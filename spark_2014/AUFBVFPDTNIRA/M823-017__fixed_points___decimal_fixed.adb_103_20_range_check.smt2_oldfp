@@ -2608,6 +2608,10 @@
 
 (declare-const o10 t2)
 
+(declare-const o11 t2)
+
+(declare-const o12 t2)
+
 (declare-const result t)
 
 (declare-const z11 t)
@@ -2655,6 +2659,14 @@
 (declare-const result11 t2)
 
 (declare-const u5 t2)
+
+(declare-const result12 t2)
+
+(declare-const u6 t2)
+
+(declare-const result13 t2)
+
+(declare-const u7 t2)
 
 ;; H
   (assert (and (<= (- 80) (to_fixed1 x)) (<= (to_fixed1 x) 80)))

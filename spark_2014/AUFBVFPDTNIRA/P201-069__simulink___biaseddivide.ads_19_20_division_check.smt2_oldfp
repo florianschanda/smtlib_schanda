@@ -1097,11 +1097,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 4.0)))
-
 (declare-const r t)
 
 (declare-const o t)
@@ -1111,6 +1106,10 @@
 (declare-const o2 t)
 
 (declare-const o3 t)
+
+(declare-const o4 t)
+
+(declare-const o5 t)
 
 (declare-const result t)
 
@@ -1128,6 +1127,11 @@
 
 ;; H
   (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite r)))
+
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 4.0)))
 
 ;; H
   (assert (neq z fliteral2))

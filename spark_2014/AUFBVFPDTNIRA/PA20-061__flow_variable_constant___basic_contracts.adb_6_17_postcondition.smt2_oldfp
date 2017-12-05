@@ -1162,11 +1162,6 @@
 ;; den__def_axiom
   (assert (= den fliteral2))
 
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) (/ 0.0 10.0))))
-
 (declare-const basic_contracts__average__result t)
 
 (declare-const o t)
@@ -1192,47 +1187,33 @@
   (assert (in_range2 denominator))
 
 ;; H
-  (assert (= (of_int RNE1 numerator) num))
-
-;; H
-  (assert (tqtisFinite num))
-
-;; H
-  (assert (tqtisFinite den))
-
-;; H
-  (assert (lt fliteral fliteral2))
-
-;; H
   (assert
-  (= basic_contracts__average__result1 basic_contracts__average__result2))
-
-;; H
-  (assert
+  (and
+  (and (= (of_int RNE1 numerator) num)
+  (and (tqtisFinite num)
+  (and (tqtisFinite den)
+  (and (lt fliteral fliteral2)
+  (and
+  (and
+  (= basic_contracts__average__result1 basic_contracts__average__result2)
   (= basic_contracts__average__result3 basic_contracts__average__result1))
-
-;; H
-  (assert
+  (and
   (and (= o (div1 RNE1 num fliteral2)) (tqtisFinite
-  (div1 RNE1 num fliteral2))))
-
-;; H
-  (assert (= result basic_contracts__average__result))
-
-;; H
-  (assert (= basic_contracts__average__result1 o))
-
-;; H
-  (assert
+  (div1 RNE1 num fliteral2)))
+  (and (= result basic_contracts__average__result)
+  (= basic_contracts__average__result1 o))))))))
+  (and
   (= (mk_t__ref basic_contracts__average__result4) (mk_t__ref
-                                                   basic_contracts__average__result2)))
-
-;; H
-  (assert
-  (= basic_contracts__average__result5 basic_contracts__average__result3))
+                                                   basic_contracts__average__result2))
+  (= basic_contracts__average__result5 basic_contracts__average__result3))))
 
 ;; H
   (assert (= result1 basic_contracts__average__result4))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) (/ 0.0 10.0))))
 
 (assert
 ;; WP_parameter_def

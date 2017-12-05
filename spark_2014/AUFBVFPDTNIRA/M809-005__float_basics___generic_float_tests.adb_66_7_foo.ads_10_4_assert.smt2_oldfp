@@ -1105,13 +1105,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral2)
-  (= (tqtreal fliteral2) (/ 100000011920928955078125.0 100000000000000000000000.0))))
-
 ;; H
   (assert (tqtisFinite x))
 
@@ -1121,10 +1114,20 @@
 ;; H
   (assert (tqtisFinite z))
 
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral2)
+  (= (tqtreal fliteral2) (/ 100000011920928955078125.0 100000000000000000000000.0))))
+
+;; H
+  (assert
+  (and (and (and (eq x fliteral) (eq z fliteral2)) (lt x y)) (lt y z)))
+
 (assert
 ;; WP_parameter_def
  ;; File "generic_float_tests.adb", line 53, characters 0-0
-  (not
-  (not (and (and (and (eq x fliteral) (eq z fliteral2)) (lt x y)) (lt y z)))))
+  (not false))
 (check-sat)
 (exit)

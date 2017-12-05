@@ -2396,24 +2396,6 @@
                                      (neg1 fliteral3) fliteral3))
                                      (tqtisFinite1 temp___expr_57)))
 
-(declare-const fliteral4 t1)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite1 fliteral4) (= (tqtreal1 fliteral4) (/ 0.0 10.0))))
-
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral5)
-  (= (tqtreal fliteral5) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
-
-(declare-const fliteral6 t1)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite1 fliteral6) (= (tqtreal1 fliteral6) 2.0)))
-
 (declare-const e (Array Int long_float))
 
 (declare-const b (Array Int long_float))
@@ -2580,6 +2562,12 @@
 ;; H
   (assert (= result b))
 
+(declare-const fliteral4 t1)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite1 fliteral4) (= (tqtreal1 fliteral4) (/ 0.0 10.0))))
+
 ;; H
   (assert
   (= b1 (floats__test__b__aggregate_def fliteral4 fliteral4 fliteral4
@@ -2627,6 +2615,13 @@
 
 ;; H
   (assert (= e1 o1))
+
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral5)
+  (= (tqtreal fliteral5) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
 
 ;; H
   (assert
@@ -2926,6 +2921,11 @@
 
 ;; H
   (assert (= d5 o35))
+
+(declare-const fliteral6 t1)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite1 fliteral6) (= (tqtreal1 fliteral6) 2.0)))
 
 (assert
 ;; WP_parameter_def

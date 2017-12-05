@@ -1111,9 +1111,6 @@
 
 (declare-const step_function__min__result8 t)
 
-(define-fun step_function__min__result9 () t__ref (mk_t__ref
-                                                  step_function__min__result5))
-
 (declare-const result2 t)
 
 ;; H
@@ -1124,44 +1121,27 @@
 
 ;; H
   (assert
-  (= step_function__min__result9 (mk_t__ref step_function__min__result3)))
-
-;; H
-  (assert (= step_function__min__result6 step_function__min__result4))
-
-;; H
-  (assert
-  (=> (le x1 x2) (= step_function__min__result1 step_function__min__result3)))
-
-;; H
-  (assert
-  (=> (le x1 x2) (= step_function__min__result4 step_function__min__result1)))
-
-;; H
-  (assert (=> (le x1 x2) (= result step_function__min__result)))
-
-;; H
-  (assert (=> (le x1 x2) (= step_function__min__result1 x1)))
-
-;; H
-  (assert
-  (=> (not (le x1 x2))
-  (= step_function__min__result2 step_function__min__result3)))
+  (and
+  (and
+  (= (mk_t__ref step_function__min__result5) (mk_t__ref
+                                             step_function__min__result3))
+  (= step_function__min__result6 step_function__min__result4))
+  (ite (le x1 x2)
+  (and
+  (and (= step_function__min__result1 step_function__min__result3)
+  (= step_function__min__result4 step_function__min__result1))
+  (and (= result step_function__min__result)
+  (= step_function__min__result1 x1)))
+  (and
+  (and (= step_function__min__result2 step_function__min__result3)
+  (= step_function__min__result4 step_function__min__result2))
+  (and (= result1 step_function__min__result)
+  (= step_function__min__result2 x2))))))
 
 ;; H
   (assert
-  (=> (not (le x1 x2))
-  (= step_function__min__result4 step_function__min__result2)))
-
-;; H
-  (assert (=> (not (le x1 x2)) (= result1 step_function__min__result)))
-
-;; H
-  (assert (=> (not (le x1 x2)) (= step_function__min__result2 x2)))
-
-;; H
-  (assert
-  (= (mk_t__ref step_function__min__result7) step_function__min__result9))
+  (= (mk_t__ref step_function__min__result7) (mk_t__ref
+                                             step_function__min__result5)))
 
 ;; H
   (assert (= step_function__min__result8 step_function__min__result6))

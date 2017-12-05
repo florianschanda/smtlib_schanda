@@ -1188,6 +1188,18 @@
 
 (declare-const u t)
 
+(declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const o3 t)
+
+(declare-const o4 t)
+
+(declare-const o5 t)
+
 ;; H
   (assert (in_range2 op))
 

@@ -1098,18 +1098,24 @@ logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+axiom H : in_range2(x)
+
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.0e-1))
+
+axiom H1 : (not eq(x, fliteral2))
 
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 0.0000000000000000000000529395592033937711917701562924776226282119750976562500000000000000000000000))
 
+axiom H2 : le(neg(fliteral3), x)
+
+axiom H3 : le(x, fliteral2)
+
  (* File "types.ads", line 65, characters 0-0 *)
-goal WP_parameter_def : (in_range2(x) -> ((not eq(x, fliteral2)) ->
-  ((le(neg(fliteral3), x) and le(x, fliteral2)) -> ((eq(neg(fliteral3),
-  fliteral2) or le(neg(fliteral3), neg(fliteral3))) or le(fliteral3,
-  neg(fliteral3))))))
+goal WP_parameter_def : ((eq(neg(fliteral3), fliteral2) or le(neg(fliteral3),
+  neg(fliteral3))) or le(fliteral3, neg(fliteral3)))

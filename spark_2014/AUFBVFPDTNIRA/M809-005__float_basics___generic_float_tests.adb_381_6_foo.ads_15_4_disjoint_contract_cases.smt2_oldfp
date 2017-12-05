@@ -1130,10 +1130,31 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
+(declare-const i Int)
+
+(declare-const o Int)
+
+(declare-const result Int)
+
+(declare-const i1 Int)
+
+(declare-const i2 Int)
+
+(declare-const i3 Int)
+
+;; H
+  (assert (tqtisFinite x))
+
+;; H
+  (assert (=> (<= (- 2147483648) 2147483647) (in_range2 i)))
+
 (declare-const fliteral2 t)
 
 ;; fliteral_axiom
   (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 4096.0)))
+
+;; H
+  (assert (and (le (neg fliteral2) x) (le x fliteral2)))
 
 (declare-const fliteral3 t)
 
@@ -1160,17 +1181,6 @@
 
 ;; fliteral_axiom
   (assert (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) (/ 0.0 10.0))))
-
-(declare-const i Int)
-
-;; H
-  (assert (tqtisFinite x))
-
-;; H
-  (assert (=> (<= (- 2147483648) 2147483647) (in_range2 i)))
-
-;; H
-  (assert (and (le (neg fliteral2) x) (le x fliteral2)))
 
 (assert
 ;; WP_parameter_def

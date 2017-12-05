@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -65,24 +65,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort float 0)
@@ -1032,6 +1032,128 @@
 (declare-const o106 us_split_fields2)
 
 (declare-const step_function_test__sfun4__assume us_rep1)
+
+(declare-const o107 Float32)
+
+(declare-const o108 Float32)
+
+(declare-const o109 Float32)
+
+(declare-const o110 Float32)
+
+(declare-const o111 Float32)
+
+(declare-const o112 Float32)
+
+(declare-const o113 Float32)
+
+(declare-const o114 Float32)
+
+(declare-const o115 Float32)
+
+(declare-const o116 Float32)
+
+(declare-const o117 Float32)
+
+(declare-const o118 Float32)
+
+(declare-const o119 Float32)
+
+(declare-const o120 Float32)
+
+(declare-const o121 Float32)
+
+(declare-const o122 Float32)
+
+(declare-const o123 Float32)
+
+(declare-const o124 Float32)
+
+(declare-const o125 Float32)
+
+(declare-const o126 Float32)
+
+(declare-const o127 Float32)
+
+(declare-const o128 Float32)
+
+(declare-const o129 Float32)
+
+(declare-const o130 Float32)
+
+(declare-const o131 Float32)
+
+(declare-const o132 Float32)
+
+(declare-const o133 Float32)
+
+(declare-const o134 Float32)
+
+(declare-const o135 Float32)
+
+(declare-const o136 Float32)
+
+(declare-const o137 Float32)
+
+(declare-const o138 Float32)
+
+(declare-const o139 Float32)
+
+(declare-const o140 Float32)
+
+(declare-const o141 Float32)
+
+(declare-const o142 Float32)
+
+(declare-const o143 Float32)
+
+(declare-const o144 Float32)
+
+(declare-const o145 Float32)
+
+(declare-const o146 Float32)
+
+(declare-const o147 Float32)
+
+(declare-const o148 Float32)
+
+(declare-const o149 Float32)
+
+(declare-const o150 Float32)
+
+(declare-const o151 Float32)
+
+(declare-const o152 Float32)
+
+(declare-const o153 Float32)
+
+(declare-const o154 Float32)
+
+(declare-const o155 Float32)
+
+(declare-const o156 Float32)
+
+(declare-const o157 Float32)
+
+(declare-const o158 Float32)
+
+(declare-const o159 Float32)
+
+(declare-const o160 Float32)
+
+(declare-const o161 Float32)
+
+(declare-const o162 Float32)
+
+(declare-const o163 Float32)
+
+(declare-const o164 Float32)
+
+(declare-const o165 Float32)
+
+(declare-const o166 Float32)
+
+(declare-const o167 Float32)
 
 (declare-const result us_split_fields__ref1)
 

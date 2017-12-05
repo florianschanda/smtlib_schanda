@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float64)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float64)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float64)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float64)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float64)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float64)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float64)
 
@@ -65,24 +65,24 @@
                                              (<= i 9007199254740992)))
 
 (define-fun same_sign ((x Float64)
-  (y Float64)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float64)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float64)
-  (y Float64)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float64)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float64) (x Float64)
-  (y Float64)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float64)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float64)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
@@ -286,13 +286,67 @@
 
 (declare-const o2 Float64)
 
-(declare-const o3 Int)
+(declare-const o3 Float64)
 
 (declare-const o4 Float64)
+
+(declare-const o5 Float64)
+
+(declare-const o6 Float64)
+
+(declare-const o7 Float64)
+
+(declare-const o8 Float64)
+
+(declare-const o9 Float64)
+
+(declare-const o10 Float64)
+
+(declare-const o11 Int)
+
+(declare-const o12 Float64)
+
+(declare-const o13 Float64)
+
+(declare-const o14 Int)
+
+(declare-const o15 Float64)
+
+(declare-const o16 Float64)
+
+(declare-const o17 Float64)
+
+(declare-const o18 Float64)
+
+(declare-const o19 Float64)
+
+(declare-const o20 Float64)
+
+(declare-const o21 Float64)
+
+(declare-const o22 Float64)
+
+(declare-const o23 Float64)
+
+(declare-const o24 Float64)
+
+(declare-const o25 Int)
+
+(declare-const o26 Float64)
+
+(declare-const o27 Float64)
+
+(declare-const o28 Int)
+
+(declare-const o29 Int)
 
 (declare-const result Float64)
 
 (declare-const new_speed1 Float64)
+
+(declare-const new_speed2 Float64)
+
+(declare-const new_speed3 Float64)
 
 ;; H
   (assert (in_range1 n))
@@ -369,27 +423,27 @@
   (of_int RNE (+ n 1)) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))
 
 ;; H
-  (assert (and (= o3 (+ n 1)) (in_range1 (+ n 1))))
+  (assert (and (= o11 (+ n 1)) (in_range1 (+ n 1))))
 
 ;; H
   (assert
-  (and (= o4 (high_bound o3))
-  (and (fp.isFinite64 o4)
-  (= o4 (fp.mul RNE (of_int RNE o3) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))))
+  (and (= o12 (high_bound o11))
+  (and (fp.isFinite64 o12)
+  (= o12 (fp.mul RNE (of_int RNE o11) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))))
 
 ;; H
   (assert
-  (and (= o1 (high_bound n))
-  (and (fp.isFinite64 o1)
-  (= o1 (fp.mul RNE (of_int RNE n) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))))
+  (and (= o9 (high_bound n))
+  (and (fp.isFinite64 o9)
+  (= o9 (fp.mul RNE (of_int RNE n) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))))
 
 ;; H
   (assert
-  (= o2 (fp.add RNE o1 (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))))
+  (= o10 (fp.add RNE o9 (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))))
 
 (assert
 ;; WP_parameter_def
  ;; File "simple_trajectory.ads", line 27, characters 0-0
-  (not (fp.isFinite64 o2)))
+  (not (fp.isFinite64 o10)))
 (check-sat)
 (exit)

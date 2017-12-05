@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -65,24 +65,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort natural 0)
@@ -206,45 +206,26 @@
   (assert (in_range1 denominator))
 
 ;; H
-  (assert (= (of_int RNE numerator) num))
-
-;; H
-  (assert (fp.isFinite32 num))
-
-;; H
-  (assert (fp.isFinite32 den))
-
-;; H
   (assert
-  (fp.lt (fp #b0 #b01111111 #b00000000000000000000000) (fp #b0 #b00000000 #b00000000000000000000001)))
-
-;; H
-  (assert
-  (= basic_contracts__average__result1 basic_contracts__average__result2))
-
-;; H
-  (assert
+  (and
+  (and (= (of_int RNE numerator) num)
+  (and (fp.isFinite32 num)
+  (and (fp.isFinite32 den)
+  (and
+  (fp.lt (fp #b0 #b01111111 #b00000000000000000000000) (fp #b0 #b00000000 #b00000000000000000000001))
+  (and
+  (and
+  (= basic_contracts__average__result1 basic_contracts__average__result2)
   (= basic_contracts__average__result3 basic_contracts__average__result1))
-
-;; H
-  (assert
+  (and
   (and (= o (fp.div RNE num (fp #b0 #b00000000 #b00000000000000000000001)))
-  (fp.isFinite32 (fp.div RNE num (fp #b0 #b00000000 #b00000000000000000000001)))))
-
-;; H
-  (assert (= result basic_contracts__average__result))
-
-;; H
-  (assert (= basic_contracts__average__result1 o))
-
-;; H
-  (assert
+  (fp.isFinite32 (fp.div RNE num (fp #b0 #b00000000 #b00000000000000000000001))))
+  (and (= result basic_contracts__average__result)
+  (= basic_contracts__average__result1 o))))))))
+  (and
   (= (mk_t__ref basic_contracts__average__result4) (mk_t__ref
-                                                   basic_contracts__average__result2)))
-
-;; H
-  (assert
-  (= basic_contracts__average__result5 basic_contracts__average__result3))
+                                                   basic_contracts__average__result2))
+  (= basic_contracts__average__result5 basic_contracts__average__result3))))
 
 ;; H
   (assert (= result1 basic_contracts__average__result4))

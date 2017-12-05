@@ -1197,6 +1197,20 @@
 
 (declare-const o1 Int)
 
+(declare-const o2 Int)
+
+(declare-const o3 Int)
+
+(declare-const o4 t)
+
+(declare-const result Int)
+
+(declare-const a1 Int)
+
+(declare-const result1 Int)
+
+(declare-const a2 Int)
+
 ;; H
   (assert (in_range1 x))
 

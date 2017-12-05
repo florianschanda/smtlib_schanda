@@ -1127,6 +1127,20 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
+(declare-const p__ident__5__result t)
+
+(declare-const result t)
+
+(declare-const p__ident__5__result1 t)
+
+(declare-const p__ident__5__result2 t)
+
+(declare-const p__ident__5__result3 t)
+
+(declare-const p__ident__5__result4 t)
+
+(declare-const p__ident__5__result5 t)
+
 ;; H
   (assert (tqtisFinite f))
 

@@ -1097,6 +1097,55 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
+(declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const o3 t)
+
+(declare-const o4 t)
+
+(declare-const o5 t)
+
+(declare-const o6 t)
+
+(declare-const o7 t)
+
+(declare-const o8 t)
+
+(declare-const o9 t)
+
+(declare-const o10 t)
+
+(declare-const o11 t)
+
+(declare-const o12 t)
+
+(declare-const o13 t)
+
+(declare-const o14 t)
+
+(declare-const o15 t)
+
+(declare-const o16 t)
+
+(declare-const o17 t)
+
+(declare-const o18 t)
+
+(declare-const o19 t)
+
+(declare-const o20 t)
+
+(declare-const o21 t)
+
+(declare-const o22 Bool)
+
+;; H
+  (assert (tqtisFinite x))
+
 (declare-const fliteral2 t)
 
 ;; fliteral_axiom
@@ -1107,46 +1156,35 @@
 ;; fliteral_axiom
   (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 60.0)))
 
+;; H
+  (assert (and (le fliteral2 x) (le x fliteral3)))
+
 (declare-const fliteral4 t)
 
 ;; fliteral_axiom
   (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 2.0)))
+
+;; H
+  (assert
+  (and (= o11 (add RNE1 x fliteral4)) (tqtisFinite (add RNE1 x fliteral4))))
+
+;; H
+  (assert (= o12 (mul RNE1 o11 x)))
+
+;; H
+  (assert (and (= o13 o12) (tqtisFinite o12)))
 
 (declare-const fliteral5 t)
 
 ;; fliteral_axiom
   (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 3.0)))
 
-(declare-const o t)
-
-(declare-const o1 t)
-
-(declare-const o2 t)
-
-(declare-const o3 t)
-
 ;; H
-  (assert (tqtisFinite x))
-
-;; H
-  (assert (and (le fliteral2 x) (le x fliteral3)))
-
-;; H
-  (assert
-  (and (= o (add RNE1 x fliteral4)) (tqtisFinite (add RNE1 x fliteral4))))
-
-;; H
-  (assert (= o1 (mul RNE1 o x)))
-
-;; H
-  (assert (and (= o2 o1) (tqtisFinite o1)))
-
-;; H
-  (assert (= o3 (add RNE1 o2 fliteral5)))
+  (assert (= o14 (add RNE1 o13 fliteral5)))
 
 (assert
 ;; WP_parameter_def
  ;; File "a-unccon.ads", line 20, characters 0-0
-  (not (tqtisFinite o3)))
+  (not (tqtisFinite o14)))
 (check-sat)
 (exit)

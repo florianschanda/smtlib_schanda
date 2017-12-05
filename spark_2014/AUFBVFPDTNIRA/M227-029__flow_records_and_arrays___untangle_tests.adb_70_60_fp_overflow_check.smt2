@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -65,24 +65,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
@@ -643,6 +643,148 @@
 
 (declare-const o22 (Array Int us_rep1))
 
+(declare-const o23 Float32)
+
+(declare-const o24 float)
+
+(declare-const o25 float)
+
+(declare-const o26 float)
+
+(declare-const o27 float)
+
+(declare-const o28 float)
+
+(declare-const o29 float)
+
+(declare-const o30 float)
+
+(declare-const o31 float)
+
+(declare-const o32 float)
+
+(declare-const o33 (Array Int us_rep))
+
+(declare-const o34 (Array Int us_rep))
+
+(declare-const o35 float)
+
+(declare-const o36 float)
+
+(declare-const o37 float)
+
+(declare-const o38 float)
+
+(declare-const o39 (Array Int us_rep))
+
+(declare-const o40 float)
+
+(declare-const o41 float)
+
+(declare-const o42 float)
+
+(declare-const o43 float)
+
+(declare-const o44 (Array Int us_rep1))
+
+(declare-const o45 Float32)
+
+(declare-const o46 float)
+
+(declare-const o47 us_split_fields)
+
+(declare-const o48 us_rep)
+
+(declare-const o49 (Array Int us_rep))
+
+(declare-const o50 us_split_fields2)
+
+(declare-const o51 us_rep1)
+
+(declare-const o52 (Array Int us_rep1))
+
+(declare-const o53 Float32)
+
+(declare-const o54 float)
+
+(declare-const o55 us_split_fields)
+
+(declare-const o56 us_rep)
+
+(declare-const o57 (Array Int us_rep))
+
+(declare-const o58 us_split_fields2)
+
+(declare-const o59 us_rep1)
+
+(declare-const o60 (Array Int us_rep1))
+
+(declare-const o61 Float32)
+
+(declare-const o62 float)
+
+(declare-const o63 us_split_fields)
+
+(declare-const o64 us_rep)
+
+(declare-const o65 (Array Int us_rep))
+
+(declare-const o66 us_split_fields2)
+
+(declare-const o67 us_rep1)
+
+(declare-const o68 (Array Int us_rep1))
+
+(declare-const o69 Float32)
+
+(declare-const o70 float)
+
+(declare-const o71 us_split_fields)
+
+(declare-const o72 us_rep)
+
+(declare-const o73 (Array Int us_rep))
+
+(declare-const o74 us_split_fields2)
+
+(declare-const o75 us_rep1)
+
+(declare-const o76 (Array Int us_rep1))
+
+(declare-const o77 Float32)
+
+(declare-const o78 float)
+
+(declare-const o79 us_split_fields)
+
+(declare-const o80 us_rep)
+
+(declare-const o81 (Array Int us_rep))
+
+(declare-const o82 us_split_fields2)
+
+(declare-const o83 us_rep1)
+
+(declare-const o84 (Array Int us_rep1))
+
+(declare-const o85 Float32)
+
+(declare-const o86 float)
+
+(declare-const o87 us_split_fields)
+
+(declare-const o88 us_rep)
+
+(declare-const o89 (Array Int us_rep))
+
+(declare-const o90 us_split_fields2)
+
+(declare-const o91 us_rep1)
+
+(declare-const o92 (Array Int us_rep1))
+
+(declare-const o93 Float32)
+
 (declare-const result int__ref)
 
 (declare-const t1 Int)
@@ -660,6 +802,42 @@
 (declare-const result2 map__ref1)
 
 (declare-const tl2 (Array Int us_rep1))
+
+(declare-const result3 map__ref1)
+
+(declare-const tl3 (Array Int us_rep1))
+
+(declare-const result4 map__ref1)
+
+(declare-const tl4 (Array Int us_rep1))
+
+(declare-const result5 int__ref)
+
+(declare-const v2 Int)
+
+(declare-const result6 map__ref1)
+
+(declare-const tl5 (Array Int us_rep1))
+
+(declare-const result7 map__ref1)
+
+(declare-const tl6 (Array Int us_rep1))
+
+(declare-const result8 map__ref1)
+
+(declare-const tl7 (Array Int us_rep1))
+
+(declare-const result9 int__ref)
+
+(declare-const v3 Int)
+
+(declare-const result10 map__ref1)
+
+(declare-const tl8 (Array Int us_rep1))
+
+(declare-const result11 map__ref1)
+
+(declare-const tl9 (Array Int us_rep1))
 
 ;; H
   (assert (= result (mk_int__ref t)))

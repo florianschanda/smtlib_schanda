@@ -2396,19 +2396,6 @@
                                      (neg1 fliteral3) fliteral3))
                                      (tqtisFinite1 temp___expr_57)))
 
-(declare-const fliteral4 t1)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite1 fliteral4) (= (tqtreal1 fliteral4) (/ 0.0 10.0))))
-
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral5)
-  (= (tqtreal fliteral5) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
-
 (declare-const e (Array Int long_float))
 
 (declare-const b (Array Int long_float))
@@ -2448,6 +2435,46 @@
 (declare-const o14 long_float)
 
 (declare-const o15 (Array Int long_float))
+
+(declare-const o16 long_float)
+
+(declare-const o17 (Array Int long_float))
+
+(declare-const o18 long_float)
+
+(declare-const o19 (Array Int long_float))
+
+(declare-const o20 long_float)
+
+(declare-const o21 (Array Int long_float))
+
+(declare-const o22 long_float)
+
+(declare-const o23 (Array Int long_float))
+
+(declare-const o24 t1)
+
+(declare-const o25 long_float)
+
+(declare-const o26 (Array Int long_float))
+
+(declare-const o27 t1)
+
+(declare-const o28 long_float)
+
+(declare-const o29 (Array Int long_float))
+
+(declare-const o30 t1)
+
+(declare-const o31 long_float)
+
+(declare-const o32 (Array Int long_float))
+
+(declare-const o33 t1)
+
+(declare-const o34 long_float)
+
+(declare-const o35 (Array Int long_float))
 
 (declare-const result (Array Int long_float))
 
@@ -2493,6 +2520,38 @@
 
 (declare-const c5 (Array Int long_float))
 
+(declare-const result11 (Array Int long_float))
+
+(declare-const b2 (Array Int long_float))
+
+(declare-const result12 (Array Int long_float))
+
+(declare-const b3 (Array Int long_float))
+
+(declare-const result13 (Array Int long_float))
+
+(declare-const b4 (Array Int long_float))
+
+(declare-const result14 (Array Int long_float))
+
+(declare-const b5 (Array Int long_float))
+
+(declare-const result15 (Array Int long_float))
+
+(declare-const d2 (Array Int long_float))
+
+(declare-const result16 (Array Int long_float))
+
+(declare-const d3 (Array Int long_float))
+
+(declare-const result17 map__ref1)
+
+(declare-const d4 (Array Int long_float))
+
+(declare-const result18 map__ref1)
+
+(declare-const d5 (Array Int long_float))
+
 ;; H
   (assert
   (forall ((i Int))
@@ -2502,6 +2561,12 @@
 
 ;; H
   (assert (= result b))
+
+(declare-const fliteral4 t1)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite1 fliteral4) (= (tqtreal1 fliteral4) (/ 0.0 10.0))))
 
 ;; H
   (assert
@@ -2550,6 +2615,13 @@
 
 ;; H
   (assert (= e1 o1))
+
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral5)
+  (= (tqtreal fliteral5) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
 
 ;; H
   (assert

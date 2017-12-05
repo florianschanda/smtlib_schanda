@@ -1158,41 +1158,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 62.0)))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 2835.0)))
-
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 17.0)))
-
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 315.0)))
-
-(declare-const fliteral6 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) 2.0)))
-
-(declare-const fliteral7 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral7) (= (tqtreal fliteral7) 15.0)))
-
-(declare-const fliteral8 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral8) (= (tqtreal fliteral8) 3.0)))
-
 (declare-const o t)
 
 (declare-const o1 t)
@@ -1223,44 +1188,78 @@
 
 (declare-const o14 t)
 
+(declare-const o15 t)
+
+(declare-const o16 t)
+
+(declare-const o17 t)
+
+(declare-const o18 t)
+
+(declare-const o19 t)
+
+(declare-const o20 t)
+
+(declare-const o21 t)
+
 ;; H
   (assert (tqtisFinite x))
 
 ;; H
   (assert
-  (and (= o11 (pow9 x))
-  (and (tqtisFinite o11)
-  (= o11 (mul RNE1
+  (and (= o15 (pow9 x))
+  (and (tqtisFinite o15)
+  (= o15 (mul RNE1
          (mul RNE1
          (mul RNE1
          (mul RNE1 (mul RNE1 (mul RNE1 (mul RNE1 (mul RNE1 x x) x) x) x) x)
          x) x) x)))))
 
-;; H
-  (assert (= o12 (mul RNE1 fliteral2 o11)))
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 62.0)))
 
 ;; H
-  (assert (and (= o13 o12) (tqtisFinite o12)))
+  (assert (= o16 (mul RNE1 fliteral2 o15)))
 
 ;; H
-  (assert (= o14 (div1 RNE1 o13 fliteral3)))
+  (assert (and (= o17 o16) (tqtisFinite o16)))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 2835.0)))
+
+;; H
+  (assert (= o18 (div1 RNE1 o17 fliteral3)))
 
 ;; H
   (assert
-  (and (= o7 (pow7 x))
-  (and (tqtisFinite o7)
-  (= o7 (mul RNE1
+  (and (= o9 (pow7 x))
+  (and (tqtisFinite o9)
+  (= o9 (mul RNE1
         (mul RNE1 (mul RNE1 (mul RNE1 (mul RNE1 (mul RNE1 x x) x) x) x) x)
         x)))))
 
-;; H
-  (assert (= o8 (mul RNE1 fliteral4 o7)))
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 17.0)))
 
 ;; H
-  (assert (and (= o9 o8) (tqtisFinite o8)))
+  (assert (= o10 (mul RNE1 fliteral4 o9)))
 
 ;; H
-  (assert (= o10 (div1 RNE1 o9 fliteral5)))
+  (assert (and (= o11 o10) (tqtisFinite o10)))
+
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 315.0)))
+
+;; H
+  (assert (= o12 (div1 RNE1 o11 fliteral5)))
 
 ;; H
   (assert
@@ -1268,11 +1267,21 @@
   (and (tqtisFinite o3)
   (= o3 (mul RNE1 (mul RNE1 (mul RNE1 (mul RNE1 x x) x) x) x)))))
 
+(declare-const fliteral6 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) 2.0)))
+
 ;; H
   (assert (= o4 (mul RNE1 fliteral6 o3)))
 
 ;; H
   (assert (and (= o5 o4) (tqtisFinite o4)))
+
+(declare-const fliteral7 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral7) (= (tqtreal fliteral7) 15.0)))
 
 ;; H
   (assert (= o6 (div1 RNE1 o5 fliteral7)))
@@ -1281,6 +1290,11 @@
   (assert
   (and (= o (pow3 x))
   (and (tqtisFinite o) (= o (mul RNE1 (mul RNE1 x x) x)))))
+
+(declare-const fliteral8 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral8) (= (tqtreal fliteral8) 3.0)))
 
 ;; H
   (assert (= o1 (div1 RNE1 o fliteral8)))

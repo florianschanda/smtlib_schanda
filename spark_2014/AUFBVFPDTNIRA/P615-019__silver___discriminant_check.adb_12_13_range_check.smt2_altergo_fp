@@ -80,7 +80,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -1214,17 +1214,17 @@ logic bool_eq5 : us_rep, us_rep -> bool
 
 axiom bool_eq_def4 :
   (forall a:us_rep. forall b:us_rep [bool_eq5(a, b)].
-  (((((((a).us_split_discrs1).rec__discriminant_check__rec__b = ((b).us_split_discrs1).rec__discriminant_check__rec__b) and
-  (discriminant_check__rec__x__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__discriminant_check__rec__x) = to_rep(((b).us_split_fields1).rec__discriminant_check__rec__x)))) and
-  (discriminant_check__rec__y__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__discriminant_check__rec__y) = to_rep1(((b).us_split_fields1).rec__discriminant_check__rec__y)))) ->
-  (bool_eq5(a, b) = true)) and
-  ((not (((((a).us_split_discrs1).rec__discriminant_check__rec__b = ((b).us_split_discrs1).rec__discriminant_check__rec__b) and
-  (discriminant_check__rec__x__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__discriminant_check__rec__x) = to_rep(((b).us_split_fields1).rec__discriminant_check__rec__x)))) and
+  ((((((a).us_split_discrs1).rec__discriminant_check__rec__b = ((b).us_split_discrs1).rec__discriminant_check__rec__b) and
+  ((discriminant_check__rec__x__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__discriminant_check__rec__x) = to_rep(((b).us_split_fields1).rec__discriminant_check__rec__x))) and
   (discriminant_check__rec__y__pred(a) ->
   (to_rep1(((a).us_split_fields1).rec__discriminant_check__rec__y) = to_rep1(((b).us_split_fields1).rec__discriminant_check__rec__y))))) ->
+  (bool_eq5(a, b) = true)) and
+  ((not ((((a).us_split_discrs1).rec__discriminant_check__rec__b = ((b).us_split_discrs1).rec__discriminant_check__rec__b) and
+  ((discriminant_check__rec__x__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__discriminant_check__rec__x) = to_rep(((b).us_split_fields1).rec__discriminant_check__rec__x))) and
+  (discriminant_check__rec__y__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__discriminant_check__rec__y) = to_rep1(((b).us_split_fields1).rec__discriminant_check__rec__y)))))) ->
   (bool_eq5(a, b) = false))))
 
 logic value__size : int

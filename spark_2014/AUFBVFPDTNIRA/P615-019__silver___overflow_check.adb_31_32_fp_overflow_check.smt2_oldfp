@@ -1190,6 +1190,16 @@
 
 (declare-const o t)
 
+(declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const o3 t)
+
+(declare-const o4 t)
+
+(declare-const o5 t)
+
 ;; H
   (assert (in_range2 op))
 
@@ -1227,11 +1237,11 @@
   (assert (=> (< e 0) (not (= x zeroF))))
 
 ;; H
-  (assert (= o (power x e)))
+  (assert (= o4 (power x e)))
 
 (assert
 ;; WP_parameter_def
  ;; File "overflow_check.adb", line 9, characters 0-0
-  (not (tqtisFinite o)))
+  (not (tqtisFinite o4)))
 (check-sat)
 (exit)

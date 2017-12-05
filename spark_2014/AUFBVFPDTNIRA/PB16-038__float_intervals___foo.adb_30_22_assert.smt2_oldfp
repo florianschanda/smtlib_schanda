@@ -1183,6 +1183,10 @@
 
 (declare-const y t)
 
+(declare-const o t)
+
+(declare-const o1 t)
+
 ;; H
   (assert (dynamic_invariant1 i2b true false true))
 

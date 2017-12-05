@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -65,24 +65,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort float 0)
@@ -129,12 +129,12 @@
 (define-fun t_degrees__ref___projection ((a t_degrees__ref)) t_degrees
   (t_degrees__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_1312 Float32)
-  (temp___is_init_1309 Bool) (temp___skip_constant_1310 Bool)
-  (temp___do_toplevel_1311 Bool)) Bool (=>
-                                       (or (= temp___is_init_1309 true)
+(define-fun dynamic_invariant1 ((temp___expr_1306 Float32)
+  (temp___is_init_1303 Bool) (temp___skip_constant_1304 Bool)
+  (temp___do_toplevel_1305 Bool)) Bool (=>
+                                       (or (= temp___is_init_1303 true)
                                        (fp.leq (fp.neg (fp #b0 #b10000111 #b01101000000000000000000)) (fp #b0 #b10000111 #b01101000000000000000000)))
-                                       (in_range temp___expr_1312)))
+                                       (in_range temp___expr_1306)))
 
 (declare-sort t_quaternion 0)
 
@@ -159,12 +159,12 @@
 (define-fun t_quaternion__ref___projection ((a t_quaternion__ref)) t_quaternion
   (t_quaternion__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_1336 Float32)
-  (temp___is_init_1333 Bool) (temp___skip_constant_1334 Bool)
-  (temp___do_toplevel_1335 Bool)) Bool (=>
-                                       (or (= temp___is_init_1333 true)
+(define-fun dynamic_invariant2 ((temp___expr_1330 Float32)
+  (temp___is_init_1327 Bool) (temp___skip_constant_1328 Bool)
+  (temp___do_toplevel_1329 Bool)) Bool (=>
+                                       (or (= temp___is_init_1327 true)
                                        (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) (fp #b0 #b01111111 #b00000000000000000000000)))
-                                       (in_range1 temp___expr_1336)))
+                                       (in_range1 temp___expr_1330)))
 
 (declare-sort t_radians 0)
 
@@ -188,12 +188,12 @@
 (define-fun t_radians__ref___projection ((a t_radians__ref)) t_radians
   (t_radians__content a))
 
-(define-fun dynamic_invariant3 ((temp___expr_1342 Float32)
-  (temp___is_init_1339 Bool) (temp___skip_constant_1340 Bool)
-  (temp___do_toplevel_1341 Bool)) Bool (=>
-                                       (or (= temp___is_init_1339 true)
+(define-fun dynamic_invariant3 ((temp___expr_1336 Float32)
+  (temp___is_init_1333 Bool) (temp___skip_constant_1334 Bool)
+  (temp___do_toplevel_1335 Bool)) Bool (=>
+                                       (or (= temp___is_init_1333 true)
                                        (fp.leq (fp.neg (fp #b0 #b10000001 #b10010010000111111011011)) (fp #b0 #b10000001 #b10010010000111111011011)))
-                                       (in_range2 temp___expr_1342)))
+                                       (in_range2 temp___expr_1336)))
 
 (declare-fun atan_2 (Float32 Float32) Float32)
 
@@ -292,6 +292,8 @@
 (declare-const o7 Float32)
 
 (declare-const o8 Float32)
+
+(declare-const o9 Float32)
 
 (declare-const result Float32)
 
@@ -458,6 +460,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "sensfusion6_pack.adb", line 248, characters 0-0
-  (not (not (fp.isZero      (fp #b0 #b10000000 #b10010010000111111011011)))))
+  (not (not (fp.isZero (fp #b0 #b10000000 #b10010010000111111011011)))))
 (check-sat)
 (exit)

@@ -1991,6 +1991,24 @@
 
 (declare-const o4 t)
 
+(declare-const o5 t)
+
+(declare-const o6 t)
+
+(declare-const o7 t)
+
+(declare-const o8 t)
+
+(declare-const o9 t)
+
+(declare-const o10 t)
+
+(declare-const o11 t)
+
+(declare-const o12 t)
+
+(declare-const o13 t)
+
 ;; H
   (assert (tqtisFinite v))
 
@@ -1999,8 +2017,8 @@
 
 ;; H
   (assert
-  (and (= o4 (a_brake_emergency v d))
-  (and (in_range1 o4) (eq o4
+  (and (= o9 (a_brake_emergency v d))
+  (and (in_range1 o9) (eq o9
   (get_value a_brake_emergency_model (to_int1 RNA1 v))))))
 
 ;; H

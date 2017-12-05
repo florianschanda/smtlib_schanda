@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float64)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float64)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float64)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float64)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float64)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float64)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float64)
 
@@ -65,24 +65,24 @@
                                              (<= i 9007199254740992)))
 
 (define-fun same_sign ((x Float64)
-  (y Float64)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float64)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float64)
-  (y Float64)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float64)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float64) (x Float64)
-  (y Float64)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float64)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float64)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
@@ -329,9 +329,121 @@
 
 (declare-const o2 Float64)
 
+(declare-const o3 Float64)
+
+(declare-const o4 Float64)
+
+(declare-const o5 Float64)
+
+(declare-const o6 Float64)
+
+(declare-const o7 Float64)
+
+(declare-const o8 Float64)
+
+(declare-const o9 Int)
+
+(declare-const o10 Int)
+
+(declare-const o11 Int)
+
+(declare-const o12 Int)
+
+(declare-const o13 Int)
+
+(declare-const o14 Int)
+
+(declare-const o15 Int)
+
+(declare-const o16 Int)
+
+(declare-const o17 Float64)
+
+(declare-const o18 Int)
+
+(declare-const o19 Int)
+
+(declare-const o20 Int)
+
+(declare-const o21 Float64)
+
+(declare-const o22 Float64)
+
+(declare-const o23 Int)
+
+(declare-const o24 Float64)
+
+(declare-const o25 Float64)
+
+(declare-const o26 Float64)
+
+(declare-const o27 Int)
+
+(declare-const o28 Float64)
+
+(declare-const o29 Float64)
+
+(declare-const o30 Int)
+
+(declare-const o31 Float64)
+
+(declare-const o32 Float64)
+
+(declare-const o33 Float64)
+
+(declare-const o34 Float64)
+
+(declare-const o35 Float64)
+
+(declare-const o36 Float64)
+
+(declare-const o37 Float64)
+
+(declare-const o38 Float64)
+
+(declare-const o39 Float64)
+
+(declare-const o40 Float64)
+
+(declare-const o41 Int)
+
+(declare-const o42 Float64)
+
+(declare-const o43 Float64)
+
+(declare-const o44 Int)
+
+(declare-const o45 Float64)
+
+(declare-const o46 Float64)
+
+(declare-const o47 Float64)
+
+(declare-const o48 Int)
+
 (declare-const result Float64)
 
 (declare-const new_speed1 Float64)
+
+(declare-const result1 Float64)
+
+(declare-const average1 Float64)
+
+(declare-const result2 Float64)
+
+(declare-const distance1 Float64)
+
+(declare-const new_speed2 Float64)
+
+(declare-const average2 Float64)
+
+(declare-const distance2 Float64)
+
+(declare-const new_speed3 Float64)
+
+(declare-const average3 Float64)
+
+(declare-const distance3 Float64)
 
 ;; H
   (assert (in_range2 n))
@@ -469,17 +581,17 @@
 
 ;; H
   (assert
-  (and (= o1 (low_bound n))
-  (and (fp.isFinite64 o1)
-  (= o1 (fp.mul RNE (of_int RNE n) (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)))))))
+  (and (= o36 (low_bound n))
+  (and (fp.isFinite64 o36)
+  (= o36 (fp.mul RNE (of_int RNE n) (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)))))))
 
 ;; H
   (assert
-  (= o2 (fp.sub RNE o1 (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))))
+  (= o37 (fp.sub RNE o36 (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))))
 
 (assert
 ;; WP_parameter_def
  ;; File "attempt_3.adb", line 25, characters 0-0
-  (not (fp.isFinite64 o2)))
+  (not (fp.isFinite64 o37)))
 (check-sat)
 (exit)

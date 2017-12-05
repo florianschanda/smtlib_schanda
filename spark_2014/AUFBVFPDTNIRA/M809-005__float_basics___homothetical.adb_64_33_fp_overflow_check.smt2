@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -65,24 +65,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
@@ -344,6 +344,10 @@
                                       (or (= temp___is_init_139 true)
                                       (<= 1 2)) (in_range1 temp___expr_142)))
 
+(declare-const kvmax (Array Int float))
+
+(declare-const kamax (Array Int float))
+
 (declare-const lambda (Array Int float))
 
 (declare-const upsilon (Array Int float))
@@ -352,63 +356,157 @@
 
 (declare-const i Int)
 
+(declare-const i1 Int)
+
 (declare-const j Int)
+
+(declare-const temp___169 (Array Int float))
+
+(declare-const temp___168 Int)
+
+(declare-const j1 Int)
 
 (declare-const o Float32)
 
-(declare-const o1 Float32)
+(declare-const o1 float)
 
-(declare-const o2 Float32)
+(declare-const o2 (Array Int float))
 
 (declare-const o3 Float32)
 
 (declare-const o4 Float32)
 
-(declare-const o5 float)
+(declare-const o5 Float32)
 
-(declare-const o6 (Array Int float))
+(declare-const o6 Float32)
 
 (declare-const o7 Float32)
 
-(declare-const o8 Float32)
+(declare-const o8 float)
 
-(declare-const o9 Float32)
+(declare-const o9 (Array Int float))
 
 (declare-const o10 Float32)
 
 (declare-const o11 Float32)
 
-(declare-const o12 float)
+(declare-const o12 Float32)
 
-(declare-const o13 (Array Int float))
+(declare-const o13 Float32)
 
 (declare-const o14 Float32)
 
-(declare-const o15 Float32)
+(declare-const o15 float)
 
-(declare-const o16 Float32)
+(declare-const o16 (Array Int float))
 
 (declare-const o17 Float32)
 
 (declare-const o18 Float32)
 
-(declare-const o19 float)
+(declare-const o19 Float32)
 
-(declare-const o20 (Array Int float))
+(declare-const o20 Float32)
 
 (declare-const o21 Float32)
 
-(declare-const o22 Float32)
+(declare-const o22 float)
 
-(declare-const o23 Float32)
+(declare-const o23 (Array Int float))
 
 (declare-const o24 Float32)
 
 (declare-const o25 Float32)
 
-(declare-const o26 float)
+(declare-const o26 Float32)
 
-(declare-const o27 (Array Int float))
+(declare-const o27 Float32)
+
+(declare-const o28 Float32)
+
+(declare-const o29 float)
+
+(declare-const o30 (Array Int float))
+
+(declare-const o31 Float32)
+
+(declare-const o32 float)
+
+(declare-const o33 (Array Int float))
+
+(declare-const o34 Float32)
+
+(declare-const o35 float)
+
+(declare-const o36 (Array Int float))
+
+(declare-const o37 Float32)
+
+(declare-const o38 Float32)
+
+(declare-const o39 Float32)
+
+(declare-const o40 Float32)
+
+(declare-const o41 Float32)
+
+(declare-const o42 float)
+
+(declare-const o43 (Array Int float))
+
+(declare-const o44 Float32)
+
+(declare-const o45 Float32)
+
+(declare-const o46 Float32)
+
+(declare-const o47 Float32)
+
+(declare-const o48 Float32)
+
+(declare-const o49 float)
+
+(declare-const o50 (Array Int float))
+
+(declare-const o51 Float32)
+
+(declare-const o52 Float32)
+
+(declare-const o53 Float32)
+
+(declare-const o54 Float32)
+
+(declare-const o55 Float32)
+
+(declare-const o56 float)
+
+(declare-const o57 (Array Int float))
+
+(declare-const o58 Float32)
+
+(declare-const o59 Float32)
+
+(declare-const o60 Float32)
+
+(declare-const o61 Float32)
+
+(declare-const o62 Float32)
+
+(declare-const o63 float)
+
+(declare-const o64 (Array Int float))
+
+(declare-const o65 Float32)
+
+(declare-const o66 float)
+
+(declare-const o67 (Array Int float))
+
+(declare-const o68 Float32)
+
+(declare-const o69 float)
+
+(declare-const o70 (Array Int float))
 
 (declare-const result (Array Int float))
 
@@ -422,21 +520,67 @@
 
 (declare-const kvp1 (Array Int float))
 
+(declare-const result3 Int)
+
+(declare-const i2 Int)
+
 (declare-const kvp2 (Array Int float))
 
-(declare-const result3 int__ref)
+(declare-const i3 Int)
 
-(declare-const i1 Int)
+(declare-const result4 (Array Int float))
 
-(declare-const result4 int__ref)
+(declare-const kvp3 (Array Int float))
 
-(declare-const j1 Int)
+(declare-const result5 Int)
 
-(declare-const result5 map__ref)
+(declare-const i4 Int)
+
+(declare-const kvp4 (Array Int float))
+
+(declare-const i5 Int)
+
+(declare-const kvp5 (Array Int float))
+
+(declare-const i6 Int)
+
+(declare-const kvp6 (Array Int float))
+
+(declare-const i7 Int)
+
+(declare-const kvp7 (Array Int float))
+
+(declare-const i8 Int)
+
+(declare-const kvp8 (Array Int float))
+
+(declare-const i9 Int)
+
+(declare-const kvp9 (Array Int float))
+
+(declare-const i10 Int)
+
+(declare-const result6 (Array Int float))
+
+(declare-const kvmax1 (Array Int float))
+
+(declare-const result7 map__ref)
+
+(declare-const kamax1 (Array Int float))
+
+(declare-const result8 int__ref)
+
+(declare-const i11 Int)
+
+(declare-const result9 int__ref)
+
+(declare-const j2 Int)
+
+(declare-const result10 map__ref)
 
 (declare-const lambda2 (Array Int float))
 
-(declare-const result6 map__ref)
+(declare-const result11 map__ref)
 
 (declare-const upsilon2 (Array Int float))
 
@@ -448,15 +592,15 @@
 
 (declare-const upsilon4 (Array Int float))
 
-(declare-const result7 int__ref)
+(declare-const result12 int__ref)
 
-(declare-const j2 Int)
+(declare-const j3 Int)
 
-(declare-const result8 map__ref)
+(declare-const result13 map__ref)
 
 (declare-const lambda5 (Array Int float))
 
-(declare-const result9 map__ref)
+(declare-const result14 map__ref)
 
 (declare-const upsilon5 (Array Int float))
 
@@ -468,17 +612,109 @@
 
 (declare-const upsilon7 (Array Int float))
 
+(declare-const result15 map__ref)
+
+(declare-const kvmax2 (Array Int float))
+
+(declare-const result16 map__ref)
+
+(declare-const kamax2 (Array Int float))
+
+(declare-const result17 int__ref)
+
+(declare-const i12 Int)
+
+(declare-const result18 int__ref)
+
+(declare-const j4 Int)
+
+(declare-const result19 map__ref)
+
+(declare-const lambda8 (Array Int float))
+
+(declare-const result20 map__ref)
+
+(declare-const upsilon8 (Array Int float))
+
+(declare-const lambda9 map__ref)
+
+(declare-const upsilon9 map__ref)
+
+(declare-const lambda10 (Array Int float))
+
+(declare-const upsilon10 (Array Int float))
+
+(declare-const result21 int__ref)
+
+(declare-const j5 Int)
+
+(declare-const result22 map__ref)
+
+(declare-const lambda11 (Array Int float))
+
+(declare-const result23 map__ref)
+
+(declare-const upsilon11 (Array Int float))
+
+(declare-const lambda12 map__ref)
+
+(declare-const upsilon12 map__ref)
+
+(declare-const lambda13 (Array Int float))
+
+(declare-const upsilon13 (Array Int float))
+
+(declare-const result24 map__ref)
+
+(declare-const kvmax3 (Array Int float))
+
+(declare-const result25 map__ref)
+
+(declare-const kamax3 (Array Int float))
+
+(declare-const kvmax4 map__ref)
+
+(declare-const kamax4 map__ref)
+
+(declare-const lambda14 map__ref)
+
+(declare-const upsilon14 map__ref)
+
+(declare-const kvp10 map__ref)
+
+(declare-const i13 int__ref)
+
+(declare-const i14 int__ref)
+
+(declare-const j6 int__ref)
+
+(declare-const kvmax5 (Array Int float))
+
+(declare-const kamax5 (Array Int float))
+
+(declare-const lambda15 (Array Int float))
+
+(declare-const upsilon15 (Array Int float))
+
+(declare-const kvp11 (Array Int float))
+
+(declare-const i15 Int)
+
+(declare-const i16 Int)
+
+(declare-const j7 Int)
+
 ;; H
   (assert
-  (forall ((j3 Int))
-  (=> (and (<= 1 j3) (<= j3 2))
+  (forall ((j8 Int))
+  (=> (and (<= 1 j8) (<= j8 2))
   (and
   (and
-  (not (fp.eq (to_rep (select d j3)) (fp #b0 #b00000000 #b00000000000000000000000)))
+  (not (fp.eq (to_rep (select d j8)) (fp #b0 #b00000000 #b00000000000000000000000)))
   (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) (to_rep
-                                                       (select kv j3))))
+                                                       (select kv j8))))
   (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) (to_rep
-                                                       (select ka j3)))))))
+                                                       (select ka j8)))))))
 
 ;; H
   (assert (= (mk_map__ref result) (mk_map__ref lambda)))
@@ -506,249 +742,252 @@
 
 ;; H
   (assert
-  (forall ((i2 Int))
-  (=> (and (<= 1 i2) (<= i2 2))
+  (forall ((i17 Int))
+  (=> (and (<= 1 i17) (<= i17 2))
   (and
   (and
   (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) (to_rep
-                                                       (select ka i2)))
-  (not (fp.eq (to_rep (select kvp2 i2)) (fp #b0 #b00000000 #b00000000000000000000000))))
-  (not (fp.eq (to_rep (select d i2)) (fp #b0 #b00000000 #b00000000000000000000000)))))))
+                                                       (select ka i17)))
+  (not (fp.eq (to_rep (select kvp8 i17)) (fp #b0 #b00000000 #b00000000000000000000000))))
+  (not (fp.eq (to_rep (select d i17)) (fp #b0 #b00000000 #b00000000000000000000000)))))))
 
 ;; H
-  (assert (= result3 (mk_int__ref i)))
+  (assert (= result8 (mk_int__ref i1)))
 
 ;; H
-  (assert (= i1 1))
+  (assert (= i11 1))
 
 ;; H
-  (assert (= result4 (mk_int__ref j)))
+  (assert (= result9 (mk_int__ref j)))
 
 ;; H
-  (assert (= j1 1))
+  (assert (= j2 1))
 
 ;; H
   (assert
-  (=> (not (= i1 j1))
+  (=> (not (= i11 j2))
   (and
-  (= o1 (fp.mul RNE (to_rep (select kvp2 i1)) (fp.abs (to_rep (select d j1)))))
-  (fp.isFinite32 (fp.mul RNE (to_rep (select kvp2 i1)) (fp.abs (to_rep
+  (= o4 (fp.mul RNE (to_rep (select kvp8 i11)) (fp.abs (to_rep (select d j2)))))
+  (fp.isFinite32 (fp.mul RNE (to_rep (select kvp8 i11)) (fp.abs (to_rep
+                                                                (select
+                                                                d j2))))))))
+
+;; H
+  (assert
+  (=> (not (= i11 j2))
+  (and
+  (= o3 (fp.mul RNE (to_rep (select kvp8 j2)) (fp.abs (to_rep (select d i11)))))
+  (fp.isFinite32 (fp.mul RNE (to_rep (select kvp8 j2)) (fp.abs (to_rep
                                                                (select
-                                                               d j1))))))))
+                                                               d i11))))))))
+
+;; H
+  (assert (=> (not (= i11 j2)) (= o5 (fp.div RNE o3 o4))))
+
+;; H
+  (assert (=> (not (= i11 j2)) (and (= o6 o5) (fp.isFinite32 o5))))
 
 ;; H
   (assert
-  (=> (not (= i1 j1))
+  (=> (not (= i11 j2)) (= o7 (fp.min (to_rep (select lambda1 i11)) o6))))
+
+;; H
+  (assert (=> (not (= i11 j2)) (= (to_rep o8) o7)))
+
+;; H
+  (assert (=> (not (= i11 j2)) (= o9 (store lambda1 i11 o8))))
+
+;; H
+  (assert (=> (not (= i11 j2)) (= result10 (mk_map__ref lambda1))))
+
+;; H
+  (assert (=> (not (= i11 j2)) (= lambda2 o9)))
+
+;; H
+  (assert
+  (=> (not (= i11 j2))
   (and
-  (= o (fp.mul RNE (to_rep (select kvp2 j1)) (fp.abs (to_rep (select d i1)))))
-  (fp.isFinite32 (fp.mul RNE (to_rep (select kvp2 j1)) (fp.abs (to_rep
-                                                               (select
-                                                               d i1))))))))
-
-;; H
-  (assert (=> (not (= i1 j1)) (= o2 (fp.div RNE o o1))))
-
-;; H
-  (assert (=> (not (= i1 j1)) (and (= o3 o2) (fp.isFinite32 o2))))
+  (= o11 (fp.mul RNE (to_rep (select ka i11)) (fp.abs (to_rep (select d j2)))))
+  (fp.isFinite32 (fp.mul RNE (to_rep (select ka i11)) (fp.abs (to_rep
+                                                              (select
+                                                              d j2))))))))
 
 ;; H
   (assert
-  (=> (not (= i1 j1)) (= o4 (fp.min (to_rep (select lambda1 i1)) o3))))
-
-;; H
-  (assert (=> (not (= i1 j1)) (= (to_rep o5) o4)))
-
-;; H
-  (assert (=> (not (= i1 j1)) (= o6 (store lambda1 i1 o5))))
-
-;; H
-  (assert (=> (not (= i1 j1)) (= result5 (mk_map__ref lambda1))))
-
-;; H
-  (assert (=> (not (= i1 j1)) (= lambda2 o6)))
-
-;; H
-  (assert
-  (=> (not (= i1 j1))
+  (=> (not (= i11 j2))
   (and
-  (= o8 (fp.mul RNE (to_rep (select ka i1)) (fp.abs (to_rep (select d j1)))))
-  (fp.isFinite32 (fp.mul RNE (to_rep (select ka i1)) (fp.abs (to_rep
-                                                             (select
-                                                             d j1))))))))
-
-;; H
-  (assert
-  (=> (not (= i1 j1))
-  (and
-  (= o7 (fp.mul RNE (to_rep (select ka j1)) (fp.abs (to_rep (select d i1)))))
-  (fp.isFinite32 (fp.mul RNE (to_rep (select ka j1)) (fp.abs (to_rep
-                                                             (select
-                                                             d i1))))))))
-
-;; H
-  (assert (=> (not (= i1 j1)) (= o9 (fp.div RNE o7 o8))))
-
-;; H
-  (assert (=> (not (= i1 j1)) (and (= o10 o9) (fp.isFinite32 o9))))
-
-;; H
-  (assert
-  (=> (not (= i1 j1)) (= o11 (fp.min (to_rep (select upsilon1 i1)) o10))))
-
-;; H
-  (assert (=> (not (= i1 j1)) (= (to_rep o12) o11)))
-
-;; H
-  (assert (=> (not (= i1 j1)) (= o13 (store upsilon1 i1 o12))))
-
-;; H
-  (assert (=> (not (= i1 j1)) (= result6 (mk_map__ref upsilon1))))
-
-;; H
-  (assert (=> (not (= i1 j1)) (= upsilon2 o13)))
-
-;; H
-  (assert (=> (not (= i1 j1)) (= upsilon3 (mk_map__ref upsilon2))))
-
-;; H
-  (assert (=> (not (= i1 j1)) (= lambda3 (mk_map__ref lambda2))))
-
-;; H
-  (assert (=> (not (= i1 j1)) (= upsilon4 upsilon2)))
-
-;; H
-  (assert (=> (not (= i1 j1)) (= lambda4 lambda2)))
-
-;; H
-  (assert (=> (not (not (= i1 j1))) (= upsilon3 (mk_map__ref upsilon1))))
-
-;; H
-  (assert (=> (not (not (= i1 j1))) (= lambda3 (mk_map__ref lambda1))))
-
-;; H
-  (assert (=> (not (not (= i1 j1))) (= upsilon4 upsilon1)))
-
-;; H
-  (assert (=> (not (not (= i1 j1))) (= lambda4 lambda1)))
-
-;; H
-  (assert (= result7 (mk_int__ref j1)))
-
-;; H
-  (assert (= j2 2))
-
-;; H
-  (assert
-  (=> (not (= i1 j2))
-  (and
-  (= o15 (fp.mul RNE (to_rep (select kvp2 i1)) (fp.abs (to_rep (select d j2)))))
-  (fp.isFinite32 (fp.mul RNE (to_rep (select kvp2 i1)) (fp.abs (to_rep
-                                                               (select
-                                                               d j2))))))))
-
-;; H
-  (assert
-  (=> (not (= i1 j2))
-  (and
-  (= o14 (fp.mul RNE (to_rep (select kvp2 j2)) (fp.abs (to_rep (select d i1)))))
-  (fp.isFinite32 (fp.mul RNE (to_rep (select kvp2 j2)) (fp.abs (to_rep
-                                                               (select
-                                                               d i1))))))))
-
-;; H
-  (assert (=> (not (= i1 j2)) (= o16 (fp.div RNE o14 o15))))
-
-;; H
-  (assert (=> (not (= i1 j2)) (and (= o17 o16) (fp.isFinite32 o16))))
-
-;; H
-  (assert
-  (=> (not (= i1 j2))
-  (= o18 (fp.min (to_rep (select (map__content lambda3) i1)) o17))))
-
-;; H
-  (assert (=> (not (= i1 j2)) (= (to_rep o19) o18)))
-
-;; H
-  (assert (=> (not (= i1 j2)) (= o20 (store (map__content lambda3) i1 o19))))
-
-;; H
-  (assert (=> (not (= i1 j2)) (= result8 lambda3)))
-
-;; H
-  (assert (=> (not (= i1 j2)) (= lambda5 o20)))
-
-;; H
-  (assert
-  (=> (not (= i1 j2))
-  (and
-  (= o22 (fp.mul RNE (to_rep (select ka i1)) (fp.abs (to_rep (select d j2)))))
-  (fp.isFinite32 (fp.mul RNE (to_rep (select ka i1)) (fp.abs (to_rep
-                                                             (select
-                                                             d j2))))))))
-
-;; H
-  (assert
-  (=> (not (= i1 j2))
-  (and
-  (= o21 (fp.mul RNE (to_rep (select ka j2)) (fp.abs (to_rep (select d i1)))))
+  (= o10 (fp.mul RNE (to_rep (select ka j2)) (fp.abs (to_rep (select d i11)))))
   (fp.isFinite32 (fp.mul RNE (to_rep (select ka j2)) (fp.abs (to_rep
                                                              (select
-                                                             d i1))))))))
+                                                             d i11))))))))
 
 ;; H
-  (assert (=> (not (= i1 j2)) (= o23 (fp.div RNE o21 o22))))
+  (assert (=> (not (= i11 j2)) (= o12 (fp.div RNE o10 o11))))
 
 ;; H
-  (assert (=> (not (= i1 j2)) (and (= o24 o23) (fp.isFinite32 o23))))
-
-;; H
-  (assert
-  (=> (not (= i1 j2))
-  (= o25 (fp.min (to_rep (select (map__content upsilon3) i1)) o24))))
-
-;; H
-  (assert (=> (not (= i1 j2)) (= (to_rep o26) o25)))
+  (assert (=> (not (= i11 j2)) (and (= o13 o12) (fp.isFinite32 o12))))
 
 ;; H
   (assert
-  (=> (not (= i1 j2)) (= o27 (store (map__content upsilon3) i1 o26))))
+  (=> (not (= i11 j2)) (= o14 (fp.min (to_rep (select upsilon1 i11)) o13))))
 
 ;; H
-  (assert (=> (not (= i1 j2)) (= result9 upsilon3)))
+  (assert (=> (not (= i11 j2)) (= (to_rep o15) o14)))
 
 ;; H
-  (assert (=> (not (= i1 j2)) (= upsilon5 o27)))
+  (assert (=> (not (= i11 j2)) (= o16 (store upsilon1 i11 o15))))
 
 ;; H
-  (assert (=> (not (= i1 j2)) (= upsilon6 (mk_map__ref upsilon5))))
+  (assert (=> (not (= i11 j2)) (= result11 (mk_map__ref upsilon1))))
 
 ;; H
-  (assert (=> (not (= i1 j2)) (= lambda6 (mk_map__ref lambda5))))
+  (assert (=> (not (= i11 j2)) (= upsilon2 o16)))
 
 ;; H
-  (assert (=> (not (= i1 j2)) (= upsilon7 upsilon5)))
+  (assert (=> (not (= i11 j2)) (= upsilon3 (mk_map__ref upsilon2))))
 
 ;; H
-  (assert (=> (not (= i1 j2)) (= lambda7 lambda5)))
+  (assert (=> (not (= i11 j2)) (= lambda3 (mk_map__ref lambda2))))
 
 ;; H
-  (assert (=> (not (not (= i1 j2))) (= upsilon6 upsilon3)))
+  (assert (=> (not (= i11 j2)) (= upsilon4 upsilon2)))
 
 ;; H
-  (assert (=> (not (not (= i1 j2))) (= lambda6 lambda3)))
+  (assert (=> (not (= i11 j2)) (= lambda4 lambda2)))
 
 ;; H
-  (assert (=> (not (not (= i1 j2))) (= upsilon7 upsilon4)))
+  (assert (=> (= i11 j2) (= upsilon3 (mk_map__ref upsilon1))))
 
 ;; H
-  (assert (=> (not (not (= i1 j2))) (= lambda7 lambda4)))
+  (assert (=> (= i11 j2) (= lambda3 (mk_map__ref lambda1))))
+
+;; H
+  (assert (=> (= i11 j2) (= upsilon4 upsilon1)))
+
+;; H
+  (assert (=> (= i11 j2) (= lambda4 lambda1)))
+
+;; H
+  (assert (= result12 (mk_int__ref j2)))
+
+;; H
+  (assert (= j3 2))
+
+;; H
+  (assert
+  (=> (not (= i11 j3))
+  (and
+  (= o18 (fp.mul RNE (to_rep (select kvp8 i11)) (fp.abs (to_rep
+                                                        (select d j3)))))
+  (fp.isFinite32 (fp.mul RNE (to_rep (select kvp8 i11)) (fp.abs (to_rep
+                                                                (select
+                                                                d j3))))))))
+
+;; H
+  (assert
+  (=> (not (= i11 j3))
+  (and
+  (= o17 (fp.mul RNE (to_rep (select kvp8 j3)) (fp.abs (to_rep
+                                                       (select d i11)))))
+  (fp.isFinite32 (fp.mul RNE (to_rep (select kvp8 j3)) (fp.abs (to_rep
+                                                               (select
+                                                               d i11))))))))
+
+;; H
+  (assert (=> (not (= i11 j3)) (= o19 (fp.div RNE o17 o18))))
+
+;; H
+  (assert (=> (not (= i11 j3)) (and (= o20 o19) (fp.isFinite32 o19))))
+
+;; H
+  (assert
+  (=> (not (= i11 j3))
+  (= o21 (fp.min (to_rep (select (map__content lambda3) i11)) o20))))
+
+;; H
+  (assert (=> (not (= i11 j3)) (= (to_rep o22) o21)))
+
+;; H
+  (assert
+  (=> (not (= i11 j3)) (= o23 (store (map__content lambda3) i11 o22))))
+
+;; H
+  (assert (=> (not (= i11 j3)) (= result13 lambda3)))
+
+;; H
+  (assert (=> (not (= i11 j3)) (= lambda5 o23)))
+
+;; H
+  (assert
+  (=> (not (= i11 j3))
+  (and
+  (= o25 (fp.mul RNE (to_rep (select ka i11)) (fp.abs (to_rep (select d j3)))))
+  (fp.isFinite32 (fp.mul RNE (to_rep (select ka i11)) (fp.abs (to_rep
+                                                              (select
+                                                              d j3))))))))
+
+;; H
+  (assert
+  (=> (not (= i11 j3))
+  (and
+  (= o24 (fp.mul RNE (to_rep (select ka j3)) (fp.abs (to_rep (select d i11)))))
+  (fp.isFinite32 (fp.mul RNE (to_rep (select ka j3)) (fp.abs (to_rep
+                                                             (select
+                                                             d i11))))))))
+
+;; H
+  (assert (=> (not (= i11 j3)) (= o26 (fp.div RNE o24 o25))))
+
+;; H
+  (assert (=> (not (= i11 j3)) (and (= o27 o26) (fp.isFinite32 o26))))
+
+;; H
+  (assert
+  (=> (not (= i11 j3))
+  (= o28 (fp.min (to_rep (select (map__content upsilon3) i11)) o27))))
+
+;; H
+  (assert (=> (not (= i11 j3)) (= (to_rep o29) o28)))
+
+;; H
+  (assert
+  (=> (not (= i11 j3)) (= o30 (store (map__content upsilon3) i11 o29))))
+
+;; H
+  (assert (=> (not (= i11 j3)) (= result14 upsilon3)))
+
+;; H
+  (assert (=> (not (= i11 j3)) (= upsilon5 o30)))
+
+;; H
+  (assert (=> (not (= i11 j3)) (= upsilon6 (mk_map__ref upsilon5))))
+
+;; H
+  (assert (=> (not (= i11 j3)) (= lambda6 (mk_map__ref lambda5))))
+
+;; H
+  (assert (=> (not (= i11 j3)) (= upsilon7 upsilon5)))
+
+;; H
+  (assert (=> (not (= i11 j3)) (= lambda7 lambda5)))
+
+;; H
+  (assert (=> (= i11 j3) (= upsilon6 upsilon3)))
+
+;; H
+  (assert (=> (= i11 j3) (= lambda6 lambda3)))
+
+;; H
+  (assert (=> (= i11 j3) (= upsilon7 upsilon4)))
+
+;; H
+  (assert (=> (= i11 j3) (= lambda7 lambda4)))
 
 (assert
 ;; WP_parameter_def
  ;; File "homothetical.ads", line 5, characters 0-0
   (not
-  (fp.isFinite32 (fp.mul RNE (to_rep (select (map__content lambda6) i1))
-  (to_rep (select kvp2 i1))))))
+  (fp.isFinite32 (fp.mul RNE (to_rep (select (map__content lambda6) i11))
+  (to_rep (select kvp8 i11))))))
 (check-sat)
 (exit)

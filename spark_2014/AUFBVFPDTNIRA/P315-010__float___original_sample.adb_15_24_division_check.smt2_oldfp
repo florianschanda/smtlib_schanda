@@ -1208,18 +1208,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral4)
-  (= (tqtreal fliteral4) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
-
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 2.0)))
-
 (declare-const time t)
 
 (declare-const d t)
@@ -1228,9 +1216,45 @@
 
 (declare-const t_pp t)
 
+(declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const o3 t)
+
 (declare-const result t)
 
 (declare-const d1 t)
+
+(declare-const result1 t)
+
+(declare-const t_fp1 t)
+
+(declare-const result2 t)
+
+(declare-const t_pp1 t)
+
+(declare-const result3 t)
+
+(declare-const time1 t)
+
+(declare-const time2 t)
+
+(declare-const d2 t)
+
+(declare-const t_fp2 t)
+
+(declare-const t_pp2 t)
+
+(declare-const time3 t)
+
+(declare-const d3 t)
+
+(declare-const t_fp3 t)
+
+(declare-const t_pp3 t)
 
 ;; H
   (assert (in_range2 nb_of_fp))
@@ -1243,6 +1267,13 @@
 
 ;; H
   (assert (tqtisFinite time))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral4)
+  (= (tqtreal fliteral4) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
 
 ;; H
   (assert
@@ -1267,6 +1298,11 @@
 
 ;; H
   (assert (= d1 (mul RNE1 (of_int RNE1 (+ nb_of_fp nb_of_pp)) delta_time)))
+
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 2.0)))
 
 (assert
 ;; WP_parameter_def

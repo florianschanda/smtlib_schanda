@@ -2067,24 +2067,188 @@ axiom def_axiom2 :
   ((floats__test__d__aggregate_def(temp___168, temp___169, temp___170,
   temp___171)[4]) = of_rep1(temp___171))))
 
+logic e : (int,long_float) farray
+
+logic b : (int,long_float) farray
+
+logic c : (int,long_float) farray
+
+logic d : (int,long_float) farray
+
+logic o : long_float
+
+logic o1 : (int,long_float) farray
+
+logic o2 : long_float
+
+logic o3 : (int,long_float) farray
+
+logic o4 : long_float
+
+logic o5 : (int,long_float) farray
+
+logic o6 : long_float
+
+logic o7 : (int,long_float) farray
+
+logic o8 : long_float
+
+logic o9 : (int,long_float) farray
+
+logic o10 : long_float
+
+logic o11 : (int,long_float) farray
+
+logic o12 : long_float
+
+logic o13 : (int,long_float) farray
+
+logic o14 : long_float
+
+logic o15 : (int,long_float) farray
+
+logic o16 : long_float
+
+logic o17 : (int,long_float) farray
+
+logic o18 : long_float
+
+logic o19 : (int,long_float) farray
+
+logic o20 : long_float
+
+logic o21 : (int,long_float) farray
+
+logic o22 : long_float
+
+logic o23 : (int,long_float) farray
+
+logic o24 : t1
+
+logic o25 : long_float
+
+logic o26 : (int,long_float) farray
+
+logic o27 : t1
+
+logic o28 : long_float
+
+logic o29 : (int,long_float) farray
+
+logic o30 : t1
+
+logic o31 : long_float
+
+logic o32 : (int,long_float) farray
+
+logic o33 : t1
+
+logic o34 : long_float
+
+logic o35 : (int,long_float) farray
+
+logic result : (int,long_float) farray
+
+logic b1 : (int,long_float) farray
+
+logic result1 : (int,long_float) farray
+
+logic c1 : (int,long_float) farray
+
+logic result2 : (int,long_float) farray
+
+logic d1 : (int,long_float) farray
+
+logic result3 : (int,long_float) farray
+
+logic e1 : (int,long_float) farray
+
+logic result4 : (int,long_float) farray
+
+logic e2 : (int,long_float) farray
+
+logic result5 : (int,long_float) farray
+
+logic e3 : (int,long_float) farray
+
+logic result6 : (int,long_float) farray
+
+logic e4 : (int,long_float) farray
+
+logic result7 : (int,long_float) farray
+
+logic c2 : (int,long_float) farray
+
+logic result8 : (int,long_float) farray
+
+logic c3 : (int,long_float) farray
+
+logic result9 : (int,long_float) farray
+
+logic c4 : (int,long_float) farray
+
+logic result10 : (int,long_float) farray
+
+logic c5 : (int,long_float) farray
+
+logic result11 : (int,long_float) farray
+
+logic b2 : (int,long_float) farray
+
+logic result12 : (int,long_float) farray
+
+logic b3 : (int,long_float) farray
+
+logic result13 : (int,long_float) farray
+
+logic b4 : (int,long_float) farray
+
+logic result14 : (int,long_float) farray
+
+logic b5 : (int,long_float) farray
+
+logic result15 : (int,long_float) farray
+
+logic d2 : (int,long_float) farray
+
+logic result16 : (int,long_float) farray
+
+logic d3 : (int,long_float) farray
+
+logic result17 : (int,long_float) farray
+
+logic d4 : (int,long_float) farray
+
+logic result18 : (int,long_float) farray
+
+logic d5 : (int,long_float) farray
+
+axiom H :
+  (forall i:int. (((1 <= i) and (i <= 3)) -> (le(neg(fliteral),
+  to_rep((a[i]))) and le(to_rep((a[i])), fliteral))))
+
+axiom H1 : (result = b)
+
 logic fliteral2 : t1
 
 axiom fliteral_axiom2 : (tqtisFinite1(fliteral2) and
   (tqtreal1(fliteral2) = 0.0e-1))
 
+axiom H2 : (b1 = floats__test__b__aggregate_def(fliteral2, fliteral2,
+  fliteral2, fliteral2))
+
+axiom H3 : (result1 = c)
+
+axiom H4 : (c1 = floats__test__c__aggregate_def(fliteral2, fliteral2,
+  fliteral2, fliteral2))
+
+axiom H5 : (result2 = d)
+
+axiom H6 : (d1 = floats__test__d__aggregate_def(fliteral2, fliteral2,
+  fliteral2, fliteral2))
+
+axiom H7 : (le(neg(fliteral), to_rep((a[1]))) and le(to_rep((a[1])),
+  fliteral))
+
  (* File "floats.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall b:(int,long_float) farray. forall c:(int,long_float) farray.
-  forall d:(int,long_float) farray. forall result:(int,long_float) farray.
-  forall b1:(int,long_float) farray. forall result1:(int,long_float) farray.
-  forall c1:(int,long_float) farray. forall result2:(int,long_float) farray.
-  forall d1:(int,long_float) farray.
-  ((forall i:int. (((1 <= i) and (i <= 3)) -> (le(neg(fliteral),
-   to_rep((a[i]))) and le(to_rep((a[i])), fliteral)))) ->
-  (((result = b) and (b1 = floats__test__b__aggregate_def(fliteral2,
-  fliteral2, fliteral2, fliteral2))) -> (((result1 = c) and
-  (c1 = floats__test__c__aggregate_def(fliteral2, fliteral2, fliteral2,
-  fliteral2))) -> (((result2 = d) and
-  (d1 = floats__test__d__aggregate_def(fliteral2, fliteral2, fliteral2,
-  fliteral2))) -> ((le(neg(fliteral), to_rep((a[1]))) and le(to_rep((a[1])),
-  fliteral)) -> le(neg(fliteral), to_rep((a[2])))))))))
+goal WP_parameter_def : le(neg(fliteral), to_rep((a[2])))

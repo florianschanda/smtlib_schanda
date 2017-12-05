@@ -1105,7 +1105,7 @@ type t__ref = { t__content : t
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -1262,17 +1262,17 @@ logic bool_eq6 : us_rep, us_rep -> bool
 
 axiom bool_eq_def5 :
   (forall a:us_rep. forall b:us_rep [bool_eq6(a, b)].
-  (((((to_rep3(((a).us_split_discrs1).rec__rec__my_rec__e) = to_rep3(((b).us_split_discrs1).rec__rec__my_rec__e)) and
-  (rec__my_rec__x__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__rec__my_rec__x) = to_rep1(((b).us_split_fields1).rec__rec__my_rec__x)))) and
-  (rec__my_rec__y__pred(a) ->
-  (to_rep2(((a).us_split_fields1).rec__rec__my_rec__y) = to_rep2(((b).us_split_fields1).rec__rec__my_rec__y)))) ->
-  (bool_eq6(a, b) = true)) and
-  ((not (((to_rep3(((a).us_split_discrs1).rec__rec__my_rec__e) = to_rep3(((b).us_split_discrs1).rec__rec__my_rec__e)) and
-  (rec__my_rec__x__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__rec__my_rec__x) = to_rep1(((b).us_split_fields1).rec__rec__my_rec__x)))) and
+  ((((to_rep3(((a).us_split_discrs1).rec__rec__my_rec__e) = to_rep3(((b).us_split_discrs1).rec__rec__my_rec__e)) and
+  ((rec__my_rec__x__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__rec__my_rec__x) = to_rep1(((b).us_split_fields1).rec__rec__my_rec__x))) and
   (rec__my_rec__y__pred(a) ->
   (to_rep2(((a).us_split_fields1).rec__rec__my_rec__y) = to_rep2(((b).us_split_fields1).rec__rec__my_rec__y))))) ->
+  (bool_eq6(a, b) = true)) and
+  ((not ((to_rep3(((a).us_split_discrs1).rec__rec__my_rec__e) = to_rep3(((b).us_split_discrs1).rec__rec__my_rec__e)) and
+  ((rec__my_rec__x__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__rec__my_rec__x) = to_rep1(((b).us_split_fields1).rec__rec__my_rec__x))) and
+  (rec__my_rec__y__pred(a) ->
+  (to_rep2(((a).us_split_fields1).rec__rec__my_rec__y) = to_rep2(((b).us_split_fields1).rec__rec__my_rec__y)))))) ->
   (bool_eq6(a, b) = false))))
 
 logic value__size : int
@@ -2172,6 +2172,112 @@ logic f__split_discrs : natural
 logic f__split_discrs1 : natural
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic x__split_fields : sub_enum
+
+logic x__split_fields1 : integer
+
+logic x__split_fields2 : float1
+
+logic y__split_fields : sub_enum
+
+logic y__split_fields1 : integer
+
+logic y__split_fields2 : float1
+
+logic main__x__assume : enum
+
+logic main__x__assume1 : sub_enum
+
+logic main__x__assume2 : integer
+
+logic main__x__assume3 : float1
+
+logic main__y__assume : enum
+
+logic main__y__assume1 : sub_enum
+
+logic main__y__assume2 : integer
+
+logic main__y__assume3 : float1
+
+logic main__f__assume : natural
+
+logic main__f__assume1 : natural
+
+logic main__f__assume2 : (int,natural) farray
+
+logic main__f__assume3 : t1
+
+logic result : sub_enum
+
+logic result1 : integer
+
+logic result2 : float1
+
+logic x__split_fields3 : sub_enum
+
+logic x__split_fields4 : integer
+
+logic x__split_fields5 : float1
+
+logic result3 : sub_enum
+
+logic result4 : integer
+
+logic result5 : float1
+
+logic y__split_fields3 : sub_enum
+
+logic y__split_fields4 : integer
+
+logic y__split_fields5 : float1
+
+axiom H : (({ us_split_discrs3 = { rec__rec__sub_rec__z = main__x__assume };
+  us_split_fields3 = { rec__rec__sub_rec__plop = { us_split_discrs1 = {
+  rec__rec__my_rec__e = main__x__assume1 }; us_split_fields1 = {
+  rec__rec__my_rec__x = main__x__assume2; rec__rec__my_rec__y =
+  main__x__assume3 } } } } = build_rec(2)) and
+  (to_rep(main__x__assume) = to_rep3(main__x__assume1)))
+
+axiom H1 : ((result = x__split_fields) and ((result1 = x__split_fields1) and
+  (result2 = x__split_fields2)))
+
+axiom H2 : ((x__split_fields3 = main__x__assume1) and
+  ((x__split_fields4 = main__x__assume2) and
+  (x__split_fields5 = main__x__assume3)))
+
+axiom H3 : (x__split_discrs = main__x__assume)
+
+axiom H4 : (to_rep(x__split_discrs) = to_rep3(x__split_fields3))
+
+axiom H5 : (({ us_split_discrs5 = { rec__rec__sub_rec_ok__z = main__y__assume
+  }; us_split_fields5 = { rec__rec__sub_rec_ok__plop = { us_split_discrs1 = {
+  rec__rec__my_rec__e = main__y__assume1 }; us_split_fields1 = {
+  rec__rec__my_rec__x = main__y__assume2; rec__rec__my_rec__y =
+  main__y__assume3 } } } } = build_rec_ok(2)) and
+  (rec__sub_rec_ok__plop__pred({ us_split_discrs5 = {
+  rec__rec__sub_rec_ok__z = main__y__assume }; us_split_fields5 = {
+  rec__rec__sub_rec_ok__plop = { us_split_discrs1 = { rec__rec__my_rec__e =
+  main__y__assume1 }; us_split_fields1 = { rec__rec__my_rec__x =
+  main__y__assume2; rec__rec__my_rec__y = main__y__assume3 } } } }) ->
+  (to_rep(main__y__assume) = to_rep3(main__y__assume1))))
+
+axiom H6 : ((result3 = y__split_fields) and ((result4 = y__split_fields1) and
+  (result5 = y__split_fields2)))
+
+axiom H7 : ((y__split_fields3 = main__y__assume1) and
+  ((y__split_fields4 = main__y__assume2) and
+  (y__split_fields5 = main__y__assume3)))
+
+axiom H8 : (y__split_discrs = main__y__assume)
+
+axiom H9 : (rec__sub_rec_ok__plop__pred({ us_split_discrs5 = {
+  rec__rec__sub_rec_ok__z = y__split_discrs }; us_split_fields5 = {
+  rec__rec__sub_rec_ok__plop = { us_split_discrs1 = { rec__rec__my_rec__e =
+  y__split_fields3 }; us_split_fields1 = { rec__rec__my_rec__x =
+  y__split_fields4; rec__rec__my_rec__y = y__split_fields5 } } } }) ->
+  (to_rep(y__split_discrs) = to_rep3(y__split_fields3)))
 
  (* File "main.adb", line 23, characters 0-0 *)
 goal WP_parameter_def : true

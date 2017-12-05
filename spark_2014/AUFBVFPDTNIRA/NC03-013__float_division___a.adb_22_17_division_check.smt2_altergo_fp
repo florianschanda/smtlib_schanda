@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -2371,19 +2371,37 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic y : t1
+
+logic h : t1
+
+logic o : t1
+
+logic o1 : t1
+
+logic result : t1
+
+logic h1 : t1
+
+axiom H : in_range1(x)
+
+axiom H1 : (le(fliteral1, fliteral2) -> in_range2(y))
+
 logic fliteral3 : t1
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 340282346638528859811704183484516925440.0))
+
+axiom H2 : (le(neg1(fliteral3), fliteral3) -> tqtisFinite(h))
+
+axiom H3 : (not (x = of_int(0)))
 
 logic fliteral4 : t1
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 0.899999976158142089843750))
 
+axiom H4 : le(fliteral4, of_ubv16(NearestTiesToEven, x))
+
  (* File "a.ads", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall y:t1. forall h:t1. (in_range1(x) -> ((le(fliteral1, fliteral2) ->
-  in_range2(y)) -> ((le(neg1(fliteral3), fliteral3) -> tqtisFinite(h)) ->
-  ((not (x = of_int(0))) -> (le(fliteral4, of_ubv16(NearestTiesToEven, x)) ->
-  (not is_zero(of_ubv16(NearestTiesToEven, x)))))))))
+goal WP_parameter_def : (not is_zero(of_ubv16(NearestTiesToEven, x)))

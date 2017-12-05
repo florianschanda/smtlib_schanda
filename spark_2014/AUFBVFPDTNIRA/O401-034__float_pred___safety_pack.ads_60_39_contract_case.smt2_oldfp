@@ -1226,9 +1226,9 @@
   (assert
   (=> (not (eq x fliteral2))
   (=> (and (le (neg fliteral3) x) (le x fliteral2))
-  (let ((temp___1352 (neg fliteral3)))
-  (or (or (eq temp___1352 fliteral2) (le temp___1352 (neg fliteral3))) (le
-  fliteral3 temp___1352))))))
+  (let ((temp___1346 (neg fliteral3)))
+  (or (or (eq temp___1346 fliteral2) (le temp___1346 (neg fliteral3))) (le
+  fliteral3 temp___1346))))))
 
 ;; H
   (assert
@@ -1276,9 +1276,9 @@
   (=> (not (eq x fliteral2))
   (=> (not (and (le (neg fliteral3) x) (le x fliteral2)))
   (=> (not (and (le fliteral2 x) (le x fliteral3)))
-  (let ((temp___1348 x))
-  (or (or (eq temp___1348 fliteral2) (le temp___1348 (neg fliteral3))) (le
-  fliteral3 temp___1348)))))))
+  (let ((temp___1342 x))
+  (or (or (eq temp___1342 fliteral2) (le temp___1342 (neg fliteral3))) (le
+  fliteral3 temp___1342)))))))
 
 ;; H
   (assert

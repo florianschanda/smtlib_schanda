@@ -1210,6 +1210,8 @@
 
 (declare-const new_speed t)
 
+(declare-const o t)
+
 ;; H
   (assert (in_range1 factor))
 

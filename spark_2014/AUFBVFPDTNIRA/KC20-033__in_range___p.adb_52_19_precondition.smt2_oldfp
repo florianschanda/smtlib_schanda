@@ -1503,13 +1503,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral3)
-  (= (tqtreal fliteral3) (/ 112000003457069396972656250.0 1000000000000000000000000000.0))))
-
 (declare-const n Int)
 
 (declare-const c Int)
@@ -1529,6 +1522,8 @@
 (declare-const o4 money)
 
 (declare-const o5 money)
+
+(declare-const o6 t)
 
 (declare-const result Int)
 
@@ -1593,6 +1588,13 @@
 
 ;; H
   (assert (= m1 o5))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral3)
+  (= (tqtreal fliteral3) (/ 112000003457069396972656250.0 1000000000000000000000000000.0))))
 
 (assert
 ;; WP_parameter_def

@@ -1556,6 +1556,26 @@
 
 (declare-const o7 t)
 
+(declare-const o8 t)
+
+(declare-const o9 t)
+
+(declare-const o10 t)
+
+(declare-const o11 t)
+
+(declare-const o12 t)
+
+(declare-const o13 t)
+
+(declare-const o14 t)
+
+(declare-const o15 t)
+
+(declare-const o16 t)
+
+(declare-const o17 t)
+
 (declare-const result t)
 
 (declare-const delta_lat1 t)

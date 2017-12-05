@@ -1408,7 +1408,25 @@
      (=> (eq x fliteral7) (eq result fliteral7))) (dynamic_invariant1 result
      true false true)))) :pattern ((sin1 x)) )))
 
+(declare-const lat_long__delta_long_in_meters__result t)
+
 (declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const result t)
+
+(declare-const lat_long__delta_long_in_meters__result1 t)
+
+(declare-const lat_long__delta_long_in_meters__result2 t)
+
+(declare-const lat_long__delta_long_in_meters__result3 t)
+
+(declare-const lat_long__delta_long_in_meters__result4 t)
+
+(declare-const lat_long__delta_long_in_meters__result5 t)
 
 ;; H
   (assert

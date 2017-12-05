@@ -1102,6 +1102,8 @@
 
 (declare-const n t)
 
+(declare-const o t)
+
 ;; H
   (assert (tqtisFinite n))
 

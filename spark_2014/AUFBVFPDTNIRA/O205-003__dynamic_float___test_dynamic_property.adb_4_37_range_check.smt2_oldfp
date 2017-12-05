@@ -1249,6 +1249,64 @@
 ;; c__def_axiom
   (assert (= c d))
 
+(declare-const x t)
+
+(declare-const y t)
+
+(declare-const test_dynamic_property__c__assume t)
+
+(declare-const us t)
+
+(declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const us1 t)
+
+(declare-const o3 t)
+
+(declare-const test_dynamic_property__dyn_param__x t)
+
+(declare-const us2 t)
+
+(declare-const o4 t)
+
+(declare-const us3 t)
+
+(declare-const o5 t)
+
+(declare-const test_dynamic_property__nested__dyn_param__x t)
+
+(declare-const us4 t)
+
+(declare-const o6 t)
+
+(declare-const y1 t)
+
+(declare-const result t)
+
+(declare-const x1 t)
+
+(declare-const result1 t)
+
+(declare-const x2 t)
+
+(declare-const x3 t)
+
+(declare-const test_dynamic_property__dyn_param__x1 t)
+
+(declare-const result2 t)
+
+(declare-const y2 t)
+
+(declare-const test_dynamic_property__nested__dyn_param__x1 t)
+
+(declare-const result3 t)
+
+(declare-const x4 t)
+
 ;; H
   (assert (tqtisFinite d))
 

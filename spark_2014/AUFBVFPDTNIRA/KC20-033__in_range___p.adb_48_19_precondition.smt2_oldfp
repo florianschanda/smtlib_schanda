@@ -1503,6 +1503,44 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
+(declare-const n Int)
+
+(declare-const c Int)
+
+(declare-const v volt)
+
+(declare-const m money)
+
+(declare-const o Int)
+
+(declare-const o1 Int)
+
+(declare-const o2 volt)
+
+(declare-const o3 volt)
+
+(declare-const o4 money)
+
+(declare-const o5 money)
+
+(declare-const o6 t)
+
+(declare-const result Int)
+
+(declare-const n1 Int)
+
+(declare-const result1 Int)
+
+(declare-const c1 Int)
+
+(declare-const result2 volt)
+
+(declare-const v1 volt)
+
+(declare-const result3 money)
+
+(declare-const m1 money)
+
 (assert
 ;; WP_parameter_def
  ;; File "p.adb", line 40, characters 0-0

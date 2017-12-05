@@ -1175,15 +1175,19 @@ axiom has_valid_order__def_axiom :
   rec__interval__interval__high = int__1 } }) = true) <-> le(to_rep(int__),
   to_rep(int__1))))
 
+logic temp___140 : float1
+
+logic temp___1401 : float1
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
+axiom H : ((to_rep(temp___140) = fliteral1) and
+  (to_rep(temp___1401) = fliteral1))
+
  (* File "interval.ads", line 17, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___140:float1. forall temp___1401:float1.
-  (((to_rep(temp___140) = fliteral1) and
-  (to_rep(temp___1401) = fliteral1)) -> (has_valid_order({ us_split_fields1 =
-  { rec__interval__interval__low = temp___140;
-  rec__interval__interval__high = temp___1401 } }) = true)))
+goal WP_parameter_def : (has_valid_order({ us_split_fields1 = {
+  rec__interval__interval__low = temp___140; rec__interval__interval__high =
+  temp___1401 } }) = true)

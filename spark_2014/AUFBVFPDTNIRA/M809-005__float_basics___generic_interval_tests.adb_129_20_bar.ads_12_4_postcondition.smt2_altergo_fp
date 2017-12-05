@@ -1118,10 +1118,26 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic z : t
+
+logic o : t
+
+logic result : t
+
+logic z1 : t
+
+logic z2 : t
+
+logic z3 : t
+
+axiom H : tqtisFinite(x)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0))
+
+axiom H1 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(z))
 
 logic fliteral2 : t
 
@@ -1137,6 +1153,20 @@ logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 20.0))
+
+axiom H2 : ((le(fliteral, x) and le(x, fliteral2)) or (le(fliteral3, x) and
+  le(x, fliteral4)))
+
+axiom H3 : ((o = add(NearestTiesToEven, x, fliteral)) and
+  tqtisFinite(add(NearestTiesToEven, x, fliteral)))
+
+axiom H4 : (result = z)
+
+axiom H5 : (z1 = o)
+
+axiom H6 : (z1 = z2)
+
+axiom H7 : (z3 = z1)
 
  (* File "generic_interval_tests.adb", line 92, characters 0-0 *)
 goal WP_parameter_def : true

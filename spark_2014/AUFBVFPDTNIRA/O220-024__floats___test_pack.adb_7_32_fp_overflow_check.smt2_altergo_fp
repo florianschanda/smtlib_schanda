@@ -1167,6 +1167,16 @@ logic measured : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic pid__split_fields : float1
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+axiom H : tqtisFinite(measured)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
@@ -1177,11 +1187,11 @@ logic fliteral2 : t
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 340282346638528859811704183484516925440.0))
 
+axiom H1 : ((lt(fliteral1, measured) -> le(add(NearestTiesToEven,
+  neg(fliteral2), measured), to_rep(pid__split_fields))) and
+  ((not lt(fliteral1, measured)) -> le(to_rep(pid__split_fields),
+  add(NearestTiesToEven, fliteral2, measured))))
+
  (* File "test_pack.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall pid__split_fields:float1. (tqtisFinite(measured) ->
-  (((lt(fliteral1, measured) and le(add(NearestTiesToEven, neg(fliteral2),
-  measured), to_rep(pid__split_fields))) or ((not lt(fliteral1,
-  measured)) and le(to_rep(pid__split_fields), add(NearestTiesToEven,
-  fliteral2, measured)))) -> tqtisFinite(sub(NearestTiesToEven,
-  to_rep(pid__split_fields), measured)))))
+goal WP_parameter_def : tqtisFinite(sub(NearestTiesToEven,
+  to_rep(pid__split_fields), measured))

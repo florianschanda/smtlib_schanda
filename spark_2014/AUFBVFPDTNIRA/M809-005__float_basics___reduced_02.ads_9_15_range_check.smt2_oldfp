@@ -2149,15 +2149,17 @@
                                       (neg fliteral3) fliteral3))
                                       (tqtisFinite temp___expr_135)))
 
+(declare-const o t)
+
+;; H
+  (assert (tqtisFinite1 x))
+
 (declare-const fliteral4 t1)
 
 ;; fliteral_axiom
   (assert
   (and (tqtisFinite1 fliteral4)
   (= (tqtreal1 fliteral4) 340282346638528859811704183484516925440.0)))
-
-;; H
-  (assert (tqtisFinite1 x))
 
 ;; H
   (assert (and (le1 (neg1 fliteral4) x) (le1 x fliteral4)))

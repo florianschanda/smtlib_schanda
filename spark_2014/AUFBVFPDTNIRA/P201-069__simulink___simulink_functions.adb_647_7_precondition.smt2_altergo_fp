@@ -1065,5 +1065,7 @@ logic f : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+axiom H : tqtisFinite(f)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(f) -> (is_zero(f) or is_positive(f)))
+goal WP_parameter_def : (is_zero(f) or is_positive(f))

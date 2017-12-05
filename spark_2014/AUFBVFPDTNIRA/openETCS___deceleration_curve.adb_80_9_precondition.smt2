@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -65,24 +65,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
@@ -1603,9 +1603,95 @@
      (= (a_gradient d) (fp #b0 #b00000000 #b00000000000000000000000))) :pattern (
   (a_gradient d)) )))
 
+(declare-const braking_curve__split_fields (Array Int us_rep))
+
+(declare-const braking_curve__split_fields1 distance_t)
+
 (declare-const speed Float32)
 
 (declare-const location Int)
+
+(declare-const i Int)
+
+(declare-const deceleration_curve__curve_from_target__end_point__assume Int)
+
+(declare-const o distance_t)
+
+(declare-const o1 (Array Int us_rep))
+
+(declare-const o2 distance_t)
+
+(declare-const temp___374 (Array Int us_rep))
+
+(declare-const temp___3741 distance_t)
+
+(declare-const o3 distance_t)
+
+(declare-const o4 distance_t)
+
+(declare-const o5 speed_t)
+
+(declare-const o6 distance_t)
+
+(declare-const o7 speed_t)
+
+(declare-const o8 (Array Int us_rep))
+
+(declare-const o9 (Array Int us_rep))
+
+(declare-const o10 distance_t)
+
+(declare-const temp___379 (Array Int us_rep))
+
+(declare-const temp___3791 distance_t)
+
+(declare-const o11 speed_t)
+
+(declare-const o12 distance_t)
+
+(declare-const o13 speed_t)
+
+(declare-const o14 distance_t)
+
+(declare-const o15 speed_t)
+
+(declare-const o16 (Array Int us_rep))
+
+(declare-const o17 (Array Int us_rep))
+
+(declare-const o18 distance_t)
+
+(declare-const temp___384 (Array Int us_rep))
+
+(declare-const temp___3841 distance_t)
+
+(declare-const o19 Float32)
+
+(declare-const o20 Float32)
+
+(declare-const o21 Float32)
+
+(declare-const o22 Float32)
+
+(declare-const o23 Float32)
+
+(declare-const o24 Float32)
+
+(declare-const o25 Float32)
+
+(declare-const o26 Float32)
+
+(declare-const o27 Float32)
+
+(declare-const o28 Float32)
+
+(declare-const o29 Float32)
+
+(declare-const o30 Float32)
+
+(declare-const o31 Int)
+
+(declare-const o32 Int)
 
 (declare-const result Float32)
 
@@ -1614,6 +1700,38 @@
 (declare-const result1 int__ref)
 
 (declare-const location1 Int)
+
+(declare-const result2 us_split_fields__ref1)
+
+(declare-const braking_curve__split_fields2 us_split_fields2)
+
+(declare-const result3 us_split_fields__ref1)
+
+(declare-const braking_curve__split_fields3 us_split_fields2)
+
+(declare-const result4 us_split_fields__ref1)
+
+(declare-const braking_curve__split_fields4 us_split_fields2)
+
+(declare-const result5 int__ref)
+
+(declare-const i1 Int)
+
+(declare-const braking_curve__split_fields5 us_split_fields2)
+
+(declare-const speed2 Float32)
+
+(declare-const location2 Int)
+
+(declare-const i2 Int)
+
+(declare-const result6 t__ref)
+
+(declare-const speed3 Float32)
+
+(declare-const result7 t__ref)
+
+(declare-const speed4 Float32)
 
 ;; H
   (assert (fp.isFinite32 maximum_valid_speed))

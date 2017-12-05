@@ -1839,9 +1839,20 @@ axiom atan2__2__post_axiom :
   ((tqtisFinite1(left1) and tqtisFinite1(right1)) ->
   tqtisFinite1(atan2__2(left1, right1))))
 
+logic o : t1
+
+logic o1 : t
+
+logic o2 : t
+
+axiom H : tqtisFinite(left)
+
+axiom H1 : tqtisFinite(right)
+
+axiom H2 : ((o = atan2__2(to_float64(NearestTiesToEven, left),
+  to_float64(NearestTiesToEven, right))) and tqtisFinite1(o))
+
+axiom H3 : (o1 = to_float32(NearestTiesToEven, o))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:t1. forall o1:t. (tqtisFinite(left) -> (tqtisFinite(right) ->
-  ((((o = atan2__2(to_float64(NearestTiesToEven, left),
-  to_float64(NearestTiesToEven, right))) and tqtisFinite1(o)) and
-  (o1 = to_float32(NearestTiesToEven, o))) -> tqtisFinite(o1)))))
+goal WP_parameter_def : tqtisFinite(o1)

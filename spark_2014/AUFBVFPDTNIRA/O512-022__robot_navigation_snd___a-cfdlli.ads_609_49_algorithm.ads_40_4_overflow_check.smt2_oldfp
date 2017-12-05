@@ -1846,6 +1846,8 @@
 
 (declare-const temp___720 count_type)
 
+(declare-const o2 Int)
+
 ;; H
   (assert (= (to_rep o) 0))
 

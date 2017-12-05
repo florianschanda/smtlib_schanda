@@ -1065,7 +1065,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1644,7 +1644,7 @@ logic bearing__function_guard : us_rep, us_rep1 -> prop
 
 type idir_t
 
-predicate in_range6(x: int) = (((-1) <= x) and (x <= 1))
+predicate in_range6(x: int) = (((- 1) <= x) and (x <= 1))
 
 logic bool_eq12 : int, int -> bool
 
@@ -3014,17 +3014,17 @@ logic bool_eq29 : us_rep9, us_rep9 -> bool
 
 axiom bool_eq_def25 :
   (forall a:us_rep9. forall b:us_rep9 [bool_eq29(a, b)].
-  (((((to_rep11(((a).us_split_discrs5).rec__robot_iface__speed_option__opt) = to_rep11(((b).us_split_discrs5).rec__robot_iface__speed_option__opt)) and
-  (robot_iface__speed_option__modulus__pred(a) ->
-  (to_rep2(((a).us_split_fields15).rec__robot_iface__speed_option__modulus) = to_rep2(((b).us_split_fields15).rec__robot_iface__speed_option__modulus)))) and
-  (robot_iface__speed_option__angle__pred(a) ->
-  (to_rep2(((a).us_split_fields15).rec__robot_iface__speed_option__angle) = to_rep2(((b).us_split_fields15).rec__robot_iface__speed_option__angle)))) ->
-  (bool_eq29(a, b) = true)) and
-  ((not (((to_rep11(((a).us_split_discrs5).rec__robot_iface__speed_option__opt) = to_rep11(((b).us_split_discrs5).rec__robot_iface__speed_option__opt)) and
-  (robot_iface__speed_option__modulus__pred(a) ->
-  (to_rep2(((a).us_split_fields15).rec__robot_iface__speed_option__modulus) = to_rep2(((b).us_split_fields15).rec__robot_iface__speed_option__modulus)))) and
+  ((((to_rep11(((a).us_split_discrs5).rec__robot_iface__speed_option__opt) = to_rep11(((b).us_split_discrs5).rec__robot_iface__speed_option__opt)) and
+  ((robot_iface__speed_option__modulus__pred(a) ->
+  (to_rep2(((a).us_split_fields15).rec__robot_iface__speed_option__modulus) = to_rep2(((b).us_split_fields15).rec__robot_iface__speed_option__modulus))) and
   (robot_iface__speed_option__angle__pred(a) ->
   (to_rep2(((a).us_split_fields15).rec__robot_iface__speed_option__angle) = to_rep2(((b).us_split_fields15).rec__robot_iface__speed_option__angle))))) ->
+  (bool_eq29(a, b) = true)) and
+  ((not ((to_rep11(((a).us_split_discrs5).rec__robot_iface__speed_option__opt) = to_rep11(((b).us_split_discrs5).rec__robot_iface__speed_option__opt)) and
+  ((robot_iface__speed_option__modulus__pred(a) ->
+  (to_rep2(((a).us_split_fields15).rec__robot_iface__speed_option__modulus) = to_rep2(((b).us_split_fields15).rec__robot_iface__speed_option__modulus))) and
+  (robot_iface__speed_option__angle__pred(a) ->
+  (to_rep2(((a).us_split_fields15).rec__robot_iface__speed_option__angle) = to_rep2(((b).us_split_fields15).rec__robot_iface__speed_option__angle)))))) ->
   (bool_eq29(a, b) = false))))
 
 logic value__size12 : int
@@ -4224,21 +4224,21 @@ logic bool_eq34 : us_rep13, us_rep13 -> bool
 
 axiom bool_eq_def30 :
   (forall a:us_rep13. forall b:us_rep13 [bool_eq34(a, b)].
-  (((((to_rep6(((a).us_split_discrs7).rec__algorithm__findbestvalley__gap_id_pair__opt) = to_rep6(((b).us_split_discrs7).rec__algorithm__findbestvalley__gap_id_pair__opt)) and
-  (algorithm__findbestvalley__gap_id_pair__rising__pred(a) ->
+  ((((to_rep6(((a).us_split_discrs7).rec__algorithm__findbestvalley__gap_id_pair__opt) = to_rep6(((b).us_split_discrs7).rec__algorithm__findbestvalley__gap_id_pair__opt)) and
+  ((algorithm__findbestvalley__gap_id_pair__rising__pred(a) ->
   (bool_eq20(((a).us_split_fields23).rec__algorithm__findbestvalley__gap_id_pair__rising,
-  ((b).us_split_fields23).rec__algorithm__findbestvalley__gap_id_pair__rising) = true))) and
-  (algorithm__findbestvalley__gap_id_pair__other__pred(a) ->
-  (bool_eq20(((a).us_split_fields23).rec__algorithm__findbestvalley__gap_id_pair__other,
-  ((b).us_split_fields23).rec__algorithm__findbestvalley__gap_id_pair__other) = true))) ->
-  (bool_eq34(a, b) = true)) and
-  ((not (((to_rep6(((a).us_split_discrs7).rec__algorithm__findbestvalley__gap_id_pair__opt) = to_rep6(((b).us_split_discrs7).rec__algorithm__findbestvalley__gap_id_pair__opt)) and
-  (algorithm__findbestvalley__gap_id_pair__rising__pred(a) ->
-  (bool_eq20(((a).us_split_fields23).rec__algorithm__findbestvalley__gap_id_pair__rising,
-  ((b).us_split_fields23).rec__algorithm__findbestvalley__gap_id_pair__rising) = true))) and
+  ((b).us_split_fields23).rec__algorithm__findbestvalley__gap_id_pair__rising) = true)) and
   (algorithm__findbestvalley__gap_id_pair__other__pred(a) ->
   (bool_eq20(((a).us_split_fields23).rec__algorithm__findbestvalley__gap_id_pair__other,
   ((b).us_split_fields23).rec__algorithm__findbestvalley__gap_id_pair__other) = true)))) ->
+  (bool_eq34(a, b) = true)) and
+  ((not ((to_rep6(((a).us_split_discrs7).rec__algorithm__findbestvalley__gap_id_pair__opt) = to_rep6(((b).us_split_discrs7).rec__algorithm__findbestvalley__gap_id_pair__opt)) and
+  ((algorithm__findbestvalley__gap_id_pair__rising__pred(a) ->
+  (bool_eq20(((a).us_split_fields23).rec__algorithm__findbestvalley__gap_id_pair__rising,
+  ((b).us_split_fields23).rec__algorithm__findbestvalley__gap_id_pair__rising) = true)) and
+  (algorithm__findbestvalley__gap_id_pair__other__pred(a) ->
+  (bool_eq20(((a).us_split_fields23).rec__algorithm__findbestvalley__gap_id_pair__other,
+  ((b).us_split_fields23).rec__algorithm__findbestvalley__gap_id_pair__other) = true))))) ->
   (bool_eq34(a, b) = false))))
 
 logic value__size18 : int
@@ -5585,128 +5585,768 @@ axiom w_get__post_axiom :
   ((in_range7(witness1) and (has_witness(container, witness1) = true)) ->
   in_range24(w_get(container, witness1)))))
 
-logic fliteral4 : t
+logic best_valley_ids__split_fields : count_type
 
-axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
-  (tqtreal(fliteral4) = 3.1415927410125732421875))
+logic best_valley_ids__split_fields1 : count_type
 
- (* File "algorithm.ads", line 27, characters 0-0 *)
-goal WP_parameter_def :
-  (forall best_valley_ids__split_fields:count_type.
-  forall best_valley_ids__split_fields1:count_type.
-  forall best_valley_ids__split_discrs:option.
-  forall ir__split_fields:count_type. forall o:float1. forall o1:float1.
-  forall o2:float1. forall o3:float1. forall temp___875:float1.
-  forall temp___8751:float1. forall o4:int.
-  forall algorithm__findbestvalley__existing_gap_id_LAST__assume:int.
-  forall o5:option. forall o6:option.
-  forall algorithm__findbestvalley__best_valley_ids__assume:option.
-  forall algorithm__findbestvalley__best_valley_ids__assume1:count_type.
-  forall algorithm__findbestvalley__best_valley_ids__assume2:count_type.
-  forall algorithm__findbestvalley__best_valley_ids__assume3:bool.
-  forall algorithm__findbestvalley__ir__assume:count_type. forall o7:us_rep6.
-  forall algorithm__findbestvalley__B_14__il__assume:us_rep6.
-  forall o8:option. forall o9:us_split_discrs6.
-  forall algorithm__findbestvalley__B_14__candidate_valley_ids__assume:us_rep13.
-  forall o10:us_rep2. forall o11:us_split_fields4. forall o12:idir_t.
-  forall o13:int. forall o14:us_rep2. forall o15:option.
-  forall o16:us_split_discrs6. forall temp___841:us_rep13.
-  forall usq_:us_rep13. forall temp___843:us_rep13. forall o17:us_rep2.
-  forall o18:us_split_fields4. forall o19:us_rep. forall o20:us_t.
-  forall o21:us_rep2. forall o22:us_split_fields4. forall o23:idir_t.
-  forall o24:int. forall o25:us_rep2. forall o26:us_rep2.
-  forall o27:us_split_fields4. forall o28:us_rep. forall o29:us_rep.
-  forall o30:t. forall o31:us_rep2. forall o32:us_split_fields4.
-  forall o33:us_rep. forall o34:us_rep. forall o35:t. forall o36:t.
-  forall o37:t. forall o38:option. forall o39:us_split_discrs6.
-  forall temp___849:us_rep13. forall usq_1:us_rep13.
-  forall temp___851:us_rep13. forall o40:option. forall o41:us_split_discrs6.
-  forall temp___846:us_rep13. forall usq_2:us_rep13.
-  forall temp___848:us_rep13. forall o42:us_rep2.
-  forall o43:us_split_fields4. forall o44:us_rep. forall o45:us_t.
-  forall result:us_split_fields__ref11.
-  forall best_valley_ids__split_fields2:us_split_fields22.
-  forall result1:us_split_discrs__ref3.
-  forall best_valley_ids__split_discrs1:us_split_discrs6.
-  forall result2:us_split_fields__ref6.
-  forall ir__split_fields1:us_split_fields12. forall result3:bool.
-  forall best_valley_ids__split_discrs2:us_split_discrs6.
-  forall ir__split_fields2:us_split_fields12.
-  forall candidate_valley_ids__split_fields:us_split_fields22.
-  forall candidate_valley_ids__split_discrs:us_split_discrs6.
-  forall result4:bool. forall result5:us_split_fields__ref11.
-  forall candidate_valley_ids__split_fields1:us_split_fields22.
-  forall result6:us_split_discrs__ref3.
-  forall candidate_valley_ids__split_discrs1:us_split_discrs6.
-  forall result7:bool. forall result8:bool.
-  forall result9:us_split_fields__ref11.
-  forall candidate_valley_ids__split_fields2:us_split_fields22.
-  forall result10:us_split_discrs__ref3.
-  forall candidate_valley_ids__split_discrs2:us_split_discrs6.
-  forall result11:bool. forall result12:bool. forall result13:bool.
-  forall result14:us_split_fields__ref11.
-  forall candidate_valley_ids__split_fields3:us_split_fields22.
-  forall result15:us_split_discrs__ref3.
-  forall candidate_valley_ids__split_discrs3:us_split_discrs6.
-  forall result16:us_split_fields__ref11.
-  forall candidate_valley_ids__split_fields4:us_split_fields22.
-  forall result17:us_split_discrs__ref3.
-  forall candidate_valley_ids__split_discrs4:us_split_discrs6.
-  (((((to_rep2(o) = fliteral1) and ((to_rep2(o1) = fliteral1) and
-  ((o1 = o2) and (o = o3)))) and ((temp___875 = o2) and
-  (temp___8751 = o3))) and ((temp___875 = zero_position) and
-  (temp___8751 = zero_position1))) -> (((this20 = false) and
-  (1000 = to_rep5(this23))) -> ((not (oeq({ us_split_fields3 = {
+logic best_valley_ids__split_discrs : option
+
+logic ir__split_fields : count_type
+
+logic candidate_valley_ids__split_fields : count_type
+
+logic candidate_valley_ids__split_fields1 : count_type
+
+logic candidate_valley_ids__split_discrs : option
+
+logic o : float1
+
+logic o1 : float1
+
+logic o2 : float1
+
+logic o3 : float1
+
+logic temp___875 : float1
+
+logic temp___8751 : float1
+
+logic o4 : int
+
+logic algorithm__findbestvalley__existing_gap_id_LAST__assume : int
+
+logic o5 : option
+
+logic o6 : option
+
+logic algorithm__findbestvalley__best_valley_ids__assume : option
+
+logic algorithm__findbestvalley__best_valley_ids__assume1 : count_type
+
+logic algorithm__findbestvalley__best_valley_ids__assume2 : count_type
+
+logic algorithm__findbestvalley__best_valley_ids__assume3 : bool
+
+logic algorithm__findbestvalley__ir__assume : count_type
+
+logic temp___868 : count_type
+
+logic temp___8681 : us_main_type
+
+logic temp___867 : count_type
+
+logic temp___866 : option
+
+logic temp___8661 : count_type
+
+logic temp___8662 : count_type
+
+logic temp___8663 : bool
+
+logic o7 : count_type
+
+logic algorithm__findbestvalley__B_14__il__assume : count_type
+
+logic o8 : option
+
+logic o9 : option
+
+logic algorithm__findbestvalley__B_14__candidate_valley_ids__assume : option
+
+logic algorithm__findbestvalley__B_14__candidate_valley_ids__assume1 : count_type
+
+logic algorithm__findbestvalley__B_14__candidate_valley_ids__assume2 : count_type
+
+logic algorithm__findbestvalley__B_14__candidate_valley_ids__assume3 : bool
+
+logic o10 : normalized2pi
+
+logic o11 : float1
+
+logic o12 : idir_t
+
+logic o13 : normalized2pi
+
+logic o14 : float1
+
+logic o15 : idir_t
+
+logic o16 : idir_t
+
+logic o17 : int
+
+logic o18 : normalized2pi
+
+logic o19 : float1
+
+logic o20 : idir_t
+
+logic o21 : option
+
+logic o22 : option
+
+logic temp___841 : option
+
+logic temp___8411 : count_type
+
+logic temp___8412 : count_type
+
+logic temp___8413 : bool
+
+logic usq_ : option
+
+logic usq_1 : count_type
+
+logic usq_2 : count_type
+
+logic usq_3 : bool
+
+logic temp___843 : option
+
+logic temp___8431 : count_type
+
+logic temp___8432 : count_type
+
+logic temp___8433 : bool
+
+logic o23 : normalized2pi
+
+logic o24 : float1
+
+logic o25 : idir_t
+
+logic o26 : normalized2pi
+
+logic o27 : float1
+
+logic o28 : idir_t
+
+logic o29 : normalized2pi
+
+logic o30 : (int,character) farray
+
+logic o31 : t1
+
+logic o32 : normalized2pi
+
+logic o33 : float1
+
+logic o34 : idir_t
+
+logic o35 : normalized2pi
+
+logic o36 : float1
+
+logic o37 : idir_t
+
+logic o38 : idir_t
+
+logic o39 : int
+
+logic o40 : normalized2pi
+
+logic o41 : float1
+
+logic o42 : idir_t
+
+logic o43 : normalized2pi
+
+logic o44 : float1
+
+logic o45 : idir_t
+
+logic o46 : normalized2pi
+
+logic o47 : float1
+
+logic o48 : idir_t
+
+logic o49 : normalized2pi
+
+logic o50 : normalized2pi
+
+logic o51 : t
+
+logic o52 : normalized2pi
+
+logic o53 : float1
+
+logic o54 : idir_t
+
+logic o55 : normalized2pi
+
+logic o56 : float1
+
+logic o57 : idir_t
+
+logic o58 : normalized2pi
+
+logic o59 : normalized2pi
+
+logic o60 : t
+
+logic o61 : t
+
+logic o62 : t
+
+logic o63 : option
+
+logic o64 : option
+
+logic temp___849 : option
+
+logic temp___8491 : count_type
+
+logic temp___8492 : count_type
+
+logic temp___8493 : bool
+
+logic usq_4 : option
+
+logic usq_5 : count_type
+
+logic usq_6 : count_type
+
+logic usq_7 : bool
+
+logic temp___851 : option
+
+logic temp___8511 : count_type
+
+logic temp___8512 : count_type
+
+logic temp___8513 : bool
+
+logic o65 : option
+
+logic o66 : option
+
+logic temp___846 : option
+
+logic temp___8461 : count_type
+
+logic temp___8462 : count_type
+
+logic temp___8463 : bool
+
+logic usq_8 : option
+
+logic usq_9 : count_type
+
+logic usq_10 : count_type
+
+logic usq_11 : bool
+
+logic temp___848 : option
+
+logic temp___8481 : count_type
+
+logic temp___8482 : count_type
+
+logic temp___8483 : bool
+
+logic o67 : normalized2pi
+
+logic o68 : float1
+
+logic o69 : idir_t
+
+logic o70 : normalized2pi
+
+logic o71 : float1
+
+logic o72 : idir_t
+
+logic o73 : normalized2pi
+
+logic o74 : (int,character) farray
+
+logic o75 : t1
+
+logic o76 : normalized2pi
+
+logic o77 : (int,character) farray
+
+logic o78 : t1
+
+logic o79 : normalized2pi
+
+logic o80 : float1
+
+logic o81 : idir_t
+
+logic o82 : normalized2pi
+
+logic o83 : float1
+
+logic o84 : idir_t
+
+logic o85 : normalized2pi
+
+logic o86 : (int,character) farray
+
+logic o87 : t1
+
+logic o88 : normalized2pi
+
+logic o89 : float1
+
+logic o90 : idir_t
+
+logic o91 : normalized2pi
+
+logic o92 : float1
+
+logic o93 : idir_t
+
+logic o94 : normalized2pi
+
+logic o95 : normalized2pi
+
+logic o96 : t
+
+logic o97 : t
+
+logic o98 : us_image
+
+logic o99 : (int,character) farray
+
+logic o100 : t1
+
+logic o101 : normalized2pi
+
+logic o102 : float1
+
+logic o103 : idir_t
+
+logic o104 : normalized2pi
+
+logic o105 : float1
+
+logic o106 : idir_t
+
+logic o107 : normalized2pi
+
+logic o108 : (int,character) farray
+
+logic o109 : t1
+
+logic o110 : normalized2pi
+
+logic o111 : float1
+
+logic o112 : idir_t
+
+logic o113 : normalized2pi
+
+logic o114 : float1
+
+logic o115 : idir_t
+
+logic o116 : normalized2pi
+
+logic o117 : normalized2pi
+
+logic o118 : t
+
+logic o119 : t
+
+logic o120 : us_image
+
+logic o121 : (int,character) farray
+
+logic o122 : t1
+
+logic o123 : normalized2pi
+
+logic o124 : float1
+
+logic o125 : idir_t
+
+logic o126 : normalized2pi
+
+logic o127 : float1
+
+logic o128 : idir_t
+
+logic o129 : normalized2pi
+
+logic o130 : normalized2pi
+
+logic o131 : t
+
+logic o132 : normalized2pi
+
+logic o133 : float1
+
+logic o134 : idir_t
+
+logic o135 : normalized2pi
+
+logic o136 : float1
+
+logic o137 : idir_t
+
+logic o138 : normalized2pi
+
+logic o139 : normalized2pi
+
+logic o140 : t
+
+logic o141 : t
+
+logic o142 : t
+
+logic usq_12 : option
+
+logic usq_13 : count_type
+
+logic usq_14 : count_type
+
+logic usq_15 : bool
+
+logic temp___865 : option
+
+logic temp___8651 : count_type
+
+logic temp___8652 : count_type
+
+logic temp___8653 : bool
+
+logic usq_16 : option
+
+logic usq_17 : count_type
+
+logic usq_18 : count_type
+
+logic usq_19 : bool
+
+logic temp___855 : option
+
+logic temp___8551 : count_type
+
+logic temp___8552 : count_type
+
+logic temp___8553 : bool
+
+logic o143 : bool
+
+logic o144 : normalized2pi
+
+logic o145 : float1
+
+logic o146 : idir_t
+
+logic o147 : normalized2pi
+
+logic o148 : float1
+
+logic o149 : idir_t
+
+logic o150 : normalized2pi
+
+logic o151 : (int,character) farray
+
+logic o152 : t1
+
+logic o153 : normalized2pi
+
+logic o154 : float1
+
+logic o155 : idir_t
+
+logic o156 : normalized2pi
+
+logic o157 : float1
+
+logic o158 : idir_t
+
+logic candidate_valley_ids__split_fields2 : count_type
+
+logic candidate_valley_ids__split_fields3 : count_type
+
+logic candidate_valley_ids__split_discrs1 : option
+
+logic result : count_type
+
+logic result1 : count_type
+
+logic best_valley_ids__split_fields2 : count_type
+
+logic best_valley_ids__split_fields3 : count_type
+
+logic result2 : option
+
+logic best_valley_ids__split_discrs1 : option
+
+logic result3 : count_type
+
+logic ir__split_fields1 : count_type
+
+logic result4 : bool
+
+logic best_valley_ids__split_fields4 : count_type
+
+logic best_valley_ids__split_fields5 : count_type
+
+logic best_valley_ids__split_discrs2 : option
+
+logic ir__split_fields2 : count_type
+
+logic candidate_valley_ids__split_fields4 : count_type
+
+logic candidate_valley_ids__split_fields5 : count_type
+
+logic candidate_valley_ids__split_discrs2 : option
+
+logic result5 : bool
+
+logic result6 : count_type
+
+logic result7 : count_type
+
+logic candidate_valley_ids__split_fields6 : count_type
+
+logic candidate_valley_ids__split_fields7 : count_type
+
+logic result8 : option
+
+logic candidate_valley_ids__split_discrs3 : option
+
+logic result9 : bool
+
+logic result10 : bool
+
+logic result11 : count_type
+
+logic result12 : count_type
+
+logic candidate_valley_ids__split_fields8 : count_type
+
+logic candidate_valley_ids__split_fields9 : count_type
+
+logic result13 : option
+
+logic candidate_valley_ids__split_discrs4 : option
+
+logic result14 : bool
+
+logic result15 : bool
+
+logic result16 : bool
+
+logic result17 : count_type
+
+logic result18 : count_type
+
+logic candidate_valley_ids__split_fields10 : count_type
+
+logic candidate_valley_ids__split_fields11 : count_type
+
+logic result19 : option
+
+logic candidate_valley_ids__split_discrs5 : option
+
+logic result20 : count_type
+
+logic result21 : count_type
+
+logic candidate_valley_ids__split_fields12 : count_type
+
+logic candidate_valley_ids__split_fields13 : count_type
+
+logic result22 : option
+
+logic candidate_valley_ids__split_discrs6 : option
+
+logic result23 : bool
+
+logic result24 : count_type
+
+logic result25 : count_type
+
+logic best_valley_ids__split_fields6 : count_type
+
+logic best_valley_ids__split_fields7 : count_type
+
+logic result26 : option
+
+logic best_valley_ids__split_discrs3 : option
+
+logic result27 : count_type
+
+logic result28 : count_type
+
+logic best_valley_ids__split_fields8 : count_type
+
+logic best_valley_ids__split_fields9 : count_type
+
+logic result29 : option
+
+logic best_valley_ids__split_discrs4 : option
+
+logic ir__split_fields3 : count_type
+
+logic result30 : bool
+
+logic best_valley_ids__split_fields10 : count_type
+
+logic best_valley_ids__split_fields11 : count_type
+
+logic best_valley_ids__split_discrs5 : option
+
+logic ir__split_fields4 : count_type
+
+logic candidate_valley_ids__split_fields14 : count_type
+
+logic candidate_valley_ids__split_fields15 : count_type
+
+logic candidate_valley_ids__split_discrs7 : option
+
+logic best_valley_ids__split_fields12 : count_type
+
+logic best_valley_ids__split_fields13 : count_type
+
+logic best_valley_ids__split_discrs6 : option
+
+logic ir__split_fields5 : count_type
+
+logic candidate_valley_ids__split_fields16 : count_type
+
+logic candidate_valley_ids__split_fields17 : count_type
+
+logic candidate_valley_ids__split_discrs8 : option
+
+logic best_valley_ids__split_fields14 : count_type
+
+logic best_valley_ids__split_fields15 : count_type
+
+logic best_valley_ids__split_discrs7 : option
+
+logic ir__split_fields6 : count_type
+
+logic candidate_valley_ids__split_fields18 : count_type
+
+logic candidate_valley_ids__split_fields19 : count_type
+
+logic candidate_valley_ids__split_discrs9 : option
+
+logic best_valley_ids__split_fields16 : count_type
+
+logic best_valley_ids__split_fields17 : count_type
+
+logic best_valley_ids__split_discrs8 : option
+
+logic ir__split_fields7 : count_type
+
+logic candidate_valley_ids__split_fields20 : count_type
+
+logic candidate_valley_ids__split_fields21 : count_type
+
+logic candidate_valley_ids__split_discrs10 : option
+
+logic best_valley_ids__split_fields18 : count_type
+
+logic best_valley_ids__split_fields19 : count_type
+
+logic best_valley_ids__split_discrs9 : option
+
+logic ir__split_fields8 : count_type
+
+logic candidate_valley_ids__split_fields22 : count_type
+
+logic candidate_valley_ids__split_fields23 : count_type
+
+logic candidate_valley_ids__split_discrs11 : option
+
+logic best_valley_ids__split_fields20 : count_type
+
+logic best_valley_ids__split_fields21 : count_type
+
+logic best_valley_ids__split_discrs10 : option
+
+logic ir__split_fields9 : count_type
+
+logic candidate_valley_ids__split_fields24 : count_type
+
+logic candidate_valley_ids__split_fields25 : count_type
+
+logic candidate_valley_ids__split_discrs12 : option
+
+axiom H : (to_rep2(o) = fliteral1)
+
+axiom H1 : (to_rep2(o1) = fliteral1)
+
+axiom H2 : (o1 = o2)
+
+axiom H3 : (o = o3)
+
+axiom H4 : (temp___875 = o2)
+
+axiom H5 : (temp___8751 = o3)
+
+axiom H6 : ((temp___875 = zero_position) and (temp___8751 = zero_position1))
+
+axiom H7 : ((this20 = false) and (1000 = to_rep5(this23)))
+
+axiom H8 : (not (oeq({ us_split_fields3 = {
   rec__spaces__positions__position__x = disttogoal;
   rec__spaces__positions__position__y = disttogoal1 } }, { us_split_fields3 =
   { rec__spaces__positions__position__x = zero_position;
-  rec__spaces__positions__position__y = zero_position1 } }) = true)) ->
-  (((((o4 = length1({ us_split_discrs3 = {
+  rec__spaces__positions__position__y = zero_position1 } }) = true))
+
+axiom H9 : ((o4 = length1({ us_split_discrs3 = {
   rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
   { rec__algorithm__gap_vectors__list = this24 } })) and (in_range7(o4) and
-  (o4 <= to_rep5(this23)))) and
+  (o4 <= to_rep5(this23))))
+
+axiom H10 :
   ((algorithm__findbestvalley__existing_gap_id_LAST__assume = o4) and
-  in_range9(o4))) and
-  (algorithm__findbestvalley__existing_gap_id_LAST__assume = existing_gap_id_LAST)) ->
-  (in_range9(existing_gap_id_LAST) -> (((((to_rep6(o5) = 0) and
-  (o5 = o6)) and
-  ((algorithm__findbestvalley__best_valley_ids__assume = o6) and
-  (((dummy33 = algorithm__findbestvalley__best_valley_ids__assume1) and
-  (dummy33 = algorithm__findbestvalley__best_valley_ids__assume2)) and
-  (true = algorithm__findbestvalley__best_valley_ids__assume3)))) and
-  (((result = { us_split_fields__content11 = {
-  rec__algorithm__findbestvalley__gap_id_pair__rising = { us_split_fields13 =
-  { rec__algorithm__gap_vectors__cursor__node = best_valley_ids__split_fields
-  } }; rec__algorithm__findbestvalley__gap_id_pair__other = {
-  us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node =
-  best_valley_ids__split_fields1 } } } }) and
-  (best_valley_ids__split_fields2 = {
-  rec__algorithm__findbestvalley__gap_id_pair__rising = { us_split_fields13 =
-  { rec__algorithm__gap_vectors__cursor__node =
-  algorithm__findbestvalley__best_valley_ids__assume1 } };
-  rec__algorithm__findbestvalley__gap_id_pair__other = { us_split_fields13 =
-  { rec__algorithm__gap_vectors__cursor__node =
-  algorithm__findbestvalley__best_valley_ids__assume2 } } })) and
-  (((result1 = { us_split_discrs__content3 = {
-  rec__algorithm__findbestvalley__gap_id_pair__opt =
-  best_valley_ids__split_discrs } }) and (best_valley_ids__split_discrs1 = {
-  rec__algorithm__findbestvalley__gap_id_pair__opt =
-  algorithm__findbestvalley__best_valley_ids__assume })) and
-  (best_valley_ids__attr__constrained = false)))) -> (((({
-  us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node =
+  in_range9(o4))
+
+axiom H11 :
+  (algorithm__findbestvalley__existing_gap_id_LAST__assume = existing_gap_id_LAST)
+
+axiom H12 : in_range9(existing_gap_id_LAST)
+
+axiom H13 : (to_rep6(o5) = 0)
+
+axiom H14 : (o6 = o5)
+
+axiom H15 : ((algorithm__findbestvalley__best_valley_ids__assume = o6) and
+  (((algorithm__findbestvalley__best_valley_ids__assume1 = dummy33) and
+  (algorithm__findbestvalley__best_valley_ids__assume2 = dummy33)) and
+  (algorithm__findbestvalley__best_valley_ids__assume3 = true)))
+
+axiom H16 : ((result = best_valley_ids__split_fields) and
+  (result1 = best_valley_ids__split_fields1))
+
+axiom H17 :
+  ((best_valley_ids__split_fields2 = algorithm__findbestvalley__best_valley_ids__assume1) and
+  (best_valley_ids__split_fields3 = algorithm__findbestvalley__best_valley_ids__assume2))
+
+axiom H18 : (result2 = best_valley_ids__split_discrs)
+
+axiom H19 :
+  (best_valley_ids__split_discrs1 = algorithm__findbestvalley__best_valley_ids__assume)
+
+axiom H20 : (best_valley_ids__attr__constrained = false)
+
+axiom H21 : (({ us_split_fields13 = {
+  rec__algorithm__gap_vectors__cursor__node =
   algorithm__findbestvalley__ir__assume } } = first2({ us_split_discrs3 = {
   rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
   { rec__algorithm__gap_vectors__list = this24 } })) and
   (((bool_eq2(length1({ us_split_discrs3 = {
   rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
-  { rec__algorithm__gap_vectors__list = this24 } }), 0) = true) and
+  { rec__algorithm__gap_vectors__list = this24 } }), 0) = true) ->
   (bool_eq20({ us_split_fields13 = {
   rec__algorithm__gap_vectors__cursor__node =
   algorithm__findbestvalley__ir__assume } }, { us_split_fields13 = {
-  rec__algorithm__gap_vectors__cursor__node = no_element } }) = true)) or
+  rec__algorithm__gap_vectors__cursor__node = no_element } }) = true)) and
   ((not (bool_eq2(length1({ us_split_discrs3 = {
   rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
-  { rec__algorithm__gap_vectors__list = this24 } }), 0) = true)) and
+  { rec__algorithm__gap_vectors__list = this24 } }), 0) = true)) ->
   ((has_key(positions({ us_split_discrs3 = {
   rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
   { rec__algorithm__gap_vectors__list = this24 } }), { us_split_fields13 = {
@@ -5715,238 +6355,210 @@ goal WP_parameter_def :
   us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
   }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }), {
   us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node =
-  algorithm__findbestvalley__ir__assume } }) = 1))))) and ((result2 = {
-  us_split_fields__content6 = { rec__algorithm__gap_vectors__cursor__node =
-  ir__split_fields } }) and (ir__split_fields1 = {
-  rec__algorithm__gap_vectors__cursor__node =
-  algorithm__findbestvalley__ir__assume }))) -> ((to_rep5(this23) = 1000) ->
-  (((result3 = has_key(positions({ us_split_discrs3 = {
-  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
-  { rec__algorithm__gap_vectors__list = this24 } }), { us_split_fields13 =
-  ir__split_fields1 })) and ((result3 = true) <-> (has_key(positions({
-  us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
-  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }), {
-  us_split_fields13 = ir__split_fields1 }) = true))) -> ((result3 = true) ->
-  ((to_rep5(this23) = 1000) -> ((has_key(positions({ us_split_discrs3 = {
-  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
-  { rec__algorithm__gap_vectors__list = this24 } }), { us_split_fields13 =
-  ir__split_fields2 }) = true) -> ((((((o7 = last2({ us_split_discrs3 = {
-  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
-  { rec__algorithm__gap_vectors__list = this24 } })) and
-  (((bool_eq2(length1({ us_split_discrs3 = {
-  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
-  { rec__algorithm__gap_vectors__list = this24 } }), 0) = true) and
-  (bool_eq20(o7, { us_split_fields13 = {
-  rec__algorithm__gap_vectors__cursor__node = no_element } }) = true)) or
-  ((not (bool_eq2(length1({ us_split_discrs3 = {
-  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
-  { rec__algorithm__gap_vectors__list = this24 } }), 0) = true)) and
-  ((has_key(positions({ us_split_discrs3 = {
-  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
-  { rec__algorithm__gap_vectors__list = this24 } }), o7) = true) and
-  (get1(positions({ us_split_discrs3 = {
-  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
-  { rec__algorithm__gap_vectors__list = this24 } }), o7) = length1({
-  us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
-  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 }
-  })))))) and (result4 = bool_eq20({ us_split_fields13 = ir__split_fields2 },
-  o7))) and (((result4 = true) and
-  ((algorithm__findbestvalley__B_14__il__assume = first2({ us_split_discrs3 =
-  { rec__algorithm__gap_vectors__list__capacity = this23 };
-  us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } })) and
-  (((bool_eq2(length1({ us_split_discrs3 = {
-  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
-  { rec__algorithm__gap_vectors__list = this24 } }), 0) = true) and
-  (bool_eq20(algorithm__findbestvalley__B_14__il__assume, {
-  us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node =
-  no_element } }) = true)) or ((not (bool_eq2(length1({ us_split_discrs3 = {
-  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
-  { rec__algorithm__gap_vectors__list = this24 } }), 0) = true)) and
-  ((has_key(positions({ us_split_discrs3 = {
-  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
-  { rec__algorithm__gap_vectors__list = this24 } }),
-  algorithm__findbestvalley__B_14__il__assume) = true) and (get1(positions({
-  us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
-  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }),
-  algorithm__findbestvalley__B_14__il__assume) = 1)))))) or
-  ((not (result4 = true)) and
-  ((algorithm__findbestvalley__B_14__il__assume = next({ us_split_discrs3 = {
-  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
-  { rec__algorithm__gap_vectors__list = this24 } }, { us_split_fields13 =
-  ir__split_fields2 })) and (((match_bool(bool_eq20({ us_split_fields13 =
-  ir__split_fields2 }, { us_split_fields13 = {
-  rec__algorithm__gap_vectors__cursor__node = no_element } }), true,
-  bool_eq2(get1(positions({ us_split_discrs3 = {
-  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
-  { rec__algorithm__gap_vectors__list = this24 } }), { us_split_fields13 =
-  ir__split_fields2 }), length1({ us_split_discrs3 = {
-  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
-  { rec__algorithm__gap_vectors__list = this24 } }))) = true) and
-  (bool_eq20(algorithm__findbestvalley__B_14__il__assume, {
-  us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node =
-  no_element } }) = true)) or ((not (match_bool(bool_eq20({
-  us_split_fields13 = ir__split_fields2 }, { us_split_fields13 = {
-  rec__algorithm__gap_vectors__cursor__node = no_element } }), true,
-  bool_eq2(get1(positions({ us_split_discrs3 = {
-  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
-  { rec__algorithm__gap_vectors__list = this24 } }), { us_split_fields13 =
-  ir__split_fields2 }), length1({ us_split_discrs3 = {
-  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
-  { rec__algorithm__gap_vectors__list = this24 } }))) = true)) and
-  ((has_key(positions({ us_split_discrs3 = {
-  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
-  { rec__algorithm__gap_vectors__list = this24 } }),
-  algorithm__findbestvalley__B_14__il__assume) = true) and (get1(positions({
-  us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
-  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }),
-  algorithm__findbestvalley__B_14__il__assume) = (get1(positions({
-  us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
-  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }), {
-  us_split_fields13 = ir__split_fields2 }) + 1))))))))) and
-  (algorithm__findbestvalley__B_14__il__assume = { us_split_fields13 = {
-  rec__algorithm__gap_vectors__cursor__node = il } })) ->
-  (((((to_rep6(o8) = 0) and (o9 = {
-  rec__algorithm__findbestvalley__gap_id_pair__opt = o8 })) and
-  (algorithm__findbestvalley__B_14__candidate_valley_ids__assume = {
-  us_split_discrs7 = o9; us_split_fields23 = {
-  rec__algorithm__findbestvalley__gap_id_pair__rising = { us_split_fields13 =
-  { rec__algorithm__gap_vectors__cursor__node = dummy33 } };
-  rec__algorithm__findbestvalley__gap_id_pair__other = { us_split_fields13 =
-  { rec__algorithm__gap_vectors__cursor__node = dummy33 } } };
-  attr__constrained2 = true })) and (((result5 = {
-  us_split_fields__content11 = candidate_valley_ids__split_fields }) and
-  (candidate_valley_ids__split_fields1 = (algorithm__findbestvalley__B_14__candidate_valley_ids__assume).us_split_fields23)) and
-  (((result6 = { us_split_discrs__content3 =
-  candidate_valley_ids__split_discrs }) and
-  (candidate_valley_ids__split_discrs1 = (algorithm__findbestvalley__B_14__candidate_valley_ids__assume).us_split_discrs7)) and
-  (candidate_valley_ids__attr__constrained = false)))) ->
-  ((((((((o10 = get(model__({ us_split_discrs3 = {
-  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
-  { rec__algorithm__gap_vectors__list = this24 } }), get1(positions({
-  us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
-  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }), {
-  us_split_fields13 = ir__split_fields2 }))) and (bool_eq13(o10,
-  get(model__({ us_split_discrs3 = {
-  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
-  { rec__algorithm__gap_vectors__list = this24 } }), get1(positions({
-  us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
-  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }), {
-  us_split_fields13 = ir__split_fields2 }))) = true)) and
-  (o11 = (o10).us_split_fields5)) and (o12 = (o11).rec__gaps__gap__idir)) and
-  (o13 = to_rep4(o12))) and (((o13 = (-1)) and (result7 = true)) or
-  ((not (o13 = (-1))) and (result7 = false)))) and (((result7 = true) and
-  ((((o14 = get(model__({ us_split_discrs3 = {
-  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
-  { rec__algorithm__gap_vectors__list = this24 } }), get1(positions({
-  us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
-  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }), {
-  us_split_fields13 = ir__split_fields2 }))) and (bool_eq13(o14,
-  get(model__({ us_split_discrs3 = {
-  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
-  { rec__algorithm__gap_vectors__list = this24 } }), get1(positions({
-  us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
-  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }), {
-  us_split_fields13 = ir__split_fields2 }))) = true)) and
-  (result8 = isrisinggapsafe({ us_split_fields21 = {
-  rec__algorithm__controller__robot = { us_split_fields17 = {
-  rec__robot_iface__proxy__robot_radius = this;
-  rec__robot_iface__proxy__min_gap_width = this1;
-  rec__robot_iface__proxy__obstacle_avoid_dist = this2;
-  rec__robot_iface__proxy__max_speed = this3;
-  rec__robot_iface__proxy__max_turn_rate = this4;
-  rec__robot_iface__proxy__goal_position_tol = this5;
-  rec__robot_iface__proxy__goal_angle_tol = this6;
-  rec__robot_iface__proxy__goalx = this7; rec__robot_iface__proxy__goaly =
-  this8; rec__robot_iface__proxy__goala = this9;
-  rec__robot_iface__proxy__scan_count = this10;
-  rec__robot_iface__proxy__scan_res = this11;
-  rec__robot_iface__proxy__max_range = this12;
-  rec__robot_iface__proxy__scans = this13; rec__robot_iface__proxy__x =
-  this14; rec__robot_iface__proxy__y = this15; rec__robot_iface__proxy__yaw =
-  this16; rec__robot_iface__proxy__speed = { us_split_discrs5 = {
-  rec__robot_iface__speed_option__opt = this17 }; us_split_fields15 = {
-  rec__robot_iface__speed_option__modulus = this18;
-  rec__robot_iface__speed_option__angle = this19 }; attr__constrained1 =
-  this20 }; rec__robot_iface__proxy__goal_reached = this21 } };
-  rec__algorithm__controller__laserscan = this22;
-  rec__algorithm__controller__gapvec = { us_split_discrs3 = {
-  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
-  { rec__algorithm__gap_vectors__list = this24 } };
-  rec__algorithm__controller__obsavoiddelta = this25;
-  rec__algorithm__controller__driveangle = { us_split_fields1 = {
-  rec__spaces__angles__angle__theta = this26 } } } }, o14))) and
-  (((result8 = true) and ((((((to_rep6(o15) = 1) and (o16 = {
-  rec__algorithm__findbestvalley__gap_id_pair__opt = o15 })) and
-  (temp___841 = { us_split_discrs7 = o16; us_split_fields23 = {
-  rec__algorithm__findbestvalley__gap_id_pair__rising = { us_split_fields13 =
-  ir__split_fields2 }; rec__algorithm__findbestvalley__gap_id_pair__other = {
-  us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node = il } } };
-  attr__constrained2 = true })) and
-  ((((candidate_valley_ids__attr__constrained = true) and
-  (((temp___841).us_split_discrs7).rec__algorithm__findbestvalley__gap_id_pair__opt = (candidate_valley_ids__split_discrs1).rec__algorithm__findbestvalley__gap_id_pair__opt)) or
-  (not (candidate_valley_ids__attr__constrained = true))) and
-  (usq_ = temp___841))) and (temp___843 = { us_split_discrs7 =
-  (usq_).us_split_discrs7; us_split_fields23 = (usq_).us_split_fields23;
-  attr__constrained2 = candidate_valley_ids__attr__constrained })) and
-  (((result9 = { us_split_fields__content11 =
-  candidate_valley_ids__split_fields1 }) and
-  (candidate_valley_ids__split_fields2 = (temp___843).us_split_fields23)) and
-  ((result10 = { us_split_discrs__content3 =
-  candidate_valley_ids__split_discrs1 }) and
-  (candidate_valley_ids__split_discrs2 = (temp___843).us_split_discrs7))))) or
-  ((not (result8 = true)) and (((of_int1(0) = true) ->
-  (((((o17 = get(model__({ us_split_discrs3 = {
-  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
-  { rec__algorithm__gap_vectors__list = this24 } }), get1(positions({
-  us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
-  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }), {
-  us_split_fields13 = ir__split_fields2 }))) and (bool_eq13(o17,
-  get(model__({ us_split_discrs3 = {
-  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
-  { rec__algorithm__gap_vectors__list = this24 } }), get1(positions({
-  us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
-  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }), {
-  us_split_fields13 = ir__split_fields2 }))) = true)) and
-  (o18 = (o17).us_split_fields5)) and
-  (o19 = (o18).rec__gaps__gap__bearing)) and ((o20 = print(o19)) and
-  dynamic_property(1, 2147483647, to_rep1(first((o20).rt)),
-  to_rep1(last((o20).rt)))))) and
-  ((candidate_valley_ids__split_discrs2 = candidate_valley_ids__split_discrs1) and
-  (candidate_valley_ids__split_fields2 = candidate_valley_ids__split_fields1))))))) or
-  ((not (result7 = true)) and
-  ((candidate_valley_ids__split_discrs2 = candidate_valley_ids__split_discrs1) and
-  (candidate_valley_ids__split_fields2 = candidate_valley_ids__split_fields1))))) ->
-  ((((((((o21 = get(model__({ us_split_discrs3 = {
-  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
-  { rec__algorithm__gap_vectors__list = this24 } }), get1(positions({
-  us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
-  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }), {
-  us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node = il }
-  }))) and (bool_eq13(o21, get(model__({ us_split_discrs3 = {
-  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
-  { rec__algorithm__gap_vectors__list = this24 } }), get1(positions({
-  us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
-  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }), {
-  us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node = il }
-  }))) = true)) and (o22 = (o21).us_split_fields5)) and
-  (o23 = (o22).rec__gaps__gap__idir)) and (o24 = to_rep4(o23))) and
-  (((o24 = 1) and (result11 = true)) or ((not (o24 = 1)) and
-  (result11 = false)))) and (((result11 = true) and ((((o25 = get(model__({
-  us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
-  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }),
-  get1(positions({ us_split_discrs3 = {
+  algorithm__findbestvalley__ir__assume } }) = 1)))))
+
+axiom H22 : (result3 = ir__split_fields)
+
+axiom H23 : (ir__split_fields1 = algorithm__findbestvalley__ir__assume)
+
+axiom H24 : (to_rep5(this23) = 1000)
+
+axiom H25 : ((result4 = has_key(positions({ us_split_discrs3 = {
   rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
   { rec__algorithm__gap_vectors__list = this24 } }), { us_split_fields13 = {
-  rec__algorithm__gap_vectors__cursor__node = il } }))) and (bool_eq13(o25,
-  get(model__({ us_split_discrs3 = {
+  rec__algorithm__gap_vectors__cursor__node = ir__split_fields1 } })) and
+  ((result4 = true) <-> (has_key(positions({ us_split_discrs3 = {
+  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
+  { rec__algorithm__gap_vectors__list = this24 } }), { us_split_fields13 = {
+  rec__algorithm__gap_vectors__cursor__node = ir__split_fields1 }
+  }) = true)))
+
+axiom H26 : (result4 = true)
+
+axiom H27 : (to_rep5(this23) = 1000)
+
+axiom H28 : (has_key(positions({ us_split_discrs3 = {
+  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
+  { rec__algorithm__gap_vectors__list = this24 } }), { us_split_fields13 = {
+  rec__algorithm__gap_vectors__cursor__node = ir__split_fields2 } }) = true)
+
+axiom H29 : (({ us_split_fields13 = {
+  rec__algorithm__gap_vectors__cursor__node = o7 } } = last2({
+  us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
+  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 }
+  })) and (((bool_eq2(length1({ us_split_discrs3 = {
+  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
+  { rec__algorithm__gap_vectors__list = this24 } }), 0) = true) ->
+  (bool_eq20({ us_split_fields13 = {
+  rec__algorithm__gap_vectors__cursor__node = o7 } }, { us_split_fields13 = {
+  rec__algorithm__gap_vectors__cursor__node = no_element } }) = true)) and
+  ((not (bool_eq2(length1({ us_split_discrs3 = {
+  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
+  { rec__algorithm__gap_vectors__list = this24 } }), 0) = true)) ->
+  ((has_key(positions({ us_split_discrs3 = {
+  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
+  { rec__algorithm__gap_vectors__list = this24 } }), { us_split_fields13 = {
+  rec__algorithm__gap_vectors__cursor__node = o7 } }) = true) and
+  (get1(positions({ us_split_discrs3 = {
+  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
+  { rec__algorithm__gap_vectors__list = this24 } }), { us_split_fields13 = {
+  rec__algorithm__gap_vectors__cursor__node = o7 } }) = length1({
+  us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
+  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 }
+  }))))))
+
+axiom H30 : (result5 = bool_eq20({ us_split_fields13 = {
+  rec__algorithm__gap_vectors__cursor__node = ir__split_fields2 } }, {
+  us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node = o7 } }))
+
+axiom H31 : ((result5 = true) -> (({ us_split_fields13 = {
+  rec__algorithm__gap_vectors__cursor__node =
+  algorithm__findbestvalley__B_14__il__assume } } = first2({
+  us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
+  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 }
+  })) and (((bool_eq2(length1({ us_split_discrs3 = {
+  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
+  { rec__algorithm__gap_vectors__list = this24 } }), 0) = true) ->
+  (bool_eq20({ us_split_fields13 = {
+  rec__algorithm__gap_vectors__cursor__node =
+  algorithm__findbestvalley__B_14__il__assume } }, { us_split_fields13 = {
+  rec__algorithm__gap_vectors__cursor__node = no_element } }) = true)) and
+  ((not (bool_eq2(length1({ us_split_discrs3 = {
+  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
+  { rec__algorithm__gap_vectors__list = this24 } }), 0) = true)) ->
+  ((has_key(positions({ us_split_discrs3 = {
+  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
+  { rec__algorithm__gap_vectors__list = this24 } }), { us_split_fields13 = {
+  rec__algorithm__gap_vectors__cursor__node =
+  algorithm__findbestvalley__B_14__il__assume } }) = true) and
+  (get1(positions({ us_split_discrs3 = {
+  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
+  { rec__algorithm__gap_vectors__list = this24 } }), { us_split_fields13 = {
+  rec__algorithm__gap_vectors__cursor__node =
+  algorithm__findbestvalley__B_14__il__assume } }) = 1))))))
+
+axiom H32 : ((not (result5 = true)) -> (({ us_split_fields13 = {
+  rec__algorithm__gap_vectors__cursor__node =
+  algorithm__findbestvalley__B_14__il__assume } } = next({ us_split_discrs3 =
+  { rec__algorithm__gap_vectors__list__capacity = this23 };
+  us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }, {
+  us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node =
+  ir__split_fields2 } })) and (((match_bool(bool_eq20({ us_split_fields13 = {
+  rec__algorithm__gap_vectors__cursor__node = ir__split_fields2 } }, {
+  us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node =
+  no_element } }), true, bool_eq2(get1(positions({ us_split_discrs3 = {
+  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
+  { rec__algorithm__gap_vectors__list = this24 } }), { us_split_fields13 = {
+  rec__algorithm__gap_vectors__cursor__node = ir__split_fields2 } }),
+  length1({ us_split_discrs3 = {
+  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
+  { rec__algorithm__gap_vectors__list = this24 } }))) = true) -> (bool_eq20({
+  us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node =
+  algorithm__findbestvalley__B_14__il__assume } }, { us_split_fields13 = {
+  rec__algorithm__gap_vectors__cursor__node = no_element } }) = true)) and
+  ((not (match_bool(bool_eq20({ us_split_fields13 = {
+  rec__algorithm__gap_vectors__cursor__node = ir__split_fields2 } }, {
+  us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node =
+  no_element } }), true, bool_eq2(get1(positions({ us_split_discrs3 = {
+  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
+  { rec__algorithm__gap_vectors__list = this24 } }), { us_split_fields13 = {
+  rec__algorithm__gap_vectors__cursor__node = ir__split_fields2 } }),
+  length1({ us_split_discrs3 = {
+  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
+  { rec__algorithm__gap_vectors__list = this24 } }))) = true)) ->
+  ((has_key(positions({ us_split_discrs3 = {
+  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
+  { rec__algorithm__gap_vectors__list = this24 } }), { us_split_fields13 = {
+  rec__algorithm__gap_vectors__cursor__node =
+  algorithm__findbestvalley__B_14__il__assume } }) = true) and
+  (get1(positions({ us_split_discrs3 = {
+  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
+  { rec__algorithm__gap_vectors__list = this24 } }), { us_split_fields13 = {
+  rec__algorithm__gap_vectors__cursor__node =
+  algorithm__findbestvalley__B_14__il__assume } }) = (get1(positions({
+  us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
+  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }), {
+  us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node =
+  ir__split_fields2 } }) + 1)))))))
+
+axiom H33 : (algorithm__findbestvalley__B_14__il__assume = il)
+
+axiom H34 : (to_rep6(o8) = 0)
+
+axiom H35 : (o9 = o8)
+
+axiom H36 :
+  ((algorithm__findbestvalley__B_14__candidate_valley_ids__assume = o9) and
+  (((algorithm__findbestvalley__B_14__candidate_valley_ids__assume1 = dummy33) and
+  (algorithm__findbestvalley__B_14__candidate_valley_ids__assume2 = dummy33)) and
+  (algorithm__findbestvalley__B_14__candidate_valley_ids__assume3 = true)))
+
+axiom H37 : ((result6 = candidate_valley_ids__split_fields4) and
+  (result7 = candidate_valley_ids__split_fields5))
+
+axiom H38 :
+  ((candidate_valley_ids__split_fields6 = algorithm__findbestvalley__B_14__candidate_valley_ids__assume1) and
+  (candidate_valley_ids__split_fields7 = algorithm__findbestvalley__B_14__candidate_valley_ids__assume2))
+
+axiom H39 : (result8 = candidate_valley_ids__split_discrs2)
+
+axiom H40 :
+  (candidate_valley_ids__split_discrs3 = algorithm__findbestvalley__B_14__candidate_valley_ids__assume)
+
+axiom H41 : (candidate_valley_ids__attr__constrained = false)
+
+axiom H42 : (({ us_split_fields5 = { rec__gaps__gap__bearing = {
+  us_split_fields1 = { rec__spaces__angles__angle__theta = o10 } };
+  rec__gaps__gap__distance = o11; rec__gaps__gap__idir = o12 }
+  } = get(model__({ us_split_discrs3 = {
   rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
   { rec__algorithm__gap_vectors__list = this24 } }), get1(positions({
   us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
   }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }), {
-  us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node = il }
-  }))) = true)) and (result12 = isrisinggapsafe({ us_split_fields21 = {
-  rec__algorithm__controller__robot = { us_split_fields17 = {
-  rec__robot_iface__proxy__robot_radius = this;
+  us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node =
+  ir__split_fields2 } }))) and (bool_eq13({ us_split_fields5 = {
+  rec__gaps__gap__bearing = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = o10 } }; rec__gaps__gap__distance =
+  o11; rec__gaps__gap__idir = o12 } }, get(model__({ us_split_discrs3 = {
+  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
+  { rec__algorithm__gap_vectors__list = this24 } }), get1(positions({
+  us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
+  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }), {
+  us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node =
+  ir__split_fields2 } }))) = true))
+
+axiom H43 : ((o13 = o10) and ((o14 = o11) and (o15 = o12)))
+
+axiom H44 : (o16 = o15)
+
+axiom H45 : (o17 = to_rep4(o16))
+
+axiom H46 : (((o17 = (- 1)) -> (result9 = true)) and ((not (o17 = (- 1))) ->
+  (result9 = false)))
+
+axiom H47 : ((result9 = true) -> (({ us_split_fields5 = {
+  rec__gaps__gap__bearing = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = o18 } }; rec__gaps__gap__distance =
+  o19; rec__gaps__gap__idir = o20 } } = get(model__({ us_split_discrs3 = {
+  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
+  { rec__algorithm__gap_vectors__list = this24 } }), get1(positions({
+  us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
+  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }), {
+  us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node =
+  ir__split_fields2 } }))) and (bool_eq13({ us_split_fields5 = {
+  rec__gaps__gap__bearing = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = o18 } }; rec__gaps__gap__distance =
+  o19; rec__gaps__gap__idir = o20 } }, get(model__({ us_split_discrs3 = {
+  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
+  { rec__algorithm__gap_vectors__list = this24 } }), get1(positions({
+  us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
+  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }), {
+  us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node =
+  ir__split_fields2 } }))) = true)))
+
+axiom H48 : ((result9 = true) -> (result10 = isrisinggapsafe({
+  us_split_fields21 = { rec__algorithm__controller__robot = {
+  us_split_fields17 = { rec__robot_iface__proxy__robot_radius = this;
   rec__robot_iface__proxy__min_gap_width = this1;
   rec__robot_iface__proxy__obstacle_avoid_dist = this2;
   rec__robot_iface__proxy__max_speed = this3;
@@ -5971,118 +6583,440 @@ goal WP_parameter_def :
   { rec__algorithm__gap_vectors__list = this24 } };
   rec__algorithm__controller__obsavoiddelta = this25;
   rec__algorithm__controller__driveangle = { us_split_fields1 = {
-  rec__spaces__angles__angle__theta = this26 } } } }, o25))) and
-  (((result12 = true) and
-  (((to_rep6((candidate_valley_ids__split_discrs2).rec__algorithm__findbestvalley__gap_id_pair__opt) = 1) and
-  (((((o34 = bearing({ us_split_fields3 = {
-  rec__spaces__positions__position__x = disttogoal;
-  rec__spaces__positions__position__y = disttogoal1 } })) and
-  (((((o31 = get(model__({ us_split_discrs3 = {
+  rec__spaces__angles__angle__theta = this26 } } } }, { us_split_fields5 = {
+  rec__gaps__gap__bearing = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = o18 } }; rec__gaps__gap__distance =
+  o19; rec__gaps__gap__idir = o20 } })))
+
+axiom H49 : ((result9 = true) -> ((result10 = true) -> (to_rep6(o21) = 1)))
+
+axiom H50 : ((result9 = true) -> ((result10 = true) -> (o22 = o21)))
+
+axiom H51 : ((result9 = true) -> ((result10 = true) ->
+  ((temp___841 = o22) and (((temp___8411 = ir__split_fields2) and
+  (temp___8412 = il)) and (temp___8413 = true)))))
+
+axiom H52 : ((result9 = true) -> ((result10 = true) ->
+  ((candidate_valley_ids__attr__constrained = true) ->
+  (temp___841 = candidate_valley_ids__split_discrs3))))
+
+axiom H53 : ((result9 = true) -> ((result10 = true) ->
+  ((usq_ = temp___841) and (((usq_1 = temp___8411) and
+  (usq_2 = temp___8412)) and (usq_3 = temp___8413)))))
+
+axiom H54 : ((result9 = true) -> ((result10 = true) ->
+  ((temp___843 = usq_) and (((temp___8431 = usq_1) and
+  (temp___8432 = usq_2)) and
+  (temp___8433 = candidate_valley_ids__attr__constrained)))))
+
+axiom H55 : ((result9 = true) -> ((result10 = true) ->
+  ((result11 = candidate_valley_ids__split_fields6) and
+  (result12 = candidate_valley_ids__split_fields7))))
+
+axiom H56 : ((result9 = true) -> ((result10 = true) ->
+  ((candidate_valley_ids__split_fields8 = temp___8431) and
+  (candidate_valley_ids__split_fields9 = temp___8432))))
+
+axiom H57 : ((result9 = true) -> ((result10 = true) ->
+  (result13 = candidate_valley_ids__split_discrs3)))
+
+axiom H58 : ((result9 = true) -> ((result10 = true) ->
+  (candidate_valley_ids__split_discrs4 = temp___843)))
+
+axiom H59 : ((result9 = true) -> ((not (result10 = true)) ->
+  ((of_int1(0) = true) -> (({ us_split_fields5 = { rec__gaps__gap__bearing =
+  { us_split_fields1 = { rec__spaces__angles__angle__theta = o23 } };
+  rec__gaps__gap__distance = o24; rec__gaps__gap__idir = o25 }
+  } = get(model__({ us_split_discrs3 = {
   rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
   { rec__algorithm__gap_vectors__list = this24 } }), get1(positions({
   us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
-  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }),
-  (candidate_valley_ids__split_fields2).rec__algorithm__findbestvalley__gap_id_pair__rising))) and
-  (bool_eq13(o31, get(model__({ us_split_discrs3 = {
+  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }), {
+  us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node =
+  ir__split_fields2 } }))) and (bool_eq13({ us_split_fields5 = {
+  rec__gaps__gap__bearing = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = o23 } }; rec__gaps__gap__distance =
+  o24; rec__gaps__gap__idir = o25 } }, get(model__({ us_split_discrs3 = {
   rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
   { rec__algorithm__gap_vectors__list = this24 } }), get1(positions({
   us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
-  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }),
-  (candidate_valley_ids__split_fields2).rec__algorithm__findbestvalley__gap_id_pair__rising))) = true)) and
-  (o32 = (o31).us_split_fields5)) and
-  (o33 = (o32).rec__gaps__gap__bearing)) and ((o35 = aldiff(o33, o34)) and
-  (tqtisFinite(o35) and (lt(neg(fliteral4), o35) and le(o35,
-  fliteral4)))))) and (o36 = abs(o35))) and ((((o29 = bearing({
-  us_split_fields3 = { rec__spaces__positions__position__x = disttogoal;
-  rec__spaces__positions__position__y = disttogoal1 } })) and
-  (((((o26 = get(model__({ us_split_discrs3 = {
+  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }), {
+  us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node =
+  ir__split_fields2 } }))) = true)))))
+
+axiom H60 : ((result9 = true) -> ((not (result10 = true)) ->
+  ((of_int1(0) = true) -> ((o26 = o23) and ((o27 = o24) and (o28 = o25))))))
+
+axiom H61 : ((result9 = true) -> ((not (result10 = true)) ->
+  ((of_int1(0) = true) -> (o29 = o26))))
+
+axiom H62 : ((result9 = true) -> ((not (result10 = true)) ->
+  ((of_int1(0) = true) -> (({ elts = o30; rt = o31 } = print({
+  us_split_fields1 = { rec__spaces__angles__angle__theta = o29 } })) and
+  dynamic_property(1, 2147483647, to_rep1(first(o31)),
+  to_rep1(last(o31)))))))
+
+axiom H63 : ((result9 = true) -> ((not (result10 = true)) ->
+  (candidate_valley_ids__split_discrs4 = candidate_valley_ids__split_discrs3)))
+
+axiom H64 : ((result9 = true) -> ((not (result10 = true)) ->
+  ((candidate_valley_ids__split_fields8 = candidate_valley_ids__split_fields6) and
+  (candidate_valley_ids__split_fields9 = candidate_valley_ids__split_fields7))))
+
+axiom H65 : ((not (result9 = true)) ->
+  (candidate_valley_ids__split_discrs4 = candidate_valley_ids__split_discrs3))
+
+axiom H66 : ((not (result9 = true)) ->
+  ((candidate_valley_ids__split_fields8 = candidate_valley_ids__split_fields6) and
+  (candidate_valley_ids__split_fields9 = candidate_valley_ids__split_fields7)))
+
+axiom H67 : (({ us_split_fields5 = { rec__gaps__gap__bearing = {
+  us_split_fields1 = { rec__spaces__angles__angle__theta = o32 } };
+  rec__gaps__gap__distance = o33; rec__gaps__gap__idir = o34 }
+  } = get(model__({ us_split_discrs3 = {
   rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
   { rec__algorithm__gap_vectors__list = this24 } }), get1(positions({
   us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
   }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }), {
   us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node = il }
-  }))) and (bool_eq13(o26, get(model__({ us_split_discrs3 = {
+  }))) and (bool_eq13({ us_split_fields5 = { rec__gaps__gap__bearing = {
+  us_split_fields1 = { rec__spaces__angles__angle__theta = o32 } };
+  rec__gaps__gap__distance = o33; rec__gaps__gap__idir = o34 } },
+  get(model__({ us_split_discrs3 = {
   rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
   { rec__algorithm__gap_vectors__list = this24 } }), get1(positions({
   us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
   }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }), {
   us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node = il }
-  }))) = true)) and (o27 = (o26).us_split_fields5)) and
-  (o28 = (o27).rec__gaps__gap__bearing)) and ((o30 = aldiff(o28, o29)) and
-  (tqtisFinite(o30) and (lt(neg(fliteral4), o30) and le(o30,
-  fliteral4)))))) and (o37 = abs(o30))) and ((lt(o37, o36) and
-  (result13 = true)) or ((not lt(o37, o36)) and (result13 = false))))) and
-  (((result13 = true) and ((((((to_rep6(o38) = 1) and (o39 = {
-  rec__algorithm__findbestvalley__gap_id_pair__opt = o38 })) and
-  (temp___849 = { us_split_discrs7 = o39; us_split_fields23 = {
-  rec__algorithm__findbestvalley__gap_id_pair__rising = { us_split_fields13 =
-  { rec__algorithm__gap_vectors__cursor__node = il } };
-  rec__algorithm__findbestvalley__gap_id_pair__other = { us_split_fields13 =
-  ir__split_fields2 } }; attr__constrained2 = true })) and
-  ((((candidate_valley_ids__attr__constrained = true) and
-  (((temp___849).us_split_discrs7).rec__algorithm__findbestvalley__gap_id_pair__opt = (candidate_valley_ids__split_discrs2).rec__algorithm__findbestvalley__gap_id_pair__opt)) or
-  (not (candidate_valley_ids__attr__constrained = true))) and
-  (usq_1 = temp___849))) and (temp___851 = { us_split_discrs7 =
-  (usq_1).us_split_discrs7; us_split_fields23 = (usq_1).us_split_fields23;
-  attr__constrained2 = candidate_valley_ids__attr__constrained })) and
-  (((result14 = { us_split_fields__content11 =
-  candidate_valley_ids__split_fields2 }) and
-  (candidate_valley_ids__split_fields3 = (temp___851).us_split_fields23)) and
-  ((result15 = { us_split_discrs__content3 =
-  candidate_valley_ids__split_discrs2 }) and
-  (candidate_valley_ids__split_discrs3 = (temp___851).us_split_discrs7))))) or
-  ((not (result13 = true)) and
-  ((candidate_valley_ids__split_discrs3 = candidate_valley_ids__split_discrs2) and
-  (candidate_valley_ids__split_fields3 = candidate_valley_ids__split_fields2)))))) or
-  ((not (to_rep6((candidate_valley_ids__split_discrs2).rec__algorithm__findbestvalley__gap_id_pair__opt) = 1)) and
-  (((((((to_rep6(o40) = 1) and (o41 = {
-  rec__algorithm__findbestvalley__gap_id_pair__opt = o40 })) and
-  (temp___846 = { us_split_discrs7 = o41; us_split_fields23 = {
-  rec__algorithm__findbestvalley__gap_id_pair__rising = { us_split_fields13 =
-  { rec__algorithm__gap_vectors__cursor__node = il } };
-  rec__algorithm__findbestvalley__gap_id_pair__other = { us_split_fields13 =
-  ir__split_fields2 } }; attr__constrained2 = true })) and
-  ((((candidate_valley_ids__attr__constrained = true) and
-  (((temp___846).us_split_discrs7).rec__algorithm__findbestvalley__gap_id_pair__opt = (candidate_valley_ids__split_discrs2).rec__algorithm__findbestvalley__gap_id_pair__opt)) or
-  (not (candidate_valley_ids__attr__constrained = true))) and
-  (usq_2 = temp___846))) and (temp___848 = { us_split_discrs7 =
-  (usq_2).us_split_discrs7; us_split_fields23 = (usq_2).us_split_fields23;
-  attr__constrained2 = candidate_valley_ids__attr__constrained })) and
-  (((result16 = { us_split_fields__content11 =
-  candidate_valley_ids__split_fields2 }) and
-  (candidate_valley_ids__split_fields4 = (temp___848).us_split_fields23)) and
-  ((result17 = { us_split_discrs__content3 =
-  candidate_valley_ids__split_discrs2 }) and
-  (candidate_valley_ids__split_discrs4 = (temp___848).us_split_discrs7)))) and
-  ((candidate_valley_ids__split_discrs3 = candidate_valley_ids__split_discrs4) and
-  (candidate_valley_ids__split_fields3 = candidate_valley_ids__split_fields4)))))) or
-  ((not (result12 = true)) and (((of_int1(0) = true) ->
-  (((((o42 = get(model__({ us_split_discrs3 = {
+  }))) = true))
+
+axiom H68 : ((o35 = o32) and ((o36 = o33) and (o37 = o34)))
+
+axiom H69 : (o38 = o37)
+
+axiom H70 : (o39 = to_rep4(o38))
+
+axiom H71 : (((o39 = 1) -> (result14 = true)) and ((not (o39 = 1)) ->
+  (result14 = false)))
+
+axiom H72 : ((result14 = true) -> (({ us_split_fields5 = {
+  rec__gaps__gap__bearing = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = o40 } }; rec__gaps__gap__distance =
+  o41; rec__gaps__gap__idir = o42 } } = get(model__({ us_split_discrs3 = {
   rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
   { rec__algorithm__gap_vectors__list = this24 } }), get1(positions({
   us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
   }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }), {
   us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node = il }
-  }))) and (bool_eq13(o42, get(model__({ us_split_discrs3 = {
+  }))) and (bool_eq13({ us_split_fields5 = { rec__gaps__gap__bearing = {
+  us_split_fields1 = { rec__spaces__angles__angle__theta = o40 } };
+  rec__gaps__gap__distance = o41; rec__gaps__gap__idir = o42 } },
+  get(model__({ us_split_discrs3 = {
   rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
   { rec__algorithm__gap_vectors__list = this24 } }), get1(positions({
   us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
   }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }), {
   us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node = il }
-  }))) = true)) and (o43 = (o42).us_split_fields5)) and
-  (o44 = (o43).rec__gaps__gap__bearing)) and ((o45 = print(o44)) and
-  dynamic_property(1, 2147483647, to_rep1(first((o45).rt)),
-  to_rep1(last((o45).rt)))))) and
-  ((candidate_valley_ids__split_discrs3 = candidate_valley_ids__split_discrs2) and
-  (candidate_valley_ids__split_fields3 = candidate_valley_ids__split_fields2))))))) or
-  ((not (result11 = true)) and
-  ((candidate_valley_ids__split_discrs3 = candidate_valley_ids__split_discrs2) and
-  (candidate_valley_ids__split_fields3 = candidate_valley_ids__split_fields2))))) ->
-  ((to_rep6((candidate_valley_ids__split_discrs3).rec__algorithm__findbestvalley__gap_id_pair__opt) = 1) ->
-  ((to_rep6((best_valley_ids__split_discrs2).rec__algorithm__findbestvalley__gap_id_pair__opt) = 1) ->
-  ((of_int1(0) = true) -> (not (oeq({ us_split_fields3 = {
+  }))) = true)))
+
+axiom H73 : ((result14 = true) -> (result15 = isrisinggapsafe({
+  us_split_fields21 = { rec__algorithm__controller__robot = {
+  us_split_fields17 = { rec__robot_iface__proxy__robot_radius = this;
+  rec__robot_iface__proxy__min_gap_width = this1;
+  rec__robot_iface__proxy__obstacle_avoid_dist = this2;
+  rec__robot_iface__proxy__max_speed = this3;
+  rec__robot_iface__proxy__max_turn_rate = this4;
+  rec__robot_iface__proxy__goal_position_tol = this5;
+  rec__robot_iface__proxy__goal_angle_tol = this6;
+  rec__robot_iface__proxy__goalx = this7; rec__robot_iface__proxy__goaly =
+  this8; rec__robot_iface__proxy__goala = this9;
+  rec__robot_iface__proxy__scan_count = this10;
+  rec__robot_iface__proxy__scan_res = this11;
+  rec__robot_iface__proxy__max_range = this12;
+  rec__robot_iface__proxy__scans = this13; rec__robot_iface__proxy__x =
+  this14; rec__robot_iface__proxy__y = this15; rec__robot_iface__proxy__yaw =
+  this16; rec__robot_iface__proxy__speed = { us_split_discrs5 = {
+  rec__robot_iface__speed_option__opt = this17 }; us_split_fields15 = {
+  rec__robot_iface__speed_option__modulus = this18;
+  rec__robot_iface__speed_option__angle = this19 }; attr__constrained1 =
+  this20 }; rec__robot_iface__proxy__goal_reached = this21 } };
+  rec__algorithm__controller__laserscan = this22;
+  rec__algorithm__controller__gapvec = { us_split_discrs3 = {
+  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
+  { rec__algorithm__gap_vectors__list = this24 } };
+  rec__algorithm__controller__obsavoiddelta = this25;
+  rec__algorithm__controller__driveangle = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = this26 } } } }, { us_split_fields5 = {
+  rec__gaps__gap__bearing = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = o40 } }; rec__gaps__gap__distance =
+  o41; rec__gaps__gap__idir = o42 } })))
+
+axiom H74 : ((result14 = true) -> ((result15 = true) ->
+  ((to_rep6(candidate_valley_ids__split_discrs4) = 1) -> ({
+  us_split_fields1 = { rec__spaces__angles__angle__theta = o59 }
+  } = bearing({ us_split_fields3 = { rec__spaces__positions__position__x =
+  disttogoal; rec__spaces__positions__position__y = disttogoal1 } })))))
+
+axiom H75 : ((result14 = true) -> ((result15 = true) ->
+  ((to_rep6(candidate_valley_ids__split_discrs4) = 1) -> (({
+  us_split_fields5 = { rec__gaps__gap__bearing = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = o52 } }; rec__gaps__gap__distance =
+  o53; rec__gaps__gap__idir = o54 } } = get(model__({ us_split_discrs3 = {
+  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
+  { rec__algorithm__gap_vectors__list = this24 } }), get1(positions({
+  us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
+  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }), {
+  us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node =
+  candidate_valley_ids__split_fields8 } }))) and (bool_eq13({
+  us_split_fields5 = { rec__gaps__gap__bearing = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = o52 } }; rec__gaps__gap__distance =
+  o53; rec__gaps__gap__idir = o54 } }, get(model__({ us_split_discrs3 = {
+  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
+  { rec__algorithm__gap_vectors__list = this24 } }), get1(positions({
+  us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
+  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }), {
+  us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node =
+  candidate_valley_ids__split_fields8 } }))) = true)))))
+
+axiom H76 : ((result14 = true) -> ((result15 = true) ->
+  ((to_rep6(candidate_valley_ids__split_discrs4) = 1) -> ((o55 = o52) and
+  ((o56 = o53) and (o57 = o54))))))
+
+axiom H77 : ((result14 = true) -> ((result15 = true) ->
+  ((to_rep6(candidate_valley_ids__split_discrs4) = 1) -> (o58 = o55))))
+
+logic fliteral4 : t
+
+axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
+  (tqtreal(fliteral4) = 3.1415927410125732421875))
+
+axiom H78 : ((result14 = true) -> ((result15 = true) ->
+  ((to_rep6(candidate_valley_ids__split_discrs4) = 1) -> ((o60 = aldiff({
+  us_split_fields1 = { rec__spaces__angles__angle__theta = o58 } }, {
+  us_split_fields1 = { rec__spaces__angles__angle__theta = o59 } })) and
+  (tqtisFinite(o60) and (lt(neg(fliteral4), o60) and le(o60, fliteral4)))))))
+
+axiom H79 : ((result14 = true) -> ((result15 = true) ->
+  ((to_rep6(candidate_valley_ids__split_discrs4) = 1) -> (o61 = abs(o60)))))
+
+axiom H80 : ((result14 = true) -> ((result15 = true) ->
+  ((to_rep6(candidate_valley_ids__split_discrs4) = 1) -> ({
+  us_split_fields1 = { rec__spaces__angles__angle__theta = o50 }
+  } = bearing({ us_split_fields3 = { rec__spaces__positions__position__x =
+  disttogoal; rec__spaces__positions__position__y = disttogoal1 } })))))
+
+axiom H81 : ((result14 = true) -> ((result15 = true) ->
+  ((to_rep6(candidate_valley_ids__split_discrs4) = 1) -> (({
+  us_split_fields5 = { rec__gaps__gap__bearing = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = o43 } }; rec__gaps__gap__distance =
+  o44; rec__gaps__gap__idir = o45 } } = get(model__({ us_split_discrs3 = {
+  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
+  { rec__algorithm__gap_vectors__list = this24 } }), get1(positions({
+  us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
+  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }), {
+  us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node = il }
+  }))) and (bool_eq13({ us_split_fields5 = { rec__gaps__gap__bearing = {
+  us_split_fields1 = { rec__spaces__angles__angle__theta = o43 } };
+  rec__gaps__gap__distance = o44; rec__gaps__gap__idir = o45 } },
+  get(model__({ us_split_discrs3 = {
+  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
+  { rec__algorithm__gap_vectors__list = this24 } }), get1(positions({
+  us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
+  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }), {
+  us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node = il }
+  }))) = true)))))
+
+axiom H82 : ((result14 = true) -> ((result15 = true) ->
+  ((to_rep6(candidate_valley_ids__split_discrs4) = 1) -> ((o46 = o43) and
+  ((o47 = o44) and (o48 = o45))))))
+
+axiom H83 : ((result14 = true) -> ((result15 = true) ->
+  ((to_rep6(candidate_valley_ids__split_discrs4) = 1) -> (o49 = o46))))
+
+axiom H84 : ((result14 = true) -> ((result15 = true) ->
+  ((to_rep6(candidate_valley_ids__split_discrs4) = 1) -> ((o51 = aldiff({
+  us_split_fields1 = { rec__spaces__angles__angle__theta = o49 } }, {
+  us_split_fields1 = { rec__spaces__angles__angle__theta = o50 } })) and
+  (tqtisFinite(o51) and (lt(neg(fliteral4), o51) and le(o51, fliteral4)))))))
+
+axiom H85 : ((result14 = true) -> ((result15 = true) ->
+  ((to_rep6(candidate_valley_ids__split_discrs4) = 1) -> (o62 = abs(o51)))))
+
+axiom H86 : ((result14 = true) -> ((result15 = true) ->
+  ((to_rep6(candidate_valley_ids__split_discrs4) = 1) -> ((lt(o62, o61) ->
+  (result16 = true)) and ((not lt(o62, o61)) -> (result16 = false))))))
+
+axiom H87 : ((result14 = true) -> ((result15 = true) ->
+  ((to_rep6(candidate_valley_ids__split_discrs4) = 1) ->
+  ((result16 = true) -> (to_rep6(o63) = 1)))))
+
+axiom H88 : ((result14 = true) -> ((result15 = true) ->
+  ((to_rep6(candidate_valley_ids__split_discrs4) = 1) ->
+  ((result16 = true) -> (o64 = o63)))))
+
+axiom H89 : ((result14 = true) -> ((result15 = true) ->
+  ((to_rep6(candidate_valley_ids__split_discrs4) = 1) ->
+  ((result16 = true) -> ((temp___849 = o64) and (((temp___8491 = il) and
+  (temp___8492 = ir__split_fields2)) and (temp___8493 = true)))))))
+
+axiom H90 : ((result14 = true) -> ((result15 = true) ->
+  ((to_rep6(candidate_valley_ids__split_discrs4) = 1) ->
+  ((result16 = true) -> ((candidate_valley_ids__attr__constrained = true) ->
+  (temp___849 = candidate_valley_ids__split_discrs4))))))
+
+axiom H91 : ((result14 = true) -> ((result15 = true) ->
+  ((to_rep6(candidate_valley_ids__split_discrs4) = 1) ->
+  ((result16 = true) -> ((usq_4 = temp___849) and (((usq_5 = temp___8491) and
+  (usq_6 = temp___8492)) and (usq_7 = temp___8493)))))))
+
+axiom H92 : ((result14 = true) -> ((result15 = true) ->
+  ((to_rep6(candidate_valley_ids__split_discrs4) = 1) ->
+  ((result16 = true) -> ((temp___851 = usq_4) and (((temp___8511 = usq_5) and
+  (temp___8512 = usq_6)) and
+  (temp___8513 = candidate_valley_ids__attr__constrained)))))))
+
+axiom H93 : ((result14 = true) -> ((result15 = true) ->
+  ((to_rep6(candidate_valley_ids__split_discrs4) = 1) ->
+  ((result16 = true) -> ((result17 = candidate_valley_ids__split_fields8) and
+  (result18 = candidate_valley_ids__split_fields9))))))
+
+axiom H94 : ((result14 = true) -> ((result15 = true) ->
+  ((to_rep6(candidate_valley_ids__split_discrs4) = 1) ->
+  ((result16 = true) ->
+  ((candidate_valley_ids__split_fields10 = temp___8511) and
+  (candidate_valley_ids__split_fields11 = temp___8512))))))
+
+axiom H95 : ((result14 = true) -> ((result15 = true) ->
+  ((to_rep6(candidate_valley_ids__split_discrs4) = 1) ->
+  ((result16 = true) -> (result19 = candidate_valley_ids__split_discrs4)))))
+
+axiom H96 : ((result14 = true) -> ((result15 = true) ->
+  ((to_rep6(candidate_valley_ids__split_discrs4) = 1) ->
+  ((result16 = true) ->
+  (candidate_valley_ids__split_discrs5 = temp___851)))))
+
+axiom H97 : ((result14 = true) -> ((result15 = true) ->
+  ((to_rep6(candidate_valley_ids__split_discrs4) = 1) ->
+  ((not (result16 = true)) ->
+  (candidate_valley_ids__split_discrs5 = candidate_valley_ids__split_discrs4)))))
+
+axiom H98 : ((result14 = true) -> ((result15 = true) ->
+  ((to_rep6(candidate_valley_ids__split_discrs4) = 1) ->
+  ((not (result16 = true)) ->
+  ((candidate_valley_ids__split_fields10 = candidate_valley_ids__split_fields8) and
+  (candidate_valley_ids__split_fields11 = candidate_valley_ids__split_fields9))))))
+
+axiom H99 : ((result14 = true) -> ((result15 = true) ->
+  ((not (to_rep6(candidate_valley_ids__split_discrs4) = 1)) ->
+  (to_rep6(o65) = 1))))
+
+axiom H100 : ((result14 = true) -> ((result15 = true) ->
+  ((not (to_rep6(candidate_valley_ids__split_discrs4) = 1)) -> (o66 = o65))))
+
+axiom H101 : ((result14 = true) -> ((result15 = true) ->
+  ((not (to_rep6(candidate_valley_ids__split_discrs4) = 1)) ->
+  ((temp___846 = o66) and (((temp___8461 = il) and
+  (temp___8462 = ir__split_fields2)) and (temp___8463 = true))))))
+
+axiom H102 : ((result14 = true) -> ((result15 = true) ->
+  ((not (to_rep6(candidate_valley_ids__split_discrs4) = 1)) ->
+  ((candidate_valley_ids__attr__constrained = true) ->
+  (temp___846 = candidate_valley_ids__split_discrs4)))))
+
+axiom H103 : ((result14 = true) -> ((result15 = true) ->
+  ((not (to_rep6(candidate_valley_ids__split_discrs4) = 1)) ->
+  ((usq_8 = temp___846) and (((usq_9 = temp___8461) and
+  (usq_10 = temp___8462)) and (usq_11 = temp___8463))))))
+
+axiom H104 : ((result14 = true) -> ((result15 = true) ->
+  ((not (to_rep6(candidate_valley_ids__split_discrs4) = 1)) ->
+  ((temp___848 = usq_8) and (((temp___8481 = usq_9) and
+  (temp___8482 = usq_10)) and
+  (temp___8483 = candidate_valley_ids__attr__constrained))))))
+
+axiom H105 : ((result14 = true) -> ((result15 = true) ->
+  ((not (to_rep6(candidate_valley_ids__split_discrs4) = 1)) ->
+  ((result20 = candidate_valley_ids__split_fields8) and
+  (result21 = candidate_valley_ids__split_fields9)))))
+
+axiom H106 : ((result14 = true) -> ((result15 = true) ->
+  ((not (to_rep6(candidate_valley_ids__split_discrs4) = 1)) ->
+  ((candidate_valley_ids__split_fields12 = temp___8481) and
+  (candidate_valley_ids__split_fields13 = temp___8482)))))
+
+axiom H107 : ((result14 = true) -> ((result15 = true) ->
+  ((not (to_rep6(candidate_valley_ids__split_discrs4) = 1)) ->
+  (result22 = candidate_valley_ids__split_discrs4))))
+
+axiom H108 : ((result14 = true) -> ((result15 = true) ->
+  ((not (to_rep6(candidate_valley_ids__split_discrs4) = 1)) ->
+  (candidate_valley_ids__split_discrs6 = temp___848))))
+
+axiom H109 : ((result14 = true) -> ((result15 = true) ->
+  ((not (to_rep6(candidate_valley_ids__split_discrs4) = 1)) ->
+  (candidate_valley_ids__split_discrs5 = candidate_valley_ids__split_discrs6))))
+
+axiom H110 : ((result14 = true) -> ((result15 = true) ->
+  ((not (to_rep6(candidate_valley_ids__split_discrs4) = 1)) ->
+  ((candidate_valley_ids__split_fields10 = candidate_valley_ids__split_fields12) and
+  (candidate_valley_ids__split_fields11 = candidate_valley_ids__split_fields13)))))
+
+axiom H111 : ((result14 = true) -> ((not (result15 = true)) ->
+  ((of_int1(0) = true) -> (({ us_split_fields5 = { rec__gaps__gap__bearing =
+  { us_split_fields1 = { rec__spaces__angles__angle__theta = o67 } };
+  rec__gaps__gap__distance = o68; rec__gaps__gap__idir = o69 }
+  } = get(model__({ us_split_discrs3 = {
+  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
+  { rec__algorithm__gap_vectors__list = this24 } }), get1(positions({
+  us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
+  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }), {
+  us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node = il }
+  }))) and (bool_eq13({ us_split_fields5 = { rec__gaps__gap__bearing = {
+  us_split_fields1 = { rec__spaces__angles__angle__theta = o67 } };
+  rec__gaps__gap__distance = o68; rec__gaps__gap__idir = o69 } },
+  get(model__({ us_split_discrs3 = {
+  rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
+  { rec__algorithm__gap_vectors__list = this24 } }), get1(positions({
+  us_split_discrs3 = { rec__algorithm__gap_vectors__list__capacity = this23
+  }; us_split_fields11 = { rec__algorithm__gap_vectors__list = this24 } }), {
+  us_split_fields13 = { rec__algorithm__gap_vectors__cursor__node = il }
+  }))) = true)))))
+
+axiom H112 : ((result14 = true) -> ((not (result15 = true)) ->
+  ((of_int1(0) = true) -> ((o70 = o67) and ((o71 = o68) and (o72 = o69))))))
+
+axiom H113 : ((result14 = true) -> ((not (result15 = true)) ->
+  ((of_int1(0) = true) -> (o73 = o70))))
+
+axiom H114 : ((result14 = true) -> ((not (result15 = true)) ->
+  ((of_int1(0) = true) -> (({ elts = o74; rt = o75 } = print({
+  us_split_fields1 = { rec__spaces__angles__angle__theta = o73 } })) and
+  dynamic_property(1, 2147483647, to_rep1(first(o75)),
+  to_rep1(last(o75)))))))
+
+axiom H115 : ((result14 = true) -> ((not (result15 = true)) ->
+  (candidate_valley_ids__split_discrs5 = candidate_valley_ids__split_discrs4)))
+
+axiom H116 : ((result14 = true) -> ((not (result15 = true)) ->
+  ((candidate_valley_ids__split_fields10 = candidate_valley_ids__split_fields8) and
+  (candidate_valley_ids__split_fields11 = candidate_valley_ids__split_fields9))))
+
+axiom H117 : ((not (result14 = true)) ->
+  (candidate_valley_ids__split_discrs5 = candidate_valley_ids__split_discrs4))
+
+axiom H118 : ((not (result14 = true)) ->
+  ((candidate_valley_ids__split_fields10 = candidate_valley_ids__split_fields8) and
+  (candidate_valley_ids__split_fields11 = candidate_valley_ids__split_fields9)))
+
+axiom H119 : (to_rep6(candidate_valley_ids__split_discrs5) = 1)
+
+axiom H120 : (to_rep6(best_valley_ids__split_discrs2) = 1)
+
+axiom H121 : (of_int1(0) = true)
+
+ (* File "algorithm.ads", line 27, characters 0-0 *)
+goal WP_parameter_def : (not (oeq({ us_split_fields3 = {
   rec__spaces__positions__position__x = disttogoal;
   rec__spaces__positions__position__y = disttogoal1 } }, { us_split_fields3 =
   { rec__spaces__positions__position__x = zero_position;
-  rec__spaces__positions__position__y = zero_position1 }
-  }) = true))))))))))))))))))))))
+  rec__spaces__positions__position__y = zero_position1 } }) = true))

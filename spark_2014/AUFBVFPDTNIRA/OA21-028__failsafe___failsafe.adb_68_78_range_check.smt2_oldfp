@@ -1528,15 +1528,27 @@
 
 (declare-const o7 (_ BitVec 8))
 
-(declare-const temp___279 (_ BitVec 8))
+(declare-const temp___280 (_ BitVec 8))
 
 (declare-const o8 (_ BitVec 8))
 
 (declare-const o9 (_ BitVec 8))
 
-(declare-const o10 battery_level_type)
+(declare-const temp___282 (_ BitVec 8))
 
-(declare-const o11 t)
+(declare-const o10 (_ BitVec 8))
+
+(declare-const o11 (_ BitVec 8))
+
+(declare-const temp___279 (_ BitVec 8))
+
+(declare-const o12 (_ BitVec 8))
+
+(declare-const o13 (_ BitVec 8))
+
+(declare-const o14 battery_level_type)
+
+(declare-const o15 t)
 
 (declare-const result (_ BitVec 8))
 
@@ -1558,6 +1570,24 @@
 
 (declare-const result6 Bool)
 
+(declare-const result7 Bool)
+
+(declare-const result8 (_ BitVec 8))
+
+(declare-const counter2 (_ BitVec 8))
+
+(declare-const battery_level_at2 (Array (_ BitVec 8) battery_level_type))
+
+(declare-const current_time2 (_ BitVec 8))
+
+(declare-const counter3 (_ BitVec 8))
+
+(declare-const battery_level_at3 (Array (_ BitVec 8) battery_level_type))
+
+(declare-const current_time3 (_ BitVec 8))
+
+(declare-const counter4 (_ BitVec 8))
+
 ;; H
   (assert (in_range4 counter))
 
@@ -1572,6 +1602,9 @@
 
 ;; H
   (assert (= counter c))
+
+;; H
+  (assert true)
 
 ;; H
   (assert (= counter (time_below_threshold battery_level_at current_time)))
@@ -1684,31 +1717,31 @@
   (assert (= result3 true))
 
 ;; H
-  (assert (and (= o7 counter1) (in_range2 counter1)))
+  (assert (and (= o11 counter1) (in_range2 counter1)))
 
 ;; H
-  (assert (= temp___279 (bvsub current_time1 o7)))
+  (assert (= temp___279 (bvsub current_time1 o11)))
 
 ;; H
-  (assert (and (= o8 counter1) (in_range2 counter1)))
+  (assert (and (= o12 counter1) (in_range2 counter1)))
 
 ;; H
-  (assert (= result5 (ite (bvult current_time1 o8) true false)))
+  (assert (= result5 (ite (bvult current_time1 o12) true false)))
 
 ;; H
-  (assert (=> (= result5 true) (= o9 (bvadd temp___279 ((_ int2bv 8) 50)))))
+  (assert (=> (= result5 true) (= o13 (bvadd temp___279 ((_ int2bv 8) 50)))))
 
 ;; H
-  (assert (=> (not (= result5 true)) (= o9 temp___279)))
+  (assert (=> (not (= result5 true)) (= o13 temp___279)))
 
 ;; H
-  (assert (= o10 (select battery_level_at1 o9)))
+  (assert (= o14 (select battery_level_at1 o13)))
 
 ;; H
-  (assert (= o11 (to_rep o10)))
+  (assert (= o15 (to_rep o14)))
 
 ;; H
-  (assert (= result4 (ite (le fliteral2 o11) true false)))
+  (assert (= result4 (ite (le fliteral2 o15) true false)))
 
 ;; H
   (assert (= result4 true))

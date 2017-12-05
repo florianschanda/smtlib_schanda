@@ -1507,11 +1507,23 @@
 
 (declare-const c Int)
 
+(declare-const v volt)
+
+(declare-const m money)
+
 (declare-const o Int)
 
 (declare-const o1 Int)
 
 (declare-const o2 volt)
+
+(declare-const o3 volt)
+
+(declare-const o4 money)
+
+(declare-const o5 money)
+
+(declare-const o6 t)
 
 (declare-const result Int)
 
@@ -1520,6 +1532,14 @@
 (declare-const result1 Int)
 
 (declare-const c1 Int)
+
+(declare-const result2 volt)
+
+(declare-const v1 volt)
+
+(declare-const result3 money)
+
+(declare-const m1 money)
 
 ;; H
   (assert (and (= o (ident 5)) (in_range1 o)))

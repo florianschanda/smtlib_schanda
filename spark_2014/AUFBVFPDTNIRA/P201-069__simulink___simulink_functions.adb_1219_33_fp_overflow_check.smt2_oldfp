@@ -1135,12 +1135,33 @@
 ;; pi_over_two__def_axiom
   (assert (= pi_over_two fliteral3))
 
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) (/ 0.0 10.0))))
-
 (declare-const result__ t)
+
+(declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const o3 t)
+
+(declare-const o4 t)
+
+(declare-const o5 t)
+
+(declare-const o6 t)
+
+(declare-const o7 t)
+
+(declare-const o8 t)
+
+(declare-const result t)
+
+(declare-const result__1 t)
+
+(declare-const result1 t)
+
+(declare-const result__2 t)
 
 ;; H
   (assert (tqtisFinite left))
@@ -1156,6 +1177,11 @@
 
 ;; H
   (assert (tqtisFinite pi_over_two))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) (/ 0.0 10.0))))
 
 ;; H
   (assert (not (and (eq left fliteral4) (eq right fliteral4))))

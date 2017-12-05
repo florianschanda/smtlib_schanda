@@ -1239,6 +1239,44 @@
 
 (declare-const res t)
 
+(declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const floating_point__angle_between__ba_dot_bc__assume t)
+
+(declare-const o3 t)
+
+(declare-const o4 t)
+
+(declare-const o5 t)
+
+(declare-const o6 t)
+
+(declare-const floating_point__angle_between__length_ba__assume t)
+
+(declare-const o7 t)
+
+(declare-const o8 t)
+
+(declare-const o9 t)
+
+(declare-const o10 t)
+
+(declare-const floating_point__angle_between__length_bc__assume t)
+
+(declare-const o11 t)
+
+(declare-const o12 t)
+
+(declare-const o13 t)
+
+(declare-const result t)
+
+(declare-const res1 t)
+
 ;; H
   (assert (in_range2 a_x))
 

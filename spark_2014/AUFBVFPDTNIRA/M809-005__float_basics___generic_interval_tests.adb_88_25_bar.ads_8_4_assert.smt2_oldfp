@@ -1125,21 +1125,6 @@
                                      (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_51)))
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 5.0)))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 10.0)))
-
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) (/ 0.0 10.0))))
-
 (declare-const o t)
 
 (declare-const result Bool)
@@ -1149,6 +1134,16 @@
 
 ;; H
   (assert (tqtisFinite y))
+
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 5.0)))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 10.0)))
 
 ;; H
   (assert
@@ -1163,6 +1158,11 @@
 
 ;; H
   (assert (= result true))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) (/ 0.0 10.0))))
 
 (assert
 ;; WP_parameter_def

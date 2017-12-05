@@ -1100,10 +1100,35 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic t1 : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic result : t
+
+logic t2 : t
+
+axiom H : tqtisFinite(x)
+
+axiom H1 : tqtisFinite(y)
+
+axiom H2 : tqtisFinite(z)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 10.0))
+
+axiom H3 : ((le(x, z) and le(z, y)) and ((le(neg(fliteral1), x) and le(x,
+  fliteral1)) and (eq(y, add(NearestTiesToEven, x, fliteral)) and
+  (eq(roundToIntegral(Down, z), x) and eq(roundToIntegral(Up, z), y)))))
+
+axiom H4 : ((o1 = add(NearestTiesToEven, x, y)) and
+  tqtisFinite(add(NearestTiesToEven, x, y)))
 
 logic fliteral2 : t
 
@@ -1111,10 +1136,4 @@ axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 2.0))
 
  (* File "testfloat.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:t. (tqtisFinite(x) -> (tqtisFinite(y) -> (tqtisFinite(z) ->
-  (((le(x, z) and le(z, y)) and ((le(neg(fliteral1), x) and le(x,
-  fliteral1)) and (eq(y, add(NearestTiesToEven, x, fliteral)) and
-  (eq(roundToIntegral(Down, z), x) and eq(roundToIntegral(Up, z), y))))) ->
-  (((o = add(NearestTiesToEven, x, y)) and tqtisFinite(add(NearestTiesToEven,
-  x, y))) -> (not is_zero(fliteral2))))))))
+goal WP_parameter_def : (not is_zero(fliteral2))

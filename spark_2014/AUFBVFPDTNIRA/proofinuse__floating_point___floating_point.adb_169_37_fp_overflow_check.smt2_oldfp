@@ -1237,13 +1237,6 @@
                (add RNE1 (mul RNE1 (sub RNE1 b_x c_x) (sub RNE1 b_x c_x))
                (mul RNE1 (sub RNE1 b_y c_y) (sub RNE1 b_y c_y))))))
 
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral5)
-  (= (tqtreal fliteral5) (/ 1000000047497451305389404296875.0 1000000000000000000000000000000000.0))))
-
 (declare-const res t)
 
 (declare-const o t)
@@ -1273,6 +1266,16 @@
 (declare-const o10 t)
 
 (declare-const floating_point__angle_between__length_bc__assume t)
+
+(declare-const o11 t)
+
+(declare-const o12 t)
+
+(declare-const o13 t)
+
+(declare-const result t)
+
+(declare-const res1 t)
 
 ;; H
   (assert (in_range2 a_x))
@@ -1414,6 +1417,13 @@
 
 ;; H
   (assert (tqtisFinite length_bc))
+
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral5)
+  (= (tqtreal fliteral5) (/ 1000000047497451305389404296875.0 1000000000000000000000000000000000.0))))
 
 ;; H
   (assert (lt fliteral5 length_ba))

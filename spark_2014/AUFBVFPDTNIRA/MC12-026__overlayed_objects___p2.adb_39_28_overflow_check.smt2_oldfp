@@ -1488,6 +1488,30 @@
 
 (declare-const full_s__split_fields integer)
 
+(declare-const full_s__split_fields1 float)
+
+(declare-const o Int)
+
+(declare-const o1 integer)
+
+(declare-const o2 integer)
+
+(declare-const o3 float)
+
+(declare-const temp___270 integer)
+
+(declare-const temp___2701 float)
+
+(declare-const o4 t)
+
+(declare-const result integer)
+
+(declare-const result1 float)
+
+(declare-const full_s__split_fields2 integer)
+
+(declare-const full_s__split_fields3 float)
+
 ;; H
   (assert (in_range1 x))
 

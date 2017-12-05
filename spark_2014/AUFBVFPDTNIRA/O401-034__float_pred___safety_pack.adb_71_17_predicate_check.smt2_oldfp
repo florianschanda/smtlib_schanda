@@ -1159,6 +1159,48 @@
 
 (declare-const res t)
 
+(declare-const safety_pack__lift_away_from_zero__result t)
+
+(declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const o3 t)
+
+(declare-const result t)
+
+(declare-const res1 t)
+
+(declare-const result1 t)
+
+(declare-const res2 t)
+
+(declare-const result2 t)
+
+(declare-const res3 t)
+
+(declare-const result3 t)
+
+(declare-const res4 t)
+
+(declare-const result4 t)
+
+(declare-const safety_pack__lift_away_from_zero__result1 t)
+
+(declare-const safety_pack__lift_away_from_zero__result2 t)
+
+(declare-const safety_pack__lift_away_from_zero__result3 t)
+
+(declare-const res5 t)
+
+(declare-const safety_pack__lift_away_from_zero__result4 t)
+
+(declare-const res6 t)
+
+(declare-const safety_pack__lift_away_from_zero__result5 t)
+
 ;; H
   (assert (in_range2 x))
 

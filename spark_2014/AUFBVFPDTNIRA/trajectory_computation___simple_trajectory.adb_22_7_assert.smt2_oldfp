@@ -1806,9 +1806,15 @@
 
 (declare-const o t)
 
+(declare-const o1 Int)
+
 (declare-const result t)
 
 (declare-const new_speed1 t)
+
+(declare-const new_speed2 t)
+
+(declare-const new_speed3 t)
 
 ;; H
   (assert (in_range2 n))
@@ -1838,6 +1844,9 @@
 
 ;; H
   (assert (= ((_ int2bv 16) n) n_bv))
+
+;; H
+  (assert true)
 
 ;; H
   (assert

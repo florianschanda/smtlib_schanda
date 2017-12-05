@@ -1121,6 +1121,24 @@
 
 (declare-const c t)
 
+(declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const result t)
+
+(declare-const a1 t)
+
+(declare-const result1 t)
+
+(declare-const b1 t)
+
+(declare-const result2 t)
+
+(declare-const c1 t)
+
 ;; H
   (assert (tqtisFinite x))
 

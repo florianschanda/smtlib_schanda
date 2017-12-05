@@ -1130,11 +1130,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
-
 (declare-const res t)
 
 (declare-const basic_contracts__average_orig__result t)
@@ -1172,58 +1167,38 @@
 ;; H
   (assert (and (<= 0 numerator) (< 0 denominator)))
 
-;; H
-  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite res)))
+(declare-const fliteral2 t)
 
-;; H
-  (assert (le fliteral2 (of_int RNE1 numerator)))
-
-;; H
-  (assert (le fliteral (of_int RNE1 denominator)))
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
 
 ;; H
   (assert
+  (and
+  (and (=> (le (neg fliteral1) fliteral1) (tqtisFinite res))
+  (and (le fliteral2 (of_int RNE1 numerator))
+  (and (le fliteral (of_int RNE1 denominator))
+  (and
+  (and
   (and (= o (div1 RNE1 (of_int RNE1 numerator) (of_int RNE1 denominator)))
   (tqtisFinite
-  (div1 RNE1 (of_int RNE1 numerator) (of_int RNE1 denominator)))))
-
-;; H
-  (assert (= (mk_t__ref result) (mk_t__ref res)))
-
-;; H
-  (assert (= res1 o))
-
-;; H
-  (assert (le fliteral2 res1))
-
-;; H
-  (assert
-  (= basic_contracts__average_orig__result1 basic_contracts__average_orig__result2))
-
-;; H
-  (assert
+  (div1 RNE1 (of_int RNE1 numerator) (of_int RNE1 denominator))))
+  (and (= (mk_t__ref result) (mk_t__ref res)) (= res1 o)))
+  (and (le fliteral2 res1)
+  (and
+  (and
+  (= basic_contracts__average_orig__result1 basic_contracts__average_orig__result2)
   (= basic_contracts__average_orig__result3 basic_contracts__average_orig__result1))
-
-;; H
-  (assert (= result1 basic_contracts__average_orig__result))
-
-;; H
-  (assert (= basic_contracts__average_orig__result1 res1))
-
-;; H
-  (assert
+  (and (= result1 basic_contracts__average_orig__result)
+  (= basic_contracts__average_orig__result1 res1))))))))
+  (and
+  (and
   (= (mk_t__ref basic_contracts__average_orig__result4) (mk_t__ref
-                                                        basic_contracts__average_orig__result2)))
-
-;; H
-  (assert (= res1 res2))
-
-;; H
-  (assert
-  (= basic_contracts__average_orig__result5 basic_contracts__average_orig__result3))
-
-;; H
-  (assert (= res3 res1))
+                                                        basic_contracts__average_orig__result2))
+  (= res1 res2))
+  (and
+  (= basic_contracts__average_orig__result5 basic_contracts__average_orig__result3)
+  (= res3 res1)))))
 
 ;; H
   (assert (= result2 basic_contracts__average_orig__result4))

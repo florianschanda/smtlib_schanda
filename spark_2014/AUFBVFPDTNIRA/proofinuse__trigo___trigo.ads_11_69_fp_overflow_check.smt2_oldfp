@@ -1105,6 +1105,16 @@
 
 (declare-const o9 t)
 
+(declare-const o10 t)
+
+(declare-const o11 t)
+
+(declare-const o12 t)
+
+(declare-const o13 t)
+
+(declare-const o14 t)
+
 ;; H
   (assert (tqtisFinite x))
 

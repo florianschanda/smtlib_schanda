@@ -1249,16 +1249,6 @@
 ;; c__def_axiom
   (assert (= c d))
 
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 30.0)))
-
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 40.0)))
-
 (declare-const x t)
 
 (declare-const y t)
@@ -1271,15 +1261,29 @@
 
 (declare-const o1 t)
 
+(declare-const o2 t)
+
 (declare-const us1 t)
 
-(declare-const o2 t)
+(declare-const o3 t)
 
 (declare-const test_dynamic_property__dyn_param__x t)
 
 (declare-const us2 t)
 
-(declare-const o3 t)
+(declare-const o4 t)
+
+(declare-const us3 t)
+
+(declare-const o5 t)
+
+(declare-const test_dynamic_property__nested__dyn_param__x t)
+
+(declare-const us4 t)
+
+(declare-const o6 t)
+
+(declare-const y1 t)
 
 (declare-const result t)
 
@@ -1295,7 +1299,13 @@
 
 (declare-const result2 t)
 
-(declare-const y1 t)
+(declare-const y2 t)
+
+(declare-const test_dynamic_property__nested__dyn_param__x1 t)
+
+(declare-const result3 t)
+
+(declare-const x4 t)
 
 ;; H
   (assert (tqtisFinite d))
@@ -1330,6 +1340,11 @@
 ;; H
   (assert (dynamic_property1 fliteral3 last1 y))
 
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 30.0)))
+
 ;; H
   (assert
   (and (= o1 (dyn_return fliteral4)) (dynamic_property fliteral last o1)))
@@ -1342,6 +1357,11 @@
 
 ;; H
   (assert (le x2 c))
+
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 40.0)))
 
 ;; H
   (assert (le (dyn_return fliteral5) c))
@@ -1359,10 +1379,10 @@
   (assert (and (= us1 y) (dynamic_property fliteral last y)))
 
 ;; H
-  (assert (= o2 y))
+  (assert (= o3 y))
 
 ;; H
-  (assert (= o2 test_dynamic_property__dyn_param__x))
+  (assert (= o3 test_dynamic_property__dyn_param__x))
 
 ;; H
   (assert (dynamic_property fliteral last
@@ -1374,17 +1394,17 @@
   fliteral3 last1 test_dynamic_property__dyn_param__x1)))
 
 ;; H
-  (assert (= o3 test_dynamic_property__dyn_param__x1))
+  (assert (= o4 test_dynamic_property__dyn_param__x1))
 
 ;; H
   (assert (= (mk_t__ref result2) (mk_t__ref y)))
 
 ;; H
-  (assert (= y1 o3))
+  (assert (= y2 o4))
 
 (assert
 ;; WP_parameter_def
  ;; File "test_dynamic_property.adb", line 40, characters 0-0
-  (not (le y1 c)))
+  (not (le y2 c)))
 (check-sat)
 (exit)

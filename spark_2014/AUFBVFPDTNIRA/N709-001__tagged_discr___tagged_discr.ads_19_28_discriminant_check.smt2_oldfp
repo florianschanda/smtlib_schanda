@@ -1236,14 +1236,14 @@
 
 (define-fun bool_eq2 ((a us_rep)
   (b us_rep)) Bool (ite (and
-                        (and
-                        (and
                         (= (to_rep2
                            (rec__tagged_discr__t__discr (us_split_discrs1 a)))
                         (to_rep2
                         (rec__tagged_discr__t__discr (us_split_discrs1 b))))
+                        (and
+                        (and
                         (= (rec__tagged_discr__t__z (us_split_fields1 a))
-                        (rec__tagged_discr__t__z (us_split_fields1 b))))
+                        (rec__tagged_discr__t__z (us_split_fields1 b)))
                         (=> (tagged_discr__t__x__pred a)
                         (= (to_rep
                            (rec__tagged_discr__t__x (us_split_fields1 a)))
@@ -1253,7 +1253,7 @@
                         (= (to_rep1
                            (rec__tagged_discr__t__y (us_split_fields1 a)))
                         (to_rep1
-                        (rec__tagged_discr__t__y (us_split_fields1 b))))))
+                        (rec__tagged_discr__t__y (us_split_fields1 b)))))))
                    true false))
 
 (declare-fun us_dispatch_eq (us_rep us_rep) Bool)

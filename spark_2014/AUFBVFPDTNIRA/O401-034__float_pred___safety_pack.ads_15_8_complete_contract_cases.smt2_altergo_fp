@@ -1133,21 +1133,68 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic res : t
+
+logic safety_pack__dead_band__result : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic result : t
+
+logic res1 : t
+
+logic result1 : t
+
+logic res2 : t
+
+logic result2 : t
+
+logic res3 : t
+
+logic result3 : t
+
+logic res4 : t
+
+logic result4 : t
+
+logic safety_pack__dead_band__result1 : t
+
+logic safety_pack__dead_band__result2 : t
+
+logic safety_pack__dead_band__result3 : t
+
+logic res5 : t
+
+logic safety_pack__dead_band__result4 : t
+
+logic res6 : t
+
+logic safety_pack__dead_band__result5 : t
+
+axiom H : tqtisFinite(value)
+
+axiom H1 : in_range2(threshold)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(value) -> (in_range2(threshold) ->
-  (((le(neg(threshold), value) and le(value, threshold)) -> (((bool_gt(value,
-  threshold) = true) -> (((bool_lt(value, neg(threshold)) = true) ->
-  (1 <= (((0 + 1) + 1) + 1))) and ((not (bool_lt(value,
-  neg(threshold)) = true)) -> (1 <= (((0 + 1) + 1) + 0))))) and
-  ((not (bool_gt(value, threshold) = true)) -> (((bool_lt(value,
-  neg(threshold)) = true) -> (1 <= (((0 + 1) + 0) + 1))) and
+goal WP_parameter_def : (((le(neg(threshold), value) and le(value,
+  threshold)) -> (((bool_gt(value, threshold) = true) -> (((bool_lt(value,
+  neg(threshold)) = true) -> (1 <= (((0 + 1) + 1) + 1))) and
   ((not (bool_lt(value, neg(threshold)) = true)) ->
-  (1 <= (((0 + 1) + 0) + 0))))))) and ((not (le(neg(threshold), value) and
-  le(value, threshold))) -> (((bool_gt(value, threshold) = true) ->
-  (((bool_lt(value, neg(threshold)) = true) ->
-  (1 <= (((0 + 0) + 1) + 1))) and ((not (bool_lt(value,
-  neg(threshold)) = true)) -> (1 <= (((0 + 0) + 1) + 0))))) and
-  ((not (bool_gt(value, threshold) = true)) -> (((bool_lt(value,
-  neg(threshold)) = true) -> (1 <= (((0 + 0) + 0) + 1))) and
+  (1 <= (((0 + 1) + 1) + 0))))) and ((not (bool_gt(value,
+  threshold) = true)) -> (((bool_lt(value, neg(threshold)) = true) ->
+  (1 <= (((0 + 1) + 0) + 1))) and ((not (bool_lt(value,
+  neg(threshold)) = true)) -> (1 <= (((0 + 1) + 0) + 0))))))) and
+  ((not (le(neg(threshold), value) and le(value, threshold))) ->
+  (((bool_gt(value, threshold) = true) -> (((bool_lt(value,
+  neg(threshold)) = true) -> (1 <= (((0 + 0) + 1) + 1))) and
   ((not (bool_lt(value, neg(threshold)) = true)) ->
-  (1 <= (((0 + 0) + 0) + 0))))))))))
+  (1 <= (((0 + 0) + 1) + 0))))) and ((not (bool_gt(value,
+  threshold) = true)) -> (((bool_lt(value, neg(threshold)) = true) ->
+  (1 <= (((0 + 0) + 0) + 1))) and ((not (bool_lt(value,
+  neg(threshold)) = true)) -> (1 <= (((0 + 0) + 0) + 0))))))))

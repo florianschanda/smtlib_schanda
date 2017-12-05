@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -65,24 +65,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort integer 0)
@@ -258,14 +258,14 @@
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and
-                        (and
-                        (and
                         (= (to_rep2
                            (rec__tagged_discr__t__discr (us_split_discrs1 a)))
                         (to_rep2
                         (rec__tagged_discr__t__discr (us_split_discrs1 b))))
+                        (and
+                        (and
                         (= (rec__tagged_discr__t__z (us_split_fields1 a))
-                        (rec__tagged_discr__t__z (us_split_fields1 b))))
+                        (rec__tagged_discr__t__z (us_split_fields1 b)))
                         (=> (tagged_discr__t__x__pred a)
                         (= (to_rep
                            (rec__tagged_discr__t__x (us_split_fields1 a)))
@@ -275,7 +275,7 @@
                         (= (to_rep1
                            (rec__tagged_discr__t__y (us_split_fields1 a)))
                         (to_rep1
-                        (rec__tagged_discr__t__y (us_split_fields1 b))))))
+                        (rec__tagged_discr__t__y (us_split_fields1 b)))))))
                    true false))
 
 (declare-fun us_dispatch_eq (us_rep us_rep) Bool)
@@ -475,18 +475,18 @@
 
 (define-fun bool_eq1 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
-                         (and
-                         (and
-                         (and
                          (= (to_rep2
                             (rec__tagged_discr__t__discr
                             (us_split_discrs2 a))) (to_rep2
                                                    (rec__tagged_discr__t__discr
                                                    (us_split_discrs2 b))))
+                         (and
+                         (and
+                         (and
                          (= (to_rep
                             (rec__tagged_discr__u1__w (us_split_fields3 a)))
                          (to_rep
-                         (rec__tagged_discr__u1__w (us_split_fields3 b)))))
+                         (rec__tagged_discr__u1__w (us_split_fields3 b))))
                          (= (rec__tagged_discr__t__z1 (us_split_fields3 a))
                          (rec__tagged_discr__t__z1 (us_split_fields3 b))))
                          (=> (tagged_discr__t__x__pred1 a)
@@ -498,7 +498,7 @@
                          (= (to_rep1
                             (rec__tagged_discr__t__y1 (us_split_fields3 a)))
                          (to_rep1
-                         (rec__tagged_discr__t__y1 (us_split_fields3 b))))))
+                         (rec__tagged_discr__t__y1 (us_split_fields3 b)))))))
                     true false))
 
 (declare-const us_tag1 Int)
@@ -741,20 +741,20 @@
 
 (define-fun bool_eq2 ((a us_rep2)
   (b us_rep2)) Bool (ite (and
-                         (and
-                         (and
-                         (and
-                         (and
-                         (and
                          (= (to_rep2
                             (rec__tagged_discr__t__discr
                             (us_split_discrs3 a))) (to_rep2
                                                    (rec__tagged_discr__t__discr
                                                    (us_split_discrs3 b))))
+                         (and
+                         (and
+                         (and
+                         (and
+                         (and
                          (= (to_rep
                             (rec__tagged_discr__u2__w (us_split_fields5 a)))
                          (to_rep
-                         (rec__tagged_discr__u2__w (us_split_fields5 b)))))
+                         (rec__tagged_discr__u2__w (us_split_fields5 b))))
                          (= (to_rep
                             (rec__tagged_discr__u2__xx (us_split_fields5 a)))
                          (to_rep
@@ -774,7 +774,7 @@
                          (= (to_rep1
                             (rec__tagged_discr__t__y2 (us_split_fields5 a)))
                          (to_rep1
-                         (rec__tagged_discr__t__y2 (us_split_fields5 b))))))
+                         (rec__tagged_discr__t__y2 (us_split_fields5 b)))))))
                     true false))
 
 (declare-const us_tag2 Int)
@@ -1938,16 +1938,13 @@
 
 (declare-const v__split_fields24 us_split_fields4)
 
-(define-fun tagged_discr__update__v__fields4 () us_split_fields (mk___split_fields
-                                                                tagged_discr__update__v__fields
-                                                                tagged_discr__update__v__fields1
-                                                                tagged_discr__update__v__fields2
-                                                                tagged_discr__update__v__fields3))
-
 ;; H
   (assert
   (= (is_zero
-     (mk___rep v__split_discrs tagged_discr__update__v__fields4 v__attr__tag)) true))
+     (mk___rep v__split_discrs
+     (mk___split_fields tagged_discr__update__v__fields
+     tagged_discr__update__v__fields1 tagged_discr__update__v__fields2
+     tagged_discr__update__v__fields3) v__attr__tag)) true))
 
 ;; H
   (assert (= result v__split_fields))
@@ -1976,14 +1973,20 @@
      v__split_fields10 v__split_fields11 v__split_fields12 v__split_fields13)
   (us_split_fields5
   (of_base1
-  (mk___rep v__split_discrs tagged_discr__update__v__fields4 v__attr__tag)))))
+  (mk___rep v__split_discrs
+  (mk___split_fields tagged_discr__update__v__fields
+  tagged_discr__update__v__fields1 tagged_discr__update__v__fields2
+  tagged_discr__update__v__fields3) v__attr__tag)))))
 
 ;; H
   (assert
   (= v__split_discrs (us_split_discrs3
                      (of_base1
                      (mk___rep v__split_discrs
-                     tagged_discr__update__v__fields4 v__attr__tag)))))
+                     (mk___split_fields tagged_discr__update__v__fields
+                     tagged_discr__update__v__fields1
+                     tagged_discr__update__v__fields2
+                     tagged_discr__update__v__fields3) v__attr__tag)))))
 
 ;; H
   (assert (= (to_rep o) 0))

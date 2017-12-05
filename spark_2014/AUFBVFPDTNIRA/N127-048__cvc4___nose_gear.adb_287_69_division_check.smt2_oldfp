@@ -1695,24 +1695,9 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS54 Int)
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral2)
-  (= (tqtreal fliteral2) (/ 175463200000000010998768562586747066234238445758819580078125.0 100000000000000000000000000000000000000000000000000000000000000.0))))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 3600000.0)))
-
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 3000.0)))
-
 (declare-const estimatedgroundvelocity t)
+
+(declare-const estimatedgroundvelocityisavailable Bool)
 
 (declare-const old_ngclicktime_memory (_ BitVec 16))
 
@@ -1804,7 +1789,11 @@
 
 (declare-const elapsed_time_h_out1 t__ref1)
 
+(declare-const relational_operator_out1 bool__ref)
+
 (declare-const avoid_div_by_zero_out1 t__ref1)
+
+(declare-const relational_operator_out1_1 bool__ref)
 
 (declare-const speed_out1 t__ref1)
 
@@ -1843,6 +1832,10 @@
 (declare-const o15 (_ BitVec 16))
 
 (declare-const o16 t)
+
+(declare-const o17 t)
+
+(declare-const o18 t)
 
 (declare-const result t__ref)
 
@@ -2020,12 +2013,57 @@
 
 (declare-const distance_km_out11 t)
 
+(declare-const result44 t__ref1)
+
+(declare-const elapsed_time_h_out11 t)
+
+(declare-const result45 bool__ref)
+
+(declare-const relational_operator_out11 Bool)
+
+(declare-const result46 t__ref1)
+
+(declare-const avoid_div_by_zero_out11 t)
+
+(declare-const result47 t__ref1)
+
+(declare-const avoid_div_by_zero_out12 t)
+
+(declare-const result48 bool__ref)
+
+(declare-const estimatedgroundvelocityisavailable1 Bool)
+
+(declare-const result49 bool__ref)
+
+(declare-const relational_operator_out1_11 Bool)
+
+;; H
+  (assert true)
+
+;; H
+  (assert true)
+
 ;; H
   (assert (tqtisFinite old_estimatedgroundvelocity_memory))
 
 ;; H
+  (assert true)
+
+;; H
+  (assert true)
+
+;; H
+  (assert true)
+
+;; H
   (assert
   (=> (le (neg fliteral1) fliteral1) (tqtisFinite estimatedgroundvelocity)))
+
+;; H
+  (assert true)
+
+;; H
+  (assert true)
 
 ;; H
   (assert
@@ -2042,6 +2080,15 @@
   (assert (=> (<= (- 2147483648) 2147483647) (in_range3 max_uint16_2_out1)))
 
 ;; H
+  (assert true)
+
+;; H
+  (assert true)
+
+;; H
+  (assert true)
+
+;; H
   (assert
   (=> (le (neg fliteral1) fliteral1) (tqtisFinite wheel_circunference_out1)))
 
@@ -2050,6 +2097,12 @@
 
 ;; H
   (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite ms_in_our1_out1)))
+
+;; H
+  (assert true)
+
+;; H
+  (assert true)
 
 ;; H
   (assert (=> (<= (- 2147483648) 2147483647) (in_range3 to_int32_left_out1)))
@@ -2087,6 +2140,9 @@
   (assert
   (=> (<= (- 2147483648) 2147483647) (in_range3
   (int__content data_type_conversion_out1))))
+
+;; H
+  (assert true)
 
 ;; H
   (assert
@@ -2140,6 +2196,15 @@
 ;; H
   (assert
   (=> (<= (- 2147483648) 2147483647) (in_range3 (int__content left_2_out1))))
+
+;; H
+  (assert true)
+
+;; H
+  (assert true)
+
+;; H
+  (assert true)
 
 ;; H
   (assert
@@ -2223,11 +2288,23 @@
 ;; H
   (assert (= result9 (mk_t__ref1 wheel_circunference_out1)))
 
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral2)
+  (= (tqtreal fliteral2) (/ 175463200000000010998768562586747066234238445758819580078125.0 100000000000000000000000000000000000000000000000000000000000000.0))))
+
 ;; H
   (assert (= wheel_circunference_out11 fliteral2))
 
 ;; H
   (assert (= result10 (mk_t__ref1 ms_in_hour_out1)))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 3600000.0)))
 
 ;; H
   (assert (= ms_in_hour_out11 fliteral3))
@@ -2422,6 +2499,11 @@
 
 ;; H
   (assert (= result30 compare_to_constant_out1))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 3000.0)))
 
 ;; H
   (assert

@@ -1609,28 +1609,15 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral4)
-  (= (tqtreal fliteral4) (/ 3276800048828125.0 1000000000000.0))))
-
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 10.0)))
-
-(declare-const fliteral6 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) 20.0)))
-
 (declare-const value t)
 
 (declare-const x t)
 
 (declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const o2 t)
 
 (declare-const result t)
 
@@ -1639,6 +1626,13 @@
 (declare-const result1 t)
 
 (declare-const x2 t)
+
+(declare-const result2 t)
+
+(declare-const x3 t)
+
+;; H
+  (assert true)
 
 ;; H
   (assert (in_range2 scale))
@@ -1652,8 +1646,25 @@
 ;; H
   (assert (= result x))
 
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral4)
+  (= (tqtreal fliteral4) (/ 3276800048828125.0 1000000000000.0))))
+
 ;; H
   (assert (= x1 (div1 RNE1 (of_ubv16 RNE1 raw_in) fliteral4)))
+
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 10.0)))
+
+(declare-const fliteral6 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) 20.0)))
 
 ;; H
   (assert

@@ -2345,6 +2345,40 @@
                                      (neg1 fliteral3) fliteral3))
                                      (tqtisFinite1 temp___expr_57)))
 
+(declare-const d (Array Int long_float))
+
+(declare-const o long_float)
+
+(declare-const o1 (Array Int long_float))
+
+(declare-const o2 long_float)
+
+(declare-const o3 (Array Int long_float))
+
+(declare-const o4 long_float)
+
+(declare-const o5 (Array Int long_float))
+
+(declare-const o6 long_float)
+
+(declare-const o7 (Array Int long_float))
+
+(declare-const result (Array Int long_float))
+
+(declare-const d1 (Array Int long_float))
+
+(declare-const result1 (Array Int long_float))
+
+(declare-const d2 (Array Int long_float))
+
+(declare-const result2 (Array Int long_float))
+
+(declare-const d3 (Array Int long_float))
+
+(declare-const result3 (Array Int long_float))
+
+(declare-const d4 (Array Int long_float))
+
 ;; H
   (assert
   (forall ((i Int))

@@ -1183,10 +1183,138 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
+(declare-const x1 t)
+
+(declare-const x2 t)
+
+(declare-const x3 t)
+
+(declare-const x4 t)
+
+(declare-const x5 t)
+
+(declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const o3 t)
+
+(declare-const o4 t)
+
+(declare-const o5 t)
+
+(declare-const result t)
+
+(declare-const x11 t)
+
+(declare-const result1 t)
+
+(declare-const x12 t)
+
+(declare-const result2 t)
+
+(declare-const x21 t)
+
+(declare-const result3 t)
+
+(declare-const x22 t)
+
+(declare-const result4 t)
+
+(declare-const x31 t)
+
+(declare-const result5 t)
+
+(declare-const x32 t)
+
+(declare-const result6 t)
+
+(declare-const x41 t)
+
+(declare-const result7 t)
+
+(declare-const x42 t)
+
+;; H
+  (assert (tqtisFinite x))
+
+;; H
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite x1)))
+
+;; H
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite x2)))
+
+;; H
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite x3)))
+
+;; H
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite x4)))
+
+;; H
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite x5)))
+
+;; H
+  (assert (= result x1))
+
+;; H
+  (assert (= x11 fliteral1))
+
+;; H
+  (assert
+  (and (= o (oadd x11 x11)) (and (tqtisFinite o) (= o (add RNE1 x11 x11)))))
+
+;; H
+  (assert (= result1 x11))
+
+;; H
+  (assert (= x12 o))
+
+;; H
+  (assert (= result2 x2))
+
+;; H
+  (assert (= x21 fliteral1))
+
+;; H
+  (assert
+  (and (= o1 (osubtract (neg x21) x21))
+  (and (tqtisFinite o1) (= o1 (sub RNE1 (neg x21) x21)))))
+
+;; H
+  (assert (= result3 x21))
+
+;; H
+  (assert (= x22 o1))
+
+;; H
+  (assert (= result4 x3))
+
+;; H
+  (assert (= x31 fliteral1))
+
+;; H
+  (assert
+  (and (= o2 (omultiply x31 x31))
+  (and (tqtisFinite o2) (= o2 (mul RNE1 x31 x31)))))
+
+;; H
+  (assert (= result5 x31))
+
+;; H
+  (assert (= x32 o2))
+
+;; H
+  (assert (= result6 x4))
+
 (declare-const fliteral3 t)
 
 ;; fliteral_axiom
   (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 3.0)))
+
+;; H
+  (assert (= x41 fliteral3))
 
 (assert
 ;; WP_parameter_def

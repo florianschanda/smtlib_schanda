@@ -1427,12 +1427,6 @@
 
 (declare-const shapes5__make_circle__result11 us_rep)
 
-(define-fun shapes5__make_circle__result12 () us_rep (mk___rep
-                                                     (mk___split_fields
-                                                     shapes5__make_circle__result3
-                                                     shapes5__make_circle__result4
-                                                     shapes5__make_circle__result5)))
-
 ;; H
   (assert (in_range3 x))
 
@@ -1522,7 +1516,12 @@
   (assert (= shapes5__make_circle__result8 shapes5__make_circle__result5))
 
 ;; H
-  (assert (= shapes5__make_circle__result9 shapes5__make_circle__result12))
+  (assert
+  (= shapes5__make_circle__result9 (mk___rep
+                                   (mk___split_fields
+                                   shapes5__make_circle__result3
+                                   shapes5__make_circle__result4
+                                   shapes5__make_circle__result5))))
 
 ;; H
   (assert (= (to_rep1 o4) r5))
@@ -1562,8 +1561,13 @@
 
 ;; H
   (assert
-  (= shapes5__make_circle__result12 (mk___rep
-                                    (mk___split_fields o10 o11 o12))))
+  (= (mk___rep
+     (mk___split_fields shapes5__make_circle__result3
+     shapes5__make_circle__result4 shapes5__make_circle__result5)) (mk___rep
+                                                                   (mk___split_fields
+                                                                   o10
+                                                                   o11
+                                                                   o12))))
 
 ;; H
   (assert

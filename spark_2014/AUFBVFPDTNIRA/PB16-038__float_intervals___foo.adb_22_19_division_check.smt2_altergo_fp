@@ -1153,6 +1153,16 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic y : t
+
+logic o : t
+
+logic o1 : t
+
+axiom H : in_range2(x)
+
+axiom H1 : (le(neg(fliteral1), fliteral1) -> in_range3(y))
+
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
@@ -1163,9 +1173,9 @@ logic fliteral3 : t
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 0.0025000000000000000520417042793042128323577344417572021484375))
 
+axiom H2 : (not (le(fliteral2, x) and le(x, fliteral3)))
+
+axiom H3 : (not (le(neg(fliteral3), x) and le(x, neg(fliteral2))))
+
  (* File "foo.adb", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall y:t. (in_range2(x) -> ((le(neg(fliteral1), fliteral1) ->
-  in_range3(y)) -> ((not (le(fliteral2, x) and le(x, fliteral3))) ->
-  ((not (le(neg(fliteral3), x) and le(x, neg(fliteral2)))) ->
-  (not is_zero(x)))))))
+goal WP_parameter_def : (not is_zero(x))

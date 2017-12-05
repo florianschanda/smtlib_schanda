@@ -42,17 +42,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -67,24 +67,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
@@ -99,17 +99,17 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
-(define-fun is_plus_infinity1 ((x Float64)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isPositive  x)))
+(define-fun is_plus_infinity1 ((x Float64)) Bool (and (fp.isInfinite x)
+                                                 (fp.isPositive x)))
 
-(define-fun is_minus_infinity1 ((x Float64)) Bool (and (fp.isInfinite  x)
-                                                  (fp.isNegative  x)))
+(define-fun is_minus_infinity1 ((x Float64)) Bool (and (fp.isInfinite x)
+                                                  (fp.isNegative x)))
 
-(define-fun is_plus_zero1 ((x Float64)) Bool (and (fp.isZero      x)
-                                             (fp.isPositive  x)))
+(define-fun is_plus_zero1 ((x Float64)) Bool (and (fp.isZero x)
+                                             (fp.isPositive x)))
 
-(define-fun is_minus_zero1 ((x Float64)) Bool (and (fp.isZero      x)
-                                              (fp.isNegative  x)))
+(define-fun is_minus_zero1 ((x Float64)) Bool (and (fp.isZero x)
+                                              (fp.isNegative x)))
 
 (declare-fun of_int2 (RoundingMode Int) Float64)
 
@@ -125,20 +125,20 @@
                                               (<= i 9007199254740992)))
 
 (define-fun same_sign1 ((x Float64)
-  (y Float64)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float64)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign1 ((x Float64)
-  (y Float64)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float64)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign1 ((z Float64) (x Float64)
-  (y Float64)) Bool (and (=> (same_sign1 x y) (fp.isPositive  z))
-                    (=> (diff_sign1 x y) (fp.isNegative  z))))
+  (y Float64)) Bool (and (=> (same_sign1 x y) (fp.isPositive z))
+                    (=> (diff_sign1 x y) (fp.isNegative z))))
 
 (define-fun same_sign_real1 ((x Float64)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 Float64)))))
 (declare-fun to_float32 (Int) Float32)
@@ -635,11 +635,33 @@
 
 (declare-const z3 Float32)
 
+(declare-const u t)
+
 (declare-const o Int)
 
 (declare-const o1 Int)
 
 (declare-const o2 Int)
+
+(declare-const o3 Int)
+
+(declare-const o4 Int)
+
+(declare-const o5 Int)
+
+(declare-const o6 t)
+
+(declare-const o7 t)
+
+(declare-const o8 t)
+
+(declare-const o9 t)
+
+(declare-const o10 t)
+
+(declare-const o11 t)
+
+(declare-const o12 t)
 
 (declare-const result Float32)
 
@@ -660,6 +682,42 @@
 (declare-const result4 Int)
 
 (declare-const y21 Int)
+
+(declare-const result5 Int)
+
+(declare-const y31 Int)
+
+(declare-const result6 Int)
+
+(declare-const y32 Int)
+
+(declare-const result7 t)
+
+(declare-const u1 t)
+
+(declare-const result8 t)
+
+(declare-const u2 t)
+
+(declare-const result9 t)
+
+(declare-const u3 t)
+
+(declare-const result10 t)
+
+(declare-const u4 t)
+
+(declare-const result11 t)
+
+(declare-const u5 t)
+
+(declare-const result12 t)
+
+(declare-const u6 t)
+
+(declare-const result13 t)
+
+(declare-const u7 t)
 
 ;; H
   (assert (and (<= (- 80) (to_fixed1 x)) (<= (to_fixed1 x) 80)))

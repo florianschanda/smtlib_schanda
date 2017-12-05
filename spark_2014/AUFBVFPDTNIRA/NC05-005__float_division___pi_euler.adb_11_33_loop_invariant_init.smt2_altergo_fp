@@ -1067,7 +1067,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1177,28 +1177,80 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic index : int
+
+logic pi : t
+
+logic erreur : t
+
+logic o : t
+
+logic o1 : int
+
+logic result : t
+
+logic pi1 : t
+
+logic result1 : int
+
+logic index1 : int
+
+logic result2 : t
+
+logic erreur1 : t
+
+logic index2 : int
+
+logic pi2 : t
+
+logic erreur2 : t
+
+logic result3 : t
+
+logic erreur3 : t
+
+logic result4 : t
+
+logic pi3 : t
+
+logic result5 : int
+
+logic index3 : int
+
+axiom H : ((1 <= 2147483647) -> in_range3(index))
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0))
+
+axiom H1 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(pi))
+
+axiom H2 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(erreur))
+
+axiom H3 : (result = pi)
 
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.0e-1))
 
+axiom H4 : (pi1 = fliteral2)
+
+axiom H5 : (result1 = index)
+
+axiom H6 : (index1 = 1)
+
+axiom H7 : (result2 = erreur)
+
+axiom H8 : (erreur1 = fliteral)
+
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 0.0000000800000000000000016738048664102778140261307271430268883705139160156250))
 
+axiom H9 : (not lt(erreur1, fliteral3))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall index:int. forall pi:t. forall erreur:t. forall result:t.
-  forall pi1:t. forall result1:int. forall index1:int. forall result2:t.
-  forall erreur1:t. (((1 <= 2147483647) -> in_range3(index)) ->
-  ((le(neg(fliteral1), fliteral1) -> tqtisFinite(pi)) -> ((le(neg(fliteral1),
-  fliteral1) -> tqtisFinite(erreur)) -> (((result = pi) and
-  (pi1 = fliteral2)) -> (((result1 = index) and (index1 = 1)) ->
-  (((result2 = erreur) and (erreur1 = fliteral)) -> ((not lt(erreur1,
-  fliteral3)) -> (1 <= index1)))))))))
+goal WP_parameter_def : (1 <= index1)

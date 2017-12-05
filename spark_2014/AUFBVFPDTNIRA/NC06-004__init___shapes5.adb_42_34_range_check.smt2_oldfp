@@ -1379,6 +1379,14 @@
 
 (declare-const delta_y t)
 
+(declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const result t)
+
+(declare-const delta_x1 t)
+
 ;; H
   (assert (in_range2 x))
 

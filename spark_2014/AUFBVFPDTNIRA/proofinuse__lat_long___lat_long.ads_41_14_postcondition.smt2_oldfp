@@ -1408,17 +1408,6 @@
      (=> (eq x fliteral7) (eq result fliteral7))) (dynamic_invariant1 result
      true false true)))) :pattern ((sin1 x)) )))
 
-(declare-const fliteral8 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral8) (= (tqtreal fliteral8) (/ 63674445.0 10.0))))
-
-(declare-const fliteral9 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral9) (= (tqtreal fliteral9) 40007832.0)))
-
 (declare-const lat_long__delta_long_in_meters__result t)
 
 (declare-const o t)
@@ -1464,6 +1453,12 @@
   (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source)))
   fliteral3)) (le fliteral4 o))))))
 
+(declare-const fliteral8 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral8) (= (tqtreal fliteral8) (/ 63674445.0 10.0))))
+
 ;; H
   (assert
   (= o1 (div1 RNE1
@@ -1495,6 +1490,11 @@
 
 ;; H
   (assert (= result1 lat_long__delta_long_in_meters__result4))
+
+(declare-const fliteral9 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral9) (= (tqtreal fliteral9) 40007832.0)))
 
 (assert
 ;; WP_parameter_def

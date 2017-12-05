@@ -1249,10 +1249,114 @@
 ;; c__def_axiom
   (assert (= c d))
 
+(declare-const x t)
+
+(declare-const y t)
+
+(declare-const test_dynamic_property__c__assume t)
+
+(declare-const us t)
+
+(declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const us1 t)
+
+(declare-const o3 t)
+
+(declare-const test_dynamic_property__dyn_param__x t)
+
+(declare-const us2 t)
+
+(declare-const o4 t)
+
+(declare-const us3 t)
+
+(declare-const o5 t)
+
+(declare-const test_dynamic_property__nested__dyn_param__x t)
+
+(declare-const us4 t)
+
+(declare-const o6 t)
+
+(declare-const y1 t)
+
+(declare-const result t)
+
+(declare-const x1 t)
+
+(declare-const result1 t)
+
+(declare-const x2 t)
+
+(declare-const x3 t)
+
+(declare-const test_dynamic_property__dyn_param__x1 t)
+
+(declare-const result2 t)
+
+(declare-const y2 t)
+
+(declare-const test_dynamic_property__nested__dyn_param__x1 t)
+
+(declare-const result3 t)
+
+(declare-const x4 t)
+
+;; H
+  (assert (tqtisFinite d))
+
+;; H
+  (assert (and (le fliteral d) (le d fliteral2)))
+
+;; H
+  (assert (and (= test_dynamic_property__c__assume d) (tqtisFinite d)))
+
+;; H
+  (assert (= test_dynamic_property__c__assume c))
+
+;; H
+  (assert (in_range2 c))
+
+;; H
+  (assert (and (= us c) (dynamic_property fliteral last c)))
+
+;; H
+  (assert (= o c))
+
+;; H
+  (assert (= result x))
+
+;; H
+  (assert (= x1 o))
+
+;; H
+  (assert (dynamic_property fliteral last x1))
+
+;; H
+  (assert (dynamic_property1 fliteral3 last1 y))
+
 (declare-const fliteral4 t)
 
 ;; fliteral_axiom
   (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 30.0)))
+
+;; H
+  (assert
+  (and (= o1 (dyn_return fliteral4)) (dynamic_property fliteral last o1)))
+
+;; H
+  (assert (= result1 x1))
+
+;; H
+  (assert (= x2 o1))
+
+;; H
+  (assert (le x2 c))
 
 (assert
 ;; WP_parameter_def

@@ -1952,6 +1952,8 @@
 
 (declare-const deceleration_curve__print_curve__L_3__R4b__assume Int)
 
+(declare-const o t)
+
 (declare-const result Int)
 
 (declare-const i1 Int)

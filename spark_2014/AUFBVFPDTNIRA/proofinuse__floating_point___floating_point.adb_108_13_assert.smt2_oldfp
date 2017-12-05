@@ -2165,13 +2165,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-const fliteral4 t1)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite1 fliteral4)
-  (= (tqtreal1 fliteral4) 340282346638528859811704183484516925440.0)))
-
 (declare-const tmp t1)
 
 (declare-const result t1)
@@ -2192,6 +2185,13 @@
 
 ;; H
   (assert (= tmp1 (to_float64 RNE1 x)))
+
+(declare-const fliteral4 t1)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite1 fliteral4)
+  (= (tqtreal1 fliteral4) 340282346638528859811704183484516925440.0)))
 
 (assert
 ;; WP_parameter_def

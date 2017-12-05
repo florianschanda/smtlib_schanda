@@ -1092,13 +1092,32 @@ logic copy : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic result : t
+
+logic x1 : t
+
+axiom H : tqtisFinite(x)
+
+axiom H1 : (x = copy)
+
+axiom H2 : tqtisFinite(copy)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
+axiom H3 : le(fliteral1, x)
+
+axiom H4 : le(x, fliteral)
+
  (* File "hard_stuff.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:t. (tqtisFinite(x) -> ((x = copy) -> (tqtisFinite(copy) ->
-  ((le(fliteral1, x) and le(x, fliteral)) ->
-  tqtisFinite(mul(NearestTiesToEven, x, x)))))))
+goal WP_parameter_def : tqtisFinite(mul(NearestTiesToEven, x, x))

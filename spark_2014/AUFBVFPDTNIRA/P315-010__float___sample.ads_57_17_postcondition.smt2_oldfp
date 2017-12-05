@@ -1173,18 +1173,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 10.0)))
-
-(declare-const fliteral6 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral6)
-  (= (tqtreal fliteral6) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
-
 (declare-const time t)
 
 (declare-const tmp t)
@@ -1213,11 +1201,23 @@
 ;; H
   (assert (tqtisFinite time))
 
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 10.0)))
+
 ;; H
   (assert (and (lt fliteral2 time) (lt time fliteral5)))
 
 ;; H
   (assert (= (mk_t__ref result) (mk_t__ref tmp)))
+
+(declare-const fliteral6 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral6)
+  (= (tqtreal fliteral6) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
 
 ;; H
   (assert (= tmp1 (mul RNE1 fliteral6 nb)))

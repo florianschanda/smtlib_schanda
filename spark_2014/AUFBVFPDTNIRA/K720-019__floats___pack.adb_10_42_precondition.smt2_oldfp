@@ -1111,6 +1111,30 @@
      (and (eq result (add RNE1 r1 r2)) (dynamic_invariant result true false
      true)))) :pattern ((add1 r1 r2)) )))
 
+(declare-const pack__associativity_test__result Bool)
+
+(declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const o3 t)
+
+(declare-const o4 Bool)
+
+(declare-const result Bool)
+
+(declare-const pack__associativity_test__result1 Bool)
+
+(declare-const pack__associativity_test__result2 Bool)
+
+(declare-const pack__associativity_test__result3 Bool)
+
+(declare-const pack__associativity_test__result4 Bool)
+
+(declare-const pack__associativity_test__result5 Bool)
+
 (declare-const fliteral2 t)
 
 ;; fliteral_axiom
@@ -1125,19 +1149,17 @@
   (and (tqtisFinite fliteral3)
   (= (tqtreal fliteral3) (/ 3000000119209289550781250.0 10000000000000000000000000.0))))
 
+;; H
+  (assert
+  (and (= o1 (add1 fliteral2 fliteral3))
+  (and (tqtisFinite o1) (eq o1 (add RNE1 fliteral2 fliteral3)))))
+
 (declare-const fliteral4 t)
 
 ;; fliteral_axiom
   (assert
   (and (tqtisFinite fliteral4)
   (= (tqtreal fliteral4) (/ 100000001490116119384765625.0 1000000000000000000000000000.0))))
-
-(declare-const o t)
-
-;; H
-  (assert
-  (and (= o (add1 fliteral2 fliteral3))
-  (and (tqtisFinite o) (eq o (add RNE1 fliteral2 fliteral3)))))
 
 (assert
 ;; WP_parameter_def

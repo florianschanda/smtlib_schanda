@@ -2009,6 +2009,8 @@
 
 (declare-const o1 Int)
 
+(declare-const o2 Int)
+
 ;; H
   (assert (dynamic_property 0 256 (to_rep elements__first)
   (to_rep elements__last)))

@@ -1123,6 +1123,24 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
+(declare-const numerics__Oadd__result t)
+
+(declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const result t)
+
+(declare-const numerics__Oadd__result1 t)
+
+(declare-const numerics__Oadd__result2 t)
+
+(declare-const numerics__Oadd__result3 t)
+
+(declare-const numerics__Oadd__result4 t)
+
+(declare-const numerics__Oadd__result5 t)
+
 ;; H
   (assert (tqtisFinite left))
 

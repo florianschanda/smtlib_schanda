@@ -1137,6 +1137,12 @@
 
 (declare-const foo__double_tests__sqrt_comedy_1__result Bool)
 
+(declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const o2 Bool)
+
 (declare-const result Bool)
 
 (declare-const foo__double_tests__sqrt_comedy_1__result1 Bool)

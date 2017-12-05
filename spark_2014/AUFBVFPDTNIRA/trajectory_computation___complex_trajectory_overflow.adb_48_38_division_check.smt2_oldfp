@@ -1806,11 +1806,6 @@
 ;; n_bv__def_axiom
   (assert (= n_bv ((_ int2bv 16) n)))
 
-(declare-const fliteral7 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral7) (= (tqtreal fliteral7) 2.0)))
-
 (declare-const speed t)
 
 (declare-const distance t)
@@ -1819,11 +1814,43 @@
 
 (declare-const o t)
 
-(declare-const o1 t)
+(declare-const o1 Int)
+
+(declare-const o2 Int)
+
+(declare-const o3 Int)
+
+(declare-const o4 t)
+
+(declare-const o5 t)
+
+(declare-const o6 t)
+
+(declare-const o7 Int)
 
 (declare-const result t)
 
 (declare-const speed1 t)
+
+(declare-const result1 t)
+
+(declare-const average1 t)
+
+(declare-const result2 t)
+
+(declare-const distance1 t)
+
+(declare-const speed2 t)
+
+(declare-const distance2 t)
+
+(declare-const average2 t)
+
+(declare-const speed3 t)
+
+(declare-const distance3 t)
+
+(declare-const average3 t)
 
 ;; H
   (assert (in_range2 n))
@@ -1862,6 +1889,9 @@
 
 ;; H
   (assert (= ((_ int2bv 16) n) n_bv))
+
+;; H
+  (assert true)
 
 ;; H
   (assert
@@ -1926,8 +1956,13 @@
 
 ;; H
   (assert
-  (and (= o1 (add RNE1 old_speed speed1)) (tqtisFinite
+  (and (= o4 (add RNE1 old_speed speed1)) (tqtisFinite
   (add RNE1 old_speed speed1))))
+
+(declare-const fliteral7 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral7) (= (tqtreal fliteral7) 2.0)))
 
 (assert
 ;; WP_parameter_def

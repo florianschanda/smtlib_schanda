@@ -1300,28 +1300,6 @@
                                       fliteral5))) :pattern ((m_per_s_from_km_per_h
                                                              speed)) )))
 
-(declare-const fliteral6 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) 10.0)))
-
-(declare-const fliteral7 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral7)
-  (= (tqtreal fliteral7) (/ 100000001490116119384765625.0 1000000000000000000000000000.0))))
-
-(declare-const fliteral8 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral8) (= (tqtreal fliteral8) 100.0)))
-
-(declare-const fliteral9 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral9) (= (tqtreal fliteral9) 5.0)))
-
 (declare-const speed t)
 
 (declare-const delta_speed t)
@@ -1332,7 +1310,25 @@
 
 (declare-const o1 t)
 
-(declare-const o2 t)
+(declare-const o2 Bool)
+
+(declare-const o3 t)
+
+(declare-const o4 t)
+
+(declare-const o5 t)
+
+(declare-const o6 t)
+
+(declare-const o7 t)
+
+(declare-const o8 t)
+
+(declare-const o9 t)
+
+(declare-const o10 t)
+
+(declare-const o11 Int)
 
 (declare-const result t)
 
@@ -1352,6 +1348,14 @@
 
 (declare-const delta_speed2 t)
 
+(declare-const result3 t)
+
+(declare-const speed3 t)
+
+(declare-const result4 Int)
+
+(declare-const distance3 Int)
+
 ;; H
   (assert (tqtisFinite maximum_valid_speed))
 
@@ -1366,6 +1370,11 @@
 
 ;; H
   (assert (tqtisFinite acceleration))
+
+(declare-const fliteral6 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) 10.0)))
 
 ;; H
   (assert
@@ -1400,6 +1409,13 @@
 ;; H
   (assert (lt final_speed speed1))
 
+(declare-const fliteral7 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral7)
+  (= (tqtreal fliteral7) (/ 100000001490116119384765625.0 1000000000000000000000000000.0))))
+
 ;; H
   (assert (lt fliteral7 speed1))
 
@@ -1413,17 +1429,29 @@
 ;; H
   (assert
   (and
+  (and
   (and (=> (le (neg fliteral1) fliteral1) (tqtisFinite delta_speed1))
   (=> (<= 0 2147483647) (in_range3 distance2)))
-  (=> (le (neg fliteral1) fliteral1) (tqtisFinite speed2))))
+  (=> (le (neg fliteral1) fliteral1) (tqtisFinite speed2)))
+  (and (lt final_speed speed2) (lt fliteral7 speed2))))
 
 ;; H
   (assert
   (and (lt fliteral3 (div1 RNE1 fliteral speed2)) (lt
   (div1 RNE1 fliteral speed2) fliteral6)))
 
+(declare-const fliteral8 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral8) (= (tqtreal fliteral8) 100.0)))
+
 ;; H
   (assert (le (neg fliteral8) (div1 RNE1 acceleration speed2)))
+
+(declare-const fliteral9 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral9) (= (tqtreal fliteral9) 5.0)))
 
 ;; H
   (assert (le (neg fliteral2)
@@ -1431,20 +1459,20 @@
 
 ;; H
   (assert
-  (and (= o (div1 RNE1 acceleration speed2)) (tqtisFinite
+  (and (= o7 (div1 RNE1 acceleration speed2)) (tqtisFinite
   (div1 RNE1 acceleration speed2))))
 
 ;; H
-  (assert (= o1 (mul RNE1 o fliteral9)))
+  (assert (= o8 (mul RNE1 o7 fliteral9)))
 
 ;; H
-  (assert (and (= o2 o1) (tqtisFinite o1)))
+  (assert (and (= o9 o8) (tqtisFinite o8)))
 
 ;; H
   (assert (= delta_speed1 result2))
 
 ;; H
-  (assert (= delta_speed2 o2))
+  (assert (= delta_speed2 o9))
 
 ;; H
   (assert

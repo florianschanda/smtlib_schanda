@@ -1514,59 +1514,6 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range2 temp___expr_15)))
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral2)
-  (= (tqtreal fliteral2) (/ 233999996185302734375.0 10000000000000000000.0))))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral3)
-  (= (tqtreal fliteral3) (/ 198999996185302734375.0 10000000000000000000.0))))
-
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) (/ 0.0 10.0))))
-
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 2.0)))
-
-(declare-const fliteral6 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) 3.0)))
-
-(declare-const fliteral7 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral7) (= (tqtreal fliteral7) 4.0)))
-
-(declare-const fliteral8 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral8) (= (tqtreal fliteral8) 5.0)))
-
-(declare-const fliteral9 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral9)
-  (= (tqtreal fliteral9) (/ 9999999974752427078783512115478515625.0 10000000000000000000000000000000000000000000.0))))
-
-(declare-const fliteral10 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral10)
-  (= (tqtreal fliteral10) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
-
 (declare-const small (Array Int float))
 
 (declare-const a t)
@@ -1604,6 +1551,8 @@
 (declare-const o11 t)
 
 (declare-const o12 Bool)
+
+(declare-const o13 t)
 
 (declare-const result t)
 
@@ -1658,6 +1607,13 @@
 ;; H
   (assert (= result a))
 
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral2)
+  (= (tqtreal fliteral2) (/ 233999996185302734375.0 10000000000000000000.0))))
+
 ;; H
   (assert (= a1 fliteral2))
 
@@ -1667,6 +1623,13 @@
 ;; H
   (assert (= result1 b))
 
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral3)
+  (= (tqtreal fliteral3) (/ 198999996185302734375.0 10000000000000000000.0))))
+
 ;; H
   (assert (= b1 fliteral3))
 
@@ -1675,6 +1638,31 @@
 
 ;; H
   (assert (= result2 small))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) (/ 0.0 10.0))))
+
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 2.0)))
+
+(declare-const fliteral6 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) 3.0)))
+
+(declare-const fliteral7 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral7) (= (tqtreal fliteral7) 4.0)))
+
+(declare-const fliteral8 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral8) (= (tqtreal fliteral8) 5.0)))
 
 ;; H
   (assert
@@ -1710,6 +1698,13 @@
 
 ;; H
   (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite approx)))
+
+(declare-const fliteral9 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral9)
+  (= (tqtreal fliteral9) (/ 9999999974752427078783512115478515625.0 10000000000000000000000000000000000000000000.0))))
 
 ;; H
   (assert (= (mul RNE1 fliteral9 c13b) tolerance))
@@ -1760,6 +1755,13 @@
 
 ;; H
   (assert (=> (= result7 true) (and (= o6 o5) (tqtisFinite o5))))
+
+(declare-const fliteral10 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral10)
+  (= (tqtreal fliteral10) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
 
 ;; H
   (assert (=> (= result7 true) (= o7 (mul RNE1 fliteral10 o6))))

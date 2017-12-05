@@ -1456,24 +1456,24 @@
 
 (define-fun bool_eq6 ((a us_rep)
   (b us_rep)) Bool (ite (and
-                        (and
                         (= (to_rep5
                            (rec__robot_iface__speed_option__opt
                            (us_split_discrs1 a))) (to_rep5
                                                   (rec__robot_iface__speed_option__opt
                                                   (us_split_discrs1 b))))
+                        (and
                         (=> (robot_iface__speed_option__modulus__pred a)
                         (= (to_rep2
                            (rec__robot_iface__speed_option__modulus
                            (us_split_fields1 a))) (to_rep2
                                                   (rec__robot_iface__speed_option__modulus
-                                                  (us_split_fields1 b))))))
+                                                  (us_split_fields1 b)))))
                         (=> (robot_iface__speed_option__angle__pred a)
                         (= (to_rep2
                            (rec__robot_iface__speed_option__angle
                            (us_split_fields1 a))) (to_rep2
                                                   (rec__robot_iface__speed_option__angle
-                                                  (us_split_fields1 b))))))
+                                                  (us_split_fields1 b)))))))
                    true false))
 
 (declare-const value__size1 Int)

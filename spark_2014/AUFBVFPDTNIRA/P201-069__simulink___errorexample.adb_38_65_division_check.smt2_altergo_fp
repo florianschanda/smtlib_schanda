@@ -160,18 +160,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -2346,7 +2346,37 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic relative_error : t
+
+logic abs_out1 : t
+
+logic result : t
+
+logic abs_out11 : t
+
+logic result1 : t
+
+logic relative_error1 : t
+
+logic relative_error2 : t
+
+logic abs_out12 : t
+
+logic relative_error3 : t
+
+logic abs_out13 : t
+
+axiom H : true
+
+axiom H1 : in_range1(calculated_force)
+
+axiom H2 : true
+
+axiom H3 : (not (requested_force = of_int(0)))
+
+axiom H4 : true
+
+axiom H5 : (not (requested_force = of_int(0)))
+
  (* File "errorexample.ads", line 22, characters 0-0 *)
-goal WP_parameter_def : (in_range1(calculated_force) ->
-  ((not (requested_force = of_int(0))) ->
-  ((not (requested_force = of_int(0))) -> (not (requested_force = zeros)))))
+goal WP_parameter_def : (not (requested_force = zeros))

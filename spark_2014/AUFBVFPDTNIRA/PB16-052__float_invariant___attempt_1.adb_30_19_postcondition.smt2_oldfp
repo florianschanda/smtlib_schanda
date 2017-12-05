@@ -1239,11 +1239,6 @@
      (= (high_bound n1) (mul RNE1 (mul RNE1 (of_int RNE1 n1) fliteral2)
                         fliteral3))) :pattern ((high_bound n1)) )))
 
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 2.0)))
-
 (declare-const new_speed t)
 
 (declare-const average t)
@@ -1253,6 +1248,8 @@
 (declare-const o1 t)
 
 (declare-const o2 t)
+
+(declare-const o3 Int)
 
 (declare-const result t)
 
@@ -1305,6 +1302,11 @@
   (assert
   (and (= o1 (add RNE1 old_speed new_speed1)) (tqtisFinite
   (add RNE1 old_speed new_speed1))))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 2.0)))
 
 ;; H
   (assert (= o2 (div1 RNE1 o1 fliteral4)))

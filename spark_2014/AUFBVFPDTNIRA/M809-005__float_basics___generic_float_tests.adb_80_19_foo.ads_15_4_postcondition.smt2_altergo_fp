@@ -1120,27 +1120,56 @@ logic b : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic foo__double_tests__underflow_1__result : t
+
+logic o : t
+
+logic result : t
+
+logic foo__double_tests__underflow_1__result1 : t
+
+logic foo__double_tests__underflow_1__result2 : t
+
+logic foo__double_tests__underflow_1__result3 : t
+
+logic foo__double_tests__underflow_1__result4 : t
+
+logic foo__double_tests__underflow_1__result5 : t
+
+logic result1 : t
+
+axiom H : tqtisFinite(a)
+
+axiom H1 : tqtisFinite(b)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
+axiom H2 : (lt(fliteral1, a) and lt(fliteral1, b))
+
+axiom H3 :
+  (foo__double_tests__underflow_1__result1 = foo__double_tests__underflow_1__result2)
+
+axiom H4 :
+  (foo__double_tests__underflow_1__result3 = foo__double_tests__underflow_1__result1)
+
+axiom H5 : ((o = div(NearestTiesToEven, a, b)) and
+  tqtisFinite(div(NearestTiesToEven, a, b)))
+
+axiom H6 : (result = foo__double_tests__underflow_1__result)
+
+axiom H7 : (foo__double_tests__underflow_1__result1 = o)
+
+axiom H8 :
+  (foo__double_tests__underflow_1__result4 = foo__double_tests__underflow_1__result2)
+
+axiom H9 :
+  (foo__double_tests__underflow_1__result5 = foo__double_tests__underflow_1__result3)
+
+axiom H10 : (result1 = foo__double_tests__underflow_1__result4)
+
  (* File "generic_float_tests.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall foo__double_tests__underflow_1__result:t. forall o:t.
-  forall result:t. forall foo__double_tests__underflow_1__result1:t.
-  forall foo__double_tests__underflow_1__result2:t.
-  forall foo__double_tests__underflow_1__result3:t.
-  forall foo__double_tests__underflow_1__result4:t.
-  forall foo__double_tests__underflow_1__result5:t.
-  (forall result1:t. ((tqtisFinite(a) and (tqtisFinite(b) and ((lt(fliteral1,
-  a) and lt(fliteral1, b)) and
-  (((((foo__double_tests__underflow_1__result1 = foo__double_tests__underflow_1__result2) and
-  (foo__double_tests__underflow_1__result3 = foo__double_tests__underflow_1__result1)) and
-  (((o = div(NearestTiesToEven, a, b)) and tqtisFinite(div(NearestTiesToEven,
-  a, b))) and ((result = foo__double_tests__underflow_1__result) and
-  (foo__double_tests__underflow_1__result1 = o)))) and
-  ((foo__double_tests__underflow_1__result4 = foo__double_tests__underflow_1__result2) and
-  (foo__double_tests__underflow_1__result5 = foo__double_tests__underflow_1__result3))) and
-  (result1 = foo__double_tests__underflow_1__result4))))) -> lt(fliteral1,
-  foo__double_tests__underflow_1__result4))))
+goal WP_parameter_def : lt(fliteral1,
+  foo__double_tests__underflow_1__result4)

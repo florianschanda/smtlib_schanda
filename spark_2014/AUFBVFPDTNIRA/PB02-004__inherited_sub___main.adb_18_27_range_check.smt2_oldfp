@@ -1259,18 +1259,18 @@
 
 (define-fun bool_eq2 ((a us_rep)
   (b us_rep)) Bool (ite (and
-                        (and
                         (= (to_rep3
                            (rec__rec__my_rec__e (us_split_discrs1 a)))
                         (to_rep3 (rec__rec__my_rec__e (us_split_discrs1 b))))
+                        (and
                         (=> (rec__my_rec__x__pred a)
                         (= (to_rep1
                            (rec__rec__my_rec__x (us_split_fields1 a)))
-                        (to_rep1 (rec__rec__my_rec__x (us_split_fields1 b))))))
+                        (to_rep1 (rec__rec__my_rec__x (us_split_fields1 b)))))
                         (=> (rec__my_rec__y__pred a)
                         (= (to_rep2
                            (rec__rec__my_rec__y (us_split_fields1 a)))
-                        (to_rep2 (rec__rec__my_rec__y (us_split_fields1 b))))))
+                        (to_rep2 (rec__rec__my_rec__y (us_split_fields1 b)))))))
                    true false))
 
 (declare-const value__size Int)
@@ -1805,6 +1805,8 @@
                                       (us_split_discrs3 temp___expr_161)))
                                       (rec__rec__sub_rec_ok__plop
                                       (us_split_fields3 temp___expr_161)))))
+
+(declare-const us Int)
 
 ;; H
   (assert (in_range1 a))

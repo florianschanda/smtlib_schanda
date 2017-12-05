@@ -1109,11 +1109,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS7 Int)
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
-
 (declare-const smoothed_value t)
 
 (declare-const abs_delta_out1 t)
@@ -1169,6 +1164,11 @@
 
 ;; H
   (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite smoothed_value)))
+
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
 
 ;; H
   (assert

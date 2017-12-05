@@ -1726,6 +1726,8 @@
                                   (select temp___243 i)))))))))) :pattern (
   (has_same_delimiters sfun1 sfun2)) )))
 
+(declare-const sec_3_13_2_monitoring_inputs__kdry_rst__result t)
+
 (declare-const o float)
 
 (declare-const o1 function_range)
@@ -1761,6 +1763,26 @@
 (declare-const temp___316 num_delimiters_range)
 
 (declare-const temp___3161 (Array Int us_rep))
+
+(declare-const o16 Int)
+
+(declare-const o17 t)
+
+(declare-const o18 Int)
+
+(declare-const o19 t)
+
+(declare-const result t)
+
+(declare-const sec_3_13_2_monitoring_inputs__kdry_rst__result1 t)
+
+(declare-const sec_3_13_2_monitoring_inputs__kdry_rst__result2 t)
+
+(declare-const sec_3_13_2_monitoring_inputs__kdry_rst__result3 t)
+
+(declare-const sec_3_13_2_monitoring_inputs__kdry_rst__result4 t)
+
+(declare-const sec_3_13_2_monitoring_inputs__kdry_rst__result5 t)
 
 ;; H
   (assert (= (to_rep o4) fliteral2))

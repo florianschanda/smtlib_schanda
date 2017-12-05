@@ -1358,13 +1358,6 @@
                                       (neg fliteral1) fliteral1))
                                       (tqtisFinite temp___expr_202)))
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral2)
-  (= (tqtreal fliteral2) (/ 20000000298023223876953125.0 100000000000000000000000000.0))))
-
 (declare-const battery_level_at (Array (_ BitVec 8) battery_level_type))
 
 (declare-const current_time (_ BitVec 8))
@@ -1372,6 +1365,12 @@
 (declare-const res (_ BitVec 8))
 
 (declare-const s (_ BitVec 8))
+
+(declare-const failsafe__model__time_below_threshold__result (_ BitVec 8))
+
+(declare-const temp___256 (_ BitVec 8))
+
+(declare-const temp___255 (_ BitVec 8))
 
 (declare-const o (_ BitVec 8))
 
@@ -1382,6 +1381,52 @@
 (declare-const o3 (_ BitVec 8))
 
 (declare-const o4 (_ BitVec 8))
+
+(declare-const o5 (_ BitVec 8))
+
+(declare-const temp___257 (_ BitVec 8))
+
+(declare-const o6 (_ BitVec 8))
+
+(declare-const o7 (_ BitVec 8))
+
+(declare-const temp___259 (_ BitVec 8))
+
+(declare-const o8 (_ BitVec 8))
+
+(declare-const o9 (_ BitVec 8))
+
+(declare-const o10 battery_level_type)
+
+(declare-const o11 t)
+
+(declare-const o12 (_ BitVec 8))
+
+(declare-const o13 (_ BitVec 8))
+
+(declare-const o14 (_ BitVec 8))
+
+(declare-const temp___266 (_ BitVec 8))
+
+(declare-const o15 (_ BitVec 8))
+
+(declare-const o16 (_ BitVec 8))
+
+(declare-const temp___268 (_ BitVec 8))
+
+(declare-const o17 (_ BitVec 8))
+
+(declare-const o18 (_ BitVec 8))
+
+(declare-const temp___265 (_ BitVec 8))
+
+(declare-const o19 (_ BitVec 8))
+
+(declare-const o20 (_ BitVec 8))
+
+(declare-const o21 battery_level_type)
+
+(declare-const o22 t)
 
 (declare-const result (_ BitVec 8))
 
@@ -1402,6 +1447,82 @@
 (declare-const s2 (_ BitVec 8))
 
 (declare-const result4 Bool)
+
+(declare-const result5 Bool)
+
+(declare-const result6 (_ BitVec 8))
+
+(declare-const s3 (_ BitVec 8))
+
+(declare-const result7 Bool)
+
+(declare-const result8 (_ BitVec 8))
+
+(declare-const res4 (_ BitVec 8))
+
+(declare-const s4 (_ BitVec 8))
+
+(declare-const s5 (_ BitVec 8))
+
+(declare-const res5 (_ BitVec 8))
+
+(declare-const s6 (_ BitVec 8))
+
+(declare-const res6 (_ BitVec 8))
+
+(declare-const s7 (_ BitVec 8))
+
+(declare-const res7 (_ BitVec 8))
+
+(declare-const s8 (_ BitVec 8))
+
+(declare-const res8 (_ BitVec 8))
+
+(declare-const s9 (_ BitVec 8))
+
+(declare-const res9 (_ BitVec 8))
+
+(declare-const s10 (_ BitVec 8))
+
+(declare-const res10 (_ BitVec 8))
+
+(declare-const s11 (_ BitVec 8))
+
+(declare-const res11 (_ BitVec 8))
+
+(declare-const s12 (_ BitVec 8))
+
+(declare-const res12 (_ BitVec 8))
+
+(declare-const s13 (_ BitVec 8))
+
+(declare-const result9 (_ BitVec 8))
+
+(declare-const failsafe__model__time_below_threshold__result1 (_ BitVec 8))
+
+(declare-const failsafe__model__time_below_threshold__result2 (_ BitVec 8))
+
+(declare-const failsafe__model__time_below_threshold__result3 (_ BitVec 8))
+
+(declare-const res13 t__ref)
+
+(declare-const s14 t__ref)
+
+(declare-const failsafe__model__time_below_threshold__result4 t__ref)
+
+(declare-const res14 (_ BitVec 8))
+
+(declare-const s15 (_ BitVec 8))
+
+(declare-const failsafe__model__time_below_threshold__result5 (_ BitVec 8))
+
+(declare-const result10 Bool)
+
+(declare-const result11 Bool)
+
+(declare-const result12 Bool)
+
+(declare-const result13 Bool)
 
 ;; H
   (assert (in_range2 current_time))
@@ -1441,6 +1562,13 @@
 ;; H
   (assert (= o2 (to_rep o1)))
 
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral2)
+  (= (tqtreal fliteral2) (/ 20000000298023223876953125.0 100000000000000000000000000.0))))
+
 ;; H
   (assert (= result2 (ite (lt o2 fliteral2) true false)))
 
@@ -1464,25 +1592,25 @@
 ;; H
   (assert
   (ite (bvuge current_time (bvsub res3 ((_ int2bv 8) 1)))
-  (forall ((s3 (_ BitVec 8)))
+  (forall ((s16 (_ BitVec 8)))
   (=>
   (and
   (bvule (let ((temp___261 (bvsub current_time (bvsub res3 ((_ int2bv 8) 1)))))
          (ite (bvult current_time (bvsub res3 ((_ int2bv 8) 1)))
-         (bvadd temp___261 ((_ int2bv 8) 50)) temp___261)) s3)
-  (bvule s3 current_time)) (lt (to_rep (select battery_level_at s3))
+         (bvadd temp___261 ((_ int2bv 8) 50)) temp___261)) s16)
+  (bvule s16 current_time)) (lt (to_rep (select battery_level_at s16))
   fliteral2)))
   (and
-  (forall ((s3 (_ BitVec 8)))
-  (=> (and (bvule ((_ int2bv 8) 0) s3) (bvule s3 current_time)) (lt
-  (to_rep (select battery_level_at s3)) fliteral2)))
-  (forall ((s3 (_ BitVec 8)))
+  (forall ((s16 (_ BitVec 8)))
+  (=> (and (bvule ((_ int2bv 8) 0) s16) (bvule s16 current_time)) (lt
+  (to_rep (select battery_level_at s16)) fliteral2)))
+  (forall ((s16 (_ BitVec 8)))
   (=>
   (and
   (bvule (let ((temp___262 (bvsub current_time (bvsub res3 ((_ int2bv 8) 1)))))
          (ite (bvult current_time (bvsub res3 ((_ int2bv 8) 1)))
-         (bvadd temp___262 ((_ int2bv 8) 50)) temp___262)) s3)
-  (bvule s3 ((_ int2bv 8) 49))) (lt (to_rep (select battery_level_at s3))
+         (bvadd temp___262 ((_ int2bv 8) 50)) temp___262)) s16)
+  (bvule s16 ((_ int2bv 8) 49))) (lt (to_rep (select battery_level_at s16))
   fliteral2))))))
 
 ;; H

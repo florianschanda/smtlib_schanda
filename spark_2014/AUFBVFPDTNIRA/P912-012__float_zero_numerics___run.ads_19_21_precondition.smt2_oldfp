@@ -1130,6 +1130,29 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
+(declare-const y t)
+
+(declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const result t)
+
+(declare-const y1 t)
+
+(declare-const y2 t)
+
+(declare-const y3 t)
+
+;; H
+  (assert (in_range1 x1))
+
+;; H
+  (assert (in_range1 x2))
+
+;; H
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite y)))
+
 (assert
 ;; WP_parameter_def
  ;; File "run.ads", line 15, characters 0-0

@@ -1533,13 +1533,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-const fliteral1 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral1)
-  (= (tqtreal fliteral1) (/ 1000000000000000020816681711721685132943093776702880859375.0 100000000000000000000000000000000000000000000000000000000000.0))))
-
 (declare-const relative_error (_ BitVec 32))
 
 (declare-const abs_out1 (_ BitVec 32))
@@ -1561,41 +1554,36 @@
 (declare-const abs_out13 (_ BitVec 32))
 
 ;; H
+  (assert true)
+
+;; H
   (assert (in_range1 calculated_force))
 
 ;; H
-  (assert (not (= requested_force ((_ int2bv 32) 0))))
+  (assert true)
 
 ;; H
   (assert (not (= requested_force ((_ int2bv 32) 0))))
 
-;; H
-  (assert (= (mk_t__ref result) (mk_t__ref abs_out1)))
+(declare-const fliteral1 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral1)
+  (= (tqtreal fliteral1) (/ 1000000000000000020816681711721685132943093776702880859375.0 100000000000000000000000000000000000000000000000000000000000.0))))
 
 ;; H
   (assert
+  (and
+  (and (not (= requested_force ((_ int2bv 32) 0)))
+  (and
+  (and (= (mk_t__ref result) (mk_t__ref abs_out1))
   (= abs_out11 (bvudiv (bvsub requested_force calculated_force) requested_force)))
-
-;; H
-  (assert (le (of_ubv32 RNE1 abs_out11) fliteral1))
-
-;; H
-  (assert (= (mk_t__ref result1) (mk_t__ref relative_error)))
-
-;; H
-  (assert (= relative_error1 abs_out11))
-
-;; H
-  (assert (= abs_out11 abs_out12))
-
-;; H
-  (assert (= relative_error1 relative_error2))
-
-;; H
-  (assert (= abs_out13 abs_out11))
-
-;; H
-  (assert (= relative_error3 relative_error1))
+  (and (le (of_ubv32 RNE1 abs_out11) fliteral1)
+  (and (= (mk_t__ref result1) (mk_t__ref relative_error))
+  (= relative_error1 abs_out11)))))
+  (and (and (= abs_out11 abs_out12) (= relative_error1 relative_error2))
+  (and (= abs_out13 abs_out11) (= relative_error3 relative_error1)))))
 
 (assert
 ;; WP_parameter_def

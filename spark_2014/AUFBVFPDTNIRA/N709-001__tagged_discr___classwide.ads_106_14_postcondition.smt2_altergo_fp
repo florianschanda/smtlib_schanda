@@ -1037,7 +1037,7 @@ type t__ref = { t__content : t
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -1851,152 +1851,480 @@ axiom is_zero__2__def_axiom :
   v2; rec__ext__ = v3 }; attr__tag = v4 }) = true) <-> (((not (v = true)) and
   (to_rep(v1) = 0)) and eq(to_rep1(v2), fliteral1))))
 
- (* File "classwide.ads", line 101, characters 0-0 *)
-goal WP_parameter_def :
-  (forall v__split_fields:integer. forall v__split_fields1:integer.
-  forall v__split_fields2:float1. forall v__split_fields3:bool.
-  forall v__split_fields4:integer. forall v__split_fields5:float1.
-  forall v__split_fields6:us_private. forall o:integer. forall o1:integer.
-  forall o2:integer. forall o3:float1. forall o4:bool. forall o5:integer.
-  forall o6:float1. forall o7:us_private. forall temp___214:integer.
-  forall temp___2141:integer. forall temp___2142:float1.
-  forall temp___2143:bool. forall temp___2144:integer.
-  forall temp___2145:float1. forall temp___2146:us_private.
-  forall temp___2147:int. forall o8:integer. forall o9:integer.
-  forall o10:integer. forall o11:float1. forall o12:bool. forall o13:integer.
-  forall o14:float1. forall o15:us_private. forall temp___216:integer.
-  forall temp___2161:integer. forall temp___2162:float1.
-  forall temp___2163:bool. forall temp___2164:integer.
-  forall temp___2165:float1. forall temp___2166:us_private.
-  forall temp___2167:int. forall o16:float1. forall o17:integer.
-  forall o18:integer. forall o19:float1. forall o20:bool. forall o21:integer.
-  forall o22:float1. forall o23:us_private. forall temp___218:integer.
-  forall temp___2181:integer. forall temp___2182:float1.
-  forall temp___2183:bool. forall temp___2184:integer.
-  forall temp___2185:float1. forall temp___2186:us_private.
-  forall temp___2187:int. forall classwide__update__v__fields:bool.
-  forall classwide__update__v__fields1:integer.
-  forall classwide__update__v__fields2:float1.
-  forall classwide__update__v__fields3:us_private. forall result:integer.
-  forall result1:integer. forall result2:float1. forall result3:bool.
-  forall result4:integer. forall result5:float1. forall result6:us_private.
-  forall v__split_fields7:integer. forall v__split_fields8:integer.
-  forall v__split_fields9:float1. forall v__split_fields10:bool.
-  forall v__split_fields11:integer. forall v__split_fields12:float1.
-  forall v__split_fields13:us_private. forall result7:integer.
-  forall result8:integer. forall result9:float1. forall result10:bool.
-  forall result11:integer. forall result12:float1.
-  forall result13:us_private. forall v__split_fields14:integer.
-  forall v__split_fields15:integer. forall v__split_fields16:float1.
-  forall v__split_fields17:bool. forall v__split_fields18:integer.
-  forall v__split_fields19:float1. forall v__split_fields20:us_private.
-  forall result14:integer. forall result15:integer. forall result16:float1.
-  forall result17:bool. forall result18:integer. forall result19:float1.
-  forall result20:us_private. forall v__split_fields21:integer.
-  forall v__split_fields22:integer. forall v__split_fields23:float1.
-  forall v__split_fields24:bool. forall v__split_fields25:integer.
-  forall v__split_fields26:float1. forall v__split_fields27:us_private.
-  forall result21:integer. forall result22:integer. forall result23:float1.
-  forall result24:bool. forall result25:integer. forall result26:float1.
-  forall result27:us_private. forall v__split_fields28:integer.
-  forall v__split_fields29:integer. forall v__split_fields30:float1.
-  forall v__split_fields31:bool. forall v__split_fields32:integer.
-  forall v__split_fields33:float1. forall v__split_fields34:us_private.
-  forall v__split_fields35:integer. forall v__split_fields36:integer.
-  forall v__split_fields37:float1. forall v__split_fields38:bool.
-  forall v__split_fields39:integer. forall v__split_fields40:float1.
-  forall v__split_fields41:us_private. forall v__split_fields42:integer.
-  forall v__split_fields43:integer. forall v__split_fields44:float1.
-  forall v__split_fields45:bool. forall v__split_fields46:integer.
-  forall v__split_fields47:float1. forall v__split_fields48:us_private.
-  (((((is_zero1({ us_split_fields1 = { rec__classwide__t__z =
+logic v__split_fields : integer
+
+logic v__split_fields1 : integer
+
+logic v__split_fields2 : float1
+
+logic v__split_fields3 : bool
+
+logic v__split_fields4 : integer
+
+logic v__split_fields5 : float1
+
+logic v__split_fields6 : us_private
+
+logic o : integer
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : float1
+
+logic o4 : bool
+
+logic o5 : integer
+
+logic o6 : float1
+
+logic o7 : us_private
+
+logic temp___214 : integer
+
+logic temp___2141 : integer
+
+logic temp___2142 : float1
+
+logic temp___2143 : bool
+
+logic temp___2144 : integer
+
+logic temp___2145 : float1
+
+logic temp___2146 : us_private
+
+logic temp___2147 : int
+
+logic o8 : integer
+
+logic o9 : integer
+
+logic o10 : integer
+
+logic o11 : float1
+
+logic o12 : bool
+
+logic o13 : integer
+
+logic o14 : float1
+
+logic o15 : us_private
+
+logic temp___216 : integer
+
+logic temp___2161 : integer
+
+logic temp___2162 : float1
+
+logic temp___2163 : bool
+
+logic temp___2164 : integer
+
+logic temp___2165 : float1
+
+logic temp___2166 : us_private
+
+logic temp___2167 : int
+
+logic o16 : float1
+
+logic o17 : integer
+
+logic o18 : integer
+
+logic o19 : float1
+
+logic o20 : bool
+
+logic o21 : integer
+
+logic o22 : float1
+
+logic o23 : us_private
+
+logic temp___218 : integer
+
+logic temp___2181 : integer
+
+logic temp___2182 : float1
+
+logic temp___2183 : bool
+
+logic temp___2184 : integer
+
+logic temp___2185 : float1
+
+logic temp___2186 : us_private
+
+logic temp___2187 : int
+
+logic classwide__update__v__fields : bool
+
+logic classwide__update__v__fields1 : integer
+
+logic classwide__update__v__fields2 : float1
+
+logic classwide__update__v__fields3 : us_private
+
+logic result : integer
+
+logic result1 : integer
+
+logic result2 : float1
+
+logic result3 : bool
+
+logic result4 : integer
+
+logic result5 : float1
+
+logic result6 : us_private
+
+logic v__split_fields7 : integer
+
+logic v__split_fields8 : integer
+
+logic v__split_fields9 : float1
+
+logic v__split_fields10 : bool
+
+logic v__split_fields11 : integer
+
+logic v__split_fields12 : float1
+
+logic v__split_fields13 : us_private
+
+logic result7 : integer
+
+logic result8 : integer
+
+logic result9 : float1
+
+logic result10 : bool
+
+logic result11 : integer
+
+logic result12 : float1
+
+logic result13 : us_private
+
+logic v__split_fields14 : integer
+
+logic v__split_fields15 : integer
+
+logic v__split_fields16 : float1
+
+logic v__split_fields17 : bool
+
+logic v__split_fields18 : integer
+
+logic v__split_fields19 : float1
+
+logic v__split_fields20 : us_private
+
+logic result14 : integer
+
+logic result15 : integer
+
+logic result16 : float1
+
+logic result17 : bool
+
+logic result18 : integer
+
+logic result19 : float1
+
+logic result20 : us_private
+
+logic v__split_fields21 : integer
+
+logic v__split_fields22 : integer
+
+logic v__split_fields23 : float1
+
+logic v__split_fields24 : bool
+
+logic v__split_fields25 : integer
+
+logic v__split_fields26 : float1
+
+logic v__split_fields27 : us_private
+
+logic result21 : integer
+
+logic result22 : integer
+
+logic result23 : float1
+
+logic result24 : bool
+
+logic result25 : integer
+
+logic result26 : float1
+
+logic result27 : us_private
+
+logic v__split_fields28 : integer
+
+logic v__split_fields29 : integer
+
+logic v__split_fields30 : float1
+
+logic v__split_fields31 : bool
+
+logic v__split_fields32 : integer
+
+logic v__split_fields33 : float1
+
+logic v__split_fields34 : us_private
+
+logic v__split_fields35 : integer
+
+logic v__split_fields36 : integer
+
+logic v__split_fields37 : float1
+
+logic v__split_fields38 : bool
+
+logic v__split_fields39 : integer
+
+logic v__split_fields40 : float1
+
+logic v__split_fields41 : us_private
+
+logic v__split_fields42 : integer
+
+logic v__split_fields43 : integer
+
+logic v__split_fields44 : float1
+
+logic v__split_fields45 : bool
+
+logic v__split_fields46 : integer
+
+logic v__split_fields47 : float1
+
+logic v__split_fields48 : us_private
+
+axiom H : (is_zero1({ us_split_fields1 = { rec__classwide__t__z =
   classwide__update__v__fields; rec__classwide__t__x =
   classwide__update__v__fields1; rec__classwide__t__y =
   classwide__update__v__fields2; rec__ext__ = classwide__update__v__fields3
-  }; attr__tag = v__attr__tag }) = true) and (((result = v__split_fields) and
-  ((result1 = v__split_fields1) and ((result2 = v__split_fields2) and
-  ((result3 = v__split_fields3) and ((result4 = v__split_fields4) and
-  ((result5 = v__split_fields5) and (result6 = v__split_fields6))))))) and ({
-  rec__classwide__u2__w = v__split_fields7; rec__classwide__u2__xx =
-  v__split_fields8; rec__classwide__u2__yy = v__split_fields9;
-  rec__classwide__t__z1 = v__split_fields10; rec__classwide__t__x1 =
-  v__split_fields11; rec__classwide__t__y1 = v__split_fields12; rec__ext__1 =
-  v__split_fields13 } = (of_base({ us_split_fields1 = {
-  rec__classwide__t__z = classwide__update__v__fields; rec__classwide__t__x =
-  classwide__update__v__fields1; rec__classwide__t__y =
-  classwide__update__v__fields2; rec__ext__ = classwide__update__v__fields3
-  }; attr__tag = v__attr__tag })).us_split_fields3))) and
-  (((((to_rep(o) = 0) and ((o = o1) and ((v__split_fields8 = o2) and
-  ((v__split_fields9 = o3) and ((v__split_fields10 = o4) and
-  ((v__split_fields11 = o5) and ((v__split_fields12 = o6) and
-  (v__split_fields13 = o7)))))))) and (((temp___214 = o1) and
-  ((temp___2141 = o2) and ((temp___2142 = o3) and ((temp___2143 = o4) and
-  ((temp___2144 = o5) and ((temp___2145 = o6) and
-  (temp___2146 = o7))))))) and (v__attr__tag = temp___2147))) and
-  (((result7 = v__split_fields7) and ((result8 = v__split_fields8) and
-  ((result9 = v__split_fields9) and ((result10 = v__split_fields10) and
-  ((result11 = v__split_fields11) and ((result12 = v__split_fields12) and
-  (result13 = v__split_fields13))))))) and
-  ((temp___214 = v__split_fields14) and
-  ((temp___2141 = v__split_fields15) and
-  ((temp___2142 = v__split_fields16) and
-  ((temp___2143 = v__split_fields17) and
-  ((temp___2144 = v__split_fields18) and
-  ((temp___2145 = v__split_fields19) and
-  (temp___2146 = v__split_fields20))))))))) and (((((to_rep(o8) = 0) and
-  ((v__split_fields14 = o9) and ((o8 = o10) and
-  ((v__split_fields16 = o11) and ((v__split_fields17 = o12) and
-  ((v__split_fields18 = o13) and ((v__split_fields19 = o14) and
-  (v__split_fields20 = o15)))))))) and (((temp___216 = o9) and
-  ((temp___2161 = o10) and ((temp___2162 = o11) and ((temp___2163 = o12) and
-  ((temp___2164 = o13) and ((temp___2165 = o14) and
-  (temp___2166 = o15))))))) and (v__attr__tag = temp___2167))) and
-  (((result14 = v__split_fields14) and ((result15 = v__split_fields15) and
-  ((result16 = v__split_fields16) and ((result17 = v__split_fields17) and
-  ((result18 = v__split_fields18) and ((result19 = v__split_fields19) and
-  (result20 = v__split_fields20))))))) and
-  ((temp___216 = v__split_fields21) and
-  ((temp___2161 = v__split_fields22) and
-  ((temp___2162 = v__split_fields23) and
-  ((temp___2163 = v__split_fields24) and
-  ((temp___2164 = v__split_fields25) and
-  ((temp___2165 = v__split_fields26) and
-  (temp___2166 = v__split_fields27))))))))) and
-  ((((to_rep1(o16) = fliteral1) and ((v__split_fields21 = o17) and
-  ((v__split_fields22 = o18) and ((o16 = o19) and
-  ((v__split_fields24 = o20) and ((v__split_fields25 = o21) and
-  ((v__split_fields26 = o22) and (v__split_fields27 = o23)))))))) and
-  (((temp___218 = o17) and ((temp___2181 = o18) and ((temp___2182 = o19) and
-  ((temp___2183 = o20) and ((temp___2184 = o21) and ((temp___2185 = o22) and
-  (temp___2186 = o23))))))) and (v__attr__tag = temp___2187))) and
-  (((result21 = v__split_fields21) and ((result22 = v__split_fields22) and
-  ((result23 = v__split_fields23) and ((result24 = v__split_fields24) and
-  ((result25 = v__split_fields25) and ((result26 = v__split_fields26) and
-  (result27 = v__split_fields27))))))) and
-  ((temp___218 = v__split_fields28) and
-  ((temp___2181 = v__split_fields29) and
-  ((temp___2182 = v__split_fields30) and
-  ((temp___2183 = v__split_fields31) and
-  ((temp___2184 = v__split_fields32) and
-  ((temp___2185 = v__split_fields33) and
-  (temp___2186 = v__split_fields34)))))))))))) and
-  (((v__split_fields35 = v__split_fields28) and
+  }; attr__tag = v__attr__tag }) = true)
+
+axiom H1 : (result = v__split_fields)
+
+axiom H2 : (result1 = v__split_fields1)
+
+axiom H3 : (result2 = v__split_fields2)
+
+axiom H4 : (result3 = v__split_fields3)
+
+axiom H5 : (result4 = v__split_fields4)
+
+axiom H6 : (result5 = v__split_fields5)
+
+axiom H7 : (result6 = v__split_fields6)
+
+axiom H8 : ({ rec__classwide__u2__w = v__split_fields7;
+  rec__classwide__u2__xx = v__split_fields8; rec__classwide__u2__yy =
+  v__split_fields9; rec__classwide__t__z1 = v__split_fields10;
+  rec__classwide__t__x1 = v__split_fields11; rec__classwide__t__y1 =
+  v__split_fields12; rec__ext__1 = v__split_fields13 } = (of_base({
+  us_split_fields1 = { rec__classwide__t__z = classwide__update__v__fields;
+  rec__classwide__t__x = classwide__update__v__fields1;
+  rec__classwide__t__y = classwide__update__v__fields2; rec__ext__ =
+  classwide__update__v__fields3 }; attr__tag = v__attr__tag
+  })).us_split_fields3)
+
+axiom H9 : (to_rep(o) = 0)
+
+axiom H10 : (o = o1)
+
+axiom H11 : (v__split_fields8 = o2)
+
+axiom H12 : (v__split_fields9 = o3)
+
+axiom H13 : (v__split_fields10 = o4)
+
+axiom H14 : (v__split_fields11 = o5)
+
+axiom H15 : (v__split_fields12 = o6)
+
+axiom H16 : (v__split_fields13 = o7)
+
+axiom H17 : (temp___214 = o1)
+
+axiom H18 : (temp___2141 = o2)
+
+axiom H19 : (temp___2142 = o3)
+
+axiom H20 : (temp___2143 = o4)
+
+axiom H21 : (temp___2144 = o5)
+
+axiom H22 : (temp___2145 = o6)
+
+axiom H23 : (temp___2146 = o7)
+
+axiom H24 : (v__attr__tag = temp___2147)
+
+axiom H25 : (result7 = v__split_fields7)
+
+axiom H26 : (result8 = v__split_fields8)
+
+axiom H27 : (result9 = v__split_fields9)
+
+axiom H28 : (result10 = v__split_fields10)
+
+axiom H29 : (result11 = v__split_fields11)
+
+axiom H30 : (result12 = v__split_fields12)
+
+axiom H31 : (result13 = v__split_fields13)
+
+axiom H32 : (temp___214 = v__split_fields14)
+
+axiom H33 : (temp___2141 = v__split_fields15)
+
+axiom H34 : (temp___2142 = v__split_fields16)
+
+axiom H35 : (temp___2143 = v__split_fields17)
+
+axiom H36 : (temp___2144 = v__split_fields18)
+
+axiom H37 : (temp___2145 = v__split_fields19)
+
+axiom H38 : (temp___2146 = v__split_fields20)
+
+axiom H39 : (to_rep(o8) = 0)
+
+axiom H40 : (v__split_fields14 = o9)
+
+axiom H41 : (o8 = o10)
+
+axiom H42 : (v__split_fields16 = o11)
+
+axiom H43 : (v__split_fields17 = o12)
+
+axiom H44 : (v__split_fields18 = o13)
+
+axiom H45 : (v__split_fields19 = o14)
+
+axiom H46 : (v__split_fields20 = o15)
+
+axiom H47 : (temp___216 = o9)
+
+axiom H48 : (temp___2161 = o10)
+
+axiom H49 : (temp___2162 = o11)
+
+axiom H50 : (temp___2163 = o12)
+
+axiom H51 : (temp___2164 = o13)
+
+axiom H52 : (temp___2165 = o14)
+
+axiom H53 : (temp___2166 = o15)
+
+axiom H54 : (v__attr__tag = temp___2167)
+
+axiom H55 : (result14 = v__split_fields14)
+
+axiom H56 : (result15 = v__split_fields15)
+
+axiom H57 : (result16 = v__split_fields16)
+
+axiom H58 : (result17 = v__split_fields17)
+
+axiom H59 : (result18 = v__split_fields18)
+
+axiom H60 : (result19 = v__split_fields19)
+
+axiom H61 : (result20 = v__split_fields20)
+
+axiom H62 : (temp___216 = v__split_fields21)
+
+axiom H63 : (temp___2161 = v__split_fields22)
+
+axiom H64 : (temp___2162 = v__split_fields23)
+
+axiom H65 : (temp___2163 = v__split_fields24)
+
+axiom H66 : (temp___2164 = v__split_fields25)
+
+axiom H67 : (temp___2165 = v__split_fields26)
+
+axiom H68 : (temp___2166 = v__split_fields27)
+
+axiom H69 : (to_rep1(o16) = fliteral1)
+
+axiom H70 : (v__split_fields21 = o17)
+
+axiom H71 : (v__split_fields22 = o18)
+
+axiom H72 : (o16 = o19)
+
+axiom H73 : (v__split_fields24 = o20)
+
+axiom H74 : (v__split_fields25 = o21)
+
+axiom H75 : (v__split_fields26 = o22)
+
+axiom H76 : (v__split_fields27 = o23)
+
+axiom H77 : (temp___218 = o17)
+
+axiom H78 : (temp___2181 = o18)
+
+axiom H79 : (temp___2182 = o19)
+
+axiom H80 : (temp___2183 = o20)
+
+axiom H81 : (temp___2184 = o21)
+
+axiom H82 : (temp___2185 = o22)
+
+axiom H83 : (temp___2186 = o23)
+
+axiom H84 : (v__attr__tag = temp___2187)
+
+axiom H85 : ((result21 = v__split_fields21) and
+  ((result22 = v__split_fields22) and ((result23 = v__split_fields23) and
+  ((result24 = v__split_fields24) and ((result25 = v__split_fields25) and
+  ((result26 = v__split_fields26) and (result27 = v__split_fields27)))))))
+
+axiom H86 : ((v__split_fields28 = temp___218) and
+  ((v__split_fields29 = temp___2181) and
+  ((v__split_fields30 = temp___2182) and
+  ((v__split_fields31 = temp___2183) and
+  ((v__split_fields32 = temp___2184) and
+  ((v__split_fields33 = temp___2185) and
+  (v__split_fields34 = temp___2186)))))))
+
+axiom H87 : ((v__split_fields35 = v__split_fields28) and
   ((v__split_fields36 = v__split_fields29) and
   ((v__split_fields37 = v__split_fields30) and
   ((v__split_fields38 = v__split_fields31) and
   ((v__split_fields39 = v__split_fields32) and
   ((v__split_fields40 = v__split_fields33) and
-  (v__split_fields41 = v__split_fields34))))))) and
-  ((v__split_fields42 = v__split_fields28) and
+  (v__split_fields41 = v__split_fields34)))))))
+
+axiom H88 : ((v__split_fields42 = v__split_fields28) and
   ((v__split_fields43 = v__split_fields29) and
   ((v__split_fields44 = v__split_fields30) and
   ((v__split_fields45 = v__split_fields31) and
   ((v__split_fields46 = v__split_fields32) and
   ((v__split_fields47 = v__split_fields33) and
-  (v__split_fields48 = v__split_fields34))))))))) -> (is_zero__3({
-  us_split_fields3 = { rec__classwide__u2__w = v__split_fields35;
-  rec__classwide__u2__xx = v__split_fields36; rec__classwide__u2__yy =
-  v__split_fields37; rec__classwide__t__z1 = v__split_fields38;
-  rec__classwide__t__x1 = v__split_fields39; rec__classwide__t__y1 =
-  v__split_fields40; rec__ext__1 = v__split_fields41 }; attr__tag1 =
-  v__attr__tag }) = true)))
+  (v__split_fields48 = v__split_fields34)))))))
+
+ (* File "classwide.ads", line 101, characters 0-0 *)
+goal WP_parameter_def : (is_zero__3({ us_split_fields3 = {
+  rec__classwide__u2__w = v__split_fields35; rec__classwide__u2__xx =
+  v__split_fields36; rec__classwide__u2__yy = v__split_fields37;
+  rec__classwide__t__z1 = v__split_fields38; rec__classwide__t__x1 =
+  v__split_fields39; rec__classwide__t__y1 = v__split_fields40; rec__ext__1 =
+  v__split_fields41 }; attr__tag1 = v__attr__tag }) = true)

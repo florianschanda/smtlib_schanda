@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -65,24 +65,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
@@ -674,6 +674,20 @@
 
 (declare-const scan_sfun2 Bool)
 
+(declare-const temp___389 Bool)
+
+(declare-const temp___387 num_delimiters_range)
+
+(declare-const temp___3871 (Array Int us_rep))
+
+(declare-const temp___386 Bool)
+
+(declare-const temp___385 Int)
+
+(declare-const temp___384 Int)
+
+(declare-const temp___383 Int)
+
 (declare-const o float)
 
 (declare-const o1 function_range)
@@ -695,6 +709,342 @@
 (declare-const temp___313 num_delimiters_range)
 
 (declare-const temp___3131 (Array Int us_rep))
+
+(declare-const i Int)
+
+(declare-const o9 Int)
+
+(declare-const o10 function_range)
+
+(declare-const o11 float)
+
+(declare-const o12 function_range)
+
+(declare-const o13 float)
+
+(declare-const o14 function_range)
+
+(declare-const o15 Int)
+
+(declare-const i3 Int)
+
+(declare-const j Int)
+
+(declare-const o16 Int)
+
+(declare-const o17 function_range)
+
+(declare-const o18 float)
+
+(declare-const o19 function_range)
+
+(declare-const o20 float)
+
+(declare-const o21 function_range)
+
+(declare-const o22 Int)
+
+(declare-const i4 Int)
+
+(declare-const j1 Int)
+
+(declare-const o23 Int)
+
+(declare-const o24 us_rep)
+
+(declare-const o25 us_split_fields)
+
+(declare-const o26 function_range)
+
+(declare-const o27 Int)
+
+(declare-const i5 Int)
+
+(declare-const j2 Int)
+
+(declare-const o28 Int)
+
+(declare-const o29 us_rep)
+
+(declare-const o30 us_split_fields)
+
+(declare-const o31 function_range)
+
+(declare-const o32 Int)
+
+(declare-const i6 Int)
+
+(declare-const j3 Int)
+
+(declare-const o33 Int)
+
+(declare-const o34 us_rep)
+
+(declare-const o35 us_split_fields)
+
+(declare-const o36 function_range)
+
+(declare-const o37 Int)
+
+(declare-const i7 Int)
+
+(declare-const o38 Int)
+
+(declare-const o39 us_rep)
+
+(declare-const o40 us_split_fields)
+
+(declare-const o41 function_range)
+
+(declare-const o42 Int)
+
+(declare-const o43 Float32)
+
+(declare-const o44 Int)
+
+(declare-const o45 us_rep)
+
+(declare-const o46 us_split_fields)
+
+(declare-const o47 function_range)
+
+(declare-const o48 Int)
+
+(declare-const o49 Float32)
+
+(declare-const o50 Float32)
+
+(declare-const o51 function_range)
+
+(declare-const o52 us_split_fields)
+
+(declare-const o53 us_rep)
+
+(declare-const o54 (Array Int us_rep))
+
+(declare-const o55 us_split_fields2)
+
+(declare-const temp___375 us_rep1)
+
+(declare-const o56 Float32)
+
+(declare-const o57 Float32)
+
+(declare-const o58 Float32)
+
+(declare-const o59 float)
+
+(declare-const o60 us_split_fields)
+
+(declare-const o61 us_rep)
+
+(declare-const o62 (Array Int us_rep))
+
+(declare-const o63 us_split_fields2)
+
+(declare-const temp___382 us_rep1)
+
+(declare-const o64 function_range)
+
+(declare-const o65 us_split_fields)
+
+(declare-const o66 us_rep)
+
+(declare-const o67 (Array Int us_rep))
+
+(declare-const o68 us_split_fields2)
+
+(declare-const temp___360 us_rep1)
+
+(declare-const o69 Float32)
+
+(declare-const o70 Float32)
+
+(declare-const o71 Float32)
+
+(declare-const o72 float)
+
+(declare-const o73 us_split_fields)
+
+(declare-const o74 us_rep)
+
+(declare-const o75 (Array Int us_rep))
+
+(declare-const o76 us_split_fields2)
+
+(declare-const temp___367 us_rep1)
+
+(declare-const o77 function_range)
+
+(declare-const o78 us_split_fields)
+
+(declare-const o79 us_rep)
+
+(declare-const o80 (Array Int us_rep))
+
+(declare-const o81 us_split_fields2)
+
+(declare-const temp___345 us_rep1)
+
+(declare-const o82 Float32)
+
+(declare-const o83 Float32)
+
+(declare-const o84 Float32)
+
+(declare-const o85 float)
+
+(declare-const o86 us_split_fields)
+
+(declare-const o87 us_rep)
+
+(declare-const o88 (Array Int us_rep))
+
+(declare-const o89 us_split_fields2)
+
+(declare-const temp___352 us_rep1)
+
+(declare-const o90 function_range)
+
+(declare-const o91 us_split_fields)
+
+(declare-const o92 us_rep)
+
+(declare-const o93 (Array Int us_rep))
+
+(declare-const o94 us_split_fields2)
+
+(declare-const temp___332 us_rep1)
+
+(declare-const o95 Float32)
+
+(declare-const o96 Float32)
+
+(declare-const o97 Float32)
+
+(declare-const o98 float)
+
+(declare-const o99 us_split_fields)
+
+(declare-const o100 us_rep)
+
+(declare-const o101 (Array Int us_rep))
+
+(declare-const o102 us_split_fields2)
+
+(declare-const temp___339 us_rep1)
+
+(declare-const o103 function_range)
+
+(declare-const o104 us_split_fields)
+
+(declare-const o105 us_rep)
+
+(declare-const o106 (Array Int us_rep))
+
+(declare-const o107 us_split_fields2)
+
+(declare-const temp___319 us_rep1)
+
+(declare-const o108 Float32)
+
+(declare-const o109 Float32)
+
+(declare-const o110 Float32)
+
+(declare-const o111 float)
+
+(declare-const o112 us_split_fields)
+
+(declare-const o113 us_rep)
+
+(declare-const o114 (Array Int us_rep))
+
+(declare-const o115 us_split_fields2)
+
+(declare-const temp___326 us_rep1)
+
+(declare-const o116 Int)
+
+(declare-const o117 float)
+
+(declare-const o118 function_range)
+
+(declare-const o119 us_split_fields)
+
+(declare-const o120 us_rep)
+
+(declare-const o121 (Array Int us_rep))
+
+(declare-const o122 us_split_fields2)
+
+(declare-const temp___3132 us_rep1)
+
+(declare-const o123 num_delimiters_range)
+
+(declare-const o124 us_split_fields2)
+
+(declare-const temp___451 us_rep1)
+
+(declare-const i8 Int)
+
+(declare-const j4 Int)
+
+(declare-const o125 Int)
+
+(declare-const o126 us_rep)
+
+(declare-const o127 us_split_fields)
+
+(declare-const o128 function_range)
+
+(declare-const o129 Int)
+
+(declare-const i9 Int)
+
+(declare-const j5 Int)
+
+(declare-const o130 Int)
+
+(declare-const o131 us_rep)
+
+(declare-const o132 us_split_fields)
+
+(declare-const o133 function_range)
+
+(declare-const o134 Int)
+
+(declare-const o135 Bool)
+
+(declare-const i10 Int)
+
+(declare-const o136 Int)
+
+(declare-const o137 us_rep)
+
+(declare-const o138 us_split_fields)
+
+(declare-const o139 function_range)
+
+(declare-const o140 Int)
+
+(declare-const o141 Float32)
+
+(declare-const o142 Int)
+
+(declare-const o143 us_rep)
+
+(declare-const o144 us_split_fields)
+
+(declare-const o145 function_range)
+
+(declare-const o146 Int)
+
+(declare-const o147 Float32)
+
+(declare-const o148 Float32)
+
+(declare-const o149 Bool)
 
 (declare-const result int__ref)
 
@@ -719,6 +1069,170 @@
 (declare-const result5 us_split_fields__ref1)
 
 (declare-const merge__split_fields2 us_split_fields2)
+
+(declare-const merge__split_fields3 us_split_fields2)
+
+(declare-const i12 Int)
+
+(declare-const i22 Int)
+
+(declare-const im2 Int)
+
+(declare-const scan_sfun12 Bool)
+
+(declare-const scan_sfun22 Bool)
+
+(declare-const result6 us_split_fields__ref1)
+
+(declare-const merge__split_fields4 us_split_fields2)
+
+(declare-const result7 us_split_fields__ref1)
+
+(declare-const merge__split_fields5 us_split_fields2)
+
+(declare-const i13 Int)
+
+(declare-const scan_sfun13 Bool)
+
+(declare-const result8 us_split_fields__ref1)
+
+(declare-const merge__split_fields6 us_split_fields2)
+
+(declare-const result9 us_split_fields__ref1)
+
+(declare-const merge__split_fields7 us_split_fields2)
+
+(declare-const i23 Int)
+
+(declare-const scan_sfun23 Bool)
+
+(declare-const result10 us_split_fields__ref1)
+
+(declare-const merge__split_fields8 us_split_fields2)
+
+(declare-const result11 us_split_fields__ref1)
+
+(declare-const merge__split_fields9 us_split_fields2)
+
+(declare-const i14 Int)
+
+(declare-const scan_sfun14 Bool)
+
+(declare-const i24 Int)
+
+(declare-const scan_sfun24 Bool)
+
+(declare-const result12 us_split_fields__ref1)
+
+(declare-const merge__split_fields10 us_split_fields2)
+
+(declare-const result13 us_split_fields__ref1)
+
+(declare-const merge__split_fields11 us_split_fields2)
+
+(declare-const i15 Int)
+
+(declare-const scan_sfun15 Bool)
+
+(declare-const result14 us_split_fields__ref1)
+
+(declare-const merge__split_fields12 us_split_fields2)
+
+(declare-const result15 us_split_fields__ref1)
+
+(declare-const merge__split_fields13 us_split_fields2)
+
+(declare-const i25 Int)
+
+(declare-const scan_sfun25 Bool)
+
+(declare-const result16 int__ref)
+
+(declare-const im3 Int)
+
+(declare-const result17 us_split_fields__ref1)
+
+(declare-const merge__split_fields14 us_split_fields2)
+
+(declare-const im4 int__ref)
+
+(declare-const im5 Int)
+
+(declare-const merge__split_fields15 us_split_fields__ref1)
+
+(declare-const i16 int__ref)
+
+(declare-const i26 int__ref)
+
+(declare-const im6 int__ref)
+
+(declare-const scan_sfun16 bool__ref)
+
+(declare-const scan_sfun26 bool__ref)
+
+(declare-const merge__split_fields16 us_split_fields2)
+
+(declare-const i17 Int)
+
+(declare-const i27 Int)
+
+(declare-const im7 Int)
+
+(declare-const scan_sfun17 Bool)
+
+(declare-const scan_sfun27 Bool)
+
+(declare-const merge__split_fields17 us_split_fields__ref1)
+
+(declare-const i18 int__ref)
+
+(declare-const i28 int__ref)
+
+(declare-const im8 int__ref)
+
+(declare-const scan_sfun18 bool__ref)
+
+(declare-const scan_sfun28 bool__ref)
+
+(declare-const merge__split_fields18 us_split_fields2)
+
+(declare-const i19 Int)
+
+(declare-const i29 Int)
+
+(declare-const im9 Int)
+
+(declare-const scan_sfun19 Bool)
+
+(declare-const scan_sfun29 Bool)
+
+(declare-const result18 us_split_fields__ref1)
+
+(declare-const merge__split_fields19 us_split_fields2)
+
+(declare-const merge__split_fields20 us_split_fields__ref1)
+
+(declare-const i110 int__ref)
+
+(declare-const i210 int__ref)
+
+(declare-const im10 int__ref)
+
+(declare-const scan_sfun110 bool__ref)
+
+(declare-const scan_sfun210 bool__ref)
+
+(declare-const merge__split_fields21 us_split_fields2)
+
+(declare-const i111 Int)
+
+(declare-const i211 Int)
+
+(declare-const im11 Int)
+
+(declare-const scan_sfun111 Bool)
+
+(declare-const scan_sfun211 Bool)
 
 ;; H
   (assert
@@ -811,28 +1325,28 @@
   (assert
   (= merge__split_fields2 (mk___split_fields1 temp___313 temp___3131)))
 
-(declare-const i Int)
+(declare-const i20 Int)
 
 ;; H
-  (assert (<= 0 i))
+  (assert (<= 0 i20))
 
 ;; H
-  (assert (<= i (- i21 1)))
+  (assert (<= i20 (- i21 1)))
 
 (assert
 ;; WP_parameter_def
  ;; File "step_function.ads", line 89, characters 0-0
   (not
-  (exists ((j Int))
-  (and (and (<= 0 j) (<= j (- im1 1)))
+  (exists ((j6 Int))
+  (and (and (<= 0 j6) (<= j6 (- im1 1)))
   (= (to_rep2
      (rec__step_function__delimiter_entry__delimiter
      (us_split_fields1
      (select (rec__step_function__step_function_t__step
-             (us_split_fields3 sfun2)) i)))) (to_rep2
-                                             (rec__step_function__delimiter_entry__delimiter
-                                             (us_split_fields1
-                                             (select (rec__step_function__step_function_t__step
-                                                     merge__split_fields2) j)))))))))
+             (us_split_fields3 sfun2)) i20)))) (to_rep2
+                                               (rec__step_function__delimiter_entry__delimiter
+                                               (us_split_fields1
+                                               (select (rec__step_function__step_function_t__step
+                                                       merge__split_fields2) j6)))))))))
 (check-sat)
 (exit)

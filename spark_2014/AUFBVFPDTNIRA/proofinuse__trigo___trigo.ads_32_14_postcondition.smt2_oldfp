@@ -1244,23 +1244,15 @@
                   (mul RNE1 (mul RNE1 (mul RNE1 (mul RNE1 x1 x1) x1) x1) x1)
                   x1) x1) x1) x1))) :pattern ((pow9 x1)) )))
 
-(declare-const fliteral10 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral10)
-  (= (tqtreal fliteral10) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
-
-(declare-const fliteral11 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral11)
-  (= (tqtreal fliteral11) (/ 999999974737875163555145263671875.0 10000000000000000000000000000000000000.0))))
-
 (declare-const trigo__tan__result t)
 
 (declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const o3 t)
 
 (declare-const result t)
 
@@ -1278,6 +1270,13 @@
 
 ;; H
   (assert (tqtisFinite x))
+
+(declare-const fliteral10 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral10)
+  (= (tqtreal fliteral10) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
 
 ;; H
   (assert (and (le (neg fliteral10) x) (le x fliteral10)))
@@ -1308,6 +1307,13 @@
 
 ;; H
   (assert (= result1 trigo__tan__result4))
+
+(declare-const fliteral11 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral11)
+  (= (tqtreal fliteral11) (/ 999999974737875163555145263671875.0 10000000000000000000000000000000000000.0))))
 
 (assert
 ;; WP_parameter_def

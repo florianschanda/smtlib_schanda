@@ -1523,15 +1523,61 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic i : int
+
+logic scan : bool
+
+logic o : int
+
+logic i1 : int
+
+logic scan1 : bool
+
+logic result : int
+
+logic i2 : int
+
+logic result1 : bool
+
+logic scan2 : bool
+
+logic i3 : int
+
+logic scan3 : bool
+
+logic i4 : int
+
+logic scan4 : bool
+
+axiom H : in_range1(i)
+
+axiom H1 : ((i <  to_rep(sfun)) -> ((o = (i + 1)) and in_range1((i + 1))))
+
+axiom H2 : ((i <  to_rep(sfun)) -> (result = i))
+
+axiom H3 : ((i <  to_rep(sfun)) -> (i2 = o))
+
+axiom H4 : ((i <  to_rep(sfun)) -> (scan2 = scan))
+
+axiom H5 : ((i <  to_rep(sfun)) -> (scan2 = scan1))
+
+axiom H6 : ((not (i <  to_rep(sfun))) -> (result1 = scan))
+
+axiom H7 : ((not (i <  to_rep(sfun))) -> (scan2 = of_int(0)))
+
+axiom H8 : ((not (i <  to_rep(sfun))) -> (i2 = i))
+
+axiom H9 : ((not (i <  to_rep(sfun))) -> (i2 = i1))
+
+axiom H10 : (scan2 = scan3)
+
+axiom H11 : (i2 = i3)
+
+axiom H12 : (scan4 = scan2)
+
+axiom H13 : (i4 = i2)
+
+axiom H14 : (i <  to_rep(sfun))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. forall scan:bool. forall o:int. forall i1:int.
-  forall scan1:bool. forall result:int. forall i2:int. forall result1:bool.
-  forall scan2:bool. forall i3:int. forall scan3:bool. forall i4:int.
-  forall scan4:bool. ((in_range1(i) and ((((i <  to_rep(sfun)) and
-  ((((o = (i + 1)) and in_range1((i + 1))) and ((result = i) and
-  (i2 = o))) and ((scan2 = scan) and (scan2 = scan1)))) or
-  ((not (i <  to_rep(sfun))) and (((result1 = scan) and
-  (scan2 = of_int(0))) and ((i2 = i) and (i2 = i1))))) and
-  (((scan2 = scan3) and (i2 = i3)) and ((scan4 = scan2) and (i4 = i2))))) ->
-  ((i <  to_rep(sfun)) -> (i3 = (i + 1)))))
+goal WP_parameter_def : (i3 = (i + 1))

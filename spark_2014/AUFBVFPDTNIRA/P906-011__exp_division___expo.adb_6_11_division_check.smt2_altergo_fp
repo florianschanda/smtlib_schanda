@@ -1088,13 +1088,21 @@ function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic x : t
+
+logic o : t
+
+logic o1 : t
+
+axiom H : tqtisFinite(x)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 3.0))
 
+axiom H1 : (le(neg(fliteral1), x) and le(x, fliteral1))
+
  (* File "expo.adb", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:t. (tqtisFinite(x) -> ((le(neg(fliteral1), x) and le(x,
-  fliteral1)) -> neq(mul(NearestTiesToEven, x, mul(NearestTiesToEven, x, x)),
-  zeroF))))
+goal WP_parameter_def : neq(mul(NearestTiesToEven, x, mul(NearestTiesToEven,
+  x, x)), zeroF)

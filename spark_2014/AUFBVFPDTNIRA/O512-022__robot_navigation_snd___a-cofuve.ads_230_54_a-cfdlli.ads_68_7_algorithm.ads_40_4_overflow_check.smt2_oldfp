@@ -1609,7 +1609,27 @@
 
 (declare-const o Int)
 
+(declare-const o1 Int)
+
+(declare-const o2 Int)
+
+(declare-const o3 Int)
+
+(declare-const o4 Int)
+
+(declare-const o5 Int)
+
+(declare-const o6 Int)
+
+(declare-const o7 Bool)
+
+(declare-const o8 Int)
+
+(declare-const o9 Int)
+
 (declare-const result Bool)
+
+(declare-const result1 Bool)
 
 ;; H
   (assert (in_range2 fst))
@@ -1622,10 +1642,10 @@
 
 ;; H
   (assert
-  (and (= o (last left)) (and (in_range3 o) (= o (+ 0 (length left))))))
+  (and (= o9 (last left)) (and (in_range3 o9) (= o9 (+ 0 (length left))))))
 
 ;; H
-  (assert (= result (ite (<= lst o) true false)))
+  (assert (= result (ite (<= lst o9) true false)))
 
 ;; H
   (assert (= result true))

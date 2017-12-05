@@ -1080,85 +1080,296 @@ logic attr__ATTRIBUTE_ADDRESS9 : int
 
 logic attr__ATTRIBUTE_ADDRESS10 : int
 
+logic t1 : t
+
+logic t2 : t
+
+logic t3 : t
+
+logic t4 : t
+
+logic t5 : t
+
+logic t6 : t
+
+logic t7 : t
+
+logic t8 : t
+
+logic t9 : t
+
+logic t10 : t
+
+logic res : t
+
+logic pi_compute__leibniz_float__result : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic o4 : t
+
+logic o5 : t
+
+logic o6 : t
+
+logic o7 : t
+
+logic o8 : t
+
+logic o9 : t
+
+logic o10 : t
+
+logic o11 : t
+
+logic o12 : t
+
+logic o13 : t
+
+logic o14 : t
+
+logic o15 : t
+
+logic o16 : t
+
+logic o17 : t
+
+logic o18 : t
+
+logic result : t
+
+logic t11 : t
+
+logic result1 : t
+
+logic t21 : t
+
+logic result2 : t
+
+logic t31 : t
+
+logic result3 : t
+
+logic t41 : t
+
+logic result4 : t
+
+logic t51 : t
+
+logic result5 : t
+
+logic t61 : t
+
+logic result6 : t
+
+logic t71 : t
+
+logic result7 : t
+
+logic t81 : t
+
+logic result8 : t
+
+logic t91 : t
+
+logic result9 : t
+
+logic t101 : t
+
+logic result10 : t
+
+logic res1 : t
+
+logic result11 : t
+
+logic pi_compute__leibniz_float__result1 : t
+
+logic pi_compute__leibniz_float__result2 : t
+
+logic pi_compute__leibniz_float__result3 : t
+
+logic t12 : t
+
+logic t22 : t
+
+logic t32 : t
+
+logic t42 : t
+
+logic t52 : t
+
+logic t62 : t
+
+logic t72 : t
+
+logic t82 : t
+
+logic t92 : t
+
+logic t102 : t
+
+logic res2 : t
+
+logic pi_compute__leibniz_float__result4 : t
+
+logic t13 : t
+
+logic t23 : t
+
+logic t33 : t
+
+logic t43 : t
+
+logic t53 : t
+
+logic t63 : t
+
+logic t73 : t
+
+logic t83 : t
+
+logic t93 : t
+
+logic t103 : t
+
+logic res3 : t
+
+logic pi_compute__leibniz_float__result5 : t
+
+axiom H : (result = t1)
+
+axiom H1 : (t11 = fliteral)
+
+axiom H2 : tqtisFinite(t11)
+
+axiom H3 : (result1 = t2)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.3333333432674407958984375))
+
+axiom H4 : (t21 = fliteral1)
+
+axiom H5 : tqtisFinite(t21)
+
+axiom H6 : (result2 = t3)
 
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.20000000298023223876953125))
 
+axiom H7 : (t31 = fliteral2)
+
+axiom H8 : tqtisFinite(t31)
+
+axiom H9 : (result3 = t4)
+
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 0.14285714924335479736328125))
+
+axiom H10 : (t41 = fliteral3)
+
+axiom H11 : tqtisFinite(t41)
+
+axiom H12 : (result4 = t5)
 
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 0.111111111938953399658203125))
 
+axiom H13 : (t51 = fliteral4)
+
+axiom H14 : tqtisFinite(t51)
+
+axiom H15 : (result5 = t6)
+
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 0.090909093618392944335937500))
+
+axiom H16 : (t61 = fliteral5)
+
+axiom H17 : tqtisFinite(t61)
+
+axiom H18 : (result6 = t7)
 
 logic fliteral6 : t
 
 axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
   (tqtreal(fliteral6) = 0.076923079788684844970703125))
 
+axiom H19 : (t71 = fliteral6)
+
+axiom H20 : tqtisFinite(t71)
+
+axiom H21 : (result7 = t8)
+
 logic fliteral7 : t
 
 axiom fliteral_axiom7 : (tqtisFinite(fliteral7) and
   (tqtreal(fliteral7) = 0.066666670143604278564453125))
+
+axiom H22 : (t81 = fliteral7)
+
+axiom H23 : tqtisFinite(t81)
+
+axiom H24 : (result8 = t9)
 
 logic fliteral8 : t
 
 axiom fliteral_axiom8 : (tqtisFinite(fliteral8) and
   (tqtreal(fliteral8) = 0.0588235296308994293212890625))
 
+axiom H25 : (t91 = fliteral8)
+
+axiom H26 : tqtisFinite(t91)
+
+axiom H27 : (result9 = t10)
+
 logic fliteral9 : t
 
 axiom fliteral_axiom9 : (tqtisFinite(fliteral9) and
   (tqtreal(fliteral9) = 0.0526315793395042419433593750))
+
+axiom H28 : (t101 = fliteral9)
+
+axiom H29 : tqtisFinite(t101)
 
 logic fliteral10 : t
 
 axiom fliteral_axiom10 : (tqtisFinite(fliteral10) and
   (tqtreal(fliteral10) = 340282346638528859811704183484516925440.0))
 
+axiom H30 : (le(neg(fliteral10), fliteral10) -> tqtisFinite(res))
+
+axiom H31 : ((o = sub(NearestTiesToEven, t11, t21)) and
+  tqtisFinite(sub(NearestTiesToEven, t11, t21)))
+
+axiom H32 : (o1 = add(NearestTiesToEven, o, t31))
+
+axiom H33 : ((o2 = o1) and tqtisFinite(o1))
+
+axiom H34 : (o3 = sub(NearestTiesToEven, o2, t41))
+
+axiom H35 : ((o4 = o3) and tqtisFinite(o3))
+
+axiom H36 : (o5 = add(NearestTiesToEven, o4, t51))
+
+axiom H37 : ((o6 = o5) and tqtisFinite(o5))
+
+axiom H38 : (o7 = sub(NearestTiesToEven, o6, t61))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall t1:t. forall t2:t. forall t3:t. forall t4:t. forall t5:t.
-  forall t6:t. forall t7:t. forall t8:t. forall t9:t. forall t10:t.
-  forall res:t. forall o:t. forall o1:t. forall o2:t. forall o3:t.
-  forall o4:t. forall o5:t. forall o6:t. forall o7:t. forall result:t.
-  forall t11:t. forall result1:t. forall t21:t. forall result2:t.
-  forall t31:t. forall result3:t. forall t41:t. forall result4:t.
-  forall t51:t. forall result5:t. forall t61:t. forall result6:t.
-  forall t71:t. forall result7:t. forall t81:t. forall result8:t.
-  forall t91:t. forall result9:t. forall t101:t. ((({ t__content = result
-  } = { t__content = t1 }) and (t11 = fliteral)) -> (tqtisFinite(t11) -> ((({
-  t__content = result1 } = { t__content = t2 }) and (t21 = fliteral1)) ->
-  (tqtisFinite(t21) -> ((({ t__content = result2 } = { t__content = t3 }) and
-  (t31 = fliteral2)) -> (tqtisFinite(t31) -> ((({ t__content = result3 } = {
-  t__content = t4 }) and (t41 = fliteral3)) -> (tqtisFinite(t41) -> ((({
-  t__content = result4 } = { t__content = t5 }) and (t51 = fliteral4)) ->
-  (tqtisFinite(t51) -> ((({ t__content = result5 } = { t__content = t6 }) and
-  (t61 = fliteral5)) -> (tqtisFinite(t61) -> ((({ t__content = result6 } = {
-  t__content = t7 }) and (t71 = fliteral6)) -> (tqtisFinite(t71) -> ((({
-  t__content = result7 } = { t__content = t8 }) and (t81 = fliteral7)) ->
-  (tqtisFinite(t81) -> ((({ t__content = result8 } = { t__content = t9 }) and
-  (t91 = fliteral8)) -> (tqtisFinite(t91) -> (((result9 = t10) and
-  (t101 = fliteral9)) -> (tqtisFinite(t101) -> ((le(neg(fliteral10),
-  fliteral10) -> tqtisFinite(res)) -> ((((((((((o = sub(NearestTiesToEven,
-  t11, t21)) and tqtisFinite(sub(NearestTiesToEven, t11, t21))) and
-  (o1 = add(NearestTiesToEven, o, t31))) and ((o2 = o1) and
-  tqtisFinite(o1))) and (o3 = sub(NearestTiesToEven, o2, t41))) and
-  ((o4 = o3) and tqtisFinite(o3))) and (o5 = add(NearestTiesToEven, o4,
-  t51))) and ((o6 = o5) and tqtisFinite(o5))) and
-  (o7 = sub(NearestTiesToEven, o6, t61))) ->
-  tqtisFinite(o7))))))))))))))))))))))))
+goal WP_parameter_def : tqtisFinite(o7)

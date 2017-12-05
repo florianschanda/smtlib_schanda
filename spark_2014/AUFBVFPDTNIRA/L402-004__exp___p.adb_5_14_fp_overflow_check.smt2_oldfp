@@ -1112,11 +1112,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 1000.0)))
-
 (declare-const x Int)
 
 (declare-const y t)
@@ -1127,11 +1122,25 @@
 
 (declare-const o2 Int)
 
+(declare-const o3 t)
+
+(declare-const o4 Int)
+
+(declare-const o5 Int)
+
+(declare-const o6 t)
+
 (declare-const result Bool)
 
 (declare-const result1 Int)
 
 (declare-const x1 Int)
+
+(declare-const result2 Bool)
+
+(declare-const result3 Int)
+
+(declare-const x2 Int)
 
 ;; H
   (assert (in_range1 x))
@@ -1144,6 +1153,11 @@
 
 ;; H
   (assert (= o1 (ite (< o 1000) true false)))
+
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 1000.0)))
 
 ;; H
   (assert

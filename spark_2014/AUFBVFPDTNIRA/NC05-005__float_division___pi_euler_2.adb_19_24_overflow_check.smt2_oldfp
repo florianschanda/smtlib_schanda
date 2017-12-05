@@ -1192,18 +1192,6 @@
                                      (<= (- 9223372036854775808) 9223372036854775807))
                                      (in_range2 temp___expr_21)))
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral3)
-  (= (tqtreal fliteral3) (/ 800000000000000016738048664102778140261307271430268883705139160156250.0 10000000000000000000000000000000000000000000000000000000000000000000000000000.0))))
-
 (declare-const index Int)
 
 (declare-const pi1 t)
@@ -1213,6 +1201,10 @@
 (declare-const index_float t)
 
 (declare-const o t)
+
+(declare-const o1 Int)
+
+(declare-const o2 t)
 
 (declare-const result t)
 
@@ -1246,6 +1238,14 @@
 
 (declare-const pi4 t)
 
+(declare-const result6 Int)
+
+(declare-const index3 Int)
+
+(declare-const result7 t)
+
+(declare-const index_float3 t)
+
 ;; H
   (assert (=> (<= 1 9223372036854775807) (in_range3 index)))
 
@@ -1260,6 +1260,11 @@
 
 ;; H
   (assert (= result pi1))
+
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
 
 ;; H
   (assert (= pi2 fliteral2))
@@ -1281,6 +1286,13 @@
 
 ;; H
   (assert (= erreur1 fliteral))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral3)
+  (= (tqtreal fliteral3) (/ 800000000000000016738048664102778140261307271430268883705139160156250.0 10000000000000000000000000000000000000000000000000000000000000000000000000000.0))))
 
 ;; H
   (assert (not (lt erreur1 fliteral3)))

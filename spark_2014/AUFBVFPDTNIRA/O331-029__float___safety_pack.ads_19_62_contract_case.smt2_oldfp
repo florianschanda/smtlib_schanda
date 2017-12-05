@@ -1121,12 +1121,12 @@
 (define-fun positive_float__ref___projection ((a positive_float__ref)) positive_float
   (positive_float__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_1294 t)
-  (temp___is_init_1291 Bool) (temp___skip_constant_1292 Bool)
-  (temp___do_toplevel_1293 Bool)) Bool (=>
-                                       (or (= temp___is_init_1291 true) (le
+(define-fun dynamic_invariant1 ((temp___expr_1288 t)
+  (temp___is_init_1285 Bool) (temp___skip_constant_1286 Bool)
+  (temp___do_toplevel_1287 Bool)) Bool (=>
+                                       (or (= temp___is_init_1285 true) (le
                                        fliteral2 fliteral1)) (in_range2
-                                       temp___expr_1294)))
+                                       temp___expr_1288)))
 
 (declare-const value t)
 
@@ -1145,6 +1145,10 @@
 (declare-const o t)
 
 (declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const o3 t)
 
 (declare-const result t)
 

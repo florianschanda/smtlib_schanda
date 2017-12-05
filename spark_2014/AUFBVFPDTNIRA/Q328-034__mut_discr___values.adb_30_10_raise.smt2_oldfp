@@ -1526,9 +1526,12 @@
   (assert
   (and (and (in_range1 int_val1) (tqtisFinite real_val1)) (in_range4 kind1)))
 
+;; H
+  (assert (not (= kind1 1)))
+
 (assert
 ;; WP_parameter_def
  ;; File "types.ads", line 5, characters 0-0
-  (not (= kind1 1)))
+  (not false))
 (check-sat)
 (exit)

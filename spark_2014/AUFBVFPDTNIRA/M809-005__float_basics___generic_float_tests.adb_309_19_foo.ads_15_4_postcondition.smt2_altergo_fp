@@ -1098,14 +1098,34 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic m : t
+
+logic result : t
+
+logic m1 : t
+
+logic m2 : t
+
+logic m3 : t
+
+axiom H : tqtisFinite(x)
+
+axiom H1 : tqtisFinite(y)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0))
 
+axiom H2 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(m))
+
+axiom H3 : (result = m)
+
+axiom H4 : (m1 = max(x, y))
+
+axiom H5 : (m1 = m2)
+
+axiom H6 : (m3 = m1)
+
  (* File "generic_float_tests.adb", line 299, characters 0-0 *)
-goal WP_parameter_def :
-  (forall m:t. forall result:t. forall m1:t. forall m2:t. forall m3:t.
-  ((tqtisFinite(x) and (tqtisFinite(y) and ((le(neg(fliteral1), fliteral1) ->
-  tqtisFinite(m)) and (((result = m) and (m1 = max(x, y))) and ((m1 = m2) and
-  (m3 = m1)))))) -> le(x, m2)))
+goal WP_parameter_def : le(x, m2)

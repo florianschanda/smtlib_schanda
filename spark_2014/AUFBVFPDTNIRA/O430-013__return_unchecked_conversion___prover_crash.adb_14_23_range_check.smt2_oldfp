@@ -1151,6 +1151,8 @@
   (! (=> (dynamic_invariant1 s true true true) (dynamic_invariant2 (conv s)
      true false true)) :pattern ((conv s)) )))
 
+(declare-const o Int)
+
 ;; H
   (assert (in_range1 x))
 

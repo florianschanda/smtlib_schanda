@@ -1190,25 +1190,13 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral2)
-  (= (tqtreal fliteral2) (/ 999999974737875163555145263671875.0 10000000000000000000000000000000000000.0))))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral3)
-  (= (tqtreal fliteral3) (/ 1500000013038516044616699218750.0 1000000000000000000000000000000000.0))))
-
 (declare-const value t)
 
 (declare-const value1 t)
 
 (declare-const value2 t)
+
+(declare-const value3 t)
 
 ;; H
   (assert (=> (le (neg fliteral1) fliteral1) (in_range2 value)))
@@ -1216,11 +1204,25 @@
 ;; H
   (assert (in_range2 value1))
 
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral2)
+  (= (tqtreal fliteral2) (/ 999999974737875163555145263671875.0 10000000000000000000000000000000000000.0))))
+
 ;; H
   (assert (and (le (neg fliteral2) value1) (le value1 fliteral2)))
 
 ;; H
   (assert (in_range2 value2))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral3)
+  (= (tqtreal fliteral3) (/ 1500000013038516044616699218750.0 1000000000000000000000000000000000.0))))
 
 (assert
 ;; WP_parameter_def

@@ -133,18 +133,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1175,7 +1175,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1761,7 +1761,7 @@ axiom def_axiom :
   (forall temp___134:integer. forall temp___1341:bool.
   forall temp___1342:float1.
   (forall temp___135:int. forall temp___136:int.
-  ((dynamic_property4((-2147483648), 2147483647, temp___135, temp___136) ->
+  ((dynamic_property4((- 2147483648), 2147483647, temp___135, temp___136) ->
   ((to_rep(first2((t__dummy__aggregate_def({ us_split_fields1 = {
   rec__t__stupid_record__a = temp___134; rec__t__stupid_record__b =
   temp___1341; rec__t__stupid_record__c = temp___1342 } }, temp___135,
@@ -1788,6 +1788,34 @@ axiom dummy__def_axiom : ((dummy11 = (t__dummy__aggregate_def({
   us_split_fields1 = { rec__t__stupid_record__a = of_rep(0);
   rec__t__stupid_record__b = of_int1(1); rec__t__stupid_record__c =
   of_rep1(fliteral) } }, 0, comp_div(value__size,8))).rt1)))))
+
+logic o : int
+
+logic us : int
+
+logic o1 : float1
+
+logic o2 : integer
+
+logic o3 : integer
+
+logic o4 : bool
+
+logic o5 : float1
+
+logic o6 : integer
+
+logic o7 : bool
+
+logic o8 : float1
+
+logic temp___165 : (int,us_rep) farray
+
+logic temp___1651 : t2
+
+logic temp___166 : (int,us_rep) farray
+
+logic temp___1661 : t2
 
  (* File "t.ads", line 15, characters 0-0 *)
 goal WP_parameter_def : in_range2(value__size)

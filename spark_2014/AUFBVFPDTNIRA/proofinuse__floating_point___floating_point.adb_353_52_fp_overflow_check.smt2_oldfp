@@ -1097,31 +1097,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 60.0)))
-
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 2.0)))
-
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 3.0)))
-
-(declare-const fliteral6 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) 4.0)))
-
 (declare-const o t)
 
 (declare-const o1 t)
@@ -1138,40 +1113,95 @@
 
 (declare-const o7 t)
 
+(declare-const o8 t)
+
+(declare-const o9 t)
+
+(declare-const o10 t)
+
+(declare-const o11 t)
+
+(declare-const o12 t)
+
+(declare-const o13 t)
+
+(declare-const o14 t)
+
+(declare-const o15 t)
+
+(declare-const o16 t)
+
+(declare-const o17 t)
+
+(declare-const o18 t)
+
+(declare-const o19 t)
+
+(declare-const o20 t)
+
+(declare-const o21 t)
+
+(declare-const o22 Bool)
+
 ;; H
   (assert (tqtisFinite x))
+
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 60.0)))
 
 ;; H
   (assert (and (le fliteral2 x) (le x fliteral3)))
 
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 2.0)))
+
 ;; H
   (assert
-  (and (= o (add RNE1 x fliteral4)) (tqtisFinite (add RNE1 x fliteral4))))
+  (and (= o11 (add RNE1 x fliteral4)) (tqtisFinite (add RNE1 x fliteral4))))
 
 ;; H
-  (assert (= o1 (mul RNE1 o x)))
+  (assert (= o12 (mul RNE1 o11 x)))
 
 ;; H
-  (assert (and (= o2 o1) (tqtisFinite o1)))
+  (assert (and (= o13 o12) (tqtisFinite o12)))
+
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 3.0)))
 
 ;; H
-  (assert (= o3 (add RNE1 o2 fliteral5)))
+  (assert (= o14 (add RNE1 o13 fliteral5)))
 
 ;; H
-  (assert (and (= o4 o3) (tqtisFinite o3)))
+  (assert (and (= o15 o14) (tqtisFinite o14)))
+
+(declare-const fliteral6 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) 4.0)))
 
 ;; H
-  (assert (= o5 (add RNE1 o4 fliteral6)))
+  (assert (= o16 (add RNE1 o15 fliteral6)))
 
 ;; H
-  (assert (and (= o6 o5) (tqtisFinite o5)))
+  (assert (and (= o17 o16) (tqtisFinite o16)))
 
 ;; H
-  (assert (= o7 (mul RNE1 o6 x)))
+  (assert (= o18 (mul RNE1 o17 x)))
 
 (assert
 ;; WP_parameter_def
  ;; File "a-unccon.ads", line 20, characters 0-0
-  (not (tqtisFinite o7)))
+  (not (tqtisFinite o18)))
 (check-sat)
 (exit)

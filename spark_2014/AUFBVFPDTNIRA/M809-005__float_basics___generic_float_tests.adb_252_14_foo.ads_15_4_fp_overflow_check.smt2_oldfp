@@ -1113,15 +1113,25 @@
                                      (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_57)))
 
+(declare-const f t)
+
+(declare-const o t)
+
+(declare-const result t)
+
+(declare-const f1 t)
+
+(declare-const f2 t)
+
+(declare-const f3 t)
+
+;; H
+  (assert (tqtisFinite f))
+
 (declare-const fliteral2 t)
 
 ;; fliteral_axiom
   (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
-
-(declare-const f t)
-
-;; H
-  (assert (tqtisFinite f))
 
 (assert
 ;; WP_parameter_def

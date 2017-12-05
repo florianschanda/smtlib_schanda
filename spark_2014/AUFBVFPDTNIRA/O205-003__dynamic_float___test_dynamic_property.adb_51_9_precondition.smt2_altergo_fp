@@ -1219,5 +1219,90 @@ axiom dyn_return__post_axiom :
 
 axiom c__def_axiom : (c = d)
 
+logic x : t
+
+logic y : t
+
+logic test_dynamic_property__c__assume : t
+
+logic us : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic us1 : t
+
+logic o3 : t
+
+logic test_dynamic_property__dyn_param__x : t
+
+logic us2 : t
+
+logic o4 : t
+
+logic us3 : t
+
+logic o5 : t
+
+logic test_dynamic_property__nested__dyn_param__x : t
+
+logic us4 : t
+
+logic o6 : t
+
+logic y1 : t
+
+logic result : t
+
+logic x1 : t
+
+logic result1 : t
+
+logic x2 : t
+
+logic x3 : t
+
+logic test_dynamic_property__dyn_param__x1 : t
+
+logic result2 : t
+
+logic y2 : t
+
+logic test_dynamic_property__nested__dyn_param__x1 : t
+
+logic result3 : t
+
+logic x4 : t
+
+axiom H : tqtisFinite(d)
+
+axiom H1 : (le(fliteral, d) and le(d, fliteral1))
+
+axiom H2 : ((test_dynamic_property__c__assume = d) and tqtisFinite(d))
+
+axiom H3 : (test_dynamic_property__c__assume = c)
+
+axiom H4 : in_range2(c)
+
+axiom H5 : ((us = c) and dynamic_property(fliteral, last, c))
+
+axiom H6 : (o = c)
+
+axiom H7 : (result = x)
+
+axiom H8 : (x1 = o)
+
+axiom H9 : dynamic_property(fliteral, last, x1)
+
+logic fliteral2 : t
+
+axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
+  (tqtreal(fliteral2) = 0.0e-1))
+
+axiom H10 : dynamic_property1(fliteral2, last1, y)
+
  (* File "test_dynamic_property.adb", line 40, characters 0-0 *)
 goal WP_parameter_def : true

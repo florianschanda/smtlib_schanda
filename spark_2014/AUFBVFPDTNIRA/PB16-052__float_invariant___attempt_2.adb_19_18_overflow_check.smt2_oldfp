@@ -1101,6 +1101,8 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
+(declare-const o Int)
+
 ;; H
   (assert (in_range2 n))
 

@@ -1231,9 +1231,15 @@
 
 (declare-const o1 t)
 
+(declare-const o2 t)
+
 (declare-const result t)
 
 (declare-const r11 t)
+
+(declare-const result1 t)
+
+(declare-const r21 t)
 
 ;; H
   (assert (in_range1 x1))

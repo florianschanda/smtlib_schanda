@@ -131,17 +131,17 @@
 (define-fun bv_max ((x (_ BitVec 16))
   (y (_ BitVec 16))) (_ BitVec 16) (ite (bvule x y) y x))
 
-(define-fun is_plus_infinity ((x Float64)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float64)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float64)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float64)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float64)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float64)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float64)
 
@@ -156,24 +156,24 @@
                                              (<= i 9007199254740992)))
 
 (define-fun same_sign ((x Float64)
-  (y Float64)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float64)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float64)
-  (y Float64)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float64)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float64) (x Float64)
-  (y Float64)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float64)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-fun nth1 ((_ BitVec 8) Int) Bool)
 
@@ -729,6 +729,8 @@
 
 (declare-const o Float64)
 
+(declare-const o1 Int)
+
 (declare-const result Float64)
 
 (declare-const new_speed1 Float64)
@@ -760,86 +762,48 @@
 
 ;; H
   (assert
+  (and
+  (and
   (= (fp.add RNE drag (fp.mul RNE (fp.mul RNE factor (fp #b0 #b10000000010 #b0011100111010010111100011010100111111011111001110111)) (fp #b0 #b01111111001 #b0001000100010001000100010001000100010001000100010001)))
-  delta_speed))
-
-;; H
-  (assert (fp.isFinite64 delta_speed))
-
-;; H
-  (assert (= ((_ int2bv 16) n) n_bv))
-
-;; H
-  (assert
+  delta_speed)
+  (and (fp.isFinite64 delta_speed)
+  (and (= ((_ int2bv 16) n) n_bv)
+  (and
+  (and
   (and (= o (fp.add RNE old_speed delta_speed))
-  (fp.isFinite64 (fp.add RNE old_speed delta_speed))))
-
-;; H
-  (assert (= (mk_t__ref1 result) (mk_t__ref1 new_speed)))
-
-;; H
-  (assert (= new_speed1 o))
-
-;; H
-  (assert
+  (fp.isFinite64 (fp.add RNE old_speed delta_speed)))
+  (and (= (mk_t__ref1 result) (mk_t__ref1 new_speed)) (= new_speed1 o)))
+  (and
   (and
   (fp.leq (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))
   delta_speed)
-  (fp.leq delta_speed (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))
-
-;; H
-  (assert (= (in_bounds (high_bound n)) true))
-
-;; H
-  (assert (= (in_bounds (low_bound n)) true))
-
-;; H
-  (assert
+  (fp.leq delta_speed (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)))
+  (and (= (in_bounds (high_bound n)) true)
+  (and (= (in_bounds (low_bound n)) true)
+  (and
   (fp.eq (fp.add RNE (fp.mul RNE ((_ to_fp_unsigned 11 53) RNE n_bv) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)) (fp.mul RNE (fp.add RNE ((_ to_fp_unsigned 11 53) RNE
-  n_bv) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))
-
-;; H
-  (assert
+  n_bv) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)))
+  (and
   (fp.eq (fp.add RNE (fp.mul RNE (of_int RNE n) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)) (fp.mul RNE (fp.add RNE
-  (of_int RNE n) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))
-
-;; H
-  (assert
+  (of_int RNE n) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)))
+  (and
   (fp.eq (fp.sub RNE (fp.mul RNE (of_int RNE n) (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)) (fp.mul RNE (fp.add RNE
-  (of_int RNE n) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)))))
-
-;; H
-  (assert
-  (fp.eq (t 1) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
-
-;; H
-  (assert
+  (of_int RNE n) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))
+  (and
+  (fp.eq (t 1) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))
+  (and
   (fp.eq (fp.add RNE (of_int RNE n) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))
-  (of_int RNE (+ n 1))))
-
-;; H
-  (assert
+  (of_int RNE (+ n 1)))
+  (and
   (fp.leq (fp.sub RNE (fp.mul RNE (of_int RNE n) (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))
-  new_speed1))
-
-;; H
-  (assert
+  new_speed1)
+  (and
   (fp.leq (fp.mul RNE (of_int RNE (+ n 1)) (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)))
-  new_speed1))
-
-;; H
-  (assert
-  (fp.leq new_speed1 (fp.add RNE (fp.mul RNE (of_int RNE n) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))
-
-;; H
-  (assert
-  (fp.leq new_speed1 (fp.mul RNE (of_int RNE (+ n 1)) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))
-
-;; H
-  (assert (= new_speed1 new_speed2))
-
-;; H
-  (assert (= new_speed3 new_speed1))
+  new_speed1)
+  (and
+  (fp.leq new_speed1 (fp.add RNE (fp.mul RNE (of_int RNE n) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)))
+  (fp.leq new_speed1 (fp.mul RNE (of_int RNE (+ n 1)) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))))))))))))))))
+  (and (= new_speed1 new_speed2) (= new_speed3 new_speed1))))
 
 (assert
 ;; WP_parameter_def

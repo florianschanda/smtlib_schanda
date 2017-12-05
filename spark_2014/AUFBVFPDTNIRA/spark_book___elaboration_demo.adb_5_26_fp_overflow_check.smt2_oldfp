@@ -1677,11 +1677,6 @@
                                       (and (= (first1 temp___expr_141) 1)
                                       (= (last1 temp___expr_141) size)))))
 
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 5.0)))
-
 (declare-const count Int)
 
 (declare-const line (Array Int character))
@@ -1697,6 +1692,10 @@
 (declare-const o t)
 
 (declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const o3 t)
 
 (declare-const result (Array Int character))
 
@@ -1755,6 +1754,11 @@
   (assert
   (and (dynamic_property1 1 size (to_rep line__first) (to_rep line__last))
   (and (= (to_rep line__first) 1) (= (to_rep line__last) size))))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 5.0)))
 
 ;; H
   (assert

@@ -1066,7 +1066,7 @@ logic magic__function_guard : int, t -> prop
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1131,6 +1131,11 @@ logic b : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+axiom H : tqtisFinite(a)
+
+axiom H1 : tqtisFinite(b)
+
+axiom H2 : eq(a, b)
+
  (* File "generic_float_tests.adb", line 9, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(a) -> (tqtisFinite(b) -> (eq(a, b) ->
-  (magic(a) = magic(b)))))
+goal WP_parameter_def : (magic(a) = magic(b))

@@ -1101,7 +1101,7 @@ axiom coerce_axiom :
 
 type tnum_delimiters_rangeB
 
-predicate in_range2(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range2(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq3 : int, int -> bool
 
@@ -1610,45 +1610,154 @@ function t3b__ref___projection(a: t3b__ref) : tnum_delimiters_rangeB =
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. forall step_function__get_value__result:t.
-  forall temp___247:int. forall temp___248:int. forall temp___243:int.
-  forall temp___241:int. forall o:int. forall o1:function_range.
-  forall o2:float1. forall o3:function_range. forall o4:float1.
-  forall o5:function_range. forall o6:int. forall o7:bool. forall i1:int.
-  forall o8:int. forall o9:function_range. forall o10:float1.
-  forall o11:function_range. forall o12:float1. forall o13:function_range.
-  forall o14:int. forall o15:bool. forall o16:int. forall o17:function_range.
-  forall o18:float1. forall o19:function_range. forall o20:float1.
-  forall o21:float1. forall o22:t. forall o23:bool.
-  forall step_function__get_value__result1:t. forall result:int.
-  forall i2:int. forall i3:int. forall step_function__get_value__result2:t.
-  forall result1:bool. forall result2:t.
-  forall step_function__get_value__result3:t. forall i4:int.
-  forall step_function__get_value__result4:t. forall i5:int.
-  forall step_function__get_value__result5:t. forall i6:int.
-  forall step_function__get_value__result6:t. forall i7:int.
-  forall step_function__get_value__result7:t. forall result3:t.
-  forall step_function__get_value__result8:t.
-  forall step_function__get_value__result9:t.
-  forall step_function__get_value__result10:t. forall i8:int.
-  forall step_function__get_value__result11:t. forall i9:int.
-  forall step_function__get_value__result12:t. forall i10:int.
-  forall step_function__get_value__result13:t. forall i11:int.
-  forall step_function__get_value__result14:t. (in_range4(x) -> ((is_valid({
-  us_split_fields3 = {
+logic i : int
+
+logic step_function__get_value__result : t
+
+logic temp___247 : int
+
+logic temp___248 : int
+
+logic temp___243 : int
+
+logic j : int
+
+logic temp___241 : int
+
+logic o : int
+
+logic o1 : function_range
+
+logic o2 : float1
+
+logic o3 : function_range
+
+logic o4 : float1
+
+logic o5 : function_range
+
+logic o6 : int
+
+logic o7 : bool
+
+logic i1 : int
+
+logic o8 : int
+
+logic o9 : function_range
+
+logic o10 : float1
+
+logic o11 : function_range
+
+logic o12 : float1
+
+logic o13 : function_range
+
+logic o14 : int
+
+logic o15 : bool
+
+logic o16 : int
+
+logic o17 : function_range
+
+logic o18 : float1
+
+logic o19 : function_range
+
+logic o20 : float1
+
+logic o21 : float1
+
+logic o22 : t
+
+logic o23 : bool
+
+logic step_function__get_value__result1 : t
+
+logic result : int
+
+logic i2 : int
+
+logic i3 : int
+
+logic step_function__get_value__result2 : t
+
+logic result1 : bool
+
+logic result2 : t
+
+logic step_function__get_value__result3 : t
+
+logic result3 : int
+
+logic i4 : int
+
+logic i5 : int
+
+logic step_function__get_value__result4 : t
+
+logic i6 : int
+
+logic step_function__get_value__result5 : t
+
+logic i7 : int
+
+logic step_function__get_value__result6 : t
+
+logic i8 : int
+
+logic step_function__get_value__result7 : t
+
+logic i9 : int
+
+logic step_function__get_value__result8 : t
+
+logic i10 : int
+
+logic step_function__get_value__result9 : t
+
+logic result4 : t
+
+logic step_function__get_value__result10 : t
+
+logic step_function__get_value__result11 : t
+
+logic step_function__get_value__result12 : t
+
+logic i11 : int
+
+logic step_function__get_value__result13 : t
+
+logic i12 : int
+
+logic step_function__get_value__result14 : t
+
+logic i13 : int
+
+logic step_function__get_value__result15 : t
+
+logic i14 : int
+
+logic step_function__get_value__result16 : t
+
+axiom H : in_range4(x)
+
+axiom H1 : (is_valid({ us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters = sfun;
-  rec__step_function__step_function_t__step = sfun1 } }) = true) ->
-  (((((((step_function__get_value__result3 = step_function__get_value__result11) and
-  (i3 = i8)) and
-  ((step_function__get_value__result12 = step_function__get_value__result3) and
-  (i9 = i3))) and ((temp___247 = 0) and
-  ((temp___248 = (to_rep1(sfun) - 1)) and ((({ int__content = result } = {
-  int__content = i }) and (i2 = temp___247)) and (((temp___247 <= i2) and
-  (i2 <= temp___248)) and ((temp___243 = i2) and
-  ((forall j:int. (((1 <= j) and (j <= i3)) ->
-   (to_rep2((((sfun1[j])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x))) and
+  rec__step_function__step_function_t__step = sfun1 } }) = true)
+
+axiom H2 :
+  (((((step_function__get_value__result13 = step_function__get_value__result3) and
+  (i11 = i3)) and
+  ((step_function__get_value__result14 = step_function__get_value__result3) and
+  (i12 = i3))) and ((temp___247 = 0) and
+  ((temp___248 = (to_rep1(sfun) - 1)) and (((result = i) and
+  (i2 = temp___247)) and (((temp___247 <= i2) and (i2 <= temp___248)) and
+  ((temp___243 = i2) and
+  ((forall j1:int. (((1 <= j1) and (j1 <= i3)) ->
+   (to_rep2((((sfun1[j1])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x))) and
   ((((0 <= (to_rep1(sfun) - 1)) -> dynamic_property(0, (to_rep1(sfun) - 1),
   i3)) and ((0 <= i3) and (i3 <= (to_rep1(sfun) - 1)))) and
   ((((((((((temp___241 = (i3 + 1)) and in_range2((i3 + 1))) and
@@ -1656,17 +1765,17 @@ goal WP_parameter_def :
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter = o1;
   rec__step_function__delimiter_entry__value = o2 } } = (sfun1[o]))) and
   ((o1 = o3) and (o2 = o4))) and (o5 = o3)) and (o6 = to_rep2(o5))) and
-  (((x <  o6) and (o7 = true)) or ((not (x <  o6)) and (o7 = false)))) and
-  (((to_rep2((((sfun1[i3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x) and
-  (result1 = o7)) or
-  ((not (to_rep2((((sfun1[i3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x)) and
+  (((x <  o6) -> (o7 = true)) and ((not (x <  o6)) -> (o7 = false)))) and
+  (((to_rep2((((sfun1[i3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x) ->
+  (result1 = o7)) and
+  ((not (to_rep2((((sfun1[i3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x)) ->
   (result1 = false)))) and ((result1 = true) and
   ((step_function__get_value__result2 = result2) and
   (step_function__get_value__result3 = to_rep((((sfun1[i3])).us_split_fields1).rec__step_function__delimiter_entry__value))))))))))))) or
-  (((({ int__content = result } = { int__content = i }) and (i2 = 0)) and
-  ((((0 <= i2) and (i2 <= (to_rep1(sfun) - 1))) and ((((temp___243 = i2) and
-  ((forall j:int. (((1 <= j) and (j <= i3)) ->
-   (to_rep2((((sfun1[j])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x))) and
+  ((((result = i) and (i2 = 0)) and ((((0 <= i2) and
+  (i2 <= (to_rep1(sfun) - 1))) -> ((((temp___243 = i2) and
+  ((forall j1:int. (((1 <= j1) and (j1 <= i3)) ->
+   (to_rep2((((sfun1[j1])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x))) and
   ((((0 <= (to_rep1(sfun) - 1)) -> dynamic_property(0, (to_rep1(sfun) - 1),
   i3)) and ((0 <= i3) and (i3 <= (to_rep1(sfun) - 1)))) and
   (((((((((((temp___241 = (i3 + 1)) and in_range2((i3 + 1))) and
@@ -1674,48 +1783,86 @@ goal WP_parameter_def :
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter = o1;
   rec__step_function__delimiter_entry__value = o2 } } = (sfun1[o]))) and
   ((o1 = o3) and (o2 = o4))) and (o5 = o3)) and (o6 = to_rep2(o5))) and
-  (((x <  o6) and (o7 = true)) or ((not (x <  o6)) and (o7 = false)))) and
-  (((to_rep2((((sfun1[i3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x) and
-  (result1 = o7)) or
-  ((not (to_rep2((((sfun1[i3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x)) and
+  (((x <  o6) -> (o7 = true)) and ((not (x <  o6)) -> (o7 = false)))) and
+  (((to_rep2((((sfun1[i3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x) ->
+  (result1 = o7)) and
+  ((not (to_rep2((((sfun1[i3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x)) ->
   (result1 = false)))) and ((not (result1 = true)) and
   (step_function__get_value__result3 = step_function__get_value__result2))) and
   (i3 = (to_rep1(sfun) - 1)))))) and
-  (((step_function__get_value__result3 = step_function__get_value__result4) and
-  (i3 = i4)) and
-  ((step_function__get_value__result5 = step_function__get_value__result3) and
-  (i5 = i3)))) and ((({ t__content = step_function__get_value__result6 } = {
-  t__content = step_function__get_value__result4 }) and ({ int__content = i6
-  } = { int__content = i4 })) and
-  ((step_function__get_value__result7 = step_function__get_value__result5) and
-  (i7 = i5))))) or ((not ((0 <= i2) and (i2 <= (to_rep1(sfun) - 1)))) and
-  ((({ t__content = step_function__get_value__result6 } = { t__content =
-  step_function__get_value__result }) and (i2 = i6)) and
-  ((step_function__get_value__result7 = step_function__get_value__result1) and
-  (i7 = i2)))))) and (((({ t__content = step_function__get_value__result11
-  } = { t__content = step_function__get_value__result9 }) and ({
-  int__content = i8 } = { int__content = i6 })) and
-  ((step_function__get_value__result12 = step_function__get_value__result10) and
-  (i9 = i7))) and
-  (((step_function__get_value__result8 = step_function__get_value__result9) and
-  (step_function__get_value__result10 = step_function__get_value__result8)) and
-  (({ t__content = result3 } = { t__content =
-  step_function__get_value__result6 }) and
-  (step_function__get_value__result8 = to_rep((((sfun1[to_rep1(sfun)])).us_split_fields1).rec__step_function__delimiter_entry__value))))))) and
-  ((({ t__content = step_function__get_value__result13 } = { t__content =
-  step_function__get_value__result11 }) and (i10 = i8)) and
+  (((step_function__get_value__result3 = step_function__get_value__result6) and
+  (i3 = i7)) and
+  ((step_function__get_value__result7 = step_function__get_value__result3) and
+  (i8 = i3)))) and
+  (((step_function__get_value__result8 = step_function__get_value__result6) and
+  (i9 = i7)) and
+  ((step_function__get_value__result9 = step_function__get_value__result7) and
+  (i10 = i8))))) and ((not ((0 <= i2) and (i2 <= (to_rep1(sfun) - 1)))) ->
+  (((step_function__get_value__result8 = step_function__get_value__result) and
+  (i2 = i9)) and
+  ((step_function__get_value__result9 = step_function__get_value__result1) and
+  (i10 = i2)))))) and
+  ((((step_function__get_value__result13 = step_function__get_value__result11) and
+  (i11 = i9)) and
   ((step_function__get_value__result14 = step_function__get_value__result12) and
-  (i11 = i9)))) -> (((0 <= i1) and (i1 <= (to_rep1(sfun) - 1))) ->
-  (((((((((0 <= i1) and (i1 <= 10)) and (o16 = i1)) and ({ us_split_fields1 =
-  { rec__step_function__delimiter_entry__delimiter = o17;
-  rec__step_function__delimiter_entry__value = o18 } } = (sfun1[o16]))) and
-  ((o17 = o19) and (o18 = o20))) and (o21 = o20)) and
-  (o22 = to_rep(o21))) and ((eq(step_function__get_value__result13, o22) and
-  (o23 = true)) or ((not eq(step_function__get_value__result13, o22)) and
-  (o23 = false)))) -> (((((((((0 <= (i1 + 1)) and ((i1 + 1) <= 10)) and
-  (o8 = (i1 + 1))) and ({ us_split_fields1 = {
+  (i12 = i10))) and
+  (((step_function__get_value__result11 = step_function__get_value__result10) and
+  (step_function__get_value__result12 = step_function__get_value__result10)) and
+  ((result4 = step_function__get_value__result8) and
+  (step_function__get_value__result10 = to_rep((((sfun1[to_rep1(sfun)])).us_split_fields1).rec__step_function__delimiter_entry__value)))))))
+
+axiom H3 :
+  (step_function__get_value__result15 = step_function__get_value__result13)
+
+axiom H4 : (i13 = i11)
+
+axiom H5 :
+  (step_function__get_value__result16 = step_function__get_value__result14)
+
+axiom H6 : (i14 = i12)
+
+axiom H7 : (0 <= i1)
+
+axiom H8 : (i1 <= (to_rep1(sfun) - 1))
+
+axiom H9 : ((0 <= i1) and (i1 <= 10))
+
+axiom H10 : (o16 = i1)
+
+axiom H11 : ({ us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = o17;
+  rec__step_function__delimiter_entry__value = o18 } } = (sfun1[o16]))
+
+axiom H12 : (o17 = o19)
+
+axiom H13 : (o18 = o20)
+
+axiom H14 : (o21 = o20)
+
+axiom H15 : (o22 = to_rep(o21))
+
+axiom H16 : ((eq(step_function__get_value__result15, o22) ->
+  (o23 = true)) and ((not eq(step_function__get_value__result15, o22)) ->
+  (o23 = false)))
+
+axiom H17 : ((0 <= (i1 + 1)) and ((i1 + 1) <= 10))
+
+axiom H18 : (o8 = (i1 + 1))
+
+axiom H19 : ({ us_split_fields1 = {
   rec__step_function__delimiter_entry__delimiter = o9;
-  rec__step_function__delimiter_entry__value = o10 } } = (sfun1[o8]))) and
-  ((o9 = o11) and (o10 = o12))) and (o13 = o11)) and
-  (o14 = to_rep2(o13))) and (((x <  o14) and (o15 = true)) or
-  ((not (x <  o14)) and (o15 = false)))) -> (0 <= i1))))))))
+  rec__step_function__delimiter_entry__value = o10 } } = (sfun1[o8]))
+
+axiom H20 : (o9 = o11)
+
+axiom H21 : (o10 = o12)
+
+axiom H22 : (o13 = o11)
+
+axiom H23 : (o14 = to_rep2(o13))
+
+axiom H24 : (((x <  o14) -> (o15 = true)) and ((not (x <  o14)) ->
+  (o15 = false)))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (0 <= i1)

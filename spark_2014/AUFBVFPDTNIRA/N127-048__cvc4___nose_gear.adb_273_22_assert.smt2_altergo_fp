@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -2301,7 +2301,7 @@ function long_float__ref___projection(a: long_float__ref) : long_float =
 
 type tinteger_32B
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -2357,7 +2357,7 @@ function tinteger_32B__ref___projection(a: tinteger_32B__ref) : tinteger_32B =
 
 type integer_32
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -2523,222 +2523,697 @@ logic attr__ATTRIBUTE_ADDRESS53 : int
 
 logic attr__ATTRIBUTE_ADDRESS54 : int
 
+logic estimatedgroundvelocity : t1
+
+logic estimatedgroundvelocityisavailable : bool
+
+logic old_ngclicktime_memory : t
+
+logic old_ngrotations_memory : t
+
+logic old_estimatedgroundvelocity_memory : t1
+
+logic old_ngclicktime_out1 : t
+
+logic old_ngrotations_out1 : t
+
+logic old_estimatedgroundvelocity_out1 : t1
+
+logic max_uint16_out1 : int
+
+logic max_uint16_1_out1 : int
+
+logic max_uint16_2_out1 : int
+
+logic millisecs_out1 : t
+
+logic ngclicktime_out1 : t
+
+logic ngrotations_out1 : t
+
+logic wheel_circunference_out1 : t1
+
+logic ms_in_hour_out1 : t1
+
+logic ms_in_our1_out1 : t1
+
+logic update_period_os_interrupt_out1 : t
+
+logic validity_period_out1 : t
+
+logic to_int32_left_out1 : int
+
+logic to_int32_left_1_out1 : int
+
+logic to_int32_left_2_out1 : int
+
+logic to_int32_right_out1 : int
+
+logic to_int32_right_1_out1 : int
+
+logic to_int32_right_2_out1 : int
+
+logic data_type_conversion1_out1 : int
+
+logic data_type_conversion_out1 : int
+
+logic sum1_2_out1 : t
+
+logic sum1_out1 : int
+
+logic sum1_1_out1 : int
+
+logic sum2_out1 : int
+
+logic sum2_1_out1 : int
+
+logic sum1_1_1_out1 : int
+
+logic sum_out1 : int
+
+logic sum2_2_out1 : int
+
+logic compare_to_constant_out1 : bool
+
+logic sum_1_out1 : int
+
+logic sum_2_out1 : int
+
+logic sum_3_out1 : int
+
+logic left_out1 : int
+
+logic left_1_out1 : int
+
+logic left_2_out1 : int
+
+logic to_uint16_result_out1 : t
+
+logic to_uint16_result_1_out1 : t
+
+logic to_uint16_result_2_out1 : t
+
+logic distance_km_out1 : t1
+
+logic elapsed_time_h_out1 : t1
+
+logic relational_operator_out1 : bool
+
+logic avoid_div_by_zero_out1 : t1
+
+logic relational_operator_out1_1 : bool
+
+logic speed_out1 : t1
+
+logic old_output_if_new_invalid_out1 : t1
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : t
+
+logic o12 : int
+
+logic o13 : t
+
+logic o14 : int
+
+logic o15 : t
+
+logic o16 : t1
+
+logic o17 : t1
+
+logic o18 : t1
+
+logic result : t
+
+logic old_ngclicktime_out11 : t
+
+logic result1 : t
+
+logic old_ngrotations_out11 : t
+
+logic result2 : t1
+
+logic old_estimatedgroundvelocity_out11 : t1
+
+logic result3 : int
+
+logic max_uint16_out11 : int
+
+logic result4 : int
+
+logic max_uint16_1_out11 : int
+
+logic result5 : int
+
+logic max_uint16_2_out11 : int
+
+logic result6 : t
+
+logic millisecs_out11 : t
+
+logic result7 : t
+
+logic ngclicktime_out11 : t
+
+logic result8 : t
+
+logic ngrotations_out11 : t
+
+logic result9 : t1
+
+logic wheel_circunference_out11 : t1
+
+logic result10 : t1
+
+logic ms_in_hour_out11 : t1
+
+logic result11 : t1
+
+logic ms_in_our1_out11 : t1
+
+logic result12 : t
+
+logic update_period_os_interrupt_out11 : t
+
+logic result13 : t
+
+logic validity_period_out11 : t
+
+logic result14 : int
+
+logic to_int32_left_out11 : int
+
+logic result15 : int
+
+logic to_int32_left_1_out11 : int
+
+logic result16 : int
+
+logic to_int32_left_2_out11 : int
+
+logic result17 : int
+
+logic to_int32_right_out11 : int
+
+logic result18 : int
+
+logic to_int32_right_1_out11 : int
+
+logic result19 : int
+
+logic to_int32_right_2_out11 : int
+
+logic result20 : int
+
+logic data_type_conversion1_out11 : int
+
+logic result21 : int
+
+logic data_type_conversion_out11 : int
+
+logic result22 : t
+
+logic sum1_2_out11 : t
+
+logic result23 : int
+
+logic sum1_out11 : int
+
+logic result24 : int
+
+logic sum1_1_out11 : int
+
+logic result25 : int
+
+logic sum2_out11 : int
+
+logic result26 : int
+
+logic sum2_1_out11 : int
+
+logic result27 : int
+
+logic sum1_1_1_out11 : int
+
+logic result28 : int
+
+logic sum_out11 : int
+
+logic result29 : int
+
+logic sum2_2_out11 : int
+
+logic result30 : bool
+
+logic compare_to_constant_out11 : bool
+
+logic result31 : int
+
+logic sum_1_out11 : int
+
+logic result32 : int
+
+logic sum_2_out11 : int
+
+logic result33 : int
+
+logic sum_3_out11 : int
+
+logic result34 : int
+
+logic left_out11 : int
+
+logic result35 : int
+
+logic left_out12 : int
+
+logic result36 : int
+
+logic left_1_out11 : int
+
+logic result37 : int
+
+logic left_1_out12 : int
+
+logic result38 : int
+
+logic left_2_out11 : int
+
+logic result39 : int
+
+logic left_2_out12 : int
+
+logic result40 : t
+
+logic to_uint16_result_out11 : t
+
+logic result41 : t
+
+logic to_uint16_result_1_out11 : t
+
+logic result42 : t
+
+logic to_uint16_result_2_out11 : t
+
+logic result43 : t1
+
+logic distance_km_out11 : t1
+
+logic result44 : t1
+
+logic elapsed_time_h_out11 : t1
+
+logic result45 : bool
+
+logic relational_operator_out11 : bool
+
+logic result46 : t1
+
+logic avoid_div_by_zero_out11 : t1
+
+logic result47 : t1
+
+logic avoid_div_by_zero_out12 : t1
+
+logic result48 : bool
+
+logic estimatedgroundvelocityisavailable1 : bool
+
+logic result49 : bool
+
+logic relational_operator_out1_11 : bool
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : tqtisFinite(old_estimatedgroundvelocity_memory)
+
+axiom H3 : true
+
+axiom H4 : true
+
+axiom H5 : true
+
 logic fliteral1 : t1
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0))
+
+axiom H6 : (le(neg1(fliteral1), fliteral1) ->
+  tqtisFinite(estimatedgroundvelocity))
+
+axiom H7 : true
+
+axiom H8 : true
+
+axiom H9 : (le(neg1(fliteral1), fliteral1) ->
+  tqtisFinite(old_estimatedgroundvelocity_out1))
+
+axiom H10 : (((- 2147483648) <= 2147483647) -> in_range3(max_uint16_out1))
+
+axiom H11 : (((- 2147483648) <= 2147483647) -> in_range3(max_uint16_1_out1))
+
+axiom H12 : (((- 2147483648) <= 2147483647) -> in_range3(max_uint16_2_out1))
+
+axiom H13 : true
+
+axiom H14 : true
+
+axiom H15 : true
+
+axiom H16 : (le(neg1(fliteral1), fliteral1) ->
+  tqtisFinite(wheel_circunference_out1))
+
+axiom H17 : (le(neg1(fliteral1), fliteral1) -> tqtisFinite(ms_in_hour_out1))
+
+axiom H18 : (le(neg1(fliteral1), fliteral1) -> tqtisFinite(ms_in_our1_out1))
+
+axiom H19 : true
+
+axiom H20 : true
+
+axiom H21 : (((- 2147483648) <= 2147483647) -> in_range3(to_int32_left_out1))
+
+axiom H22 : (((- 2147483648) <= 2147483647) ->
+  in_range3(to_int32_left_1_out1))
+
+axiom H23 : (((- 2147483648) <= 2147483647) ->
+  in_range3(to_int32_left_2_out1))
+
+axiom H24 : (((- 2147483648) <= 2147483647) ->
+  in_range3(to_int32_right_out1))
+
+axiom H25 : (((- 2147483648) <= 2147483647) ->
+  in_range3(to_int32_right_1_out1))
+
+axiom H26 : (((- 2147483648) <= 2147483647) ->
+  in_range3(to_int32_right_2_out1))
+
+axiom H27 : (((- 2147483648) <= 2147483647) ->
+  in_range3(data_type_conversion1_out1))
+
+axiom H28 : (((- 2147483648) <= 2147483647) ->
+  in_range3(data_type_conversion_out1))
+
+axiom H29 : true
+
+axiom H30 : (((- 2147483648) <= 2147483647) -> in_range3(sum1_out1))
+
+axiom H31 : (((- 2147483648) <= 2147483647) -> in_range3(sum1_1_out1))
+
+axiom H32 : (((- 2147483648) <= 2147483647) -> in_range3(sum2_out1))
+
+axiom H33 : (((- 2147483648) <= 2147483647) -> in_range3(sum2_1_out1))
+
+axiom H34 : (((- 2147483648) <= 2147483647) -> in_range3(sum1_1_1_out1))
+
+axiom H35 : (((- 2147483648) <= 2147483647) -> in_range3(sum_out1))
+
+axiom H36 : (((- 2147483648) <= 2147483647) -> in_range3(sum2_2_out1))
+
+axiom H37 : (((- 2147483648) <= 2147483647) -> in_range3(sum_1_out1))
+
+axiom H38 : (((- 2147483648) <= 2147483647) -> in_range3(sum_2_out1))
+
+axiom H39 : (((- 2147483648) <= 2147483647) -> in_range3(sum_3_out1))
+
+axiom H40 : (((- 2147483648) <= 2147483647) -> in_range3(left_out1))
+
+axiom H41 : (((- 2147483648) <= 2147483647) -> in_range3(left_1_out1))
+
+axiom H42 : (((- 2147483648) <= 2147483647) -> in_range3(left_2_out1))
+
+axiom H43 : true
+
+axiom H44 : true
+
+axiom H45 : true
+
+axiom H46 : (le(neg1(fliteral1), fliteral1) -> tqtisFinite(distance_km_out1))
+
+axiom H47 : (le(neg1(fliteral1), fliteral1) ->
+  tqtisFinite(elapsed_time_h_out1))
+
+axiom H48 : (le(neg1(fliteral1), fliteral1) ->
+  tqtisFinite(avoid_div_by_zero_out1))
+
+axiom H49 : (le(neg1(fliteral1), fliteral1) -> tqtisFinite(speed_out1))
+
+axiom H50 : (le(neg1(fliteral1), fliteral1) ->
+  tqtisFinite(old_output_if_new_invalid_out1))
+
+axiom H51 : (result = old_ngclicktime_out1)
+
+axiom H52 : (old_ngclicktime_out11 = old_ngclicktime_memory)
+
+axiom H53 : (result1 = old_ngrotations_out1)
+
+axiom H54 : (old_ngrotations_out11 = old_ngrotations_memory)
+
+axiom H55 : (result2 = old_estimatedgroundvelocity_out1)
+
+axiom H56 :
+  (old_estimatedgroundvelocity_out11 = old_estimatedgroundvelocity_memory)
+
+axiom H57 : (result3 = max_uint16_out1)
+
+axiom H58 : (max_uint16_out11 = 65535)
+
+axiom H59 : (result4 = max_uint16_1_out1)
+
+axiom H60 : (max_uint16_1_out11 = 65535)
+
+axiom H61 : (result5 = max_uint16_2_out1)
+
+axiom H62 : (max_uint16_2_out11 = 65535)
+
+axiom H63 : (result6 = millisecs_out1)
+
+axiom H64 : (millisecs_out11 = millisecs)
+
+axiom H65 : (result7 = ngclicktime_out1)
+
+axiom H66 : (ngclicktime_out11 = ngclicktime)
+
+axiom H67 : (result8 = ngrotations_out1)
+
+axiom H68 : (ngrotations_out11 = ngrotations)
+
+axiom H69 : (result9 = wheel_circunference_out1)
 
 logic fliteral2 : t1
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.00175463200000000010998768562586747066234238445758819580078125))
 
+axiom H70 : (wheel_circunference_out11 = fliteral2)
+
+axiom H71 : (result10 = ms_in_hour_out1)
+
 logic fliteral3 : t1
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 3600000.0))
+
+axiom H72 : (ms_in_hour_out11 = fliteral3)
+
+axiom H73 : (result11 = ms_in_our1_out1)
+
+axiom H74 : (ms_in_our1_out11 = fliteral)
+
+axiom H75 : (result12 = update_period_os_interrupt_out1)
+
+axiom H76 : (update_period_os_interrupt_out11 = of_int(500))
+
+axiom H77 : (result13 = validity_period_out1)
+
+axiom H78 : (validity_period_out11 = of_int(3000))
+
+axiom H79 : (result14 = to_int32_left_out1)
+
+axiom H80 : (to_int32_left_out11 = tqtint(ngrotations_out11))
+
+axiom H81 : (result15 = to_int32_left_1_out1)
+
+axiom H82 : (to_int32_left_1_out11 = tqtint(ngclicktime_out11))
+
+axiom H83 : (result16 = to_int32_left_2_out1)
+
+axiom H84 : (to_int32_left_2_out11 = tqtint(millisecs_out11))
+
+axiom H85 : (result17 = to_int32_right_out1)
+
+axiom H86 : (to_int32_right_out11 = tqtint(old_ngrotations_out11))
+
+axiom H87 : (result18 = to_int32_right_1_out1)
+
+axiom H88 : (to_int32_right_1_out11 = tqtint(old_ngclicktime_out11))
+
+axiom H89 : (result19 = to_int32_right_2_out1)
+
+axiom H90 : (to_int32_right_2_out11 = tqtint(old_ngclicktime_out11))
+
+axiom H91 : (result20 = data_type_conversion1_out1)
+
+axiom H92 : (data_type_conversion1_out11 = tqtint(millisecs_out11))
+
+axiom H93 : (result21 = data_type_conversion_out1)
+
+axiom H94 : (data_type_conversion_out11 = tqtint(old_ngclicktime_out11))
+
+axiom H95 : (result22 = sum1_2_out1)
+
+axiom H96 : (sum1_2_out11 = sub(validity_period_out11,
+  update_period_os_interrupt_out11))
+
+axiom H97 : ((o = (to_int32_right_out11 - to_int32_left_out11)) and
+  in_range2((to_int32_right_out11 - to_int32_left_out11)))
+
+axiom H98 : (result23 = sum1_out1)
+
+axiom H99 : (sum1_out11 = o)
+
+axiom H100 : ((o1 = (to_int32_right_1_out11 - to_int32_left_1_out11)) and
+  in_range2((to_int32_right_1_out11 - to_int32_left_1_out11)))
+
+axiom H101 : (result24 = sum1_1_out1)
+
+axiom H102 : (sum1_1_out11 = o1)
+
+axiom H103 : ((o2 = (to_int32_left_out11 - to_int32_right_out11)) and
+  in_range2((to_int32_left_out11 - to_int32_right_out11)))
+
+axiom H104 : (result25 = sum2_out1)
+
+axiom H105 : (sum2_out11 = o2)
+
+axiom H106 : ((o3 = (to_int32_left_1_out11 - to_int32_right_1_out11)) and
+  in_range2((to_int32_left_1_out11 - to_int32_right_1_out11)))
+
+axiom H107 : (result26 = sum2_1_out1)
+
+axiom H108 : (sum2_1_out11 = o3)
+
+axiom H109 : ((o4 = (to_int32_right_2_out11 - to_int32_left_2_out11)) and
+  in_range2((to_int32_right_2_out11 - to_int32_left_2_out11)))
+
+axiom H110 : (result27 = sum1_1_1_out1)
+
+axiom H111 : (sum1_1_1_out11 = o4)
+
+axiom H112 :
+  ((o5 = (data_type_conversion1_out11 - data_type_conversion_out11)) and
+  in_range2((data_type_conversion1_out11 - data_type_conversion_out11)))
+
+axiom H113 : (result28 = sum_out1)
+
+axiom H114 : (sum_out11 = o5)
+
+axiom H115 : ((o6 = (to_int32_left_2_out11 - to_int32_right_2_out11)) and
+  in_range2((to_int32_left_2_out11 - to_int32_right_2_out11)))
+
+axiom H116 : (result29 = sum2_2_out1)
+
+axiom H117 : (sum2_2_out11 = o6)
+
+axiom H118 : (result30 = compare_to_constant_out1)
 
 logic fliteral4 : t1
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 3000.0))
 
+axiom H119 : ((le(of_int1(NearestTiesToEven, sum_out11), fliteral4) ->
+  (compare_to_constant_out11 = true)) and ((not le(of_int1(NearestTiesToEven,
+  sum_out11), fliteral4)) -> (compare_to_constant_out11 = false)))
+
+axiom H120 : ((o7 = (max_uint16_out11 - sum1_out11)) and
+  in_range2((max_uint16_out11 - sum1_out11)))
+
+axiom H121 : (result31 = sum_1_out1)
+
+axiom H122 : (sum_1_out11 = o7)
+
+axiom H123 : ((o8 = (max_uint16_1_out11 - sum1_1_out11)) and
+  in_range2((max_uint16_1_out11 - sum1_1_out11)))
+
+axiom H124 : (result32 = sum_2_out1)
+
+axiom H125 : (sum_2_out11 = o8)
+
+axiom H126 : ((o9 = (max_uint16_2_out11 - sum1_1_1_out11)) and
+  in_range2((max_uint16_2_out11 - sum1_1_1_out11)))
+
+axiom H127 : (result33 = sum_3_out1)
+
+axiom H128 : (sum_3_out11 = o9)
+
+axiom H129 : ((0 <= sum2_out11) -> (result34 = left_out1))
+
+axiom H130 : ((0 <= sum2_out11) -> (left_out11 = sum2_out11))
+
+axiom H131 : ((not (0 <= sum2_out11)) -> (result35 = left_out1))
+
+axiom H132 : ((not (0 <= sum2_out11)) -> (left_out12 = sum_1_out11))
+
+axiom H133 : ((not (0 <= sum2_out11)) -> (left_out11 = left_out12))
+
+axiom H134 : ((not (0 <= sum2_out11)) -> (left_out11 = left_out12))
+
+axiom H135 : ((0 <= sum2_1_out11) -> (result36 = left_1_out1))
+
+axiom H136 : ((0 <= sum2_1_out11) -> (left_1_out11 = sum2_1_out11))
+
+axiom H137 : ((not (0 <= sum2_1_out11)) -> (result37 = left_1_out1))
+
+axiom H138 : ((not (0 <= sum2_1_out11)) -> (left_1_out12 = sum_2_out11))
+
+axiom H139 : ((not (0 <= sum2_1_out11)) -> (left_1_out11 = left_1_out12))
+
+axiom H140 : ((not (0 <= sum2_1_out11)) -> (left_1_out11 = left_1_out12))
+
+axiom H141 : ((0 <= sum2_2_out11) -> (result38 = left_2_out1))
+
+axiom H142 : ((0 <= sum2_2_out11) -> (left_2_out11 = sum2_2_out11))
+
+axiom H143 : ((not (0 <= sum2_2_out11)) -> (result39 = left_2_out1))
+
+axiom H144 : ((not (0 <= sum2_2_out11)) -> (left_2_out12 = sum_3_out11))
+
+axiom H145 : ((not (0 <= sum2_2_out11)) -> (left_2_out11 = left_2_out12))
+
+axiom H146 : ((not (0 <= sum2_2_out11)) -> (left_2_out11 = left_2_out12))
+
+axiom H147 : ((o10 = left_out11) and uint_in_range(left_out11))
+
+axiom H148 : (o11 = of_int(o10))
+
+axiom H149 : (result40 = to_uint16_result_out1)
+
+axiom H150 : (to_uint16_result_out11 = o11)
+
  (* File "nose_gear.adb", line 24, characters 0-0 *)
-goal WP_parameter_def :
-  (forall estimatedgroundvelocity:t1. forall old_ngclicktime_memory:t.
-  forall old_ngrotations_memory:t.
-  forall old_estimatedgroundvelocity_memory:t1.
-  forall old_ngclicktime_out1:t. forall old_ngrotations_out1:t.
-  forall old_estimatedgroundvelocity_out1:t1. forall max_uint16_out1:int.
-  forall max_uint16_1_out1:int. forall max_uint16_2_out1:int.
-  forall millisecs_out1:t. forall ngclicktime_out1:t.
-  forall ngrotations_out1:t. forall wheel_circunference_out1:t1.
-  forall ms_in_hour_out1:t1. forall ms_in_our1_out1:t1.
-  forall update_period_os_interrupt_out1:t. forall validity_period_out1:t.
-  forall to_int32_left_out1:int. forall to_int32_left_1_out1:int.
-  forall to_int32_left_2_out1:int. forall to_int32_right_out1:int.
-  forall to_int32_right_1_out1:int. forall to_int32_right_2_out1:int.
-  forall data_type_conversion1_out1:int.
-  forall data_type_conversion_out1:int. forall sum1_2_out1:t.
-  forall sum1_out1:int. forall sum1_1_out1:int. forall sum2_out1:int.
-  forall sum2_1_out1:int. forall sum1_1_1_out1:int. forall sum_out1:int.
-  forall sum2_2_out1:int. forall compare_to_constant_out1:bool.
-  forall sum_1_out1:int. forall sum_2_out1:int. forall sum_3_out1:int.
-  forall left_out1:int. forall left_1_out1:int. forall left_2_out1:int.
-  forall to_uint16_result_out1:t__ref. forall distance_km_out1:t__ref1.
-  forall elapsed_time_h_out1:t__ref1. forall avoid_div_by_zero_out1:t__ref1.
-  forall speed_out1:t__ref1. forall old_output_if_new_invalid_out1:t__ref1.
-  forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
-  forall o5:int. forall o6:int. forall o7:int. forall o8:int. forall o9:int.
-  forall o10:int. forall o11:t. forall result:t__ref.
-  forall old_ngclicktime_out11:t. forall result1:t__ref.
-  forall old_ngrotations_out11:t. forall result2:t__ref1.
-  forall old_estimatedgroundvelocity_out11:t1. forall result3:int__ref.
-  forall max_uint16_out11:int. forall result4:int__ref.
-  forall max_uint16_1_out11:int. forall result5:int__ref.
-  forall max_uint16_2_out11:int. forall result6:t__ref.
-  forall millisecs_out11:t. forall result7:t__ref.
-  forall ngclicktime_out11:t. forall result8:t__ref.
-  forall ngrotations_out11:t. forall result9:t__ref1.
-  forall wheel_circunference_out11:t1. forall result10:t__ref1.
-  forall ms_in_hour_out11:t1. forall result11:t__ref1.
-  forall ms_in_our1_out11:t1. forall result12:t__ref.
-  forall update_period_os_interrupt_out11:t. forall result13:t__ref.
-  forall validity_period_out11:t. forall result14:int__ref.
-  forall to_int32_left_out11:int. forall result15:int__ref.
-  forall to_int32_left_1_out11:int. forall result16:int__ref.
-  forall to_int32_left_2_out11:int. forall result17:int__ref.
-  forall to_int32_right_out11:int. forall result18:int__ref.
-  forall to_int32_right_1_out11:int. forall result19:int__ref.
-  forall to_int32_right_2_out11:int. forall result20:int__ref.
-  forall data_type_conversion1_out11:int. forall result21:int__ref.
-  forall data_type_conversion_out11:int. forall result22:t__ref.
-  forall sum1_2_out11:t. forall result23:int__ref. forall sum1_out11:int.
-  forall result24:int__ref. forall sum1_1_out11:int.
-  forall result25:int__ref. forall sum2_out11:int. forall result26:int__ref.
-  forall sum2_1_out11:int. forall result27:int__ref.
-  forall sum1_1_1_out11:int. forall result28:int__ref. forall sum_out11:int.
-  forall result29:int__ref. forall sum2_2_out11:int.
-  forall result30:bool__ref. forall compare_to_constant_out11:bool.
-  forall result31:int__ref. forall sum_1_out11:int. forall result32:int__ref.
-  forall sum_2_out11:int. forall result33:int__ref. forall sum_3_out11:int.
-  forall result34:int__ref. forall left_out11:int. forall result35:int__ref.
-  forall left_out12:int. forall result36:int__ref. forall left_1_out11:int.
-  forall result37:int__ref. forall left_1_out12:int.
-  forall result38:int__ref. forall left_2_out11:int.
-  forall result39:int__ref. forall left_2_out12:int. forall result40:t__ref.
-  forall to_uint16_result_out11:t.
-  (tqtisFinite(old_estimatedgroundvelocity_memory) -> ((le(neg1(fliteral1),
-  fliteral1) -> tqtisFinite(estimatedgroundvelocity)) ->
-  ((le(neg1(fliteral1), fliteral1) ->
-  tqtisFinite(old_estimatedgroundvelocity_out1)) ->
-  ((((-2147483648) <= 2147483647) -> in_range3(max_uint16_out1)) ->
-  ((((-2147483648) <= 2147483647) -> in_range3(max_uint16_1_out1)) ->
-  ((((-2147483648) <= 2147483647) -> in_range3(max_uint16_2_out1)) ->
-  ((le(neg1(fliteral1), fliteral1) ->
-  tqtisFinite(wheel_circunference_out1)) -> ((le(neg1(fliteral1),
-  fliteral1) -> tqtisFinite(ms_in_hour_out1)) -> ((le(neg1(fliteral1),
-  fliteral1) -> tqtisFinite(ms_in_our1_out1)) ->
-  ((((-2147483648) <= 2147483647) -> in_range3(to_int32_left_out1)) ->
-  ((((-2147483648) <= 2147483647) -> in_range3(to_int32_left_1_out1)) ->
-  ((((-2147483648) <= 2147483647) -> in_range3(to_int32_left_2_out1)) ->
-  ((((-2147483648) <= 2147483647) -> in_range3(to_int32_right_out1)) ->
-  ((((-2147483648) <= 2147483647) -> in_range3(to_int32_right_1_out1)) ->
-  ((((-2147483648) <= 2147483647) -> in_range3(to_int32_right_2_out1)) ->
-  ((((-2147483648) <= 2147483647) ->
-  in_range3(data_type_conversion1_out1)) ->
-  ((((-2147483648) <= 2147483647) -> in_range3(data_type_conversion_out1)) ->
-  ((((-2147483648) <= 2147483647) -> in_range3(sum1_out1)) ->
-  ((((-2147483648) <= 2147483647) -> in_range3(sum1_1_out1)) ->
-  ((((-2147483648) <= 2147483647) -> in_range3(sum2_out1)) ->
-  ((((-2147483648) <= 2147483647) -> in_range3(sum2_1_out1)) ->
-  ((((-2147483648) <= 2147483647) -> in_range3(sum1_1_1_out1)) ->
-  ((((-2147483648) <= 2147483647) -> in_range3(sum_out1)) ->
-  ((((-2147483648) <= 2147483647) -> in_range3(sum2_2_out1)) ->
-  ((((-2147483648) <= 2147483647) -> in_range3(sum_1_out1)) ->
-  ((((-2147483648) <= 2147483647) -> in_range3(sum_2_out1)) ->
-  ((((-2147483648) <= 2147483647) -> in_range3(sum_3_out1)) ->
-  ((((-2147483648) <= 2147483647) -> in_range3(left_out1)) ->
-  ((((-2147483648) <= 2147483647) -> in_range3(left_1_out1)) ->
-  ((((-2147483648) <= 2147483647) -> in_range3(left_2_out1)) ->
-  ((le(neg1(fliteral1), fliteral1) ->
-  tqtisFinite((distance_km_out1).t__content1)) -> ((le(neg1(fliteral1),
-  fliteral1) -> tqtisFinite((elapsed_time_h_out1).t__content1)) ->
-  ((le(neg1(fliteral1), fliteral1) ->
-  tqtisFinite((avoid_div_by_zero_out1).t__content1)) -> ((le(neg1(fliteral1),
-  fliteral1) -> tqtisFinite((speed_out1).t__content1)) ->
-  ((le(neg1(fliteral1), fliteral1) ->
-  tqtisFinite((old_output_if_new_invalid_out1).t__content1)) -> (((result = {
-  t__content = old_ngclicktime_out1 }) and
-  (old_ngclicktime_out11 = old_ngclicktime_memory)) -> (((result1 = {
-  t__content = old_ngrotations_out1 }) and
-  (old_ngrotations_out11 = old_ngrotations_memory)) -> (((result2 = {
-  t__content1 = old_estimatedgroundvelocity_out1 }) and
-  (old_estimatedgroundvelocity_out11 = old_estimatedgroundvelocity_memory)) ->
-  (((result3 = { int__content = max_uint16_out1 }) and
-  (max_uint16_out11 = 65535)) -> (((result4 = { int__content =
-  max_uint16_1_out1 }) and (max_uint16_1_out11 = 65535)) -> (((result5 = {
-  int__content = max_uint16_2_out1 }) and (max_uint16_2_out11 = 65535)) ->
-  (((result6 = { t__content = millisecs_out1 }) and
-  (millisecs_out11 = millisecs)) -> (((result7 = { t__content =
-  ngclicktime_out1 }) and (ngclicktime_out11 = ngclicktime)) ->
-  (((result8 = { t__content = ngrotations_out1 }) and
-  (ngrotations_out11 = ngrotations)) -> (((result9 = { t__content1 =
-  wheel_circunference_out1 }) and (wheel_circunference_out11 = fliteral2)) ->
-  (((result10 = { t__content1 = ms_in_hour_out1 }) and
-  (ms_in_hour_out11 = fliteral3)) -> (((result11 = { t__content1 =
-  ms_in_our1_out1 }) and (ms_in_our1_out11 = fliteral)) -> (((result12 = {
-  t__content = update_period_os_interrupt_out1 }) and
-  (update_period_os_interrupt_out11 = of_int(500))) -> (((result13 = {
-  t__content = validity_period_out1 }) and
-  (validity_period_out11 = of_int(3000))) -> (((result14 = { int__content =
-  to_int32_left_out1 }) and
-  (to_int32_left_out11 = tqtint(ngrotations_out11))) -> (((result15 = {
-  int__content = to_int32_left_1_out1 }) and
-  (to_int32_left_1_out11 = tqtint(ngclicktime_out11))) -> (((result16 = {
-  int__content = to_int32_left_2_out1 }) and
-  (to_int32_left_2_out11 = tqtint(millisecs_out11))) -> (((result17 = {
-  int__content = to_int32_right_out1 }) and
-  (to_int32_right_out11 = tqtint(old_ngrotations_out11))) -> (((result18 = {
-  int__content = to_int32_right_1_out1 }) and
-  (to_int32_right_1_out11 = tqtint(old_ngclicktime_out11))) ->
-  (((result19 = { int__content = to_int32_right_2_out1 }) and
-  (to_int32_right_2_out11 = tqtint(old_ngclicktime_out11))) ->
-  (((result20 = { int__content = data_type_conversion1_out1 }) and
-  (data_type_conversion1_out11 = tqtint(millisecs_out11))) -> (((result21 = {
-  int__content = data_type_conversion_out1 }) and
-  (data_type_conversion_out11 = tqtint(old_ngclicktime_out11))) ->
-  (((result22 = { t__content = sum1_2_out1 }) and
-  (sum1_2_out11 = sub(validity_period_out11,
-  update_period_os_interrupt_out11))) ->
-  ((((o = (to_int32_right_out11 - to_int32_left_out11)) and
-  in_range2((to_int32_right_out11 - to_int32_left_out11))) and ((result23 = {
-  int__content = sum1_out1 }) and (sum1_out11 = o))) ->
-  ((((o1 = (to_int32_right_1_out11 - to_int32_left_1_out11)) and
-  in_range2((to_int32_right_1_out11 - to_int32_left_1_out11))) and
-  ((result24 = { int__content = sum1_1_out1 }) and (sum1_1_out11 = o1))) ->
-  ((((o2 = (to_int32_left_out11 - to_int32_right_out11)) and
-  in_range2((to_int32_left_out11 - to_int32_right_out11))) and ((result25 = {
-  int__content = sum2_out1 }) and (sum2_out11 = o2))) ->
-  ((((o3 = (to_int32_left_1_out11 - to_int32_right_1_out11)) and
-  in_range2((to_int32_left_1_out11 - to_int32_right_1_out11))) and
-  ((result26 = { int__content = sum2_1_out1 }) and (sum2_1_out11 = o3))) ->
-  ((((o4 = (to_int32_right_2_out11 - to_int32_left_2_out11)) and
-  in_range2((to_int32_right_2_out11 - to_int32_left_2_out11))) and
-  ((result27 = { int__content = sum1_1_1_out1 }) and
-  (sum1_1_1_out11 = o4))) ->
-  ((((o5 = (data_type_conversion1_out11 - data_type_conversion_out11)) and
-  in_range2((data_type_conversion1_out11 - data_type_conversion_out11))) and
-  ((result28 = { int__content = sum_out1 }) and (sum_out11 = o5))) ->
-  ((((o6 = (to_int32_left_2_out11 - to_int32_right_2_out11)) and
-  in_range2((to_int32_left_2_out11 - to_int32_right_2_out11))) and
-  ((result29 = { int__content = sum2_2_out1 }) and (sum2_2_out11 = o6))) ->
-  (((result30 = { bool__content = compare_to_constant_out1 }) and
-  ((le(of_int1(NearestTiesToEven, sum_out11), fliteral4) and
-  (compare_to_constant_out11 = true)) or ((not le(of_int1(NearestTiesToEven,
-  sum_out11), fliteral4)) and (compare_to_constant_out11 = false)))) ->
-  ((((o7 = (max_uint16_out11 - sum1_out11)) and
-  in_range2((max_uint16_out11 - sum1_out11))) and ((result31 = {
-  int__content = sum_1_out1 }) and (sum_1_out11 = o7))) ->
-  ((((o8 = (max_uint16_1_out11 - sum1_1_out11)) and
-  in_range2((max_uint16_1_out11 - sum1_1_out11))) and ((result32 = {
-  int__content = sum_2_out1 }) and (sum_2_out11 = o8))) ->
-  ((((o9 = (max_uint16_2_out11 - sum1_1_1_out11)) and
-  in_range2((max_uint16_2_out11 - sum1_1_1_out11))) and ((result33 = {
-  int__content = sum_3_out1 }) and (sum_3_out11 = o9))) ->
-  ((((0 <= sum2_out11) and ((result34 = { int__content = left_out1 }) and
-  (left_out11 = sum2_out11))) or ((not (0 <= sum2_out11)) and (((result35 = {
-  int__content = left_out1 }) and (left_out12 = sum_1_out11)) and
-  (left_out11 = left_out12)))) -> ((((0 <= sum2_1_out11) and ((result36 = {
-  int__content = left_1_out1 }) and (left_1_out11 = sum2_1_out11))) or
-  ((not (0 <= sum2_1_out11)) and (((result37 = { int__content = left_1_out1
-  }) and (left_1_out12 = sum_2_out11)) and
-  (left_1_out11 = left_1_out12)))) -> ((((0 <= sum2_2_out11) and
-  ((result38 = { int__content = left_2_out1 }) and
-  (left_2_out11 = sum2_2_out11))) or ((not (0 <= sum2_2_out11)) and
-  (((result39 = { int__content = left_2_out1 }) and
-  (left_2_out12 = sum_3_out11)) and (left_2_out11 = left_2_out12)))) ->
-  (((((o10 = left_out11) and uint_in_range(left_out11)) and
-  (o11 = of_int(o10))) and ((result40 = to_uint16_result_out1) and
-  (to_uint16_result_out11 = o11))) ->
-  (left_1_out11 <= 65535)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+goal WP_parameter_def : (left_1_out11 <= 65535)

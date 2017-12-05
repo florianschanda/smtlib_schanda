@@ -1080,6 +1080,170 @@ logic attr__ATTRIBUTE_ADDRESS9 : int
 
 logic attr__ATTRIBUTE_ADDRESS10 : int
 
+logic t1 : t
+
+logic t2 : t
+
+logic t3 : t
+
+logic t4 : t
+
+logic t5 : t
+
+logic t6 : t
+
+logic t7 : t
+
+logic t8 : t
+
+logic t9 : t
+
+logic t10 : t
+
+logic res : t
+
+logic pi_compute__leibniz_float__result : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic o4 : t
+
+logic o5 : t
+
+logic o6 : t
+
+logic o7 : t
+
+logic o8 : t
+
+logic o9 : t
+
+logic o10 : t
+
+logic o11 : t
+
+logic o12 : t
+
+logic o13 : t
+
+logic o14 : t
+
+logic o15 : t
+
+logic o16 : t
+
+logic o17 : t
+
+logic o18 : t
+
+logic result : t
+
+logic t11 : t
+
+logic result1 : t
+
+logic t21 : t
+
+logic result2 : t
+
+logic t31 : t
+
+logic result3 : t
+
+logic t41 : t
+
+logic result4 : t
+
+logic t51 : t
+
+logic result5 : t
+
+logic t61 : t
+
+logic result6 : t
+
+logic t71 : t
+
+logic result7 : t
+
+logic t81 : t
+
+logic result8 : t
+
+logic t91 : t
+
+logic result9 : t
+
+logic t101 : t
+
+logic result10 : t
+
+logic res1 : t
+
+logic result11 : t
+
+logic pi_compute__leibniz_float__result1 : t
+
+logic pi_compute__leibniz_float__result2 : t
+
+logic pi_compute__leibniz_float__result3 : t
+
+logic t12 : t
+
+logic t22 : t
+
+logic t32 : t
+
+logic t42 : t
+
+logic t52 : t
+
+logic t62 : t
+
+logic t72 : t
+
+logic t82 : t
+
+logic t92 : t
+
+logic t102 : t
+
+logic res2 : t
+
+logic pi_compute__leibniz_float__result4 : t
+
+logic t13 : t
+
+logic t23 : t
+
+logic t33 : t
+
+logic t43 : t
+
+logic t53 : t
+
+logic t63 : t
+
+logic t73 : t
+
+logic t83 : t
+
+logic t93 : t
+
+logic t103 : t
+
+logic res3 : t
+
+logic pi_compute__leibniz_float__result5 : t
+
+logic result12 : t
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
@@ -1140,47 +1304,19 @@ logic fliteral12 : t
 axiom fliteral_axiom12 : (tqtisFinite(fliteral12) and
   (tqtreal(fliteral12) = 3.0418395996093750000000))
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall t1:t. forall t2:t. forall t3:t. forall t4:t. forall t5:t.
-  forall t6:t. forall t7:t. forall t8:t. forall t9:t. forall t10:t.
-  forall res:t. forall pi_compute__leibniz_float__result:t. forall o:t.
-  forall o1:t. forall o2:t. forall o3:t. forall o4:t. forall o5:t.
-  forall o6:t. forall o7:t. forall o8:t. forall o9:t. forall o10:t.
-  forall o11:t. forall o12:t. forall o13:t. forall o14:t. forall o15:t.
-  forall o16:t. forall o17:t. forall o18:t. forall result:t. forall t11:t.
-  forall result1:t. forall t21:t. forall result2:t. forall t31:t.
-  forall result3:t. forall t41:t. forall result4:t. forall t51:t.
-  forall result5:t. forall t61:t. forall result6:t. forall t71:t.
-  forall result7:t. forall t81:t. forall result8:t. forall t91:t.
-  forall result9:t. forall t101:t. forall result10:t. forall res1:t.
-  forall result11:t. forall pi_compute__leibniz_float__result1:t.
-  forall pi_compute__leibniz_float__result2:t.
-  forall pi_compute__leibniz_float__result3:t. forall t12:t. forall t22:t.
-  forall t32:t. forall t42:t. forall t52:t. forall t62:t. forall t72:t.
-  forall t82:t. forall t92:t. forall t102:t. forall res2:t.
-  forall pi_compute__leibniz_float__result4:t. forall t13:t. forall t23:t.
-  forall t33:t. forall t43:t. forall t53:t. forall t63:t. forall t73:t.
-  forall t83:t. forall t93:t. forall t103:t. forall res3:t.
-  forall pi_compute__leibniz_float__result5:t.
-  (forall result12:t. (((((({ t__content = result } = { t__content = t1
-  }) and (t11 = fliteral)) and (tqtisFinite(t11) and ((({ t__content =
-  result1 } = { t__content = t2 }) and (t21 = fliteral1)) and
-  (tqtisFinite(t21) and ((({ t__content = result2 } = { t__content = t3
-  }) and (t31 = fliteral2)) and (tqtisFinite(t31) and ((({ t__content =
-  result3 } = { t__content = t4 }) and (t41 = fliteral3)) and
-  (tqtisFinite(t41) and ((({ t__content = result4 } = { t__content = t5
-  }) and (t51 = fliteral4)) and (tqtisFinite(t51) and ((({ t__content =
-  result5 } = { t__content = t6 }) and (t61 = fliteral5)) and
-  (tqtisFinite(t61) and ((({ t__content = result6 } = { t__content = t7
-  }) and (t71 = fliteral6)) and (tqtisFinite(t71) and ((({ t__content =
-  result7 } = { t__content = t8 }) and (t81 = fliteral7)) and
-  (tqtisFinite(t81) and ((({ t__content = result8 } = { t__content = t9
-  }) and (t91 = fliteral8)) and (tqtisFinite(t91) and ((({ t__content =
-  result9 } = { t__content = t10 }) and (t101 = fliteral9)) and
-  (tqtisFinite(t101) and ((le(neg(fliteral10), fliteral10) ->
-  tqtisFinite(res)) and ((((((((((((((((((((((o = sub(NearestTiesToEven, t11,
-  t21)) and tqtisFinite(sub(NearestTiesToEven, t11, t21))) and
+axiom H : ((((result = t1) and (t11 = fliteral)) and (tqtisFinite(t11) and
+  (((result1 = t2) and (t21 = fliteral1)) and (tqtisFinite(t21) and
+  (((result2 = t3) and (t31 = fliteral2)) and (tqtisFinite(t31) and
+  (((result3 = t4) and (t41 = fliteral3)) and (tqtisFinite(t41) and
+  (((result4 = t5) and (t51 = fliteral4)) and (tqtisFinite(t51) and
+  (((result5 = t6) and (t61 = fliteral5)) and (tqtisFinite(t61) and
+  (((result6 = t7) and (t71 = fliteral6)) and (tqtisFinite(t71) and
+  (((result7 = t8) and (t81 = fliteral7)) and (tqtisFinite(t81) and
+  (((result8 = t9) and (t91 = fliteral8)) and (tqtisFinite(t91) and
+  (((result9 = t10) and (t101 = fliteral9)) and (tqtisFinite(t101) and
+  ((le(neg(fliteral10), fliteral10) -> tqtisFinite(res)) and
+  ((((((((((((((((((((((o = sub(NearestTiesToEven, t11, t21)) and
+  tqtisFinite(sub(NearestTiesToEven, t11, t21))) and
   (o1 = add(NearestTiesToEven, o, t31))) and ((o2 = o1) and
   tqtisFinite(o1))) and (o3 = sub(NearestTiesToEven, o2, t41))) and
   ((o4 = o3) and tqtisFinite(o3))) and (o5 = add(NearestTiesToEven, o4,
@@ -1192,21 +1328,22 @@ goal WP_parameter_def :
   (o13 = add(NearestTiesToEven, o12, t91))) and ((o14 = o13) and
   tqtisFinite(o13))) and (o15 = sub(NearestTiesToEven, o14, t101))) and
   ((o16 = o15) and tqtisFinite(o15))) and (o17 = mul(NearestTiesToEven,
-  fliteral11, o16))) and ((o18 = o17) and tqtisFinite(o17))) and (({
-  t__content = result10 } = { t__content = res }) and (res1 = o18))) and
-  (eq(res1, fliteral12) and
-  (((pi_compute__leibniz_float__result1 = pi_compute__leibniz_float__result2) and
+  fliteral11, o16))) and ((o18 = o17) and tqtisFinite(o17))) and
+  ((result10 = res) and (res1 = o18))) and (eq(res1, fliteral12) and
+  (((pi_compute__leibniz_float__result2 = pi_compute__leibniz_float__result1) and
   (pi_compute__leibniz_float__result3 = pi_compute__leibniz_float__result1)) and
   ((result11 = pi_compute__leibniz_float__result) and
   (pi_compute__leibniz_float__result1 = res1)))))))))))))))))))))))))) and
-  ((({ t__content = pi_compute__leibniz_float__result4 } = { t__content =
-  pi_compute__leibniz_float__result2 }) and ((res1 = res2) and
-  ((t101 = t102) and ((t91 = t92) and ((t81 = t82) and ((t71 = t72) and
-  ((t61 = t62) and ((t51 = t52) and ((t41 = t42) and ((t31 = t32) and
-  ((t21 = t22) and (t11 = t12)))))))))))) and
+  (((pi_compute__leibniz_float__result4 = pi_compute__leibniz_float__result2) and
+  ((res2 = res1) and ((t102 = t101) and ((t92 = t91) and ((t82 = t81) and
+  ((t72 = t71) and ((t62 = t61) and ((t52 = t51) and ((t42 = t41) and
+  ((t32 = t31) and ((t22 = t21) and (t12 = t11)))))))))))) and
   ((pi_compute__leibniz_float__result5 = pi_compute__leibniz_float__result3) and
   ((res3 = res1) and ((t103 = t101) and ((t93 = t91) and ((t83 = t81) and
   ((t73 = t71) and ((t63 = t61) and ((t53 = t51) and ((t43 = t41) and
-  ((t33 = t31) and ((t23 = t21) and (t13 = t11)))))))))))))) and
-  (result12 = pi_compute__leibniz_float__result4)) ->
-  eq(pi_compute__leibniz_float__result4, fliteral12))))
+  ((t33 = t31) and ((t23 = t21) and (t13 = t11))))))))))))))
+
+axiom H1 : (result12 = pi_compute__leibniz_float__result4)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : eq(pi_compute__leibniz_float__result4, fliteral12)

@@ -1116,18 +1116,20 @@
                                      (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_51)))
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral2)
-  (= (tqtreal fliteral2) (/ 99999997473787516355514526367187500.0 10000000000000000000000000000000000000000.0))))
+(declare-const o t)
 
 ;; H
   (assert (tqtisFinite left))
 
 ;; H
   (assert (tqtisFinite right))
+
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral2)
+  (= (tqtreal fliteral2) (/ 99999997473787516355514526367187500.0 10000000000000000000000000000000000000000.0))))
 
 (assert
 ;; WP_parameter_def

@@ -1322,20 +1322,20 @@
 
 (define-fun bool_eq2 ((a us_rep)
   (b us_rep)) Bool (ite (and
-                        (and
-                        (and
                         (= (to_rep1 (rec__pred__r__d (us_split_discrs1 a)))
                         (to_rep1 (rec__pred__r__d (us_split_discrs1 b))))
+                        (and
+                        (and
                         (=> (pred__r__c1__pred a)
                         (= (to_rep (rec__pred__r__c1 (us_split_fields1 a)))
-                        (to_rep (rec__pred__r__c1 (us_split_fields1 b))))))
+                        (to_rep (rec__pred__r__c1 (us_split_fields1 b)))))
                         (=> (pred__r__c2__pred a)
                         (= (to_rep2 (rec__pred__r__c2 (us_split_fields1 a)))
                         (to_rep2 (rec__pred__r__c2 (us_split_fields1 b))))))
                         (=> (pred__r__c3__pred a)
                         (= (rec__pred__r__c3 (us_split_fields1 a)) (rec__pred__r__c3
                                                                    (us_split_fields1
-                                                                   b)))))
+                                                                   b))))))
                    true false))
 
 (declare-const value__size Int)

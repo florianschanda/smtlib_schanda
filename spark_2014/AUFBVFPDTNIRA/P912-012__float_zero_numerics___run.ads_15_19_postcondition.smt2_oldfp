@@ -1130,11 +1130,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) (/ 0.0 10.0))))
-
 (declare-const y t)
 
 (declare-const o t)
@@ -1175,6 +1170,11 @@
 
 ;; H
   (assert (= y3 y1))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) (/ 0.0 10.0))))
 
 (assert
 ;; WP_parameter_def

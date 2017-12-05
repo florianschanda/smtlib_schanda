@@ -1562,6 +1562,20 @@
 
 (declare-const o10 t)
 
+(declare-const o11 t)
+
+(declare-const o12 t)
+
+(declare-const o13 t)
+
+(declare-const o14 t)
+
+(declare-const o15 t)
+
+(declare-const o16 t)
+
+(declare-const o17 t)
+
 (declare-const result t)
 
 (declare-const delta_lat1 t)
@@ -1699,44 +1713,44 @@
 
 ;; H
   (assert
-  (and (= o8 (delta_long_in_meters source destination))
-  (and (tqtisFinite o8)
+  (and (= o11 (delta_long_in_meters source destination))
+  (and (tqtisFinite o11)
   (and
-  (= o8 (div1 RNE1
-        (mul RNE1
-        (sub RNE1
-        (to_rep1
-        (rec__lat_long__coordinates__long (us_split_fields1 destination)))
-        (to_rep1
-        (rec__lat_long__coordinates__long (us_split_fields1 source))))
-        fliteral7)
-        (cos1
-        (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source))))))
-  (= (olt (abs1 o8) fliteral9) true)))))
+  (= o11 (div1 RNE1
+         (mul RNE1
+         (sub RNE1
+         (to_rep1
+         (rec__lat_long__coordinates__long (us_split_fields1 destination)))
+         (to_rep1
+         (rec__lat_long__coordinates__long (us_split_fields1 source))))
+         fliteral7)
+         (cos1
+         (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source))))))
+  (= (olt (abs1 o11) fliteral9) true)))))
 
 ;; H
   (assert
-  (and (= o9 (delta_long_in_meters source destination))
-  (and (tqtisFinite o9)
+  (and (= o12 (delta_long_in_meters source destination))
+  (and (tqtisFinite o12)
   (and
-  (= o9 (div1 RNE1
-        (mul RNE1
-        (sub RNE1
-        (to_rep1
-        (rec__lat_long__coordinates__long (us_split_fields1 destination)))
-        (to_rep1
-        (rec__lat_long__coordinates__long (us_split_fields1 source))))
-        fliteral7)
-        (cos1
-        (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source))))))
-  (= (olt (abs1 o9) fliteral9) true)))))
+  (= o12 (div1 RNE1
+         (mul RNE1
+         (sub RNE1
+         (to_rep1
+         (rec__lat_long__coordinates__long (us_split_fields1 destination)))
+         (to_rep1
+         (rec__lat_long__coordinates__long (us_split_fields1 source))))
+         fliteral7)
+         (cos1
+         (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source))))))
+  (= (olt (abs1 o12) fliteral9) true)))))
 
 ;; H
-  (assert (= o10 (mul RNE1 o9 o8)))
+  (assert (= o13 (mul RNE1 o12 o11)))
 
 (assert
 ;; WP_parameter_def
  ;; File "lat_long.ads", line 6, characters 0-0
-  (not (tqtisFinite o10)))
+  (not (tqtisFinite o13)))
 (check-sat)
 (exit)

@@ -1993,6 +1993,8 @@
 
 (declare-const o4 Int)
 
+(declare-const o5 Bool)
+
 ;; H
   (assert (= (to_rep o) 0))
 

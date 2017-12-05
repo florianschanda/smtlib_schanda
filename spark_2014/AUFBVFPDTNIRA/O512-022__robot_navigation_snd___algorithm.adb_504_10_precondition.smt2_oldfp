@@ -2880,24 +2880,24 @@
 
 (define-fun bool_eq18 ((a us_rep9)
   (b us_rep9)) Bool (ite (and
-                         (and
                          (= (to_rep11
                             (rec__robot_iface__speed_option__opt
                             (us_split_discrs5 a))) (to_rep11
                                                    (rec__robot_iface__speed_option__opt
                                                    (us_split_discrs5 b))))
+                         (and
                          (=> (robot_iface__speed_option__modulus__pred a)
                          (= (to_rep2
                             (rec__robot_iface__speed_option__modulus
                             (us_split_fields15 a))) (to_rep2
                                                     (rec__robot_iface__speed_option__modulus
-                                                    (us_split_fields15 b))))))
+                                                    (us_split_fields15 b)))))
                          (=> (robot_iface__speed_option__angle__pred a)
                          (= (to_rep2
                             (rec__robot_iface__speed_option__angle
                             (us_split_fields15 a))) (to_rep2
                                                     (rec__robot_iface__speed_option__angle
-                                                    (us_split_fields15 b))))))
+                                                    (us_split_fields15 b)))))))
                     true false))
 
 (declare-const value__size12 Int)
@@ -4088,12 +4088,12 @@
 
 (define-fun bool_eq23 ((a us_rep13)
   (b us_rep13)) Bool (ite (and
-                          (and
                           (= (to_rep6
                              (rec__algorithm__findbestvalley__gap_id_pair__opt
                              (us_split_discrs7 a))) (to_rep6
                                                     (rec__algorithm__findbestvalley__gap_id_pair__opt
                                                     (us_split_discrs7 b))))
+                          (and
                           (=>
                           (algorithm__findbestvalley__gap_id_pair__rising__pred
                           a)
@@ -4101,7 +4101,7 @@
                              (rec__algorithm__findbestvalley__gap_id_pair__rising
                              (us_split_fields23 a))
                              (rec__algorithm__findbestvalley__gap_id_pair__rising
-                             (us_split_fields23 b))) true)))
+                             (us_split_fields23 b))) true))
                           (=>
                           (algorithm__findbestvalley__gap_id_pair__other__pred
                           a)
@@ -4109,7 +4109,7 @@
                              (rec__algorithm__findbestvalley__gap_id_pair__other
                              (us_split_fields23 a))
                              (rec__algorithm__findbestvalley__gap_id_pair__other
-                             (us_split_fields23 b))) true)))
+                             (us_split_fields23 b))) true))))
                      true false))
 
 (declare-const value__size18 Int)
@@ -5768,13 +5768,6 @@
      (w_get container witness1) true false true)) :pattern ((w_get container
                                                             witness1)) ))))
 
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral4)
-  (= (tqtreal fliteral4) (/ 31415927410125732421875.0 10000000000000000000000.0))))
-
 (declare-const best_valley_ids__split_fields count_type)
 
 (declare-const best_valley_ids__split_fields1 count_type)
@@ -5782,6 +5775,12 @@
 (declare-const best_valley_ids__split_discrs option)
 
 (declare-const ir__split_fields count_type)
+
+(declare-const candidate_valley_ids__split_fields count_type)
+
+(declare-const candidate_valley_ids__split_fields1 count_type)
+
+(declare-const candidate_valley_ids__split_discrs option)
 
 (declare-const o float)
 
@@ -5806,6 +5805,12 @@
 (declare-const algorithm__findbestvalley__best_valley_ids__assume us_rep13)
 
 (declare-const algorithm__findbestvalley__ir__assume us_rep6)
+
+(declare-const temp___868 us_rep5)
+
+(declare-const temp___867 us_rep6)
+
+(declare-const temp___866 us_rep13)
 
 (declare-const o7 us_rep6)
 
@@ -5991,6 +5996,24 @@
 
 (declare-const temp___855 us_rep13)
 
+(declare-const o84 Bool)
+
+(declare-const o85 us_rep2)
+
+(declare-const o86 us_split_fields4)
+
+(declare-const o87 us_rep)
+
+(declare-const o88 us_t)
+
+(declare-const o89 us_rep2)
+
+(declare-const o90 us_rep2)
+
+(declare-const candidate_valley_ids__split_fields2 us_split_fields22)
+
+(declare-const candidate_valley_ids__split_discrs1 us_split_discrs6)
+
 (declare-const result us_split_fields__ref11)
 
 (declare-const best_valley_ids__split_fields2 us_split_fields22)
@@ -6011,19 +6034,19 @@
 
 (declare-const ir__split_fields2 us_split_fields12)
 
-(declare-const candidate_valley_ids__split_fields us_split_fields22)
+(declare-const candidate_valley_ids__split_fields3 us_split_fields22)
 
-(declare-const candidate_valley_ids__split_discrs us_split_discrs6)
+(declare-const candidate_valley_ids__split_discrs2 us_split_discrs6)
 
 (declare-const result4 Bool)
 
 (declare-const result5 us_split_fields__ref11)
 
-(declare-const candidate_valley_ids__split_fields1 us_split_fields22)
+(declare-const candidate_valley_ids__split_fields4 us_split_fields22)
 
 (declare-const result6 us_split_discrs__ref3)
 
-(declare-const candidate_valley_ids__split_discrs1 us_split_discrs6)
+(declare-const candidate_valley_ids__split_discrs3 us_split_discrs6)
 
 (declare-const result7 Bool)
 
@@ -6031,11 +6054,11 @@
 
 (declare-const result9 us_split_fields__ref11)
 
-(declare-const candidate_valley_ids__split_fields2 us_split_fields22)
+(declare-const candidate_valley_ids__split_fields5 us_split_fields22)
 
 (declare-const result10 us_split_discrs__ref3)
 
-(declare-const candidate_valley_ids__split_discrs2 us_split_discrs6)
+(declare-const candidate_valley_ids__split_discrs4 us_split_discrs6)
 
 (declare-const result11 Bool)
 
@@ -6045,19 +6068,19 @@
 
 (declare-const result14 us_split_fields__ref11)
 
-(declare-const candidate_valley_ids__split_fields3 us_split_fields22)
+(declare-const candidate_valley_ids__split_fields6 us_split_fields22)
 
 (declare-const result15 us_split_discrs__ref3)
 
-(declare-const candidate_valley_ids__split_discrs3 us_split_discrs6)
+(declare-const candidate_valley_ids__split_discrs5 us_split_discrs6)
 
 (declare-const result16 us_split_fields__ref11)
 
-(declare-const candidate_valley_ids__split_fields4 us_split_fields22)
+(declare-const candidate_valley_ids__split_fields7 us_split_fields22)
 
 (declare-const result17 us_split_discrs__ref3)
 
-(declare-const candidate_valley_ids__split_discrs4 us_split_discrs6)
+(declare-const candidate_valley_ids__split_discrs6 us_split_discrs6)
 
 (declare-const result18 Bool)
 
@@ -6076,6 +6099,70 @@
 (declare-const result22 us_split_discrs__ref3)
 
 (declare-const best_valley_ids__split_discrs4 us_split_discrs6)
+
+(declare-const ir__split_fields3 us_split_fields12)
+
+(declare-const result23 Bool)
+
+(declare-const best_valley_ids__split_fields6 us_split_fields__ref11)
+
+(declare-const best_valley_ids__split_discrs5 us_split_discrs__ref3)
+
+(declare-const ir__split_fields4 us_split_fields__ref6)
+
+(declare-const candidate_valley_ids__split_fields8 us_split_fields__ref11)
+
+(declare-const candidate_valley_ids__split_discrs7 us_split_discrs__ref3)
+
+(declare-const best_valley_ids__split_fields7 us_split_fields22)
+
+(declare-const best_valley_ids__split_discrs6 us_split_discrs6)
+
+(declare-const ir__split_fields5 us_split_fields12)
+
+(declare-const candidate_valley_ids__split_fields9 us_split_fields22)
+
+(declare-const candidate_valley_ids__split_discrs8 us_split_discrs6)
+
+(declare-const best_valley_ids__split_fields8 us_split_fields__ref11)
+
+(declare-const best_valley_ids__split_discrs7 us_split_discrs__ref3)
+
+(declare-const ir__split_fields6 us_split_fields__ref6)
+
+(declare-const candidate_valley_ids__split_fields10 us_split_fields__ref11)
+
+(declare-const candidate_valley_ids__split_discrs9 us_split_discrs__ref3)
+
+(declare-const best_valley_ids__split_fields9 us_split_fields22)
+
+(declare-const best_valley_ids__split_discrs8 us_split_discrs6)
+
+(declare-const ir__split_fields7 us_split_fields12)
+
+(declare-const candidate_valley_ids__split_fields11 us_split_fields22)
+
+(declare-const candidate_valley_ids__split_discrs10 us_split_discrs6)
+
+(declare-const best_valley_ids__split_fields10 us_split_fields__ref11)
+
+(declare-const best_valley_ids__split_discrs9 us_split_discrs__ref3)
+
+(declare-const ir__split_fields8 us_split_fields__ref6)
+
+(declare-const candidate_valley_ids__split_fields12 us_split_fields__ref11)
+
+(declare-const candidate_valley_ids__split_discrs11 us_split_discrs__ref3)
+
+(declare-const best_valley_ids__split_fields11 us_split_fields22)
+
+(declare-const best_valley_ids__split_discrs10 us_split_discrs6)
+
+(declare-const ir__split_fields9 us_split_fields12)
+
+(declare-const candidate_valley_ids__split_fields13 us_split_fields22)
+
+(declare-const candidate_valley_ids__split_discrs12 us_split_discrs6)
 
 ;; H
   (assert (= (to_rep2 o) fliteral1))
@@ -6331,20 +6418,20 @@
 
 ;; H
   (assert
-  (= result5 (mk___split_fields__ref11 candidate_valley_ids__split_fields)))
+  (= result5 (mk___split_fields__ref11 candidate_valley_ids__split_fields3)))
 
 ;; H
   (assert
-  (= candidate_valley_ids__split_fields1 (us_split_fields23
+  (= candidate_valley_ids__split_fields4 (us_split_fields23
                                          algorithm__findbestvalley__B_14__candidate_valley_ids__assume)))
 
 ;; H
   (assert
-  (= result6 (mk___split_discrs__ref3 candidate_valley_ids__split_discrs)))
+  (= result6 (mk___split_discrs__ref3 candidate_valley_ids__split_discrs2)))
 
 ;; H
   (assert
-  (= candidate_valley_ids__split_discrs1 (us_split_discrs7
+  (= candidate_valley_ids__split_discrs3 (us_split_discrs7
                                          algorithm__findbestvalley__B_14__candidate_valley_ids__assume)))
 
 ;; H
@@ -6416,7 +6503,7 @@
   (=> (= candidate_valley_ids__attr__constrained true)
   (= (rec__algorithm__findbestvalley__gap_id_pair__opt
      (us_split_discrs7 temp___841)) (rec__algorithm__findbestvalley__gap_id_pair__opt
-                                    candidate_valley_ids__split_discrs1))))))
+                                    candidate_valley_ids__split_discrs3))))))
 
 ;; H
   (assert (=> (= result7 true) (=> (= result8 true) (= usq_ temp___841))))
@@ -6432,25 +6519,25 @@
   (assert
   (=> (= result7 true)
   (=> (= result8 true)
-  (= result9 (mk___split_fields__ref11 candidate_valley_ids__split_fields1)))))
+  (= result9 (mk___split_fields__ref11 candidate_valley_ids__split_fields4)))))
 
 ;; H
   (assert
   (=> (= result7 true)
   (=> (= result8 true)
-  (= candidate_valley_ids__split_fields2 (us_split_fields23 temp___843)))))
+  (= candidate_valley_ids__split_fields5 (us_split_fields23 temp___843)))))
 
 ;; H
   (assert
   (=> (= result7 true)
   (=> (= result8 true)
-  (= result10 (mk___split_discrs__ref3 candidate_valley_ids__split_discrs1)))))
+  (= result10 (mk___split_discrs__ref3 candidate_valley_ids__split_discrs3)))))
 
 ;; H
   (assert
   (=> (= result7 true)
   (=> (= result8 true)
-  (= candidate_valley_ids__split_discrs2 (us_split_discrs7 temp___843)))))
+  (= candidate_valley_ids__split_discrs4 (us_split_discrs7 temp___843)))))
 
 ;; H
   (assert
@@ -6492,23 +6579,23 @@
   (assert
   (=> (= result7 true)
   (=> (not (= result8 true))
-  (= candidate_valley_ids__split_discrs2 candidate_valley_ids__split_discrs1))))
+  (= candidate_valley_ids__split_discrs4 candidate_valley_ids__split_discrs3))))
 
 ;; H
   (assert
   (=> (= result7 true)
   (=> (not (= result8 true))
-  (= candidate_valley_ids__split_fields2 candidate_valley_ids__split_fields1))))
+  (= candidate_valley_ids__split_fields5 candidate_valley_ids__split_fields4))))
 
 ;; H
   (assert
   (=> (not (= result7 true))
-  (= candidate_valley_ids__split_discrs2 candidate_valley_ids__split_discrs1)))
+  (= candidate_valley_ids__split_discrs4 candidate_valley_ids__split_discrs3)))
 
 ;; H
   (assert
   (=> (not (= result7 true))
-  (= candidate_valley_ids__split_fields2 candidate_valley_ids__split_fields1)))
+  (= candidate_valley_ids__split_fields5 candidate_valley_ids__split_fields4)))
 
 ;; H
   (assert
@@ -6559,7 +6646,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
+     candidate_valley_ids__split_discrs4)) 1)
   (= o34 (bearing disttogoal))))))
 
 ;; H
@@ -6569,12 +6656,12 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
+     candidate_valley_ids__split_discrs4)) 1)
   (and
   (= o31 (element
          (rec__algorithm__controller__gapvec (us_split_fields21 this))
          (rec__algorithm__findbestvalley__gap_id_pair__rising
-         candidate_valley_ids__split_fields2)))
+         candidate_valley_ids__split_fields5)))
   (= (bool_eq7 o31
      (get
      (model__ (rec__algorithm__controller__gapvec (us_split_fields21 this)))
@@ -6582,7 +6669,7 @@
      (positions
      (rec__algorithm__controller__gapvec (us_split_fields21 this)))
      (rec__algorithm__findbestvalley__gap_id_pair__rising
-     candidate_valley_ids__split_fields2)))) true))))))
+     candidate_valley_ids__split_fields5)))) true))))))
 
 ;; H
   (assert
@@ -6591,7 +6678,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
+     candidate_valley_ids__split_discrs4)) 1)
   (= o32 (us_split_fields5 o31))))))
 
 ;; H
@@ -6601,8 +6688,15 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
+     candidate_valley_ids__split_discrs4)) 1)
   (= o33 (rec__gaps__gap__bearing o32))))))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral4)
+  (= (tqtreal fliteral4) (/ 31415927410125732421875.0 10000000000000000000000.0))))
 
 ;; H
   (assert
@@ -6611,7 +6705,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
+     candidate_valley_ids__split_discrs4)) 1)
   (and (= o35 (aldiff o33 o34))
   (and (tqtisFinite o35) (and (lt (neg fliteral4) o35) (le o35 fliteral4))))))))
 
@@ -6622,7 +6716,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
+     candidate_valley_ids__split_discrs4)) 1)
   (= o36 (abs1 o35))))))
 
 ;; H
@@ -6632,7 +6726,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
+     candidate_valley_ids__split_discrs4)) 1)
   (= o29 (bearing disttogoal))))))
 
 ;; H
@@ -6642,7 +6736,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
+     candidate_valley_ids__split_discrs4)) 1)
   (and
   (= o26 (element
          (rec__algorithm__controller__gapvec (us_split_fields21 this))
@@ -6661,7 +6755,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
+     candidate_valley_ids__split_discrs4)) 1)
   (= o27 (us_split_fields5 o26))))))
 
 ;; H
@@ -6671,7 +6765,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
+     candidate_valley_ids__split_discrs4)) 1)
   (= o28 (rec__gaps__gap__bearing o27))))))
 
 ;; H
@@ -6681,7 +6775,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
+     candidate_valley_ids__split_discrs4)) 1)
   (and (= o30 (aldiff o28 o29))
   (and (tqtisFinite o30) (and (lt (neg fliteral4) o30) (le o30 fliteral4))))))))
 
@@ -6692,7 +6786,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
+     candidate_valley_ids__split_discrs4)) 1)
   (= o37 (abs1 o30))))))
 
 ;; H
@@ -6702,7 +6796,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
+     candidate_valley_ids__split_discrs4)) 1)
   (= result13 (ite (lt o37 o36) true false))))))
 
 ;; H
@@ -6712,7 +6806,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
+     candidate_valley_ids__split_discrs4)) 1)
   (=> (= result13 true) (= (to_rep6 o38) 1))))))
 
 ;; H
@@ -6722,7 +6816,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
+     candidate_valley_ids__split_discrs4)) 1)
   (=> (= result13 true) (= o39 (mk___split_discrs3 o38)))))))
 
 ;; H
@@ -6732,7 +6826,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
+     candidate_valley_ids__split_discrs4)) 1)
   (=> (= result13 true)
   (= temp___849 (mk___rep11 o39
                 (mk___split_fields11 il (mk___rep6 ir__split_fields2)) true)))))))
@@ -6744,12 +6838,12 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
+     candidate_valley_ids__split_discrs4)) 1)
   (=> (= result13 true)
   (=> (= candidate_valley_ids__attr__constrained true)
   (= (rec__algorithm__findbestvalley__gap_id_pair__opt
      (us_split_discrs7 temp___849)) (rec__algorithm__findbestvalley__gap_id_pair__opt
-                                    candidate_valley_ids__split_discrs2))))))))
+                                    candidate_valley_ids__split_discrs4))))))))
 
 ;; H
   (assert
@@ -6758,7 +6852,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
+     candidate_valley_ids__split_discrs4)) 1)
   (=> (= result13 true) (= usq_1 temp___849))))))
 
 ;; H
@@ -6768,7 +6862,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
+     candidate_valley_ids__split_discrs4)) 1)
   (=> (= result13 true)
   (= temp___851 (mk___rep11 (us_split_discrs7 usq_1)
                 (us_split_fields23 usq_1)
@@ -6781,9 +6875,9 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
+     candidate_valley_ids__split_discrs4)) 1)
   (=> (= result13 true)
-  (= result14 (mk___split_fields__ref11 candidate_valley_ids__split_fields2)))))))
+  (= result14 (mk___split_fields__ref11 candidate_valley_ids__split_fields5)))))))
 
 ;; H
   (assert
@@ -6792,9 +6886,9 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
+     candidate_valley_ids__split_discrs4)) 1)
   (=> (= result13 true)
-  (= candidate_valley_ids__split_fields3 (us_split_fields23 temp___851)))))))
+  (= candidate_valley_ids__split_fields6 (us_split_fields23 temp___851)))))))
 
 ;; H
   (assert
@@ -6803,9 +6897,9 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
+     candidate_valley_ids__split_discrs4)) 1)
   (=> (= result13 true)
-  (= result15 (mk___split_discrs__ref3 candidate_valley_ids__split_discrs2)))))))
+  (= result15 (mk___split_discrs__ref3 candidate_valley_ids__split_discrs4)))))))
 
 ;; H
   (assert
@@ -6814,9 +6908,9 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
+     candidate_valley_ids__split_discrs4)) 1)
   (=> (= result13 true)
-  (= candidate_valley_ids__split_discrs3 (us_split_discrs7 temp___851)))))))
+  (= candidate_valley_ids__split_discrs5 (us_split_discrs7 temp___851)))))))
 
 ;; H
   (assert
@@ -6825,9 +6919,9 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
+     candidate_valley_ids__split_discrs4)) 1)
   (=> (not (= result13 true))
-  (= candidate_valley_ids__split_discrs3 candidate_valley_ids__split_discrs2))))))
+  (= candidate_valley_ids__split_discrs5 candidate_valley_ids__split_discrs4))))))
 
 ;; H
   (assert
@@ -6836,9 +6930,9 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
+     candidate_valley_ids__split_discrs4)) 1)
   (=> (not (= result13 true))
-  (= candidate_valley_ids__split_fields3 candidate_valley_ids__split_fields2))))))
+  (= candidate_valley_ids__split_fields6 candidate_valley_ids__split_fields5))))))
 
 ;; H
   (assert
@@ -6848,7 +6942,7 @@
   (not
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1))
+     candidate_valley_ids__split_discrs4)) 1))
   (= (to_rep6 o40) 1)))))
 
 ;; H
@@ -6859,7 +6953,7 @@
   (not
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1))
+     candidate_valley_ids__split_discrs4)) 1))
   (= o41 (mk___split_discrs3 o40))))))
 
 ;; H
@@ -6870,7 +6964,7 @@
   (not
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1))
+     candidate_valley_ids__split_discrs4)) 1))
   (= temp___846 (mk___rep11 o41
                 (mk___split_fields11 il (mk___rep6 ir__split_fields2)) true))))))
 
@@ -6882,11 +6976,11 @@
   (not
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1))
+     candidate_valley_ids__split_discrs4)) 1))
   (=> (= candidate_valley_ids__attr__constrained true)
   (= (rec__algorithm__findbestvalley__gap_id_pair__opt
      (us_split_discrs7 temp___846)) (rec__algorithm__findbestvalley__gap_id_pair__opt
-                                    candidate_valley_ids__split_discrs2)))))))
+                                    candidate_valley_ids__split_discrs4)))))))
 
 ;; H
   (assert
@@ -6896,7 +6990,7 @@
   (not
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1))
+     candidate_valley_ids__split_discrs4)) 1))
   (= usq_2 temp___846)))))
 
 ;; H
@@ -6907,7 +7001,7 @@
   (not
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1))
+     candidate_valley_ids__split_discrs4)) 1))
   (= temp___848 (mk___rep11 (us_split_discrs7 usq_2)
                 (us_split_fields23 usq_2)
                 candidate_valley_ids__attr__constrained))))))
@@ -6920,8 +7014,8 @@
   (not
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1))
-  (= result16 (mk___split_fields__ref11 candidate_valley_ids__split_fields2))))))
+     candidate_valley_ids__split_discrs4)) 1))
+  (= result16 (mk___split_fields__ref11 candidate_valley_ids__split_fields5))))))
 
 ;; H
   (assert
@@ -6931,8 +7025,8 @@
   (not
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1))
-  (= candidate_valley_ids__split_fields4 (us_split_fields23 temp___848))))))
+     candidate_valley_ids__split_discrs4)) 1))
+  (= candidate_valley_ids__split_fields7 (us_split_fields23 temp___848))))))
 
 ;; H
   (assert
@@ -6942,8 +7036,8 @@
   (not
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1))
-  (= result17 (mk___split_discrs__ref3 candidate_valley_ids__split_discrs2))))))
+     candidate_valley_ids__split_discrs4)) 1))
+  (= result17 (mk___split_discrs__ref3 candidate_valley_ids__split_discrs4))))))
 
 ;; H
   (assert
@@ -6953,8 +7047,8 @@
   (not
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1))
-  (= candidate_valley_ids__split_discrs4 (us_split_discrs7 temp___848))))))
+     candidate_valley_ids__split_discrs4)) 1))
+  (= candidate_valley_ids__split_discrs6 (us_split_discrs7 temp___848))))))
 
 ;; H
   (assert
@@ -6964,8 +7058,8 @@
   (not
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1))
-  (= candidate_valley_ids__split_discrs3 candidate_valley_ids__split_discrs4)))))
+     candidate_valley_ids__split_discrs4)) 1))
+  (= candidate_valley_ids__split_discrs5 candidate_valley_ids__split_discrs6)))))
 
 ;; H
   (assert
@@ -6975,8 +7069,8 @@
   (not
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1))
-  (= candidate_valley_ids__split_fields3 candidate_valley_ids__split_fields4)))))
+     candidate_valley_ids__split_discrs4)) 1))
+  (= candidate_valley_ids__split_fields6 candidate_valley_ids__split_fields7)))))
 
 ;; H
   (assert
@@ -7017,30 +7111,30 @@
   (assert
   (=> (= result11 true)
   (=> (not (= result12 true))
-  (= candidate_valley_ids__split_discrs3 candidate_valley_ids__split_discrs2))))
+  (= candidate_valley_ids__split_discrs5 candidate_valley_ids__split_discrs4))))
 
 ;; H
   (assert
   (=> (= result11 true)
   (=> (not (= result12 true))
-  (= candidate_valley_ids__split_fields3 candidate_valley_ids__split_fields2))))
+  (= candidate_valley_ids__split_fields6 candidate_valley_ids__split_fields5))))
 
 ;; H
   (assert
   (=> (not (= result11 true))
-  (= candidate_valley_ids__split_discrs3 candidate_valley_ids__split_discrs2)))
+  (= candidate_valley_ids__split_discrs5 candidate_valley_ids__split_discrs4)))
 
 ;; H
   (assert
   (=> (not (= result11 true))
-  (= candidate_valley_ids__split_fields3 candidate_valley_ids__split_fields2)))
+  (= candidate_valley_ids__split_fields6 candidate_valley_ids__split_fields5)))
 
 ;; H
   (assert
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7052,7 +7146,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7065,7 +7159,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7075,7 +7169,7 @@
   (= o48 (element
          (rec__algorithm__controller__gapvec (us_split_fields21 this))
          (rec__algorithm__findbestvalley__gap_id_pair__rising
-         candidate_valley_ids__split_fields3)))
+         candidate_valley_ids__split_fields6)))
   (= (bool_eq7 o48
      (get
      (model__ (rec__algorithm__controller__gapvec (us_split_fields21 this)))
@@ -7083,14 +7177,14 @@
      (positions
      (rec__algorithm__controller__gapvec (us_split_fields21 this)))
      (rec__algorithm__findbestvalley__gap_id_pair__rising
-     candidate_valley_ids__split_fields3)))) true))))))
+     candidate_valley_ids__split_fields6)))) true))))))
 
 ;; H
   (assert
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7102,7 +7196,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7114,7 +7208,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7127,7 +7221,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7139,7 +7233,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7149,7 +7243,7 @@
   (= o52 (element
          (rec__algorithm__controller__gapvec (us_split_fields21 this))
          (rec__algorithm__findbestvalley__gap_id_pair__rising
-         candidate_valley_ids__split_fields3)))
+         candidate_valley_ids__split_fields6)))
   (= (bool_eq7 o52
      (get
      (model__ (rec__algorithm__controller__gapvec (us_split_fields21 this)))
@@ -7157,14 +7251,14 @@
      (positions
      (rec__algorithm__controller__gapvec (us_split_fields21 this)))
      (rec__algorithm__findbestvalley__gap_id_pair__rising
-     candidate_valley_ids__split_fields3)))) true))))))
+     candidate_valley_ids__split_fields6)))) true))))))
 
 ;; H
   (assert
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7176,7 +7270,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7188,7 +7282,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7202,7 +7296,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7214,7 +7308,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7226,7 +7320,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7238,7 +7332,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7263,7 +7357,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7275,7 +7369,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7287,7 +7381,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7300,7 +7394,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7312,7 +7406,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7337,7 +7431,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7349,7 +7443,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7361,7 +7455,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7375,7 +7469,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7387,7 +7481,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7399,7 +7493,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7411,7 +7505,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7423,7 +7517,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7447,7 +7541,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7459,7 +7553,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7471,7 +7565,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7484,7 +7578,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7496,7 +7590,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7508,7 +7602,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7517,7 +7611,7 @@
   (= o72 (element
          (rec__algorithm__controller__gapvec (us_split_fields21 this))
          (rec__algorithm__findbestvalley__gap_id_pair__rising
-         candidate_valley_ids__split_fields3)))
+         candidate_valley_ids__split_fields6)))
   (= (bool_eq7 o72
      (get
      (model__ (rec__algorithm__controller__gapvec (us_split_fields21 this)))
@@ -7525,14 +7619,14 @@
      (positions
      (rec__algorithm__controller__gapvec (us_split_fields21 this)))
      (rec__algorithm__findbestvalley__gap_id_pair__rising
-     candidate_valley_ids__split_fields3)))) true)))))
+     candidate_valley_ids__split_fields6)))) true)))))
 
 ;; H
   (assert
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7544,7 +7638,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7556,7 +7650,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7569,7 +7663,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7581,7 +7675,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7593,7 +7687,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7601,7 +7695,7 @@
   (=> (= result18 true)
   (=> (= best_valley_ids__attr__constrained true)
   (= (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3) (rec__algorithm__findbestvalley__gap_id_pair__opt
+     candidate_valley_ids__split_discrs5) (rec__algorithm__findbestvalley__gap_id_pair__opt
                                           best_valley_ids__split_discrs2)))))))
 
 ;; H
@@ -7609,14 +7703,14 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
      best_valley_ids__split_discrs2)) 1)
   (=> (= result18 true)
-  (= usq_3 (mk___rep11 candidate_valley_ids__split_discrs3
-           candidate_valley_ids__split_fields3
+  (= usq_3 (mk___rep11 candidate_valley_ids__split_discrs5
+           candidate_valley_ids__split_fields6
            candidate_valley_ids__attr__constrained))))))
 
 ;; H
@@ -7624,7 +7718,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7638,7 +7732,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7651,7 +7745,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7664,7 +7758,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7677,7 +7771,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7690,7 +7784,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7703,7 +7797,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
@@ -7716,7 +7810,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (not
   (= (to_rep6
@@ -7724,7 +7818,7 @@
      best_valley_ids__split_discrs2)) 1))
   (=> (= best_valley_ids__attr__constrained true)
   (= (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3) (rec__algorithm__findbestvalley__gap_id_pair__opt
+     candidate_valley_ids__split_discrs5) (rec__algorithm__findbestvalley__gap_id_pair__opt
                                           best_valley_ids__split_discrs2))))))
 
 ;; H
@@ -7732,14 +7826,14 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (not
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
      best_valley_ids__split_discrs2)) 1))
-  (= usq_4 (mk___rep11 candidate_valley_ids__split_discrs3
-           candidate_valley_ids__split_fields3
+  (= usq_4 (mk___rep11 candidate_valley_ids__split_discrs5
+           candidate_valley_ids__split_fields6
            candidate_valley_ids__attr__constrained)))))
 
 ;; H
@@ -7747,7 +7841,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (not
   (= (to_rep6
@@ -7761,7 +7855,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (not
   (= (to_rep6
@@ -7774,7 +7868,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (not
   (= (to_rep6
@@ -7787,7 +7881,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (not
   (= (to_rep6
@@ -7800,7 +7894,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (not
   (= (to_rep6
@@ -7813,7 +7907,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (not
   (= (to_rep6
@@ -7826,7 +7920,7 @@
   (=>
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1)
+     candidate_valley_ids__split_discrs5)) 1)
   (=>
   (not
   (= (to_rep6
@@ -7840,7 +7934,7 @@
   (not
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1))
+     candidate_valley_ids__split_discrs5)) 1))
   (= best_valley_ids__split_discrs3 best_valley_ids__split_discrs2)))
 
 ;; H
@@ -7849,7 +7943,7 @@
   (not
   (= (to_rep6
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1))
+     candidate_valley_ids__split_discrs5)) 1))
   (= best_valley_ids__split_fields4 best_valley_ids__split_fields3)))
 
 (assert

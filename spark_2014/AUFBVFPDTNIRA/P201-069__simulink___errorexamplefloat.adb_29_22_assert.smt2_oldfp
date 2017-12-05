@@ -1174,14 +1174,21 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) (/ 0.0 10.0))))
-
 (declare-const relative_error t)
 
 (declare-const abs_out1 t)
+
+(declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const o3 t)
+
+(declare-const result t)
+
+(declare-const abs_out11 t)
 
 ;; H
   (assert (in_range2 requested_force))
@@ -1191,6 +1198,11 @@
 
 ;; H
   (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite relative_error)))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) (/ 0.0 10.0))))
 
 ;; H
   (assert (neq requested_force fliteral4))

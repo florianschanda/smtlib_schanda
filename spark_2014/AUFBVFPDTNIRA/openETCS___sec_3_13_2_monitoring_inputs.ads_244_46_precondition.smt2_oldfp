@@ -2027,6 +2027,8 @@
 
 (declare-const sec_3_13_2_monitoring_inputs__kwet_rst_model__assume us_rep1)
 
+(declare-const sec_3_13_2_monitoring_inputs__maximum_train_speed__assume t)
+
 ;; H
   (assert (in_range6 breaking_model))
 

@@ -1152,18 +1152,13 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral5)
-  (= (tqtreal fliteral5) (/ 4199999868869781494140625.0 10000000000000000000000000.0))))
-
 (declare-const x t)
 
 (declare-const y t)
 
 (declare-const z t)
+
+(declare-const o t)
 
 (declare-const result t)
 
@@ -1183,6 +1178,13 @@
 
 ;; H
   (assert (= z1 (div1 RNE1 x y)))
+
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral5)
+  (= (tqtreal fliteral5) (/ 4199999868869781494140625.0 10000000000000000000000000.0))))
 
 (assert
 ;; WP_parameter_def

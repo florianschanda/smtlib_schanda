@@ -1085,6 +1085,9 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
+;; H
+  (assert (tqtisFinite x))
+
 (declare-const fliteral2 t)
 
 ;; fliteral_axiom
@@ -1092,16 +1095,13 @@
   (and (tqtisFinite fliteral2)
   (= (tqtreal fliteral2) (/ 4000000059604644775390625.0 10000000000000000000000000.0))))
 
+;; H
+  (assert (eq x fliteral2))
+
 (declare-const fliteral3 t)
 
 ;; fliteral_axiom
   (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) (/ 0.0 10.0))))
-
-;; H
-  (assert (tqtisFinite x))
-
-;; H
-  (assert (eq x fliteral2))
 
 (assert
 ;; WP_parameter_def

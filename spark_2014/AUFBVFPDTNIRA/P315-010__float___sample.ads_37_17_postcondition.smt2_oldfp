@@ -1317,18 +1317,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS8 Int)
 
-(declare-const fliteral7 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral7)
-  (= (tqtreal fliteral7) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
-
-(declare-const fliteral8 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral8) (= (tqtreal fliteral8) 2.0)))
-
 (declare-const time t)
 
 (declare-const d t)
@@ -1409,6 +1397,13 @@
 ;; H
   (assert (tqtisFinite time))
 
+(declare-const fliteral7 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral7)
+  (= (tqtreal fliteral7) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
+
 ;; H
   (assert
   (and
@@ -1436,6 +1431,11 @@
 
 ;; H
   (assert (= d1 (mul RNE1 (of_int RNE1 (+ nb_of_fp nb_of_pp)) delta_time)))
+
+(declare-const fliteral8 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral8) (= (tqtreal fliteral8) 2.0)))
 
 ;; H
   (assert

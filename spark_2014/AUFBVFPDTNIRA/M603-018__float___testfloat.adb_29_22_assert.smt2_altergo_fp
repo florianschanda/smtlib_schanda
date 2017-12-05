@@ -1100,27 +1100,62 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic t1 : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic result : t
+
+logic t2 : t
+
+axiom H : tqtisFinite(x)
+
+axiom H1 : tqtisFinite(y)
+
+axiom H2 : tqtisFinite(z)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 10.0))
+
+axiom H3 : ((le(x, z) and le(z, y)) and ((le(neg(fliteral1), x) and le(x,
+  fliteral1)) and (eq(y, add(NearestTiesToEven, x, fliteral)) and
+  (eq(roundToIntegral(Down, z), x) and eq(roundToIntegral(Up, z), y)))))
+
+axiom H4 : ((o1 = add(NearestTiesToEven, x, y)) and
+  tqtisFinite(add(NearestTiesToEven, x, y)))
 
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 2.0))
 
+axiom H5 : (o2 = div(NearestTiesToEven, o1, fliteral2))
+
+axiom H6 : (result = t1)
+
+axiom H7 : (t2 = o2)
+
+axiom H8 : tqtisFinite(t2)
+
+axiom H9 : eq(roundToIntegral(Down, x), x)
+
+axiom H10 : eq(roundToIntegral(Down, y), y)
+
+axiom H11 : eq(roundToIntegral(Down, z), x)
+
+axiom H12 : eq(roundToIntegral(Down, t2), x)
+
+axiom H13 : eq(roundToIntegral(Up, x), x)
+
+axiom H14 : eq(roundToIntegral(Up, y), y)
+
+axiom H15 : eq(roundToIntegral(Up, z), y)
+
  (* File "testfloat.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall t1:t. forall o:t. forall o1:t. forall result:t. forall t2:t.
-  (tqtisFinite(x) -> (tqtisFinite(y) -> (tqtisFinite(z) -> (((le(x, z) and
-  le(z, y)) and ((le(neg(fliteral1), x) and le(x, fliteral1)) and (eq(y,
-  add(NearestTiesToEven, x, fliteral)) and (eq(roundToIntegral(Down, z),
-  x) and eq(roundToIntegral(Up, z), y))))) -> (((((o = add(NearestTiesToEven,
-  x, y)) and tqtisFinite(add(NearestTiesToEven, x, y))) and
-  (o1 = div(NearestTiesToEven, o, fliteral2))) and ((result = t1) and
-  (t2 = o1))) -> (tqtisFinite(t2) -> (eq(roundToIntegral(Down, x), x) ->
-  (eq(roundToIntegral(Down, y), y) -> (eq(roundToIntegral(Down, z), x) ->
-  (eq(roundToIntegral(Down, t2), x) -> (eq(roundToIntegral(Up, x), x) ->
-  (eq(roundToIntegral(Up, y), y) -> (eq(roundToIntegral(Up, z), y) ->
-  eq(roundToIntegral(Up, t2), y)))))))))))))))
+goal WP_parameter_def : eq(roundToIntegral(Up, t2), y)

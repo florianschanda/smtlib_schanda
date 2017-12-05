@@ -1065,7 +1065,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1905,6 +1905,18 @@ axiom is_valid_speed__def_axiom :
   (forall speed:t [is_valid_speed(speed)].
   ((is_valid_speed(speed) = true) <-> (le(fliteral1, speed) and le(speed,
   m_per_s_from_km_per_h(fliteral2)))))
+
+logic i : int
+
+logic deceleration_curve__print_curve__L_3__R4b__assume : int
+
+logic o : t
+
+logic result : int
+
+logic i1 : int
+
+logic i2 : int
 
  (* File "deceleration_curve.adb", line 73, characters 0-0 *)
 goal WP_parameter_def : (to_rep3(braking_curve1) <= 5000)

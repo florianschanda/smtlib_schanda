@@ -1088,21 +1088,27 @@
 (declare-datatypes () ((t_acc__ref (mk_t_acc__ref (t_acc__content t_acc)))))
 (define-fun t_acc__ref___projection ((a t_acc__ref)) t_acc (t_acc__content a))
 
-(define-fun dynamic_invariant ((temp___expr_1330 t)
-  (temp___is_init_1327 Bool) (temp___skip_constant_1328 Bool)
-  (temp___do_toplevel_1329 Bool)) Bool (=>
-                                       (or (= temp___is_init_1327 true) (le
+(define-fun dynamic_invariant ((temp___expr_1324 t)
+  (temp___is_init_1321 Bool) (temp___skip_constant_1322 Bool)
+  (temp___do_toplevel_1323 Bool)) Bool (=>
+                                       (or (= temp___is_init_1321 true) (le
                                        (neg fliteral1) fliteral1)) (in_range2
-                                       temp___expr_1330)))
+                                       temp___expr_1324)))
 
 (declare-const x t)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
+;; H
+  (assert (in_range2 x))
+
 (declare-const fliteral2 t)
 
 ;; fliteral_axiom
   (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
+
+;; H
+  (assert (eq x fliteral2))
 
 (declare-const fliteral3 t)
 
@@ -1110,12 +1116,6 @@
   (assert
   (and (tqtisFinite fliteral3)
   (= (tqtreal fliteral3) (/ 529395592033937711917701562924776226282119750976562500000000000000000000000.0 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.0))))
-
-;; H
-  (assert (in_range2 x))
-
-;; H
-  (assert (eq x fliteral2))
 
 (assert
 ;; WP_parameter_def

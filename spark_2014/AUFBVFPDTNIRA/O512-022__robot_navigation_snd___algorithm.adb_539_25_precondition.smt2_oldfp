@@ -1610,24 +1610,24 @@
 
 (define-fun bool_eq8 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
-                         (and
                          (= (to_rep6
                             (rec__robot_iface__speed_option__opt
                             (us_split_discrs1 a))) (to_rep6
                                                    (rec__robot_iface__speed_option__opt
                                                    (us_split_discrs1 b))))
+                         (and
                          (=> (robot_iface__speed_option__modulus__pred a)
                          (= (to_rep4
                             (rec__robot_iface__speed_option__modulus
                             (us_split_fields3 a))) (to_rep4
                                                    (rec__robot_iface__speed_option__modulus
-                                                   (us_split_fields3 b))))))
+                                                   (us_split_fields3 b)))))
                          (=> (robot_iface__speed_option__angle__pred a)
                          (= (to_rep4
                             (rec__robot_iface__speed_option__angle
                             (us_split_fields3 a))) (to_rep4
                                                    (rec__robot_iface__speed_option__angle
-                                                   (us_split_fields3 b))))))
+                                                   (us_split_fields3 b)))))))
                     true false))
 
 (declare-const value__size2 Int)
@@ -3167,6 +3167,18 @@
 
 (declare-const i Int)
 
+(declare-const temp___884 t)
+
+(declare-const temp___883 t)
+
+(declare-const temp___882 t)
+
+(declare-const temp___881 t)
+
+(declare-const temp___880 Int)
+
+(declare-const temp___879 t)
+
 (declare-const o t)
 
 (declare-const o1 t)
@@ -3178,6 +3190,28 @@
 (declare-const o4 t)
 
 (declare-const o5 t)
+
+(declare-const o6 t)
+
+(declare-const o7 t)
+
+(declare-const o8 normalized2pi)
+
+(declare-const o9 normalized2pi)
+
+(declare-const o10 t)
+
+(declare-const o11 t)
+
+(declare-const o12 t)
+
+(declare-const o13 t)
+
+(declare-const o14 t)
+
+(declare-const deltamag1 t)
+
+(declare-const deltaangle1 t)
 
 (declare-const result t)
 
@@ -3191,9 +3225,9 @@
 
 (declare-const i1 Int)
 
-(declare-const deltamag1 t)
+(declare-const deltamag2 t)
 
-(declare-const deltaangle1 t)
+(declare-const deltaangle2 t)
 
 (declare-const deltaareasum2 t)
 
@@ -3202,6 +3236,86 @@
 (declare-const i2 Int)
 
 (declare-const result3 Bool)
+
+(declare-const result4 t)
+
+(declare-const deltamag3 t)
+
+(declare-const result5 t)
+
+(declare-const deltaangle3 t)
+
+(declare-const result6 t)
+
+(declare-const deltaareasum3 t)
+
+(declare-const result7 t)
+
+(declare-const obstacleavoiddelta3 t)
+
+(declare-const result8 Int)
+
+(declare-const i3 Int)
+
+(declare-const deltamag4 t)
+
+(declare-const deltaangle4 t)
+
+(declare-const deltaareasum4 t)
+
+(declare-const obstacleavoiddelta4 t)
+
+(declare-const i4 int__ref)
+
+(declare-const deltamag5 t)
+
+(declare-const deltaangle5 t)
+
+(declare-const deltaareasum5 t)
+
+(declare-const obstacleavoiddelta5 t)
+
+(declare-const i5 Int)
+
+(declare-const deltamag6 t__ref)
+
+(declare-const deltaangle6 t__ref)
+
+(declare-const deltaareasum6 t__ref)
+
+(declare-const obstacleavoiddelta6 t__ref)
+
+(declare-const i6 int__ref)
+
+(declare-const deltamag7 t)
+
+(declare-const deltaangle7 t)
+
+(declare-const deltaareasum7 t)
+
+(declare-const obstacleavoiddelta7 t)
+
+(declare-const i7 Int)
+
+(declare-const deltamag8 t__ref)
+
+(declare-const deltaangle8 t__ref)
+
+(declare-const deltaareasum8 t__ref)
+
+(declare-const obstacleavoiddelta8 t__ref)
+
+(declare-const i8 int__ref)
+
+(declare-const deltamag9 t)
+
+(declare-const deltaangle9 t)
+
+(declare-const deltaareasum9 t)
+
+(declare-const obstacleavoiddelta9 t)
+
+(declare-const i9 Int)
 
 ;; H
   (assert
@@ -3276,8 +3390,8 @@
   (and
   (and (=> (le (neg fliteral1) fliteral1) (tqtisFinite obstacleavoiddelta2))
   (=> (<= 1 1000) (dynamic_property 1 1000 i2)))
-  (=> (le fliteral2 fliteral) (in_range10 deltamag1)))
-  (=> (le (neg fliteral1) fliteral1) (tqtisFinite deltaangle1)))
+  (=> (le fliteral2 fliteral) (in_range10 deltamag2)))
+  (=> (le (neg fliteral1) fliteral1) (tqtisFinite deltaangle2)))
   (=> (le fliteral2 fliteral1) (in_range3 deltaareasum2)))
   (and (<= 1 i2) (<= i2 1000))))
 

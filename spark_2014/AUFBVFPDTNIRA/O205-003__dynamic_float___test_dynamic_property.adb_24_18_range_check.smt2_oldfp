@@ -1204,7 +1204,29 @@
 
 (declare-const o t)
 
+(declare-const temp___152 t)
+
+(declare-const us t)
+
+(declare-const o1 t)
+
+(declare-const us1 t)
+
+(declare-const o2 t)
+
 (declare-const result Bool)
+
+(declare-const result1 t)
+
+(declare-const x1 t)
+
+(declare-const result2 t)
+
+(declare-const x2 t)
+
+(declare-const x3 t)
+
+(declare-const x4 t)
 
 ;; H
   (assert (tqtisFinite d))

@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -65,24 +65,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
@@ -237,19 +237,19 @@
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and
-                        (and
-                        (and
-                        (and
-                        (and
                         (= (rec__depends_legal_2__dis_rec__d
                            (us_split_discrs1 a)) (rec__depends_legal_2__dis_rec__d
                                                  (us_split_discrs1 b)))
+                        (and
+                        (and
+                        (and
+                        (and
                         (=> (depends_legal_2__dis_rec__a__pred a)
                         (= (to_rep
                            (rec__depends_legal_2__dis_rec__a
                            (us_split_fields1 a))) (to_rep
                                                   (rec__depends_legal_2__dis_rec__a
-                                                  (us_split_fields1 b))))))
+                                                  (us_split_fields1 b)))))
                         (=> (depends_legal_2__dis_rec__b__pred a)
                         (= (to_rep
                            (rec__depends_legal_2__dis_rec__b
@@ -273,7 +273,7 @@
                            (rec__depends_legal_2__dis_rec__z
                            (us_split_fields1 a))) (to_rep1
                                                   (rec__depends_legal_2__dis_rec__z
-                                                  (us_split_fields1 b))))))
+                                                  (us_split_fields1 b)))))))
                    true false))
 
 (declare-const value__size Int)
@@ -817,18 +817,6 @@
 
 (declare-const par1__split_discrs2 us_split_discrs)
 
-(define-fun par1__split_discrs3 () us_split_discrs__ref (mk___split_discrs__ref
-                                                        (mk___split_discrs
-                                                        par1__split_discrs)))
-
-(define-fun par1__split_fields7 () us_split_fields__ref (mk___split_fields__ref
-                                                        (mk___split_fields
-                                                        par1__split_fields
-                                                        par1__split_fields1
-                                                        par1__split_fields2
-                                                        par1__split_fields3
-                                                        par1__split_fields4)))
-
 ;; H
   (assert (= rec1__attr__constrained false))
 
@@ -920,7 +908,11 @@
   (=> (= par1__split_discrs true) (= par1__attr__constrained temp___1666)))
 
 ;; H
-  (assert (=> (= par1__split_discrs true) (= result par1__split_fields7)))
+  (assert
+  (=> (= par1__split_discrs true)
+  (= result (mk___split_fields__ref
+            (mk___split_fields par1__split_fields par1__split_fields1
+            par1__split_fields2 par1__split_fields3 par1__split_fields4)))))
 
 ;; H
   (assert
@@ -929,7 +921,9 @@
                          temp___1663 temp___1664 temp___1665))))
 
 ;; H
-  (assert (=> (= par1__split_discrs true) (= result1 par1__split_discrs3)))
+  (assert
+  (=> (= par1__split_discrs true)
+  (= result1 (mk___split_discrs__ref (mk___split_discrs par1__split_discrs)))))
 
 ;; H
   (assert
@@ -1010,7 +1004,10 @@
 
 ;; H
   (assert
-  (=> (not (= par1__split_discrs true)) (= result2 par1__split_fields7)))
+  (=> (not (= par1__split_discrs true))
+  (= result2 (mk___split_fields__ref
+             (mk___split_fields par1__split_fields par1__split_fields1
+             par1__split_fields2 par1__split_fields3 par1__split_fields4)))))
 
 ;; H
   (assert
@@ -1019,7 +1016,8 @@
 
 ;; H
   (assert
-  (=> (not (= par1__split_discrs true)) (= result3 par1__split_discrs3)))
+  (=> (not (= par1__split_discrs true))
+  (= result3 (mk___split_discrs__ref (mk___split_discrs par1__split_discrs)))))
 
 ;; H
   (assert

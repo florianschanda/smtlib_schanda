@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -65,24 +65,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
@@ -137,6 +137,93 @@
      (let ((result (add r1 r2)))
      (and (fp.eq result (fp.add RNE r1 r2)) (dynamic_invariant result true
      false true)))) :pattern ((add r1 r2)) )))
+
+(declare-const pack__associativity_test__result Bool)
+
+(declare-const o Float32)
+
+(declare-const o1 Float32)
+
+(declare-const o2 Float32)
+
+(declare-const o3 Float32)
+
+(declare-const o4 Bool)
+
+(declare-const result Bool)
+
+(declare-const pack__associativity_test__result1 Bool)
+
+(declare-const pack__associativity_test__result2 Bool)
+
+(declare-const pack__associativity_test__result3 Bool)
+
+(declare-const pack__associativity_test__result4 Bool)
+
+(declare-const pack__associativity_test__result5 Bool)
+
+(declare-const result1 Bool)
+
+;; H
+  (assert
+  (= pack__associativity_test__result1 pack__associativity_test__result2))
+
+;; H
+  (assert
+  (= pack__associativity_test__result3 pack__associativity_test__result1))
+
+;; H
+  (assert
+  (and
+  (= o1 (add (fp #b0 #b01111100 #b10011001100110011001101)
+        (fp #b0 #b01111101 #b00110011001100110011010)))
+  (and (fp.isFinite32 o1)
+  (fp.eq o1 (fp.add RNE (fp #b0 #b01111100 #b10011001100110011001101) (fp #b0 #b01111101 #b00110011001100110011010))))))
+
+;; H
+  (assert
+  (and (= o2 (add (fp #b0 #b01111011 #b10011001100110011001101) o1))
+  (and (fp.isFinite32 o2)
+  (fp.eq o2 (fp.add RNE (fp #b0 #b01111011 #b10011001100110011001101)
+  o1)))))
+
+;; H
+  (assert
+  (and
+  (= o (add (fp #b0 #b01111011 #b10011001100110011001101)
+       (fp #b0 #b01111100 #b10011001100110011001101)))
+  (and (fp.isFinite32 o)
+  (fp.eq o (fp.add RNE (fp #b0 #b01111011 #b10011001100110011001101) (fp #b0 #b01111100 #b10011001100110011001101))))))
+
+;; H
+  (assert
+  (and (= o3 (add o (fp #b0 #b01111101 #b00110011001100110011010)))
+  (and (fp.isFinite32 o3)
+  (fp.eq o3 (fp.add RNE o (fp #b0 #b01111101 #b00110011001100110011010))))))
+
+;; H
+  (assert (= o4 (ite (fp.eq o3 o2) true false)))
+
+;; H
+  (assert (= result pack__associativity_test__result))
+
+;; H
+  (assert (= pack__associativity_test__result1 o4))
+
+;; H
+  (assert
+  (= (mk_bool__ref pack__associativity_test__result4) (mk_bool__ref
+                                                      pack__associativity_test__result2)))
+
+;; H
+  (assert
+  (= pack__associativity_test__result5 pack__associativity_test__result3))
+
+;; H
+  (assert (= result1 pack__associativity_test__result4))
+
+;; H
+  (assert (= pack__associativity_test__result4 true))
 
 (assert
 ;; WP_parameter_def

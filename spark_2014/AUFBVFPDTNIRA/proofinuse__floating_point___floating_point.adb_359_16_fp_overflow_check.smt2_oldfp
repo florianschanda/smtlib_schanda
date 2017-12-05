@@ -1114,6 +1114,12 @@
 
 (declare-const res t)
 
+(declare-const o t)
+
+(declare-const result t)
+
+(declare-const res1 t)
+
 ;; H
   (assert (tqtisFinite x))
 

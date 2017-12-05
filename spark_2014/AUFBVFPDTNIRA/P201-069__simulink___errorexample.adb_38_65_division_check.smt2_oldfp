@@ -1533,11 +1533,40 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
+(declare-const relative_error (_ BitVec 32))
+
+(declare-const abs_out1 (_ BitVec 32))
+
+(declare-const result (_ BitVec 32))
+
+(declare-const abs_out11 (_ BitVec 32))
+
+(declare-const result1 (_ BitVec 32))
+
+(declare-const relative_error1 (_ BitVec 32))
+
+(declare-const relative_error2 (_ BitVec 32))
+
+(declare-const abs_out12 (_ BitVec 32))
+
+(declare-const relative_error3 (_ BitVec 32))
+
+(declare-const abs_out13 (_ BitVec 32))
+
+;; H
+  (assert true)
+
 ;; H
   (assert (in_range1 calculated_force))
 
 ;; H
+  (assert true)
+
+;; H
   (assert (not (= requested_force ((_ int2bv 32) 0))))
+
+;; H
+  (assert true)
 
 ;; H
   (assert (not (= requested_force ((_ int2bv 32) 0))))

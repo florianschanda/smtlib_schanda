@@ -1181,6 +1181,8 @@
      (and (le fliteral4 speed1) (le speed1 fliteral5))) :pattern ((is_valid_speed_km_per_h
                                                                   speed1)) )))
 
+(declare-const o t)
+
 ;; H
   (assert (tqtisFinite speed))
 

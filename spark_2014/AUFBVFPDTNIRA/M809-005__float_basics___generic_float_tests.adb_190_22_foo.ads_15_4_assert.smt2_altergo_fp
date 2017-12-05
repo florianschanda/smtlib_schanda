@@ -1064,5 +1064,7 @@ logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+axiom H : tqtisFinite(x)
+
  (* File "generic_float_tests.adb", line 174, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(x) -> eq(x, x))
+goal WP_parameter_def : eq(x, x)

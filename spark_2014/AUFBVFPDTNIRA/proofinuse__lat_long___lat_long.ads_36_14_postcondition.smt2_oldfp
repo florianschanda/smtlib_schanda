@@ -1318,24 +1318,6 @@
                                       (neg fliteral4) fliteral5)) (in_range2
                                       temp___expr_153)))
 
-(declare-const fliteral6 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) (/ 63674445.0 10.0))))
-
-(declare-const fliteral7 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral7)
-  (= (tqtreal fliteral7) (/ 1745329238474369049072265625.0 100000000000000000000000000000.0))))
-
-(declare-const fliteral8 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral8) (= (tqtreal fliteral8) 20003916.0)))
-
 (declare-const lat_long__delta_lat_in_meters__result t)
 
 (declare-const result t)
@@ -1363,6 +1345,19 @@
 ;; H
   (assert (= result lat_long__delta_lat_in_meters__result))
 
+(declare-const fliteral6 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) (/ 63674445.0 10.0))))
+
+(declare-const fliteral7 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral7)
+  (= (tqtreal fliteral7) (/ 1745329238474369049072265625.0 100000000000000000000000000000.0))))
+
 ;; H
   (assert
   (= lat_long__delta_lat_in_meters__result1 (mul RNE1
@@ -1387,6 +1382,11 @@
 
 ;; H
   (assert (= result1 lat_long__delta_lat_in_meters__result4))
+
+(declare-const fliteral8 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral8) (= (tqtreal fliteral8) 20003916.0)))
 
 (assert
 ;; WP_parameter_def

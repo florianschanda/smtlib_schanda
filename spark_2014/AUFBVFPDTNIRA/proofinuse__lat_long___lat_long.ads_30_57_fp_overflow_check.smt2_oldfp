@@ -1570,6 +1570,12 @@
 
 (declare-const o14 t)
 
+(declare-const o15 t)
+
+(declare-const o16 t)
+
+(declare-const o17 t)
+
 (declare-const result t)
 
 (declare-const delta_lat1 t)

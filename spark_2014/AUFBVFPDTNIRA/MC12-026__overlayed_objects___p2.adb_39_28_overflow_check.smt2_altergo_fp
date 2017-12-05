@@ -1037,7 +1037,7 @@ type t__ref = { t__content : t
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -1334,18 +1334,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1777,7 +1777,35 @@ logic y : t
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic full_s__split_fields : integer
+
+logic full_s__split_fields1 : float1
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : float1
+
+logic temp___270 : integer
+
+logic temp___2701 : float1
+
+logic o4 : t
+
+logic result : integer
+
+logic result1 : float1
+
+logic full_s__split_fields2 : integer
+
+logic full_s__split_fields3 : float1
+
+axiom H : in_range1(x)
+
+axiom H1 : tqtisFinite(y)
+
  (* File "p2.ads", line 18, characters 0-0 *)
-goal WP_parameter_def :
-  (forall full_s__split_fields:integer. (in_range1(x) -> (tqtisFinite(y) ->
-  in_range1((to_rep(full_s__split_fields) + x)))))
+goal WP_parameter_def : in_range1((to_rep(full_s__split_fields) + x))

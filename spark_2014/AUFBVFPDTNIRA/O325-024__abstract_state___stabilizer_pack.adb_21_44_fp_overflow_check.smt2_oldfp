@@ -1137,6 +1137,30 @@
 
 (declare-const o1 t)
 
+(declare-const o2 t)
+
+(declare-const o3 t)
+
+(declare-const o4 t)
+
+(declare-const o5 t)
+
+(declare-const o6 t)
+
+(declare-const o7 t)
+
+(declare-const o8 t)
+
+(declare-const o9 t)
+
+(declare-const o10 t)
+
+(declare-const o11 t)
+
+(declare-const result t)
+
+(declare-const asl_tmp1 t)
+
 ;; H
   (assert (tqtisFinite temperature))
 

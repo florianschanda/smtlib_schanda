@@ -133,17 +133,17 @@
 (define-fun bv_max ((x (_ BitVec 32))
   (y (_ BitVec 32))) (_ BitVec 32) (ite (bvule x y) y x))
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -158,24 +158,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 Float32)))))
 (define-fun to_int3 ((b Bool)) Int (ite (= b true) 1 0))
@@ -264,12 +264,12 @@
 (define-fun source__ref___projection ((a source__ref)) source (source__content
                                                               a))
 
-(define-fun dynamic_invariant2 ((temp___expr_1348 Float32)
-  (temp___is_init_1345 Bool) (temp___skip_constant_1346 Bool)
-  (temp___do_toplevel_1347 Bool)) Bool (=>
-                                       (or (= temp___is_init_1345 true)
+(define-fun dynamic_invariant2 ((temp___expr_1342 Float32)
+  (temp___is_init_1339 Bool) (temp___skip_constant_1340 Bool)
+  (temp___do_toplevel_1341 Bool)) Bool (=>
+                                       (or (= temp___is_init_1339 true)
                                        (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                       (fp.isFinite32 temp___expr_1348)))
+                                       (fp.isFinite32 temp___expr_1342)))
 
 (declare-sort target 0)
 
@@ -290,9 +290,9 @@
 (define-fun target__ref___projection ((a target__ref)) target (target__content
                                                               a))
 
-(define-fun dynamic_invariant3 ((temp___expr_1354 (_ BitVec 32))
-  (temp___is_init_1351 Bool) (temp___skip_constant_1352 Bool)
-  (temp___do_toplevel_1353 Bool)) Bool true)
+(define-fun dynamic_invariant3 ((temp___expr_1348 (_ BitVec 32))
+  (temp___is_init_1345 Bool) (temp___skip_constant_1346 Bool)
+  (temp___do_toplevel_1347 Bool)) Bool true)
 
 (declare-fun float_to_unsigned_32 (Float32) (_ BitVec 32))
 
@@ -325,9 +325,9 @@
 (define-fun source__ref___2__projection ((a source__ref1)) source1 (source__content1
                                                                    a))
 
-(define-fun dynamic_invariant4 ((temp___expr_1360 (_ BitVec 32))
-  (temp___is_init_1357 Bool) (temp___skip_constant_1358 Bool)
-  (temp___do_toplevel_1359 Bool)) Bool true)
+(define-fun dynamic_invariant4 ((temp___expr_1354 (_ BitVec 32))
+  (temp___is_init_1351 Bool) (temp___skip_constant_1352 Bool)
+  (temp___do_toplevel_1353 Bool)) Bool true)
 
 (declare-sort target1 0)
 
@@ -346,12 +346,12 @@
 (define-fun target__ref___2__projection ((a target__ref1)) target1 (target__content1
                                                                    a))
 
-(define-fun dynamic_invariant5 ((temp___expr_1366 Float32)
-  (temp___is_init_1363 Bool) (temp___skip_constant_1364 Bool)
-  (temp___do_toplevel_1365 Bool)) Bool (=>
-                                       (or (= temp___is_init_1363 true)
+(define-fun dynamic_invariant5 ((temp___expr_1360 Float32)
+  (temp___is_init_1357 Bool) (temp___skip_constant_1358 Bool)
+  (temp___do_toplevel_1359 Bool)) Bool (=>
+                                       (or (= temp___is_init_1357 true)
                                        (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                       (fp.isFinite32 temp___expr_1366)))
+                                       (fp.isFinite32 temp___expr_1360)))
 
 (declare-fun unsigned_32_to_float ((_ BitVec 32)) Float32)
 
@@ -373,6 +373,8 @@
 
 (declare-const i (_ BitVec 32))
 
+(declare-const maths_pack__inv_sqrt__result Float32)
+
 (declare-const o (_ BitVec 32))
 
 (declare-const o1 Float32)
@@ -380,6 +382,16 @@
 (declare-const o2 Float32)
 
 (declare-const o3 Float32)
+
+(declare-const o4 Float32)
+
+(declare-const o5 Float32)
+
+(declare-const o6 Float32)
+
+(declare-const o7 Float32)
+
+(declare-const o8 Float32)
 
 (declare-const result Float32)
 
@@ -404,6 +416,38 @@
 (declare-const result5 Float32)
 
 (declare-const y2 Float32)
+
+(declare-const result6 Float32)
+
+(declare-const y3 Float32)
+
+(declare-const result7 Float32)
+
+(declare-const maths_pack__inv_sqrt__result1 Float32)
+
+(declare-const maths_pack__inv_sqrt__result2 Float32)
+
+(declare-const maths_pack__inv_sqrt__result3 Float32)
+
+(declare-const half_x2 Float32)
+
+(declare-const y4 Float32)
+
+(declare-const magic_num2 (_ BitVec 32))
+
+(declare-const i3 (_ BitVec 32))
+
+(declare-const maths_pack__inv_sqrt__result4 Float32)
+
+(declare-const half_x3 Float32)
+
+(declare-const y5 Float32)
+
+(declare-const magic_num3 (_ BitVec 32))
+
+(declare-const i4 (_ BitVec 32))
+
+(declare-const maths_pack__inv_sqrt__result5 Float32)
 
 ;; H
   (assert (fp.isFinite32 x))
@@ -436,6 +480,12 @@
 
 ;; H
   (assert (= magic_num1 ((_ int2bv 32) 1597463007)))
+
+;; H
+  (assert true)
+
+;; H
+  (assert true)
 
 ;; H
   (assert (= o (float_to_unsigned_32 y1)))

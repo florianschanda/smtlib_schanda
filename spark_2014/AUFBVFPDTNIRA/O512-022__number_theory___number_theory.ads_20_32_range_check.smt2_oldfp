@@ -1226,6 +1226,50 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range2 temp___expr_15)))
 
+(declare-const number_theory__fib__result Int)
+
+(declare-const o Int)
+
+(declare-const o1 Int)
+
+(declare-const o2 Int)
+
+(declare-const o3 Int)
+
+(declare-const o4 Int)
+
+(declare-const o5 Int)
+
+(declare-const o6 t)
+
+(declare-const o7 t)
+
+(declare-const o8 t)
+
+(declare-const result Int)
+
+(declare-const number_theory__fib__result1 Int)
+
+(declare-const number_theory__fib__result2 Int)
+
+(declare-const number_theory__fib__result3 Int)
+
+(declare-const number_theory__fib__result4 Int)
+
+(declare-const number_theory__fib__result5 Int)
+
+;; H
+  (assert (in_range3 n))
+
+;; H
+  (assert (not (= n 0)))
+
+;; H
+  (assert (not (= n 1)))
+
+;; H
+  (assert (and (= o1 (- n 2)) (in_range3 (- n 2))))
+
 (declare-const fliteral2 t)
 
 ;; fliteral_axiom
@@ -1240,29 +1284,14 @@
   (and (tqtisFinite fliteral3)
   (= (tqtreal fliteral3) (/ 22360000610351562500000.0 10000000000000000000000.0))))
 
-(declare-const o Int)
-
-(declare-const o1 Int)
-
-;; H
-  (assert (in_range3 n))
-
-;; H
-  (assert (not (not (not (= n 0)))))
-
-;; H
-  (assert (not (= n 1)))
-
-;; H
-  (assert (and (= o (- n 2)) (in_range3 (- n 2))))
-
 ;; H
   (assert
-  (and (= o1 (fib o))
-  (and (in_range4 o1)
-  (and (= o1 (ite (or (= o 0) (= o 1)) o (+ (fib (- o 1)) (fib (- o 2)))))
-  (lt (of_int RNE1 o1)
-  (add RNE1 (div1 RNE1 (power fliteral2 o) fliteral3) fliteral))))))
+  (and (= o2 (fib o1))
+  (and (in_range4 o2)
+  (and
+  (= o2 (ite (or (= o1 0) (= o1 1)) o1 (+ (fib (- o1 1)) (fib (- o1 2)))))
+  (lt (of_int RNE1 o2)
+  (add RNE1 (div1 RNE1 (power fliteral2 o1) fliteral3) fliteral))))))
 
 (assert
 ;; WP_parameter_def

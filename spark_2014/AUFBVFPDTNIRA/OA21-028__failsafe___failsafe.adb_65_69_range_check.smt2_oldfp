@@ -1524,6 +1524,32 @@
 
 (declare-const o5 Bool)
 
+(declare-const o6 (_ BitVec 8))
+
+(declare-const o7 (_ BitVec 8))
+
+(declare-const temp___280 (_ BitVec 8))
+
+(declare-const o8 (_ BitVec 8))
+
+(declare-const o9 (_ BitVec 8))
+
+(declare-const temp___282 (_ BitVec 8))
+
+(declare-const o10 (_ BitVec 8))
+
+(declare-const o11 (_ BitVec 8))
+
+(declare-const temp___279 (_ BitVec 8))
+
+(declare-const o12 (_ BitVec 8))
+
+(declare-const o13 (_ BitVec 8))
+
+(declare-const o14 battery_level_type)
+
+(declare-const o15 t)
+
 (declare-const result (_ BitVec 8))
 
 (declare-const current_time1 (_ BitVec 8))
@@ -1537,6 +1563,30 @@
 (declare-const counter1 (_ BitVec 8))
 
 (declare-const result3 Bool)
+
+(declare-const result4 Bool)
+
+(declare-const result5 Bool)
+
+(declare-const result6 Bool)
+
+(declare-const result7 Bool)
+
+(declare-const result8 (_ BitVec 8))
+
+(declare-const counter2 (_ BitVec 8))
+
+(declare-const battery_level_at2 (Array (_ BitVec 8) battery_level_type))
+
+(declare-const current_time2 (_ BitVec 8))
+
+(declare-const counter3 (_ BitVec 8))
+
+(declare-const battery_level_at3 (Array (_ BitVec 8) battery_level_type))
+
+(declare-const current_time3 (_ BitVec 8))
+
+(declare-const counter4 (_ BitVec 8))
 
 ;; H
   (assert (in_range4 counter))
@@ -1552,6 +1602,9 @@
 
 ;; H
   (assert (= counter c))
+
+;; H
+  (assert true)
 
 ;; H
   (assert (= counter (time_below_threshold battery_level_at current_time)))

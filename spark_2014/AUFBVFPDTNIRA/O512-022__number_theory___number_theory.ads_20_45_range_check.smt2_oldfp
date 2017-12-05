@@ -1226,11 +1226,43 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range2 temp___expr_15)))
 
+(declare-const number_theory__fib__result Int)
+
+(declare-const o Int)
+
+(declare-const o1 Int)
+
+(declare-const o2 Int)
+
+(declare-const o3 Int)
+
+(declare-const o4 Int)
+
+(declare-const o5 Int)
+
+(declare-const o6 t)
+
+(declare-const o7 t)
+
+(declare-const o8 t)
+
+(declare-const result Int)
+
+(declare-const number_theory__fib__result1 Int)
+
+(declare-const number_theory__fib__result2 Int)
+
+(declare-const number_theory__fib__result3 Int)
+
+(declare-const number_theory__fib__result4 Int)
+
+(declare-const number_theory__fib__result5 Int)
+
 ;; H
   (assert (in_range3 n))
 
 ;; H
-  (assert (not (not (not (= n 0)))))
+  (assert (not (= n 0)))
 
 ;; H
   (assert (not (= n 1)))

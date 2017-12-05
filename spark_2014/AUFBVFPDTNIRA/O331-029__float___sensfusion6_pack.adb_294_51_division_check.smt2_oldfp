@@ -1109,12 +1109,12 @@
 (define-fun t_degrees__ref___projection ((a t_degrees__ref)) t_degrees
   (t_degrees__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_1312 t)
-  (temp___is_init_1309 Bool) (temp___skip_constant_1310 Bool)
-  (temp___do_toplevel_1311 Bool)) Bool (=>
-                                       (or (= temp___is_init_1309 true) (le
+(define-fun dynamic_invariant1 ((temp___expr_1306 t)
+  (temp___is_init_1303 Bool) (temp___skip_constant_1304 Bool)
+  (temp___do_toplevel_1305 Bool)) Bool (=>
+                                       (or (= temp___is_init_1303 true) (le
                                        (neg fliteral2) fliteral2)) (in_range1
-                                       temp___expr_1312)))
+                                       temp___expr_1306)))
 
 (declare-sort t_quaternion 0)
 
@@ -1140,12 +1140,12 @@
 (define-fun t_quaternion__ref___projection ((a t_quaternion__ref)) t_quaternion
   (t_quaternion__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_1336 t)
-  (temp___is_init_1333 Bool) (temp___skip_constant_1334 Bool)
-  (temp___do_toplevel_1335 Bool)) Bool (=>
-                                       (or (= temp___is_init_1333 true) (le
+(define-fun dynamic_invariant2 ((temp___expr_1330 t)
+  (temp___is_init_1327 Bool) (temp___skip_constant_1328 Bool)
+  (temp___do_toplevel_1329 Bool)) Bool (=>
+                                       (or (= temp___is_init_1327 true) (le
                                        (neg fliteral) fliteral)) (in_range2
-                                       temp___expr_1336)))
+                                       temp___expr_1330)))
 
 (declare-sort t_radians 0)
 
@@ -1177,12 +1177,12 @@
 (define-fun t_radians__ref___projection ((a t_radians__ref)) t_radians
   (t_radians__content a))
 
-(define-fun dynamic_invariant3 ((temp___expr_1342 t)
-  (temp___is_init_1339 Bool) (temp___skip_constant_1340 Bool)
-  (temp___do_toplevel_1341 Bool)) Bool (=>
-                                       (or (= temp___is_init_1339 true) (le
+(define-fun dynamic_invariant3 ((temp___expr_1336 t)
+  (temp___is_init_1333 Bool) (temp___skip_constant_1334 Bool)
+  (temp___do_toplevel_1335 Bool)) Bool (=>
+                                       (or (= temp___is_init_1333 true) (le
                                        (neg fliteral3) fliteral3)) (in_range3
-                                       temp___expr_1342)))
+                                       temp___expr_1336)))
 
 (declare-fun atan_2 (t t) t)
 
@@ -1245,23 +1245,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS9 Int)
 
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 2.0)))
-
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 180.0)))
-
-(declare-const fliteral6 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral6)
-  (= (tqtreal fliteral6) (/ 31415927410125732421875.0 10000000000000000000000.0))))
-
 (declare-const euler_roll_actual t)
 
 (declare-const euler_pitch_actual t)
@@ -1294,6 +1277,14 @@
 
 (declare-const o5 t)
 
+(declare-const o6 t)
+
+(declare-const o7 t)
+
+(declare-const o8 t)
+
+(declare-const o9 t)
+
 (declare-const result t)
 
 (declare-const grav_x1 t)
@@ -1313,6 +1304,10 @@
 (declare-const result4 t)
 
 (declare-const euler_yaw_actual1 t)
+
+(declare-const result5 t)
+
+(declare-const euler_pitch_actual1 t)
 
 ;; H
   (assert (=> (le (neg fliteral2) fliteral2) (in_range1 euler_roll_actual)))
@@ -1346,6 +1341,11 @@
 
 ;; H
   (assert (= result grav_x))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 2.0)))
 
 ;; H
   (assert
@@ -1392,8 +1392,20 @@
         (mul RNE1 q2 q2)) (mul RNE1 q3 q3))))
   (in_range3 o1)))
 
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 180.0)))
+
 ;; H
   (assert (= o2 (mul RNE1 o1 fliteral5)))
+
+(declare-const fliteral6 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral6)
+  (= (tqtreal fliteral6) (/ 31415927410125732421875.0 10000000000000000000000.0))))
 
 ;; H
   (assert (= o3 (div1 RNE1 o2 fliteral6)))

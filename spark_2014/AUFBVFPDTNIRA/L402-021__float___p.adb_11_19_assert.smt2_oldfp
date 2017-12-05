@@ -1101,6 +1101,10 @@
 
 (declare-const t1 t)
 
+(declare-const o t)
+
+(declare-const o1 t)
+
 (declare-const result t)
 
 (declare-const c1 t)

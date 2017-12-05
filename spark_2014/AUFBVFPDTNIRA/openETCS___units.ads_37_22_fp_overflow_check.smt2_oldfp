@@ -1133,16 +1133,20 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-const fliteral4 t)
+(declare-const o t)
 
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 1000.0)))
+(declare-const o1 t)
 
 ;; H
   (assert (tqtisFinite speed))
 
 ;; H
   (assert (= (is_valid_speed_km_per_h speed) true))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 1000.0)))
 
 (assert
 ;; WP_parameter_def

@@ -1092,26 +1092,60 @@ logic copy : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x : t
+
+logic y : int
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic result : bool
+
+logic result1 : t
+
+logic x1 : t
+
+axiom H : tqtisFinite(x)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 100000.0))
+
+axiom H1 : ((result = true) <->
+  (exists y1:int. (((0 <= y1) and (y1 <= 100000)) and eq(x,
+  mul(NearestTiesToEven, div(NearestTiesToEven, of_int(NearestTiesToEven,
+  y1), fliteral1), div(NearestTiesToEven, of_int(NearestTiesToEven, y1),
+  fliteral1))))))
 
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.0e-1))
 
+axiom H2 : ((result = true) -> (le(fliteral2, x) and le(x, fliteral)))
+
+axiom H3 : (x = copy)
+
+axiom H4 : tqtisFinite(copy)
+
+axiom H5 : le(fliteral2, x)
+
+axiom H6 : le(x, fliteral)
+
+axiom H7 : ((o = mul(NearestTiesToEven, x, x)) and
+  tqtisFinite(mul(NearestTiesToEven, x, x)))
+
+axiom H8 : (o1 = sub(NearestTiesToEven, x, o))
+
+axiom H9 : ((o2 = o1) and tqtisFinite(o1))
+
+axiom H10 : (result1 = x)
+
+axiom H11 : (x1 = o2)
+
  (* File "hard_stuff.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:t. forall o:t. forall o1:t. forall o2:t. forall result:bool.
-  forall result1:t. forall x1:t. (tqtisFinite(x) -> ((((result = true) <->
-  (exists y:int. (((0 <= y) and (y <= 100000)) and eq(x,
-  mul(NearestTiesToEven, div(NearestTiesToEven, of_int(NearestTiesToEven, y),
-  fliteral1), div(NearestTiesToEven, of_int(NearestTiesToEven, y),
-  fliteral1)))))) and ((result = true) -> (le(fliteral2, x) and le(x,
-  fliteral)))) -> ((x = copy) -> (tqtisFinite(copy) -> ((le(fliteral2, x) and
-  le(x, fliteral)) -> ((((((o = mul(NearestTiesToEven, x, x)) and
-  tqtisFinite(mul(NearestTiesToEven, x, x))) and (o1 = sub(NearestTiesToEven,
-  x, o))) and ((o2 = o1) and tqtisFinite(o1))) and ((result1 = x) and
-  (x1 = o2))) -> le(fliteral2, x1))))))))
+goal WP_parameter_def : le(fliteral2, x1)

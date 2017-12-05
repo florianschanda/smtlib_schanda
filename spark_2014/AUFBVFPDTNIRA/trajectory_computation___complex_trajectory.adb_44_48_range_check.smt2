@@ -131,17 +131,17 @@
 (define-fun bv_max ((x (_ BitVec 16))
   (y (_ BitVec 16))) (_ BitVec 16) (ite (bvule x y) y x))
 
-(define-fun is_plus_infinity ((x Float64)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float64)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float64)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float64)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float64)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float64)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float64)
 
@@ -156,24 +156,24 @@
                                              (<= i 9007199254740992)))
 
 (define-fun same_sign ((x Float64)
-  (y Float64)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float64)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float64)
-  (y Float64)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float64)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float64) (x Float64)
-  (y Float64)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float64)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-fun nth1 ((_ BitVec 8) Int) Bool)
 
@@ -748,9 +748,23 @@
 
 (declare-const o3 Int)
 
-(declare-const o4 Float64)
+(declare-const o4 Int)
 
-(declare-const o5 Bool)
+(declare-const o5 Float64)
+
+(declare-const o6 Bool)
+
+(declare-const o7 Int)
+
+(declare-const o8 Int)
+
+(declare-const o9 Float64)
+
+(declare-const o10 Bool)
+
+(declare-const o11 Float64)
+
+(declare-const o12 Int)
 
 (declare-const result Float64)
 
@@ -759,6 +773,22 @@
 (declare-const result1 Float64)
 
 (declare-const average1 Float64)
+
+(declare-const result2 Float64)
+
+(declare-const distance1 Float64)
+
+(declare-const speed2 Float64)
+
+(declare-const distance2 Float64)
+
+(declare-const average2 Float64)
+
+(declare-const speed3 Float64)
+
+(declare-const distance3 Float64)
+
+(declare-const average3 Float64)
 
 ;; H
   (assert (in_range1 n))
@@ -800,6 +830,9 @@
 
 ;; H
   (assert (= ((_ int2bv 16) n) n_bv))
+
+;; H
+  (assert true)
 
 ;; H
   (assert
@@ -883,16 +916,16 @@
   (assert (= average1 o2))
 
 ;; H
-  (assert (and (= o3 (+ n 1)) (in_range1 (+ n 1))))
+  (assert (and (= o4 (+ n 1)) (in_range1 (+ n 1))))
 
 ;; H
   (assert
-  (and (= o4 (high_bound o3))
-  (and (fp.isFinite64 o4)
-  (= o4 (fp.mul RNE (of_int RNE o3) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))))
+  (and (= o5 (high_bound o4))
+  (and (fp.isFinite64 o5)
+  (= o5 (fp.mul RNE (of_int RNE o4) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))))
 
 ;; H
-  (assert (= o5 (ite (fp.leq old_speed o4) true false)))
+  (assert (= o6 (ite (fp.leq old_speed o5) true false)))
 
 (assert
 ;; WP_parameter_def

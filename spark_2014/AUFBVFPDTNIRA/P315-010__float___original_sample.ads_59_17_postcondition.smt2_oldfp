@@ -1139,18 +1139,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 10.0)))
-
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral5)
-  (= (tqtreal fliteral5) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
-
 (declare-const time t)
 
 (declare-const o t)
@@ -1169,8 +1157,20 @@
 ;; H
   (assert (tqtisFinite time))
 
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 10.0)))
+
 ;; H
   (assert (and (lt fliteral2 time) (lt time fliteral4)))
+
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral5)
+  (= (tqtreal fliteral5) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
 
 ;; H
   (assert

@@ -1091,6 +1091,22 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
+(declare-const normalize__r3__result t)
+
+(declare-const o t)
+
+(declare-const result t)
+
+(declare-const normalize__r3__result1 t)
+
+(declare-const normalize__r3__result2 t)
+
+(declare-const normalize__r3__result3 t)
+
+(declare-const normalize__r3__result4 t)
+
+(declare-const normalize__r3__result5 t)
+
 ;; H
   (assert (in_range1 x))
 

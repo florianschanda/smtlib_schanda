@@ -1119,12 +1119,22 @@ logic right : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic o : t
+
+logic o1 : t
+
+axiom H : tqtisFinite(left)
+
+axiom H1 : tqtisFinite(right)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
+axiom H2 : (le(fliteral1, left) and le(fliteral1, right))
+
+axiom H3 : (not lt(right, fliteral))
+
  (* File "protectedfloat.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(left) -> (tqtisFinite(right) ->
-  ((le(fliteral1, left) and le(fliteral1, right)) -> ((not lt(right,
-  fliteral)) -> tqtisFinite(div(NearestTiesToEven, left, right))))))
+goal WP_parameter_def : tqtisFinite(div(NearestTiesToEven, left, right))

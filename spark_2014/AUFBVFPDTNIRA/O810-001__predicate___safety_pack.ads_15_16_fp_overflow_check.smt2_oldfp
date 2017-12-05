@@ -1121,12 +1121,12 @@
 (define-fun natural_float__ref___projection ((a natural_float__ref)) natural_float
   (natural_float__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_1270 t)
-  (temp___is_init_1267 Bool) (temp___skip_constant_1268 Bool)
-  (temp___do_toplevel_1269 Bool)) Bool (=>
-                                       (or (= temp___is_init_1267 true) (le
+(define-fun dynamic_invariant1 ((temp___expr_1264 t)
+  (temp___is_init_1261 Bool) (temp___skip_constant_1262 Bool)
+  (temp___do_toplevel_1263 Bool)) Bool (=>
+                                       (or (= temp___is_init_1261 true) (le
                                        fliteral2 fliteral1)) (in_range2
-                                       temp___expr_1270)))
+                                       temp___expr_1264)))
 
 (declare-const value t)
 

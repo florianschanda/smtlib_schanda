@@ -1982,12 +1982,27 @@ axiom kwet_rst__post_axiom :
   rec__step_function__step_function_t__step = kwet_rst_model1 } },
   to_int(NearestTiesToAway, v1))) and tqtisFinite(kwet_rst(v1)))))
 
- (* File "units.ads", line 26, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:t. forall o1:t. forall o2:t. (tqtisFinite(v) -> (in_range1(d) ->
-  ((((o = a_gradient(d)) and (in_range2(o) and (o = fliteral1))) and
-  (((o1 = a_brake_safe(v, d)) and (in_range2(o1) and
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+axiom H : tqtisFinite(v)
+
+axiom H1 : in_range1(d)
+
+axiom H2 : ((o = a_gradient(d)) and (in_range2(o) and (o = fliteral1)))
+
+axiom H3 : ((o1 = a_brake_safe(v, d)) and (in_range2(o1) and
   (o1 = mul(NearestTiesToEven, mul(NearestTiesToEven, kdry_rst(v),
   add(NearestTiesToEven, kwet_rst(v), mul(NearestTiesToEven, fliteral1,
   sub(NearestTiesToEven, fliteral, kwet_rst(v))))), a_brake_emergency(v,
-  d))))) and (o2 = add(NearestTiesToEven, o1, o)))) -> tqtisFinite(o2)))))
+  d)))))
+
+axiom H4 : (o2 = add(NearestTiesToEven, o1, o))
+
+ (* File "units.ads", line 26, characters 0-0 *)
+goal WP_parameter_def : tqtisFinite(o2)

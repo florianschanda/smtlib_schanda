@@ -1111,6 +1111,30 @@
      (and (eq result (add RNE1 r1 r2)) (dynamic_invariant result true false
      true)))) :pattern ((add1 r1 r2)) )))
 
+(declare-const pack__associativity_test__result Bool)
+
+(declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const o3 t)
+
+(declare-const o4 Bool)
+
+(declare-const result Bool)
+
+(declare-const pack__associativity_test__result1 Bool)
+
+(declare-const pack__associativity_test__result2 Bool)
+
+(declare-const pack__associativity_test__result3 Bool)
+
+(declare-const pack__associativity_test__result4 Bool)
+
+(declare-const pack__associativity_test__result5 Bool)
+
 (declare-const fliteral2 t)
 
 ;; fliteral_axiom

@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -65,24 +65,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
@@ -1438,25 +1438,21 @@
      (w_get container witness1) true false true)) :pattern ((w_get container
                                                             witness1)) ))))
 
+(declare-const gapvec__split_fields us_main_type)
+
+(declare-const rayr__split_fields nonnegative_float)
+
+(declare-const rayr__split_fields1 normalized2pi)
+
+(declare-const rayl__split_fields nonnegative_float)
+
+(declare-const rayl__split_fields1 normalized2pi)
+
 (declare-const i Int)
 
-(declare-const temp___820 nonnegative_float)
+(declare-const o Float32)
 
-(declare-const temp___8201 normalized2pi)
-
-(declare-const temp___819 nonnegative_float)
-
-(declare-const temp___8191 normalized2pi)
-
-(declare-const temp___818 us_rep2)
-
-(declare-const temp___817 Int)
-
-(declare-const algorithm__buildgapvector__B_9__dist__assume Float32)
-
-(declare-const o us_rep1)
-
-(declare-const o1 us_rep1)
+(declare-const o1 Float32)
 
 (declare-const o2 Float32)
 
@@ -1472,27 +1468,71 @@
 
 (declare-const o8 Float32)
 
-(declare-const rayr__split_fields us_split_fields8)
+(declare-const o9 Float32)
 
-(declare-const rayl__split_fields us_split_fields8)
+(declare-const o10 Float32)
 
-(declare-const gapvec__split_fields us_split_fields4)
+(declare-const o11 Float32)
 
-(declare-const result int__ref)
+(declare-const algorithm__buildgapvector__B_7__dist__assume Float32)
 
-(declare-const i1 Int)
+(declare-const o12 normalized2pi)
+
+(declare-const o13 float)
+
+(declare-const o14 idir_t)
+
+(declare-const temp___820 nonnegative_float)
+
+(declare-const temp___8201 normalized2pi)
+
+(declare-const temp___819 nonnegative_float)
+
+(declare-const temp___8191 normalized2pi)
+
+(declare-const temp___818 us_rep2)
+
+(declare-const temp___817 Int)
+
+(declare-const algorithm__buildgapvector__B_9__dist__assume Float32)
+
+(declare-const o15 us_rep1)
+
+(declare-const o16 us_rep1)
+
+(declare-const o17 Float32)
+
+(declare-const o18 Float32)
+
+(declare-const o19 Float32)
+
+(declare-const o20 Float32)
+
+(declare-const o21 Float32)
+
+(declare-const o22 Float32)
+
+(declare-const o23 Float32)
+
+(declare-const o24 Float32)
+
+(declare-const o25 Float32)
+
+(declare-const o26 Float32)
+
+(declare-const o27 Float32)
+
+(declare-const o28 Float32)
+
+(declare-const algorithm__buildgapvector__B_10__dist__assume Float32)
+
+(declare-const o29 us_rep1)
+
+(declare-const algorithm__gap_vectors__clear__container__fields us_split_fields4)
+
+(declare-const result us_split_fields__ref2)
 
 (declare-const gapvec__split_fields1 us_split_fields4)
-
-(declare-const rayr__split_fields1 us_split_fields8)
-
-(declare-const rayl__split_fields1 us_split_fields8)
-
-(declare-const i2 Int)
-
-(declare-const rho us_split_fields4)
-
-(declare-const rho1 us_split_fields4)
 
 (declare-const result1 us_split_fields__ref4)
 
@@ -1508,27 +1548,45 @@
 
 (declare-const gapvec__split_fields2 us_split_fields4)
 
-(declare-const algorithm__gap_vectors__append__container__fields1 us_split_fields4)
+(declare-const result4 int__ref)
 
-(declare-const result4 us_split_fields__ref2)
+(declare-const i1 Int)
 
 (declare-const gapvec__split_fields3 us_split_fields4)
 
-(declare-const gapvec__split_fields4 us_split_fields__ref2)
+(declare-const rayr__split_fields3 us_split_fields8)
 
-(declare-const rayr__split_fields3 us_split_fields__ref4)
+(declare-const rayl__split_fields3 us_split_fields8)
 
-(declare-const rayl__split_fields3 us_split_fields__ref4)
+(declare-const i2 Int)
 
-(declare-const i3 int__ref)
+(declare-const rho us_split_fields4)
 
-(declare-const gapvec__split_fields5 us_split_fields4)
+(declare-const rho1 us_split_fields4)
+
+(declare-const result5 us_split_fields__ref4)
 
 (declare-const rayr__split_fields4 us_split_fields8)
 
+(declare-const result6 us_split_fields__ref4)
+
 (declare-const rayl__split_fields4 us_split_fields8)
 
-(declare-const i4 Int)
+(declare-const algorithm__gap_vectors__append__container__fields1 us_split_fields4)
+
+(declare-const result7 us_split_fields__ref2)
+
+(declare-const gapvec__split_fields4 us_split_fields4)
+
+(declare-const algorithm__gap_vectors__append__container__fields2 us_split_fields4)
+
+(declare-const result8 us_split_fields__ref2)
+
+(declare-const gapvec__split_fields5 us_split_fields4)
+
+(declare-const result9 int__ref)
+
+(declare-const i3 Int)
 
 (declare-const gapvec__split_fields6 us_split_fields__ref2)
 
@@ -1536,7 +1594,7 @@
 
 (declare-const rayl__split_fields5 us_split_fields__ref4)
 
-(declare-const i5 int__ref)
+(declare-const i4 int__ref)
 
 (declare-const gapvec__split_fields7 us_split_fields4)
 
@@ -1544,15 +1602,49 @@
 
 (declare-const rayl__split_fields6 us_split_fields8)
 
-(declare-const i6 Int)
+(declare-const i5 Int)
 
-(declare-const result5 us_split_fields__ref4)
+(declare-const gapvec__split_fields8 us_split_fields__ref2)
 
-(declare-const rayr__split_fields7 us_split_fields8)
+(declare-const rayr__split_fields7 us_split_fields__ref4)
 
-(declare-const result6 us_split_fields__ref4)
+(declare-const rayl__split_fields7 us_split_fields__ref4)
 
-(declare-const rayl__split_fields7 us_split_fields8)
+(declare-const i6 int__ref)
+
+(declare-const gapvec__split_fields9 us_split_fields4)
+
+(declare-const rayr__split_fields8 us_split_fields8)
+
+(declare-const rayl__split_fields8 us_split_fields8)
+
+(declare-const i7 Int)
+
+(declare-const gapvec__split_fields10 us_split_fields__ref2)
+
+(declare-const rayr__split_fields9 us_split_fields__ref4)
+
+(declare-const rayl__split_fields9 us_split_fields__ref4)
+
+(declare-const i8 int__ref)
+
+(declare-const gapvec__split_fields11 us_split_fields4)
+
+(declare-const rayr__split_fields10 us_split_fields8)
+
+(declare-const rayl__split_fields10 us_split_fields8)
+
+(declare-const i9 Int)
+
+(declare-const result10 us_split_fields__ref4)
+
+(declare-const rayr__split_fields11 us_split_fields8)
+
+(declare-const result11 us_split_fields__ref4)
+
+(declare-const rayl__split_fields11 us_split_fields8)
+
+(declare-const algorithm__gap_vectors__append__container__fields3 us_split_fields4)
 
 ;; H
   (assert
@@ -1573,10 +1665,10 @@
   (and
   (= (to_rep4
      (rec__algorithm__gap_vectors__list__capacity gapvec__split_discrs)) 1000)
-  (<= (length (mk___rep2 gapvec__split_discrs gapvec__split_fields)) 1)))
+  (<= (length (mk___rep2 gapvec__split_discrs gapvec__split_fields2)) 1)))
 
 ;; H
-  (assert (= result (mk_int__ref i)))
+  (assert (= result4 (mk_int__ref i)))
 
 ;; H
   (assert (= i1 2))
@@ -1584,244 +1676,59 @@
 ;; H
   (assert
   (=> (and (<= 2 i1) (<= i1 999))
+  (and
+  (and
   (= (mk___split_fields4 temp___820
-     (mk___rep (mk___split_fields temp___8201))) rayl__split_fields)))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
+     (mk___rep (mk___split_fields temp___8201))) rayl__split_fields2)
+  (and
   (= (mk___split_fields4 temp___819
-     (mk___rep (mk___split_fields temp___8191))) rayr__split_fields)))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
-  (= temp___818 (mk___rep2 gapvec__split_discrs gapvec__split_fields))))
-
-;; H
-  (assert (=> (and (<= 2 i1) (<= i1 999)) (= temp___817 i1)))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
+     (mk___rep (mk___split_fields temp___8191))) rayr__split_fields2)
+  (and (= temp___818 (mk___rep2 gapvec__split_discrs gapvec__split_fields2))
+  (and (= temp___817 i1)
+  (and
   (and
   (= (to_rep4
      (rec__algorithm__gap_vectors__list__capacity gapvec__split_discrs)) 1000)
-  (< (length (mk___rep2 gapvec__split_discrs gapvec__split_fields1))
-  i2))))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
-  (and (=> (<= 2 999) (in_range7 i2)) (and (<= 2 i2) (<= i2 999)))))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
-  (= result1 (mk___split_fields__ref4 rayr__split_fields1))))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
-  (= rayr__split_fields2 rayl__split_fields1)))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
-  (= result2 (mk___split_fields__ref4 rayl__split_fields1))))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
-  (= rayl__split_fields2 (us_split_fields9 (select laserscan i2)))))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
+  (< (length (mk___rep2 gapvec__split_discrs gapvec__split_fields3))
+  i2))
+  (and (and (=> (<= 2 999) (in_range7 i2)) (and (<= 2 i2) (<= i2 999)))
+  (and
+  (and (= result5 (mk___split_fields__ref4 rayr__split_fields3))
+  (= rayr__split_fields4 rayl__split_fields3))
+  (and
+  (and (= result6 (mk___split_fields__ref4 rayl__split_fields3))
+  (= rayl__split_fields4 (us_split_fields9 (select laserscan i2))))
+  (and
+  (and
+  (and
   (and
   (= algorithm__buildgapvector__B_9__dist__assume (fp.sub RNE (to_rep
                                                               (rec__algorithm__laser_scan_data__first
-                                                              rayl__split_fields2))
-  (to_rep (rec__algorithm__laser_scan_data__first rayr__split_fields2))))
+                                                              rayl__split_fields4))
+  (to_rep (rec__algorithm__laser_scan_data__first rayr__split_fields4))))
   (fp.isFinite32 (fp.sub RNE (to_rep
                              (rec__algorithm__laser_scan_data__first
-                             rayl__split_fields2)) (to_rep
+                             rayl__split_fields4)) (to_rep
                                                    (rec__algorithm__laser_scan_data__first
-                                                   rayr__split_fields2)))))))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
-  (= algorithm__buildgapvector__B_9__dist__assume dist1)))
-
-;; H
-  (assert (=> (and (<= 2 i1) (<= i1 999)) (fp.isFinite32 dist1)))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
-  (=>
-  (or (fp.leq mingapwidth dist1)
+                                                   rayr__split_fields4)))))
+  (= algorithm__buildgapvector__B_9__dist__assume dist1))
+  (fp.isFinite32 dist1))
   (and
-  (fp.eq (to_rep
-         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
-  fmaxrange)
-  (fp.lt (to_rep
-         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
-  fmaxrange)))
-  (= o (create__2
-       (rec__algorithm__laser_scan_data__second rayr__split_fields2)
-       (to_rep (rec__algorithm__laser_scan_data__first rayr__split_fields2))
-       (- 1))))))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
-  (=>
-  (or (fp.leq mingapwidth dist1)
-  (and
-  (fp.eq (to_rep
-         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
-  fmaxrange)
-  (fp.lt (to_rep
-         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
-  fmaxrange)))
+  (ite (or (fp.leq mingapwidth dist1)
+       (and
+       (fp.eq (to_rep
+              (rec__algorithm__laser_scan_data__first rayl__split_fields4))
+       fmaxrange)
+       (fp.lt (to_rep
+              (rec__algorithm__laser_scan_data__first rayr__split_fields4))
+       fmaxrange)))
   (and
   (and
   (and
-  (and
-  (and
-  (= (length
-     (mk___rep2 gapvec__split_discrs
-     algorithm__gap_vectors__append__container__fields)) (+ (length
-                                                            (mk___rep2
-                                                            gapvec__split_discrs
-                                                            gapvec__split_fields1)) 1))
-  (= (get1
-     (positions
-     (mk___rep2 gapvec__split_discrs
-     algorithm__gap_vectors__append__container__fields))
-     (last1
-     (mk___rep2 gapvec__split_discrs
-     algorithm__gap_vectors__append__container__fields))) (length
-                                                          (mk___rep2
-                                                          gapvec__split_discrs
-                                                          algorithm__gap_vectors__append__container__fields))))
-  (= (keys_included_except
-     (positions
-     (mk___rep2 gapvec__split_discrs
-     algorithm__gap_vectors__append__container__fields))
-     (positions (mk___rep2 gapvec__split_discrs gapvec__split_fields1))
-     (last1
-     (mk___rep2 gapvec__split_discrs
-     algorithm__gap_vectors__append__container__fields))) true))
-  (= (ole1 (positions (mk___rep2 gapvec__split_discrs gapvec__split_fields1))
-     (positions
-     (mk___rep2 gapvec__split_discrs
-     algorithm__gap_vectors__append__container__fields))) true))
-  (= (bool_eq1
-     (get
-     (model__
-     (mk___rep2 gapvec__split_discrs
-     algorithm__gap_vectors__append__container__fields))
-     (length
-     (mk___rep2 gapvec__split_discrs
-     algorithm__gap_vectors__append__container__fields))) o) true))
-  (= (ole (model__ (mk___rep2 gapvec__split_discrs gapvec__split_fields1))
-     (model__
-     (mk___rep2 gapvec__split_discrs
-     algorithm__gap_vectors__append__container__fields))) true)))))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
-  (=>
-  (or (fp.leq mingapwidth dist1)
-  (and
-  (fp.eq (to_rep
-         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
-  fmaxrange)
-  (fp.lt (to_rep
-         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
-  fmaxrange))) (= result3 (mk___split_fields__ref2 gapvec__split_fields1)))))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
-  (=>
-  (or (fp.leq mingapwidth dist1)
-  (and
-  (fp.eq (to_rep
-         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
-  fmaxrange)
-  (fp.lt (to_rep
-         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
-  fmaxrange)))
-  (= gapvec__split_fields2 algorithm__gap_vectors__append__container__fields))))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
-  (=>
-  (or (fp.leq mingapwidth dist1)
-  (and
-  (fp.eq (to_rep
-         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
-  fmaxrange)
-  (fp.lt (to_rep
-         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
-  fmaxrange))) (= algorithm__gap_vectors__append__container__fields1
-  rho1))))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
-  (=>
-  (not
-  (or (fp.leq mingapwidth dist1)
-  (and
-  (fp.eq (to_rep
-         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
-  fmaxrange)
-  (fp.lt (to_rep
-         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
-  fmaxrange))))
-  (=>
-  (or (fp.leq dist1 (fp.neg mingapwidth))
-  (and
-  (fp.eq (to_rep
-         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
-  fmaxrange)
-  (fp.lt (to_rep
-         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
-  fmaxrange)))
-  (= o1 (create__2
-        (rec__algorithm__laser_scan_data__second rayl__split_fields2)
-        (to_rep (rec__algorithm__laser_scan_data__first rayl__split_fields2))
-        1))))))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
-  (=>
-  (not
-  (or (fp.leq mingapwidth dist1)
-  (and
-  (fp.eq (to_rep
-         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
-  fmaxrange)
-  (fp.lt (to_rep
-         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
-  fmaxrange))))
-  (=>
-  (or (fp.leq dist1 (fp.neg mingapwidth))
-  (and
-  (fp.eq (to_rep
-         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
-  fmaxrange)
-  (fp.lt (to_rep
-         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
-  fmaxrange)))
+  (= o15 (create__2
+         (rec__algorithm__laser_scan_data__second rayr__split_fields4)
+         (to_rep
+         (rec__algorithm__laser_scan_data__first rayr__split_fields4)) (- 1)))
   (and
   (and
   (and
@@ -1832,7 +1739,7 @@
      algorithm__gap_vectors__append__container__fields1)) (+ (length
                                                              (mk___rep2
                                                              gapvec__split_discrs
-                                                             gapvec__split_fields1)) 1))
+                                                             gapvec__split_fields3)) 1))
   (= (get1
      (positions
      (mk___rep2 gapvec__split_discrs
@@ -1847,11 +1754,11 @@
      (positions
      (mk___rep2 gapvec__split_discrs
      algorithm__gap_vectors__append__container__fields1))
-     (positions (mk___rep2 gapvec__split_discrs gapvec__split_fields1))
+     (positions (mk___rep2 gapvec__split_discrs gapvec__split_fields3))
      (last1
      (mk___rep2 gapvec__split_discrs
      algorithm__gap_vectors__append__container__fields1))) true))
-  (= (ole1 (positions (mk___rep2 gapvec__split_discrs gapvec__split_fields1))
+  (= (ole1 (positions (mk___rep2 gapvec__split_discrs gapvec__split_fields3))
      (positions
      (mk___rep2 gapvec__split_discrs
      algorithm__gap_vectors__append__container__fields1))) true))
@@ -1862,339 +1769,218 @@
      algorithm__gap_vectors__append__container__fields1))
      (length
      (mk___rep2 gapvec__split_discrs
-     algorithm__gap_vectors__append__container__fields1))) o1) true))
-  (= (ole (model__ (mk___rep2 gapvec__split_discrs gapvec__split_fields1))
+     algorithm__gap_vectors__append__container__fields1))) o15) true))
+  (= (ole (model__ (mk___rep2 gapvec__split_discrs gapvec__split_fields3))
      (model__
      (mk___rep2 gapvec__split_discrs
-     algorithm__gap_vectors__append__container__fields1))) true))))))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
-  (=>
-  (not
-  (or (fp.leq mingapwidth dist1)
+     algorithm__gap_vectors__append__container__fields1))) true)))
+  (and (= result7 (mk___split_fields__ref2 gapvec__split_fields3))
+  (= gapvec__split_fields4 algorithm__gap_vectors__append__container__fields1)))
+  (= algorithm__gap_vectors__append__container__fields2 rho1))
   (and
-  (fp.eq (to_rep
-         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
-  fmaxrange)
-  (fp.lt (to_rep
-         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
-  fmaxrange))))
-  (=>
-  (or (fp.leq dist1 (fp.neg mingapwidth))
+  (ite (or (fp.leq dist1 (fp.neg mingapwidth))
+       (and
+       (fp.eq (to_rep
+              (rec__algorithm__laser_scan_data__first rayr__split_fields4))
+       fmaxrange)
+       (fp.lt (to_rep
+              (rec__algorithm__laser_scan_data__first rayl__split_fields4))
+       fmaxrange)))
   (and
-  (fp.eq (to_rep
-         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
-  fmaxrange)
-  (fp.lt (to_rep
-         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
-  fmaxrange))) (= result4 (mk___split_fields__ref2 gapvec__split_fields1))))))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
-  (=>
-  (not
-  (or (fp.leq mingapwidth dist1)
   (and
-  (fp.eq (to_rep
-         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
-  fmaxrange)
-  (fp.lt (to_rep
-         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
-  fmaxrange))))
-  (=>
-  (or (fp.leq dist1 (fp.neg mingapwidth))
+  (= o16 (create__2
+         (rec__algorithm__laser_scan_data__second rayl__split_fields4)
+         (to_rep
+         (rec__algorithm__laser_scan_data__first rayl__split_fields4)) 1))
   (and
-  (fp.eq (to_rep
-         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
-  fmaxrange)
-  (fp.lt (to_rep
-         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
-  fmaxrange)))
-  (= gapvec__split_fields3 algorithm__gap_vectors__append__container__fields1)))))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
-  (=>
-  (not
-  (or (fp.leq mingapwidth dist1)
   (and
-  (fp.eq (to_rep
-         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
-  fmaxrange)
-  (fp.lt (to_rep
-         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
-  fmaxrange))))
-  (=>
-  (not
-  (or (fp.leq dist1 (fp.neg mingapwidth))
   (and
-  (fp.eq (to_rep
-         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
-  fmaxrange)
-  (fp.lt (to_rep
-         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
-  fmaxrange)))) (= gapvec__split_fields3 gapvec__split_fields1)))))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
-  (=>
-  (not
-  (or (fp.leq mingapwidth dist1)
   (and
-  (fp.eq (to_rep
-         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
-  fmaxrange)
-  (fp.lt (to_rep
-         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
-  fmaxrange))))
-  (=>
-  (not
-  (or (fp.leq dist1 (fp.neg mingapwidth))
   (and
-  (fp.eq (to_rep
-         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
-  fmaxrange)
-  (fp.lt (to_rep
-         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
-  fmaxrange)))) (= algorithm__gap_vectors__append__container__fields1
-  rho1)))))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
-  (=>
-  (not
-  (or (fp.leq mingapwidth dist1)
+  (= (length
+     (mk___rep2 gapvec__split_discrs
+     algorithm__gap_vectors__append__container__fields2)) (+ (length
+                                                             (mk___rep2
+                                                             gapvec__split_discrs
+                                                             gapvec__split_fields3)) 1))
+  (= (get1
+     (positions
+     (mk___rep2 gapvec__split_discrs
+     algorithm__gap_vectors__append__container__fields2))
+     (last1
+     (mk___rep2 gapvec__split_discrs
+     algorithm__gap_vectors__append__container__fields2))) (length
+                                                           (mk___rep2
+                                                           gapvec__split_discrs
+                                                           algorithm__gap_vectors__append__container__fields2))))
+  (= (keys_included_except
+     (positions
+     (mk___rep2 gapvec__split_discrs
+     algorithm__gap_vectors__append__container__fields2))
+     (positions (mk___rep2 gapvec__split_discrs gapvec__split_fields3))
+     (last1
+     (mk___rep2 gapvec__split_discrs
+     algorithm__gap_vectors__append__container__fields2))) true))
+  (= (ole1 (positions (mk___rep2 gapvec__split_discrs gapvec__split_fields3))
+     (positions
+     (mk___rep2 gapvec__split_discrs
+     algorithm__gap_vectors__append__container__fields2))) true))
+  (= (bool_eq1
+     (get
+     (model__
+     (mk___rep2 gapvec__split_discrs
+     algorithm__gap_vectors__append__container__fields2))
+     (length
+     (mk___rep2 gapvec__split_discrs
+     algorithm__gap_vectors__append__container__fields2))) o16) true))
+  (= (ole (model__ (mk___rep2 gapvec__split_discrs gapvec__split_fields3))
+     (model__
+     (mk___rep2 gapvec__split_discrs
+     algorithm__gap_vectors__append__container__fields2))) true)))
+  (and (= result8 (mk___split_fields__ref2 gapvec__split_fields3))
+  (= gapvec__split_fields5 algorithm__gap_vectors__append__container__fields2)))
+  (and (= gapvec__split_fields5 gapvec__split_fields3)
+  (and (= algorithm__gap_vectors__append__container__fields2 rho1)
+  (= gapvec__split_fields5 gapvec__split_fields3))))
+  (and (= gapvec__split_fields4 gapvec__split_fields5)
+  (and (= algorithm__gap_vectors__append__container__fields1 rho)
+  (= gapvec__split_fields4 gapvec__split_fields5))))) (= i2 999)))))))))))
   (and
-  (fp.eq (to_rep
-         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
-  fmaxrange)
-  (fp.lt (to_rep
-         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
-  fmaxrange))))
-  (=>
-  (not
-  (or (fp.leq dist1 (fp.neg mingapwidth))
-  (and
-  (fp.eq (to_rep
-         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
-  fmaxrange)
-  (fp.lt (to_rep
-         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
-  fmaxrange)))) (= gapvec__split_fields3 gapvec__split_fields1)))))
+  (and (= i6 (mk_int__ref i2))
+  (and (= rayl__split_fields7 (mk___split_fields__ref4 rayl__split_fields4))
+  (and (= rayr__split_fields7 (mk___split_fields__ref4 rayr__split_fields4))
+  (= gapvec__split_fields8 (mk___split_fields__ref2 gapvec__split_fields4)))))
+  (and (= i7 i2)
+  (and (= rayl__split_fields8 rayl__split_fields4)
+  (and (= rayr__split_fields8 rayr__split_fields4)
+  (= gapvec__split_fields9 gapvec__split_fields4))))))))
+
+;; H
+  (assert (=> (and (<= 2 i1) (<= i1 999)) (= i8 i6)))
 
 ;; H
   (assert
   (=> (and (<= 2 i1) (<= i1 999))
-  (=>
-  (not
-  (or (fp.leq mingapwidth dist1)
-  (and
-  (fp.eq (to_rep
-         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
-  fmaxrange)
-  (fp.lt (to_rep
-         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
-  fmaxrange)))) (= gapvec__split_fields2 gapvec__split_fields3))))
+  (= rayl__split_fields9 rayl__split_fields7)))
 
 ;; H
   (assert
   (=> (and (<= 2 i1) (<= i1 999))
-  (=>
-  (not
-  (or (fp.leq mingapwidth dist1)
-  (and
-  (fp.eq (to_rep
-         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
-  fmaxrange)
-  (fp.lt (to_rep
-         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
-  fmaxrange)))) (= algorithm__gap_vectors__append__container__fields
-  rho))))
+  (= rayr__split_fields9 rayr__split_fields7)))
 
 ;; H
   (assert
   (=> (and (<= 2 i1) (<= i1 999))
-  (=>
-  (not
-  (or (fp.leq mingapwidth dist1)
-  (and
-  (fp.eq (to_rep
-         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
-  fmaxrange)
-  (fp.lt (to_rep
-         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
-  fmaxrange)))) (= gapvec__split_fields2 gapvec__split_fields3))))
+  (= gapvec__split_fields10 gapvec__split_fields8)))
 
 ;; H
-  (assert (=> (and (<= 2 i1) (<= i1 999)) (= i2 999)))
-
-;; H
-  (assert (=> (and (<= 2 i1) (<= i1 999)) (= i3 (mk_int__ref i2))))
+  (assert (=> (and (<= 2 i1) (<= i1 999)) (= i9 i7)))
 
 ;; H
   (assert
   (=> (and (<= 2 i1) (<= i1 999))
-  (= rayl__split_fields3 (mk___split_fields__ref4 rayl__split_fields2))))
+  (= rayl__split_fields10 rayl__split_fields8)))
 
 ;; H
   (assert
   (=> (and (<= 2 i1) (<= i1 999))
-  (= rayr__split_fields3 (mk___split_fields__ref4 rayr__split_fields2))))
+  (= rayr__split_fields10 rayr__split_fields8)))
 
 ;; H
   (assert
   (=> (and (<= 2 i1) (<= i1 999))
-  (= gapvec__split_fields4 (mk___split_fields__ref2 gapvec__split_fields2))))
+  (= gapvec__split_fields11 gapvec__split_fields9)))
 
 ;; H
-  (assert (=> (and (<= 2 i1) (<= i1 999)) (= i4 i2)))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
-  (= rayl__split_fields4 rayl__split_fields2)))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
-  (= rayr__split_fields4 rayr__split_fields2)))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
-  (= gapvec__split_fields5 gapvec__split_fields2)))
-
-;; H
-  (assert (=> (and (<= 2 i1) (<= i1 999)) (= i5 i3)))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
-  (= rayl__split_fields5 rayl__split_fields3)))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
-  (= rayr__split_fields5 rayr__split_fields3)))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
-  (= gapvec__split_fields6 gapvec__split_fields4)))
-
-;; H
-  (assert (=> (and (<= 2 i1) (<= i1 999)) (= i6 i4)))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
-  (= rayl__split_fields6 rayl__split_fields4)))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
-  (= rayr__split_fields6 rayr__split_fields4)))
-
-;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
-  (= gapvec__split_fields7 gapvec__split_fields5)))
-
-;; H
-  (assert (=> (not (and (<= 2 i1) (<= i1 999))) (= i5 (mk_int__ref i1))))
+  (assert (=> (not (and (<= 2 i1) (<= i1 999))) (= i8 (mk_int__ref i1))))
 
 ;; H
   (assert
   (=> (not (and (<= 2 i1) (<= i1 999)))
-  (= rayl__split_fields5 (mk___split_fields__ref4 rayl__split_fields))))
+  (= rayl__split_fields9 (mk___split_fields__ref4 rayl__split_fields2))))
 
 ;; H
   (assert
   (=> (not (and (<= 2 i1) (<= i1 999)))
-  (= rayr__split_fields5 (mk___split_fields__ref4 rayr__split_fields))))
+  (= rayr__split_fields9 (mk___split_fields__ref4 rayr__split_fields2))))
 
 ;; H
   (assert
   (=> (not (and (<= 2 i1) (<= i1 999)))
-  (= gapvec__split_fields6 (mk___split_fields__ref2 gapvec__split_fields))))
+  (= gapvec__split_fields10 (mk___split_fields__ref2 gapvec__split_fields2))))
 
 ;; H
-  (assert (=> (not (and (<= 2 i1) (<= i1 999))) (= i6 i1)))
-
-;; H
-  (assert
-  (=> (not (and (<= 2 i1) (<= i1 999)))
-  (= rayl__split_fields6 rayl__split_fields)))
+  (assert (=> (not (and (<= 2 i1) (<= i1 999))) (= i9 i1)))
 
 ;; H
   (assert
   (=> (not (and (<= 2 i1) (<= i1 999)))
-  (= rayr__split_fields6 rayr__split_fields)))
+  (= rayl__split_fields10 rayl__split_fields2)))
 
 ;; H
   (assert
   (=> (not (and (<= 2 i1) (<= i1 999)))
-  (= gapvec__split_fields7 gapvec__split_fields)))
+  (= rayr__split_fields10 rayr__split_fields2)))
 
 ;; H
-  (assert (= result5 rayr__split_fields5))
+  (assert
+  (=> (not (and (<= 2 i1) (<= i1 999)))
+  (= gapvec__split_fields11 gapvec__split_fields2)))
 
 ;; H
-  (assert (= rayr__split_fields7 (us_split_fields9 (select laserscan 1000))))
+  (assert (= result10 rayr__split_fields9))
 
 ;; H
-  (assert (= result6 rayl__split_fields5))
+  (assert
+  (= rayr__split_fields11 (us_split_fields9 (select laserscan 1000))))
 
 ;; H
-  (assert (= rayl__split_fields7 (us_split_fields9 (select laserscan 1))))
+  (assert (= result11 rayl__split_fields9))
+
+;; H
+  (assert (= rayl__split_fields11 (us_split_fields9 (select laserscan 1))))
 
 ;; H
   (assert
   (and
-  (= o4 (ccwdiff
-        (rec__algorithm__laser_scan_data__second rayr__split_fields7)
-        (rec__algorithm__laser_scan_data__second rayl__split_fields7)))
-  (fp.isFinite32 o4)))
+  (= o22 (ccwdiff
+         (rec__algorithm__laser_scan_data__second rayr__split_fields11)
+         (rec__algorithm__laser_scan_data__second rayl__split_fields11)))
+  (fp.isFinite32 o22)))
 
 ;; H
   (assert
-  (and (= o5 (cos1 o4))
-  (and (fp.isFinite32 o5)
+  (and (= o23 (cos1 o22))
+  (and (fp.isFinite32 o23)
   (and
   (and (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000))
-  o5) (fp.leq o5 (fp #b0 #b01111111 #b00000000000000000000000)))
-  (=> (fp.eq o4 (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq o5 (fp #b0 #b01111111 #b00000000000000000000000)))))))
+  o23) (fp.leq o23 (fp #b0 #b01111111 #b00000000000000000000000)))
+  (=> (fp.eq o22 (fp #b0 #b00000000 #b00000000000000000000000))
+  (fp.eq o23 (fp #b0 #b01111111 #b00000000000000000000000)))))))
 
 ;; H
   (assert
   (and
-  (= o2 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) (to_rep
-                                                                  (rec__algorithm__laser_scan_data__first
-                                                                  rayr__split_fields7))))
+  (= o20 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) (to_rep
+                                                                   (rec__algorithm__laser_scan_data__first
+                                                                   rayr__split_fields11))))
   (fp.isFinite32 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
-  (to_rep (rec__algorithm__laser_scan_data__first rayr__split_fields7))))))
+  (to_rep (rec__algorithm__laser_scan_data__first rayr__split_fields11))))))
 
 ;; H
   (assert
-  (= o3 (fp.mul RNE o2 (to_rep
-                       (rec__algorithm__laser_scan_data__first
-                       rayl__split_fields7)))))
+  (= o21 (fp.mul RNE o20 (to_rep
+                         (rec__algorithm__laser_scan_data__first
+                         rayl__split_fields11)))))
 
 ;; H
-  (assert (and (= o6 o3) (fp.isFinite32 o3)))
+  (assert (and (= o24 o21) (fp.isFinite32 o21)))
 
 ;; H
-  (assert (= o7 (fp.mul RNE o6 o5)))
+  (assert (= o25 (fp.mul RNE o24 o23)))
 
 ;; H
-  (assert (and (= o8 o7) (fp.isFinite32 o7)))
+  (assert (and (= o26 o25) (fp.isFinite32 o25)))
 
 (assert
 ;; WP_parameter_def
@@ -2202,8 +1988,8 @@
   (not
   (fp.isFinite32 (fp.mul RNE (to_rep
                              (rec__algorithm__laser_scan_data__first
-                             rayl__split_fields7)) (to_rep
-                                                   (rec__algorithm__laser_scan_data__first
-                                                   rayl__split_fields7))))))
+                             rayl__split_fields11)) (to_rep
+                                                    (rec__algorithm__laser_scan_data__first
+                                                    rayl__split_fields11))))))
 (check-sat)
 (exit)

@@ -1100,13 +1100,40 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic res : bool
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic o4 : t
+
+logic o5 : bool
+
+logic result : bool
+
+logic res1 : bool
+
+axiom H : tqtisFinite(d0)
+
+axiom H1 : tqtisFinite(d1)
+
+axiom H2 : tqtisFinite(r)
+
+axiom H3 : lt(d0, d1)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
+axiom H4 : (le(fliteral1, r) and le(r, fliteral))
+
+axiom H5 : le(fliteral1, d0)
+
  (* File "floating_point.adb", line 284, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(d0) -> (tqtisFinite(d1) ->
-  (tqtisFinite(r) -> (lt(d0, d1) -> ((le(fliteral1, r) and le(r,
-  fliteral)) -> (le(fliteral1, d0) -> tqtisFinite(sub(NearestTiesToEven, d1,
-  d0))))))))
+goal WP_parameter_def : tqtisFinite(sub(NearestTiesToEven, d1, d0))

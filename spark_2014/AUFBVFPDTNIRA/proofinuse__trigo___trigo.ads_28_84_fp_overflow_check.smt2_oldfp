@@ -1158,34 +1158,74 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 62.0)))
-
 (declare-const o t)
 
 (declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const o3 t)
+
+(declare-const o4 t)
+
+(declare-const o5 t)
+
+(declare-const o6 t)
+
+(declare-const o7 t)
+
+(declare-const o8 t)
+
+(declare-const o9 t)
+
+(declare-const o10 t)
+
+(declare-const o11 t)
+
+(declare-const o12 t)
+
+(declare-const o13 t)
+
+(declare-const o14 t)
+
+(declare-const o15 t)
+
+(declare-const o16 t)
+
+(declare-const o17 t)
+
+(declare-const o18 t)
+
+(declare-const o19 t)
+
+(declare-const o20 t)
+
+(declare-const o21 t)
 
 ;; H
   (assert (tqtisFinite x))
 
 ;; H
   (assert
-  (and (= o (pow9 x))
-  (and (tqtisFinite o)
-  (= o (mul RNE1
-       (mul RNE1
-       (mul RNE1
-       (mul RNE1 (mul RNE1 (mul RNE1 (mul RNE1 (mul RNE1 x x) x) x) x) x)
-       x) x) x)))))
+  (and (= o15 (pow9 x))
+  (and (tqtisFinite o15)
+  (= o15 (mul RNE1
+         (mul RNE1
+         (mul RNE1
+         (mul RNE1 (mul RNE1 (mul RNE1 (mul RNE1 (mul RNE1 x x) x) x) x) x)
+         x) x) x)))))
+
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 62.0)))
 
 ;; H
-  (assert (= o1 (mul RNE1 fliteral2 o)))
+  (assert (= o16 (mul RNE1 fliteral2 o15)))
 
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (tqtisFinite o1)))
+  (not (tqtisFinite o16)))
 (check-sat)
 (exit)

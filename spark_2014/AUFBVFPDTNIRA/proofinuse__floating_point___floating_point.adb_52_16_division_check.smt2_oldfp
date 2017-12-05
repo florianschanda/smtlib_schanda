@@ -1124,12 +1124,9 @@
 ;; threshold__def_axiom
   (assert (= threshold fliteral2))
 
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) (/ 0.0 10.0))))
-
 (declare-const res t)
+
+(declare-const o t)
 
 ;; H
   (assert (tqtisFinite x))
@@ -1142,6 +1139,11 @@
 
 ;; H
   (assert (tqtisFinite threshold))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) (/ 0.0 10.0))))
 
 ;; H
   (assert (le fliteral3 x))

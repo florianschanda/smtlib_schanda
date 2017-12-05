@@ -155,17 +155,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int1 (RoundingMode Int) Float32)
 
@@ -180,24 +180,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-fun power (Float32 Int) Float32)
@@ -225,21 +225,21 @@
   (assert
   (forall ((x Float32))
   (=> (fp.isFinite32 x)
-  (=> (not (fp.isZero      x))
+  (=> (not (fp.isZero x))
   (fp.eq (power x (- 1)) (fp.div RNE (of_int1 RNE 1) x))))))
 
 ;; Power_neg2
   (assert
   (forall ((x Float32))
   (=> (fp.isFinite32 x)
-  (=> (not (fp.isZero      x))
+  (=> (not (fp.isZero x))
   (fp.eq (power x (- 2)) (fp.div RNE (of_int1 RNE 1) (power x 2)))))))
 
 ;; Power_neg3
   (assert
   (forall ((x Float32))
   (=> (fp.isFinite32 x)
-  (=> (not (fp.isZero      x))
+  (=> (not (fp.isZero x))
   (fp.eq (power x (- 2)) (fp.div RNE (of_int1 RNE 1) (power x 3)))))))
 
 ;; fib__def_axiom
@@ -326,6 +326,14 @@
 
 (declare-const o Int)
 
+(declare-const o1 Int)
+
+(declare-const o2 Int)
+
+(declare-const o3 Bool)
+
+(declare-const o4 Int)
+
 (declare-const old__1 Int)
 
 (declare-const oldest1 Int)
@@ -370,13 +378,17 @@
 
 (declare-const old__4 Int)
 
+(declare-const result7 Int)
+
+(declare-const i4 Int)
+
 (declare-const old__5 Int)
 
 (declare-const oldest5 Int)
 
 (declare-const temp4 Int)
 
-(declare-const i4 int__ref)
+(declare-const i5 Int)
 
 (declare-const old__6 Int)
 
@@ -384,15 +396,15 @@
 
 (declare-const temp5 Int)
 
-(declare-const i5 Int)
+(declare-const i6 Int)
 
-(declare-const old__7 int__ref)
+(declare-const old__7 Int)
 
-(declare-const oldest7 int__ref)
+(declare-const oldest7 Int)
 
-(declare-const temp6 int__ref)
+(declare-const temp6 Int)
 
-(declare-const i6 int__ref)
+(declare-const i7 int__ref)
 
 (declare-const old__8 Int)
 
@@ -400,13 +412,7 @@
 
 (declare-const temp7 Int)
 
-(declare-const i7 Int)
-
-(declare-const result7 int__ref)
-
-(declare-const result__2 Int)
-
-(declare-const result__3 int__ref)
+(declare-const i8 Int)
 
 (declare-const old__9 int__ref)
 
@@ -414,9 +420,7 @@
 
 (declare-const temp8 int__ref)
 
-(declare-const i8 int__ref)
-
-(declare-const result__4 Int)
+(declare-const i9 int__ref)
 
 (declare-const old__10 Int)
 
@@ -424,9 +428,33 @@
 
 (declare-const temp9 Int)
 
-(declare-const i9 Int)
+(declare-const i10 Int)
 
 (declare-const result8 int__ref)
+
+(declare-const result__2 Int)
+
+(declare-const result__3 int__ref)
+
+(declare-const old__11 int__ref)
+
+(declare-const oldest11 int__ref)
+
+(declare-const temp10 int__ref)
+
+(declare-const i11 int__ref)
+
+(declare-const result__4 Int)
+
+(declare-const old__12 Int)
+
+(declare-const oldest12 Int)
+
+(declare-const temp11 Int)
+
+(declare-const i12 Int)
+
+(declare-const result9 int__ref)
 
 (declare-const number_theory__fibonacci__result1 Int)
 
@@ -436,37 +464,29 @@
 
 (declare-const result__5 int__ref)
 
-(declare-const old__11 int__ref)
+(declare-const old__13 int__ref)
 
-(declare-const oldest11 int__ref)
+(declare-const oldest13 int__ref)
 
-(declare-const temp10 int__ref)
+(declare-const temp12 int__ref)
 
-(declare-const i10 int__ref)
+(declare-const i13 int__ref)
 
 (declare-const number_theory__fibonacci__result4 int__ref)
 
 (declare-const result__6 Int)
 
-(declare-const old__12 Int)
+(declare-const old__14 Int)
 
-(declare-const oldest12 Int)
+(declare-const oldest14 Int)
 
-(declare-const temp11 Int)
+(declare-const temp13 Int)
 
-(declare-const i11 Int)
+(declare-const i14 Int)
 
 (declare-const number_theory__fibonacci__result5 Int)
 
-(define-fun i12 () int__ref (mk_int__ref i))
-
-(define-fun temp12 () int__ref (mk_int__ref temp))
-
-(define-fun oldest13 () int__ref (mk_int__ref oldest))
-
-(define-fun old__13 () int__ref (mk_int__ref old__))
-
-(declare-const result9 Int)
+(declare-const result10 Int)
 
 ;; H
   (assert (in_range4 n))
@@ -490,53 +510,56 @@
   (assert (=> (=> (not (= n 0)) (= n 1)) (= result__1 n)))
 
 ;; H
-  (assert (=> (=> (not (= n 0)) (= n 1)) (= i8 i12)))
+  (assert (=> (=> (not (= n 0)) (= n 1)) (= i11 (mk_int__ref i))))
 
 ;; H
-  (assert (=> (=> (not (= n 0)) (= n 1)) (= temp8 temp12)))
+  (assert (=> (=> (not (= n 0)) (= n 1)) (= temp10 (mk_int__ref temp))))
 
 ;; H
-  (assert (=> (=> (not (= n 0)) (= n 1)) (= oldest9 oldest13)))
+  (assert (=> (=> (not (= n 0)) (= n 1)) (= oldest11 (mk_int__ref oldest))))
 
 ;; H
-  (assert (=> (=> (not (= n 0)) (= n 1)) (= old__9 old__13)))
+  (assert (=> (=> (not (= n 0)) (= n 1)) (= old__11 (mk_int__ref old__))))
 
 ;; H
   (assert
   (=> (=> (not (= n 0)) (= n 1)) (= result__3 (mk_int__ref result__1))))
 
 ;; H
-  (assert (=> (=> (not (= n 0)) (= n 1)) (= i9 i1)))
+  (assert (=> (=> (not (= n 0)) (= n 1)) (= i12 i1)))
 
 ;; H
-  (assert (=> (=> (not (= n 0)) (= n 1)) (= temp9 temp1)))
+  (assert (=> (=> (not (= n 0)) (= n 1)) (= temp11 temp1)))
 
 ;; H
-  (assert (=> (=> (not (= n 0)) (= n 1)) (= oldest10 oldest1)))
+  (assert (=> (=> (not (= n 0)) (= n 1)) (= oldest12 oldest1)))
 
 ;; H
-  (assert (=> (=> (not (= n 0)) (= n 1)) (= old__10 old__1)))
+  (assert (=> (=> (not (= n 0)) (= n 1)) (= old__12 old__1)))
 
 ;; H
   (assert (=> (=> (not (= n 0)) (= n 1)) (= result__4 result__1)))
 
 ;; H
   (assert
-  (=> (not (=> (not (= n 0)) (= n 1))) (= (mk_int__ref result1) oldest13)))
+  (=> (not (=> (not (= n 0)) (= n 1)))
+  (= (mk_int__ref result1) (mk_int__ref oldest))))
 
 ;; H
   (assert (=> (not (=> (not (= n 0)) (= n 1))) (= oldest2 0)))
 
 ;; H
   (assert
-  (=> (not (=> (not (= n 0)) (= n 1))) (= (mk_int__ref result2) old__13)))
+  (=> (not (=> (not (= n 0)) (= n 1)))
+  (= (mk_int__ref result2) (mk_int__ref old__))))
 
 ;; H
   (assert (=> (not (=> (not (= n 0)) (= n 1))) (= old__2 1)))
 
 ;; H
   (assert
-  (=> (not (=> (not (= n 0)) (= n 1))) (= (mk_int__ref result3) i12)))
+  (=> (not (=> (not (= n 0)) (= n 1)))
+  (= (mk_int__ref result3) (mk_int__ref i))))
 
 ;; H
   (assert (=> (not (=> (not (= n 0)) (= n 1))) (= i2 2)))
@@ -544,237 +567,147 @@
 ;; H
   (assert
   (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (and (<= 2 i2) (<= i2 n)) (= temp___194 temp))))
-
-;; H
-  (assert
-  (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (and (<= 2 i2) (<= i2 n)) (= temp___193 oldest2))))
-
-;; H
-  (assert
-  (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (and (<= 2 i2) (<= i2 n)) (= temp___192 old__2))))
-
-;; H
-  (assert
-  (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (and (<= 2 i2) (<= i2 n)) (= temp___191 i2))))
-
-;; H
-  (assert
-  (=> (not (=> (not (= n 0)) (= n 1)))
   (=> (and (<= 2 i2) (<= i2 n))
-  (and (= old__3 (fib (- i3 1))) (= oldest3 (fib (- i3 2)))))))
-
-;; H
-  (assert
-  (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (and (<= 2 i2) (<= i2 n))
+  (and
+  (and (= temp___194 temp)
+  (and (= temp___193 oldest2)
+  (and (= temp___192 old__2)
+  (and (= temp___191 i2)
+  (and (and (= old__3 (fib (- i3 1))) (= oldest3 (fib (- i3 2))))
+  (and
   (and
   (and
   (and
   (and (=> (<= 2 n) (dynamic_property 2 n i3))
   (=> (<= 1 2147483647) (in_range3 old__3)))
   (=> (<= 0 2147483647) (in_range2 oldest3)))
-  (=> (<= 0 2147483647) (in_range2 temp2))) (and (<= 2 i3) (<= i3 n))))))
+  (=> (<= 0 2147483647) (in_range2 temp2))) (and (<= 2 i3) (<= i3 n)))
+  (and (and (= temp2 result4) (= temp3 oldest3))
+  (and (and (= oldest3 result5) (= oldest4 old__3))
+  (and
+  (and (and (= o4 (+ old__3 temp3)) (in_range1 (+ old__3 temp3)))
+  (and (= old__3 result6) (= old__4 o4))) (= i3 n))))))))))
+  (and
+  (and (= i7 (mk_int__ref i3))
+  (and (= temp3 temp6) (and (= oldest4 oldest7) (= old__4 old__7))))
+  (and (= i8 i3)
+  (and (= temp7 temp3) (and (= oldest8 oldest4) (= old__8 old__4)))))))))
 
 ;; H
   (assert
   (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (and (<= 2 i2) (<= i2 n)) (= temp2 result4))))
+  (=> (and (<= 2 i2) (<= i2 n)) (= i9 i7))))
 
 ;; H
   (assert
   (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (and (<= 2 i2) (<= i2 n)) (= temp3 oldest3))))
+  (=> (and (<= 2 i2) (<= i2 n)) (= temp8 (mk_int__ref temp6)))))
 
 ;; H
   (assert
   (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (and (<= 2 i2) (<= i2 n)) (= oldest3 result5))))
+  (=> (and (<= 2 i2) (<= i2 n)) (= oldest9 (mk_int__ref oldest7)))))
 
 ;; H
   (assert
   (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (and (<= 2 i2) (<= i2 n)) (= oldest4 old__3))))
+  (=> (and (<= 2 i2) (<= i2 n)) (= old__9 (mk_int__ref old__7)))))
 
 ;; H
   (assert
   (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (and (<= 2 i2) (<= i2 n))
-  (and (= o (+ old__3 temp3)) (in_range1 (+ old__3 temp3))))))
+  (=> (and (<= 2 i2) (<= i2 n)) (= i10 i8))))
 
 ;; H
   (assert
   (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (and (<= 2 i2) (<= i2 n)) (= old__3 result6))))
+  (=> (and (<= 2 i2) (<= i2 n)) (= temp9 temp7))))
 
 ;; H
   (assert
   (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (and (<= 2 i2) (<= i2 n)) (= old__4 o))))
+  (=> (and (<= 2 i2) (<= i2 n)) (= oldest10 oldest8))))
 
 ;; H
   (assert
   (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (and (<= 2 i2) (<= i2 n)) (= i3 n))))
+  (=> (and (<= 2 i2) (<= i2 n)) (= old__10 old__8))))
 
 ;; H
   (assert
   (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (and (<= 2 i2) (<= i2 n)) (= i4 (mk_int__ref i3)))))
+  (=> (not (and (<= 2 i2) (<= i2 n))) (= i9 (mk_int__ref i2)))))
 
 ;; H
   (assert
   (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (and (<= 2 i2) (<= i2 n)) (= temp3 temp4))))
+  (=> (not (and (<= 2 i2) (<= i2 n))) (= temp8 (mk_int__ref temp)))))
 
 ;; H
   (assert
   (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (and (<= 2 i2) (<= i2 n)) (= oldest4 oldest5))))
+  (=> (not (and (<= 2 i2) (<= i2 n))) (= oldest9 (mk_int__ref oldest2)))))
 
 ;; H
   (assert
   (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (and (<= 2 i2) (<= i2 n)) (= old__4 old__5))))
+  (=> (not (and (<= 2 i2) (<= i2 n))) (= old__9 (mk_int__ref old__2)))))
 
 ;; H
   (assert
   (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (and (<= 2 i2) (<= i2 n)) (= i5 i3))))
+  (=> (not (and (<= 2 i2) (<= i2 n))) (= i10 i2))))
 
 ;; H
   (assert
   (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (and (<= 2 i2) (<= i2 n)) (= temp5 temp3))))
+  (=> (not (and (<= 2 i2) (<= i2 n))) (= temp9 temp1))))
 
 ;; H
   (assert
   (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (and (<= 2 i2) (<= i2 n)) (= oldest6 oldest4))))
+  (=> (not (and (<= 2 i2) (<= i2 n))) (= oldest10 oldest2))))
 
 ;; H
   (assert
   (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (and (<= 2 i2) (<= i2 n)) (= old__6 old__4))))
+  (=> (not (and (<= 2 i2) (<= i2 n))) (= old__10 old__2))))
 
 ;; H
   (assert
-  (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (and (<= 2 i2) (<= i2 n)) (= i6 i4))))
+  (=> (not (=> (not (= n 0)) (= n 1))) (= result8 (mk_int__ref result__))))
 
 ;; H
   (assert
-  (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (and (<= 2 i2) (<= i2 n)) (= temp6 (mk_int__ref temp4)))))
+  (=> (not (=> (not (= n 0)) (= n 1))) (= result__2 (int__content old__9))))
 
 ;; H
-  (assert
-  (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (and (<= 2 i2) (<= i2 n)) (= oldest7 (mk_int__ref oldest5)))))
+  (assert (=> (not (=> (not (= n 0)) (= n 1))) (= i11 i9)))
 
 ;; H
-  (assert
-  (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (and (<= 2 i2) (<= i2 n)) (= old__7 (mk_int__ref old__5)))))
+  (assert (=> (not (=> (not (= n 0)) (= n 1))) (= temp10 temp8)))
 
 ;; H
-  (assert
-  (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (and (<= 2 i2) (<= i2 n)) (= i7 i5))))
+  (assert (=> (not (=> (not (= n 0)) (= n 1))) (= oldest11 oldest9)))
 
 ;; H
-  (assert
-  (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (and (<= 2 i2) (<= i2 n)) (= temp7 temp5))))
-
-;; H
-  (assert
-  (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (and (<= 2 i2) (<= i2 n)) (= oldest8 oldest6))))
-
-;; H
-  (assert
-  (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (and (<= 2 i2) (<= i2 n)) (= old__8 old__6))))
-
-;; H
-  (assert
-  (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (not (and (<= 2 i2) (<= i2 n))) (= i6 (mk_int__ref i2)))))
-
-;; H
-  (assert
-  (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (not (and (<= 2 i2) (<= i2 n))) (= temp6 temp12))))
-
-;; H
-  (assert
-  (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (not (and (<= 2 i2) (<= i2 n))) (= oldest7 (mk_int__ref oldest2)))))
-
-;; H
-  (assert
-  (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (not (and (<= 2 i2) (<= i2 n))) (= old__7 (mk_int__ref old__2)))))
-
-;; H
-  (assert
-  (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (not (and (<= 2 i2) (<= i2 n))) (= i7 i2))))
-
-;; H
-  (assert
-  (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (not (and (<= 2 i2) (<= i2 n))) (= temp7 temp1))))
-
-;; H
-  (assert
-  (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (not (and (<= 2 i2) (<= i2 n))) (= oldest8 oldest2))))
-
-;; H
-  (assert
-  (=> (not (=> (not (= n 0)) (= n 1)))
-  (=> (not (and (<= 2 i2) (<= i2 n))) (= old__8 old__2))))
-
-;; H
-  (assert
-  (=> (not (=> (not (= n 0)) (= n 1))) (= result7 (mk_int__ref result__))))
-
-;; H
-  (assert
-  (=> (not (=> (not (= n 0)) (= n 1))) (= result__2 (int__content old__7))))
-
-;; H
-  (assert (=> (not (=> (not (= n 0)) (= n 1))) (= i8 i6)))
-
-;; H
-  (assert (=> (not (=> (not (= n 0)) (= n 1))) (= temp8 temp6)))
-
-;; H
-  (assert (=> (not (=> (not (= n 0)) (= n 1))) (= oldest9 oldest7)))
-
-;; H
-  (assert (=> (not (=> (not (= n 0)) (= n 1))) (= old__9 old__7)))
+  (assert (=> (not (=> (not (= n 0)) (= n 1))) (= old__11 old__9)))
 
 ;; H
   (assert
   (=> (not (=> (not (= n 0)) (= n 1))) (= result__3 (mk_int__ref result__2))))
 
 ;; H
-  (assert (=> (not (=> (not (= n 0)) (= n 1))) (= i9 i7)))
+  (assert (=> (not (=> (not (= n 0)) (= n 1))) (= i12 i10)))
 
 ;; H
-  (assert (=> (not (=> (not (= n 0)) (= n 1))) (= temp9 temp7)))
+  (assert (=> (not (=> (not (= n 0)) (= n 1))) (= temp11 temp9)))
 
 ;; H
-  (assert (=> (not (=> (not (= n 0)) (= n 1))) (= oldest10 oldest8)))
+  (assert (=> (not (=> (not (= n 0)) (= n 1))) (= oldest12 oldest10)))
 
 ;; H
-  (assert (=> (not (=> (not (= n 0)) (= n 1))) (= old__10 old__8)))
+  (assert (=> (not (=> (not (= n 0)) (= n 1))) (= old__12 old__10)))
 
 ;; H
   (assert (=> (not (=> (not (= n 0)) (= n 1))) (= result__4 result__2)))
@@ -789,7 +722,7 @@
   (= number_theory__fibonacci__result3 number_theory__fibonacci__result1))
 
 ;; H
-  (assert (= result8 (mk_int__ref number_theory__fibonacci__result)))
+  (assert (= result9 (mk_int__ref number_theory__fibonacci__result)))
 
 ;; H
   (assert (= number_theory__fibonacci__result1 (int__content result__3)))
@@ -799,16 +732,16 @@
   (= number_theory__fibonacci__result4 number_theory__fibonacci__result2))
 
 ;; H
-  (assert (= i10 i8))
+  (assert (= i13 i11))
 
 ;; H
-  (assert (= temp10 temp8))
+  (assert (= temp12 temp10))
 
 ;; H
-  (assert (= oldest11 oldest9))
+  (assert (= oldest13 oldest11))
 
 ;; H
-  (assert (= old__11 old__9))
+  (assert (= old__13 old__11))
 
 ;; H
   (assert (= result__5 result__3))
@@ -818,22 +751,22 @@
   (= number_theory__fibonacci__result5 number_theory__fibonacci__result3))
 
 ;; H
-  (assert (= i11 i9))
+  (assert (= i14 i12))
 
 ;; H
-  (assert (= temp11 temp9))
+  (assert (= temp13 temp11))
 
 ;; H
-  (assert (= oldest12 oldest10))
+  (assert (= oldest14 oldest12))
 
 ;; H
-  (assert (= old__12 old__10))
+  (assert (= old__14 old__12))
 
 ;; H
   (assert (= result__6 result__4))
 
 ;; H
-  (assert (= result9 (int__content number_theory__fibonacci__result4)))
+  (assert (= result10 (int__content number_theory__fibonacci__result4)))
 
 (assert
 ;; WP_parameter_def

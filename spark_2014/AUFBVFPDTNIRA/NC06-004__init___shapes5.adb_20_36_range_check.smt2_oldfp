@@ -1347,9 +1347,85 @@
 
 (declare-const r t)
 
+(declare-const shapes5__make_circle__result coordinate_type)
+
+(declare-const shapes5__make_circle__result1 coordinate_type)
+
+(declare-const shapes5__make_circle__result2 radius_type)
+
+(declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const o3 t)
+
+(declare-const o4 radius_type)
+
+(declare-const o5 coordinate_type)
+
+(declare-const o6 coordinate_type)
+
+(declare-const o7 coordinate_type)
+
+(declare-const o8 coordinate_type)
+
+(declare-const o9 radius_type)
+
+(declare-const o10 coordinate_type)
+
+(declare-const o11 coordinate_type)
+
+(declare-const o12 radius_type)
+
 (declare-const result t)
 
 (declare-const r1 t)
+
+(declare-const result1 t)
+
+(declare-const r2 t)
+
+(declare-const result2 t)
+
+(declare-const r3 t)
+
+(declare-const result3 t)
+
+(declare-const r4 t)
+
+(declare-const result4 t)
+
+(declare-const r5 t)
+
+(declare-const result5 coordinate_type)
+
+(declare-const result6 coordinate_type)
+
+(declare-const result7 radius_type)
+
+(declare-const shapes5__make_circle__result3 coordinate_type)
+
+(declare-const shapes5__make_circle__result4 coordinate_type)
+
+(declare-const shapes5__make_circle__result5 radius_type)
+
+(declare-const shapes5__make_circle__result6 coordinate_type)
+
+(declare-const shapes5__make_circle__result7 coordinate_type)
+
+(declare-const shapes5__make_circle__result8 radius_type)
+
+(declare-const shapes5__make_circle__result9 us_rep)
+
+(declare-const r6 t__ref)
+
+(declare-const shapes5__make_circle__result10 circle__ref)
+
+(declare-const r7 t)
+
+(declare-const shapes5__make_circle__result11 us_rep)
 
 ;; H
   (assert (in_range3 x))

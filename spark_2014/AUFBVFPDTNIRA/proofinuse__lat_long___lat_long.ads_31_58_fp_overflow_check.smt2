@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -65,24 +65,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort tfloat_with_approxB 0)
@@ -497,6 +497,20 @@
 
 (declare-const o10 Float32)
 
+(declare-const o11 Float32)
+
+(declare-const o12 Float32)
+
+(declare-const o13 Float32)
+
+(declare-const o14 Float32)
+
+(declare-const o15 Float32)
+
+(declare-const o16 Float32)
+
+(declare-const o17 Float32)
+
 (declare-const result Float32)
 
 (declare-const delta_lat1 Float32)
@@ -640,34 +654,34 @@
 
 ;; H
   (assert
-  (and (= o8 (delta_long_in_meters source destination))
-  (and (fp.isFinite32 o8)
+  (and (= o11 (delta_long_in_meters source destination))
+  (and (fp.isFinite32 o11)
   (and
-  (= o8 (fp.div RNE (fp.mul RNE (fp.sub RNE (to_rep1
-                                            (rec__lat_long__coordinates__long
-                                            (us_split_fields1 destination)))
+  (= o11 (fp.div RNE (fp.mul RNE (fp.sub RNE (to_rep1
+                                             (rec__lat_long__coordinates__long
+                                             (us_split_fields1 destination)))
   (to_rep1 (rec__lat_long__coordinates__long (us_split_fields1 source)))) (fp #b0 #b10010101 #b10000100101000110101001))
   (cos1 (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source))))))
-  (= (olt (fp.abs o8) (fp #b0 #b10011000 #b00110001001111000100110)) true)))))
+  (= (olt (fp.abs o11) (fp #b0 #b10011000 #b00110001001111000100110)) true)))))
 
 ;; H
   (assert
-  (and (= o9 (delta_long_in_meters source destination))
-  (and (fp.isFinite32 o9)
+  (and (= o12 (delta_long_in_meters source destination))
+  (and (fp.isFinite32 o12)
   (and
-  (= o9 (fp.div RNE (fp.mul RNE (fp.sub RNE (to_rep1
-                                            (rec__lat_long__coordinates__long
-                                            (us_split_fields1 destination)))
+  (= o12 (fp.div RNE (fp.mul RNE (fp.sub RNE (to_rep1
+                                             (rec__lat_long__coordinates__long
+                                             (us_split_fields1 destination)))
   (to_rep1 (rec__lat_long__coordinates__long (us_split_fields1 source)))) (fp #b0 #b10010101 #b10000100101000110101001))
   (cos1 (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source))))))
-  (= (olt (fp.abs o9) (fp #b0 #b10011000 #b00110001001111000100110)) true)))))
+  (= (olt (fp.abs o12) (fp #b0 #b10011000 #b00110001001111000100110)) true)))))
 
 ;; H
-  (assert (= o10 (fp.mul RNE o9 o8)))
+  (assert (= o13 (fp.mul RNE o12 o11)))
 
 (assert
 ;; WP_parameter_def
  ;; File "lat_long.ads", line 6, characters 0-0
-  (not (fp.isFinite32 o10)))
+  (not (fp.isFinite32 o13)))
 (check-sat)
 (exit)

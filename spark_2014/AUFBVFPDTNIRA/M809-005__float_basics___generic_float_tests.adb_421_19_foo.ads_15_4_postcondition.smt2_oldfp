@@ -1191,16 +1191,6 @@
   (= (select (foo__double_tests__test_array_1__a__aggregate_def temp___237) temp___238)
   (of_rep temp___237)))))
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 3.0)))
-
 (declare-const y t)
 
 (declare-const a (Array Int ft))
@@ -1246,6 +1236,11 @@
 ;; H
   (assert (= result a))
 
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
+
 ;; H
   (assert
   (= a1 (foo__double_tests__test_array_1__a__aggregate_def fliteral2)))
@@ -1261,6 +1256,11 @@
 
 ;; H
   (assert (= a2 o1))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 3.0)))
 
 ;; H
   (assert (= (to_rep o2) fliteral3))

@@ -1143,6 +1143,8 @@
 
 (declare-const o1 Int)
 
+(declare-const o2 Int)
+
 ;; H
   (assert (in_range1 i))
 

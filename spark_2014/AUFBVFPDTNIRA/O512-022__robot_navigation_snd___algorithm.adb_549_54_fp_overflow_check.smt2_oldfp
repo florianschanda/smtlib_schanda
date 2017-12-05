@@ -1610,24 +1610,24 @@
 
 (define-fun bool_eq8 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
-                         (and
                          (= (to_rep6
                             (rec__robot_iface__speed_option__opt
                             (us_split_discrs1 a))) (to_rep6
                                                    (rec__robot_iface__speed_option__opt
                                                    (us_split_discrs1 b))))
+                         (and
                          (=> (robot_iface__speed_option__modulus__pred a)
                          (= (to_rep4
                             (rec__robot_iface__speed_option__modulus
                             (us_split_fields3 a))) (to_rep4
                                                    (rec__robot_iface__speed_option__modulus
-                                                   (us_split_fields3 b))))))
+                                                   (us_split_fields3 b)))))
                          (=> (robot_iface__speed_option__angle__pred a)
                          (= (to_rep4
                             (rec__robot_iface__speed_option__angle
                             (us_split_fields3 a))) (to_rep4
                                                    (rec__robot_iface__speed_option__angle
-                                                   (us_split_fields3 b))))))
+                                                   (us_split_fields3 b)))))))
                     true false))
 
 (declare-const value__size2 Int)
@@ -3157,13 +3157,6 @@
   (! (= (= (is_empty container) true) (= (length container) 0)) :pattern (
   (is_empty container)) )))
 
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral4)
-  (= (tqtreal fliteral4) (/ 31415927410125732421875.0 10000000000000000000000.0))))
-
 (declare-const deltamag t)
 
 (declare-const deltaangle t)
@@ -3260,15 +3253,19 @@
 
 (declare-const obstacleavoiddelta3 t)
 
-(declare-const deltamag4 t__ref)
+(declare-const result8 Int)
 
-(declare-const deltaangle4 t__ref)
+(declare-const i3 Int)
 
-(declare-const deltaareasum4 t__ref)
+(declare-const deltamag4 t)
 
-(declare-const obstacleavoiddelta4 t__ref)
+(declare-const deltaangle4 t)
 
-(declare-const i3 int__ref)
+(declare-const deltaareasum4 t)
+
+(declare-const obstacleavoiddelta4 t)
+
+(declare-const i4 int__ref)
 
 (declare-const deltamag5 t)
 
@@ -3278,7 +3275,7 @@
 
 (declare-const obstacleavoiddelta5 t)
 
-(declare-const i4 Int)
+(declare-const i5 Int)
 
 (declare-const deltamag6 t__ref)
 
@@ -3288,7 +3285,7 @@
 
 (declare-const obstacleavoiddelta6 t__ref)
 
-(declare-const i5 int__ref)
+(declare-const i6 int__ref)
 
 (declare-const deltamag7 t)
 
@@ -3298,11 +3295,27 @@
 
 (declare-const obstacleavoiddelta7 t)
 
-(declare-const i6 Int)
+(declare-const i7 Int)
 
-(define-fun o15 () us_rep (mk___rep (mk___split_fields o9)))
+(declare-const deltamag8 t__ref)
 
-(define-fun o16 () us_rep (mk___rep (mk___split_fields o8)))
+(declare-const deltaangle8 t__ref)
+
+(declare-const deltaareasum8 t__ref)
+
+(declare-const obstacleavoiddelta8 t__ref)
+
+(declare-const i8 int__ref)
+
+(declare-const deltamag9 t)
+
+(declare-const deltaangle9 t)
+
+(declare-const deltaareasum9 t)
+
+(declare-const obstacleavoiddelta9 t)
+
+(declare-const i9 Int)
 
 ;; H
   (assert
@@ -3352,42 +3365,33 @@
 ;; H
   (assert (= i1 1))
 
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral4)
+  (= (tqtreal fliteral4) (/ 31415927410125732421875.0 10000000000000000000000.0))))
+
 ;; H
   (assert
   (=> (and (<= 1 i1) (<= i1 1000))
+  (and
+  (and
   (= temp___884 (to_rep
                 (rec__robot_iface__proxy__robot_radius
                 (us_split_fields5
-                (rec__algorithm__controller__robot (us_split_fields11 this))))))))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= temp___883 deltaareasum1)))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= temp___882 deltaangle)))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= temp___881 deltamag)))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= temp___880 i1)))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000)) (= temp___879 obstacleavoiddelta1)))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000)) (eq
+                (rec__algorithm__controller__robot (us_split_fields11 this))))))
+  (and (= temp___883 deltaareasum1)
+  (and (= temp___882 deltaangle)
+  (and (= temp___881 deltamag)
+  (and (= temp___880 i1)
+  (and (= temp___879 obstacleavoiddelta1)
+  (and (eq
   (to_rep
   (rec__robot_iface__proxy__robot_radius
   (us_split_fields5
-  (rec__algorithm__controller__robot (us_split_fields11 this)))))
-  temp___884)))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
+  (rec__algorithm__controller__robot (us_split_fields11 this))))) temp___884)
+  (and
   (and
   (and
   (and
@@ -3397,11 +3401,10 @@
   (=> (le fliteral2 fliteral) (in_range10 deltamag2)))
   (=> (le (neg fliteral1) fliteral1) (tqtisFinite deltaangle2)))
   (=> (le fliteral2 fliteral1) (in_range3 deltaareasum2)))
-  (and (<= 1 i2) (<= i2 1000)))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
+  (and (<= 1 i2) (<= i2 1000)))
+  (and
+  (and
+  (and
   (and
   (= o (add RNE1 safetydist
        (to_rep
@@ -3413,23 +3416,23 @@
   (to_rep
   (rec__robot_iface__proxy__robot_radius
   (us_split_fields5
-  (rec__algorithm__controller__robot (us_split_fields11 this))))))))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
+  (rec__algorithm__controller__robot (us_split_fields11 this))))))))
   (= result3 (ite (le
              (to_rep1
              (rec__algorithm__laser_scan_data__first
              (us_split_fields7
              (select (rec__algorithm__controller__laserscan
                      (us_split_fields11 this)) i2))))
-             o) true false))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true)
+             o) true false)))
+  (ite (= result3 true)
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
   (and
   (= o1 (add RNE1 safetydist
         (to_rep
@@ -3441,280 +3444,148 @@
   (to_rep
   (rec__robot_iface__proxy__robot_radius
   (us_split_fields5
-  (rec__algorithm__controller__robot (us_split_fields11 this)))))))))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true)
+  (rec__algorithm__controller__robot (us_split_fields11 this))))))))
   (= o2 (sub RNE1 o1
         (to_rep1
         (rec__algorithm__laser_scan_data__first
         (us_split_fields7
         (select (rec__algorithm__controller__laserscan
-                (us_split_fields11 this)) i2)))))))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true) (and (= o3 o2) (tqtisFinite o2)))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true) (= o4 (div1 RNE1 o3 safetydist)))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true) (and (= o5 o4) (tqtisFinite o4)))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true)
+                (us_split_fields11 this)) i2)))))))
+  (and (= o3 o2) (tqtisFinite o2))) (= o4 (div1 RNE1 o3 safetydist)))
+  (and (= o5 o4) (tqtisFinite o4)))
   (and (= o6 (limit o5 fliteral2 fliteral))
-  (and (tqtisFinite o6) (and (le fliteral2 o6) (le o6 fliteral)))))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true) (and (= o7 o6) (tqtisFinite o6)))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true) (= deltamag2 result4))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000)) (=> (= result3 true) (= deltamag3 o7))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true) (= o16 (create__2 fliteral4)))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true)
-  (= o15 (oadd
-         (rec__algorithm__laser_scan_data__second
-         (us_split_fields7
-         (select (rec__algorithm__controller__laserscan
-                 (us_split_fields11 this)) i2)))
-         o16)))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true)
+  (and (tqtisFinite o6) (and (le fliteral2 o6) (le o6 fliteral)))))
+  (and (= o7 o6) (tqtisFinite o6)))
+  (and (= deltamag2 result4) (= deltamag3 o7)))
+  (and
+  (and
+  (and
+  (and (= (mk___rep (mk___split_fields o8)) (create__2 fliteral4))
+  (= (mk___rep (mk___split_fields o9)) (oadd
+                                       (rec__algorithm__laser_scan_data__second
+                                       (us_split_fields7
+                                       (select (rec__algorithm__controller__laserscan
+                                               (us_split_fields11 this))
+                                       i2)))
+                                       (mk___rep (mk___split_fields o8)))))
   (and
   (= o10 (aldiff
          (rec__algorithm__controller__driveangle (us_split_fields11 this))
-         o15))
-  (and (tqtisFinite o10) (and (lt (neg fliteral4) o10) (le o10 fliteral4)))))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true) (= deltaangle2 result5))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000)) (=> (= result3 true) (= deltaangle3 o10))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true)
+         (mk___rep (mk___split_fields o9))))
+  (and (tqtisFinite o10) (and (lt (neg fliteral4) o10) (le o10 fliteral4)))))
+  (and (= deltaangle2 result5) (= deltaangle3 o10)))
+  (and
+  (and
   (and (= o11 (add RNE1 deltaareasum2 (mul RNE1 deltamag3 deltamag3)))
-  (tqtisFinite (add RNE1 deltaareasum2 (mul RNE1 deltamag3 deltamag3)))))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true) (= deltaareasum2 result6))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true) (= deltaareasum3 o11))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true)
+  (tqtisFinite (add RNE1 deltaareasum2 (mul RNE1 deltamag3 deltamag3))))
+  (and (= deltaareasum2 result6) (= deltaareasum3 o11)))
+  (and
+  (and
+  (and
   (and
   (= o12 (mul RNE1 (mul RNE1 (mul RNE1 deltamag3 deltamag3) deltamag3)
          deltaangle3))
   (tqtisFinite
-  (mul RNE1 (mul RNE1 (mul RNE1 deltamag3 deltamag3) deltamag3) deltaangle3))))))
+  (mul RNE1 (mul RNE1 (mul RNE1 deltamag3 deltamag3) deltamag3) deltaangle3)))
+  (= o13 (add RNE1 obstacleavoiddelta2 o12)))
+  (and (= o14 o13) (tqtisFinite o13)))
+  (and (= obstacleavoiddelta2 result7) (= obstacleavoiddelta3 o14))))))
+  (and (= obstacleavoiddelta3 obstacleavoiddelta2)
+  (and (= deltaareasum3 deltaareasum2)
+  (and (= deltaangle3 deltaangle2) (= deltamag3 deltamag2)))))) (= i2 1000))))))))))
+  (and
+  (and (= i6 (mk_int__ref i2))
+  (and (= obstacleavoiddelta6 (mk_t__ref obstacleavoiddelta3))
+  (and (= deltaareasum6 (mk_t__ref deltaareasum3))
+  (and (= deltaangle6 (mk_t__ref deltaangle3))
+  (= deltamag6 (mk_t__ref deltamag3))))))
+  (and (= i7 i2)
+  (and (= obstacleavoiddelta7 obstacleavoiddelta3)
+  (and (= deltaareasum7 deltaareasum3)
+  (and (= deltaangle7 deltaangle3) (= deltamag7 deltamag3)))))))))
+
+;; H
+  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= i8 i6)))
 
 ;; H
   (assert
   (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true) (= o13 (add RNE1 obstacleavoiddelta2 o12)))))
+  (= obstacleavoiddelta8 obstacleavoiddelta6)))
+
+;; H
+  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= deltaareasum8 deltaareasum6)))
+
+;; H
+  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= deltaangle8 deltaangle6)))
+
+;; H
+  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= deltamag8 deltamag6)))
+
+;; H
+  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= i9 i7)))
 
 ;; H
   (assert
   (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true) (and (= o14 o13) (tqtisFinite o13)))))
+  (= obstacleavoiddelta9 obstacleavoiddelta7)))
 
 ;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true) (= obstacleavoiddelta2 result7))))
+  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= deltaareasum9 deltaareasum7)))
 
 ;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true) (= obstacleavoiddelta3 o14))))
+  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= deltaangle9 deltaangle7)))
 
 ;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (not (= result3 true)) (= obstacleavoiddelta3 obstacleavoiddelta2))))
+  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= deltamag9 deltamag7)))
 
 ;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (not (= result3 true)) (= deltaareasum3 deltaareasum2))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (not (= result3 true)) (= deltaangle3 deltaangle2))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (not (= result3 true)) (= deltamag3 deltamag2))))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= i2 1000)))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= i3 (mk_int__ref i2))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (= obstacleavoiddelta4 (mk_t__ref obstacleavoiddelta3))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (= deltaareasum4 (mk_t__ref deltaareasum3))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000)) (= deltaangle4 (mk_t__ref deltaangle3))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000)) (= deltamag4 (mk_t__ref deltamag3))))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= i4 i2)))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (= obstacleavoiddelta5 obstacleavoiddelta3)))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= deltaareasum5 deltaareasum3)))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= deltaangle5 deltaangle3)))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= deltamag5 deltamag3)))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= i5 i3)))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (= obstacleavoiddelta6 obstacleavoiddelta4)))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= deltaareasum6 deltaareasum4)))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= deltaangle6 deltaangle4)))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= deltamag6 deltamag4)))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= i6 i4)))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (= obstacleavoiddelta7 obstacleavoiddelta5)))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= deltaareasum7 deltaareasum5)))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= deltaangle7 deltaangle5)))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= deltamag7 deltamag5)))
-
-;; H
-  (assert (=> (not (and (<= 1 i1) (<= i1 1000))) (= i5 (mk_int__ref i1))))
+  (assert (=> (not (and (<= 1 i1) (<= i1 1000))) (= i8 (mk_int__ref i1))))
 
 ;; H
   (assert
   (=> (not (and (<= 1 i1) (<= i1 1000)))
-  (= obstacleavoiddelta6 (mk_t__ref obstacleavoiddelta1))))
+  (= obstacleavoiddelta8 (mk_t__ref obstacleavoiddelta1))))
 
 ;; H
   (assert
   (=> (not (and (<= 1 i1) (<= i1 1000)))
-  (= deltaareasum6 (mk_t__ref deltaareasum1))))
+  (= deltaareasum8 (mk_t__ref deltaareasum1))))
 
 ;; H
   (assert
   (=> (not (and (<= 1 i1) (<= i1 1000)))
-  (= deltaangle6 (mk_t__ref deltaangle))))
+  (= deltaangle8 (mk_t__ref deltaangle))))
 
 ;; H
   (assert
-  (=> (not (and (<= 1 i1) (<= i1 1000))) (= deltamag6 (mk_t__ref deltamag))))
+  (=> (not (and (<= 1 i1) (<= i1 1000))) (= deltamag8 (mk_t__ref deltamag))))
 
 ;; H
-  (assert (=> (not (and (<= 1 i1) (<= i1 1000))) (= i6 i1)))
+  (assert (=> (not (and (<= 1 i1) (<= i1 1000))) (= i9 i1)))
 
 ;; H
   (assert
   (=> (not (and (<= 1 i1) (<= i1 1000)))
-  (= obstacleavoiddelta7 obstacleavoiddelta1)))
+  (= obstacleavoiddelta9 obstacleavoiddelta1)))
 
 ;; H
   (assert
-  (=> (not (and (<= 1 i1) (<= i1 1000))) (= deltaareasum7 deltaareasum1)))
+  (=> (not (and (<= 1 i1) (<= i1 1000))) (= deltaareasum9 deltaareasum1)))
 
 ;; H
   (assert
-  (=> (not (and (<= 1 i1) (<= i1 1000))) (= deltaangle7 deltaangle1)))
+  (=> (not (and (<= 1 i1) (<= i1 1000))) (= deltaangle9 deltaangle1)))
 
 ;; H
-  (assert (=> (not (and (<= 1 i1) (<= i1 1000))) (= deltamag7 deltamag1)))
+  (assert (=> (not (and (<= 1 i1) (<= i1 1000))) (= deltamag9 deltamag1)))
 
 ;; H
-  (assert (lt fliteral2 (t__content deltaareasum6)))
+  (assert (lt fliteral2 (t__content deltaareasum8)))
 
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
   (not (tqtisFinite
-  (div1 RNE1 (t__content obstacleavoiddelta6) (t__content deltaareasum6)))))
+  (div1 RNE1 (t__content obstacleavoiddelta8) (t__content deltaareasum8)))))
 (check-sat)
 (exit)

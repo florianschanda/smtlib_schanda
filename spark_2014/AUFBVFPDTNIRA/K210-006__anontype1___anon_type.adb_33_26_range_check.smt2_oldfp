@@ -1646,7 +1646,13 @@
 
 (declare-const board (Array Int float))
 
+(declare-const anon_type__increment__result Int)
+
 (declare-const o Int)
+
+(declare-const o1 Int)
+
+(declare-const o2 Int)
 
 (declare-const result Int)
 
@@ -1659,6 +1665,34 @@
 (declare-const result2 (Array Int float))
 
 (declare-const board1 (Array Int float))
+
+(declare-const result3 Int)
+
+(declare-const var_out2 Int)
+
+(declare-const result4 Int)
+
+(declare-const anon_type__increment__result1 Int)
+
+(declare-const anon_type__increment__result2 Int)
+
+(declare-const anon_type__increment__result3 Int)
+
+(declare-const var_out3 Int)
+
+(declare-const ten_characters2 (Array Int character))
+
+(declare-const board2 (Array Int float))
+
+(declare-const anon_type__increment__result4 Int)
+
+(declare-const var_out4 Int)
+
+(declare-const ten_characters3 (Array Int character))
+
+(declare-const board3 (Array Int float))
+
+(declare-const anon_type__increment__result5 Int)
 
 ;; H
   (assert (in_range1 var_in))

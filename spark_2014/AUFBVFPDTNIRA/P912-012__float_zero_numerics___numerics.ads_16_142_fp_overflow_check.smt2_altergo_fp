@@ -1119,22 +1119,42 @@ logic right : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic numerics__Omultiply__result : t
+
+logic o : t
+
+logic o1 : t
+
+logic result : t
+
+logic numerics__Omultiply__result1 : t
+
+logic numerics__Omultiply__result2 : t
+
+logic numerics__Omultiply__result3 : t
+
+logic numerics__Omultiply__result4 : t
+
+logic numerics__Omultiply__result5 : t
+
+axiom H : tqtisFinite(left)
+
+axiom H1 : tqtisFinite(right)
+
+axiom H2 : (numerics__Omultiply__result1 = numerics__Omultiply__result2)
+
+axiom H3 : (numerics__Omultiply__result3 = numerics__Omultiply__result1)
+
+axiom H4 : ((o = mul(NearestTiesToEven, left, right)) and
+  tqtisFinite(mul(NearestTiesToEven, left, right)))
+
+axiom H5 : (result = numerics__Omultiply__result)
+
+axiom H6 : (numerics__Omultiply__result1 = o)
+
+axiom H7 : (numerics__Omultiply__result4 = numerics__Omultiply__result2)
+
+axiom H8 : (numerics__Omultiply__result5 = numerics__Omultiply__result3)
+
  (* File "numerics.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall numerics__Omultiply__result:t. forall o:t. forall result:t.
-  forall numerics__Omultiply__result1:t.
-  forall numerics__Omultiply__result2:t.
-  forall numerics__Omultiply__result3:t.
-  forall numerics__Omultiply__result4:t.
-  forall numerics__Omultiply__result5:t. (tqtisFinite(left) ->
-  (tqtisFinite(right) ->
-  (((((numerics__Omultiply__result1 = numerics__Omultiply__result2) and
-  (numerics__Omultiply__result3 = numerics__Omultiply__result1)) and
-  (((o = mul(NearestTiesToEven, left, right)) and
-  tqtisFinite(mul(NearestTiesToEven, left, right))) and (({ t__content =
-  result } = { t__content = numerics__Omultiply__result }) and
-  (numerics__Omultiply__result1 = o)))) and (({ t__content =
-  numerics__Omultiply__result4 } = { t__content =
-  numerics__Omultiply__result2 }) and
-  (numerics__Omultiply__result5 = numerics__Omultiply__result3))) ->
-  tqtisFinite(mul(NearestTiesToEven, left, right))))))
+goal WP_parameter_def : tqtisFinite(mul(NearestTiesToEven, left, right))

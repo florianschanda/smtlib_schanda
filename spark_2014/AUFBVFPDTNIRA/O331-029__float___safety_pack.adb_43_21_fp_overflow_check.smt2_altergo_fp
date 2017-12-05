@@ -1133,11 +1133,65 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic res : t
+
+logic safety_pack__dead_band__result : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic result : t
+
+logic res1 : t
+
+logic result1 : t
+
+logic res2 : t
+
+logic result2 : t
+
+logic res3 : t
+
+logic result3 : t
+
+logic res4 : t
+
+logic result4 : t
+
+logic safety_pack__dead_band__result1 : t
+
+logic safety_pack__dead_band__result2 : t
+
+logic safety_pack__dead_band__result3 : t
+
+logic res5 : t
+
+logic safety_pack__dead_band__result4 : t
+
+logic res6 : t
+
+logic safety_pack__dead_band__result5 : t
+
+axiom H : tqtisFinite(value)
+
+axiom H1 : in_range2(threshold)
+
+axiom H2 : (result = res)
+
+axiom H3 : (res1 = value)
+
+axiom H4 : tqtisFinite(res1)
+
+axiom H5 : (not (le(neg(threshold), value) and le(value, threshold)))
+
+axiom H6 : (not lt(fliteral1, value))
+
+axiom H7 : lt(value, fliteral1)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall res:t. forall result:t. forall res1:t. (tqtisFinite(value) ->
-  (in_range2(threshold) -> ((({ t__content = result } = { t__content = res
-  }) and (res1 = value)) -> (tqtisFinite(res1) -> ((not (le(neg(threshold),
-  value) and le(value, threshold))) -> ((not lt(fliteral1, value)) ->
-  (lt(value, fliteral1) -> tqtisFinite(add(NearestTiesToEven, res1,
-  threshold))))))))))
+goal WP_parameter_def : tqtisFinite(add(NearestTiesToEven, res1, threshold))

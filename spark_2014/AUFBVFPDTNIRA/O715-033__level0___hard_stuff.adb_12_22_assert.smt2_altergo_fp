@@ -1092,21 +1092,74 @@ logic copy : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic y : int
+
+logic o3 : t
+
+logic o4 : t
+
+logic o5 : t
+
+logic x1 : t
+
+logic result : t
+
+logic x2 : t
+
+logic result1 : t
+
+logic x3 : t
+
+logic result2 : t
+
+logic x4 : t
+
+logic result3 : bool
+
+logic result4 : t
+
+logic x5 : t
+
+axiom H : tqtisFinite(x)
+
+axiom H1 : ((le(neg(fliteral), x) and le(x, fliteral)) ->
+  ((o = add(NearestTiesToEven, x, x)) and tqtisFinite(add(NearestTiesToEven,
+  x, x))))
+
+axiom H2 : ((le(neg(fliteral), x) and le(x, fliteral)) -> (result = x))
+
+axiom H3 : ((le(neg(fliteral), x) and le(x, fliteral)) -> (x2 = o))
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 2.0))
 
+axiom H4 : ((le(neg(fliteral), x) and le(x, fliteral)) -> (le(neg(fliteral1),
+  x2) and le(x2, fliteral1)))
+
+axiom H5 : ((not (le(neg(fliteral), x) and le(x, fliteral))) -> (x2 = x))
+
+axiom H6 : ((not (le(neg(fliteral), x) and le(x, fliteral))) -> (x2 = x1))
+
+axiom H7 : le(neg(fliteral), x2)
+
+axiom H8 : le(x2, fliteral)
+
+axiom H9 : ((o1 = mul(NearestTiesToEven, x2, fliteral1)) and
+  tqtisFinite(mul(NearestTiesToEven, x2, fliteral1)))
+
+axiom H10 : (x2 = result1)
+
+axiom H11 : (x3 = o1)
+
  (* File "hard_stuff.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:t. forall o:t. forall o1:t. forall x1:t. forall result:t.
-  forall x2:t. forall result1:t. forall x3:t. (tqtisFinite(x) ->
-  ((((le(neg(fliteral), x) and le(x, fliteral)) and
-  ((((o = add(NearestTiesToEven, x, x)) and
-  tqtisFinite(add(NearestTiesToEven, x, x))) and (({ t__content = result
-  } = { t__content = x }) and (x2 = o))) and (le(neg(fliteral1), x2) and
-  le(x2, fliteral1)))) or ((not (le(neg(fliteral), x) and le(x,
-  fliteral))) and ((x2 = x) and (x2 = x1)))) -> ((le(neg(fliteral), x2) and
-  le(x2, fliteral)) -> ((((o1 = mul(NearestTiesToEven, x2, fliteral1)) and
-  tqtisFinite(mul(NearestTiesToEven, x2, fliteral1))) and ((x2 = result1) and
-  (x3 = o1))) -> le(neg(fliteral1), x3))))))
+goal WP_parameter_def : le(neg(fliteral1), x3)

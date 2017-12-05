@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -65,24 +65,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
@@ -639,9 +639,135 @@
 
 (declare-const i Int)
 
-(declare-const result Int)
+(declare-const step_function__get_value__result Float32)
+
+(declare-const temp___247 Int)
+
+(declare-const temp___248 Int)
+
+(declare-const temp___243 Int)
+
+(declare-const j Int)
+
+(declare-const temp___241 Int)
+
+(declare-const o Int)
+
+(declare-const o1 function_range)
+
+(declare-const o2 float)
+
+(declare-const o3 function_range)
+
+(declare-const o4 float)
+
+(declare-const o5 function_range)
+
+(declare-const o6 Int)
+
+(declare-const o7 Bool)
 
 (declare-const i1 Int)
+
+(declare-const o8 Int)
+
+(declare-const o9 function_range)
+
+(declare-const o10 float)
+
+(declare-const o11 function_range)
+
+(declare-const o12 float)
+
+(declare-const o13 function_range)
+
+(declare-const o14 Int)
+
+(declare-const o15 Bool)
+
+(declare-const o16 Int)
+
+(declare-const o17 function_range)
+
+(declare-const o18 float)
+
+(declare-const o19 function_range)
+
+(declare-const o20 float)
+
+(declare-const o21 float)
+
+(declare-const o22 Float32)
+
+(declare-const o23 Bool)
+
+(declare-const step_function__get_value__result1 Float32)
+
+(declare-const result Int)
+
+(declare-const i2 Int)
+
+(declare-const i3 Int)
+
+(declare-const step_function__get_value__result2 Float32)
+
+(declare-const result1 Bool)
+
+(declare-const result2 Float32)
+
+(declare-const step_function__get_value__result3 Float32)
+
+(declare-const result3 Int)
+
+(declare-const i4 Int)
+
+(declare-const i5 Int)
+
+(declare-const step_function__get_value__result4 Float32)
+
+(declare-const i6 Int)
+
+(declare-const step_function__get_value__result5 Float32)
+
+(declare-const i7 Int)
+
+(declare-const step_function__get_value__result6 Float32)
+
+(declare-const i8 Int)
+
+(declare-const step_function__get_value__result7 Float32)
+
+(declare-const i9 Int)
+
+(declare-const step_function__get_value__result8 Float32)
+
+(declare-const i10 Int)
+
+(declare-const step_function__get_value__result9 Float32)
+
+(declare-const result4 Float32)
+
+(declare-const step_function__get_value__result10 Float32)
+
+(declare-const step_function__get_value__result11 t__ref)
+
+(declare-const step_function__get_value__result12 Float32)
+
+(declare-const i11 int__ref)
+
+(declare-const step_function__get_value__result13 t__ref)
+
+(declare-const i12 Int)
+
+(declare-const step_function__get_value__result14 Float32)
+
+(declare-const i13 int__ref)
+
+(declare-const step_function__get_value__result15 t__ref)
+
+(declare-const i14 Int)
+
+(declare-const step_function__get_value__result16 Float32)
 
 ;; H
   (assert (in_range3 x))
@@ -653,24 +779,24 @@
   (assert (= (mk_int__ref result) (mk_int__ref i)))
 
 ;; H
-  (assert (= i1 0))
+  (assert (= i2 0))
 
 ;; H
-  (assert (<= 0 i1))
+  (assert (<= 0 i2))
 
 ;; H
   (assert
-  (<= i1 (- (to_rep1
+  (<= i2 (- (to_rep1
             (rec__step_function__step_function_t__number_of_delimiters
             (us_split_fields3 sfun))) 1)))
 
-(declare-const j Int)
+(declare-const j1 Int)
 
 ;; H
-  (assert (<= 1 j))
+  (assert (<= 1 j1))
 
 ;; H
-  (assert (<= j i1))
+  (assert (<= j1 i2))
 
 (assert
 ;; WP_parameter_def
@@ -680,6 +806,6 @@
       (rec__step_function__delimiter_entry__delimiter
       (us_split_fields1
       (select (rec__step_function__step_function_t__step
-              (us_split_fields3 sfun)) j)))) x)))
+              (us_split_fields3 sfun)) j1)))) x)))
 (check-sat)
 (exit)

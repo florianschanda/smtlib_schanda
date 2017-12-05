@@ -1219,15 +1219,80 @@ axiom dyn_return__post_axiom :
 
 axiom c__def_axiom : (c = d)
 
+logic x : t
+
+logic y : t
+
+logic test_dynamic_property__c__assume : t
+
+logic us : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic us1 : t
+
+logic o3 : t
+
+logic test_dynamic_property__dyn_param__x : t
+
+logic us2 : t
+
+logic o4 : t
+
+logic us3 : t
+
+logic o5 : t
+
+logic test_dynamic_property__nested__dyn_param__x : t
+
+logic us4 : t
+
+logic o6 : t
+
+logic y1 : t
+
+logic result : t
+
+logic x1 : t
+
+logic result1 : t
+
+logic x2 : t
+
+logic x3 : t
+
+logic test_dynamic_property__dyn_param__x1 : t
+
+logic result2 : t
+
+logic y2 : t
+
+logic test_dynamic_property__nested__dyn_param__x1 : t
+
+logic result3 : t
+
+logic x4 : t
+
+axiom H : tqtisFinite(d)
+
+axiom H1 : (le(fliteral, d) and le(d, fliteral1))
+
+axiom H2 : ((test_dynamic_property__c__assume = d) and tqtisFinite(d))
+
+axiom H3 : (test_dynamic_property__c__assume = c)
+
+axiom H4 : in_range2(c)
+
+axiom H5 : le(fliteral, c)
+
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 340282346638528859811704183484516925440.0))
 
  (* File "test_dynamic_property.adb", line 40, characters 0-0 *)
-goal WP_parameter_def :
-  (forall test_dynamic_property__c__assume:t. (tqtisFinite(d) ->
-  ((le(fliteral, d) and le(d, fliteral1)) ->
-  ((((test_dynamic_property__c__assume = d) and tqtisFinite(d)) and
-  (test_dynamic_property__c__assume = c)) -> (in_range2(c) -> (le(fliteral,
-  c) -> le(neg(fliteral2), fliteral)))))))
+goal WP_parameter_def : le(neg(fliteral2), fliteral)

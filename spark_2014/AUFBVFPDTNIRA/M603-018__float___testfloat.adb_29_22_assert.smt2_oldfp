@@ -1107,21 +1107,13 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 10.0)))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 2.0)))
-
 (declare-const t1 t)
 
 (declare-const o t)
 
 (declare-const o1 t)
+
+(declare-const o2 t)
 
 (declare-const result t)
 
@@ -1136,6 +1128,11 @@
 ;; H
   (assert (tqtisFinite z))
 
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 10.0)))
+
 ;; H
   (assert
   (and (and (le x z) (le z y))
@@ -1144,16 +1141,21 @@
   (and (eq (roundToIntegral RTN1 z) x) (eq (roundToIntegral RTP1 z) y))))))
 
 ;; H
-  (assert (and (= o (add RNE1 x y)) (tqtisFinite (add RNE1 x y))))
+  (assert (and (= o1 (add RNE1 x y)) (tqtisFinite (add RNE1 x y))))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 2.0)))
 
 ;; H
-  (assert (= o1 (div1 RNE1 o fliteral3)))
+  (assert (= o2 (div1 RNE1 o1 fliteral3)))
 
 ;; H
   (assert (= result t1))
 
 ;; H
-  (assert (= t2 o1))
+  (assert (= t2 o2))
 
 ;; H
   (assert (tqtisFinite t2))

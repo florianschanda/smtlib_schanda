@@ -1218,11 +1218,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
-
 (declare-const y t)
 
 (declare-const r__split_fields ft)
@@ -1318,6 +1313,11 @@
 
 ;; H
   (assert (= (to_rep o1) x))
+
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
 
 ;; H
   (assert (= (to_rep o2) fliteral2))

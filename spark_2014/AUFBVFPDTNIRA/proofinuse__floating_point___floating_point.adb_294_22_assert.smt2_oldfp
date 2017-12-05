@@ -1137,11 +1137,6 @@
                                       (neg fliteral2) fliteral2)) (in_range1
                                       temp___expr_217)))
 
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) (/ 0.0 10.0))))
-
 (declare-const res Bool)
 
 (declare-const o t)
@@ -1177,6 +1172,11 @@
 
 ;; H
   (assert (tqtisFinite d))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) (/ 0.0 10.0))))
 
 ;; H
   (assert (le fliteral3 a))

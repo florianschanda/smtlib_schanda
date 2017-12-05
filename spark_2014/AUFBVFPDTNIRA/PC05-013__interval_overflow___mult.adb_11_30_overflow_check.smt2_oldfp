@@ -1111,7 +1111,21 @@
 
 (declare-const o Int)
 
-(declare-const o1 t)
+(declare-const o1 Int)
+
+(declare-const o2 Int)
+
+(declare-const o3 Int)
+
+(declare-const o4 Int)
+
+(declare-const o5 Int)
+
+(declare-const o6 Int)
+
+(declare-const o7 Int)
+
+(declare-const o8 t)
 
 ;; H
   (assert (in_range3 n))
@@ -1120,10 +1134,10 @@
   (assert (<= (+ (* n 65) 1) (* (+ n 1) 65)))
 
 ;; H
-  (assert (and (= o (* (+ n 1) 65)) (in_range2 (* (+ n 1) 65))))
+  (assert (and (= o7 (* (+ n 1) 65)) (in_range2 (* (+ n 1) 65))))
 
 ;; H
-  (assert (= o1 (of_int RNE1 o)))
+  (assert (= o8 (of_int RNE1 o7)))
 
 (assert
 ;; WP_parameter_def

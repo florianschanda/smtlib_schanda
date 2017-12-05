@@ -133,17 +133,17 @@
 (define-fun bv_max ((x (_ BitVec 32))
   (y (_ BitVec 32))) (_ BitVec 32) (ite (bvule x y) y x))
 
-(define-fun is_plus_infinity ((x Float64)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float64)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float64)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float64)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float64)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float64)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float64)
 
@@ -158,24 +158,24 @@
                                              (<= i 9007199254740992)))
 
 (define-fun same_sign ((x Float64)
-  (y Float64)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float64)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float64)
-  (y Float64)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float64)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float64) (x Float64)
-  (y Float64)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float64)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-fun nth1 ((_ BitVec 8) Int) Bool)
 
@@ -517,42 +517,30 @@
 (declare-const abs_out13 (_ BitVec 32))
 
 ;; H
+  (assert true)
+
+;; H
   (assert (in_range calculated_force))
 
 ;; H
-  (assert (not (= requested_force ((_ int2bv 32) 0))))
+  (assert true)
 
 ;; H
   (assert (not (= requested_force ((_ int2bv 32) 0))))
-
-;; H
-  (assert (= (mk_t__ref result) (mk_t__ref abs_out1)))
 
 ;; H
   (assert
+  (and
+  (and (not (= requested_force ((_ int2bv 32) 0)))
+  (and
+  (and (= (mk_t__ref result) (mk_t__ref abs_out1))
   (= abs_out11 (bvudiv (bvsub requested_force calculated_force) requested_force)))
-
-;; H
-  (assert
-  (fp.leq ((_ to_fp_unsigned 11 53) RNE abs_out11) (fp #b0 #b01111111000 #b0100011110101110000101000111101011100001010001111011)))
-
-;; H
-  (assert (= (mk_t__ref result1) (mk_t__ref relative_error)))
-
-;; H
-  (assert (= relative_error1 abs_out11))
-
-;; H
-  (assert (= abs_out11 abs_out12))
-
-;; H
-  (assert (= relative_error1 relative_error2))
-
-;; H
-  (assert (= abs_out13 abs_out11))
-
-;; H
-  (assert (= relative_error3 relative_error1))
+  (and
+  (fp.leq ((_ to_fp_unsigned 11 53) RNE abs_out11) (fp #b0 #b01111111000 #b0100011110101110000101000111101011100001010001111011))
+  (and (= (mk_t__ref result1) (mk_t__ref relative_error))
+  (= relative_error1 abs_out11)))))
+  (and (and (= abs_out11 abs_out12) (= relative_error1 relative_error2))
+  (and (= abs_out13 abs_out11) (= relative_error3 relative_error1)))))
 
 (assert
 ;; WP_parameter_def

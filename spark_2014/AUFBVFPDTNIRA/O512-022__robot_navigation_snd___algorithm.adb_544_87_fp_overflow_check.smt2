@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -65,24 +65,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
@@ -623,24 +623,24 @@
 
 (define-fun bool_eq2 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
-                         (and
                          (= (to_rep6
                             (rec__robot_iface__speed_option__opt
                             (us_split_discrs1 a))) (to_rep6
                                                    (rec__robot_iface__speed_option__opt
                                                    (us_split_discrs1 b))))
+                         (and
                          (=> (robot_iface__speed_option__modulus__pred a)
                          (= (to_rep4
                             (rec__robot_iface__speed_option__modulus
                             (us_split_fields3 a))) (to_rep4
                                                    (rec__robot_iface__speed_option__modulus
-                                                   (us_split_fields3 b))))))
+                                                   (us_split_fields3 b)))))
                          (=> (robot_iface__speed_option__angle__pred a)
                          (= (to_rep4
                             (rec__robot_iface__speed_option__angle
                             (us_split_fields3 a))) (to_rep4
                                                    (rec__robot_iface__speed_option__angle
-                                                   (us_split_fields3 b))))))
+                                                   (us_split_fields3 b)))))))
                     true false))
 
 (declare-const value__size2 Int)
@@ -2183,6 +2183,18 @@
 
 (declare-const i Int)
 
+(declare-const temp___884 Float32)
+
+(declare-const temp___883 Float32)
+
+(declare-const temp___882 Float32)
+
+(declare-const temp___881 Float32)
+
+(declare-const temp___880 Int)
+
+(declare-const temp___879 Float32)
+
 (declare-const o Float32)
 
 (declare-const o1 Float32)
@@ -2207,6 +2219,16 @@
 
 (declare-const o11 Float32)
 
+(declare-const o12 Float32)
+
+(declare-const o13 Float32)
+
+(declare-const o14 Float32)
+
+(declare-const deltamag1 Float32)
+
+(declare-const deltaangle1 Float32)
+
 (declare-const result Float32)
 
 (declare-const deltaareasum1 Float32)
@@ -2219,9 +2241,9 @@
 
 (declare-const i1 Int)
 
-(declare-const deltamag1 Float32)
+(declare-const deltamag2 Float32)
 
-(declare-const deltaangle1 Float32)
+(declare-const deltaangle2 Float32)
 
 (declare-const deltaareasum2 Float32)
 
@@ -2233,19 +2255,83 @@
 
 (declare-const result4 Float32)
 
-(declare-const deltamag2 Float32)
+(declare-const deltamag3 Float32)
 
 (declare-const result5 Float32)
 
-(declare-const deltaangle2 Float32)
+(declare-const deltaangle3 Float32)
 
 (declare-const result6 Float32)
 
 (declare-const deltaareasum3 Float32)
 
-(define-fun o12 () us_rep (mk___rep (mk___split_fields o9)))
+(declare-const result7 Float32)
 
-(define-fun o13 () us_rep (mk___rep (mk___split_fields o8)))
+(declare-const obstacleavoiddelta3 Float32)
+
+(declare-const result8 Int)
+
+(declare-const i3 Int)
+
+(declare-const deltamag4 Float32)
+
+(declare-const deltaangle4 Float32)
+
+(declare-const deltaareasum4 Float32)
+
+(declare-const obstacleavoiddelta4 Float32)
+
+(declare-const i4 int__ref)
+
+(declare-const deltamag5 Float32)
+
+(declare-const deltaangle5 Float32)
+
+(declare-const deltaareasum5 Float32)
+
+(declare-const obstacleavoiddelta5 Float32)
+
+(declare-const i5 Int)
+
+(declare-const deltamag6 t__ref)
+
+(declare-const deltaangle6 t__ref)
+
+(declare-const deltaareasum6 t__ref)
+
+(declare-const obstacleavoiddelta6 t__ref)
+
+(declare-const i6 int__ref)
+
+(declare-const deltamag7 Float32)
+
+(declare-const deltaangle7 Float32)
+
+(declare-const deltaareasum7 Float32)
+
+(declare-const obstacleavoiddelta7 Float32)
+
+(declare-const i7 Int)
+
+(declare-const deltamag8 t__ref)
+
+(declare-const deltaangle8 t__ref)
+
+(declare-const deltaareasum8 t__ref)
+
+(declare-const obstacleavoiddelta8 t__ref)
+
+(declare-const i8 int__ref)
+
+(declare-const deltamag9 Float32)
+
+(declare-const deltaangle9 Float32)
+
+(declare-const deltaareasum9 Float32)
+
+(declare-const obstacleavoiddelta9 Float32)
+
+(declare-const i9 Int)
 
 ;; H
   (assert
@@ -2333,10 +2419,10 @@
   (=> (<= 1 1000) (dynamic_property 1 1000 i2)))
   (=>
   (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b01111111 #b00000000000000000000000))
-  (in_range9 deltamag1)))
+  (in_range9 deltamag2)))
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (fp.isFinite32 deltaangle1)))
+  (fp.isFinite32 deltaangle2)))
   (=>
   (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111))
   (in_range2 deltaareasum2))) (and (<= 1 i2) (<= i2 1000))))
@@ -2411,43 +2497,46 @@
   (assert (and (= o7 o6) (fp.isFinite32 o6)))
 
 ;; H
-  (assert (= deltamag1 result4))
+  (assert (= deltamag2 result4))
 
 ;; H
-  (assert (= deltamag2 o7))
-
-;; H
-  (assert (= o13 (create__2 (fp #b0 #b10000000 #b10010010000111111011011))))
+  (assert (= deltamag3 o7))
 
 ;; H
   (assert
-  (= o12 (oadd
-         (rec__algorithm__laser_scan_data__second
-         (us_split_fields7
-         (select (rec__algorithm__controller__laserscan
-                 (us_split_fields11 this)) i2)))
-         o13)))
+  (= (mk___rep (mk___split_fields o8)) (create__2
+                                       (fp #b0 #b10000000 #b10010010000111111011011))))
+
+;; H
+  (assert
+  (= (mk___rep (mk___split_fields o9)) (oadd
+                                       (rec__algorithm__laser_scan_data__second
+                                       (us_split_fields7
+                                       (select (rec__algorithm__controller__laserscan
+                                               (us_split_fields11 this))
+                                       i2)))
+                                       (mk___rep (mk___split_fields o8)))))
 
 ;; H
   (assert
   (and
   (= o10 (aldiff
          (rec__algorithm__controller__driveangle (us_split_fields11 this))
-         o12))
+         (mk___rep (mk___split_fields o9))))
   (and (fp.isFinite32 o10)
   (and (fp.lt (fp.neg (fp #b0 #b10000000 #b10010010000111111011011))
   o10) (fp.leq o10 (fp #b0 #b10000000 #b10010010000111111011011))))))
 
 ;; H
-  (assert (= deltaangle1 result5))
+  (assert (= deltaangle2 result5))
 
 ;; H
-  (assert (= deltaangle2 o10))
+  (assert (= deltaangle3 o10))
 
 ;; H
   (assert
-  (and (= o11 (fp.add RNE deltaareasum2 (fp.mul RNE deltamag2 deltamag2)))
-  (fp.isFinite32 (fp.add RNE deltaareasum2 (fp.mul RNE deltamag2 deltamag2)))))
+  (and (= o11 (fp.add RNE deltaareasum2 (fp.mul RNE deltamag3 deltamag3)))
+  (fp.isFinite32 (fp.add RNE deltaareasum2 (fp.mul RNE deltamag3 deltamag3)))))
 
 ;; H
   (assert (= deltaareasum2 result6))
@@ -2459,7 +2548,7 @@
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
   (not
-  (fp.isFinite32 (fp.mul RNE (fp.mul RNE (fp.mul RNE deltamag2 deltamag2)
-  deltamag2) deltaangle2))))
+  (fp.isFinite32 (fp.mul RNE (fp.mul RNE (fp.mul RNE deltamag3 deltamag3)
+  deltamag3) deltaangle3))))
 (check-sat)
 (exit)

@@ -1108,9 +1108,12 @@
                                       (or (= temp___is_init_156 true)
                                       (<= 0 97)) (in_range1 temp___expr_159)))
 
+;; H
+  (assert false)
+
 (assert
 ;; WP_parameter_def
  ;; File "watchdog.ads", line 6, characters 0-0
-  (not true))
+  (not false))
 (check-sat)
 (exit)

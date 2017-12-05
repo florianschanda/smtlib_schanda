@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -65,24 +65,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
@@ -228,12 +228,12 @@
 (define-fun positive_float__ref___projection ((a positive_float__ref)) positive_float
   (positive_float__content a))
 
-(define-fun dynamic_invariant4 ((temp___expr_1294 Float32)
-  (temp___is_init_1291 Bool) (temp___skip_constant_1292 Bool)
-  (temp___do_toplevel_1293 Bool)) Bool (=>
-                                       (or (= temp___is_init_1291 true)
+(define-fun dynamic_invariant4 ((temp___expr_1288 Float32)
+  (temp___is_init_1285 Bool) (temp___skip_constant_1286 Bool)
+  (temp___do_toplevel_1287 Bool)) Bool (=>
+                                       (or (= temp___is_init_1285 true)
                                        (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                       (in_range4 temp___expr_1294)))
+                                       (in_range4 temp___expr_1288)))
 
 (declare-sort t_delta_time 0)
 
@@ -258,12 +258,12 @@
 (define-fun t_delta_time__ref___projection ((a t_delta_time__ref)) t_delta_time
   (t_delta_time__content a))
 
-(define-fun dynamic_invariant5 ((temp___expr_1300 Float32)
-  (temp___is_init_1297 Bool) (temp___skip_constant_1298 Bool)
-  (temp___do_toplevel_1299 Bool)) Bool (=>
-                                       (or (= temp___is_init_1297 true)
+(define-fun dynamic_invariant5 ((temp___expr_1294 Float32)
+  (temp___is_init_1291 Bool) (temp___skip_constant_1292 Bool)
+  (temp___do_toplevel_1293 Bool)) Bool (=>
+                                       (or (= temp___is_init_1291 true)
                                        (fp.leq (fp #b0 #b01110101 #b00000110001001001101111) (fp #b0 #b01111111 #b00000000000000000000000)))
-                                       (in_range5 temp___expr_1300)))
+                                       (in_range5 temp___expr_1294)))
 
 (declare-sort t_alpha 0)
 
@@ -287,12 +287,12 @@
 (define-fun t_alpha__ref___projection ((a t_alpha__ref)) t_alpha (t_alpha__content
                                                                  a))
 
-(define-fun dynamic_invariant6 ((temp___expr_1306 Float32)
-  (temp___is_init_1303 Bool) (temp___skip_constant_1304 Bool)
-  (temp___do_toplevel_1305 Bool)) Bool (=>
-                                       (or (= temp___is_init_1303 true)
+(define-fun dynamic_invariant6 ((temp___expr_1300 Float32)
+  (temp___is_init_1297 Bool) (temp___skip_constant_1298 Bool)
+  (temp___do_toplevel_1299 Bool)) Bool (=>
+                                       (or (= temp___is_init_1297 true)
                                        (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b01111111 #b00000000000000000000000)))
-                                       (in_range6 temp___expr_1306)))
+                                       (in_range6 temp___expr_1300)))
 
 (declare-sort t_quaternion 0)
 
@@ -317,12 +317,12 @@
 (define-fun t_quaternion__ref___projection ((a t_quaternion__ref)) t_quaternion
   (t_quaternion__content a))
 
-(define-fun dynamic_invariant7 ((temp___expr_1336 Float32)
-  (temp___is_init_1333 Bool) (temp___skip_constant_1334 Bool)
-  (temp___do_toplevel_1335 Bool)) Bool (=>
-                                       (or (= temp___is_init_1333 true)
+(define-fun dynamic_invariant7 ((temp___expr_1330 Float32)
+  (temp___is_init_1327 Bool) (temp___skip_constant_1328 Bool)
+  (temp___do_toplevel_1329 Bool)) Bool (=>
+                                       (or (= temp___is_init_1327 true)
                                        (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) (fp #b0 #b01111111 #b00000000000000000000000)))
-                                       (in_range7 temp___expr_1336)))
+                                       (in_range7 temp___expr_1330)))
 
 (declare-fun inv_sqrt (Float32) Float32)
 
@@ -697,6 +697,192 @@
 
 (declare-const o25 Float32)
 
+(declare-const o26 Float32)
+
+(declare-const o27 Float32)
+
+(declare-const o28 Float32)
+
+(declare-const o29 Float32)
+
+(declare-const o30 Float32)
+
+(declare-const o31 Float32)
+
+(declare-const o32 Float32)
+
+(declare-const o33 Float32)
+
+(declare-const o34 Float32)
+
+(declare-const o35 Float32)
+
+(declare-const o36 Float32)
+
+(declare-const o37 Float32)
+
+(declare-const o38 Float32)
+
+(declare-const o39 Float32)
+
+(declare-const o40 Float32)
+
+(declare-const o41 Float32)
+
+(declare-const o42 Float32)
+
+(declare-const o43 Float32)
+
+(declare-const o44 Float32)
+
+(declare-const o45 Float32)
+
+(declare-const o46 Float32)
+
+(declare-const o47 Float32)
+
+(declare-const o48 Float32)
+
+(declare-const o49 Float32)
+
+(declare-const o50 Float32)
+
+(declare-const o51 Float32)
+
+(declare-const o52 Float32)
+
+(declare-const o53 Float32)
+
+(declare-const o54 Float32)
+
+(declare-const o55 Float32)
+
+(declare-const o56 Float32)
+
+(declare-const o57 Float32)
+
+(declare-const o58 Float32)
+
+(declare-const o59 Float32)
+
+(declare-const o60 Float32)
+
+(declare-const o61 Float32)
+
+(declare-const o62 Float32)
+
+(declare-const o63 Float32)
+
+(declare-const o64 Float32)
+
+(declare-const o65 Float32)
+
+(declare-const o66 Float32)
+
+(declare-const o67 Float32)
+
+(declare-const o68 Float32)
+
+(declare-const o69 Float32)
+
+(declare-const o70 Float32)
+
+(declare-const o71 Float32)
+
+(declare-const o72 Float32)
+
+(declare-const o73 Float32)
+
+(declare-const o74 Float32)
+
+(declare-const o75 Float32)
+
+(declare-const o76 Float32)
+
+(declare-const o77 Float32)
+
+(declare-const o78 Float32)
+
+(declare-const o79 Float32)
+
+(declare-const o80 Float32)
+
+(declare-const o81 Float32)
+
+(declare-const o82 Float32)
+
+(declare-const o83 Float32)
+
+(declare-const o84 Float32)
+
+(declare-const o85 Float32)
+
+(declare-const o86 Float32)
+
+(declare-const o87 Float32)
+
+(declare-const o88 Float32)
+
+(declare-const o89 Float32)
+
+(declare-const o90 Float32)
+
+(declare-const o91 Float32)
+
+(declare-const o92 Float32)
+
+(declare-const o93 Float32)
+
+(declare-const o94 Float32)
+
+(declare-const o95 Float32)
+
+(declare-const o96 Float32)
+
+(declare-const o97 Float32)
+
+(declare-const o98 Float32)
+
+(declare-const o99 Float32)
+
+(declare-const o100 Float32)
+
+(declare-const o101 Float32)
+
+(declare-const o102 Float32)
+
+(declare-const o103 Float32)
+
+(declare-const o104 Float32)
+
+(declare-const o105 Float32)
+
+(declare-const o106 Float32)
+
+(declare-const o107 Float32)
+
+(declare-const o108 Float32)
+
+(declare-const integral_fbx1 Float32)
+
+(declare-const integral_fby1 Float32)
+
+(declare-const integral_fbz1 Float32)
+
+(declare-const recip_norm1 Float32)
+
+(declare-const norm_ax1 Float32)
+
+(declare-const norm_ay1 Float32)
+
+(declare-const norm_az1 Float32)
+
+(declare-const half_ex1 Float32)
+
+(declare-const half_ey1 Float32)
+
+(declare-const half_ez1 Float32)
+
 (declare-const result t__ref)
 
 (declare-const rad_gx1 Float32)
@@ -735,31 +921,123 @@
 
 (declare-const result9 t__ref)
 
-(declare-const recip_norm1 Float32)
+(declare-const recip_norm2 Float32)
 
 (declare-const result10 t__ref)
 
-(declare-const norm_ax1 Float32)
+(declare-const norm_ax2 Float32)
 
 (declare-const result11 t__ref)
 
-(declare-const norm_ay1 Float32)
+(declare-const norm_ay2 Float32)
 
 (declare-const result12 t__ref)
 
-(declare-const norm_az1 Float32)
+(declare-const norm_az2 Float32)
 
 (declare-const result13 t__ref)
 
-(declare-const half_ex1 Float32)
+(declare-const half_ex2 Float32)
 
 (declare-const result14 t__ref)
 
-(declare-const half_ey1 Float32)
+(declare-const half_ey2 Float32)
 
 (declare-const result15 t__ref)
 
-(declare-const half_ez1 Float32)
+(declare-const half_ez2 Float32)
+
+(declare-const result16 t__ref)
+
+(declare-const integral_fbx2 Float32)
+
+(declare-const result17 t__ref)
+
+(declare-const integral_fby2 Float32)
+
+(declare-const result18 t__ref)
+
+(declare-const integral_fbz2 Float32)
+
+(declare-const result19 t__ref)
+
+(declare-const rad_gx2 Float32)
+
+(declare-const result20 t__ref)
+
+(declare-const rad_gy2 Float32)
+
+(declare-const result21 t__ref)
+
+(declare-const rad_gz2 Float32)
+
+(declare-const result22 t__ref)
+
+(declare-const integral_fbx3 Float32)
+
+(declare-const result23 t__ref)
+
+(declare-const integral_fby3 Float32)
+
+(declare-const result24 t__ref)
+
+(declare-const integral_fbz3 Float32)
+
+(declare-const result25 t__ref)
+
+(declare-const rad_gx3 Float32)
+
+(declare-const result26 t__ref)
+
+(declare-const rad_gy3 Float32)
+
+(declare-const result27 t__ref)
+
+(declare-const rad_gz3 Float32)
+
+(declare-const result28 t__ref)
+
+(declare-const rad_gx4 Float32)
+
+(declare-const result29 t__ref)
+
+(declare-const rad_gy4 Float32)
+
+(declare-const result30 t__ref)
+
+(declare-const rad_gz4 Float32)
+
+(declare-const result31 t__ref)
+
+(declare-const q0_tmp1 Float32)
+
+(declare-const result32 t__ref)
+
+(declare-const q1_tmp1 Float32)
+
+(declare-const result33 t__ref)
+
+(declare-const q2_tmp1 Float32)
+
+(declare-const result34 t__ref)
+
+(declare-const q3_tmp1 Float32)
+
+(declare-const result35 t__ref)
+
+(declare-const recip_norm3 Float32)
+
+(declare-const result36 t__ref)
+
+(declare-const q01 Float32)
+
+(declare-const result37 t__ref)
+
+(declare-const q11 Float32)
+
+(declare-const result38 t__ref)
+
+(declare-const q21 Float32)
 
 ;; H
   (assert (in_range1 gx))
@@ -1027,12 +1305,12 @@
   (assert (= result9 (mk_t__ref recip_norm)))
 
 ;; H
-  (assert (= recip_norm1 o))
+  (assert (= recip_norm2 o))
 
 ;; H
   (assert
-  (and (= o1 (fp.mul RNE c6b recip_norm1))
-  (fp.isFinite32 (fp.mul RNE c6b recip_norm1))))
+  (and (= o1 (fp.mul RNE c6b recip_norm2))
+  (fp.isFinite32 (fp.mul RNE c6b recip_norm2))))
 
 ;; H
   (assert
@@ -1053,12 +1331,12 @@
   (assert (= result10 (mk_t__ref norm_ax)))
 
 ;; H
-  (assert (= norm_ax1 o3))
+  (assert (= norm_ax2 o3))
 
 ;; H
   (assert
-  (and (= o4 (fp.mul RNE c7b recip_norm1))
-  (fp.isFinite32 (fp.mul RNE c7b recip_norm1))))
+  (and (= o4 (fp.mul RNE c7b recip_norm2))
+  (fp.isFinite32 (fp.mul RNE c7b recip_norm2))))
 
 ;; H
   (assert
@@ -1079,12 +1357,12 @@
   (assert (= result11 (mk_t__ref norm_ay)))
 
 ;; H
-  (assert (= norm_ay1 o6))
+  (assert (= norm_ay2 o6))
 
 ;; H
   (assert
-  (and (= o7 (fp.mul RNE c8b recip_norm1))
-  (fp.isFinite32 (fp.mul RNE c8b recip_norm1))))
+  (and (= o7 (fp.mul RNE c8b recip_norm2))
+  (fp.isFinite32 (fp.mul RNE c8b recip_norm2))))
 
 ;; H
   (assert
@@ -1105,17 +1383,17 @@
   (assert (= result12 (mk_t__ref norm_az)))
 
 ;; H
-  (assert (= norm_az1 o9))
+  (assert (= norm_az2 o9))
 
 ;; H
   (assert
-  (and (= o10 (fp.mul RNE norm_az1 half_vy1))
-  (fp.isFinite32 (fp.mul RNE norm_az1 half_vy1))))
+  (and (= o10 (fp.mul RNE norm_az2 half_vy1))
+  (fp.isFinite32 (fp.mul RNE norm_az2 half_vy1))))
 
 ;; H
   (assert
-  (and (= o11 (fp.mul RNE norm_ay1 half_vz1))
-  (fp.isFinite32 (fp.mul RNE norm_ay1 half_vz1))))
+  (and (= o11 (fp.mul RNE norm_ay2 half_vz1))
+  (fp.isFinite32 (fp.mul RNE norm_ay2 half_vz1))))
 
 ;; H
   (assert (= o12 (fp.sub RNE o11 o10)))
@@ -1127,17 +1405,17 @@
   (assert (= result13 (mk_t__ref half_ex)))
 
 ;; H
-  (assert (= half_ex1 o13))
+  (assert (= half_ex2 o13))
 
 ;; H
   (assert
-  (and (= o14 (fp.mul RNE norm_ax1 half_vz1))
-  (fp.isFinite32 (fp.mul RNE norm_ax1 half_vz1))))
+  (and (= o14 (fp.mul RNE norm_ax2 half_vz1))
+  (fp.isFinite32 (fp.mul RNE norm_ax2 half_vz1))))
 
 ;; H
   (assert
-  (and (= o15 (fp.mul RNE norm_az1 half_vx1))
-  (fp.isFinite32 (fp.mul RNE norm_az1 half_vx1))))
+  (and (= o15 (fp.mul RNE norm_az2 half_vx1))
+  (fp.isFinite32 (fp.mul RNE norm_az2 half_vx1))))
 
 ;; H
   (assert (= o16 (fp.sub RNE o15 o14)))
@@ -1149,17 +1427,17 @@
   (assert (= result14 half_ey))
 
 ;; H
-  (assert (= (let ((subject half_ey)) half_ey1) o17))
+  (assert (= (let ((subject half_ey)) half_ey2) o17))
 
 ;; H
   (assert
-  (and (= o18 (fp.mul RNE norm_ay1 half_vx1))
-  (fp.isFinite32 (fp.mul RNE norm_ay1 half_vx1))))
+  (and (= o18 (fp.mul RNE norm_ay2 half_vx1))
+  (fp.isFinite32 (fp.mul RNE norm_ay2 half_vx1))))
 
 ;; H
   (assert
-  (and (= o19 (fp.mul RNE norm_ax1 half_vy1))
-  (fp.isFinite32 (fp.mul RNE norm_ax1 half_vy1))))
+  (and (= o19 (fp.mul RNE norm_ax2 half_vy1))
+  (fp.isFinite32 (fp.mul RNE norm_ax2 half_vy1))))
 
 ;; H
   (assert (= o20 (fp.sub RNE o19 o18)))
@@ -1171,15 +1449,15 @@
   (assert (= result15 half_ez))
 
 ;; H
-  (assert (= (let ((subject half_ez)) half_ez1) o21))
+  (assert (= (let ((subject half_ez)) half_ez2) o21))
 
 ;; H
   (assert (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) two_ki))
 
 ;; H
   (assert
-  (and (= o22 (fp.mul RNE two_ki half_ex1))
-  (fp.isFinite32 (fp.mul RNE two_ki half_ex1))))
+  (and (= o22 (fp.mul RNE two_ki half_ex2))
+  (fp.isFinite32 (fp.mul RNE two_ki half_ex2))))
 
 ;; H
   (assert (= o23 (fp.mul RNE o22 c9b)))

@@ -1065,7 +1065,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1905,43 +1905,93 @@ axiom temp___String_Literal_786__def_axiom :
   (to_rep((temp___String_Literal_786(void)[19])) = 108)) and
   (to_rep((temp___String_Literal_786(void)[20])) = 101))
 
+logic i : int
+
+logic algorithm__isfilterclear__B_2__deltaangle__assume : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic o4 : t
+
+logic o5 : t
+
+logic o6 : t
+
+logic result : int
+
+logic i1 : int
+
+logic i2 : int
+
+logic d : t
+
+logic result1 : bool
+
+axiom H : tqtisFinite(width)
+
+axiom H1 : tqtisFinite(forwardlength)
+
+axiom H2 : (result = i)
+
+axiom H3 : (i1 = 1)
+
+axiom H4 : (1 <= i1)
+
+axiom H5 : (i1 <= 1000)
+
+axiom H6 : ((1 <= i2) and (i2 <= 1000))
+
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 3.1415927410125732421875))
+
+axiom H7 :
+  ((algorithm__isfilterclear__B_2__deltaangle__assume = aldiff((((scans[i2])).us_split_fields3).rec__algorithm__laser_scan_data__second,
+  { us_split_fields1 = { rec__spaces__angles__angle__theta = testbearing }
+  })) and (tqtisFinite(algorithm__isfilterclear__B_2__deltaangle__assume) and
+  (lt(neg(fliteral4), algorithm__isfilterclear__B_2__deltaangle__assume) and
+  le(algorithm__isfilterclear__B_2__deltaangle__assume, fliteral4))))
+
+axiom H8 : (algorithm__isfilterclear__B_2__deltaangle__assume = deltaangle)
+
+axiom H9 : tqtisFinite(deltaangle)
 
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 1.57079637050628662109375))
 
+axiom H10 : (not lt(fliteral5, abs(deltaangle)))
+
+axiom H11 : (neq(width, fliteral1) or neq(forwardlength, fliteral1))
+
+axiom H12 : (le(neg(fliteral2), fliteral2) -> tqtisFinite(d))
+
 logic fliteral6 : t
 
 axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
   (tqtreal(fliteral6) = 2.0))
 
- (* File "algorithm.ads", line 68, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. forall algorithm__isfilterclear__B_2__deltaangle__assume:t.
-  forall o:t. forall o1:t. forall result:int. forall i1:int. forall i2:int.
-  forall d:t. forall result1:bool. (tqtisFinite(width) ->
-  (tqtisFinite(forwardlength) -> (((result = i) and (i1 = 1)) ->
-  (((1 <= i1) and (i1 <= 1000)) -> (((1 <= i2) and (i2 <= 1000)) ->
-  (((((algorithm__isfilterclear__B_2__deltaangle__assume = aldiff((((scans[i2])).us_split_fields3).rec__algorithm__laser_scan_data__second,
-  { us_split_fields1 = { rec__spaces__angles__angle__theta = testbearing }
-  })) and (tqtisFinite(algorithm__isfilterclear__B_2__deltaangle__assume) and
-  (lt(neg(fliteral4), algorithm__isfilterclear__B_2__deltaangle__assume) and
-  le(algorithm__isfilterclear__B_2__deltaangle__assume, fliteral4)))) and
-  (algorithm__isfilterclear__B_2__deltaangle__assume = deltaangle)) and
-  tqtisFinite(deltaangle)) -> ((not lt(fliteral5, abs(deltaangle))) ->
-  ((neq(width, fliteral1) or neq(forwardlength, fliteral1)) ->
-  ((le(neg(fliteral2), fliteral2) -> tqtisFinite(d)) ->
-  ((((o = arctan(div(NearestTiesToEven, abs(width), fliteral6),
+axiom H13 : ((o = arctan(div(NearestTiesToEven, abs(width), fliteral6),
   abs(forwardlength))) and (tqtisFinite(o) and ((lt(fliteral1,
   abs(forwardlength)) and eq(div(NearestTiesToEven, abs(width), fliteral6),
-  fliteral1)) -> eq(o, fliteral1)))) and ((lt(abs(deltaangle), o) and
-  (result1 = true)) or ((not lt(abs(deltaangle), o)) and
-  (result1 = false)))) -> ((result1 = true) -> (((o1 = cos(deltaangle)) and
-  (tqtisFinite(o1) and ((le(neg(fliteral), o1) and le(o1, fliteral)) and
-  (eq(deltaangle, fliteral1) -> eq(o1, fliteral))))) ->
-  (not is_zero(o1)))))))))))))))
+  fliteral1)) -> eq(o, fliteral1))))
+
+axiom H14 : ((lt(abs(deltaangle), o) -> (result1 = true)) and
+  ((not lt(abs(deltaangle), o)) -> (result1 = false)))
+
+axiom H15 : (result1 = true)
+
+axiom H16 : ((o1 = cos(deltaangle)) and (tqtisFinite(o1) and
+  ((le(neg(fliteral), o1) and le(o1, fliteral)) and (eq(deltaangle,
+  fliteral1) -> eq(o1, fliteral)))))
+
+ (* File "algorithm.ads", line 68, characters 0-0 *)
+goal WP_parameter_def : (not is_zero(o1))

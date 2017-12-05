@@ -1162,6 +1162,22 @@
 ;; den__def_axiom
   (assert (= den fliteral2))
 
+(declare-const basic_contracts__average__result t)
+
+(declare-const o t)
+
+(declare-const result t)
+
+(declare-const basic_contracts__average__result1 t)
+
+(declare-const basic_contracts__average__result2 t)
+
+(declare-const basic_contracts__average__result3 t)
+
+(declare-const basic_contracts__average__result4 t)
+
+(declare-const basic_contracts__average__result5 t)
+
 ;; H
   (assert (in_range1 numerator))
 

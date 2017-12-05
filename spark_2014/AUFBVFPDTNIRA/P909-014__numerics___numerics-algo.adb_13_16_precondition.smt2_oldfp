@@ -1183,6 +1183,84 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
+(declare-const x1 t)
+
+(declare-const x2 t)
+
+(declare-const x3 t)
+
+(declare-const x4 t)
+
+(declare-const x5 t)
+
+(declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const o3 t)
+
+(declare-const o4 t)
+
+(declare-const o5 t)
+
+(declare-const result t)
+
+(declare-const x11 t)
+
+(declare-const result1 t)
+
+(declare-const x12 t)
+
+(declare-const result2 t)
+
+(declare-const x21 t)
+
+(declare-const result3 t)
+
+(declare-const x22 t)
+
+(declare-const result4 t)
+
+(declare-const x31 t)
+
+(declare-const result5 t)
+
+(declare-const x32 t)
+
+(declare-const result6 t)
+
+(declare-const x41 t)
+
+(declare-const result7 t)
+
+(declare-const x42 t)
+
+;; H
+  (assert (tqtisFinite x))
+
+;; H
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite x1)))
+
+;; H
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite x2)))
+
+;; H
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite x3)))
+
+;; H
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite x4)))
+
+;; H
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite x5)))
+
+;; H
+  (assert (= result x1))
+
+;; H
+  (assert (= x11 fliteral1))
+
 (assert
 ;; WP_parameter_def
  ;; File "numerics-algo.ads", line 10, characters 0-0

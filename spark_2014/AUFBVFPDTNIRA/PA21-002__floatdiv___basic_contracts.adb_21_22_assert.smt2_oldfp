@@ -1130,12 +1130,31 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
-
 (declare-const res t)
+
+(declare-const basic_contracts__average_orig__result t)
+
+(declare-const o t)
+
+(declare-const result t)
+
+(declare-const res1 t)
+
+(declare-const result1 t)
+
+(declare-const basic_contracts__average_orig__result1 t)
+
+(declare-const basic_contracts__average_orig__result2 t)
+
+(declare-const basic_contracts__average_orig__result3 t)
+
+(declare-const res2 t)
+
+(declare-const basic_contracts__average_orig__result4 t)
+
+(declare-const res3 t)
+
+(declare-const basic_contracts__average_orig__result5 t)
 
 ;; H
   (assert (in_range2 numerator))
@@ -1148,6 +1167,11 @@
 
 ;; H
   (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite res)))
+
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
 
 (assert
 ;; WP_parameter_def

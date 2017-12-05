@@ -1099,14 +1099,29 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
+(declare-const res Bool)
 
 (declare-const o t)
 
 (declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const o3 t)
+
+(declare-const o4 t)
+
+(declare-const o5 t)
+
+(declare-const o6 t)
+
+(declare-const o7 t)
+
+(declare-const o8 Bool)
+
+(declare-const result Bool)
+
+(declare-const res1 Bool)
 
 ;; H
   (assert (tqtisFinite a))
@@ -1120,6 +1135,11 @@
 ;; H
   (assert (tqtisFinite d))
 
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
+
 ;; H
   (assert (le fliteral2 a))
 
@@ -1127,14 +1147,14 @@
   (assert (le fliteral2 b))
 
 ;; H
-  (assert (and (= o (mul RNE1 d d)) (tqtisFinite (mul RNE1 d d))))
+  (assert (and (= o2 (mul RNE1 d d)) (tqtisFinite (mul RNE1 d d))))
 
 ;; H
-  (assert (= o1 (mul RNE1 o b)))
+  (assert (= o3 (mul RNE1 o2 b)))
 
 (assert
 ;; WP_parameter_def
  ;; File "floating_point.adb", line 263, characters 0-0
-  (not (tqtisFinite o1)))
+  (not (tqtisFinite o3)))
 (check-sat)
 (exit)

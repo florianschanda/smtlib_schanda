@@ -1067,7 +1067,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1150,35 +1150,60 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic i : int
+
+logic o : int
+
+logic result : int
+
+logic i1 : int
+
+logic i2 : int
+
+logic i3 : int
+
+axiom H : tqtisFinite(x)
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range2(i))
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 4096.0))
+
+axiom H2 : (le(neg(fliteral1), x) and le(x, fliteral1))
+
+axiom H3 : ((o = to_int(NearestTiesToAway, x)) and
+  in_range2(to_int(NearestTiesToAway, x)))
+
+axiom H4 : (result = i)
+
+axiom H5 : (i1 = o)
+
+axiom H6 : (i1 = i2)
+
+axiom H7 : (i3 = i1)
 
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 1.6000000000000000888178419700125232338905334472656250))
 
+axiom H8 : ((bool_eq(x, neg(fliteral2)) = true) -> (i2 = (- 2)))
+
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 1.5000000000000000000000000000000000000000000000000000))
+
+axiom H9 : ((bool_eq(x, neg(fliteral3)) = true) -> (i2 = (- 2)))
 
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 1.3999999999999999111821580299874767661094665527343750))
 
+axiom H10 : (bool_eq(x, neg(fliteral4)) = true)
+
  (* File "generic_float_tests.adb", line 351, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. forall o:int. forall result:int. forall i1:int.
-  forall i2:int. forall i3:int. (tqtisFinite(x) ->
-  ((((-2147483648) <= 2147483647) -> in_range2(i)) -> ((le(neg(fliteral1),
-  x) and le(x, fliteral1)) -> (((((o = to_int(NearestTiesToAway, x)) and
-  in_range2(to_int(NearestTiesToAway, x))) and ((result = i) and
-  (i1 = o))) and ((i1 = i2) and (i3 = i1))) -> ((((bool_eq(x,
-  neg(fliteral2)) = true) and (i2 = (-2))) or (not (bool_eq(x,
-  neg(fliteral2)) = true))) -> ((((bool_eq(x, neg(fliteral3)) = true) and
-  (i2 = (-2))) or (not (bool_eq(x, neg(fliteral3)) = true))) -> ((bool_eq(x,
-  neg(fliteral4)) = true) -> (i2 = (-1))))))))))
+goal WP_parameter_def : (i2 = (- 1))

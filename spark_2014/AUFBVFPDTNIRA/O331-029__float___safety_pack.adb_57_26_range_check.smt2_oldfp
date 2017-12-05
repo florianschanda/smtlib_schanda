@@ -1100,12 +1100,12 @@
 (define-fun t_int16__ref___projection ((a t_int16__ref)) t_int16 (t_int16__content
                                                                  a))
 
-(define-fun dynamic_invariant1 ((temp___expr_1264 Int)
-  (temp___is_init_1261 Bool) (temp___skip_constant_1262 Bool)
-  (temp___do_toplevel_1263 Bool)) Bool (=>
-                                       (or (= temp___is_init_1261 true)
+(define-fun dynamic_invariant1 ((temp___expr_1258 Int)
+  (temp___is_init_1255 Bool) (temp___skip_constant_1256 Bool)
+  (temp___do_toplevel_1257 Bool)) Bool (=>
+                                       (or (= temp___is_init_1255 true)
                                        (<= (- 32768) 32767)) (in_range1
-                                       temp___expr_1264)))
+                                       temp___expr_1258)))
 
 (declare-const value t)
 
@@ -1113,17 +1113,9 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 32767.0)))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 32768.0)))
-
 (declare-const res Int)
+
+(declare-const o Int)
 
 ;; H
   (assert (tqtisFinite value))
@@ -1131,8 +1123,18 @@
 ;; H
   (assert (=> (<= (- 32768) 32767) (in_range1 res)))
 
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 32767.0)))
+
 ;; H
   (assert (not (lt fliteral2 value)))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 32768.0)))
 
 ;; H
   (assert (not (lt value (neg fliteral3))))

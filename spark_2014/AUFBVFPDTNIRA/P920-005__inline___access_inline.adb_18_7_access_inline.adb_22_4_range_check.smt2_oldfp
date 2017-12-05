@@ -1264,6 +1264,8 @@
 
 (declare-const o1 t)
 
+(declare-const o2 t)
+
 (declare-const result (Array Int t_angle_360))
 
 (declare-const angle1 (Array Int t_angle_360))

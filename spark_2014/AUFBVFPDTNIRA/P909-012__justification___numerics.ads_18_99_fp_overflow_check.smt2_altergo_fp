@@ -1091,12 +1091,18 @@ logic right : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic o : t
+
+axiom H : tqtisFinite(left)
+
+axiom H1 : tqtisFinite(right)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
+axiom H2 : neq(right, fliteral1)
+
  (* File "numerics.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(left) -> (tqtisFinite(right) ->
-  (neq(right, fliteral1) -> tqtisFinite(div(NearestTiesToEven, left,
-  right)))))
+goal WP_parameter_def : tqtisFinite(div(NearestTiesToEven, left, right))

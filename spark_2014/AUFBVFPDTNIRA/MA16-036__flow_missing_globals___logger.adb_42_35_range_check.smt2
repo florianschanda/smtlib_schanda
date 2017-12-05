@@ -131,17 +131,17 @@
 (define-fun bv_max ((x (_ BitVec 16))
   (y (_ BitVec 16))) (_ BitVec 16) (ite (bvule x y) y x))
 
-(define-fun is_plus_infinity ((x Float64)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float64)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float64)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float64)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float64)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float64)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float64)
 
@@ -156,24 +156,24 @@
                                              (<= i 9007199254740992)))
 
 (define-fun same_sign ((x Float64)
-  (y Float64)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float64)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float64)
-  (y Float64)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float64)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float64) (x Float64)
-  (y Float64)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float64)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 Float64)))))
 (define-fun to_int3 ((b Bool)) Int (ite (= b true) 1 0))
@@ -1470,13 +1470,143 @@
 
 (declare-const event_log__split_fields3 Bool)
 
-(declare-const o Int)
+(declare-const result__ (Array (_ BitVec 16) us_rep))
 
-(declare-const o1 Int)
+(declare-const logger__log_content__result (Array (_ BitVec 16) us_rep))
 
-(declare-const o2 Int)
+(declare-const logger__log_content__result1 t)
+
+(declare-const o unsigned_16)
+
+(declare-const o1 unsigned_16)
+
+(declare-const o2 unsigned_16)
+
+(declare-const o3 long_float)
+
+(declare-const o4 Bool)
+
+(declare-const o5 (Array (_ BitVec 16) us_rep))
+
+(declare-const o6 (Array (_ BitVec 16) us_rep))
+
+(declare-const o7 t)
+
+(declare-const o8 Int)
+
+(declare-const o9 Int)
+
+(declare-const o10 Int)
 
 (declare-const logger__log_content__B_1__tmp__assume (_ BitVec 16))
+
+(declare-const o11 (Array (_ BitVec 16) us_rep))
+
+(declare-const temp___279 (Array (_ BitVec 16) us_rep))
+
+(declare-const temp___2791 t2)
+
+(declare-const temp___280 (Array (_ BitVec 16) us_rep))
+
+(declare-const temp___2801 t1)
+
+(declare-const o12 (Array (_ BitVec 16) us_rep))
+
+(declare-const o13 t1)
+
+(declare-const o14 (Array (_ BitVec 16) us_rep))
+
+(declare-const o15 (Array (_ BitVec 16) us_rep))
+
+(declare-const temp___275 (Array (_ BitVec 16) us_rep))
+
+(declare-const temp___2751 t4)
+
+(declare-const o16 (Array (_ BitVec 16) us_rep))
+
+(declare-const temp___274 (Array (_ BitVec 16) us_rep))
+
+(declare-const temp___2741 t3)
+
+(declare-const o17 Int)
+
+(declare-const o18 Int)
+
+(declare-const o19 Int)
+
+(declare-const o20 Int)
+
+(declare-const o21 Int)
+
+(declare-const o22 Int)
+
+(declare-const o23 (_ BitVec 16))
+
+(declare-const temp___276 (Array (_ BitVec 16) us_rep))
+
+(declare-const temp___2761 t)
+
+(declare-const temp___277 (Array (_ BitVec 16) us_rep))
+
+(declare-const temp___2771 t1)
+
+(declare-const o24 (Array (_ BitVec 16) us_rep))
+
+(declare-const o25 t1)
+
+(declare-const o26 (Array (_ BitVec 16) us_rep))
+
+(declare-const o27 Int)
+
+(declare-const o28 Int)
+
+(declare-const o29 Int)
+
+(declare-const result__1 (Array (_ BitVec 16) us_rep))
+
+(declare-const result (Array (_ BitVec 16) us_rep))
+
+(declare-const result1 t)
+
+(declare-const logger__log_content__result2 (Array (_ BitVec 16) us_rep))
+
+(declare-const logger__log_content__result3 t)
+
+(declare-const result2 (Array (_ BitVec 16) us_rep))
+
+(declare-const result__2 (Array (_ BitVec 16) us_rep))
+
+(declare-const result3 (Array (_ BitVec 16) us_rep))
+
+(declare-const result__3 (Array (_ BitVec 16) us_rep))
+
+(declare-const result4 log_array__ref)
+
+(declare-const logger__log_content__result4 us_t)
+
+(declare-const result__4 map__ref)
+
+(declare-const logger__log_content__result5 log_array__ref)
+
+(declare-const result__5 (Array (_ BitVec 16) us_rep))
+
+(declare-const logger__log_content__result6 us_t)
+
+(declare-const result__6 map__ref)
+
+(declare-const logger__log_content__result7 log_array__ref)
+
+(declare-const result__7 (Array (_ BitVec 16) us_rep))
+
+(declare-const logger__log_content__result8 us_t)
+
+(declare-const result__8 map__ref)
+
+(declare-const logger__log_content__result9 log_array__ref)
+
+(declare-const result__9 (Array (_ BitVec 16) us_rep))
+
+(declare-const logger__log_content__result10 us_t)
 
 ;; H
   (assert (not (= event_log__split_fields3 true)))
@@ -1484,25 +1614,26 @@
 ;; H
   (assert
   (and
-  (= o (log_size
-       (mk___split_fields1 event_log__split_fields event_log__split_fields1
-       event_log__split_fields2 event_log__split_fields3)))
-  (and (in_range3 o)
-  (= o (ite (= event_log__split_fields3 true) 0
-       (+ (bv2nat (let ((temp___239 (bvsub (to_rep2 event_log__split_fields2)
-                  (to_rep2 event_log__split_fields1))))
-                  (ite (bvult (to_rep2 event_log__split_fields2) (to_rep2
-                                                                 event_log__split_fields1))
-                  (bvadd temp___239 ((_ int2bv 16) 600)) temp___239))) 1))))))
+  (= o8 (log_size
+        (mk___split_fields1 event_log__split_fields event_log__split_fields1
+        event_log__split_fields2 event_log__split_fields3)))
+  (and (in_range3 o8)
+  (= o8 (ite (= event_log__split_fields3 true) 0
+        (+ (bv2nat (let ((temp___239 (bvsub (to_rep2
+                                            event_log__split_fields2)
+                   (to_rep2 event_log__split_fields1))))
+                   (ite (bvult (to_rep2 event_log__split_fields2) (to_rep2
+                                                                  event_log__split_fields1))
+                   (bvadd temp___239 ((_ int2bv 16) 600)) temp___239))) 1))))))
 
 ;; H
-  (assert (= o1 (- o 1)))
+  (assert (= o9 (- o8 1)))
 
 ;; H
-  (assert (and (= o2 o1) (in_range_int o1)))
+  (assert (and (= o10 o9) (in_range_int o9)))
 
 ;; H
-  (assert (= logger__log_content__B_1__tmp__assume ((_ int2bv 16) o2)))
+  (assert (= logger__log_content__B_1__tmp__assume ((_ int2bv 16) o10)))
 
 ;; H
   (assert (= logger__log_content__B_1__tmp__assume tmp))

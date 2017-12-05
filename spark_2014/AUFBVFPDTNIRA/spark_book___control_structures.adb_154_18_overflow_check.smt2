@@ -112,17 +112,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -137,24 +137,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
@@ -260,12 +260,12 @@
 (declare-datatypes () ((field__ref (mk_field__ref (field__content field)))))
 (define-fun field__ref___projection ((a field__ref)) field (field__content a))
 
-(define-fun dynamic_invariant3 ((temp___expr_472 Int)
-  (temp___is_init_469 Bool) (temp___skip_constant_470 Bool)
-  (temp___do_toplevel_471 Bool)) Bool (=>
-                                      (or (= temp___is_init_469 true)
+(define-fun dynamic_invariant3 ((temp___expr_466 Int)
+  (temp___is_init_463 Bool) (temp___skip_constant_464 Bool)
+  (temp___do_toplevel_465 Bool)) Bool (=>
+                                      (or (= temp___is_init_463 true)
                                       (<= 0 255)) (in_range3
-                                      temp___expr_472)))
+                                      temp___expr_466)))
 
 (declare-sort number_base 0)
 
@@ -286,11 +286,11 @@
 (define-fun number_base__ref___projection ((a number_base__ref)) number_base
   (number_base__content a))
 
-(define-fun dynamic_invariant4 ((temp___expr_478 Int)
-  (temp___is_init_475 Bool) (temp___skip_constant_476 Bool)
-  (temp___do_toplevel_477 Bool)) Bool (=>
-                                      (or (= temp___is_init_475 true)
-                                      (<= 2 16)) (in_range4 temp___expr_478)))
+(define-fun dynamic_invariant4 ((temp___expr_472 Int)
+  (temp___is_init_469 Bool) (temp___skip_constant_470 Bool)
+  (temp___do_toplevel_471 Bool)) Bool (=>
+                                      (or (= temp___is_init_469 true)
+                                      (<= 2 16)) (in_range4 temp___expr_472)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -314,12 +314,12 @@
 (declare-datatypes () ((num__ref (mk_num__ref (num__content num)))))
 (define-fun num__ref___projection ((a num__ref)) num (num__content a))
 
-(define-fun dynamic_invariant5 ((temp___expr_514 Int)
-  (temp___is_init_511 Bool) (temp___skip_constant_512 Bool)
-  (temp___do_toplevel_513 Bool)) Bool (=>
-                                      (or (= temp___is_init_511 true)
+(define-fun dynamic_invariant5 ((temp___expr_508 Int)
+  (temp___is_init_505 Bool) (temp___skip_constant_506 Bool)
+  (temp___do_toplevel_507 Bool)) Bool (=>
+                                      (or (= temp___is_init_505 true)
                                       (<= (- 2147483648) 2147483647))
-                                      (in_range5 temp___expr_514)))
+                                      (in_range5 temp___expr_508)))
 
 (declare-sort uppercase 0)
 
@@ -340,12 +340,12 @@
 (define-fun uppercase__ref___projection ((a uppercase__ref)) uppercase
   (uppercase__content a))
 
-(define-fun dynamic_invariant6 ((temp___expr_527 Int)
-  (temp___is_init_524 Bool) (temp___skip_constant_525 Bool)
-  (temp___do_toplevel_526 Bool)) Bool (=>
-                                      (or (= temp___is_init_524 true)
+(define-fun dynamic_invariant6 ((temp___expr_521 Int)
+  (temp___is_init_518 Bool) (temp___skip_constant_519 Bool)
+  (temp___do_toplevel_520 Bool)) Bool (=>
+                                      (or (= temp___is_init_518 true)
                                       (<= 65 90)) (in_range6
-                                      temp___expr_527)))
+                                      temp___expr_521)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
@@ -458,6 +458,14 @@
 
 (declare-const letter Int)
 
+(declare-const count Int)
+
+(declare-const count1 int__ref)
+
+(declare-const count2 int__ref)
+
+(declare-const count3 int__ref)
+
 (declare-const o Int)
 
 (declare-const o1 Int)
@@ -487,6 +495,42 @@
 (declare-const o13 Int)
 
 (declare-const o14 Int)
+
+(declare-const temp___525 Int)
+
+(declare-const temp___524 Int)
+
+(declare-const o15 Int)
+
+(declare-const o16 Float32)
+
+(declare-const o17 Float32)
+
+(declare-const o18 Float32)
+
+(declare-const o19 Float32)
+
+(declare-const temp___526 Float32)
+
+(declare-const o20 Float32)
+
+(declare-const o21 Float32)
+
+(declare-const o22 Float32)
+
+(declare-const o23 Float32)
+
+(declare-const o24 Float32)
+
+(declare-const o25 Float32)
+
+(declare-const o26 Float32)
+
+(declare-const o27 Float32)
+
+(declare-const o28 Bool)
+
+(declare-const o29 Int)
 
 (declare-const g1 Int)
 
@@ -670,13 +714,121 @@
 
 (declare-const value3 Int)
 
-(define-fun y4 () t__ref (mk_t__ref y))
+(declare-const sum3 int__ref)
 
-(define-fun h6 () int__ref (mk_int__ref h))
+(declare-const sum4 Int)
 
-(define-fun g5 () int__ref (mk_int__ref g))
+(declare-const value4 int__ref)
 
-(define-fun f6 () int__ref (mk_int__ref f))
+(declare-const sum5 int__ref)
+
+(declare-const value5 Int)
+
+(declare-const sum6 Int)
+
+(declare-const value6 int__ref)
+
+(declare-const sum7 int__ref)
+
+(declare-const value7 Int)
+
+(declare-const sum8 Int)
+
+(declare-const result46 t__ref)
+
+(declare-const approx1 Float32)
+
+(declare-const result47 Bool)
+
+(declare-const approx2 Float32)
+
+(declare-const result48 t__ref)
+
+(declare-const approx3 Float32)
+
+(declare-const result49 Bool)
+
+(declare-const approx4 t__ref)
+
+(declare-const approx5 Float32)
+
+(declare-const approx6 t__ref)
+
+(declare-const approx7 Float32)
+
+(declare-const result50 int__ref)
+
+(declare-const count4 Int)
+
+(declare-const result51 int__ref)
+
+(declare-const count5 Int)
+
+(declare-const result52 int__ref)
+
+(declare-const count6 Int)
+
+(declare-const result53 int__ref)
+
+(declare-const count7 Int)
+
+(declare-const result54 int__ref)
+
+(declare-const count8 Int)
+
+(declare-const result55 int__ref)
+
+(declare-const count9 Int)
+
+(declare-const result56 int__ref)
+
+(declare-const count10 Int)
+
+(declare-const result57 int__ref)
+
+(declare-const count11 Int)
+
+(declare-const result58 int__ref)
+
+(declare-const a3 Int)
+
+(declare-const result59 int__ref)
+
+(declare-const b3 Int)
+
+(declare-const result60 int__ref)
+
+(declare-const count12 Int)
+
+(declare-const count13 Int)
+
+(declare-const count14 int__ref)
+
+(declare-const count15 Int)
+
+(declare-const count16 int__ref)
+
+(declare-const count17 Int)
+
+(declare-const result61 int__ref)
+
+(declare-const count18 Int)
+
+(declare-const count19 Int)
+
+(declare-const count20 int__ref)
+
+(declare-const count21 Int)
+
+(declare-const count22 int__ref)
+
+(declare-const count23 Int)
+
+(declare-const temperature1 Int)
+
+(declare-const valve_setting1 Int)
+
+(declare-const temperature2 Int)
 
 ;; H
   (assert (in_range3 default_width))
@@ -832,7 +984,7 @@
   (assert (=> (< b2 a2) (= e2 1)))
 
 ;; H
-  (assert (=> (< b2 a2) (= result12 f6)))
+  (assert (=> (< b2 a2) (= result12 (mk_int__ref f))))
 
 ;; H
   (assert (=> (< b2 a2) (= f1 a2)))
@@ -844,7 +996,7 @@
   (assert (=> (not (< b2 a2)) (= e3 2)))
 
 ;; H
-  (assert (=> (not (< b2 a2)) (= result14 f6)))
+  (assert (=> (not (< b2 a2)) (= result14 (mk_int__ref f))))
 
 ;; H
   (assert (=> (not (< b2 a2)) (= f2 b2)))
@@ -881,7 +1033,7 @@
   (assert (=> (not (= a2 b2)) (= f3 f4)))
 
 ;; H
-  (assert (=> (and (< b2 a2) (< c1 a2)) (= result18 g5)))
+  (assert (=> (and (< b2 a2) (< c1 a2)) (= result18 (mk_int__ref g))))
 
 ;; H
   (assert (=> (and (< b2 a2) (< c1 a2)) (= g2 6)))
@@ -889,7 +1041,7 @@
 ;; H
   (assert
   (=> (not (and (< b2 a2) (< c1 a2)))
-  (=> (and (< a2 b2) (< c1 b2)) (= result19 g5))))
+  (=> (and (< a2 b2) (< c1 b2)) (= result19 (mk_int__ref g)))))
 
 ;; H
   (assert
@@ -900,7 +1052,7 @@
   (assert
   (=> (not (and (< b2 a2) (< c1 a2)))
   (=> (not (and (< a2 b2) (< c1 b2)))
-  (=> (and (< a2 c1) (< b2 c1)) (= result20 g5)))))
+  (=> (and (< a2 c1) (< b2 c1)) (= result20 (mk_int__ref g))))))
 
 ;; H
   (assert
@@ -935,7 +1087,7 @@
   (assert (= success1 (of_int1 1)))
 
 ;; H
-  (assert (=> (and (<= 97 ch1) (<= ch1 122)) (= result22 h6)))
+  (assert (=> (and (<= 97 ch1) (<= ch1 122)) (= result22 (mk_int__ref h))))
 
 ;; H
   (assert (=> (and (<= 97 ch1) (<= ch1 122)) (= h1 1)))
@@ -946,7 +1098,7 @@
 ;; H
   (assert
   (=> (not (and (<= 97 ch1) (<= ch1 122)))
-  (=> (and (<= 65 ch1) (<= ch1 90)) (= result23 h6))))
+  (=> (and (<= 65 ch1) (<= ch1 90)) (= result23 (mk_int__ref h)))))
 
 ;; H
   (assert
@@ -962,7 +1114,7 @@
   (assert
   (=> (not (and (<= 97 ch1) (<= ch1 122)))
   (=> (not (and (<= 65 ch1) (<= ch1 90)))
-  (=> (and (<= 48 ch1) (<= ch1 57)) (= result24 h6)))))
+  (=> (and (<= 48 ch1) (<= ch1 57)) (= result24 (mk_int__ref h))))))
 
 ;; H
   (assert
@@ -981,7 +1133,8 @@
   (=> (not (and (<= 97 ch1) (<= ch1 122)))
   (=> (not (and (<= 65 ch1) (<= ch1 90)))
   (=> (not (and (<= 48 ch1) (<= ch1 57)))
-  (=> (=> (not (= ch1 46)) (=> (not (= ch1 33)) (= ch1 63))) (= result25 h6))))))
+  (=> (=> (not (= ch1 46)) (=> (not (= ch1 33)) (= ch1 63)))
+  (= result25 (mk_int__ref h)))))))
 
 ;; H
   (assert
@@ -1004,7 +1157,7 @@
   (=> (not (and (<= 65 ch1) (<= ch1 90)))
   (=> (not (and (<= 48 ch1) (<= ch1 57)))
   (=> (not (=> (not (= ch1 46)) (=> (not (= ch1 33)) (= ch1 63))))
-  (= result26 h6))))))
+  (= result26 (mk_int__ref h)))))))
 
 ;; H
   (assert
@@ -1133,7 +1286,7 @@
 ;; H
   (assert
   (=> (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x1)
-  (= result35 y4)))
+  (= result35 (mk_t__ref y))))
 
 ;; H
   (assert
@@ -1161,7 +1314,7 @@
 ;; H
   (assert
   (=> (not (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x1))
-  (= result36 y4)))
+  (= result36 (mk_t__ref y))))
 
 ;; H
   (assert

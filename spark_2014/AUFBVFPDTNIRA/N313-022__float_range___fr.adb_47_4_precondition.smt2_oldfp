@@ -1140,6 +1140,98 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
+(declare-const x t)
+
+(declare-const y t)
+
+(declare-const z t)
+
+(declare-const result t)
+
+(declare-const x1 t)
+
+(declare-const result1 t)
+
+(declare-const y1 t)
+
+(declare-const result2 t)
+
+(declare-const z1 t)
+
+(declare-const z2 t)
+
+(declare-const result3 t)
+
+(declare-const x2 t)
+
+(declare-const z3 t)
+
+(declare-const result4 t)
+
+(declare-const x3 t)
+
+(declare-const z4 t)
+
+(declare-const result5 t)
+
+(declare-const y2 t)
+
+(declare-const z5 t)
+
+;; H
+  (assert (=> (le fliteral1 fliteral2) (in_range1 x)))
+
+;; H
+  (assert (=> (le fliteral1 fliteral2) (in_range1 y)))
+
+;; H
+  (assert (=> (le fliteral3 fliteral4) (in_range2 z)))
+
+;; H
+  (assert (= result x))
+
+;; H
+  (assert (= x1 fliteral2))
+
+;; H
+  (assert (= result1 y))
+
+;; H
+  (assert (= y1 fliteral2))
+
+;; H
+  (assert (= result2 z))
+
+;; H
+  (assert (= z1 fliteral3))
+
+;; H
+  (assert (in_range2 z2))
+
+;; H
+  (assert (= result3 x1))
+
+;; H
+  (assert (= x2 fliteral1))
+
+;; H
+  (assert (in_range2 z3))
+
+;; H
+  (assert (= result4 x2))
+
+;; H
+  (assert (= x3 fliteral2))
+
+;; H
+  (assert (in_range2 z4))
+
+;; H
+  (assert (= result5 y1))
+
+;; H
+  (assert (= y2 fliteral1))
+
 (assert
 ;; WP_parameter_def
  ;; File "fr.adb", line 8, characters 0-0

@@ -1732,9 +1732,12 @@ axiom is_valid_target__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic target : (int,us_rep2) farray
+
+axiom H : ((is_valid_target(target) = true) and
+  eq(to_rep((((target[3])).us_split_fields5).rec__deceleration_curve__target_t__speed),
+  fliteral1))
+
  (* File "sec_3_13_8_targets_decel_curves.ads", line 48, characters 0-0 *)
 goal WP_parameter_def :
-  (forall target:(int,us_rep2) farray. (((is_valid_target(target) = true) and
-  eq(to_rep((((target[3])).us_split_fields5).rec__deceleration_curve__target_t__speed),
-  fliteral1)) ->
-  (to_rep1((((target[3])).us_split_fields5).rec__deceleration_curve__target_t__location) <= 5000)))
+  (to_rep1((((target[3])).us_split_fields5).rec__deceleration_curve__target_t__location) <= 5000)

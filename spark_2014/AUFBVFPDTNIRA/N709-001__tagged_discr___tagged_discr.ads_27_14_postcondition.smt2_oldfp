@@ -1236,14 +1236,14 @@
 
 (define-fun bool_eq2 ((a us_rep)
   (b us_rep)) Bool (ite (and
-                        (and
-                        (and
                         (= (to_rep2
                            (rec__tagged_discr__t__discr (us_split_discrs1 a)))
                         (to_rep2
                         (rec__tagged_discr__t__discr (us_split_discrs1 b))))
+                        (and
+                        (and
                         (= (rec__tagged_discr__t__z (us_split_fields1 a))
-                        (rec__tagged_discr__t__z (us_split_fields1 b))))
+                        (rec__tagged_discr__t__z (us_split_fields1 b)))
                         (=> (tagged_discr__t__x__pred a)
                         (= (to_rep
                            (rec__tagged_discr__t__x (us_split_fields1 a)))
@@ -1253,7 +1253,7 @@
                         (= (to_rep1
                            (rec__tagged_discr__t__y (us_split_fields1 a)))
                         (to_rep1
-                        (rec__tagged_discr__t__y (us_split_fields1 b))))))
+                        (rec__tagged_discr__t__y (us_split_fields1 b)))))))
                    true false))
 
 (declare-fun us_dispatch_eq (us_rep us_rep) Bool)
@@ -1453,18 +1453,18 @@
 
 (define-fun bool_eq3 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
-                         (and
-                         (and
-                         (and
                          (= (to_rep2
                             (rec__tagged_discr__t__discr
                             (us_split_discrs2 a))) (to_rep2
                                                    (rec__tagged_discr__t__discr
                                                    (us_split_discrs2 b))))
+                         (and
+                         (and
+                         (and
                          (= (to_rep
                             (rec__tagged_discr__u1__w (us_split_fields3 a)))
                          (to_rep
-                         (rec__tagged_discr__u1__w (us_split_fields3 b)))))
+                         (rec__tagged_discr__u1__w (us_split_fields3 b))))
                          (= (rec__tagged_discr__t__z1 (us_split_fields3 a))
                          (rec__tagged_discr__t__z1 (us_split_fields3 b))))
                          (=> (tagged_discr__t__x__pred1 a)
@@ -1476,7 +1476,7 @@
                          (= (to_rep1
                             (rec__tagged_discr__t__y1 (us_split_fields3 a)))
                          (to_rep1
-                         (rec__tagged_discr__t__y1 (us_split_fields3 b))))))
+                         (rec__tagged_discr__t__y1 (us_split_fields3 b)))))))
                     true false))
 
 (declare-const us_tag1 Int)
@@ -1719,20 +1719,20 @@
 
 (define-fun bool_eq4 ((a us_rep2)
   (b us_rep2)) Bool (ite (and
-                         (and
-                         (and
-                         (and
-                         (and
-                         (and
                          (= (to_rep2
                             (rec__tagged_discr__t__discr
                             (us_split_discrs3 a))) (to_rep2
                                                    (rec__tagged_discr__t__discr
                                                    (us_split_discrs3 b))))
+                         (and
+                         (and
+                         (and
+                         (and
+                         (and
                          (= (to_rep
                             (rec__tagged_discr__u2__w (us_split_fields5 a)))
                          (to_rep
-                         (rec__tagged_discr__u2__w (us_split_fields5 b)))))
+                         (rec__tagged_discr__u2__w (us_split_fields5 b))))
                          (= (to_rep
                             (rec__tagged_discr__u2__xx (us_split_fields5 a)))
                          (to_rep
@@ -1752,7 +1752,7 @@
                          (= (to_rep1
                             (rec__tagged_discr__t__y2 (us_split_fields5 a)))
                          (to_rep1
-                         (rec__tagged_discr__t__y2 (us_split_fields5 b))))))
+                         (rec__tagged_discr__t__y2 (us_split_fields5 b)))))))
                     true false))
 
 (declare-const us_tag2 Int)
@@ -2715,12 +2715,6 @@
 
 (declare-const v__split_fields20 us_split_fields)
 
-(define-fun v__split_fields21 () us_split_fields (mk___split_fields
-                                                 v__split_fields8
-                                                 v__split_fields9
-                                                 v__split_fields10
-                                                 v__split_fields11))
-
 ;; H
   (assert
   (= (mk___split_fields__ref
@@ -3049,8 +3043,10 @@
   (not
   (=> (not (= (to_rep2 (rec__tagged_discr__t__discr v__split_discrs)) 0))
   (= (to_rep2 (rec__tagged_discr__t__discr v__split_discrs)) 2)))
-  (= v__split_fields21 (mk___split_fields v__split_fields12 v__split_fields13
-                       v__split_fields14 v__split_fields15))))
+  (= (mk___split_fields v__split_fields8 v__split_fields9 v__split_fields10
+     v__split_fields11) (mk___split_fields v__split_fields12
+                        v__split_fields13 v__split_fields14
+                        v__split_fields15))))
 
 ;; H
   (assert (= v__split_fields16 v__split_fields8))
@@ -3065,7 +3061,9 @@
   (assert (= v__split_fields19 v__split_fields11))
 
 ;; H
-  (assert (= v__split_fields20 v__split_fields21))
+  (assert
+  (= v__split_fields20 (mk___split_fields v__split_fields8 v__split_fields9
+                       v__split_fields10 v__split_fields11)))
 
 (assert
 ;; WP_parameter_def

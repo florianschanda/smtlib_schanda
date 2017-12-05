@@ -1097,6 +1097,55 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
+(declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const o3 t)
+
+(declare-const o4 t)
+
+(declare-const o5 t)
+
+(declare-const o6 t)
+
+(declare-const o7 t)
+
+(declare-const o8 t)
+
+(declare-const o9 t)
+
+(declare-const o10 t)
+
+(declare-const o11 t)
+
+(declare-const o12 t)
+
+(declare-const o13 t)
+
+(declare-const o14 t)
+
+(declare-const o15 t)
+
+(declare-const o16 t)
+
+(declare-const o17 t)
+
+(declare-const o18 t)
+
+(declare-const o19 t)
+
+(declare-const o20 t)
+
+(declare-const o21 t)
+
+(declare-const o22 Bool)
+
+;; H
+  (assert (tqtisFinite x))
+
 (declare-const fliteral2 t)
 
 ;; fliteral_axiom
@@ -1106,6 +1155,9 @@
 
 ;; fliteral_axiom
   (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 60.0)))
+
+;; H
+  (assert (and (le fliteral2 x) (le x fliteral3)))
 
 (declare-const fliteral4 t)
 
@@ -1126,12 +1178,6 @@
 
 ;; fliteral_axiom
   (assert (and (tqtisFinite fliteral7) (= (tqtreal fliteral7) 5.0)))
-
-;; H
-  (assert (tqtisFinite x))
-
-;; H
-  (assert (and (le fliteral2 x) (le x fliteral3)))
 
 (assert
 ;; WP_parameter_def

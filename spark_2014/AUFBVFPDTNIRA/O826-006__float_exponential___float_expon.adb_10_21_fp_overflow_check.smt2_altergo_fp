@@ -1052,15 +1052,15 @@ axiom Power_3 :
   mul(NearestTiesToEven, x, x)))))
 
 axiom Power_neg1 :
-  (forall x:t. (tqtisFinite(x) -> ((not is_zero(x)) -> eq(power(x, (-1)),
+  (forall x:t. (tqtisFinite(x) -> ((not is_zero(x)) -> eq(power(x, (- 1)),
   div(NearestTiesToEven, of_int(NearestTiesToEven, 1), x)))))
 
 axiom Power_neg2 :
-  (forall x:t. (tqtisFinite(x) -> ((not is_zero(x)) -> eq(power(x, (-2)),
+  (forall x:t. (tqtisFinite(x) -> ((not is_zero(x)) -> eq(power(x, (- 2)),
   div(NearestTiesToEven, of_int(NearestTiesToEven, 1), power(x, 2))))))
 
 axiom Power_neg3 :
-  (forall x:t. (tqtisFinite(x) -> ((not is_zero(x)) -> eq(power(x, (-2)),
+  (forall x:t. (tqtisFinite(x) -> ((not is_zero(x)) -> eq(power(x, (- 2)),
   div(NearestTiesToEven, of_int(NearestTiesToEven, 1), power(x, 3))))))
 
 type float1
@@ -1123,27 +1123,76 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic y : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic o4 : t
+
+logic o5 : t
+
+logic o6 : t
+
+logic o7 : t
+
+logic o8 : t
+
+logic o9 : t
+
+logic o10 : t
+
+logic o11 : t
+
+logic o12 : t
+
+logic o13 : t
+
+logic o14 : t
+
+logic o15 : t
+
+axiom H : in_range1(x)
+
+axiom H1 : tqtisFinite(y)
+
+axiom H2 : ((o8 = mul(NearestTiesToEven, x, x)) and
+  tqtisFinite(mul(NearestTiesToEven, x, x)))
+
+axiom H3 : ((o3 = mul(NearestTiesToEven, x, mul(NearestTiesToEven, x,
+  x))) and tqtisFinite(mul(NearestTiesToEven, x, mul(NearestTiesToEven, x,
+  x))))
+
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 7.0))
+
+axiom H4 : (o4 = mul(NearestTiesToEven, fliteral2, o3))
+
+axiom H5 : ((o5 = o4) and tqtisFinite(o4))
+
+axiom H6 : ((4 <  0) -> (not (x = zeroF)))
+
+axiom H7 : (o = power(x, 4))
+
+axiom H8 : ((o1 = o) and tqtisFinite(o))
 
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 4.0))
 
+axiom H9 : (o2 = mul(NearestTiesToEven, fliteral3, o1))
+
+axiom H10 : ((o6 = o2) and tqtisFinite(o2))
+
+axiom H11 : (o7 = add(NearestTiesToEven, o6, o5))
+
  (* File "float_expon.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall y:t. forall o:t. forall o1:t. forall o2:t. forall o3:t.
-  forall o4:t. forall o5:t. forall o6:t. forall o7:t. forall o8:t.
-  (in_range1(x) -> (tqtisFinite(y) -> (((o8 = mul(NearestTiesToEven, x,
-  x)) and tqtisFinite(mul(NearestTiesToEven, x, x))) ->
-  ((((((o3 = mul(NearestTiesToEven, x, mul(NearestTiesToEven, x, x))) and
-  tqtisFinite(mul(NearestTiesToEven, x, mul(NearestTiesToEven, x, x)))) and
-  (o4 = mul(NearestTiesToEven, fliteral2, o3))) and ((o5 = o4) and
-  tqtisFinite(o4))) and ((((((((4 <  0) and (not (x = zeroF))) or
-  (not (4 <  0))) and (o = power(x, 4))) and ((o1 = o) and
-  tqtisFinite(o))) and (o2 = mul(NearestTiesToEven, fliteral3, o1))) and
-  ((o6 = o2) and tqtisFinite(o2))) and (o7 = add(NearestTiesToEven, o6,
-  o5)))) -> tqtisFinite(o7))))))
+goal WP_parameter_def : tqtisFinite(o7)

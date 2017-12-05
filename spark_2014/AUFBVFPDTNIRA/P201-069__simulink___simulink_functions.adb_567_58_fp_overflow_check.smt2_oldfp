@@ -1101,6 +1101,12 @@
 
 (declare-const o2 t)
 
+(declare-const o3 t)
+
+(declare-const o4 t)
+
+(declare-const o5 t)
+
 ;; H
   (assert (tqtisFinite left))
 

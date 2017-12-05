@@ -112,17 +112,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -137,24 +137,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
@@ -748,21 +748,25 @@
             (of_array (to_array1 temp___138) (first3 temp___138)
             (last3 temp___138)))))
 
-(declare-const o float)
+(declare-const o Int)
 
-(declare-const o1 integer)
+(declare-const us Int)
+
+(declare-const o1 float)
 
 (declare-const o2 integer)
 
-(declare-const o3 Bool)
+(declare-const o3 integer)
 
-(declare-const o4 float)
+(declare-const o4 Bool)
 
-(declare-const o5 integer)
+(declare-const o5 float)
 
-(declare-const o6 Bool)
+(declare-const o6 integer)
 
-(declare-const o7 float)
+(declare-const o7 Bool)
+
+(declare-const o8 float)
 
 (declare-const temp___165 (Array Int us_rep))
 
@@ -772,25 +776,20 @@
 
 (declare-const temp___1661 t1)
 
-(define-fun temp___1652 () us_t1 (mk___t1 temp___165 temp___1651))
+;; H
+  (assert (= (to_rep1 o1) (fp #b0 #b01111111 #b00000000000000000000000)))
 
 ;; H
-  (assert (= (to_rep1 o) (fp #b0 #b01111111 #b00000000000000000000000)))
+  (assert (= (to_rep o2) 0))
 
 ;; H
-  (assert (= (to_rep o1) 0))
+  (assert (= o2 o3))
 
 ;; H
-  (assert (= o1 o2))
+  (assert (= (of_int1 1) o4))
 
 ;; H
-  (assert (= (of_int1 1) o3))
-
-;; H
-  (assert (= o o4))
-
-;; H
-  (assert (= o5 o2))
+  (assert (= o1 o5))
 
 ;; H
   (assert (= o6 o3))
@@ -799,10 +798,13 @@
   (assert (= o7 o4))
 
 ;; H
+  (assert (= o8 o5))
+
+;; H
   (assert
-  (= temp___1652 (t__dummy__aggregate_def
-                 (mk___rep (mk___split_fields o5 o6 o7)) 0
-                 (div1 value__size 8))))
+  (= (mk___t1 temp___165 temp___1651) (t__dummy__aggregate_def
+                                      (mk___rep (mk___split_fields o6 o7 o8))
+                                      0 (div1 value__size 8))))
 
 ;; H
   (assert (= (to_rep (first2 temp___1651)) 0))
@@ -811,7 +813,8 @@
   (assert (= (to_rep (last2 temp___1651)) (div1 value__size 8)))
 
 ;; H
-  (assert (= (mk___t1 temp___166 temp___1661) temp___1652))
+  (assert
+  (= (mk___t1 temp___166 temp___1661) (mk___t1 temp___165 temp___1651)))
 
 (assert
 ;; WP_parameter_def

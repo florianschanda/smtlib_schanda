@@ -1243,6 +1243,30 @@
 
 (declare-const average t)
 
+(declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const o3 Int)
+
+(declare-const result t)
+
+(declare-const new_speed1 t)
+
+(declare-const result1 t)
+
+(declare-const average1 t)
+
+(declare-const new_speed2 t)
+
+(declare-const average2 t)
+
+(declare-const new_speed3 t)
+
+(declare-const average3 t)
+
 ;; H
   (assert (in_range1 n))
 

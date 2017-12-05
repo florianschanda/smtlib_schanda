@@ -2130,13 +2130,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-const fliteral3 t1)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite1 fliteral3)
-  (= (tqtreal1 fliteral3) 340282346638528859811704183484516925440.0)))
-
 (declare-const type_conversion__float_to_long_float__result t1)
 
 (declare-const result t1)
@@ -2185,6 +2178,13 @@
 
 ;; H
   (assert (= result1 type_conversion__float_to_long_float__result4))
+
+(declare-const fliteral3 t1)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite1 fliteral3)
+  (= (tqtreal1 fliteral3) 340282346638528859811704183484516925440.0)))
 
 (assert
 ;; WP_parameter_def

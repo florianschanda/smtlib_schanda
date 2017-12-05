@@ -133,18 +133,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1511,7 +1511,7 @@ type t__ref1 = { t__content1 : t1
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1687,7 +1687,7 @@ function source__ref___3__projection(a: source__ref1) : source1 =
 
 type target1
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq8 : int, int -> bool
 
@@ -1724,23 +1724,59 @@ axiom zero_plus__def_axiom : (zero_plus = convert(of_int(0)))
 
 axiom zero_neg__def_axiom : (zero_neg = convert(of_int(2147483648)))
 
+logic x : int
+
+logic zero_and_unchecked__zero_plus__assume : t1
+
+logic zero_and_unchecked__zero_neg__assume : t1
+
+logic o : int
+
+logic o1 : bool
+
+logic o2 : int
+
+logic o3 : int
+
+logic result : bool
+
+axiom H : ((zero_and_unchecked__zero_plus__assume = convert(of_int(0))) and
+  tqtisFinite(zero_and_unchecked__zero_plus__assume))
+
+axiom H1 : (zero_and_unchecked__zero_plus__assume = zero_plus)
+
+axiom H2 : tqtisFinite(zero_plus)
+
+axiom H3 :
+  ((zero_and_unchecked__zero_neg__assume = convert(of_int(2147483648))) and
+  tqtisFinite(zero_and_unchecked__zero_neg__assume))
+
+axiom H4 : (zero_and_unchecked__zero_neg__assume = zero_neg)
+
+axiom H5 : tqtisFinite(zero_neg)
+
+axiom H6 : (zero_plus = c1b)
+
+axiom H7 : tqtisFinite(c1b)
+
+axiom H8 : (zero_neg = c2b)
+
+axiom H9 : tqtisFinite(c2b)
+
+axiom H10 : (((- 2147483648) <= 2147483647) -> in_range1(x))
+
+axiom H11 : eq(c1b, c2b)
+
+axiom H12 : ((o = magic(c2b)) and in_range2(o))
+
+axiom H13 : (((o = 0) -> (o1 = true)) and ((not (o = 0)) -> (o1 = false)))
+
+axiom H14 : (((not (o1 = true)) -> (result = true)) and ((o1 = true) ->
+  (result = false)))
+
+axiom H15 : (result = true)
+
+axiom H16 : ((o2 = magic(c1b)) and in_range2(o2))
+
  (* File "a-unccon.ads", line 20, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall zero_and_unchecked__zero_plus__assume:t1.
-  forall zero_and_unchecked__zero_neg__assume:t1. forall o:int.
-  forall o1:bool. forall o2:int. forall result:bool.
-  ((((zero_and_unchecked__zero_plus__assume = convert(of_int(0))) and
-  tqtisFinite(zero_and_unchecked__zero_plus__assume)) and
-  (zero_and_unchecked__zero_plus__assume = zero_plus)) ->
-  (tqtisFinite(zero_plus) ->
-  ((((zero_and_unchecked__zero_neg__assume = convert(of_int(2147483648))) and
-  tqtisFinite(zero_and_unchecked__zero_neg__assume)) and
-  (zero_and_unchecked__zero_neg__assume = zero_neg)) ->
-  (tqtisFinite(zero_neg) -> (((zero_plus = c1b) and tqtisFinite(c1b)) ->
-  (((zero_neg = c2b) and tqtisFinite(c2b)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(x)) -> (eq(c1b, c2b) ->
-  (((((o = magic(c2b)) and in_range2(o)) and (((o = 0) and (o1 = true)) or
-  ((not (o = 0)) and (o1 = false)))) and (((not (o1 = true)) and
-  (result = true)) or ((o1 = true) and (result = false)))) ->
-  ((result = true) -> (((o2 = magic(c1b)) and in_range2(o2)) ->
-  (not (o2 = 0))))))))))))))
+goal WP_parameter_def : (not (o2 = 0))

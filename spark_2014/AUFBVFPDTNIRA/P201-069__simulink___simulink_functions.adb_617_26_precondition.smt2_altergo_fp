@@ -1037,7 +1037,7 @@ type t__ref = { t__content : t
 
 type integer_16
 
-predicate in_range1(x: int) = (((-32768) <= x) and (x <= 32767))
+predicate in_range1(x: int) = (((- 32768) <= x) and (x <= 32767))
 
 logic bool_eq1 : int, int -> bool
 
@@ -1095,6 +1095,10 @@ logic i : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic o : int
+
+axiom H : in_range1(i)
+
  (* File "interfac.ads", line 49, characters 0-0 *)
-goal WP_parameter_def : (in_range1(i) -> (is_zero(of_int(NearestTiesToEven,
-  i)) or is_positive(of_int(NearestTiesToEven, i))))
+goal WP_parameter_def : (is_zero(of_int(NearestTiesToEven, i)) or
+  is_positive(of_int(NearestTiesToEven, i)))

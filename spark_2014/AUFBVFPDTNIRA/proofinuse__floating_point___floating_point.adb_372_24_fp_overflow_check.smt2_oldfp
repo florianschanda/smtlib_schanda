@@ -1093,6 +1093,12 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
+(declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const o2 t)
+
 ;; H
   (assert (tqtisFinite x))
 

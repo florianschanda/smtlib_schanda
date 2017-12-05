@@ -1133,25 +1133,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral3)
-  (= (tqtreal fliteral3) (/ 110000002384185791015625.0 100000000000000000000000.0))))
-
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral4)
-  (= (tqtreal fliteral4) (/ 899999976158142089843750.0 1000000000000000000000000.0))))
-
 (declare-const x t)
 
 (declare-const result t)
@@ -1170,11 +1151,24 @@
 
 (declare-const x4 t)
 
+(declare-const result4 t)
+
+(declare-const x5 t)
+
+(declare-const result5 t)
+
+(declare-const x6 t)
+
 ;; H
   (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite x)))
 
 ;; H
   (assert (= result x))
+
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
 
 ;; H
   (assert (= x1 fliteral2))
@@ -1200,11 +1194,25 @@
 ;; H
   (assert (lt fliteral (next_representable x2)))
 
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral3)
+  (= (tqtreal fliteral3) (/ 110000002384185791015625.0 100000000000000000000000.0))))
+
 ;; H
   (assert (lt (next_representable x2) fliteral3))
 
 ;; H
   (assert (lt (prev_representable x2) fliteral))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral4)
+  (= (tqtreal fliteral4) (/ 899999976158142089843750.0 1000000000000000000000000.0))))
 
 ;; H
   (assert (lt fliteral4 (prev_representable x2)))

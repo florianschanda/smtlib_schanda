@@ -2051,6 +2051,8 @@
 
 (declare-const o2 t)
 
+(declare-const o3 t)
+
 ;; H
   (assert (tqtisFinite v))
 

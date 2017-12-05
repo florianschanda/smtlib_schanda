@@ -1089,15 +1089,17 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
+(declare-const a t)
+
+(declare-const o t)
+
+;; H
+  (assert (=> (le fliteral1 fliteral2) (in_range1 a)))
+
 (declare-const fliteral3 t)
 
 ;; fliteral_axiom
   (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 540.0)))
-
-(declare-const a t)
-
-;; H
-  (assert (=> (le fliteral1 fliteral2) (in_range1 a)))
 
 (assert
 ;; WP_parameter_def

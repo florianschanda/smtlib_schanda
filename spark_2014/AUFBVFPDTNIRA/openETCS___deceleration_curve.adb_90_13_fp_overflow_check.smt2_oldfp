@@ -2617,16 +2617,6 @@
   (! (=> (dynamic_invariant1 d true true true) (= (a_gradient d) fliteral2)) :pattern (
   (a_gradient d)) )))
 
-(declare-const fliteral7 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral7) (= (tqtreal fliteral7) 4.0)))
-
-(declare-const fliteral8 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral8) (= (tqtreal fliteral8) 5.0)))
-
 (declare-const braking_curve__split_fields (Array Int us_rep))
 
 (declare-const braking_curve__split_fields1 distance_t)
@@ -2697,6 +2687,26 @@
 
 (declare-const o22 t)
 
+(declare-const o23 t)
+
+(declare-const o24 t)
+
+(declare-const o25 t)
+
+(declare-const o26 t)
+
+(declare-const o27 t)
+
+(declare-const o28 t)
+
+(declare-const o29 t)
+
+(declare-const o30 t)
+
+(declare-const o31 Int)
+
+(declare-const o32 Int)
+
 (declare-const result t)
 
 (declare-const speed1 t)
@@ -2728,6 +2738,14 @@
 (declare-const location2 Int)
 
 (declare-const i2 Int)
+
+(declare-const result6 t__ref)
+
+(declare-const speed3 t)
+
+(declare-const result7 t__ref)
+
+(declare-const speed4 t)
 
 ;; H
   (assert (tqtisFinite maximum_valid_speed))
@@ -2939,11 +2957,21 @@
   (and (in_range4 o19)
   (= o19 (add RNE1 (a_brake_safe speed2 location2) (a_gradient location2))))))
 
+(declare-const fliteral7 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral7) (= (tqtreal fliteral7) 4.0)))
+
 ;; H
   (assert (= o20 (mul RNE1 fliteral7 o19)))
 
 ;; H
   (assert (and (= o21 o20) (tqtisFinite o20)))
+
+(declare-const fliteral8 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral8) (= (tqtreal fliteral8) 5.0)))
 
 ;; H
   (assert (= o22 (mul RNE1 o21 fliteral8)))

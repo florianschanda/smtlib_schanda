@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -65,24 +65,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
@@ -310,7 +310,27 @@
 
 (declare-const o Float32)
 
-(declare-const o1 Bool)
+(declare-const o1 Float32)
+
+(declare-const o2 Bool)
+
+(declare-const o3 Float32)
+
+(declare-const o4 Float32)
+
+(declare-const o5 Float32)
+
+(declare-const o6 Float32)
+
+(declare-const o7 Float32)
+
+(declare-const o8 Float32)
+
+(declare-const o9 Float32)
+
+(declare-const o10 Float32)
+
+(declare-const o11 Int)
 
 (declare-const result Float32)
 
@@ -325,6 +345,18 @@
 (declare-const delta_speed1 Float32)
 
 (declare-const distance2 Int)
+
+(declare-const result2 Float32)
+
+(declare-const delta_speed2 Float32)
+
+(declare-const result3 Float32)
+
+(declare-const speed3 Float32)
+
+(declare-const result4 Int)
+
+(declare-const distance3 Int)
 
 ;; H
   (assert (fp.isFinite32 maximum_valid_speed))
@@ -401,23 +433,26 @@
   (assert
   (and
   (and
+  (and
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
   (fp.isFinite32 delta_speed1)) (=> (<= 0 2147483647) (in_range2 distance2)))
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (fp.isFinite32 speed2))))
+  (fp.isFinite32 speed2)))
+  (and (fp.lt final_speed speed2)
+  (fp.lt (fp #b0 #b01111011 #b10011001100110011001101) speed2))))
 
 ;; H
   (assert
   (and
-  (= o (fp.div RNE (fp #b0 #b01111111 #b00000000000000000000000) speed2))
+  (= o1 (fp.div RNE (fp #b0 #b01111111 #b00000000000000000000000) speed2))
   (fp.isFinite32 (fp.div RNE (fp #b0 #b01111111 #b00000000000000000000000)
   speed2))))
 
 ;; H
   (assert
-  (= o1 (ite (fp.lt o (fp #b0 #b10000010 #b01000000000000000000000)) true
+  (= o2 (ite (fp.lt o1 (fp #b0 #b10000010 #b01000000000000000000000)) true
         false)))
 
 (assert

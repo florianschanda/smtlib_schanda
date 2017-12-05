@@ -1875,6 +1875,12 @@
 
 (declare-const o18 t)
 
+(declare-const o19 Int)
+
+(declare-const o20 t)
+
+(declare-const o21 t)
+
 (declare-const result t)
 
 (declare-const sec_3_13_6_deceleration__a_brake_emergency__result1 t)

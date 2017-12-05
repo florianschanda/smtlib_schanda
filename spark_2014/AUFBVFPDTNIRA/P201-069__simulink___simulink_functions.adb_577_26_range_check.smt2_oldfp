@@ -1550,6 +1550,11 @@
 
 (declare-const o1 t)
 
+(declare-const o2 t)
+
+;; H
+  (assert true)
+
 ;; H
   (assert
   (and (= o (sqrt2 (of_ubv8 RNE1 i)))

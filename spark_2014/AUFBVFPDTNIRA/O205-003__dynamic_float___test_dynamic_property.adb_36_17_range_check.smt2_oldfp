@@ -1198,6 +1198,10 @@
 ;; last__def_axiom
   (assert (= last c))
 
+(declare-const us t)
+
+(declare-const us1 t)
+
 ;; H
   (assert (tqtisFinite d))
 

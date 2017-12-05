@@ -1548,6 +1548,8 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
+(declare-const o Int)
+
 ;; H
   (assert (in_range1 count))
 

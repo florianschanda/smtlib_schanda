@@ -2419,11 +2419,6 @@
      (w_get container witness1) true false true)) :pattern ((w_get container
                                                             witness1)) ))))
 
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 2.0)))
-
 (declare-const gapvec__split_fields us_main_type)
 
 (declare-const rayr__split_fields nonnegative_float)
@@ -2433,6 +2428,8 @@
 (declare-const rayl__split_fields nonnegative_float)
 
 (declare-const rayl__split_fields1 normalized2pi)
+
+(declare-const i Int)
 
 (declare-const o t)
 
@@ -2458,6 +2455,60 @@
 
 (declare-const o11 t)
 
+(declare-const algorithm__buildgapvector__B_7__dist__assume t)
+
+(declare-const o12 normalized2pi)
+
+(declare-const o13 float)
+
+(declare-const o14 idir_t)
+
+(declare-const temp___820 nonnegative_float)
+
+(declare-const temp___8201 normalized2pi)
+
+(declare-const temp___819 nonnegative_float)
+
+(declare-const temp___8191 normalized2pi)
+
+(declare-const temp___818 us_rep2)
+
+(declare-const temp___817 Int)
+
+(declare-const algorithm__buildgapvector__B_9__dist__assume t)
+
+(declare-const o15 us_rep1)
+
+(declare-const o16 us_rep1)
+
+(declare-const o17 t)
+
+(declare-const o18 t)
+
+(declare-const o19 t)
+
+(declare-const o20 t)
+
+(declare-const o21 t)
+
+(declare-const o22 t)
+
+(declare-const o23 t)
+
+(declare-const o24 t)
+
+(declare-const o25 t)
+
+(declare-const o26 t)
+
+(declare-const o27 t)
+
+(declare-const o28 t)
+
+(declare-const algorithm__buildgapvector__B_10__dist__assume t)
+
+(declare-const o29 us_rep1)
+
 (declare-const algorithm__gap_vectors__clear__container__fields us_split_fields4)
 
 (declare-const result us_split_fields__ref2)
@@ -2471,6 +2522,110 @@
 (declare-const result2 us_split_fields__ref4)
 
 (declare-const rayl__split_fields2 us_split_fields8)
+
+(declare-const algorithm__gap_vectors__append__container__fields us_split_fields4)
+
+(declare-const result3 us_split_fields__ref2)
+
+(declare-const gapvec__split_fields2 us_split_fields4)
+
+(declare-const result4 int__ref)
+
+(declare-const i1 Int)
+
+(declare-const gapvec__split_fields3 us_split_fields4)
+
+(declare-const rayr__split_fields3 us_split_fields8)
+
+(declare-const rayl__split_fields3 us_split_fields8)
+
+(declare-const i2 Int)
+
+(declare-const rho us_split_fields4)
+
+(declare-const rho1 us_split_fields4)
+
+(declare-const result5 us_split_fields__ref4)
+
+(declare-const rayr__split_fields4 us_split_fields8)
+
+(declare-const result6 us_split_fields__ref4)
+
+(declare-const rayl__split_fields4 us_split_fields8)
+
+(declare-const algorithm__gap_vectors__append__container__fields1 us_split_fields4)
+
+(declare-const result7 us_split_fields__ref2)
+
+(declare-const gapvec__split_fields4 us_split_fields4)
+
+(declare-const algorithm__gap_vectors__append__container__fields2 us_split_fields4)
+
+(declare-const result8 us_split_fields__ref2)
+
+(declare-const gapvec__split_fields5 us_split_fields4)
+
+(declare-const result9 int__ref)
+
+(declare-const i3 Int)
+
+(declare-const gapvec__split_fields6 us_split_fields__ref2)
+
+(declare-const rayr__split_fields5 us_split_fields__ref4)
+
+(declare-const rayl__split_fields5 us_split_fields__ref4)
+
+(declare-const i4 int__ref)
+
+(declare-const gapvec__split_fields7 us_split_fields4)
+
+(declare-const rayr__split_fields6 us_split_fields8)
+
+(declare-const rayl__split_fields6 us_split_fields8)
+
+(declare-const i5 Int)
+
+(declare-const gapvec__split_fields8 us_split_fields__ref2)
+
+(declare-const rayr__split_fields7 us_split_fields__ref4)
+
+(declare-const rayl__split_fields7 us_split_fields__ref4)
+
+(declare-const i6 int__ref)
+
+(declare-const gapvec__split_fields9 us_split_fields4)
+
+(declare-const rayr__split_fields8 us_split_fields8)
+
+(declare-const rayl__split_fields8 us_split_fields8)
+
+(declare-const i7 Int)
+
+(declare-const gapvec__split_fields10 us_split_fields__ref2)
+
+(declare-const rayr__split_fields9 us_split_fields__ref4)
+
+(declare-const rayl__split_fields9 us_split_fields__ref4)
+
+(declare-const i8 int__ref)
+
+(declare-const gapvec__split_fields11 us_split_fields4)
+
+(declare-const rayr__split_fields10 us_split_fields8)
+
+(declare-const rayl__split_fields10 us_split_fields8)
+
+(declare-const i9 Int)
+
+(declare-const result10 us_split_fields__ref4)
+
+(declare-const rayr__split_fields11 us_split_fields8)
+
+(declare-const result11 us_split_fields__ref4)
+
+(declare-const rayl__split_fields11 us_split_fields8)
+
+(declare-const algorithm__gap_vectors__append__container__fields3 us_split_fields4)
 
 ;; H
   (assert
@@ -2538,6 +2693,11 @@
   (and (tqtisFinite o6)
   (and (and (le (neg fliteral) o6) (le o6 fliteral))
   (=> (eq o5 fliteral2) (eq o6 fliteral))))))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 2.0)))
 
 ;; H
   (assert

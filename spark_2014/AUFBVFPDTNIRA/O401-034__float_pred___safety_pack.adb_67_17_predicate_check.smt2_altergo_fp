@@ -1127,10 +1127,60 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic res : t
+
+logic safety_pack__lift_away_from_zero__result : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic result : t
+
+logic res1 : t
+
+logic result1 : t
+
+logic res2 : t
+
+logic result2 : t
+
+logic res3 : t
+
+logic result3 : t
+
+logic res4 : t
+
+logic result4 : t
+
+logic safety_pack__lift_away_from_zero__result1 : t
+
+logic safety_pack__lift_away_from_zero__result2 : t
+
+logic safety_pack__lift_away_from_zero__result3 : t
+
+logic res5 : t
+
+logic safety_pack__lift_away_from_zero__result4 : t
+
+logic res6 : t
+
+logic safety_pack__lift_away_from_zero__result5 : t
+
+axiom H : in_range2(x)
+
+axiom H1 : (le(neg(fliteral1), fliteral1) -> in_range3(res))
+
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.0e-1))
+
+axiom H2 : eq(x, fliteral2)
 
 logic fliteral3 : t
 
@@ -1138,7 +1188,5 @@ axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 0.0000000000000000000000529395592033937711917701562924776226282119750976562500000000000000000000000))
 
  (* File "imu_pack.ads", line 16, characters 0-0 *)
-goal WP_parameter_def :
-  (forall res:t. (in_range2(x) -> ((le(neg(fliteral1), fliteral1) ->
-  in_range3(res)) -> (eq(x, fliteral2) -> ((eq(fliteral2, fliteral2) or
-  le(fliteral2, neg(fliteral3))) or le(fliteral3, fliteral2))))))
+goal WP_parameter_def : ((eq(fliteral2, fliteral2) or le(fliteral2,
+  neg(fliteral3))) or le(fliteral3, fliteral2))

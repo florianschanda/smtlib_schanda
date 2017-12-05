@@ -1202,15 +1202,15 @@
 
 (define-fun bool_eq2 ((a us_rep)
   (b us_rep)) Bool (ite (and
-                        (and
                         (= (to_rep2 (rec__types__r__i (us_split_discrs1 a)))
                         (to_rep2 (rec__types__r__i (us_split_discrs1 b))))
+                        (and
                         (=> (types__r__x__pred a)
                         (= (to_rep (rec__types__r__x (us_split_fields1 a)))
-                        (to_rep (rec__types__r__x (us_split_fields1 b))))))
+                        (to_rep (rec__types__r__x (us_split_fields1 b)))))
                         (=> (types__r__y__pred a)
                         (= (to_rep1 (rec__types__r__y (us_split_fields1 a)))
-                        (to_rep1 (rec__types__r__y (us_split_fields1 b))))))
+                        (to_rep1 (rec__types__r__y (us_split_fields1 b)))))))
                    true false))
 
 (declare-const value__size Int)
@@ -1470,11 +1470,6 @@
                                       (or (= temp___is_init_132 true)
                                       (<= 0 1)) (in_range2 temp___expr_135)))
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 2.0)))
-
 (declare-const x__split_fields integer)
 
 (declare-const x__split_fields1 float)
@@ -1557,6 +1552,11 @@
 
 ;; H
   (assert (= x__split_discrs (mk___split_discrs p__bad__x__assume)))
+
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 2.0)))
 
 ;; H
   (assert (= (to_rep1 o6) fliteral2))

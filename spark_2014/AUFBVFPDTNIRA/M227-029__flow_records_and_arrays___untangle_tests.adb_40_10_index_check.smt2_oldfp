@@ -1628,10 +1628,6 @@
 
 (declare-const l1 (Array Int us_rep1))
 
-(define-fun o9 () us_rep1 (mk___rep1
-                          (mk___split_fields1 o2
-                          (mk___rep (mk___split_fields o3 o4 o5 o6)))))
-
 ;; H
   (assert (in_range a))
 
@@ -1691,7 +1687,10 @@
   (assert (= o1 b))
 
 ;; H
-  (assert (= o9 (select l o1)))
+  (assert
+  (= (mk___rep1
+     (mk___split_fields1 o2 (mk___rep (mk___split_fields o3 o4 o5 o6)))) (select
+  l o1)))
 
 ;; H
   (assert (and (<= 1 a) (<= a 100)))
@@ -1700,7 +1699,10 @@
   (assert (= o7 a))
 
 ;; H
-  (assert (= o8 (store l o7 o9)))
+  (assert
+  (= o8 (store l o7 (mk___rep1
+                    (mk___split_fields1 o2
+                    (mk___rep (mk___split_fields o3 o4 o5 o6)))))))
 
 ;; H
   (assert (= result5 l))

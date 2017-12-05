@@ -1135,11 +1135,6 @@
 ;; pi_over_two__def_axiom
   (assert (= pi_over_two fliteral3))
 
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) (/ 0.0 10.0))))
-
 (declare-const result__ t)
 
 (declare-const o t)
@@ -1148,9 +1143,25 @@
 
 (declare-const o2 t)
 
+(declare-const o3 t)
+
+(declare-const o4 t)
+
+(declare-const o5 t)
+
+(declare-const o6 t)
+
+(declare-const o7 t)
+
+(declare-const o8 t)
+
 (declare-const result t)
 
 (declare-const result__1 t)
+
+(declare-const result1 t)
+
+(declare-const result__2 t)
 
 ;; H
   (assert (tqtisFinite left))
@@ -1167,6 +1178,11 @@
 ;; H
   (assert (tqtisFinite pi_over_two))
 
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) (/ 0.0 10.0))))
+
 ;; H
   (assert (not (and (eq left fliteral4) (eq right fliteral4))))
 
@@ -1175,19 +1191,19 @@
 
 ;; H
   (assert
-  (and (= o (div1 RNE1 right left)) (tqtisFinite (div1 RNE1 right left))))
+  (and (= o4 (div1 RNE1 right left)) (tqtisFinite (div1 RNE1 right left))))
 
 ;; H
-  (assert (= o1 (neg o)))
+  (assert (= o5 (neg o4)))
 
 ;; H
-  (assert (and (= o2 (atan__2 o1)) (tqtisFinite o2)))
+  (assert (and (= o6 (atan__2 o5)) (tqtisFinite o6)))
 
 ;; H
-  (assert (= result result__))
+  (assert (= result1 result__))
 
 ;; H
-  (assert (= result__1 o2))
+  (assert (= result__2 o6))
 
 ;; H
   (assert (le left fliteral4))
@@ -1195,6 +1211,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (tqtisFinite (sub RNE1 result__1 fliteral3))))
+  (not (tqtisFinite (sub RNE1 result__2 fliteral3))))
 (check-sat)
 (exit)

@@ -1092,6 +1092,13 @@ logic y : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic o : t
+
+axiom H : tqtisFinite(x)
+
+axiom H1 : tqtisFinite(y)
+
+axiom H2 : le(fliteral, y)
+
  (* File "generic_interval_tests.adb", line 42, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(x) -> (tqtisFinite(y) -> (le(fliteral,
-  y) -> tqtisFinite(mul(NearestTiesToEven, x, y)))))
+goal WP_parameter_def : tqtisFinite(mul(NearestTiesToEven, x, y))

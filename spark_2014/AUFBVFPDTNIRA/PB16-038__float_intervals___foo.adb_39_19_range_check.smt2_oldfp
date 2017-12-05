@@ -1154,22 +1154,24 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral2)
-  (= (tqtreal fliteral2) (/ 25000000000000000520417042793042128323577344417572021484375.0 10000000000000000000000000000000000000000000000000000000000000.0))))
-
 (declare-const y t)
 
 (declare-const o t)
+
+(declare-const o1 t)
 
 ;; H
   (assert (in_range2 x))
 
 ;; H
   (assert (=> (le (neg fliteral1) fliteral1) (in_range3 y)))
+
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral2)
+  (= (tqtreal fliteral2) (/ 25000000000000000520417042793042128323577344417572021484375.0 10000000000000000000000000000000000000000000000000000000000000.0))))
 
 ;; H
   (assert (not (and (le (neg fliteral2) x) (le x fliteral2))))

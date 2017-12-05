@@ -80,7 +80,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type tnum_delimiters_rangeB
 
-predicate in_range1(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range1(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq1 : int, int -> bool
 
@@ -1546,6 +1546,27 @@ logic sfun1 : (int,us_rep) farray
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic i : int
+
+logic temp___228 : int
+
+logic o : int
+
+logic o1 : function_range
+
+logic o2 : float1
+
+logic o3 : function_range
+
+logic o4 : float1
+
+logic o5 : function_range
+
+logic o6 : int
+
+axiom H : (0 <= i)
+
+axiom H1 : (i <= (to_rep(sfun) - 1))
+
  (* File "step_function.ads", line 42, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. (((0 <= i) and (i <= (to_rep(sfun) - 1))) -> (0 <= i)))
+goal WP_parameter_def : (0 <= i)

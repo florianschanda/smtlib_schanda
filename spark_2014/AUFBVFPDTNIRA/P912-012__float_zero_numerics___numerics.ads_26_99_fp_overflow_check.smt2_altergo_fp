@@ -1119,6 +1119,27 @@ logic right : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic numerics__Osubtract__result : t
+
+logic o : t
+
+logic o1 : t
+
+logic result : t
+
+logic numerics__Osubtract__result1 : t
+
+logic numerics__Osubtract__result2 : t
+
+logic numerics__Osubtract__result3 : t
+
+logic numerics__Osubtract__result4 : t
+
+logic numerics__Osubtract__result5 : t
+
+axiom H : tqtisFinite(left)
+
+axiom H1 : tqtisFinite(right)
+
  (* File "numerics.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(left) -> (tqtisFinite(right) ->
-  tqtisFinite(sub(NearestTiesToEven, left, right))))
+goal WP_parameter_def : tqtisFinite(sub(NearestTiesToEven, left, right))

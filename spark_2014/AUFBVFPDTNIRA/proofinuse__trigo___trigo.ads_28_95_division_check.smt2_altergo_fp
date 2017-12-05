@@ -1110,10 +1110,66 @@ logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic o4 : t
+
+logic o5 : t
+
+logic o6 : t
+
+logic o7 : t
+
+logic o8 : t
+
+logic o9 : t
+
+logic o10 : t
+
+logic o11 : t
+
+logic o12 : t
+
+logic o13 : t
+
+logic o14 : t
+
+logic o15 : t
+
+logic o16 : t
+
+logic o17 : t
+
+logic o18 : t
+
+logic o19 : t
+
+logic o20 : t
+
+logic o21 : t
+
+axiom H : tqtisFinite(x)
+
+axiom H1 : ((o15 = pow9(x)) and (tqtisFinite(o15) and
+  (o15 = mul(NearestTiesToEven, mul(NearestTiesToEven, mul(NearestTiesToEven,
+  mul(NearestTiesToEven, mul(NearestTiesToEven, mul(NearestTiesToEven,
+  mul(NearestTiesToEven, mul(NearestTiesToEven, x, x), x), x), x), x), x),
+  x), x))))
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 62.0))
+
+axiom H2 : (o16 = mul(NearestTiesToEven, fliteral1, o15))
+
+axiom H3 : ((o17 = o16) and tqtisFinite(o16))
 
 logic fliteral2 : t
 
@@ -1121,11 +1177,4 @@ axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 2835.0))
 
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:t. forall o1:t. forall o2:t. (tqtisFinite(x) ->
-  (((((o = pow9(x)) and (tqtisFinite(o) and (o = mul(NearestTiesToEven,
-  mul(NearestTiesToEven, mul(NearestTiesToEven, mul(NearestTiesToEven,
-  mul(NearestTiesToEven, mul(NearestTiesToEven, mul(NearestTiesToEven,
-  mul(NearestTiesToEven, x, x), x), x), x), x), x), x), x)))) and
-  (o1 = mul(NearestTiesToEven, fliteral1, o))) and ((o2 = o1) and
-  tqtisFinite(o1))) -> (not is_zero(fliteral2)))))
+goal WP_parameter_def : (not is_zero(fliteral2))

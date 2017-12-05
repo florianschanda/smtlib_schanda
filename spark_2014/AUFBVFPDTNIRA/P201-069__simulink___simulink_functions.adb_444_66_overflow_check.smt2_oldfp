@@ -1126,6 +1126,12 @@
 
 (declare-const o4 Int)
 
+(declare-const o5 Int)
+
+(declare-const o6 Int)
+
+(declare-const o7 Int)
+
 ;; H
   (assert (in_range1 left))
 

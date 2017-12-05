@@ -167,17 +167,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int1 (RoundingMode Int) Float32)
 
@@ -192,24 +192,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort float 0)
@@ -635,6 +635,12 @@
 
 (declare-const o6 Int)
 
+(declare-const o7 Bool)
+
+(declare-const o8 Int)
+
+(declare-const o9 Int)
+
 (declare-const result Bool)
 
 (declare-const result1 Bool)
@@ -650,10 +656,10 @@
 
 ;; H
   (assert
-  (and (= o6 (last left)) (and (in_range3 o6) (= o6 (+ 0 (length left))))))
+  (and (= o9 (last left)) (and (in_range3 o9) (= o9 (+ 0 (length left))))))
 
 ;; H
-  (assert (= result (ite (<= lst o6) true false)))
+  (assert (= result (ite (<= lst o9) true false)))
 
 ;; H
   (assert (= result true))
@@ -661,11 +667,11 @@
 ;; H
   (assert
   (=> (< offset 0)
-  (and (= o5 (- (- 2147483648) offset)) (in_range1
+  (and (= o8 (- (- 2147483648) offset)) (in_range1
   (- (- 2147483648) offset)))))
 
 ;; H
-  (assert (=> (< offset 0) (= result1 (ite (<= o5 1) true false))))
+  (assert (=> (< offset 0) (= result1 (ite (<= o8 1) true false))))
 
 ;; H
   (assert (=> (not (< offset 0)) (= result1 (of_int 1))))
@@ -677,24 +683,24 @@
   (assert (<= fst lst))
 
 ;; H
-  (assert (and (= o2 lst) (in_range1 lst)))
+  (assert (and (= o3 lst) (in_range1 lst)))
 
 ;; H
   (assert
-  (and (= o (length right)) (and (in_range6 o) (<= (+ 0 o) 2147483647))))
+  (and (= o1 (length right)) (and (in_range6 o1) (<= (+ 0 o1) 2147483647))))
 
 ;; H
-  (assert (= o1 (+ 0 o)))
+  (assert (= o2 (+ 0 o1)))
 
 ;; H
-  (assert (and (= o3 o1) (in_range1 o1)))
+  (assert (and (= o4 o2) (in_range1 o2)))
 
 ;; H
-  (assert (= o4 (- o3 o2)))
+  (assert (= o5 (- o4 o3)))
 
 (assert
 ;; WP_parameter_def
  ;; File "a-cofuve.ads", line 201, characters 0-0
-  (not (in_range1 o4)))
+  (not (in_range1 o5)))
 (check-sat)
 (exit)

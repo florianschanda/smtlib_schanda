@@ -1109,18 +1109,49 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS7 Int)
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
-
 (declare-const smoothed_value t)
 
 (declare-const abs_delta_out1 t)
 
+(declare-const compare_to_zero_out1 Bool)
+
 (declare-const smoother_value_out1 t)
 
 (declare-const abs_new_delta_out1 t)
+
+(declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const o3 t)
+
+(declare-const o4 t)
+
+(declare-const o5 t)
+
+(declare-const o6 t)
+
+(declare-const o7 t)
+
+(declare-const o8 t)
+
+(declare-const result t)
+
+(declare-const abs_delta_out11 t)
+
+(declare-const result1 Bool)
+
+(declare-const compare_to_zero_out11 Bool)
+
+(declare-const result2 t)
+
+(declare-const smoother_value_out11 t)
+
+(declare-const result3 t)
+
+(declare-const abs_new_delta_out11 t)
 
 ;; H
   (assert (tqtisFinite new_value))
@@ -1133,6 +1164,11 @@
 
 ;; H
   (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite smoothed_value)))
+
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
 
 ;; H
   (assert

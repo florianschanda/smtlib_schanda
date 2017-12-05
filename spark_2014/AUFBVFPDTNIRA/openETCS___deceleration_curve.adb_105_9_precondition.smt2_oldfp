@@ -1948,6 +1948,18 @@
      (and (le fliteral2 speed) (le speed (m_per_s_from_km_per_h fliteral3)))) :pattern (
   (is_valid_speed speed)) )))
 
+(declare-const i Int)
+
+(declare-const deceleration_curve__print_curve__L_3__R4b__assume Int)
+
+(declare-const o t)
+
+(declare-const result Int)
+
+(declare-const i1 Int)
+
+(declare-const i2 Int)
+
 (assert
 ;; WP_parameter_def
  ;; File "deceleration_curve.adb", line 73, characters 0-0

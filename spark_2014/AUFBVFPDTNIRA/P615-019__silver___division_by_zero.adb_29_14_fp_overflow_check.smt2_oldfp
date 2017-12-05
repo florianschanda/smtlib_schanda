@@ -1093,6 +1093,8 @@
 
 (declare-const u t)
 
+(declare-const o t)
+
 ;; H
   (assert (tqtisFinite x))
 

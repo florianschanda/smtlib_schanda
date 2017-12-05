@@ -1103,6 +1103,8 @@
 
 (declare-const o1 t)
 
+(declare-const o2 t)
+
 ;; H
   (assert (tqtisFinite a))
 

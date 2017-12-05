@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -65,24 +65,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
@@ -333,7 +333,9 @@
 
 (declare-const o28 Float32)
 
-(declare-const o29 Bool)
+(declare-const o29 Float32)
+
+(declare-const o30 Bool)
 
 (declare-const result____split_fields2 us_split_fields)
 
@@ -381,11 +383,6 @@
 
 (declare-const flight_manager__set_engine_speed__result6 us_rep)
 
-(define-fun result____split_fields11 () us_split_fields__ref (mk___split_fields__ref
-                                                             (mk___split_fields
-                                                             result____split_fields
-                                                             result____split_fields1)))
-
 ;; H
   (assert (fp.isFinite32 position_x))
 
@@ -417,7 +414,10 @@
 
 ;; H
   (assert
-  (=> (fp.lt target_x position_x) (= result result____split_fields11)))
+  (=> (fp.lt target_x position_x)
+  (= result (mk___split_fields__ref
+            (mk___split_fields result____split_fields
+            result____split_fields1)))))
 
 ;; H
   (assert
@@ -453,7 +453,10 @@
 ;; H
   (assert
   (=> (not (fp.lt target_x position_x))
-  (=> (fp.lt position_x target_x) (= result1 result____split_fields11))))
+  (=> (fp.lt position_x target_x)
+  (= result1 (mk___split_fields__ref
+             (mk___split_fields result____split_fields
+             result____split_fields1))))))
 
 ;; H
   (assert
@@ -680,7 +683,7 @@
 ;; H
   (assert
   (and
-  (= o27 (fp.add RNE position_y (to_rep
+  (= o28 (fp.add RNE position_y (to_rep
                                 (rec__flight_manager__engine_values__y_speed
                                 (us_split_fields1
                                 (engine_values__content
@@ -694,7 +697,7 @@
 ;; H
   (assert
   (and
-  (= o25 (fp.add RNE position_y (to_rep
+  (= o26 (fp.add RNE position_y (to_rep
                                 (rec__flight_manager__engine_values__y_speed
                                 (us_split_fields1
                                 (engine_values__content
@@ -706,13 +709,13 @@
                                         flight_manager__set_engine_speed__result5))))))))
 
 ;; H
-  (assert (= o26 (fp.sub RNE o25 target_y)))
+  (assert (= o27 (fp.sub RNE o26 target_y)))
 
 ;; H
-  (assert (and (= o28 o26) (fp.isFinite32 o26)))
+  (assert (and (= o29 o27) (fp.isFinite32 o27)))
 
 ;; H
-  (assert (= o29 (ite (fp.lt o28 o27) true false)))
+  (assert (= o30 (ite (fp.lt o29 o28) true false)))
 
 ;; H
   (assert

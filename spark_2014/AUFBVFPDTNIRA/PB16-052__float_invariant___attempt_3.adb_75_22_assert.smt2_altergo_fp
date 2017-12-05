@@ -1115,7 +1115,7 @@ function float64__ref___projection(a: float64__ref) : float641 =
 
 type tframeB
 
-predicate in_range2(x: int) = (((-32768) <= x) and (x <= 32767))
+predicate in_range2(x: int) = (((- 32768) <= x) and (x <= 32767))
 
 logic bool_eq4 : int, int -> bool
 
@@ -1326,39 +1326,210 @@ axiom fnt65__def_axiom : (fnt65 = mul(NearestTiesToEven,
 axiom fnp1t65__def_axiom : (fnp1t65 = mul(NearestTiesToEven,
   of_int(NearestTiesToEven, (n + 1)), fliteral1))
 
+logic new_speed : t
+
+logic average : t
+
+logic distance : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic o4 : t
+
+logic o5 : t
+
+logic o6 : t
+
+logic o7 : t
+
+logic o8 : t
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : t
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : t
+
+logic o22 : t
+
+logic o23 : int
+
+logic o24 : t
+
+logic o25 : t
+
+logic o26 : t
+
+logic o27 : int
+
+logic o28 : t
+
+logic o29 : t
+
+logic o30 : int
+
+logic o31 : t
+
+logic o32 : t
+
+logic o33 : t
+
+logic o34 : t
+
+logic o35 : t
+
+logic o36 : t
+
+logic o37 : t
+
+logic o38 : t
+
+logic o39 : t
+
+logic o40 : t
+
+logic o41 : int
+
+logic o42 : t
+
+logic o43 : t
+
+logic o44 : int
+
+logic o45 : t
+
+logic o46 : t
+
+logic o47 : t
+
+logic o48 : int
+
+logic result : t
+
+logic new_speed1 : t
+
+logic result1 : t
+
+logic average1 : t
+
+logic result2 : t
+
+logic distance1 : t
+
+logic new_speed2 : t
+
+logic average2 : t
+
+logic distance2 : t
+
+logic new_speed3 : t
+
+logic average3 : t
+
+logic distance3 : t
+
+axiom H : in_range3(n)
+
+axiom H1 : in_range4(factor)
+
+axiom H2 : tqtisFinite(old_speed)
+
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0))
 
+axiom H3 : (le(neg(fliteral5), fliteral5) -> tqtisFinite(new_speed))
+
+axiom H4 : (le(neg(fliteral5), fliteral5) -> tqtisFinite(average))
+
+axiom H5 : tqtisFinite(distance)
+
+axiom H6 : ((n <  25000) and (invariant__(n, old_speed) = true))
+
+axiom H7 : (mul(NearestTiesToEven, mul(NearestTiesToEven, factor, fliteral3),
+  fliteral4) = delta_speed)
+
+axiom H8 : tqtisFinite(delta_speed)
+
+axiom H9 : ((o = add(NearestTiesToEven, old_speed, delta_speed)) and
+  tqtisFinite(add(NearestTiesToEven, old_speed, delta_speed)))
+
+axiom H10 : (result = new_speed)
+
+axiom H11 : (new_speed1 = o)
+
+axiom H12 : (le(neg(fliteral), delta_speed) and le(delta_speed, fliteral))
+
+axiom H13 : (in_bounds(old_speed) = true)
+
+axiom H14 : (in_bounds(high_bound(n)) = true)
+
+axiom H15 : (in_bounds(low_bound(n)) = true)
+
+axiom H16 : le(new_speed1, add(NearestTiesToEven, old_speed, fliteral))
+
+axiom H17 : le(old_speed, high_bound(n))
+
+axiom H18 : le(add(NearestTiesToEven, old_speed, fliteral),
+  add(NearestTiesToEven, high_bound(n), fliteral))
+
+axiom H19 : le(new_speed1, add(NearestTiesToEven, high_bound(n), fliteral))
+
+axiom H20 : (mul(NearestTiesToEven, of_int(NearestTiesToEven, n),
+  fliteral1) = fnt65)
+
+axiom H21 : tqtisFinite(fnt65)
+
+axiom H22 : (mul(NearestTiesToEven, of_int(NearestTiesToEven, (n + 1)),
+  fliteral1) = fnp1t65)
+
+axiom H23 : tqtisFinite(fnp1t65)
+
+axiom H24 : (((n * 65) + 1) <= ((n + 1) * 65))
+
+axiom H25 : le(of_int(NearestTiesToEven, ((n * 65) + 1)),
+  of_int(NearestTiesToEven, ((n + 1) * 65)))
+
+axiom H26 : eq(add(NearestTiesToEven, fnt65, fliteral),
+  of_int(NearestTiesToEven, ((n * 65) + 1)))
+
+axiom H27 : eq(fnp1t65, of_int(NearestTiesToEven, ((n + 1) * 65)))
+
+axiom H28 : le(add(NearestTiesToEven, fnt65, fliteral), fnp1t65)
+
+axiom H29 : le(add(NearestTiesToEven, high_bound(n), fliteral),
+  high_bound((n + 1)))
+
+axiom H30 : le(new_speed1, high_bound((n + 1)))
+
+axiom H31 : le(sub(NearestTiesToEven, old_speed, fliteral), new_speed1)
+
  (* File "attempt_3.adb", line 25, characters 0-0 *)
-goal WP_parameter_def :
-  (forall new_speed:t. forall average:t. forall distance:t. forall o:t.
-  forall result:t. forall new_speed1:t. (in_range3(n) ->
-  (in_range4(factor) -> (tqtisFinite(old_speed) -> ((le(neg(fliteral5),
-  fliteral5) -> tqtisFinite(new_speed)) -> ((le(neg(fliteral5), fliteral5) ->
-  tqtisFinite(average)) -> (tqtisFinite(distance) -> (((n <  25000) and
-  (invariant__(n, old_speed) = true)) -> ((mul(NearestTiesToEven,
-  mul(NearestTiesToEven, factor, fliteral3), fliteral4) = delta_speed) ->
-  (tqtisFinite(delta_speed) -> ((((o = add(NearestTiesToEven, old_speed,
-  delta_speed)) and tqtisFinite(add(NearestTiesToEven, old_speed,
-  delta_speed))) and (({ t__content = result } = { t__content = new_speed
-  }) and (new_speed1 = o))) -> ((le(neg(fliteral), delta_speed) and
-  le(delta_speed, fliteral)) -> ((in_bounds(old_speed) = true) ->
-  ((in_bounds(high_bound(n)) = true) -> ((in_bounds(low_bound(n)) = true) ->
-  (le(new_speed1, add(NearestTiesToEven, old_speed, fliteral)) ->
-  (le(old_speed, high_bound(n)) -> (le(add(NearestTiesToEven, old_speed,
-  fliteral), add(NearestTiesToEven, high_bound(n), fliteral)) ->
-  (le(new_speed1, add(NearestTiesToEven, high_bound(n), fliteral)) ->
-  (((mul(NearestTiesToEven, of_int(NearestTiesToEven, n),
-  fliteral1) = fnt65) and (tqtisFinite(fnt65) and ((mul(NearestTiesToEven,
-  of_int(NearestTiesToEven, (n + 1)), fliteral1) = fnp1t65) and
-  (tqtisFinite(fnp1t65) and ((((n * 65) + 1) <= ((n + 1) * 65)) and
-  (le(of_int(NearestTiesToEven, ((n * 65) + 1)), of_int(NearestTiesToEven,
-  ((n + 1) * 65))) and (eq(add(NearestTiesToEven, fnt65, fliteral),
-  of_int(NearestTiesToEven, ((n * 65) + 1))) and (eq(fnp1t65,
-  of_int(NearestTiesToEven, ((n + 1) * 65))) and le(add(NearestTiesToEven,
-  fnt65, fliteral), fnp1t65))))))))) -> (le(add(NearestTiesToEven,
-  high_bound(n), fliteral), high_bound((n + 1))) -> (le(new_speed1,
-  high_bound((n + 1))) -> (le(sub(NearestTiesToEven, old_speed, fliteral),
-  new_speed1) -> le(low_bound(n), old_speed))))))))))))))))))))))))
+goal WP_parameter_def : le(low_bound(n), old_speed)

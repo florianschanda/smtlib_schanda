@@ -1133,6 +1133,8 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
+(declare-const homothetical__adjust2triangle__result t)
+
 (declare-const o t)
 
 (declare-const o1 t)
@@ -1141,7 +1143,29 @@
 
 (declare-const o3 t)
 
+(declare-const o4 t)
+
 (declare-const result Bool)
+
+(declare-const result1 t)
+
+(declare-const homothetical__adjust2triangle__result1 t)
+
+(declare-const result2 t)
+
+(declare-const homothetical__adjust2triangle__result2 t)
+
+(declare-const homothetical__adjust2triangle__result3 t)
+
+(declare-const homothetical__adjust2triangle__result4 t)
+
+(declare-const homothetical__adjust2triangle__result5 t)
+
+(declare-const homothetical__adjust2triangle__result6 t)
+
+(declare-const homothetical__adjust2triangle__result7 t)
+
+(declare-const homothetical__adjust2triangle__result8 t)
 
 ;; H
   (assert (tqtisFinite d))

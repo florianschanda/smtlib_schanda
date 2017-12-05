@@ -1098,18 +1098,49 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic x : t
+
+logic result : t
+
+logic x1 : t
+
+logic result1 : t
+
+logic x2 : t
+
+logic result2 : t
+
+logic x3 : t
+
+logic result3 : t
+
+logic x4 : t
+
+logic result4 : t
+
+logic x5 : t
+
+logic result5 : t
+
+logic x6 : t
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
+
+axiom H : (le(neg(fliteral1), fliteral1) -> tqtisFinite(x))
+
+axiom H1 : (result = x)
 
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.0e-1))
 
+axiom H2 : (x1 = fliteral2)
+
+axiom H3 : lt(fliteral2, next_representable(x1))
+
  (* File "succ_floats.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:t. forall result:t. forall x1:t. ((le(neg(fliteral1),
-  fliteral1) -> tqtisFinite(x)) -> (((result = x) and (x1 = fliteral2)) ->
-  (lt(fliteral2, next_representable(x1)) -> (not (x1 = fliteral1))))))
+goal WP_parameter_def : (not (x1 = fliteral1))

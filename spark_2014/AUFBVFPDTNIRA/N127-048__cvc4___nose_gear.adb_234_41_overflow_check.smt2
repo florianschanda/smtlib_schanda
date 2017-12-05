@@ -131,17 +131,17 @@
 (define-fun bv_max ((x (_ BitVec 16))
   (y (_ BitVec 16))) (_ BitVec 16) (ite (bvule x y) y x))
 
-(define-fun is_plus_infinity ((x Float64)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float64)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float64)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float64)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float64)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float64)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float64)
 
@@ -156,24 +156,24 @@
                                              (<= i 9007199254740992)))
 
 (define-fun same_sign ((x Float64)
-  (y Float64)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float64)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float64)
-  (y Float64)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float64)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float64) (x Float64)
-  (y Float64)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float64)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-fun nth1 ((_ BitVec 8) Int) Bool)
 
@@ -651,6 +651,8 @@
 
 (declare-const estimatedgroundvelocity Float64)
 
+(declare-const estimatedgroundvelocityisavailable Bool)
+
 (declare-const old_ngclicktime_memory (_ BitVec 16))
 
 (declare-const old_ngrotations_memory (_ BitVec 16))
@@ -731,11 +733,21 @@
 
 (declare-const left_2_out1 int__ref)
 
+(declare-const to_uint16_result_out1 t__ref)
+
+(declare-const to_uint16_result_1_out1 t__ref)
+
+(declare-const to_uint16_result_2_out1 t__ref)
+
 (declare-const distance_km_out1 t__ref1)
 
 (declare-const elapsed_time_h_out1 t__ref1)
 
+(declare-const relational_operator_out1 bool__ref)
+
 (declare-const avoid_div_by_zero_out1 t__ref1)
+
+(declare-const relational_operator_out1_1 bool__ref)
 
 (declare-const speed_out1 t__ref1)
 
@@ -758,6 +770,26 @@
 (declare-const o7 Int)
 
 (declare-const o8 Int)
+
+(declare-const o9 Int)
+
+(declare-const o10 Int)
+
+(declare-const o11 (_ BitVec 16))
+
+(declare-const o12 Int)
+
+(declare-const o13 (_ BitVec 16))
+
+(declare-const o14 Int)
+
+(declare-const o15 (_ BitVec 16))
+
+(declare-const o16 Float64)
+
+(declare-const o17 Float64)
+
+(declare-const o18 Float64)
 
 (declare-const result t__ref)
 
@@ -891,14 +923,103 @@
 
 (declare-const sum_2_out11 Int)
 
+(declare-const result33 int__ref)
+
+(declare-const sum_3_out11 Int)
+
+(declare-const result34 int__ref)
+
+(declare-const left_out11 Int)
+
+(declare-const result35 int__ref)
+
+(declare-const left_out12 Int)
+
+(declare-const result36 int__ref)
+
+(declare-const left_1_out11 Int)
+
+(declare-const result37 int__ref)
+
+(declare-const left_1_out12 Int)
+
+(declare-const result38 int__ref)
+
+(declare-const left_2_out11 Int)
+
+(declare-const result39 int__ref)
+
+(declare-const left_2_out12 Int)
+
+(declare-const result40 t__ref)
+
+(declare-const to_uint16_result_out11 (_ BitVec 16))
+
+(declare-const result41 t__ref)
+
+(declare-const to_uint16_result_1_out11 (_ BitVec 16))
+
+(declare-const result42 t__ref)
+
+(declare-const to_uint16_result_2_out11 (_ BitVec 16))
+
+(declare-const result43 t__ref1)
+
+(declare-const distance_km_out11 Float64)
+
+(declare-const result44 t__ref1)
+
+(declare-const elapsed_time_h_out11 Float64)
+
+(declare-const result45 bool__ref)
+
+(declare-const relational_operator_out11 Bool)
+
+(declare-const result46 t__ref1)
+
+(declare-const avoid_div_by_zero_out11 Float64)
+
+(declare-const result47 t__ref1)
+
+(declare-const avoid_div_by_zero_out12 Float64)
+
+(declare-const result48 bool__ref)
+
+(declare-const estimatedgroundvelocityisavailable1 Bool)
+
+(declare-const result49 bool__ref)
+
+(declare-const relational_operator_out1_11 Bool)
+
+;; H
+  (assert true)
+
+;; H
+  (assert true)
+
 ;; H
   (assert (fp.isFinite64 old_estimatedgroundvelocity_memory))
+
+;; H
+  (assert true)
+
+;; H
+  (assert true)
+
+;; H
+  (assert true)
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
   (fp.isFinite64 estimatedgroundvelocity)))
+
+;; H
+  (assert true)
+
+;; H
+  (assert true)
 
 ;; H
   (assert
@@ -914,6 +1035,15 @@
 
 ;; H
   (assert (=> (<= (- 2147483648) 2147483647) (in_range2 max_uint16_2_out1)))
+
+;; H
+  (assert true)
+
+;; H
+  (assert true)
+
+;; H
+  (assert true)
 
 ;; H
   (assert
@@ -932,6 +1062,12 @@
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
   (fp.isFinite64 ms_in_our1_out1)))
+
+;; H
+  (assert true)
+
+;; H
+  (assert true)
 
 ;; H
   (assert (=> (<= (- 2147483648) 2147483647) (in_range2 to_int32_left_out1)))
@@ -969,6 +1105,9 @@
   (assert
   (=> (<= (- 2147483648) 2147483647) (in_range2
   (int__content data_type_conversion_out1))))
+
+;; H
+  (assert true)
 
 ;; H
   (assert
@@ -1022,6 +1161,15 @@
 ;; H
   (assert
   (=> (<= (- 2147483648) 2147483647) (in_range2 (int__content left_2_out1))))
+
+;; H
+  (assert true)
+
+;; H
+  (assert true)
+
+;; H
+  (assert true)
 
 ;; H
   (assert

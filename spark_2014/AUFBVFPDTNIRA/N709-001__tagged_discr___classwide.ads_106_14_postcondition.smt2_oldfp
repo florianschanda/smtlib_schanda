@@ -1966,15 +1966,13 @@
 
 (declare-const v__split_fields30 us_split_fields2)
 
-(define-fun classwide__update__v__fields4 () us_split_fields (mk___split_fields
-                                                             classwide__update__v__fields
-                                                             classwide__update__v__fields1
-                                                             classwide__update__v__fields2
-                                                             classwide__update__v__fields3))
-
 ;; H
   (assert
-  (= (is_zero1 (mk___rep classwide__update__v__fields4 v__attr__tag)) true))
+  (= (is_zero1
+     (mk___rep
+     (mk___split_fields classwide__update__v__fields
+     classwide__update__v__fields1 classwide__update__v__fields2
+     classwide__update__v__fields3) v__attr__tag)) true))
 
 ;; H
   (assert (= result v__split_fields))
@@ -2002,7 +2000,11 @@
   (= (mk___split_fields1 v__split_fields7 v__split_fields8 v__split_fields9
      v__split_fields10 v__split_fields11 v__split_fields12 v__split_fields13)
   (us_split_fields3
-  (of_base (mk___rep classwide__update__v__fields4 v__attr__tag)))))
+  (of_base
+  (mk___rep
+  (mk___split_fields classwide__update__v__fields
+  classwide__update__v__fields1 classwide__update__v__fields2
+  classwide__update__v__fields3) v__attr__tag)))))
 
 ;; H
   (assert (= (to_rep o) 0))

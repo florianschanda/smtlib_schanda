@@ -1239,29 +1239,33 @@
                         (mul RNE1 (of_int RNE1 (* n1 n1)) fliteral2)
                         fliteral3))) :pattern ((high_bound n1)) )))
 
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral4)
-  (= (tqtreal fliteral4) (/ 3710999999999999854338739169179461896419525146484375.0 1000000000000000000000000000000000000000000000000000.0))))
-
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral5)
-  (= (tqtreal fliteral5) (/ 166666666666666664353702032030923874117434024810791015625.0 10000000000000000000000000000000000000000000000000000000000.0))))
-
 (declare-const new_speed t)
 
 (declare-const average t)
 
 (declare-const o t)
 
+(declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const o3 Int)
+
 (declare-const result t)
 
 (declare-const new_speed1 t)
+
+(declare-const result1 t)
+
+(declare-const average1 t)
+
+(declare-const new_speed2 t)
+
+(declare-const average2 t)
+
+(declare-const new_speed3 t)
+
+(declare-const average3 t)
 
 ;; H
   (assert (in_range1 n))
@@ -1280,6 +1284,20 @@
 
 ;; H
   (assert (and (< n 25000) (= (invariant__ n old_speed) true)))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral4)
+  (= (tqtreal fliteral4) (/ 3710999999999999854338739169179461896419525146484375.0 1000000000000000000000000000000000000000000000000000.0))))
+
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral5)
+  (= (tqtreal fliteral5) (/ 166666666666666664353702032030923874117434024810791015625.0 10000000000000000000000000000000000000000000000000000000000.0))))
 
 ;; H
   (assert

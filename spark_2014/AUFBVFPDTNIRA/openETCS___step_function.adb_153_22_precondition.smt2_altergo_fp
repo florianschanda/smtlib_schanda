@@ -1591,123 +1591,944 @@ logic attr__ATTRIBUTE_ADDRESS6 : int
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
-logic fliteral1 : t
+logic merge__split_fields : num_delimiters_range
 
-axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
-  (tqtreal(fliteral1) = 0.0e-1))
+logic merge__split_fields1 : (int,us_rep) farray
 
- (* File "step_function.ads", line 89, characters 0-0 *)
-goal WP_parameter_def :
-  (forall merge__split_fields:num_delimiters_range.
-  forall merge__split_fields1:(int,us_rep) farray. forall i1:int.
-  forall i2:int. forall im:int. forall scan_sfun1:bool.
-  forall scan_sfun2:bool. forall o:float1. forall o1:function_range.
-  forall o2:function_range. forall o3:float1. forall o4:function_range.
-  forall o5:float1. forall o6:(int,us_rep) farray.
-  forall o7:num_delimiters_range. forall o8:(int,us_rep) farray.
-  forall temp___313:num_delimiters_range.
-  forall temp___3131:(int,us_rep) farray. forall o9:function_range.
-  forall o10:function_range. forall o11:float1. forall o12:function_range.
-  forall o13:float1. forall o14:(int,us_rep) farray.
-  forall o15:num_delimiters_range. forall o16:(int,us_rep) farray.
-  forall temp___375:num_delimiters_range.
-  forall temp___3751:(int,us_rep) farray. forall result:int__ref.
-  forall i11:int. forall result1:int__ref. forall i21:int.
-  forall result2:int__ref. forall im1:int. forall result3:bool__ref.
-  forall scan_sfun11:bool. forall result4:bool__ref. forall scan_sfun21:bool.
-  forall result5:us_split_fields__ref1.
-  forall merge__split_fields2:us_split_fields2.
-  forall merge__split_fields3:us_split_fields2. forall i12:int.
-  forall i22:int. forall im2:int. forall scan_sfun12:bool.
-  forall scan_sfun22:bool. forall result6:us_split_fields__ref1.
-  forall merge__split_fields4:us_split_fields2. ((((is_valid({
-  us_split_fields3 = {
+logic i1 : int
+
+logic i2 : int
+
+logic im : int
+
+logic scan_sfun1 : bool
+
+logic scan_sfun2 : bool
+
+logic temp___389 : bool
+
+logic temp___387 : num_delimiters_range
+
+logic temp___3871 : (int,us_rep) farray
+
+logic temp___386 : bool
+
+logic temp___385 : int
+
+logic temp___384 : int
+
+logic temp___383 : int
+
+logic o : float1
+
+logic o1 : function_range
+
+logic o2 : function_range
+
+logic o3 : float1
+
+logic o4 : function_range
+
+logic o5 : float1
+
+logic o6 : (int,us_rep) farray
+
+logic o7 : num_delimiters_range
+
+logic o8 : (int,us_rep) farray
+
+logic temp___313 : num_delimiters_range
+
+logic temp___3131 : (int,us_rep) farray
+
+logic i : int
+
+logic o9 : int
+
+logic o10 : function_range
+
+logic o11 : float1
+
+logic o12 : function_range
+
+logic o13 : float1
+
+logic o14 : function_range
+
+logic o15 : int
+
+logic i3 : int
+
+logic j : int
+
+logic o16 : int
+
+logic o17 : function_range
+
+logic o18 : float1
+
+logic o19 : function_range
+
+logic o20 : float1
+
+logic o21 : function_range
+
+logic o22 : int
+
+logic i4 : int
+
+logic j1 : int
+
+logic o23 : int
+
+logic o24 : function_range
+
+logic o25 : float1
+
+logic o26 : function_range
+
+logic o27 : float1
+
+logic o28 : function_range
+
+logic o29 : int
+
+logic i5 : int
+
+logic j2 : int
+
+logic o30 : int
+
+logic o31 : function_range
+
+logic o32 : float1
+
+logic o33 : function_range
+
+logic o34 : float1
+
+logic o35 : function_range
+
+logic o36 : int
+
+logic i6 : int
+
+logic j3 : int
+
+logic o37 : int
+
+logic o38 : function_range
+
+logic o39 : float1
+
+logic o40 : function_range
+
+logic o41 : float1
+
+logic o42 : function_range
+
+logic o43 : int
+
+logic i7 : int
+
+logic o44 : int
+
+logic o45 : function_range
+
+logic o46 : float1
+
+logic o47 : function_range
+
+logic o48 : float1
+
+logic o49 : function_range
+
+logic o50 : int
+
+logic o51 : t
+
+logic o52 : int
+
+logic o53 : function_range
+
+logic o54 : float1
+
+logic o55 : function_range
+
+logic o56 : float1
+
+logic o57 : function_range
+
+logic o58 : int
+
+logic o59 : t
+
+logic o60 : t
+
+logic o61 : function_range
+
+logic o62 : function_range
+
+logic o63 : float1
+
+logic o64 : function_range
+
+logic o65 : float1
+
+logic o66 : (int,us_rep) farray
+
+logic o67 : num_delimiters_range
+
+logic o68 : (int,us_rep) farray
+
+logic temp___375 : num_delimiters_range
+
+logic temp___3751 : (int,us_rep) farray
+
+logic o69 : t
+
+logic o70 : t
+
+logic o71 : t
+
+logic o72 : float1
+
+logic o73 : function_range
+
+logic o74 : float1
+
+logic o75 : function_range
+
+logic o76 : float1
+
+logic o77 : (int,us_rep) farray
+
+logic o78 : num_delimiters_range
+
+logic o79 : (int,us_rep) farray
+
+logic temp___382 : num_delimiters_range
+
+logic temp___3821 : (int,us_rep) farray
+
+logic o80 : function_range
+
+logic o81 : function_range
+
+logic o82 : float1
+
+logic o83 : function_range
+
+logic o84 : float1
+
+logic o85 : (int,us_rep) farray
+
+logic o86 : num_delimiters_range
+
+logic o87 : (int,us_rep) farray
+
+logic temp___360 : num_delimiters_range
+
+logic temp___3601 : (int,us_rep) farray
+
+logic o88 : t
+
+logic o89 : t
+
+logic o90 : t
+
+logic o91 : float1
+
+logic o92 : function_range
+
+logic o93 : float1
+
+logic o94 : function_range
+
+logic o95 : float1
+
+logic o96 : (int,us_rep) farray
+
+logic o97 : num_delimiters_range
+
+logic o98 : (int,us_rep) farray
+
+logic temp___367 : num_delimiters_range
+
+logic temp___3671 : (int,us_rep) farray
+
+logic o99 : function_range
+
+logic o100 : function_range
+
+logic o101 : float1
+
+logic o102 : function_range
+
+logic o103 : float1
+
+logic o104 : (int,us_rep) farray
+
+logic o105 : num_delimiters_range
+
+logic o106 : (int,us_rep) farray
+
+logic temp___345 : num_delimiters_range
+
+logic temp___3451 : (int,us_rep) farray
+
+logic o107 : t
+
+logic o108 : t
+
+logic o109 : t
+
+logic o110 : float1
+
+logic o111 : function_range
+
+logic o112 : float1
+
+logic o113 : function_range
+
+logic o114 : float1
+
+logic o115 : (int,us_rep) farray
+
+logic o116 : num_delimiters_range
+
+logic o117 : (int,us_rep) farray
+
+logic temp___352 : num_delimiters_range
+
+logic temp___3521 : (int,us_rep) farray
+
+logic o118 : function_range
+
+logic o119 : function_range
+
+logic o120 : float1
+
+logic o121 : function_range
+
+logic o122 : float1
+
+logic o123 : (int,us_rep) farray
+
+logic o124 : num_delimiters_range
+
+logic o125 : (int,us_rep) farray
+
+logic temp___332 : num_delimiters_range
+
+logic temp___3321 : (int,us_rep) farray
+
+logic o126 : t
+
+logic o127 : t
+
+logic o128 : t
+
+logic o129 : float1
+
+logic o130 : function_range
+
+logic o131 : float1
+
+logic o132 : function_range
+
+logic o133 : float1
+
+logic o134 : (int,us_rep) farray
+
+logic o135 : num_delimiters_range
+
+logic o136 : (int,us_rep) farray
+
+logic temp___339 : num_delimiters_range
+
+logic temp___3391 : (int,us_rep) farray
+
+logic o137 : function_range
+
+logic o138 : function_range
+
+logic o139 : float1
+
+logic o140 : function_range
+
+logic o141 : float1
+
+logic o142 : (int,us_rep) farray
+
+logic o143 : num_delimiters_range
+
+logic o144 : (int,us_rep) farray
+
+logic temp___319 : num_delimiters_range
+
+logic temp___3191 : (int,us_rep) farray
+
+logic o145 : t
+
+logic o146 : t
+
+logic o147 : t
+
+logic o148 : float1
+
+logic o149 : function_range
+
+logic o150 : float1
+
+logic o151 : function_range
+
+logic o152 : float1
+
+logic o153 : (int,us_rep) farray
+
+logic o154 : num_delimiters_range
+
+logic o155 : (int,us_rep) farray
+
+logic temp___326 : num_delimiters_range
+
+logic temp___3261 : (int,us_rep) farray
+
+logic o156 : int
+
+logic o157 : float1
+
+logic o158 : function_range
+
+logic o159 : function_range
+
+logic o160 : float1
+
+logic o161 : function_range
+
+logic o162 : float1
+
+logic o163 : (int,us_rep) farray
+
+logic o164 : num_delimiters_range
+
+logic o165 : (int,us_rep) farray
+
+logic temp___3132 : num_delimiters_range
+
+logic temp___3133 : (int,us_rep) farray
+
+logic o166 : num_delimiters_range
+
+logic o167 : num_delimiters_range
+
+logic o168 : (int,us_rep) farray
+
+logic temp___451 : num_delimiters_range
+
+logic temp___4511 : (int,us_rep) farray
+
+logic i8 : int
+
+logic j4 : int
+
+logic o169 : int
+
+logic o170 : function_range
+
+logic o171 : float1
+
+logic o172 : function_range
+
+logic o173 : float1
+
+logic o174 : function_range
+
+logic o175 : int
+
+logic i9 : int
+
+logic j5 : int
+
+logic o176 : int
+
+logic o177 : function_range
+
+logic o178 : float1
+
+logic o179 : function_range
+
+logic o180 : float1
+
+logic o181 : function_range
+
+logic o182 : int
+
+logic o183 : bool
+
+logic i10 : int
+
+logic o184 : int
+
+logic o185 : function_range
+
+logic o186 : float1
+
+logic o187 : function_range
+
+logic o188 : float1
+
+logic o189 : function_range
+
+logic o190 : int
+
+logic o191 : t
+
+logic o192 : int
+
+logic o193 : function_range
+
+logic o194 : float1
+
+logic o195 : function_range
+
+logic o196 : float1
+
+logic o197 : function_range
+
+logic o198 : int
+
+logic o199 : t
+
+logic o200 : t
+
+logic o201 : bool
+
+logic result : int
+
+logic i11 : int
+
+logic result1 : int
+
+logic i21 : int
+
+logic result2 : int
+
+logic im1 : int
+
+logic result3 : bool
+
+logic scan_sfun11 : bool
+
+logic result4 : bool
+
+logic scan_sfun21 : bool
+
+logic result5 : num_delimiters_range
+
+logic result6 : (int,us_rep) farray
+
+logic merge__split_fields2 : num_delimiters_range
+
+logic merge__split_fields3 : (int,us_rep) farray
+
+logic merge__split_fields4 : num_delimiters_range
+
+logic merge__split_fields5 : (int,us_rep) farray
+
+logic i12 : int
+
+logic i22 : int
+
+logic im2 : int
+
+logic scan_sfun12 : bool
+
+logic scan_sfun22 : bool
+
+logic result7 : num_delimiters_range
+
+logic result8 : (int,us_rep) farray
+
+logic merge__split_fields6 : num_delimiters_range
+
+logic merge__split_fields7 : (int,us_rep) farray
+
+logic result9 : num_delimiters_range
+
+logic result10 : (int,us_rep) farray
+
+logic merge__split_fields8 : num_delimiters_range
+
+logic merge__split_fields9 : (int,us_rep) farray
+
+logic i13 : int
+
+logic scan_sfun13 : bool
+
+logic result11 : num_delimiters_range
+
+logic result12 : (int,us_rep) farray
+
+logic merge__split_fields10 : num_delimiters_range
+
+logic merge__split_fields11 : (int,us_rep) farray
+
+logic result13 : num_delimiters_range
+
+logic result14 : (int,us_rep) farray
+
+logic merge__split_fields12 : num_delimiters_range
+
+logic merge__split_fields13 : (int,us_rep) farray
+
+logic i23 : int
+
+logic scan_sfun23 : bool
+
+logic result15 : num_delimiters_range
+
+logic result16 : (int,us_rep) farray
+
+logic merge__split_fields14 : num_delimiters_range
+
+logic merge__split_fields15 : (int,us_rep) farray
+
+logic result17 : num_delimiters_range
+
+logic result18 : (int,us_rep) farray
+
+logic merge__split_fields16 : num_delimiters_range
+
+logic merge__split_fields17 : (int,us_rep) farray
+
+logic i14 : int
+
+logic scan_sfun14 : bool
+
+logic i24 : int
+
+logic scan_sfun24 : bool
+
+logic result19 : num_delimiters_range
+
+logic result20 : (int,us_rep) farray
+
+logic merge__split_fields18 : num_delimiters_range
+
+logic merge__split_fields19 : (int,us_rep) farray
+
+logic result21 : num_delimiters_range
+
+logic result22 : (int,us_rep) farray
+
+logic merge__split_fields20 : num_delimiters_range
+
+logic merge__split_fields21 : (int,us_rep) farray
+
+logic i15 : int
+
+logic scan_sfun15 : bool
+
+logic result23 : num_delimiters_range
+
+logic result24 : (int,us_rep) farray
+
+logic merge__split_fields22 : num_delimiters_range
+
+logic merge__split_fields23 : (int,us_rep) farray
+
+logic result25 : num_delimiters_range
+
+logic result26 : (int,us_rep) farray
+
+logic merge__split_fields24 : num_delimiters_range
+
+logic merge__split_fields25 : (int,us_rep) farray
+
+logic i25 : int
+
+logic scan_sfun25 : bool
+
+logic result27 : int
+
+logic im3 : int
+
+logic result28 : num_delimiters_range
+
+logic result29 : (int,us_rep) farray
+
+logic merge__split_fields26 : num_delimiters_range
+
+logic merge__split_fields27 : (int,us_rep) farray
+
+logic im4 : int
+
+logic im5 : int
+
+logic merge__split_fields28 : num_delimiters_range
+
+logic merge__split_fields29 : (int,us_rep) farray
+
+logic i16 : int
+
+logic i26 : int
+
+logic im6 : int
+
+logic scan_sfun16 : bool
+
+logic scan_sfun26 : bool
+
+logic merge__split_fields30 : num_delimiters_range
+
+logic merge__split_fields31 : (int,us_rep) farray
+
+logic i17 : int
+
+logic i27 : int
+
+logic im7 : int
+
+logic scan_sfun17 : bool
+
+logic scan_sfun27 : bool
+
+logic merge__split_fields32 : num_delimiters_range
+
+logic merge__split_fields33 : (int,us_rep) farray
+
+logic i18 : int
+
+logic i28 : int
+
+logic im8 : int
+
+logic scan_sfun18 : bool
+
+logic scan_sfun28 : bool
+
+logic merge__split_fields34 : num_delimiters_range
+
+logic merge__split_fields35 : (int,us_rep) farray
+
+logic i19 : int
+
+logic i29 : int
+
+logic im9 : int
+
+logic scan_sfun19 : bool
+
+logic scan_sfun29 : bool
+
+logic result30 : num_delimiters_range
+
+logic result31 : (int,us_rep) farray
+
+logic merge__split_fields36 : num_delimiters_range
+
+logic merge__split_fields37 : (int,us_rep) farray
+
+logic merge__split_fields38 : num_delimiters_range
+
+logic merge__split_fields39 : (int,us_rep) farray
+
+logic i110 : int
+
+logic i210 : int
+
+logic im10 : int
+
+logic scan_sfun110 : bool
+
+logic scan_sfun210 : bool
+
+logic merge__split_fields40 : num_delimiters_range
+
+logic merge__split_fields41 : (int,us_rep) farray
+
+logic i111 : int
+
+logic i211 : int
+
+logic im11 : int
+
+logic scan_sfun111 : bool
+
+logic scan_sfun211 : bool
+
+axiom H : (((is_valid({ us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters = sfun1;
   rec__step_function__step_function_t__step = sfun11 } }) = true) and
   (is_valid({ us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters = sfun2;
   rec__step_function__step_function_t__step = sfun21 } }) = true)) and
-  ((to_rep1(sfun1) + to_rep1(sfun2)) <= 10)) -> (((result = { int__content =
-  i1 }) and (i11 = 0)) -> (in_range2(i11) -> (((result1 = { int__content = i2
-  }) and (i21 = 0)) -> (in_range2(i21) -> (((result2 = { int__content = im
-  }) and (im1 = 0)) -> (in_range2(im1) -> (((result3 = { bool__content =
-  scan_sfun1 }) and (scan_sfun11 = of_int1(1))) -> (((result4 = {
-  bool__content = scan_sfun2 }) and (scan_sfun21 = of_int1(1))) ->
-  ((((((((to_rep(o) = fliteral1) and ((to_rep2(o1) = 0) and ((o1 = o2) and
-  (o = o3)))) and ((o4 = o2) and (o5 = o3))) and
-  (o6 = (merge__split_fields1[im1 <- { us_split_fields1 = {
+  ((to_rep1(sfun1) + to_rep1(sfun2)) <= 10))
+
+axiom H1 : (result = i1)
+
+axiom H2 : (i11 = 0)
+
+axiom H3 : in_range2(i11)
+
+axiom H4 : (result1 = i2)
+
+axiom H5 : (i21 = 0)
+
+axiom H6 : in_range2(i21)
+
+axiom H7 : (result2 = im)
+
+axiom H8 : (im1 = 0)
+
+axiom H9 : in_range2(im1)
+
+axiom H10 : (result3 = scan_sfun1)
+
+axiom H11 : (scan_sfun11 = of_int1(1))
+
+axiom H12 : (result4 = scan_sfun2)
+
+axiom H13 : (scan_sfun21 = of_int1(1))
+
+logic fliteral1 : t
+
+axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
+  (tqtreal(fliteral1) = 0.0e-1))
+
+axiom H14 : (to_rep(o) = fliteral1)
+
+axiom H15 : (to_rep2(o1) = 0)
+
+axiom H16 : (o1 = o2)
+
+axiom H17 : (o = o3)
+
+axiom H18 : (o4 = o2)
+
+axiom H19 : (o5 = o3)
+
+axiom H20 : (o6 = (merge__split_fields1[im1 <- { us_split_fields1 = {
   rec__step_function__delimiter_entry__delimiter = o4;
-  rec__step_function__delimiter_entry__value = o5 } }]))) and
-  ((merge__split_fields = o7) and (o6 = o8))) and ((temp___313 = o7) and
-  (temp___3131 = o8))) and ((result5 = { us_split_fields__content1 = {
-  rec__step_function__step_function_t__number_of_delimiters =
-  merge__split_fields; rec__step_function__step_function_t__step =
-  merge__split_fields1 } }) and (merge__split_fields2 = {
-  rec__step_function__step_function_t__number_of_delimiters = temp___313;
-  rec__step_function__step_function_t__step = temp___3131 }))) ->
-  (((0 <= i12) and ((0 <= i22) and ((0 <= im2) and
-  ((i12 <= to_rep1(sfun1)) and ((i22 <= to_rep1(sfun2)) and ((im2 <= 10) and
-  (((scan_sfun12 = true) or (scan_sfun22 = true)) and (((((i12 = 0) and
-  (i22 = 0)) and (im2 = 0)) or ((((0 <  i12) or
+  rec__step_function__delimiter_entry__value = o5 } }]))
+
+axiom H21 : (merge__split_fields = o7)
+
+axiom H22 : (o6 = o8)
+
+axiom H23 : (temp___313 = o7)
+
+axiom H24 : (temp___3131 = o8)
+
+axiom H25 : ((result5 = merge__split_fields) and
+  (result6 = merge__split_fields1))
+
+axiom H26 : ((merge__split_fields2 = temp___313) and
+  (merge__split_fields3 = temp___3131))
+
+axiom H27 : (0 <= i12)
+
+axiom H28 : (0 <= i22)
+
+axiom H29 : (0 <= im2)
+
+axiom H30 : (i12 <= to_rep1(sfun1))
+
+axiom H31 : (i22 <= to_rep1(sfun2))
+
+axiom H32 : (im2 <= 10)
+
+axiom H33 : ((scan_sfun12 = true) or (scan_sfun22 = true))
+
+axiom H34 : ((((i12 = 0) and (i22 = 0)) and (im2 = 0)) or ((((0 <  i12) or
   (not (scan_sfun12 = true))) and ((0 <  i22) or
-  (not (scan_sfun22 = true)))) and (0 <  im2))) and ((((((0 <  im2) and
-  (scan_sfun12 = true)) and (scan_sfun22 = true)) and
-  (im2 <  (i12 + i22))) or ((not (((0 <  im2) and (scan_sfun12 = true)) and
-  (scan_sfun22 = true))) and (im2 <= (i12 + i22)))) and ((((0 <  im2) and
-  (to_rep2(((((merge__split_fields3).rec__step_function__step_function_t__step[0])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) = 0)) or
-  (not (0 <  im2))) and (((((0 <  im2) and (scan_sfun12 = true)) and
-  (to_rep2(((((merge__split_fields3).rec__step_function__step_function_t__step[(im2 - 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) or
-  (not ((0 <  im2) and (scan_sfun12 = true)))) and (((((0 <  im2) and
-  (scan_sfun22 = true)) and
-  (to_rep2(((((merge__split_fields3).rec__step_function__step_function_t__step[(im2 - 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) or
-  (not ((0 <  im2) and (scan_sfun22 = true)))) and
-  ((forall i:int. (((1 <= i) and (i <= (im2 - 1))) ->
-   (to_rep2(((((merge__split_fields3).rec__step_function__step_function_t__step[(i - 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2(((((merge__split_fields3).rec__step_function__step_function_t__step[i])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)))) and
-  ((forall i:int. (((0 <= i) and (i <= (i12 - 1))) ->
-   (exists j:int. (((0 <= j) and (j <= (im2 - 1))) and
-   (to_rep2((((sfun11[i])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) = to_rep2(((((merge__split_fields3).rec__step_function__step_function_t__step[j])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)))))) and
-  ((((not (scan_sfun12 = true)) and
-  (forall i:int. (((0 <= i) and (i <= to_rep1(sfun1))) ->
-  (exists j:int. (((0 <= j) and (j <= (im2 - 1))) and
-  (to_rep2((((sfun11[i])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) = to_rep2(((((merge__split_fields3).rec__step_function__step_function_t__step[j])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))))))) or
-  (scan_sfun12 = true)) and
-  ((forall i:int. (((0 <= i) and (i <= (i22 - 1))) ->
-   (exists j:int. (((0 <= j) and (j <= (im2 - 1))) and
-   (to_rep2((((sfun21[i])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) = to_rep2(((((merge__split_fields3).rec__step_function__step_function_t__step[j])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)))))) and
-  ((((not (scan_sfun22 = true)) and
-  (forall i:int. (((0 <= i) and (i <= to_rep1(sfun2))) ->
-  (exists j:int. (((0 <= j) and (j <= (im2 - 1))) and
-  (to_rep2((((sfun21[i])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) = to_rep2(((((merge__split_fields3).rec__step_function__step_function_t__step[j])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))))))) or
-  (scan_sfun22 = true)) and
-  (forall i:int. (((0 <= i) and (i <= (im2 - 1))) ->
-  eq(to_rep(((((merge__split_fields3).rec__step_function__step_function_t__step[i])).us_split_fields1).rec__step_function__delimiter_entry__value),
+  (not (scan_sfun22 = true)))) and (0 <  im2)))
+
+axiom H35 : (((((0 <  im2) and (scan_sfun12 = true)) and
+  (scan_sfun22 = true)) -> (im2 <  (i12 + i22))) and ((not (((0 <  im2) and
+  (scan_sfun12 = true)) and (scan_sfun22 = true))) -> (im2 <= (i12 + i22))))
+
+axiom H36 : ((0 <  im2) ->
+  (to_rep2((((merge__split_fields5[0])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) = 0))
+
+axiom H37 : (((0 <  im2) and (scan_sfun12 = true)) ->
+  (to_rep2((((merge__split_fields5[(im2 - 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)))
+
+axiom H38 : (((0 <  im2) and (scan_sfun22 = true)) ->
+  (to_rep2((((merge__split_fields5[(im2 - 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)))
+
+axiom H39 :
+  (forall i20:int. (((1 <= i20) and (i20 <= (im2 - 1))) ->
+  (to_rep2((((merge__split_fields5[(i20 - 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((merge__split_fields5[i20])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))))
+
+axiom H40 :
+  (forall i30:int. (((0 <= i30) and (i30 <= (i12 - 1))) ->
+  (exists j6:int. (((0 <= j6) and (j6 <= (im2 - 1))) and
+  (to_rep2((((sfun11[i30])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) = to_rep2((((merge__split_fields5[j6])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))))))
+
+axiom H41 : ((not (scan_sfun12 = true)) ->
+  (forall i30:int. (((0 <= i30) and (i30 <= to_rep1(sfun1))) ->
+  (exists j6:int. (((0 <= j6) and (j6 <= (im2 - 1))) and
+  (to_rep2((((sfun11[i30])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) = to_rep2((((merge__split_fields5[j6])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)))))))
+
+axiom H42 :
+  (forall i30:int. (((0 <= i30) and (i30 <= (i22 - 1))) ->
+  (exists j6:int. (((0 <= j6) and (j6 <= (im2 - 1))) and
+  (to_rep2((((sfun21[i30])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) = to_rep2((((merge__split_fields5[j6])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))))))
+
+axiom H43 : ((not (scan_sfun22 = true)) ->
+  (forall i30:int. (((0 <= i30) and (i30 <= to_rep1(sfun2))) ->
+  (exists j6:int. (((0 <= j6) and (j6 <= (im2 - 1))) and
+  (to_rep2((((sfun21[i30])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) = to_rep2((((merge__split_fields5[j6])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)))))))
+
+axiom H44 :
+  (forall i30:int. (((0 <= i30) and (i30 <= (im2 - 1))) ->
+  eq(to_rep((((merge__split_fields5[i30])).us_split_fields1).rec__step_function__delimiter_entry__value),
   min1(get_value({ us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters = sfun1;
   rec__step_function__step_function_t__step = sfun11 } },
-  to_rep2(((((merge__split_fields3).rec__step_function__step_function_t__step[i])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)),
+  to_rep2((((merge__split_fields5[i30])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)),
   get_value({ us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters = sfun2;
   rec__step_function__step_function_t__step = sfun21 } },
-  to_rep2(((((merge__split_fields3).rec__step_function__step_function_t__step[i])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))))))))))))))))))))))) ->
-  ((((((0 <= 10) -> in_range2(i12)) and ((0 <= 10) -> in_range2(i22))) and
-  ((0 <= 10) -> in_range2(im2))) and
-  ((merge__split_fields3).rec__step_function__step_function_t__number_of_delimiters = merge__split_fields)) ->
-  (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((((((((to_rep2(o9) = to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
-  ((o9 = o10) and
-  (((((merge__split_fields3).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__value = o11))) and
-  ((o12 = o10) and (o13 = o11))) and
-  (o14 = ((merge__split_fields3).rec__step_function__step_function_t__step[im2 <- {
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter = o12;
-  rec__step_function__delimiter_entry__value = o13 } }]))) and
-  (((merge__split_fields3).rec__step_function__step_function_t__number_of_delimiters = o15) and
-  (o14 = o16))) and ((temp___375 = o15) and (temp___3751 = o16))) and
-  ((result6 = { us_split_fields__content1 = merge__split_fields3 }) and
-  (merge__split_fields4 = {
-  rec__step_function__step_function_t__number_of_delimiters = temp___375;
-  rec__step_function__step_function_t__step = temp___3751 }))) -> (is_valid({
-  us_split_fields3 = {
+  to_rep2((((merge__split_fields5[i30])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))))))
+
+axiom H45 : (((((0 <= 10) -> in_range2(i12)) and ((0 <= 10) ->
+  in_range2(i22))) and ((0 <= 10) -> in_range2(im2))) and
+  (merge__split_fields4 = merge__split_fields))
+
+axiom H46 : (scan_sfun12 = true)
+
+axiom H47 : (scan_sfun22 = true)
+
+axiom H48 :
+  (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))
+
+axiom H49 :
+  (to_rep2(o61) = to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))
+
+axiom H50 : ((o62 = o61) and
+  (o63 = (((merge__split_fields5[im2])).us_split_fields1).rec__step_function__delimiter_entry__value))
+
+axiom H51 : ((o64 = o62) and (o65 = o63))
+
+axiom H52 : (o66 = (merge__split_fields5[im2 <- { us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = o64;
+  rec__step_function__delimiter_entry__value = o65 } }]))
+
+axiom H53 : ((o67 = merge__split_fields4) and (o68 = o66))
+
+axiom H54 : ((temp___375 = o67) and (temp___3751 = o68))
+
+axiom H55 : ((result7 = merge__split_fields4) and
+  (result8 = merge__split_fields5))
+
+axiom H56 : ((merge__split_fields6 = temp___375) and
+  (merge__split_fields7 = temp___3751))
+
+ (* File "step_function.ads", line 89, characters 0-0 *)
+goal WP_parameter_def : (is_valid({ us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters = sfun2;
-  rec__step_function__step_function_t__step = sfun21 }
-  }) = true)))))))))))))))))
+  rec__step_function__step_function_t__step = sfun21 } }) = true)

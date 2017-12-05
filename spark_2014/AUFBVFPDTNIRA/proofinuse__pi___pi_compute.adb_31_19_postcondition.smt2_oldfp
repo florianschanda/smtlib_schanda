@@ -1103,81 +1103,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS10 Int)
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral2)
-  (= (tqtreal fliteral2) (/ 3333333432674407958984375.0 10000000000000000000000000.0))))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral3)
-  (= (tqtreal fliteral3) (/ 20000000298023223876953125.0 100000000000000000000000000.0))))
-
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral4)
-  (= (tqtreal fliteral4) (/ 14285714924335479736328125.0 100000000000000000000000000.0))))
-
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral5)
-  (= (tqtreal fliteral5) (/ 111111111938953399658203125.0 1000000000000000000000000000.0))))
-
-(declare-const fliteral6 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral6)
-  (= (tqtreal fliteral6) (/ 90909093618392944335937500.0 1000000000000000000000000000.0))))
-
-(declare-const fliteral7 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral7)
-  (= (tqtreal fliteral7) (/ 76923079788684844970703125.0 1000000000000000000000000000.0))))
-
-(declare-const fliteral8 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral8)
-  (= (tqtreal fliteral8) (/ 66666670143604278564453125.0 1000000000000000000000000000.0))))
-
-(declare-const fliteral9 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral9)
-  (= (tqtreal fliteral9) (/ 588235296308994293212890625.0 10000000000000000000000000000.0))))
-
-(declare-const fliteral10 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral10)
-  (= (tqtreal fliteral10) (/ 526315793395042419433593750.0 10000000000000000000000000000.0))))
-
-(declare-const fliteral11 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral11) (= (tqtreal fliteral11) 4.0)))
-
-(declare-const fliteral12 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral12)
-  (= (tqtreal fliteral12) (/ 30418395996093750000000.0 10000000000000000000000.0))))
-
 (declare-const t1 t)
 
 (declare-const t2 t)
@@ -1342,253 +1267,166 @@
 
 (declare-const result12 t)
 
-;; H
-  (assert (= (mk_t__ref result) (mk_t__ref t1)))
+(declare-const fliteral2 t)
 
-;; H
-  (assert (= t11 fliteral))
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral2)
+  (= (tqtreal fliteral2) (/ 3333333432674407958984375.0 10000000000000000000000000.0))))
 
-;; H
-  (assert (tqtisFinite t11))
+(declare-const fliteral3 t)
 
-;; H
-  (assert (= (mk_t__ref result1) (mk_t__ref t2)))
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral3)
+  (= (tqtreal fliteral3) (/ 20000000298023223876953125.0 100000000000000000000000000.0))))
 
-;; H
-  (assert (= t21 fliteral2))
+(declare-const fliteral4 t)
 
-;; H
-  (assert (tqtisFinite t21))
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral4)
+  (= (tqtreal fliteral4) (/ 14285714924335479736328125.0 100000000000000000000000000.0))))
 
-;; H
-  (assert (= (mk_t__ref result2) (mk_t__ref t3)))
+(declare-const fliteral5 t)
 
-;; H
-  (assert (= t31 fliteral3))
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral5)
+  (= (tqtreal fliteral5) (/ 111111111938953399658203125.0 1000000000000000000000000000.0))))
 
-;; H
-  (assert (tqtisFinite t31))
+(declare-const fliteral6 t)
 
-;; H
-  (assert (= (mk_t__ref result3) (mk_t__ref t4)))
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral6)
+  (= (tqtreal fliteral6) (/ 90909093618392944335937500.0 1000000000000000000000000000.0))))
 
-;; H
-  (assert (= t41 fliteral4))
+(declare-const fliteral7 t)
 
-;; H
-  (assert (tqtisFinite t41))
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral7)
+  (= (tqtreal fliteral7) (/ 76923079788684844970703125.0 1000000000000000000000000000.0))))
 
-;; H
-  (assert (= (mk_t__ref result4) (mk_t__ref t5)))
+(declare-const fliteral8 t)
 
-;; H
-  (assert (= t51 fliteral5))
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral8)
+  (= (tqtreal fliteral8) (/ 66666670143604278564453125.0 1000000000000000000000000000.0))))
 
-;; H
-  (assert (tqtisFinite t51))
+(declare-const fliteral9 t)
 
-;; H
-  (assert (= (mk_t__ref result5) (mk_t__ref t6)))
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral9)
+  (= (tqtreal fliteral9) (/ 588235296308994293212890625.0 10000000000000000000000000000.0))))
 
-;; H
-  (assert (= t61 fliteral6))
+(declare-const fliteral10 t)
 
-;; H
-  (assert (tqtisFinite t61))
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral10)
+  (= (tqtreal fliteral10) (/ 526315793395042419433593750.0 10000000000000000000000000000.0))))
 
-;; H
-  (assert (= (mk_t__ref result6) (mk_t__ref t7)))
+(declare-const fliteral11 t)
 
-;; H
-  (assert (= t71 fliteral7))
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral11) (= (tqtreal fliteral11) 4.0)))
 
-;; H
-  (assert (tqtisFinite t71))
+(declare-const fliteral12 t)
 
-;; H
-  (assert (= (mk_t__ref result7) (mk_t__ref t8)))
-
-;; H
-  (assert (= t81 fliteral8))
-
-;; H
-  (assert (tqtisFinite t81))
-
-;; H
-  (assert (= (mk_t__ref result8) (mk_t__ref t9)))
-
-;; H
-  (assert (= t91 fliteral9))
-
-;; H
-  (assert (tqtisFinite t91))
-
-;; H
-  (assert (= result9 (mk_t__ref t10)))
-
-;; H
-  (assert (= t101 fliteral10))
-
-;; H
-  (assert (tqtisFinite t101))
-
-;; H
-  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite res)))
-
-;; H
-  (assert (and (= o (sub RNE1 t11 t21)) (tqtisFinite (sub RNE1 t11 t21))))
-
-;; H
-  (assert (= o1 (add RNE1 o t31)))
-
-;; H
-  (assert (and (= o2 o1) (tqtisFinite o1)))
-
-;; H
-  (assert (= o3 (sub RNE1 o2 t41)))
-
-;; H
-  (assert (and (= o4 o3) (tqtisFinite o3)))
-
-;; H
-  (assert (= o5 (add RNE1 o4 t51)))
-
-;; H
-  (assert (and (= o6 o5) (tqtisFinite o5)))
-
-;; H
-  (assert (= o7 (sub RNE1 o6 t61)))
-
-;; H
-  (assert (and (= o8 o7) (tqtisFinite o7)))
-
-;; H
-  (assert (= o9 (add RNE1 o8 t71)))
-
-;; H
-  (assert (and (= o10 o9) (tqtisFinite o9)))
-
-;; H
-  (assert (= o11 (sub RNE1 o10 t81)))
-
-;; H
-  (assert (and (= o12 o11) (tqtisFinite o11)))
-
-;; H
-  (assert (= o13 (add RNE1 o12 t91)))
-
-;; H
-  (assert (and (= o14 o13) (tqtisFinite o13)))
-
-;; H
-  (assert (= o15 (sub RNE1 o14 t101)))
-
-;; H
-  (assert (and (= o16 o15) (tqtisFinite o15)))
-
-;; H
-  (assert (= o17 (mul RNE1 fliteral11 o16)))
-
-;; H
-  (assert (and (= o18 o17) (tqtisFinite o17)))
-
-;; H
-  (assert (= result10 (mk_t__ref res)))
-
-;; H
-  (assert (= res1 o18))
-
-;; H
-  (assert (eq res1 fliteral12))
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral12)
+  (= (tqtreal fliteral12) (/ 30418395996093750000000.0 10000000000000000000000.0))))
 
 ;; H
   (assert
+  (and
+  (and (and (= (mk_t__ref result) (mk_t__ref t1)) (= t11 fliteral))
+  (and (tqtisFinite t11)
+  (and (and (= (mk_t__ref result1) (mk_t__ref t2)) (= t21 fliteral2))
+  (and (tqtisFinite t21)
+  (and (and (= (mk_t__ref result2) (mk_t__ref t3)) (= t31 fliteral3))
+  (and (tqtisFinite t31)
+  (and (and (= (mk_t__ref result3) (mk_t__ref t4)) (= t41 fliteral4))
+  (and (tqtisFinite t41)
+  (and (and (= (mk_t__ref result4) (mk_t__ref t5)) (= t51 fliteral5))
+  (and (tqtisFinite t51)
+  (and (and (= (mk_t__ref result5) (mk_t__ref t6)) (= t61 fliteral6))
+  (and (tqtisFinite t61)
+  (and (and (= (mk_t__ref result6) (mk_t__ref t7)) (= t71 fliteral7))
+  (and (tqtisFinite t71)
+  (and (and (= (mk_t__ref result7) (mk_t__ref t8)) (= t81 fliteral8))
+  (and (tqtisFinite t81)
+  (and (and (= (mk_t__ref result8) (mk_t__ref t9)) (= t91 fliteral9))
+  (and (tqtisFinite t91)
+  (and (and (= result9 (mk_t__ref t10)) (= t101 fliteral10))
+  (and (tqtisFinite t101)
+  (and (=> (le (neg fliteral1) fliteral1) (tqtisFinite res))
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and (and (= o (sub RNE1 t11 t21)) (tqtisFinite (sub RNE1 t11 t21)))
+  (= o1 (add RNE1 o t31))) (and (= o2 o1) (tqtisFinite o1)))
+  (= o3 (sub RNE1 o2 t41))) (and (= o4 o3) (tqtisFinite o3)))
+  (= o5 (add RNE1 o4 t51))) (and (= o6 o5) (tqtisFinite o5)))
+  (= o7 (sub RNE1 o6 t61))) (and (= o8 o7) (tqtisFinite o7)))
+  (= o9 (add RNE1 o8 t71))) (and (= o10 o9) (tqtisFinite o9)))
+  (= o11 (sub RNE1 o10 t81))) (and (= o12 o11) (tqtisFinite o11)))
+  (= o13 (add RNE1 o12 t91))) (and (= o14 o13) (tqtisFinite o13)))
+  (= o15 (sub RNE1 o14 t101))) (and (= o16 o15) (tqtisFinite o15)))
+  (= o17 (mul RNE1 fliteral11 o16))) (and (= o18 o17) (tqtisFinite o17)))
+  (and (= result10 (mk_t__ref res)) (= res1 o18)))
+  (and (eq res1 fliteral12)
+  (and
+  (and
   (= pi_compute__leibniz_float__result2 (mk_t__ref
-                                        pi_compute__leibniz_float__result1)))
-
-;; H
-  (assert
+                                        pi_compute__leibniz_float__result1))
   (= pi_compute__leibniz_float__result3 pi_compute__leibniz_float__result1))
-
-;; H
-  (assert (= result11 (mk_t__ref pi_compute__leibniz_float__result)))
-
-;; H
-  (assert (= pi_compute__leibniz_float__result1 res1))
-
-;; H
-  (assert
-  (= pi_compute__leibniz_float__result4 pi_compute__leibniz_float__result2))
-
-;; H
-  (assert (= res2 (mk_t__ref res1)))
-
-;; H
-  (assert (= t102 (mk_t__ref t101)))
-
-;; H
-  (assert (= t92 (mk_t__ref t91)))
-
-;; H
-  (assert (= t82 (mk_t__ref t81)))
-
-;; H
-  (assert (= t72 (mk_t__ref t71)))
-
-;; H
-  (assert (= t62 (mk_t__ref t61)))
-
-;; H
-  (assert (= t52 (mk_t__ref t51)))
-
-;; H
-  (assert (= t42 (mk_t__ref t41)))
-
-;; H
-  (assert (= t32 (mk_t__ref t31)))
-
-;; H
-  (assert (= t22 (mk_t__ref t21)))
-
-;; H
-  (assert (= t12 (mk_t__ref t11)))
-
-;; H
-  (assert
-  (= pi_compute__leibniz_float__result5 pi_compute__leibniz_float__result3))
-
-;; H
-  (assert (= res3 res1))
-
-;; H
-  (assert (= t103 t101))
-
-;; H
-  (assert (= t93 t91))
-
-;; H
-  (assert (= t83 t81))
-
-;; H
-  (assert (= t73 t71))
-
-;; H
-  (assert (= t63 t61))
-
-;; H
-  (assert (= t53 t51))
-
-;; H
-  (assert (= t43 t41))
-
-;; H
-  (assert (= t33 t31))
-
-;; H
-  (assert (= t23 t21))
-
-;; H
-  (assert (= t13 t11))
+  (and (= result11 (mk_t__ref pi_compute__leibniz_float__result))
+  (= pi_compute__leibniz_float__result1 res1))))))))))))))))))))))))))
+  (and
+  (and
+  (= pi_compute__leibniz_float__result4 pi_compute__leibniz_float__result2)
+  (and (= res2 (mk_t__ref res1))
+  (and (= t102 (mk_t__ref t101))
+  (and (= t92 (mk_t__ref t91))
+  (and (= t82 (mk_t__ref t81))
+  (and (= t72 (mk_t__ref t71))
+  (and (= t62 (mk_t__ref t61))
+  (and (= t52 (mk_t__ref t51))
+  (and (= t42 (mk_t__ref t41))
+  (and (= t32 (mk_t__ref t31))
+  (and (= t22 (mk_t__ref t21)) (= t12 (mk_t__ref t11)))))))))))))
+  (and
+  (= pi_compute__leibniz_float__result5 pi_compute__leibniz_float__result3)
+  (and (= res3 res1)
+  (and (= t103 t101)
+  (and (= t93 t91)
+  (and (= t83 t81)
+  (and (= t73 t71)
+  (and (= t63 t61)
+  (and (= t53 t51)
+  (and (= t43 t41) (and (= t33 t31) (and (= t23 t21) (= t13 t11)))))))))))))))
 
 ;; H
   (assert (= result12 (t__content pi_compute__leibniz_float__result4)))

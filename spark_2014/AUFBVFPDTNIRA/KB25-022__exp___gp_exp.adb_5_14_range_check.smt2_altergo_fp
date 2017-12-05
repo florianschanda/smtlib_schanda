@@ -1072,7 +1072,7 @@ type t__ref = { t__content : t
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -1187,13 +1187,40 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic a : int
+
+logic b : t
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : t
+
+logic result : int
+
+logic a1 : int
+
+logic result1 : int
+
+logic a2 : int
+
+axiom H : in_range1(x)
+
+axiom H1 : tqtisFinite(y)
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range1(a))
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
 
+axiom H3 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(b))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:int. forall b:t. (in_range1(x) -> (tqtisFinite(y) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(a)) -> ((le(neg(fliteral1),
-  fliteral1) -> tqtisFinite(b)) -> in_range2(x))))))
+goal WP_parameter_def : in_range2(x)

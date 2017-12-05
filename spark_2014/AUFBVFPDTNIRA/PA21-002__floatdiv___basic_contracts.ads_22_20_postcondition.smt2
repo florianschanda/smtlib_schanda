@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -65,24 +65,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
@@ -195,62 +195,37 @@
 
 ;; H
   (assert
+  (and
+  (and
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (fp.isFinite32 res)))
-
-;; H
-  (assert
+  (fp.isFinite32 res))
+  (and
   (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (of_int RNE
-                                                        numerator)))
-
-;; H
-  (assert
+                                                        numerator))
+  (and
   (fp.leq (fp #b0 #b01111111 #b00000000000000000000000) (of_int RNE
-                                                        denominator)))
-
-;; H
-  (assert
+                                                        denominator))
+  (and
+  (and
   (and (= o (fp.div RNE (of_int RNE numerator) (of_int RNE denominator)))
-  (fp.isFinite32 (fp.div RNE (of_int RNE numerator) (of_int RNE denominator)))))
-
-;; H
-  (assert (= (mk_t__ref result) (mk_t__ref res)))
-
-;; H
-  (assert (= res1 o))
-
-;; H
-  (assert (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) res1))
-
-;; H
-  (assert
-  (= basic_contracts__average_orig__result1 basic_contracts__average_orig__result2))
-
-;; H
-  (assert
+  (fp.isFinite32 (fp.div RNE (of_int RNE numerator) (of_int RNE denominator))))
+  (and (= (mk_t__ref result) (mk_t__ref res)) (= res1 o)))
+  (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) res1)
+  (and
+  (and
+  (= basic_contracts__average_orig__result1 basic_contracts__average_orig__result2)
   (= basic_contracts__average_orig__result3 basic_contracts__average_orig__result1))
-
-;; H
-  (assert (= result1 basic_contracts__average_orig__result))
-
-;; H
-  (assert (= basic_contracts__average_orig__result1 res1))
-
-;; H
-  (assert
+  (and (= result1 basic_contracts__average_orig__result)
+  (= basic_contracts__average_orig__result1 res1))))))))
+  (and
+  (and
   (= (mk_t__ref basic_contracts__average_orig__result4) (mk_t__ref
-                                                        basic_contracts__average_orig__result2)))
-
-;; H
-  (assert (= res1 res2))
-
-;; H
-  (assert
-  (= basic_contracts__average_orig__result5 basic_contracts__average_orig__result3))
-
-;; H
-  (assert (= res3 res1))
+                                                        basic_contracts__average_orig__result2))
+  (= res1 res2))
+  (and
+  (= basic_contracts__average_orig__result5 basic_contracts__average_orig__result3)
+  (= res3 res1)))))
 
 ;; H
   (assert (= result2 basic_contracts__average_orig__result4))

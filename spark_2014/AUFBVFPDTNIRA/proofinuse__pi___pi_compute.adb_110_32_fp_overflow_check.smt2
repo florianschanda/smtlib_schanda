@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -65,24 +65,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort float 0)
@@ -195,6 +195,12 @@
 
 (declare-const num Float32)
 
+(declare-const den t__ref)
+
+(declare-const res t__ref)
+
+(declare-const pi_compute__shanks_float__result t__ref)
+
 (declare-const o Float32)
 
 (declare-const o1 Float32)
@@ -224,6 +230,18 @@
 (declare-const o13 Float32)
 
 (declare-const o14 Float32)
+
+(declare-const o15 Float32)
+
+(declare-const o16 Float32)
+
+(declare-const o17 Float32)
+
+(declare-const o18 Float32)
+
+(declare-const o19 Float32)
+
+(declare-const o20 Float32)
 
 (declare-const result t__ref)
 
@@ -308,6 +326,118 @@
 (declare-const result20 t__ref)
 
 (declare-const num1 Float32)
+
+(declare-const result21 t__ref)
+
+(declare-const den1 Float32)
+
+(declare-const result22 t__ref)
+
+(declare-const res1 Float32)
+
+(declare-const result23 t__ref)
+
+(declare-const pi_compute__shanks_float__result1 Float32)
+
+(declare-const pi_compute__shanks_float__result2 t__ref)
+
+(declare-const pi_compute__shanks_float__result3 Float32)
+
+(declare-const t12 t__ref)
+
+(declare-const t22 t__ref)
+
+(declare-const t32 t__ref)
+
+(declare-const t42 t__ref)
+
+(declare-const t52 t__ref)
+
+(declare-const t62 t__ref)
+
+(declare-const t72 t__ref)
+
+(declare-const t82 t__ref)
+
+(declare-const t92 t__ref)
+
+(declare-const t102 t__ref)
+
+(declare-const a12 t__ref)
+
+(declare-const a22 t__ref)
+
+(declare-const a32 t__ref)
+
+(declare-const a42 t__ref)
+
+(declare-const a52 t__ref)
+
+(declare-const a62 t__ref)
+
+(declare-const a72 t__ref)
+
+(declare-const a82 t__ref)
+
+(declare-const a92 t__ref)
+
+(declare-const a102 t__ref)
+
+(declare-const num2 t__ref)
+
+(declare-const den2 t__ref)
+
+(declare-const res2 t__ref)
+
+(declare-const pi_compute__shanks_float__result4 t__ref)
+
+(declare-const t13 Float32)
+
+(declare-const t23 Float32)
+
+(declare-const t33 Float32)
+
+(declare-const t43 Float32)
+
+(declare-const t53 Float32)
+
+(declare-const t63 Float32)
+
+(declare-const t73 Float32)
+
+(declare-const t83 Float32)
+
+(declare-const t93 Float32)
+
+(declare-const t103 Float32)
+
+(declare-const a13 Float32)
+
+(declare-const a23 Float32)
+
+(declare-const a33 Float32)
+
+(declare-const a43 Float32)
+
+(declare-const a53 Float32)
+
+(declare-const a63 Float32)
+
+(declare-const a73 Float32)
+
+(declare-const a83 Float32)
+
+(declare-const a93 Float32)
+
+(declare-const a103 Float32)
+
+(declare-const num3 Float32)
+
+(declare-const den3 Float32)
+
+(declare-const res3 Float32)
+
+(declare-const pi_compute__shanks_float__result5 Float32)
 
 ;; H
   (assert (= result (mk_t__ref t1)))

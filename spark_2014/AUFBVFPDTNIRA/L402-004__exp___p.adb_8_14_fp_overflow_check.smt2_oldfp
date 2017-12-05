@@ -1112,11 +1112,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 1000.0)))
-
 (declare-const x Int)
 
 (declare-const y t)
@@ -1127,15 +1122,25 @@
 
 (declare-const o2 Int)
 
-(declare-const o3 Int)
+(declare-const o3 t)
+
+(declare-const o4 Int)
+
+(declare-const o5 Int)
+
+(declare-const o6 t)
 
 (declare-const result Bool)
 
-(declare-const result1 Bool)
-
-(declare-const result2 Int)
+(declare-const result1 Int)
 
 (declare-const x1 Int)
+
+(declare-const result2 Bool)
+
+(declare-const result3 Int)
+
+(declare-const x2 Int)
 
 ;; H
   (assert (in_range1 x))
@@ -1149,6 +1154,11 @@
 ;; H
   (assert (= o1 (ite (< o 1000) true false)))
 
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 1000.0)))
+
 ;; H
   (assert
   (= result (ite (and (= o1 true) (lt (abs1 y) fliteral2)) true false)))
@@ -1157,22 +1167,22 @@
   (assert (not (= result true)))
 
 ;; H
-  (assert (and (= o2 (* x x)) (in_range1 (* x x))))
+  (assert (and (= o4 (* x x)) (in_range1 (* x x))))
 
 ;; H
-  (assert (= result1 (ite (< 0 o2) true false)))
+  (assert (= result2 (ite (< 0 o4) true false)))
 
 ;; H
-  (assert (= result1 true))
+  (assert (= result2 true))
 
 ;; H
-  (assert (and (= o3 (* x x)) (in_range1 (* x x))))
+  (assert (and (= o5 (* x x)) (in_range1 (* x x))))
 
 ;; H
-  (assert (= result2 x))
+  (assert (= result3 x))
 
 ;; H
-  (assert (= x1 o3))
+  (assert (= x2 o5))
 
 (assert
 ;; WP_parameter_def

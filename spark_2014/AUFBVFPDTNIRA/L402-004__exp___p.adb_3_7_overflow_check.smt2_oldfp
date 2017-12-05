@@ -1116,6 +1116,32 @@
 
 (declare-const y t)
 
+(declare-const o Int)
+
+(declare-const o1 Bool)
+
+(declare-const o2 Int)
+
+(declare-const o3 t)
+
+(declare-const o4 Int)
+
+(declare-const o5 Int)
+
+(declare-const o6 t)
+
+(declare-const result Bool)
+
+(declare-const result1 Int)
+
+(declare-const x1 Int)
+
+(declare-const result2 Bool)
+
+(declare-const result3 Int)
+
+(declare-const x2 Int)
+
 ;; H
   (assert (in_range1 x))
 

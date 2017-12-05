@@ -1105,6 +1105,8 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
+(declare-const o t)
+
 ;; H
   (assert (tqtisFinite f))
 

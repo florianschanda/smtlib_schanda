@@ -1354,13 +1354,6 @@
 ;; threehalfs__def_axiom
   (assert (= threehalfs fliteral3))
 
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral4)
-  (= (tqtreal fliteral4) (/ 99999997473787516355514526367187500.0 10000000000000000000000000000000000000000.0))))
-
 (declare-const i Int)
 
 (declare-const y t)
@@ -1388,6 +1381,16 @@
 (declare-const o10 t)
 
 (declare-const o11 t)
+
+(declare-const o12 t)
+
+(declare-const o13 t)
+
+(declare-const o14 t)
+
+(declare-const o15 t)
+
+(declare-const o16 Bool)
 
 (declare-const result Int)
 
@@ -1422,6 +1425,13 @@
 
 ;; H
   (assert (tqtisFinite threehalfs))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral4)
+  (= (tqtreal fliteral4) (/ 99999997473787516355514526367187500.0 10000000000000000000000000000000000000000.0))))
 
 ;; H
   (assert (le fliteral4 x))
@@ -1483,14 +1493,14 @@
   (assert (= y2 o9))
 
 ;; H
-  (assert (and (= o10 (mul RNE1 y2 y2)) (tqtisFinite (mul RNE1 y2 y2))))
+  (assert (and (= o13 (mul RNE1 y2 y2)) (tqtisFinite (mul RNE1 y2 y2))))
 
 ;; H
-  (assert (= o11 (mul RNE1 o10 x)))
+  (assert (= o14 (mul RNE1 o13 x)))
 
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (tqtisFinite o11)))
+  (not (tqtisFinite o14)))
 (check-sat)
 (exit)

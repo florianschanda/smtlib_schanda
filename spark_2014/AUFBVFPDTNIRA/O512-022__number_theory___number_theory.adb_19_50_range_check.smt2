@@ -155,17 +155,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int1 (RoundingMode Int) Float32)
 
@@ -180,24 +180,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-fun power (Float32 Int) Float32)
@@ -225,21 +225,21 @@
   (assert
   (forall ((x Float32))
   (=> (fp.isFinite32 x)
-  (=> (not (fp.isZero      x))
+  (=> (not (fp.isZero x))
   (fp.eq (power x (- 1)) (fp.div RNE (of_int1 RNE 1) x))))))
 
 ;; Power_neg2
   (assert
   (forall ((x Float32))
   (=> (fp.isFinite32 x)
-  (=> (not (fp.isZero      x))
+  (=> (not (fp.isZero x))
   (fp.eq (power x (- 2)) (fp.div RNE (of_int1 RNE 1) (power x 2)))))))
 
 ;; Power_neg3
   (assert
   (forall ((x Float32))
   (=> (fp.isFinite32 x)
-  (=> (not (fp.isZero      x))
+  (=> (not (fp.isZero x))
   (fp.eq (power x (- 2)) (fp.div RNE (of_int1 RNE 1) (power x 3)))))))
 
 ;; fib__def_axiom
@@ -314,31 +314,177 @@
 
 (declare-const i Int)
 
+(declare-const number_theory__fibonacci__result Int)
+
+(declare-const temp___194 Int)
+
+(declare-const temp___193 Int)
+
+(declare-const temp___192 Int)
+
+(declare-const temp___191 Int)
+
 (declare-const o Int)
 
 (declare-const o1 Int)
 
-(declare-const o2 Bool)
+(declare-const o2 Int)
 
-(declare-const result Int)
+(declare-const o3 Bool)
 
-(declare-const oldest1 Int)
-
-(declare-const result1 Int)
+(declare-const o4 Int)
 
 (declare-const old__1 Int)
 
-(declare-const result2 Int)
-
-(declare-const i1 Int)
-
-(declare-const old__2 Int)
-
-(declare-const oldest2 Int)
+(declare-const oldest1 Int)
 
 (declare-const temp1 Int)
 
+(declare-const i1 Int)
+
+(declare-const result Int)
+
+(declare-const result__1 Int)
+
+(declare-const result1 Int)
+
+(declare-const oldest2 Int)
+
+(declare-const result2 Int)
+
+(declare-const old__2 Int)
+
+(declare-const result3 Int)
+
 (declare-const i2 Int)
+
+(declare-const old__3 Int)
+
+(declare-const oldest3 Int)
+
+(declare-const temp2 Int)
+
+(declare-const i3 Int)
+
+(declare-const result4 Int)
+
+(declare-const temp3 Int)
+
+(declare-const result5 Int)
+
+(declare-const oldest4 Int)
+
+(declare-const result6 Int)
+
+(declare-const old__4 Int)
+
+(declare-const result7 Int)
+
+(declare-const i4 Int)
+
+(declare-const old__5 Int)
+
+(declare-const oldest5 Int)
+
+(declare-const temp4 Int)
+
+(declare-const i5 Int)
+
+(declare-const old__6 Int)
+
+(declare-const oldest6 Int)
+
+(declare-const temp5 Int)
+
+(declare-const i6 Int)
+
+(declare-const old__7 Int)
+
+(declare-const oldest7 Int)
+
+(declare-const temp6 Int)
+
+(declare-const i7 int__ref)
+
+(declare-const old__8 Int)
+
+(declare-const oldest8 Int)
+
+(declare-const temp7 Int)
+
+(declare-const i8 Int)
+
+(declare-const old__9 int__ref)
+
+(declare-const oldest9 int__ref)
+
+(declare-const temp8 int__ref)
+
+(declare-const i9 int__ref)
+
+(declare-const old__10 Int)
+
+(declare-const oldest10 Int)
+
+(declare-const temp9 Int)
+
+(declare-const i10 Int)
+
+(declare-const result8 int__ref)
+
+(declare-const result__2 Int)
+
+(declare-const result__3 int__ref)
+
+(declare-const old__11 int__ref)
+
+(declare-const oldest11 int__ref)
+
+(declare-const temp10 int__ref)
+
+(declare-const i11 int__ref)
+
+(declare-const result__4 Int)
+
+(declare-const old__12 Int)
+
+(declare-const oldest12 Int)
+
+(declare-const temp11 Int)
+
+(declare-const i12 Int)
+
+(declare-const result9 int__ref)
+
+(declare-const number_theory__fibonacci__result1 Int)
+
+(declare-const number_theory__fibonacci__result2 int__ref)
+
+(declare-const number_theory__fibonacci__result3 Int)
+
+(declare-const result__5 int__ref)
+
+(declare-const old__13 int__ref)
+
+(declare-const oldest13 int__ref)
+
+(declare-const temp12 int__ref)
+
+(declare-const i13 int__ref)
+
+(declare-const number_theory__fibonacci__result4 int__ref)
+
+(declare-const result__6 Int)
+
+(declare-const old__14 Int)
+
+(declare-const oldest14 Int)
+
+(declare-const temp13 Int)
+
+(declare-const i14 Int)
+
+(declare-const number_theory__fibonacci__result5 Int)
 
 ;; H
   (assert (in_range4 n))
@@ -356,66 +502,67 @@
   (assert (=> (<= 0 2147483647) (in_range2 temp)))
 
 ;; H
-  (assert (not (not (not (= n 0)))))
+  (assert (not (= n 0)))
 
 ;; H
   (assert (not (= n 1)))
 
 ;; H
-  (assert (= (mk_int__ref result) (mk_int__ref oldest)))
+  (assert (= (mk_int__ref result1) (mk_int__ref oldest)))
 
 ;; H
-  (assert (= oldest1 0))
+  (assert (= oldest2 0))
 
 ;; H
-  (assert (= (mk_int__ref result1) (mk_int__ref old__)))
+  (assert (= (mk_int__ref result2) (mk_int__ref old__)))
 
 ;; H
-  (assert (= old__1 1))
+  (assert (= old__2 1))
 
 ;; H
-  (assert (= (mk_int__ref result2) (mk_int__ref i)))
+  (assert (= (mk_int__ref result3) (mk_int__ref i)))
 
 ;; H
-  (assert (= i1 2))
+  (assert (= i2 2))
 
 ;; H
-  (assert (<= 2 i1))
+  (assert (<= 2 i2))
 
 ;; H
-  (assert (<= i1 n))
+  (assert (<= i2 n))
 
 ;; H
-  (assert (and (= old__2 (fib (- i2 1))) (= oldest2 (fib (- i2 2)))))
-
-;; H
-  (assert
-  (and
-  (and
-  (and
-  (and (=> (<= 2 n) (dynamic_property 2 n i2))
-  (=> (<= 1 2147483647) (in_range3 old__2)))
-  (=> (<= 0 2147483647) (in_range2 oldest2)))
-  (=> (<= 0 2147483647) (in_range2 temp1))) (and (<= 2 i2) (<= i2 n))))
-
-;; H
-  (assert (and (= o (- i2 2)) (in_range4 (- i2 2))))
+  (assert (and (= old__3 (fib (- i3 1))) (= oldest3 (fib (- i3 2)))))
 
 ;; H
   (assert
-  (and (= o1 (fib o))
-  (and (in_range2 o1)
-  (and (= o1 (ite (or (= o 0) (= o 1)) o (+ (fib (- o 1)) (fib (- o 2)))))
-  (fp.lt (of_int1 RNE o1) (fp.add RNE (fp.div RNE (power
+  (and
+  (and
+  (and
+  (and (=> (<= 2 n) (dynamic_property 2 n i3))
+  (=> (<= 1 2147483647) (in_range3 old__3)))
+  (=> (<= 0 2147483647) (in_range2 oldest3)))
+  (=> (<= 0 2147483647) (in_range2 temp2))) (and (<= 2 i3) (<= i3 n))))
+
+;; H
+  (assert (and (= o1 (- i3 2)) (in_range4 (- i3 2))))
+
+;; H
+  (assert
+  (and (= o2 (fib o1))
+  (and (in_range2 o2)
+  (and
+  (= o2 (ite (or (= o1 0) (= o1 1)) o1 (+ (fib (- o1 1)) (fib (- o1 2)))))
+  (fp.lt (of_int1 RNE o2) (fp.add RNE (fp.div RNE (power
                                                   (fp #b0 #b01111111 #b10011110001110111100111)
-                                                  o) (fp #b0 #b10000000 #b00011110001101010100000)) (fp #b0 #b01111111 #b00000000000000000000000)))))))
+                                                  o1) (fp #b0 #b10000000 #b00011110001101010100000)) (fp #b0 #b01111111 #b00000000000000000000000)))))))
 
 ;; H
-  (assert (= o2 (ite (= oldest2 o1) true false)))
+  (assert (= o3 (ite (= oldest3 o2) true false)))
 
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (in_range4 (- i2 1))))
+  (not (in_range4 (- i3 1))))
 (check-sat)
 (exit)

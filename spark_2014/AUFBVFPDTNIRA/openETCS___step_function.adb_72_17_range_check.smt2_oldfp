@@ -1516,6 +1516,30 @@
 
 (declare-const i Int)
 
+(declare-const scan Bool)
+
+(declare-const o Int)
+
+(declare-const i1 Int)
+
+(declare-const scan1 Bool)
+
+(declare-const result Int)
+
+(declare-const i2 Int)
+
+(declare-const result1 Bool)
+
+(declare-const scan2 Bool)
+
+(declare-const i3 Int)
+
+(declare-const scan3 Bool)
+
+(declare-const i4 Int)
+
+(declare-const scan4 Bool)
+
 ;; H
   (assert (in_range1 i))
 

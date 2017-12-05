@@ -2584,6 +2584,34 @@
 
 (declare-const z3 t)
 
+(declare-const u t2)
+
+(declare-const o Int)
+
+(declare-const o1 Int)
+
+(declare-const o2 Int)
+
+(declare-const o3 Int)
+
+(declare-const o4 Int)
+
+(declare-const o5 Int)
+
+(declare-const o6 t2)
+
+(declare-const o7 t2)
+
+(declare-const o8 t2)
+
+(declare-const o9 t2)
+
+(declare-const o10 t2)
+
+(declare-const o11 t2)
+
+(declare-const o12 t2)
+
 (declare-const result t)
 
 (declare-const z11 t)
@@ -2595,6 +2623,50 @@
 (declare-const result2 t)
 
 (declare-const z31 t)
+
+(declare-const result3 Int)
+
+(declare-const y11 Int)
+
+(declare-const result4 Int)
+
+(declare-const y21 Int)
+
+(declare-const result5 Int)
+
+(declare-const y31 Int)
+
+(declare-const result6 Int)
+
+(declare-const y32 Int)
+
+(declare-const result7 t2)
+
+(declare-const u1 t2)
+
+(declare-const result8 t2)
+
+(declare-const u2 t2)
+
+(declare-const result9 t2)
+
+(declare-const u3 t2)
+
+(declare-const result10 t2)
+
+(declare-const u4 t2)
+
+(declare-const result11 t2)
+
+(declare-const u5 t2)
+
+(declare-const result12 t2)
+
+(declare-const u6 t2)
+
+(declare-const result13 t2)
+
+(declare-const u7 t2)
 
 ;; H
   (assert (and (<= (- 80) (to_fixed1 x)) (<= (to_fixed1 x) 80)))

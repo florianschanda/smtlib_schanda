@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -65,24 +65,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort float 0)
@@ -310,16 +310,6 @@
 
 (declare-const interval__make__result12 us_rep)
 
-(define-fun interval__make__result13 () us_rep (mk___rep
-                                               (mk___split_fields
-                                               interval__make__result4
-                                               interval__make__result5)))
-
-(define-fun interval__make__result14 () us_rep (mk___rep
-                                               (mk___split_fields
-                                               interval__make__result2
-                                               interval__make__result3)))
-
 ;; H
   (assert (fp.isFinite32 low))
 
@@ -328,98 +318,49 @@
 
 ;; H
   (assert
+  (and
+  (and
   (= interval__make__result9 (mk_interval__ref
                              (mk___rep
                              (mk___split_fields interval__make__result6
-                             interval__make__result7)))))
-
-;; H
-  (assert (= interval__make__result10 interval__make__result8))
-
-;; H
-  (assert
-  (=> (fp.leq low high) (= interval__make__result6 interval__make__result2)))
-
-;; H
-  (assert
-  (=> (fp.leq low high) (= interval__make__result7 interval__make__result3)))
-
-;; H
-  (assert
-  (=> (fp.leq low high) (= interval__make__result8 interval__make__result14)))
-
-;; H
-  (assert (=> (fp.leq low high) (= (to_rep o) high)))
-
-;; H
-  (assert (=> (fp.leq low high) (= (to_rep o1) low)))
-
-;; H
-  (assert (=> (fp.leq low high) (= o1 o2)))
-
-;; H
-  (assert (=> (fp.leq low high) (= o o3)))
-
-;; H
-  (assert (=> (fp.leq low high) (= o4 o2)))
-
-;; H
-  (assert (=> (fp.leq low high) (= o5 o3)))
-
-;; H
-  (assert (=> (fp.leq low high) (= result interval__make__result)))
-
-;; H
-  (assert (=> (fp.leq low high) (= result1 interval__make__result1)))
-
-;; H
-  (assert
-  (=> (fp.leq low high)
-  (= interval__make__result14 (mk___rep (mk___split_fields o4 o5)))))
-
-;; H
-  (assert
-  (=> (not (fp.leq low high))
-  (= interval__make__result6 interval__make__result4)))
-
-;; H
-  (assert
-  (=> (not (fp.leq low high))
-  (= interval__make__result7 interval__make__result5)))
-
-;; H
-  (assert
-  (=> (not (fp.leq low high))
-  (= interval__make__result8 interval__make__result13)))
-
-;; H
-  (assert (=> (not (fp.leq low high)) (= (to_rep o6) low)))
-
-;; H
-  (assert (=> (not (fp.leq low high)) (= (to_rep o7) high)))
-
-;; H
-  (assert (=> (not (fp.leq low high)) (= o7 o8)))
-
-;; H
-  (assert (=> (not (fp.leq low high)) (= o6 o9)))
-
-;; H
-  (assert (=> (not (fp.leq low high)) (= o10 o8)))
-
-;; H
-  (assert (=> (not (fp.leq low high)) (= o11 o9)))
-
-;; H
-  (assert (=> (not (fp.leq low high)) (= result2 interval__make__result)))
-
-;; H
-  (assert (=> (not (fp.leq low high)) (= result3 interval__make__result1)))
-
-;; H
-  (assert
-  (=> (not (fp.leq low high))
-  (= interval__make__result13 (mk___rep (mk___split_fields o10 o11)))))
+                             interval__make__result7))))
+  (= interval__make__result10 interval__make__result8))
+  (ite (fp.leq low high)
+  (and
+  (and
+  (and (= interval__make__result6 interval__make__result2)
+  (= interval__make__result7 interval__make__result3))
+  (= interval__make__result8 (mk___rep
+                             (mk___split_fields interval__make__result2
+                             interval__make__result3))))
+  (and
+  (and
+  (and (= (to_rep o) high)
+  (and (= (to_rep o1) low) (and (= o1 o2) (= o o3))))
+  (and (= o4 o2) (= o5 o3)))
+  (and
+  (and (= result interval__make__result) (= result1 interval__make__result1))
+  (= (mk___rep
+     (mk___split_fields interval__make__result2 interval__make__result3))
+  (mk___rep (mk___split_fields o4 o5))))))
+  (and
+  (and
+  (and (= interval__make__result6 interval__make__result4)
+  (= interval__make__result7 interval__make__result5))
+  (= interval__make__result8 (mk___rep
+                             (mk___split_fields interval__make__result4
+                             interval__make__result5))))
+  (and
+  (and
+  (and (= (to_rep o6) low)
+  (and (= (to_rep o7) high) (and (= o7 o8) (= o6 o9))))
+  (and (= o10 o8) (= o11 o9)))
+  (and
+  (and (= result2 interval__make__result)
+  (= result3 interval__make__result1))
+  (= (mk___rep
+     (mk___split_fields interval__make__result4 interval__make__result5))
+  (mk___rep (mk___split_fields o10 o11)))))))))
 
 ;; H
   (assert (= interval__make__result11 interval__make__result9))

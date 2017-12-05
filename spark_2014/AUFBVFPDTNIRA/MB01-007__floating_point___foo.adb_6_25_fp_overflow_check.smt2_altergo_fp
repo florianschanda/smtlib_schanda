@@ -1073,9 +1073,22 @@ logic c : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+axiom H : tqtisFinite(a)
+
+axiom H1 : tqtisFinite(b)
+
+axiom H2 : tqtisFinite(c)
+
+axiom H3 : ((o = add(NearestTiesToEven, a, b)) and
+  tqtisFinite(add(NearestTiesToEven, a, b)))
+
+axiom H4 : (o1 = add(NearestTiesToEven, o, c))
+
  (* File "foo.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:t. forall o1:t. (tqtisFinite(a) -> (tqtisFinite(b) ->
-  (tqtisFinite(c) -> ((((o = add(NearestTiesToEven, a, b)) and
-  tqtisFinite(add(NearestTiesToEven, a, b))) and (o1 = add(NearestTiesToEven,
-  o, c))) -> tqtisFinite(o1))))))
+goal WP_parameter_def : tqtisFinite(o1)

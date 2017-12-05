@@ -2317,6 +2317,8 @@
 
 (declare-const o8 t1)
 
+(declare-const o9 t1)
+
 ;; H
   (assert (and (= temp___1371 (f Tuple0)) (in_range3 temp___1371)))
 

@@ -1141,31 +1141,6 @@
                                      (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_57)))
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 5.0)))
-
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 10.0)))
-
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 4.0)))
-
-(declare-const fliteral6 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) 6.0)))
-
 (declare-const z t)
 
 (declare-const o t)
@@ -1201,6 +1176,31 @@
 ;; H
   (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite z)))
 
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 5.0)))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 10.0)))
+
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 4.0)))
+
+(declare-const fliteral6 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) 6.0)))
+
 ;; H
   (assert
   (and
@@ -1214,40 +1214,19 @@
   a)) (le b c)))
 
 ;; H
-  (assert (lt a b))
-
-;; H
-  (assert (eq c fliteral3))
-
-;; H
-  (assert (and (le fliteral2 d) (le d fliteral4)))
-
-;; H
-  (assert (and (= o (add RNE1 a b)) (tqtisFinite (add RNE1 a b))))
-
-;; H
-  (assert (= o1 (add RNE1 o c)))
-
-;; H
-  (assert (and (= o2 o1) (tqtisFinite o1)))
-
-;; H
-  (assert (= o3 (add RNE1 o2 d)))
-
-;; H
-  (assert (and (= o4 o3) (tqtisFinite o3)))
-
-;; H
-  (assert (= result z))
-
-;; H
-  (assert (= z1 o4))
-
-;; H
-  (assert (= z1 z2))
-
-;; H
-  (assert (= z3 z1))
+  (assert
+  (and
+  (and (lt a b)
+  (and (eq c fliteral3)
+  (and (and (le fliteral2 d) (le d fliteral4))
+  (and
+  (and
+  (and
+  (and
+  (and (and (= o (add RNE1 a b)) (tqtisFinite (add RNE1 a b)))
+  (= o1 (add RNE1 o c))) (and (= o2 o1) (tqtisFinite o1)))
+  (= o3 (add RNE1 o2 d))) (and (= o4 o3) (tqtisFinite o3)))
+  (and (= result z) (= z1 o4)))))) (and (= z1 z2) (= z3 z1))))
 
 (assert
 ;; WP_parameter_def

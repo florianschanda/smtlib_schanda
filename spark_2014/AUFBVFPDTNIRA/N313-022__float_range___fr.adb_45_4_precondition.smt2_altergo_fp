@@ -1115,5 +1115,73 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic x : t
+
+logic y : t
+
+logic z : t
+
+logic result : t
+
+logic x1 : t
+
+logic result1 : t
+
+logic y1 : t
+
+logic result2 : t
+
+logic z1 : t
+
+logic z2 : t
+
+logic result3 : t
+
+logic x2 : t
+
+logic z3 : t
+
+logic result4 : t
+
+logic x3 : t
+
+logic z4 : t
+
+logic result5 : t
+
+logic y2 : t
+
+logic z5 : t
+
+axiom H : (le(fliteral1, fliteral2) -> in_range1(x))
+
+axiom H1 : (le(fliteral1, fliteral2) -> in_range1(y))
+
+axiom H2 : (le(fliteral3, fliteral4) -> in_range2(z))
+
+axiom H3 : (result = x)
+
+axiom H4 : (x1 = fliteral2)
+
+axiom H5 : (result1 = y)
+
+axiom H6 : (y1 = fliteral2)
+
+axiom H7 : (result2 = z)
+
+axiom H8 : (z1 = fliteral3)
+
+axiom H9 : in_range2(z2)
+
+axiom H10 : (result3 = x1)
+
+axiom H11 : (x2 = fliteral1)
+
+axiom H12 : in_range2(z3)
+
+axiom H13 : (result4 = x2)
+
+axiom H14 : (x3 = fliteral2)
+
  (* File "fr.adb", line 8, characters 0-0 *)
 goal WP_parameter_def : true

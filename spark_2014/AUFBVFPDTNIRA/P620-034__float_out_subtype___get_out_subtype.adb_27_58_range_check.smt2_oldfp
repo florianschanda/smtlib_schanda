@@ -1153,16 +1153,25 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) (/ 0.0 10.0))))
-
 (declare-const roll_rate_desired t)
 
 (declare-const pitch_rate_desired t)
 
 (declare-const yaw_rate_desired t)
+
+(declare-const o t)
+
+(declare-const get_out_subtype__controller_get_desired_rate__pitch_rate_desired t)
+
+(declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const o3 t_rate)
+
+(declare-const o4 t)
+
+(declare-const o5 t)
 
 (declare-const result t)
 
@@ -1176,6 +1185,20 @@
 
 (declare-const yaw_rate_desired1 t)
 
+(declare-const get_out_subtype__controller_get_desired_rate__yaw_rate_desired t)
+
+(declare-const get_out_subtype__controller_get_desired_rate__pitch_rate_desired1 t)
+
+(declare-const get_out_subtype__controller_get_desired_rate__roll_rate_desired t)
+
+(declare-const result3 t)
+
+(declare-const roll_rate_desired2 t)
+
+(declare-const result4 t)
+
+(declare-const pitch_rate_desired2 t)
+
 ;; H
   (assert (tqtisFinite x))
 
@@ -1187,6 +1210,11 @@
 
 ;; H
   (assert (= result roll_rate_desired))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) (/ 0.0 10.0))))
 
 ;; H
   (assert (= roll_rate_desired1 fliteral3))

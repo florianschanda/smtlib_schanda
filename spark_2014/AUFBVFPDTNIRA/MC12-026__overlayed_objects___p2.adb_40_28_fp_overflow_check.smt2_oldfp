@@ -1502,6 +1502,8 @@
 
 (declare-const temp___2701 float)
 
+(declare-const o4 t)
+
 (declare-const result integer)
 
 (declare-const result1 float)

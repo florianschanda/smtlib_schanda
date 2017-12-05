@@ -1203,19 +1203,19 @@
 
 (define-fun bool_eq2 ((a us_rep)
   (b us_rep)) Bool (ite (and
-                        (and
-                        (and
-                        (and
-                        (and
                         (= (rec__depends_legal_2__dis_rec__d
                            (us_split_discrs1 a)) (rec__depends_legal_2__dis_rec__d
                                                  (us_split_discrs1 b)))
+                        (and
+                        (and
+                        (and
+                        (and
                         (=> (depends_legal_2__dis_rec__a__pred a)
                         (= (to_rep
                            (rec__depends_legal_2__dis_rec__a
                            (us_split_fields1 a))) (to_rep
                                                   (rec__depends_legal_2__dis_rec__a
-                                                  (us_split_fields1 b))))))
+                                                  (us_split_fields1 b)))))
                         (=> (depends_legal_2__dis_rec__b__pred a)
                         (= (to_rep
                            (rec__depends_legal_2__dis_rec__b
@@ -1239,7 +1239,7 @@
                            (rec__depends_legal_2__dis_rec__z
                            (us_split_fields1 a))) (to_rep1
                                                   (rec__depends_legal_2__dis_rec__z
-                                                  (us_split_fields1 b))))))
+                                                  (us_split_fields1 b)))))))
                    true false))
 
 (declare-const value__size Int)
@@ -1670,28 +1670,91 @@
                                      (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_51)))
 
-(declare-const fliteral2 t)
+(declare-const rec1__split_discrs Bool)
 
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
+(declare-const par1__split_fields integer)
+
+(declare-const par1__split_fields1 integer)
+
+(declare-const par1__split_fields2 float)
+
+(declare-const par1__split_fields3 float)
+
+(declare-const par1__split_fields4 float)
 
 (declare-const par1__split_discrs Bool)
 
-(declare-const o float)
+(declare-const o integer)
 
-(declare-const o1 float)
+(declare-const o1 integer)
 
-(declare-const o2 float)
+(declare-const o2 integer)
 
 (declare-const o3 integer)
 
-(declare-const o4 integer)
+(declare-const o4 float)
 
 (declare-const o5 float)
 
 (declare-const o6 float)
 
+(declare-const temp___164 Bool)
+
+(declare-const temp___1641 integer)
+
+(declare-const temp___1642 integer)
+
+(declare-const temp___1643 float)
+
+(declare-const temp___1644 float)
+
+(declare-const temp___1645 float)
+
+(declare-const temp___1646 Bool)
+
+(declare-const usq_ Bool)
+
+(declare-const usq_1 integer)
+
+(declare-const usq_2 integer)
+
+(declare-const usq_3 float)
+
+(declare-const usq_4 float)
+
+(declare-const usq_5 float)
+
+(declare-const usq_6 Bool)
+
+(declare-const temp___166 Bool)
+
+(declare-const temp___1661 integer)
+
+(declare-const temp___1662 integer)
+
+(declare-const temp___1663 float)
+
+(declare-const temp___1664 float)
+
+(declare-const temp___1665 float)
+
+(declare-const temp___1666 Bool)
+
 (declare-const o7 float)
+
+(declare-const o8 float)
+
+(declare-const o9 float)
+
+(declare-const o10 integer)
+
+(declare-const o11 integer)
+
+(declare-const o12 float)
+
+(declare-const o13 float)
+
+(declare-const o14 float)
 
 (declare-const temp___161 Bool)
 
@@ -1707,6 +1770,26 @@
 
 (declare-const temp___1616 Bool)
 
+(declare-const usq_7 us_rep)
+
+(declare-const temp___163 us_rep)
+
+(declare-const result us_split_fields__ref)
+
+(declare-const par1__split_fields5 us_split_fields)
+
+(declare-const result1 us_split_discrs__ref)
+
+(declare-const par1__split_discrs1 us_split_discrs)
+
+(declare-const result2 us_split_fields__ref)
+
+(declare-const par1__split_fields6 us_split_fields)
+
+(declare-const result3 us_split_discrs__ref)
+
+(declare-const par1__split_discrs2 us_split_discrs)
+
 ;; H
   (assert (= rec1__attr__constrained false))
 
@@ -1716,47 +1799,52 @@
 ;; H
   (assert (= par1__split_discrs r7b))
 
-;; H
-  (assert (= (to_rep1 o) fliteral2))
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
 
 ;; H
-  (assert (= (to_rep1 o1) fliteral2))
+  (assert (= (to_rep1 o7) fliteral2))
 
 ;; H
-  (assert (= (to_rep1 o2) fliteral2))
+  (assert (= (to_rep1 o8) fliteral2))
 
 ;; H
-  (assert (= dummy o3))
+  (assert (= (to_rep1 o9) fliteral2))
 
 ;; H
-  (assert (= dummy o4))
+  (assert (= dummy o10))
 
 ;; H
-  (assert (= o2 o5))
+  (assert (= dummy o11))
 
 ;; H
-  (assert (= o1 o6))
+  (assert (= o9 o12))
 
 ;; H
-  (assert (= o o7))
+  (assert (= o8 o13))
+
+;; H
+  (assert (= o7 o14))
 
 ;; H
   (assert (= (of_int1 0) temp___161))
 
 ;; H
-  (assert (= temp___1611 o3))
+  (assert (= temp___1611 o10))
 
 ;; H
-  (assert (= temp___1612 o4))
+  (assert (= temp___1612 o11))
 
 ;; H
-  (assert (= temp___1613 o5))
+  (assert (= temp___1613 o12))
 
 ;; H
-  (assert (= temp___1614 o6))
+  (assert (= temp___1614 o13))
 
 ;; H
-  (assert (= temp___1615 o7))
+  (assert (= temp___1615 o14))
 
 ;; H
   (assert (= true temp___1616))

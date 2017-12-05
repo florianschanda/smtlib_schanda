@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -65,24 +65,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
@@ -1015,24 +1015,24 @@
 
 (define-fun bool_eq5 ((a us_rep2)
   (b us_rep2)) Bool (ite (and
-                         (and
                          (= (to_rep8
                             (rec__robot_iface__speed_option__opt
                             (us_split_discrs1 a))) (to_rep8
                                                    (rec__robot_iface__speed_option__opt
                                                    (us_split_discrs1 b))))
+                         (and
                          (=> (robot_iface__speed_option__modulus__pred a)
                          (= (to_rep2
                             (rec__robot_iface__speed_option__modulus
                             (us_split_fields5 a))) (to_rep2
                                                    (rec__robot_iface__speed_option__modulus
-                                                   (us_split_fields5 b))))))
+                                                   (us_split_fields5 b)))))
                          (=> (robot_iface__speed_option__angle__pred a)
                          (= (to_rep2
                             (rec__robot_iface__speed_option__angle
                             (us_split_fields5 a))) (to_rep2
                                                    (rec__robot_iface__speed_option__angle
-                                                   (us_split_fields5 b))))))
+                                                   (us_split_fields5 b)))))))
                     true false))
 
 (declare-const value__size4 Int)
@@ -2769,16 +2769,13 @@
 
 (declare-const algorithm__isrisinggapsafe__B_4__B_6__deltaangle__assume Float32)
 
+(declare-const o2 Float32)
+
 (declare-const result Int)
 
 (declare-const i1 Int)
 
 (declare-const i2 Int)
-
-(define-fun algorithm__isrisinggapsafe__B_4__posgapcorner__assume2 () us_rep1
-  (mk___rep1
-  (mk___split_fields1 algorithm__isrisinggapsafe__B_4__posgapcorner__assume
-  algorithm__isrisinggapsafe__B_4__posgapcorner__assume1)))
 
 ;; H
   (assert
@@ -2795,24 +2792,33 @@
 ;; H
   (assert
   (and
-  (= algorithm__isrisinggapsafe__B_4__posgapcorner__assume2 (create__4
-                                                            (to_rep2
-                                                            (rec__gaps__gap__distance
-                                                            (us_split_fields9
-                                                            risinggap)))
-                                                            (rec__gaps__gap__bearing
-                                                            (us_split_fields9
-                                                            risinggap))))
+  (= (mk___rep1
+     (mk___split_fields1
+     algorithm__isrisinggapsafe__B_4__posgapcorner__assume
+     algorithm__isrisinggapsafe__B_4__posgapcorner__assume1)) (create__4
+                                                              (to_rep2
+                                                              (rec__gaps__gap__distance
+                                                              (us_split_fields9
+                                                              risinggap)))
+                                                              (rec__gaps__gap__bearing
+                                                              (us_split_fields9
+                                                              risinggap))))
   (=>
   (not (fp.eq (to_rep2
               (rec__gaps__gap__distance (us_split_fields9 risinggap))) (fp #b0 #b00000000 #b00000000000000000000000)))
   (not
-  (= (oeq algorithm__isrisinggapsafe__B_4__posgapcorner__assume2
-     zero_position) true)))))
+  (= (oeq
+     (mk___rep1
+     (mk___split_fields1
+     algorithm__isrisinggapsafe__B_4__posgapcorner__assume
+     algorithm__isrisinggapsafe__B_4__posgapcorner__assume1)) zero_position) true)))))
 
 ;; H
   (assert
-  (= algorithm__isrisinggapsafe__B_4__posgapcorner__assume2 posgapcorner))
+  (= (mk___rep1
+     (mk___split_fields1
+     algorithm__isrisinggapsafe__B_4__posgapcorner__assume
+     algorithm__isrisinggapsafe__B_4__posgapcorner__assume1)) posgapcorner))
 
 ;; H
   (assert (= result i))

@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -65,24 +65,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
@@ -279,15 +279,29 @@
 
 (declare-const o1 Float32)
 
+(declare-const o2 Float32)
+
 (declare-const us1 Float32)
 
-(declare-const o2 Float32)
+(declare-const o3 Float32)
 
 (declare-const test_dynamic_property__dyn_param__x Float32)
 
 (declare-const us2 Float32)
 
-(declare-const o3 Float32)
+(declare-const o4 Float32)
+
+(declare-const us3 Float32)
+
+(declare-const o5 Float32)
+
+(declare-const test_dynamic_property__nested__dyn_param__x Float32)
+
+(declare-const us4 Float32)
+
+(declare-const o6 Float32)
+
+(declare-const y1 Float32)
 
 (declare-const result Float32)
 
@@ -303,7 +317,13 @@
 
 (declare-const result2 Float32)
 
-(declare-const y1 Float32)
+(declare-const y2 Float32)
+
+(declare-const test_dynamic_property__nested__dyn_param__x1 Float32)
+
+(declare-const result3 Float32)
+
+(declare-const x4 Float32)
 
 ;; H
   (assert (fp.isFinite32 d))
@@ -380,10 +400,10 @@
   (fp #b0 #b01111111 #b00000000000000000000000) last y)))
 
 ;; H
-  (assert (= o2 y))
+  (assert (= o3 y))
 
 ;; H
-  (assert (= o2 test_dynamic_property__dyn_param__x))
+  (assert (= o3 test_dynamic_property__dyn_param__x))
 
 ;; H
   (assert (dynamic_property (fp #b0 #b01111111 #b00000000000000000000000)
@@ -396,17 +416,17 @@
   test_dynamic_property__dyn_param__x1)))
 
 ;; H
-  (assert (= o3 test_dynamic_property__dyn_param__x1))
+  (assert (= o4 test_dynamic_property__dyn_param__x1))
 
 ;; H
   (assert (= (mk_t__ref result2) (mk_t__ref y)))
 
 ;; H
-  (assert (= y1 o3))
+  (assert (= y2 o4))
 
 (assert
 ;; WP_parameter_def
  ;; File "test_dynamic_property.adb", line 40, characters 0-0
-  (not (fp.leq y1 c)))
+  (not (fp.leq y2 c)))
 (check-sat)
 (exit)

@@ -160,18 +160,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1447,7 +1447,7 @@ type t__ref1 = { t__content1 : t1
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1623,7 +1623,7 @@ function source__ref___3__projection(a: source__ref1) : source1 =
 
 type target1
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq8 : int, int -> bool
 
@@ -1666,24 +1666,52 @@ axiom zero_plus__def_axiom : (zero_plus = convert(of_int(0)))
 
 axiom zero_neg__def_axiom : (zero_neg = convert(of_int(2147483648)))
 
+logic zero_and_min__zero_plus__assume : t1
+
+logic zero_and_min__zero_neg__assume : t1
+
+logic zero_and_min__B3b__x__assume : int
+
+logic zero_and_min__B3b__y__assume : int
+
+axiom H : ((zero_and_min__zero_plus__assume = convert(of_int(0))) and
+  tqtisFinite(zero_and_min__zero_plus__assume))
+
+axiom H1 : (zero_and_min__zero_plus__assume = zero_plus)
+
+axiom H2 : tqtisFinite(zero_plus)
+
+axiom H3 :
+  ((zero_and_min__zero_neg__assume = convert(of_int(2147483648))) and
+  tqtisFinite(zero_and_min__zero_neg__assume))
+
+axiom H4 : (zero_and_min__zero_neg__assume = zero_neg)
+
+axiom H5 : tqtisFinite(zero_neg)
+
+axiom H6 : (zero_plus = c1b)
+
+axiom H7 : tqtisFinite(c1b)
+
+axiom H8 : (zero_neg = c2b)
+
+axiom H9 : tqtisFinite(c2b)
+
+axiom H10 : ((zero_and_min__B3b__x__assume = magic(min1(c1b, c2b))) and
+  in_range2(zero_and_min__B3b__x__assume))
+
+axiom H11 : (zero_and_min__B3b__x__assume = x)
+
+axiom H12 : in_range1(x)
+
+axiom H13 : ((zero_and_min__B3b__y__assume = magic(min1(c2b, c1b))) and
+  in_range2(zero_and_min__B3b__y__assume))
+
+axiom H14 : (zero_and_min__B3b__y__assume = y)
+
+axiom H15 : in_range1(y)
+
+axiom H16 : (not (x = y))
+
  (* File "a-unccon.ads", line 20, characters 0-0 *)
-goal WP_parameter_def :
-  (forall zero_and_min__zero_plus__assume:t1.
-  forall zero_and_min__zero_neg__assume:t1.
-  forall zero_and_min__B3b__x__assume:int.
-  forall zero_and_min__B3b__y__assume:int.
-  ((((zero_and_min__zero_plus__assume = convert(of_int(0))) and
-  tqtisFinite(zero_and_min__zero_plus__assume)) and
-  (zero_and_min__zero_plus__assume = zero_plus)) ->
-  (tqtisFinite(zero_plus) ->
-  ((((zero_and_min__zero_neg__assume = convert(of_int(2147483648))) and
-  tqtisFinite(zero_and_min__zero_neg__assume)) and
-  (zero_and_min__zero_neg__assume = zero_neg)) -> (tqtisFinite(zero_neg) ->
-  (((zero_plus = c1b) and tqtisFinite(c1b)) -> (((zero_neg = c2b) and
-  tqtisFinite(c2b)) -> ((((zero_and_min__B3b__x__assume = magic(min1(c1b,
-  c2b))) and in_range2(zero_and_min__B3b__x__assume)) and
-  (zero_and_min__B3b__x__assume = x)) -> (in_range1(x) ->
-  ((((zero_and_min__B3b__y__assume = magic(min1(c2b, c1b))) and
-  in_range2(zero_and_min__B3b__y__assume)) and
-  (zero_and_min__B3b__y__assume = y)) -> (in_range1(y) -> ((not (x = y)) ->
-  neq(min1(c1b, c2b), min1(c2b, c1b))))))))))))))
+goal WP_parameter_def : neq(min1(c1b, c2b), min1(c2b, c1b))

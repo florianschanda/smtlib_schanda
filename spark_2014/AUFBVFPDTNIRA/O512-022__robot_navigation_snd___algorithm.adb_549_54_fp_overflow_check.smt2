@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -65,24 +65,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
@@ -623,24 +623,24 @@
 
 (define-fun bool_eq2 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
-                         (and
                          (= (to_rep6
                             (rec__robot_iface__speed_option__opt
                             (us_split_discrs1 a))) (to_rep6
                                                    (rec__robot_iface__speed_option__opt
                                                    (us_split_discrs1 b))))
+                         (and
                          (=> (robot_iface__speed_option__modulus__pred a)
                          (= (to_rep4
                             (rec__robot_iface__speed_option__modulus
                             (us_split_fields3 a))) (to_rep4
                                                    (rec__robot_iface__speed_option__modulus
-                                                   (us_split_fields3 b))))))
+                                                   (us_split_fields3 b)))))
                          (=> (robot_iface__speed_option__angle__pred a)
                          (= (to_rep4
                             (rec__robot_iface__speed_option__angle
                             (us_split_fields3 a))) (to_rep4
                                                    (rec__robot_iface__speed_option__angle
-                                                   (us_split_fields3 b))))))
+                                                   (us_split_fields3 b)))))))
                     true false))
 
 (declare-const value__size2 Int)
@@ -2269,15 +2269,19 @@
 
 (declare-const obstacleavoiddelta3 Float32)
 
-(declare-const deltamag4 t__ref)
+(declare-const result8 Int)
 
-(declare-const deltaangle4 t__ref)
+(declare-const i3 Int)
 
-(declare-const deltaareasum4 t__ref)
+(declare-const deltamag4 Float32)
 
-(declare-const obstacleavoiddelta4 t__ref)
+(declare-const deltaangle4 Float32)
 
-(declare-const i3 int__ref)
+(declare-const deltaareasum4 Float32)
+
+(declare-const obstacleavoiddelta4 Float32)
+
+(declare-const i4 int__ref)
 
 (declare-const deltamag5 Float32)
 
@@ -2287,7 +2291,7 @@
 
 (declare-const obstacleavoiddelta5 Float32)
 
-(declare-const i4 Int)
+(declare-const i5 Int)
 
 (declare-const deltamag6 t__ref)
 
@@ -2297,7 +2301,7 @@
 
 (declare-const obstacleavoiddelta6 t__ref)
 
-(declare-const i5 int__ref)
+(declare-const i6 int__ref)
 
 (declare-const deltamag7 Float32)
 
@@ -2307,11 +2311,27 @@
 
 (declare-const obstacleavoiddelta7 Float32)
 
-(declare-const i6 Int)
+(declare-const i7 Int)
 
-(define-fun o15 () us_rep (mk___rep (mk___split_fields o9)))
+(declare-const deltamag8 t__ref)
 
-(define-fun o16 () us_rep (mk___rep (mk___split_fields o8)))
+(declare-const deltaangle8 t__ref)
+
+(declare-const deltaareasum8 t__ref)
+
+(declare-const obstacleavoiddelta8 t__ref)
+
+(declare-const i8 int__ref)
+
+(declare-const deltamag9 Float32)
+
+(declare-const deltaangle9 Float32)
+
+(declare-const deltaareasum9 Float32)
+
+(declare-const obstacleavoiddelta9 Float32)
+
+(declare-const i9 Int)
 
 ;; H
   (assert
@@ -2372,39 +2392,24 @@
 ;; H
   (assert
   (=> (and (<= 1 i1) (<= i1 1000))
+  (and
+  (and
   (= temp___884 (to_rep
                 (rec__robot_iface__proxy__robot_radius
                 (us_split_fields5
-                (rec__algorithm__controller__robot (us_split_fields11 this))))))))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= temp___883 deltaareasum1)))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= temp___882 deltaangle)))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= temp___881 deltamag)))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= temp___880 i1)))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000)) (= temp___879 obstacleavoiddelta1)))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
+                (rec__algorithm__controller__robot (us_split_fields11 this))))))
+  (and (= temp___883 deltaareasum1)
+  (and (= temp___882 deltaangle)
+  (and (= temp___881 deltamag)
+  (and (= temp___880 i1)
+  (and (= temp___879 obstacleavoiddelta1)
+  (and
   (fp.eq (to_rep
          (rec__robot_iface__proxy__robot_radius
          (us_split_fields5
          (rec__algorithm__controller__robot (us_split_fields11 this)))))
-  temp___884)))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
+  temp___884)
+  (and
   (and
   (and
   (and
@@ -2422,11 +2427,10 @@
   (fp.isFinite32 deltaangle2)))
   (=>
   (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111))
-  (in_range2 deltaareasum2))) (and (<= 1 i2) (<= i2 1000)))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
+  (in_range2 deltaareasum2))) (and (<= 1 i2) (<= i2 1000)))
+  (and
+  (and
+  (and
   (and
   (= o (fp.add RNE safetydist (to_rep
                               (rec__robot_iface__proxy__robot_radius
@@ -2437,22 +2441,22 @@
                                         (rec__robot_iface__proxy__robot_radius
                                         (us_split_fields5
                                         (rec__algorithm__controller__robot
-                                        (us_split_fields11 this))))))))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
+                                        (us_split_fields11 this))))))))
   (= result3 (ite (fp.leq (to_rep1
                           (rec__algorithm__laser_scan_data__first
                           (us_split_fields7
                           (select (rec__algorithm__controller__laserscan
                                   (us_split_fields11 this)) i2)))) o)
-             true false))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true)
+             true false)))
+  (ite (= result3 true)
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
   (and
   (= o1 (fp.add RNE safetydist (to_rep
                                (rec__robot_iface__proxy__robot_radius
@@ -2463,289 +2467,157 @@
                                         (rec__robot_iface__proxy__robot_radius
                                         (us_split_fields5
                                         (rec__algorithm__controller__robot
-                                        (us_split_fields11 this)))))))))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true)
+                                        (us_split_fields11 this))))))))
   (= o2 (fp.sub RNE o1 (to_rep1
                        (rec__algorithm__laser_scan_data__first
                        (us_split_fields7
                        (select (rec__algorithm__controller__laserscan
-                               (us_split_fields11 this)) i2)))))))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true) (and (= o3 o2) (fp.isFinite32 o2)))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true) (= o4 (fp.div RNE o3 safetydist)))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true) (and (= o5 o4) (fp.isFinite32 o4)))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true)
+                               (us_split_fields11 this)) i2)))))))
+  (and (= o3 o2) (fp.isFinite32 o2))) (= o4 (fp.div RNE o3 safetydist)))
+  (and (= o5 o4) (fp.isFinite32 o4)))
   (and
   (= o6 (limit o5 (fp #b0 #b00000000 #b00000000000000000000000)
         (fp #b0 #b01111111 #b00000000000000000000000)))
   (and (fp.isFinite32 o6)
   (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) o6)
-  (fp.leq o6 (fp #b0 #b01111111 #b00000000000000000000000))))))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true) (and (= o7 o6) (fp.isFinite32 o6)))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true) (= deltamag2 result4))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000)) (=> (= result3 true) (= deltamag3 o7))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true)
-  (= o16 (create__2 (fp #b0 #b10000000 #b10010010000111111011011))))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true)
-  (= o15 (oadd
-         (rec__algorithm__laser_scan_data__second
-         (us_split_fields7
-         (select (rec__algorithm__controller__laserscan
-                 (us_split_fields11 this)) i2)))
-         o16)))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true)
+  (fp.leq o6 (fp #b0 #b01111111 #b00000000000000000000000))))))
+  (and (= o7 o6) (fp.isFinite32 o6)))
+  (and (= deltamag2 result4) (= deltamag3 o7)))
+  (and
+  (and
+  (and
+  (and
+  (= (mk___rep (mk___split_fields o8)) (create__2
+                                       (fp #b0 #b10000000 #b10010010000111111011011)))
+  (= (mk___rep (mk___split_fields o9)) (oadd
+                                       (rec__algorithm__laser_scan_data__second
+                                       (us_split_fields7
+                                       (select (rec__algorithm__controller__laserscan
+                                               (us_split_fields11 this))
+                                       i2)))
+                                       (mk___rep (mk___split_fields o8)))))
   (and
   (= o10 (aldiff
          (rec__algorithm__controller__driveangle (us_split_fields11 this))
-         o15))
+         (mk___rep (mk___split_fields o9))))
   (and (fp.isFinite32 o10)
   (and (fp.lt (fp.neg (fp #b0 #b10000000 #b10010010000111111011011))
-  o10) (fp.leq o10 (fp #b0 #b10000000 #b10010010000111111011011))))))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true) (= deltaangle2 result5))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000)) (=> (= result3 true) (= deltaangle3 o10))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true)
+  o10) (fp.leq o10 (fp #b0 #b10000000 #b10010010000111111011011))))))
+  (and (= deltaangle2 result5) (= deltaangle3 o10)))
+  (and
+  (and
   (and (= o11 (fp.add RNE deltaareasum2 (fp.mul RNE deltamag3 deltamag3)))
-  (fp.isFinite32 (fp.add RNE deltaareasum2 (fp.mul RNE deltamag3 deltamag3)))))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true) (= deltaareasum2 result6))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true) (= deltaareasum3 o11))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true)
+  (fp.isFinite32 (fp.add RNE deltaareasum2 (fp.mul RNE deltamag3 deltamag3))))
+  (and (= deltaareasum2 result6) (= deltaareasum3 o11)))
+  (and
+  (and
+  (and
   (and
   (= o12 (fp.mul RNE (fp.mul RNE (fp.mul RNE deltamag3 deltamag3) deltamag3)
   deltaangle3))
   (fp.isFinite32 (fp.mul RNE (fp.mul RNE (fp.mul RNE deltamag3 deltamag3)
-  deltamag3) deltaangle3))))))
+  deltamag3) deltaangle3))) (= o13 (fp.add RNE obstacleavoiddelta2 o12)))
+  (and (= o14 o13) (fp.isFinite32 o13)))
+  (and (= obstacleavoiddelta2 result7) (= obstacleavoiddelta3 o14))))))
+  (and (= obstacleavoiddelta3 obstacleavoiddelta2)
+  (and (= deltaareasum3 deltaareasum2)
+  (and (= deltaangle3 deltaangle2) (= deltamag3 deltamag2)))))) (= i2 1000))))))))))
+  (and
+  (and (= i6 (mk_int__ref i2))
+  (and (= obstacleavoiddelta6 (mk_t__ref obstacleavoiddelta3))
+  (and (= deltaareasum6 (mk_t__ref deltaareasum3))
+  (and (= deltaangle6 (mk_t__ref deltaangle3))
+  (= deltamag6 (mk_t__ref deltamag3))))))
+  (and (= i7 i2)
+  (and (= obstacleavoiddelta7 obstacleavoiddelta3)
+  (and (= deltaareasum7 deltaareasum3)
+  (and (= deltaangle7 deltaangle3) (= deltamag7 deltamag3)))))))))
+
+;; H
+  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= i8 i6)))
 
 ;; H
   (assert
   (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true) (= o13 (fp.add RNE obstacleavoiddelta2 o12)))))
+  (= obstacleavoiddelta8 obstacleavoiddelta6)))
+
+;; H
+  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= deltaareasum8 deltaareasum6)))
+
+;; H
+  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= deltaangle8 deltaangle6)))
+
+;; H
+  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= deltamag8 deltamag6)))
+
+;; H
+  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= i9 i7)))
 
 ;; H
   (assert
   (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true) (and (= o14 o13) (fp.isFinite32 o13)))))
+  (= obstacleavoiddelta9 obstacleavoiddelta7)))
 
 ;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true) (= obstacleavoiddelta2 result7))))
+  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= deltaareasum9 deltaareasum7)))
 
 ;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (= result3 true) (= obstacleavoiddelta3 o14))))
+  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= deltaangle9 deltaangle7)))
 
 ;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (not (= result3 true)) (= obstacleavoiddelta3 obstacleavoiddelta2))))
+  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= deltamag9 deltamag7)))
 
 ;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (not (= result3 true)) (= deltaareasum3 deltaareasum2))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (not (= result3 true)) (= deltaangle3 deltaangle2))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (=> (not (= result3 true)) (= deltamag3 deltamag2))))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= i2 1000)))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= i3 (mk_int__ref i2))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (= obstacleavoiddelta4 (mk_t__ref obstacleavoiddelta3))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (= deltaareasum4 (mk_t__ref deltaareasum3))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000)) (= deltaangle4 (mk_t__ref deltaangle3))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000)) (= deltamag4 (mk_t__ref deltamag3))))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= i4 i2)))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (= obstacleavoiddelta5 obstacleavoiddelta3)))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= deltaareasum5 deltaareasum3)))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= deltaangle5 deltaangle3)))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= deltamag5 deltamag3)))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= i5 i3)))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (= obstacleavoiddelta6 obstacleavoiddelta4)))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= deltaareasum6 deltaareasum4)))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= deltaangle6 deltaangle4)))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= deltamag6 deltamag4)))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= i6 i4)))
-
-;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 1000))
-  (= obstacleavoiddelta7 obstacleavoiddelta5)))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= deltaareasum7 deltaareasum5)))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= deltaangle7 deltaangle5)))
-
-;; H
-  (assert (=> (and (<= 1 i1) (<= i1 1000)) (= deltamag7 deltamag5)))
-
-;; H
-  (assert (=> (not (and (<= 1 i1) (<= i1 1000))) (= i5 (mk_int__ref i1))))
+  (assert (=> (not (and (<= 1 i1) (<= i1 1000))) (= i8 (mk_int__ref i1))))
 
 ;; H
   (assert
   (=> (not (and (<= 1 i1) (<= i1 1000)))
-  (= obstacleavoiddelta6 (mk_t__ref obstacleavoiddelta1))))
+  (= obstacleavoiddelta8 (mk_t__ref obstacleavoiddelta1))))
 
 ;; H
   (assert
   (=> (not (and (<= 1 i1) (<= i1 1000)))
-  (= deltaareasum6 (mk_t__ref deltaareasum1))))
+  (= deltaareasum8 (mk_t__ref deltaareasum1))))
 
 ;; H
   (assert
   (=> (not (and (<= 1 i1) (<= i1 1000)))
-  (= deltaangle6 (mk_t__ref deltaangle))))
+  (= deltaangle8 (mk_t__ref deltaangle))))
 
 ;; H
   (assert
-  (=> (not (and (<= 1 i1) (<= i1 1000))) (= deltamag6 (mk_t__ref deltamag))))
+  (=> (not (and (<= 1 i1) (<= i1 1000))) (= deltamag8 (mk_t__ref deltamag))))
 
 ;; H
-  (assert (=> (not (and (<= 1 i1) (<= i1 1000))) (= i6 i1)))
+  (assert (=> (not (and (<= 1 i1) (<= i1 1000))) (= i9 i1)))
 
 ;; H
   (assert
   (=> (not (and (<= 1 i1) (<= i1 1000)))
-  (= obstacleavoiddelta7 obstacleavoiddelta1)))
+  (= obstacleavoiddelta9 obstacleavoiddelta1)))
 
 ;; H
   (assert
-  (=> (not (and (<= 1 i1) (<= i1 1000))) (= deltaareasum7 deltaareasum1)))
+  (=> (not (and (<= 1 i1) (<= i1 1000))) (= deltaareasum9 deltaareasum1)))
 
 ;; H
   (assert
-  (=> (not (and (<= 1 i1) (<= i1 1000))) (= deltaangle7 deltaangle1)))
+  (=> (not (and (<= 1 i1) (<= i1 1000))) (= deltaangle9 deltaangle1)))
 
 ;; H
-  (assert (=> (not (and (<= 1 i1) (<= i1 1000))) (= deltamag7 deltamag1)))
+  (assert (=> (not (and (<= 1 i1) (<= i1 1000))) (= deltamag9 deltamag1)))
 
 ;; H
   (assert
   (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) (t__content
-                                                       deltaareasum6)))
+                                                       deltaareasum8)))
 
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
   (not
-  (fp.isFinite32 (fp.div RNE (t__content obstacleavoiddelta6) (t__content
-                                                              deltaareasum6)))))
+  (fp.isFinite32 (fp.div RNE (t__content obstacleavoiddelta8) (t__content
+                                                              deltaareasum8)))))
 (check-sat)
 (exit)

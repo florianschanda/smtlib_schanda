@@ -1156,6 +1156,11 @@ logic conv__function_guard : t, int -> prop
 axiom conv__post_axiom :
   (forall s:int [conv(s)]. (in_range2(s) -> tqtisFinite(conv(s))))
 
+logic o : int
+
+axiom H : in_range1(x)
+
+axiom H1 : in_range1(y)
+
  (* File "prover_crash.ads", line 8, characters 0-0 *)
-goal WP_parameter_def : (in_range1(x) -> (in_range1(y) ->
-  in_range2((x + y))))
+goal WP_parameter_def : in_range2((x + y))

@@ -130,17 +130,17 @@
 (define-fun bv_max ((x (_ BitVec 8))
   (y (_ BitVec 8))) (_ BitVec 8) (ite (bvule x y) y x))
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -155,24 +155,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 Float32)))))
 (define-fun to_int3 ((b Bool)) Int (ite (= b true) 1 0))
@@ -486,6 +486,14 @@
 
 (declare-const temp___279 (Array (_ BitVec 8) battery_level_type))
 
+(declare-const o Bool)
+
+(declare-const us Bool)
+
+(declare-const us1 Bool)
+
+(declare-const o1 Bool)
+
 (declare-const battery_level_at1 (Array (_ BitVec 8) battery_level_type))
 
 (declare-const current_time1 (_ BitVec 8))
@@ -496,72 +504,69 @@
 
 (declare-const j1 Int)
 
+(declare-const battery_level_at2 (Array (_ BitVec 8) battery_level_type))
+
 (declare-const current_time2 (_ BitVec 8))
 
 (declare-const j2 Int)
-
-(declare-const battery_level_at2 (Array (_ BitVec 8) battery_level_type))
-
-(declare-const current_time3 (_ BitVec 8))
 
 (declare-const failsafe_state2 us_private)
 
 (declare-const battery_level_at3 (Array (_ BitVec 8) battery_level_type))
 
-(declare-const current_time4 (_ BitVec 8))
-
-(declare-const j3 Int)
+(declare-const current_time3 (_ BitVec 8))
 
 (declare-const failsafe_state3 us_private)
 
 (declare-const battery_level_at4 (Array (_ BitVec 8) battery_level_type))
 
-(declare-const current_time5 (_ BitVec 8))
+(declare-const current_time4 (_ BitVec 8))
 
-(declare-const j4 Int)
+(declare-const j3 Int)
 
 (declare-const failsafe_state4 us_private)
 
 (declare-const battery_level_at5 (Array (_ BitVec 8) battery_level_type))
 
-(declare-const current_time6 (_ BitVec 8))
+(declare-const current_time5 (_ BitVec 8))
 
-(declare-const j5 Int)
+(declare-const j4 Int)
 
 (declare-const failsafe_state5 us_private)
 
 (declare-const battery_level_at6 (Array (_ BitVec 8) battery_level_type))
 
-(declare-const current_time7 (_ BitVec 8))
+(declare-const current_time6 (_ BitVec 8))
 
-(declare-const j6 Int)
+(declare-const j5 Int)
 
 (declare-const failsafe_state6 us_private)
 
 (declare-const battery_level_at7 (Array (_ BitVec 8) battery_level_type))
 
-(declare-const current_time8 (_ BitVec 8))
+(declare-const current_time7 (_ BitVec 8))
+
+(declare-const j6 Int)
 
 (declare-const failsafe_state7 us_private)
 
 (declare-const battery_level_at8 (Array (_ BitVec 8) battery_level_type))
 
-(declare-const current_time9 (_ BitVec 8))
+(declare-const current_time8 (_ BitVec 8))
 
 (declare-const failsafe_state8 us_private)
 
 (declare-const battery_level_at9 (Array (_ BitVec 8) battery_level_type))
 
-(declare-const current_time10 (_ BitVec 8))
+(declare-const current_time9 (_ BitVec 8))
 
 (declare-const failsafe_state9 us_private)
 
-(define-fun failsafe_state10 () us_private__ref (mk___private__ref
-                                                failsafe_state5))
+(declare-const battery_level_at10 (Array (_ BitVec 8) battery_level_type))
 
-(define-fun current_time11 () t__ref (mk_t__ref current_time6))
+(declare-const current_time10 (_ BitVec 8))
 
-(define-fun battery_level_at10 () map__ref (mk_map__ref battery_level_at5))
+(declare-const failsafe_state10 us_private)
 
 ;; H
   (assert (in_range1 current_time))
@@ -587,12 +592,12 @@
   (assert
   (=> (and (<= 1 j1) (<= j1 49))
   (and
-  (and (= (is_valid failsafe_state2 battery_level_at2 current_time3) true)
+  (and (= (is_valid failsafe_state3 battery_level_at3 current_time3) true)
   (and
   (= current_time3 (let ((temp___236 (bvadd current_time2 ((_ int2bv 8) 1))))
                    (ite (bvule (bvsub ((_ int2bv 8) 50) current_time2) ((_ int2bv 8) 1))
                    (bvsub temp___236 ((_ int2bv 8) 50)) temp___236)))
-  (fp.eq (to_rep (select battery_level_at2 current_time3)) (fp #b0 #b01111011 #b10011001100110011001101))))
+  (fp.eq (to_rep (select battery_level_at3 current_time3)) (fp #b0 #b01111011 #b10011001100110011001101))))
   (in_range1 current_time3))))
 
 ;; H
@@ -600,7 +605,7 @@
 
 ;; H
   (assert
-  (=> (and (<= 1 j1) (<= j1 49)) (= failsafe_state2 failsafe_state3)))
+  (=> (and (<= 1 j1) (<= j1 49)) (= failsafe_state3 failsafe_state4)))
 
 ;; H
   (assert (=> (and (<= 1 j1) (<= j1 49)) (= j2 j3)))
@@ -610,11 +615,11 @@
 
 ;; H
   (assert
-  (=> (and (<= 1 j1) (<= j1 49)) (= battery_level_at2 battery_level_at3)))
+  (=> (and (<= 1 j1) (<= j1 49)) (= battery_level_at3 battery_level_at4)))
 
 ;; H
   (assert
-  (=> (and (<= 1 j1) (<= j1 49)) (= failsafe_state4 failsafe_state2)))
+  (=> (and (<= 1 j1) (<= j1 49)) (= failsafe_state5 failsafe_state3)))
 
 ;; H
   (assert (=> (and (<= 1 j1) (<= j1 49)) (= j4 j2)))
@@ -624,12 +629,12 @@
 
 ;; H
   (assert
-  (=> (and (<= 1 j1) (<= j1 49)) (= battery_level_at4 battery_level_at2)))
+  (=> (and (<= 1 j1) (<= j1 49)) (= battery_level_at5 battery_level_at3)))
 
 ;; H
   (assert
   (=> (and (<= 1 j1) (<= j1 49))
-  (= failsafe_state10 (mk___private__ref failsafe_state3))))
+  (= (mk___private__ref failsafe_state6) (mk___private__ref failsafe_state4))))
 
 ;; H
   (assert
@@ -638,16 +643,16 @@
 ;; H
   (assert
   (=> (and (<= 1 j1) (<= j1 49))
-  (= current_time11 (mk_t__ref current_time4))))
+  (= (mk_t__ref current_time6) (mk_t__ref current_time4))))
 
 ;; H
   (assert
   (=> (and (<= 1 j1) (<= j1 49))
-  (= battery_level_at10 (mk_map__ref battery_level_at3))))
+  (= (mk_map__ref battery_level_at6) (mk_map__ref battery_level_at4))))
 
 ;; H
   (assert
-  (=> (and (<= 1 j1) (<= j1 49)) (= failsafe_state6 failsafe_state4)))
+  (=> (and (<= 1 j1) (<= j1 49)) (= failsafe_state7 failsafe_state5)))
 
 ;; H
   (assert (=> (and (<= 1 j1) (<= j1 49)) (= j6 j4)))
@@ -657,12 +662,12 @@
 
 ;; H
   (assert
-  (=> (and (<= 1 j1) (<= j1 49)) (= battery_level_at6 battery_level_at4)))
+  (=> (and (<= 1 j1) (<= j1 49)) (= battery_level_at7 battery_level_at5)))
 
 ;; H
   (assert
   (=> (not (and (<= 1 j1) (<= j1 49)))
-  (= failsafe_state10 (mk___private__ref failsafe_state))))
+  (= (mk___private__ref failsafe_state6) (mk___private__ref failsafe_state))))
 
 ;; H
   (assert (=> (not (and (<= 1 j1) (<= j1 49))) (= j1 j5)))
@@ -670,16 +675,16 @@
 ;; H
   (assert
   (=> (not (and (<= 1 j1) (<= j1 49)))
-  (= current_time11 (mk_t__ref current_time))))
+  (= (mk_t__ref current_time6) (mk_t__ref current_time))))
 
 ;; H
   (assert
   (=> (not (and (<= 1 j1) (<= j1 49)))
-  (= battery_level_at10 (mk_map__ref battery_level_at))))
+  (= (mk_map__ref battery_level_at6) (mk_map__ref battery_level_at))))
 
 ;; H
   (assert
-  (=> (not (and (<= 1 j1) (<= j1 49))) (= failsafe_state6 failsafe_state1)))
+  (=> (not (and (<= 1 j1) (<= j1 49))) (= failsafe_state7 failsafe_state1)))
 
 ;; H
   (assert (=> (not (and (<= 1 j1) (<= j1 49))) (= j6 j1)))
@@ -691,57 +696,58 @@
 ;; H
   (assert
   (=> (not (and (<= 1 j1) (<= j1 49)))
-  (= battery_level_at6 battery_level_at1)))
+  (= battery_level_at7 battery_level_at1)))
 
 ;; H
   (assert
-  (not (= (is_raised failsafe_state5 battery_level_at5 current_time6) true)))
+  (not (= (is_raised failsafe_state6 battery_level_at6 current_time6) true)))
 
 ;; H
   (assert
   (and
-  (and (= (is_valid failsafe_state7 battery_level_at7 current_time8) true)
+  (and (= (is_valid failsafe_state8 battery_level_at8 current_time8) true)
   (and
   (= current_time8 (let ((temp___236 (bvadd current_time6 ((_ int2bv 8) 1))))
                    (ite (bvule (bvsub ((_ int2bv 8) 50) current_time6) ((_ int2bv 8) 1))
                    (bvsub temp___236 ((_ int2bv 8) 50)) temp___236)))
-  (fp.eq (to_rep (select battery_level_at7 current_time8)) (fp #b0 #b01111011 #b10011001100110011001101))))
+  (fp.eq (to_rep (select battery_level_at8 current_time8)) (fp #b0 #b01111011 #b10011001100110011001101))))
   (in_range1 current_time8)))
 
 ;; H
   (assert
-  (= (is_raised failsafe_state7 battery_level_at7 current_time8) true))
+  (= (is_raised failsafe_state8 battery_level_at8 current_time8) true))
 
 ;; H
   (assert
   (and
-  (and (= (is_valid failsafe_state8 battery_level_at8 current_time9) true)
+  (and (= (is_valid failsafe_state9 battery_level_at9 current_time9) true)
   (and
   (= current_time9 (let ((temp___236 (bvadd current_time8 ((_ int2bv 8) 1))))
                    (ite (bvule (bvsub ((_ int2bv 8) 50) current_time8) ((_ int2bv 8) 1))
                    (bvsub temp___236 ((_ int2bv 8) 50)) temp___236)))
-  (fp.eq (to_rep (select battery_level_at8 current_time9)) (fp #b0 #b01111011 #b10011001100110011001101))))
+  (fp.eq (to_rep (select battery_level_at9 current_time9)) (fp #b0 #b01111011 #b10011001100110011001101))))
   (in_range1 current_time9)))
 
 ;; H
   (assert
-  (= (is_raised failsafe_state8 battery_level_at8 current_time9) true))
+  (= (is_raised failsafe_state9 battery_level_at9 current_time9) true))
 
 ;; H
   (assert
   (and
-  (and (= (is_valid failsafe_state9 battery_level_at9 current_time10) true)
+  (and (= (is_valid failsafe_state10 battery_level_at10 current_time10) true)
   (and
   (= current_time10 (let ((temp___236 (bvadd current_time9 ((_ int2bv 8) 1))))
                     (ite (bvule (bvsub ((_ int2bv 8) 50) current_time9) ((_ int2bv 8) 1))
                     (bvsub temp___236 ((_ int2bv 8) 50)) temp___236)))
-  (fp.eq (to_rep (select battery_level_at9 current_time10)) (fp #b0 #b01111111 #b00000000000000000000000))))
+  (fp.eq (to_rep (select battery_level_at10 current_time10)) (fp #b0 #b01111111 #b00000000000000000000000))))
   (in_range1 current_time10)))
 
 (assert
 ;; WP_parameter_def
  ;; File "failsafe.ads", line 20, characters 0-0
   (not
-  (not (= (is_raised failsafe_state9 battery_level_at9 current_time10) true))))
+  (not
+  (= (is_raised failsafe_state10 battery_level_at10 current_time10) true))))
 (check-sat)
 (exit)

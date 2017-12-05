@@ -1125,6 +1125,22 @@
                                      (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_51)))
 
+(declare-const foo__float_tests__underflow_2__result Bool)
+
+(declare-const o t)
+
+(declare-const result Bool)
+
+(declare-const foo__float_tests__underflow_2__result1 Bool)
+
+(declare-const foo__float_tests__underflow_2__result2 Bool)
+
+(declare-const foo__float_tests__underflow_2__result3 Bool)
+
+(declare-const foo__float_tests__underflow_2__result4 Bool)
+
+(declare-const foo__float_tests__underflow_2__result5 Bool)
+
 ;; H
   (assert (tqtisFinite a))
 

@@ -1150,23 +1150,11 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral5)
-  (= (tqtreal fliteral5) (/ 23299999237060546875000.0 10000000000000000000000.0))))
-
-(declare-const fliteral6 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral6)
-  (= (tqtreal fliteral6) (/ 23399999141693115234375.0 10000000000000000000000.0))))
-
 (declare-const x t)
 
 (declare-const z t)
+
+(declare-const o t)
 
 (declare-const result t)
 
@@ -1181,8 +1169,22 @@
 ;; H
   (assert (= result z))
 
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral5)
+  (= (tqtreal fliteral5) (/ 23299999237060546875000.0 10000000000000000000000.0))))
+
 ;; H
   (assert (= z1 (mul RNE1 fliteral5 x)))
+
+(declare-const fliteral6 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral6)
+  (= (tqtreal fliteral6) (/ 23399999141693115234375.0 10000000000000000000000.0))))
 
 (assert
 ;; WP_parameter_def

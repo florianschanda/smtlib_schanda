@@ -1523,7 +1523,35 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic i : int
+
+logic scan : bool
+
+logic o : int
+
+logic i1 : int
+
+logic scan1 : bool
+
+logic result : int
+
+logic i2 : int
+
+logic result1 : bool
+
+logic scan2 : bool
+
+logic i3 : int
+
+logic scan3 : bool
+
+logic i4 : int
+
+logic scan4 : bool
+
+axiom H : in_range1(i)
+
+axiom H1 : (i <  to_rep(sfun))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. (in_range1(i) -> ((i <  to_rep(sfun)) ->
-  in_range1((i + 1)))))
+goal WP_parameter_def : in_range1((i + 1))

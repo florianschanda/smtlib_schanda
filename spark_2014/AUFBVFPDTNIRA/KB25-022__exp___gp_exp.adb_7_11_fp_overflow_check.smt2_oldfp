@@ -1201,6 +1201,8 @@
 
 (declare-const o3 Int)
 
+(declare-const o4 t)
+
 (declare-const result Int)
 
 (declare-const a1 Int)

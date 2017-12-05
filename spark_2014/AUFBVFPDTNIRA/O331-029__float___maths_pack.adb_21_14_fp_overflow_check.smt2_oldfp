@@ -1240,12 +1240,12 @@
 (define-fun source__ref___projection ((a source__ref)) source (source__content
                                                               a))
 
-(define-fun dynamic_invariant2 ((temp___expr_1348 t)
-  (temp___is_init_1345 Bool) (temp___skip_constant_1346 Bool)
-  (temp___do_toplevel_1347 Bool)) Bool (=>
-                                       (or (= temp___is_init_1345 true) (le
+(define-fun dynamic_invariant2 ((temp___expr_1342 t)
+  (temp___is_init_1339 Bool) (temp___skip_constant_1340 Bool)
+  (temp___do_toplevel_1341 Bool)) Bool (=>
+                                       (or (= temp___is_init_1339 true) (le
                                        (neg fliteral1) fliteral1))
-                                       (tqtisFinite temp___expr_1348)))
+                                       (tqtisFinite temp___expr_1342)))
 
 (declare-sort target 0)
 
@@ -1266,9 +1266,9 @@
 (define-fun target__ref___projection ((a target__ref)) target (target__content
                                                               a))
 
-(define-fun dynamic_invariant3 ((temp___expr_1354 (_ BitVec 32))
-  (temp___is_init_1351 Bool) (temp___skip_constant_1352 Bool)
-  (temp___do_toplevel_1353 Bool)) Bool true)
+(define-fun dynamic_invariant3 ((temp___expr_1348 (_ BitVec 32))
+  (temp___is_init_1345 Bool) (temp___skip_constant_1346 Bool)
+  (temp___do_toplevel_1347 Bool)) Bool true)
 
 (declare-fun float_to_unsigned_32 (t) (_ BitVec 32))
 
@@ -1300,9 +1300,9 @@
 (define-fun source__ref___2__projection ((a source__ref1)) source1 (source__content1
                                                                    a))
 
-(define-fun dynamic_invariant4 ((temp___expr_1360 (_ BitVec 32))
-  (temp___is_init_1357 Bool) (temp___skip_constant_1358 Bool)
-  (temp___do_toplevel_1359 Bool)) Bool true)
+(define-fun dynamic_invariant4 ((temp___expr_1354 (_ BitVec 32))
+  (temp___is_init_1351 Bool) (temp___skip_constant_1352 Bool)
+  (temp___do_toplevel_1353 Bool)) Bool true)
 
 (declare-sort target1 0)
 
@@ -1323,12 +1323,12 @@
 (define-fun target__ref___2__projection ((a target__ref1)) target1 (target__content1
                                                                    a))
 
-(define-fun dynamic_invariant5 ((temp___expr_1366 t)
-  (temp___is_init_1363 Bool) (temp___skip_constant_1364 Bool)
-  (temp___do_toplevel_1365 Bool)) Bool (=>
-                                       (or (= temp___is_init_1363 true) (le
+(define-fun dynamic_invariant5 ((temp___expr_1360 t)
+  (temp___is_init_1357 Bool) (temp___skip_constant_1358 Bool)
+  (temp___do_toplevel_1359 Bool)) Bool (=>
+                                       (or (= temp___is_init_1357 true) (le
                                        (neg fliteral1) fliteral1))
-                                       (tqtisFinite temp___expr_1366)))
+                                       (tqtisFinite temp___expr_1360)))
 
 (declare-fun unsigned_32_to_float ((_ BitVec 32)) t)
 
@@ -1341,27 +1341,6 @@
      (unsigned_32_to_float s) true false true)) :pattern ((unsigned_32_to_float
                                                           s)) )))
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral2)
-  (= (tqtreal fliteral2) (/ 14012984643248170709237295832899161312802619418765157717570682838897910826858606014866381883621215820312500000000000000000000000.0 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.0))))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral3)
-  (= (tqtreal fliteral3) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
-
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral4)
-  (= (tqtreal fliteral4) (/ 150000000000000000000000.0 100000000000000000000000.0))))
-
 (declare-const half_x t)
 
 (declare-const y t)
@@ -1369,6 +1348,8 @@
 (declare-const magic_num (_ BitVec 32))
 
 (declare-const i (_ BitVec 32))
+
+(declare-const maths_pack__inv_sqrt__result t)
 
 (declare-const o (_ BitVec 32))
 
@@ -1385,6 +1366,8 @@
 (declare-const o6 t)
 
 (declare-const o7 t)
+
+(declare-const o8 t)
 
 (declare-const result t)
 
@@ -1410,14 +1393,60 @@
 
 (declare-const y2 t)
 
+(declare-const result6 t)
+
+(declare-const y3 t)
+
+(declare-const result7 t)
+
+(declare-const maths_pack__inv_sqrt__result1 t)
+
+(declare-const maths_pack__inv_sqrt__result2 t)
+
+(declare-const maths_pack__inv_sqrt__result3 t)
+
+(declare-const half_x2 t)
+
+(declare-const y4 t)
+
+(declare-const magic_num2 (_ BitVec 32))
+
+(declare-const i3 (_ BitVec 32))
+
+(declare-const maths_pack__inv_sqrt__result4 t)
+
+(declare-const half_x3 t)
+
+(declare-const y5 t)
+
+(declare-const magic_num3 (_ BitVec 32))
+
+(declare-const i4 (_ BitVec 32))
+
+(declare-const maths_pack__inv_sqrt__result5 t)
+
 ;; H
   (assert (tqtisFinite x))
+
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral2)
+  (= (tqtreal fliteral2) (/ 14012984643248170709237295832899161312802619418765157717570682838897910826858606014866381883621215820312500000000000000000000000.0 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.0))))
 
 ;; H
   (assert (le fliteral2 x))
 
 ;; H
   (assert (= (mk_t__ref1 result) (mk_t__ref1 half_x)))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral3)
+  (= (tqtreal fliteral3) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
 
 ;; H
   (assert (= half_x1 (mul RNE1 fliteral3 x)))
@@ -1439,6 +1468,12 @@
 
 ;; H
   (assert (= magic_num1 ((_ int2bv 32) 1597463007)))
+
+;; H
+  (assert true)
+
+;; H
+  (assert true)
 
 ;; H
   (assert (= o (float_to_unsigned_32 y1)))
@@ -1473,6 +1508,13 @@
 
 ;; H
   (assert (and (= o4 o3) (tqtisFinite o3)))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral4)
+  (= (tqtreal fliteral4) (/ 150000000000000000000000.0 100000000000000000000000.0))))
 
 ;; H
   (assert (= o5 (sub RNE1 fliteral4 o4)))

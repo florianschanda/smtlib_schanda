@@ -2345,13 +2345,6 @@
                                      (neg1 fliteral3) fliteral3))
                                      (tqtisFinite1 temp___expr_57)))
 
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral4)
-  (= (tqtreal fliteral4) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
-
 (declare-const d (Array Int long_float))
 
 (declare-const o long_float)
@@ -2419,6 +2412,13 @@
 
 ;; H
   (assert (= d1 o1))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral4)
+  (= (tqtreal fliteral4) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
 
 ;; H
   (assert

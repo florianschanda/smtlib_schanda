@@ -1564,16 +1564,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 11.0)))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 10.0)))
-
 (declare-const state t)
 
 (declare-const o t)
@@ -1592,10 +1582,20 @@
 ;; H
   (assert (in_range2 x))
 
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 11.0)))
+
 ;; H
   (assert
   (and (bvult x ((_ int2bv 32) 1000000)) (le state
   (mul RNE1 (of_ubv32 RNE1 x) fliteral2))))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 10.0)))
 
 ;; H
   (assert

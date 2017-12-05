@@ -1806,6 +1806,8 @@
 
 (declare-const o t)
 
+(declare-const o1 Int)
+
 (declare-const result t)
 
 (declare-const new_speed1 t)
@@ -1834,72 +1836,35 @@
 
 ;; H
   (assert
+  (and
+  (and
   (= (add RNE1 drag (mul RNE1 (mul RNE1 factor fliteral5) fliteral6))
-  delta_speed))
-
-;; H
-  (assert (tqtisFinite delta_speed))
-
-;; H
-  (assert (= ((_ int2bv 16) n) n_bv))
-
-;; H
-  (assert
+  delta_speed)
+  (and (tqtisFinite delta_speed)
+  (and (= ((_ int2bv 16) n) n_bv)
+  (and
+  (and
   (and (= o (add RNE1 old_speed delta_speed)) (tqtisFinite
-  (add RNE1 old_speed delta_speed))))
-
-;; H
-  (assert (= (mk_t__ref1 result) (mk_t__ref1 new_speed)))
-
-;; H
-  (assert (= new_speed1 o))
-
-;; H
-  (assert (and (le (neg fliteral3) delta_speed) (le delta_speed fliteral3)))
-
-;; H
-  (assert (= (in_bounds (high_bound n)) true))
-
-;; H
-  (assert (= (in_bounds (low_bound n)) true))
-
-;; H
-  (assert (eq (add RNE1 (mul RNE1 (of_ubv16 RNE1 n_bv) fliteral3) fliteral3)
-  (mul RNE1 (add RNE1 (of_ubv16 RNE1 n_bv) fliteral) fliteral3)))
-
-;; H
-  (assert (eq (add RNE1 (mul RNE1 (of_int RNE1 n) fliteral3) fliteral3)
-  (mul RNE1 (add RNE1 (of_int RNE1 n) fliteral) fliteral3)))
-
-;; H
-  (assert (eq (sub RNE1 (mul RNE1 (of_int RNE1 n) (neg fliteral3)) fliteral3)
-  (mul RNE1 (add RNE1 (of_int RNE1 n) fliteral) (neg fliteral3))))
-
-;; H
-  (assert (eq (t1 1) fliteral))
-
-;; H
-  (assert (eq (add RNE1 (of_int RNE1 n) fliteral) (of_int RNE1 (+ n 1))))
-
-;; H
-  (assert (le (sub RNE1 (mul RNE1 (of_int RNE1 n) (neg fliteral3)) fliteral3)
-  new_speed1))
-
-;; H
-  (assert (le (mul RNE1 (of_int RNE1 (+ n 1)) (neg fliteral3)) new_speed1))
-
-;; H
-  (assert (le new_speed1
-  (add RNE1 (mul RNE1 (of_int RNE1 n) fliteral3) fliteral3)))
-
-;; H
-  (assert (le new_speed1 (mul RNE1 (of_int RNE1 (+ n 1)) fliteral3)))
-
-;; H
-  (assert (= new_speed1 new_speed2))
-
-;; H
-  (assert (= new_speed3 new_speed1))
+  (add RNE1 old_speed delta_speed)))
+  (and (= (mk_t__ref1 result) (mk_t__ref1 new_speed)) (= new_speed1 o)))
+  (and (and (le (neg fliteral3) delta_speed) (le delta_speed fliteral3))
+  (and (= (in_bounds (high_bound n)) true)
+  (and (= (in_bounds (low_bound n)) true)
+  (and (eq (add RNE1 (mul RNE1 (of_ubv16 RNE1 n_bv) fliteral3) fliteral3)
+  (mul RNE1 (add RNE1 (of_ubv16 RNE1 n_bv) fliteral) fliteral3))
+  (and (eq (add RNE1 (mul RNE1 (of_int RNE1 n) fliteral3) fliteral3)
+  (mul RNE1 (add RNE1 (of_int RNE1 n) fliteral) fliteral3))
+  (and (eq (sub RNE1 (mul RNE1 (of_int RNE1 n) (neg fliteral3)) fliteral3)
+  (mul RNE1 (add RNE1 (of_int RNE1 n) fliteral) (neg fliteral3)))
+  (and (eq (t1 1) fliteral)
+  (and (eq (add RNE1 (of_int RNE1 n) fliteral) (of_int RNE1 (+ n 1)))
+  (and (le (sub RNE1 (mul RNE1 (of_int RNE1 n) (neg fliteral3)) fliteral3)
+  new_speed1)
+  (and (le (mul RNE1 (of_int RNE1 (+ n 1)) (neg fliteral3)) new_speed1)
+  (and (le new_speed1
+  (add RNE1 (mul RNE1 (of_int RNE1 n) fliteral3) fliteral3)) (le new_speed1
+  (mul RNE1 (of_int RNE1 (+ n 1)) fliteral3)))))))))))))))))
+  (and (= new_speed1 new_speed2) (= new_speed3 new_speed1))))
 
 (assert
 ;; WP_parameter_def

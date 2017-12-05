@@ -1037,7 +1037,7 @@ type t__ref = { t__content : t
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -1225,17 +1225,17 @@ logic bool_eq5 : us_rep, us_rep -> bool
 
 axiom bool_eq_def4 :
   (forall a:us_rep. forall b:us_rep [bool_eq5(a, b)].
-  (((((to_rep2(((a).us_split_discrs1).rec__types__r__i) = to_rep2(((b).us_split_discrs1).rec__types__r__i)) and
-  (types__r__x__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__types__r__x) = to_rep(((b).us_split_fields1).rec__types__r__x)))) and
-  (types__r__y__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__types__r__y) = to_rep1(((b).us_split_fields1).rec__types__r__y)))) ->
-  (bool_eq5(a, b) = true)) and
-  ((not (((to_rep2(((a).us_split_discrs1).rec__types__r__i) = to_rep2(((b).us_split_discrs1).rec__types__r__i)) and
-  (types__r__x__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__types__r__x) = to_rep(((b).us_split_fields1).rec__types__r__x)))) and
+  ((((to_rep2(((a).us_split_discrs1).rec__types__r__i) = to_rep2(((b).us_split_discrs1).rec__types__r__i)) and
+  ((types__r__x__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__types__r__x) = to_rep(((b).us_split_fields1).rec__types__r__x))) and
   (types__r__y__pred(a) ->
   (to_rep1(((a).us_split_fields1).rec__types__r__y) = to_rep1(((b).us_split_fields1).rec__types__r__y))))) ->
+  (bool_eq5(a, b) = true)) and
+  ((not ((to_rep2(((a).us_split_discrs1).rec__types__r__i) = to_rep2(((b).us_split_discrs1).rec__types__r__i)) and
+  ((types__r__x__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__types__r__x) = to_rep(((b).us_split_fields1).rec__types__r__x))) and
+  (types__r__y__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__types__r__y) = to_rep1(((b).us_split_fields1).rec__types__r__y)))))) ->
   (bool_eq5(a, b) = false))))
 
 logic value__size : int
@@ -1482,34 +1482,116 @@ type t6b__ref = { t6b__content : us_rep
 
 function t6b__ref___projection(a: t6b__ref) : us_rep = (a).t6b__content
 
+logic x__split_fields : integer
+
+logic x__split_fields1 : float1
+
+logic x__split_discrs : enum
+
+logic o : enum
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : float1
+
+logic o4 : enum
+
+logic p__good_2__x__assume : enum
+
+logic p__good_2__x__assume1 : integer
+
+logic p__good_2__x__assume2 : float1
+
+logic p__good_2__x__assume3 : bool
+
+logic o5 : enum
+
+logic o6 : float1
+
+logic o7 : integer
+
+logic o8 : float1
+
+logic o9 : enum
+
+logic temp___151 : enum
+
+logic temp___1511 : integer
+
+logic temp___1512 : float1
+
+logic temp___1513 : bool
+
+logic result : integer
+
+logic result1 : float1
+
+logic x__split_fields2 : integer
+
+logic x__split_fields3 : float1
+
+logic result2 : enum
+
+logic x__split_discrs1 : enum
+
+axiom H : (to_rep(o1) = 1)
+
+axiom H1 : (o1 = o2)
+
+axiom H2 : (dummy1 = o3)
+
+axiom H3 : (to_rep2(o) = 0)
+
+axiom H4 : (o = o4)
+
+axiom H5 : (p__good_2__x__assume = o4)
+
+axiom H6 : (p__good_2__x__assume1 = o2)
+
+axiom H7 : (p__good_2__x__assume2 = o3)
+
+axiom H8 : (true = p__good_2__x__assume3)
+
+axiom H9 : (result = x__split_fields)
+
+axiom H10 : (result1 = x__split_fields1)
+
+axiom H11 : (p__good_2__x__assume1 = x__split_fields2)
+
+axiom H12 : (p__good_2__x__assume2 = x__split_fields3)
+
+axiom H13 : (result2 = x__split_discrs)
+
+axiom H14 : (p__good_2__x__assume = x__split_discrs1)
+
+axiom H15 : (x__attr__constrained = false)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 2.0))
 
+axiom H16 : (to_rep1(o6) = fliteral1)
+
+axiom H17 : (dummy = o7)
+
+axiom H18 : (o6 = o8)
+
+axiom H19 : (to_rep2(o5) = 1)
+
+axiom H20 : (o5 = o9)
+
+axiom H21 : (temp___151 = o9)
+
+axiom H22 : (temp___1511 = o7)
+
+axiom H23 : (temp___1512 = o8)
+
+axiom H24 : (true = temp___1513)
+
+axiom H25 : (x__attr__constrained = true)
+
  (* File "p.adb", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_fields:integer. forall x__split_fields1:float1.
-  forall x__split_discrs:enum. forall o:enum. forall o1:integer.
-  forall o2:integer. forall o3:float1. forall o4:enum.
-  forall p__good_2__x__assume:enum. forall p__good_2__x__assume1:integer.
-  forall p__good_2__x__assume2:float1. forall p__good_2__x__assume3:bool.
-  forall o5:enum. forall o6:float1. forall o7:integer. forall o8:float1.
-  forall o9:enum. forall temp___151:enum. forall temp___1511:integer.
-  forall temp___1512:float1. forall temp___1513:bool. forall result:integer.
-  forall result1:float1. forall x__split_fields2:integer.
-  forall x__split_fields3:float1. forall result2:enum.
-  forall x__split_discrs1:enum. (((((to_rep(o1) = 1) and ((o1 = o2) and
-  (dummy1 = o3))) and (((to_rep2(o) = 0) and (o = o4)) and
-  ((p__good_2__x__assume = o4) and (((p__good_2__x__assume1 = o2) and
-  (p__good_2__x__assume2 = o3)) and (true = p__good_2__x__assume3))))) and
-  ((((result = x__split_fields) and (result1 = x__split_fields1)) and
-  ((p__good_2__x__assume1 = x__split_fields2) and
-  (p__good_2__x__assume2 = x__split_fields3))) and
-  (((result2 = x__split_discrs) and
-  (p__good_2__x__assume = x__split_discrs1)) and
-  (x__attr__constrained = false)))) -> ((((to_rep1(o6) = fliteral1) and
-  ((dummy = o7) and (o6 = o8))) and (((to_rep2(o5) = 1) and (o5 = o9)) and
-  ((temp___151 = o9) and (((temp___1511 = o7) and (temp___1512 = o8)) and
-  (true = temp___1513))))) -> ((x__attr__constrained = true) ->
-  (temp___151 = x__split_discrs1)))))
+goal WP_parameter_def : (temp___151 = x__split_discrs1)

@@ -1237,20 +1237,6 @@
                (add RNE1 (mul RNE1 (sub RNE1 b_x c_x) (sub RNE1 b_x c_x))
                (mul RNE1 (sub RNE1 b_y c_y) (sub RNE1 b_y c_y))))))
 
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral5)
-  (= (tqtreal fliteral5) (/ 1000000047497451305389404296875.0 1000000000000000000000000000000000.0))))
-
-(declare-const fliteral6 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral6)
-  (= (tqtreal fliteral6) (/ 100001001358032226562500.0 100000000000000000000000.0))))
-
 (declare-const res t)
 
 (declare-const o t)
@@ -1432,6 +1418,13 @@
 ;; H
   (assert (tqtisFinite length_bc))
 
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral5)
+  (= (tqtreal fliteral5) (/ 1000000047497451305389404296875.0 1000000000000000000000000000000000.0))))
+
 ;; H
   (assert (lt fliteral5 length_ba))
 
@@ -1454,6 +1447,13 @@
 
 ;; H
   (assert (= res1 o13))
+
+(declare-const fliteral6 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral6)
+  (= (tqtreal fliteral6) (/ 100001001358032226562500.0 100000000000000000000000.0))))
 
 ;; H
   (assert (and (le (neg fliteral6) res1) (le res1 fliteral6)))

@@ -1125,7 +1125,7 @@ axiom coerce_axiom :
 
 type tdistance_tB
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -2542,112 +2542,321 @@ axiom a_gradient__def_axiom :
   (forall d:int [a_gradient(d)]. (in_range3(d) ->
   (a_gradient(d) = fliteral1)))
 
+logic braking_curve__split_fields : (int,us_rep) farray
+
+logic braking_curve__split_fields1 : distance_t
+
+logic speed : t
+
+logic location : int
+
+logic i : int
+
+logic deceleration_curve__curve_from_target__end_point__assume : int
+
+logic o : distance_t
+
+logic o1 : (int,us_rep) farray
+
+logic o2 : distance_t
+
+logic temp___374 : (int,us_rep) farray
+
+logic temp___3741 : distance_t
+
+logic o3 : distance_t
+
+logic o4 : distance_t
+
+logic o5 : speed_t
+
+logic o6 : distance_t
+
+logic o7 : speed_t
+
+logic o8 : (int,us_rep) farray
+
+logic o9 : (int,us_rep) farray
+
+logic o10 : distance_t
+
+logic temp___379 : (int,us_rep) farray
+
+logic temp___3791 : distance_t
+
+logic o11 : speed_t
+
+logic o12 : distance_t
+
+logic o13 : speed_t
+
+logic o14 : distance_t
+
+logic o15 : speed_t
+
+logic o16 : (int,us_rep) farray
+
+logic o17 : (int,us_rep) farray
+
+logic o18 : distance_t
+
+logic temp___384 : (int,us_rep) farray
+
+logic temp___3841 : distance_t
+
+logic o19 : t
+
+logic o20 : t
+
+logic o21 : t
+
+logic o22 : t
+
+logic o23 : t
+
+logic o24 : t
+
+logic o25 : t
+
+logic o26 : t
+
+logic o27 : t
+
+logic o28 : t
+
+logic o29 : t
+
+logic o30 : t
+
+logic o31 : int
+
+logic o32 : int
+
+logic result : t
+
+logic speed1 : t
+
+logic result1 : int
+
+logic location1 : int
+
+logic result2 : (int,us_rep) farray
+
+logic result3 : distance_t
+
+logic braking_curve__split_fields2 : (int,us_rep) farray
+
+logic braking_curve__split_fields3 : distance_t
+
+logic result4 : (int,us_rep) farray
+
+logic result5 : distance_t
+
+logic braking_curve__split_fields4 : (int,us_rep) farray
+
+logic braking_curve__split_fields5 : distance_t
+
+logic result6 : (int,us_rep) farray
+
+logic result7 : distance_t
+
+logic braking_curve__split_fields6 : (int,us_rep) farray
+
+logic braking_curve__split_fields7 : distance_t
+
+logic result8 : int
+
+logic i1 : int
+
+logic braking_curve__split_fields8 : (int,us_rep) farray
+
+logic braking_curve__split_fields9 : distance_t
+
+logic speed2 : t
+
+logic location2 : int
+
+logic i2 : int
+
+logic result9 : t
+
+logic speed3 : t
+
+logic result10 : t
+
+logic speed4 : t
+
+axiom H : tqtisFinite(maximum_valid_speed)
+
+axiom H1 : (m_per_s_from_km_per_h(fliteral3) = maximum_valid_speed)
+
+axiom H2 : (to_rep1(target1) <= 5000)
+
+axiom H3 : (result = speed)
+
+axiom H4 : (speed1 = to_rep(target2))
+
+axiom H5 : tqtisFinite(speed1)
+
+axiom H6 : (result1 = location)
+
+axiom H7 : (location1 = to_rep1(target1))
+
+axiom H8 : in_range3(location1)
+
+axiom H9 :
+  ((deceleration_curve__curve_from_target__end_point__assume = curve_index_from_location(to_rep1(target1))) and
+  in_range5(deceleration_curve__curve_from_target__end_point__assume))
+
+axiom H10 :
+  (deceleration_curve__curve_from_target__end_point__assume = end_point)
+
+axiom H11 : in_range5(end_point)
+
+axiom H12 : (to_rep1(o) = to_rep1(target1))
+
+axiom H13 : (braking_curve__split_fields = o1)
+
+axiom H14 : (o = o2)
+
+axiom H15 : (temp___374 = o1)
+
+axiom H16 : (temp___3741 = o2)
+
+axiom H17 : ((result2 = braking_curve__split_fields) and
+  (result3 = braking_curve__split_fields1))
+
+axiom H18 : ((braking_curve__split_fields2 = temp___374) and
+  (braking_curve__split_fields3 = temp___3741))
+
+axiom H19 : (to_rep1(o3) = location1)
+
+axiom H20 : (o3 = o4)
+
+axiom H21 :
+  ((((braking_curve__split_fields2[end_point])).us_split_fields1).rec__deceleration_curve__braking_curve_entry__speed = o5)
+
+axiom H22 : (o6 = o4)
+
+axiom H23 : (o7 = o5)
+
+axiom H24 : (o8 = (braking_curve__split_fields2[end_point <- {
+  us_split_fields1 = {
+  rec__deceleration_curve__braking_curve_entry__location = o6;
+  rec__deceleration_curve__braking_curve_entry__speed = o7 } }]))
+
+axiom H25 : (o8 = o9)
+
+axiom H26 : (braking_curve__split_fields3 = o10)
+
+axiom H27 : (temp___379 = o9)
+
+axiom H28 : (temp___3791 = o10)
+
+axiom H29 : ((result4 = braking_curve__split_fields2) and
+  (result5 = braking_curve__split_fields3))
+
+axiom H30 : ((braking_curve__split_fields4 = temp___379) and
+  (braking_curve__split_fields5 = temp___3791))
+
+axiom H31 : (to_rep(o11) = speed1)
+
+axiom H32 :
+  ((((braking_curve__split_fields4[end_point])).us_split_fields1).rec__deceleration_curve__braking_curve_entry__location = o12)
+
+axiom H33 : (o11 = o13)
+
+axiom H34 : (o14 = o12)
+
+axiom H35 : (o15 = o13)
+
+axiom H36 : (o16 = (braking_curve__split_fields4[end_point <- {
+  us_split_fields1 = {
+  rec__deceleration_curve__braking_curve_entry__location = o14;
+  rec__deceleration_curve__braking_curve_entry__speed = o15 } }]))
+
+axiom H37 : (o16 = o17)
+
+axiom H38 : (braking_curve__split_fields5 = o18)
+
+axiom H39 : (temp___384 = o17)
+
+axiom H40 : (temp___3841 = o18)
+
+axiom H41 : ((result6 = braking_curve__split_fields4) and
+  (result7 = braking_curve__split_fields5))
+
+axiom H42 : ((braking_curve__split_fields6 = temp___384) and
+  (braking_curve__split_fields7 = temp___3841))
+
+axiom H43 : (result8 = i)
+
+axiom H44 : (i1 = (end_point - 1))
+
+axiom H45 : (0 <= i1)
+
+axiom H46 : (i1 <= (end_point - 1))
+
+axiom H47 : (((((0 <= 2147483647) -> in_range3(location2)) and
+  ((forall temp___397:int. (((0 <= temp___397) and (temp___397 <= 1000)) ->
+   ((temp___397 <= i2) ->
+   ((braking_curve__split_fields8[temp___397]) = (braking_curve__split_fields6[temp___397]))))) and
+  (braking_curve__split_fields9 = braking_curve__split_fields7))) and
+  (le(neg(fliteral2), fliteral2) -> tqtisFinite(speed2))) and ((0 <= i2) and
+  (i2 <= (end_point - 1))))
+
+axiom H48 : ((o19 = a_safe(speed2, location2)) and (in_range4(o19) and
+  (o19 = add(NearestTiesToEven, a_brake_safe(speed2, location2),
+  a_gradient(location2)))))
+
 logic fliteral6 : t
 
 axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
   (tqtreal(fliteral6) = 4.0))
+
+axiom H49 : (o20 = mul(NearestTiesToEven, fliteral6, o19))
+
+axiom H50 : ((o21 = o20) and tqtisFinite(o20))
 
 logic fliteral7 : t
 
 axiom fliteral_axiom7 : (tqtisFinite(fliteral7) and
   (tqtreal(fliteral7) = 5.0))
 
+axiom H51 : (o22 = mul(NearestTiesToEven, o21, fliteral7))
+
+axiom H52 : ((o23 = o22) and tqtisFinite(o22))
+
+axiom H53 : ((o24 = mul(NearestTiesToEven, speed2, speed2)) and
+  tqtisFinite(mul(NearestTiesToEven, speed2, speed2)))
+
+axiom H54 : (o25 = add(NearestTiesToEven, o24, o23))
+
+axiom H55 : ((o26 = o25) and tqtisFinite(o25))
+
+axiom H56 : (o27 = sqrt(NearestTiesToEven, o26))
+
+axiom H57 : (o28 = add(NearestTiesToEven, speed2, o27))
+
+axiom H58 : ((o29 = o28) and tqtisFinite(o28))
+
 logic fliteral8 : t
 
 axiom fliteral_axiom8 : (tqtisFinite(fliteral8) and
   (tqtreal(fliteral8) = 2.0))
 
+axiom H59 : (o30 = div(NearestTiesToEven, o29, fliteral8))
+
+axiom H60 : (result9 = speed2)
+
+axiom H61 : (speed3 = o30)
+
+axiom H62 : (lt(maximum_valid_speed, speed3) -> (result10 = speed3))
+
+axiom H63 : (lt(maximum_valid_speed, speed3) ->
+  (speed4 = maximum_valid_speed))
+
+axiom H64 : ((not lt(maximum_valid_speed, speed3)) -> (speed4 = speed3))
+
  (* File "deceleration_curve.ads", line 32, characters 0-0 *)
-goal WP_parameter_def :
-  (forall braking_curve__split_fields:(int,us_rep) farray.
-  forall braking_curve__split_fields1:distance_t. forall speed:t.
-  forall location:int. forall i:int.
-  forall deceleration_curve__curve_from_target__end_point__assume:int.
-  forall o:distance_t. forall o1:(int,us_rep) farray. forall o2:distance_t.
-  forall temp___374:(int,us_rep) farray. forall temp___3741:distance_t.
-  forall o3:distance_t. forall o4:distance_t. forall o5:speed_t.
-  forall o6:distance_t. forall o7:speed_t. forall o8:(int,us_rep) farray.
-  forall o9:(int,us_rep) farray. forall o10:distance_t.
-  forall temp___379:(int,us_rep) farray. forall temp___3791:distance_t.
-  forall o11:speed_t. forall o12:distance_t. forall o13:speed_t.
-  forall o14:distance_t. forall o15:speed_t. forall o16:(int,us_rep) farray.
-  forall o17:(int,us_rep) farray. forall o18:distance_t.
-  forall temp___384:(int,us_rep) farray. forall temp___3841:distance_t.
-  forall o19:t. forall o20:t. forall o21:t. forall o22:t. forall o23:t.
-  forall o24:t. forall o25:t. forall o26:t. forall o27:t. forall o28:t.
-  forall o29:t. forall o30:t. forall result:t. forall speed1:t.
-  forall result1:int. forall location1:int.
-  forall result2:(int,us_rep) farray. forall result3:distance_t.
-  forall braking_curve__split_fields2:(int,us_rep) farray.
-  forall braking_curve__split_fields3:distance_t.
-  forall result4:(int,us_rep) farray. forall result5:distance_t.
-  forall braking_curve__split_fields4:(int,us_rep) farray.
-  forall braking_curve__split_fields5:distance_t.
-  forall result6:(int,us_rep) farray. forall result7:distance_t.
-  forall braking_curve__split_fields6:(int,us_rep) farray.
-  forall braking_curve__split_fields7:distance_t. forall result8:int.
-  forall i1:int. forall braking_curve__split_fields8:(int,us_rep) farray.
-  forall braking_curve__split_fields9:distance_t. forall speed2:t.
-  forall location2:int. forall i2:int. forall result9:t. forall speed3:t.
-  forall result10:t. forall speed4:t. (tqtisFinite(maximum_valid_speed) ->
-  ((m_per_s_from_km_per_h(fliteral3) = maximum_valid_speed) ->
-  ((to_rep1(target1) <= 5000) -> (((result = speed) and
-  (speed1 = to_rep(target2))) -> (tqtisFinite(speed1) ->
-  (((result1 = location) and (location1 = to_rep1(target1))) ->
-  (in_range3(location1) ->
-  ((((deceleration_curve__curve_from_target__end_point__assume = curve_index_from_location(to_rep1(target1))) and
-  in_range5(deceleration_curve__curve_from_target__end_point__assume)) and
-  (deceleration_curve__curve_from_target__end_point__assume = end_point)) ->
-  (in_range5(end_point) -> (((((to_rep1(o) = to_rep1(target1)) and
-  ((braking_curve__split_fields = o1) and (o = o2))) and
-  ((temp___374 = o1) and (temp___3741 = o2))) and
-  (((result2 = braking_curve__split_fields) and
-  (result3 = braking_curve__split_fields1)) and
-  ((temp___374 = braking_curve__split_fields2) and
-  (temp___3741 = braking_curve__split_fields3)))) ->
-  ((((((((to_rep1(o3) = location1) and ((o3 = o4) and
-  ((((braking_curve__split_fields2[end_point])).us_split_fields1).rec__deceleration_curve__braking_curve_entry__speed = o5))) and
-  ((o6 = o4) and (o7 = o5))) and
-  (o8 = (braking_curve__split_fields2[end_point <- { us_split_fields1 = {
-  rec__deceleration_curve__braking_curve_entry__location = o6;
-  rec__deceleration_curve__braking_curve_entry__speed = o7 } }]))) and
-  ((o8 = o9) and (braking_curve__split_fields3 = o10))) and
-  ((temp___379 = o9) and (temp___3791 = o10))) and
-  (((result4 = braking_curve__split_fields2) and
-  (result5 = braking_curve__split_fields3)) and
-  ((temp___379 = braking_curve__split_fields4) and
-  (temp___3791 = braking_curve__split_fields5)))) ->
-  ((((((((to_rep(o11) = speed1) and
-  (((((braking_curve__split_fields4[end_point])).us_split_fields1).rec__deceleration_curve__braking_curve_entry__location = o12) and
-  (o11 = o13))) and ((o14 = o12) and (o15 = o13))) and
-  (o16 = (braking_curve__split_fields4[end_point <- { us_split_fields1 = {
-  rec__deceleration_curve__braking_curve_entry__location = o14;
-  rec__deceleration_curve__braking_curve_entry__speed = o15 } }]))) and
-  ((o16 = o17) and (braking_curve__split_fields5 = o18))) and
-  ((temp___384 = o17) and (temp___3841 = o18))) and
-  (((result6 = braking_curve__split_fields4) and
-  (result7 = braking_curve__split_fields5)) and
-  ((temp___384 = braking_curve__split_fields6) and
-  (temp___3841 = braking_curve__split_fields7)))) -> (((result8 = i) and
-  (i1 = (end_point - 1))) -> (((0 <= i1) and (i1 <= (end_point - 1))) ->
-  ((((((0 <= 2147483647) -> in_range3(location2)) and
-  ((forall temp___397:int. (((0 <= temp___397) and (temp___397 <= 1000)) ->
-   ((temp___397 <= i2) ->
-   ((braking_curve__split_fields8[temp___397]) = (braking_curve__split_fields6[temp___397]))))) and
-  (braking_curve__split_fields9 = braking_curve__split_fields7))) and
-  (le(neg(fliteral2), fliteral2) -> tqtisFinite(speed2))) and ((0 <= i2) and
-  (i2 <= (end_point - 1)))) -> ((((((((((((((o19 = a_safe(speed2,
-  location2)) and (in_range4(o19) and (o19 = add(NearestTiesToEven,
-  a_brake_safe(speed2, location2), a_gradient(location2))))) and
-  (o20 = mul(NearestTiesToEven, fliteral6, o19))) and ((o21 = o20) and
-  tqtisFinite(o20))) and (o22 = mul(NearestTiesToEven, o21, fliteral7))) and
-  ((o23 = o22) and tqtisFinite(o22))) and (((o24 = mul(NearestTiesToEven,
-  speed2, speed2)) and tqtisFinite(mul(NearestTiesToEven, speed2,
-  speed2))) and (o25 = add(NearestTiesToEven, o24, o23)))) and
-  ((o26 = o25) and tqtisFinite(o25))) and (o27 = sqrt(NearestTiesToEven,
-  o26))) and (o28 = add(NearestTiesToEven, speed2, o27))) and
-  ((o29 = o28) and tqtisFinite(o28))) and (o30 = div(NearestTiesToEven, o29,
-  fliteral8))) and ((result9 = speed2) and (speed3 = o30))) ->
-  (((lt(maximum_valid_speed, speed3) and ((result10 = speed3) and
-  (speed4 = maximum_valid_speed))) or ((not lt(maximum_valid_speed,
-  speed3)) and (speed4 = speed3))) -> in_range2((i2 * 5))))))))))))))))))))
+goal WP_parameter_def : in_range2((i2 * 5))

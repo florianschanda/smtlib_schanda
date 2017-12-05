@@ -1109,9 +1109,25 @@
                                      (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_51)))
 
+(declare-const foo__float_tests__inverse_reciprocal__result t)
+
 (declare-const o t)
 
 (declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const result t)
+
+(declare-const foo__float_tests__inverse_reciprocal__result1 t)
+
+(declare-const foo__float_tests__inverse_reciprocal__result2 t)
+
+(declare-const foo__float_tests__inverse_reciprocal__result3 t)
+
+(declare-const foo__float_tests__inverse_reciprocal__result4 t)
+
+(declare-const foo__float_tests__inverse_reciprocal__result5 t)
 
 ;; H
   (assert (tqtisFinite a))

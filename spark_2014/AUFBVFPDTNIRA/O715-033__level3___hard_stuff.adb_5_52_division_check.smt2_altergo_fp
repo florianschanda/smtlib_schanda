@@ -1092,12 +1092,32 @@ logic copy : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x : t
+
+logic y : int
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic result : bool
+
+logic result1 : t
+
+logic x1 : t
+
+axiom H : tqtisFinite(x)
+
+axiom H1 : (0 <= y)
+
+axiom H2 : (y <= 100000)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 100000.0))
 
  (* File "hard_stuff.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:t. forall y:int. (tqtisFinite(x) -> (((0 <= y) and
-  (y <= 100000)) -> (not is_zero(fliteral1)))))
+goal WP_parameter_def : (not is_zero(fliteral1))

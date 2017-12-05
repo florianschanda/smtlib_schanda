@@ -1686,6 +1686,50 @@ axiom is_valid_speed_km_per_h__def_axiom :
 axiom maximum_valid_speed__def_axiom :
   (maximum_valid_speed = m_per_s_from_km_per_h(fliteral4))
 
+logic initial_speed : t
+
+logic target__split_fields : bool
+
+logic target__split_fields1 : distance_t
+
+logic target__split_fields2 : speed_t
+
+logic o : t
+
+logic o1 : speed_t
+
+logic o2 : distance_t
+
+logic o3 : bool
+
+logic o4 : distance_t
+
+logic o5 : speed_t
+
+logic deceleration_curve_test__target__assume : bool
+
+logic deceleration_curve_test__target__assume1 : distance_t
+
+logic deceleration_curve_test__target__assume2 : speed_t
+
+logic o6 : int
+
+logic result : t
+
+logic initial_speed1 : t
+
+logic result1 : bool
+
+logic result2 : distance_t
+
+logic result3 : speed_t
+
+logic target__split_fields3 : bool
+
+logic target__split_fields4 : distance_t
+
+logic target__split_fields5 : speed_t
+
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and

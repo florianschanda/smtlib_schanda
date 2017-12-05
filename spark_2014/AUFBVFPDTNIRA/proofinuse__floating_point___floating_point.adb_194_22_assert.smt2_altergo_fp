@@ -1068,16 +1068,38 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic res : bool
+
+logic o : t
+
+logic o1 : bool
+
+logic result : bool
+
+logic res1 : bool
+
+axiom H : tqtisFinite(x)
+
+axiom H1 : tqtisFinite(y)
+
+axiom H2 : lt(x, y)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
+axiom H3 : lt(fliteral1, y)
+
+axiom H4 : ((o = div(NearestTiesToEven, x, y)) and
+  tqtisFinite(div(NearestTiesToEven, x, y)))
+
+axiom H5 : ((le(o, fliteral) -> (o1 = true)) and ((not le(o, fliteral)) ->
+  (o1 = false)))
+
+axiom H6 : (result = res)
+
+axiom H7 : (res1 = o1)
+
  (* File "floating_point.adb", line 174, characters 0-0 *)
-goal WP_parameter_def :
-  (forall res:bool. forall o:t. forall o1:bool. forall result:bool.
-  forall res1:bool. (tqtisFinite(x) -> (tqtisFinite(y) -> (lt(x, y) ->
-  (lt(fliteral1, y) -> (((((o = div(NearestTiesToEven, x, y)) and
-  tqtisFinite(div(NearestTiesToEven, x, y))) and ((le(o, fliteral) and
-  (o1 = true)) or ((not le(o, fliteral)) and (o1 = false)))) and
-  ((result = res) and (res1 = o1))) -> (res1 = true)))))))
+goal WP_parameter_def : (res1 = true)

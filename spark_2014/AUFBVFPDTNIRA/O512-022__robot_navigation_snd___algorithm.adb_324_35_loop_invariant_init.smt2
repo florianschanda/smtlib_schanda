@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -65,24 +65,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
@@ -909,24 +909,24 @@
 
 (define-fun bool_eq4 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
-                         (and
                          (= (to_rep8
                             (rec__robot_iface__speed_option__opt
                             (us_split_discrs1 a))) (to_rep8
                                                    (rec__robot_iface__speed_option__opt
                                                    (us_split_discrs1 b))))
+                         (and
                          (=> (robot_iface__speed_option__modulus__pred a)
                          (= (to_rep5
                             (rec__robot_iface__speed_option__modulus
                             (us_split_fields3 a))) (to_rep5
                                                    (rec__robot_iface__speed_option__modulus
-                                                   (us_split_fields3 b))))))
+                                                   (us_split_fields3 b)))))
                          (=> (robot_iface__speed_option__angle__pred a)
                          (= (to_rep5
                             (rec__robot_iface__speed_option__angle
                             (us_split_fields3 a))) (to_rep5
                                                    (rec__robot_iface__speed_option__angle
-                                                   (us_split_fields3 b))))))
+                                                   (us_split_fields3 b)))))))
                     true false))
 
 (declare-const value__size3 Int)
@@ -1845,16 +1845,16 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
+(declare-fun length1 (us_rep4) Int)
+
+(declare-fun length__function_guard (Int us_rep4) Bool)
+
 (define-fun dynamic_invariant2 ((temp___expr_324 Int)
   (temp___is_init_321 Bool) (temp___skip_constant_322 Bool)
   (temp___do_toplevel_323 Bool)) Bool (=>
                                       (or (= temp___is_init_321 true)
                                       (<= 0 2147483647)) (in_range10
                                       temp___expr_324)))
-
-(declare-fun length1 (us_rep4) Int)
-
-(declare-fun length__function_guard (Int us_rep4) Bool)
 
 ;; length__post_axiom
   (assert
@@ -3251,6 +3251,122 @@
 
 (declare-const o2 Int)
 
+(declare-const temp___1051 count_type)
+
+(declare-const temp___1052 Float32)
+
+(declare-const temp___1050 us_rep9)
+
+(declare-const temp___1049 count_type)
+
+(declare-const o3 count_type)
+
+(declare-const o4 normalized2pi)
+
+(declare-const o5 float)
+
+(declare-const o6 idir_t)
+
+(declare-const o7 normalized2pi)
+
+(declare-const o8 float)
+
+(declare-const o9 idir_t)
+
+(declare-const o10 idir_t)
+
+(declare-const o11 Int)
+
+(declare-const o12 us_rep3)
+
+(declare-const o13 us_split_fields6)
+
+(declare-const o14 idir_t)
+
+(declare-const o15 Int)
+
+(declare-const o16 us_rep3)
+
+(declare-const o17 us_split_fields6)
+
+(declare-const o18 us_rep)
+
+(declare-const o19 us_rep3)
+
+(declare-const o20 us_split_fields6)
+
+(declare-const o21 us_rep)
+
+(declare-const o22 Float32)
+
+(declare-const o23 Float32)
+
+(declare-const o24 us_rep5)
+
+(declare-const o25 us_rep3)
+
+(declare-const o26 us_split_fields6)
+
+(declare-const o27 us_rep)
+
+(declare-const o28 us_t)
+
+(declare-const o29 Int)
+
+(declare-const o30 Bool)
+
+(declare-const o31 Int)
+
+(declare-const o32 us_rep5)
+
+(declare-const o33 Bool)
+
+(declare-const temp___1053 us_rep5)
+
+(declare-const o34 us_rep3)
+
+(declare-const o35 us_split_fields6)
+
+(declare-const o36 idir_t)
+
+(declare-const o37 Int)
+
+(declare-const o38 us_rep3)
+
+(declare-const o39 us_split_fields6)
+
+(declare-const o40 idir_t)
+
+(declare-const o41 Int)
+
+(declare-const o42 us_rep3)
+
+(declare-const o43 us_split_fields6)
+
+(declare-const o44 us_rep)
+
+(declare-const o45 us_rep3)
+
+(declare-const o46 us_split_fields6)
+
+(declare-const o47 us_rep)
+
+(declare-const o48 Float32)
+
+(declare-const o49 Float32)
+
+(declare-const o50 us_rep5)
+
+(declare-const o51 us_rep3)
+
+(declare-const o52 us_split_fields6)
+
+(declare-const o53 us_rep)
+
+(declare-const o54 us_t)
+
+(declare-const this__split_fields1 us_split_fields14)
+
 (declare-const result us_split_fields__ref5)
 
 (declare-const riterr__split_fields1 us_split_fields10)
@@ -3263,8 +3379,129 @@
 
 (declare-const result2 Bool)
 
-(define-fun temp___10431 () us_rep5 (mk___rep5
-                                    (mk___split_fields5 temp___1043)))
+(declare-const this__split_fields2 us_split_fields14)
+
+(declare-const riterr__split_fields3 us_split_fields10)
+
+(declare-const riterl__split_fields2 us_split_fields10)
+
+(declare-const rho us_split_fields8)
+
+(declare-const result3 Bool)
+
+(declare-const result4 Bool)
+
+(declare-const result5 Bool)
+
+(declare-const result6 Bool)
+
+(declare-const result7 Bool)
+
+(declare-const riterl__split_fields3 us_split_fields10)
+
+(declare-const algorithm__gap_vectors__delete__container__fields us_split_fields8)
+
+(declare-const result8 us_split_fields__ref7)
+
+(declare-const this__split_fields3 us_split_fields14)
+
+(declare-const result9 us_split_fields__ref5)
+
+(declare-const riterl__split_fields4 us_split_fields10)
+
+(declare-const riterr__split_fields4 us_split_fields10)
+
+(declare-const result10 Bool)
+
+(declare-const this__split_fields4 us_split_fields__ref7)
+
+(declare-const riterr__split_fields5 us_split_fields__ref5)
+
+(declare-const riterl__split_fields5 us_split_fields__ref5)
+
+(declare-const this__split_fields5 us_split_fields14)
+
+(declare-const riterr__split_fields6 us_split_fields10)
+
+(declare-const riterl__split_fields6 us_split_fields10)
+
+(declare-const this__split_fields6 us_split_fields__ref7)
+
+(declare-const riterr__split_fields7 us_split_fields__ref5)
+
+(declare-const riterl__split_fields7 us_split_fields__ref5)
+
+(declare-const this__split_fields7 us_split_fields14)
+
+(declare-const riterr__split_fields8 us_split_fields10)
+
+(declare-const riterl__split_fields8 us_split_fields10)
+
+(declare-const this__split_fields8 us_split_fields__ref7)
+
+(declare-const riterr__split_fields9 us_split_fields__ref5)
+
+(declare-const riterl__split_fields9 us_split_fields__ref5)
+
+(declare-const this__split_fields9 us_split_fields14)
+
+(declare-const riterr__split_fields10 us_split_fields10)
+
+(declare-const riterl__split_fields10 us_split_fields10)
+
+(declare-const result11 Bool)
+
+(declare-const result12 Bool)
+
+(declare-const result13 us_split_fields__ref5)
+
+(declare-const riterr__split_fields11 us_split_fields10)
+
+(declare-const result14 Bool)
+
+(declare-const result15 Bool)
+
+(declare-const result16 Bool)
+
+(declare-const riterl__split_fields11 us_split_fields10)
+
+(declare-const algorithm__gap_vectors__delete__container__fields1 us_split_fields8)
+
+(declare-const result17 us_split_fields__ref7)
+
+(declare-const this__split_fields10 us_split_fields14)
+
+(declare-const this__split_fields11 us_split_fields__ref7)
+
+(declare-const riterl__split_fields12 us_split_fields__ref5)
+
+(declare-const this__split_fields12 us_split_fields14)
+
+(declare-const riterl__split_fields13 us_split_fields10)
+
+(declare-const this__split_fields13 us_split_fields__ref7)
+
+(declare-const riterr__split_fields12 us_split_fields__ref5)
+
+(declare-const riterl__split_fields14 us_split_fields__ref5)
+
+(declare-const this__split_fields14 us_split_fields14)
+
+(declare-const riterr__split_fields13 us_split_fields10)
+
+(declare-const riterl__split_fields15 us_split_fields10)
+
+(declare-const this__split_fields15 us_split_fields__ref7)
+
+(declare-const riterr__split_fields14 us_split_fields__ref5)
+
+(declare-const riterl__split_fields16 us_split_fields__ref5)
+
+(declare-const this__split_fields16 us_split_fields14)
+
+(declare-const riterr__split_fields15 us_split_fields10)
+
+(declare-const riterl__split_fields17 us_split_fields10)
 
 ;; H
   (assert (= (to_rep10 o) 0))
@@ -3301,25 +3538,28 @@
 ;; H
   (assert
   (and
-  (= temp___10431 (last2
-                  (rec__algorithm__controller__gapvec
-                  (us_split_fields__content7 this__split_fields))))
+  (= (mk___rep5 (mk___split_fields5 temp___1043)) (last2
+                                                  (rec__algorithm__controller__gapvec
+                                                  (us_split_fields__content7
+                                                  this__split_fields))))
   (ite (= (= (length1
              (rec__algorithm__controller__gapvec
              (us_split_fields__content7 this__split_fields))) 0) true)
-  (= (bool_eq8 temp___10431 no_element) true)
+  (= (bool_eq8 (mk___rep5 (mk___split_fields5 temp___1043)) no_element) true)
   (and
   (= (has_key
      (positions
      (rec__algorithm__controller__gapvec
-     (us_split_fields__content7 this__split_fields))) temp___10431) true)
+     (us_split_fields__content7 this__split_fields)))
+     (mk___rep5 (mk___split_fields5 temp___1043))) true)
   (= (get1
      (positions
      (rec__algorithm__controller__gapvec
-     (us_split_fields__content7 this__split_fields))) temp___10431) (length1
-                                                                    (rec__algorithm__controller__gapvec
-                                                                    (us_split_fields__content7
-                                                                    this__split_fields))))))))
+     (us_split_fields__content7 this__split_fields)))
+     (mk___rep5 (mk___split_fields5 temp___1043))) (length1
+                                                   (rec__algorithm__controller__gapvec
+                                                   (us_split_fields__content7
+                                                   this__split_fields))))))))
 
 ;; H
   (assert

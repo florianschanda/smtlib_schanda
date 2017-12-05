@@ -1198,6 +1198,16 @@
 
 (declare-const x t)
 
+(declare-const o t)
+
+(declare-const temp___156 t)
+
+(declare-const us t)
+
+(declare-const us1 t)
+
+(declare-const result Bool)
+
 ;; H
   (assert (tqtisFinite d))
 

@@ -1283,6 +1283,64 @@
 
 (declare-const o t)
 
+(declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const o3 t)
+
+(declare-const o4 t)
+
+(declare-const o5 t)
+
+(declare-const o6 t)
+
+(declare-const o7 t)
+
+(declare-const o8 t)
+
+(declare-const o9 t)
+
+(declare-const o10 t)
+
+(declare-const o11 Int)
+
+(declare-const o12 t)
+
+(declare-const o13 t)
+
+(declare-const o14 Int)
+
+(declare-const o15 t)
+
+(declare-const o16 t)
+
+(declare-const o17 t)
+
+(declare-const o18 t)
+
+(declare-const o19 t)
+
+(declare-const o20 t)
+
+(declare-const o21 t)
+
+(declare-const o22 t)
+
+(declare-const o23 t)
+
+(declare-const o24 t)
+
+(declare-const o25 Int)
+
+(declare-const o26 t)
+
+(declare-const o27 t)
+
+(declare-const o28 Int)
+
+(declare-const o29 Int)
+
 (declare-const result t)
 
 (declare-const new_speed1 t)
@@ -1307,85 +1365,36 @@
   (assert (and (< n 25000) (= (invariant__ n old_speed) true)))
 
 ;; H
-  (assert (= (mul RNE1 (mul RNE1 factor fliteral4) fliteral5) delta_speed))
-
-;; H
-  (assert (tqtisFinite delta_speed))
-
-;; H
   (assert
+  (and
+  (and (= (mul RNE1 (mul RNE1 factor fliteral4) fliteral5) delta_speed)
+  (and (tqtisFinite delta_speed)
+  (and
+  (and
   (and (= o (add RNE1 old_speed delta_speed)) (tqtisFinite
-  (add RNE1 old_speed delta_speed))))
-
-;; H
-  (assert (= (mk_t__ref result) (mk_t__ref new_speed)))
-
-;; H
-  (assert (= new_speed1 o))
-
-;; H
-  (assert (and (le (neg fliteral) delta_speed) (le delta_speed fliteral)))
-
-;; H
-  (assert (= (in_bounds old_speed) true))
-
-;; H
-  (assert (= (in_bounds (high_bound n)) true))
-
-;; H
-  (assert (= (in_bounds (low_bound n)) true))
-
-;; H
-  (assert (le new_speed1 (add RNE1 old_speed fliteral)))
-
-;; H
-  (assert (le old_speed (high_bound n)))
-
-;; H
-  (assert (le (add RNE1 old_speed fliteral)
-  (add RNE1 (high_bound n) fliteral)))
-
-;; H
-  (assert (le new_speed1 (add RNE1 (high_bound n) fliteral)))
-
-;; H
-  (assert (le (add RNE1 (mul RNE1 (of_int RNE1 n) fliteral2) fliteral)
-  (mul RNE1 (of_int RNE1 (+ n 1)) fliteral2)))
-
-;; H
-  (assert (le (add RNE1 (high_bound n) fliteral) (high_bound (+ n 1))))
-
-;; H
-  (assert (le new_speed1 (high_bound (+ n 1))))
-
-;; H
-  (assert (le (sub RNE1 old_speed fliteral) new_speed1))
-
-;; H
-  (assert (le (low_bound n) old_speed))
-
-;; H
-  (assert (le (sub RNE1 (low_bound n) fliteral)
-  (sub RNE1 old_speed fliteral)))
-
-;; H
-  (assert (le (sub RNE1 (low_bound n) fliteral) new_speed1))
-
-;; H
-  (assert (le (mul RNE1 (of_int RNE1 (+ n 1)) (neg fliteral2))
-  (sub RNE1 (mul RNE1 (of_int RNE1 n) (neg fliteral2)) fliteral)))
-
-;; H
-  (assert (le (low_bound (+ n 1)) (sub RNE1 (low_bound n) fliteral)))
-
-;; H
-  (assert (le (low_bound (+ n 1)) new_speed1))
-
-;; H
-  (assert (= new_speed1 new_speed2))
-
-;; H
-  (assert (= new_speed3 new_speed1))
+  (add RNE1 old_speed delta_speed)))
+  (and (= (mk_t__ref result) (mk_t__ref new_speed)) (= new_speed1 o)))
+  (and (and (le (neg fliteral) delta_speed) (le delta_speed fliteral))
+  (and (= (in_bounds old_speed) true)
+  (and (= (in_bounds (high_bound n)) true)
+  (and (= (in_bounds (low_bound n)) true)
+  (and (le new_speed1 (add RNE1 old_speed fliteral))
+  (and (le old_speed (high_bound n))
+  (and (le (add RNE1 old_speed fliteral) (add RNE1 (high_bound n) fliteral))
+  (and (le new_speed1 (add RNE1 (high_bound n) fliteral))
+  (and (le (add RNE1 (mul RNE1 (of_int RNE1 n) fliteral2) fliteral)
+  (mul RNE1 (of_int RNE1 (+ n 1)) fliteral2))
+  (and (le (add RNE1 (high_bound n) fliteral) (high_bound (+ n 1)))
+  (and (le new_speed1 (high_bound (+ n 1)))
+  (and (le (sub RNE1 old_speed fliteral) new_speed1)
+  (and (le (low_bound n) old_speed)
+  (and (le (sub RNE1 (low_bound n) fliteral) (sub RNE1 old_speed fliteral))
+  (and (le (sub RNE1 (low_bound n) fliteral) new_speed1)
+  (and (le (mul RNE1 (of_int RNE1 (+ n 1)) (neg fliteral2))
+  (sub RNE1 (mul RNE1 (of_int RNE1 n) (neg fliteral2)) fliteral))
+  (and (le (low_bound (+ n 1)) (sub RNE1 (low_bound n) fliteral)) (le
+  (low_bound (+ n 1)) new_speed1)))))))))))))))))))))
+  (and (= new_speed1 new_speed2) (= new_speed3 new_speed1))))
 
 (assert
 ;; WP_parameter_def

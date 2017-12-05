@@ -1099,21 +1099,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 2.0)))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 100000.0)))
-
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) (/ 0.0 10.0))))
-
 (declare-const x t)
 
 (declare-const o t)
@@ -1121,6 +1106,14 @@
 (declare-const o1 t)
 
 (declare-const o2 t)
+
+(declare-const y Int)
+
+(declare-const o3 t)
+
+(declare-const o4 t)
+
+(declare-const o5 t)
 
 (declare-const x1 t)
 
@@ -1138,6 +1131,10 @@
 
 (declare-const result3 Bool)
 
+(declare-const result4 t)
+
+(declare-const x5 t)
+
 ;; H
   (assert (tqtisFinite x))
 
@@ -1153,6 +1150,11 @@
 
 ;; H
   (assert (=> (and (le (neg fliteral) x) (le x fliteral)) (= x2 o)))
+
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 2.0)))
 
 ;; H
   (assert
@@ -1203,16 +1205,26 @@
 ;; H
   (assert (=> (not (and (le (neg fliteral) x3) (le x3 fliteral))) (= x4 x3)))
 
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 100000.0)))
+
 ;; H
   (assert
   (= (= result3 true)
-  (exists ((y Int))
-  (and (and (<= 0 y) (<= y 100000)) (eq x4
-  (mul RNE1 (div1 RNE1 (of_int RNE1 y) fliteral3)
-  (div1 RNE1 (of_int RNE1 y) fliteral3)))))))
+  (exists ((y1 Int))
+  (and (and (<= 0 y1) (<= y1 100000)) (eq x4
+  (mul RNE1 (div1 RNE1 (of_int RNE1 y1) fliteral3)
+  (div1 RNE1 (of_int RNE1 y1) fliteral3)))))))
 
 ;; H
   (assert (= result3 true))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) (/ 0.0 10.0))))
 
 (assert
 ;; WP_parameter_def

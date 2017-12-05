@@ -1118,6 +1118,8 @@
 
 (declare-const o t)
 
+(declare-const o1 t)
+
 (declare-const result t)
 
 (declare-const float_example__minus_i__result1 t)

@@ -2002,24 +2002,24 @@
 
 (define-fun bool_eq11 ((a us_rep2)
   (b us_rep2)) Bool (ite (and
-                         (and
                          (= (to_rep8
                             (rec__robot_iface__speed_option__opt
                             (us_split_discrs1 a))) (to_rep8
                                                    (rec__robot_iface__speed_option__opt
                                                    (us_split_discrs1 b))))
+                         (and
                          (=> (robot_iface__speed_option__modulus__pred a)
                          (= (to_rep2
                             (rec__robot_iface__speed_option__modulus
                             (us_split_fields5 a))) (to_rep2
                                                    (rec__robot_iface__speed_option__modulus
-                                                   (us_split_fields5 b))))))
+                                                   (us_split_fields5 b)))))
                          (=> (robot_iface__speed_option__angle__pred a)
                          (= (to_rep2
                             (rec__robot_iface__speed_option__angle
                             (us_split_fields5 a))) (to_rep2
                                                    (rec__robot_iface__speed_option__angle
-                                                   (us_split_fields5 b))))))
+                                                   (us_split_fields5 b)))))))
                     true false))
 
 (declare-const value__size4 Int)
@@ -3740,27 +3740,6 @@
   (! (= (= (is_empty container) true) (= (length1 container) 0)) :pattern (
   (is_empty container)) )))
 
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral4)
-  (= (tqtreal fliteral4) (/ 31415927410125732421875.0 10000000000000000000000.0))))
-
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral5)
-  (= (tqtreal fliteral5) (/ 157079637050628662109375.0 100000000000000000000000.0))))
-
-(declare-const fliteral6 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral6)
-  (= (tqtreal fliteral6) (/ 9999999776482582092285156250.0 1000000000000000000000000000000.0))))
-
 (declare-const i Int)
 
 (declare-const algorithm__isrisinggapsafe__B_4__posgapcorner__assume float)
@@ -3773,16 +3752,13 @@
 
 (declare-const algorithm__isrisinggapsafe__B_4__B_6__deltaangle__assume t)
 
+(declare-const o2 t)
+
 (declare-const result Int)
 
 (declare-const i1 Int)
 
 (declare-const i2 Int)
-
-(define-fun algorithm__isrisinggapsafe__B_4__posgapcorner__assume2 () us_rep1
-  (mk___rep1
-  (mk___split_fields1 algorithm__isrisinggapsafe__B_4__posgapcorner__assume
-  algorithm__isrisinggapsafe__B_4__posgapcorner__assume1)))
 
 ;; H
   (assert
@@ -3799,23 +3775,32 @@
 ;; H
   (assert
   (and
-  (= algorithm__isrisinggapsafe__B_4__posgapcorner__assume2 (create__4
-                                                            (to_rep2
-                                                            (rec__gaps__gap__distance
-                                                            (us_split_fields9
-                                                            risinggap)))
-                                                            (rec__gaps__gap__bearing
-                                                            (us_split_fields9
-                                                            risinggap))))
+  (= (mk___rep1
+     (mk___split_fields1
+     algorithm__isrisinggapsafe__B_4__posgapcorner__assume
+     algorithm__isrisinggapsafe__B_4__posgapcorner__assume1)) (create__4
+                                                              (to_rep2
+                                                              (rec__gaps__gap__distance
+                                                              (us_split_fields9
+                                                              risinggap)))
+                                                              (rec__gaps__gap__bearing
+                                                              (us_split_fields9
+                                                              risinggap))))
   (=> (neq (to_rep2 (rec__gaps__gap__distance (us_split_fields9 risinggap)))
   fliteral2)
   (not
-  (= (oeq algorithm__isrisinggapsafe__B_4__posgapcorner__assume2
-     zero_position) true)))))
+  (= (oeq
+     (mk___rep1
+     (mk___split_fields1
+     algorithm__isrisinggapsafe__B_4__posgapcorner__assume
+     algorithm__isrisinggapsafe__B_4__posgapcorner__assume1)) zero_position) true)))))
 
 ;; H
   (assert
-  (= algorithm__isrisinggapsafe__B_4__posgapcorner__assume2 posgapcorner))
+  (= (mk___rep1
+     (mk___split_fields1
+     algorithm__isrisinggapsafe__B_4__posgapcorner__assume
+     algorithm__isrisinggapsafe__B_4__posgapcorner__assume1)) posgapcorner))
 
 ;; H
   (assert (= result i))
@@ -3831,6 +3816,13 @@
 
 ;; H
   (assert (and (<= 1 i2) (<= i2 1000)))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral4)
+  (= (tqtreal fliteral4) (/ 31415927410125732421875.0 10000000000000000000000.0))))
 
 ;; H
   (assert
@@ -3865,8 +3857,22 @@
 ;; H
   (assert (lt fliteral2 deltaangle))
 
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral5)
+  (= (tqtreal fliteral5) (/ 157079637050628662109375.0 100000000000000000000000.0))))
+
 ;; H
   (assert (lt deltaangle fliteral5))
+
+(declare-const fliteral6 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral6)
+  (= (tqtreal fliteral6) (/ 9999999776482582092285156250.0 1000000000000000000000000000000.0))))
 
 (assert
 ;; WP_parameter_def

@@ -2024,28 +2024,23 @@
                                       fliteral2 fliteral3)) (in_range6
                                       temp___expr_170)))
 
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral4)
-  (= (tqtreal fliteral4) (/ 31415927410125732421875.0 10000000000000000000000.0))))
-
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral5)
-  (= (tqtreal fliteral5) (/ 157079637050628662109375.0 100000000000000000000000.0))))
-
-(declare-const fliteral6 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) 2.0)))
-
 (declare-const i Int)
 
 (declare-const algorithm__isfilterclear__B_2__deltaangle__assume t)
+
+(declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const o3 t)
+
+(declare-const o4 t)
+
+(declare-const o5 t)
+
+(declare-const o6 t)
 
 (declare-const result Int)
 
@@ -2054,6 +2049,8 @@
 (declare-const i2 Int)
 
 (declare-const d t)
+
+(declare-const result1 Bool)
 
 ;; H
   (assert (tqtisFinite width))
@@ -2076,6 +2073,13 @@
 ;; H
   (assert (and (<= 1 i2) (<= i2 1000)))
 
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral4)
+  (= (tqtreal fliteral4) (/ 31415927410125732421875.0 10000000000000000000000.0))))
+
 ;; H
   (assert
   (and
@@ -2094,6 +2098,13 @@
 ;; H
   (assert (tqtisFinite deltaangle))
 
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral5)
+  (= (tqtreal fliteral5) (/ 157079637050628662109375.0 100000000000000000000000.0))))
+
 ;; H
   (assert (not (lt fliteral5 (abs1 deltaangle))))
 
@@ -2102,6 +2113,11 @@
 
 ;; H
   (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite d)))
+
+(declare-const fliteral6 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) 2.0)))
 
 (assert
 ;; WP_parameter_def

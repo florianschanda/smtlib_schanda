@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float64)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float64)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float64)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float64)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float64)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float64)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float64)
 
@@ -65,24 +65,24 @@
                                              (<= i 9007199254740992)))
 
 (define-fun same_sign ((x Float64)
-  (y Float64)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float64)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float64)
-  (y Float64)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float64)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float64) (x Float64)
-  (y Float64)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float64)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float64)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
@@ -362,11 +362,37 @@
 
 (declare-const r Float64)
 
+(declare-const shapes5__make_circle__result coordinate_type)
+
+(declare-const shapes5__make_circle__result1 coordinate_type)
+
+(declare-const shapes5__make_circle__result2 radius_type)
+
 (declare-const o Float64)
 
 (declare-const o1 Float64)
 
 (declare-const o2 Float64)
+
+(declare-const o3 Float64)
+
+(declare-const o4 radius_type)
+
+(declare-const o5 coordinate_type)
+
+(declare-const o6 coordinate_type)
+
+(declare-const o7 coordinate_type)
+
+(declare-const o8 coordinate_type)
+
+(declare-const o9 radius_type)
+
+(declare-const o10 coordinate_type)
+
+(declare-const o11 coordinate_type)
+
+(declare-const o12 radius_type)
 
 (declare-const result Float64)
 
@@ -383,6 +409,38 @@
 (declare-const result3 Float64)
 
 (declare-const r4 Float64)
+
+(declare-const result4 Float64)
+
+(declare-const r5 Float64)
+
+(declare-const result5 coordinate_type)
+
+(declare-const result6 coordinate_type)
+
+(declare-const result7 radius_type)
+
+(declare-const shapes5__make_circle__result3 coordinate_type)
+
+(declare-const shapes5__make_circle__result4 coordinate_type)
+
+(declare-const shapes5__make_circle__result5 radius_type)
+
+(declare-const shapes5__make_circle__result6 coordinate_type)
+
+(declare-const shapes5__make_circle__result7 coordinate_type)
+
+(declare-const shapes5__make_circle__result8 radius_type)
+
+(declare-const shapes5__make_circle__result9 us_rep)
+
+(declare-const r6 t__ref)
+
+(declare-const shapes5__make_circle__result10 circle__ref)
+
+(declare-const r7 Float64)
+
+(declare-const shapes5__make_circle__result11 us_rep)
 
 ;; H
   (assert (in_range2 x))

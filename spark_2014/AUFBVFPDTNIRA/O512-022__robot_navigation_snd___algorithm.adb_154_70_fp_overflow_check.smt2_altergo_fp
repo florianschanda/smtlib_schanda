@@ -1065,7 +1065,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1999,17 +1999,17 @@ logic bool_eq18 : us_rep2, us_rep2 -> bool
 
 axiom bool_eq_def16 :
   (forall a:us_rep2. forall b:us_rep2 [bool_eq18(a, b)].
-  (((((to_rep8(((a).us_split_discrs1).rec__robot_iface__speed_option__opt) = to_rep8(((b).us_split_discrs1).rec__robot_iface__speed_option__opt)) and
-  (robot_iface__speed_option__modulus__pred(a) ->
-  (to_rep2(((a).us_split_fields5).rec__robot_iface__speed_option__modulus) = to_rep2(((b).us_split_fields5).rec__robot_iface__speed_option__modulus)))) and
-  (robot_iface__speed_option__angle__pred(a) ->
-  (to_rep2(((a).us_split_fields5).rec__robot_iface__speed_option__angle) = to_rep2(((b).us_split_fields5).rec__robot_iface__speed_option__angle)))) ->
-  (bool_eq18(a, b) = true)) and
-  ((not (((to_rep8(((a).us_split_discrs1).rec__robot_iface__speed_option__opt) = to_rep8(((b).us_split_discrs1).rec__robot_iface__speed_option__opt)) and
-  (robot_iface__speed_option__modulus__pred(a) ->
-  (to_rep2(((a).us_split_fields5).rec__robot_iface__speed_option__modulus) = to_rep2(((b).us_split_fields5).rec__robot_iface__speed_option__modulus)))) and
+  ((((to_rep8(((a).us_split_discrs1).rec__robot_iface__speed_option__opt) = to_rep8(((b).us_split_discrs1).rec__robot_iface__speed_option__opt)) and
+  ((robot_iface__speed_option__modulus__pred(a) ->
+  (to_rep2(((a).us_split_fields5).rec__robot_iface__speed_option__modulus) = to_rep2(((b).us_split_fields5).rec__robot_iface__speed_option__modulus))) and
   (robot_iface__speed_option__angle__pred(a) ->
   (to_rep2(((a).us_split_fields5).rec__robot_iface__speed_option__angle) = to_rep2(((b).us_split_fields5).rec__robot_iface__speed_option__angle))))) ->
+  (bool_eq18(a, b) = true)) and
+  ((not ((to_rep8(((a).us_split_discrs1).rec__robot_iface__speed_option__opt) = to_rep8(((b).us_split_discrs1).rec__robot_iface__speed_option__opt)) and
+  ((robot_iface__speed_option__modulus__pred(a) ->
+  (to_rep2(((a).us_split_fields5).rec__robot_iface__speed_option__modulus) = to_rep2(((b).us_split_fields5).rec__robot_iface__speed_option__modulus))) and
+  (robot_iface__speed_option__angle__pred(a) ->
+  (to_rep2(((a).us_split_fields5).rec__robot_iface__speed_option__angle) = to_rep2(((b).us_split_fields5).rec__robot_iface__speed_option__angle)))))) ->
   (bool_eq18(a, b) = false))))
 
 logic value__size4 : int
@@ -2549,7 +2549,7 @@ function proxy__ref___projection(a: proxy__ref) : us_rep3 =
 
 type idir_t
 
-predicate in_range10(x: int) = (((-1) <= x) and (x <= 1))
+predicate in_range10(x: int) = (((- 1) <= x) and (x <= 1))
 
 logic bool_eq20 : int, int -> bool
 
@@ -3596,31 +3596,29 @@ axiom is_empty__post_axiom :
   us_split_fields13 = { rec__algorithm__gap_vectors__list = container1 }
   }) = 0)))
 
-logic fliteral4 : t
+logic i : int
 
-axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
-  (tqtreal(fliteral4) = 3.1415927410125732421875))
+logic algorithm__isrisinggapsafe__B_4__posgapcorner__assume : float1
 
-logic fliteral5 : t
+logic algorithm__isrisinggapsafe__B_4__posgapcorner__assume1 : float1
 
-axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
-  (tqtreal(fliteral5) = 1.57079637050628662109375))
+logic o : t
 
-logic fliteral6 : t
+logic o1 : t
 
-axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
-  (tqtreal(fliteral6) = 0.009999999776482582092285156250))
+logic algorithm__isrisinggapsafe__B_4__B_6__deltaangle__assume : t
 
- (* File "algorithm.ads", line 76, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int.
-  forall algorithm__isrisinggapsafe__B_4__posgapcorner__assume:float1.
-  forall algorithm__isrisinggapsafe__B_4__posgapcorner__assume1:float1.
-  forall o:t. forall o1:t.
-  forall algorithm__isrisinggapsafe__B_4__B_6__deltaangle__assume:t.
-  forall result:int. forall i1:int. forall i2:int. (((this20 = false) and
-  (1000 = to_rep10(this23))) -> (((({ us_split_fields3 = {
-  rec__spaces__positions__position__x =
+logic o2 : t
+
+logic result : int
+
+logic i1 : int
+
+logic i2 : int
+
+axiom H : ((this20 = false) and (1000 = to_rep10(this23)))
+
+axiom H1 : (({ us_split_fields3 = { rec__spaces__positions__position__x =
   algorithm__isrisinggapsafe__B_4__posgapcorner__assume;
   rec__spaces__positions__position__y =
   algorithm__isrisinggapsafe__B_4__posgapcorner__assume1 }
@@ -3632,19 +3630,58 @@ goal WP_parameter_def :
   rec__spaces__positions__position__y =
   algorithm__isrisinggapsafe__B_4__posgapcorner__assume1 } }, {
   us_split_fields3 = { rec__spaces__positions__position__x = zero_position;
-  rec__spaces__positions__position__y = zero_position1 } }) = true)))) and
-  ((posgapcorner = algorithm__isrisinggapsafe__B_4__posgapcorner__assume) and
-  (posgapcorner1 = algorithm__isrisinggapsafe__B_4__posgapcorner__assume1))) ->
-  (((result = i) and (i1 = 1)) -> (((1 <= i1) and (i1 <= 1000)) ->
-  (((1 <= i2) and (i2 <= 1000)) ->
-  (((((((o = aldiff((((this22[i2])).us_split_fields11).rec__algorithm__laser_scan_data__second,
+  rec__spaces__positions__position__y = zero_position1 } }) = true))))
+
+axiom H2 :
+  ((algorithm__isrisinggapsafe__B_4__posgapcorner__assume = posgapcorner) and
+  (algorithm__isrisinggapsafe__B_4__posgapcorner__assume1 = posgapcorner1))
+
+axiom H3 : (result = i)
+
+axiom H4 : (i1 = 1)
+
+axiom H5 : (1 <= i1)
+
+axiom H6 : (i1 <= 1000)
+
+axiom H7 : ((1 <= i2) and (i2 <= 1000))
+
+logic fliteral4 : t
+
+axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
+  (tqtreal(fliteral4) = 3.1415927410125732421875))
+
+axiom H8 :
+  ((o = aldiff((((this22[i2])).us_split_fields11).rec__algorithm__laser_scan_data__second,
   { us_split_fields1 = { rec__spaces__angles__angle__theta = risinggap }
-  })) and (tqtisFinite(o) and (lt(neg(fliteral4), o) and le(o,
-  fliteral4)))) and (o1 = mul(NearestTiesToEven, of_int(NearestTiesToEven,
-  to_rep9(risinggap2)), o))) and
+  })) and (tqtisFinite(o) and (lt(neg(fliteral4), o) and le(o, fliteral4))))
+
+axiom H9 : (o1 = mul(NearestTiesToEven, of_int(NearestTiesToEven,
+  to_rep9(risinggap2)), o))
+
+axiom H10 :
   ((algorithm__isrisinggapsafe__B_4__B_6__deltaangle__assume = o1) and
-  tqtisFinite(o1))) and
-  (algorithm__isrisinggapsafe__B_4__B_6__deltaangle__assume = deltaangle)) and
-  tqtisFinite(deltaangle)) -> ((lt(fliteral1, deltaangle) and lt(deltaangle,
-  fliteral5)) -> tqtisFinite(sub(NearestTiesToEven, to_rep3(this12),
-  fliteral6))))))))))
+  tqtisFinite(o1))
+
+axiom H11 :
+  (algorithm__isrisinggapsafe__B_4__B_6__deltaangle__assume = deltaangle)
+
+axiom H12 : tqtisFinite(deltaangle)
+
+axiom H13 : lt(fliteral1, deltaangle)
+
+logic fliteral5 : t
+
+axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
+  (tqtreal(fliteral5) = 1.57079637050628662109375))
+
+axiom H14 : lt(deltaangle, fliteral5)
+
+logic fliteral6 : t
+
+axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
+  (tqtreal(fliteral6) = 0.009999999776482582092285156250))
+
+ (* File "algorithm.ads", line 76, characters 0-0 *)
+goal WP_parameter_def : tqtisFinite(sub(NearestTiesToEven, to_rep3(this12),
+  fliteral6))

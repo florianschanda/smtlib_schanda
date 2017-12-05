@@ -1181,21 +1181,16 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
+(declare-const p__t_FIRST__assume t)
+
+(declare-const p__t_LAST__assume t)
+
+(declare-const us t)
+
 (declare-const fliteral2 t)
 
 ;; fliteral_axiom
   (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral3)
-  (= (tqtreal fliteral3) (/ 150000000000000000000000.0 100000000000000000000000.0))))
-
-(declare-const p__t_FIRST__assume t)
-
-(declare-const p__t_LAST__assume t)
 
 ;; H
   (assert
@@ -1218,6 +1213,13 @@
 
 ;; H
   (assert (tqtisFinite t_LAST))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral3)
+  (= (tqtreal fliteral3) (/ 150000000000000000000000.0 100000000000000000000000.0))))
 
 (assert
 ;; WP_parameter_def

@@ -1207,6 +1207,10 @@
                                        fliteral5))) :pattern ((m_per_s_from_km_per_h
                                                               speed1)) )))
 
+(declare-const o t)
+
+(declare-const o1 t)
+
 ;; H
   (assert (tqtisFinite speed))
 

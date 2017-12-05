@@ -130,17 +130,17 @@
 (define-fun bv_max ((x (_ BitVec 8))
   (y (_ BitVec 8))) (_ BitVec 8) (ite (bvule x y) y x))
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -155,24 +155,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 Float32)))))
 (define-fun to_int3 ((b Bool)) Int (ite (= b true) 1 0))
@@ -544,15 +544,29 @@
 
 (declare-const o6 (_ BitVec 8))
 
-(declare-const temp___279 (_ BitVec 8))
-
 (declare-const o7 (_ BitVec 8))
+
+(declare-const temp___280 (_ BitVec 8))
 
 (declare-const o8 (_ BitVec 8))
 
-(declare-const o9 battery_level_type)
+(declare-const o9 (_ BitVec 8))
 
-(declare-const o10 Float32)
+(declare-const temp___282 (_ BitVec 8))
+
+(declare-const o10 (_ BitVec 8))
+
+(declare-const o11 (_ BitVec 8))
+
+(declare-const temp___279 (_ BitVec 8))
+
+(declare-const o12 (_ BitVec 8))
+
+(declare-const o13 (_ BitVec 8))
+
+(declare-const o14 battery_level_type)
+
+(declare-const o15 Float32)
 
 (declare-const result (_ BitVec 8))
 
@@ -572,6 +586,26 @@
 
 (declare-const result5 Bool)
 
+(declare-const result6 Bool)
+
+(declare-const result7 Bool)
+
+(declare-const result8 (_ BitVec 8))
+
+(declare-const counter2 (_ BitVec 8))
+
+(declare-const battery_level_at2 (Array (_ BitVec 8) battery_level_type))
+
+(declare-const current_time2 (_ BitVec 8))
+
+(declare-const counter3 (_ BitVec 8))
+
+(declare-const battery_level_at3 (Array (_ BitVec 8) battery_level_type))
+
+(declare-const current_time3 (_ BitVec 8))
+
+(declare-const counter4 (_ BitVec 8))
+
 ;; H
   (assert (in_range3 counter))
 
@@ -586,6 +620,9 @@
 
 ;; H
   (assert (= counter c))
+
+;; H
+  (assert true)
 
 ;; H
   (assert (= counter (time_below_threshold battery_level_at current_time)))
@@ -702,33 +739,33 @@
   (assert (= result3 true))
 
 ;; H
-  (assert (and (= o6 counter1) (in_range1 counter1)))
+  (assert (and (= o11 counter1) (in_range1 counter1)))
 
 ;; H
-  (assert (= temp___279 (bvsub current_time1 o6)))
+  (assert (= temp___279 (bvsub current_time1 o11)))
 
 ;; H
-  (assert (and (= o7 counter1) (in_range1 counter1)))
+  (assert (and (= o12 counter1) (in_range1 counter1)))
 
 ;; H
-  (assert (= result5 (ite (bvult current_time1 o7) true false)))
+  (assert (= result5 (ite (bvult current_time1 o12) true false)))
 
 ;; H
-  (assert (=> (= result5 true) (= o8 (bvadd temp___279 ((_ int2bv 8) 50)))))
+  (assert (=> (= result5 true) (= o13 (bvadd temp___279 ((_ int2bv 8) 50)))))
 
 ;; H
-  (assert (=> (not (= result5 true)) (= o8 temp___279)))
+  (assert (=> (not (= result5 true)) (= o13 temp___279)))
 
 ;; H
-  (assert (= o9 (select battery_level_at1 o8)))
+  (assert (= o14 (select battery_level_at1 o13)))
 
 ;; H
-  (assert (= o10 (to_rep o9)))
+  (assert (= o15 (to_rep o14)))
 
 ;; H
   (assert
   (= result4 (ite (fp.leq (fp #b0 #b01111100 #b10011001100110011001101)
-             o10) true false)))
+             o15) true false)))
 
 ;; H
   (assert (= result4 true))

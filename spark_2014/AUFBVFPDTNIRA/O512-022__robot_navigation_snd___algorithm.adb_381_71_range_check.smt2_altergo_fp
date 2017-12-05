@@ -1065,7 +1065,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1644,7 +1644,7 @@ logic bearing__function_guard : us_rep, us_rep1 -> prop
 
 type idir_t
 
-predicate in_range6(x: int) = (((-1) <= x) and (x <= 1))
+predicate in_range6(x: int) = (((- 1) <= x) and (x <= 1))
 
 logic bool_eq12 : int, int -> bool
 
@@ -3014,17 +3014,17 @@ logic bool_eq29 : us_rep9, us_rep9 -> bool
 
 axiom bool_eq_def25 :
   (forall a:us_rep9. forall b:us_rep9 [bool_eq29(a, b)].
-  (((((to_rep11(((a).us_split_discrs5).rec__robot_iface__speed_option__opt) = to_rep11(((b).us_split_discrs5).rec__robot_iface__speed_option__opt)) and
-  (robot_iface__speed_option__modulus__pred(a) ->
-  (to_rep2(((a).us_split_fields15).rec__robot_iface__speed_option__modulus) = to_rep2(((b).us_split_fields15).rec__robot_iface__speed_option__modulus)))) and
-  (robot_iface__speed_option__angle__pred(a) ->
-  (to_rep2(((a).us_split_fields15).rec__robot_iface__speed_option__angle) = to_rep2(((b).us_split_fields15).rec__robot_iface__speed_option__angle)))) ->
-  (bool_eq29(a, b) = true)) and
-  ((not (((to_rep11(((a).us_split_discrs5).rec__robot_iface__speed_option__opt) = to_rep11(((b).us_split_discrs5).rec__robot_iface__speed_option__opt)) and
-  (robot_iface__speed_option__modulus__pred(a) ->
-  (to_rep2(((a).us_split_fields15).rec__robot_iface__speed_option__modulus) = to_rep2(((b).us_split_fields15).rec__robot_iface__speed_option__modulus)))) and
+  ((((to_rep11(((a).us_split_discrs5).rec__robot_iface__speed_option__opt) = to_rep11(((b).us_split_discrs5).rec__robot_iface__speed_option__opt)) and
+  ((robot_iface__speed_option__modulus__pred(a) ->
+  (to_rep2(((a).us_split_fields15).rec__robot_iface__speed_option__modulus) = to_rep2(((b).us_split_fields15).rec__robot_iface__speed_option__modulus))) and
   (robot_iface__speed_option__angle__pred(a) ->
   (to_rep2(((a).us_split_fields15).rec__robot_iface__speed_option__angle) = to_rep2(((b).us_split_fields15).rec__robot_iface__speed_option__angle))))) ->
+  (bool_eq29(a, b) = true)) and
+  ((not ((to_rep11(((a).us_split_discrs5).rec__robot_iface__speed_option__opt) = to_rep11(((b).us_split_discrs5).rec__robot_iface__speed_option__opt)) and
+  ((robot_iface__speed_option__modulus__pred(a) ->
+  (to_rep2(((a).us_split_fields15).rec__robot_iface__speed_option__modulus) = to_rep2(((b).us_split_fields15).rec__robot_iface__speed_option__modulus))) and
+  (robot_iface__speed_option__angle__pred(a) ->
+  (to_rep2(((a).us_split_fields15).rec__robot_iface__speed_option__angle) = to_rep2(((b).us_split_fields15).rec__robot_iface__speed_option__angle)))))) ->
   (bool_eq29(a, b) = false))))
 
 logic value__size12 : int
@@ -4224,21 +4224,21 @@ logic bool_eq34 : us_rep13, us_rep13 -> bool
 
 axiom bool_eq_def30 :
   (forall a:us_rep13. forall b:us_rep13 [bool_eq34(a, b)].
-  (((((to_rep6(((a).us_split_discrs7).rec__algorithm__findbestvalley__gap_id_pair__opt) = to_rep6(((b).us_split_discrs7).rec__algorithm__findbestvalley__gap_id_pair__opt)) and
-  (algorithm__findbestvalley__gap_id_pair__rising__pred(a) ->
+  ((((to_rep6(((a).us_split_discrs7).rec__algorithm__findbestvalley__gap_id_pair__opt) = to_rep6(((b).us_split_discrs7).rec__algorithm__findbestvalley__gap_id_pair__opt)) and
+  ((algorithm__findbestvalley__gap_id_pair__rising__pred(a) ->
   (bool_eq20(((a).us_split_fields23).rec__algorithm__findbestvalley__gap_id_pair__rising,
-  ((b).us_split_fields23).rec__algorithm__findbestvalley__gap_id_pair__rising) = true))) and
-  (algorithm__findbestvalley__gap_id_pair__other__pred(a) ->
-  (bool_eq20(((a).us_split_fields23).rec__algorithm__findbestvalley__gap_id_pair__other,
-  ((b).us_split_fields23).rec__algorithm__findbestvalley__gap_id_pair__other) = true))) ->
-  (bool_eq34(a, b) = true)) and
-  ((not (((to_rep6(((a).us_split_discrs7).rec__algorithm__findbestvalley__gap_id_pair__opt) = to_rep6(((b).us_split_discrs7).rec__algorithm__findbestvalley__gap_id_pair__opt)) and
-  (algorithm__findbestvalley__gap_id_pair__rising__pred(a) ->
-  (bool_eq20(((a).us_split_fields23).rec__algorithm__findbestvalley__gap_id_pair__rising,
-  ((b).us_split_fields23).rec__algorithm__findbestvalley__gap_id_pair__rising) = true))) and
+  ((b).us_split_fields23).rec__algorithm__findbestvalley__gap_id_pair__rising) = true)) and
   (algorithm__findbestvalley__gap_id_pair__other__pred(a) ->
   (bool_eq20(((a).us_split_fields23).rec__algorithm__findbestvalley__gap_id_pair__other,
   ((b).us_split_fields23).rec__algorithm__findbestvalley__gap_id_pair__other) = true)))) ->
+  (bool_eq34(a, b) = true)) and
+  ((not ((to_rep6(((a).us_split_discrs7).rec__algorithm__findbestvalley__gap_id_pair__opt) = to_rep6(((b).us_split_discrs7).rec__algorithm__findbestvalley__gap_id_pair__opt)) and
+  ((algorithm__findbestvalley__gap_id_pair__rising__pred(a) ->
+  (bool_eq20(((a).us_split_fields23).rec__algorithm__findbestvalley__gap_id_pair__rising,
+  ((b).us_split_fields23).rec__algorithm__findbestvalley__gap_id_pair__rising) = true)) and
+  (algorithm__findbestvalley__gap_id_pair__other__pred(a) ->
+  (bool_eq20(((a).us_split_fields23).rec__algorithm__findbestvalley__gap_id_pair__other,
+  ((b).us_split_fields23).rec__algorithm__findbestvalley__gap_id_pair__other) = true))))) ->
   (bool_eq34(a, b) = false))))
 
 logic value__size18 : int
@@ -5585,20 +5585,720 @@ axiom w_get__post_axiom :
   ((in_range7(witness1) and (has_witness(container, witness1) = true)) ->
   in_range24(w_get(container, witness1)))))
 
- (* File "algorithm.ads", line 27, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:float1. forall o1:float1. forall o2:float1. forall o3:float1.
-  forall temp___875:float1. forall temp___8751:float1. forall o4:int.
-  (((((to_rep2(o) = fliteral1) and ((to_rep2(o1) = fliteral1) and
-  ((o1 = o2) and (o = o3)))) and ((temp___875 = o2) and
-  (temp___8751 = o3))) and ((temp___875 = zero_position) and
-  (temp___8751 = zero_position1))) -> (((this20 = false) and
-  (1000 = to_rep5(this23))) -> ((not (oeq({ us_split_fields3 = {
+logic best_valley_ids__split_fields : count_type
+
+logic best_valley_ids__split_fields1 : count_type
+
+logic best_valley_ids__split_discrs : option
+
+logic ir__split_fields : count_type
+
+logic candidate_valley_ids__split_fields : count_type
+
+logic candidate_valley_ids__split_fields1 : count_type
+
+logic candidate_valley_ids__split_discrs : option
+
+logic o : float1
+
+logic o1 : float1
+
+logic o2 : float1
+
+logic o3 : float1
+
+logic temp___875 : float1
+
+logic temp___8751 : float1
+
+logic o4 : int
+
+logic algorithm__findbestvalley__existing_gap_id_LAST__assume : int
+
+logic o5 : option
+
+logic o6 : option
+
+logic algorithm__findbestvalley__best_valley_ids__assume : option
+
+logic algorithm__findbestvalley__best_valley_ids__assume1 : count_type
+
+logic algorithm__findbestvalley__best_valley_ids__assume2 : count_type
+
+logic algorithm__findbestvalley__best_valley_ids__assume3 : bool
+
+logic algorithm__findbestvalley__ir__assume : count_type
+
+logic temp___868 : count_type
+
+logic temp___8681 : us_main_type
+
+logic temp___867 : count_type
+
+logic temp___866 : option
+
+logic temp___8661 : count_type
+
+logic temp___8662 : count_type
+
+logic temp___8663 : bool
+
+logic o7 : count_type
+
+logic algorithm__findbestvalley__B_14__il__assume : count_type
+
+logic o8 : option
+
+logic o9 : option
+
+logic algorithm__findbestvalley__B_14__candidate_valley_ids__assume : option
+
+logic algorithm__findbestvalley__B_14__candidate_valley_ids__assume1 : count_type
+
+logic algorithm__findbestvalley__B_14__candidate_valley_ids__assume2 : count_type
+
+logic algorithm__findbestvalley__B_14__candidate_valley_ids__assume3 : bool
+
+logic o10 : normalized2pi
+
+logic o11 : float1
+
+logic o12 : idir_t
+
+logic o13 : normalized2pi
+
+logic o14 : float1
+
+logic o15 : idir_t
+
+logic o16 : idir_t
+
+logic o17 : int
+
+logic o18 : normalized2pi
+
+logic o19 : float1
+
+logic o20 : idir_t
+
+logic o21 : option
+
+logic o22 : option
+
+logic temp___841 : option
+
+logic temp___8411 : count_type
+
+logic temp___8412 : count_type
+
+logic temp___8413 : bool
+
+logic usq_ : option
+
+logic usq_1 : count_type
+
+logic usq_2 : count_type
+
+logic usq_3 : bool
+
+logic temp___843 : option
+
+logic temp___8431 : count_type
+
+logic temp___8432 : count_type
+
+logic temp___8433 : bool
+
+logic o23 : normalized2pi
+
+logic o24 : float1
+
+logic o25 : idir_t
+
+logic o26 : normalized2pi
+
+logic o27 : float1
+
+logic o28 : idir_t
+
+logic o29 : normalized2pi
+
+logic o30 : (int,character) farray
+
+logic o31 : t1
+
+logic o32 : normalized2pi
+
+logic o33 : float1
+
+logic o34 : idir_t
+
+logic o35 : normalized2pi
+
+logic o36 : float1
+
+logic o37 : idir_t
+
+logic o38 : idir_t
+
+logic o39 : int
+
+logic o40 : normalized2pi
+
+logic o41 : float1
+
+logic o42 : idir_t
+
+logic o43 : normalized2pi
+
+logic o44 : float1
+
+logic o45 : idir_t
+
+logic o46 : normalized2pi
+
+logic o47 : float1
+
+logic o48 : idir_t
+
+logic o49 : normalized2pi
+
+logic o50 : normalized2pi
+
+logic o51 : t
+
+logic o52 : normalized2pi
+
+logic o53 : float1
+
+logic o54 : idir_t
+
+logic o55 : normalized2pi
+
+logic o56 : float1
+
+logic o57 : idir_t
+
+logic o58 : normalized2pi
+
+logic o59 : normalized2pi
+
+logic o60 : t
+
+logic o61 : t
+
+logic o62 : t
+
+logic o63 : option
+
+logic o64 : option
+
+logic temp___849 : option
+
+logic temp___8491 : count_type
+
+logic temp___8492 : count_type
+
+logic temp___8493 : bool
+
+logic usq_4 : option
+
+logic usq_5 : count_type
+
+logic usq_6 : count_type
+
+logic usq_7 : bool
+
+logic temp___851 : option
+
+logic temp___8511 : count_type
+
+logic temp___8512 : count_type
+
+logic temp___8513 : bool
+
+logic o65 : option
+
+logic o66 : option
+
+logic temp___846 : option
+
+logic temp___8461 : count_type
+
+logic temp___8462 : count_type
+
+logic temp___8463 : bool
+
+logic usq_8 : option
+
+logic usq_9 : count_type
+
+logic usq_10 : count_type
+
+logic usq_11 : bool
+
+logic temp___848 : option
+
+logic temp___8481 : count_type
+
+logic temp___8482 : count_type
+
+logic temp___8483 : bool
+
+logic o67 : normalized2pi
+
+logic o68 : float1
+
+logic o69 : idir_t
+
+logic o70 : normalized2pi
+
+logic o71 : float1
+
+logic o72 : idir_t
+
+logic o73 : normalized2pi
+
+logic o74 : (int,character) farray
+
+logic o75 : t1
+
+logic o76 : normalized2pi
+
+logic o77 : (int,character) farray
+
+logic o78 : t1
+
+logic o79 : normalized2pi
+
+logic o80 : float1
+
+logic o81 : idir_t
+
+logic o82 : normalized2pi
+
+logic o83 : float1
+
+logic o84 : idir_t
+
+logic o85 : normalized2pi
+
+logic o86 : (int,character) farray
+
+logic o87 : t1
+
+logic o88 : normalized2pi
+
+logic o89 : float1
+
+logic o90 : idir_t
+
+logic o91 : normalized2pi
+
+logic o92 : float1
+
+logic o93 : idir_t
+
+logic o94 : normalized2pi
+
+logic o95 : normalized2pi
+
+logic o96 : t
+
+logic o97 : t
+
+logic o98 : us_image
+
+logic o99 : (int,character) farray
+
+logic o100 : t1
+
+logic o101 : normalized2pi
+
+logic o102 : float1
+
+logic o103 : idir_t
+
+logic o104 : normalized2pi
+
+logic o105 : float1
+
+logic o106 : idir_t
+
+logic o107 : normalized2pi
+
+logic o108 : (int,character) farray
+
+logic o109 : t1
+
+logic o110 : normalized2pi
+
+logic o111 : float1
+
+logic o112 : idir_t
+
+logic o113 : normalized2pi
+
+logic o114 : float1
+
+logic o115 : idir_t
+
+logic o116 : normalized2pi
+
+logic o117 : normalized2pi
+
+logic o118 : t
+
+logic o119 : t
+
+logic o120 : us_image
+
+logic o121 : (int,character) farray
+
+logic o122 : t1
+
+logic o123 : normalized2pi
+
+logic o124 : float1
+
+logic o125 : idir_t
+
+logic o126 : normalized2pi
+
+logic o127 : float1
+
+logic o128 : idir_t
+
+logic o129 : normalized2pi
+
+logic o130 : normalized2pi
+
+logic o131 : t
+
+logic o132 : normalized2pi
+
+logic o133 : float1
+
+logic o134 : idir_t
+
+logic o135 : normalized2pi
+
+logic o136 : float1
+
+logic o137 : idir_t
+
+logic o138 : normalized2pi
+
+logic o139 : normalized2pi
+
+logic o140 : t
+
+logic o141 : t
+
+logic o142 : t
+
+logic usq_12 : option
+
+logic usq_13 : count_type
+
+logic usq_14 : count_type
+
+logic usq_15 : bool
+
+logic temp___865 : option
+
+logic temp___8651 : count_type
+
+logic temp___8652 : count_type
+
+logic temp___8653 : bool
+
+logic usq_16 : option
+
+logic usq_17 : count_type
+
+logic usq_18 : count_type
+
+logic usq_19 : bool
+
+logic temp___855 : option
+
+logic temp___8551 : count_type
+
+logic temp___8552 : count_type
+
+logic temp___8553 : bool
+
+logic o143 : bool
+
+logic o144 : normalized2pi
+
+logic o145 : float1
+
+logic o146 : idir_t
+
+logic o147 : normalized2pi
+
+logic o148 : float1
+
+logic o149 : idir_t
+
+logic o150 : normalized2pi
+
+logic o151 : (int,character) farray
+
+logic o152 : t1
+
+logic o153 : normalized2pi
+
+logic o154 : float1
+
+logic o155 : idir_t
+
+logic o156 : normalized2pi
+
+logic o157 : float1
+
+logic o158 : idir_t
+
+logic candidate_valley_ids__split_fields2 : count_type
+
+logic candidate_valley_ids__split_fields3 : count_type
+
+logic candidate_valley_ids__split_discrs1 : option
+
+logic result : count_type
+
+logic result1 : count_type
+
+logic best_valley_ids__split_fields2 : count_type
+
+logic best_valley_ids__split_fields3 : count_type
+
+logic result2 : option
+
+logic best_valley_ids__split_discrs1 : option
+
+logic result3 : count_type
+
+logic ir__split_fields1 : count_type
+
+logic result4 : bool
+
+logic best_valley_ids__split_fields4 : count_type
+
+logic best_valley_ids__split_fields5 : count_type
+
+logic best_valley_ids__split_discrs2 : option
+
+logic ir__split_fields2 : count_type
+
+logic candidate_valley_ids__split_fields4 : count_type
+
+logic candidate_valley_ids__split_fields5 : count_type
+
+logic candidate_valley_ids__split_discrs2 : option
+
+logic result5 : bool
+
+logic result6 : count_type
+
+logic result7 : count_type
+
+logic candidate_valley_ids__split_fields6 : count_type
+
+logic candidate_valley_ids__split_fields7 : count_type
+
+logic result8 : option
+
+logic candidate_valley_ids__split_discrs3 : option
+
+logic result9 : bool
+
+logic result10 : bool
+
+logic result11 : count_type
+
+logic result12 : count_type
+
+logic candidate_valley_ids__split_fields8 : count_type
+
+logic candidate_valley_ids__split_fields9 : count_type
+
+logic result13 : option
+
+logic candidate_valley_ids__split_discrs4 : option
+
+logic result14 : bool
+
+logic result15 : bool
+
+logic result16 : bool
+
+logic result17 : count_type
+
+logic result18 : count_type
+
+logic candidate_valley_ids__split_fields10 : count_type
+
+logic candidate_valley_ids__split_fields11 : count_type
+
+logic result19 : option
+
+logic candidate_valley_ids__split_discrs5 : option
+
+logic result20 : count_type
+
+logic result21 : count_type
+
+logic candidate_valley_ids__split_fields12 : count_type
+
+logic candidate_valley_ids__split_fields13 : count_type
+
+logic result22 : option
+
+logic candidate_valley_ids__split_discrs6 : option
+
+logic result23 : bool
+
+logic result24 : count_type
+
+logic result25 : count_type
+
+logic best_valley_ids__split_fields6 : count_type
+
+logic best_valley_ids__split_fields7 : count_type
+
+logic result26 : option
+
+logic best_valley_ids__split_discrs3 : option
+
+logic result27 : count_type
+
+logic result28 : count_type
+
+logic best_valley_ids__split_fields8 : count_type
+
+logic best_valley_ids__split_fields9 : count_type
+
+logic result29 : option
+
+logic best_valley_ids__split_discrs4 : option
+
+logic ir__split_fields3 : count_type
+
+logic result30 : bool
+
+logic best_valley_ids__split_fields10 : count_type
+
+logic best_valley_ids__split_fields11 : count_type
+
+logic best_valley_ids__split_discrs5 : option
+
+logic ir__split_fields4 : count_type
+
+logic candidate_valley_ids__split_fields14 : count_type
+
+logic candidate_valley_ids__split_fields15 : count_type
+
+logic candidate_valley_ids__split_discrs7 : option
+
+logic best_valley_ids__split_fields12 : count_type
+
+logic best_valley_ids__split_fields13 : count_type
+
+logic best_valley_ids__split_discrs6 : option
+
+logic ir__split_fields5 : count_type
+
+logic candidate_valley_ids__split_fields16 : count_type
+
+logic candidate_valley_ids__split_fields17 : count_type
+
+logic candidate_valley_ids__split_discrs8 : option
+
+logic best_valley_ids__split_fields14 : count_type
+
+logic best_valley_ids__split_fields15 : count_type
+
+logic best_valley_ids__split_discrs7 : option
+
+logic ir__split_fields6 : count_type
+
+logic candidate_valley_ids__split_fields18 : count_type
+
+logic candidate_valley_ids__split_fields19 : count_type
+
+logic candidate_valley_ids__split_discrs9 : option
+
+logic best_valley_ids__split_fields16 : count_type
+
+logic best_valley_ids__split_fields17 : count_type
+
+logic best_valley_ids__split_discrs8 : option
+
+logic ir__split_fields7 : count_type
+
+logic candidate_valley_ids__split_fields20 : count_type
+
+logic candidate_valley_ids__split_fields21 : count_type
+
+logic candidate_valley_ids__split_discrs10 : option
+
+logic best_valley_ids__split_fields18 : count_type
+
+logic best_valley_ids__split_fields19 : count_type
+
+logic best_valley_ids__split_discrs9 : option
+
+logic ir__split_fields8 : count_type
+
+logic candidate_valley_ids__split_fields22 : count_type
+
+logic candidate_valley_ids__split_fields23 : count_type
+
+logic candidate_valley_ids__split_discrs11 : option
+
+logic best_valley_ids__split_fields20 : count_type
+
+logic best_valley_ids__split_fields21 : count_type
+
+logic best_valley_ids__split_discrs10 : option
+
+logic ir__split_fields9 : count_type
+
+logic candidate_valley_ids__split_fields24 : count_type
+
+logic candidate_valley_ids__split_fields25 : count_type
+
+logic candidate_valley_ids__split_discrs12 : option
+
+axiom H : (to_rep2(o) = fliteral1)
+
+axiom H1 : (to_rep2(o1) = fliteral1)
+
+axiom H2 : (o1 = o2)
+
+axiom H3 : (o = o3)
+
+axiom H4 : (temp___875 = o2)
+
+axiom H5 : (temp___8751 = o3)
+
+axiom H6 : ((temp___875 = zero_position) and (temp___8751 = zero_position1))
+
+axiom H7 : ((this20 = false) and (1000 = to_rep5(this23)))
+
+axiom H8 : (not (oeq({ us_split_fields3 = {
   rec__spaces__positions__position__x = disttogoal;
   rec__spaces__positions__position__y = disttogoal1 } }, { us_split_fields3 =
   { rec__spaces__positions__position__x = zero_position;
-  rec__spaces__positions__position__y = zero_position1 } }) = true)) ->
-  (((o4 = length1({ us_split_discrs3 = {
+  rec__spaces__positions__position__y = zero_position1 } }) = true))
+
+axiom H9 : ((o4 = length1({ us_split_discrs3 = {
   rec__algorithm__gap_vectors__list__capacity = this23 }; us_split_fields11 =
   { rec__algorithm__gap_vectors__list = this24 } })) and (in_range7(o4) and
-  (o4 <= to_rep5(this23)))) -> in_range9(o4))))))
+  (o4 <= to_rep5(this23))))
+
+ (* File "algorithm.ads", line 27, characters 0-0 *)
+goal WP_parameter_def : in_range9(o4)

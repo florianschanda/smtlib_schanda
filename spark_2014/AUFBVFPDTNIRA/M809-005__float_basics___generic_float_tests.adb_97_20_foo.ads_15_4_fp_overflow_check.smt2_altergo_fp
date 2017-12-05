@@ -1120,6 +1120,25 @@ logic b : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic foo__double_tests__underflow_2__result : bool
+
+logic o : t
+
+logic result : bool
+
+logic foo__double_tests__underflow_2__result1 : bool
+
+logic foo__double_tests__underflow_2__result2 : bool
+
+logic foo__double_tests__underflow_2__result3 : bool
+
+logic foo__double_tests__underflow_2__result4 : bool
+
+logic foo__double_tests__underflow_2__result5 : bool
+
+axiom H : tqtisFinite(a)
+
+axiom H1 : tqtisFinite(b)
+
  (* File "generic_float_tests.adb", line 96, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(a) -> (tqtisFinite(b) ->
-  tqtisFinite(mul(NearestTiesToEven, a, b))))
+goal WP_parameter_def : tqtisFinite(mul(NearestTiesToEven, a, b))

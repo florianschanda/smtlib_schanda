@@ -1158,6 +1158,12 @@
 
 (declare-const z t)
 
+(declare-const o t)
+
+(declare-const result t)
+
+(declare-const z1 t)
+
 ;; H
   (assert (in_range2 x))
 

@@ -1525,13 +1525,41 @@ logic sfun21 : (int,us_rep) farray
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "step_function.ads", line 48, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. forall o:int. forall o1:function_range. forall o2:float1.
-  forall o3:function_range. forall o4:float1. forall o5:function_range.
-  forall o6:int. (((1 <= i) and (i <= to_rep(sfun1))) -> ((((((((0 <= i) and
-  (i <= 10)) and (o = i)) and ({ us_split_fields1 = {
+logic i : int
+
+logic o : int
+
+logic o1 : function_range
+
+logic o2 : float1
+
+logic o3 : function_range
+
+logic o4 : float1
+
+logic o5 : function_range
+
+logic o6 : int
+
+axiom H : (1 <= i)
+
+axiom H1 : (i <= to_rep(sfun1))
+
+axiom H2 : ((0 <= i) and (i <= 10))
+
+axiom H3 : (o = i)
+
+axiom H4 : ({ us_split_fields1 = {
   rec__step_function__delimiter_entry__delimiter = o1;
-  rec__step_function__delimiter_entry__value = o2 } } = (sfun21[o]))) and
-  ((o1 = o3) and (o2 = o4))) and (o5 = o3)) and (o6 = to_rep1(o5))) ->
-  (0 <= i))))
+  rec__step_function__delimiter_entry__value = o2 } } = (sfun21[o]))
+
+axiom H5 : (o1 = o3)
+
+axiom H6 : (o2 = o4)
+
+axiom H7 : (o5 = o3)
+
+axiom H8 : (o6 = to_rep1(o5))
+
+ (* File "step_function.ads", line 48, characters 0-0 *)
+goal WP_parameter_def : (0 <= i)

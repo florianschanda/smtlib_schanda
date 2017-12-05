@@ -1091,17 +1091,49 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic a : t
+
+logic b : t
+
+logic c : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic result : t
+
+logic a1 : t
+
+logic result1 : t
+
+logic b1 : t
+
+logic result2 : t
+
+logic c1 : t
+
+axiom H : tqtisFinite(x)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
 
+axiom H1 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(a))
+
+axiom H2 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(b))
+
+axiom H3 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(c))
+
+axiom H4 : ((o = div(NearestTiesToEven, fliteral, x)) and
+  tqtisFinite(div(NearestTiesToEven, fliteral, x)))
+
+axiom H5 : (result = a)
+
+axiom H6 : (a1 = o)
+
  (* File "generic_float_tests.adb", line 255, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:t. forall b:t. forall c:t. forall o:t. forall result:t.
-  forall a1:t. (tqtisFinite(x) -> ((le(neg(fliteral1), fliteral1) ->
-  tqtisFinite(a)) -> ((le(neg(fliteral1), fliteral1) -> tqtisFinite(b)) ->
-  ((le(neg(fliteral1), fliteral1) -> tqtisFinite(c)) ->
-  ((((o = div(NearestTiesToEven, fliteral, x)) and
-  tqtisFinite(div(NearestTiesToEven, fliteral, x))) and ((result = a) and
-  (a1 = o))) -> tqtisFinite(div(NearestTiesToEven, fliteral, a1))))))))
+goal WP_parameter_def : tqtisFinite(div(NearestTiesToEven, fliteral, a1))

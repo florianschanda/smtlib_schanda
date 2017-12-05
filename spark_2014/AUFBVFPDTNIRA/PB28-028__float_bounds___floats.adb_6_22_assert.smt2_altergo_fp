@@ -2019,10 +2019,49 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic d : (int,long_float) farray
+
+logic o : long_float
+
+logic o1 : (int,long_float) farray
+
+logic o2 : long_float
+
+logic o3 : (int,long_float) farray
+
+logic o4 : long_float
+
+logic o5 : (int,long_float) farray
+
+logic o6 : long_float
+
+logic o7 : (int,long_float) farray
+
+logic result : (int,long_float) farray
+
+logic d1 : (int,long_float) farray
+
+logic result1 : (int,long_float) farray
+
+logic d2 : (int,long_float) farray
+
+logic result2 : (int,long_float) farray
+
+logic d3 : (int,long_float) farray
+
+logic result3 : (int,long_float) farray
+
+logic d4 : (int,long_float) farray
+
+axiom H :
+  (forall i:int. (((1 <= i) and (i <= 3)) -> (le(neg(fliteral),
+  to_rep((a[i]))) and le(to_rep((a[i])), fliteral))))
+
+axiom H1 : (le(neg(fliteral), to_rep((a[1]))) and le(to_rep((a[1])),
+  fliteral))
+
+axiom H2 : (le(neg(fliteral), to_rep((a[2]))) and le(to_rep((a[2])),
+  fliteral))
+
  (* File "floats.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  ((forall i:int. (((1 <= i) and (i <= 3)) -> (le(neg(fliteral),
-   to_rep((a[i]))) and le(to_rep((a[i])), fliteral)))) -> ((le(neg(fliteral),
-  to_rep((a[1]))) and le(to_rep((a[1])), fliteral)) -> ((le(neg(fliteral),
-  to_rep((a[2]))) and le(to_rep((a[2])), fliteral)) -> le(neg(fliteral),
-  to_rep((a[3]))))))
+goal WP_parameter_def : le(neg(fliteral), to_rep((a[3])))

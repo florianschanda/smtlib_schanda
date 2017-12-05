@@ -1221,20 +1221,6 @@
   (= record_const (mk___rep
                   (mk___split_fields (of_rep fliteral2) (of_rep fliteral3)))))
 
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral4)
-  (= (tqtreal fliteral4) (/ 1999999955296516418457031250.0 100000000000000000000000000000.0))))
-
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral5)
-  (= (tqtreal fliteral5) (/ 9999999776482582092285156250.0 1000000000000000000000000000000.0))))
-
 (declare-const res_1 t)
 
 (declare-const res_2 t)
@@ -1253,9 +1239,17 @@
 
 (declare-const temp___1401 float)
 
+(declare-const o4 t)
+
+(declare-const o5 t)
+
 (declare-const result t)
 
 (declare-const res_11 t)
+
+(declare-const result1 t)
+
+(declare-const res_21 t)
 
 ;; H
   (assert (= (to_rep o) fliteral3))
@@ -1299,8 +1293,22 @@
 ;; H
   (assert (= result res_1))
 
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral4)
+  (= (tqtreal fliteral4) (/ 1999999955296516418457031250.0 100000000000000000000000000000.0))))
+
 ;; H
   (assert (= res_11 fliteral4))
+
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral5)
+  (= (tqtreal fliteral5) (/ 9999999776482582092285156250.0 1000000000000000000000000000000.0))))
 
 (assert
 ;; WP_parameter_def

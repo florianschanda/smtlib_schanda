@@ -1336,6 +1336,8 @@
 
 (declare-const w t)
 
+(declare-const o t)
+
 ;; H
   (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite w)))
 

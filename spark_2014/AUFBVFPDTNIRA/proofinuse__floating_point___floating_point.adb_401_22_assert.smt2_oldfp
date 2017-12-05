@@ -2167,13 +2167,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral4)
-  (= (tqtreal fliteral4) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
-
 (declare-const res t1)
 
 (declare-const result t1)
@@ -2191,6 +2184,13 @@
 
 ;; H
   (assert (= result res))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral4)
+  (= (tqtreal fliteral4) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
 
 ;; H
   (assert (= res1 (to_float64 RNE1 (mul RNE1 x fliteral4))))

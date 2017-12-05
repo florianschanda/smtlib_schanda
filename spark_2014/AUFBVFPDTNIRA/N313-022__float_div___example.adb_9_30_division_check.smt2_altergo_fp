@@ -1077,5 +1077,7 @@ logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+axiom H : in_range1(x)
+
  (* File "example.ads", line 13, characters 0-0 *)
-goal WP_parameter_def : (in_range1(x) -> (not is_zero(x)))
+goal WP_parameter_def : (not is_zero(x))

@@ -1121,6 +1121,12 @@
                                      (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_51)))
 
+(declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const o2 Bool)
+
 ;; H
   (assert (tqtisFinite x))
 

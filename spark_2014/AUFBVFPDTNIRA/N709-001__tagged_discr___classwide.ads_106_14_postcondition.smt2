@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -65,24 +65,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort integer 0)
@@ -988,15 +988,13 @@
 
 (declare-const v__split_fields30 us_split_fields2)
 
-(define-fun classwide__update__v__fields4 () us_split_fields (mk___split_fields
-                                                             classwide__update__v__fields
-                                                             classwide__update__v__fields1
-                                                             classwide__update__v__fields2
-                                                             classwide__update__v__fields3))
-
 ;; H
   (assert
-  (= (is_zero (mk___rep classwide__update__v__fields4 v__attr__tag)) true))
+  (= (is_zero
+     (mk___rep
+     (mk___split_fields classwide__update__v__fields
+     classwide__update__v__fields1 classwide__update__v__fields2
+     classwide__update__v__fields3) v__attr__tag)) true))
 
 ;; H
   (assert (= result v__split_fields))
@@ -1024,7 +1022,11 @@
   (= (mk___split_fields1 v__split_fields7 v__split_fields8 v__split_fields9
      v__split_fields10 v__split_fields11 v__split_fields12 v__split_fields13)
   (us_split_fields3
-  (of_base (mk___rep classwide__update__v__fields4 v__attr__tag)))))
+  (of_base
+  (mk___rep
+  (mk___split_fields classwide__update__v__fields
+  classwide__update__v__fields1 classwide__update__v__fields2
+  classwide__update__v__fields3) v__attr__tag)))))
 
 ;; H
   (assert (= (to_rep o) 0))

@@ -1151,6 +1151,12 @@
 
 (declare-const o8 t)
 
+(declare-const o9 t)
+
+(declare-const o10 t)
+
+(declare-const o11 t)
+
 (declare-const result t)
 
 (declare-const asl_tmp1 t)

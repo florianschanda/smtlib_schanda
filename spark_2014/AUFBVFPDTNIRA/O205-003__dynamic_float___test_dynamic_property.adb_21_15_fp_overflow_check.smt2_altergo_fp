@@ -1176,13 +1176,46 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 axiom c__def_axiom : (c = d)
 
+logic x : t
+
+logic o : t
+
+logic temp___152 : t
+
+logic us : t
+
+logic o1 : t
+
+logic us1 : t
+
+logic o2 : t
+
+logic result : bool
+
+logic result1 : t
+
+logic x1 : t
+
+logic result2 : t
+
+logic x2 : t
+
+logic x3 : t
+
+logic x4 : t
+
+axiom H : tqtisFinite(d)
+
+axiom H1 : in_range2(c)
+
+axiom H2 : (d = c)
+
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.0e-1))
 
+axiom H3 : dynamic_property(fliteral2, last, x)
+
  (* File "test_dynamic_property.adb", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:t. (tqtisFinite(d) -> (in_range2(c) -> ((d = c) ->
-  (dynamic_property(fliteral2, last, x) -> tqtisFinite(add(NearestTiesToEven,
-  x, fliteral)))))))
+goal WP_parameter_def : tqtisFinite(add(NearestTiesToEven, x, fliteral))

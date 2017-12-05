@@ -1229,6 +1229,8 @@
 
 (declare-const x t)
 
+(declare-const us t)
+
 ;; H
   (assert (tqtisFinite d))
 

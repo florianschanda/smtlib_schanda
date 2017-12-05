@@ -1088,9 +1088,12 @@
 ;; dummy__def_axiom
   (assert (= dummy1 fliteral))
 
+;; H
+  (assert (tqtisFinite dummy1))
+
 (assert
 ;; WP_parameter_def
  ;; File "floats.adb", line 2, characters 0-0
-  (not (not (tqtisFinite dummy1))))
+  (not false))
 (check-sat)
 (exit)

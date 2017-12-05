@@ -1226,20 +1226,6 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range2 temp___expr_15)))
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral2)
-  (= (tqtreal fliteral2) (/ 161810004711151123046875.0 100000000000000000000000.0))))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral3)
-  (= (tqtreal fliteral3) (/ 22360000610351562500000.0 10000000000000000000000.0))))
-
 (declare-const number_theory__fib__result Int)
 
 (declare-const o Int)
@@ -1253,6 +1239,12 @@
 (declare-const o4 Int)
 
 (declare-const o5 Int)
+
+(declare-const o6 t)
+
+(declare-const o7 t)
+
+(declare-const o8 t)
 
 (declare-const result Int)
 
@@ -1284,6 +1276,20 @@
   (assert
   (=> (not (=> (not (= n 0)) (= n 1)))
   (and (= o1 (- n 2)) (in_range3 (- n 2)))))
+
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral2)
+  (= (tqtreal fliteral2) (/ 161810004711151123046875.0 100000000000000000000000.0))))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral3)
+  (= (tqtreal fliteral3) (/ 22360000610351562500000.0 10000000000000000000000.0))))
 
 ;; H
   (assert

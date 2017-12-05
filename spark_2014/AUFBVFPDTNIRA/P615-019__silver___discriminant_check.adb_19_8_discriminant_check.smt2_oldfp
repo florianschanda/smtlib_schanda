@@ -1189,22 +1189,22 @@
 
 (define-fun bool_eq2 ((a us_rep)
   (b us_rep)) Bool (ite (and
-                        (and
                         (= (rec__discriminant_check__rec__b
                            (us_split_discrs1 a)) (rec__discriminant_check__rec__b
                                                  (us_split_discrs1 b)))
+                        (and
                         (=> (discriminant_check__rec__x__pred a)
                         (= (to_rep
                            (rec__discriminant_check__rec__x
                            (us_split_fields1 a))) (to_rep
                                                   (rec__discriminant_check__rec__x
-                                                  (us_split_fields1 b))))))
+                                                  (us_split_fields1 b)))))
                         (=> (discriminant_check__rec__y__pred a)
                         (= (to_rep1
                            (rec__discriminant_check__rec__y
                            (us_split_fields1 a))) (to_rep1
                                                   (rec__discriminant_check__rec__y
-                                                  (us_split_fields1 b))))))
+                                                  (us_split_fields1 b)))))))
                    true false))
 
 (declare-const value__size Int)

@@ -1896,24 +1896,24 @@
 
 (define-fun bool_eq10 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
-                         (and
                          (= (to_rep8
                             (rec__robot_iface__speed_option__opt
                             (us_split_discrs1 a))) (to_rep8
                                                    (rec__robot_iface__speed_option__opt
                                                    (us_split_discrs1 b))))
+                         (and
                          (=> (robot_iface__speed_option__modulus__pred a)
                          (= (to_rep5
                             (rec__robot_iface__speed_option__modulus
                             (us_split_fields3 a))) (to_rep5
                                                    (rec__robot_iface__speed_option__modulus
-                                                   (us_split_fields3 b))))))
+                                                   (us_split_fields3 b)))))
                          (=> (robot_iface__speed_option__angle__pred a)
                          (= (to_rep5
                             (rec__robot_iface__speed_option__angle
                             (us_split_fields3 a))) (to_rep5
                                                    (rec__robot_iface__speed_option__angle
-                                                   (us_split_fields3 b))))))
+                                                   (us_split_fields3 b)))))))
                     true false))
 
 (declare-const value__size3 Int)
@@ -2832,16 +2832,16 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
+(declare-fun length1 (us_rep4) Int)
+
+(declare-fun length__function_guard (Int us_rep4) Bool)
+
 (define-fun dynamic_invariant2 ((temp___expr_324 Int)
   (temp___is_init_321 Bool) (temp___skip_constant_322 Bool)
   (temp___do_toplevel_323 Bool)) Bool (=>
                                       (or (= temp___is_init_321 true)
                                       (<= 0 2147483647)) (in_range11
                                       temp___expr_324)))
-
-(declare-fun length1 (us_rep4) Int)
-
-(declare-fun length__function_guard (Int us_rep4) Bool)
 
 ;; length__post_axiom
   (assert
@@ -4219,11 +4219,6 @@
      (w_get container witness1) true false true)) :pattern ((w_get container
                                                             witness1)) ))))
 
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 2.0)))
-
 (declare-const this__split_fields us_split_fields__ref7)
 
 (declare-const riterr__split_fields count_type)
@@ -4248,83 +4243,111 @@
 
 (declare-const temp___1049 count_type)
 
-(declare-const o3 normalized2pi)
+(declare-const o3 count_type)
 
-(declare-const o4 float)
+(declare-const o4 normalized2pi)
 
-(declare-const o5 idir_t)
+(declare-const o5 float)
 
-(declare-const o6 normalized2pi)
+(declare-const o6 idir_t)
 
-(declare-const o7 float)
+(declare-const o7 normalized2pi)
 
-(declare-const o8 idir_t)
+(declare-const o8 float)
 
 (declare-const o9 idir_t)
 
-(declare-const o10 Int)
+(declare-const o10 idir_t)
 
-(declare-const o11 us_rep3)
+(declare-const o11 Int)
 
-(declare-const o12 us_split_fields6)
+(declare-const o12 us_rep3)
 
-(declare-const o13 idir_t)
+(declare-const o13 us_split_fields6)
 
-(declare-const o14 Int)
+(declare-const o14 idir_t)
 
-(declare-const o15 us_rep3)
+(declare-const o15 Int)
 
-(declare-const o16 us_split_fields6)
+(declare-const o16 us_rep3)
 
-(declare-const o17 us_rep)
+(declare-const o17 us_split_fields6)
 
-(declare-const o18 us_rep3)
+(declare-const o18 us_rep)
 
-(declare-const o19 us_split_fields6)
+(declare-const o19 us_rep3)
 
-(declare-const o20 us_rep)
+(declare-const o20 us_split_fields6)
 
-(declare-const o21 t)
+(declare-const o21 us_rep)
 
 (declare-const o22 t)
 
-(declare-const o23 us_rep5)
+(declare-const o23 t)
 
-(declare-const o24 us_rep3)
+(declare-const o24 us_rep5)
 
-(declare-const o25 us_split_fields6)
+(declare-const o25 us_rep3)
 
-(declare-const o26 us_rep)
+(declare-const o26 us_split_fields6)
 
-(declare-const o27 us_t)
+(declare-const o27 us_rep)
 
-(declare-const o28 Int)
+(declare-const o28 us_t)
 
-(declare-const o29 Bool)
+(declare-const o29 Int)
 
-(declare-const o30 Int)
+(declare-const o30 Bool)
 
-(declare-const o31 us_rep5)
+(declare-const o31 Int)
 
-(declare-const o32 Bool)
+(declare-const o32 us_rep5)
+
+(declare-const o33 Bool)
 
 (declare-const temp___1053 us_rep5)
 
-(declare-const o33 us_rep3)
+(declare-const o34 us_rep3)
 
-(declare-const o34 us_split_fields6)
+(declare-const o35 us_split_fields6)
 
-(declare-const o35 us_rep)
+(declare-const o36 idir_t)
 
-(declare-const o36 us_rep3)
+(declare-const o37 Int)
 
-(declare-const o37 us_split_fields6)
+(declare-const o38 us_rep3)
 
-(declare-const o38 us_rep)
+(declare-const o39 us_split_fields6)
 
-(declare-const o39 t)
+(declare-const o40 idir_t)
 
-(declare-const o40 t)
+(declare-const o41 Int)
+
+(declare-const o42 us_rep3)
+
+(declare-const o43 us_split_fields6)
+
+(declare-const o44 us_rep)
+
+(declare-const o45 us_rep3)
+
+(declare-const o46 us_split_fields6)
+
+(declare-const o47 us_rep)
+
+(declare-const o48 t)
+
+(declare-const o49 t)
+
+(declare-const o50 us_rep5)
+
+(declare-const o51 us_rep3)
+
+(declare-const o52 us_split_fields6)
+
+(declare-const o53 us_rep)
+
+(declare-const o54 us_t)
 
 (declare-const this__split_fields1 us_split_fields14)
 
@@ -4354,21 +4377,25 @@
 
 (declare-const result5 Bool)
 
+(declare-const result6 Bool)
+
+(declare-const result7 Bool)
+
 (declare-const riterl__split_fields3 us_split_fields10)
 
 (declare-const algorithm__gap_vectors__delete__container__fields us_split_fields8)
 
-(declare-const result6 us_split_fields__ref7)
+(declare-const result8 us_split_fields__ref7)
 
 (declare-const this__split_fields3 us_split_fields14)
 
-(declare-const result7 us_split_fields__ref5)
+(declare-const result9 us_split_fields__ref5)
 
 (declare-const riterl__split_fields4 us_split_fields10)
 
 (declare-const riterr__split_fields4 us_split_fields10)
 
-(declare-const result8 Bool)
+(declare-const result10 Bool)
 
 (declare-const this__split_fields4 us_split_fields__ref7)
 
@@ -4394,22 +4421,71 @@
 
 (declare-const riterl__split_fields8 us_split_fields10)
 
-(declare-const result9 Bool)
+(declare-const this__split_fields8 us_split_fields__ref7)
 
-(declare-const result10 Bool)
+(declare-const riterr__split_fields9 us_split_fields__ref5)
 
-(declare-const result11 us_split_fields__ref5)
+(declare-const riterl__split_fields9 us_split_fields__ref5)
 
-(declare-const riterr__split_fields9 us_split_fields10)
+(declare-const this__split_fields9 us_split_fields14)
+
+(declare-const riterr__split_fields10 us_split_fields10)
+
+(declare-const riterl__split_fields10 us_split_fields10)
+
+(declare-const result11 Bool)
 
 (declare-const result12 Bool)
 
-(define-fun o41 () us_rep3 (mk___rep3
-                           (mk___split_fields3
-                           (mk___rep (mk___split_fields o3)) o4 o5)))
+(declare-const result13 us_split_fields__ref5)
 
-(define-fun temp___10431 () us_rep5 (mk___rep5
-                                    (mk___split_fields5 temp___1043)))
+(declare-const riterr__split_fields11 us_split_fields10)
+
+(declare-const result14 Bool)
+
+(declare-const result15 Bool)
+
+(declare-const result16 Bool)
+
+(declare-const riterl__split_fields11 us_split_fields10)
+
+(declare-const algorithm__gap_vectors__delete__container__fields1 us_split_fields8)
+
+(declare-const result17 us_split_fields__ref7)
+
+(declare-const this__split_fields10 us_split_fields14)
+
+(declare-const this__split_fields11 us_split_fields__ref7)
+
+(declare-const riterl__split_fields12 us_split_fields__ref5)
+
+(declare-const this__split_fields12 us_split_fields14)
+
+(declare-const riterl__split_fields13 us_split_fields10)
+
+(declare-const this__split_fields13 us_split_fields__ref7)
+
+(declare-const riterr__split_fields12 us_split_fields__ref5)
+
+(declare-const riterl__split_fields14 us_split_fields__ref5)
+
+(declare-const this__split_fields14 us_split_fields14)
+
+(declare-const riterr__split_fields13 us_split_fields10)
+
+(declare-const riterl__split_fields15 us_split_fields10)
+
+(declare-const this__split_fields15 us_split_fields__ref7)
+
+(declare-const riterr__split_fields14 us_split_fields__ref5)
+
+(declare-const riterl__split_fields16 us_split_fields__ref5)
+
+(declare-const this__split_fields16 us_split_fields14)
+
+(declare-const riterr__split_fields15 us_split_fields10)
+
+(declare-const riterl__split_fields17 us_split_fields10)
 
 ;; H
   (assert (= (to_rep10 o) 0))
@@ -4446,25 +4522,28 @@
 ;; H
   (assert
   (and
-  (= temp___10431 (last2
-                  (rec__algorithm__controller__gapvec
-                  (us_split_fields__content7 this__split_fields))))
+  (= (mk___rep5 (mk___split_fields5 temp___1043)) (last2
+                                                  (rec__algorithm__controller__gapvec
+                                                  (us_split_fields__content7
+                                                  this__split_fields))))
   (ite (= (= (length1
              (rec__algorithm__controller__gapvec
              (us_split_fields__content7 this__split_fields))) 0) true)
-  (= (bool_eq14 temp___10431 no_element) true)
+  (= (bool_eq14 (mk___rep5 (mk___split_fields5 temp___1043)) no_element) true)
   (and
   (= (has_key
      (positions
      (rec__algorithm__controller__gapvec
-     (us_split_fields__content7 this__split_fields))) temp___10431) true)
+     (us_split_fields__content7 this__split_fields)))
+     (mk___rep5 (mk___split_fields5 temp___1043))) true)
   (= (get1
      (positions
      (rec__algorithm__controller__gapvec
-     (us_split_fields__content7 this__split_fields))) temp___10431) (length1
-                                                                    (rec__algorithm__controller__gapvec
-                                                                    (us_split_fields__content7
-                                                                    this__split_fields))))))))
+     (us_split_fields__content7 this__split_fields)))
+     (mk___rep5 (mk___split_fields5 temp___1043))) (length1
+                                                   (rec__algorithm__controller__gapvec
+                                                   (us_split_fields__content7
+                                                   this__split_fields))))))))
 
 ;; H
   (assert
@@ -4542,33 +4621,26 @@
   (not (= (bool_eq14 (mk___rep5 riterr__split_fields2) no_element) true))))
   (= result2 false)))
 
-;; H
-  (assert
-  (=> (= result2 true)
-  (= riterr__split_fields2 (mk___split_fields5 temp___1051))))
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 2.0)))
 
 ;; H
   (assert
   (=> (= result2 true)
+  (and
+  (and (= riterr__split_fields2 (mk___split_fields5 temp___1051))
+  (and
   (= temp___1052 (to_rep2
                  (rec__robot_iface__proxy__robot_radius
                  (us_split_fields5
                  (rec__algorithm__controller__robot
-                 (us_split_fields__content7 this__split_fields))))))))
-
-;; H
-  (assert
-  (=> (= result2 true)
-  (= temp___1050 (mk___rep7 (us_split_fields__content7 this__split_fields)))))
-
-;; H
-  (assert
-  (=> (= result2 true)
-  (= riterl__split_fields1 (mk___split_fields5 temp___1049))))
-
-;; H
-  (assert
-  (=> (= result2 true)
+                 (us_split_fields__content7 this__split_fields))))))
+  (and
+  (= temp___1050 (mk___rep7 (us_split_fields__content7 this__split_fields)))
+  (and (= riterl__split_fields1 (mk___split_fields5 temp___1049))
+  (and
   (and
   (and
   (and
@@ -4592,11 +4664,9 @@
   (rec__robot_iface__proxy__robot_radius
   (us_split_fields5
   (rec__algorithm__controller__robot
-  (let ((subject this__split_fields)) this__split_fields2))))) temp___1052))))
-
-;; H
-  (assert
-  (=> (= result2 true)
+  (let ((subject this__split_fields)) this__split_fields2))))) temp___1052))
+  (and
+  (and
   (and
   (and
   (= (attr__constrained
@@ -4627,13 +4697,21 @@
   (= (rec__algorithm__controller__driveangle
      (let ((subject this__split_fields)) this__split_fields2)) (rec__algorithm__controller__driveangle
                                                                (us_split_fields15
-                                                               temp___1050)))))))
-
-;; H
-  (assert
-  (=> (= result2 true)
+                                                               temp___1050)))))
   (and
-  (= o21 (mul RNE1 fliteral4
+  (and
+  (not (= (bool_eq14 (mk___rep5 riterl__split_fields2) no_element) true))
+  (not (= (bool_eq14 (mk___rep5 riterr__split_fields3) no_element) true)))
+  (< 1 (length1
+       (rec__algorithm__controller__gapvec
+       (let ((subject this__split_fields)) this__split_fields2))))))
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (= o22 (mul RNE1 fliteral4
          (to_rep2
          (rec__robot_iface__proxy__scan_res
          (us_split_fields5
@@ -4645,17 +4723,17 @@
   (rec__robot_iface__proxy__scan_res
   (us_split_fields5
   (rec__algorithm__controller__robot
-  (let ((subject this__split_fields)) this__split_fields2))))))))))
-
-;; H
-  (assert
-  (=> (= result2 true)
+  (let ((subject this__split_fields)) this__split_fields2))))))))
   (and
-  (= o18 (element
+  (and
+  (and
+  (and
+  (and
+  (= o19 (element
          (rec__algorithm__controller__gapvec
          (let ((subject this__split_fields)) this__split_fields2))
          (mk___rep5 riterl__split_fields2)))
-  (= (bool_eq12 o18
+  (= (bool_eq12 o19
      (get
      (model__
      (rec__algorithm__controller__gapvec
@@ -4664,23 +4742,17 @@
      (positions
      (rec__algorithm__controller__gapvec
      (let ((subject this__split_fields)) this__split_fields2)))
-     (mk___rep5 riterl__split_fields2)))) true))))
-
-;; H
-  (assert (=> (= result2 true) (= o19 (us_split_fields7 o18))))
-
-;; H
-  (assert (=> (= result2 true) (= o20 (rec__gaps__gap__bearing o19))))
-
-;; H
-  (assert
-  (=> (= result2 true)
+     (mk___rep5 riterl__split_fields2)))) true))
+  (= o20 (us_split_fields7 o19))) (= o21 (rec__gaps__gap__bearing o20)))
   (and
-  (= o15 (element
+  (and
+  (and
+  (and
+  (= o16 (element
          (rec__algorithm__controller__gapvec
          (let ((subject this__split_fields)) this__split_fields2))
          (mk___rep5 riterr__split_fields3)))
-  (= (bool_eq12 o15
+  (= (bool_eq12 o16
      (get
      (model__
      (rec__algorithm__controller__gapvec
@@ -4689,31 +4761,21 @@
      (positions
      (rec__algorithm__controller__gapvec
      (let ((subject this__split_fields)) this__split_fields2)))
-     (mk___rep5 riterr__split_fields3)))) true))))
-
-;; H
-  (assert (=> (= result2 true) (= o16 (us_split_fields7 o15))))
-
-;; H
-  (assert (=> (= result2 true) (= o17 (rec__gaps__gap__bearing o16))))
-
-;; H
-  (assert
-  (=> (= result2 true) (and (= o22 (ccwdiff o17 o20)) (tqtisFinite o22))))
-
-;; H
-  (assert (=> (= result2 true) (= result5 (ite (lt o22 o21) true false))))
-
-;; H
-  (assert
-  (=> (= result2 true)
-  (=> (= result5 true)
+     (mk___rep5 riterr__split_fields3)))) true))
+  (= o17 (us_split_fields7 o16))) (= o18 (rec__gaps__gap__bearing o17)))
+  (and (= o23 (ccwdiff o18 o21)) (tqtisFinite o23))))
+  (= result7 (ite (lt o23 o22) true false))))
+  (ite (= result7 true)
   (and
-  (= o11 (element
+  (and
+  (and
+  (and
+  (and
+  (= o12 (element
          (rec__algorithm__controller__gapvec
          (let ((subject this__split_fields)) this__split_fields2))
          (mk___rep5 riterl__split_fields2)))
-  (= (bool_eq12 o11
+  (= (bool_eq12 o12
      (get
      (model__
      (rec__algorithm__controller__gapvec
@@ -4722,39 +4784,23 @@
      (positions
      (rec__algorithm__controller__gapvec
      (let ((subject this__split_fields)) this__split_fields2)))
-     (mk___rep5 riterl__split_fields2)))) true)))))
-
-;; H
-  (assert
-  (=> (= result2 true) (=> (= result5 true) (= o12 (us_split_fields7 o11)))))
-
-;; H
-  (assert
-  (=> (= result2 true)
-  (=> (= result5 true) (= o13 (rec__gaps__gap__idir o12)))))
-
-;; H
-  (assert (=> (= result2 true) (=> (= result5 true) (= o14 (to_rep9 o13)))))
-
-;; H
-  (assert
-  (=> (= result2 true)
-  (=> (= result5 true) (= result4 (ite (= o14 (- 1)) true false)))))
-
-;; H
-  (assert
-  (=> (= result2 true) (=> (not (= result5 true)) (= result4 false))))
-
-;; H
-  (assert
-  (=> (= result2 true)
-  (=> (= result4 true)
+     (mk___rep5 riterl__split_fields2)))) true))
+  (= o13 (us_split_fields7 o12))) (= o14 (rec__gaps__gap__idir o13)))
+  (= o15 (to_rep9 o14))) (= result6 (ite (= o15 (- 1)) true false)))
+  (= result6 false)))
+  (ite (= result6 true)
   (and
-  (= o41 (element
-         (rec__algorithm__controller__gapvec
-         (let ((subject this__split_fields)) this__split_fields2))
-         (mk___rep5 riterr__split_fields3)))
-  (= (bool_eq12 o41
+  (and
+  (and
+  (and
+  (and
+  (= (mk___rep3 (mk___split_fields3 (mk___rep (mk___split_fields o4)) o5 o6))
+  (element
+  (rec__algorithm__controller__gapvec
+  (let ((subject this__split_fields)) this__split_fields2))
+  (mk___rep5 riterr__split_fields3)))
+  (= (bool_eq12
+     (mk___rep3 (mk___split_fields3 (mk___rep (mk___split_fields o4)) o5 o6))
      (get
      (model__
      (rec__algorithm__controller__gapvec
@@ -4763,39 +4809,19 @@
      (positions
      (rec__algorithm__controller__gapvec
      (let ((subject this__split_fields)) this__split_fields2)))
-     (mk___rep5 riterr__split_fields3)))) true)))))
-
-;; H
-  (assert (=> (= result2 true) (=> (= result4 true) (= o3 o6))))
-
-;; H
-  (assert (=> (= result2 true) (=> (= result4 true) (= o4 o7))))
-
-;; H
-  (assert (=> (= result2 true) (=> (= result4 true) (= o5 o8))))
-
-;; H
-  (assert (=> (= result2 true) (=> (= result4 true) (= o9 o8))))
-
-;; H
-  (assert (=> (= result2 true) (=> (= result4 true) (= o10 (to_rep9 o9)))))
-
-;; H
-  (assert
-  (=> (= result2 true)
-  (=> (= result4 true) (= result3 (ite (= o10 (- 1)) true false)))))
-
-;; H
-  (assert
-  (=> (= result2 true) (=> (not (= result4 true)) (= result3 false))))
-
-;; H
-  (assert
-  (=> (= result2 true)
-  (=> (= result3 true)
+     (mk___rep5 riterr__split_fields3)))) true))
+  (and (= o4 o7) (and (= o5 o8) (= o6 o9)))) (= o10 o9))
+  (= o11 (to_rep9 o10))) (= result5 (ite (= o11 (- 1)) true false)))
+  (= result5 false)))
+  (ite (= result5 true)
+  (and
   (=> (= (of_int1 0) true)
   (and
-  (= o23 (previous
+  (and
+  (and
+  (and
+  (and
+  (= o24 (previous
          (rec__algorithm__controller__gapvec
          (let ((subject this__split_fields)) this__split_fields2))
          (mk___rep5 riterl__split_fields2)))
@@ -4805,32 +4831,26 @@
           (rec__algorithm__controller__gapvec
           (let ((subject this__split_fields)) this__split_fields2)))
           (mk___rep5 riterl__split_fields2)) 1) true) true)
-  (= (bool_eq14 o23 no_element) true)
+  (= (bool_eq14 o24 no_element) true)
   (and
   (= (has_key
      (positions
      (rec__algorithm__controller__gapvec
-     (let ((subject this__split_fields)) this__split_fields2))) o23) true)
+     (let ((subject this__split_fields)) this__split_fields2))) o24) true)
   (= (get1
      (positions
      (rec__algorithm__controller__gapvec
-     (let ((subject this__split_fields)) this__split_fields2))) o23) (-
+     (let ((subject this__split_fields)) this__split_fields2))) o24) (-
   (get1
   (positions
   (rec__algorithm__controller__gapvec
   (let ((subject this__split_fields)) this__split_fields2)))
-  (mk___rep5 riterl__split_fields2)) 1)))))))))
-
-;; H
-  (assert
-  (=> (= result2 true)
-  (=> (= result3 true)
-  (=> (= (of_int1 0) true)
+  (mk___rep5 riterl__split_fields2)) 1)))))
   (and
-  (= o24 (element
+  (= o25 (element
          (rec__algorithm__controller__gapvec
-         (let ((subject this__split_fields)) this__split_fields2)) o23))
-  (= (bool_eq12 o24
+         (let ((subject this__split_fields)) this__split_fields2)) o24))
+  (= (bool_eq12 o25
      (get
      (model__
      (rec__algorithm__controller__gapvec
@@ -4838,31 +4858,10 @@
      (get1
      (positions
      (rec__algorithm__controller__gapvec
-     (let ((subject this__split_fields)) this__split_fields2))) o23))) true))))))
-
-;; H
-  (assert
-  (=> (= result2 true)
-  (=> (= result3 true)
-  (=> (= (of_int1 0) true) (= o25 (us_split_fields7 o24))))))
-
-;; H
-  (assert
-  (=> (= result2 true)
-  (=> (= result3 true)
-  (=> (= (of_int1 0) true) (= o26 (rec__gaps__gap__bearing o25))))))
-
-;; H
-  (assert
-  (=> (= result2 true)
-  (=> (= result3 true)
-  (=> (= (of_int1 0) true)
-  (and (= o27 (print o26)) (dynamic_invariant1 o27 true false true))))))
-
-;; H
-  (assert
-  (=> (= result2 true)
-  (=> (= result3 true)
+     (let ((subject this__split_fields)) this__split_fields2))) o24))) true)))
+  (= o26 (us_split_fields7 o25))) (= o27 (rec__gaps__gap__bearing o26)))
+  (and (= o28 (print o27)) (dynamic_invariant1 o28 true false true))))
+  (and
   (and
   (and
   (and
@@ -4965,19 +4964,10 @@
      (us_split_fields9
      (rec__algorithm__controller__gapvec
      (let ((subject this__split_fields)) this__split_fields2)))))
-     (mk___rep5 riterl__split_fields2)) 1) true)))))
-
-;; H
-  (assert
-  (=> (= result2 true)
-  (=> (= result3 true)
-  (= result6 (let ((subject this__split_fields))
-             (mk___split_fields__ref7 this__split_fields2))))))
-
-;; H
-  (assert
-  (=> (= result2 true)
-  (=> (= result3 true)
+     (mk___rep5 riterl__split_fields2)) 1) true))
+  (and
+  (= result8 (let ((subject this__split_fields))
+             (mk___split_fields__ref7 this__split_fields2)))
   (= (let ((subject this__split_fields)) this__split_fields3) (mk___split_fields7
                                                               (rec__algorithm__controller__robot
                                                               (let ((subject
@@ -5002,49 +4992,19 @@
                                                               (let ((subject
                                                               this__split_fields))
                                                               this__split_fields2)))))))
-
-;; H
-  (assert
-  (=> (= result2 true)
-  (=> (not (= result3 true)) (= riterl__split_fields3 riterl__split_fields2))))
-
-;; H
-  (assert
-  (=> (= result2 true)
-  (=> (not (= result3 true))
+  (and
+  (and (= riterl__split_fields3 riterl__split_fields2)
   (= (let ((subject this__split_fields))
      (mk___split_fields__ref7 this__split_fields3)) (let ((subject this__split_fields))
                                                     (mk___split_fields__ref7
-                                                    this__split_fields2))))))
-
-;; H
-  (assert
-  (=> (= result2 true)
-  (=> (not (= result3 true))
-  (= algorithm__gap_vectors__delete__container__fields rho))))
-
-;; H
-  (assert
-  (=> (= result2 true)
-  (=> (not (= result3 true)) (= riterl__split_fields3 riterl__split_fields2))))
-
-;; H
-  (assert
-  (=> (= result2 true)
-  (=> (not (= result3 true)) (= this__split_fields3 this__split_fields2))))
-
-;; H
-  (assert
-  (=> (= result2 true)
-  (= result7 (mk___split_fields__ref5 riterl__split_fields3))))
-
-;; H
-  (assert
-  (=> (= result2 true) (= riterl__split_fields4 riterr__split_fields3)))
-
-;; H
-  (assert
-  (=> (= result2 true)
+                                                    this__split_fields2))))
+  (and (= algorithm__gap_vectors__delete__container__fields rho)
+  (and (= riterl__split_fields3 riterl__split_fields2)
+  (= this__split_fields3 this__split_fields2))))))
+  (and
+  (and (= result9 (mk___split_fields__ref5 riterl__split_fields3))
+  (= riterl__split_fields4 riterr__split_fields3))
+  (and
   (ite (= (ite (= (bool_eq14 (mk___rep5 riterr__split_fields3) no_element) false) (=
           (get1
           (positions
@@ -5067,281 +5027,242 @@
                                            (rec__algorithm__controller__gapvec
                                            (let ((subject this__split_fields))
                                            this__split_fields3)))
-                                           (mk___rep5 riterr__split_fields3)) 1))))))
-
-;; H
-  (assert
-  (=> (= result2 true)
-  (=>
+                                           (mk___rep5 riterr__split_fields3)) 1))))
   (and
-  (not (= (bool_eq14 (mk___rep5 riterl__split_fields4) no_element) true))
-  (not (= (bool_eq14 (mk___rep5 riterr__split_fields4) no_element) true)))
   (and
-  (= o28 (length1
+  (ite (and
+       (not
+       (= (bool_eq14 (mk___rep5 riterl__split_fields4) no_element) true))
+       (not
+       (= (bool_eq14 (mk___rep5 riterr__split_fields4) no_element) true)))
+  (and
+  (and
+  (= o29 (length1
          (rec__algorithm__controller__gapvec
          (let ((subject this__split_fields)) this__split_fields3))))
-  (and (in_range11 o28)
-  (<= o28 (to_rep10
+  (and (in_range11 o29)
+  (<= o29 (to_rep10
           (rec__algorithm__gap_vectors__list__capacity
           (us_split_discrs3
           (rec__algorithm__controller__gapvec
-          (let ((subject this__split_fields)) this__split_fields3)))))))))))
-
-;; H
-  (assert
-  (=> (= result2 true)
-  (=>
+          (let ((subject this__split_fields)) this__split_fields3))))))))
+  (= o30 (ite (< 1 o29) true false))) (= o30 false))
+  (= result10 (ite (not (= o30 true)) true false))) (= result10 true)))))))))))
   (and
-  (not (= (bool_eq14 (mk___rep5 riterl__split_fields4) no_element) true))
-  (not (= (bool_eq14 (mk___rep5 riterr__split_fields4) no_element) true)))
-  (= o29 (ite (< 1 o28) true false)))))
-
-;; H
-  (assert
-  (=> (= result2 true)
-  (=>
-  (not
   (and
-  (not (= (bool_eq14 (mk___rep5 riterl__split_fields4) no_element) true))
-  (not (= (bool_eq14 (mk___rep5 riterr__split_fields4) no_element) true))))
-  (= o29 false))))
-
-;; H
-  (assert
-  (=> (= result2 true) (= result8 (ite (not (= o29 true)) true false))))
-
-;; H
-  (assert (=> (= result2 true) (= result8 true)))
-
-;; H
-  (assert
-  (=> (= result2 true)
-  (= riterl__split_fields5 (mk___split_fields__ref5 riterl__split_fields4))))
-
-;; H
-  (assert
-  (=> (= result2 true)
-  (= riterr__split_fields5 (mk___split_fields__ref5 riterr__split_fields4))))
-
-;; H
-  (assert
-  (=> (= result2 true)
-  (= this__split_fields4 (let ((subject this__split_fields))
+  (= riterl__split_fields7 (mk___split_fields__ref5 riterl__split_fields4))
+  (and
+  (= riterr__split_fields7 (mk___split_fields__ref5 riterr__split_fields4))
+  (= this__split_fields6 (let ((subject this__split_fields))
                          (mk___split_fields__ref7 this__split_fields3)))))
+  (and (= riterl__split_fields8 riterl__split_fields4)
+  (and (= riterr__split_fields8 riterr__split_fields4)
+  (= this__split_fields7 this__split_fields3)))))))
 
 ;; H
   (assert
-  (=> (= result2 true) (= riterl__split_fields6 riterl__split_fields4)))
+  (=> (= result2 true) (= riterl__split_fields9 riterl__split_fields7)))
 
 ;; H
   (assert
-  (=> (= result2 true) (= riterr__split_fields6 riterr__split_fields4)))
+  (=> (= result2 true) (= riterr__split_fields9 riterr__split_fields7)))
 
 ;; H
-  (assert (=> (= result2 true) (= this__split_fields5 this__split_fields3)))
-
-;; H
-  (assert
-  (=> (= result2 true) (= riterl__split_fields7 riterl__split_fields5)))
+  (assert (=> (= result2 true) (= this__split_fields8 this__split_fields6)))
 
 ;; H
   (assert
-  (=> (= result2 true) (= riterr__split_fields7 riterr__split_fields5)))
-
-;; H
-  (assert (=> (= result2 true) (= this__split_fields6 this__split_fields4)))
+  (=> (= result2 true) (= riterl__split_fields10 riterl__split_fields8)))
 
 ;; H
   (assert
-  (=> (= result2 true) (= riterl__split_fields8 riterl__split_fields6)))
+  (=> (= result2 true) (= riterr__split_fields10 riterr__split_fields8)))
 
 ;; H
-  (assert
-  (=> (= result2 true) (= riterr__split_fields8 riterr__split_fields6)))
-
-;; H
-  (assert (=> (= result2 true) (= this__split_fields7 this__split_fields5)))
+  (assert (=> (= result2 true) (= this__split_fields9 this__split_fields7)))
 
 ;; H
   (assert
   (=> (not (= result2 true))
-  (= riterl__split_fields7 (mk___split_fields__ref5 riterl__split_fields1))))
+  (= riterl__split_fields9 (mk___split_fields__ref5 riterl__split_fields1))))
 
 ;; H
   (assert
   (=> (not (= result2 true))
-  (= riterr__split_fields7 (mk___split_fields__ref5 riterr__split_fields2))))
+  (= riterr__split_fields9 (mk___split_fields__ref5 riterr__split_fields2))))
 
 ;; H
   (assert
-  (=> (not (= result2 true)) (= this__split_fields6 this__split_fields)))
+  (=> (not (= result2 true)) (= this__split_fields8 this__split_fields)))
 
 ;; H
   (assert
-  (=> (not (= result2 true)) (= riterl__split_fields8 riterl__split_fields1)))
+  (=> (not (= result2 true))
+  (= riterl__split_fields10 riterl__split_fields1)))
 
 ;; H
   (assert
-  (=> (not (= result2 true)) (= riterr__split_fields8 riterr__split_fields2)))
+  (=> (not (= result2 true))
+  (= riterr__split_fields10 riterr__split_fields2)))
 
 ;; H
   (assert
-  (=> (not (= result2 true)) (= this__split_fields7 this__split_fields1)))
+  (=> (not (= result2 true)) (= this__split_fields9 this__split_fields1)))
 
 ;; H
   (assert
   (and
-  (= o31 (first2
+  (= o32 (first2
          (rec__algorithm__controller__gapvec
-         (us_split_fields__content7 this__split_fields6))))
+         (us_split_fields__content7 this__split_fields8))))
   (ite (= (= (length1
              (rec__algorithm__controller__gapvec
-             (us_split_fields__content7 this__split_fields6))) 0) true)
-  (= (bool_eq14 o31 no_element) true)
+             (us_split_fields__content7 this__split_fields8))) 0) true)
+  (= (bool_eq14 o32 no_element) true)
   (and
   (= (has_key
      (positions
      (rec__algorithm__controller__gapvec
-     (us_split_fields__content7 this__split_fields6))) o31) true)
+     (us_split_fields__content7 this__split_fields8))) o32) true)
   (= (get1
      (positions
      (rec__algorithm__controller__gapvec
-     (us_split_fields__content7 this__split_fields6))) o31) 1)))))
+     (us_split_fields__content7 this__split_fields8))) o32) 1)))))
 
 ;; H
   (assert
-  (= o32 (bool_eq14
-         (mk___rep5 (us_split_fields__content5 riterl__split_fields7))
-         o31)))
+  (= o33 (bool_eq14
+         (mk___rep5 (us_split_fields__content5 riterl__split_fields9))
+         o32)))
 
 ;; H
-  (assert (= result10 (ite (not (= o32 true)) true false)))
+  (assert (= result12 (ite (not (= o33 true)) true false)))
 
 ;; H
   (assert
-  (=> (= result10 true)
+  (=> (= result12 true)
   (and
-  (= o30 (length1
+  (= o31 (length1
          (rec__algorithm__controller__gapvec
-         (us_split_fields__content7 this__split_fields6))))
-  (and (in_range11 o30)
-  (<= o30 (to_rep10
+         (us_split_fields__content7 this__split_fields8))))
+  (and (in_range11 o31)
+  (<= o31 (to_rep10
           (rec__algorithm__gap_vectors__list__capacity
           (us_split_discrs3
           (rec__algorithm__controller__gapvec
-          (us_split_fields__content7 this__split_fields6))))))))))
+          (us_split_fields__content7 this__split_fields8))))))))))
 
 ;; H
-  (assert (=> (= result10 true) (= result9 (ite (< 1 o30) true false))))
+  (assert (=> (= result12 true) (= result11 (ite (< 1 o31) true false))))
 
 ;; H
-  (assert (=> (not (= result10 true)) (= result9 false)))
+  (assert (=> (not (= result12 true)) (= result11 false)))
 
 ;; H
-  (assert (= result9 true))
+  (assert (= result11 true))
 
 ;; H
   (assert
   (and
   (= temp___1053 (last2
                  (rec__algorithm__controller__gapvec
-                 (us_split_fields__content7 this__split_fields6))))
+                 (us_split_fields__content7 this__split_fields8))))
   (ite (= (= (length1
              (rec__algorithm__controller__gapvec
-             (us_split_fields__content7 this__split_fields6))) 0) true)
+             (us_split_fields__content7 this__split_fields8))) 0) true)
   (= (bool_eq14 temp___1053 no_element) true)
   (and
   (= (has_key
      (positions
      (rec__algorithm__controller__gapvec
-     (us_split_fields__content7 this__split_fields6))) temp___1053) true)
+     (us_split_fields__content7 this__split_fields8))) temp___1053) true)
   (= (get1
      (positions
      (rec__algorithm__controller__gapvec
-     (us_split_fields__content7 this__split_fields6))) temp___1053) (length1
+     (us_split_fields__content7 this__split_fields8))) temp___1053) (length1
                                                                     (rec__algorithm__controller__gapvec
                                                                     (us_split_fields__content7
-                                                                    this__split_fields6))))))))
+                                                                    this__split_fields8))))))))
 
 ;; H
-  (assert (= result11 riterr__split_fields7))
+  (assert (= result13 riterr__split_fields9))
 
 ;; H
-  (assert (= riterr__split_fields9 (us_split_fields11 temp___1053)))
+  (assert (= riterr__split_fields11 (us_split_fields11 temp___1053)))
 
 ;; H
   (assert
   (and
-  (= o39 (mul RNE1 fliteral4
+  (= o48 (mul RNE1 fliteral4
          (to_rep2
          (rec__robot_iface__proxy__scan_res
          (us_split_fields5
          (rec__algorithm__controller__robot
-         (us_split_fields__content7 this__split_fields6)))))))
+         (us_split_fields__content7 this__split_fields8)))))))
   (tqtisFinite
   (mul RNE1 fliteral4
   (to_rep2
   (rec__robot_iface__proxy__scan_res
   (us_split_fields5
   (rec__algorithm__controller__robot
-  (us_split_fields__content7 this__split_fields6)))))))))
+  (us_split_fields__content7 this__split_fields8)))))))))
 
 ;; H
   (assert
   (and
-  (= o36 (element
+  (= o45 (element
          (rec__algorithm__controller__gapvec
-         (us_split_fields__content7 this__split_fields6))
-         (mk___rep5 (us_split_fields__content5 riterl__split_fields7))))
-  (= (bool_eq12 o36
+         (us_split_fields__content7 this__split_fields8))
+         (mk___rep5 (us_split_fields__content5 riterl__split_fields9))))
+  (= (bool_eq12 o45
      (get
      (model__
      (rec__algorithm__controller__gapvec
-     (us_split_fields__content7 this__split_fields6)))
+     (us_split_fields__content7 this__split_fields8)))
      (get1
      (positions
      (rec__algorithm__controller__gapvec
-     (us_split_fields__content7 this__split_fields6)))
-     (mk___rep5 (us_split_fields__content5 riterl__split_fields7))))) true)))
+     (us_split_fields__content7 this__split_fields8)))
+     (mk___rep5 (us_split_fields__content5 riterl__split_fields9))))) true)))
 
 ;; H
-  (assert (= o37 (us_split_fields7 o36)))
+  (assert (= o46 (us_split_fields7 o45)))
 
 ;; H
-  (assert (= o38 (rec__gaps__gap__bearing o37)))
+  (assert (= o47 (rec__gaps__gap__bearing o46)))
 
 ;; H
   (assert
   (and
-  (= o33 (element
+  (= o42 (element
          (rec__algorithm__controller__gapvec
-         (us_split_fields__content7 this__split_fields6))
-         (mk___rep5 riterr__split_fields9)))
-  (= (bool_eq12 o33
+         (us_split_fields__content7 this__split_fields8))
+         (mk___rep5 riterr__split_fields11)))
+  (= (bool_eq12 o42
      (get
      (model__
      (rec__algorithm__controller__gapvec
-     (us_split_fields__content7 this__split_fields6)))
+     (us_split_fields__content7 this__split_fields8)))
      (get1
      (positions
      (rec__algorithm__controller__gapvec
-     (us_split_fields__content7 this__split_fields6)))
-     (mk___rep5 riterr__split_fields9)))) true)))
+     (us_split_fields__content7 this__split_fields8)))
+     (mk___rep5 riterr__split_fields11)))) true)))
 
 ;; H
-  (assert (= o34 (us_split_fields7 o33)))
+  (assert (= o43 (us_split_fields7 o42)))
 
 ;; H
-  (assert (= o35 (rec__gaps__gap__bearing o34)))
+  (assert (= o44 (rec__gaps__gap__bearing o43)))
 
 ;; H
-  (assert (and (= o40 (ccwdiff o35 o38)) (tqtisFinite o40)))
+  (assert (and (= o49 (ccwdiff o44 o47)) (tqtisFinite o49)))
 
 ;; H
-  (assert (= result12 (ite (lt o40 o39) true false)))
+  (assert (= result16 (ite (lt o49 o48) true false)))
 
 ;; H
-  (assert (= result12 true))
+  (assert (= result16 true))
 
 (assert
 ;; WP_parameter_def
@@ -5350,7 +5271,7 @@
   (= (has_key
      (positions
      (rec__algorithm__controller__gapvec
-     (us_split_fields__content7 this__split_fields6)))
-     (mk___rep5 (us_split_fields__content5 riterl__split_fields7))) true)))
+     (us_split_fields__content7 this__split_fields8)))
+     (mk___rep5 (us_split_fields__content5 riterl__split_fields9))) true)))
 (check-sat)
 (exit)

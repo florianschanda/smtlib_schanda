@@ -112,17 +112,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -137,24 +137,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
@@ -492,6 +492,76 @@
 
 (declare-const index_3 Int)
 
+(declare-const index_2 Int)
+
+(declare-const test_prime_and_coprime_numbers__p__eratosthenes__L_5__R87b__assume Int)
+
+(declare-const temp___260 (Array Int Bool))
+
+(declare-const temp___259 Int)
+
+(declare-const temp___258 Int)
+
+(declare-const temp___257 Int)
+
+(declare-const v Int)
+
+(declare-const o Bool)
+
+(declare-const o1 Int)
+
+(declare-const v1 Int)
+
+(declare-const div2 Int)
+
+(declare-const o2 Bool)
+
+(declare-const o3 Int)
+
+(declare-const o4 Int)
+
+(declare-const o5 Int)
+
+(declare-const temp___255 (Array Int Bool))
+
+(declare-const temp___254 Int)
+
+(declare-const o6 Int)
+
+(declare-const o7 (Array Int Bool))
+
+(declare-const v2 Int)
+
+(declare-const o8 Bool)
+
+(declare-const o9 Int)
+
+(declare-const v3 Int)
+
+(declare-const div3 Int)
+
+(declare-const o10 Int)
+
+(declare-const o11 Bool)
+
+(declare-const o12 Bool)
+
+(declare-const o13 Bool)
+
+(declare-const o14 Bool)
+
+(declare-const o15 Int)
+
+(declare-const o16 Int)
+
+(declare-const o17 Int)
+
+(declare-const o18 (Array Int Bool))
+
+(declare-const index_11 Int)
+
+(declare-const index_31 Int)
+
 (declare-const result (Array Int Bool))
 
 (declare-const is_prime2 (Array Int Bool))
@@ -503,6 +573,142 @@
 (declare-const result2 (Array Int Bool))
 
 (declare-const is_prime4 (Array Int Bool))
+
+(declare-const result3 Int)
+
+(declare-const index_21 Int)
+
+(declare-const is_prime5 (Array Int Bool))
+
+(declare-const index_12 Int)
+
+(declare-const index_32 Int)
+
+(declare-const index_22 Int)
+
+(declare-const result4 Bool)
+
+(declare-const result5 Int)
+
+(declare-const index_13 Int)
+
+(declare-const result6 Int)
+
+(declare-const index_33 Int)
+
+(declare-const result7 (Array Int Bool))
+
+(declare-const is_prime6 (Array Int Bool))
+
+(declare-const is_prime7 (Array Int Bool))
+
+(declare-const index_34 Int)
+
+(declare-const result8 Bool)
+
+(declare-const result9 Int)
+
+(declare-const index_35 Int)
+
+(declare-const result10 (Array Int Bool))
+
+(declare-const is_prime8 (Array Int Bool))
+
+(declare-const is_prime9 (Array Int Bool))
+
+(declare-const index_36 Int)
+
+(declare-const is_prime10 (Array Int Bool))
+
+(declare-const index_37 Int)
+
+(declare-const is_prime11 (Array Int Bool))
+
+(declare-const index_38 Int)
+
+(declare-const is_prime12 (Array Int Bool))
+
+(declare-const index_39 Int)
+
+(declare-const is_prime13 (Array Int Bool))
+
+(declare-const index_14 Int)
+
+(declare-const index_310 int__ref)
+
+(declare-const is_prime14 (Array Int Bool))
+
+(declare-const index_15 Int)
+
+(declare-const index_311 Int)
+
+(declare-const result11 int__ref)
+
+(declare-const index_23 Int)
+
+(declare-const is_prime15 map__ref)
+
+(declare-const index_16 int__ref)
+
+(declare-const index_312 int__ref)
+
+(declare-const index_24 int__ref)
+
+(declare-const is_prime16 (Array Int Bool))
+
+(declare-const index_17 Int)
+
+(declare-const index_313 Int)
+
+(declare-const index_25 Int)
+
+(declare-const is_prime17 map__ref)
+
+(declare-const index_18 int__ref)
+
+(declare-const index_314 int__ref)
+
+(declare-const index_26 int__ref)
+
+(declare-const is_prime18 (Array Int Bool))
+
+(declare-const index_19 Int)
+
+(declare-const index_315 Int)
+
+(declare-const index_27 Int)
+
+(declare-const is_prime19 map__ref)
+
+(declare-const index_110 int__ref)
+
+(declare-const index_316 int__ref)
+
+(declare-const index_28 int__ref)
+
+(declare-const is_prime20 (Array Int Bool))
+
+(declare-const index_111 Int)
+
+(declare-const index_317 Int)
+
+(declare-const index_29 Int)
+
+(declare-const is_prime21 map__ref)
+
+(declare-const index_112 int__ref)
+
+(declare-const index_318 int__ref)
+
+(declare-const index_210 int__ref)
+
+(declare-const is_prime22 (Array Int Bool))
+
+(declare-const index_113 Int)
+
+(declare-const index_319 Int)
+
+(declare-const index_211 Int)
 
 ;; H
   (assert (=> (<= 0 2147483647) (in_range2 index_1)))
@@ -532,7 +738,7 @@
 ;; WP_parameter_def
  ;; File "prime_and_coprime_numbers.ads", line 3, characters 0-0
   (not
-  (or (fp.isZero      (fp #b0 #b10001111 #b10000110101000000000000))
-  (fp.isPositive  (fp #b0 #b10001111 #b10000110101000000000000)))))
+  (or (fp.isZero (fp #b0 #b10001111 #b10000110101000000000000))
+  (fp.isPositive (fp #b0 #b10001111 #b10000110101000000000000)))))
 (check-sat)
 (exit)

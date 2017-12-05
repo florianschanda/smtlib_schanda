@@ -1142,7 +1142,7 @@ function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -1629,7 +1629,31 @@ axiom def_axiom :
   (((elaboration_demo__line__aggregate_def(temp___148, temp___149,
   temp___150)).elts1[temp___151]) = of_rep1(temp___148)))))
 
+logic count : int
+
+logic line : (int,character) farray
+
+logic temp___153 : (int,character) farray
+
+logic temp___1531 : t2
+
+logic elaboration_demo__line__assume : (int,character) farray
+
+logic elaboration_demo__line__assume1 : t1
+
+logic o : t
+
+logic o1 : t
+
+logic result : (int,character) farray
+
+logic line1 : (int,character) farray
+
+axiom H : in_range2(size)
+
+axiom H1 : ((0 <= 2147483647) -> in_range1(count))
+
+axiom H2 : (1 <= size)
+
  (* File "elaboration_demo.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall count:int. (in_range2(size) -> (((0 <= 2147483647) ->
-  in_range1(count)) -> ((1 <= size) -> (1 <= 1)))))
+goal WP_parameter_def : (1 <= 1)

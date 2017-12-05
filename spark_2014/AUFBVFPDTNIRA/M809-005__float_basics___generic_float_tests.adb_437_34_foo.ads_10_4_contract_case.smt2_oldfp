@@ -1099,25 +1099,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 4096.0)))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral3)
-  (= (tqtreal fliteral3) (/ 160000002384185791015625.0 100000000000000000000000.0))))
-
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral4)
-  (= (tqtreal fliteral4) (/ 150000000000000000000000.0 100000000000000000000000.0))))
-
 (declare-const y t)
 
 (declare-const result t)
@@ -1134,6 +1115,11 @@
 ;; H
   (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite y)))
 
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 4096.0)))
+
 ;; H
   (assert (and (le (neg fliteral2) x) (le x fliteral2)))
 
@@ -1149,8 +1135,22 @@
 ;; H
   (assert (= y3 y1))
 
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral3)
+  (= (tqtreal fliteral3) (/ 160000002384185791015625.0 100000000000000000000000.0))))
+
 ;; H
   (assert (=> (= (bool_eq x (neg fliteral3)) true) (eq y2 (neg fliteral))))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral4)
+  (= (tqtreal fliteral4) (/ 150000000000000000000000.0 100000000000000000000000.0))))
 
 ;; H
   (assert (= (bool_eq x (neg fliteral4)) true))

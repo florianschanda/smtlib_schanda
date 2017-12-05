@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -65,24 +65,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort float 0)
@@ -442,463 +442,181 @@
 (declare-const result24 Float32)
 
 ;; H
-  (assert (= result (mk_t__ref t1)))
-
-;; H
-  (assert (= t11 (fp #b0 #b01111111 #b00000000000000000000000)))
-
-;; H
-  (assert (fp.isFinite32 t11))
-
-;; H
-  (assert (= result1 (mk_t__ref t2)))
-
-;; H
-  (assert (= t21 (fp #b0 #b01111101 #b01010101010101010101011)))
-
-;; H
-  (assert (fp.isFinite32 t21))
-
-;; H
-  (assert (= result2 (mk_t__ref t3)))
-
-;; H
-  (assert (= t31 (fp #b0 #b01111100 #b10011001100110011001101)))
-
-;; H
-  (assert (fp.isFinite32 t31))
-
-;; H
-  (assert (= result3 (mk_t__ref t4)))
-
-;; H
-  (assert (= t41 (fp #b0 #b01111100 #b00100100100100100100101)))
-
-;; H
-  (assert (fp.isFinite32 t41))
-
-;; H
-  (assert (= result4 (mk_t__ref t5)))
-
-;; H
-  (assert (= t51 (fp #b0 #b01111011 #b11000111000111000111001)))
-
-;; H
-  (assert (fp.isFinite32 t51))
-
-;; H
-  (assert (= result5 (mk_t__ref t6)))
-
-;; H
-  (assert (= t61 (fp #b0 #b01111011 #b01110100010111010001100)))
-
-;; H
-  (assert (fp.isFinite32 t61))
-
-;; H
-  (assert (= result6 (mk_t__ref t7)))
-
-;; H
-  (assert (= t71 (fp #b0 #b01111011 #b00111011000100111011001)))
-
-;; H
-  (assert (fp.isFinite32 t71))
-
-;; H
-  (assert (= result7 (mk_t__ref t8)))
-
-;; H
-  (assert (= t81 (fp #b0 #b01111011 #b00010001000100010001001)))
-
-;; H
-  (assert (fp.isFinite32 t81))
-
-;; H
-  (assert (= result8 (mk_t__ref t9)))
-
-;; H
-  (assert (= t91 (fp #b0 #b01111010 #b11100001111000011110001)))
-
-;; H
-  (assert (fp.isFinite32 t91))
-
-;; H
-  (assert (= result9 (mk_t__ref t10)))
-
-;; H
-  (assert (= t101 (fp #b0 #b01111010 #b10101111001010000110110)))
-
-;; H
-  (assert (fp.isFinite32 t101))
-
-;; H
-  (assert (= result10 (mk_t__ref a1)))
-
-;; H
-  (assert (= a11 t11))
-
-;; H
-  (assert (fp.isFinite32 a11))
-
-;; H
   (assert
-  (and (= o (fp.sub RNE a11 t21)) (fp.isFinite32 (fp.sub RNE a11 t21))))
-
-;; H
-  (assert (= result11 (mk_t__ref a2)))
-
-;; H
-  (assert (= a21 o))
-
-;; H
-  (assert (fp.isFinite32 a21))
-
-;; H
-  (assert
-  (and (= o1 (fp.add RNE a21 t31)) (fp.isFinite32 (fp.add RNE a21 t31))))
-
-;; H
-  (assert (= result12 (mk_t__ref a3)))
-
-;; H
-  (assert (= a31 o1))
-
-;; H
-  (assert (fp.isFinite32 a31))
-
-;; H
-  (assert
-  (and (= o2 (fp.sub RNE a31 t41)) (fp.isFinite32 (fp.sub RNE a31 t41))))
-
-;; H
-  (assert (= result13 (mk_t__ref a4)))
-
-;; H
-  (assert (= a41 o2))
-
-;; H
-  (assert (fp.isFinite32 a41))
-
-;; H
-  (assert
-  (and (= o3 (fp.add RNE a41 t51)) (fp.isFinite32 (fp.add RNE a41 t51))))
-
-;; H
-  (assert (= result14 (mk_t__ref a5)))
-
-;; H
-  (assert (= a51 o3))
-
-;; H
-  (assert (fp.isFinite32 a51))
-
-;; H
-  (assert
-  (and (= o4 (fp.sub RNE a51 t61)) (fp.isFinite32 (fp.sub RNE a51 t61))))
-
-;; H
-  (assert (= result15 (mk_t__ref a6)))
-
-;; H
-  (assert (= a61 o4))
-
-;; H
-  (assert (fp.isFinite32 a61))
-
-;; H
-  (assert
-  (and (= o5 (fp.add RNE a61 t71)) (fp.isFinite32 (fp.add RNE a61 t71))))
-
-;; H
-  (assert (= result16 (mk_t__ref a7)))
-
-;; H
-  (assert (= a71 o5))
-
-;; H
-  (assert (fp.isFinite32 a71))
-
-;; H
-  (assert
-  (and (= o6 (fp.sub RNE a71 t81)) (fp.isFinite32 (fp.sub RNE a71 t81))))
-
-;; H
-  (assert (= result17 (mk_t__ref a8)))
-
-;; H
-  (assert (= a81 o6))
-
-;; H
-  (assert (fp.isFinite32 a81))
-
-;; H
-  (assert
-  (and (= o7 (fp.add RNE a81 t91)) (fp.isFinite32 (fp.add RNE a81 t91))))
-
-;; H
-  (assert (= result18 (mk_t__ref a9)))
-
-;; H
-  (assert (= a91 o7))
-
-;; H
-  (assert (fp.isFinite32 a91))
-
-;; H
-  (assert
-  (and (= o8 (fp.sub RNE a91 t101)) (fp.isFinite32 (fp.sub RNE a91 t101))))
-
-;; H
-  (assert (= result19 (mk_t__ref a10)))
-
-;; H
-  (assert (= a101 o8))
-
-;; H
-  (assert (fp.isFinite32 a101))
-
-;; H
-  (assert
-  (and (= o9 (fp.mul RNE a91 a91)) (fp.isFinite32 (fp.mul RNE a91 a91))))
-
-;; H
-  (assert
-  (and (= o10 (fp.mul RNE a101 a81)) (fp.isFinite32 (fp.mul RNE a101 a81))))
-
-;; H
-  (assert (= o11 (fp.sub RNE o10 o9)))
-
-;; H
-  (assert (and (= o12 o11) (fp.isFinite32 o11)))
-
-;; H
-  (assert
+  (and
+  (and
+  (and (= result (mk_t__ref t1))
+  (= t11 (fp #b0 #b01111111 #b00000000000000000000000)))
+  (and (fp.isFinite32 t11)
+  (and
+  (and (= result1 (mk_t__ref t2))
+  (= t21 (fp #b0 #b01111101 #b01010101010101010101011)))
+  (and (fp.isFinite32 t21)
+  (and
+  (and (= result2 (mk_t__ref t3))
+  (= t31 (fp #b0 #b01111100 #b10011001100110011001101)))
+  (and (fp.isFinite32 t31)
+  (and
+  (and (= result3 (mk_t__ref t4))
+  (= t41 (fp #b0 #b01111100 #b00100100100100100100101)))
+  (and (fp.isFinite32 t41)
+  (and
+  (and (= result4 (mk_t__ref t5))
+  (= t51 (fp #b0 #b01111011 #b11000111000111000111001)))
+  (and (fp.isFinite32 t51)
+  (and
+  (and (= result5 (mk_t__ref t6))
+  (= t61 (fp #b0 #b01111011 #b01110100010111010001100)))
+  (and (fp.isFinite32 t61)
+  (and
+  (and (= result6 (mk_t__ref t7))
+  (= t71 (fp #b0 #b01111011 #b00111011000100111011001)))
+  (and (fp.isFinite32 t71)
+  (and
+  (and (= result7 (mk_t__ref t8))
+  (= t81 (fp #b0 #b01111011 #b00010001000100010001001)))
+  (and (fp.isFinite32 t81)
+  (and
+  (and (= result8 (mk_t__ref t9))
+  (= t91 (fp #b0 #b01111010 #b11100001111000011110001)))
+  (and (fp.isFinite32 t91)
+  (and
+  (and (= result9 (mk_t__ref t10))
+  (= t101 (fp #b0 #b01111010 #b10101111001010000110110)))
+  (and (fp.isFinite32 t101)
+  (and (and (= result10 (mk_t__ref a1)) (= a11 t11))
+  (and (fp.isFinite32 a11)
+  (and
+  (and (and (= o (fp.sub RNE a11 t21)) (fp.isFinite32 (fp.sub RNE a11 t21)))
+  (and (= result11 (mk_t__ref a2)) (= a21 o)))
+  (and (fp.isFinite32 a21)
+  (and
+  (and (and (= o1 (fp.add RNE a21 t31)) (fp.isFinite32 (fp.add RNE a21 t31)))
+  (and (= result12 (mk_t__ref a3)) (= a31 o1)))
+  (and (fp.isFinite32 a31)
+  (and
+  (and (and (= o2 (fp.sub RNE a31 t41)) (fp.isFinite32 (fp.sub RNE a31 t41)))
+  (and (= result13 (mk_t__ref a4)) (= a41 o2)))
+  (and (fp.isFinite32 a41)
+  (and
+  (and (and (= o3 (fp.add RNE a41 t51)) (fp.isFinite32 (fp.add RNE a41 t51)))
+  (and (= result14 (mk_t__ref a5)) (= a51 o3)))
+  (and (fp.isFinite32 a51)
+  (and
+  (and (and (= o4 (fp.sub RNE a51 t61)) (fp.isFinite32 (fp.sub RNE a51 t61)))
+  (and (= result15 (mk_t__ref a6)) (= a61 o4)))
+  (and (fp.isFinite32 a61)
+  (and
+  (and (and (= o5 (fp.add RNE a61 t71)) (fp.isFinite32 (fp.add RNE a61 t71)))
+  (and (= result16 (mk_t__ref a7)) (= a71 o5)))
+  (and (fp.isFinite32 a71)
+  (and
+  (and (and (= o6 (fp.sub RNE a71 t81)) (fp.isFinite32 (fp.sub RNE a71 t81)))
+  (and (= result17 (mk_t__ref a8)) (= a81 o6)))
+  (and (fp.isFinite32 a81)
+  (and
+  (and (and (= o7 (fp.add RNE a81 t91)) (fp.isFinite32 (fp.add RNE a81 t91)))
+  (and (= result18 (mk_t__ref a9)) (= a91 o7)))
+  (and (fp.isFinite32 a91)
+  (and
+  (and
+  (and (= o8 (fp.sub RNE a91 t101)) (fp.isFinite32 (fp.sub RNE a91 t101)))
+  (and (= result19 (mk_t__ref a10)) (= a101 o8)))
+  (and (fp.isFinite32 a101)
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and (and (= o9 (fp.mul RNE a91 a91)) (fp.isFinite32 (fp.mul RNE a91 a91)))
+  (and
+  (and (= o10 (fp.mul RNE a101 a81)) (fp.isFinite32 (fp.mul RNE a101 a81)))
+  (= o11 (fp.sub RNE o10 o9)))) (and (= o12 o11) (fp.isFinite32 o11)))
   (= o13 (fp.mul RNE (fp #b0 #b10000001 #b00000000000000000000000) o12)))
-
-;; H
-  (assert (and (= o14 o13) (fp.isFinite32 o13)))
-
-;; H
-  (assert (= result20 (mk_t__ref num)))
-
-;; H
-  (assert (= num1 o14))
-
-;; H
-  (assert (fp.isFinite32 num1))
-
-;; H
-  (assert
+  (and (= o14 o13) (fp.isFinite32 o13)))
+  (and (= result20 (mk_t__ref num)) (= num1 o14)))
+  (and (fp.isFinite32 num1)
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
   (and (= o15 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
   a91))
   (fp.isFinite32 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
-  a91))))
-
-;; H
-  (assert (= o16 (fp.sub RNE a101 o15)))
-
-;; H
-  (assert (and (= o17 o16) (fp.isFinite32 o16)))
-
-;; H
-  (assert (= o18 (fp.add RNE o17 a81)))
-
-;; H
-  (assert (and (= o19 o18) (fp.isFinite32 o18)))
-
-;; H
-  (assert (= result21 den))
-
-;; H
-  (assert (= (let ((subject den)) den1) o19))
-
-;; H
-  (assert (fp.isFinite32 (let ((subject den)) den1)))
-
-;; H
-  (assert
+  a91))) (= o16 (fp.sub RNE a101 o15)))
+  (and (= o17 o16) (fp.isFinite32 o16))) (= o18 (fp.add RNE o17 a81)))
+  (and (= o19 o18) (fp.isFinite32 o18)))
+  (and (= result21 den) (= (let ((subject den)) den1) o19)))
+  (and (fp.isFinite32 (let ((subject den)) den1))
+  (and
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (fp.isFinite32 (t__content res))))
-
-;; H
-  (assert
+  (fp.isFinite32 (t__content res)))
+  (and
+  (and
   (and (= o20 (fp.div RNE num1 (let ((subject den)) den1)))
-  (fp.isFinite32 (fp.div RNE num1 (let ((subject den)) den1)))))
-
-;; H
-  (assert (= result22 res))
-
-;; H
-  (assert (= (let ((subject res)) res1) o20))
-
-;; H
-  (assert
-  (fp.eq (let ((subject res)) res1) (fp #b0 #b10000000 #b10010010000101001010011)))
-
-;; H
-  (assert
+  (fp.isFinite32 (fp.div RNE num1 (let ((subject den)) den1))))
+  (and (= result22 res) (= (let ((subject res)) res1) o20)))
+  (and
+  (fp.eq (let ((subject res)) res1) (fp #b0 #b10000000 #b10010010000101001010011))
+  (and
+  (and
   (= pi_compute__shanks_float__result2 (let ((subject pi_compute__shanks_float__result))
                                        (mk_t__ref
-                                       pi_compute__shanks_float__result1))))
-
-;; H
-  (assert
+                                       pi_compute__shanks_float__result1)))
   (= pi_compute__shanks_float__result3 pi_compute__shanks_float__result1))
-
-;; H
-  (assert (= result23 pi_compute__shanks_float__result))
-
-;; H
-  (assert
+  (and (= result23 pi_compute__shanks_float__result)
   (= (let ((subject pi_compute__shanks_float__result))
-     pi_compute__shanks_float__result1) (let ((subject res)) res1)))
-
-;; H
-  (assert
-  (= pi_compute__shanks_float__result4 pi_compute__shanks_float__result2))
-
-;; H
-  (assert (= res2 (let ((subject res)) (mk_t__ref res1))))
-
-;; H
-  (assert (= den2 (let ((subject den)) (mk_t__ref den1))))
-
-;; H
-  (assert (= num2 (mk_t__ref num1)))
-
-;; H
-  (assert (= a102 (mk_t__ref a101)))
-
-;; H
-  (assert (= a92 (mk_t__ref a91)))
-
-;; H
-  (assert (= a82 (mk_t__ref a81)))
-
-;; H
-  (assert (= a72 (mk_t__ref a71)))
-
-;; H
-  (assert (= a62 (mk_t__ref a61)))
-
-;; H
-  (assert (= a52 (mk_t__ref a51)))
-
-;; H
-  (assert (= a42 (mk_t__ref a41)))
-
-;; H
-  (assert (= a32 (mk_t__ref a31)))
-
-;; H
-  (assert (= a22 (mk_t__ref a21)))
-
-;; H
-  (assert (= a12 (mk_t__ref a11)))
-
-;; H
-  (assert (= t102 (mk_t__ref t101)))
-
-;; H
-  (assert (= t92 (mk_t__ref t91)))
-
-;; H
-  (assert (= t82 (mk_t__ref t81)))
-
-;; H
-  (assert (= t72 (mk_t__ref t71)))
-
-;; H
-  (assert (= t62 (mk_t__ref t61)))
-
-;; H
-  (assert (= t52 (mk_t__ref t51)))
-
-;; H
-  (assert (= t42 (mk_t__ref t41)))
-
-;; H
-  (assert (= t32 (mk_t__ref t31)))
-
-;; H
-  (assert (= t22 (mk_t__ref t21)))
-
-;; H
-  (assert (= t12 (mk_t__ref t11)))
-
-;; H
-  (assert
-  (= pi_compute__shanks_float__result5 pi_compute__shanks_float__result3))
-
-;; H
-  (assert (= res3 res1))
-
-;; H
-  (assert (= den3 den1))
-
-;; H
-  (assert (= num3 num1))
-
-;; H
-  (assert (= a103 a101))
-
-;; H
-  (assert (= a93 a91))
-
-;; H
-  (assert (= a83 a81))
-
-;; H
-  (assert (= a73 a71))
-
-;; H
-  (assert (= a63 a61))
-
-;; H
-  (assert (= a53 a51))
-
-;; H
-  (assert (= a43 a41))
-
-;; H
-  (assert (= a33 a31))
-
-;; H
-  (assert (= a23 a21))
-
-;; H
-  (assert (= a13 a11))
-
-;; H
-  (assert (= t103 t101))
-
-;; H
-  (assert (= t93 t91))
-
-;; H
-  (assert (= t83 t81))
-
-;; H
-  (assert (= t73 t71))
-
-;; H
-  (assert (= t63 t61))
-
-;; H
-  (assert (= t53 t51))
-
-;; H
-  (assert (= t43 t41))
-
-;; H
-  (assert (= t33 t31))
-
-;; H
-  (assert (= t23 t21))
-
-;; H
-  (assert (= t13 t11))
+     pi_compute__shanks_float__result1) (let ((subject res)) res1)))))))))))))))))))))))))))))))))))))))))))))))))))
+  (and
+  (and
+  (= pi_compute__shanks_float__result4 pi_compute__shanks_float__result2)
+  (and (= res2 (let ((subject res)) (mk_t__ref res1)))
+  (and (= den2 (let ((subject den)) (mk_t__ref den1)))
+  (and (= num2 (mk_t__ref num1))
+  (and (= a102 (mk_t__ref a101))
+  (and (= a92 (mk_t__ref a91))
+  (and (= a82 (mk_t__ref a81))
+  (and (= a72 (mk_t__ref a71))
+  (and (= a62 (mk_t__ref a61))
+  (and (= a52 (mk_t__ref a51))
+  (and (= a42 (mk_t__ref a41))
+  (and (= a32 (mk_t__ref a31))
+  (and (= a22 (mk_t__ref a21))
+  (and (= a12 (mk_t__ref a11))
+  (and (= t102 (mk_t__ref t101))
+  (and (= t92 (mk_t__ref t91))
+  (and (= t82 (mk_t__ref t81))
+  (and (= t72 (mk_t__ref t71))
+  (and (= t62 (mk_t__ref t61))
+  (and (= t52 (mk_t__ref t51))
+  (and (= t42 (mk_t__ref t41))
+  (and (= t32 (mk_t__ref t31))
+  (and (= t22 (mk_t__ref t21)) (= t12 (mk_t__ref t11)))))))))))))))))))))))))
+  (and
+  (= pi_compute__shanks_float__result5 pi_compute__shanks_float__result3)
+  (and (= res3 res1)
+  (and (= den3 den1)
+  (and (= num3 num1)
+  (and (= a103 a101)
+  (and (= a93 a91)
+  (and (= a83 a81)
+  (and (= a73 a71)
+  (and (= a63 a61)
+  (and (= a53 a51)
+  (and (= a43 a41)
+  (and (= a33 a31)
+  (and (= a23 a21)
+  (and (= a13 a11)
+  (and (= t103 t101)
+  (and (= t93 t91)
+  (and (= t83 t81)
+  (and (= t73 t71)
+  (and (= t63 t61)
+  (and (= t53 t51)
+  (and (= t43 t41) (and (= t33 t31) (and (= t23 t21) (= t13 t11)))))))))))))))))))))))))))
 
 ;; H
   (assert (= result24 (t__content pi_compute__shanks_float__result4)))

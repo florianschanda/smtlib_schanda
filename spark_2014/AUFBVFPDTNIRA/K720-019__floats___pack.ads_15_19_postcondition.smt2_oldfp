@@ -1093,6 +1093,8 @@
 
 (declare-const o t)
 
+(declare-const o1 t)
+
 (declare-const result t)
 
 (declare-const pack__add__result1 t)

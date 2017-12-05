@@ -1213,6 +1213,12 @@
 
 (declare-const pid__split_fields float)
 
+(declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const o2 t)
+
 ;; H
   (assert (tqtisFinite measured))
 

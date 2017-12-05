@@ -1987,7 +1987,13 @@
 
 (declare-const temp___781 count_type)
 
-(declare-const o2 us_rep5)
+(declare-const o2 us_rep2)
+
+(declare-const o3 us_rep5)
+
+(declare-const o4 Int)
+
+(declare-const o5 Bool)
 
 ;; H
   (assert (= (to_rep o) 0))
@@ -2011,18 +2017,18 @@
 
 ;; H
   (assert
-  (and (= o2 (positions container))
-  (and (not (= (has_key o2 no_element) true))
+  (and (= o3 (positions container))
+  (and (not (= (has_key o3 no_element) true))
   (forall ((i us_rep1))
-  (=> (= (has_key o2 i) true)
-  (and (and (<= 1 (get1 o2 i)) (<= (get1 o2 i) (length container)))
+  (=> (= (has_key o3 i) true)
+  (and (and (<= 1 (get1 o3 i)) (<= (get1 o3 i) (length container)))
   (forall ((j us_rep1))
-  (=> (= (has_key o2 j) true)
-  (=> (= (get1 o2 i) (get1 o2 j)) (= (bool_eq1 i j) true))))))))))
+  (=> (= (has_key o3 j) true)
+  (=> (= (get1 o3 i) (get1 o3 j)) (= (bool_eq1 i j) true))))))))))
 
 (assert
 ;; WP_parameter_def
  ;; File "a-cfdlli.ads", line 1403, characters 0-0
-  (not (= (has_key o2 position) true)))
+  (not (= (has_key o3 position) true)))
 (check-sat)
 (exit)

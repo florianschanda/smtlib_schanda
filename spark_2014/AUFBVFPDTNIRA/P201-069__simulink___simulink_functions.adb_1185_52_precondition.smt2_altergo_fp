@@ -1079,5 +1079,9 @@ logic lf : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic o : t
+
+axiom H : tqtisFinite(lf)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(lf) -> neq(abs(lf), fliteral))
+goal WP_parameter_def : neq(abs(lf), fliteral)

@@ -1089,12 +1089,18 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
+;; H
+  (assert (tqtisFinite x))
+
 (declare-const fliteral2 t)
 
 ;; fliteral_axiom
   (assert
   (and (tqtisFinite fliteral2)
   (= (tqtreal fliteral2) (/ 400000000000000022204460492503130808472633361816406250.0 1000000000000000000000000000000000000000000000000000000.0))))
+
+;; H
+  (assert (not (eq x fliteral2)))
 
 (declare-const fliteral3 t)
 
@@ -1103,6 +1109,9 @@
   (and (tqtisFinite fliteral3)
   (= (tqtreal fliteral3) (/ 50000000000000000000000000000000000000000000000000000.0 100000000000000000000000000000000000000000000000000000.0))))
 
+;; H
+  (assert (not (eq x fliteral3)))
+
 (declare-const fliteral4 t)
 
 ;; fliteral_axiom
@@ -1110,22 +1119,13 @@
   (and (tqtisFinite fliteral4)
   (= (tqtreal fliteral4) (/ 59999999999999997779553950749686919152736663818359375.0 100000000000000000000000000000000000000000000000000000.0))))
 
+;; H
+  (assert (not (eq x fliteral4)))
+
 (declare-const fliteral5 t)
 
 ;; fliteral_axiom
   (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 12.0)))
-
-;; H
-  (assert (tqtisFinite x))
-
-;; H
-  (assert (not (eq x fliteral2)))
-
-;; H
-  (assert (not (eq x fliteral3)))
-
-;; H
-  (assert (not (eq x fliteral4)))
 
 ;; H
   (assert (eq x fliteral5))

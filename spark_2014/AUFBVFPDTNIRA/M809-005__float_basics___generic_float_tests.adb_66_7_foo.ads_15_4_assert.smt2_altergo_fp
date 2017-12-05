@@ -1100,12 +1100,19 @@ logic z : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+axiom H : tqtisFinite(x)
+
+axiom H1 : tqtisFinite(y)
+
+axiom H2 : tqtisFinite(z)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 1.0000000000000002220446049250313080847263336181640625))
 
+axiom H3 : (((eq(x, fliteral) and eq(z, fliteral1)) and lt(x, y)) and lt(y,
+  z))
+
  (* File "generic_float_tests.adb", line 53, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(x) -> (tqtisFinite(y) ->
-  (tqtisFinite(z) -> (not (((eq(x, fliteral) and eq(z, fliteral1)) and lt(x,
-  y)) and lt(y, z))))))
+goal WP_parameter_def : false

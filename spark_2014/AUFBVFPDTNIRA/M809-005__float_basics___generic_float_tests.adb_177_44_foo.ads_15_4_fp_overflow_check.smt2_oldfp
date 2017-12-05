@@ -1129,6 +1129,14 @@
 
 (declare-const o2 t)
 
+(declare-const o3 t)
+
+(declare-const o4 t)
+
+(declare-const o5 t)
+
+(declare-const o6 t)
+
 ;; H
   (assert (tqtisFinite a))
 
@@ -1139,17 +1147,17 @@
   (assert (tqtisFinite c))
 
 ;; H
-  (assert (and (= o (mul RNE1 a c)) (tqtisFinite (mul RNE1 a c))))
+  (assert (and (= o2 (mul RNE1 a c)) (tqtisFinite (mul RNE1 a c))))
 
 ;; H
-  (assert (and (= o1 (mul RNE1 a b)) (tqtisFinite (mul RNE1 a b))))
+  (assert (and (= o3 (mul RNE1 a b)) (tqtisFinite (mul RNE1 a b))))
 
 ;; H
-  (assert (= o2 (add RNE1 o1 o)))
+  (assert (= o4 (add RNE1 o3 o2)))
 
 (assert
 ;; WP_parameter_def
  ;; File "generic_float_tests.adb", line 168, characters 0-0
-  (not (tqtisFinite o2)))
+  (not (tqtisFinite o4)))
 (check-sat)
 (exit)

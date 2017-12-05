@@ -1588,6 +1588,22 @@
 
 (declare-const untangle_tests__swap_triangle__tmp__assume4 float)
 
+(declare-const o1 Int)
+
+(declare-const o2 (Array Int us_rep))
+
+(declare-const o3 float)
+
+(declare-const o4 float)
+
+(declare-const o5 float)
+
+(declare-const o6 float)
+
+(declare-const o7 Int)
+
+(declare-const o8 (Array Int us_rep1))
+
 (declare-const result (Array Int us_rep))
 
 (declare-const result1 float)
@@ -1607,6 +1623,10 @@
 (declare-const tmp__split_fields8 float)
 
 (declare-const tmp__split_fields9 float)
+
+(declare-const result5 (Array Int us_rep1))
+
+(declare-const l1 (Array Int us_rep1))
 
 ;; H
   (assert (in_range a))

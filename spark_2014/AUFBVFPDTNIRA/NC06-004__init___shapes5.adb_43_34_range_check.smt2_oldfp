@@ -1381,6 +1381,8 @@
 
 (declare-const o t)
 
+(declare-const o1 t)
+
 (declare-const result t)
 
 (declare-const delta_x1 t)

@@ -1209,6 +1209,8 @@
 
 (declare-const o t)
 
+(declare-const o1 t)
+
 ;; H
   (assert (tqtisFinite speed))
 

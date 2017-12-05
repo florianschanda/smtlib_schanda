@@ -1115,7 +1115,17 @@
 
 (declare-const o2 Int)
 
-(declare-const o3 t)
+(declare-const o3 Int)
+
+(declare-const o4 Int)
+
+(declare-const o5 Int)
+
+(declare-const o6 Int)
+
+(declare-const o7 Int)
+
+(declare-const o8 t)
 
 ;; H
   (assert (in_range3 n))
@@ -1124,20 +1134,20 @@
   (assert (<= (+ (* n 65) 1) (* (+ n 1) 65)))
 
 ;; H
-  (assert (and (= o2 (* (+ n 1) 65)) (in_range2 (* (+ n 1) 65))))
+  (assert (and (= o7 (* (+ n 1) 65)) (in_range2 (* (+ n 1) 65))))
 
 ;; H
-  (assert (= o3 (of_int RNE1 o2)))
+  (assert (= o8 (of_int RNE1 o7)))
 
 ;; H
-  (assert (and (= o (* n 65)) (in_range2 (* n 65))))
+  (assert (and (= o4 (* n 65)) (in_range2 (* n 65))))
 
 ;; H
-  (assert (= o1 (+ o 1)))
+  (assert (= o5 (+ o4 1)))
 
 (assert
 ;; WP_parameter_def
  ;; File "mult.adb", line 1, characters 0-0
-  (not (in_range2 o1)))
+  (not (in_range2 o5)))
 (check-sat)
 (exit)

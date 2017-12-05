@@ -1093,6 +1093,12 @@
 
 (declare-const o3 t)
 
+(declare-const o4 t)
+
+(declare-const o5 t)
+
+(declare-const o6 t)
+
 ;; H
   (assert (tqtisFinite x))
 

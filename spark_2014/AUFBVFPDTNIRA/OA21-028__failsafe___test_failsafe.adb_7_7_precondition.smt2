@@ -130,17 +130,17 @@
 (define-fun bv_max ((x (_ BitVec 8))
   (y (_ BitVec 8))) (_ BitVec 8) (ite (bvule x y) y x))
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -155,24 +155,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 Float32)))))
 (define-fun to_int3 ((b Bool)) Int (ite (= b true) 1 0))
@@ -474,21 +474,99 @@
 ;; is_valid__post_axiom
   (assert true)
 
+(declare-const battery_level_at (Array (_ BitVec 8) battery_level_type))
+
 (declare-const current_time (_ BitVec 8))
 
 (declare-const j Int)
+
+(declare-const failsafe_state us_private)
+
+(declare-const temp___280 (_ BitVec 8))
+
+(declare-const temp___279 (Array (_ BitVec 8) battery_level_type))
+
+(declare-const o Bool)
+
+(declare-const us Bool)
+
+(declare-const us1 Bool)
+
+(declare-const o1 Bool)
+
+(declare-const battery_level_at1 (Array (_ BitVec 8) battery_level_type))
+
+(declare-const current_time1 (_ BitVec 8))
+
+(declare-const failsafe_state1 us_private)
 
 (declare-const result Int)
 
 (declare-const j1 Int)
 
-(declare-const battery_level_at (Array (_ BitVec 8) battery_level_type))
+(declare-const battery_level_at2 (Array (_ BitVec 8) battery_level_type))
 
-(declare-const current_time1 (_ BitVec 8))
+(declare-const current_time2 (_ BitVec 8))
 
 (declare-const j2 Int)
 
-(declare-const failsafe_state us_private)
+(declare-const failsafe_state2 us_private)
+
+(declare-const battery_level_at3 (Array (_ BitVec 8) battery_level_type))
+
+(declare-const current_time3 (_ BitVec 8))
+
+(declare-const failsafe_state3 us_private)
+
+(declare-const battery_level_at4 (Array (_ BitVec 8) battery_level_type))
+
+(declare-const current_time4 (_ BitVec 8))
+
+(declare-const j3 Int)
+
+(declare-const failsafe_state4 us_private)
+
+(declare-const battery_level_at5 (Array (_ BitVec 8) battery_level_type))
+
+(declare-const current_time5 (_ BitVec 8))
+
+(declare-const j4 Int)
+
+(declare-const failsafe_state5 us_private)
+
+(declare-const battery_level_at6 (Array (_ BitVec 8) battery_level_type))
+
+(declare-const current_time6 (_ BitVec 8))
+
+(declare-const j5 Int)
+
+(declare-const failsafe_state6 us_private)
+
+(declare-const battery_level_at7 (Array (_ BitVec 8) battery_level_type))
+
+(declare-const current_time7 (_ BitVec 8))
+
+(declare-const j6 Int)
+
+(declare-const failsafe_state7 us_private)
+
+(declare-const battery_level_at8 (Array (_ BitVec 8) battery_level_type))
+
+(declare-const current_time8 (_ BitVec 8))
+
+(declare-const failsafe_state8 us_private)
+
+(declare-const battery_level_at9 (Array (_ BitVec 8) battery_level_type))
+
+(declare-const current_time9 (_ BitVec 8))
+
+(declare-const failsafe_state9 us_private)
+
+(declare-const battery_level_at10 (Array (_ BitVec 8) battery_level_type))
+
+(declare-const current_time10 (_ BitVec 8))
+
+(declare-const failsafe_state10 us_private)
 
 ;; H
   (assert (in_range1 current_time))
@@ -506,11 +584,11 @@
   (assert (<= j1 49))
 
 ;; H
-  (assert (and (in_range1 current_time1) (and (<= 1 j2) (<= j2 49))))
+  (assert (and (in_range1 current_time2) (and (<= 1 j2) (<= j2 49))))
 
 (assert
 ;; WP_parameter_def
  ;; File "failsafe.ads", line 20, characters 0-0
-  (not (= (is_valid failsafe_state battery_level_at current_time1) true)))
+  (not (= (is_valid failsafe_state2 battery_level_at2 current_time2) true)))
 (check-sat)
 (exit)

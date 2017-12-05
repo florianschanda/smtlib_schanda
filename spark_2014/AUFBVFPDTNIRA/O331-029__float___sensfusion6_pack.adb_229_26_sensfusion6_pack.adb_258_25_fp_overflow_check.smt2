@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -65,24 +65,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
@@ -228,12 +228,12 @@
 (define-fun positive_float__ref___projection ((a positive_float__ref)) positive_float
   (positive_float__content a))
 
-(define-fun dynamic_invariant4 ((temp___expr_1294 Float32)
-  (temp___is_init_1291 Bool) (temp___skip_constant_1292 Bool)
-  (temp___do_toplevel_1293 Bool)) Bool (=>
-                                       (or (= temp___is_init_1291 true)
+(define-fun dynamic_invariant4 ((temp___expr_1288 Float32)
+  (temp___is_init_1285 Bool) (temp___skip_constant_1286 Bool)
+  (temp___do_toplevel_1287 Bool)) Bool (=>
+                                       (or (= temp___is_init_1285 true)
                                        (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                       (in_range4 temp___expr_1294)))
+                                       (in_range4 temp___expr_1288)))
 
 (declare-sort t_delta_time 0)
 
@@ -258,12 +258,12 @@
 (define-fun t_delta_time__ref___projection ((a t_delta_time__ref)) t_delta_time
   (t_delta_time__content a))
 
-(define-fun dynamic_invariant5 ((temp___expr_1300 Float32)
-  (temp___is_init_1297 Bool) (temp___skip_constant_1298 Bool)
-  (temp___do_toplevel_1299 Bool)) Bool (=>
-                                       (or (= temp___is_init_1297 true)
+(define-fun dynamic_invariant5 ((temp___expr_1294 Float32)
+  (temp___is_init_1291 Bool) (temp___skip_constant_1292 Bool)
+  (temp___do_toplevel_1293 Bool)) Bool (=>
+                                       (or (= temp___is_init_1291 true)
                                        (fp.leq (fp #b0 #b01110101 #b00000110001001001101111) (fp #b0 #b01111111 #b00000000000000000000000)))
-                                       (in_range5 temp___expr_1300)))
+                                       (in_range5 temp___expr_1294)))
 
 (declare-sort t_alpha 0)
 
@@ -287,12 +287,12 @@
 (define-fun t_alpha__ref___projection ((a t_alpha__ref)) t_alpha (t_alpha__content
                                                                  a))
 
-(define-fun dynamic_invariant6 ((temp___expr_1306 Float32)
-  (temp___is_init_1303 Bool) (temp___skip_constant_1304 Bool)
-  (temp___do_toplevel_1305 Bool)) Bool (=>
-                                       (or (= temp___is_init_1303 true)
+(define-fun dynamic_invariant6 ((temp___expr_1300 Float32)
+  (temp___is_init_1297 Bool) (temp___skip_constant_1298 Bool)
+  (temp___do_toplevel_1299 Bool)) Bool (=>
+                                       (or (= temp___is_init_1297 true)
                                        (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b01111111 #b00000000000000000000000)))
-                                       (in_range6 temp___expr_1306)))
+                                       (in_range6 temp___expr_1300)))
 
 (declare-sort t_quaternion 0)
 
@@ -317,12 +317,12 @@
 (define-fun t_quaternion__ref___projection ((a t_quaternion__ref)) t_quaternion
   (t_quaternion__content a))
 
-(define-fun dynamic_invariant7 ((temp___expr_1336 Float32)
-  (temp___is_init_1333 Bool) (temp___skip_constant_1334 Bool)
-  (temp___do_toplevel_1335 Bool)) Bool (=>
-                                       (or (= temp___is_init_1333 true)
+(define-fun dynamic_invariant7 ((temp___expr_1330 Float32)
+  (temp___is_init_1327 Bool) (temp___skip_constant_1328 Bool)
+  (temp___do_toplevel_1329 Bool)) Bool (=>
+                                       (or (= temp___is_init_1327 true)
                                        (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) (fp #b0 #b01111111 #b00000000000000000000000)))
-                                       (in_range7 temp___expr_1336)))
+                                       (in_range7 temp___expr_1330)))
 
 (declare-fun inv_sqrt (Float32) Float32)
 
@@ -803,6 +803,66 @@
 
 (declare-const o78 Float32)
 
+(declare-const o79 Float32)
+
+(declare-const o80 Float32)
+
+(declare-const o81 Float32)
+
+(declare-const o82 Float32)
+
+(declare-const o83 Float32)
+
+(declare-const o84 Float32)
+
+(declare-const o85 Float32)
+
+(declare-const o86 Float32)
+
+(declare-const o87 Float32)
+
+(declare-const o88 Float32)
+
+(declare-const o89 Float32)
+
+(declare-const o90 Float32)
+
+(declare-const o91 Float32)
+
+(declare-const o92 Float32)
+
+(declare-const o93 Float32)
+
+(declare-const o94 Float32)
+
+(declare-const o95 Float32)
+
+(declare-const o96 Float32)
+
+(declare-const o97 Float32)
+
+(declare-const o98 Float32)
+
+(declare-const o99 Float32)
+
+(declare-const o100 Float32)
+
+(declare-const o101 Float32)
+
+(declare-const o102 Float32)
+
+(declare-const o103 Float32)
+
+(declare-const o104 Float32)
+
+(declare-const o105 Float32)
+
+(declare-const o106 Float32)
+
+(declare-const o107 Float32)
+
+(declare-const o108 Float32)
+
 (declare-const integral_fbx1 Float32)
 
 (declare-const integral_fby1 Float32)
@@ -959,11 +1019,25 @@
 
 (declare-const q2_tmp1 Float32)
 
-(define-fun integral_fbz4 () t__ref (mk_t__ref integral_fbz))
+(declare-const result34 t__ref)
 
-(define-fun integral_fby4 () t__ref (mk_t__ref integral_fby))
+(declare-const q3_tmp1 Float32)
 
-(define-fun integral_fbx4 () t__ref (mk_t__ref integral_fbx))
+(declare-const result35 t__ref)
+
+(declare-const recip_norm3 Float32)
+
+(declare-const result36 t__ref)
+
+(declare-const q01 Float32)
+
+(declare-const result37 t__ref)
+
+(declare-const q11 Float32)
+
+(declare-const result38 t__ref)
+
+(declare-const q21 Float32)
 
 ;; H
   (assert (in_range1 gx))
@@ -1632,7 +1706,7 @@
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (=> (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) two_ki)
-  (= result16 integral_fbx4))))
+  (= result16 (mk_t__ref integral_fbx)))))
 
 ;; H
   (assert
@@ -1703,7 +1777,7 @@
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (=> (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) two_ki)
-  (= result17 integral_fby4))))
+  (= result17 (mk_t__ref integral_fby)))))
 
 ;; H
   (assert
@@ -1774,7 +1848,7 @@
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (=> (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) two_ki)
-  (= result18 integral_fbz4))))
+  (= result18 (mk_t__ref integral_fbz)))))
 
 ;; H
   (assert
@@ -1887,7 +1961,7 @@
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (=> (not (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) two_ki))
-  (= result22 integral_fbx4))))
+  (= result22 (mk_t__ref integral_fbx)))))
 
 ;; H
   (assert
@@ -1907,7 +1981,7 @@
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (=> (not (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) two_ki))
-  (= result23 integral_fby4))))
+  (= result23 (mk_t__ref integral_fby)))))
 
 ;; H
   (assert
@@ -1927,7 +2001,7 @@
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (=> (not (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) two_ki))
-  (= result24 integral_fbz4))))
+  (= result24 (mk_t__ref integral_fbz)))))
 
 ;; H
   (assert
@@ -2140,261 +2214,209 @@
 ;; H
   (assert
   (=>
-  (not
-  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
   (= (let ((subject half_ez)) (mk_t__ref half_ez2)) half_ez)))
 
 ;; H
   (assert
   (=>
-  (not
-  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
   (= (let ((subject half_ey)) (mk_t__ref half_ey2)) half_ey)))
 
 ;; H
   (assert
   (=>
-  (not
-  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
   (= half_ex2 half_ex)))
 
 ;; H
   (assert
   (=>
-  (not
-  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
   (= rad_gz3 rad_gz1)))
 
 ;; H
   (assert
   (=>
-  (not
-  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
   (= rad_gy3 rad_gy1)))
 
 ;; H
   (assert
   (=>
-  (not
-  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
   (= rad_gx3 rad_gx1)))
 
 ;; H
   (assert
   (=>
-  (not
-  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
   (= norm_az2 norm_az)))
 
 ;; H
   (assert
   (=>
-  (not
-  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
   (= norm_ay2 norm_ay)))
 
 ;; H
   (assert
   (=>
-  (not
-  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
   (= norm_ax2 norm_ax)))
 
 ;; H
   (assert
   (=>
-  (not
-  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
   (= recip_norm2 recip_norm)))
 
 ;; H
   (assert
   (=>
-  (not
-  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
   (= integral_fbz2 integral_fbz)))
 
 ;; H
   (assert
   (=>
-  (not
-  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
   (= integral_fby2 integral_fby)))
 
 ;; H
   (assert
   (=>
-  (not
-  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
   (= integral_fbx2 integral_fbx)))
 
 ;; H
   (assert
   (=>
-  (not
-  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
   (= half_ez2 half_ez1)))
 
 ;; H
   (assert
   (=>
-  (not
-  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
   (= half_ey2 half_ey1)))
 
 ;; H
   (assert
   (=>
-  (not
-  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
   (= half_ex2 half_ex1)))
 
 ;; H
   (assert
   (=>
-  (not
-  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
   (= rad_gz3 rad_gz1)))
 
 ;; H
   (assert
   (=>
-  (not
-  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
   (= rad_gy3 rad_gy1)))
 
 ;; H
   (assert
   (=>
-  (not
-  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
   (= rad_gx3 rad_gx1)))
 
 ;; H
   (assert
   (=>
-  (not
-  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
   (= norm_az2 norm_az1)))
 
 ;; H
   (assert
   (=>
-  (not
-  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
   (= norm_ay2 norm_ay1)))
 
 ;; H
   (assert
   (=>
-  (not
-  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
   (= norm_ax2 norm_ax1)))
 
 ;; H
   (assert
   (=>
-  (not
-  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
   (= recip_norm2 recip_norm1)))
 
 ;; H
   (assert
   (=>
-  (not
-  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
   (= integral_fbz2 integral_fbz1)))
 
 ;; H
   (assert
   (=>
-  (not
-  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
   (= integral_fby2 integral_fby1)))
 
 ;; H
   (assert
   (=>
-  (not
-  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
   (= integral_fbx2 integral_fbx1)))
 
 ;; H
@@ -2543,7 +2565,7 @@
 
 ;; H
   (assert
-  (and (= o78 (fp.mul RNE (let ((subject qc)) qc1) rad_gx4))
+  (and (= o80 (fp.mul RNE (let ((subject qc)) qc1) rad_gx4))
   (fp.isFinite32 (fp.mul RNE (let ((subject qc)) qc1) rad_gx4))))
 
 ;; H

@@ -1052,15 +1052,15 @@ axiom Power_3 :
   mul(NearestTiesToEven, x, x)))))
 
 axiom Power_neg1 :
-  (forall x:t. (tqtisFinite(x) -> ((not is_zero(x)) -> eq(power(x, (-1)),
+  (forall x:t. (tqtisFinite(x) -> ((not is_zero(x)) -> eq(power(x, (- 1)),
   div(NearestTiesToEven, of_int(NearestTiesToEven, 1), x)))))
 
 axiom Power_neg2 :
-  (forall x:t. (tqtisFinite(x) -> ((not is_zero(x)) -> eq(power(x, (-2)),
+  (forall x:t. (tqtisFinite(x) -> ((not is_zero(x)) -> eq(power(x, (- 2)),
   div(NearestTiesToEven, of_int(NearestTiesToEven, 1), power(x, 2))))))
 
 axiom Power_neg3 :
-  (forall x:t. (tqtisFinite(x) -> ((not is_zero(x)) -> eq(power(x, (-2)),
+  (forall x:t. (tqtisFinite(x) -> ((not is_zero(x)) -> eq(power(x, (- 2)),
   div(NearestTiesToEven, of_int(NearestTiesToEven, 1), power(x, 3))))))
 
 type natural
@@ -1185,14 +1185,46 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic u : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic o4 : t
+
+logic o5 : t
+
+axiom H : in_range2(op)
+
+axiom H1 : tqtisFinite(x)
+
+axiom H2 : tqtisFinite(y)
+
+axiom H3 : in_range1(e)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
 
+axiom H4 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(u))
+
+axiom H5 : (not (op = 0))
+
+axiom H6 : (not (op = 1))
+
+axiom H7 : (not (op = 2))
+
+axiom H8 : (not (op = 3))
+
+axiom H9 : (not (op = 4))
+
+axiom H10 : (op = 5)
+
  (* File "overflow_check.adb", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall u:t. (in_range2(op) -> (tqtisFinite(x) -> (tqtisFinite(y) ->
-  (in_range1(e) -> ((le(neg(fliteral1), fliteral1) -> tqtisFinite(u)) ->
-  ((not (op = 0)) -> ((not (op = 1)) -> ((not (op = 2)) -> ((not (op = 3)) ->
-  ((not (op = 4)) -> ((op = 5) -> (not is_zero(y))))))))))))))
+goal WP_parameter_def : (not is_zero(y))

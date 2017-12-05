@@ -1133,17 +1133,9 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 1000.0)))
-
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 3600.0)))
-
 (declare-const o t)
+
+(declare-const o1 t)
 
 ;; H
   (assert (tqtisFinite speed))
@@ -1151,10 +1143,20 @@
 ;; H
   (assert (= (is_valid_speed_km_per_h speed) true))
 
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 1000.0)))
+
 ;; H
   (assert
   (and (= o (mul RNE1 speed fliteral4)) (tqtisFinite
   (mul RNE1 speed fliteral4))))
+
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 3600.0)))
 
 (assert
 ;; WP_parameter_def

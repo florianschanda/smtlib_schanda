@@ -157,18 +157,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1470,7 +1470,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -1854,29 +1854,81 @@ axiom null_r__def_axiom : ((null_r = of_rep(0)) and
 axiom null_raw_r__def_axiom :
   (null_raw_r = p__null_raw_r__aggregate_def(of_int(0)))
 
+logic full_s__split_fields : integer
+
+logic full_s__split_fields1 : float1
+
+logic o : float1
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : float1
+
+logic temp___268 : integer
+
+logic temp___2681 : float1
+
+logic result : integer
+
+logic result1 : float1
+
+logic full_s__split_fields2 : integer
+
+logic full_s__split_fields3 : float1
+
+logic raw_s : (int,unsigned_8) farray
+
+logic full_s__split_fields4 : integer
+
+logic full_s__split_fields5 : float1
+
+logic raw_s1 : (int,unsigned_8) farray
+
+logic full_s__split_fields6 : integer
+
+logic full_s__split_fields7 : float1
+
+logic raw_s2 : (int,unsigned_8) farray
+
+axiom H : (to_rep1(o) = fliteral1)
+
+axiom H1 : (to_rep(o1) = 0)
+
+axiom H2 : (o1 = o2)
+
+axiom H3 : (o = o3)
+
+axiom H4 : (temp___268 = o2)
+
+axiom H5 : (temp___2681 = o3)
+
+axiom H6 : ((temp___268 = null_r) and (temp___2681 = null_r1))
+
+axiom H7 : (p__null_raw_r__aggregate_def(of_int(0)) = null_raw_r)
+
+axiom H8 : (result = full_s__split_fields)
+
+axiom H9 : (result1 = full_s__split_fields1)
+
+axiom H10 : ((full_s__split_fields2 = null_r) and
+  (full_s__split_fields3 = null_r1))
+
+axiom H11 : (raw_s = raw_s1)
+
+axiom H12 : (full_s__split_fields4 = full_s__split_fields2)
+
+axiom H13 : (full_s__split_fields5 = full_s__split_fields3)
+
+axiom H14 : (raw_s2 = raw_s)
+
+axiom H15 : (full_s__split_fields6 = full_s__split_fields2)
+
+axiom H16 : (full_s__split_fields7 = full_s__split_fields3)
+
  (* File "p.ads", line 14, characters 0-0 *)
-goal WP_parameter_def :
-  (forall full_s__split_fields:integer. forall full_s__split_fields1:float1.
-  forall o:float1. forall o1:integer. forall o2:integer. forall o3:float1.
-  forall temp___268:integer. forall temp___2681:float1.
-  forall result:integer. forall result1:float1.
-  forall full_s__split_fields2:integer. forall full_s__split_fields3:float1.
-  forall raw_s:(int,unsigned_8) farray. forall full_s__split_fields4:integer.
-  forall full_s__split_fields5:float1. forall raw_s1:(int,unsigned_8) farray.
-  forall full_s__split_fields6:integer. forall full_s__split_fields7:float1.
-  forall raw_s2:(int,unsigned_8) farray. ((((((to_rep1(o) = fliteral1) and
-  ((to_rep(o1) = 0) and ((o1 = o2) and (o = o3)))) and ((temp___268 = o2) and
-  (temp___2681 = o3))) and ((temp___268 = null_r) and
-  (temp___2681 = null_r1))) and
-  ((p__null_raw_r__aggregate_def(of_int(0)) = null_raw_r) and
-  ((((result = full_s__split_fields) and
-  (result1 = full_s__split_fields1)) and
-  ((full_s__split_fields2 = null_r) and
-  (full_s__split_fields3 = null_r1))) and (((raw_s = raw_s1) and
-  ((full_s__split_fields4 = full_s__split_fields2) and
-  (full_s__split_fields5 = full_s__split_fields3))) and ((raw_s2 = raw_s) and
-  ((full_s__split_fields6 = full_s__split_fields2) and
-  (full_s__split_fields7 = full_s__split_fields3))))))) -> (bool_eq6({
-  us_split_fields1 = { rec__p__r__a = full_s__split_fields4; rec__p__r__b =
-  full_s__split_fields5 } }, { us_split_fields1 = { rec__p__r__a = null_r;
-  rec__p__r__b = null_r1 } }) = true)))
+goal WP_parameter_def : (bool_eq6({ us_split_fields1 = { rec__p__r__a =
+  full_s__split_fields4; rec__p__r__b = full_s__split_fields5 } }, {
+  us_split_fields1 = { rec__p__r__a = null_r; rec__p__r__b = null_r1 }
+  }) = true)

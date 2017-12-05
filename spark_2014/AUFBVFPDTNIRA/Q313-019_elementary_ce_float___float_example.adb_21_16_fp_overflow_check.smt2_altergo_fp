@@ -1093,12 +1093,32 @@ logic b : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic float_example__bounded_add__result : t
+
+logic o : t
+
+logic result : t
+
+logic float_example__bounded_add__result1 : t
+
+logic float_example__bounded_add__result2 : t
+
+logic float_example__bounded_add__result3 : t
+
+logic float_example__bounded_add__result4 : t
+
+logic float_example__bounded_add__result5 : t
+
+axiom H : tqtisFinite(a)
+
+axiom H1 : tqtisFinite(b)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 4.0))
 
+axiom H2 : (lt(a, fliteral1) and lt(b, fliteral1))
+
  (* File "float_example.adb", line 5, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(a) -> (tqtisFinite(b) -> ((lt(a,
-  fliteral1) and lt(b, fliteral1)) -> tqtisFinite(add(NearestTiesToEven, a,
-  b)))))
+goal WP_parameter_def : tqtisFinite(add(NearestTiesToEven, a, b))

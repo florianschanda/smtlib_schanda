@@ -1124,6 +1124,9 @@ logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+axiom H : in_range2(x)
+
+axiom H1 : (in_range3(x) and (le(neg(fliteral), x) and le(x, fliteral)))
+
  (* File "floatround.adb", line 5, characters 0-0 *)
-goal WP_parameter_def : (in_range2(x) -> ((in_range3(x) and
-  (le(neg(fliteral), x) and le(x, fliteral))) -> le(neg(fliteral), x)))
+goal WP_parameter_def : le(neg(fliteral), x)

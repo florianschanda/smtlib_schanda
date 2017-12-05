@@ -2157,30 +2157,17 @@
 ;; max_double__def_axiom
   (assert (= max_double fliteral3))
 
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) (/ 0.0 10.0))))
-
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral5)
-  (= (tqtreal fliteral5) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
-
-(declare-const fliteral6 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) 2.0)))
-
 (declare-const x t)
 
 (declare-const y t)
 
 (declare-const z t)
 
+(declare-const t2 t)
+
 (declare-const o t)
+
+(declare-const o1 t)
 
 (declare-const result t)
 
@@ -2194,6 +2181,10 @@
 
 (declare-const z1 t)
 
+(declare-const result3 t)
+
+(declare-const t3 t)
+
 ;; H
   (assert (tqtisFinite max_float))
 
@@ -2202,6 +2193,11 @@
 
 ;; H
   (assert (= result x))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) (/ 0.0 10.0))))
 
 ;; H
   (assert (= x1 fliteral4))
@@ -2221,6 +2217,13 @@
 ;; H
   (assert (= result2 z))
 
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral5)
+  (= (tqtreal fliteral5) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
+
 ;; H
   (assert (= z1 fliteral5))
 
@@ -2229,6 +2232,11 @@
 
 ;; H
   (assert (and (= o (add RNE1 x1 y1)) (tqtisFinite (add RNE1 x1 y1))))
+
+(declare-const fliteral6 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) 2.0)))
 
 (assert
 ;; WP_parameter_def

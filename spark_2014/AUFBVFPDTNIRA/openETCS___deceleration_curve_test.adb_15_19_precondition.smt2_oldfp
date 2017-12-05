@@ -1672,11 +1672,6 @@
 ;; maximum_valid_speed__def_axiom
   (assert (= maximum_valid_speed (m_per_s_from_km_per_h fliteral5)))
 
-(declare-const fliteral6 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) 160.0)))
-
 (declare-const initial_speed t)
 
 (declare-const target__split_fields Bool)
@@ -1703,6 +1698,8 @@
 
 (declare-const deceleration_curve_test__target__assume2 speed_t)
 
+(declare-const o6 Int)
+
 (declare-const result t)
 
 (declare-const initial_speed1 t)
@@ -1718,6 +1715,11 @@
 (declare-const target__split_fields4 distance_t)
 
 (declare-const target__split_fields5 speed_t)
+
+(declare-const fliteral6 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) 160.0)))
 
 ;; H
   (assert

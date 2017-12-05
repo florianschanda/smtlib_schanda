@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -65,24 +65,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
@@ -647,6 +647,8 @@
 
 (declare-const temp___243 Int)
 
+(declare-const j Int)
+
 (declare-const temp___241 Int)
 
 (declare-const o Int)
@@ -715,56 +717,57 @@
 
 (declare-const step_function__get_value__result3 Float32)
 
-(declare-const i4 Int)
+(declare-const result3 Int)
 
-(declare-const step_function__get_value__result4 Float32)
+(declare-const i4 Int)
 
 (declare-const i5 Int)
 
-(declare-const step_function__get_value__result5 Float32)
+(declare-const step_function__get_value__result4 Float32)
 
 (declare-const i6 Int)
 
-(declare-const step_function__get_value__result6 Float32)
+(declare-const step_function__get_value__result5 Float32)
 
 (declare-const i7 Int)
 
+(declare-const step_function__get_value__result6 Float32)
+
+(declare-const i8 Int)
+
 (declare-const step_function__get_value__result7 Float32)
-
-(declare-const result3 Float32)
-
-(declare-const step_function__get_value__result8 Float32)
-
-(declare-const step_function__get_value__result9 t__ref)
-
-(declare-const step_function__get_value__result10 Float32)
-
-(declare-const i8 int__ref)
-
-(declare-const step_function__get_value__result11 t__ref)
 
 (declare-const i9 Int)
 
+(declare-const step_function__get_value__result8 Float32)
+
+(declare-const i10 Int)
+
+(declare-const step_function__get_value__result9 Float32)
+
+(declare-const result4 Float32)
+
+(declare-const step_function__get_value__result10 Float32)
+
+(declare-const step_function__get_value__result11 t__ref)
+
 (declare-const step_function__get_value__result12 Float32)
 
-(declare-const i10 int__ref)
+(declare-const i11 int__ref)
 
 (declare-const step_function__get_value__result13 t__ref)
 
-(declare-const i11 Int)
+(declare-const i12 Int)
 
 (declare-const step_function__get_value__result14 Float32)
 
-(define-fun step_function__get_value__result15 () t__ref (mk_t__ref
-                                                         step_function__get_value__result6))
+(declare-const i13 int__ref)
 
-(define-fun i12 () int__ref (mk_int__ref i6))
+(declare-const step_function__get_value__result15 t__ref)
 
-(define-fun result4 () int__ref (mk_int__ref result))
+(declare-const i14 Int)
 
-(define-fun o24 () us_rep (mk___rep (mk___split_fields o1 o2)))
-
-(define-fun i13 () int__ref (mk_int__ref i))
+(declare-const step_function__get_value__result16 Float32)
 
 ;; H
   (assert (in_range3 x))
@@ -778,28 +781,28 @@
   (and
   (and
   (and
-  (= step_function__get_value__result11 (mk_t__ref
+  (= step_function__get_value__result13 (mk_t__ref
                                         step_function__get_value__result3))
-  (= i8 (mk_int__ref i3)))
+  (= i11 (mk_int__ref i3)))
   (and
-  (= step_function__get_value__result12 step_function__get_value__result3)
-  (= i9 i3)))
+  (= step_function__get_value__result14 step_function__get_value__result3)
+  (= i12 i3)))
   (and (= temp___247 0)
   (and
   (= temp___248 (- (to_rep1
                    (rec__step_function__step_function_t__number_of_delimiters
                    (us_split_fields3 sfun))) 1))
-  (and (and (= result4 i13) (= i2 temp___247))
+  (and (and (= (mk_int__ref result) (mk_int__ref i)) (= i2 temp___247))
   (and (and (<= temp___247 i2) (<= i2 temp___248))
   (and (= temp___243 i2)
   (and
-  (forall ((j Int))
-  (=> (and (<= 1 j) (<= j i3))
+  (forall ((j1 Int))
+  (=> (and (<= 1 j1) (<= j1 i3))
   (<= (to_rep2
       (rec__step_function__delimiter_entry__delimiter
       (us_split_fields1
       (select (rec__step_function__step_function_t__step
-              (us_split_fields3 sfun)) j)))) x)))
+              (us_split_fields3 sfun)) j1)))) x)))
   (and
   (and
   (=>
@@ -824,9 +827,9 @@
   (and
   (and (and (= temp___241 (+ i3 1)) (in_range1 (+ i3 1)))
   (and (and (<= 0 temp___241) (<= temp___241 10)) (= o temp___241)))
-  (= o24 (select (rec__step_function__step_function_t__step
-                 (us_split_fields3 sfun)) o)))
-  (and (= o1 o3) (= o2 o4))) (= o5 o3)) (= o6 (to_rep2 o5)))
+  (= (mk___rep (mk___split_fields o1 o2)) (select (rec__step_function__step_function_t__step
+                                                  (us_split_fields3 sfun))
+  o))) (and (= o1 o3) (= o2 o4))) (= o5 o3)) (= o6 (to_rep2 o5)))
   (= o7 (ite (< x o6) true false)))
   (= result1 (ite (<= (to_rep2
                       (rec__step_function__delimiter_entry__delimiter
@@ -843,7 +846,7 @@
                                                (us_split_fields3 sfun))
                                        i3))))))))))))))))
   (and
-  (and (and (= result4 i13) (= i2 0))
+  (and (and (= (mk_int__ref result) (mk_int__ref i)) (= i2 0))
   (ite (and (<= 0 i2)
        (<= i2 (- (to_rep1
                  (rec__step_function__step_function_t__number_of_delimiters
@@ -852,13 +855,13 @@
   (and
   (and (= temp___243 i2)
   (and
-  (forall ((j Int))
-  (=> (and (<= 1 j) (<= j i3))
+  (forall ((j1 Int))
+  (=> (and (<= 1 j1) (<= j1 i3))
   (<= (to_rep2
       (rec__step_function__delimiter_entry__delimiter
       (us_split_fields1
       (select (rec__step_function__step_function_t__step
-              (us_split_fields3 sfun)) j)))) x)))
+              (us_split_fields3 sfun)) j1)))) x)))
   (and
   (and
   (=>
@@ -884,9 +887,9 @@
   (and
   (and (and (= temp___241 (+ i3 1)) (in_range1 (+ i3 1)))
   (and (and (<= 0 temp___241) (<= temp___241 10)) (= o temp___241)))
-  (= o24 (select (rec__step_function__step_function_t__step
-                 (us_split_fields3 sfun)) o)))
-  (and (= o1 o3) (= o2 o4))) (= o5 o3)) (= o6 (to_rep2 o5)))
+  (= (mk___rep (mk___split_fields o1 o2)) (select (rec__step_function__step_function_t__step
+                                                  (us_split_fields3 sfun))
+  o))) (and (= o1 o3) (= o2 o4))) (= o5 o3)) (= o6 (to_rep2 o5)))
   (= o7 (ite (< x o6) true false)))
   (= result1 (ite (<= (to_rep2
                       (rec__step_function__delimiter_entry__delimiter
@@ -901,63 +904,63 @@
            (us_split_fields3 sfun))) 1))))))
   (and
   (and
-  (= step_function__get_value__result3 step_function__get_value__result4)
-  (= i3 i4))
+  (= step_function__get_value__result3 step_function__get_value__result6)
+  (= i3 i7))
   (and
-  (= step_function__get_value__result5 step_function__get_value__result3)
-  (= i5 i3))))
-  (and
-  (and
-  (= step_function__get_value__result15 (mk_t__ref
-                                        step_function__get_value__result4))
-  (= i12 (mk_int__ref i4)))
-  (and
-  (= step_function__get_value__result7 step_function__get_value__result5)
-  (= i7 i5))))
+  (= step_function__get_value__result7 step_function__get_value__result3)
+  (= i8 i3))))
   (and
   (and
-  (= step_function__get_value__result15 (mk_t__ref
-                                        step_function__get_value__result))
-  (= i2 i6))
+  (= (mk_t__ref step_function__get_value__result8) (mk_t__ref
+                                                   step_function__get_value__result6))
+  (= (mk_int__ref i9) (mk_int__ref i7)))
   (and
-  (= step_function__get_value__result7 step_function__get_value__result1)
-  (= i7 i2)))))
-  (and
-  (and
-  (and
-  (= step_function__get_value__result11 step_function__get_value__result9)
-  (= i8 i12))
-  (and
-  (= step_function__get_value__result12 step_function__get_value__result10)
-  (= i9 i7)))
+  (= step_function__get_value__result9 step_function__get_value__result7)
+  (= i10 i8))))
   (and
   (and
-  (= step_function__get_value__result9 (mk_t__ref
-                                       step_function__get_value__result8))
-  (= step_function__get_value__result10 step_function__get_value__result8))
-  (and (= (mk_t__ref result3) step_function__get_value__result15)
-  (= step_function__get_value__result8 (to_rep
-                                       (rec__step_function__delimiter_entry__value
-                                       (us_split_fields1
-                                       (select (rec__step_function__step_function_t__step
-                                               (us_split_fields3 sfun))
-                                       (to_rep1
-                                       (rec__step_function__step_function_t__number_of_delimiters
-                                       (us_split_fields3 sfun))))))))))))))
+  (= (mk_t__ref step_function__get_value__result8) (mk_t__ref
+                                                   step_function__get_value__result))
+  (= i2 i9))
+  (and
+  (= step_function__get_value__result9 step_function__get_value__result1)
+  (= i10 i2)))))
+  (and
+  (and
+  (and
+  (= step_function__get_value__result13 step_function__get_value__result11)
+  (= i11 (mk_int__ref i9)))
+  (and
+  (= step_function__get_value__result14 step_function__get_value__result12)
+  (= i12 i10)))
+  (and
+  (and
+  (= step_function__get_value__result11 (mk_t__ref
+                                        step_function__get_value__result10))
+  (= step_function__get_value__result12 step_function__get_value__result10))
+  (and (= (mk_t__ref result4) (mk_t__ref step_function__get_value__result8))
+  (= step_function__get_value__result10 (to_rep
+                                        (rec__step_function__delimiter_entry__value
+                                        (us_split_fields1
+                                        (select (rec__step_function__step_function_t__step
+                                                (us_split_fields3 sfun))
+                                        (to_rep1
+                                        (rec__step_function__step_function_t__number_of_delimiters
+                                        (us_split_fields3 sfun))))))))))))))
 
 ;; H
   (assert
-  (= step_function__get_value__result13 step_function__get_value__result11))
+  (= step_function__get_value__result15 step_function__get_value__result13))
 
 ;; H
-  (assert (= i10 i8))
+  (assert (= i13 i11))
 
 ;; H
   (assert
-  (= step_function__get_value__result14 step_function__get_value__result12))
+  (= step_function__get_value__result16 step_function__get_value__result14))
 
 ;; H
-  (assert (= i11 i9))
+  (assert (= i14 i12))
 
 ;; H
   (assert (<= 0 i1))
@@ -994,7 +997,7 @@
 
 ;; H
   (assert
-  (= o23 (ite (fp.eq (t__content step_function__get_value__result13)
+  (= o23 (ite (fp.eq (t__content step_function__get_value__result15)
          o22) true false)))
 
 ;; H

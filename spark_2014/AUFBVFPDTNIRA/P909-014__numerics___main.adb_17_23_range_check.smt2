@@ -40,17 +40,17 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -65,24 +65,24 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (declare-fun sqrt (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort integer 0)
@@ -391,12 +391,12 @@
 (define-fun t_float__ref___projection ((a t_float__ref)) t_float (t_float__content
                                                                  a))
 
-(define-fun dynamic_invariant ((temp___expr_520 Float32)
-  (temp___is_init_517 Bool) (temp___skip_constant_518 Bool)
-  (temp___do_toplevel_519 Bool)) Bool (=>
-                                      (or (= temp___is_init_517 true)
+(define-fun dynamic_invariant ((temp___expr_514 Float32)
+  (temp___is_init_511 Bool) (temp___skip_constant_512 Bool)
+  (temp___do_toplevel_513 Bool)) Bool (=>
+                                      (or (= temp___is_init_511 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_520)))
+                                      (fp.isFinite32 temp___expr_514)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -407,6 +407,42 @@
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
+
+(declare-fun temp___String_Literal_517 (tuple0) (Array Int character))
+
+;; temp___String_Literal_517__def_axiom
+  (assert
+  (forall ((us_void_param tuple0))
+  (! (and
+     (and
+     (and
+     (and
+     (and
+     (= (to_rep (select (temp___String_Literal_517 us_void_param) 1)) 88)
+     (= (to_rep (select (temp___String_Literal_517 us_void_param) 2)) 50))
+     (= (to_rep (select (temp___String_Literal_517 us_void_param) 3)) 49))
+     (= (to_rep (select (temp___String_Literal_517 us_void_param) 4)) 32))
+     (= (to_rep (select (temp___String_Literal_517 us_void_param) 5)) 61))
+     (= (to_rep (select (temp___String_Literal_517 us_void_param) 6)) 32)) :pattern (
+  (temp___String_Literal_517 us_void_param)) )))
+
+(declare-fun temp___String_Literal_520 (tuple0) (Array Int character))
+
+;; temp___String_Literal_520__def_axiom
+  (assert
+  (forall ((us_void_param tuple0))
+  (! (and
+     (and
+     (and
+     (and
+     (and
+     (= (to_rep (select (temp___String_Literal_520 us_void_param) 1)) 88)
+     (= (to_rep (select (temp___String_Literal_520 us_void_param) 2)) 50))
+     (= (to_rep (select (temp___String_Literal_520 us_void_param) 3)) 50))
+     (= (to_rep (select (temp___String_Literal_520 us_void_param) 4)) 32))
+     (= (to_rep (select (temp___String_Literal_520 us_void_param) 5)) 61))
+     (= (to_rep (select (temp___String_Literal_520 us_void_param) 6)) 32)) :pattern (
+  (temp___String_Literal_520 us_void_param)) )))
 
 (declare-fun temp___String_Literal_523 (tuple0) (Array Int character))
 
@@ -420,7 +456,7 @@
      (and
      (= (to_rep (select (temp___String_Literal_523 us_void_param) 1)) 88)
      (= (to_rep (select (temp___String_Literal_523 us_void_param) 2)) 50))
-     (= (to_rep (select (temp___String_Literal_523 us_void_param) 3)) 49))
+     (= (to_rep (select (temp___String_Literal_523 us_void_param) 3)) 51))
      (= (to_rep (select (temp___String_Literal_523 us_void_param) 4)) 32))
      (= (to_rep (select (temp___String_Literal_523 us_void_param) 5)) 61))
      (= (to_rep (select (temp___String_Literal_523 us_void_param) 6)) 32)) :pattern (
@@ -438,7 +474,7 @@
      (and
      (= (to_rep (select (temp___String_Literal_526 us_void_param) 1)) 88)
      (= (to_rep (select (temp___String_Literal_526 us_void_param) 2)) 50))
-     (= (to_rep (select (temp___String_Literal_526 us_void_param) 3)) 50))
+     (= (to_rep (select (temp___String_Literal_526 us_void_param) 3)) 52))
      (= (to_rep (select (temp___String_Literal_526 us_void_param) 4)) 32))
      (= (to_rep (select (temp___String_Literal_526 us_void_param) 5)) 61))
      (= (to_rep (select (temp___String_Literal_526 us_void_param) 6)) 32)) :pattern (
@@ -456,47 +492,11 @@
      (and
      (= (to_rep (select (temp___String_Literal_529 us_void_param) 1)) 88)
      (= (to_rep (select (temp___String_Literal_529 us_void_param) 2)) 50))
-     (= (to_rep (select (temp___String_Literal_529 us_void_param) 3)) 51))
+     (= (to_rep (select (temp___String_Literal_529 us_void_param) 3)) 53))
      (= (to_rep (select (temp___String_Literal_529 us_void_param) 4)) 32))
      (= (to_rep (select (temp___String_Literal_529 us_void_param) 5)) 61))
      (= (to_rep (select (temp___String_Literal_529 us_void_param) 6)) 32)) :pattern (
   (temp___String_Literal_529 us_void_param)) )))
-
-(declare-fun temp___String_Literal_532 (tuple0) (Array Int character))
-
-;; temp___String_Literal_532__def_axiom
-  (assert
-  (forall ((us_void_param tuple0))
-  (! (and
-     (and
-     (and
-     (and
-     (and
-     (= (to_rep (select (temp___String_Literal_532 us_void_param) 1)) 88)
-     (= (to_rep (select (temp___String_Literal_532 us_void_param) 2)) 50))
-     (= (to_rep (select (temp___String_Literal_532 us_void_param) 3)) 52))
-     (= (to_rep (select (temp___String_Literal_532 us_void_param) 4)) 32))
-     (= (to_rep (select (temp___String_Literal_532 us_void_param) 5)) 61))
-     (= (to_rep (select (temp___String_Literal_532 us_void_param) 6)) 32)) :pattern (
-  (temp___String_Literal_532 us_void_param)) )))
-
-(declare-fun temp___String_Literal_535 (tuple0) (Array Int character))
-
-;; temp___String_Literal_535__def_axiom
-  (assert
-  (forall ((us_void_param tuple0))
-  (! (and
-     (and
-     (and
-     (and
-     (and
-     (= (to_rep (select (temp___String_Literal_535 us_void_param) 1)) 88)
-     (= (to_rep (select (temp___String_Literal_535 us_void_param) 2)) 50))
-     (= (to_rep (select (temp___String_Literal_535 us_void_param) 3)) 53))
-     (= (to_rep (select (temp___String_Literal_535 us_void_param) 4)) 32))
-     (= (to_rep (select (temp___String_Literal_535 us_void_param) 5)) 61))
-     (= (to_rep (select (temp___String_Literal_535 us_void_param) 6)) 32)) :pattern (
-  (temp___String_Literal_535 us_void_param)) )))
 
 (define-fun dynamic_invariant1 ((temp___expr_39 Int) (temp___is_init_36 Bool)
   (temp___skip_constant_37 Bool)
@@ -610,6 +610,8 @@
 
 (declare-const o36 Int)
 
+(declare-const o37 Int)
+
 (declare-const x211 Float32)
 
 (declare-const x221 Float32)
@@ -693,7 +695,7 @@
 
 ;; H
   (assert
-  (= o6 (concat1 (temp___String_Literal_523 Tuple0) 1 6
+  (= o6 (concat1 (temp___String_Literal_517 Tuple0) 1 6
         (elts (to_string (attr__ATTRIBUTE_IMAGE3 x211)))
         (to_rep1 (first (rt (to_string (attr__ATTRIBUTE_IMAGE3 x211)))))
         (to_rep1 (last (rt (to_string (attr__ATTRIBUTE_IMAGE3 x211))))))))
@@ -737,7 +739,7 @@
 
 ;; H
   (assert
-  (= o14 (concat1 (temp___String_Literal_526 Tuple0) 1 6
+  (= o14 (concat1 (temp___String_Literal_520 Tuple0) 1 6
          (elts (to_string (attr__ATTRIBUTE_IMAGE3 x221)))
          (to_rep1 (first (rt (to_string (attr__ATTRIBUTE_IMAGE3 x221)))))
          (to_rep1 (last (rt (to_string (attr__ATTRIBUTE_IMAGE3 x221))))))))
@@ -782,7 +784,7 @@
 
 ;; H
   (assert
-  (= o22 (concat1 (temp___String_Literal_529 Tuple0) 1 6
+  (= o22 (concat1 (temp___String_Literal_523 Tuple0) 1 6
          (elts (to_string (attr__ATTRIBUTE_IMAGE3 x231)))
          (to_rep1 (first (rt (to_string (attr__ATTRIBUTE_IMAGE3 x231)))))
          (to_rep1 (last (rt (to_string (attr__ATTRIBUTE_IMAGE3 x231))))))))
@@ -827,7 +829,7 @@
 
 ;; H
   (assert
-  (= o30 (concat1 (temp___String_Literal_532 Tuple0) 1 6
+  (= o30 (concat1 (temp___String_Literal_526 Tuple0) 1 6
          (elts (to_string (attr__ATTRIBUTE_IMAGE3 x241)))
          (to_rep1 (first (rt (to_string (attr__ATTRIBUTE_IMAGE3 x241)))))
          (to_rep1 (last (rt (to_string (attr__ATTRIBUTE_IMAGE3 x241))))))))

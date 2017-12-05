@@ -1121,12 +1121,12 @@
 (define-fun positive_float__ref___projection ((a positive_float__ref)) positive_float
   (positive_float__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_1297 t)
-  (temp___is_init_1294 Bool) (temp___skip_constant_1295 Bool)
-  (temp___do_toplevel_1296 Bool)) Bool (=>
-                                       (or (= temp___is_init_1294 true) (le
+(define-fun dynamic_invariant1 ((temp___expr_1291 t)
+  (temp___is_init_1288 Bool) (temp___skip_constant_1289 Bool)
+  (temp___do_toplevel_1290 Bool)) Bool (=>
+                                       (or (= temp___is_init_1288 true) (le
                                        fliteral2 fliteral1)) (in_range2
-                                       temp___expr_1297)))
+                                       temp___expr_1291)))
 
 (declare-const value t)
 
@@ -1137,6 +1137,50 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
+
+(declare-const res t)
+
+(declare-const safety_pack__dead_band__result t)
+
+(declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const o3 t)
+
+(declare-const result t)
+
+(declare-const res1 t)
+
+(declare-const result1 t)
+
+(declare-const res2 t)
+
+(declare-const result2 t)
+
+(declare-const res3 t)
+
+(declare-const result3 t)
+
+(declare-const res4 t)
+
+(declare-const result4 t)
+
+(declare-const safety_pack__dead_band__result1 t)
+
+(declare-const safety_pack__dead_band__result2 t)
+
+(declare-const safety_pack__dead_band__result3 t)
+
+(declare-const res5 t)
+
+(declare-const safety_pack__dead_band__result4 t)
+
+(declare-const res6 t)
+
+(declare-const safety_pack__dead_band__result5 t)
 
 ;; H
   (assert (tqtisFinite value))

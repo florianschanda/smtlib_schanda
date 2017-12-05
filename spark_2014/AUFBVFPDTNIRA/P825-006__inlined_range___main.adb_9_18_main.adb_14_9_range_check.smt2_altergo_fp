@@ -1073,12 +1073,16 @@ function angle__ref___projection(a: angle__ref) : angle = (a).angle__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic a : t
+
+logic o : t
+
+axiom H : (le(fliteral1, fliteral2) -> in_range1(a))
+
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 540.0))
 
  (* File "main.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:t. ((le(fliteral1, fliteral2) -> in_range1(a)) ->
-  in_range1(fliteral3)))
+goal WP_parameter_def : in_range1(fliteral3)

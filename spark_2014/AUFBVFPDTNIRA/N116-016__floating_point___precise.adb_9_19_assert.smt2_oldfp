@@ -1099,39 +1099,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 10.0)))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral3)
-  (= (tqtreal fliteral3) (/ 4000000059604644775390625.0 10000000000000000000000000.0))))
-
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral4)
-  (= (tqtreal fliteral4) (/ 1039999008178710937500.0 100000000000000000000.0))))
-
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral5)
-  (= (tqtreal fliteral5) (/ 1040001010894775390625.0 100000000000000000000.0))))
-
-(declare-const fliteral6 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral6)
-  (= (tqtreal fliteral6) (/ 959998989105224609375.0 100000000000000000000.0))))
-
 (declare-const x t)
 
 (declare-const y t)
@@ -1141,6 +1108,10 @@
 (declare-const o t)
 
 (declare-const o1 t)
+
+(declare-const o2 t)
+
+(declare-const o3 t)
 
 (declare-const result t)
 
@@ -1158,8 +1129,21 @@
 
 (declare-const z2 t)
 
+(declare-const result4 t)
+
+(declare-const z3 t)
+
+(declare-const result5 t)
+
+(declare-const z4 t)
+
 ;; H
   (assert (= result x))
+
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 10.0)))
 
 ;; H
   (assert (= x1 fliteral2))
@@ -1169,6 +1153,13 @@
 
 ;; H
   (assert (= result1 y))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral3)
+  (= (tqtreal fliteral3) (/ 4000000059604644775390625.0 10000000000000000000000000.0))))
 
 ;; H
   (assert (= y1 fliteral3))
@@ -1188,6 +1179,20 @@
 ;; H
   (assert (= z1 o))
 
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral4)
+  (= (tqtreal fliteral4) (/ 1039999008178710937500.0 100000000000000000000.0))))
+
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral5)
+  (= (tqtreal fliteral5) (/ 1040001010894775390625.0 100000000000000000000.0))))
+
 ;; H
   (assert (and (le fliteral4 z1) (le z1 fliteral5)))
 
@@ -1199,6 +1204,13 @@
 
 ;; H
   (assert (= z2 o1))
+
+(declare-const fliteral6 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral6)
+  (= (tqtreal fliteral6) (/ 959998989105224609375.0 100000000000000000000.0))))
 
 (assert
 ;; WP_parameter_def

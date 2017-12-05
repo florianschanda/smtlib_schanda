@@ -1327,30 +1327,405 @@ axiom def_axiom4 :
   (forall temp___180:int.
   ((temp___177(temp___179)[temp___180]) = of_rep(temp___179))))
 
- (* File "homothetical.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall lambda:(int,float1) farray. forall upsilon:(int,float1) farray.
-  forall kvp:(int,float1) farray. forall i:int. forall j:int.
-  forall result:(int,float1) farray. forall lambda1:(int,float1) farray.
-  forall result1:(int,float1) farray. forall upsilon1:(int,float1) farray.
-  forall result2:(int,float1) farray. forall kvp1:(int,float1) farray.
-  forall result3:int. forall i1:int. forall kvp2:(int,float1) farray.
-  forall i2:int.
-  ((forall j1:int. (((1 <= j1) and (j1 <= 2)) -> ((neq(to_rep((d[j1])),
-   fliteral1) and lt(fliteral1, to_rep((kv[j1])))) and lt(fliteral1,
-   to_rep((ka[j1])))))) ->
-  ((({ map__content = result } = { map__content = lambda }) and
-  (lambda1 = homothetical__homothetical__lambda__aggregate_def(fliteral))) ->
-  ((({ map__content = result1 } = { map__content = upsilon }) and
-  (upsilon1 = homothetical__homothetical__upsilon__aggregate_def(fliteral))) ->
-  ((({ map__content = result2 } = { map__content = kvp }) and
-  (kvp1 = homothetical__homothetical__kvp__aggregate_def(fliteral1))) -> ((({
-  int__content = result3 } = { int__content = i }) and (i1 = 1)) ->
-  (((1 <= i1) and (i1 <= 2)) ->
-  ((forall j1:int. (((1 <= j1) and (j1 <= (i2 - 1))) -> lt(fliteral1,
-   to_rep((kvp2[j1]))))) ->
-  (((((1 <= 2) -> in_range3(i2)) and
+logic kvmax : (int,float1) farray
+
+logic kamax : (int,float1) farray
+
+logic lambda : (int,float1) farray
+
+logic upsilon : (int,float1) farray
+
+logic kvp : (int,float1) farray
+
+logic i : int
+
+logic i1 : int
+
+logic j : int
+
+logic temp___169 : (int,float1) farray
+
+logic temp___168 : int
+
+logic j1 : int
+
+logic o : t
+
+logic o1 : float1
+
+logic o2 : (int,float1) farray
+
+logic o3 : t
+
+logic o4 : t
+
+logic o5 : t
+
+logic o6 : t
+
+logic o7 : t
+
+logic o8 : float1
+
+logic o9 : (int,float1) farray
+
+logic o10 : t
+
+logic o11 : t
+
+logic o12 : t
+
+logic o13 : t
+
+logic o14 : t
+
+logic o15 : float1
+
+logic o16 : (int,float1) farray
+
+logic o17 : t
+
+logic o18 : t
+
+logic o19 : t
+
+logic o20 : t
+
+logic o21 : t
+
+logic o22 : float1
+
+logic o23 : (int,float1) farray
+
+logic o24 : t
+
+logic o25 : t
+
+logic o26 : t
+
+logic o27 : t
+
+logic o28 : t
+
+logic o29 : float1
+
+logic o30 : (int,float1) farray
+
+logic o31 : t
+
+logic o32 : float1
+
+logic o33 : (int,float1) farray
+
+logic o34 : t
+
+logic o35 : float1
+
+logic o36 : (int,float1) farray
+
+logic o37 : t
+
+logic o38 : t
+
+logic o39 : t
+
+logic o40 : t
+
+logic o41 : t
+
+logic o42 : float1
+
+logic o43 : (int,float1) farray
+
+logic o44 : t
+
+logic o45 : t
+
+logic o46 : t
+
+logic o47 : t
+
+logic o48 : t
+
+logic o49 : float1
+
+logic o50 : (int,float1) farray
+
+logic o51 : t
+
+logic o52 : t
+
+logic o53 : t
+
+logic o54 : t
+
+logic o55 : t
+
+logic o56 : float1
+
+logic o57 : (int,float1) farray
+
+logic o58 : t
+
+logic o59 : t
+
+logic o60 : t
+
+logic o61 : t
+
+logic o62 : t
+
+logic o63 : float1
+
+logic o64 : (int,float1) farray
+
+logic o65 : t
+
+logic o66 : float1
+
+logic o67 : (int,float1) farray
+
+logic o68 : t
+
+logic o69 : float1
+
+logic o70 : (int,float1) farray
+
+logic result : (int,float1) farray
+
+logic lambda1 : (int,float1) farray
+
+logic result1 : (int,float1) farray
+
+logic upsilon1 : (int,float1) farray
+
+logic result2 : (int,float1) farray
+
+logic kvp1 : (int,float1) farray
+
+logic result3 : int
+
+logic i2 : int
+
+logic kvp2 : (int,float1) farray
+
+logic i3 : int
+
+logic result4 : (int,float1) farray
+
+logic kvp3 : (int,float1) farray
+
+logic result5 : int
+
+logic i4 : int
+
+logic kvp4 : (int,float1) farray
+
+logic i5 : int
+
+logic kvp5 : (int,float1) farray
+
+logic i6 : int
+
+logic kvp6 : (int,float1) farray
+
+logic i7 : int
+
+logic kvp7 : (int,float1) farray
+
+logic i8 : int
+
+logic kvp8 : (int,float1) farray
+
+logic i9 : int
+
+logic kvp9 : (int,float1) farray
+
+logic i10 : int
+
+logic result6 : (int,float1) farray
+
+logic kvmax1 : (int,float1) farray
+
+logic result7 : (int,float1) farray
+
+logic kamax1 : (int,float1) farray
+
+logic result8 : int
+
+logic i11 : int
+
+logic result9 : int
+
+logic j2 : int
+
+logic result10 : (int,float1) farray
+
+logic lambda2 : (int,float1) farray
+
+logic result11 : (int,float1) farray
+
+logic upsilon2 : (int,float1) farray
+
+logic lambda3 : (int,float1) farray
+
+logic upsilon3 : (int,float1) farray
+
+logic lambda4 : (int,float1) farray
+
+logic upsilon4 : (int,float1) farray
+
+logic result12 : int
+
+logic j3 : int
+
+logic result13 : (int,float1) farray
+
+logic lambda5 : (int,float1) farray
+
+logic result14 : (int,float1) farray
+
+logic upsilon5 : (int,float1) farray
+
+logic lambda6 : (int,float1) farray
+
+logic upsilon6 : (int,float1) farray
+
+logic lambda7 : (int,float1) farray
+
+logic upsilon7 : (int,float1) farray
+
+logic result15 : (int,float1) farray
+
+logic kvmax2 : (int,float1) farray
+
+logic result16 : (int,float1) farray
+
+logic kamax2 : (int,float1) farray
+
+logic result17 : int
+
+logic i12 : int
+
+logic result18 : int
+
+logic j4 : int
+
+logic result19 : (int,float1) farray
+
+logic lambda8 : (int,float1) farray
+
+logic result20 : (int,float1) farray
+
+logic upsilon8 : (int,float1) farray
+
+logic lambda9 : (int,float1) farray
+
+logic upsilon9 : (int,float1) farray
+
+logic lambda10 : (int,float1) farray
+
+logic upsilon10 : (int,float1) farray
+
+logic result21 : int
+
+logic j5 : int
+
+logic result22 : (int,float1) farray
+
+logic lambda11 : (int,float1) farray
+
+logic result23 : (int,float1) farray
+
+logic upsilon11 : (int,float1) farray
+
+logic lambda12 : (int,float1) farray
+
+logic upsilon12 : (int,float1) farray
+
+logic lambda13 : (int,float1) farray
+
+logic upsilon13 : (int,float1) farray
+
+logic result24 : (int,float1) farray
+
+logic kvmax3 : (int,float1) farray
+
+logic result25 : (int,float1) farray
+
+logic kamax3 : (int,float1) farray
+
+logic kvmax4 : (int,float1) farray
+
+logic kamax4 : (int,float1) farray
+
+logic lambda14 : (int,float1) farray
+
+logic upsilon14 : (int,float1) farray
+
+logic kvp10 : (int,float1) farray
+
+logic i13 : int
+
+logic i14 : int
+
+logic j6 : int
+
+logic kvmax5 : (int,float1) farray
+
+logic kamax5 : (int,float1) farray
+
+logic lambda15 : (int,float1) farray
+
+logic upsilon15 : (int,float1) farray
+
+logic kvp11 : (int,float1) farray
+
+logic i15 : int
+
+logic i16 : int
+
+logic j7 : int
+
+axiom H :
+  (forall j8:int. (((1 <= j8) and (j8 <= 2)) -> ((neq(to_rep((d[j8])),
+  fliteral1) and lt(fliteral1, to_rep((kv[j8])))) and lt(fliteral1,
+  to_rep((ka[j8]))))))
+
+axiom H1 : (result = lambda)
+
+axiom H2 :
+  (lambda1 = homothetical__homothetical__lambda__aggregate_def(fliteral))
+
+axiom H3 : (result1 = upsilon)
+
+axiom H4 :
+  (upsilon1 = homothetical__homothetical__upsilon__aggregate_def(fliteral))
+
+axiom H5 : (result2 = kvp)
+
+axiom H6 : (kvp1 = homothetical__homothetical__kvp__aggregate_def(fliteral1))
+
+axiom H7 : (result3 = i)
+
+axiom H8 : (i2 = 1)
+
+axiom H9 : (1 <= i2)
+
+axiom H10 : (i2 <= 2)
+
+axiom H11 :
+  (forall j8:int. (((1 <= j8) and (j8 <= (i3 - 1))) -> lt(fliteral1,
+  to_rep((kvp2[j8])))))
+
+axiom H12 : ((((1 <= 2) -> in_range3(i3)) and
   (forall temp___170:int. (((1 <= temp___170) and (temp___170 <= 2)) ->
-  ((i2 <= temp___170) -> ((kvp2[temp___170]) = (kvp1[temp___170])))))) and
-  ((1 <= i2) and (i2 <= 2))) -> (((1 <= j) and (j <= (i2 - 1))) ->
-  (1 <= j)))))))))))
+  ((i3 <= temp___170) -> ((kvp2[temp___170]) = (kvp1[temp___170])))))) and
+  ((1 <= i3) and (i3 <= 2)))
+
+axiom H13 : (1 <= j1)
+
+axiom H14 : (j1 <= (i3 - 1))
+
+ (* File "homothetical.ads", line 5, characters 0-0 *)
+goal WP_parameter_def : (1 <= j1)

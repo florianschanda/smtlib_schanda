@@ -1857,15 +1857,13 @@
 
 (declare-const v__split_fields15 us_private)
 
-(define-fun classwide__c_update__v__fields4 () us_split_fields (mk___split_fields
-                                                               classwide__c_update__v__fields
-                                                               classwide__c_update__v__fields1
-                                                               classwide__c_update__v__fields2
-                                                               classwide__c_update__v__fields3))
-
 ;; H
   (assert
-  (= (c_is_zero (mk___rep classwide__c_update__v__fields4 v__attr__tag)) true))
+  (= (c_is_zero
+     (mk___rep
+     (mk___split_fields classwide__c_update__v__fields
+     classwide__c_update__v__fields1 classwide__c_update__v__fields2
+     classwide__c_update__v__fields3) v__attr__tag)) true))
 
 ;; H
   (assert (= result v__split_fields))
@@ -1882,7 +1880,10 @@
 ;; H
   (assert
   (= (mk___split_fields v__split_fields4 v__split_fields5 v__split_fields6
-     v__split_fields7) classwide__c_update__v__fields4))
+     v__split_fields7) (mk___split_fields classwide__c_update__v__fields
+                       classwide__c_update__v__fields1
+                       classwide__c_update__v__fields2
+                       classwide__c_update__v__fields3)))
 
 ;; H
   (assert (= v__split_fields8 v__split_fields4))

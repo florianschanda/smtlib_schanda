@@ -1129,9 +1129,25 @@
                                      (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_51)))
 
+(declare-const foo__float_tests__sqrt_comedy_1__result Bool)
+
 (declare-const o t)
 
-(declare-const o1 Bool)
+(declare-const o1 t)
+
+(declare-const o2 Bool)
+
+(declare-const result Bool)
+
+(declare-const foo__float_tests__sqrt_comedy_1__result1 Bool)
+
+(declare-const foo__float_tests__sqrt_comedy_1__result2 Bool)
+
+(declare-const foo__float_tests__sqrt_comedy_1__result3 Bool)
+
+(declare-const foo__float_tests__sqrt_comedy_1__result4 Bool)
+
+(declare-const foo__float_tests__sqrt_comedy_1__result5 Bool)
 
 ;; H
   (assert (tqtisFinite a))
@@ -1143,10 +1159,10 @@
   (assert (tqtisFinite c))
 
 ;; H
-  (assert (and (= o (mul RNE1 b b)) (tqtisFinite (mul RNE1 b b))))
+  (assert (and (= o1 (mul RNE1 b b)) (tqtisFinite (mul RNE1 b b))))
 
 ;; H
-  (assert (= o1 (ite (eq o c) true false)))
+  (assert (= o2 (ite (eq o1 c) true false)))
 
 (assert
 ;; WP_parameter_def

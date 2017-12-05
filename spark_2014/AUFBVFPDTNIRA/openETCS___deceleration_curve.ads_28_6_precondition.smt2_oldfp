@@ -1265,6 +1265,8 @@
      (and (le fliteral7 speed) (le speed fliteral5))) :pattern ((is_valid_speed_km_per_h
                                                                 speed)) )))
 
+(declare-const deceleration_curve__maximum_valid_speed__assume t)
+
 ;; H
   (assert (in_range1 distance_resolution))
 

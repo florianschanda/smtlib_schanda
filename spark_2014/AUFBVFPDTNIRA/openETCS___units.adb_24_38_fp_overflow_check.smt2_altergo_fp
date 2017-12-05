@@ -1166,7 +1166,13 @@ axiom m_per_s_from_km_per_h__def_axiom :
   (m_per_s_from_km_per_h(speed1) = div(NearestTiesToEven,
   mul(NearestTiesToEven, speed1, fliteral3), fliteral4))))
 
+logic o : t
+
+logic o1 : t
+
+axiom H : tqtisFinite(speed)
+
+axiom H1 : (is_valid_speed(speed) = true)
+
  (* File "units.ads", line 24, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(speed) ->
-  ((is_valid_speed(speed) = true) -> tqtisFinite(mul(NearestTiesToEven,
-  speed, fliteral4))))
+goal WP_parameter_def : tqtisFinite(mul(NearestTiesToEven, speed, fliteral4))

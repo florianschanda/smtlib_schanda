@@ -1354,13 +1354,6 @@
 ;; threehalfs__def_axiom
   (assert (= threehalfs fliteral3))
 
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral4)
-  (= (tqtreal fliteral4) (/ 99999997473787516355514526367187500.0 10000000000000000000000000000000000000000.0))))
-
 (declare-const i Int)
 
 (declare-const y t)
@@ -1384,6 +1377,20 @@
 (declare-const o8 t)
 
 (declare-const o9 t)
+
+(declare-const o10 t)
+
+(declare-const o11 t)
+
+(declare-const o12 t)
+
+(declare-const o13 t)
+
+(declare-const o14 t)
+
+(declare-const o15 t)
+
+(declare-const o16 Bool)
 
 (declare-const result Int)
 
@@ -1418,6 +1425,13 @@
 
 ;; H
   (assert (tqtisFinite threehalfs))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral4)
+  (= (tqtreal fliteral4) (/ 99999997473787516355514526367187500.0 10000000000000000000000000000000000000000.0))))
 
 ;; H
   (assert (le fliteral4 x))

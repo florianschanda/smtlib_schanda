@@ -1196,14 +1196,21 @@
                                       (neg fliteral3) fliteral4)) (in_range4
                                       temp___expr_147)))
 
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 360.0)))
-
 (declare-const v1 t)
 
 (declare-const v2 t)
+
+(declare-const o t)
+
+(declare-const o1 t)
+
+(declare-const result t)
+
+(declare-const v11 t)
+
+(declare-const result1 t)
+
+(declare-const v21 t)
 
 ;; H
   (assert (in_range3 x))
@@ -1213,6 +1220,11 @@
 
 ;; H
   (assert (=> (le (neg fliteral1) fliteral1) (in_range2 v2)))
+
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 360.0)))
 
 (assert
 ;; WP_parameter_def

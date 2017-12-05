@@ -1178,15 +1178,17 @@
                                       (neg fliteral2) fliteral3)) (in_range2
                                       temp___expr_147)))
 
+(declare-const o t)
+
+(declare-const o1 t)
+
+;; H
+  (assert (in_range1 x))
+
 (declare-const fliteral5 t)
 
 ;; fliteral_axiom
   (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 360.0)))
-
-(declare-const o t)
-
-;; H
-  (assert (in_range1 x))
 
 ;; H
   (assert

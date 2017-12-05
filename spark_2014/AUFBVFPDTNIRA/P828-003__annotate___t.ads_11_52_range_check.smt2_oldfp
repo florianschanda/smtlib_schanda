@@ -1719,6 +1719,34 @@
             (of_array (to_array1 temp___138) (first3 temp___138)
             (last3 temp___138)))))
 
+(declare-const o Int)
+
+(declare-const us Int)
+
+(declare-const o1 float)
+
+(declare-const o2 integer)
+
+(declare-const o3 integer)
+
+(declare-const o4 Bool)
+
+(declare-const o5 float)
+
+(declare-const o6 integer)
+
+(declare-const o7 Bool)
+
+(declare-const o8 float)
+
+(declare-const temp___165 (Array Int us_rep))
+
+(declare-const temp___1651 t2)
+
+(declare-const temp___166 (Array Int us_rep))
+
+(declare-const temp___1661 t2)
+
 (assert
 ;; WP_parameter_def
  ;; File "t.ads", line 15, characters 0-0
