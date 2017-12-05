@@ -10,17 +10,17 @@
 ;;; SMT-LIB2: real arithmetic
 (define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (define-fun fp.isIntegral32 ((x Float32)) Bool (or (fp.isZero x) (and (fp.isNormal x) (= x (fp.roundToIntegral RNE x)))))
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-const max_int Int)
 
@@ -31,22 +31,22 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -106,11 +106,11 @@
 
 (define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
 
-(define-fun dynamic_invariant1 ((temp___expr_538 Int)
-  (temp___is_init_535 Bool) (temp___skip_constant_536 Bool)
-  (temp___do_toplevel_537 Bool)) Bool (=>
-                                      (or (= temp___is_init_535 true)
-                                      (<= 0 10)) (in_range4 temp___expr_538)))
+(define-fun dynamic_invariant1 ((temp___expr_532 Int)
+  (temp___is_init_529 Bool) (temp___skip_constant_530 Bool)
+  (temp___do_toplevel_531 Bool)) Bool (=>
+                                      (or (= temp___is_init_529 true)
+                                      (<= 0 10)) (in_range4 temp___expr_532)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
@@ -140,20 +140,20 @@
 
 (define-fun in_range6 ((x Int)) Bool (and (<= 0 x) (<= x 2)))
 
-(define-fun dynamic_invariant5 ((temp___expr_550 Int)
-  (temp___is_init_547 Bool) (temp___skip_constant_548 Bool)
-  (temp___do_toplevel_549 Bool)) Bool (=>
-                                      (or (= temp___is_init_547 true)
-                                      (<= 0 2)) (in_range6 temp___expr_550)))
+(define-fun dynamic_invariant5 ((temp___expr_544 Int)
+  (temp___is_init_541 Bool) (temp___skip_constant_542 Bool)
+  (temp___do_toplevel_543 Bool)) Bool (=>
+                                      (or (= temp___is_init_541 true)
+                                      (<= 0 2)) (in_range6 temp___expr_544)))
 
 (define-fun in_range7 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(define-fun dynamic_invariant6 ((temp___expr_556 Int)
-  (temp___is_init_553 Bool) (temp___skip_constant_554 Bool)
-  (temp___do_toplevel_555 Bool)) Bool (=>
-                                      (or (= temp___is_init_553 true)
+(define-fun dynamic_invariant6 ((temp___expr_550 Int)
+  (temp___is_init_547 Bool) (temp___skip_constant_548 Bool)
+  (temp___do_toplevel_549 Bool)) Bool (=>
+                                      (or (= temp___is_init_547 true)
                                       (<= 0 2147483647)) (in_range7
-                                      temp___expr_556)))
+                                      temp___expr_550)))
 
 (declare-const f Float32)
 

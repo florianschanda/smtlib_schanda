@@ -10,17 +10,17 @@
 ;;; SMT-LIB2: real arithmetic
 (define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (define-fun fp.isIntegral32 ((x Float32)) Bool (or (fp.isZero x) (and (fp.isNormal x) (= x (fp.roundToIntegral RNE x)))))
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-const max_int Int)
 
@@ -31,22 +31,22 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 ;; max_value
   (assert
@@ -120,21 +120,21 @@
 
 (declare-const dummy Float32)
 
-(declare-const temp___519 Float32)
+(declare-const temp___513 Float32)
 
-(declare-const temp___518 Float32)
+(declare-const temp___512 Float32)
 
 (declare-const o Float32)
 
-(declare-const temp___523 Float32)
+(declare-const temp___517 Float32)
 
-(declare-const temp___522 Float32)
+(declare-const temp___516 Float32)
 
 (declare-const o1 Float32)
 
-(declare-const temp___527 Float32)
+(declare-const temp___521 Float32)
 
-(declare-const temp___526 Float32)
+(declare-const temp___520 Float32)
 
 (declare-const o2 Float32)
 
@@ -263,12 +263,12 @@
 ;; H
   (assert
   (=> (fp.leq f1 (fp #b0 #b01111111 #b00000000000000000000000))
-  (= temp___519 dummy)))
+  (= temp___513 dummy)))
 
 ;; H
   (assert
   (=> (fp.leq f1 (fp #b0 #b01111111 #b00000000000000000000000))
-  (= temp___518 f1)))
+  (= temp___512 f1)))
 
 ;; H
   (assert
@@ -371,12 +371,12 @@
 ;; H
   (assert
   (=> (fp.leq f8 (fp #b0 #b01111111 #b00000000000000000000000))
-  (= temp___523 dummy6)))
+  (= temp___517 dummy6)))
 
 ;; H
   (assert
   (=> (fp.leq f8 (fp #b0 #b01111111 #b00000000000000000000000))
-  (= temp___522 f8)))
+  (= temp___516 f8)))
 
 ;; H
   (assert
@@ -480,12 +480,12 @@
 ;; H
   (assert
   (=> (fp.leq f15 (fp #b0 #b01111110 #b00000000000000000000000))
-  (= temp___527 dummy12)))
+  (= temp___521 dummy12)))
 
 ;; H
   (assert
   (=> (fp.leq f15 (fp #b0 #b01111110 #b00000000000000000000000))
-  (= temp___526 f15)))
+  (= temp___520 f15)))
 
 ;; H
   (assert
@@ -593,6 +593,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "test_trigo.adb", line 5, characters 0-0
-  (not (not (fp.isZero      o4))))
+  (not (not (fp.isZero o4))))
 (check-sat)
 (exit)

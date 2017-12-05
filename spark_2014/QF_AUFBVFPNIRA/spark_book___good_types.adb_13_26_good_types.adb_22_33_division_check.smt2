@@ -10,17 +10,17 @@
 ;;; SMT-LIB2: real arithmetic
 (define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (define-fun fp.isIntegral32 ((x Float32)) Bool (or (fp.isZero x) (and (fp.isNormal x) (= x (fp.roundToIntegral RNE x)))))
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-const max_int Int)
 
@@ -31,54 +31,54 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (define-fun in_range ((x Int)) Bool (and (<= 0 x) (<= x 255)))
 
-(define-fun dynamic_invariant ((temp___expr_472 Int)
-  (temp___is_init_469 Bool) (temp___skip_constant_470 Bool)
-  (temp___do_toplevel_471 Bool)) Bool (=>
-                                      (or (= temp___is_init_469 true)
-                                      (<= 0 255)) (in_range temp___expr_472)))
+(define-fun dynamic_invariant ((temp___expr_466 Int)
+  (temp___is_init_463 Bool) (temp___skip_constant_464 Bool)
+  (temp___do_toplevel_465 Bool)) Bool (=>
+                                      (or (= temp___is_init_463 true)
+                                      (<= 0 255)) (in_range temp___expr_466)))
 
 (define-fun in_range1 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000101 #b10010000000000000000000)))))
 
-(define-fun dynamic_invariant1 ((temp___expr_515 Float32)
-  (temp___is_init_512 Bool) (temp___skip_constant_513 Bool)
-  (temp___do_toplevel_514 Bool)) Bool (=>
-                                      (or (= temp___is_init_512 true)
+(define-fun dynamic_invariant1 ((temp___expr_509 Float32)
+  (temp___is_init_506 Bool) (temp___skip_constant_507 Bool)
+  (temp___do_toplevel_508 Bool)) Bool (=>
+                                      (or (= temp___is_init_506 true)
                                       (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000101 #b10010000000000000000000)))
-                                      (in_range1 temp___expr_515)))
+                                      (in_range1 temp___expr_509)))
 
 (define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000010 #b10000000000000000000000)))))
 
-(define-fun dynamic_invariant2 ((temp___expr_521 Float32)
-  (temp___is_init_518 Bool) (temp___skip_constant_519 Bool)
-  (temp___do_toplevel_520 Bool)) Bool (=>
-                                      (or (= temp___is_init_518 true)
+(define-fun dynamic_invariant2 ((temp___expr_515 Float32)
+  (temp___is_init_512 Bool) (temp___skip_constant_513 Bool)
+  (temp___do_toplevel_514 Bool)) Bool (=>
+                                      (or (= temp___is_init_512 true)
                                       (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000010 #b10000000000000000000000)))
-                                      (in_range2 temp___expr_521)))
+                                      (in_range2 temp___expr_515)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -91,12 +91,12 @@
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000101 #b10010000000000000000000)))))
 
-(define-fun dynamic_invariant3 ((temp___expr_527 Float32)
-  (temp___is_init_524 Bool) (temp___skip_constant_525 Bool)
-  (temp___do_toplevel_526 Bool)) Bool (=>
-                                      (or (= temp___is_init_524 true)
+(define-fun dynamic_invariant3 ((temp___expr_521 Float32)
+  (temp___is_init_518 Bool) (temp___skip_constant_519 Bool)
+  (temp___do_toplevel_520 Bool)) Bool (=>
+                                      (or (= temp___is_init_518 true)
                                       (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000101 #b10010000000000000000000)))
-                                      (in_range3 temp___expr_527)))
+                                      (in_range3 temp___expr_521)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
@@ -109,12 +109,12 @@
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000010 #b10000000000000000000000)))))
 
-(define-fun dynamic_invariant4 ((temp___expr_534 Float32)
-  (temp___is_init_531 Bool) (temp___skip_constant_532 Bool)
-  (temp___do_toplevel_533 Bool)) Bool (=>
-                                      (or (= temp___is_init_531 true)
+(define-fun dynamic_invariant4 ((temp___expr_528 Float32)
+  (temp___is_init_525 Bool) (temp___skip_constant_526 Bool)
+  (temp___do_toplevel_527 Bool)) Bool (=>
+                                      (or (= temp___is_init_525 true)
                                       (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000010 #b10000000000000000000000)))
-                                      (in_range4 temp___expr_534)))
+                                      (in_range4 temp___expr_528)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
@@ -159,22 +159,22 @@
 (declare-const wall_thickness1 Float32)
 
 ;; H
+  (assert (in_range default_fore))
+
+;; H
   (assert (in_range default_aft))
 
 ;; H
   (assert (in_range default_exp))
 
 ;; H
-  (assert (in_range default_fore))
+  (assert (in_range default_fore1))
 
 ;; H
   (assert (in_range default_aft1))
 
 ;; H
   (assert (in_range default_exp1))
-
-;; H
-  (assert (in_range default_fore1))
 
 ;; H
   (assert
@@ -221,6 +221,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "a-tiflio.ads", line 80, characters 0-0
-  (not (not (fp.isZero      (fp #b0 #b10000010 #b10000000000000000000000)))))
+  (not (not (fp.isZero (fp #b0 #b10000010 #b10000000000000000000000)))))
 (check-sat)
 (exit)

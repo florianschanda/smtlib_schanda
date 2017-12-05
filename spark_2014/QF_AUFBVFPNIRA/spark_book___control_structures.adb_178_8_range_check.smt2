@@ -13,17 +13,17 @@
 (define-fun mod1 ((x Int)
   (y Int)) Int (ite (< 0 y) (mod x y) (+ (mod x y) y)))
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-const max_int Int)
 
@@ -34,22 +34,22 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -84,20 +84,20 @@
 
 (define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 255)))
 
-(define-fun dynamic_invariant3 ((temp___expr_472 Int)
-  (temp___is_init_469 Bool) (temp___skip_constant_470 Bool)
-  (temp___do_toplevel_471 Bool)) Bool (=>
-                                      (or (= temp___is_init_469 true)
+(define-fun dynamic_invariant3 ((temp___expr_466 Int)
+  (temp___is_init_463 Bool) (temp___skip_constant_464 Bool)
+  (temp___do_toplevel_465 Bool)) Bool (=>
+                                      (or (= temp___is_init_463 true)
                                       (<= 0 255)) (in_range3
-                                      temp___expr_472)))
+                                      temp___expr_466)))
 
 (define-fun in_range4 ((x Int)) Bool (and (<= 2 x) (<= x 16)))
 
-(define-fun dynamic_invariant4 ((temp___expr_478 Int)
-  (temp___is_init_475 Bool) (temp___skip_constant_476 Bool)
-  (temp___do_toplevel_477 Bool)) Bool (=>
-                                      (or (= temp___is_init_475 true)
-                                      (<= 2 16)) (in_range4 temp___expr_478)))
+(define-fun dynamic_invariant4 ((temp___expr_472 Int)
+  (temp___is_init_469 Bool) (temp___skip_constant_470 Bool)
+  (temp___do_toplevel_471 Bool)) Bool (=>
+                                      (or (= temp___is_init_469 true)
+                                      (<= 2 16)) (in_range4 temp___expr_472)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -106,21 +106,21 @@
 (define-fun in_range5 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
-(define-fun dynamic_invariant5 ((temp___expr_514 Int)
-  (temp___is_init_511 Bool) (temp___skip_constant_512 Bool)
-  (temp___do_toplevel_513 Bool)) Bool (=>
-                                      (or (= temp___is_init_511 true)
+(define-fun dynamic_invariant5 ((temp___expr_508 Int)
+  (temp___is_init_505 Bool) (temp___skip_constant_506 Bool)
+  (temp___do_toplevel_507 Bool)) Bool (=>
+                                      (or (= temp___is_init_505 true)
                                       (<= (- 2147483648) 2147483647))
-                                      (in_range5 temp___expr_514)))
+                                      (in_range5 temp___expr_508)))
 
 (define-fun in_range6 ((x Int)) Bool (and (<= 65 x) (<= x 90)))
 
-(define-fun dynamic_invariant6 ((temp___expr_527 Int)
-  (temp___is_init_524 Bool) (temp___skip_constant_525 Bool)
-  (temp___do_toplevel_526 Bool)) Bool (=>
-                                      (or (= temp___is_init_524 true)
+(define-fun dynamic_invariant6 ((temp___expr_521 Int)
+  (temp___is_init_518 Bool) (temp___skip_constant_519 Bool)
+  (temp___do_toplevel_520 Bool)) Bool (=>
+                                      (or (= temp___is_init_518 true)
                                       (<= 65 90)) (in_range6
-                                      temp___expr_527)))
+                                      temp___expr_521)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
@@ -265,9 +265,9 @@
 
 (declare-const o14 Int)
 
-(declare-const temp___531 Int)
+(declare-const temp___525 Int)
 
-(declare-const temp___530 Int)
+(declare-const temp___524 Int)
 
 (declare-const o15 Int)
 
@@ -279,7 +279,7 @@
 
 (declare-const o19 Float32)
 
-(declare-const temp___532 Float32)
+(declare-const temp___526 Float32)
 
 (declare-const o20 Float32)
 
@@ -1025,10 +1025,10 @@
   (assert (= sum1 0))
 
 ;; H
-  (assert (= temp___531 sum1))
+  (assert (= temp___525 sum1))
 
 ;; H
-  (assert (= temp___530 value1))
+  (assert (= temp___524 value1))
 
 ;; H
   (assert
@@ -1083,7 +1083,7 @@
              o19) true false)))
 
 ;; H
-  (assert (=> (= result5 true) (= temp___532 approx1)))
+  (assert (=> (= result5 true) (= temp___526 approx1)))
 
 ;; H
   (assert

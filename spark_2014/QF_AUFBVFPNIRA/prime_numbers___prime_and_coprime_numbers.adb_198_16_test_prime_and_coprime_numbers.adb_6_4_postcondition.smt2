@@ -13,17 +13,17 @@
 (define-fun mod1 ((x Int)
   (y Int)) Int (ite (< 0 y) (mod x y) (+ (mod x y) y)))
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                (fp.isPositive  x)))
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
-                                                 (fp.isNegative  x)))
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                            (fp.isPositive  x)))
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
-                                             (fp.isNegative  x)))
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
 
 (declare-const max_int Int)
 
@@ -34,22 +34,22 @@
                                              (<= i 16777216)))
 
 (define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isPositive  y))
-                    (and (fp.isNegative  x) (fp.isNegative  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
 
 (define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive  x) (fp.isNegative  y))
-                    (and (fp.isNegative  x) (fp.isPositive  y))))
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
 
 (define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive  z))
-                    (=> (diff_sign x y) (fp.isNegative  z))))
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
 
 (define-fun sqr ((x Real)) Real (* x x))
 
 (define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
-                 (and (fp.isNegative  x) (< r 0.0))))
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
 
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -114,9 +114,9 @@
 
 (declare-const test_prime_and_coprime_numbers__p__eratosthenes__L_5__R87b__assume Int)
 
-(declare-const temp___261 Int)
+(declare-const temp___260 (Array Int Bool))
 
-(declare-const temp___259 (Array Int Bool))
+(declare-const temp___259 Int)
 
 (declare-const temp___258 Int)
 
@@ -335,19 +335,19 @@
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= temp___261 index_21)))
+  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= temp___260 is_prime3)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= temp___259 is_prime3)))
+  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= temp___259 index_3)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= temp___258 index_3)))
+  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= temp___258 index_1)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= temp___257 index_1)))
+  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= temp___257 index_21)))
 
 ;; H
   (assert
@@ -365,9 +365,9 @@
   (=> (and (<= 2 index_21) (<= index_21 r87b))
   (and
   (and
-  (and (=> (<= 0 2147483647) (in_range2 index_12))
+  (and (=> (<= 2 r87b) (dynamic_property 2 r87b index_22))
+  (=> (<= 0 2147483647) (in_range2 index_12)))
   (=> (<= (- 2147483648) 2147483647) (in_range1 index_32)))
-  (=> (<= 2 r87b) (dynamic_property 2 r87b index_22)))
   (and (<= 2 index_22) (<= index_22 r87b)))))
 
 ;; H
