@@ -70,6 +70,8 @@
 (declare-const cat_44 Int)
 (declare-const cat_45 Int)
 (declare-const cat_46 Int)
+(declare-const cat_47 Int)
+(declare-const cat_48 Int)
 (assert (spoon_29 cat_39))
 (assert (spoon_14 cat_41))
 (assert (and (= cat_44 (spoon_37 cat_39)) (and (spoon_14 cat_44) (= cat_44 (* cat_39 100)))))

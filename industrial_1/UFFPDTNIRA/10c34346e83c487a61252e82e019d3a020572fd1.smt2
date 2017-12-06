@@ -90,6 +90,8 @@
 (declare-const cat_64 Int)
 (assert (= cat_62 (fp #b0 #b01100100 #b01010111100110001110111)))
 (declare-const cat_65 Float32)
+(declare-const cat_66 Float32)
+(declare-const cat_67 Float32)
 (assert (spoon_34 cat_58))
 (assert (spoon_42 cat_60))
 (assert (spoon_42 cat_62))

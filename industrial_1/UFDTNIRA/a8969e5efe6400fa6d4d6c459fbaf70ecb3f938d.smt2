@@ -64,6 +64,7 @@
 (define-fun spoon_29 ((kitten_45 Int) (kitten_46 Bool) (kitten_47 Bool) (kitten_48 Bool)) Bool (=> (or (= kitten_46 true) (<= 0 99)) (spoon_18 kitten_45)))
 (declare-const cat_30 Int)
 (declare-const cat_31 Int)
+(declare-const cat_32 Int)
 (assert (spoon_10 cat_27))
 (assert (and (= cat_30 (spoon_25 cat_27)) (and (spoon_10 cat_30) (= (spoon_9 cat_30 10) 0))))
 (assert (= cat_31 (spoon_7 cat_30 10)))

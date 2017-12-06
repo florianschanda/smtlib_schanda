@@ -63,6 +63,8 @@
 (declare-const cat_42 Int)
 (declare-const cat_43 Int)
 (declare-const cat_44 Float32)
+(declare-const cat_45 Float32)
+(declare-const cat_46 Float32)
 (assert (spoon_25 cat_41))
 (assert (=> (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000111 #b01101000000000000000000)) (spoon_33 cat_44)))
 (assert (not (fp.lt cat_41 (fp #b0 #b00000000 #b00000000000000000000000))))

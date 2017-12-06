@@ -46,6 +46,7 @@
 (declare-const cat_26 Int)
 (declare-const cat_27 Int)
 (declare-const cat_28 Int)
+(declare-const cat_29 Int)
 (assert (spoon_7 cat_23))
 (assert (spoon_15 cat_25))
 (assert (=> (<= 0 9007199254740991) (spoon_7 cat_28)))

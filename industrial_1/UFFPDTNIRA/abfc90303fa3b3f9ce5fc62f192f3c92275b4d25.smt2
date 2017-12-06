@@ -117,6 +117,7 @@
 (declare-const cat_75 Float32)
 (declare-const cat_76 Float32)
 (declare-const cat_77 Float32)
+(declare-const cat_78 Float32)
 (assert (and (= cat_74 (fp.mul RNE (fp.sub RNE (spoon_39 (get_potato_15_a (get_potato_17_a cat_64))) (spoon_39 (get_potato_15_a (get_potato_17_a cat_66)))) (fp.sub RNE (spoon_39 (get_potato_15_a (get_potato_17_a cat_64))) (spoon_39 (get_potato_15_a (get_potato_17_a cat_66)))))) (spoon_1 (fp.mul RNE (fp.sub RNE (spoon_39 (get_potato_15_a (get_potato_17_a cat_64))) (spoon_39 (get_potato_15_a (get_potato_17_a cat_66)))) (fp.sub RNE (spoon_39 (get_potato_15_a (get_potato_17_a cat_64))) (spoon_39 (get_potato_15_a (get_potato_17_a cat_66))))))))
 (assert (= cat_74 cat_68))
 (assert (spoon_1 cat_68))

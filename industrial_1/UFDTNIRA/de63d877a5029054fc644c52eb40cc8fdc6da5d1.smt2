@@ -92,7 +92,7 @@
 (assert (=> (not (= (spoon_9 cat_25 10) 0)) (=> (not (= cat_35 true)) (= cat_34 cat_38))))
 (assert (=> (not (= (spoon_9 cat_25 10) 0)) (=> (not (= cat_35 true)) (= cat_39 cat_32))))
 (assert (=> (not (= (spoon_9 cat_25 10) 0)) (=> (not (= cat_35 true)) (= cat_37 cat_39))))
-(assert (=> (not (not (= (spoon_9 cat_25 10) 0))) (= cat_37 cat_34)))
+(assert (=> (= (spoon_9 cat_25 10) 0) (= cat_37 cat_34)))
 (assert (= cat_41 cat_42))
 (assert (= cat_43 cat_41))
 (assert (= (mk_potato_6 cat_40) (mk_potato_6 cat_29)))

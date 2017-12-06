@@ -59,6 +59,7 @@
 (declare-const cat_25 Int)
 (declare-const cat_26 Int)
 (define-fun spoon_27 ((kitten_43 Int) (kitten_44 Bool) (kitten_45 Bool) (kitten_46 Bool)) Bool (=> (or (= kitten_44 true) (<= 0 999)) (spoon_10 kitten_43)))
+(declare-const cat_28 Int)
 (assert (spoon_17 cat_25))
 (assert (not (not (= 100 0))))
 (check-sat)
