@@ -79,14 +79,14 @@ def main():
     if all_provers:
         # We pick a random (but consistent) version for the OldFP and
         # NoCBQI run for CVC4
-        invocations.append(("oldfp", "cvc4_2017_10_02"))
-        invocations.append(("nocbqi", "cvc4_2017_10_02"))
+        # invocations.append(("oldfp", "cvc4_2017_10_02"))
+        # invocations.append(("nocbqi", "cvc4_2017_10_02"))
 
         #invocations.append(("altergo", ALT_ERGO_VERSION))
         invocations.append(("altergo-fp", ALT_ERGO_FP_VERSION))
         invocations.append(("colibri", "colibri"))
         invocations.append(("mathsat", "mathsat"))
-        #invocations.append(("mathsat-acdl", "mathsat"))
+        invocations.append(("mathsat-acdl", "mathsat"))
 
         invocations.append(("z3_smallfloats", Z3_SF_VERSION))
 
