@@ -45,6 +45,44 @@ def err_cmp(a, b):
     else:
         return cmp(b_left, b_right)
 
+# The list of benchmarks from the XSat paper
+XSAT_BENCH = [
+    "div2.c.30",
+    "mult1.c.30",
+    "div3.c.30",
+    "div.c.30",
+    "mult2.c.30",
+    "test_v7_r7_vr10_c1_s24535",
+    "test_v5_r10_vr5_c1_s13195",
+    "div2.c.40",
+    "mult1.c.40",
+    "test_v7_r7_vr1_c1_s24449",
+    "div3.c.40",
+    "div.c.40",
+    "mult2.c.40",
+    "test_v7_r7_vr5_c1_s3582",
+    "test_v7_r7_vr1_c1_s22845",
+    "test_v7_r7_vr5_c1_s19694",
+    "test_v7_r7_vr5_c1_s14675",
+    "test_v7_r7_vr10_c1_s32506",
+    "test_v7_r7_vr10_c1_s10625",
+    "test_v7_r7_vr1_c1_s4574",
+    "test_v5_r10_vr5_c1_s8690",
+    "test_v5_r10_vr1_c1_s32538",
+    "test_v5_r10_vr5_c1_s13679",
+    "test_v5_r10_vr10_c1_s15708",
+    "test_v5_r10_vr10_c1_s7608",
+    "test_v5_r10_vr1_c1_s19145",
+    "test_v5_r10_vr1_c1_s13516",
+    "test_v5_r10_vr10_c1_s21502",
+    "sin2.c.10",
+    "div2.c.50",
+    "mult1.c.50",
+    "div3.c.50",
+    "mult2.c.50",
+    "div.c.50"
+]
+
 def main():
     provers = []
     provers.append(Prover_Kind("cvc4",
@@ -101,6 +139,10 @@ def main():
                                ["--mcsat"],
                                use_logic=False,
                                use_temp=True))
+    provers.append(Prover_Kind("xsat",
+                               [],
+                               use_temp=True,
+                               only_logic=["QF_FP"]))
 
     ap = argparse.ArgumentParser()
     ap.add_argument("--suite",
@@ -109,6 +151,7 @@ def main():
                              "qf_fp", "fp", "industrial", "spark",
                              "schanda",
                              "spark_all",
+                             "xsat_paper", # the 34 benchmarks from xsat paper
                              "debug"])
     ap.add_argument("--single",
                     default=False,
@@ -139,14 +182,15 @@ def main():
             the_prover = Prover(p, options.prover_bin, options.timeout)
 
     bench_dirs = []
-    if options.suite in ("all", "schanda", "fp_fp", "fp"):
+    if options.suite in ("all", "schanda", "qf_fp", "fp"):
         bench_dirs.append("crafted/QF_FP")
         bench_dirs.append("crafted/QF_FPBV")
         bench_dirs.append("crafted/QF_FPLRA")
         bench_dirs.append("random")
         bench_dirs.append("random_ext")
-    if options.suite in ("all", "qf_fp", "fp"):
+    if options.suite in ("all", "qf_fp", "fp", "xsat_paper"):
         bench_dirs.append("griggio")
+    if options.suite in ("all", "qf_fp", "fp"):
         bench_dirs.append("wintersteiger")
         bench_dirs.append("nyxbrain")
     if options.suite in ("all", "qf_fp", "fp", "spark"):
@@ -162,8 +206,7 @@ def main():
     if options.suite in ("all", "spark_all"):
         bench_dirs.append("spark_2014_all")
     if options.suite == "debug":
-        bench_dirs.append("crafted/QF_FPBV")
-        bench_dirs.append("random/smtlib.eq")
+        bench_dirs.append("griggio")
 
     data_filename = "data_%s.p" % mk_run_id(options.prover_kind,
                                             sane_prover_bin)
@@ -184,6 +227,8 @@ def main():
         for path, dirs, files in os.walk(d):
             for f in sorted(files):
                 if f.endswith(".smt2"):
+                    if options.suite == "xsat_paper" and f.replace(".smt2","") not in XSAT_BENCH:
+                        continue
                     t = Task(Benchmark(os.path.join(path, f),
                                        dialect = the_prover.dialect),
                              the_prover)
@@ -193,6 +238,8 @@ def main():
                     assert os.path.exists(os.path.join(path,
                                                        f.split(".smt2_")[0]
                                                        + ".smt2"))
+
+    assert not options.suite == "xsat_paper" or len(tasks) == len(XSAT_BENCH)
 
     if len(tasks) == 0:
         print "Results for %s (%s) already exist. Use --force to recreate." %\

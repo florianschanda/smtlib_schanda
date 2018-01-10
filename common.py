@@ -58,6 +58,7 @@ class Benchmark(object):
         self.sha       = secure_name(fn)
         self.name      = os.path.basename(fn)
         self.cat       = cat_from_benchmark_name(fn)
+        self.logic     = None
         self.expected  = "unknown"
         self.data      = None
         if dialect is not None and os.path.exists(self.benchmark + "_" +
@@ -105,8 +106,13 @@ class Benchmark(object):
                     self.expected = status
                 # elif "set-info" in line and ":smt-lib-version" in line:
                 #     pass
-                elif not keep_logic and "(set-logic" in line:
-                    pass
+                elif "(set-logic" in line:
+                    tokens = line.strip().split()
+                    assert tokens[0] == "(set-logic"
+                    assert tokens[1].endswith(")")
+                    self.logic = tokens[1].strip(")")
+                    if keep_logic and self.logic is not None:
+                        self.data += "(set-logic %s)\n" % self.logic
                 else:
                     self.data += line + "\n"
 
@@ -126,13 +132,15 @@ class Prover_Kind(object):
                  use_logic=True,
                  use_temp=False,
                  use_dialect=None,
-                 strict_dialect=False):
+                 strict_dialect=False,
+                 only_logic=None):
         self.name    = name
         self.cmd     = base_cmd
         self.logic   = use_logic
         self.temp    = use_temp
         self.dialect = use_dialect
         self.strict  = strict_dialect  # if true, only run on special encoding
+        self.only_logic = only_logic   # only support the given logics
 
 class Prover(object):
     def __init__(self, kind, binary, timeout):
@@ -142,6 +150,7 @@ class Prover(object):
         self.temp    = kind.temp
         self.dialect = kind.dialect
         self.strict  = kind.strict
+        self.logics  = kind.only_logic
 
     def get_status(self, benchmark):
         MEM_LIMIT=1024*1024*1024*5 # 5 GiB
@@ -155,6 +164,11 @@ class Prover(object):
 
         if self.strict and self.dialect != benchmark.dialect:
             return ("error", "unsupported", 0.0)
+        if self.logics is not None:
+            if benchmark.logic not in self.logics:
+                return ("error",
+                        "unsupported logic %s" % self.benchmark.logic,
+                        0.0)
 
         altergo_mode = self.dialect is not None and "altergo" in self.dialect
 
