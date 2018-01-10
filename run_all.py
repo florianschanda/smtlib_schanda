@@ -86,7 +86,7 @@ def main():
         invocations.append(("altergo-fp", ALT_ERGO_FP_VERSION))
         invocations.append(("colibri", "colibri"))
         invocations.append(("mathsat", "mathsat"))
-        invocations.append(("mathsat-acdl", "mathsat"))
+        invocations.append(("mathsat_acdl", "mathsat"))
 
         invocations.append(("z3_smallfloats", Z3_SF_VERSION))
 
