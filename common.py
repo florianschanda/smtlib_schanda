@@ -173,7 +173,7 @@ class Prover(object):
         altergo_mode = self.dialect is not None and "altergo" in self.dialect
 
         cmd = ["/usr/bin/time",
-               '--format=<<<%E | %U>>>',
+               '--format=<<<%e | %U>>>',
                "--"] + self.cmd
         if self.temp:
             if altergo_mode:
@@ -243,11 +243,13 @@ class Prover(object):
         if timing.startswith("<<<") and timing.endswith(">>>"):
             timing = timing[3:-3]
             wallclock_time, cpu_time = timing.split(" | ")
-            cpu_time = float(cpu_time)
+            wallclock_time = float(wallclock_time)
+            cpu_time       = float(cpu_time)
         else:
-            cpu_time = float(self.timeout)
+            wallclock_time = float(self.timeout)
+            cpu_time       = float(self.timeout)
 
-        return status, comment.strip(), cpu_time
+        return status, comment.strip(), wallclock_time
 
 
 class Task(object):
