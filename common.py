@@ -167,7 +167,7 @@ class Prover(object):
         if self.logics is not None:
             if benchmark.logic not in self.logics:
                 return ("error",
-                        "unsupported logic %s" % self.benchmark.logic,
+                        "unsupported logic %s" % benchmark.logic,
                         0.0)
 
         altergo_mode = self.dialect is not None and "altergo" in self.dialect
