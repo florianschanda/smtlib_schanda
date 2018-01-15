@@ -187,7 +187,7 @@ def main():
         bench_dirs.append("crafted/QF_FPBV")
         bench_dirs.append("crafted/QF_FPLRA")
         bench_dirs.append("random")
-        bench_dirs.append("random_ext")
+        # bench_dirs.append("random_ext")
     if options.suite in ("all", "qf_fp", "fp", "xsat_paper"):
         bench_dirs.append("griggio")
     if options.suite in ("all", "qf_fp", "fp"):
