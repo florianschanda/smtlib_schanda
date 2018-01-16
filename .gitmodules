@@ -1,0 +1,3 @@
+[submodule "timeout"]
+	path = timeout
+	url = https://github.com/pshved/timeout
