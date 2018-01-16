@@ -26,7 +26,8 @@ map bm_name -> map status -> sat (s), unsat (u), unknown (?)
 
 ## data_<kind>_<bin>.p (on disk)
 map results -> map sha1(bm_name) -> map status -> sat (s), unsat (u), error (e),
-                                                  timeout (t), unknown (?)
+                                                  timeout (t), oom (o),
+                                                  unknown (?)
                                         dialect -> False, True
                                         time    -> float (seconds)
                                         comment -> string
@@ -50,11 +51,13 @@ map group_results -> map groupname -> map sha1(bm_name) ->
     group_summary -> map groupname -> map score -> map solved  -> int
                                                        unknown -> int
                                                        timeout -> int
+                                                       oom     -> int
                                                        error   -> int
                                                        unsound -> int
                                           average -> map solved  -> percent
                                                          unknown -> percent
                                                          timeout -> percent
+                                                         oom     -> percent
                                                          error   -> percent
                                                          unsound -> percent
                                           dialect -> int
@@ -68,11 +71,13 @@ here is the average of avarages, not counting non-participated groups.
 map total_summary -> map score -> map solved  -> int
                                       unknown -> int
                                       timeout -> int
+                                      oom     -> int
                                       error   -> int
                                       unsound -> int
                          average -> map solved  -> average of averages
                                         unknown -> average of averages
                                         timeout -> average of averages
+                                        oom     -> average of averages
                                         error   -> average of averages
                                         unsound -> average of averages
                          dialect -> int

@@ -1,9 +1,10 @@
 #!/usr/bin/env python
+# coding=UTF-8
 ##############################################################################
 ##                                                                          ##
 ##                            smtlib_schanda                                ##
 ##                                                                          ##
-##              Copyright (C) 2017, Altran UK Limited                       ##
+##              Copyright (C) 2017-2018, Altran UK Limited                  ##
 ##                                                                          ##
 ##  This file is part of smtlib_schamda.                                    ##
 ##                                                                          ##
@@ -26,7 +27,6 @@ from copy import copy, deepcopy
 
 import os
 import subprocess
-import resource
 import tempfile
 import datetime
 import hashlib
@@ -144,37 +144,36 @@ class Prover_Kind(object):
 
 class Prover(object):
     def __init__(self, kind, binary, timeout):
-        self.cmd     = [binary] + kind.cmd
-        self.timeout = timeout
-        self.logic   = kind.logic
-        self.temp    = kind.temp
-        self.dialect = kind.dialect
-        self.strict  = kind.strict
-        self.logics  = kind.only_logic
+        self.cmd       = [binary] + kind.cmd
+        self.timeout   = timeout
+        self.mem_limit = 1024*1024*1024*5 # 5 GiB
+        self.logic     = kind.logic
+        self.temp      = kind.temp
+        self.dialect   = kind.dialect
+        self.strict    = kind.strict
+        self.logics    = kind.only_logic
 
+    # Returns a tuple (status, comment, time)
     def get_status(self, benchmark):
-        MEM_LIMIT=1024*1024*1024*5 # 5 GiB
-        def set_limit():
-            resource.setrlimit(resource.RLIMIT_CPU, (self.timeout,
-                                                     self.timeout))
-            resource.setrlimit(resource.RLIMIT_DATA, (MEM_LIMIT,
-                                                      MEM_LIMIT))
-
         benchmark.load(keep_logic = self.logic)
 
+        # A few early aborts to cut down on run-time
         if self.strict and self.dialect != benchmark.dialect:
-            return ("error", "unsupported", 0.0)
+            return ("error", "classified::unsupported", 0.0)
         if self.logics is not None:
             if benchmark.logic not in self.logics:
                 return ("error",
-                        "unsupported logic %s" % benchmark.logic,
+                        "classified::unsupported logic %s" % benchmark.logic,
                         0.0)
 
+        # Since they don't implement SMT-LIB responses we need to special
+        # case their responses. Exceptionalism much?
         altergo_mode = self.dialect is not None and "altergo" in self.dialect
 
-        cmd = ["/usr/bin/time",
-               '--format=<<<%e | %U>>>',
-               "--"] + self.cmd
+        cmd = ["timeout/timeout",
+               "-t", "%u" % self.timeout,            # given in seconds
+               "-m", "%u" % (self.mem_limit / 1024), # given in KiB
+               ] + self.cmd
         if self.temp:
             if altergo_mode:
                 suffix = ".why"
@@ -187,11 +186,14 @@ class Prover(object):
             os.close(fid)
             cmd.append(fn)
 
+        new_env = deepcopy(os.environ)
+        new_env["TIMEOUT_IDSTR"] = "timeout::"
+
         p = subprocess.Popen(cmd,
                              stdin=subprocess.PIPE,
                              stdout=subprocess.PIPE,
                              stderr=subprocess.PIPE,
-                             preexec_fn=set_limit)
+                             env = new_env)
         if self.temp:
             stdout, stderr = p.communicate()
             os.unlink(fn)
@@ -201,11 +203,44 @@ class Prover(object):
         stderr = stderr.strip()
         benchmark.unload()
 
+        # First, we try to extract the magic line from timeout
+        timeout_info = None
+        for line in stderr.splitlines():
+            if line.startswith("timeout::"):
+                timeout_info = line
+        if timeout_info is None:
+            return ("error",
+                    "could not determine timeout" + "\n" + stderr.strip(),
+                    0.0)
+
+        # This line looks like so:
+        #
+        # 0                 1   2    3   4       5      6
+        # timeout::FINISHED CPU 0.56 MEM 2226432 MAXMEM 2226432
+        #                   STALE 0 MAXMEM_RSS 110516
+        #                   7     8 9          10
+        timeout_info = timeout_info.strip().split()
+
+        if timeout_info[0] == "timeout::FINISHED":
+            status         = None # we'll work it out later
+            wallclock_time = float(timeout_info[2])
+        elif timeout_info[0] == "timeout::TIMEOUT":
+            status         = "timeout"
+            wallclock_time = float(timeout_info[2])
+        elif timeout_info[0] == "timeout::MEM":
+            status         = "oom"
+            wallclock_time = float(timeout_info[2])
+        else:
+            return ("error",
+                    "unknown timeout status %s" % timeout_info[0],
+                    0.0)
+
+        # On timeout/oom we can stop here
+        if status is not None:
+            return (status, "", wallclock_time)
+
         if len(stdout) == 0 and len(stderr) == 0:
-            status = "timeout"
-            comment = ""
-        elif stderr.startswith("Command terminated by signal 9"):
-            status = "timeout"
+            status = "error"
             comment = ""
         elif len(stdout) == 0:
             status = "error"
@@ -239,16 +274,6 @@ class Prover(object):
                 status  = "error"
                 comment = stdout + "\n" + stderr
 
-        timing = stderr.strip().splitlines()[-1].strip()
-        if timing.startswith("<<<") and timing.endswith(">>>"):
-            timing = timing[3:-3]
-            wallclock_time, cpu_time = timing.split(" | ")
-            wallclock_time = float(wallclock_time)
-            cpu_time       = float(cpu_time)
-        else:
-            wallclock_time = float(self.timeout)
-            cpu_time       = float(self.timeout)
-
         return status, comment.strip(), wallclock_time
 
 
@@ -263,7 +288,7 @@ class Task(object):
 
 class Result(object):
     def __init__(self, task, status, comment, cpu_time):
-        assert status in ("sat", "unsat", "unknown", "timeout", "error")
+        assert status in ("sat", "unsat", "unknown", "timeout", "oom", "error")
         self.task          = task
         self.prover_status = status
         self.comment       = comment
@@ -279,12 +304,13 @@ class Result(object):
             self.status = self.prover_status
 
     def __str__(self):
-        rv = "[%c] %s" % ({"sat"     : 's',
-                           "unsat"   : 'u',
-                           "unknown" : '?',
-                           "timeout" : ' ',
-                           "error"   : 'e',
-                           "unsound" : '!'}[self.status],
+        rv = "[%s] %s" % ({"sat"     : 's ✓',
+                           "unsat"   : 'u ✓',
+                           "unknown" : ' ? ',
+                           "timeout" : ' ⌛ ',
+                           "oom"     : 'oom',
+                           "error"   : 'err',
+                           "unsound" : ' ! '}[self.status],
                           self.task.benchmark.name)
         if self.task.benchmark.dialect is not None:
             rv += " (%s)" % self.task.benchmark.dialect
@@ -381,11 +407,12 @@ def list_results():
 
     return sorted(rv)
 
-SCORES = ("solved", "unknown", "timeout", "error", "unsound")
+SCORES = ("solved", "unknown", "timeout", "oom", "error", "unsound")
 
 to_long_score = {"s" : "solved",
                  "?" : "unknown",
                  "t" : "timeout",
+                 "o" : "oom",
                  "e" : "error",
                  "u" : "unsound"}
 
@@ -427,6 +454,7 @@ def augment_group_result(rv, group, benchmark_status):
         else:
             assert data["status"] in ("e", # error
                                       "t", # timeout
+                                      "o", # out-of-memory
                                       "?") # unknown
             data["score"] = data["status"]
 
@@ -442,6 +470,7 @@ def augment_group_result(rv, group, benchmark_status):
     # Add aggregated group summary
     summary["participated"] = (summary["score"]["solved"] > 0 or
                                summary["score"]["timeout"] > 0 or
+                               summary["score"]["oom"] > 0 or
                                summary["score"]["unsound"] > 0)
 
     # Special case for the "previous encoding" solver
@@ -507,7 +536,7 @@ def mk_virtual_best_solver(solvers, benchmark_status):
     rv["prover_kind"] = "vbs"
 
     GROUPS = solvers[0]["group_results"]
-    SCORE_ORDER = ["s", "?", "t", "e", "u"]
+    SCORE_ORDER = ["s", "?", "t", "o", "e", "u"]
 
     def solution_preference(a, b):
         if a["score"] == b["score"]:

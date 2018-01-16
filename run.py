@@ -3,7 +3,7 @@
 ##                                                                          ##
 ##                            smtlib_schanda                                ##
 ##                                                                          ##
-##              Copyright (C) 2017, Altran UK Limited                       ##
+##              Copyright (C) 2017-2018, Altran UK Limited                  ##
 ##                                                                          ##
 ##  This file is part of smtlib_schamda.                                    ##
 ##                                                                          ##
@@ -270,6 +270,7 @@ def main():
                             "sat"     : "s",
                             "error"   : "e",
                             "timeout" : "t",
+                            "oom"     : "o",
                             "unknown" : "?"}[result.prover_status]
 
         RESULTS[group][bm.sha] = {

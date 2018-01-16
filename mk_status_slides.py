@@ -3,7 +3,7 @@
 ##                                                                          ##
 ##                            smtlib_schanda                                ##
 ##                                                                          ##
-##              Copyright (C) 2017, Altran UK Limited                       ##
+##              Copyright (C) 2017-2018, Altran UK Limited                  ##
 ##                                                                          ##
 ##  This file is part of smtlib_schamda.                                    ##
 ##                                                                          ##
@@ -45,7 +45,7 @@ other_data = [load_results(solver_kind, solver_bin, BENCHMARKS)
 other_data.append(mk_virtual_best_solver(other_data + [data[-1]],
                                          BENCHMARKS))
 
-COMPARISON_CATS = ("solved", "timeout", "unknown", "error", "unsound")
+COMPARISON_CATS = ("solved", "timeout", "oom", "unknown", "error", "unsound")
 
 GROUPS = sorted(data[-1]["group_summary"])
 
@@ -82,7 +82,7 @@ def mk_solver_name(nam):
 def mk_coloring(criteria):
     if criteria == "solved":
         return COL_AWARD_HIGH
-    elif criteria in ("timeout", "unknown"):
+    elif criteria in ("timeout", "oom", "unknown"):
         return COL_AWARD_LOW
     else:
         # error, unsound
@@ -116,7 +116,8 @@ def mk_progress_slides(fd):
 
     # Table with Benchmark, (Old) Solved%, (New) Solved%
     def mk_progress_table(criteria):
-        assert criteria in ("solved", "unknown", "error", "timeout", "unsound")
+        assert criteria in ("solved", "unknown", "error",
+                            "timeout", "oom", "unsound")
 
         t = TikzTable(title      = "Benchmark",
                       columns    = [v["prover_bin"] for v in versions],
