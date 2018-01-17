@@ -146,7 +146,7 @@ class Prover(object):
     def __init__(self, kind, binary, timeout):
         self.cmd       = [binary] + kind.cmd
         self.timeout   = timeout
-        self.mem_limit = 1024*1024*1024*5 # 5 GiB
+        self.mem_limit = 1024*5 # 5 GiB
         self.logic     = kind.logic
         self.temp      = kind.temp
         self.dialect   = kind.dialect
@@ -170,9 +170,10 @@ class Prover(object):
         # case their responses. Exceptionalism much?
         altergo_mode = self.dialect is not None and "altergo" in self.dialect
 
-        cmd = ["timeout/timeout",
-               "-t", "%u" % self.timeout,            # given in seconds
-               "-m", "%u" % (self.mem_limit / 1024), # given in KiB
+        cmd = ["util/limiter",
+               "-t", "%u" % self.timeout,   # given in seconds
+               "-m", "%u" % self.mem_limit, # given in MiB
+               "--",
                ] + self.cmd
         if self.temp:
             if altergo_mode:
@@ -186,14 +187,10 @@ class Prover(object):
             os.close(fid)
             cmd.append(fn)
 
-        new_env = deepcopy(os.environ)
-        new_env["TIMEOUT_IDSTR"] = "timeout::"
-
         p = subprocess.Popen(cmd,
                              stdin=subprocess.PIPE,
                              stdout=subprocess.PIPE,
-                             stderr=subprocess.PIPE,
-                             env = new_env)
+                             stderr=subprocess.PIPE)
         if self.temp:
             stdout, stderr = p.communicate()
             os.unlink(fn)
@@ -203,33 +200,32 @@ class Prover(object):
         stderr = stderr.strip()
         benchmark.unload()
 
-        # First, we try to extract the magic line from timeout
+        # First, we try to extract the magic line from limiter
         timeout_info = None
         for line in stderr.splitlines():
-            if line.startswith("timeout::"):
+            if line.startswith("limiter::"):
                 timeout_info = line
         if timeout_info is None:
             return ("error",
-                    "could not determine timeout" + "\n" + stderr.strip(),
+                    "could not determine timeout\n" + stdout.strip() +
+                    "\n" + stderr.strip(),
                     0.0)
 
         # This line looks like so:
         #
-        # 0                 1   2    3   4       5      6
-        # timeout::FINISHED CPU 0.56 MEM 2226432 MAXMEM 2226432
-        #                   STALE 0 MAXMEM_RSS 110516
-        #                   7     8 9          10
+        # 0             1    2 3   4
+        # limiter::CODE 12.3 s 500 MiB
         timeout_info = timeout_info.strip().split()
 
-        if timeout_info[0] == "timeout::FINISHED":
+        if timeout_info[0] == "limiter::ok":
             status         = None # we'll work it out later
-            wallclock_time = float(timeout_info[2])
-        elif timeout_info[0] == "timeout::TIMEOUT":
+            wallclock_time = float(timeout_info[1])
+        elif timeout_info[0] == "limiter::timeout":
             status         = "timeout"
-            wallclock_time = float(timeout_info[2])
-        elif timeout_info[0] == "timeout::MEM":
+            wallclock_time = float(timeout_info[1])
+        elif timeout_info[0] == "limiter::oom":
             status         = "oom"
-            wallclock_time = float(timeout_info[2])
+            wallclock_time = float(timeout_info[1])
         else:
             return ("error",
                     "unknown timeout status %s" % timeout_info[0],

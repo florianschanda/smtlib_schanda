@@ -90,6 +90,9 @@ def main():
 
         invocations.append(("z3_smallfloats", Z3_SF_VERSION))
 
+    print "Compiling utilities..."
+    os.system("make -C util")
+
     for kind, binary in invocations:
         for suite in bm_suites:
             if os.path.exists(binary):
@@ -97,7 +100,7 @@ def main():
             else:
                 actual_bin = binary
 
-            os.system("./run.py %s %s --suite=%s %s %s" %
+            os.system("./run.py --no-utils %s %s --suite=%s %s %s" %
                       ("--force" if options.force else "",
                        "--timeout=2" if options.suite == "fast" else "",
                        suite,

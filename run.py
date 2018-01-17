@@ -165,6 +165,9 @@ def main():
     ap.add_argument("--report",
                     default=False,
                     action="store_true")
+    ap.add_argument("--no-utils",
+                    default=False,
+                    action="store_true")
     ap.add_argument("prover_kind",
                     choices=[p.name for p in provers],
                     metavar="KIND",
@@ -220,6 +223,10 @@ def main():
                 continue
             if data_filename in os.listdir(os.path.join("results", group)):
                 EXISTING_RESULTS.add(group)
+
+    if not options.no_utils:
+        print "Compiling utilities..."
+        os.system("make -C util")
 
     print "Assembling benchmarks..."
     tasks = []
