@@ -143,6 +143,10 @@ def main():
                                [],
                                use_temp=True,
                                only_logic=["QF_FP"]))
+    provers.append(Prover_Kind("gosat",
+                               ["-smtlib-output", "-f"],
+                               use_temp=True))
+
 
     ap = argparse.ArgumentParser()
     ap.add_argument("--suite",

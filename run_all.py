@@ -43,6 +43,8 @@ ALT_ERGO_VERSION    = sorted(glob("altergo_spark_*"))[-1]
 ALT_ERGO_FP_VERSION = "altergo_2_0_0"
 ALT_ERGO_FP_AXIOMS  = sorted(glob("altergo_fp_*.why"))[-1]
 
+GOSAT_VERSION       = sorted(glob("gosat_*"))[-1]
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("suite",
@@ -89,6 +91,7 @@ def main():
         invocations.append(("mathsat_acdl", "mathsat"))
 
         invocations.append(("z3_smallfloats", Z3_SF_VERSION))
+        invocations.append(("gosat", GOSAT_VERSION))
 
     print "Compiling utilities..."
     os.system("make -C util")
