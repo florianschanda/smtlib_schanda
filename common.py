@@ -200,23 +200,26 @@ class Prover(object):
         stderr = stderr.strip()
         benchmark.unload()
 
-        # First, we try to extract the magic line from limiter
+        # First, we try to extract the magic line from limiter and remove
+        # it from stderr
         timeout_info = None
+        stderr_new = ""
         for line in stderr.splitlines():
             if line.startswith("limiter::"):
-                timeout_info = line
+                timeout_info = line.strip().split()
+            else:
+                stderr_new += line.rstrip() + "\n"
         if timeout_info is None:
             return ("error",
                     "could not determine timeout\n" + stdout.strip() +
                     "\n" + stderr.strip(),
                     0.0)
+        stderr = stderr_new.strip()
 
-        # This line looks like so:
+        # timeout_info looks like so:
         #
         # 0             1    2 3   4
         # limiter::CODE 12.3 s 500 MiB
-        timeout_info = timeout_info.strip().split()
-
         if timeout_info[0] == "limiter::ok":
             status         = None # we'll work it out later
             wallclock_time = float(timeout_info[1])

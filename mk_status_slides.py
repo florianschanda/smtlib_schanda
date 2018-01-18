@@ -77,6 +77,7 @@ def mk_solver_name(nam):
         "mathsat_acdl"   : "MathSAT (ACDL)",
         "altergo"        : "Alt-Ergo 1.3",
         "altergo-fp"     : "Alt-Ergo FPA",
+        "gosat"          : "goSAT",
     }.get(nam, nam)
 
 def mk_coloring(criteria):

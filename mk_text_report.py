@@ -41,6 +41,7 @@ def create_report(prover_kind, prover_bin):
             "Unknown",
             "Error",
             "Timeout",
+            "OOM",
             "Unsound")
     FMT = "%%%us " % max(len(HEAD[0]),
                          len("TOTAL/AVAV"),
@@ -67,6 +68,7 @@ def create_report(prover_kind, prover_bin):
             row.append("%u" % summary["score"]["unknown"])
             row.append("%u" % summary["score"]["error"])
             row.append("%u" % summary["score"]["timeout"])
+            row.append("%u" % summary["score"]["oom"])
             row.append("%u" % summary["score"]["unsound"])
 
             fd.write(FMT % tuple(row) + "\n")
@@ -79,6 +81,7 @@ def create_report(prover_kind, prover_bin):
         row.append("%u" % totals["score"]["unknown"])
         row.append("%u" % totals["score"]["error"])
         row.append("%u" % totals["score"]["timeout"])
+        row.append("%u" % totals["score"]["oom"])
         row.append("%u" % totals["score"]["unsound"])
 
         fd.write(FMT % tuple(row) + "\n")
@@ -107,51 +110,22 @@ def create_report(prover_kind, prover_bin):
             for bm in sorted(tmp_u):
                 fd.write(bm + "\n")
 
-        tmp = []
+        error_map = {}
         for group in GROUPS:
             for bm, data in res["group_results"][group].iteritems():
                 if data["score"] == "e":
-                    tmp.append((bench[bm]["name"],
-                                data["comment"]))
-        if len(tmp) > 0:
+                    err = data["comment"].strip()
+                    if err in error_map:
+                        error_map[err].add(bench[bm]["name"])
+                    else:
+                        error_map[err] = set([bench[bm]["name"]])
+
+        if len(error_map) > 0:
             fd.write("\n# Errors (duplicates grouped)\n")
-            def s(a, b):
-                conv_err_left = ("FLOATINGPOINT_TO_REAL_TOTAL" in a[1] or
-                                 "to_fp" in a[1])
-                conv_err_right = ("FLOATINGPOINT_TO_REAL_TOTAL" in b[1] or
-                                  "to_fp" in b[1])
-                tmp = cmp(conv_err_left, conv_err_right)
-                if tmp != 0:
-                    return tmp
-
-                tmp = cmp(a[1], b[1])
-                if tmp != 0:
-                    return tmp
-
-                return cmp(a[0], b[0])
-
-            error = None
-            bms   = []
-            for bm, comment in sorted(tmp, cmp=s):
-                if "<<<" in comment:
-                    comment = comment.rsplit("<<<")[0].strip()
-                if bm.startswith("sha<"):
-                    continue
-                if error is None:
-                    error = comment
-                    bms.append(bm)
-                elif error == comment:
-                    bms.append(bm)
-                else:
-                    for x in bms:
-                        fd.write("## %s\n" % x)
-                    fd.write(comment + "\n\n")
-                    error = comment
-                    bms   = [bm]
-            if len(bms) > 0:
-                for x in bms:
-                    fd.write("## %s\n" % x)
-                fd.write(comment + "\n")
+            for error in sorted(error_map):
+                for bench in sorted(error_map[error]):
+                    fd.write("## %s\n" % bench)
+                fd.write(error + "\n\n")
 
 
 def main():
