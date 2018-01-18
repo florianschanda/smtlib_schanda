@@ -67,10 +67,18 @@
   (forall ((x Int) (n Int) (m Int))
   (=> (<= 0 n) (=> (<= 0 m) (= (power x (* n m)) (power (power x n) m))))))
 
-;; Power_mult2
+;; Power_comm1
   (assert
-  (forall ((x Int) (y Int) (n Int))
-  (=> (<= 0 n) (= (power (* x y) n) (* (power x n) (power y n))))))
+  (forall ((x Int) (y Int))
+  (=> (= (* x y) (* y x))
+  (forall ((n Int)) (=> (<= 0 n) (= (* (power x n) y) (* y (power x n))))))))
+
+;; Power_comm2
+  (assert
+  (forall ((x Int) (y Int))
+  (=> (= (* x y) (* y x))
+  (forall ((n Int))
+  (=> (<= 0 n) (= (power (* x y) n) (* (power x n) (power y n))))))))
 
 ;; Power_non_neg
   (assert
