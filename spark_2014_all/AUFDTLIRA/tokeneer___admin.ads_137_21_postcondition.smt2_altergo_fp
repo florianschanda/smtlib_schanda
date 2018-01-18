@@ -1470,13 +1470,13 @@ logic op : int
 
 logic admin__opisavailable__result : int
 
-logic temp___487 : int
+logic temp___531 : int
 
-logic temp___486 : int
+logic temp___530 : int
 
 logic o : int
 
-logic temp___485 : (int,bool) farray
+logic temp___529 : (int,bool) farray
 
 logic op1 : int
 
@@ -1583,8 +1583,8 @@ axiom H5 : (result1 = op)
 
 axiom H6 : (op3 = 1)
 
-axiom H7 : (((1 <= op3) and (op3 <= 4)) -> (((temp___487 = op3) and
-  ((temp___486 = theop1) and ((theop2 = 0) and (((((0 <= 4) ->
+axiom H7 : (((1 <= op3) and (op3 <= 4)) -> (((temp___531 = op3) and
+  ((temp___530 = theop1) and ((theop2 = 0) and (((((0 <= 4) ->
   in_range5(theop2)) and ((1 <= 4) -> in_range6(op4))) and ((1 <= op4) and
   (op4 <= 4))) and ((((theop3 = theop4) and (theop5 = theop3)) and
   (((result2 = str_comp({ us_split_fields1 = { rec__keyboard__datat__length =
@@ -1596,7 +1596,7 @@ axiom H7 : (((1 <= op3) and (op3 <= 4)) -> (((temp___487 = op3) and
   (to_rep2(((((optokeyed[op4])).us_split_fields5).rec__admin__datat__text[i])) = to_rep2((keyedop1[i])))))))) and
   ((result2 = true) and ((((((1 <= to_rep(theadmin)) and
   (to_rep(theadmin) <= 3)) and (o = to_rep(theadmin))) and
-  (temp___485 = (isavailable[o]))) and (result3 = (temp___485[op4]))) and
+  (temp___529 = (isavailable[o]))) and (result3 = (temp___529[op4]))) and
   (((result3 = true) -> ((theop2 = result4) and (theop3 = op4))) and
   ((not (result3 = true)) -> (theop3 = theop2))))))) or
   ((((result2 = str_comp({ us_split_fields1 = {

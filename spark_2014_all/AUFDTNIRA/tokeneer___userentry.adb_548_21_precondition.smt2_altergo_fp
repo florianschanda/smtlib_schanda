@@ -1632,19 +1632,19 @@ logic valid_numberlogentries : int, int, us_rep1,
 logic valid_numberlogentries__function_guard : bool, int, int, us_rep1,
   (int,fileentrycountt) farray -> prop
 
-logic temp___1044 : int -> (int,logfileindext) farray
+logic temp___1100 : int -> (int,logfileindext) farray
 
 axiom def_axiom :
-  (forall temp___1046:int.
-  (forall temp___1047:int.
-  ((temp___1044(temp___1046)[temp___1047]) = of_rep5(temp___1046))))
+  (forall temp___1102:int.
+  (forall temp___1103:int.
+  ((temp___1100(temp___1102)[temp___1103]) = of_rep5(temp___1102))))
 
-logic temp___1048 : int -> (int,fileentrycountt) farray
+logic temp___1104 : int -> (int,fileentrycountt) farray
 
 axiom def_axiom1 :
-  (forall temp___1050:int.
-  (forall temp___1051:int.
-  ((temp___1048(temp___1050)[temp___1051]) = of_rep8(temp___1050))))
+  (forall temp___1106:int.
+  (forall temp___1107:int.
+  ((temp___1104(temp___1106)[temp___1107]) = of_rep8(temp___1106))))
 
 type us_main_type
 
@@ -2201,13 +2201,13 @@ logic state1 : us_private
 
 logic o : bool
 
-logic temp___2444 : templatelengtht
+logic temp___2500 : templatelengtht
 
-logic temp___24441 : fart
+logic temp___25001 : fart
 
-logic temp___24442 : (int,character) farray
+logic temp___25002 : (int,character) farray
 
-logic temp___24443 : (int,bytet) farray
+logic temp___25003 : (int,bytet) farray
 
 logic o1 : int
 
@@ -2331,9 +2331,9 @@ axiom H7 : (((not (o = true)) -> (result = true)) and ((o = true) ->
 axiom H8 : (not (result = true))
 
 axiom H9 : ({ us_split_fields1 = { rec__iandatypes__templatet__length =
-  temp___2444; rec__iandatypes__templatet__requiredmaxfar = temp___24441;
-  rec__iandatypes__templatet__id = temp___24442;
-  rec__iandatypes__templatet__pad = temp___24443 }
+  temp___2500; rec__iandatypes__templatet__requiredmaxfar = temp___25001;
+  rec__iandatypes__templatet__id = temp___25002;
+  rec__iandatypes__templatet__pad = temp___25003 }
   } = getiandatemplate(state1))
 
 axiom H10 : ((result1 = thetemplate__split_fields) and
@@ -2341,10 +2341,10 @@ axiom H10 : ((result1 = thetemplate__split_fields) and
   ((result3 = thetemplate__split_fields2) and
   (result4 = thetemplate__split_fields3))))
 
-axiom H11 : ((thetemplate__split_fields4 = temp___2444) and
-  ((thetemplate__split_fields5 = temp___24441) and
-  ((thetemplate__split_fields6 = temp___24442) and
-  (thetemplate__split_fields7 = temp___24443))))
+axiom H11 : ((thetemplate__split_fields4 = temp___2500) and
+  ((thetemplate__split_fields5 = temp___25001) and
+  ((thetemplate__split_fields6 = temp___25002) and
+  (thetemplate__split_fields7 = temp___25003))))
 
 axiom H12 : ((o1 = thesystemmaxfar(state)) and in_range3(o1))
 

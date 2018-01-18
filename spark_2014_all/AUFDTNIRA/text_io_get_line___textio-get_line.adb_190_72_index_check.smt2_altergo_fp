@@ -1204,15 +1204,15 @@ logic o6 : int
 
 logic temp___548 : int
 
-logic temp___547 : (int,character) farray
+logic temp___547 : int
 
-logic temp___545 : int
+logic temp___546 : (int,character) farray
+
+logic temp___544 : int
 
 logic temp___551 : int
 
 logic temp___549 : int
-
-logic temp___544 : int
 
 logic temp___543 : int
 
@@ -1613,9 +1613,9 @@ axiom H38 :
   (cur_position2 = (((cur_position + last6) - to_rep1(item__first)) + 1))
 
 axiom H39 : ((((((0 <= 2147483647) -> in_range4(last6)) and
-  ((0 <= 2147483647) -> in_range4(n3))) and
   (((- 2147483648) <= 2147483647) -> in_range1(rest2))) and
-  in_range2(cur_position2)) and (80 <= n3))
+  ((0 <= 2147483647) -> in_range4(n3))) and in_range2(cur_position2)) and
+  (80 <= n3))
 
 axiom H40 : (to_rep1(item__first) <= idx)
 

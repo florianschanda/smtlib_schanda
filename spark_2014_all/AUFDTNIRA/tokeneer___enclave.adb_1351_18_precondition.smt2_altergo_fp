@@ -1563,19 +1563,19 @@ logic valid_numberlogentries : int, int, us_rep2,
 logic valid_numberlogentries__function_guard : bool, int, int, us_rep2,
   (int,fileentrycountt) farray -> prop
 
-logic temp___1145 : int -> (int,logfileindext) farray
+logic temp___1203 : int -> (int,logfileindext) farray
 
 axiom def_axiom :
-  (forall temp___1147:int.
-  (forall temp___1148:int.
-  ((temp___1145(temp___1147)[temp___1148]) = of_rep6(temp___1147))))
+  (forall temp___1205:int.
+  (forall temp___1206:int.
+  ((temp___1203(temp___1205)[temp___1206]) = of_rep6(temp___1205))))
 
-logic temp___1149 : int -> (int,fileentrycountt) farray
+logic temp___1207 : int -> (int,fileentrycountt) farray
 
 axiom def_axiom1 :
-  (forall temp___1151:int.
-  (forall temp___1152:int.
-  ((temp___1149(temp___1151)[temp___1152]) = of_rep9(temp___1151))))
+  (forall temp___1209:int.
+  (forall temp___1210:int.
+  ((temp___1207(temp___1209)[temp___1210]) = of_rep9(temp___1209))))
 
 type us_main_type
 
@@ -3954,9 +3954,9 @@ logic theadmin__split_fields1 : opandnullt
 
 logic currenttime : us_private
 
-logic state : us_private
-
 logic filestate : us_private
+
+logic state : us_private
 
 logic filestate1 : us_private
 
@@ -4254,9 +4254,9 @@ logic latchtimeout__split_fields6 : dayst
 
 logic latchtimeout__split_fields7 : millisecst
 
-logic state9 : us_private
-
 logic filestate2 : us_private
+
+logic state9 : us_private
 
 logic state10 : us_private
 
@@ -4358,9 +4358,9 @@ logic theadmin__split_fields4 : privileget
 
 logic theadmin__split_fields5 : opandnullt
 
-logic state19 : us_private
-
 logic filestate4 : us_private
+
+logic state19 : us_private
 
 logic filestate5 : us_private
 
@@ -4686,9 +4686,9 @@ logic theadmin__split_fields10 : privileget
 
 logic theadmin__split_fields11 : opandnullt
 
-logic state35 : us_private
-
 logic filestate8 : us_private
+
+logic state35 : us_private
 
 logic filestate9 : us_private
 
@@ -4836,9 +4836,9 @@ logic theadmin__split_fields12 : privileget
 
 logic theadmin__split_fields13 : opandnullt
 
-logic state44 : us_private
-
 logic filestate10 : us_private
+
+logic state44 : us_private
 
 logic filestate11 : us_private
 

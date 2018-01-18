@@ -64,7 +64,7 @@
 (declare-const dummy3 durationt)
 (declare-datatypes () ((durationt__ref (mk_durationt__ref (durationt__content durationt)))))
 (define-fun durationt__ref___projection ((a durationt__ref)) durationt (durationt__content a))
-(define-fun dynamic_invariant2 ((temp___expr_367 Int) (temp___is_init_364 Bool) (temp___skip_constant_365 Bool) (temp___do_toplevel_366 Bool)) Bool (=> (or (= temp___is_init_364 true) (<= 0 864000)) (in_range4 temp___expr_367)))
+(define-fun dynamic_invariant2 ((temp___expr_407 Int) (temp___is_init_404 Bool) (temp___skip_constant_405 Bool) (temp___do_toplevel_406 Bool)) Bool (=> (or (= temp___is_init_404 true) (<= 0 864000)) (in_range4 temp___expr_407)))
 (declare-sort us_main_type 0)
 (declare-fun us_main_eq (us_main_type us_main_type) Bool)
 (declare-sort us_rep 0)

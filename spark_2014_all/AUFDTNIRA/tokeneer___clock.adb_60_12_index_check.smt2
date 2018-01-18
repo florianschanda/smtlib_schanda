@@ -177,7 +177,7 @@
 (assert (= i1 send))
 (assert (<= sstart i1))
 (assert (<= i1 send))
-(assert (and (and (forall ((temp___400 Int)) (=> (and (<= (to_rep1 s__first) temp___400) (<= temp___400 (to_rep1 s__last))) (=> (<= temp___400 i2) (= (select s1 temp___400) (select s temp___400))))) (=> (<= 0 2147483647) (in_range4 v2))) (and (<= sstart i2) (<= i2 send))))
+(assert (and (and (forall ((temp___447 Int)) (=> (and (<= (to_rep1 s__first) temp___447) (<= temp___447 (to_rep1 s__last))) (=> (<= temp___447 i2) (= (select s1 temp___447) (select s temp___447))))) (=> (<= 0 2147483647) (in_range4 v2))) (and (<= sstart i2) (<= i2 send))))
 (assert (= (to_rep o) (+ 48 (mod2 v2 10))))
 (assert (not (<= (to_rep1 s__first) i2)))
 (check-sat)

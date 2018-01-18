@@ -150,7 +150,7 @@
 (assert (=> (< last_char (+ first_char 0)) (= temp___644 line)))
 (assert (=> (< last_char (+ first_char 0)) (= temp___643 line_num)))
 (assert (=> (< last_char (+ first_char 0)) (= temp___642 last_char)))
-(assert (=> (< last_char (+ first_char 0)) (and (and (and (in_range5 last_char2) (in_range1 line_num2)) (in_range4 first_char2)) (< last_char2 (+ first_char2 0)))))
+(assert (=> (< last_char (+ first_char 0)) (and (and (and (in_range5 last_char2) (in_range1 line_num2)) (in_range4 first_char2)) (= (< last_char2 (+ first_char2 0)) true))))
 (assert (=> (< last_char (+ first_char 0)) (and (and (in_range5 last_char3) (in_range1 line_num3)) (in_range4 first_char3))))
 (assert (=> (< last_char (+ first_char 0)) (not (< last_char3 (+ first_char3 0)))))
 (assert (=> (< last_char (+ first_char 0)) (= line_num3 line_num4)))

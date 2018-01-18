@@ -859,21 +859,21 @@ logic temp___499 : count_type
 
 logic o2 : count_type
 
+logic temp___488 : count_type
+
 logic temp___490 : count_type
 
 logic temp___4901 : us_main_type
-
-logic temp___488 : count_type
 
 logic temp___487 : count_type
 
 logic temp___4871 : us_main_type
 
+logic temp___486 : count_type
+
 logic temp___489 : count_type
 
 logic temp___4891 : us_main_type
-
-logic temp___486 : count_type
 
 logic temp___491 : count_type
 
@@ -1132,11 +1132,11 @@ axiom H4 : (((((cu10 = cu4) and ((c__split_fields12 = c__split_fields5) and
   us_split_fields1 = { rec__for_loops_on_lists__my_lists__list =
   l__split_fields } }), { us_split_fields3 = {
   rec__for_loops_on_lists__my_lists__cursor__node = cu1 } }) = true))) and
-  ((result1 = true) and (((l__split_discrs = temp___490) and
-  (l__split_fields = temp___4901)) and ((c__split_fields = temp___488) and
+  ((result1 = true) and ((c__split_fields = temp___488) and
+  (((l__split_discrs = temp___490) and (l__split_fields = temp___4901)) and
   (((l__split_discrs = temp___487) and (l__split_fields = temp___4871)) and
-  (((l__split_discrs = temp___489) and (l__split_fields = temp___4891)) and
-  ((temp___486 = cu1) and (((temp___491 = l__split_discrs) and
+  ((temp___486 = cu1) and (((temp___489 = l__split_discrs) and
+  (temp___4891 = l__split_fields)) and (((temp___491 = l__split_discrs) and
   (temp___4911 = l__split_fields)) and (((temp___492 = l__split_discrs) and
   (temp___4921 = l__split_fields)) and (((((cu4 = cu1) and
   ((c__split_fields5 = c__split_fields2) and
@@ -1460,11 +1460,11 @@ axiom H4 : (((((cu10 = cu4) and ((c__split_fields12 = c__split_fields5) and
   us_split_fields1 = { rec__for_loops_on_lists__my_lists__list =
   l__split_fields } }), { us_split_fields3 = {
   rec__for_loops_on_lists__my_lists__cursor__node = cu1 } }) = true))) and
-  (((result1 = true) -> (((((l__split_discrs = temp___490) and
-  (l__split_fields = temp___4901)) and ((c__split_fields = temp___488) and
+  (((result1 = true) -> ((((c__split_fields = temp___488) and
+  (((l__split_discrs = temp___490) and (l__split_fields = temp___4901)) and
   (((l__split_discrs = temp___487) and (l__split_fields = temp___4871)) and
-  (((l__split_discrs = temp___489) and (l__split_fields = temp___4891)) and
-  ((temp___486 = cu1) and (((temp___491 = l__split_discrs) and
+  ((temp___486 = cu1) and (((temp___489 = l__split_discrs) and
+  (temp___4891 = l__split_fields)) and (((temp___491 = l__split_discrs) and
   (temp___4911 = l__split_fields)) and (((temp___492 = l__split_discrs) and
   (temp___4921 = l__split_fields)) and (((((o3 = get(model__({
   us_split_discrs1 = { rec__for_loops_on_lists__my_lists__list__capacity =
@@ -1809,6 +1809,18 @@ axiom H26 : ((o39 = model__({ us_split_discrs1 = {
   rec__for_loops_on_lists__my_lists__list__capacity = l__split_discrs };
   us_split_fields1 = { rec__for_loops_on_lists__my_lists__list =
   l__split_fields } })))
+
+axiom H27 : ((o40 = get(o39, i2)) and in_range4(o40))
+
+axiom H28 : (o41 = (o40 - 1))
+
+axiom H29 : ((o38 = model__({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l__split_discrs };
+  us_split_fields1 = { rec__for_loops_on_lists__my_lists__list =
+  l__split_fields12 } })) and (length1(o38) = length({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l__split_discrs };
+  us_split_fields1 = { rec__for_loops_on_lists__my_lists__list =
+  l__split_fields12 } })))
 
  (* File "for_loops_on_lists.adb", line 16, characters 0-0 *)
 goal WP_parameter_def : (1 <= i2)

@@ -1204,15 +1204,15 @@ logic o6 : int
 
 logic temp___548 : int
 
-logic temp___547 : (int,character) farray
+logic temp___547 : int
 
-logic temp___545 : int
+logic temp___546 : (int,character) farray
+
+logic temp___544 : int
 
 logic temp___551 : int
 
 logic temp___549 : int
-
-logic temp___544 : int
 
 logic temp___543 : int
 
@@ -1601,18 +1601,18 @@ axiom H28 : (((((rest11 = rest) and ((n13 = n) and ((ch7 = ch) and
   in_range1((to_rep1(item__last) - to_rep1(item__first)))) and
   (o4 = (o3 + 1))) and ((o5 = o4) and in_range1(o4))) and ((o6 = o5) and
   in_range4(o5))) and ((result2 = n) and (n2 = o6))) and ((((80 <= n2) ->
-  ((((temp___548 = cur_position) and ((temp___547 = item1) and
-  ((temp___545 = rest) and ((temp___551 = cur_position) and
-  ((temp___549 = cur_position) and ((temp___544 = n2) and
+  ((((temp___548 = cur_position) and ((temp___547 = n2) and
+  ((temp___546 = item1) and ((temp___544 = rest) and
+  ((temp___551 = cur_position) and ((temp___549 = cur_position) and
   ((temp___543 = last5) and ((((to_rep1(item__first) <= (last6 + 1)) and
   ((last6 + n3) = to_rep1(item__last))) and
   ((forall idx2:int. (((to_rep1(item__first) <= idx2) and (idx2 <= last6)) ->
    (to_rep((item2[idx2])) = to_rep((the_file[((idx2 - to_rep1(item__first)) + temp___549)]))))) and
   (cur_position2 = (((temp___551 + last6) - to_rep1(item__first)) + 1)))) and
-  (((((((0 <= 2147483647) -> in_range4(last6)) and ((0 <= 2147483647) ->
-  in_range4(n3))) and (((- 2147483648) <= 2147483647) ->
-  in_range1(rest2))) and in_range2(cur_position2)) and (80 <= n3)) and
-  ((cur_position2 <= 10000) and
+  (((((((0 <= 2147483647) -> in_range4(last6)) and
+  (((- 2147483648) <= 2147483647) -> in_range1(rest2))) and
+  ((0 <= 2147483647) -> in_range4(n3))) and in_range2(cur_position2)) and
+  (80 <= n3)) and ((cur_position2 <= 10000) and
   (((((forall idx2:int. (((to_rep1(item__first) <= idx2) and
       (idx2 <= last6)) -> (to_rep((item3[idx2])) = to_rep((item2[idx2]))))) and
   (((cur_position3 - cur_position2) = (last7 - last6)) and

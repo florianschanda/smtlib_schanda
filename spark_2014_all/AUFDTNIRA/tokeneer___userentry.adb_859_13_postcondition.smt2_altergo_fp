@@ -1599,19 +1599,19 @@ logic valid_numberlogentries : int, int, us_rep1,
 logic valid_numberlogentries__function_guard : bool, int, int, us_rep1,
   (int,fileentrycountt) farray -> prop
 
-logic temp___1044 : int -> (int,logfileindext) farray
+logic temp___1100 : int -> (int,logfileindext) farray
 
 axiom def_axiom1 :
-  (forall temp___1046:int.
-  (forall temp___1047:int.
-  ((temp___1044(temp___1046)[temp___1047]) = of_rep6(temp___1046))))
+  (forall temp___1102:int.
+  (forall temp___1103:int.
+  ((temp___1100(temp___1102)[temp___1103]) = of_rep6(temp___1102))))
 
-logic temp___1048 : int -> (int,fileentrycountt) farray
+logic temp___1104 : int -> (int,fileentrycountt) farray
 
 axiom def_axiom2 :
-  (forall temp___1050:int.
-  (forall temp___1051:int.
-  ((temp___1048(temp___1050)[temp___1051]) = of_rep9(temp___1050))))
+  (forall temp___1106:int.
+  (forall temp___1107:int.
+  ((temp___1104(temp___1106)[temp___1107]) = of_rep9(temp___1106))))
 
 type us_main_type
 
@@ -2304,9 +2304,9 @@ logic thestats__split_fields3 : statscount
 
 logic currenttime : us_private
 
-logic filestate : us_private
-
 logic state : us_private
+
+logic filestate : us_private
 
 logic state1 : us_private
 
@@ -2370,9 +2370,9 @@ logic thestats__split_fields6 : statscount
 
 logic thestats__split_fields7 : statscount
 
-logic filestate1 : us_private
-
 logic state5 : us_private
+
+logic filestate1 : us_private
 
 logic state6 : us_private
 
@@ -2438,9 +2438,9 @@ logic auditalarm3 : int
 
 logic auditsystemfault2 : bool
 
-logic filestate2 : us_private
-
 logic state13 : us_private
+
+logic filestate2 : us_private
 
 logic state14 : us_private
 
@@ -2496,9 +2496,9 @@ logic auditalarm5 : int
 
 logic auditsystemfault3 : bool
 
-logic filestate3 : us_private
-
 logic state15 : us_private
+
+logic filestate3 : us_private
 
 logic state16 : us_private
 
@@ -2548,9 +2548,9 @@ logic thestats__split_fields14 : statscount
 
 logic thestats__split_fields15 : statscount
 
-logic filestate4 : us_private
-
 logic state17 : us_private
+
+logic filestate4 : us_private
 
 logic state18 : us_private
 
@@ -2602,9 +2602,9 @@ logic thestats__split_fields18 : statscount
 
 logic thestats__split_fields19 : statscount
 
-logic filestate5 : us_private
-
 logic state22 : us_private
+
+logic filestate5 : us_private
 
 logic state23 : us_private
 
@@ -2759,10 +2759,10 @@ axiom H19 : ((not (result = true)) -> ((not (result2 = true)) ->
   (state16 = state3)))
 
 axiom H20 : ((not (result = true)) -> ((not (result2 = true)) ->
-  (state15 = state)))
+  (filestate3 = filestate)))
 
 axiom H21 : ((not (result = true)) -> ((not (result2 = true)) ->
-  (filestate3 = filestate)))
+  (state15 = state)))
 
 axiom H22 : ((not (result = true)) -> ((not (result2 = true)) ->
   (status3 = status)))
@@ -2792,10 +2792,10 @@ axiom H28 : ((not (result = true)) -> ((not (result2 = true)) ->
   (state16 = state8)))
 
 axiom H29 : ((not (result = true)) -> ((not (result2 = true)) ->
-  (state15 = state5)))
+  (filestate3 = filestate1)))
 
 axiom H30 : ((not (result = true)) -> ((not (result2 = true)) ->
-  (filestate3 = filestate1)))
+  (state15 = state5)))
 
 axiom H31 : ((not (result = true)) -> ((not (result2 = true)) ->
   (status3 = status1)))
@@ -2829,9 +2829,9 @@ axiom H39 : ((not (result = true)) -> (state11 = state2))
 
 axiom H40 : ((not (result = true)) -> (state10 = state1))
 
-axiom H41 : ((not (result = true)) -> (state13 = state15))
+axiom H41 : ((not (result = true)) -> (filestate2 = filestate3))
 
-axiom H42 : ((not (result = true)) -> (filestate2 = filestate3))
+axiom H42 : ((not (result = true)) -> (state13 = state15))
 
 axiom H43 : ((not (result = true)) ->
   ((thestats__split_fields8 = thestats__split_fields) and
@@ -2875,9 +2875,9 @@ axiom H54 : ((not (result = true)) -> (state11 = state7))
 
 axiom H55 : ((not (result = true)) -> (state10 = state6))
 
-axiom H56 : ((not (result = true)) -> (state13 = state15))
+axiom H56 : ((not (result = true)) -> (filestate2 = filestate3))
 
-axiom H57 : ((not (result = true)) -> (filestate2 = filestate3))
+axiom H57 : ((not (result = true)) -> (state13 = state15))
 
 axiom H58 : ((not (result = true)) ->
   ((thestats__split_fields8 = thestats__split_fields4) and
@@ -2921,9 +2921,9 @@ axiom H69 : (state19 = state11)
 
 axiom H70 : (state18 = state10)
 
-axiom H71 : (state17 = state13)
+axiom H71 : (filestate4 = filestate2)
 
-axiom H72 : (filestate4 = filestate2)
+axiom H72 : (state17 = state13)
 
 axiom H73 : ((thestats__split_fields12 = thestats__split_fields8) and
   ((thestats__split_fields13 = thestats__split_fields9) and
@@ -2964,9 +2964,9 @@ axiom H84 : (state24 = state11)
 
 axiom H85 : (state23 = state10)
 
-axiom H86 : (state22 = state13)
+axiom H86 : (filestate5 = filestate2)
 
-axiom H87 : (filestate5 = filestate2)
+axiom H87 : (state22 = state13)
 
 axiom H88 : ((thestats__split_fields16 = thestats__split_fields8) and
   ((thestats__split_fields17 = thestats__split_fields9) and

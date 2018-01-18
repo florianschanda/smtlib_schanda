@@ -750,9 +750,9 @@ logic color10 : int
 
 axiom H : in_range4(default_base)
 
-axiom H1 : in_range5(default_setting)
+axiom H1 : in_range3(default_width)
 
-axiom H2 : in_range3(default_width)
+axiom H2 : in_range5(default_setting)
 
 axiom H3 : ((0 <= 6) -> in_range6(today))
 

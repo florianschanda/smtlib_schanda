@@ -174,4 +174,4 @@ axiom H8 : (result1 = test__parity__result4)
  (* File "test.adb", line 3, characters 0-0 *)
 goal WP_parameter_def :
   (exists x:int. (((0 <= x) and (x <= 255)) and ((a = (x + x)) or
-  (a = ((x + x) + 1)))))
+  (a = ((x + x) + 2)))))

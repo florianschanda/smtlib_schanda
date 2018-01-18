@@ -1204,15 +1204,15 @@ logic o6 : int
 
 logic temp___548 : int
 
-logic temp___547 : (int,character) farray
+logic temp___547 : int
 
-logic temp___545 : int
+logic temp___546 : (int,character) farray
+
+logic temp___544 : int
 
 logic temp___551 : int
 
 logic temp___549 : int
-
-logic temp___544 : int
 
 logic temp___543 : int
 
@@ -1602,15 +1602,15 @@ axiom H34 : (n2 = o6)
 
 axiom H35 : ((80 <= n2) -> (temp___548 = cur_position))
 
-axiom H36 : ((80 <= n2) -> (temp___547 = item1))
+axiom H36 : ((80 <= n2) -> (temp___547 = n2))
 
-axiom H37 : ((80 <= n2) -> (temp___545 = rest))
+axiom H37 : ((80 <= n2) -> (temp___546 = item1))
 
-axiom H38 : ((80 <= n2) -> (temp___551 = cur_position))
+axiom H38 : ((80 <= n2) -> (temp___544 = rest))
 
-axiom H39 : ((80 <= n2) -> (temp___549 = cur_position))
+axiom H39 : ((80 <= n2) -> (temp___551 = cur_position))
 
-axiom H40 : ((80 <= n2) -> (temp___544 = n2))
+axiom H40 : ((80 <= n2) -> (temp___549 = cur_position))
 
 axiom H41 : ((80 <= n2) -> (temp___543 = last5))
 
@@ -1625,9 +1625,9 @@ axiom H44 : ((80 <= n2) ->
   (cur_position2 = (((temp___551 + last6) - to_rep1(item__first)) + 1)))
 
 axiom H45 : ((80 <= n2) -> ((((((0 <= 2147483647) -> in_range4(last6)) and
-  ((0 <= 2147483647) -> in_range4(n3))) and
   (((- 2147483648) <= 2147483647) -> in_range1(rest2))) and
-  in_range2(cur_position2)) and (80 <= n3)))
+  ((0 <= 2147483647) -> in_range4(n3))) and in_range2(cur_position2)) and
+  (80 <= n3)))
 
 axiom H46 : ((80 <= n2) -> (cur_position2 <= 10000))
 

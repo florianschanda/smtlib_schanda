@@ -181,6 +181,7 @@
 (declare-const o Int)
 (declare-const o1 Int)
 (declare-const o2 Int)
+(declare-const o3 Int)
 (declare-const ap__altitude__pitch__rate__calc_pitchrate__present_pitchrate Int)
 (declare-const result Int)
 (declare-const present_pitchrate1 Int)

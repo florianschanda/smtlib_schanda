@@ -278,21 +278,21 @@ logic one : int
 
 logic o : int
 
-logic o1 : natural
+logic o1 : int
 
-logic o2 : (int,natural) farray
+logic o2 : natural
 
-logic o3 : int
+logic o3 : (int,natural) farray
 
-logic o4 : natural
+logic o4 : int
 
-logic o5 : (int,natural) farray
+logic o5 : int
 
-logic o6 : int
+logic o6 : natural
 
-logic o7 : natural
+logic o7 : (int,natural) farray
 
-logic o8 : (int,natural) farray
+logic o8 : int
 
 logic o9 : int
 
@@ -302,21 +302,21 @@ logic o11 : (int,natural) farray
 
 logic o12 : int
 
-logic o13 : natural
+logic o13 : int
 
-logic o14 : (int,natural) farray
+logic o14 : natural
 
-logic o15 : int
+logic o15 : (int,natural) farray
 
-logic o16 : natural
+logic o16 : int
 
-logic o17 : (int,natural) farray
+logic o17 : int
 
-logic o18 : int
+logic o18 : natural
 
-logic o19 : natural
+logic o19 : (int,natural) farray
 
-logic o20 : (int,natural) farray
+logic o20 : int
 
 logic o21 : int
 
@@ -326,15 +326,35 @@ logic o23 : (int,natural) farray
 
 logic o24 : int
 
-logic o25 : natural
+logic o25 : int
 
-logic o26 : (int,natural) farray
+logic o26 : natural
 
-logic o27 : int
+logic o27 : (int,natural) farray
 
-logic o28 : natural
+logic o28 : int
 
-logic o29 : (int,natural) farray
+logic o29 : int
+
+logic o30 : natural
+
+logic o31 : (int,natural) farray
+
+logic o32 : int
+
+logic o33 : int
+
+logic o34 : natural
+
+logic o35 : (int,natural) farray
+
+logic o36 : int
+
+logic o37 : int
+
+logic o38 : natural
+
+logic o39 : (int,natural) farray
 
 logic result : int
 
@@ -396,13 +416,15 @@ axiom H2 : in_range1(one1)
 
 axiom H3 : ((o = (1 + one1)) and in_range1((1 + one1)))
 
-axiom H4 : (to_rep(o1) = o)
+axiom H4 : ((o1 = o) and in_range2(o))
 
-axiom H5 : (o2 = (x[1 <- o1]))
+axiom H5 : (to_rep(o2) = o1)
 
-axiom H6 : (result1 = x)
+axiom H6 : (o3 = (x[1 <- o2]))
 
-axiom H7 : (x1 = o2)
+axiom H7 : (result1 = x)
+
+axiom H8 : (x1 = o3)
 
  (* File "array_arith.ads", line 6, characters 0-0 *)
 goal WP_parameter_def : in_range1((2 + one1))

@@ -1,0 +1,2172 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
+logic to_int : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int(b)]. (((b = true) -> (to_int(b) = 1)) and
+  ((not (b = true)) -> (to_int(b) = 0))))
+
+logic of_int : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
+  ((not (i = 0)) -> (of_int(i) = true))))
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type index_type
+
+predicate in_range1(x: int) = ((1 <= x) and (x <= 100))
+
+logic bool_eq1 : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq : index_type, index_type -> bool
+
+logic dummy : index_type
+
+type index_type__ref = { index_type__content : index_type
+}
+
+function index_type__ref___projection(a: index_type__ref) : index_type =
+  (a).index_type__content
+
+type extended_index_type
+
+predicate in_range2(x: int) = ((0 <= x) and (x <= 100))
+
+logic bool_eq3 : int, int -> bool
+
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+
+logic user_eq1 : extended_index_type, extended_index_type -> bool
+
+logic dummy1 : extended_index_type
+
+type extended_index_type__ref = { extended_index_type__content :
+extended_index_type
+}
+
+function extended_index_type__ref___projection(a: extended_index_type__ref) : extended_index_type =
+  (a).extended_index_type__content
+
+logic to_rep : extended_index_type -> int
+
+logic of_rep : int -> extended_index_type
+
+axiom inversion_axiom :
+  (forall x:extended_index_type [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom :
+  (forall x:extended_index_type [to_rep(x)]. in_range2(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range2(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type position_type
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 2))
+
+logic bool_eq4 : int, int -> bool
+
+axiom bool_eq_def3 :
+  (forall x:int. forall y:int [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> int
+
+logic user_eq2 : position_type, position_type -> bool
+
+logic dummy2 : position_type
+
+type position_type__ref = { position_type__content : position_type
+}
+
+function position_type__ref___projection(a: position_type__ref) : position_type =
+  (a).position_type__content
+
+logic to_rep1 : position_type -> int
+
+logic of_rep1 : int -> position_type
+
+axiom inversion_axiom1 :
+  (forall x:position_type [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 :
+  (forall x:position_type [to_rep1(x)]. in_range3(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range3(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type direction
+
+predicate in_range4(x: int) = ((0 <= x) and (x <= 1))
+
+logic bool_eq5 : int, int -> bool
+
+axiom bool_eq_def4 :
+  (forall x:int. forall y:int [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> int
+
+logic user_eq3 : direction, direction -> bool
+
+logic dummy3 : direction
+
+type direction__ref = { direction__content : direction
+}
+
+function direction__ref___projection(a: direction__ref) : direction =
+  (a).direction__content
+
+type us_main_type
+
+logic us_main_eq : us_main_type, us_main_type -> bool
+
+type us_rep
+
+logic bool_eq6 : us_rep, us_rep -> bool
+
+logic value__size : int
+
+logic object__size : us_rep -> int
+
+logic value__alignment : int
+
+logic object__alignment : us_rep -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (forall a:us_rep. (0 <= object__size(a)))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:us_rep. (0 <= object__alignment(a)))
+
+logic user_eq4 : us_rep, us_rep -> bool
+
+logic dummy4 : us_rep
+
+type sequence__ref = { sequence__content : us_rep
+}
+
+function sequence__ref___projection(a: sequence__ref) : us_rep =
+  (a).sequence__content
+
+logic length : us_rep -> int
+
+logic length__function_guard : int, us_rep -> prop
+
+logic last__function_guard : int, us_rep -> prop
+
+logic get : us_rep, int -> int
+
+logic get__function_guard : int, us_rep, int -> prop
+
+logic oeq__function_guard : bool, us_rep, us_rep -> prop
+
+logic ole__function_guard : bool, us_rep, us_rep -> prop
+
+type us_split_fields = { rec__tree_model__path_type__a : us_rep;
+rec__tree_model__path_type__k : bool
+}
+
+function us_split_fields_A__projection(a: us_split_fields) : us_rep =
+  (a).rec__tree_model__path_type__a
+
+function us_split_fields_K__projection(a: us_split_fields) : bool =
+  (a).rec__tree_model__path_type__k
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref___projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep1 = { us_split_fields1 : us_split_fields
+}
+
+function us_rep___projection(a: us_rep1) : us_split_fields =
+  (a).us_split_fields1
+
+logic bool_eq7 : us_rep1, us_rep1 -> bool
+
+axiom bool_eq_def5 :
+  (forall a:us_rep1. forall b:us_rep1 [bool_eq7(a, b)].
+  ((((user_eq4(((a).us_split_fields1).rec__tree_model__path_type__a,
+  ((b).us_split_fields1).rec__tree_model__path_type__a) = true) and
+  (((a).us_split_fields1).rec__tree_model__path_type__k = ((b).us_split_fields1).rec__tree_model__path_type__k)) ->
+  (bool_eq7(a, b) = true)) and
+  ((not ((user_eq4(((a).us_split_fields1).rec__tree_model__path_type__a,
+  ((b).us_split_fields1).rec__tree_model__path_type__a) = true) and
+  (((a).us_split_fields1).rec__tree_model__path_type__k = ((b).us_split_fields1).rec__tree_model__path_type__k))) ->
+  (bool_eq7(a, b) = false))))
+
+logic value__size1 : int
+
+logic object__size1 : us_rep1 -> int
+
+logic value__alignment1 : int
+
+logic object__alignment1 : us_rep1 -> int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 :
+  (forall a:us_rep. forall a1:bool. (0 <= object__size1({ us_split_fields1 =
+  { rec__tree_model__path_type__a = a; rec__tree_model__path_type__k = a1 }
+  })))
+
+axiom value__alignment_axiom1 : (0 <= value__alignment1)
+
+axiom object__alignment_axiom1 :
+  (forall a:us_rep. forall a1:bool. (0 <= object__alignment1({
+  us_split_fields1 = { rec__tree_model__path_type__a = a;
+  rec__tree_model__path_type__k = a1 } })))
+
+logic tree_model__path_type__a__first__bit : int
+
+logic tree_model__path_type__a__last__bit : int
+
+logic tree_model__path_type__a__position : int
+
+axiom tree_model__path_type__a__first__bit_axiom :
+  (0 <= tree_model__path_type__a__first__bit)
+
+axiom tree_model__path_type__a__last__bit_axiom :
+  (tree_model__path_type__a__first__bit <  tree_model__path_type__a__last__bit)
+
+axiom tree_model__path_type__a__position_axiom :
+  (0 <= tree_model__path_type__a__position)
+
+logic tree_model__path_type__k__first__bit : int
+
+logic tree_model__path_type__k__last__bit : int
+
+logic tree_model__path_type__k__position : int
+
+axiom tree_model__path_type__k__first__bit_axiom :
+  (0 <= tree_model__path_type__k__first__bit)
+
+axiom tree_model__path_type__k__last__bit_axiom :
+  (tree_model__path_type__k__first__bit <  tree_model__path_type__k__last__bit)
+
+axiom tree_model__path_type__k__position_axiom :
+  (0 <= tree_model__path_type__k__position)
+
+logic user_eq5 : us_rep1, us_rep1 -> bool
+
+logic dummy5 : us_rep
+
+logic dummy6 : bool
+
+type path_type__ref = { path_type__content : us_rep1
+}
+
+function path_type__ref___projection(a: path_type__ref) : us_rep1 =
+  (a).path_type__content
+
+logic is_concat : us_rep, us_rep, us_rep -> bool
+
+logic is_concat__function_guard : bool, us_rep, us_rep, us_rep -> prop
+
+axiom user_eq__def_axiom :
+  (forall a:us_rep. forall b:us_rep [user_eq4(a, b)].
+  (((forall n:int. (((1 <= n) and (n <= (0 + length(a)))) -> (get(a,
+    n) = get(b, n)))) ->
+  (user_eq4(a, b) = match_bool(bool_eq1(length(a), length(b)), true,
+  false))) and
+  ((not (forall n:int. (((1 <= n) and (n <= (0 + length(a)))) -> (get(a,
+        n) = get(b, n))))) ->
+  (user_eq4(a, b) = match_bool(bool_eq1(length(a), length(b)), false,
+  false)))))
+
+axiom is_concat__post_axiom : true
+
+axiom is_concat__def_axiom :
+  (forall q:us_rep. forall v:us_rep. forall p:us_rep [is_concat(q, v, p)].
+  ((is_concat(q, v, p) = true) <->
+  (((((length(p) - length(v)) = length(q)) and
+  (forall i:int. (((1 <= i) and (i <= length(q))) -> (get(p, i) = get(q,
+  i))))) and
+  (forall i:int. (((1 <= i) and (i <= length(v))) -> (get(p,
+  (i + length(q))) = get(v, i))))) and
+  (forall i:int. ((((length(q) + 1) <= i) and (i <= length(p))) -> (get(v,
+  (i - length(q))) = get(p, i)))))))
+
+type map__ref = { map__content : (int,us_rep1) farray
+}
+
+logic slide : (int,us_rep1) farray, int, int -> (int,us_rep1) farray
+
+axiom slide_eq :
+  (forall a:(int,us_rep1) farray.
+  (forall first:int [slide(a, first, first)]. (slide(a, first, first) = a)))
+
+axiom slide_def :
+  (forall a:(int,us_rep1) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
+  new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat : (int,us_rep1) farray, int, int, (int,us_rep1) farray, int,
+  int -> (int,us_rep1) farray
+
+axiom concat_def :
+  (forall a:(int,us_rep1) farray. forall b:(int,us_rep1) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton : us_rep1, int -> (int,us_rep1) farray
+
+axiom singleton_def :
+  (forall v:us_rep. forall v1:bool.
+  (forall i:int [(singleton({ us_split_fields1 = {
+  rec__tree_model__path_type__a = v; rec__tree_model__path_type__k = v1 } },
+  i)[i])]. ((singleton({ us_split_fields1 = { rec__tree_model__path_type__a =
+  v; rec__tree_model__path_type__k = v1 } }, i)[i]) = { us_split_fields1 = {
+  rec__tree_model__path_type__a = v; rec__tree_model__path_type__k = v1 } })))
+
+logic bool_eq8 : (int,us_rep1) farray, int, int, (int,us_rep1) farray, int,
+  int -> bool
+
+axiom bool_eq_def6 :
+  (forall a:(int,us_rep1) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,us_rep1) farray. forall b__first:int. forall b__last:int
+  [bool_eq8(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) and (bool_eq7((a[temp___idx_132]),
+  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
+  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (bool_eq8(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) -> (bool_eq7((a[temp___idx_132]),
+  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq8(a,
+  a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev :
+  (forall a:(int,us_rep1) farray. forall b:(int,us_rep1) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq8(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) -> (bool_eq7((a[temp___idx_132]),
+  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+
+logic oeq : (int,us_rep1) farray, (int,us_rep1) farray -> bool
+
+logic oeq__function_guard1 : bool, (int,us_rep1) farray,
+  (int,us_rep1) farray -> prop
+
+axiom oeq__post_axiom : true
+
+axiom oeq__def_axiom :
+  (forall m1:(int,us_rep1) farray. forall m2:(int,us_rep1) farray [oeq(m1,
+  m2)]. (((oeq(m1, m2) = true) ->
+  (forall i:int. (((1 <= i) and (i <= 100)) ->
+  ((((bool_eq1(length((((m1[i])).us_split_fields1).rec__tree_model__path_type__a),
+  length((((m2[i])).us_split_fields1).rec__tree_model__path_type__a)) = true) ->
+  (forall n:int. (((1 <= n) and
+  (n <= (0 + length((((m1[i])).us_split_fields1).rec__tree_model__path_type__a)))) ->
+  (get((((m1[i])).us_split_fields1).rec__tree_model__path_type__a,
+  n) = get((((m2[i])).us_split_fields1).rec__tree_model__path_type__a, n))))) and
+  (not (bool_eq1(length((((m1[i])).us_split_fields1).rec__tree_model__path_type__a),
+  length((((m2[i])).us_split_fields1).rec__tree_model__path_type__a)) = false))) and
+  (((((m1[i])).us_split_fields1).rec__tree_model__path_type__k = true) <->
+  ((((m2[i])).us_split_fields1).rec__tree_model__path_type__k = true)))))) and
+  ((forall i:int. (((1 <= i) and (i <= 100)) ->
+   (((bool_eq1(length((((m1[i])).us_split_fields1).rec__tree_model__path_type__a),
+   length((((m2[i])).us_split_fields1).rec__tree_model__path_type__a)) = true) and
+   (forall n:int. (((1 <= n) and
+   (n <= (0 + length((((m1[i])).us_split_fields1).rec__tree_model__path_type__a)))) ->
+   (get((((m1[i])).us_split_fields1).rec__tree_model__path_type__a,
+   n) = get((((m2[i])).us_split_fields1).rec__tree_model__path_type__a, n))))) and
+   (((((m1[i])).us_split_fields1).rec__tree_model__path_type__k = true) <->
+   ((((m2[i])).us_split_fields1).rec__tree_model__path_type__k = true))))) ->
+  (oeq(m1, m2) = true))))
+
+type us_split_fields2 = { rec__binary_trees__cell__left :
+extended_index_type; rec__binary_trees__cell__right : extended_index_type;
+rec__binary_trees__cell__parent : extended_index_type;
+rec__binary_trees__cell__position : position_type
+}
+
+function us_split_fields_Left__projection(a: us_split_fields2) : extended_index_type =
+  (a).rec__binary_trees__cell__left
+
+function us_split_fields_Right__projection(a: us_split_fields2) : extended_index_type =
+  (a).rec__binary_trees__cell__right
+
+function us_split_fields_Parent__projection(a: us_split_fields2) : extended_index_type =
+  (a).rec__binary_trees__cell__parent
+
+function us_split_fields_Position__projection(a: us_split_fields2) : position_type =
+  (a).rec__binary_trees__cell__position
+
+type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
+}
+
+function us_split_fields__ref___2__projection(a: us_split_fields__ref1) : us_split_fields2 =
+  (a).us_split_fields__content1
+
+type us_rep2 = { us_split_fields3 : us_split_fields2
+}
+
+function us_rep___2__projection(a: us_rep2) : us_split_fields2 =
+  (a).us_split_fields3
+
+logic bool_eq9 : us_rep2, us_rep2 -> bool
+
+axiom bool_eq_def7 :
+  (forall a:us_rep2. forall b:us_rep2 [bool_eq9(a, b)].
+  ((((((to_rep(((a).us_split_fields3).rec__binary_trees__cell__left) = to_rep(((b).us_split_fields3).rec__binary_trees__cell__left)) and
+  (to_rep(((a).us_split_fields3).rec__binary_trees__cell__right) = to_rep(((b).us_split_fields3).rec__binary_trees__cell__right))) and
+  (to_rep(((a).us_split_fields3).rec__binary_trees__cell__parent) = to_rep(((b).us_split_fields3).rec__binary_trees__cell__parent))) and
+  (to_rep1(((a).us_split_fields3).rec__binary_trees__cell__position) = to_rep1(((b).us_split_fields3).rec__binary_trees__cell__position))) ->
+  (bool_eq9(a, b) = true)) and
+  ((not ((((to_rep(((a).us_split_fields3).rec__binary_trees__cell__left) = to_rep(((b).us_split_fields3).rec__binary_trees__cell__left)) and
+  (to_rep(((a).us_split_fields3).rec__binary_trees__cell__right) = to_rep(((b).us_split_fields3).rec__binary_trees__cell__right))) and
+  (to_rep(((a).us_split_fields3).rec__binary_trees__cell__parent) = to_rep(((b).us_split_fields3).rec__binary_trees__cell__parent))) and
+  (to_rep1(((a).us_split_fields3).rec__binary_trees__cell__position) = to_rep1(((b).us_split_fields3).rec__binary_trees__cell__position)))) ->
+  (bool_eq9(a, b) = false))))
+
+logic value__size2 : int
+
+logic object__size2 : us_rep2 -> int
+
+logic value__alignment2 : int
+
+logic object__alignment2 : us_rep2 -> int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 :
+  (forall a:extended_index_type. forall a1:extended_index_type.
+  forall a2:extended_index_type. forall a3:position_type.
+  (0 <= object__size2({ us_split_fields3 = { rec__binary_trees__cell__left =
+  a; rec__binary_trees__cell__right = a1; rec__binary_trees__cell__parent =
+  a2; rec__binary_trees__cell__position = a3 } })))
+
+axiom value__alignment_axiom2 : (0 <= value__alignment2)
+
+axiom object__alignment_axiom2 :
+  (forall a:extended_index_type. forall a1:extended_index_type.
+  forall a2:extended_index_type. forall a3:position_type.
+  (0 <= object__alignment2({ us_split_fields3 = {
+  rec__binary_trees__cell__left = a; rec__binary_trees__cell__right = a1;
+  rec__binary_trees__cell__parent = a2; rec__binary_trees__cell__position =
+  a3 } })))
+
+logic binary_trees__cell__left__first__bit : int
+
+logic binary_trees__cell__left__last__bit : int
+
+logic binary_trees__cell__left__position : int
+
+axiom binary_trees__cell__left__first__bit_axiom :
+  (0 <= binary_trees__cell__left__first__bit)
+
+axiom binary_trees__cell__left__last__bit_axiom :
+  (binary_trees__cell__left__first__bit <  binary_trees__cell__left__last__bit)
+
+axiom binary_trees__cell__left__position_axiom :
+  (0 <= binary_trees__cell__left__position)
+
+logic binary_trees__cell__right__first__bit : int
+
+logic binary_trees__cell__right__last__bit : int
+
+logic binary_trees__cell__right__position : int
+
+axiom binary_trees__cell__right__first__bit_axiom :
+  (0 <= binary_trees__cell__right__first__bit)
+
+axiom binary_trees__cell__right__last__bit_axiom :
+  (binary_trees__cell__right__first__bit <  binary_trees__cell__right__last__bit)
+
+axiom binary_trees__cell__right__position_axiom :
+  (0 <= binary_trees__cell__right__position)
+
+logic binary_trees__cell__parent__first__bit : int
+
+logic binary_trees__cell__parent__last__bit : int
+
+logic binary_trees__cell__parent__position : int
+
+axiom binary_trees__cell__parent__first__bit_axiom :
+  (0 <= binary_trees__cell__parent__first__bit)
+
+axiom binary_trees__cell__parent__last__bit_axiom :
+  (binary_trees__cell__parent__first__bit <  binary_trees__cell__parent__last__bit)
+
+axiom binary_trees__cell__parent__position_axiom :
+  (0 <= binary_trees__cell__parent__position)
+
+logic binary_trees__cell__position__first__bit : int
+
+logic binary_trees__cell__position__last__bit : int
+
+logic binary_trees__cell__position__position : int
+
+axiom binary_trees__cell__position__first__bit_axiom :
+  (0 <= binary_trees__cell__position__first__bit)
+
+axiom binary_trees__cell__position__last__bit_axiom :
+  (binary_trees__cell__position__first__bit <  binary_trees__cell__position__last__bit)
+
+axiom binary_trees__cell__position__position_axiom :
+  (0 <= binary_trees__cell__position__position)
+
+logic user_eq6 : us_rep2, us_rep2 -> bool
+
+logic dummy7 : extended_index_type
+
+logic dummy8 : extended_index_type
+
+logic dummy9 : extended_index_type
+
+logic dummy10 : position_type
+
+type cell__ref = { cell__content : us_rep2
+}
+
+function cell__ref___projection(a: cell__ref) : us_rep2 = (a).cell__content
+
+type map__ref1 = { map__content1 : (int,us_rep2) farray
+}
+
+logic slide1 : (int,us_rep2) farray, int, int -> (int,us_rep2) farray
+
+axiom slide_eq1 :
+  (forall a:(int,us_rep2) farray.
+  (forall first:int [slide1(a, first, first)]. (slide1(a, first, first) = a)))
+
+axiom slide_def1 :
+  (forall a:(int,us_rep2) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
+  old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat1 : (int,us_rep2) farray, int, int, (int,us_rep2) farray, int,
+  int -> (int,us_rep2) farray
+
+axiom concat_def1 :
+  (forall a:(int,us_rep2) farray. forall b:(int,us_rep2) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton1 : us_rep2, int -> (int,us_rep2) farray
+
+axiom singleton_def1 :
+  (forall v:extended_index_type. forall v1:extended_index_type.
+  forall v2:extended_index_type. forall v3:position_type.
+  (forall i:int [(singleton1({ us_split_fields3 = {
+  rec__binary_trees__cell__left = v; rec__binary_trees__cell__right = v1;
+  rec__binary_trees__cell__parent = v2; rec__binary_trees__cell__position =
+  v3 } }, i)[i])]. ((singleton1({ us_split_fields3 = {
+  rec__binary_trees__cell__left = v; rec__binary_trees__cell__right = v1;
+  rec__binary_trees__cell__parent = v2; rec__binary_trees__cell__position =
+  v3 } }, i)[i]) = { us_split_fields3 = { rec__binary_trees__cell__left = v;
+  rec__binary_trees__cell__right = v1; rec__binary_trees__cell__parent = v2;
+  rec__binary_trees__cell__position = v3 } })))
+
+logic bool_eq10 : (int,us_rep2) farray, int, int, (int,us_rep2) farray, int,
+  int -> bool
+
+axiom bool_eq_def8 :
+  (forall a:(int,us_rep2) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,us_rep2) farray. forall b__first:int. forall b__last:int
+  [bool_eq10(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
+  (temp___idx_133 <= a__last)) and (bool_eq9((a[temp___idx_133]),
+  (b[((b__first - a__first) + temp___idx_133)])) = true)) or
+  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (bool_eq10(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
+  (temp___idx_133 <= a__last)) -> (bool_eq9((a[temp___idx_133]),
+  (b[((b__first - a__first) + temp___idx_133)])) = true))))) -> (bool_eq10(a,
+  a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev1 :
+  (forall a:(int,us_rep2) farray. forall b:(int,us_rep2) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq10(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
+  (temp___idx_133 <= a__last)) -> (bool_eq9((a[temp___idx_133]),
+  (b[((b__first - a__first) + temp___idx_133)])) = true)))))))
+
+logic dummy11 : (int,us_rep2) farray
+
+logic value__size3 : int
+
+logic object__size3 : (int,us_rep2) farray -> int
+
+logic value__component__size : int
+
+logic object__component__size : (int,us_rep2) farray -> int
+
+logic value__alignment3 : int
+
+logic object__alignment3 : (int,us_rep2) farray -> int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 :
+  (forall a:(int,us_rep2) farray. (0 <= object__size3(a)))
+
+axiom value__component__size_axiom : (0 <= value__component__size)
+
+axiom object__component__size_axiom :
+  (forall a:(int,us_rep2) farray. (0 <= object__component__size(a)))
+
+axiom value__alignment_axiom3 : (0 <= value__alignment3)
+
+axiom object__alignment_axiom3 :
+  (forall a:(int,us_rep2) farray. (0 <= object__alignment3(a)))
+
+logic user_eq7 : (int,us_rep2) farray, (int,us_rep2) farray -> bool
+
+type us_split_fields4 = { rec__binary_trees__forest__s : extended_index_type;
+rec__binary_trees__forest__c : (int,us_rep2) farray
+}
+
+function us_split_fields_S__projection(a: us_split_fields4) : extended_index_type =
+  (a).rec__binary_trees__forest__s
+
+function us_split_fields_C__projection(a: us_split_fields4) : (int,us_rep2) farray =
+  (a).rec__binary_trees__forest__c
+
+type us_split_fields__ref2 = { us_split_fields__content2 : us_split_fields4
+}
+
+function us_split_fields__ref___3__projection(a: us_split_fields__ref2) : us_split_fields4 =
+  (a).us_split_fields__content2
+
+type us_rep3 = { us_split_fields5 : us_split_fields4
+}
+
+function us_rep___3__projection(a: us_rep3) : us_split_fields4 =
+  (a).us_split_fields5
+
+logic bool_eq11 : us_rep3, us_rep3 -> bool
+
+axiom bool_eq_def9 :
+  (forall a:us_rep3. forall b:us_rep3 [bool_eq11(a, b)].
+  ((((to_rep(((a).us_split_fields5).rec__binary_trees__forest__s) = to_rep(((b).us_split_fields5).rec__binary_trees__forest__s)) and
+  (bool_eq10(((a).us_split_fields5).rec__binary_trees__forest__c, 1, 100,
+  ((b).us_split_fields5).rec__binary_trees__forest__c, 1, 100) = true)) ->
+  (bool_eq11(a, b) = true)) and
+  ((not ((to_rep(((a).us_split_fields5).rec__binary_trees__forest__s) = to_rep(((b).us_split_fields5).rec__binary_trees__forest__s)) and
+  (bool_eq10(((a).us_split_fields5).rec__binary_trees__forest__c, 1, 100,
+  ((b).us_split_fields5).rec__binary_trees__forest__c, 1, 100) = true))) ->
+  (bool_eq11(a, b) = false))))
+
+logic value__size4 : int
+
+logic object__size4 : us_rep3 -> int
+
+logic value__alignment4 : int
+
+logic object__alignment4 : us_rep3 -> int
+
+axiom value__size_axiom4 : (0 <= value__size4)
+
+axiom object__size_axiom4 :
+  (forall a:extended_index_type. forall a1:(int,us_rep2) farray.
+  (0 <= object__size4({ us_split_fields5 = { rec__binary_trees__forest__s =
+  a; rec__binary_trees__forest__c = a1 } })))
+
+axiom value__alignment_axiom4 : (0 <= value__alignment4)
+
+axiom object__alignment_axiom4 :
+  (forall a:extended_index_type. forall a1:(int,us_rep2) farray.
+  (0 <= object__alignment4({ us_split_fields5 = {
+  rec__binary_trees__forest__s = a; rec__binary_trees__forest__c = a1 } })))
+
+logic binary_trees__forest__s__first__bit : int
+
+logic binary_trees__forest__s__last__bit : int
+
+logic binary_trees__forest__s__position : int
+
+axiom binary_trees__forest__s__first__bit_axiom :
+  (0 <= binary_trees__forest__s__first__bit)
+
+axiom binary_trees__forest__s__last__bit_axiom :
+  (binary_trees__forest__s__first__bit <  binary_trees__forest__s__last__bit)
+
+axiom binary_trees__forest__s__position_axiom :
+  (0 <= binary_trees__forest__s__position)
+
+logic binary_trees__forest__c__first__bit : int
+
+logic binary_trees__forest__c__last__bit : int
+
+logic binary_trees__forest__c__position : int
+
+axiom binary_trees__forest__c__first__bit_axiom :
+  (0 <= binary_trees__forest__c__first__bit)
+
+axiom binary_trees__forest__c__last__bit_axiom :
+  (binary_trees__forest__c__first__bit <  binary_trees__forest__c__last__bit)
+
+axiom binary_trees__forest__c__position_axiom :
+  (0 <= binary_trees__forest__c__position)
+
+logic user_eq8 : us_rep3, us_rep3 -> bool
+
+logic dummy12 : extended_index_type
+
+logic dummy13 : (int,us_rep2) farray
+
+type forest__ref = { forest__content : us_rep3
+}
+
+function forest__ref___projection(a: forest__ref) : us_rep3 =
+  (a).forest__content
+
+logic size : us_rep3 -> int
+
+logic size__function_guard : int, us_rep3 -> prop
+
+logic tree_structure : us_rep3 -> bool
+
+logic tree_structure__function_guard : bool, us_rep3 -> prop
+
+axiom size__post_axiom :
+  (forall f:extended_index_type. forall f1:(int,us_rep2) farray [size({
+  us_split_fields5 = { rec__binary_trees__forest__s = f;
+  rec__binary_trees__forest__c = f1 } })]. ((tree_structure({
+  us_split_fields5 = { rec__binary_trees__forest__s = f;
+  rec__binary_trees__forest__c = f1 } }) = true) -> in_range2(size({
+  us_split_fields5 = { rec__binary_trees__forest__s = f;
+  rec__binary_trees__forest__c = f1 } }))))
+
+axiom size__def_axiom :
+  (forall f:extended_index_type. forall f1:(int,us_rep2) farray [size({
+  us_split_fields5 = { rec__binary_trees__forest__s = f;
+  rec__binary_trees__forest__c = f1 } })]. (size({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f; rec__binary_trees__forest__c = f1 }
+  }) = to_rep(f)))
+
+logic valid_root : us_rep3, int -> bool
+
+logic valid_root__function_guard : bool, us_rep3, int -> prop
+
+axiom valid_root__post_axiom :
+  (forall f:extended_index_type. forall f1:(int,us_rep2) farray.
+  (forall i:int [valid_root({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f; rec__binary_trees__forest__c = f1 } },
+  i)]. ((in_range1(i) and (tree_structure({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f; rec__binary_trees__forest__c = f1 }
+  }) = true)) -> ((size({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f; rec__binary_trees__forest__c = f1 } }) <  i) -> (not (valid_root({
+  us_split_fields5 = { rec__binary_trees__forest__s = f;
+  rec__binary_trees__forest__c = f1 } }, i) = true))))))
+
+axiom valid_root__def_axiom :
+  (forall f:extended_index_type. forall f1:(int,us_rep2) farray.
+  (forall i:int [valid_root({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f; rec__binary_trees__forest__c = f1 } },
+  i)]. ((valid_root({ us_split_fields5 = { rec__binary_trees__forest__s = f;
+  rec__binary_trees__forest__c = f1 } }, i) = true) <-> ((i <= to_rep(f)) and
+  (to_rep1((((f1[i])).us_split_fields3).rec__binary_trees__cell__position) = 2)))))
+
+logic parent : us_rep3, int -> int
+
+logic parent__function_guard : int, us_rep3, int -> prop
+
+axiom parent__post_axiom :
+  (forall f:extended_index_type. forall f1:(int,us_rep2) farray.
+  (forall i:int [parent({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f; rec__binary_trees__forest__c = f1 } }, i)]. ((in_range1(i) and
+  (tree_structure({ us_split_fields5 = { rec__binary_trees__forest__s = f;
+  rec__binary_trees__forest__c = f1 } }) = true)) -> ((((valid_root({
+  us_split_fields5 = { rec__binary_trees__forest__s = f;
+  rec__binary_trees__forest__c = f1 } }, i) = true) -> (parent({
+  us_split_fields5 = { rec__binary_trees__forest__s = f;
+  rec__binary_trees__forest__c = f1 } }, i) = 0)) and ((size({
+  us_split_fields5 = { rec__binary_trees__forest__s = f;
+  rec__binary_trees__forest__c = f1 } }) = 0) -> (parent({ us_split_fields5 =
+  { rec__binary_trees__forest__s = f; rec__binary_trees__forest__c = f1 } },
+  i) = 0))) and in_range2(parent({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f; rec__binary_trees__forest__c = f1 } },
+  i))))))
+
+axiom parent__def_axiom :
+  (forall f:extended_index_type. forall f1:(int,us_rep2) farray.
+  (forall i:int [parent({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f; rec__binary_trees__forest__c = f1 } }, i)]. (in_range1(i) -> (parent({
+  us_split_fields5 = { rec__binary_trees__forest__s = f;
+  rec__binary_trees__forest__c = f1 } },
+  i) = to_rep((((f1[i])).us_split_fields3).rec__binary_trees__cell__parent)))))
+
+logic position : us_rep3, int -> int
+
+logic position__function_guard : int, us_rep3, int -> prop
+
+axiom position__post_axiom :
+  (forall f:extended_index_type. forall f1:(int,us_rep2) farray.
+  (forall i:int [position({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f; rec__binary_trees__forest__c = f1 } },
+  i)]. (((in_range1(i) and (tree_structure({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f; rec__binary_trees__forest__c = f1 }
+  }) = true)) and (not (parent({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f; rec__binary_trees__forest__c = f1 } },
+  i) = 0))) -> in_range4(position({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f; rec__binary_trees__forest__c = f1 } },
+  i)))))
+
+axiom position__def_axiom :
+  (forall f:extended_index_type. forall f1:(int,us_rep2) farray.
+  (forall i:int [position({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f; rec__binary_trees__forest__c = f1 } },
+  i)]. (in_range1(i) -> (position({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f; rec__binary_trees__forest__c = f1 } },
+  i) = to_rep1((((f1[i])).us_split_fields3).rec__binary_trees__cell__position)))))
+
+logic peek : us_rep3, int, int -> int
+
+logic peek__function_guard : int, us_rep3, int, int -> prop
+
+axiom peek__post_axiom :
+  (forall f:extended_index_type. forall f1:(int,us_rep2) farray.
+  (forall i:int. forall d:int [peek({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f; rec__binary_trees__forest__c = f1 } }, i,
+  d)]. (((in_range1(i) and in_range4(d)) and (tree_structure({
+  us_split_fields5 = { rec__binary_trees__forest__s = f;
+  rec__binary_trees__forest__c = f1 } }) = true)) -> (((((not (peek({
+  us_split_fields5 = { rec__binary_trees__forest__s = f;
+  rec__binary_trees__forest__c = f1 } }, i, d) = 0)) -> ((position({
+  us_split_fields5 = { rec__binary_trees__forest__s = f;
+  rec__binary_trees__forest__c = f1 } }, peek({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f; rec__binary_trees__forest__c = f1 } }, i,
+  d)) = d) and (parent({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f; rec__binary_trees__forest__c = f1 } }, peek({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f; rec__binary_trees__forest__c = f1 } }, i,
+  d)) = i))) and ((peek({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f; rec__binary_trees__forest__c = f1 } }, i, d) = 0) ->
+  (forall j:int. (((1 <= j) and (j <= 100)) -> ((parent({ us_split_fields5 =
+  { rec__binary_trees__forest__s = f; rec__binary_trees__forest__c = f1 } },
+  j) = i) -> (not (position({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f; rec__binary_trees__forest__c = f1 } },
+  j) = d))))))) and
+  (forall j:int. (((1 <= j) and (j <= 100)) -> (((parent({ us_split_fields5 =
+  { rec__binary_trees__forest__s = f; rec__binary_trees__forest__c = f1 } },
+  j) = i) and (position({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f; rec__binary_trees__forest__c = f1 } }, j) = d)) -> (peek({
+  us_split_fields5 = { rec__binary_trees__forest__s = f;
+  rec__binary_trees__forest__c = f1 } }, i, d) = j))))) and in_range2(peek({
+  us_split_fields5 = { rec__binary_trees__forest__s = f;
+  rec__binary_trees__forest__c = f1 } }, i, d))))))
+
+axiom peek__def_axiom :
+  (forall f:extended_index_type. forall f1:(int,us_rep2) farray.
+  (forall i:int. forall d:int [peek({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f; rec__binary_trees__forest__c = f1 } }, i,
+  d)]. ((in_range1(i) and in_range4(d)) -> (((d = 0) -> (peek({
+  us_split_fields5 = { rec__binary_trees__forest__s = f;
+  rec__binary_trees__forest__c = f1 } }, i,
+  d) = to_rep((((f1[i])).us_split_fields3).rec__binary_trees__cell__left))) and
+  ((not (d = 0)) -> (peek({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f; rec__binary_trees__forest__c = f1 } }, i,
+  d) = to_rep((((f1[i])).us_split_fields3).rec__binary_trees__cell__right)))))))
+
+logic model__ : us_rep3, int -> (int,us_rep1) farray
+
+logic model____function_guard : (int,us_rep1) farray, us_rep3, int -> prop
+
+logic is_add : us_rep, int, us_rep -> bool
+
+logic is_add__function_guard : bool, us_rep, int, us_rep -> prop
+
+axiom model____post_axiom :
+  (forall f:extended_index_type. forall f1:(int,us_rep2) farray.
+  (forall root:int [model__({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f; rec__binary_trees__forest__c = f1 } },
+  root)]. (((in_range1(root) and (tree_structure({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f; rec__binary_trees__forest__c = f1 }
+  }) = true)) and (valid_root({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f; rec__binary_trees__forest__c = f1 } },
+  root) = true)) -> ((((((model__({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f; rec__binary_trees__forest__c = f1 } },
+  root)[root])).us_split_fields1).rec__tree_model__path_type__k = true) and
+  ((length((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f; rec__binary_trees__forest__c = f1 } },
+  root)[root])).us_split_fields1).rec__tree_model__path_type__a) = 0) and
+  ((forall i:int. (((1 <= i) and (i <= 100)) -> ((not (i = root)) ->
+   ((((not (parent({ us_split_fields5 = { rec__binary_trees__forest__s = f;
+   rec__binary_trees__forest__c = f1 } }, i) = 0)) and ((((model__({
+   us_split_fields5 = { rec__binary_trees__forest__s = f;
+   rec__binary_trees__forest__c = f1 } }, root)[parent({ us_split_fields5 = {
+   rec__binary_trees__forest__s = f; rec__binary_trees__forest__c = f1 } },
+   i)])).us_split_fields1).rec__tree_model__path_type__k = true)) ->
+   ((((model__({ us_split_fields5 = { rec__binary_trees__forest__s = f;
+   rec__binary_trees__forest__c = f1 } },
+   root)[i])).us_split_fields1).rec__tree_model__path_type__k = true)) and
+   ((not ((not (parent({ us_split_fields5 = { rec__binary_trees__forest__s =
+   f; rec__binary_trees__forest__c = f1 } }, i) = 0)) and ((((model__({
+   us_split_fields5 = { rec__binary_trees__forest__s = f;
+   rec__binary_trees__forest__c = f1 } }, root)[parent({ us_split_fields5 = {
+   rec__binary_trees__forest__s = f; rec__binary_trees__forest__c = f1 } },
+   i)])).us_split_fields1).rec__tree_model__path_type__k = true))) ->
+   (not ((((model__({ us_split_fields5 = { rec__binary_trees__forest__s = f;
+   rec__binary_trees__forest__c = f1 } },
+   root)[i])).us_split_fields1).rec__tree_model__path_type__k = true))))))) and
+  ((forall i:int. (((1 <= i) and (i <= 100)) -> (((((((model__({
+   us_split_fields5 = { rec__binary_trees__forest__s = f;
+   rec__binary_trees__forest__c = f1 } },
+   root)[i])).us_split_fields1).rec__tree_model__path_type__k = true) and
+   (not (i = root))) -> (is_add((((model__({ us_split_fields5 = {
+   rec__binary_trees__forest__s = f; rec__binary_trees__forest__c = f1 } },
+   root)[parent({ us_split_fields5 = { rec__binary_trees__forest__s = f;
+   rec__binary_trees__forest__c = f1 } },
+   i)])).us_split_fields1).rec__tree_model__path_type__a, position({
+   us_split_fields5 = { rec__binary_trees__forest__s = f;
+   rec__binary_trees__forest__c = f1 } }, i), (((model__({ us_split_fields5 =
+   { rec__binary_trees__forest__s = f; rec__binary_trees__forest__c = f1 } },
+   root)[i])).us_split_fields1).rec__tree_model__path_type__a) = true)) and
+   ((not (((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+   f; rec__binary_trees__forest__c = f1 } },
+   root)[i])).us_split_fields1).rec__tree_model__path_type__k = true) and
+   (not (i = root)))) -> (length((((model__({ us_split_fields5 = {
+   rec__binary_trees__forest__s = f; rec__binary_trees__forest__c = f1 } },
+   root)[i])).us_split_fields1).rec__tree_model__path_type__a) = 0))))) and
+  (forall i:int. (((1 <= i) and (i <= 100)) -> (((((model__({
+  us_split_fields5 = { rec__binary_trees__forest__s = f;
+  rec__binary_trees__forest__c = f1 } },
+  root)[i])).us_split_fields1).rec__tree_model__path_type__k = true) ->
+  (forall j:int. (((1 <= j) and (j <= 100)) -> ((((((model__({
+  us_split_fields5 = { rec__binary_trees__forest__s = f;
+  rec__binary_trees__forest__c = f1 } },
+  root)[j])).us_split_fields1).rec__tree_model__path_type__k = true) and
+  ((bool_eq1(length((((model__({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f; rec__binary_trees__forest__c = f1 } },
+  root)[i])).us_split_fields1).rec__tree_model__path_type__a),
+  length((((model__({ us_split_fields5 = { rec__binary_trees__forest__s = f;
+  rec__binary_trees__forest__c = f1 } },
+  root)[j])).us_split_fields1).rec__tree_model__path_type__a)) = true) and
+  (forall n:int. (((1 <= n) and (n <= (0 + length((((model__({
+  us_split_fields5 = { rec__binary_trees__forest__s = f;
+  rec__binary_trees__forest__c = f1 } },
+  root)[i])).us_split_fields1).rec__tree_model__path_type__a)))) ->
+  (get((((model__({ us_split_fields5 = { rec__binary_trees__forest__s = f;
+  rec__binary_trees__forest__c = f1 } },
+  root)[i])).us_split_fields1).rec__tree_model__path_type__a,
+  n) = get((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f; rec__binary_trees__forest__c = f1 } },
+  root)[j])).us_split_fields1).rec__tree_model__path_type__a, n)))))) ->
+  (j = i))))))))))) and
+  (forall temp___217:int. (((1 <= temp___217) and (temp___217 <= 100)) ->
+  (length((((model__({ us_split_fields5 = { rec__binary_trees__forest__s = f;
+  rec__binary_trees__forest__c = f1 } },
+  root)[temp___217])).us_split_fields1).rec__tree_model__path_type__a) <  100)))))))
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic root : int
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic i : int
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic d : int
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+logic attr__ATTRIBUTE_ADDRESS4 : int
+
+logic attr__ATTRIBUTE_ADDRESS5 : int
+
+axiom tree_structure__post_axiom : true
+
+axiom tree_structure__def_axiom :
+  (forall f:extended_index_type. forall f1:(int,us_rep2) farray
+  [tree_structure({ us_split_fields5 = { rec__binary_trees__forest__s = f;
+  rec__binary_trees__forest__c = f1 } })]. ((tree_structure({
+  us_split_fields5 = { rec__binary_trees__forest__s = f;
+  rec__binary_trees__forest__c = f1 } }) = true) <->
+  (((((((((forall i1:int. ((((to_rep(f) + 1) <= i1) and (i1 <= 100)) ->
+          (bool_eq9((f1[i1]), { us_split_fields3 = {
+          rec__binary_trees__cell__left = of_rep(0);
+          rec__binary_trees__cell__right = of_rep(0);
+          rec__binary_trees__cell__parent = of_rep(0);
+          rec__binary_trees__cell__position = of_rep1(2) } }) = true))) and
+  (forall i1:int. (((1 <= i1) and (i1 <= 100)) ->
+  ((0 <= to_rep((((f1[i1])).us_split_fields3).rec__binary_trees__cell__parent)) and
+  (to_rep((((f1[i1])).us_split_fields3).rec__binary_trees__cell__parent) <= to_rep(f)))))) and
+  (forall i1:int. (((1 <= i1) and (i1 <= 100)) ->
+  ((0 <= to_rep((((f1[i1])).us_split_fields3).rec__binary_trees__cell__left)) and
+  (to_rep((((f1[i1])).us_split_fields3).rec__binary_trees__cell__left) <= to_rep(f)))))) and
+  (forall i1:int. (((1 <= i1) and (i1 <= 100)) ->
+  ((0 <= to_rep((((f1[i1])).us_split_fields3).rec__binary_trees__cell__right)) and
+  (to_rep((((f1[i1])).us_split_fields3).rec__binary_trees__cell__right) <= to_rep(f)))))) and
+  (forall i1:int. (((1 <= i1) and (i1 <= 100)) ->
+  ((to_rep1((((f1[i1])).us_split_fields3).rec__binary_trees__cell__position) = 2) ->
+  (to_rep((((f1[i1])).us_split_fields3).rec__binary_trees__cell__parent) = 0))))) and
+  (forall i1:int. (((1 <= i1) and (i1 <= 100)) ->
+  ((not (to_rep((((f1[i1])).us_split_fields3).rec__binary_trees__cell__left) = 0)) ->
+  ((to_rep1((((f1[to_rep((((f1[i1])).us_split_fields3).rec__binary_trees__cell__left)])).us_split_fields3).rec__binary_trees__cell__position) = 0) and
+  (to_rep((((f1[to_rep((((f1[i1])).us_split_fields3).rec__binary_trees__cell__left)])).us_split_fields3).rec__binary_trees__cell__parent) = i1)))))) and
+  (forall i1:int. (((1 <= i1) and (i1 <= 100)) ->
+  ((not (to_rep((((f1[i1])).us_split_fields3).rec__binary_trees__cell__right) = 0)) ->
+  ((to_rep1((((f1[to_rep((((f1[i1])).us_split_fields3).rec__binary_trees__cell__right)])).us_split_fields3).rec__binary_trees__cell__position) = 1) and
+  (to_rep((((f1[to_rep((((f1[i1])).us_split_fields3).rec__binary_trees__cell__right)])).us_split_fields3).rec__binary_trees__cell__parent) = i1)))))) and
+  (forall i1:int. (((1 <= i1) and (i1 <= 100)) ->
+  (((not (to_rep((((f1[i1])).us_split_fields3).rec__binary_trees__cell__parent) = 0)) and
+  (to_rep1((((f1[i1])).us_split_fields3).rec__binary_trees__cell__position) = 0)) ->
+  (to_rep((((f1[to_rep((((f1[i1])).us_split_fields3).rec__binary_trees__cell__parent)])).us_split_fields3).rec__binary_trees__cell__left) = i1))))) and
+  (forall i1:int. (((1 <= i1) and (i1 <= 100)) ->
+  (((not (to_rep((((f1[i1])).us_split_fields3).rec__binary_trees__cell__parent) = 0)) and
+  (to_rep1((((f1[i1])).us_split_fields3).rec__binary_trees__cell__position) = 1)) ->
+  (to_rep((((f1[to_rep((((f1[i1])).us_split_fields3).rec__binary_trees__cell__parent)])).us_split_fields3).rec__binary_trees__cell__right) = i1)))))))
+
+logic olt__function_guard : bool, us_rep, us_rep -> prop
+
+axiom is_add__post_axiom : true
+
+axiom is_add__def_axiom :
+  (forall s1:us_rep. forall s2:us_rep.
+  (forall d1:int [is_add(s1, d1, s2)]. (((is_add(s1, d1, s2) = true) ->
+  ((((length(s2) - 1) = length(s1)) and (((bool_lt(length(s1),
+  length(s2)) = true) ->
+  (forall n:int. (((1 <= n) and (n <= (0 + length(s1)))) -> (get(s1,
+  n) = get(s2, n))))) and (not (bool_lt(length(s1),
+  length(s2)) = false)))) and (get(s2, length(s2)) = d1))) and
+  (((((length(s2) - 1) = length(s1)) and ((bool_lt(length(s1),
+  length(s2)) = true) and
+  (forall n:int. (((1 <= n) and (n <= (0 + length(s1)))) -> (get(s1,
+  n) = get(s2, n)))))) and (get(s2, length(s2)) = d1)) -> (is_add(s1, d1,
+  s2) = true)))))
+
+type count_type
+
+predicate in_range5(x: int) = ((0 <= x) and (x <= 2147483647))
+
+logic bool_eq12 : int, int -> bool
+
+axiom bool_eq_def10 :
+  (forall x:int. forall y:int [bool_eq12(x, y)]. (((x = y) -> (bool_eq12(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq12(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE5 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE5 : us_image -> int
+
+logic user_eq9 : count_type, count_type -> bool
+
+logic dummy14 : count_type
+
+type count_type__ref = { count_type__content : count_type
+}
+
+function count_type__ref___projection(a: count_type__ref) : count_type =
+  (a).count_type__content
+
+type extended_index
+
+predicate in_range6(x: int) = ((0 <= x) and (x <= 2147483647))
+
+logic bool_eq13 : int, int -> bool
+
+axiom bool_eq_def11 :
+  (forall x:int. forall y:int [bool_eq13(x, y)]. (((x = y) -> (bool_eq13(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq13(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE6 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE6 : us_image -> int
+
+logic user_eq10 : extended_index, extended_index -> bool
+
+logic dummy15 : extended_index
+
+type extended_index__ref = { extended_index__content : extended_index
+}
+
+function extended_index__ref___projection(a: extended_index__ref) : extended_index =
+  (a).extended_index__content
+
+axiom length__post_axiom :
+  (forall container:us_rep [length(container)].
+  (((0 + length(container)) <= 2147483647) and in_range5(length(container))))
+
+type element_type
+
+predicate in_range7(x: int) = ((0 <= x) and (x <= 1))
+
+logic bool_eq14 : int, int -> bool
+
+axiom bool_eq_def12 :
+  (forall x:int. forall y:int [bool_eq14(x, y)]. (((x = y) -> (bool_eq14(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq14(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE7 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check7 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE7 : us_image -> int
+
+logic user_eq11 : element_type, element_type -> bool
+
+logic dummy16 : element_type
+
+type element_type__ref = { element_type__content : element_type
+}
+
+function element_type__ref___projection(a: element_type__ref) : element_type =
+  (a).element_type__content
+
+axiom get__post_axiom :
+  (forall container:us_rep.
+  (forall position1:int [get(container, position1)].
+  ((in_range6(position1) and ((1 <= position1) and
+  (position1 <= (0 + length(container))))) -> in_range7(get(container,
+  position1)))))
+
+logic f__split_fields : extended_index_type
+
+logic f__split_fields1 : (int,us_rep2) farray
+
+logic v : int
+
+logic f_old__split_fields : extended_index_type
+
+logic f_old__split_fields1 : (int,us_rep2) farray
+
+logic o : int
+
+logic o1 : extended_index_type
+
+logic o2 : extended_index_type
+
+logic o3 : extended_index_type
+
+logic o4 : extended_index_type
+
+logic o5 : position_type
+
+logic o6 : extended_index_type
+
+logic o7 : extended_index_type
+
+logic o8 : extended_index_type
+
+logic o9 : position_type
+
+logic o10 : (int,us_rep2) farray
+
+logic o11 : extended_index_type
+
+logic o12 : (int,us_rep2) farray
+
+logic temp___708 : extended_index_type
+
+logic temp___7081 : (int,us_rep2) farray
+
+logic o13 : extended_index_type
+
+logic o14 : extended_index_type
+
+logic o15 : extended_index_type
+
+logic o16 : extended_index_type
+
+logic o17 : position_type
+
+logic o18 : extended_index_type
+
+logic o19 : extended_index_type
+
+logic o20 : extended_index_type
+
+logic o21 : position_type
+
+logic o22 : (int,us_rep2) farray
+
+logic o23 : extended_index_type
+
+logic o24 : (int,us_rep2) farray
+
+logic temp___703 : extended_index_type
+
+logic temp___7031 : (int,us_rep2) farray
+
+logic o25 : position_type
+
+logic o26 : extended_index_type
+
+logic o27 : extended_index_type
+
+logic o28 : extended_index_type
+
+logic o29 : position_type
+
+logic o30 : extended_index_type
+
+logic o31 : extended_index_type
+
+logic o32 : extended_index_type
+
+logic o33 : position_type
+
+logic o34 : int
+
+logic o35 : (int,us_rep2) farray
+
+logic o36 : extended_index_type
+
+logic o37 : (int,us_rep2) farray
+
+logic temp___715 : extended_index_type
+
+logic temp___7151 : (int,us_rep2) farray
+
+logic o38 : extended_index_type
+
+logic o39 : extended_index_type
+
+logic o40 : extended_index_type
+
+logic o41 : extended_index_type
+
+logic o42 : position_type
+
+logic o43 : extended_index_type
+
+logic o44 : extended_index_type
+
+logic o45 : extended_index_type
+
+logic o46 : position_type
+
+logic o47 : int
+
+logic o48 : (int,us_rep2) farray
+
+logic o49 : extended_index_type
+
+logic o50 : (int,us_rep2) farray
+
+logic temp___720 : extended_index_type
+
+logic temp___7201 : (int,us_rep2) farray
+
+logic i1 : int
+
+logic i2 : int
+
+logic i3 : int
+
+logic o51 : int
+
+logic o52 : int
+
+logic temp___751 : (int,us_rep1) farray
+
+logic o53 : us_rep
+
+logic o54 : bool
+
+logic o55 : us_rep
+
+logic o56 : bool
+
+logic o57 : int
+
+logic o58 : us_rep
+
+logic o59 : bool
+
+logic o60 : us_rep
+
+logic o61 : bool
+
+logic o62 : us_rep
+
+logic o63 : int
+
+logic o64 : int
+
+logic temp___749 : (int,us_rep1) farray
+
+logic o65 : us_rep
+
+logic o66 : bool
+
+logic o67 : us_rep
+
+logic o68 : bool
+
+logic o69 : us_rep
+
+logic i4 : int
+
+logic temp___756 : (int,us_rep1) farray
+
+logic o70 : us_rep
+
+logic o71 : bool
+
+logic o72 : us_rep
+
+logic o73 : bool
+
+logic i5 : int
+
+logic o74 : int
+
+logic o75 : int
+
+logic i6 : int
+
+logic i7 : int
+
+logic o76 : int
+
+logic o77 : us_rep
+
+logic o78 : bool
+
+logic o79 : us_rep
+
+logic o80 : bool
+
+logic o81 : us_rep
+
+logic o82 : int
+
+logic o83 : int
+
+logic o84 : int
+
+logic o85 : int
+
+logic t : int
+
+logic o86 : bool
+
+logic o87 : bool
+
+logic o88 : (int,us_rep1) farray
+
+logic t1 : int
+
+logic o89 : bool
+
+logic o90 : bool
+
+logic j : int
+
+logic e : int
+
+logic o91 : int
+
+logic j1 : int
+
+logic o92 : int
+
+logic o93 : bool
+
+logic o94 : bool
+
+logic o95 : int
+
+logic j2 : int
+
+logic o96 : int
+
+logic o97 : int
+
+logic o98 : int
+
+logic f__split_fields2 : extended_index_type
+
+logic f__split_fields3 : (int,us_rep2) farray
+
+logic result : bool
+
+logic result1 : extended_index_type
+
+logic result2 : (int,us_rep2) farray
+
+logic f_old__split_fields2 : extended_index_type
+
+logic f_old__split_fields3 : (int,us_rep2) farray
+
+logic result3 : int
+
+logic v1 : int
+
+logic result4 : extended_index_type
+
+logic result5 : (int,us_rep2) farray
+
+logic f__split_fields4 : extended_index_type
+
+logic f__split_fields5 : (int,us_rep2) farray
+
+logic result6 : extended_index_type
+
+logic result7 : (int,us_rep2) farray
+
+logic f__split_fields6 : extended_index_type
+
+logic f__split_fields7 : (int,us_rep2) farray
+
+logic result8 : extended_index_type
+
+logic result9 : (int,us_rep2) farray
+
+logic f__split_fields8 : extended_index_type
+
+logic f__split_fields9 : (int,us_rep2) farray
+
+logic result10 : extended_index_type
+
+logic result11 : (int,us_rep2) farray
+
+logic f__split_fields10 : extended_index_type
+
+logic f__split_fields11 : (int,us_rep2) farray
+
+logic f__split_fields12 : extended_index_type
+
+logic f__split_fields13 : (int,us_rep2) farray
+
+logic v2 : int
+
+logic f_old__split_fields4 : extended_index_type
+
+logic f_old__split_fields5 : (int,us_rep2) farray
+
+logic f__split_fields14 : extended_index_type
+
+logic f__split_fields15 : (int,us_rep2) farray
+
+logic v3 : int
+
+logic f_old__split_fields6 : extended_index_type
+
+logic f_old__split_fields7 : (int,us_rep2) farray
+
+logic result12 : bool
+
+logic result13 : bool
+
+logic result14 : bool
+
+logic result15 : bool
+
+logic result16 : bool
+
+logic result17 : bool
+
+logic result18 : bool
+
+logic result19 : bool
+
+logic result20 : bool
+
+logic result21 : bool
+
+logic result22 : bool
+
+logic result23 : bool
+
+logic result24 : bool
+
+logic result25 : bool
+
+logic result26 : bool
+
+logic result27 : bool
+
+logic result28 : bool
+
+logic result29 : bool
+
+logic result30 : bool
+
+axiom H : in_range1(root)
+
+axiom H1 : in_range1(i)
+
+axiom H2 : in_range4(d)
+
+axiom H3 : ((0 <= 100) -> in_range2(v))
+
+axiom H4 : (tree_structure({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f__split_fields;
+  rec__binary_trees__forest__c = f__split_fields1 } }) = true)
+
+axiom H5 : ((valid_root({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f__split_fields; rec__binary_trees__forest__c = f__split_fields1 } },
+  root) = true) and ((((model__({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f__split_fields;
+  rec__binary_trees__forest__c = f__split_fields1 } },
+  root)[i])).us_split_fields1).rec__tree_model__path_type__k = true))
+
+axiom H6 : (((((result1 = f_old__split_fields) and
+  (result2 = f_old__split_fields1)) and
+  ((f_old__split_fields2 = f__split_fields) and
+  (f_old__split_fields3 = f__split_fields1))) and (((((d = 0) ->
+  (o = to_rep((((f__split_fields1[i])).us_split_fields3).rec__binary_trees__cell__left))) and
+  ((not (d = 0)) ->
+  (o = to_rep((((f__split_fields1[i])).us_split_fields3).rec__binary_trees__cell__right)))) and
+  ((result3 = v) and (v1 = o))) and ((((not (v1 = 0)) -> ((((d = 0) ->
+  (((((((to_rep(o1) = 0) and ((o1 = o2) and
+  (((((f__split_fields1[i])).us_split_fields3).rec__binary_trees__cell__right = o3) and
+  (((((f__split_fields1[i])).us_split_fields3).rec__binary_trees__cell__parent = o4) and
+  ((((f__split_fields1[i])).us_split_fields3).rec__binary_trees__cell__position = o5))))) and
+  ((o6 = o2) and ((o7 = o3) and ((o8 = o4) and (o9 = o5))))) and
+  (o10 = (f__split_fields1[i <- { us_split_fields3 = {
+  rec__binary_trees__cell__left = o6; rec__binary_trees__cell__right = o7;
+  rec__binary_trees__cell__parent = o8; rec__binary_trees__cell__position =
+  o9 } }]))) and ((f__split_fields = o11) and (o10 = o12))) and
+  ((temp___708 = o11) and (temp___7081 = o12))) and
+  (((result4 = f__split_fields) and (result5 = f__split_fields1)) and
+  ((f__split_fields4 = temp___708) and
+  (f__split_fields5 = temp___7081))))) and ((not (d = 0)) ->
+  ((((((((to_rep(o13) = 0) and
+  (((((f__split_fields1[i])).us_split_fields3).rec__binary_trees__cell__left = o14) and
+  ((o13 = o15) and
+  (((((f__split_fields1[i])).us_split_fields3).rec__binary_trees__cell__parent = o16) and
+  ((((f__split_fields1[i])).us_split_fields3).rec__binary_trees__cell__position = o17))))) and
+  ((o18 = o14) and ((o19 = o15) and ((o20 = o16) and (o21 = o17))))) and
+  (o22 = (f__split_fields1[i <- { us_split_fields3 = {
+  rec__binary_trees__cell__left = o18; rec__binary_trees__cell__right = o19;
+  rec__binary_trees__cell__parent = o20; rec__binary_trees__cell__position =
+  o21 } }]))) and ((f__split_fields = o23) and (o22 = o24))) and
+  ((temp___703 = o23) and (temp___7031 = o24))) and
+  (((result6 = f__split_fields) and (result7 = f__split_fields1)) and
+  ((f__split_fields6 = temp___703) and
+  (f__split_fields7 = temp___7031)))) and
+  ((f__split_fields4 = f__split_fields6) and
+  (f__split_fields5 = f__split_fields7))))) and
+  ((to_rep((((f__split_fields5[v1])).us_split_fields3).rec__binary_trees__cell__parent) = i) and
+  ((((((((to_rep1(o25) = 2) and
+  (((((f__split_fields5[v1])).us_split_fields3).rec__binary_trees__cell__left = o26) and
+  (((((f__split_fields5[v1])).us_split_fields3).rec__binary_trees__cell__right = o27) and
+  (((((f__split_fields5[v1])).us_split_fields3).rec__binary_trees__cell__parent = o28) and
+  (o25 = o29))))) and ((o30 = o26) and ((o31 = o27) and ((o32 = o28) and
+  (o33 = o29))))) and ((((1 <= v1) and (v1 <= 100)) and (o34 = v1)) and
+  (o35 = (f__split_fields5[o34 <- { us_split_fields3 = {
+  rec__binary_trees__cell__left = o30; rec__binary_trees__cell__right = o31;
+  rec__binary_trees__cell__parent = o32; rec__binary_trees__cell__position =
+  o33 } }])))) and ((f__split_fields4 = o36) and (o35 = o37))) and
+  ((temp___715 = o36) and (temp___7151 = o37))) and
+  (((result8 = f__split_fields4) and (result9 = f__split_fields5)) and
+  ((f__split_fields8 = temp___715) and
+  (f__split_fields9 = temp___7151)))) and (((((((to_rep(o38) = 0) and
+  ((o39 = (((f__split_fields9[v1])).us_split_fields3).rec__binary_trees__cell__left) and
+  ((o40 = (((f__split_fields9[v1])).us_split_fields3).rec__binary_trees__cell__right) and
+  ((o41 = o38) and
+  (o42 = (((f__split_fields9[v1])).us_split_fields3).rec__binary_trees__cell__position))))) and
+  ((o43 = o39) and ((o44 = o40) and ((o45 = o41) and (o46 = o42))))) and
+  ((((1 <= v1) and (v1 <= 100)) and (o47 = v1)) and
+  (o48 = (f__split_fields9[o47 <- { us_split_fields3 = {
+  rec__binary_trees__cell__left = o43; rec__binary_trees__cell__right = o44;
+  rec__binary_trees__cell__parent = o45; rec__binary_trees__cell__position =
+  o46 } }])))) and ((o49 = f__split_fields8) and (o50 = o48))) and
+  ((temp___720 = o49) and (temp___7201 = o50))) and
+  (((result10 = f__split_fields8) and (result11 = f__split_fields9)) and
+  ((f__split_fields10 = temp___720) and
+  (f__split_fields11 = temp___7201)))))))) and ((v1 = 0) ->
+  (((f__split_fields10 = f__split_fields) and
+  (f__split_fields11 = f__split_fields1)) and
+  ((f__split_fields10 = f__split_fields2) and
+  (f__split_fields11 = f__split_fields3))))) and
+  ((forall i8:int. (((1 <= i8) and (i8 <= 100)) ->
+   (((not (to_rep((((f__split_fields11[i8])).us_split_fields3).rec__binary_trees__cell__parent) = 0)) and
+   (to_rep1((((f__split_fields11[i8])).us_split_fields3).rec__binary_trees__cell__position) = 0)) ->
+   (to_rep((((f__split_fields11[to_rep((((f__split_fields11[i8])).us_split_fields3).rec__binary_trees__cell__parent)])).us_split_fields3).rec__binary_trees__cell__left) = i8)))) and
+  ((forall i8:int. (((1 <= i8) and (i8 <= 100)) ->
+   (((not (to_rep((((f__split_fields11[i8])).us_split_fields3).rec__binary_trees__cell__parent) = 0)) and
+   (to_rep1((((f__split_fields11[i8])).us_split_fields3).rec__binary_trees__cell__position) = 1)) ->
+   (to_rep((((f__split_fields11[to_rep((((f__split_fields11[i8])).us_split_fields3).rec__binary_trees__cell__parent)])).us_split_fields3).rec__binary_trees__cell__right) = i8)))) and
+  ((not (v1 = 0)) -> (((tree_structure({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f__split_fields10;
+  rec__binary_trees__forest__c = f__split_fields11 } }) = true) and
+  (tree_structure({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f_old__split_fields2; rec__binary_trees__forest__c = f_old__split_fields3 }
+  }) = true)) and
+  ((forall i8:int. (((1 <= i8) and (i8 <= 100)) -> (((((model__({
+   us_split_fields5 = { rec__binary_trees__forest__s = f_old__split_fields2;
+   rec__binary_trees__forest__c = f_old__split_fields3 } },
+   root)[i8])).us_split_fields1).rec__tree_model__path_type__k = true) ->
+   ((((bool_le(length((((model__({ us_split_fields5 = {
+   rec__binary_trees__forest__s = f_old__split_fields2;
+   rec__binary_trees__forest__c = f_old__split_fields3 } },
+   root)[v1])).us_split_fields1).rec__tree_model__path_type__a),
+   length((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+   f_old__split_fields2; rec__binary_trees__forest__c = f_old__split_fields3
+   } },
+   root)[i8])).us_split_fields1).rec__tree_model__path_type__a)) = true) and
+   (forall n:int. (((1 <= n) and (n <= (0 + length((((model__({
+   us_split_fields5 = { rec__binary_trees__forest__s = f_old__split_fields2;
+   rec__binary_trees__forest__c = f_old__split_fields3 } },
+   root)[v1])).us_split_fields1).rec__tree_model__path_type__a)))) ->
+   (get((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+   f_old__split_fields2; rec__binary_trees__forest__c = f_old__split_fields3
+   } }, root)[v1])).us_split_fields1).rec__tree_model__path_type__a,
+   n) = get((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+   f_old__split_fields2; rec__binary_trees__forest__c = f_old__split_fields3
+   } }, root)[i8])).us_split_fields1).rec__tree_model__path_type__a, n))))) ->
+   ((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+   f__split_fields10; rec__binary_trees__forest__c = f__split_fields11 } },
+   v1)[i8])).us_split_fields1).rec__tree_model__path_type__k = true)) and
+   ((not (((bool_le(length((((model__({ us_split_fields5 = {
+   rec__binary_trees__forest__s = f_old__split_fields2;
+   rec__binary_trees__forest__c = f_old__split_fields3 } },
+   root)[v1])).us_split_fields1).rec__tree_model__path_type__a),
+   length((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+   f_old__split_fields2; rec__binary_trees__forest__c = f_old__split_fields3
+   } },
+   root)[i8])).us_split_fields1).rec__tree_model__path_type__a)) = true) ->
+   (forall n:int. (((1 <= n) and (n <= (0 + length((((model__({
+   us_split_fields5 = { rec__binary_trees__forest__s = f_old__split_fields2;
+   rec__binary_trees__forest__c = f_old__split_fields3 } },
+   root)[v1])).us_split_fields1).rec__tree_model__path_type__a)))) ->
+   (get((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+   f_old__split_fields2; rec__binary_trees__forest__c = f_old__split_fields3
+   } }, root)[v1])).us_split_fields1).rec__tree_model__path_type__a,
+   n) = get((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+   f_old__split_fields2; rec__binary_trees__forest__c = f_old__split_fields3
+   } }, root)[i8])).us_split_fields1).rec__tree_model__path_type__a, n))))) and
+   (not (bool_le(length((((model__({ us_split_fields5 = {
+   rec__binary_trees__forest__s = f_old__split_fields2;
+   rec__binary_trees__forest__c = f_old__split_fields3 } },
+   root)[v1])).us_split_fields1).rec__tree_model__path_type__a),
+   length((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+   f_old__split_fields2; rec__binary_trees__forest__c = f_old__split_fields3
+   } },
+   root)[i8])).us_split_fields1).rec__tree_model__path_type__a)) = false)))) ->
+   ((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+   f__split_fields10; rec__binary_trees__forest__c = f__split_fields11 } },
+   root)[i8])).us_split_fields1).rec__tree_model__path_type__k = true)))))) and
+  ((forall i8:int. (((1 <= i8) and (i8 <= 100)) -> (((((model__({
+   us_split_fields5 = { rec__binary_trees__forest__s = f__split_fields10;
+   rec__binary_trees__forest__c = f__split_fields11 } },
+   root)[i8])).us_split_fields1).rec__tree_model__path_type__k = true) ->
+   ((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+   f_old__split_fields2; rec__binary_trees__forest__c = f_old__split_fields3
+   } },
+   root)[i8])).us_split_fields1).rec__tree_model__path_type__k = true)))) and
+  ((forall i8:int. (((1 <= i8) and (i8 <= 100)) -> (((((model__({
+   us_split_fields5 = { rec__binary_trees__forest__s = f__split_fields10;
+   rec__binary_trees__forest__c = f__split_fields11 } },
+   v1)[i8])).us_split_fields1).rec__tree_model__path_type__k = true) ->
+   ((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+   f_old__split_fields2; rec__binary_trees__forest__c = f_old__split_fields3
+   } },
+   root)[i8])).us_split_fields1).rec__tree_model__path_type__k = true)))) and
+  ((forall i8:int. (((1 <= i8) and (i8 <= 100)) -> (((((model__({
+   us_split_fields5 = { rec__binary_trees__forest__s = f__split_fields10;
+   rec__binary_trees__forest__c = f__split_fields11 } },
+   root)[i8])).us_split_fields1).rec__tree_model__path_type__k = true) ->
+   (((bool_eq1(length((((model__({ us_split_fields5 = {
+   rec__binary_trees__forest__s = f__split_fields10;
+   rec__binary_trees__forest__c = f__split_fields11 } },
+   root)[i8])).us_split_fields1).rec__tree_model__path_type__a),
+   length((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+   f_old__split_fields2; rec__binary_trees__forest__c = f_old__split_fields3
+   } },
+   root)[i8])).us_split_fields1).rec__tree_model__path_type__a)) = true) ->
+   (forall n:int. (((1 <= n) and (n <= (0 + length((((model__({
+   us_split_fields5 = { rec__binary_trees__forest__s = f__split_fields10;
+   rec__binary_trees__forest__c = f__split_fields11 } },
+   root)[i8])).us_split_fields1).rec__tree_model__path_type__a)))) ->
+   (get((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+   f__split_fields10; rec__binary_trees__forest__c = f__split_fields11 } },
+   root)[i8])).us_split_fields1).rec__tree_model__path_type__a,
+   n) = get((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+   f_old__split_fields2; rec__binary_trees__forest__c = f_old__split_fields3
+   } }, root)[i8])).us_split_fields1).rec__tree_model__path_type__a, n))))) and
+   (not (bool_eq1(length((((model__({ us_split_fields5 = {
+   rec__binary_trees__forest__s = f__split_fields10;
+   rec__binary_trees__forest__c = f__split_fields11 } },
+   root)[i8])).us_split_fields1).rec__tree_model__path_type__a),
+   length((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+   f_old__split_fields2; rec__binary_trees__forest__c = f_old__split_fields3
+   } },
+   root)[i8])).us_split_fields1).rec__tree_model__path_type__a)) = false)))))) and
+  ((forall i8:int. (((1 <= i8) and (i8 <= 100)) -> (((((model__({
+   us_split_fields5 = { rec__binary_trees__forest__s = f__split_fields10;
+   rec__binary_trees__forest__c = f__split_fields11 } },
+   v1)[i8])).us_split_fields1).rec__tree_model__path_type__k = true) ->
+   (is_concat((((model__({ us_split_fields5 = {
+   rec__binary_trees__forest__s = f_old__split_fields2;
+   rec__binary_trees__forest__c = f_old__split_fields3 } },
+   root)[v1])).us_split_fields1).rec__tree_model__path_type__a, (((model__({
+   us_split_fields5 = { rec__binary_trees__forest__s = f__split_fields10;
+   rec__binary_trees__forest__c = f__split_fields11 } },
+   v1)[i8])).us_split_fields1).rec__tree_model__path_type__a, (((model__({
+   us_split_fields5 = { rec__binary_trees__forest__s = f_old__split_fields2;
+   rec__binary_trees__forest__c = f_old__split_fields3 } },
+   root)[i8])).us_split_fields1).rec__tree_model__path_type__a) = true)))) and
+  (forall r:int. (((1 <= r) and (r <= to_rep(f__split_fields10))) ->
+  ((((not (r = root)) and (not (r = v1))) and
+  (to_rep1((((f_old__split_fields3[r])).us_split_fields3).rec__binary_trees__cell__position) = 2)) ->
+  (oeq(model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f_old__split_fields2; rec__binary_trees__forest__c = f_old__split_fields3 }
+  }, r), model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f__split_fields10; rec__binary_trees__forest__c = f__split_fields11 } },
+  r)) = true)))))))))))))))) and
+  ((((f_old__split_fields4 = f_old__split_fields2) and
+  (f_old__split_fields5 = f_old__split_fields3)) and ((v2 = v1) and
+  ((f__split_fields12 = f__split_fields10) and
+  (f__split_fields13 = f__split_fields11)))) and
+  (((f_old__split_fields6 = f_old__split_fields2) and
+  (f_old__split_fields7 = f_old__split_fields3)) and ((v3 = v1) and
+  ((f__split_fields14 = f__split_fields10) and
+  (f__split_fields15 = f__split_fields11))))))
+
+axiom H7 : (tree_structure({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f__split_fields12;
+  rec__binary_trees__forest__c = f__split_fields13 } }) = true)
+
+axiom H8 : (tree_structure({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f__split_fields12;
+  rec__binary_trees__forest__c = f__split_fields13 } }) = true)
+
+axiom H9 : ((o98 = size({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f__split_fields12; rec__binary_trees__forest__c = f__split_fields13 }
+  })) and (in_range2(o98) and (o98 = to_rep(f__split_fields12))))
+
+axiom H10 : (((o98 = size({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f__split_fields;
+  rec__binary_trees__forest__c = f__split_fields1 } })) ->
+  (result12 = true)) and ((not (o98 = size({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f__split_fields;
+  rec__binary_trees__forest__c = f__split_fields1 } }))) ->
+  (result12 = false)))
+
+axiom H11 : (result12 = true)
+
+axiom H12 : (tree_structure({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f__split_fields12;
+  rec__binary_trees__forest__c = f__split_fields13 } }) = true)
+
+axiom H13 : ((result13 = valid_root({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f__split_fields12;
+  rec__binary_trees__forest__c = f__split_fields13 } }, root)) and
+  (((result13 = true) <-> ((root <= to_rep(f__split_fields12)) and
+  (to_rep1((((f__split_fields13[root])).us_split_fields3).rec__binary_trees__cell__position) = 2))) and
+  ((size({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f__split_fields12; rec__binary_trees__forest__c = f__split_fields13 }
+  }) <  root) -> (not (result13 = true)))))
+
+axiom H14 : (result13 = true)
+
+axiom H15 : (v2 = peek({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f__split_fields; rec__binary_trees__forest__c = f__split_fields1 } }, i,
+  d))
+
+axiom H16 : (tree_structure({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f__split_fields12;
+  rec__binary_trees__forest__c = f__split_fields13 } }) = true)
+
+axiom H17 : ((o97 = peek({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f__split_fields12;
+  rec__binary_trees__forest__c = f__split_fields13 } }, i, d)) and
+  (in_range2(o97) and ((((d = 0) ->
+  (o97 = to_rep((((f__split_fields13[i])).us_split_fields3).rec__binary_trees__cell__left))) and
+  ((not (d = 0)) ->
+  (o97 = to_rep((((f__split_fields13[i])).us_split_fields3).rec__binary_trees__cell__right)))) and
+  ((((not (o97 = 0)) -> ((position({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f__split_fields12;
+  rec__binary_trees__forest__c = f__split_fields13 } }, o97) = d) and
+  (parent({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f__split_fields12; rec__binary_trees__forest__c = f__split_fields13 } },
+  o97) = i))) and ((o97 = 0) ->
+  (forall j3:int. (((1 <= j3) and (j3 <= 100)) -> ((parent({
+  us_split_fields5 = { rec__binary_trees__forest__s = f__split_fields12;
+  rec__binary_trees__forest__c = f__split_fields13 } }, j3) = i) ->
+  (not (position({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f__split_fields12; rec__binary_trees__forest__c = f__split_fields13 } },
+  j3) = d))))))) and
+  (forall j3:int. (((1 <= j3) and (j3 <= 100)) -> (((parent({
+  us_split_fields5 = { rec__binary_trees__forest__s = f__split_fields12;
+  rec__binary_trees__forest__c = f__split_fields13 } }, j3) = i) and
+  (position({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f__split_fields12; rec__binary_trees__forest__c = f__split_fields13 } },
+  j3) = d)) -> (o97 = j3))))))))
+
+axiom H18 : (((o97 = 0) -> (result14 = true)) and ((not (o97 = 0)) ->
+  (result14 = false)))
+
+axiom H19 : (result14 = true)
+
+axiom H20 : ((result15 = true) <->
+  (forall j3:int. (((1 <= j3) and (j3 <= 100)) -> ((not (j3 = v2)) ->
+  (parent({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f__split_fields12; rec__binary_trees__forest__c = f__split_fields13 } },
+  j3) = parent({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f__split_fields; rec__binary_trees__forest__c = f__split_fields1 } },
+  j3))))))
+
+axiom H21 : (result15 = true)
+
+axiom H22 : ((result16 = true) <->
+  (forall j3:int. (((1 <= j3) and (j3 <= 100)) -> (((not (j3 = v2)) and
+  (not (parent({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f__split_fields12; rec__binary_trees__forest__c = f__split_fields13 } },
+  j3) = 0))) -> (position({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f__split_fields12;
+  rec__binary_trees__forest__c = f__split_fields13 } }, j3) = position({
+  us_split_fields5 = { rec__binary_trees__forest__s = f__split_fields;
+  rec__binary_trees__forest__c = f__split_fields1 } }, j3))))))
+
+axiom H23 : (result16 = true)
+
+axiom H24 : ((result18 = true) <->
+  (forall j3:int. (((1 <= j3) and (j3 <= 100)) ->
+  (forall e1:int. (((0 <= e1) and (e1 <= 1)) -> (((not (j3 = i)) or
+  (not (e1 = d))) -> (peek({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f__split_fields12;
+  rec__binary_trees__forest__c = f__split_fields13 } }, j3, e1) = peek({
+  us_split_fields5 = { rec__binary_trees__forest__s = f__split_fields;
+  rec__binary_trees__forest__c = f__split_fields1 } }, j3, e1))))))))
+
+axiom H25 : (result18 = true)
+
+axiom H26 : ((result19 = true) <->
+  (forall t2:int. (((1 <= t2) and (t2 <= 100)) -> ((((valid_root({
+  us_split_fields5 = { rec__binary_trees__forest__s = f__split_fields;
+  rec__binary_trees__forest__c = f__split_fields1 } }, t2) = true) and
+  (not (i = t2))) and (not (v2 = t2))) -> (valid_root({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f__split_fields12;
+  rec__binary_trees__forest__c = f__split_fields13 } }, t2) = true)))))
+
+axiom H27 : (result19 = true)
+
+axiom H28 : ((result21 = true) <->
+  (forall t2:int. (((1 <= t2) and (t2 <= 100)) -> ((((valid_root({
+  us_split_fields5 = { rec__binary_trees__forest__s = f__split_fields;
+  rec__binary_trees__forest__c = f__split_fields1 } }, t2) = true) and
+  (not (root = t2))) and (not (v2 = t2))) -> (oeq(model__({
+  us_split_fields5 = { rec__binary_trees__forest__s = f__split_fields12;
+  rec__binary_trees__forest__c = f__split_fields13 } }, t2), model__({
+  us_split_fields5 = { rec__binary_trees__forest__s = f__split_fields;
+  rec__binary_trees__forest__c = f__split_fields1 } }, t2)) = true)))))
+
+axiom H29 : (result21 = true)
+
+axiom H30 : ((not (v2 = 0)) -> ((o84 = v2) and in_range1(v2)))
+
+axiom H31 : ((not (v2 = 0)) -> (tree_structure({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f__split_fields12;
+  rec__binary_trees__forest__c = f__split_fields13 } }) = true))
+
+axiom H32 : ((not (v2 = 0)) -> ((o85 = v2) and in_range1(v2)))
+
+axiom H33 : ((not (v2 = 0)) -> ((result23 = valid_root({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f__split_fields12;
+  rec__binary_trees__forest__c = f__split_fields13 } }, o85)) and
+  (((result23 = true) <-> ((o85 <= to_rep(f__split_fields12)) and
+  (to_rep1((((f__split_fields13[o85])).us_split_fields3).rec__binary_trees__cell__position) = 2))) and
+  ((size({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f__split_fields12; rec__binary_trees__forest__c = f__split_fields13 }
+  }) <  o85) -> (not (result23 = true))))))
+
+axiom H34 : ((v2 = 0) -> (result23 = of_int(1)))
+
+axiom H35 : (result23 = true)
+
+axiom H36 : (((result24 = true) ->
+  (forall i8:int. (((1 <= i8) and (i8 <= 100)) -> (((((model__({
+  us_split_fields5 = { rec__binary_trees__forest__s = f__split_fields;
+  rec__binary_trees__forest__c = f__split_fields1 } },
+  root)[i8])).us_split_fields1).rec__tree_model__path_type__k = true) ->
+  ((((not (v2 = 0)) and ((bool_le(length((((model__({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f__split_fields;
+  rec__binary_trees__forest__c = f__split_fields1 } },
+  root)[v2])).us_split_fields1).rec__tree_model__path_type__a),
+  length((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f__split_fields; rec__binary_trees__forest__c = f__split_fields1 } },
+  root)[i8])).us_split_fields1).rec__tree_model__path_type__a)) = true) and
+  (forall n:int. (((1 <= n) and (n <= (0 + length((((model__({
+  us_split_fields5 = { rec__binary_trees__forest__s = f__split_fields;
+  rec__binary_trees__forest__c = f__split_fields1 } },
+  root)[v2])).us_split_fields1).rec__tree_model__path_type__a)))) ->
+  (get((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f__split_fields; rec__binary_trees__forest__c = f__split_fields1 } },
+  root)[v2])).us_split_fields1).rec__tree_model__path_type__a,
+  n) = get((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f__split_fields; rec__binary_trees__forest__c = f__split_fields1 } },
+  root)[i8])).us_split_fields1).rec__tree_model__path_type__a, n)))))) ->
+  ((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f__split_fields12; rec__binary_trees__forest__c = f__split_fields13 } },
+  v2)[i8])).us_split_fields1).rec__tree_model__path_type__k = true)) and
+  ((not ((not (v2 = 0)) and (((bool_le(length((((model__({ us_split_fields5 =
+  { rec__binary_trees__forest__s = f__split_fields;
+  rec__binary_trees__forest__c = f__split_fields1 } },
+  root)[v2])).us_split_fields1).rec__tree_model__path_type__a),
+  length((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f__split_fields; rec__binary_trees__forest__c = f__split_fields1 } },
+  root)[i8])).us_split_fields1).rec__tree_model__path_type__a)) = true) ->
+  (forall n:int. (((1 <= n) and (n <= (0 + length((((model__({
+  us_split_fields5 = { rec__binary_trees__forest__s = f__split_fields;
+  rec__binary_trees__forest__c = f__split_fields1 } },
+  root)[v2])).us_split_fields1).rec__tree_model__path_type__a)))) ->
+  (get((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f__split_fields; rec__binary_trees__forest__c = f__split_fields1 } },
+  root)[v2])).us_split_fields1).rec__tree_model__path_type__a,
+  n) = get((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f__split_fields; rec__binary_trees__forest__c = f__split_fields1 } },
+  root)[i8])).us_split_fields1).rec__tree_model__path_type__a, n))))) and
+  (not (bool_le(length((((model__({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f__split_fields;
+  rec__binary_trees__forest__c = f__split_fields1 } },
+  root)[v2])).us_split_fields1).rec__tree_model__path_type__a),
+  length((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f__split_fields; rec__binary_trees__forest__c = f__split_fields1 } },
+  root)[i8])).us_split_fields1).rec__tree_model__path_type__a)) = false))))) ->
+  ((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f__split_fields12; rec__binary_trees__forest__c = f__split_fields13 } },
+  root)[i8])).us_split_fields1).rec__tree_model__path_type__k = true))))))) and
+  ((forall i8:int. (((1 <= i8) and (i8 <= 100)) -> (((((model__({
+   us_split_fields5 = { rec__binary_trees__forest__s = f__split_fields;
+   rec__binary_trees__forest__c = f__split_fields1 } },
+   root)[i8])).us_split_fields1).rec__tree_model__path_type__k = true) ->
+   ((((not (v2 = 0)) and ((bool_le(length((((model__({ us_split_fields5 = {
+   rec__binary_trees__forest__s = f__split_fields;
+   rec__binary_trees__forest__c = f__split_fields1 } },
+   root)[v2])).us_split_fields1).rec__tree_model__path_type__a),
+   length((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+   f__split_fields; rec__binary_trees__forest__c = f__split_fields1 } },
+   root)[i8])).us_split_fields1).rec__tree_model__path_type__a)) = true) and
+   (forall n:int. (((1 <= n) and (n <= (0 + length((((model__({
+   us_split_fields5 = { rec__binary_trees__forest__s = f__split_fields;
+   rec__binary_trees__forest__c = f__split_fields1 } },
+   root)[v2])).us_split_fields1).rec__tree_model__path_type__a)))) ->
+   (get((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+   f__split_fields; rec__binary_trees__forest__c = f__split_fields1 } },
+   root)[v2])).us_split_fields1).rec__tree_model__path_type__a,
+   n) = get((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+   f__split_fields; rec__binary_trees__forest__c = f__split_fields1 } },
+   root)[i8])).us_split_fields1).rec__tree_model__path_type__a, n)))))) and
+   ((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+   f__split_fields12; rec__binary_trees__forest__c = f__split_fields13 } },
+   v2)[i8])).us_split_fields1).rec__tree_model__path_type__k = true)) or
+   ((not ((not (v2 = 0)) and (((bool_le(length((((model__({
+   us_split_fields5 = { rec__binary_trees__forest__s = f__split_fields;
+   rec__binary_trees__forest__c = f__split_fields1 } },
+   root)[v2])).us_split_fields1).rec__tree_model__path_type__a),
+   length((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+   f__split_fields; rec__binary_trees__forest__c = f__split_fields1 } },
+   root)[i8])).us_split_fields1).rec__tree_model__path_type__a)) = true) ->
+   (forall n:int. (((1 <= n) and (n <= (0 + length((((model__({
+   us_split_fields5 = { rec__binary_trees__forest__s = f__split_fields;
+   rec__binary_trees__forest__c = f__split_fields1 } },
+   root)[v2])).us_split_fields1).rec__tree_model__path_type__a)))) ->
+   (get((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+   f__split_fields; rec__binary_trees__forest__c = f__split_fields1 } },
+   root)[v2])).us_split_fields1).rec__tree_model__path_type__a,
+   n) = get((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+   f__split_fields; rec__binary_trees__forest__c = f__split_fields1 } },
+   root)[i8])).us_split_fields1).rec__tree_model__path_type__a, n))))) and
+   (not (bool_le(length((((model__({ us_split_fields5 = {
+   rec__binary_trees__forest__s = f__split_fields;
+   rec__binary_trees__forest__c = f__split_fields1 } },
+   root)[v2])).us_split_fields1).rec__tree_model__path_type__a),
+   length((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+   f__split_fields; rec__binary_trees__forest__c = f__split_fields1 } },
+   root)[i8])).us_split_fields1).rec__tree_model__path_type__a)) = false))))) and
+   ((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+   f__split_fields12; rec__binary_trees__forest__c = f__split_fields13 } },
+   root)[i8])).us_split_fields1).rec__tree_model__path_type__k = true)))))) ->
+  (result24 = true)))
+
+axiom H37 : (result24 = true)
+
+axiom H38 : ((result26 = true) <->
+  (forall i8:int. (((1 <= i8) and (i8 <= 100)) -> (((((model__({
+  us_split_fields5 = { rec__binary_trees__forest__s = f__split_fields12;
+  rec__binary_trees__forest__c = f__split_fields13 } },
+  root)[i8])).us_split_fields1).rec__tree_model__path_type__k = true) ->
+  ((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f__split_fields; rec__binary_trees__forest__c = f__split_fields1 } },
+  root)[i8])).us_split_fields1).rec__tree_model__path_type__k = true)))))
+
+axiom H39 : (result26 = true)
+
+axiom H40 : ((result27 = true) <->
+  (forall i8:int. (((1 <= i8) and (i8 <= 100)) -> (((not (v2 = 0)) and
+  ((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f__split_fields12; rec__binary_trees__forest__c = f__split_fields13 } },
+  v2)[i8])).us_split_fields1).rec__tree_model__path_type__k = true)) ->
+  ((((model__({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f__split_fields; rec__binary_trees__forest__c = f__split_fields1 } },
+  root)[i8])).us_split_fields1).rec__tree_model__path_type__k = true)))))
+
+axiom H41 : (result27 = true)
+
+axiom H42 : (1 <= i4)
+
+axiom H43 : (i4 <= 100)
+
+axiom H44 : (tree_structure({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f__split_fields12;
+  rec__binary_trees__forest__c = f__split_fields13 } }) = true)
+
+ (* File "binary_trees.ads", line 119, characters 0-0 *)
+goal WP_parameter_def : (valid_root({ us_split_fields5 = {
+  rec__binary_trees__forest__s = f__split_fields12;
+  rec__binary_trees__forest__c = f__split_fields13 } }, root) = true)

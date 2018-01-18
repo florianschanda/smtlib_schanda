@@ -1563,19 +1563,19 @@ logic valid_numberlogentries : int, int, us_rep2,
 logic valid_numberlogentries__function_guard : bool, int, int, us_rep2,
   (int,fileentrycountt) farray -> prop
 
-logic temp___1145 : int -> (int,logfileindext) farray
+logic temp___1203 : int -> (int,logfileindext) farray
 
 axiom def_axiom :
-  (forall temp___1147:int.
-  (forall temp___1148:int.
-  ((temp___1145(temp___1147)[temp___1148]) = of_rep6(temp___1147))))
+  (forall temp___1205:int.
+  (forall temp___1206:int.
+  ((temp___1203(temp___1205)[temp___1206]) = of_rep6(temp___1205))))
 
-logic temp___1149 : int -> (int,fileentrycountt) farray
+logic temp___1207 : int -> (int,fileentrycountt) farray
 
 axiom def_axiom1 :
-  (forall temp___1151:int.
-  (forall temp___1152:int.
-  ((temp___1149(temp___1151)[temp___1152]) = of_rep9(temp___1151))))
+  (forall temp___1209:int.
+  (forall temp___1210:int.
+  ((temp___1207(temp___1209)[temp___1210]) = of_rep9(temp___1209))))
 
 type us_main_type
 
@@ -4166,9 +4166,9 @@ logic localstatus : int
 
 logic currenttime : us_private
 
-logic state : us_private
-
 logic filestate : us_private
+
+logic state : us_private
 
 logic filestate1 : us_private
 
@@ -4490,9 +4490,9 @@ logic theadmin__split_fields3 : opandnullt
 
 logic status2 : int
 
-logic state9 : us_private
-
 logic filestate2 : us_private
+
+logic state9 : us_private
 
 logic filestate3 : us_private
 
@@ -4900,9 +4900,9 @@ logic theadmin__split_fields7 : opandnullt
 
 logic status7 : int
 
-logic state24 : us_private
-
 logic filestate6 : us_private
+
+logic state24 : us_private
 
 logic filestate7 : us_private
 
@@ -5052,9 +5052,9 @@ logic status8 : int
 
 logic localstatus2 : int
 
-logic state33 : us_private
-
 logic filestate8 : us_private
+
+logic state33 : us_private
 
 logic filestate9 : us_private
 
@@ -5206,9 +5206,9 @@ logic status10 : int
 
 logic localstatus3 : int
 
-logic state42 : us_private
-
 logic filestate10 : us_private
+
+logic state42 : us_private
 
 logic filestate11 : us_private
 
@@ -5991,16 +5991,16 @@ axiom H8 : (((((((((((((not (enrolmentisinprogress(status8) = true)) and
   theadmin__split_fields; rec__admin__t__currentop = theadmin__split_fields1
   } }) = 3))))
 
-axiom H9 : ((((((in_range1(tokenpresence5) and
+axiom H9 : ((((((in_range6(auditalarm5) and in_range17(tokentry5)) and
+  in_range16(tokenid5)) and in_range28(status8)) and
+  in_range26(currentlatch3)) and in_range1(tokenpresence5)) and
   (valid_numberlogentries(to_rep6(logfilestate__split_fields35),
   to_rep7(logfilestate__split_fields36), { us_split_fields5 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields37;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields38;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields39;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields40 } },
-  logfilestate__split_fields41) = true)) and in_range6(auditalarm5)) and
-  in_range17(tokentry5)) and in_range28(status8)) and
-  in_range26(currentlatch3)) and in_range16(tokenid5))
+  logfilestate__split_fields41) = true))
 
  (* File "enclave.ads", line 77, characters 0-0 *)
 goal WP_parameter_def : (not (enrolmentisinprogress(status8) = true))

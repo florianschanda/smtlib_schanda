@@ -3621,13 +3621,13 @@ logic c__split_fields : character
 
 logic c__split_discrs : file_status
 
-logic temp___933 : (int,character) farray
+logic temp___933 : us_rep
 
-logic temp___932 : us_rep
+logic temp___932 : (int,character) farray
 
-logic temp___931 : int
+logic temp___931 : us_rep
 
-logic temp___930 : us_rep
+logic temp___930 : int
 
 logic temp___929 : us_rep
 
@@ -3751,21 +3751,21 @@ logic o47 : int
 
 logic temp___998 : us_rep
 
-logic temp___997 : int
+logic temp___997 : us_rep
 
-logic temp___996 : (int,character) farray
+logic temp___996 : int
 
-logic temp___995 : us_rep
+logic temp___995 : (int,character) farray
 
-logic temp___994 : int
+logic temp___994 : us_rep
 
-logic temp___993 : us_rep
+logic temp___993 : int
 
 logic temp___992 : us_rep
 
-logic temp___991 : (int,character) farray
+logic temp___990 : (int,character) farray
 
-logic temp___990 : us_rep
+logic temp___991 : us_rep
 
 logic o48 : int
 
@@ -3887,15 +3887,15 @@ logic o96 : int
 
 logic temp___987 : us_rep
 
-logic temp___986 : int
+logic temp___986 : us_rep
 
-logic temp___985 : us_rep
+logic temp___985 : int
 
 logic temp___984 : us_rep
 
-logic temp___983 : (int,character) farray
-
 logic temp___982 : us_rep
+
+logic temp___983 : (int,character) farray
 
 logic o97 : integer
 
@@ -4005,13 +4005,13 @@ logic temp___1010 : int
 
 logic temp___1009 : us_rep
 
-logic temp___1008 : us_rep
+logic temp___1007 : us_rep
 
-logic temp___1007 : file_status
+logic temp___1008 : file_status
 
-logic temp___10071 : character
+logic temp___10081 : character
 
-logic temp___10072 : bool
+logic temp___10082 : bool
 
 logic o129 : int
 
@@ -5353,9 +5353,9 @@ axiom H10 : (result1 = count_limit_reached)
 
 axiom H11 : (count_limit_reached1 = of_int(0))
 
-axiom H12 : (((temp___933 = response) and ((temp___932 = source) and
-  ((temp___931 = last28) and ((temp___930 = standard_error) and
-  ((temp___929 = standard_output) and ((temp___928 = standard_input) and
+axiom H12 : (((temp___933 = standard_input) and ((temp___932 = response) and
+  ((temp___931 = source) and ((temp___930 = last28) and
+  ((temp___929 = standard_error) and ((temp___928 = standard_output) and
   ((((status(standard_error1) = 1) and
   (is_writable(standard_error1) = true)) and
   (not (is_open(source1) = true))) and (((0 <= 2147483647) ->
@@ -5457,11 +5457,11 @@ axiom H23 : (standard_output13 = standard_output11)
 
 axiom H24 : (standard_input8 = standard_input6)
 
-axiom H25 : (((temp___998 = destination) and
-  ((temp___997 = last_of_yes_no) and ((temp___996 = response7) and
-  ((temp___995 = source9) and ((temp___994 = last35) and
-  ((temp___993 = standard_error12) and ((temp___992 = standard_output12) and
-  ((temp___991 = yes_no) and ((temp___990 = standard_input7) and
+axiom H25 : (((temp___998 = standard_input7) and
+  ((temp___997 = destination) and ((temp___996 = last_of_yes_no) and
+  ((temp___995 = response7) and ((temp___994 = source9) and
+  ((temp___993 = last35) and ((temp___992 = standard_error12) and
+  ((temp___990 = yes_no) and ((temp___991 = standard_output12) and
   (((((((status(standard_error14) = 1) and
   (is_writable(standard_error14) = true)) and
   (not (is_open(destination1) = true))) and (is_open(source11) = true)) and
@@ -5681,9 +5681,9 @@ axiom H25 : (((temp___998 = destination) and
   (standard_output28 = standard_output27)) and
   ((standard_error26 = standard_error23) and
   (standard_output29 = standard_output27))))) and (result22 = true))) and
-  ((temp___987 = destination2) and ((temp___986 = last_of_yes_no1) and
-  ((temp___985 = standard_error25) and ((temp___984 = standard_output28) and
-  ((temp___983 = yes_no1) and ((temp___982 = standard_input10) and
+  ((temp___987 = standard_input10) and ((temp___986 = destination2) and
+  ((temp___985 = last_of_yes_no1) and ((temp___984 = standard_error25) and
+  ((temp___982 = standard_output28) and ((temp___983 = yes_no1) and
   ((((not (is_open(destination3) = true)) and
   (status(standard_error27) = 1)) and
   (is_writable(standard_error27) = true)) and (((0 <= 2147483647) ->
@@ -5826,9 +5826,9 @@ axiom H45 : (((not (o128 = true)) -> (result33 = true)) and ((o128 = true) ->
 axiom H46 : ((result33 = true) -> (((temp___1013 = destination43) and
   ((temp___1012 = source32) and ((temp___1011 = count_limit_reached1) and
   ((temp___1010 = count2) and ((temp___1009 = standard_error80) and
-  ((temp___1008 = standard_output85) and
-  (((temp___1007 = c__split_discrs) and ((temp___10071 = c__split_fields) and
-  (temp___10072 = c__attr__constrained))) and
+  ((temp___1007 = standard_output85) and
+  (((temp___1008 = c__split_discrs) and ((temp___10081 = c__split_fields) and
+  (temp___10082 = c__attr__constrained))) and
   (((((((((status(standard_error82) = 1) and
   (is_writable(standard_error82) = true)) and (is_open(source34) = true)) and
   (is_open(destination45) = true)) and (is_readable(source34) = true)) and

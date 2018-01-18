@@ -552,6 +552,8 @@ logic o1 : int
 
 logic o2 : int
 
+logic o3 : int
+
 logic ap__altitude__pitch__rate__calc_pitchrate__present_pitchrate : int
 
 logic result : int
@@ -676,13 +678,15 @@ axiom H32 : ((not (1000 <  result__2)) -> ((not (result__2 <  (- 1000))) ->
 
 axiom H33 : ((not (1000 <  result__2)) -> (result__3 = result__4))
 
-axiom H34 : (result4 = target_climb_rate)
+axiom H34 : ((o1 = result__3) and in_range8(result__3))
 
-axiom H35 : (target_climb_rate1 = result__3)
+axiom H35 : (result4 = target_climb_rate)
 
-axiom H36 : (not (1000 <  c13b))
+axiom H36 : (target_climb_rate1 = o1)
 
-axiom H37 : (not (c13b <  (- 1000)))
+axiom H37 : (not (1000 <  c13b))
+
+axiom H38 : (not (c13b <  (- 1000)))
 
  (* File "ap-altitude-pitch-rate.ads", line 9, characters 0-0 *)
 goal WP_parameter_def : in_range8(c13b)

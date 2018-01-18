@@ -1614,19 +1614,19 @@ logic valid_numberlogentries : int, int, us_rep2,
 logic valid_numberlogentries__function_guard : bool, int, int, us_rep2,
   (int,fileentrycountt) farray -> prop
 
-logic temp___1157 : int -> (int,logfileindext) farray
+logic temp___1215 : int -> (int,logfileindext) farray
 
 axiom def_axiom :
-  (forall temp___1159:int.
-  (forall temp___1160:int.
-  ((temp___1157(temp___1159)[temp___1160]) = of_rep6(temp___1159))))
+  (forall temp___1217:int.
+  (forall temp___1218:int.
+  ((temp___1215(temp___1217)[temp___1218]) = of_rep6(temp___1217))))
 
-logic temp___1161 : int -> (int,fileentrycountt) farray
+logic temp___1219 : int -> (int,fileentrycountt) farray
 
 axiom def_axiom1 :
-  (forall temp___1163:int.
-  (forall temp___1164:int.
-  ((temp___1161(temp___1163)[temp___1164]) = of_rep9(temp___1163))))
+  (forall temp___1221:int.
+  (forall temp___1222:int.
+  ((temp___1219(temp___1221)[temp___1222]) = of_rep9(temp___1221))))
 
 type us_main_type
 
@@ -4135,12 +4135,12 @@ axiom enrolmentisinprogress__def_axiom :
   enclave__state)]. ((enrolmentisinprogress(enclave__status,
   enclave__state) = true) <-> in_range30(enclave__status))))
 
-logic adminmustlogout : us_rep, int, us_private, int, us_private,
-  us_split_fields2, int, us_private, int, us_split_fields18,
+logic adminmustlogout : us_rep, int, us_private, us_split_fields2, int,
+  us_private, us_private, int, int, us_split_fields18,
   us_split_fields24 -> bool
 
-logic adminmustlogout__function_guard : bool, us_rep, int, us_private, int,
-  us_private, us_split_fields2, int, us_private, int, us_split_fields18,
+logic adminmustlogout__function_guard : bool, us_rep, int, us_private,
+  us_split_fields2, int, us_private, us_private, int, int, us_split_fields18,
   us_split_fields24 -> prop
 
 axiom adminmustlogout__post_axiom : true
@@ -4387,9 +4387,9 @@ logic theadmin__split_fields1 : opandnullt
 
 logic currenttime : us_private
 
-logic filestate : us_private
-
 logic state : us_private
+
+logic filestate : us_private
 
 logic filestate1 : us_private
 
@@ -4689,9 +4689,9 @@ logic theadmin__split_fields2 : privileget
 
 logic theadmin__split_fields3 : opandnullt
 
-logic filestate3 : us_private
-
 logic state13 : us_private
+
+logic filestate3 : us_private
 
 logic state14 : us_private
 
@@ -5149,9 +5149,9 @@ logic theadmin__split_fields6 : privileget
 
 logic theadmin__split_fields7 : opandnullt
 
-logic filestate9 : us_private
-
 logic state42 : us_private
+
+logic filestate9 : us_private
 
 logic filestate10 : us_private
 
@@ -5405,9 +5405,9 @@ logic theadmin__split_fields10 : privileget
 
 logic theadmin__split_fields11 : opandnullt
 
-logic filestate13 : us_private
-
 logic state59 : us_private
+
+logic filestate13 : us_private
 
 logic filestate14 : us_private
 
@@ -5589,9 +5589,9 @@ logic theadmin__split_fields12 : privileget
 
 logic theadmin__split_fields13 : opandnullt
 
-logic filestate16 : us_private
-
 logic state72 : us_private
+
+logic filestate16 : us_private
 
 logic filestate17 : us_private
 
@@ -5779,7 +5779,80 @@ axiom H38 : ((result6 = isdoingop({ us_split_fields1 = {
   rec__admin__t__currentop = theadmin__split_fields1 } })) and
   ((result6 = true) <-> in_range4(to_rep1(theadmin__split_fields1))))
 
-axiom H39 : (result6 = true)
+axiom H39 : ((result6 = true) -> ((o10 = thecurrentop({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields;
+  rec__admin__t__currentop = theadmin__split_fields1 } })) and
+  in_range4(o10)))
+
+axiom H40 : ((result6 = true) -> (((o10 = 4) -> (result5 = true)) and
+  ((not (o10 = 4)) -> (result5 = false))))
+
+axiom H41 : ((not (result6 = true)) -> (result5 = false))
+
+axiom H42 : ((result5 = true) -> ((o11 = statusiswaitingstartadminop(status,
+  state11)) and ((o11 = true) <-> (status = 6))))
+
+axiom H43 : ((not (result5 = true)) -> (o11 = of_int(1)))
+
+axiom H44 : ((o7 = ispresent({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields;
+  rec__admin__t__currentop = theadmin__split_fields1 } })) and
+  ((o7 = true) <-> in_range5(to_rep(theadmin__split_fields))))
+
+axiom H45 : (((not (o7 = true)) -> (result7 = true)) and ((o7 = true) ->
+  (result7 = false)))
+
+axiom H46 : ((result7 = true) -> ((o8 = isdoingop({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields;
+  rec__admin__t__currentop = theadmin__split_fields1 } })) and
+  ((o8 = true) <-> in_range4(to_rep1(theadmin__split_fields1)))))
+
+axiom H47 : ((result7 = true) -> (((not (o8 = true)) -> (o9 = true)) and
+  ((o8 = true) -> (o9 = false))))
+
+axiom H48 : ((not (result7 = true)) -> (o9 = of_int(1)))
+
+axiom H49 : ((o1 = rolepresent({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields;
+  rec__admin__t__currentop = theadmin__split_fields1 } })) and
+  (in_range2(o1) and (o1 = to_rep(theadmin__split_fields))))
+
+axiom H50 : (((o1 = 1) -> (result8 = true)) and ((not (o1 = 1)) ->
+  (result8 = false)))
+
+axiom H51 : ((result8 = true) -> ((o3 = isdoingop({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields;
+  rec__admin__t__currentop = theadmin__split_fields1 } })) and
+  ((o3 = true) <-> in_range4(to_rep1(theadmin__split_fields1)))))
+
+axiom H52 : ((result8 = true) -> (((not (o3 = true)) -> (o4 = true)) and
+  ((o3 = true) -> (o4 = false))))
+
+axiom H53 : ((result8 = true) -> ((result9 = isdoingop({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields;
+  rec__admin__t__currentop = theadmin__split_fields1 } })) and
+  ((result9 = true) <-> in_range4(to_rep1(theadmin__split_fields1)))))
+
+axiom H54 : ((result8 = true) -> ((result9 = true) -> ((o2 = thecurrentop({
+  us_split_fields1 = { rec__admin__t__rolepresent = theadmin__split_fields;
+  rec__admin__t__currentop = theadmin__split_fields1 } })) and
+  in_range4(o2))))
+
+axiom H55 : ((result8 = true) -> ((result9 = true) -> (((o2 = 3) ->
+  (o5 = true)) and ((not (o2 = 3)) -> (o5 = false)))))
+
+axiom H56 : ((result8 = true) -> ((not (result9 = true)) -> (o5 = false)))
+
+axiom H57 : ((result8 = true) -> (o6 = match_bool(o5, true, o4)))
+
+axiom H58 : ((not (result8 = true)) -> (o6 = of_int(1)))
+
+axiom H59 : ((result10 = isdoingop({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields;
+  rec__admin__t__currentop = theadmin__split_fields1 } })) and
+  ((result10 = true) <-> in_range4(to_rep1(theadmin__split_fields1))))
+
+axiom H60 : (result10 = true)
 
  (* File "admintoken.ads", line 50, characters 0-0 *)
 goal WP_parameter_def : (isdoingop({ us_split_fields1 = {

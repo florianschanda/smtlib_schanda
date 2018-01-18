@@ -1,0 +1,5365 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+type t
+
+logic tqtint : t -> int
+
+axiom tqtaxiom : (forall i:t. ((0 <= tqtint(i)) and (tqtint(i) <= 65535)))
+
+logic nth : t, int -> bool
+
+axiom nth_out_of_bound :
+  (forall x:t. forall n:int. (((n <  0) or (16 <= n)) -> (nth(x,
+  n) = false)))
+
+logic zeros : t
+
+axiom Nth_zeros : (forall n:int. (nth(zeros, n) = false))
+
+logic one : t
+
+logic ones : t
+
+axiom Nth_ones :
+  (forall n:int. (((0 <= n) and (n <  16)) -> (nth(ones, n) = true)))
+
+logic bw_and : t, t -> t
+
+axiom Nth_bw_and :
+  (forall v1:t. forall v2:t. forall n:int. (((0 <= n) and (n <  16)) ->
+  (nth(bw_and(v1, v2), n) = match_bool(nth(v1, n), nth(v2, n), false))))
+
+logic bw_or : t, t -> t
+
+axiom Nth_bw_or :
+  (forall v1:t. forall v2:t. forall n:int. (((0 <= n) and (n <  16)) ->
+  (nth(bw_or(v1, v2), n) = match_bool(nth(v1, n), true, nth(v2, n)))))
+
+logic bw_xor : t, t -> t
+
+axiom Nth_bw_xor :
+  (forall v1:t. forall v2:t. forall n:int. (((0 <= n) and (n <  16)) ->
+  (nth(bw_xor(v1, v2), n) = xorb(nth(v1, n), nth(v2, n)))))
+
+logic bw_not : t -> t
+
+axiom Nth_bw_not :
+  (forall v:t. forall n:int. (((0 <= n) and (n <  16)) -> (nth(bw_not(v),
+  n) = match_bool(nth(v, n), false, true))))
+
+logic lsr : t, int -> t
+
+axiom Lsr_nth_low :
+  (forall b:t. forall n:int. forall s:int. ((0 <= s) -> ((0 <= n) ->
+  (((n + s) <  16) -> (nth(lsr(b, s), n) = nth(b, (n + s)))))))
+
+axiom Lsr_nth_high :
+  (forall b:t. forall n:int. forall s:int. ((0 <= s) -> ((0 <= n) ->
+  ((16 <= (n + s)) -> (nth(lsr(b, s), n) = false)))))
+
+axiom lsr_zeros : (forall x:t. (lsr(x, 0) = x))
+
+logic asr : t, int -> t
+
+axiom Asr_nth_low :
+  (forall b:t. forall n:int. forall s:int. ((0 <= s) -> (((0 <= n) and
+  (n <  16)) -> (((n + s) <  16) -> (nth(asr(b, s), n) = nth(b, (n + s)))))))
+
+axiom Asr_nth_high :
+  (forall b:t. forall n:int. forall s:int. ((0 <= s) -> (((0 <= n) and
+  (n <  16)) -> ((16 <= (n + s)) -> (nth(asr(b, s), n) = nth(b,
+  (16 - 1)))))))
+
+axiom asr_zeros : (forall x:t. (asr(x, 0) = x))
+
+logic lsl : t, int -> t
+
+axiom Lsl_nth_high :
+  (forall b:t. forall n:int. forall s:int. (((0 <= s) and ((s <= n) and
+  (n <  16))) -> (nth(lsl(b, s), n) = nth(b, (n - s)))))
+
+axiom Lsl_nth_low :
+  (forall b:t. forall n:int. forall s:int. (((0 <= n) and (n <  s)) ->
+  (nth(lsl(b, s), n) = false)))
+
+axiom lsl_zeros : (forall x:t. (lsl(x, 0) = x))
+
+axiom Div_mod :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (x = ((y * (x / y)) + (x % y)))))
+
+axiom Mod_bound :
+  (forall x:int. forall y:int. ((not (y = 0)) -> ((0 <= (x % y)) and
+  ((x % y) <  abs_int(y)))))
+
+axiom Div_unique :
+  (forall x:int. forall y:int. forall q:int. ((0 <  y) ->
+  ((((q * y) <= x) and (x <  ((q * y) + y))) -> ((x / y) = q))))
+
+axiom Div_bound :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) ->
+  ((0 <= (x / y)) and ((x / y) <= x))))
+
+axiom Mod_1 : (forall x:int. ((x % 1) = 0))
+
+axiom Div_1 : (forall x:int. ((x / 1) = x))
+
+axiom Div_inf :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) -> ((x / y) = 0)))
+
+axiom Div_inf_neg :
+  (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
+  (((-x) / y) = (- 1))))
+
+axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
+
+axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
+
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
+
+axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
+
+axiom Mod_minus1_left :
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
+
+axiom Div_mult :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
+  ((0 <  x) -> ((((x * y) + z) / x) = (y + (z / x)))))
+
+axiom Mod_mult :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) % x)].
+  ((0 <  x) -> ((((x * y) + z) % x) = (z % x))))
+
+logic rotate_right : t, int -> t
+
+axiom Nth_rotate_right :
+  (forall v:t. forall n:int. forall i:int. (((0 <= i) and (i <  16)) ->
+  ((0 <= n) -> (nth(rotate_right(v, n), i) = nth(v, ((i + n) % 16))))))
+
+logic rotate_left : t, int -> t
+
+axiom Nth_rotate_left :
+  (forall v:t. forall n:int. forall i:int. (((0 <= i) and (i <  16)) ->
+  ((0 <= n) -> (nth(rotate_left(v, n), i) = nth(v, ((i - n) % 16))))))
+
+logic pow2 : int -> int
+
+axiom Power_0 : (pow2(0) = 1)
+
+axiom Power_s : (forall n:int. ((0 <= n) -> (pow2((n + 1)) = (2 * pow2(n)))))
+
+axiom Power_1 : (pow2(1) = 2)
+
+axiom Power_sum :
+  (forall n:int. forall m:int. (((0 <= n) and (0 <= m)) ->
+  (pow2((n + m)) = (pow2(n) * pow2(m)))))
+
+axiom pow2pos : (forall i:int. ((0 <= i) -> (0 <  pow2(i))))
+
+axiom pow2_0 : (pow2(0) = 1)
+
+axiom pow2_1 : (pow2(1) = 2)
+
+axiom pow2_2 : (pow2(2) = 4)
+
+axiom pow2_3 : (pow2(3) = 8)
+
+axiom pow2_4 : (pow2(4) = 16)
+
+axiom pow2_5 : (pow2(5) = 32)
+
+axiom pow2_6 : (pow2(6) = 64)
+
+axiom pow2_7 : (pow2(7) = 128)
+
+axiom pow2_8 : (pow2(8) = 256)
+
+axiom pow2_9 : (pow2(9) = 512)
+
+axiom pow2_10 : (pow2(10) = 1024)
+
+axiom pow2_11 : (pow2(11) = 2048)
+
+axiom pow2_12 : (pow2(12) = 4096)
+
+axiom pow2_13 : (pow2(13) = 8192)
+
+axiom pow2_14 : (pow2(14) = 16384)
+
+axiom pow2_15 : (pow2(15) = 32768)
+
+axiom pow2_16 : (pow2(16) = 65536)
+
+axiom pow2_17 : (pow2(17) = 131072)
+
+axiom pow2_18 : (pow2(18) = 262144)
+
+axiom pow2_19 : (pow2(19) = 524288)
+
+axiom pow2_20 : (pow2(20) = 1048576)
+
+axiom pow2_21 : (pow2(21) = 2097152)
+
+axiom pow2_22 : (pow2(22) = 4194304)
+
+axiom pow2_23 : (pow2(23) = 8388608)
+
+axiom pow2_24 : (pow2(24) = 16777216)
+
+axiom pow2_25 : (pow2(25) = 33554432)
+
+axiom pow2_26 : (pow2(26) = 67108864)
+
+axiom pow2_27 : (pow2(27) = 134217728)
+
+axiom pow2_28 : (pow2(28) = 268435456)
+
+axiom pow2_29 : (pow2(29) = 536870912)
+
+axiom pow2_30 : (pow2(30) = 1073741824)
+
+axiom pow2_31 : (pow2(31) = 2147483648)
+
+axiom pow2_32 : (pow2(32) = 4294967296)
+
+axiom pow2_33 : (pow2(33) = 8589934592)
+
+axiom pow2_34 : (pow2(34) = 17179869184)
+
+axiom pow2_35 : (pow2(35) = 34359738368)
+
+axiom pow2_36 : (pow2(36) = 68719476736)
+
+axiom pow2_37 : (pow2(37) = 137438953472)
+
+axiom pow2_38 : (pow2(38) = 274877906944)
+
+axiom pow2_39 : (pow2(39) = 549755813888)
+
+axiom pow2_40 : (pow2(40) = 1099511627776)
+
+axiom pow2_41 : (pow2(41) = 2199023255552)
+
+axiom pow2_42 : (pow2(42) = 4398046511104)
+
+axiom pow2_43 : (pow2(43) = 8796093022208)
+
+axiom pow2_44 : (pow2(44) = 17592186044416)
+
+axiom pow2_45 : (pow2(45) = 35184372088832)
+
+axiom pow2_46 : (pow2(46) = 70368744177664)
+
+axiom pow2_47 : (pow2(47) = 140737488355328)
+
+axiom pow2_48 : (pow2(48) = 281474976710656)
+
+axiom pow2_49 : (pow2(49) = 562949953421312)
+
+axiom pow2_50 : (pow2(50) = 1125899906842624)
+
+axiom pow2_51 : (pow2(51) = 2251799813685248)
+
+axiom pow2_52 : (pow2(52) = 4503599627370496)
+
+axiom pow2_53 : (pow2(53) = 9007199254740992)
+
+axiom pow2_54 : (pow2(54) = 18014398509481984)
+
+axiom pow2_55 : (pow2(55) = 36028797018963968)
+
+axiom pow2_56 : (pow2(56) = 72057594037927936)
+
+axiom pow2_57 : (pow2(57) = 144115188075855872)
+
+axiom pow2_58 : (pow2(58) = 288230376151711744)
+
+axiom pow2_59 : (pow2(59) = 576460752303423488)
+
+axiom pow2_60 : (pow2(60) = 1152921504606846976)
+
+axiom pow2_61 : (pow2(61) = 2305843009213693952)
+
+axiom pow2_62 : (pow2(62) = 4611686018427387904)
+
+axiom pow2_63 : (pow2(63) = 9223372036854775808)
+
+axiom pow2_64 : (pow2(64) = 18446744073709551616)
+
+logic is_signed_positive : t -> prop
+
+logic of_int : int -> t
+
+logic to_int : t -> int
+
+axiom to_int_def :
+  (forall x:t [to_int(x)]. ((is_signed_positive(x) ->
+  (to_int(x) = tqtint(x))) and ((not is_signed_positive(x)) ->
+  (to_int(x) = (-(65536 - tqtint(x)))))))
+
+axiom to_uint_extensionality :
+  (forall v:t. forall vqt:t. ((tqtint(v) = tqtint(vqt)) -> (v = vqt)))
+
+axiom to_int_extensionality :
+  (forall v:t. forall vqt:t. ((to_int(v) = to_int(vqt)) -> (v = vqt)))
+
+predicate uint_in_range(i: int) = ((0 <= i) and (i <= 65535))
+
+axiom to_uint_bounds :
+  (forall v:t. ((0 <= tqtint(v)) and (tqtint(v) <  65536)))
+
+axiom to_uint_of_int :
+  (forall i:int. (((0 <= i) and (i <  65536)) -> (tqtint(of_int(i)) = i)))
+
+logic size_bv : t
+
+axiom to_uint_size_bv : (tqtint(size_bv) = 16)
+
+axiom to_uint_zeros : (tqtint(zeros) = 0)
+
+axiom to_uint_one : (tqtint(one) = 1)
+
+axiom to_uint_ones : (tqtint(ones) = 65535)
+
+predicate ult(x: t, y: t) = (tqtint(x) <  tqtint(y))
+
+predicate ule(x: t, y: t) = (tqtint(x) <= tqtint(y))
+
+predicate ugt(x: t, y: t) = (tqtint(y) <  tqtint(x))
+
+predicate uge(x: t, y: t) = (tqtint(y) <= tqtint(x))
+
+predicate slt(v1: t, v2: t) = (to_int(v1) <  to_int(v2))
+
+predicate sle(v1: t, v2: t) = (to_int(v1) <= to_int(v2))
+
+predicate sgt(v1: t, v2: t) = (to_int(v2) <  to_int(v1))
+
+predicate sge(v1: t, v2: t) = (to_int(v2) <= to_int(v1))
+
+axiom positive_is_ge_zeros :
+  (forall x:t. (is_signed_positive(x) <-> sge(x, zeros)))
+
+logic add : t, t -> t
+
+axiom to_uint_add_bounded :
+  (forall v1:t. forall v2:t. (((tqtint(v1) + tqtint(v2)) <  65536) ->
+  (tqtint(add(v1, v2)) = (tqtint(v1) + tqtint(v2)))))
+
+logic sub : t, t -> t
+
+axiom to_uint_sub_bounded :
+  (forall v1:t. forall v2:t. (((0 <= (tqtint(v1) - tqtint(v2))) and
+  ((tqtint(v1) - tqtint(v2)) <  65536)) -> (tqtint(sub(v1,
+  v2)) = (tqtint(v1) - tqtint(v2)))))
+
+logic neg : t -> t
+
+axiom to_uint_neg : (forall v:t. (tqtint(neg(v)) = ((-tqtint(v)) % 65536)))
+
+logic mul : t, t -> t
+
+axiom to_uint_mul_bounded :
+  (forall v1:t. forall v2:t. (((tqtint(v1) * tqtint(v2)) <  65536) ->
+  (tqtint(mul(v1, v2)) = (tqtint(v1) * tqtint(v2)))))
+
+logic udiv : t, t -> t
+
+axiom to_uint_udiv :
+  (forall v1:t. forall v2:t. (tqtint(udiv(v1,
+  v2)) = (tqtint(v1) / tqtint(v2))))
+
+logic urem : t, t -> t
+
+axiom to_uint_urem :
+  (forall v1:t. forall v2:t. (tqtint(urem(v1,
+  v2)) = (tqtint(v1) % tqtint(v2))))
+
+logic lsr_bv : t, t -> t
+
+axiom lsr_bv_is_lsr :
+  (forall x:t. forall n:t. (lsr_bv(x, n) = lsr(x, tqtint(n))))
+
+axiom to_uint_lsr :
+  (forall v:t. forall n:t. (tqtint(lsr_bv(v,
+  n)) = (tqtint(v) / pow2(tqtint(n)))))
+
+logic asr_bv : t, t -> t
+
+axiom asr_bv_is_asr :
+  (forall x:t. forall n:t. (asr_bv(x, n) = asr(x, tqtint(n))))
+
+logic lsl_bv : t, t -> t
+
+axiom lsl_bv_is_lsl :
+  (forall x:t. forall n:t. (lsl_bv(x, n) = lsl(x, tqtint(n))))
+
+axiom to_uint_lsl :
+  (forall v:t. forall n:t. (tqtint(lsl_bv(v,
+  n)) = ((tqtint(v) * pow2(tqtint(n))) % 65536)))
+
+logic rotate_right_bv : t, t -> t
+
+logic rotate_left_bv : t, t -> t
+
+axiom rotate_left_bv_is_rotate_left :
+  (forall v:t. forall n:t. (rotate_left_bv(v, n) = rotate_left(v,
+  tqtint(n))))
+
+axiom rotate_right_bv_is_rotate_right :
+  (forall v:t. forall n:t. (rotate_right_bv(v, n) = rotate_right(v,
+  tqtint(n))))
+
+logic nth_bv : t, t -> bool
+
+axiom Nth_bv_is_nth :
+  (forall x:t. forall i:t. (nth(x, tqtint(i)) = nth_bv(x, i)))
+
+axiom Nth_bv_is_nth2 :
+  (forall x:t. forall i:int. (((0 <= i) and (i <  65536)) -> (nth_bv(x,
+  of_int(i)) = nth(x, i))))
+
+logic eq_sub_bv : t, t, t, t -> prop
+
+predicate eq_sub(a: t, b: t, i: int, n: int) =
+  (forall j:int. (((i <= j) and (j <  (i + n))) -> (nth(a, j) = nth(b, j))))
+
+axiom eq_sub_equiv :
+  (forall a:t. forall b:t. forall i:t. forall n:t. (eq_sub(a, b, tqtint(i),
+  tqtint(n)) <-> eq_sub_bv(a, b, i, n)))
+
+axiom Extensionality :
+  (forall x:t. forall y:t [eq_sub(x, y, 0, 16)]. (eq_sub(x, y, 0, 16) ->
+  (x = y)))
+
+type t__ref = { t__content : t
+}
+
+logic bool_eq : t, t -> bool
+
+axiom bool_eq_def :
+  (forall x:t. forall y:t [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
+logic bool_ne : t, t -> bool
+
+axiom bool_ne_def :
+  (forall x:t. forall y:t [bool_ne(x, y)]. (((not (x = y)) -> (bool_ne(x,
+  y) = true)) and ((x = y) -> (bool_ne(x, y) = false))))
+
+logic bool_lt : t, t -> bool
+
+axiom bool_lt_def :
+  (forall x:t. forall y:t [bool_lt(x, y)]. ((ult(x, y) -> (bool_lt(x,
+  y) = true)) and ((not ult(x, y)) -> (bool_lt(x, y) = false))))
+
+logic bool_le : t, t -> bool
+
+axiom bool_le_def :
+  (forall x:t. forall y:t [bool_le(x, y)]. ((ule(x, y) -> (bool_le(x,
+  y) = true)) and ((not ule(x, y)) -> (bool_le(x, y) = false))))
+
+logic bool_gt : t, t -> bool
+
+axiom bool_gt_def :
+  (forall x:t. forall y:t [bool_gt(x, y)]. ((ugt(x, y) -> (bool_gt(x,
+  y) = true)) and ((not ugt(x, y)) -> (bool_gt(x, y) = false))))
+
+logic bool_ge : t, t -> bool
+
+axiom bool_ge_def :
+  (forall x:t. forall y:t [bool_ge(x, y)]. ((uge(x, y) -> (bool_ge(x,
+  y) = true)) and ((not uge(x, y)) -> (bool_ge(x, y) = false))))
+
+logic power : t, int -> t
+
+axiom Power_01 : (forall x:t. (power(x, 0) = one))
+
+axiom Power_11 : (forall x:t. (power(x, 1) = x))
+
+axiom Power_s1 :
+  (forall x:t. forall n:int. ((0 <= n) -> (power(x, (n + 1)) = mul(x,
+  power(x, n)))))
+
+axiom Power_s_alt :
+  (forall x:t. forall n:int. ((0 <  n) -> (power(x, n) = mul(x, power(x,
+  (n - 1))))))
+
+axiom Power_sum1 :
+  (forall x:t. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
+  (power(x, (n + m)) = mul(power(x, n), power(x, m))))))
+
+axiom Power_mult :
+  (forall x:t. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
+  (power(x, (n * m)) = power(power(x, n), m)))))
+
+axiom Power_mult2 :
+  (forall x:t. forall y:t. forall n:int. ((0 <= n) -> (power(mul(x, y),
+  n) = mul(power(x, n), power(y, n)))))
+
+logic bv_min : t, t -> t
+
+axiom bv_min_def :
+  (forall x:t. forall y:t [bv_min(x, y)]. ((ule(x, y) -> (bv_min(x,
+  y) = x)) and ((not ule(x, y)) -> (bv_min(x, y) = y))))
+
+logic bv_max : t, t -> t
+
+axiom bv_max_def :
+  (forall x:t. forall y:t [bv_max(x, y)]. ((ule(x, y) -> (bv_max(x,
+  y) = y)) and ((not ule(x, y)) -> (bv_max(x, y) = x))))
+
+logic min : int, int -> int
+
+axiom min_def :
+  (forall x:int. forall y:int [min(x, y)]. (((x <= y) -> (min(x, y) = x)) and
+  ((not (x <= y)) -> (min(x, y) = y))))
+
+logic max : int, int -> int
+
+axiom max_def :
+  (forall x:int. forall y:int [max(x, y)]. (((x <= y) -> (max(x, y) = y)) and
+  ((not (x <= y)) -> (max(x, y) = x))))
+
+axiom Min_r : (forall x:int. forall y:int. ((y <= x) -> (min(x, y) = y)))
+
+axiom Max_l : (forall x:int. forall y:int. ((y <= x) -> (max(x, y) = x)))
+
+axiom Min_comm : (forall x:int. forall y:int. (min(x, y) = min(y, x)))
+
+axiom Max_comm : (forall x:int. forall y:int. (max(x, y) = max(y, x)))
+
+axiom Min_assoc :
+  (forall x:int. forall y:int. forall z:int. (min(min(x, y), z) = min(x,
+  min(y, z))))
+
+axiom Max_assoc :
+  (forall x:int. forall y:int. forall z:int. (max(max(x, y), z) = max(x,
+  max(y, z))))
+
+axiom bv_min_to_uint :
+  (forall x:t. forall y:t. (tqtint(bv_min(x, y)) = min(tqtint(x),
+  tqtint(y))))
+
+axiom bv_max_to_uint :
+  (forall x:t. forall y:t. (tqtint(bv_max(x, y)) = max(tqtint(x),
+  tqtint(y))))
+
+type t1
+
+logic tqtint1 : t1 -> int
+
+axiom tqtaxiom1 :
+  (forall i:t1. ((0 <= tqtint1(i)) and (tqtint1(i) <= 4294967295)))
+
+logic nth1 : t1, int -> bool
+
+axiom nth_out_of_bound1 :
+  (forall x:t1. forall n:int. (((n <  0) or (32 <= n)) -> (nth1(x,
+  n) = false)))
+
+logic zeros1 : t1
+
+axiom Nth_zeros1 : (forall n:int. (nth1(zeros1, n) = false))
+
+logic one1 : t1
+
+logic ones1 : t1
+
+axiom Nth_ones1 :
+  (forall n:int. (((0 <= n) and (n <  32)) -> (nth1(ones1, n) = true)))
+
+logic bw_and1 : t1, t1 -> t1
+
+axiom Nth_bw_and1 :
+  (forall v1:t1. forall v2:t1. forall n:int. (((0 <= n) and (n <  32)) ->
+  (nth1(bw_and1(v1, v2), n) = match_bool(nth1(v1, n), nth1(v2, n), false))))
+
+logic bw_or1 : t1, t1 -> t1
+
+axiom Nth_bw_or1 :
+  (forall v1:t1. forall v2:t1. forall n:int. (((0 <= n) and (n <  32)) ->
+  (nth1(bw_or1(v1, v2), n) = match_bool(nth1(v1, n), true, nth1(v2, n)))))
+
+logic bw_xor1 : t1, t1 -> t1
+
+axiom Nth_bw_xor1 :
+  (forall v1:t1. forall v2:t1. forall n:int. (((0 <= n) and (n <  32)) ->
+  (nth1(bw_xor1(v1, v2), n) = xorb(nth1(v1, n), nth1(v2, n)))))
+
+logic bw_not1 : t1 -> t1
+
+axiom Nth_bw_not1 :
+  (forall v:t1. forall n:int. (((0 <= n) and (n <  32)) -> (nth1(bw_not1(v),
+  n) = match_bool(nth1(v, n), false, true))))
+
+logic lsr1 : t1, int -> t1
+
+axiom Lsr_nth_low1 :
+  (forall b:t1. forall n:int. forall s:int. ((0 <= s) -> ((0 <= n) ->
+  (((n + s) <  32) -> (nth1(lsr1(b, s), n) = nth1(b, (n + s)))))))
+
+axiom Lsr_nth_high1 :
+  (forall b:t1. forall n:int. forall s:int. ((0 <= s) -> ((0 <= n) ->
+  ((32 <= (n + s)) -> (nth1(lsr1(b, s), n) = false)))))
+
+axiom lsr_zeros1 : (forall x:t1. (lsr1(x, 0) = x))
+
+logic asr1 : t1, int -> t1
+
+axiom Asr_nth_low1 :
+  (forall b:t1. forall n:int. forall s:int. ((0 <= s) -> (((0 <= n) and
+  (n <  32)) -> (((n + s) <  32) -> (nth1(asr1(b, s), n) = nth1(b,
+  (n + s)))))))
+
+axiom Asr_nth_high1 :
+  (forall b:t1. forall n:int. forall s:int. ((0 <= s) -> (((0 <= n) and
+  (n <  32)) -> ((32 <= (n + s)) -> (nth1(asr1(b, s), n) = nth1(b,
+  (32 - 1)))))))
+
+axiom asr_zeros1 : (forall x:t1. (asr1(x, 0) = x))
+
+logic lsl1 : t1, int -> t1
+
+axiom Lsl_nth_high1 :
+  (forall b:t1. forall n:int. forall s:int. (((0 <= s) and ((s <= n) and
+  (n <  32))) -> (nth1(lsl1(b, s), n) = nth1(b, (n - s)))))
+
+axiom Lsl_nth_low1 :
+  (forall b:t1. forall n:int. forall s:int. (((0 <= n) and (n <  s)) ->
+  (nth1(lsl1(b, s), n) = false)))
+
+axiom lsl_zeros1 : (forall x:t1. (lsl1(x, 0) = x))
+
+logic rotate_right1 : t1, int -> t1
+
+axiom Nth_rotate_right1 :
+  (forall v:t1. forall n:int. forall i:int. (((0 <= i) and (i <  32)) ->
+  ((0 <= n) -> (nth1(rotate_right1(v, n), i) = nth1(v, ((i + n) % 32))))))
+
+logic rotate_left1 : t1, int -> t1
+
+axiom Nth_rotate_left1 :
+  (forall v:t1. forall n:int. forall i:int. (((0 <= i) and (i <  32)) ->
+  ((0 <= n) -> (nth1(rotate_left1(v, n), i) = nth1(v, ((i - n) % 32))))))
+
+logic is_signed_positive1 : t1 -> prop
+
+logic of_int1 : int -> t1
+
+logic to_int1 : t1 -> int
+
+axiom to_int_def1 :
+  (forall x:t1 [to_int1(x)]. ((is_signed_positive1(x) ->
+  (to_int1(x) = tqtint1(x))) and ((not is_signed_positive1(x)) ->
+  (to_int1(x) = (-(4294967296 - tqtint1(x)))))))
+
+axiom to_uint_extensionality1 :
+  (forall v:t1. forall vqt:t1. ((tqtint1(v) = tqtint1(vqt)) -> (v = vqt)))
+
+axiom to_int_extensionality1 :
+  (forall v:t1. forall vqt:t1. ((to_int1(v) = to_int1(vqt)) -> (v = vqt)))
+
+predicate uint_in_range1(i: int) = ((0 <= i) and (i <= 4294967295))
+
+axiom to_uint_bounds1 :
+  (forall v:t1. ((0 <= tqtint1(v)) and (tqtint1(v) <  4294967296)))
+
+axiom to_uint_of_int1 :
+  (forall i:int. (((0 <= i) and (i <  4294967296)) ->
+  (tqtint1(of_int1(i)) = i)))
+
+logic size_bv1 : t1
+
+axiom to_uint_size_bv1 : (tqtint1(size_bv1) = 32)
+
+axiom to_uint_zeros1 : (tqtint1(zeros1) = 0)
+
+axiom to_uint_one1 : (tqtint1(one1) = 1)
+
+axiom to_uint_ones1 : (tqtint1(ones1) = 4294967295)
+
+predicate ult1(x: t1, y: t1) = (tqtint1(x) <  tqtint1(y))
+
+predicate ule1(x: t1, y: t1) = (tqtint1(x) <= tqtint1(y))
+
+predicate ugt1(x: t1, y: t1) = (tqtint1(y) <  tqtint1(x))
+
+predicate uge1(x: t1, y: t1) = (tqtint1(y) <= tqtint1(x))
+
+predicate slt1(v1: t1, v2: t1) = (to_int1(v1) <  to_int1(v2))
+
+predicate sle1(v1: t1, v2: t1) = (to_int1(v1) <= to_int1(v2))
+
+predicate sgt1(v1: t1, v2: t1) = (to_int1(v2) <  to_int1(v1))
+
+predicate sge1(v1: t1, v2: t1) = (to_int1(v2) <= to_int1(v1))
+
+axiom positive_is_ge_zeros1 :
+  (forall x:t1. (is_signed_positive1(x) <-> sge1(x, zeros1)))
+
+logic add1 : t1, t1 -> t1
+
+axiom to_uint_add_bounded1 :
+  (forall v1:t1. forall v2:t1.
+  (((tqtint1(v1) + tqtint1(v2)) <  4294967296) -> (tqtint1(add1(v1,
+  v2)) = (tqtint1(v1) + tqtint1(v2)))))
+
+logic sub1 : t1, t1 -> t1
+
+axiom to_uint_sub_bounded1 :
+  (forall v1:t1. forall v2:t1. (((0 <= (tqtint1(v1) - tqtint1(v2))) and
+  ((tqtint1(v1) - tqtint1(v2)) <  4294967296)) -> (tqtint1(sub1(v1,
+  v2)) = (tqtint1(v1) - tqtint1(v2)))))
+
+logic neg1 : t1 -> t1
+
+axiom to_uint_neg1 :
+  (forall v:t1. (tqtint1(neg1(v)) = ((-tqtint1(v)) % 4294967296)))
+
+logic mul1 : t1, t1 -> t1
+
+axiom to_uint_mul_bounded1 :
+  (forall v1:t1. forall v2:t1.
+  (((tqtint1(v1) * tqtint1(v2)) <  4294967296) -> (tqtint1(mul1(v1,
+  v2)) = (tqtint1(v1) * tqtint1(v2)))))
+
+logic udiv1 : t1, t1 -> t1
+
+axiom to_uint_udiv1 :
+  (forall v1:t1. forall v2:t1. (tqtint1(udiv1(v1,
+  v2)) = (tqtint1(v1) / tqtint1(v2))))
+
+logic urem1 : t1, t1 -> t1
+
+axiom to_uint_urem1 :
+  (forall v1:t1. forall v2:t1. (tqtint1(urem1(v1,
+  v2)) = (tqtint1(v1) % tqtint1(v2))))
+
+logic lsr_bv1 : t1, t1 -> t1
+
+axiom lsr_bv_is_lsr1 :
+  (forall x:t1. forall n:t1. (lsr_bv1(x, n) = lsr1(x, tqtint1(n))))
+
+axiom to_uint_lsr1 :
+  (forall v:t1. forall n:t1. (tqtint1(lsr_bv1(v,
+  n)) = (tqtint1(v) / pow2(tqtint1(n)))))
+
+logic asr_bv1 : t1, t1 -> t1
+
+axiom asr_bv_is_asr1 :
+  (forall x:t1. forall n:t1. (asr_bv1(x, n) = asr1(x, tqtint1(n))))
+
+logic lsl_bv1 : t1, t1 -> t1
+
+axiom lsl_bv_is_lsl1 :
+  (forall x:t1. forall n:t1. (lsl_bv1(x, n) = lsl1(x, tqtint1(n))))
+
+axiom to_uint_lsl1 :
+  (forall v:t1. forall n:t1. (tqtint1(lsl_bv1(v,
+  n)) = ((tqtint1(v) * pow2(tqtint1(n))) % 4294967296)))
+
+logic rotate_right_bv1 : t1, t1 -> t1
+
+logic rotate_left_bv1 : t1, t1 -> t1
+
+axiom rotate_left_bv_is_rotate_left1 :
+  (forall v:t1. forall n:t1. (rotate_left_bv1(v, n) = rotate_left1(v,
+  tqtint1(n))))
+
+axiom rotate_right_bv_is_rotate_right1 :
+  (forall v:t1. forall n:t1. (rotate_right_bv1(v, n) = rotate_right1(v,
+  tqtint1(n))))
+
+logic nth_bv1 : t1, t1 -> bool
+
+axiom Nth_bv_is_nth1 :
+  (forall x:t1. forall i:t1. (nth1(x, tqtint1(i)) = nth_bv1(x, i)))
+
+axiom Nth_bv_is_nth21 :
+  (forall x:t1. forall i:int. (((0 <= i) and (i <  4294967296)) ->
+  (nth_bv1(x, of_int1(i)) = nth1(x, i))))
+
+logic eq_sub_bv1 : t1, t1, t1, t1 -> prop
+
+predicate eq_sub1(a: t1, b: t1, i: int, n: int) =
+  (forall j:int. (((i <= j) and (j <  (i + n))) -> (nth1(a, j) = nth1(b,
+  j))))
+
+axiom eq_sub_equiv1 :
+  (forall a:t1. forall b:t1. forall i:t1. forall n:t1. (eq_sub1(a, b,
+  tqtint1(i), tqtint1(n)) <-> eq_sub_bv1(a, b, i, n)))
+
+axiom Extensionality1 :
+  (forall x:t1. forall y:t1 [eq_sub1(x, y, 0, 32)]. (eq_sub1(x, y, 0, 32) ->
+  (x = y)))
+
+type t__ref1 = { t__content1 : t1
+}
+
+logic bool_eq1 : t1, t1 -> bool
+
+axiom bool_eq_def1 :
+  (forall x:t1. forall y:t1 [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
+
+logic bool_ne1 : t1, t1 -> bool
+
+axiom bool_ne_def1 :
+  (forall x:t1. forall y:t1 [bool_ne1(x, y)]. (((not (x = y)) -> (bool_ne1(x,
+  y) = true)) and ((x = y) -> (bool_ne1(x, y) = false))))
+
+logic bool_lt1 : t1, t1 -> bool
+
+axiom bool_lt_def1 :
+  (forall x:t1. forall y:t1 [bool_lt1(x, y)]. ((ult1(x, y) -> (bool_lt1(x,
+  y) = true)) and ((not ult1(x, y)) -> (bool_lt1(x, y) = false))))
+
+logic bool_le1 : t1, t1 -> bool
+
+axiom bool_le_def1 :
+  (forall x:t1. forall y:t1 [bool_le1(x, y)]. ((ule1(x, y) -> (bool_le1(x,
+  y) = true)) and ((not ule1(x, y)) -> (bool_le1(x, y) = false))))
+
+logic bool_gt1 : t1, t1 -> bool
+
+axiom bool_gt_def1 :
+  (forall x:t1. forall y:t1 [bool_gt1(x, y)]. ((ugt1(x, y) -> (bool_gt1(x,
+  y) = true)) and ((not ugt1(x, y)) -> (bool_gt1(x, y) = false))))
+
+logic bool_ge1 : t1, t1 -> bool
+
+axiom bool_ge_def1 :
+  (forall x:t1. forall y:t1 [bool_ge1(x, y)]. ((uge1(x, y) -> (bool_ge1(x,
+  y) = true)) and ((not uge1(x, y)) -> (bool_ge1(x, y) = false))))
+
+logic power1 : t1, int -> t1
+
+axiom Power_02 : (forall x:t1. (power1(x, 0) = one1))
+
+axiom Power_12 : (forall x:t1. (power1(x, 1) = x))
+
+axiom Power_s2 :
+  (forall x:t1. forall n:int. ((0 <= n) -> (power1(x, (n + 1)) = mul1(x,
+  power1(x, n)))))
+
+axiom Power_s_alt1 :
+  (forall x:t1. forall n:int. ((0 <  n) -> (power1(x, n) = mul1(x, power1(x,
+  (n - 1))))))
+
+axiom Power_sum2 :
+  (forall x:t1. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
+  (power1(x, (n + m)) = mul1(power1(x, n), power1(x, m))))))
+
+axiom Power_mult1 :
+  (forall x:t1. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
+  (power1(x, (n * m)) = power1(power1(x, n), m)))))
+
+axiom Power_mult21 :
+  (forall x:t1. forall y:t1. forall n:int. ((0 <= n) -> (power1(mul1(x, y),
+  n) = mul1(power1(x, n), power1(y, n)))))
+
+logic bv_min1 : t1, t1 -> t1
+
+axiom bv_min_def1 :
+  (forall x:t1. forall y:t1 [bv_min1(x, y)]. ((ule1(x, y) -> (bv_min1(x,
+  y) = x)) and ((not ule1(x, y)) -> (bv_min1(x, y) = y))))
+
+logic bv_max1 : t1, t1 -> t1
+
+axiom bv_max_def1 :
+  (forall x:t1. forall y:t1 [bv_max1(x, y)]. ((ule1(x, y) -> (bv_max1(x,
+  y) = y)) and ((not ule1(x, y)) -> (bv_max1(x, y) = x))))
+
+axiom bv_min_to_uint1 :
+  (forall x:t1. forall y:t1. (tqtint1(bv_min1(x, y)) = min(tqtint1(x),
+  tqtint1(y))))
+
+axiom bv_max_to_uint1 :
+  (forall x:t1. forall y:t1. (tqtint1(bv_max1(x, y)) = max(tqtint1(x),
+  tqtint1(y))))
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic to_int2 : bool -> int
+
+axiom to_int_def2 :
+  (forall b:bool [to_int2(b)]. (((b = true) -> (to_int2(b) = 1)) and
+  ((not (b = true)) -> (to_int2(b) = 0))))
+
+logic of_int2 : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int2(i)]. (((i = 0) -> (of_int2(i) = false)) and
+  ((not (i = 0)) -> (of_int2(i) = true))))
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type integer
+
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq3 : int, int -> bool
+
+logic bool_ne2 : int, int -> bool
+
+logic bool_lt2 : int, int -> bool
+
+logic bool_le2 : int, int -> bool
+
+logic bool_gt2 : int, int -> bool
+
+logic bool_ge2 : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq3(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne2(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt2(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le2(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt2(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge2(x, y) = true) <-> (y <= x))))
+
+logic bool_eq4 : int, int -> bool
+
+axiom bool_eq_def3 :
+  (forall x:int. forall y:int [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq : integer, integer -> bool
+
+logic dummy : integer
+
+type integer__ref = { integer__content : integer
+}
+
+function integer__ref___projection(a: integer__ref) : integer =
+  (a).integer__content
+
+type character
+
+predicate in_range2(x: int) = ((0 <= x) and (x <= 255))
+
+logic bool_eq5 : int, int -> bool
+
+axiom bool_eq_def4 :
+  (forall x:int. forall y:int [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+
+logic user_eq1 : character, character -> bool
+
+logic dummy1 : character
+
+type character__ref = { character__content : character
+}
+
+function character__ref___projection(a: character__ref) : character =
+  (a).character__content
+
+logic to_rep : character -> int
+
+logic of_rep : int -> character
+
+axiom inversion_axiom :
+  (forall x:character [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:character [to_rep(x)]. in_range2(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range2(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type map__ref = { map__content : (int,character) farray
+}
+
+logic slide : (int,character) farray, int, int -> (int,character) farray
+
+axiom slide_eq :
+  (forall a:(int,character) farray.
+  (forall first:int [slide(a, first, first)]. (slide(a, first, first) = a)))
+
+axiom slide_def :
+  (forall a:(int,character) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
+  new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat : (int,character) farray, int, int, (int,character) farray, int,
+  int -> (int,character) farray
+
+axiom concat_def :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton : character, int -> (int,character) farray
+
+axiom singleton_def :
+  (forall v:character.
+  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
+
+logic bool_eq6 : (int,character) farray, int, int, (int,character) farray,
+  int, int -> bool
+
+axiom bool_eq_def5 :
+  (forall a:(int,character) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,character) farray. forall b__first:int. forall b__last:int
+  [bool_eq6(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
+  (temp___idx_78 <= a__last)) and
+  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
+  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
+  (temp___idx_78 <= a__last)) ->
+  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (bool_eq6(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq6(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
+  (temp___idx_78 <= a__last)) ->
+  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
+
+logic compare : (int,character) farray, int, int, (int,character) farray,
+  int, int -> int
+
+axiom compare_def_eq :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq6(a,
+  a_first, a_last, b, b_first, b_last) = true))))
+
+axiom compare_def_lt :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
+  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
+  ((bool_eq6(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
+  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
+
+axiom compare_def_gt :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
+  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
+  ((bool_eq6(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
+  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+
+type t2
+
+logic tqtint2 : t2 -> int
+
+axiom tqtaxiom2 : (forall i:t2. ((0 <= tqtint2(i)) and (tqtint2(i) <= 255)))
+
+logic nth2 : t2, int -> bool
+
+axiom nth_out_of_bound2 :
+  (forall x:t2. forall n:int. (((n <  0) or (8 <= n)) -> (nth2(x,
+  n) = false)))
+
+logic zeros2 : t2
+
+axiom Nth_zeros2 : (forall n:int. (nth2(zeros2, n) = false))
+
+logic one2 : t2
+
+logic ones2 : t2
+
+axiom Nth_ones2 :
+  (forall n:int. (((0 <= n) and (n <  8)) -> (nth2(ones2, n) = true)))
+
+logic bw_and2 : t2, t2 -> t2
+
+axiom Nth_bw_and2 :
+  (forall v1:t2. forall v2:t2. forall n:int. (((0 <= n) and (n <  8)) ->
+  (nth2(bw_and2(v1, v2), n) = match_bool(nth2(v1, n), nth2(v2, n), false))))
+
+logic bw_or2 : t2, t2 -> t2
+
+axiom Nth_bw_or2 :
+  (forall v1:t2. forall v2:t2. forall n:int. (((0 <= n) and (n <  8)) ->
+  (nth2(bw_or2(v1, v2), n) = match_bool(nth2(v1, n), true, nth2(v2, n)))))
+
+logic bw_xor2 : t2, t2 -> t2
+
+axiom Nth_bw_xor2 :
+  (forall v1:t2. forall v2:t2. forall n:int. (((0 <= n) and (n <  8)) ->
+  (nth2(bw_xor2(v1, v2), n) = xorb(nth2(v1, n), nth2(v2, n)))))
+
+logic bw_not2 : t2 -> t2
+
+axiom Nth_bw_not2 :
+  (forall v:t2. forall n:int. (((0 <= n) and (n <  8)) -> (nth2(bw_not2(v),
+  n) = match_bool(nth2(v, n), false, true))))
+
+logic lsr2 : t2, int -> t2
+
+axiom Lsr_nth_low2 :
+  (forall b:t2. forall n:int. forall s:int. ((0 <= s) -> ((0 <= n) ->
+  (((n + s) <  8) -> (nth2(lsr2(b, s), n) = nth2(b, (n + s)))))))
+
+axiom Lsr_nth_high2 :
+  (forall b:t2. forall n:int. forall s:int. ((0 <= s) -> ((0 <= n) ->
+  ((8 <= (n + s)) -> (nth2(lsr2(b, s), n) = false)))))
+
+axiom lsr_zeros2 : (forall x:t2. (lsr2(x, 0) = x))
+
+logic asr2 : t2, int -> t2
+
+axiom Asr_nth_low2 :
+  (forall b:t2. forall n:int. forall s:int. ((0 <= s) -> (((0 <= n) and
+  (n <  8)) -> (((n + s) <  8) -> (nth2(asr2(b, s), n) = nth2(b,
+  (n + s)))))))
+
+axiom Asr_nth_high2 :
+  (forall b:t2. forall n:int. forall s:int. ((0 <= s) -> (((0 <= n) and
+  (n <  8)) -> ((8 <= (n + s)) -> (nth2(asr2(b, s), n) = nth2(b,
+  (8 - 1)))))))
+
+axiom asr_zeros2 : (forall x:t2. (asr2(x, 0) = x))
+
+logic lsl2 : t2, int -> t2
+
+axiom Lsl_nth_high2 :
+  (forall b:t2. forall n:int. forall s:int. (((0 <= s) and ((s <= n) and
+  (n <  8))) -> (nth2(lsl2(b, s), n) = nth2(b, (n - s)))))
+
+axiom Lsl_nth_low2 :
+  (forall b:t2. forall n:int. forall s:int. (((0 <= n) and (n <  s)) ->
+  (nth2(lsl2(b, s), n) = false)))
+
+axiom lsl_zeros2 : (forall x:t2. (lsl2(x, 0) = x))
+
+logic rotate_right2 : t2, int -> t2
+
+axiom Nth_rotate_right2 :
+  (forall v:t2. forall n:int. forall i:int. (((0 <= i) and (i <  8)) ->
+  ((0 <= n) -> (nth2(rotate_right2(v, n), i) = nth2(v, ((i + n) % 8))))))
+
+logic rotate_left2 : t2, int -> t2
+
+axiom Nth_rotate_left2 :
+  (forall v:t2. forall n:int. forall i:int. (((0 <= i) and (i <  8)) ->
+  ((0 <= n) -> (nth2(rotate_left2(v, n), i) = nth2(v, ((i - n) % 8))))))
+
+logic is_signed_positive2 : t2 -> prop
+
+logic of_int3 : int -> t2
+
+logic to_int3 : t2 -> int
+
+axiom to_int_def3 :
+  (forall x:t2 [to_int3(x)]. ((is_signed_positive2(x) ->
+  (to_int3(x) = tqtint2(x))) and ((not is_signed_positive2(x)) ->
+  (to_int3(x) = (-(256 - tqtint2(x)))))))
+
+axiom to_uint_extensionality2 :
+  (forall v:t2. forall vqt:t2. ((tqtint2(v) = tqtint2(vqt)) -> (v = vqt)))
+
+axiom to_int_extensionality2 :
+  (forall v:t2. forall vqt:t2. ((to_int3(v) = to_int3(vqt)) -> (v = vqt)))
+
+predicate uint_in_range2(i: int) = ((0 <= i) and (i <= 255))
+
+axiom to_uint_bounds2 :
+  (forall v:t2. ((0 <= tqtint2(v)) and (tqtint2(v) <  256)))
+
+axiom to_uint_of_int2 :
+  (forall i:int. (((0 <= i) and (i <  256)) -> (tqtint2(of_int3(i)) = i)))
+
+logic size_bv2 : t2
+
+axiom to_uint_size_bv2 : (tqtint2(size_bv2) = 8)
+
+axiom to_uint_zeros2 : (tqtint2(zeros2) = 0)
+
+axiom to_uint_one2 : (tqtint2(one2) = 1)
+
+axiom to_uint_ones2 : (tqtint2(ones2) = 255)
+
+predicate ult2(x: t2, y: t2) = (tqtint2(x) <  tqtint2(y))
+
+predicate ule2(x: t2, y: t2) = (tqtint2(x) <= tqtint2(y))
+
+predicate ugt2(x: t2, y: t2) = (tqtint2(y) <  tqtint2(x))
+
+predicate uge2(x: t2, y: t2) = (tqtint2(y) <= tqtint2(x))
+
+predicate slt2(v1: t2, v2: t2) = (to_int3(v1) <  to_int3(v2))
+
+predicate sle2(v1: t2, v2: t2) = (to_int3(v1) <= to_int3(v2))
+
+predicate sgt2(v1: t2, v2: t2) = (to_int3(v2) <  to_int3(v1))
+
+predicate sge2(v1: t2, v2: t2) = (to_int3(v2) <= to_int3(v1))
+
+axiom positive_is_ge_zeros2 :
+  (forall x:t2. (is_signed_positive2(x) <-> sge2(x, zeros2)))
+
+logic add2 : t2, t2 -> t2
+
+axiom to_uint_add_bounded2 :
+  (forall v1:t2. forall v2:t2. (((tqtint2(v1) + tqtint2(v2)) <  256) ->
+  (tqtint2(add2(v1, v2)) = (tqtint2(v1) + tqtint2(v2)))))
+
+logic sub2 : t2, t2 -> t2
+
+axiom to_uint_sub_bounded2 :
+  (forall v1:t2. forall v2:t2. (((0 <= (tqtint2(v1) - tqtint2(v2))) and
+  ((tqtint2(v1) - tqtint2(v2)) <  256)) -> (tqtint2(sub2(v1,
+  v2)) = (tqtint2(v1) - tqtint2(v2)))))
+
+logic neg2 : t2 -> t2
+
+axiom to_uint_neg2 :
+  (forall v:t2. (tqtint2(neg2(v)) = ((-tqtint2(v)) % 256)))
+
+logic mul2 : t2, t2 -> t2
+
+axiom to_uint_mul_bounded2 :
+  (forall v1:t2. forall v2:t2. (((tqtint2(v1) * tqtint2(v2)) <  256) ->
+  (tqtint2(mul2(v1, v2)) = (tqtint2(v1) * tqtint2(v2)))))
+
+logic udiv2 : t2, t2 -> t2
+
+axiom to_uint_udiv2 :
+  (forall v1:t2. forall v2:t2. (tqtint2(udiv2(v1,
+  v2)) = (tqtint2(v1) / tqtint2(v2))))
+
+logic urem2 : t2, t2 -> t2
+
+axiom to_uint_urem2 :
+  (forall v1:t2. forall v2:t2. (tqtint2(urem2(v1,
+  v2)) = (tqtint2(v1) % tqtint2(v2))))
+
+logic lsr_bv2 : t2, t2 -> t2
+
+axiom lsr_bv_is_lsr2 :
+  (forall x:t2. forall n:t2. (lsr_bv2(x, n) = lsr2(x, tqtint2(n))))
+
+axiom to_uint_lsr2 :
+  (forall v:t2. forall n:t2. (tqtint2(lsr_bv2(v,
+  n)) = (tqtint2(v) / pow2(tqtint2(n)))))
+
+logic asr_bv2 : t2, t2 -> t2
+
+axiom asr_bv_is_asr2 :
+  (forall x:t2. forall n:t2. (asr_bv2(x, n) = asr2(x, tqtint2(n))))
+
+logic lsl_bv2 : t2, t2 -> t2
+
+axiom lsl_bv_is_lsl2 :
+  (forall x:t2. forall n:t2. (lsl_bv2(x, n) = lsl2(x, tqtint2(n))))
+
+axiom to_uint_lsl2 :
+  (forall v:t2. forall n:t2. (tqtint2(lsl_bv2(v,
+  n)) = ((tqtint2(v) * pow2(tqtint2(n))) % 256)))
+
+logic rotate_right_bv2 : t2, t2 -> t2
+
+logic rotate_left_bv2 : t2, t2 -> t2
+
+axiom rotate_left_bv_is_rotate_left2 :
+  (forall v:t2. forall n:t2. (rotate_left_bv2(v, n) = rotate_left2(v,
+  tqtint2(n))))
+
+axiom rotate_right_bv_is_rotate_right2 :
+  (forall v:t2. forall n:t2. (rotate_right_bv2(v, n) = rotate_right2(v,
+  tqtint2(n))))
+
+logic nth_bv2 : t2, t2 -> bool
+
+axiom Nth_bv_is_nth3 :
+  (forall x:t2. forall i:t2. (nth2(x, tqtint2(i)) = nth_bv2(x, i)))
+
+axiom Nth_bv_is_nth22 :
+  (forall x:t2. forall i:int. (((0 <= i) and (i <  256)) -> (nth_bv2(x,
+  of_int3(i)) = nth2(x, i))))
+
+logic eq_sub_bv2 : t2, t2, t2, t2 -> prop
+
+predicate eq_sub2(a: t2, b: t2, i: int, n: int) =
+  (forall j:int. (((i <= j) and (j <  (i + n))) -> (nth2(a, j) = nth2(b,
+  j))))
+
+axiom eq_sub_equiv2 :
+  (forall a:t2. forall b:t2. forall i:t2. forall n:t2. (eq_sub2(a, b,
+  tqtint2(i), tqtint2(n)) <-> eq_sub_bv2(a, b, i, n)))
+
+axiom Extensionality2 :
+  (forall x:t2. forall y:t2 [eq_sub2(x, y, 0, 8)]. (eq_sub2(x, y, 0, 8) ->
+  (x = y)))
+
+type t__ref2 = { t__content2 : t2
+}
+
+logic bool_eq7 : t2, t2 -> bool
+
+axiom bool_eq_def6 :
+  (forall x:t2. forall y:t2 [bool_eq7(x, y)]. (((x = y) -> (bool_eq7(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq7(x, y) = false))))
+
+logic bool_ne3 : t2, t2 -> bool
+
+axiom bool_ne_def2 :
+  (forall x:t2. forall y:t2 [bool_ne3(x, y)]. (((not (x = y)) -> (bool_ne3(x,
+  y) = true)) and ((x = y) -> (bool_ne3(x, y) = false))))
+
+logic bool_lt3 : t2, t2 -> bool
+
+axiom bool_lt_def2 :
+  (forall x:t2. forall y:t2 [bool_lt3(x, y)]. ((ult2(x, y) -> (bool_lt3(x,
+  y) = true)) and ((not ult2(x, y)) -> (bool_lt3(x, y) = false))))
+
+logic bool_le3 : t2, t2 -> bool
+
+axiom bool_le_def2 :
+  (forall x:t2. forall y:t2 [bool_le3(x, y)]. ((ule2(x, y) -> (bool_le3(x,
+  y) = true)) and ((not ule2(x, y)) -> (bool_le3(x, y) = false))))
+
+logic bool_gt3 : t2, t2 -> bool
+
+axiom bool_gt_def2 :
+  (forall x:t2. forall y:t2 [bool_gt3(x, y)]. ((ugt2(x, y) -> (bool_gt3(x,
+  y) = true)) and ((not ugt2(x, y)) -> (bool_gt3(x, y) = false))))
+
+logic bool_ge3 : t2, t2 -> bool
+
+axiom bool_ge_def2 :
+  (forall x:t2. forall y:t2 [bool_ge3(x, y)]. ((uge2(x, y) -> (bool_ge3(x,
+  y) = true)) and ((not uge2(x, y)) -> (bool_ge3(x, y) = false))))
+
+logic power2 : t2, int -> t2
+
+axiom Power_03 : (forall x:t2. (power2(x, 0) = one2))
+
+axiom Power_13 : (forall x:t2. (power2(x, 1) = x))
+
+axiom Power_s3 :
+  (forall x:t2. forall n:int. ((0 <= n) -> (power2(x, (n + 1)) = mul2(x,
+  power2(x, n)))))
+
+axiom Power_s_alt2 :
+  (forall x:t2. forall n:int. ((0 <  n) -> (power2(x, n) = mul2(x, power2(x,
+  (n - 1))))))
+
+axiom Power_sum3 :
+  (forall x:t2. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
+  (power2(x, (n + m)) = mul2(power2(x, n), power2(x, m))))))
+
+axiom Power_mult3 :
+  (forall x:t2. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
+  (power2(x, (n * m)) = power2(power2(x, n), m)))))
+
+axiom Power_mult22 :
+  (forall x:t2. forall y:t2. forall n:int. ((0 <= n) -> (power2(mul2(x, y),
+  n) = mul2(power2(x, n), power2(y, n)))))
+
+logic bv_min2 : t2, t2 -> t2
+
+axiom bv_min_def2 :
+  (forall x:t2. forall y:t2 [bv_min2(x, y)]. ((ule2(x, y) -> (bv_min2(x,
+  y) = x)) and ((not ule2(x, y)) -> (bv_min2(x, y) = y))))
+
+logic bv_max2 : t2, t2 -> t2
+
+axiom bv_max_def2 :
+  (forall x:t2. forall y:t2 [bv_max2(x, y)]. ((ule2(x, y) -> (bv_max2(x,
+  y) = y)) and ((not ule2(x, y)) -> (bv_max2(x, y) = x))))
+
+axiom bv_min_to_uint2 :
+  (forall x:t2. forall y:t2. (tqtint2(bv_min2(x, y)) = min(tqtint2(x),
+  tqtint2(y))))
+
+axiom bv_max_to_uint2 :
+  (forall x:t2. forall y:t2. (tqtint2(bv_max2(x, y)) = max(tqtint2(x),
+  tqtint2(y))))
+
+type unsigned8
+
+logic attr__ATTRIBUTE_MODULUS : t2
+
+logic bool_eq8 : t2, t2 -> bool
+
+axiom bool_eq_def7 :
+  (forall x:t2. forall y:t2 [bool_eq8(x, y)]. (((x = y) -> (bool_eq8(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq8(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE3 : t2 -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> t2
+
+logic user_eq2 : unsigned8, unsigned8 -> bool
+
+logic dummy2 : unsigned8
+
+type unsigned8__ref = { unsigned8__content : unsigned8
+}
+
+function unsigned8__ref___projection(a: unsigned8__ref) : unsigned8 =
+  (a).unsigned8__content
+
+type unsigned16
+
+logic attr__ATTRIBUTE_MODULUS1 : t
+
+logic bool_eq9 : t, t -> bool
+
+axiom bool_eq_def8 :
+  (forall x:t. forall y:t [bool_eq9(x, y)]. (((x = y) -> (bool_eq9(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq9(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE4 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> t
+
+logic user_eq3 : unsigned16, unsigned16 -> bool
+
+logic dummy3 : unsigned16
+
+type unsigned16__ref = { unsigned16__content : unsigned16
+}
+
+function unsigned16__ref___projection(a: unsigned16__ref) : unsigned16 =
+  (a).unsigned16__content
+
+logic to_rep1 : unsigned16 -> t
+
+logic of_rep1 : t -> unsigned16
+
+axiom inversion_axiom1 :
+  (forall x:unsigned16 [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : true
+
+axiom coerce_axiom1 :
+  (forall x:t [to_rep1(of_rep1(x))]. (to_rep1(of_rep1(x)) = x))
+
+function to_int4(x: unsigned16) : int = tqtint(to_rep1(x))
+
+axiom range_int_axiom :
+  (forall x:unsigned16 [to_int4(x)]. uint_in_range(to_int4(x)))
+
+type unsigned32
+
+logic attr__ATTRIBUTE_MODULUS2 : t1
+
+logic bool_eq10 : t1, t1 -> bool
+
+axiom bool_eq_def9 :
+  (forall x:t1. forall y:t1 [bool_eq10(x, y)]. (((x = y) -> (bool_eq10(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq10(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE5 : t1 -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE5 : us_image -> t1
+
+logic user_eq4 : unsigned32, unsigned32 -> bool
+
+logic dummy4 : unsigned32
+
+type unsigned32__ref = { unsigned32__content : unsigned32
+}
+
+function unsigned32__ref___projection(a: unsigned32__ref) : unsigned32 =
+  (a).unsigned32__content
+
+logic to_rep2 : unsigned32 -> t1
+
+logic of_rep2 : t1 -> unsigned32
+
+axiom inversion_axiom2 :
+  (forall x:unsigned32 [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
+
+axiom range_axiom2 : true
+
+axiom coerce_axiom2 :
+  (forall x:t1 [to_rep2(of_rep2(x))]. (to_rep2(of_rep2(x)) = x))
+
+function to_int5(x: unsigned32) : int = tqtint1(to_rep2(x))
+
+axiom range_int_axiom1 :
+  (forall x:unsigned32 [to_int5(x)]. uint_in_range1(to_int5(x)))
+
+type classtype
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 3))
+
+logic bool_eq11 : int, int -> bool
+
+axiom bool_eq_def10 :
+  (forall x:int. forall y:int [bool_eq11(x, y)]. (((x = y) -> (bool_eq11(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq11(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE6 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE6 : us_image -> int
+
+logic user_eq5 : classtype, classtype -> bool
+
+logic dummy5 : classtype
+
+type classtype__ref = { classtype__content : classtype
+}
+
+function classtype__ref___projection(a: classtype__ref) : classtype =
+  (a).classtype__content
+
+type rritemtype
+
+predicate in_range4(x: int) = ((0 <= x) and (x <= 10))
+
+logic bool_eq12 : int, int -> bool
+
+axiom bool_eq_def11 :
+  (forall x:int. forall y:int [bool_eq12(x, y)]. (((x = y) -> (bool_eq12(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq12(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE7 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check7 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE7 : us_image -> int
+
+logic user_eq6 : rritemtype, rritemtype -> bool
+
+logic dummy6 : rritemtype
+
+type rritemtype__ref = { rritemtype__content : rritemtype
+}
+
+function rritemtype__ref___projection(a: rritemtype__ref) : rritemtype =
+  (a).rritemtype__content
+
+type linelengthindex
+
+predicate in_range5(x: int) = ((1 <= x) and (x <= 256))
+
+logic bool_eq13 : int, int -> bool
+
+axiom bool_eq_def12 :
+  (forall x:int. forall y:int [bool_eq13(x, y)]. (((x = y) -> (bool_eq13(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq13(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE8 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check8 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE8 : us_image -> int
+
+logic user_eq7 : linelengthindex, linelengthindex -> bool
+
+logic dummy7 : linelengthindex
+
+type linelengthindex__ref = { linelengthindex__content : linelengthindex
+}
+
+function linelengthindex__ref___projection(a: linelengthindex__ref) : linelengthindex =
+  (a).linelengthindex__content
+
+type domainnamestringtypeindex
+
+predicate in_range6(x: int) = ((1 <= x) and (x <= 128))
+
+logic bool_eq14 : int, int -> bool
+
+axiom bool_eq_def13 :
+  (forall x:int. forall y:int [bool_eq14(x, y)]. (((x = y) -> (bool_eq14(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq14(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE9 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check9 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE9 : us_image -> int
+
+logic user_eq8 : domainnamestringtypeindex, domainnamestringtypeindex -> bool
+
+logic dummy8 : domainnamestringtypeindex
+
+type domainnamestringtypeindex__ref = { domainnamestringtypeindex__content :
+domainnamestringtypeindex
+}
+
+function domainnamestringtypeindex__ref___projection(a: domainnamestringtypeindex__ref) : domainnamestringtypeindex =
+  (a).domainnamestringtypeindex__content
+
+type query_type
+
+predicate in_range7(x: int) = ((0 <= x) and (x <= 18))
+
+logic bool_eq15 : int, int -> bool
+
+axiom bool_eq_def14 :
+  (forall x:int. forall y:int [bool_eq15(x, y)]. (((x = y) -> (bool_eq15(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq15(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE10 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check10 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE10 : us_image -> int
+
+logic user_eq9 : query_type, query_type -> bool
+
+logic dummy9 : query_type
+
+type query_type__ref = { query_type__content : query_type
+}
+
+function query_type__ref___projection(a: query_type__ref) : query_type =
+  (a).query_type__content
+
+type timestringtypeindex
+
+predicate in_range8(x: int) = ((1 <= x) and (x <= 14))
+
+logic bool_eq16 : int, int -> bool
+
+axiom bool_eq_def15 :
+  (forall x:int. forall y:int [bool_eq16(x, y)]. (((x = y) -> (bool_eq16(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq16(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE11 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check11 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE11 : us_image -> int
+
+logic user_eq10 : timestringtypeindex, timestringtypeindex -> bool
+
+logic dummy10 : timestringtypeindex
+
+type timestringtypeindex__ref = { timestringtypeindex__content :
+timestringtypeindex
+}
+
+function timestringtypeindex__ref___projection(a: timestringtypeindex__ref) : timestringtypeindex =
+  (a).timestringtypeindex__content
+
+type siglengthvaluetype
+
+predicate in_range9(x: int) = ((0 <= x) and (x <= 1365))
+
+logic bool_eq17 : int, int -> bool
+
+axiom bool_eq_def16 :
+  (forall x:int. forall y:int [bool_eq17(x, y)]. (((x = y) -> (bool_eq17(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq17(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE12 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check12 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE12 : us_image -> int
+
+logic user_eq11 : siglengthvaluetype, siglengthvaluetype -> bool
+
+logic dummy11 : siglengthvaluetype
+
+type siglengthvaluetype__ref = { siglengthvaluetype__content :
+siglengthvaluetype
+}
+
+function siglengthvaluetype__ref___projection(a: siglengthvaluetype__ref) : siglengthvaluetype =
+  (a).siglengthvaluetype__content
+
+logic to_rep3 : unsigned8 -> t2
+
+logic of_rep3 : t2 -> unsigned8
+
+axiom inversion_axiom3 :
+  (forall x:unsigned8 [to_rep3(x)]. (of_rep3(to_rep3(x)) = x))
+
+axiom range_axiom3 : true
+
+axiom coerce_axiom3 :
+  (forall x:t2 [to_rep3(of_rep3(x))]. (to_rep3(of_rep3(x)) = x))
+
+function to_int6(x: unsigned8) : int = tqtint2(to_rep3(x))
+
+axiom range_int_axiom2 :
+  (forall x:unsigned8 [to_int6(x)]. uint_in_range2(to_int6(x)))
+
+logic to_rep4 : classtype -> int
+
+logic of_rep4 : int -> classtype
+
+axiom inversion_axiom4 :
+  (forall x:classtype [to_rep4(x)]. (of_rep4(to_rep4(x)) = x))
+
+axiom range_axiom4 : (forall x:classtype [to_rep4(x)]. in_range3(to_rep4(x)))
+
+axiom coerce_axiom4 :
+  (forall x:int [to_rep4(of_rep4(x))]. (in_range3(x) ->
+  (to_rep4(of_rep4(x)) = x)))
+
+logic dummy12 : (int,character) farray
+
+logic value__size : int
+
+logic object__size : (int,character) farray -> int
+
+logic value__component__size : int
+
+logic object__component__size : (int,character) farray -> int
+
+logic value__alignment : int
+
+logic object__alignment : (int,character) farray -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:(int,character) farray. (0 <= object__size(a)))
+
+axiom value__component__size_axiom : (0 <= value__component__size)
+
+axiom object__component__size_axiom :
+  (forall a:(int,character) farray. (0 <= object__component__size(a)))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:(int,character) farray. (0 <= object__alignment(a)))
+
+logic user_eq12 : (int,character) farray, (int,character) farray -> bool
+
+type us_split_fields = { rec__rr_type__resourcerecordtype__ttlinseconds :
+unsigned32; rec__rr_type__resourcerecordtype__class : classtype; rec__ext__ :
+us_private
+}
+
+function us_split_fields_TTLInSeconds__projection(a: us_split_fields) : unsigned32 =
+  (a).rec__rr_type__resourcerecordtype__ttlinseconds
+
+function us_split_fields_Class__projection(a: us_split_fields) : classtype =
+  (a).rec__rr_type__resourcerecordtype__class
+
+function us_split_fields___projection(a: us_split_fields) : us_private =
+  (a).rec__ext__
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref___projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep = { us_split_fields1 : us_split_fields; attr__tag : int
+}
+
+function us_rep___projection(a: us_rep) : us_split_fields =
+  (a).us_split_fields1
+
+function us_rep___2__projection(a: us_rep) : int = (a).attr__tag
+
+logic bool_eq18 : us_rep, us_rep -> bool
+
+axiom bool_eq_def17 :
+  (forall a:us_rep. forall b:us_rep [bool_eq18(a, b)].
+  ((((to_rep2(((a).us_split_fields1).rec__rr_type__resourcerecordtype__ttlinseconds) = to_rep2(((b).us_split_fields1).rec__rr_type__resourcerecordtype__ttlinseconds)) and
+  (to_rep4(((a).us_split_fields1).rec__rr_type__resourcerecordtype__class) = to_rep4(((b).us_split_fields1).rec__rr_type__resourcerecordtype__class))) ->
+  (bool_eq18(a, b) = true)) and
+  ((not ((to_rep2(((a).us_split_fields1).rec__rr_type__resourcerecordtype__ttlinseconds) = to_rep2(((b).us_split_fields1).rec__rr_type__resourcerecordtype__ttlinseconds)) and
+  (to_rep4(((a).us_split_fields1).rec__rr_type__resourcerecordtype__class) = to_rep4(((b).us_split_fields1).rec__rr_type__resourcerecordtype__class)))) ->
+  (bool_eq18(a, b) = false))))
+
+logic us_dispatch_eq : us_rep, us_rep -> bool
+
+logic us_tag : int
+
+logic value__size1 : int
+
+logic object__size1 : us_rep -> int
+
+logic value__alignment1 : int
+
+logic object__alignment1 : us_rep -> int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 :
+  (forall a:unsigned32. forall a1:classtype. forall a2:us_private.
+  forall a3:int. (0 <= object__size1({ us_split_fields1 = {
+  rec__rr_type__resourcerecordtype__ttlinseconds = a;
+  rec__rr_type__resourcerecordtype__class = a1; rec__ext__ = a2 };
+  attr__tag = a3 })))
+
+axiom value__alignment_axiom1 : (0 <= value__alignment1)
+
+axiom object__alignment_axiom1 :
+  (forall a:unsigned32. forall a1:classtype. forall a2:us_private.
+  forall a3:int. (0 <= object__alignment1({ us_split_fields1 = {
+  rec__rr_type__resourcerecordtype__ttlinseconds = a;
+  rec__rr_type__resourcerecordtype__class = a1; rec__ext__ = a2 };
+  attr__tag = a3 })))
+
+logic rr_type__resourcerecordtype__ttlinseconds__first__bit : int
+
+logic rr_type__resourcerecordtype__ttlinseconds__last__bit : int
+
+logic rr_type__resourcerecordtype__ttlinseconds__position : int
+
+axiom rr_type__resourcerecordtype__ttlinseconds__first__bit_axiom :
+  (0 <= rr_type__resourcerecordtype__ttlinseconds__first__bit)
+
+axiom rr_type__resourcerecordtype__ttlinseconds__last__bit_axiom :
+  (rr_type__resourcerecordtype__ttlinseconds__first__bit <  rr_type__resourcerecordtype__ttlinseconds__last__bit)
+
+axiom rr_type__resourcerecordtype__ttlinseconds__position_axiom :
+  (0 <= rr_type__resourcerecordtype__ttlinseconds__position)
+
+logic rr_type__resourcerecordtype__class__first__bit : int
+
+logic rr_type__resourcerecordtype__class__last__bit : int
+
+logic rr_type__resourcerecordtype__class__position : int
+
+axiom rr_type__resourcerecordtype__class__first__bit_axiom :
+  (0 <= rr_type__resourcerecordtype__class__first__bit)
+
+axiom rr_type__resourcerecordtype__class__last__bit_axiom :
+  (rr_type__resourcerecordtype__class__first__bit <  rr_type__resourcerecordtype__class__last__bit)
+
+axiom rr_type__resourcerecordtype__class__position_axiom :
+  (0 <= rr_type__resourcerecordtype__class__position)
+
+logic user_eq13 : us_rep, us_rep -> bool
+
+logic dummy13 : unsigned32
+
+logic dummy14 : classtype
+
+logic dummy15 : us_private
+
+logic dummy16 : int
+
+type resourcerecordtype__ref = { resourcerecordtype__content : us_rep
+}
+
+function resourcerecordtype__ref___projection(a: resourcerecordtype__ref) : us_rep =
+  (a).resourcerecordtype__content
+
+logic to_rep5 : query_type -> int
+
+logic of_rep5 : int -> query_type
+
+axiom inversion_axiom5 :
+  (forall x:query_type [to_rep5(x)]. (of_rep5(to_rep5(x)) = x))
+
+axiom range_axiom5 :
+  (forall x:query_type [to_rep5(x)]. in_range7(to_rep5(x)))
+
+axiom coerce_axiom5 :
+  (forall x:int [to_rep5(of_rep5(x))]. (in_range7(x) ->
+  (to_rep5(of_rep5(x)) = x)))
+
+logic dummy17 : (int,character) farray
+
+logic value__size2 : int
+
+logic object__size2 : (int,character) farray -> int
+
+logic value__component__size1 : int
+
+logic object__component__size1 : (int,character) farray -> int
+
+logic value__alignment2 : int
+
+logic object__alignment2 : (int,character) farray -> int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 :
+  (forall a:(int,character) farray. (0 <= object__size2(a)))
+
+axiom value__component__size_axiom1 : (0 <= value__component__size1)
+
+axiom object__component__size_axiom1 :
+  (forall a:(int,character) farray. (0 <= object__component__size1(a)))
+
+axiom value__alignment_axiom2 : (0 <= value__alignment2)
+
+axiom object__alignment_axiom2 :
+  (forall a:(int,character) farray. (0 <= object__alignment2(a)))
+
+logic user_eq14 : (int,character) farray, (int,character) farray -> bool
+
+logic to_rep6 : siglengthvaluetype -> int
+
+logic of_rep6 : int -> siglengthvaluetype
+
+axiom inversion_axiom6 :
+  (forall x:siglengthvaluetype [to_rep6(x)]. (of_rep6(to_rep6(x)) = x))
+
+axiom range_axiom6 :
+  (forall x:siglengthvaluetype [to_rep6(x)]. in_range9(to_rep6(x)))
+
+axiom coerce_axiom6 :
+  (forall x:int [to_rep6(of_rep6(x))]. (in_range9(x) ->
+  (to_rep6(of_rep6(x)) = x)))
+
+type us_split_fields2 = {
+rec__rr_type__rrsig_record_type__rrsigrecordtype__typecovered : query_type;
+rec__rr_type__rrsig_record_type__rrsigrecordtype__algorithm : unsigned8;
+rec__rr_type__rrsig_record_type__rrsigrecordtype__numlabels : unsigned8;
+rec__rr_type__rrsig_record_type__rrsigrecordtype__origttl : unsigned32;
+rec__rr_type__rrsig_record_type__rrsigrecordtype__sigexpiration : unsigned32;
+rec__rr_type__rrsig_record_type__rrsigrecordtype__siginception : unsigned32;
+rec__rr_type__rrsig_record_type__rrsigrecordtype__keytag : unsigned16;
+rec__rr_type__rrsig_record_type__rrsigrecordtype__signername :
+(int,character) farray;
+rec__rr_type__rrsig_record_type__rrsigrecordtype__signature :
+(int,character) farray;
+rec__rr_type__rrsig_record_type__rrsigrecordtype__signaturelength :
+siglengthvaluetype; rec__rr_type__resourcerecordtype__ttlinseconds1 :
+unsigned32; rec__rr_type__resourcerecordtype__class1 : classtype; rec__ext__1
+: us_private
+}
+
+function us_split_fields_TypeCovered__projection(a: us_split_fields2) : query_type =
+  (a).rec__rr_type__rrsig_record_type__rrsigrecordtype__typecovered
+
+function us_split_fields_Algorithm__2__projection(a: us_split_fields2) : unsigned8 =
+  (a).rec__rr_type__rrsig_record_type__rrsigrecordtype__algorithm
+
+function us_split_fields_NumLabels__projection(a: us_split_fields2) : unsigned8 =
+  (a).rec__rr_type__rrsig_record_type__rrsigrecordtype__numlabels
+
+function us_split_fields_OrigTTL__projection(a: us_split_fields2) : unsigned32 =
+  (a).rec__rr_type__rrsig_record_type__rrsigrecordtype__origttl
+
+function us_split_fields_SigExpiration__projection(a: us_split_fields2) : unsigned32 =
+  (a).rec__rr_type__rrsig_record_type__rrsigrecordtype__sigexpiration
+
+function us_split_fields_SigInception__projection(a: us_split_fields2) : unsigned32 =
+  (a).rec__rr_type__rrsig_record_type__rrsigrecordtype__siginception
+
+function us_split_fields_KeyTag__projection(a: us_split_fields2) : unsigned16 =
+  (a).rec__rr_type__rrsig_record_type__rrsigrecordtype__keytag
+
+function us_split_fields_SignerName__projection(a: us_split_fields2) : (int,character) farray =
+  (a).rec__rr_type__rrsig_record_type__rrsigrecordtype__signername
+
+function us_split_fields_Signature__projection(a: us_split_fields2) : (int,character) farray =
+  (a).rec__rr_type__rrsig_record_type__rrsigrecordtype__signature
+
+function us_split_fields_SignatureLength__projection(a: us_split_fields2) : siglengthvaluetype =
+  (a).rec__rr_type__rrsig_record_type__rrsigrecordtype__signaturelength
+
+function us_split_fields_TTLInSeconds__4__projection(a: us_split_fields2) : unsigned32 =
+  (a).rec__rr_type__resourcerecordtype__ttlinseconds1
+
+function us_split_fields_Class__4__projection(a: us_split_fields2) : classtype =
+  (a).rec__rr_type__resourcerecordtype__class1
+
+function us_split_fields___4__projection(a: us_split_fields2) : us_private =
+  (a).rec__ext__1
+
+type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
+}
+
+function us_split_fields__ref___8__projection(a: us_split_fields__ref1) : us_split_fields2 =
+  (a).us_split_fields__content1
+
+type us_rep1 = { us_split_fields3 : us_split_fields2; attr__tag1 : int
+}
+
+function us_rep___11__projection(a: us_rep1) : us_split_fields2 =
+  (a).us_split_fields3
+
+function us_rep___12__projection(a: us_rep1) : int = (a).attr__tag1
+
+logic hide_ext__ : query_type, unsigned8, unsigned8, unsigned32, unsigned32,
+  unsigned32, unsigned16, (int,character) farray, (int,character) farray,
+  siglengthvaluetype, us_private -> us_private
+
+logic extract__typecovered : us_private -> query_type
+
+axiom extract__typecovered__conv :
+  (forall typecovered:query_type.
+  (forall algorithm:unsigned8. forall numlabels:unsigned8.
+  (forall origttl:unsigned32. forall sigexpiration:unsigned32.
+  forall siginception:unsigned32.
+  (forall keytag:unsigned16.
+  (forall signername:(int,character) farray.
+  forall signature:(int,character) farray.
+  (forall signaturelength:siglengthvaluetype.
+  (forall rec__ext__2:us_private.
+  (extract__typecovered(hide_ext__(typecovered, algorithm, numlabels,
+  origttl, sigexpiration, siginception, keytag, signername, signature,
+  signaturelength, rec__ext__2)) = typecovered))))))))
+
+logic extract__algorithm : us_private -> unsigned8
+
+axiom extract__algorithm__conv :
+  (forall typecovered:query_type.
+  (forall algorithm:unsigned8. forall numlabels:unsigned8.
+  (forall origttl:unsigned32. forall sigexpiration:unsigned32.
+  forall siginception:unsigned32.
+  (forall keytag:unsigned16.
+  (forall signername:(int,character) farray.
+  forall signature:(int,character) farray.
+  (forall signaturelength:siglengthvaluetype.
+  (forall rec__ext__2:us_private. (extract__algorithm(hide_ext__(typecovered,
+  algorithm, numlabels, origttl, sigexpiration, siginception, keytag,
+  signername, signature, signaturelength, rec__ext__2)) = algorithm))))))))
+
+logic extract__numlabels : us_private -> unsigned8
+
+axiom extract__numlabels__conv :
+  (forall typecovered:query_type.
+  (forall algorithm:unsigned8. forall numlabels:unsigned8.
+  (forall origttl:unsigned32. forall sigexpiration:unsigned32.
+  forall siginception:unsigned32.
+  (forall keytag:unsigned16.
+  (forall signername:(int,character) farray.
+  forall signature:(int,character) farray.
+  (forall signaturelength:siglengthvaluetype.
+  (forall rec__ext__2:us_private. (extract__numlabels(hide_ext__(typecovered,
+  algorithm, numlabels, origttl, sigexpiration, siginception, keytag,
+  signername, signature, signaturelength, rec__ext__2)) = numlabels))))))))
+
+logic extract__origttl : us_private -> unsigned32
+
+axiom extract__origttl__conv :
+  (forall typecovered:query_type.
+  (forall algorithm:unsigned8. forall numlabels:unsigned8.
+  (forall origttl:unsigned32. forall sigexpiration:unsigned32.
+  forall siginception:unsigned32.
+  (forall keytag:unsigned16.
+  (forall signername:(int,character) farray.
+  forall signature:(int,character) farray.
+  (forall signaturelength:siglengthvaluetype.
+  (forall rec__ext__2:us_private. (extract__origttl(hide_ext__(typecovered,
+  algorithm, numlabels, origttl, sigexpiration, siginception, keytag,
+  signername, signature, signaturelength, rec__ext__2)) = origttl))))))))
+
+logic extract__sigexpiration : us_private -> unsigned32
+
+axiom extract__sigexpiration__conv :
+  (forall typecovered:query_type.
+  (forall algorithm:unsigned8. forall numlabels:unsigned8.
+  (forall origttl:unsigned32. forall sigexpiration:unsigned32.
+  forall siginception:unsigned32.
+  (forall keytag:unsigned16.
+  (forall signername:(int,character) farray.
+  forall signature:(int,character) farray.
+  (forall signaturelength:siglengthvaluetype.
+  (forall rec__ext__2:us_private.
+  (extract__sigexpiration(hide_ext__(typecovered, algorithm, numlabels,
+  origttl, sigexpiration, siginception, keytag, signername, signature,
+  signaturelength, rec__ext__2)) = sigexpiration))))))))
+
+logic extract__siginception : us_private -> unsigned32
+
+axiom extract__siginception__conv :
+  (forall typecovered:query_type.
+  (forall algorithm:unsigned8. forall numlabels:unsigned8.
+  (forall origttl:unsigned32. forall sigexpiration:unsigned32.
+  forall siginception:unsigned32.
+  (forall keytag:unsigned16.
+  (forall signername:(int,character) farray.
+  forall signature:(int,character) farray.
+  (forall signaturelength:siglengthvaluetype.
+  (forall rec__ext__2:us_private.
+  (extract__siginception(hide_ext__(typecovered, algorithm, numlabels,
+  origttl, sigexpiration, siginception, keytag, signername, signature,
+  signaturelength, rec__ext__2)) = siginception))))))))
+
+logic extract__keytag : us_private -> unsigned16
+
+axiom extract__keytag__conv :
+  (forall typecovered:query_type.
+  (forall algorithm:unsigned8. forall numlabels:unsigned8.
+  (forall origttl:unsigned32. forall sigexpiration:unsigned32.
+  forall siginception:unsigned32.
+  (forall keytag:unsigned16.
+  (forall signername:(int,character) farray.
+  forall signature:(int,character) farray.
+  (forall signaturelength:siglengthvaluetype.
+  (forall rec__ext__2:us_private. (extract__keytag(hide_ext__(typecovered,
+  algorithm, numlabels, origttl, sigexpiration, siginception, keytag,
+  signername, signature, signaturelength, rec__ext__2)) = keytag))))))))
+
+logic extract__signername : us_private -> (int,character) farray
+
+axiom extract__signername__conv :
+  (forall typecovered:query_type.
+  (forall algorithm:unsigned8. forall numlabels:unsigned8.
+  (forall origttl:unsigned32. forall sigexpiration:unsigned32.
+  forall siginception:unsigned32.
+  (forall keytag:unsigned16.
+  (forall signername:(int,character) farray.
+  forall signature:(int,character) farray.
+  (forall signaturelength:siglengthvaluetype.
+  (forall rec__ext__2:us_private.
+  (extract__signername(hide_ext__(typecovered, algorithm, numlabels, origttl,
+  sigexpiration, siginception, keytag, signername, signature,
+  signaturelength, rec__ext__2)) = signername))))))))
+
+logic extract__signature : us_private -> (int,character) farray
+
+axiom extract__signature__conv :
+  (forall typecovered:query_type.
+  (forall algorithm:unsigned8. forall numlabels:unsigned8.
+  (forall origttl:unsigned32. forall sigexpiration:unsigned32.
+  forall siginception:unsigned32.
+  (forall keytag:unsigned16.
+  (forall signername:(int,character) farray.
+  forall signature:(int,character) farray.
+  (forall signaturelength:siglengthvaluetype.
+  (forall rec__ext__2:us_private. (extract__signature(hide_ext__(typecovered,
+  algorithm, numlabels, origttl, sigexpiration, siginception, keytag,
+  signername, signature, signaturelength, rec__ext__2)) = signature))))))))
+
+logic extract__signaturelength : us_private -> siglengthvaluetype
+
+axiom extract__signaturelength__conv :
+  (forall typecovered:query_type.
+  (forall algorithm:unsigned8. forall numlabels:unsigned8.
+  (forall origttl:unsigned32. forall sigexpiration:unsigned32.
+  forall siginception:unsigned32.
+  (forall keytag:unsigned16.
+  (forall signername:(int,character) farray.
+  forall signature:(int,character) farray.
+  (forall signaturelength:siglengthvaluetype.
+  (forall rec__ext__2:us_private.
+  (extract__signaturelength(hide_ext__(typecovered, algorithm, numlabels,
+  origttl, sigexpiration, siginception, keytag, signername, signature,
+  signaturelength, rec__ext__2)) = signaturelength))))))))
+
+logic extract__ext__ : us_private -> us_private
+
+function to_base(a: us_rep1) : us_rep = { us_split_fields1 = {
+  rec__rr_type__resourcerecordtype__ttlinseconds =
+  ((a).us_split_fields3).rec__rr_type__resourcerecordtype__ttlinseconds1;
+  rec__rr_type__resourcerecordtype__class =
+  ((a).us_split_fields3).rec__rr_type__resourcerecordtype__class1;
+  rec__ext__ =
+  hide_ext__(((a).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__typecovered,
+  ((a).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__algorithm,
+  ((a).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__numlabels,
+  ((a).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__origttl,
+  ((a).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__sigexpiration,
+  ((a).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__siginception,
+  ((a).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__keytag,
+  ((a).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__signername,
+  ((a).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__signature,
+  ((a).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__signaturelength,
+  ((a).us_split_fields3).rec__ext__1) }; attr__tag = (a).attr__tag1 }
+
+function of_base(r: us_rep) : us_rep1 = { us_split_fields3 = {
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__typecovered =
+  extract__typecovered(((r).us_split_fields1).rec__ext__);
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__algorithm =
+  extract__algorithm(((r).us_split_fields1).rec__ext__);
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__numlabels =
+  extract__numlabels(((r).us_split_fields1).rec__ext__);
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__origttl =
+  extract__origttl(((r).us_split_fields1).rec__ext__);
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__sigexpiration =
+  extract__sigexpiration(((r).us_split_fields1).rec__ext__);
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__siginception =
+  extract__siginception(((r).us_split_fields1).rec__ext__);
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__keytag =
+  extract__keytag(((r).us_split_fields1).rec__ext__);
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__signername =
+  extract__signername(((r).us_split_fields1).rec__ext__);
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__signature =
+  extract__signature(((r).us_split_fields1).rec__ext__);
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__signaturelength =
+  extract__signaturelength(((r).us_split_fields1).rec__ext__);
+  rec__rr_type__resourcerecordtype__ttlinseconds1 =
+  ((r).us_split_fields1).rec__rr_type__resourcerecordtype__ttlinseconds;
+  rec__rr_type__resourcerecordtype__class1 =
+  ((r).us_split_fields1).rec__rr_type__resourcerecordtype__class;
+  rec__ext__1 = extract__ext__(((r).us_split_fields1).rec__ext__) };
+  attr__tag1 = (r).attr__tag }
+
+logic bool_eq19 : us_rep1, us_rep1 -> bool
+
+axiom bool_eq_def18 :
+  (forall a:us_rep1. forall b:us_rep1 [bool_eq19(a, b)].
+  ((((((((((((((to_rep5(((a).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__typecovered) = to_rep5(((b).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__typecovered)) and
+  (to_rep3(((a).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__algorithm) = to_rep3(((b).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__algorithm))) and
+  (to_rep3(((a).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__numlabels) = to_rep3(((b).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__numlabels))) and
+  (to_rep2(((a).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__origttl) = to_rep2(((b).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__origttl))) and
+  (to_rep2(((a).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__sigexpiration) = to_rep2(((b).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__sigexpiration))) and
+  (to_rep2(((a).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__siginception) = to_rep2(((b).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__siginception))) and
+  (to_rep1(((a).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__keytag) = to_rep1(((b).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__keytag))) and
+  (bool_eq6(((a).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__signername,
+  1, 128,
+  ((b).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__signername,
+  1, 128) = true)) and
+  (bool_eq6(((a).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__signature,
+  1, 1365,
+  ((b).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__signature,
+  1, 1365) = true)) and
+  (to_rep6(((a).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__signaturelength) = to_rep6(((b).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__signaturelength))) and
+  (to_rep2(((a).us_split_fields3).rec__rr_type__resourcerecordtype__ttlinseconds1) = to_rep2(((b).us_split_fields3).rec__rr_type__resourcerecordtype__ttlinseconds1))) and
+  (to_rep4(((a).us_split_fields3).rec__rr_type__resourcerecordtype__class1) = to_rep4(((b).us_split_fields3).rec__rr_type__resourcerecordtype__class1))) ->
+  (bool_eq19(a, b) = true)) and
+  ((not ((((((((((((to_rep5(((a).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__typecovered) = to_rep5(((b).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__typecovered)) and
+  (to_rep3(((a).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__algorithm) = to_rep3(((b).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__algorithm))) and
+  (to_rep3(((a).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__numlabels) = to_rep3(((b).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__numlabels))) and
+  (to_rep2(((a).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__origttl) = to_rep2(((b).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__origttl))) and
+  (to_rep2(((a).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__sigexpiration) = to_rep2(((b).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__sigexpiration))) and
+  (to_rep2(((a).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__siginception) = to_rep2(((b).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__siginception))) and
+  (to_rep1(((a).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__keytag) = to_rep1(((b).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__keytag))) and
+  (bool_eq6(((a).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__signername,
+  1, 128,
+  ((b).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__signername,
+  1, 128) = true)) and
+  (bool_eq6(((a).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__signature,
+  1, 1365,
+  ((b).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__signature,
+  1, 1365) = true)) and
+  (to_rep6(((a).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__signaturelength) = to_rep6(((b).us_split_fields3).rec__rr_type__rrsig_record_type__rrsigrecordtype__signaturelength))) and
+  (to_rep2(((a).us_split_fields3).rec__rr_type__resourcerecordtype__ttlinseconds1) = to_rep2(((b).us_split_fields3).rec__rr_type__resourcerecordtype__ttlinseconds1))) and
+  (to_rep4(((a).us_split_fields3).rec__rr_type__resourcerecordtype__class1) = to_rep4(((b).us_split_fields3).rec__rr_type__resourcerecordtype__class1)))) ->
+  (bool_eq19(a, b) = false))))
+
+logic us_tag1 : int
+
+logic value__size3 : int
+
+logic object__size3 : us_rep1 -> int
+
+logic value__alignment3 : int
+
+logic object__alignment3 : us_rep1 -> int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 :
+  (forall a:query_type. forall a1:unsigned8. forall a2:unsigned8.
+  forall a3:unsigned32. forall a4:unsigned32. forall a5:unsigned32.
+  forall a6:unsigned16. forall a7:(int,character) farray.
+  forall a8:(int,character) farray. forall a9:siglengthvaluetype.
+  forall a10:unsigned32. forall a11:classtype. forall a12:us_private.
+  forall a13:int. (0 <= object__size3({ us_split_fields3 = {
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__typecovered = a;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__algorithm = a1;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__numlabels = a2;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__origttl = a3;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__sigexpiration = a4;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__siginception = a5;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__keytag = a6;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__signername = a7;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__signature = a8;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__signaturelength = a9;
+  rec__rr_type__resourcerecordtype__ttlinseconds1 = a10;
+  rec__rr_type__resourcerecordtype__class1 = a11; rec__ext__1 = a12 };
+  attr__tag1 = a13 })))
+
+axiom value__alignment_axiom3 : (0 <= value__alignment3)
+
+axiom object__alignment_axiom3 :
+  (forall a:query_type. forall a1:unsigned8. forall a2:unsigned8.
+  forall a3:unsigned32. forall a4:unsigned32. forall a5:unsigned32.
+  forall a6:unsigned16. forall a7:(int,character) farray.
+  forall a8:(int,character) farray. forall a9:siglengthvaluetype.
+  forall a10:unsigned32. forall a11:classtype. forall a12:us_private.
+  forall a13:int. (0 <= object__alignment3({ us_split_fields3 = {
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__typecovered = a;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__algorithm = a1;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__numlabels = a2;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__origttl = a3;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__sigexpiration = a4;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__siginception = a5;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__keytag = a6;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__signername = a7;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__signature = a8;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__signaturelength = a9;
+  rec__rr_type__resourcerecordtype__ttlinseconds1 = a10;
+  rec__rr_type__resourcerecordtype__class1 = a11; rec__ext__1 = a12 };
+  attr__tag1 = a13 })))
+
+logic rr_type__rrsig_record_type__rrsigrecordtype__typecovered__first__bit : int
+
+logic rr_type__rrsig_record_type__rrsigrecordtype__typecovered__last__bit : int
+
+logic rr_type__rrsig_record_type__rrsigrecordtype__typecovered__position : int
+
+axiom rr_type__rrsig_record_type__rrsigrecordtype__typecovered__first__bit_axiom :
+  (0 <= rr_type__rrsig_record_type__rrsigrecordtype__typecovered__first__bit)
+
+axiom rr_type__rrsig_record_type__rrsigrecordtype__typecovered__last__bit_axiom :
+  (rr_type__rrsig_record_type__rrsigrecordtype__typecovered__first__bit <  rr_type__rrsig_record_type__rrsigrecordtype__typecovered__last__bit)
+
+axiom rr_type__rrsig_record_type__rrsigrecordtype__typecovered__position_axiom :
+  (0 <= rr_type__rrsig_record_type__rrsigrecordtype__typecovered__position)
+
+logic rr_type__rrsig_record_type__rrsigrecordtype__algorithm__first__bit : int
+
+logic rr_type__rrsig_record_type__rrsigrecordtype__algorithm__last__bit : int
+
+logic rr_type__rrsig_record_type__rrsigrecordtype__algorithm__position : int
+
+axiom rr_type__rrsig_record_type__rrsigrecordtype__algorithm__first__bit_axiom :
+  (0 <= rr_type__rrsig_record_type__rrsigrecordtype__algorithm__first__bit)
+
+axiom rr_type__rrsig_record_type__rrsigrecordtype__algorithm__last__bit_axiom :
+  (rr_type__rrsig_record_type__rrsigrecordtype__algorithm__first__bit <  rr_type__rrsig_record_type__rrsigrecordtype__algorithm__last__bit)
+
+axiom rr_type__rrsig_record_type__rrsigrecordtype__algorithm__position_axiom :
+  (0 <= rr_type__rrsig_record_type__rrsigrecordtype__algorithm__position)
+
+logic rr_type__rrsig_record_type__rrsigrecordtype__numlabels__first__bit : int
+
+logic rr_type__rrsig_record_type__rrsigrecordtype__numlabels__last__bit : int
+
+logic rr_type__rrsig_record_type__rrsigrecordtype__numlabels__position : int
+
+axiom rr_type__rrsig_record_type__rrsigrecordtype__numlabels__first__bit_axiom :
+  (0 <= rr_type__rrsig_record_type__rrsigrecordtype__numlabels__first__bit)
+
+axiom rr_type__rrsig_record_type__rrsigrecordtype__numlabels__last__bit_axiom :
+  (rr_type__rrsig_record_type__rrsigrecordtype__numlabels__first__bit <  rr_type__rrsig_record_type__rrsigrecordtype__numlabels__last__bit)
+
+axiom rr_type__rrsig_record_type__rrsigrecordtype__numlabels__position_axiom :
+  (0 <= rr_type__rrsig_record_type__rrsigrecordtype__numlabels__position)
+
+logic rr_type__rrsig_record_type__rrsigrecordtype__origttl__first__bit : int
+
+logic rr_type__rrsig_record_type__rrsigrecordtype__origttl__last__bit : int
+
+logic rr_type__rrsig_record_type__rrsigrecordtype__origttl__position : int
+
+axiom rr_type__rrsig_record_type__rrsigrecordtype__origttl__first__bit_axiom :
+  (0 <= rr_type__rrsig_record_type__rrsigrecordtype__origttl__first__bit)
+
+axiom rr_type__rrsig_record_type__rrsigrecordtype__origttl__last__bit_axiom :
+  (rr_type__rrsig_record_type__rrsigrecordtype__origttl__first__bit <  rr_type__rrsig_record_type__rrsigrecordtype__origttl__last__bit)
+
+axiom rr_type__rrsig_record_type__rrsigrecordtype__origttl__position_axiom :
+  (0 <= rr_type__rrsig_record_type__rrsigrecordtype__origttl__position)
+
+logic rr_type__rrsig_record_type__rrsigrecordtype__sigexpiration__first__bit : int
+
+logic rr_type__rrsig_record_type__rrsigrecordtype__sigexpiration__last__bit : int
+
+logic rr_type__rrsig_record_type__rrsigrecordtype__sigexpiration__position : int
+
+axiom rr_type__rrsig_record_type__rrsigrecordtype__sigexpiration__first__bit_axiom :
+  (0 <= rr_type__rrsig_record_type__rrsigrecordtype__sigexpiration__first__bit)
+
+axiom rr_type__rrsig_record_type__rrsigrecordtype__sigexpiration__last__bit_axiom :
+  (rr_type__rrsig_record_type__rrsigrecordtype__sigexpiration__first__bit <  rr_type__rrsig_record_type__rrsigrecordtype__sigexpiration__last__bit)
+
+axiom rr_type__rrsig_record_type__rrsigrecordtype__sigexpiration__position_axiom :
+  (0 <= rr_type__rrsig_record_type__rrsigrecordtype__sigexpiration__position)
+
+logic rr_type__rrsig_record_type__rrsigrecordtype__siginception__first__bit : int
+
+logic rr_type__rrsig_record_type__rrsigrecordtype__siginception__last__bit : int
+
+logic rr_type__rrsig_record_type__rrsigrecordtype__siginception__position : int
+
+axiom rr_type__rrsig_record_type__rrsigrecordtype__siginception__first__bit_axiom :
+  (0 <= rr_type__rrsig_record_type__rrsigrecordtype__siginception__first__bit)
+
+axiom rr_type__rrsig_record_type__rrsigrecordtype__siginception__last__bit_axiom :
+  (rr_type__rrsig_record_type__rrsigrecordtype__siginception__first__bit <  rr_type__rrsig_record_type__rrsigrecordtype__siginception__last__bit)
+
+axiom rr_type__rrsig_record_type__rrsigrecordtype__siginception__position_axiom :
+  (0 <= rr_type__rrsig_record_type__rrsigrecordtype__siginception__position)
+
+logic rr_type__rrsig_record_type__rrsigrecordtype__keytag__first__bit : int
+
+logic rr_type__rrsig_record_type__rrsigrecordtype__keytag__last__bit : int
+
+logic rr_type__rrsig_record_type__rrsigrecordtype__keytag__position : int
+
+axiom rr_type__rrsig_record_type__rrsigrecordtype__keytag__first__bit_axiom :
+  (0 <= rr_type__rrsig_record_type__rrsigrecordtype__keytag__first__bit)
+
+axiom rr_type__rrsig_record_type__rrsigrecordtype__keytag__last__bit_axiom :
+  (rr_type__rrsig_record_type__rrsigrecordtype__keytag__first__bit <  rr_type__rrsig_record_type__rrsigrecordtype__keytag__last__bit)
+
+axiom rr_type__rrsig_record_type__rrsigrecordtype__keytag__position_axiom :
+  (0 <= rr_type__rrsig_record_type__rrsigrecordtype__keytag__position)
+
+logic rr_type__rrsig_record_type__rrsigrecordtype__signername__first__bit : int
+
+logic rr_type__rrsig_record_type__rrsigrecordtype__signername__last__bit : int
+
+logic rr_type__rrsig_record_type__rrsigrecordtype__signername__position : int
+
+axiom rr_type__rrsig_record_type__rrsigrecordtype__signername__first__bit_axiom :
+  (0 <= rr_type__rrsig_record_type__rrsigrecordtype__signername__first__bit)
+
+axiom rr_type__rrsig_record_type__rrsigrecordtype__signername__last__bit_axiom :
+  (rr_type__rrsig_record_type__rrsigrecordtype__signername__first__bit <  rr_type__rrsig_record_type__rrsigrecordtype__signername__last__bit)
+
+axiom rr_type__rrsig_record_type__rrsigrecordtype__signername__position_axiom :
+  (0 <= rr_type__rrsig_record_type__rrsigrecordtype__signername__position)
+
+logic rr_type__rrsig_record_type__rrsigrecordtype__signature__first__bit : int
+
+logic rr_type__rrsig_record_type__rrsigrecordtype__signature__last__bit : int
+
+logic rr_type__rrsig_record_type__rrsigrecordtype__signature__position : int
+
+axiom rr_type__rrsig_record_type__rrsigrecordtype__signature__first__bit_axiom :
+  (0 <= rr_type__rrsig_record_type__rrsigrecordtype__signature__first__bit)
+
+axiom rr_type__rrsig_record_type__rrsigrecordtype__signature__last__bit_axiom :
+  (rr_type__rrsig_record_type__rrsigrecordtype__signature__first__bit <  rr_type__rrsig_record_type__rrsigrecordtype__signature__last__bit)
+
+axiom rr_type__rrsig_record_type__rrsigrecordtype__signature__position_axiom :
+  (0 <= rr_type__rrsig_record_type__rrsigrecordtype__signature__position)
+
+logic rr_type__rrsig_record_type__rrsigrecordtype__signaturelength__first__bit : int
+
+logic rr_type__rrsig_record_type__rrsigrecordtype__signaturelength__last__bit : int
+
+logic rr_type__rrsig_record_type__rrsigrecordtype__signaturelength__position : int
+
+axiom rr_type__rrsig_record_type__rrsigrecordtype__signaturelength__first__bit_axiom :
+  (0 <= rr_type__rrsig_record_type__rrsigrecordtype__signaturelength__first__bit)
+
+axiom rr_type__rrsig_record_type__rrsigrecordtype__signaturelength__last__bit_axiom :
+  (rr_type__rrsig_record_type__rrsigrecordtype__signaturelength__first__bit <  rr_type__rrsig_record_type__rrsigrecordtype__signaturelength__last__bit)
+
+axiom rr_type__rrsig_record_type__rrsigrecordtype__signaturelength__position_axiom :
+  (0 <= rr_type__rrsig_record_type__rrsigrecordtype__signaturelength__position)
+
+logic rr_type__resourcerecordtype__ttlinseconds__first__bit1 : int
+
+logic rr_type__resourcerecordtype__ttlinseconds__last__bit1 : int
+
+logic rr_type__resourcerecordtype__ttlinseconds__position1 : int
+
+axiom rr_type__resourcerecordtype__ttlinseconds__first__bit_axiom1 :
+  (0 <= rr_type__resourcerecordtype__ttlinseconds__first__bit1)
+
+axiom rr_type__resourcerecordtype__ttlinseconds__last__bit_axiom1 :
+  (rr_type__resourcerecordtype__ttlinseconds__first__bit1 <  rr_type__resourcerecordtype__ttlinseconds__last__bit1)
+
+axiom rr_type__resourcerecordtype__ttlinseconds__position_axiom1 :
+  (0 <= rr_type__resourcerecordtype__ttlinseconds__position1)
+
+logic rr_type__resourcerecordtype__class__first__bit1 : int
+
+logic rr_type__resourcerecordtype__class__last__bit1 : int
+
+logic rr_type__resourcerecordtype__class__position1 : int
+
+axiom rr_type__resourcerecordtype__class__first__bit_axiom1 :
+  (0 <= rr_type__resourcerecordtype__class__first__bit1)
+
+axiom rr_type__resourcerecordtype__class__last__bit_axiom1 :
+  (rr_type__resourcerecordtype__class__first__bit1 <  rr_type__resourcerecordtype__class__last__bit1)
+
+axiom rr_type__resourcerecordtype__class__position_axiom1 :
+  (0 <= rr_type__resourcerecordtype__class__position1)
+
+logic user_eq15 : us_rep1, us_rep1 -> bool
+
+logic dummy18 : query_type
+
+logic dummy19 : unsigned8
+
+logic dummy20 : unsigned8
+
+logic dummy21 : unsigned32
+
+logic dummy22 : unsigned32
+
+logic dummy23 : unsigned32
+
+logic dummy24 : unsigned16
+
+logic dummy25 : (int,character) farray
+
+logic dummy26 : (int,character) farray
+
+logic dummy27 : siglengthvaluetype
+
+logic dummy28 : unsigned32
+
+logic dummy29 : classtype
+
+logic dummy30 : us_private
+
+logic dummy31 : int
+
+type rrsigrecordtype__ref = { rrsigrecordtype__content : us_rep1
+}
+
+function rrsigrecordtype__ref___projection(a: rrsigrecordtype__ref) : us_rep1 =
+  (a).rrsigrecordtype__content
+
+logic rrsig_rec__attr__tag : int
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic zonefileline : (int,character) farray
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic zlength : int
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+logic attr__ATTRIBUTE_ADDRESS4 : int
+
+logic attr__ATTRIBUTE_ADDRESS5 : int
+
+logic attr__ATTRIBUTE_ADDRESS6 : int
+
+logic attr__ATTRIBUTE_ADDRESS7 : int
+
+logic attr__ATTRIBUTE_ADDRESS8 : int
+
+logic attr__ATTRIBUTE_ADDRESS9 : int
+
+logic attr__ATTRIBUTE_ADDRESS10 : int
+
+logic r13b : int
+
+logic attr__ATTRIBUTE_ADDRESS11 : int
+
+logic r14b : int
+
+logic attr__ATTRIBUTE_ADDRESS12 : int
+
+logic to_rep7 : integer -> int
+
+logic of_rep7 : int -> integer
+
+axiom inversion_axiom7 :
+  (forall x:integer [to_rep7(x)]. (of_rep7(to_rep7(x)) = x))
+
+axiom range_axiom7 : (forall x:integer [to_rep7(x)]. in_range1(to_rep7(x)))
+
+axiom coerce_axiom7 :
+  (forall x:int [to_rep7(of_rep7(x))]. (in_range1(x) ->
+  (to_rep7(of_rep7(x)) = x)))
+
+predicate dynamic_property(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq20 : int, int -> bool
+
+axiom bool_eq_def19 :
+  (forall x:int. forall y:int [bool_eq20(x, y)]. (((x = y) -> (bool_eq20(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq20(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE13 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check13 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE13 : us_image -> int
+
+logic user_eq16 : integer, integer -> bool
+
+logic dummy32 : integer
+
+type t15b__ref = { t15b__content : integer
+}
+
+function t15b__ref___projection(a: t15b__ref) : integer = (a).t15b__content
+
+logic attr__ATTRIBUTE_ADDRESS13 : int
+
+logic r16b : int
+
+logic attr__ATTRIBUTE_ADDRESS14 : int
+
+predicate dynamic_property1(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq21 : int, int -> bool
+
+axiom bool_eq_def20 :
+  (forall x:int. forall y:int [bool_eq21(x, y)]. (((x = y) -> (bool_eq21(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq21(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE14 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check14 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE14 : us_image -> int
+
+logic user_eq17 : integer, integer -> bool
+
+logic dummy33 : integer
+
+type t17b__ref = { t17b__content : integer
+}
+
+function t17b__ref___projection(a: t17b__ref) : integer = (a).t17b__content
+
+logic attr__ATTRIBUTE_ADDRESS15 : int
+
+logic zone_file_parser__parserrsig2ndline__timestring__aggregate_def : int -> (int,character) farray
+
+axiom def_axiom :
+  (forall temp___1468:int.
+  (forall temp___1469:int.
+  ((zone_file_parser__parserrsig2ndline__timestring__aggregate_def(temp___1468)[temp___1469]) = of_rep(temp___1468))))
+
+logic rrsig_rec__split_fields : query_type
+
+logic rrsig_rec__split_fields1 : unsigned8
+
+logic rrsig_rec__split_fields2 : unsigned8
+
+logic rrsig_rec__split_fields3 : unsigned32
+
+logic rrsig_rec__split_fields4 : unsigned32
+
+logic rrsig_rec__split_fields5 : unsigned32
+
+logic rrsig_rec__split_fields6 : unsigned16
+
+logic rrsig_rec__split_fields7 : (int,character) farray
+
+logic rrsig_rec__split_fields8 : (int,character) farray
+
+logic rrsig_rec__split_fields9 : siglengthvaluetype
+
+logic rrsig_rec__split_fields10 : unsigned32
+
+logic rrsig_rec__split_fields11 : classtype
+
+logic rrsig_rec__split_fields12 : us_private
+
+logic success : bool
+
+logic begidx : int
+
+logic endidx : int
+
+logic lengthoftoken : int
+
+logic foundtype : int
+
+logic timestring : (int,character) farray
+
+logic i : int
+
+logic i1 : int
+
+logic i2 : int
+
+logic i3 : int
+
+logic o : unsigned32
+
+logic o1 : query_type
+
+logic o2 : unsigned8
+
+logic o3 : unsigned8
+
+logic o4 : unsigned32
+
+logic o5 : unsigned32
+
+logic o6 : unsigned32
+
+logic o7 : unsigned16
+
+logic o8 : (int,character) farray
+
+logic o9 : (int,character) farray
+
+logic o10 : siglengthvaluetype
+
+logic o11 : unsigned32
+
+logic o12 : classtype
+
+logic o13 : us_private
+
+logic temp___1486 : query_type
+
+logic temp___14861 : unsigned8
+
+logic temp___14862 : unsigned8
+
+logic temp___14863 : unsigned32
+
+logic temp___14864 : unsigned32
+
+logic temp___14865 : unsigned32
+
+logic temp___14866 : unsigned16
+
+logic temp___14867 : (int,character) farray
+
+logic temp___14868 : (int,character) farray
+
+logic temp___14869 : siglengthvaluetype
+
+logic temp___148610 : unsigned32
+
+logic temp___148611 : classtype
+
+logic temp___148612 : us_private
+
+logic temp___148613 : int
+
+logic temp___1472 : (int,character) farray
+
+logic temp___1476 : int
+
+logic temp___1475 : int
+
+logic temp___1474 : int
+
+logic temp___1471 : int
+
+logic o14 : int
+
+logic o15 : character
+
+logic o16 : int
+
+logic o17 : character
+
+logic o18 : (int,character) farray
+
+logic temp___1480 : bool
+
+logic temp___1479 : int
+
+logic j : int
+
+logic o19 : int
+
+logic o20 : character
+
+logic o21 : int
+
+logic o22 : bool
+
+logic o23 : unsigned32
+
+logic o24 : query_type
+
+logic o25 : unsigned8
+
+logic o26 : unsigned8
+
+logic o27 : unsigned32
+
+logic o28 : unsigned32
+
+logic o29 : unsigned32
+
+logic o30 : unsigned16
+
+logic o31 : (int,character) farray
+
+logic o32 : (int,character) farray
+
+logic o33 : siglengthvaluetype
+
+logic o34 : unsigned32
+
+logic o35 : classtype
+
+logic o36 : us_private
+
+logic temp___1484 : query_type
+
+logic temp___14841 : unsigned8
+
+logic temp___14842 : unsigned8
+
+logic temp___14843 : unsigned32
+
+logic temp___14844 : unsigned32
+
+logic temp___14845 : unsigned32
+
+logic temp___14846 : unsigned16
+
+logic temp___14847 : (int,character) farray
+
+logic temp___14848 : (int,character) farray
+
+logic temp___14849 : siglengthvaluetype
+
+logic temp___148410 : unsigned32
+
+logic temp___148411 : classtype
+
+logic temp___148412 : us_private
+
+logic temp___148413 : int
+
+logic o37 : int
+
+logic o38 : unsigned16
+
+logic o39 : query_type
+
+logic o40 : unsigned8
+
+logic o41 : unsigned8
+
+logic o42 : unsigned32
+
+logic o43 : unsigned32
+
+logic o44 : unsigned32
+
+logic o45 : unsigned16
+
+logic o46 : (int,character) farray
+
+logic o47 : (int,character) farray
+
+logic o48 : siglengthvaluetype
+
+logic o49 : unsigned32
+
+logic o50 : classtype
+
+logic o51 : us_private
+
+logic temp___1488 : query_type
+
+logic temp___14881 : unsigned8
+
+logic temp___14882 : unsigned8
+
+logic temp___14883 : unsigned32
+
+logic temp___14884 : unsigned32
+
+logic temp___14885 : unsigned32
+
+logic temp___14886 : unsigned16
+
+logic temp___14887 : (int,character) farray
+
+logic temp___14888 : (int,character) farray
+
+logic temp___14889 : siglengthvaluetype
+
+logic temp___148810 : unsigned32
+
+logic temp___148811 : classtype
+
+logic temp___148812 : us_private
+
+logic temp___148813 : int
+
+logic o52 : int
+
+logic o53 : int
+
+logic temp___1495 : int
+
+logic temp___1496 : int
+
+logic temp___1493 : query_type
+
+logic temp___14931 : unsigned8
+
+logic temp___14932 : unsigned8
+
+logic temp___14933 : unsigned32
+
+logic temp___14934 : unsigned32
+
+logic temp___14935 : unsigned32
+
+logic temp___14936 : unsigned16
+
+logic temp___14937 : (int,character) farray
+
+logic temp___14938 : (int,character) farray
+
+logic temp___14939 : siglengthvaluetype
+
+logic temp___149310 : unsigned32
+
+logic temp___149311 : classtype
+
+logic temp___149312 : us_private
+
+logic temp___149313 : int
+
+logic o54 : int
+
+logic o55 : int
+
+logic temp___1490 : int
+
+logic o56 : character
+
+logic o57 : int
+
+logic o58 : (int,character) farray
+
+logic o59 : query_type
+
+logic o60 : unsigned8
+
+logic o61 : unsigned8
+
+logic o62 : unsigned32
+
+logic o63 : unsigned32
+
+logic o64 : unsigned32
+
+logic o65 : unsigned16
+
+logic o66 : (int,character) farray
+
+logic o67 : (int,character) farray
+
+logic o68 : siglengthvaluetype
+
+logic o69 : unsigned32
+
+logic o70 : classtype
+
+logic o71 : us_private
+
+logic temp___1492 : query_type
+
+logic temp___14921 : unsigned8
+
+logic temp___14922 : unsigned8
+
+logic temp___14923 : unsigned32
+
+logic temp___14924 : unsigned32
+
+logic temp___14925 : unsigned32
+
+logic temp___14926 : unsigned16
+
+logic temp___14927 : (int,character) farray
+
+logic temp___14928 : (int,character) farray
+
+logic temp___14929 : siglengthvaluetype
+
+logic temp___149210 : unsigned32
+
+logic temp___149211 : classtype
+
+logic temp___149212 : us_private
+
+logic temp___149213 : int
+
+logic o72 : character
+
+logic o73 : (int,character) farray
+
+logic o74 : query_type
+
+logic o75 : unsigned8
+
+logic o76 : unsigned8
+
+logic o77 : unsigned32
+
+logic o78 : unsigned32
+
+logic o79 : unsigned32
+
+logic o80 : unsigned16
+
+logic o81 : (int,character) farray
+
+logic o82 : (int,character) farray
+
+logic o83 : siglengthvaluetype
+
+logic o84 : unsigned32
+
+logic o85 : classtype
+
+logic o86 : us_private
+
+logic temp___1501 : query_type
+
+logic temp___15011 : unsigned8
+
+logic temp___15012 : unsigned8
+
+logic temp___15013 : unsigned32
+
+logic temp___15014 : unsigned32
+
+logic temp___15015 : unsigned32
+
+logic temp___15016 : unsigned16
+
+logic temp___15017 : (int,character) farray
+
+logic temp___15018 : (int,character) farray
+
+logic temp___15019 : siglengthvaluetype
+
+logic temp___150110 : unsigned32
+
+logic temp___150111 : classtype
+
+logic temp___150112 : us_private
+
+logic temp___150113 : int
+
+logic rrsig_rec__split_fields13 : query_type
+
+logic rrsig_rec__split_fields14 : unsigned8
+
+logic rrsig_rec__split_fields15 : unsigned8
+
+logic rrsig_rec__split_fields16 : unsigned32
+
+logic rrsig_rec__split_fields17 : unsigned32
+
+logic rrsig_rec__split_fields18 : unsigned32
+
+logic rrsig_rec__split_fields19 : unsigned16
+
+logic rrsig_rec__split_fields20 : (int,character) farray
+
+logic rrsig_rec__split_fields21 : (int,character) farray
+
+logic rrsig_rec__split_fields22 : siglengthvaluetype
+
+logic rrsig_rec__split_fields23 : unsigned32
+
+logic rrsig_rec__split_fields24 : classtype
+
+logic rrsig_rec__split_fields25 : us_private
+
+logic i4 : int
+
+logic i5 : int
+
+logic result : (int,character) farray
+
+logic timestring1 : (int,character) farray
+
+logic result1 : int
+
+logic begidx1 : int
+
+logic begidx2 : int
+
+logic endidx1 : int
+
+logic foundtype1 : int
+
+logic result2 : bool
+
+logic success1 : bool
+
+logic success2 : bool
+
+logic parser_utilities__convert32bitunsigned__value : t1
+
+logic result3 : query_type
+
+logic result4 : unsigned8
+
+logic result5 : unsigned8
+
+logic result6 : unsigned32
+
+logic result7 : unsigned32
+
+logic result8 : unsigned32
+
+logic result9 : unsigned16
+
+logic result10 : (int,character) farray
+
+logic result11 : (int,character) farray
+
+logic result12 : siglengthvaluetype
+
+logic result13 : unsigned32
+
+logic result14 : classtype
+
+logic result15 : us_private
+
+logic rrsig_rec__split_fields26 : query_type
+
+logic rrsig_rec__split_fields27 : unsigned8
+
+logic rrsig_rec__split_fields28 : unsigned8
+
+logic rrsig_rec__split_fields29 : unsigned32
+
+logic rrsig_rec__split_fields30 : unsigned32
+
+logic rrsig_rec__split_fields31 : unsigned32
+
+logic rrsig_rec__split_fields32 : unsigned16
+
+logic rrsig_rec__split_fields33 : (int,character) farray
+
+logic rrsig_rec__split_fields34 : (int,character) farray
+
+logic rrsig_rec__split_fields35 : siglengthvaluetype
+
+logic rrsig_rec__split_fields36 : unsigned32
+
+logic rrsig_rec__split_fields37 : classtype
+
+logic rrsig_rec__split_fields38 : us_private
+
+logic result16 : int
+
+logic i6 : int
+
+logic timestring2 : (int,character) farray
+
+logic i7 : int
+
+logic result17 : (int,character) farray
+
+logic timestring3 : (int,character) farray
+
+logic result18 : int
+
+logic i8 : int
+
+logic timestring4 : (int,character) farray
+
+logic i9 : int
+
+logic timestring5 : (int,character) farray
+
+logic i10 : int
+
+logic timestring6 : (int,character) farray
+
+logic i11 : int
+
+logic timestring7 : (int,character) farray
+
+logic i12 : int
+
+logic timestring8 : (int,character) farray
+
+logic i13 : int
+
+logic timestring9 : (int,character) farray
+
+logic i14 : int
+
+logic result19 : int
+
+logic i15 : int
+
+logic success3 : bool
+
+logic i16 : int
+
+logic result20 : bool
+
+logic success4 : bool
+
+logic success5 : bool
+
+logic success6 : bool
+
+logic result21 : int
+
+logic i17 : int
+
+logic success7 : bool
+
+logic success8 : bool
+
+logic success9 : bool
+
+logic i18 : int
+
+logic success10 : bool
+
+logic i19 : int
+
+logic success11 : bool
+
+logic i20 : int
+
+logic success12 : bool
+
+logic i21 : int
+
+logic success13 : bool
+
+logic i22 : int
+
+logic success14 : bool
+
+logic i23 : int
+
+logic success15 : bool
+
+logic i24 : int
+
+logic success16 : bool
+
+logic i25 : int
+
+logic success17 : bool
+
+logic parser_utilities__converttimestring__timeval : t1
+
+logic result22 : query_type
+
+logic result23 : unsigned8
+
+logic result24 : unsigned8
+
+logic result25 : unsigned32
+
+logic result26 : unsigned32
+
+logic result27 : unsigned32
+
+logic result28 : unsigned16
+
+logic result29 : (int,character) farray
+
+logic result30 : (int,character) farray
+
+logic result31 : siglengthvaluetype
+
+logic result32 : unsigned32
+
+logic result33 : classtype
+
+logic result34 : us_private
+
+logic rrsig_rec__split_fields39 : query_type
+
+logic rrsig_rec__split_fields40 : unsigned8
+
+logic rrsig_rec__split_fields41 : unsigned8
+
+logic rrsig_rec__split_fields42 : unsigned32
+
+logic rrsig_rec__split_fields43 : unsigned32
+
+logic rrsig_rec__split_fields44 : unsigned32
+
+logic rrsig_rec__split_fields45 : unsigned16
+
+logic rrsig_rec__split_fields46 : (int,character) farray
+
+logic rrsig_rec__split_fields47 : (int,character) farray
+
+logic rrsig_rec__split_fields48 : siglengthvaluetype
+
+logic rrsig_rec__split_fields49 : unsigned32
+
+logic rrsig_rec__split_fields50 : classtype
+
+logic rrsig_rec__split_fields51 : us_private
+
+logic rrsig_rec__split_fields52 : query_type
+
+logic rrsig_rec__split_fields53 : unsigned8
+
+logic rrsig_rec__split_fields54 : unsigned8
+
+logic rrsig_rec__split_fields55 : unsigned32
+
+logic rrsig_rec__split_fields56 : unsigned32
+
+logic rrsig_rec__split_fields57 : unsigned32
+
+logic rrsig_rec__split_fields58 : unsigned16
+
+logic rrsig_rec__split_fields59 : (int,character) farray
+
+logic rrsig_rec__split_fields60 : (int,character) farray
+
+logic rrsig_rec__split_fields61 : siglengthvaluetype
+
+logic rrsig_rec__split_fields62 : unsigned32
+
+logic rrsig_rec__split_fields63 : classtype
+
+logic rrsig_rec__split_fields64 : us_private
+
+logic success18 : bool
+
+logic rrsig_rec__split_fields65 : query_type
+
+logic rrsig_rec__split_fields66 : unsigned8
+
+logic rrsig_rec__split_fields67 : unsigned8
+
+logic rrsig_rec__split_fields68 : unsigned32
+
+logic rrsig_rec__split_fields69 : unsigned32
+
+logic rrsig_rec__split_fields70 : unsigned32
+
+logic rrsig_rec__split_fields71 : unsigned16
+
+logic rrsig_rec__split_fields72 : (int,character) farray
+
+logic rrsig_rec__split_fields73 : (int,character) farray
+
+logic rrsig_rec__split_fields74 : siglengthvaluetype
+
+logic rrsig_rec__split_fields75 : unsigned32
+
+logic rrsig_rec__split_fields76 : classtype
+
+logic rrsig_rec__split_fields77 : us_private
+
+logic success19 : bool
+
+logic rrsig_rec__split_fields78 : query_type
+
+logic rrsig_rec__split_fields79 : unsigned8
+
+logic rrsig_rec__split_fields80 : unsigned8
+
+logic rrsig_rec__split_fields81 : unsigned32
+
+logic rrsig_rec__split_fields82 : unsigned32
+
+logic rrsig_rec__split_fields83 : unsigned32
+
+logic rrsig_rec__split_fields84 : unsigned16
+
+logic rrsig_rec__split_fields85 : (int,character) farray
+
+logic rrsig_rec__split_fields86 : (int,character) farray
+
+logic rrsig_rec__split_fields87 : siglengthvaluetype
+
+logic rrsig_rec__split_fields88 : unsigned32
+
+logic rrsig_rec__split_fields89 : classtype
+
+logic rrsig_rec__split_fields90 : us_private
+
+logic success20 : bool
+
+logic timestring10 : (int,character) farray
+
+logic i26 : int
+
+logic i27 : int
+
+logic rrsig_rec__split_fields91 : query_type
+
+logic rrsig_rec__split_fields92 : unsigned8
+
+logic rrsig_rec__split_fields93 : unsigned8
+
+logic rrsig_rec__split_fields94 : unsigned32
+
+logic rrsig_rec__split_fields95 : unsigned32
+
+logic rrsig_rec__split_fields96 : unsigned32
+
+logic rrsig_rec__split_fields97 : unsigned16
+
+logic rrsig_rec__split_fields98 : (int,character) farray
+
+logic rrsig_rec__split_fields99 : (int,character) farray
+
+logic rrsig_rec__split_fields100 : siglengthvaluetype
+
+logic rrsig_rec__split_fields101 : unsigned32
+
+logic rrsig_rec__split_fields102 : classtype
+
+logic rrsig_rec__split_fields103 : us_private
+
+logic success21 : bool
+
+logic timestring11 : (int,character) farray
+
+logic i28 : int
+
+logic i29 : int
+
+logic rrsig_rec__split_fields104 : query_type
+
+logic rrsig_rec__split_fields105 : unsigned8
+
+logic rrsig_rec__split_fields106 : unsigned8
+
+logic rrsig_rec__split_fields107 : unsigned32
+
+logic rrsig_rec__split_fields108 : unsigned32
+
+logic rrsig_rec__split_fields109 : unsigned32
+
+logic rrsig_rec__split_fields110 : unsigned16
+
+logic rrsig_rec__split_fields111 : (int,character) farray
+
+logic rrsig_rec__split_fields112 : (int,character) farray
+
+logic rrsig_rec__split_fields113 : siglengthvaluetype
+
+logic rrsig_rec__split_fields114 : unsigned32
+
+logic rrsig_rec__split_fields115 : classtype
+
+logic rrsig_rec__split_fields116 : us_private
+
+logic success22 : bool
+
+logic timestring12 : (int,character) farray
+
+logic i30 : int
+
+logic i31 : int
+
+logic rrsig_rec__split_fields117 : query_type
+
+logic rrsig_rec__split_fields118 : unsigned8
+
+logic rrsig_rec__split_fields119 : unsigned8
+
+logic rrsig_rec__split_fields120 : unsigned32
+
+logic rrsig_rec__split_fields121 : unsigned32
+
+logic rrsig_rec__split_fields122 : unsigned32
+
+logic rrsig_rec__split_fields123 : unsigned16
+
+logic rrsig_rec__split_fields124 : (int,character) farray
+
+logic rrsig_rec__split_fields125 : (int,character) farray
+
+logic rrsig_rec__split_fields126 : siglengthvaluetype
+
+logic rrsig_rec__split_fields127 : unsigned32
+
+logic rrsig_rec__split_fields128 : classtype
+
+logic rrsig_rec__split_fields129 : us_private
+
+logic success23 : bool
+
+logic timestring13 : (int,character) farray
+
+logic i32 : int
+
+logic i33 : int
+
+logic result35 : bool
+
+logic success24 : bool
+
+logic result36 : int
+
+logic begidx3 : int
+
+logic begidx4 : int
+
+logic endidx2 : int
+
+logic foundtype2 : int
+
+logic result37 : bool
+
+logic success25 : bool
+
+logic success26 : bool
+
+logic parser_utilities__convert16bitunsigned__value : t
+
+logic result38 : query_type
+
+logic result39 : unsigned8
+
+logic result40 : unsigned8
+
+logic result41 : unsigned32
+
+logic result42 : unsigned32
+
+logic result43 : unsigned32
+
+logic result44 : unsigned16
+
+logic result45 : (int,character) farray
+
+logic result46 : (int,character) farray
+
+logic result47 : siglengthvaluetype
+
+logic result48 : unsigned32
+
+logic result49 : classtype
+
+logic result50 : us_private
+
+logic rrsig_rec__split_fields130 : query_type
+
+logic rrsig_rec__split_fields131 : unsigned8
+
+logic rrsig_rec__split_fields132 : unsigned8
+
+logic rrsig_rec__split_fields133 : unsigned32
+
+logic rrsig_rec__split_fields134 : unsigned32
+
+logic rrsig_rec__split_fields135 : unsigned32
+
+logic rrsig_rec__split_fields136 : unsigned16
+
+logic rrsig_rec__split_fields137 : (int,character) farray
+
+logic rrsig_rec__split_fields138 : (int,character) farray
+
+logic rrsig_rec__split_fields139 : siglengthvaluetype
+
+logic rrsig_rec__split_fields140 : unsigned32
+
+logic rrsig_rec__split_fields141 : classtype
+
+logic rrsig_rec__split_fields142 : us_private
+
+logic rrsig_rec__split_fields143 : query_type
+
+logic rrsig_rec__split_fields144 : unsigned8
+
+logic rrsig_rec__split_fields145 : unsigned8
+
+logic rrsig_rec__split_fields146 : unsigned32
+
+logic rrsig_rec__split_fields147 : unsigned32
+
+logic rrsig_rec__split_fields148 : unsigned32
+
+logic rrsig_rec__split_fields149 : unsigned16
+
+logic rrsig_rec__split_fields150 : (int,character) farray
+
+logic rrsig_rec__split_fields151 : (int,character) farray
+
+logic rrsig_rec__split_fields152 : siglengthvaluetype
+
+logic rrsig_rec__split_fields153 : unsigned32
+
+logic rrsig_rec__split_fields154 : classtype
+
+logic rrsig_rec__split_fields155 : us_private
+
+logic success27 : bool
+
+logic rrsig_rec__split_fields156 : query_type
+
+logic rrsig_rec__split_fields157 : unsigned8
+
+logic rrsig_rec__split_fields158 : unsigned8
+
+logic rrsig_rec__split_fields159 : unsigned32
+
+logic rrsig_rec__split_fields160 : unsigned32
+
+logic rrsig_rec__split_fields161 : unsigned32
+
+logic rrsig_rec__split_fields162 : unsigned16
+
+logic rrsig_rec__split_fields163 : (int,character) farray
+
+logic rrsig_rec__split_fields164 : (int,character) farray
+
+logic rrsig_rec__split_fields165 : siglengthvaluetype
+
+logic rrsig_rec__split_fields166 : unsigned32
+
+logic rrsig_rec__split_fields167 : classtype
+
+logic rrsig_rec__split_fields168 : us_private
+
+logic success28 : bool
+
+logic rrsig_rec__split_fields169 : query_type
+
+logic rrsig_rec__split_fields170 : unsigned8
+
+logic rrsig_rec__split_fields171 : unsigned8
+
+logic rrsig_rec__split_fields172 : unsigned32
+
+logic rrsig_rec__split_fields173 : unsigned32
+
+logic rrsig_rec__split_fields174 : unsigned32
+
+logic rrsig_rec__split_fields175 : unsigned16
+
+logic rrsig_rec__split_fields176 : (int,character) farray
+
+logic rrsig_rec__split_fields177 : (int,character) farray
+
+logic rrsig_rec__split_fields178 : siglengthvaluetype
+
+logic rrsig_rec__split_fields179 : unsigned32
+
+logic rrsig_rec__split_fields180 : classtype
+
+logic rrsig_rec__split_fields181 : us_private
+
+logic success29 : bool
+
+logic begidx5 : int
+
+logic endidx3 : int
+
+logic foundtype3 : int
+
+logic rrsig_rec__split_fields182 : query_type
+
+logic rrsig_rec__split_fields183 : unsigned8
+
+logic rrsig_rec__split_fields184 : unsigned8
+
+logic rrsig_rec__split_fields185 : unsigned32
+
+logic rrsig_rec__split_fields186 : unsigned32
+
+logic rrsig_rec__split_fields187 : unsigned32
+
+logic rrsig_rec__split_fields188 : unsigned16
+
+logic rrsig_rec__split_fields189 : (int,character) farray
+
+logic rrsig_rec__split_fields190 : (int,character) farray
+
+logic rrsig_rec__split_fields191 : siglengthvaluetype
+
+logic rrsig_rec__split_fields192 : unsigned32
+
+logic rrsig_rec__split_fields193 : classtype
+
+logic rrsig_rec__split_fields194 : us_private
+
+logic success30 : bool
+
+logic begidx6 : int
+
+logic endidx4 : int
+
+logic foundtype4 : int
+
+logic result51 : bool
+
+logic success31 : bool
+
+logic result52 : int
+
+logic begidx7 : int
+
+logic begidx8 : int
+
+logic endidx5 : int
+
+logic foundtype5 : int
+
+logic result53 : bool
+
+logic success32 : bool
+
+logic result54 : int
+
+logic lengthoftoken1 : int
+
+logic result55 : int
+
+logic i34 : int
+
+logic rrsig_rec__split_fields195 : query_type
+
+logic rrsig_rec__split_fields196 : unsigned8
+
+logic rrsig_rec__split_fields197 : unsigned8
+
+logic rrsig_rec__split_fields198 : unsigned32
+
+logic rrsig_rec__split_fields199 : unsigned32
+
+logic rrsig_rec__split_fields200 : unsigned32
+
+logic rrsig_rec__split_fields201 : unsigned16
+
+logic rrsig_rec__split_fields202 : (int,character) farray
+
+logic rrsig_rec__split_fields203 : (int,character) farray
+
+logic rrsig_rec__split_fields204 : siglengthvaluetype
+
+logic rrsig_rec__split_fields205 : unsigned32
+
+logic rrsig_rec__split_fields206 : classtype
+
+logic rrsig_rec__split_fields207 : us_private
+
+logic i35 : int
+
+logic result56 : query_type
+
+logic result57 : unsigned8
+
+logic result58 : unsigned8
+
+logic result59 : unsigned32
+
+logic result60 : unsigned32
+
+logic result61 : unsigned32
+
+logic result62 : unsigned16
+
+logic result63 : (int,character) farray
+
+logic result64 : (int,character) farray
+
+logic result65 : siglengthvaluetype
+
+logic result66 : unsigned32
+
+logic result67 : classtype
+
+logic result68 : us_private
+
+logic rrsig_rec__split_fields208 : query_type
+
+logic rrsig_rec__split_fields209 : unsigned8
+
+logic rrsig_rec__split_fields210 : unsigned8
+
+logic rrsig_rec__split_fields211 : unsigned32
+
+logic rrsig_rec__split_fields212 : unsigned32
+
+logic rrsig_rec__split_fields213 : unsigned32
+
+logic rrsig_rec__split_fields214 : unsigned16
+
+logic rrsig_rec__split_fields215 : (int,character) farray
+
+logic rrsig_rec__split_fields216 : (int,character) farray
+
+logic rrsig_rec__split_fields217 : siglengthvaluetype
+
+logic rrsig_rec__split_fields218 : unsigned32
+
+logic rrsig_rec__split_fields219 : classtype
+
+logic rrsig_rec__split_fields220 : us_private
+
+logic result69 : int
+
+logic i36 : int
+
+logic rrsig_rec__split_fields221 : query_type
+
+logic rrsig_rec__split_fields222 : unsigned8
+
+logic rrsig_rec__split_fields223 : unsigned8
+
+logic rrsig_rec__split_fields224 : unsigned32
+
+logic rrsig_rec__split_fields225 : unsigned32
+
+logic rrsig_rec__split_fields226 : unsigned32
+
+logic rrsig_rec__split_fields227 : unsigned16
+
+logic rrsig_rec__split_fields228 : (int,character) farray
+
+logic rrsig_rec__split_fields229 : (int,character) farray
+
+logic rrsig_rec__split_fields230 : siglengthvaluetype
+
+logic rrsig_rec__split_fields231 : unsigned32
+
+logic rrsig_rec__split_fields232 : classtype
+
+logic rrsig_rec__split_fields233 : us_private
+
+logic i37 : int
+
+logic rrsig_rec__split_fields234 : query_type
+
+logic rrsig_rec__split_fields235 : unsigned8
+
+logic rrsig_rec__split_fields236 : unsigned8
+
+logic rrsig_rec__split_fields237 : unsigned32
+
+logic rrsig_rec__split_fields238 : unsigned32
+
+logic rrsig_rec__split_fields239 : unsigned32
+
+logic rrsig_rec__split_fields240 : unsigned16
+
+logic rrsig_rec__split_fields241 : (int,character) farray
+
+logic rrsig_rec__split_fields242 : (int,character) farray
+
+logic rrsig_rec__split_fields243 : siglengthvaluetype
+
+logic rrsig_rec__split_fields244 : unsigned32
+
+logic rrsig_rec__split_fields245 : classtype
+
+logic rrsig_rec__split_fields246 : us_private
+
+logic i38 : int
+
+logic rrsig_rec__split_fields247 : query_type
+
+logic rrsig_rec__split_fields248 : unsigned8
+
+logic rrsig_rec__split_fields249 : unsigned8
+
+logic rrsig_rec__split_fields250 : unsigned32
+
+logic rrsig_rec__split_fields251 : unsigned32
+
+logic rrsig_rec__split_fields252 : unsigned32
+
+logic rrsig_rec__split_fields253 : unsigned16
+
+logic rrsig_rec__split_fields254 : (int,character) farray
+
+logic rrsig_rec__split_fields255 : (int,character) farray
+
+logic rrsig_rec__split_fields256 : siglengthvaluetype
+
+logic rrsig_rec__split_fields257 : unsigned32
+
+logic rrsig_rec__split_fields258 : classtype
+
+logic rrsig_rec__split_fields259 : us_private
+
+logic i39 : int
+
+logic rrsig_rec__split_fields260 : query_type
+
+logic rrsig_rec__split_fields261 : unsigned8
+
+logic rrsig_rec__split_fields262 : unsigned8
+
+logic rrsig_rec__split_fields263 : unsigned32
+
+logic rrsig_rec__split_fields264 : unsigned32
+
+logic rrsig_rec__split_fields265 : unsigned32
+
+logic rrsig_rec__split_fields266 : unsigned16
+
+logic rrsig_rec__split_fields267 : (int,character) farray
+
+logic rrsig_rec__split_fields268 : (int,character) farray
+
+logic rrsig_rec__split_fields269 : siglengthvaluetype
+
+logic rrsig_rec__split_fields270 : unsigned32
+
+logic rrsig_rec__split_fields271 : classtype
+
+logic rrsig_rec__split_fields272 : us_private
+
+logic i40 : int
+
+logic rrsig_rec__split_fields273 : query_type
+
+logic rrsig_rec__split_fields274 : unsigned8
+
+logic rrsig_rec__split_fields275 : unsigned8
+
+logic rrsig_rec__split_fields276 : unsigned32
+
+logic rrsig_rec__split_fields277 : unsigned32
+
+logic rrsig_rec__split_fields278 : unsigned32
+
+logic rrsig_rec__split_fields279 : unsigned16
+
+logic rrsig_rec__split_fields280 : (int,character) farray
+
+logic rrsig_rec__split_fields281 : (int,character) farray
+
+logic rrsig_rec__split_fields282 : siglengthvaluetype
+
+logic rrsig_rec__split_fields283 : unsigned32
+
+logic rrsig_rec__split_fields284 : classtype
+
+logic rrsig_rec__split_fields285 : us_private
+
+logic i41 : int
+
+logic rrsig_rec__split_fields286 : query_type
+
+logic rrsig_rec__split_fields287 : unsigned8
+
+logic rrsig_rec__split_fields288 : unsigned8
+
+logic rrsig_rec__split_fields289 : unsigned32
+
+logic rrsig_rec__split_fields290 : unsigned32
+
+logic rrsig_rec__split_fields291 : unsigned32
+
+logic rrsig_rec__split_fields292 : unsigned16
+
+logic rrsig_rec__split_fields293 : (int,character) farray
+
+logic rrsig_rec__split_fields294 : (int,character) farray
+
+logic rrsig_rec__split_fields295 : siglengthvaluetype
+
+logic rrsig_rec__split_fields296 : unsigned32
+
+logic rrsig_rec__split_fields297 : classtype
+
+logic rrsig_rec__split_fields298 : us_private
+
+logic i42 : int
+
+logic rrsig_rec__split_fields299 : query_type
+
+logic rrsig_rec__split_fields300 : unsigned8
+
+logic rrsig_rec__split_fields301 : unsigned8
+
+logic rrsig_rec__split_fields302 : unsigned32
+
+logic rrsig_rec__split_fields303 : unsigned32
+
+logic rrsig_rec__split_fields304 : unsigned32
+
+logic rrsig_rec__split_fields305 : unsigned16
+
+logic rrsig_rec__split_fields306 : (int,character) farray
+
+logic rrsig_rec__split_fields307 : (int,character) farray
+
+logic rrsig_rec__split_fields308 : siglengthvaluetype
+
+logic rrsig_rec__split_fields309 : unsigned32
+
+logic rrsig_rec__split_fields310 : classtype
+
+logic rrsig_rec__split_fields311 : us_private
+
+logic i43 : int
+
+logic rrsig_rec__split_fields312 : query_type
+
+logic rrsig_rec__split_fields313 : unsigned8
+
+logic rrsig_rec__split_fields314 : unsigned8
+
+logic rrsig_rec__split_fields315 : unsigned32
+
+logic rrsig_rec__split_fields316 : unsigned32
+
+logic rrsig_rec__split_fields317 : unsigned32
+
+logic rrsig_rec__split_fields318 : unsigned16
+
+logic rrsig_rec__split_fields319 : (int,character) farray
+
+logic rrsig_rec__split_fields320 : (int,character) farray
+
+logic rrsig_rec__split_fields321 : siglengthvaluetype
+
+logic rrsig_rec__split_fields322 : unsigned32
+
+logic rrsig_rec__split_fields323 : classtype
+
+logic rrsig_rec__split_fields324 : us_private
+
+logic i44 : int
+
+logic result70 : int
+
+logic i45 : int
+
+logic rrsig_rec__split_fields325 : query_type
+
+logic rrsig_rec__split_fields326 : unsigned8
+
+logic rrsig_rec__split_fields327 : unsigned8
+
+logic rrsig_rec__split_fields328 : unsigned32
+
+logic rrsig_rec__split_fields329 : unsigned32
+
+logic rrsig_rec__split_fields330 : unsigned32
+
+logic rrsig_rec__split_fields331 : unsigned16
+
+logic rrsig_rec__split_fields332 : (int,character) farray
+
+logic rrsig_rec__split_fields333 : (int,character) farray
+
+logic rrsig_rec__split_fields334 : siglengthvaluetype
+
+logic rrsig_rec__split_fields335 : unsigned32
+
+logic rrsig_rec__split_fields336 : classtype
+
+logic rrsig_rec__split_fields337 : us_private
+
+logic i46 : int
+
+logic result71 : query_type
+
+logic result72 : unsigned8
+
+logic result73 : unsigned8
+
+logic result74 : unsigned32
+
+logic result75 : unsigned32
+
+logic result76 : unsigned32
+
+logic result77 : unsigned16
+
+logic result78 : (int,character) farray
+
+logic result79 : (int,character) farray
+
+logic result80 : siglengthvaluetype
+
+logic result81 : unsigned32
+
+logic result82 : classtype
+
+logic result83 : us_private
+
+logic rrsig_rec__split_fields338 : query_type
+
+logic rrsig_rec__split_fields339 : unsigned8
+
+logic rrsig_rec__split_fields340 : unsigned8
+
+logic rrsig_rec__split_fields341 : unsigned32
+
+logic rrsig_rec__split_fields342 : unsigned32
+
+logic rrsig_rec__split_fields343 : unsigned32
+
+logic rrsig_rec__split_fields344 : unsigned16
+
+logic rrsig_rec__split_fields345 : (int,character) farray
+
+logic rrsig_rec__split_fields346 : (int,character) farray
+
+logic rrsig_rec__split_fields347 : siglengthvaluetype
+
+logic rrsig_rec__split_fields348 : unsigned32
+
+logic rrsig_rec__split_fields349 : classtype
+
+logic rrsig_rec__split_fields350 : us_private
+
+logic result84 : int
+
+logic i47 : int
+
+logic rrsig_rec__split_fields351 : query_type
+
+logic rrsig_rec__split_fields352 : unsigned8
+
+logic rrsig_rec__split_fields353 : unsigned8
+
+logic rrsig_rec__split_fields354 : unsigned32
+
+logic rrsig_rec__split_fields355 : unsigned32
+
+logic rrsig_rec__split_fields356 : unsigned32
+
+logic rrsig_rec__split_fields357 : unsigned16
+
+logic rrsig_rec__split_fields358 : (int,character) farray
+
+logic rrsig_rec__split_fields359 : (int,character) farray
+
+logic rrsig_rec__split_fields360 : siglengthvaluetype
+
+logic rrsig_rec__split_fields361 : unsigned32
+
+logic rrsig_rec__split_fields362 : classtype
+
+logic rrsig_rec__split_fields363 : us_private
+
+logic i48 : int
+
+logic rrsig_rec__split_fields364 : query_type
+
+logic rrsig_rec__split_fields365 : unsigned8
+
+logic rrsig_rec__split_fields366 : unsigned8
+
+logic rrsig_rec__split_fields367 : unsigned32
+
+logic rrsig_rec__split_fields368 : unsigned32
+
+logic rrsig_rec__split_fields369 : unsigned32
+
+logic rrsig_rec__split_fields370 : unsigned16
+
+logic rrsig_rec__split_fields371 : (int,character) farray
+
+logic rrsig_rec__split_fields372 : (int,character) farray
+
+logic rrsig_rec__split_fields373 : siglengthvaluetype
+
+logic rrsig_rec__split_fields374 : unsigned32
+
+logic rrsig_rec__split_fields375 : classtype
+
+logic rrsig_rec__split_fields376 : us_private
+
+logic i49 : int
+
+axiom H : in_range5(zlength)
+
+axiom H1 : ((1 <= 256) -> in_range5(begidx))
+
+axiom H2 : ((1 <= 256) -> in_range5(endidx))
+
+axiom H3 : ((1 <= 256) -> in_range5(lengthoftoken))
+
+axiom H4 : ((0 <= 10) -> in_range4(foundtype))
+
+axiom H5 : (result = timestring)
+
+axiom H6 :
+  (timestring1 = zone_file_parser__parserrsig2ndline__timestring__aggregate_def(32))
+
+axiom H7 : (result1 = begidx)
+
+axiom H8 : (begidx1 = 1)
+
+axiom H9 : (((((begidx2 <= endidx1) and (begidx2 <= zlength)) and
+  (endidx1 <= zlength)) and ((foundtype1 = 1) ->
+  (forall i50:int. (((begidx2 <= i50) and (i50 <= endidx1)) ->
+  ((48 <= to_rep((zonefileline[i50]))) and
+  (to_rep((zonefileline[i50])) <= 57)))))) and ((in_range5(begidx2) and
+  in_range5(endidx1)) and in_range4(foundtype1)))
+
+axiom H10 : (result2 = success)
+
+axiom H11 : (((foundtype1 = 1) -> (success1 = match_bool(success, true,
+  false))) and ((not (foundtype1 = 1)) -> (success1 = match_bool(success,
+  false, false))))
+
+axiom H12 : true
+
+axiom H13 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (to_rep2(o) = parser_utilities__convert32bitunsigned__value)))
+
+axiom H14 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (rrsig_rec__split_fields = o1)))
+
+axiom H15 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (rrsig_rec__split_fields1 = o2)))
+
+axiom H16 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (rrsig_rec__split_fields2 = o3)))
+
+axiom H17 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (o = o4)))
+
+axiom H18 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (rrsig_rec__split_fields4 = o5)))
+
+axiom H19 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (rrsig_rec__split_fields5 = o6)))
+
+axiom H20 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (rrsig_rec__split_fields6 = o7)))
+
+axiom H21 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (rrsig_rec__split_fields7 = o8)))
+
+axiom H22 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (rrsig_rec__split_fields8 = o9)))
+
+axiom H23 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (rrsig_rec__split_fields9 = o10)))
+
+axiom H24 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (rrsig_rec__split_fields10 = o11)))
+
+axiom H25 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (rrsig_rec__split_fields11 = o12)))
+
+axiom H26 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (rrsig_rec__split_fields12 = o13)))
+
+axiom H27 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (temp___1486 = o1)))
+
+axiom H28 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (temp___14861 = o2)))
+
+axiom H29 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (temp___14862 = o3)))
+
+axiom H30 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (temp___14863 = o4)))
+
+axiom H31 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (temp___14864 = o5)))
+
+axiom H32 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (temp___14865 = o6)))
+
+axiom H33 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (temp___14866 = o7)))
+
+axiom H34 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (temp___14867 = o8)))
+
+axiom H35 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (temp___14868 = o9)))
+
+axiom H36 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (temp___14869 = o10)))
+
+axiom H37 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (temp___148610 = o11)))
+
+axiom H38 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (temp___148611 = o12)))
+
+axiom H39 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (temp___148612 = o13)))
+
+axiom H40 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (rrsig_rec__attr__tag = temp___148613)))
+
+axiom H41 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  ((result3 = rrsig_rec__split_fields) and
+  ((result4 = rrsig_rec__split_fields1) and
+  ((result5 = rrsig_rec__split_fields2) and
+  ((result6 = rrsig_rec__split_fields3) and
+  ((result7 = rrsig_rec__split_fields4) and
+  ((result8 = rrsig_rec__split_fields5) and
+  ((result9 = rrsig_rec__split_fields6) and
+  ((result10 = rrsig_rec__split_fields7) and
+  ((result11 = rrsig_rec__split_fields8) and
+  ((result12 = rrsig_rec__split_fields9) and
+  ((result13 = rrsig_rec__split_fields10) and
+  ((result14 = rrsig_rec__split_fields11) and
+  (result15 = rrsig_rec__split_fields12)))))))))))))))
+
+axiom H42 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  ((rrsig_rec__split_fields26 = temp___1486) and
+  ((rrsig_rec__split_fields27 = temp___14861) and
+  ((rrsig_rec__split_fields28 = temp___14862) and
+  ((rrsig_rec__split_fields29 = temp___14863) and
+  ((rrsig_rec__split_fields30 = temp___14864) and
+  ((rrsig_rec__split_fields31 = temp___14865) and
+  ((rrsig_rec__split_fields32 = temp___14866) and
+  ((rrsig_rec__split_fields33 = temp___14867) and
+  ((rrsig_rec__split_fields34 = temp___14868) and
+  ((rrsig_rec__split_fields35 = temp___14869) and
+  ((rrsig_rec__split_fields36 = temp___148610) and
+  ((rrsig_rec__split_fields37 = temp___148611) and
+  (rrsig_rec__split_fields38 = temp___148612)))))))))))))))
+
+axiom H43 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (i27 = i1)))
+
+axiom H44 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (i26 = i)))
+
+axiom H45 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (timestring10 = timestring1)))
+
+axiom H46 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (success20 = success2)))
+
+axiom H47 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  ((rrsig_rec__split_fields78 = rrsig_rec__split_fields26) and
+  ((rrsig_rec__split_fields79 = rrsig_rec__split_fields27) and
+  ((rrsig_rec__split_fields80 = rrsig_rec__split_fields28) and
+  ((rrsig_rec__split_fields81 = rrsig_rec__split_fields29) and
+  ((rrsig_rec__split_fields82 = rrsig_rec__split_fields30) and
+  ((rrsig_rec__split_fields83 = rrsig_rec__split_fields31) and
+  ((rrsig_rec__split_fields84 = rrsig_rec__split_fields32) and
+  ((rrsig_rec__split_fields85 = rrsig_rec__split_fields33) and
+  ((rrsig_rec__split_fields86 = rrsig_rec__split_fields34) and
+  ((rrsig_rec__split_fields87 = rrsig_rec__split_fields35) and
+  ((rrsig_rec__split_fields88 = rrsig_rec__split_fields36) and
+  ((rrsig_rec__split_fields89 = rrsig_rec__split_fields37) and
+  (rrsig_rec__split_fields90 = rrsig_rec__split_fields38)))))))))))))))
+
+axiom H48 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (i29 = i5)))
+
+axiom H49 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (i28 = i4)))
+
+axiom H50 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (timestring11 = timestring1)))
+
+axiom H51 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  (success21 = success2)))
+
+axiom H52 : ((success1 = true) -> ((not (((endidx1 - begidx2) + 1) = 14)) ->
+  ((rrsig_rec__split_fields91 = rrsig_rec__split_fields26) and
+  ((rrsig_rec__split_fields92 = rrsig_rec__split_fields27) and
+  ((rrsig_rec__split_fields93 = rrsig_rec__split_fields28) and
+  ((rrsig_rec__split_fields94 = rrsig_rec__split_fields29) and
+  ((rrsig_rec__split_fields95 = rrsig_rec__split_fields30) and
+  ((rrsig_rec__split_fields96 = rrsig_rec__split_fields31) and
+  ((rrsig_rec__split_fields97 = rrsig_rec__split_fields32) and
+  ((rrsig_rec__split_fields98 = rrsig_rec__split_fields33) and
+  ((rrsig_rec__split_fields99 = rrsig_rec__split_fields34) and
+  ((rrsig_rec__split_fields100 = rrsig_rec__split_fields35) and
+  ((rrsig_rec__split_fields101 = rrsig_rec__split_fields36) and
+  ((rrsig_rec__split_fields102 = rrsig_rec__split_fields37) and
+  (rrsig_rec__split_fields103 = rrsig_rec__split_fields38)))))))))))))))
+
+axiom H53 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  (result16 = i)))
+
+axiom H54 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  (i6 = 1)))
+
+axiom H55 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  (((1 <= i6) and (i6 <= 14)) -> (((temp___1472 = timestring1) and
+  ((temp___1476 = zlength) and ((temp___1475 = endidx1) and
+  ((temp___1474 = begidx2) and ((temp___1471 = i6) and
+  (((((((begidx2 = temp___1474) and (endidx1 = temp___1475)) and
+  (zlength = temp___1476)) and (endidx1 <= zlength)) and
+  ((endidx1 - begidx2) = 13)) and (i7 <= 14)) and (((((1 <= 14) ->
+  in_range8(i7)) and
+  (forall temp___1473:int. (((1 <= temp___1473) and (temp___1473 <= 14)) ->
+  ((i7 <= temp___1473) ->
+  ((timestring2[temp___1473]) = (temp___1472[temp___1473])))))) and
+  ((1 <= i7) and (i7 <= 14))) and (((((((((1 <= ((begidx2 + i7) - 1)) and
+  (((begidx2 + i7) - 1) <= 256)) and (o14 = ((begidx2 + i7) - 1))) and
+  (o15 = (zonefileline[o14]))) and (o16 = to_rep(o15))) and
+  (to_rep(o17) = o16)) and (o18 = (timestring2[i7 <- o17]))) and
+  ((result17 = timestring2) and (timestring3 = o18))) and
+  (i7 = 14))))))))) and (((i11 = i7) and (timestring6 = timestring3)) and
+  ((i12 = i7) and (timestring7 = timestring3)))))))
+
+axiom H56 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  (((1 <= i6) and (i6 <= 14)) -> (i13 = i11))))
+
+axiom H57 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  (((1 <= i6) and (i6 <= 14)) -> (timestring8 = timestring6))))
+
+axiom H58 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  (((1 <= i6) and (i6 <= 14)) -> (i14 = i12))))
+
+axiom H59 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  (((1 <= i6) and (i6 <= 14)) -> (timestring9 = timestring7))))
+
+axiom H60 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((not ((1 <= i6) and (i6 <= 14))) -> (i13 = i6))))
+
+axiom H61 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((not ((1 <= i6) and (i6 <= 14))) -> (timestring8 = timestring1))))
+
+axiom H62 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((not ((1 <= i6) and (i6 <= 14))) -> (i14 = i6))))
+
+axiom H63 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((not ((1 <= i6) and (i6 <= 14))) -> (timestring9 = timestring1))))
+
+axiom H64 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  (result19 = i1)))
+
+axiom H65 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  (i15 = 1)))
+
+axiom H66 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  (((1 <= i15) and (i15 <= 14)) -> (((temp___1480 = success1) and
+  ((temp___1479 = i15) and
+  ((forall j1:int. (((1 <= j1) and (j1 <= (i16 - 1))) ->
+   ((48 <= to_rep((timestring8[j1]))) and
+   (to_rep((timestring8[j1])) <= 57)))) and ((((1 <= 14) ->
+  in_range8(i16)) and ((1 <= i16) and (i16 <= 14))) and
+  ((((success7 = success4) and (success8 = success4)) and
+  (((not (to_rep((timestring8[i16])) <  48)) ->
+  (57 <  to_rep((timestring8[i16])))) and ((result20 = success3) and
+  (success4 = of_int2(0))))) or
+  (((not ((not (to_rep((timestring8[i16])) <  48)) ->
+  (57 <  to_rep((timestring8[i16]))))) and ((success5 = success3) and
+  (success6 = success3))) and (((success7 = success5) and
+  (success8 = success6)) and (i16 = 14)))))))) and (((i22 = i16) and
+  (success13 = success7)) and ((i23 = i16) and (success14 = success8)))))))
+
+axiom H67 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  (((1 <= i15) and (i15 <= 14)) -> (i24 = i22))))
+
+axiom H68 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  (((1 <= i15) and (i15 <= 14)) -> (success15 = success13))))
+
+axiom H69 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  (((1 <= i15) and (i15 <= 14)) -> (i25 = i23))))
+
+axiom H70 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  (((1 <= i15) and (i15 <= 14)) -> (success16 = success14))))
+
+axiom H71 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((not ((1 <= i15) and (i15 <= 14))) -> (i24 = i15))))
+
+axiom H72 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((not ((1 <= i15) and (i15 <= 14))) -> (success15 = success1))))
+
+axiom H73 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((not ((1 <= i15) and (i15 <= 14))) -> (i25 = i15))))
+
+axiom H74 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((not ((1 <= i15) and (i15 <= 14))) -> (success16 = success1))))
+
+axiom H75 : true
+
+axiom H76 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) ->
+  (to_rep2(o23) = parser_utilities__converttimestring__timeval))))
+
+axiom H77 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> (rrsig_rec__split_fields = o24))))
+
+axiom H78 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> (rrsig_rec__split_fields1 = o25))))
+
+axiom H79 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> (rrsig_rec__split_fields2 = o26))))
+
+axiom H80 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> (rrsig_rec__split_fields3 = o27))))
+
+axiom H81 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> (rrsig_rec__split_fields4 = o28))))
+
+axiom H82 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> (o23 = o29))))
+
+axiom H83 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> (rrsig_rec__split_fields6 = o30))))
+
+axiom H84 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> (rrsig_rec__split_fields7 = o31))))
+
+axiom H85 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> (rrsig_rec__split_fields8 = o32))))
+
+axiom H86 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> (rrsig_rec__split_fields9 = o33))))
+
+axiom H87 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> (rrsig_rec__split_fields10 = o34))))
+
+axiom H88 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> (rrsig_rec__split_fields11 = o35))))
+
+axiom H89 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> (rrsig_rec__split_fields12 = o36))))
+
+axiom H90 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> (temp___1484 = o24))))
+
+axiom H91 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> (temp___14841 = o25))))
+
+axiom H92 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> (temp___14842 = o26))))
+
+axiom H93 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> (temp___14843 = o27))))
+
+axiom H94 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> (temp___14844 = o28))))
+
+axiom H95 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> (temp___14845 = o29))))
+
+axiom H96 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> (temp___14846 = o30))))
+
+axiom H97 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> (temp___14847 = o31))))
+
+axiom H98 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> (temp___14848 = o32))))
+
+axiom H99 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> (temp___14849 = o33))))
+
+axiom H100 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> (temp___148410 = o34))))
+
+axiom H101 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> (temp___148411 = o35))))
+
+axiom H102 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> (temp___148412 = o36))))
+
+axiom H103 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> (rrsig_rec__attr__tag = temp___148413))))
+
+axiom H104 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> ((result22 = rrsig_rec__split_fields) and
+  ((result23 = rrsig_rec__split_fields1) and
+  ((result24 = rrsig_rec__split_fields2) and
+  ((result25 = rrsig_rec__split_fields3) and
+  ((result26 = rrsig_rec__split_fields4) and
+  ((result27 = rrsig_rec__split_fields5) and
+  ((result28 = rrsig_rec__split_fields6) and
+  ((result29 = rrsig_rec__split_fields7) and
+  ((result30 = rrsig_rec__split_fields8) and
+  ((result31 = rrsig_rec__split_fields9) and
+  ((result32 = rrsig_rec__split_fields10) and
+  ((result33 = rrsig_rec__split_fields11) and
+  (result34 = rrsig_rec__split_fields12))))))))))))))))
+
+axiom H105 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> ((rrsig_rec__split_fields39 = temp___1484) and
+  ((rrsig_rec__split_fields40 = temp___14841) and
+  ((rrsig_rec__split_fields41 = temp___14842) and
+  ((rrsig_rec__split_fields42 = temp___14843) and
+  ((rrsig_rec__split_fields43 = temp___14844) and
+  ((rrsig_rec__split_fields44 = temp___14845) and
+  ((rrsig_rec__split_fields45 = temp___14846) and
+  ((rrsig_rec__split_fields46 = temp___14847) and
+  ((rrsig_rec__split_fields47 = temp___14848) and
+  ((rrsig_rec__split_fields48 = temp___14849) and
+  ((rrsig_rec__split_fields49 = temp___148410) and
+  ((rrsig_rec__split_fields50 = temp___148411) and
+  (rrsig_rec__split_fields51 = temp___148412))))))))))))))))
+
+axiom H106 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> (success18 = success17))))
+
+axiom H107 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) ->
+  ((rrsig_rec__split_fields52 = rrsig_rec__split_fields39) and
+  ((rrsig_rec__split_fields53 = rrsig_rec__split_fields40) and
+  ((rrsig_rec__split_fields54 = rrsig_rec__split_fields41) and
+  ((rrsig_rec__split_fields55 = rrsig_rec__split_fields42) and
+  ((rrsig_rec__split_fields56 = rrsig_rec__split_fields43) and
+  ((rrsig_rec__split_fields57 = rrsig_rec__split_fields44) and
+  ((rrsig_rec__split_fields58 = rrsig_rec__split_fields45) and
+  ((rrsig_rec__split_fields59 = rrsig_rec__split_fields46) and
+  ((rrsig_rec__split_fields60 = rrsig_rec__split_fields47) and
+  ((rrsig_rec__split_fields61 = rrsig_rec__split_fields48) and
+  ((rrsig_rec__split_fields62 = rrsig_rec__split_fields49) and
+  ((rrsig_rec__split_fields63 = rrsig_rec__split_fields50) and
+  (rrsig_rec__split_fields64 = rrsig_rec__split_fields51))))))))))))))))
+
+axiom H108 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) -> (success19 = success17))))
+
+axiom H109 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((success15 = true) ->
+  ((rrsig_rec__split_fields65 = rrsig_rec__split_fields39) and
+  ((rrsig_rec__split_fields66 = rrsig_rec__split_fields40) and
+  ((rrsig_rec__split_fields67 = rrsig_rec__split_fields41) and
+  ((rrsig_rec__split_fields68 = rrsig_rec__split_fields42) and
+  ((rrsig_rec__split_fields69 = rrsig_rec__split_fields43) and
+  ((rrsig_rec__split_fields70 = rrsig_rec__split_fields44) and
+  ((rrsig_rec__split_fields71 = rrsig_rec__split_fields45) and
+  ((rrsig_rec__split_fields72 = rrsig_rec__split_fields46) and
+  ((rrsig_rec__split_fields73 = rrsig_rec__split_fields47) and
+  ((rrsig_rec__split_fields74 = rrsig_rec__split_fields48) and
+  ((rrsig_rec__split_fields75 = rrsig_rec__split_fields49) and
+  ((rrsig_rec__split_fields76 = rrsig_rec__split_fields50) and
+  (rrsig_rec__split_fields77 = rrsig_rec__split_fields51))))))))))))))))
+
+axiom H110 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((not (success15 = true)) -> (success18 = success15))))
+
+axiom H111 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((not (success15 = true)) ->
+  ((rrsig_rec__split_fields52 = rrsig_rec__split_fields) and
+  ((rrsig_rec__split_fields53 = rrsig_rec__split_fields1) and
+  ((rrsig_rec__split_fields54 = rrsig_rec__split_fields2) and
+  ((rrsig_rec__split_fields55 = rrsig_rec__split_fields3) and
+  ((rrsig_rec__split_fields56 = rrsig_rec__split_fields4) and
+  ((rrsig_rec__split_fields57 = rrsig_rec__split_fields5) and
+  ((rrsig_rec__split_fields58 = rrsig_rec__split_fields6) and
+  ((rrsig_rec__split_fields59 = rrsig_rec__split_fields7) and
+  ((rrsig_rec__split_fields60 = rrsig_rec__split_fields8) and
+  ((rrsig_rec__split_fields61 = rrsig_rec__split_fields9) and
+  ((rrsig_rec__split_fields62 = rrsig_rec__split_fields10) and
+  ((rrsig_rec__split_fields63 = rrsig_rec__split_fields11) and
+  (rrsig_rec__split_fields64 = rrsig_rec__split_fields12))))))))))))))))
+
+axiom H112 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((not (success15 = true)) -> (success19 = success16))))
+
+axiom H113 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((not (success15 = true)) ->
+  ((rrsig_rec__split_fields65 = rrsig_rec__split_fields13) and
+  ((rrsig_rec__split_fields66 = rrsig_rec__split_fields14) and
+  ((rrsig_rec__split_fields67 = rrsig_rec__split_fields15) and
+  ((rrsig_rec__split_fields68 = rrsig_rec__split_fields16) and
+  ((rrsig_rec__split_fields69 = rrsig_rec__split_fields17) and
+  ((rrsig_rec__split_fields70 = rrsig_rec__split_fields18) and
+  ((rrsig_rec__split_fields71 = rrsig_rec__split_fields19) and
+  ((rrsig_rec__split_fields72 = rrsig_rec__split_fields20) and
+  ((rrsig_rec__split_fields73 = rrsig_rec__split_fields21) and
+  ((rrsig_rec__split_fields74 = rrsig_rec__split_fields22) and
+  ((rrsig_rec__split_fields75 = rrsig_rec__split_fields23) and
+  ((rrsig_rec__split_fields76 = rrsig_rec__split_fields24) and
+  (rrsig_rec__split_fields77 = rrsig_rec__split_fields25))))))))))))))))
+
+axiom H114 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  (i27 = i24)))
+
+axiom H115 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  (i26 = i13)))
+
+axiom H116 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  (timestring10 = timestring8)))
+
+axiom H117 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  (success20 = success18)))
+
+axiom H118 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((rrsig_rec__split_fields78 = rrsig_rec__split_fields52) and
+  ((rrsig_rec__split_fields79 = rrsig_rec__split_fields53) and
+  ((rrsig_rec__split_fields80 = rrsig_rec__split_fields54) and
+  ((rrsig_rec__split_fields81 = rrsig_rec__split_fields55) and
+  ((rrsig_rec__split_fields82 = rrsig_rec__split_fields56) and
+  ((rrsig_rec__split_fields83 = rrsig_rec__split_fields57) and
+  ((rrsig_rec__split_fields84 = rrsig_rec__split_fields58) and
+  ((rrsig_rec__split_fields85 = rrsig_rec__split_fields59) and
+  ((rrsig_rec__split_fields86 = rrsig_rec__split_fields60) and
+  ((rrsig_rec__split_fields87 = rrsig_rec__split_fields61) and
+  ((rrsig_rec__split_fields88 = rrsig_rec__split_fields62) and
+  ((rrsig_rec__split_fields89 = rrsig_rec__split_fields63) and
+  (rrsig_rec__split_fields90 = rrsig_rec__split_fields64)))))))))))))))
+
+axiom H119 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  (i29 = i25)))
+
+axiom H120 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  (i28 = i14)))
+
+axiom H121 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  (timestring11 = timestring9)))
+
+axiom H122 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  (success21 = success19)))
+
+axiom H123 : ((success1 = true) -> ((((endidx1 - begidx2) + 1) = 14) ->
+  ((rrsig_rec__split_fields91 = rrsig_rec__split_fields65) and
+  ((rrsig_rec__split_fields92 = rrsig_rec__split_fields66) and
+  ((rrsig_rec__split_fields93 = rrsig_rec__split_fields67) and
+  ((rrsig_rec__split_fields94 = rrsig_rec__split_fields68) and
+  ((rrsig_rec__split_fields95 = rrsig_rec__split_fields69) and
+  ((rrsig_rec__split_fields96 = rrsig_rec__split_fields70) and
+  ((rrsig_rec__split_fields97 = rrsig_rec__split_fields71) and
+  ((rrsig_rec__split_fields98 = rrsig_rec__split_fields72) and
+  ((rrsig_rec__split_fields99 = rrsig_rec__split_fields73) and
+  ((rrsig_rec__split_fields100 = rrsig_rec__split_fields74) and
+  ((rrsig_rec__split_fields101 = rrsig_rec__split_fields75) and
+  ((rrsig_rec__split_fields102 = rrsig_rec__split_fields76) and
+  (rrsig_rec__split_fields103 = rrsig_rec__split_fields77)))))))))))))))
+
+axiom H124 : ((success1 = true) -> (i31 = i27))
+
+axiom H125 : ((success1 = true) -> (i30 = i26))
+
+axiom H126 : ((success1 = true) -> (timestring12 = timestring10))
+
+axiom H127 : ((success1 = true) -> (success22 = success20))
+
+axiom H128 : ((success1 = true) ->
+  ((rrsig_rec__split_fields104 = rrsig_rec__split_fields78) and
+  ((rrsig_rec__split_fields105 = rrsig_rec__split_fields79) and
+  ((rrsig_rec__split_fields106 = rrsig_rec__split_fields80) and
+  ((rrsig_rec__split_fields107 = rrsig_rec__split_fields81) and
+  ((rrsig_rec__split_fields108 = rrsig_rec__split_fields82) and
+  ((rrsig_rec__split_fields109 = rrsig_rec__split_fields83) and
+  ((rrsig_rec__split_fields110 = rrsig_rec__split_fields84) and
+  ((rrsig_rec__split_fields111 = rrsig_rec__split_fields85) and
+  ((rrsig_rec__split_fields112 = rrsig_rec__split_fields86) and
+  ((rrsig_rec__split_fields113 = rrsig_rec__split_fields87) and
+  ((rrsig_rec__split_fields114 = rrsig_rec__split_fields88) and
+  ((rrsig_rec__split_fields115 = rrsig_rec__split_fields89) and
+  (rrsig_rec__split_fields116 = rrsig_rec__split_fields90))))))))))))))
+
+axiom H129 : ((success1 = true) -> (i33 = i29))
+
+axiom H130 : ((success1 = true) -> (i32 = i28))
+
+axiom H131 : ((success1 = true) -> (timestring13 = timestring11))
+
+axiom H132 : ((success1 = true) -> (success23 = success21))
+
+axiom H133 : ((success1 = true) ->
+  ((rrsig_rec__split_fields117 = rrsig_rec__split_fields91) and
+  ((rrsig_rec__split_fields118 = rrsig_rec__split_fields92) and
+  ((rrsig_rec__split_fields119 = rrsig_rec__split_fields93) and
+  ((rrsig_rec__split_fields120 = rrsig_rec__split_fields94) and
+  ((rrsig_rec__split_fields121 = rrsig_rec__split_fields95) and
+  ((rrsig_rec__split_fields122 = rrsig_rec__split_fields96) and
+  ((rrsig_rec__split_fields123 = rrsig_rec__split_fields97) and
+  ((rrsig_rec__split_fields124 = rrsig_rec__split_fields98) and
+  ((rrsig_rec__split_fields125 = rrsig_rec__split_fields99) and
+  ((rrsig_rec__split_fields126 = rrsig_rec__split_fields100) and
+  ((rrsig_rec__split_fields127 = rrsig_rec__split_fields101) and
+  ((rrsig_rec__split_fields128 = rrsig_rec__split_fields102) and
+  (rrsig_rec__split_fields129 = rrsig_rec__split_fields103))))))))))))))
+
+axiom H134 : ((not (success1 = true)) -> (i31 = i1))
+
+axiom H135 : ((not (success1 = true)) -> (i30 = i))
+
+axiom H136 : ((not (success1 = true)) -> (timestring12 = timestring1))
+
+axiom H137 : ((not (success1 = true)) -> (success22 = success1))
+
+axiom H138 : ((not (success1 = true)) ->
+  ((rrsig_rec__split_fields104 = rrsig_rec__split_fields) and
+  ((rrsig_rec__split_fields105 = rrsig_rec__split_fields1) and
+  ((rrsig_rec__split_fields106 = rrsig_rec__split_fields2) and
+  ((rrsig_rec__split_fields107 = rrsig_rec__split_fields3) and
+  ((rrsig_rec__split_fields108 = rrsig_rec__split_fields4) and
+  ((rrsig_rec__split_fields109 = rrsig_rec__split_fields5) and
+  ((rrsig_rec__split_fields110 = rrsig_rec__split_fields6) and
+  ((rrsig_rec__split_fields111 = rrsig_rec__split_fields7) and
+  ((rrsig_rec__split_fields112 = rrsig_rec__split_fields8) and
+  ((rrsig_rec__split_fields113 = rrsig_rec__split_fields9) and
+  ((rrsig_rec__split_fields114 = rrsig_rec__split_fields10) and
+  ((rrsig_rec__split_fields115 = rrsig_rec__split_fields11) and
+  (rrsig_rec__split_fields116 = rrsig_rec__split_fields12))))))))))))))
+
+axiom H139 : ((not (success1 = true)) -> (i33 = i5))
+
+axiom H140 : ((not (success1 = true)) -> (i32 = i4))
+
+axiom H141 : ((not (success1 = true)) -> (timestring13 = timestring1))
+
+axiom H142 : ((not (success1 = true)) -> (success23 = success1))
+
+axiom H143 : ((not (success1 = true)) ->
+  ((rrsig_rec__split_fields117 = rrsig_rec__split_fields13) and
+  ((rrsig_rec__split_fields118 = rrsig_rec__split_fields14) and
+  ((rrsig_rec__split_fields119 = rrsig_rec__split_fields15) and
+  ((rrsig_rec__split_fields120 = rrsig_rec__split_fields16) and
+  ((rrsig_rec__split_fields121 = rrsig_rec__split_fields17) and
+  ((rrsig_rec__split_fields122 = rrsig_rec__split_fields18) and
+  ((rrsig_rec__split_fields123 = rrsig_rec__split_fields19) and
+  ((rrsig_rec__split_fields124 = rrsig_rec__split_fields20) and
+  ((rrsig_rec__split_fields125 = rrsig_rec__split_fields21) and
+  ((rrsig_rec__split_fields126 = rrsig_rec__split_fields22) and
+  ((rrsig_rec__split_fields127 = rrsig_rec__split_fields23) and
+  ((rrsig_rec__split_fields128 = rrsig_rec__split_fields24) and
+  (rrsig_rec__split_fields129 = rrsig_rec__split_fields25))))))))))))))
+
+axiom H144 : (result35 = success22)
+
+axiom H145 : (((endidx1 <  zlength) -> (success24 = match_bool(success22,
+  true, false))) and ((not (endidx1 <  zlength)) ->
+  (success24 = match_bool(success22, false, false))))
+
+axiom H146 : ((success24 = true) -> ((o37 = (endidx1 + 1)) and
+  in_range5((endidx1 + 1))))
+
+axiom H147 : ((success24 = true) -> (result36 = begidx2))
+
+axiom H148 : ((success24 = true) -> (begidx3 = o37))
+
+axiom H149 : ((success24 = true) -> (((((begidx4 <= endidx2) and
+  (begidx4 <= zlength)) and (endidx2 <= zlength)) and ((foundtype2 = 1) ->
+  (forall i50:int. (((begidx4 <= i50) and (i50 <= endidx2)) ->
+  ((48 <= to_rep((zonefileline[i50]))) and
+  (to_rep((zonefileline[i50])) <= 57)))))) and ((in_range5(begidx4) and
+  in_range5(endidx2)) and in_range4(foundtype2))))
+
+axiom H150 : ((success24 = true) -> (result37 = success24))
+
+axiom H151 : ((success24 = true) -> (((foundtype2 = 1) ->
+  (success25 = true)) and ((not (foundtype2 = 1)) -> (success25 = false))))
+
+axiom H152 : true
+
+axiom H153 : ((success24 = true) -> ((success25 = true) ->
+  (to_rep1(o38) = parser_utilities__convert16bitunsigned__value)))
+
+axiom H154 : ((success24 = true) -> ((success25 = true) ->
+  (rrsig_rec__split_fields104 = o39)))
+
+axiom H155 : ((success24 = true) -> ((success25 = true) ->
+  (rrsig_rec__split_fields105 = o40)))
+
+axiom H156 : ((success24 = true) -> ((success25 = true) ->
+  (rrsig_rec__split_fields106 = o41)))
+
+axiom H157 : ((success24 = true) -> ((success25 = true) ->
+  (rrsig_rec__split_fields107 = o42)))
+
+axiom H158 : ((success24 = true) -> ((success25 = true) ->
+  (rrsig_rec__split_fields108 = o43)))
+
+axiom H159 : ((success24 = true) -> ((success25 = true) ->
+  (rrsig_rec__split_fields109 = o44)))
+
+axiom H160 : ((success24 = true) -> ((success25 = true) -> (o38 = o45)))
+
+axiom H161 : ((success24 = true) -> ((success25 = true) ->
+  (rrsig_rec__split_fields111 = o46)))
+
+axiom H162 : ((success24 = true) -> ((success25 = true) ->
+  (rrsig_rec__split_fields112 = o47)))
+
+axiom H163 : ((success24 = true) -> ((success25 = true) ->
+  (rrsig_rec__split_fields113 = o48)))
+
+axiom H164 : ((success24 = true) -> ((success25 = true) ->
+  (rrsig_rec__split_fields114 = o49)))
+
+axiom H165 : ((success24 = true) -> ((success25 = true) ->
+  (rrsig_rec__split_fields115 = o50)))
+
+axiom H166 : ((success24 = true) -> ((success25 = true) ->
+  (rrsig_rec__split_fields116 = o51)))
+
+axiom H167 : ((success24 = true) -> ((success25 = true) ->
+  (temp___1488 = o39)))
+
+axiom H168 : ((success24 = true) -> ((success25 = true) ->
+  (temp___14881 = o40)))
+
+axiom H169 : ((success24 = true) -> ((success25 = true) ->
+  (temp___14882 = o41)))
+
+axiom H170 : ((success24 = true) -> ((success25 = true) ->
+  (temp___14883 = o42)))
+
+axiom H171 : ((success24 = true) -> ((success25 = true) ->
+  (temp___14884 = o43)))
+
+axiom H172 : ((success24 = true) -> ((success25 = true) ->
+  (temp___14885 = o44)))
+
+axiom H173 : ((success24 = true) -> ((success25 = true) ->
+  (temp___14886 = o45)))
+
+axiom H174 : ((success24 = true) -> ((success25 = true) ->
+  (temp___14887 = o46)))
+
+axiom H175 : ((success24 = true) -> ((success25 = true) ->
+  (temp___14888 = o47)))
+
+axiom H176 : ((success24 = true) -> ((success25 = true) ->
+  (temp___14889 = o48)))
+
+axiom H177 : ((success24 = true) -> ((success25 = true) ->
+  (temp___148810 = o49)))
+
+axiom H178 : ((success24 = true) -> ((success25 = true) ->
+  (temp___148811 = o50)))
+
+axiom H179 : ((success24 = true) -> ((success25 = true) ->
+  (temp___148812 = o51)))
+
+axiom H180 : ((success24 = true) -> ((success25 = true) ->
+  (rrsig_rec__attr__tag = temp___148813)))
+
+axiom H181 : ((success24 = true) -> ((success25 = true) ->
+  ((result38 = rrsig_rec__split_fields104) and
+  ((result39 = rrsig_rec__split_fields105) and
+  ((result40 = rrsig_rec__split_fields106) and
+  ((result41 = rrsig_rec__split_fields107) and
+  ((result42 = rrsig_rec__split_fields108) and
+  ((result43 = rrsig_rec__split_fields109) and
+  ((result44 = rrsig_rec__split_fields110) and
+  ((result45 = rrsig_rec__split_fields111) and
+  ((result46 = rrsig_rec__split_fields112) and
+  ((result47 = rrsig_rec__split_fields113) and
+  ((result48 = rrsig_rec__split_fields114) and
+  ((result49 = rrsig_rec__split_fields115) and
+  (result50 = rrsig_rec__split_fields116)))))))))))))))
+
+axiom H182 : ((success24 = true) -> ((success25 = true) ->
+  ((rrsig_rec__split_fields130 = temp___1488) and
+  ((rrsig_rec__split_fields131 = temp___14881) and
+  ((rrsig_rec__split_fields132 = temp___14882) and
+  ((rrsig_rec__split_fields133 = temp___14883) and
+  ((rrsig_rec__split_fields134 = temp___14884) and
+  ((rrsig_rec__split_fields135 = temp___14885) and
+  ((rrsig_rec__split_fields136 = temp___14886) and
+  ((rrsig_rec__split_fields137 = temp___14887) and
+  ((rrsig_rec__split_fields138 = temp___14888) and
+  ((rrsig_rec__split_fields139 = temp___14889) and
+  ((rrsig_rec__split_fields140 = temp___148810) and
+  ((rrsig_rec__split_fields141 = temp___148811) and
+  (rrsig_rec__split_fields142 = temp___148812)))))))))))))))
+
+axiom H183 : ((success24 = true) -> ((success25 = true) ->
+  (success27 = success26)))
+
+axiom H184 : ((success24 = true) -> ((success25 = true) ->
+  ((rrsig_rec__split_fields143 = rrsig_rec__split_fields130) and
+  ((rrsig_rec__split_fields144 = rrsig_rec__split_fields131) and
+  ((rrsig_rec__split_fields145 = rrsig_rec__split_fields132) and
+  ((rrsig_rec__split_fields146 = rrsig_rec__split_fields133) and
+  ((rrsig_rec__split_fields147 = rrsig_rec__split_fields134) and
+  ((rrsig_rec__split_fields148 = rrsig_rec__split_fields135) and
+  ((rrsig_rec__split_fields149 = rrsig_rec__split_fields136) and
+  ((rrsig_rec__split_fields150 = rrsig_rec__split_fields137) and
+  ((rrsig_rec__split_fields151 = rrsig_rec__split_fields138) and
+  ((rrsig_rec__split_fields152 = rrsig_rec__split_fields139) and
+  ((rrsig_rec__split_fields153 = rrsig_rec__split_fields140) and
+  ((rrsig_rec__split_fields154 = rrsig_rec__split_fields141) and
+  (rrsig_rec__split_fields155 = rrsig_rec__split_fields142)))))))))))))))
+
+axiom H185 : ((success24 = true) -> ((success25 = true) ->
+  (success28 = success26)))
+
+axiom H186 : ((success24 = true) -> ((success25 = true) ->
+  ((rrsig_rec__split_fields156 = rrsig_rec__split_fields130) and
+  ((rrsig_rec__split_fields157 = rrsig_rec__split_fields131) and
+  ((rrsig_rec__split_fields158 = rrsig_rec__split_fields132) and
+  ((rrsig_rec__split_fields159 = rrsig_rec__split_fields133) and
+  ((rrsig_rec__split_fields160 = rrsig_rec__split_fields134) and
+  ((rrsig_rec__split_fields161 = rrsig_rec__split_fields135) and
+  ((rrsig_rec__split_fields162 = rrsig_rec__split_fields136) and
+  ((rrsig_rec__split_fields163 = rrsig_rec__split_fields137) and
+  ((rrsig_rec__split_fields164 = rrsig_rec__split_fields138) and
+  ((rrsig_rec__split_fields165 = rrsig_rec__split_fields139) and
+  ((rrsig_rec__split_fields166 = rrsig_rec__split_fields140) and
+  ((rrsig_rec__split_fields167 = rrsig_rec__split_fields141) and
+  (rrsig_rec__split_fields168 = rrsig_rec__split_fields142)))))))))))))))
+
+axiom H187 : ((success24 = true) -> ((not (success25 = true)) ->
+  (success27 = success25)))
+
+axiom H188 : ((success24 = true) -> ((not (success25 = true)) ->
+  ((rrsig_rec__split_fields143 = rrsig_rec__split_fields104) and
+  ((rrsig_rec__split_fields144 = rrsig_rec__split_fields105) and
+  ((rrsig_rec__split_fields145 = rrsig_rec__split_fields106) and
+  ((rrsig_rec__split_fields146 = rrsig_rec__split_fields107) and
+  ((rrsig_rec__split_fields147 = rrsig_rec__split_fields108) and
+  ((rrsig_rec__split_fields148 = rrsig_rec__split_fields109) and
+  ((rrsig_rec__split_fields149 = rrsig_rec__split_fields110) and
+  ((rrsig_rec__split_fields150 = rrsig_rec__split_fields111) and
+  ((rrsig_rec__split_fields151 = rrsig_rec__split_fields112) and
+  ((rrsig_rec__split_fields152 = rrsig_rec__split_fields113) and
+  ((rrsig_rec__split_fields153 = rrsig_rec__split_fields114) and
+  ((rrsig_rec__split_fields154 = rrsig_rec__split_fields115) and
+  (rrsig_rec__split_fields155 = rrsig_rec__split_fields116)))))))))))))))
+
+axiom H189 : ((success24 = true) -> ((not (success25 = true)) ->
+  (success28 = success25)))
+
+axiom H190 : ((success24 = true) -> ((not (success25 = true)) ->
+  ((rrsig_rec__split_fields156 = rrsig_rec__split_fields117) and
+  ((rrsig_rec__split_fields157 = rrsig_rec__split_fields118) and
+  ((rrsig_rec__split_fields158 = rrsig_rec__split_fields119) and
+  ((rrsig_rec__split_fields159 = rrsig_rec__split_fields120) and
+  ((rrsig_rec__split_fields160 = rrsig_rec__split_fields121) and
+  ((rrsig_rec__split_fields161 = rrsig_rec__split_fields122) and
+  ((rrsig_rec__split_fields162 = rrsig_rec__split_fields123) and
+  ((rrsig_rec__split_fields163 = rrsig_rec__split_fields124) and
+  ((rrsig_rec__split_fields164 = rrsig_rec__split_fields125) and
+  ((rrsig_rec__split_fields165 = rrsig_rec__split_fields126) and
+  ((rrsig_rec__split_fields166 = rrsig_rec__split_fields127) and
+  ((rrsig_rec__split_fields167 = rrsig_rec__split_fields128) and
+  (rrsig_rec__split_fields168 = rrsig_rec__split_fields129)))))))))))))))
+
+axiom H191 : ((success24 = true) -> (foundtype3 = foundtype2))
+
+axiom H192 : ((success24 = true) -> (endidx3 = endidx2))
+
+axiom H193 : ((success24 = true) -> (begidx5 = begidx4))
+
+axiom H194 : ((success24 = true) -> (success29 = success27))
+
+axiom H195 : ((success24 = true) ->
+  ((rrsig_rec__split_fields169 = rrsig_rec__split_fields143) and
+  ((rrsig_rec__split_fields170 = rrsig_rec__split_fields144) and
+  ((rrsig_rec__split_fields171 = rrsig_rec__split_fields145) and
+  ((rrsig_rec__split_fields172 = rrsig_rec__split_fields146) and
+  ((rrsig_rec__split_fields173 = rrsig_rec__split_fields147) and
+  ((rrsig_rec__split_fields174 = rrsig_rec__split_fields148) and
+  ((rrsig_rec__split_fields175 = rrsig_rec__split_fields149) and
+  ((rrsig_rec__split_fields176 = rrsig_rec__split_fields150) and
+  ((rrsig_rec__split_fields177 = rrsig_rec__split_fields151) and
+  ((rrsig_rec__split_fields178 = rrsig_rec__split_fields152) and
+  ((rrsig_rec__split_fields179 = rrsig_rec__split_fields153) and
+  ((rrsig_rec__split_fields180 = rrsig_rec__split_fields154) and
+  (rrsig_rec__split_fields181 = rrsig_rec__split_fields155))))))))))))))
+
+axiom H196 : ((success24 = true) -> (foundtype4 = foundtype2))
+
+axiom H197 : ((success24 = true) -> (endidx4 = endidx2))
+
+axiom H198 : ((success24 = true) -> (begidx6 = begidx4))
+
+axiom H199 : ((success24 = true) -> (success30 = success28))
+
+axiom H200 : ((success24 = true) ->
+  ((rrsig_rec__split_fields182 = rrsig_rec__split_fields156) and
+  ((rrsig_rec__split_fields183 = rrsig_rec__split_fields157) and
+  ((rrsig_rec__split_fields184 = rrsig_rec__split_fields158) and
+  ((rrsig_rec__split_fields185 = rrsig_rec__split_fields159) and
+  ((rrsig_rec__split_fields186 = rrsig_rec__split_fields160) and
+  ((rrsig_rec__split_fields187 = rrsig_rec__split_fields161) and
+  ((rrsig_rec__split_fields188 = rrsig_rec__split_fields162) and
+  ((rrsig_rec__split_fields189 = rrsig_rec__split_fields163) and
+  ((rrsig_rec__split_fields190 = rrsig_rec__split_fields164) and
+  ((rrsig_rec__split_fields191 = rrsig_rec__split_fields165) and
+  ((rrsig_rec__split_fields192 = rrsig_rec__split_fields166) and
+  ((rrsig_rec__split_fields193 = rrsig_rec__split_fields167) and
+  (rrsig_rec__split_fields194 = rrsig_rec__split_fields168))))))))))))))
+
+axiom H201 : ((not (success24 = true)) -> (foundtype3 = foundtype1))
+
+axiom H202 : ((not (success24 = true)) -> (endidx3 = endidx1))
+
+axiom H203 : ((not (success24 = true)) -> (begidx5 = begidx2))
+
+axiom H204 : ((not (success24 = true)) -> (success29 = success24))
+
+axiom H205 : ((not (success24 = true)) ->
+  ((rrsig_rec__split_fields169 = rrsig_rec__split_fields104) and
+  ((rrsig_rec__split_fields170 = rrsig_rec__split_fields105) and
+  ((rrsig_rec__split_fields171 = rrsig_rec__split_fields106) and
+  ((rrsig_rec__split_fields172 = rrsig_rec__split_fields107) and
+  ((rrsig_rec__split_fields173 = rrsig_rec__split_fields108) and
+  ((rrsig_rec__split_fields174 = rrsig_rec__split_fields109) and
+  ((rrsig_rec__split_fields175 = rrsig_rec__split_fields110) and
+  ((rrsig_rec__split_fields176 = rrsig_rec__split_fields111) and
+  ((rrsig_rec__split_fields177 = rrsig_rec__split_fields112) and
+  ((rrsig_rec__split_fields178 = rrsig_rec__split_fields113) and
+  ((rrsig_rec__split_fields179 = rrsig_rec__split_fields114) and
+  ((rrsig_rec__split_fields180 = rrsig_rec__split_fields115) and
+  (rrsig_rec__split_fields181 = rrsig_rec__split_fields116))))))))))))))
+
+axiom H206 : ((not (success24 = true)) -> (foundtype4 = foundtype1))
+
+axiom H207 : ((not (success24 = true)) -> (endidx4 = endidx1))
+
+axiom H208 : ((not (success24 = true)) -> (begidx6 = begidx2))
+
+axiom H209 : ((not (success24 = true)) -> (success30 = success24))
+
+axiom H210 : ((not (success24 = true)) ->
+  ((rrsig_rec__split_fields182 = rrsig_rec__split_fields117) and
+  ((rrsig_rec__split_fields183 = rrsig_rec__split_fields118) and
+  ((rrsig_rec__split_fields184 = rrsig_rec__split_fields119) and
+  ((rrsig_rec__split_fields185 = rrsig_rec__split_fields120) and
+  ((rrsig_rec__split_fields186 = rrsig_rec__split_fields121) and
+  ((rrsig_rec__split_fields187 = rrsig_rec__split_fields122) and
+  ((rrsig_rec__split_fields188 = rrsig_rec__split_fields123) and
+  ((rrsig_rec__split_fields189 = rrsig_rec__split_fields124) and
+  ((rrsig_rec__split_fields190 = rrsig_rec__split_fields125) and
+  ((rrsig_rec__split_fields191 = rrsig_rec__split_fields126) and
+  ((rrsig_rec__split_fields192 = rrsig_rec__split_fields127) and
+  ((rrsig_rec__split_fields193 = rrsig_rec__split_fields128) and
+  (rrsig_rec__split_fields194 = rrsig_rec__split_fields129))))))))))))))
+
+axiom H211 : (result51 = success29)
+
+axiom H212 : (((endidx3 <  zlength) -> (success31 = match_bool(success29,
+  true, false))) and ((not (endidx3 <  zlength)) ->
+  (success31 = match_bool(success29, false, false))))
+
+axiom H213 : (success31 = true)
+
+axiom H214 : ((o52 = (endidx3 + 1)) and in_range5((endidx3 + 1)))
+
+axiom H215 : (result52 = begidx5)
+
+axiom H216 : (begidx7 = o52)
+
+axiom H217 : (((((begidx8 <= endidx5) and (begidx8 <= zlength)) and
+  (endidx5 <= zlength)) and ((foundtype5 = 1) ->
+  (forall i50:int. (((begidx8 <= i50) and (i50 <= endidx5)) ->
+  ((48 <= to_rep((zonefileline[i50]))) and
+  (to_rep((zonefileline[i50])) <= 57)))))) and ((in_range5(begidx8) and
+  in_range5(endidx5)) and in_range4(foundtype5)))
+
+axiom H218 : (result53 = success31)
+
+axiom H219 : (((foundtype5 = 0) -> (success32 = true)) and
+  ((not (foundtype5 = 0)) -> (success32 = false)))
+
+axiom H220 : (success32 = true)
+
+axiom H221 : ((o53 = ((endidx5 - begidx8) + 1)) and
+  in_range5(((endidx5 - begidx8) + 1)))
+
+axiom H222 : (result54 = lengthoftoken)
+
+axiom H223 : (lengthoftoken1 = o53)
+
+axiom H224 : (not (128 <  lengthoftoken1))
+
+axiom H225 : (begidx8 = r13b)
+
+axiom H226 : in_range5(r13b)
+
+axiom H227 : (endidx5 = r14b)
+
+axiom H228 : in_range5(r14b)
+
+axiom H229 : (result55 = i2)
+
+axiom H230 : (i34 = r13b)
+
+axiom H231 : (r13b <= i34)
+
+axiom H232 : (i34 <= r14b)
+
+axiom H233 : ((1 <= begidx8) and (((endidx5 - begidx8) + 1) <= 128))
+
+axiom H234 :
+  (((((((((((((rrsig_rec__split_fields195 = rrsig_rec__split_fields169) and
+  (rrsig_rec__split_fields196 = rrsig_rec__split_fields170)) and
+  (rrsig_rec__split_fields197 = rrsig_rec__split_fields171)) and
+  (rrsig_rec__split_fields198 = rrsig_rec__split_fields172)) and
+  (rrsig_rec__split_fields199 = rrsig_rec__split_fields173)) and
+  (rrsig_rec__split_fields200 = rrsig_rec__split_fields174)) and
+  (rrsig_rec__split_fields201 = rrsig_rec__split_fields175)) and
+  (rrsig_rec__split_fields203 = rrsig_rec__split_fields177)) and
+  (rrsig_rec__split_fields204 = rrsig_rec__split_fields178)) and
+  (rrsig_rec__split_fields205 = rrsig_rec__split_fields179)) and
+  (rrsig_rec__split_fields206 = rrsig_rec__split_fields180)) and
+  ((r13b <= r14b) -> dynamic_property(r13b, r14b, i35))) and
+  ((r13b <= i35) and (i35 <= r14b)))
+
+axiom H235 : (to_rep(o56) = to_rep((zonefileline[i35])))
+
+axiom H236 : ((o54 = (i35 + 1)) and in_range1((i35 + 1)))
+
+axiom H237 : (o55 = (o54 - begidx8))
+
+axiom H238 : ((temp___1490 = o55) and in_range1(o55))
+
+axiom H239 : ((1 <= temp___1490) and (temp___1490 <= 128))
+
+axiom H240 : (o57 = temp___1490)
+
+axiom H241 : (o58 = (rrsig_rec__split_fields202[o57 <- o56]))
+
+axiom H242 : ((o59 = rrsig_rec__split_fields195) and
+  ((o60 = rrsig_rec__split_fields196) and
+  ((o61 = rrsig_rec__split_fields197) and
+  ((o62 = rrsig_rec__split_fields198) and
+  ((o63 = rrsig_rec__split_fields199) and
+  ((o64 = rrsig_rec__split_fields200) and
+  ((o65 = rrsig_rec__split_fields201) and ((o66 = o58) and
+  ((o67 = rrsig_rec__split_fields203) and
+  ((o68 = rrsig_rec__split_fields204) and
+  ((o69 = rrsig_rec__split_fields205) and
+  ((o70 = rrsig_rec__split_fields206) and
+  (o71 = rrsig_rec__split_fields207)))))))))))))
+
+axiom H243 : (((temp___1492 = o59) and ((temp___14921 = o60) and
+  ((temp___14922 = o61) and ((temp___14923 = o62) and
+  ((temp___14924 = o63) and ((temp___14925 = o64) and
+  ((temp___14926 = o65) and ((temp___14927 = o66) and
+  ((temp___14928 = o67) and ((temp___14929 = o68) and
+  ((temp___149210 = o69) and ((temp___149211 = o70) and
+  (temp___149212 = o71))))))))))))) and
+  (temp___149213 = rrsig_rec__attr__tag))
+
+axiom H244 : ((result56 = rrsig_rec__split_fields195) and
+  ((result57 = rrsig_rec__split_fields196) and
+  ((result58 = rrsig_rec__split_fields197) and
+  ((result59 = rrsig_rec__split_fields198) and
+  ((result60 = rrsig_rec__split_fields199) and
+  ((result61 = rrsig_rec__split_fields200) and
+  ((result62 = rrsig_rec__split_fields201) and
+  ((result63 = rrsig_rec__split_fields202) and
+  ((result64 = rrsig_rec__split_fields203) and
+  ((result65 = rrsig_rec__split_fields204) and
+  ((result66 = rrsig_rec__split_fields205) and
+  ((result67 = rrsig_rec__split_fields206) and
+  (result68 = rrsig_rec__split_fields207)))))))))))))
+
+axiom H245 : ((rrsig_rec__split_fields208 = temp___1492) and
+  ((rrsig_rec__split_fields209 = temp___14921) and
+  ((rrsig_rec__split_fields210 = temp___14922) and
+  ((rrsig_rec__split_fields211 = temp___14923) and
+  ((rrsig_rec__split_fields212 = temp___14924) and
+  ((rrsig_rec__split_fields213 = temp___14925) and
+  ((rrsig_rec__split_fields214 = temp___14926) and
+  ((rrsig_rec__split_fields215 = temp___14927) and
+  ((rrsig_rec__split_fields216 = temp___14928) and
+  ((rrsig_rec__split_fields217 = temp___14929) and
+  ((rrsig_rec__split_fields218 = temp___149210) and
+  ((rrsig_rec__split_fields219 = temp___149211) and
+  (rrsig_rec__split_fields220 = temp___149212)))))))))))))
+
+axiom H246 : (not (i35 = r14b))
+
+axiom H247 : (result69 = i35)
+
+axiom H248 : (i36 = (i35 + 1))
+
+axiom H249 : (i37 = i36)
+
+axiom H250 : ((rrsig_rec__split_fields221 = rrsig_rec__split_fields208) and
+  ((rrsig_rec__split_fields222 = rrsig_rec__split_fields209) and
+  ((rrsig_rec__split_fields223 = rrsig_rec__split_fields210) and
+  ((rrsig_rec__split_fields224 = rrsig_rec__split_fields211) and
+  ((rrsig_rec__split_fields225 = rrsig_rec__split_fields212) and
+  ((rrsig_rec__split_fields226 = rrsig_rec__split_fields213) and
+  ((rrsig_rec__split_fields227 = rrsig_rec__split_fields214) and
+  ((rrsig_rec__split_fields228 = rrsig_rec__split_fields215) and
+  ((rrsig_rec__split_fields229 = rrsig_rec__split_fields216) and
+  ((rrsig_rec__split_fields230 = rrsig_rec__split_fields217) and
+  ((rrsig_rec__split_fields231 = rrsig_rec__split_fields218) and
+  ((rrsig_rec__split_fields232 = rrsig_rec__split_fields219) and
+  (rrsig_rec__split_fields233 = rrsig_rec__split_fields220)))))))))))))
+
+axiom H251 : (i38 = i36)
+
+axiom H252 : ((rrsig_rec__split_fields234 = rrsig_rec__split_fields208) and
+  ((rrsig_rec__split_fields235 = rrsig_rec__split_fields209) and
+  ((rrsig_rec__split_fields236 = rrsig_rec__split_fields210) and
+  ((rrsig_rec__split_fields237 = rrsig_rec__split_fields211) and
+  ((rrsig_rec__split_fields238 = rrsig_rec__split_fields212) and
+  ((rrsig_rec__split_fields239 = rrsig_rec__split_fields213) and
+  ((rrsig_rec__split_fields240 = rrsig_rec__split_fields214) and
+  ((rrsig_rec__split_fields241 = rrsig_rec__split_fields215) and
+  ((rrsig_rec__split_fields242 = rrsig_rec__split_fields216) and
+  ((rrsig_rec__split_fields243 = rrsig_rec__split_fields217) and
+  ((rrsig_rec__split_fields244 = rrsig_rec__split_fields218) and
+  ((rrsig_rec__split_fields245 = rrsig_rec__split_fields219) and
+  (rrsig_rec__split_fields246 = rrsig_rec__split_fields220)))))))))))))
+
+ (* File "zone_file_parser.adb", line 219, characters 0-0 *)
+goal WP_parameter_def : (1 <= begidx8)

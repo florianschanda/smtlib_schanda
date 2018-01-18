@@ -464,13 +464,13 @@ logic k : int
 
 logic temp___563 : int
 
-logic temp___561 : int
-
 logic temp___562 : int
 
-logic temp___560 : bool
+logic temp___560 : int
 
-logic temp___559 : int
+logic temp___561 : int
+
+logic temp___559 : bool
 
 logic temp___565 : int
 
@@ -807,9 +807,9 @@ axiom H24 : ((to_rep((items[low_index2])) <  search_item) or
 axiom H25 : ((search_item <  to_rep((items[high_index2]))) or
   (search_item = to_rep((items[high_index2]))))
 
-axiom H26 : (((((1 <= 10) -> in_range4(low_index2)) and ((1 <= 10) ->
-  in_range4(result__3))) and ((1 <= 10) -> in_range4(mid_index3))) and
-  ((1 <= 10) -> in_range4(high_index2)))
+axiom H26 : (((((1 <= 10) -> in_range4(result__3)) and ((1 <= 10) ->
+  in_range4(mid_index3))) and ((1 <= 10) -> in_range4(high_index2))) and
+  ((1 <= 10) -> in_range4(low_index2)))
 
 axiom H27 : (temp___5652 = result7)
 

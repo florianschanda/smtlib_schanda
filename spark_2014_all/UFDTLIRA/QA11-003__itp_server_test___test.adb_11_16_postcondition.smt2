@@ -55,6 +55,6 @@
 (assert (= (mk_int__ref test__parity__result4) (mk_int__ref test__parity__result2)))
 (assert (= test__parity__result5 test__parity__result3))
 (assert (= result1 test__parity__result4))
-(assert (not (exists ((x Int)) (and (and (<= 0 x) (<= x 255)) (or (= a (+ x x)) (= a (+ (+ x x) 1)))))))
+(assert (not (exists ((x Int)) (and (and (<= 0 x) (<= x 255)) (or (= a (+ x x)) (= a (+ (+ x x) 2)))))))
 (check-sat)
 (exit)

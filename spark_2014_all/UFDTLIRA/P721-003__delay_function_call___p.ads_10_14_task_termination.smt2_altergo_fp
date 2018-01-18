@@ -97,5 +97,5 @@ axiom wakeup_time__def_axiom :
 
 axiom H : false
 
- (* File "a-reatim.ads", line 51, characters 0-0 *)
+ (* File "a-reatim.ads", line 49, characters 0-0 *)
 goal WP_parameter_def : false

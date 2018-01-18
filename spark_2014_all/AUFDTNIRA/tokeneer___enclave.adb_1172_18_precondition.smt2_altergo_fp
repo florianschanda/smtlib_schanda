@@ -1885,19 +1885,19 @@ logic valid_numberlogentries : int, int, us_rep2,
 logic valid_numberlogentries__function_guard : bool, int, int, us_rep2,
   (int,fileentrycountt) farray -> prop
 
-logic temp___1145 : int -> (int,logfileindext) farray
+logic temp___1203 : int -> (int,logfileindext) farray
 
 axiom def_axiom1 :
-  (forall temp___1147:int.
-  (forall temp___1148:int.
-  ((temp___1145(temp___1147)[temp___1148]) = of_rep8(temp___1147))))
+  (forall temp___1205:int.
+  (forall temp___1206:int.
+  ((temp___1203(temp___1205)[temp___1206]) = of_rep8(temp___1205))))
 
-logic temp___1149 : int -> (int,fileentrycountt) farray
+logic temp___1207 : int -> (int,fileentrycountt) farray
 
 axiom def_axiom2 :
-  (forall temp___1151:int.
-  (forall temp___1152:int.
-  ((temp___1149(temp___1151)[temp___1152]) = of_rep11(temp___1151))))
+  (forall temp___1209:int.
+  (forall temp___1210:int.
+  ((temp___1207(temp___1209)[temp___1210]) = of_rep11(temp___1209))))
 
 type us_main_type
 
@@ -5230,23 +5230,23 @@ axiom H9 : ((o29 = thecurrentdoor(state3)) and in_range30(o29))
 axiom H10 : (((o29 = 1) -> (result8 = true)) and ((not (o29 = 1)) ->
   (result8 = false)))
 
-axiom H11 : ((result8 = true) ->
-  ((valid_numberlogentries(to_rep8(logfilestate__split_fields7),
+axiom H11 : ((result8 = true) -> (in_range9(auditalarm1) and
+  (valid_numberlogentries(to_rep8(logfilestate__split_fields7),
   to_rep9(logfilestate__split_fields8), { us_split_fields5 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields9;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields10;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields11;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields12 } },
-  logfilestate__split_fields13) = true) and in_range9(auditalarm1)))
+  logfilestate__split_fields13) = true)))
 
-axiom H12 : ((result8 = true) ->
-  ((valid_numberlogentries(to_rep8(logfilestate__split_fields14),
+axiom H12 : ((result8 = true) -> (in_range9(auditalarm2) and
+  (valid_numberlogentries(to_rep8(logfilestate__split_fields14),
   to_rep9(logfilestate__split_fields15), { us_split_fields5 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields16;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields17;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields18;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields19 } },
-  logfilestate__split_fields20) = true) and in_range9(auditalarm2)))
+  logfilestate__split_fields20) = true)))
 
 axiom H13 : ((result8 = true) -> (result9 = status))
 
@@ -5268,14 +5268,14 @@ axiom H15 : ((result8 = true) -> ((((((islocked(currentlatch2, state14, {
   rec__clock__timet__month = latchtimeout__split_fields9;
   rec__clock__timet__day = latchtimeout__split_fields10;
   rec__clock__timet__millisec = latchtimeout__split_fields11 }) = true)) and
-  (((valid_numberlogentries(to_rep8(logfilestate__split_fields21),
+  ((in_range9(auditalarm3) and in_range29(currentlatch2)) and
+  (valid_numberlogentries(to_rep8(logfilestate__split_fields21),
   to_rep9(logfilestate__split_fields22), { us_split_fields5 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields23;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields24;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields25;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields26 } },
-  logfilestate__split_fields27) = true) and in_range9(auditalarm3)) and
-  in_range29(currentlatch2))))
+  logfilestate__split_fields27) = true))))
 
 axiom H16 : ((result8 = true) -> ((not (ispresent({ us_split_fields1 = {
   rec__admin__t__rolepresent = theadmin__split_fields4;
@@ -5339,14 +5339,14 @@ axiom H17 : ((result8 = true) -> (o30 = extractuser(tokenpresence, state1,
   rec__cryptotypes__keypartt__keyid = idcert__split_fields18;
   rec__cryptotypes__keypartt__keylength = idcert__split_fields19 } } } } })))
 
-axiom H18 : ((result8 = true) ->
-  ((valid_numberlogentries(to_rep8(logfilestate__split_fields28),
+axiom H18 : ((result8 = true) -> (in_range9(auditalarm4) and
+  (valid_numberlogentries(to_rep8(logfilestate__split_fields28),
   to_rep9(logfilestate__split_fields29), { us_split_fields5 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields30;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields31;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields32;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields33 } },
-  logfilestate__split_fields34) = true) and in_range9(auditalarm4)))
+  logfilestate__split_fields34) = true)))
 
 axiom H19 : ((result8 = true) -> (((not (isgood(tokenpresence2, state18,
   tokentry2, tokenid2, { rec__admintoken__validauthcertt__valid =
@@ -5512,17 +5512,17 @@ axiom H19 : ((result8 = true) -> (((not (isgood(tokenpresence2, state18,
   us_split_fields19 = { rec__cryptotypes__keypartt__algorithmid =
   idcert__split_fields57; rec__cryptotypes__keypartt__keyid =
   idcert__split_fields58; rec__cryptotypes__keypartt__keylength =
-  idcert__split_fields59 } } } } }))))) and ((in_range4(tokenpresence2) and
-  in_range21(tokentry2)) and in_range20(tokenid2))))
+  idcert__split_fields59 } } } } }))))) and ((in_range21(tokentry2) and
+  in_range20(tokenid2)) and in_range4(tokenpresence2))))
 
-axiom H20 : ((not (result8 = true)) ->
-  ((valid_numberlogentries(to_rep8(logfilestate__split_fields35),
+axiom H20 : ((not (result8 = true)) -> (in_range9(auditalarm5) and
+  (valid_numberlogentries(to_rep8(logfilestate__split_fields35),
   to_rep9(logfilestate__split_fields36), { us_split_fields5 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields37;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields38;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields39;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields40 } },
-  logfilestate__split_fields41) = true) and in_range9(auditalarm5)))
+  logfilestate__split_fields41) = true)))
 
 axiom H21 : ((not (result8 = true)) -> (state17 = state6))
 

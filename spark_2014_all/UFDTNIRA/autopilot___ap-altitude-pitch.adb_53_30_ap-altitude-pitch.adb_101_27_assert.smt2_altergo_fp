@@ -552,6 +552,8 @@ logic o1 : int
 
 logic o2 : int
 
+logic o3 : int
+
 logic ap__altitude__pitch__rate__calc_pitchrate__present_pitchrate : int
 
 logic result : int
@@ -676,33 +678,35 @@ axiom H32 : ((not (1000 <  result__2)) -> ((not (result__2 <  (- 1000))) ->
 
 axiom H33 : ((not (1000 <  result__2)) -> (result__3 = result__4))
 
-axiom H34 : (result4 = target_climb_rate)
+axiom H34 : ((o1 = result__3) and in_range8(result__3))
 
-axiom H35 : (target_climb_rate1 = result__3)
+axiom H35 : (result4 = target_climb_rate)
 
-axiom H36 : ((1000 <  c13b) -> (result5 = floor_climb_rate))
+axiom H36 : (target_climb_rate1 = o1)
 
-axiom H37 : ((1000 <  c13b) -> (floor_climb_rate1 = 1000))
+axiom H37 : ((1000 <  c13b) -> (result5 = floor_climb_rate))
 
-axiom H38 : ((not (1000 <  c13b)) -> ((c13b <  (- 1000)) ->
-  (result6 = floor_climb_rate)))
+axiom H38 : ((1000 <  c13b) -> (floor_climb_rate1 = 1000))
 
 axiom H39 : ((not (1000 <  c13b)) -> ((c13b <  (- 1000)) ->
+  (result6 = floor_climb_rate)))
+
+axiom H40 : ((not (1000 <  c13b)) -> ((c13b <  (- 1000)) ->
   (floor_climb_rate2 = (- 1000))))
 
-axiom H40 : ((not (1000 <  c13b)) -> ((not (c13b <  (- 1000))) ->
-  ((o1 = c13b) and in_range8(c13b))))
-
 axiom H41 : ((not (1000 <  c13b)) -> ((not (c13b <  (- 1000))) ->
-  (result7 = floor_climb_rate)))
+  ((o2 = c13b) and in_range8(c13b))))
 
 axiom H42 : ((not (1000 <  c13b)) -> ((not (c13b <  (- 1000))) ->
-  (floor_climb_rate3 = o1)))
+  (result7 = floor_climb_rate)))
 
 axiom H43 : ((not (1000 <  c13b)) -> ((not (c13b <  (- 1000))) ->
+  (floor_climb_rate3 = o2)))
+
+axiom H44 : ((not (1000 <  c13b)) -> ((not (c13b <  (- 1000))) ->
   (floor_climb_rate2 = floor_climb_rate3)))
 
-axiom H44 : ((not (1000 <  c13b)) -> (floor_climb_rate1 = floor_climb_rate2))
+axiom H45 : ((not (1000 <  c13b)) -> (floor_climb_rate1 = floor_climb_rate2))
 
  (* File "ap-altitude-pitch-rate.ads", line 9, characters 0-0 *)
 goal WP_parameter_def : in_range8(floor_climb_rate1)

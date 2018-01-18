@@ -1231,19 +1231,19 @@ logic valid_numberlogentries : int, int, us_rep2,
 logic valid_numberlogentries__function_guard : bool, int, int, us_rep2,
   (int,fileentrycountt) farray -> prop
 
-logic temp___1145 : int -> (int,logfileindext) farray
+logic temp___1203 : int -> (int,logfileindext) farray
 
 axiom def_axiom :
-  (forall temp___1147:int.
-  (forall temp___1148:int.
-  ((temp___1145(temp___1147)[temp___1148]) = of_rep2(temp___1147))))
+  (forall temp___1205:int.
+  (forall temp___1206:int.
+  ((temp___1203(temp___1205)[temp___1206]) = of_rep2(temp___1205))))
 
-logic temp___1149 : int -> (int,fileentrycountt) farray
+logic temp___1207 : int -> (int,fileentrycountt) farray
 
 axiom def_axiom1 :
-  (forall temp___1151:int.
-  (forall temp___1152:int.
-  ((temp___1149(temp___1151)[temp___1152]) = of_rep5(temp___1151))))
+  (forall temp___1209:int.
+  (forall temp___1210:int.
+  ((temp___1207(temp___1209)[temp___1210]) = of_rep5(temp___1209))))
 
 type map__ref2 = { map__content2 : (int,us_rep1) farray
 }
@@ -3515,9 +3515,9 @@ logic thecurrentfloppy : us_rep1
 
 logic configdataok : bool
 
-logic state : us_private
-
 logic filestate : us_private
+
+logic state : us_private
 
 logic state1 : us_private
 
@@ -3549,9 +3549,9 @@ logic thecurrentfloppy1 : us_rep1
 
 logic configdataok1 : bool
 
-logic state3 : us_private
-
 logic filestate1 : us_private
+
+logic state3 : us_private
 
 logic state4 : us_private
 
@@ -3647,9 +3647,9 @@ logic thecurrentfloppy3 : us_rep1
 
 logic configdataok2 : bool
 
-logic state10 : us_private
-
 logic filestate4 : us_private
+
+logic state10 : us_private
 
 logic logfiles2 : (int,us_rep1) farray
 
@@ -3747,9 +3747,9 @@ logic thecurrentfloppy4 : us_rep1
 
 logic configdataok3 : bool
 
-logic state15 : us_private
-
 logic filestate7 : us_private
+
+logic state15 : us_private
 
 logic filestate8 : us_private
 
@@ -3791,9 +3791,9 @@ logic thecurrentfloppy5 : us_rep1
 
 logic configdataok4 : bool
 
-logic state19 : us_private
-
 logic filestate9 : us_private
+
+logic state19 : us_private
 
 logic filestate10 : us_private
 
@@ -3838,31 +3838,32 @@ axiom H9 : (result4 = thecurrentfloppy)
 
 axiom H10 : (thecurrentfloppy2 = o1)
 
-axiom H11 : ((valid_numberlogentries(to_rep2(logfilestate__split_fields21),
+axiom H11 : (in_range6(auditalarm3) and
+  (valid_numberlogentries(to_rep2(logfilestate__split_fields21),
   to_rep3(logfilestate__split_fields22), { us_split_fields3 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields23;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields24;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields25;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields26 } },
-  logfilestate__split_fields27) = true) and in_range6(auditalarm3))
+  logfilestate__split_fields27) = true))
 
-axiom H12 : ((configdataok2 = true) ->
-  ((valid_numberlogentries(to_rep2(logfilestate__split_fields28),
+axiom H12 : ((configdataok2 = true) -> (in_range6(auditalarm4) and
+  (valid_numberlogentries(to_rep2(logfilestate__split_fields28),
   to_rep3(logfilestate__split_fields29), { us_split_fields3 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields30;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields31;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields32;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields33 } },
-  logfilestate__split_fields34) = true) and in_range6(auditalarm4)))
+  logfilestate__split_fields34) = true)))
 
-axiom H13 : ((not (configdataok2 = true)) ->
-  ((valid_numberlogentries(to_rep2(logfilestate__split_fields35),
+axiom H13 : ((not (configdataok2 = true)) -> (in_range6(auditalarm5) and
+  (valid_numberlogentries(to_rep2(logfilestate__split_fields35),
   to_rep3(logfilestate__split_fields36), { us_split_fields3 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields37;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields38;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields39;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields40 } },
-  logfilestate__split_fields41) = true) and in_range6(auditalarm5)))
+  logfilestate__split_fields41) = true)))
 
 axiom H14 : ((not (configdataok2 = true)) -> (state12 = state14))
 

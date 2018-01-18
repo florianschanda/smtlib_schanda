@@ -3297,8 +3297,6 @@ logic o2 : t1
 
 logic temp___1374 : t1
 
-logic temp___1371 : t1
-
 logic temp___1372 : u64
 
 logic temp___13721 : u32
@@ -3322,6 +3320,8 @@ logic temp___13729 : u64
 logic temp___137210 : (t1,u64) farray
 
 logic temp___137211 : (t1,byte) farray
+
+logic temp___1371 : t1
 
 logic o3 : t1
 
@@ -3581,31 +3581,31 @@ logic o92 : t1
 
 logic o93 : t1
 
-logic temp___1387 : u64
+logic temp___1388 : t1
 
-logic temp___13871 : u32
+logic temp___1386 : u64
 
-logic temp___13872 : u16
+logic temp___13861 : u32
 
-logic temp___13873 : u7
+logic temp___13862 : u16
 
-logic temp___13874 : bool
+logic temp___13863 : u7
 
-logic temp___13875 : u6
+logic temp___13864 : bool
 
-logic temp___13876 : bool
+logic temp___13865 : u6
 
-logic temp___13877 : bool
+logic temp___13866 : bool
 
-logic temp___13878 : hash_bit_length
+logic temp___13867 : bool
 
-logic temp___13879 : u64
+logic temp___13868 : hash_bit_length
 
-logic temp___138710 : (t1,u64) farray
+logic temp___13869 : u64
 
-logic temp___138711 : (t1,byte) farray
+logic temp___138610 : (t1,u64) farray
 
-logic temp___1386 : t1
+logic temp___138611 : (t1,byte) farray
 
 logic temp___1385 : t1
 
@@ -5194,7 +5194,7 @@ axiom H34 : (ugt1(to_rep1(ctx__split_fields9), of_int1(0)) -> (ugt1(c238b,
   of_int1(0)) -> (final_src4 = add1(src4, sub1(c238b, of_int1(1))))))
 
 axiom H35 : (ugt1(to_rep1(ctx__split_fields9), of_int1(0)) -> (ugt1(c238b,
-  of_int1(0)) -> (((temp___1374 = dst4) and ((temp___1371 = src4) and
+  of_int1(0)) -> (((temp___1374 = dst4) and
   (((((ctx__split_fields = temp___1372) and
   ((ctx__split_fields1 = temp___13721) and
   ((ctx__split_fields2 = temp___13722) and
@@ -5206,7 +5206,7 @@ axiom H35 : (ugt1(to_rep1(ctx__split_fields9), of_int1(0)) -> (ugt1(c238b,
   ((ctx__split_fields8 = temp___13728) and
   (ctx__split_fields9 = temp___13729))) and
   ((ctx__split_fields10 = temp___137210) and
-  (ctx__split_fields11 = temp___137211))) and
+  (ctx__split_fields11 = temp___137211))) and ((temp___1371 = src4) and
   (((((((((((ule1(to_rep2(first(msg1)), src4) and ule1(src4,
   to_rep2(last(msg1)))) and (o3 = src4)) and (o4 = (msg[o3]))) and
   (o5 = to_rep(o4))) and (to_rep(o6) = o5)) and

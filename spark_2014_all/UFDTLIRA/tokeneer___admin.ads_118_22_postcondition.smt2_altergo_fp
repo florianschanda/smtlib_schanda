@@ -375,9 +375,9 @@ logic o2 : privileget
 
 logic o3 : opandnullt
 
-logic temp___483 : privileget
+logic temp___527 : privileget
 
-logic temp___4831 : opandnullt
+logic temp___5271 : opandnullt
 
 logic result : privileget
 
@@ -403,17 +403,17 @@ axiom H2 : (o1 = o2)
 
 axiom H3 : (o = o3)
 
-axiom H4 : (temp___483 = o2)
+axiom H4 : (temp___527 = o2)
 
-axiom H5 : (temp___4831 = o3)
+axiom H5 : (temp___5271 = o3)
 
 axiom H6 : (result = theadmin__split_fields)
 
 axiom H7 : (result1 = theadmin__split_fields1)
 
-axiom H8 : (temp___483 = theadmin__split_fields2)
+axiom H8 : (temp___527 = theadmin__split_fields2)
 
-axiom H9 : (temp___4831 = theadmin__split_fields3)
+axiom H9 : (temp___5271 = theadmin__split_fields3)
 
 axiom H10 : (theadmin__split_fields4 = theadmin__split_fields2)
 
@@ -423,7 +423,7 @@ axiom H12 : (theadmin__split_fields6 = theadmin__split_fields2)
 
 axiom H13 : (theadmin__split_fields7 = theadmin__split_fields3)
 
- (* File "admin.adb", line 72, characters 0-0 *)
+ (* File "admin.ads", line 270, characters 0-0 *)
 goal WP_parameter_def : (not (ispresent({ us_split_fields1 = {
   rec__admin__t__rolepresent = theadmin__split_fields4;
   rec__admin__t__currentop = theadmin__split_fields5 } }) = true))

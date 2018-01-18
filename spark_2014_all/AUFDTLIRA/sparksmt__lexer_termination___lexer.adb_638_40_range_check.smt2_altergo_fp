@@ -812,10 +812,6 @@ type unbounded_string__ref = { unbounded_string__content : us_rep2
 function unbounded_string__ref___projection(a: unbounded_string__ref) : us_rep2 =
   (a).unbounded_string__content
 
-logic is_empty : us_rep2 -> bool
-
-logic is_empty__function_guard : bool, us_rep2 -> prop
-
 logic length1 : us_rep2 -> int
 
 logic length__function_guard : int, us_rep2 -> prop
@@ -1973,42 +1969,6 @@ axiom temp___String_Literal_888__def_axiom :
   (to_rep((temp___String_Literal_888(void)[32])) = 100))
 
 axiom invariant____post_axiom : true
-
-logic capacity__function_guard : int, us_rep2 -> prop
-
-logic length5 : us_rep2 -> int
-
-logic length__function_guard1 : int, us_rep2 -> prop
-
-axiom length__post_axiom1 :
-  (forall container:capacity_range. forall container1:us_main_type1
-  [length5({ us_split_discrs3 = {
-  rec__unbounded_strings__char_vectors__vector__capacity = container };
-  us_split_fields3 = { rec__unbounded_strings__char_vectors__vector =
-  container1 } })]. ((((of_int(0) = true) -> (length5({ us_split_discrs3 = {
-  rec__unbounded_strings__char_vectors__vector__capacity = container };
-  us_split_fields3 = { rec__unbounded_strings__char_vectors__vector =
-  container1 } }) <= to_rep4(container))) and ((not (of_int(0) = true)) ->
-  (length5({ us_split_discrs3 = {
-  rec__unbounded_strings__char_vectors__vector__capacity = container };
-  us_split_fields3 = { rec__unbounded_strings__char_vectors__vector =
-  container1 } }) <= 2147483647))) and in_range6(length5({ us_split_discrs3 =
-  { rec__unbounded_strings__char_vectors__vector__capacity = container };
-  us_split_fields3 = { rec__unbounded_strings__char_vectors__vector =
-  container1 } }))))
-
-axiom is_empty__post_axiom :
-  (forall container:capacity_range. forall container1:us_main_type1
-  [is_empty({ us_split_discrs3 = {
-  rec__unbounded_strings__char_vectors__vector__capacity = container };
-  us_split_fields3 = { rec__unbounded_strings__char_vectors__vector =
-  container1 } })]. ((is_empty({ us_split_discrs3 = {
-  rec__unbounded_strings__char_vectors__vector__capacity = container };
-  us_split_fields3 = { rec__unbounded_strings__char_vectors__vector =
-  container1 } }) = true) <-> (length5({ us_split_discrs3 = {
-  rec__unbounded_strings__char_vectors__vector__capacity = container };
-  us_split_fields3 = { rec__unbounded_strings__char_vectors__vector =
-  container1 } }) = 0)))
 
 logic t__split_fields : natural
 
@@ -4419,11 +4379,10 @@ axiom H7 : ((invariant__(name_table, the_file, {
   rec__file_io__read_result__status = next_read__split_discrs },
   next_idx) = true) and (not (t__attr__constrained = true)))
 
-axiom H8 : ((to_rep4(s__split_discrs) = 32) and (is_empty({
-  us_split_discrs3 = {
-  rec__unbounded_strings__char_vectors__vector__capacity = s__split_discrs };
-  us_split_fields3 = { rec__unbounded_strings__char_vectors__vector =
-  s__split_fields } }) = true))
+axiom H8 : ((to_rep4(s__split_discrs) = 32) and (length1({ us_split_discrs3 =
+  { rec__unbounded_strings__char_vectors__vector__capacity = s__split_discrs
+  }; us_split_fields3 = { rec__unbounded_strings__char_vectors__vector =
+  s__split_fields } }) = 0))
 
 axiom H9 : (32 = to_rep4(s__split_discrs))
 

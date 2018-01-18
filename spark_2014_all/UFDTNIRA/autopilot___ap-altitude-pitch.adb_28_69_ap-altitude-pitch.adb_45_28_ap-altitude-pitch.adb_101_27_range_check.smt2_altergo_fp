@@ -552,6 +552,8 @@ logic o1 : int
 
 logic o2 : int
 
+logic o3 : int
+
 logic ap__altitude__pitch__rate__calc_pitchrate__present_pitchrate : int
 
 logic result : int

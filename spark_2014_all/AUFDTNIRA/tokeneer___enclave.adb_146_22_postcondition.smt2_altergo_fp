@@ -858,19 +858,19 @@ logic valid_numberlogentries : int, int, us_rep,
 logic valid_numberlogentries__function_guard : bool, int, int, us_rep,
   (int,fileentrycountt) farray -> prop
 
-logic temp___1145 : int -> (int,logfileindext) farray
+logic temp___1203 : int -> (int,logfileindext) farray
 
 axiom def_axiom :
-  (forall temp___1147:int.
-  (forall temp___1148:int.
-  ((temp___1145(temp___1147)[temp___1148]) = of_rep(temp___1147))))
+  (forall temp___1205:int.
+  (forall temp___1206:int.
+  ((temp___1203(temp___1205)[temp___1206]) = of_rep(temp___1205))))
 
-logic temp___1149 : int -> (int,fileentrycountt) farray
+logic temp___1207 : int -> (int,fileentrycountt) farray
 
 axiom def_axiom1 :
-  (forall temp___1151:int.
-  (forall temp___1152:int.
-  ((temp___1149(temp___1151)[temp___1152]) = of_rep3(temp___1151))))
+  (forall temp___1209:int.
+  (forall temp___1210:int.
+  ((temp___1207(temp___1209)[temp___1210]) = of_rep3(temp___1209))))
 
 type us_main_type
 
@@ -1407,45 +1407,45 @@ axiom H3 : in_range7(status)
 
 axiom H4 : (result = ispresent(state))
 
-axiom H5 : ((result = true) ->
-  ((valid_numberlogentries(to_rep(logfilestate__split_fields7),
+axiom H5 : ((result = true) -> (in_range(auditalarm1) and
+  (valid_numberlogentries(to_rep(logfilestate__split_fields7),
   to_rep1(logfilestate__split_fields8), { us_split_fields1 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields9;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields10;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields11;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields12 } },
-  logfilestate__split_fields13) = true) and in_range(auditalarm1)))
+  logfilestate__split_fields13) = true)))
 
-axiom H6 : ((result = true) ->
-  ((valid_numberlogentries(to_rep(logfilestate__split_fields14),
+axiom H6 : ((result = true) -> (in_range(auditalarm2) and
+  (valid_numberlogentries(to_rep(logfilestate__split_fields14),
   to_rep1(logfilestate__split_fields15), { us_split_fields1 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields16;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields17;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields18;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields19 } },
-  logfilestate__split_fields20) = true) and in_range(auditalarm2)))
+  logfilestate__split_fields20) = true)))
 
 axiom H7 : ((result = true) -> (result1 = status))
 
 axiom H8 : ((result = true) -> (status2 = 1))
 
-axiom H9 : ((not (result = true)) ->
-  ((valid_numberlogentries(to_rep(logfilestate__split_fields21),
+axiom H9 : ((not (result = true)) -> (in_range(auditalarm3) and
+  (valid_numberlogentries(to_rep(logfilestate__split_fields21),
   to_rep1(logfilestate__split_fields22), { us_split_fields1 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields23;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields24;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields25;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields26 } },
-  logfilestate__split_fields27) = true) and in_range(auditalarm3)))
+  logfilestate__split_fields27) = true)))
 
-axiom H10 : ((not (result = true)) ->
-  ((valid_numberlogentries(to_rep(logfilestate__split_fields28),
+axiom H10 : ((not (result = true)) -> (in_range(auditalarm4) and
+  (valid_numberlogentries(to_rep(logfilestate__split_fields28),
   to_rep1(logfilestate__split_fields29), { us_split_fields1 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields30;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields31;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields32;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields33 } },
-  logfilestate__split_fields34) = true) and in_range(auditalarm4)))
+  logfilestate__split_fields34) = true)))
 
 axiom H11 : ((not (result = true)) -> (state3 = state6))
 

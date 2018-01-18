@@ -1563,19 +1563,19 @@ logic valid_numberlogentries : int, int, us_rep2,
 logic valid_numberlogentries__function_guard : bool, int, int, us_rep2,
   (int,fileentrycountt) farray -> prop
 
-logic temp___1145 : int -> (int,logfileindext) farray
+logic temp___1203 : int -> (int,logfileindext) farray
 
 axiom def_axiom :
-  (forall temp___1147:int.
-  (forall temp___1148:int.
-  ((temp___1145(temp___1147)[temp___1148]) = of_rep6(temp___1147))))
+  (forall temp___1205:int.
+  (forall temp___1206:int.
+  ((temp___1203(temp___1205)[temp___1206]) = of_rep6(temp___1205))))
 
-logic temp___1149 : int -> (int,fileentrycountt) farray
+logic temp___1207 : int -> (int,fileentrycountt) farray
 
 axiom def_axiom1 :
-  (forall temp___1151:int.
-  (forall temp___1152:int.
-  ((temp___1149(temp___1151)[temp___1152]) = of_rep9(temp___1151))))
+  (forall temp___1209:int.
+  (forall temp___1210:int.
+  ((temp___1207(temp___1209)[temp___1210]) = of_rep9(temp___1209))))
 
 type us_main_type
 
@@ -4166,9 +4166,9 @@ logic localstatus : int
 
 logic currenttime : us_private
 
-logic state : us_private
-
 logic filestate : us_private
+
+logic state : us_private
 
 logic filestate1 : us_private
 
@@ -4490,9 +4490,9 @@ logic theadmin__split_fields3 : opandnullt
 
 logic status2 : int
 
-logic state9 : us_private
-
 logic filestate2 : us_private
+
+logic state9 : us_private
 
 logic filestate3 : us_private
 
@@ -4900,9 +4900,9 @@ logic theadmin__split_fields7 : opandnullt
 
 logic status7 : int
 
-logic state24 : us_private
-
 logic filestate6 : us_private
+
+logic state24 : us_private
 
 logic filestate7 : us_private
 
@@ -5052,9 +5052,9 @@ logic status8 : int
 
 logic localstatus2 : int
 
-logic state33 : us_private
-
 logic filestate8 : us_private
+
+logic state33 : us_private
 
 logic filestate9 : us_private
 
@@ -5206,9 +5206,9 @@ logic status10 : int
 
 logic localstatus3 : int
 
-logic state42 : us_private
-
 logic filestate10 : us_private
+
+logic state42 : us_private
 
 logic filestate11 : us_private
 
@@ -5765,15 +5765,16 @@ axiom H12 : ((localstatus1 = 5) -> ((((((((status4 = 3) or (status4 = 4)) and
   } }) = 3)) or (not (isdoingop({ us_split_fields1 = {
   rec__admin__t__rolepresent = theadmin__split_fields4;
   rec__admin__t__currentop = theadmin__split_fields5 } }) = true))))) and
-  (((((in_range1(tokenpresence2) and
+  (((((in_range6(auditalarm2) and in_range17(tokentry2)) and
+  in_range16(tokenid2)) and in_range28(status4)) and
+  in_range1(tokenpresence2)) and
   (valid_numberlogentries(to_rep6(logfilestate__split_fields14),
   to_rep7(logfilestate__split_fields15), { us_split_fields5 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields16;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields17;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields18;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields19 } },
-  logfilestate__split_fields20) = true)) and in_range6(auditalarm2)) and
-  in_range17(tokentry2)) and in_range28(status4)) and in_range16(tokenid2))))
+  logfilestate__split_fields20) = true))))
 
 axiom H13 : ((localstatus1 = 5) -> (state32 = state8))
 
@@ -5789,9 +5790,9 @@ axiom H18 : ((localstatus1 = 5) -> (state28 = state4))
 
 axiom H19 : ((localstatus1 = 5) -> (state27 = state3))
 
-axiom H20 : ((localstatus1 = 5) -> (filestate6 = filestate))
+axiom H20 : ((localstatus1 = 5) -> (state24 = state))
 
-axiom H21 : ((localstatus1 = 5) -> (state24 = state))
+axiom H21 : ((localstatus1 = 5) -> (filestate6 = filestate))
 
 axiom H22 : ((localstatus1 = 5) ->
   ((latchtimeout__split_fields8 = latchtimeout__split_fields) and
@@ -5815,9 +5816,9 @@ axiom H29 : ((localstatus1 = 5) -> (state28 = state13))
 
 axiom H30 : ((localstatus1 = 5) -> (state27 = state12))
 
-axiom H31 : ((localstatus1 = 5) -> (filestate6 = filestate2))
+axiom H31 : ((localstatus1 = 5) -> (state24 = state9))
 
-axiom H32 : ((localstatus1 = 5) -> (state24 = state9))
+axiom H32 : ((localstatus1 = 5) -> (filestate6 = filestate2))
 
 axiom H33 : ((localstatus1 = 5) ->
   ((latchtimeout__split_fields8 = latchtimeout__split_fields4) and
@@ -5828,16 +5829,16 @@ axiom H33 : ((localstatus1 = 5) ->
 axiom H34 : ((localstatus1 = 5) -> (currentlatch2 = currentlatch1))
 
 axiom H35 : ((not (localstatus1 = 5)) -> ((localstatus1 = 4) ->
-  ((status6 = 3) and (((((in_range1(tokenpresence3) and
+  ((status6 = 3) and (((((in_range6(auditalarm3) and
+  in_range17(tokentry3)) and in_range16(tokenid3)) and
+  in_range28(status6)) and in_range1(tokenpresence3)) and
   (valid_numberlogentries(to_rep6(logfilestate__split_fields21),
   to_rep7(logfilestate__split_fields22), { us_split_fields5 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields23;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields24;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields25;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields26 } },
-  logfilestate__split_fields27) = true)) and in_range6(auditalarm3)) and
-  in_range17(tokentry3)) and in_range28(status6)) and
-  in_range16(tokenid3)))))
+  logfilestate__split_fields27) = true)))))
 
 axiom H36 : ((not (localstatus1 = 5)) -> ((localstatus1 = 4) ->
   (state32 = state8)))
@@ -5861,10 +5862,10 @@ axiom H42 : ((not (localstatus1 = 5)) -> ((localstatus1 = 4) ->
   (state27 = state3)))
 
 axiom H43 : ((not (localstatus1 = 5)) -> ((localstatus1 = 4) ->
-  (filestate6 = filestate)))
+  (state24 = state)))
 
 axiom H44 : ((not (localstatus1 = 5)) -> ((localstatus1 = 4) ->
-  (state24 = state)))
+  (filestate6 = filestate)))
 
 axiom H45 : ((not (localstatus1 = 5)) -> ((localstatus1 = 4) ->
   ((theadmin__split_fields6 = theadmin__split_fields) and
@@ -5901,10 +5902,10 @@ axiom H54 : ((not (localstatus1 = 5)) -> ((localstatus1 = 4) ->
   (state27 = state12)))
 
 axiom H55 : ((not (localstatus1 = 5)) -> ((localstatus1 = 4) ->
-  (filestate6 = filestate2)))
+  (state24 = state9)))
 
 axiom H56 : ((not (localstatus1 = 5)) -> ((localstatus1 = 4) ->
-  (state24 = state9)))
+  (filestate6 = filestate2)))
 
 axiom H57 : ((not (localstatus1 = 5)) -> ((localstatus1 = 4) ->
   ((theadmin__split_fields6 = theadmin__split_fields2) and
@@ -6336,16 +6337,16 @@ axiom H60 : ((not (localstatus1 = 5)) -> ((not (localstatus1 = 4)) ->
   } }) = true) and (thecurrentop({ us_split_fields1 = {
   rec__admin__t__rolepresent = theadmin__split_fields;
   rec__admin__t__currentop = theadmin__split_fields1 } }) = 3)))) and
-  ((((((in_range1(tokenpresence4) and
+  ((((((in_range6(auditalarm4) and in_range17(tokentry4)) and
+  in_range16(tokenid4)) and in_range28(status7)) and
+  in_range26(currentlatch2)) and in_range1(tokenpresence4)) and
   (valid_numberlogentries(to_rep6(logfilestate__split_fields28),
   to_rep7(logfilestate__split_fields29), { us_split_fields5 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields30;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields31;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields32;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields33 } },
-  logfilestate__split_fields34) = true)) and in_range6(auditalarm4)) and
-  in_range17(tokentry4)) and in_range28(status7)) and
-  in_range26(currentlatch2)) and in_range16(tokenid4))))))
+  logfilestate__split_fields34) = true))))))
 
 axiom H61 : ((not (localstatus1 = 5)) -> ((not (localstatus1 = 4)) ->
   ((not ((not (localstatus1 = 6)) -> (localstatus1 = 7))) ->
@@ -6393,11 +6394,11 @@ axiom H71 : ((not (localstatus1 = 5)) -> ((not (localstatus1 = 4)) ->
 
 axiom H72 : ((not (localstatus1 = 5)) -> ((not (localstatus1 = 4)) ->
   ((not ((not (localstatus1 = 6)) -> (localstatus1 = 7))) ->
-  (filestate6 = filestate))))
+  (state24 = state))))
 
 axiom H73 : ((not (localstatus1 = 5)) -> ((not (localstatus1 = 4)) ->
   ((not ((not (localstatus1 = 6)) -> (localstatus1 = 7))) ->
-  (state24 = state))))
+  (filestate6 = filestate))))
 
 axiom H74 : ((not (localstatus1 = 5)) -> ((not (localstatus1 = 4)) ->
   ((not ((not (localstatus1 = 6)) -> (localstatus1 = 7))) ->
@@ -6549,11 +6550,11 @@ axiom H98 : ((not (localstatus1 = 5)) -> ((not (localstatus1 = 4)) ->
 
 axiom H99 : ((not (localstatus1 = 5)) -> ((not (localstatus1 = 4)) ->
   ((not ((not (localstatus1 = 6)) -> (localstatus1 = 7))) ->
-  (filestate6 = filestate2))))
+  (state24 = state9))))
 
 axiom H100 : ((not (localstatus1 = 5)) -> ((not (localstatus1 = 4)) ->
   ((not ((not (localstatus1 = 6)) -> (localstatus1 = 7))) ->
-  (state24 = state9))))
+  (filestate6 = filestate2))))
 
 axiom H101 : ((not (localstatus1 = 5)) -> ((not (localstatus1 = 4)) ->
   ((not ((not (localstatus1 = 6)) -> (localstatus1 = 7))) ->
@@ -7031,9 +7032,9 @@ axiom H189 : (state34 = state18)
 
 axiom H190 : (filestate9 = filestate4)
 
-axiom H191 : (filestate8 = filestate6)
+axiom H191 : (state33 = state24)
 
-axiom H192 : (state33 = state24)
+axiom H192 : (filestate8 = filestate6)
 
 axiom H193 : (localstatus2 = localstatus1)
 
@@ -7139,9 +7140,9 @@ axiom H218 : (state43 = state18)
 
 axiom H219 : (filestate11 = filestate4)
 
-axiom H220 : (filestate10 = filestate6)
+axiom H220 : (state42 = state24)
 
-axiom H221 : (state42 = state24)
+axiom H221 : (filestate10 = filestate6)
 
 axiom H222 : (localstatus3 = localstatus1)
 

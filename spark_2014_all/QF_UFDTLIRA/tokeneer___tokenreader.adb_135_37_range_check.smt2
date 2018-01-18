@@ -47,7 +47,7 @@
 (define-fun cardstatet__ref___projection ((a cardstatet__ref)) cardstatet (cardstatet__content a))
 (declare-const cardstate Int)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
-(define-fun dynamic_invariant1 ((temp___expr_1414 Int) (temp___is_init_1411 Bool) (temp___skip_constant_1412 Bool) (temp___do_toplevel_1413 Bool)) Bool (=> (or (= temp___is_init_1411 true) (<= 0 6)) (in_range2 temp___expr_1414)))
+(define-fun dynamic_invariant1 ((temp___expr_1470 Int) (temp___is_init_1467 Bool) (temp___skip_constant_1468 Bool) (temp___do_toplevel_1469 Bool)) Bool (=> (or (= temp___is_init_1467 true) (<= 0 6)) (in_range2 temp___expr_1470)))
 (assert (in_range1 cardstate))
 (assert (<= 0 cardstate))
 (assert (<= cardstate 6))

@@ -1251,19 +1251,19 @@ logic valid_numberlogentries : int, int, us_rep1,
 logic valid_numberlogentries__function_guard : bool, int, int, us_rep1,
   (int,fileentrycountt) farray -> prop
 
-logic temp___1044 : int -> (int,logfileindext) farray
+logic temp___1100 : int -> (int,logfileindext) farray
 
 axiom def_axiom :
-  (forall temp___1046:int.
-  (forall temp___1047:int.
-  ((temp___1044(temp___1046)[temp___1047]) = of_rep4(temp___1046))))
+  (forall temp___1102:int.
+  (forall temp___1103:int.
+  ((temp___1100(temp___1102)[temp___1103]) = of_rep4(temp___1102))))
 
-logic temp___1048 : int -> (int,fileentrycountt) farray
+logic temp___1104 : int -> (int,fileentrycountt) farray
 
 axiom def_axiom1 :
-  (forall temp___1050:int.
-  (forall temp___1051:int.
-  ((temp___1048(temp___1050)[temp___1051]) = of_rep7(temp___1050))))
+  (forall temp___1106:int.
+  (forall temp___1107:int.
+  ((temp___1104(temp___1106)[temp___1107]) = of_rep7(temp___1106))))
 
 type us_main_type
 
@@ -2525,9 +2525,9 @@ logic localstatus : int
 
 logic currenttime : us_private
 
-logic filestate : us_private
-
 logic state : us_private
+
+logic filestate : us_private
 
 logic state1 : us_private
 
@@ -2631,9 +2631,9 @@ logic fingertimeout__split_fields10 : dayst
 
 logic fingertimeout__split_fields11 : millisecst
 
-logic filestate3 : us_private
-
 logic state10 : us_private
+
+logic filestate3 : us_private
 
 logic state11 : us_private
 
@@ -2673,9 +2673,9 @@ logic thestats__split_fields7 : statscount
 
 logic status5 : int
 
-logic filestate4 : us_private
-
 logic state13 : us_private
+
+logic filestate4 : us_private
 
 logic state14 : us_private
 
@@ -2713,9 +2713,9 @@ logic thestats__split_fields11 : statscount
 
 logic status6 : int
 
-logic filestate5 : us_private
-
 logic state16 : us_private
+
+logic filestate5 : us_private
 
 logic state17 : us_private
 
@@ -2753,9 +2753,9 @@ logic thestats__split_fields15 : statscount
 
 logic status7 : int
 
-logic filestate6 : us_private
-
 logic state19 : us_private
+
+logic filestate6 : us_private
 
 logic filestate7 : us_private
 
@@ -2809,9 +2809,9 @@ logic tokenremovaltimeout__split_fields10 : dayst
 
 logic tokenremovaltimeout__split_fields11 : millisecst
 
-logic filestate8 : us_private
-
 logic state23 : us_private
+
+logic filestate8 : us_private
 
 logic state24 : us_private
 
@@ -2859,9 +2859,9 @@ logic thestats__split_fields23 : statscount
 
 logic status10 : int
 
-logic filestate9 : us_private
-
 logic state26 : us_private
+
+logic filestate9 : us_private
 
 logic state27 : us_private
 
@@ -2903,9 +2903,9 @@ logic thestats__split_fields27 : statscount
 
 logic status11 : int
 
-logic filestate10 : us_private
-
 logic state31 : us_private
+
+logic filestate10 : us_private
 
 logic state32 : us_private
 
@@ -2971,9 +2971,9 @@ logic tokenremovaltimeout__split_fields15 : millisecst
 
 logic localstatus2 : int
 
-logic filestate11 : us_private
-
 logic state34 : us_private
+
+logic filestate11 : us_private
 
 logic state35 : us_private
 
@@ -3051,9 +3051,9 @@ logic tokenremovaltimeout__split_fields19 : millisecst
 
 logic localstatus3 : int
 
-logic filestate13 : us_private
-
 logic state40 : us_private
+
+logic filestate13 : us_private
 
 logic state41 : us_private
 

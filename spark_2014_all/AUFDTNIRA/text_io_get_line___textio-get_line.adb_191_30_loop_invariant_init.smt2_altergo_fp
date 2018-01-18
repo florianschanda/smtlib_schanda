@@ -1204,15 +1204,15 @@ logic o6 : int
 
 logic temp___548 : int
 
-logic temp___547 : (int,character) farray
+logic temp___547 : int
 
-logic temp___545 : int
+logic temp___546 : (int,character) farray
+
+logic temp___544 : int
 
 logic temp___551 : int
 
 logic temp___549 : int
-
-logic temp___544 : int
 
 logic temp___543 : int
 

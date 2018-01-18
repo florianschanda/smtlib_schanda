@@ -1599,19 +1599,19 @@ logic valid_numberlogentries : int, int, us_rep1,
 logic valid_numberlogentries__function_guard : bool, int, int, us_rep1,
   (int,fileentrycountt) farray -> prop
 
-logic temp___1044 : int -> (int,logfileindext) farray
+logic temp___1100 : int -> (int,logfileindext) farray
 
 axiom def_axiom1 :
-  (forall temp___1046:int.
-  (forall temp___1047:int.
-  ((temp___1044(temp___1046)[temp___1047]) = of_rep6(temp___1046))))
+  (forall temp___1102:int.
+  (forall temp___1103:int.
+  ((temp___1100(temp___1102)[temp___1103]) = of_rep6(temp___1102))))
 
-logic temp___1048 : int -> (int,fileentrycountt) farray
+logic temp___1104 : int -> (int,fileentrycountt) farray
 
 axiom def_axiom2 :
-  (forall temp___1050:int.
-  (forall temp___1051:int.
-  ((temp___1048(temp___1050)[temp___1051]) = of_rep9(temp___1050))))
+  (forall temp___1106:int.
+  (forall temp___1107:int.
+  ((temp___1104(temp___1106)[temp___1107]) = of_rep9(temp___1106))))
 
 type us_main_type
 
@@ -2304,9 +2304,9 @@ logic thestats__split_fields3 : statscount
 
 logic currenttime : us_private
 
-logic filestate : us_private
-
 logic state : us_private
+
+logic filestate : us_private
 
 logic state1 : us_private
 
@@ -2370,9 +2370,9 @@ logic thestats__split_fields6 : statscount
 
 logic thestats__split_fields7 : statscount
 
-logic filestate1 : us_private
-
 logic state5 : us_private
+
+logic filestate1 : us_private
 
 logic state6 : us_private
 
@@ -2438,9 +2438,9 @@ logic auditalarm3 : int
 
 logic auditsystemfault2 : bool
 
-logic filestate2 : us_private
-
 logic state13 : us_private
+
+logic filestate2 : us_private
 
 logic state14 : us_private
 
@@ -2496,9 +2496,9 @@ logic auditalarm5 : int
 
 logic auditsystemfault3 : bool
 
-logic filestate3 : us_private
-
 logic state15 : us_private
+
+logic filestate3 : us_private
 
 logic state16 : us_private
 
@@ -2548,9 +2548,9 @@ logic thestats__split_fields14 : statscount
 
 logic thestats__split_fields15 : statscount
 
-logic filestate4 : us_private
-
 logic state17 : us_private
+
+logic filestate4 : us_private
 
 logic state18 : us_private
 
@@ -2602,9 +2602,9 @@ logic thestats__split_fields18 : statscount
 
 logic thestats__split_fields19 : statscount
 
-logic filestate5 : us_private
-
 logic state22 : us_private
+
+logic filestate5 : us_private
 
 logic state23 : us_private
 

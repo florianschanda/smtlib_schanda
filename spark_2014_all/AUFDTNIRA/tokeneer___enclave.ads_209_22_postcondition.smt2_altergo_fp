@@ -886,19 +886,19 @@ logic valid_numberlogentries : int, int, us_rep,
 logic valid_numberlogentries__function_guard : bool, int, int, us_rep,
   (int,fileentrycountt) farray -> prop
 
-logic temp___1145 : int -> (int,logfileindext) farray
+logic temp___1203 : int -> (int,logfileindext) farray
 
 axiom def_axiom :
-  (forall temp___1147:int.
-  (forall temp___1148:int.
-  ((temp___1145(temp___1147)[temp___1148]) = of_rep(temp___1147))))
+  (forall temp___1205:int.
+  (forall temp___1206:int.
+  ((temp___1203(temp___1205)[temp___1206]) = of_rep(temp___1205))))
 
-logic temp___1149 : int -> (int,fileentrycountt) farray
+logic temp___1207 : int -> (int,fileentrycountt) farray
 
 axiom def_axiom1 :
-  (forall temp___1151:int.
-  (forall temp___1152:int.
-  ((temp___1149(temp___1151)[temp___1152]) = of_rep3(temp___1151))))
+  (forall temp___1209:int.
+  (forall temp___1210:int.
+  ((temp___1207(temp___1209)[temp___1210]) = of_rep3(temp___1209))))
 
 type us_main_type
 
@@ -2046,14 +2046,14 @@ axiom H4 : (((privatekeypresent({
   (not (enrolmentisinprogress(status4) = true))) and
   ((enrolmentisinprogress(status4) = true) or (status4 = 3)))
 
-axiom H5 : (((valid_numberlogentries(to_rep(logfilestate__split_fields28),
+axiom H5 : ((in_range1(auditalarm4) and in_range10(status4)) and
+  (valid_numberlogentries(to_rep(logfilestate__split_fields28),
   to_rep1(logfilestate__split_fields29), { us_split_fields1 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields30;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields31;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields32;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields33 } },
-  logfilestate__split_fields34) = true) and in_range1(auditalarm4)) and
-  in_range10(status4))
+  logfilestate__split_fields34) = true))
 
 axiom H6 : (privatekeypresent({
   rec__keystore__optionalprivatekeyt__ispresent =

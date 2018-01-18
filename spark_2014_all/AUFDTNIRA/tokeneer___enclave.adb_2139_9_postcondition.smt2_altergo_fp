@@ -1770,19 +1770,19 @@ logic valid_numberlogentries : int, int, us_rep2,
 logic valid_numberlogentries__function_guard : bool, int, int, us_rep2,
   (int,fileentrycountt) farray -> prop
 
-logic temp___1145 : int -> (int,logfileindext) farray
+logic temp___1203 : int -> (int,logfileindext) farray
 
 axiom def_axiom :
-  (forall temp___1147:int.
-  (forall temp___1148:int.
-  ((temp___1145(temp___1147)[temp___1148]) = of_rep5(temp___1147))))
+  (forall temp___1205:int.
+  (forall temp___1206:int.
+  ((temp___1203(temp___1205)[temp___1206]) = of_rep5(temp___1205))))
 
-logic temp___1149 : int -> (int,fileentrycountt) farray
+logic temp___1207 : int -> (int,fileentrycountt) farray
 
 axiom def_axiom1 :
-  (forall temp___1151:int.
-  (forall temp___1152:int.
-  ((temp___1149(temp___1151)[temp___1152]) = of_rep8(temp___1151))))
+  (forall temp___1209:int.
+  (forall temp___1210:int.
+  ((temp___1207(temp___1209)[temp___1210]) = of_rep8(temp___1209))))
 
 type us_main_type
 
@@ -4029,7 +4029,309 @@ logic attr__ATTRIBUTE_ADDRESS14 : int
 
 axiom str_comp__post_axiom : true
 
+type map__ref5 = { map__content5 : (int,bool) farray
+}
+
+logic slide5 : (int,bool) farray, int, int -> (int,bool) farray
+
+axiom slide_eq5 :
+  (forall a:(int,bool) farray.
+  (forall first2:int [slide5(a, first2, first2)]. (slide5(a, first2,
+  first2) = a)))
+
+axiom slide_def5 :
+  (forall a:(int,bool) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide5(a, old_first, new_first)[i])]. ((slide5(a,
+  old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat5 : (int,bool) farray, int, int, (int,bool) farray, int,
+  int -> (int,bool) farray
+
+axiom concat_def5 :
+  (forall a:(int,bool) farray. forall b:(int,bool) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat5(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat5(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat5(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton5 : bool, int -> (int,bool) farray
+
+axiom singleton_def5 :
+  (forall v:bool.
+  (forall i:int [(singleton5(v, i)[i])]. ((singleton5(v, i)[i]) = v)))
+
+logic bool_eq52 : (int,bool) farray, int, int, (int,bool) farray, int,
+  int -> bool
+
+axiom bool_eq_def49 :
+  (forall a:(int,bool) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,bool) farray. forall b__first:int. forall b__last:int
+  [bool_eq52(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
+  (temp___idx_133 <= a__last)) and
+  ((a[temp___idx_133]) = (b[((b__first - a__first) + temp___idx_133)]))) or
+  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (bool_eq52(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
+  (temp___idx_133 <= a__last)) ->
+  ((a[temp___idx_133]) = (b[((b__first - a__first) + temp___idx_133)])))))) ->
+  (bool_eq52(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev5 :
+  (forall a:(int,bool) farray. forall b:(int,bool) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq52(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
+  (temp___idx_133 <= a__last)) ->
+  ((a[temp___idx_133]) = (b[((b__first - a__first) + temp___idx_133)]))))))))
+
+logic compare4 : (int,bool) farray, int, int, (int,bool) farray, int,
+  int -> int
+
+axiom compare_def_eq4 :
+  (forall a:(int,bool) farray. forall b:(int,bool) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare4(a, a_first, a_last, b, b_first, b_last)].
+  ((compare4(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq52(a,
+  a_first, a_last, b, b_first, b_last) = true))))
+
+axiom compare_def_lt4 :
+  (forall a:(int,bool) farray. forall b:(int,bool) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare4(a, a_first, a_last, b, b_first, b_last)].
+  ((compare4(a, a_first, a_last, b, b_first, b_last) <  0) <->
+  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
+  ((bool_eq52(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
+  ((i <  a_last) and (to_int((a[(i + 1)])) <  to_int((b[(j + 1)]))))))))))))
+
+axiom compare_def_gt4 :
+  (forall a:(int,bool) farray. forall b:(int,bool) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare4(a, a_first, a_last, b, b_first, b_last)].
+  ((0 <  compare4(a, a_first, a_last, b, b_first, b_last)) <->
+  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
+  ((bool_eq52(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
+  ((i <  b_last) and (to_int((b[(i + 1)])) <  to_int((a[(j + 1)]))))))))))))
+
+logic xorb1 : (int,bool) farray, int, int, (int,bool) farray, int,
+  int -> (int,bool) farray
+
+logic andb1 : (int,bool) farray, int, int, (int,bool) farray, int,
+  int -> (int,bool) farray
+
+logic orb1 : (int,bool) farray, int, int, (int,bool) farray, int,
+  int -> (int,bool) farray
+
+logic notb1 : (int,bool) farray, int, int -> (int,bool) farray
+
+axiom op_def :
+  (forall a:(int,bool) farray. forall b:(int,bool) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(orb1(a, a_first, a_last, b, b_first, b_last)[i])].
+  (((a_first <= i) and (i <= a_last)) -> ((orb1(a, a_first, a_last, b,
+  b_first, b_last)[i]) = match_bool((a[i]), true,
+  (b[((i - a_first) + b_first)])))))))
+
+axiom op_def1 :
+  (forall a:(int,bool) farray. forall b:(int,bool) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(andb1(a, a_first, a_last, b, b_first, b_last)[i])].
+  (((a_first <= i) and (i <= a_last)) -> ((andb1(a, a_first, a_last, b,
+  b_first, b_last)[i]) = match_bool((a[i]), (b[((i - a_first) + b_first)]),
+  false))))))
+
+axiom op_def2 :
+  (forall a:(int,bool) farray. forall b:(int,bool) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(xorb1(a, a_first, a_last, b, b_first, b_last)[i])].
+  (((a_first <= i) and (i <= a_last)) -> ((xorb1(a, a_first, a_last, b,
+  b_first, b_last)[i]) = xorb((a[i]), (b[((i - a_first) + b_first)])))))))
+
+axiom notb_def :
+  (forall a:(int,bool) farray.
+  (forall a_first:int. forall a_last:int.
+  (forall i:int [(notb1(a, a_first, a_last)[i])]. (((a_first <= i) and
+  (i <= a_last)) -> ((notb1(a, a_first, a_last)[i]) = match_bool((a[i]),
+  false, true))))))
+
+logic dummy145 : (int,bool) farray
+
+logic value__size19 : int
+
+logic object__size19 : (int,bool) farray -> int
+
+logic value__component__size5 : int
+
+logic object__component__size5 : (int,bool) farray -> int
+
+logic value__alignment19 : int
+
+logic object__alignment19 : (int,bool) farray -> int
+
+axiom value__size_axiom19 : (0 <= value__size19)
+
+axiom object__size_axiom19 :
+  (forall a:(int,bool) farray. (0 <= object__size19(a)))
+
+axiom value__component__size_axiom5 : (0 <= value__component__size5)
+
+axiom object__component__size_axiom5 :
+  (forall a:(int,bool) farray. (0 <= object__component__size5(a)))
+
+axiom value__alignment_axiom19 : (0 <= value__alignment19)
+
+axiom object__alignment_axiom19 :
+  (forall a:(int,bool) farray. (0 <= object__alignment19(a)))
+
+logic user_eq49 : (int,bool) farray, (int,bool) farray -> bool
+
+type map__ref6 = { map__content6 : (int,(int,bool) farray) farray
+}
+
+logic slide6 : (int,(int,bool) farray) farray, int,
+  int -> (int,(int,bool) farray) farray
+
+axiom slide_eq6 :
+  (forall a:(int,(int,bool) farray) farray.
+  (forall first2:int [slide6(a, first2, first2)]. (slide6(a, first2,
+  first2) = a)))
+
+axiom slide_def6 :
+  (forall a:(int,(int,bool) farray) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide6(a, old_first, new_first)[i])]. ((slide6(a,
+  old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat6 : (int,(int,bool) farray) farray, int, int,
+  (int,(int,bool) farray) farray, int, int -> (int,(int,bool) farray) farray
+
+axiom concat_def6 :
+  (forall a:(int,(int,bool) farray) farray.
+  forall b:(int,(int,bool) farray) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat6(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat6(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat6(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton6 : (int,bool) farray, int -> (int,(int,bool) farray) farray
+
+axiom singleton_def6 :
+  (forall v:(int,bool) farray.
+  (forall i:int [(singleton6(v, i)[i])]. ((singleton6(v, i)[i]) = v)))
+
+logic bool_eq53 : (int,(int,bool) farray) farray, int, int,
+  (int,(int,bool) farray) farray, int, int -> bool
+
+axiom bool_eq_def50 :
+  (forall a:(int,(int,bool) farray) farray. forall a__first:int.
+  forall a__last:int. forall b:(int,(int,bool) farray) farray.
+  forall b__first:int. forall b__last:int [bool_eq53(a, a__first, a__last, b,
+  b__first, b__last)]. ((((((a__first <= a__last) and
+  ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_134:int. ((((a__first <= temp___idx_134) and
+  (temp___idx_134 <= a__last)) and (bool_eq52((a[temp___idx_134]), 1, 4,
+  (b[((b__first - a__first) + temp___idx_134)]), 1, 4) = true)) or
+  (not ((a__first <= temp___idx_134) and (temp___idx_134 <= a__last)))))) ->
+  (bool_eq53(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_134:int. (((a__first <= temp___idx_134) and
+  (temp___idx_134 <= a__last)) -> (bool_eq52((a[temp___idx_134]), 1, 4,
+  (b[((b__first - a__first) + temp___idx_134)]), 1, 4) = true))))) ->
+  (bool_eq53(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev6 :
+  (forall a:(int,(int,bool) farray) farray.
+  forall b:(int,(int,bool) farray) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq53(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_134:int. (((a__first <= temp___idx_134) and
+  (temp___idx_134 <= a__last)) -> (bool_eq52((a[temp___idx_134]), 1, 4,
+  (b[((b__first - a__first) + temp___idx_134)]), 1, 4) = true)))))))
+
+logic isavailable : (int,(int,bool) farray) farray
+
+logic attr__ATTRIBUTE_ADDRESS15 : int
+
 axiom allowedop__post_axiom : true
+
+axiom allowedop__def_axiom :
+  (forall theadmin:privileget. forall theadmin1:opandnullt.
+  (forall op:int [allowedop({ us_split_fields3 = {
+  rec__admin__t__rolepresent = theadmin; rec__admin__t__currentop = theadmin1
+  } }, op)]. ((allowedop({ us_split_fields3 = { rec__admin__t__rolepresent =
+  theadmin; rec__admin__t__currentop = theadmin1 } }, op) = true) <->
+  (((isavailable[to_rep3(theadmin)])[op]) = true))))
+
+logic admin__isavailable__aggregate_def : (int,bool) farray,
+  (int,bool) farray, (int,bool) farray -> (int,(int,bool) farray) farray
+
+axiom def_axiom2 :
+  (forall temp___136:(int,bool) farray. forall temp___137:(int,bool) farray.
+  forall temp___138:(int,bool) farray.
+  ((((admin__isavailable__aggregate_def(temp___136, temp___137,
+  temp___138)[1]) = temp___136) and
+  ((admin__isavailable__aggregate_def(temp___136, temp___137,
+  temp___138)[2]) = temp___137)) and
+  ((admin__isavailable__aggregate_def(temp___136, temp___137,
+  temp___138)[3]) = temp___138)))
+
+logic temp___140 : bool, bool -> (int,bool) farray
+
+axiom def_axiom3 :
+  (forall temp___142:bool. forall temp___143:bool.
+  (forall temp___144:int. (((temp___144 = 3) -> ((temp___140(temp___142,
+  temp___143)[temp___144]) = temp___142)) and ((not (temp___144 = 3)) ->
+  ((temp___140(temp___142, temp___143)[temp___144]) = temp___143)))))
+
+logic temp___145 : bool, bool -> (int,bool) farray
+
+axiom def_axiom4 :
+  (forall temp___147:bool. forall temp___148:bool.
+  (forall temp___149:int. (((temp___149 = 1) -> ((temp___145(temp___147,
+  temp___148)[temp___149]) = temp___147)) and ((not (temp___149 = 1)) ->
+  ((temp___145(temp___147, temp___148)[temp___149]) = temp___148)))))
+
+logic temp___150 : bool, bool, bool -> (int,bool) farray
+
+axiom def_axiom5 :
+  (forall temp___152:bool. forall temp___153:bool. forall temp___154:bool.
+  (forall temp___155:int. (((temp___155 = 4) -> ((temp___150(temp___152,
+  temp___153, temp___154)[temp___155]) = temp___153)) and
+  ((not (temp___155 = 4)) -> (((temp___155 = 2) -> ((temp___150(temp___152,
+  temp___153, temp___154)[temp___155]) = temp___152)) and
+  ((not (temp___155 = 2)) -> ((temp___150(temp___152, temp___153,
+  temp___154)[temp___155]) = temp___154)))))))
+
+axiom isavailable__def_axiom :
+  (isavailable = admin__isavailable__aggregate_def(temp___140(of_int(1),
+  of_int(0)), temp___145(of_int(1), of_int(0)), temp___150(of_int(1),
+  of_int(1), of_int(0))))
 
 axiom ispresent__post_axiom1 : true
 
@@ -4231,41 +4533,37 @@ logic o20 : bool
 
 logic o21 : bool
 
-logic o22 : bool
+logic o22 : int
 
-logic o23 : bool
+logic o23 : int
 
-logic o24 : int
+logic o24 : bool
 
-logic o25 : int
+logic o25 : bool
 
 logic o26 : bool
 
 logic o27 : bool
 
-logic o28 : bool
+logic o28 : int
 
-logic o29 : bool
+logic o29 : int
 
-logic o30 : int
+logic o30 : bool
 
-logic o31 : int
+logic o31 : bool
 
 logic o32 : bool
 
 logic o33 : bool
 
-logic o34 : bool
+logic o34 : int
 
 logic o35 : bool
 
-logic o36 : int
+logic o36 : bool
 
 logic o37 : bool
-
-logic o38 : bool
-
-logic o39 : bool
 
 logic logfiles1 : (int,us_rep4) farray
 
@@ -4506,6 +4804,8 @@ logic result6 : bool
 logic result7 : bool
 
 logic result8 : bool
+
+logic result9 : bool
 
 axiom H : in_range30(status)
 
@@ -4841,13 +5141,14 @@ axiom H14 : ((keyeddatapresence1 = 0) -> ((not (theop2 = 0)) ->
   (status2 = 6)))
 
 axiom H15 : ((keyeddatapresence1 = 0) -> ((not (theop2 = 0)) ->
-  ((valid_numberlogentries(to_rep5(logfilestate__split_fields14),
+  (in_range11(auditalarm2) and
+  (valid_numberlogentries(to_rep5(logfilestate__split_fields14),
   to_rep6(logfilestate__split_fields15), { us_split_fields5 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields16;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields17;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields18;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields19 } },
-  logfilestate__split_fields20) = true) and in_range11(auditalarm2))))
+  logfilestate__split_fields20) = true))))
 
 axiom H16 : ((keyeddatapresence1 = 0) -> ((not (theop2 = 0)) ->
   ((o8 = theop2) and in_range8(theop2))))
@@ -4924,22 +5225,24 @@ axiom H18 : ((keyeddatapresence1 = 0) -> ((not (theop2 = 0)) ->
   }))))
 
 axiom H19 : ((keyeddatapresence1 = 0) -> ((not (theop2 = 0)) ->
-  ((valid_numberlogentries(to_rep5(logfilestate__split_fields21),
+  (in_range11(auditalarm3) and
+  (valid_numberlogentries(to_rep5(logfilestate__split_fields21),
   to_rep6(logfilestate__split_fields22), { us_split_fields5 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields23;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields24;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields25;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields26 } },
-  logfilestate__split_fields27) = true) and in_range11(auditalarm3))))
+  logfilestate__split_fields27) = true))))
 
 axiom H20 : ((keyeddatapresence1 = 0) -> ((theop2 = 0) ->
-  ((valid_numberlogentries(to_rep5(logfilestate__split_fields28),
+  (in_range11(auditalarm4) and
+  (valid_numberlogentries(to_rep5(logfilestate__split_fields28),
   to_rep6(logfilestate__split_fields29), { us_split_fields5 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields30;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields31;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields32;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields33 } },
-  logfilestate__split_fields34) = true) and in_range11(auditalarm4))))
+  logfilestate__split_fields34) = true))))
 
 axiom H21 : ((keyeddatapresence1 = 0) -> ((theop2 = 0) ->
   (o10 = extractuser(tokenpresence, state1, tokentry, tokenid, {
@@ -4999,13 +5302,14 @@ axiom H21 : ((keyeddatapresence1 = 0) -> ((theop2 = 0) ->
   }))))
 
 axiom H22 : ((keyeddatapresence1 = 0) -> ((theop2 = 0) ->
-  ((valid_numberlogentries(to_rep5(logfilestate__split_fields35),
+  (in_range11(auditalarm5) and
+  (valid_numberlogentries(to_rep5(logfilestate__split_fields35),
   to_rep6(logfilestate__split_fields36), { us_split_fields5 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields37;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields38;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields39;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields40 } },
-  logfilestate__split_fields41) = true) and in_range11(auditalarm5))))
+  logfilestate__split_fields41) = true))))
 
 axiom H23 : ((keyeddatapresence1 = 0) -> ((theop2 = 0) -> (state5 = state7)))
 

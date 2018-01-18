@@ -550,8 +550,10 @@ axiom fart_image__post_axiom :
   (forall x:int [fart_image(x)]. (in_range3(x) -> (dynamic_property1(1,
   2147483647, to_rep1(first2((fart_image(x)).rt1)),
   to_rep1(last2((fart_image(x)).rt1))) and
-  ((to_rep1(first4(mk2(to_rep1(first2((fart_image(x)).rt1)),
+  (((to_rep1(first4(mk2(to_rep1(first2((fart_image(x)).rt1)),
   to_rep1(last2((fart_image(x)).rt1))))) = 1) and
+  (0 <= to_rep1(last4(mk2(to_rep1(first2((fart_image(x)).rt1)),
+  to_rep1(last2((fart_image(x)).rt1))))))) and
   (to_rep1(last2((fart_image(x)).rt1)) <= 1000)))))
 
 axiom fart_image__def_axiom :
@@ -698,24 +700,24 @@ type t4b__ref = { t4b__content : us_t3
 
 function t4b__ref___projection(a: t4b__ref) : us_t3 = (a).t4b__content
 
-logic temp___String_Literal_2454 : unit -> (int,character) farray
+logic temp___String_Literal_2510 : unit -> (int,character) farray
 
-axiom temp___String_Literal_2454__def_axiom :
-  (((((((((((((((to_rep((temp___String_Literal_2454(void)[1])) = 65) and
-  (to_rep((temp___String_Literal_2454(void)[2])) = 99)) and
-  (to_rep((temp___String_Literal_2454(void)[3])) = 104)) and
-  (to_rep((temp___String_Literal_2454(void)[4])) = 101)) and
-  (to_rep((temp___String_Literal_2454(void)[5])) = 105)) and
-  (to_rep((temp___String_Literal_2454(void)[6])) = 118)) and
-  (to_rep((temp___String_Literal_2454(void)[7])) = 101)) and
-  (to_rep((temp___String_Literal_2454(void)[8])) = 100)) and
-  (to_rep((temp___String_Literal_2454(void)[9])) = 32)) and
-  (to_rep((temp___String_Literal_2454(void)[10])) = 70)) and
-  (to_rep((temp___String_Literal_2454(void)[11])) = 65)) and
-  (to_rep((temp___String_Literal_2454(void)[12])) = 82)) and
-  (to_rep((temp___String_Literal_2454(void)[13])) = 32)) and
-  (to_rep((temp___String_Literal_2454(void)[14])) = 58)) and
-  (to_rep((temp___String_Literal_2454(void)[15])) = 32))
+axiom temp___String_Literal_2510__def_axiom :
+  (((((((((((((((to_rep((temp___String_Literal_2510(void)[1])) = 65) and
+  (to_rep((temp___String_Literal_2510(void)[2])) = 99)) and
+  (to_rep((temp___String_Literal_2510(void)[3])) = 104)) and
+  (to_rep((temp___String_Literal_2510(void)[4])) = 101)) and
+  (to_rep((temp___String_Literal_2510(void)[5])) = 105)) and
+  (to_rep((temp___String_Literal_2510(void)[6])) = 118)) and
+  (to_rep((temp___String_Literal_2510(void)[7])) = 101)) and
+  (to_rep((temp___String_Literal_2510(void)[8])) = 100)) and
+  (to_rep((temp___String_Literal_2510(void)[9])) = 32)) and
+  (to_rep((temp___String_Literal_2510(void)[10])) = 70)) and
+  (to_rep((temp___String_Literal_2510(void)[11])) = 65)) and
+  (to_rep((temp___String_Literal_2510(void)[12])) = 82)) and
+  (to_rep((temp___String_Literal_2510(void)[13])) = 32)) and
+  (to_rep((temp___String_Literal_2510(void)[14])) = 58)) and
+  (to_rep((temp___String_Literal_2510(void)[15])) = 32))
 
 logic achievedfar : int
 
@@ -723,9 +725,9 @@ logic result__ : (int,character) farray
 
 logic fullstring : (int,character) farray
 
-logic temp___2456 : (int,character) farray
+logic temp___2512 : (int,character) farray
 
-logic temp___24561 : t1
+logic temp___25121 : t1
 
 logic o : int
 
@@ -743,15 +745,15 @@ logic userentry__validatefinger__achievedfardescription__setresultstring__fullst
 
 logic userentry__validatefinger__achievedfardescription__setresultstring__fullstring__assume1 : t
 
-logic temp___2461 : (int,character) farray
+logic temp___2517 : (int,character) farray
 
-logic temp___24611 : t3
+logic temp___25171 : t3
 
 logic o6 : (int,character) farray
 
-logic temp___2464 : (int,character) farray
+logic temp___2520 : (int,character) farray
 
-logic temp___24641 : t3
+logic temp___25201 : t3
 
 logic result : (int,character) farray
 
@@ -759,22 +761,24 @@ logic fullstring1 : (int,character) farray
 
 axiom H : in_range3(achievedfar)
 
-axiom H1 : (({ elts1 = temp___2456; rt1 = temp___24561
+axiom H1 : (({ elts1 = temp___2512; rt1 = temp___25121
   } = fart_image(achievedfar)) and ((dynamic_property1(1, 2147483647,
-  to_rep1(first2(temp___24561)), to_rep1(last2(temp___24561))) and
-  ((to_rep1(first4(mk2(to_rep1(first2(temp___24561)),
-  to_rep1(last2(temp___24561))))) = 1) and
-  (to_rep1(last2(temp___24561)) <= 1000))) and
-  ((temp___2456 = (to_string(attr__ATTRIBUTE_IMAGE3(achievedfar))).elts) and
-  (temp___24561 = mk1(to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE3(achievedfar))).rt)),
+  to_rep1(first2(temp___25121)), to_rep1(last2(temp___25121))) and
+  (((to_rep1(first4(mk2(to_rep1(first2(temp___25121)),
+  to_rep1(last2(temp___25121))))) = 1) and
+  (0 <= to_rep1(last4(mk2(to_rep1(first2(temp___25121)),
+  to_rep1(last2(temp___25121))))))) and
+  (to_rep1(last2(temp___25121)) <= 1000))) and
+  ((temp___2512 = (to_string(attr__ATTRIBUTE_IMAGE3(achievedfar))).elts) and
+  (temp___25121 = mk1(to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE3(achievedfar))).rt)),
   to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE3(achievedfar))).rt)))))))
 
 axiom H2 :
-  ((to_rep1(first2(temp___24561)) <= to_rep1(last2(temp___24561))) ->
-  (o = ((to_rep1(last2(temp___24561)) - to_rep1(first2(temp___24561))) + 1)))
+  ((to_rep1(first2(temp___25121)) <= to_rep1(last2(temp___25121))) ->
+  (o = ((to_rep1(last2(temp___25121)) - to_rep1(first2(temp___25121))) + 1)))
 
 axiom H3 :
-  ((not (to_rep1(first2(temp___24561)) <= to_rep1(last2(temp___24561)))) ->
+  ((not (to_rep1(first2(temp___25121)) <= to_rep1(last2(temp___25121)))) ->
   (o = 0))
 
 axiom H4 : ((1 <= 15) -> (o1 = ((15 - 1) + 1)))
@@ -789,9 +793,9 @@ axiom H8 : (o4 = (o3 - 1))
 
 axiom H9 : ((o5 = o4) and in_range1(o4))
 
-axiom H10 : (concat(temp___String_Literal_2454(void), 1, 15, temp___2456,
-  to_rep1(first2(temp___24561)),
-  to_rep1(last2(temp___24561))) = userentry__validatefinger__achievedfardescription__setresultstring__fullstring__assume)
+axiom H10 : (concat(temp___String_Literal_2510(void), 1, 15, temp___2512,
+  to_rep1(first2(temp___25121)),
+  to_rep1(last2(temp___25121))) = userentry__validatefinger__achievedfardescription__setresultstring__fullstring__assume)
 
 axiom H11 : (mk(1,
   o5) = userentry__validatefinger__achievedfardescription__setresultstring__fullstring__assume1)

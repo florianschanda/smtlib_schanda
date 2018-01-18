@@ -71,9 +71,14 @@ axiom Power_mult :
   (forall x:int. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
   (power(x, (n * m)) = power(power(x, n), m)))))
 
-axiom Power_mult2 :
-  (forall x:int. forall y:int. forall n:int. ((0 <= n) -> (power((x * y),
-  n) = (power(x, n) * power(y, n)))))
+axiom Power_comm1 :
+  (forall x:int. forall y:int. (((x * y) = (y * x)) ->
+  (forall n:int. ((0 <= n) -> ((power(x, n) * y) = (y * power(x, n)))))))
+
+axiom Power_comm2 :
+  (forall x:int. forall y:int. (((x * y) = (y * x)) ->
+  (forall n:int. ((0 <= n) -> (power((x * y), n) = (power(x, n) * power(y,
+  n)))))))
 
 axiom Power_non_neg :
   (forall x:int. forall y:int. (((0 <= x) and (0 <= y)) -> (0 <= power(x,
@@ -575,7 +580,7 @@ axiom Power_mult1 :
   (forall x:t. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
   (power1(x, (n * m)) = power1(power1(x, n), m)))))
 
-axiom Power_mult21 :
+axiom Power_mult2 :
   (forall x:t. forall y:t. forall n:int. ((0 <= n) -> (power1(mul(x, y),
   n) = mul(power1(x, n), power1(y, n)))))
 
@@ -1024,7 +1029,7 @@ axiom Power_mult3 :
   (forall x:t1. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
   (power2(x, (n * m)) = power2(power2(x, n), m)))))
 
-axiom Power_mult22 :
+axiom Power_mult21 :
   (forall x:t1. forall y:t1. forall n:int. ((0 <= n) -> (power2(mul1(x, y),
   n) = mul1(power2(x, n), power2(y, n)))))
 
@@ -1358,7 +1363,7 @@ axiom Power_mult4 :
   (forall x:t2. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
   (power3(x, (n * m)) = power3(power3(x, n), m)))))
 
-axiom Power_mult23 :
+axiom Power_mult22 :
   (forall x:t2. forall y:t2. forall n:int. ((0 <= n) -> (power3(mul2(x, y),
   n) = mul2(power3(x, n), power3(y, n)))))
 
@@ -1692,7 +1697,7 @@ axiom Power_mult5 :
   (forall x:t3. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
   (power4(x, (n * m)) = power4(power4(x, n), m)))))
 
-axiom Power_mult24 :
+axiom Power_mult23 :
   (forall x:t3. forall y:t3. forall n:int. ((0 <= n) -> (power4(mul3(x, y),
   n) = mul3(power4(x, n), power4(y, n)))))
 

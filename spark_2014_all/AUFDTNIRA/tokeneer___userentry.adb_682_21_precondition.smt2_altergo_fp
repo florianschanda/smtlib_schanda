@@ -1479,19 +1479,19 @@ logic valid_numberlogentries : int, int, us_rep1,
 logic valid_numberlogentries__function_guard : bool, int, int, us_rep1,
   (int,fileentrycountt) farray -> prop
 
-logic temp___1044 : int -> (int,logfileindext) farray
+logic temp___1100 : int -> (int,logfileindext) farray
 
 axiom def_axiom1 :
-  (forall temp___1046:int.
-  (forall temp___1047:int.
-  ((temp___1044(temp___1046)[temp___1047]) = of_rep6(temp___1046))))
+  (forall temp___1102:int.
+  (forall temp___1103:int.
+  ((temp___1100(temp___1102)[temp___1103]) = of_rep6(temp___1102))))
 
-logic temp___1048 : int -> (int,fileentrycountt) farray
+logic temp___1104 : int -> (int,fileentrycountt) farray
 
 axiom def_axiom2 :
-  (forall temp___1050:int.
-  (forall temp___1051:int.
-  ((temp___1048(temp___1050)[temp___1051]) = of_rep9(temp___1050))))
+  (forall temp___1106:int.
+  (forall temp___1107:int.
+  ((temp___1104(temp___1106)[temp___1107]) = of_rep9(temp___1106))))
 
 type us_main_type
 
@@ -2439,9 +2439,9 @@ logic auditsystemfault : bool
 
 logic updateok : bool
 
-logic filestate : us_private
-
 logic state2 : us_private
+
+logic filestate : us_private
 
 logic state3 : us_private
 
@@ -2473,9 +2473,9 @@ logic auditsystemfault1 : bool
 
 logic updateok1 : bool
 
-logic filestate1 : us_private
-
 logic state4 : us_private
+
+logic filestate1 : us_private
 
 logic status4 : us_private
 
@@ -2567,9 +2567,9 @@ axiom H12 : ((not (updateok = true)) -> (output2 = output))
 
 axiom H13 : ((not (updateok = true)) -> (status4 = status1))
 
-axiom H14 : ((not (updateok = true)) -> (state4 = state2))
+axiom H14 : ((not (updateok = true)) -> (filestate1 = filestate))
 
-axiom H15 : ((not (updateok = true)) -> (filestate1 = filestate))
+axiom H15 : ((not (updateok = true)) -> (state4 = state2))
 
 axiom H16 : ((not (updateok = true)) -> (updateok1 = updateok))
 
@@ -2595,9 +2595,9 @@ axiom H22 : ((not (updateok = true)) -> (output2 = output1))
 
 axiom H23 : ((not (updateok = true)) -> (status4 = status2))
 
-axiom H24 : ((not (updateok = true)) -> (state4 = state2))
+axiom H24 : ((not (updateok = true)) -> (filestate1 = filestate))
 
-axiom H25 : ((not (updateok = true)) -> (filestate1 = filestate))
+axiom H25 : ((not (updateok = true)) -> (state4 = state2))
 
 axiom H26 : ((not (updateok = true)) -> (updateok1 = updateok))
 

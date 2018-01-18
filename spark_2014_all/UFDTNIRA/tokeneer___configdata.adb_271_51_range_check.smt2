@@ -45,7 +45,7 @@
 (declare-const dummy1 filesizet)
 (declare-datatypes () ((filesizet__ref (mk_filesizet__ref (filesizet__content filesizet)))))
 (define-fun filesizet__ref___projection ((a filesizet__ref)) filesizet (filesizet__content a))
-(define-fun dynamic_invariant1 ((temp___expr_494 Int) (temp___is_init_491 Bool) (temp___skip_constant_492 Bool) (temp___do_toplevel_493 Bool)) Bool (=> (or (= temp___is_init_491 true) (<= 0 4194304)) (in_range2 temp___expr_494)))
+(define-fun dynamic_invariant1 ((temp___expr_542 Int) (temp___is_init_539 Bool) (temp___skip_constant_540 Bool) (temp___do_toplevel_541 Bool)) Bool (=> (or (= temp___is_init_539 true) (<= 0 4194304)) (in_range2 temp___expr_542)))
 (declare-sort us_main_type 0)
 (declare-fun us_main_eq (us_main_type us_main_type) Bool)
 (declare-sort us_rep 0)

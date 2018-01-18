@@ -49,8 +49,6 @@ function real__ref___projection(a: real__ref) : real = (a).real__content
 function us_private__ref___projection(a: us_private__ref) : us_private =
   (a).us_private__content
 
-logic attr__ATTRIBUTE_ADDRESS : int
-
 type us_main_type
 
 logic us_main_eq : us_main_type, us_main_type -> bool
@@ -85,6 +83,12 @@ type task_id__ref = { task_id__content : us_rep
 
 function task_id__ref___projection(a: task_id__ref) : us_rep =
   (a).task_id__content
+
+logic null_task_id : us_rep
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
 
 type us_split_fields = { rec__interrupt_handler__po__t : us_rep
 }
@@ -148,7 +152,7 @@ function po__ref___projection(a: po__ref) : us_rep1 = (a).po__content
 
 logic self__ : us_rep
 
-logic temp___1528 : bool
+logic temp___1527 : bool
 
  (* File "interrupt_handler.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : (temp___1528 = false)
+goal WP_parameter_def : (temp___1527 = false)

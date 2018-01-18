@@ -464,13 +464,13 @@ logic k : int
 
 logic temp___563 : int
 
-logic temp___561 : int
-
 logic temp___562 : int
 
-logic temp___560 : bool
+logic temp___560 : int
 
-logic temp___559 : int
+logic temp___561 : int
+
+logic temp___559 : bool
 
 logic temp___565 : int
 
@@ -801,9 +801,9 @@ axiom H14 : (((((high_index16 = high_index1) and
   (found17 = found11))))) and ((high_index15 = high_index9) and
   ((mid_index18 = mid_index12) and ((low_index15 = low_index9) and
   ((result__18 = result__12) and (found18 = found12)))))) and
-  ((temp___563 = high_index1) and ((temp___561 = result__1) and
-  ((temp___562 = mid_index) and ((temp___560 = found1) and
-  ((temp___559 = low_index1) and ((0 = temp___565) and ((0 = temp___564) and
+  ((temp___563 = low_index1) and ((temp___562 = high_index1) and
+  ((temp___560 = result__1) and ((temp___561 = mid_index) and
+  ((temp___559 = found1) and ((0 = temp___565) and ((0 = temp___564) and
   (((result4 = mid_index) and
   (mid_index2 = comp_div((low_index1 + high_index1),2))) and
   (((((temp___5646 = temp___564) and ((temp___5656 = temp___565) and
@@ -831,9 +831,9 @@ axiom H14 : (((((high_index16 = high_index1) and
   (to_rep((items[low_index2])) = search_item)) and
   ((search_item <  to_rep((items[high_index2]))) or
   (search_item = to_rep((items[high_index2]))))))) and ((((((1 <= 10) ->
-  in_range4(low_index2)) and ((1 <= 10) -> in_range4(result__3))) and
-  ((1 <= 10) -> in_range4(mid_index3))) and ((1 <= 10) ->
-  in_range4(high_index2))) and (((temp___5652 = result7) and
+  in_range4(result__3)) and ((1 <= 10) -> in_range4(mid_index3))) and
+  ((1 <= 10) -> in_range4(high_index2))) and ((1 <= 10) ->
+  in_range4(low_index2))) and (((temp___5652 = result7) and
   (temp___5653 = low_index2)) and (((temp___5642 = result8) and
   (temp___5643 = high_index2)) and (((((high_index4 = high_index2) and
   ((mid_index7 = mid_index3) and ((low_index4 = low_index2) and
@@ -866,9 +866,9 @@ axiom H14 : (((((high_index16 = high_index1) and
   ((search_item = to_rep((items[mid_index4]))) and (((result13 = found3) and
   (found4 = of_int(1))) and ((result14 = result__3) and
   (result__4 = mid_index4))))))))))))))))))))))))) or
-  (((((temp___563 = high_index1) and ((temp___561 = result__1) and
-  ((temp___562 = mid_index) and ((temp___560 = found1) and
-  ((temp___559 = low_index1) and ((0 = temp___565) and ((0 = temp___564) and
+  (((((temp___563 = low_index1) and ((temp___562 = high_index1) and
+  ((temp___560 = result__1) and ((temp___561 = mid_index) and
+  ((temp___559 = found1) and ((0 = temp___565) and ((0 = temp___564) and
   (((result4 = mid_index) and
   (mid_index2 = comp_div((low_index1 + high_index1),2))) and
   (((not (search_item = to_rep((items[mid_index2])))) and
@@ -894,9 +894,9 @@ axiom H14 : (((((high_index16 = high_index1) and
   (to_rep((items[low_index2])) = search_item)) and
   ((search_item <  to_rep((items[high_index2]))) or
   (search_item = to_rep((items[high_index2]))))))) and ((((((1 <= 10) ->
-  in_range4(low_index2)) and ((1 <= 10) -> in_range4(result__3))) and
-  ((1 <= 10) -> in_range4(mid_index3))) and ((1 <= 10) ->
-  in_range4(high_index2))) and (((temp___5652 = result7) and
+  in_range4(result__3)) and ((1 <= 10) -> in_range4(mid_index3))) and
+  ((1 <= 10) -> in_range4(high_index2))) and ((1 <= 10) ->
+  in_range4(low_index2))) and (((temp___5652 = result7) and
   (temp___5653 = low_index2)) and (((temp___5642 = result8) and
   (temp___5643 = high_index2)) and
   ((((to_rep((items[mid_index3])) <  search_item) ->

@@ -859,21 +859,21 @@ logic temp___499 : count_type
 
 logic o2 : count_type
 
+logic temp___488 : count_type
+
 logic temp___490 : count_type
 
 logic temp___4901 : us_main_type
-
-logic temp___488 : count_type
 
 logic temp___487 : count_type
 
 logic temp___4871 : us_main_type
 
+logic temp___486 : count_type
+
 logic temp___489 : count_type
 
 logic temp___4891 : us_main_type
-
-logic temp___486 : count_type
 
 logic temp___491 : count_type
 

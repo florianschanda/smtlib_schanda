@@ -464,13 +464,13 @@ logic k : int
 
 logic temp___563 : int
 
-logic temp___561 : int
-
 logic temp___562 : int
 
-logic temp___560 : bool
+logic temp___560 : int
 
-logic temp___559 : int
+logic temp___561 : int
+
+logic temp___559 : bool
 
 logic temp___565 : int
 

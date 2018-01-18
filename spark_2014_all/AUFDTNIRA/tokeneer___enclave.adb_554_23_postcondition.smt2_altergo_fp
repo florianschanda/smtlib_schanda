@@ -1205,19 +1205,19 @@ logic valid_numberlogentries : int, int, us_rep,
 logic valid_numberlogentries__function_guard : bool, int, int, us_rep,
   (int,fileentrycountt) farray -> prop
 
-logic temp___1145 : int -> (int,logfileindext) farray
+logic temp___1203 : int -> (int,logfileindext) farray
 
 axiom def_axiom1 :
-  (forall temp___1147:int.
-  (forall temp___1148:int.
-  ((temp___1145(temp___1147)[temp___1148]) = of_rep2(temp___1147))))
+  (forall temp___1205:int.
+  (forall temp___1206:int.
+  ((temp___1203(temp___1205)[temp___1206]) = of_rep2(temp___1205))))
 
-logic temp___1149 : int -> (int,fileentrycountt) farray
+logic temp___1207 : int -> (int,fileentrycountt) farray
 
 axiom def_axiom2 :
-  (forall temp___1151:int.
-  (forall temp___1152:int.
-  ((temp___1149(temp___1151)[temp___1152]) = of_rep5(temp___1151))))
+  (forall temp___1209:int.
+  (forall temp___1210:int.
+  ((temp___1207(temp___1209)[temp___1210]) = of_rep5(temp___1209))))
 
 type us_main_type
 
@@ -4062,26 +4062,26 @@ axiom H7 : ((((o = extractuser(tokenpresence, state, tokentry, tokenid, {
   rec__cryptotypes__keypartt__algorithmid = idcert__split_fields17;
   rec__cryptotypes__keypartt__keyid = idcert__split_fields18;
   rec__cryptotypes__keypartt__keylength = idcert__split_fields19 } } } }
-  })) and ((valid_numberlogentries(to_rep2(logfilestate__split_fields7),
+  })) and (in_range4(auditalarm1) and
+  (valid_numberlogentries(to_rep2(logfilestate__split_fields7),
   to_rep3(logfilestate__split_fields8), { us_split_fields1 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields9;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields10;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields11;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields12 } },
-  logfilestate__split_fields13) = true) and in_range4(auditalarm1))) and
-  (((result = status) and (status1 = 3)) and
-  (((valid_numberlogentries(to_rep2(logfilestate__split_fields14),
+  logfilestate__split_fields13) = true))) and (((result = status) and
+  (status1 = 3)) and ((in_range4(auditalarm2) and
+  (valid_numberlogentries(to_rep2(logfilestate__split_fields14),
   to_rep3(logfilestate__split_fields15), { us_split_fields1 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields16;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields17;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields18;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields19 } },
-  logfilestate__split_fields20) = true) and in_range4(auditalarm2)) and
-  (((not (isgood(tokenpresence1, state3, tokentry1, tokenid1, {
-  rec__admintoken__validauthcertt__valid = authcert__split_fields20;
-  rec__admintoken__validauthcertt__contents = { us_split_fields13 = {
-  rec__cert__attr__auth__contentst__id = { us_split_fields11 = {
-  rec__certtypes__idt__issuer = { us_split_fields9 = {
+  logfilestate__split_fields20) = true)) and (((not (isgood(tokenpresence1,
+  state3, tokentry1, tokenid1, { rec__admintoken__validauthcertt__valid =
+  authcert__split_fields20; rec__admintoken__validauthcertt__contents = {
+  us_split_fields13 = { rec__cert__attr__auth__contentst__id = {
+  us_split_fields11 = { rec__certtypes__idt__issuer = { us_split_fields9 = {
   rec__cryptotypes__issuert__id = authcert__split_fields21;
   rec__cryptotypes__issuert__namelength = authcert__split_fields22;
   rec__cryptotypes__issuert__name = authcert__split_fields23 } };
@@ -4241,8 +4241,8 @@ axiom H7 : ((((o = extractuser(tokenpresence, state, tokentry, tokenid, {
   us_split_fields17 = { rec__cryptotypes__keypartt__algorithmid =
   idcert__split_fields37; rec__cryptotypes__keypartt__keyid =
   idcert__split_fields38; rec__cryptotypes__keypartt__keylength =
-  idcert__split_fields39 } } } } }))))) and ((in_range3(tokenpresence1) and
-  in_range12(tokentry1)) and in_range11(tokenid1)))))) and
+  idcert__split_fields39 } } } } }))))) and ((in_range12(tokentry1) and
+  in_range11(tokenid1)) and in_range3(tokenpresence1)))))) and
   (((state6 = state2) and ((state5 = state3) and ((state4 = state1) and
   ((filestate1 = filestate) and ((status2 = status1) and
   (((idcert__split_fields40 = idcert__split_fields20) and

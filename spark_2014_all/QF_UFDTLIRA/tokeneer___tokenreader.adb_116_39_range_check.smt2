@@ -47,7 +47,7 @@
 (define-fun readerstatet__ref___projection ((a readerstatet__ref)) readerstatet (readerstatet__content a))
 (declare-const readerstate Int)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
-(define-fun dynamic_invariant1 ((temp___expr_1420 Int) (temp___is_init_1417 Bool) (temp___skip_constant_1418 Bool) (temp___do_toplevel_1419 Bool)) Bool (=> (or (= temp___is_init_1417 true) (<= 0 6)) (in_range2 temp___expr_1420)))
+(define-fun dynamic_invariant1 ((temp___expr_1476 Int) (temp___is_init_1473 Bool) (temp___skip_constant_1474 Bool) (temp___do_toplevel_1475 Bool)) Bool (=> (or (= temp___is_init_1473 true) (<= 0 6)) (in_range2 temp___expr_1476)))
 (assert (in_range1 readerstate))
 (assert (<= 0 readerstate))
 (assert (<= readerstate 6))

@@ -49,13 +49,43 @@ function real__ref___projection(a: real__ref) : real = (a).real__content
 function us_private__ref___projection(a: us_private__ref) : us_private =
   (a).us_private__content
 
+logic bool_eq : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
+logic bool_eq1 : bool, bool -> bool
 
 axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 logic to_int : bool -> int
 
@@ -80,36 +110,6 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 type natural
 
 predicate in_range1(x: int) = ((0 <= x) and (x <= 2147483647))
-
-logic bool_eq1 : int, int -> bool
-
-logic bool_ne : int, int -> bool
-
-logic bool_lt : int, int -> bool
-
-logic bool_le : int, int -> bool
-
-logic bool_gt : int, int -> bool
-
-logic bool_ge : int, int -> bool
-
-axiom bool_eq_axiom :
-  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
-
-axiom bool_ne_axiom :
-  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
-
-axiom bool_lt_axiom :
-  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
-
-axiom bool_int__le_axiom :
-  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
-
-axiom bool_gt_axiom :
-  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
-
-axiom bool_ge_axiom :
-  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
 
 logic bool_eq2 : int, int -> bool
 
@@ -459,8 +459,8 @@ axiom H7 : ((last_char <  (first_char + 0)) -> (temp___643 = line_num))
 axiom H8 : ((last_char <  (first_char + 0)) -> (temp___642 = last_char))
 
 axiom H9 : ((last_char <  (first_char + 0)) -> (((in_range5(last_char2) and
-  in_range1(line_num2)) and in_range4(first_char2)) and
-  (last_char2 <  (first_char2 + 0))))
+  in_range1(line_num2)) and in_range4(first_char2)) and (bool_lt(last_char2,
+  (first_char2 + 0)) = true)))
 
 axiom H10 : ((last_char <  (first_char + 0)) -> ((in_range5(last_char3) and
   in_range1(line_num3)) and in_range4(first_char3)))

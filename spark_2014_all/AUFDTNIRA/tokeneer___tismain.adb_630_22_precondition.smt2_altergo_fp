@@ -1614,19 +1614,19 @@ logic valid_numberlogentries : int, int, us_rep2,
 logic valid_numberlogentries__function_guard : bool, int, int, us_rep2,
   (int,fileentrycountt) farray -> prop
 
-logic temp___1157 : int -> (int,logfileindext) farray
+logic temp___1215 : int -> (int,logfileindext) farray
 
 axiom def_axiom :
-  (forall temp___1159:int.
-  (forall temp___1160:int.
-  ((temp___1157(temp___1159)[temp___1160]) = of_rep6(temp___1159))))
+  (forall temp___1217:int.
+  (forall temp___1218:int.
+  ((temp___1215(temp___1217)[temp___1218]) = of_rep6(temp___1217))))
 
-logic temp___1161 : int -> (int,fileentrycountt) farray
+logic temp___1219 : int -> (int,fileentrycountt) farray
 
 axiom def_axiom1 :
-  (forall temp___1163:int.
-  (forall temp___1164:int.
-  ((temp___1161(temp___1163)[temp___1164]) = of_rep9(temp___1163))))
+  (forall temp___1221:int.
+  (forall temp___1222:int.
+  ((temp___1219(temp___1221)[temp___1222]) = of_rep9(temp___1221))))
 
 type us_main_type
 
@@ -4135,12 +4135,12 @@ axiom enrolmentisinprogress__def_axiom :
   enclave__state)]. ((enrolmentisinprogress(enclave__status,
   enclave__state) = true) <-> in_range30(enclave__status))))
 
-logic adminmustlogout : us_rep, int, us_private, int, us_private,
-  us_split_fields2, int, us_private, int, us_split_fields18,
+logic adminmustlogout : us_rep, int, us_private, us_split_fields2, int,
+  us_private, us_private, int, int, us_split_fields18,
   us_split_fields24 -> bool
 
-logic adminmustlogout__function_guard : bool, us_rep, int, us_private, int,
-  us_private, us_split_fields2, int, us_private, int, us_split_fields18,
+logic adminmustlogout__function_guard : bool, us_rep, int, us_private,
+  us_split_fields2, int, us_private, us_private, int, int, us_split_fields18,
   us_split_fields24 -> prop
 
 axiom adminmustlogout__post_axiom : true
@@ -4387,9 +4387,9 @@ logic theadmin__split_fields1 : opandnullt
 
 logic currenttime : us_private
 
-logic filestate : us_private
-
 logic state : us_private
+
+logic filestate : us_private
 
 logic filestate1 : us_private
 
@@ -4689,9 +4689,9 @@ logic theadmin__split_fields2 : privileget
 
 logic theadmin__split_fields3 : opandnullt
 
-logic filestate3 : us_private
-
 logic state13 : us_private
+
+logic filestate3 : us_private
 
 logic state14 : us_private
 
@@ -5149,9 +5149,9 @@ logic theadmin__split_fields6 : privileget
 
 logic theadmin__split_fields7 : opandnullt
 
-logic filestate9 : us_private
-
 logic state42 : us_private
+
+logic filestate9 : us_private
 
 logic filestate10 : us_private
 
@@ -5405,9 +5405,9 @@ logic theadmin__split_fields10 : privileget
 
 logic theadmin__split_fields11 : opandnullt
 
-logic filestate13 : us_private
-
 logic state59 : us_private
+
+logic filestate13 : us_private
 
 logic filestate14 : us_private
 
@@ -5589,9 +5589,9 @@ logic theadmin__split_fields12 : privileget
 
 logic theadmin__split_fields13 : opandnullt
 
-logic filestate16 : us_private
-
 logic state72 : us_private
+
+logic filestate16 : us_private
 
 logic filestate17 : us_private
 
@@ -5926,14 +5926,14 @@ axiom H9 : ((result11 = true) -> ((((privatekeypresent({
   state25) = true) <-> (not (enrolmentisinprogress(status6,
   state29) = true))) and ((enrolmentisinprogress(status6, state29) = true) or
   (statusisenclavequiescent(status6, state29) = true))) and
-  ((in_range29(status6) and
+  ((in_range8(auditalarm1) and in_range29(status6)) and
   (valid_numberlogentries(to_rep6(logfilestate__split_fields7),
   to_rep7(logfilestate__split_fields8), { us_split_fields5 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields9;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields10;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields11;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields12 } },
-  logfilestate__split_fields13) = true)) and in_range8(auditalarm1))))
+  logfilestate__split_fields13) = true))))
 
 axiom H10 : ((result11 = true) -> (state39 = state12))
 
@@ -5959,9 +5959,9 @@ axiom H20 : ((result11 = true) -> (status10 = status1))
 
 axiom H21 : ((result11 = true) -> (state30 = state3))
 
-axiom H22 : ((result11 = true) -> (state42 = state))
+axiom H22 : ((result11 = true) -> (filestate9 = filestate))
 
-axiom H23 : ((result11 = true) -> (filestate9 = filestate))
+axiom H23 : ((result11 = true) -> (state42 = state))
 
 axiom H24 : ((result11 = true) ->
   ((theadmin__split_fields4 = theadmin__split_fields) and
@@ -6055,9 +6055,9 @@ axiom H43 : ((result11 = true) -> (status10 = status4))
 
 axiom H44 : ((result11 = true) -> (state30 = state15))
 
-axiom H45 : ((result11 = true) -> (state42 = state13))
+axiom H45 : ((result11 = true) -> (filestate9 = filestate3))
 
-axiom H46 : ((result11 = true) -> (filestate9 = filestate3))
+axiom H46 : ((result11 = true) -> (state42 = state13))
 
 axiom H47 : ((result11 = true) ->
   ((theadmin__split_fields4 = theadmin__split_fields2) and
@@ -6129,12 +6129,12 @@ axiom H55 : ((result11 = true) -> (tokenpresence2 = tokenpresence1))
 
 axiom H56 : ((not (result11 = true)) -> (result12 = adminmustlogout({
   us_split_fields1 = { rec__admin__t__rolepresent = theadmin__split_fields;
-  rec__admin__t__currentop = theadmin__split_fields1 } }, status, state11,
-  tokenpresence, state3, { rec__clock__timet__year =
-  currenttimevar__split_fields; rec__clock__timet__month =
-  currenttimevar__split_fields1; rec__clock__timet__day =
-  currenttimevar__split_fields2; rec__clock__timet__millisec =
-  currenttimevar__split_fields3 }, tokentry, currenttime, tokenid, {
+  rec__admin__t__currentop = theadmin__split_fields1 } }, status, state11, {
+  rec__clock__timet__year = currenttimevar__split_fields;
+  rec__clock__timet__month = currenttimevar__split_fields1;
+  rec__clock__timet__day = currenttimevar__split_fields2;
+  rec__clock__timet__millisec = currenttimevar__split_fields3 },
+  tokenpresence, currenttime, state3, tokentry, tokenid, {
   rec__admintoken__validauthcertt__valid = authcert__split_fields;
   rec__admintoken__validauthcertt__contents = { us_split_fields17 = {
   rec__cert__attr__auth__contentst__id = { us_split_fields15 = {
@@ -6201,24 +6201,26 @@ axiom H57 : ((not (result11 = true)) -> ((result12 = true) ->
   (getstatus(status7, state31) = getstatus(status, state11)))) and
   (not ((statusiswaitingstartadminop(status7, state31) = true) or
   (statusiswaitingfinishadminop(status7, state31) = true)))) and
-  (((((in_range29(status7) and in_range1(tokenpresence2)) and
+  (((((in_range8(auditalarm2) and in_range7(tokentry2)) and
+  in_range29(status7)) and in_range6(tokenid2)) and
+  in_range1(tokenpresence2)) and
   (valid_numberlogentries(to_rep6(logfilestate__split_fields14),
   to_rep7(logfilestate__split_fields15), { us_split_fields5 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields16;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields17;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields18;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields19 } },
-  logfilestate__split_fields20) = true)) and in_range8(auditalarm2)) and
-  in_range7(tokentry2)) and in_range6(tokenid2)))))
+  logfilestate__split_fields20) = true)))))
 
 axiom H58 : ((not (result11 = true)) -> ((result12 = true) ->
-  ((valid_numberlogentries(to_rep6(logfilestate__split_fields21),
+  (in_range8(auditalarm3) and
+  (valid_numberlogentries(to_rep6(logfilestate__split_fields21),
   to_rep7(logfilestate__split_fields22), { us_split_fields5 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields23;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields24;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields25;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields26 } },
-  logfilestate__split_fields27) = true) and in_range8(auditalarm3))))
+  logfilestate__split_fields27) = true))))
 
 axiom H59 : ((not (result11 = true)) -> ((result12 = true) ->
   (state39 = state12)))
@@ -6260,10 +6262,10 @@ axiom H71 : ((not (result11 = true)) -> ((result12 = true) ->
   (status10 = status1)))
 
 axiom H72 : ((not (result11 = true)) -> ((result12 = true) ->
-  (state42 = state)))
+  (filestate9 = filestate)))
 
 axiom H73 : ((not (result11 = true)) -> ((result12 = true) ->
-  (filestate9 = filestate)))
+  (state42 = state)))
 
 axiom H74 : ((not (result11 = true)) -> ((result12 = true) ->
   ((thestats__split_fields8 = thestats__split_fields) and
@@ -6320,10 +6322,10 @@ axiom H89 : ((not (result11 = true)) -> ((result12 = true) ->
   (status10 = status4)))
 
 axiom H90 : ((not (result11 = true)) -> ((result12 = true) ->
-  (state42 = state13)))
+  (filestate9 = filestate3)))
 
 axiom H91 : ((not (result11 = true)) -> ((result12 = true) ->
-  (filestate9 = filestate3)))
+  (state42 = state13)))
 
 axiom H92 : ((not (result11 = true)) -> ((result12 = true) ->
   ((thestats__split_fields8 = thestats__split_fields4) and
@@ -6355,25 +6357,25 @@ axiom H96 : ((not (result11 = true)) -> ((not (result12 = true)) ->
   rec__clock__timet__day = currenttimevar__split_fields2;
   rec__clock__timet__millisec = currenttimevar__split_fields3 },
   currenttime), alarm_timeout(state35)) = true)) <->
-  (thedooralarm(state35) = 0)) and
-  (((valid_numberlogentries(to_rep6(logfilestate__split_fields28),
+  (thedooralarm(state35) = 0)) and ((in_range8(auditalarm4) and
+  in_range26(currentlatch2)) and
+  (valid_numberlogentries(to_rep6(logfilestate__split_fields28),
   to_rep7(logfilestate__split_fields29), { us_split_fields5 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields30;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields31;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields32;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields33 } },
-  logfilestate__split_fields34) = true) and in_range8(auditalarm4)) and
-  in_range26(currentlatch2))))))
+  logfilestate__split_fields34) = true))))))
 
 axiom H97 : ((not (result11 = true)) -> ((not (result12 = true)) ->
-  ((result13 = true) ->
-  ((valid_numberlogentries(to_rep6(logfilestate__split_fields35),
+  ((result13 = true) -> (in_range8(auditalarm5) and
+  (valid_numberlogentries(to_rep6(logfilestate__split_fields35),
   to_rep7(logfilestate__split_fields36), { us_split_fields5 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields37;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields38;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields39;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields40 } },
-  logfilestate__split_fields41) = true) and in_range8(auditalarm5)))))
+  logfilestate__split_fields41) = true)))))
 
 axiom H98 : ((not (result11 = true)) -> ((not (result12 = true)) ->
   ((result13 = true) -> (state51 = state11))))
@@ -6394,10 +6396,10 @@ axiom H103 : ((not (result11 = true)) -> ((not (result12 = true)) ->
   ((result13 = true) -> (state44 = state3))))
 
 axiom H104 : ((not (result11 = true)) -> ((not (result12 = true)) ->
-  ((result13 = true) -> (state42 = state))))
+  ((result13 = true) -> (filestate9 = filestate))))
 
 axiom H105 : ((not (result11 = true)) -> ((not (result12 = true)) ->
-  ((result13 = true) -> (filestate9 = filestate))))
+  ((result13 = true) -> (state42 = state))))
 
 axiom H106 : ((not (result11 = true)) -> ((not (result12 = true)) ->
   ((result13 = true) ->
@@ -6480,10 +6482,10 @@ axiom H118 : ((not (result11 = true)) -> ((not (result12 = true)) ->
   ((result13 = true) -> (state44 = state15))))
 
 axiom H119 : ((not (result11 = true)) -> ((not (result12 = true)) ->
-  ((result13 = true) -> (state42 = state13))))
+  ((result13 = true) -> (filestate9 = filestate3))))
 
 axiom H120 : ((not (result11 = true)) -> ((not (result12 = true)) ->
-  ((result13 = true) -> (filestate9 = filestate3))))
+  ((result13 = true) -> (state42 = state13))))
 
 axiom H121 : ((not (result11 = true)) -> ((not (result12 = true)) ->
   ((result13 = true) ->
@@ -7027,16 +7029,16 @@ axiom H129 : ((not (result11 = true)) -> ((not (result12 = true)) ->
   } }) = true) and (thecurrentop({ us_split_fields1 = {
   rec__admin__t__rolepresent = theadmin__split_fields;
   rec__admin__t__currentop = theadmin__split_fields1 } }) = 3)))) and
-  ((((((in_range29(status9) and in_range1(tokenpresence3)) and
+  ((((((in_range8(auditalarm6) and in_range26(currentlatch3)) and
+  in_range7(tokentry3)) and in_range29(status9)) and in_range6(tokenid3)) and
+  in_range1(tokenpresence3)) and
   (valid_numberlogentries(to_rep6(logfilestate__split_fields42),
   to_rep7(logfilestate__split_fields43), { us_split_fields5 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields44;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields45;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields46;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields47 } },
-  logfilestate__split_fields48) = true)) and in_range8(auditalarm6)) and
-  in_range7(tokentry3)) and in_range6(tokenid3)) and
-  in_range26(currentlatch3)))))))
+  logfilestate__split_fields48) = true)))))))
 
 axiom H130 : ((not (result11 = true)) -> ((not (result12 = true)) ->
   ((not (result13 = true)) -> ((result14 = true) -> (state53 = state12)))))
@@ -7050,25 +7052,25 @@ axiom H132 : ((not (result11 = true)) -> ((not (result12 = true)) ->
 
 axiom H133 : ((not (result11 = true)) -> ((not (result12 = true)) ->
   ((not (result13 = true)) -> ((not (result14 = true)) ->
-  ((result15 = true) ->
-  ((valid_numberlogentries(to_rep6(logfilestate__split_fields49),
+  ((result15 = true) -> (in_range8(auditalarm7) and
+  (valid_numberlogentries(to_rep6(logfilestate__split_fields49),
   to_rep7(logfilestate__split_fields50), { us_split_fields5 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields51;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields52;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields53;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields54 } },
-  logfilestate__split_fields55) = true) and in_range8(auditalarm7)))))))
+  logfilestate__split_fields55) = true)))))))
 
 axiom H134 : ((not (result11 = true)) -> ((not (result12 = true)) ->
   ((not (result13 = true)) -> ((not (result14 = true)) ->
-  ((result15 = true) ->
-  ((valid_numberlogentries(to_rep6(logfilestate__split_fields56),
+  ((result15 = true) -> (in_range8(auditalarm8) and
+  (valid_numberlogentries(to_rep6(logfilestate__split_fields56),
   to_rep7(logfilestate__split_fields57), { us_split_fields5 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields58;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields59;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields60;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields61 } },
-  logfilestate__split_fields62) = true) and in_range8(auditalarm8)))))))
+  logfilestate__split_fields62) = true)))))))
 
 axiom H135 : ((not (result11 = true)) -> ((not (result12 = true)) ->
   ((not (result13 = true)) -> ((not (result14 = true)) ->
@@ -7323,14 +7325,14 @@ axiom H141 : ((not (result11 = true)) -> ((not (result12 = true)) ->
   } }) = 3)) or (not (isdoingop({ us_split_fields1 = {
   rec__admin__t__rolepresent = theadmin__split_fields8;
   rec__admin__t__currentop = theadmin__split_fields9 } }) = true))))) and
-  ((in_range29(status11) and
+  ((in_range8(auditalarm9) and in_range29(status11)) and
   (valid_numberlogentries(to_rep6(logfilestate__split_fields63),
   to_rep7(logfilestate__split_fields64), { us_split_fields5 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields65;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields66;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields67;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields68 } },
-  logfilestate__split_fields69) = true)) and in_range8(auditalarm9))))))))
+  logfilestate__split_fields69) = true))))))))
 
 axiom H142 : ((not (result11 = true)) -> ((not (result12 = true)) ->
   ((not (result13 = true)) -> ((not (result14 = true)) ->
@@ -7480,11 +7482,11 @@ axiom H174 : ((not (result11 = true)) -> ((not (result12 = true)) ->
 
 axiom H175 : ((not (result11 = true)) -> ((not (result12 = true)) ->
   ((not (result13 = true)) -> ((not (result14 = true)) ->
-  (state42 = state)))))
+  (filestate9 = filestate)))))
 
 axiom H176 : ((not (result11 = true)) -> ((not (result12 = true)) ->
   ((not (result13 = true)) -> ((not (result14 = true)) ->
-  (filestate9 = filestate)))))
+  (state42 = state)))))
 
 axiom H177 : ((not (result11 = true)) -> ((not (result12 = true)) ->
   ((not (result13 = true)) -> ((not (result14 = true)) ->
@@ -7644,11 +7646,11 @@ axiom H203 : ((not (result11 = true)) -> ((not (result12 = true)) ->
 
 axiom H204 : ((not (result11 = true)) -> ((not (result12 = true)) ->
   ((not (result13 = true)) -> ((not (result14 = true)) ->
-  (state42 = state13)))))
+  (filestate9 = filestate3)))))
 
 axiom H205 : ((not (result11 = true)) -> ((not (result12 = true)) ->
   ((not (result13 = true)) -> ((not (result14 = true)) ->
-  (filestate9 = filestate3)))))
+  (state42 = state13)))))
 
 axiom H206 : ((not (result11 = true)) -> ((not (result12 = true)) ->
   ((not (result13 = true)) -> ((not (result14 = true)) ->
@@ -8220,9 +8222,9 @@ axiom H342 : (state60 = state24)
 
 axiom H343 : (filestate14 = filestate5)
 
-axiom H344 : (state59 = state42)
+axiom H344 : (filestate13 = filestate9)
 
-axiom H345 : (filestate13 = filestate9)
+axiom H345 : (state59 = state42)
 
 axiom H346 : ((theadmin__split_fields10 = theadmin__split_fields4) and
   (theadmin__split_fields11 = theadmin__split_fields5))
@@ -8352,9 +8354,9 @@ axiom H380 : (state73 = state24)
 
 axiom H381 : (filestate17 = filestate5)
 
-axiom H382 : (state72 = state42)
+axiom H382 : (filestate16 = filestate9)
 
-axiom H383 : (filestate16 = filestate9)
+axiom H383 : (state72 = state42)
 
 axiom H384 : ((theadmin__split_fields12 = theadmin__split_fields4) and
   (theadmin__split_fields13 = theadmin__split_fields5))
@@ -8563,7 +8565,82 @@ axiom H435 : ((result22 = isdoingop({ us_split_fields1 = {
   rec__admin__t__currentop = theadmin__split_fields11 } })) and
   ((result22 = true) <-> in_range4(to_rep1(theadmin__split_fields11))))
 
-axiom H436 : (result22 = true)
+axiom H436 : ((result22 = true) -> ((o43 = thecurrentop({ us_split_fields1 =
+  { rec__admin__t__rolepresent = theadmin__split_fields10;
+  rec__admin__t__currentop = theadmin__split_fields11 } })) and
+  in_range4(o43)))
+
+axiom H437 : ((result22 = true) -> (((o43 = 4) -> (result21 = true)) and
+  ((not (o43 = 4)) -> (result21 = false))))
+
+axiom H438 : ((not (result22 = true)) -> (result21 = false))
+
+axiom H439 : ((result21 = true) ->
+  ((o44 = statusiswaitingstartadminop(status12, state70)) and
+  ((o44 = true) <-> (status12 = 6))))
+
+axiom H440 : ((not (result21 = true)) -> (o44 = of_int(1)))
+
+axiom H441 : ((o40 = ispresent({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields10;
+  rec__admin__t__currentop = theadmin__split_fields11 } })) and
+  ((o40 = true) <-> in_range5(to_rep(theadmin__split_fields10))))
+
+axiom H442 : (((not (o40 = true)) -> (result23 = true)) and ((o40 = true) ->
+  (result23 = false)))
+
+axiom H443 : ((result23 = true) -> ((o41 = isdoingop({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields10;
+  rec__admin__t__currentop = theadmin__split_fields11 } })) and
+  ((o41 = true) <-> in_range4(to_rep1(theadmin__split_fields11)))))
+
+axiom H444 : ((result23 = true) -> (((not (o41 = true)) -> (o42 = true)) and
+  ((o41 = true) -> (o42 = false))))
+
+axiom H445 : ((not (result23 = true)) -> (o42 = of_int(1)))
+
+axiom H446 : ((o34 = rolepresent({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields10;
+  rec__admin__t__currentop = theadmin__split_fields11 } })) and
+  (in_range2(o34) and (o34 = to_rep(theadmin__split_fields10))))
+
+axiom H447 : (((o34 = 1) -> (result24 = true)) and ((not (o34 = 1)) ->
+  (result24 = false)))
+
+axiom H448 : ((result24 = true) -> ((o36 = isdoingop({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields10;
+  rec__admin__t__currentop = theadmin__split_fields11 } })) and
+  ((o36 = true) <-> in_range4(to_rep1(theadmin__split_fields11)))))
+
+axiom H449 : ((result24 = true) -> (((not (o36 = true)) -> (o37 = true)) and
+  ((o36 = true) -> (o37 = false))))
+
+axiom H450 : ((result24 = true) -> ((result25 = isdoingop({
+  us_split_fields1 = { rec__admin__t__rolepresent = theadmin__split_fields10;
+  rec__admin__t__currentop = theadmin__split_fields11 } })) and
+  ((result25 = true) <-> in_range4(to_rep1(theadmin__split_fields11)))))
+
+axiom H451 : ((result24 = true) -> ((result25 = true) ->
+  ((o35 = thecurrentop({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields10; rec__admin__t__currentop =
+  theadmin__split_fields11 } })) and in_range4(o35))))
+
+axiom H452 : ((result24 = true) -> ((result25 = true) -> (((o35 = 3) ->
+  (o38 = true)) and ((not (o35 = 3)) -> (o38 = false)))))
+
+axiom H453 : ((result24 = true) -> ((not (result25 = true)) ->
+  (o38 = false)))
+
+axiom H454 : ((result24 = true) -> (o39 = match_bool(o38, true, o37)))
+
+axiom H455 : ((not (result24 = true)) -> (o39 = of_int(1)))
+
+axiom H456 : ((result26 = isdoingop({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields10;
+  rec__admin__t__currentop = theadmin__split_fields11 } })) and
+  ((result26 = true) <-> in_range4(to_rep1(theadmin__split_fields11))))
+
+axiom H457 : (result26 = true)
 
  (* File "admintoken.ads", line 50, characters 0-0 *)
 goal WP_parameter_def : (isdoingop({ us_split_fields1 = {
