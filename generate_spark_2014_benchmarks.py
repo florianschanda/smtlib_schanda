@@ -219,7 +219,22 @@ def emit_lemmalib_gpr(test):
 
 def extract_benchmark(test):
     if "record_ddos" in test["dir"]:
+        # Designed to break the tools
         return None
+    if "Q510-009__flow_circular_global" in test["dir"]:
+        # Currently causes an infinite loop in tools
+        return None
+
+    if "alt-ergo" in test["prover"]:
+        if "O910-022__concatenation" in test["dir"]:
+            # Why3 goes into an infinite loop trying to emit a VC for alt-ergo.
+            # Something to do with ite not being supported.
+            return None
+        if "O901-014__formal_vectors" in test["dir"]:
+            # Why3 eats all memory when trying to produce VCs here for
+            # alt-ergo. Cause unknown.
+            return None
+
     #if "proofinuse" not in test["dir"]:
     #    return None
     # if "TU__type_invariant__legal" not in test["dir"]:
@@ -439,7 +454,7 @@ def main():
             pass
     else:
         pool = multiprocessing.Pool()
-        for result in pool.imap_unordered(extract_benchmark, tests, 2):
+        for result in pool.imap_unordered(extract_benchmark, tests):
             pass
 
 if __name__ == "__main__":
