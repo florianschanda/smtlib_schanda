@@ -154,6 +154,7 @@ def main():
                     choices=["all",
                              "qf_fp", "fp", "industrial", "spark",
                              "schanda",
+                             "griggio",
                              "spark_all",
                              "xsat_paper", # the 34 benchmarks from xsat paper
                              "debug"])
@@ -195,7 +196,7 @@ def main():
         bench_dirs.append("crafted/QF_FPLRA")
         bench_dirs.append("random")
         # bench_dirs.append("random_ext")
-    if options.suite in ("all", "qf_fp", "fp", "xsat_paper"):
+    if options.suite in ("all", "qf_fp", "fp", "xsat_paper", "griggio"):
         bench_dirs.append("griggio")
     if options.suite in ("all", "qf_fp", "fp"):
         bench_dirs.append("wintersteiger")
