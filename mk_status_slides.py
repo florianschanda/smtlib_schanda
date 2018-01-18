@@ -775,6 +775,8 @@ def main():
         fd.write("  4/.style={Altran7},\n")
         fd.write("  5/.style={Altran8},\n")
         fd.write("  6/.style={Altran12},\n")
+        fd.write("  7/.style={Altran5},\n")
+        fd.write("  8/.style={Altran10},\n")
         fd.write("  default style/.style={black}\n")
         fd.write("}\n")
         fd.write("\\author{Florian Schanda}\n")
