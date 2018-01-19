@@ -456,7 +456,9 @@ def mk_competition_slides(fd):
     competitors = sorted([data[-1]] + other_data,
                          cmp=lambda a, b: cmp(a["prover_kind"],
                                               b["prover_kind"]))
-    solvers = sorted(c["prover_kind"] for c in competitors)
+    solvers = sorted((c["prover_kind"] for c in competitors),
+                     cmp=lambda a, b: cmp(a.replace("vbs", "zzz"),
+                                          b.replace("vbs", "zzz")))
 
     # def calculate_unique_solutions():
     #     verdicts = {}
