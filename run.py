@@ -145,8 +145,8 @@ def main():
                                only_logic=["QF_FP"]))
     provers.append(Prover_Kind("gosat",
                                ["-smtlib-output", "-f"],
+                               use_logic=False, # Since it's based on Z3...
                                use_temp=True))
-
 
     ap = argparse.ArgumentParser()
     ap.add_argument("--suite",
