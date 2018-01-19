@@ -615,12 +615,14 @@ def mk_competition_slides(fd):
     # Table comparing all solvers
     for cat in COMPARISON_CATS:
         fd.write("\\begin{frame}{Benchmarks}{With status `%s'}\n" % cat)
+        fd.write("\\begin{adjustwidth}{-1cm}{-1cm}\n")
         fd.write("\\begin{center}\n")
         mk_table(cat)
         fd.write("\\end{center}\n")
         fd.write("\\begin{center}\n")
         fd.write("\\footnotesize $^*$) uses different VCs\n")
         fd.write("\\end{center}\n")
+        fd.write("\\end{adjustwidth}\n")
         fd.write("\\end{frame}\n\n")
 
         # if cat == "solved":
@@ -770,6 +772,7 @@ def main():
         fd.write("\\documentclass{beamer}\n")
         fd.write("\\input{altran-beamer}\n")
         fd.write("\\usepackage{tikz}\n")
+        fd.write("\\usepackage{changepage}\n")
         fd.write("\\usetikzlibrary{datavisualization}\n")
         fd.write("\\pgfdvdeclarestylesheet{altran}{\n")
         fd.write("  1/.style={Altran1},\n")
