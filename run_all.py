@@ -92,6 +92,7 @@ def main():
 
         invocations.append(("z3_smallfloats", Z3_SF_VERSION))
         invocations.append(("gosat", GOSAT_VERSION))
+        invocations.append(("sonolar", "sonolar_2014_12_04"))
 
     print "Compiling utilities..."
     os.system("make -C util")

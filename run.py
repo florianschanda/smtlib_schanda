@@ -147,6 +147,10 @@ def main():
                                ["-smtlib-output", "-f"],
                                use_logic=False, # Since it's based on Z3...
                                use_temp=True))
+    provers.append(Prover_Kind("sonolar",
+                               ["--input-format=smtlib2"],
+                               use_logic=False, # Doesn't like logic strings
+                               use_temp=True))
 
     ap = argparse.ArgumentParser()
     ap.add_argument("--suite",
