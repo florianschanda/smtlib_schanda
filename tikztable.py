@@ -94,7 +94,7 @@ class TikzTable(object):
             if x == 0:
                 return 0.0
             else:
-                return 2.5 + float(x - 1) * 1.0
+                return 2.0 + float(x - 1) * 0.9
 
         def tr_y(y):
             return float(-y) * 0.35
