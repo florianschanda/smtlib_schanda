@@ -1,0 +1,5483 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo real arithmetic *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+logic match_mode : fpa_rounding_mode, 'a, 'a, 'a, 'a, 'a -> 'a
+
+axiom match_mode_NearestTiesToEven :
+  (forall z:'a. forall z1:'a. forall z2:'a. forall z3:'a. forall z4:'a.
+  (match_mode(NearestTiesToEven, z, z1, z2, z3, z4) = z))
+
+axiom match_mode_ToZero :
+  (forall z:'a. forall z1:'a. forall z2:'a. forall z3:'a. forall z4:'a.
+  (match_mode(ToZero, z, z1, z2, z3, z4) = z1))
+
+axiom match_mode_Up :
+  (forall z:'a. forall z1:'a. forall z2:'a. forall z3:'a. forall z4:'a.
+  (match_mode(Up, z, z1, z2, z3, z4) = z2))
+
+axiom match_mode_Down :
+  (forall z:'a. forall z1:'a. forall z2:'a. forall z3:'a. forall z4:'a.
+  (match_mode(Down, z, z1, z2, z3, z4) = z3))
+
+axiom match_mode_NearestTiesToAway :
+  (forall z:'a. forall z1:'a. forall z2:'a. forall z3:'a. forall z4:'a.
+  (match_mode(NearestTiesToAway, z, z1, z2, z3, z4) = z4))
+
+type double
+
+axiom add_div :
+  (forall x:real. forall y:real. forall z:real. ((not (z = 0.0)) ->
+  (((x + y) / z) = ((x / z) + (y / z)))))
+
+axiom sub_div :
+  (forall x:real. forall y:real. forall z:real. ((not (z = 0.0)) ->
+  (((x - y) / z) = ((x / z) - (y / z)))))
+
+axiom neg_div :
+  (forall x:real. forall y:real. ((not (y = 0.0)) ->
+  (((-x) / y) = (-(x / y)))))
+
+axiom assoc_mul_div :
+  (forall x:real. forall y:real. forall z:real. ((not (z = 0.0)) ->
+  (((x * y) / z) = (x * (y / z)))))
+
+axiom assoc_div_mul :
+  (forall x:real. forall y:real. forall z:real. (((not (y = 0.0)) and
+  (not (z = 0.0))) -> (((x / y) / z) = (x / (y * z)))))
+
+axiom assoc_div_div :
+  (forall x:real. forall y:real. forall z:real. (((not (y = 0.0)) and
+  (not (z = 0.0))) -> ((x / (y / z)) = ((x * z) / y))))
+
+axiom CompatOrderMult :
+  (forall x:real. forall y:real. forall z:real. ((x <= y) -> ((0.0 <= z) ->
+  ((x * z) <= (y * z)))))
+
+axiom CompatOrderMult1 :
+  (forall x:int. forall y:int. forall z:int. ((x <= y) -> ((0 <= z) ->
+  ((x * z) <= (y * z)))))
+
+axiom Monotonic :
+  (forall x:int. forall y:int. ((x <= y) ->
+  (real_of_int(x) <= real_of_int(y))))
+
+logic truncate : real -> int
+
+axiom Truncate_int : (forall i:int. (truncate(real_of_int(i)) = i))
+
+axiom Truncate_down_pos :
+  (forall x:real. ((0.0 <= x) -> (real_of_int(truncate(x)) <= x)))
+
+axiom Truncate_down_pos1 :
+  (forall x:real. ((0.0 <= x) -> (x <  real_of_int((truncate(x) + 1)))))
+
+axiom Truncate_up_neg :
+  (forall x:real. ((x <= 0.0) -> (real_of_int((truncate(x) - 1)) <  x)))
+
+axiom Truncate_up_neg1 :
+  (forall x:real. ((x <= 0.0) -> (x <= real_of_int(truncate(x)))))
+
+axiom Real_of_truncate :
+  (forall x:real. ((x - 1.0) <= real_of_int(truncate(x))))
+
+axiom Real_of_truncate1 :
+  (forall x:real. (real_of_int(truncate(x)) <= (x + 1.0)))
+
+axiom Truncate_monotonic :
+  (forall x:real. forall y:real. ((x <= y) -> (truncate(x) <= truncate(y))))
+
+axiom Truncate_monotonic_int1 :
+  (forall x:real. forall i:int. ((x <= real_of_int(i)) ->
+  (truncate(x) <= i)))
+
+axiom Truncate_monotonic_int2 :
+  (forall x:real. forall i:int. ((real_of_int(i) <= x) ->
+  (i <= truncate(x))))
+
+axiom Floor_int : (forall i:int. (int_floor(real_of_int(i)) = i))
+
+axiom Ceil_int : (forall i:int. (int_ceil(real_of_int(i)) = i))
+
+axiom Floor_down : (forall x:real. (real_of_int(int_floor(x)) <= x))
+
+axiom Floor_down1 : (forall x:real. (x <  real_of_int((int_floor(x) + 1))))
+
+axiom Ceil_up : (forall x:real. (real_of_int((int_ceil(x) - 1)) <  x))
+
+axiom Ceil_up1 : (forall x:real. (x <= real_of_int(int_ceil(x))))
+
+axiom Floor_monotonic :
+  (forall x:real. forall y:real. ((x <= y) ->
+  (int_floor(x) <= int_floor(y))))
+
+axiom Ceil_monotonic :
+  (forall x:real. forall y:real. ((x <= y) -> (int_ceil(x) <= int_ceil(y))))
+
+function sqr(x: real) : real = (x * x)
+
+axiom Sqrt_positive : (forall x:real. ((0.0 <= x) -> (0.0 <= sqrt_real(x))))
+
+axiom Sqrt_square : (forall x:real. ((0.0 <= x) -> (sqr(sqrt_real(x)) = x)))
+
+axiom Square_sqrt : (forall x:real. ((0.0 <= x) -> (sqrt_real((x * x)) = x)))
+
+axiom Sqrt_mul :
+  (forall x:real. forall y:real. (((0.0 <= x) and (0.0 <= y)) ->
+  (sqrt_real((x * y)) = (sqrt_real(x) * sqrt_real(y)))))
+
+axiom Sqrt_le :
+  (forall x:real. forall y:real. (((0.0 <= x) and (x <= y)) ->
+  (sqrt_real(x) <= sqrt_real(y))))
+
+type class = Finite | Infinite | NaN
+
+logic match_class : class, 'a, 'a, 'a -> 'a
+
+axiom match_class_Finite :
+  (forall z:'a. forall z1:'a. forall z2:'a. (match_class(Finite, z, z1,
+  z2) = z))
+
+axiom match_class_Infinite :
+  (forall z:'a. forall z1:'a. forall z2:'a. (match_class(Infinite, z, z1,
+  z2) = z1))
+
+axiom match_class_NaN :
+  (forall z:'a. forall z1:'a. forall z2:'a. (match_class(NaN, z, z1,
+  z2) = z2))
+
+type sign = Neg | Pos
+
+logic match_sign : sign, 'a, 'a -> 'a
+
+axiom match_sign_Neg :
+  (forall z:'a. forall z1:'a. (match_sign(Neg, z, z1) = z))
+
+axiom match_sign_Pos :
+  (forall z:'a. forall z1:'a. (match_sign(Pos, z, z1) = z1))
+
+logic same_sign_real : sign, real -> prop
+
+axiom Neg_case : (forall x:real. ((x <  0.0) -> same_sign_real(Neg, x)))
+
+axiom Pos_case : (forall x:real. ((0.0 <  x) -> same_sign_real(Pos, x)))
+
+axiom same_sign_real_inversion :
+  (forall z:sign. forall z1:real. (same_sign_real(z, z1) -> (((z1 <  0.0) and
+  (z = Neg)) or ((0.0 <  z1) and (z = Pos)))))
+
+axiom same_sign_real_zero1 : (forall b:sign. (not same_sign_real(b, 0.0)))
+
+axiom same_sign_real_zero2 :
+  (forall x:real. (not (same_sign_real(Neg, x) and same_sign_real(Pos, x))))
+
+axiom same_sign_real_zero3 :
+  (forall b:sign. forall x:real. (same_sign_real(b, x) -> (not (x = 0.0))))
+
+axiom same_sign_real_correct2 :
+  (forall b:sign. forall x:real. (same_sign_real(b, x) -> ((x <  0.0) ->
+  (b = Neg))))
+
+axiom same_sign_real_correct21 :
+  (forall b:sign. forall x:real. (same_sign_real(b, x) -> ((b = Neg) ->
+  (x <  0.0))))
+
+axiom same_sign_real_correct3 :
+  (forall b:sign. forall x:real. (same_sign_real(b, x) -> ((0.0 <  x) ->
+  (b = Pos))))
+
+axiom same_sign_real_correct31 :
+  (forall b:sign. forall x:real. (same_sign_real(b, x) -> ((b = Pos) ->
+  (0.0 <  x))))
+
+axiom Abs_le :
+  (forall x:real. forall y:real. ((abs_real(x) <= y) -> ((-y) <= x)))
+
+axiom Abs_le1 :
+  (forall x:real. forall y:real. ((abs_real(x) <= y) -> (x <= y)))
+
+axiom Abs_le2 :
+  (forall x:real. forall y:real. ((((-y) <= x) and (x <= y)) ->
+  (abs_real(x) <= y)))
+
+axiom Abs_pos : (forall x:real. (0.0 <= abs_real(x)))
+
+axiom Abs_sum :
+  (forall x:real. forall y:real.
+  (abs_real((x + y)) <= (abs_real(x) + abs_real(y))))
+
+axiom Abs_prod :
+  (forall x:real. forall y:real.
+  (abs_real((x * y)) = (abs_real(x) * abs_real(y))))
+
+axiom triangular_inequality :
+  (forall x:real. forall y:real. forall z:real.
+  (abs_real((x - z)) <= (abs_real((x - y)) + abs_real((y - z)))))
+
+logic value : double -> real
+
+predicate no_overflow(m: fpa_rounding_mode, x: real) =
+  (abs_real(float64(m, x)) <= 0x1.FFFFFFFFFFFFFp1023)
+
+axiom Bounded_real_no_overflow :
+  (forall m:fpa_rounding_mode. forall x:real.
+  ((abs_real(x) <= 0x1.FFFFFFFFFFFFFp1023) -> no_overflow(m, x)))
+
+axiom Round_value :
+  (forall m:fpa_rounding_mode. forall x:double.
+  (float64(m, value(x)) = value(x)))
+
+axiom Bounded_value :
+  (forall x:double. (abs_real(value(x)) <= 0x1.FFFFFFFFFFFFFp1023))
+
+axiom Exact_rounding_for_integers :
+  (forall m:fpa_rounding_mode. forall i:int. ((((-9007199254740992) <= i) and
+  (i <= 9007199254740992)) -> (float64(m, real_of_int(i)) = real_of_int(i))))
+
+axiom Round_down_le : (forall x:real. (float64(Down, x) <= x))
+
+axiom Round_up_ge : (forall x:real. (x <= float64(Up, x)))
+
+axiom Round_down_neg :
+  (forall x:real. (float64(Down, (-x)) = (-float64(Up, x))))
+
+axiom Round_up_neg :
+  (forall x:real. (float64(Up, (-x)) = (-float64(Down, x))))
+
+logic round_logic : fpa_rounding_mode, real -> double
+
+axiom Round_logic_def :
+  (forall m:fpa_rounding_mode. forall x:real. (no_overflow(m, x) ->
+  (value(round_logic(m, x)) = float64(m, x))))
+
+logic class1 : double -> class
+
+predicate is_finite(x: double) = (class1(x) = Finite)
+
+predicate is_infinite(x: double) = (class1(x) = Infinite)
+
+predicate is_NaN(x: double) = (class1(x) = NaN)
+
+predicate is_not_NaN(x: double) = (is_finite(x) or is_infinite(x))
+
+axiom is_not_NaN1 : (forall x:double. (is_not_NaN(x) -> (not is_NaN(x))))
+
+axiom is_not_NaN2 : (forall x:double. ((not is_NaN(x)) -> is_not_NaN(x)))
+
+logic sign1 : double -> sign
+
+predicate same_sign_real1(x: double, y: real) = same_sign_real(sign1(x), y)
+
+predicate same_sign(x: double, y: double) = (sign1(x) = sign1(y))
+
+predicate diff_sign(x: double, y: double) = (not (sign1(x) = sign1(y)))
+
+predicate sign_zero_result(m: fpa_rounding_mode, x: double) =
+  ((value(x) = 0.0) -> ((((((m = NearestTiesToEven) -> (sign1(x) = Pos)) and
+  ((m = ToZero) -> (sign1(x) = Pos))) and ((m = Up) -> (sign1(x) = Pos))) and
+  ((m = Down) -> (sign1(x) = Neg))) and ((m = NearestTiesToAway) ->
+  (sign1(x) = Pos))))
+
+predicate is_minus_infinity(x: double) = (is_infinite(x) and
+  (sign1(x) = Neg))
+
+predicate is_plus_infinity(x: double) = (is_infinite(x) and (sign1(x) = Pos))
+
+predicate is_gen_zero(x: double) = (is_finite(x) and (value(x) = 0.0))
+
+predicate is_gen_zero_plus(x: double) = (is_gen_zero(x) and (sign1(x) = Pos))
+
+predicate is_gen_zero_minus(x: double) = (is_gen_zero(x) and
+  (sign1(x) = Neg))
+
+axiom finite_sign :
+  (forall x:double. (((class1(x) = Finite) and (not (value(x) = 0.0))) ->
+  same_sign_real1(x, value(x))))
+
+axiom finite_sign_pos1 :
+  (forall x:double. (((class1(x) = Finite) and (0.0 <  value(x))) ->
+  (sign1(x) = Pos)))
+
+axiom finite_sign_pos2 :
+  (forall x:double. (((class1(x) = Finite) and ((not (value(x) = 0.0)) and
+  (sign1(x) = Pos))) -> (0.0 <  value(x))))
+
+axiom finite_sign_neg1 :
+  (forall x:double. (((class1(x) = Finite) and (value(x) <  0.0)) ->
+  (sign1(x) = Neg)))
+
+axiom finite_sign_neg2 :
+  (forall x:double. (((class1(x) = Finite) and ((not (value(x) = 0.0)) and
+  (sign1(x) = Neg))) -> (value(x) <  0.0)))
+
+axiom diff_sign_trans :
+  (forall x:double. forall y:double. forall z:double. ((diff_sign(x, y) and
+  diff_sign(y, z)) -> same_sign(x, z)))
+
+axiom diff_sign_product :
+  (forall x:double. forall y:double. (((class1(x) = Finite) and
+  ((class1(y) = Finite) and ((value(x) * value(y)) <  0.0))) -> diff_sign(x,
+  y)))
+
+axiom same_sign_product :
+  (forall x:double. forall y:double. (((class1(x) = Finite) and
+  ((class1(y) = Finite) and same_sign(x, y))) ->
+  (0.0 <= (value(x) * value(y)))))
+
+predicate overflow_value(m: fpa_rounding_mode, x: double) =
+  (((sign1(x) = Neg) -> ((((((m = NearestTiesToEven) -> is_infinite(x)) and
+  ((m = ToZero) -> (is_finite(x) and
+  (value(x) = (-0x1.FFFFFFFFFFFFFp1023))))) and ((m = Up) ->
+  (is_finite(x) and (value(x) = (-0x1.FFFFFFFFFFFFFp1023))))) and
+  ((m = Down) -> is_infinite(x))) and ((m = NearestTiesToAway) ->
+  is_infinite(x)))) and ((sign1(x) = Pos) -> ((((((m = NearestTiesToEven) ->
+  is_infinite(x)) and ((m = ToZero) -> (is_finite(x) and
+  (value(x) = 0x1.FFFFFFFFFFFFFp1023)))) and ((m = Up) ->
+  is_infinite(x))) and ((m = Down) -> (is_finite(x) and
+  (value(x) = 0x1.FFFFFFFFFFFFFp1023)))) and ((m = NearestTiesToAway) ->
+  is_infinite(x)))))
+
+axiom round1 :
+  (forall m:fpa_rounding_mode. forall x:real. (no_overflow(m, x) ->
+  is_finite(round_logic(m, x))))
+
+axiom round11 :
+  (forall m:fpa_rounding_mode. forall x:real. (no_overflow(m, x) ->
+  (value(round_logic(m, x)) = float64(m, x))))
+
+axiom round2 :
+  (forall m:fpa_rounding_mode. forall x:real. ((not no_overflow(m, x)) ->
+  same_sign_real1(round_logic(m, x), x)))
+
+axiom round21 :
+  (forall m:fpa_rounding_mode. forall x:real. ((not no_overflow(m, x)) ->
+  overflow_value(m, round_logic(m, x))))
+
+axiom round_of_zero :
+  (forall m:fpa_rounding_mode. is_gen_zero(round_logic(m, 0.0)))
+
+axiom round_logic_le :
+  (forall m:fpa_rounding_mode. forall x:real. (is_finite(round_logic(m,
+  x)) -> (abs_real(value(round_logic(m, x))) <= 0x1.FFFFFFFFFFFFFp1023)))
+
+axiom round_no_overflow :
+  (forall m:fpa_rounding_mode. forall x:real.
+  ((abs_real(x) <= 0x1.FFFFFFFFFFFFFp1023) -> is_finite(round_logic(m, x))))
+
+axiom round_no_overflow1 :
+  (forall m:fpa_rounding_mode. forall x:real.
+  ((abs_real(x) <= 0x1.FFFFFFFFFFFFFp1023) -> (value(round_logic(m,
+  x)) = float64(m, x))))
+
+logic min : real
+
+axiom positive_constant :
+  (forall m:fpa_rounding_mode. forall x:real. (((min <= x) and
+  (x <= 0x1.FFFFFFFFFFFFFp1023)) -> is_finite(round_logic(m, x))))
+
+axiom positive_constant1 :
+  (forall m:fpa_rounding_mode. forall x:real. (((min <= x) and
+  (x <= 0x1.FFFFFFFFFFFFFp1023)) -> (0.0 <  value(round_logic(m, x)))))
+
+axiom positive_constant2 :
+  (forall m:fpa_rounding_mode. forall x:real. (((min <= x) and
+  (x <= 0x1.FFFFFFFFFFFFFp1023)) -> (sign1(round_logic(m, x)) = Pos)))
+
+axiom negative_constant :
+  (forall m:fpa_rounding_mode. forall x:real.
+  ((((-0x1.FFFFFFFFFFFFFp1023) <= x) and (x <= (-min))) ->
+  is_finite(round_logic(m, x))))
+
+axiom negative_constant1 :
+  (forall m:fpa_rounding_mode. forall x:real.
+  ((((-0x1.FFFFFFFFFFFFFp1023) <= x) and (x <= (-min))) ->
+  (value(round_logic(m, x)) <  0.0)))
+
+axiom negative_constant2 :
+  (forall m:fpa_rounding_mode. forall x:real.
+  ((((-0x1.FFFFFFFFFFFFFp1023) <= x) and (x <= (-min))) ->
+  (sign1(round_logic(m, x)) = Neg)))
+
+axiom is_gen_zero_comp1 :
+  (forall x:double. forall y:double. ((is_gen_zero(x) and
+  ((value(x) = value(y)) and is_finite(y))) -> is_gen_zero(y)))
+
+axiom is_gen_zero_comp2 :
+  (forall x:double. forall y:double. ((is_finite(x) and
+  ((not is_gen_zero(x)) and (value(x) = value(y)))) -> (not is_gen_zero(y))))
+
+predicate add_post(m: fpa_rounding_mode, x: double, y: double, r: double) =
+  (((is_NaN(x) or is_NaN(y)) -> is_NaN(r)) and (((is_finite(x) and
+  is_infinite(y)) -> (is_infinite(r) and same_sign(r, y))) and
+  (((is_infinite(x) and is_finite(y)) -> (is_infinite(r) and same_sign(r,
+  x))) and (((is_infinite(x) and is_infinite(y)) -> ((same_sign(x, y) ->
+  (is_infinite(r) and same_sign(r, x))) and ((not same_sign(x, y)) ->
+  is_NaN(r)))) and (((is_finite(x) and (is_finite(y) and no_overflow(m,
+  (value(x) + value(y))))) -> (is_finite(r) and
+  ((value(r) = float64(m, (value(x) + value(y)))) and ((same_sign(x, y) ->
+  same_sign(r, x)) and ((not same_sign(x, y)) -> sign_zero_result(m,
+  r)))))) and ((is_finite(x) and (is_finite(y) and (not no_overflow(m,
+  (value(x) + value(y)))))) -> (same_sign_real(sign1(r),
+  (value(x) + value(y))) and overflow_value(m, r))))))))
+
+predicate sub_post(m: fpa_rounding_mode, x: double, y: double, r: double) =
+  (((is_NaN(x) or is_NaN(y)) -> is_NaN(r)) and (((is_finite(x) and
+  is_infinite(y)) -> (is_infinite(r) and diff_sign(r, y))) and
+  (((is_infinite(x) and is_finite(y)) -> (is_infinite(r) and same_sign(r,
+  x))) and (((is_infinite(x) and is_infinite(y)) -> ((diff_sign(x, y) ->
+  (is_infinite(r) and same_sign(r, x))) and ((not diff_sign(x, y)) ->
+  is_NaN(r)))) and (((is_finite(x) and (is_finite(y) and no_overflow(m,
+  (value(x) - value(y))))) -> (is_finite(r) and
+  ((value(r) = float64(m, (value(x) - value(y)))) and ((diff_sign(x, y) ->
+  same_sign(r, x)) and ((not diff_sign(x, y)) -> sign_zero_result(m,
+  r)))))) and ((is_finite(x) and (is_finite(y) and (not no_overflow(m,
+  (value(x) - value(y)))))) -> (same_sign_real(sign1(r),
+  (value(x) - value(y))) and overflow_value(m, r))))))))
+
+predicate product_sign(z: double, x: double, y: double) = ((same_sign(x,
+  y) -> (sign1(z) = Pos)) and (diff_sign(x, y) -> (sign1(z) = Neg)))
+
+predicate mul_post(m: fpa_rounding_mode, x: double, y: double, r: double) =
+  (((is_NaN(x) or is_NaN(y)) -> is_NaN(r)) and (((is_gen_zero(x) and
+  is_infinite(y)) -> is_NaN(r)) and (((is_finite(x) and (is_infinite(y) and
+  (not (value(x) = 0.0)))) -> is_infinite(r)) and (((is_infinite(x) and
+  is_gen_zero(y)) -> is_NaN(r)) and (((is_infinite(x) and (is_finite(y) and
+  (not (value(y) = 0.0)))) -> is_infinite(r)) and (((is_infinite(x) and
+  is_infinite(y)) -> is_infinite(r)) and (((is_finite(x) and
+  (is_finite(y) and no_overflow(m, (value(x) * value(y))))) ->
+  (is_finite(r) and (value(r) = float64(m, (value(x) * value(y)))))) and
+  (((is_finite(x) and (is_finite(y) and (not no_overflow(m,
+  (value(x) * value(y)))))) -> overflow_value(m, r)) and ((not is_NaN(r)) ->
+  product_sign(r, x, y))))))))))
+
+predicate neg_post(x: double, r: double) = ((is_NaN(x) -> is_NaN(r)) and
+  ((is_infinite(x) -> is_infinite(r)) and ((is_finite(x) -> (is_finite(r) and
+  (value(r) = (-value(x))))) and ((not is_NaN(x)) -> diff_sign(r, x)))))
+
+predicate div_post(m: fpa_rounding_mode, x: double, y: double, r: double) =
+  (((is_NaN(x) or is_NaN(y)) -> is_NaN(r)) and (((is_finite(x) and
+  is_infinite(y)) -> is_gen_zero(r)) and (((is_infinite(x) and
+  is_finite(y)) -> is_infinite(r)) and (((is_infinite(x) and
+  is_infinite(y)) -> is_NaN(r)) and (((is_finite(x) and (is_finite(y) and
+  ((not (value(y) = 0.0)) and no_overflow(m, (value(x) / value(y)))))) ->
+  (is_finite(r) and (value(r) = float64(m, (value(x) / value(y)))))) and
+  (((is_finite(x) and (is_finite(y) and ((not (value(y) = 0.0)) and
+  (not no_overflow(m, (value(x) / value(y))))))) -> overflow_value(m, r)) and
+  (((is_finite(x) and (is_gen_zero(y) and (not (value(x) = 0.0)))) ->
+  is_infinite(r)) and (((is_gen_zero(x) and is_gen_zero(y)) -> is_NaN(r)) and
+  ((not is_NaN(r)) -> product_sign(r, x, y))))))))))
+
+predicate fma_post(m: fpa_rounding_mode, x: double, y: double, z: double,
+  r: double) = (((is_NaN(x) or (is_NaN(y) or is_NaN(z))) -> is_NaN(r)) and
+  (((is_gen_zero(x) and is_infinite(y)) -> is_NaN(r)) and
+  (((is_infinite(x) and is_gen_zero(y)) -> is_NaN(r)) and (((is_finite(x) and
+  ((not (value(x) = 0.0)) and (is_infinite(y) and is_finite(z)))) ->
+  (is_infinite(r) and product_sign(r, x, y))) and (((is_finite(x) and
+  ((not (value(x) = 0.0)) and (is_infinite(y) and is_infinite(z)))) ->
+  ((product_sign(z, x, y) -> (is_infinite(r) and same_sign(r, z))) and
+  ((not product_sign(z, x, y)) -> is_NaN(r)))) and (((is_infinite(x) and
+  (is_finite(y) and ((not (value(y) = 0.0)) and is_finite(z)))) ->
+  (is_infinite(r) and product_sign(r, x, y))) and (((is_infinite(x) and
+  (is_finite(y) and ((not (value(y) = 0.0)) and is_infinite(z)))) ->
+  ((product_sign(z, x, y) -> (is_infinite(r) and same_sign(r, z))) and
+  ((not product_sign(z, x, y)) -> is_NaN(r)))) and (((is_infinite(x) and
+  (is_infinite(y) and is_finite(z))) -> (is_infinite(r) and product_sign(r,
+  x, y))) and (((is_finite(x) and (is_finite(y) and is_infinite(z))) ->
+  (is_infinite(r) and same_sign(r, z))) and (((is_infinite(x) and
+  (is_infinite(y) and is_infinite(z))) -> ((product_sign(z, x, y) ->
+  (is_infinite(r) and same_sign(r, z))) and ((not product_sign(z, x, y)) ->
+  is_NaN(r)))) and (((is_finite(x) and (is_finite(y) and (is_finite(z) and
+  no_overflow(m, ((value(x) * value(y)) + value(z)))))) -> (is_finite(r) and
+  ((value(r) = float64(m, ((value(x) * value(y)) + value(z)))) and
+  ((product_sign(z, x, y) -> same_sign(r, z)) and ((not product_sign(z, x,
+  y)) -> ((((value(x) * value(y)) + value(z)) = 0.0) -> (((m = Down) ->
+  (sign1(r) = Neg)) and ((not (m = Down)) -> (sign1(r) = Pos))))))))) and
+  ((is_finite(x) and (is_finite(y) and (is_finite(z) and (not no_overflow(m,
+  ((value(x) * value(y)) + value(z))))))) -> (same_sign_real(sign1(r),
+  ((value(x) * value(y)) + value(z))) and overflow_value(m, r))))))))))))))
+
+predicate sqrt_post(m: fpa_rounding_mode, x: double, r: double) =
+  ((is_NaN(x) -> is_NaN(r)) and ((is_plus_infinity(x) ->
+  is_plus_infinity(r)) and ((is_minus_infinity(x) -> is_NaN(r)) and
+  (((is_finite(x) and (value(x) <  0.0)) -> is_NaN(r)) and
+  (((is_finite(x) and (value(x) = 0.0)) -> (is_finite(r) and
+  ((value(r) = 0.0) and same_sign(r, x)))) and ((is_finite(x) and
+  (0.0 <  value(x))) -> (is_finite(r) and
+  ((value(r) = float64(m, sqrt_real(value(x)))) and (sign1(r) = Pos)))))))))
+
+predicate roundToIntegral_post(m: fpa_rounding_mode, x: double, r: double) =
+  ((is_NaN(x) -> is_NaN(r)) and ((is_infinite(x) -> (is_infinite(r) and
+  same_sign(x, r))) and (is_finite(x) -> (same_sign(x, r) and
+  (value(r) = real_of_int(integer_round(m, value(x))))))))
+
+predicate of_real_exact_post(x: real, r: double) = (is_finite(r) and
+  (value(r) = x))
+
+predicate le(x: double, y: double) = ((is_finite(x) and (is_finite(y) and
+  (value(x) <= value(y)))) or ((is_minus_infinity(x) and is_not_NaN(y)) or
+  (is_not_NaN(x) and is_plus_infinity(y))))
+
+predicate lt(x: double, y: double) = ((is_finite(x) and (is_finite(y) and
+  (value(x) <  value(y)))) or ((is_minus_infinity(x) and (is_not_NaN(y) and
+  (not is_minus_infinity(y)))) or (is_not_NaN(x) and
+  ((not is_plus_infinity(x)) and is_plus_infinity(y)))))
+
+predicate eq(x: double, y: double) = ((is_finite(x) and (is_finite(y) and
+  (value(x) = value(y)))) or (is_infinite(x) and (is_infinite(y) and
+  same_sign(x, y))))
+
+predicate ne(x: double, y: double) = (not eq(x, y))
+
+predicate rem_post(x: double, y: double, r: double) = (((is_NaN(x) or
+  (is_NaN(y) or (is_infinite(x) or is_gen_zero(y)))) -> is_NaN(r)) and
+  ((not (is_NaN(x) or (is_NaN(y) or (is_infinite(x) or is_gen_zero(y))))) ->
+  ((is_infinite(y) -> eq(x, r)) and ((not is_infinite(y)) ->
+  (is_finite(r) and (((value(r) = 0.0) -> same_sign(x, r)) and
+  (value(r) = (value(x) - (value(y) * real_of_int(integer_round(NearestTiesToEven, (value(x) / value(y)))))))))))))
+
+axiom le_lt_trans :
+  (forall x:double. forall y:double. forall z:double. ((le(x, y) and lt(y,
+  z)) -> lt(x, z)))
+
+axiom lt_le_trans :
+  (forall x:double. forall y:double. forall z:double. ((lt(x, y) and le(y,
+  z)) -> lt(x, z)))
+
+axiom le_ge_asym :
+  (forall x:double. forall y:double. ((le(x, y) and le(y, x)) -> eq(x, y)))
+
+axiom not_lt_ge :
+  (forall x:double. forall y:double. (((not lt(x, y)) and (is_not_NaN(x) and
+  is_not_NaN(y))) -> le(y, x)))
+
+axiom not_gt_le :
+  (forall x:double. forall y:double. (((not lt(y, x)) and (is_not_NaN(x) and
+  is_not_NaN(y))) -> le(x, y)))
+
+predicate smt2_double_eq(x: double, y: double) = (((is_finite(x) and
+  (is_finite(y) and ((value(x) = value(y)) and same_sign(x, y)))) or
+  (is_infinite(x) and (is_infinite(y) and same_sign(x, y)))) or
+  (is_NaN(x) and is_NaN(y)))
+
+logic b492 : double
+
+logic b3444 : double
+
+logic b3620 : double
+
+logic b526 : double
+
+logic b3077 : double
+
+logic b3655 : double
+
+logic b4264 : double
+
+logic b3132 : double
+
+logic b3016 : double
+
+logic b3257 : double
+
+logic b4138 : double
+
+logic b3500 : double
+
+logic b3505 : double
+
+logic b3428 : double
+
+logic b3745 : double
+
+logic b3685 : double
+
+logic b4048 : double
+
+logic b3372 : double
+
+logic b535 : double
+
+logic b3836 : double
+
+logic b4274 : double
+
+logic b3867 : double
+
+logic b3565 : double
+
+logic b3102 : double
+
+logic b3928 : double
+
+logic b3317 : double
+
+logic b3710 : double
+
+logic b3470 : double
+
+logic b3047 : double
+
+logic b504 : double
+
+logic b3963 : double
+
+logic b4083 : double
+
+logic b3475 : double
+
+logic b3958 : double
+
+logic b3560 : double
+
+logic b1363 : double
+
+logic b4113 : double
+
+logic b3222 : double
+
+logic b3770 : double
+
+logic b3072 : double
+
+logic b3903 : double
+
+logic b3000 : double
+
+logic b3846 : double
+
+logic b3137 : double
+
+logic b3775 : double
+
+logic b3342 : double
+
+logic b3011 : double
+
+logic b3898 : double
+
+logic b3197 : double
+
+logic b3530 : double
+
+logic b4203 : double
+
+logic b3740 : double
+
+logic b3439 : double
+
+logic b4173 : double
+
+logic b3856 : double
+
+logic b4143 : double
+
+logic b3347 : double
+
+logic b3282 : double
+
+logic b4018 : double
+
+logic b538 : double
+
+logic b4078 : double
+
+logic b3988 : double
+
+logic b4168 : double
+
+logic b3625 : double
+
+logic b3595 : double
+
+logic b3872 : double
+
+logic b3287 : double
+
+logic b3312 : double
+
+logic b3107 : double
+
+logic b3252 : double
+
+logic b3715 : double
+
+logic b4053 : double
+
+logic b3650 : double
+
+logic b3162 : double
+
+logic b3167 : double
+
+logic b3535 : double
+
+logic b3042 : double
+
+logic b3192 : double
+
+logic b3800 : double
+
+logic b3408 : double
+
+logic b3993 : double
+
+logic b3590 : double
+
+logic b3227 : double
+
+logic b3680 : double
+
+logic b4228 : double
+
+logic b4023 : double
+
+logic b3933 : double
+
+logic b4198 : double
+
+logic b3418 : double
+
+logic b4108 : double
+
+logic d_mul__t_3__t_9__t_10 : double
+
+axiom eq_0 : mul_post(NearestTiesToEven, b3000, b526, d_mul__t_3__t_9__t_10)
+
+logic ust_11 : double
+
+axiom eq_1 : mul_post(NearestTiesToEven, b3000, b526, ust_11)
+
+logic d_mul__t_3__t_9__t_9 : double
+
+axiom eq_2 : mul_post(NearestTiesToEven, b3000, b3000, d_mul__t_3__t_9__t_9)
+
+logic ust_12 : double
+
+axiom eq_3 : mul_post(NearestTiesToEven, b3000, b3000, ust_12)
+
+logic d_neg__t_12 : double
+
+axiom eq_4 : neg_post(ust_12, d_neg__t_12)
+
+logic ust_13 : double
+
+axiom eq_5 : neg_post(ust_12, ust_13)
+
+logic d_add__t_3__t_13__t_14 : double
+
+axiom eq_6 : add_post(NearestTiesToEven, ust_13, b1363,
+  d_add__t_3__t_13__t_14)
+
+logic ust_15 : double
+
+axiom eq_7 : add_post(NearestTiesToEven, ust_13, b1363, ust_15)
+
+logic d_div__t_3__t_15__t_11 : double
+
+axiom eq_8 : div_post(NearestTiesToEven, ust_15, ust_11,
+  d_div__t_3__t_15__t_11)
+
+logic ust_16 : double
+
+axiom eq_9 : div_post(NearestTiesToEven, ust_15, ust_11, ust_16)
+
+logic d_add__t_3__t_9__t_16 : double
+
+axiom eq_10 : add_post(NearestTiesToEven, b3000, ust_16,
+  d_add__t_3__t_9__t_16)
+
+logic ust_17 : double
+
+axiom eq_11 : add_post(NearestTiesToEven, b3000, ust_16, ust_17)
+
+logic d_mul__t_3__t_17__t_17 : double
+
+axiom eq_12 : mul_post(NearestTiesToEven, ust_17, ust_17,
+  d_mul__t_3__t_17__t_17)
+
+logic ust_18 : double
+
+axiom eq_13 : mul_post(NearestTiesToEven, ust_17, ust_17, ust_18)
+
+logic d_neg__t_18 : double
+
+axiom eq_14 : neg_post(ust_18, d_neg__t_18)
+
+logic ust_19 : double
+
+axiom eq_15 : neg_post(ust_18, ust_19)
+
+logic d_add__t_3__t_14__t_19 : double
+
+axiom eq_16 : add_post(NearestTiesToEven, b1363, ust_19,
+  d_add__t_3__t_14__t_19)
+
+logic ust_20 : double
+
+axiom eq_17 : add_post(NearestTiesToEven, b1363, ust_19, ust_20)
+
+predicate ust_23() = (not smt2_double_eq(ust_20, b3011))
+
+logic d_mul__t_3__t_10__t_24 : double
+
+axiom eq_18 : mul_post(NearestTiesToEven, b526, b3016,
+  d_mul__t_3__t_10__t_24)
+
+logic ust_25 : double
+
+axiom eq_19 : mul_post(NearestTiesToEven, b526, b3016, ust_25)
+
+logic d_mul__t_3__t_24__t_24 : double
+
+axiom eq_20 : mul_post(NearestTiesToEven, b3016, b3016,
+  d_mul__t_3__t_24__t_24)
+
+logic ust_26 : double
+
+axiom eq_21 : mul_post(NearestTiesToEven, b3016, b3016, ust_26)
+
+logic d_neg__t_26 : double
+
+axiom eq_22 : neg_post(ust_26, d_neg__t_26)
+
+logic ust_27 : double
+
+axiom eq_23 : neg_post(ust_26, ust_27)
+
+logic d_add__t_3__t_14__t_27 : double
+
+axiom eq_24 : add_post(NearestTiesToEven, b1363, ust_27,
+  d_add__t_3__t_14__t_27)
+
+logic ust_28 : double
+
+axiom eq_25 : add_post(NearestTiesToEven, b1363, ust_27, ust_28)
+
+logic d_div__t_3__t_28__t_25 : double
+
+axiom eq_26 : div_post(NearestTiesToEven, ust_28, ust_25,
+  d_div__t_3__t_28__t_25)
+
+logic ust_29 : double
+
+axiom eq_27 : div_post(NearestTiesToEven, ust_28, ust_25, ust_29)
+
+logic d_add__t_3__t_24__t_29 : double
+
+axiom eq_28 : add_post(NearestTiesToEven, b3016, ust_29,
+  d_add__t_3__t_24__t_29)
+
+logic ust_30 : double
+
+axiom eq_29 : add_post(NearestTiesToEven, b3016, ust_29, ust_30)
+
+predicate ust_32() = (not smt2_double_eq(b3000, ust_30))
+
+logic d_mul__t_3__t_30__t_30 : double
+
+axiom eq_30 : mul_post(NearestTiesToEven, ust_30, ust_30,
+  d_mul__t_3__t_30__t_30)
+
+logic ust_33 : double
+
+axiom eq_31 : mul_post(NearestTiesToEven, ust_30, ust_30, ust_33)
+
+logic d_neg__t_33 : double
+
+axiom eq_32 : neg_post(ust_33, d_neg__t_33)
+
+logic ust_34 : double
+
+axiom eq_33 : neg_post(ust_33, ust_34)
+
+logic d_add__t_3__t_14__t_34 : double
+
+axiom eq_34 : add_post(NearestTiesToEven, b1363, ust_34,
+  d_add__t_3__t_14__t_34)
+
+logic ust_35 : double
+
+axiom eq_35 : add_post(NearestTiesToEven, b1363, ust_34, ust_35)
+
+predicate ust_38() = (not smt2_double_eq(ust_35, b3042))
+
+logic d_mul__t_3__t_10__t_39 : double
+
+axiom eq_36 : mul_post(NearestTiesToEven, b526, b3047,
+  d_mul__t_3__t_10__t_39)
+
+logic ust_40 : double
+
+axiom eq_37 : mul_post(NearestTiesToEven, b526, b3047, ust_40)
+
+logic d_mul__t_3__t_39__t_39 : double
+
+axiom eq_38 : mul_post(NearestTiesToEven, b3047, b3047,
+  d_mul__t_3__t_39__t_39)
+
+logic ust_41 : double
+
+axiom eq_39 : mul_post(NearestTiesToEven, b3047, b3047, ust_41)
+
+logic d_neg__t_41 : double
+
+axiom eq_40 : neg_post(ust_41, d_neg__t_41)
+
+logic ust_42 : double
+
+axiom eq_41 : neg_post(ust_41, ust_42)
+
+logic d_add__t_3__t_14__t_42 : double
+
+axiom eq_42 : add_post(NearestTiesToEven, b1363, ust_42,
+  d_add__t_3__t_14__t_42)
+
+logic ust_43 : double
+
+axiom eq_43 : add_post(NearestTiesToEven, b1363, ust_42, ust_43)
+
+logic d_div__t_3__t_43__t_40 : double
+
+axiom eq_44 : div_post(NearestTiesToEven, ust_43, ust_40,
+  d_div__t_3__t_43__t_40)
+
+logic ust_44 : double
+
+axiom eq_45 : div_post(NearestTiesToEven, ust_43, ust_40, ust_44)
+
+logic d_add__t_3__t_39__t_44 : double
+
+axiom eq_46 : add_post(NearestTiesToEven, b3047, ust_44,
+  d_add__t_3__t_39__t_44)
+
+logic ust_45 : double
+
+axiom eq_47 : add_post(NearestTiesToEven, b3047, ust_44, ust_45)
+
+predicate ust_47() = (not smt2_double_eq(b3016, ust_45))
+
+logic d_mul__t_3__t_45__t_45 : double
+
+axiom eq_48 : mul_post(NearestTiesToEven, ust_45, ust_45,
+  d_mul__t_3__t_45__t_45)
+
+logic ust_48 : double
+
+axiom eq_49 : mul_post(NearestTiesToEven, ust_45, ust_45, ust_48)
+
+logic d_neg__t_48 : double
+
+axiom eq_50 : neg_post(ust_48, d_neg__t_48)
+
+logic ust_49 : double
+
+axiom eq_51 : neg_post(ust_48, ust_49)
+
+logic d_add__t_3__t_14__t_49 : double
+
+axiom eq_52 : add_post(NearestTiesToEven, b1363, ust_49,
+  d_add__t_3__t_14__t_49)
+
+logic ust_50 : double
+
+axiom eq_53 : add_post(NearestTiesToEven, b1363, ust_49, ust_50)
+
+predicate ust_53() = (not smt2_double_eq(ust_50, b3072))
+
+logic d_mul__t_3__t_10__t_54 : double
+
+axiom eq_54 : mul_post(NearestTiesToEven, b526, b3077,
+  d_mul__t_3__t_10__t_54)
+
+logic ust_55 : double
+
+axiom eq_55 : mul_post(NearestTiesToEven, b526, b3077, ust_55)
+
+logic d_mul__t_3__t_54__t_54 : double
+
+axiom eq_56 : mul_post(NearestTiesToEven, b3077, b3077,
+  d_mul__t_3__t_54__t_54)
+
+logic ust_56 : double
+
+axiom eq_57 : mul_post(NearestTiesToEven, b3077, b3077, ust_56)
+
+logic d_neg__t_56 : double
+
+axiom eq_58 : neg_post(ust_56, d_neg__t_56)
+
+logic ust_57 : double
+
+axiom eq_59 : neg_post(ust_56, ust_57)
+
+logic d_add__t_3__t_14__t_57 : double
+
+axiom eq_60 : add_post(NearestTiesToEven, b1363, ust_57,
+  d_add__t_3__t_14__t_57)
+
+logic ust_58 : double
+
+axiom eq_61 : add_post(NearestTiesToEven, b1363, ust_57, ust_58)
+
+logic d_div__t_3__t_58__t_55 : double
+
+axiom eq_62 : div_post(NearestTiesToEven, ust_58, ust_55,
+  d_div__t_3__t_58__t_55)
+
+logic ust_59 : double
+
+axiom eq_63 : div_post(NearestTiesToEven, ust_58, ust_55, ust_59)
+
+logic d_add__t_3__t_54__t_59 : double
+
+axiom eq_64 : add_post(NearestTiesToEven, b3077, ust_59,
+  d_add__t_3__t_54__t_59)
+
+logic ust_60 : double
+
+axiom eq_65 : add_post(NearestTiesToEven, b3077, ust_59, ust_60)
+
+predicate ust_62() = (not smt2_double_eq(b3047, ust_60))
+
+logic d_mul__t_3__t_60__t_60 : double
+
+axiom eq_66 : mul_post(NearestTiesToEven, ust_60, ust_60,
+  d_mul__t_3__t_60__t_60)
+
+logic ust_63 : double
+
+axiom eq_67 : mul_post(NearestTiesToEven, ust_60, ust_60, ust_63)
+
+logic d_neg__t_63 : double
+
+axiom eq_68 : neg_post(ust_63, d_neg__t_63)
+
+logic ust_64 : double
+
+axiom eq_69 : neg_post(ust_63, ust_64)
+
+logic d_add__t_3__t_14__t_64 : double
+
+axiom eq_70 : add_post(NearestTiesToEven, b1363, ust_64,
+  d_add__t_3__t_14__t_64)
+
+logic ust_65 : double
+
+axiom eq_71 : add_post(NearestTiesToEven, b1363, ust_64, ust_65)
+
+predicate ust_68() = (not smt2_double_eq(ust_65, b3102))
+
+logic d_mul__t_3__t_10__t_69 : double
+
+axiom eq_72 : mul_post(NearestTiesToEven, b526, b3107,
+  d_mul__t_3__t_10__t_69)
+
+logic ust_70 : double
+
+axiom eq_73 : mul_post(NearestTiesToEven, b526, b3107, ust_70)
+
+logic d_mul__t_3__t_69__t_69 : double
+
+axiom eq_74 : mul_post(NearestTiesToEven, b3107, b3107,
+  d_mul__t_3__t_69__t_69)
+
+logic ust_71 : double
+
+axiom eq_75 : mul_post(NearestTiesToEven, b3107, b3107, ust_71)
+
+logic d_neg__t_71 : double
+
+axiom eq_76 : neg_post(ust_71, d_neg__t_71)
+
+logic ust_72 : double
+
+axiom eq_77 : neg_post(ust_71, ust_72)
+
+logic d_add__t_3__t_14__t_72 : double
+
+axiom eq_78 : add_post(NearestTiesToEven, b1363, ust_72,
+  d_add__t_3__t_14__t_72)
+
+logic ust_73 : double
+
+axiom eq_79 : add_post(NearestTiesToEven, b1363, ust_72, ust_73)
+
+logic d_div__t_3__t_73__t_70 : double
+
+axiom eq_80 : div_post(NearestTiesToEven, ust_73, ust_70,
+  d_div__t_3__t_73__t_70)
+
+logic ust_74 : double
+
+axiom eq_81 : div_post(NearestTiesToEven, ust_73, ust_70, ust_74)
+
+logic d_add__t_3__t_69__t_74 : double
+
+axiom eq_82 : add_post(NearestTiesToEven, b3107, ust_74,
+  d_add__t_3__t_69__t_74)
+
+logic ust_75 : double
+
+axiom eq_83 : add_post(NearestTiesToEven, b3107, ust_74, ust_75)
+
+predicate ust_77() = (not smt2_double_eq(b3077, ust_75))
+
+logic d_mul__t_3__t_75__t_75 : double
+
+axiom eq_84 : mul_post(NearestTiesToEven, ust_75, ust_75,
+  d_mul__t_3__t_75__t_75)
+
+logic ust_78 : double
+
+axiom eq_85 : mul_post(NearestTiesToEven, ust_75, ust_75, ust_78)
+
+logic d_neg__t_78 : double
+
+axiom eq_86 : neg_post(ust_78, d_neg__t_78)
+
+logic ust_79 : double
+
+axiom eq_87 : neg_post(ust_78, ust_79)
+
+logic d_add__t_3__t_14__t_79 : double
+
+axiom eq_88 : add_post(NearestTiesToEven, b1363, ust_79,
+  d_add__t_3__t_14__t_79)
+
+logic ust_80 : double
+
+axiom eq_89 : add_post(NearestTiesToEven, b1363, ust_79, ust_80)
+
+predicate ust_83() = (not smt2_double_eq(ust_80, b3132))
+
+logic d_mul__t_3__t_10__t_84 : double
+
+axiom eq_90 : mul_post(NearestTiesToEven, b526, b3137,
+  d_mul__t_3__t_10__t_84)
+
+logic ust_85 : double
+
+axiom eq_91 : mul_post(NearestTiesToEven, b526, b3137, ust_85)
+
+logic d_mul__t_3__t_84__t_84 : double
+
+axiom eq_92 : mul_post(NearestTiesToEven, b3137, b3137,
+  d_mul__t_3__t_84__t_84)
+
+logic ust_86 : double
+
+axiom eq_93 : mul_post(NearestTiesToEven, b3137, b3137, ust_86)
+
+logic d_neg__t_86 : double
+
+axiom eq_94 : neg_post(ust_86, d_neg__t_86)
+
+logic ust_87 : double
+
+axiom eq_95 : neg_post(ust_86, ust_87)
+
+logic d_add__t_3__t_14__t_87 : double
+
+axiom eq_96 : add_post(NearestTiesToEven, b1363, ust_87,
+  d_add__t_3__t_14__t_87)
+
+logic ust_88 : double
+
+axiom eq_97 : add_post(NearestTiesToEven, b1363, ust_87, ust_88)
+
+logic d_div__t_3__t_88__t_85 : double
+
+axiom eq_98 : div_post(NearestTiesToEven, ust_88, ust_85,
+  d_div__t_3__t_88__t_85)
+
+logic ust_89 : double
+
+axiom eq_99 : div_post(NearestTiesToEven, ust_88, ust_85, ust_89)
+
+logic d_add__t_3__t_84__t_89 : double
+
+axiom eq_100 : add_post(NearestTiesToEven, b3137, ust_89,
+  d_add__t_3__t_84__t_89)
+
+logic ust_90 : double
+
+axiom eq_101 : add_post(NearestTiesToEven, b3137, ust_89, ust_90)
+
+predicate ust_92() = (not smt2_double_eq(b3107, ust_90))
+
+logic d_mul__t_3__t_90__t_90 : double
+
+axiom eq_102 : mul_post(NearestTiesToEven, ust_90, ust_90,
+  d_mul__t_3__t_90__t_90)
+
+logic ust_93 : double
+
+axiom eq_103 : mul_post(NearestTiesToEven, ust_90, ust_90, ust_93)
+
+logic d_neg__t_93 : double
+
+axiom eq_104 : neg_post(ust_93, d_neg__t_93)
+
+logic ust_94 : double
+
+axiom eq_105 : neg_post(ust_93, ust_94)
+
+logic d_add__t_3__t_14__t_94 : double
+
+axiom eq_106 : add_post(NearestTiesToEven, b1363, ust_94,
+  d_add__t_3__t_14__t_94)
+
+logic ust_95 : double
+
+axiom eq_107 : add_post(NearestTiesToEven, b1363, ust_94, ust_95)
+
+predicate ust_98() = (not smt2_double_eq(ust_95, b3162))
+
+logic d_mul__t_3__t_10__t_99 : double
+
+axiom eq_108 : mul_post(NearestTiesToEven, b526, b3167,
+  d_mul__t_3__t_10__t_99)
+
+logic ust_100 : double
+
+axiom eq_109 : mul_post(NearestTiesToEven, b526, b3167, ust_100)
+
+logic d_mul__t_3__t_99__t_99 : double
+
+axiom eq_110 : mul_post(NearestTiesToEven, b3167, b3167,
+  d_mul__t_3__t_99__t_99)
+
+logic ust_101 : double
+
+axiom eq_111 : mul_post(NearestTiesToEven, b3167, b3167, ust_101)
+
+logic d_neg__t_101 : double
+
+axiom eq_112 : neg_post(ust_101, d_neg__t_101)
+
+logic ust_102 : double
+
+axiom eq_113 : neg_post(ust_101, ust_102)
+
+logic d_add__t_3__t_14__t_102 : double
+
+axiom eq_114 : add_post(NearestTiesToEven, b1363, ust_102,
+  d_add__t_3__t_14__t_102)
+
+logic ust_103 : double
+
+axiom eq_115 : add_post(NearestTiesToEven, b1363, ust_102, ust_103)
+
+logic d_div__t_3__t_103__t_100 : double
+
+axiom eq_116 : div_post(NearestTiesToEven, ust_103, ust_100,
+  d_div__t_3__t_103__t_100)
+
+logic ust_104 : double
+
+axiom eq_117 : div_post(NearestTiesToEven, ust_103, ust_100, ust_104)
+
+logic d_add__t_3__t_99__t_104 : double
+
+axiom eq_118 : add_post(NearestTiesToEven, b3167, ust_104,
+  d_add__t_3__t_99__t_104)
+
+logic ust_105 : double
+
+axiom eq_119 : add_post(NearestTiesToEven, b3167, ust_104, ust_105)
+
+predicate ust_107() = (not smt2_double_eq(b3137, ust_105))
+
+logic d_mul__t_3__t_105__t_105 : double
+
+axiom eq_120 : mul_post(NearestTiesToEven, ust_105, ust_105,
+  d_mul__t_3__t_105__t_105)
+
+logic ust_108 : double
+
+axiom eq_121 : mul_post(NearestTiesToEven, ust_105, ust_105, ust_108)
+
+logic d_neg__t_108 : double
+
+axiom eq_122 : neg_post(ust_108, d_neg__t_108)
+
+logic ust_109 : double
+
+axiom eq_123 : neg_post(ust_108, ust_109)
+
+logic d_add__t_3__t_14__t_109 : double
+
+axiom eq_124 : add_post(NearestTiesToEven, b1363, ust_109,
+  d_add__t_3__t_14__t_109)
+
+logic ust_110 : double
+
+axiom eq_125 : add_post(NearestTiesToEven, b1363, ust_109, ust_110)
+
+predicate ust_113() = (not smt2_double_eq(ust_110, b3192))
+
+logic d_mul__t_3__t_10__t_114 : double
+
+axiom eq_126 : mul_post(NearestTiesToEven, b526, b3197,
+  d_mul__t_3__t_10__t_114)
+
+logic ust_115 : double
+
+axiom eq_127 : mul_post(NearestTiesToEven, b526, b3197, ust_115)
+
+logic d_mul__t_3__t_114__t_114 : double
+
+axiom eq_128 : mul_post(NearestTiesToEven, b3197, b3197,
+  d_mul__t_3__t_114__t_114)
+
+logic ust_116 : double
+
+axiom eq_129 : mul_post(NearestTiesToEven, b3197, b3197, ust_116)
+
+logic d_neg__t_116 : double
+
+axiom eq_130 : neg_post(ust_116, d_neg__t_116)
+
+logic ust_117 : double
+
+axiom eq_131 : neg_post(ust_116, ust_117)
+
+logic d_add__t_3__t_14__t_117 : double
+
+axiom eq_132 : add_post(NearestTiesToEven, b1363, ust_117,
+  d_add__t_3__t_14__t_117)
+
+logic ust_118 : double
+
+axiom eq_133 : add_post(NearestTiesToEven, b1363, ust_117, ust_118)
+
+logic d_div__t_3__t_118__t_115 : double
+
+axiom eq_134 : div_post(NearestTiesToEven, ust_118, ust_115,
+  d_div__t_3__t_118__t_115)
+
+logic ust_119 : double
+
+axiom eq_135 : div_post(NearestTiesToEven, ust_118, ust_115, ust_119)
+
+logic d_add__t_3__t_114__t_119 : double
+
+axiom eq_136 : add_post(NearestTiesToEven, b3197, ust_119,
+  d_add__t_3__t_114__t_119)
+
+logic ust_120 : double
+
+axiom eq_137 : add_post(NearestTiesToEven, b3197, ust_119, ust_120)
+
+predicate ust_122() = (not smt2_double_eq(b3167, ust_120))
+
+logic d_mul__t_3__t_120__t_120 : double
+
+axiom eq_138 : mul_post(NearestTiesToEven, ust_120, ust_120,
+  d_mul__t_3__t_120__t_120)
+
+logic ust_123 : double
+
+axiom eq_139 : mul_post(NearestTiesToEven, ust_120, ust_120, ust_123)
+
+logic d_neg__t_123 : double
+
+axiom eq_140 : neg_post(ust_123, d_neg__t_123)
+
+logic ust_124 : double
+
+axiom eq_141 : neg_post(ust_123, ust_124)
+
+logic d_add__t_3__t_14__t_124 : double
+
+axiom eq_142 : add_post(NearestTiesToEven, b1363, ust_124,
+  d_add__t_3__t_14__t_124)
+
+logic ust_125 : double
+
+axiom eq_143 : add_post(NearestTiesToEven, b1363, ust_124, ust_125)
+
+predicate ust_128() = (not smt2_double_eq(ust_125, b3222))
+
+logic d_mul__t_3__t_10__t_129 : double
+
+axiom eq_144 : mul_post(NearestTiesToEven, b526, b3227,
+  d_mul__t_3__t_10__t_129)
+
+logic ust_130 : double
+
+axiom eq_145 : mul_post(NearestTiesToEven, b526, b3227, ust_130)
+
+logic d_mul__t_3__t_129__t_129 : double
+
+axiom eq_146 : mul_post(NearestTiesToEven, b3227, b3227,
+  d_mul__t_3__t_129__t_129)
+
+logic ust_131 : double
+
+axiom eq_147 : mul_post(NearestTiesToEven, b3227, b3227, ust_131)
+
+logic d_neg__t_131 : double
+
+axiom eq_148 : neg_post(ust_131, d_neg__t_131)
+
+logic ust_132 : double
+
+axiom eq_149 : neg_post(ust_131, ust_132)
+
+logic d_add__t_3__t_14__t_132 : double
+
+axiom eq_150 : add_post(NearestTiesToEven, b1363, ust_132,
+  d_add__t_3__t_14__t_132)
+
+logic ust_133 : double
+
+axiom eq_151 : add_post(NearestTiesToEven, b1363, ust_132, ust_133)
+
+logic d_div__t_3__t_133__t_130 : double
+
+axiom eq_152 : div_post(NearestTiesToEven, ust_133, ust_130,
+  d_div__t_3__t_133__t_130)
+
+logic ust_134 : double
+
+axiom eq_153 : div_post(NearestTiesToEven, ust_133, ust_130, ust_134)
+
+logic d_add__t_3__t_129__t_134 : double
+
+axiom eq_154 : add_post(NearestTiesToEven, b3227, ust_134,
+  d_add__t_3__t_129__t_134)
+
+logic ust_135 : double
+
+axiom eq_155 : add_post(NearestTiesToEven, b3227, ust_134, ust_135)
+
+predicate ust_137() = (not smt2_double_eq(b3197, ust_135))
+
+logic d_mul__t_3__t_135__t_135 : double
+
+axiom eq_156 : mul_post(NearestTiesToEven, ust_135, ust_135,
+  d_mul__t_3__t_135__t_135)
+
+logic ust_138 : double
+
+axiom eq_157 : mul_post(NearestTiesToEven, ust_135, ust_135, ust_138)
+
+logic d_neg__t_138 : double
+
+axiom eq_158 : neg_post(ust_138, d_neg__t_138)
+
+logic ust_139 : double
+
+axiom eq_159 : neg_post(ust_138, ust_139)
+
+logic d_add__t_3__t_14__t_139 : double
+
+axiom eq_160 : add_post(NearestTiesToEven, b1363, ust_139,
+  d_add__t_3__t_14__t_139)
+
+logic ust_140 : double
+
+axiom eq_161 : add_post(NearestTiesToEven, b1363, ust_139, ust_140)
+
+predicate ust_143() = (not smt2_double_eq(ust_140, b3252))
+
+logic d_mul__t_3__t_10__t_144 : double
+
+axiom eq_162 : mul_post(NearestTiesToEven, b526, b3257,
+  d_mul__t_3__t_10__t_144)
+
+logic ust_145 : double
+
+axiom eq_163 : mul_post(NearestTiesToEven, b526, b3257, ust_145)
+
+logic d_mul__t_3__t_144__t_144 : double
+
+axiom eq_164 : mul_post(NearestTiesToEven, b3257, b3257,
+  d_mul__t_3__t_144__t_144)
+
+logic ust_146 : double
+
+axiom eq_165 : mul_post(NearestTiesToEven, b3257, b3257, ust_146)
+
+logic d_neg__t_146 : double
+
+axiom eq_166 : neg_post(ust_146, d_neg__t_146)
+
+logic ust_147 : double
+
+axiom eq_167 : neg_post(ust_146, ust_147)
+
+logic d_add__t_3__t_14__t_147 : double
+
+axiom eq_168 : add_post(NearestTiesToEven, b1363, ust_147,
+  d_add__t_3__t_14__t_147)
+
+logic ust_148 : double
+
+axiom eq_169 : add_post(NearestTiesToEven, b1363, ust_147, ust_148)
+
+logic d_div__t_3__t_148__t_145 : double
+
+axiom eq_170 : div_post(NearestTiesToEven, ust_148, ust_145,
+  d_div__t_3__t_148__t_145)
+
+logic ust_149 : double
+
+axiom eq_171 : div_post(NearestTiesToEven, ust_148, ust_145, ust_149)
+
+logic d_add__t_3__t_144__t_149 : double
+
+axiom eq_172 : add_post(NearestTiesToEven, b3257, ust_149,
+  d_add__t_3__t_144__t_149)
+
+logic ust_150 : double
+
+axiom eq_173 : add_post(NearestTiesToEven, b3257, ust_149, ust_150)
+
+logic d_mul__t_3__t_150__t_150 : double
+
+axiom eq_174 : mul_post(NearestTiesToEven, ust_150, ust_150,
+  d_mul__t_3__t_150__t_150)
+
+logic ust_151 : double
+
+axiom eq_175 : mul_post(NearestTiesToEven, ust_150, ust_150, ust_151)
+
+logic d_neg__t_151 : double
+
+axiom eq_176 : neg_post(ust_151, d_neg__t_151)
+
+logic ust_152 : double
+
+axiom eq_177 : neg_post(ust_151, ust_152)
+
+logic d_add__t_3__t_14__t_152 : double
+
+axiom eq_178 : add_post(NearestTiesToEven, b1363, ust_152,
+  d_add__t_3__t_14__t_152)
+
+logic ust_153 : double
+
+axiom eq_179 : add_post(NearestTiesToEven, b1363, ust_152, ust_153)
+
+predicate ust_156() = (not smt2_double_eq(ust_153, b3282))
+
+logic d_mul__t_3__t_10__t_157 : double
+
+axiom eq_180 : mul_post(NearestTiesToEven, b526, b3287,
+  d_mul__t_3__t_10__t_157)
+
+logic ust_158 : double
+
+axiom eq_181 : mul_post(NearestTiesToEven, b526, b3287, ust_158)
+
+logic d_mul__t_3__t_157__t_157 : double
+
+axiom eq_182 : mul_post(NearestTiesToEven, b3287, b3287,
+  d_mul__t_3__t_157__t_157)
+
+logic ust_159 : double
+
+axiom eq_183 : mul_post(NearestTiesToEven, b3287, b3287, ust_159)
+
+logic d_neg__t_159 : double
+
+axiom eq_184 : neg_post(ust_159, d_neg__t_159)
+
+logic ust_160 : double
+
+axiom eq_185 : neg_post(ust_159, ust_160)
+
+logic d_add__t_3__t_14__t_160 : double
+
+axiom eq_186 : add_post(NearestTiesToEven, b1363, ust_160,
+  d_add__t_3__t_14__t_160)
+
+logic ust_161 : double
+
+axiom eq_187 : add_post(NearestTiesToEven, b1363, ust_160, ust_161)
+
+logic d_div__t_3__t_161__t_158 : double
+
+axiom eq_188 : div_post(NearestTiesToEven, ust_161, ust_158,
+  d_div__t_3__t_161__t_158)
+
+logic ust_162 : double
+
+axiom eq_189 : div_post(NearestTiesToEven, ust_161, ust_158, ust_162)
+
+logic d_add__t_3__t_157__t_162 : double
+
+axiom eq_190 : add_post(NearestTiesToEven, b3287, ust_162,
+  d_add__t_3__t_157__t_162)
+
+logic ust_163 : double
+
+axiom eq_191 : add_post(NearestTiesToEven, b3287, ust_162, ust_163)
+
+predicate ust_165() = (not smt2_double_eq(b3257, ust_163))
+
+predicate ust_167() = (not smt2_double_eq(b3227, ust_150))
+
+logic d_mul__t_3__t_163__t_163 : double
+
+axiom eq_192 : mul_post(NearestTiesToEven, ust_163, ust_163,
+  d_mul__t_3__t_163__t_163)
+
+logic ust_168 : double
+
+axiom eq_193 : mul_post(NearestTiesToEven, ust_163, ust_163, ust_168)
+
+logic d_neg__t_168 : double
+
+axiom eq_194 : neg_post(ust_168, d_neg__t_168)
+
+logic ust_169 : double
+
+axiom eq_195 : neg_post(ust_168, ust_169)
+
+logic d_add__t_3__t_14__t_169 : double
+
+axiom eq_196 : add_post(NearestTiesToEven, b1363, ust_169,
+  d_add__t_3__t_14__t_169)
+
+logic ust_170 : double
+
+axiom eq_197 : add_post(NearestTiesToEven, b1363, ust_169, ust_170)
+
+predicate ust_173() = (not smt2_double_eq(ust_170, b3312))
+
+logic d_mul__t_3__t_10__t_174 : double
+
+axiom eq_198 : mul_post(NearestTiesToEven, b526, b3317,
+  d_mul__t_3__t_10__t_174)
+
+logic ust_175 : double
+
+axiom eq_199 : mul_post(NearestTiesToEven, b526, b3317, ust_175)
+
+logic d_mul__t_3__t_174__t_174 : double
+
+axiom eq_200 : mul_post(NearestTiesToEven, b3317, b3317,
+  d_mul__t_3__t_174__t_174)
+
+logic ust_176 : double
+
+axiom eq_201 : mul_post(NearestTiesToEven, b3317, b3317, ust_176)
+
+logic d_neg__t_176 : double
+
+axiom eq_202 : neg_post(ust_176, d_neg__t_176)
+
+logic ust_177 : double
+
+axiom eq_203 : neg_post(ust_176, ust_177)
+
+logic d_add__t_3__t_14__t_177 : double
+
+axiom eq_204 : add_post(NearestTiesToEven, b1363, ust_177,
+  d_add__t_3__t_14__t_177)
+
+logic ust_178 : double
+
+axiom eq_205 : add_post(NearestTiesToEven, b1363, ust_177, ust_178)
+
+logic d_div__t_3__t_178__t_175 : double
+
+axiom eq_206 : div_post(NearestTiesToEven, ust_178, ust_175,
+  d_div__t_3__t_178__t_175)
+
+logic ust_179 : double
+
+axiom eq_207 : div_post(NearestTiesToEven, ust_178, ust_175, ust_179)
+
+logic d_add__t_3__t_174__t_179 : double
+
+axiom eq_208 : add_post(NearestTiesToEven, b3317, ust_179,
+  d_add__t_3__t_174__t_179)
+
+logic ust_180 : double
+
+axiom eq_209 : add_post(NearestTiesToEven, b3317, ust_179, ust_180)
+
+predicate ust_182() = (not smt2_double_eq(b3287, ust_180))
+
+logic d_mul__t_3__t_180__t_180 : double
+
+axiom eq_210 : mul_post(NearestTiesToEven, ust_180, ust_180,
+  d_mul__t_3__t_180__t_180)
+
+logic ust_183 : double
+
+axiom eq_211 : mul_post(NearestTiesToEven, ust_180, ust_180, ust_183)
+
+logic d_neg__t_183 : double
+
+axiom eq_212 : neg_post(ust_183, d_neg__t_183)
+
+logic ust_184 : double
+
+axiom eq_213 : neg_post(ust_183, ust_184)
+
+logic d_add__t_3__t_14__t_184 : double
+
+axiom eq_214 : add_post(NearestTiesToEven, b1363, ust_184,
+  d_add__t_3__t_14__t_184)
+
+logic ust_185 : double
+
+axiom eq_215 : add_post(NearestTiesToEven, b1363, ust_184, ust_185)
+
+predicate ust_188() = (not smt2_double_eq(ust_185, b3342))
+
+logic d_mul__t_3__t_10__t_189 : double
+
+axiom eq_216 : mul_post(NearestTiesToEven, b526, b3347,
+  d_mul__t_3__t_10__t_189)
+
+logic ust_190 : double
+
+axiom eq_217 : mul_post(NearestTiesToEven, b526, b3347, ust_190)
+
+logic d_mul__t_3__t_189__t_189 : double
+
+axiom eq_218 : mul_post(NearestTiesToEven, b3347, b3347,
+  d_mul__t_3__t_189__t_189)
+
+logic ust_191 : double
+
+axiom eq_219 : mul_post(NearestTiesToEven, b3347, b3347, ust_191)
+
+logic d_neg__t_191 : double
+
+axiom eq_220 : neg_post(ust_191, d_neg__t_191)
+
+logic ust_192 : double
+
+axiom eq_221 : neg_post(ust_191, ust_192)
+
+logic d_add__t_3__t_14__t_192 : double
+
+axiom eq_222 : add_post(NearestTiesToEven, b1363, ust_192,
+  d_add__t_3__t_14__t_192)
+
+logic ust_193 : double
+
+axiom eq_223 : add_post(NearestTiesToEven, b1363, ust_192, ust_193)
+
+logic d_div__t_3__t_193__t_190 : double
+
+axiom eq_224 : div_post(NearestTiesToEven, ust_193, ust_190,
+  d_div__t_3__t_193__t_190)
+
+logic ust_194 : double
+
+axiom eq_225 : div_post(NearestTiesToEven, ust_193, ust_190, ust_194)
+
+logic d_add__t_3__t_189__t_194 : double
+
+axiom eq_226 : add_post(NearestTiesToEven, b3347, ust_194,
+  d_add__t_3__t_189__t_194)
+
+logic ust_195 : double
+
+axiom eq_227 : add_post(NearestTiesToEven, b3347, ust_194, ust_195)
+
+predicate ust_197() = (not smt2_double_eq(b3317, ust_195))
+
+logic d_mul__t_3__t_195__t_195 : double
+
+axiom eq_228 : mul_post(NearestTiesToEven, ust_195, ust_195,
+  d_mul__t_3__t_195__t_195)
+
+logic ust_198 : double
+
+axiom eq_229 : mul_post(NearestTiesToEven, ust_195, ust_195, ust_198)
+
+logic d_neg__t_198 : double
+
+axiom eq_230 : neg_post(ust_198, d_neg__t_198)
+
+logic ust_199 : double
+
+axiom eq_231 : neg_post(ust_198, ust_199)
+
+logic d_add__t_3__t_14__t_199 : double
+
+axiom eq_232 : add_post(NearestTiesToEven, b1363, ust_199,
+  d_add__t_3__t_14__t_199)
+
+logic ust_200 : double
+
+axiom eq_233 : add_post(NearestTiesToEven, b1363, ust_199, ust_200)
+
+predicate ust_203() = (not smt2_double_eq(ust_200, b3372))
+
+logic d_div__t_3__t_14__t_204 : double
+
+axiom eq_234 : div_post(NearestTiesToEven, b1363, b535,
+  d_div__t_3__t_14__t_204)
+
+logic ust_205 : double
+
+axiom eq_235 : div_post(NearestTiesToEven, b1363, b535, ust_205)
+
+logic d_mul__t_3__t_10__t_205 : double
+
+axiom eq_236 : mul_post(NearestTiesToEven, b526, ust_205,
+  d_mul__t_3__t_10__t_205)
+
+logic ust_206 : double
+
+axiom eq_237 : mul_post(NearestTiesToEven, b526, ust_205, ust_206)
+
+logic d_mul__t_3__t_205__t_205 : double
+
+axiom eq_238 : mul_post(NearestTiesToEven, ust_205, ust_205,
+  d_mul__t_3__t_205__t_205)
+
+logic ust_207 : double
+
+axiom eq_239 : mul_post(NearestTiesToEven, ust_205, ust_205, ust_207)
+
+logic d_neg__t_207 : double
+
+axiom eq_240 : neg_post(ust_207, d_neg__t_207)
+
+logic ust_208 : double
+
+axiom eq_241 : neg_post(ust_207, ust_208)
+
+logic d_add__t_3__t_14__t_208 : double
+
+axiom eq_242 : add_post(NearestTiesToEven, b1363, ust_208,
+  d_add__t_3__t_14__t_208)
+
+logic ust_209 : double
+
+axiom eq_243 : add_post(NearestTiesToEven, b1363, ust_208, ust_209)
+
+logic d_div__t_3__t_209__t_206 : double
+
+axiom eq_244 : div_post(NearestTiesToEven, ust_209, ust_206,
+  d_div__t_3__t_209__t_206)
+
+logic ust_210 : double
+
+axiom eq_245 : div_post(NearestTiesToEven, ust_209, ust_206, ust_210)
+
+logic d_add__t_3__t_205__t_210 : double
+
+axiom eq_246 : add_post(NearestTiesToEven, ust_205, ust_210,
+  d_add__t_3__t_205__t_210)
+
+logic ust_211 : double
+
+axiom eq_247 : add_post(NearestTiesToEven, ust_205, ust_210, ust_211)
+
+predicate ust_213() = (not smt2_double_eq(b3347, ust_211))
+
+logic d_mul__t_3__t_10__t_211 : double
+
+axiom eq_248 : mul_post(NearestTiesToEven, b526, ust_211,
+  d_mul__t_3__t_10__t_211)
+
+logic ust_214 : double
+
+axiom eq_249 : mul_post(NearestTiesToEven, b526, ust_211, ust_214)
+
+logic d_mul__t_3__t_211__t_211 : double
+
+axiom eq_250 : mul_post(NearestTiesToEven, ust_211, ust_211,
+  d_mul__t_3__t_211__t_211)
+
+logic ust_215 : double
+
+axiom eq_251 : mul_post(NearestTiesToEven, ust_211, ust_211, ust_215)
+
+logic d_neg__t_215 : double
+
+axiom eq_252 : neg_post(ust_215, d_neg__t_215)
+
+logic ust_216 : double
+
+axiom eq_253 : neg_post(ust_215, ust_216)
+
+logic d_add__t_3__t_14__t_216 : double
+
+axiom eq_254 : add_post(NearestTiesToEven, b1363, ust_216,
+  d_add__t_3__t_14__t_216)
+
+logic ust_217 : double
+
+axiom eq_255 : add_post(NearestTiesToEven, b1363, ust_216, ust_217)
+
+logic d_div__t_3__t_217__t_214 : double
+
+axiom eq_256 : div_post(NearestTiesToEven, ust_217, ust_214,
+  d_div__t_3__t_217__t_214)
+
+logic ust_218 : double
+
+axiom eq_257 : div_post(NearestTiesToEven, ust_217, ust_214, ust_218)
+
+logic d_add__t_3__t_211__t_218 : double
+
+axiom eq_258 : add_post(NearestTiesToEven, ust_211, ust_218,
+  d_add__t_3__t_211__t_218)
+
+logic ust_219 : double
+
+axiom eq_259 : add_post(NearestTiesToEven, ust_211, ust_218, ust_219)
+
+logic d_mul__t_3__t_219__t_219 : double
+
+axiom eq_260 : mul_post(NearestTiesToEven, ust_219, ust_219,
+  d_mul__t_3__t_219__t_219)
+
+logic ust_220 : double
+
+axiom eq_261 : mul_post(NearestTiesToEven, ust_219, ust_219, ust_220)
+
+logic d_neg__t_220 : double
+
+axiom eq_262 : neg_post(ust_220, d_neg__t_220)
+
+logic ust_221 : double
+
+axiom eq_263 : neg_post(ust_220, ust_221)
+
+logic d_add__t_3__t_14__t_221 : double
+
+axiom eq_264 : add_post(NearestTiesToEven, b1363, ust_221,
+  d_add__t_3__t_14__t_221)
+
+logic ust_222 : double
+
+axiom eq_265 : add_post(NearestTiesToEven, b1363, ust_221, ust_222)
+
+predicate ust_225() = (not smt2_double_eq(ust_222, b3408))
+
+predicate ust_228() = (not smt2_double_eq(ust_217, b3418))
+
+logic d_mul__t_3__t_10__t_229 : double
+
+axiom eq_266 : mul_post(NearestTiesToEven, b526, b3428,
+  d_mul__t_3__t_10__t_229)
+
+logic ust_230 : double
+
+axiom eq_267 : mul_post(NearestTiesToEven, b526, b3428, ust_230)
+
+logic d_mul__t_3__t_229__t_229 : double
+
+axiom eq_268 : mul_post(NearestTiesToEven, b3428, b3428,
+  d_mul__t_3__t_229__t_229)
+
+logic ust_231 : double
+
+axiom eq_269 : mul_post(NearestTiesToEven, b3428, b3428, ust_231)
+
+logic d_neg__t_231 : double
+
+axiom eq_270 : neg_post(ust_231, d_neg__t_231)
+
+logic ust_232 : double
+
+axiom eq_271 : neg_post(ust_231, ust_232)
+
+logic d_add__t_3__t_232__t_233 : double
+
+axiom eq_272 : add_post(NearestTiesToEven, ust_232, b492,
+  d_add__t_3__t_232__t_233)
+
+logic ust_234 : double
+
+axiom eq_273 : add_post(NearestTiesToEven, ust_232, b492, ust_234)
+
+logic d_div__t_3__t_234__t_230 : double
+
+axiom eq_274 : div_post(NearestTiesToEven, ust_234, ust_230,
+  d_div__t_3__t_234__t_230)
+
+logic ust_235 : double
+
+axiom eq_275 : div_post(NearestTiesToEven, ust_234, ust_230, ust_235)
+
+logic d_add__t_3__t_229__t_235 : double
+
+axiom eq_276 : add_post(NearestTiesToEven, b3428, ust_235,
+  d_add__t_3__t_229__t_235)
+
+logic ust_236 : double
+
+axiom eq_277 : add_post(NearestTiesToEven, b3428, ust_235, ust_236)
+
+logic d_mul__t_3__t_236__t_236 : double
+
+axiom eq_278 : mul_post(NearestTiesToEven, ust_236, ust_236,
+  d_mul__t_3__t_236__t_236)
+
+logic ust_237 : double
+
+axiom eq_279 : mul_post(NearestTiesToEven, ust_236, ust_236, ust_237)
+
+logic d_neg__t_237 : double
+
+axiom eq_280 : neg_post(ust_237, d_neg__t_237)
+
+logic ust_238 : double
+
+axiom eq_281 : neg_post(ust_237, ust_238)
+
+logic d_add__t_3__t_233__t_238 : double
+
+axiom eq_282 : add_post(NearestTiesToEven, b492, ust_238,
+  d_add__t_3__t_233__t_238)
+
+logic ust_239 : double
+
+axiom eq_283 : add_post(NearestTiesToEven, b492, ust_238, ust_239)
+
+predicate ust_242() = (not smt2_double_eq(ust_239, b3439))
+
+logic d_mul__t_3__t_10__t_243 : double
+
+axiom eq_284 : mul_post(NearestTiesToEven, b526, b3444,
+  d_mul__t_3__t_10__t_243)
+
+logic ust_244 : double
+
+axiom eq_285 : mul_post(NearestTiesToEven, b526, b3444, ust_244)
+
+logic d_mul__t_3__t_243__t_243 : double
+
+axiom eq_286 : mul_post(NearestTiesToEven, b3444, b3444,
+  d_mul__t_3__t_243__t_243)
+
+logic ust_245 : double
+
+axiom eq_287 : mul_post(NearestTiesToEven, b3444, b3444, ust_245)
+
+logic d_neg__t_245 : double
+
+axiom eq_288 : neg_post(ust_245, d_neg__t_245)
+
+logic ust_246 : double
+
+axiom eq_289 : neg_post(ust_245, ust_246)
+
+logic d_add__t_3__t_233__t_246 : double
+
+axiom eq_290 : add_post(NearestTiesToEven, b492, ust_246,
+  d_add__t_3__t_233__t_246)
+
+logic ust_247 : double
+
+axiom eq_291 : add_post(NearestTiesToEven, b492, ust_246, ust_247)
+
+logic d_div__t_3__t_247__t_244 : double
+
+axiom eq_292 : div_post(NearestTiesToEven, ust_247, ust_244,
+  d_div__t_3__t_247__t_244)
+
+logic ust_248 : double
+
+axiom eq_293 : div_post(NearestTiesToEven, ust_247, ust_244, ust_248)
+
+logic d_add__t_3__t_243__t_248 : double
+
+axiom eq_294 : add_post(NearestTiesToEven, b3444, ust_248,
+  d_add__t_3__t_243__t_248)
+
+logic ust_249 : double
+
+axiom eq_295 : add_post(NearestTiesToEven, b3444, ust_248, ust_249)
+
+predicate ust_251() = (not smt2_double_eq(b3428, ust_249))
+
+logic d_mul__t_3__t_249__t_249 : double
+
+axiom eq_296 : mul_post(NearestTiesToEven, ust_249, ust_249,
+  d_mul__t_3__t_249__t_249)
+
+logic ust_252 : double
+
+axiom eq_297 : mul_post(NearestTiesToEven, ust_249, ust_249, ust_252)
+
+logic d_neg__t_252 : double
+
+axiom eq_298 : neg_post(ust_252, d_neg__t_252)
+
+logic ust_253 : double
+
+axiom eq_299 : neg_post(ust_252, ust_253)
+
+logic d_add__t_3__t_233__t_253 : double
+
+axiom eq_300 : add_post(NearestTiesToEven, b492, ust_253,
+  d_add__t_3__t_233__t_253)
+
+logic ust_254 : double
+
+axiom eq_301 : add_post(NearestTiesToEven, b492, ust_253, ust_254)
+
+logic d_neg__t_254 : double
+
+axiom eq_302 : neg_post(ust_254, d_neg__t_254)
+
+logic ust_255 : double
+
+axiom eq_303 : neg_post(ust_254, ust_255)
+
+predicate ust_258() = (not smt2_double_eq(ust_255, b3470))
+
+logic d_mul__t_3__t_10__t_259 : double
+
+axiom eq_304 : mul_post(NearestTiesToEven, b526, b3475,
+  d_mul__t_3__t_10__t_259)
+
+logic ust_260 : double
+
+axiom eq_305 : mul_post(NearestTiesToEven, b526, b3475, ust_260)
+
+logic d_mul__t_3__t_259__t_259 : double
+
+axiom eq_306 : mul_post(NearestTiesToEven, b3475, b3475,
+  d_mul__t_3__t_259__t_259)
+
+logic ust_261 : double
+
+axiom eq_307 : mul_post(NearestTiesToEven, b3475, b3475, ust_261)
+
+logic d_neg__t_261 : double
+
+axiom eq_308 : neg_post(ust_261, d_neg__t_261)
+
+logic ust_262 : double
+
+axiom eq_309 : neg_post(ust_261, ust_262)
+
+logic d_add__t_3__t_233__t_262 : double
+
+axiom eq_310 : add_post(NearestTiesToEven, b492, ust_262,
+  d_add__t_3__t_233__t_262)
+
+logic ust_263 : double
+
+axiom eq_311 : add_post(NearestTiesToEven, b492, ust_262, ust_263)
+
+logic d_div__t_3__t_263__t_260 : double
+
+axiom eq_312 : div_post(NearestTiesToEven, ust_263, ust_260,
+  d_div__t_3__t_263__t_260)
+
+logic ust_264 : double
+
+axiom eq_313 : div_post(NearestTiesToEven, ust_263, ust_260, ust_264)
+
+logic d_add__t_3__t_259__t_264 : double
+
+axiom eq_314 : add_post(NearestTiesToEven, b3475, ust_264,
+  d_add__t_3__t_259__t_264)
+
+logic ust_265 : double
+
+axiom eq_315 : add_post(NearestTiesToEven, b3475, ust_264, ust_265)
+
+predicate ust_267() = (not smt2_double_eq(b3444, ust_265))
+
+logic d_mul__t_3__t_265__t_265 : double
+
+axiom eq_316 : mul_post(NearestTiesToEven, ust_265, ust_265,
+  d_mul__t_3__t_265__t_265)
+
+logic ust_268 : double
+
+axiom eq_317 : mul_post(NearestTiesToEven, ust_265, ust_265, ust_268)
+
+logic d_neg__t_268 : double
+
+axiom eq_318 : neg_post(ust_268, d_neg__t_268)
+
+logic ust_269 : double
+
+axiom eq_319 : neg_post(ust_268, ust_269)
+
+logic d_add__t_3__t_233__t_269 : double
+
+axiom eq_320 : add_post(NearestTiesToEven, b492, ust_269,
+  d_add__t_3__t_233__t_269)
+
+logic ust_270 : double
+
+axiom eq_321 : add_post(NearestTiesToEven, b492, ust_269, ust_270)
+
+predicate ust_273() = (not smt2_double_eq(ust_270, b3500))
+
+logic d_mul__t_3__t_10__t_274 : double
+
+axiom eq_322 : mul_post(NearestTiesToEven, b526, b3505,
+  d_mul__t_3__t_10__t_274)
+
+logic ust_275 : double
+
+axiom eq_323 : mul_post(NearestTiesToEven, b526, b3505, ust_275)
+
+logic d_mul__t_3__t_274__t_274 : double
+
+axiom eq_324 : mul_post(NearestTiesToEven, b3505, b3505,
+  d_mul__t_3__t_274__t_274)
+
+logic ust_276 : double
+
+axiom eq_325 : mul_post(NearestTiesToEven, b3505, b3505, ust_276)
+
+logic d_neg__t_276 : double
+
+axiom eq_326 : neg_post(ust_276, d_neg__t_276)
+
+logic ust_277 : double
+
+axiom eq_327 : neg_post(ust_276, ust_277)
+
+logic d_add__t_3__t_233__t_277 : double
+
+axiom eq_328 : add_post(NearestTiesToEven, b492, ust_277,
+  d_add__t_3__t_233__t_277)
+
+logic ust_278 : double
+
+axiom eq_329 : add_post(NearestTiesToEven, b492, ust_277, ust_278)
+
+logic d_div__t_3__t_278__t_275 : double
+
+axiom eq_330 : div_post(NearestTiesToEven, ust_278, ust_275,
+  d_div__t_3__t_278__t_275)
+
+logic ust_279 : double
+
+axiom eq_331 : div_post(NearestTiesToEven, ust_278, ust_275, ust_279)
+
+logic d_add__t_3__t_274__t_279 : double
+
+axiom eq_332 : add_post(NearestTiesToEven, b3505, ust_279,
+  d_add__t_3__t_274__t_279)
+
+logic ust_280 : double
+
+axiom eq_333 : add_post(NearestTiesToEven, b3505, ust_279, ust_280)
+
+predicate ust_282() = (not smt2_double_eq(b3475, ust_280))
+
+logic d_mul__t_3__t_280__t_280 : double
+
+axiom eq_334 : mul_post(NearestTiesToEven, ust_280, ust_280,
+  d_mul__t_3__t_280__t_280)
+
+logic ust_283 : double
+
+axiom eq_335 : mul_post(NearestTiesToEven, ust_280, ust_280, ust_283)
+
+logic d_neg__t_283 : double
+
+axiom eq_336 : neg_post(ust_283, d_neg__t_283)
+
+logic ust_284 : double
+
+axiom eq_337 : neg_post(ust_283, ust_284)
+
+logic d_add__t_3__t_233__t_284 : double
+
+axiom eq_338 : add_post(NearestTiesToEven, b492, ust_284,
+  d_add__t_3__t_233__t_284)
+
+logic ust_285 : double
+
+axiom eq_339 : add_post(NearestTiesToEven, b492, ust_284, ust_285)
+
+predicate ust_288() = (not smt2_double_eq(ust_285, b3530))
+
+logic d_mul__t_3__t_10__t_289 : double
+
+axiom eq_340 : mul_post(NearestTiesToEven, b526, b3535,
+  d_mul__t_3__t_10__t_289)
+
+logic ust_290 : double
+
+axiom eq_341 : mul_post(NearestTiesToEven, b526, b3535, ust_290)
+
+logic d_mul__t_3__t_289__t_289 : double
+
+axiom eq_342 : mul_post(NearestTiesToEven, b3535, b3535,
+  d_mul__t_3__t_289__t_289)
+
+logic ust_291 : double
+
+axiom eq_343 : mul_post(NearestTiesToEven, b3535, b3535, ust_291)
+
+logic d_neg__t_291 : double
+
+axiom eq_344 : neg_post(ust_291, d_neg__t_291)
+
+logic ust_292 : double
+
+axiom eq_345 : neg_post(ust_291, ust_292)
+
+logic d_add__t_3__t_233__t_292 : double
+
+axiom eq_346 : add_post(NearestTiesToEven, b492, ust_292,
+  d_add__t_3__t_233__t_292)
+
+logic ust_293 : double
+
+axiom eq_347 : add_post(NearestTiesToEven, b492, ust_292, ust_293)
+
+logic d_div__t_3__t_293__t_290 : double
+
+axiom eq_348 : div_post(NearestTiesToEven, ust_293, ust_290,
+  d_div__t_3__t_293__t_290)
+
+logic ust_294 : double
+
+axiom eq_349 : div_post(NearestTiesToEven, ust_293, ust_290, ust_294)
+
+logic d_add__t_3__t_289__t_294 : double
+
+axiom eq_350 : add_post(NearestTiesToEven, b3535, ust_294,
+  d_add__t_3__t_289__t_294)
+
+logic ust_295 : double
+
+axiom eq_351 : add_post(NearestTiesToEven, b3535, ust_294, ust_295)
+
+predicate ust_297() = (not smt2_double_eq(b3505, ust_295))
+
+logic d_mul__t_3__t_295__t_295 : double
+
+axiom eq_352 : mul_post(NearestTiesToEven, ust_295, ust_295,
+  d_mul__t_3__t_295__t_295)
+
+logic ust_298 : double
+
+axiom eq_353 : mul_post(NearestTiesToEven, ust_295, ust_295, ust_298)
+
+logic d_neg__t_298 : double
+
+axiom eq_354 : neg_post(ust_298, d_neg__t_298)
+
+logic ust_299 : double
+
+axiom eq_355 : neg_post(ust_298, ust_299)
+
+logic d_add__t_3__t_233__t_299 : double
+
+axiom eq_356 : add_post(NearestTiesToEven, b492, ust_299,
+  d_add__t_3__t_233__t_299)
+
+logic ust_300 : double
+
+axiom eq_357 : add_post(NearestTiesToEven, b492, ust_299, ust_300)
+
+predicate ust_303() = (not smt2_double_eq(ust_300, b3560))
+
+logic d_mul__t_3__t_10__t_304 : double
+
+axiom eq_358 : mul_post(NearestTiesToEven, b526, b3565,
+  d_mul__t_3__t_10__t_304)
+
+logic ust_305 : double
+
+axiom eq_359 : mul_post(NearestTiesToEven, b526, b3565, ust_305)
+
+logic d_mul__t_3__t_304__t_304 : double
+
+axiom eq_360 : mul_post(NearestTiesToEven, b3565, b3565,
+  d_mul__t_3__t_304__t_304)
+
+logic ust_306 : double
+
+axiom eq_361 : mul_post(NearestTiesToEven, b3565, b3565, ust_306)
+
+logic d_neg__t_306 : double
+
+axiom eq_362 : neg_post(ust_306, d_neg__t_306)
+
+logic ust_307 : double
+
+axiom eq_363 : neg_post(ust_306, ust_307)
+
+logic d_add__t_3__t_233__t_307 : double
+
+axiom eq_364 : add_post(NearestTiesToEven, b492, ust_307,
+  d_add__t_3__t_233__t_307)
+
+logic ust_308 : double
+
+axiom eq_365 : add_post(NearestTiesToEven, b492, ust_307, ust_308)
+
+logic d_div__t_3__t_308__t_305 : double
+
+axiom eq_366 : div_post(NearestTiesToEven, ust_308, ust_305,
+  d_div__t_3__t_308__t_305)
+
+logic ust_309 : double
+
+axiom eq_367 : div_post(NearestTiesToEven, ust_308, ust_305, ust_309)
+
+logic d_add__t_3__t_304__t_309 : double
+
+axiom eq_368 : add_post(NearestTiesToEven, b3565, ust_309,
+  d_add__t_3__t_304__t_309)
+
+logic ust_310 : double
+
+axiom eq_369 : add_post(NearestTiesToEven, b3565, ust_309, ust_310)
+
+predicate ust_312() = (not smt2_double_eq(b3535, ust_310))
+
+logic d_mul__t_3__t_310__t_310 : double
+
+axiom eq_370 : mul_post(NearestTiesToEven, ust_310, ust_310,
+  d_mul__t_3__t_310__t_310)
+
+logic ust_313 : double
+
+axiom eq_371 : mul_post(NearestTiesToEven, ust_310, ust_310, ust_313)
+
+logic d_neg__t_313 : double
+
+axiom eq_372 : neg_post(ust_313, d_neg__t_313)
+
+logic ust_314 : double
+
+axiom eq_373 : neg_post(ust_313, ust_314)
+
+logic d_add__t_3__t_233__t_314 : double
+
+axiom eq_374 : add_post(NearestTiesToEven, b492, ust_314,
+  d_add__t_3__t_233__t_314)
+
+logic ust_315 : double
+
+axiom eq_375 : add_post(NearestTiesToEven, b492, ust_314, ust_315)
+
+predicate ust_318() = (not smt2_double_eq(ust_315, b3590))
+
+logic d_mul__t_3__t_10__t_319 : double
+
+axiom eq_376 : mul_post(NearestTiesToEven, b526, b3595,
+  d_mul__t_3__t_10__t_319)
+
+logic ust_320 : double
+
+axiom eq_377 : mul_post(NearestTiesToEven, b526, b3595, ust_320)
+
+logic d_mul__t_3__t_319__t_319 : double
+
+axiom eq_378 : mul_post(NearestTiesToEven, b3595, b3595,
+  d_mul__t_3__t_319__t_319)
+
+logic ust_321 : double
+
+axiom eq_379 : mul_post(NearestTiesToEven, b3595, b3595, ust_321)
+
+logic d_neg__t_321 : double
+
+axiom eq_380 : neg_post(ust_321, d_neg__t_321)
+
+logic ust_322 : double
+
+axiom eq_381 : neg_post(ust_321, ust_322)
+
+logic d_add__t_3__t_233__t_322 : double
+
+axiom eq_382 : add_post(NearestTiesToEven, b492, ust_322,
+  d_add__t_3__t_233__t_322)
+
+logic ust_323 : double
+
+axiom eq_383 : add_post(NearestTiesToEven, b492, ust_322, ust_323)
+
+logic d_div__t_3__t_323__t_320 : double
+
+axiom eq_384 : div_post(NearestTiesToEven, ust_323, ust_320,
+  d_div__t_3__t_323__t_320)
+
+logic ust_324 : double
+
+axiom eq_385 : div_post(NearestTiesToEven, ust_323, ust_320, ust_324)
+
+logic d_add__t_3__t_319__t_324 : double
+
+axiom eq_386 : add_post(NearestTiesToEven, b3595, ust_324,
+  d_add__t_3__t_319__t_324)
+
+logic ust_325 : double
+
+axiom eq_387 : add_post(NearestTiesToEven, b3595, ust_324, ust_325)
+
+predicate ust_327() = (not smt2_double_eq(b3565, ust_325))
+
+logic d_mul__t_3__t_325__t_325 : double
+
+axiom eq_388 : mul_post(NearestTiesToEven, ust_325, ust_325,
+  d_mul__t_3__t_325__t_325)
+
+logic ust_328 : double
+
+axiom eq_389 : mul_post(NearestTiesToEven, ust_325, ust_325, ust_328)
+
+logic d_neg__t_328 : double
+
+axiom eq_390 : neg_post(ust_328, d_neg__t_328)
+
+logic ust_329 : double
+
+axiom eq_391 : neg_post(ust_328, ust_329)
+
+logic d_add__t_3__t_233__t_329 : double
+
+axiom eq_392 : add_post(NearestTiesToEven, b492, ust_329,
+  d_add__t_3__t_233__t_329)
+
+logic ust_330 : double
+
+axiom eq_393 : add_post(NearestTiesToEven, b492, ust_329, ust_330)
+
+predicate ust_333() = (not smt2_double_eq(ust_330, b3620))
+
+logic d_mul__t_3__t_10__t_334 : double
+
+axiom eq_394 : mul_post(NearestTiesToEven, b526, b3625,
+  d_mul__t_3__t_10__t_334)
+
+logic ust_335 : double
+
+axiom eq_395 : mul_post(NearestTiesToEven, b526, b3625, ust_335)
+
+logic d_mul__t_3__t_334__t_334 : double
+
+axiom eq_396 : mul_post(NearestTiesToEven, b3625, b3625,
+  d_mul__t_3__t_334__t_334)
+
+logic ust_336 : double
+
+axiom eq_397 : mul_post(NearestTiesToEven, b3625, b3625, ust_336)
+
+logic d_neg__t_336 : double
+
+axiom eq_398 : neg_post(ust_336, d_neg__t_336)
+
+logic ust_337 : double
+
+axiom eq_399 : neg_post(ust_336, ust_337)
+
+logic d_add__t_3__t_233__t_337 : double
+
+axiom eq_400 : add_post(NearestTiesToEven, b492, ust_337,
+  d_add__t_3__t_233__t_337)
+
+logic ust_338 : double
+
+axiom eq_401 : add_post(NearestTiesToEven, b492, ust_337, ust_338)
+
+logic d_div__t_3__t_338__t_335 : double
+
+axiom eq_402 : div_post(NearestTiesToEven, ust_338, ust_335,
+  d_div__t_3__t_338__t_335)
+
+logic ust_339 : double
+
+axiom eq_403 : div_post(NearestTiesToEven, ust_338, ust_335, ust_339)
+
+logic d_add__t_3__t_334__t_339 : double
+
+axiom eq_404 : add_post(NearestTiesToEven, b3625, ust_339,
+  d_add__t_3__t_334__t_339)
+
+logic ust_340 : double
+
+axiom eq_405 : add_post(NearestTiesToEven, b3625, ust_339, ust_340)
+
+predicate ust_342() = (not smt2_double_eq(b3595, ust_340))
+
+logic d_mul__t_3__t_340__t_340 : double
+
+axiom eq_406 : mul_post(NearestTiesToEven, ust_340, ust_340,
+  d_mul__t_3__t_340__t_340)
+
+logic ust_343 : double
+
+axiom eq_407 : mul_post(NearestTiesToEven, ust_340, ust_340, ust_343)
+
+logic d_neg__t_343 : double
+
+axiom eq_408 : neg_post(ust_343, d_neg__t_343)
+
+logic ust_344 : double
+
+axiom eq_409 : neg_post(ust_343, ust_344)
+
+logic d_add__t_3__t_233__t_344 : double
+
+axiom eq_410 : add_post(NearestTiesToEven, b492, ust_344,
+  d_add__t_3__t_233__t_344)
+
+logic ust_345 : double
+
+axiom eq_411 : add_post(NearestTiesToEven, b492, ust_344, ust_345)
+
+predicate ust_348() = (not smt2_double_eq(ust_345, b3650))
+
+logic d_mul__t_3__t_10__t_349 : double
+
+axiom eq_412 : mul_post(NearestTiesToEven, b526, b3655,
+  d_mul__t_3__t_10__t_349)
+
+logic ust_350 : double
+
+axiom eq_413 : mul_post(NearestTiesToEven, b526, b3655, ust_350)
+
+logic d_mul__t_3__t_349__t_349 : double
+
+axiom eq_414 : mul_post(NearestTiesToEven, b3655, b3655,
+  d_mul__t_3__t_349__t_349)
+
+logic ust_351 : double
+
+axiom eq_415 : mul_post(NearestTiesToEven, b3655, b3655, ust_351)
+
+logic d_neg__t_351 : double
+
+axiom eq_416 : neg_post(ust_351, d_neg__t_351)
+
+logic ust_352 : double
+
+axiom eq_417 : neg_post(ust_351, ust_352)
+
+logic d_add__t_3__t_233__t_352 : double
+
+axiom eq_418 : add_post(NearestTiesToEven, b492, ust_352,
+  d_add__t_3__t_233__t_352)
+
+logic ust_353 : double
+
+axiom eq_419 : add_post(NearestTiesToEven, b492, ust_352, ust_353)
+
+logic d_div__t_3__t_353__t_350 : double
+
+axiom eq_420 : div_post(NearestTiesToEven, ust_353, ust_350,
+  d_div__t_3__t_353__t_350)
+
+logic ust_354 : double
+
+axiom eq_421 : div_post(NearestTiesToEven, ust_353, ust_350, ust_354)
+
+logic d_add__t_3__t_349__t_354 : double
+
+axiom eq_422 : add_post(NearestTiesToEven, b3655, ust_354,
+  d_add__t_3__t_349__t_354)
+
+logic ust_355 : double
+
+axiom eq_423 : add_post(NearestTiesToEven, b3655, ust_354, ust_355)
+
+predicate ust_357() = (not smt2_double_eq(b3625, ust_355))
+
+logic d_mul__t_3__t_355__t_355 : double
+
+axiom eq_424 : mul_post(NearestTiesToEven, ust_355, ust_355,
+  d_mul__t_3__t_355__t_355)
+
+logic ust_358 : double
+
+axiom eq_425 : mul_post(NearestTiesToEven, ust_355, ust_355, ust_358)
+
+logic d_neg__t_358 : double
+
+axiom eq_426 : neg_post(ust_358, d_neg__t_358)
+
+logic ust_359 : double
+
+axiom eq_427 : neg_post(ust_358, ust_359)
+
+logic d_add__t_3__t_233__t_359 : double
+
+axiom eq_428 : add_post(NearestTiesToEven, b492, ust_359,
+  d_add__t_3__t_233__t_359)
+
+logic ust_360 : double
+
+axiom eq_429 : add_post(NearestTiesToEven, b492, ust_359, ust_360)
+
+predicate ust_363() = (not smt2_double_eq(ust_360, b3680))
+
+logic d_mul__t_3__t_10__t_364 : double
+
+axiom eq_430 : mul_post(NearestTiesToEven, b526, b3685,
+  d_mul__t_3__t_10__t_364)
+
+logic ust_365 : double
+
+axiom eq_431 : mul_post(NearestTiesToEven, b526, b3685, ust_365)
+
+logic d_mul__t_3__t_364__t_364 : double
+
+axiom eq_432 : mul_post(NearestTiesToEven, b3685, b3685,
+  d_mul__t_3__t_364__t_364)
+
+logic ust_366 : double
+
+axiom eq_433 : mul_post(NearestTiesToEven, b3685, b3685, ust_366)
+
+logic d_neg__t_366 : double
+
+axiom eq_434 : neg_post(ust_366, d_neg__t_366)
+
+logic ust_367 : double
+
+axiom eq_435 : neg_post(ust_366, ust_367)
+
+logic d_add__t_3__t_233__t_367 : double
+
+axiom eq_436 : add_post(NearestTiesToEven, b492, ust_367,
+  d_add__t_3__t_233__t_367)
+
+logic ust_368 : double
+
+axiom eq_437 : add_post(NearestTiesToEven, b492, ust_367, ust_368)
+
+logic d_div__t_3__t_368__t_365 : double
+
+axiom eq_438 : div_post(NearestTiesToEven, ust_368, ust_365,
+  d_div__t_3__t_368__t_365)
+
+logic ust_369 : double
+
+axiom eq_439 : div_post(NearestTiesToEven, ust_368, ust_365, ust_369)
+
+logic d_add__t_3__t_364__t_369 : double
+
+axiom eq_440 : add_post(NearestTiesToEven, b3685, ust_369,
+  d_add__t_3__t_364__t_369)
+
+logic ust_370 : double
+
+axiom eq_441 : add_post(NearestTiesToEven, b3685, ust_369, ust_370)
+
+predicate ust_372() = (not smt2_double_eq(b3655, ust_370))
+
+logic d_mul__t_3__t_370__t_370 : double
+
+axiom eq_442 : mul_post(NearestTiesToEven, ust_370, ust_370,
+  d_mul__t_3__t_370__t_370)
+
+logic ust_373 : double
+
+axiom eq_443 : mul_post(NearestTiesToEven, ust_370, ust_370, ust_373)
+
+logic d_neg__t_373 : double
+
+axiom eq_444 : neg_post(ust_373, d_neg__t_373)
+
+logic ust_374 : double
+
+axiom eq_445 : neg_post(ust_373, ust_374)
+
+logic d_add__t_3__t_233__t_374 : double
+
+axiom eq_446 : add_post(NearestTiesToEven, b492, ust_374,
+  d_add__t_3__t_233__t_374)
+
+logic ust_375 : double
+
+axiom eq_447 : add_post(NearestTiesToEven, b492, ust_374, ust_375)
+
+predicate ust_378() = (not smt2_double_eq(ust_375, b3710))
+
+logic d_mul__t_3__t_10__t_379 : double
+
+axiom eq_448 : mul_post(NearestTiesToEven, b526, b3715,
+  d_mul__t_3__t_10__t_379)
+
+logic ust_380 : double
+
+axiom eq_449 : mul_post(NearestTiesToEven, b526, b3715, ust_380)
+
+logic d_mul__t_3__t_379__t_379 : double
+
+axiom eq_450 : mul_post(NearestTiesToEven, b3715, b3715,
+  d_mul__t_3__t_379__t_379)
+
+logic ust_381 : double
+
+axiom eq_451 : mul_post(NearestTiesToEven, b3715, b3715, ust_381)
+
+logic d_neg__t_381 : double
+
+axiom eq_452 : neg_post(ust_381, d_neg__t_381)
+
+logic ust_382 : double
+
+axiom eq_453 : neg_post(ust_381, ust_382)
+
+logic d_add__t_3__t_233__t_382 : double
+
+axiom eq_454 : add_post(NearestTiesToEven, b492, ust_382,
+  d_add__t_3__t_233__t_382)
+
+logic ust_383 : double
+
+axiom eq_455 : add_post(NearestTiesToEven, b492, ust_382, ust_383)
+
+logic d_div__t_3__t_383__t_380 : double
+
+axiom eq_456 : div_post(NearestTiesToEven, ust_383, ust_380,
+  d_div__t_3__t_383__t_380)
+
+logic ust_384 : double
+
+axiom eq_457 : div_post(NearestTiesToEven, ust_383, ust_380, ust_384)
+
+logic d_add__t_3__t_379__t_384 : double
+
+axiom eq_458 : add_post(NearestTiesToEven, b3715, ust_384,
+  d_add__t_3__t_379__t_384)
+
+logic ust_385 : double
+
+axiom eq_459 : add_post(NearestTiesToEven, b3715, ust_384, ust_385)
+
+predicate ust_387() = (not smt2_double_eq(b3685, ust_385))
+
+logic d_mul__t_3__t_385__t_385 : double
+
+axiom eq_460 : mul_post(NearestTiesToEven, ust_385, ust_385,
+  d_mul__t_3__t_385__t_385)
+
+logic ust_388 : double
+
+axiom eq_461 : mul_post(NearestTiesToEven, ust_385, ust_385, ust_388)
+
+logic d_neg__t_388 : double
+
+axiom eq_462 : neg_post(ust_388, d_neg__t_388)
+
+logic ust_389 : double
+
+axiom eq_463 : neg_post(ust_388, ust_389)
+
+logic d_add__t_3__t_233__t_389 : double
+
+axiom eq_464 : add_post(NearestTiesToEven, b492, ust_389,
+  d_add__t_3__t_233__t_389)
+
+logic ust_390 : double
+
+axiom eq_465 : add_post(NearestTiesToEven, b492, ust_389, ust_390)
+
+predicate ust_393() = (not smt2_double_eq(ust_390, b3740))
+
+logic d_mul__t_3__t_10__t_394 : double
+
+axiom eq_466 : mul_post(NearestTiesToEven, b526, b3745,
+  d_mul__t_3__t_10__t_394)
+
+logic ust_395 : double
+
+axiom eq_467 : mul_post(NearestTiesToEven, b526, b3745, ust_395)
+
+logic d_mul__t_3__t_394__t_394 : double
+
+axiom eq_468 : mul_post(NearestTiesToEven, b3745, b3745,
+  d_mul__t_3__t_394__t_394)
+
+logic ust_396 : double
+
+axiom eq_469 : mul_post(NearestTiesToEven, b3745, b3745, ust_396)
+
+logic d_neg__t_396 : double
+
+axiom eq_470 : neg_post(ust_396, d_neg__t_396)
+
+logic ust_397 : double
+
+axiom eq_471 : neg_post(ust_396, ust_397)
+
+logic d_add__t_3__t_233__t_397 : double
+
+axiom eq_472 : add_post(NearestTiesToEven, b492, ust_397,
+  d_add__t_3__t_233__t_397)
+
+logic ust_398 : double
+
+axiom eq_473 : add_post(NearestTiesToEven, b492, ust_397, ust_398)
+
+logic d_div__t_3__t_398__t_395 : double
+
+axiom eq_474 : div_post(NearestTiesToEven, ust_398, ust_395,
+  d_div__t_3__t_398__t_395)
+
+logic ust_399 : double
+
+axiom eq_475 : div_post(NearestTiesToEven, ust_398, ust_395, ust_399)
+
+logic d_add__t_3__t_394__t_399 : double
+
+axiom eq_476 : add_post(NearestTiesToEven, b3745, ust_399,
+  d_add__t_3__t_394__t_399)
+
+logic ust_400 : double
+
+axiom eq_477 : add_post(NearestTiesToEven, b3745, ust_399, ust_400)
+
+predicate ust_402() = (not smt2_double_eq(b3715, ust_400))
+
+logic d_mul__t_3__t_400__t_400 : double
+
+axiom eq_478 : mul_post(NearestTiesToEven, ust_400, ust_400,
+  d_mul__t_3__t_400__t_400)
+
+logic ust_403 : double
+
+axiom eq_479 : mul_post(NearestTiesToEven, ust_400, ust_400, ust_403)
+
+logic d_neg__t_403 : double
+
+axiom eq_480 : neg_post(ust_403, d_neg__t_403)
+
+logic ust_404 : double
+
+axiom eq_481 : neg_post(ust_403, ust_404)
+
+logic d_add__t_3__t_233__t_404 : double
+
+axiom eq_482 : add_post(NearestTiesToEven, b492, ust_404,
+  d_add__t_3__t_233__t_404)
+
+logic ust_405 : double
+
+axiom eq_483 : add_post(NearestTiesToEven, b492, ust_404, ust_405)
+
+predicate ust_408() = (not smt2_double_eq(ust_405, b3770))
+
+logic d_mul__t_3__t_10__t_409 : double
+
+axiom eq_484 : mul_post(NearestTiesToEven, b526, b3775,
+  d_mul__t_3__t_10__t_409)
+
+logic ust_410 : double
+
+axiom eq_485 : mul_post(NearestTiesToEven, b526, b3775, ust_410)
+
+logic d_mul__t_3__t_409__t_409 : double
+
+axiom eq_486 : mul_post(NearestTiesToEven, b3775, b3775,
+  d_mul__t_3__t_409__t_409)
+
+logic ust_411 : double
+
+axiom eq_487 : mul_post(NearestTiesToEven, b3775, b3775, ust_411)
+
+logic d_neg__t_411 : double
+
+axiom eq_488 : neg_post(ust_411, d_neg__t_411)
+
+logic ust_412 : double
+
+axiom eq_489 : neg_post(ust_411, ust_412)
+
+logic d_add__t_3__t_233__t_412 : double
+
+axiom eq_490 : add_post(NearestTiesToEven, b492, ust_412,
+  d_add__t_3__t_233__t_412)
+
+logic ust_413 : double
+
+axiom eq_491 : add_post(NearestTiesToEven, b492, ust_412, ust_413)
+
+logic d_div__t_3__t_413__t_410 : double
+
+axiom eq_492 : div_post(NearestTiesToEven, ust_413, ust_410,
+  d_div__t_3__t_413__t_410)
+
+logic ust_414 : double
+
+axiom eq_493 : div_post(NearestTiesToEven, ust_413, ust_410, ust_414)
+
+logic d_add__t_3__t_409__t_414 : double
+
+axiom eq_494 : add_post(NearestTiesToEven, b3775, ust_414,
+  d_add__t_3__t_409__t_414)
+
+logic ust_415 : double
+
+axiom eq_495 : add_post(NearestTiesToEven, b3775, ust_414, ust_415)
+
+predicate ust_417() = (not smt2_double_eq(b3745, ust_415))
+
+logic d_mul__t_3__t_415__t_415 : double
+
+axiom eq_496 : mul_post(NearestTiesToEven, ust_415, ust_415,
+  d_mul__t_3__t_415__t_415)
+
+logic ust_418 : double
+
+axiom eq_497 : mul_post(NearestTiesToEven, ust_415, ust_415, ust_418)
+
+logic d_neg__t_418 : double
+
+axiom eq_498 : neg_post(ust_418, d_neg__t_418)
+
+logic ust_419 : double
+
+axiom eq_499 : neg_post(ust_418, ust_419)
+
+logic d_add__t_3__t_233__t_419 : double
+
+axiom eq_500 : add_post(NearestTiesToEven, b492, ust_419,
+  d_add__t_3__t_233__t_419)
+
+logic ust_420 : double
+
+axiom eq_501 : add_post(NearestTiesToEven, b492, ust_419, ust_420)
+
+predicate ust_423() = (not smt2_double_eq(ust_420, b3800))
+
+logic d_div__t_3__t_233__t_204 : double
+
+axiom eq_502 : div_post(NearestTiesToEven, b492, b535,
+  d_div__t_3__t_233__t_204)
+
+logic ust_424 : double
+
+axiom eq_503 : div_post(NearestTiesToEven, b492, b535, ust_424)
+
+logic d_mul__t_3__t_10__t_424 : double
+
+axiom eq_504 : mul_post(NearestTiesToEven, b526, ust_424,
+  d_mul__t_3__t_10__t_424)
+
+logic ust_425 : double
+
+axiom eq_505 : mul_post(NearestTiesToEven, b526, ust_424, ust_425)
+
+logic d_mul__t_3__t_424__t_424 : double
+
+axiom eq_506 : mul_post(NearestTiesToEven, ust_424, ust_424,
+  d_mul__t_3__t_424__t_424)
+
+logic ust_426 : double
+
+axiom eq_507 : mul_post(NearestTiesToEven, ust_424, ust_424, ust_426)
+
+logic d_neg__t_426 : double
+
+axiom eq_508 : neg_post(ust_426, d_neg__t_426)
+
+logic ust_427 : double
+
+axiom eq_509 : neg_post(ust_426, ust_427)
+
+logic d_add__t_3__t_233__t_427 : double
+
+axiom eq_510 : add_post(NearestTiesToEven, b492, ust_427,
+  d_add__t_3__t_233__t_427)
+
+logic ust_428 : double
+
+axiom eq_511 : add_post(NearestTiesToEven, b492, ust_427, ust_428)
+
+logic d_div__t_3__t_428__t_425 : double
+
+axiom eq_512 : div_post(NearestTiesToEven, ust_428, ust_425,
+  d_div__t_3__t_428__t_425)
+
+logic ust_429 : double
+
+axiom eq_513 : div_post(NearestTiesToEven, ust_428, ust_425, ust_429)
+
+logic d_add__t_3__t_424__t_429 : double
+
+axiom eq_514 : add_post(NearestTiesToEven, ust_424, ust_429,
+  d_add__t_3__t_424__t_429)
+
+logic ust_430 : double
+
+axiom eq_515 : add_post(NearestTiesToEven, ust_424, ust_429, ust_430)
+
+predicate ust_432() = (not smt2_double_eq(b3775, ust_430))
+
+logic d_mul__t_3__t_10__t_430 : double
+
+axiom eq_516 : mul_post(NearestTiesToEven, b526, ust_430,
+  d_mul__t_3__t_10__t_430)
+
+logic ust_433 : double
+
+axiom eq_517 : mul_post(NearestTiesToEven, b526, ust_430, ust_433)
+
+logic d_mul__t_3__t_430__t_430 : double
+
+axiom eq_518 : mul_post(NearestTiesToEven, ust_430, ust_430,
+  d_mul__t_3__t_430__t_430)
+
+logic ust_434 : double
+
+axiom eq_519 : mul_post(NearestTiesToEven, ust_430, ust_430, ust_434)
+
+logic d_neg__t_434 : double
+
+axiom eq_520 : neg_post(ust_434, d_neg__t_434)
+
+logic ust_435 : double
+
+axiom eq_521 : neg_post(ust_434, ust_435)
+
+logic d_add__t_3__t_233__t_435 : double
+
+axiom eq_522 : add_post(NearestTiesToEven, b492, ust_435,
+  d_add__t_3__t_233__t_435)
+
+logic ust_436 : double
+
+axiom eq_523 : add_post(NearestTiesToEven, b492, ust_435, ust_436)
+
+logic d_div__t_3__t_436__t_433 : double
+
+axiom eq_524 : div_post(NearestTiesToEven, ust_436, ust_433,
+  d_div__t_3__t_436__t_433)
+
+logic ust_437 : double
+
+axiom eq_525 : div_post(NearestTiesToEven, ust_436, ust_433, ust_437)
+
+logic d_add__t_3__t_430__t_437 : double
+
+axiom eq_526 : add_post(NearestTiesToEven, ust_430, ust_437,
+  d_add__t_3__t_430__t_437)
+
+logic ust_438 : double
+
+axiom eq_527 : add_post(NearestTiesToEven, ust_430, ust_437, ust_438)
+
+logic d_mul__t_3__t_438__t_438 : double
+
+axiom eq_528 : mul_post(NearestTiesToEven, ust_438, ust_438,
+  d_mul__t_3__t_438__t_438)
+
+logic ust_439 : double
+
+axiom eq_529 : mul_post(NearestTiesToEven, ust_438, ust_438, ust_439)
+
+logic d_neg__t_439 : double
+
+axiom eq_530 : neg_post(ust_439, d_neg__t_439)
+
+logic ust_440 : double
+
+axiom eq_531 : neg_post(ust_439, ust_440)
+
+logic d_add__t_3__t_233__t_440 : double
+
+axiom eq_532 : add_post(NearestTiesToEven, b492, ust_440,
+  d_add__t_3__t_233__t_440)
+
+logic ust_441 : double
+
+axiom eq_533 : add_post(NearestTiesToEven, b492, ust_440, ust_441)
+
+predicate ust_444() = (not smt2_double_eq(ust_441, b3836))
+
+predicate ust_447() = (not smt2_double_eq(ust_436, b3846))
+
+logic d_mul__t_3__t_10__t_448 : double
+
+axiom eq_534 : mul_post(NearestTiesToEven, b526, b3856,
+  d_mul__t_3__t_10__t_448)
+
+logic ust_449 : double
+
+axiom eq_535 : mul_post(NearestTiesToEven, b526, b3856, ust_449)
+
+logic d_mul__t_3__t_448__t_448 : double
+
+axiom eq_536 : mul_post(NearestTiesToEven, b3856, b3856,
+  d_mul__t_3__t_448__t_448)
+
+logic ust_450 : double
+
+axiom eq_537 : mul_post(NearestTiesToEven, b3856, b3856, ust_450)
+
+logic d_neg__t_450 : double
+
+axiom eq_538 : neg_post(ust_450, d_neg__t_450)
+
+logic ust_451 : double
+
+axiom eq_539 : neg_post(ust_450, ust_451)
+
+logic d_add__t_3__t_451__t_452 : double
+
+axiom eq_540 : add_post(NearestTiesToEven, ust_451, b504,
+  d_add__t_3__t_451__t_452)
+
+logic ust_453 : double
+
+axiom eq_541 : add_post(NearestTiesToEven, ust_451, b504, ust_453)
+
+logic d_div__t_3__t_453__t_449 : double
+
+axiom eq_542 : div_post(NearestTiesToEven, ust_453, ust_449,
+  d_div__t_3__t_453__t_449)
+
+logic ust_454 : double
+
+axiom eq_543 : div_post(NearestTiesToEven, ust_453, ust_449, ust_454)
+
+logic d_add__t_3__t_448__t_454 : double
+
+axiom eq_544 : add_post(NearestTiesToEven, b3856, ust_454,
+  d_add__t_3__t_448__t_454)
+
+logic ust_455 : double
+
+axiom eq_545 : add_post(NearestTiesToEven, b3856, ust_454, ust_455)
+
+logic d_mul__t_3__t_455__t_455 : double
+
+axiom eq_546 : mul_post(NearestTiesToEven, ust_455, ust_455,
+  d_mul__t_3__t_455__t_455)
+
+logic ust_456 : double
+
+axiom eq_547 : mul_post(NearestTiesToEven, ust_455, ust_455, ust_456)
+
+logic d_neg__t_456 : double
+
+axiom eq_548 : neg_post(ust_456, d_neg__t_456)
+
+logic ust_457 : double
+
+axiom eq_549 : neg_post(ust_456, ust_457)
+
+logic d_add__t_3__t_452__t_457 : double
+
+axiom eq_550 : add_post(NearestTiesToEven, b504, ust_457,
+  d_add__t_3__t_452__t_457)
+
+logic ust_458 : double
+
+axiom eq_551 : add_post(NearestTiesToEven, b504, ust_457, ust_458)
+
+predicate ust_461() = (not smt2_double_eq(ust_458, b3867))
+
+logic d_mul__t_3__t_10__t_462 : double
+
+axiom eq_552 : mul_post(NearestTiesToEven, b526, b3872,
+  d_mul__t_3__t_10__t_462)
+
+logic ust_463 : double
+
+axiom eq_553 : mul_post(NearestTiesToEven, b526, b3872, ust_463)
+
+logic d_mul__t_3__t_462__t_462 : double
+
+axiom eq_554 : mul_post(NearestTiesToEven, b3872, b3872,
+  d_mul__t_3__t_462__t_462)
+
+logic ust_464 : double
+
+axiom eq_555 : mul_post(NearestTiesToEven, b3872, b3872, ust_464)
+
+logic d_neg__t_464 : double
+
+axiom eq_556 : neg_post(ust_464, d_neg__t_464)
+
+logic ust_465 : double
+
+axiom eq_557 : neg_post(ust_464, ust_465)
+
+logic d_add__t_3__t_452__t_465 : double
+
+axiom eq_558 : add_post(NearestTiesToEven, b504, ust_465,
+  d_add__t_3__t_452__t_465)
+
+logic ust_466 : double
+
+axiom eq_559 : add_post(NearestTiesToEven, b504, ust_465, ust_466)
+
+logic d_div__t_3__t_466__t_463 : double
+
+axiom eq_560 : div_post(NearestTiesToEven, ust_466, ust_463,
+  d_div__t_3__t_466__t_463)
+
+logic ust_467 : double
+
+axiom eq_561 : div_post(NearestTiesToEven, ust_466, ust_463, ust_467)
+
+logic d_add__t_3__t_462__t_467 : double
+
+axiom eq_562 : add_post(NearestTiesToEven, b3872, ust_467,
+  d_add__t_3__t_462__t_467)
+
+logic ust_468 : double
+
+axiom eq_563 : add_post(NearestTiesToEven, b3872, ust_467, ust_468)
+
+predicate ust_470() = (not smt2_double_eq(b3856, ust_468))
+
+logic d_mul__t_3__t_468__t_468 : double
+
+axiom eq_564 : mul_post(NearestTiesToEven, ust_468, ust_468,
+  d_mul__t_3__t_468__t_468)
+
+logic ust_471 : double
+
+axiom eq_565 : mul_post(NearestTiesToEven, ust_468, ust_468, ust_471)
+
+logic d_neg__t_471 : double
+
+axiom eq_566 : neg_post(ust_471, d_neg__t_471)
+
+logic ust_472 : double
+
+axiom eq_567 : neg_post(ust_471, ust_472)
+
+logic d_add__t_3__t_452__t_472 : double
+
+axiom eq_568 : add_post(NearestTiesToEven, b504, ust_472,
+  d_add__t_3__t_452__t_472)
+
+logic ust_473 : double
+
+axiom eq_569 : add_post(NearestTiesToEven, b504, ust_472, ust_473)
+
+predicate ust_476() = (not smt2_double_eq(ust_473, b3898))
+
+logic d_mul__t_3__t_10__t_477 : double
+
+axiom eq_570 : mul_post(NearestTiesToEven, b526, b3903,
+  d_mul__t_3__t_10__t_477)
+
+logic ust_478 : double
+
+axiom eq_571 : mul_post(NearestTiesToEven, b526, b3903, ust_478)
+
+logic d_mul__t_3__t_477__t_477 : double
+
+axiom eq_572 : mul_post(NearestTiesToEven, b3903, b3903,
+  d_mul__t_3__t_477__t_477)
+
+logic ust_479 : double
+
+axiom eq_573 : mul_post(NearestTiesToEven, b3903, b3903, ust_479)
+
+logic d_neg__t_479 : double
+
+axiom eq_574 : neg_post(ust_479, d_neg__t_479)
+
+logic ust_480 : double
+
+axiom eq_575 : neg_post(ust_479, ust_480)
+
+logic d_add__t_3__t_452__t_480 : double
+
+axiom eq_576 : add_post(NearestTiesToEven, b504, ust_480,
+  d_add__t_3__t_452__t_480)
+
+logic ust_481 : double
+
+axiom eq_577 : add_post(NearestTiesToEven, b504, ust_480, ust_481)
+
+logic d_div__t_3__t_481__t_478 : double
+
+axiom eq_578 : div_post(NearestTiesToEven, ust_481, ust_478,
+  d_div__t_3__t_481__t_478)
+
+logic ust_482 : double
+
+axiom eq_579 : div_post(NearestTiesToEven, ust_481, ust_478, ust_482)
+
+logic d_add__t_3__t_477__t_482 : double
+
+axiom eq_580 : add_post(NearestTiesToEven, b3903, ust_482,
+  d_add__t_3__t_477__t_482)
+
+logic ust_483 : double
+
+axiom eq_581 : add_post(NearestTiesToEven, b3903, ust_482, ust_483)
+
+predicate ust_485() = (not smt2_double_eq(b3872, ust_483))
+
+logic d_mul__t_3__t_483__t_483 : double
+
+axiom eq_582 : mul_post(NearestTiesToEven, ust_483, ust_483,
+  d_mul__t_3__t_483__t_483)
+
+logic ust_486 : double
+
+axiom eq_583 : mul_post(NearestTiesToEven, ust_483, ust_483, ust_486)
+
+logic d_neg__t_486 : double
+
+axiom eq_584 : neg_post(ust_486, d_neg__t_486)
+
+logic ust_487 : double
+
+axiom eq_585 : neg_post(ust_486, ust_487)
+
+logic d_add__t_3__t_452__t_487 : double
+
+axiom eq_586 : add_post(NearestTiesToEven, b504, ust_487,
+  d_add__t_3__t_452__t_487)
+
+logic ust_488 : double
+
+axiom eq_587 : add_post(NearestTiesToEven, b504, ust_487, ust_488)
+
+predicate ust_491() = (not smt2_double_eq(ust_488, b3928))
+
+logic d_mul__t_3__t_10__t_492 : double
+
+axiom eq_588 : mul_post(NearestTiesToEven, b526, b3933,
+  d_mul__t_3__t_10__t_492)
+
+logic ust_493 : double
+
+axiom eq_589 : mul_post(NearestTiesToEven, b526, b3933, ust_493)
+
+logic d_mul__t_3__t_492__t_492 : double
+
+axiom eq_590 : mul_post(NearestTiesToEven, b3933, b3933,
+  d_mul__t_3__t_492__t_492)
+
+logic ust_494 : double
+
+axiom eq_591 : mul_post(NearestTiesToEven, b3933, b3933, ust_494)
+
+logic d_neg__t_494 : double
+
+axiom eq_592 : neg_post(ust_494, d_neg__t_494)
+
+logic ust_495 : double
+
+axiom eq_593 : neg_post(ust_494, ust_495)
+
+logic d_add__t_3__t_452__t_495 : double
+
+axiom eq_594 : add_post(NearestTiesToEven, b504, ust_495,
+  d_add__t_3__t_452__t_495)
+
+logic ust_496 : double
+
+axiom eq_595 : add_post(NearestTiesToEven, b504, ust_495, ust_496)
+
+logic d_div__t_3__t_496__t_493 : double
+
+axiom eq_596 : div_post(NearestTiesToEven, ust_496, ust_493,
+  d_div__t_3__t_496__t_493)
+
+logic ust_497 : double
+
+axiom eq_597 : div_post(NearestTiesToEven, ust_496, ust_493, ust_497)
+
+logic d_add__t_3__t_492__t_497 : double
+
+axiom eq_598 : add_post(NearestTiesToEven, b3933, ust_497,
+  d_add__t_3__t_492__t_497)
+
+logic ust_498 : double
+
+axiom eq_599 : add_post(NearestTiesToEven, b3933, ust_497, ust_498)
+
+predicate ust_500() = (not smt2_double_eq(b3903, ust_498))
+
+logic d_mul__t_3__t_498__t_498 : double
+
+axiom eq_600 : mul_post(NearestTiesToEven, ust_498, ust_498,
+  d_mul__t_3__t_498__t_498)
+
+logic ust_501 : double
+
+axiom eq_601 : mul_post(NearestTiesToEven, ust_498, ust_498, ust_501)
+
+logic d_neg__t_501 : double
+
+axiom eq_602 : neg_post(ust_501, d_neg__t_501)
+
+logic ust_502 : double
+
+axiom eq_603 : neg_post(ust_501, ust_502)
+
+logic d_add__t_3__t_452__t_502 : double
+
+axiom eq_604 : add_post(NearestTiesToEven, b504, ust_502,
+  d_add__t_3__t_452__t_502)
+
+logic ust_503 : double
+
+axiom eq_605 : add_post(NearestTiesToEven, b504, ust_502, ust_503)
+
+predicate ust_506() = (not smt2_double_eq(ust_503, b3958))
+
+logic d_mul__t_3__t_10__t_507 : double
+
+axiom eq_606 : mul_post(NearestTiesToEven, b526, b3963,
+  d_mul__t_3__t_10__t_507)
+
+logic ust_508 : double
+
+axiom eq_607 : mul_post(NearestTiesToEven, b526, b3963, ust_508)
+
+logic d_mul__t_3__t_507__t_507 : double
+
+axiom eq_608 : mul_post(NearestTiesToEven, b3963, b3963,
+  d_mul__t_3__t_507__t_507)
+
+logic ust_509 : double
+
+axiom eq_609 : mul_post(NearestTiesToEven, b3963, b3963, ust_509)
+
+logic d_neg__t_509 : double
+
+axiom eq_610 : neg_post(ust_509, d_neg__t_509)
+
+logic ust_510 : double
+
+axiom eq_611 : neg_post(ust_509, ust_510)
+
+logic d_add__t_3__t_452__t_510 : double
+
+axiom eq_612 : add_post(NearestTiesToEven, b504, ust_510,
+  d_add__t_3__t_452__t_510)
+
+logic ust_511 : double
+
+axiom eq_613 : add_post(NearestTiesToEven, b504, ust_510, ust_511)
+
+logic d_div__t_3__t_511__t_508 : double
+
+axiom eq_614 : div_post(NearestTiesToEven, ust_511, ust_508,
+  d_div__t_3__t_511__t_508)
+
+logic ust_512 : double
+
+axiom eq_615 : div_post(NearestTiesToEven, ust_511, ust_508, ust_512)
+
+logic d_add__t_3__t_507__t_512 : double
+
+axiom eq_616 : add_post(NearestTiesToEven, b3963, ust_512,
+  d_add__t_3__t_507__t_512)
+
+logic ust_513 : double
+
+axiom eq_617 : add_post(NearestTiesToEven, b3963, ust_512, ust_513)
+
+predicate ust_515() = (not smt2_double_eq(b3933, ust_513))
+
+logic d_mul__t_3__t_513__t_513 : double
+
+axiom eq_618 : mul_post(NearestTiesToEven, ust_513, ust_513,
+  d_mul__t_3__t_513__t_513)
+
+logic ust_516 : double
+
+axiom eq_619 : mul_post(NearestTiesToEven, ust_513, ust_513, ust_516)
+
+logic d_neg__t_516 : double
+
+axiom eq_620 : neg_post(ust_516, d_neg__t_516)
+
+logic ust_517 : double
+
+axiom eq_621 : neg_post(ust_516, ust_517)
+
+logic d_add__t_3__t_452__t_517 : double
+
+axiom eq_622 : add_post(NearestTiesToEven, b504, ust_517,
+  d_add__t_3__t_452__t_517)
+
+logic ust_518 : double
+
+axiom eq_623 : add_post(NearestTiesToEven, b504, ust_517, ust_518)
+
+predicate ust_521() = (not smt2_double_eq(ust_518, b3988))
+
+logic d_mul__t_3__t_10__t_522 : double
+
+axiom eq_624 : mul_post(NearestTiesToEven, b526, b3993,
+  d_mul__t_3__t_10__t_522)
+
+logic ust_523 : double
+
+axiom eq_625 : mul_post(NearestTiesToEven, b526, b3993, ust_523)
+
+logic d_mul__t_3__t_522__t_522 : double
+
+axiom eq_626 : mul_post(NearestTiesToEven, b3993, b3993,
+  d_mul__t_3__t_522__t_522)
+
+logic ust_524 : double
+
+axiom eq_627 : mul_post(NearestTiesToEven, b3993, b3993, ust_524)
+
+logic d_neg__t_524 : double
+
+axiom eq_628 : neg_post(ust_524, d_neg__t_524)
+
+logic ust_525 : double
+
+axiom eq_629 : neg_post(ust_524, ust_525)
+
+logic d_add__t_3__t_452__t_525 : double
+
+axiom eq_630 : add_post(NearestTiesToEven, b504, ust_525,
+  d_add__t_3__t_452__t_525)
+
+logic ust_526 : double
+
+axiom eq_631 : add_post(NearestTiesToEven, b504, ust_525, ust_526)
+
+logic d_div__t_3__t_526__t_523 : double
+
+axiom eq_632 : div_post(NearestTiesToEven, ust_526, ust_523,
+  d_div__t_3__t_526__t_523)
+
+logic ust_527 : double
+
+axiom eq_633 : div_post(NearestTiesToEven, ust_526, ust_523, ust_527)
+
+logic d_add__t_3__t_522__t_527 : double
+
+axiom eq_634 : add_post(NearestTiesToEven, b3993, ust_527,
+  d_add__t_3__t_522__t_527)
+
+logic ust_528 : double
+
+axiom eq_635 : add_post(NearestTiesToEven, b3993, ust_527, ust_528)
+
+predicate ust_530() = (not smt2_double_eq(b3963, ust_528))
+
+logic d_mul__t_3__t_528__t_528 : double
+
+axiom eq_636 : mul_post(NearestTiesToEven, ust_528, ust_528,
+  d_mul__t_3__t_528__t_528)
+
+logic ust_531 : double
+
+axiom eq_637 : mul_post(NearestTiesToEven, ust_528, ust_528, ust_531)
+
+logic d_neg__t_531 : double
+
+axiom eq_638 : neg_post(ust_531, d_neg__t_531)
+
+logic ust_532 : double
+
+axiom eq_639 : neg_post(ust_531, ust_532)
+
+logic d_add__t_3__t_452__t_532 : double
+
+axiom eq_640 : add_post(NearestTiesToEven, b504, ust_532,
+  d_add__t_3__t_452__t_532)
+
+logic ust_533 : double
+
+axiom eq_641 : add_post(NearestTiesToEven, b504, ust_532, ust_533)
+
+predicate ust_536() = (not smt2_double_eq(ust_533, b4018))
+
+logic d_mul__t_3__t_10__t_537 : double
+
+axiom eq_642 : mul_post(NearestTiesToEven, b526, b4023,
+  d_mul__t_3__t_10__t_537)
+
+logic ust_538 : double
+
+axiom eq_643 : mul_post(NearestTiesToEven, b526, b4023, ust_538)
+
+logic d_mul__t_3__t_537__t_537 : double
+
+axiom eq_644 : mul_post(NearestTiesToEven, b4023, b4023,
+  d_mul__t_3__t_537__t_537)
+
+logic ust_539 : double
+
+axiom eq_645 : mul_post(NearestTiesToEven, b4023, b4023, ust_539)
+
+logic d_neg__t_539 : double
+
+axiom eq_646 : neg_post(ust_539, d_neg__t_539)
+
+logic ust_540 : double
+
+axiom eq_647 : neg_post(ust_539, ust_540)
+
+logic d_add__t_3__t_452__t_540 : double
+
+axiom eq_648 : add_post(NearestTiesToEven, b504, ust_540,
+  d_add__t_3__t_452__t_540)
+
+logic ust_541 : double
+
+axiom eq_649 : add_post(NearestTiesToEven, b504, ust_540, ust_541)
+
+logic d_div__t_3__t_541__t_538 : double
+
+axiom eq_650 : div_post(NearestTiesToEven, ust_541, ust_538,
+  d_div__t_3__t_541__t_538)
+
+logic ust_542 : double
+
+axiom eq_651 : div_post(NearestTiesToEven, ust_541, ust_538, ust_542)
+
+logic d_add__t_3__t_537__t_542 : double
+
+axiom eq_652 : add_post(NearestTiesToEven, b4023, ust_542,
+  d_add__t_3__t_537__t_542)
+
+logic ust_543 : double
+
+axiom eq_653 : add_post(NearestTiesToEven, b4023, ust_542, ust_543)
+
+predicate ust_545() = (not smt2_double_eq(b3993, ust_543))
+
+logic d_mul__t_3__t_543__t_543 : double
+
+axiom eq_654 : mul_post(NearestTiesToEven, ust_543, ust_543,
+  d_mul__t_3__t_543__t_543)
+
+logic ust_546 : double
+
+axiom eq_655 : mul_post(NearestTiesToEven, ust_543, ust_543, ust_546)
+
+logic d_neg__t_546 : double
+
+axiom eq_656 : neg_post(ust_546, d_neg__t_546)
+
+logic ust_547 : double
+
+axiom eq_657 : neg_post(ust_546, ust_547)
+
+logic d_add__t_3__t_452__t_547 : double
+
+axiom eq_658 : add_post(NearestTiesToEven, b504, ust_547,
+  d_add__t_3__t_452__t_547)
+
+logic ust_548 : double
+
+axiom eq_659 : add_post(NearestTiesToEven, b504, ust_547, ust_548)
+
+predicate ust_551() = (not smt2_double_eq(ust_548, b4048))
+
+logic d_mul__t_3__t_10__t_552 : double
+
+axiom eq_660 : mul_post(NearestTiesToEven, b526, b4053,
+  d_mul__t_3__t_10__t_552)
+
+logic ust_553 : double
+
+axiom eq_661 : mul_post(NearestTiesToEven, b526, b4053, ust_553)
+
+logic d_mul__t_3__t_552__t_552 : double
+
+axiom eq_662 : mul_post(NearestTiesToEven, b4053, b4053,
+  d_mul__t_3__t_552__t_552)
+
+logic ust_554 : double
+
+axiom eq_663 : mul_post(NearestTiesToEven, b4053, b4053, ust_554)
+
+logic d_neg__t_554 : double
+
+axiom eq_664 : neg_post(ust_554, d_neg__t_554)
+
+logic ust_555 : double
+
+axiom eq_665 : neg_post(ust_554, ust_555)
+
+logic d_add__t_3__t_452__t_555 : double
+
+axiom eq_666 : add_post(NearestTiesToEven, b504, ust_555,
+  d_add__t_3__t_452__t_555)
+
+logic ust_556 : double
+
+axiom eq_667 : add_post(NearestTiesToEven, b504, ust_555, ust_556)
+
+logic d_div__t_3__t_556__t_553 : double
+
+axiom eq_668 : div_post(NearestTiesToEven, ust_556, ust_553,
+  d_div__t_3__t_556__t_553)
+
+logic ust_557 : double
+
+axiom eq_669 : div_post(NearestTiesToEven, ust_556, ust_553, ust_557)
+
+logic d_add__t_3__t_552__t_557 : double
+
+axiom eq_670 : add_post(NearestTiesToEven, b4053, ust_557,
+  d_add__t_3__t_552__t_557)
+
+logic ust_558 : double
+
+axiom eq_671 : add_post(NearestTiesToEven, b4053, ust_557, ust_558)
+
+predicate ust_560() = (not smt2_double_eq(b4023, ust_558))
+
+logic d_mul__t_3__t_558__t_558 : double
+
+axiom eq_672 : mul_post(NearestTiesToEven, ust_558, ust_558,
+  d_mul__t_3__t_558__t_558)
+
+logic ust_561 : double
+
+axiom eq_673 : mul_post(NearestTiesToEven, ust_558, ust_558, ust_561)
+
+logic d_neg__t_561 : double
+
+axiom eq_674 : neg_post(ust_561, d_neg__t_561)
+
+logic ust_562 : double
+
+axiom eq_675 : neg_post(ust_561, ust_562)
+
+logic d_add__t_3__t_452__t_562 : double
+
+axiom eq_676 : add_post(NearestTiesToEven, b504, ust_562,
+  d_add__t_3__t_452__t_562)
+
+logic ust_563 : double
+
+axiom eq_677 : add_post(NearestTiesToEven, b504, ust_562, ust_563)
+
+predicate ust_566() = (not smt2_double_eq(ust_563, b4078))
+
+logic d_mul__t_3__t_10__t_567 : double
+
+axiom eq_678 : mul_post(NearestTiesToEven, b526, b4083,
+  d_mul__t_3__t_10__t_567)
+
+logic ust_568 : double
+
+axiom eq_679 : mul_post(NearestTiesToEven, b526, b4083, ust_568)
+
+logic d_mul__t_3__t_567__t_567 : double
+
+axiom eq_680 : mul_post(NearestTiesToEven, b4083, b4083,
+  d_mul__t_3__t_567__t_567)
+
+logic ust_569 : double
+
+axiom eq_681 : mul_post(NearestTiesToEven, b4083, b4083, ust_569)
+
+logic d_neg__t_569 : double
+
+axiom eq_682 : neg_post(ust_569, d_neg__t_569)
+
+logic ust_570 : double
+
+axiom eq_683 : neg_post(ust_569, ust_570)
+
+logic d_add__t_3__t_452__t_570 : double
+
+axiom eq_684 : add_post(NearestTiesToEven, b504, ust_570,
+  d_add__t_3__t_452__t_570)
+
+logic ust_571 : double
+
+axiom eq_685 : add_post(NearestTiesToEven, b504, ust_570, ust_571)
+
+logic d_div__t_3__t_571__t_568 : double
+
+axiom eq_686 : div_post(NearestTiesToEven, ust_571, ust_568,
+  d_div__t_3__t_571__t_568)
+
+logic ust_572 : double
+
+axiom eq_687 : div_post(NearestTiesToEven, ust_571, ust_568, ust_572)
+
+logic d_add__t_3__t_567__t_572 : double
+
+axiom eq_688 : add_post(NearestTiesToEven, b4083, ust_572,
+  d_add__t_3__t_567__t_572)
+
+logic ust_573 : double
+
+axiom eq_689 : add_post(NearestTiesToEven, b4083, ust_572, ust_573)
+
+predicate ust_575() = (not smt2_double_eq(b4053, ust_573))
+
+logic d_mul__t_3__t_573__t_573 : double
+
+axiom eq_690 : mul_post(NearestTiesToEven, ust_573, ust_573,
+  d_mul__t_3__t_573__t_573)
+
+logic ust_576 : double
+
+axiom eq_691 : mul_post(NearestTiesToEven, ust_573, ust_573, ust_576)
+
+logic d_neg__t_576 : double
+
+axiom eq_692 : neg_post(ust_576, d_neg__t_576)
+
+logic ust_577 : double
+
+axiom eq_693 : neg_post(ust_576, ust_577)
+
+logic d_add__t_3__t_452__t_577 : double
+
+axiom eq_694 : add_post(NearestTiesToEven, b504, ust_577,
+  d_add__t_3__t_452__t_577)
+
+logic ust_578 : double
+
+axiom eq_695 : add_post(NearestTiesToEven, b504, ust_577, ust_578)
+
+predicate ust_581() = (not smt2_double_eq(ust_578, b4108))
+
+logic d_mul__t_3__t_10__t_582 : double
+
+axiom eq_696 : mul_post(NearestTiesToEven, b526, b4113,
+  d_mul__t_3__t_10__t_582)
+
+logic ust_583 : double
+
+axiom eq_697 : mul_post(NearestTiesToEven, b526, b4113, ust_583)
+
+logic d_mul__t_3__t_582__t_582 : double
+
+axiom eq_698 : mul_post(NearestTiesToEven, b4113, b4113,
+  d_mul__t_3__t_582__t_582)
+
+logic ust_584 : double
+
+axiom eq_699 : mul_post(NearestTiesToEven, b4113, b4113, ust_584)
+
+logic d_neg__t_584 : double
+
+axiom eq_700 : neg_post(ust_584, d_neg__t_584)
+
+logic ust_585 : double
+
+axiom eq_701 : neg_post(ust_584, ust_585)
+
+logic d_add__t_3__t_452__t_585 : double
+
+axiom eq_702 : add_post(NearestTiesToEven, b504, ust_585,
+  d_add__t_3__t_452__t_585)
+
+logic ust_586 : double
+
+axiom eq_703 : add_post(NearestTiesToEven, b504, ust_585, ust_586)
+
+logic d_div__t_3__t_586__t_583 : double
+
+axiom eq_704 : div_post(NearestTiesToEven, ust_586, ust_583,
+  d_div__t_3__t_586__t_583)
+
+logic ust_587 : double
+
+axiom eq_705 : div_post(NearestTiesToEven, ust_586, ust_583, ust_587)
+
+logic d_add__t_3__t_582__t_587 : double
+
+axiom eq_706 : add_post(NearestTiesToEven, b4113, ust_587,
+  d_add__t_3__t_582__t_587)
+
+logic ust_588 : double
+
+axiom eq_707 : add_post(NearestTiesToEven, b4113, ust_587, ust_588)
+
+predicate ust_590() = (not smt2_double_eq(b4083, ust_588))
+
+logic d_mul__t_3__t_588__t_588 : double
+
+axiom eq_708 : mul_post(NearestTiesToEven, ust_588, ust_588,
+  d_mul__t_3__t_588__t_588)
+
+logic ust_591 : double
+
+axiom eq_709 : mul_post(NearestTiesToEven, ust_588, ust_588, ust_591)
+
+logic d_neg__t_591 : double
+
+axiom eq_710 : neg_post(ust_591, d_neg__t_591)
+
+logic ust_592 : double
+
+axiom eq_711 : neg_post(ust_591, ust_592)
+
+logic d_add__t_3__t_452__t_592 : double
+
+axiom eq_712 : add_post(NearestTiesToEven, b504, ust_592,
+  d_add__t_3__t_452__t_592)
+
+logic ust_593 : double
+
+axiom eq_713 : add_post(NearestTiesToEven, b504, ust_592, ust_593)
+
+predicate ust_596() = (not smt2_double_eq(ust_593, b4138))
+
+logic d_mul__t_3__t_10__t_597 : double
+
+axiom eq_714 : mul_post(NearestTiesToEven, b526, b4143,
+  d_mul__t_3__t_10__t_597)
+
+logic ust_598 : double
+
+axiom eq_715 : mul_post(NearestTiesToEven, b526, b4143, ust_598)
+
+logic d_mul__t_3__t_597__t_597 : double
+
+axiom eq_716 : mul_post(NearestTiesToEven, b4143, b4143,
+  d_mul__t_3__t_597__t_597)
+
+logic ust_599 : double
+
+axiom eq_717 : mul_post(NearestTiesToEven, b4143, b4143, ust_599)
+
+logic d_neg__t_599 : double
+
+axiom eq_718 : neg_post(ust_599, d_neg__t_599)
+
+logic ust_600 : double
+
+axiom eq_719 : neg_post(ust_599, ust_600)
+
+logic d_add__t_3__t_452__t_600 : double
+
+axiom eq_720 : add_post(NearestTiesToEven, b504, ust_600,
+  d_add__t_3__t_452__t_600)
+
+logic ust_601 : double
+
+axiom eq_721 : add_post(NearestTiesToEven, b504, ust_600, ust_601)
+
+logic d_div__t_3__t_601__t_598 : double
+
+axiom eq_722 : div_post(NearestTiesToEven, ust_601, ust_598,
+  d_div__t_3__t_601__t_598)
+
+logic ust_602 : double
+
+axiom eq_723 : div_post(NearestTiesToEven, ust_601, ust_598, ust_602)
+
+logic d_add__t_3__t_597__t_602 : double
+
+axiom eq_724 : add_post(NearestTiesToEven, b4143, ust_602,
+  d_add__t_3__t_597__t_602)
+
+logic ust_603 : double
+
+axiom eq_725 : add_post(NearestTiesToEven, b4143, ust_602, ust_603)
+
+predicate ust_605() = (not smt2_double_eq(b4113, ust_603))
+
+logic d_mul__t_3__t_603__t_603 : double
+
+axiom eq_726 : mul_post(NearestTiesToEven, ust_603, ust_603,
+  d_mul__t_3__t_603__t_603)
+
+logic ust_606 : double
+
+axiom eq_727 : mul_post(NearestTiesToEven, ust_603, ust_603, ust_606)
+
+logic d_neg__t_606 : double
+
+axiom eq_728 : neg_post(ust_606, d_neg__t_606)
+
+logic ust_607 : double
+
+axiom eq_729 : neg_post(ust_606, ust_607)
+
+logic d_add__t_3__t_452__t_607 : double
+
+axiom eq_730 : add_post(NearestTiesToEven, b504, ust_607,
+  d_add__t_3__t_452__t_607)
+
+logic ust_608 : double
+
+axiom eq_731 : add_post(NearestTiesToEven, b504, ust_607, ust_608)
+
+predicate ust_611() = (not smt2_double_eq(ust_608, b4168))
+
+logic d_mul__t_3__t_10__t_612 : double
+
+axiom eq_732 : mul_post(NearestTiesToEven, b526, b4173,
+  d_mul__t_3__t_10__t_612)
+
+logic ust_613 : double
+
+axiom eq_733 : mul_post(NearestTiesToEven, b526, b4173, ust_613)
+
+logic d_mul__t_3__t_612__t_612 : double
+
+axiom eq_734 : mul_post(NearestTiesToEven, b4173, b4173,
+  d_mul__t_3__t_612__t_612)
+
+logic ust_614 : double
+
+axiom eq_735 : mul_post(NearestTiesToEven, b4173, b4173, ust_614)
+
+logic d_neg__t_614 : double
+
+axiom eq_736 : neg_post(ust_614, d_neg__t_614)
+
+logic ust_615 : double
+
+axiom eq_737 : neg_post(ust_614, ust_615)
+
+logic d_add__t_3__t_452__t_615 : double
+
+axiom eq_738 : add_post(NearestTiesToEven, b504, ust_615,
+  d_add__t_3__t_452__t_615)
+
+logic ust_616 : double
+
+axiom eq_739 : add_post(NearestTiesToEven, b504, ust_615, ust_616)
+
+logic d_div__t_3__t_616__t_613 : double
+
+axiom eq_740 : div_post(NearestTiesToEven, ust_616, ust_613,
+  d_div__t_3__t_616__t_613)
+
+logic ust_617 : double
+
+axiom eq_741 : div_post(NearestTiesToEven, ust_616, ust_613, ust_617)
+
+logic d_add__t_3__t_612__t_617 : double
+
+axiom eq_742 : add_post(NearestTiesToEven, b4173, ust_617,
+  d_add__t_3__t_612__t_617)
+
+logic ust_618 : double
+
+axiom eq_743 : add_post(NearestTiesToEven, b4173, ust_617, ust_618)
+
+predicate ust_620() = (not smt2_double_eq(b4143, ust_618))
+
+logic d_mul__t_3__t_618__t_618 : double
+
+axiom eq_744 : mul_post(NearestTiesToEven, ust_618, ust_618,
+  d_mul__t_3__t_618__t_618)
+
+logic ust_621 : double
+
+axiom eq_745 : mul_post(NearestTiesToEven, ust_618, ust_618, ust_621)
+
+logic d_neg__t_621 : double
+
+axiom eq_746 : neg_post(ust_621, d_neg__t_621)
+
+logic ust_622 : double
+
+axiom eq_747 : neg_post(ust_621, ust_622)
+
+logic d_add__t_3__t_452__t_622 : double
+
+axiom eq_748 : add_post(NearestTiesToEven, b504, ust_622,
+  d_add__t_3__t_452__t_622)
+
+logic ust_623 : double
+
+axiom eq_749 : add_post(NearestTiesToEven, b504, ust_622, ust_623)
+
+predicate ust_626() = (not smt2_double_eq(ust_623, b4198))
+
+logic d_mul__t_3__t_10__t_627 : double
+
+axiom eq_750 : mul_post(NearestTiesToEven, b526, b4203,
+  d_mul__t_3__t_10__t_627)
+
+logic ust_628 : double
+
+axiom eq_751 : mul_post(NearestTiesToEven, b526, b4203, ust_628)
+
+logic d_mul__t_3__t_627__t_627 : double
+
+axiom eq_752 : mul_post(NearestTiesToEven, b4203, b4203,
+  d_mul__t_3__t_627__t_627)
+
+logic ust_629 : double
+
+axiom eq_753 : mul_post(NearestTiesToEven, b4203, b4203, ust_629)
+
+logic d_neg__t_629 : double
+
+axiom eq_754 : neg_post(ust_629, d_neg__t_629)
+
+logic ust_630 : double
+
+axiom eq_755 : neg_post(ust_629, ust_630)
+
+logic d_add__t_3__t_452__t_630 : double
+
+axiom eq_756 : add_post(NearestTiesToEven, b504, ust_630,
+  d_add__t_3__t_452__t_630)
+
+logic ust_631 : double
+
+axiom eq_757 : add_post(NearestTiesToEven, b504, ust_630, ust_631)
+
+logic d_div__t_3__t_631__t_628 : double
+
+axiom eq_758 : div_post(NearestTiesToEven, ust_631, ust_628,
+  d_div__t_3__t_631__t_628)
+
+logic ust_632 : double
+
+axiom eq_759 : div_post(NearestTiesToEven, ust_631, ust_628, ust_632)
+
+logic d_add__t_3__t_627__t_632 : double
+
+axiom eq_760 : add_post(NearestTiesToEven, b4203, ust_632,
+  d_add__t_3__t_627__t_632)
+
+logic ust_633 : double
+
+axiom eq_761 : add_post(NearestTiesToEven, b4203, ust_632, ust_633)
+
+predicate ust_635() = (not smt2_double_eq(b4173, ust_633))
+
+logic d_mul__t_3__t_633__t_633 : double
+
+axiom eq_762 : mul_post(NearestTiesToEven, ust_633, ust_633,
+  d_mul__t_3__t_633__t_633)
+
+logic ust_636 : double
+
+axiom eq_763 : mul_post(NearestTiesToEven, ust_633, ust_633, ust_636)
+
+logic d_neg__t_636 : double
+
+axiom eq_764 : neg_post(ust_636, d_neg__t_636)
+
+logic ust_637 : double
+
+axiom eq_765 : neg_post(ust_636, ust_637)
+
+logic d_add__t_3__t_452__t_637 : double
+
+axiom eq_766 : add_post(NearestTiesToEven, b504, ust_637,
+  d_add__t_3__t_452__t_637)
+
+logic ust_638 : double
+
+axiom eq_767 : add_post(NearestTiesToEven, b504, ust_637, ust_638)
+
+predicate ust_641() = (not smt2_double_eq(ust_638, b4228))
+
+logic d_div__t_3__t_452__t_204 : double
+
+axiom eq_768 : div_post(NearestTiesToEven, b504, b535,
+  d_div__t_3__t_452__t_204)
+
+logic ust_642 : double
+
+axiom eq_769 : div_post(NearestTiesToEven, b504, b535, ust_642)
+
+logic d_mul__t_3__t_10__t_642 : double
+
+axiom eq_770 : mul_post(NearestTiesToEven, b526, ust_642,
+  d_mul__t_3__t_10__t_642)
+
+logic ust_643 : double
+
+axiom eq_771 : mul_post(NearestTiesToEven, b526, ust_642, ust_643)
+
+logic d_mul__t_3__t_642__t_642 : double
+
+axiom eq_772 : mul_post(NearestTiesToEven, ust_642, ust_642,
+  d_mul__t_3__t_642__t_642)
+
+logic ust_644 : double
+
+axiom eq_773 : mul_post(NearestTiesToEven, ust_642, ust_642, ust_644)
+
+logic d_neg__t_644 : double
+
+axiom eq_774 : neg_post(ust_644, d_neg__t_644)
+
+logic ust_645 : double
+
+axiom eq_775 : neg_post(ust_644, ust_645)
+
+logic d_add__t_3__t_452__t_645 : double
+
+axiom eq_776 : add_post(NearestTiesToEven, b504, ust_645,
+  d_add__t_3__t_452__t_645)
+
+logic ust_646 : double
+
+axiom eq_777 : add_post(NearestTiesToEven, b504, ust_645, ust_646)
+
+logic d_div__t_3__t_646__t_643 : double
+
+axiom eq_778 : div_post(NearestTiesToEven, ust_646, ust_643,
+  d_div__t_3__t_646__t_643)
+
+logic ust_647 : double
+
+axiom eq_779 : div_post(NearestTiesToEven, ust_646, ust_643, ust_647)
+
+logic d_add__t_3__t_642__t_647 : double
+
+axiom eq_780 : add_post(NearestTiesToEven, ust_642, ust_647,
+  d_add__t_3__t_642__t_647)
+
+logic ust_648 : double
+
+axiom eq_781 : add_post(NearestTiesToEven, ust_642, ust_647, ust_648)
+
+predicate ust_650() = (not smt2_double_eq(b4203, ust_648))
+
+logic d_mul__t_3__t_10__t_648 : double
+
+axiom eq_782 : mul_post(NearestTiesToEven, b526, ust_648,
+  d_mul__t_3__t_10__t_648)
+
+logic ust_651 : double
+
+axiom eq_783 : mul_post(NearestTiesToEven, b526, ust_648, ust_651)
+
+logic d_mul__t_3__t_648__t_648 : double
+
+axiom eq_784 : mul_post(NearestTiesToEven, ust_648, ust_648,
+  d_mul__t_3__t_648__t_648)
+
+logic ust_652 : double
+
+axiom eq_785 : mul_post(NearestTiesToEven, ust_648, ust_648, ust_652)
+
+logic d_neg__t_652 : double
+
+axiom eq_786 : neg_post(ust_652, d_neg__t_652)
+
+logic ust_653 : double
+
+axiom eq_787 : neg_post(ust_652, ust_653)
+
+logic d_add__t_3__t_452__t_653 : double
+
+axiom eq_788 : add_post(NearestTiesToEven, b504, ust_653,
+  d_add__t_3__t_452__t_653)
+
+logic ust_654 : double
+
+axiom eq_789 : add_post(NearestTiesToEven, b504, ust_653, ust_654)
+
+logic d_div__t_3__t_654__t_651 : double
+
+axiom eq_790 : div_post(NearestTiesToEven, ust_654, ust_651,
+  d_div__t_3__t_654__t_651)
+
+logic ust_655 : double
+
+axiom eq_791 : div_post(NearestTiesToEven, ust_654, ust_651, ust_655)
+
+logic d_add__t_3__t_648__t_655 : double
+
+axiom eq_792 : add_post(NearestTiesToEven, ust_648, ust_655,
+  d_add__t_3__t_648__t_655)
+
+logic ust_656 : double
+
+axiom eq_793 : add_post(NearestTiesToEven, ust_648, ust_655, ust_656)
+
+logic d_mul__t_3__t_656__t_656 : double
+
+axiom eq_794 : mul_post(NearestTiesToEven, ust_656, ust_656,
+  d_mul__t_3__t_656__t_656)
+
+logic ust_657 : double
+
+axiom eq_795 : mul_post(NearestTiesToEven, ust_656, ust_656, ust_657)
+
+logic d_neg__t_657 : double
+
+axiom eq_796 : neg_post(ust_657, d_neg__t_657)
+
+logic ust_658 : double
+
+axiom eq_797 : neg_post(ust_657, ust_658)
+
+logic d_add__t_3__t_452__t_658 : double
+
+axiom eq_798 : add_post(NearestTiesToEven, b504, ust_658,
+  d_add__t_3__t_452__t_658)
+
+logic ust_659 : double
+
+axiom eq_799 : add_post(NearestTiesToEven, b504, ust_658, ust_659)
+
+predicate ust_662() = (not smt2_double_eq(ust_659, b4264))
+
+predicate ust_665() = (not smt2_double_eq(ust_654, b4274))
+
+predicate ust_667() = (not eq(b492, b492))
+
+predicate ust_669() = (not eq(b492, b504))
+
+predicate ust_670() = (ust_667 and ust_669)
+
+predicate ust_672() = (not eq(b1363, b492))
+
+predicate ust_673() = (ust_670 and ust_672)
+
+predicate ust_675() = (not le(b492, ust_654))
+
+predicate ust_676() = (ust_673 and ust_675)
+
+logic d_neg__t_654 : double
+
+axiom eq_800 : neg_post(ust_654, d_neg__t_654)
+
+logic ust_677 : double
+
+axiom eq_801 : neg_post(ust_654, ust_677)
+
+predicate ust_679() = (ust_676 and smt2_double_eq(b4274, ust_677))
+
+predicate ust_680() = (ust_665 and ust_679)
+
+predicate ust_683() = (not le(b4274, b538))
+
+predicate ust_684() = (ust_680 and ust_683)
+
+predicate ust_686() = (ust_684 and smt2_double_eq(b4203, ust_656))
+
+predicate ust_688() = (not le(b492, ust_659))
+
+predicate ust_689() = (ust_686 and ust_688)
+
+logic d_neg__t_659 : double
+
+axiom eq_802 : neg_post(ust_659, d_neg__t_659)
+
+logic ust_690 : double
+
+axiom eq_803 : neg_post(ust_659, ust_690)
+
+predicate ust_692() = (ust_689 and smt2_double_eq(b4264, ust_690))
+
+predicate ust_693() = (ust_662 and ust_692)
+
+predicate ust_695() = (not le(b4264, b538))
+
+predicate ust_696() = (ust_693 and ust_695)
+
+predicate ust_697() = (ust_650 and ust_696)
+
+predicate ust_699() = (not le(b492, ust_638))
+
+predicate ust_700() = (ust_697 and ust_699)
+
+logic d_neg__t_638 : double
+
+axiom eq_804 : neg_post(ust_638, d_neg__t_638)
+
+logic ust_701 : double
+
+axiom eq_805 : neg_post(ust_638, ust_701)
+
+predicate ust_703() = (ust_700 and smt2_double_eq(b4228, ust_701))
+
+predicate ust_704() = (ust_641 and ust_703)
+
+predicate ust_706() = (ust_704 and smt2_double_eq(b4173, b4203))
+
+predicate ust_708() = (not le(b4228, b538))
+
+predicate ust_709() = (ust_706 and ust_708)
+
+predicate ust_710() = (ust_635 and ust_709)
+
+predicate ust_712() = (not le(b492, ust_623))
+
+predicate ust_713() = (ust_710 and ust_712)
+
+logic d_neg__t_623 : double
+
+axiom eq_806 : neg_post(ust_623, d_neg__t_623)
+
+logic ust_714 : double
+
+axiom eq_807 : neg_post(ust_623, ust_714)
+
+predicate ust_716() = (ust_713 and smt2_double_eq(b4198, ust_714))
+
+predicate ust_717() = (ust_626 and ust_716)
+
+predicate ust_719() = (ust_717 and smt2_double_eq(b4143, b4173))
+
+predicate ust_720() = (ust_620 and ust_719)
+
+predicate ust_722() = (not le(b4198, b538))
+
+predicate ust_723() = (ust_720 and ust_722)
+
+predicate ust_725() = (not le(b492, ust_608))
+
+predicate ust_726() = (ust_723 and ust_725)
+
+logic d_neg__t_608 : double
+
+axiom eq_808 : neg_post(ust_608, d_neg__t_608)
+
+logic ust_727 : double
+
+axiom eq_809 : neg_post(ust_608, ust_727)
+
+predicate ust_729() = (ust_726 and smt2_double_eq(b4168, ust_727))
+
+predicate ust_730() = (ust_611 and ust_729)
+
+predicate ust_732() = (ust_730 and smt2_double_eq(b4113, b4143))
+
+predicate ust_733() = (ust_605 and ust_732)
+
+predicate ust_735() = (not le(b4168, b538))
+
+predicate ust_736() = (ust_733 and ust_735)
+
+predicate ust_738() = (not le(b492, ust_593))
+
+predicate ust_739() = (ust_736 and ust_738)
+
+logic d_neg__t_593 : double
+
+axiom eq_810 : neg_post(ust_593, d_neg__t_593)
+
+logic ust_740 : double
+
+axiom eq_811 : neg_post(ust_593, ust_740)
+
+predicate ust_742() = (ust_739 and smt2_double_eq(b4138, ust_740))
+
+predicate ust_743() = (ust_596 and ust_742)
+
+predicate ust_745() = (ust_743 and smt2_double_eq(b4083, b4113))
+
+predicate ust_746() = (ust_590 and ust_745)
+
+predicate ust_748() = (not le(b4138, b538))
+
+predicate ust_749() = (ust_746 and ust_748)
+
+predicate ust_751() = (not le(b492, ust_578))
+
+predicate ust_752() = (ust_749 and ust_751)
+
+logic d_neg__t_578 : double
+
+axiom eq_812 : neg_post(ust_578, d_neg__t_578)
+
+logic ust_753 : double
+
+axiom eq_813 : neg_post(ust_578, ust_753)
+
+predicate ust_755() = (ust_752 and smt2_double_eq(b4108, ust_753))
+
+predicate ust_756() = (ust_581 and ust_755)
+
+predicate ust_758() = (ust_756 and smt2_double_eq(b4053, b4083))
+
+predicate ust_759() = (ust_575 and ust_758)
+
+predicate ust_761() = (not le(b4108, b538))
+
+predicate ust_762() = (ust_759 and ust_761)
+
+predicate ust_764() = (not le(b492, ust_563))
+
+predicate ust_765() = (ust_762 and ust_764)
+
+logic d_neg__t_563 : double
+
+axiom eq_814 : neg_post(ust_563, d_neg__t_563)
+
+logic ust_766 : double
+
+axiom eq_815 : neg_post(ust_563, ust_766)
+
+predicate ust_768() = (ust_765 and smt2_double_eq(b4078, ust_766))
+
+predicate ust_769() = (ust_566 and ust_768)
+
+predicate ust_771() = (ust_769 and smt2_double_eq(b4023, b4053))
+
+predicate ust_772() = (ust_560 and ust_771)
+
+predicate ust_774() = (not le(b4078, b538))
+
+predicate ust_775() = (ust_772 and ust_774)
+
+predicate ust_777() = (not le(b492, ust_548))
+
+predicate ust_778() = (ust_775 and ust_777)
+
+logic d_neg__t_548 : double
+
+axiom eq_816 : neg_post(ust_548, d_neg__t_548)
+
+logic ust_779 : double
+
+axiom eq_817 : neg_post(ust_548, ust_779)
+
+predicate ust_781() = (ust_778 and smt2_double_eq(b4048, ust_779))
+
+predicate ust_782() = (ust_551 and ust_781)
+
+predicate ust_784() = (ust_782 and smt2_double_eq(b3993, b4023))
+
+predicate ust_785() = (ust_545 and ust_784)
+
+predicate ust_787() = (not le(b4048, b538))
+
+predicate ust_788() = (ust_785 and ust_787)
+
+predicate ust_790() = (not le(b492, ust_533))
+
+predicate ust_791() = (ust_788 and ust_790)
+
+logic d_neg__t_533 : double
+
+axiom eq_818 : neg_post(ust_533, d_neg__t_533)
+
+logic ust_792 : double
+
+axiom eq_819 : neg_post(ust_533, ust_792)
+
+predicate ust_794() = (ust_791 and smt2_double_eq(b4018, ust_792))
+
+predicate ust_795() = (ust_536 and ust_794)
+
+predicate ust_797() = (ust_795 and smt2_double_eq(b3963, b3993))
+
+predicate ust_798() = (ust_530 and ust_797)
+
+predicate ust_800() = (not le(b4018, b538))
+
+predicate ust_801() = (ust_798 and ust_800)
+
+predicate ust_803() = (not le(b492, ust_518))
+
+predicate ust_804() = (ust_801 and ust_803)
+
+logic d_neg__t_518 : double
+
+axiom eq_820 : neg_post(ust_518, d_neg__t_518)
+
+logic ust_805 : double
+
+axiom eq_821 : neg_post(ust_518, ust_805)
+
+predicate ust_807() = (ust_804 and smt2_double_eq(b3988, ust_805))
+
+predicate ust_808() = (ust_521 and ust_807)
+
+predicate ust_810() = (ust_808 and smt2_double_eq(b3933, b3963))
+
+predicate ust_811() = (ust_515 and ust_810)
+
+predicate ust_813() = (not le(b3988, b538))
+
+predicate ust_814() = (ust_811 and ust_813)
+
+predicate ust_816() = (not le(b492, ust_503))
+
+predicate ust_817() = (ust_814 and ust_816)
+
+logic d_neg__t_503 : double
+
+axiom eq_822 : neg_post(ust_503, d_neg__t_503)
+
+logic ust_818 : double
+
+axiom eq_823 : neg_post(ust_503, ust_818)
+
+predicate ust_820() = (ust_817 and smt2_double_eq(b3958, ust_818))
+
+predicate ust_821() = (ust_506 and ust_820)
+
+predicate ust_823() = (ust_821 and smt2_double_eq(b3903, b3933))
+
+predicate ust_824() = (ust_500 and ust_823)
+
+predicate ust_826() = (not le(b3958, b538))
+
+predicate ust_827() = (ust_824 and ust_826)
+
+predicate ust_829() = (not le(b492, ust_488))
+
+predicate ust_830() = (ust_827 and ust_829)
+
+logic d_neg__t_488 : double
+
+axiom eq_824 : neg_post(ust_488, d_neg__t_488)
+
+logic ust_831 : double
+
+axiom eq_825 : neg_post(ust_488, ust_831)
+
+predicate ust_833() = (ust_830 and smt2_double_eq(b3928, ust_831))
+
+predicate ust_834() = (ust_491 and ust_833)
+
+predicate ust_836() = (ust_834 and smt2_double_eq(b3872, b3903))
+
+predicate ust_837() = (ust_485 and ust_836)
+
+predicate ust_839() = (not le(b3928, b538))
+
+predicate ust_840() = (ust_837 and ust_839)
+
+predicate ust_842() = (not le(b492, ust_473))
+
+predicate ust_843() = (ust_840 and ust_842)
+
+logic d_neg__t_473 : double
+
+axiom eq_826 : neg_post(ust_473, d_neg__t_473)
+
+logic ust_844 : double
+
+axiom eq_827 : neg_post(ust_473, ust_844)
+
+predicate ust_846() = (ust_843 and smt2_double_eq(b3898, ust_844))
+
+predicate ust_847() = (ust_476 and ust_846)
+
+predicate ust_849() = (ust_847 and smt2_double_eq(b3856, b3872))
+
+predicate ust_850() = (ust_470 and ust_849)
+
+predicate ust_852() = (not le(b3898, b538))
+
+predicate ust_853() = (ust_850 and ust_852)
+
+predicate ust_855() = (not le(b492, ust_458))
+
+predicate ust_856() = (ust_853 and ust_855)
+
+logic d_neg__t_458 : double
+
+axiom eq_828 : neg_post(ust_458, d_neg__t_458)
+
+logic ust_857 : double
+
+axiom eq_829 : neg_post(ust_458, ust_857)
+
+predicate ust_859() = (ust_856 and smt2_double_eq(b3867, ust_857))
+
+predicate ust_860() = (ust_461 and ust_859)
+
+predicate ust_862() = (not le(b492, ust_436))
+
+predicate ust_863() = (ust_860 and ust_862)
+
+logic d_neg__t_436 : double
+
+axiom eq_830 : neg_post(ust_436, d_neg__t_436)
+
+logic ust_864 : double
+
+axiom eq_831 : neg_post(ust_436, ust_864)
+
+predicate ust_866() = (ust_863 and smt2_double_eq(b3846, ust_864))
+
+predicate ust_867() = (ust_447 and ust_866)
+
+predicate ust_869() = (not le(b3846, b538))
+
+predicate ust_870() = (ust_867 and ust_869)
+
+predicate ust_872() = (ust_870 and smt2_double_eq(b3775, ust_438))
+
+predicate ust_874() = (not le(b492, ust_441))
+
+predicate ust_875() = (ust_872 and ust_874)
+
+logic d_neg__t_441 : double
+
+axiom eq_832 : neg_post(ust_441, d_neg__t_441)
+
+logic ust_876 : double
+
+axiom eq_833 : neg_post(ust_441, ust_876)
+
+predicate ust_878() = (ust_875 and smt2_double_eq(b3836, ust_876))
+
+predicate ust_879() = (ust_444 and ust_878)
+
+predicate ust_881() = (not le(b3836, b538))
+
+predicate ust_882() = (ust_879 and ust_881)
+
+predicate ust_883() = (ust_432 and ust_882)
+
+predicate ust_885() = (not le(b492, ust_420))
+
+predicate ust_886() = (ust_883 and ust_885)
+
+logic d_neg__t_420 : double
+
+axiom eq_834 : neg_post(ust_420, d_neg__t_420)
+
+logic ust_887 : double
+
+axiom eq_835 : neg_post(ust_420, ust_887)
+
+predicate ust_889() = (ust_886 and smt2_double_eq(b3800, ust_887))
+
+predicate ust_890() = (ust_423 and ust_889)
+
+predicate ust_892() = (ust_890 and smt2_double_eq(b3745, b3775))
+
+predicate ust_894() = (not le(b3800, b538))
+
+predicate ust_895() = (ust_892 and ust_894)
+
+predicate ust_896() = (ust_417 and ust_895)
+
+predicate ust_898() = (not le(b492, ust_405))
+
+predicate ust_899() = (ust_896 and ust_898)
+
+logic d_neg__t_405 : double
+
+axiom eq_836 : neg_post(ust_405, d_neg__t_405)
+
+logic ust_900 : double
+
+axiom eq_837 : neg_post(ust_405, ust_900)
+
+predicate ust_902() = (ust_899 and smt2_double_eq(b3770, ust_900))
+
+predicate ust_903() = (ust_408 and ust_902)
+
+predicate ust_905() = (ust_903 and smt2_double_eq(b3715, b3745))
+
+predicate ust_906() = (ust_402 and ust_905)
+
+predicate ust_908() = (not le(b3770, b538))
+
+predicate ust_909() = (ust_906 and ust_908)
+
+predicate ust_911() = (not le(b492, ust_390))
+
+predicate ust_912() = (ust_909 and ust_911)
+
+logic d_neg__t_390 : double
+
+axiom eq_838 : neg_post(ust_390, d_neg__t_390)
+
+logic ust_913 : double
+
+axiom eq_839 : neg_post(ust_390, ust_913)
+
+predicate ust_915() = (ust_912 and smt2_double_eq(b3740, ust_913))
+
+predicate ust_916() = (ust_393 and ust_915)
+
+predicate ust_918() = (ust_916 and smt2_double_eq(b3685, b3715))
+
+predicate ust_919() = (ust_387 and ust_918)
+
+predicate ust_921() = (not le(b3740, b538))
+
+predicate ust_922() = (ust_919 and ust_921)
+
+predicate ust_924() = (not le(b492, ust_375))
+
+predicate ust_925() = (ust_922 and ust_924)
+
+logic d_neg__t_375 : double
+
+axiom eq_840 : neg_post(ust_375, d_neg__t_375)
+
+logic ust_926 : double
+
+axiom eq_841 : neg_post(ust_375, ust_926)
+
+predicate ust_928() = (ust_925 and smt2_double_eq(b3710, ust_926))
+
+predicate ust_929() = (ust_378 and ust_928)
+
+predicate ust_931() = (ust_929 and smt2_double_eq(b3655, b3685))
+
+predicate ust_932() = (ust_372 and ust_931)
+
+predicate ust_934() = (not le(b3710, b538))
+
+predicate ust_935() = (ust_932 and ust_934)
+
+predicate ust_937() = (not le(b492, ust_360))
+
+predicate ust_938() = (ust_935 and ust_937)
+
+logic d_neg__t_360 : double
+
+axiom eq_842 : neg_post(ust_360, d_neg__t_360)
+
+logic ust_939 : double
+
+axiom eq_843 : neg_post(ust_360, ust_939)
+
+predicate ust_941() = (ust_938 and smt2_double_eq(b3680, ust_939))
+
+predicate ust_942() = (ust_363 and ust_941)
+
+predicate ust_944() = (ust_942 and smt2_double_eq(b3625, b3655))
+
+predicate ust_945() = (ust_357 and ust_944)
+
+predicate ust_947() = (not le(b3680, b538))
+
+predicate ust_948() = (ust_945 and ust_947)
+
+predicate ust_950() = (not le(b492, ust_345))
+
+predicate ust_951() = (ust_948 and ust_950)
+
+logic d_neg__t_345 : double
+
+axiom eq_844 : neg_post(ust_345, d_neg__t_345)
+
+logic ust_952 : double
+
+axiom eq_845 : neg_post(ust_345, ust_952)
+
+predicate ust_954() = (ust_951 and smt2_double_eq(b3650, ust_952))
+
+predicate ust_955() = (ust_348 and ust_954)
+
+predicate ust_957() = (not le(b3650, b538))
+
+predicate ust_958() = (ust_955 and ust_957)
+
+predicate ust_960() = (ust_958 and smt2_double_eq(b3595, b3625))
+
+predicate ust_961() = (ust_342 and ust_960)
+
+predicate ust_963() = (not le(b492, ust_330))
+
+predicate ust_964() = (ust_961 and ust_963)
+
+logic d_neg__t_330 : double
+
+axiom eq_846 : neg_post(ust_330, d_neg__t_330)
+
+logic ust_965 : double
+
+axiom eq_847 : neg_post(ust_330, ust_965)
+
+predicate ust_967() = (ust_964 and smt2_double_eq(b3620, ust_965))
+
+predicate ust_968() = (ust_333 and ust_967)
+
+predicate ust_970() = (ust_968 and smt2_double_eq(b3565, b3595))
+
+predicate ust_971() = (ust_327 and ust_970)
+
+predicate ust_973() = (not le(b3620, b538))
+
+predicate ust_974() = (ust_971 and ust_973)
+
+predicate ust_976() = (ust_974 and smt2_double_eq(ust_254, b3470))
+
+predicate ust_978() = (not le(b492, ust_315))
+
+predicate ust_979() = (ust_976 and ust_978)
+
+logic d_neg__t_315 : double
+
+axiom eq_848 : neg_post(ust_315, d_neg__t_315)
+
+logic ust_980 : double
+
+axiom eq_849 : neg_post(ust_315, ust_980)
+
+predicate ust_982() = (ust_979 and smt2_double_eq(b3590, ust_980))
+
+predicate ust_983() = (ust_318 and ust_982)
+
+predicate ust_985() = (ust_983 and smt2_double_eq(b3535, b3565))
+
+predicate ust_986() = (ust_312 and ust_985)
+
+predicate ust_988() = (not le(b3590, b538))
+
+predicate ust_989() = (ust_986 and ust_988)
+
+predicate ust_991() = (not le(b492, ust_300))
+
+predicate ust_992() = (ust_989 and ust_991)
+
+logic d_neg__t_300 : double
+
+axiom eq_850 : neg_post(ust_300, d_neg__t_300)
+
+logic ust_993 : double
+
+axiom eq_851 : neg_post(ust_300, ust_993)
+
+predicate ust_995() = (ust_992 and smt2_double_eq(b3560, ust_993))
+
+predicate ust_996() = (ust_303 and ust_995)
+
+predicate ust_998() = (ust_996 and smt2_double_eq(b3227, b3257))
+
+predicate ust_1000() = (ust_998 and smt2_double_eq(b3505, b3535))
+
+predicate ust_1001() = (ust_297 and ust_1000)
+
+predicate ust_1003() = (not le(b3560, b538))
+
+predicate ust_1004() = (ust_1001 and ust_1003)
+
+predicate ust_1006() = (not le(b492, ust_285))
+
+predicate ust_1007() = (ust_1004 and ust_1006)
+
+logic d_neg__t_285 : double
+
+axiom eq_852 : neg_post(ust_285, d_neg__t_285)
+
+logic ust_1008 : double
+
+axiom eq_853 : neg_post(ust_285, ust_1008)
+
+predicate ust_1010() = (ust_1007 and smt2_double_eq(b3530, ust_1008))
+
+predicate ust_1011() = (ust_288 and ust_1010)
+
+predicate ust_1013() = (ust_1011 and smt2_double_eq(b3475, b3505))
+
+predicate ust_1014() = (ust_282 and ust_1013)
+
+predicate ust_1016() = (not le(b3530, b538))
+
+predicate ust_1017() = (ust_1014 and ust_1016)
+
+predicate ust_1019() = (not le(b492, ust_270))
+
+predicate ust_1020() = (ust_1017 and ust_1019)
+
+logic d_neg__t_270 : double
+
+axiom eq_854 : neg_post(ust_270, d_neg__t_270)
+
+logic ust_1021 : double
+
+axiom eq_855 : neg_post(ust_270, ust_1021)
+
+predicate ust_1023() = (ust_1020 and smt2_double_eq(b3500, ust_1021))
+
+predicate ust_1024() = (ust_273 and ust_1023)
+
+predicate ust_1026() = (ust_1024 and smt2_double_eq(b3444, b3475))
+
+predicate ust_1027() = (ust_267 and ust_1026)
+
+predicate ust_1028() = (ust_258 and ust_1027)
+
+predicate ust_1030() = (ust_1028 and le(b492, ust_254))
+
+predicate ust_1032() = (not le(b3500, b538))
+
+predicate ust_1033() = (ust_1030 and ust_1032)
+
+predicate ust_1035() = (ust_1033 and smt2_double_eq(b3428, b3444))
+
+predicate ust_1036() = (ust_251 and ust_1035)
+
+predicate ust_1038() = (not le(b3470, b538))
+
+predicate ust_1039() = (ust_1036 and ust_1038)
+
+predicate ust_1041() = (not le(b492, ust_239))
+
+predicate ust_1042() = (ust_1039 and ust_1041)
+
+logic d_neg__t_239 : double
+
+axiom eq_856 : neg_post(ust_239, d_neg__t_239)
+
+logic ust_1043 : double
+
+axiom eq_857 : neg_post(ust_239, ust_1043)
+
+predicate ust_1045() = (ust_1042 and smt2_double_eq(b3439, ust_1043))
+
+predicate ust_1046() = (ust_242 and ust_1045)
+
+predicate ust_1048() = (not le(b492, ust_217))
+
+predicate ust_1049() = (ust_1046 and ust_1048)
+
+logic d_neg__t_217 : double
+
+axiom eq_858 : neg_post(ust_217, d_neg__t_217)
+
+logic ust_1050 : double
+
+axiom eq_859 : neg_post(ust_217, ust_1050)
+
+predicate ust_1052() = (ust_1049 and smt2_double_eq(b3418, ust_1050))
+
+predicate ust_1053() = (ust_228 and ust_1052)
+
+predicate ust_1055() = (not le(b3418, b538))
+
+predicate ust_1056() = (ust_1053 and ust_1055)
+
+predicate ust_1058() = (ust_1056 and smt2_double_eq(b3347, ust_219))
+
+predicate ust_1060() = (not le(b492, ust_222))
+
+predicate ust_1061() = (ust_1058 and ust_1060)
+
+logic d_neg__t_222 : double
+
+axiom eq_860 : neg_post(ust_222, d_neg__t_222)
+
+logic ust_1062 : double
+
+axiom eq_861 : neg_post(ust_222, ust_1062)
+
+predicate ust_1064() = (ust_1061 and smt2_double_eq(b3408, ust_1062))
+
+predicate ust_1065() = (ust_225 and ust_1064)
+
+predicate ust_1067() = (not le(b3408, b538))
+
+predicate ust_1068() = (ust_1065 and ust_1067)
+
+predicate ust_1069() = (ust_213 and ust_1068)
+
+predicate ust_1071() = (not le(b492, ust_200))
+
+predicate ust_1072() = (ust_1069 and ust_1071)
+
+logic d_neg__t_200 : double
+
+axiom eq_862 : neg_post(ust_200, d_neg__t_200)
+
+logic ust_1073 : double
+
+axiom eq_863 : neg_post(ust_200, ust_1073)
+
+predicate ust_1075() = (ust_1072 and smt2_double_eq(b3372, ust_1073))
+
+predicate ust_1076() = (ust_203 and ust_1075)
+
+predicate ust_1078() = (ust_1076 and smt2_double_eq(b3317, b3347))
+
+predicate ust_1080() = (not le(b3372, b538))
+
+predicate ust_1081() = (ust_1078 and ust_1080)
+
+predicate ust_1082() = (ust_197 and ust_1081)
+
+predicate ust_1084() = (not le(b492, ust_185))
+
+predicate ust_1085() = (ust_1082 and ust_1084)
+
+logic d_neg__t_185 : double
+
+axiom eq_864 : neg_post(ust_185, d_neg__t_185)
+
+logic ust_1086 : double
+
+axiom eq_865 : neg_post(ust_185, ust_1086)
+
+predicate ust_1088() = (ust_1085 and smt2_double_eq(b3342, ust_1086))
+
+predicate ust_1089() = (ust_188 and ust_1088)
+
+predicate ust_1091() = (ust_1089 and smt2_double_eq(b3287, b3317))
+
+predicate ust_1092() = (ust_182 and ust_1091)
+
+predicate ust_1094() = (not le(b3342, b538))
+
+predicate ust_1095() = (ust_1092 and ust_1094)
+
+predicate ust_1097() = (not le(b492, ust_170))
+
+predicate ust_1098() = (ust_1095 and ust_1097)
+
+logic d_neg__t_170 : double
+
+axiom eq_866 : neg_post(ust_170, d_neg__t_170)
+
+logic ust_1099 : double
+
+axiom eq_867 : neg_post(ust_170, ust_1099)
+
+predicate ust_1101() = (ust_1098 and smt2_double_eq(b3312, ust_1099))
+
+predicate ust_1102() = (ust_173 and ust_1101)
+
+predicate ust_1104() = (ust_1102 and smt2_double_eq(b3257, b3287))
+
+predicate ust_1105() = (ust_167 and ust_1104)
+
+predicate ust_1106() = (ust_165 and ust_1105)
+
+predicate ust_1108() = (not le(b3312, b538))
+
+predicate ust_1109() = (ust_1106 and ust_1108)
+
+predicate ust_1111() = (not le(b492, ust_153))
+
+predicate ust_1112() = (ust_1109 and ust_1111)
+
+logic d_neg__t_153 : double
+
+axiom eq_868 : neg_post(ust_153, d_neg__t_153)
+
+logic ust_1113 : double
+
+axiom eq_869 : neg_post(ust_153, ust_1113)
+
+predicate ust_1115() = (ust_1112 and smt2_double_eq(b3282, ust_1113))
+
+predicate ust_1116() = (ust_156 and ust_1115)
+
+predicate ust_1118() = (not le(b3282, b538))
+
+predicate ust_1119() = (ust_1116 and ust_1118)
+
+predicate ust_1121() = (not le(b492, ust_140))
+
+predicate ust_1122() = (ust_1119 and ust_1121)
+
+logic d_neg__t_140 : double
+
+axiom eq_870 : neg_post(ust_140, d_neg__t_140)
+
+logic ust_1123 : double
+
+axiom eq_871 : neg_post(ust_140, ust_1123)
+
+predicate ust_1125() = (ust_1122 and smt2_double_eq(b3252, ust_1123))
+
+predicate ust_1126() = (ust_143 and ust_1125)
+
+predicate ust_1128() = (ust_1126 and smt2_double_eq(b3197, b3227))
+
+predicate ust_1129() = (ust_137 and ust_1128)
+
+predicate ust_1131() = (not le(b3252, b538))
+
+predicate ust_1132() = (ust_1129 and ust_1131)
+
+predicate ust_1134() = (not le(b492, ust_125))
+
+predicate ust_1135() = (ust_1132 and ust_1134)
+
+logic d_neg__t_125 : double
+
+axiom eq_872 : neg_post(ust_125, d_neg__t_125)
+
+logic ust_1136 : double
+
+axiom eq_873 : neg_post(ust_125, ust_1136)
+
+predicate ust_1138() = (ust_1135 and smt2_double_eq(b3222, ust_1136))
+
+predicate ust_1139() = (ust_128 and ust_1138)
+
+predicate ust_1141() = (ust_1139 and smt2_double_eq(b3167, b3197))
+
+predicate ust_1142() = (ust_122 and ust_1141)
+
+predicate ust_1144() = (not le(b3222, b538))
+
+predicate ust_1145() = (ust_1142 and ust_1144)
+
+predicate ust_1147() = (not le(b492, ust_110))
+
+predicate ust_1148() = (ust_1145 and ust_1147)
+
+logic d_neg__t_110 : double
+
+axiom eq_874 : neg_post(ust_110, d_neg__t_110)
+
+logic ust_1149 : double
+
+axiom eq_875 : neg_post(ust_110, ust_1149)
+
+predicate ust_1151() = (ust_1148 and smt2_double_eq(b3192, ust_1149))
+
+predicate ust_1152() = (ust_113 and ust_1151)
+
+predicate ust_1154() = (ust_1152 and smt2_double_eq(b3137, b3167))
+
+predicate ust_1155() = (ust_107 and ust_1154)
+
+predicate ust_1157() = (not le(b3192, b538))
+
+predicate ust_1158() = (ust_1155 and ust_1157)
+
+predicate ust_1160() = (not le(b492, ust_95))
+
+predicate ust_1161() = (ust_1158 and ust_1160)
+
+logic d_neg__t_95 : double
+
+axiom eq_876 : neg_post(ust_95, d_neg__t_95)
+
+logic ust_1162 : double
+
+axiom eq_877 : neg_post(ust_95, ust_1162)
+
+predicate ust_1164() = (ust_1161 and smt2_double_eq(b3162, ust_1162))
+
+predicate ust_1165() = (ust_98 and ust_1164)
+
+predicate ust_1167() = (ust_1165 and smt2_double_eq(b3107, b3137))
+
+predicate ust_1168() = (ust_92 and ust_1167)
+
+predicate ust_1170() = (not le(b3162, b538))
+
+predicate ust_1171() = (ust_1168 and ust_1170)
+
+predicate ust_1173() = (not le(b492, ust_80))
+
+predicate ust_1174() = (ust_1171 and ust_1173)
+
+logic d_neg__t_80 : double
+
+axiom eq_878 : neg_post(ust_80, d_neg__t_80)
+
+logic ust_1175 : double
+
+axiom eq_879 : neg_post(ust_80, ust_1175)
+
+predicate ust_1177() = (ust_1174 and smt2_double_eq(b3132, ust_1175))
+
+predicate ust_1178() = (ust_83 and ust_1177)
+
+predicate ust_1180() = (ust_1178 and smt2_double_eq(b3077, b3107))
+
+predicate ust_1181() = (ust_77 and ust_1180)
+
+predicate ust_1183() = (not le(b3132, b538))
+
+predicate ust_1184() = (ust_1181 and ust_1183)
+
+predicate ust_1186() = (not le(b492, ust_65))
+
+predicate ust_1187() = (ust_1184 and ust_1186)
+
+logic d_neg__t_65 : double
+
+axiom eq_880 : neg_post(ust_65, d_neg__t_65)
+
+logic ust_1188 : double
+
+axiom eq_881 : neg_post(ust_65, ust_1188)
+
+predicate ust_1190() = (ust_1187 and smt2_double_eq(b3102, ust_1188))
+
+predicate ust_1191() = (ust_68 and ust_1190)
+
+predicate ust_1193() = (ust_1191 and smt2_double_eq(b3047, b3077))
+
+predicate ust_1194() = (ust_62 and ust_1193)
+
+predicate ust_1196() = (not le(b3102, b538))
+
+predicate ust_1197() = (ust_1194 and ust_1196)
+
+predicate ust_1199() = (not le(b492, ust_50))
+
+predicate ust_1200() = (ust_1197 and ust_1199)
+
+logic d_neg__t_50 : double
+
+axiom eq_882 : neg_post(ust_50, d_neg__t_50)
+
+logic ust_1201 : double
+
+axiom eq_883 : neg_post(ust_50, ust_1201)
+
+predicate ust_1203() = (ust_1200 and smt2_double_eq(b3072, ust_1201))
+
+predicate ust_1204() = (ust_53 and ust_1203)
+
+predicate ust_1206() = (ust_1204 and smt2_double_eq(b3016, b3047))
+
+predicate ust_1207() = (ust_47 and ust_1206)
+
+predicate ust_1209() = (not le(b3072, b538))
+
+predicate ust_1210() = (ust_1207 and ust_1209)
+
+predicate ust_1212() = (not le(b492, ust_35))
+
+predicate ust_1213() = (ust_1210 and ust_1212)
+
+logic d_neg__t_35 : double
+
+axiom eq_884 : neg_post(ust_35, d_neg__t_35)
+
+logic ust_1214 : double
+
+axiom eq_885 : neg_post(ust_35, ust_1214)
+
+predicate ust_1216() = (ust_1213 and smt2_double_eq(b3042, ust_1214))
+
+predicate ust_1217() = (ust_38 and ust_1216)
+
+predicate ust_1219() = (ust_1217 and smt2_double_eq(b3000, b3016))
+
+predicate ust_1220() = (ust_32 and ust_1219)
+
+predicate ust_1222() = (not le(b3042, b538))
+
+predicate ust_1223() = (ust_1220 and ust_1222)
+
+predicate ust_1225() = (not le(b492, ust_20))
+
+predicate ust_1226() = (ust_1223 and ust_1225)
+
+logic d_neg__t_20 : double
+
+axiom eq_886 : neg_post(ust_20, d_neg__t_20)
+
+logic ust_1227 : double
+
+axiom eq_887 : neg_post(ust_20, ust_1227)
+
+predicate ust_1229() = (ust_1226 and smt2_double_eq(b3011, ust_1227))
+
+predicate ust_1230() = (ust_23 and ust_1229)
+
+axiom ax_1 : ust_1230
+
+goal g_1 : false

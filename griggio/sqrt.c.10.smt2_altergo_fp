@@ -1,0 +1,2544 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo real arithmetic *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+logic match_mode : fpa_rounding_mode, 'a, 'a, 'a, 'a, 'a -> 'a
+
+axiom match_mode_NearestTiesToEven :
+  (forall z:'a. forall z1:'a. forall z2:'a. forall z3:'a. forall z4:'a.
+  (match_mode(NearestTiesToEven, z, z1, z2, z3, z4) = z))
+
+axiom match_mode_ToZero :
+  (forall z:'a. forall z1:'a. forall z2:'a. forall z3:'a. forall z4:'a.
+  (match_mode(ToZero, z, z1, z2, z3, z4) = z1))
+
+axiom match_mode_Up :
+  (forall z:'a. forall z1:'a. forall z2:'a. forall z3:'a. forall z4:'a.
+  (match_mode(Up, z, z1, z2, z3, z4) = z2))
+
+axiom match_mode_Down :
+  (forall z:'a. forall z1:'a. forall z2:'a. forall z3:'a. forall z4:'a.
+  (match_mode(Down, z, z1, z2, z3, z4) = z3))
+
+axiom match_mode_NearestTiesToAway :
+  (forall z:'a. forall z1:'a. forall z2:'a. forall z3:'a. forall z4:'a.
+  (match_mode(NearestTiesToAway, z, z1, z2, z3, z4) = z4))
+
+type single
+
+axiom add_div :
+  (forall x:real. forall y:real. forall z:real. ((not (z = 0.0)) ->
+  (((x + y) / z) = ((x / z) + (y / z)))))
+
+axiom sub_div :
+  (forall x:real. forall y:real. forall z:real. ((not (z = 0.0)) ->
+  (((x - y) / z) = ((x / z) - (y / z)))))
+
+axiom neg_div :
+  (forall x:real. forall y:real. ((not (y = 0.0)) ->
+  (((-x) / y) = (-(x / y)))))
+
+axiom assoc_mul_div :
+  (forall x:real. forall y:real. forall z:real. ((not (z = 0.0)) ->
+  (((x * y) / z) = (x * (y / z)))))
+
+axiom assoc_div_mul :
+  (forall x:real. forall y:real. forall z:real. (((not (y = 0.0)) and
+  (not (z = 0.0))) -> (((x / y) / z) = (x / (y * z)))))
+
+axiom assoc_div_div :
+  (forall x:real. forall y:real. forall z:real. (((not (y = 0.0)) and
+  (not (z = 0.0))) -> ((x / (y / z)) = ((x * z) / y))))
+
+axiom CompatOrderMult :
+  (forall x:real. forall y:real. forall z:real. ((x <= y) -> ((0.0 <= z) ->
+  ((x * z) <= (y * z)))))
+
+axiom CompatOrderMult1 :
+  (forall x:int. forall y:int. forall z:int. ((x <= y) -> ((0 <= z) ->
+  ((x * z) <= (y * z)))))
+
+axiom Monotonic :
+  (forall x:int. forall y:int. ((x <= y) ->
+  (real_of_int(x) <= real_of_int(y))))
+
+logic truncate : real -> int
+
+axiom Truncate_int : (forall i:int. (truncate(real_of_int(i)) = i))
+
+axiom Truncate_down_pos :
+  (forall x:real. ((0.0 <= x) -> (real_of_int(truncate(x)) <= x)))
+
+axiom Truncate_down_pos1 :
+  (forall x:real. ((0.0 <= x) -> (x <  real_of_int((truncate(x) + 1)))))
+
+axiom Truncate_up_neg :
+  (forall x:real. ((x <= 0.0) -> (real_of_int((truncate(x) - 1)) <  x)))
+
+axiom Truncate_up_neg1 :
+  (forall x:real. ((x <= 0.0) -> (x <= real_of_int(truncate(x)))))
+
+axiom Real_of_truncate :
+  (forall x:real. ((x - 1.0) <= real_of_int(truncate(x))))
+
+axiom Real_of_truncate1 :
+  (forall x:real. (real_of_int(truncate(x)) <= (x + 1.0)))
+
+axiom Truncate_monotonic :
+  (forall x:real. forall y:real. ((x <= y) -> (truncate(x) <= truncate(y))))
+
+axiom Truncate_monotonic_int1 :
+  (forall x:real. forall i:int. ((x <= real_of_int(i)) ->
+  (truncate(x) <= i)))
+
+axiom Truncate_monotonic_int2 :
+  (forall x:real. forall i:int. ((real_of_int(i) <= x) ->
+  (i <= truncate(x))))
+
+axiom Floor_int : (forall i:int. (int_floor(real_of_int(i)) = i))
+
+axiom Ceil_int : (forall i:int. (int_ceil(real_of_int(i)) = i))
+
+axiom Floor_down : (forall x:real. (real_of_int(int_floor(x)) <= x))
+
+axiom Floor_down1 : (forall x:real. (x <  real_of_int((int_floor(x) + 1))))
+
+axiom Ceil_up : (forall x:real. (real_of_int((int_ceil(x) - 1)) <  x))
+
+axiom Ceil_up1 : (forall x:real. (x <= real_of_int(int_ceil(x))))
+
+axiom Floor_monotonic :
+  (forall x:real. forall y:real. ((x <= y) ->
+  (int_floor(x) <= int_floor(y))))
+
+axiom Ceil_monotonic :
+  (forall x:real. forall y:real. ((x <= y) -> (int_ceil(x) <= int_ceil(y))))
+
+function sqr(x: real) : real = (x * x)
+
+axiom Sqrt_positive : (forall x:real. ((0.0 <= x) -> (0.0 <= sqrt_real(x))))
+
+axiom Sqrt_square : (forall x:real. ((0.0 <= x) -> (sqr(sqrt_real(x)) = x)))
+
+axiom Square_sqrt : (forall x:real. ((0.0 <= x) -> (sqrt_real((x * x)) = x)))
+
+axiom Sqrt_mul :
+  (forall x:real. forall y:real. (((0.0 <= x) and (0.0 <= y)) ->
+  (sqrt_real((x * y)) = (sqrt_real(x) * sqrt_real(y)))))
+
+axiom Sqrt_le :
+  (forall x:real. forall y:real. (((0.0 <= x) and (x <= y)) ->
+  (sqrt_real(x) <= sqrt_real(y))))
+
+type class = Finite | Infinite | NaN
+
+logic match_class : class, 'a, 'a, 'a -> 'a
+
+axiom match_class_Finite :
+  (forall z:'a. forall z1:'a. forall z2:'a. (match_class(Finite, z, z1,
+  z2) = z))
+
+axiom match_class_Infinite :
+  (forall z:'a. forall z1:'a. forall z2:'a. (match_class(Infinite, z, z1,
+  z2) = z1))
+
+axiom match_class_NaN :
+  (forall z:'a. forall z1:'a. forall z2:'a. (match_class(NaN, z, z1,
+  z2) = z2))
+
+type sign = Neg | Pos
+
+logic match_sign : sign, 'a, 'a -> 'a
+
+axiom match_sign_Neg :
+  (forall z:'a. forall z1:'a. (match_sign(Neg, z, z1) = z))
+
+axiom match_sign_Pos :
+  (forall z:'a. forall z1:'a. (match_sign(Pos, z, z1) = z1))
+
+logic same_sign_real : sign, real -> prop
+
+axiom Neg_case : (forall x:real. ((x <  0.0) -> same_sign_real(Neg, x)))
+
+axiom Pos_case : (forall x:real. ((0.0 <  x) -> same_sign_real(Pos, x)))
+
+axiom same_sign_real_inversion :
+  (forall z:sign. forall z1:real. (same_sign_real(z, z1) -> (((z1 <  0.0) and
+  (z = Neg)) or ((0.0 <  z1) and (z = Pos)))))
+
+axiom same_sign_real_zero1 : (forall b:sign. (not same_sign_real(b, 0.0)))
+
+axiom same_sign_real_zero2 :
+  (forall x:real. (not (same_sign_real(Neg, x) and same_sign_real(Pos, x))))
+
+axiom same_sign_real_zero3 :
+  (forall b:sign. forall x:real. (same_sign_real(b, x) -> (not (x = 0.0))))
+
+axiom same_sign_real_correct2 :
+  (forall b:sign. forall x:real. (same_sign_real(b, x) -> ((x <  0.0) ->
+  (b = Neg))))
+
+axiom same_sign_real_correct21 :
+  (forall b:sign. forall x:real. (same_sign_real(b, x) -> ((b = Neg) ->
+  (x <  0.0))))
+
+axiom same_sign_real_correct3 :
+  (forall b:sign. forall x:real. (same_sign_real(b, x) -> ((0.0 <  x) ->
+  (b = Pos))))
+
+axiom same_sign_real_correct31 :
+  (forall b:sign. forall x:real. (same_sign_real(b, x) -> ((b = Pos) ->
+  (0.0 <  x))))
+
+axiom Abs_le :
+  (forall x:real. forall y:real. ((abs_real(x) <= y) -> ((-y) <= x)))
+
+axiom Abs_le1 :
+  (forall x:real. forall y:real. ((abs_real(x) <= y) -> (x <= y)))
+
+axiom Abs_le2 :
+  (forall x:real. forall y:real. ((((-y) <= x) and (x <= y)) ->
+  (abs_real(x) <= y)))
+
+axiom Abs_pos : (forall x:real. (0.0 <= abs_real(x)))
+
+axiom Abs_sum :
+  (forall x:real. forall y:real.
+  (abs_real((x + y)) <= (abs_real(x) + abs_real(y))))
+
+axiom Abs_prod :
+  (forall x:real. forall y:real.
+  (abs_real((x * y)) = (abs_real(x) * abs_real(y))))
+
+axiom triangular_inequality :
+  (forall x:real. forall y:real. forall z:real.
+  (abs_real((x - z)) <= (abs_real((x - y)) + abs_real((y - z)))))
+
+logic value : single -> real
+
+predicate no_overflow(m: fpa_rounding_mode, x: real) =
+  (abs_real(float32(m, x)) <= 0x1.FFFFFEp127)
+
+axiom Bounded_real_no_overflow :
+  (forall m:fpa_rounding_mode. forall x:real.
+  ((abs_real(x) <= 0x1.FFFFFEp127) -> no_overflow(m, x)))
+
+axiom Round_value :
+  (forall m:fpa_rounding_mode. forall x:single.
+  (float32(m, value(x)) = value(x)))
+
+axiom Bounded_value :
+  (forall x:single. (abs_real(value(x)) <= 0x1.FFFFFEp127))
+
+axiom Exact_rounding_for_integers :
+  (forall m:fpa_rounding_mode. forall i:int. ((((-16777216) <= i) and
+  (i <= 16777216)) -> (float32(m, real_of_int(i)) = real_of_int(i))))
+
+axiom Round_down_le : (forall x:real. (float32(Down, x) <= x))
+
+axiom Round_up_ge : (forall x:real. (x <= float32(Up, x)))
+
+axiom Round_down_neg :
+  (forall x:real. (float32(Down, (-x)) = (-float32(Up, x))))
+
+axiom Round_up_neg :
+  (forall x:real. (float32(Up, (-x)) = (-float32(Down, x))))
+
+logic round_logic : fpa_rounding_mode, real -> single
+
+axiom Round_logic_def :
+  (forall m:fpa_rounding_mode. forall x:real. (no_overflow(m, x) ->
+  (value(round_logic(m, x)) = float32(m, x))))
+
+logic class1 : single -> class
+
+predicate is_finite(x: single) = (class1(x) = Finite)
+
+predicate is_infinite(x: single) = (class1(x) = Infinite)
+
+predicate is_NaN(x: single) = (class1(x) = NaN)
+
+predicate is_not_NaN(x: single) = (is_finite(x) or is_infinite(x))
+
+axiom is_not_NaN1 : (forall x:single. (is_not_NaN(x) -> (not is_NaN(x))))
+
+axiom is_not_NaN2 : (forall x:single. ((not is_NaN(x)) -> is_not_NaN(x)))
+
+logic sign1 : single -> sign
+
+predicate same_sign_real1(x: single, y: real) = same_sign_real(sign1(x), y)
+
+predicate same_sign(x: single, y: single) = (sign1(x) = sign1(y))
+
+predicate diff_sign(x: single, y: single) = (not (sign1(x) = sign1(y)))
+
+predicate sign_zero_result(m: fpa_rounding_mode, x: single) =
+  ((value(x) = 0.0) -> ((((((m = NearestTiesToEven) -> (sign1(x) = Pos)) and
+  ((m = ToZero) -> (sign1(x) = Pos))) and ((m = Up) -> (sign1(x) = Pos))) and
+  ((m = Down) -> (sign1(x) = Neg))) and ((m = NearestTiesToAway) ->
+  (sign1(x) = Pos))))
+
+predicate is_minus_infinity(x: single) = (is_infinite(x) and
+  (sign1(x) = Neg))
+
+predicate is_plus_infinity(x: single) = (is_infinite(x) and (sign1(x) = Pos))
+
+predicate is_gen_zero(x: single) = (is_finite(x) and (value(x) = 0.0))
+
+predicate is_gen_zero_plus(x: single) = (is_gen_zero(x) and (sign1(x) = Pos))
+
+predicate is_gen_zero_minus(x: single) = (is_gen_zero(x) and
+  (sign1(x) = Neg))
+
+axiom finite_sign :
+  (forall x:single. (((class1(x) = Finite) and (not (value(x) = 0.0))) ->
+  same_sign_real1(x, value(x))))
+
+axiom finite_sign_pos1 :
+  (forall x:single. (((class1(x) = Finite) and (0.0 <  value(x))) ->
+  (sign1(x) = Pos)))
+
+axiom finite_sign_pos2 :
+  (forall x:single. (((class1(x) = Finite) and ((not (value(x) = 0.0)) and
+  (sign1(x) = Pos))) -> (0.0 <  value(x))))
+
+axiom finite_sign_neg1 :
+  (forall x:single. (((class1(x) = Finite) and (value(x) <  0.0)) ->
+  (sign1(x) = Neg)))
+
+axiom finite_sign_neg2 :
+  (forall x:single. (((class1(x) = Finite) and ((not (value(x) = 0.0)) and
+  (sign1(x) = Neg))) -> (value(x) <  0.0)))
+
+axiom diff_sign_trans :
+  (forall x:single. forall y:single. forall z:single. ((diff_sign(x, y) and
+  diff_sign(y, z)) -> same_sign(x, z)))
+
+axiom diff_sign_product :
+  (forall x:single. forall y:single. (((class1(x) = Finite) and
+  ((class1(y) = Finite) and ((value(x) * value(y)) <  0.0))) -> diff_sign(x,
+  y)))
+
+axiom same_sign_product :
+  (forall x:single. forall y:single. (((class1(x) = Finite) and
+  ((class1(y) = Finite) and same_sign(x, y))) ->
+  (0.0 <= (value(x) * value(y)))))
+
+predicate overflow_value(m: fpa_rounding_mode, x: single) =
+  (((sign1(x) = Neg) -> ((((((m = NearestTiesToEven) -> is_infinite(x)) and
+  ((m = ToZero) -> (is_finite(x) and (value(x) = (-0x1.FFFFFEp127))))) and
+  ((m = Up) -> (is_finite(x) and (value(x) = (-0x1.FFFFFEp127))))) and
+  ((m = Down) -> is_infinite(x))) and ((m = NearestTiesToAway) ->
+  is_infinite(x)))) and ((sign1(x) = Pos) -> ((((((m = NearestTiesToEven) ->
+  is_infinite(x)) and ((m = ToZero) -> (is_finite(x) and
+  (value(x) = 0x1.FFFFFEp127)))) and ((m = Up) -> is_infinite(x))) and
+  ((m = Down) -> (is_finite(x) and (value(x) = 0x1.FFFFFEp127)))) and
+  ((m = NearestTiesToAway) -> is_infinite(x)))))
+
+axiom round1 :
+  (forall m:fpa_rounding_mode. forall x:real. (no_overflow(m, x) ->
+  is_finite(round_logic(m, x))))
+
+axiom round11 :
+  (forall m:fpa_rounding_mode. forall x:real. (no_overflow(m, x) ->
+  (value(round_logic(m, x)) = float32(m, x))))
+
+axiom round2 :
+  (forall m:fpa_rounding_mode. forall x:real. ((not no_overflow(m, x)) ->
+  same_sign_real1(round_logic(m, x), x)))
+
+axiom round21 :
+  (forall m:fpa_rounding_mode. forall x:real. ((not no_overflow(m, x)) ->
+  overflow_value(m, round_logic(m, x))))
+
+axiom round_of_zero :
+  (forall m:fpa_rounding_mode. is_gen_zero(round_logic(m, 0.0)))
+
+axiom round_logic_le :
+  (forall m:fpa_rounding_mode. forall x:real. (is_finite(round_logic(m,
+  x)) -> (abs_real(value(round_logic(m, x))) <= 0x1.FFFFFEp127)))
+
+axiom round_no_overflow :
+  (forall m:fpa_rounding_mode. forall x:real.
+  ((abs_real(x) <= 0x1.FFFFFEp127) -> is_finite(round_logic(m, x))))
+
+axiom round_no_overflow1 :
+  (forall m:fpa_rounding_mode. forall x:real.
+  ((abs_real(x) <= 0x1.FFFFFEp127) -> (value(round_logic(m,
+  x)) = float32(m, x))))
+
+logic min : real
+
+axiom positive_constant :
+  (forall m:fpa_rounding_mode. forall x:real. (((min <= x) and
+  (x <= 0x1.FFFFFEp127)) -> is_finite(round_logic(m, x))))
+
+axiom positive_constant1 :
+  (forall m:fpa_rounding_mode. forall x:real. (((min <= x) and
+  (x <= 0x1.FFFFFEp127)) -> (0.0 <  value(round_logic(m, x)))))
+
+axiom positive_constant2 :
+  (forall m:fpa_rounding_mode. forall x:real. (((min <= x) and
+  (x <= 0x1.FFFFFEp127)) -> (sign1(round_logic(m, x)) = Pos)))
+
+axiom negative_constant :
+  (forall m:fpa_rounding_mode. forall x:real. ((((-0x1.FFFFFEp127) <= x) and
+  (x <= (-min))) -> is_finite(round_logic(m, x))))
+
+axiom negative_constant1 :
+  (forall m:fpa_rounding_mode. forall x:real. ((((-0x1.FFFFFEp127) <= x) and
+  (x <= (-min))) -> (value(round_logic(m, x)) <  0.0)))
+
+axiom negative_constant2 :
+  (forall m:fpa_rounding_mode. forall x:real. ((((-0x1.FFFFFEp127) <= x) and
+  (x <= (-min))) -> (sign1(round_logic(m, x)) = Neg)))
+
+axiom is_gen_zero_comp1 :
+  (forall x:single. forall y:single. ((is_gen_zero(x) and
+  ((value(x) = value(y)) and is_finite(y))) -> is_gen_zero(y)))
+
+axiom is_gen_zero_comp2 :
+  (forall x:single. forall y:single. ((is_finite(x) and
+  ((not is_gen_zero(x)) and (value(x) = value(y)))) -> (not is_gen_zero(y))))
+
+predicate add_post(m: fpa_rounding_mode, x: single, y: single, r: single) =
+  (((is_NaN(x) or is_NaN(y)) -> is_NaN(r)) and (((is_finite(x) and
+  is_infinite(y)) -> (is_infinite(r) and same_sign(r, y))) and
+  (((is_infinite(x) and is_finite(y)) -> (is_infinite(r) and same_sign(r,
+  x))) and (((is_infinite(x) and is_infinite(y)) -> ((same_sign(x, y) ->
+  (is_infinite(r) and same_sign(r, x))) and ((not same_sign(x, y)) ->
+  is_NaN(r)))) and (((is_finite(x) and (is_finite(y) and no_overflow(m,
+  (value(x) + value(y))))) -> (is_finite(r) and
+  ((value(r) = float32(m, (value(x) + value(y)))) and ((same_sign(x, y) ->
+  same_sign(r, x)) and ((not same_sign(x, y)) -> sign_zero_result(m,
+  r)))))) and ((is_finite(x) and (is_finite(y) and (not no_overflow(m,
+  (value(x) + value(y)))))) -> (same_sign_real(sign1(r),
+  (value(x) + value(y))) and overflow_value(m, r))))))))
+
+predicate sub_post(m: fpa_rounding_mode, x: single, y: single, r: single) =
+  (((is_NaN(x) or is_NaN(y)) -> is_NaN(r)) and (((is_finite(x) and
+  is_infinite(y)) -> (is_infinite(r) and diff_sign(r, y))) and
+  (((is_infinite(x) and is_finite(y)) -> (is_infinite(r) and same_sign(r,
+  x))) and (((is_infinite(x) and is_infinite(y)) -> ((diff_sign(x, y) ->
+  (is_infinite(r) and same_sign(r, x))) and ((not diff_sign(x, y)) ->
+  is_NaN(r)))) and (((is_finite(x) and (is_finite(y) and no_overflow(m,
+  (value(x) - value(y))))) -> (is_finite(r) and
+  ((value(r) = float32(m, (value(x) - value(y)))) and ((diff_sign(x, y) ->
+  same_sign(r, x)) and ((not diff_sign(x, y)) -> sign_zero_result(m,
+  r)))))) and ((is_finite(x) and (is_finite(y) and (not no_overflow(m,
+  (value(x) - value(y)))))) -> (same_sign_real(sign1(r),
+  (value(x) - value(y))) and overflow_value(m, r))))))))
+
+predicate product_sign(z: single, x: single, y: single) = ((same_sign(x,
+  y) -> (sign1(z) = Pos)) and (diff_sign(x, y) -> (sign1(z) = Neg)))
+
+predicate mul_post(m: fpa_rounding_mode, x: single, y: single, r: single) =
+  (((is_NaN(x) or is_NaN(y)) -> is_NaN(r)) and (((is_gen_zero(x) and
+  is_infinite(y)) -> is_NaN(r)) and (((is_finite(x) and (is_infinite(y) and
+  (not (value(x) = 0.0)))) -> is_infinite(r)) and (((is_infinite(x) and
+  is_gen_zero(y)) -> is_NaN(r)) and (((is_infinite(x) and (is_finite(y) and
+  (not (value(y) = 0.0)))) -> is_infinite(r)) and (((is_infinite(x) and
+  is_infinite(y)) -> is_infinite(r)) and (((is_finite(x) and
+  (is_finite(y) and no_overflow(m, (value(x) * value(y))))) ->
+  (is_finite(r) and (value(r) = float32(m, (value(x) * value(y)))))) and
+  (((is_finite(x) and (is_finite(y) and (not no_overflow(m,
+  (value(x) * value(y)))))) -> overflow_value(m, r)) and ((not is_NaN(r)) ->
+  product_sign(r, x, y))))))))))
+
+predicate neg_post(x: single, r: single) = ((is_NaN(x) -> is_NaN(r)) and
+  ((is_infinite(x) -> is_infinite(r)) and ((is_finite(x) -> (is_finite(r) and
+  (value(r) = (-value(x))))) and ((not is_NaN(x)) -> diff_sign(r, x)))))
+
+predicate div_post(m: fpa_rounding_mode, x: single, y: single, r: single) =
+  (((is_NaN(x) or is_NaN(y)) -> is_NaN(r)) and (((is_finite(x) and
+  is_infinite(y)) -> is_gen_zero(r)) and (((is_infinite(x) and
+  is_finite(y)) -> is_infinite(r)) and (((is_infinite(x) and
+  is_infinite(y)) -> is_NaN(r)) and (((is_finite(x) and (is_finite(y) and
+  ((not (value(y) = 0.0)) and no_overflow(m, (value(x) / value(y)))))) ->
+  (is_finite(r) and (value(r) = float32(m, (value(x) / value(y)))))) and
+  (((is_finite(x) and (is_finite(y) and ((not (value(y) = 0.0)) and
+  (not no_overflow(m, (value(x) / value(y))))))) -> overflow_value(m, r)) and
+  (((is_finite(x) and (is_gen_zero(y) and (not (value(x) = 0.0)))) ->
+  is_infinite(r)) and (((is_gen_zero(x) and is_gen_zero(y)) -> is_NaN(r)) and
+  ((not is_NaN(r)) -> product_sign(r, x, y))))))))))
+
+predicate fma_post(m: fpa_rounding_mode, x: single, y: single, z: single,
+  r: single) = (((is_NaN(x) or (is_NaN(y) or is_NaN(z))) -> is_NaN(r)) and
+  (((is_gen_zero(x) and is_infinite(y)) -> is_NaN(r)) and
+  (((is_infinite(x) and is_gen_zero(y)) -> is_NaN(r)) and (((is_finite(x) and
+  ((not (value(x) = 0.0)) and (is_infinite(y) and is_finite(z)))) ->
+  (is_infinite(r) and product_sign(r, x, y))) and (((is_finite(x) and
+  ((not (value(x) = 0.0)) and (is_infinite(y) and is_infinite(z)))) ->
+  ((product_sign(z, x, y) -> (is_infinite(r) and same_sign(r, z))) and
+  ((not product_sign(z, x, y)) -> is_NaN(r)))) and (((is_infinite(x) and
+  (is_finite(y) and ((not (value(y) = 0.0)) and is_finite(z)))) ->
+  (is_infinite(r) and product_sign(r, x, y))) and (((is_infinite(x) and
+  (is_finite(y) and ((not (value(y) = 0.0)) and is_infinite(z)))) ->
+  ((product_sign(z, x, y) -> (is_infinite(r) and same_sign(r, z))) and
+  ((not product_sign(z, x, y)) -> is_NaN(r)))) and (((is_infinite(x) and
+  (is_infinite(y) and is_finite(z))) -> (is_infinite(r) and product_sign(r,
+  x, y))) and (((is_finite(x) and (is_finite(y) and is_infinite(z))) ->
+  (is_infinite(r) and same_sign(r, z))) and (((is_infinite(x) and
+  (is_infinite(y) and is_infinite(z))) -> ((product_sign(z, x, y) ->
+  (is_infinite(r) and same_sign(r, z))) and ((not product_sign(z, x, y)) ->
+  is_NaN(r)))) and (((is_finite(x) and (is_finite(y) and (is_finite(z) and
+  no_overflow(m, ((value(x) * value(y)) + value(z)))))) -> (is_finite(r) and
+  ((value(r) = float32(m, ((value(x) * value(y)) + value(z)))) and
+  ((product_sign(z, x, y) -> same_sign(r, z)) and ((not product_sign(z, x,
+  y)) -> ((((value(x) * value(y)) + value(z)) = 0.0) -> (((m = Down) ->
+  (sign1(r) = Neg)) and ((not (m = Down)) -> (sign1(r) = Pos))))))))) and
+  ((is_finite(x) and (is_finite(y) and (is_finite(z) and (not no_overflow(m,
+  ((value(x) * value(y)) + value(z))))))) -> (same_sign_real(sign1(r),
+  ((value(x) * value(y)) + value(z))) and overflow_value(m, r))))))))))))))
+
+predicate sqrt_post(m: fpa_rounding_mode, x: single, r: single) =
+  ((is_NaN(x) -> is_NaN(r)) and ((is_plus_infinity(x) ->
+  is_plus_infinity(r)) and ((is_minus_infinity(x) -> is_NaN(r)) and
+  (((is_finite(x) and (value(x) <  0.0)) -> is_NaN(r)) and
+  (((is_finite(x) and (value(x) = 0.0)) -> (is_finite(r) and
+  ((value(r) = 0.0) and same_sign(r, x)))) and ((is_finite(x) and
+  (0.0 <  value(x))) -> (is_finite(r) and
+  ((value(r) = float32(m, sqrt_real(value(x)))) and (sign1(r) = Pos)))))))))
+
+predicate roundToIntegral_post(m: fpa_rounding_mode, x: single, r: single) =
+  ((is_NaN(x) -> is_NaN(r)) and ((is_infinite(x) -> (is_infinite(r) and
+  same_sign(x, r))) and (is_finite(x) -> (same_sign(x, r) and
+  (value(r) = real_of_int(integer_round(m, value(x))))))))
+
+predicate of_real_exact_post(x: real, r: single) = (is_finite(r) and
+  (value(r) = x))
+
+predicate le(x: single, y: single) = ((is_finite(x) and (is_finite(y) and
+  (value(x) <= value(y)))) or ((is_minus_infinity(x) and is_not_NaN(y)) or
+  (is_not_NaN(x) and is_plus_infinity(y))))
+
+predicate lt(x: single, y: single) = ((is_finite(x) and (is_finite(y) and
+  (value(x) <  value(y)))) or ((is_minus_infinity(x) and (is_not_NaN(y) and
+  (not is_minus_infinity(y)))) or (is_not_NaN(x) and
+  ((not is_plus_infinity(x)) and is_plus_infinity(y)))))
+
+predicate eq(x: single, y: single) = ((is_finite(x) and (is_finite(y) and
+  (value(x) = value(y)))) or (is_infinite(x) and (is_infinite(y) and
+  same_sign(x, y))))
+
+predicate ne(x: single, y: single) = (not eq(x, y))
+
+predicate rem_post(x: single, y: single, r: single) = (((is_NaN(x) or
+  (is_NaN(y) or (is_infinite(x) or is_gen_zero(y)))) -> is_NaN(r)) and
+  ((not (is_NaN(x) or (is_NaN(y) or (is_infinite(x) or is_gen_zero(y))))) ->
+  ((is_infinite(y) -> eq(x, r)) and ((not is_infinite(y)) ->
+  (is_finite(r) and (((value(r) = 0.0) -> same_sign(x, r)) and
+  (value(r) = (value(x) - (value(y) * real_of_int(integer_round(NearestTiesToEven, (value(x) / value(y)))))))))))))
+
+axiom le_lt_trans :
+  (forall x:single. forall y:single. forall z:single. ((le(x, y) and lt(y,
+  z)) -> lt(x, z)))
+
+axiom lt_le_trans :
+  (forall x:single. forall y:single. forall z:single. ((lt(x, y) and le(y,
+  z)) -> lt(x, z)))
+
+axiom le_ge_asym :
+  (forall x:single. forall y:single. ((le(x, y) and le(y, x)) -> eq(x, y)))
+
+axiom not_lt_ge :
+  (forall x:single. forall y:single. (((not lt(x, y)) and (is_not_NaN(x) and
+  is_not_NaN(y))) -> le(y, x)))
+
+axiom not_gt_le :
+  (forall x:single. forall y:single. (((not lt(y, x)) and (is_not_NaN(x) and
+  is_not_NaN(y))) -> le(x, y)))
+
+type double
+
+logic value1 : double -> real
+
+predicate no_overflow1(m: fpa_rounding_mode, x: real) =
+  (abs_real(float64(m, x)) <= 0x1.FFFFFFFFFFFFFp1023)
+
+axiom Bounded_real_no_overflow1 :
+  (forall m:fpa_rounding_mode. forall x:real.
+  ((abs_real(x) <= 0x1.FFFFFFFFFFFFFp1023) -> no_overflow1(m, x)))
+
+axiom Round_value1 :
+  (forall m:fpa_rounding_mode. forall x:double.
+  (float64(m, value1(x)) = value1(x)))
+
+axiom Bounded_value1 :
+  (forall x:double. (abs_real(value1(x)) <= 0x1.FFFFFFFFFFFFFp1023))
+
+axiom Exact_rounding_for_integers1 :
+  (forall m:fpa_rounding_mode. forall i:int. ((((-9007199254740992) <= i) and
+  (i <= 9007199254740992)) -> (float64(m, real_of_int(i)) = real_of_int(i))))
+
+axiom Round_down_le1 : (forall x:real. (float64(Down, x) <= x))
+
+axiom Round_up_ge1 : (forall x:real. (x <= float64(Up, x)))
+
+axiom Round_down_neg1 :
+  (forall x:real. (float64(Down, (-x)) = (-float64(Up, x))))
+
+axiom Round_up_neg1 :
+  (forall x:real. (float64(Up, (-x)) = (-float64(Down, x))))
+
+logic round_logic1 : fpa_rounding_mode, real -> double
+
+axiom Round_logic_def1 :
+  (forall m:fpa_rounding_mode. forall x:real. (no_overflow1(m, x) ->
+  (value1(round_logic1(m, x)) = float64(m, x))))
+
+logic class2 : double -> class
+
+predicate is_finite1(x: double) = (class2(x) = Finite)
+
+predicate is_infinite1(x: double) = (class2(x) = Infinite)
+
+predicate is_NaN1(x: double) = (class2(x) = NaN)
+
+predicate is_not_NaN3(x: double) = (is_finite1(x) or is_infinite1(x))
+
+axiom is_not_NaN4 : (forall x:double. (is_not_NaN3(x) -> (not is_NaN1(x))))
+
+axiom is_not_NaN5 : (forall x:double. ((not is_NaN1(x)) -> is_not_NaN3(x)))
+
+logic sign2 : double -> sign
+
+predicate same_sign_real2(x: double, y: real) = same_sign_real(sign2(x), y)
+
+predicate same_sign1(x: double, y: double) = (sign2(x) = sign2(y))
+
+predicate diff_sign1(x: double, y: double) = (not (sign2(x) = sign2(y)))
+
+predicate sign_zero_result1(m: fpa_rounding_mode, x: double) =
+  ((value1(x) = 0.0) -> ((((((m = NearestTiesToEven) -> (sign2(x) = Pos)) and
+  ((m = ToZero) -> (sign2(x) = Pos))) and ((m = Up) -> (sign2(x) = Pos))) and
+  ((m = Down) -> (sign2(x) = Neg))) and ((m = NearestTiesToAway) ->
+  (sign2(x) = Pos))))
+
+predicate is_minus_infinity1(x: double) = (is_infinite1(x) and
+  (sign2(x) = Neg))
+
+predicate is_plus_infinity1(x: double) = (is_infinite1(x) and
+  (sign2(x) = Pos))
+
+predicate is_gen_zero1(x: double) = (is_finite1(x) and (value1(x) = 0.0))
+
+predicate is_gen_zero_plus1(x: double) = (is_gen_zero1(x) and
+  (sign2(x) = Pos))
+
+predicate is_gen_zero_minus1(x: double) = (is_gen_zero1(x) and
+  (sign2(x) = Neg))
+
+axiom finite_sign1 :
+  (forall x:double. (((class2(x) = Finite) and (not (value1(x) = 0.0))) ->
+  same_sign_real2(x, value1(x))))
+
+axiom finite_sign_pos11 :
+  (forall x:double. (((class2(x) = Finite) and (0.0 <  value1(x))) ->
+  (sign2(x) = Pos)))
+
+axiom finite_sign_pos21 :
+  (forall x:double. (((class2(x) = Finite) and ((not (value1(x) = 0.0)) and
+  (sign2(x) = Pos))) -> (0.0 <  value1(x))))
+
+axiom finite_sign_neg11 :
+  (forall x:double. (((class2(x) = Finite) and (value1(x) <  0.0)) ->
+  (sign2(x) = Neg)))
+
+axiom finite_sign_neg21 :
+  (forall x:double. (((class2(x) = Finite) and ((not (value1(x) = 0.0)) and
+  (sign2(x) = Neg))) -> (value1(x) <  0.0)))
+
+axiom diff_sign_trans1 :
+  (forall x:double. forall y:double. forall z:double. ((diff_sign1(x, y) and
+  diff_sign1(y, z)) -> same_sign1(x, z)))
+
+axiom diff_sign_product1 :
+  (forall x:double. forall y:double. (((class2(x) = Finite) and
+  ((class2(y) = Finite) and ((value1(x) * value1(y)) <  0.0))) ->
+  diff_sign1(x, y)))
+
+axiom same_sign_product1 :
+  (forall x:double. forall y:double. (((class2(x) = Finite) and
+  ((class2(y) = Finite) and same_sign1(x, y))) ->
+  (0.0 <= (value1(x) * value1(y)))))
+
+predicate overflow_value1(m: fpa_rounding_mode, x: double) =
+  (((sign2(x) = Neg) -> ((((((m = NearestTiesToEven) -> is_infinite1(x)) and
+  ((m = ToZero) -> (is_finite1(x) and
+  (value1(x) = (-0x1.FFFFFFFFFFFFFp1023))))) and ((m = Up) ->
+  (is_finite1(x) and (value1(x) = (-0x1.FFFFFFFFFFFFFp1023))))) and
+  ((m = Down) -> is_infinite1(x))) and ((m = NearestTiesToAway) ->
+  is_infinite1(x)))) and ((sign2(x) = Pos) -> ((((((m = NearestTiesToEven) ->
+  is_infinite1(x)) and ((m = ToZero) -> (is_finite1(x) and
+  (value1(x) = 0x1.FFFFFFFFFFFFFp1023)))) and ((m = Up) ->
+  is_infinite1(x))) and ((m = Down) -> (is_finite1(x) and
+  (value1(x) = 0x1.FFFFFFFFFFFFFp1023)))) and ((m = NearestTiesToAway) ->
+  is_infinite1(x)))))
+
+axiom round12 :
+  (forall m:fpa_rounding_mode. forall x:real. (no_overflow1(m, x) ->
+  is_finite1(round_logic1(m, x))))
+
+axiom round13 :
+  (forall m:fpa_rounding_mode. forall x:real. (no_overflow1(m, x) ->
+  (value1(round_logic1(m, x)) = float64(m, x))))
+
+axiom round22 :
+  (forall m:fpa_rounding_mode. forall x:real. ((not no_overflow1(m, x)) ->
+  same_sign_real2(round_logic1(m, x), x)))
+
+axiom round23 :
+  (forall m:fpa_rounding_mode. forall x:real. ((not no_overflow1(m, x)) ->
+  overflow_value1(m, round_logic1(m, x))))
+
+axiom round_of_zero1 :
+  (forall m:fpa_rounding_mode. is_gen_zero1(round_logic1(m, 0.0)))
+
+axiom round_logic_le1 :
+  (forall m:fpa_rounding_mode. forall x:real. (is_finite1(round_logic1(m,
+  x)) -> (abs_real(value1(round_logic1(m, x))) <= 0x1.FFFFFFFFFFFFFp1023)))
+
+axiom round_no_overflow2 :
+  (forall m:fpa_rounding_mode. forall x:real.
+  ((abs_real(x) <= 0x1.FFFFFFFFFFFFFp1023) -> is_finite1(round_logic1(m,
+  x))))
+
+axiom round_no_overflow3 :
+  (forall m:fpa_rounding_mode. forall x:real.
+  ((abs_real(x) <= 0x1.FFFFFFFFFFFFFp1023) -> (value1(round_logic1(m,
+  x)) = float64(m, x))))
+
+logic min1 : real
+
+axiom positive_constant3 :
+  (forall m:fpa_rounding_mode. forall x:real. (((min1 <= x) and
+  (x <= 0x1.FFFFFFFFFFFFFp1023)) -> is_finite1(round_logic1(m, x))))
+
+axiom positive_constant4 :
+  (forall m:fpa_rounding_mode. forall x:real. (((min1 <= x) and
+  (x <= 0x1.FFFFFFFFFFFFFp1023)) -> (0.0 <  value1(round_logic1(m, x)))))
+
+axiom positive_constant5 :
+  (forall m:fpa_rounding_mode. forall x:real. (((min1 <= x) and
+  (x <= 0x1.FFFFFFFFFFFFFp1023)) -> (sign2(round_logic1(m, x)) = Pos)))
+
+axiom negative_constant3 :
+  (forall m:fpa_rounding_mode. forall x:real.
+  ((((-0x1.FFFFFFFFFFFFFp1023) <= x) and (x <= (-min1))) ->
+  is_finite1(round_logic1(m, x))))
+
+axiom negative_constant4 :
+  (forall m:fpa_rounding_mode. forall x:real.
+  ((((-0x1.FFFFFFFFFFFFFp1023) <= x) and (x <= (-min1))) ->
+  (value1(round_logic1(m, x)) <  0.0)))
+
+axiom negative_constant5 :
+  (forall m:fpa_rounding_mode. forall x:real.
+  ((((-0x1.FFFFFFFFFFFFFp1023) <= x) and (x <= (-min1))) ->
+  (sign2(round_logic1(m, x)) = Neg)))
+
+axiom is_gen_zero_comp11 :
+  (forall x:double. forall y:double. ((is_gen_zero1(x) and
+  ((value1(x) = value1(y)) and is_finite1(y))) -> is_gen_zero1(y)))
+
+axiom is_gen_zero_comp21 :
+  (forall x:double. forall y:double. ((is_finite1(x) and
+  ((not is_gen_zero1(x)) and (value1(x) = value1(y)))) ->
+  (not is_gen_zero1(y))))
+
+predicate add_post1(m: fpa_rounding_mode, x: double, y: double, r: double) =
+  (((is_NaN1(x) or is_NaN1(y)) -> is_NaN1(r)) and (((is_finite1(x) and
+  is_infinite1(y)) -> (is_infinite1(r) and same_sign1(r, y))) and
+  (((is_infinite1(x) and is_finite1(y)) -> (is_infinite1(r) and same_sign1(r,
+  x))) and (((is_infinite1(x) and is_infinite1(y)) -> ((same_sign1(x, y) ->
+  (is_infinite1(r) and same_sign1(r, x))) and ((not same_sign1(x, y)) ->
+  is_NaN1(r)))) and (((is_finite1(x) and (is_finite1(y) and no_overflow1(m,
+  (value1(x) + value1(y))))) -> (is_finite1(r) and
+  ((value1(r) = float64(m, (value1(x) + value1(y)))) and ((same_sign1(x,
+  y) -> same_sign1(r, x)) and ((not same_sign1(x, y)) -> sign_zero_result1(m,
+  r)))))) and ((is_finite1(x) and (is_finite1(y) and (not no_overflow1(m,
+  (value1(x) + value1(y)))))) -> (same_sign_real(sign2(r),
+  (value1(x) + value1(y))) and overflow_value1(m, r))))))))
+
+predicate sub_post1(m: fpa_rounding_mode, x: double, y: double, r: double) =
+  (((is_NaN1(x) or is_NaN1(y)) -> is_NaN1(r)) and (((is_finite1(x) and
+  is_infinite1(y)) -> (is_infinite1(r) and diff_sign1(r, y))) and
+  (((is_infinite1(x) and is_finite1(y)) -> (is_infinite1(r) and same_sign1(r,
+  x))) and (((is_infinite1(x) and is_infinite1(y)) -> ((diff_sign1(x, y) ->
+  (is_infinite1(r) and same_sign1(r, x))) and ((not diff_sign1(x, y)) ->
+  is_NaN1(r)))) and (((is_finite1(x) and (is_finite1(y) and no_overflow1(m,
+  (value1(x) - value1(y))))) -> (is_finite1(r) and
+  ((value1(r) = float64(m, (value1(x) - value1(y)))) and ((diff_sign1(x,
+  y) -> same_sign1(r, x)) and ((not diff_sign1(x, y)) -> sign_zero_result1(m,
+  r)))))) and ((is_finite1(x) and (is_finite1(y) and (not no_overflow1(m,
+  (value1(x) - value1(y)))))) -> (same_sign_real(sign2(r),
+  (value1(x) - value1(y))) and overflow_value1(m, r))))))))
+
+predicate product_sign1(z: double, x: double, y: double) = ((same_sign1(x,
+  y) -> (sign2(z) = Pos)) and (diff_sign1(x, y) -> (sign2(z) = Neg)))
+
+predicate mul_post1(m: fpa_rounding_mode, x: double, y: double, r: double) =
+  (((is_NaN1(x) or is_NaN1(y)) -> is_NaN1(r)) and (((is_gen_zero1(x) and
+  is_infinite1(y)) -> is_NaN1(r)) and (((is_finite1(x) and
+  (is_infinite1(y) and (not (value1(x) = 0.0)))) -> is_infinite1(r)) and
+  (((is_infinite1(x) and is_gen_zero1(y)) -> is_NaN1(r)) and
+  (((is_infinite1(x) and (is_finite1(y) and (not (value1(y) = 0.0)))) ->
+  is_infinite1(r)) and (((is_infinite1(x) and is_infinite1(y)) ->
+  is_infinite1(r)) and (((is_finite1(x) and (is_finite1(y) and
+  no_overflow1(m, (value1(x) * value1(y))))) -> (is_finite1(r) and
+  (value1(r) = float64(m, (value1(x) * value1(y)))))) and
+  (((is_finite1(x) and (is_finite1(y) and (not no_overflow1(m,
+  (value1(x) * value1(y)))))) -> overflow_value1(m, r)) and
+  ((not is_NaN1(r)) -> product_sign1(r, x, y))))))))))
+
+predicate neg_post1(x: double, r: double) = ((is_NaN1(x) -> is_NaN1(r)) and
+  ((is_infinite1(x) -> is_infinite1(r)) and ((is_finite1(x) ->
+  (is_finite1(r) and (value1(r) = (-value1(x))))) and ((not is_NaN1(x)) ->
+  diff_sign1(r, x)))))
+
+predicate div_post1(m: fpa_rounding_mode, x: double, y: double, r: double) =
+  (((is_NaN1(x) or is_NaN1(y)) -> is_NaN1(r)) and (((is_finite1(x) and
+  is_infinite1(y)) -> is_gen_zero1(r)) and (((is_infinite1(x) and
+  is_finite1(y)) -> is_infinite1(r)) and (((is_infinite1(x) and
+  is_infinite1(y)) -> is_NaN1(r)) and (((is_finite1(x) and (is_finite1(y) and
+  ((not (value1(y) = 0.0)) and no_overflow1(m, (value1(x) / value1(y)))))) ->
+  (is_finite1(r) and (value1(r) = float64(m, (value1(x) / value1(y)))))) and
+  (((is_finite1(x) and (is_finite1(y) and ((not (value1(y) = 0.0)) and
+  (not no_overflow1(m, (value1(x) / value1(y))))))) -> overflow_value1(m,
+  r)) and (((is_finite1(x) and (is_gen_zero1(y) and
+  (not (value1(x) = 0.0)))) -> is_infinite1(r)) and (((is_gen_zero1(x) and
+  is_gen_zero1(y)) -> is_NaN1(r)) and ((not is_NaN1(r)) -> product_sign1(r,
+  x, y))))))))))
+
+predicate fma_post1(m: fpa_rounding_mode, x: double, y: double, z: double,
+  r: double) = (((is_NaN1(x) or (is_NaN1(y) or is_NaN1(z))) ->
+  is_NaN1(r)) and (((is_gen_zero1(x) and is_infinite1(y)) -> is_NaN1(r)) and
+  (((is_infinite1(x) and is_gen_zero1(y)) -> is_NaN1(r)) and
+  (((is_finite1(x) and ((not (value1(x) = 0.0)) and (is_infinite1(y) and
+  is_finite1(z)))) -> (is_infinite1(r) and product_sign1(r, x, y))) and
+  (((is_finite1(x) and ((not (value1(x) = 0.0)) and (is_infinite1(y) and
+  is_infinite1(z)))) -> ((product_sign1(z, x, y) -> (is_infinite1(r) and
+  same_sign1(r, z))) and ((not product_sign1(z, x, y)) -> is_NaN1(r)))) and
+  (((is_infinite1(x) and (is_finite1(y) and ((not (value1(y) = 0.0)) and
+  is_finite1(z)))) -> (is_infinite1(r) and product_sign1(r, x, y))) and
+  (((is_infinite1(x) and (is_finite1(y) and ((not (value1(y) = 0.0)) and
+  is_infinite1(z)))) -> ((product_sign1(z, x, y) -> (is_infinite1(r) and
+  same_sign1(r, z))) and ((not product_sign1(z, x, y)) -> is_NaN1(r)))) and
+  (((is_infinite1(x) and (is_infinite1(y) and is_finite1(z))) ->
+  (is_infinite1(r) and product_sign1(r, x, y))) and (((is_finite1(x) and
+  (is_finite1(y) and is_infinite1(z))) -> (is_infinite1(r) and same_sign1(r,
+  z))) and (((is_infinite1(x) and (is_infinite1(y) and is_infinite1(z))) ->
+  ((product_sign1(z, x, y) -> (is_infinite1(r) and same_sign1(r, z))) and
+  ((not product_sign1(z, x, y)) -> is_NaN1(r)))) and (((is_finite1(x) and
+  (is_finite1(y) and (is_finite1(z) and no_overflow1(m,
+  ((value1(x) * value1(y)) + value1(z)))))) -> (is_finite1(r) and
+  ((value1(r) = float64(m, ((value1(x) * value1(y)) + value1(z)))) and
+  ((product_sign1(z, x, y) -> same_sign1(r, z)) and ((not product_sign1(z, x,
+  y)) -> ((((value1(x) * value1(y)) + value1(z)) = 0.0) -> (((m = Down) ->
+  (sign2(r) = Neg)) and ((not (m = Down)) -> (sign2(r) = Pos))))))))) and
+  ((is_finite1(x) and (is_finite1(y) and (is_finite1(z) and
+  (not no_overflow1(m, ((value1(x) * value1(y)) + value1(z))))))) ->
+  (same_sign_real(sign2(r), ((value1(x) * value1(y)) + value1(z))) and
+  overflow_value1(m, r))))))))))))))
+
+predicate sqrt_post1(m: fpa_rounding_mode, x: double, r: double) =
+  ((is_NaN1(x) -> is_NaN1(r)) and ((is_plus_infinity1(x) ->
+  is_plus_infinity1(r)) and ((is_minus_infinity1(x) -> is_NaN1(r)) and
+  (((is_finite1(x) and (value1(x) <  0.0)) -> is_NaN1(r)) and
+  (((is_finite1(x) and (value1(x) = 0.0)) -> (is_finite1(r) and
+  ((value1(r) = 0.0) and same_sign1(r, x)))) and ((is_finite1(x) and
+  (0.0 <  value1(x))) -> (is_finite1(r) and
+  ((value1(r) = float64(m, sqrt_real(value1(x)))) and
+  (sign2(r) = Pos)))))))))
+
+predicate roundToIntegral_post1(m: fpa_rounding_mode, x: double, r: double) =
+  ((is_NaN1(x) -> is_NaN1(r)) and ((is_infinite1(x) -> (is_infinite1(r) and
+  same_sign1(x, r))) and (is_finite1(x) -> (same_sign1(x, r) and
+  (value1(r) = real_of_int(integer_round(m, value1(x))))))))
+
+predicate of_real_exact_post1(x: real, r: double) = (is_finite1(r) and
+  (value1(r) = x))
+
+predicate le1(x: double, y: double) = ((is_finite1(x) and (is_finite1(y) and
+  (value1(x) <= value1(y)))) or ((is_minus_infinity1(x) and
+  is_not_NaN3(y)) or (is_not_NaN3(x) and is_plus_infinity1(y))))
+
+predicate lt1(x: double, y: double) = ((is_finite1(x) and (is_finite1(y) and
+  (value1(x) <  value1(y)))) or ((is_minus_infinity1(x) and
+  (is_not_NaN3(y) and (not is_minus_infinity1(y)))) or (is_not_NaN3(x) and
+  ((not is_plus_infinity1(x)) and is_plus_infinity1(y)))))
+
+predicate eq1(x: double, y: double) = ((is_finite1(x) and (is_finite1(y) and
+  (value1(x) = value1(y)))) or (is_infinite1(x) and (is_infinite1(y) and
+  same_sign1(x, y))))
+
+predicate ne1(x: double, y: double) = (not eq1(x, y))
+
+predicate rem_post1(x: double, y: double, r: double) = (((is_NaN1(x) or
+  (is_NaN1(y) or (is_infinite1(x) or is_gen_zero1(y)))) -> is_NaN1(r)) and
+  ((not (is_NaN1(x) or (is_NaN1(y) or (is_infinite1(x) or
+  is_gen_zero1(y))))) -> ((is_infinite1(y) -> eq1(x, r)) and
+  ((not is_infinite1(y)) -> (is_finite1(r) and (((value1(r) = 0.0) ->
+  same_sign1(x, r)) and
+  (value1(r) = (value1(x) - (value1(y) * real_of_int(integer_round(NearestTiesToEven, (value1(x) / value1(y)))))))))))))
+
+axiom le_lt_trans1 :
+  (forall x:double. forall y:double. forall z:double. ((le1(x, y) and lt1(y,
+  z)) -> lt1(x, z)))
+
+axiom lt_le_trans1 :
+  (forall x:double. forall y:double. forall z:double. ((lt1(x, y) and le1(y,
+  z)) -> lt1(x, z)))
+
+axiom le_ge_asym1 :
+  (forall x:double. forall y:double. ((le1(x, y) and le1(y, x)) -> eq1(x,
+  y)))
+
+axiom not_lt_ge1 :
+  (forall x:double. forall y:double. (((not lt1(x, y)) and
+  (is_not_NaN3(x) and is_not_NaN3(y))) -> le1(y, x)))
+
+axiom not_gt_le1 :
+  (forall x:double. forall y:double. (((not lt1(y, x)) and
+  (is_not_NaN3(x) and is_not_NaN3(y))) -> le1(x, y)))
+
+predicate single_to_double_cast(x: single, r: double) = ((is_NaN(x) ->
+  is_NaN1(r)) and (is_finite(x) -> (is_finite1(r) and
+  ((value1(r) = value(x)) and (sign2(r) = sign1(x))))))
+
+predicate double_to_single_cast(m: fpa_rounding_mode, x: double, r: single) =
+  ((is_NaN1(x) -> is_NaN(r)) and ((is_infinite1(x) -> (is_infinite(r) and
+  (sign1(r) = sign2(x)))) and (((is_finite1(x) and no_overflow(m,
+  value1(x))) -> (is_finite(r) and ((value(r) = float32(m, value1(x))) and
+  (sign1(r) = sign2(x))))) and ((is_finite1(x) and (not no_overflow(m,
+  value1(x)))) -> ((sign1(r) = sign2(x)) and overflow_value(m, r))))))
+
+predicate smt2_single_eq(x: single, y: single) = (((is_finite(x) and
+  (is_finite(y) and ((value(x) = value(y)) and same_sign(x, y)))) or
+  (is_infinite(x) and (is_infinite(y) and same_sign(x, y)))) or
+  (is_NaN(x) and is_NaN(y)))
+
+logic b739 : single
+
+logic b442 : double
+
+logic b791 : single
+
+logic b901 : single
+
+logic b826 : single
+
+logic b755 : single
+
+logic b760 : single
+
+logic b452 : single
+
+logic b896 : single
+
+logic b1029 : single
+
+logic b121 : single
+
+logic b124 : double
+
+logic b135 : double
+
+logic b936 : single
+
+logic b866 : single
+
+logic b126 : single
+
+logic b1001 : single
+
+logic b966 : single
+
+logic b831 : single
+
+logic b119 : single
+
+logic b971 : single
+
+logic b1020 : single
+
+logic b931 : single
+
+logic b796 : single
+
+logic b734 : single
+
+logic b861 : single
+
+logic s_div__t_3__t_9__t_10 : single
+
+axiom eq_0 : div_post(NearestTiesToEven, b119, b121, s_div__t_3__t_9__t_10)
+
+logic ust_11 : single
+
+axiom eq_1 : div_post(NearestTiesToEven, b119, b121, ust_11)
+
+logic double_of_single__t_3__t_11 : double
+
+axiom eq_2 : single_to_double_cast(ust_11, double_of_single__t_3__t_11)
+
+logic ust_12 : double
+
+axiom eq_3 : single_to_double_cast(ust_11, ust_12)
+
+logic d_mul__t_3__t_12__t_13 : double
+
+axiom eq_4 : mul_post1(NearestTiesToEven, ust_12, b135,
+  d_mul__t_3__t_12__t_13)
+
+logic ust_14 : double
+
+axiom eq_5 : mul_post1(NearestTiesToEven, ust_12, b135, ust_14)
+
+logic s_mul__t_3__t_11__t_11 : single
+
+axiom eq_6 : mul_post(NearestTiesToEven, ust_11, ust_11,
+  s_mul__t_3__t_11__t_11)
+
+logic ust_15 : single
+
+axiom eq_7 : mul_post(NearestTiesToEven, ust_11, ust_11, ust_15)
+
+logic s_neg__t_15 : single
+
+axiom eq_8 : neg_post(ust_15, s_neg__t_15)
+
+logic ust_16 : single
+
+axiom eq_9 : neg_post(ust_15, ust_16)
+
+logic s_add__t_3__t_9__t_16 : single
+
+axiom eq_10 : add_post(NearestTiesToEven, b119, ust_16,
+  s_add__t_3__t_9__t_16)
+
+logic ust_17 : single
+
+axiom eq_11 : add_post(NearestTiesToEven, b119, ust_16, ust_17)
+
+logic double_of_single__t_3__t_17 : double
+
+axiom eq_12 : single_to_double_cast(ust_17, double_of_single__t_3__t_17)
+
+logic ust_18 : double
+
+axiom eq_13 : single_to_double_cast(ust_17, ust_18)
+
+logic d_div__t_3__t_18__t_14 : double
+
+axiom eq_14 : div_post1(NearestTiesToEven, ust_18, ust_14,
+  d_div__t_3__t_18__t_14)
+
+logic ust_19 : double
+
+axiom eq_15 : div_post1(NearestTiesToEven, ust_18, ust_14, ust_19)
+
+logic single_of_double__t_3__t_19 : single
+
+axiom eq_16 : double_to_single_cast(NearestTiesToEven, ust_19,
+  single_of_double__t_3__t_19)
+
+logic ust_20 : single
+
+axiom eq_17 : double_to_single_cast(NearestTiesToEven, ust_19, ust_20)
+
+logic s_add__t_3__t_11__t_20 : single
+
+axiom eq_18 : add_post(NearestTiesToEven, ust_11, ust_20,
+  s_add__t_3__t_11__t_20)
+
+logic ust_21 : single
+
+axiom eq_19 : add_post(NearestTiesToEven, ust_11, ust_20, ust_21)
+
+logic s_mul__t_3__t_21__t_21 : single
+
+axiom eq_20 : mul_post(NearestTiesToEven, ust_21, ust_21,
+  s_mul__t_3__t_21__t_21)
+
+logic ust_22 : single
+
+axiom eq_21 : mul_post(NearestTiesToEven, ust_21, ust_21, ust_22)
+
+logic s_neg__t_22 : single
+
+axiom eq_22 : neg_post(ust_22, s_neg__t_22)
+
+logic ust_23 : single
+
+axiom eq_23 : neg_post(ust_22, ust_23)
+
+logic s_add__t_3__t_9__t_23 : single
+
+axiom eq_24 : add_post(NearestTiesToEven, b119, ust_23,
+  s_add__t_3__t_9__t_23)
+
+logic ust_24 : single
+
+axiom eq_25 : add_post(NearestTiesToEven, b119, ust_23, ust_24)
+
+logic double_of_single__t_3__t_24 : double
+
+axiom eq_26 : single_to_double_cast(ust_24, double_of_single__t_3__t_24)
+
+logic ust_25 : double
+
+axiom eq_27 : single_to_double_cast(ust_24, ust_25)
+
+logic single_of_double__t_3__t_25 : single
+
+axiom eq_28 : double_to_single_cast(NearestTiesToEven, ust_25,
+  single_of_double__t_3__t_25)
+
+logic ust_26 : single
+
+axiom eq_29 : double_to_single_cast(NearestTiesToEven, ust_25, ust_26)
+
+predicate ust_29() = (not smt2_single_eq(ust_26, b1029))
+
+logic double_of_single__t_3__t_21 : double
+
+axiom eq_30 : single_to_double_cast(ust_21, double_of_single__t_3__t_21)
+
+logic ust_30 : double
+
+axiom eq_31 : single_to_double_cast(ust_21, ust_30)
+
+logic d_mul__t_3__t_13__t_30 : double
+
+axiom eq_32 : mul_post1(NearestTiesToEven, b135, ust_30,
+  d_mul__t_3__t_13__t_30)
+
+logic ust_31 : double
+
+axiom eq_33 : mul_post1(NearestTiesToEven, b135, ust_30, ust_31)
+
+logic d_div__t_3__t_25__t_31 : double
+
+axiom eq_34 : div_post1(NearestTiesToEven, ust_25, ust_31,
+  d_div__t_3__t_25__t_31)
+
+logic ust_32 : double
+
+axiom eq_35 : div_post1(NearestTiesToEven, ust_25, ust_31, ust_32)
+
+logic single_of_double__t_3__t_32 : single
+
+axiom eq_36 : double_to_single_cast(NearestTiesToEven, ust_32,
+  single_of_double__t_3__t_32)
+
+logic ust_33 : single
+
+axiom eq_37 : double_to_single_cast(NearestTiesToEven, ust_32, ust_33)
+
+logic s_add__t_3__t_21__t_33 : single
+
+axiom eq_38 : add_post(NearestTiesToEven, ust_21, ust_33,
+  s_add__t_3__t_21__t_33)
+
+logic ust_34 : single
+
+axiom eq_39 : add_post(NearestTiesToEven, ust_21, ust_33, ust_34)
+
+logic s_mul__t_3__t_34__t_34 : single
+
+axiom eq_40 : mul_post(NearestTiesToEven, ust_34, ust_34,
+  s_mul__t_3__t_34__t_34)
+
+logic ust_35 : single
+
+axiom eq_41 : mul_post(NearestTiesToEven, ust_34, ust_34, ust_35)
+
+logic s_neg__t_35 : single
+
+axiom eq_42 : neg_post(ust_35, s_neg__t_35)
+
+logic ust_36 : single
+
+axiom eq_43 : neg_post(ust_35, ust_36)
+
+logic s_add__t_3__t_9__t_36 : single
+
+axiom eq_44 : add_post(NearestTiesToEven, b119, ust_36,
+  s_add__t_3__t_9__t_36)
+
+logic ust_37 : single
+
+axiom eq_45 : add_post(NearestTiesToEven, b119, ust_36, ust_37)
+
+logic double_of_single__t_3__t_37 : double
+
+axiom eq_46 : single_to_double_cast(ust_37, double_of_single__t_3__t_37)
+
+logic ust_38 : double
+
+axiom eq_47 : single_to_double_cast(ust_37, ust_38)
+
+logic single_of_double__t_3__t_38 : single
+
+axiom eq_48 : double_to_single_cast(NearestTiesToEven, ust_38,
+  single_of_double__t_3__t_38)
+
+logic ust_39 : single
+
+axiom eq_49 : double_to_single_cast(NearestTiesToEven, ust_38, ust_39)
+
+predicate ust_42() = (not smt2_single_eq(ust_39, b1020))
+
+predicate ust_45() = (not smt2_single_eq(ust_34, b971))
+
+logic double_of_single__t_3__t_43 : double
+
+axiom eq_50 : single_to_double_cast(b971, double_of_single__t_3__t_43)
+
+logic ust_46 : double
+
+axiom eq_51 : single_to_double_cast(b971, ust_46)
+
+logic d_mul__t_3__t_13__t_46 : double
+
+axiom eq_52 : mul_post1(NearestTiesToEven, b135, ust_46,
+  d_mul__t_3__t_13__t_46)
+
+logic ust_47 : double
+
+axiom eq_53 : mul_post1(NearestTiesToEven, b135, ust_46, ust_47)
+
+logic s_mul__t_3__t_43__t_43 : single
+
+axiom eq_54 : mul_post(NearestTiesToEven, b971, b971, s_mul__t_3__t_43__t_43)
+
+logic ust_48 : single
+
+axiom eq_55 : mul_post(NearestTiesToEven, b971, b971, ust_48)
+
+logic s_neg__t_48 : single
+
+axiom eq_56 : neg_post(ust_48, s_neg__t_48)
+
+logic ust_49 : single
+
+axiom eq_57 : neg_post(ust_48, ust_49)
+
+logic s_add__t_3__t_9__t_49 : single
+
+axiom eq_58 : add_post(NearestTiesToEven, b119, ust_49,
+  s_add__t_3__t_9__t_49)
+
+logic ust_50 : single
+
+axiom eq_59 : add_post(NearestTiesToEven, b119, ust_49, ust_50)
+
+logic double_of_single__t_3__t_50 : double
+
+axiom eq_60 : single_to_double_cast(ust_50, double_of_single__t_3__t_50)
+
+logic ust_51 : double
+
+axiom eq_61 : single_to_double_cast(ust_50, ust_51)
+
+logic d_div__t_3__t_51__t_47 : double
+
+axiom eq_62 : div_post1(NearestTiesToEven, ust_51, ust_47,
+  d_div__t_3__t_51__t_47)
+
+logic ust_52 : double
+
+axiom eq_63 : div_post1(NearestTiesToEven, ust_51, ust_47, ust_52)
+
+logic single_of_double__t_3__t_52 : single
+
+axiom eq_64 : double_to_single_cast(NearestTiesToEven, ust_52,
+  single_of_double__t_3__t_52)
+
+logic ust_53 : single
+
+axiom eq_65 : double_to_single_cast(NearestTiesToEven, ust_52, ust_53)
+
+logic s_add__t_3__t_43__t_53 : single
+
+axiom eq_66 : add_post(NearestTiesToEven, b971, ust_53,
+  s_add__t_3__t_43__t_53)
+
+logic ust_54 : single
+
+axiom eq_67 : add_post(NearestTiesToEven, b971, ust_53, ust_54)
+
+logic s_mul__t_3__t_54__t_54 : single
+
+axiom eq_68 : mul_post(NearestTiesToEven, ust_54, ust_54,
+  s_mul__t_3__t_54__t_54)
+
+logic ust_55 : single
+
+axiom eq_69 : mul_post(NearestTiesToEven, ust_54, ust_54, ust_55)
+
+logic s_neg__t_55 : single
+
+axiom eq_70 : neg_post(ust_55, s_neg__t_55)
+
+logic ust_56 : single
+
+axiom eq_71 : neg_post(ust_55, ust_56)
+
+logic s_add__t_3__t_9__t_56 : single
+
+axiom eq_72 : add_post(NearestTiesToEven, b119, ust_56,
+  s_add__t_3__t_9__t_56)
+
+logic ust_57 : single
+
+axiom eq_73 : add_post(NearestTiesToEven, b119, ust_56, ust_57)
+
+logic double_of_single__t_3__t_57 : double
+
+axiom eq_74 : single_to_double_cast(ust_57, double_of_single__t_3__t_57)
+
+logic ust_58 : double
+
+axiom eq_75 : single_to_double_cast(ust_57, ust_58)
+
+logic single_of_double__t_3__t_58 : single
+
+axiom eq_76 : double_to_single_cast(NearestTiesToEven, ust_58,
+  single_of_double__t_3__t_58)
+
+logic ust_59 : single
+
+axiom eq_77 : double_to_single_cast(NearestTiesToEven, ust_58, ust_59)
+
+predicate ust_62() = (not smt2_single_eq(ust_59, b1001))
+
+predicate ust_65() = (not smt2_single_eq(ust_54, b936))
+
+logic double_of_single__t_3__t_63 : double
+
+axiom eq_78 : single_to_double_cast(b936, double_of_single__t_3__t_63)
+
+logic ust_66 : double
+
+axiom eq_79 : single_to_double_cast(b936, ust_66)
+
+logic d_mul__t_3__t_13__t_66 : double
+
+axiom eq_80 : mul_post1(NearestTiesToEven, b135, ust_66,
+  d_mul__t_3__t_13__t_66)
+
+logic ust_67 : double
+
+axiom eq_81 : mul_post1(NearestTiesToEven, b135, ust_66, ust_67)
+
+logic s_mul__t_3__t_63__t_63 : single
+
+axiom eq_82 : mul_post(NearestTiesToEven, b936, b936, s_mul__t_3__t_63__t_63)
+
+logic ust_68 : single
+
+axiom eq_83 : mul_post(NearestTiesToEven, b936, b936, ust_68)
+
+logic s_neg__t_68 : single
+
+axiom eq_84 : neg_post(ust_68, s_neg__t_68)
+
+logic ust_69 : single
+
+axiom eq_85 : neg_post(ust_68, ust_69)
+
+logic s_add__t_3__t_9__t_69 : single
+
+axiom eq_86 : add_post(NearestTiesToEven, b119, ust_69,
+  s_add__t_3__t_9__t_69)
+
+logic ust_70 : single
+
+axiom eq_87 : add_post(NearestTiesToEven, b119, ust_69, ust_70)
+
+logic double_of_single__t_3__t_70 : double
+
+axiom eq_88 : single_to_double_cast(ust_70, double_of_single__t_3__t_70)
+
+logic ust_71 : double
+
+axiom eq_89 : single_to_double_cast(ust_70, ust_71)
+
+logic d_div__t_3__t_71__t_67 : double
+
+axiom eq_90 : div_post1(NearestTiesToEven, ust_71, ust_67,
+  d_div__t_3__t_71__t_67)
+
+logic ust_72 : double
+
+axiom eq_91 : div_post1(NearestTiesToEven, ust_71, ust_67, ust_72)
+
+logic single_of_double__t_3__t_72 : single
+
+axiom eq_92 : double_to_single_cast(NearestTiesToEven, ust_72,
+  single_of_double__t_3__t_72)
+
+logic ust_73 : single
+
+axiom eq_93 : double_to_single_cast(NearestTiesToEven, ust_72, ust_73)
+
+logic s_add__t_3__t_63__t_73 : single
+
+axiom eq_94 : add_post(NearestTiesToEven, b936, ust_73,
+  s_add__t_3__t_63__t_73)
+
+logic ust_74 : single
+
+axiom eq_95 : add_post(NearestTiesToEven, b936, ust_73, ust_74)
+
+logic s_mul__t_3__t_74__t_74 : single
+
+axiom eq_96 : mul_post(NearestTiesToEven, ust_74, ust_74,
+  s_mul__t_3__t_74__t_74)
+
+logic ust_75 : single
+
+axiom eq_97 : mul_post(NearestTiesToEven, ust_74, ust_74, ust_75)
+
+logic s_neg__t_75 : single
+
+axiom eq_98 : neg_post(ust_75, s_neg__t_75)
+
+logic ust_76 : single
+
+axiom eq_99 : neg_post(ust_75, ust_76)
+
+logic s_add__t_3__t_9__t_76 : single
+
+axiom eq_100 : add_post(NearestTiesToEven, b119, ust_76,
+  s_add__t_3__t_9__t_76)
+
+logic ust_77 : single
+
+axiom eq_101 : add_post(NearestTiesToEven, b119, ust_76, ust_77)
+
+logic double_of_single__t_3__t_77 : double
+
+axiom eq_102 : single_to_double_cast(ust_77, double_of_single__t_3__t_77)
+
+logic ust_78 : double
+
+axiom eq_103 : single_to_double_cast(ust_77, ust_78)
+
+logic single_of_double__t_3__t_78 : single
+
+axiom eq_104 : double_to_single_cast(NearestTiesToEven, ust_78,
+  single_of_double__t_3__t_78)
+
+logic ust_79 : single
+
+axiom eq_105 : double_to_single_cast(NearestTiesToEven, ust_78, ust_79)
+
+predicate ust_82() = (not smt2_single_eq(ust_79, b966))
+
+predicate ust_85() = (not smt2_single_eq(ust_74, b901))
+
+logic double_of_single__t_3__t_83 : double
+
+axiom eq_106 : single_to_double_cast(b901, double_of_single__t_3__t_83)
+
+logic ust_86 : double
+
+axiom eq_107 : single_to_double_cast(b901, ust_86)
+
+logic d_mul__t_3__t_13__t_86 : double
+
+axiom eq_108 : mul_post1(NearestTiesToEven, b135, ust_86,
+  d_mul__t_3__t_13__t_86)
+
+logic ust_87 : double
+
+axiom eq_109 : mul_post1(NearestTiesToEven, b135, ust_86, ust_87)
+
+logic s_mul__t_3__t_83__t_83 : single
+
+axiom eq_110 : mul_post(NearestTiesToEven, b901, b901,
+  s_mul__t_3__t_83__t_83)
+
+logic ust_88 : single
+
+axiom eq_111 : mul_post(NearestTiesToEven, b901, b901, ust_88)
+
+logic s_neg__t_88 : single
+
+axiom eq_112 : neg_post(ust_88, s_neg__t_88)
+
+logic ust_89 : single
+
+axiom eq_113 : neg_post(ust_88, ust_89)
+
+logic s_add__t_3__t_9__t_89 : single
+
+axiom eq_114 : add_post(NearestTiesToEven, b119, ust_89,
+  s_add__t_3__t_9__t_89)
+
+logic ust_90 : single
+
+axiom eq_115 : add_post(NearestTiesToEven, b119, ust_89, ust_90)
+
+logic double_of_single__t_3__t_90 : double
+
+axiom eq_116 : single_to_double_cast(ust_90, double_of_single__t_3__t_90)
+
+logic ust_91 : double
+
+axiom eq_117 : single_to_double_cast(ust_90, ust_91)
+
+logic d_div__t_3__t_91__t_87 : double
+
+axiom eq_118 : div_post1(NearestTiesToEven, ust_91, ust_87,
+  d_div__t_3__t_91__t_87)
+
+logic ust_92 : double
+
+axiom eq_119 : div_post1(NearestTiesToEven, ust_91, ust_87, ust_92)
+
+logic single_of_double__t_3__t_92 : single
+
+axiom eq_120 : double_to_single_cast(NearestTiesToEven, ust_92,
+  single_of_double__t_3__t_92)
+
+logic ust_93 : single
+
+axiom eq_121 : double_to_single_cast(NearestTiesToEven, ust_92, ust_93)
+
+logic s_add__t_3__t_83__t_93 : single
+
+axiom eq_122 : add_post(NearestTiesToEven, b901, ust_93,
+  s_add__t_3__t_83__t_93)
+
+logic ust_94 : single
+
+axiom eq_123 : add_post(NearestTiesToEven, b901, ust_93, ust_94)
+
+logic s_mul__t_3__t_94__t_94 : single
+
+axiom eq_124 : mul_post(NearestTiesToEven, ust_94, ust_94,
+  s_mul__t_3__t_94__t_94)
+
+logic ust_95 : single
+
+axiom eq_125 : mul_post(NearestTiesToEven, ust_94, ust_94, ust_95)
+
+logic s_neg__t_95 : single
+
+axiom eq_126 : neg_post(ust_95, s_neg__t_95)
+
+logic ust_96 : single
+
+axiom eq_127 : neg_post(ust_95, ust_96)
+
+logic s_add__t_3__t_9__t_96 : single
+
+axiom eq_128 : add_post(NearestTiesToEven, b119, ust_96,
+  s_add__t_3__t_9__t_96)
+
+logic ust_97 : single
+
+axiom eq_129 : add_post(NearestTiesToEven, b119, ust_96, ust_97)
+
+logic double_of_single__t_3__t_97 : double
+
+axiom eq_130 : single_to_double_cast(ust_97, double_of_single__t_3__t_97)
+
+logic ust_98 : double
+
+axiom eq_131 : single_to_double_cast(ust_97, ust_98)
+
+logic single_of_double__t_3__t_98 : single
+
+axiom eq_132 : double_to_single_cast(NearestTiesToEven, ust_98,
+  single_of_double__t_3__t_98)
+
+logic ust_99 : single
+
+axiom eq_133 : double_to_single_cast(NearestTiesToEven, ust_98, ust_99)
+
+predicate ust_102() = (not smt2_single_eq(ust_99, b931))
+
+predicate ust_105() = (not smt2_single_eq(ust_94, b866))
+
+logic double_of_single__t_3__t_103 : double
+
+axiom eq_134 : single_to_double_cast(b866, double_of_single__t_3__t_103)
+
+logic ust_106 : double
+
+axiom eq_135 : single_to_double_cast(b866, ust_106)
+
+logic d_mul__t_3__t_13__t_106 : double
+
+axiom eq_136 : mul_post1(NearestTiesToEven, b135, ust_106,
+  d_mul__t_3__t_13__t_106)
+
+logic ust_107 : double
+
+axiom eq_137 : mul_post1(NearestTiesToEven, b135, ust_106, ust_107)
+
+logic s_mul__t_3__t_103__t_103 : single
+
+axiom eq_138 : mul_post(NearestTiesToEven, b866, b866,
+  s_mul__t_3__t_103__t_103)
+
+logic ust_108 : single
+
+axiom eq_139 : mul_post(NearestTiesToEven, b866, b866, ust_108)
+
+logic s_neg__t_108 : single
+
+axiom eq_140 : neg_post(ust_108, s_neg__t_108)
+
+logic ust_109 : single
+
+axiom eq_141 : neg_post(ust_108, ust_109)
+
+logic s_add__t_3__t_9__t_109 : single
+
+axiom eq_142 : add_post(NearestTiesToEven, b119, ust_109,
+  s_add__t_3__t_9__t_109)
+
+logic ust_110 : single
+
+axiom eq_143 : add_post(NearestTiesToEven, b119, ust_109, ust_110)
+
+logic double_of_single__t_3__t_110 : double
+
+axiom eq_144 : single_to_double_cast(ust_110, double_of_single__t_3__t_110)
+
+logic ust_111 : double
+
+axiom eq_145 : single_to_double_cast(ust_110, ust_111)
+
+logic d_div__t_3__t_111__t_107 : double
+
+axiom eq_146 : div_post1(NearestTiesToEven, ust_111, ust_107,
+  d_div__t_3__t_111__t_107)
+
+logic ust_112 : double
+
+axiom eq_147 : div_post1(NearestTiesToEven, ust_111, ust_107, ust_112)
+
+logic single_of_double__t_3__t_112 : single
+
+axiom eq_148 : double_to_single_cast(NearestTiesToEven, ust_112,
+  single_of_double__t_3__t_112)
+
+logic ust_113 : single
+
+axiom eq_149 : double_to_single_cast(NearestTiesToEven, ust_112, ust_113)
+
+logic s_add__t_3__t_103__t_113 : single
+
+axiom eq_150 : add_post(NearestTiesToEven, b866, ust_113,
+  s_add__t_3__t_103__t_113)
+
+logic ust_114 : single
+
+axiom eq_151 : add_post(NearestTiesToEven, b866, ust_113, ust_114)
+
+logic s_mul__t_3__t_114__t_114 : single
+
+axiom eq_152 : mul_post(NearestTiesToEven, ust_114, ust_114,
+  s_mul__t_3__t_114__t_114)
+
+logic ust_115 : single
+
+axiom eq_153 : mul_post(NearestTiesToEven, ust_114, ust_114, ust_115)
+
+logic s_neg__t_115 : single
+
+axiom eq_154 : neg_post(ust_115, s_neg__t_115)
+
+logic ust_116 : single
+
+axiom eq_155 : neg_post(ust_115, ust_116)
+
+logic s_add__t_3__t_9__t_116 : single
+
+axiom eq_156 : add_post(NearestTiesToEven, b119, ust_116,
+  s_add__t_3__t_9__t_116)
+
+logic ust_117 : single
+
+axiom eq_157 : add_post(NearestTiesToEven, b119, ust_116, ust_117)
+
+logic double_of_single__t_3__t_117 : double
+
+axiom eq_158 : single_to_double_cast(ust_117, double_of_single__t_3__t_117)
+
+logic ust_118 : double
+
+axiom eq_159 : single_to_double_cast(ust_117, ust_118)
+
+logic single_of_double__t_3__t_118 : single
+
+axiom eq_160 : double_to_single_cast(NearestTiesToEven, ust_118,
+  single_of_double__t_3__t_118)
+
+logic ust_119 : single
+
+axiom eq_161 : double_to_single_cast(NearestTiesToEven, ust_118, ust_119)
+
+predicate ust_122() = (not smt2_single_eq(ust_119, b896))
+
+predicate ust_125() = (not smt2_single_eq(ust_114, b831))
+
+logic double_of_single__t_3__t_123 : double
+
+axiom eq_162 : single_to_double_cast(b831, double_of_single__t_3__t_123)
+
+logic ust_126 : double
+
+axiom eq_163 : single_to_double_cast(b831, ust_126)
+
+logic d_mul__t_3__t_13__t_126 : double
+
+axiom eq_164 : mul_post1(NearestTiesToEven, b135, ust_126,
+  d_mul__t_3__t_13__t_126)
+
+logic ust_127 : double
+
+axiom eq_165 : mul_post1(NearestTiesToEven, b135, ust_126, ust_127)
+
+logic s_mul__t_3__t_123__t_123 : single
+
+axiom eq_166 : mul_post(NearestTiesToEven, b831, b831,
+  s_mul__t_3__t_123__t_123)
+
+logic ust_128 : single
+
+axiom eq_167 : mul_post(NearestTiesToEven, b831, b831, ust_128)
+
+logic s_neg__t_128 : single
+
+axiom eq_168 : neg_post(ust_128, s_neg__t_128)
+
+logic ust_129 : single
+
+axiom eq_169 : neg_post(ust_128, ust_129)
+
+logic s_add__t_3__t_9__t_129 : single
+
+axiom eq_170 : add_post(NearestTiesToEven, b119, ust_129,
+  s_add__t_3__t_9__t_129)
+
+logic ust_130 : single
+
+axiom eq_171 : add_post(NearestTiesToEven, b119, ust_129, ust_130)
+
+logic double_of_single__t_3__t_130 : double
+
+axiom eq_172 : single_to_double_cast(ust_130, double_of_single__t_3__t_130)
+
+logic ust_131 : double
+
+axiom eq_173 : single_to_double_cast(ust_130, ust_131)
+
+logic d_div__t_3__t_131__t_127 : double
+
+axiom eq_174 : div_post1(NearestTiesToEven, ust_131, ust_127,
+  d_div__t_3__t_131__t_127)
+
+logic ust_132 : double
+
+axiom eq_175 : div_post1(NearestTiesToEven, ust_131, ust_127, ust_132)
+
+logic single_of_double__t_3__t_132 : single
+
+axiom eq_176 : double_to_single_cast(NearestTiesToEven, ust_132,
+  single_of_double__t_3__t_132)
+
+logic ust_133 : single
+
+axiom eq_177 : double_to_single_cast(NearestTiesToEven, ust_132, ust_133)
+
+logic s_add__t_3__t_123__t_133 : single
+
+axiom eq_178 : add_post(NearestTiesToEven, b831, ust_133,
+  s_add__t_3__t_123__t_133)
+
+logic ust_134 : single
+
+axiom eq_179 : add_post(NearestTiesToEven, b831, ust_133, ust_134)
+
+logic s_mul__t_3__t_134__t_134 : single
+
+axiom eq_180 : mul_post(NearestTiesToEven, ust_134, ust_134,
+  s_mul__t_3__t_134__t_134)
+
+logic ust_135 : single
+
+axiom eq_181 : mul_post(NearestTiesToEven, ust_134, ust_134, ust_135)
+
+logic s_neg__t_135 : single
+
+axiom eq_182 : neg_post(ust_135, s_neg__t_135)
+
+logic ust_136 : single
+
+axiom eq_183 : neg_post(ust_135, ust_136)
+
+logic s_add__t_3__t_9__t_136 : single
+
+axiom eq_184 : add_post(NearestTiesToEven, b119, ust_136,
+  s_add__t_3__t_9__t_136)
+
+logic ust_137 : single
+
+axiom eq_185 : add_post(NearestTiesToEven, b119, ust_136, ust_137)
+
+logic double_of_single__t_3__t_137 : double
+
+axiom eq_186 : single_to_double_cast(ust_137, double_of_single__t_3__t_137)
+
+logic ust_138 : double
+
+axiom eq_187 : single_to_double_cast(ust_137, ust_138)
+
+logic single_of_double__t_3__t_138 : single
+
+axiom eq_188 : double_to_single_cast(NearestTiesToEven, ust_138,
+  single_of_double__t_3__t_138)
+
+logic ust_139 : single
+
+axiom eq_189 : double_to_single_cast(NearestTiesToEven, ust_138, ust_139)
+
+predicate ust_142() = (not smt2_single_eq(ust_139, b861))
+
+predicate ust_145() = (not smt2_single_eq(ust_134, b796))
+
+logic double_of_single__t_3__t_143 : double
+
+axiom eq_190 : single_to_double_cast(b796, double_of_single__t_3__t_143)
+
+logic ust_146 : double
+
+axiom eq_191 : single_to_double_cast(b796, ust_146)
+
+logic d_mul__t_3__t_13__t_146 : double
+
+axiom eq_192 : mul_post1(NearestTiesToEven, b135, ust_146,
+  d_mul__t_3__t_13__t_146)
+
+logic ust_147 : double
+
+axiom eq_193 : mul_post1(NearestTiesToEven, b135, ust_146, ust_147)
+
+logic s_mul__t_3__t_143__t_143 : single
+
+axiom eq_194 : mul_post(NearestTiesToEven, b796, b796,
+  s_mul__t_3__t_143__t_143)
+
+logic ust_148 : single
+
+axiom eq_195 : mul_post(NearestTiesToEven, b796, b796, ust_148)
+
+logic s_neg__t_148 : single
+
+axiom eq_196 : neg_post(ust_148, s_neg__t_148)
+
+logic ust_149 : single
+
+axiom eq_197 : neg_post(ust_148, ust_149)
+
+logic s_add__t_3__t_9__t_149 : single
+
+axiom eq_198 : add_post(NearestTiesToEven, b119, ust_149,
+  s_add__t_3__t_9__t_149)
+
+logic ust_150 : single
+
+axiom eq_199 : add_post(NearestTiesToEven, b119, ust_149, ust_150)
+
+logic double_of_single__t_3__t_150 : double
+
+axiom eq_200 : single_to_double_cast(ust_150, double_of_single__t_3__t_150)
+
+logic ust_151 : double
+
+axiom eq_201 : single_to_double_cast(ust_150, ust_151)
+
+logic d_div__t_3__t_151__t_147 : double
+
+axiom eq_202 : div_post1(NearestTiesToEven, ust_151, ust_147,
+  d_div__t_3__t_151__t_147)
+
+logic ust_152 : double
+
+axiom eq_203 : div_post1(NearestTiesToEven, ust_151, ust_147, ust_152)
+
+logic single_of_double__t_3__t_152 : single
+
+axiom eq_204 : double_to_single_cast(NearestTiesToEven, ust_152,
+  single_of_double__t_3__t_152)
+
+logic ust_153 : single
+
+axiom eq_205 : double_to_single_cast(NearestTiesToEven, ust_152, ust_153)
+
+logic s_add__t_3__t_143__t_153 : single
+
+axiom eq_206 : add_post(NearestTiesToEven, b796, ust_153,
+  s_add__t_3__t_143__t_153)
+
+logic ust_154 : single
+
+axiom eq_207 : add_post(NearestTiesToEven, b796, ust_153, ust_154)
+
+logic s_mul__t_3__t_154__t_154 : single
+
+axiom eq_208 : mul_post(NearestTiesToEven, ust_154, ust_154,
+  s_mul__t_3__t_154__t_154)
+
+logic ust_155 : single
+
+axiom eq_209 : mul_post(NearestTiesToEven, ust_154, ust_154, ust_155)
+
+logic s_neg__t_155 : single
+
+axiom eq_210 : neg_post(ust_155, s_neg__t_155)
+
+logic ust_156 : single
+
+axiom eq_211 : neg_post(ust_155, ust_156)
+
+logic s_add__t_3__t_9__t_156 : single
+
+axiom eq_212 : add_post(NearestTiesToEven, b119, ust_156,
+  s_add__t_3__t_9__t_156)
+
+logic ust_157 : single
+
+axiom eq_213 : add_post(NearestTiesToEven, b119, ust_156, ust_157)
+
+logic double_of_single__t_3__t_157 : double
+
+axiom eq_214 : single_to_double_cast(ust_157, double_of_single__t_3__t_157)
+
+logic ust_158 : double
+
+axiom eq_215 : single_to_double_cast(ust_157, ust_158)
+
+logic single_of_double__t_3__t_158 : single
+
+axiom eq_216 : double_to_single_cast(NearestTiesToEven, ust_158,
+  single_of_double__t_3__t_158)
+
+logic ust_159 : single
+
+axiom eq_217 : double_to_single_cast(NearestTiesToEven, ust_158, ust_159)
+
+predicate ust_162() = (not smt2_single_eq(ust_159, b826))
+
+predicate ust_165() = (not smt2_single_eq(ust_154, b760))
+
+logic double_of_single__t_3__t_163 : double
+
+axiom eq_218 : single_to_double_cast(b760, double_of_single__t_3__t_163)
+
+logic ust_166 : double
+
+axiom eq_219 : single_to_double_cast(b760, ust_166)
+
+logic d_mul__t_3__t_13__t_166 : double
+
+axiom eq_220 : mul_post1(NearestTiesToEven, b135, ust_166,
+  d_mul__t_3__t_13__t_166)
+
+logic ust_167 : double
+
+axiom eq_221 : mul_post1(NearestTiesToEven, b135, ust_166, ust_167)
+
+logic s_mul__t_3__t_163__t_163 : single
+
+axiom eq_222 : mul_post(NearestTiesToEven, b760, b760,
+  s_mul__t_3__t_163__t_163)
+
+logic ust_168 : single
+
+axiom eq_223 : mul_post(NearestTiesToEven, b760, b760, ust_168)
+
+logic s_neg__t_168 : single
+
+axiom eq_224 : neg_post(ust_168, s_neg__t_168)
+
+logic ust_169 : single
+
+axiom eq_225 : neg_post(ust_168, ust_169)
+
+logic s_add__t_3__t_9__t_169 : single
+
+axiom eq_226 : add_post(NearestTiesToEven, b119, ust_169,
+  s_add__t_3__t_9__t_169)
+
+logic ust_170 : single
+
+axiom eq_227 : add_post(NearestTiesToEven, b119, ust_169, ust_170)
+
+logic double_of_single__t_3__t_170 : double
+
+axiom eq_228 : single_to_double_cast(ust_170, double_of_single__t_3__t_170)
+
+logic ust_171 : double
+
+axiom eq_229 : single_to_double_cast(ust_170, ust_171)
+
+logic d_div__t_3__t_171__t_167 : double
+
+axiom eq_230 : div_post1(NearestTiesToEven, ust_171, ust_167,
+  d_div__t_3__t_171__t_167)
+
+logic ust_172 : double
+
+axiom eq_231 : div_post1(NearestTiesToEven, ust_171, ust_167, ust_172)
+
+logic single_of_double__t_3__t_172 : single
+
+axiom eq_232 : double_to_single_cast(NearestTiesToEven, ust_172,
+  single_of_double__t_3__t_172)
+
+logic ust_173 : single
+
+axiom eq_233 : double_to_single_cast(NearestTiesToEven, ust_172, ust_173)
+
+logic s_add__t_3__t_163__t_173 : single
+
+axiom eq_234 : add_post(NearestTiesToEven, b760, ust_173,
+  s_add__t_3__t_163__t_173)
+
+logic ust_174 : single
+
+axiom eq_235 : add_post(NearestTiesToEven, b760, ust_173, ust_174)
+
+logic s_mul__t_3__t_174__t_174 : single
+
+axiom eq_236 : mul_post(NearestTiesToEven, ust_174, ust_174,
+  s_mul__t_3__t_174__t_174)
+
+logic ust_175 : single
+
+axiom eq_237 : mul_post(NearestTiesToEven, ust_174, ust_174, ust_175)
+
+logic s_neg__t_175 : single
+
+axiom eq_238 : neg_post(ust_175, s_neg__t_175)
+
+logic ust_176 : single
+
+axiom eq_239 : neg_post(ust_175, ust_176)
+
+logic s_add__t_3__t_9__t_176 : single
+
+axiom eq_240 : add_post(NearestTiesToEven, b119, ust_176,
+  s_add__t_3__t_9__t_176)
+
+logic ust_177 : single
+
+axiom eq_241 : add_post(NearestTiesToEven, b119, ust_176, ust_177)
+
+logic double_of_single__t_3__t_177 : double
+
+axiom eq_242 : single_to_double_cast(ust_177, double_of_single__t_3__t_177)
+
+logic ust_178 : double
+
+axiom eq_243 : single_to_double_cast(ust_177, ust_178)
+
+logic single_of_double__t_3__t_178 : single
+
+axiom eq_244 : double_to_single_cast(NearestTiesToEven, ust_178,
+  single_of_double__t_3__t_178)
+
+logic ust_179 : single
+
+axiom eq_245 : double_to_single_cast(NearestTiesToEven, ust_178, ust_179)
+
+predicate ust_182() = (not smt2_single_eq(ust_179, b791))
+
+predicate ust_185() = (not smt2_single_eq(ust_174, b739))
+
+logic double_of_single__t_3__t_183 : double
+
+axiom eq_246 : single_to_double_cast(b739, double_of_single__t_3__t_183)
+
+logic ust_186 : double
+
+axiom eq_247 : single_to_double_cast(b739, ust_186)
+
+logic d_mul__t_3__t_13__t_186 : double
+
+axiom eq_248 : mul_post1(NearestTiesToEven, b135, ust_186,
+  d_mul__t_3__t_13__t_186)
+
+logic ust_187 : double
+
+axiom eq_249 : mul_post1(NearestTiesToEven, b135, ust_186, ust_187)
+
+logic s_mul__t_3__t_183__t_183 : single
+
+axiom eq_250 : mul_post(NearestTiesToEven, b739, b739,
+  s_mul__t_3__t_183__t_183)
+
+logic ust_188 : single
+
+axiom eq_251 : mul_post(NearestTiesToEven, b739, b739, ust_188)
+
+logic s_neg__t_188 : single
+
+axiom eq_252 : neg_post(ust_188, s_neg__t_188)
+
+logic ust_189 : single
+
+axiom eq_253 : neg_post(ust_188, ust_189)
+
+logic s_add__t_3__t_9__t_189 : single
+
+axiom eq_254 : add_post(NearestTiesToEven, b119, ust_189,
+  s_add__t_3__t_9__t_189)
+
+logic ust_190 : single
+
+axiom eq_255 : add_post(NearestTiesToEven, b119, ust_189, ust_190)
+
+logic double_of_single__t_3__t_190 : double
+
+axiom eq_256 : single_to_double_cast(ust_190, double_of_single__t_3__t_190)
+
+logic ust_191 : double
+
+axiom eq_257 : single_to_double_cast(ust_190, ust_191)
+
+logic d_div__t_3__t_191__t_187 : double
+
+axiom eq_258 : div_post1(NearestTiesToEven, ust_191, ust_187,
+  d_div__t_3__t_191__t_187)
+
+logic ust_192 : double
+
+axiom eq_259 : div_post1(NearestTiesToEven, ust_191, ust_187, ust_192)
+
+logic single_of_double__t_3__t_192 : single
+
+axiom eq_260 : double_to_single_cast(NearestTiesToEven, ust_192,
+  single_of_double__t_3__t_192)
+
+logic ust_193 : single
+
+axiom eq_261 : double_to_single_cast(NearestTiesToEven, ust_192, ust_193)
+
+logic s_add__t_3__t_183__t_193 : single
+
+axiom eq_262 : add_post(NearestTiesToEven, b739, ust_193,
+  s_add__t_3__t_183__t_193)
+
+logic ust_194 : single
+
+axiom eq_263 : add_post(NearestTiesToEven, b739, ust_193, ust_194)
+
+logic s_mul__t_3__t_194__t_194 : single
+
+axiom eq_264 : mul_post(NearestTiesToEven, ust_194, ust_194,
+  s_mul__t_3__t_194__t_194)
+
+logic ust_195 : single
+
+axiom eq_265 : mul_post(NearestTiesToEven, ust_194, ust_194, ust_195)
+
+logic s_neg__t_195 : single
+
+axiom eq_266 : neg_post(ust_195, s_neg__t_195)
+
+logic ust_196 : single
+
+axiom eq_267 : neg_post(ust_195, ust_196)
+
+logic s_add__t_3__t_9__t_196 : single
+
+axiom eq_268 : add_post(NearestTiesToEven, b119, ust_196,
+  s_add__t_3__t_9__t_196)
+
+logic ust_197 : single
+
+axiom eq_269 : add_post(NearestTiesToEven, b119, ust_196, ust_197)
+
+logic double_of_single__t_3__t_197 : double
+
+axiom eq_270 : single_to_double_cast(ust_197, double_of_single__t_3__t_197)
+
+logic ust_198 : double
+
+axiom eq_271 : single_to_double_cast(ust_197, ust_198)
+
+logic single_of_double__t_3__t_198 : single
+
+axiom eq_272 : double_to_single_cast(NearestTiesToEven, ust_198,
+  single_of_double__t_3__t_198)
+
+logic ust_199 : single
+
+axiom eq_273 : double_to_single_cast(NearestTiesToEven, ust_198, ust_199)
+
+predicate ust_202() = (not smt2_single_eq(ust_199, b755))
+
+logic single_of_double__t_3__t_203 : single
+
+axiom eq_274 : double_to_single_cast(NearestTiesToEven, b442,
+  single_of_double__t_3__t_203)
+
+logic ust_204 : single
+
+axiom eq_275 : double_to_single_cast(NearestTiesToEven, b442, ust_204)
+
+predicate ust_207() = (not smt2_single_eq(ust_204, b734))
+
+predicate ust_210() = (not eq(b119, b126))
+
+predicate ust_212() = (ust_210 and le(b126, b119))
+
+predicate ust_214() = (not le(b126, ust_204))
+
+predicate ust_215() = (ust_212 and ust_214)
+
+logic s_neg__t_204 : single
+
+axiom eq_276 : neg_post(ust_204, s_neg__t_204)
+
+logic ust_216 : single
+
+axiom eq_277 : neg_post(ust_204, ust_216)
+
+predicate ust_218() = (ust_215 and smt2_single_eq(b734, ust_216))
+
+predicate ust_219() = (ust_207 and ust_218)
+
+predicate ust_221() = (not le(b126, ust_199))
+
+predicate ust_222() = (ust_219 and ust_221)
+
+logic s_neg__t_199 : single
+
+axiom eq_278 : neg_post(ust_199, s_neg__t_199)
+
+logic ust_223 : single
+
+axiom eq_279 : neg_post(ust_199, ust_223)
+
+predicate ust_225() = (ust_222 and smt2_single_eq(b755, ust_223))
+
+predicate ust_226() = (ust_202 and ust_225)
+
+predicate ust_228() = (ust_226 and smt2_single_eq(b760, b739))
+
+predicate ust_229() = (ust_185 and ust_228)
+
+logic double_of_single__t_3__t_180 : double
+
+axiom eq_280 : single_to_double_cast(b791, double_of_single__t_3__t_180)
+
+logic ust_230 : double
+
+axiom eq_281 : single_to_double_cast(b791, ust_230)
+
+predicate ust_233() = (not le1(ust_230, b124))
+
+predicate ust_234() = (ust_229 and ust_233)
+
+predicate ust_236() = (not le(b126, ust_179))
+
+predicate ust_237() = (ust_234 and ust_236)
+
+logic s_neg__t_179 : single
+
+axiom eq_282 : neg_post(ust_179, s_neg__t_179)
+
+logic ust_238 : single
+
+axiom eq_283 : neg_post(ust_179, ust_238)
+
+predicate ust_240() = (ust_237 and smt2_single_eq(b791, ust_238))
+
+predicate ust_241() = (ust_182 and ust_240)
+
+predicate ust_243() = (ust_241 and smt2_single_eq(b796, b760))
+
+predicate ust_244() = (ust_165 and ust_243)
+
+logic double_of_single__t_3__t_160 : double
+
+axiom eq_284 : single_to_double_cast(b826, double_of_single__t_3__t_160)
+
+logic ust_245 : double
+
+axiom eq_285 : single_to_double_cast(b826, ust_245)
+
+predicate ust_247() = (not le1(ust_245, b124))
+
+predicate ust_248() = (ust_244 and ust_247)
+
+predicate ust_250() = (not le(b126, ust_159))
+
+predicate ust_251() = (ust_248 and ust_250)
+
+logic s_neg__t_159 : single
+
+axiom eq_286 : neg_post(ust_159, s_neg__t_159)
+
+logic ust_252 : single
+
+axiom eq_287 : neg_post(ust_159, ust_252)
+
+predicate ust_254() = (ust_251 and smt2_single_eq(b826, ust_252))
+
+predicate ust_255() = (ust_162 and ust_254)
+
+predicate ust_257() = (ust_255 and smt2_single_eq(b831, b796))
+
+predicate ust_258() = (ust_145 and ust_257)
+
+logic double_of_single__t_3__t_140 : double
+
+axiom eq_288 : single_to_double_cast(b861, double_of_single__t_3__t_140)
+
+logic ust_259 : double
+
+axiom eq_289 : single_to_double_cast(b861, ust_259)
+
+predicate ust_261() = (not le1(ust_259, b124))
+
+predicate ust_262() = (ust_258 and ust_261)
+
+predicate ust_264() = (not le(b126, ust_139))
+
+predicate ust_265() = (ust_262 and ust_264)
+
+logic s_neg__t_139 : single
+
+axiom eq_290 : neg_post(ust_139, s_neg__t_139)
+
+logic ust_266 : single
+
+axiom eq_291 : neg_post(ust_139, ust_266)
+
+predicate ust_268() = (ust_265 and smt2_single_eq(b861, ust_266))
+
+predicate ust_269() = (ust_142 and ust_268)
+
+predicate ust_271() = (ust_269 and smt2_single_eq(b866, b831))
+
+predicate ust_272() = (ust_125 and ust_271)
+
+logic double_of_single__t_3__t_120 : double
+
+axiom eq_292 : single_to_double_cast(b896, double_of_single__t_3__t_120)
+
+logic ust_273 : double
+
+axiom eq_293 : single_to_double_cast(b896, ust_273)
+
+predicate ust_275() = (not le1(ust_273, b124))
+
+predicate ust_276() = (ust_272 and ust_275)
+
+predicate ust_278() = (not le(b126, ust_119))
+
+predicate ust_279() = (ust_276 and ust_278)
+
+logic s_neg__t_119 : single
+
+axiom eq_294 : neg_post(ust_119, s_neg__t_119)
+
+logic ust_280 : single
+
+axiom eq_295 : neg_post(ust_119, ust_280)
+
+predicate ust_282() = (ust_279 and smt2_single_eq(b896, ust_280))
+
+predicate ust_283() = (ust_122 and ust_282)
+
+predicate ust_285() = (ust_283 and smt2_single_eq(b901, b866))
+
+predicate ust_286() = (ust_105 and ust_285)
+
+logic double_of_single__t_3__t_100 : double
+
+axiom eq_296 : single_to_double_cast(b931, double_of_single__t_3__t_100)
+
+logic ust_287 : double
+
+axiom eq_297 : single_to_double_cast(b931, ust_287)
+
+predicate ust_289() = (not le1(ust_287, b124))
+
+predicate ust_290() = (ust_286 and ust_289)
+
+predicate ust_292() = (not le(b126, ust_99))
+
+predicate ust_293() = (ust_290 and ust_292)
+
+logic s_neg__t_99 : single
+
+axiom eq_298 : neg_post(ust_99, s_neg__t_99)
+
+logic ust_294 : single
+
+axiom eq_299 : neg_post(ust_99, ust_294)
+
+predicate ust_296() = (ust_293 and smt2_single_eq(b931, ust_294))
+
+predicate ust_297() = (ust_102 and ust_296)
+
+predicate ust_299() = (ust_297 and smt2_single_eq(b936, b901))
+
+predicate ust_300() = (ust_85 and ust_299)
+
+logic double_of_single__t_3__t_80 : double
+
+axiom eq_300 : single_to_double_cast(b966, double_of_single__t_3__t_80)
+
+logic ust_301 : double
+
+axiom eq_301 : single_to_double_cast(b966, ust_301)
+
+predicate ust_303() = (not le1(ust_301, b124))
+
+predicate ust_304() = (ust_300 and ust_303)
+
+predicate ust_306() = (not le(b126, ust_79))
+
+predicate ust_307() = (ust_304 and ust_306)
+
+logic s_neg__t_79 : single
+
+axiom eq_302 : neg_post(ust_79, s_neg__t_79)
+
+logic ust_308 : single
+
+axiom eq_303 : neg_post(ust_79, ust_308)
+
+predicate ust_310() = (ust_307 and smt2_single_eq(b966, ust_308))
+
+predicate ust_311() = (ust_82 and ust_310)
+
+predicate ust_313() = (ust_311 and smt2_single_eq(b971, b936))
+
+predicate ust_314() = (ust_65 and ust_313)
+
+logic double_of_single__t_3__t_60 : double
+
+axiom eq_304 : single_to_double_cast(b1001, double_of_single__t_3__t_60)
+
+logic ust_315 : double
+
+axiom eq_305 : single_to_double_cast(b1001, ust_315)
+
+predicate ust_317() = (not le1(ust_315, b124))
+
+predicate ust_318() = (ust_314 and ust_317)
+
+predicate ust_320() = (not le(b126, ust_59))
+
+predicate ust_321() = (ust_318 and ust_320)
+
+logic s_neg__t_59 : single
+
+axiom eq_306 : neg_post(ust_59, s_neg__t_59)
+
+logic ust_322 : single
+
+axiom eq_307 : neg_post(ust_59, ust_322)
+
+predicate ust_324() = (ust_321 and smt2_single_eq(b1001, ust_322))
+
+predicate ust_325() = (ust_62 and ust_324)
+
+predicate ust_327() = (ust_325 and smt2_single_eq(ust_21, b971))
+
+logic double_of_single__t_3__t_27 : double
+
+axiom eq_308 : single_to_double_cast(b1029, double_of_single__t_3__t_27)
+
+logic ust_328 : double
+
+axiom eq_309 : single_to_double_cast(b1029, ust_328)
+
+predicate ust_330() = (ust_327 and le1(ust_328, b124))
+
+predicate ust_331() = (ust_45 and ust_330)
+
+logic double_of_single__t_3__t_40 : double
+
+axiom eq_310 : single_to_double_cast(b1020, double_of_single__t_3__t_40)
+
+logic ust_332 : double
+
+axiom eq_311 : single_to_double_cast(b1020, ust_332)
+
+predicate ust_334() = (not le1(ust_332, b124))
+
+predicate ust_335() = (ust_331 and ust_334)
+
+predicate ust_337() = (not le(b126, ust_39))
+
+predicate ust_338() = (ust_335 and ust_337)
+
+logic s_neg__t_39 : single
+
+axiom eq_312 : neg_post(ust_39, s_neg__t_39)
+
+logic ust_339 : single
+
+axiom eq_313 : neg_post(ust_39, ust_339)
+
+predicate ust_341() = (ust_338 and smt2_single_eq(b1020, ust_339))
+
+predicate ust_342() = (ust_42 and ust_341)
+
+predicate ust_344() = (not le(b126, ust_26))
+
+predicate ust_345() = (ust_342 and ust_344)
+
+logic s_neg__t_26 : single
+
+axiom eq_314 : neg_post(ust_26, s_neg__t_26)
+
+logic ust_346 : single
+
+axiom eq_315 : neg_post(ust_26, ust_346)
+
+predicate ust_348() = (ust_345 and smt2_single_eq(b1029, ust_346))
+
+predicate ust_351() = (not le(b734, b452))
+
+predicate ust_352() = (ust_348 and ust_351)
+
+predicate ust_353() = (ust_29 and ust_352)
+
+axiom ax_1 : ust_353
+
+goal g_1 : false

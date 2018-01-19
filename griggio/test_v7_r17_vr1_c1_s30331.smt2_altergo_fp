@@ -1,0 +1,4616 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo real arithmetic *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+axiom add_div :
+  (forall x:real. forall y:real. forall z:real. ((not (z = 0.0)) ->
+  (((x + y) / z) = ((x / z) + (y / z)))))
+
+axiom sub_div :
+  (forall x:real. forall y:real. forall z:real. ((not (z = 0.0)) ->
+  (((x - y) / z) = ((x / z) - (y / z)))))
+
+axiom neg_div :
+  (forall x:real. forall y:real. ((not (y = 0.0)) ->
+  (((-x) / y) = (-(x / y)))))
+
+axiom assoc_mul_div :
+  (forall x:real. forall y:real. forall z:real. ((not (z = 0.0)) ->
+  (((x * y) / z) = (x * (y / z)))))
+
+axiom assoc_div_mul :
+  (forall x:real. forall y:real. forall z:real. (((not (y = 0.0)) and
+  (not (z = 0.0))) -> (((x / y) / z) = (x / (y * z)))))
+
+axiom assoc_div_div :
+  (forall x:real. forall y:real. forall z:real. (((not (y = 0.0)) and
+  (not (z = 0.0))) -> ((x / (y / z)) = ((x * z) / y))))
+
+axiom CompatOrderMult :
+  (forall x:real. forall y:real. forall z:real. ((x <= y) -> ((0.0 <= z) ->
+  ((x * z) <= (y * z)))))
+
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+logic match_mode : fpa_rounding_mode, 'a, 'a, 'a, 'a, 'a -> 'a
+
+axiom match_mode_NearestTiesToEven :
+  (forall z:'a. forall z1:'a. forall z2:'a. forall z3:'a. forall z4:'a.
+  (match_mode(NearestTiesToEven, z, z1, z2, z3, z4) = z))
+
+axiom match_mode_ToZero :
+  (forall z:'a. forall z1:'a. forall z2:'a. forall z3:'a. forall z4:'a.
+  (match_mode(ToZero, z, z1, z2, z3, z4) = z1))
+
+axiom match_mode_Up :
+  (forall z:'a. forall z1:'a. forall z2:'a. forall z3:'a. forall z4:'a.
+  (match_mode(Up, z, z1, z2, z3, z4) = z2))
+
+axiom match_mode_Down :
+  (forall z:'a. forall z1:'a. forall z2:'a. forall z3:'a. forall z4:'a.
+  (match_mode(Down, z, z1, z2, z3, z4) = z3))
+
+axiom match_mode_NearestTiesToAway :
+  (forall z:'a. forall z1:'a. forall z2:'a. forall z3:'a. forall z4:'a.
+  (match_mode(NearestTiesToAway, z, z1, z2, z3, z4) = z4))
+
+type single
+
+axiom CompatOrderMult1 :
+  (forall x:int. forall y:int. forall z:int. ((x <= y) -> ((0 <= z) ->
+  ((x * z) <= (y * z)))))
+
+axiom Monotonic :
+  (forall x:int. forall y:int. ((x <= y) ->
+  (real_of_int(x) <= real_of_int(y))))
+
+logic truncate : real -> int
+
+axiom Truncate_int : (forall i:int. (truncate(real_of_int(i)) = i))
+
+axiom Truncate_down_pos :
+  (forall x:real. ((0.0 <= x) -> (real_of_int(truncate(x)) <= x)))
+
+axiom Truncate_down_pos1 :
+  (forall x:real. ((0.0 <= x) -> (x <  real_of_int((truncate(x) + 1)))))
+
+axiom Truncate_up_neg :
+  (forall x:real. ((x <= 0.0) -> (real_of_int((truncate(x) - 1)) <  x)))
+
+axiom Truncate_up_neg1 :
+  (forall x:real. ((x <= 0.0) -> (x <= real_of_int(truncate(x)))))
+
+axiom Real_of_truncate :
+  (forall x:real. ((x - 1.0) <= real_of_int(truncate(x))))
+
+axiom Real_of_truncate1 :
+  (forall x:real. (real_of_int(truncate(x)) <= (x + 1.0)))
+
+axiom Truncate_monotonic :
+  (forall x:real. forall y:real. ((x <= y) -> (truncate(x) <= truncate(y))))
+
+axiom Truncate_monotonic_int1 :
+  (forall x:real. forall i:int. ((x <= real_of_int(i)) ->
+  (truncate(x) <= i)))
+
+axiom Truncate_monotonic_int2 :
+  (forall x:real. forall i:int. ((real_of_int(i) <= x) ->
+  (i <= truncate(x))))
+
+axiom Floor_int : (forall i:int. (int_floor(real_of_int(i)) = i))
+
+axiom Ceil_int : (forall i:int. (int_ceil(real_of_int(i)) = i))
+
+axiom Floor_down : (forall x:real. (real_of_int(int_floor(x)) <= x))
+
+axiom Floor_down1 : (forall x:real. (x <  real_of_int((int_floor(x) + 1))))
+
+axiom Ceil_up : (forall x:real. (real_of_int((int_ceil(x) - 1)) <  x))
+
+axiom Ceil_up1 : (forall x:real. (x <= real_of_int(int_ceil(x))))
+
+axiom Floor_monotonic :
+  (forall x:real. forall y:real. ((x <= y) ->
+  (int_floor(x) <= int_floor(y))))
+
+axiom Ceil_monotonic :
+  (forall x:real. forall y:real. ((x <= y) -> (int_ceil(x) <= int_ceil(y))))
+
+function sqr(x: real) : real = (x * x)
+
+axiom Sqrt_positive : (forall x:real. ((0.0 <= x) -> (0.0 <= sqrt_real(x))))
+
+axiom Sqrt_square : (forall x:real. ((0.0 <= x) -> (sqr(sqrt_real(x)) = x)))
+
+axiom Square_sqrt : (forall x:real. ((0.0 <= x) -> (sqrt_real((x * x)) = x)))
+
+axiom Sqrt_mul :
+  (forall x:real. forall y:real. (((0.0 <= x) and (0.0 <= y)) ->
+  (sqrt_real((x * y)) = (sqrt_real(x) * sqrt_real(y)))))
+
+axiom Sqrt_le :
+  (forall x:real. forall y:real. (((0.0 <= x) and (x <= y)) ->
+  (sqrt_real(x) <= sqrt_real(y))))
+
+type class = Finite | Infinite | NaN
+
+logic match_class : class, 'a, 'a, 'a -> 'a
+
+axiom match_class_Finite :
+  (forall z:'a. forall z1:'a. forall z2:'a. (match_class(Finite, z, z1,
+  z2) = z))
+
+axiom match_class_Infinite :
+  (forall z:'a. forall z1:'a. forall z2:'a. (match_class(Infinite, z, z1,
+  z2) = z1))
+
+axiom match_class_NaN :
+  (forall z:'a. forall z1:'a. forall z2:'a. (match_class(NaN, z, z1,
+  z2) = z2))
+
+type sign = Neg | Pos
+
+logic match_sign : sign, 'a, 'a -> 'a
+
+axiom match_sign_Neg :
+  (forall z:'a. forall z1:'a. (match_sign(Neg, z, z1) = z))
+
+axiom match_sign_Pos :
+  (forall z:'a. forall z1:'a. (match_sign(Pos, z, z1) = z1))
+
+logic same_sign_real : sign, real -> prop
+
+axiom Neg_case : (forall x:real. ((x <  0.0) -> same_sign_real(Neg, x)))
+
+axiom Pos_case : (forall x:real. ((0.0 <  x) -> same_sign_real(Pos, x)))
+
+axiom same_sign_real_inversion :
+  (forall z:sign. forall z1:real. (same_sign_real(z, z1) -> (((z1 <  0.0) and
+  (z = Neg)) or ((0.0 <  z1) and (z = Pos)))))
+
+axiom same_sign_real_zero1 : (forall b:sign. (not same_sign_real(b, 0.0)))
+
+axiom same_sign_real_zero2 :
+  (forall x:real. (not (same_sign_real(Neg, x) and same_sign_real(Pos, x))))
+
+axiom same_sign_real_zero3 :
+  (forall b:sign. forall x:real. (same_sign_real(b, x) -> (not (x = 0.0))))
+
+axiom same_sign_real_correct2 :
+  (forall b:sign. forall x:real. (same_sign_real(b, x) -> ((x <  0.0) ->
+  (b = Neg))))
+
+axiom same_sign_real_correct21 :
+  (forall b:sign. forall x:real. (same_sign_real(b, x) -> ((b = Neg) ->
+  (x <  0.0))))
+
+axiom same_sign_real_correct3 :
+  (forall b:sign. forall x:real. (same_sign_real(b, x) -> ((0.0 <  x) ->
+  (b = Pos))))
+
+axiom same_sign_real_correct31 :
+  (forall b:sign. forall x:real. (same_sign_real(b, x) -> ((b = Pos) ->
+  (0.0 <  x))))
+
+axiom Abs_le :
+  (forall x:real. forall y:real. ((abs_real(x) <= y) -> ((-y) <= x)))
+
+axiom Abs_le1 :
+  (forall x:real. forall y:real. ((abs_real(x) <= y) -> (x <= y)))
+
+axiom Abs_le2 :
+  (forall x:real. forall y:real. ((((-y) <= x) and (x <= y)) ->
+  (abs_real(x) <= y)))
+
+axiom Abs_pos : (forall x:real. (0.0 <= abs_real(x)))
+
+axiom Abs_sum :
+  (forall x:real. forall y:real.
+  (abs_real((x + y)) <= (abs_real(x) + abs_real(y))))
+
+axiom Abs_prod :
+  (forall x:real. forall y:real.
+  (abs_real((x * y)) = (abs_real(x) * abs_real(y))))
+
+axiom triangular_inequality :
+  (forall x:real. forall y:real. forall z:real.
+  (abs_real((x - z)) <= (abs_real((x - y)) + abs_real((y - z)))))
+
+logic value : single -> real
+
+predicate no_overflow(m: fpa_rounding_mode, x: real) =
+  (abs_real(float32(m, x)) <= 0x1.FFFFFEp127)
+
+axiom Bounded_real_no_overflow :
+  (forall m:fpa_rounding_mode. forall x:real.
+  ((abs_real(x) <= 0x1.FFFFFEp127) -> no_overflow(m, x)))
+
+axiom Round_value :
+  (forall m:fpa_rounding_mode. forall x:single.
+  (float32(m, value(x)) = value(x)))
+
+axiom Bounded_value :
+  (forall x:single. (abs_real(value(x)) <= 0x1.FFFFFEp127))
+
+axiom Exact_rounding_for_integers :
+  (forall m:fpa_rounding_mode. forall i:int. ((((-16777216) <= i) and
+  (i <= 16777216)) -> (float32(m, real_of_int(i)) = real_of_int(i))))
+
+axiom Round_down_le : (forall x:real. (float32(Down, x) <= x))
+
+axiom Round_up_ge : (forall x:real. (x <= float32(Up, x)))
+
+axiom Round_down_neg :
+  (forall x:real. (float32(Down, (-x)) = (-float32(Up, x))))
+
+axiom Round_up_neg :
+  (forall x:real. (float32(Up, (-x)) = (-float32(Down, x))))
+
+logic round_logic : fpa_rounding_mode, real -> single
+
+axiom Round_logic_def :
+  (forall m:fpa_rounding_mode. forall x:real. (no_overflow(m, x) ->
+  (value(round_logic(m, x)) = float32(m, x))))
+
+logic class1 : single -> class
+
+predicate is_finite(x: single) = (class1(x) = Finite)
+
+predicate is_infinite(x: single) = (class1(x) = Infinite)
+
+predicate is_NaN(x: single) = (class1(x) = NaN)
+
+predicate is_not_NaN(x: single) = (is_finite(x) or is_infinite(x))
+
+axiom is_not_NaN1 : (forall x:single. (is_not_NaN(x) -> (not is_NaN(x))))
+
+axiom is_not_NaN2 : (forall x:single. ((not is_NaN(x)) -> is_not_NaN(x)))
+
+logic sign1 : single -> sign
+
+predicate same_sign_real1(x: single, y: real) = same_sign_real(sign1(x), y)
+
+predicate same_sign(x: single, y: single) = (sign1(x) = sign1(y))
+
+predicate diff_sign(x: single, y: single) = (not (sign1(x) = sign1(y)))
+
+predicate sign_zero_result(m: fpa_rounding_mode, x: single) =
+  ((value(x) = 0.0) -> ((((((m = NearestTiesToEven) -> (sign1(x) = Pos)) and
+  ((m = ToZero) -> (sign1(x) = Pos))) and ((m = Up) -> (sign1(x) = Pos))) and
+  ((m = Down) -> (sign1(x) = Neg))) and ((m = NearestTiesToAway) ->
+  (sign1(x) = Pos))))
+
+predicate is_minus_infinity(x: single) = (is_infinite(x) and
+  (sign1(x) = Neg))
+
+predicate is_plus_infinity(x: single) = (is_infinite(x) and (sign1(x) = Pos))
+
+predicate is_gen_zero(x: single) = (is_finite(x) and (value(x) = 0.0))
+
+predicate is_gen_zero_plus(x: single) = (is_gen_zero(x) and (sign1(x) = Pos))
+
+predicate is_gen_zero_minus(x: single) = (is_gen_zero(x) and
+  (sign1(x) = Neg))
+
+axiom finite_sign :
+  (forall x:single. (((class1(x) = Finite) and (not (value(x) = 0.0))) ->
+  same_sign_real1(x, value(x))))
+
+axiom finite_sign_pos1 :
+  (forall x:single. (((class1(x) = Finite) and (0.0 <  value(x))) ->
+  (sign1(x) = Pos)))
+
+axiom finite_sign_pos2 :
+  (forall x:single. (((class1(x) = Finite) and ((not (value(x) = 0.0)) and
+  (sign1(x) = Pos))) -> (0.0 <  value(x))))
+
+axiom finite_sign_neg1 :
+  (forall x:single. (((class1(x) = Finite) and (value(x) <  0.0)) ->
+  (sign1(x) = Neg)))
+
+axiom finite_sign_neg2 :
+  (forall x:single. (((class1(x) = Finite) and ((not (value(x) = 0.0)) and
+  (sign1(x) = Neg))) -> (value(x) <  0.0)))
+
+axiom diff_sign_trans :
+  (forall x:single. forall y:single. forall z:single. ((diff_sign(x, y) and
+  diff_sign(y, z)) -> same_sign(x, z)))
+
+axiom diff_sign_product :
+  (forall x:single. forall y:single. (((class1(x) = Finite) and
+  ((class1(y) = Finite) and ((value(x) * value(y)) <  0.0))) -> diff_sign(x,
+  y)))
+
+axiom same_sign_product :
+  (forall x:single. forall y:single. (((class1(x) = Finite) and
+  ((class1(y) = Finite) and same_sign(x, y))) ->
+  (0.0 <= (value(x) * value(y)))))
+
+predicate overflow_value(m: fpa_rounding_mode, x: single) =
+  (((sign1(x) = Neg) -> ((((((m = NearestTiesToEven) -> is_infinite(x)) and
+  ((m = ToZero) -> (is_finite(x) and (value(x) = (-0x1.FFFFFEp127))))) and
+  ((m = Up) -> (is_finite(x) and (value(x) = (-0x1.FFFFFEp127))))) and
+  ((m = Down) -> is_infinite(x))) and ((m = NearestTiesToAway) ->
+  is_infinite(x)))) and ((sign1(x) = Pos) -> ((((((m = NearestTiesToEven) ->
+  is_infinite(x)) and ((m = ToZero) -> (is_finite(x) and
+  (value(x) = 0x1.FFFFFEp127)))) and ((m = Up) -> is_infinite(x))) and
+  ((m = Down) -> (is_finite(x) and (value(x) = 0x1.FFFFFEp127)))) and
+  ((m = NearestTiesToAway) -> is_infinite(x)))))
+
+axiom round1 :
+  (forall m:fpa_rounding_mode. forall x:real. (no_overflow(m, x) ->
+  is_finite(round_logic(m, x))))
+
+axiom round11 :
+  (forall m:fpa_rounding_mode. forall x:real. (no_overflow(m, x) ->
+  (value(round_logic(m, x)) = float32(m, x))))
+
+axiom round2 :
+  (forall m:fpa_rounding_mode. forall x:real. ((not no_overflow(m, x)) ->
+  same_sign_real1(round_logic(m, x), x)))
+
+axiom round21 :
+  (forall m:fpa_rounding_mode. forall x:real. ((not no_overflow(m, x)) ->
+  overflow_value(m, round_logic(m, x))))
+
+axiom round_of_zero :
+  (forall m:fpa_rounding_mode. is_gen_zero(round_logic(m, 0.0)))
+
+axiom round_logic_le :
+  (forall m:fpa_rounding_mode. forall x:real. (is_finite(round_logic(m,
+  x)) -> (abs_real(value(round_logic(m, x))) <= 0x1.FFFFFEp127)))
+
+axiom round_no_overflow :
+  (forall m:fpa_rounding_mode. forall x:real.
+  ((abs_real(x) <= 0x1.FFFFFEp127) -> is_finite(round_logic(m, x))))
+
+axiom round_no_overflow1 :
+  (forall m:fpa_rounding_mode. forall x:real.
+  ((abs_real(x) <= 0x1.FFFFFEp127) -> (value(round_logic(m,
+  x)) = float32(m, x))))
+
+logic min : real
+
+axiom positive_constant :
+  (forall m:fpa_rounding_mode. forall x:real. (((min <= x) and
+  (x <= 0x1.FFFFFEp127)) -> is_finite(round_logic(m, x))))
+
+axiom positive_constant1 :
+  (forall m:fpa_rounding_mode. forall x:real. (((min <= x) and
+  (x <= 0x1.FFFFFEp127)) -> (0.0 <  value(round_logic(m, x)))))
+
+axiom positive_constant2 :
+  (forall m:fpa_rounding_mode. forall x:real. (((min <= x) and
+  (x <= 0x1.FFFFFEp127)) -> (sign1(round_logic(m, x)) = Pos)))
+
+axiom negative_constant :
+  (forall m:fpa_rounding_mode. forall x:real. ((((-0x1.FFFFFEp127) <= x) and
+  (x <= (-min))) -> is_finite(round_logic(m, x))))
+
+axiom negative_constant1 :
+  (forall m:fpa_rounding_mode. forall x:real. ((((-0x1.FFFFFEp127) <= x) and
+  (x <= (-min))) -> (value(round_logic(m, x)) <  0.0)))
+
+axiom negative_constant2 :
+  (forall m:fpa_rounding_mode. forall x:real. ((((-0x1.FFFFFEp127) <= x) and
+  (x <= (-min))) -> (sign1(round_logic(m, x)) = Neg)))
+
+axiom is_gen_zero_comp1 :
+  (forall x:single. forall y:single. ((is_gen_zero(x) and
+  ((value(x) = value(y)) and is_finite(y))) -> is_gen_zero(y)))
+
+axiom is_gen_zero_comp2 :
+  (forall x:single. forall y:single. ((is_finite(x) and
+  ((not is_gen_zero(x)) and (value(x) = value(y)))) -> (not is_gen_zero(y))))
+
+predicate add_post(m: fpa_rounding_mode, x: single, y: single, r: single) =
+  (((is_NaN(x) or is_NaN(y)) -> is_NaN(r)) and (((is_finite(x) and
+  is_infinite(y)) -> (is_infinite(r) and same_sign(r, y))) and
+  (((is_infinite(x) and is_finite(y)) -> (is_infinite(r) and same_sign(r,
+  x))) and (((is_infinite(x) and is_infinite(y)) -> ((same_sign(x, y) ->
+  (is_infinite(r) and same_sign(r, x))) and ((not same_sign(x, y)) ->
+  is_NaN(r)))) and (((is_finite(x) and (is_finite(y) and no_overflow(m,
+  (value(x) + value(y))))) -> (is_finite(r) and
+  ((value(r) = float32(m, (value(x) + value(y)))) and ((same_sign(x, y) ->
+  same_sign(r, x)) and ((not same_sign(x, y)) -> sign_zero_result(m,
+  r)))))) and ((is_finite(x) and (is_finite(y) and (not no_overflow(m,
+  (value(x) + value(y)))))) -> (same_sign_real(sign1(r),
+  (value(x) + value(y))) and overflow_value(m, r))))))))
+
+predicate sub_post(m: fpa_rounding_mode, x: single, y: single, r: single) =
+  (((is_NaN(x) or is_NaN(y)) -> is_NaN(r)) and (((is_finite(x) and
+  is_infinite(y)) -> (is_infinite(r) and diff_sign(r, y))) and
+  (((is_infinite(x) and is_finite(y)) -> (is_infinite(r) and same_sign(r,
+  x))) and (((is_infinite(x) and is_infinite(y)) -> ((diff_sign(x, y) ->
+  (is_infinite(r) and same_sign(r, x))) and ((not diff_sign(x, y)) ->
+  is_NaN(r)))) and (((is_finite(x) and (is_finite(y) and no_overflow(m,
+  (value(x) - value(y))))) -> (is_finite(r) and
+  ((value(r) = float32(m, (value(x) - value(y)))) and ((diff_sign(x, y) ->
+  same_sign(r, x)) and ((not diff_sign(x, y)) -> sign_zero_result(m,
+  r)))))) and ((is_finite(x) and (is_finite(y) and (not no_overflow(m,
+  (value(x) - value(y)))))) -> (same_sign_real(sign1(r),
+  (value(x) - value(y))) and overflow_value(m, r))))))))
+
+predicate product_sign(z: single, x: single, y: single) = ((same_sign(x,
+  y) -> (sign1(z) = Pos)) and (diff_sign(x, y) -> (sign1(z) = Neg)))
+
+predicate mul_post(m: fpa_rounding_mode, x: single, y: single, r: single) =
+  (((is_NaN(x) or is_NaN(y)) -> is_NaN(r)) and (((is_gen_zero(x) and
+  is_infinite(y)) -> is_NaN(r)) and (((is_finite(x) and (is_infinite(y) and
+  (not (value(x) = 0.0)))) -> is_infinite(r)) and (((is_infinite(x) and
+  is_gen_zero(y)) -> is_NaN(r)) and (((is_infinite(x) and (is_finite(y) and
+  (not (value(y) = 0.0)))) -> is_infinite(r)) and (((is_infinite(x) and
+  is_infinite(y)) -> is_infinite(r)) and (((is_finite(x) and
+  (is_finite(y) and no_overflow(m, (value(x) * value(y))))) ->
+  (is_finite(r) and (value(r) = float32(m, (value(x) * value(y)))))) and
+  (((is_finite(x) and (is_finite(y) and (not no_overflow(m,
+  (value(x) * value(y)))))) -> overflow_value(m, r)) and ((not is_NaN(r)) ->
+  product_sign(r, x, y))))))))))
+
+predicate neg_post(x: single, r: single) = ((is_NaN(x) -> is_NaN(r)) and
+  ((is_infinite(x) -> is_infinite(r)) and ((is_finite(x) -> (is_finite(r) and
+  (value(r) = (-value(x))))) and ((not is_NaN(x)) -> diff_sign(r, x)))))
+
+predicate div_post(m: fpa_rounding_mode, x: single, y: single, r: single) =
+  (((is_NaN(x) or is_NaN(y)) -> is_NaN(r)) and (((is_finite(x) and
+  is_infinite(y)) -> is_gen_zero(r)) and (((is_infinite(x) and
+  is_finite(y)) -> is_infinite(r)) and (((is_infinite(x) and
+  is_infinite(y)) -> is_NaN(r)) and (((is_finite(x) and (is_finite(y) and
+  ((not (value(y) = 0.0)) and no_overflow(m, (value(x) / value(y)))))) ->
+  (is_finite(r) and (value(r) = float32(m, (value(x) / value(y)))))) and
+  (((is_finite(x) and (is_finite(y) and ((not (value(y) = 0.0)) and
+  (not no_overflow(m, (value(x) / value(y))))))) -> overflow_value(m, r)) and
+  (((is_finite(x) and (is_gen_zero(y) and (not (value(x) = 0.0)))) ->
+  is_infinite(r)) and (((is_gen_zero(x) and is_gen_zero(y)) -> is_NaN(r)) and
+  ((not is_NaN(r)) -> product_sign(r, x, y))))))))))
+
+predicate fma_post(m: fpa_rounding_mode, x: single, y: single, z: single,
+  r: single) = (((is_NaN(x) or (is_NaN(y) or is_NaN(z))) -> is_NaN(r)) and
+  (((is_gen_zero(x) and is_infinite(y)) -> is_NaN(r)) and
+  (((is_infinite(x) and is_gen_zero(y)) -> is_NaN(r)) and (((is_finite(x) and
+  ((not (value(x) = 0.0)) and (is_infinite(y) and is_finite(z)))) ->
+  (is_infinite(r) and product_sign(r, x, y))) and (((is_finite(x) and
+  ((not (value(x) = 0.0)) and (is_infinite(y) and is_infinite(z)))) ->
+  ((product_sign(z, x, y) -> (is_infinite(r) and same_sign(r, z))) and
+  ((not product_sign(z, x, y)) -> is_NaN(r)))) and (((is_infinite(x) and
+  (is_finite(y) and ((not (value(y) = 0.0)) and is_finite(z)))) ->
+  (is_infinite(r) and product_sign(r, x, y))) and (((is_infinite(x) and
+  (is_finite(y) and ((not (value(y) = 0.0)) and is_infinite(z)))) ->
+  ((product_sign(z, x, y) -> (is_infinite(r) and same_sign(r, z))) and
+  ((not product_sign(z, x, y)) -> is_NaN(r)))) and (((is_infinite(x) and
+  (is_infinite(y) and is_finite(z))) -> (is_infinite(r) and product_sign(r,
+  x, y))) and (((is_finite(x) and (is_finite(y) and is_infinite(z))) ->
+  (is_infinite(r) and same_sign(r, z))) and (((is_infinite(x) and
+  (is_infinite(y) and is_infinite(z))) -> ((product_sign(z, x, y) ->
+  (is_infinite(r) and same_sign(r, z))) and ((not product_sign(z, x, y)) ->
+  is_NaN(r)))) and (((is_finite(x) and (is_finite(y) and (is_finite(z) and
+  no_overflow(m, ((value(x) * value(y)) + value(z)))))) -> (is_finite(r) and
+  ((value(r) = float32(m, ((value(x) * value(y)) + value(z)))) and
+  ((product_sign(z, x, y) -> same_sign(r, z)) and ((not product_sign(z, x,
+  y)) -> ((((value(x) * value(y)) + value(z)) = 0.0) -> (((m = Down) ->
+  (sign1(r) = Neg)) and ((not (m = Down)) -> (sign1(r) = Pos))))))))) and
+  ((is_finite(x) and (is_finite(y) and (is_finite(z) and (not no_overflow(m,
+  ((value(x) * value(y)) + value(z))))))) -> (same_sign_real(sign1(r),
+  ((value(x) * value(y)) + value(z))) and overflow_value(m, r))))))))))))))
+
+predicate sqrt_post(m: fpa_rounding_mode, x: single, r: single) =
+  ((is_NaN(x) -> is_NaN(r)) and ((is_plus_infinity(x) ->
+  is_plus_infinity(r)) and ((is_minus_infinity(x) -> is_NaN(r)) and
+  (((is_finite(x) and (value(x) <  0.0)) -> is_NaN(r)) and
+  (((is_finite(x) and (value(x) = 0.0)) -> (is_finite(r) and
+  ((value(r) = 0.0) and same_sign(r, x)))) and ((is_finite(x) and
+  (0.0 <  value(x))) -> (is_finite(r) and
+  ((value(r) = float32(m, sqrt_real(value(x)))) and (sign1(r) = Pos)))))))))
+
+predicate roundToIntegral_post(m: fpa_rounding_mode, x: single, r: single) =
+  ((is_NaN(x) -> is_NaN(r)) and ((is_infinite(x) -> (is_infinite(r) and
+  same_sign(x, r))) and (is_finite(x) -> (same_sign(x, r) and
+  (value(r) = real_of_int(integer_round(m, value(x))))))))
+
+predicate of_real_exact_post(x: real, r: single) = (is_finite(r) and
+  (value(r) = x))
+
+predicate le(x: single, y: single) = ((is_finite(x) and (is_finite(y) and
+  (value(x) <= value(y)))) or ((is_minus_infinity(x) and is_not_NaN(y)) or
+  (is_not_NaN(x) and is_plus_infinity(y))))
+
+predicate lt(x: single, y: single) = ((is_finite(x) and (is_finite(y) and
+  (value(x) <  value(y)))) or ((is_minus_infinity(x) and (is_not_NaN(y) and
+  (not is_minus_infinity(y)))) or (is_not_NaN(x) and
+  ((not is_plus_infinity(x)) and is_plus_infinity(y)))))
+
+predicate eq(x: single, y: single) = ((is_finite(x) and (is_finite(y) and
+  (value(x) = value(y)))) or (is_infinite(x) and (is_infinite(y) and
+  same_sign(x, y))))
+
+predicate ne(x: single, y: single) = (not eq(x, y))
+
+predicate rem_post(x: single, y: single, r: single) = (((is_NaN(x) or
+  (is_NaN(y) or (is_infinite(x) or is_gen_zero(y)))) -> is_NaN(r)) and
+  ((not (is_NaN(x) or (is_NaN(y) or (is_infinite(x) or is_gen_zero(y))))) ->
+  ((is_infinite(y) -> eq(x, r)) and ((not is_infinite(y)) ->
+  (is_finite(r) and (((value(r) = 0.0) -> same_sign(x, r)) and
+  (value(r) = (value(x) - (value(y) * real_of_int(integer_round(NearestTiesToEven, (value(x) / value(y)))))))))))))
+
+axiom le_lt_trans :
+  (forall x:single. forall y:single. forall z:single. ((le(x, y) and lt(y,
+  z)) -> lt(x, z)))
+
+axiom lt_le_trans :
+  (forall x:single. forall y:single. forall z:single. ((lt(x, y) and le(y,
+  z)) -> lt(x, z)))
+
+axiom le_ge_asym :
+  (forall x:single. forall y:single. ((le(x, y) and le(y, x)) -> eq(x, y)))
+
+axiom not_lt_ge :
+  (forall x:single. forall y:single. (((not lt(x, y)) and (is_not_NaN(x) and
+  is_not_NaN(y))) -> le(y, x)))
+
+axiom not_gt_le :
+  (forall x:single. forall y:single. (((not lt(y, x)) and (is_not_NaN(x) and
+  is_not_NaN(y))) -> le(x, y)))
+
+logic x0 : single
+
+logic x1 : single
+
+logic x2 : single
+
+logic x3 : single
+
+logic x4 : single
+
+logic x5 : single
+
+logic x6 : single
+
+logic sfp_0_127_0 : single
+
+axiom eq_0 : is_finite(sfp_0_127_0)
+
+axiom eq_01 : (value(sfp_0_127_0) = 1.0)
+
+logic ust_10 : single
+
+axiom eq_1 : (value(ust_10) = 1.0)
+
+axiom eq_11 : (sign1(ust_10) = Pos)
+
+axiom eq_12 : is_finite(ust_10)
+
+logic sfp_1_127_0 : single
+
+axiom eq_2 : is_finite(sfp_1_127_0)
+
+axiom eq_21 : (value(sfp_1_127_0) = (-1.0))
+
+logic ust_12 : single
+
+axiom eq_3 : (value(ust_12) = (-1.0))
+
+axiom eq_31 : (sign1(ust_12) = Neg)
+
+axiom eq_32 : is_finite(ust_12)
+
+predicate ust_16() = (le(ust_12, x0) and le(x0, ust_10))
+
+axiom ax_1 : ust_16
+
+predicate ust_20() = (le(ust_12, x1) and le(x1, ust_10))
+
+axiom ax_2 : ust_20
+
+predicate ust_24() = (le(ust_12, x2) and le(x2, ust_10))
+
+axiom ax_3 : ust_24
+
+predicate ust_28() = (le(ust_12, x3) and le(x3, ust_10))
+
+axiom ax_4 : ust_28
+
+predicate ust_32() = (le(ust_12, x4) and le(x4, ust_10))
+
+axiom ax_5 : ust_32
+
+predicate ust_36() = (le(ust_12, x5) and le(x5, ust_10))
+
+axiom ax_6 : ust_36
+
+predicate ust_40() = (le(ust_12, x6) and le(x6, ust_10))
+
+axiom ax_7 : ust_40
+
+logic sfp_0_0_0 : single
+
+axiom eq_4 : is_finite(sfp_0_0_0)
+
+axiom eq_41 : (value(sfp_0_0_0) = 0.0)
+
+logic ust_42 : single
+
+axiom eq_5 : (value(ust_42) = 0.0)
+
+axiom eq_51 : (sign1(ust_42) = Pos)
+
+axiom eq_52 : is_finite(ust_42)
+
+logic sfp_1_126_822084 : single
+
+axiom eq_6 : is_finite(sfp_1_126_822084)
+
+axiom eq_61 : (value(sfp_1_126_822084) = ((-2302673.0) / 4194304.0))
+
+logic ust_45 : single
+
+axiom eq_7 : (value(ust_45) = ((-2302673.0) / 4194304.0))
+
+axiom eq_71 : (sign1(ust_45) = Neg)
+
+axiom eq_72 : is_finite(ust_45)
+
+logic sfp_0_125_3321888 : single
+
+axiom eq_8 : is_finite(sfp_0_125_3321888)
+
+axiom eq_81 : (value(sfp_0_125_3321888) = (365953.0 / 1048576.0))
+
+logic ust_47 : single
+
+axiom eq_9 : (value(ust_47) = (365953.0 / 1048576.0))
+
+axiom eq_91 : (sign1(ust_47) = Pos)
+
+axiom eq_92 : is_finite(ust_47)
+
+logic s_mul__t_3__t_13__t_47 : single
+
+axiom eq_10 : mul_post(NearestTiesToEven, x0, ust_47, s_mul__t_3__t_13__t_47)
+
+logic ust_48 : single
+
+axiom eq_111 : mul_post(NearestTiesToEven, x0, ust_47, ust_48)
+
+logic s_add__t_3__t_42__t_48 : single
+
+axiom eq_121 : add_post(NearestTiesToEven, ust_42, ust_48,
+  s_add__t_3__t_42__t_48)
+
+logic ust_49 : single
+
+axiom eq_13 : add_post(NearestTiesToEven, ust_42, ust_48, ust_49)
+
+logic sfp_1_122_7449083 : single
+
+axiom eq_14 : is_finite(sfp_1_122_7449083)
+
+axiom eq_141 : (value(sfp_1_122_7449083) = ((-15837691.0) / 268435456.0))
+
+logic ust_52 : single
+
+axiom eq_15 : (value(ust_52) = ((-15837691.0) / 268435456.0))
+
+axiom eq_151 : (sign1(ust_52) = Neg)
+
+axiom eq_152 : is_finite(ust_52)
+
+logic s_mul__t_3__t_17__t_52 : single
+
+axiom eq_16 : mul_post(NearestTiesToEven, x1, ust_52, s_mul__t_3__t_17__t_52)
+
+logic ust_53 : single
+
+axiom eq_17 : mul_post(NearestTiesToEven, x1, ust_52, ust_53)
+
+logic s_add__t_3__t_49__t_53 : single
+
+axiom eq_18 : add_post(NearestTiesToEven, ust_49, ust_53,
+  s_add__t_3__t_49__t_53)
+
+logic ust_54 : single
+
+axiom eq_19 : add_post(NearestTiesToEven, ust_49, ust_53, ust_54)
+
+logic sfp_0_124_5972688 : single
+
+axiom eq_20 : is_finite(sfp_0_124_5972688)
+
+axiom eq_201 : (value(sfp_0_124_5972688) = (897581.0 / 4194304.0))
+
+logic ust_56 : single
+
+axiom eq_211 : (value(ust_56) = (897581.0 / 4194304.0))
+
+axiom eq_212 : (sign1(ust_56) = Pos)
+
+axiom eq_213 : is_finite(ust_56)
+
+logic s_mul__t_3__t_21__t_56 : single
+
+axiom eq_22 : mul_post(NearestTiesToEven, x2, ust_56, s_mul__t_3__t_21__t_56)
+
+logic ust_57 : single
+
+axiom eq_23 : mul_post(NearestTiesToEven, x2, ust_56, ust_57)
+
+logic s_add__t_3__t_54__t_57 : single
+
+axiom eq_24 : add_post(NearestTiesToEven, ust_54, ust_57,
+  s_add__t_3__t_54__t_57)
+
+logic ust_58 : single
+
+axiom eq_25 : add_post(NearestTiesToEven, ust_54, ust_57, ust_58)
+
+logic sfp_0_126_5653921 : single
+
+axiom eq_26 : is_finite(sfp_0_126_5653921)
+
+axiom eq_261 : (value(sfp_0_126_5653921) = (14042529.0 / 16777216.0))
+
+logic ust_60 : single
+
+axiom eq_27 : (value(ust_60) = (14042529.0 / 16777216.0))
+
+axiom eq_271 : (sign1(ust_60) = Pos)
+
+axiom eq_272 : is_finite(ust_60)
+
+logic s_mul__t_3__t_25__t_60 : single
+
+axiom eq_28 : mul_post(NearestTiesToEven, x3, ust_60, s_mul__t_3__t_25__t_60)
+
+logic ust_61 : single
+
+axiom eq_29 : mul_post(NearestTiesToEven, x3, ust_60, ust_61)
+
+logic s_add__t_3__t_58__t_61 : single
+
+axiom eq_30 : add_post(NearestTiesToEven, ust_58, ust_61,
+  s_add__t_3__t_58__t_61)
+
+logic ust_62 : single
+
+axiom eq_311 : add_post(NearestTiesToEven, ust_58, ust_61, ust_62)
+
+logic sfp_0_121_1275067 : single
+
+axiom eq_321 : is_finite(sfp_0_121_1275067)
+
+axiom eq_322 : (value(sfp_0_121_1275067) = (9663675.0 / 536870912.0))
+
+logic ust_64 : single
+
+axiom eq_33 : (value(ust_64) = (9663675.0 / 536870912.0))
+
+axiom eq_331 : (sign1(ust_64) = Pos)
+
+axiom eq_332 : is_finite(ust_64)
+
+logic s_mul__t_3__t_29__t_64 : single
+
+axiom eq_34 : mul_post(NearestTiesToEven, x4, ust_64, s_mul__t_3__t_29__t_64)
+
+logic ust_65 : single
+
+axiom eq_35 : mul_post(NearestTiesToEven, x4, ust_64, ust_65)
+
+logic s_add__t_3__t_62__t_65 : single
+
+axiom eq_36 : add_post(NearestTiesToEven, ust_62, ust_65,
+  s_add__t_3__t_62__t_65)
+
+logic ust_66 : single
+
+axiom eq_37 : add_post(NearestTiesToEven, ust_62, ust_65, ust_66)
+
+logic sfp_1_126_2835350 : single
+
+axiom eq_38 : is_finite(sfp_1_126_2835350)
+
+axiom eq_381 : (value(sfp_1_126_2835350) = ((-5611979.0) / 8388608.0))
+
+logic ust_69 : single
+
+axiom eq_39 : (value(ust_69) = ((-5611979.0) / 8388608.0))
+
+axiom eq_391 : (sign1(ust_69) = Neg)
+
+axiom eq_392 : is_finite(ust_69)
+
+logic s_mul__t_3__t_33__t_69 : single
+
+axiom eq_40 : mul_post(NearestTiesToEven, x5, ust_69, s_mul__t_3__t_33__t_69)
+
+logic ust_70 : single
+
+axiom eq_411 : mul_post(NearestTiesToEven, x5, ust_69, ust_70)
+
+logic s_add__t_3__t_66__t_70 : single
+
+axiom eq_42 : add_post(NearestTiesToEven, ust_66, ust_70,
+  s_add__t_3__t_66__t_70)
+
+logic ust_71 : single
+
+axiom eq_43 : add_post(NearestTiesToEven, ust_66, ust_70, ust_71)
+
+logic sfp_1_125_4932502 : single
+
+axiom eq_44 : is_finite(sfp_1_125_4932502)
+
+axiom eq_441 : (value(sfp_1_125_4932502) = ((-6660555.0) / 16777216.0))
+
+logic ust_74 : single
+
+axiom eq_45 : (value(ust_74) = ((-6660555.0) / 16777216.0))
+
+axiom eq_451 : (sign1(ust_74) = Neg)
+
+axiom eq_452 : is_finite(ust_74)
+
+logic s_mul__t_3__t_37__t_74 : single
+
+axiom eq_46 : mul_post(NearestTiesToEven, x6, ust_74, s_mul__t_3__t_37__t_74)
+
+logic ust_75 : single
+
+axiom eq_47 : mul_post(NearestTiesToEven, x6, ust_74, ust_75)
+
+logic s_add__t_3__t_71__t_75 : single
+
+axiom eq_48 : add_post(NearestTiesToEven, ust_71, ust_75,
+  s_add__t_3__t_71__t_75)
+
+logic ust_76 : single
+
+axiom eq_49 : add_post(NearestTiesToEven, ust_71, ust_75, ust_76)
+
+axiom ax_8 : le(ust_45, ust_76)
+
+logic sfp_0_126_7566524 : single
+
+axiom eq_50 : is_finite(sfp_0_126_7566524)
+
+axiom eq_501 : (value(sfp_0_126_7566524) = (3988783.0 / 4194304.0))
+
+logic ust_79 : single
+
+axiom eq_511 : (value(ust_79) = (3988783.0 / 4194304.0))
+
+axiom eq_512 : (sign1(ust_79) = Pos)
+
+axiom eq_513 : is_finite(ust_79)
+
+logic sfp_1_124_3623879 : single
+
+axiom eq_521 : is_finite(sfp_1_124_3623879)
+
+axiom eq_522 : (value(sfp_1_124_3623879) = ((-12012487.0) / 67108864.0))
+
+logic ust_82 : single
+
+axiom eq_53 : (value(ust_82) = ((-12012487.0) / 67108864.0))
+
+axiom eq_531 : (sign1(ust_82) = Neg)
+
+axiom eq_532 : is_finite(ust_82)
+
+logic s_mul__t_3__t_13__t_82 : single
+
+axiom eq_54 : mul_post(NearestTiesToEven, x0, ust_82, s_mul__t_3__t_13__t_82)
+
+logic ust_83 : single
+
+axiom eq_55 : mul_post(NearestTiesToEven, x0, ust_82, ust_83)
+
+logic s_add__t_3__t_42__t_83 : single
+
+axiom eq_56 : add_post(NearestTiesToEven, ust_42, ust_83,
+  s_add__t_3__t_42__t_83)
+
+logic ust_84 : single
+
+axiom eq_57 : add_post(NearestTiesToEven, ust_42, ust_83, ust_84)
+
+logic sfp_0_123_6509559 : single
+
+axiom eq_58 : is_finite(sfp_0_123_6509559)
+
+axiom eq_581 : (value(sfp_0_123_6509559) = (14898167.0 / 134217728.0))
+
+logic ust_86 : single
+
+axiom eq_59 : (value(ust_86) = (14898167.0 / 134217728.0))
+
+axiom eq_591 : (sign1(ust_86) = Pos)
+
+axiom eq_592 : is_finite(ust_86)
+
+logic s_mul__t_3__t_17__t_86 : single
+
+axiom eq_60 : mul_post(NearestTiesToEven, x1, ust_86, s_mul__t_3__t_17__t_86)
+
+logic ust_87 : single
+
+axiom eq_611 : mul_post(NearestTiesToEven, x1, ust_86, ust_87)
+
+logic s_add__t_3__t_84__t_87 : single
+
+axiom eq_62 : add_post(NearestTiesToEven, ust_84, ust_87,
+  s_add__t_3__t_84__t_87)
+
+logic ust_88 : single
+
+axiom eq_63 : add_post(NearestTiesToEven, ust_84, ust_87, ust_88)
+
+logic sfp_0_120_3422551 : single
+
+axiom eq_64 : is_finite(sfp_0_120_3422551)
+
+axiom eq_641 : (value(sfp_0_120_3422551) = (11811159.0 / 1073741824.0))
+
+logic ust_90 : single
+
+axiom eq_65 : (value(ust_90) = (11811159.0 / 1073741824.0))
+
+axiom eq_651 : (sign1(ust_90) = Pos)
+
+axiom eq_652 : is_finite(ust_90)
+
+logic s_mul__t_3__t_21__t_90 : single
+
+axiom eq_66 : mul_post(NearestTiesToEven, x2, ust_90, s_mul__t_3__t_21__t_90)
+
+logic ust_91 : single
+
+axiom eq_67 : mul_post(NearestTiesToEven, x2, ust_90, ust_91)
+
+logic s_add__t_3__t_88__t_91 : single
+
+axiom eq_68 : add_post(NearestTiesToEven, ust_88, ust_91,
+  s_add__t_3__t_88__t_91)
+
+logic ust_92 : single
+
+axiom eq_69 : add_post(NearestTiesToEven, ust_88, ust_91, ust_92)
+
+logic sfp_1_126_3305112 : single
+
+axiom eq_70 : is_finite(sfp_1_126_3305112)
+
+axiom eq_701 : (value(sfp_1_126_3305112) = ((-1461715.0) / 2097152.0))
+
+logic ust_95 : single
+
+axiom eq_711 : (value(ust_95) = ((-1461715.0) / 2097152.0))
+
+axiom eq_712 : (sign1(ust_95) = Neg)
+
+axiom eq_713 : is_finite(ust_95)
+
+logic s_mul__t_3__t_25__t_95 : single
+
+axiom eq_721 : mul_post(NearestTiesToEven, x3, ust_95,
+  s_mul__t_3__t_25__t_95)
+
+logic ust_96 : single
+
+axiom eq_73 : mul_post(NearestTiesToEven, x3, ust_95, ust_96)
+
+logic s_add__t_3__t_92__t_96 : single
+
+axiom eq_74 : add_post(NearestTiesToEven, ust_92, ust_96,
+  s_add__t_3__t_92__t_96)
+
+logic ust_97 : single
+
+axiom eq_75 : add_post(NearestTiesToEven, ust_92, ust_96, ust_97)
+
+logic sfp_1_126_6576668 : single
+
+axiom eq_76 : is_finite(sfp_1_126_6576668)
+
+axiom eq_761 : (value(sfp_1_126_6576668) = ((-3741319.0) / 4194304.0))
+
+logic ust_100 : single
+
+axiom eq_77 : (value(ust_100) = ((-3741319.0) / 4194304.0))
+
+axiom eq_771 : (sign1(ust_100) = Neg)
+
+axiom eq_772 : is_finite(ust_100)
+
+logic s_mul__t_3__t_29__t_100 : single
+
+axiom eq_78 : mul_post(NearestTiesToEven, x4, ust_100,
+  s_mul__t_3__t_29__t_100)
+
+logic ust_101 : single
+
+axiom eq_79 : mul_post(NearestTiesToEven, x4, ust_100, ust_101)
+
+logic s_add__t_3__t_97__t_101 : single
+
+axiom eq_80 : add_post(NearestTiesToEven, ust_97, ust_101,
+  s_add__t_3__t_97__t_101)
+
+logic ust_102 : single
+
+axiom eq_811 : add_post(NearestTiesToEven, ust_97, ust_101, ust_102)
+
+logic sfp_0_126_4110417 : single
+
+axiom eq_82 : is_finite(sfp_0_126_4110417)
+
+axiom eq_821 : (value(sfp_0_126_4110417) = (12499025.0 / 16777216.0))
+
+logic ust_104 : single
+
+axiom eq_83 : (value(ust_104) = (12499025.0 / 16777216.0))
+
+axiom eq_831 : (sign1(ust_104) = Pos)
+
+axiom eq_832 : is_finite(ust_104)
+
+logic s_mul__t_3__t_33__t_104 : single
+
+axiom eq_84 : mul_post(NearestTiesToEven, x5, ust_104,
+  s_mul__t_3__t_33__t_104)
+
+logic ust_105 : single
+
+axiom eq_85 : mul_post(NearestTiesToEven, x5, ust_104, ust_105)
+
+logic s_add__t_3__t_102__t_105 : single
+
+axiom eq_86 : add_post(NearestTiesToEven, ust_102, ust_105,
+  s_add__t_3__t_102__t_105)
+
+logic ust_106 : single
+
+axiom eq_87 : add_post(NearestTiesToEven, ust_102, ust_105, ust_106)
+
+logic sfp_0_125_6174015 : single
+
+axiom eq_88 : is_finite(sfp_0_125_6174015)
+
+axiom eq_881 : (value(sfp_0_125_6174015) = (14562623.0 / 33554432.0))
+
+logic ust_108 : single
+
+axiom eq_89 : (value(ust_108) = (14562623.0 / 33554432.0))
+
+axiom eq_891 : (sign1(ust_108) = Pos)
+
+axiom eq_892 : is_finite(ust_108)
+
+logic s_mul__t_3__t_37__t_108 : single
+
+axiom eq_90 : mul_post(NearestTiesToEven, x6, ust_108,
+  s_mul__t_3__t_37__t_108)
+
+logic ust_109 : single
+
+axiom eq_911 : mul_post(NearestTiesToEven, x6, ust_108, ust_109)
+
+logic s_add__t_3__t_106__t_109 : single
+
+axiom eq_921 : add_post(NearestTiesToEven, ust_106, ust_109,
+  s_add__t_3__t_106__t_109)
+
+logic ust_110 : single
+
+axiom eq_93 : add_post(NearestTiesToEven, ust_106, ust_109, ust_110)
+
+axiom ax_9 : le(ust_79, ust_110)
+
+logic sfp_1_125_2181037 : single
+
+axiom eq_94 : is_finite(sfp_1_125_2181037)
+
+axiom eq_941 : (value(sfp_1_125_2181037) = ((-10569645.0) / 33554432.0))
+
+logic ust_114 : single
+
+axiom eq_95 : (value(ust_114) = ((-10569645.0) / 33554432.0))
+
+axiom eq_951 : (sign1(ust_114) = Neg)
+
+axiom eq_952 : is_finite(ust_114)
+
+logic sfp_1_125_8355053 : single
+
+axiom eq_96 : is_finite(sfp_1_125_8355053)
+
+axiom eq_961 : (value(sfp_1_125_8355053) = ((-16743661.0) / 33554432.0))
+
+logic ust_117 : single
+
+axiom eq_97 : (value(ust_117) = ((-16743661.0) / 33554432.0))
+
+axiom eq_971 : (sign1(ust_117) = Neg)
+
+axiom eq_972 : is_finite(ust_117)
+
+logic s_mul__t_3__t_13__t_117 : single
+
+axiom eq_98 : mul_post(NearestTiesToEven, x0, ust_117,
+  s_mul__t_3__t_13__t_117)
+
+logic ust_118 : single
+
+axiom eq_99 : mul_post(NearestTiesToEven, x0, ust_117, ust_118)
+
+logic s_add__t_3__t_42__t_118 : single
+
+axiom eq_100 : add_post(NearestTiesToEven, ust_42, ust_118,
+  s_add__t_3__t_42__t_118)
+
+logic ust_119 : single
+
+axiom eq_101 : add_post(NearestTiesToEven, ust_42, ust_118, ust_119)
+
+logic sfp_1_124_4630512 : single
+
+axiom eq_102 : is_finite(sfp_1_124_4630512)
+
+axiom eq_1021 : (value(sfp_1_124_4630512) = ((-813695.0) / 4194304.0))
+
+logic ust_122 : single
+
+axiom eq_103 : (value(ust_122) = ((-813695.0) / 4194304.0))
+
+axiom eq_1031 : (sign1(ust_122) = Neg)
+
+axiom eq_1032 : is_finite(ust_122)
+
+logic s_mul__t_3__t_17__t_122 : single
+
+axiom eq_104 : mul_post(NearestTiesToEven, x1, ust_122,
+  s_mul__t_3__t_17__t_122)
+
+logic ust_123 : single
+
+axiom eq_105 : mul_post(NearestTiesToEven, x1, ust_122, ust_123)
+
+logic s_add__t_3__t_119__t_123 : single
+
+axiom eq_106 : add_post(NearestTiesToEven, ust_119, ust_123,
+  s_add__t_3__t_119__t_123)
+
+logic ust_124 : single
+
+axiom eq_107 : add_post(NearestTiesToEven, ust_119, ust_123, ust_124)
+
+logic sfp_0_122_1006633 : single
+
+axiom eq_108 : is_finite(sfp_0_122_1006633)
+
+axiom eq_1081 : (value(sfp_0_122_1006633) = (9395241.0 / 268435456.0))
+
+logic ust_126 : single
+
+axiom eq_109 : (value(ust_126) = (9395241.0 / 268435456.0))
+
+axiom eq_1091 : (sign1(ust_126) = Pos)
+
+axiom eq_1092 : is_finite(ust_126)
+
+logic s_mul__t_3__t_21__t_126 : single
+
+axiom eq_110 : mul_post(NearestTiesToEven, x2, ust_126,
+  s_mul__t_3__t_21__t_126)
+
+logic ust_127 : single
+
+axiom eq_1111 : mul_post(NearestTiesToEven, x2, ust_126, ust_127)
+
+logic s_add__t_3__t_124__t_127 : single
+
+axiom eq_112 : add_post(NearestTiesToEven, ust_124, ust_127,
+  s_add__t_3__t_124__t_127)
+
+logic ust_128 : single
+
+axiom eq_113 : add_post(NearestTiesToEven, ust_124, ust_127, ust_128)
+
+logic sfp_1_125_905970 : single
+
+axiom eq_114 : is_finite(sfp_1_125_905970)
+
+axiom eq_1141 : (value(sfp_1_125_905970) = ((-4647289.0) / 16777216.0))
+
+logic ust_131 : single
+
+axiom eq_115 : (value(ust_131) = ((-4647289.0) / 16777216.0))
+
+axiom eq_1151 : (sign1(ust_131) = Neg)
+
+axiom eq_1152 : is_finite(ust_131)
+
+logic s_mul__t_3__t_25__t_131 : single
+
+axiom eq_116 : mul_post(NearestTiesToEven, x3, ust_131,
+  s_mul__t_3__t_25__t_131)
+
+logic ust_132 : single
+
+axiom eq_117 : mul_post(NearestTiesToEven, x3, ust_131, ust_132)
+
+logic s_add__t_3__t_128__t_132 : single
+
+axiom eq_118 : add_post(NearestTiesToEven, ust_128, ust_132,
+  s_add__t_3__t_128__t_132)
+
+logic ust_133 : single
+
+axiom eq_119 : add_post(NearestTiesToEven, ust_128, ust_132, ust_133)
+
+logic sfp_1_125_2281701 : single
+
+axiom eq_120 : is_finite(sfp_1_125_2281701)
+
+axiom eq_1201 : (value(sfp_1_125_2281701) = ((-10670309.0) / 33554432.0))
+
+logic ust_136 : single
+
+axiom eq_1211 : (value(ust_136) = ((-10670309.0) / 33554432.0))
+
+axiom eq_1212 : (sign1(ust_136) = Neg)
+
+axiom eq_1213 : is_finite(ust_136)
+
+logic s_mul__t_3__t_29__t_136 : single
+
+axiom eq_122 : mul_post(NearestTiesToEven, x4, ust_136,
+  s_mul__t_3__t_29__t_136)
+
+logic ust_137 : single
+
+axiom eq_123 : mul_post(NearestTiesToEven, x4, ust_136, ust_137)
+
+logic s_add__t_3__t_133__t_137 : single
+
+axiom eq_124 : add_post(NearestTiesToEven, ust_133, ust_137,
+  s_add__t_3__t_133__t_137)
+
+logic ust_138 : single
+
+axiom eq_125 : add_post(NearestTiesToEven, ust_133, ust_137, ust_138)
+
+logic sfp_0_126_5754585 : single
+
+axiom eq_126 : is_finite(sfp_0_126_5754585)
+
+axiom eq_1261 : (value(sfp_0_126_5754585) = (14143193.0 / 16777216.0))
+
+logic ust_140 : single
+
+axiom eq_127 : (value(ust_140) = (14143193.0 / 16777216.0))
+
+axiom eq_1271 : (sign1(ust_140) = Pos)
+
+axiom eq_1272 : is_finite(ust_140)
+
+logic s_mul__t_3__t_33__t_140 : single
+
+axiom eq_128 : mul_post(NearestTiesToEven, x5, ust_140,
+  s_mul__t_3__t_33__t_140)
+
+logic ust_141 : single
+
+axiom eq_129 : mul_post(NearestTiesToEven, x5, ust_140, ust_141)
+
+logic s_add__t_3__t_138__t_141 : single
+
+axiom eq_130 : add_post(NearestTiesToEven, ust_138, ust_141,
+  s_add__t_3__t_138__t_141)
+
+logic ust_142 : single
+
+axiom eq_131 : add_post(NearestTiesToEven, ust_138, ust_141, ust_142)
+
+logic sfp_1_121_6106906 : single
+
+axiom eq_132 : is_finite(sfp_1_121_6106906)
+
+axiom eq_1321 : (value(sfp_1_121_6106906) = ((-7247757.0) / 268435456.0))
+
+logic ust_145 : single
+
+axiom eq_133 : (value(ust_145) = ((-7247757.0) / 268435456.0))
+
+axiom eq_1331 : (sign1(ust_145) = Neg)
+
+axiom eq_1332 : is_finite(ust_145)
+
+logic s_mul__t_3__t_37__t_145 : single
+
+axiom eq_134 : mul_post(NearestTiesToEven, x6, ust_145,
+  s_mul__t_3__t_37__t_145)
+
+logic ust_146 : single
+
+axiom eq_135 : mul_post(NearestTiesToEven, x6, ust_145, ust_146)
+
+logic s_add__t_3__t_142__t_146 : single
+
+axiom eq_136 : add_post(NearestTiesToEven, ust_142, ust_146,
+  s_add__t_3__t_142__t_146)
+
+logic ust_147 : single
+
+axiom eq_137 : add_post(NearestTiesToEven, ust_142, ust_146, ust_147)
+
+axiom ax_10 : le(ust_114, ust_147)
+
+logic sfp_1_125_1778384 : single
+
+axiom eq_138 : is_finite(sfp_1_125_1778384)
+
+axiom eq_1381 : (value(sfp_1_125_1778384) = ((-635437.0) / 2097152.0))
+
+logic ust_151 : single
+
+axiom eq_139 : (value(ust_151) = ((-635437.0) / 2097152.0))
+
+axiom eq_1391 : (sign1(ust_151) = Neg)
+
+axiom eq_1392 : is_finite(ust_151)
+
+logic s_mul__t_3__t_13__t_79 : single
+
+axiom eq_140 : mul_post(NearestTiesToEven, x0, ust_79,
+  s_mul__t_3__t_13__t_79)
+
+logic ust_152 : single
+
+axiom eq_1411 : mul_post(NearestTiesToEven, x0, ust_79, ust_152)
+
+logic s_add__t_3__t_42__t_152 : single
+
+axiom eq_142 : add_post(NearestTiesToEven, ust_42, ust_152,
+  s_add__t_3__t_42__t_152)
+
+logic ust_153 : single
+
+axiom eq_143 : add_post(NearestTiesToEven, ust_42, ust_152, ust_153)
+
+logic sfp_1_126_5570036 : single
+
+axiom eq_144 : is_finite(sfp_1_126_5570036)
+
+axiom eq_1441 : (value(sfp_1_126_5570036) = ((-3489661.0) / 4194304.0))
+
+logic ust_156 : single
+
+axiom eq_145 : (value(ust_156) = ((-3489661.0) / 4194304.0))
+
+axiom eq_1451 : (sign1(ust_156) = Neg)
+
+axiom eq_1452 : is_finite(ust_156)
+
+logic s_mul__t_3__t_17__t_156 : single
+
+axiom eq_146 : mul_post(NearestTiesToEven, x1, ust_156,
+  s_mul__t_3__t_17__t_156)
+
+logic ust_157 : single
+
+axiom eq_147 : mul_post(NearestTiesToEven, x1, ust_156, ust_157)
+
+logic s_add__t_3__t_153__t_157 : single
+
+axiom eq_148 : add_post(NearestTiesToEven, ust_153, ust_157,
+  s_add__t_3__t_153__t_157)
+
+logic ust_158 : single
+
+axiom eq_149 : add_post(NearestTiesToEven, ust_153, ust_157, ust_158)
+
+logic sfp_1_120_7717518 : single
+
+axiom eq_150 : is_finite(sfp_1_120_7717518)
+
+axiom eq_1501 : (value(sfp_1_120_7717518) = ((-8053063.0) / 536870912.0))
+
+logic ust_161 : single
+
+axiom eq_1511 : (value(ust_161) = ((-8053063.0) / 536870912.0))
+
+axiom eq_1512 : (sign1(ust_161) = Neg)
+
+axiom eq_1513 : is_finite(ust_161)
+
+logic s_mul__t_3__t_21__t_161 : single
+
+axiom eq_1521 : mul_post(NearestTiesToEven, x2, ust_161,
+  s_mul__t_3__t_21__t_161)
+
+logic ust_162 : single
+
+axiom eq_153 : mul_post(NearestTiesToEven, x2, ust_161, ust_162)
+
+logic s_add__t_3__t_158__t_162 : single
+
+axiom eq_154 : add_post(NearestTiesToEven, ust_158, ust_162,
+  s_add__t_3__t_158__t_162)
+
+logic ust_163 : single
+
+axiom eq_155 : add_post(NearestTiesToEven, ust_158, ust_162, ust_163)
+
+logic sfp_0_125_1677721 : single
+
+axiom eq_156 : is_finite(sfp_0_125_1677721)
+
+axiom eq_1561 : (value(sfp_0_125_1677721) = (10066329.0 / 33554432.0))
+
+logic ust_165 : single
+
+axiom eq_157 : (value(ust_165) = (10066329.0 / 33554432.0))
+
+axiom eq_1571 : (sign1(ust_165) = Pos)
+
+axiom eq_1572 : is_finite(ust_165)
+
+logic s_mul__t_3__t_25__t_165 : single
+
+axiom eq_158 : mul_post(NearestTiesToEven, x3, ust_165,
+  s_mul__t_3__t_25__t_165)
+
+logic ust_166 : single
+
+axiom eq_159 : mul_post(NearestTiesToEven, x3, ust_165, ust_166)
+
+logic s_add__t_3__t_163__t_166 : single
+
+axiom eq_160 : add_post(NearestTiesToEven, ust_163, ust_166,
+  s_add__t_3__t_163__t_166)
+
+logic ust_167 : single
+
+axiom eq_161 : add_post(NearestTiesToEven, ust_163, ust_166, ust_167)
+
+logic sfp_0_126_6257902 : single
+
+axiom eq_162 : is_finite(sfp_0_126_6257902)
+
+axiom eq_1621 : (value(sfp_0_126_6257902) = (7323255.0 / 8388608.0))
+
+logic ust_169 : single
+
+axiom eq_163 : (value(ust_169) = (7323255.0 / 8388608.0))
+
+axiom eq_1631 : (sign1(ust_169) = Pos)
+
+axiom eq_1632 : is_finite(ust_169)
+
+logic s_mul__t_3__t_29__t_169 : single
+
+axiom eq_164 : mul_post(NearestTiesToEven, x4, ust_169,
+  s_mul__t_3__t_29__t_169)
+
+logic ust_170 : single
+
+axiom eq_165 : mul_post(NearestTiesToEven, x4, ust_169, ust_170)
+
+logic s_add__t_3__t_167__t_170 : single
+
+axiom eq_166 : add_post(NearestTiesToEven, ust_167, ust_170,
+  s_add__t_3__t_167__t_170)
+
+logic ust_171 : single
+
+axiom eq_167 : add_post(NearestTiesToEven, ust_167, ust_170, ust_171)
+
+logic sfp_0_123_5301600 : single
+
+axiom eq_168 : is_finite(sfp_0_123_5301600)
+
+axiom eq_1681 : (value(sfp_0_123_5301600) = (427819.0 / 4194304.0))
+
+logic ust_173 : single
+
+axiom eq_169 : (value(ust_173) = (427819.0 / 4194304.0))
+
+axiom eq_1691 : (sign1(ust_173) = Pos)
+
+axiom eq_1692 : is_finite(ust_173)
+
+logic s_mul__t_3__t_33__t_173 : single
+
+axiom eq_170 : mul_post(NearestTiesToEven, x5, ust_173,
+  s_mul__t_3__t_33__t_173)
+
+logic ust_174 : single
+
+axiom eq_171 : mul_post(NearestTiesToEven, x5, ust_173, ust_174)
+
+logic s_add__t_3__t_171__t_174 : single
+
+axiom eq_172 : add_post(NearestTiesToEven, ust_171, ust_174,
+  s_add__t_3__t_171__t_174)
+
+logic ust_175 : single
+
+axiom eq_173 : add_post(NearestTiesToEven, ust_171, ust_174, ust_175)
+
+logic sfp_1_126_1342177 : single
+
+axiom eq_174 : is_finite(sfp_1_126_1342177)
+
+axiom eq_1741 : (value(sfp_1_126_1342177) = ((-9730785.0) / 16777216.0))
+
+logic ust_178 : single
+
+axiom eq_175 : (value(ust_178) = ((-9730785.0) / 16777216.0))
+
+axiom eq_1751 : (sign1(ust_178) = Neg)
+
+axiom eq_1752 : is_finite(ust_178)
+
+logic s_mul__t_3__t_37__t_178 : single
+
+axiom eq_176 : mul_post(NearestTiesToEven, x6, ust_178,
+  s_mul__t_3__t_37__t_178)
+
+logic ust_179 : single
+
+axiom eq_177 : mul_post(NearestTiesToEven, x6, ust_178, ust_179)
+
+logic s_add__t_3__t_175__t_179 : single
+
+axiom eq_178 : add_post(NearestTiesToEven, ust_175, ust_179,
+  s_add__t_3__t_175__t_179)
+
+logic ust_180 : single
+
+axiom eq_179 : add_post(NearestTiesToEven, ust_175, ust_179, ust_180)
+
+axiom ax_11 : le(ust_180, ust_151)
+
+logic sfp_0_123_1275068 : single
+
+axiom eq_180 : is_finite(sfp_0_123_1275068)
+
+axiom eq_1801 : (value(sfp_0_123_1275068) = (2415919.0 / 33554432.0))
+
+logic ust_183 : single
+
+axiom eq_181 : (value(ust_183) = (2415919.0 / 33554432.0))
+
+axiom eq_1811 : (sign1(ust_183) = Pos)
+
+axiom eq_1812 : is_finite(ust_183)
+
+logic sfp_0_124_1744830 : single
+
+axiom eq_182 : is_finite(sfp_0_124_1744830)
+
+axiom eq_1821 : (value(sfp_0_124_1744830) = (5066719.0 / 33554432.0))
+
+logic ust_185 : single
+
+axiom eq_183 : (value(ust_185) = (5066719.0 / 33554432.0))
+
+axiom eq_1831 : (sign1(ust_185) = Pos)
+
+axiom eq_1832 : is_finite(ust_185)
+
+logic s_mul__t_3__t_13__t_185 : single
+
+axiom eq_184 : mul_post(NearestTiesToEven, x0, ust_185,
+  s_mul__t_3__t_13__t_185)
+
+logic ust_186 : single
+
+axiom eq_185 : mul_post(NearestTiesToEven, x0, ust_185, ust_186)
+
+logic s_add__t_3__t_42__t_186 : single
+
+axiom eq_186 : add_post(NearestTiesToEven, ust_42, ust_186,
+  s_add__t_3__t_42__t_186)
+
+logic ust_187 : single
+
+axiom eq_187 : add_post(NearestTiesToEven, ust_42, ust_186, ust_187)
+
+logic sfp_0_122_1543503 : single
+
+axiom eq_188 : is_finite(sfp_0_122_1543503)
+
+axiom eq_1881 : (value(sfp_0_122_1543503) = (9932111.0 / 268435456.0))
+
+logic ust_189 : single
+
+axiom eq_189 : (value(ust_189) = (9932111.0 / 268435456.0))
+
+axiom eq_1891 : (sign1(ust_189) = Pos)
+
+axiom eq_1892 : is_finite(ust_189)
+
+logic s_mul__t_3__t_17__t_189 : single
+
+axiom eq_190 : mul_post(NearestTiesToEven, x1, ust_189,
+  s_mul__t_3__t_17__t_189)
+
+logic ust_190 : single
+
+axiom eq_191 : mul_post(NearestTiesToEven, x1, ust_189, ust_190)
+
+logic s_add__t_3__t_187__t_190 : single
+
+axiom eq_192 : add_post(NearestTiesToEven, ust_187, ust_190,
+  s_add__t_3__t_187__t_190)
+
+logic ust_191 : single
+
+axiom eq_193 : add_post(NearestTiesToEven, ust_187, ust_190, ust_191)
+
+logic sfp_0_126_956300 : single
+
+axiom eq_194 : is_finite(sfp_0_126_956300)
+
+axiom eq_1941 : (value(sfp_0_126_956300) = (2336227.0 / 4194304.0))
+
+logic ust_193 : single
+
+axiom eq_195 : (value(ust_193) = (2336227.0 / 4194304.0))
+
+axiom eq_1951 : (sign1(ust_193) = Pos)
+
+axiom eq_1952 : is_finite(ust_193)
+
+logic s_mul__t_3__t_21__t_193 : single
+
+axiom eq_196 : mul_post(NearestTiesToEven, x2, ust_193,
+  s_mul__t_3__t_21__t_193)
+
+logic ust_194 : single
+
+axiom eq_197 : mul_post(NearestTiesToEven, x2, ust_193, ust_194)
+
+logic s_add__t_3__t_191__t_194 : single
+
+axiom eq_198 : add_post(NearestTiesToEven, ust_191, ust_194,
+  s_add__t_3__t_191__t_194)
+
+logic ust_195 : single
+
+axiom eq_199 : add_post(NearestTiesToEven, ust_191, ust_194, ust_195)
+
+logic sfp_0_124_7583302 : single
+
+axiom eq_200 : is_finite(sfp_0_124_7583302)
+
+axiom eq_2001 : (value(sfp_0_124_7583302) = (7985955.0 / 33554432.0))
+
+logic ust_197 : single
+
+axiom eq_2011 : (value(ust_197) = (7985955.0 / 33554432.0))
+
+axiom eq_2012 : (sign1(ust_197) = Pos)
+
+axiom eq_2013 : is_finite(ust_197)
+
+logic s_mul__t_3__t_25__t_197 : single
+
+axiom eq_202 : mul_post(NearestTiesToEven, x3, ust_197,
+  s_mul__t_3__t_25__t_197)
+
+logic ust_198 : single
+
+axiom eq_203 : mul_post(NearestTiesToEven, x3, ust_197, ust_198)
+
+logic s_add__t_3__t_195__t_198 : single
+
+axiom eq_204 : add_post(NearestTiesToEven, ust_195, ust_198,
+  s_add__t_3__t_195__t_198)
+
+logic ust_199 : single
+
+axiom eq_205 : add_post(NearestTiesToEven, ust_195, ust_198, ust_199)
+
+logic sfp_1_125_1811939 : single
+
+axiom eq_206 : is_finite(sfp_1_125_1811939)
+
+axiom eq_2061 : (value(sfp_1_125_1811939) = ((-10200547.0) / 33554432.0))
+
+logic ust_202 : single
+
+axiom eq_207 : (value(ust_202) = ((-10200547.0) / 33554432.0))
+
+axiom eq_2071 : (sign1(ust_202) = Neg)
+
+axiom eq_2072 : is_finite(ust_202)
+
+logic s_mul__t_3__t_29__t_202 : single
+
+axiom eq_208 : mul_post(NearestTiesToEven, x4, ust_202,
+  s_mul__t_3__t_29__t_202)
+
+logic ust_203 : single
+
+axiom eq_209 : mul_post(NearestTiesToEven, x4, ust_202, ust_203)
+
+logic s_add__t_3__t_199__t_203 : single
+
+axiom eq_210 : add_post(NearestTiesToEven, ust_199, ust_203,
+  s_add__t_3__t_199__t_203)
+
+logic ust_204 : single
+
+axiom eq_2111 : add_post(NearestTiesToEven, ust_199, ust_203, ust_204)
+
+logic sfp_0_126_771752 : single
+
+axiom eq_2121 : is_finite(sfp_0_126_771752)
+
+axiom eq_2122 : (value(sfp_0_126_771752) = (1145045.0 / 2097152.0))
+
+logic ust_206 : single
+
+axiom eq_2131 : (value(ust_206) = (1145045.0 / 2097152.0))
+
+axiom eq_2132 : (sign1(ust_206) = Pos)
+
+axiom eq_2133 : is_finite(ust_206)
+
+logic s_mul__t_3__t_33__t_206 : single
+
+axiom eq_214 : mul_post(NearestTiesToEven, x5, ust_206,
+  s_mul__t_3__t_33__t_206)
+
+logic ust_207 : single
+
+axiom eq_215 : mul_post(NearestTiesToEven, x5, ust_206, ust_207)
+
+logic s_add__t_3__t_204__t_207 : single
+
+axiom eq_216 : add_post(NearestTiesToEven, ust_204, ust_207,
+  s_add__t_3__t_204__t_207)
+
+logic ust_208 : single
+
+axiom eq_217 : add_post(NearestTiesToEven, ust_204, ust_207, ust_208)
+
+logic sfp_0_126_4647289 : single
+
+axiom eq_218 : is_finite(sfp_0_126_4647289)
+
+axiom eq_2181 : (value(sfp_0_126_4647289) = (13035897.0 / 16777216.0))
+
+logic ust_210 : single
+
+axiom eq_219 : (value(ust_210) = (13035897.0 / 16777216.0))
+
+axiom eq_2191 : (sign1(ust_210) = Pos)
+
+axiom eq_2192 : is_finite(ust_210)
+
+logic s_mul__t_3__t_37__t_210 : single
+
+axiom eq_220 : mul_post(NearestTiesToEven, x6, ust_210,
+  s_mul__t_3__t_37__t_210)
+
+logic ust_211 : single
+
+axiom eq_221 : mul_post(NearestTiesToEven, x6, ust_210, ust_211)
+
+logic s_add__t_3__t_208__t_211 : single
+
+axiom eq_222 : add_post(NearestTiesToEven, ust_208, ust_211,
+  s_add__t_3__t_208__t_211)
+
+logic ust_212 : single
+
+axiom eq_223 : add_post(NearestTiesToEven, ust_208, ust_211, ust_212)
+
+axiom ax_12 : le(ust_212, ust_183)
+
+logic sfp_0_125_5100274 : single
+
+axiom eq_224 : is_finite(sfp_0_125_5100274)
+
+axiom eq_2241 : (value(sfp_0_125_5100274) = (6744441.0 / 16777216.0))
+
+logic ust_215 : single
+
+axiom eq_225 : (value(ust_215) = (6744441.0 / 16777216.0))
+
+axiom eq_2251 : (sign1(ust_215) = Pos)
+
+axiom eq_2252 : is_finite(ust_215)
+
+logic sfp_1_126_5939134 : single
+
+axiom eq_226 : is_finite(sfp_1_126_5939134)
+
+axiom eq_2261 : (value(sfp_1_126_5939134) = ((-7163871.0) / 8388608.0))
+
+logic ust_218 : single
+
+axiom eq_227 : (value(ust_218) = ((-7163871.0) / 8388608.0))
+
+axiom eq_2271 : (sign1(ust_218) = Neg)
+
+axiom eq_2272 : is_finite(ust_218)
+
+logic s_mul__t_3__t_13__t_218 : single
+
+axiom eq_228 : mul_post(NearestTiesToEven, x0, ust_218,
+  s_mul__t_3__t_13__t_218)
+
+logic ust_219 : single
+
+axiom eq_229 : mul_post(NearestTiesToEven, x0, ust_218, ust_219)
+
+logic s_add__t_3__t_42__t_219 : single
+
+axiom eq_230 : add_post(NearestTiesToEven, ust_42, ust_219,
+  s_add__t_3__t_42__t_219)
+
+logic ust_220 : single
+
+axiom eq_231 : add_post(NearestTiesToEven, ust_42, ust_219, ust_220)
+
+logic sfp_0_124_4026532 : single
+
+axiom eq_232 : is_finite(sfp_0_124_4026532)
+
+axiom eq_2321 : (value(sfp_0_124_4026532) = (3103785.0 / 16777216.0))
+
+logic ust_222 : single
+
+axiom eq_233 : (value(ust_222) = (3103785.0 / 16777216.0))
+
+axiom eq_2331 : (sign1(ust_222) = Pos)
+
+axiom eq_2332 : is_finite(ust_222)
+
+logic s_mul__t_3__t_17__t_222 : single
+
+axiom eq_234 : mul_post(NearestTiesToEven, x1, ust_222,
+  s_mul__t_3__t_17__t_222)
+
+logic ust_223 : single
+
+axiom eq_235 : mul_post(NearestTiesToEven, x1, ust_222, ust_223)
+
+logic s_add__t_3__t_220__t_223 : single
+
+axiom eq_236 : add_post(NearestTiesToEven, ust_220, ust_223,
+  s_add__t_3__t_220__t_223)
+
+logic ust_224 : single
+
+axiom eq_237 : add_post(NearestTiesToEven, ust_220, ust_223, ust_224)
+
+logic sfp_1_126_1325400 : single
+
+axiom eq_238 : is_finite(sfp_1_126_1325400)
+
+axiom eq_2381 : (value(sfp_1_126_1325400) = ((-1214251.0) / 2097152.0))
+
+logic ust_227 : single
+
+axiom eq_239 : (value(ust_227) = ((-1214251.0) / 2097152.0))
+
+axiom eq_2391 : (sign1(ust_227) = Neg)
+
+axiom eq_2392 : is_finite(ust_227)
+
+logic s_mul__t_3__t_21__t_227 : single
+
+axiom eq_240 : mul_post(NearestTiesToEven, x2, ust_227,
+  s_mul__t_3__t_21__t_227)
+
+logic ust_228 : single
+
+axiom eq_241 : mul_post(NearestTiesToEven, x2, ust_227, ust_228)
+
+logic s_add__t_3__t_224__t_228 : single
+
+axiom eq_242 : add_post(NearestTiesToEven, ust_224, ust_228,
+  s_add__t_3__t_224__t_228)
+
+logic ust_229 : single
+
+axiom eq_243 : add_post(NearestTiesToEven, ust_224, ust_228, ust_229)
+
+logic sfp_1_126_5586812 : single
+
+axiom eq_244 : is_finite(sfp_1_126_5586812)
+
+axiom eq_2441 : (value(sfp_1_126_5586812) = ((-3493855.0) / 4194304.0))
+
+logic ust_232 : single
+
+axiom eq_245 : (value(ust_232) = ((-3493855.0) / 4194304.0))
+
+axiom eq_2451 : (sign1(ust_232) = Neg)
+
+axiom eq_2452 : is_finite(ust_232)
+
+logic s_mul__t_3__t_25__t_232 : single
+
+axiom eq_246 : mul_post(NearestTiesToEven, x3, ust_232,
+  s_mul__t_3__t_25__t_232)
+
+logic ust_233 : single
+
+axiom eq_247 : mul_post(NearestTiesToEven, x3, ust_232, ust_233)
+
+logic s_add__t_3__t_229__t_233 : single
+
+axiom eq_248 : add_post(NearestTiesToEven, ust_229, ust_233,
+  s_add__t_3__t_229__t_233)
+
+logic ust_234 : single
+
+axiom eq_249 : add_post(NearestTiesToEven, ust_229, ust_233, ust_234)
+
+logic sfp_1_126_1459617 : single
+
+axiom eq_250 : is_finite(sfp_1_126_1459617)
+
+axiom eq_2501 : (value(sfp_1_126_1459617) = ((-9848225.0) / 16777216.0))
+
+logic ust_237 : single
+
+axiom eq_251 : (value(ust_237) = ((-9848225.0) / 16777216.0))
+
+axiom eq_2511 : (sign1(ust_237) = Neg)
+
+axiom eq_2512 : is_finite(ust_237)
+
+logic s_mul__t_3__t_29__t_237 : single
+
+axiom eq_252 : mul_post(NearestTiesToEven, x4, ust_237,
+  s_mul__t_3__t_29__t_237)
+
+logic ust_238 : single
+
+axiom eq_253 : mul_post(NearestTiesToEven, x4, ust_237, ust_238)
+
+logic s_add__t_3__t_234__t_238 : single
+
+axiom eq_254 : add_post(NearestTiesToEven, ust_234, ust_238,
+  s_add__t_3__t_234__t_238)
+
+logic ust_239 : single
+
+axiom eq_255 : add_post(NearestTiesToEven, ust_234, ust_238, ust_239)
+
+logic sfp_1_125_5335155 : single
+
+axiom eq_256 : is_finite(sfp_1_125_5335155)
+
+axiom eq_2561 : (value(sfp_1_125_5335155) = ((-13723763.0) / 33554432.0))
+
+logic ust_242 : single
+
+axiom eq_257 : (value(ust_242) = ((-13723763.0) / 33554432.0))
+
+axiom eq_2571 : (sign1(ust_242) = Neg)
+
+axiom eq_2572 : is_finite(ust_242)
+
+logic s_mul__t_3__t_33__t_242 : single
+
+axiom eq_258 : mul_post(NearestTiesToEven, x5, ust_242,
+  s_mul__t_3__t_33__t_242)
+
+logic ust_243 : single
+
+axiom eq_259 : mul_post(NearestTiesToEven, x5, ust_242, ust_243)
+
+logic s_add__t_3__t_239__t_243 : single
+
+axiom eq_260 : add_post(NearestTiesToEven, ust_239, ust_243,
+  s_add__t_3__t_239__t_243)
+
+logic ust_244 : single
+
+axiom eq_2611 : add_post(NearestTiesToEven, ust_239, ust_243, ust_244)
+
+logic sfp_0_125_7147094 : single
+
+axiom eq_262 : is_finite(sfp_0_125_7147094)
+
+axiom eq_2621 : (value(sfp_0_125_7147094) = (7767851.0 / 16777216.0))
+
+logic ust_246 : single
+
+axiom eq_263 : (value(ust_246) = (7767851.0 / 16777216.0))
+
+axiom eq_2631 : (sign1(ust_246) = Pos)
+
+axiom eq_2632 : is_finite(ust_246)
+
+logic s_mul__t_3__t_37__t_246 : single
+
+axiom eq_264 : mul_post(NearestTiesToEven, x6, ust_246,
+  s_mul__t_3__t_37__t_246)
+
+logic ust_247 : single
+
+axiom eq_265 : mul_post(NearestTiesToEven, x6, ust_246, ust_247)
+
+logic s_add__t_3__t_244__t_247 : single
+
+axiom eq_266 : add_post(NearestTiesToEven, ust_244, ust_247,
+  s_add__t_3__t_244__t_247)
+
+logic ust_248 : single
+
+axiom eq_267 : add_post(NearestTiesToEven, ust_244, ust_247, ust_248)
+
+axiom ax_13 : le(ust_215, ust_248)
+
+logic sfp_0_124_805305 : single
+
+axiom eq_268 : is_finite(sfp_0_124_805305)
+
+axiom eq_2681 : (value(sfp_0_124_805305) = (9193913.0 / 67108864.0))
+
+logic ust_251 : single
+
+axiom eq_269 : (value(ust_251) = (9193913.0 / 67108864.0))
+
+axiom eq_2691 : (sign1(ust_251) = Pos)
+
+axiom eq_2692 : is_finite(ust_251)
+
+logic sfp_1_126_8136950 : single
+
+axiom eq_270 : is_finite(sfp_1_126_8136950)
+
+axiom eq_2701 : (value(sfp_1_126_8136950) = ((-8262779.0) / 8388608.0))
+
+logic ust_254 : single
+
+axiom eq_2711 : (value(ust_254) = ((-8262779.0) / 8388608.0))
+
+axiom eq_2712 : (sign1(ust_254) = Neg)
+
+axiom eq_2713 : is_finite(ust_254)
+
+logic s_mul__t_3__t_13__t_254 : single
+
+axiom eq_2721 : mul_post(NearestTiesToEven, x0, ust_254,
+  s_mul__t_3__t_13__t_254)
+
+logic ust_255 : single
+
+axiom eq_273 : mul_post(NearestTiesToEven, x0, ust_254, ust_255)
+
+logic s_add__t_3__t_42__t_255 : single
+
+axiom eq_274 : add_post(NearestTiesToEven, ust_42, ust_255,
+  s_add__t_3__t_42__t_255)
+
+logic ust_256 : single
+
+axiom eq_275 : add_post(NearestTiesToEven, ust_42, ust_255, ust_256)
+
+logic sfp_0_126_2952790 : single
+
+axiom eq_276 : is_finite(sfp_0_126_2952790)
+
+axiom eq_2761 : (value(sfp_0_126_2952790) = (5670699.0 / 8388608.0))
+
+logic ust_258 : single
+
+axiom eq_277 : (value(ust_258) = (5670699.0 / 8388608.0))
+
+axiom eq_2771 : (sign1(ust_258) = Pos)
+
+axiom eq_2772 : is_finite(ust_258)
+
+logic s_mul__t_3__t_17__t_258 : single
+
+axiom eq_278 : mul_post(NearestTiesToEven, x1, ust_258,
+  s_mul__t_3__t_17__t_258)
+
+logic ust_259 : single
+
+axiom eq_279 : mul_post(NearestTiesToEven, x1, ust_258, ust_259)
+
+logic s_add__t_3__t_256__t_259 : single
+
+axiom eq_280 : add_post(NearestTiesToEven, ust_256, ust_259,
+  s_add__t_3__t_256__t_259)
+
+logic ust_260 : single
+
+axiom eq_281 : add_post(NearestTiesToEven, ust_256, ust_259, ust_260)
+
+logic sfp_1_124_1140850 : single
+
+axiom eq_282 : is_finite(sfp_1_124_1140850)
+
+axiom eq_2821 : (value(sfp_1_124_1140850) = ((-4764729.0) / 33554432.0))
+
+logic ust_263 : single
+
+axiom eq_283 : (value(ust_263) = ((-4764729.0) / 33554432.0))
+
+axiom eq_2831 : (sign1(ust_263) = Neg)
+
+axiom eq_2832 : is_finite(ust_263)
+
+logic s_mul__t_3__t_21__t_263 : single
+
+axiom eq_284 : mul_post(NearestTiesToEven, x2, ust_263,
+  s_mul__t_3__t_21__t_263)
+
+logic ust_264 : single
+
+axiom eq_285 : mul_post(NearestTiesToEven, x2, ust_263, ust_264)
+
+logic s_add__t_3__t_260__t_264 : single
+
+axiom eq_286 : add_post(NearestTiesToEven, ust_260, ust_264,
+  s_add__t_3__t_260__t_264)
+
+logic ust_265 : single
+
+axiom eq_287 : add_post(NearestTiesToEven, ust_260, ust_264, ust_265)
+
+logic s_mul__t_3__t_25__t_100 : single
+
+axiom eq_288 : mul_post(NearestTiesToEven, x3, ust_100,
+  s_mul__t_3__t_25__t_100)
+
+logic ust_266 : single
+
+axiom eq_289 : mul_post(NearestTiesToEven, x3, ust_100, ust_266)
+
+logic s_add__t_3__t_265__t_266 : single
+
+axiom eq_290 : add_post(NearestTiesToEven, ust_265, ust_266,
+  s_add__t_3__t_265__t_266)
+
+logic ust_267 : single
+
+axiom eq_291 : add_post(NearestTiesToEven, ust_265, ust_266, ust_267)
+
+logic sfp_1_125_4328521 : single
+
+axiom eq_292 : is_finite(sfp_1_125_4328521)
+
+axiom eq_2921 : (value(sfp_1_125_4328521) = ((-12717129.0) / 33554432.0))
+
+logic ust_270 : single
+
+axiom eq_293 : (value(ust_270) = ((-12717129.0) / 33554432.0))
+
+axiom eq_2931 : (sign1(ust_270) = Neg)
+
+axiom eq_2932 : is_finite(ust_270)
+
+logic s_mul__t_3__t_29__t_270 : single
+
+axiom eq_294 : mul_post(NearestTiesToEven, x4, ust_270,
+  s_mul__t_3__t_29__t_270)
+
+logic ust_271 : single
+
+axiom eq_295 : mul_post(NearestTiesToEven, x4, ust_270, ust_271)
+
+logic s_add__t_3__t_267__t_271 : single
+
+axiom eq_296 : add_post(NearestTiesToEven, ust_267, ust_271,
+  s_add__t_3__t_267__t_271)
+
+logic ust_272 : single
+
+axiom eq_297 : add_post(NearestTiesToEven, ust_267, ust_271, ust_272)
+
+logic sfp_1_124_4026532 : single
+
+axiom eq_298 : is_finite(sfp_1_124_4026532)
+
+axiom eq_2981 : (value(sfp_1_124_4026532) = ((-3103785.0) / 16777216.0))
+
+logic ust_274 : single
+
+axiom eq_299 : (value(ust_274) = ((-3103785.0) / 16777216.0))
+
+axiom eq_2991 : (sign1(ust_274) = Neg)
+
+axiom eq_2992 : is_finite(ust_274)
+
+logic s_mul__t_3__t_33__t_274 : single
+
+axiom eq_300 : mul_post(NearestTiesToEven, x5, ust_274,
+  s_mul__t_3__t_33__t_274)
+
+logic ust_275 : single
+
+axiom eq_301 : mul_post(NearestTiesToEven, x5, ust_274, ust_275)
+
+logic s_add__t_3__t_272__t_275 : single
+
+axiom eq_302 : add_post(NearestTiesToEven, ust_272, ust_275,
+  s_add__t_3__t_272__t_275)
+
+logic ust_276 : single
+
+axiom eq_303 : add_post(NearestTiesToEven, ust_272, ust_275, ust_276)
+
+logic sfp_0_126_4697620 : single
+
+axiom eq_304 : is_finite(sfp_0_126_4697620)
+
+axiom eq_3041 : (value(sfp_0_126_4697620) = (3271557.0 / 4194304.0))
+
+logic ust_278 : single
+
+axiom eq_305 : (value(ust_278) = (3271557.0 / 4194304.0))
+
+axiom eq_3051 : (sign1(ust_278) = Pos)
+
+axiom eq_3052 : is_finite(ust_278)
+
+logic s_mul__t_3__t_37__t_278 : single
+
+axiom eq_306 : mul_post(NearestTiesToEven, x6, ust_278,
+  s_mul__t_3__t_37__t_278)
+
+logic ust_279 : single
+
+axiom eq_307 : mul_post(NearestTiesToEven, x6, ust_278, ust_279)
+
+logic s_add__t_3__t_276__t_279 : single
+
+axiom eq_308 : add_post(NearestTiesToEven, ust_276, ust_279,
+  s_add__t_3__t_276__t_279)
+
+logic ust_280 : single
+
+axiom eq_309 : add_post(NearestTiesToEven, ust_276, ust_279, ust_280)
+
+axiom ax_14 : le(ust_280, ust_251)
+
+logic sfp_1_126_1694499 : single
+
+axiom eq_310 : is_finite(sfp_1_126_1694499)
+
+axiom eq_3101 : (value(sfp_1_126_1694499) = ((-10083107.0) / 16777216.0))
+
+logic ust_284 : single
+
+axiom eq_3111 : (value(ust_284) = ((-10083107.0) / 16777216.0))
+
+axiom eq_3112 : (sign1(ust_284) = Neg)
+
+axiom eq_3113 : is_finite(ust_284)
+
+logic sfp_1_126_4127195 : single
+
+axiom eq_312 : is_finite(sfp_1_126_4127195)
+
+axiom eq_3121 : (value(sfp_1_126_4127195) = ((-12515803.0) / 16777216.0))
+
+logic ust_287 : single
+
+axiom eq_313 : (value(ust_287) = ((-12515803.0) / 16777216.0))
+
+axiom eq_3131 : (sign1(ust_287) = Neg)
+
+axiom eq_3132 : is_finite(ust_287)
+
+logic s_mul__t_3__t_13__t_287 : single
+
+axiom eq_314 : mul_post(NearestTiesToEven, x0, ust_287,
+  s_mul__t_3__t_13__t_287)
+
+logic ust_288 : single
+
+axiom eq_315 : mul_post(NearestTiesToEven, x0, ust_287, ust_288)
+
+logic s_add__t_3__t_42__t_288 : single
+
+axiom eq_316 : add_post(NearestTiesToEven, ust_42, ust_288,
+  s_add__t_3__t_42__t_288)
+
+logic ust_289 : single
+
+axiom eq_317 : add_post(NearestTiesToEven, ust_42, ust_288, ust_289)
+
+logic sfp_1_126_1627390 : single
+
+axiom eq_318 : is_finite(sfp_1_126_1627390)
+
+axiom eq_3181 : (value(sfp_1_126_1627390) = ((-5007999.0) / 8388608.0))
+
+logic ust_292 : single
+
+axiom eq_319 : (value(ust_292) = ((-5007999.0) / 8388608.0))
+
+axiom eq_3191 : (sign1(ust_292) = Neg)
+
+axiom eq_3192 : is_finite(ust_292)
+
+logic s_mul__t_3__t_17__t_292 : single
+
+axiom eq_320 : mul_post(NearestTiesToEven, x1, ust_292,
+  s_mul__t_3__t_17__t_292)
+
+logic ust_293 : single
+
+axiom eq_3211 : mul_post(NearestTiesToEven, x1, ust_292, ust_293)
+
+logic s_add__t_3__t_289__t_293 : single
+
+axiom eq_3221 : add_post(NearestTiesToEven, ust_289, ust_293,
+  s_add__t_3__t_289__t_293)
+
+logic ust_294 : single
+
+axiom eq_323 : add_post(NearestTiesToEven, ust_289, ust_293, ust_294)
+
+logic sfp_1_126_7096761 : single
+
+axiom eq_324 : is_finite(sfp_1_126_7096761)
+
+axiom eq_3241 : (value(sfp_1_126_7096761) = ((-15485369.0) / 16777216.0))
+
+logic ust_297 : single
+
+axiom eq_325 : (value(ust_297) = ((-15485369.0) / 16777216.0))
+
+axiom eq_3251 : (sign1(ust_297) = Neg)
+
+axiom eq_3252 : is_finite(ust_297)
+
+logic s_mul__t_3__t_21__t_297 : single
+
+axiom eq_326 : mul_post(NearestTiesToEven, x2, ust_297,
+  s_mul__t_3__t_21__t_297)
+
+logic ust_298 : single
+
+axiom eq_327 : mul_post(NearestTiesToEven, x2, ust_297, ust_298)
+
+logic s_add__t_3__t_294__t_298 : single
+
+axiom eq_328 : add_post(NearestTiesToEven, ust_294, ust_298,
+  s_add__t_3__t_294__t_298)
+
+logic ust_299 : single
+
+axiom eq_329 : add_post(NearestTiesToEven, ust_294, ust_298, ust_299)
+
+logic sfp_0_125_4227858 : single
+
+axiom eq_330 : is_finite(sfp_0_125_4227858)
+
+axiom eq_3301 : (value(sfp_0_125_4227858) = (6308233.0 / 16777216.0))
+
+logic ust_301 : single
+
+axiom eq_3311 : (value(ust_301) = (6308233.0 / 16777216.0))
+
+axiom eq_3312 : (sign1(ust_301) = Pos)
+
+axiom eq_3313 : is_finite(ust_301)
+
+logic s_mul__t_3__t_25__t_301 : single
+
+axiom eq_3321 : mul_post(NearestTiesToEven, x3, ust_301,
+  s_mul__t_3__t_25__t_301)
+
+logic ust_302 : single
+
+axiom eq_333 : mul_post(NearestTiesToEven, x3, ust_301, ust_302)
+
+logic s_add__t_3__t_299__t_302 : single
+
+axiom eq_334 : add_post(NearestTiesToEven, ust_299, ust_302,
+  s_add__t_3__t_299__t_302)
+
+logic ust_303 : single
+
+axiom eq_335 : add_post(NearestTiesToEven, ust_299, ust_302, ust_303)
+
+logic sfp_1_126_6878659 : single
+
+axiom eq_336 : is_finite(sfp_1_126_6878659)
+
+axiom eq_3361 : (value(sfp_1_126_6878659) = ((-15267267.0) / 16777216.0))
+
+logic ust_306 : single
+
+axiom eq_337 : (value(ust_306) = ((-15267267.0) / 16777216.0))
+
+axiom eq_3371 : (sign1(ust_306) = Neg)
+
+axiom eq_3372 : is_finite(ust_306)
+
+logic s_mul__t_3__t_29__t_306 : single
+
+axiom eq_338 : mul_post(NearestTiesToEven, x4, ust_306,
+  s_mul__t_3__t_29__t_306)
+
+logic ust_307 : single
+
+axiom eq_339 : mul_post(NearestTiesToEven, x4, ust_306, ust_307)
+
+logic s_add__t_3__t_303__t_307 : single
+
+axiom eq_340 : add_post(NearestTiesToEven, ust_303, ust_307,
+  s_add__t_3__t_303__t_307)
+
+logic ust_308 : single
+
+axiom eq_341 : add_post(NearestTiesToEven, ust_303, ust_307, ust_308)
+
+logic sfp_1_126_855638 : single
+
+axiom eq_342 : is_finite(sfp_1_126_855638)
+
+axiom eq_3421 : (value(sfp_1_126_855638) = ((-4622123.0) / 8388608.0))
+
+logic ust_311 : single
+
+axiom eq_343 : (value(ust_311) = ((-4622123.0) / 8388608.0))
+
+axiom eq_3431 : (sign1(ust_311) = Neg)
+
+axiom eq_3432 : is_finite(ust_311)
+
+logic s_mul__t_3__t_33__t_311 : single
+
+axiom eq_344 : mul_post(NearestTiesToEven, x5, ust_311,
+  s_mul__t_3__t_33__t_311)
+
+logic ust_312 : single
+
+axiom eq_345 : mul_post(NearestTiesToEven, x5, ust_311, ust_312)
+
+logic s_add__t_3__t_308__t_312 : single
+
+axiom eq_346 : add_post(NearestTiesToEven, ust_308, ust_312,
+  s_add__t_3__t_308__t_312)
+
+logic ust_313 : single
+
+axiom eq_347 : add_post(NearestTiesToEven, ust_308, ust_312, ust_313)
+
+logic sfp_1_126_452985 : single
+
+axiom eq_348 : is_finite(sfp_1_126_452985)
+
+axiom eq_3481 : (value(sfp_1_126_452985) = ((-8841593.0) / 16777216.0))
+
+logic ust_316 : single
+
+axiom eq_349 : (value(ust_316) = ((-8841593.0) / 16777216.0))
+
+axiom eq_3491 : (sign1(ust_316) = Neg)
+
+axiom eq_3492 : is_finite(ust_316)
+
+logic s_mul__t_3__t_37__t_316 : single
+
+axiom eq_350 : mul_post(NearestTiesToEven, x6, ust_316,
+  s_mul__t_3__t_37__t_316)
+
+logic ust_317 : single
+
+axiom eq_351 : mul_post(NearestTiesToEven, x6, ust_316, ust_317)
+
+logic s_add__t_3__t_313__t_317 : single
+
+axiom eq_352 : add_post(NearestTiesToEven, ust_313, ust_317,
+  s_add__t_3__t_313__t_317)
+
+logic ust_318 : single
+
+axiom eq_353 : add_post(NearestTiesToEven, ust_313, ust_317, ust_318)
+
+axiom ax_15 : le(ust_284, ust_318)
+
+logic sfp_1_126_7952400 : single
+
+axiom eq_354 : is_finite(sfp_1_126_7952400)
+
+axiom eq_3541 : (value(sfp_1_126_7952400) = ((-1021313.0) / 1048576.0))
+
+logic ust_322 : single
+
+axiom eq_355 : (value(ust_322) = ((-1021313.0) / 1048576.0))
+
+axiom eq_3551 : (sign1(ust_322) = Neg)
+
+axiom eq_3552 : is_finite(ust_322)
+
+logic sfp_1_125_6912213 : single
+
+axiom eq_356 : is_finite(sfp_1_125_6912213)
+
+axiom eq_3561 : (value(sfp_1_125_6912213) = ((-15300821.0) / 33554432.0))
+
+logic ust_325 : single
+
+axiom eq_357 : (value(ust_325) = ((-15300821.0) / 33554432.0))
+
+axiom eq_3571 : (sign1(ust_325) = Neg)
+
+axiom eq_3572 : is_finite(ust_325)
+
+logic s_mul__t_3__t_13__t_325 : single
+
+axiom eq_358 : mul_post(NearestTiesToEven, x0, ust_325,
+  s_mul__t_3__t_13__t_325)
+
+logic ust_326 : single
+
+axiom eq_359 : mul_post(NearestTiesToEven, x0, ust_325, ust_326)
+
+logic s_add__t_3__t_42__t_326 : single
+
+axiom eq_360 : add_post(NearestTiesToEven, ust_42, ust_326,
+  s_add__t_3__t_42__t_326)
+
+logic ust_327 : single
+
+axiom eq_361 : add_post(NearestTiesToEven, ust_42, ust_326, ust_327)
+
+logic sfp_0_125_5905580 : single
+
+axiom eq_362 : is_finite(sfp_0_125_5905580)
+
+axiom eq_3621 : (value(sfp_0_125_5905580) = (3573547.0 / 8388608.0))
+
+logic ust_329 : single
+
+axiom eq_363 : (value(ust_329) = (3573547.0 / 8388608.0))
+
+axiom eq_3631 : (sign1(ust_329) = Pos)
+
+axiom eq_3632 : is_finite(ust_329)
+
+logic s_mul__t_3__t_17__t_329 : single
+
+axiom eq_364 : mul_post(NearestTiesToEven, x1, ust_329,
+  s_mul__t_3__t_17__t_329)
+
+logic ust_330 : single
+
+axiom eq_365 : mul_post(NearestTiesToEven, x1, ust_329, ust_330)
+
+logic s_add__t_3__t_327__t_330 : single
+
+axiom eq_366 : add_post(NearestTiesToEven, ust_327, ust_330,
+  s_add__t_3__t_327__t_330)
+
+logic ust_331 : single
+
+axiom eq_367 : add_post(NearestTiesToEven, ust_327, ust_330, ust_331)
+
+logic sfp_0_126_2281700 : single
+
+axiom eq_368 : is_finite(sfp_0_126_2281700)
+
+axiom eq_3681 : (value(sfp_0_126_2281700) = (2667577.0 / 4194304.0))
+
+logic ust_333 : single
+
+axiom eq_369 : (value(ust_333) = (2667577.0 / 4194304.0))
+
+axiom eq_3691 : (sign1(ust_333) = Pos)
+
+axiom eq_3692 : is_finite(ust_333)
+
+logic s_mul__t_3__t_21__t_333 : single
+
+axiom eq_370 : mul_post(NearestTiesToEven, x2, ust_333,
+  s_mul__t_3__t_21__t_333)
+
+logic ust_334 : single
+
+axiom eq_371 : mul_post(NearestTiesToEven, x2, ust_333, ust_334)
+
+logic s_add__t_3__t_331__t_334 : single
+
+axiom eq_372 : add_post(NearestTiesToEven, ust_331, ust_334,
+  s_add__t_3__t_331__t_334)
+
+logic ust_335 : single
+
+axiom eq_373 : add_post(NearestTiesToEven, ust_331, ust_334, ust_335)
+
+logic sfp_0_126_6140460 : single
+
+axiom eq_374 : is_finite(sfp_0_126_6140460)
+
+axiom eq_3741 : (value(sfp_0_126_6140460) = (3632267.0 / 4194304.0))
+
+logic ust_337 : single
+
+axiom eq_375 : (value(ust_337) = (3632267.0 / 4194304.0))
+
+axiom eq_3751 : (sign1(ust_337) = Pos)
+
+axiom eq_3752 : is_finite(ust_337)
+
+logic s_mul__t_3__t_25__t_337 : single
+
+axiom eq_376 : mul_post(NearestTiesToEven, x3, ust_337,
+  s_mul__t_3__t_25__t_337)
+
+logic ust_338 : single
+
+axiom eq_377 : mul_post(NearestTiesToEven, x3, ust_337, ust_338)
+
+logic s_add__t_3__t_335__t_338 : single
+
+axiom eq_378 : add_post(NearestTiesToEven, ust_335, ust_338,
+  s_add__t_3__t_335__t_338)
+
+logic ust_339 : single
+
+axiom eq_379 : add_post(NearestTiesToEven, ust_335, ust_338, ust_339)
+
+logic sfp_0_126_1409286 : single
+
+axiom eq_380 : is_finite(sfp_0_126_1409286)
+
+axiom eq_3801 : (value(sfp_0_126_1409286) = (4898947.0 / 8388608.0))
+
+logic ust_341 : single
+
+axiom eq_3811 : (value(ust_341) = (4898947.0 / 8388608.0))
+
+axiom eq_3812 : (sign1(ust_341) = Pos)
+
+axiom eq_3813 : is_finite(ust_341)
+
+logic s_mul__t_3__t_29__t_341 : single
+
+axiom eq_382 : mul_post(NearestTiesToEven, x4, ust_341,
+  s_mul__t_3__t_29__t_341)
+
+logic ust_342 : single
+
+axiom eq_383 : mul_post(NearestTiesToEven, x4, ust_341, ust_342)
+
+logic s_add__t_3__t_339__t_342 : single
+
+axiom eq_384 : add_post(NearestTiesToEven, ust_339, ust_342,
+  s_add__t_3__t_339__t_342)
+
+logic ust_343 : single
+
+axiom eq_385 : add_post(NearestTiesToEven, ust_339, ust_342, ust_343)
+
+logic sfp_1_126_4177526 : single
+
+axiom eq_386 : is_finite(sfp_1_126_4177526)
+
+axiom eq_3861 : (value(sfp_1_126_4177526) = ((-6283067.0) / 8388608.0))
+
+logic ust_346 : single
+
+axiom eq_387 : (value(ust_346) = ((-6283067.0) / 8388608.0))
+
+axiom eq_3871 : (sign1(ust_346) = Neg)
+
+axiom eq_3872 : is_finite(ust_346)
+
+logic s_mul__t_3__t_33__t_346 : single
+
+axiom eq_388 : mul_post(NearestTiesToEven, x5, ust_346,
+  s_mul__t_3__t_33__t_346)
+
+logic ust_347 : single
+
+axiom eq_389 : mul_post(NearestTiesToEven, x5, ust_346, ust_347)
+
+logic s_add__t_3__t_343__t_347 : single
+
+axiom eq_390 : add_post(NearestTiesToEven, ust_343, ust_347,
+  s_add__t_3__t_343__t_347)
+
+logic ust_348 : single
+
+axiom eq_3911 : add_post(NearestTiesToEven, ust_343, ust_347, ust_348)
+
+logic sfp_0_123_1543504 : single
+
+axiom eq_3921 : is_finite(sfp_0_123_1543504)
+
+axiom eq_3922 : (value(sfp_0_123_1543504) = (620757.0 / 8388608.0))
+
+logic ust_350 : single
+
+axiom eq_393 : (value(ust_350) = (620757.0 / 8388608.0))
+
+axiom eq_3931 : (sign1(ust_350) = Pos)
+
+axiom eq_3932 : is_finite(ust_350)
+
+logic s_mul__t_3__t_37__t_350 : single
+
+axiom eq_394 : mul_post(NearestTiesToEven, x6, ust_350,
+  s_mul__t_3__t_37__t_350)
+
+logic ust_351 : single
+
+axiom eq_395 : mul_post(NearestTiesToEven, x6, ust_350, ust_351)
+
+logic s_add__t_3__t_348__t_351 : single
+
+axiom eq_396 : add_post(NearestTiesToEven, ust_348, ust_351,
+  s_add__t_3__t_348__t_351)
+
+logic ust_352 : single
+
+axiom eq_397 : add_post(NearestTiesToEven, ust_348, ust_351, ust_352)
+
+axiom ax_16 : le(ust_322, ust_352)
+
+logic sfp_0_125_6207570 : single
+
+axiom eq_398 : is_finite(sfp_0_125_6207570)
+
+axiom eq_3981 : (value(sfp_0_125_6207570) = (7298089.0 / 16777216.0))
+
+logic ust_355 : single
+
+axiom eq_399 : (value(ust_355) = (7298089.0 / 16777216.0))
+
+axiom eq_3991 : (sign1(ust_355) = Pos)
+
+axiom eq_3992 : is_finite(ust_355)
+
+logic sfp_0_125_2785017 : single
+
+axiom eq_400 : is_finite(sfp_0_125_2785017)
+
+axiom eq_4001 : (value(sfp_0_125_2785017) = (11173625.0 / 33554432.0))
+
+logic ust_357 : single
+
+axiom eq_401 : (value(ust_357) = (11173625.0 / 33554432.0))
+
+axiom eq_4011 : (sign1(ust_357) = Pos)
+
+axiom eq_4012 : is_finite(ust_357)
+
+logic s_mul__t_3__t_13__t_357 : single
+
+axiom eq_402 : mul_post(NearestTiesToEven, x0, ust_357,
+  s_mul__t_3__t_13__t_357)
+
+logic ust_358 : single
+
+axiom eq_403 : mul_post(NearestTiesToEven, x0, ust_357, ust_358)
+
+logic s_add__t_3__t_42__t_358 : single
+
+axiom eq_404 : add_post(NearestTiesToEven, ust_42, ust_358,
+  s_add__t_3__t_42__t_358)
+
+logic ust_359 : single
+
+axiom eq_405 : add_post(NearestTiesToEven, ust_42, ust_358, ust_359)
+
+logic sfp_1_125_7415529 : single
+
+axiom eq_406 : is_finite(sfp_1_125_7415529)
+
+axiom eq_4061 : (value(sfp_1_125_7415529) = ((-15804137.0) / 33554432.0))
+
+logic ust_362 : single
+
+axiom eq_407 : (value(ust_362) = ((-15804137.0) / 33554432.0))
+
+axiom eq_4071 : (sign1(ust_362) = Neg)
+
+axiom eq_4072 : is_finite(ust_362)
+
+logic s_mul__t_3__t_17__t_362 : single
+
+axiom eq_408 : mul_post(NearestTiesToEven, x1, ust_362,
+  s_mul__t_3__t_17__t_362)
+
+logic ust_363 : single
+
+axiom eq_409 : mul_post(NearestTiesToEven, x1, ust_362, ust_363)
+
+logic s_add__t_3__t_359__t_363 : single
+
+axiom eq_410 : add_post(NearestTiesToEven, ust_359, ust_363,
+  s_add__t_3__t_359__t_363)
+
+logic ust_364 : single
+
+axiom eq_4111 : add_post(NearestTiesToEven, ust_359, ust_363, ust_364)
+
+logic sfp_0_123_1811939 : single
+
+axiom eq_412 : is_finite(sfp_0_123_1811939)
+
+axiom eq_4121 : (value(sfp_0_123_1811939) = (10200547.0 / 134217728.0))
+
+logic ust_366 : single
+
+axiom eq_413 : (value(ust_366) = (10200547.0 / 134217728.0))
+
+axiom eq_4131 : (sign1(ust_366) = Pos)
+
+axiom eq_4132 : is_finite(ust_366)
+
+logic s_mul__t_3__t_21__t_366 : single
+
+axiom eq_414 : mul_post(NearestTiesToEven, x2, ust_366,
+  s_mul__t_3__t_21__t_366)
+
+logic ust_367 : single
+
+axiom eq_415 : mul_post(NearestTiesToEven, x2, ust_366, ust_367)
+
+logic s_add__t_3__t_364__t_367 : single
+
+axiom eq_416 : add_post(NearestTiesToEven, ust_364, ust_367,
+  s_add__t_3__t_364__t_367)
+
+logic ust_368 : single
+
+axiom eq_417 : add_post(NearestTiesToEven, ust_364, ust_367, ust_368)
+
+logic sfp_1_125_4429184 : single
+
+axiom eq_418 : is_finite(sfp_1_125_4429184)
+
+axiom eq_4181 : (value(sfp_1_125_4429184) = ((-100139.0) / 262144.0))
+
+logic ust_371 : single
+
+axiom eq_419 : (value(ust_371) = ((-100139.0) / 262144.0))
+
+axiom eq_4191 : (sign1(ust_371) = Neg)
+
+axiom eq_4192 : is_finite(ust_371)
+
+logic s_mul__t_3__t_25__t_371 : single
+
+axiom eq_420 : mul_post(NearestTiesToEven, x3, ust_371,
+  s_mul__t_3__t_25__t_371)
+
+logic ust_372 : single
+
+axiom eq_421 : mul_post(NearestTiesToEven, x3, ust_371, ust_372)
+
+logic s_add__t_3__t_368__t_372 : single
+
+axiom eq_422 : add_post(NearestTiesToEven, ust_368, ust_372,
+  s_add__t_3__t_368__t_372)
+
+logic ust_373 : single
+
+axiom eq_423 : add_post(NearestTiesToEven, ust_368, ust_372, ust_373)
+
+logic sfp_0_125_8086617 : single
+
+axiom eq_424 : is_finite(sfp_0_125_8086617)
+
+axiom eq_4241 : (value(sfp_0_125_8086617) = (16475225.0 / 33554432.0))
+
+logic ust_375 : single
+
+axiom eq_425 : (value(ust_375) = (16475225.0 / 33554432.0))
+
+axiom eq_4251 : (sign1(ust_375) = Pos)
+
+axiom eq_4252 : is_finite(ust_375)
+
+logic s_mul__t_3__t_29__t_375 : single
+
+axiom eq_426 : mul_post(NearestTiesToEven, x4, ust_375,
+  s_mul__t_3__t_29__t_375)
+
+logic ust_376 : single
+
+axiom eq_427 : mul_post(NearestTiesToEven, x4, ust_375, ust_376)
+
+logic s_add__t_3__t_373__t_376 : single
+
+axiom eq_428 : add_post(NearestTiesToEven, ust_373, ust_376,
+  s_add__t_3__t_373__t_376)
+
+logic ust_377 : single
+
+axiom eq_429 : add_post(NearestTiesToEven, ust_373, ust_376, ust_377)
+
+logic sfp_0_126_7902068 : single
+
+axiom eq_430 : is_finite(sfp_0_126_7902068)
+
+axiom eq_4301 : (value(sfp_0_126_7902068) = (4072669.0 / 4194304.0))
+
+logic ust_379 : single
+
+axiom eq_431 : (value(ust_379) = (4072669.0 / 4194304.0))
+
+axiom eq_4311 : (sign1(ust_379) = Pos)
+
+axiom eq_4312 : is_finite(ust_379)
+
+logic s_mul__t_3__t_33__t_379 : single
+
+axiom eq_432 : mul_post(NearestTiesToEven, x5, ust_379,
+  s_mul__t_3__t_33__t_379)
+
+logic ust_380 : single
+
+axiom eq_433 : mul_post(NearestTiesToEven, x5, ust_379, ust_380)
+
+logic s_add__t_3__t_377__t_380 : single
+
+axiom eq_434 : add_post(NearestTiesToEven, ust_377, ust_380,
+  s_add__t_3__t_377__t_380)
+
+logic ust_381 : single
+
+axiom eq_435 : add_post(NearestTiesToEven, ust_377, ust_380, ust_381)
+
+logic sfp_1_125_4362076 : single
+
+axiom eq_436 : is_finite(sfp_1_125_4362076)
+
+axiom eq_4361 : (value(sfp_1_125_4362076) = ((-3187671.0) / 8388608.0))
+
+logic ust_384 : single
+
+axiom eq_437 : (value(ust_384) = ((-3187671.0) / 8388608.0))
+
+axiom eq_4371 : (sign1(ust_384) = Neg)
+
+axiom eq_4372 : is_finite(ust_384)
+
+logic s_mul__t_3__t_37__t_384 : single
+
+axiom eq_438 : mul_post(NearestTiesToEven, x6, ust_384,
+  s_mul__t_3__t_37__t_384)
+
+logic ust_385 : single
+
+axiom eq_439 : mul_post(NearestTiesToEven, x6, ust_384, ust_385)
+
+logic s_add__t_3__t_381__t_385 : single
+
+axiom eq_440 : add_post(NearestTiesToEven, ust_381, ust_385,
+  s_add__t_3__t_381__t_385)
+
+logic ust_386 : single
+
+axiom eq_4411 : add_post(NearestTiesToEven, ust_381, ust_385, ust_386)
+
+axiom ax_17 : le(ust_386, ust_355)
+
+logic sfp_0_125_5368709 : single
+
+axiom eq_442 : is_finite(sfp_0_125_5368709)
+
+axiom eq_4421 : (value(sfp_0_125_5368709) = (13757317.0 / 33554432.0))
+
+logic ust_389 : single
+
+axiom eq_443 : (value(ust_389) = (13757317.0 / 33554432.0))
+
+axiom eq_4431 : (sign1(ust_389) = Pos)
+
+axiom eq_4432 : is_finite(ust_389)
+
+logic s_mul__t_3__t_13__t_210 : single
+
+axiom eq_444 : mul_post(NearestTiesToEven, x0, ust_210,
+  s_mul__t_3__t_13__t_210)
+
+logic ust_390 : single
+
+axiom eq_445 : mul_post(NearestTiesToEven, x0, ust_210, ust_390)
+
+logic s_add__t_3__t_42__t_390 : single
+
+axiom eq_446 : add_post(NearestTiesToEven, ust_42, ust_390,
+  s_add__t_3__t_42__t_390)
+
+logic ust_391 : single
+
+axiom eq_447 : add_post(NearestTiesToEven, ust_42, ust_390, ust_391)
+
+logic sfp_0_126_1157628 : single
+
+axiom eq_448 : is_finite(sfp_0_126_1157628)
+
+axiom eq_4481 : (value(sfp_0_126_1157628) = (2386559.0 / 4194304.0))
+
+logic ust_393 : single
+
+axiom eq_449 : (value(ust_393) = (2386559.0 / 4194304.0))
+
+axiom eq_4491 : (sign1(ust_393) = Pos)
+
+axiom eq_4492 : is_finite(ust_393)
+
+logic s_mul__t_3__t_17__t_393 : single
+
+axiom eq_450 : mul_post(NearestTiesToEven, x1, ust_393,
+  s_mul__t_3__t_17__t_393)
+
+logic ust_394 : single
+
+axiom eq_4511 : mul_post(NearestTiesToEven, x1, ust_393, ust_394)
+
+logic s_add__t_3__t_391__t_394 : single
+
+axiom eq_4521 : add_post(NearestTiesToEven, ust_391, ust_394,
+  s_add__t_3__t_391__t_394)
+
+logic ust_395 : single
+
+axiom eq_453 : add_post(NearestTiesToEven, ust_391, ust_394, ust_395)
+
+logic sfp_1_125_0 : single
+
+axiom eq_454 : is_finite(sfp_1_125_0)
+
+axiom eq_4541 : (value(sfp_1_125_0) = ((-1.0) / 4.0))
+
+logic ust_398 : single
+
+axiom eq_455 : (value(ust_398) = ((-1.0) / 4.0))
+
+axiom eq_4551 : (sign1(ust_398) = Neg)
+
+axiom eq_4552 : is_finite(ust_398)
+
+logic s_mul__t_3__t_21__t_398 : single
+
+axiom eq_456 : mul_post(NearestTiesToEven, x2, ust_398,
+  s_mul__t_3__t_21__t_398)
+
+logic ust_399 : single
+
+axiom eq_457 : mul_post(NearestTiesToEven, x2, ust_398, ust_399)
+
+logic s_add__t_3__t_395__t_399 : single
+
+axiom eq_458 : add_post(NearestTiesToEven, ust_395, ust_399,
+  s_add__t_3__t_395__t_399)
+
+logic ust_400 : single
+
+axiom eq_459 : add_post(NearestTiesToEven, ust_395, ust_399, ust_400)
+
+logic sfp_1_126_4278190 : single
+
+axiom eq_460 : is_finite(sfp_1_126_4278190)
+
+axiom eq_4601 : (value(sfp_1_126_4278190) = ((-6333399.0) / 8388608.0))
+
+logic ust_403 : single
+
+axiom eq_461 : (value(ust_403) = ((-6333399.0) / 8388608.0))
+
+axiom eq_4611 : (sign1(ust_403) = Neg)
+
+axiom eq_4612 : is_finite(ust_403)
+
+logic s_mul__t_3__t_25__t_403 : single
+
+axiom eq_462 : mul_post(NearestTiesToEven, x3, ust_403,
+  s_mul__t_3__t_25__t_403)
+
+logic ust_404 : single
+
+axiom eq_463 : mul_post(NearestTiesToEven, x3, ust_403, ust_404)
+
+logic s_add__t_3__t_400__t_404 : single
+
+axiom eq_464 : add_post(NearestTiesToEven, ust_400, ust_404,
+  s_add__t_3__t_400__t_404)
+
+logic ust_405 : single
+
+axiom eq_465 : add_post(NearestTiesToEven, ust_400, ust_404, ust_405)
+
+logic sfp_1_125_6375341 : single
+
+axiom eq_466 : is_finite(sfp_1_125_6375341)
+
+axiom eq_4661 : (value(sfp_1_125_6375341) = ((-14763949.0) / 33554432.0))
+
+logic ust_408 : single
+
+axiom eq_467 : (value(ust_408) = ((-14763949.0) / 33554432.0))
+
+axiom eq_4671 : (sign1(ust_408) = Neg)
+
+axiom eq_4672 : is_finite(ust_408)
+
+logic s_mul__t_3__t_29__t_408 : single
+
+axiom eq_468 : mul_post(NearestTiesToEven, x4, ust_408,
+  s_mul__t_3__t_29__t_408)
+
+logic ust_409 : single
+
+axiom eq_469 : mul_post(NearestTiesToEven, x4, ust_408, ust_409)
+
+logic s_add__t_3__t_405__t_409 : single
+
+axiom eq_470 : add_post(NearestTiesToEven, ust_405, ust_409,
+  s_add__t_3__t_405__t_409)
+
+logic ust_410 : single
+
+axiom eq_471 : add_post(NearestTiesToEven, ust_405, ust_409, ust_410)
+
+logic sfp_1_126_469761 : single
+
+axiom eq_472 : is_finite(sfp_1_126_469761)
+
+axiom eq_4721 : (value(sfp_1_126_469761) = ((-8858369.0) / 16777216.0))
+
+logic ust_413 : single
+
+axiom eq_473 : (value(ust_413) = ((-8858369.0) / 16777216.0))
+
+axiom eq_4731 : (sign1(ust_413) = Neg)
+
+axiom eq_4732 : is_finite(ust_413)
+
+logic s_mul__t_3__t_33__t_413 : single
+
+axiom eq_474 : mul_post(NearestTiesToEven, x5, ust_413,
+  s_mul__t_3__t_33__t_413)
+
+logic ust_414 : single
+
+axiom eq_475 : mul_post(NearestTiesToEven, x5, ust_413, ust_414)
+
+logic s_add__t_3__t_410__t_414 : single
+
+axiom eq_476 : add_post(NearestTiesToEven, ust_410, ust_414,
+  s_add__t_3__t_410__t_414)
+
+logic ust_415 : single
+
+axiom eq_477 : add_post(NearestTiesToEven, ust_410, ust_414, ust_415)
+
+logic sfp_0_125_5637145 : single
+
+axiom eq_478 : is_finite(sfp_0_125_5637145)
+
+axiom eq_4781 : (value(sfp_0_125_5637145) = (14025753.0 / 33554432.0))
+
+logic ust_417 : single
+
+axiom eq_479 : (value(ust_417) = (14025753.0 / 33554432.0))
+
+axiom eq_4791 : (sign1(ust_417) = Pos)
+
+axiom eq_4792 : is_finite(ust_417)
+
+logic s_mul__t_3__t_37__t_417 : single
+
+axiom eq_480 : mul_post(NearestTiesToEven, x6, ust_417,
+  s_mul__t_3__t_37__t_417)
+
+logic ust_418 : single
+
+axiom eq_481 : mul_post(NearestTiesToEven, x6, ust_417, ust_418)
+
+logic s_add__t_3__t_415__t_418 : single
+
+axiom eq_482 : add_post(NearestTiesToEven, ust_415, ust_418,
+  s_add__t_3__t_415__t_418)
+
+logic ust_419 : single
+
+axiom eq_483 : add_post(NearestTiesToEven, ust_415, ust_418, ust_419)
+
+axiom ax_18 : le(ust_389, ust_419)
+
+logic sfp_0_126_5570036 : single
+
+axiom eq_484 : is_finite(sfp_0_126_5570036)
+
+axiom eq_4841 : (value(sfp_0_126_5570036) = (3489661.0 / 4194304.0))
+
+logic ust_421 : single
+
+axiom eq_485 : (value(ust_421) = (3489661.0 / 4194304.0))
+
+axiom eq_4851 : (sign1(ust_421) = Pos)
+
+axiom eq_4852 : is_finite(ust_421)
+
+logic sfp_1_125_6710886 : single
+
+axiom eq_486 : is_finite(sfp_1_125_6710886)
+
+axiom eq_4861 : (value(sfp_1_125_6710886) = ((-7549747.0) / 16777216.0))
+
+logic ust_424 : single
+
+axiom eq_487 : (value(ust_424) = ((-7549747.0) / 16777216.0))
+
+axiom eq_4871 : (sign1(ust_424) = Neg)
+
+axiom eq_4872 : is_finite(ust_424)
+
+logic sfp_0_126_6543113 : single
+
+axiom eq_488 : is_finite(sfp_0_126_6543113)
+
+axiom eq_4881 : (value(sfp_0_126_6543113) = (14931721.0 / 16777216.0))
+
+logic ust_426 : single
+
+axiom eq_489 : (value(ust_426) = (14931721.0 / 16777216.0))
+
+axiom eq_4891 : (sign1(ust_426) = Pos)
+
+axiom eq_4892 : is_finite(ust_426)
+
+logic s_mul__t_3__t_13__t_426 : single
+
+axiom eq_490 : mul_post(NearestTiesToEven, x0, ust_426,
+  s_mul__t_3__t_13__t_426)
+
+logic ust_427 : single
+
+axiom eq_491 : mul_post(NearestTiesToEven, x0, ust_426, ust_427)
+
+logic s_add__t_3__t_42__t_427 : single
+
+axiom eq_492 : add_post(NearestTiesToEven, ust_42, ust_427,
+  s_add__t_3__t_42__t_427)
+
+logic ust_428 : single
+
+axiom eq_493 : add_post(NearestTiesToEven, ust_42, ust_427, ust_428)
+
+logic sfp_1_120_4496293 : single
+
+axiom eq_494 : is_finite(sfp_1_120_4496293)
+
+axiom eq_4941 : (value(sfp_1_120_4496293) = ((-12884901.0) / 1073741824.0))
+
+logic ust_431 : single
+
+axiom eq_495 : (value(ust_431) = ((-12884901.0) / 1073741824.0))
+
+axiom eq_4951 : (sign1(ust_431) = Neg)
+
+axiom eq_4952 : is_finite(ust_431)
+
+logic s_mul__t_3__t_17__t_431 : single
+
+axiom eq_496 : mul_post(NearestTiesToEven, x1, ust_431,
+  s_mul__t_3__t_17__t_431)
+
+logic ust_432 : single
+
+axiom eq_497 : mul_post(NearestTiesToEven, x1, ust_431, ust_432)
+
+logic s_add__t_3__t_428__t_432 : single
+
+axiom eq_498 : add_post(NearestTiesToEven, ust_428, ust_432,
+  s_add__t_3__t_428__t_432)
+
+logic ust_433 : single
+
+axiom eq_499 : add_post(NearestTiesToEven, ust_428, ust_432, ust_433)
+
+logic s_add__t_3__t_298__t_433 : single
+
+axiom eq_500 : add_post(NearestTiesToEven, ust_298, ust_433,
+  s_add__t_3__t_298__t_433)
+
+logic ust_434 : single
+
+axiom eq_5011 : add_post(NearestTiesToEven, ust_298, ust_433, ust_434)
+
+logic sfp_0_125_8053064 : single
+
+axiom eq_502 : is_finite(sfp_0_125_8053064)
+
+axiom eq_5021 : (value(sfp_0_125_8053064) = (2055209.0 / 4194304.0))
+
+logic ust_436 : single
+
+axiom eq_503 : (value(ust_436) = (2055209.0 / 4194304.0))
+
+axiom eq_5031 : (sign1(ust_436) = Pos)
+
+axiom eq_5032 : is_finite(ust_436)
+
+logic s_mul__t_3__t_25__t_436 : single
+
+axiom eq_504 : mul_post(NearestTiesToEven, x3, ust_436,
+  s_mul__t_3__t_25__t_436)
+
+logic ust_437 : single
+
+axiom eq_505 : mul_post(NearestTiesToEven, x3, ust_436, ust_437)
+
+logic s_add__t_3__t_434__t_437 : single
+
+axiom eq_506 : add_post(NearestTiesToEven, ust_434, ust_437,
+  s_add__t_3__t_434__t_437)
+
+logic ust_438 : single
+
+axiom eq_507 : add_post(NearestTiesToEven, ust_434, ust_437, ust_438)
+
+logic s_mul__t_3__t_29__t_393 : single
+
+axiom eq_508 : mul_post(NearestTiesToEven, x4, ust_393,
+  s_mul__t_3__t_29__t_393)
+
+logic ust_439 : single
+
+axiom eq_509 : mul_post(NearestTiesToEven, x4, ust_393, ust_439)
+
+logic s_add__t_3__t_438__t_439 : single
+
+axiom eq_510 : add_post(NearestTiesToEven, ust_438, ust_439,
+  s_add__t_3__t_438__t_439)
+
+logic ust_440 : single
+
+axiom eq_5111 : add_post(NearestTiesToEven, ust_438, ust_439, ust_440)
+
+logic s_mul__t_3__t_33__t_421 : single
+
+axiom eq_5121 : mul_post(NearestTiesToEven, x5, ust_421,
+  s_mul__t_3__t_33__t_421)
+
+logic ust_441 : single
+
+axiom eq_5131 : mul_post(NearestTiesToEven, x5, ust_421, ust_441)
+
+logic s_add__t_3__t_440__t_441 : single
+
+axiom eq_514 : add_post(NearestTiesToEven, ust_440, ust_441,
+  s_add__t_3__t_440__t_441)
+
+logic ust_442 : single
+
+axiom eq_515 : add_post(NearestTiesToEven, ust_440, ust_441, ust_442)
+
+logic sfp_0_122_4227858 : single
+
+axiom eq_516 : is_finite(sfp_0_122_4227858)
+
+axiom eq_5161 : (value(sfp_0_122_4227858) = (6308233.0 / 134217728.0))
+
+logic ust_444 : single
+
+axiom eq_517 : (value(ust_444) = (6308233.0 / 134217728.0))
+
+axiom eq_5171 : (sign1(ust_444) = Pos)
+
+axiom eq_5172 : is_finite(ust_444)
+
+logic s_mul__t_3__t_37__t_444 : single
+
+axiom eq_518 : mul_post(NearestTiesToEven, x6, ust_444,
+  s_mul__t_3__t_37__t_444)
+
+logic ust_445 : single
+
+axiom eq_519 : mul_post(NearestTiesToEven, x6, ust_444, ust_445)
+
+logic s_add__t_3__t_442__t_445 : single
+
+axiom eq_520 : add_post(NearestTiesToEven, ust_442, ust_445,
+  s_add__t_3__t_442__t_445)
+
+logic ust_446 : single
+
+axiom eq_5211 : add_post(NearestTiesToEven, ust_442, ust_445, ust_446)
+
+axiom ax_19 : le(ust_446, ust_424)
+
+logic sfp_0_125_5066719 : single
+
+axiom eq_5221 : is_finite(sfp_0_125_5066719)
+
+axiom eq_5222 : (value(sfp_0_125_5066719) = (13455327.0 / 33554432.0))
+
+logic ust_449 : single
+
+axiom eq_523 : (value(ust_449) = (13455327.0 / 33554432.0))
+
+axiom eq_5231 : (sign1(ust_449) = Pos)
+
+axiom eq_5232 : is_finite(ust_449)
+
+logic sfp_1_126_7918846 : single
+
+axiom eq_524 : is_finite(sfp_1_126_7918846)
+
+axiom eq_5241 : (value(sfp_1_126_7918846) = ((-8153727.0) / 8388608.0))
+
+logic ust_452 : single
+
+axiom eq_525 : (value(ust_452) = ((-8153727.0) / 8388608.0))
+
+axiom eq_5251 : (sign1(ust_452) = Neg)
+
+axiom eq_5252 : is_finite(ust_452)
+
+logic s_mul__t_3__t_13__t_452 : single
+
+axiom eq_526 : mul_post(NearestTiesToEven, x0, ust_452,
+  s_mul__t_3__t_13__t_452)
+
+logic ust_453 : single
+
+axiom eq_527 : mul_post(NearestTiesToEven, x0, ust_452, ust_453)
+
+logic s_add__t_3__t_42__t_453 : single
+
+axiom eq_528 : add_post(NearestTiesToEven, ust_42, ust_453,
+  s_add__t_3__t_42__t_453)
+
+logic ust_454 : single
+
+axiom eq_529 : add_post(NearestTiesToEven, ust_42, ust_453, ust_454)
+
+logic sfp_0_124_6979321 : single
+
+axiom eq_530 : is_finite(sfp_0_124_6979321)
+
+axiom eq_5301 : (value(sfp_0_124_6979321) = (15367929.0 / 67108864.0))
+
+logic ust_456 : single
+
+axiom eq_5311 : (value(ust_456) = (15367929.0 / 67108864.0))
+
+axiom eq_5312 : (sign1(ust_456) = Pos)
+
+axiom eq_5313 : is_finite(ust_456)
+
+logic s_mul__t_3__t_17__t_456 : single
+
+axiom eq_5321 : mul_post(NearestTiesToEven, x1, ust_456,
+  s_mul__t_3__t_17__t_456)
+
+logic ust_457 : single
+
+axiom eq_533 : mul_post(NearestTiesToEven, x1, ust_456, ust_457)
+
+logic s_add__t_3__t_454__t_457 : single
+
+axiom eq_534 : add_post(NearestTiesToEven, ust_454, ust_457,
+  s_add__t_3__t_454__t_457)
+
+logic ust_458 : single
+
+axiom eq_535 : add_post(NearestTiesToEven, ust_454, ust_457, ust_458)
+
+logic sfp_1_126_1744830 : single
+
+axiom eq_536 : is_finite(sfp_1_126_1744830)
+
+axiom eq_5361 : (value(sfp_1_126_1744830) = ((-5066719.0) / 8388608.0))
+
+logic ust_461 : single
+
+axiom eq_537 : (value(ust_461) = ((-5066719.0) / 8388608.0))
+
+axiom eq_5371 : (sign1(ust_461) = Neg)
+
+axiom eq_5372 : is_finite(ust_461)
+
+logic s_mul__t_3__t_21__t_461 : single
+
+axiom eq_538 : mul_post(NearestTiesToEven, x2, ust_461,
+  s_mul__t_3__t_21__t_461)
+
+logic ust_462 : single
+
+axiom eq_539 : mul_post(NearestTiesToEven, x2, ust_461, ust_462)
+
+logic s_add__t_3__t_458__t_462 : single
+
+axiom eq_540 : add_post(NearestTiesToEven, ust_458, ust_462,
+  s_add__t_3__t_458__t_462)
+
+logic ust_463 : single
+
+axiom eq_541 : add_post(NearestTiesToEven, ust_458, ust_462, ust_463)
+
+logic sfp_0_126_486539 : single
+
+axiom eq_542 : is_finite(sfp_0_126_486539)
+
+axiom eq_5421 : (value(sfp_0_126_486539) = (8875147.0 / 16777216.0))
+
+logic ust_465 : single
+
+axiom eq_543 : (value(ust_465) = (8875147.0 / 16777216.0))
+
+axiom eq_5431 : (sign1(ust_465) = Pos)
+
+axiom eq_5432 : is_finite(ust_465)
+
+logic s_mul__t_3__t_25__t_465 : single
+
+axiom eq_544 : mul_post(NearestTiesToEven, x3, ust_465,
+  s_mul__t_3__t_25__t_465)
+
+logic ust_466 : single
+
+axiom eq_545 : mul_post(NearestTiesToEven, x3, ust_465, ust_466)
+
+logic s_add__t_3__t_463__t_466 : single
+
+axiom eq_546 : add_post(NearestTiesToEven, ust_463, ust_466,
+  s_add__t_3__t_463__t_466)
+
+logic ust_467 : single
+
+axiom eq_547 : add_post(NearestTiesToEven, ust_463, ust_466, ust_467)
+
+logic sfp_0_125_1107296 : single
+
+axiom eq_548 : is_finite(sfp_0_125_1107296)
+
+axiom eq_5481 : (value(sfp_0_125_1107296) = (296747.0 / 1048576.0))
+
+logic ust_469 : single
+
+axiom eq_549 : (value(ust_469) = (296747.0 / 1048576.0))
+
+axiom eq_5491 : (sign1(ust_469) = Pos)
+
+axiom eq_5492 : is_finite(ust_469)
+
+logic s_mul__t_3__t_29__t_469 : single
+
+axiom eq_550 : mul_post(NearestTiesToEven, x4, ust_469,
+  s_mul__t_3__t_29__t_469)
+
+logic ust_470 : single
+
+axiom eq_551 : mul_post(NearestTiesToEven, x4, ust_469, ust_470)
+
+logic s_add__t_3__t_467__t_470 : single
+
+axiom eq_552 : add_post(NearestTiesToEven, ust_467, ust_470,
+  s_add__t_3__t_467__t_470)
+
+logic ust_471 : single
+
+axiom eq_553 : add_post(NearestTiesToEven, ust_467, ust_470, ust_471)
+
+logic sfp_0_125_7482637 : single
+
+axiom eq_554 : is_finite(sfp_0_125_7482637)
+
+axiom eq_5541 : (value(sfp_0_125_7482637) = (15871245.0 / 33554432.0))
+
+logic ust_473 : single
+
+axiom eq_555 : (value(ust_473) = (15871245.0 / 33554432.0))
+
+axiom eq_5551 : (sign1(ust_473) = Pos)
+
+axiom eq_5552 : is_finite(ust_473)
+
+logic s_mul__t_3__t_33__t_473 : single
+
+axiom eq_556 : mul_post(NearestTiesToEven, x5, ust_473,
+  s_mul__t_3__t_33__t_473)
+
+logic ust_474 : single
+
+axiom eq_557 : mul_post(NearestTiesToEven, x5, ust_473, ust_474)
+
+logic s_add__t_3__t_471__t_474 : single
+
+axiom eq_558 : add_post(NearestTiesToEven, ust_471, ust_474,
+  s_add__t_3__t_471__t_474)
+
+logic ust_475 : single
+
+axiom eq_559 : add_post(NearestTiesToEven, ust_471, ust_474, ust_475)
+
+logic sfp_0_125_6945766 : single
+
+axiom eq_560 : is_finite(sfp_0_125_6945766)
+
+axiom eq_5601 : (value(sfp_0_125_6945766) = (7667187.0 / 16777216.0))
+
+logic ust_477 : single
+
+axiom eq_561 : (value(ust_477) = (7667187.0 / 16777216.0))
+
+axiom eq_5611 : (sign1(ust_477) = Pos)
+
+axiom eq_5612 : is_finite(ust_477)
+
+logic s_mul__t_3__t_37__t_477 : single
+
+axiom eq_562 : mul_post(NearestTiesToEven, x6, ust_477,
+  s_mul__t_3__t_37__t_477)
+
+logic ust_478 : single
+
+axiom eq_563 : mul_post(NearestTiesToEven, x6, ust_477, ust_478)
+
+logic s_add__t_3__t_475__t_478 : single
+
+axiom eq_564 : add_post(NearestTiesToEven, ust_475, ust_478,
+  s_add__t_3__t_475__t_478)
+
+logic ust_479 : single
+
+axiom eq_565 : add_post(NearestTiesToEven, ust_475, ust_478, ust_479)
+
+axiom ax_20 : le(ust_479, ust_449)
+
+logic sfp_0_126_452985 : single
+
+axiom eq_566 : is_finite(sfp_0_126_452985)
+
+axiom eq_5661 : (value(sfp_0_126_452985) = (8841593.0 / 16777216.0))
+
+logic ust_481 : single
+
+axiom eq_567 : (value(ust_481) = (8841593.0 / 16777216.0))
+
+axiom eq_5671 : (sign1(ust_481) = Pos)
+
+axiom eq_5672 : is_finite(ust_481)
+
+logic sfp_0_123_2885681 : single
+
+axiom eq_568 : is_finite(sfp_0_123_2885681)
+
+axiom eq_5681 : (value(sfp_0_123_2885681) = (11274289.0 / 134217728.0))
+
+logic ust_483 : single
+
+axiom eq_569 : (value(ust_483) = (11274289.0 / 134217728.0))
+
+axiom eq_5691 : (sign1(ust_483) = Pos)
+
+axiom eq_5692 : is_finite(ust_483)
+
+logic sfp_0_126_6559891 : single
+
+axiom eq_570 : is_finite(sfp_0_126_6559891)
+
+axiom eq_5701 : (value(sfp_0_126_6559891) = (14948499.0 / 16777216.0))
+
+logic ust_485 : single
+
+axiom eq_571 : (value(ust_485) = (14948499.0 / 16777216.0))
+
+axiom eq_5711 : (sign1(ust_485) = Pos)
+
+axiom eq_5712 : is_finite(ust_485)
+
+logic s_mul__t_3__t_13__t_485 : single
+
+axiom eq_572 : mul_post(NearestTiesToEven, x0, ust_485,
+  s_mul__t_3__t_13__t_485)
+
+logic ust_486 : single
+
+axiom eq_573 : mul_post(NearestTiesToEven, x0, ust_485, ust_486)
+
+logic s_add__t_3__t_42__t_486 : single
+
+axiom eq_574 : add_post(NearestTiesToEven, ust_42, ust_486,
+  s_add__t_3__t_42__t_486)
+
+logic ust_487 : single
+
+axiom eq_575 : add_post(NearestTiesToEven, ust_42, ust_486, ust_487)
+
+logic sfp_1_126_2315256 : single
+
+axiom eq_576 : is_finite(sfp_1_126_2315256)
+
+axiom eq_5761 : (value(sfp_1_126_2315256) = ((-1337983.0) / 2097152.0))
+
+logic ust_490 : single
+
+axiom eq_577 : (value(ust_490) = ((-1337983.0) / 2097152.0))
+
+axiom eq_5771 : (sign1(ust_490) = Neg)
+
+axiom eq_5772 : is_finite(ust_490)
+
+logic s_mul__t_3__t_17__t_490 : single
+
+axiom eq_578 : mul_post(NearestTiesToEven, x1, ust_490,
+  s_mul__t_3__t_17__t_490)
+
+logic ust_491 : single
+
+axiom eq_579 : mul_post(NearestTiesToEven, x1, ust_490, ust_491)
+
+logic s_add__t_3__t_487__t_491 : single
+
+axiom eq_580 : add_post(NearestTiesToEven, ust_487, ust_491,
+  s_add__t_3__t_487__t_491)
+
+logic ust_492 : single
+
+axiom eq_5811 : add_post(NearestTiesToEven, ust_487, ust_491, ust_492)
+
+logic s_mul__t_3__t_21__t_481 : single
+
+axiom eq_582 : mul_post(NearestTiesToEven, x2, ust_481,
+  s_mul__t_3__t_21__t_481)
+
+logic ust_493 : single
+
+axiom eq_583 : mul_post(NearestTiesToEven, x2, ust_481, ust_493)
+
+logic s_add__t_3__t_492__t_493 : single
+
+axiom eq_584 : add_post(NearestTiesToEven, ust_492, ust_493,
+  s_add__t_3__t_492__t_493)
+
+logic ust_494 : single
+
+axiom eq_585 : add_post(NearestTiesToEven, ust_492, ust_493, ust_494)
+
+logic sfp_0_126_4194304 : single
+
+axiom eq_586 : is_finite(sfp_0_126_4194304)
+
+axiom eq_5861 : (value(sfp_0_126_4194304) = (3.0 / 4.0))
+
+logic ust_496 : single
+
+axiom eq_587 : (value(ust_496) = (3.0 / 4.0))
+
+axiom eq_5871 : (sign1(ust_496) = Pos)
+
+axiom eq_5872 : is_finite(ust_496)
+
+logic s_mul__t_3__t_25__t_496 : single
+
+axiom eq_588 : mul_post(NearestTiesToEven, x3, ust_496,
+  s_mul__t_3__t_25__t_496)
+
+logic ust_497 : single
+
+axiom eq_589 : mul_post(NearestTiesToEven, x3, ust_496, ust_497)
+
+logic s_add__t_3__t_494__t_497 : single
+
+axiom eq_590 : add_post(NearestTiesToEven, ust_494, ust_497,
+  s_add__t_3__t_494__t_497)
+
+logic ust_498 : single
+
+axiom eq_5911 : add_post(NearestTiesToEven, ust_494, ust_497, ust_498)
+
+logic sfp_0_125_4160749 : single
+
+axiom eq_5921 : is_finite(sfp_0_125_4160749)
+
+axiom eq_5922 : (value(sfp_0_125_4160749) = (12549357.0 / 33554432.0))
+
+logic ust_500 : single
+
+axiom eq_593 : (value(ust_500) = (12549357.0 / 33554432.0))
+
+axiom eq_5931 : (sign1(ust_500) = Pos)
+
+axiom eq_5932 : is_finite(ust_500)
+
+logic s_mul__t_3__t_29__t_500 : single
+
+axiom eq_594 : mul_post(NearestTiesToEven, x4, ust_500,
+  s_mul__t_3__t_29__t_500)
+
+logic ust_501 : single
+
+axiom eq_595 : mul_post(NearestTiesToEven, x4, ust_500, ust_501)
+
+logic s_add__t_3__t_498__t_501 : single
+
+axiom eq_596 : add_post(NearestTiesToEven, ust_498, ust_501,
+  s_add__t_3__t_498__t_501)
+
+logic ust_502 : single
+
+axiom eq_597 : add_post(NearestTiesToEven, ust_498, ust_501, ust_502)
+
+logic sfp_1_126_6861881 : single
+
+axiom eq_598 : is_finite(sfp_1_126_6861881)
+
+axiom eq_5981 : (value(sfp_1_126_6861881) = ((-15250489.0) / 16777216.0))
+
+logic ust_505 : single
+
+axiom eq_599 : (value(ust_505) = ((-15250489.0) / 16777216.0))
+
+axiom eq_5991 : (sign1(ust_505) = Neg)
+
+axiom eq_5992 : is_finite(ust_505)
+
+logic s_mul__t_3__t_33__t_505 : single
+
+axiom eq_600 : mul_post(NearestTiesToEven, x5, ust_505,
+  s_mul__t_3__t_33__t_505)
+
+logic ust_506 : single
+
+axiom eq_601 : mul_post(NearestTiesToEven, x5, ust_505, ust_506)
+
+logic s_add__t_3__t_502__t_506 : single
+
+axiom eq_602 : add_post(NearestTiesToEven, ust_502, ust_506,
+  s_add__t_3__t_502__t_506)
+
+logic ust_507 : single
+
+axiom eq_603 : add_post(NearestTiesToEven, ust_502, ust_506, ust_507)
+
+logic sfp_0_125_1610613 : single
+
+axiom eq_604 : is_finite(sfp_0_125_1610613)
+
+axiom eq_6041 : (value(sfp_0_125_1610613) = (9999221.0 / 33554432.0))
+
+logic ust_509 : single
+
+axiom eq_605 : (value(ust_509) = (9999221.0 / 33554432.0))
+
+axiom eq_6051 : (sign1(ust_509) = Pos)
+
+axiom eq_6052 : is_finite(ust_509)
+
+logic s_mul__t_3__t_37__t_509 : single
+
+axiom eq_606 : mul_post(NearestTiesToEven, x6, ust_509,
+  s_mul__t_3__t_37__t_509)
+
+logic ust_510 : single
+
+axiom eq_607 : mul_post(NearestTiesToEven, x6, ust_509, ust_510)
+
+logic s_add__t_3__t_507__t_510 : single
+
+axiom eq_608 : add_post(NearestTiesToEven, ust_507, ust_510,
+  s_add__t_3__t_507__t_510)
+
+logic ust_511 : single
+
+axiom eq_609 : add_post(NearestTiesToEven, ust_507, ust_510, ust_511)
+
+axiom ax_21 : le(ust_511, ust_483)
+
+logic sfp_0_126_218104 : single
+
+axiom eq_610 : is_finite(sfp_0_126_218104)
+
+axiom eq_6101 : (value(sfp_0_126_218104) = (1075839.0 / 2097152.0))
+
+logic ust_514 : single
+
+axiom eq_6111 : (value(ust_514) = (1075839.0 / 2097152.0))
+
+axiom eq_6112 : (sign1(ust_514) = Pos)
+
+axiom eq_6113 : is_finite(ust_514)
+
+logic sfp_0_124_7717519 : single
+
+axiom eq_612 : is_finite(sfp_0_124_7717519)
+
+axiom eq_6121 : (value(sfp_0_124_7717519) = (16106127.0 / 67108864.0))
+
+logic ust_516 : single
+
+axiom eq_613 : (value(ust_516) = (16106127.0 / 67108864.0))
+
+axiom eq_6131 : (sign1(ust_516) = Pos)
+
+axiom eq_6132 : is_finite(ust_516)
+
+logic s_mul__t_3__t_13__t_516 : single
+
+axiom eq_614 : mul_post(NearestTiesToEven, x0, ust_516,
+  s_mul__t_3__t_13__t_516)
+
+logic ust_517 : single
+
+axiom eq_615 : mul_post(NearestTiesToEven, x0, ust_516, ust_517)
+
+logic s_add__t_3__t_42__t_517 : single
+
+axiom eq_616 : add_post(NearestTiesToEven, ust_42, ust_517,
+  s_add__t_3__t_42__t_517)
+
+logic ust_518 : single
+
+axiom eq_617 : add_post(NearestTiesToEven, ust_42, ust_517, ust_518)
+
+logic sfp_0_122_5301600 : single
+
+axiom eq_618 : is_finite(sfp_0_122_5301600)
+
+axiom eq_6181 : (value(sfp_0_122_5301600) = (427819.0 / 8388608.0))
+
+logic ust_520 : single
+
+axiom eq_619 : (value(ust_520) = (427819.0 / 8388608.0))
+
+axiom eq_6191 : (sign1(ust_520) = Pos)
+
+axiom eq_6192 : is_finite(ust_520)
+
+logic s_mul__t_3__t_17__t_520 : single
+
+axiom eq_620 : mul_post(NearestTiesToEven, x1, ust_520,
+  s_mul__t_3__t_17__t_520)
+
+logic ust_521 : single
+
+axiom eq_621 : mul_post(NearestTiesToEven, x1, ust_520, ust_521)
+
+logic s_add__t_3__t_518__t_521 : single
+
+axiom eq_622 : add_post(NearestTiesToEven, ust_518, ust_521,
+  s_add__t_3__t_518__t_521)
+
+logic ust_522 : single
+
+axiom eq_623 : add_post(NearestTiesToEven, ust_518, ust_521, ust_522)
+
+logic sfp_1_122_4496293 : single
+
+axiom eq_624 : is_finite(sfp_1_122_4496293)
+
+axiom eq_6241 : (value(sfp_1_122_4496293) = ((-12884901.0) / 268435456.0))
+
+logic ust_525 : single
+
+axiom eq_625 : (value(ust_525) = ((-12884901.0) / 268435456.0))
+
+axiom eq_6251 : (sign1(ust_525) = Neg)
+
+axiom eq_6252 : is_finite(ust_525)
+
+logic s_mul__t_3__t_21__t_525 : single
+
+axiom eq_626 : mul_post(NearestTiesToEven, x2, ust_525,
+  s_mul__t_3__t_21__t_525)
+
+logic ust_526 : single
+
+axiom eq_627 : mul_post(NearestTiesToEven, x2, ust_525, ust_526)
+
+logic s_add__t_3__t_522__t_526 : single
+
+axiom eq_628 : add_post(NearestTiesToEven, ust_522, ust_526,
+  s_add__t_3__t_522__t_526)
+
+logic ust_527 : single
+
+axiom eq_629 : add_post(NearestTiesToEven, ust_522, ust_526, ust_527)
+
+logic s_mul__t_3__t_25__t_509 : single
+
+axiom eq_630 : mul_post(NearestTiesToEven, x3, ust_509,
+  s_mul__t_3__t_25__t_509)
+
+logic ust_528 : single
+
+axiom eq_631 : mul_post(NearestTiesToEven, x3, ust_509, ust_528)
+
+logic s_add__t_3__t_527__t_528 : single
+
+axiom eq_632 : add_post(NearestTiesToEven, ust_527, ust_528,
+  s_add__t_3__t_527__t_528)
+
+logic ust_529 : single
+
+axiom eq_633 : add_post(NearestTiesToEven, ust_527, ust_528, ust_529)
+
+logic sfp_0_124_7113540 : single
+
+axiom eq_634 : is_finite(sfp_0_124_7113540)
+
+axiom eq_6341 : (value(sfp_0_124_7113540) = (3875537.0 / 16777216.0))
+
+logic ust_531 : single
+
+axiom eq_635 : (value(ust_531) = (3875537.0 / 16777216.0))
+
+axiom eq_6351 : (sign1(ust_531) = Pos)
+
+axiom eq_6352 : is_finite(ust_531)
+
+logic s_mul__t_3__t_29__t_531 : single
+
+axiom eq_636 : mul_post(NearestTiesToEven, x4, ust_531,
+  s_mul__t_3__t_29__t_531)
+
+logic ust_532 : single
+
+axiom eq_637 : mul_post(NearestTiesToEven, x4, ust_531, ust_532)
+
+logic s_add__t_3__t_529__t_532 : single
+
+axiom eq_638 : add_post(NearestTiesToEven, ust_529, ust_532,
+  s_add__t_3__t_529__t_532)
+
+logic ust_533 : single
+
+axiom eq_639 : add_post(NearestTiesToEven, ust_529, ust_532, ust_533)
+
+logic sfp_1_126_5486150 : single
+
+axiom eq_640 : is_finite(sfp_1_126_5486150)
+
+axiom eq_6401 : (value(sfp_1_126_5486150) = ((-6937379.0) / 8388608.0))
+
+logic ust_536 : single
+
+axiom eq_6411 : (value(ust_536) = ((-6937379.0) / 8388608.0))
+
+axiom eq_6412 : (sign1(ust_536) = Neg)
+
+axiom eq_6413 : is_finite(ust_536)
+
+logic s_mul__t_3__t_33__t_536 : single
+
+axiom eq_642 : mul_post(NearestTiesToEven, x5, ust_536,
+  s_mul__t_3__t_33__t_536)
+
+logic ust_537 : single
+
+axiom eq_643 : mul_post(NearestTiesToEven, x5, ust_536, ust_537)
+
+logic s_add__t_3__t_533__t_537 : single
+
+axiom eq_644 : add_post(NearestTiesToEven, ust_533, ust_537,
+  s_add__t_3__t_533__t_537)
+
+logic ust_538 : single
+
+axiom eq_645 : add_post(NearestTiesToEven, ust_533, ust_537, ust_538)
+
+logic sfp_0_126_3355443 : single
+
+axiom eq_646 : is_finite(sfp_0_126_3355443)
+
+axiom eq_6461 : (value(sfp_0_126_3355443) = (11744051.0 / 16777216.0))
+
+logic ust_540 : single
+
+axiom eq_647 : (value(ust_540) = (11744051.0 / 16777216.0))
+
+axiom eq_6471 : (sign1(ust_540) = Pos)
+
+axiom eq_6472 : is_finite(ust_540)
+
+logic s_mul__t_3__t_37__t_540 : single
+
+axiom eq_648 : mul_post(NearestTiesToEven, x6, ust_540,
+  s_mul__t_3__t_37__t_540)
+
+logic ust_541 : single
+
+axiom eq_649 : mul_post(NearestTiesToEven, x6, ust_540, ust_541)
+
+logic s_add__t_3__t_538__t_541 : single
+
+axiom eq_650 : add_post(NearestTiesToEven, ust_538, ust_541,
+  s_add__t_3__t_538__t_541)
+
+logic ust_542 : single
+
+axiom eq_6511 : add_post(NearestTiesToEven, ust_538, ust_541, ust_542)
+
+axiom ax_22 : le(ust_514, ust_542)
+
+logic sfp_1_126_5721030 : single
+
+axiom eq_6521 : is_finite(sfp_1_126_5721030)
+
+axiom eq_6522 : (value(sfp_1_126_5721030) = ((-7054819.0) / 8388608.0))
+
+logic ust_546 : single
+
+axiom eq_653 : (value(ust_546) = ((-7054819.0) / 8388608.0))
+
+axiom eq_6531 : (sign1(ust_546) = Neg)
+
+axiom eq_6532 : is_finite(ust_546)
+
+logic sfp_1_126_4445961 : single
+
+axiom eq_654 : is_finite(sfp_1_126_4445961)
+
+axiom eq_6541 : (value(sfp_1_126_4445961) = ((-12834569.0) / 16777216.0))
+
+logic ust_549 : single
+
+axiom eq_655 : (value(ust_549) = ((-12834569.0) / 16777216.0))
+
+axiom eq_6551 : (sign1(ust_549) = Neg)
+
+axiom eq_6552 : is_finite(ust_549)
+
+logic s_mul__t_3__t_13__t_549 : single
+
+axiom eq_656 : mul_post(NearestTiesToEven, x0, ust_549,
+  s_mul__t_3__t_13__t_549)
+
+logic ust_550 : single
+
+axiom eq_657 : mul_post(NearestTiesToEven, x0, ust_549, ust_550)
+
+logic s_add__t_3__t_42__t_550 : single
+
+axiom eq_658 : add_post(NearestTiesToEven, ust_42, ust_550,
+  s_add__t_3__t_42__t_550)
+
+logic ust_551 : single
+
+axiom eq_659 : add_post(NearestTiesToEven, ust_42, ust_550, ust_551)
+
+logic sfp_0_124_4362075 : single
+
+axiom eq_660 : is_finite(sfp_0_124_4362075)
+
+axiom eq_6601 : (value(sfp_0_124_4362075) = (12750683.0 / 67108864.0))
+
+logic ust_553 : single
+
+axiom eq_661 : (value(ust_553) = (12750683.0 / 67108864.0))
+
+axiom eq_6611 : (sign1(ust_553) = Pos)
+
+axiom eq_6612 : is_finite(ust_553)
+
+logic s_mul__t_3__t_17__t_553 : single
+
+axiom eq_662 : mul_post(NearestTiesToEven, x1, ust_553,
+  s_mul__t_3__t_17__t_553)
+
+logic ust_554 : single
+
+axiom eq_663 : mul_post(NearestTiesToEven, x1, ust_553, ust_554)
+
+logic s_add__t_3__t_551__t_554 : single
+
+axiom eq_664 : add_post(NearestTiesToEven, ust_551, ust_554,
+  s_add__t_3__t_551__t_554)
+
+logic ust_555 : single
+
+axiom eq_665 : add_post(NearestTiesToEven, ust_551, ust_554, ust_555)
+
+logic sfp_0_126_8355054 : single
+
+axiom eq_666 : is_finite(sfp_0_126_8355054)
+
+axiom eq_6661 : (value(sfp_0_126_8355054) = (8371831.0 / 8388608.0))
+
+logic ust_557 : single
+
+axiom eq_667 : (value(ust_557) = (8371831.0 / 8388608.0))
+
+axiom eq_6671 : (sign1(ust_557) = Pos)
+
+axiom eq_6672 : is_finite(ust_557)
+
+logic s_mul__t_3__t_21__t_557 : single
+
+axiom eq_668 : mul_post(NearestTiesToEven, x2, ust_557,
+  s_mul__t_3__t_21__t_557)
+
+logic ust_558 : single
+
+axiom eq_669 : mul_post(NearestTiesToEven, x2, ust_557, ust_558)
+
+logic s_add__t_3__t_555__t_558 : single
+
+axiom eq_670 : add_post(NearestTiesToEven, ust_555, ust_558,
+  s_add__t_3__t_555__t_558)
+
+logic ust_559 : single
+
+axiom eq_671 : add_post(NearestTiesToEven, ust_555, ust_558, ust_559)
+
+logic sfp_1_124_6442450 : single
+
+axiom eq_672 : is_finite(sfp_1_124_6442450)
+
+axiom eq_6721 : (value(sfp_1_124_6442450) = ((-7415529.0) / 33554432.0))
+
+logic ust_562 : single
+
+axiom eq_673 : (value(ust_562) = ((-7415529.0) / 33554432.0))
+
+axiom eq_6731 : (sign1(ust_562) = Neg)
+
+axiom eq_6732 : is_finite(ust_562)
+
+logic s_mul__t_3__t_25__t_562 : single
+
+axiom eq_674 : mul_post(NearestTiesToEven, x3, ust_562,
+  s_mul__t_3__t_25__t_562)
+
+logic ust_563 : single
+
+axiom eq_675 : mul_post(NearestTiesToEven, x3, ust_562, ust_563)
+
+logic s_add__t_3__t_559__t_563 : single
+
+axiom eq_676 : add_post(NearestTiesToEven, ust_559, ust_563,
+  s_add__t_3__t_559__t_563)
+
+logic ust_564 : single
+
+axiom eq_677 : add_post(NearestTiesToEven, ust_559, ust_563, ust_564)
+
+logic sfp_1_126_3187670 : single
+
+axiom eq_678 : is_finite(sfp_1_126_3187670)
+
+axiom eq_6781 : (value(sfp_1_126_3187670) = ((-5788139.0) / 8388608.0))
+
+logic ust_567 : single
+
+axiom eq_679 : (value(ust_567) = ((-5788139.0) / 8388608.0))
+
+axiom eq_6791 : (sign1(ust_567) = Neg)
+
+axiom eq_6792 : is_finite(ust_567)
+
+logic s_mul__t_3__t_29__t_567 : single
+
+axiom eq_680 : mul_post(NearestTiesToEven, x4, ust_567,
+  s_mul__t_3__t_29__t_567)
+
+logic ust_568 : single
+
+axiom eq_681 : mul_post(NearestTiesToEven, x4, ust_567, ust_568)
+
+logic s_add__t_3__t_564__t_568 : single
+
+axiom eq_682 : add_post(NearestTiesToEven, ust_564, ust_568,
+  s_add__t_3__t_564__t_568)
+
+logic ust_569 : single
+
+axiom eq_683 : add_post(NearestTiesToEven, ust_564, ust_568, ust_569)
+
+logic s_mul__t_3__t_33__t_161 : single
+
+axiom eq_684 : mul_post(NearestTiesToEven, x5, ust_161,
+  s_mul__t_3__t_33__t_161)
+
+logic ust_570 : single
+
+axiom eq_685 : mul_post(NearestTiesToEven, x5, ust_161, ust_570)
+
+logic s_add__t_3__t_569__t_570 : single
+
+axiom eq_686 : add_post(NearestTiesToEven, ust_569, ust_570,
+  s_add__t_3__t_569__t_570)
+
+logic ust_571 : single
+
+axiom eq_687 : add_post(NearestTiesToEven, ust_569, ust_570, ust_571)
+
+logic sfp_1_122_4227858 : single
+
+axiom eq_688 : is_finite(sfp_1_122_4227858)
+
+axiom eq_6881 : (value(sfp_1_122_4227858) = ((-6308233.0) / 134217728.0))
+
+logic ust_573 : single
+
+axiom eq_689 : (value(ust_573) = ((-6308233.0) / 134217728.0))
+
+axiom eq_6891 : (sign1(ust_573) = Neg)
+
+axiom eq_6892 : is_finite(ust_573)
+
+logic s_mul__t_3__t_37__t_573 : single
+
+axiom eq_690 : mul_post(NearestTiesToEven, x6, ust_573,
+  s_mul__t_3__t_37__t_573)
+
+logic ust_574 : single
+
+axiom eq_691 : mul_post(NearestTiesToEven, x6, ust_573, ust_574)
+
+logic s_add__t_3__t_571__t_574 : single
+
+axiom eq_692 : add_post(NearestTiesToEven, ust_571, ust_574,
+  s_add__t_3__t_571__t_574)
+
+logic ust_575 : single
+
+axiom eq_693 : add_post(NearestTiesToEven, ust_571, ust_574, ust_575)
+
+axiom ax_23 : le(ust_575, ust_546)
+
+logic sfp_1_125_7147094 : single
+
+axiom eq_694 : is_finite(sfp_1_125_7147094)
+
+axiom eq_6941 : (value(sfp_1_125_7147094) = ((-7767851.0) / 16777216.0))
+
+logic ust_578 : single
+
+axiom eq_695 : (value(ust_578) = ((-7767851.0) / 16777216.0))
+
+axiom eq_6951 : (sign1(ust_578) = Neg)
+
+axiom eq_6952 : is_finite(ust_578)
+
+logic sfp_0_125_1040186 : single
+
+axiom eq_696 : is_finite(sfp_0_125_1040186)
+
+axiom eq_6961 : (value(sfp_0_125_1040186) = (4714397.0 / 16777216.0))
+
+logic ust_580 : single
+
+axiom eq_697 : (value(ust_580) = (4714397.0 / 16777216.0))
+
+axiom eq_6971 : (sign1(ust_580) = Pos)
+
+axiom eq_6972 : is_finite(ust_580)
+
+logic s_mul__t_3__t_13__t_580 : single
+
+axiom eq_698 : mul_post(NearestTiesToEven, x0, ust_580,
+  s_mul__t_3__t_13__t_580)
+
+logic ust_581 : single
+
+axiom eq_699 : mul_post(NearestTiesToEven, x0, ust_580, ust_581)
+
+logic s_add__t_3__t_42__t_581 : single
+
+axiom eq_700 : add_post(NearestTiesToEven, ust_42, ust_581,
+  s_add__t_3__t_42__t_581)
+
+logic ust_582 : single
+
+axiom eq_7011 : add_post(NearestTiesToEven, ust_42, ust_581, ust_582)
+
+logic sfp_0_124_5100274 : single
+
+axiom eq_702 : is_finite(sfp_0_124_5100274)
+
+axiom eq_7021 : (value(sfp_0_124_5100274) = (6744441.0 / 33554432.0))
+
+logic ust_584 : single
+
+axiom eq_703 : (value(ust_584) = (6744441.0 / 33554432.0))
+
+axiom eq_7031 : (sign1(ust_584) = Pos)
+
+axiom eq_7032 : is_finite(ust_584)
+
+logic s_mul__t_3__t_17__t_584 : single
+
+axiom eq_704 : mul_post(NearestTiesToEven, x1, ust_584,
+  s_mul__t_3__t_17__t_584)
+
+logic ust_585 : single
+
+axiom eq_705 : mul_post(NearestTiesToEven, x1, ust_584, ust_585)
+
+logic s_add__t_3__t_582__t_585 : single
+
+axiom eq_706 : add_post(NearestTiesToEven, ust_582, ust_585,
+  s_add__t_3__t_582__t_585)
+
+logic ust_586 : single
+
+axiom eq_707 : add_post(NearestTiesToEven, ust_582, ust_585, ust_586)
+
+logic sfp_0_124_6576668 : single
+
+axiom eq_708 : is_finite(sfp_0_124_6576668)
+
+axiom eq_7081 : (value(sfp_0_124_6576668) = (3741319.0 / 16777216.0))
+
+logic ust_588 : single
+
+axiom eq_709 : (value(ust_588) = (3741319.0 / 16777216.0))
+
+axiom eq_7091 : (sign1(ust_588) = Pos)
+
+axiom eq_7092 : is_finite(ust_588)
+
+logic s_mul__t_3__t_21__t_588 : single
+
+axiom eq_710 : mul_post(NearestTiesToEven, x2, ust_588,
+  s_mul__t_3__t_21__t_588)
+
+logic ust_589 : single
+
+axiom eq_7111 : mul_post(NearestTiesToEven, x2, ust_588, ust_589)
+
+logic s_add__t_3__t_586__t_589 : single
+
+axiom eq_7121 : add_post(NearestTiesToEven, ust_586, ust_589,
+  s_add__t_3__t_586__t_589)
+
+logic ust_590 : single
+
+axiom eq_7131 : add_post(NearestTiesToEven, ust_586, ust_589, ust_590)
+
+logic sfp_1_125_67109 : single
+
+axiom eq_714 : is_finite(sfp_1_125_67109)
+
+axiom eq_7141 : (value(sfp_1_125_67109) = ((-8455717.0) / 33554432.0))
+
+logic ust_593 : single
+
+axiom eq_715 : (value(ust_593) = ((-8455717.0) / 33554432.0))
+
+axiom eq_7151 : (sign1(ust_593) = Neg)
+
+axiom eq_7152 : is_finite(ust_593)
+
+logic s_mul__t_3__t_25__t_593 : single
+
+axiom eq_716 : mul_post(NearestTiesToEven, x3, ust_593,
+  s_mul__t_3__t_25__t_593)
+
+logic ust_594 : single
+
+axiom eq_717 : mul_post(NearestTiesToEven, x3, ust_593, ust_594)
+
+logic s_add__t_3__t_590__t_594 : single
+
+axiom eq_718 : add_post(NearestTiesToEven, ust_590, ust_594,
+  s_add__t_3__t_590__t_594)
+
+logic ust_595 : single
+
+axiom eq_719 : add_post(NearestTiesToEven, ust_590, ust_594, ust_595)
+
+logic sfp_0_123_7046431 : single
+
+axiom eq_720 : is_finite(sfp_0_123_7046431)
+
+axiom eq_7201 : (value(sfp_0_123_7046431) = (15435039.0 / 134217728.0))
+
+logic ust_597 : single
+
+axiom eq_7211 : (value(ust_597) = (15435039.0 / 134217728.0))
+
+axiom eq_7212 : (sign1(ust_597) = Pos)
+
+axiom eq_7213 : is_finite(ust_597)
+
+logic s_mul__t_3__t_29__t_597 : single
+
+axiom eq_722 : mul_post(NearestTiesToEven, x4, ust_597,
+  s_mul__t_3__t_29__t_597)
+
+logic ust_598 : single
+
+axiom eq_723 : mul_post(NearestTiesToEven, x4, ust_597, ust_598)
+
+logic s_add__t_3__t_595__t_598 : single
+
+axiom eq_724 : add_post(NearestTiesToEven, ust_595, ust_598,
+  s_add__t_3__t_595__t_598)
+
+logic ust_599 : single
+
+axiom eq_725 : add_post(NearestTiesToEven, ust_595, ust_598, ust_599)
+
+logic sfp_0_126_8170504 : single
+
+axiom eq_726 : is_finite(sfp_0_126_8170504)
+
+axiom eq_7261 : (value(sfp_0_126_8170504) = (2069889.0 / 2097152.0))
+
+logic ust_601 : single
+
+axiom eq_727 : (value(ust_601) = (2069889.0 / 2097152.0))
+
+axiom eq_7271 : (sign1(ust_601) = Pos)
+
+axiom eq_7272 : is_finite(ust_601)
+
+logic s_mul__t_3__t_33__t_601 : single
+
+axiom eq_728 : mul_post(NearestTiesToEven, x5, ust_601,
+  s_mul__t_3__t_33__t_601)
+
+logic ust_602 : single
+
+axiom eq_729 : mul_post(NearestTiesToEven, x5, ust_601, ust_602)
+
+logic s_add__t_3__t_599__t_602 : single
+
+axiom eq_730 : add_post(NearestTiesToEven, ust_599, ust_602,
+  s_add__t_3__t_599__t_602)
+
+logic ust_603 : single
+
+axiom eq_731 : add_post(NearestTiesToEven, ust_599, ust_602, ust_603)
+
+logic sfp_0_126_2751462 : single
+
+axiom eq_732 : is_finite(sfp_0_126_2751462)
+
+axiom eq_7321 : (value(sfp_0_126_2751462) = (5570035.0 / 8388608.0))
+
+logic ust_605 : single
+
+axiom eq_733 : (value(ust_605) = (5570035.0 / 8388608.0))
+
+axiom eq_7331 : (sign1(ust_605) = Pos)
+
+axiom eq_7332 : is_finite(ust_605)
+
+logic s_mul__t_3__t_37__t_605 : single
+
+axiom eq_734 : mul_post(NearestTiesToEven, x6, ust_605,
+  s_mul__t_3__t_37__t_605)
+
+logic ust_606 : single
+
+axiom eq_735 : mul_post(NearestTiesToEven, x6, ust_605, ust_606)
+
+logic s_add__t_3__t_603__t_606 : single
+
+axiom eq_736 : add_post(NearestTiesToEven, ust_603, ust_606,
+  s_add__t_3__t_603__t_606)
+
+logic ust_607 : single
+
+axiom eq_737 : add_post(NearestTiesToEven, ust_603, ust_606, ust_607)
+
+axiom ax_24 : le(ust_607, ust_578)
+
+goal g_1 : false
