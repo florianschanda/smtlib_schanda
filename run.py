@@ -307,7 +307,7 @@ def main():
                     float(n * 100) / float(len(tasks)),
                     start_time)
     else:
-        bunch = 1 if options.suite == "debug" else 5
+        bunch = 1 if options.suite in ("debug", "xsat_paper") else 5
         pool = multiprocessing.Pool()
         for result in pool.imap_unordered(process, tasks, bunch):
             n += 1
