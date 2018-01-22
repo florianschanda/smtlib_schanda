@@ -1,0 +1,601 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo real arithmetic *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+axiom add_div :
+  (forall x:real. forall y:real. forall z:real. ((not (z = 0.0)) ->
+  (((x + y) / z) = ((x / z) + (y / z)))))
+
+axiom sub_div :
+  (forall x:real. forall y:real. forall z:real. ((not (z = 0.0)) ->
+  (((x - y) / z) = ((x / z) - (y / z)))))
+
+axiom neg_div :
+  (forall x:real. forall y:real. ((not (y = 0.0)) ->
+  (((-x) / y) = (-(x / y)))))
+
+axiom assoc_mul_div :
+  (forall x:real. forall y:real. forall z:real. ((not (z = 0.0)) ->
+  (((x * y) / z) = (x * (y / z)))))
+
+axiom assoc_div_mul :
+  (forall x:real. forall y:real. forall z:real. (((not (y = 0.0)) and
+  (not (z = 0.0))) -> (((x / y) / z) = (x / (y * z)))))
+
+axiom assoc_div_div :
+  (forall x:real. forall y:real. forall z:real. (((not (y = 0.0)) and
+  (not (z = 0.0))) -> ((x / (y / z)) = ((x * z) / y))))
+
+axiom CompatOrderMult :
+  (forall x:real. forall y:real. forall z:real. ((x <= y) -> ((0.0 <= z) ->
+  ((x * z) <= (y * z)))))
+
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+logic match_mode : fpa_rounding_mode, 'a, 'a, 'a, 'a, 'a -> 'a
+
+axiom match_mode_NearestTiesToEven :
+  (forall z:'a. forall z1:'a. forall z2:'a. forall z3:'a. forall z4:'a.
+  (match_mode(NearestTiesToEven, z, z1, z2, z3, z4) = z))
+
+axiom match_mode_ToZero :
+  (forall z:'a. forall z1:'a. forall z2:'a. forall z3:'a. forall z4:'a.
+  (match_mode(ToZero, z, z1, z2, z3, z4) = z1))
+
+axiom match_mode_Up :
+  (forall z:'a. forall z1:'a. forall z2:'a. forall z3:'a. forall z4:'a.
+  (match_mode(Up, z, z1, z2, z3, z4) = z2))
+
+axiom match_mode_Down :
+  (forall z:'a. forall z1:'a. forall z2:'a. forall z3:'a. forall z4:'a.
+  (match_mode(Down, z, z1, z2, z3, z4) = z3))
+
+axiom match_mode_NearestTiesToAway :
+  (forall z:'a. forall z1:'a. forall z2:'a. forall z3:'a. forall z4:'a.
+  (match_mode(NearestTiesToAway, z, z1, z2, z3, z4) = z4))
+
+type double
+
+axiom CompatOrderMult1 :
+  (forall x:int. forall y:int. forall z:int. ((x <= y) -> ((0 <= z) ->
+  ((x * z) <= (y * z)))))
+
+axiom Monotonic :
+  (forall x:int. forall y:int. ((x <= y) ->
+  (real_of_int(x) <= real_of_int(y))))
+
+logic truncate : real -> int
+
+axiom Truncate_int : (forall i:int. (truncate(real_of_int(i)) = i))
+
+axiom Truncate_down_pos :
+  (forall x:real. ((0.0 <= x) -> (real_of_int(truncate(x)) <= x)))
+
+axiom Truncate_down_pos1 :
+  (forall x:real. ((0.0 <= x) -> (x <  real_of_int((truncate(x) + 1)))))
+
+axiom Truncate_up_neg :
+  (forall x:real. ((x <= 0.0) -> (real_of_int((truncate(x) - 1)) <  x)))
+
+axiom Truncate_up_neg1 :
+  (forall x:real. ((x <= 0.0) -> (x <= real_of_int(truncate(x)))))
+
+axiom Real_of_truncate :
+  (forall x:real. ((x - 1.0) <= real_of_int(truncate(x))))
+
+axiom Real_of_truncate1 :
+  (forall x:real. (real_of_int(truncate(x)) <= (x + 1.0)))
+
+axiom Truncate_monotonic :
+  (forall x:real. forall y:real. ((x <= y) -> (truncate(x) <= truncate(y))))
+
+axiom Truncate_monotonic_int1 :
+  (forall x:real. forall i:int. ((x <= real_of_int(i)) ->
+  (truncate(x) <= i)))
+
+axiom Truncate_monotonic_int2 :
+  (forall x:real. forall i:int. ((real_of_int(i) <= x) ->
+  (i <= truncate(x))))
+
+axiom Floor_int : (forall i:int. (int_floor(real_of_int(i)) = i))
+
+axiom Ceil_int : (forall i:int. (int_ceil(real_of_int(i)) = i))
+
+axiom Floor_down : (forall x:real. (real_of_int(int_floor(x)) <= x))
+
+axiom Floor_down1 : (forall x:real. (x <  real_of_int((int_floor(x) + 1))))
+
+axiom Ceil_up : (forall x:real. (real_of_int((int_ceil(x) - 1)) <  x))
+
+axiom Ceil_up1 : (forall x:real. (x <= real_of_int(int_ceil(x))))
+
+axiom Floor_monotonic :
+  (forall x:real. forall y:real. ((x <= y) ->
+  (int_floor(x) <= int_floor(y))))
+
+axiom Ceil_monotonic :
+  (forall x:real. forall y:real. ((x <= y) -> (int_ceil(x) <= int_ceil(y))))
+
+function sqr(x: real) : real = (x * x)
+
+axiom Sqrt_positive : (forall x:real. ((0.0 <= x) -> (0.0 <= sqrt_real(x))))
+
+axiom Sqrt_square : (forall x:real. ((0.0 <= x) -> (sqr(sqrt_real(x)) = x)))
+
+axiom Square_sqrt : (forall x:real. ((0.0 <= x) -> (sqrt_real((x * x)) = x)))
+
+axiom Sqrt_mul :
+  (forall x:real. forall y:real. (((0.0 <= x) and (0.0 <= y)) ->
+  (sqrt_real((x * y)) = (sqrt_real(x) * sqrt_real(y)))))
+
+axiom Sqrt_le :
+  (forall x:real. forall y:real. (((0.0 <= x) and (x <= y)) ->
+  (sqrt_real(x) <= sqrt_real(y))))
+
+type class = Finite | Infinite | NaN
+
+logic match_class : class, 'a, 'a, 'a -> 'a
+
+axiom match_class_Finite :
+  (forall z:'a. forall z1:'a. forall z2:'a. (match_class(Finite, z, z1,
+  z2) = z))
+
+axiom match_class_Infinite :
+  (forall z:'a. forall z1:'a. forall z2:'a. (match_class(Infinite, z, z1,
+  z2) = z1))
+
+axiom match_class_NaN :
+  (forall z:'a. forall z1:'a. forall z2:'a. (match_class(NaN, z, z1,
+  z2) = z2))
+
+type sign = Neg | Pos
+
+logic match_sign : sign, 'a, 'a -> 'a
+
+axiom match_sign_Neg :
+  (forall z:'a. forall z1:'a. (match_sign(Neg, z, z1) = z))
+
+axiom match_sign_Pos :
+  (forall z:'a. forall z1:'a. (match_sign(Pos, z, z1) = z1))
+
+logic same_sign_real : sign, real -> prop
+
+axiom Neg_case : (forall x:real. ((x <  0.0) -> same_sign_real(Neg, x)))
+
+axiom Pos_case : (forall x:real. ((0.0 <  x) -> same_sign_real(Pos, x)))
+
+axiom same_sign_real_inversion :
+  (forall z:sign. forall z1:real. (same_sign_real(z, z1) -> (((z1 <  0.0) and
+  (z = Neg)) or ((0.0 <  z1) and (z = Pos)))))
+
+axiom same_sign_real_zero1 : (forall b:sign. (not same_sign_real(b, 0.0)))
+
+axiom same_sign_real_zero2 :
+  (forall x:real. (not (same_sign_real(Neg, x) and same_sign_real(Pos, x))))
+
+axiom same_sign_real_zero3 :
+  (forall b:sign. forall x:real. (same_sign_real(b, x) -> (not (x = 0.0))))
+
+axiom same_sign_real_correct2 :
+  (forall b:sign. forall x:real. (same_sign_real(b, x) -> ((x <  0.0) ->
+  (b = Neg))))
+
+axiom same_sign_real_correct21 :
+  (forall b:sign. forall x:real. (same_sign_real(b, x) -> ((b = Neg) ->
+  (x <  0.0))))
+
+axiom same_sign_real_correct3 :
+  (forall b:sign. forall x:real. (same_sign_real(b, x) -> ((0.0 <  x) ->
+  (b = Pos))))
+
+axiom same_sign_real_correct31 :
+  (forall b:sign. forall x:real. (same_sign_real(b, x) -> ((b = Pos) ->
+  (0.0 <  x))))
+
+axiom Abs_le :
+  (forall x:real. forall y:real. ((abs_real(x) <= y) -> ((-y) <= x)))
+
+axiom Abs_le1 :
+  (forall x:real. forall y:real. ((abs_real(x) <= y) -> (x <= y)))
+
+axiom Abs_le2 :
+  (forall x:real. forall y:real. ((((-y) <= x) and (x <= y)) ->
+  (abs_real(x) <= y)))
+
+axiom Abs_pos : (forall x:real. (0.0 <= abs_real(x)))
+
+axiom Abs_sum :
+  (forall x:real. forall y:real.
+  (abs_real((x + y)) <= (abs_real(x) + abs_real(y))))
+
+axiom Abs_prod :
+  (forall x:real. forall y:real.
+  (abs_real((x * y)) = (abs_real(x) * abs_real(y))))
+
+axiom triangular_inequality :
+  (forall x:real. forall y:real. forall z:real.
+  (abs_real((x - z)) <= (abs_real((x - y)) + abs_real((y - z)))))
+
+logic value : double -> real
+
+predicate no_overflow(m: fpa_rounding_mode, x: real) =
+  (abs_real(float64(m, x)) <= 0x1.FFFFFFFFFFFFFp1023)
+
+axiom Bounded_real_no_overflow :
+  (forall m:fpa_rounding_mode. forall x:real.
+  ((abs_real(x) <= 0x1.FFFFFFFFFFFFFp1023) -> no_overflow(m, x)))
+
+axiom Round_value :
+  (forall m:fpa_rounding_mode. forall x:double.
+  (float64(m, value(x)) = value(x)))
+
+axiom Bounded_value :
+  (forall x:double. (abs_real(value(x)) <= 0x1.FFFFFFFFFFFFFp1023))
+
+axiom Exact_rounding_for_integers :
+  (forall m:fpa_rounding_mode. forall i:int. ((((-9007199254740992) <= i) and
+  (i <= 9007199254740992)) -> (float64(m, real_of_int(i)) = real_of_int(i))))
+
+axiom Round_down_le : (forall x:real. (float64(Down, x) <= x))
+
+axiom Round_up_ge : (forall x:real. (x <= float64(Up, x)))
+
+axiom Round_down_neg :
+  (forall x:real. (float64(Down, (-x)) = (-float64(Up, x))))
+
+axiom Round_up_neg :
+  (forall x:real. (float64(Up, (-x)) = (-float64(Down, x))))
+
+logic round_logic : fpa_rounding_mode, real -> double
+
+axiom Round_logic_def :
+  (forall m:fpa_rounding_mode. forall x:real. (no_overflow(m, x) ->
+  (value(round_logic(m, x)) = float64(m, x))))
+
+logic class1 : double -> class
+
+predicate is_finite(x: double) = (class1(x) = Finite)
+
+predicate is_infinite(x: double) = (class1(x) = Infinite)
+
+predicate is_NaN(x: double) = (class1(x) = NaN)
+
+predicate is_not_NaN(x: double) = (is_finite(x) or is_infinite(x))
+
+axiom is_not_NaN1 : (forall x:double. (is_not_NaN(x) -> (not is_NaN(x))))
+
+axiom is_not_NaN2 : (forall x:double. ((not is_NaN(x)) -> is_not_NaN(x)))
+
+logic sign1 : double -> sign
+
+predicate same_sign_real1(x: double, y: real) = same_sign_real(sign1(x), y)
+
+predicate same_sign(x: double, y: double) = (sign1(x) = sign1(y))
+
+predicate diff_sign(x: double, y: double) = (not (sign1(x) = sign1(y)))
+
+predicate sign_zero_result(m: fpa_rounding_mode, x: double) =
+  ((value(x) = 0.0) -> ((((((m = NearestTiesToEven) -> (sign1(x) = Pos)) and
+  ((m = ToZero) -> (sign1(x) = Pos))) and ((m = Up) -> (sign1(x) = Pos))) and
+  ((m = Down) -> (sign1(x) = Neg))) and ((m = NearestTiesToAway) ->
+  (sign1(x) = Pos))))
+
+predicate is_minus_infinity(x: double) = (is_infinite(x) and
+  (sign1(x) = Neg))
+
+predicate is_plus_infinity(x: double) = (is_infinite(x) and (sign1(x) = Pos))
+
+predicate is_gen_zero(x: double) = (is_finite(x) and (value(x) = 0.0))
+
+predicate is_gen_zero_plus(x: double) = (is_gen_zero(x) and (sign1(x) = Pos))
+
+predicate is_gen_zero_minus(x: double) = (is_gen_zero(x) and
+  (sign1(x) = Neg))
+
+axiom finite_sign :
+  (forall x:double. (((class1(x) = Finite) and (not (value(x) = 0.0))) ->
+  same_sign_real1(x, value(x))))
+
+axiom finite_sign_pos1 :
+  (forall x:double. (((class1(x) = Finite) and (0.0 <  value(x))) ->
+  (sign1(x) = Pos)))
+
+axiom finite_sign_pos2 :
+  (forall x:double. (((class1(x) = Finite) and ((not (value(x) = 0.0)) and
+  (sign1(x) = Pos))) -> (0.0 <  value(x))))
+
+axiom finite_sign_neg1 :
+  (forall x:double. (((class1(x) = Finite) and (value(x) <  0.0)) ->
+  (sign1(x) = Neg)))
+
+axiom finite_sign_neg2 :
+  (forall x:double. (((class1(x) = Finite) and ((not (value(x) = 0.0)) and
+  (sign1(x) = Neg))) -> (value(x) <  0.0)))
+
+axiom diff_sign_trans :
+  (forall x:double. forall y:double. forall z:double. ((diff_sign(x, y) and
+  diff_sign(y, z)) -> same_sign(x, z)))
+
+axiom diff_sign_product :
+  (forall x:double. forall y:double. (((class1(x) = Finite) and
+  ((class1(y) = Finite) and ((value(x) * value(y)) <  0.0))) -> diff_sign(x,
+  y)))
+
+axiom same_sign_product :
+  (forall x:double. forall y:double. (((class1(x) = Finite) and
+  ((class1(y) = Finite) and same_sign(x, y))) ->
+  (0.0 <= (value(x) * value(y)))))
+
+predicate overflow_value(m: fpa_rounding_mode, x: double) =
+  (((sign1(x) = Neg) -> ((((((m = NearestTiesToEven) -> is_infinite(x)) and
+  ((m = ToZero) -> (is_finite(x) and
+  (value(x) = (-0x1.FFFFFFFFFFFFFp1023))))) and ((m = Up) ->
+  (is_finite(x) and (value(x) = (-0x1.FFFFFFFFFFFFFp1023))))) and
+  ((m = Down) -> is_infinite(x))) and ((m = NearestTiesToAway) ->
+  is_infinite(x)))) and ((sign1(x) = Pos) -> ((((((m = NearestTiesToEven) ->
+  is_infinite(x)) and ((m = ToZero) -> (is_finite(x) and
+  (value(x) = 0x1.FFFFFFFFFFFFFp1023)))) and ((m = Up) ->
+  is_infinite(x))) and ((m = Down) -> (is_finite(x) and
+  (value(x) = 0x1.FFFFFFFFFFFFFp1023)))) and ((m = NearestTiesToAway) ->
+  is_infinite(x)))))
+
+axiom round1 :
+  (forall m:fpa_rounding_mode. forall x:real. (no_overflow(m, x) ->
+  is_finite(round_logic(m, x))))
+
+axiom round11 :
+  (forall m:fpa_rounding_mode. forall x:real. (no_overflow(m, x) ->
+  (value(round_logic(m, x)) = float64(m, x))))
+
+axiom round2 :
+  (forall m:fpa_rounding_mode. forall x:real. ((not no_overflow(m, x)) ->
+  same_sign_real1(round_logic(m, x), x)))
+
+axiom round21 :
+  (forall m:fpa_rounding_mode. forall x:real. ((not no_overflow(m, x)) ->
+  overflow_value(m, round_logic(m, x))))
+
+axiom round_of_zero :
+  (forall m:fpa_rounding_mode. is_gen_zero(round_logic(m, 0.0)))
+
+axiom round_logic_le :
+  (forall m:fpa_rounding_mode. forall x:real. (is_finite(round_logic(m,
+  x)) -> (abs_real(value(round_logic(m, x))) <= 0x1.FFFFFFFFFFFFFp1023)))
+
+axiom round_no_overflow :
+  (forall m:fpa_rounding_mode. forall x:real.
+  ((abs_real(x) <= 0x1.FFFFFFFFFFFFFp1023) -> is_finite(round_logic(m, x))))
+
+axiom round_no_overflow1 :
+  (forall m:fpa_rounding_mode. forall x:real.
+  ((abs_real(x) <= 0x1.FFFFFFFFFFFFFp1023) -> (value(round_logic(m,
+  x)) = float64(m, x))))
+
+logic min : real
+
+axiom positive_constant :
+  (forall m:fpa_rounding_mode. forall x:real. (((min <= x) and
+  (x <= 0x1.FFFFFFFFFFFFFp1023)) -> is_finite(round_logic(m, x))))
+
+axiom positive_constant1 :
+  (forall m:fpa_rounding_mode. forall x:real. (((min <= x) and
+  (x <= 0x1.FFFFFFFFFFFFFp1023)) -> (0.0 <  value(round_logic(m, x)))))
+
+axiom positive_constant2 :
+  (forall m:fpa_rounding_mode. forall x:real. (((min <= x) and
+  (x <= 0x1.FFFFFFFFFFFFFp1023)) -> (sign1(round_logic(m, x)) = Pos)))
+
+axiom negative_constant :
+  (forall m:fpa_rounding_mode. forall x:real.
+  ((((-0x1.FFFFFFFFFFFFFp1023) <= x) and (x <= (-min))) ->
+  is_finite(round_logic(m, x))))
+
+axiom negative_constant1 :
+  (forall m:fpa_rounding_mode. forall x:real.
+  ((((-0x1.FFFFFFFFFFFFFp1023) <= x) and (x <= (-min))) ->
+  (value(round_logic(m, x)) <  0.0)))
+
+axiom negative_constant2 :
+  (forall m:fpa_rounding_mode. forall x:real.
+  ((((-0x1.FFFFFFFFFFFFFp1023) <= x) and (x <= (-min))) ->
+  (sign1(round_logic(m, x)) = Neg)))
+
+axiom is_gen_zero_comp1 :
+  (forall x:double. forall y:double. ((is_gen_zero(x) and
+  ((value(x) = value(y)) and is_finite(y))) -> is_gen_zero(y)))
+
+axiom is_gen_zero_comp2 :
+  (forall x:double. forall y:double. ((is_finite(x) and
+  ((not is_gen_zero(x)) and (value(x) = value(y)))) -> (not is_gen_zero(y))))
+
+predicate add_post(m: fpa_rounding_mode, x: double, y: double, r: double) =
+  (((is_NaN(x) or is_NaN(y)) -> is_NaN(r)) and (((is_finite(x) and
+  is_infinite(y)) -> (is_infinite(r) and same_sign(r, y))) and
+  (((is_infinite(x) and is_finite(y)) -> (is_infinite(r) and same_sign(r,
+  x))) and (((is_infinite(x) and is_infinite(y)) -> ((same_sign(x, y) ->
+  (is_infinite(r) and same_sign(r, x))) and ((not same_sign(x, y)) ->
+  is_NaN(r)))) and (((is_finite(x) and (is_finite(y) and no_overflow(m,
+  (value(x) + value(y))))) -> (is_finite(r) and
+  ((value(r) = float64(m, (value(x) + value(y)))) and ((same_sign(x, y) ->
+  same_sign(r, x)) and ((not same_sign(x, y)) -> sign_zero_result(m,
+  r)))))) and ((is_finite(x) and (is_finite(y) and (not no_overflow(m,
+  (value(x) + value(y)))))) -> (same_sign_real(sign1(r),
+  (value(x) + value(y))) and overflow_value(m, r))))))))
+
+predicate sub_post(m: fpa_rounding_mode, x: double, y: double, r: double) =
+  (((is_NaN(x) or is_NaN(y)) -> is_NaN(r)) and (((is_finite(x) and
+  is_infinite(y)) -> (is_infinite(r) and diff_sign(r, y))) and
+  (((is_infinite(x) and is_finite(y)) -> (is_infinite(r) and same_sign(r,
+  x))) and (((is_infinite(x) and is_infinite(y)) -> ((diff_sign(x, y) ->
+  (is_infinite(r) and same_sign(r, x))) and ((not diff_sign(x, y)) ->
+  is_NaN(r)))) and (((is_finite(x) and (is_finite(y) and no_overflow(m,
+  (value(x) - value(y))))) -> (is_finite(r) and
+  ((value(r) = float64(m, (value(x) - value(y)))) and ((diff_sign(x, y) ->
+  same_sign(r, x)) and ((not diff_sign(x, y)) -> sign_zero_result(m,
+  r)))))) and ((is_finite(x) and (is_finite(y) and (not no_overflow(m,
+  (value(x) - value(y)))))) -> (same_sign_real(sign1(r),
+  (value(x) - value(y))) and overflow_value(m, r))))))))
+
+predicate product_sign(z: double, x: double, y: double) = ((same_sign(x,
+  y) -> (sign1(z) = Pos)) and (diff_sign(x, y) -> (sign1(z) = Neg)))
+
+predicate mul_post(m: fpa_rounding_mode, x: double, y: double, r: double) =
+  (((is_NaN(x) or is_NaN(y)) -> is_NaN(r)) and (((is_gen_zero(x) and
+  is_infinite(y)) -> is_NaN(r)) and (((is_finite(x) and (is_infinite(y) and
+  (not (value(x) = 0.0)))) -> is_infinite(r)) and (((is_infinite(x) and
+  is_gen_zero(y)) -> is_NaN(r)) and (((is_infinite(x) and (is_finite(y) and
+  (not (value(y) = 0.0)))) -> is_infinite(r)) and (((is_infinite(x) and
+  is_infinite(y)) -> is_infinite(r)) and (((is_finite(x) and
+  (is_finite(y) and no_overflow(m, (value(x) * value(y))))) ->
+  (is_finite(r) and (value(r) = float64(m, (value(x) * value(y)))))) and
+  (((is_finite(x) and (is_finite(y) and (not no_overflow(m,
+  (value(x) * value(y)))))) -> overflow_value(m, r)) and ((not is_NaN(r)) ->
+  product_sign(r, x, y))))))))))
+
+predicate neg_post(x: double, r: double) = ((is_NaN(x) -> is_NaN(r)) and
+  ((is_infinite(x) -> is_infinite(r)) and ((is_finite(x) -> (is_finite(r) and
+  (value(r) = (-value(x))))) and ((not is_NaN(x)) -> diff_sign(r, x)))))
+
+predicate div_post(m: fpa_rounding_mode, x: double, y: double, r: double) =
+  (((is_NaN(x) or is_NaN(y)) -> is_NaN(r)) and (((is_finite(x) and
+  is_infinite(y)) -> is_gen_zero(r)) and (((is_infinite(x) and
+  is_finite(y)) -> is_infinite(r)) and (((is_infinite(x) and
+  is_infinite(y)) -> is_NaN(r)) and (((is_finite(x) and (is_finite(y) and
+  ((not (value(y) = 0.0)) and no_overflow(m, (value(x) / value(y)))))) ->
+  (is_finite(r) and (value(r) = float64(m, (value(x) / value(y)))))) and
+  (((is_finite(x) and (is_finite(y) and ((not (value(y) = 0.0)) and
+  (not no_overflow(m, (value(x) / value(y))))))) -> overflow_value(m, r)) and
+  (((is_finite(x) and (is_gen_zero(y) and (not (value(x) = 0.0)))) ->
+  is_infinite(r)) and (((is_gen_zero(x) and is_gen_zero(y)) -> is_NaN(r)) and
+  ((not is_NaN(r)) -> product_sign(r, x, y))))))))))
+
+predicate fma_post(m: fpa_rounding_mode, x: double, y: double, z: double,
+  r: double) = (((is_NaN(x) or (is_NaN(y) or is_NaN(z))) -> is_NaN(r)) and
+  (((is_gen_zero(x) and is_infinite(y)) -> is_NaN(r)) and
+  (((is_infinite(x) and is_gen_zero(y)) -> is_NaN(r)) and (((is_finite(x) and
+  ((not (value(x) = 0.0)) and (is_infinite(y) and is_finite(z)))) ->
+  (is_infinite(r) and product_sign(r, x, y))) and (((is_finite(x) and
+  ((not (value(x) = 0.0)) and (is_infinite(y) and is_infinite(z)))) ->
+  ((product_sign(z, x, y) -> (is_infinite(r) and same_sign(r, z))) and
+  ((not product_sign(z, x, y)) -> is_NaN(r)))) and (((is_infinite(x) and
+  (is_finite(y) and ((not (value(y) = 0.0)) and is_finite(z)))) ->
+  (is_infinite(r) and product_sign(r, x, y))) and (((is_infinite(x) and
+  (is_finite(y) and ((not (value(y) = 0.0)) and is_infinite(z)))) ->
+  ((product_sign(z, x, y) -> (is_infinite(r) and same_sign(r, z))) and
+  ((not product_sign(z, x, y)) -> is_NaN(r)))) and (((is_infinite(x) and
+  (is_infinite(y) and is_finite(z))) -> (is_infinite(r) and product_sign(r,
+  x, y))) and (((is_finite(x) and (is_finite(y) and is_infinite(z))) ->
+  (is_infinite(r) and same_sign(r, z))) and (((is_infinite(x) and
+  (is_infinite(y) and is_infinite(z))) -> ((product_sign(z, x, y) ->
+  (is_infinite(r) and same_sign(r, z))) and ((not product_sign(z, x, y)) ->
+  is_NaN(r)))) and (((is_finite(x) and (is_finite(y) and (is_finite(z) and
+  no_overflow(m, ((value(x) * value(y)) + value(z)))))) -> (is_finite(r) and
+  ((value(r) = float64(m, ((value(x) * value(y)) + value(z)))) and
+  ((product_sign(z, x, y) -> same_sign(r, z)) and ((not product_sign(z, x,
+  y)) -> ((((value(x) * value(y)) + value(z)) = 0.0) -> (((m = Down) ->
+  (sign1(r) = Neg)) and ((not (m = Down)) -> (sign1(r) = Pos))))))))) and
+  ((is_finite(x) and (is_finite(y) and (is_finite(z) and (not no_overflow(m,
+  ((value(x) * value(y)) + value(z))))))) -> (same_sign_real(sign1(r),
+  ((value(x) * value(y)) + value(z))) and overflow_value(m, r))))))))))))))
+
+predicate sqrt_post(m: fpa_rounding_mode, x: double, r: double) =
+  ((is_NaN(x) -> is_NaN(r)) and ((is_plus_infinity(x) ->
+  is_plus_infinity(r)) and ((is_minus_infinity(x) -> is_NaN(r)) and
+  (((is_finite(x) and (value(x) <  0.0)) -> is_NaN(r)) and
+  (((is_finite(x) and (value(x) = 0.0)) -> (is_finite(r) and
+  ((value(r) = 0.0) and same_sign(r, x)))) and ((is_finite(x) and
+  (0.0 <  value(x))) -> (is_finite(r) and
+  ((value(r) = float64(m, sqrt_real(value(x)))) and (sign1(r) = Pos)))))))))
+
+predicate roundToIntegral_post(m: fpa_rounding_mode, x: double, r: double) =
+  ((is_NaN(x) -> is_NaN(r)) and ((is_infinite(x) -> (is_infinite(r) and
+  same_sign(x, r))) and (is_finite(x) -> (same_sign(x, r) and
+  (value(r) = real_of_int(integer_round(m, value(x))))))))
+
+predicate of_real_exact_post(x: real, r: double) = (is_finite(r) and
+  (value(r) = x))
+
+predicate le(x: double, y: double) = ((is_finite(x) and (is_finite(y) and
+  (value(x) <= value(y)))) or ((is_minus_infinity(x) and is_not_NaN(y)) or
+  (is_not_NaN(x) and is_plus_infinity(y))))
+
+predicate lt(x: double, y: double) = ((is_finite(x) and (is_finite(y) and
+  (value(x) <  value(y)))) or ((is_minus_infinity(x) and (is_not_NaN(y) and
+  (not is_minus_infinity(y)))) or (is_not_NaN(x) and
+  ((not is_plus_infinity(x)) and is_plus_infinity(y)))))
+
+predicate eq(x: double, y: double) = ((is_finite(x) and (is_finite(y) and
+  (value(x) = value(y)))) or (is_infinite(x) and (is_infinite(y) and
+  same_sign(x, y))))
+
+predicate ne(x: double, y: double) = (not eq(x, y))
+
+predicate rem_post(x: double, y: double, r: double) = (((is_NaN(x) or
+  (is_NaN(y) or (is_infinite(x) or is_gen_zero(y)))) -> is_NaN(r)) and
+  ((not (is_NaN(x) or (is_NaN(y) or (is_infinite(x) or is_gen_zero(y))))) ->
+  ((is_infinite(y) -> eq(x, r)) and ((not is_infinite(y)) ->
+  (is_finite(r) and (((value(r) = 0.0) -> same_sign(x, r)) and
+  (value(r) = (value(x) - (value(y) * real_of_int(integer_round(NearestTiesToEven, (value(x) / value(y)))))))))))))
+
+axiom le_lt_trans :
+  (forall x:double. forall y:double. forall z:double. ((le(x, y) and lt(y,
+  z)) -> lt(x, z)))
+
+axiom lt_le_trans :
+  (forall x:double. forall y:double. forall z:double. ((lt(x, y) and le(y,
+  z)) -> lt(x, z)))
+
+axiom le_ge_asym :
+  (forall x:double. forall y:double. ((le(x, y) and le(y, x)) -> eq(x, y)))
+
+axiom not_lt_ge :
+  (forall x:double. forall y:double. (((not lt(x, y)) and (is_not_NaN(x) and
+  is_not_NaN(y))) -> le(y, x)))
+
+axiom not_gt_le :
+  (forall x:double. forall y:double. (((not lt(y, x)) and (is_not_NaN(x) and
+  is_not_NaN(y))) -> le(x, y)))
+
+predicate smt2_double_eq(x: double, y: double) = (((is_finite(x) and
+  (is_finite(y) and ((value(x) = value(y)) and same_sign(x, y)))) or
+  (is_infinite(x) and (is_infinite(y) and same_sign(x, y)))) or
+  (is_NaN(x) and is_NaN(y)))
+
+logic x : double
+
+logic y : double
+
+axiom ax_1 :
+  (value(x) = (-2753747494067056584447266275711701591127834039869711033910876155901242331407010236327488437277278930468864.0))
+
+axiom ax_11 : (sign1(x) = Neg)
+
+axiom ax_12 : is_finite(x)
+
+axiom ax_2 :
+  (value(y) = (-16924932971028041842152387455752413260136346428143790599431586015586053437860587798298580002959382596079739082429053858126253612047238381044762799586902937805487233221090030593290415604553746962699293439149459111936.0))
+
+axiom ax_21 : (sign1(y) = Neg)
+
+axiom ax_22 : is_finite(y)
+
+axiom ax_3 : (not lt(y, x))
+
+axiom ax_31 : true
+
+goal g_1 : false
