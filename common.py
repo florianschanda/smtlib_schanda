@@ -116,7 +116,7 @@ class Benchmark(object):
                 else:
                     self.data += line + "\n"
 
-        if not self.data.endswith("(exit)\n"):
+        if not self.data.endswith("(exit)\n") and self.dialect is None :
             self.data += "(exit)\n"
 
         if altergo_mode:

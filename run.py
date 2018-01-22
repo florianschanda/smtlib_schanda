@@ -151,6 +151,11 @@ def main():
                                ["--input-format=smtlib2"],
                                use_logic=False, # Doesn't like logic strings
                                use_temp=True))
+    provers.append(Prover_Kind("cbmc",
+                               [],
+                               use_dialect="cbmc",
+                               strict_dialect=True))
+
 
     ap = argparse.ArgumentParser()
     ap.add_argument("--suite",
@@ -218,7 +223,7 @@ def main():
     if options.suite in ("all", "spark_all"):
         bench_dirs.append("spark_2014_all")
     if options.suite == "debug":
-        bench_dirs.append("griggio")
+        bench_dirs.append("cbmc/demo")
 
     data_filename = "data_%s.p" % mk_run_id(options.prover_kind,
                                             sane_prover_bin)
