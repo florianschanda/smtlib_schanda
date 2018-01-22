@@ -1,4 +1,4 @@
 all: limiter
 
 limiter:
-	$(CC) limiter.c -o limiter
+	$(CC) -std=c11 limiter.c -o limiter
