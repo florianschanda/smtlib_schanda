@@ -83,6 +83,17 @@ XSAT_BENCH = [
     "div.c.50"
 ]
 
+def find_timeout(path):
+    if os.path.exists(os.path.join(path, "TIMEOUT")):
+        with open(os.path.join(path, "TIMEOUT"), "rU") as fd:
+            tmp = int(fd.read().strip())
+            assert tmp > 0
+            return tmp
+    elif "/" in path:
+        return find_timeout("/".join(path.split("/")[:-1]))
+    else:
+        return None
+
 def main():
     provers = []
     provers.append(Prover_Kind("cvc4",
@@ -171,8 +182,10 @@ def main():
                     default=False,
                     action="store_true")
     ap.add_argument("--timeout",
-                    default=60,
-                    type=int)
+                    default=None,
+                    type=int,
+                    help="by default we use the benchmark-specific timeout; "
+                    "use this option to globally override it")
     ap.add_argument("--force",
                     default=False,
                     action="store_true")
@@ -196,7 +209,7 @@ def main():
     the_prover = None
     for p in provers:
         if p.name == options.prover_kind:
-            the_prover = Prover(p, options.prover_bin, options.timeout)
+            the_prover = Prover(p, options.prover_bin)
 
     bench_dirs = []
     if options.suite in ("all", "schanda", "qf_fp", "fp"):
@@ -246,12 +259,16 @@ def main():
     tasks = []
     for d in bench_dirs:
         for path, dirs, files in os.walk(d):
+            timeout = options.timeout
+            if timeout is None:
+                timeout = find_timeout(path)
             for f in sorted(files):
                 if f.endswith(".smt2"):
                     if options.suite == "xsat_paper" and f.replace(".smt2","") not in XSAT_BENCH:
                         continue
                     t = Task(Benchmark(os.path.join(path, f),
-                                       dialect = the_prover.dialect),
+                                       the_prover.dialect,
+                                       timeout),
                              the_prover)
                     if t.benchmark.cat not in EXISTING_RESULTS:
                         tasks.append(t)

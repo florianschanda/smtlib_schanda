@@ -53,7 +53,7 @@ def secure_name(bm_name):
     return m.hexdigest()
 
 class Benchmark(object):
-    def __init__(self, fn, dialect=None):
+    def __init__(self, fn, dialect=None, timeout_override=None):
         self.benchmark = fn
         self.sha       = secure_name(fn)
         self.name      = os.path.basename(fn)
@@ -61,6 +61,11 @@ class Benchmark(object):
         self.logic     = None
         self.expected  = "unknown"
         self.data      = None
+        if timeout_override is None:
+            self.limit_time = 60
+        else:
+            self.limit_time = timeout_override
+        self.limit_memory = 1024*5 # 5 GiB
         if dialect is not None and os.path.exists(self.benchmark + "_" +
                                                   dialect):
             self.dialect = dialect
@@ -143,10 +148,8 @@ class Prover_Kind(object):
         self.only_logic = only_logic   # only support the given logics
 
 class Prover(object):
-    def __init__(self, kind, binary, timeout):
+    def __init__(self, kind, binary):
         self.cmd       = [binary] + kind.cmd
-        self.timeout   = timeout
-        self.mem_limit = 1024*5 # 5 GiB
         self.logic     = kind.logic
         self.temp      = kind.temp
         self.dialect   = kind.dialect
@@ -171,8 +174,8 @@ class Prover(object):
         altergo_mode = self.dialect is not None and "altergo" in self.dialect
 
         cmd = ["util/limiter",
-               "-t", "%u" % self.timeout,   # given in seconds
-               "-m", "%u" % self.mem_limit, # given in MiB
+               "-t", "%u" % benchmark.limit_time,   # given in seconds
+               "-m", "%u" % benchmark.limit_memory, # given in MiB
                "--",
                ] + self.cmd
         if self.temp:
