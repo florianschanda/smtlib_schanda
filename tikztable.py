@@ -33,15 +33,21 @@ class TikzTable(object):
                  noncomp=[],
                  col_fmt_fn=None,
                  col_rule="Altran2",
-                 col_good="AnSecondaryGreen",
-                 col_bad="AnSecondaryRed",
+                 fmt_good=None,
+                 fmt_bad=None,
                  transposed=False):
         assert type(title) is str
         assert type(columns) is list
 
         self.col_rule  = col_rule
-        self.col_good  = col_good
-        self.col_bad   = col_bad
+        if fmt_good is None:
+            self.fmt_good = lambda x: "{\\color{AnSecondaryGreen}%s}" % x
+        else:
+            self.fmt_good = fmt_good
+        if fmt_bad is None:
+            self.fmt_bad = lambda x: "{\\color{AnSecondaryRed}%s}" % x
+        else:
+            self.fmt_bad = fmt_bad
         self.cat_title = title
         self.columns   = columns
         self.rows      = []
@@ -73,15 +79,15 @@ class TikzTable(object):
                 txt = "{\color{black!33}%s}" % txt
             elif coloring == COL_ERROR:
                 if item == 0.0:
-                    txt = "{\color{%s}%s}" % (self.col_good, txt)
+                    txt = self.fmt_good(txt)
                 else:
-                    txt = "{\color{%s}%s}" % (self.col_bad, txt)
+                    txt = self.fmt_bad(txt)
             elif coloring == COL_AWARD_HIGH:
                 if item == max(competing_data.itervalues()):
-                    txt = "{\color{%s}%s}" % (self.col_good, txt)
+                    txt = self.fmt_good(txt)
             elif coloring == COL_AWARD_LOW:
                 if item == min(competing_data.itervalues()):
-                    txt = "{\color{%s}%s}" % (self.col_good, txt)
+                    txt = self.fmt_good(txt)
             if col in notes:
                 txt += "$^%s$" % notes[col]
             row["data"][col] = txt
@@ -159,25 +165,43 @@ class TikzTable(object):
         return "\n".join(rv)
 
     def emit_plain(self, filename):
+        tbl = {}
+        def put(x, y, txt):
+            if self.transposed:
+                x, y = y, x
+            if y not in tbl:
+                tbl[y] = {x: txt}
+            else:
+                tbl[y][x] = txt
+
+        # Heading
+        put(0, 0, self.cat_title)
+        for i, txt in enumerate(self.columns):
+            put(i+1, 0, self.col_fmt_fn(txt))
+
+        # Rows
+        row_id = 0
+        for row in self.rows:
+            if row["kind"] == "row":
+                row_id += 1
+                put(0, row_id, row["title"])
+                for col, txt in row["data"].iteritems():
+                    put(self.columns.index(col) + 1, row_id, txt)
+
         with open(filename, "w") as fd:
+            width = len(tbl[0])
+            na   = r"\noalign{\smallskip}"
+            rule = r"\hline"
 
-            fd.write("\\begin{tabular}{%s}\n" %
-                     ("l" * (len(self.columns) + 1)))
-            fd.write(self.cat_title + " & ")
-            fd.write(" & ".join(map(self.col_fmt_fn, self.columns)))
-            fd.write(r"\\" + "\n")
-            fd.write("\\hrule\n")
-
-            row_id = 0
-            for row in self.rows:
-                if row["kind"] == "row":
-                    this_row = [row["title"]] + [""] * len(self.columns)
-                    row_id += 1
-                    for col, txt in row["data"].iteritems():
-                        this_row[self.columns.index(col) + 1] = txt
-                    fd.write(" & ".join(this_row))
-                    fd.write(r"\\" + "\n")
-                elif row["kind"] == "rule":
-                    fd.write(r"\hrule" + "\n")
-
+            fd.write("\\begin{tabular}{%s}\n" % ("l" * width))
+            fd.write(rule + na + "\n")
+            for row_id in xrange(len(tbl)):
+                for col_id in xrange(width):
+                    if col_id > 0:
+                        fd.write(" & ")
+                    fd.write(tbl[row_id][col_id])
+                fd.write("\\\\\n")
+                if row_id == 0:
+                    fd.write(na + rule + na + "\n")
+            fd.write(rule + "\n")
             fd.write("\\end{tabular}\n")

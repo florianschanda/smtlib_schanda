@@ -434,6 +434,7 @@ def augment_group_result(rv, group, benchmark_status):
         "score"        : {score: 0 for score in SCORES},
         "average"      : {score: 0.0 for score in SCORES},
         "dialect"      : 0,
+        "time"         : 0.0,
         "participated" : False,
         "annotated"    : False,
     }
@@ -468,6 +469,7 @@ def augment_group_result(rv, group, benchmark_status):
             totals["dialect"] += 1
         if benchmark_status[bm]["status"] in ("s", "u"):
             summary["annotated"] = True
+        summary["time"] += data["time"]
 
     # Add aggregated group summary
     bm_total = sum(summary["score"].itervalues())

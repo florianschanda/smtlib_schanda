@@ -60,6 +60,7 @@ map group_results -> map groupname -> map sha1(bm_name) ->
                                                          oom     -> percent
                                                          error   -> percent
                                                          unsound -> percent
+                                          time -> float
                                           dialect -> int
                                           participated -> False, True
                                           annotated -> False, True

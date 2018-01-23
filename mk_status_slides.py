@@ -528,50 +528,93 @@ def mk_competition_slides(fd):
             else:
                 return "0:%.2f" % flt_seconds
 
-        qualified = [s["prover_kind"] for s in competitors
-                     if s["group_summary"][group]["participated"]]
+        def rank_solver(a, b):
+            if a["prover_kind"] == b["prover_kind"]:
+                return 0
+            elif a["prover_kind"] == "vbs":
+                return 1
+            elif b["prover_kind"] == "vbs":
+                return -1
+            elif (a["group_summary"][group]["score"]["unsound"] > 0 and
+                  b["group_summary"][group]["score"]["unsound"] == 0):
+                return 1
+            elif (a["group_summary"][group]["score"]["unsound"] == 0 and
+                  b["group_summary"][group]["score"]["unsound"] > 0):
+                return -1
+            else:
+                # Sort by solved first
+                tmp = -cmp(a["group_summary"][group]["score"]["solved"],
+                           b["group_summary"][group]["score"]["solved"])
+                if tmp != 0:
+                    return tmp
 
-        t = TikzTable(title      = "Solver",
-                      columns    = [s for s in solvers if s in qualified],
-                      col_fmt_fn = mk_solver_name,
-                      noncomp    = ["vbs"],
-                      transposed = True)
+                # Sort by time
+                tmp = cmp(a["group_summary"][group]["time"],
+                           b["group_summary"][group]["time"])
+                if tmp != 0:
+                    return tmp
 
-        for cat in COMPARISON_CATS:
+                # Finally sort by name
+                return cmp(a["prover_kind"], b["prover_kind"])
+
+
+        solver_order = sorted(competitors, cmp=rank_solver)
+
+        columns = [c["prover_kind"] for c in solver_order
+                   if c["group_summary"][group]["participated"]]
+
+        def build(good=None, bad=None):
+            t = TikzTable(title      = "Solver",
+                          columns    = columns,
+                          col_fmt_fn = mk_solver_name,
+                          noncomp    = ["vbs"],
+                          transposed = True,
+                          fmt_good   = good,
+                          fmt_bad    = bad)
+
+            for cat in COMPARISON_CATS:
+                row = {}
+                notes = {}
+                for c in competitors:
+                    if not c["group_summary"][group]["participated"]:
+                        continue
+
+                    if cat == "solved":
+                        row[c["prover_kind"]] =\
+                          c["group_summary"][group]["average"][cat]
+                    else:
+                        row[c["prover_kind"]] =\
+                          c["group_summary"][group]["score"][cat]
+                    if cat == "solved" and c["group_summary"][group]["dialect"] > 0:
+                        notes[c["prover_kind"]] = "*"
+
+                t.add_row(title      = cat.capitalize(),
+                          data       = row,
+                          format_fn  = mk_fmt_function(cat),
+                          coloring   = mk_coloring(cat),
+                          notes      = notes)
+
             row = {}
-            notes = {}
             for c in competitors:
                 if not c["group_summary"][group]["participated"]:
                     continue
+                row[c["prover_kind"]] = sum(map(lambda x: x["time"],
+                                                c["group_results"][group].itervalues()))
 
-                if cat == "solved":
-                    row[c["prover_kind"]] = c["group_summary"][group]["average"][cat]
-                else:
-                    row[c["prover_kind"]] = c["group_summary"][group]["score"][cat]
-                if cat == "solved" and c["group_summary"][group]["dialect"] > 0:
-                    notes[c["prover_kind"]] = "*"
-
-            t.add_row(title      = cat.capitalize(),
+            t.add_row(title      = "Total time (m:s)",
                       data       = row,
-                      format_fn  = mk_fmt_function(cat),
-                      coloring   = mk_coloring(cat),
-                      notes      = notes)
+                      format_fn  = fmt_time,
+                      coloring   = COL_AWARD_LOW,
+                      notes      = {})
 
-        row = {}
-        for c in competitors:
-            if not c["group_summary"][group]["participated"]:
-                continue
-            row[c["prover_kind"]] = sum(map(lambda x: x["time"],
-                                            c["group_results"][group].itervalues()))
+            return t
 
-        t.add_row(title      = "Total time (m:s)",
-                  data       = row,
-                  format_fn  = fmt_time,
-                  coloring   = COL_AWARD_LOW,
-                  notes      = {})
+        tbl_for_slides = build()
+        fd.write(tbl_for_slides.emit() + "\n")
 
-
-        fd.write(t.emit() + "\n")
+        tbl_for_paper = build(good=lambda x: "\\textbf{%s}" % x,
+                              bad=lambda x: x)
+        tbl_for_paper.emit_plain("stats_table_bench_%s.tex" % group)
 
     # Table comparing all solvers
     fd.write("\\subsection{Comparison over status}\n")
@@ -590,6 +633,7 @@ def mk_competition_slides(fd):
     # Table comparing all benchmarks
     fd.write("\\subsection{Comparison over benchmark}\n")
     for group in GROUPS:
+        # Slides
         total = {"s" : 0, "u" : 0, "?" : 0}
         for bm in data[-1]["group_results"][group]:
             total[BENCHMARKS[bm]["status"]] += 1
@@ -610,6 +654,11 @@ def mk_competition_slides(fd):
                                              "?" : "unknown"}[cat]))
         summary += " (%s)" % ", ".join(tmp)
 
+        with open("stats_bench_%s.tex" % group, "w") as stats_fd:
+            stats_fd.write("\\def\\benchName{%s}\n" % mk_bench_name(group))
+            stats_fd.write("\\def\\benchProblems{%u}\n" % total_problems)
+            stats_fd.write("\\def\\benchSummary{%s}\n" % ", ".join(tmp))
+
         fd.write("\\begin{frame}{Benchmark %s}{%s}\n" %
                  (mk_bench_name(group),
                   summary))
@@ -622,7 +671,6 @@ def mk_competition_slides(fd):
         fd.write("\\end{center}\n")
         fd.write("\\end{adjustwidth}\n")
         fd.write("\\end{frame}\n\n")
-
 
 
 def mk_cactus_slides(fd):
