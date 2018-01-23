@@ -75,6 +75,11 @@ void parse(char *proc_stat_output, float *utime, uint64_t *vsize)
     fld += 1;
     if (fld == 14) {
       sscanf(p, "%lu", &tmp);
+      if (tmp == 0) {
+        // Make sure to never report 0; this can happen in some cases where
+        // programs more or less instantly terminate.
+        tmp = 1;
+      }
       *utime = (float)tmp / ticks_per_second;
     } else if (fld == 23) {
       sscanf(p, "%lu", &tmp);
@@ -83,6 +88,22 @@ void parse(char *proc_stat_output, float *utime, uint64_t *vsize)
 
     while (*p && *p != ' ') ++p;
     if (*p) ++p;
+  }
+}
+
+void get_stats(char *filename,
+               float *utime,
+               uint64_t *vsize,
+               uint64_t *vsize_hwm)
+{
+  int fd = open(filename, O_RDONLY);
+  char buf[4096];
+  read(fd, buf, 4096);
+  close(fd);
+
+  parse(buf, utime, vsize);
+  if (*vsize > *vsize_hwm) {
+    *vsize_hwm = *vsize;
   }
 }
 
@@ -138,8 +159,10 @@ int main(int argc, char **argv)
     asprintf(&filename, "/proc/%u/stat", child_id);
     int running = 1;
 
-    int vsize_hwm = 0;
-    int cycle = 0;
+    float    utime;
+    uint64_t vsize;
+    uint64_t vsize_hwm = 0;
+    int      cycle     = 0;
 
     while(running) {
       /* Many solvers quickly return, it would add a lot of overhead ot
@@ -161,17 +184,7 @@ int main(int argc, char **argv)
       }
 
       /* Measure run-time and memory usage */
-      int fd = open(filename, O_RDONLY);
-      char buf[4096];
-
-      float utime;
-      uint64_t vsize;
-
-      read(fd, buf, 4096);
-      parse(buf, &utime, &vsize);
-      if (vsize > vsize_hwm) {
-        vsize_hwm = vsize;
-      }
+      get_stats(filename, &utime, &vsize, &vsize_hwm);
 
       if (verbose) {
         printf("utime = %.1f s, vsize = %lu MiB\n", utime, vsize);
@@ -193,8 +206,11 @@ int main(int argc, char **argv)
         int tmp = waitpid(child_id, &wstatus, WNOHANG);
         if (tmp != 0) {
           // Either error (-1) or the status has changed and we can stop.
+          // We need to measure stats one last time so we can print the
+          // most precise results possible.
+          get_stats(filename, &utime, &vsize, &vsize_hwm);
           fprintf(stderr,
-                  "limiter::ok %.1f s %u MiB\n", utime, vsize_hwm);
+                  "limiter::ok %.3f s %u MiB\n", utime, vsize_hwm);
           break;
         }
       } else {
