@@ -34,7 +34,8 @@ class TikzTable(object):
                  col_fmt_fn=None,
                  col_rule="Altran2",
                  col_good="AnSecondaryGreen",
-                 col_bad="AnSecondaryRed"):
+                 col_bad="AnSecondaryRed",
+                 transposed=False):
         assert type(title) is str
         assert type(columns) is list
 
@@ -46,6 +47,7 @@ class TikzTable(object):
         self.rows      = []
         self.competing = {c: c not in noncomp
                           for c in columns}
+        self.transposed = transposed
 
         if col_fmt_fn is None:
             self.col_fmt_fn = lambda x: x
@@ -99,7 +101,11 @@ class TikzTable(object):
         def tr_y(y):
             return float(-y) * 0.35
 
-        def emit_box(x, y, txt, title=False):
+        def emit_box(x, y, txt):
+            if self.transposed:
+                x, y = y, x
+
+            title = (y == 0) and x > 0
             n_atr = ["anchor=west"]
             # n_atr.append("fill=black!10")
             if title:
@@ -117,11 +123,16 @@ class TikzTable(object):
             rv.append(n)
 
         def emit_hrule(after_y):
+            if self.transposed:
+                width = len(self.rows)
+            else:
+                width = len(self.columns)
+
             r = r"\draw[%s,thick]" % self.col_rule
 
             y = (tr_y(after_y) + tr_y(after_y + 1)) / 2.0 + 0.05
             r += " (%.3f, %.3f)" % (tr_x(0), y)
-            r += " -- (%.3f, %.3f)" % (tr_x(len(self.columns) + 1), y)
+            r += " -- (%.3f, %.3f)" % (tr_x(width + 1), y)
             r += ";"
 
             rv.append(r)
@@ -129,7 +140,7 @@ class TikzTable(object):
         rv = [r"\begin{tikzpicture}"]
         emit_box(0, 0, self.cat_title)
         for col_id, col in enumerate(self.columns):
-            emit_box(col_id + 1, 0, self.col_fmt_fn(col), title=True)
+            emit_box(col_id + 1, 0, self.col_fmt_fn(col))
         emit_hrule(0)
 
         row_id = 0
@@ -146,3 +157,27 @@ class TikzTable(object):
 
         rv.append(r"\end{tikzpicture}")
         return "\n".join(rv)
+
+    def emit_plain(self, filename):
+        with open(filename, "w") as fd:
+
+            fd.write("\\begin{tabular}{%s}\n" %
+                     ("l" * (len(self.columns) + 1)))
+            fd.write(self.cat_title + " & ")
+            fd.write(" & ".join(map(self.col_fmt_fn, self.columns)))
+            fd.write(r"\\" + "\n")
+            fd.write("\\hrule\n")
+
+            row_id = 0
+            for row in self.rows:
+                if row["kind"] == "row":
+                    this_row = [row["title"]] + [""] * len(self.columns)
+                    row_id += 1
+                    for col, txt in row["data"].iteritems():
+                        this_row[self.columns.index(col) + 1] = txt
+                    fd.write(" & ".join(this_row))
+                    fd.write(r"\\" + "\n")
+                elif row["kind"] == "rule":
+                    fd.write(r"\hrule" + "\n")
+
+            fd.write("\\end{tabular}\n")

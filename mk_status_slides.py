@@ -45,7 +45,7 @@ other_data = [load_results(solver_kind, solver_bin, BENCHMARKS)
 other_data.append(mk_virtual_best_solver(other_data + [data[-1]],
                                          BENCHMARKS))
 
-COMPARISON_CATS = ("solved", "timeout", "oom", "unknown", "error", "unsound")
+COMPARISON_CATS = ("solved", "unknown", "timeout", "oom", "error", "unsound")
 
 GROUPS = sorted(data[-1]["group_summary"])
 
@@ -96,7 +96,10 @@ def mk_fmt_function(criteria):
             if item == 100.0:
                 return "$\checkmark$"
             else:
-                return "%.1f\\%%" % item
+                tmp = "%.1f\\%%" % item
+                if tmp == "100.0\\%":
+                    tmp = "$>$99.9\\%"
+                return tmp
         elif criteria in ("error", "unsound") and item == 0:
             return "$\checkmark$"
         else:
@@ -460,40 +463,12 @@ def mk_competition_slides(fd):
                      cmp=lambda a, b: cmp(a.replace("vbs", "zzz"),
                                           b.replace("vbs", "zzz")))
 
-    # def calculate_unique_solutions():
-    #     verdicts = {}
-    #     for c in competitors:
-    #         for bench, verd in c["verdicts_processed"].iteritems():
-    #             if bench not in verdicts:
-    #                 verdicts[bench] = set()
-    #             if verd in ("sat", "unsat"):
-    #                 verdicts[bench].add(c["prover"]["kind"])
-
-    #     unique_total = {}
-    #     unique_cat   = {}
-    #     for c in competitors:
-    #         unique_total[c["prover"]["kind"]] = 0
-    #         for cat in c["details"]:
-    #             if cat not in unique_cat:
-    #                 unique_cat[cat] = {}
-    #             unique_cat[cat][c["prover"]["kind"]] = 0
-
-    #     for bench, answers in verdicts.iteritems():
-    #         if len(answers) == 1:
-    #             cat    = cat_from_benchmark_name(bench)
-    #             solver = list(answers)[0]
-
-    #             unique_total[solver] += 1
-    #             unique_cat[cat][solver] += 1
-
-    #     return unique_cat, unique_total
-
-
-    def mk_table(criteria):
+    # Produce table for each category over benchmark/solver
+    def mk_cat_table(criteria):
         t = TikzTable(title      = "Benchmark",
                       columns    = solvers,
                       col_fmt_fn = mk_solver_name,
-                      noncomp    = "vbs")
+                      noncomp    = ["vbs"])
 
         # Add result rows
         for group in GROUPS:
@@ -534,90 +509,77 @@ def mk_competition_slides(fd):
 
         fd.write(t.emit() + "\n")
 
-    # def mk_unique_solutions_table():
-    #     def format_fn(item):
-    #         return "%u" % item
+    # Make focussed on individual benchmarks, looking at solvers / categories
+    def mk_bench_table(group):
+        def fmt_time(seconds):
+            flt_seconds = seconds
+            seconds = int(seconds)
 
-    #     t = TikzTable(title      = "Benchmark",
-    #                   columns    = solvers,
-    #                   col_fmt_fn = mk_solver_name)
+            minutes = seconds / 60
+            seconds = seconds % 60
 
-    #     unique_cat, unique_total = calculate_unique_solutions()
+            hours   = minutes / 60
+            minutes = minutes % 60
 
-    #     # Add result rows
-    #     for group in GROUPS:
-    #         data = {}
-    #         notes = {}
+            if hours > 0:
+                return "%u:%02u:%02u" % (hours, minutes, seconds)
+            elif minutes > 0:
+                return "%u:%02u" % (minutes, seconds)
+            else:
+                return "0:%.2f" % flt_seconds
 
-    #         for c in competitors:
-    #             if not c["tried"][group]:
-    #                 continue
+        qualified = [s["prover_kind"] for s in competitors
+                     if s["group_summary"][group]["participated"]]
 
-    #             solver = c["prover"]["kind"]
+        t = TikzTable(title      = "Solver",
+                      columns    = [s for s in solvers if s in qualified],
+                      col_fmt_fn = mk_solver_name,
+                      noncomp    = ["vbs"],
+                      transposed = True)
 
-    #             data[solver] = unique_cat[group][solver]
-    #             if c["snowflakes"][group] > 0:
-    #                 notes[solver] = "*"
+        for cat in COMPARISON_CATS:
+            row = {}
+            notes = {}
+            for c in competitors:
+                if not c["group_summary"][group]["participated"]:
+                    continue
 
-    #         t.add_row(title     = mk_bench_name(group),
-    #                   data      = data,
-    #                   format_fn = format_fn,
-    #                   coloring  = COL_AWARD_HIGH,
-    #                   notes     = notes)
+                if cat == "solved":
+                    row[c["prover_kind"]] = c["group_summary"][group]["average"][cat]
+                else:
+                    row[c["prover_kind"]] = c["group_summary"][group]["score"][cat]
+                if cat == "solved" and c["group_summary"][group]["dialect"] > 0:
+                    notes[c["prover_kind"]] = "*"
 
-    #     # Add summary row
-    #     data = {}
-    #     for c in competitors:
-    #         solver = c["prover"]["kind"]
-    #         data[solver] = unique_total[solver]
+            t.add_row(title      = cat.capitalize(),
+                      data       = row,
+                      format_fn  = mk_fmt_function(cat),
+                      coloring   = mk_coloring(cat),
+                      notes      = notes)
 
-    #     t.start_footer()
-    #     t.add_row(title     = "Total",
-    #               data      = data,
-    #               format_fn = format_fn,
-    #               coloring  = COL_AWARD_HIGH)
+        row = {}
+        for c in competitors:
+            if not c["group_summary"][group]["participated"]:
+                continue
+            row[c["prover_kind"]] = sum(map(lambda x: x["time"],
+                                            c["group_results"][group].itervalues()))
 
-    #     fd.write(t.emit() + "\n")
+        t.add_row(title      = "Total time (m:s)",
+                  data       = row,
+                  format_fn  = fmt_time,
+                  coloring   = COL_AWARD_LOW,
+                  notes      = {})
 
-    ##########################################################################
 
-    # def mk_detailed_unsoundness_table(cat):
-    #     t = TikzTable(title      = "Benchmark",
-    #                   columns    = solvers,
-    #                   col_fmt_fn = mk_solver_name)
-
-    #     # Add result rows
-    #     for group in GROUPS:
-    #         if group in NON_ANNOTATED_TESTS:
-    #             continue
-
-    #         data = {}
-    #         notes = {}
-
-    #         for c in competitors:
-    #             if not c["tried"][group]:
-    #                 continue
-
-    #             solver = c["prover"]["kind"]
-
-    #             data[solver] = c["unsoundness"][group]["wrong_%s" % cat]
-    #             if c["snowflakes"][group] > 0:
-    #                 notes[solver] = "*"
-
-    #         t.add_row(title     = mk_bench_name(group),
-    #                   data      = data,
-    #                   format_fn = mk_fmt_function("unsound"),
-    #                   coloring  = COL_ERROR,
-    #                   notes     = notes)
-
-    #     fd.write(t.emit() + "\n")
+        fd.write(t.emit() + "\n")
 
     # Table comparing all solvers
+    fd.write("\\subsection{Comparison over status}\n")
     for cat in COMPARISON_CATS:
         fd.write("\\begin{frame}{Benchmarks}{With status `%s'}\n" % cat)
         fd.write("\\begin{adjustwidth}{-1cm}{-1cm}\n")
         fd.write("\\begin{center}\n")
-        mk_table(cat)
+        mk_cat_table(cat)
         fd.write("\\end{center}\n")
         fd.write("\\begin{center}\n")
         fd.write("\\footnotesize $^*$) uses different VCs\n")
@@ -625,28 +587,42 @@ def mk_competition_slides(fd):
         fd.write("\\end{adjustwidth}\n")
         fd.write("\\end{frame}\n\n")
 
-        # if cat == "solved":
-        #     fd.write("\\begin{frame}{Benchmarks}{Unique solutions}\n")
-        #     fd.write("\\begin{center}\n")
-        #     mk_unique_solutions_table()
-        #     fd.write("\\end{center}\n")
-        #     fd.write("$^*$) uses different VCs\n")
-        #     fd.write("\\end{frame}\n\n")
+    # Table comparing all benchmarks
+    fd.write("\\subsection{Comparison over benchmark}\n")
+    for group in GROUPS:
+        total = {"s" : 0, "u" : 0, "?" : 0}
+        for bm in data[-1]["group_results"][group]:
+            total[BENCHMARKS[bm]["status"]] += 1
+        total_problems = sum(total.itervalues())
+        assert sum(data[-1]["group_summary"][group]["score"].itervalues()) == total_problems
+        summary = "%u problems" % total_problems
+        tmp = []
+        for cat in "su?":
+            if total[cat] == total_problems:
+                tmp.append("all %s" % {"s" : "SAT",
+                                       "u" : "UNSAT",
+                                       "?" : "unknown"}[cat])
+            elif total[cat] > 0:
+                tmp.append("%.1f\\%% %s" % (float(total[cat] * 100) /
+                                            float(total_problems),
+                                            {"s" : "SAT",
+                                             "u" : "UNSAT",
+                                             "?" : "unknown"}[cat]))
+        summary += " (%s)" % ", ".join(tmp)
 
-        # elif cat == "unsound":
-        #     fd.write("\\begin{frame}{Benchmarks}{Incorrect `unsat' results - these would be really bad for \\spark}\n")
-        #     fd.write("\\begin{center}\n")
-        #     mk_detailed_unsoundness_table("unsat")
-        #     fd.write("\\end{center}\n")
-        #     fd.write("$^*$) uses different VCs\n")
-        #     fd.write("\\end{frame}\n\n")
+        fd.write("\\begin{frame}{Benchmark %s}{%s}\n" %
+                 (mk_bench_name(group),
+                  summary))
+        fd.write("\\begin{adjustwidth}{-1cm}{-1cm}\n")
+        fd.write("\\begin{center}\n")
+        mk_bench_table(group)
+        fd.write("\\end{center}\n")
+        fd.write("\\begin{center}\n")
+        fd.write("\\footnotesize $^*$) uses different VCs\n")
+        fd.write("\\end{center}\n")
+        fd.write("\\end{adjustwidth}\n")
+        fd.write("\\end{frame}\n\n")
 
-        #     fd.write("\\begin{frame}{Benchmarks}{Incorrect `sat' results}\n")
-        #     fd.write("\\begin{center}\n")
-        #     mk_detailed_unsoundness_table("sat")
-        #     fd.write("\\end{center}\n")
-        #     fd.write("$^*$) uses different VCs\n")
-        #     fd.write("\\end{frame}\n\n")
 
 
 def mk_cactus_slides(fd):
