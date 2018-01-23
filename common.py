@@ -470,21 +470,36 @@ def augment_group_result(rv, group, benchmark_status):
             summary["annotated"] = True
 
     # Add aggregated group summary
-    summary["participated"] = (summary["score"]["solved"] > 0 or
-                               summary["score"]["timeout"] > 0 or
-                               summary["score"]["oom"] > 0 or
-                               summary["score"]["unsound"] > 0)
-
-    # Special case for the "previous encoding" solver
-    if rv["prover_kind"] == "oldfp":
-        if summary["dialect"] == 0:
-            summary["participated"] = False
-
     bm_total = sum(summary["score"].itervalues())
     for score in SCORES:
         summary["average"][score] = (
             float(summary["score"][score] * 100) /
             float(bm_total))
+
+    # Decide if a solver "competed". Two ideas: we can either check if they
+    # have given any kind of non-error answer, or (probably better) check
+    # if they have solved a reasonable amount (which removes solvers that
+    # solved 1 or 2 benchmarks by accident). But once a solver returns an
+    # unsound answer we always include it since that is generally a bad
+    # thing that we want to know about.
+    approach = 2
+
+    if approach == 1:
+        summary["participated"] = (summary["score"]["solved"] > 0 or
+                                   summary["score"]["timeout"] > 0 or
+                                   summary["score"]["oom"] > 0 or
+                                   summary["score"]["unsound"] > 0)
+    elif approach == 2:
+        summary["participated"] = (summary["average"]["solved"] +
+                                   summary["average"]["timeout"] > 2.0 or
+                                   summary["score"]["unsound"] > 0)
+    else:
+        assert False
+
+    # Special case for the "previous encoding" solver
+    if rv["prover_kind"] == "oldfp":
+        if summary["dialect"] == 0:
+            summary["participated"] = False
 
     return int(summary["participated"])
 
