@@ -1,0 +1,1 @@
+cbmc/rosa/sine.c --function sine

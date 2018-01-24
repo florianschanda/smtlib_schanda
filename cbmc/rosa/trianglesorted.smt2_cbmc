@@ -1,0 +1,1 @@
+cbmc/rosa/trianglesorted.c --function trianglesorted
