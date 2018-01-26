@@ -3,7 +3,7 @@
 (set-logic QF_FP)
 (set-info :source |Reviewing of Martin Brain's examples by Florian Schanda|)
 (set-info :category crafted)
-;(set-info :status unsat)
+(set-info :status unsat)
 
 (declare-const f Float32)
 (declare-const g Float32)
