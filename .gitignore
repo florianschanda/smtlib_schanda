@@ -5,11 +5,8 @@
 util/limiter
 
 # Canned solver binaries
-cvc4_*
-z3_*
+*_201?_*_*
 altergo_*
-sonolar_*
-gosat_*
 
 # Reports
 fp_progress*.*
