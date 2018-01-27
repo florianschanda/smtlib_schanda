@@ -22,19 +22,26 @@
 ##                                                                          ##
 ##############################################################################
 
-# This tiny script produces a list of directory that contain
-# benchmarks filed in AUFBVFPDTNIRA.
+# This tiny script produces a list of directories in the spark
+# testsuite that contain floating point.
 
 import os
 
-dirs = set()
+fp_dirs = set()
 
-for fn in os.listdir("AUFBVFPDTNIRA"):
-    if fn.endswith(".smt2"):
-        d, _ = fn.split("___", 1)
-        dirs.add(d)
+for path, dirs, files in os.walk("../spark_2014_all"):
+    irrelevant = []
+    for d in dirs:
+        if "FP" not in d:
+            irrelevant.append(d)
+    for d in irrelevant:
+        dirs.remove(d)
+    for f in files:
+        if f.endswith(".smt2"):
+            td, vc = f.split("___", 1)
+            fp_dirs.add(td)
 
 print "FLOAT_ONLY_BENCHMARKS = set(["
-for d in sorted(dirs):
+for d in sorted(fp_dirs):
     print "    '%s'," % d
 print "])"
