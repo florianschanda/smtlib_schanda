@@ -1,6 +1,9 @@
 # Python things
 *.pyc
 
+# Temp
+spark_2014_all/ALL/*
+
 # Utilities
 util/limiter
 
