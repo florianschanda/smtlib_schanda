@@ -476,7 +476,7 @@ def mk_competition_slides(fd):
                 not competitors[0]["group_summary"][group]["annotated"]):
                 continue
 
-            data  = {}
+            tbl_data  = {}
             notes = {}
 
             for c in competitors:
@@ -487,23 +487,23 @@ def mk_competition_slides(fd):
 
                 kind = "average" if criteria == "solved" else "score"
 
-                data[solver] = c["group_summary"][group][kind][criteria]
+                tbl_data[solver] = c["group_summary"][group][kind][criteria]
                 if c["group_summary"][group]["dialect"] > 0:
                     notes[solver] = "*"
 
             t.add_row(title     = mk_bench_name(group),
-                      data      = data,
+                      data      = tbl_data,
                       format_fn = mk_fmt_function(criteria),
                       coloring  = mk_coloring(criteria),
                       notes     = notes)
 
         # Add summary row
-        data = {c["prover_kind"] : c["total_summary"]["average"][criteria]
-                for c in competitors}
+        tbl_data = {c["prover_kind"] : c["total_summary"]["average"][criteria]
+                    for c in competitors}
 
         t.start_footer()
         t.add_row(title     = "Summary",
-                  data      = data,
+                  data      = tbl_data,
                   format_fn = format_fn_totals,
                   coloring  = mk_coloring(criteria))
 
