@@ -73,17 +73,10 @@ class Benchmark(object):
             self.dialect = None
 
     def load(self, keep_logic):
-        altergo_mode = self.dialect is not None and "altergo" in self.dialect
-
+        # First we always load the original benchmark, as that
+        # contains the authoritative status
         self.data = ""
-        if not altergo_mode and self.dialect is not None:
-            fn = self.benchmark + "_" + self.dialect
-        else:
-            fn = self.benchmark
-
-        # We still do this for altergo, since status is not encoded in
-        # the why files.
-        with open(fn, "rU") as fd:
+        with open(self.benchmark, "rU") as fd:
             for raw_line in fd:
                 line = ""
                 in_token = False
@@ -121,13 +114,11 @@ class Benchmark(object):
                 else:
                     self.data += line + "\n"
 
-        if not self.data.endswith("(exit)\n") and self.dialect is None :
-            self.data += "(exit)\n"
-
-        if altergo_mode:
+        # Then, for dialect benchmarks we open that file and use it as
+        # is.
+        if self.dialect is not None:
             with open(self.benchmark + "_" + self.dialect, "rU") as fd:
                 self.data = fd.read()
-
 
     def unload(self):
         self.data = None
