@@ -73,7 +73,7 @@ void parse(char *proc_stat_output, float *utime, uint64_t *vsize)
      parsing */
   while (*p && fld < 100) {
     fld += 1;
-    if (fld == 14) {
+    if (fld == 14) { // utime
       sscanf(p, "%lu", &tmp);
       if (tmp == 0) {
         // Make sure to never report 0; this can happen in some cases where
@@ -81,7 +81,7 @@ void parse(char *proc_stat_output, float *utime, uint64_t *vsize)
         tmp = 1;
       }
       *utime = (float)tmp / ticks_per_second;
-    } else if (fld == 23) {
+    } else if (fld == 23) { //vsize
       sscanf(p, "%lu", &tmp);
       *vsize = tmp / (1024 * 1024);
     }
