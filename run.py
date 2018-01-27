@@ -113,6 +113,12 @@ def main():
                                 "--check-models"],
                                use_dialect="oldfp",
                                strict_dialect=True))
+    # approx stuff
+    provers.append(Prover_Kind("approx",
+                               ["--lang=smt2",
+                                "--fp-over-approximate",
+                                "--no-cond-rewrite-quant",
+                                "--check-models"]))
 
     provers.append(Prover_Kind("z3",
                                ["-in", "-smt2"],
