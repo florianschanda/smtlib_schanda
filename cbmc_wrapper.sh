@@ -1,4 +1,5 @@
 #!/bin/bash
 
 # This wrapper script make CBMC slot into the benchmarking framework here.
-exec cbmc $@ $(cat /dev/stdin)
+CBMC_BIN=$(ls cbmc_2* | sort | tail -1)
+exec ./${CBMC_BIN} $@ $(cat /dev/stdin)
