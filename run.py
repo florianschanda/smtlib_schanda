@@ -166,6 +166,10 @@ def main():
                                [],
                                use_dialect="cbmc",
                                strict_dialect=True))
+    provers.append(Prover_Kind("cbmc_refine",
+                               ["--refine"],
+                               use_dialect="cbmc",
+                               strict_dialect=True))
 
 
     ap = argparse.ArgumentParser()
@@ -177,6 +181,7 @@ def main():
                              "griggio",
                              "spark_all",
                              "xsat_paper", # the 34 benchmarks from xsat paper
+                             "cbmc",
                              "debug"])
     ap.add_argument("--single",
                     default=False,
@@ -235,8 +240,8 @@ def main():
                 bench_dirs.append(d)
     if options.suite in ("all", "spark_all"):
         bench_dirs.append("spark_2014_all")
-    if options.suite == "debug":
-        bench_dirs.append("cbmc/demo")
+    if options.suite in ("all", "cbmc", "qf_fp", "fp"):
+        bench_dirs.append("cbmc")
 
     data_filename = "data_%s.p" % mk_run_id(options.prover_kind,
                                             sane_prover_bin)
@@ -329,7 +334,7 @@ def main():
                     float(n * 100) / float(len(tasks)),
                     start_time)
     else:
-        bunch = 1 if options.suite in ("debug", "xsat_paper") else 5
+        bunch = 1 if options.suite in ("debug", "cbmc", "xsat_paper") else 5
         pool = multiprocessing.Pool()
         for result in pool.imap_unordered(process, tasks, bunch):
             n += 1

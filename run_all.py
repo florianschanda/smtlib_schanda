@@ -48,7 +48,7 @@ GOSAT_VERSION       = sorted(glob("gosat_*"))[-1]
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("suite",
-                    choices=["all", "fast", "industrial"])
+                    choices=["all", "cbmc", "fast", "industrial"])
     ap.add_argument("--force",
                     action="store_true",
                     default=False)
@@ -63,6 +63,10 @@ def main():
         all_provers = False
     elif options.suite == "all":
         bm_suites = ["all"]
+        cvc4_used_versions = CVC4_VERSIONS
+        all_provers = True
+    elif options.suite == "cbmc":
+        bm_suites = ["cbmc"]
         cvc4_used_versions = CVC4_VERSIONS
         all_provers = True
     elif options.suite == "industrial":
@@ -93,6 +97,8 @@ def main():
         invocations.append(("z3_smallfloats", Z3_SF_VERSION))
         invocations.append(("gosat", GOSAT_VERSION))
         invocations.append(("sonolar", "sonolar_2014_12_04"))
+        invocations.append(("cbmc", "cbmc_wrapper.sh"))
+        invocations.append(("cbmc_refine", "cbmc_wrapper.sh"))
 
     print "Compiling utilities..."
     os.system("make -C util")

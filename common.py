@@ -172,6 +172,7 @@ class Prover(object):
         # Since they don't implement SMT-LIB responses we need to special
         # case their responses. Exceptionalism much?
         altergo_mode = self.dialect is not None and "altergo" in self.dialect
+        cbmc_mode    = self.dialect is not None and "cbmc" in self.dialect
 
         cmd = ["util/limiter",
                "-t", "%u" % benchmark.limit_time,   # given in seconds
@@ -247,6 +248,16 @@ class Prover(object):
         elif len(stdout) == 0:
             status = "error"
             comment = stderr.strip()
+        elif cbmc_mode:
+            if "VERIFICATION SUCCESSFUL" in stdout:
+                status = "unsat"
+                comment = ""
+            elif "VERIFICATION FAILED" in stdout:
+                status = "sat"
+                comment = ""
+            else:
+                status = "error"
+                comment = stdout.strip()
         elif altergo_mode:
             tmp = stdout.strip().splitlines()
             if (len(tmp) == 1 and tmp[0].startswith("File ")):
