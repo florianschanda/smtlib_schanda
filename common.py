@@ -52,6 +52,50 @@ def secure_name(bm_name):
     m.update(os.path.normpath(bm_name))
     return m.hexdigest()
 
+def process_smt_file(fn, strip_logic):
+    status = None
+    logic  = None
+    data   = ""
+
+    with open(fn, "rU") as fd:
+        for raw_line in fd:
+            line = ""
+            in_token = False
+            in_comment = False
+            for c in raw_line:
+                if in_token and c == "|":
+                    in_token = False
+                elif c == "|":
+                    in_token = True
+                elif in_token and c == ";":
+                    pass
+                elif c == ";":
+                    in_comment = True
+                    break
+                elif c == "\n":
+                    break
+                line += c
+
+            if "set-info" in line and ":status" in line:
+                tokens = line.strip().split()
+                assert tokens[0] == "(set-info"
+                assert tokens[1] == ":status"
+                status = tokens[2].strip(")")
+                assert status in ("unknown", "sat", "unsat")
+            # elif "set-info" in line and ":smt-lib-version" in line:
+            #     pass
+            elif "(set-logic" in line:
+                tokens = line.strip().split()
+                assert tokens[0] == "(set-logic"
+                assert tokens[1].endswith(")")
+                logic = tokens[1].strip(")")
+                if not strip_logic and logic is not None:
+                    data += "(set-logic %s)\n" % logic
+            else:
+                data += line + "\n"
+
+        return status, logic, data
+
 class Benchmark(object):
     def __init__(self, fn, dialect=None, timeout_override=None):
         self.benchmark = fn
@@ -75,50 +119,19 @@ class Benchmark(object):
     def load(self, keep_logic):
         # First we always load the original benchmark, as that
         # contains the authoritative status
-        self.data = ""
-        with open(self.benchmark, "rU") as fd:
-            for raw_line in fd:
-                line = ""
-                in_token = False
-                in_comment = False
-                for c in raw_line:
-                    if in_token and c == "|":
-                        in_token = False
-                    elif c == "|":
-                        in_token = True
-                    elif in_token and c == ";":
-                        pass
-                    elif c == ";":
-                        in_comment = True
-                        break
-                    elif c == "\n":
-                        break
-                    line += c
+        self.expected, self.logic, self.data = process_smt_file(self.benchmark,
+                                                                not keep_logic)
 
-                if "set-info" in line and ":status" in line:
-                    tokens = line.strip().split()
-                    assert tokens[0] == "(set-info"
-                    assert tokens[1] == ":status"
-                    status = tokens[2].strip(")")
-                    assert status in ("unknown", "sat", "unsat")
-                    self.expected = status
-                # elif "set-info" in line and ":smt-lib-version" in line:
-                #     pass
-                elif "(set-logic" in line:
-                    tokens = line.strip().split()
-                    assert tokens[0] == "(set-logic"
-                    assert tokens[1].endswith(")")
-                    self.logic = tokens[1].strip(")")
-                    if keep_logic and self.logic is not None:
-                        self.data += "(set-logic %s)\n" % self.logic
-                else:
-                    self.data += line + "\n"
-
-        # Then, for dialect benchmarks we open that file and use it as
-        # is.
+        # Then, for dialect benchmarks we do the same processing, but
+        # we discard the status it might contain.
         if self.dialect is not None:
-            with open(self.benchmark + "_" + self.dialect, "rU") as fd:
-                self.data = fd.read()
+            # For these non-smt we just read the file as is.
+            if self.dialect in ("altergo", "altergo_fp", "cbmc", "cbmc_refine"):
+                with open(self.benchmark + "_" + self.dialect, "rU") as fd:
+                    self.data = fd.read()
+            else:
+                _, self.logic, self.data = process_smt_file(self.benchmark,
+                                                            not keep_logic)
 
     def unload(self):
         self.data = None

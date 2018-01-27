@@ -120,8 +120,7 @@ def main():
                                use_dialect="z3"))
     provers.append(Prover_Kind("z3_smallfloats",
                                ["-in", "-smt2"],
-                               use_logic=False,
-                               use_dialect="z3"))
+                               use_logic=False))
     provers.append(Prover_Kind("mathsat",
                                ["-input=smt2"],
                                use_dialect="mathsat"))
