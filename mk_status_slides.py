@@ -55,6 +55,7 @@ def mk_bench_name(cat):
         "nyxbrain"       : "NyxBrain",
         "random"         : "PyMPF",
         "random_ext"     : "PyMPF (extensions)",
+        "cbmc"           : "{\\sc cbmc}",
         "spark_2014"     : "{\\sc Spark~FP}",
         "spark_2014_qf"  : "{\\sc Spark~FP~(QF)}",
         "spark_2014_all" : "{\sc Spark~ALL}",
@@ -75,6 +76,8 @@ def mk_solver_name(nam):
         "colibri"        : "Colibri",
         "mathsat"        : "MathSAT",
         "mathsat_acdl"   : "MathSAT (ACDL)",
+        "cbmc"           : "{\\sc cbmc}",
+        "cbmc_refine"    : "{\\sc cbmc} --refine",
         "altergo"        : "Alt-Ergo 1.3",
         "altergo-fp"     : "Alt-Ergo FPA",
         "gosat"          : "goSAT",
@@ -466,7 +469,8 @@ def mk_competition_slides(fd):
     # Produce table for each category over benchmark/solver
     def mk_cat_table(criteria):
         t = TikzTable(title      = "Benchmark",
-                      columns    = solvers,
+                      columns    = [s for s in solvers
+                                    if "cbmc" not in s],
                       col_fmt_fn = mk_solver_name,
                       noncomp    = ["vbs"])
 
@@ -480,10 +484,11 @@ def mk_competition_slides(fd):
             notes = {}
 
             for c in competitors:
+                solver = c["prover_kind"]
                 if not c["group_summary"][group]["participated"]:
                     continue
-
-                solver = c["prover_kind"]
+                if "cbmc" in solver:
+                    continue
 
                 kind = "average" if criteria == "solved" else "score"
 
@@ -499,7 +504,8 @@ def mk_competition_slides(fd):
 
         # Add summary row
         tbl_data = {c["prover_kind"] : c["total_summary"]["average"][criteria]
-                    for c in competitors}
+                    for c in competitors
+                    if "cbmc" not in c["prover_kind"]}
 
         t.start_footer()
         t.add_row(title     = "Summary",

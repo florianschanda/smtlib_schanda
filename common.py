@@ -405,6 +405,8 @@ def list_results():
             tmp[0:2] = ["mathsat_acdl"]
         elif tmp[0] == "z3" and tmp[1] == "smallfloats":
             tmp[0:2] = ["z3_smallfloats"]
+        elif tmp[0] == "cbmc" and tmp[1] == "refine":
+            tmp[0:2] = ["cbmc_refine"]
         prover_kind = tmp[0]
         prover_bin  = "_".join(tmp[1:])
         rv.append((prover_kind, prover_bin))
