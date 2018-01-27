@@ -1,18 +1,26 @@
 # Python things
 *.pyc
 
+# Utilities
+util/limiter
+
 # Canned solver binaries
 cvc4_*
 z3_*
 altergo_*
+sonolar_*
+gosat_*
 
 # Reports
-fp_progress.*
+fp_progress*.*
 report_*.txt
+fishy.txt
 
 # Results
 data_*.p
 benchmarks.p
-results.tar.xz
+results*.tar.xz
 
 industrial_2*
+
+stats_*.tex
