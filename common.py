@@ -109,7 +109,9 @@ class Benchmark(object):
             self.limit_time = 60
         else:
             self.limit_time = timeout_override
-        self.limit_memory = 1024*5 # 5 GiB
+        # Around 2.5 GiB which is enough to run 48 benchmarks in
+        # parallel on a 48 core box with 128G of RAM
+        self.limit_memory = 2500
         if dialect is not None and os.path.exists(self.benchmark + "_" +
                                                   dialect):
             self.dialect = dialect
