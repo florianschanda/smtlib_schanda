@@ -53,7 +53,7 @@ def secure_name(bm_name):
     return m.hexdigest()
 
 def process_smt_file(fn, strip_logic):
-    status = None
+    status = "unknown"
     logic  = None
     data   = ""
 
