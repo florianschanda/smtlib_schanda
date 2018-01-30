@@ -246,7 +246,12 @@ def main():
     if options.suite in ("all", "spark_all"):
         bench_dirs.append("spark_2014_all")
     if options.suite in ("all", "cbmc", "qf_fp", "fp"):
-        bench_dirs.append("cbmc")
+        bench_dirs.append("cbmc/rosa")
+        bench_dirs.append("cbmc/sv-comp")
+        bench_dirs.append("cbmc/cp2017")
+        bench_dirs.append("cbmc/onera-examples")
+    if options.suite == "debug":
+        bench_dirs.append("industrial_1")
 
     data_filename = "data_%s.p" % mk_run_id(options.prover_kind,
                                             sane_prover_bin)
@@ -283,9 +288,11 @@ def main():
                     if t.benchmark.cat not in EXISTING_RESULTS:
                         tasks.append(t)
                 elif ".smt2_" in f:
-                    assert os.path.exists(os.path.join(path,
+                    if not os.path.exists(os.path.join(path,
                                                        f.split(".smt2_")[0]
-                                                       + ".smt2"))
+                                                       + ".smt2")):
+                        print "No corresponding smt file: %s" % f
+                        assert False
 
     assert not options.suite == "xsat_paper" or len(tasks) == len(XSAT_BENCH)
 

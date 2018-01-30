@@ -1,1 +1,0 @@
-cbmc/demo/baz.c --function baz
