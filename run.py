@@ -175,6 +175,10 @@ def main():
                                ["--refine"],
                                use_dialect="cbmc",
                                strict_dialect=True))
+    provers.append(Prover_Kind("cbmc_symfpu",
+                               ["--symfpu"],
+                               use_dialect="cbmc",
+                               strict_dialect=True))
 
 
     ap = argparse.ArgumentParser()
