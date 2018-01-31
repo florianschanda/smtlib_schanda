@@ -35,6 +35,7 @@ class TikzTable(object):
                  col_rule="Altran2",
                  fmt_good=None,
                  fmt_bad=None,
+                 fmt_ncomp=None,
                  transposed=False):
         assert type(title) is str
         assert type(columns) is list
@@ -48,6 +49,10 @@ class TikzTable(object):
             self.fmt_bad = lambda x: "{\\color{AnSecondaryRed}%s}" % x
         else:
             self.fmt_bad = fmt_bad
+        if fmt_ncomp is None:
+            self.fmt_ncomp = lambda x: "{\\color{black!33}%s}" % x
+        else:
+            self.fmt_ncomp = fmt_ncomp
         self.cat_title = title
         self.columns   = columns
         self.rows      = []
@@ -67,16 +72,17 @@ class TikzTable(object):
 
         competing_data = {col : item
                           for col, item in data.iteritems()
-                          if self.competing[col]}
+                          if col in self.columns and self.competing[col]}
 
         row = {"kind" : "row",
                "title" : title,
                "data"  : {}}
         for col, item in data.iteritems():
-            assert col in self.columns
+            if col not in self.columns:
+                continue
             txt = format_fn(item)
             if not self.competing[col]:
-                txt = "{\color{black!33}%s}" % txt
+                txt = self.fmt_ncomp(txt)
             elif coloring == COL_ERROR:
                 if item == 0.0:
                     txt = self.fmt_good(txt)
@@ -164,7 +170,7 @@ class TikzTable(object):
         rv.append(r"\end{tikzpicture}")
         return "\n".join(rv)
 
-    def emit_plain(self, filename):
+    def emit_plain(self, filename, cwidth=None):
         tbl = {}
         def put(x, y, txt):
             if self.transposed:
@@ -193,13 +199,20 @@ class TikzTable(object):
             na   = r"\noalign{\smallskip}"
             rule = r"\hline"
 
-            fd.write("\\begin{tabular}{%s}\n" % ("l" * width))
+            if cwidth is None:
+                fd.write("\\begin{tabular}{%s}\n" % ("l" * width))
+            else:
+                col = "p{%s}" % cwidth
+                fd.write("\\begin{tabular}{l|%s}\n" % (col * (width - 1)))
             fd.write(rule + na + "\n")
             for row_id in xrange(len(tbl)):
                 for col_id in xrange(width):
                     if col_id > 0:
                         fd.write(" & ")
-                    fd.write(tbl[row_id][col_id])
+                    if col_id not in tbl[row_id]:
+                        fd.write("")
+                    else:
+                        fd.write(tbl[row_id][col_id])
                 fd.write("\\\\\n")
                 if row_id == 0:
                     fd.write(na + rule + na + "\n")

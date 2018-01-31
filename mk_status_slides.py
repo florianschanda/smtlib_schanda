@@ -68,20 +68,41 @@ def mk_bench_name(cat):
 def mk_solver_name(nam):
     return {
         "vbs"            : "Virtual best",
-        "cvc4"           : "{\\sc cvc4} (${\\mathbb F}$)",
+        "cvc4"           : "{\\sc cvc4}",
         "oldfp"          : "{\\sc cvc4} (${\\mathbb R}$)",
-        "nocbqi"         : "{\\sc cvc4} --nocbqi",
+        "nocbqi"         : "{\\sc cvc4} --no-cbqi",
+        "approx"         : "{\\sc cvc4} (${\\mathbb F, approx}$)",
         "z3"             : "Z3",
         "z3_smallfloats" : "Z3 (SmallFloat)",
         "colibri"        : "Colibri",
         "mathsat"        : "MathSAT",
-        "mathsat_acdl"   : "MathSAT (ACDL)",
+        "mathsat_acdl"   : "MathSAT (ACDCL)",
         "cbmc"           : "{\\sc cbmc}",
         "cbmc_refine"    : "{\\sc cbmc} --refine",
         "altergo"        : "Alt-Ergo 1.3",
         "altergo-fp"     : "Alt-Ergo FPA",
         "gosat"          : "goSAT",
         "sonolar"        : "{\\sc sonolar}",
+    }.get(nam, nam)
+
+def mk_brief_solver_name(nam):
+    return "\\tiny " + {
+        "vbs"            : "VBS",
+        "cvc4"           : "CVC4",
+        "oldfp"          : "CVC4-${\\mathbb R}$",
+        "nocbqi"         : "CVC4-NC",
+        "approx"         : "CVC4-A",
+        "z3"             : "Z3",
+        "z3_smallfloats" : "Z3-SF",
+        "colibri"        : "Col",
+        "mathsat"        : "MS",
+        "mathsat_acdl"   : "MS-A",
+        "cbmc"           : "CBMC",
+        "cbmc_refine"    : "CBMC-R",
+        "altergo"        : "AE 1.3",
+        "altergo-fp"     : "AE",
+        "gosat"          : "goSAT",
+        "sonolar"        : "SON",
     }.get(nam, nam)
 
 def mk_coloring(criteria):
@@ -93,15 +114,17 @@ def mk_coloring(criteria):
         # error, unsound
         return COL_ERROR
 
-def mk_fmt_function(criteria):
+def mk_fmt_function(criteria, paper=False):
     def format_fn(item):
         if criteria == "solved":
             if item == 100.0:
                 return "$\checkmark$"
             else:
-                tmp = "%.1f\\%%" % item
-                if tmp == "100.0\\%":
-                    tmp = "$>$99.9\\%"
+                tmp = "%.1f" % item
+                if tmp == "100.0":
+                    tmp = "$>$99.9"
+                if not paper:
+                    tmp += "\\%"
                 return tmp
         elif criteria in ("error", "unsound") and item == 0:
             return "$\checkmark$"
@@ -118,6 +141,12 @@ def mk_cvc4_shortname(prover_bin):
         return "-".join(tmp[-2:])
     else:
         return "-".join(tmp[-3:])
+
+def pp_number(number):
+    tmp = str(number)
+    if number >= 10000:
+        tmp = tmp[:-3] + "," + tmp[-3:]
+    return tmp
 
 def mk_progress_slides(fd):
     versions = [data[0], data[-1]]
@@ -456,7 +485,9 @@ def mk_csf_slides(fd):
         fd.write("\\end{center}\n")
         fd.write("\\end{frame}\n\n")
 
-
+##############################################################################
+# Competition
+##############################################################################
 
 def mk_competition_slides(fd):
     competitors = sorted([data[-1]] + other_data,
@@ -468,52 +499,70 @@ def mk_competition_slides(fd):
 
     # Produce table for each category over benchmark/solver
     def mk_cat_table(criteria):
-        t = TikzTable(title      = "Benchmark",
-                      columns    = [s for s in solvers
-                                    if "cbmc" not in s],
-                      col_fmt_fn = mk_solver_name,
-                      noncomp    = ["vbs"])
+        def build(good=None, bad=None, paper=False):
+            t = TikzTable(title      = "Benchmark",
+                          columns    = [s for s in solvers
+                                        if ("cbmc" not in s and
+                                            (not paper or s != "vbs" or criteria == "solved"))
+                                    ],
+                          col_fmt_fn = mk_brief_solver_name if paper else mk_solver_name,
+                          noncomp    = ["vbs"],
+                          fmt_good   = good,
+                          fmt_bad    = bad,
+                          fmt_ncomp  = (lambda x: x) if paper else None)
 
-        # Add result rows
-        for group in GROUPS:
-            if (criteria == "unsound" and
-                not competitors[0]["group_summary"][group]["annotated"]):
-                continue
-
-            tbl_data  = {}
-            notes = {}
-
-            for c in competitors:
-                solver = c["prover_kind"]
-                if not c["group_summary"][group]["participated"]:
+            # Add result rows
+            for group in GROUPS:
+                if (criteria == "unsound" and
+                    not competitors[0]["group_summary"][group]["annotated"]):
                     continue
-                if "cbmc" in solver:
+                if paper and group == "spark_2014_all":
                     continue
 
-                kind = "average" if criteria == "solved" else "score"
+                tbl_data  = {}
+                notes = {}
 
-                tbl_data[solver] = c["group_summary"][group][kind][criteria]
-                if c["group_summary"][group]["dialect"] > 0:
-                    notes[solver] = "*"
+                for c in competitors:
+                    solver = c["prover_kind"]
+                    if not c["group_summary"][group]["participated"]:
+                        continue
+                    if "cbmc" in solver:
+                        continue
 
-            t.add_row(title     = mk_bench_name(group),
-                      data      = tbl_data,
-                      format_fn = mk_fmt_function(criteria),
-                      coloring  = mk_coloring(criteria),
-                      notes     = notes)
+                    kind = "average" if criteria == "solved" else "score"
 
-        # Add summary row
-        tbl_data = {c["prover_kind"] : c["total_summary"]["average"][criteria]
-                    for c in competitors
-                    if "cbmc" not in c["prover_kind"]}
+                    tbl_data[solver] = c["group_summary"][group][kind][criteria]
+                    if c["group_summary"][group]["dialect"] > 0:
+                        notes[solver] = "*"
 
-        t.start_footer()
-        t.add_row(title     = "Summary",
-                  data      = tbl_data,
-                  format_fn = format_fn_totals,
-                  coloring  = mk_coloring(criteria))
+                t.add_row(title     = mk_bench_name(group),
+                          data      = tbl_data,
+                          format_fn = mk_fmt_function(criteria, paper),
+                          coloring  = mk_coloring(criteria),
+                          notes     = notes)
 
-        fd.write(t.emit() + "\n")
+            # Add summary row
+            tbl_data = {c["prover_kind"] : c["total_summary"]["average"][criteria]
+                        for c in competitors
+                        if "cbmc" not in c["prover_kind"]}
+
+            if not paper:
+                t.start_footer()
+                t.add_row(title     = "Summary",
+                          data      = tbl_data,
+                          format_fn = format_fn_totals,
+                          coloring  = mk_coloring(criteria))
+
+            return t
+
+        tbl_for_slides = build()
+        fd.write(tbl_for_slides.emit() + "\n")
+
+        tbl_for_paper = build(good=lambda x: "\\textbf{%s}" % x,
+                              bad=lambda x: x,
+                              paper=True)
+        tbl_for_paper.emit_plain("stats_category_%s.tex" % criteria,
+                                 cwidth="0.8cm")
 
     # Make focussed on individual benchmarks, looking at solvers / categories
     def mk_bench_table(group):
@@ -645,7 +694,7 @@ def mk_competition_slides(fd):
             total[BENCHMARKS[bm]["status"]] += 1
         total_problems = sum(total.itervalues())
         assert sum(data[-1]["group_summary"][group]["score"].itervalues()) == total_problems
-        summary = "%u problems" % total_problems
+        summary = "%s problems" % pp_number(total_problems)
         tmp = []
         for cat in "su?":
             if total[cat] == total_problems:
@@ -662,7 +711,7 @@ def mk_competition_slides(fd):
 
         with open("stats_bench_%s.tex" % group, "w") as stats_fd:
             stats_fd.write("\\def\\benchName{%s}\n" % mk_bench_name(group))
-            stats_fd.write("\\def\\benchProblems{%u}\n" % total_problems)
+            stats_fd.write("\\def\\benchProblems{%s}\n" % pp_number(total_problems))
             stats_fd.write("\\def\\benchSummary{%s}\n" % ", ".join(tmp))
 
         fd.write("\\begin{frame}{Benchmark %s}{%s}\n" %
