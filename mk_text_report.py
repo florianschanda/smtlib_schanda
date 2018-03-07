@@ -63,7 +63,7 @@ def create_report(prover_kind, prover_bin):
             row = [group]
             row.append("%.1f%%" %
                        sum(summary["average"][cat]
-                           for cat in ("solved", "unknown", "timeout")))
+                           for cat in ("solved", "unknown", "timeout", "oom")))
             row.append("%.1f%%" % summary["average"]["solved"])
             row.append("%u" % summary["score"]["unknown"])
             row.append("%u" % summary["score"]["error"])
@@ -76,7 +76,7 @@ def create_report(prover_kind, prover_bin):
         row = ["TOTAL/AVAV"]
         row.append("%.1f%%" %
                    sum(totals["average"][cat]
-                       for cat in ("solved", "unknown", "timeout")))
+                       for cat in ("solved", "unknown", "timeout", "oom")))
         row.append("%.1f%%" % totals["average"]["solved"])
         row.append("%u" % totals["score"]["unknown"])
         row.append("%u" % totals["score"]["error"])
