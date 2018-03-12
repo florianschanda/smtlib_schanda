@@ -58,6 +58,7 @@ void usage(char *name)
   printf("usage: %s [options] <command [arg...]>\n", name);
   printf("\n");
   printf("  -v        verbose (report measurements)\n");
+  printf("  -g        be gentle (use SIGINT instead of SIGKILL)\n");
   printf("  -t LIMIT  timelimit in seconds (default = 60 s)\n");
   printf("  -m LIMIT  memory limit in MiB  (default =  5 GiB)\n");
 }
@@ -116,12 +117,16 @@ int main(int argc, char **argv)
   int time_limit = 60;
   int mem_limit = 1024 * 5; // 5 GiB
   int verbose = 0;
+  int the_signal = SIGKILL;
 
   int c;
-  while ((c = getopt(argc, argv, "vt:m:")) != -1) {
+  while ((c = getopt(argc, argv, "vgt:m:")) != -1) {
     switch (c) {
     case 'v':
       verbose = 1;
+      break;
+    case 'g':
+      the_signal = SIGINT;
       break;
     case 't':
       time_limit = atoi(optarg);
@@ -214,7 +219,7 @@ int main(int argc, char **argv)
           break;
         }
       } else {
-        kill(child_id, SIGKILL);
+        kill(child_id, the_signal);
         waitpid(child_id, NULL, 0);
         break;
       }
