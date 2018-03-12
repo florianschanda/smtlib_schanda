@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -325,35 +325,17 @@ axiom get__def_axiom1 :
   (get({ us_split_fields1 = { rec__ext__ = x }; attr__tag = x1 },
   extension_pkg__body_elaborated) = true)))
 
-logic body_elaborated : bool
-
-logic extension_pkg__early_call__assume : bool
-
-logic result : bool
-
-logic body_elaborated1 : bool
-
-logic result1 : bool
-
-logic body_elaborated2 : bool
-
-logic result2 : bool
-
-axiom H : (result = body_elaborated)
-
-axiom H1 : (body_elaborated1 = of_int(0))
-
-axiom H2 : (extension_pkg__early_call__assume = op_wrapper({
-  us_split_fields1 = { rec__ext__ = hide_ext__(of_int(0), us_null_ext__) };
-  attr__tag = us_tag1 }, body_elaborated1))
-
-axiom H3 : (extension_pkg__early_call__assume = early_call)
-
-axiom H4 : (result1 = body_elaborated1)
-
-axiom H5 : (body_elaborated2 = of_int(1))
-
-axiom H6 : (result2 = body_elaborated2)
-
  (* File "extension_pkg.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : (body_elaborated2 = true)
+goal WP_parameter_def :
+  (forall body_elaborated:bool.
+  forall extension_pkg__early_call__assume:bool. forall result:bool.
+  forall body_elaborated1:bool. forall result1:bool.
+  forall body_elaborated2:bool.
+  (forall result2:bool. (((({ bool__content = result } = { bool__content =
+  body_elaborated }) and (body_elaborated1 = of_int(0))) and
+  (((extension_pkg__early_call__assume = op_wrapper({ us_split_fields1 = {
+  rec__ext__ = hide_ext__(of_int(0), us_null_ext__) }; attr__tag = us_tag1 },
+  body_elaborated1)) and
+  (extension_pkg__early_call__assume = early_call)) and
+  (((result1 = body_elaborated1) and (body_elaborated2 = of_int(1))) and
+  (result2 = body_elaborated2)))) -> (body_elaborated2 = true))))

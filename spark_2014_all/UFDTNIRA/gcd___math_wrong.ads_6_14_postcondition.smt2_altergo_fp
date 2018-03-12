@@ -233,39 +233,18 @@ logic b : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic math_wrong__gcd__result : int
-
-logic result : int
-
-logic math_wrong__gcd__result1 : int
-
-logic math_wrong__gcd__result2 : int
-
-logic math_wrong__gcd__result3 : int
-
-logic math_wrong__gcd__result4 : int
-
-logic math_wrong__gcd__result5 : int
-
-logic result1 : int
-
-axiom H : in_range(a)
-
-axiom H1 : in_range(b)
-
-axiom H2 : (math_wrong__gcd__result1 = math_wrong__gcd__result2)
-
-axiom H3 : (math_wrong__gcd__result3 = math_wrong__gcd__result1)
-
-axiom H4 : (result = math_wrong__gcd__result)
-
-axiom H5 : (math_wrong__gcd__result1 = 1)
-
-axiom H6 : (math_wrong__gcd__result4 = math_wrong__gcd__result2)
-
-axiom H7 : (math_wrong__gcd__result5 = math_wrong__gcd__result3)
-
-axiom H8 : (result1 = math_wrong__gcd__result4)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (divides(math_wrong__gcd__result4, a) = true)
+goal WP_parameter_def :
+  (forall math_wrong__gcd__result:int. forall result:int.
+  forall math_wrong__gcd__result1:int. forall math_wrong__gcd__result2:int.
+  forall math_wrong__gcd__result3:int. forall math_wrong__gcd__result4:int.
+  forall math_wrong__gcd__result5:int.
+  (forall result1:int. ((in_range(a) and (in_range(b) and
+  (((((math_wrong__gcd__result1 = math_wrong__gcd__result2) and
+  (math_wrong__gcd__result3 = math_wrong__gcd__result1)) and
+  ((result = math_wrong__gcd__result) and
+  (math_wrong__gcd__result1 = 1))) and
+  ((math_wrong__gcd__result4 = math_wrong__gcd__result2) and
+  (math_wrong__gcd__result5 = math_wrong__gcd__result3))) and
+  (result1 = math_wrong__gcd__result4)))) ->
+  (divides(math_wrong__gcd__result4, a) = true))))

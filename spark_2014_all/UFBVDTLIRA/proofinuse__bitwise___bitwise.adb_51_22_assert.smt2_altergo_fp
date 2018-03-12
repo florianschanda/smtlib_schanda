@@ -1397,37 +1397,23 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic res : t1
+logic rliteral3 : t
 
-logic result : t1
-
-logic res1 : t1
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : true
-
-axiom H3 : true
-
-axiom H4 : true
-
-axiom H5 : (result = res)
-
-axiom H6 : (res1 = bw_or1(bw_or1(bw_or1(toBig1(val1), lsl_bv1(toBig1(val2),
-  of_int1(8))), lsl_bv1(toBig1(val3), of_int1(16))), lsl_bv1(toBig1(val4),
-  of_int1(24))))
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 0)
 
  (* File "bitwise.adb", line 36, characters 0-0 *)
-goal WP_parameter_def : (((8 <  16) -> (((8 <  16) ->
+goal WP_parameter_def :
+  (forall res:t1. forall result:t1. forall res1:t1. (((result = res) and
+  (res1 = bw_or1(bw_or1(bw_or1(toBig1(val1), lsl_bv1(toBig1(val2),
+  of_int1(8))), lsl_bv1(toBig1(val3), of_int1(16))), lsl_bv1(toBig1(val4),
+  of_int1(24))))) -> (((8 <  16) -> (((8 <  16) ->
   (res1 = bw_or1(toBig(bw_or(toBig2(val1), lsl_bv(toBig2(val2), of_int(8)))),
   lsl_bv1(toBig(bw_or(toBig2(val3), lsl_bv(toBig2(val4), of_int(8)))),
   of_int1(16))))) and ((not (8 <  16)) ->
   (res1 = bw_or1(toBig(bw_or(toBig2(val1), lsl_bv(toBig2(val2), of_int(8)))),
-  lsl_bv1(toBig(bw_or(toBig2(val3), of_int(0))), of_int1(16))))))) and
+  lsl_bv1(toBig(bw_or(toBig2(val3), rliteral3)), of_int1(16))))))) and
   ((not (8 <  16)) -> (((8 <  16) -> (res1 = bw_or1(toBig(bw_or(toBig2(val1),
-  of_int(0))), lsl_bv1(toBig(bw_or(toBig2(val3), lsl_bv(toBig2(val4),
+  rliteral3)), lsl_bv1(toBig(bw_or(toBig2(val3), lsl_bv(toBig2(val4),
   of_int(8)))), of_int1(16))))) and ((not (8 <  16)) ->
-  (res1 = bw_or1(toBig(bw_or(toBig2(val1), of_int(0))),
-  lsl_bv1(toBig(bw_or(toBig2(val3), of_int(0))), of_int1(16))))))))
+  (res1 = bw_or1(toBig(bw_or(toBig2(val1), rliteral3)),
+  lsl_bv1(toBig(bw_or(toBig2(val3), rliteral3)), of_int1(16))))))))))

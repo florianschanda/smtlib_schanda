@@ -111,27 +111,12 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic level : int
-
-logic level_a : int
-
-logic level_b : int
-
-logic o : int
-
-logic level_a1 : int
-
-logic level_b1 : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range(level))
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(level_a))
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range(level_b))
-
-axiom H3 : in_range(level_a1)
-
-axiom H4 : in_range(level_b1)
-
  (* File "power_14-source_b_14.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : in_range((level_a1 + level_b1))
+goal WP_parameter_def :
+  (forall level:int. forall level_a:int. forall level_b:int.
+  forall level_a1:int. forall level_b1:int.
+  ((((- 2147483648) <= 2147483647) -> in_range(level)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(level_a)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(level_b)) ->
+  (in_range(level_a1) -> (in_range(level_b1) ->
+  in_range((level_a1 + level_b1))))))))

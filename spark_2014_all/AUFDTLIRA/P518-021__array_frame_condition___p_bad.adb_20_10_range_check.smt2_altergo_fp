@@ -159,24 +159,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> (int,integer) farray
-
-axiom concat_def :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : integer, int -> (int,integer) farray
-
-axiom singleton_def :
-  (forall v:integer.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq3 : (int,integer) farray, int, int, (int,integer) farray, int,
   int -> bool
 
@@ -187,17 +169,17 @@ axiom bool_eq_def2 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq3(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq3(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -207,37 +189,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq3(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq3(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq3(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic dummy2 : (int,integer) farray
 
@@ -320,14 +274,14 @@ axiom bool_eq_def3 :
   (((a__first_2 <= a__last_2) and ((b__first_2 <= b__last_2) and
   ((a__last_2 - a__first_2) = (b__last_2 - b__first_2)))) or
   ((not (a__first_2 <= a__last_2)) and (b__last_2 <  b__first_2)))) and
-  (forall temp___idx_133:int. forall temp___idx_134:int.
-  (((((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)) and
-  ((a__first_2 <= temp___idx_134) and (temp___idx_134 <= a__last_2))) and
-  (bool_eq3(get(a, temp___idx_133, temp___idx_134), 1, 3, get(b,
-  ((b__first - a__first) + temp___idx_133),
-  ((b__first_2 - a__first_2) + temp___idx_134)), 1, 3) = true)) or
-  (not (((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)) and
-  ((a__first_2 <= temp___idx_134) and (temp___idx_134 <= a__last_2))))))) ->
+  (forall temp___idx_155:int. forall temp___idx_156:int.
+  (((((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)) and
+  ((a__first_2 <= temp___idx_156) and (temp___idx_156 <= a__last_2))) and
+  (bool_eq3(get(a, temp___idx_155, temp___idx_156), 1, 3, get(b,
+  ((b__first - a__first) + temp___idx_155),
+  ((b__first_2 - a__first_2) + temp___idx_156)), 1, 3) = true)) or
+  (not (((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)) and
+  ((a__first_2 <= temp___idx_156) and (temp___idx_156 <= a__last_2))))))) ->
   (bool_eq4(a, a__first, a__last, a__first_2, a__last_2, b, b__first,
   b__last, b__first_2, b__last_2) = true)) and
   ((not (((((a__first <= a__last) -> ((b__first <= b__last) and
@@ -336,12 +290,12 @@ axiom bool_eq_def3 :
   (((a__first_2 <= a__last_2) -> ((b__first_2 <= b__last_2) and
   ((a__last_2 - a__first_2) = (b__last_2 - b__first_2)))) and
   ((not (a__first_2 <= a__last_2)) -> (b__last_2 <  b__first_2)))) and
-  (forall temp___idx_133:int. forall temp___idx_134:int.
-  ((((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)) and
-  ((a__first_2 <= temp___idx_134) and (temp___idx_134 <= a__last_2))) ->
-  (bool_eq3(get(a, temp___idx_133, temp___idx_134), 1, 3, get(b,
-  ((b__first - a__first) + temp___idx_133),
-  ((b__first_2 - a__first_2) + temp___idx_134)), 1, 3) = true))))) ->
+  (forall temp___idx_155:int. forall temp___idx_156:int.
+  ((((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)) and
+  ((a__first_2 <= temp___idx_156) and (temp___idx_156 <= a__last_2))) ->
+  (bool_eq3(get(a, temp___idx_155, temp___idx_156), 1, 3, get(b,
+  ((b__first - a__first) + temp___idx_155),
+  ((b__first_2 - a__first_2) + temp___idx_156)), 1, 3) = true))))) ->
   (bool_eq4(a, a__first, a__last, a__first_2, a__last_2, b, b__first,
   b__last, b__first_2, b__last_2) = false))))
 
@@ -358,12 +312,12 @@ axiom bool_eq_rev1 :
   (((a__first_2 <= a__last_2) -> ((b__first_2 <= b__last_2) and
   ((a__last_2 - a__first_2) = (b__last_2 - b__first_2)))) and
   ((not (a__first_2 <= a__last_2)) -> (b__last_2 <  b__first_2)))) and
-  (forall temp___idx_133:int. forall temp___idx_134:int.
-  ((((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)) and
-  ((a__first_2 <= temp___idx_134) and (temp___idx_134 <= a__last_2))) ->
-  (bool_eq3(get(a, temp___idx_133, temp___idx_134), 1, 3, get(b,
-  ((b__first - a__first) + temp___idx_133),
-  ((b__first_2 - a__first_2) + temp___idx_134)), 1, 3) = true)))))))
+  (forall temp___idx_155:int. forall temp___idx_156:int.
+  ((((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)) and
+  ((a__first_2 <= temp___idx_156) and (temp___idx_156 <= a__last_2))) ->
+  (bool_eq3(get(a, temp___idx_155, temp___idx_156), 1, 3, get(b,
+  ((b__first - a__first) + temp___idx_155),
+  ((b__first_2 - a__first_2) + temp___idx_156)), 1, 3) = true)))))))
 
 logic dummy3 : map
 
@@ -410,24 +364,6 @@ axiom slide_def2 :
   (forall i:int [(slide2(a, old_first, new_first)[i])]. ((slide2(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,map) farray, int, int, (int,map) farray, int,
-  int -> (int,map) farray
-
-axiom concat_def1 :
-  (forall a:(int,map) farray. forall b:(int,map) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : map, int -> (int,map) farray
-
-axiom singleton_def1 :
-  (forall v:map.
-  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,map) farray, int, int, (int,map) farray, int,
   int -> bool
 
@@ -438,17 +374,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_135:int. ((((a__first <= temp___idx_135) and
-  (temp___idx_135 <= a__last)) and (bool_eq4((a[temp___idx_135]), 1, 3, 1, 3,
-  (b[((b__first - a__first) + temp___idx_135)]), 1, 3, 1, 3) = true)) or
-  (not ((a__first <= temp___idx_135) and (temp___idx_135 <= a__last)))))) ->
+  (forall temp___idx_157:int. ((((a__first <= temp___idx_157) and
+  (temp___idx_157 <= a__last)) and (bool_eq4((a[temp___idx_157]), 1, 3, 1, 3,
+  (b[((b__first - a__first) + temp___idx_157)]), 1, 3, 1, 3) = true)) or
+  (not ((a__first <= temp___idx_157) and (temp___idx_157 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_135:int. (((a__first <= temp___idx_135) and
-  (temp___idx_135 <= a__last)) -> (bool_eq4((a[temp___idx_135]), 1, 3, 1, 3,
-  (b[((b__first - a__first) + temp___idx_135)]), 1, 3, 1, 3) = true))))) ->
+  (forall temp___idx_157:int. (((a__first <= temp___idx_157) and
+  (temp___idx_157 <= a__last)) -> (bool_eq4((a[temp___idx_157]), 1, 3, 1, 3,
+  (b[((b__first - a__first) + temp___idx_157)]), 1, 3, 1, 3) = true))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev2 :
@@ -458,9 +394,9 @@ axiom bool_eq_rev2 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_135:int. (((a__first <= temp___idx_135) and
-  (temp___idx_135 <= a__last)) -> (bool_eq4((a[temp___idx_135]), 1, 3, 1, 3,
-  (b[((b__first - a__first) + temp___idx_135)]), 1, 3, 1, 3) = true)))))))
+  (forall temp___idx_157:int. (((a__first <= temp___idx_157) and
+  (temp___idx_157 <= a__last)) -> (bool_eq4((a[temp___idx_157]), 1, 3, 1, 3,
+  (b[((b__first - a__first) + temp___idx_157)]), 1, 3, 1, 3) = true)))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -682,2009 +618,243 @@ function t15b__ref___projection(a: t15b__ref) : us_t1 = (a).t15b__content
 
 logic p_bad__x__aggregate_def : map -> (int,map) farray
 
-axiom def_axiom :
-  (forall temp___219:map.
-  (forall temp___220:int.
-  ((p_bad__x__aggregate_def(temp___219)[temp___220]) = temp___219)))
+logic temp___253 : (int,integer) farray -> map
 
-logic temp___221 : (int,integer) farray -> map
+logic temp___258 : int -> (int,integer) farray
+
+axiom def_axiom :
+  (forall temp___251:map.
+  (forall temp___252:int.
+  ((p_bad__x__aggregate_def(temp___251)[temp___252]) = temp___251)))
 
 axiom def_axiom1 :
-  (forall temp___223:(int,integer) farray.
-  (forall temp___224:int. forall temp___225:int. (get(temp___221(temp___223),
-  temp___224, temp___225) = temp___223)))
-
-logic temp___226 : int -> (int,integer) farray
+  (forall temp___255:(int,integer) farray.
+  (forall temp___256:int. forall temp___257:int. (get(temp___253(temp___255),
+  temp___256, temp___257) = temp___255)))
 
 axiom def_axiom2 :
-  (forall temp___228:int.
-  (forall temp___229:int.
-  ((temp___226(temp___228)[temp___229]) = of_rep(temp___228))))
-
-logic x : (int,map) farray
-
-logic i3 : int
-
-logic i21 : int
-
-logic i22 : int
-
-logic i1 : int
-
-logic o : integer
-
-logic o1 : (int,integer) farray
-
-logic o2 : map
-
-logic o3 : (int,map) farray
-
-logic o4 : integer
-
-logic o5 : (int,integer) farray
-
-logic o6 : map
-
-logic o7 : (int,map) farray
-
-logic o8 : integer
-
-logic o9 : (int,integer) farray
-
-logic o10 : map
-
-logic o11 : (int,map) farray
-
-logic o12 : integer
-
-logic o13 : (int,integer) farray
-
-logic o14 : map
-
-logic o15 : (int,map) farray
-
-logic o16 : integer
-
-logic o17 : (int,integer) farray
-
-logic o18 : map
-
-logic o19 : (int,map) farray
-
-logic o20 : integer
-
-logic o21 : (int,integer) farray
-
-logic o22 : map
-
-logic o23 : (int,map) farray
-
-logic o24 : integer
-
-logic o25 : (int,integer) farray
-
-logic o26 : map
-
-logic o27 : (int,map) farray
-
-logic o28 : integer
-
-logic o29 : (int,integer) farray
-
-logic o30 : map
-
-logic o31 : (int,map) farray
-
-logic o32 : integer
-
-logic o33 : (int,integer) farray
-
-logic o34 : map
-
-logic o35 : (int,map) farray
-
-logic o36 : integer
-
-logic o37 : (int,integer) farray
-
-logic o38 : map
-
-logic o39 : (int,map) farray
-
-logic o40 : integer
-
-logic o41 : (int,integer) farray
-
-logic o42 : map
-
-logic o43 : (int,map) farray
-
-logic o44 : integer
-
-logic o45 : (int,integer) farray
-
-logic o46 : map
-
-logic o47 : (int,map) farray
-
-logic o48 : integer
-
-logic o49 : (int,integer) farray
-
-logic o50 : map
-
-logic o51 : (int,map) farray
-
-logic o52 : integer
-
-logic o53 : (int,integer) farray
-
-logic o54 : map
-
-logic o55 : (int,map) farray
-
-logic o56 : integer
-
-logic o57 : (int,integer) farray
-
-logic o58 : map
-
-logic o59 : (int,map) farray
-
-logic o60 : integer
-
-logic o61 : (int,integer) farray
-
-logic o62 : map
-
-logic o63 : (int,map) farray
-
-logic o64 : integer
-
-logic o65 : (int,integer) farray
-
-logic o66 : map
-
-logic o67 : (int,map) farray
-
-logic o68 : integer
-
-logic o69 : (int,integer) farray
-
-logic o70 : map
-
-logic o71 : (int,map) farray
-
-logic o72 : integer
-
-logic o73 : (int,integer) farray
-
-logic o74 : map
-
-logic o75 : (int,map) farray
-
-logic o76 : integer
-
-logic o77 : (int,integer) farray
-
-logic o78 : map
-
-logic o79 : (int,map) farray
-
-logic o80 : integer
-
-logic o81 : (int,integer) farray
-
-logic o82 : map
-
-logic o83 : (int,map) farray
-
-logic o84 : integer
-
-logic o85 : (int,integer) farray
-
-logic o86 : map
-
-logic o87 : (int,map) farray
-
-logic o88 : integer
-
-logic o89 : (int,integer) farray
-
-logic o90 : map
-
-logic o91 : (int,map) farray
-
-logic o92 : integer
-
-logic o93 : (int,integer) farray
-
-logic o94 : map
-
-logic o95 : (int,map) farray
-
-logic o96 : integer
-
-logic o97 : (int,integer) farray
-
-logic o98 : map
-
-logic o99 : (int,map) farray
-
-logic o100 : integer
-
-logic o101 : (int,integer) farray
-
-logic o102 : map
-
-logic o103 : (int,map) farray
-
-logic o104 : integer
-
-logic o105 : (int,integer) farray
-
-logic o106 : map
-
-logic o107 : (int,map) farray
-
-logic o108 : (int,map) farray
-
-logic temp___257 : (int,map) farray
-
-logic temp___2571 : t1
-
-logic o109 : integer
-
-logic o110 : (int,integer) farray
-
-logic o111 : map
-
-logic o112 : (int,map) farray
-
-logic o113 : integer
-
-logic o114 : (int,integer) farray
-
-logic o115 : map
-
-logic o116 : (int,map) farray
-
-logic o117 : integer
-
-logic o118 : (int,integer) farray
-
-logic o119 : map
-
-logic o120 : (int,map) farray
-
-logic o121 : integer
-
-logic o122 : (int,integer) farray
-
-logic o123 : map
-
-logic o124 : (int,map) farray
-
-logic o125 : integer
-
-logic o126 : (int,integer) farray
-
-logic o127 : map
-
-logic o128 : (int,map) farray
-
-logic o129 : integer
-
-logic o130 : (int,integer) farray
-
-logic o131 : map
-
-logic o132 : (int,map) farray
-
-logic o133 : integer
-
-logic o134 : (int,integer) farray
-
-logic o135 : map
-
-logic o136 : (int,map) farray
-
-logic o137 : integer
-
-logic o138 : (int,integer) farray
-
-logic o139 : map
-
-logic o140 : (int,map) farray
-
-logic o141 : integer
-
-logic o142 : (int,integer) farray
-
-logic o143 : map
-
-logic o144 : (int,map) farray
-
-logic o145 : integer
-
-logic o146 : (int,integer) farray
-
-logic o147 : map
-
-logic o148 : (int,map) farray
-
-logic o149 : integer
-
-logic o150 : (int,integer) farray
-
-logic o151 : map
-
-logic o152 : (int,map) farray
-
-logic o153 : integer
-
-logic o154 : (int,integer) farray
-
-logic o155 : map
-
-logic o156 : (int,map) farray
-
-logic o157 : integer
-
-logic o158 : (int,integer) farray
-
-logic o159 : map
-
-logic o160 : (int,map) farray
-
-logic o161 : integer
-
-logic o162 : (int,integer) farray
-
-logic o163 : map
-
-logic o164 : (int,map) farray
-
-logic o165 : integer
-
-logic o166 : (int,integer) farray
-
-logic o167 : map
-
-logic o168 : (int,map) farray
-
-logic o169 : integer
-
-logic o170 : (int,integer) farray
-
-logic o171 : map
-
-logic o172 : (int,map) farray
-
-logic o173 : integer
-
-logic o174 : (int,integer) farray
-
-logic o175 : map
-
-logic o176 : (int,map) farray
-
-logic o177 : integer
-
-logic o178 : (int,integer) farray
-
-logic o179 : map
-
-logic o180 : (int,map) farray
-
-logic o181 : integer
-
-logic o182 : (int,integer) farray
-
-logic o183 : map
-
-logic o184 : (int,map) farray
-
-logic o185 : integer
-
-logic o186 : (int,integer) farray
-
-logic o187 : map
-
-logic o188 : (int,map) farray
-
-logic o189 : integer
-
-logic o190 : (int,integer) farray
-
-logic o191 : map
-
-logic o192 : (int,map) farray
-
-logic o193 : integer
-
-logic o194 : (int,integer) farray
-
-logic o195 : map
-
-logic o196 : (int,map) farray
-
-logic o197 : integer
-
-logic o198 : (int,integer) farray
-
-logic o199 : map
-
-logic o200 : (int,map) farray
-
-logic o201 : integer
-
-logic o202 : (int,integer) farray
-
-logic o203 : map
-
-logic o204 : (int,map) farray
-
-logic o205 : integer
-
-logic o206 : (int,integer) farray
-
-logic o207 : map
-
-logic o208 : (int,map) farray
-
-logic o209 : integer
-
-logic o210 : (int,integer) farray
-
-logic o211 : map
-
-logic o212 : (int,map) farray
-
-logic o213 : integer
-
-logic o214 : (int,integer) farray
-
-logic o215 : map
-
-logic o216 : (int,map) farray
-
-logic o217 : (int,map) farray
-
-logic temp___2572 : (int,map) farray
-
-logic temp___2573 : t1
-
-logic o218 : integer
-
-logic o219 : (int,integer) farray
-
-logic o220 : map
-
-logic o221 : (int,map) farray
-
-logic o222 : integer
-
-logic o223 : (int,integer) farray
-
-logic o224 : map
-
-logic o225 : (int,map) farray
-
-logic o226 : integer
-
-logic o227 : (int,integer) farray
-
-logic o228 : map
-
-logic o229 : (int,map) farray
-
-logic o230 : integer
-
-logic o231 : (int,integer) farray
-
-logic o232 : map
-
-logic o233 : (int,map) farray
-
-logic o234 : integer
-
-logic o235 : (int,integer) farray
-
-logic o236 : map
-
-logic o237 : (int,map) farray
-
-logic o238 : integer
-
-logic o239 : (int,integer) farray
-
-logic o240 : map
-
-logic o241 : (int,map) farray
-
-logic o242 : integer
-
-logic o243 : (int,integer) farray
-
-logic o244 : map
-
-logic o245 : (int,map) farray
-
-logic o246 : integer
-
-logic o247 : (int,integer) farray
-
-logic o248 : map
-
-logic o249 : (int,map) farray
-
-logic o250 : integer
-
-logic o251 : (int,integer) farray
-
-logic o252 : map
-
-logic o253 : (int,map) farray
-
-logic o254 : integer
-
-logic o255 : (int,integer) farray
-
-logic o256 : map
-
-logic o257 : (int,map) farray
-
-logic o258 : integer
-
-logic o259 : (int,integer) farray
-
-logic o260 : map
-
-logic o261 : (int,map) farray
-
-logic o262 : integer
-
-logic o263 : (int,integer) farray
-
-logic o264 : map
-
-logic o265 : (int,map) farray
-
-logic o266 : integer
-
-logic o267 : (int,integer) farray
-
-logic o268 : map
-
-logic o269 : (int,map) farray
-
-logic o270 : integer
-
-logic o271 : (int,integer) farray
-
-logic o272 : map
-
-logic o273 : (int,map) farray
-
-logic o274 : integer
-
-logic o275 : (int,integer) farray
-
-logic o276 : map
-
-logic o277 : (int,map) farray
-
-logic o278 : integer
-
-logic o279 : (int,integer) farray
-
-logic o280 : map
-
-logic o281 : (int,map) farray
-
-logic o282 : integer
-
-logic o283 : (int,integer) farray
-
-logic o284 : map
-
-logic o285 : (int,map) farray
-
-logic o286 : integer
-
-logic o287 : (int,integer) farray
-
-logic o288 : map
-
-logic o289 : (int,map) farray
-
-logic o290 : integer
-
-logic o291 : (int,integer) farray
-
-logic o292 : map
-
-logic o293 : (int,map) farray
-
-logic o294 : integer
-
-logic o295 : (int,integer) farray
-
-logic o296 : map
-
-logic o297 : (int,map) farray
-
-logic o298 : integer
-
-logic o299 : (int,integer) farray
-
-logic o300 : map
-
-logic o301 : (int,map) farray
-
-logic o302 : integer
-
-logic o303 : (int,integer) farray
-
-logic o304 : map
-
-logic o305 : (int,map) farray
-
-logic o306 : integer
-
-logic o307 : (int,integer) farray
-
-logic o308 : map
-
-logic o309 : (int,map) farray
-
-logic o310 : integer
-
-logic o311 : (int,integer) farray
-
-logic o312 : map
-
-logic o313 : (int,map) farray
-
-logic o314 : integer
-
-logic o315 : (int,integer) farray
-
-logic o316 : map
-
-logic o317 : (int,map) farray
-
-logic o318 : integer
-
-logic o319 : (int,integer) farray
-
-logic o320 : map
-
-logic o321 : (int,map) farray
-
-logic o322 : integer
-
-logic o323 : (int,integer) farray
-
-logic o324 : map
-
-logic o325 : (int,map) farray
-
-logic o326 : (int,map) farray
-
-logic temp___2574 : (int,map) farray
-
-logic temp___2575 : t1
-
-logic result : (int,map) farray
-
-logic x1 : (int,map) farray
-
-logic result1 : int
-
-logic i31 : int
-
-logic result2 : int
-
-logic i211 : int
-
-logic result3 : int
-
-logic i221 : int
-
-logic result4 : int
-
-logic i11 : int
-
-logic result5 : (int,map) farray
-
-logic x2 : (int,map) farray
-
-logic result6 : int
-
-logic i12 : int
-
-logic result7 : (int,map) farray
-
-logic x3 : (int,map) farray
-
-logic result8 : int
-
-logic i13 : int
-
-logic result9 : (int,map) farray
-
-logic x4 : (int,map) farray
-
-logic result10 : int
-
-logic i222 : int
-
-logic result11 : int
-
-logic i14 : int
-
-logic result12 : (int,map) farray
-
-logic x5 : (int,map) farray
-
-logic result13 : int
-
-logic i15 : int
-
-logic result14 : (int,map) farray
-
-logic x6 : (int,map) farray
-
-logic result15 : int
-
-logic i16 : int
-
-logic result16 : (int,map) farray
-
-logic x7 : (int,map) farray
-
-logic result17 : int
-
-logic i223 : int
-
-logic result18 : int
-
-logic i17 : int
-
-logic result19 : (int,map) farray
-
-logic x8 : (int,map) farray
-
-logic result20 : int
-
-logic i18 : int
-
-logic result21 : (int,map) farray
-
-logic x9 : (int,map) farray
-
-logic result22 : int
-
-logic i19 : int
-
-logic result23 : (int,map) farray
-
-logic x10 : (int,map) farray
-
-logic result24 : int
-
-logic i212 : int
-
-logic result25 : int
-
-logic i224 : int
-
-logic result26 : int
-
-logic i110 : int
-
-logic result27 : (int,map) farray
-
-logic x11 : (int,map) farray
-
-logic result28 : int
-
-logic i111 : int
-
-logic result29 : (int,map) farray
-
-logic x12 : (int,map) farray
-
-logic result30 : int
-
-logic i112 : int
-
-logic result31 : (int,map) farray
-
-logic x13 : (int,map) farray
-
-logic result32 : int
-
-logic i225 : int
-
-logic result33 : int
-
-logic i113 : int
-
-logic result34 : (int,map) farray
-
-logic x14 : (int,map) farray
-
-logic result35 : int
-
-logic i114 : int
-
-logic result36 : (int,map) farray
-
-logic x15 : (int,map) farray
-
-logic result37 : int
-
-logic i115 : int
-
-logic result38 : (int,map) farray
-
-logic x16 : (int,map) farray
-
-logic result39 : int
-
-logic i226 : int
-
-logic result40 : int
-
-logic i116 : int
-
-logic result41 : (int,map) farray
-
-logic x17 : (int,map) farray
-
-logic result42 : int
-
-logic i117 : int
-
-logic result43 : (int,map) farray
-
-logic x18 : (int,map) farray
-
-logic result44 : int
-
-logic i118 : int
-
-logic result45 : (int,map) farray
-
-logic x19 : (int,map) farray
-
-logic result46 : int
-
-logic i213 : int
-
-logic result47 : int
-
-logic i227 : int
-
-logic result48 : int
-
-logic i119 : int
-
-logic result49 : (int,map) farray
-
-logic x20 : (int,map) farray
-
-logic result50 : int
-
-logic i120 : int
-
-logic result51 : (int,map) farray
-
-logic x21 : (int,map) farray
-
-logic result52 : int
-
-logic i121 : int
-
-logic result53 : (int,map) farray
-
-logic x22 : (int,map) farray
-
-logic result54 : int
-
-logic i228 : int
-
-logic result55 : int
-
-logic i122 : int
-
-logic result56 : (int,map) farray
-
-logic x23 : (int,map) farray
-
-logic result57 : int
-
-logic i123 : int
-
-logic result58 : (int,map) farray
-
-logic x24 : (int,map) farray
-
-logic result59 : int
-
-logic i124 : int
-
-logic result60 : (int,map) farray
-
-logic x25 : (int,map) farray
-
-logic result61 : int
-
-logic i229 : int
-
-logic result62 : int
-
-logic i125 : int
-
-logic result63 : (int,map) farray
-
-logic x26 : (int,map) farray
-
-logic result64 : int
-
-logic i126 : int
-
-logic result65 : (int,map) farray
-
-logic x27 : (int,map) farray
-
-logic result66 : int
-
-logic i127 : int
-
-logic result67 : (int,map) farray
-
-logic x28 : (int,map) farray
-
-logic result68 : int
-
-logic i32 : int
-
-logic result69 : int
-
-logic i214 : int
-
-logic result70 : int
-
-logic i2210 : int
-
-logic result71 : int
-
-logic i128 : int
-
-logic result72 : (int,map) farray
-
-logic x29 : (int,map) farray
-
-logic result73 : int
-
-logic i129 : int
-
-logic result74 : (int,map) farray
-
-logic x30 : (int,map) farray
-
-logic result75 : int
-
-logic i130 : int
-
-logic result76 : (int,map) farray
-
-logic x31 : (int,map) farray
-
-logic result77 : int
-
-logic i2211 : int
-
-logic result78 : int
-
-logic i131 : int
-
-logic result79 : (int,map) farray
-
-logic x32 : (int,map) farray
-
-logic result80 : int
-
-logic i132 : int
-
-logic result81 : (int,map) farray
-
-logic x33 : (int,map) farray
-
-logic result82 : int
-
-logic i133 : int
-
-logic result83 : (int,map) farray
-
-logic x34 : (int,map) farray
-
-logic result84 : int
-
-logic i2212 : int
-
-logic result85 : int
-
-logic i134 : int
-
-logic result86 : (int,map) farray
-
-logic x35 : (int,map) farray
-
-logic result87 : int
-
-logic i135 : int
-
-logic result88 : (int,map) farray
-
-logic x36 : (int,map) farray
-
-logic result89 : int
-
-logic i136 : int
-
-logic result90 : (int,map) farray
-
-logic x37 : (int,map) farray
-
-logic result91 : int
-
-logic i215 : int
-
-logic result92 : int
-
-logic i2213 : int
-
-logic result93 : int
-
-logic i137 : int
-
-logic result94 : (int,map) farray
-
-logic x38 : (int,map) farray
-
-logic result95 : int
-
-logic i138 : int
-
-logic result96 : (int,map) farray
-
-logic x39 : (int,map) farray
-
-logic result97 : int
-
-logic i139 : int
-
-logic result98 : (int,map) farray
-
-logic x40 : (int,map) farray
-
-logic result99 : int
-
-logic i2214 : int
-
-logic result100 : int
-
-logic i140 : int
-
-logic result101 : (int,map) farray
-
-logic x41 : (int,map) farray
-
-logic result102 : int
-
-logic i141 : int
-
-logic result103 : (int,map) farray
-
-logic x42 : (int,map) farray
-
-logic result104 : int
-
-logic i142 : int
-
-logic result105 : (int,map) farray
-
-logic x43 : (int,map) farray
-
-logic result106 : int
-
-logic i2215 : int
-
-logic result107 : int
-
-logic i143 : int
-
-logic result108 : (int,map) farray
-
-logic x44 : (int,map) farray
-
-logic result109 : int
-
-logic i144 : int
-
-logic result110 : (int,map) farray
-
-logic x45 : (int,map) farray
-
-logic result111 : int
-
-logic i145 : int
-
-logic result112 : (int,map) farray
-
-logic x46 : (int,map) farray
-
-logic result113 : int
-
-logic i216 : int
-
-logic result114 : int
-
-logic i2216 : int
-
-logic result115 : int
-
-logic i146 : int
-
-logic result116 : (int,map) farray
-
-logic x47 : (int,map) farray
-
-logic result117 : int
-
-logic i147 : int
-
-logic result118 : (int,map) farray
-
-logic x48 : (int,map) farray
-
-logic result119 : int
-
-logic i148 : int
-
-logic result120 : (int,map) farray
-
-logic x49 : (int,map) farray
-
-logic result121 : int
-
-logic i2217 : int
-
-logic result122 : int
-
-logic i149 : int
-
-logic result123 : (int,map) farray
-
-logic x50 : (int,map) farray
-
-logic result124 : int
-
-logic i150 : int
-
-logic result125 : (int,map) farray
-
-logic x51 : (int,map) farray
-
-logic result126 : int
-
-logic i151 : int
-
-logic result127 : (int,map) farray
-
-logic x52 : (int,map) farray
-
-logic result128 : int
-
-logic i2218 : int
-
-logic result129 : int
-
-logic i152 : int
-
-logic result130 : (int,map) farray
-
-logic x53 : (int,map) farray
-
-logic result131 : int
-
-logic i153 : int
-
-logic result132 : (int,map) farray
-
-logic x54 : (int,map) farray
-
-logic result133 : int
-
-logic i154 : int
-
-logic result134 : (int,map) farray
-
-logic x55 : (int,map) farray
-
-logic result135 : int
-
-logic i33 : int
-
-logic result136 : int
-
-logic i217 : int
-
-logic result137 : int
-
-logic i2219 : int
-
-logic result138 : int
-
-logic i155 : int
-
-logic result139 : (int,map) farray
-
-logic x56 : (int,map) farray
-
-logic result140 : int
-
-logic i156 : int
-
-logic result141 : (int,map) farray
-
-logic x57 : (int,map) farray
-
-logic result142 : int
-
-logic i157 : int
-
-logic result143 : (int,map) farray
-
-logic x58 : (int,map) farray
-
-logic result144 : int
-
-logic i2220 : int
-
-logic result145 : int
-
-logic i158 : int
-
-logic result146 : (int,map) farray
-
-logic x59 : (int,map) farray
-
-logic result147 : int
-
-logic i159 : int
-
-logic result148 : (int,map) farray
-
-logic x60 : (int,map) farray
-
-logic result149 : int
-
-logic i160 : int
-
-logic result150 : (int,map) farray
-
-logic x61 : (int,map) farray
-
-logic result151 : int
-
-logic i2221 : int
-
-logic result152 : int
-
-logic i161 : int
-
-logic result153 : (int,map) farray
-
-logic x62 : (int,map) farray
-
-logic result154 : int
-
-logic i162 : int
-
-logic result155 : (int,map) farray
-
-logic x63 : (int,map) farray
-
-logic result156 : int
-
-logic i163 : int
-
-logic result157 : (int,map) farray
-
-logic x64 : (int,map) farray
-
-logic result158 : int
-
-logic i218 : int
-
-logic result159 : int
-
-logic i2222 : int
-
-logic result160 : int
-
-logic i164 : int
-
-logic result161 : (int,map) farray
-
-logic x65 : (int,map) farray
-
-logic result162 : int
-
-logic i165 : int
-
-logic result163 : (int,map) farray
-
-logic x66 : (int,map) farray
-
-logic result164 : int
-
-logic i166 : int
-
-logic result165 : (int,map) farray
-
-logic x67 : (int,map) farray
-
-logic result166 : int
-
-logic i2223 : int
-
-logic result167 : int
-
-logic i167 : int
-
-logic result168 : (int,map) farray
-
-logic x68 : (int,map) farray
-
-logic result169 : int
-
-logic i168 : int
-
-logic result170 : (int,map) farray
-
-logic x69 : (int,map) farray
-
-logic result171 : int
-
-logic i169 : int
-
-logic result172 : (int,map) farray
-
-logic x70 : (int,map) farray
-
-logic result173 : int
-
-logic i2224 : int
-
-logic result174 : int
-
-logic i170 : int
-
-logic result175 : (int,map) farray
-
-logic x71 : (int,map) farray
-
-logic result176 : int
-
-logic i171 : int
-
-logic result177 : (int,map) farray
-
-logic x72 : (int,map) farray
-
-logic result178 : int
-
-logic i172 : int
-
-logic result179 : (int,map) farray
-
-logic x73 : (int,map) farray
-
-logic result180 : int
-
-logic i219 : int
-
-logic result181 : int
-
-logic i2225 : int
-
-logic result182 : int
-
-logic i173 : int
-
-logic result183 : (int,map) farray
-
-logic x74 : (int,map) farray
-
-logic result184 : int
-
-logic i174 : int
-
-logic result185 : (int,map) farray
-
-logic x75 : (int,map) farray
-
-logic result186 : int
-
-logic i175 : int
-
-logic result187 : (int,map) farray
-
-logic x76 : (int,map) farray
-
-logic result188 : int
-
-logic i2226 : int
-
-logic result189 : int
-
-logic i176 : int
-
-logic result190 : (int,map) farray
-
-logic x77 : (int,map) farray
-
-logic result191 : int
-
-logic i177 : int
-
-logic result192 : (int,map) farray
-
-logic x78 : (int,map) farray
-
-logic result193 : int
-
-logic i178 : int
-
-logic result194 : (int,map) farray
-
-logic x79 : (int,map) farray
-
-logic result195 : int
-
-logic i2227 : int
-
-logic result196 : int
-
-logic i179 : int
-
-logic result197 : (int,map) farray
-
-logic x80 : (int,map) farray
-
-logic result198 : int
-
-logic i180 : int
-
-logic result199 : (int,map) farray
-
-logic x81 : (int,map) farray
-
-logic result200 : int
-
-logic i181 : int
-
-logic result201 : (int,map) farray
-
-logic x82 : (int,map) farray
-
-axiom H : (result = x)
-
-axiom H1 : (x1 = p_bad__x__aggregate_def(temp___221(temp___226(0))))
-
-axiom H2 : (x1 = y)
-
-axiom H3 : (result1 = i3)
-
-axiom H4 : (i31 = 1)
-
-axiom H5 : (result2 = i21)
-
-axiom H6 : (i211 = 1)
-
-axiom H7 : (result3 = i22)
-
-axiom H8 : (i221 = 1)
-
-axiom H9 : (result4 = i1)
-
-axiom H10 : (i11 = 1)
-
-axiom H11 : (to_rep(o) = 1)
-
-axiom H12 : (o1 = (get((x1[i31]), i211, i221)[i11 <- o]))
-
-axiom H13 : (o2 = set((x1[i31]), i211, i221, o1))
-
-axiom H14 : (o3 = (x1[i31 <- o2]))
-
-axiom H15 : (result5 = x1)
-
-axiom H16 : (x2 = o3)
-
-axiom H17 : (result6 = i11)
-
-axiom H18 : (i12 = 2)
-
-axiom H19 : (to_rep(o4) = 1)
-
-axiom H20 : (o5 = (get((x2[i31]), i211, i221)[i12 <- o4]))
-
-axiom H21 : (o6 = set((x2[i31]), i211, i221, o5))
-
-axiom H22 : (o7 = (x2[i31 <- o6]))
-
-axiom H23 : (result7 = x2)
-
-axiom H24 : (x3 = o7)
-
-axiom H25 : (result8 = i12)
-
-axiom H26 : (i13 = 3)
-
-axiom H27 : (to_rep(o8) = 1)
-
-axiom H28 : (o9 = (get((x3[i31]), i211, i221)[i13 <- o8]))
-
-axiom H29 : (o10 = set((x3[i31]), i211, i221, o9))
-
-axiom H30 : (o11 = (x3[i31 <- o10]))
-
-axiom H31 : (result9 = x3)
-
-axiom H32 : (x4 = o11)
-
-axiom H33 : (result10 = i221)
-
-axiom H34 : (i222 = 2)
-
-axiom H35 : (result11 = i13)
-
-axiom H36 : (i14 = 1)
-
-axiom H37 : (to_rep(o12) = 1)
-
-axiom H38 : (o13 = (get((x4[i31]), i211, i222)[i14 <- o12]))
-
-axiom H39 : (o14 = set((x4[i31]), i211, i222, o13))
-
-axiom H40 : (o15 = (x4[i31 <- o14]))
-
-axiom H41 : (result12 = x4)
-
-axiom H42 : (x5 = o15)
-
-axiom H43 : (result13 = i14)
-
-axiom H44 : (i15 = 2)
-
-axiom H45 : (to_rep(o16) = 1)
-
-axiom H46 : (o17 = (get((x5[i31]), i211, i222)[i15 <- o16]))
-
-axiom H47 : (o18 = set((x5[i31]), i211, i222, o17))
-
-axiom H48 : (o19 = (x5[i31 <- o18]))
-
-axiom H49 : (result14 = x5)
-
-axiom H50 : (x6 = o19)
-
-axiom H51 : (result15 = i15)
-
-axiom H52 : (i16 = 3)
-
-axiom H53 : (to_rep(o20) = 1)
-
-axiom H54 : (o21 = (get((x6[i31]), i211, i222)[i16 <- o20]))
-
-axiom H55 : (o22 = set((x6[i31]), i211, i222, o21))
-
-axiom H56 : (o23 = (x6[i31 <- o22]))
-
-axiom H57 : (result16 = x6)
-
-axiom H58 : (x7 = o23)
-
-axiom H59 : (result17 = i222)
-
-axiom H60 : (i223 = 3)
-
-axiom H61 : (result18 = i16)
-
-axiom H62 : (i17 = 1)
-
-axiom H63 : (to_rep(o24) = 1)
-
-axiom H64 : (o25 = (get((x7[i31]), i211, i223)[i17 <- o24]))
-
-axiom H65 : (o26 = set((x7[i31]), i211, i223, o25))
-
-axiom H66 : (o27 = (x7[i31 <- o26]))
-
-axiom H67 : (result19 = x7)
-
-axiom H68 : (x8 = o27)
-
-axiom H69 : (result20 = i17)
-
-axiom H70 : (i18 = 2)
-
-axiom H71 : (to_rep(o28) = 1)
-
-axiom H72 : (o29 = (get((x8[i31]), i211, i223)[i18 <- o28]))
-
-axiom H73 : (o30 = set((x8[i31]), i211, i223, o29))
-
-axiom H74 : (o31 = (x8[i31 <- o30]))
-
-axiom H75 : (result21 = x8)
-
-axiom H76 : (x9 = o31)
-
-axiom H77 : (result22 = i18)
-
-axiom H78 : (i19 = 3)
-
-axiom H79 : (to_rep(o32) = 1)
-
-axiom H80 : (o33 = (get((x9[i31]), i211, i223)[i19 <- o32]))
-
-axiom H81 : (o34 = set((x9[i31]), i211, i223, o33))
-
-axiom H82 : (o35 = (x9[i31 <- o34]))
-
-axiom H83 : (result23 = x9)
-
-axiom H84 : (x10 = o35)
-
-axiom H85 : (result24 = i211)
-
-axiom H86 : (i212 = 2)
-
-axiom H87 : (result25 = i223)
-
-axiom H88 : (i224 = 1)
-
-axiom H89 : (result26 = i19)
-
-axiom H90 : (i110 = 1)
-
-axiom H91 : (to_rep(o36) = 1)
-
-axiom H92 : (o37 = (get((x10[i31]), i212, i224)[i110 <- o36]))
-
-axiom H93 : (o38 = set((x10[i31]), i212, i224, o37))
-
-axiom H94 : (o39 = (x10[i31 <- o38]))
-
-axiom H95 : (result27 = x10)
-
-axiom H96 : (x11 = o39)
-
-axiom H97 : (result28 = i110)
-
-axiom H98 : (i111 = 2)
-
-axiom H99 : (to_rep(o40) = 1)
-
-axiom H100 : (o41 = (get((x11[i31]), i212, i224)[i111 <- o40]))
-
-axiom H101 : (o42 = set((x11[i31]), i212, i224, o41))
-
-axiom H102 : (o43 = (x11[i31 <- o42]))
-
-axiom H103 : (result29 = x11)
-
-axiom H104 : (x12 = o43)
-
-axiom H105 : (result30 = i111)
-
-axiom H106 : (i112 = 3)
-
-axiom H107 : (to_rep(o44) = 1)
-
-axiom H108 : (o45 = (get((x12[i31]), i212, i224)[i112 <- o44]))
-
-axiom H109 : (o46 = set((x12[i31]), i212, i224, o45))
-
-axiom H110 : (o47 = (x12[i31 <- o46]))
-
-axiom H111 : (result31 = x12)
-
-axiom H112 : (x13 = o47)
-
-axiom H113 : (result32 = i224)
-
-axiom H114 : (i225 = 2)
-
-axiom H115 : (result33 = i112)
-
-axiom H116 : (i113 = 1)
-
-axiom H117 : (to_rep(o48) = 1)
-
-axiom H118 : (o49 = (get((x13[i31]), i212, i225)[i113 <- o48]))
-
-axiom H119 : (o50 = set((x13[i31]), i212, i225, o49))
-
-axiom H120 : (o51 = (x13[i31 <- o50]))
-
-axiom H121 : (result34 = x13)
-
-axiom H122 : (x14 = o51)
-
-axiom H123 : (result35 = i113)
-
-axiom H124 : (i114 = 2)
-
-axiom H125 : (to_rep(o52) = 1)
-
-axiom H126 : (o53 = (get((x14[i31]), i212, i225)[i114 <- o52]))
-
-axiom H127 : (o54 = set((x14[i31]), i212, i225, o53))
-
-axiom H128 : (o55 = (x14[i31 <- o54]))
-
-axiom H129 : (result36 = x14)
-
-axiom H130 : (x15 = o55)
-
-axiom H131 : (result37 = i114)
-
-axiom H132 : (i115 = 3)
-
-axiom H133 : (to_rep(o56) = 1)
-
-axiom H134 : (o57 = (get((x15[i31]), i212, i225)[i115 <- o56]))
-
-axiom H135 : (o58 = set((x15[i31]), i212, i225, o57))
-
-axiom H136 : (o59 = (x15[i31 <- o58]))
-
-axiom H137 : (result38 = x15)
-
-axiom H138 : (x16 = o59)
-
-axiom H139 : (result39 = i225)
-
-axiom H140 : (i226 = 3)
-
-axiom H141 : (result40 = i115)
-
-axiom H142 : (i116 = 1)
-
-axiom H143 : (to_rep(o60) = 1)
-
-axiom H144 : (o61 = (get((x16[i31]), i212, i226)[i116 <- o60]))
-
-axiom H145 : (o62 = set((x16[i31]), i212, i226, o61))
-
-axiom H146 : (o63 = (x16[i31 <- o62]))
-
-axiom H147 : (result41 = x16)
-
-axiom H148 : (x17 = o63)
-
-axiom H149 : (result42 = i116)
-
-axiom H150 : (i117 = 2)
-
-axiom H151 : (to_rep(o64) = 1)
-
-axiom H152 : (o65 = (get((x17[i31]), i212, i226)[i117 <- o64]))
-
-axiom H153 : (o66 = set((x17[i31]), i212, i226, o65))
-
-axiom H154 : (o67 = (x17[i31 <- o66]))
-
-axiom H155 : (result43 = x17)
-
-axiom H156 : (x18 = o67)
-
-axiom H157 : (result44 = i117)
-
-axiom H158 : (i118 = 3)
-
-axiom H159 : (to_rep(o68) = 1)
-
-axiom H160 : (o69 = (get((x18[i31]), i212, i226)[i118 <- o68]))
-
-axiom H161 : (o70 = set((x18[i31]), i212, i226, o69))
-
-axiom H162 : (o71 = (x18[i31 <- o70]))
-
-axiom H163 : (result45 = x18)
-
-axiom H164 : (x19 = o71)
-
-axiom H165 : (result46 = i212)
-
-axiom H166 : (i213 = 3)
-
-axiom H167 : (result47 = i226)
-
-axiom H168 : (i227 = 1)
-
-axiom H169 : (result48 = i118)
-
-axiom H170 : (i119 = 1)
-
-axiom H171 : (to_rep(o72) = 1)
-
-axiom H172 : (o73 = (get((x19[i31]), i213, i227)[i119 <- o72]))
-
-axiom H173 : (o74 = set((x19[i31]), i213, i227, o73))
-
-axiom H174 : (o75 = (x19[i31 <- o74]))
-
-axiom H175 : (result49 = x19)
-
-axiom H176 : (x20 = o75)
-
-axiom H177 : (result50 = i119)
-
-axiom H178 : (i120 = 2)
-
-axiom H179 : (to_rep(o76) = 1)
-
-axiom H180 : (o77 = (get((x20[i31]), i213, i227)[i120 <- o76]))
-
-axiom H181 : (o78 = set((x20[i31]), i213, i227, o77))
-
-axiom H182 : (o79 = (x20[i31 <- o78]))
-
-axiom H183 : (result51 = x20)
-
-axiom H184 : (x21 = o79)
-
-axiom H185 : (result52 = i120)
-
-axiom H186 : (i121 = 3)
-
-axiom H187 : (to_rep(o80) = 1)
-
-axiom H188 : (o81 = (get((x21[i31]), i213, i227)[i121 <- o80]))
-
-axiom H189 : (o82 = set((x21[i31]), i213, i227, o81))
-
-axiom H190 : (o83 = (x21[i31 <- o82]))
-
-axiom H191 : (result53 = x21)
-
-axiom H192 : (x22 = o83)
-
-axiom H193 : (result54 = i227)
-
-axiom H194 : (i228 = 2)
-
-axiom H195 : (result55 = i121)
-
-axiom H196 : (i122 = 1)
-
-axiom H197 : (to_rep(o84) = 1)
-
-axiom H198 : (o85 = (get((x22[i31]), i213, i228)[i122 <- o84]))
-
-axiom H199 : (o86 = set((x22[i31]), i213, i228, o85))
-
-axiom H200 : (o87 = (x22[i31 <- o86]))
-
-axiom H201 : (result56 = x22)
-
-axiom H202 : (x23 = o87)
-
-axiom H203 : (result57 = i122)
-
-axiom H204 : (i123 = 2)
-
-axiom H205 : (to_rep(o88) = 1)
-
-axiom H206 : (o89 = (get((x23[i31]), i213, i228)[i123 <- o88]))
-
-axiom H207 : (o90 = set((x23[i31]), i213, i228, o89))
-
-axiom H208 : (o91 = (x23[i31 <- o90]))
-
-axiom H209 : (result58 = x23)
-
-axiom H210 : (x24 = o91)
-
-axiom H211 : (result59 = i123)
-
-axiom H212 : (i124 = 3)
-
-axiom H213 : (to_rep(o92) = 1)
-
-axiom H214 : (o93 = (get((x24[i31]), i213, i228)[i124 <- o92]))
-
-axiom H215 : (o94 = set((x24[i31]), i213, i228, o93))
-
-axiom H216 : (o95 = (x24[i31 <- o94]))
-
-axiom H217 : (result60 = x24)
-
-axiom H218 : (x25 = o95)
-
-axiom H219 : (result61 = i228)
-
-axiom H220 : (i229 = 3)
-
-axiom H221 : (result62 = i124)
-
-axiom H222 : (i125 = 1)
-
-axiom H223 : (to_rep(o96) = 1)
-
-axiom H224 : (o97 = (get((x25[i31]), i213, i229)[i125 <- o96]))
-
-axiom H225 : (o98 = set((x25[i31]), i213, i229, o97))
-
-axiom H226 : (o99 = (x25[i31 <- o98]))
-
-axiom H227 : (result63 = x25)
-
-axiom H228 : (x26 = o99)
-
-axiom H229 : (result64 = i125)
-
-axiom H230 : (i126 = 2)
-
-axiom H231 : (to_rep(o100) = 1)
-
-axiom H232 : (o101 = (get((x26[i31]), i213, i229)[i126 <- o100]))
-
-axiom H233 : (o102 = set((x26[i31]), i213, i229, o101))
-
-axiom H234 : (o103 = (x26[i31 <- o102]))
-
-axiom H235 : (result65 = x26)
-
-axiom H236 : (x27 = o103)
-
-axiom H237 : (result66 = i126)
-
-axiom H238 : (i127 = 3)
-
-axiom H239 : (to_rep(o104) = 1)
-
-axiom H240 : (o105 = (get((x27[i31]), i213, i229)[i127 <- o104]))
-
-axiom H241 : (o106 = set((x27[i31]), i213, i229, o105))
-
-axiom H242 : (o107 = (x27[i31 <- o106]))
-
-axiom H243 : (result67 = x27)
-
-axiom H244 : (x28 = o107)
-
-axiom H245 : ((i31 <= 3) -> (((1 <= i31) and (i31 <= 3)) and ((1 <= 3) and
-  (3 <= 3))))
-
-axiom H246 : (o108 = y)
-
-axiom H247 : (temp___257 = o108)
-
-axiom H248 : (temp___2571 = mk1(i31, 3))
-
-axiom H249 : (i31 <= 3)
-
- (* File "p_bad.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : (1 <= i31)
+  (forall temp___260:int. (in_range(temp___260) ->
+  (forall temp___261:int.
+  (to_rep((temp___258(temp___260)[temp___261])) = temp___260))))
+
+ (* File "p_bad.adb", line 8, characters 0-0 *)
+goal WP_parameter_def :
+  (forall x:(int,map) farray. forall i3:int. forall i21:int. forall i22:int.
+  forall i1:int. forall o:integer. forall o1:(int,integer) farray.
+  forall o2:map. forall o3:(int,map) farray. forall o4:integer.
+  forall o5:(int,integer) farray. forall o6:map. forall o7:(int,map) farray.
+  forall o8:integer. forall o9:(int,integer) farray. forall o10:map.
+  forall o11:(int,map) farray. forall o12:integer.
+  forall o13:(int,integer) farray. forall o14:map.
+  forall o15:(int,map) farray. forall o16:integer.
+  forall o17:(int,integer) farray. forall o18:map.
+  forall o19:(int,map) farray. forall o20:integer.
+  forall o21:(int,integer) farray. forall o22:map.
+  forall o23:(int,map) farray. forall o24:integer.
+  forall o25:(int,integer) farray. forall o26:map.
+  forall o27:(int,map) farray. forall o28:integer.
+  forall o29:(int,integer) farray. forall o30:map.
+  forall o31:(int,map) farray. forall o32:integer.
+  forall o33:(int,integer) farray. forall o34:map.
+  forall o35:(int,map) farray. forall o36:integer.
+  forall o37:(int,integer) farray. forall o38:map.
+  forall o39:(int,map) farray. forall o40:integer.
+  forall o41:(int,integer) farray. forall o42:map.
+  forall o43:(int,map) farray. forall o44:integer.
+  forall o45:(int,integer) farray. forall o46:map.
+  forall o47:(int,map) farray. forall o48:integer.
+  forall o49:(int,integer) farray. forall o50:map.
+  forall o51:(int,map) farray. forall o52:integer.
+  forall o53:(int,integer) farray. forall o54:map.
+  forall o55:(int,map) farray. forall o56:integer.
+  forall o57:(int,integer) farray. forall o58:map.
+  forall o59:(int,map) farray. forall o60:integer.
+  forall o61:(int,integer) farray. forall o62:map.
+  forall o63:(int,map) farray. forall o64:integer.
+  forall o65:(int,integer) farray. forall o66:map.
+  forall o67:(int,map) farray. forall o68:integer.
+  forall o69:(int,integer) farray. forall o70:map.
+  forall o71:(int,map) farray. forall o72:integer.
+  forall o73:(int,integer) farray. forall o74:map.
+  forall o75:(int,map) farray. forall o76:integer.
+  forall o77:(int,integer) farray. forall o78:map.
+  forall o79:(int,map) farray. forall o80:integer.
+  forall o81:(int,integer) farray. forall o82:map.
+  forall o83:(int,map) farray. forall o84:integer.
+  forall o85:(int,integer) farray. forall o86:map.
+  forall o87:(int,map) farray. forall o88:integer.
+  forall o89:(int,integer) farray. forall o90:map.
+  forall o91:(int,map) farray. forall o92:integer.
+  forall o93:(int,integer) farray. forall o94:map.
+  forall o95:(int,map) farray. forall o96:integer.
+  forall o97:(int,integer) farray. forall o98:map.
+  forall o99:(int,map) farray. forall o100:integer.
+  forall o101:(int,integer) farray. forall o102:map.
+  forall o103:(int,map) farray. forall o104:integer.
+  forall o105:(int,integer) farray. forall o106:map.
+  forall o107:(int,map) farray. forall o108:(int,map) farray.
+  forall temp___289:(int,map) farray. forall temp___2891:t1.
+  forall result:(int,map) farray. forall x1:(int,map) farray.
+  forall result1:int. forall i31:int. forall result2:int. forall i211:int.
+  forall result3:int. forall i221:int. forall result4:int. forall i11:int.
+  forall result5:(int,map) farray. forall x2:(int,map) farray.
+  forall result6:int. forall i12:int. forall result7:(int,map) farray.
+  forall x3:(int,map) farray. forall result8:int. forall i13:int.
+  forall result9:(int,map) farray. forall x4:(int,map) farray.
+  forall result10:int. forall i222:int. forall result11:int. forall i14:int.
+  forall result12:(int,map) farray. forall x5:(int,map) farray.
+  forall result13:int. forall i15:int. forall result14:(int,map) farray.
+  forall x6:(int,map) farray. forall result15:int. forall i16:int.
+  forall result16:(int,map) farray. forall x7:(int,map) farray.
+  forall result17:int. forall i223:int. forall result18:int. forall i17:int.
+  forall result19:(int,map) farray. forall x8:(int,map) farray.
+  forall result20:int. forall i18:int. forall result21:(int,map) farray.
+  forall x9:(int,map) farray. forall result22:int. forall i19:int.
+  forall result23:(int,map) farray. forall x10:(int,map) farray.
+  forall result24:int. forall i212:int. forall result25:int. forall i224:int.
+  forall result26:int. forall i110:int. forall result27:(int,map) farray.
+  forall x11:(int,map) farray. forall result28:int. forall i111:int.
+  forall result29:(int,map) farray. forall x12:(int,map) farray.
+  forall result30:int. forall i112:int. forall result31:(int,map) farray.
+  forall x13:(int,map) farray. forall result32:int. forall i225:int.
+  forall result33:int. forall i113:int. forall result34:map__ref2.
+  forall x14:(int,map) farray. forall result35:int__ref. forall i114:int.
+  forall result36:map__ref2. forall x15:(int,map) farray.
+  forall result37:int__ref. forall i115:int. forall result38:map__ref2.
+  forall x16:(int,map) farray. forall result39:int__ref. forall i226:int.
+  forall result40:int__ref. forall i116:int. forall result41:map__ref2.
+  forall x17:(int,map) farray. forall result42:int__ref. forall i117:int.
+  forall result43:map__ref2. forall x18:(int,map) farray.
+  forall result44:int__ref. forall i118:int. forall result45:map__ref2.
+  forall x19:(int,map) farray. forall result46:int__ref. forall i213:int.
+  forall result47:int__ref. forall i227:int. forall result48:int__ref.
+  forall i119:int. forall result49:map__ref2. forall x20:(int,map) farray.
+  forall result50:int__ref. forall i120:int. forall result51:map__ref2.
+  forall x21:(int,map) farray. forall result52:int__ref. forall i121:int.
+  forall result53:map__ref2. forall x22:(int,map) farray.
+  forall result54:int__ref. forall i228:int. forall result55:int__ref.
+  forall i122:int. forall result56:map__ref2. forall x23:(int,map) farray.
+  forall result57:int__ref. forall i123:int. forall result58:map__ref2.
+  forall x24:(int,map) farray. forall result59:int__ref. forall i124:int.
+  forall result60:map__ref2. forall x25:(int,map) farray.
+  forall result61:int__ref. forall i229:int. forall result62:int__ref.
+  forall i125:int. forall result63:map__ref2. forall x26:(int,map) farray.
+  forall result64:int__ref. forall i126:int. forall result65:map__ref2.
+  forall x27:(int,map) farray. forall result66:int__ref. forall i127:int.
+  forall result67:map__ref2. forall x28:(int,map) farray. (((result = x) and
+  (x1 = p_bad__x__aggregate_def(temp___253(temp___258(0))))) -> ((x1 = y) ->
+  (((result1 = i3) and (i31 = 1)) -> ((((result2 = i21) and (i211 = 1)) and
+  ((((result3 = i22) and (i221 = 1)) and ((((result4 = i1) and (i11 = 1)) and
+  ((((((to_rep(o) = 1) and (o1 = (get((x1[i31]), i211, i221)[i11 <- o]))) and
+  (o2 = set((x1[i31]), i211, i221, o1))) and (o3 = (x1[i31 <- o2]))) and
+  ((result5 = x1) and (x2 = o3))) and (((result6 = i11) and (i12 = 2)) and
+  ((((((to_rep(o4) = 1) and (o5 = (get((x2[i31]), i211,
+  i221)[i12 <- o4]))) and (o6 = set((x2[i31]), i211, i221, o5))) and
+  (o7 = (x2[i31 <- o6]))) and ((result7 = x2) and (x3 = o7))) and
+  (((result8 = i12) and (i13 = 3)) and (((((to_rep(o8) = 1) and
+  (o9 = (get((x3[i31]), i211, i221)[i13 <- o8]))) and (o10 = set((x3[i31]),
+  i211, i221, o9))) and (o11 = (x3[i31 <- o10]))) and ((result9 = x3) and
+  (x4 = o11)))))))) and (((result10 = i221) and (i222 = 2)) and
+  ((((result11 = i13) and (i14 = 1)) and ((((((to_rep(o12) = 1) and
+  (o13 = (get((x4[i31]), i211, i222)[i14 <- o12]))) and (o14 = set((x4[i31]),
+  i211, i222, o13))) and (o15 = (x4[i31 <- o14]))) and ((result12 = x4) and
+  (x5 = o15))) and (((result13 = i14) and (i15 = 2)) and
+  ((((((to_rep(o16) = 1) and (o17 = (get((x5[i31]), i211,
+  i222)[i15 <- o16]))) and (o18 = set((x5[i31]), i211, i222, o17))) and
+  (o19 = (x5[i31 <- o18]))) and ((result14 = x5) and (x6 = o19))) and
+  (((result15 = i15) and (i16 = 3)) and (((((to_rep(o20) = 1) and
+  (o21 = (get((x6[i31]), i211, i222)[i16 <- o20]))) and (o22 = set((x6[i31]),
+  i211, i222, o21))) and (o23 = (x6[i31 <- o22]))) and ((result16 = x6) and
+  (x7 = o23)))))))) and (((result17 = i222) and (i223 = 3)) and
+  (((result18 = i16) and (i17 = 1)) and ((((((to_rep(o24) = 1) and
+  (o25 = (get((x7[i31]), i211, i223)[i17 <- o24]))) and (o26 = set((x7[i31]),
+  i211, i223, o25))) and (o27 = (x7[i31 <- o26]))) and ((result19 = x7) and
+  (x8 = o27))) and (((result20 = i17) and (i18 = 2)) and
+  ((((((to_rep(o28) = 1) and (o29 = (get((x8[i31]), i211,
+  i223)[i18 <- o28]))) and (o30 = set((x8[i31]), i211, i223, o29))) and
+  (o31 = (x8[i31 <- o30]))) and ((result21 = x8) and (x9 = o31))) and
+  (((result22 = i18) and (i19 = 3)) and (((((to_rep(o32) = 1) and
+  (o33 = (get((x9[i31]), i211, i223)[i19 <- o32]))) and (o34 = set((x9[i31]),
+  i211, i223, o33))) and (o35 = (x9[i31 <- o34]))) and ((result23 = x9) and
+  (x10 = o35))))))))))))) and (((result24 = i211) and (i212 = 2)) and
+  ((((result25 = i223) and (i224 = 1)) and ((((result26 = i19) and
+  (i110 = 1)) and ((((((to_rep(o36) = 1) and (o37 = (get((x10[i31]), i212,
+  i224)[i110 <- o36]))) and (o38 = set((x10[i31]), i212, i224, o37))) and
+  (o39 = (x10[i31 <- o38]))) and ((result27 = x10) and (x11 = o39))) and
+  (((result28 = i110) and (i111 = 2)) and ((((((to_rep(o40) = 1) and
+  (o41 = (get((x11[i31]), i212, i224)[i111 <- o40]))) and
+  (o42 = set((x11[i31]), i212, i224, o41))) and
+  (o43 = (x11[i31 <- o42]))) and ((result29 = x11) and (x12 = o43))) and
+  (((result30 = i111) and (i112 = 3)) and (((((to_rep(o44) = 1) and
+  (o45 = (get((x12[i31]), i212, i224)[i112 <- o44]))) and
+  (o46 = set((x12[i31]), i212, i224, o45))) and
+  (o47 = (x12[i31 <- o46]))) and ((result31 = x12) and (x13 = o47)))))))) and
+  (((result32 = i224) and (i225 = 2)) and ((((result33 = i112) and
+  (i113 = 1)) and ((((((to_rep(o48) = 1) and (o49 = (get((x13[i31]), i212,
+  i225)[i113 <- o48]))) and (o50 = set((x13[i31]), i212, i225, o49))) and
+  (o51 = (x13[i31 <- o50]))) and ((result34 = { map__content2 = x13 }) and
+  (x14 = o51))) and (((result35 = { int__content = i113 }) and
+  (i114 = 2)) and ((((((to_rep(o52) = 1) and (o53 = (get((x14[i31]), i212,
+  i225)[i114 <- o52]))) and (o54 = set((x14[i31]), i212, i225, o53))) and
+  (o55 = (x14[i31 <- o54]))) and ((result36 = { map__content2 = x14 }) and
+  (x15 = o55))) and (((result37 = { int__content = i114 }) and
+  (i115 = 3)) and (((((to_rep(o56) = 1) and (o57 = (get((x15[i31]), i212,
+  i225)[i115 <- o56]))) and (o58 = set((x15[i31]), i212, i225, o57))) and
+  (o59 = (x15[i31 <- o58]))) and ((result38 = { map__content2 = x15 }) and
+  (x16 = o59)))))))) and (((result39 = { int__content = i225 }) and
+  (i226 = 3)) and (((result40 = { int__content = i115 }) and (i116 = 1)) and
+  ((((((to_rep(o60) = 1) and (o61 = (get((x16[i31]), i212,
+  i226)[i116 <- o60]))) and (o62 = set((x16[i31]), i212, i226, o61))) and
+  (o63 = (x16[i31 <- o62]))) and ((result41 = { map__content2 = x16 }) and
+  (x17 = o63))) and (((result42 = { int__content = i116 }) and
+  (i117 = 2)) and ((((((to_rep(o64) = 1) and (o65 = (get((x17[i31]), i212,
+  i226)[i117 <- o64]))) and (o66 = set((x17[i31]), i212, i226, o65))) and
+  (o67 = (x17[i31 <- o66]))) and ((result43 = { map__content2 = x17 }) and
+  (x18 = o67))) and (((result44 = { int__content = i117 }) and
+  (i118 = 3)) and (((((to_rep(o68) = 1) and (o69 = (get((x18[i31]), i212,
+  i226)[i118 <- o68]))) and (o70 = set((x18[i31]), i212, i226, o69))) and
+  (o71 = (x18[i31 <- o70]))) and ((result45 = { map__content2 = x18 }) and
+  (x19 = o71))))))))))))) and (((result46 = { int__content = i212 }) and
+  (i213 = 3)) and (((result47 = { int__content = i226 }) and (i227 = 1)) and
+  ((((result48 = { int__content = i118 }) and (i119 = 1)) and
+  ((((((to_rep(o72) = 1) and (o73 = (get((x19[i31]), i213,
+  i227)[i119 <- o72]))) and (o74 = set((x19[i31]), i213, i227, o73))) and
+  (o75 = (x19[i31 <- o74]))) and ((result49 = { map__content2 = x19 }) and
+  (x20 = o75))) and (((result50 = { int__content = i119 }) and
+  (i120 = 2)) and ((((((to_rep(o76) = 1) and (o77 = (get((x20[i31]), i213,
+  i227)[i120 <- o76]))) and (o78 = set((x20[i31]), i213, i227, o77))) and
+  (o79 = (x20[i31 <- o78]))) and ((result51 = { map__content2 = x20 }) and
+  (x21 = o79))) and (((result52 = { int__content = i120 }) and
+  (i121 = 3)) and (((((to_rep(o80) = 1) and (o81 = (get((x21[i31]), i213,
+  i227)[i121 <- o80]))) and (o82 = set((x21[i31]), i213, i227, o81))) and
+  (o83 = (x21[i31 <- o82]))) and ((result53 = { map__content2 = x21 }) and
+  (x22 = o83)))))))) and (((result54 = { int__content = i227 }) and
+  (i228 = 2)) and ((((result55 = { int__content = i121 }) and (i122 = 1)) and
+  ((((((to_rep(o84) = 1) and (o85 = (get((x22[i31]), i213,
+  i228)[i122 <- o84]))) and (o86 = set((x22[i31]), i213, i228, o85))) and
+  (o87 = (x22[i31 <- o86]))) and ((result56 = { map__content2 = x22 }) and
+  (x23 = o87))) and (((result57 = { int__content = i122 }) and
+  (i123 = 2)) and ((((((to_rep(o88) = 1) and (o89 = (get((x23[i31]), i213,
+  i228)[i123 <- o88]))) and (o90 = set((x23[i31]), i213, i228, o89))) and
+  (o91 = (x23[i31 <- o90]))) and ((result58 = { map__content2 = x23 }) and
+  (x24 = o91))) and (((result59 = { int__content = i123 }) and
+  (i124 = 3)) and (((((to_rep(o92) = 1) and (o93 = (get((x24[i31]), i213,
+  i228)[i124 <- o92]))) and (o94 = set((x24[i31]), i213, i228, o93))) and
+  (o95 = (x24[i31 <- o94]))) and ((result60 = { map__content2 = x24 }) and
+  (x25 = o95)))))))) and (((result61 = { int__content = i228 }) and
+  (i229 = 3)) and (((result62 = { int__content = i124 }) and (i125 = 1)) and
+  ((((((to_rep(o96) = 1) and (o97 = (get((x25[i31]), i213,
+  i229)[i125 <- o96]))) and (o98 = set((x25[i31]), i213, i229, o97))) and
+  (o99 = (x25[i31 <- o98]))) and ((result63 = { map__content2 = x25 }) and
+  (x26 = o99))) and (((result64 = { int__content = i125 }) and
+  (i126 = 2)) and ((((((to_rep(o100) = 1) and (o101 = (get((x26[i31]), i213,
+  i229)[i126 <- o100]))) and (o102 = set((x26[i31]), i213, i229, o101))) and
+  (o103 = (x26[i31 <- o102]))) and ((result65 = { map__content2 = x26 }) and
+  (x27 = o103))) and (((result66 = { int__content = i126 }) and
+  (i127 = 3)) and (((((to_rep(o104) = 1) and (o105 = (get((x27[i31]), i213,
+  i229)[i127 <- o104]))) and (o106 = set((x27[i31]), i213, i229, o105))) and
+  (o107 = (x27[i31 <- o106]))) and ((result67 = { map__content2 = x27 }) and
+  (x28 = o107)))))))))))))))))) -> (((((i31 <= 3) -> (((1 <= i31) and
+  (i31 <= 3)) and ((1 <= 3) and (3 <= 3)))) and (o108 = y)) and
+  ((temp___289 = o108) and (temp___2891 = mk1(i31, 3)))) -> ((i31 <= 3) ->
+  (1 <= i31))))))))

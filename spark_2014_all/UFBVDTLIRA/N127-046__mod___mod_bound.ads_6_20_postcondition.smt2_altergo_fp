@@ -654,33 +654,21 @@ function t__ref___projection(a: t__ref1) : t1 = (a).t__content1
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : t
+logic rliteral : t
 
-logic result : t
+axiom rliteral_axiom : (tqtint(rliteral) = 4294967295)
 
-logic x1 : t
+logic rliteral1 : t
 
-logic result1 : t
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 1)
 
-logic x2 : t
+logic rliteral2 : t
 
-logic x3 : t
-
-logic x4 : t
-
-axiom H : true
-
-axiom H1 : (result = x)
-
-axiom H2 : (x1 = of_int(4294967295))
-
-axiom H3 : (result1 = x1)
-
-axiom H4 : (x2 = add(x1, of_int(1)))
-
-axiom H5 : (x2 = x3)
-
-axiom H6 : (x4 = x2)
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 0)
 
  (* File "mod_bound.ads", line 8, characters 0-0 *)
-goal WP_parameter_def : (x3 = of_int(0))
+goal WP_parameter_def :
+  (forall x:t. forall result:t. forall x1:t. forall result1:t. forall x2:t.
+  forall x3:t. forall x4:t. (((((result = x) and (x1 = rliteral)) and
+  ((result1 = x1) and (x2 = add(x1, rliteral1)))) and ((x2 = x3) and
+  (x4 = x2))) -> (x3 = rliteral2)))

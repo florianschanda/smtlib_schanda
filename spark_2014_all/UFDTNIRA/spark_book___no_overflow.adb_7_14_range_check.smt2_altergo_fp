@@ -251,31 +251,9 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic c : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-axiom H : in_range1(a)
-
-axiom H1 : in_range1(b)
-
-axiom H2 : ((0 <= 2147483647) -> in_range1(c))
-
-axiom H3 : ((o = (b - a)) and in_range((b - a)))
-
-axiom H4 : (o1 = comp_div(o,2))
-
-axiom H5 : (o2 = (a + o1))
-
-axiom H6 : ((o3 = o2) and in_range(o2))
-
  (* File "no_overflow.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : in_range1(o3)
+goal WP_parameter_def :
+  (forall c:int. forall o:int. forall o1:int. forall o2:int. forall o3:int.
+  (in_range1(a) -> (in_range1(b) -> (((0 <= 2147483647) -> in_range1(c)) ->
+  ((((((o = (b - a)) and in_range((b - a))) and (o1 = comp_div(o,2))) and
+  (o2 = (a + o1))) and ((o3 = o2) and in_range(o2))) -> in_range1(o3))))))

@@ -184,120 +184,29 @@ logic i : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic speed : int
-
-logic state : int
-
-logic o : int
-
-logic o1 : int
-
-logic speed1 : int
-
-logic state1 : int
-
-logic result : int
-
-logic speed2 : int
-
-logic result1 : int
-
-logic speed3 : int
-
-logic result2 : int
-
-logic state2 : int
-
-logic result3 : int
-
-logic state3 : int
-
-logic result4 : int
-
-logic state4 : int
-
-logic speed4 : int
-
-logic state5 : int
-
-logic speed5 : int
-
-logic state6 : int
-
-axiom H : in_range2(speed)
-
-axiom H1 : in_range(state)
-
-axiom H2 : in_range1(i)
-
-axiom H3 : (speed_is_valid(speed, state) = true)
-
-axiom H4 : ((i = 2) -> ((speed <  100) -> ((o = (speed + 1)) and
-  in_range2((speed + 1)))))
-
-axiom H5 : ((i = 2) -> ((speed <  100) -> (result = speed)))
-
-axiom H6 : ((i = 2) -> ((speed <  100) -> (speed2 = o)))
-
-axiom H7 : ((i = 2) -> ((not (speed <  100)) -> (speed2 = speed)))
-
-axiom H8 : ((i = 2) -> ((not (speed <  100)) -> (speed2 = speed1)))
-
-axiom H9 : ((not (i = 2)) -> ((i = 3) -> (((- 100) <  speed) ->
-  ((o1 = (speed - 1)) and in_range2((speed - 1))))))
-
-axiom H10 : ((not (i = 2)) -> ((i = 3) -> (((- 100) <  speed) ->
-  (result1 = speed))))
-
-axiom H11 : ((not (i = 2)) -> ((i = 3) -> (((- 100) <  speed) ->
-  (speed3 = o1))))
-
-axiom H12 : ((not (i = 2)) -> ((i = 3) -> ((not ((- 100) <  speed)) ->
-  (speed3 = speed))))
-
-axiom H13 : ((not (i = 2)) -> ((i = 3) -> ((not ((- 100) <  speed)) ->
-  (speed3 = speed1))))
-
-axiom H14 : ((not (i = 2)) -> ((not (i = 3)) -> (speed3 = speed)))
-
-axiom H15 : ((not (i = 2)) -> ((not (i = 3)) -> (speed3 = speed1)))
-
-axiom H16 : ((not (i = 2)) -> (speed2 = speed3))
-
-axiom H17 : ((speed2 = 0) -> (result2 = state))
-
-axiom H18 : ((speed2 = 0) -> (state2 = 0))
-
-axiom H19 : ((not (speed2 = 0)) -> (((speed2 = 1) and (i = 2)) ->
-  (result3 = state)))
-
-axiom H20 : ((not (speed2 = 0)) -> (((speed2 = 1) and (i = 2)) ->
-  (state3 = 1)))
-
-axiom H21 : ((not (speed2 = 0)) -> ((not ((speed2 = 1) and (i = 2))) ->
-  (((speed2 = (- 1)) and (i = 2)) -> (result4 = state))))
-
-axiom H22 : ((not (speed2 = 0)) -> ((not ((speed2 = 1) and (i = 2))) ->
-  (((speed2 = (- 1)) and (i = 2)) -> (state4 = 2))))
-
-axiom H23 : ((not (speed2 = 0)) -> ((not ((speed2 = 1) and (i = 2))) ->
-  ((not ((speed2 = (- 1)) and (i = 2))) -> (state4 = state))))
-
-axiom H24 : ((not (speed2 = 0)) -> ((not ((speed2 = 1) and (i = 2))) ->
-  ((not ((speed2 = (- 1)) and (i = 2))) -> (state4 = state1))))
-
-axiom H25 : ((not (speed2 = 0)) -> ((not ((speed2 = 1) and (i = 2))) ->
-  (state3 = state4)))
-
-axiom H26 : ((not (speed2 = 0)) -> (state2 = state3))
-
-axiom H27 : (state2 = state5)
-
-axiom H28 : (speed2 = speed4)
-
-axiom H29 : (state6 = state2)
-
-axiom H30 : (speed5 = speed2)
-
  (* File "vehicle.ads", line 16, characters 0-0 *)
-goal WP_parameter_def : (speed_is_valid(speed4, state5) = true)
+goal WP_parameter_def :
+  (forall speed:int. forall state:int. forall o:int. forall o1:int.
+  forall speed1:int. forall state1:int. forall result:int. forall speed2:int.
+  forall result1:int. forall speed3:int. forall result2:int.
+  forall state2:int. forall result3:int. forall state3:int.
+  forall result4:int. forall state4:int. forall speed4:int.
+  forall state5:int. forall speed5:int. forall state6:int.
+  ((in_range2(speed) and (in_range(state) and (in_range1(i) and
+  ((speed_is_valid(speed, state) = true) and (((((i = 2) and
+  (((speed <  100) and (((o = (speed + 1)) and in_range2((speed + 1))) and
+  ((result = speed) and (speed2 = o)))) or ((not (speed <  100)) and
+  ((speed2 = speed) and (speed2 = speed1))))) or ((not (i = 2)) and
+  ((((i = 3) and ((((- 100) <  speed) and (((o1 = (speed - 1)) and
+  in_range2((speed - 1))) and ((result1 = speed) and (speed3 = o1)))) or
+  ((not ((- 100) <  speed)) and ((speed3 = speed) and
+  (speed3 = speed1))))) or ((not (i = 3)) and ((speed3 = speed) and
+  (speed3 = speed1)))) and (speed2 = speed3)))) and (((speed2 = 0) and
+  ((result2 = state) and (state2 = 0))) or ((not (speed2 = 0)) and
+  (((((speed2 = 1) and (i = 2)) and ((result3 = state) and (state3 = 1))) or
+  ((not ((speed2 = 1) and (i = 2))) and (((((speed2 = (- 1)) and (i = 2)) and
+  ((result4 = state) and (state4 = 2))) or ((not ((speed2 = (- 1)) and
+  (i = 2))) and ((state4 = state) and (state4 = state1)))) and
+  (state3 = state4)))) and (state2 = state3))))) and (((state2 = state5) and
+  (speed2 = speed4)) and ((state6 = state2) and (speed5 = speed2)))))))) ->
+  (speed_is_valid(speed4, state5) = true)))

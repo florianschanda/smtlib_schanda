@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -137,45 +137,21 @@ logic n : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic test_08_util__is_positive_good__result : bool
-
-logic result : bool
-
-logic test_08_util__is_positive_good__result1 : bool
-
-logic test_08_util__is_positive_good__result2 : bool
-
-logic test_08_util__is_positive_good__result3 : bool
-
-logic test_08_util__is_positive_good__result4 : bool
-
-logic test_08_util__is_positive_good__result5 : bool
-
-logic result1 : bool
-
-axiom H : in_range1(n)
-
-axiom H1 :
-  (test_08_util__is_positive_good__result1 = test_08_util__is_positive_good__result2)
-
-axiom H2 :
-  (test_08_util__is_positive_good__result3 = test_08_util__is_positive_good__result1)
-
-axiom H3 : (result = test_08_util__is_positive_good__result)
-
-axiom H4 : (((1 <= n) ->
-  (test_08_util__is_positive_good__result1 = true)) and ((not (1 <= n)) ->
-  (test_08_util__is_positive_good__result1 = false)))
-
-axiom H5 :
-  (test_08_util__is_positive_good__result4 = test_08_util__is_positive_good__result2)
-
-axiom H6 :
-  (test_08_util__is_positive_good__result5 = test_08_util__is_positive_good__result3)
-
-axiom H7 : (result1 = test_08_util__is_positive_good__result4)
-
-axiom H8 : (test_08_util__is_positive_good__result4 = true)
-
  (* File "test_08_util.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (1 <= n)
+goal WP_parameter_def :
+  (forall test_08_util__is_positive_good__result:bool. forall result:bool.
+  forall test_08_util__is_positive_good__result1:bool.
+  forall test_08_util__is_positive_good__result2:bool.
+  forall test_08_util__is_positive_good__result3:bool.
+  forall test_08_util__is_positive_good__result4:bool.
+  forall test_08_util__is_positive_good__result5:bool.
+  (forall result1:bool. ((in_range1(n) and
+  (((((test_08_util__is_positive_good__result1 = test_08_util__is_positive_good__result2) and
+  (test_08_util__is_positive_good__result3 = test_08_util__is_positive_good__result1)) and
+  ((result = test_08_util__is_positive_good__result) and (((1 <= n) and
+  (test_08_util__is_positive_good__result1 = true)) or ((not (1 <= n)) and
+  (test_08_util__is_positive_good__result1 = false))))) and
+  ((test_08_util__is_positive_good__result4 = test_08_util__is_positive_good__result2) and
+  (test_08_util__is_positive_good__result5 = test_08_util__is_positive_good__result3))) and
+  (result1 = test_08_util__is_positive_good__result4))) ->
+  ((test_08_util__is_positive_good__result4 = true) -> (1 <= n)))))

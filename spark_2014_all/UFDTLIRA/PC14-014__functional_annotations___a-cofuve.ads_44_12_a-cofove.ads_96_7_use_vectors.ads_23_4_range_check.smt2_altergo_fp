@@ -105,40 +105,6 @@ type integer__ref = { integer__content : integer
 function integer__ref___projection(a: integer__ref) : integer =
   (a).integer__content
 
-logic id : int, int, int -> int
-
-logic id__function_guard : int, int, int, int -> prop
-
-type smaller
-
-predicate in_range1(x: int) = (((- 2147483647) <= x) and (x <= 2147483647))
-
-logic bool_eq2 : int, int -> bool
-
-axiom bool_eq_def1 :
-  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE1 : us_image -> int
-
-logic user_eq1 : smaller, smaller -> bool
-
-logic dummy1 : smaller
-
-type smaller__ref = { smaller__content : smaller
-}
-
-function smaller__ref___projection(a: smaller__ref) : smaller =
-  (a).smaller__content
-
-logic fst : int
-
-logic attr__ATTRIBUTE_ADDRESS : int
-
 logic to_rep : integer -> int
 
 logic of_rep : int -> integer
@@ -154,123 +120,58 @@ axiom coerce_axiom :
 
 logic first : int
 
+logic last : int
+
 predicate dynamic_property(first_int: int, last_int: int, x: int) =
   ((first_int <= x) and (x <= last_int))
 
-logic bool_eq3 : int, int -> bool
+logic bool_eq2 : int, int -> bool
 
-axiom bool_eq_def2 :
-  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
-logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
 
-logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
 
-logic user_eq2 : integer, integer -> bool
+logic user_eq1 : integer, integer -> bool
 
-logic dummy2 : integer
-
-type bigger__ref = { bigger__content : integer
-}
-
-function bigger__ref___projection(a: bigger__ref) : integer =
-  (a).bigger__content
-
-axiom first__def_axiom : (first = fst)
-
-logic lst : int
-
-logic attr__ATTRIBUTE_ADDRESS1 : int
-
-logic first1 : int
-
-logic last : int
-
-predicate dynamic_property1(first_int: int, last_int: int, x: int) =
-  ((first_int <= x) and (x <= last_int))
-
-logic bool_eq4 : int, int -> bool
-
-axiom bool_eq_def3 :
-  (forall x:int. forall y:int [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE3 : us_image -> int
-
-logic user_eq3 : integer, integer -> bool
-
-logic dummy3 : integer
+logic dummy1 : integer
 
 type index_type__ref = { index_type__content : integer
 }
 
-function index_type__ref___2__projection(a: index_type__ref) : integer =
+function index_type__ref___3__projection(a: index_type__ref) : integer =
   (a).index_type__content
 
-logic first2 : int
+logic id : int, int, int -> int
 
-logic last1 : int
-
-predicate dynamic_property2(first_int: int, last_int: int, x: int) =
-  ((first_int <= x) and (x <= last_int))
-
-logic bool_eq5 : int, int -> bool
-
-axiom bool_eq_def4 :
-  (forall x:int. forall y:int [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE4 : us_image -> int
-
-logic user_eq4 : integer, integer -> bool
-
-logic dummy4 : integer
-
-type index_type__ref1 = { index_type__content1 : integer
-}
-
-function index_type__ref___3__projection(a: index_type__ref1) : integer =
-  (a).index_type__content1
+logic id__function_guard : int, int, int, int -> prop
 
 axiom id__post_axiom :
   (forall x:int. forall f:int. forall l:int [id(x, f, l)]. (((in_range(x) and
   in_range(f)) and in_range(l)) -> ((((f <= x) and (x <= l)) -> ((f <= id(x,
   f, l)) and (id(x, f, l) <= l))) and in_range(id(x, f, l)))))
 
+logic fst : int
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
 axiom fst__def_axiom : (fst = id(1, (- 2147483647), 2147483647))
+
+logic lst : int
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
 
 axiom lst__def_axiom : (lst = id(2147483647, fst, 2147483647))
 
-axiom first__def_axiom1 : (first1 = fst)
+axiom first__def_axiom : (first = fst)
 
 axiom last__def_axiom : (last = lst)
 
-axiom first__def_axiom2 : (first2 = fst)
-
-axiom last__def_axiom1 : (last1 = lst)
-
-logic o : int
-
-axiom H : in_range1(fst)
-
-axiom H1 : (id(1, (- 2147483647), 2147483647) = fst)
-
-axiom H2 : dynamic_property(first, 2147483647, lst)
-
-axiom H3 : (id(2147483647, fst, 2147483647) = lst)
-
-axiom H4 : ((first2 - 1) <= last1)
-
  (* File "a-cofove.ads", line 88, characters 0-0 *)
-goal WP_parameter_def : ((- 2147483648) <= (first2 - 1))
+goal WP_parameter_def : (((first - 1) <= last) ->
+  ((- 2147483648) <= (first - 1)))

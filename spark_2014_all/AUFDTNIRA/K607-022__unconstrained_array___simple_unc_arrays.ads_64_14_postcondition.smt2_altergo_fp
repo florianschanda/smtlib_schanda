@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -336,24 +336,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,value) farray, int, int, (int,value) farray, int,
-  int -> (int,value) farray
-
-axiom concat_def :
-  (forall a:(int,value) farray. forall b:(int,value) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : value, int -> (int,value) farray
-
-axiom singleton_def :
-  (forall v:value.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,value) farray, int, int, (int,value) farray, int,
   int -> bool
 
@@ -364,17 +346,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_151:int. ((((a__first <= temp___idx_151) and
-  (temp___idx_151 <= a__last)) and
-  (to_rep1((a[temp___idx_151])) = to_rep1((b[((b__first - a__first) + temp___idx_151)])))) or
-  (not ((a__first <= temp___idx_151) and (temp___idx_151 <= a__last)))))) ->
+  (forall temp___idx_173:int. ((((a__first <= temp___idx_173) and
+  (temp___idx_173 <= a__last)) and
+  (to_rep1((a[temp___idx_173])) = to_rep1((b[((b__first - a__first) + temp___idx_173)])))) or
+  (not ((a__first <= temp___idx_173) and (temp___idx_173 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_151:int. (((a__first <= temp___idx_151) and
-  (temp___idx_151 <= a__last)) ->
-  (to_rep1((a[temp___idx_151])) = to_rep1((b[((b__first - a__first) + temp___idx_151)]))))))) ->
+  (forall temp___idx_173:int. (((a__first <= temp___idx_173) and
+  (temp___idx_173 <= a__last)) ->
+  (to_rep1((a[temp___idx_173])) = to_rep1((b[((b__first - a__first) + temp___idx_173)]))))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -384,37 +366,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_151:int. (((a__first <= temp___idx_151) and
-  (temp___idx_151 <= a__last)) ->
-  (to_rep1((a[temp___idx_151])) = to_rep1((b[((b__first - a__first) + temp___idx_151)])))))))))
-
-logic compare : (int,value) farray, int, int, (int,value) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,value) farray. forall b:(int,value) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,value) farray. forall b:(int,value) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep1((a[(i + 1)])) <  to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,value) farray. forall b:(int,value) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep1((b[(i + 1)])) <  to_rep1((a[(j + 1)]))))))))))))
+  (forall temp___idx_173:int. (((a__first <= temp___idx_173) and
+  (temp___idx_173 <= a__last)) ->
+  (to_rep1((a[temp___idx_173])) = to_rep1((b[((b__first - a__first) + temp___idx_173)])))))))))
 
 type integer
 
@@ -750,120 +704,54 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic sum : int
-
-logic i : int
-
-logic simple_unc_arrays__average__result : int
-
-logic us : int
-
-logic temp___878 : int
-
-logic o : int
-
-logic o1 : value
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic result : int
-
-logic sum1 : int
-
-logic result1 : int
-
-logic i1 : int
-
-logic sum2 : int
-
-logic i2 : int
-
-logic result2 : int
-
-logic sum3 : int
-
-logic sum4 : int
-
-logic i3 : int
-
-logic sum5 : int
-
-logic i4 : int
-
-logic sum6 : int
-
-logic i5 : int
-
-logic sum7 : int
-
-logic i6 : int
-
-logic result3 : int
-
-logic simple_unc_arrays__average__result1 : int
-
-logic simple_unc_arrays__average__result2 : int
-
-logic simple_unc_arrays__average__result3 : int
-
-logic sum8 : int
-
-logic i7 : int
-
-logic simple_unc_arrays__average__result4 : int
-
-logic sum9 : int
-
-logic i8 : int
-
-logic simple_unc_arrays__average__result5 : int
-
-logic result4 : bool
-
-logic result5 : int
-
-axiom H : (dynamic_property1(1, to_rep(a), to_rep2(first(a2)),
+ (* File "simple_unc_arrays.ads", line 4, characters 0-0 *)
+goal WP_parameter_def :
+  (forall sum:int. forall i:int.
+  forall simple_unc_arrays__average__result:int. forall us:int.
+  forall temp___963:int. forall o:int. forall o1:value. forall o2:int.
+  forall o3:int. forall o4:int. forall result:int. forall sum1:int.
+  forall result1:int. forall i1:int. forall sum2:int. forall i2:int.
+  forall result2:int. forall sum3:int. forall sum4:int. forall i3:int.
+  forall sum5:int. forall i4:int. forall sum6:int. forall i5:int.
+  forall sum7:int. forall i6:int. forall result3:int.
+  forall simple_unc_arrays__average__result1:int.
+  forall simple_unc_arrays__average__result2:int.
+  forall simple_unc_arrays__average__result3:int. forall sum8:int.
+  forall i7:int. forall simple_unc_arrays__average__result4:int.
+  forall sum9:int. forall i8:int.
+  forall simple_unc_arrays__average__result5:int.
+  (forall result4:int. (((dynamic_property1(1, to_rep(a), to_rep2(first(a2)),
   to_rep2(last(a2))) and ((to_rep2(first(a2)) = 1) and
-  (to_rep2(last(a2)) = to_rep(a))))
-
-axiom H1 : (not (empty({ us_split_discrs1 = {
+  (to_rep2(last(a2)) = to_rep(a)))) and ((not (empty({ us_split_discrs1 = {
   rec__simple_unc_arrays__table__last = a }; us_split_fields1 = {
-  rec__simple_unc_arrays__table__v = { elts = a1; rt = a2 } } }) = true))
-
-axiom H2 : ((((us = to_rep(a)) and in_range1(to_rep(a))) and
-  (((result = sum) and (sum1 = 0)) and (in_range3(sum1) and
-  (((to_rep(a) = r43b) and in_range1(r43b)) and ((((result1 = i) and
-  (i1 = 1)) and ((((1 <= i1) and (i1 <= r43b)) -> ((((temp___878 = sum1) and
+  rec__simple_unc_arrays__table__v = { elts = a1; rt = a2 } } }) = true)) and
+  (((((us = to_rep(a)) and in_range1(to_rep(a))) and ((({ int__content =
+  result } = { int__content = sum }) and (sum1 = 0)) and (in_range3(sum1) and
+  (((to_rep(a) = r43b) and in_range1(r43b)) and (((({ int__content = result1
+  } = { int__content = i }) and (i1 = 1)) and ((((1 <= i1) and
+  (i1 <= r43b)) and ((((temp___963 = sum1) and
   (((((- 2147483648) <= 2147483647) -> in_range3(sum2)) and ((1 <= i2) and
   (i2 <= r43b))) and (((((((((to_rep2(first(a2)) <= i2) and
   (i2 <= to_rep2(last(a2)))) and (o = i2)) and (o1 = (a1[o]))) and
   (o2 = to_rep1(o1))) and (o3 = (sum2 + o2))) and ((o4 = o3) and
   in_range2(o3))) and ((sum2 = result2) and (sum3 = o4))) and
   (i2 = r43b)))) and (((i2 = i3) and (sum3 = sum4)) and ((i4 = i2) and
-  (sum5 = sum3)))) and (((i5 = i3) and (sum6 = sum4)) and ((i6 = i4) and
-  (sum7 = sum5))))) and ((not ((1 <= i1) and (i1 <= r43b))) ->
+  (sum5 = sum3)))) and ((({ int__content = i5 } = { int__content = i3 }) and
+  ({ int__content = sum6 } = { int__content = sum4 })) and ((i6 = i4) and
+  (sum7 = sum5))))) or ((not ((1 <= i1) and (i1 <= r43b))) and
   (((i1 = i5) and (sum1 = sum6)) and ((i6 = i1) and (sum7 = sum1)))))) and
   (((simple_unc_arrays__average__result1 = simple_unc_arrays__average__result2) and
   (simple_unc_arrays__average__result3 = simple_unc_arrays__average__result1)) and
-  ((result3 = simple_unc_arrays__average__result) and
+  (({ int__content = result3 } = { int__content =
+  simple_unc_arrays__average__result }) and
   (simple_unc_arrays__average__result1 = comp_div(sum6,to_rep(a)))))))))) and
-  (((simple_unc_arrays__average__result4 = simple_unc_arrays__average__result2) and
-  ((i7 = i5) and (sum8 = sum6))) and
+  ((({ int__content = simple_unc_arrays__average__result4 } = {
+  int__content = simple_unc_arrays__average__result2 }) and (({
+  int__content = i7 } = { int__content = i5 }) and ({ int__content = sum8
+  } = { int__content = sum6 }))) and
   ((simple_unc_arrays__average__result5 = simple_unc_arrays__average__result3) and
-  ((i8 = i6) and (sum9 = sum7)))))
-
-axiom H3 : (result5 = simple_unc_arrays__average__result4)
-
- (* File "simple_unc_arrays.ads", line 4, characters 0-0 *)
-goal WP_parameter_def : (min({ us_split_discrs1 = {
-  rec__simple_unc_arrays__table__last = a }; us_split_fields1 = {
-  rec__simple_unc_arrays__table__v = { elts = a1; rt = a2 } }
-  }) <= simple_unc_arrays__average__result4)
+  ((i8 = i6) and (sum9 = sum7))))) and
+  (result4 = simple_unc_arrays__average__result4)))) -> (min({
+  us_split_discrs1 = { rec__simple_unc_arrays__table__last = a };
+  us_split_fields1 = { rec__simple_unc_arrays__table__v = { elts = a1; rt =
+  a2 } } }) <= simple_unc_arrays__average__result4))))

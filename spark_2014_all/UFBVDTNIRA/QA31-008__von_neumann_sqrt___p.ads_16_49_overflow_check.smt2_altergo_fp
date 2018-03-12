@@ -601,12 +601,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -618,6 +612,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -782,417 +782,147 @@ logic attr__ATTRIBUTE_ADDRESS8 : int
 
 logic attr__ATTRIBUTE_ADDRESS9 : int
 
-logic ux : t
-
-logic m : t
-
-logic y : t
-
-logic b : t
-
-logic i : t
-
-logic bits : t
-
-logic left_x : t
-
-logic left_y : t
-
-logic left_ux : t
-
-logic p__sqrt_von_neumann__result : int
-
-logic temp___233 : t
-
-logic temp___232 : t
-
-logic temp___231 : t
-
-logic temp___230 : t
-
-logic temp___229 : t
-
-logic temp___228 : t
-
-logic temp___227 : t
-
-logic temp___225 : t
-
-logic temp___226 : t
-
-logic o : t
-
-logic o1 : int
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : int
-
-logic o6 : t
-
-logic o7 : t
-
-logic o8 : t
-
-logic o9 : int
-
-logic o10 : t
-
-logic o11 : t
-
-logic o12 : t
-
-logic temp___234 : int
-
-logic temp___236 : int
-
-logic o13 : t
-
-logic o14 : int
-
-logic o15 : t
-
-logic o16 : t
-
-logic o17 : t
-
-logic o18 : int
-
-logic o19 : t
-
-logic o20 : t
-
-logic o21 : t
-
-logic o22 : int
-
-logic o23 : t
-
-logic o24 : t
-
-logic o25 : t
-
-logic o26 : int
-
-logic o27 : int
-
-logic o28 : int
-
-logic o29 : bool
-
-logic b1 : t
-
-logic bits1 : t
-
-logic left_x1 : t
-
-logic left_y1 : t
-
-logic left_ux1 : t
-
-logic result : t
-
-logic i1 : t
-
-logic result1 : t
-
-logic ux1 : t
-
-logic result2 : t
-
-logic m1 : t
-
-logic result3 : t
-
-logic y1 : t
-
-logic result4 : t
-
-logic i2 : t
-
-logic result5 : t
-
-logic b2 : t
-
-logic result6 : t
-
-logic y2 : t
-
-logic result7 : t
-
-logic ux2 : t
-
-logic result8 : t
-
-logic y3 : t
-
-logic result9 : t
-
-logic bits2 : t
-
-logic result10 : t
-
-logic left_x2 : t
-
-logic result11 : t
-
-logic left_y2 : t
-
-logic result12 : t
-
-logic left_ux2 : t
-
-logic ux3 : t
-
-logic m2 : t
-
-logic y4 : t
-
-logic b3 : t
-
-logic i3 : t
-
-logic bits3 : t
-
-logic left_x3 : t
-
-logic left_y3 : t
-
-logic left_ux3 : t
-
-logic result13 : t
-
-logic m3 : t
-
-logic result14 : t
-
-logic i4 : t
-
-logic result15 : t
-
-logic b4 : t
-
-logic result16 : t
-
-logic y5 : t
-
-logic result17 : t
-
-logic ux4 : t
-
-logic result18 : t
-
-logic y6 : t
-
-logic result19 : t
-
-logic bits4 : t
-
-logic result20 : t
-
-logic left_x4 : t
-
-logic result21 : t
-
-logic left_y4 : t
-
-logic result22 : t
-
-logic left_ux4 : t
-
-logic ux5 : t
-
-logic m4 : t
-
-logic y7 : t
-
-logic b5 : t
-
-logic i5 : t
-
-logic bits5 : t
-
-logic left_x5 : t
-
-logic left_y5 : t
-
-logic left_ux5 : t
-
-logic ux6 : t
-
-logic m5 : t
-
-logic y8 : t
-
-logic b6 : t
-
-logic i6 : t
-
-logic bits6 : t
-
-logic left_x6 : t
-
-logic left_y6 : t
-
-logic left_ux6 : t
-
-logic ux7 : t
-
-logic m6 : t
-
-logic y9 : t
-
-logic b7 : t
-
-logic i7 : t
-
-logic bits7 : t
-
-logic left_x7 : t
-
-logic left_y7 : t
-
-logic left_ux7 : t
-
-logic ux8 : t
-
-logic m7 : t
-
-logic y10 : t
-
-logic b8 : t
-
-logic i8 : t
-
-logic bits8 : t
-
-logic left_x8 : t
-
-logic left_y8 : t
-
-logic left_ux8 : t
-
-logic result23 : int
-
-logic p__sqrt_von_neumann__result1 : int
-
-logic p__sqrt_von_neumann__result2 : int
-
-logic p__sqrt_von_neumann__result3 : int
-
-logic ux9 : t
-
-logic m8 : t
-
-logic y11 : t
-
-logic b9 : t
-
-logic i9 : t
-
-logic bits9 : t
-
-logic left_x9 : t
-
-logic left_y9 : t
-
-logic left_ux9 : t
-
-logic p__sqrt_von_neumann__result4 : int
-
-logic ux10 : t
-
-logic m9 : t
-
-logic y12 : t
-
-logic b10 : t
-
-logic i10 : t
-
-logic bits10 : t
-
-logic left_x10 : t
-
-logic left_y10 : t
-
-logic left_ux10 : t
-
-logic p__sqrt_von_neumann__result5 : int
-
-axiom H : in_range2(x)
-
-axiom H1 : ((((result = i) and (i1 = of_int(0))) and (((result1 = ux) and
-  (ux1 = of_int(x))) and (ule(ux1, of_int(2147483647)) and
-  (((result2 = m) and (m1 = of_int(1073741824))) and (((result3 = y) and
-  (y1 = of_int(0))) and ((((not (m1 = of_int(0))) ->
-  ((((temp___233 = ux1) and ((temp___232 = left_y) and ((temp___231 = i1) and
-  ((temp___230 = left_x) and ((temp___229 = b) and ((temp___228 = y1) and
-  ((temp___227 = left_ux) and ((temp___225 = m1) and ((temp___226 = bits) and
-  (((i1 = result4) and (i2 = add(i1, of_int(1)))) and (((result5 = b) and
-  (b2 = bw_or(y1, m1))) and (((y1 = result6) and (y2 = udiv(y1,
-  of_int(2)))) and (((uge(ux1, b2) -> (((ux1 = result7) and (ux2 = sub(ux1,
-  b2))) and ((y2 = result8) and (y3 = bw_or(y2, m1))))) and ((not uge(ux1,
-  b2)) -> ((y3 = y2) and (ux2 = ux1)))) and (((o = sub(of_int(32),
-  mul(of_int(2), i2))) and ((result9 = bits) and (bits2 = o))) and
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 2147483647)
+
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 1073741824)
+
+logic rliteral3 : t
+
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 1)
+
+logic rliteral4 : t
+
+axiom rliteral_axiom4 : (tqtint(rliteral4) = 2)
+
+logic rliteral5 : t
+
+axiom rliteral_axiom5 : (tqtint(rliteral5) = 32)
+
+logic rliteral6 : t
+
+axiom rliteral_axiom6 : (tqtint(rliteral6) = 16)
+
+logic rliteral7 : t
+
+axiom rliteral_axiom7 : (tqtint(rliteral7) = 4)
+
+ (* File "p.ads", line 5, characters 0-0 *)
+goal WP_parameter_def :
+  (forall ux:t. forall m:t. forall y:t. forall b:t. forall i:t.
+  forall bits:t. forall left_x:t. forall left_y:t. forall left_ux:t.
+  forall p__sqrt_von_neumann__result:int. forall temp___270:t.
+  forall temp___269:t. forall temp___268:t. forall temp___267:t.
+  forall temp___266:t. forall temp___265:t. forall temp___264:t.
+  forall temp___262:t. forall temp___263:t. forall o:t. forall o1:int.
+  forall o2:t. forall o3:t. forall o4:t. forall o5:int. forall o6:t.
+  forall o7:t. forall o8:t. forall o9:int. forall o10:t. forall o11:t.
+  forall o12:t. forall o13:int. forall b1:t. forall bits1:t.
+  forall left_x1:t. forall left_y1:t. forall left_ux1:t. forall result:t.
+  forall i1:t. forall result1:t. forall ux1:t. forall result2:t. forall m1:t.
+  forall result3:t. forall y1:t. forall result4:t. forall i2:t.
+  forall result5:t. forall b2:t. forall result6:t. forall y2:t.
+  forall result7:t. forall ux2:t. forall result8:t. forall y3:t.
+  forall result9:t. forall bits2:t. forall result10:t. forall left_x2:t.
+  forall result11:t. forall left_y2:t. forall result12:t. forall left_ux2:t.
+  forall ux3:t. forall m2:t. forall y4:t. forall b3:t. forall i3:t.
+  forall bits3:t. forall left_x3:t. forall left_y3:t. forall left_ux3:t.
+  forall result13:t. forall m3:t. forall ux4:t. forall m4:t. forall y5:t.
+  forall b4:t. forall i4:t. forall bits4:t. forall left_x4:t.
+  forall left_y4:t. forall left_ux4:t. forall ux5:t. forall m5:t.
+  forall y6:t. forall b5:t. forall i5:t. forall bits5:t. forall left_x5:t.
+  forall left_y5:t. forall left_ux5:t. forall ux6:t__ref. forall m6:t__ref.
+  forall y7:t__ref. forall b6:t__ref. forall i6:t__ref. forall bits6:t__ref.
+  forall left_x6:t__ref. forall left_y6:t__ref. forall left_ux6:t__ref.
+  forall ux7:t. forall m7:t. forall y8:t. forall b7:t. forall i7:t.
+  forall bits7:t. forall left_x7:t. forall left_y7:t. forall left_ux7:t.
+  forall result14:int__ref. forall p__sqrt_von_neumann__result1:int.
+  forall p__sqrt_von_neumann__result2:int__ref.
+  forall p__sqrt_von_neumann__result3:int. forall ux8:t__ref.
+  forall m8:t__ref. forall y9:t__ref. forall b8:t__ref. forall i8:t__ref.
+  forall bits8:t__ref. forall left_x8:t__ref. forall left_y8:t__ref.
+  forall left_ux8:t__ref. forall p__sqrt_von_neumann__result4:int__ref.
+  forall ux9:t. forall m9:t. forall y10:t. forall b9:t. forall i9:t.
+  forall bits9:t. forall left_x9:t. forall left_y9:t. forall left_ux9:t.
+  forall p__sqrt_von_neumann__result5:int. (in_range2(x) -> ((((({
+  t__content = result } = { t__content = i }) and (i1 = rliteral)) and ((({
+  t__content = result1 } = { t__content = ux }) and (ux1 = of_int(x))) and
+  (ule(ux1, rliteral1) and ((({ t__content = result2 } = { t__content = m
+  }) and (m1 = rliteral2)) and ((({ t__content = result3 } = { t__content = y
+  }) and (y1 = rliteral)) and ((((not (m1 = rliteral)) and
+  ((((temp___270 = ux1) and ((temp___269 = left_y) and ((temp___268 = i1) and
+  ((temp___267 = left_x) and ((temp___266 = b) and ((temp___265 = y1) and
+  ((temp___264 = left_ux) and ((temp___262 = m1) and ((temp___263 = bits) and
+  (((i1 = result4) and (i2 = add(i1, rliteral3))) and ((({ t__content =
+  result5 } = { t__content = b }) and (b2 = bw_or(y1, m1))) and
+  (((y1 = result6) and (y2 = udiv(y1, rliteral4))) and (((uge(ux1, b2) and
+  (((ux1 = result7) and (ux2 = sub(ux1, b2))) and ((y2 = result8) and
+  (y3 = bw_or(y2, m1))))) or ((not uge(ux1, b2)) and ((y3 = y2) and
+  (ux2 = ux1)))) and (((o = sub(rliteral5, mul(rliteral4, i2))) and (({
+  t__content = result9 } = { t__content = bits }) and (bits2 = o))) and
   (((((((o1 = tqtint(bits2)) and in_range1(tqtint(bits2))) and
-  (o2 = of_int(o1))) and (o3 = lsr_bv(of_int(x), o2))) and (o4 = o3)) and
-  ((result10 = left_x) and (left_x2 = o4))) and
+  (o2 = of_int(o1))) and (o3 = lsr_bv(of_int(x), o2))) and (o4 = o3)) and (({
+  t__content = result10 } = { t__content = left_x }) and (left_x2 = o4))) and
   (((((((o5 = tqtint(bits2)) and in_range1(tqtint(bits2))) and
   (o6 = of_int(o5))) and (o7 = lsr_bv(y3, o6))) and (o8 = o7)) and
   ((result11 = left_y) and (left_y2 = o8))) and
   (((((((o9 = tqtint(bits2)) and in_range1(tqtint(bits2))) and
   (o10 = of_int(o9))) and (o11 = lsr_bv(ux2, o10))) and (o12 = o11)) and
-  ((result12 = left_ux) and (left_ux2 = o12))) and (((ule(of_int(1), i3) and
-  ule(i3, of_int(16))) and ((((tqtint(sub(of_int(32), mul(of_int(2),
-  i3))) <  18446744073709551616) -> (m2 = lsl_bv(of_int(1),
-  of_int(tqtint(sub(of_int(32), mul(of_int(2), i3))))))) and
-  ((not (tqtint(sub(of_int(32), mul(of_int(2),
-  i3))) <  18446744073709551616)) -> (m2 = of_int(0)))) and ((urem(y4,
-  m2) = of_int(0)) and ((((tqtint(i3) <  18446744073709551616) ->
-  ult(left_y3, lsl_bv(of_int(1), of_int(tqtint(i3))))) and
-  ((not (tqtint(i3) <  18446744073709551616)) -> ult(left_y3,
-  of_int(0)))) and ((urem(ux3, m2) = urem(of_int(x), m2)) and
+  ((result12 = left_ux) and (left_ux2 = o12))) and (((ule(rliteral3, i3) and
+  ule(i3, rliteral6)) and ((((tqtint(sub(rliteral5, mul(rliteral4,
+  i3))) <  18446744073709551616) and (m2 = lsl_bv(rliteral3,
+  of_int(tqtint(sub(rliteral5, mul(rliteral4, i3))))))) or
+  ((not (tqtint(sub(rliteral5, mul(rliteral4,
+  i3))) <  18446744073709551616)) and (m2 = rliteral))) and ((urem(y4,
+  m2) = rliteral) and ((((tqtint(i3) <  18446744073709551616) and
+  ult(left_y3, lsl_bv(rliteral3, of_int(tqtint(i3))))) or
+  ((not (tqtint(i3) <  18446744073709551616)) and ult(left_y3,
+  rliteral))) and ((urem(ux3, m2) = urem(of_int(x), m2)) and
   ((left_ux3 = sub(left_x3, mul(left_y3, left_y3))) and (ule(mul(left_y3,
-  left_y3), left_x3) and ugt(mul(add(left_y3, of_int(1)), add(left_y3,
-  of_int(1))), left_x3)))))))) and (((result13 = m2) and (m3 = udiv(m2,
-  of_int(4)))) and (m3 = of_int(0))))))))))))))))))))) and
-  (((left_ux5 = left_ux3) and ((left_y5 = left_y3) and
+  left_y3), left_x3) and ugt(mul(add(left_y3, rliteral3), add(left_y3,
+  rliteral3)), left_x3)))))))) and (((result13 = m2) and (m3 = udiv(m2,
+  rliteral7))) and (m3 = rliteral)))))))))))))))))))) and
+  (((left_ux3 = left_ux4) and ((left_y3 = left_y4) and
+  ((left_x3 = left_x4) and ((bits3 = bits4) and ((i3 = i4) and ((b3 = b4) and
+  ((y4 = y5) and ((m3 = m4) and (ux3 = ux4))))))))) and
+  ((left_ux5 = left_ux3) and ((left_y5 = left_y3) and
   ((left_x5 = left_x3) and ((bits5 = bits3) and ((i5 = i3) and ((b5 = b3) and
-  ((y7 = y4) and ((m4 = m3) and (ux5 = ux3))))))))) and
-  ((left_ux6 = left_ux3) and ((left_y6 = left_y3) and
-  ((left_x6 = left_x3) and ((bits6 = bits3) and ((i6 = i3) and ((b6 = b3) and
-  ((y8 = y4) and ((m5 = m3) and (ux6 = ux3))))))))))) and
-  (((left_ux7 = left_ux5) and ((left_y7 = left_y5) and
-  ((left_x7 = left_x5) and ((bits7 = bits5) and ((i7 = i5) and ((b7 = b5) and
-  ((y9 = y7) and ((m6 = m4) and (ux7 = ux5))))))))) and
+  ((y6 = y4) and ((m5 = m3) and (ux5 = ux3))))))))))) and (((left_ux6 = {
+  t__content = left_ux4 }) and ((left_y6 = { t__content = left_y4 }) and
+  ((left_x6 = { t__content = left_x4 }) and ((bits6 = { t__content = bits4
+  }) and ((i6 = { t__content = i4 }) and ((b6 = { t__content = b4 }) and
+  ((y7 = { t__content = y5 }) and ((m6 = { t__content = m4 }) and (ux6 = {
+  t__content = ux4 }))))))))) and ((left_ux7 = left_ux5) and
+  ((left_y7 = left_y5) and ((left_x7 = left_x5) and ((bits7 = bits5) and
+  ((i7 = i5) and ((b7 = b5) and ((y8 = y6) and ((m7 = m5) and
+  (ux7 = ux5)))))))))))) or ((m1 = rliteral) and (((left_ux6 = { t__content =
+  left_ux }) and ((left_y6 = { t__content = left_y }) and ((left_x6 = {
+  t__content = left_x }) and ((bits6 = { t__content = bits }) and ((i6 = {
+  t__content = i1 }) and ((b6 = { t__content = b }) and ((y7 = { t__content =
+  y1 }) and ((m6 = { t__content = m1 }) and (ux6 = { t__content = ux1
+  }))))))))) and ((left_ux7 = left_ux1) and ((left_y7 = left_y1) and
+  ((left_x7 = left_x1) and ((bits7 = bits1) and ((i7 = i1) and ((b7 = b1) and
+  ((y8 = y1) and ((m7 = m1) and (ux7 = ux1)))))))))))) and
+  (((p__sqrt_von_neumann__result2 = { int__content =
+  p__sqrt_von_neumann__result1 }) and
+  (p__sqrt_von_neumann__result3 = p__sqrt_von_neumann__result1)) and
+  (((o13 = tqtint((y7).t__content)) and
+  in_range3(tqtint((y7).t__content))) and ((result14 = { int__content =
+  p__sqrt_von_neumann__result }) and
+  (p__sqrt_von_neumann__result1 = o13)))))))))) and
+  (((p__sqrt_von_neumann__result4 = p__sqrt_von_neumann__result2) and
   ((left_ux8 = left_ux6) and ((left_y8 = left_y6) and
   ((left_x8 = left_x6) and ((bits8 = bits6) and ((i8 = i6) and ((b8 = b6) and
-  ((y10 = y8) and ((m7 = m5) and (ux8 = ux6)))))))))))) and
-  ((m1 = of_int(0)) -> (((left_ux7 = left_ux) and ((left_y7 = left_y) and
-  ((left_x7 = left_x) and ((bits7 = bits) and ((i7 = i1) and ((b7 = b) and
-  ((y9 = y1) and ((m6 = m1) and (ux7 = ux1))))))))) and
-  ((left_ux8 = left_ux1) and ((left_y8 = left_y1) and
-  ((left_x8 = left_x1) and ((bits8 = bits1) and ((i8 = i1) and ((b8 = b1) and
-  ((y10 = y1) and ((m7 = m1) and (ux8 = ux1)))))))))))) and
-  (((p__sqrt_von_neumann__result2 = p__sqrt_von_neumann__result1) and
-  (p__sqrt_von_neumann__result3 = p__sqrt_von_neumann__result1)) and
-  (((o26 = tqtint(y9)) and in_range3(tqtint(y9))) and
-  ((result23 = p__sqrt_von_neumann__result) and
-  (p__sqrt_von_neumann__result1 = o26)))))))))) and
-  (((p__sqrt_von_neumann__result4 = p__sqrt_von_neumann__result2) and
+  ((y9 = y7) and ((m8 = m6) and (ux8 = ux6)))))))))) and
+  ((p__sqrt_von_neumann__result5 = p__sqrt_von_neumann__result3) and
   ((left_ux9 = left_ux7) and ((left_y9 = left_y7) and
   ((left_x9 = left_x7) and ((bits9 = bits7) and ((i9 = i7) and ((b9 = b7) and
-  ((y11 = y9) and ((m8 = m6) and (ux9 = ux7)))))))))) and
-  ((p__sqrt_von_neumann__result5 = p__sqrt_von_neumann__result3) and
-  ((left_ux10 = left_ux8) and ((left_y10 = left_y8) and
-  ((left_x10 = left_x8) and ((bits10 = bits8) and ((i10 = i8) and
-  ((b10 = b8) and ((y12 = y10) and ((m9 = m7) and (ux10 = ux8))))))))))))
-
- (* File "p.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  in_range1(((p__sqrt_von_neumann__result4 + 1) * (p__sqrt_von_neumann__result4 + 1)))
+  ((y10 = y8) and ((m9 = m7) and (ux9 = ux7)))))))))))) ->
+  in_range1((((p__sqrt_von_neumann__result4).int__content + 1) * ((p__sqrt_von_neumann__result4).int__content + 1))))))

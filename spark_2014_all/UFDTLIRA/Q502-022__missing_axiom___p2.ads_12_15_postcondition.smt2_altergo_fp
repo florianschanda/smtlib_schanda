@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -352,35 +352,18 @@ axiom oeq__def_axiom :
   (not (oeq({ us_split_fields1 = { rec__p2__s__x = x2 } }, {
   us_split_fields1 = { rec__p2__s__x = y2 } }) = true)))
 
-logic p2__always_true__result : bool
-
-logic result : bool
-
-logic p2__always_true__result1 : bool
-
-logic p2__always_true__result2 : bool
-
-logic p2__always_true__result3 : bool
-
-logic p2__always_true__result4 : bool
-
-logic p2__always_true__result5 : bool
-
-logic result1 : bool
-
-axiom H : (p2__always_true__result1 = p2__always_true__result2)
-
-axiom H1 : (p2__always_true__result3 = p2__always_true__result1)
-
-axiom H2 : (result = p2__always_true__result)
-
-axiom H3 : (p2__always_true__result1 = of_int(1))
-
-axiom H4 : (p2__always_true__result4 = p2__always_true__result2)
-
-axiom H5 : (p2__always_true__result5 = p2__always_true__result3)
-
-axiom H6 : (result1 = p2__always_true__result4)
-
  (* File "p2.ads", line 11, characters 0-0 *)
-goal WP_parameter_def : (p2__always_true__result4 = true)
+goal WP_parameter_def :
+  (forall p2__always_true__result:bool. forall result:bool.
+  forall p2__always_true__result1:bool. forall p2__always_true__result2:bool.
+  forall p2__always_true__result3:bool. forall p2__always_true__result4:bool.
+  forall p2__always_true__result5:bool.
+  (forall result1:bool.
+  ((((((p2__always_true__result1 = p2__always_true__result2) and
+  (p2__always_true__result3 = p2__always_true__result1)) and
+  ((result = p2__always_true__result) and
+  (p2__always_true__result1 = of_int(1)))) and
+  ((p2__always_true__result4 = p2__always_true__result2) and
+  (p2__always_true__result5 = p2__always_true__result3))) and
+  (result1 = p2__always_true__result4)) ->
+  (p2__always_true__result4 = true))))

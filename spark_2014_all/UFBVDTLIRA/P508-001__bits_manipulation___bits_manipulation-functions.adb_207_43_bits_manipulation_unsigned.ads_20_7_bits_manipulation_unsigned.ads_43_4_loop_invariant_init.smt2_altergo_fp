@@ -596,12 +596,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -613,6 +607,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -708,26 +708,37 @@ logic axiom__ : unit -> bool
 
 logic axiom____function_guard : bool, unit -> prop
 
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 65535)
+
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 1)
+
 axiom axiom____post_axiom : ((axiom__(void) = true) ->
-  (forall v:t. ((ule(of_int(0), v) and ule(v, of_int(65535))) ->
+  (forall v:t. ((ule(rliteral, v) and ule(v, rliteral1)) ->
   (forall n:int. (((0 <= n) and (n <= 15)) -> ((((n <  65536) and (bw_and(v,
-  lsl_bv(of_int(1), of_int(n))) = of_int(0))) or ((not (n <  65536)) and
-  (bw_and(v, of_int(0)) = of_int(0)))) -> (((n <  65536) -> (((n <  65536) ->
-  (((n <  65536) -> (bw_and(add(v, lsl_bv(of_int(1), of_int(n))),
-  lsl_bv(of_int(1), of_int(n))) = lsl_bv(of_int(1), of_int(n)))) and
-  ((not (n <  65536)) -> (bw_and(add(v, lsl_bv(of_int(1), of_int(n))),
-  lsl_bv(of_int(1), of_int(n))) = of_int(0))))) and ((not (n <  65536)) ->
-  (((n <  65536) -> (bw_and(add(v, lsl_bv(of_int(1), of_int(n))),
-  of_int(0)) = lsl_bv(of_int(1), of_int(n)))) and ((not (n <  65536)) ->
-  (bw_and(add(v, lsl_bv(of_int(1), of_int(n))),
-  of_int(0)) = of_int(0))))))) and ((not (n <  65536)) -> (((n <  65536) ->
-  (((n <  65536) -> (bw_and(add(v, of_int(0)), lsl_bv(of_int(1),
-  of_int(n))) = lsl_bv(of_int(1), of_int(n)))) and ((not (n <  65536)) ->
-  (bw_and(add(v, of_int(0)), lsl_bv(of_int(1),
-  of_int(n))) = of_int(0))))) and ((not (n <  65536)) -> (((n <  65536) ->
-  (bw_and(add(v, of_int(0)), of_int(0)) = lsl_bv(of_int(1), of_int(n)))) and
-  ((not (n <  65536)) -> (bw_and(add(v, of_int(0)),
-  of_int(0)) = of_int(0))))))))))))))
+  lsl_bv(rliteral2, of_int(n))) = rliteral)) or ((not (n <  65536)) and
+  (bw_and(v, rliteral) = rliteral))) -> (((n <  65536) -> (((n <  65536) ->
+  (((n <  65536) -> (bw_and(add(v, lsl_bv(rliteral2, of_int(n))),
+  lsl_bv(rliteral2, of_int(n))) = lsl_bv(rliteral2, of_int(n)))) and
+  ((not (n <  65536)) -> (bw_and(add(v, lsl_bv(rliteral2, of_int(n))),
+  lsl_bv(rliteral2, of_int(n))) = rliteral)))) and ((not (n <  65536)) ->
+  (((n <  65536) -> (bw_and(add(v, lsl_bv(rliteral2, of_int(n))),
+  rliteral) = lsl_bv(rliteral2, of_int(n)))) and ((not (n <  65536)) ->
+  (bw_and(add(v, lsl_bv(rliteral2, of_int(n))),
+  rliteral) = rliteral)))))) and ((not (n <  65536)) -> (((n <  65536) ->
+  (((n <  65536) -> (bw_and(add(v, rliteral), lsl_bv(rliteral2,
+  of_int(n))) = lsl_bv(rliteral2, of_int(n)))) and ((not (n <  65536)) ->
+  (bw_and(add(v, rliteral), lsl_bv(rliteral2, of_int(n))) = rliteral)))) and
+  ((not (n <  65536)) -> (((n <  65536) -> (bw_and(add(v, rliteral),
+  rliteral) = lsl_bv(rliteral2, of_int(n)))) and ((not (n <  65536)) ->
+  (bw_and(add(v, rliteral), rliteral) = rliteral)))))))))))))
 
 logic amount : int
 
@@ -801,126 +812,22 @@ function t645s__ref___projection(a: t645s__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic result__ : t
-
-logic i : int
-
-logic bits_manipulation_unsigned__unsigned_16__functions__proofs__make_mask__lemma2__ones__result : t
-
-logic temp___429 : int
-
-logic temp___428 : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic result : t
-
-logic result__1 : t
-
-logic result1 : int
-
-logic i1 : int
-
-logic result2 : t
-
-logic result__2 : t
-
-logic result__3 : t
-
-logic i2 : int
-
-logic result3 : int
-
-logic i3 : int
-
-logic result4 : t
-
-logic result__4 : t
-
-logic result__5 : t
-
-logic i4 : int
-
-logic result__6 : t
-
-logic i5 : int
-
-logic result__7 : t
-
-logic i6 : int
-
-logic result__8 : t
-
-logic i7 : int
-
-logic result__9 : t
-
-logic i8 : int
-
-logic result__10 : t
-
-logic i9 : int
-
-logic result5 : t
-
-logic bits_manipulation_unsigned__unsigned_16__functions__proofs__make_mask__lemma2__ones__result1 : t
-
-logic bits_manipulation_unsigned__unsigned_16__functions__proofs__make_mask__lemma2__ones__result2 : t
-
-logic bits_manipulation_unsigned__unsigned_16__functions__proofs__make_mask__lemma2__ones__result3 : t
-
-logic result__11 : t
-
-logic i10 : int
-
-logic bits_manipulation_unsigned__unsigned_16__functions__proofs__make_mask__lemma2__ones__result4 : t
-
-logic result__12 : t
-
-logic i11 : int
-
-logic bits_manipulation_unsigned__unsigned_16__functions__proofs__make_mask__lemma2__ones__result5 : t
-
-axiom H : in_range1(amount)
-
-axiom H1 : (result = result__)
-
-axiom H2 : (result__1 = of_int(0))
-
-axiom H3 : true
-
-axiom H4 : (axiom__(void) = true)
-
-axiom H5 : (result1 = i)
-
-axiom H6 : (i1 = 1)
-
-axiom H7 : (1 <= i1)
-
-axiom H8 : (i1 <= amount)
-
-axiom H9 : (((i1 - 1) <  65536) -> (o = lsl_bv(of_int(1), of_int((i1 - 1)))))
-
-axiom H10 : ((not ((i1 - 1) <  65536)) -> (o = of_int(0)))
-
-axiom H11 : (o1 = add(result__1, o))
-
-axiom H12 : (result__1 = result2)
-
-axiom H13 : (result__2 = o1)
-
  (* File "bits_manipulation.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : ((((i1 - 1) <  65536) -> ((((i1 - 1) <  65536) ->
-  (bw_and(result__2, lsl_bv(of_int(1), of_int((i1 - 1)))) = lsl_bv(of_int(1),
+goal WP_parameter_def :
+  (forall result__:t. forall i:int. forall o:t. forall o1:t. forall result:t.
+  forall result__1:t. forall result1:int. forall i1:int. forall result2:t.
+  forall result__2:t. (in_range1(amount) -> ((({ t__content = result } = {
+  t__content = result__ }) and (result__1 = rliteral)) ->
+  ((axiom__(void) = true) -> ((({ int__content = result1 } = { int__content =
+  i }) and (i1 = 1)) -> (((1 <= i1) and (i1 <= amount)) ->
+  (((((((i1 - 1) <  65536) and (o = lsl_bv(rliteral2, of_int((i1 - 1))))) or
+  ((not ((i1 - 1) <  65536)) and (o = rliteral))) and (o1 = add(result__1,
+  o))) and ((result__1 = result2) and (result__2 = o1))) ->
+  ((((i1 - 1) <  65536) -> ((((i1 - 1) <  65536) -> (bw_and(result__2,
+  lsl_bv(rliteral2, of_int((i1 - 1)))) = lsl_bv(rliteral2,
   of_int((i1 - 1))))) and ((not ((i1 - 1) <  65536)) -> (bw_and(result__2,
-  lsl_bv(of_int(1), of_int((i1 - 1)))) = of_int(0))))) and
+  lsl_bv(rliteral2, of_int((i1 - 1)))) = rliteral)))) and
   ((not ((i1 - 1) <  65536)) -> ((((i1 - 1) <  65536) -> (bw_and(result__2,
-  of_int(0)) = lsl_bv(of_int(1), of_int((i1 - 1))))) and
+  rliteral) = lsl_bv(rliteral2, of_int((i1 - 1))))) and
   ((not ((i1 - 1) <  65536)) -> (bw_and(result__2,
-  of_int(0)) = of_int(0))))))
+  rliteral) = rliteral))))))))))))

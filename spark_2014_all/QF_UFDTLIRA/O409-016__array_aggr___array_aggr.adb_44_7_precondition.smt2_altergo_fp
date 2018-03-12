@@ -109,7 +109,5 @@ logic one : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-axiom H : in_range(one)
-
  (* File "array_aggr.adb", line 2, characters 0-0 *)
 goal WP_parameter_def : true

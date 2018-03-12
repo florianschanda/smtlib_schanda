@@ -81,12 +81,6 @@ axiom bool_ge_axiom :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -98,6 +92,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -116,97 +116,6 @@ logic b : bool
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
-
-logic r : bool
-
-logic logic__xor_test_a__result : bool
-
-logic result : bool
-
-logic r1 : bool
-
-logic result1 : bool
-
-logic r2 : bool
-
-logic result2 : bool
-
-logic r3 : bool
-
-logic result3 : bool
-
-logic r4 : bool
-
-logic result4 : bool
-
-logic logic__xor_test_a__result1 : bool
-
-logic logic__xor_test_a__result2 : bool
-
-logic logic__xor_test_a__result3 : bool
-
-logic r5 : bool
-
-logic logic__xor_test_a__result4 : bool
-
-logic r6 : bool
-
-logic logic__xor_test_a__result5 : bool
-
-logic result5 : bool
-
-axiom H : ((match_bool(a, b, false) = true) -> (result = r))
-
-axiom H1 : ((match_bool(a, b, false) = true) -> (r1 = of_int(0)))
-
-axiom H2 : ((not (match_bool(a, b, false) = true)) -> (((not (a = true)) and
-  (not (b = true))) -> (result1 = r)))
-
-axiom H3 : ((not (match_bool(a, b, false) = true)) -> (((not (a = true)) and
-  (not (b = true))) -> (r2 = of_int(0))))
-
-axiom H4 : ((not (match_bool(a, b, false) = true)) ->
-  ((not ((not (a = true)) and (not (b = true)))) -> (((a = true) and
-  (not (b = true))) -> (result2 = r))))
-
-axiom H5 : ((not (match_bool(a, b, false) = true)) ->
-  ((not ((not (a = true)) and (not (b = true)))) -> (((a = true) and
-  (not (b = true))) -> (r3 = of_int(1)))))
-
-axiom H6 : ((not (match_bool(a, b, false) = true)) ->
-  ((not ((not (a = true)) and (not (b = true)))) -> ((not (((a = true) ->
-  (not (b = true))) and (not (a = false)))) -> (result3 = r))))
-
-axiom H7 : ((not (match_bool(a, b, false) = true)) ->
-  ((not ((not (a = true)) and (not (b = true)))) -> ((not (((a = true) ->
-  (not (b = true))) and (not (a = false)))) -> (r4 = of_int(1)))))
-
-axiom H8 : ((not (match_bool(a, b, false) = true)) ->
-  ((not ((not (a = true)) and (not (b = true)))) -> ((not (((a = true) ->
-  (not (b = true))) and (not (a = false)))) -> (r3 = r4))))
-
-axiom H9 : ((not (match_bool(a, b, false) = true)) ->
-  ((not ((not (a = true)) and (not (b = true)))) -> (r2 = r3)))
-
-axiom H10 : ((not (match_bool(a, b, false) = true)) -> (r1 = r2))
-
-axiom H11 : (logic__xor_test_a__result1 = logic__xor_test_a__result2)
-
-axiom H12 : (logic__xor_test_a__result3 = logic__xor_test_a__result1)
-
-axiom H13 : (result4 = logic__xor_test_a__result)
-
-axiom H14 : (logic__xor_test_a__result1 = r1)
-
-axiom H15 : (logic__xor_test_a__result4 = logic__xor_test_a__result2)
-
-axiom H16 : (r5 = r1)
-
-axiom H17 : (logic__xor_test_a__result5 = logic__xor_test_a__result3)
-
-axiom H18 : (r6 = r1)
-
-axiom H19 : (result5 = logic__xor_test_a__result4)
 
  (* File "logic.adb", line 91, characters 0-0 *)
 goal WP_parameter_def : true

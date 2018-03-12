@@ -54,7 +54,5 @@ logic read__function_guard : bool, us_private -> prop
 
 axiom read__post_axiom : true
 
-logic x : us_private
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (read(x) = true)
+goal WP_parameter_def : (forall x:us_private. (read(x) = true))

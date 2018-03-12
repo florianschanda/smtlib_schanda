@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -188,24 +188,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,value_t) farray, int, int, (int,value_t) farray, int,
-  int -> (int,value_t) farray
-
-axiom concat_def :
-  (forall a:(int,value_t) farray. forall b:(int,value_t) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : value_t, int -> (int,value_t) farray
-
-axiom singleton_def :
-  (forall v:value_t.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,value_t) farray, int, int, (int,value_t) farray, int,
   int -> bool
 
@@ -216,17 +198,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) and
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)])))) or
-  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (forall temp___idx_155:int. ((((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) and
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)])))) or
+  (not ((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) ->
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)]))))))) ->
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) ->
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -236,37 +218,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) ->
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)])))))))))
-
-logic compare : (int,value_t) farray, int, int, (int,value_t) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,value_t) farray. forall b:(int,value_t) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,value_t) farray. forall b:(int,value_t) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,value_t) farray. forall b:(int,value_t) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) ->
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)])))))))))
 
 type us_split_fields = { rec__usergroup_examples__value_cache_t__cached :
 bool; rec__usergroup_examples__value_cache_t__cache : value_t
@@ -381,31 +335,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def1 :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def1 :
-  (forall v:bool. forall v1:value_t.
-  (forall i:int [(singleton1({ us_split_fields1 = {
-  rec__usergroup_examples__value_cache_t__cached = v;
-  rec__usergroup_examples__value_cache_t__cache = v1 } }, i)[i])].
-  ((singleton1({ us_split_fields1 = {
-  rec__usergroup_examples__value_cache_t__cached = v;
-  rec__usergroup_examples__value_cache_t__cache = v1 } }, i)[i]) = {
-  us_split_fields1 = { rec__usergroup_examples__value_cache_t__cached = v;
-  rec__usergroup_examples__value_cache_t__cache = v1 } })))
-
 logic bool_eq6 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -416,17 +345,17 @@ axiom bool_eq_def5 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_134:int. ((((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) and (bool_eq5((a[temp___idx_134]),
-  (b[((b__first - a__first) + temp___idx_134)])) = true)) or
-  (not ((a__first <= temp___idx_134) and (temp___idx_134 <= a__last)))))) ->
+  (forall temp___idx_156:int. ((((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) and (bool_eq5((a[temp___idx_156]),
+  (b[((b__first - a__first) + temp___idx_156)])) = true)) or
+  (not ((a__first <= temp___idx_156) and (temp___idx_156 <= a__last)))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_134:int. (((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) -> (bool_eq5((a[temp___idx_134]),
-  (b[((b__first - a__first) + temp___idx_134)])) = true))))) -> (bool_eq6(a,
+  (forall temp___idx_156:int. (((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) -> (bool_eq5((a[temp___idx_156]),
+  (b[((b__first - a__first) + temp___idx_156)])) = true))))) -> (bool_eq6(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -436,9 +365,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_134:int. (((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) -> (bool_eq5((a[temp___idx_134]),
-  (b[((b__first - a__first) + temp___idx_134)])) = true)))))))
+  (forall temp___idx_156:int. (((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) -> (bool_eq5((a[temp___idx_156]),
+  (b[((b__first - a__first) + temp___idx_156)])) = true)))))))
 
 logic is_valid : int -> bool
 
@@ -458,132 +387,35 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic vca : (int,us_rep) farray
-
-logic v : int
-
-logic o : value_t
-
-logic o1 : bool
-
-logic o2 : value_t
-
-logic o3 : bool
-
-logic o4 : value_t
-
-logic o5 : (int,us_rep) farray
-
-logic vca1 : (int,us_rep) farray
-
-logic result : int
-
-logic v1 : int
-
-logic result1 : (int,us_rep) farray
-
-logic vca2 : (int,us_rep) farray
-
-logic result2 : (int,us_rep) farray
-
-logic vca3 : (int,us_rep) farray
-
-logic result3 : int
-
-logic v2 : int
-
-logic vca4 : (int,us_rep) farray
-
-logic v3 : int
-
-logic vca5 : (int,us_rep) farray
-
-logic v4 : int
-
-axiom H : in_range1(i)
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range2(v))
-
-axiom H2 :
-  ((forall x:int. (((1 <= x) and (x <= 100)) ->
-   (is_valid(to_rep((va[x]))) = true))) and
+ (* File "usergroup_examples.adb", line 16, characters 0-0 *)
+goal WP_parameter_def :
+  (forall vca:(int,us_rep) farray. forall v:int. forall o:value_t.
+  forall o1:bool. forall o2:value_t. forall o3:bool. forall o4:value_t.
+  forall o5:(int,us_rep) farray. forall vca1:(int,us_rep) farray.
+  forall result:int. forall v1:int. forall result1:(int,us_rep) farray.
+  forall vca2:(int,us_rep) farray. forall result2:(int,us_rep) farray.
+  forall vca3:(int,us_rep) farray. forall result3:int. forall v2:int.
+  (in_range1(i) -> ((((- 2147483648) <= 2147483647) -> in_range2(v)) ->
+  (((forall x:int. (((1 <= x) and (x <= 100)) ->
+    (is_valid(to_rep((va[x]))) = true))) and
   (forall y:int. (((1 <= y) and (y <= 100)) ->
   (((((vca[y])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true) ->
-  (to_rep((((vca[y])).us_split_fields1).rec__usergroup_examples__value_cache_t__cache) = to_rep((va[y])))))))
-
-axiom H3 :
-  (((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true) ->
-  (result = v))
-
-axiom H4 :
-  (((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true) ->
-  (v1 = to_rep((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cache)))
-
-axiom H5 :
-  (((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true) ->
-  (vca3 = vca))
-
-axiom H6 :
-  (((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true) ->
-  (vca3 = vca1))
-
-axiom H7 :
-  ((not ((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true)) ->
-  (to_rep(o) = to_rep((va[i]))))
-
-axiom H8 :
-  ((not ((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true)) ->
-  ((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = o1))
-
-axiom H9 :
-  ((not ((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true)) ->
-  (o = o2))
-
-axiom H10 :
-  ((not ((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true)) ->
-  (o3 = o1))
-
-axiom H11 :
-  ((not ((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true)) ->
-  (o4 = o2))
-
-axiom H12 :
-  ((not ((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true)) ->
-  (o5 = (vca[i <- { us_split_fields1 = {
-  rec__usergroup_examples__value_cache_t__cached = o3;
-  rec__usergroup_examples__value_cache_t__cache = o4 } }])))
-
-axiom H13 :
-  ((not ((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true)) ->
-  (result1 = vca))
-
-axiom H14 :
-  ((not ((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true)) ->
-  (vca2 = o5))
-
-axiom H15 :
-  ((not ((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true)) ->
-  (vca2 = result2))
-
-axiom H16 :
-  ((not ((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true)) ->
-  (vca3 = (vca2[i <- { us_split_fields1 = {
+  (to_rep((((vca[y])).us_split_fields1).rec__usergroup_examples__value_cache_t__cache) = to_rep((va[y]))))))) ->
+  (((((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true) and
+  ((({ int__content = result } = { int__content = v }) and
+  (v1 = to_rep((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cache))) and
+  ((vca3 = vca) and (vca3 = vca1)))) or
+  ((not ((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true)) and
+  (((((((to_rep(o) = to_rep((va[i]))) and
+  (((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = o1) and
+  (o = o2))) and ((o3 = o1) and (o4 = o2))) and (o5 = (vca[i <- {
+  us_split_fields1 = { rec__usergroup_examples__value_cache_t__cached = o3;
+  rec__usergroup_examples__value_cache_t__cache = o4 } }]))) and (({
+  map__content1 = result1 } = { map__content1 = vca }) and (vca2 = o5))) and
+  (((vca2 = result2) and (vca3 = (vca2[i <- { us_split_fields1 = {
   rec__usergroup_examples__value_cache_t__cached = of_int(1);
   rec__usergroup_examples__value_cache_t__cache =
   (((vca2[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cache
-  } }])))
-
-axiom H17 :
-  ((not ((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true)) ->
-  (result3 = v))
-
-axiom H18 :
-  ((not ((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true)) ->
-  (v2 = to_rep((((vca3[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cache)))
-
-axiom H19 :
-  ((not ((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true)) ->
-  (v1 = v2))
-
- (* File "usergroup_examples.adb", line 16, characters 0-0 *)
-goal WP_parameter_def : (is_valid(to_rep((va[i]))) = true)
+  } }]))) and (({ int__content = result3 } = { int__content = v }) and
+  (v2 = to_rep((((vca3[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cache))))) and
+  (v1 = v2)))) -> (is_valid(to_rep((va[i]))) = true))))))

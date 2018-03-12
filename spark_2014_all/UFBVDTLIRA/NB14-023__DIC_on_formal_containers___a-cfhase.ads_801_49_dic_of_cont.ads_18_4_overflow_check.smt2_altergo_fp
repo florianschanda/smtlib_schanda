@@ -1009,12 +1009,6 @@ logic length__function_guard2 : int, us_rep1 -> prop
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq8 : bool, bool -> bool
-
-axiom bool_eq_def6 :
-  (forall x:bool. forall y:bool [bool_eq8(x, y)]. (((x = y) -> (bool_eq8(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq8(x, y) = false))))
-
 logic to_int2 : bool -> int
 
 axiom to_int_def1 :
@@ -1026,6 +1020,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq8 : bool, bool -> bool
+
+axiom bool_eq_def6 :
+  (forall x:bool. forall y:bool [bool_eq8(x, y)]. (((x = y) -> (bool_eq8(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq8(x, y) = false))))
 
 predicate in_range3(x: int) = ((x = 0) or (x = 1))
 
@@ -1201,8 +1201,8 @@ axiom elements__post_axiom :
   us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity = container;
   rec__dic_of_cont__my_hase__set__modulus = container1 }; us_split_fields1 =
   { rec__dic_of_cont__my_hase__set = container2 } })) and
-  (forall temp___845:int. ((in_range5(temp___845) and ((1 <= temp___845) and
-  (temp___845 <= (0 + length2(elements({ us_split_discrs1 = {
+  (forall temp___916:int. ((in_range5(temp___916) and ((1 <= temp___916) and
+  (temp___916 <= (0 + length2(elements({ us_split_discrs1 = {
   rec__dic_of_cont__my_hase__set__capacity = container;
   rec__dic_of_cont__my_hase__set__modulus = container1 }; us_split_fields1 =
   { rec__dic_of_cont__my_hase__set = container2 } })))))) ->
@@ -1212,7 +1212,7 @@ axiom elements__post_axiom :
   { rec__dic_of_cont__my_hase__set = container2 } }), get(elements({
   us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity = container;
   rec__dic_of_cont__my_hase__set__modulus = container1 }; us_split_fields1 =
-  { rec__dic_of_cont__my_hase__set = container2 } }), temp___845)) = true)))) and
+  { rec__dic_of_cont__my_hase__set = container2 } }), temp___916)) = true)))) and
   (forall item:int. ((in_range4(item) and (contains(model__({
   us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity = container;
   rec__dic_of_cont__my_hase__set__modulus = container1 }; us_split_fields1 =
@@ -1406,19 +1406,10 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length2(container))))) ->
   in_range6(get(container, position)))))
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-axiom H : ((o = length({ us_split_discrs1 = {
+ (* File "a-cfhase.ads", line 751, characters 0-0 *)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. ((((o = length({ us_split_discrs1 = {
   rec__dic_of_cont__my_hase__set__capacity = right;
   rec__dic_of_cont__my_hase__set__modulus = right1 }; us_split_fields1 = {
   rec__dic_of_cont__my_hase__set = right2 } })) and (in_range1(o) and
-  (o <= to_rep1(right))))
-
-axiom H1 : (o1 = (2147483647 - o))
-
- (* File "a-cfhase.ads", line 751, characters 0-0 *)
-goal WP_parameter_def : in_range(o1)
+  (o <= to_rep1(right)))) and (o1 = (2147483647 - o))) -> in_range(o1)))

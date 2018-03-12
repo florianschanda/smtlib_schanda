@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -205,24 +205,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> (int,natural) farray
-
-axiom concat_def :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : natural, int -> (int,natural) farray
-
-axiom singleton_def :
-  (forall v:natural.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,natural) farray, int, int, (int,natural) farray, int,
   int -> bool
 
@@ -233,17 +215,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -253,37 +235,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type t
 
@@ -1182,154 +1136,38 @@ axiom nested_with_globals__def_axiom :
 
 logic test_globals__au__aggregate_def : int, int, int -> us_t2
 
-axiom def_axiom :
-  (forall temp___195:int. forall temp___196:int. forall temp___197:int.
-  ((dynamic_property(0, 2147483647, temp___196, temp___197) ->
-  ((to_rep1(first4((test_globals__au__aggregate_def(temp___195, temp___196,
-  temp___197)).rt2)) = temp___196) and
-  (to_rep1(last4((test_globals__au__aggregate_def(temp___195, temp___196,
-  temp___197)).rt2)) = temp___197))) and
-  (forall temp___198:int. (((test_globals__au__aggregate_def(temp___195,
-  temp___196, temp___197)).elts2[temp___198]) = of_rep(temp___195)))))
-
 logic test_globals__as__aggregate_def : int -> (int,natural) farray
-
-axiom def_axiom1 :
-  (forall temp___203:int.
-  (forall temp___204:int.
-  ((test_globals__as__aggregate_def(temp___203)[temp___204]) = of_rep(temp___203))))
 
 logic test_globals__ad__aggregate_def : int, int, int -> us_t3
 
+axiom def_axiom :
+  (forall temp___223:int. forall temp___224:int. forall temp___225:int.
+  (in_range1(temp___223) -> ((dynamic_property(0, 2147483647, temp___224,
+  temp___225) ->
+  ((to_rep1(first4((test_globals__au__aggregate_def(temp___223, temp___224,
+  temp___225)).rt2)) = temp___224) and
+  (to_rep1(last4((test_globals__au__aggregate_def(temp___223, temp___224,
+  temp___225)).rt2)) = temp___225))) and
+  (forall temp___226:int.
+  (to_rep(((test_globals__au__aggregate_def(temp___223, temp___224,
+  temp___225)).elts2[temp___226])) = temp___223)))))
+
+axiom def_axiom1 :
+  (forall temp___231:int. (in_range1(temp___231) ->
+  (forall temp___232:int.
+  (to_rep((test_globals__as__aggregate_def(temp___231)[temp___232])) = temp___231))))
+
 axiom def_axiom2 :
-  (forall temp___206:int. forall temp___207:int. forall temp___208:int.
-  ((dynamic_property(0, 2147483647, temp___207, temp___208) ->
-  ((to_rep1(first6((test_globals__ad__aggregate_def(temp___206, temp___207,
-  temp___208)).rt3)) = temp___207) and
-  (to_rep1(last6((test_globals__ad__aggregate_def(temp___206, temp___207,
-  temp___208)).rt3)) = temp___208))) and
-  (forall temp___209:int. (((test_globals__ad__aggregate_def(temp___206,
-  temp___207, temp___208)).elts3[temp___209]) = of_rep(temp___206)))))
+  (forall temp___234:int. forall temp___235:int. forall temp___236:int.
+  (in_range1(temp___234) -> ((dynamic_property(0, 2147483647, temp___235,
+  temp___236) ->
+  ((to_rep1(first6((test_globals__ad__aggregate_def(temp___234, temp___235,
+  temp___236)).rt3)) = temp___235) and
+  (to_rep1(last6((test_globals__ad__aggregate_def(temp___234, temp___235,
+  temp___236)).rt3)) = temp___236))) and
+  (forall temp___237:int.
+  (to_rep(((test_globals__ad__aggregate_def(temp___234, temp___235,
+  temp___236)).elts3[temp___237])) = temp___234)))))
 
-logic au : (int,natural) farray
-
-logic as__ : (int,natural) farray
-
-logic ad : (int,natural) farray
-
-logic ru__split_fields : natural
-
-logic rs__split_fields : natural
-
-logic rd__split_fields : natural
-
-logic us : int
-
-logic us1 : int
-
-logic temp___200 : (int,natural) farray
-
-logic temp___2001 : t2
-
-logic test_globals__au__assume : (int,natural) farray
-
-logic test_globals__au__assume1 : t
-
-logic temp___211 : (int,natural) farray
-
-logic temp___2111 : t3
-
-logic test_globals__ad__assume : (int,natural) farray
-
-logic test_globals__ad__assume1 : t1
-
-logic o : natural
-
-logic o1 : natural
-
-logic o2 : natural
-
-logic o3 : natural
-
-logic test_globals__ru__assume : natural
-
-logic test_globals__ru__assume1 : natural
-
-logic o4 : natural
-
-logic o5 : natural
-
-logic o6 : natural
-
-logic o7 : natural
-
-logic o8 : natural
-
-logic o9 : natural
-
-logic o10 : natural
-
-logic o11 : natural
-
-logic o12 : natural
-
-logic o13 : natural
-
-logic test_globals__rs__assume : natural
-
-logic test_globals__rs__assume1 : natural
-
-logic o14 : natural
-
-logic o15 : natural
-
-logic o16 : natural
-
-logic o17 : natural
-
-logic o18 : natural
-
-logic o19 : natural
-
-logic o20 : natural
-
-logic o21 : natural
-
-logic o22 : natural
-
-logic o23 : natural
-
-logic test_globals__rd__assume : natural
-
-logic test_globals__rd__assume1 : natural
-
-logic us2 : bool
-
-logic result : (int,natural) farray
-
-logic au1 : (int,natural) farray
-
-logic result1 : (int,natural) farray
-
-logic as__1 : (int,natural) farray
-
-logic result2 : (int,natural) farray
-
-logic ad1 : (int,natural) farray
-
-logic result3 : natural
-
-logic ru__split_fields1 : natural
-
-logic result4 : natural
-
-logic rs__split_fields1 : natural
-
-logic result5 : natural
-
-logic rd__split_fields1 : natural
-
-axiom H : in_range1(c)
-
- (* File "test_globals.adb", line 16, characters 0-0 *)
-goal WP_parameter_def : in_range1(100)
+ (* File "test_globals.adb", line 13, characters 0-0 *)
+goal WP_parameter_def : (in_range1(c) -> in_range1(100))

@@ -601,12 +601,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -618,6 +612,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -755,9 +755,13 @@ logic maxvalue__function_guard : t, int -> prop
 
 axiom maxvalue__post_axiom : true
 
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 1)
+
 axiom maxvalue__def_axiom :
   (forall len:int [maxvalue(len)]. (in_range2(len) ->
-  (maxvalue(len) = lsl_bv(of_int(1), of_int(len)))))
+  (maxvalue(len) = lsl_bv(rliteral, of_int(len)))))
 
 logic x : t
 
@@ -773,83 +777,24 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 axiom len_bv__def_axiom : (len_bv = of_int(len))
 
-logic bitwalker__lemmafunction2__result : int
+logic rliteral1 : t
 
-logic o : int
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 0)
 
-logic o1 : int
+logic rliteral2 : t
 
-logic bitwalker__lemmafunction2__len_bv__assume : t
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic us : bool
-
-logic j : int
-
-logic o5 : int
-
-logic o6 : bool
-
-logic o7 : int
-
-logic o8 : bool
-
-logic o9 : int
-
-logic i : int
-
-logic o10 : int
-
-logic o11 : bool
-
-logic result : int
-
-logic bitwalker__lemmafunction2__result1 : int
-
-logic bitwalker__lemmafunction2__result2 : int
-
-logic bitwalker__lemmafunction2__result3 : int
-
-logic bitwalker__lemmafunction2__result4 : int
-
-logic bitwalker__lemmafunction2__result5 : int
-
-axiom H : true
-
-axiom H1 : in_range1(len)
-
-axiom H2 : (((0 <= len) and (len <= 63)) and ult(x, maxvalue(len)))
-
-axiom H3 : ((o1 = len) and uint_in_range(len))
-
-axiom H4 : (bitwalker__lemmafunction2__len_bv__assume = of_int(o1))
-
-axiom H5 : (bitwalker__lemmafunction2__len_bv__assume = len_bv)
-
-axiom H6 : true
-
-axiom H7 : (bw_and(x, sub(maxvalue(len), of_int(1))) = x)
-
-axiom H8 : (eq_sub_bv__logic(x, of_int(0), len_bv, sub(of_int(64),
-  len_bv)) = true)
-
-axiom H9 : (eq_sub__logic(x, of_int(0), tqtint(len_bv),
-  tqtint(sub(of_int(64), len_bv))) = true)
-
-axiom H10 : (len <= j)
-
-axiom H11 : (j <= ((len + (64 - len)) - 1))
-
-axiom H12 : ((o7 = j) and in_range2(j))
-
-axiom H13 : (o8 = nth(of_int(0), o7))
-
-axiom H14 : (o9 = to_int1(o8))
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 64)
 
  (* File "bitspec.ads", line 16, characters 0-0 *)
-goal WP_parameter_def : in_range2(j)
+goal WP_parameter_def :
+  (forall o:int. forall bitwalker__lemmafunction2__len_bv__assume:t.
+  forall j:int. forall o1:int. forall o2:bool. forall o3:int.
+  (in_range1(len) -> ((((0 <= len) and (len <= 63)) and ult(x,
+  maxvalue(len))) -> (((((o = len) and uint_in_range(len)) and
+  (bitwalker__lemmafunction2__len_bv__assume = of_int(o))) and
+  (bitwalker__lemmafunction2__len_bv__assume = len_bv)) -> ((bw_and(x,
+  sub(maxvalue(len), rliteral)) = x) -> ((eq_sub_bv__logic(x, rliteral1,
+  len_bv, sub(rliteral2, len_bv)) = true) -> ((eq_sub__logic(x, rliteral1,
+  tqtint(len_bv), tqtint(sub(rliteral2, len_bv))) = true) -> (((len <= j) and
+  (j <= ((len + (64 - len)) - 1))) -> (((((o1 = j) and in_range2(j)) and
+  (o2 = nth(rliteral1, o1))) and (o3 = to_int1(o2))) -> in_range2(j))))))))))

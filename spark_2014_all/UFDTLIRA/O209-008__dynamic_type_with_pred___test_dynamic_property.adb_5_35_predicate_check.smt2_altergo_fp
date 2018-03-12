@@ -185,29 +185,9 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic s : int
-
-logic us : int
-
-logic temp___178 : int
-
-logic o : int
-
-logic us1 : int
-
-logic temp___181 : int
-
-logic result : int
-
-logic s1 : int
-
-axiom H : in_range1(c)
-
-axiom H1 : ((us = 1) and dynamic_property(first, last, 1))
-
-axiom H2 : (temp___178 = 1)
-
  (* File "test_dynamic_property.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : ((((- 2147483648) <= temp___178) and
-  (temp___178 <= (- 1))) or ((1 <= temp___178) and
-  (temp___178 <= 2147483647)))
+goal WP_parameter_def :
+  (forall us:int. forall temp___207:int. (in_range1(c) -> ((((us = 1) and
+  dynamic_property(first, last, 1)) and (temp___207 = 1)) ->
+  ((((- 2147483648) <= temp___207) and (temp___207 <= (- 1))) or
+  ((1 <= temp___207) and (temp___207 <= 2147483647))))))

@@ -172,12 +172,6 @@ logic length__function_guard : int, us_rep -> prop
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq4 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -189,6 +183,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq4 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
 
 predicate in_range2(x: int) = ((x = 0) or (x = 1))
 
@@ -320,40 +320,11 @@ logic result__ : us_rep
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic result : bool
-
-logic result1 : bool
-
-logic result2 : bool
-
-axiom H : in_range1(e)
-
-axiom H1 : ((o6 = length(s)) and (in_range3(o6) and
-  ((0 + o6) <= 2147483647)))
-
-axiom H2 : (((o6 <  2147483647) -> (result2 = true)) and
-  ((not (o6 <  2147483647)) -> (result2 = false)))
-
-axiom H3 : (result2 = true)
-
-axiom H4 : ((o2 = length(s)) and (in_range3(o2) and
-  ((0 + o2) <= 2147483647)))
-
-axiom H5 : (o3 = (o2 + 1))
-
  (* File "list_allocator.ads", line 55, characters 0-0 *)
-goal WP_parameter_def : in_range(o3)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. forall o2:int. forall result:bool.
+  (in_range1(e) -> ((((o2 = length(s)) and (in_range3(o2) and
+  ((0 + o2) <= 2147483647))) and (((o2 <  2147483647) and (result = true)) or
+  ((not (o2 <  2147483647)) and (result = false)))) -> ((result = true) ->
+  ((((o = length(s)) and (in_range3(o) and ((0 + o) <= 2147483647))) and
+  (o1 = (o + 1))) -> in_range(o1))))))

@@ -861,35 +861,15 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-axiom buffer__def_axiom : (buffer = to_address(of_int(0)))
+logic rliteral : t
 
-logic asp : int
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
 
-logic pixel__buffer__assume : t
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-axiom H : (pixel__buffer__assume = to_address(of_int(0)))
-
-axiom H1 : (pixel__buffer__assume = buffer)
-
-axiom H2 : true
-
-axiom H3 : ((o4 = zero(void)) and (in_range2(o4) and (o4 = 0)))
+axiom buffer__def_axiom : (buffer = to_address(rliteral))
 
  (* File "pixel.adb", line 12, characters 0-0 *)
-goal WP_parameter_def : (not (o4 = 0))
+goal WP_parameter_def :
+  (forall pixel__buffer__assume:t. forall o:int.
+  (((pixel__buffer__assume = to_address(rliteral)) and
+  (pixel__buffer__assume = buffer)) -> (((o = zero(void)) and
+  (in_range2(o) and (o = 0))) -> (not (o = 0)))))

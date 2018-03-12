@@ -243,46 +243,29 @@ axiom saturate__def_axiom :
   (saturate({ us_split_fields1 = { rec__test_type__t__f = x1 } }) = {
   us_split_fields1 = { rec__test_type__t__f = x1 } }))))
 
-logic test_type__decr__result : integer
-
-logic o : integer
-
-logic o1 : integer
-
-logic result : integer
-
-logic test_type__decr__result1 : integer
-
-logic test_type__decr__result2 : integer
-
-logic test_type__decr__result3 : integer
-
-logic test_type__decr__result4 : integer
-
-logic test_type__decr__result5 : integer
-
-axiom H : in_range1(to_rep(x))
-
-axiom H1 : (test_type__decr__result2 = test_type__decr__result1)
-
-axiom H2 : (test_type__decr__result3 = test_type__decr__result1)
-
-axiom H3 : (({ us_split_fields1 = { rec__test_type__t__f = o } } = decr_int({
-  us_split_fields1 = { rec__test_type__t__f = x } })) and
-  (of_rep((to_rep(x) - 1)) = o))
-
-axiom H4 : (({ us_split_fields1 = { rec__test_type__t__f = o1 }
-  } = saturate({ us_split_fields1 = { rec__test_type__t__f = o } })) and
-  (((to_rep(o) <  0) -> (o1 = of_rep(0))) and ((not (to_rep(o) <  0)) ->
-  (o1 = o))))
-
-axiom H5 : (result = test_type__decr__result)
-
-axiom H6 : (test_type__decr__result1 = o1)
-
-axiom H7 : (test_type__decr__result4 = test_type__decr__result2)
-
-axiom H8 : (test_type__decr__result5 = test_type__decr__result3)
-
  (* File "test_type.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : in_range1(to_rep(test_type__decr__result4))
+goal WP_parameter_def :
+  (forall test_type__decr__result:integer. forall o:integer.
+  forall o1:integer. forall result:integer.
+  forall test_type__decr__result1:integer.
+  forall test_type__decr__result2:integer.
+  forall test_type__decr__result3:integer.
+  forall test_type__decr__result4:integer.
+  forall test_type__decr__result5:integer. (in_range1(to_rep(x)) ->
+  (((((test_type__decr__result2 = test_type__decr__result1) and
+  (test_type__decr__result3 = test_type__decr__result1)) and (((({
+  us_split_fields1 = { rec__test_type__t__f = o } } = decr_int({
+  us_split_fields1 = { rec__test_type__t__f = x } })) and
+  (of_rep((to_rep(x) - 1)) = o)) and (({ us_split_fields1 = {
+  rec__test_type__t__f = o1 } } = saturate({ us_split_fields1 = {
+  rec__test_type__t__f = o } })) and (((to_rep(o) <  0) and ({
+  us_split_fields1 = { rec__test_type__t__f = o1 } } = { us_split_fields1 = {
+  rec__test_type__t__f = of_rep(0) } })) or ((not (to_rep(o) <  0)) and ({
+  us_split_fields1 = { rec__test_type__t__f = o1 } } = { us_split_fields1 = {
+  rec__test_type__t__f = o } }))))) and
+  ((result = test_type__decr__result) and ({ us_split_fields1 = {
+  rec__test_type__t__f = test_type__decr__result1 } } = { us_split_fields1 =
+  { rec__test_type__t__f = o1 } })))) and
+  ((test_type__decr__result4 = test_type__decr__result2) and
+  (test_type__decr__result5 = test_type__decr__result3))) ->
+  in_range1(to_rep(test_type__decr__result4)))))

@@ -105,9 +105,6 @@ type integer__ref = { integer__content : integer
 function integer__ref___projection(a: integer__ref) : integer =
   (a).integer__content
 
-logic us : int
-
-axiom H : ((us = 100) and in_range(100))
-
  (* File "private_ptr.ads", line 4, characters 0-0 *)
-goal WP_parameter_def : in_range(100)
+goal WP_parameter_def :
+  (forall us:int. (((us = 100) and in_range(100)) -> in_range(100)))

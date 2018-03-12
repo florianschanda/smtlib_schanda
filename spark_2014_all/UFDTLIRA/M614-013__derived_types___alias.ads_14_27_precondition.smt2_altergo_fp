@@ -338,45 +338,18 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic alias__add__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic result : int
-
-logic alias__add__result1 : int
-
-logic alias__add__result2 : int
-
-logic alias__add__result3 : int
-
-logic alias__add__result4 : int
-
-logic alias__add__result5 : int
-
-axiom H : in_range(x)
-
-axiom H1 : (alias__add__result1 = alias__add__result2)
-
-axiom H2 : (alias__add__result3 = alias__add__result1)
-
-axiom H3 : ((o = get_content({ us_split_fields1 = {
-  rec__alias__my_rec__content = r; rec__alias__my_rec__modulus = r1 } })) and
-  in_range(o))
-
-axiom H4 : (o1 = (o + x))
-
-axiom H5 : (result = alias__add__result)
-
-axiom H6 : (alias__add__result1 = o1)
-
-axiom H7 : (alias__add__result4 = alias__add__result2)
-
-axiom H8 : (alias__add__result5 = alias__add__result3)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (0 <  to_rep(r1))
+goal WP_parameter_def :
+  (forall alias__add__result:int. forall o:int. forall o1:int.
+  forall result:int. forall alias__add__result1:int.
+  forall alias__add__result2:int. forall alias__add__result3:int.
+  forall alias__add__result4:int. forall alias__add__result5:int.
+  (in_range(x) -> (((((alias__add__result1 = alias__add__result2) and
+  (alias__add__result3 = alias__add__result1)) and ((((o = get_content({
+  us_split_fields1 = { rec__alias__my_rec__content = r;
+  rec__alias__my_rec__modulus = r1 } })) and in_range(o)) and
+  (o1 = (o + x))) and (({ int__content = result } = { int__content =
+  alias__add__result }) and (alias__add__result1 = o1)))) and (({
+  int__content = alias__add__result4 } = { int__content = alias__add__result2
+  }) and (alias__add__result5 = alias__add__result3))) ->
+  (0 <  to_rep(r1)))))

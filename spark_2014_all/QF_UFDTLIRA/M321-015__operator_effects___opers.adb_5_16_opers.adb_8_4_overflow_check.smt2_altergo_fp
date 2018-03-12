@@ -134,9 +134,5 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : int
-
-axiom H : in_range1(x)
-
  (* File "opers.ads", line 10, characters 0-0 *)
-goal WP_parameter_def : in_range((x + x))
+goal WP_parameter_def : (in_range1(x) -> in_range((x + x)))

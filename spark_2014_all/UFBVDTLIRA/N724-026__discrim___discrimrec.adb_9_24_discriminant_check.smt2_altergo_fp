@@ -3024,164 +3024,59 @@ type t5b__ref = { t5b__content : us_rep
 
 function t5b__ref___projection(a: t5b__ref) : us_rep = (a).t5b__content
 
-logic o : register_option
+logic rliteral1 : t1
 
-logic o1 : unsigned_32
+axiom rliteral_axiom1 : (tqtint1(rliteral1) = 4294967296)
 
-logic o2 : unsigned_32
+logic rliteral2 : t
 
-logic o3 : unsigned_64
-
-logic o4 : unsigned_32
-
-logic o5 : unsigned_32
-
-logic o6 : unsigned_32
-
-logic o7 : unsigned_16
-
-logic o8 : unsigned_16
-
-logic o9 : unsigned_32
-
-logic o10 : unsigned_16
-
-logic o11 : unsigned_8
-
-logic o12 : unsigned_8
-
-logic o13 : register_option
-
-logic o14 : register_option
-
-logic o15 : unsigned_64
-
-logic o16 : unsigned_32
-
-logic o17 : unsigned_32
-
-logic o18 : unsigned_32
-
-logic o19 : unsigned_16
-
-logic o20 : unsigned_16
-
-logic o21 : unsigned_32
-
-logic o22 : unsigned_16
-
-logic o23 : unsigned_8
-
-logic o24 : unsigned_8
-
-logic o25 : bool
-
-logic o26 : register_option
-
-logic o27 : unsigned_64
-
-logic o28 : unsigned_32
-
-logic o29 : unsigned_32
-
-logic o30 : unsigned_32
-
-logic o31 : unsigned_16
-
-logic o32 : unsigned_16
-
-logic o33 : unsigned_32
-
-logic o34 : unsigned_16
-
-logic o35 : unsigned_8
-
-logic o36 : unsigned_8
-
-logic o37 : bool
-
-logic o38 : register_option
-
-logic o39 : unsigned_64
-
-logic o40 : unsigned_32
-
-logic o41 : unsigned_32
-
-logic o42 : unsigned_32
-
-logic o43 : unsigned_16
-
-logic o44 : unsigned_16
-
-logic o45 : unsigned_32
-
-logic o46 : unsigned_16
-
-logic o47 : unsigned_8
-
-logic o48 : unsigned_8
-
-logic o49 : bool
-
-axiom H : ((0 = to_rep2(reg)) and (reg11 = true))
-
-axiom H1 : (to_rep1(o1) = toSmall(urem1(to_rep(reg1), of_int1(4294967296))))
-
-axiom H2 : (to_rep1(o2) = of_int(0))
-
-axiom H3 : (dummy = o3)
-
-axiom H4 : (o2 = o4)
-
-axiom H5 : (o1 = o5)
-
-axiom H6 : (dummy1 = o6)
-
-axiom H7 : (dummy2 = o7)
-
-axiom H8 : (dummy2 = o8)
-
-axiom H9 : (dummy1 = o9)
-
-axiom H10 : (dummy2 = o10)
-
-axiom H11 : (dummy3 = o11)
-
-axiom H12 : (dummy3 = o12)
-
-axiom H13 : (to_rep2(o) = 1)
-
-axiom H14 : (o = o13)
-
-axiom H15 : (o14 = o13)
-
-axiom H16 : (o15 = o3)
-
-axiom H17 : (o16 = o4)
-
-axiom H18 : (o17 = o5)
-
-axiom H19 : (o18 = o6)
-
-axiom H20 : (o19 = o7)
-
-axiom H21 : (o20 = o8)
-
-axiom H22 : (o21 = o9)
-
-axiom H23 : (o22 = o10)
-
-axiom H24 : (o23 = o11)
-
-axiom H25 : (o24 = o12)
-
-axiom H26 : (true = o25)
-
-axiom H27 : ((o26 = o14) and (((o27 = o15) and ((o28 = o16) and
-  ((o29 = o17) and ((o30 = o18) and ((o31 = o19) and ((o32 = o20) and
-  ((o33 = o21) and ((o34 = o22) and ((o35 = o23) and (o36 = o24)))))))))) and
-  (o37 = o25)))
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 0)
 
  (* File "discrimrec.adb", line 6, characters 0-0 *)
-goal WP_parameter_def : (1 = to_rep2(o26))
+goal WP_parameter_def :
+  (forall o:register_option. forall o1:unsigned_32. forall o2:unsigned_32.
+  forall o3:unsigned_64. forall o4:unsigned_32. forall o5:unsigned_32.
+  forall o6:unsigned_32. forall o7:unsigned_16. forall o8:unsigned_16.
+  forall o9:unsigned_32. forall o10:unsigned_16. forall o11:unsigned_8.
+  forall o12:unsigned_8. forall o13:register_option.
+  forall o14:register_option. forall o15:unsigned_64. forall o16:unsigned_32.
+  forall o17:unsigned_32. forall o18:unsigned_32. forall o19:unsigned_16.
+  forall o20:unsigned_16. forall o21:unsigned_32. forall o22:unsigned_16.
+  forall o23:unsigned_8. forall o24:unsigned_8. forall o25:bool.
+  forall o26:register_option. forall o27:unsigned_64. forall o28:unsigned_32.
+  forall o29:unsigned_32. forall o30:unsigned_32. forall o31:unsigned_16.
+  forall o32:unsigned_16. forall o33:unsigned_32. forall o34:unsigned_16.
+  forall o35:unsigned_8. forall o36:unsigned_8. forall o37:bool.
+  (((0 = to_rep2(reg)) and (reg11 = true)) ->
+  (((((to_rep1(o1) = toSmall(urem1(to_rep(reg1), rliteral1))) and
+  ((to_rep1(o2) = rliteral2) and ((dummy = o3) and ((o2 = o4) and
+  ((o1 = o5) and ((dummy1 = o6) and ((dummy2 = o7) and ((dummy2 = o8) and
+  ((dummy1 = o9) and ((dummy2 = o10) and ((dummy3 = o11) and
+  (dummy3 = o12)))))))))))) and (((to_rep2(o) = 1) and (o = o13)) and
+  ((o14 = o13) and (((o15 = o3) and ((o16 = o4) and ((o17 = o5) and
+  ((o18 = o6) and ((o19 = o7) and ((o20 = o8) and ((o21 = o9) and
+  ((o22 = o10) and ((o23 = o11) and (o24 = o12)))))))))) and
+  (true = o25))))) and ({ us_split_discrs1 = {
+  rec__discrimrec__register_type__option = o26 }; us_split_fields1 = {
+  rec__discrimrec__register_type__value_64 = o27;
+  rec__discrimrec__register_type__ignore_32a = o28;
+  rec__discrimrec__register_type__value_32 = o29;
+  rec__discrimrec__register_type__ignore_32b = o30;
+  rec__discrimrec__register_type__ignore_16a = o31;
+  rec__discrimrec__register_type__value_16 = o32;
+  rec__discrimrec__register_type__ignore_32c = o33;
+  rec__discrimrec__register_type__ignore_16b = o34;
+  rec__discrimrec__register_type__value_high = o35;
+  rec__discrimrec__register_type__value_low = o36 }; attr__constrained = o37
+  } = { us_split_discrs1 = { rec__discrimrec__register_type__option = o14 };
+  us_split_fields1 = { rec__discrimrec__register_type__value_64 = o15;
+  rec__discrimrec__register_type__ignore_32a = o16;
+  rec__discrimrec__register_type__value_32 = o17;
+  rec__discrimrec__register_type__ignore_32b = o18;
+  rec__discrimrec__register_type__ignore_16a = o19;
+  rec__discrimrec__register_type__value_16 = o20;
+  rec__discrimrec__register_type__ignore_32c = o21;
+  rec__discrimrec__register_type__ignore_16b = o22;
+  rec__discrimrec__register_type__value_high = o23;
+  rec__discrimrec__register_type__value_low = o24 }; attr__constrained = o25
+  })) -> (1 = to_rep2(o26)))))

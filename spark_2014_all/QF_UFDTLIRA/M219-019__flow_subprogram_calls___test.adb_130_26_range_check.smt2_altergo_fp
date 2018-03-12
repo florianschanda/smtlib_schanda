@@ -141,13 +141,6 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic n : int
-
-logic o : int
-
-axiom H : in_range(n)
-
-axiom H1 : (not (a = true))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range1(n)
+goal WP_parameter_def :
+  (forall n:int. (in_range(n) -> ((not (a = true)) -> in_range1(n))))

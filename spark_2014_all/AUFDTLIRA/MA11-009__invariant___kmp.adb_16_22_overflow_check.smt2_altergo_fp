@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -162,24 +162,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> (int,integer) farray
-
-axiom concat_def :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : integer, int -> (int,integer) farray
-
-axiom singleton_def :
-  (forall v:integer.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq3 : (int,integer) farray, int, int, (int,integer) farray, int,
   int -> bool
 
@@ -190,17 +172,17 @@ axiom bool_eq_def2 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq3(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq3(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -210,37 +192,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq3(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq3(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq3(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type t
 
@@ -754,385 +708,63 @@ function t14b__ref___projection(a: t14b__ref) : us_t4 = (a).t14b__content
 logic kmp__init_next__next__aggregate_def : int, int, int -> us_t2
 
 axiom def_axiom :
-  (forall temp___159:int. forall temp___160:int. forall temp___161:int.
-  ((dynamic_property((- 2147483648), 2147483647, temp___160, temp___161) ->
-  ((to_rep(first4((kmp__init_next__next__aggregate_def(temp___159,
-  temp___160, temp___161)).rt2)) = temp___160) and
-  (to_rep(last4((kmp__init_next__next__aggregate_def(temp___159, temp___160,
-  temp___161)).rt2)) = temp___161))) and
-  (forall temp___162:int. (((kmp__init_next__next__aggregate_def(temp___159,
-  temp___160, temp___161)).elts2[temp___162]) = of_rep(temp___159)))))
-
-logic next : (int,integer) farray
-
-logic i : int
-
-logic j : int
-
-logic r8b : int
-
-logic r9b : int
-
-logic r12b : int
-
-logic kmp__init_next__result : (int,integer) farray
-
-logic kmp__init_next__result1 : t
-
-logic temp___164 : (int,integer) farray
-
-logic temp___1641 : t2
-
-logic kmp__init_next__next__assume : (int,integer) farray
-
-logic kmp__init_next__next__assume1 : t1
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : bool
-
-logic temp___170 : int
-
-logic temp___169 : int
-
-logic temp___167 : (int,integer) farray
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : (int,integer) farray
-
-logic temp___173 : (int,integer) farray
-
-logic temp___1731 : t4
-
-logic o6 : int
-
-logic o7 : integer
-
-logic o8 : int
-
-logic o9 : integer
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : int
-
-logic o13 : int
-
-logic o14 : integer
-
-logic o15 : int
-
-logic o16 : (int,integer) farray
-
-logic o17 : int
-
-logic o18 : integer
-
-logic o19 : int
-
-logic o20 : (int,integer) farray
-
-logic o21 : int
-
-logic o22 : integer
-
-logic o23 : int
-
-logic o24 : int
-
-logic o25 : bool
-
-logic o26 : bool
-
-logic o27 : int
-
-logic o28 : int
-
-logic j1 : int
-
-logic r8b1 : int
-
-logic r9b1 : int
-
-logic r12b1 : int
-
-logic result : (int,integer) farray
-
-logic next1 : (int,integer) farray
-
-logic result1 : int
-
-logic i1 : int
-
-logic result2 : int
-
-logic j2 : int
-
-logic result3 : bool
-
-logic result4 : int
-
-logic r8b2 : int
-
-logic result5 : int
-
-logic r9b2 : int
-
-logic result6 : int
-
-logic r12b2 : int
-
-logic next2 : (int,integer) farray
-
-logic i2 : int
-
-logic j3 : int
-
-logic r8b3 : int
-
-logic r9b3 : int
-
-logic r12b3 : int
-
-logic result7 : bool
-
-logic result8 : int
-
-logic i3 : int
-
-logic result9 : int
-
-logic j4 : int
-
-logic result10 : (int,integer) farray
-
-logic next3 : (int,integer) farray
-
-logic result11 : int
-
-logic i4 : int
-
-logic result12 : (int,integer) farray
-
-logic next4 : (int,integer) farray
-
-logic result13 : int
-
-logic j5 : int
-
-logic result14 : bool
-
-logic result15 : int
-
-logic r8b4 : int
-
-logic result16 : int
-
-logic r9b4 : int
-
-logic result17 : int
-
-logic r12b4 : int
-
-logic next5 : (int,integer) farray
-
-logic i5 : int
-
-logic j6 : int
-
-logic r8b5 : int
-
-logic r9b5 : int
-
-logic r12b5 : int
-
-logic next6 : (int,integer) farray
-
-logic i6 : int
-
-logic j7 : int
-
-logic r8b6 : int
-
-logic r9b6 : int
-
-logic r12b6 : int
-
-logic next7 : (int,integer) farray
-
-logic i7 : int
-
-logic j8 : int
-
-logic r8b7 : int
-
-logic r9b7 : int
-
-logic r12b7 : int
-
-logic next8 : (int,integer) farray
-
-logic i8 : int
-
-logic j9 : int
-
-logic r8b8 : int
-
-logic r9b8 : int
-
-logic r12b8 : int
-
-logic next9 : (int,integer) farray
-
-logic i9 : int
-
-logic j10 : int
-
-logic r8b9 : int
-
-logic r9b9 : int
-
-logic r12b9 : int
-
-logic next10 : (int,integer) farray
-
-logic i10 : int
-
-logic j11 : int
-
-logic r8b10 : int
-
-logic r9b10 : int
-
-logic r12b10 : int
-
-logic result18 : (int,integer) farray
-
-logic result19 : t
-
-logic kmp__init_next__result2 : (int,integer) farray
-
-logic kmp__init_next__result3 : t
-
-logic kmp__init_next__result4 : (int,integer) farray
-
-logic kmp__init_next__result5 : t
-
-logic kmp__init_next__result6 : (int,integer) farray
-
-logic kmp__init_next__result7 : t
-
-logic next11 : (int,integer) farray
-
-logic i11 : int
-
-logic j12 : int
-
-logic r8b11 : int
-
-logic r9b11 : int
-
-logic r12b11 : int
-
-logic kmp__init_next__result8 : (int,integer) farray
-
-logic kmp__init_next__result9 : t
-
-logic next12 : (int,integer) farray
-
-logic i12 : int
-
-logic j13 : int
-
-logic r8b12 : int
-
-logic r9b12 : int
-
-logic r12b12 : int
-
-logic kmp__init_next__result10 : (int,integer) farray
-
-logic kmp__init_next__result11 : t
-
-axiom H : dynamic_property((- 2147483648), 2147483647, to_rep(first(p1)),
-  to_rep(last(p1)))
-
-axiom H1 : (1 <= length({ elts = p; rt = p1 }))
-
-axiom H2 : (to_rep(first4((kmp__init_next__next__aggregate_def(0,
-  to_rep(first(p1)), to_rep(last(p1)))).rt2)) = to_rep(first(p1)))
-
-axiom H3 : (to_rep(last4((kmp__init_next__next__aggregate_def(0,
-  to_rep(first(p1)), to_rep(last(p1)))).rt2)) = to_rep(last(p1)))
-
-axiom H4 : ({ elts2 = temp___164; rt2 = temp___1641
-  } = kmp__init_next__next__aggregate_def(0, to_rep(first(p1)),
-  to_rep(last(p1))))
-
-axiom H5 : (((to_rep(first4(temp___1641)) <= to_rep(last4(temp___1641))) ->
-  (((to_rep(first(p1)) <= to_rep(last(p1))) ->
-  (((to_rep(last4(temp___1641)) - to_rep(first4(temp___1641))) + 1) = ((to_rep(last(p1)) - to_rep(first(p1))) + 1))) and
-  ((not (to_rep(first(p1)) <= to_rep(last(p1)))) ->
-  (((to_rep(last4(temp___1641)) - to_rep(first4(temp___1641))) + 1) = 0)))) and
-  ((not (to_rep(first4(temp___1641)) <= to_rep(last4(temp___1641)))) ->
-  ((to_rep(first(p1)) <= to_rep(last(p1))) ->
-  (0 = ((to_rep(last(p1)) - to_rep(first(p1))) + 1)))))
-
-axiom H6 : (slide(temp___164, to_rep(first4(temp___1641)),
-  to_rep(first(p1))) = kmp__init_next__next__assume)
-
-axiom H7 : (mk1(to_rep(first(p1)),
-  to_rep(last(p1))) = kmp__init_next__next__assume1)
-
-axiom H8 : (result = next)
-
-axiom H9 : (next1 = kmp__init_next__next__assume)
-
-axiom H10 :
-  (to_rep(next__first) = to_rep(first2(kmp__init_next__next__assume1)))
-
-axiom H11 :
-  (to_rep(next__last) = to_rep(last2(kmp__init_next__next__assume1)))
-
-axiom H12 : (dynamic_property2(to_rep(first(p1)), to_rep(last(p1)),
-  to_rep(next__first), to_rep(next__last)) and
-  ((to_rep(next__first) = to_rep(first(p1))) and
-  (to_rep(next__last) = to_rep(last(p1)))))
-
-axiom H13 : (result1 = i)
-
-axiom H14 : (i1 = to_rep(first(p1)))
-
-axiom H15 : in_range1(i1)
-
-axiom H16 : (((- 2147483648) <= 2147483647) -> in_range1(j))
-
-axiom H17 : (1 <  length({ elts = p; rt = p1 }))
-
-axiom H18 : ((o = (to_rep(first(p1)) + 1)) and
-  in_range1((to_rep(first(p1)) + 1)))
-
-axiom H19 : (result2 = j)
-
-axiom H20 : (j2 = o)
-
-axiom H21 : ((o1 = (to_rep(last(p1)) - 1)) and
-  in_range1((to_rep(last(p1)) - 1)))
-
-axiom H22 : (((i1 <= o1) -> (o2 = true)) and ((not (i1 <= o1)) ->
-  (o2 = false)))
-
-axiom H23 : (((to_rep(first(p1)) <= i1) -> (result3 = o2)) and
-  ((not (to_rep(first(p1)) <= i1)) -> (result3 = false)))
-
-axiom H24 : (result3 = true)
+  (forall temp___184:int. forall temp___185:int. forall temp___186:int.
+  (in_range1(temp___184) -> ((dynamic_property((- 2147483648), 2147483647,
+  temp___185, temp___186) ->
+  ((to_rep(first4((kmp__init_next__next__aggregate_def(temp___184,
+  temp___185, temp___186)).rt2)) = temp___185) and
+  (to_rep(last4((kmp__init_next__next__aggregate_def(temp___184, temp___185,
+  temp___186)).rt2)) = temp___186))) and
+  (forall temp___187:int.
+  (to_rep(((kmp__init_next__next__aggregate_def(temp___184, temp___185,
+  temp___186)).elts2[temp___187])) = temp___184)))))
 
  (* File "kmp.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : in_range1((i1 - j2))
+goal WP_parameter_def :
+  (forall next:(int,integer) farray. forall i:int. forall j:int.
+  forall temp___189:(int,integer) farray. forall temp___1891:t2.
+  forall kmp__init_next__next__assume:(int,integer) farray.
+  forall kmp__init_next__next__assume1:t1. forall o:int. forall o1:int.
+  forall o2:bool. forall result:(int,integer) farray.
+  forall next1:(int,integer) farray. forall result1:int. forall i1:int.
+  forall result2:int. forall j1:int. forall result3:bool.
+  (dynamic_property((- 2147483648), 2147483647, to_rep(first(p1)),
+  to_rep(last(p1))) -> ((1 <= length({ elts = p; rt = p1 })) ->
+  (((((to_rep(first4((kmp__init_next__next__aggregate_def(0,
+  to_rep(first(p1)), to_rep(last(p1)))).rt2)) = to_rep(first(p1))) and
+  ((to_rep(last4((kmp__init_next__next__aggregate_def(0, to_rep(first(p1)),
+  to_rep(last(p1)))).rt2)) = to_rep(last(p1))) and ({ elts2 = temp___189;
+  rt2 = temp___1891 } = kmp__init_next__next__aggregate_def(0,
+  to_rep(first(p1)), to_rep(last(p1)))))) and
+  ((((to_rep(first4(temp___1891)) <= to_rep(last4(temp___1891))) and
+  (((to_rep(first(p1)) <= to_rep(last(p1))) and
+  (((to_rep(last4(temp___1891)) - to_rep(first4(temp___1891))) + 1) = ((to_rep(last(p1)) - to_rep(first(p1))) + 1))) or
+  ((not (to_rep(first(p1)) <= to_rep(last(p1)))) and
+  (((to_rep(last4(temp___1891)) - to_rep(first4(temp___1891))) + 1) = 0)))) or
+  ((not (to_rep(first4(temp___1891)) <= to_rep(last4(temp___1891)))) and
+  (((to_rep(first(p1)) <= to_rep(last(p1))) and
+  (0 = ((to_rep(last(p1)) - to_rep(first(p1))) + 1))) or
+  (not (to_rep(first(p1)) <= to_rep(last(p1))))))) and ((slide(temp___189,
+  to_rep(first4(temp___1891)),
+  to_rep(first(p1))) = kmp__init_next__next__assume) and
+  (mk1(to_rep(first(p1)),
+  to_rep(last(p1))) = kmp__init_next__next__assume1)))) and ((({
+  map__content = result } = { map__content = next }) and
+  (next1 = kmp__init_next__next__assume)) and
+  ((to_rep(next__first) = to_rep(first2(kmp__init_next__next__assume1))) and
+  (to_rep(next__last) = to_rep(last2(kmp__init_next__next__assume1)))))) ->
+  ((dynamic_property2(to_rep(first(p1)), to_rep(last(p1)),
+  to_rep(next__first), to_rep(next__last)) and
+  ((to_rep(next__first) = to_rep(first(p1))) and
+  (to_rep(next__last) = to_rep(last(p1))))) -> ((({ int__content = result1
+  } = { int__content = i }) and (i1 = to_rep(first(p1)))) ->
+  (in_range1(i1) -> ((((- 2147483648) <= 2147483647) -> in_range1(j)) ->
+  ((1 <  length({ elts = p; rt = p1 })) ->
+  ((((o = (to_rep(first(p1)) + 1)) and
+  in_range1((to_rep(first(p1)) + 1))) and (({ int__content = result2 } = {
+  int__content = j }) and (j1 = o))) -> (((((o1 = (to_rep(last(p1)) - 1)) and
+  in_range1((to_rep(last(p1)) - 1))) and (((i1 <= o1) and (o2 = true)) or
+  ((not (i1 <= o1)) and (o2 = false)))) and (((to_rep(first(p1)) <= i1) and
+  (result3 = o2)) or ((not (to_rep(first(p1)) <= i1)) and
+  (result3 = false)))) -> ((result3 = true) ->
+  in_range1((i1 - j1))))))))))))))

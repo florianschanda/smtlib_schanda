@@ -117,29 +117,9 @@ axiom add_one__post_axiom :
 axiom add_one__def_axiom :
   (forall x:int [add_one(x)]. (in_range(x) -> (add_one(x) = (x + 1))))
 
-logic x : int
-
-logic o : int
-
-logic result : int
-
-logic x1 : int
-
-logic x2 : int
-
-logic x3 : int
-
-axiom H : in_range(x)
-
-axiom H1 : ((o = (x + 1)) and in_range((x + 1)))
-
-axiom H2 : (result = x)
-
-axiom H3 : (x1 = o)
-
-axiom H4 : (x1 = x2)
-
-axiom H5 : (x3 = x1)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (x2 = add_one(x))
+goal WP_parameter_def :
+  (forall x:int. forall o:int. forall result:int. forall x1:int.
+  forall x2:int. forall x3:int. ((in_range(x) and ((((o = (x + 1)) and
+  in_range((x + 1))) and ((result = x) and (x1 = o))) and ((x1 = x2) and
+  (x3 = x1)))) -> (x2 = add_one(x))))

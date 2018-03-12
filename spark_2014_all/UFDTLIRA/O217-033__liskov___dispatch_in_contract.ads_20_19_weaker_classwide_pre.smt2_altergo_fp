@@ -354,12 +354,6 @@ logic less_than_max__2__function_guard1 : bool, int, us_rep1 -> prop
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq4 : bool, bool -> bool
-
-axiom bool_eq_def3 :
-  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -371,6 +365,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq4 : bool, bool -> bool
+
+axiom bool_eq_def3 :
+  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -534,19 +534,14 @@ axiom less_than_max__3__def_axiom :
   rec__dispatch_in_contract__root__f11 = o1; rec__ext__1 = o2 }; attr__tag1 =
   o3 }) = true) <-> (to_rep(o1) <  2147483647)))
 
-logic o__split_fields : integer
-
-logic o__split_fields1 : integer
-
-logic o__split_fields2 : us_private
-
-axiom H : (less_than_max__2({ us_split_fields3 = {
-  rec__dispatch_in_contract__child__f2 = o__split_fields;
-  rec__dispatch_in_contract__root__f11 = o__split_fields1; rec__ext__1 =
-  o__split_fields2 }; attr__tag1 = o__attr__tag }) = true)
-
  (* File "dispatch_in_contract.adb", line 8, characters 0-0 *)
-goal WP_parameter_def : (less_than_max__2({ us_split_fields3 = {
+goal WP_parameter_def :
+  (forall o__split_fields:integer. forall o__split_fields1:integer.
+  forall o__split_fields2:us_private. ((less_than_max__2({ us_split_fields3 =
+  { rec__dispatch_in_contract__child__f2 = o__split_fields;
+  rec__dispatch_in_contract__root__f11 = o__split_fields1; rec__ext__1 =
+  o__split_fields2 }; attr__tag1 = o__attr__tag }) = true) ->
+  (less_than_max__2({ us_split_fields3 = {
   rec__dispatch_in_contract__child__f2 = o__split_fields;
   rec__dispatch_in_contract__root__f11 = o__split_fields1; rec__ext__1 =
-  o__split_fields2 }; attr__tag1 = o__attr__tag }) = true)
+  o__split_fields2 }; attr__tag1 = o__attr__tag }) = true)))

@@ -1037,12 +1037,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1054,6 +1048,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1152,40 +1152,6 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic res : t
-
-logic basic_contracts__average_orig__result : t
-
-logic o : t
-
-logic result : t
-
-logic res1 : t
-
-logic result1 : t
-
-logic basic_contracts__average_orig__result1 : t
-
-logic basic_contracts__average_orig__result2 : t
-
-logic basic_contracts__average_orig__result3 : t
-
-logic res2 : t
-
-logic basic_contracts__average_orig__result4 : t
-
-logic res3 : t
-
-logic basic_contracts__average_orig__result5 : t
-
-logic result2 : t
-
-axiom H : in_range2(numerator)
-
-axiom H1 : in_range2(denominator)
-
-axiom H2 : ((0 <= numerator) and (0 <  denominator))
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
@@ -1196,14 +1162,25 @@ logic fliteral2 : t
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.0e-1))
 
-axiom H3 : (((le(neg(fliteral1), fliteral1) -> tqtisFinite(res)) and
-  (le(fliteral2, of_int(NearestTiesToEven, numerator)) and (le(fliteral,
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (forall res:t. forall basic_contracts__average_orig__result:t. forall o:t.
+  forall result:t. forall res1:t. forall result1:t.
+  forall basic_contracts__average_orig__result1:t.
+  forall basic_contracts__average_orig__result2:t.
+  forall basic_contracts__average_orig__result3:t. forall res2:t.
+  forall basic_contracts__average_orig__result4:t. forall res3:t.
+  forall basic_contracts__average_orig__result5:t.
+  (forall result2:t. ((in_range2(numerator) and (in_range2(denominator) and
+  (((0 <= numerator) and (0 <  denominator)) and ((((le(neg(fliteral1),
+  fliteral1) -> tqtisFinite(res)) and (le(fliteral2,
+  of_int(NearestTiesToEven, numerator)) and (le(fliteral,
   of_int(NearestTiesToEven, denominator)) and ((((o = div(NearestTiesToEven,
   of_int(NearestTiesToEven, numerator), of_int(NearestTiesToEven,
   denominator))) and tqtisFinite(div(NearestTiesToEven,
   of_int(NearestTiesToEven, numerator), of_int(NearestTiesToEven,
-  denominator)))) and ((result = res) and (res1 = o))) and (le(fliteral2,
-  res1) and
+  denominator)))) and (({ t__content = result } = { t__content = res }) and
+  (res1 = o))) and (le(fliteral2, res1) and
   (((basic_contracts__average_orig__result1 = basic_contracts__average_orig__result2) and
   (basic_contracts__average_orig__result3 = basic_contracts__average_orig__result1)) and
   ((result1 = basic_contracts__average_orig__result) and
@@ -1211,9 +1188,6 @@ axiom H3 : (((le(neg(fliteral1), fliteral1) -> tqtisFinite(res)) and
   (((basic_contracts__average_orig__result4 = basic_contracts__average_orig__result2) and
   (res1 = res2)) and
   ((basic_contracts__average_orig__result5 = basic_contracts__average_orig__result3) and
-  (res3 = res1))))
-
-axiom H4 : (result2 = basic_contracts__average_orig__result4)
-
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : le(fliteral2, basic_contracts__average_orig__result4)
+  (res3 = res1)))) and
+  (result2 = basic_contracts__average_orig__result4))))) -> le(fliteral2,
+  basic_contracts__average_orig__result4))))

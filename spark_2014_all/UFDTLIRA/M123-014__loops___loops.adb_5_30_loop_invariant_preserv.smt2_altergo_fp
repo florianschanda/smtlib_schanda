@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -201,165 +201,34 @@ function t2b__ref___projection(a: t2b__ref) : integer = (a).t2b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic count : int
-
-logic i : int
-
-logic temp___169 : int
-
-logic temp___168 : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic count1 : int
-
-logic result1 : int
-
-logic i1 : int
-
-logic count2 : int
-
-logic i2 : int
-
-logic k : int
-
-logic result2 : int
-
-logic count3 : int
-
-logic result3 : int
-
-logic k1 : int
-
-logic result4 : int
-
-logic count4 : int
-
-logic count5 : int
-
-logic k2 : int
-
-logic result5 : int
-
-logic k3 : int
-
-logic result6 : int
-
-logic count6 : int
-
-logic count7 : int
-
-logic k4 : int
-
-logic count8 : int
-
-logic k5 : int
-
-logic count9 : int
-
-logic k6 : int
-
-logic count10 : int
-
-logic k7 : int
-
-logic count11 : int
-
-logic k8 : int
-
-logic count12 : int
-
-logic k9 : int
-
-logic result7 : int
-
-logic i3 : int
-
-logic count13 : int
-
-logic i4 : int
-
-logic k10 : int
-
-logic count14 : int
-
-logic i5 : int
-
-logic k11 : int
-
-axiom H : (result = count)
-
-axiom H1 : (count1 = 0)
-
-axiom H2 : in_range1(count1)
-
-axiom H3 : (result1 = i)
-
-axiom H4 : (i1 = 1)
-
-axiom H5 : (1 <= i1)
-
-axiom H6 : (i1 <= 5)
-
-axiom H7 : (count2 = (i2 - 1))
-
-axiom H8 : ((((1 <= 5) -> in_range2(i2)) and
-  (((- 2147483648) <= 2147483647) -> in_range1(count2))) and ((1 <= i2) and
-  (i2 <= 5)))
-
-axiom H9 : (count2 = result2)
-
-axiom H10 : (count3 = 0)
-
-axiom H11 : (k = result3)
-
-axiom H12 : (k1 = 1)
-
-axiom H13 : (((1 <= k1) and (k1 <= i2)) -> (((temp___169 = count3) and
-  ((temp___168 = k1) and ((((o = (count3 + 1)) and
-  in_range1((count3 + 1))) and ((count3 = result4) and (count4 = o))) and
-  ((count5 = k2) and (((((1 <= i2) -> dynamic_property(1, i2, k2)) and
-  (((- 2147483648) <= 2147483647) -> in_range1(count5))) and ((1 <= k2) and
-  (k2 <= i2))) and (k2 = i2)))))) and (((k2 = k6) and (count5 = count9)) and
-  ((k7 = k2) and (count10 = count5)))))
-
-axiom H14 : (((1 <= k1) and (k1 <= i2)) -> (k8 = k6))
-
-axiom H15 : (((1 <= k1) and (k1 <= i2)) -> (count11 = count9))
-
-axiom H16 : (((1 <= k1) and (k1 <= i2)) -> (k9 = k7))
-
-axiom H17 : (((1 <= k1) and (k1 <= i2)) -> (count12 = count10))
-
-axiom H18 : ((not ((1 <= k1) and (k1 <= i2))) -> (k1 = k8))
-
-axiom H19 : ((not ((1 <= k1) and (k1 <= i2))) -> (count3 = count11))
-
-axiom H20 : ((not ((1 <= k1) and (k1 <= i2))) -> (k9 = k1))
-
-axiom H21 : ((not ((1 <= k1) and (k1 <= i2))) -> (count12 = count3))
-
-axiom H22 : (not (i2 = 5))
-
-axiom H23 : (result7 = i2)
-
-axiom H24 : (i3 = (i2 + 1))
-
-axiom H25 : (k10 = k8)
-
-axiom H26 : (i3 = i4)
-
-axiom H27 : (count13 = count11)
-
-axiom H28 : (k11 = k9)
-
-axiom H29 : (i5 = i3)
-
-axiom H30 : (count14 = count12)
-
  (* File "loops.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : (count13 = (i4 - 1))
+goal WP_parameter_def :
+  (forall count:int. forall i:int. forall temp___197:int.
+  forall temp___196:int. forall o:int. forall result:int. forall count1:int.
+  forall result1:int. forall i1:int. forall count2:int. forall i2:int.
+  forall k:int. forall result2:int. forall count3:int. forall result3:int.
+  forall k1:int. forall result4:int. forall count4:int. forall count5:int.
+  forall k2:int. forall count6:int. forall k3:int. forall count7:int.
+  forall k4:int. forall count8:int. forall k5:int. forall count9:int.
+  forall k6:int. forall result5:int. forall i3:int. forall count10:int.
+  forall i4:int. forall k7:int. forall count11:int. forall i5:int.
+  forall k8:int. (((result = count) and (count1 = 0)) ->
+  (in_range1(count1) -> (((result1 = i) and (i1 = 1)) -> (((1 <= i1) and
+  (i1 <= 5)) -> ((count2 = (i2 - 1)) -> (((((((1 <= 5) -> in_range2(i2)) and
+  (((- 2147483648) <= 2147483647) -> in_range1(count2))) and ((1 <= i2) and
+  (i2 <= 5))) and (((count2 = result2) and (count3 = 0)) and
+  ((((k = result3) and (k1 = 1)) and ((((1 <= k1) and (k1 <= i2)) and
+  ((((temp___197 = count3) and ((temp___196 = k1) and
+  ((((o = (count3 + 1)) and in_range1((count3 + 1))) and
+  ((count3 = result4) and (count4 = o))) and ((count5 = k2) and
+  (((((1 <= i2) -> dynamic_property(1, i2, k2)) and
+  (((- 2147483648) <= 2147483647) -> in_range1(count5))) and ((1 <= k2) and
+  (k2 <= i2))) and (k2 = i2)))))) and (((k2 = k3) and (count5 = count6)) and
+  ((k4 = k2) and (count7 = count5)))) and (((k5 = k3) and ({ int__content =
+  count8 } = { int__content = count6 })) and ((k6 = k4) and
+  (count9 = count7))))) or ((not ((1 <= k1) and (k1 <= i2))) and
+  (((k1 = k5) and (count3 = count8)) and ((k6 = k1) and
+  (count9 = count3)))))) and ((not (i2 = 5)) and ((result5 = i2) and
+  (i3 = (i2 + 1))))))) and (((k7 = k5) and ((i3 = i4) and
+  (count10 = count8))) and ((k8 = k6) and ((i5 = i3) and
+  (count11 = count9))))) -> (count10 = (i4 - 1)))))))))

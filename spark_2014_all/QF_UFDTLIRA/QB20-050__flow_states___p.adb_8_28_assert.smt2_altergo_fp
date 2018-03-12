@@ -50,7 +50,5 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : bool
-
  (* File "p.adb", line 4, characters 0-0 *)
-goal WP_parameter_def : (x = true)
+goal WP_parameter_def : (forall x:bool. (x = true))

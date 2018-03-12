@@ -307,10 +307,9 @@ logic strong_data_type2 : bool
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-axiom H : (is_nat32({ us_split_discrs1 = {
+ (* File "data.ads", line 4, characters 0-0 *)
+goal WP_parameter_def : ((is_nat32({ us_split_discrs1 = {
   rec__data__t_strong_data_type__data_type = strong_data_type };
   us_split_fields1 = { rec__data__t_strong_data_type__min_nat32 =
-  strong_data_type1 }; attr__constrained = strong_data_type2 }) = true)
-
- (* File "data.ads", line 4, characters 0-0 *)
-goal WP_parameter_def : (to_rep1(strong_data_type) = 1)
+  strong_data_type1 }; attr__constrained = strong_data_type2 }) = true) ->
+  (to_rep1(strong_data_type) = 1))

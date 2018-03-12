@@ -270,12 +270,6 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -287,6 +281,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
 predicate in_range2(x: int) = ((x = 0) or (x = 1))
 
@@ -328,8 +328,6 @@ axiom is_empty__post_axiom :
   rec__sum_elem__partitions__vector__capacity = container };
   us_split_fields1 = { rec__sum_elem__partitions__vector = container1 }
   }) = 0)))
-
-logic us : int
 
  (* File "sum_elem.ads", line 28, characters 0-0 *)
 goal WP_parameter_def : in_range(10)

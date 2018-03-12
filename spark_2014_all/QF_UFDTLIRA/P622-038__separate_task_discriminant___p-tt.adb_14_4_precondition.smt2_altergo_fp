@@ -111,9 +111,5 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic y : int
-
-logic y1 : int
-
  (* File "p-tt.adb", line 4, characters 0-0 *)
 goal WP_parameter_def : true

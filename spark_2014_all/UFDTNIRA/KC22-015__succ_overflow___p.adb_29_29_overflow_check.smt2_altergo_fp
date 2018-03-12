@@ -403,7 +403,6 @@ logic v : volt
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-axiom H : (to_fixed1(v) = 2040)
-
  (* File "p.adb", line 4, characters 0-0 *)
-goal WP_parameter_def : (not ((to_fixed1(v) + 1) = (- 32768)))
+goal WP_parameter_def : ((to_fixed1(v) = 2040) ->
+  (not ((to_fixed1(v) + 1) = (- 32768))))

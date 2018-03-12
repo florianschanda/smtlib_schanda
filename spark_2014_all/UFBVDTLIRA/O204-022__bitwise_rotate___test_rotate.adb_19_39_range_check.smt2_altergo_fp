@@ -689,32 +689,18 @@ logic b : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic test_rotate__r__result : t
+logic rliteral : t
 
-logic o : int
+axiom rliteral_axiom : (tqtint(rliteral) = 18446744073709551615)
 
-logic o1 : t
+logic rliteral1 : t
 
-logic o2 : t
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 0)
 
-logic result : t
+logic rliteral2 : t
 
-logic test_rotate__r__result1 : t
-
-logic test_rotate__r__result2 : t
-
-logic test_rotate__r__result3 : t
-
-logic test_rotate__r__result4 : t
-
-logic test_rotate__r__result5 : t
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : (ule(a, of_int(18446744073709551615)) and
-  ((not (a = of_int(0))) and ule(b, of_int(2147483647))))
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 2147483647)
 
  (* File "commontypes.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : in_range(tqtint(b))
+goal WP_parameter_def : ((ule(a, rliteral) and ((not (a = rliteral1)) and
+  ule(b, rliteral2))) -> in_range(tqtint(b)))

@@ -225,27 +225,9 @@ axiom is_valid__post_axiom : true
 axiom is_valid__def_axiom :
   (forall x:int [is_valid(x)]. ((is_valid(x) = true) <-> (mod(x, 2) = 0)))
 
-logic x : int
-
-logic result : int
-
-logic x1 : int
-
-logic x2 : int
-
-logic x3 : int
-
-axiom H : in_range(x)
-
-axiom H1 : (is_valid(x) = true)
-
-axiom H2 : (result = x)
-
-axiom H3 : (x1 = comp_div(x,2))
-
-axiom H4 : (x1 = x2)
-
-axiom H5 : (x3 = x1)
-
  (* File "typeinv.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : (is_valid(x2) = true)
+goal WP_parameter_def :
+  (forall x:int. forall result:int. forall x1:int. forall x2:int.
+  forall x3:int. (in_range(x) -> ((is_valid(x) = true) -> ((((result = x) and
+  (x1 = comp_div(x,2))) and ((x1 = x2) and (x3 = x1))) ->
+  (is_valid(x2) = true)))))

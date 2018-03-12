@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -277,27 +277,9 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic x : int
-
-logic o : int
-
-logic result : int
-
-logic x1 : int
-
-logic x2 : int
-
-axiom H : (result = x)
-
-axiom H1 : (x1 = 0)
-
-axiom H2 : in_range2(x1)
-
-axiom H3 : (not (to_rep(t1) = to_rep(t2)))
-
-axiom H4 : (of_int(1) = true)
-
-axiom H5 : ((0 <= 2147483647) -> in_range2(x2))
-
  (* File "task_types.adb", line 6, characters 0-0 *)
-goal WP_parameter_def : in_range1((x2 + 1))
+goal WP_parameter_def :
+  (forall x:int. forall result:int. forall x1:int. forall x2:int.
+  (((result = x) and (x1 = 0)) -> (in_range2(x1) ->
+  ((not (to_rep(t1) = to_rep(t2))) -> ((of_int(1) = true) ->
+  (((0 <= 2147483647) -> in_range2(x2)) -> in_range1((x2 + 1))))))))

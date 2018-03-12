@@ -817,32 +817,6 @@ axiom slide_def :
   (forall i:t [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[sub(i, sub(new_first, old_first))]))))))
 
-logic concat : (t,us_rep) farray, t, t, (t,us_rep) farray, t,
-  t -> (t,us_rep) farray
-
-axiom concat_def :
-  (forall a:(t,us_rep) farray. forall b:(t,us_rep) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t.
-  (forall i:t [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((ule(a_first, i) and ule(i, a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and (ugt(i, a_last) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[add(sub(i, a_last), sub(b_first,
-  one))])))))))
-
-logic singleton : us_rep, t -> (t,us_rep) farray
-
-axiom singleton_def :
-  (forall v:time_type. forall v1:temperature_type.
-  (forall i:t [(singleton({ us_split_fields1 = {
-  rec__temperature_buffer14__temperature_record__time_stamp = v;
-  rec__temperature_buffer14__temperature_record__value = v1 } }, i)[i])].
-  ((singleton({ us_split_fields1 = {
-  rec__temperature_buffer14__temperature_record__time_stamp = v;
-  rec__temperature_buffer14__temperature_record__value = v1 } }, i)[i]) = {
-  us_split_fields1 = {
-  rec__temperature_buffer14__temperature_record__time_stamp = v;
-  rec__temperature_buffer14__temperature_record__value = v1 } })))
-
 logic bool_eq5 : (t,us_rep) farray, t, t, (t,us_rep) farray, t, t -> bool
 
 axiom bool_eq_def4 :
@@ -852,17 +826,17 @@ axiom bool_eq_def4 :
   a__last) and (ule(b__first, b__last) and (sub(a__last,
   a__first) = sub(b__last, b__first)))) or ((not ule(a__first, a__last)) and
   ugt(b__first, b__last))) and
-  (forall temp___idx_132:t. (((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) and (bool_eq4((a[temp___idx_132]),
-  (b[add(sub(b__first, a__first), temp___idx_132)])) = true)) or
-  (not (ule(a__first, temp___idx_132) and ule(temp___idx_132, a__last)))))) ->
+  (forall temp___idx_154:t. (((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) and (bool_eq4((a[temp___idx_154]),
+  (b[add(sub(b__first, a__first), temp___idx_154)])) = true)) or
+  (not (ule(a__first, temp___idx_154) and ule(temp___idx_154, a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not (((ule(a__first, a__last) -> (ule(b__first, b__last) and
   (sub(a__last, a__first) = sub(b__last, b__first)))) and ((not ule(a__first,
   a__last)) -> ugt(b__first, b__last))) and
-  (forall temp___idx_132:t. ((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) -> (bool_eq4((a[temp___idx_132]),
-  (b[add(sub(b__first, a__first), temp___idx_132)])) = true))))) ->
+  (forall temp___idx_154:t. ((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) -> (bool_eq4((a[temp___idx_154]),
+  (b[add(sub(b__first, a__first), temp___idx_154)])) = true))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -872,9 +846,9 @@ axiom bool_eq_rev :
   (((ule(a__first, a__last) -> (ule(b__first, b__last) and (sub(a__last,
   a__first) = sub(b__last, b__first)))) and ((not ule(a__first, a__last)) ->
   ugt(b__first, b__last))) and
-  (forall temp___idx_132:t. ((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) -> (bool_eq4((a[temp___idx_132]),
-  (b[add(sub(b__first, a__first), temp___idx_132)])) = true)))))))
+  (forall temp___idx_154:t. ((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) -> (bool_eq4((a[temp___idx_154]),
+  (b[add(sub(b__first, a__first), temp___idx_154)])) = true)))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -892,7 +866,15 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 type buffer_index_type
 
-predicate in_range2(x: t) = (ule(of_int(0), x) and ule(x, of_int(7)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 7)
+
+predicate in_range2(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 7))
 
@@ -946,41 +928,22 @@ buffer_count_type
 function buffer_count_type__ref___projection(a: buffer_count_type__ref) : buffer_count_type =
   (a).buffer_count_type__content
 
-logic buffer : (t,us_rep) farray
+logic rliteral2 : t
 
-logic count : int
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 1)
 
-logic next_in : t
+logic rliteral3 : t
 
-logic next_out : t
-
-logic o : int
-
-logic result : (t,us_rep) farray
-
-logic buffer1 : (t,us_rep) farray
-
-logic result1 : t
-
-logic next_in1 : t
-
-axiom H : in_range3(count)
-
-axiom H1 : in_range2(next_in)
-
-axiom H2 : in_range2(next_out)
-
-axiom H3 : (result = buffer)
-
-axiom H4 : (buffer1 = (buffer[next_in <- { us_split_fields1 = {
-  rec__temperature_buffer14__temperature_record__time_stamp = item;
-  rec__temperature_buffer14__temperature_record__value = item1 } }]))
-
-axiom H5 : (result1 = next_in)
-
-axiom H6 : (next_in1 = urem(add(next_in, of_int(1)), of_int(8)))
-
-axiom H7 : (not (count = 8))
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 8)
 
  (* File "temperature_buffer14.adb", line 57, characters 0-0 *)
-goal WP_parameter_def : in_range3((count + 1))
+goal WP_parameter_def :
+  (forall buffer:(t,us_rep) farray. forall count:int. forall next_in:t.
+  forall next_out:t. forall result:(t,us_rep) farray.
+  forall buffer1:(t,us_rep) farray. forall result1:t. forall next_in1:t.
+  (in_range3(count) -> (in_range2(next_in) -> (in_range2(next_out) ->
+  (((result = buffer) and (buffer1 = (buffer[next_in <- { us_split_fields1 =
+  { rec__temperature_buffer14__temperature_record__time_stamp = item;
+  rec__temperature_buffer14__temperature_record__value = item1 } }]))) ->
+  (((result1 = next_in) and (next_in1 = urem(add(next_in, rliteral2),
+  rliteral3))) -> ((not (count = 8)) -> in_range3((count + 1)))))))))

@@ -137,13 +137,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic r : int
-
-logic o : int
-
-axiom H : in_range1(n)
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(r))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((n + 1))
+goal WP_parameter_def :
+  (forall r:int. (in_range1(n) -> ((((- 2147483648) <= 2147483647) ->
+  in_range(r)) -> in_range((n + 1)))))

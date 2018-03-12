@@ -113,21 +113,8 @@ axiom f__def_axiom : (f(void) = 1)
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : int
-
-logic o : int
-
-logic result : int
-
-logic x1 : int
-
-axiom H : ((o = f(void)) and (in_range(o) and (o = 1)))
-
-axiom H1 : (result = x)
-
-axiom H2 : (x1 = o)
-
-axiom H3 : in_range(x1)
-
  (* File "main.adb", line 11, characters 0-0 *)
-goal WP_parameter_def : (x1 = 1)
+goal WP_parameter_def :
+  (forall x:int. forall o:int. forall result:int. forall x1:int.
+  ((((o = f(void)) and (in_range(o) and (o = 1))) and ((result = x) and
+  (x1 = o))) -> (in_range(x1) -> (x1 = 1))))

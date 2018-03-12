@@ -109,43 +109,19 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic assume_call__f1__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic assume_call__f1__result1 : int
-
-logic assume_call__f1__result2 : int
-
-logic assume_call__f1__result3 : int
-
-logic assume_call__f1__result4 : int
-
-logic assume_call__f1__result5 : int
-
-logic result1 : int
-
-axiom H : in_range(x)
-
-axiom H1 : (assume_call__f1__result1 = assume_call__f1__result2)
-
-axiom H2 : (assume_call__f1__result3 = assume_call__f1__result1)
-
-axiom H3 : ((o = (x + 1)) and in_range((x + 1)))
-
-axiom H4 : (result = assume_call__f1__result)
-
-axiom H5 : (assume_call__f1__result1 = o)
-
-axiom H6 : (assume_call__f1__result4 = assume_call__f1__result2)
-
-axiom H7 : (assume_call__f1__result5 = assume_call__f1__result3)
-
-axiom H8 : (result1 = assume_call__f1__result4)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (assume_call__f1__result4 = (x + 1))
+goal WP_parameter_def :
+  (forall assume_call__f1__result:int. forall o:int. forall result:int.
+  forall assume_call__f1__result1:int. forall assume_call__f1__result2:int.
+  forall assume_call__f1__result3:int. forall assume_call__f1__result4:int.
+  forall assume_call__f1__result5:int.
+  (forall result1:int. ((in_range(x) and
+  (((((assume_call__f1__result1 = assume_call__f1__result2) and
+  (assume_call__f1__result3 = assume_call__f1__result1)) and
+  (((o = (x + 1)) and in_range((x + 1))) and (({ int__content = result } = {
+  int__content = assume_call__f1__result }) and
+  (assume_call__f1__result1 = o)))) and (({ int__content =
+  assume_call__f1__result4 } = { int__content = assume_call__f1__result2
+  }) and (assume_call__f1__result5 = assume_call__f1__result3))) and
+  (result1 = assume_call__f1__result4))) ->
+  (assume_call__f1__result4 = (x + 1)))))

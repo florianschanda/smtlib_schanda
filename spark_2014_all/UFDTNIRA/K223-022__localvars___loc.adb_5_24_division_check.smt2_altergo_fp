@@ -225,59 +225,8 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic x : int
-
-logic y : int
-
-logic k : int
-
-logic loc__local__result : int
-
-logic result : int
-
-logic x1 : int
-
-logic result1 : int
-
-logic y1 : int
-
-logic result2 : int
-
-logic k1 : int
-
-logic result3 : int
-
-logic loc__local__result1 : int
-
-logic loc__local__result2 : int
-
-logic loc__local__result3 : int
-
-logic x2 : int
-
-logic y2 : int
-
-logic k2 : int
-
-logic loc__local__result4 : int
-
-logic x3 : int
-
-logic y3 : int
-
-logic k3 : int
-
-logic loc__local__result5 : int
-
-axiom H : in_range(z)
-
-axiom H1 : (z = 1)
-
-axiom H2 : (result = x)
-
-axiom H3 : (x1 = comp_div(1,z))
-
-axiom H4 : in_range(x1)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (not (x1 = 0))
+goal WP_parameter_def :
+  (forall x:int. forall result:int. forall x1:int. (in_range(z) ->
+  ((z = 1) -> ((({ int__content = result } = { int__content = x }) and
+  (x1 = comp_div(1,z))) -> (in_range(x1) -> (not (x1 = 0)))))))

@@ -113,13 +113,6 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : int
-
-axiom H : in_range(x)
-
-axiom H1 : in_range(y)
-
-axiom H2 : ((0 <= x) and ((x <= 10) and ((0 <= y) and (y <= 10))))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((x * y))
+goal WP_parameter_def : (in_range(x) -> (in_range(y) -> (((0 <= x) and
+  ((x <= 10) and ((0 <= y) and (y <= 10)))) -> in_range((x * y)))))

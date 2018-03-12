@@ -23,7 +23,6 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const b Bool)
 (declare-const b1 Bool)
-(declare-const b2 Bool)
 (assert (= b true))
 (assert (not (= b1 true)))
 (check-sat)

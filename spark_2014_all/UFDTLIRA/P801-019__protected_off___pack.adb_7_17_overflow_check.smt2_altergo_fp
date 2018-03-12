@@ -195,12 +195,6 @@ function prot__ref___projection(a: prot__ref) : us_rep = (a).prot__content
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -213,6 +207,12 @@ axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
 
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
 logic attr__ATTRIBUTE_IMAGE1 : bool -> us_image
@@ -221,28 +221,11 @@ logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE1 : us_image -> bool
 
-logic self__ : bool
-
-logic self__1 : integer
-
-logic o : int
-
-logic result : bool
-
-logic result1 : integer
-
-logic self__2 : bool
-
-logic self__3 : integer
-
-axiom H : (result = self__)
-
-axiom H1 : (result1 = self__1)
-
-axiom H2 : (((not (self__ = true)) -> (true = self__2)) and
-  ((self__ = true) -> (false = self__2)))
-
-axiom H3 : (self__1 = self__3)
-
  (* File "pack.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : in_range((to_rep(self__3) + 1))
+goal WP_parameter_def :
+  (forall self__:bool. forall self__1:integer. forall result:bool.
+  forall result1:integer. forall self__2:bool. forall self__3:integer.
+  ((((result = self__) and (result1 = self__1)) and
+  ((((not (self__ = true)) and (true = self__2)) or ((self__ = true) and
+  (false = self__2))) and (self__1 = self__3))) ->
+  in_range((to_rep(self__3) + 1))))

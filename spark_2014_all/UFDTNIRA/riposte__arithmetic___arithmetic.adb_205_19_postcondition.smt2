@@ -46,7 +46,7 @@
 (declare-const dummy byte)
 (declare-datatypes () ((byte__ref (mk_byte__ref (byte__content byte)))))
 (define-fun byte__ref___projection ((a byte__ref)) byte (byte__content a))
-(define-fun dynamic_invariant ((temp___expr_141 Int) (temp___is_init_138 Bool) (temp___skip_constant_139 Bool) (temp___do_toplevel_140 Bool)) Bool (=> (or (= temp___is_init_138 true) (<= (- 128) 127)) (in_range temp___expr_141)))
+(define-fun dynamic_invariant ((temp___expr_165 Int) (temp___is_init_161 Bool) (temp___skip_constant_162 Bool) (temp___do_toplevel_163 Bool) (temp___do_typ_inv_164 Bool)) Bool (=> (or (= temp___is_init_161 true) (<= (- 128) 127)) (in_range temp___expr_165)))
 (declare-const n Int)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const arithmetic__test_mod_b__result Int)

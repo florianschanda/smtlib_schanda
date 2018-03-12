@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -337,24 +337,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> (int,natural) farray
-
-axiom concat_def :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : natural, int -> (int,natural) farray
-
-axiom singleton_def :
-  (forall v:natural.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,natural) farray, int, int, (int,natural) farray, int,
   int -> bool
 
@@ -365,17 +347,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -385,37 +367,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type t
 
@@ -717,95 +671,45 @@ logic workspaces__generate_workspace__workspace__aggregate_def : int, int,
   int -> us_t2
 
 axiom def_axiom :
-  (forall temp___150:int. forall temp___151:int. forall temp___152:int.
-  ((dynamic_property(1, 2147483647, temp___151, temp___152) ->
-  ((to_rep1(first4((workspaces__generate_workspace__workspace__aggregate_def(temp___150,
-  temp___151, temp___152)).rt2)) = temp___151) and
-  (to_rep1(last4((workspaces__generate_workspace__workspace__aggregate_def(temp___150,
-  temp___151, temp___152)).rt2)) = temp___152))) and
-  (forall temp___153:int.
-  (((workspaces__generate_workspace__workspace__aggregate_def(temp___150,
-  temp___151, temp___152)).elts2[temp___153]) = of_rep(temp___150)))))
-
-logic workspace : (int,natural) farray
-
-logic j : int
-
-logic temp___155 : (int,natural) farray
-
-logic temp___1551 : t2
-
-logic workspaces__generate_workspace__workspace__assume : (int,natural) farray
-
-logic workspaces__generate_workspace__workspace__assume1 : t1
-
-logic o : natural
-
-logic o1 : int
-
-logic o2 : (int,natural) farray
-
-logic o3 : int
-
-logic temp___157 : int
-
-logic o4 : natural
-
-logic result : (int,natural) farray
-
-logic workspace1 : (int,natural) farray
-
-logic result1 : int
-
-logic j1 : int
-
-logic workspace2 : (int,natural) farray
-
-logic j2 : int
-
-logic result2 : (int,natural) farray
-
-logic workspace3 : (int,natural) farray
-
-axiom H : in_range3(size)
-
-axiom H1 :
-  (to_rep1(first4((workspaces__generate_workspace__workspace__aggregate_def(0,
-  1, size)).rt2)) = 1)
-
-axiom H2 :
-  (to_rep1(last4((workspaces__generate_workspace__workspace__aggregate_def(0,
-  1, size)).rt2)) = size)
-
-axiom H3 : ({ elts2 = temp___155; rt2 = temp___1551
-  } = workspaces__generate_workspace__workspace__aggregate_def(0, 1, size))
-
-axiom H4 : (((to_rep1(first4(temp___1551)) <= to_rep1(last4(temp___1551))) ->
-  (((1 <= size) ->
-  (((to_rep1(last4(temp___1551)) - to_rep1(first4(temp___1551))) + 1) = ((size - 1) + 1))) and
-  ((not (1 <= size)) ->
-  (((to_rep1(last4(temp___1551)) - to_rep1(first4(temp___1551))) + 1) = 0)))) and
-  ((not (to_rep1(first4(temp___1551)) <= to_rep1(last4(temp___1551)))) ->
-  ((1 <= size) -> (0 = ((size - 1) + 1)))))
-
-axiom H5 : (temp___155 = workspaces__generate_workspace__workspace__assume)
-
-axiom H6 : (mk1(to_rep1(first4(temp___1551)),
-  to_rep1(last4(temp___1551))) = workspaces__generate_workspace__workspace__assume1)
-
-axiom H7 : (result = workspace)
-
-axiom H8 : (workspace1 = workspaces__generate_workspace__workspace__assume)
-
-axiom H9 :
-  (to_rep1(workspace__first) = to_rep1(first2(workspaces__generate_workspace__workspace__assume1)))
-
-axiom H10 :
-  (to_rep1(workspace__last) = to_rep1(last2(workspaces__generate_workspace__workspace__assume1)))
-
-axiom H11 : (dynamic_property2(1, size, to_rep1(workspace__first),
-  to_rep1(workspace__last)) and ((to_rep1(workspace__first) = 1) and
-  (to_rep1(workspace__last) = size)))
+  (forall temp___174:int. forall temp___175:int. forall temp___176:int.
+  (in_range2(temp___174) -> ((dynamic_property(1, 2147483647, temp___175,
+  temp___176) ->
+  ((to_rep1(first4((workspaces__generate_workspace__workspace__aggregate_def(temp___174,
+  temp___175, temp___176)).rt2)) = temp___175) and
+  (to_rep1(last4((workspaces__generate_workspace__workspace__aggregate_def(temp___174,
+  temp___175, temp___176)).rt2)) = temp___176))) and
+  (forall temp___177:int.
+  (to_rep(((workspaces__generate_workspace__workspace__aggregate_def(temp___174,
+  temp___175, temp___176)).elts2[temp___177])) = temp___174)))))
 
  (* File "workspaces.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (not (2 = 0))
+goal WP_parameter_def :
+  (forall workspace:(int,natural) farray.
+  forall temp___179:(int,natural) farray. forall temp___1791:t2.
+  forall workspaces__generate_workspace__workspace__assume:(int,natural) farray.
+  forall workspaces__generate_workspace__workspace__assume1:t1.
+  forall result:(int,natural) farray. forall workspace1:(int,natural) farray.
+  (in_range3(size) ->
+  (((((to_rep1(first4((workspaces__generate_workspace__workspace__aggregate_def(0,
+  1, size)).rt2)) = 1) and
+  ((to_rep1(last4((workspaces__generate_workspace__workspace__aggregate_def(0,
+  1, size)).rt2)) = size) and ({ elts2 = temp___179; rt2 = temp___1791
+  } = workspaces__generate_workspace__workspace__aggregate_def(0, 1,
+  size)))) and
+  ((((to_rep1(first4(temp___1791)) <= to_rep1(last4(temp___1791))) and
+  (((1 <= size) and
+  (((to_rep1(last4(temp___1791)) - to_rep1(first4(temp___1791))) + 1) = ((size - 1) + 1))) or
+  ((not (1 <= size)) and
+  (((to_rep1(last4(temp___1791)) - to_rep1(first4(temp___1791))) + 1) = 0)))) or
+  ((not (to_rep1(first4(temp___1791)) <= to_rep1(last4(temp___1791)))) and
+  (((1 <= size) and (0 = ((size - 1) + 1))) or (not (1 <= size))))) and
+  ((temp___179 = workspaces__generate_workspace__workspace__assume) and
+  (mk1(to_rep1(first4(temp___1791)),
+  to_rep1(last4(temp___1791))) = workspaces__generate_workspace__workspace__assume1)))) and
+  (((result = workspace) and
+  (workspace1 = workspaces__generate_workspace__workspace__assume)) and
+  ((to_rep1(workspace__first) = to_rep1(first2(workspaces__generate_workspace__workspace__assume1))) and
+  (to_rep1(workspace__last) = to_rep1(last2(workspaces__generate_workspace__workspace__assume1)))))) ->
+  ((dynamic_property2(1, size, to_rep1(workspace__first),
+  to_rep1(workspace__last)) and ((to_rep1(workspace__first) = 1) and
+  (to_rep1(workspace__last) = size))) -> (not (2 = 0))))))

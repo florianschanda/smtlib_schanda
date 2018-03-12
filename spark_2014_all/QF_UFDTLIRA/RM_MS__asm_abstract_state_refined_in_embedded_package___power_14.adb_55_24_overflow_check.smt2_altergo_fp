@@ -115,35 +115,13 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic level : int
-
-logic state : int
-
-logic state1 : int
-
-logic level_a : int
-
-logic level_b : int
-
-logic o : int
-
-logic level_a1 : int
-
-logic level_b1 : int
-
-axiom H : in_range(state)
-
-axiom H1 : in_range(state1)
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range(level))
-
-axiom H3 : (((- 2147483648) <= 2147483647) -> in_range(level_a))
-
-axiom H4 : (((- 2147483648) <= 2147483647) -> in_range(level_b))
-
-axiom H5 : in_range(level_a1)
-
-axiom H6 : in_range(level_b1)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((level_a1 + level_b1))
+goal WP_parameter_def :
+  (forall level:int. forall state:int. forall state1:int. forall level_a:int.
+  forall level_b:int. forall level_a1:int. forall level_b1:int.
+  (in_range(state) -> (in_range(state1) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(level)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(level_a)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(level_b)) ->
+  (in_range(level_a1) -> (in_range(level_b1) ->
+  in_range((level_a1 + level_b1))))))))))

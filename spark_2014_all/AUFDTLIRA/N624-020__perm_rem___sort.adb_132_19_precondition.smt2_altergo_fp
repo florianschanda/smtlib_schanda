@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -278,24 +278,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> (int,natural) farray
-
-axiom concat_def :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : natural, int -> (int,natural) farray
-
-axiom singleton_def :
-  (forall v:natural.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq7 : (int,natural) farray, int, int, (int,natural) farray, int,
   int -> bool
 
@@ -306,17 +288,17 @@ axiom bool_eq_def6 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -326,37 +308,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq7(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq7(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep1((a[(i + 1)])) <  to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq7(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep1((b[(i + 1)])) <  to_rep1((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type t
 
@@ -600,223 +554,28 @@ axiom remove__post_axiom :
   elts = a; rt = a1 }, i)).rt)), to_rep(last((remove({ elts = a; rt = a1 },
   i)).rt)))))))
 
-logic values : (int,natural) farray
-
-logic smallest : int
-
-logic prec : (int,natural) farray
-
-logic hr : int
-
-logic current : int
-
-logic o : int
-
-logic temp___206 : (int,natural) farray
-
-logic temp___205 : int
-
-logic temp___204 : int
-
-logic temp___203 : (int,natural) farray
-
-logic temp___202 : int
-
-logic temp___201 : (int,natural) farray
-
-logic o1 : int
-
-logic o2 : int
-
-logic us : bool
-
-logic o3 : int
-
-logic o4 : int
-
-logic us1 : bool
-
-logic values1 : (int,natural) farray
-
-logic smallest1 : int
-
-logic result : (int,natural) farray
-
-logic prec1 : (int,natural) farray
-
-logic result1 : int
-
-logic hr1 : int
-
-logic result2 : int
-
-logic current1 : int
-
-logic result3 : int
-
-logic smallest2 : int
-
-logic result4 : (int,natural) farray
-
-logic prec2 : (int,natural) farray
-
-logic values2 : (int,natural) farray
-
-logic result5 : int
-
-logic hr2 : int
-
-logic values3 : (int,natural) farray
-
-logic smallest3 : int
-
-logic prec3 : (int,natural) farray
-
-logic hr3 : int
-
-logic current2 : int
-
-logic result6 : int
-
-logic current3 : int
-
-logic result7 : int
-
-logic smallest4 : int
-
-logic result8 : (int,natural) farray
-
-logic prec4 : (int,natural) farray
-
-logic values4 : (int,natural) farray
-
-logic result9 : int
-
-logic hr4 : int
-
-logic values5 : (int,natural) farray
-
-logic smallest5 : int
-
-logic prec5 : (int,natural) farray
-
-logic hr5 : int
-
-logic current4 : int
-
-logic values6 : (int,natural) farray
-
-logic smallest6 : int
-
-logic prec6 : (int,natural) farray
-
-logic hr6 : int
-
-logic current5 : int
-
-logic values7 : (int,natural) farray
-
-logic smallest7 : int
-
-logic prec7 : (int,natural) farray
-
-logic hr7 : int
-
-logic current6 : int
-
-logic values8 : (int,natural) farray
-
-logic smallest8 : int
-
-logic prec8 : (int,natural) farray
-
-logic hr8 : int
-
-logic current7 : int
-
-logic values9 : (int,natural) farray
-
-logic smallest9 : int
-
-logic prec9 : (int,natural) farray
-
-logic hr9 : int
-
-logic current8 : int
-
-logic values10 : (int,natural) farray
-
-logic smallest10 : int
-
-logic prec10 : (int,natural) farray
-
-logic hr10 : int
-
-logic current9 : int
-
-logic values11 : (int,natural) farray
-
-logic smallest11 : int
-
-logic prec11 : (int,natural) farray
-
-logic hr11 : int
-
-logic current10 : int
-
-logic values12 : (int,natural) farray
-
-logic smallest12 : int
-
-logic prec12 : (int,natural) farray
-
-logic hr12 : int
-
-logic current11 : int
-
-axiom H : ((1 <= 2147483647) -> in_range1(smallest))
-
-axiom H1 : (values = init)
-
-axiom H2 : (result = prec)
-
-axiom H3 : (prec1 = values)
-
-axiom H4 : ((1 <= 1) -> in_range2(hr))
-
-axiom H5 : ((o = perm_reflexive({ elts = values; rt = mk(1, 100) }, { elts =
-  values; rt = mk(1, 100) })) and (in_range2(o) and ((of_int(o) = true) ->
-  (is_perm({ elts = values; rt = mk(1, 100) }, { elts = values; rt = mk(1,
-  100) }) = true))))
-
-axiom H6 : (result1 = hr)
-
-axiom H7 : (hr1 = o)
-
-axiom H8 : (result2 = current)
-
-axiom H9 : (current1 = 1)
-
-axiom H10 : (1 <= current1)
-
-axiom H11 : (current1 <= 99)
-
-axiom H12 : ((o1 = index_of_minimum(values, current1, 100)) and
-  (in_range1(o1) and ((current1 <= o1) and (o1 <= 100))))
-
-axiom H13 : (result3 = smallest)
-
-axiom H14 : (smallest2 = o1)
-
-axiom H15 : (not (smallest2 = current1))
-
-axiom H16 : (prec1 = result4)
-
-axiom H17 : (prec2 = values)
-
-axiom H18 : (is_perm({ elts = values; rt = mk(1, 100) }, { elts = values2;
-  rt = mk(1, 100) }) = true)
-
  (* File "sort.adb", line 92, characters 0-0 *)
-goal WP_parameter_def : (invariant__({ elts = init; rt = mk(1, 100)
-  }) = true)
+goal WP_parameter_def :
+  (forall values:(int,natural) farray. forall smallest:int.
+  forall prec:(int,natural) farray. forall hr:int. forall current:int.
+  forall o:int. forall o1:int. forall result:(int,natural) farray.
+  forall prec1:(int,natural) farray. forall result1:int. forall hr1:int.
+  forall result2:int. forall current1:int. forall result3:int.
+  forall smallest1:int. forall result4:(int,natural) farray.
+  forall prec2:(int,natural) farray. forall values1:(int,natural) farray.
+  (((1 <= 2147483647) -> in_range1(smallest)) -> ((values = init) -> ((({
+  map__content = result } = { map__content = prec }) and (prec1 = values)) ->
+  (((1 <= 1) -> in_range2(hr)) -> ((((o = perm_reflexive({ elts = values;
+  rt = mk(1, 100) }, { elts = values; rt = mk(1, 100) })) and
+  (in_range2(o) and ((of_int(o) = true) -> (is_perm({ elts = values; rt =
+  mk(1, 100) }, { elts = values; rt = mk(1, 100) }) = true)))) and (({
+  int__content = result1 } = { int__content = hr }) and (hr1 = o))) -> ((({
+  int__content = result2 } = { int__content = current }) and
+  (current1 = 1)) -> (((1 <= current1) and (current1 <= 99)) ->
+  ((((o1 = index_of_minimum(values, current1, 100)) and (in_range1(o1) and
+  ((current1 <= o1) and (o1 <= 100)))) and (({ int__content = result3 } = {
+  int__content = smallest }) and (smallest1 = o1))) ->
+  ((not (smallest1 = current1)) -> (((prec1 = result4) and
+  (prec2 = values)) -> ((is_perm({ elts = values; rt = mk(1, 100) }, { elts =
+  values1; rt = mk(1, 100) }) = true) -> (invariant__({ elts = init; rt =
+  mk(1, 100) }) = true)))))))))))))

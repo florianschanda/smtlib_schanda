@@ -370,9 +370,6 @@ logic r1 : natural
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : int
-
-axiom H : (0 <  to_rep(r1))
-
  (* File "alias.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : in_range1(mod(to_rep1(r), to_rep(r1)))
+goal WP_parameter_def : ((0 <  to_rep(r1)) -> in_range1(mod(to_rep1(r),
+  to_rep(r1))))

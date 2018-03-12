@@ -167,55 +167,12 @@ axiom c5__def_axiom : (c5 = 5)
 
 axiom c6__def_axiom : (c6 = c2)
 
-logic a : int
-
-logic c : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic a1 : int
-
-axiom H : in_range1(c3)
-
-axiom H1 : (5 = c3)
-
-axiom H2 : in_range1(c5)
-
-axiom H3 : (5 = c5)
-
-axiom H4 : in_range1(a)
-
-axiom H5 : in_range1(b)
-
-axiom H6 : ((0 <= 2147483647) -> in_range1(c))
-
-axiom H7 : in_range1(c3)
-
-axiom H8 : (5 = c3)
-
-axiom H9 : in_range1(c4)
-
-axiom H10 : (b = c4)
-
-axiom H11 : in_range1(c2)
-
-axiom H12 : in_range1(c5)
-
-axiom H13 : (5 = c5)
-
-axiom H14 : in_range1(c6)
-
-axiom H15 : (c2 = c6)
-
-axiom H16 : ((o = (a + 1)) and in_range((a + 1)))
-
-axiom H17 : (result = a)
-
-axiom H18 : (a1 = o)
-
  (* File "info_flow_tests.adb", line 212, characters 0-0 *)
-goal WP_parameter_def : in_range((5 + c6))
+goal WP_parameter_def :
+  (forall a:int. forall c:int. forall o:int. forall result:int.
+  forall a1:int. (in_range1(c3) -> ((5 = c3) -> (in_range1(c5) ->
+  ((5 = c5) -> (in_range1(a) -> (in_range1(b) -> (((0 <= 2147483647) ->
+  in_range1(c)) -> (in_range1(c3) -> ((5 = c3) -> (in_range1(c4) ->
+  ((b = c4) -> (in_range1(c2) -> (in_range1(c5) -> ((5 = c5) ->
+  (in_range1(c6) -> ((c2 = c6) -> ((((o = (a + 1)) and in_range((a + 1))) and
+  ((result = a) and (a1 = o))) -> in_range((5 + c6))))))))))))))))))))

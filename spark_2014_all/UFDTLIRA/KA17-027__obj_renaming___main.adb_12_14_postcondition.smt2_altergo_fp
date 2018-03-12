@@ -193,51 +193,24 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 axiom result____def_axiom : (result__ = of_rep(5678))
 
-logic main__get_rec__result : natural
-
-logic o : natural
-
-logic o1 : natural
-
-logic main__get_rec__result__assume : natural
-
-logic result : natural
-
-logic main__get_rec__result1 : natural
-
-logic main__get_rec__result2 : natural
-
-logic main__get_rec__result3 : natural
-
-logic main__get_rec__result4 : natural
-
-logic main__get_rec__result5 : natural
-
-logic result1 : natural
-
-axiom H : (to_rep(o) = 5678)
-
-axiom H1 : (o = o1)
-
-axiom H2 : (main__get_rec__result__assume = o1)
-
-axiom H3 : (main__get_rec__result__assume = result__)
-
-axiom H4 : (main__get_rec__result2 = main__get_rec__result1)
-
-axiom H5 : (main__get_rec__result3 = main__get_rec__result1)
-
-axiom H6 : (result = main__get_rec__result)
-
-axiom H7 : (main__get_rec__result1 = result__)
-
-axiom H8 : (main__get_rec__result4 = main__get_rec__result2)
-
-axiom H9 : (main__get_rec__result5 = main__get_rec__result3)
-
-axiom H10 : (result1 = main__get_rec__result4)
-
  (* File "main.adb", line 2, characters 0-0 *)
-goal WP_parameter_def : (bool_eq2({ us_split_fields1 = {
+goal WP_parameter_def :
+  (forall main__get_rec__result:natural. forall o:natural. forall o1:natural.
+  forall main__get_rec__result__assume:natural. forall result:natural.
+  forall main__get_rec__result1:natural.
+  forall main__get_rec__result2:natural.
+  forall main__get_rec__result3:natural.
+  forall main__get_rec__result4:natural.
+  forall main__get_rec__result5:natural.
+  (forall result1:natural. ((((((((to_rep(o) = 5678) and (o = o1)) and
+  (main__get_rec__result__assume = o1)) and
+  (main__get_rec__result__assume = result__)) and
+  (((main__get_rec__result2 = main__get_rec__result1) and
+  (main__get_rec__result3 = main__get_rec__result1)) and
+  ((result = main__get_rec__result) and
+  (result__ = main__get_rec__result1)))) and
+  ((main__get_rec__result4 = main__get_rec__result2) and
+  (main__get_rec__result5 = main__get_rec__result3))) and
+  (result1 = main__get_rec__result4)) -> (bool_eq2({ us_split_fields1 = {
   rec__main__rec__comp = main__get_rec__result4 } }, { us_split_fields1 = {
-  rec__main__rec__comp = of_rep(5678) } }) = true)
+  rec__main__rec__comp = of_rep(5678) } }) = true))))

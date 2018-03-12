@@ -248,60 +248,23 @@ logic b : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic arithmetic__test_rem_b__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic result : int
-
-logic arithmetic__test_rem_b__result1 : int
-
-logic arithmetic__test_rem_b__result2 : int
-
-logic arithmetic__test_rem_b__result3 : int
-
-logic arithmetic__test_rem_b__result4 : int
-
-logic arithmetic__test_rem_b__result5 : int
-
-logic result1 : int
-
-axiom H : in_range1(a)
-
-axiom H1 : in_range1(b)
-
-axiom H2 : (not (b = 0))
-
-axiom H3 :
-  (arithmetic__test_rem_b__result1 = arithmetic__test_rem_b__result2)
-
-axiom H4 :
-  (arithmetic__test_rem_b__result3 = arithmetic__test_rem_b__result1)
-
-axiom H5 : (result = arithmetic__test_rem_b__result)
-
-axiom H6 : (arithmetic__test_rem_b__result1 = comp_mod(a,b))
-
-axiom H7 :
-  (arithmetic__test_rem_b__result4 = arithmetic__test_rem_b__result2)
-
-axiom H8 :
-  (arithmetic__test_rem_b__result5 = arithmetic__test_rem_b__result3)
-
-axiom H9 : (result1 = arithmetic__test_rem_b__result4)
-
  (* File "arithmetic.adb", line 4, characters 0-0 *)
 goal WP_parameter_def :
-  (arithmetic__test_rem_b__result4 = ((-(comp_div(a,b) * b)) + a))
+  (forall arithmetic__test_rem_b__result:int. forall result:int.
+  forall arithmetic__test_rem_b__result1:int.
+  forall arithmetic__test_rem_b__result2:int.
+  forall arithmetic__test_rem_b__result3:int.
+  forall arithmetic__test_rem_b__result4:int.
+  forall arithmetic__test_rem_b__result5:int.
+  (forall result1:int. ((in_range1(a) and (in_range1(b) and
+  ((not (b = 0)) and
+  (((((arithmetic__test_rem_b__result1 = arithmetic__test_rem_b__result2) and
+  (arithmetic__test_rem_b__result3 = arithmetic__test_rem_b__result1)) and
+  (({ int__content = result } = { int__content =
+  arithmetic__test_rem_b__result }) and
+  (arithmetic__test_rem_b__result1 = comp_mod(a,b)))) and (({ int__content =
+  arithmetic__test_rem_b__result4 } = { int__content =
+  arithmetic__test_rem_b__result2 }) and
+  (arithmetic__test_rem_b__result5 = arithmetic__test_rem_b__result3))) and
+  (result1 = arithmetic__test_rem_b__result4))))) ->
+  (arithmetic__test_rem_b__result4 = ((-(comp_div(a,b) * b)) + a)))))

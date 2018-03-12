@@ -721,19 +721,5 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 axiom max__def_axiom : (max1 = 100)
 
-logic find_map__R258s__assume : t
-
-logic us : t
-
-logic us1 : int
-
-axiom H : in_range(max1)
-
-axiom H1 : (find_map__R258s__assume = default_modulus(100))
-
-axiom H2 : (find_map__R258s__assume = r258s)
-
-axiom H3 : true
-
  (* File "find_map.ads", line 36, characters 0-0 *)
 goal WP_parameter_def : true

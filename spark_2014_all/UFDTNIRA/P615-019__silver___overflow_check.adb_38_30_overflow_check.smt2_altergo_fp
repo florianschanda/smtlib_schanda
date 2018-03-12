@@ -499,11 +499,6 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-axiom H : in_range1(op)
-
-axiom H1 : in_range(e)
-
-axiom H2 : (op = 0)
-
  (* File "overflow_check.adb", line 22, characters 0-0 *)
-goal WP_parameter_def : in_range2((-to_fixed1(x)))
+goal WP_parameter_def : (in_range1(op) -> (in_range(e) -> ((op = 0) ->
+  in_range2((-to_fixed1(x))))))

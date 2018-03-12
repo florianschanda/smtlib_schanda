@@ -87,35 +87,17 @@ logic l : us_rep
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic p__identity2__result : us_rep
-
-logic result : us_rep
-
-logic p__identity2__result1 : us_rep
-
-logic p__identity2__result2 : us_rep
-
-logic p__identity2__result3 : us_rep
-
-logic p__identity2__result4 : us_rep
-
-logic p__identity2__result5 : us_rep
-
-logic result1 : us_rep
-
-axiom H : (p__identity2__result1 = p__identity2__result2)
-
-axiom H1 : (p__identity2__result3 = p__identity2__result1)
-
-axiom H2 : (result = p__identity2__result)
-
-axiom H3 : (p__identity2__result1 = l)
-
-axiom H4 : (p__identity2__result4 = p__identity2__result2)
-
-axiom H5 : (p__identity2__result5 = p__identity2__result3)
-
-axiom H6 : (result1 = p__identity2__result4)
-
  (* File "p.ads", line 4, characters 0-0 *)
-goal WP_parameter_def : (bool_eq(p__identity2__result4, l) = true)
+goal WP_parameter_def :
+  (forall p__identity2__result:us_rep. forall result:us_rep.
+  forall p__identity2__result1:us_rep. forall p__identity2__result2:us_rep.
+  forall p__identity2__result3:us_rep. forall p__identity2__result4:us_rep.
+  forall p__identity2__result5:us_rep.
+  (forall result1:us_rep.
+  ((((((p__identity2__result1 = p__identity2__result2) and
+  (p__identity2__result3 = p__identity2__result1)) and
+  ((result = p__identity2__result) and (p__identity2__result1 = l))) and
+  ((p__identity2__result4 = p__identity2__result2) and
+  (p__identity2__result5 = p__identity2__result3))) and
+  (result1 = p__identity2__result4)) -> (bool_eq(p__identity2__result4,
+  l) = true))))

@@ -178,7 +178,5 @@ function pt__ref___projection(a: pt__ref) : us_rep = (a).pt__content
 
 logic self__ : interrupt_id
 
-logic temp___1602 : bool
-
  (* File "r.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : (temp___1602 = false)
+goal WP_parameter_def : (forall temp___1793:bool. (temp___1793 = false))

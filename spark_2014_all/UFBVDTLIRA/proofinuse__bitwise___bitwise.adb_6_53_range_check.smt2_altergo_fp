@@ -1027,16 +1027,22 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic res : t
+logic rliteral1 : t
 
-logic result : t
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 0)
 
-logic res1 : t
+logic rliteral2 : t1
 
-axiom H : true
+axiom rliteral_axiom2 : (tqtint1(rliteral2) = 4294967040)
 
-axiom H1 : true
+logic rliteral3 : t1
+
+axiom rliteral_axiom3 : (tqtint1(rliteral3) = 1)
+
+logic rliteral4 : t1
+
+axiom rliteral_axiom4 : (tqtint1(rliteral4) = 255)
 
  (* File "bitwise.ads", line 22, characters 0-0 *)
-goal WP_parameter_def : ule1(toBig(of_int(0)), bw_and1(bw_or1(bw_and1(x,
-  of_int1(4294967040)), of_int1(1)), of_int1(255)))
+goal WP_parameter_def : ule1(toBig(rliteral1), bw_and1(bw_or1(bw_and1(x,
+  rliteral2), rliteral3), rliteral4))

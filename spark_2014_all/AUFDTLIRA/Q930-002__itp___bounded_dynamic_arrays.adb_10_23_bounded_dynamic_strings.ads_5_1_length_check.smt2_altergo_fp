@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -228,24 +228,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -256,17 +238,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep1((a[temp___idx_78])) = to_rep1((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep1((a[temp___idx_91])) = to_rep1((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep1((a[temp___idx_78])) = to_rep1((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep1((a[temp___idx_91])) = to_rep1((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -276,37 +258,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep1((a[temp___idx_78])) = to_rep1((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep1((a[(i + 1)])) <  to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep1((b[(i + 1)])) <  to_rep1((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep1((a[temp___idx_91])) = to_rep1((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 logic to_rep2 : integer -> int
 
@@ -873,6 +827,8 @@ type t81b__ref = { t81b__content : us_t2
 
 function t81b__ref___projection(a: t81b__ref) : us_t2 = (a).t81b__content
 
+logic temp___995 : int, int, int -> us_t2
+
 type positive
 
 predicate in_range4(x: int) = ((1 <= x) and (x <= 2147483647))
@@ -981,180 +937,66 @@ type string__ref = { string__content : us_t3
 function string__ref___projection(a: string__ref) : us_t3 =
   (a).string__content
 
-logic temp___932 : int, int, int -> us_t2
-
 axiom def_axiom :
-  (forall temp___934:int. forall temp___935:int. forall temp___936:int.
-  ((dynamic_property6(1, 2147483647, temp___935, temp___936) ->
-  ((to_rep2(first4((temp___932(temp___934, temp___935,
-  temp___936)).rt2)) = temp___935) and (to_rep2(last4((temp___932(temp___934,
-  temp___935, temp___936)).rt2)) = temp___936))) and
-  (forall temp___937:int. (((temp___932(temp___934, temp___935,
-  temp___936)).elts2[temp___937]) = of_rep1(temp___934)))))
+  (forall temp___997:int. forall temp___998:int. forall temp___999:int.
+  (in_range3(temp___997) -> ((dynamic_property6(1, 2147483647, temp___998,
+  temp___999) -> ((to_rep2(first4((temp___995(temp___997, temp___998,
+  temp___999)).rt2)) = temp___998) and (to_rep2(last4((temp___995(temp___997,
+  temp___998, temp___999)).rt2)) = temp___999))) and
+  (forall temp___1000:int. (to_rep1(((temp___995(temp___997, temp___998,
+  temp___999)).elts2[temp___1000])) = temp___997)))))
 
-logic this__split_fields : natural_index
-
-logic this__split_fields1 : (int,character) farray
-
-logic this__split_fields2 : t
-
-logic o : natural_index
-
-logic o1 : natural_index
-
-logic o2 : (int,character) farray
-
-logic o3 : t
-
-logic temp___930 : natural_index
-
-logic temp___9301 : natural_index
-
-logic temp___9302 : (int,character) farray
-
-logic temp___9303 : t
-
-logic temp___931 : natural_index
-
-logic temp___9311 : natural_index
-
-logic temp___9312 : (int,character) farray
-
-logic temp___9313 : t
-
-logic temp___939 : (int,character) farray
-
-logic temp___9391 : t2
-
-logic temp___940 : (int,character) farray
-
-logic temp___9401 : t1
-
-logic temp___942 : (int,character) farray
-
-logic temp___9421 : t1
-
-logic o4 : (int,character) farray
-
-logic o5 : t
-
-logic o6 : natural_index
-
-logic o7 : (int,character) farray
-
-logic o8 : t
-
-logic temp___944 : natural_index
-
-logic temp___9441 : natural_index
-
-logic temp___9442 : (int,character) farray
-
-logic temp___9443 : t
-
-logic temp___945 : natural_index
-
-logic temp___9451 : natural_index
-
-logic temp___9452 : (int,character) farray
-
-logic temp___9453 : t
-
-logic result : natural_index
-
-logic result1 : (int,character) farray
-
-logic result2 : t
-
-logic this__split_fields3 : natural_index
-
-logic this__split_fields4 : (int,character) farray
-
-logic this__split_fields5 : t
-
-logic result3 : natural_index
-
-logic result4 : (int,character) farray
-
-logic result5 : t
-
-logic this__split_fields6 : natural_index
-
-logic this__split_fields7 : (int,character) farray
-
-logic this__split_fields8 : t
-
-logic this__split_fields9 : natural_index
-
-logic this__split_fields10 : (int,character) farray
-
-logic this__split_fields11 : t
-
-logic this__split_fields12 : natural_index
-
-logic this__split_fields13 : (int,character) farray
-
-logic this__split_fields14 : t
-
-axiom H : (((0 <= to_rep(i52s1)) and (to_rep(i52s1) <= to_rep(i52s))) and
-  (dynamic_property1(1, to_rep(i52s), to_rep2(first(i52s3)),
-  to_rep2(last(i52s3))) and ((to_rep2(first(i52s3)) = 1) and
-  (to_rep2(last(i52s3)) = to_rep(i52s)))))
-
-axiom H1 : (dynamic_property1(1, to_rep(this__split_discrs),
-  to_rep2(first(this__split_fields2)),
+ (* File "bounded_dynamic_arrays.adb", line 10, characters 0-0 *)
+goal WP_parameter_def :
+  (forall this__split_fields:natural_index.
+  forall this__split_fields1:(int,character) farray.
+  forall this__split_fields2:t. forall o:natural_index.
+  forall o1:natural_index. forall o2:(int,character) farray. forall o3:t.
+  forall temp___993:natural_index. forall temp___9931:natural_index.
+  forall temp___9932:(int,character) farray. forall temp___9933:t.
+  forall temp___994:natural_index. forall temp___9941:natural_index.
+  forall temp___9942:(int,character) farray. forall temp___9943:t.
+  forall temp___1002:(int,character) farray. forall temp___10021:t2.
+  forall result:natural_index. forall result1:(int,character) farray.
+  forall result2:t. forall this__split_fields3:natural_index.
+  forall this__split_fields4:(int,character) farray.
+  forall this__split_fields5:t. ((((0 <= to_rep(i52s1)) and
+  (to_rep(i52s1) <= to_rep(i52s))) and (dynamic_property1(1, to_rep(i52s),
+  to_rep2(first(i52s3)), to_rep2(last(i52s3))) and
+  ((to_rep2(first(i52s3)) = 1) and
+  (to_rep2(last(i52s3)) = to_rep(i52s))))) -> ((dynamic_property1(1,
+  to_rep(this__split_discrs), to_rep2(first(this__split_fields2)),
   to_rep2(last(this__split_fields2))) and
   ((to_rep2(first(this__split_fields2)) = 1) and
-  (to_rep2(last(this__split_fields2)) = to_rep(this__split_discrs))))
-
-axiom H2 : (to_rep(o) = 0)
-
-axiom H3 : (o = o1)
-
-axiom H4 : (this__split_fields1 = o2)
-
-axiom H5 : (this__split_fields2 = o3)
-
-axiom H6 : (this__split_discrs = temp___930)
-
-axiom H7 : (temp___9301 = o1)
-
-axiom H8 : (temp___9302 = o2)
-
-axiom H9 : (temp___9303 = o3)
-
-axiom H10 : ((0 <= to_rep(temp___9301)) and
-  (to_rep(temp___9301) <= to_rep(temp___930)))
-
-axiom H11 : ((temp___931 = temp___930) and ((temp___9311 = temp___9301) and
-  ((temp___9312 = temp___9302) and (temp___9313 = temp___9303))))
-
-axiom H12 : ((result = this__split_fields) and
-  ((result1 = this__split_fields1) and (result2 = this__split_fields2)))
-
-axiom H13 : ((this__split_fields3 = temp___9311) and
-  ((this__split_fields4 = temp___9312) and
-  (this__split_fields5 = temp___9313)))
-
-axiom H14 : (this__split_discrs = temp___931)
-
-axiom H15 : (to_rep(this__split_discrs) = r79b)
-
-axiom H16 : in_range1(r79b)
-
-axiom H17 : (to_rep2(first4((temp___932(32, 1, r79b)).rt2)) = 1)
-
-axiom H18 : (to_rep2(last4((temp___932(32, 1, r79b)).rt2)) = r79b)
-
-axiom H19 : ({ elts2 = temp___939; rt2 = temp___9391 } = temp___932(32, 1,
-  r79b))
-
- (* File "bounded_dynamic_arrays.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (((to_rep2(first4(temp___9391)) <= to_rep2(last4(temp___9391))) ->
+  (to_rep2(last(this__split_fields2)) = to_rep(this__split_discrs)))) ->
+  ((((((to_rep(o) = 0) and ((o = o1) and ((this__split_fields1 = o2) and
+  (this__split_fields2 = o3)))) and ((this__split_discrs = temp___993) and
+  ((temp___9931 = o1) and ((temp___9932 = o2) and (temp___9933 = o3))))) and
+  (((0 <= to_rep(temp___9931)) and
+  (to_rep(temp___9931) <= to_rep(temp___993))) and ({ us_split_discrs1 = {
+  rec__bounded_dynamic_strings__sequence__capacity = temp___994 };
+  us_split_fields1 = {
+  rec__bounded_dynamic_strings__sequence__current_length = temp___9941;
+  rec__bounded_dynamic_strings__sequence__content = { elts = temp___9942;
+  rt = temp___9943 } } } = { us_split_discrs1 = {
+  rec__bounded_dynamic_strings__sequence__capacity = temp___993 };
+  us_split_fields1 = {
+  rec__bounded_dynamic_strings__sequence__current_length = temp___9931;
+  rec__bounded_dynamic_strings__sequence__content = { elts = temp___9932;
+  rt = temp___9933 } } }))) and ((((result = this__split_fields) and
+  ((result1 = this__split_fields1) and (result2 = this__split_fields2))) and
+  ((this__split_fields3 = temp___9941) and
+  ((this__split_fields4 = temp___9942) and
+  (this__split_fields5 = temp___9943)))) and
+  (this__split_discrs = temp___994))) ->
+  (((to_rep(this__split_discrs) = r79b) and in_range1(r79b)) ->
+  (((to_rep2(first4((temp___995(32, 1, r79b)).rt2)) = 1) and
+  ((to_rep2(last4((temp___995(32, 1, r79b)).rt2)) = r79b) and ({ elts2 =
+  temp___1002; rt2 = temp___10021 } = temp___995(32, 1, r79b)))) ->
+  (((to_rep2(first4(temp___10021)) <= to_rep2(last4(temp___10021))) ->
   (((1 <= r79b) ->
-  (((to_rep2(last4(temp___9391)) - to_rep2(first4(temp___9391))) + 1) = ((r79b - 1) + 1))) and
+  (((to_rep2(last4(temp___10021)) - to_rep2(first4(temp___10021))) + 1) = ((r79b - 1) + 1))) and
   ((not (1 <= r79b)) ->
-  (((to_rep2(last4(temp___9391)) - to_rep2(first4(temp___9391))) + 1) = 0)))) and
-  ((not (to_rep2(first4(temp___9391)) <= to_rep2(last4(temp___9391)))) ->
-  ((1 <= r79b) -> (0 = ((r79b - 1) + 1)))))
+  (((to_rep2(last4(temp___10021)) - to_rep2(first4(temp___10021))) + 1) = 0)))) and
+  ((not (to_rep2(first4(temp___10021)) <= to_rep2(last4(temp___10021)))) ->
+  ((1 <= r79b) -> (0 = ((r79b - 1) + 1)))))))))))

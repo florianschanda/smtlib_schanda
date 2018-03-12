@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -145,116 +145,18 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic q : int
-
-logic r : int
-
-logic temp___133 : int
-
-logic temp___132 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic result : int
-
-logic q1 : int
-
-logic result1 : int
-
-logic r1 : int
-
-logic q2 : int
-
-logic r2 : int
-
-logic result2 : bool
-
-logic result3 : int
-
-logic q3 : int
-
-logic result4 : int
-
-logic r3 : int
-
-logic q4 : int
-
-logic r4 : int
-
-logic q5 : int
-
-logic r5 : int
-
-logic q6 : int
-
-logic r6 : int
-
-logic q7 : int
-
-logic r7 : int
-
-logic q8 : int
-
-logic r8 : int
-
-logic q9 : int
-
-logic r9 : int
-
-logic q10 : int
-
-logic r10 : int
-
-logic q11 : int
-
-logic r11 : int
-
-axiom H : in_range1(m)
-
-axiom H1 : in_range1(n)
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range1(q))
-
-axiom H3 : (((- 2147483648) <= 2147483647) -> in_range1(r))
-
-axiom H4 : ((0 <= m) and (0 <  n))
-
-axiom H5 : (result = q)
-
-axiom H6 : (q1 = 0)
-
-axiom H7 : (result1 = r)
-
-axiom H8 : (r1 = m)
-
-axiom H9 : (n <= r1)
-
-axiom H10 : (((q2 <= (m - r2)) and (m = ((q2 * n) + r2))) and (0 <= r2))
-
-axiom H11 : (((((- 2147483648) <= 2147483647) -> in_range1(q2)) and
-  (((- 2147483648) <= 2147483647) -> in_range1(r2))) and (n <= r2))
-
-axiom H12 : ((o4 = (q2 + 1)) and in_range1((q2 + 1)))
-
-axiom H13 : (q2 = result3)
-
-axiom H14 : (q3 = o4)
-
  (* File "divide.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : in_range1((r2 - n))
+goal WP_parameter_def :
+  (forall q:int. forall r:int. forall o:int. forall result:int.
+  forall q1:int. forall result1:int. forall r1:int. forall q2:int.
+  forall r2:int. forall result2:int. forall q3:int. (in_range1(m) ->
+  (in_range1(n) -> ((((- 2147483648) <= 2147483647) -> in_range1(q)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range1(r)) -> (((0 <= m) and
+  (0 <  n)) -> ((({ int__content = result } = { int__content = q }) and
+  (q1 = 0)) -> ((({ int__content = result1 } = { int__content = r }) and
+  (r1 = m)) -> ((n <= r1) -> ((((q2 <= (m - r2)) and
+  (m = ((q2 * n) + r2))) and (0 <= r2)) ->
+  ((((((- 2147483648) <= 2147483647) -> in_range1(q2)) and
+  (((- 2147483648) <= 2147483647) -> in_range1(r2))) and (n <= r2)) ->
+  ((((o = (q2 + 1)) and in_range1((q2 + 1))) and ((q2 = result2) and
+  (q3 = o))) -> in_range1((r2 - n))))))))))))))

@@ -2307,7 +2307,15 @@ type unsigned_32_m1_0_m100_0
 
 logic attr__ATTRIBUTE_MODULUS1 : t
 
-predicate in_range1(x: t) = (ule(of_int(1), x) and ule(x, of_int(100)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 1)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 100)
+
+predicate in_range1(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((1 <= x) and (x <= 100))
 
@@ -2346,47 +2354,28 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic relative_error : t
+logic rliteral2 : t
 
-logic abs_out1 : t
-
-logic result : t
-
-logic abs_out11 : t
-
-logic result1 : t
-
-logic relative_error1 : t
-
-logic relative_error2 : t
-
-logic abs_out12 : t
-
-logic relative_error3 : t
-
-logic abs_out13 : t
-
-axiom H : true
-
-axiom H1 : in_range1(calculated_force)
-
-axiom H2 : true
-
-axiom H3 : (not (requested_force = of_int(0)))
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 0)
 
 logic fliteral1 : t1
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.01000000000000000020816681711721685132943093776702880859375))
 
-axiom H4 : (((not (requested_force = of_int(0))) and
-  (((result = abs_out1) and (abs_out11 = udiv(sub(requested_force,
-  calculated_force), requested_force))) and (le(of_ubv32(NearestTiesToEven,
-  abs_out11), fliteral1) and ((result1 = relative_error) and
-  (relative_error1 = abs_out11))))) and (((abs_out11 = abs_out12) and
-  (relative_error1 = relative_error2)) and ((abs_out13 = abs_out11) and
-  (relative_error3 = relative_error1))))
-
  (* File "errorexample.ads", line 22, characters 0-0 *)
-goal WP_parameter_def : (relative_error2 = udiv(sub(requested_force,
-  calculated_force), requested_force))
+goal WP_parameter_def :
+  (forall relative_error:t. forall abs_out1:t. forall result:t.
+  forall abs_out11:t. forall result1:t. forall relative_error1:t.
+  forall relative_error2:t. forall abs_out12:t. forall relative_error3:t.
+  forall abs_out13:t. ((in_range1(calculated_force) and
+  ((not (requested_force = rliteral2)) and
+  (((not (requested_force = rliteral2)) and ((({ t__content = result } = {
+  t__content = abs_out1 }) and (abs_out11 = udiv(sub(requested_force,
+  calculated_force), requested_force))) and (le(of_ubv32(NearestTiesToEven,
+  abs_out11), fliteral1) and (({ t__content = result1 } = { t__content =
+  relative_error }) and (relative_error1 = abs_out11))))) and
+  (((abs_out11 = abs_out12) and (relative_error1 = relative_error2)) and
+  ((abs_out13 = abs_out11) and (relative_error3 = relative_error1)))))) ->
+  (relative_error2 = udiv(sub(requested_force, calculated_force),
+  requested_force))))

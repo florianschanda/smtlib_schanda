@@ -396,130 +396,65 @@ logic x4 : natural
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic conv__id__result : enum
-
-logic conv__id__result1 : integer
-
-logic conv__id__result2 : integer
-
-logic conv__id__result3 : bool
-
-logic conv__id__result4 : natural
-
-logic us : int
-
-logic result : enum
-
-logic result1 : integer
-
-logic result2 : integer
-
-logic result3 : bool
-
-logic result4 : natural
-
-logic conv__id__result5 : enum
-
-logic conv__id__result6 : integer
-
-logic conv__id__result7 : integer
-
-logic conv__id__result8 : bool
-
-logic conv__id__result9 : natural
-
-logic conv__id__result10 : enum
-
-logic conv__id__result11 : integer
-
-logic conv__id__result12 : integer
-
-logic conv__id__result13 : bool
-
-logic conv__id__result14 : natural
-
-logic conv__id__result15 : enum
-
-logic conv__id__result16 : integer
-
-logic conv__id__result17 : integer
-
-logic conv__id__result18 : bool
-
-logic conv__id__result19 : natural
-
-logic conv__id__result20 : enum
-
-logic conv__id__result21 : integer
-
-logic conv__id__result22 : integer
-
-logic conv__id__result23 : bool
-
-logic conv__id__result24 : natural
-
-logic conv__id__result25 : enum
-
-logic conv__id__result26 : integer
-
-logic conv__id__result27 : integer
-
-logic conv__id__result28 : bool
-
-logic conv__id__result29 : natural
-
-logic result5 : enum
-
-logic result6 : integer
-
-logic result7 : integer
-
-logic result8 : bool
-
-logic result9 : natural
-
-axiom H : ((((us = to_rep(x)) and in_range(to_rep(x))) and
-  ((((conv__id__result10 = conv__id__result5) and
+ (* File "basic.ads", line 4, characters 0-0 *)
+goal WP_parameter_def :
+  (forall conv__id__result:enum. forall conv__id__result1:integer.
+  forall conv__id__result2:integer. forall conv__id__result3:bool.
+  forall conv__id__result4:natural. forall us:int. forall result:enum.
+  forall result1:integer. forall result2:integer. forall result3:bool.
+  forall result4:natural. forall conv__id__result5:enum.
+  forall conv__id__result6:integer. forall conv__id__result7:integer.
+  forall conv__id__result8:bool. forall conv__id__result9:natural.
+  forall conv__id__result10:enum. forall conv__id__result11:integer.
+  forall conv__id__result12:integer. forall conv__id__result13:bool.
+  forall conv__id__result14:natural. forall conv__id__result15:enum.
+  forall conv__id__result16:integer. forall conv__id__result17:integer.
+  forall conv__id__result18:bool. forall conv__id__result19:natural.
+  forall conv__id__result20:enum. forall conv__id__result21:integer.
+  forall conv__id__result22:integer. forall conv__id__result23:bool.
+  forall conv__id__result24:natural. forall conv__id__result25:enum.
+  forall conv__id__result26:integer. forall conv__id__result27:integer.
+  forall conv__id__result28:bool. forall conv__id__result29:natural.
+  (forall result5:enum. forall result6:integer. forall result7:integer.
+  forall result8:bool. forall result9:natural. ((((((us = to_rep(x)) and
+  in_range(to_rep(x))) and ((((conv__id__result10 = conv__id__result5) and
   ((conv__id__result11 = conv__id__result6) and
   ((conv__id__result12 = conv__id__result7) and
   ((conv__id__result13 = conv__id__result8) and
-  (conv__id__result14 = conv__id__result9))))) and
-  ((conv__id__result15 = conv__id__result5) and
-  ((conv__id__result16 = conv__id__result6) and
-  ((conv__id__result17 = conv__id__result7) and
-  ((conv__id__result18 = conv__id__result8) and
-  (conv__id__result19 = conv__id__result9)))))) and
+  (conv__id__result14 = conv__id__result9))))) and ({ us_split_discrs1 = {
+  rec__basic__r__x = conv__id__result15 }; us_split_fields1 = {
+  rec__basic__r__base = conv__id__result16; rec__basic__r__a_field =
+  conv__id__result17; rec__basic__r__c_field1 = conv__id__result18;
+  rec__basic__r__c_field2 = conv__id__result19 } } = { us_split_discrs1 = {
+  rec__basic__r__x = conv__id__result5 }; us_split_fields1 = {
+  rec__basic__r__base = conv__id__result6; rec__basic__r__a_field =
+  conv__id__result7; rec__basic__r__c_field1 = conv__id__result8;
+  rec__basic__r__c_field2 = conv__id__result9 } })) and
   (((result = conv__id__result) and ((result1 = conv__id__result1) and
   ((result2 = conv__id__result2) and ((result3 = conv__id__result3) and
-  (result4 = conv__id__result4))))) and ((conv__id__result5 = x) and
-  ((conv__id__result6 = x1) and ((conv__id__result7 = x2) and
-  ((conv__id__result8 = x3) and (conv__id__result9 = x4)))))))) and
+  (result4 = conv__id__result4))))) and ((x = conv__id__result5) and
+  ((x1 = conv__id__result6) and ((x2 = conv__id__result7) and
+  ((x3 = conv__id__result8) and (x4 = conv__id__result9)))))))) and
   (((conv__id__result20 = conv__id__result10) and
   ((conv__id__result21 = conv__id__result11) and
   ((conv__id__result22 = conv__id__result12) and
   ((conv__id__result23 = conv__id__result13) and
-  (conv__id__result24 = conv__id__result14))))) and
-  ((conv__id__result25 = conv__id__result15) and
-  ((conv__id__result26 = conv__id__result16) and
-  ((conv__id__result27 = conv__id__result17) and
-  ((conv__id__result28 = conv__id__result18) and
-  (conv__id__result29 = conv__id__result19)))))))
-
-axiom H1 : (result5 = conv__id__result20)
-
-axiom H2 : (result6 = conv__id__result21)
-
-axiom H3 : (result7 = conv__id__result22)
-
-axiom H4 : (result8 = conv__id__result23)
-
-axiom H5 : (result9 = conv__id__result24)
-
- (* File "basic.ads", line 4, characters 0-0 *)
-goal WP_parameter_def : (bool_eq4({ us_split_discrs1 = { rec__basic__r__x =
-  conv__id__result20 }; us_split_fields1 = { rec__basic__r__base =
-  conv__id__result21; rec__basic__r__a_field = conv__id__result22;
-  rec__basic__r__c_field1 = conv__id__result23; rec__basic__r__c_field2 =
-  conv__id__result24 } }, { us_split_discrs1 = { rec__basic__r__x = x };
-  us_split_fields1 = { rec__basic__r__base = x1; rec__basic__r__a_field = x2;
-  rec__basic__r__c_field1 = x3; rec__basic__r__c_field2 = x4 } }) = true)
+  (conv__id__result24 = conv__id__result14))))) and ({ us_split_discrs1 = {
+  rec__basic__r__x = conv__id__result25 }; us_split_fields1 = {
+  rec__basic__r__base = conv__id__result26; rec__basic__r__a_field =
+  conv__id__result27; rec__basic__r__c_field1 = conv__id__result28;
+  rec__basic__r__c_field2 = conv__id__result29 } } = { us_split_discrs1 = {
+  rec__basic__r__x = conv__id__result15 }; us_split_fields1 = {
+  rec__basic__r__base = conv__id__result16; rec__basic__r__a_field =
+  conv__id__result17; rec__basic__r__c_field1 = conv__id__result18;
+  rec__basic__r__c_field2 = conv__id__result19 } }))) and
+  ((result5 = conv__id__result20) and ((result6 = conv__id__result21) and
+  ((result7 = conv__id__result22) and ((result8 = conv__id__result23) and
+  (result9 = conv__id__result24)))))) -> (bool_eq4({ us_split_discrs1 = {
+  rec__basic__r__x = conv__id__result20 }; us_split_fields1 = {
+  rec__basic__r__base = conv__id__result21; rec__basic__r__a_field =
+  conv__id__result22; rec__basic__r__c_field1 = conv__id__result23;
+  rec__basic__r__c_field2 = conv__id__result24 } }, { us_split_discrs1 = {
+  rec__basic__r__x = x }; us_split_fields1 = { rec__basic__r__base = x1;
+  rec__basic__r__a_field = x2; rec__basic__r__c_field1 = x3;
+  rec__basic__r__c_field2 = x4 } }) = true))))

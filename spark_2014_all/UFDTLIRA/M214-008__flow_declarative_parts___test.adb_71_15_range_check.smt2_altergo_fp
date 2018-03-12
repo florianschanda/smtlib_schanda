@@ -156,13 +156,7 @@ axiom first__def_axiom : (first = a)
 
 axiom last__def_axiom : (last = a)
 
-logic b : int
-
-axiom H : in_range(a)
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(b))
-
-axiom H2 : (a <= a)
-
  (* File "test.adb", line 54, characters 0-0 *)
-goal WP_parameter_def : ((- 2147483648) <= a)
+goal WP_parameter_def :
+  (forall b:int. (in_range(a) -> ((((- 2147483648) <= 2147483647) ->
+  in_range(b)) -> ((a <= a) -> ((- 2147483648) <= a)))))

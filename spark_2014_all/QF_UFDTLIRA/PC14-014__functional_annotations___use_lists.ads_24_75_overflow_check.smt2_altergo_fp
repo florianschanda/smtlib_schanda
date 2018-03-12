@@ -139,13 +139,6 @@ logic i2 : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : int
-
-axiom H : in_range1(i1)
-
-axiom H1 : in_range1(i2)
-
-axiom H2 : (not (i1 = 2147483647))
-
  (* File "use_lists.ads", line 23, characters 0-0 *)
-goal WP_parameter_def : in_range((i1 + 1))
+goal WP_parameter_def : (in_range1(i1) -> (in_range1(i2) ->
+  ((not (i1 = 2147483647)) -> in_range((i1 + 1)))))

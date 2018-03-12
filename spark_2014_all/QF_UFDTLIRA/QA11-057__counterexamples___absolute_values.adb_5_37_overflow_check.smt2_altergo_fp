@@ -109,48 +109,25 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic absolute_value__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic absolute_value__result1 : int
-
-logic result1 : int
-
-logic absolute_value__result2 : int
-
-logic absolute_value__result3 : int
-
-logic absolute_value__result4 : int
-
-logic absolute_value__result5 : int
-
-logic absolute_value__result6 : int
-
-logic absolute_value__result7 : int
-
-logic absolute_value__result8 : int
-
-axiom H : in_range(x)
-
-axiom H1 : (((absolute_value__result5 = absolute_value__result3) and
-  (absolute_value__result6 = absolute_value__result4)) and (((0 <  x) ->
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (forall absolute_value__result:int. forall o:int. forall result:int.
+  forall absolute_value__result1:int. forall result1:int.
+  forall absolute_value__result2:int. forall absolute_value__result3:int.
+  forall absolute_value__result4:int. forall absolute_value__result5:int.
+  forall absolute_value__result6:int. forall absolute_value__result7:int.
+  forall absolute_value__result8:int. (in_range(x) -> ((((({ int__content =
+  absolute_value__result5 } = { int__content = absolute_value__result3 }) and
+  (absolute_value__result6 = absolute_value__result4)) and (((0 <  x) and
   (((absolute_value__result1 = absolute_value__result3) and
-  (absolute_value__result4 = absolute_value__result1)) and
-  ((result = absolute_value__result) and (absolute_value__result1 = x)))) and
-  ((not (0 <  x)) ->
+  (absolute_value__result4 = absolute_value__result1)) and (({ int__content =
+  result } = { int__content = absolute_value__result }) and
+  (absolute_value__result1 = x)))) or ((not (0 <  x)) and
   (((absolute_value__result2 = absolute_value__result3) and
   (absolute_value__result4 = absolute_value__result2)) and (((o = (-x)) and
-  in_range((-x))) and ((result1 = absolute_value__result) and
-  (absolute_value__result2 = o)))))))
-
-axiom H2 : (absolute_value__result7 = absolute_value__result5)
-
-axiom H3 : (absolute_value__result8 = absolute_value__result6)
-
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(abs_int(x))
+  in_range((-x))) and (({ int__content = result1 } = { int__content =
+  absolute_value__result }) and (absolute_value__result2 = o))))))) and (({
+  int__content = absolute_value__result7 } = { int__content =
+  absolute_value__result5 }) and
+  (absolute_value__result8 = absolute_value__result6))) ->
+  in_range(abs_int(x)))))

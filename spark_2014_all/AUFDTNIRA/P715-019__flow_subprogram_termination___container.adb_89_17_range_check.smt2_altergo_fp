@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -279,24 +279,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,positive) farray, int, int, (int,positive) farray, int,
-  int -> (int,positive) farray
-
-axiom concat_def :
-  (forall a:(int,positive) farray. forall b:(int,positive) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : positive, int -> (int,positive) farray
-
-axiom singleton_def :
-  (forall v:positive.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq7 : (int,positive) farray, int, int, (int,positive) farray, int,
   int -> bool
 
@@ -307,17 +289,17 @@ axiom bool_eq_def6 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_151:int. ((((a__first <= temp___idx_151) and
-  (temp___idx_151 <= a__last)) and
-  (to_rep1((a[temp___idx_151])) = to_rep1((b[((b__first - a__first) + temp___idx_151)])))) or
-  (not ((a__first <= temp___idx_151) and (temp___idx_151 <= a__last)))))) ->
+  (forall temp___idx_173:int. ((((a__first <= temp___idx_173) and
+  (temp___idx_173 <= a__last)) and
+  (to_rep1((a[temp___idx_173])) = to_rep1((b[((b__first - a__first) + temp___idx_173)])))) or
+  (not ((a__first <= temp___idx_173) and (temp___idx_173 <= a__last)))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_151:int. (((a__first <= temp___idx_151) and
-  (temp___idx_151 <= a__last)) ->
-  (to_rep1((a[temp___idx_151])) = to_rep1((b[((b__first - a__first) + temp___idx_151)]))))))) ->
+  (forall temp___idx_173:int. (((a__first <= temp___idx_173) and
+  (temp___idx_173 <= a__last)) ->
+  (to_rep1((a[temp___idx_173])) = to_rep1((b[((b__first - a__first) + temp___idx_173)]))))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -327,37 +309,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_151:int. (((a__first <= temp___idx_151) and
-  (temp___idx_151 <= a__last)) ->
-  (to_rep1((a[temp___idx_151])) = to_rep1((b[((b__first - a__first) + temp___idx_151)])))))))))
-
-logic compare : (int,positive) farray, int, int, (int,positive) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,positive) farray. forall b:(int,positive) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq7(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,positive) farray. forall b:(int,positive) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq7(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep1((a[(i + 1)])) <  to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,positive) farray. forall b:(int,positive) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq7(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep1((b[(i + 1)])) <  to_rep1((a[(j + 1)]))))))))))))
+  (forall temp___idx_173:int. (((a__first <= temp___idx_173) and
+  (temp___idx_173 <= a__last)) ->
+  (to_rep1((a[temp___idx_173])) = to_rep1((b[((b__first - a__first) + temp___idx_173)])))))))))
 
 logic dummy5 : (int,positive) farray
 
@@ -629,919 +583,167 @@ logic attr__ATTRIBUTE_ADDRESS10 : int
 logic container__arr__aggregate_def : int -> (int,positive) farray
 
 axiom def_axiom :
-  (forall temp___589:int.
-  (forall temp___590:int.
-  ((container__arr__aggregate_def(temp___589)[temp___590]) = of_rep1(temp___589))))
-
-logic x : int
-
-logic r : int
-
-logic i : int
-
-logic b : bool
-
-logic arr : (int,positive) farray
-
-logic my_container__split_fields : (int,positive) farray
-
-logic position__split_fields : natural
-
-logic e : int
-
-logic e1 : int
-
-logic e2 : int
-
-logic o : natural
-
-logic o1 : natural
-
-logic container__position__assume : natural
-
-logic temp___555 : int
-
-logic temp___554 : bool
-
-logic o2 : int
-
-logic temp___557 : int
-
-logic temp___556 : int
-
-logic temp___559 : int
-
-logic temp___558 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic temp___560 : int
-
-logic o8 : int
-
-logic temp___561 : int
-
-logic temp___562 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : natural
-
-logic temp___566 : natural
-
-logic o12 : int
-
-logic temp___563 : bool
-
-logic o13 : natural
-
-logic o14 : bool
-
-logic o15 : natural
-
-logic o16 : int
-
-logic o17 : natural
-
-logic temp___573 : natural
-
-logic o18 : int
-
-logic temp___570 : int
-
-logic temp___569 : bool
-
-logic temp___567 : int
-
-logic temp___568 : int
-
-logic o19 : int
-
-logic o20 : int
-
-logic o21 : natural
-
-logic o22 : bool
-
-logic o23 : natural
-
-logic o24 : int
-
-logic o25 : natural
-
-logic temp___587 : natural
-
-logic o26 : int
-
-logic o27 : int
-
-logic temp___575 : int
-
-logic temp___574 : int
-
-logic temp___577 : int
-
-logic temp___576 : int
-
-logic o28 : int
-
-logic o29 : int
-
-logic o30 : natural
-
-logic o31 : bool
-
-logic o32 : natural
-
-logic o33 : int
-
-logic o34 : int
-
-logic b1 : bool
-
-logic e3 : int
-
-logic e4 : int
-
-logic e5 : int
-
-logic result : int
-
-logic x1 : int
-
-logic result1 : int
-
-logic r1 : int
-
-logic result2 : int
-
-logic i1 : int
-
-logic result3 : (int,positive) farray
-
-logic arr1 : (int,positive) farray
-
-logic result4 : (int,positive) farray
-
-logic my_container__split_fields1 : (int,positive) farray
-
-logic result5 : natural
-
-logic position__split_fields1 : natural
-
-logic x2 : int
-
-logic b2 : bool
-
-logic result6 : bool
-
-logic b3 : bool
-
-logic result7 : int
-
-logic x3 : int
-
-logic x4 : int
-
-logic b4 : bool
-
-logic x5 : int
-
-logic b5 : bool
-
-logic x6 : int
-
-logic b6 : bool
-
-logic x7 : int
-
-logic b7 : bool
-
-logic r2 : int
-
-logic i2 : int
-
-logic temp___5591 : int
-
-logic temp___5581 : int
-
-logic result8 : int
-
-logic temp___5592 : int
-
-logic result9 : int
-
-logic temp___5582 : int
-
-logic result10 : int
-
-logic r3 : int
-
-logic result11 : int
-
-logic i3 : int
-
-logic r4 : int
-
-logic i4 : int
-
-logic temp___5593 : int
-
-logic temp___5583 : int
-
-logic r5 : int
-
-logic i5 : int
-
-logic temp___5594 : int
-
-logic temp___5584 : int
-
-logic r6 : int
-
-logic i6 : int
-
-logic temp___5595 : int
-
-logic temp___5585 : int
-
-logic r7 : int
-
-logic i7 : int
-
-logic temp___5596 : int
-
-logic temp___5586 : int
-
-logic r8 : int
-
-logic i8 : int
-
-logic r9 : int
-
-logic i9 : int
-
-logic r10 : int
-
-logic i10 : int
-
-logic r11 : int
-
-logic i11 : int
-
-logic x8 : int
-
-logic result12 : int
-
-logic x9 : int
-
-logic x10 : int
-
-logic x11 : int
-
-logic x12 : int
-
-logic x13 : int
-
-logic result13 : int
-
-logic x14 : int
-
-logic x15 : int
-
-logic temp___5621 : int
-
-logic result14 : int
-
-logic temp___5622 : int
-
-logic result15 : int
-
-logic x16 : int
-
-logic x17 : int
-
-logic x18 : int
-
-logic x19 : int
-
-logic x20 : int
-
-logic temp___5661 : natural
-
-logic result16 : bool
-
-logic result17 : int
-
-logic e6 : int
-
-logic e7 : int
-
-logic e8 : int
-
-logic result18 : bool
-
-logic b8 : bool
-
-logic e9 : int
-
-logic temp___5662 : natural
-
-logic result19 : bool
-
-logic b9 : bool
-
-logic result20 : bool
-
-logic result21 : natural
-
-logic temp___5663 : natural
-
-logic result22 : bool
-
-logic b10 : bool
-
-logic e10 : int
-
-logic temp___5664 : natural
-
-logic b11 : bool
-
-logic e11 : int
-
-logic temp___5665 : natural
-
-logic b12 : bool
-
-logic e12 : int
-
-logic temp___5666 : natural
-
-logic b13 : bool
-
-logic e13 : int
-
-logic temp___5667 : natural
-
-logic temp___5731 : natural
-
-logic result23 : bool
-
-logic result24 : int
-
-logic e14 : int
-
-logic e15 : int
-
-logic e16 : int
-
-logic result25 : bool
-
-logic x21 : int
-
-logic b14 : bool
-
-logic e17 : int
-
-logic temp___5732 : natural
-
-logic result26 : int
-
-logic x22 : int
-
-logic x23 : int
-
-logic temp___5681 : int
-
-logic result27 : int
-
-logic temp___5682 : int
-
-logic result28 : int
-
-logic x24 : int
-
-logic x25 : int
-
-logic x26 : int
-
-logic rho : int
-
-logic x27 : int
-
-logic x28 : int
-
-logic rho1 : int
-
-logic result29 : bool
-
-logic b15 : bool
-
-logic result30 : bool
-
-logic result31 : natural
-
-logic temp___5733 : natural
-
-logic result32 : bool
-
-logic x29 : int
-
-logic b16 : bool
-
-logic e18 : int
-
-logic temp___5734 : natural
-
-logic x30 : int
-
-logic b17 : bool
-
-logic e19 : int
-
-logic temp___5735 : natural
-
-logic x31 : int
-
-logic b18 : bool
-
-logic e20 : int
-
-logic temp___5736 : natural
-
-logic x32 : int
-
-logic b19 : bool
-
-logic e21 : int
-
-logic temp___5737 : natural
-
-logic result33 : bool
-
-logic result34 : int
-
-logic e22 : int
-
-logic e23 : int
-
-logic e24 : int
-
-logic result35 : bool
-
-logic result36 : bool
-
-logic b20 : bool
-
-logic result37 : int
-
-logic r12 : int
-
-logic x33 : int
-
-logic r13 : int
-
-logic b21 : bool
-
-logic e25 : int
-
-logic i12 : int
-
-logic temp___5871 : natural
-
-logic temp___584 : int
-
-logic rho2 : int
-
-logic rho3 : int
-
-logic result38 : int
-
-logic temp___5841 : int
-
-logic result39 : int
-
-logic i13 : int
-
-logic result40 : int
-
-logic x34 : int
-
-logic x35 : int
-
-logic i14 : int
-
-logic temp___5771 : int
-
-logic temp___5761 : int
-
-logic result41 : int
-
-logic temp___5762 : int
-
-logic result42 : int
-
-logic temp___5772 : int
-
-logic result43 : int
-
-logic i15 : int
-
-logic result44 : int
-
-logic x36 : int
-
-logic x37 : int
-
-logic i16 : int
-
-logic x38 : int
-
-logic i17 : int
-
-logic rho4 : int
-
-logic rho5 : int
-
-logic x39 : int
-
-logic i18 : int
-
-logic x40 : int
-
-logic i19 : int
-
-logic rho6 : int
-
-logic rho7 : int
-
-logic result45 : bool
-
-logic result46 : natural
-
-logic temp___5872 : natural
-
-logic result47 : bool
-
-logic result48 : int
-
-logic e26 : int
-
-logic e27 : int
-
-logic e28 : int
-
-logic result49 : bool
-
-logic b22 : bool
-
-logic result50 : int
-
-logic r14 : int
-
-logic x41 : int
-
-logic r15 : int
-
-logic b23 : bool
-
-logic e29 : int
-
-logic i20 : int
-
-logic temp___5873 : natural
-
-logic temp___5842 : int
-
-logic x42 : int
-
-logic r16 : int
-
-logic b24 : bool
-
-logic e30 : int
-
-logic i21 : int
-
-logic temp___5874 : natural
-
-logic temp___5843 : int
-
-logic rho8 : int
-
-logic rho9 : int
-
-axiom H : (result = x)
-
-axiom H1 : (x1 = 1)
-
-axiom H2 : in_range3(x1)
-
-axiom H3 : (result1 = r)
-
-axiom H4 : (r1 = 100)
-
-axiom H5 : in_range3(r1)
-
-axiom H6 : (result2 = i)
-
-axiom H7 : (i1 = 1)
-
-axiom H8 : in_range4(i1)
-
-axiom H9 : (result3 = arr)
-
-axiom H10 : (arr1 = container__arr__aggregate_def(3))
-
-axiom H11 : (result4 = my_container__split_fields)
-
-axiom H12 : (my_container__split_fields1 = arr1)
-
-axiom H13 : (to_rep(o) = 0)
-
-axiom H14 : (o = o1)
-
-axiom H15 : (container__position__assume = o1)
-
-axiom H16 : (result5 = position__split_fields)
-
-axiom H17 : (position__split_fields1 = container__position__assume)
-
-axiom H18 : ((0 <  x1) -> (temp___555 = x1))
-
-axiom H19 : ((0 <  x1) -> (temp___554 = b))
-
-axiom H20 : ((0 <  x1) -> (((1 <= 200) -> in_range3(x2)) and (0 <  x2)))
-
-axiom H21 : ((0 <  x1) -> (result6 = b2))
-
-axiom H22 : ((0 <  x1) -> (b3 = of_int(1)))
-
-axiom H23 : ((0 <  x1) -> ((x2 <  200) -> ((o2 = (x2 + 1)) and
-  in_range3((x2 + 1)))))
-
-axiom H24 : ((0 <  x1) -> ((x2 <  200) -> (result7 = x2)))
-
-axiom H25 : ((0 <  x1) -> ((x2 <  200) -> (x3 = o2)))
-
-axiom H26 : ((0 <  x1) -> ((not (x2 <  200)) -> (x3 = x2)))
-
-axiom H27 : ((0 <  x1) -> (not (0 <  x3)))
-
-axiom H28 : ((0 <  x1) -> (b4 = b3))
-
-axiom H29 : ((0 <  x1) -> (x4 = x3))
-
-axiom H30 : ((0 <  x1) -> (b5 = b3))
-
-axiom H31 : ((0 <  x1) -> (x5 = x3))
-
-axiom H32 : ((0 <  x1) -> (b6 = b4))
-
-axiom H33 : ((0 <  x1) -> (x6 = x4))
-
-axiom H34 : ((0 <  x1) -> (b7 = b5))
-
-axiom H35 : ((0 <  x1) -> (x7 = x5))
-
-axiom H36 : ((not (0 <  x1)) -> (b6 = b))
-
-axiom H37 : ((not (0 <  x1)) -> (x6 = x1))
-
-axiom H38 : ((not (0 <  x1)) -> (b7 = b1))
-
-axiom H39 : ((not (0 <  x1)) -> (x7 = x1))
-
-axiom H40 : ((i1 <  10) -> (((temp___557 = i1) and ((temp___556 = r1) and
-  ((0 = temp___559) and ((0 = temp___558) and (((100 - (10 * i2)) <= r2) and
-  (((((1 <= 200) -> in_range3(r2)) and ((1 <= 10) -> in_range4(i2))) and
-  (i2 <  10)) and (((result8 = temp___5591) and (temp___5592 = i2)) and
-  (((result9 = temp___5581) and (temp___5582 = r2)) and
-  ((((o6 = (r2 - i2)) and in_range3((r2 - i2))) and ((result10 = r2) and
-  (r3 = o6))) and ((((o7 = (i2 + 1)) and in_range4((i2 + 1))) and
-  ((result11 = i2) and (i3 = o7))) and (not (i3 <  10)))))))))))) and
-  (((i8 = i3) and (r8 = r3)) and ((i9 = i3) and (r9 = r3)))))
-
-axiom H41 : ((i1 <  10) -> (i10 = i8))
-
-axiom H42 : ((i1 <  10) -> (r10 = r8))
-
-axiom H43 : ((i1 <  10) -> (i11 = i9))
-
-axiom H44 : ((i1 <  10) -> (r11 = r9))
-
-axiom H45 : ((not (i1 <  10)) -> (i10 = i1))
-
-axiom H46 : ((not (i1 <  10)) -> (r10 = r1))
-
-axiom H47 : ((not (i1 <  10)) -> (i11 = i1))
-
-axiom H48 : ((not (i1 <  10)) -> (r11 = r1))
-
-axiom H49 : (temp___560 = x6)
-
-axiom H50 : ((1 <= 200) -> in_range3(x8))
-
-axiom H51 : ((o8 = (x8 + 1)) and in_range3((x8 + 1)))
-
-axiom H52 : (result12 = x8)
-
-axiom H53 : (x9 = o8)
-
-axiom H54 : (x9 <  0)
-
-axiom H55 : (x10 = x9)
-
-axiom H56 : (x11 = x9)
-
-axiom H57 : (x12 = x10)
-
-axiom H58 : (x13 = x11)
-
-axiom H59 : (temp___561 = x12)
-
-axiom H60 : (0 = temp___562)
-
-axiom H61 : ((o9 = (x12 + 1)) and in_range3((x12 + 1)))
-
-axiom H62 : (result13 = x12)
-
-axiom H63 : (x14 = o9)
-
-axiom H64 : ((1 <= 200) -> in_range3(x15))
-
-axiom H65 : (result14 = temp___5621)
-
-axiom H66 : (temp___5622 = x15)
-
-axiom H67 : (x15 = 5)
-
-axiom H68 : (x17 = x15)
-
-axiom H69 : (x18 = x15)
-
-axiom H70 : (x19 = x17)
-
-axiom H71 : (x20 = x18)
-
-axiom H72 : (({ us_split_fields3 = { rec__container__cursor__index = o11 }
-  } = first({ us_split_fields1 = { rec__container__container__a =
-  my_container__split_fields1 } })) and (of_rep(1) = o11))
-
-axiom H73 : (temp___566 = o11)
-
-axiom H74 : ((result16 = has_element({ us_split_fields1 = {
-  rec__container__container__a = my_container__split_fields1 } }, {
-  us_split_fields3 = { rec__container__cursor__index = temp___566 } })) and
-  ((result16 = true) <-> ((1 <= to_rep(temp___566)) and
-  (to_rep(temp___566) <= 200))))
-
-axiom H75 : ((result16 = true) -> ((o12 = element({ us_split_fields1 = {
-  rec__container__container__a = my_container__split_fields1 } }, {
-  us_split_fields3 = { rec__container__cursor__index = temp___566 } })) and
-  (in_range1(o12) and
-  (o12 = to_rep1((my_container__split_fields1[to_rep(temp___566)]))))))
-
-axiom H76 : ((result16 = true) -> (result17 = e))
-
-axiom H77 : ((result16 = true) -> (e6 = o12))
-
-axiom H78 : ((result16 = true) -> (e7 = e6))
-
-axiom H79 : ((result16 = true) -> (e8 = e6))
-
-axiom H80 : ((not (result16 = true)) -> (e7 = e))
-
-axiom H81 : ((not (result16 = true)) -> (e8 = e3))
-
-axiom H82 : ((result18 = has_element({ us_split_fields1 = {
-  rec__container__container__a = my_container__split_fields1 } }, {
-  us_split_fields3 = { rec__container__cursor__index = temp___566 } })) and
-  ((result18 = true) <-> ((1 <= to_rep(temp___566)) and
-  (to_rep(temp___566) <= 200))))
-
-axiom H83 : ((result18 = true) -> (temp___563 = b6))
-
-axiom H84 : ((result18 = true) -> ((has_element({ us_split_fields1 = {
-  rec__container__container__a = my_container__split_fields1 } }, {
-  us_split_fields3 = { rec__container__cursor__index = temp___5662 }
-  }) = true) and (e9 = element({ us_split_fields1 = {
-  rec__container__container__a = my_container__split_fields1 } }, {
-  us_split_fields3 = { rec__container__cursor__index = temp___5662 } }))))
-
-axiom H85 : ((result18 = true) -> (result19 = b8))
-
-axiom H86 : ((result18 = true) -> (b9 = of_int(0)))
-
-axiom H87 : ((result18 = true) -> (({ us_split_fields3 = {
-  rec__container__cursor__index = o13 } } = next({ us_split_fields1 = {
-  rec__container__container__a = my_container__split_fields1 } }, {
-  us_split_fields3 = { rec__container__cursor__index = temp___5662 } })) and
-  (((to_rep(temp___5662) <  200) ->
-  (o13 = of_rep((to_rep(temp___5662) + 1)))) and
-  ((not (to_rep(temp___5662) <  200)) -> (o13 = of_rep(0))))))
-
-axiom H88 : ((result18 = true) -> ((o14 = has_element({ us_split_fields1 = {
-  rec__container__container__a = my_container__split_fields1 } }, {
-  us_split_fields3 = { rec__container__cursor__index = o13 } })) and
-  ((o14 = true) <-> ((1 <= to_rep(o13)) and (to_rep(o13) <= 200)))))
-
-axiom H89 : ((result18 = true) -> (((not (o14 = true)) ->
-  (result20 = true)) and ((o14 = true) -> (result20 = false))))
-
-axiom H90 : ((result18 = true) -> (result20 = true))
-
-axiom H91 : ((result18 = true) -> (temp___5664 = temp___5662))
-
-axiom H92 : ((result18 = true) -> (e10 = e9))
-
-axiom H93 : ((result18 = true) -> (b10 = b9))
-
-axiom H94 : ((result18 = true) -> (temp___5665 = temp___5662))
-
-axiom H95 : ((result18 = true) -> (e11 = e9))
-
-axiom H96 : ((result18 = true) -> (b11 = b9))
-
-axiom H97 : ((result18 = true) -> (temp___5666 = temp___5664))
-
-axiom H98 : ((result18 = true) -> (e12 = e10))
-
-axiom H99 : ((result18 = true) -> (b12 = b10))
-
-axiom H100 : ((result18 = true) -> (temp___5667 = temp___5665))
-
-axiom H101 : ((result18 = true) -> (e13 = e11))
-
-axiom H102 : ((result18 = true) -> (b13 = b11))
-
-axiom H103 : ((not (result18 = true)) -> (temp___5666 = temp___566))
-
-axiom H104 : ((not (result18 = true)) -> (e12 = e7))
-
-axiom H105 : ((not (result18 = true)) -> (b12 = b6))
-
-axiom H106 : ((not (result18 = true)) -> (temp___5667 = temp___5661))
-
-axiom H107 : ((not (result18 = true)) -> (e13 = e8))
-
-axiom H108 : ((not (result18 = true)) -> (b13 = b7))
-
-axiom H109 : (({ us_split_fields3 = { rec__container__cursor__index = o17 }
-  } = first({ us_split_fields1 = { rec__container__container__a =
-  my_container__split_fields1 } })) and (o17 = of_rep(1)))
-
-axiom H110 : (temp___573 = o17)
-
-axiom H111 : ((result23 = has_element({ us_split_fields1 = {
-  rec__container__container__a = my_container__split_fields1 } }, {
-  us_split_fields3 = { rec__container__cursor__index = temp___573 } })) and
-  ((result23 = true) <-> ((1 <= to_rep(temp___573)) and
-  (to_rep(temp___573) <= 200))))
-
-axiom H112 : ((result23 = true) -> ((o18 = element({ us_split_fields1 = {
-  rec__container__container__a = my_container__split_fields1 } }, {
-  us_split_fields3 = { rec__container__cursor__index = temp___573 } })) and
-  (in_range1(o18) and
-  (o18 = to_rep1((my_container__split_fields1[to_rep(temp___573)]))))))
-
-axiom H113 : ((result23 = true) -> (result24 = e1))
-
-axiom H114 : ((result23 = true) -> (e14 = o18))
-
-axiom H115 : ((result23 = true) -> (e15 = e14))
-
-axiom H116 : ((result23 = true) -> (e16 = e14))
-
-axiom H117 : ((not (result23 = true)) -> (e15 = e1))
-
-axiom H118 : ((not (result23 = true)) -> (e16 = e4))
-
-axiom H119 : ((result25 = has_element({ us_split_fields1 = {
-  rec__container__container__a = my_container__split_fields1 } }, {
-  us_split_fields3 = { rec__container__cursor__index = temp___573 } })) and
-  ((result25 = true) <-> ((1 <= to_rep(temp___573)) and
-  (to_rep(temp___573) <= 200))))
-
-axiom H120 : (result25 = true)
-
-axiom H121 : (((1 <= 200) -> in_range3(x21)) and ((has_element({
-  us_split_fields1 = { rec__container__container__a =
-  my_container__split_fields1 } }, { us_split_fields3 = {
-  rec__container__cursor__index = temp___5732 } }) = true) and
-  (e17 = element({ us_split_fields1 = { rec__container__container__a =
-  my_container__split_fields1 } }, { us_split_fields3 = {
-  rec__container__cursor__index = temp___5732 } }))))
-
- (* File "container.ads", line 33, characters 0-0 *)
-goal WP_parameter_def : in_range3((x21 + 1))
+  (forall temp___664:int. (in_range5(temp___664) ->
+  (forall temp___665:int.
+  (to_rep1((container__arr__aggregate_def(temp___664)[temp___665])) = temp___664))))
+
+ (* File "container.adb", line 7, characters 0-0 *)
+goal WP_parameter_def :
+  (forall x:int. forall r:int. forall i:int. forall b:bool.
+  forall arr:(int,positive) farray.
+  forall my_container__split_fields:(int,positive) farray.
+  forall position__split_fields:natural. forall e:int. forall e1:int.
+  forall o:natural. forall o1:natural.
+  forall container__position__assume:natural. forall temp___630:int.
+  forall temp___629:bool. forall o2:int. forall temp___632:int.
+  forall temp___631:int. forall temp___634:int. forall temp___633:int.
+  forall o3:int. forall o4:int. forall temp___635:int. forall o5:int.
+  forall temp___636:int. forall temp___637:int. forall o6:int.
+  forall o7:natural. forall temp___641:natural. forall o8:int.
+  forall temp___638:bool. forall o9:natural. forall o10:bool.
+  forall o11:natural. forall temp___648:natural. forall o12:int.
+  forall b1:bool. forall e2:int. forall e3:int. forall result:int__ref.
+  forall x1:int. forall result1:int__ref. forall r1:int.
+  forall result2:int__ref. forall i1:int. forall result3:map__ref.
+  forall arr1:(int,positive) farray. forall result4:us_split_fields__ref.
+  forall my_container__split_fields1:us_split_fields.
+  forall result5:us_split_fields__ref1.
+  forall position__split_fields1:us_split_fields2. forall x2:int.
+  forall b2:bool. forall result6:bool__ref. forall b3:bool.
+  forall result7:int__ref. forall x3:int. forall x4:int__ref.
+  forall b4:bool__ref. forall x5:int. forall b5:bool. forall x6:int__ref.
+  forall b6:bool__ref. forall x7:int. forall b7:bool. forall r2:int.
+  forall i2:int. forall temp___6341:int. forall temp___6331:int.
+  forall result8:int__ref. forall temp___6342:int. forall result9:int__ref.
+  forall temp___6332:int. forall result10:int__ref. forall r3:int.
+  forall result11:int__ref. forall i3:int. forall r4:int__ref.
+  forall i4:int__ref. forall r5:int. forall i5:int. forall r6:int__ref.
+  forall i6:int__ref. forall r7:int. forall i7:int. forall x8:int.
+  forall result12:int__ref. forall x9:int. forall x10:int__ref.
+  forall x11:int. forall x12:int__ref. forall x13:int.
+  forall result13:int__ref. forall x14:int. forall x15:int.
+  forall temp___6371:int. forall result14:int__ref. forall temp___6372:int.
+  forall x16:int__ref. forall x17:int. forall x18:int__ref. forall x19:int.
+  forall temp___6411:us_rep1. forall result15:bool. forall result16:int__ref.
+  forall e4:int. forall e5:int__ref. forall e6:int. forall result17:bool.
+  forall b8:bool. forall e7:int. forall temp___6412:us_rep1.
+  forall result18:bool__ref. forall b9:bool. forall result19:bool.
+  forall b10:bool__ref. forall e8:int__ref. forall temp___6413:cursor__ref.
+  forall b11:bool. forall e9:int. forall temp___6414:us_rep1.
+  forall b12:bool__ref. forall e10:int__ref. forall temp___6415:cursor__ref.
+  forall b13:bool. forall e11:int. forall temp___6416:us_rep1.
+  forall result20:bool. forall result21:int__ref. forall e12:int.
+  forall e13:int__ref. forall e14:int. forall result22:bool. forall x20:int.
+  forall e15:int. forall temp___6481:us_rep1. (((result = { int__content = x
+  }) and (x1 = 1)) -> (in_range3(x1) -> (((result1 = { int__content = r
+  }) and (r1 = 100)) -> (in_range3(r1) -> (((result2 = { int__content = i
+  }) and (i1 = 1)) -> (in_range4(i1) -> (((result3 = { map__content = arr
+  }) and (arr1 = container__arr__aggregate_def(3))) -> (((result4 = {
+  us_split_fields__content = { rec__container__container__a =
+  my_container__split_fields } }) and (my_container__split_fields1 = {
+  rec__container__container__a = arr1 })) -> (((((to_rep(o) = 0) and
+  (o = o1)) and (container__position__assume = o1)) and ((result5 = {
+  us_split_fields__content1 = { rec__container__cursor__index =
+  position__split_fields } }) and (position__split_fields1 = {
+  rec__container__cursor__index = container__position__assume }))) ->
+  ((((0 <  x1) and ((((temp___630 = x1) and ((temp___629 = b) and
+  ((((1 <= 200) -> in_range3(x2)) and (0 <  x2)) and (((result6 = {
+  bool__content = b2 }) and (b3 = of_int(1))) and ((((x2 <  200) and
+  (((o2 = (x2 + 1)) and in_range3((x2 + 1))) and ((result7 = { int__content =
+  x2 }) and (x3 = o2)))) or ((not (x2 <  200)) and (x3 = x2))) and
+  (not (0 <  x3))))))) and (((b4 = { bool__content = b3 }) and (x4 = {
+  int__content = x3 })) and ((b5 = b3) and (x5 = x3)))) and (((b6 = b4) and
+  (x6 = x4)) and ((b7 = b5) and (x7 = x5))))) or ((not (0 <  x1)) and
+  (((b6 = { bool__content = b }) and (x6 = { int__content = x1 })) and
+  ((b7 = b1) and (x7 = x1))))) -> ((((i1 <  10) and ((((temp___632 = i1) and
+  ((temp___631 = r1) and ((0 = temp___634) and ((0 = temp___633) and
+  (((100 - (10 * i2)) <= r2) and (((((1 <= 200) -> in_range3(r2)) and
+  ((1 <= 10) -> in_range4(i2))) and (i2 <  10)) and (((result8 = {
+  int__content = temp___6341 }) and (temp___6342 = i2)) and (((result9 = {
+  int__content = temp___6331 }) and (temp___6332 = r2)) and
+  ((((o3 = (r2 - i2)) and in_range3((r2 - i2))) and ((result10 = {
+  int__content = r2 }) and (r3 = o3))) and ((((o4 = (i2 + 1)) and
+  in_range4((i2 + 1))) and ((result11 = { int__content = i2 }) and
+  (i3 = o4))) and (not (i3 <  10)))))))))))) and (((i4 = { int__content = i3
+  }) and (r4 = { int__content = r3 })) and ((i5 = i3) and (r5 = r3)))) and
+  (((i6 = i4) and (r6 = r4)) and ((i7 = i5) and (r7 = r5))))) or
+  ((not (i1 <  10)) and (((i6 = { int__content = i1 }) and (r6 = {
+  int__content = r1 })) and ((i7 = i1) and (r7 = r1))))) ->
+  (((((temp___635 = (x6).int__content) and (((1 <= 200) -> in_range3(x8)) and
+  ((((o5 = (x8 + 1)) and in_range3((x8 + 1))) and ((result12 = {
+  int__content = x8 }) and (x9 = o5))) and (x9 <  0)))) and ((x10 = {
+  int__content = x9 }) and (x11 = x9))) and ((x12 = x10) and (x13 = x11))) ->
+  (((((temp___636 = (x12).int__content) and ((0 = temp___637) and
+  ((((o6 = ((x12).int__content + 1)) and
+  in_range3(((x12).int__content + 1))) and ((result13 = x12) and
+  (x14 = o6))) and (((1 <= 200) -> in_range3(x15)) and (((result14 = {
+  int__content = temp___6371 }) and (temp___6372 = x15)) and
+  (x15 = 5)))))) and ((x16 = { int__content = x15 }) and (x17 = x15))) and
+  ((x18 = x16) and (x19 = x17))) -> ((((({ us_split_fields3 = {
+  rec__container__cursor__index = o7 } } = first({ us_split_fields1 =
+  my_container__split_fields1 })) and (of_rep(1) = o7)) and
+  (temp___641 = o7)) and ((((result15 = has_element({ us_split_fields1 =
+  my_container__split_fields1 }, { us_split_fields3 = {
+  rec__container__cursor__index = temp___641 } })) and ((result15 = true) <->
+  ((1 <= to_rep(temp___641)) and (to_rep(temp___641) <= 200)))) and
+  (((result15 = true) and ((((o8 = element({ us_split_fields1 =
+  my_container__split_fields1 }, { us_split_fields3 = {
+  rec__container__cursor__index = temp___641 } })) and (in_range1(o8) and
+  (o8 = to_rep1(((my_container__split_fields1).rec__container__container__a[to_rep(temp___641)]))))) and
+  ((result16 = { int__content = e }) and (e4 = o8))) and ((e5 = {
+  int__content = e4 }) and (e6 = e4)))) or ((not (result15 = true)) and
+  ((e5 = { int__content = e }) and (e6 = e2))))) and
+  (((result17 = has_element({ us_split_fields1 = my_container__split_fields1
+  }, { us_split_fields3 = { rec__container__cursor__index = temp___641 }
+  })) and ((result17 = true) <-> ((1 <= to_rep(temp___641)) and
+  (to_rep(temp___641) <= 200)))) and (((result17 = true) and
+  ((((temp___638 = (b6).bool__content) and (((has_element({
+  us_split_fields1 = my_container__split_fields1 }, temp___6412) = true) and
+  (e7 = element({ us_split_fields1 = my_container__split_fields1 },
+  temp___6412))) and (((result18 = { bool__content = b8 }) and
+  (b9 = of_int(0))) and ((((({ us_split_fields3 = {
+  rec__container__cursor__index = o9 } } = next({ us_split_fields1 =
+  my_container__split_fields1 }, temp___6412)) and
+  (((to_rep(((temp___6412).us_split_fields3).rec__container__cursor__index) <  200) and
+  ({ us_split_fields3 = { rec__container__cursor__index = o9 } } = {
+  us_split_fields3 = { rec__container__cursor__index =
+  of_rep((to_rep(((temp___6412).us_split_fields3).rec__container__cursor__index) + 1))
+  } })) or
+  ((not (to_rep(((temp___6412).us_split_fields3).rec__container__cursor__index) <  200)) and
+  ({ us_split_fields3 = { rec__container__cursor__index = o9 } } = {
+  us_split_fields3 = { rec__container__cursor__index = of_rep(0) } })))) and
+  ((o10 = has_element({ us_split_fields1 = my_container__split_fields1 }, {
+  us_split_fields3 = { rec__container__cursor__index = o9 } })) and
+  ((o10 = true) <-> ((1 <= to_rep(o9)) and (to_rep(o9) <= 200))))) and
+  (((not (o10 = true)) and (result19 = true)) or ((o10 = true) and
+  (result19 = false)))) and (result19 = true))))) and (((temp___6413 = {
+  cursor__content = temp___6412 }) and ((e8 = { int__content = e7 }) and
+  (b10 = { bool__content = b9 }))) and ((temp___6414 = temp___6412) and
+  ((e9 = e7) and (b11 = b9))))) and (((temp___6415 = temp___6413) and
+  ((e10 = e8) and (b12 = b10))) and ((temp___6416 = temp___6414) and
+  ((e11 = e9) and (b13 = b11)))))) or ((not (result17 = true)) and
+  (((temp___6415 = { cursor__content = { us_split_fields3 = {
+  rec__container__cursor__index = temp___641 } } }) and ((e10 = e5) and
+  (b12 = b6))) and ((temp___6416 = temp___6411) and ((e11 = e6) and
+  (b13 = b7))))))))) -> (((({ us_split_fields3 = {
+  rec__container__cursor__index = o11 } } = first({ us_split_fields1 =
+  my_container__split_fields1 })) and (of_rep(1) = o11)) and
+  (temp___648 = o11)) -> ((((result20 = has_element({ us_split_fields1 =
+  my_container__split_fields1 }, { us_split_fields3 = {
+  rec__container__cursor__index = temp___648 } })) and ((result20 = true) <->
+  ((1 <= to_rep(temp___648)) and (to_rep(temp___648) <= 200)))) and
+  (((result20 = true) and ((((o12 = element({ us_split_fields1 =
+  my_container__split_fields1 }, { us_split_fields3 = {
+  rec__container__cursor__index = temp___648 } })) and (in_range1(o12) and
+  (o12 = to_rep1(((my_container__split_fields1).rec__container__container__a[to_rep(temp___648)]))))) and
+  ((result21 = { int__content = e1 }) and (e12 = o12))) and ((e13 = {
+  int__content = e12 }) and (e14 = e12)))) or ((not (result20 = true)) and
+  ((e13 = { int__content = e1 }) and (e14 = e3))))) ->
+  (((result22 = has_element({ us_split_fields1 = my_container__split_fields1
+  }, { us_split_fields3 = { rec__container__cursor__index = temp___648 }
+  })) and ((result22 = true) <-> ((1 <= to_rep(temp___648)) and
+  (to_rep(temp___648) <= 200)))) -> ((result22 = true) -> ((((1 <= 200) ->
+  in_range3(x20)) and ((has_element({ us_split_fields1 =
+  my_container__split_fields1 }, temp___6481) = true) and (e15 = element({
+  us_split_fields1 = my_container__split_fields1 }, temp___6481)))) ->
+  in_range3((x20 + 1))))))))))))))))))))))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -289,27 +289,12 @@ logic res__split_discrs : bool
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic res__split_fields : integer
-
-logic res__split_fields1 : bool
-
-logic result : integer
-
-logic result1 : bool
-
-logic res__split_fields2 : integer
-
-logic res__split_fields3 : bool
-
-axiom H : (result = res__split_fields)
-
-axiom H1 : (result1 = res__split_fields1)
-
-axiom H2 : ((res__split_fields2 = x1) and (res__split_fields3 = x2))
-
-axiom H3 : (res__split_discrs = x)
-
-axiom H4 : (to_int(res__split_discrs) = 1)
-
  (* File "q.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : (to_int(res__split_discrs) = 1)
+goal WP_parameter_def :
+  (forall res__split_fields:integer. forall res__split_fields1:bool.
+  forall result:integer. forall result1:bool.
+  forall res__split_fields2:integer. forall res__split_fields3:bool.
+  (((((result = res__split_fields) and (result1 = res__split_fields1)) and
+  ((res__split_fields2 = x1) and (res__split_fields3 = x2))) and
+  (res__split_discrs = x)) -> ((to_int(res__split_discrs) = 1) ->
+  (to_int(res__split_discrs) = 1))))

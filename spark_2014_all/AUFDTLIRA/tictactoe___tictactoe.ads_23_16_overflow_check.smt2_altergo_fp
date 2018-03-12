@@ -183,24 +183,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,slot) farray, int, int, (int,slot) farray, int,
-  int -> (int,slot) farray
-
-axiom concat_def :
-  (forall a:(int,slot) farray. forall b:(int,slot) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : slot, int -> (int,slot) farray
-
-axiom singleton_def :
-  (forall v:slot.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,slot) farray, int, int, (int,slot) farray, int,
   int -> bool
 
@@ -211,17 +193,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_151:int. ((((a__first <= temp___idx_151) and
-  (temp___idx_151 <= a__last)) and
-  (to_rep((a[temp___idx_151])) = to_rep((b[((b__first - a__first) + temp___idx_151)])))) or
-  (not ((a__first <= temp___idx_151) and (temp___idx_151 <= a__last)))))) ->
+  (forall temp___idx_173:int. ((((a__first <= temp___idx_173) and
+  (temp___idx_173 <= a__last)) and
+  (to_rep((a[temp___idx_173])) = to_rep((b[((b__first - a__first) + temp___idx_173)])))) or
+  (not ((a__first <= temp___idx_173) and (temp___idx_173 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_151:int. (((a__first <= temp___idx_151) and
-  (temp___idx_151 <= a__last)) ->
-  (to_rep((a[temp___idx_151])) = to_rep((b[((b__first - a__first) + temp___idx_151)]))))))) ->
+  (forall temp___idx_173:int. (((a__first <= temp___idx_173) and
+  (temp___idx_173 <= a__last)) ->
+  (to_rep((a[temp___idx_173])) = to_rep((b[((b__first - a__first) + temp___idx_173)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -231,37 +213,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_151:int. (((a__first <= temp___idx_151) and
-  (temp___idx_151 <= a__last)) ->
-  (to_rep((a[temp___idx_151])) = to_rep((b[((b__first - a__first) + temp___idx_151)])))))))))
-
-logic compare : (int,slot) farray, int, int, (int,slot) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,slot) farray. forall b:(int,slot) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,slot) farray. forall b:(int,slot) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,slot) farray. forall b:(int,slot) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_173:int. (((a__first <= temp___idx_173) and
+  (temp___idx_173 <= a__last)) ->
+  (to_rep((a[temp___idx_173])) = to_rep((b[((b__first - a__first) + temp___idx_173)])))))))))
 
 logic dummy3 : (int,slot) farray
 
@@ -311,25 +265,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,(int,slot) farray) farray, int, int,
-  (int,(int,slot) farray) farray, int, int -> (int,(int,slot) farray) farray
-
-axiom concat_def1 :
-  (forall a:(int,(int,slot) farray) farray.
-  forall b:(int,(int,slot) farray) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : (int,slot) farray, int -> (int,(int,slot) farray) farray
-
-axiom singleton_def1 :
-  (forall v:(int,slot) farray.
-  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,(int,slot) farray) farray, int, int,
   (int,(int,slot) farray) farray, int, int -> bool
 
@@ -341,17 +276,17 @@ axiom bool_eq_def4 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_152:int. ((((a__first <= temp___idx_152) and
-  (temp___idx_152 <= a__last)) and (bool_eq4((a[temp___idx_152]), 1, 3,
-  (b[((b__first - a__first) + temp___idx_152)]), 1, 3) = true)) or
-  (not ((a__first <= temp___idx_152) and (temp___idx_152 <= a__last)))))) ->
+  (forall temp___idx_174:int. ((((a__first <= temp___idx_174) and
+  (temp___idx_174 <= a__last)) and (bool_eq4((a[temp___idx_174]), 1, 3,
+  (b[((b__first - a__first) + temp___idx_174)]), 1, 3) = true)) or
+  (not ((a__first <= temp___idx_174) and (temp___idx_174 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_152:int. (((a__first <= temp___idx_152) and
-  (temp___idx_152 <= a__last)) -> (bool_eq4((a[temp___idx_152]), 1, 3,
-  (b[((b__first - a__first) + temp___idx_152)]), 1, 3) = true))))) ->
+  (forall temp___idx_174:int. (((a__first <= temp___idx_174) and
+  (temp___idx_174 <= a__last)) -> (bool_eq4((a[temp___idx_174]), 1, 3,
+  (b[((b__first - a__first) + temp___idx_174)]), 1, 3) = true))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -362,9 +297,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_152:int. (((a__first <= temp___idx_152) and
-  (temp___idx_152 <= a__last)) -> (bool_eq4((a[temp___idx_152]), 1, 3,
-  (b[((b__first - a__first) + temp___idx_152)]), 1, 3) = true)))))))
+  (forall temp___idx_174:int. (((a__first <= temp___idx_174) and
+  (temp___idx_174 <= a__last)) -> (bool_eq4((a[temp___idx_174]), 1, 3,
+  (b[((b__first - a__first) + temp___idx_174)]), 1, 3) = true)))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -396,143 +331,51 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic my_board : (int,(int,slot) farray) farray
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : int
-
-logic o13 : int
-
-logic o14 : int
-
-logic o15 : int
-
-logic o16 : int
-
-logic o17 : int
-
-logic o18 : int
-
-logic o19 : int
-
-logic o20 : int
-
-logic o21 : int
-
-logic o22 : int
-
-logic o23 : int
-
-logic o24 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : in_range1(y)
-
-axiom H2 : ((3 <= x) -> ((3 <= y) -> ((o18 = one_free_slot(3, 3,
-  my_board)) and (in_range(o18) and (((to_rep(((my_board[3])[3])) = 0) ->
-  (o18 = 1)) and ((not (to_rep(((my_board[3])[3])) = 0)) -> (o18 = 0)))))))
-
-axiom H3 : ((3 <= x) -> ((not (3 <= y)) -> (o18 = 0)))
-
-axiom H4 : ((3 <= x) -> ((2 <= y) -> ((o15 = one_free_slot(3, 2,
-  my_board)) and (in_range(o15) and (((to_rep(((my_board[3])[2])) = 0) ->
-  (o15 = 1)) and ((not (to_rep(((my_board[3])[2])) = 0)) -> (o15 = 0)))))))
-
-axiom H5 : ((3 <= x) -> ((not (2 <= y)) -> (o15 = 0)))
-
-axiom H6 : ((3 <= x) -> ((o16 = one_free_slot(3, 1, my_board)) and
-  (in_range(o16) and (((to_rep(((my_board[3])[1])) = 0) -> (o16 = 1)) and
-  ((not (to_rep(((my_board[3])[1])) = 0)) -> (o16 = 0))))))
-
-axiom H7 : ((3 <= x) -> (o17 = (o16 + o15)))
-
-axiom H8 : ((3 <= x) -> ((o19 = o17) and in_range(o17)))
-
-axiom H9 : ((3 <= x) -> (o20 = (o19 + o18)))
-
-axiom H10 : ((3 <= x) -> ((o21 = o20) and in_range(o20)))
-
-axiom H11 : ((not (3 <= x)) -> (o21 = 0))
-
-axiom H12 : ((2 <= x) -> ((3 <= y) -> ((o9 = one_free_slot(2, 3,
-  my_board)) and (in_range(o9) and (((to_rep(((my_board[2])[3])) = 0) ->
-  (o9 = 1)) and ((not (to_rep(((my_board[2])[3])) = 0)) -> (o9 = 0)))))))
-
-axiom H13 : ((2 <= x) -> ((not (3 <= y)) -> (o9 = 0)))
-
-axiom H14 : ((2 <= x) -> ((2 <= y) -> ((o6 = one_free_slot(2, 2,
-  my_board)) and (in_range(o6) and (((to_rep(((my_board[2])[2])) = 0) ->
-  (o6 = 1)) and ((not (to_rep(((my_board[2])[2])) = 0)) -> (o6 = 0)))))))
-
-axiom H15 : ((2 <= x) -> ((not (2 <= y)) -> (o6 = 0)))
-
-axiom H16 : ((2 <= x) -> ((o7 = one_free_slot(2, 1, my_board)) and
-  (in_range(o7) and (((to_rep(((my_board[2])[1])) = 0) -> (o7 = 1)) and
-  ((not (to_rep(((my_board[2])[1])) = 0)) -> (o7 = 0))))))
-
-axiom H17 : ((2 <= x) -> (o8 = (o7 + o6)))
-
-axiom H18 : ((2 <= x) -> ((o10 = o8) and in_range(o8)))
-
-axiom H19 : ((2 <= x) -> (o11 = (o10 + o9)))
-
-axiom H20 : ((2 <= x) -> ((o12 = o11) and in_range(o11)))
-
-axiom H21 : ((not (2 <= x)) -> (o12 = 0))
-
-axiom H22 : ((3 <= y) -> ((o3 = one_free_slot(1, 3, my_board)) and
-  (in_range(o3) and (((to_rep(((my_board[1])[3])) = 0) -> (o3 = 1)) and
-  ((not (to_rep(((my_board[1])[3])) = 0)) -> (o3 = 0))))))
-
-axiom H23 : ((not (3 <= y)) -> (o3 = 0))
-
-axiom H24 : ((2 <= y) -> ((o = one_free_slot(1, 2, my_board)) and
-  (in_range(o) and (((to_rep(((my_board[1])[2])) = 0) -> (o = 1)) and
-  ((not (to_rep(((my_board[1])[2])) = 0)) -> (o = 0))))))
-
-axiom H25 : ((not (2 <= y)) -> (o = 0))
-
-axiom H26 : ((o1 = one_free_slot(1, 1, my_board)) and (in_range(o1) and
-  (((to_rep(((my_board[1])[1])) = 0) -> (o1 = 1)) and
-  ((not (to_rep(((my_board[1])[1])) = 0)) -> (o1 = 0)))))
-
-axiom H27 : (o2 = (o1 + o))
-
-axiom H28 : ((o4 = o2) and in_range(o2))
-
-axiom H29 : (o5 = (o4 + o3))
-
-axiom H30 : ((o13 = o5) and in_range(o5))
-
-axiom H31 : (o14 = (o13 + o12))
-
-axiom H32 : ((o22 = o14) and in_range(o14))
-
-axiom H33 : (o23 = (o22 + o21))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(o23)
+goal WP_parameter_def :
+  (forall my_board:(int,(int,slot) farray) farray. forall o:int.
+  forall o1:int. forall o2:int. forall o3:int. forall o4:int. forall o5:int.
+  forall o6:int. forall o7:int. forall o8:int. forall o9:int. forall o10:int.
+  forall o11:int. forall o12:int. forall o13:int. forall o14:int.
+  forall o15:int. forall o16:int. forall o17:int. forall o18:int.
+  forall o19:int. forall o20:int. forall o21:int. forall o22:int.
+  forall o23:int. (in_range1(x) -> (in_range1(y) -> (((((3 <= x) and
+  (((((3 <= y) and ((o18 = one_free_slot(3, 3, my_board)) and
+  (in_range(o18) and (((to_rep(((my_board[3])[3])) = 0) and (o18 = 1)) or
+  ((not (to_rep(((my_board[3])[3])) = 0)) and (o18 = 0)))))) or
+  ((not (3 <= y)) and (o18 = 0))) and ((((((2 <= y) and
+  ((o15 = one_free_slot(3, 2, my_board)) and (in_range(o15) and
+  (((to_rep(((my_board[3])[2])) = 0) and (o15 = 1)) or
+  ((not (to_rep(((my_board[3])[2])) = 0)) and (o15 = 0)))))) or
+  ((not (2 <= y)) and (o15 = 0))) and (((o16 = one_free_slot(3, 1,
+  my_board)) and (in_range(o16) and (((to_rep(((my_board[3])[1])) = 0) and
+  (o16 = 1)) or ((not (to_rep(((my_board[3])[1])) = 0)) and (o16 = 0))))) and
+  (o17 = (o16 + o15)))) and ((o19 = o17) and in_range(o17))) and
+  (o20 = (o19 + o18)))) and ((o21 = o20) and in_range(o20)))) or
+  ((not (3 <= x)) and (o21 = 0))) and ((((((2 <= x) and (((((3 <= y) and
+  ((o9 = one_free_slot(2, 3, my_board)) and (in_range(o9) and
+  (((to_rep(((my_board[2])[3])) = 0) and (o9 = 1)) or
+  ((not (to_rep(((my_board[2])[3])) = 0)) and (o9 = 0)))))) or
+  ((not (3 <= y)) and (o9 = 0))) and ((((((2 <= y) and
+  ((o6 = one_free_slot(2, 2, my_board)) and (in_range(o6) and
+  (((to_rep(((my_board[2])[2])) = 0) and (o6 = 1)) or
+  ((not (to_rep(((my_board[2])[2])) = 0)) and (o6 = 0)))))) or
+  ((not (2 <= y)) and (o6 = 0))) and (((o7 = one_free_slot(2, 1,
+  my_board)) and (in_range(o7) and (((to_rep(((my_board[2])[1])) = 0) and
+  (o7 = 1)) or ((not (to_rep(((my_board[2])[1])) = 0)) and (o7 = 0))))) and
+  (o8 = (o7 + o6)))) and ((o10 = o8) and in_range(o8))) and
+  (o11 = (o10 + o9)))) and ((o12 = o11) and in_range(o11)))) or
+  ((not (2 <= x)) and (o12 = 0))) and ((((((3 <= y) and
+  ((o3 = one_free_slot(1, 3, my_board)) and (in_range(o3) and
+  (((to_rep(((my_board[1])[3])) = 0) and (o3 = 1)) or
+  ((not (to_rep(((my_board[1])[3])) = 0)) and (o3 = 0)))))) or
+  ((not (3 <= y)) and (o3 = 0))) and ((((((2 <= y) and ((o = one_free_slot(1,
+  2, my_board)) and (in_range(o) and (((to_rep(((my_board[1])[2])) = 0) and
+  (o = 1)) or ((not (to_rep(((my_board[1])[2])) = 0)) and (o = 0)))))) or
+  ((not (2 <= y)) and (o = 0))) and (((o1 = one_free_slot(1, 1,
+  my_board)) and (in_range(o1) and (((to_rep(((my_board[1])[1])) = 0) and
+  (o1 = 1)) or ((not (to_rep(((my_board[1])[1])) = 0)) and (o1 = 0))))) and
+  (o2 = (o1 + o)))) and ((o4 = o2) and in_range(o2))) and
+  (o5 = (o4 + o3)))) and ((o13 = o5) and in_range(o5))) and
+  (o14 = (o13 + o12)))) and ((o22 = o14) and in_range(o14))) and
+  (o23 = (o22 + o21)))) -> in_range(o23)))))

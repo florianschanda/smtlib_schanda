@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -164,95 +164,29 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic res : int
-
-logic casing__f__result : int
-
-logic result : int
-
-logic res1 : int
-
-logic result1 : int
-
-logic res2 : int
-
-logic result2 : int
-
-logic res3 : int
-
-logic result3 : int
-
-logic res4 : int
-
-logic result4 : int
-
-logic casing__f__result1 : int
-
-logic casing__f__result2 : int
-
-logic casing__f__result3 : int
-
-logic res5 : int
-
-logic casing__f__result4 : int
-
-logic res6 : int
-
-logic casing__f__result5 : int
-
-logic result5 : int
-
-axiom H : in_range2(x)
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(res))
-
-axiom H2 : ((x = 0) -> (result = res))
-
-axiom H3 : ((x = 0) -> (res1 = 0))
-
-axiom H4 : ((not (x = 0)) -> ((x = 1) -> (result1 = res)))
-
-axiom H5 : ((not (x = 0)) -> ((x = 1) -> (res2 = 1)))
-
-axiom H6 : ((not (x = 0)) -> ((not (x = 1)) -> (((2 <= x) and (x <= 3)) ->
-  (result2 = res))))
-
-axiom H7 : ((not (x = 0)) -> ((not (x = 1)) -> (((2 <= x) and (x <= 3)) ->
-  (res3 = 2))))
-
-axiom H8 : ((not (x = 0)) -> ((not (x = 1)) -> ((not ((2 <= x) and
-  (x <= 3))) -> (result3 = res))))
-
-axiom H9 : ((not (x = 0)) -> ((not (x = 1)) -> ((not ((2 <= x) and
-  (x <= 3))) -> (res4 = 3))))
-
-axiom H10 : ((not (x = 0)) -> ((not (x = 1)) -> ((not ((2 <= x) and
-  (x <= 3))) -> (res3 = res4))))
-
-axiom H11 : ((not (x = 0)) -> ((not (x = 1)) -> (res2 = res3)))
-
-axiom H12 : ((not (x = 0)) -> (res1 = res2))
-
-axiom H13 : (casing__f__result1 = casing__f__result2)
-
-axiom H14 : (casing__f__result3 = casing__f__result1)
-
-axiom H15 : (result4 = casing__f__result)
-
-axiom H16 : (casing__f__result1 = res1)
-
-axiom H17 : (casing__f__result4 = casing__f__result2)
-
-axiom H18 : (res5 = res1)
-
-axiom H19 : (casing__f__result5 = casing__f__result3)
-
-axiom H20 : (res6 = res1)
-
-axiom H21 : (result5 = casing__f__result4)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (((x = 0) -> (casing__f__result4 = 0)) and
-  ((not (x = 0)) -> (((x = 1) -> (casing__f__result4 = 1)) and
-  ((not (x = 1)) -> ((((x = 2) or (x = 3)) -> (casing__f__result4 = 2)) and
-  ((not ((x = 2) or (x = 3))) -> (casing__f__result4 = 3)))))))
+goal WP_parameter_def :
+  (forall res:int. forall casing__f__result:int. forall result:int.
+  forall res1:int. forall result1:int. forall res2:int. forall result2:int.
+  forall res3:int. forall result3:int. forall res4:int. forall result4:int.
+  forall casing__f__result1:int. forall casing__f__result2:int.
+  forall casing__f__result3:int. forall res5:int.
+  forall casing__f__result4:int. forall res6:int.
+  forall casing__f__result5:int.
+  (forall result5:int. ((in_range2(x) and
+  ((((((- 2147483648) <= 2147483647) -> in_range1(res)) and ((((x = 0) and
+  ((result = res) and (res1 = 0))) or ((not (x = 0)) and ((((x = 1) and
+  ((result1 = res) and (res2 = 1))) or ((not (x = 1)) and (((((2 <= x) and
+  (x <= 3)) and ((result2 = res) and (res3 = 2))) or ((not ((2 <= x) and
+  (x <= 3))) and (((result3 = res) and (res4 = 3)) and (res3 = res4)))) and
+  (res2 = res3)))) and (res1 = res2)))) and
+  (((casing__f__result1 = casing__f__result2) and
+  (casing__f__result3 = casing__f__result1)) and
+  ((result4 = casing__f__result) and (casing__f__result1 = res1))))) and
+  (((casing__f__result4 = casing__f__result2) and (res5 = res1)) and
+  ((casing__f__result5 = casing__f__result3) and (res6 = res1)))) and
+  (result5 = casing__f__result4))) -> (((x = 0) ->
+  (casing__f__result4 = 0)) and ((not (x = 0)) -> (((x = 1) ->
+  (casing__f__result4 = 1)) and ((not (x = 1)) -> ((((x = 2) or (x = 3)) ->
+  (casing__f__result4 = 2)) and ((not ((x = 2) or (x = 3))) ->
+  (casing__f__result4 = 3))))))))))

@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -250,25 +250,6 @@ logic b : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic arithmetic__test_mod_c__result : int
-
-logic result : int
-
-logic arithmetic__test_mod_c__result1 : int
-
-logic arithmetic__test_mod_c__result2 : int
-
-logic arithmetic__test_mod_c__result3 : int
-
-logic arithmetic__test_mod_c__result4 : int
-
-logic arithmetic__test_mod_c__result5 : int
-
-axiom H : in_range1(a)
-
-axiom H1 : in_range1(b)
-
-axiom H2 : ((((- 10) <= b) and (b <= 20)) and (not (b = 0)))
-
  (* File "arithmetic.adb", line 4, characters 0-0 *)
-goal WP_parameter_def : (not (b = 0))
+goal WP_parameter_def : (in_range1(a) -> (in_range1(b) ->
+  (((((- 10) <= b) and (b <= 20)) and (not (b = 0))) -> (not (b = 0)))))

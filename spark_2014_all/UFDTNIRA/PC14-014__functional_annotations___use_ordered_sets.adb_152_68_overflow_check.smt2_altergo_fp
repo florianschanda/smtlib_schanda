@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -863,8 +863,8 @@ axiom elements__post_axiom :
   rec__use_ordered_sets__my_sets__set__capacity = container };
   us_split_fields1 = { rec__use_ordered_sets__my_sets__set = container1 }
   })) and
-  (forall temp___393:int. ((in_range4(temp___393) and ((1 <= temp___393) and
-  (temp___393 <= (0 + length2(elements({ us_split_discrs1 = {
+  (forall temp___435:int. ((in_range4(temp___435) and ((1 <= temp___435) and
+  (temp___435 <= (0 + length2(elements({ us_split_discrs1 = {
   rec__use_ordered_sets__my_sets__set__capacity = container };
   us_split_fields1 = { rec__use_ordered_sets__my_sets__set = container1 }
   })))))) -> (contains(model__({ us_split_discrs1 = {
@@ -873,7 +873,7 @@ axiom elements__post_axiom :
   get(elements({ us_split_discrs1 = {
   rec__use_ordered_sets__my_sets__set__capacity = container };
   us_split_fields1 = { rec__use_ordered_sets__my_sets__set = container1 } }),
-  temp___393)) = true)))) and
+  temp___435)) = true)))) and
   (forall item:int. ((in_range7(item) and (contains(model__({
   us_split_discrs1 = { rec__use_ordered_sets__my_sets__set__capacity =
   container }; us_split_fields1 = { rec__use_ordered_sets__my_sets__set =
@@ -1592,278 +1592,25 @@ axiom w_get__post_axiom :
   ((in_range2(witness1) and (has_witness(container, witness1) = true)) ->
   in_range6(w_get(container, witness1)))))
 
-logic s__split_fields : us_main_type
-
-logic cu__split_fields : count_type
-
-logic n : int
-
-logic o : int
-
-logic temp___806 : us_rep2
-
-logic temp___805 : int
-
-logic o1 : bool
-
-logic o2 : bool
-
-logic e : int
-
-logic o3 : bool
-
-logic use_ordered_sets__double_size__cu__assume : count_type
-
-logic temp___797 : int
-
-logic temp___792 : count_type
-
-logic temp___795 : us_rep2
-
-logic temp___793 : int
-
-logic temp___796 : us_rep2
-
-logic temp___798 : us_rep2
-
-logic temp___794 : us_rep2
-
-logic temp___791 : count_type
-
-logic temp___7911 : us_main_type
-
-logic temp___790 : int
-
-logic o4 : int
-
-logic i : int
-
-logic o5 : us_rep2
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : us_rep2
-
-logic o13 : int
-
-logic o14 : int
-
-logic o15 : int
-
-logic o16 : int
-
-logic o17 : int
-
-logic o18 : int
-
-logic o19 : bool
-
-logic i1 : int
-
-logic o20 : int
-
-logic o21 : int
-
-logic o22 : int
-
-logic o23 : int
-
-logic o24 : bool
-
-logic o25 : bool
-
-logic o26 : us_rep2
-
-logic o27 : int
-
-logic o28 : int
-
-logic o29 : int
-
-logic o30 : int
-
-logic o31 : int
-
-logic i2 : int
-
-logic o32 : int
-
-logic o33 : bool
-
-logic o34 : us_rep2
-
-logic o35 : int
-
-logic o36 : int
-
-logic o37 : int
-
-logic o38 : int
-
-logic o39 : int
-
-logic o40 : us_rep3
-
-logic o41 : int
-
-logic o42 : int
-
-logic o43 : int
-
-logic o44 : int
-
-logic o45 : int
-
-logic o46 : int
-
-logic o47 : int
-
-logic o48 : int
-
-logic o49 : int
-
-logic o50 : int
-
-logic o51 : count_type
-
-logic temp___789 : count_type
-
-logic o52 : int
-
-logic o53 : bool
-
-logic o54 : int
-
-logic i3 : int
-
-logic o55 : us_rep2
-
-logic o56 : int
-
-logic o57 : int
-
-logic o58 : int
-
-logic o59 : int
-
-logic o60 : int
-
-logic o61 : int
-
-logic o62 : us_rep2
-
-logic o63 : int
-
-logic o64 : int
-
-logic o65 : int
-
-logic o66 : int
-
-logic o67 : int
-
-logic o68 : int
-
-logic o69 : bool
-
-logic o70 : bool
-
-logic s__split_fields1 : us_main_type
-
-logic result : bool
-
-logic result1 : count_type
-
-logic cu__split_fields1 : count_type
-
-logic result2 : int
-
-logic n1 : int
-
-logic result3 : bool
-
-logic s__split_fields2 : us_main_type
-
-logic cu__split_fields2 : count_type
-
-logic n2 : int
-
-logic result4 : bool
-
-logic result5 : bool
-
-logic s__split_fields3 : us_main_type
-
-logic result6 : count_type
-
-logic cu__split_fields3 : count_type
-
-logic result7 : int
-
-logic n3 : int
-
-logic result8 : bool
-
-logic s__split_fields4 : us_main_type
-
-logic cu__split_fields4 : count_type
-
-logic n4 : int
-
-logic s__split_fields5 : us_main_type
-
-logic cu__split_fields5 : count_type
-
-logic n5 : int
-
-logic s__split_fields6 : us_main_type
-
-logic cu__split_fields6 : count_type
-
-logic n6 : int
-
-logic s__split_fields7 : us_main_type
-
-logic cu__split_fields7 : count_type
-
-logic n7 : int
-
-logic s__split_fields8 : us_main_type
-
-logic cu__split_fields8 : count_type
-
-logic n8 : int
-
-logic s__split_fields9 : us_main_type
-
-logic cu__split_fields9 : count_type
-
-logic n9 : int
-
-axiom H : ((length({ us_split_discrs1 = {
+ (* File "use_ordered_sets.ads", line 71, characters 0-0 *)
+goal WP_parameter_def :
+  (forall s__split_fields:us_main_type. forall cu__split_fields:count_type.
+  forall n:int. forall use_ordered_sets__double_size__cu__assume:count_type.
+  forall result:count_type. forall cu__split_fields1:count_type.
+  forall result1:int. forall n1:int. forall result2:bool.
+  forall s__split_fields1:us_main_type. forall cu__split_fields2:count_type.
+  forall n2:int. (((length({ us_split_discrs1 = {
   rec__use_ordered_sets__my_sets__set__capacity = s__split_discrs };
   us_split_fields1 = { rec__use_ordered_sets__my_sets__set = s__split_fields
   } }) <= comp_div(to_rep(s__split_discrs),2)) and
-  (forall temp___809:int. ((in_range4(temp___809) and ((1 <= temp___809) and
-  (temp___809 <= (0 + length2(elements({ us_split_discrs1 = {
+  (forall temp___851:int. ((in_range4(temp___851) and ((1 <= temp___851) and
+  (temp___851 <= (0 + length2(elements({ us_split_discrs1 = {
   rec__use_ordered_sets__my_sets__set__capacity = s__split_discrs };
   us_split_fields1 = { rec__use_ordered_sets__my_sets__set = s__split_fields
   } })))))) -> (mod(get(elements({ us_split_discrs1 = {
   rec__use_ordered_sets__my_sets__set__capacity = s__split_discrs };
   us_split_fields1 = { rec__use_ordered_sets__my_sets__set = s__split_fields
-  } }), temp___809), 2) = 0))))
-
-axiom H1 : (({ us_split_fields3 = {
+  } }), temp___851), 2) = 0)))) -> (((({ us_split_fields3 = {
   rec__use_ordered_sets__my_sets__cursor__node =
   use_ordered_sets__double_size__cu__assume } } = first({ us_split_discrs1 =
   { rec__use_ordered_sets__my_sets__set__capacity = s__split_discrs };
@@ -1871,14 +1618,14 @@ axiom H1 : (({ us_split_fields3 = {
   } })) and (((bool_eq1(length({ us_split_discrs1 = {
   rec__use_ordered_sets__my_sets__set__capacity = s__split_discrs };
   us_split_fields1 = { rec__use_ordered_sets__my_sets__set = s__split_fields
-  } }), 0) = true) -> (bool_eq6({ us_split_fields3 = {
+  } }), 0) = true) and (bool_eq6({ us_split_fields3 = {
   rec__use_ordered_sets__my_sets__cursor__node =
   use_ordered_sets__double_size__cu__assume } }, { us_split_fields3 = {
-  rec__use_ordered_sets__my_sets__cursor__node = no_element } }) = true)) and
+  rec__use_ordered_sets__my_sets__cursor__node = no_element } }) = true)) or
   ((not (bool_eq1(length({ us_split_discrs1 = {
   rec__use_ordered_sets__my_sets__set__capacity = s__split_discrs };
   us_split_fields1 = { rec__use_ordered_sets__my_sets__set = s__split_fields
-  } }), 0) = true)) -> ((has_key(positions({ us_split_discrs1 = {
+  } }), 0) = true)) and ((has_key(positions({ us_split_discrs1 = {
   rec__use_ordered_sets__my_sets__set__capacity = s__split_discrs };
   us_split_fields1 = { rec__use_ordered_sets__my_sets__set = s__split_fields
   } }), { us_split_fields3 = { rec__use_ordered_sets__my_sets__cursor__node =
@@ -1887,90 +1634,70 @@ axiom H1 : (({ us_split_fields3 = {
   rec__use_ordered_sets__my_sets__set__capacity = s__split_discrs };
   us_split_fields1 = { rec__use_ordered_sets__my_sets__set = s__split_fields
   } }), { us_split_fields3 = { rec__use_ordered_sets__my_sets__cursor__node =
-  use_ordered_sets__double_size__cu__assume } }) = 1)))))
-
-axiom H2 : (result1 = cu__split_fields)
-
-axiom H3 : (use_ordered_sets__double_size__cu__assume = cu__split_fields1)
-
-axiom H4 : (result2 = n)
-
-axiom H5 : (n1 = 0)
-
-axiom H6 : in_range2(n1)
-
-axiom H7 : ((result3 = has_key(positions({ us_split_discrs1 = {
+  use_ordered_sets__double_size__cu__assume } }) = 1))))) and (({
+  us_split_fields__content1 = {
+  rec__use_ordered_sets__my_sets__cursor__node = result } } = {
+  us_split_fields__content1 = {
+  rec__use_ordered_sets__my_sets__cursor__node = cu__split_fields } }) and
+  (use_ordered_sets__double_size__cu__assume = cu__split_fields1))) -> ((({
+  int__content = result1 } = { int__content = n }) and (n1 = 0)) ->
+  (in_range2(n1) -> (((result2 = has_key(positions({ us_split_discrs1 = {
   rec__use_ordered_sets__my_sets__set__capacity = s__split_discrs };
   us_split_fields1 = { rec__use_ordered_sets__my_sets__set = s__split_fields
   } }), { us_split_fields3 = { rec__use_ordered_sets__my_sets__cursor__node =
-  cu__split_fields1 } })) and ((result3 = true) <-> (has_key(positions({
+  cu__split_fields1 } })) and ((result2 = true) <-> (has_key(positions({
   us_split_discrs1 = { rec__use_ordered_sets__my_sets__set__capacity =
   s__split_discrs }; us_split_fields1 = {
   rec__use_ordered_sets__my_sets__set = s__split_fields } }), {
   us_split_fields3 = { rec__use_ordered_sets__my_sets__cursor__node =
-  cu__split_fields1 } }) = true)))
-
-axiom H8 : (result3 = true)
-
-axiom H9 : (length({ us_split_discrs1 = {
-  rec__use_ordered_sets__my_sets__set__capacity = s__split_discrs };
-  us_split_fields1 = { rec__use_ordered_sets__my_sets__set = s__split_fields2
-  } }) = (length({ us_split_discrs1 = {
-  rec__use_ordered_sets__my_sets__set__capacity = s__split_discrs };
-  us_split_fields1 = { rec__use_ordered_sets__my_sets__set = s__split_fields
-  } }) + n2))
-
-axiom H10 :
-  (forall i4:int. (((1 <= i4) and (i4 <= n2)) -> ((get(elements({
+  cu__split_fields1 } }) = true))) -> ((result2 = true) -> (((length({
   us_split_discrs1 = { rec__use_ordered_sets__my_sets__set__capacity =
   s__split_discrs }; us_split_fields1 = {
-  rec__use_ordered_sets__my_sets__set = s__split_fields2 } }),
-  (2 * i4)) = (get(elements({ us_split_discrs1 = {
-  rec__use_ordered_sets__my_sets__set__capacity = s__split_discrs };
-  us_split_fields1 = { rec__use_ordered_sets__my_sets__set = s__split_fields
-  } }), i4) + 1)) and (get(elements({ us_split_discrs1 = {
-  rec__use_ordered_sets__my_sets__set__capacity = s__split_discrs };
-  us_split_fields1 = { rec__use_ordered_sets__my_sets__set = s__split_fields2
-  } }), ((2 * i4) - 1)) = get(elements({ us_split_discrs1 = {
-  rec__use_ordered_sets__my_sets__set__capacity = s__split_discrs };
-  us_split_fields1 = { rec__use_ordered_sets__my_sets__set = s__split_fields
-  } }), i4)))))
-
-axiom H11 :
-  (forall i4:int. (((((2 * n2) + 1) <= i4) and (i4 <= length({
+  rec__use_ordered_sets__my_sets__set = s__split_fields1 } }) = (length({
   us_split_discrs1 = { rec__use_ordered_sets__my_sets__set__capacity =
   s__split_discrs }; us_split_fields1 = {
-  rec__use_ordered_sets__my_sets__set = s__split_fields2 } }))) ->
-  (get(elements({ us_split_discrs1 = {
+  rec__use_ordered_sets__my_sets__set = s__split_fields } }) + n2)) and
+  ((forall i:int. (((1 <= i) and (i <= n2)) -> ((get(elements({
+   us_split_discrs1 = { rec__use_ordered_sets__my_sets__set__capacity =
+   s__split_discrs }; us_split_fields1 = {
+   rec__use_ordered_sets__my_sets__set = s__split_fields1 } }),
+   (2 * i)) = (get(elements({ us_split_discrs1 = {
+   rec__use_ordered_sets__my_sets__set__capacity = s__split_discrs };
+   us_split_fields1 = { rec__use_ordered_sets__my_sets__set = s__split_fields
+   } }), i) + 1)) and (get(elements({ us_split_discrs1 = {
+   rec__use_ordered_sets__my_sets__set__capacity = s__split_discrs };
+   us_split_fields1 = { rec__use_ordered_sets__my_sets__set =
+   s__split_fields1 } }), ((2 * i) - 1)) = get(elements({ us_split_discrs1 =
+   { rec__use_ordered_sets__my_sets__set__capacity = s__split_discrs };
+   us_split_fields1 = { rec__use_ordered_sets__my_sets__set = s__split_fields
+   } }), i))))) and
+  ((forall i:int. (((((2 * n2) + 1) <= i) and (i <= length({
+   us_split_discrs1 = { rec__use_ordered_sets__my_sets__set__capacity =
+   s__split_discrs }; us_split_fields1 = {
+   rec__use_ordered_sets__my_sets__set = s__split_fields1 } }))) ->
+   (get(elements({ us_split_discrs1 = {
+   rec__use_ordered_sets__my_sets__set__capacity = s__split_discrs };
+   us_split_fields1 = { rec__use_ordered_sets__my_sets__set =
+   s__split_fields1 } }), i) = get(elements({ us_split_discrs1 = {
+   rec__use_ordered_sets__my_sets__set__capacity = s__split_discrs };
+   us_split_fields1 = { rec__use_ordered_sets__my_sets__set = s__split_fields
+   } }), (i - n2))))) and
+  ((forall i:int. ((((n2 + 1) <= i) and (i <= length({ us_split_discrs1 = {
+   rec__use_ordered_sets__my_sets__set__capacity = s__split_discrs };
+   us_split_fields1 = { rec__use_ordered_sets__my_sets__set = s__split_fields
+   } }))) -> (get(elements({ us_split_discrs1 = {
+   rec__use_ordered_sets__my_sets__set__capacity = s__split_discrs };
+   us_split_fields1 = { rec__use_ordered_sets__my_sets__set =
+   s__split_fields1 } }), (i + n2)) = get(elements({ us_split_discrs1 = {
+   rec__use_ordered_sets__my_sets__set__capacity = s__split_discrs };
+   us_split_fields1 = { rec__use_ordered_sets__my_sets__set = s__split_fields
+   } }), i)))) and
+  (get1(positions({ us_split_discrs1 = {
   rec__use_ordered_sets__my_sets__set__capacity = s__split_discrs };
-  us_split_fields1 = { rec__use_ordered_sets__my_sets__set = s__split_fields2
-  } }), i4) = get(elements({ us_split_discrs1 = {
-  rec__use_ordered_sets__my_sets__set__capacity = s__split_discrs };
-  us_split_fields1 = { rec__use_ordered_sets__my_sets__set = s__split_fields
-  } }), (i4 - n2)))))
-
-axiom H12 :
-  (forall i4:int. ((((n2 + 1) <= i4) and (i4 <= length({ us_split_discrs1 = {
-  rec__use_ordered_sets__my_sets__set__capacity = s__split_discrs };
-  us_split_fields1 = { rec__use_ordered_sets__my_sets__set = s__split_fields
-  } }))) -> (get(elements({ us_split_discrs1 = {
-  rec__use_ordered_sets__my_sets__set__capacity = s__split_discrs };
-  us_split_fields1 = { rec__use_ordered_sets__my_sets__set = s__split_fields2
-  } }), (i4 + n2)) = get(elements({ us_split_discrs1 = {
-  rec__use_ordered_sets__my_sets__set__capacity = s__split_discrs };
-  us_split_fields1 = { rec__use_ordered_sets__my_sets__set = s__split_fields
-  } }), i4))))
-
-axiom H13 : (get1(positions({ us_split_discrs1 = {
-  rec__use_ordered_sets__my_sets__set__capacity = s__split_discrs };
-  us_split_fields1 = { rec__use_ordered_sets__my_sets__set = s__split_fields2
+  us_split_fields1 = { rec__use_ordered_sets__my_sets__set = s__split_fields1
   } }), { us_split_fields3 = { rec__use_ordered_sets__my_sets__cursor__node =
-  cu__split_fields2 } }) = ((2 * n2) + 1))
-
-axiom H14 : ((0 <= 2147483647) -> in_range2(n2))
-
- (* File "use_ordered_sets.ads", line 71, characters 0-0 *)
-goal WP_parameter_def : in_range1((length({ us_split_discrs1 = {
+  cu__split_fields2 } }) = ((2 * n2) + 1)))))) -> (((0 <= 2147483647) ->
+  in_range2(n2)) -> in_range1((length({ us_split_discrs1 = {
   rec__use_ordered_sets__my_sets__set__capacity = s__split_discrs };
   us_split_fields1 = { rec__use_ordered_sets__my_sets__set = s__split_fields
-  } }) + n2))
+  } }) + n2)))))))))))

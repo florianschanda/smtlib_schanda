@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -359,156 +359,17 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic lower : int
-
-logic upper : int
-
-logic halfway : int
-
-logic p2__sqrt__result : int
-
-logic temp___146 : int
-
-logic temp___145 : int
-
-logic temp___144 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : bool
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : bool
-
-logic result : int
-
-logic lower1 : int
-
-logic result1 : int
-
-logic upper1 : int
-
-logic lower2 : int
-
-logic upper2 : int
-
-logic halfway1 : int
-
-logic result2 : int
-
-logic halfway2 : int
-
-logic result3 : bool
-
-logic result4 : int
-
-logic lower3 : int
-
-logic result5 : int
-
-logic upper3 : int
-
-logic lower4 : int
-
-logic upper4 : int
-
-logic halfway3 : int
-
-logic lower5 : int
-
-logic upper5 : int
-
-logic halfway4 : int
-
-logic lower6 : int
-
-logic upper6 : int
-
-logic halfway5 : int
-
-logic lower7 : int
-
-logic upper7 : int
-
-logic halfway6 : int
-
-logic lower8 : int
-
-logic upper8 : int
-
-logic halfway7 : int
-
-logic lower9 : int
-
-logic upper9 : int
-
-logic halfway8 : int
-
-logic lower10 : int
-
-logic upper10 : int
-
-logic halfway9 : int
-
-logic lower11 : int
-
-logic upper11 : int
-
-logic halfway10 : int
-
-logic result6 : int
-
-logic p2__sqrt__result1 : int
-
-logic p2__sqrt__result2 : int
-
-logic p2__sqrt__result3 : int
-
-logic lower12 : int
-
-logic upper12 : int
-
-logic halfway11 : int
-
-logic p2__sqrt__result4 : int
-
-logic lower13 : int
-
-logic upper13 : int
-
-logic halfway12 : int
-
-logic p2__sqrt__result5 : int
-
-axiom H : in_range3(n)
-
-axiom H1 : ((0 <= 46340) -> in_range4(lower))
-
-axiom H2 : ((0 <= 46341) -> in_range5(upper))
-
-axiom H3 : ((0 <= 46340) -> in_range4(halfway))
-
-axiom H4 : (result = lower)
-
-axiom H5 : (lower1 = 0)
-
-axiom H6 : (result1 = upper)
-
-axiom H7 : (upper1 = 46341)
-
-axiom H8 : (((lower2 * lower2) <= n) and (n <  (upper2 * upper2)))
-
-axiom H9 : ((((0 <= 46340) -> in_range4(halfway1)) and ((0 <= 46340) ->
-  in_range4(lower2))) and ((0 <= 46341) -> in_range5(upper2)))
-
-axiom H10 : (not (upper2 = (lower2 + 1)))
-
  (* File "p2.ads", line 8, characters 0-0 *)
-goal WP_parameter_def : (not (2 = 0))
+goal WP_parameter_def :
+  (forall lower:int. forall upper:int. forall halfway:int. forall result:int.
+  forall lower1:int. forall result1:int. forall upper1:int.
+  forall lower2:int. forall upper2:int. forall halfway1:int. (in_range3(n) ->
+  (((0 <= 46340) -> in_range4(lower)) -> (((0 <= 46341) ->
+  in_range5(upper)) -> (((0 <= 46340) -> in_range4(halfway)) -> ((({
+  int__content = result } = { int__content = lower }) and (lower1 = 0)) ->
+  ((({ int__content = result1 } = { int__content = upper }) and
+  (upper1 = 46341)) -> ((((lower2 * lower2) <= n) and
+  (n <  (upper2 * upper2))) -> (((((0 <= 46340) -> in_range4(halfway1)) and
+  ((0 <= 46340) -> in_range4(lower2))) and ((0 <= 46341) ->
+  in_range5(upper2))) -> ((not (upper2 = (lower2 + 1))) ->
+  (not (2 = 0))))))))))))

@@ -412,17 +412,8 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 axiom up__def_axiom : (up = osubtract(now, of_fixed(fxp_div_int(1000000000,
   zero(void)))))
 
-logic delay_cal1__now__assume : us_rep
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-axiom H : (delay_cal1__now__assume = now)
-
-axiom H1 : ((o = zero(void)) and (in_range1(o) and (o = 0)))
-
  (* File "delay_cal1.adb", line 6, characters 0-0 *)
-goal WP_parameter_def : (not (o = 0))
+goal WP_parameter_def :
+  (forall delay_cal1__now__assume:us_rep. forall o:int.
+  ((delay_cal1__now__assume = now) -> (((o = zero(void)) and
+  (in_range1(o) and (o = 0))) -> (not (o = 0)))))

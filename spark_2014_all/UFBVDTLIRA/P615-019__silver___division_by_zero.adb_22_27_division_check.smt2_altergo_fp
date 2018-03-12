@@ -692,19 +692,6 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic u : t
-
-axiom H : in_range(op)
-
-axiom H1 : true
-
-axiom H2 : true
-
-axiom H3 : true
-
-axiom H4 : (not (op = 0))
-
-axiom H5 : (op = 1)
-
  (* File "division_by_zero.adb", line 9, characters 0-0 *)
-goal WP_parameter_def : (not (y = zeros))
+goal WP_parameter_def : (in_range(op) -> ((not (op = 0)) -> ((op = 1) ->
+  (not (y = zeros)))))

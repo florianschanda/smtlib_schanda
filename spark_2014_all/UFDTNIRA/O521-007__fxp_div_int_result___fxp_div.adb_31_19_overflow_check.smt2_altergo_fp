@@ -415,15 +415,8 @@ logic right : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : int
-
-logic o1 : int
-
-axiom H : in_range(right)
-
-axiom H1 : ((0 <  right) and ((0 <  to_fixed(left)) and
-  (fxp_div_result_int(to_fixed(left),
-  1) <= comp_div(9223372036854775807,right))))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range1((to_fixed(left) * right))
+goal WP_parameter_def : (in_range(right) -> (((0 <  right) and
+  ((0 <  to_fixed(left)) and (fxp_div_result_int(to_fixed(left),
+  1) <= comp_div(9223372036854775807,right)))) ->
+  in_range1((to_fixed(left) * right))))

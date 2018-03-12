@@ -240,116 +240,45 @@ logic c : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic base__create__result : integer
-
-logic base__create__result1 : us_private
-
-logic base__create__result2 : int
-
-logic o : integer
-
-logic o1 : integer
-
-logic o2 : us_private
-
-logic o3 : integer
-
-logic o4 : us_private
-
-logic o5 : int
-
-logic result : integer
-
-logic result1 : us_private
-
-logic result2 : int
-
-logic base__create__result3 : integer
-
-logic base__create__result4 : us_private
-
-logic base__create__result5 : int
-
-logic base__create__result6 : integer
-
-logic base__create__result7 : us_private
-
-logic base__create__result8 : int
-
-logic base__create__result9 : integer
-
-logic base__create__result10 : us_private
-
-logic base__create__result11 : int
-
-logic base__create__result12 : integer
-
-logic base__create__result13 : us_private
-
-logic base__create__result14 : int
-
-logic base__create__result15 : integer
-
-logic base__create__result16 : us_private
-
-logic base__create__result17 : int
-
-logic result3 : integer
-
-logic result4 : us_private
-
-logic result5 : int
-
-axiom H : in_range(c)
-
-axiom H1 : (base__create__result6 = base__create__result3)
-
-axiom H2 : (base__create__result7 = base__create__result4)
-
-axiom H3 : (base__create__result8 = base__create__result5)
-
-axiom H4 : (((base__create__result9 = base__create__result3) and
-  (base__create__result10 = base__create__result4)) and
-  (base__create__result11 = base__create__result5))
-
-axiom H5 : (to_rep(o) = c)
-
-axiom H6 : (o = o1)
-
-axiom H7 : (us_null_ext__ = o2)
-
-axiom H8 : (o3 = o1)
-
-axiom H9 : (o4 = o2)
-
-axiom H10 : (us_tag = o5)
-
-axiom H11 : (result = base__create__result)
-
-axiom H12 : (result1 = base__create__result1)
-
-axiom H13 : (result2 = base__create__result2)
-
-axiom H14 : (((base__create__result3 = o3) and
-  (base__create__result4 = o4)) and (base__create__result5 = o5))
-
-axiom H15 : (((base__create__result12 = base__create__result6) and
-  (base__create__result13 = base__create__result7)) and
-  (base__create__result14 = base__create__result8))
-
-axiom H16 : (base__create__result15 = base__create__result9)
-
-axiom H17 : (base__create__result16 = base__create__result10)
-
-axiom H18 : (base__create__result17 = base__create__result11)
-
-axiom H19 : (result3 = base__create__result12)
-
-axiom H20 : (result4 = base__create__result13)
-
-axiom H21 : (result5 = base__create__result14)
-
  (* File "base.ads", line 12, characters 0-0 *)
-goal WP_parameter_def : (sum({ us_split_fields1 = { rec__base__t__c =
-  base__create__result12; rec__ext__ = base__create__result13 }; attr__tag =
-  base__create__result14 }) = c)
+goal WP_parameter_def :
+  (forall base__create__result:integer.
+  forall base__create__result1:us_private. forall base__create__result2:int.
+  forall o:integer. forall o1:integer. forall o2:us_private.
+  forall o3:integer. forall o4:us_private. forall o5:int.
+  forall result:integer. forall result1:us_private. forall result2:int.
+  forall base__create__result3:integer.
+  forall base__create__result4:us_private. forall base__create__result5:int.
+  forall base__create__result6:integer.
+  forall base__create__result7:us_private. forall base__create__result8:int.
+  forall base__create__result9:integer.
+  forall base__create__result10:us_private.
+  forall base__create__result11:int. forall base__create__result12:integer.
+  forall base__create__result13:us_private.
+  forall base__create__result14:int. forall base__create__result15:integer.
+  forall base__create__result16:us_private.
+  forall base__create__result17:int.
+  (forall result3:integer. forall result4:us_private. forall result5:int.
+  ((in_range(c) and (((((((base__create__result6 = base__create__result3) and
+  (base__create__result7 = base__create__result4)) and
+  (base__create__result8 = base__create__result5)) and
+  (((base__create__result9 = base__create__result3) and
+  (base__create__result10 = base__create__result4)) and
+  (base__create__result11 = base__create__result5))) and
+  ((((to_rep(o) = c) and ((o = o1) and (us_null_ext__ = o2))) and
+  (((o3 = o1) and (o4 = o2)) and (us_tag = o5))) and
+  ((((result = base__create__result) and
+  (result1 = base__create__result1)) and
+  (result2 = base__create__result2)) and (((o3 = base__create__result3) and
+  (o4 = base__create__result4)) and (o5 = base__create__result5))))) and
+  ((((base__create__result12 = base__create__result6) and
+  (base__create__result13 = base__create__result7)) and
+  (base__create__result14 = base__create__result8)) and
+  (((base__create__result15 = base__create__result9) and
+  (base__create__result16 = base__create__result10)) and
+  (base__create__result17 = base__create__result11)))) and
+  (((result3 = base__create__result12) and
+  (result4 = base__create__result13)) and
+  (result5 = base__create__result14)))) -> (sum({ us_split_fields1 = {
+  rec__base__t__c = base__create__result12; rec__ext__ =
+  base__create__result13 }; attr__tag = base__create__result14 }) = c))))

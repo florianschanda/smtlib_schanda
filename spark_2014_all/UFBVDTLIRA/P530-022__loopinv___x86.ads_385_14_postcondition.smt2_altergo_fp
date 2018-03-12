@@ -1030,45 +1030,25 @@ logic readreg32 : t1 -> t
 
 logic readreg32__function_guard : t, t1 -> prop
 
+logic rliteral1 : t1
+
+axiom rliteral_axiom1 : (tqtint1(rliteral1) = 4294967295)
+
 axiom readreg32__post_axiom :
   (forall reg:t1 [readreg32(reg)]. (readreg32(reg) = toSmall(bw_and1(reg,
-  of_int1(4294967295)))))
+  rliteral1))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic rbp : t1
-
-logic x86__ebp__result : t
-
-logic result : t
-
-logic x86__ebp__result1 : t
-
-logic x86__ebp__result2 : t
-
-logic x86__ebp__result3 : t
-
-logic x86__ebp__result4 : t
-
-logic x86__ebp__result5 : t
-
-logic result1 : t
-
-axiom H : true
-
-axiom H1 : (x86__ebp__result1 = x86__ebp__result2)
-
-axiom H2 : (x86__ebp__result3 = x86__ebp__result1)
-
-axiom H3 : (result = x86__ebp__result)
-
-axiom H4 : (x86__ebp__result1 = toSmall(bw_and1(rbp, of_int1(4294967295))))
-
-axiom H5 : (x86__ebp__result4 = x86__ebp__result2)
-
-axiom H6 : (x86__ebp__result5 = x86__ebp__result3)
-
-axiom H7 : (result1 = x86__ebp__result4)
-
  (* File "x86.ads", line 8, characters 0-0 *)
-goal WP_parameter_def : (x86__ebp__result4 = readreg32(rbp))
+goal WP_parameter_def :
+  (forall rbp:t1. forall x86__ebp__result:t. forall result:t.
+  forall x86__ebp__result1:t. forall x86__ebp__result2:t.
+  forall x86__ebp__result3:t. forall x86__ebp__result4:t.
+  forall x86__ebp__result5:t.
+  (forall result1:t. ((((((x86__ebp__result1 = x86__ebp__result2) and
+  (x86__ebp__result3 = x86__ebp__result1)) and
+  ((result = x86__ebp__result) and (x86__ebp__result1 = toSmall(bw_and1(rbp,
+  rliteral1))))) and ((x86__ebp__result4 = x86__ebp__result2) and
+  (x86__ebp__result5 = x86__ebp__result3))) and
+  (result1 = x86__ebp__result4)) -> (x86__ebp__result4 = readreg32(rbp)))))

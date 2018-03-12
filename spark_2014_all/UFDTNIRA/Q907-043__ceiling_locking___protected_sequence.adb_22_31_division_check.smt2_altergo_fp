@@ -330,27 +330,10 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic local : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic local1 : int
-
-logic local2 : int
-
-axiom H : (result = local)
-
-axiom H1 : (local1 = 0)
-
-axiom H2 : in_range(local1)
-
-axiom H3 : (((- 2147483648) <= 2147483647) -> in_range(local2))
-
-axiom H4 : ((o = (local2 + 1)) and in_range((local2 + 1)))
-
  (* File "protected_sequence.adb", line 12, characters 0-0 *)
-goal WP_parameter_def : (not (100 = 0))
+goal WP_parameter_def :
+  (forall local:int. forall o:int. forall result:int. forall local1:int.
+  forall local2:int. (((result = local) and (local1 = 0)) ->
+  (in_range(local1) -> ((((- 2147483648) <= 2147483647) ->
+  in_range(local2)) -> (((o = (local2 + 1)) and in_range((local2 + 1))) ->
+  (not (100 = 0)))))))

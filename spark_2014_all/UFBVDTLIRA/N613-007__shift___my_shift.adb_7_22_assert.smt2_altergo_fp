@@ -659,25 +659,12 @@ logic z_old : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic z : t
+logic rliteral : t
 
-logic result : t
-
-logic z1 : t
-
-logic result1 : t
-
-logic z2 : t
-
-axiom H : true
-
-axiom H1 : (z = z_old)
-
-axiom H2 : true
-
-axiom H3 : (result = z)
-
-axiom H4 : (z1 = lsr_bv(z, of_int(1)))
+axiom rliteral_axiom : (tqtint(rliteral) = 2)
 
  (* File "my_shift.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : (z1 = udiv(z_old, of_int(2)))
+goal WP_parameter_def :
+  (forall z:t. forall result:t. forall z1:t. ((z = z_old) ->
+  (((result = z) and (z1 = lsr_bv(z, of_int(1)))) -> (z1 = udiv(z_old,
+  rliteral)))))

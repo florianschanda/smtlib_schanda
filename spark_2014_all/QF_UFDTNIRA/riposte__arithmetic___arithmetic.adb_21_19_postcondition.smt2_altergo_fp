@@ -113,49 +113,22 @@ logic b : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic arithmetic__multiply_a__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic arithmetic__multiply_a__result1 : int
-
-logic arithmetic__multiply_a__result2 : int
-
-logic arithmetic__multiply_a__result3 : int
-
-logic arithmetic__multiply_a__result4 : int
-
-logic arithmetic__multiply_a__result5 : int
-
-logic result1 : int
-
-axiom H : in_range(a)
-
-axiom H1 : in_range(b)
-
-axiom H2 :
-  (arithmetic__multiply_a__result1 = arithmetic__multiply_a__result2)
-
-axiom H3 :
-  (arithmetic__multiply_a__result3 = arithmetic__multiply_a__result1)
-
-axiom H4 : ((o = (a * b)) and in_range((a * b)))
-
-axiom H5 : (result = arithmetic__multiply_a__result)
-
-axiom H6 : (arithmetic__multiply_a__result1 = o)
-
-axiom H7 :
-  (arithmetic__multiply_a__result4 = arithmetic__multiply_a__result2)
-
-axiom H8 :
-  (arithmetic__multiply_a__result5 = arithmetic__multiply_a__result3)
-
-axiom H9 : (result1 = arithmetic__multiply_a__result4)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (arithmetic__multiply_a__result4 = (a * b))
+goal WP_parameter_def :
+  (forall arithmetic__multiply_a__result:int. forall o:int.
+  forall result:int. forall arithmetic__multiply_a__result1:int.
+  forall arithmetic__multiply_a__result2:int.
+  forall arithmetic__multiply_a__result3:int.
+  forall arithmetic__multiply_a__result4:int.
+  forall arithmetic__multiply_a__result5:int.
+  (forall result1:int. ((in_range(a) and (in_range(b) and
+  (((((arithmetic__multiply_a__result1 = arithmetic__multiply_a__result2) and
+  (arithmetic__multiply_a__result3 = arithmetic__multiply_a__result1)) and
+  (((o = (a * b)) and in_range((a * b))) and (({ int__content = result } = {
+  int__content = arithmetic__multiply_a__result }) and
+  (arithmetic__multiply_a__result1 = o)))) and (({ int__content =
+  arithmetic__multiply_a__result4 } = { int__content =
+  arithmetic__multiply_a__result2 }) and
+  (arithmetic__multiply_a__result5 = arithmetic__multiply_a__result3))) and
+  (result1 = arithmetic__multiply_a__result4)))) ->
+  (arithmetic__multiply_a__result4 = (a * b)))))

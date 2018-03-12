@@ -109,27 +109,5 @@ logic a : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic enums__succ_a__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic result : int
-
-logic enums__succ_a__result1 : int
-
-logic enums__succ_a__result2 : int
-
-logic enums__succ_a__result3 : int
-
-logic enums__succ_a__result4 : int
-
-logic enums__succ_a__result5 : int
-
-axiom H : in_range(a)
-
  (* File "enums.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (not (a = 8))
+goal WP_parameter_def : (in_range(a) -> (not (a = 8)))

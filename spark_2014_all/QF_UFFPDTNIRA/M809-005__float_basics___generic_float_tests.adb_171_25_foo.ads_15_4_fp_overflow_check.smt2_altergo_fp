@@ -1092,16 +1092,8 @@ logic b : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : t
-
-logic o1 : t
-
-axiom H : tqtisFinite(a)
-
-axiom H1 : tqtisFinite(b)
-
-axiom H2 : ((o = add(NearestTiesToEven, b, a)) and
-  tqtisFinite(add(NearestTiesToEven, b, a)))
-
  (* File "generic_float_tests.adb", line 162, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(add(NearestTiesToEven, a, b))
+goal WP_parameter_def :
+  (forall o:t. (tqtisFinite(a) -> (tqtisFinite(b) ->
+  (((o = add(NearestTiesToEven, b, a)) and tqtisFinite(add(NearestTiesToEven,
+  b, a))) -> tqtisFinite(add(NearestTiesToEven, a, b))))))

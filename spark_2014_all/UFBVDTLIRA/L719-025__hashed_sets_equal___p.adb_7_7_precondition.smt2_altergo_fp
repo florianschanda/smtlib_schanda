@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1505,8 +1505,8 @@ axiom elements__post_axiom :
   })) = length({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
   container; rec__p__my_sets__set__modulus = container1 }; us_split_fields1 =
   { rec__p__my_sets__set = container2 } })) and
-  (forall temp___429:int. ((in_range5(temp___429) and ((1 <= temp___429) and
-  (temp___429 <= (0 + length2(elements({ us_split_discrs1 = {
+  (forall temp___471:int. ((in_range5(temp___471) and ((1 <= temp___471) and
+  (temp___471 <= (0 + length2(elements({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = container; rec__p__my_sets__set__modulus =
   container1 }; us_split_fields1 = { rec__p__my_sets__set = container2 }
   })))))) -> (contains(model__({ us_split_discrs1 = {
@@ -1514,7 +1514,7 @@ axiom elements__post_axiom :
   container1 }; us_split_fields1 = { rec__p__my_sets__set = container2 } }),
   get(elements({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
   container; rec__p__my_sets__set__modulus = container1 }; us_split_fields1 =
-  { rec__p__my_sets__set = container2 } }), temp___429)) = true)))) and
+  { rec__p__my_sets__set = container2 } }), temp___471)) = true)))) and
   (forall item:int. ((in_range4(item) and (contains(model__({
   us_split_discrs1 = { rec__p__my_sets__set__capacity = container;
   rec__p__my_sets__set__modulus = container1 }; us_split_fields1 = {
@@ -1793,58 +1793,20 @@ axiom w_get__post_axiom :
   ((in_range1(witness1) and (has_witness(container, witness1) = true)) ->
   in_range7(w_get(container, witness1)))))
 
-logic l__split_fields : us_main_type
-
-logic c : count_type
-
-logic o : bool
-
-logic o1 : bool
-
-logic o2 : int
-
-logic o3 : int
-
-logic l__split_fields1 : us_main_type
-
-logic cu__split_fields : count_type
-
-logic i : bool
-
-logic l__split_fields2 : us_main_type
-
-logic cu__split_fields1 : count_type
-
-logic l__split_fields3 : us_main_type
-
-logic cu__split_fields2 : count_type
-
-logic i1 : bool
-
-logic l__split_fields4 : us_main_type
-
-logic cu__split_fields3 : count_type
-
-logic i2 : bool
-
-logic result : bool
-
-axiom H : in_range2(e)
-
-axiom H1 : ((length({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
-  l__split_discrs; rec__p__my_sets__set__modulus = l__split_discrs1 };
-  us_split_fields1 = { rec__p__my_sets__set = l__split_fields }
-  }) <  to_rep(l__split_discrs)) and (not (contains(model__({
+ (* File "p.ads", line 16, characters 0-0 *)
+goal WP_parameter_def :
+  (forall l__split_fields:us_main_type. (in_range2(e) -> (((length({
   us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs;
   rec__p__my_sets__set__modulus = l__split_discrs1 }; us_split_fields1 = {
-  rec__p__my_sets__set = l__split_fields } }), e) = true)))
-
- (* File "p.ads", line 16, characters 0-0 *)
-goal WP_parameter_def : ((length({ us_split_discrs1 = {
+  rec__p__my_sets__set = l__split_fields } }) <  to_rep(l__split_discrs)) and
+  (not (contains(model__({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = l__split_discrs;
+  rec__p__my_sets__set__modulus = l__split_discrs1 }; us_split_fields1 = {
+  rec__p__my_sets__set = l__split_fields } }), e) = true))) -> ((length({
+  us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs;
   rec__p__my_sets__set__modulus = l__split_discrs1 }; us_split_fields1 = {
   rec__p__my_sets__set = l__split_fields } }) <  to_rep(l__split_discrs)) or
   (contains(model__({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
   l__split_discrs; rec__p__my_sets__set__modulus = l__split_discrs1 };
   us_split_fields1 = { rec__p__my_sets__set = l__split_fields } }),
-  e) = true))
+  e) = true)))))

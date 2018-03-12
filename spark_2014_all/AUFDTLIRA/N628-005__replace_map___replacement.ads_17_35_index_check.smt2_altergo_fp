@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -162,24 +162,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> (int,integer) farray
-
-axiom concat_def :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : integer, int -> (int,integer) farray
-
-axiom singleton_def :
-  (forall v:integer.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq3 : (int,integer) farray, int, int, (int,integer) farray, int,
   int -> bool
 
@@ -190,17 +172,17 @@ axiom bool_eq_def2 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) and
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)])))) or
-  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (forall temp___idx_155:int. ((((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) and
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)])))) or
+  (not ((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)))))) ->
   (bool_eq3(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) ->
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)]))))))) ->
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) ->
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)]))))))) ->
   (bool_eq3(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -210,37 +192,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) ->
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)])))))))))
-
-logic compare : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq3(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq3(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq3(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) ->
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)])))))))))
 
 type t
 
@@ -1137,8 +1091,8 @@ axiom keys__post_axiom :
   rec__replacement__inverse_sets__map__capacity = container };
   us_split_fields1 = { rec__replacement__inverse_sets__map = container1 }
   })) and
-  (forall temp___405:int. ((in_range6(temp___405) and ((1 <= temp___405) and
-  (temp___405 <= (0 + length1(keys({ us_split_discrs1 = {
+  (forall temp___449:int. ((in_range6(temp___449) and ((1 <= temp___449) and
+  (temp___449 <= (0 + length1(keys({ us_split_discrs1 = {
   rec__replacement__inverse_sets__map__capacity = container };
   us_split_fields1 = { rec__replacement__inverse_sets__map = container1 }
   })))))) -> (has_key1(model__({ us_split_discrs1 = {
@@ -1147,7 +1101,7 @@ axiom keys__post_axiom :
   get(keys({ us_split_discrs1 = {
   rec__replacement__inverse_sets__map__capacity = container };
   us_split_fields1 = { rec__replacement__inverse_sets__map = container1 } }),
-  temp___405)) = true)))) and
+  temp___449)) = true)))) and
   (forall key1:int. ((in_range5(key1) and (has_key1(model__({
   us_split_discrs1 = { rec__replacement__inverse_sets__map__capacity =
   container }; us_split_fields1 = { rec__replacement__inverse_sets__map =
@@ -1634,98 +1588,29 @@ axiom w_get__post_axiom1 :
   ((in_range2(witness2) and (has_witness1(container, witness2) = true)) ->
   in_range9(w_get1(container, witness2)))))
 
-logic d__split_fields : us_main_type
-
-logic c : count_type
-
-logic o : bool
-
-logic o1 : bool
-
-logic temp___599 : int
-
-logic o2 : int
-
-logic c1 : count_type
-
-logic o3 : bool
-
-logic o4 : bool
-
-logic o5 : int
-
-logic o6 : bool
-
-logic temp___587 : int
-
-logic o7 : int
-
-logic o8 : count_type
-
-logic c2 : count_type
-
-logic o9 : bool
-
-logic o10 : bool
-
-logic o11 : int
-
-logic o12 : bool
-
-logic temp___592 : int
-
-logic o13 : int
-
-logic result : bool
-
-logic result1 : bool
-
-logic result2 : bool
-
-logic result3 : bool
-
-logic replacement__inverse_sets__replace_element__container__fields : us_main_type
-
-logic result4 : us_main_type
-
-logic d__split_fields1 : us_main_type
-
-logic result5 : bool
-
-logic result6 : bool
-
-axiom H : dynamic_property((- 2147483648), 2147483647, to_rep(first(a1)),
-  to_rep(last(a1)))
-
-axiom H1 : in_range1(k)
-
-axiom H2 : ((result = has_key1(model__({ us_split_discrs1 = {
+ (* File "a-cforma.ads", line 997, characters 0-0 *)
+goal WP_parameter_def :
+  (forall d__split_fields:us_main_type. forall c:count_type. forall o:bool.
+  forall o1:bool. forall temp___645:int. forall o2:int. forall result:bool.
+  forall result1:bool. (dynamic_property((- 2147483648), 2147483647,
+  to_rep(first(a1)), to_rep(last(a1))) -> (in_range1(k) ->
+  (((result = has_key1(model__({ us_split_discrs1 = {
   rec__replacement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields
   } }), k)) and ((result = true) <-> (has_key1(model__({ us_split_discrs1 = {
   rec__replacement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields
-  } }), k) = true)))
-
-axiom H3 : (result = true)
-
-axiom H4 : ((o = has_key(positions({ us_split_discrs1 = {
+  } }), k) = true))) -> ((result = true) -> ((((o = has_key(positions({
+  us_split_discrs1 = { rec__replacement__inverse_sets__map__capacity =
+  d__split_discrs }; us_split_fields1 = {
+  rec__replacement__inverse_sets__map = d__split_fields } }), {
+  us_split_fields3 = { rec__replacement__inverse_sets__cursor__node = c }
+  })) and ((o = true) <-> (has_key(positions({ us_split_discrs1 = {
   rec__replacement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields
   } }), { us_split_fields3 = { rec__replacement__inverse_sets__cursor__node =
-  c } })) and ((o = true) <-> (has_key(positions({ us_split_discrs1 = {
-  rec__replacement__inverse_sets__map__capacity = d__split_discrs };
-  us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields
-  } }), { us_split_fields3 = { rec__replacement__inverse_sets__cursor__node =
-  c } }) = true)))
-
-axiom H5 : (o1 = true)
-
-axiom H6 : (result1 = match_bool(o1, o, false))
-
-axiom H7 : (result1 = true)
-
-axiom H8 : ((o2 = get(keys({ us_split_discrs1 = {
+  c } }) = true))) and ((o1 = true) and (result1 = match_bool(o1, o,
+  false)))) -> ((result1 = true) -> (((o2 = get(keys({ us_split_discrs1 = {
   rec__replacement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields
   } }), get1(positions({ us_split_discrs1 = {
@@ -1739,9 +1624,7 @@ axiom H8 : ((o2 = get(keys({ us_split_discrs1 = {
   rec__replacement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields
   } }), { us_split_fields3 = { rec__replacement__inverse_sets__cursor__node =
-  c } })))))
-
-axiom H9 : ((temp___599 = get2(model__({ us_split_discrs1 = {
+  c } }))))) -> (((temp___645 = get2(model__({ us_split_discrs1 = {
   rec__replacement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields
   } }), get(keys({ us_split_discrs1 = {
@@ -1751,7 +1634,7 @@ axiom H9 : ((temp___599 = get2(model__({ us_split_discrs1 = {
   rec__replacement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields
   } }), { us_split_fields3 = { rec__replacement__inverse_sets__cursor__node =
-  c } })))) and (in_range4(temp___599) and (temp___599 = get2(model__({
+  c } })))) and (in_range4(temp___645) and (temp___645 = get2(model__({
   us_split_discrs1 = { rec__replacement__inverse_sets__map__capacity =
   d__split_discrs }; us_split_fields1 = {
   rec__replacement__inverse_sets__map = d__split_fields } }), get(keys({
@@ -1762,7 +1645,4 @@ axiom H9 : ((temp___599 = get2(model__({ us_split_discrs1 = {
   rec__replacement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields
   } }), { us_split_fields3 = { rec__replacement__inverse_sets__cursor__node =
-  c } }))))))
-
- (* File "a-cforma.ads", line 997, characters 0-0 *)
-goal WP_parameter_def : (to_rep(first(a1)) <= temp___599)
+  c } })))))) -> (to_rep(first(a1)) <= temp___645))))))))))

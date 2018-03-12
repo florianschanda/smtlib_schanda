@@ -81,12 +81,6 @@ axiom bool_ge_axiom :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -98,6 +92,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -240,18 +240,11 @@ logic x2 : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic dispatch__incr6__result : integer
-
-logic o : int
-
-axiom H : (to_rep(x) <  2147483647)
-
-axiom H1 : (((bool_lt(to_rep(x), 2147483647) = true) ->
-  (to_rep(dispatch__incr6__result) = (to_rep(x) + 1))) and
-  ((not (bool_lt(to_rep(x), 2147483647) = true)) ->
-  (to_rep(dispatch__incr6__result) = 0)))
-
-axiom H2 : (to_rep(x) <  2147483647)
-
  (* File "dispatch.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : (to_rep(dispatch__incr6__result) = (to_rep(x) + 1))
+goal WP_parameter_def :
+  (forall dispatch__incr6__result:integer. ((to_rep(x) <  2147483647) ->
+  ((((bool_lt(to_rep(x), 2147483647) = true) and
+  (to_rep(dispatch__incr6__result) = (to_rep(x) + 1))) or
+  ((not (bool_lt(to_rep(x), 2147483647) = true)) and
+  (to_rep(dispatch__incr6__result) = 0))) -> ((to_rep(x) <  2147483647) ->
+  (to_rep(dispatch__incr6__result) = (to_rep(x) + 1))))))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -134,15 +134,5 @@ function t__ref___projection(a: t__ref) : t = (a).t__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : int
-
-logic x1 : int
-
-logic result : int
-
-logic x2 : int
-
-axiom H : in_range1(x)
-
  (* File "type_invariant_legal_6.adb", line 38, characters 0-0 *)
-goal WP_parameter_def : (not (x = 0))
+goal WP_parameter_def : (forall x:int. (in_range1(x) -> (not (x = 0))))

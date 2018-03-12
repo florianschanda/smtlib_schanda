@@ -182,15 +182,7 @@ logic e : us_rep
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : int
-
-logic o1 : us_rep
-
-logic o2 : us_rep
-
-axiom H : in_range(i)
-
-axiom H1 : ((o = to_integer(e)) and in_range1(o))
-
  (* File "use_types_with_invariants_no_spark.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : ((- 2147483648) <  o)
+goal WP_parameter_def :
+  (forall o:int. (in_range(i) -> (((o = to_integer(e)) and in_range1(o)) ->
+  ((- 2147483648) <  o))))

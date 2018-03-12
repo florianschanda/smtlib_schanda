@@ -1039,12 +1039,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1056,6 +1050,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1124,16 +1124,6 @@ logic val3 : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic o : t
-
-logic o1 : t
-
-axiom H : tqtisFinite(val1)
-
-axiom H1 : tqtisFinite(val2)
-
-axiom H2 : tqtisFinite(val3)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
@@ -1149,13 +1139,12 @@ logic fliteral3 : t
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000014916681462400413486581930630925867674752943069200813788543036666412556770140236609872349780800855606723023206511672202906825456190450605320972329659184169382962521584637562754990408148532870525882893108730127829530828434521177014240063373646006445484595127398530700430674412116673033257292007225854867103693937314652998016306639783579157665371894836425781250000000000000000000000000000000000000000000000000000))
 
-axiom H3 : ((le(neg(fliteral1), val1) and le(val1, fliteral1)) and
-  ((le(neg(fliteral1), val2) and le(val2, fliteral1)) and
-  ((le(neg(fliteral2), val3) and le(val3, neg(fliteral3))) and le(val1,
-  val2))))
-
-axiom H4 : ((o = div(NearestTiesToEven, val1, val3)) and
-  tqtisFinite(div(NearestTiesToEven, val1, val3)))
-
  (* File "spark-floating_point_arithmetic_lemmas.ads", line 96, characters 0-0 *)
-goal WP_parameter_def : (not is_zero(val3))
+goal WP_parameter_def :
+  (forall o:t. (tqtisFinite(val1) -> (tqtisFinite(val2) ->
+  (tqtisFinite(val3) -> (((le(neg(fliteral1), val1) and le(val1,
+  fliteral1)) and ((le(neg(fliteral1), val2) and le(val2, fliteral1)) and
+  ((le(neg(fliteral2), val3) and le(val3, neg(fliteral3))) and le(val1,
+  val2)))) -> (((o = div(NearestTiesToEven, val1, val3)) and
+  tqtisFinite(div(NearestTiesToEven, val1, val3))) ->
+  (not is_zero(val3))))))))

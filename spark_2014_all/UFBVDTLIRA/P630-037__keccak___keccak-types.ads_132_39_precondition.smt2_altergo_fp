@@ -650,7 +650,15 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type unsigned_2
 
-predicate in_range1(x: t) = (ule(of_int(0), x) and ule(x, of_int(3)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 3)
+
+predicate in_range1(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 3))
 
@@ -690,9 +698,9 @@ axiom shift_left_2__def_axiom :
   (forall value:t.
   (forall amount:int [shift_left_2(value, amount)]. ((in_range1(value) and
   in_range(amount)) -> (((amount <  8) -> (shift_left_2(value,
-  amount) = bw_and(lsl_bv(value, of_int(amount)), of_int(3)))) and
-  ((not (amount <  8)) -> (shift_left_2(value, amount) = bw_and(of_int(0),
-  of_int(3))))))))
+  amount) = bw_and(lsl_bv(value, of_int(amount)), rliteral1))) and
+  ((not (amount <  8)) -> (shift_left_2(value, amount) = bw_and(rliteral,
+  rliteral1)))))))
 
 logic shift_right_2 : t, int -> t
 
@@ -708,9 +716,9 @@ axiom shift_right_2__def_axiom :
   (forall value:t.
   (forall amount:int [shift_right_2(value, amount)]. ((in_range1(value) and
   in_range(amount)) -> (((amount <  8) -> (shift_right_2(value,
-  amount) = bw_and(lsr_bv(value, of_int(amount)), of_int(3)))) and
-  ((not (amount <  8)) -> (shift_right_2(value, amount) = bw_and(of_int(0),
-  of_int(3))))))))
+  amount) = bw_and(lsr_bv(value, of_int(amount)), rliteral1))) and
+  ((not (amount <  8)) -> (shift_right_2(value, amount) = bw_and(rliteral,
+  rliteral1)))))))
 
 logic value : t
 
@@ -720,19 +728,7 @@ logic amount : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : int
-
-logic o1 : t
-
-logic o2 : t
-
-axiom H : in_range1(value)
-
-axiom H1 : in_range(amount)
-
-axiom H2 : (amount <= 2)
-
-axiom H3 : ((o = (2 - amount)) and in_range((2 - amount)))
-
  (* File "keccak-types.ads", line 40, characters 0-0 *)
-goal WP_parameter_def : (o <= 2)
+goal WP_parameter_def :
+  (forall o:int. (in_range1(value) -> (in_range(amount) -> ((amount <= 2) ->
+  (((o = (2 - amount)) and in_range((2 - amount))) -> (o <= 2))))))

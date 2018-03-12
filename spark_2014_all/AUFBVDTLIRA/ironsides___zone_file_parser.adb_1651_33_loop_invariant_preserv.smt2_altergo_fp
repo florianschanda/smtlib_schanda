@@ -599,12 +599,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -616,6 +610,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -736,24 +736,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -764,17 +746,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -784,37 +766,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 logic to_upper : int -> int
 
@@ -960,11 +914,6 @@ logic blankdomainname : (int,character) farray
 logic attr__ATTRIBUTE_ADDRESS : int
 
 logic rr_type__blankdomainname__aggregate_def : int -> (int,character) farray
-
-axiom def_axiom :
-  (forall temp___136:int.
-  (forall temp___137:int.
-  ((rr_type__blankdomainname__aggregate_def(temp___136)[temp___137]) = of_rep(temp___136))))
 
 type query_type
 
@@ -1153,1519 +1102,348 @@ logic attr__ATTRIBUTE_ADDRESS23 : int
 
 logic zone_file_parser__parseownerttlclassandrecordtype__token__aggregate_def : int -> (int,character) farray
 
-axiom def_axiom1 :
-  (forall temp___1768:int.
-  (forall temp___1769:int.
-  ((zone_file_parser__parseownerttlclassandrecordtype__token__aggregate_def(temp___1768)[temp___1769]) = of_rep(temp___1768))))
+axiom def_axiom :
+  (forall temp___1827:int. (in_range2(temp___1827) ->
+  (forall temp___1828:int.
+  (to_rep((zone_file_parser__parseownerttlclassandrecordtype__token__aggregate_def(temp___1827)[temp___1828])) = temp___1827))))
 
 axiom blankdomainname__def_axiom :
   (blankdomainname = rr_type__blankdomainname__aggregate_def(32))
 
-logic newowner : (int,character) farray
-
-logic newttl : t
-
-logic newclass : int
-
-logic newtype : int
-
-logic success : bool
-
-logic begidx : int
-
-logic endidx : int
-
-logic token : (int,character) farray
-
-logic lengthoftoken : int
-
-logic tokentype : int
-
-logic recordtypefound : bool
-
-logic firstchar : int
-
-logic lastchar : int
-
-logic i : int
-
-logic i1 : int
-
-logic o : int
-
-logic temp___1771 : (int,character) farray
-
-logic temp___1773 : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic temp___1770 : int
-
-logic o3 : character
-
-logic o4 : int
-
-logic o5 : (int,character) farray
-
-logic temp___1777 : (int,character) farray
-
-logic temp___1776 : int
-
-logic temp___1779 : int
-
-logic o6 : character
-
-logic o7 : int
-
-logic o8 : (int,character) farray
-
-logic o9 : int
-
-logic temp___1784 : (int,character) farray
-
-logic temp___1783 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic temp___1782 : int
-
-logic o12 : character
-
-logic o13 : int
-
-logic o14 : (int,character) farray
-
-logic o15 : int
-
-logic o16 : int
-
-logic o17 : int
-
-logic o18 : int
-
-logic newowner1 : (int,character) farray
-
-logic success1 : bool
-
-logic endidx1 : int
-
-logic lengthoftoken1 : int
-
-logic tokentype1 : int
-
-logic i2 : int
-
-logic i3 : int
-
-logic result : int
-
-logic begidx1 : int
-
-logic result1 : (int,character) farray
-
-logic token1 : (int,character) farray
-
-logic result2 : bool
-
-logic recordtypefound1 : bool
-
-logic begidx2 : int
-
-logic endidx2 : int
-
-logic tokentype2 : int
-
-logic result3 : int
-
-logic lengthoftoken2 : int
-
-logic result4 : int
-
-logic i4 : int
-
-logic token2 : (int,character) farray
-
-logic i5 : int
-
-logic result5 : (int,character) farray
-
-logic token3 : (int,character) farray
-
-logic result6 : int
-
-logic i6 : int
-
-logic token4 : (int,character) farray
-
-logic i7 : int
-
-logic token5 : (int,character) farray
-
-logic i8 : int
-
-logic token6 : (int,character) farray
-
-logic i9 : int
-
-logic token7 : (int,character) farray
-
-logic i10 : int
-
-logic token8 : (int,character) farray
-
-logic i11 : int
-
-logic token9 : (int,character) farray
-
-logic i12 : int
-
-logic result7 : bool
-
-logic success2 : bool
-
-logic result8 : (int,character) farray
-
-logic newowner2 : (int,character) farray
-
-logic result9 : int
-
-logic i13 : int
-
-logic newowner3 : (int,character) farray
-
-logic i14 : int
-
-logic result10 : (int,character) farray
-
-logic newowner4 : (int,character) farray
-
-logic result11 : int
-
-logic i15 : int
-
-logic newowner5 : (int,character) farray
-
-logic i16 : int
-
-logic newowner6 : (int,character) farray
-
-logic i17 : int
-
-logic newowner7 : (int,character) farray
-
-logic i18 : int
-
-logic newowner8 : (int,character) farray
-
-logic i19 : int
-
-logic newowner9 : (int,character) farray
-
-logic i20 : int
-
-logic newowner10 : (int,character) farray
-
-logic i21 : int
-
-logic newowner11 : (int,character) farray
-
-logic i22 : int
-
-logic newowner12 : (int,character) farray
-
-logic i23 : int
-
-logic newowner13 : (int,character) farray
-
-logic success3 : bool
-
-logic i24 : int
-
-logic newowner14 : (int,character) farray
-
-logic success4 : bool
-
-logic i25 : int
-
-logic result12 : bool
-
-logic success5 : bool
-
-logic result13 : int
-
-logic begidx3 : int
-
-logic success6 : bool
-
-logic begidx4 : int
-
-logic success7 : bool
-
-logic begidx5 : int
-
-logic newowner15 : (int,character) farray
-
-logic success8 : bool
-
-logic begidx6 : int
-
-logic endidx3 : int
-
-logic token10 : (int,character) farray
-
-logic lengthoftoken3 : int
-
-logic tokentype3 : int
-
-logic i26 : int
-
-logic i27 : int
-
-logic newowner16 : (int,character) farray
-
-logic success9 : bool
-
-logic begidx7 : int
-
-logic endidx4 : int
-
-logic token11 : (int,character) farray
-
-logic lengthoftoken4 : int
-
-logic tokentype4 : int
-
-logic i28 : int
-
-logic i29 : int
-
-logic begidx8 : int
-
-logic endidx5 : int
-
-logic tokentype5 : int
-
-logic newttl1 : t
-
-logic newclass1 : int
-
-logic newtype1 : int
-
-logic success10 : bool
-
-logic begidx9 : int
-
-logic endidx6 : int
-
-logic token12 : (int,character) farray
-
-logic tokentype6 : int
-
-logic recordtypefound2 : bool
-
-logic firstchar1 : int
-
-logic lastchar1 : int
-
-logic i30 : int
-
-logic result14 : int
-
-logic i31 : int
-
-logic token13 : (int,character) farray
-
-logic i32 : int
-
-logic result15 : (int,character) farray
-
-logic token14 : (int,character) farray
-
-logic result16 : int
-
-logic i33 : int
-
-logic token15 : (int,character) farray
-
-logic i34 : int
-
-logic token16 : (int,character) farray
-
-logic i35 : int
-
-logic token17 : (int,character) farray
-
-logic i36 : int
-
-logic token18 : (int,character) farray
-
-logic i37 : int
-
-logic token19 : (int,character) farray
-
-logic i38 : int
-
-logic token20 : (int,character) farray
-
-logic i39 : int
-
-logic token21 : (int,character) farray
-
-logic i40 : int
-
-logic token22 : (int,character) farray
-
-logic i41 : int
-
-logic newttl2 : t
-
-logic success11 : bool
-
-logic result17 : int
-
-logic firstchar2 : int
-
-logic result18 : int
-
-logic lastchar2 : int
-
-logic result19 : int
-
-logic newclass2 : int
-
-logic result20 : int
-
-logic newclass3 : int
-
-logic result21 : int
-
-logic newclass4 : int
-
-logic result22 : int
-
-logic newclass5 : int
-
-logic newclass6 : int
-
-logic newclass7 : int
-
-logic newclass8 : int
-
-logic newclass9 : int
-
-logic newclass10 : int
-
-logic newclass11 : int
-
-logic newclass12 : int
-
-logic newclass13 : int
-
-logic result23 : bool
-
-logic recordtypefound3 : bool
-
-logic result24 : int
-
-logic newtype2 : int
-
-logic result25 : bool
-
-logic success12 : bool
-
-logic newtype3 : int
-
-logic success13 : bool
-
-logic recordtypefound4 : bool
-
-logic newtype4 : int
-
-logic success14 : bool
-
-logic recordtypefound5 : bool
-
-logic newclass14 : int
-
-logic newtype5 : int
-
-logic success15 : bool
-
-logic recordtypefound6 : bool
-
-logic firstchar3 : int
-
-logic lastchar3 : int
-
-logic newclass15 : int
-
-logic newtype6 : int
-
-logic success16 : bool
-
-logic recordtypefound7 : bool
-
-logic firstchar4 : int
-
-logic lastchar4 : int
-
-logic newttl3 : t
-
-logic newclass16 : int
-
-logic newtype7 : int
-
-logic success17 : bool
-
-logic recordtypefound8 : bool
-
-logic firstchar5 : int
-
-logic lastchar5 : int
-
-logic newttl4 : t
-
-logic newclass17 : int
-
-logic newtype8 : int
-
-logic success18 : bool
-
-logic recordtypefound9 : bool
-
-logic firstchar6 : int
-
-logic lastchar6 : int
-
-logic result26 : bool
-
-logic success19 : bool
-
-logic success20 : bool
-
-logic success21 : bool
-
-logic result27 : int
-
-logic begidx10 : int
-
-logic success22 : bool
-
-logic begidx11 : int
-
-logic success23 : bool
-
-logic begidx12 : int
-
-logic begidx13 : int
-
-logic endidx7 : int
-
-logic tokentype7 : int
-
-logic newttl5 : t
-
-logic newclass18 : int
-
-logic newtype9 : int
-
-logic success24 : bool
-
-logic begidx14 : int
-
-logic endidx8 : int
-
-logic token23 : (int,character) farray
-
-logic tokentype8 : int
-
-logic recordtypefound10 : bool
-
-logic firstchar7 : int
-
-logic lastchar7 : int
-
-logic i42 : int
-
-logic newttl6 : t
-
-logic newclass19 : int
-
-logic newtype10 : int
-
-logic success25 : bool
-
-logic begidx15 : int
-
-logic endidx9 : int
-
-logic token24 : (int,character) farray
-
-logic tokentype9 : int
-
-logic recordtypefound11 : bool
-
-logic firstchar8 : int
-
-logic lastchar8 : int
-
-logic i43 : int
-
-axiom H : (rr_type__blankdomainname__aggregate_def(32) = blankdomainname)
-
-axiom H1 : true
-
-axiom H2 : in_range3(newclass)
-
-axiom H3 : in_range7(newtype)
-
-axiom H4 : in_range5(zlength)
-
-axiom H5 : (result = begidx)
-
-axiom H6 : (begidx1 = 1)
-
-axiom H7 : in_range5(begidx1)
-
-axiom H8 : ((1 <= 256) -> in_range5(endidx))
-
-axiom H9 : (result1 = token)
-
-axiom H10 :
-  (token1 = zone_file_parser__parseownerttlclassandrecordtype__token__aggregate_def(32))
-
-axiom H11 : ((1 <= 256) -> in_range5(lengthoftoken))
-
-axiom H12 : ((0 <= 10) -> in_range4(tokentype))
-
-axiom H13 : (result2 = recordtypefound)
-
-axiom H14 : (recordtypefound1 = of_int1(0))
-
-axiom H15 : ((0 <= 255) -> in_range2(firstchar))
-
-axiom H16 : ((0 <= 255) -> in_range2(lastchar))
-
-axiom H17 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (((((begidx2 <= endidx2) and
+axiom def_axiom1 :
+  (forall temp___158:int. (in_range2(temp___158) ->
+  (forall temp___159:int.
+  (to_rep((rr_type__blankdomainname__aggregate_def(temp___158)[temp___159])) = temp___158))))
+
+ (* File "zone_file_parser.adb", line 1595, characters 0-0 *)
+goal WP_parameter_def :
+  (forall newowner:(int,character) farray. forall newclass:int.
+  forall newtype:int. forall success:bool. forall begidx:int.
+  forall endidx:int. forall token:(int,character) farray.
+  forall lengthoftoken:int. forall tokentype:int.
+  forall recordtypefound:bool. forall firstchar:int. forall lastchar:int.
+  forall i:int. forall i1:int. forall o:int.
+  forall temp___1830:(int,character) farray. forall temp___1832:int.
+  forall o1:int. forall o2:int. forall temp___1829:int. forall o3:character.
+  forall o4:int. forall o5:(int,character) farray.
+  forall temp___1836:(int,character) farray. forall temp___1835:int.
+  forall temp___1838:int. forall o6:character. forall o7:int.
+  forall o8:(int,character) farray. forall o9:int.
+  forall temp___1843:(int,character) farray. forall temp___1842:int.
+  forall o10:int. forall o11:int. forall temp___1841:int.
+  forall o12:character. forall o13:int. forall o14:(int,character) farray.
+  forall o15:int. forall o16:int. forall o17:int. forall o18:int.
+  forall newowner1:(int,character) farray. forall success1:bool.
+  forall endidx1:int. forall lengthoftoken1:int. forall tokentype1:int.
+  forall i2:int. forall i3:int. forall result:int. forall begidx1:int.
+  forall result1:(int,character) farray.
+  forall token1:(int,character) farray. forall result2:bool.
+  forall recordtypefound1:bool. forall begidx2:int. forall endidx2:int.
+  forall tokentype2:int. forall result3:int. forall lengthoftoken2:int.
+  forall result4:int. forall i4:int. forall token2:(int,character) farray.
+  forall i5:int. forall result5:(int,character) farray.
+  forall token3:(int,character) farray. forall token4:(int,character) farray.
+  forall i6:int. forall token5:(int,character) farray. forall i7:int.
+  forall token6:(int,character) farray. forall i8:int.
+  forall token7:(int,character) farray. forall i9:int. forall result6:bool.
+  forall success2:bool. forall result7:(int,character) farray.
+  forall newowner2:(int,character) farray. forall result8:int.
+  forall i10:int. forall newowner3:(int,character) farray. forall i11:int.
+  forall result9:(int,character) farray.
+  forall newowner4:(int,character) farray.
+  forall newowner5:(int,character) farray. forall i12:int.
+  forall newowner6:(int,character) farray. forall i13:int.
+  forall newowner7:(int,character) farray. forall i14:int.
+  forall newowner8:(int,character) farray. forall i15:int.
+  forall newowner9:map__ref. forall success3:bool__ref. forall i16:int__ref.
+  forall newowner10:(int,character) farray. forall success4:bool.
+  forall i17:int. forall result10:bool__ref. forall success5:bool.
+  forall result11:int__ref. forall begidx3:int. forall success6:bool__ref.
+  forall begidx4:int__ref. forall success7:bool. forall begidx5:int.
+  forall newowner11:map__ref. forall success8:bool__ref.
+  forall begidx6:int__ref. forall endidx3:int__ref. forall token8:map__ref.
+  forall lengthoftoken3:int__ref. forall tokentype3:int__ref.
+  forall i18:int__ref. forall i19:int__ref.
+  forall newowner12:(int,character) farray. forall success9:bool.
+  forall begidx7:int. forall endidx4:int.
+  forall token9:(int,character) farray. forall lengthoftoken4:int.
+  forall tokentype4:int. forall i20:int. forall i21:int. forall begidx8:int.
+  forall endidx5:int. forall tokentype5:int. forall newttl:t.
+  forall newclass1:int. forall newtype1:int. forall success10:bool.
+  forall begidx9:int. forall endidx6:int.
+  forall token10:(int,character) farray. forall tokentype6:int.
+  forall recordtypefound2:bool. forall firstchar1:int. forall lastchar1:int.
+  forall i22:int. forall result12:int__ref. forall i23:int.
+  forall token11:(int,character) farray. forall i24:int.
+  forall result13:map__ref. forall token12:(int,character) farray.
+  forall token13:map__ref. forall i25:int__ref.
+  forall token14:(int,character) farray. forall i26:int.
+  forall token15:map__ref. forall i27:int__ref.
+  forall token16:(int,character) farray. forall i28:int. forall newttl1:t.
+  forall success11:bool. forall result14:int__ref. forall firstchar2:int.
+  forall result15:int__ref. forall lastchar2:int. forall result16:int__ref.
+  forall newclass2:int. forall result17:int__ref. forall newclass3:int.
+  forall result18:int__ref. forall newclass4:int. forall result19:int__ref.
+  forall newclass5:int. forall newclass6:int__ref. forall newclass7:int.
+  forall newclass8:int__ref. forall newclass9:int.
+  forall newclass10:int__ref. forall newclass11:int.
+  forall newclass12:int__ref. forall newclass13:int.
+  forall result20:bool__ref. forall recordtypefound3:bool.
+  forall result21:int__ref. forall newtype2:int. forall result22:bool__ref.
+  forall success12:bool. forall newtype3:int__ref.
+  forall success13:bool__ref. forall recordtypefound4:bool__ref.
+  forall newtype4:int. forall success14:bool. forall recordtypefound5:bool.
+  forall newclass14:int__ref. forall newtype5:int__ref.
+  forall success15:bool__ref. forall recordtypefound6:bool__ref.
+  forall firstchar3:int__ref. forall lastchar3:int__ref.
+  forall newclass15:int. forall newtype6:int. forall success16:bool.
+  forall recordtypefound7:bool. forall firstchar4:int. forall lastchar4:int.
+  forall newttl2:t__ref. forall newclass16:int__ref.
+  forall newtype7:int__ref. forall success17:bool__ref.
+  forall recordtypefound8:bool__ref. forall firstchar5:int__ref.
+  forall lastchar5:int__ref. forall newttl3:t. forall newclass17:int.
+  forall newtype8:int. forall success18:bool. forall recordtypefound9:bool.
+  forall firstchar6:int. forall lastchar6:int. forall result23:bool__ref.
+  forall success19:bool. forall success20:bool__ref. forall success21:bool.
+  forall result24:int__ref. forall begidx10:int. forall success22:bool__ref.
+  forall begidx11:int__ref. forall success23:bool. forall begidx12:int.
+  forall begidx13:int. forall endidx7:int. forall tokentype7:int.
+  forall newttl4:t__ref. forall newclass18:int__ref.
+  forall newtype9:int__ref. forall success24:bool__ref.
+  forall begidx14:int__ref. forall endidx8:int__ref. forall token17:map__ref.
+  forall tokentype8:int__ref. forall recordtypefound10:bool__ref.
+  forall firstchar7:int__ref. forall lastchar7:int__ref. forall i29:int__ref.
+  forall newttl5:t. forall newclass19:int. forall newtype10:int.
+  forall success25:bool. forall begidx15:int. forall endidx9:int.
+  forall token18:(int,character) farray. forall tokentype9:int.
+  forall recordtypefound11:bool. forall firstchar8:int. forall lastchar8:int.
+  forall i30:int.
+  ((rr_type__blankdomainname__aggregate_def(32) = blankdomainname) ->
+  (in_range3(newclass) -> (in_range7(newtype) -> (in_range5(zlength) ->
+  (((result = begidx) and (begidx1 = 1)) -> (in_range5(begidx1) ->
+  (((1 <= 256) -> in_range5(endidx)) -> (((result1 = token) and
+  (token1 = zone_file_parser__parseownerttlclassandrecordtype__token__aggregate_def(32))) ->
+  (((1 <= 256) -> in_range5(lengthoftoken)) -> (((0 <= 10) ->
+  in_range4(tokentype)) -> (((result2 = recordtypefound) and
+  (recordtypefound1 = of_int1(0))) -> (((0 <= 255) ->
+  in_range2(firstchar)) -> (((0 <= 255) -> in_range2(lastchar)) ->
+  (((((not (to_rep((zonefileline[1])) = 32)) and
+  (not (to_rep((zonefileline[1])) = 9))) and (((((((begidx2 <= endidx2) and
   (begidx2 <= zlength)) and (endidx2 <= zlength)) and ((tokentype2 = 1) ->
-  (forall i44:int. (((begidx2 <= i44) and (i44 <= endidx2)) ->
-  ((48 <= to_rep((zonefileline[i44]))) and
-  (to_rep((zonefileline[i44])) <= 57)))))) and ((in_range5(begidx2) and
-  in_range5(endidx2)) and in_range4(tokentype2))))
-
-axiom H18 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) ->
-  ((o = ((endidx2 - begidx2) + 1)) and in_range5(((endidx2 - begidx2) + 1))))
-
-axiom H19 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (result3 = lengthoftoken))
-
-axiom H20 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (lengthoftoken2 = o))
-
-axiom H21 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (begidx2 = r109b))
-
-axiom H22 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> in_range5(r109b))
-
-axiom H23 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (endidx2 = r110b))
-
-axiom H24 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> in_range5(r110b))
-
-axiom H25 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (result4 = i))
-
-axiom H26 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (i4 = r109b))
-
-axiom H27 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (((r109b <= i4) and
-  (i4 <= r110b)) -> (((temp___1771 = token1) and ((temp___1773 = i4) and
-  (((1 <= begidx2) and (begidx2 <= endidx2)) and ((((r109b <= r110b) ->
-  dynamic_property(r109b, r110b, i5)) and ((r109b <= i5) and
-  (i5 <= r110b))) and ((((to_rep(o3) = to_rep((zonefileline[i5]))) and
-  ((((((o1 = (i5 + 1)) and in_range1((i5 + 1))) and
-  (o2 = (o1 - begidx2))) and ((temp___1770 = o2) and in_range1(o2))) and
-  (((1 <= temp___1770) and (temp___1770 <= 256)) and (o4 = temp___1770))) and
-  (o5 = (token2[o4 <- o3])))) and ((result5 = token2) and (token3 = o5))) and
-  (i5 = r110b)))))) and (((i9 = i5) and (token6 = token3)) and
-  ((i10 = i5) and (token7 = token3))))))
-
-axiom H28 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (((r109b <= i4) and
-  (i4 <= r110b)) -> (i11 = i9)))
-
-axiom H29 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (((r109b <= i4) and
-  (i4 <= r110b)) -> (token8 = token6)))
-
-axiom H30 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (((r109b <= i4) and
-  (i4 <= r110b)) -> (i12 = i10)))
-
-axiom H31 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (((r109b <= i4) and
-  (i4 <= r110b)) -> (token9 = token7)))
-
-axiom H32 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((not ((r109b <= i4) and
-  (i4 <= r110b))) -> (i11 = i4)))
-
-axiom H33 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((not ((r109b <= i4) and
-  (i4 <= r110b))) -> (token8 = token1)))
-
-axiom H34 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((not ((r109b <= i4) and
-  (i4 <= r110b))) -> (i12 = i4)))
-
-axiom H35 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((not ((r109b <= i4) and
-  (i4 <= r110b))) -> (token9 = token1)))
-
-axiom H36 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((128 <= lengthoftoken2) ->
-  (result7 = success)))
-
-axiom H37 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((128 <= lengthoftoken2) ->
-  (success2 = of_int1(0))))
-
-axiom H38 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((128 <= lengthoftoken2) ->
-  (i24 = i1)))
-
-axiom H39 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((128 <= lengthoftoken2) ->
-  (success3 = success2)))
-
-axiom H40 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((128 <= lengthoftoken2) ->
-  (newowner13 = newowner)))
-
-axiom H41 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((128 <= lengthoftoken2) ->
-  (i25 = i3)))
-
-axiom H42 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((128 <= lengthoftoken2) ->
-  (success4 = success2)))
-
-axiom H43 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((128 <= lengthoftoken2) ->
-  (newowner14 = newowner1)))
-
-axiom H44 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((not (128 <= lengthoftoken2)) ->
-  (result8 = newowner)))
-
-axiom H45 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((not (128 <= lengthoftoken2)) ->
-  (newowner2 = blankdomainname)))
-
-axiom H46 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((not (128 <= lengthoftoken2)) ->
-  (lengthoftoken2 = r112b)))
-
-axiom H47 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((not (128 <= lengthoftoken2)) ->
-  in_range5(r112b)))
-
-axiom H48 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((not (128 <= lengthoftoken2)) ->
-  (result9 = i1)))
-
-axiom H49 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((not (128 <= lengthoftoken2)) ->
-  (i13 = 1)))
-
-axiom H50 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((not (128 <= lengthoftoken2)) ->
-  (((1 <= i13) and (i13 <= r112b)) -> (((temp___1777 = newowner2) and
-  ((temp___1776 = i13) and ((temp___1779 = lengthoftoken2) and
-  (((lengthoftoken2 = temp___1779) and (lengthoftoken2 <  128)) and
-  (((((1 <= r112b) -> dynamic_property1(1, r112b, i14)) and
-  (forall temp___1778:int. (((1 <= temp___1778) and (temp___1778 <= 128)) ->
-  ((i14 <= temp___1778) ->
-  ((newowner3[temp___1778]) = (temp___1777[temp___1778])))))) and
-  ((1 <= i14) and (i14 <= r112b))) and
-  ((((to_rep(o6) = to_rep((token8[i14]))) and ((((1 <= i14) and
-  (i14 <= 128)) and (o7 = i14)) and (o8 = (newowner3[o7 <- o6])))) and
-  ((result10 = newowner3) and (newowner4 = o8))) and (i14 = r112b))))))) and
-  (((i20 = i14) and (newowner9 = newowner4)) and ((i21 = i14) and
-  (newowner10 = newowner4)))))))
-
-axiom H51 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((not (128 <= lengthoftoken2)) ->
-  (((1 <= i13) and (i13 <= r112b)) -> (i22 = i20))))
-
-axiom H52 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((not (128 <= lengthoftoken2)) ->
-  (((1 <= i13) and (i13 <= r112b)) -> (newowner11 = newowner9))))
-
-axiom H53 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((not (128 <= lengthoftoken2)) ->
-  (((1 <= i13) and (i13 <= r112b)) -> (i23 = i21))))
-
-axiom H54 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((not (128 <= lengthoftoken2)) ->
-  (((1 <= i13) and (i13 <= r112b)) -> (newowner12 = newowner10))))
-
-axiom H55 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((not (128 <= lengthoftoken2)) ->
-  ((not ((1 <= i13) and (i13 <= r112b))) -> (i22 = i13))))
-
-axiom H56 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((not (128 <= lengthoftoken2)) ->
-  ((not ((1 <= i13) and (i13 <= r112b))) -> (newowner11 = newowner2))))
-
-axiom H57 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((not (128 <= lengthoftoken2)) ->
-  ((not ((1 <= i13) and (i13 <= r112b))) -> (i23 = i13))))
-
-axiom H58 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((not (128 <= lengthoftoken2)) ->
-  ((not ((1 <= i13) and (i13 <= r112b))) -> (newowner12 = newowner2))))
-
-axiom H59 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((not (128 <= lengthoftoken2)) ->
-  (i24 = i22)))
-
-axiom H60 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((not (128 <= lengthoftoken2)) ->
-  (success3 = success)))
-
-axiom H61 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((not (128 <= lengthoftoken2)) ->
-  (newowner13 = newowner11)))
-
-axiom H62 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((not (128 <= lengthoftoken2)) ->
-  (i25 = i23)))
-
-axiom H63 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((not (128 <= lengthoftoken2)) ->
-  (success4 = success1)))
-
-axiom H64 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> ((not (128 <= lengthoftoken2)) ->
-  (newowner14 = newowner12)))
-
-axiom H65 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (((not (zlength <= endidx2)) ->
-  (tokentype2 = 9)) -> (result12 = success3)))
-
-axiom H66 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (((not (zlength <= endidx2)) ->
-  (tokentype2 = 9)) -> (success5 = of_int1(0))))
-
-axiom H67 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (((not (zlength <= endidx2)) ->
-  (tokentype2 = 9)) -> (begidx4 = begidx2)))
-
-axiom H68 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (((not (zlength <= endidx2)) ->
-  (tokentype2 = 9)) -> (success6 = success5)))
-
-axiom H69 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (((not (zlength <= endidx2)) ->
-  (tokentype2 = 9)) -> (begidx5 = begidx2)))
-
-axiom H70 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (((not (zlength <= endidx2)) ->
-  (tokentype2 = 9)) -> (success7 = success5)))
-
-axiom H71 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) ->
-  ((not ((not (zlength <= endidx2)) -> (tokentype2 = 9))) ->
-  ((o9 = (endidx2 + 1)) and in_range5((endidx2 + 1)))))
-
-axiom H72 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) ->
-  ((not ((not (zlength <= endidx2)) -> (tokentype2 = 9))) ->
-  (result13 = begidx2)))
-
-axiom H73 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) ->
-  ((not ((not (zlength <= endidx2)) -> (tokentype2 = 9))) -> (begidx3 = o9)))
-
-axiom H74 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) ->
-  ((not ((not (zlength <= endidx2)) -> (tokentype2 = 9))) ->
-  (begidx4 = begidx3)))
-
-axiom H75 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) ->
-  ((not ((not (zlength <= endidx2)) -> (tokentype2 = 9))) ->
-  (success6 = success3)))
-
-axiom H76 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) ->
-  ((not ((not (zlength <= endidx2)) -> (tokentype2 = 9))) ->
-  (begidx5 = begidx3)))
-
-axiom H77 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) ->
-  ((not ((not (zlength <= endidx2)) -> (tokentype2 = 9))) ->
-  (success7 = success4)))
-
-axiom H78 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (i27 = i24))
-
-axiom H79 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (i26 = i11))
-
-axiom H80 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (tokentype3 = tokentype2))
-
-axiom H81 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) ->
-  (lengthoftoken3 = lengthoftoken2))
-
-axiom H82 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (token10 = token8))
-
-axiom H83 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (endidx3 = endidx2))
-
-axiom H84 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (begidx6 = begidx4))
-
-axiom H85 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (success8 = success6))
-
-axiom H86 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (newowner15 = newowner13))
-
-axiom H87 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (i29 = i25))
-
-axiom H88 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (i28 = i12))
-
-axiom H89 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (tokentype4 = tokentype2))
-
-axiom H90 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) ->
-  (lengthoftoken4 = lengthoftoken2))
-
-axiom H91 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (token11 = token9))
-
-axiom H92 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (endidx4 = endidx2))
-
-axiom H93 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (begidx7 = begidx5))
-
-axiom H94 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (success9 = success7))
-
-axiom H95 : (((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9))) -> (newowner16 = newowner14))
-
-axiom H96 : ((not ((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9)))) -> (i27 = i1))
-
-axiom H97 : ((not ((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9)))) -> (i26 = i))
-
-axiom H98 : ((not ((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9)))) -> (tokentype3 = tokentype))
-
-axiom H99 : ((not ((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9)))) ->
-  (lengthoftoken3 = lengthoftoken))
-
-axiom H100 : ((not ((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9)))) -> (token10 = token1))
-
-axiom H101 : ((not ((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9)))) -> (endidx3 = endidx))
-
-axiom H102 : ((not ((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9)))) -> (begidx6 = begidx1))
-
-axiom H103 : ((not ((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9)))) -> (success8 = success))
-
-axiom H104 : ((not ((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9)))) -> (newowner15 = newowner))
-
-axiom H105 : ((not ((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9)))) -> (i29 = i3))
-
-axiom H106 : ((not ((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9)))) -> (i28 = i2))
-
-axiom H107 : ((not ((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9)))) -> (tokentype4 = tokentype1))
-
-axiom H108 : ((not ((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9)))) ->
-  (lengthoftoken4 = lengthoftoken1))
-
-axiom H109 : ((not ((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9)))) -> (token11 = token1))
-
-axiom H110 : ((not ((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9)))) -> (endidx4 = endidx1))
-
-axiom H111 : ((not ((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9)))) -> (begidx7 = begidx1))
-
-axiom H112 : ((not ((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9)))) -> (success9 = success1))
-
-axiom H113 : ((not ((not (to_rep((zonefileline[1])) = 32)) and
-  (not (to_rep((zonefileline[1])) = 9)))) -> (newowner16 = newowner1))
-
-axiom H114 : (((not (recordtypefound1 = true)) -> (success8 = true)) and
-  ((recordtypefound1 = true) -> (false = true)))
-
-axiom H115 : (((((begidx8 <= endidx5) and (begidx8 <= zlength)) and
+  (forall i31:int. (((begidx2 <= i31) and (i31 <= endidx2)) ->
+  ((48 <= to_rep((zonefileline[i31]))) and
+  (to_rep((zonefileline[i31])) <= 57)))))) and ((in_range5(begidx2) and
+  in_range5(endidx2)) and in_range4(tokentype2))) and
+  ((((o = ((endidx2 - begidx2) + 1)) and
+  in_range5(((endidx2 - begidx2) + 1))) and (({ int__content = result3 } = {
+  int__content = lengthoftoken }) and (lengthoftoken2 = o))) and
+  (((begidx2 = r109b) and in_range5(r109b)) and (((endidx2 = r110b) and
+  in_range5(r110b)) and (((({ int__content = result4 } = { int__content = i
+  }) and (i4 = r109b)) and ((((r109b <= i4) and (i4 <= r110b)) and
+  ((((temp___1830 = token1) and ((temp___1832 = i4) and (((1 <= begidx2) and
+  (begidx2 <= endidx2)) and ((((r109b <= r110b) -> dynamic_property(r109b,
+  r110b, i5)) and ((r109b <= i5) and (i5 <= r110b))) and
+  ((((to_rep(o3) = to_rep((zonefileline[i5]))) and ((((((o1 = (i5 + 1)) and
+  in_range1((i5 + 1))) and (o2 = (o1 - begidx2))) and ((temp___1829 = o2) and
+  in_range1(o2))) and (((1 <= temp___1829) and (temp___1829 <= 256)) and
+  (o4 = temp___1829))) and (o5 = (token2[o4 <- o3])))) and
+  ((result5 = token2) and (token3 = o5))) and (i5 = r110b)))))) and
+  (((i5 = i6) and (token3 = token4)) and ((i7 = i5) and
+  (token5 = token3)))) and ((({ int__content = i8 } = { int__content = i6
+  }) and ({ map__content = token6 } = { map__content = token4 })) and
+  ((i9 = i7) and (token7 = token5))))) or ((not ((r109b <= i4) and
+  (i4 <= r110b))) and (((i4 = i8) and (token1 = token6)) and ((i9 = i4) and
+  (token7 = token1)))))) and ((((128 <= lengthoftoken2) and
+  (((result6 = success) and (success2 = of_int1(0))) and (((i16 = {
+  int__content = i1 }) and ((success3 = { bool__content = success2 }) and
+  (newowner9 = { map__content = newowner }))) and ((i17 = i3) and
+  ((success4 = success2) and (newowner10 = newowner1)))))) or
+  ((not (128 <= lengthoftoken2)) and ((((result7 = newowner) and
+  (newowner2 = blankdomainname)) and (((lengthoftoken2 = r112b) and
+  in_range5(r112b)) and (((result8 = i1) and (i10 = 1)) and ((((1 <= i10) and
+  (i10 <= r112b)) and ((((temp___1836 = newowner2) and
+  ((temp___1835 = i10) and ((temp___1838 = lengthoftoken2) and
+  (((lengthoftoken2 = temp___1838) and (lengthoftoken2 <  128)) and
+  (((((1 <= r112b) -> dynamic_property1(1, r112b, i11)) and
+  (forall temp___1837:int. (((1 <= temp___1837) and (temp___1837 <= 128)) ->
+  ((i11 <= temp___1837) ->
+  ((newowner3[temp___1837]) = (temp___1836[temp___1837])))))) and
+  ((1 <= i11) and (i11 <= r112b))) and
+  ((((to_rep(o6) = to_rep((token6[i11]))) and ((((1 <= i11) and
+  (i11 <= 128)) and (o7 = i11)) and (o8 = (newowner3[o7 <- o6])))) and
+  ((result9 = newowner3) and (newowner4 = o8))) and (i11 = r112b))))))) and
+  (((i11 = i12) and (newowner4 = newowner5)) and ((i13 = i11) and
+  (newowner6 = newowner4)))) and ((({ int__content = i14 } = { int__content =
+  i12 }) and ({ map__content = newowner7 } = { map__content = newowner5
+  })) and ((i15 = i13) and (newowner8 = newowner6))))) or
+  ((not ((1 <= i10) and (i10 <= r112b))) and (((i10 = i14) and
+  (newowner2 = newowner7)) and ((i15 = i10) and
+  (newowner8 = newowner2)))))))) and (((i16 = { int__content = i14 }) and
+  ((success3 = { bool__content = success }) and (newowner9 = { map__content =
+  newowner7 }))) and ((i17 = i15) and ((success4 = success1) and
+  (newowner10 = newowner8))))))) and ((((not (zlength <= endidx2)) ->
+  (tokentype2 = 9)) and (((result10 = success3) and
+  (success5 = of_int1(0))) and (((begidx4 = { int__content = begidx2 }) and
+  (success6 = { bool__content = success5 })) and ((begidx5 = begidx2) and
+  (success7 = success5))))) or ((not ((not (zlength <= endidx2)) ->
+  (tokentype2 = 9))) and ((((o9 = (endidx2 + 1)) and
+  in_range5((endidx2 + 1))) and ((result11 = { int__content = begidx2 }) and
+  (begidx3 = o9))) and (((begidx4 = { int__content = begidx3 }) and
+  (success6 = success3)) and ((begidx5 = begidx3) and
+  (success7 = success4)))))))))))) and (((i19 = i16) and ((i18 = {
+  int__content = i8 }) and ((tokentype3 = { int__content = tokentype2 }) and
+  ((lengthoftoken3 = { int__content = lengthoftoken2 }) and ((token8 = {
+  map__content = token6 }) and ((endidx3 = { int__content = endidx2 }) and
+  ((begidx6 = begidx4) and ((success8 = success6) and
+  (newowner11 = newowner9))))))))) and ((i21 = i17) and ((i20 = i9) and
+  ((tokentype4 = tokentype2) and ((lengthoftoken4 = lengthoftoken2) and
+  ((token9 = token7) and ((endidx4 = endidx2) and ((begidx7 = begidx5) and
+  ((success9 = success7) and (newowner12 = newowner10)))))))))))) or
+  ((not ((not (to_rep((zonefileline[1])) = 32)) and
+  (not (to_rep((zonefileline[1])) = 9)))) and (((i19 = { int__content = i1
+  }) and ((i18 = { int__content = i }) and ((tokentype3 = { int__content =
+  tokentype }) and ((lengthoftoken3 = { int__content = lengthoftoken }) and
+  ((token8 = { map__content = token1 }) and ((endidx3 = { int__content =
+  endidx }) and ((begidx6 = { int__content = begidx1 }) and ((success8 = {
+  bool__content = success }) and (newowner11 = { map__content = newowner
+  }))))))))) and ((i21 = i3) and ((i20 = i2) and
+  ((tokentype4 = tokentype1) and ((lengthoftoken4 = lengthoftoken1) and
+  ((token9 = token1) and ((endidx4 = endidx1) and ((begidx7 = begidx1) and
+  ((success9 = success1) and (newowner12 = newowner1)))))))))))) ->
+  ((((not (recordtypefound1 = true)) and
+  ((success8).bool__content = true)) or ((recordtypefound1 = true) and
+  (false = true))) -> ((((((begidx8 <= endidx5) and (begidx8 <= zlength)) and
   (endidx5 <= zlength)) and ((tokentype5 = 1) ->
-  (forall i44:int. (((begidx8 <= i44) and (i44 <= endidx5)) ->
-  ((48 <= to_rep((zonefileline[i44]))) and
-  (to_rep((zonefileline[i44])) <= 57)))))) and ((in_range5(begidx8) and
-  in_range5(endidx5)) and in_range4(tokentype5)))
-
-axiom H116 : (begidx9 <= endidx6)
-
-axiom H117 : ((((((((0 <= 10) -> in_range4(tokentype6)) and ((1 <= 256) ->
+  (forall i31:int. (((begidx8 <= i31) and (i31 <= endidx5)) ->
+  ((48 <= to_rep((zonefileline[i31]))) and
+  (to_rep((zonefileline[i31])) <= 57)))))) and ((in_range5(begidx8) and
+  in_range5(endidx5)) and in_range4(tokentype5))) -> ((begidx9 <= endidx6) ->
+  (((((((((((0 <= 10) -> in_range4(tokentype6)) and ((1 <= 256) ->
   in_range5(begidx9))) and in_range3(newclass1)) and ((1 <= 256) ->
   in_range5(endidx6))) and ((0 <= 255) -> in_range2(firstchar1))) and
-  in_range7(newtype1)) and ((0 <= 255) -> in_range2(lastchar1)))
-
-axiom H118 : (begidx9 = r114b)
-
-axiom H119 : in_range5(r114b)
-
-axiom H120 : (endidx6 = r115b)
-
-axiom H121 : in_range5(r115b)
-
-axiom H122 : (result14 = i30)
-
-axiom H123 : (i31 = r114b)
-
-axiom H124 : (((r114b <= i31) and (i31 <= r115b)) ->
-  (((temp___1784 = token12) and ((temp___1783 = i31) and (((1 <= begidx9) and
-  (begidx9 <= endidx6)) and ((((r114b <= r115b) -> dynamic_property2(r114b,
-  r115b, i32)) and ((r114b <= i32) and (i32 <= r115b))) and
-  ((((to_rep(o12) = to_rep((zonefileline[i32]))) and
-  ((((((o10 = (i32 + 1)) and in_range1((i32 + 1))) and
-  (o11 = (o10 - begidx9))) and ((temp___1782 = o11) and in_range1(o11))) and
-  (((1 <= temp___1782) and (temp___1782 <= 256)) and
-  (o13 = temp___1782))) and (o14 = (token13[o13 <- o12])))) and
-  ((result15 = token13) and (token14 = o14))) and (i32 = r115b)))))) and
-  (((i38 = i32) and (token19 = token14)) and ((i39 = i32) and
-  (token20 = token14)))))
-
-axiom H125 : (((r114b <= i31) and (i31 <= r115b)) -> (i40 = i38))
-
-axiom H126 : (((r114b <= i31) and (i31 <= r115b)) -> (token21 = token19))
-
-axiom H127 : (((r114b <= i31) and (i31 <= r115b)) -> (i41 = i39))
-
-axiom H128 : (((r114b <= i31) and (i31 <= r115b)) -> (token22 = token20))
-
-axiom H129 : ((not ((r114b <= i31) and (i31 <= r115b))) -> (i40 = i31))
-
-axiom H130 : ((not ((r114b <= i31) and (i31 <= r115b))) ->
-  (token21 = token12))
-
-axiom H131 : ((not ((r114b <= i31) and (i31 <= r115b))) -> (i41 = i31))
-
-axiom H132 : ((not ((r114b <= i31) and (i31 <= r115b))) ->
-  (token22 = token12))
-
-axiom H133 : true
-
-axiom H134 : (((not (tokentype6 = 1)) -> (tokentype6 = 0)) ->
-  (lastchar5 = lastchar1))
-
-axiom H135 : (((not (tokentype6 = 1)) -> (tokentype6 = 0)) ->
-  (firstchar5 = firstchar1))
-
-axiom H136 : (((not (tokentype6 = 1)) -> (tokentype6 = 0)) ->
-  (recordtypefound8 = recordtypefound2))
-
-axiom H137 : (((not (tokentype6 = 1)) -> (tokentype6 = 0)) ->
-  (success17 = success11))
-
-axiom H138 : (((not (tokentype6 = 1)) -> (tokentype6 = 0)) ->
-  (newtype7 = newtype1))
-
-axiom H139 : (((not (tokentype6 = 1)) -> (tokentype6 = 0)) ->
-  (newclass16 = newclass1))
-
-axiom H140 : (((not (tokentype6 = 1)) -> (tokentype6 = 0)) ->
-  (newttl3 = newttl2))
-
-axiom H141 : (((not (tokentype6 = 1)) -> (tokentype6 = 0)) ->
-  (lastchar6 = lastchar1))
-
-axiom H142 : (((not (tokentype6 = 1)) -> (tokentype6 = 0)) ->
-  (firstchar6 = firstchar1))
-
-axiom H143 : (((not (tokentype6 = 1)) -> (tokentype6 = 0)) ->
-  (recordtypefound9 = recordtypefound2))
-
-axiom H144 : (((not (tokentype6 = 1)) -> (tokentype6 = 0)) ->
-  (success18 = success11))
-
-axiom H145 : (((not (tokentype6 = 1)) -> (tokentype6 = 0)) ->
-  (newtype8 = newtype1))
-
-axiom H146 : (((not (tokentype6 = 1)) -> (tokentype6 = 0)) ->
-  (newclass17 = newclass1))
-
-axiom H147 : (((not (tokentype6 = 1)) -> (tokentype6 = 0)) ->
-  (newttl4 = newttl2))
-
-axiom H148 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> ((o15 = to_upper(to_rep((token21[begidx9])))) and
-  in_range2(o15))))
-
-axiom H149 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> (result17 = firstchar1)))
-
-axiom H150 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> (firstchar2 = o15)))
-
-axiom H151 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> ((o16 = to_upper(to_rep((token21[endidx6])))) and
-  in_range2(o16))))
-
-axiom H152 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> (result18 = lastchar1)))
-
-axiom H153 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> (lastchar2 = o16)))
-
-axiom H154 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> (((firstchar2 = 67) and (lastchar2 = 72)) ->
-  (result19 = newclass1))))
-
-axiom H155 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> (((firstchar2 = 67) and (lastchar2 = 72)) ->
-  (newclass2 = 2))))
-
-axiom H156 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> (((firstchar2 = 67) and (lastchar2 = 72)) ->
-  (newclass12 = newclass2))))
-
-axiom H157 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> (((firstchar2 = 67) and (lastchar2 = 72)) ->
-  (newclass13 = newclass2))))
-
-axiom H158 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> ((not ((firstchar2 = 67) and (lastchar2 = 72))) ->
-  (((firstchar2 = 67) and (lastchar2 = 83)) -> (result20 = newclass1)))))
-
-axiom H159 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> ((not ((firstchar2 = 67) and (lastchar2 = 72))) ->
-  (((firstchar2 = 67) and (lastchar2 = 83)) -> (newclass3 = 1)))))
-
-axiom H160 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> ((not ((firstchar2 = 67) and (lastchar2 = 72))) ->
-  (((firstchar2 = 67) and (lastchar2 = 83)) -> (newclass10 = newclass3)))))
-
-axiom H161 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> ((not ((firstchar2 = 67) and (lastchar2 = 72))) ->
-  (((firstchar2 = 67) and (lastchar2 = 83)) -> (newclass11 = newclass3)))))
-
-axiom H162 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> ((not ((firstchar2 = 67) and (lastchar2 = 72))) ->
-  ((not ((firstchar2 = 67) and (lastchar2 = 83))) -> (((firstchar2 = 72) and
-  (lastchar2 = 83)) -> (result21 = newclass1))))))
-
-axiom H163 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> ((not ((firstchar2 = 67) and (lastchar2 = 72))) ->
-  ((not ((firstchar2 = 67) and (lastchar2 = 83))) -> (((firstchar2 = 72) and
-  (lastchar2 = 83)) -> (newclass4 = 3))))))
-
-axiom H164 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> ((not ((firstchar2 = 67) and (lastchar2 = 72))) ->
-  ((not ((firstchar2 = 67) and (lastchar2 = 83))) -> (((firstchar2 = 72) and
-  (lastchar2 = 83)) -> (newclass8 = newclass4))))))
-
-axiom H165 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> ((not ((firstchar2 = 67) and (lastchar2 = 72))) ->
-  ((not ((firstchar2 = 67) and (lastchar2 = 83))) -> (((firstchar2 = 72) and
-  (lastchar2 = 83)) -> (newclass9 = newclass4))))))
-
-axiom H166 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> ((not ((firstchar2 = 67) and (lastchar2 = 72))) ->
-  ((not ((firstchar2 = 67) and (lastchar2 = 83))) ->
-  ((not ((firstchar2 = 72) and (lastchar2 = 83))) -> (((firstchar2 = 73) and
-  (lastchar2 = 78)) -> (result22 = newclass1)))))))
-
-axiom H167 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> ((not ((firstchar2 = 67) and (lastchar2 = 72))) ->
-  ((not ((firstchar2 = 67) and (lastchar2 = 83))) ->
-  ((not ((firstchar2 = 72) and (lastchar2 = 83))) -> (((firstchar2 = 73) and
-  (lastchar2 = 78)) -> (newclass5 = 0)))))))
-
-axiom H168 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> ((not ((firstchar2 = 67) and (lastchar2 = 72))) ->
-  ((not ((firstchar2 = 67) and (lastchar2 = 83))) ->
-  ((not ((firstchar2 = 72) and (lastchar2 = 83))) -> (((firstchar2 = 73) and
-  (lastchar2 = 78)) -> (newclass6 = newclass5)))))))
-
-axiom H169 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> ((not ((firstchar2 = 67) and (lastchar2 = 72))) ->
-  ((not ((firstchar2 = 67) and (lastchar2 = 83))) ->
-  ((not ((firstchar2 = 72) and (lastchar2 = 83))) -> (((firstchar2 = 73) and
-  (lastchar2 = 78)) -> (newclass7 = newclass5)))))))
-
-axiom H170 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> ((not ((firstchar2 = 67) and (lastchar2 = 72))) ->
-  ((not ((firstchar2 = 67) and (lastchar2 = 83))) ->
-  ((not ((firstchar2 = 72) and (lastchar2 = 83))) ->
-  ((not ((firstchar2 = 73) and (lastchar2 = 78))) ->
-  (newclass6 = newclass1)))))))
-
-axiom H171 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> ((not ((firstchar2 = 67) and (lastchar2 = 72))) ->
-  ((not ((firstchar2 = 67) and (lastchar2 = 83))) ->
-  ((not ((firstchar2 = 72) and (lastchar2 = 83))) ->
-  ((not ((firstchar2 = 73) and (lastchar2 = 78))) ->
-  (newclass7 = newclass1)))))))
-
-axiom H172 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> ((not ((firstchar2 = 67) and (lastchar2 = 72))) ->
-  ((not ((firstchar2 = 67) and (lastchar2 = 83))) ->
-  ((not ((firstchar2 = 72) and (lastchar2 = 83))) ->
-  (newclass8 = newclass6))))))
-
-axiom H173 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> ((not ((firstchar2 = 67) and (lastchar2 = 72))) ->
-  ((not ((firstchar2 = 67) and (lastchar2 = 83))) ->
-  ((not ((firstchar2 = 72) and (lastchar2 = 83))) ->
-  (newclass9 = newclass7))))))
-
-axiom H174 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> ((not ((firstchar2 = 67) and (lastchar2 = 72))) ->
-  ((not ((firstchar2 = 67) and (lastchar2 = 83))) ->
-  (newclass10 = newclass8)))))
-
-axiom H175 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> ((not ((firstchar2 = 67) and (lastchar2 = 72))) ->
-  ((not ((firstchar2 = 67) and (lastchar2 = 83))) ->
-  (newclass11 = newclass9)))))
-
-axiom H176 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> ((not ((firstchar2 = 67) and (lastchar2 = 72))) ->
-  (newclass12 = newclass10))))
-
-axiom H177 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> ((not ((firstchar2 = 67) and (lastchar2 = 72))) ->
-  (newclass13 = newclass11))))
-
-axiom H178 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> (lastchar3 = lastchar2)))
-
-axiom H179 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> (firstchar3 = firstchar2)))
-
-axiom H180 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> (recordtypefound6 = recordtypefound2)))
-
-axiom H181 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> (success15 = success10)))
-
-axiom H182 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> (newtype5 = newtype1)))
-
-axiom H183 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> (newclass14 = newclass12)))
-
-axiom H184 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> (lastchar4 = lastchar2)))
-
-axiom H185 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> (firstchar4 = firstchar2)))
-
-axiom H186 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> (recordtypefound7 = recordtypefound2)))
-
-axiom H187 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> (success16 = success10)))
-
-axiom H188 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> (newtype6 = newtype1)))
-
-axiom H189 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((tokentype6 = 2) -> (newclass15 = newclass13)))
-
-axiom H190 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> ((tokentype6 = 3) ->
-  (result23 = recordtypefound2))))
-
-axiom H191 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> ((tokentype6 = 3) ->
-  (recordtypefound3 = of_int1(1)))))
-
-axiom H192 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> ((tokentype6 = 3) ->
-  ((o17 = getrecordtype(zonefileline, begidx9, endidx6)) and
-  in_range7(o17)))))
-
-axiom H193 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> ((tokentype6 = 3) -> (result24 = newtype1))))
-
-axiom H194 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> ((tokentype6 = 3) -> (newtype2 = o17))))
-
-axiom H195 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> ((tokentype6 = 3) ->
-  (recordtypefound4 = recordtypefound3))))
-
-axiom H196 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> ((tokentype6 = 3) -> (success13 = success10))))
-
-axiom H197 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> ((tokentype6 = 3) -> (newtype3 = newtype2))))
-
-axiom H198 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> ((tokentype6 = 3) ->
-  (recordtypefound5 = recordtypefound3))))
-
-axiom H199 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> ((tokentype6 = 3) -> (success14 = success10))))
-
-axiom H200 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> ((tokentype6 = 3) -> (newtype4 = newtype2))))
-
-axiom H201 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> ((not (tokentype6 = 3)) ->
-  (result25 = success10))))
-
-axiom H202 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> ((not (tokentype6 = 3)) ->
-  (success12 = of_int1(0)))))
-
-axiom H203 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> ((not (tokentype6 = 3)) ->
-  (recordtypefound4 = recordtypefound2))))
-
-axiom H204 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> ((not (tokentype6 = 3)) ->
-  (success13 = success12))))
-
-axiom H205 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> ((not (tokentype6 = 3)) ->
-  (newtype3 = newtype1))))
-
-axiom H206 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> ((not (tokentype6 = 3)) ->
-  (recordtypefound5 = recordtypefound2))))
-
-axiom H207 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> ((not (tokentype6 = 3)) ->
-  (success14 = success12))))
-
-axiom H208 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> ((not (tokentype6 = 3)) ->
-  (newtype4 = newtype1))))
-
-axiom H209 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> (lastchar3 = lastchar1)))
-
-axiom H210 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> (firstchar3 = firstchar1)))
-
-axiom H211 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> (recordtypefound6 = recordtypefound4)))
-
-axiom H212 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> (success15 = success13)))
-
-axiom H213 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> (newtype5 = newtype3)))
-
-axiom H214 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> (newclass14 = newclass1)))
-
-axiom H215 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> (lastchar4 = lastchar1)))
-
-axiom H216 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> (firstchar4 = firstchar1)))
-
-axiom H217 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> (recordtypefound7 = recordtypefound5)))
-
-axiom H218 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> (success16 = success14)))
-
-axiom H219 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> (newtype6 = newtype4)))
-
-axiom H220 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  ((not (tokentype6 = 2)) -> (newclass15 = newclass1)))
-
-axiom H221 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  (lastchar5 = lastchar3))
-
-axiom H222 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  (firstchar5 = firstchar3))
-
-axiom H223 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  (recordtypefound8 = recordtypefound6))
-
-axiom H224 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  (success17 = success15))
-
-axiom H225 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  (newtype7 = newtype5))
-
-axiom H226 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  (newclass16 = newclass14))
-
-axiom H227 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  (newttl3 = newttl1))
-
-axiom H228 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  (lastchar6 = lastchar4))
-
-axiom H229 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  (firstchar6 = firstchar4))
-
-axiom H230 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  (recordtypefound9 = recordtypefound7))
-
-axiom H231 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  (success18 = success16))
-
-axiom H232 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  (newtype8 = newtype6))
-
-axiom H233 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  (newclass17 = newclass15))
-
-axiom H234 : ((not ((not (tokentype6 = 1)) -> (tokentype6 = 0))) ->
-  (newttl4 = newttl1))
-
-axiom H235 : (((not (zlength <= endidx6)) -> (tokentype6 = 9)) ->
-  ((not (recordtypefound8 = true)) -> (result26 = success17)))
-
-axiom H236 : (((not (zlength <= endidx6)) -> (tokentype6 = 9)) ->
-  ((not (recordtypefound8 = true)) -> (success19 = of_int1(0))))
-
-axiom H237 : (((not (zlength <= endidx6)) -> (tokentype6 = 9)) ->
-  ((not (recordtypefound8 = true)) -> (success20 = success19)))
-
-axiom H238 : (((not (zlength <= endidx6)) -> (tokentype6 = 9)) ->
-  ((not (recordtypefound8 = true)) -> (success21 = success19)))
-
-axiom H239 : (((not (zlength <= endidx6)) -> (tokentype6 = 9)) ->
-  ((recordtypefound8 = true) -> (success20 = success17)))
-
-axiom H240 : (((not (zlength <= endidx6)) -> (tokentype6 = 9)) ->
-  ((recordtypefound8 = true) -> (success21 = success18)))
-
-axiom H241 : (((not (zlength <= endidx6)) -> (tokentype6 = 9)) ->
-  (begidx11 = begidx9))
-
-axiom H242 : (((not (zlength <= endidx6)) -> (tokentype6 = 9)) ->
-  (success22 = success20))
-
-axiom H243 : (((not (zlength <= endidx6)) -> (tokentype6 = 9)) ->
-  (begidx12 = begidx9))
-
-axiom H244 : (((not (zlength <= endidx6)) -> (tokentype6 = 9)) ->
-  (success23 = success21))
-
-axiom H245 : ((not ((not (zlength <= endidx6)) -> (tokentype6 = 9))) ->
-  ((o18 = (endidx6 + 1)) and in_range5((endidx6 + 1))))
-
-axiom H246 : ((not ((not (zlength <= endidx6)) -> (tokentype6 = 9))) ->
-  (result27 = begidx9))
-
-axiom H247 : ((not ((not (zlength <= endidx6)) -> (tokentype6 = 9))) ->
-  (begidx10 = o18))
-
-axiom H248 : ((not ((not (zlength <= endidx6)) -> (tokentype6 = 9))) ->
-  (begidx11 = begidx10))
-
-axiom H249 : ((not ((not (zlength <= endidx6)) -> (tokentype6 = 9))) ->
-  (success22 = success17))
-
-axiom H250 : ((not ((not (zlength <= endidx6)) -> (tokentype6 = 9))) ->
-  (begidx12 = begidx10))
-
-axiom H251 : ((not ((not (zlength <= endidx6)) -> (tokentype6 = 9))) ->
-  (success23 = success18))
-
-axiom H252 : (((not (recordtypefound8 = true)) -> (success22 = true)) and
-  ((recordtypefound8 = true) -> (false = true)))
-
-axiom H253 : (((((begidx13 <= endidx7) and (begidx13 <= zlength)) and
+  in_range7(newtype1)) and ((0 <= 255) -> in_range2(lastchar1))) and
+  (((begidx9 = r114b) and in_range5(r114b)) and (((endidx6 = r115b) and
+  in_range5(r115b)) and ((((result12 = { int__content = i22 }) and
+  (i23 = r114b)) and ((((r114b <= i23) and (i23 <= r115b)) and
+  ((((temp___1843 = token10) and ((temp___1842 = i23) and
+  (((1 <= begidx9) and (begidx9 <= endidx6)) and ((((r114b <= r115b) ->
+  dynamic_property2(r114b, r115b, i24)) and ((r114b <= i24) and
+  (i24 <= r115b))) and ((((to_rep(o12) = to_rep((zonefileline[i24]))) and
+  ((((((o10 = (i24 + 1)) and in_range1((i24 + 1))) and
+  (o11 = (o10 - begidx9))) and ((temp___1841 = o11) and in_range1(o11))) and
+  (((1 <= temp___1841) and (temp___1841 <= 256)) and
+  (o13 = temp___1841))) and (o14 = (token11[o13 <- o12])))) and
+  ((result13 = { map__content = token11 }) and (token12 = o14))) and
+  (i24 = r115b)))))) and (((i25 = { int__content = i24 }) and (token13 = {
+  map__content = token12 })) and ((i26 = i24) and (token14 = token12)))) and
+  (((i27 = i25) and (token15 = token13)) and ((i28 = i26) and
+  (token16 = token14))))) or ((not ((r114b <= i23) and (i23 <= r115b))) and
+  (((i27 = { int__content = i23 }) and (token15 = { map__content = token10
+  })) and ((i28 = i23) and (token16 = token10)))))) and
+  (((((not (tokentype6 = 1)) -> (tokentype6 = 0)) and (((lastchar5 = {
+  int__content = lastchar1 }) and ((firstchar5 = { int__content = firstchar1
+  }) and ((recordtypefound8 = { bool__content = recordtypefound2 }) and
+  ((success17 = { bool__content = success11 }) and ((newtype7 = {
+  int__content = newtype1 }) and ((newclass16 = { int__content = newclass1
+  }) and (newttl2 = { t__content = newttl1 }))))))) and
+  ((lastchar6 = lastchar1) and ((firstchar6 = firstchar1) and
+  ((recordtypefound9 = recordtypefound2) and ((success18 = success11) and
+  ((newtype8 = newtype1) and ((newclass17 = newclass1) and
+  (newttl3 = newttl1))))))))) or ((not ((not (tokentype6 = 1)) ->
+  (tokentype6 = 0))) and ((((tokentype6 = 2) and
+  (((((o15 = to_upper(to_rep(((token15).map__content[begidx9])))) and
+  in_range2(o15)) and ((result14 = { int__content = firstchar1 }) and
+  (firstchar2 = o15))) and
+  ((((o16 = to_upper(to_rep(((token15).map__content[endidx6])))) and
+  in_range2(o16)) and ((result15 = { int__content = lastchar1 }) and
+  (lastchar2 = o16))) and ((((firstchar2 = 67) and (lastchar2 = 72)) and
+  (((result16 = { int__content = newclass1 }) and (newclass2 = 2)) and
+  ((newclass12 = { int__content = newclass2 }) and
+  (newclass13 = newclass2)))) or ((not ((firstchar2 = 67) and
+  (lastchar2 = 72))) and (((((firstchar2 = 67) and (lastchar2 = 83)) and
+  (((result17 = { int__content = newclass1 }) and (newclass3 = 1)) and
+  ((newclass10 = { int__content = newclass3 }) and
+  (newclass11 = newclass3)))) or ((not ((firstchar2 = 67) and
+  (lastchar2 = 83))) and (((((firstchar2 = 72) and (lastchar2 = 83)) and
+  (((result18 = { int__content = newclass1 }) and (newclass4 = 3)) and
+  ((newclass8 = { int__content = newclass4 }) and
+  (newclass9 = newclass4)))) or ((not ((firstchar2 = 72) and
+  (lastchar2 = 83))) and (((((firstchar2 = 73) and (lastchar2 = 78)) and
+  (((result19 = { int__content = newclass1 }) and (newclass5 = 0)) and
+  ((newclass6 = { int__content = newclass5 }) and
+  (newclass7 = newclass5)))) or ((not ((firstchar2 = 73) and
+  (lastchar2 = 78))) and ((newclass6 = { int__content = newclass1 }) and
+  (newclass7 = newclass1)))) and ((newclass8 = newclass6) and
+  (newclass9 = newclass7))))) and ((newclass10 = newclass8) and
+  (newclass11 = newclass9))))) and ((newclass12 = newclass10) and
+  (newclass13 = newclass11))))))) and (((lastchar3 = { int__content =
+  lastchar2 }) and ((firstchar3 = { int__content = firstchar2 }) and
+  ((recordtypefound6 = { bool__content = recordtypefound2 }) and
+  ((success15 = { bool__content = success10 }) and ((newtype5 = {
+  int__content = newtype1 }) and (newclass14 = newclass12)))))) and
+  ((lastchar4 = lastchar2) and ((firstchar4 = firstchar2) and
+  ((recordtypefound7 = recordtypefound2) and ((success16 = success10) and
+  ((newtype6 = newtype1) and (newclass15 = newclass13))))))))) or
+  ((not (tokentype6 = 2)) and ((((tokentype6 = 3) and ((((result20 = {
+  bool__content = recordtypefound2 }) and
+  (recordtypefound3 = of_int1(1))) and (((o17 = getrecordtype(zonefileline,
+  begidx9, endidx6)) and in_range7(o17)) and ((result21 = { int__content =
+  newtype1 }) and (newtype2 = o17)))) and (((recordtypefound4 = {
+  bool__content = recordtypefound3 }) and ((success13 = { bool__content =
+  success10 }) and (newtype3 = { int__content = newtype2 }))) and
+  ((recordtypefound5 = recordtypefound3) and ((success14 = success10) and
+  (newtype4 = newtype2)))))) or ((not (tokentype6 = 3)) and (((result22 = {
+  bool__content = success10 }) and (success12 = of_int1(0))) and
+  (((recordtypefound4 = { bool__content = recordtypefound2 }) and
+  ((success13 = { bool__content = success12 }) and (newtype3 = {
+  int__content = newtype1 }))) and ((recordtypefound5 = recordtypefound2) and
+  ((success14 = success12) and (newtype4 = newtype1))))))) and
+  (((lastchar3 = { int__content = lastchar1 }) and ((firstchar3 = {
+  int__content = firstchar1 }) and ((recordtypefound6 = recordtypefound4) and
+  ((success15 = success13) and ((newtype5 = newtype3) and (newclass14 = {
+  int__content = newclass1 })))))) and ((lastchar4 = lastchar1) and
+  ((firstchar4 = firstchar1) and ((recordtypefound7 = recordtypefound5) and
+  ((success16 = success14) and ((newtype6 = newtype4) and
+  (newclass15 = newclass1)))))))))) and (((lastchar5 = lastchar3) and
+  ((firstchar5 = firstchar3) and ((recordtypefound8 = recordtypefound6) and
+  ((success17 = success15) and ((newtype7 = newtype5) and
+  ((newclass16 = newclass14) and (newttl2 = { t__content = newttl
+  }))))))) and ((lastchar6 = lastchar4) and ((firstchar6 = firstchar4) and
+  ((recordtypefound9 = recordtypefound7) and ((success18 = success16) and
+  ((newtype8 = newtype6) and ((newclass17 = newclass15) and
+  (newttl3 = newttl))))))))))) and (((((not (zlength <= endidx6)) ->
+  (tokentype6 = 9)) and
+  ((((not ((recordtypefound8).bool__content = true)) and
+  (((result23 = success17) and (success19 = of_int1(0))) and ((success20 = {
+  bool__content = success19 }) and (success21 = success19)))) or
+  (((recordtypefound8).bool__content = true) and ((success20 = success17) and
+  (success21 = success18)))) and (((begidx11 = { int__content = begidx9
+  }) and (success22 = success20)) and ((begidx12 = begidx9) and
+  (success23 = success21))))) or ((not ((not (zlength <= endidx6)) ->
+  (tokentype6 = 9))) and ((((o18 = (endidx6 + 1)) and
+  in_range5((endidx6 + 1))) and ((result24 = { int__content = begidx9 }) and
+  (begidx10 = o18))) and (((begidx11 = { int__content = begidx10 }) and
+  (success22 = success17)) and ((begidx12 = begidx10) and
+  (success23 = success18)))))) and
+  ((((not ((recordtypefound8).bool__content = true)) and
+  ((success22).bool__content = true)) or
+  (((recordtypefound8).bool__content = true) and (false = true))) and
+  (((((begidx13 <= endidx7) and (begidx13 <= zlength)) and
   (endidx7 <= zlength)) and ((tokentype7 = 1) ->
-  (forall i44:int. (((begidx13 <= i44) and (i44 <= endidx7)) ->
-  ((48 <= to_rep((zonefileline[i44]))) and
-  (to_rep((zonefileline[i44])) <= 57)))))) and ((in_range5(begidx13) and
-  in_range5(endidx7)) and in_range4(tokentype7)))
-
-axiom H254 : (i42 = i40)
-
-axiom H255 : (lastchar7 = lastchar5)
-
-axiom H256 : (firstchar7 = firstchar5)
-
-axiom H257 : (recordtypefound10 = recordtypefound8)
-
-axiom H258 : (tokentype8 = tokentype7)
-
-axiom H259 : (token23 = token21)
-
-axiom H260 : (endidx8 = endidx7)
-
-axiom H261 : (begidx14 = begidx13)
-
-axiom H262 : (success24 = success22)
-
-axiom H263 : (newtype9 = newtype7)
-
-axiom H264 : (newclass18 = newclass16)
-
-axiom H265 : (newttl5 = newttl3)
-
-axiom H266 : (i43 = i41)
-
-axiom H267 : (lastchar8 = lastchar6)
-
-axiom H268 : (firstchar8 = firstchar6)
-
-axiom H269 : (recordtypefound11 = recordtypefound9)
-
-axiom H270 : (tokentype9 = tokentype7)
-
-axiom H271 : (token24 = token22)
-
-axiom H272 : (endidx9 = endidx7)
-
-axiom H273 : (begidx15 = begidx13)
-
-axiom H274 : (success25 = success23)
-
-axiom H275 : (newtype10 = newtype8)
-
-axiom H276 : (newclass19 = newclass17)
-
-axiom H277 : (newttl6 = newttl4)
-
- (* File "zone_file_parser.adb", line 896, characters 0-0 *)
-goal WP_parameter_def : (begidx14 <= endidx8)
+  (forall i31:int. (((begidx13 <= i31) and (i31 <= endidx7)) ->
+  ((48 <= to_rep((zonefileline[i31]))) and
+  (to_rep((zonefileline[i31])) <= 57)))))) and ((in_range5(begidx13) and
+  in_range5(endidx7)) and in_range4(tokentype7)))))))))) and
+  (((i29 = i27) and ((lastchar7 = lastchar5) and
+  ((firstchar7 = firstchar5) and ((recordtypefound10 = recordtypefound8) and
+  ((tokentype8 = { int__content = tokentype7 }) and ((token17 = token15) and
+  ((endidx8 = { int__content = endidx7 }) and ((begidx14 = { int__content =
+  begidx13 }) and ((success24 = success22) and ((newtype9 = newtype7) and
+  ((newclass18 = newclass16) and (newttl4 = newttl2)))))))))))) and
+  ((i30 = i28) and ((lastchar8 = lastchar6) and
+  ((firstchar8 = firstchar6) and ((recordtypefound11 = recordtypefound9) and
+  ((tokentype9 = tokentype7) and ((token18 = token16) and
+  ((endidx9 = endidx7) and ((begidx15 = begidx13) and
+  ((success25 = success23) and ((newtype10 = newtype8) and
+  ((newclass19 = newclass17) and (newttl5 = newttl3)))))))))))))) ->
+  ((begidx14).int__content <= (endidx8).int__content))))))))))))))))))))

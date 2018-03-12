@@ -214,12 +214,6 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq4 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -231,6 +225,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq4 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
 
 predicate in_range2(x: int) = ((x = 0) or (x = 1))
 
@@ -318,23 +318,7 @@ axiom intersection__post_axiom :
   (includes_intersection(intersection(left1, right1), left1,
   right1) = true)))
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-axiom H : ((o3 = length(right)) and in_range1(o3))
-
-axiom H1 : (o4 = (2147483647 - o3))
-
  (* File "a-cofuse.ads", line 218, characters 0-0 *)
-goal WP_parameter_def : in_range(o4)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. ((((o = length(right)) and in_range1(o)) and
+  (o1 = (2147483647 - o))) -> in_range(o1)))

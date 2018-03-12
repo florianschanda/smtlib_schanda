@@ -654,7 +654,15 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 type tt7
 
-predicate in_range(x: t) = (ule(of_int(0), x) and ule(x, of_int(2)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 2)
+
+predicate in_range(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 2))
 
@@ -683,14 +691,14 @@ logic c : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-axiom b__def_axiom : (b = of_int(10))
+logic rliteral2 : t
 
-axiom c__def_axiom : (c = of_int(2))
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 10)
 
-axiom H : true
+axiom b__def_axiom : (b = rliteral2)
 
-axiom H1 : in_range(c)
+axiom c__def_axiom : (c = rliteral1)
 
  (* File "u.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : ((256 <  8) -> (lsl_bv(of_int(10),
-  of_int(256)) = of_int(0)))
+goal WP_parameter_def : (in_range(c) -> ((256 <  8) -> (lsl_bv(rliteral2,
+  of_int(256)) = rliteral)))

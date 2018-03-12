@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -353,33 +353,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def :
-  (forall v:track_id. forall v1:natural. forall v2:track_id.
-  (forall i:int [(singleton({ us_split_fields1 = {
-  rec__trains__train_position__track_begin = v;
-  rec__trains__train_position__pos_begin = v1;
-  rec__trains__train_position__track_end = v2 } }, i)[i])]. ((singleton({
-  us_split_fields1 = { rec__trains__train_position__track_begin = v;
-  rec__trains__train_position__pos_begin = v1;
-  rec__trains__train_position__track_end = v2 } }, i)[i]) = {
-  us_split_fields1 = { rec__trains__train_position__track_begin = v;
-  rec__trains__train_position__pos_begin = v1;
-  rec__trains__train_position__track_end = v2 } })))
-
 logic bool_eq6 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -390,17 +363,17 @@ axiom bool_eq_def5 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_182:int. ((((a__first <= temp___idx_182) and
-  (temp___idx_182 <= a__last)) and (bool_eq5((a[temp___idx_182]),
-  (b[((b__first - a__first) + temp___idx_182)])) = true)) or
-  (not ((a__first <= temp___idx_182) and (temp___idx_182 <= a__last)))))) ->
+  (forall temp___idx_204:int. ((((a__first <= temp___idx_204) and
+  (temp___idx_204 <= a__last)) and (bool_eq5((a[temp___idx_204]),
+  (b[((b__first - a__first) + temp___idx_204)])) = true)) or
+  (not ((a__first <= temp___idx_204) and (temp___idx_204 <= a__last)))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_182:int. (((a__first <= temp___idx_182) and
-  (temp___idx_182 <= a__last)) -> (bool_eq5((a[temp___idx_182]),
-  (b[((b__first - a__first) + temp___idx_182)])) = true))))) -> (bool_eq6(a,
+  (forall temp___idx_204:int. (((a__first <= temp___idx_204) and
+  (temp___idx_204 <= a__last)) -> (bool_eq5((a[temp___idx_204]),
+  (b[((b__first - a__first) + temp___idx_204)])) = true))))) -> (bool_eq6(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -410,210 +383,37 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_182:int. (((a__first <= temp___idx_182) and
-  (temp___idx_182 <= a__last)) -> (bool_eq5((a[temp___idx_182]),
-  (b[((b__first - a__first) + temp___idx_182)])) = true)))))))
+  (forall temp___idx_204:int. (((a__first <= temp___idx_204) and
+  (temp___idx_204 <= a__last)) -> (bool_eq5((a[temp___idx_204]),
+  (b[((b__first - a__first) + temp___idx_204)])) = true)))))))
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic cur_num_trains : int
-
-logic trains : (int,us_rep) farray
-
-logic train : int
-
-logic other_train : int
-
-logic o : int
-
-logic o1 : track_id
-
-logic o2 : natural
-
-logic o3 : track_id
-
-logic o4 : track_id
-
-logic o5 : natural
-
-logic o6 : track_id
-
-logic o7 : track_id
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : track_id
-
-logic o11 : natural
-
-logic o12 : track_id
-
-logic o13 : track_id
-
-logic o14 : natural
-
-logic o15 : track_id
-
-logic o16 : track_id
-
-logic o17 : int
-
-logic o18 : track_id
-
-logic o19 : natural
-
-logic o20 : track_id
-
-logic o21 : track_id
-
-logic o22 : natural
-
-logic o23 : track_id
-
-logic o24 : track_id
-
-logic o25 : int
-
-logic o26 : int
-
-logic o27 : bool
-
-logic o28 : int
-
-logic o29 : track_id
-
-logic o30 : natural
-
-logic o31 : track_id
-
-logic o32 : track_id
-
-logic o33 : natural
-
-logic o34 : track_id
-
-logic o35 : track_id
-
-logic o36 : int
-
-logic o37 : track_id
-
-logic o38 : natural
-
-logic o39 : track_id
-
-logic o40 : track_id
-
-logic o41 : natural
-
-logic o42 : track_id
-
-logic o43 : track_id
-
-logic o44 : int
-
-logic o45 : int
-
-logic o46 : bool
-
-logic o47 : int
-
-logic o48 : track_id
-
-logic o49 : natural
-
-logic o50 : track_id
-
-logic o51 : track_id
-
-logic o52 : natural
-
-logic o53 : track_id
-
-logic o54 : track_id
-
-logic o55 : int
-
-logic o56 : track_id
-
-logic o57 : natural
-
-logic o58 : track_id
-
-logic o59 : track_id
-
-logic o60 : natural
-
-logic o61 : track_id
-
-logic o62 : track_id
-
-logic o63 : int
-
-logic o64 : int
-
-logic o65 : bool
-
-logic result : bool
-
-logic result1 : bool
-
-logic result2 : bool
-
-axiom H : in_range2(cur_num_trains)
-
-axiom H1 : (1 <= train)
-
-axiom H2 : (train <= cur_num_trains)
-
-axiom H3 : (1 <= other_train)
-
-axiom H4 : (other_train <= cur_num_trains)
-
-axiom H5 : (not (other_train = train))
-
-axiom H6 : ((1 <= other_train) and (other_train <= 10))
-
-axiom H7 : (o55 = other_train)
-
-axiom H8 : ({ us_split_fields1 = { rec__trains__train_position__track_begin =
-  o56; rec__trains__train_position__pos_begin = o57;
-  rec__trains__train_position__track_end = o58 } } = (trains[o55]))
-
-axiom H9 : ((o59 = o56) and ((o60 = o57) and (o61 = o58)))
-
-axiom H10 : (o62 = o59)
-
-axiom H11 : (o63 = to_rep(o62))
-
-axiom H12 : ((1 <= train) and (train <= 10))
-
-axiom H13 : (o47 = train)
-
-axiom H14 : ({ us_split_fields1 = {
-  rec__trains__train_position__track_begin = o48;
-  rec__trains__train_position__pos_begin = o49;
-  rec__trains__train_position__track_end = o50 } } = (trains[o47]))
-
-axiom H15 : (o48 = o51)
-
-axiom H16 : (o49 = o52)
-
-axiom H17 : (o50 = o53)
-
-axiom H18 : (o54 = o51)
-
-axiom H19 : (o64 = to_rep(o54))
-
-axiom H20 : (((o64 = o63) -> (o65 = true)) and ((not (o64 = o63)) ->
-  (o65 = false)))
-
-axiom H21 : (((not (o65 = true)) -> (result2 = true)) and ((o65 = true) ->
-  (result2 = false)))
-
-axiom H22 : (result2 = true)
-
  (* File "trains.ads", line 91, characters 0-0 *)
-goal WP_parameter_def : (1 <= other_train)
+goal WP_parameter_def :
+  (forall cur_num_trains:int. forall trains:(int,us_rep) farray.
+  forall train:int. forall other_train:int. forall o:int. forall o1:track_id.
+  forall o2:natural. forall o3:track_id. forall o4:track_id.
+  forall o5:natural. forall o6:track_id. forall o7:track_id. forall o8:int.
+  forall o9:track_id. forall o10:natural. forall o11:track_id.
+  forall o12:track_id. forall o13:natural. forall o14:track_id.
+  forall o15:track_id. forall o16:int. forall o17:int. forall o18:bool.
+  forall result:bool. (in_range2(cur_num_trains) -> (((1 <= train) and
+  (train <= cur_num_trains)) -> (((1 <= other_train) and
+  (other_train <= cur_num_trains)) -> ((not (other_train = train)) ->
+  ((((((((((1 <= other_train) and (other_train <= 10)) and
+  (o8 = other_train)) and ({ us_split_fields1 = {
+  rec__trains__train_position__track_begin = o9;
+  rec__trains__train_position__pos_begin = o10;
+  rec__trains__train_position__track_end = o11 } } = (trains[o8]))) and
+  ((o9 = o12) and ((o10 = o13) and (o11 = o14)))) and (o15 = o12)) and
+  (o16 = to_rep(o15))) and ((((((((1 <= train) and (train <= 10)) and
+  (o = train)) and ({ us_split_fields1 = {
+  rec__trains__train_position__track_begin = o1;
+  rec__trains__train_position__pos_begin = o2;
+  rec__trains__train_position__track_end = o3 } } = (trains[o]))) and
+  ((o1 = o4) and ((o2 = o5) and (o3 = o6)))) and (o7 = o4)) and
+  (o17 = to_rep(o7))) and (((o17 = o16) and (o18 = true)) or
+  ((not (o17 = o16)) and (o18 = false))))) and (((not (o18 = true)) and
+  (result = true)) or ((o18 = true) and (result = false)))) ->
+  ((result = true) -> (1 <= other_train))))))))

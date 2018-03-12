@@ -107,11 +107,5 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : int
-
-axiom H : in_range(x)
-
-axiom H1 : (x = 1)
-
  (* File "no_return_illegal.adb", line 6, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def : (forall x:int. (in_range(x) -> (not (x = 1))))

@@ -439,107 +439,12 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic d2__split_discrs : natural
-
-logic h__split_fields : natural
-
-logic h__split_fields1 : bool
-
-logic us : int
-
-logic o : natural
-
-logic o1 : natural
-
-logic o2 : natural
-
-logic o3 : bool
-
-logic o4 : natural
-
-logic o5 : bool
-
-logic o6 : natural
-
-logic o7 : bool
-
-logic discr__r5__d1__assume : natural
-
-logic discr__r5__d1__assume1 : bool
-
-logic o8 : natural
-
-logic o9 : natural
-
-logic discr__r5__d2__assume : natural
-
-logic discr__r5__d2__assume1 : bool
-
-logic usq_ : natural
-
-logic usq_1 : bool
-
-logic o10 : natural
-
-logic o11 : bool
-
-logic o12 : natural
-
-logic o13 : bool
-
-logic temp___295 : natural
-
-logic temp___2951 : bool
-
-logic usq_2 : natural
-
-logic usq_3 : bool
-
-logic o14 : natural
-
-logic o15 : bool
-
-logic o16 : natural
-
-logic o17 : bool
-
-logic temp___299 : natural
-
-logic temp___2991 : bool
-
-logic result : natural
-
-logic d2__split_discrs1 : natural
-
-logic result1 : natural
-
-logic result2 : bool
-
-logic h__split_fields2 : natural
-
-logic h__split_fields3 : bool
-
-logic result3 : natural
-
-logic result4 : bool
-
-logic h__split_fields4 : natural
-
-logic h__split_fields5 : bool
-
-axiom H : in_range(c)
-
-axiom H1 : ((us = c) and in_range(c))
-
-axiom H2 : (to_rep(o) = c)
-
-axiom H3 : (o = o1)
-
-axiom H4 : (o2 = o1)
-
-axiom H5 : (true = o3)
-
-axiom H6 : ((o4 = o2) and (o5 = o3))
-
  (* File "discr.adb", line 34, characters 0-0 *)
-goal WP_parameter_def : (c = to_rep(o4))
+goal WP_parameter_def :
+  (forall us:int. forall o:natural. forall o1:natural. forall o2:natural.
+  forall o3:bool. forall o4:natural. forall o5:bool. (in_range(c) ->
+  (((us = c) and in_range(c)) -> (((((to_rep(o) = c) and (o = o1)) and
+  ((o2 = o1) and (true = o3))) and ({ us_split_discrs1 = {
+  rec__discr__with_default__c = o4 }; attr__constrained = o5 } = {
+  us_split_discrs1 = { rec__discr__with_default__c = o2 };
+  attr__constrained = o3 })) -> (c = to_rep(o4))))))

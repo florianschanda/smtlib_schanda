@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -428,27 +428,12 @@ logic b__attr__constrained : bool
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic a__split_fields : integer
-
-logic b__split_discrs : bool
-
-logic result : integer
-
-logic a__split_fields1 : integer
-
-axiom H : (result = a__split_fields)
-
-axiom H1 : (dummy = a__split_fields1)
-
-axiom H2 : (a__split_discrs = of_int(0))
-
-axiom H3 : (a__attr__constrained = true)
-
-axiom H4 : ((of_int(0) = a__split_discrs) and (a__attr__constrained = true))
-
-axiom H5 : ((b__attr__constrained = false) and (b__split_discrs = of_int(0)))
-
-axiom H6 : (b__attr__constrained = true)
-
  (* File "tests.adb", line 330, characters 0-0 *)
-goal WP_parameter_def : (a__split_discrs = b__split_discrs)
+goal WP_parameter_def :
+  (forall a__split_fields:integer. forall b__split_discrs:bool.
+  forall result:integer. forall a__split_fields1:integer.
+  ((((result = a__split_fields) and (dummy = a__split_fields1)) and
+  ((a__split_discrs = of_int(0)) and (a__attr__constrained = true))) ->
+  (((of_int(0) = a__split_discrs) and (a__attr__constrained = true)) ->
+  (((b__attr__constrained = false) and (b__split_discrs = of_int(0))) ->
+  ((b__attr__constrained = true) -> (a__split_discrs = b__split_discrs))))))

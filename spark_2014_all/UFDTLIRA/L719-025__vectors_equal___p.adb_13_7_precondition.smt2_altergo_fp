@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -563,60 +563,32 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length(container))))) ->
   in_range9(get(container, position)))))
 
-logic l__split_fields : us_main_type
-
-logic e : int
-
-logic o : int
-
-logic result : int
-
-logic e1 : int
-
-logic l__split_fields1 : us_main_type
-
-logic l__split_fields2 : us_main_type
-
-logic l__split_fields3 : us_main_type
-
-logic e2 : int
-
-logic l__split_fields4 : us_main_type
-
-logic e3 : int
-
-axiom H : in_range2(i)
-
-axiom H1 : ((1 <= i) and (i = (0 + length(model__({ us_split_discrs1 = {
-  rec__p__my_vectors__vector__capacity = l__split_discrs };
-  us_split_fields1 = { rec__p__my_vectors__vector = l__split_fields } })))))
-
-axiom H2 : ((o = get(model__({ us_split_discrs1 = {
+ (* File "p.ads", line 13, characters 0-0 *)
+goal WP_parameter_def :
+  (forall l__split_fields:us_main_type. forall e:int. forall o:int.
+  forall result:int. forall e1:int. forall l__split_fields1:us_main_type.
+  (in_range2(i) -> (((1 <= i) and (i = (0 + length(model__({
+  us_split_discrs1 = { rec__p__my_vectors__vector__capacity = l__split_discrs
+  }; us_split_fields1 = { rec__p__my_vectors__vector = l__split_fields }
+  }))))) -> ((((o = get(model__({ us_split_discrs1 = {
   rec__p__my_vectors__vector__capacity = l__split_discrs };
   us_split_fields1 = { rec__p__my_vectors__vector = l__split_fields } }),
   i)) and (in_range6(o) and (o = get(model__({ us_split_discrs1 = {
   rec__p__my_vectors__vector__capacity = l__split_discrs };
   us_split_fields1 = { rec__p__my_vectors__vector = l__split_fields } }),
-  i))))
-
-axiom H3 : (result = e)
-
-axiom H4 : (e1 = o)
-
-axiom H5 : in_range1(e1)
-
-axiom H6 : ((length1({ us_split_discrs1 = {
+  i)))) and (({ int__content = result } = { int__content = e }) and
+  (e1 = o))) -> (in_range1(e1) -> (((length1({ us_split_discrs1 = {
   rec__p__my_vectors__vector__capacity = l__split_discrs };
   us_split_fields1 = { rec__p__my_vectors__vector = l__split_fields1 }
   }) = (length1({ us_split_discrs1 = { rec__p__my_vectors__vector__capacity =
   l__split_discrs }; us_split_fields1 = { rec__p__my_vectors__vector =
-  l__split_fields } }) - 1)) and (((bool_lt(length(model__({
+  l__split_fields } }) - 1)) and ((bool_lt(length(model__({
   us_split_discrs1 = { rec__p__my_vectors__vector__capacity = l__split_discrs
   }; us_split_fields1 = { rec__p__my_vectors__vector = l__split_fields1 }
   })), length(model__({ us_split_discrs1 = {
   rec__p__my_vectors__vector__capacity = l__split_discrs };
   us_split_fields1 = { rec__p__my_vectors__vector = l__split_fields }
-  }))) = true) ->
+  }))) = true) and
   (forall n:int. (((1 <= n) and (n <= (0 + length(model__({
   us_split_discrs1 = { rec__p__my_vectors__vector__capacity = l__split_discrs
   }; us_split_fields1 = { rec__p__my_vectors__vector = l__split_fields1 }
@@ -626,19 +598,10 @@ axiom H6 : ((length1({ us_split_discrs1 = {
   n) = get(model__({ us_split_discrs1 = {
   rec__p__my_vectors__vector__capacity = l__split_discrs };
   us_split_fields1 = { rec__p__my_vectors__vector = l__split_fields } }),
-  n))))) and (not (bool_lt(length(model__({ us_split_discrs1 = {
+  n)))))) -> (((of_int(1) = true) -> (length1({ us_split_discrs1 = {
   rec__p__my_vectors__vector__capacity = l__split_discrs };
-  us_split_fields1 = { rec__p__my_vectors__vector = l__split_fields1 } })),
-  length(model__({ us_split_discrs1 = {
-  rec__p__my_vectors__vector__capacity = l__split_discrs };
-  us_split_fields1 = { rec__p__my_vectors__vector = l__split_fields }
-  }))) = false))))
-
- (* File "p.ads", line 13, characters 0-0 *)
-goal WP_parameter_def : (((of_int(1) = true) -> (length1({ us_split_discrs1 =
-  { rec__p__my_vectors__vector__capacity = l__split_discrs };
   us_split_fields1 = { rec__p__my_vectors__vector = l__split_fields1 }
   }) <  to_rep(l__split_discrs))) and ((not (of_int(1) = true)) -> (length1({
   us_split_discrs1 = { rec__p__my_vectors__vector__capacity = l__split_discrs
   }; us_split_fields1 = { rec__p__my_vectors__vector = l__split_fields1 }
-  }) <  100)))
+  }) <  100)))))))))

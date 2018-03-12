@@ -172,12 +172,6 @@ logic length__function_guard : int, us_rep -> prop
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq4 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -189,6 +183,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq4 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
 
 predicate in_range2(x: int) = ((x = 0) or (x = 1))
 
@@ -320,50 +320,16 @@ logic result__ : us_rep
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic result : bool
-
-logic result1 : bool
-
-logic result2 : bool
-
-axiom H : in_range1(e)
-
-axiom H1 : ((o6 = length(s)) and (in_range3(o6) and
-  ((0 + o6) <= 2147483647)))
-
-axiom H2 : (((o6 <  2147483647) -> (result2 = true)) and
-  ((not (o6 <  2147483647)) -> (result2 = false)))
-
-axiom H3 : ((result2 = true) -> ((o2 = length(s)) and (in_range3(o2) and
-  ((0 + o2) <= 2147483647))))
-
-axiom H4 : ((result2 = true) -> (o3 = (o2 + 1)))
-
-axiom H5 : ((result2 = true) -> ((o4 = o3) and in_range(o3)))
-
-axiom H6 : ((result2 = true) -> ((o5 = length(result__)) and
-  (in_range3(o5) and ((0 + o5) <= 2147483647))))
-
-axiom H7 : ((result2 = true) -> (((o5 = o4) -> (result1 = true)) and
-  ((not (o5 = o4)) -> (result1 = false))))
-
-axiom H8 : ((not (result2 = true)) -> (result1 = false))
-
-axiom H9 : (result1 = true)
-
  (* File "list_mod_allocator.ads", line 44, characters 0-0 *)
-goal WP_parameter_def : (1 <= 1)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
+  forall result:bool. forall result1:bool. (in_range1(e) ->
+  (((((o4 = length(s)) and (in_range3(o4) and ((0 + o4) <= 2147483647))) and
+  (((o4 <  2147483647) and (result1 = true)) or ((not (o4 <  2147483647)) and
+  (result1 = false)))) and (((result1 = true) and (((((o = length(s)) and
+  (in_range3(o) and ((0 + o) <= 2147483647))) and (o1 = (o + 1))) and
+  ((o2 = o1) and in_range(o1))) and (((o3 = length(result__)) and
+  (in_range3(o3) and ((0 + o3) <= 2147483647))) and (((o3 = o2) and
+  (result = true)) or ((not (o3 = o2)) and (result = false)))))) or
+  ((not (result1 = true)) and (result = false)))) -> ((result = true) ->
+  (1 <= 1)))))

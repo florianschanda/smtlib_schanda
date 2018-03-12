@@ -1160,24 +1160,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,t_angle_360) farray, int, int, (int,t_angle_360) farray,
-  int, int -> (int,t_angle_360) farray
-
-axiom concat_def :
-  (forall a:(int,t_angle_360) farray. forall b:(int,t_angle_360) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : t_angle_360, int -> (int,t_angle_360) farray
-
-axiom singleton_def :
-  (forall v:t_angle_360.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,t_angle_360) farray, int, int,
   (int,t_angle_360) farray, int, int -> bool
 
@@ -1188,17 +1170,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1208,9 +1190,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
@@ -1220,40 +1202,22 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic access_inline__angle__aggregate_def : t -> (int,t_angle_360) farray
 
-axiom def_axiom :
-  (forall temp___197:t.
-  (forall temp___198:int.
-  ((access_inline__angle__aggregate_def(temp___197)[temp___198]) = of_rep(temp___197))))
-
 axiom c_2pi_in_degrees__def_axiom : (c_2pi_in_degrees = fliteral3)
 
-logic angle : (int,t_angle_360) farray
+axiom def_axiom :
+  (forall temp___229:t. (in_range2(temp___229) ->
+  (forall temp___230:int.
+  (to_rep((access_inline__angle__aggregate_def(temp___229)[temp___230])) = temp___229))))
 
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic result : (int,t_angle_360) farray
-
-logic angle1 : (int,t_angle_360) farray
-
-axiom H : in_range1(c_2pi_in_degrees)
-
-axiom H1 : (result = angle)
-
-axiom H2 : (angle1 = access_inline__angle__aggregate_def(fliteral2))
-
-axiom H3 : (to_rep((angle1[3])) = c6b)
-
-axiom H4 : in_range1(c6b)
-
-axiom H5 : ((o = sub(NearestTiesToEven, to_rep((angle1[3])),
+ (* File "access_inline.adb", line 11, characters 0-0 *)
+goal WP_parameter_def :
+  (forall angle:(int,t_angle_360) farray. forall o:t. forall o1:t.
+  forall result:(int,t_angle_360) farray.
+  forall angle1:(int,t_angle_360) farray. (in_range1(c_2pi_in_degrees) ->
+  (((result = angle) and
+  (angle1 = access_inline__angle__aggregate_def(fliteral2))) ->
+  (((to_rep((angle1[3])) = c6b) and in_range1(c6b)) ->
+  ((((o = sub(NearestTiesToEven, to_rep((angle1[3])),
   to_rep((angle1[3])))) and tqtisFinite(sub(NearestTiesToEven,
-  to_rep((angle1[3])), to_rep((angle1[3])))))
-
-axiom H6 : ((o1 = o) and tqtisFinite(o))
-
- (* File "access_inline.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range2(o1)
+  to_rep((angle1[3])), to_rep((angle1[3]))))) and ((o1 = o) and
+  tqtisFinite(o))) -> in_range2(o1))))))

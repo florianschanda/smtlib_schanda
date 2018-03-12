@@ -134,24 +134,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq2 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -162,17 +144,17 @@ axiom bool_eq_def1 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq2(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq2(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -182,37 +164,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq2(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq2(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq2(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 type num
 
@@ -268,24 +222,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,num) farray, int, int, (int,num) farray, int,
-  int -> (int,num) farray
-
-axiom concat_def1 :
-  (forall a:(int,num) farray. forall b:(int,num) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : num, int -> (int,num) farray
-
-axiom singleton_def1 :
-  (forall v:num.
-  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,num) farray, int, int, (int,num) farray, int,
   int -> bool
 
@@ -296,17 +232,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_135:int. ((((a__first <= temp___idx_135) and
-  (temp___idx_135 <= a__last)) and
-  (to_rep1((a[temp___idx_135])) = to_rep1((b[((b__first - a__first) + temp___idx_135)])))) or
-  (not ((a__first <= temp___idx_135) and (temp___idx_135 <= a__last)))))) ->
+  (forall temp___idx_157:int. ((((a__first <= temp___idx_157) and
+  (temp___idx_157 <= a__last)) and
+  (to_rep1((a[temp___idx_157])) = to_rep1((b[((b__first - a__first) + temp___idx_157)])))) or
+  (not ((a__first <= temp___idx_157) and (temp___idx_157 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_135:int. (((a__first <= temp___idx_135) and
-  (temp___idx_135 <= a__last)) ->
-  (to_rep1((a[temp___idx_135])) = to_rep1((b[((b__first - a__first) + temp___idx_135)]))))))) ->
+  (forall temp___idx_157:int. (((a__first <= temp___idx_157) and
+  (temp___idx_157 <= a__last)) ->
+  (to_rep1((a[temp___idx_157])) = to_rep1((b[((b__first - a__first) + temp___idx_157)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -316,37 +252,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_135:int. (((a__first <= temp___idx_135) and
-  (temp___idx_135 <= a__last)) ->
-  (to_rep1((a[temp___idx_135])) = to_rep1((b[((b__first - a__first) + temp___idx_135)])))))))))
-
-logic compare1 : (int,num) farray, int, int, (int,num) farray, int,
-  int -> int
-
-axiom compare_def_eq1 :
-  (forall a:(int,num) farray. forall b:(int,num) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt1 :
-  (forall a:(int,num) farray. forall b:(int,num) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep1((a[(i + 1)])) <  to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt1 :
-  (forall a:(int,num) farray. forall b:(int,num) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare1(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep1((b[(i + 1)])) <  to_rep1((a[(j + 1)]))))))))))))
+  (forall temp___idx_157:int. (((a__first <= temp___idx_157) and
+  (temp___idx_157 <= a__last)) ->
+  (to_rep1((a[temp___idx_157])) = to_rep1((b[((b__first - a__first) + temp___idx_157)])))))))))
 
 type cur
 
@@ -742,34 +650,6 @@ axiom slide_def2 :
   (forall i:int [(slide2(a, old_first, new_first)[i])]. ((slide2(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat2 : (int,us_rep1) farray, int, int, (int,us_rep1) farray, int,
-  int -> (int,us_rep1) farray
-
-axiom concat_def2 :
-  (forall a:(int,us_rep1) farray. forall b:(int,us_rep1) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat2(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat2(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat2(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton2 : us_rep1, int -> (int,us_rep1) farray
-
-axiom singleton_def2 :
-  (forall v:bool. forall v1:ext_account_num. forall v2:ext_account_num.
-  (forall i:int [(singleton2({ us_split_fields3 = {
-  rec__database__availability__account_link__available = v;
-  rec__database__availability__account_link__prev = v1;
-  rec__database__availability__account_link__next = v2 } }, i)[i])].
-  ((singleton2({ us_split_fields3 = {
-  rec__database__availability__account_link__available = v;
-  rec__database__availability__account_link__prev = v1;
-  rec__database__availability__account_link__next = v2 } }, i)[i]) = {
-  us_split_fields3 = { rec__database__availability__account_link__available =
-  v; rec__database__availability__account_link__prev = v1;
-  rec__database__availability__account_link__next = v2 } })))
-
 logic bool_eq11 : (int,us_rep1) farray, int, int, (int,us_rep1) farray, int,
   int -> bool
 
@@ -780,17 +660,17 @@ axiom bool_eq_def10 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_141:int. ((((a__first <= temp___idx_141) and
-  (temp___idx_141 <= a__last)) and (bool_eq10((a[temp___idx_141]),
-  (b[((b__first - a__first) + temp___idx_141)])) = true)) or
-  (not ((a__first <= temp___idx_141) and (temp___idx_141 <= a__last)))))) ->
+  (forall temp___idx_163:int. ((((a__first <= temp___idx_163) and
+  (temp___idx_163 <= a__last)) and (bool_eq10((a[temp___idx_163]),
+  (b[((b__first - a__first) + temp___idx_163)])) = true)) or
+  (not ((a__first <= temp___idx_163) and (temp___idx_163 <= a__last)))))) ->
   (bool_eq11(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_141:int. (((a__first <= temp___idx_141) and
-  (temp___idx_141 <= a__last)) -> (bool_eq10((a[temp___idx_141]),
-  (b[((b__first - a__first) + temp___idx_141)])) = true))))) -> (bool_eq11(a,
+  (forall temp___idx_163:int. (((a__first <= temp___idx_163) and
+  (temp___idx_163 <= a__last)) -> (bool_eq10((a[temp___idx_163]),
+  (b[((b__first - a__first) + temp___idx_163)])) = true))))) -> (bool_eq11(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev2 :
@@ -800,9 +680,9 @@ axiom bool_eq_rev2 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_141:int. (((a__first <= temp___idx_141) and
-  (temp___idx_141 <= a__last)) -> (bool_eq10((a[temp___idx_141]),
-  (b[((b__first - a__first) + temp___idx_141)])) = true)))))))
+  (forall temp___idx_163:int. (((a__first <= temp___idx_163) and
+  (temp___idx_163 <= a__last)) -> (bool_eq10((a[temp___idx_163]),
+  (b[((b__first - a__first) + temp___idx_163)])) = true)))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -1033,34 +913,6 @@ axiom slide_def3 :
   (forall i:int [(slide3(a, old_first, new_first)[i])]. ((slide3(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat3 : (int,us_rep2) farray, int, int, (int,us_rep2) farray, int,
-  int -> (int,us_rep2) farray
-
-axiom concat_def3 :
-  (forall a:(int,us_rep2) farray. forall b:(int,us_rep2) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat3(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat3(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat3(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton3 : us_rep2, int -> (int,us_rep2) farray
-
-axiom singleton_def3 :
-  (forall v:(int,character) farray. forall v1:(int,num) farray.
-  forall v2:ext_account_num.
-  (forall i:int [(singleton3({ us_split_fields5 = {
-  rec__database__account_rec__owner_name = v;
-  rec__database__account_rec__owner_id = v1;
-  rec__database__account_rec__account = v2 } }, i)[i])]. ((singleton3({
-  us_split_fields5 = { rec__database__account_rec__owner_name = v;
-  rec__database__account_rec__owner_id = v1;
-  rec__database__account_rec__account = v2 } }, i)[i]) = { us_split_fields5 =
-  { rec__database__account_rec__owner_name = v;
-  rec__database__account_rec__owner_id = v1;
-  rec__database__account_rec__account = v2 } })))
-
 logic bool_eq13 : (int,us_rep2) farray, int, int, (int,us_rep2) farray, int,
   int -> bool
 
@@ -1071,17 +923,17 @@ axiom bool_eq_def12 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_142:int. ((((a__first <= temp___idx_142) and
-  (temp___idx_142 <= a__last)) and (bool_eq12((a[temp___idx_142]),
-  (b[((b__first - a__first) + temp___idx_142)])) = true)) or
-  (not ((a__first <= temp___idx_142) and (temp___idx_142 <= a__last)))))) ->
+  (forall temp___idx_164:int. ((((a__first <= temp___idx_164) and
+  (temp___idx_164 <= a__last)) and (bool_eq12((a[temp___idx_164]),
+  (b[((b__first - a__first) + temp___idx_164)])) = true)) or
+  (not ((a__first <= temp___idx_164) and (temp___idx_164 <= a__last)))))) ->
   (bool_eq13(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_142:int. (((a__first <= temp___idx_142) and
-  (temp___idx_142 <= a__last)) -> (bool_eq12((a[temp___idx_142]),
-  (b[((b__first - a__first) + temp___idx_142)])) = true))))) -> (bool_eq13(a,
+  (forall temp___idx_164:int. (((a__first <= temp___idx_164) and
+  (temp___idx_164 <= a__last)) -> (bool_eq12((a[temp___idx_164]),
+  (b[((b__first - a__first) + temp___idx_164)])) = true))))) -> (bool_eq13(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev3 :
@@ -1091,9 +943,9 @@ axiom bool_eq_rev3 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_142:int. (((a__first <= temp___idx_142) and
-  (temp___idx_142 <= a__last)) -> (bool_eq12((a[temp___idx_142]),
-  (b[((b__first - a__first) + temp___idx_142)])) = true)))))))
+  (forall temp___idx_164:int. (((a__first <= temp___idx_164) and
+  (temp___idx_164 <= a__last)) -> (bool_eq12((a[temp___idx_164]),
+  (b[((b__first - a__first) + temp___idx_164)])) = true)))))))
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
@@ -1255,34 +1107,6 @@ axiom slide_def4 :
   (forall i:int [(slide4(a, old_first, new_first)[i])]. ((slide4(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat4 : (int,us_rep3) farray, int, int, (int,us_rep3) farray, int,
-  int -> (int,us_rep3) farray
-
-axiom concat_def4 :
-  (forall a:(int,us_rep3) farray. forall b:(int,us_rep3) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat4(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat4(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat4(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton4 : us_rep3, int -> (int,us_rep3) farray
-
-axiom singleton_def4 :
-  (forall v:cur. forall v1:raw_amount. forall v2:ext_account_num.
-  (forall i:int [(singleton4({ us_split_fields7 = {
-  rec__database__account_balance__value = { us_split_fields1 = {
-  rec__money__amount__currency = v; rec__money__amount__raw = v1 } };
-  rec__database__account_balance__account = v2 } }, i)[i])]. ((singleton4({
-  us_split_fields7 = { rec__database__account_balance__value = {
-  us_split_fields1 = { rec__money__amount__currency = v;
-  rec__money__amount__raw = v1 } }; rec__database__account_balance__account =
-  v2 } }, i)[i]) = { us_split_fields7 = {
-  rec__database__account_balance__value = { us_split_fields1 = {
-  rec__money__amount__currency = v; rec__money__amount__raw = v1 } };
-  rec__database__account_balance__account = v2 } })))
-
 logic bool_eq15 : (int,us_rep3) farray, int, int, (int,us_rep3) farray, int,
   int -> bool
 
@@ -1293,17 +1117,17 @@ axiom bool_eq_def14 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_143:int. ((((a__first <= temp___idx_143) and
-  (temp___idx_143 <= a__last)) and (bool_eq14((a[temp___idx_143]),
-  (b[((b__first - a__first) + temp___idx_143)])) = true)) or
-  (not ((a__first <= temp___idx_143) and (temp___idx_143 <= a__last)))))) ->
+  (forall temp___idx_165:int. ((((a__first <= temp___idx_165) and
+  (temp___idx_165 <= a__last)) and (bool_eq14((a[temp___idx_165]),
+  (b[((b__first - a__first) + temp___idx_165)])) = true)) or
+  (not ((a__first <= temp___idx_165) and (temp___idx_165 <= a__last)))))) ->
   (bool_eq15(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_143:int. (((a__first <= temp___idx_143) and
-  (temp___idx_143 <= a__last)) -> (bool_eq14((a[temp___idx_143]),
-  (b[((b__first - a__first) + temp___idx_143)])) = true))))) -> (bool_eq15(a,
+  (forall temp___idx_165:int. (((a__first <= temp___idx_165) and
+  (temp___idx_165 <= a__last)) -> (bool_eq14((a[temp___idx_165]),
+  (b[((b__first - a__first) + temp___idx_165)])) = true))))) -> (bool_eq15(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev4 :
@@ -1313,9 +1137,9 @@ axiom bool_eq_rev4 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_143:int. (((a__first <= temp___idx_143) and
-  (temp___idx_143 <= a__last)) -> (bool_eq14((a[temp___idx_143]),
-  (b[((b__first - a__first) + temp___idx_143)])) = true)))))))
+  (forall temp___idx_165:int. (((a__first <= temp___idx_165) and
+  (temp___idx_165 <= a__last)) -> (bool_eq14((a[temp___idx_165]),
+  (b[((b__first - a__first) + temp___idx_165)])) = true)))))))
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
@@ -1365,161 +1189,60 @@ axiom is_available__def_axiom :
   ((is_available(account, database__availability__links) = true) <->
   ((((database__availability__links[account])).us_split_fields3).rec__database__availability__account_link__available = true))))
 
-logic account : int
-
-logic links : (int,us_rep1) farray
-
-logic first_available : int
-
-logic accounts : (int,us_rep2) farray
-
-logic accounts_balance : (int,us_rep3) farray
-
-logic o : ext_account_num
-
-logic o1 : (int,character) farray
-
-logic o2 : (int,num) farray
-
-logic o3 : ext_account_num
-
-logic o4 : (int,character) farray
-
-logic o5 : (int,num) farray
-
-logic o6 : ext_account_num
-
-logic o7 : (int,us_rep2) farray
-
-logic o8 : raw_amount
-
-logic o9 : cur
-
-logic o10 : cur
-
-logic o11 : raw_amount
-
-logic o12 : ext_account_num
-
-logic o13 : cur
-
-logic o14 : raw_amount
-
-logic o15 : cur
-
-logic o16 : raw_amount
-
-logic o17 : ext_account_num
-
-logic o18 : cur
-
-logic o19 : raw_amount
-
-logic o20 : ext_account_num
-
-logic o21 : (int,us_rep3) farray
-
-logic o22 : cur
-
-logic o23 : raw_amount
-
-logic account1 : int
-
-logic links1 : (int,us_rep1) farray
-
-logic first_available1 : int
-
-logic accounts1 : (int,us_rep2) farray
-
-logic accounts_balance1 : (int,us_rep3) farray
-
-logic result : bool
-
-logic result1 : int
-
-logic account2 : int
-
-logic account3 : int
-
-logic links2 : (int,us_rep1) farray
-
-logic first_available2 : int
-
-logic result2 : (int,us_rep2) farray
-
-logic accounts2 : (int,us_rep2) farray
-
-logic result3 : (int,us_rep3) farray
-
-logic accounts_balance2 : (int,us_rep3) farray
-
-logic account4 : int
-
-logic links3 : (int,us_rep1) farray
-
-logic first_available3 : int
-
-logic accounts3 : (int,us_rep2) farray
-
-logic accounts_balance3 : (int,us_rep3) farray
-
-logic account5 : int
-
-logic links4 : (int,us_rep1) farray
-
-logic first_available4 : int
-
-logic accounts4 : (int,us_rep2) farray
-
-logic accounts_balance4 : (int,us_rep3) farray
-
-logic account6 : int
-
-logic links5 : (int,us_rep1) farray
-
-logic first_available5 : int
-
-logic accounts5 : (int,us_rep2) farray
-
-logic accounts_balance5 : (int,us_rep3) farray
-
-logic account7 : int
-
-logic links6 : (int,us_rep1) farray
-
-logic first_available6 : int
-
-logic accounts6 : (int,us_rep2) farray
-
-logic accounts_balance6 : (int,us_rep3) farray
-
-logic result4 : bool
-
-logic result5 : bool
-
-axiom H : in_range4(first_available)
-
-axiom H1 : in_range2(cur1)
-
-axiom H2 : ((1 <= 200000) -> in_range5(account))
-
-axiom H3 : (not (max_account_reached(first_available) = true))
-
-axiom H4 : ((((((accounts_balance3 = accounts_balance) and
-  ((accounts3 = accounts) and ((first_available3 = first_available) and
-  ((links3 = links) and (account4 = account2))))) and
-  ((accounts_balance4 = accounts_balance1) and ((accounts4 = accounts1) and
-  ((first_available4 = first_available1) and ((links4 = links1) and
-  (account5 = account2)))))) and
+ (* File "money.ads", line 17, characters 0-0 *)
+goal WP_parameter_def :
+  (forall account:int. forall links:(int,us_rep1) farray.
+  forall first_available:int. forall accounts:(int,us_rep2) farray.
+  forall accounts_balance:(int,us_rep3) farray. forall o:ext_account_num.
+  forall o1:(int,character) farray. forall o2:(int,num) farray.
+  forall o3:ext_account_num. forall o4:(int,character) farray.
+  forall o5:(int,num) farray. forall o6:ext_account_num.
+  forall o7:(int,us_rep2) farray. forall o8:raw_amount. forall o9:cur.
+  forall o10:cur. forall o11:raw_amount. forall o12:ext_account_num.
+  forall o13:cur. forall o14:raw_amount. forall o15:cur.
+  forall o16:raw_amount. forall o17:ext_account_num. forall o18:cur.
+  forall o19:raw_amount. forall o20:ext_account_num.
+  forall o21:(int,us_rep3) farray. forall account1:int.
+  forall links1:(int,us_rep1) farray. forall first_available1:int.
+  forall accounts1:(int,us_rep2) farray.
+  forall accounts_balance1:(int,us_rep3) farray. forall result:bool.
+  forall result1:int. forall account2:int. forall account3:int.
+  forall links2:(int,us_rep1) farray. forall first_available2:int.
+  forall result2:(int,us_rep2) farray. forall accounts2:(int,us_rep2) farray.
+  forall result3:(int,us_rep3) farray.
+  forall accounts_balance2:(int,us_rep3) farray. forall account4:int.
+  forall links3:(int,us_rep1) farray. forall first_available3:int.
+  forall accounts3:(int,us_rep2) farray.
+  forall accounts_balance3:(int,us_rep3) farray. forall account5:int.
+  forall links4:(int,us_rep1) farray. forall first_available4:int.
+  forall accounts4:(int,us_rep2) farray.
+  forall accounts_balance4:(int,us_rep3) farray. forall account6:int.
+  forall links5:(int,us_rep1) farray. forall first_available5:int.
+  forall accounts5:(int,us_rep2) farray.
+  forall accounts_balance5:(int,us_rep3) farray. forall account7:int.
+  forall links6:(int,us_rep1) farray. forall first_available6:int.
+  forall accounts6:(int,us_rep2) farray.
+  forall accounts_balance6:(int,us_rep3) farray.
+  ((in_range4(first_available) and (in_range2(cur1) and (((1 <= 200000) ->
+  in_range5(account)) and
+  ((not (max_account_reached(first_available) = true)) and (((((({
+  map__content4 = accounts_balance3 } = { map__content4 = accounts_balance
+  }) and (({ map__content3 = accounts3 } = { map__content3 = accounts }) and
+  (({ int__content = first_available3 } = { int__content = first_available
+  }) and (({ map__content2 = links3 } = { map__content2 = links }) and
+  (account2 = account4))))) and ((accounts_balance4 = accounts_balance1) and
+  ((accounts4 = accounts1) and ((first_available4 = first_available1) and
+  ((links4 = links1) and (account5 = account2)))))) and
   (((result = max_account_reached(first_available)) and ((result = true) <->
   (not (some_available(first_available) = true)))) and ((result = true) and
-  ((result1 = account) and (account2 = 200000))))) or
+  (({ int__content = result1 } = { int__content = account }) and
+  (account2 = 200000))))) or
   ((((result = max_account_reached(first_available)) and ((result = true) <->
   (not (some_available(first_available) = true)))) and
   ((not (result = true)) and ((account2 = account) and
-  (account2 = account1)))) and ((((accounts_balance3 = accounts_balance2) and
-  ((accounts3 = accounts2) and ((first_available3 = first_available2) and
-  ((links3 = links2) and (account4 = account3))))) and
+  (account2 = account1)))) and ((((accounts_balance2 = accounts_balance3) and
+  ((accounts2 = accounts3) and ((first_available2 = first_available3) and
+  ((links2 = links3) and (account3 = account4))))) and
   ((accounts_balance4 = accounts_balance2) and ((accounts4 = accounts2) and
   ((first_available4 = first_available2) and ((links4 = links2) and
   (account5 = account3)))))) and ((((not (is_available(account3,
@@ -1544,12 +1267,12 @@ axiom H4 : ((((((accounts_balance3 = accounts_balance) and
   rec__database__account_balance__value = { us_split_fields1 = {
   rec__money__amount__currency = o18; rec__money__amount__raw = o19 } };
   rec__database__account_balance__account = o20 } }]))) and
-  ((result3 = accounts_balance) and (accounts_balance2 = o21)))))))) and
-  (((accounts_balance5 = accounts_balance3) and ((accounts5 = accounts3) and
-  ((first_available5 = first_available3) and ((links5 = links3) and
-  (account6 = account4))))) and ((accounts_balance6 = accounts_balance4) and
-  ((accounts6 = accounts4) and ((first_available6 = first_available4) and
-  ((links6 = links4) and (account7 = account5)))))))
-
- (* File "money.ads", line 17, characters 0-0 *)
-goal WP_parameter_def : (existing(account6, links5) = true)
+  ((result3 = accounts_balance) and (accounts_balance2 = o21)))))))) and ((({
+  map__content4 = accounts_balance5 } = { map__content4 = accounts_balance3
+  }) and (({ map__content3 = accounts5 } = { map__content3 = accounts3 }) and
+  (({ int__content = first_available5 } = { int__content = first_available3
+  }) and (({ map__content2 = links5 } = { map__content2 = links3 }) and ({
+  int__content = account6 } = { int__content = account4 }))))) and
+  ((accounts_balance6 = accounts_balance4) and ((accounts6 = accounts4) and
+  ((first_available6 = first_available4) and ((links6 = links4) and
+  (account7 = account5))))))))))) -> (existing(account6, links5) = true)))

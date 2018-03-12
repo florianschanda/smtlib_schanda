@@ -295,72 +295,26 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic x : bool
-
-logic n : int
-
-logic s__split_fields : bool
-
-logic s__split_fields1 : enum_t
-
-logic s__split_fields2 : integer
-
-logic temp___155 : bool
-
-logic temp___1551 : enum_t
-
-logic temp___1552 : integer
-
-logic result : bool
-
-logic result1 : enum_t
-
-logic result2 : integer
-
-logic s__split_fields3 : bool
-
-logic s__split_fields4 : enum_t
-
-logic s__split_fields5 : integer
-
-logic result3 : int
-
-logic n1 : int
-
-logic result4 : bool
-
-logic x1 : bool
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range(n))
-
-axiom H1 : (({ us_split_fields1 = { rec__mixed__rec__b = temp___155;
-  rec__mixed__rec__e = temp___1551; rec__mixed__rec__i = temp___1552 }
-  } = id({ us_split_fields1 = { rec__mixed__rec__b = r; rec__mixed__rec__e =
-  r1; rec__mixed__rec__i = r2 } })) and (bool_eq3({ us_split_fields1 = {
-  rec__mixed__rec__b = r; rec__mixed__rec__e = r1; rec__mixed__rec__i = r2 }
-  }, { us_split_fields1 = { rec__mixed__rec__b = temp___155;
-  rec__mixed__rec__e = temp___1551; rec__mixed__rec__i = temp___1552 }
-  }) = true))
-
-axiom H2 : (result = s__split_fields)
-
-axiom H3 : (result1 = s__split_fields1)
-
-axiom H4 : (result2 = s__split_fields2)
-
-axiom H5 : (temp___155 = s__split_fields3)
-
-axiom H6 : (temp___1551 = s__split_fields4)
-
-axiom H7 : (temp___1552 = s__split_fields5)
-
-axiom H8 : (result3 = n)
-
-axiom H9 : (n1 = to_rep(s__split_fields5))
-
-axiom H10 : (result4 = x)
-
-axiom H11 : (((n1 = 0) -> (x1 = true)) and ((not (n1 = 0)) -> (x1 = false)))
-
  (* File "mixed.adb", line 28, characters 0-0 *)
-goal WP_parameter_def : (x1 = true)
+goal WP_parameter_def :
+  (forall x:bool. forall n:int. forall s__split_fields:bool.
+  forall s__split_fields1:enum_t. forall s__split_fields2:integer.
+  forall temp___180:bool. forall temp___1801:enum_t.
+  forall temp___1802:integer. forall result:bool. forall result1:enum_t.
+  forall result2:integer. forall s__split_fields3:bool.
+  forall s__split_fields4:enum_t. forall s__split_fields5:integer.
+  forall result3:int. forall n1:int. forall result4:bool. forall x1:bool.
+  ((((- 2147483648) <= 2147483647) -> in_range(n)) -> (((({
+  us_split_fields1 = { rec__mixed__rec__b = temp___180; rec__mixed__rec__e =
+  temp___1801; rec__mixed__rec__i = temp___1802 } } = id({ us_split_fields1 =
+  { rec__mixed__rec__b = r; rec__mixed__rec__e = r1; rec__mixed__rec__i = r2
+  } })) and (bool_eq3({ us_split_fields1 = { rec__mixed__rec__b = r;
+  rec__mixed__rec__e = r1; rec__mixed__rec__i = r2 } }, { us_split_fields1 =
+  { rec__mixed__rec__b = temp___180; rec__mixed__rec__e = temp___1801;
+  rec__mixed__rec__i = temp___1802 } }) = true)) and
+  (((result = s__split_fields) and ((result1 = s__split_fields1) and
+  (result2 = s__split_fields2))) and ((temp___180 = s__split_fields3) and
+  ((temp___1801 = s__split_fields4) and
+  (temp___1802 = s__split_fields5))))) -> (((result3 = n) and
+  (n1 = to_rep(s__split_fields5))) -> (((result4 = x) and (((n1 = 0) and
+  (x1 = true)) or ((not (n1 = 0)) and (x1 = false)))) -> (x1 = true))))))

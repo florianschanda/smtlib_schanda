@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -135,25 +135,10 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : int
-
-logic o : int
-
-logic x1 : int
-
-logic result : int
-
-logic x2 : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range1(x))
-
-axiom H1 : ((of_int(1) = true) -> (result = x))
-
-axiom H2 : ((of_int(1) = true) -> (x2 = 5))
-
-axiom H3 : ((not (of_int(1) = true)) -> (x2 = x))
-
-axiom H4 : ((not (of_int(1) = true)) -> (x2 = x1))
-
  (* File "uninitialized.adb", line 8, characters 0-0 *)
-goal WP_parameter_def : in_range1((x2 + 1))
+goal WP_parameter_def :
+  (forall x:int. forall x1:int. forall result:int. forall x2:int.
+  ((((- 2147483648) <= 2147483647) -> in_range1(x)) ->
+  ((((of_int(1) = true) and ((result = x) and (x2 = 5))) or
+  ((not (of_int(1) = true)) and ((x2 = x) and (x2 = x1)))) ->
+  in_range1((x2 + 1)))))

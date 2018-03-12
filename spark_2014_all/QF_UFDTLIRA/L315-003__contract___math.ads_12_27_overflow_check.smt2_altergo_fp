@@ -109,25 +109,5 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic math__bad__result : int
-
-logic o : int
-
-logic result : int
-
-logic math__bad__result1 : int
-
-logic math__bad__result2 : int
-
-logic math__bad__result3 : int
-
-logic math__bad__result4 : int
-
-logic math__bad__result5 : int
-
-axiom H : in_range(x)
-
-axiom H1 : (0 <= x)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((x + x))
+goal WP_parameter_def : (in_range(x) -> ((0 <= x) -> in_range((x + x))))

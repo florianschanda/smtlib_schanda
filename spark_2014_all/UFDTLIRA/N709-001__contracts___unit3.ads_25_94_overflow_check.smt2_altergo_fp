@@ -492,12 +492,6 @@ logic is_max__function_guard1 : bool, int, us_rep2 -> prop
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq5 : bool, bool -> bool
-
-axiom bool_eq_def4 :
-  (forall x:bool. forall y:bool [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -509,6 +503,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq5 : bool, bool -> bool
+
+axiom bool_eq_def4 :
+  (forall x:bool. forall y:bool [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -647,57 +647,18 @@ axiom is_max__def_axiom2 :
   x2 })]. ((is_max4({ us_split_fields1 = { rec__unit1__t1__c1 = x;
   rec__ext__ = x1 }; attr__tag = x2 }) = true) <-> (to_rep(x) = 2147483647)))
 
-logic x__split_fields : integer
-
-logic x__split_fields1 : integer
-
-logic x__split_fields2 : integer
-
-logic x__split_fields3 : us_private
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic x__split_fields4 : integer
-
-logic x__split_fields5 : integer
-
-logic x__split_fields6 : integer
-
-logic x__split_fields7 : integer
-
-logic x__split_fields8 : integer
-
-logic result : bool
-
-logic result1 : bool
-
-logic x__split_fields9 : integer
-
-logic x__split_fields10 : integer
-
-logic x__split_fields11 : integer
-
-logic x__split_fields12 : us_private
-
-axiom H : ((o2 = (to_rep(x__split_fields1) + 1)) and
-  in_range((to_rep(x__split_fields1) + 1)))
-
-axiom H1 : (((to_rep(x__split_fields7) = o2) -> (result = true)) and
-  ((not (to_rep(x__split_fields7) = o2)) -> (result = false)))
-
-axiom H2 : (result = true)
-
-axiom H3 : ((o1 = (to_rep(x__split_fields2) + 1)) and
-  in_range((to_rep(x__split_fields2) + 1)))
-
-axiom H4 : (((to_rep(x__split_fields8) = o1) -> (result1 = true)) and
-  ((not (to_rep(x__split_fields8) = o1)) -> (result1 = false)))
-
-axiom H5 : (result1 = true)
-
  (* File "unit3.ads", line 26, characters 0-0 *)
-goal WP_parameter_def : in_range((to_rep(x__split_fields) + 1))
+goal WP_parameter_def :
+  (forall x__split_fields:integer. forall x__split_fields1:integer.
+  forall x__split_fields2:integer. forall o:int. forall o1:int.
+  forall x__split_fields3:integer. forall x__split_fields4:integer.
+  forall result:bool. forall result1:bool.
+  ((((o1 = (to_rep(x__split_fields1) + 1)) and
+  in_range((to_rep(x__split_fields1) + 1))) and
+  (((to_rep(x__split_fields3) = o1) and (result = true)) or
+  ((not (to_rep(x__split_fields3) = o1)) and (result = false)))) ->
+  ((result = true) -> ((((o = (to_rep(x__split_fields2) + 1)) and
+  in_range((to_rep(x__split_fields2) + 1))) and
+  (((to_rep(x__split_fields4) = o) and (result1 = true)) or
+  ((not (to_rep(x__split_fields4) = o)) and (result1 = false)))) ->
+  ((result1 = true) -> in_range((to_rep(x__split_fields) + 1)))))))

@@ -594,12 +594,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -611,6 +605,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -774,24 +774,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,octet) farray, int, int, (int,octet) farray, int,
-  int -> (int,octet) farray
-
-axiom concat_def :
-  (forall a:(int,octet) farray. forall b:(int,octet) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : octet, int -> (int,octet) farray
-
-axiom singleton_def :
-  (forall v:octet.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq6 : (int,octet) farray, int, int, (int,octet) farray, int,
   int -> bool
 
@@ -802,17 +784,17 @@ axiom bool_eq_def5 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -822,37 +804,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,octet) farray, int, int, (int,octet) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,octet) farray. forall b:(int,octet) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq6(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,octet) farray. forall b:(int,octet) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq6(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and ult(to_rep1((a[(i + 1)])), to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,octet) farray. forall b:(int,octet) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq6(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and ugt(to_rep1((a[(j + 1)])), to_rep1((b[(i + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type tdigit_count_typeB
 
@@ -1120,6 +1074,10 @@ logic is_zero__function_guard : bool, us_rep -> prop
 
 axiom is_zero__post_axiom : true
 
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
 axiom is_zero__def_axiom :
   (forall number:digit_index_type. forall number1:(int,octet) farray.
   forall number2:t1 [is_zero({ us_split_discrs1 = {
@@ -1130,7 +1088,7 @@ axiom is_zero__def_axiom :
   rec__very_longs__very_long__long_digits = { elts = number1; rt = number2 }
   } }) = true) <->
   (forall j:int. (((1 <= j) and (j <= to_rep2(last(number2)))) ->
-  (to_rep1((number1[j])) = of_int(0))))))
+  (to_rep1((number1[j])) = rliteral)))))
 
 logic number : digit_index_type
 
@@ -1169,193 +1127,87 @@ function t60b__ref___projection(a: t60b__ref) : tdigit_count_typeB =
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic digit_count : int
-
-logic index : int
-
-logic very_longs__number_of_digits__result : int
-
-logic us : int
-
-logic o : bool
-
-logic temp___876 : int
-
-logic temp___875 : int
-
-logic o1 : int
-
-logic o2 : octet
-
-logic o3 : t
-
-logic o4 : bool
-
-logic o5 : int
-
-logic j : int
-
-logic o6 : bool
-
-logic o7 : int
-
-logic o8 : octet
-
-logic o9 : t
-
-logic o10 : bool
-
-logic o11 : int
-
-logic j1 : int
-
-logic o12 : bool
-
-logic index1 : int
-
-logic result : int
-
-logic digit_count1 : int
-
-logic result1 : bool
-
-logic result2 : int
-
-logic index2 : int
-
-logic result3 : bool
-
-logic result4 : int
-
-logic digit_count2 : int
-
-logic digit_count3 : int
-
-logic index3 : int
-
-logic result5 : int
-
-logic index4 : int
-
-logic result6 : bool
-
-logic result7 : int
-
-logic digit_count4 : int
-
-logic digit_count5 : int
-
-logic index5 : int
-
-logic digit_count6 : int
-
-logic index6 : int
-
-logic digit_count7 : int
-
-logic index7 : int
-
-logic digit_count8 : int
-
-logic index8 : int
-
-logic digit_count9 : int
-
-logic index9 : int
-
-logic digit_count10 : int
-
-logic index10 : int
-
-logic digit_count11 : int
-
-logic index11 : int
-
-logic digit_count12 : int
-
-logic index12 : int
-
-logic result8 : int
-
-logic very_longs__number_of_digits__result1 : int
-
-logic very_longs__number_of_digits__result2 : int
-
-logic very_longs__number_of_digits__result3 : int
-
-logic digit_count13 : int
-
-logic index13 : int
-
-logic very_longs__number_of_digits__result4 : int
-
-logic digit_count14 : int
-
-logic index14 : int
-
-logic very_longs__number_of_digits__result5 : int
-
-axiom H : (dynamic_property1(1, to_rep(number), to_rep2(first(number2)),
-  to_rep2(last(number2))) and ((to_rep2(first(number2)) = 1) and
-  (to_rep2(last(number2)) = to_rep(number))))
-
-axiom H1 : ((((us = to_rep(number)) and in_range2(to_rep(number))) and
-  (((result = digit_count) and (digit_count1 = 0)) and
-  (in_range1(digit_count1) and (((((o = is_zero({ us_split_discrs1 = {
-  rec__very_longs__very_long__length = number }; us_split_fields1 = {
-  rec__very_longs__very_long__long_digits = { elts = number1; rt = number2 }
-  } })) and ((o = true) <->
-  (forall j2:int. (((1 <= j2) and (j2 <= to_rep2(last(number2)))) ->
-  (to_rep1((number1[j2])) = of_int(0)))))) and (((not (o = true)) ->
-  (result1 = true)) and ((o = true) -> (result1 = false)))) and
-  (((result1 = true) -> ((((result2 = index) and (index2 = 1)) and
-  ((((1 <= index2) and (index2 <= to_rep2(last(number2)))) ->
-  ((((temp___876 = digit_count1) and ((temp___875 = index2) and
-  (((((((((to_rep2(first(number2)) <= index2) and
+ (* File "very_longs.ads", line 7, characters 0-0 *)
+goal WP_parameter_def :
+  (forall digit_count:int. forall index:int.
+  forall very_longs__number_of_digits__result:int. forall us:int.
+  forall o:bool. forall temp___945:int. forall temp___944:int. forall o1:int.
+  forall o2:octet. forall o3:t. forall o4:bool. forall o5:int.
+  forall o6:bool. forall index1:int. forall result:int.
+  forall digit_count1:int. forall result1:bool. forall result2:int.
+  forall index2:int. forall result3:bool. forall result4:int.
+  forall digit_count2:int. forall digit_count3:int. forall index3:int.
+  forall digit_count4:int. forall index4:int. forall digit_count5:int.
+  forall index5:int. forall digit_count6:int. forall index6:int.
+  forall digit_count7:int. forall index7:int. forall digit_count8:int.
+  forall index8:int. forall digit_count9:int. forall index9:int.
+  forall result5:int. forall very_longs__number_of_digits__result1:int.
+  forall very_longs__number_of_digits__result2:int.
+  forall very_longs__number_of_digits__result3:int. forall digit_count10:int.
+  forall index10:int. forall very_longs__number_of_digits__result4:int.
+  forall digit_count11:int. forall index11:int.
+  forall very_longs__number_of_digits__result5:int. ((dynamic_property1(1,
+  to_rep(number), to_rep2(first(number2)), to_rep2(last(number2))) and
+  ((to_rep2(first(number2)) = 1) and
+  (to_rep2(last(number2)) = to_rep(number)))) ->
+  (((((us = to_rep(number)) and in_range2(to_rep(number))) and ((({
+  int__content = result } = { int__content = digit_count }) and
+  (digit_count1 = 0)) and (in_range1(digit_count1) and (((((o = is_zero({
+  us_split_discrs1 = { rec__very_longs__very_long__length = number };
+  us_split_fields1 = { rec__very_longs__very_long__long_digits = { elts =
+  number1; rt = number2 } } })) and ((o = true) <->
+  (forall j:int. (((1 <= j) and (j <= to_rep2(last(number2)))) ->
+  (to_rep1((number1[j])) = rliteral))))) and (((not (o = true)) and
+  (result1 = true)) or ((o = true) and (result1 = false)))) and
+  (((result1 = true) and (((({ int__content = result2 } = { int__content =
+  index }) and (index2 = 1)) and ((((1 <= index2) and
+  (index2 <= to_rep2(last(number2)))) and ((((temp___945 = digit_count1) and
+  ((temp___944 = index2) and (((((((((to_rep2(first(number2)) <= index2) and
   (index2 <= to_rep2(last(number2)))) and (o1 = index2)) and
-  (o2 = (number1[o1]))) and (o3 = to_rep1(o2))) and (((o3 = of_int(0)) ->
-  (o4 = true)) and ((not (o3 = of_int(0))) -> (o4 = false)))) and
-  (((not (o4 = true)) -> (result3 = true)) and ((o4 = true) ->
-  (result3 = false)))) and (((result3 = true) -> (((o5 = index2) and
+  (o2 = (number1[o1]))) and (o3 = to_rep1(o2))) and (((o3 = rliteral) and
+  (o4 = true)) or ((not (o3 = rliteral)) and (o4 = false)))) and
+  (((not (o4 = true)) and (result3 = true)) or ((o4 = true) and
+  (result3 = false)))) and (((result3 = true) and (((o5 = index2) and
   in_range1(index2)) and ((digit_count1 = result4) and
-  (digit_count2 = o5)))) and ((not (result3 = true)) ->
+  (digit_count2 = o5)))) or ((not (result3 = true)) and
   (digit_count2 = digit_count1)))) and ((((0 <  digit_count3) ->
-  ((not (to_rep1((number1[digit_count3])) = of_int(0))) and
+  ((not (to_rep1((number1[digit_count3])) = rliteral)) and
   ((1 <= digit_count3) and (digit_count3 <= index3)))) and
   ((digit_count3 <  index3) ->
-  (forall j2:int. ((((digit_count3 + 1) <= j2) and (j2 <= index3)) ->
-  (to_rep1((number1[j2])) = of_int(0)))))) and
+  (forall j:int. ((((digit_count3 + 1) <= j) and (j <= index3)) ->
+  (to_rep1((number1[j])) = rliteral))))) and
   (((((1 <= to_rep2(last(number2))) -> dynamic_property2(1,
   to_rep2(last(number2)), index3)) and ((0 <= 65536) ->
   in_range1(digit_count3))) and ((1 <= index3) and
   (index3 <= to_rep2(last(number2))))) and
-  (index3 = to_rep2(last(number2)))))))) and (((index3 = index7) and
-  (digit_count3 = digit_count7)) and ((index8 = index3) and
-  (digit_count8 = digit_count3)))) and (((index9 = index7) and
-  (digit_count9 = digit_count7)) and ((index10 = index8) and
-  (digit_count10 = digit_count8))))) and ((not ((1 <= index2) and
-  (index2 <= to_rep2(last(number2))))) -> (((index2 = index9) and
-  (digit_count1 = digit_count9)) and ((index10 = index2) and
-  (digit_count10 = digit_count1)))))) and (((index11 = index9) and
-  (digit_count11 = digit_count9)) and ((index12 = index10) and
-  (digit_count12 = digit_count10))))) and ((not (result1 = true)) ->
-  (((index11 = index) and (digit_count1 = digit_count11)) and
-  ((index12 = index1) and (digit_count12 = digit_count1)))))) and
+  (index3 = to_rep2(last(number2)))))))) and (((index3 = index4) and
+  (digit_count3 = digit_count4)) and ((index5 = index3) and
+  (digit_count5 = digit_count3)))) and ((({ int__content = index6 } = {
+  int__content = index4 }) and ({ int__content = digit_count6 } = {
+  int__content = digit_count4 })) and ((index7 = index5) and
+  (digit_count7 = digit_count5))))) or ((not ((1 <= index2) and
+  (index2 <= to_rep2(last(number2))))) and (((index2 = index6) and
+  (digit_count1 = digit_count6)) and ((index7 = index2) and
+  (digit_count7 = digit_count1)))))) and ((({ int__content = index8 } = {
+  int__content = index6 }) and ({ int__content = digit_count8 } = {
+  int__content = digit_count6 })) and ((index9 = index7) and
+  (digit_count9 = digit_count7))))) or ((not (result1 = true)) and ((({
+  int__content = index8 } = { int__content = index }) and
+  (digit_count1 = digit_count8)) and ((index9 = index1) and
+  (digit_count9 = digit_count1)))))) and
   (((very_longs__number_of_digits__result1 = very_longs__number_of_digits__result2) and
   (very_longs__number_of_digits__result3 = very_longs__number_of_digits__result1)) and
-  ((result8 = very_longs__number_of_digits__result) and
-  (very_longs__number_of_digits__result1 = digit_count11))))))) and
-  (((very_longs__number_of_digits__result4 = very_longs__number_of_digits__result2) and
-  ((index13 = index11) and (digit_count13 = digit_count11))) and
+  (({ int__content = result5 } = { int__content =
+  very_longs__number_of_digits__result }) and
+  (very_longs__number_of_digits__result1 = digit_count8))))))) and ((({
+  int__content = very_longs__number_of_digits__result4 } = { int__content =
+  very_longs__number_of_digits__result2 }) and (({ int__content = index10
+  } = { int__content = index8 }) and ({ int__content = digit_count10 } = {
+  int__content = digit_count8 }))) and
   ((very_longs__number_of_digits__result5 = very_longs__number_of_digits__result3) and
-  ((index14 = index12) and (digit_count14 = digit_count12)))))
-
-axiom H2 : ((o12 = true) <->
-  (forall j2:int. ((((very_longs__number_of_digits__result4 + 1) <= j2) and
-  (j2 <= to_rep2(last(number2)))) -> (to_rep1((number1[j2])) = of_int(0)))))
-
-axiom H3 : (0 <  very_longs__number_of_digits__result4)
-
- (* File "very_longs.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (to_rep2(first(number2)) <= very_longs__number_of_digits__result4)
+  ((index11 = index9) and (digit_count11 = digit_count9))))) ->
+  (((o6 = true) <->
+  (forall j:int. ((((very_longs__number_of_digits__result4 + 1) <= j) and
+  (j <= to_rep2(last(number2)))) -> (to_rep1((number1[j])) = rliteral)))) ->
+  ((0 <  very_longs__number_of_digits__result4) ->
+  (to_rep2(first(number2)) <= very_longs__number_of_digits__result4))))))

@@ -237,21 +237,10 @@ axiom x__def_axiom : (x = of_rep(0))
 axiom y__def_axiom : ({ us_split_fields1 = { rec__test_type__t__f = y }
   } = decr_int({ us_split_fields1 = { rec__test_type__t__f = x } }))
 
-logic o : integer
-
-logic o1 : integer
-
-logic test_type__test__x__assume : integer
-
-logic test_type__test__y__assume : integer
-
-axiom H : (to_rep(o) = 0)
-
-axiom H1 : (o = o1)
-
-axiom H2 : (test_type__test__x__assume = o1)
-
-axiom H3 : (test_type__test__x__assume = x)
-
  (* File "test_type-test.ads", line 4, characters 0-0 *)
-goal WP_parameter_def : ((- 2147483648) <  to_rep(x))
+goal WP_parameter_def :
+  (forall o:integer. forall o1:integer.
+  forall test_type__test__x__assume:integer. (((((to_rep(o) = 0) and
+  (o = o1)) and (test_type__test__x__assume = o1)) and
+  (test_type__test__x__assume = x)) -> (in_range1(to_rep(x)) ->
+  ((- 2147483648) <  to_rep(x)))))

@@ -270,41 +270,5 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : integer
-
-logic us_self__compl : integer
-
-logic o1 : integer
-
-logic us_self__compl1 : integer
-
-logic o2 : integer
-
-logic us_self__compl2 : integer
-
-logic p__split_fields : integer
-
-logic us_self__compl3 : integer
-
-logic result : integer
-
-logic p__split_fields1 : integer
-
-logic q__split_fields : integer
-
-logic us_self__compl4 : integer
-
-logic result1 : integer
-
-logic q__split_fields1 : integer
-
-logic p__split_fields2 : integer
-
-logic us_self__compl5 : integer
-
-logic result2 : integer
-
-logic p__split_fields3 : integer
-
  (* File "active_prio.ads", line 16, characters 0-0 *)
 goal WP_parameter_def : (0 <= 5)

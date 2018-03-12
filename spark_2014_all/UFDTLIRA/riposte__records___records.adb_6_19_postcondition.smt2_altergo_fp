@@ -216,123 +216,57 @@ function pair__ref___projection(a: pair__ref) : us_rep = (a).pair__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic r__split_fields : unsigned_byte
-
-logic r__split_fields1 : unsigned_byte
-
-logic records__init_a__result : unsigned_byte
-
-logic records__init_a__result1 : unsigned_byte
-
-logic o : unsigned_byte
-
-logic o1 : unsigned_byte
-
-logic o2 : unsigned_byte
-
-logic o3 : unsigned_byte
-
-logic temp___257 : unsigned_byte
-
-logic temp___2571 : unsigned_byte
-
-logic result : unsigned_byte
-
-logic result1 : unsigned_byte
-
-logic r__split_fields2 : unsigned_byte
-
-logic r__split_fields3 : unsigned_byte
-
-logic result2 : unsigned_byte
-
-logic result3 : unsigned_byte
-
-logic records__init_a__result2 : unsigned_byte
-
-logic records__init_a__result3 : unsigned_byte
-
-logic records__init_a__result4 : unsigned_byte
-
-logic records__init_a__result5 : unsigned_byte
-
-logic records__init_a__result6 : unsigned_byte
-
-logic records__init_a__result7 : unsigned_byte
-
-logic r__split_fields4 : unsigned_byte
-
-logic r__split_fields5 : unsigned_byte
-
-logic records__init_a__result8 : unsigned_byte
-
-logic records__init_a__result9 : unsigned_byte
-
-logic r__split_fields6 : unsigned_byte
-
-logic r__split_fields7 : unsigned_byte
-
-logic records__init_a__result10 : unsigned_byte
-
-logic records__init_a__result11 : unsigned_byte
-
-logic result4 : unsigned_byte
-
-logic result5 : unsigned_byte
-
-axiom H : (to_rep(o) = 0)
-
-axiom H1 : (to_rep(o1) = 0)
-
-axiom H2 : (o1 = o2)
-
-axiom H3 : (o = o3)
-
-axiom H4 : (temp___257 = o2)
-
-axiom H5 : (temp___2571 = o3)
-
-axiom H6 : (result = r__split_fields)
-
-axiom H7 : (result1 = r__split_fields1)
-
-axiom H8 : (temp___257 = r__split_fields2)
-
-axiom H9 : (temp___2571 = r__split_fields3)
-
-axiom H10 : (records__init_a__result4 = records__init_a__result2)
-
-axiom H11 : (records__init_a__result5 = records__init_a__result3)
-
-axiom H12 : ((records__init_a__result6 = records__init_a__result2) and
-  (records__init_a__result7 = records__init_a__result3))
-
-axiom H13 : (result2 = records__init_a__result)
-
-axiom H14 : (result3 = records__init_a__result1)
-
-axiom H15 : (records__init_a__result2 = r__split_fields2)
-
-axiom H16 : (records__init_a__result3 = r__split_fields3)
-
-axiom H17 : ((records__init_a__result8 = records__init_a__result4) and
-  (records__init_a__result9 = records__init_a__result5))
-
-axiom H18 : ((r__split_fields4 = r__split_fields2) and
-  (r__split_fields5 = r__split_fields3))
-
-axiom H19 : ((records__init_a__result10 = records__init_a__result6) and
-  (records__init_a__result11 = records__init_a__result7))
-
-axiom H20 : ((r__split_fields6 = r__split_fields2) and
-  (r__split_fields7 = r__split_fields3))
-
-axiom H21 : ((result4 = records__init_a__result8) and
-  (result5 = records__init_a__result9))
-
  (* File "records_prooffuncs.ads", line 11, characters 0-0 *)
-goal WP_parameter_def : (bool_eq2({ us_split_fields1 = {
+goal WP_parameter_def :
+  (forall r__split_fields:unsigned_byte.
+  forall r__split_fields1:unsigned_byte.
+  forall records__init_a__result:unsigned_byte.
+  forall records__init_a__result1:unsigned_byte. forall o:unsigned_byte.
+  forall o1:unsigned_byte. forall o2:unsigned_byte. forall o3:unsigned_byte.
+  forall temp___290:unsigned_byte. forall temp___2901:unsigned_byte.
+  forall result:unsigned_byte. forall result1:unsigned_byte.
+  forall r__split_fields2:unsigned_byte.
+  forall r__split_fields3:unsigned_byte. forall result2:unsigned_byte.
+  forall result3:unsigned_byte.
+  forall records__init_a__result2:unsigned_byte.
+  forall records__init_a__result3:unsigned_byte.
+  forall records__init_a__result4:unsigned_byte.
+  forall records__init_a__result5:unsigned_byte.
+  forall records__init_a__result6:unsigned_byte.
+  forall records__init_a__result7:unsigned_byte.
+  forall r__split_fields4:unsigned_byte.
+  forall r__split_fields5:unsigned_byte.
+  forall records__init_a__result8:unsigned_byte.
+  forall records__init_a__result9:unsigned_byte.
+  forall r__split_fields6:unsigned_byte.
+  forall r__split_fields7:unsigned_byte.
+  forall records__init_a__result10:unsigned_byte.
+  forall records__init_a__result11:unsigned_byte.
+  (forall result4:unsigned_byte. forall result5:unsigned_byte.
+  ((((((((to_rep(o) = 0) and ((to_rep(o1) = 0) and ((o1 = o2) and
+  (o = o3)))) and ((temp___290 = o2) and (temp___2901 = o3))) and
+  (((result = r__split_fields) and (result1 = r__split_fields1)) and
+  ((temp___290 = r__split_fields2) and
+  (temp___2901 = r__split_fields3)))) and
+  ((((records__init_a__result4 = records__init_a__result2) and
+  (records__init_a__result5 = records__init_a__result3)) and
+  ((records__init_a__result2 = records__init_a__result6) and
+  (records__init_a__result3 = records__init_a__result7))) and
+  (((result2 = records__init_a__result) and
+  (result3 = records__init_a__result1)) and
+  ((records__init_a__result2 = r__split_fields2) and
+  (records__init_a__result3 = r__split_fields3))))) and
+  ((((records__init_a__result4 = records__init_a__result8) and
+  (records__init_a__result5 = records__init_a__result9)) and
+  ((r__split_fields4 = r__split_fields2) and
+  (r__split_fields5 = r__split_fields3))) and
+  (((records__init_a__result10 = records__init_a__result6) and
+  (records__init_a__result11 = records__init_a__result7)) and
+  ((r__split_fields6 = r__split_fields2) and
+  (r__split_fields7 = r__split_fields3))))) and
+  ((result4 = records__init_a__result8) and
+  (result5 = records__init_a__result9))) -> (bool_eq2({ us_split_fields1 = {
   rec__records_prooffuncs__pair__a = records__init_a__result8;
   rec__records_prooffuncs__pair__b = records__init_a__result9 } }, {
   us_split_fields1 = { rec__records_prooffuncs__pair__a = of_rep(0);
-  rec__records_prooffuncs__pair__b = of_rep(0) } }) = true)
+  rec__records_prooffuncs__pair__b = of_rep(0) } }) = true))))

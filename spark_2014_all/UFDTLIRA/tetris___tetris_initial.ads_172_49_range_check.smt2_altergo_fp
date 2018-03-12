@@ -460,21 +460,6 @@ logic a : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-axiom H : in_range4(a)
-
-axiom H1 : (not (a = 0))
-
-axiom H2 : (not (a = 1))
-
-axiom H3 : (a = 2)
-
  (* File "tetris_initial.ads", line 65, characters 0-0 *)
-goal WP_parameter_def : in_range1((to_rep1(p3) + 1))
+goal WP_parameter_def : (in_range4(a) -> ((not (a = 0)) -> ((not (a = 1)) ->
+  ((a = 2) -> in_range1((to_rep1(p3) + 1))))))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -139,55 +139,14 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic export__ : int
-
-logic a : int
-
-logic b : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic a1 : int
-
-logic result1 : int
-
-logic b1 : int
-
-logic export__1 : int
-
-logic a2 : int
-
-logic b2 : int
-
-logic result2 : int
-
-logic a3 : int
-
-logic export__2 : int
-
-logic b3 : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range1(export__))
-
-axiom H1 : (result = a)
-
-axiom H2 : (a1 = 0)
-
-axiom H3 : in_range1(a1)
-
-axiom H4 : (result1 = b)
-
-axiom H5 : (b1 = 100)
-
-axiom H6 : in_range1(b1)
-
-axiom H7 : (((((- 2147483648) <= 2147483647) -> in_range1(export__1)) and
-  (((- 2147483648) <= 2147483647) -> in_range1(a2))) and
-  (((- 2147483648) <= 2147483647) -> in_range1(b2)))
-
  (* File "test.adb", line 38, characters 0-0 *)
-goal WP_parameter_def : in_range1((a2 + 1))
+goal WP_parameter_def :
+  (forall export__:int. forall a:int. forall b:int. forall result:int.
+  forall a1:int. forall result1:int. forall b1:int. forall export__1:int.
+  forall a2:int. forall b2:int. ((((- 2147483648) <= 2147483647) ->
+  in_range1(export__)) -> (((result = a) and (a1 = 0)) -> (in_range1(a1) ->
+  (((result1 = b) and (b1 = 100)) -> (in_range1(b1) ->
+  ((((((- 2147483648) <= 2147483647) -> in_range1(export__1)) and
+  (((- 2147483648) <= 2147483647) -> in_range1(a2))) and
+  (((- 2147483648) <= 2147483647) -> in_range1(b2))) ->
+  in_range1((a2 + 1)))))))))

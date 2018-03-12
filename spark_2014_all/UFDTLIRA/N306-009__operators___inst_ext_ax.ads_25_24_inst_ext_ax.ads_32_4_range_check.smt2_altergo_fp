@@ -179,24 +179,9 @@ logic i2 : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-axiom H : in_range1(i1)
-
-axiom H1 : in_range1(i2)
-
-axiom H2 : ((o = addthree(i1, i2, i1)) and (in_range(o) and
-  (o = ((i1 + i2) + i1))))
-
-axiom H3 : (o1 = ((i1 + i2) + o))
-
-axiom H4 : ((o2 = o1) and in_range(o1))
-
  (* File "inst_ext_ax.ads", line 11, characters 0-0 *)
-goal WP_parameter_def : in_range2(o2)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. forall o2:int. (in_range1(i1) ->
+  (in_range1(i2) -> (((((o = addthree(i1, i2, i1)) and (in_range(o) and
+  (o = ((i1 + i2) + i1)))) and (o1 = ((i1 + i2) + o))) and ((o2 = o1) and
+  in_range(o1))) -> in_range2(o2)))))

@@ -108,25 +108,5 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic const__incr__result : int
-
-logic o : int
-
-logic result : int
-
-logic const__incr__result1 : int
-
-logic const__incr__result2 : int
-
-logic const__incr__result3 : int
-
-logic const__incr__result4 : int
-
-logic const__incr__result5 : int
-
-axiom H : in_range(x)
-
-axiom H1 : (x <  10000)
-
  (* File "const.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : in_range((x + 1))
+goal WP_parameter_def : (in_range(x) -> ((x <  10000) -> in_range((x + 1))))

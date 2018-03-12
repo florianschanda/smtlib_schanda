@@ -206,12 +206,8 @@ axiom glob_ok__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic g1__split_fields : natural
-
-axiom H : in_range(n)
-
-axiom H1 : (to_rep(g1__split_fields) = n)
-
  (* File "foo.adb", line 9, characters 0-0 *)
-goal WP_parameter_def : (glob_ok({ us_split_fields1 = {
-  rec__foo__nested__glob__f = g1__split_fields } }) = true)
+goal WP_parameter_def :
+  (forall g1__split_fields:natural. (in_range(n) ->
+  ((to_rep(g1__split_fields) = n) -> (glob_ok({ us_split_fields1 = {
+  rec__foo__nested__glob__f = g1__split_fields } }) = true))))

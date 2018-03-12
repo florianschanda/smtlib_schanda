@@ -81,12 +81,6 @@ axiom bool_ge_axiom :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -98,6 +92,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -510,35 +510,17 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length1(container))))) ->
   in_range7(get(container, position)))))
 
-logic container__split_fields : us_main_type
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-axiom H : in_range3(index)
-
-axiom H1 : in_range2(count)
-
-axiom H2 : ((1 <= index) and (index <= (0 + length1(model__({
-  us_split_discrs1 = { rec__p__my_vectors__vector__capacity =
-  container__split_discrs }; us_split_fields1 = {
-  rec__p__my_vectors__vector = container__split_fields } })))))
-
-axiom H3 : ((o2 = (index - 1)) and in_range2((index - 1)))
-
-axiom H4 : ((o = length({ us_split_discrs1 = {
+ (* File "a-cofove.ads", line 549, characters 0-0 *)
+goal WP_parameter_def :
+  (forall container__split_fields:us_main_type. forall o:int. forall o1:int.
+  forall o2:int. (in_range3(index) -> (in_range2(count) -> (((1 <= index) and
+  (index <= (0 + length1(model__({ us_split_discrs1 = {
   rec__p__my_vectors__vector__capacity = container__split_discrs };
   us_split_fields1 = { rec__p__my_vectors__vector = container__split_fields }
-  })) and (in_range4(o) and (((of_int(1) = true) ->
-  (o <= to_rep(container__split_discrs))) and ((not (of_int(1) = true)) ->
-  (o <= 2147483647)))))
-
-axiom H5 : (o1 = (o - count))
-
- (* File "a-cofove.ads", line 549, characters 0-0 *)
-goal WP_parameter_def : in_range1(o1)
+  }))))) -> (((o2 = (index - 1)) and in_range2((index - 1))) ->
+  ((((o = length({ us_split_discrs1 = {
+  rec__p__my_vectors__vector__capacity = container__split_discrs };
+  us_split_fields1 = { rec__p__my_vectors__vector = container__split_fields }
+  })) and (in_range4(o) and (((of_int(1) = true) and
+  (o <= to_rep(container__split_discrs))) or ((not (of_int(1) = true)) and
+  (o <= 2147483647))))) and (o1 = (o - count))) -> in_range1(o1)))))))

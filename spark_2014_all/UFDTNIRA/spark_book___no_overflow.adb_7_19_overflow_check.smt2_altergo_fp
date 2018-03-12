@@ -251,23 +251,7 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic c : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-axiom H : in_range1(a)
-
-axiom H1 : in_range1(b)
-
-axiom H2 : ((0 <= 2147483647) -> in_range1(c))
-
  (* File "no_overflow.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : in_range((b - a))
+goal WP_parameter_def :
+  (forall c:int. (in_range1(a) -> (in_range1(b) -> (((0 <= 2147483647) ->
+  in_range1(c)) -> in_range((b - a))))))

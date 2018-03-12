@@ -225,182 +225,30 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic x : int
-
-logic y : int
-
-logic k : int
-
-logic o : int
-
-logic temp___134 : int
-
-logic temp___133 : int
-
-logic temp___132 : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : int
-
-logic o13 : int
-
-logic o14 : int
-
-logic o15 : int
-
-logic o16 : int
-
-logic result : int
-
-logic k1 : int
-
-logic result1 : int
-
-logic x1 : int
-
-logic result2 : int
-
-logic y1 : int
-
-logic result3 : int
-
-logic y2 : int
-
-logic result4 : int
-
-logic x2 : int
-
-logic x3 : int
-
-logic y3 : int
-
-logic result5 : int
-
-logic y4 : int
-
-logic result6 : int
-
-logic x4 : int
-
-logic x5 : int
-
-logic y5 : int
-
-logic x6 : int
-
-logic y6 : int
-
-logic x7 : int
-
-logic y7 : int
-
-logic x8 : int
-
-logic y8 : int
-
-logic result7 : bool
-
-logic result8 : int
-
-logic y9 : int
-
-axiom H : in_range(input)
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(x))
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range(y))
-
-axiom H3 : (((- 2147483648) <= 2147483647) -> in_range(k))
-
-axiom H4 : (result = k)
-
-axiom H5 : (k1 = comp_div(input,100))
-
-axiom H6 : (result1 = x)
-
-axiom H7 : (x1 = 2)
-
-axiom H8 : ((o = (k1 + 5)) and in_range((k1 + 5)))
-
-axiom H9 : (result2 = y)
-
-axiom H10 : (y1 = o)
-
-axiom H11 : ((x1 <  10) -> (temp___134 = y1))
-
-axiom H12 : ((x1 <  10) -> (temp___133 = y1))
-
-axiom H13 : ((x1 <  10) -> (temp___132 = x1))
-
-axiom H14 : ((x1 <  10) -> ((o1 = (y1 + 3)) and in_range((y1 + 3))))
-
-axiom H15 : ((x1 <  10) -> (y1 = result3))
-
-axiom H16 : ((x1 <  10) -> (y2 = o1))
-
-axiom H17 : ((x1 <  10) -> ((o2 = (x1 + 1)) and in_range((x1 + 1))))
-
-axiom H18 : ((x1 <  10) -> (x1 = result4))
-
-axiom H19 : ((x1 <  10) -> (x2 = o2))
-
-axiom H20 : ((x1 <  10) -> (y3 = (temp___134 + (3 * (x3 - 2)))))
-
-axiom H21 : ((x1 <  10) -> (3 <= x3))
-
-axiom H22 : ((x1 <  10) -> ((((- 2147483648) <= 2147483647) ->
-  in_range(x3)) and (((- 2147483648) <= 2147483647) -> in_range(y3))))
-
-axiom H23 : ((x1 <  10) -> (not (x3 <  10)))
-
-axiom H24 : ((x1 <  10) -> (y3 = y5))
-
-axiom H25 : ((x1 <  10) -> (x3 = x5))
-
-axiom H26 : ((x1 <  10) -> (y6 = y3))
-
-axiom H27 : ((x1 <  10) -> (x6 = x3))
-
-axiom H28 : ((x1 <  10) -> (y7 = y5))
-
-axiom H29 : ((x1 <  10) -> (x7 = x5))
-
-axiom H30 : ((x1 <  10) -> (y8 = y6))
-
-axiom H31 : ((x1 <  10) -> (x8 = x6))
-
-axiom H32 : ((not (x1 <  10)) -> (y1 = y7))
-
-axiom H33 : ((not (x1 <  10)) -> (x1 = x7))
-
-axiom H34 : ((not (x1 <  10)) -> (y8 = y1))
-
-axiom H35 : ((not (x1 <  10)) -> (x8 = x1))
-
-axiom H36 : ((o10 = (3 * k1)) and in_range((3 * k1)))
-
-axiom H37 : (o11 = (o10 + 100))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(o11)
+goal WP_parameter_def :
+  (forall x:int. forall y:int. forall k:int. forall o:int.
+  forall temp___156:int. forall temp___155:int. forall temp___154:int.
+  forall o1:int. forall o2:int. forall o3:int. forall o4:int.
+  forall result:int. forall k1:int. forall result1:int. forall x1:int.
+  forall result2:int. forall y1:int. forall result3:int. forall y2:int.
+  forall result4:int. forall x2:int. forall x3:int. forall y3:int.
+  forall x4:int. forall y4:int. forall x5:int. forall y5:int. forall x6:int.
+  forall y6:int. forall x7:int. forall y7:int. (in_range(input) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(x)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(y)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(k)) -> (((result = k) and
+  (k1 = comp_div(input,100))) -> (((result1 = x) and (x1 = 2)) ->
+  ((((o = (k1 + 5)) and in_range((k1 + 5))) and ((result2 = y) and
+  (y1 = o))) -> ((((x1 <  10) and ((((temp___156 = y1) and
+  ((temp___155 = y1) and ((temp___154 = x1) and ((((o1 = (y1 + 3)) and
+  in_range((y1 + 3))) and ((y1 = result3) and (y2 = o1))) and
+  ((((o2 = (x1 + 1)) and in_range((x1 + 1))) and ((x1 = result4) and
+  (x2 = o2))) and (((y3 = (temp___156 + (3 * (x3 - 2)))) and (3 <= x3)) and
+  (((((- 2147483648) <= 2147483647) -> in_range(x3)) and
+  (((- 2147483648) <= 2147483647) -> in_range(y3))) and
+  (not (x3 <  10))))))))) and (((y3 = y4) and (x3 = x4)) and ((y5 = y3) and
+  (x5 = x3)))) and (((y6 = y4) and (x6 = x4)) and ((y7 = y5) and
+  (x7 = x5))))) or ((not (x1 <  10)) and (((y1 = y6) and (x1 = x6)) and
+  ((y7 = y1) and (x7 = x1))))) -> ((((o3 = (3 * k1)) and
+  in_range((3 * k1))) and (o4 = (o3 + 100))) -> in_range(o4)))))))))))

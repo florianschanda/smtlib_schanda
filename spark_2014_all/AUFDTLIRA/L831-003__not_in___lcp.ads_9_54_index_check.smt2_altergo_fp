@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -188,24 +188,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> (int,integer) farray
-
-axiom concat_def :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : integer, int -> (int,integer) farray
-
-axiom singleton_def :
-  (forall v:integer.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,integer) farray, int, int, (int,integer) farray, int,
   int -> bool
 
@@ -216,17 +198,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -236,37 +218,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type index
 
@@ -388,374 +342,170 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic l : int
-
-logic j : int
-
-logic lcp__result : int
-
-logic temp___158 : int
-
-logic temp___159 : int
-
-logic temp___157 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : bool
-
-logic o3 : bool
-
-logic o4 : bool
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : bool
-
-logic o8 : bool
-
-logic o9 : bool
-
-logic temp___155 : int
-
-logic o10 : int
-
-logic o11 : integer
-
-logic temp___156 : int
-
-logic o12 : int
-
-logic o13 : integer
-
-logic o14 : int
-
-logic o15 : int
-
-logic o16 : bool
-
-logic o17 : int
-
-logic temp___160 : int
-
-logic temp___161 : int
-
-logic o18 : int
-
-logic o19 : integer
-
-logic o20 : int
-
-logic o21 : int
-
-logic o22 : int
-
-logic o23 : bool
-
-logic o24 : bool
-
-logic o25 : bool
-
-logic o26 : int
-
-logic o27 : int
-
-logic o28 : bool
-
-logic o29 : bool
-
-logic o30 : bool
-
-logic k : int
-
-logic temp___162 : int
-
-logic temp___163 : int
-
-logic o31 : int
-
-logic o32 : integer
-
-logic o33 : int
-
-logic lcp__result1 : int
-
-logic result : int
-
-logic l1 : int
-
-logic result1 : int
-
-logic j1 : int
-
-logic l2 : int
-
-logic j2 : int
-
-logic lcp__result2 : int
-
-logic result2 : bool
-
-logic result3 : bool
-
-logic result4 : int
-
-logic lcp__result3 : int
-
-logic result5 : bool
-
-logic result6 : int
-
-logic lcp__result4 : int
-
-logic result7 : int
-
-logic l3 : int
-
-logic lcp__result5 : int
-
-logic lcp__result6 : int
-
-logic l4 : int
-
-logic j3 : int
-
-logic lcp__result7 : int
-
-logic l5 : int
-
-logic j4 : int
-
-logic lcp__result8 : int
-
-logic l6 : int
-
-logic j5 : int
-
-logic lcp__result9 : int
-
-logic l7 : int
-
-logic j6 : int
-
-logic lcp__result10 : int
-
-logic result8 : int
-
-logic lcp__result11 : int
-
-logic lcp__result12 : int
-
-logic lcp__result13 : int
-
-logic l8 : int
-
-logic j7 : int
-
-logic lcp__result14 : int
-
-logic l9 : int
-
-logic j8 : int
-
-logic lcp__result15 : int
-
-logic l10 : int
-
-logic j9 : int
-
-logic lcp__result16 : int
-
-logic l11 : int
-
-logic j10 : int
-
-logic lcp__result17 : int
-
-logic result9 : bool
-
-logic result10 : bool
-
-logic result11 : bool
-
-axiom H : dynamic_property(1, 1000000, to_rep(first(a1)), to_rep(last(a1)))
-
-axiom H1 : in_range1(x)
-
-axiom H2 : in_range1(y)
-
-axiom H3 : (((to_rep(first(a1)) <= x) and (x <= to_rep(last(a1)))) and
-  ((to_rep(first(a1)) <= y) and (y <= to_rep(last(a1)))))
-
-axiom H4 : (result = l)
-
-axiom H5 : (l1 = 0)
-
-axiom H6 : in_range2(l1)
-
-axiom H7 : (((((lcp__result14 = lcp__result5) and ((j7 = j2) and
-  (l2 = l8))) and ((lcp__result15 = lcp__result6) and ((j8 = j2) and
-  (l9 = l2)))) and ((temp___158 = to_rep(first(a1))) and
-  ((temp___159 = to_rep(last(a1))) and (((result1 = j) and
-  (j1 = temp___158)) and (((temp___158 <= j1) and (j1 <= temp___159)) and
-  ((temp___157 = l1) and ((((0 <= 2147483647) -> in_range2(l2)) and
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (forall l:int. forall j:int. forall lcp__result:int. forall temp___183:int.
+  forall temp___184:int. forall temp___182:int. forall o:int. forall o1:int.
+  forall o2:bool. forall o3:bool. forall o4:bool. forall o5:int.
+  forall o6:int. forall o7:bool. forall o8:bool. forall o9:bool.
+  forall temp___180:int. forall o10:int. forall o11:integer.
+  forall temp___181:int. forall o12:int. forall o13:integer. forall o14:int.
+  forall o15:int. forall o16:bool. forall o17:int. forall temp___186:int.
+  forall o18:int. forall o19:int. forall o20:bool. forall o21:bool.
+  forall o22:bool. forall o23:int. forall o24:int. forall o25:bool.
+  forall o26:bool. forall o27:bool. forall lcp__result1:int.
+  forall result:int. forall l1:int. forall result1:int. forall j1:int.
+  forall l2:int. forall j2:int. forall lcp__result2:int. forall result2:bool.
+  forall result3:bool. forall result4:int. forall lcp__result3:int.
+  forall result5:bool. forall result6:int. forall lcp__result4:int.
+  forall result7:int. forall l3:int. forall lcp__result5:int.
+  forall lcp__result6:int. forall l4:int. forall j3:int.
+  forall lcp__result7:int. forall l5:int. forall j4:int.
+  forall lcp__result8:int. forall l6:int. forall j5:int.
+  forall lcp__result9:int. forall l7:int. forall j6:int.
+  forall lcp__result10:int. forall result8:int. forall lcp__result11:int.
+  forall lcp__result12:int. forall lcp__result13:int. forall l8:int.
+  forall j7:int. forall lcp__result14:int. forall l9:int. forall j8:int.
+  forall lcp__result15:int. forall l10:int. forall j9:int.
+  forall lcp__result16:int. forall l11:int. forall j10:int.
+  forall lcp__result17:int. forall result9:bool. forall result10:bool.
+  forall result11:bool. (dynamic_property(1, 1000000, to_rep(first(a1)),
+  to_rep(last(a1))) -> (in_range1(x) -> (in_range1(y) ->
+  ((((to_rep(first(a1)) <= x) and (x <= to_rep(last(a1)))) and
+  ((to_rep(first(a1)) <= y) and (y <= to_rep(last(a1))))) -> ((((({
+  int__content = result } = { int__content = l }) and (l1 = 0)) and
+  (in_range2(l1) and ((((({ int__content = lcp__result14 } = { int__content =
+  lcp__result5 }) and ((j2 = j7) and (l2 = l8))) and
+  ((lcp__result15 = lcp__result6) and ((j8 = j2) and (l9 = l2)))) and
+  ((temp___183 = to_rep(first(a1))) and ((temp___184 = to_rep(last(a1))) and
+  ((({ int__content = result1 } = { int__content = j }) and
+  (j1 = temp___183)) and (((temp___183 <= j1) and (j1 <= temp___184)) and
+  ((temp___182 = l1) and ((((0 <= 2147483647) -> in_range2(l2)) and
   ((to_rep(first(a1)) <= j2) and (j2 <= to_rep(last(a1))))) and
   ((((lcp__result3 = lcp__result5) and (lcp__result6 = lcp__result3)) and
   (((((((o6 = (x + l2)) and in_range1((x + l2))) and
-  (((o6 <= to_rep(last(a1))) -> (o7 = true)) and
-  ((not (o6 <= to_rep(last(a1)))) -> (o7 = false)))) and
+  (((o6 <= to_rep(last(a1))) and (o7 = true)) or
+  ((not (o6 <= to_rep(last(a1)))) and (o7 = false)))) and
   ((((o5 = (x + l2)) and in_range1((x + l2))) and
-  (((to_rep(first(a1)) <= o5) -> (o8 = true)) and
-  ((not (to_rep(first(a1)) <= o5)) -> (o8 = false)))) and
-  (o9 = match_bool(o8, o7, false)))) and (((not (o9 = true)) ->
-  (result3 = true)) and ((o9 = true) -> (result3 = false)))) and
-  (((result3 = true) -> (result2 = true)) and ((not (result3 = true)) ->
+  (((to_rep(first(a1)) <= o5) and (o8 = true)) or
+  ((not (to_rep(first(a1)) <= o5)) and (o8 = false)))) and
+  (o9 = match_bool(o8, o7, false)))) and (((not (o9 = true)) and
+  (result3 = true)) or ((o9 = true) and (result3 = false)))) and
+  (((result3 = true) and (result2 = true)) or ((not (result3 = true)) and
   (((((o1 = (y + l2)) and in_range1((y + l2))) and
-  (((o1 <= to_rep(last(a1))) -> (o2 = true)) and
-  ((not (o1 <= to_rep(last(a1)))) -> (o2 = false)))) and
+  (((o1 <= to_rep(last(a1))) and (o2 = true)) or
+  ((not (o1 <= to_rep(last(a1)))) and (o2 = false)))) and
   ((((o = (y + l2)) and in_range1((y + l2))) and
-  (((to_rep(first(a1)) <= o) -> (o3 = true)) and
-  ((not (to_rep(first(a1)) <= o)) -> (o3 = false)))) and (o4 = match_bool(o3,
-  o2, false)))) and (((not (o4 = true)) -> (result2 = true)) and
-  ((o4 = true) -> (result2 = false))))))) and ((result2 = true) and
-  ((lcp__result2 = result4) and (lcp__result3 = l2))))) or
-  ((((((((o6 = (x + l2)) and in_range1((x + l2))) and
-  (((o6 <= to_rep(last(a1))) -> (o7 = true)) and
-  ((not (o6 <= to_rep(last(a1)))) -> (o7 = false)))) and
+  (((to_rep(first(a1)) <= o) and (o3 = true)) or
+  ((not (to_rep(first(a1)) <= o)) and (o3 = false)))) and
+  (o4 = match_bool(o3, o2, false)))) and (((not (o4 = true)) and
+  (result2 = true)) or ((o4 = true) and (result2 = false))))))) and
+  ((result2 = true) and ((lcp__result2 = result4) and
+  (lcp__result3 = l2))))) or ((((((((o6 = (x + l2)) and
+  in_range1((x + l2))) and (((o6 <= to_rep(last(a1))) and (o7 = true)) or
+  ((not (o6 <= to_rep(last(a1)))) and (o7 = false)))) and
   ((((o5 = (x + l2)) and in_range1((x + l2))) and
-  (((to_rep(first(a1)) <= o5) -> (o8 = true)) and
-  ((not (to_rep(first(a1)) <= o5)) -> (o8 = false)))) and
-  (o9 = match_bool(o8, o7, false)))) and (((not (o9 = true)) ->
-  (result3 = true)) and ((o9 = true) -> (result3 = false)))) and
-  (((result3 = true) -> (result2 = true)) and ((not (result3 = true)) ->
+  (((to_rep(first(a1)) <= o5) and (o8 = true)) or
+  ((not (to_rep(first(a1)) <= o5)) and (o8 = false)))) and
+  (o9 = match_bool(o8, o7, false)))) and (((not (o9 = true)) and
+  (result3 = true)) or ((o9 = true) and (result3 = false)))) and
+  (((result3 = true) and (result2 = true)) or ((not (result3 = true)) and
   (((((o1 = (y + l2)) and in_range1((y + l2))) and
-  (((o1 <= to_rep(last(a1))) -> (o2 = true)) and
-  ((not (o1 <= to_rep(last(a1)))) -> (o2 = false)))) and
+  (((o1 <= to_rep(last(a1))) and (o2 = true)) or
+  ((not (o1 <= to_rep(last(a1)))) and (o2 = false)))) and
   ((((o = (y + l2)) and in_range1((y + l2))) and
-  (((to_rep(first(a1)) <= o) -> (o3 = true)) and
-  ((not (to_rep(first(a1)) <= o)) -> (o3 = false)))) and (o4 = match_bool(o3,
-  o2, false)))) and (((not (o4 = true)) -> (result2 = true)) and
-  ((o4 = true) -> (result2 = false))))))) and ((not (result2 = true)) and
-  (lcp__result3 = lcp__result2))) and (((lcp__result4 = lcp__result5) and
-  (lcp__result6 = lcp__result4)) and ((((((((temp___156 = (y + l2)) and
-  in_range1((y + l2))) and (((to_rep(first(a1)) <= temp___156) and
-  (temp___156 <= to_rep(last(a1)))) and (o12 = temp___156))) and
+  (((to_rep(first(a1)) <= o) and (o3 = true)) or
+  ((not (to_rep(first(a1)) <= o)) and (o3 = false)))) and
+  (o4 = match_bool(o3, o2, false)))) and (((not (o4 = true)) and
+  (result2 = true)) or ((o4 = true) and (result2 = false))))))) and
+  ((not (result2 = true)) and (lcp__result3 = lcp__result2))) and
+  (((lcp__result4 = lcp__result5) and (lcp__result6 = lcp__result4)) and
+  ((((((((temp___181 = (y + l2)) and in_range1((y + l2))) and
+  (((to_rep(first(a1)) <= temp___181) and
+  (temp___181 <= to_rep(last(a1)))) and (o12 = temp___181))) and
   (o13 = (a[o12]))) and (o14 = to_rep(o13))) and
-  ((((((temp___155 = (x + l2)) and in_range1((x + l2))) and
-  (((to_rep(first(a1)) <= temp___155) and
-  (temp___155 <= to_rep(last(a1)))) and (o10 = temp___155))) and
-  (o11 = (a[o10]))) and (o15 = to_rep(o11))) and (((o15 = o14) ->
-  (o16 = true)) and ((not (o15 = o14)) -> (o16 = false))))) and
-  (((not (o16 = true)) -> (result5 = true)) and ((o16 = true) ->
+  ((((((temp___180 = (x + l2)) and in_range1((x + l2))) and
+  (((to_rep(first(a1)) <= temp___180) and
+  (temp___180 <= to_rep(last(a1)))) and (o10 = temp___180))) and
+  (o11 = (a[o10]))) and (o15 = to_rep(o11))) and (((o15 = o14) and
+  (o16 = true)) or ((not (o15 = o14)) and (o16 = false))))) and
+  (((not (o16 = true)) and (result5 = true)) or ((o16 = true) and
   (result5 = false)))) and ((result5 = true) and
-  ((lcp__result3 = result6) and (lcp__result4 = l2)))))))))))))) or
-  ((((result1 = j) and (j1 = to_rep(first(a1)))) and
-  ((((to_rep(first(a1)) <= j1) and (j1 <= to_rep(last(a1)))) ->
-  ((((temp___157 = l1) and ((((0 <= 2147483647) -> in_range2(l2)) and
-  ((to_rep(first(a1)) <= j2) and (j2 <= to_rep(last(a1))))) and
-  ((((((((o6 = (x + l2)) and in_range1((x + l2))) and
-  (((o6 <= to_rep(last(a1))) -> (o7 = true)) and
-  ((not (o6 <= to_rep(last(a1)))) -> (o7 = false)))) and
+  ((lcp__result3 = result6) and (lcp__result4 = l2)))))))))))))) or (((({
+  int__content = result1 } = { int__content = j }) and
+  (j1 = to_rep(first(a1)))) and ((((to_rep(first(a1)) <= j1) and
+  (j1 <= to_rep(last(a1)))) and ((((temp___182 = l1) and
+  ((((0 <= 2147483647) -> in_range2(l2)) and ((to_rep(first(a1)) <= j2) and
+  (j2 <= to_rep(last(a1))))) and ((((((((o6 = (x + l2)) and
+  in_range1((x + l2))) and (((o6 <= to_rep(last(a1))) and (o7 = true)) or
+  ((not (o6 <= to_rep(last(a1)))) and (o7 = false)))) and
   ((((o5 = (x + l2)) and in_range1((x + l2))) and
-  (((to_rep(first(a1)) <= o5) -> (o8 = true)) and
-  ((not (to_rep(first(a1)) <= o5)) -> (o8 = false)))) and
-  (o9 = match_bool(o8, o7, false)))) and (((not (o9 = true)) ->
-  (result3 = true)) and ((o9 = true) -> (result3 = false)))) and
-  (((result3 = true) -> (result2 = true)) and ((not (result3 = true)) ->
+  (((to_rep(first(a1)) <= o5) and (o8 = true)) or
+  ((not (to_rep(first(a1)) <= o5)) and (o8 = false)))) and
+  (o9 = match_bool(o8, o7, false)))) and (((not (o9 = true)) and
+  (result3 = true)) or ((o9 = true) and (result3 = false)))) and
+  (((result3 = true) and (result2 = true)) or ((not (result3 = true)) and
   (((((o1 = (y + l2)) and in_range1((y + l2))) and
-  (((o1 <= to_rep(last(a1))) -> (o2 = true)) and
-  ((not (o1 <= to_rep(last(a1)))) -> (o2 = false)))) and
+  (((o1 <= to_rep(last(a1))) and (o2 = true)) or
+  ((not (o1 <= to_rep(last(a1)))) and (o2 = false)))) and
   ((((o = (y + l2)) and in_range1((y + l2))) and
-  (((to_rep(first(a1)) <= o) -> (o3 = true)) and
-  ((not (to_rep(first(a1)) <= o)) -> (o3 = false)))) and (o4 = match_bool(o3,
-  o2, false)))) and (((not (o4 = true)) -> (result2 = true)) and
-  ((o4 = true) -> (result2 = false))))))) and ((not (result2 = true)) and
-  (lcp__result3 = lcp__result2))) and (((((((((temp___156 = (y + l2)) and
-  in_range1((y + l2))) and (((to_rep(first(a1)) <= temp___156) and
-  (temp___156 <= to_rep(last(a1)))) and (o12 = temp___156))) and
+  (((to_rep(first(a1)) <= o) and (o3 = true)) or
+  ((not (to_rep(first(a1)) <= o)) and (o3 = false)))) and
+  (o4 = match_bool(o3, o2, false)))) and (((not (o4 = true)) and
+  (result2 = true)) or ((o4 = true) and (result2 = false))))))) and
+  ((not (result2 = true)) and (lcp__result3 = lcp__result2))) and
+  (((((((((temp___181 = (y + l2)) and in_range1((y + l2))) and
+  (((to_rep(first(a1)) <= temp___181) and
+  (temp___181 <= to_rep(last(a1)))) and (o12 = temp___181))) and
   (o13 = (a[o12]))) and (o14 = to_rep(o13))) and
-  ((((((temp___155 = (x + l2)) and in_range1((x + l2))) and
-  (((to_rep(first(a1)) <= temp___155) and
-  (temp___155 <= to_rep(last(a1)))) and (o10 = temp___155))) and
-  (o11 = (a[o10]))) and (o15 = to_rep(o11))) and (((o15 = o14) ->
-  (o16 = true)) and ((not (o15 = o14)) -> (o16 = false))))) and
-  (((not (o16 = true)) -> (result5 = true)) and ((o16 = true) ->
+  ((((((temp___180 = (x + l2)) and in_range1((x + l2))) and
+  (((to_rep(first(a1)) <= temp___180) and
+  (temp___180 <= to_rep(last(a1)))) and (o10 = temp___180))) and
+  (o11 = (a[o10]))) and (o15 = to_rep(o11))) and (((o15 = o14) and
+  (o16 = true)) or ((not (o15 = o14)) and (o16 = false))))) and
+  (((not (o16 = true)) and (result5 = true)) or ((o16 = true) and
   (result5 = false)))) and ((not (result5 = true)) and
   (lcp__result4 = lcp__result3))) and ((((o17 = (l2 + 1)) and
   in_range1((l2 + 1))) and ((l2 = result7) and (l3 = o17))) and
   (j2 = to_rep(last(a1)))))))) and (((lcp__result4 = lcp__result7) and
   ((j2 = j3) and (l3 = l4))) and ((lcp__result8 = lcp__result4) and
-  ((j4 = j2) and (l5 = l3))))) and (((lcp__result9 = lcp__result7) and
-  ((j5 = j3) and (l6 = l4))) and ((lcp__result10 = lcp__result8) and
-  ((j6 = j4) and (l7 = l5)))))) and ((not ((to_rep(first(a1)) <= j1) and
-  (j1 <= to_rep(last(a1))))) -> (((lcp__result9 = lcp__result) and
-  ((j1 = j5) and (l1 = l6))) and ((lcp__result10 = lcp__result1) and
-  ((j6 = j1) and (l7 = l1))))))) and ((((lcp__result14 = lcp__result12) and
-  ((j7 = j5) and (l8 = l6))) and ((lcp__result15 = lcp__result13) and
-  ((j8 = j6) and (l9 = l7)))) and (((lcp__result11 = lcp__result12) and
-  (lcp__result13 = lcp__result11)) and ((result8 = lcp__result9) and
-  (lcp__result11 = l6))))))
-
-axiom H8 : (lcp__result16 = lcp__result14)
-
-axiom H9 : (j9 = j7)
-
-axiom H10 : (l10 = l8)
-
-axiom H11 : (lcp__result17 = lcp__result15)
-
-axiom H12 : (j10 = j8)
-
-axiom H13 : (l11 = l9)
-
-axiom H14 : ((result9 = true) <->
-  (forall k1:int. (((0 <= k1) and (k1 <= lcp__result16)) ->
-  (to_rep((a[(x + k1)])) = to_rep((a[(y + k1)]))))))
-
-axiom H15 : (result9 = true)
-
-axiom H16 : ((o27 = (x + lcp__result16)) and in_range1((x + lcp__result16)))
-
-axiom H17 : (((o27 <= to_rep(last(a1))) -> (o28 = true)) and
-  ((not (o27 <= to_rep(last(a1)))) -> (o28 = false)))
-
-axiom H18 : ((o26 = (x + lcp__result16)) and in_range1((x + lcp__result16)))
-
-axiom H19 : (((to_rep(first(a1)) <= o26) -> (o29 = true)) and
-  ((not (to_rep(first(a1)) <= o26)) -> (o29 = false)))
-
-axiom H20 : (o30 = match_bool(o29, o28, false))
-
-axiom H21 : (((not (o30 = true)) -> (result11 = true)) and ((o30 = true) ->
-  (result11 = false)))
-
-axiom H22 : ((result11 = true) -> (result10 = true))
-
-axiom H23 : ((not (result11 = true)) -> ((o22 = (y + lcp__result16)) and
-  in_range1((y + lcp__result16))))
-
-axiom H24 : ((not (result11 = true)) -> (((o22 <= to_rep(last(a1))) ->
-  (o23 = true)) and ((not (o22 <= to_rep(last(a1)))) -> (o23 = false))))
-
-axiom H25 : ((not (result11 = true)) -> ((o21 = (y + lcp__result16)) and
-  in_range1((y + lcp__result16))))
-
-axiom H26 : ((not (result11 = true)) -> (((to_rep(first(a1)) <= o21) ->
-  (o24 = true)) and ((not (to_rep(first(a1)) <= o21)) -> (o24 = false))))
-
-axiom H27 : ((not (result11 = true)) -> (o25 = match_bool(o24, o23, false)))
-
-axiom H28 : ((not (result11 = true)) -> (((not (o25 = true)) ->
-  (result10 = true)) and ((o25 = true) -> (result10 = false))))
-
-axiom H29 : (not (result10 = true))
-
-axiom H30 : ((temp___161 = (y + lcp__result16)) and
-  in_range1((y + lcp__result16)))
-
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (to_rep(first(a1)) <= temp___161)
+  ((j4 = j2) and (l5 = l3))))) and ((({ int__content = lcp__result9 } = {
+  int__content = lcp__result7 }) and (({ int__content = j5 } = {
+  int__content = j3 }) and ({ int__content = l6 } = { int__content = l4
+  }))) and ((lcp__result10 = lcp__result8) and ((j6 = j4) and
+  (l7 = l5)))))) or ((not ((to_rep(first(a1)) <= j1) and
+  (j1 <= to_rep(last(a1))))) and ((({ int__content = lcp__result9 } = {
+  int__content = lcp__result }) and ((j1 = j5) and (l1 = l6))) and
+  ((lcp__result10 = lcp__result1) and ((j6 = j1) and (l7 = l1))))))) and
+  (((({ int__content = lcp__result14 } = { int__content = lcp__result12
+  }) and (({ int__content = j7 } = { int__content = j5 }) and ({
+  int__content = l8 } = { int__content = l6 }))) and
+  ((lcp__result15 = lcp__result13) and ((j8 = j6) and (l9 = l7)))) and
+  (((lcp__result11 = lcp__result12) and (lcp__result13 = lcp__result11)) and
+  (({ int__content = result8 } = { int__content = lcp__result9 }) and
+  (lcp__result11 = l6)))))))) and ((({ int__content = lcp__result16 } = {
+  int__content = lcp__result14 }) and ((j9 = j7) and (l10 = l8))) and
+  ((lcp__result17 = lcp__result15) and ((j10 = j8) and (l11 = l9))))) ->
+  (((result9 = true) <->
+  (forall k:int. (((0 <= k) and (k <= lcp__result16)) ->
+  (to_rep((a[(x + k)])) = to_rep((a[(y + k)])))))) -> ((result9 = true) ->
+  (((((((o24 = (x + lcp__result16)) and in_range1((x + lcp__result16))) and
+  (((o24 <= to_rep(last(a1))) and (o25 = true)) or
+  ((not (o24 <= to_rep(last(a1)))) and (o25 = false)))) and
+  ((((o23 = (x + lcp__result16)) and in_range1((x + lcp__result16))) and
+  (((to_rep(first(a1)) <= o23) and (o26 = true)) or
+  ((not (to_rep(first(a1)) <= o23)) and (o26 = false)))) and
+  (o27 = match_bool(o26, o25, false)))) and (((not (o27 = true)) and
+  (result11 = true)) or ((o27 = true) and (result11 = false)))) and
+  (((result11 = true) and (result10 = true)) or ((not (result11 = true)) and
+  (((((o19 = (y + lcp__result16)) and in_range1((y + lcp__result16))) and
+  (((o19 <= to_rep(last(a1))) and (o20 = true)) or
+  ((not (o19 <= to_rep(last(a1)))) and (o20 = false)))) and
+  ((((o18 = (y + lcp__result16)) and in_range1((y + lcp__result16))) and
+  (((to_rep(first(a1)) <= o18) and (o21 = true)) or
+  ((not (to_rep(first(a1)) <= o18)) and (o21 = false)))) and
+  (o22 = match_bool(o21, o20, false)))) and (((not (o22 = true)) and
+  (result10 = true)) or ((o22 = true) and (result10 = false))))))) ->
+  ((not (result10 = true)) -> (((temp___186 = (y + lcp__result16)) and
+  in_range1((y + lcp__result16))) ->
+  (to_rep(first(a1)) <= temp___186))))))))))))

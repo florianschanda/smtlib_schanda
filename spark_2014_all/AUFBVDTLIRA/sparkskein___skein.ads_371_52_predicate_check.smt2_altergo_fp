@@ -1593,12 +1593,6 @@ axiom bv_max_to_uint3 :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq4 : bool, bool -> bool
-
-axiom bool_eq_def4 :
-  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
-
 logic to_int4 : bool -> int
 
 axiom to_int_def4 :
@@ -1610,6 +1604,12 @@ logic of_int4 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int4(i)]. (((i = 0) -> (of_int4(i) = false)) and
   ((not (i = 0)) -> (of_int4(i) = true))))
+
+logic bool_eq4 : bool, bool -> bool
+
+axiom bool_eq_def4 :
+  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1778,8 +1778,15 @@ type hash_bit_length
 
 logic attr__ATTRIBUTE_MODULUS3 : t3
 
-predicate in_range1(x: t3) = (ule3(of_int3(0), x) and ule3(x,
-  of_int3(18446744073709551608)))
+logic rliteral : t3
+
+axiom rliteral_axiom : (tqtint3(rliteral) = 0)
+
+logic rliteral1 : t3
+
+axiom rliteral_axiom1 : (tqtint3(rliteral1) = 18446744073709551608)
+
+predicate in_range1(x: t3) = (ule3(rliteral, x) and ule3(x, rliteral1))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 18446744073709551608))
 
@@ -1925,24 +1932,6 @@ axiom slide_def :
   (forall i:t3 [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[sub3(i, sub3(new_first, old_first))]))))))
 
-logic concat : (t3,byte) farray, t3, t3, (t3,byte) farray, t3,
-  t3 -> (t3,byte) farray
-
-axiom concat_def :
-  (forall a:(t3,byte) farray. forall b:(t3,byte) farray.
-  (forall a_first:t3. forall a_last:t3. forall b_first:t3. forall b_last:t3.
-  (forall i:t3 [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((ule3(a_first, i) and ule3(i, a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and (ugt3(i, a_last) -> ((concat(a,
-  a_first, a_last, b, b_first, b_last)[i]) = (b[add3(sub3(i, a_last),
-  sub3(b_first, one3))])))))))
-
-logic singleton : byte, t3 -> (t3,byte) farray
-
-axiom singleton_def :
-  (forall v:byte.
-  (forall i:t3 [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq12 : (t3,byte) farray, t3, t3, (t3,byte) farray, t3, t3 -> bool
 
 axiom bool_eq_def11 :
@@ -1952,19 +1941,19 @@ axiom bool_eq_def11 :
   (((((ule3(a__first, a__last) and (ule3(b__first, b__last) and
   (sub3(a__last, a__first) = sub3(b__last, b__first)))) or
   ((not ule3(a__first, a__last)) and ugt3(b__first, b__last))) and
-  (forall temp___idx_132:t3. (((ule3(a__first, temp___idx_132) and
-  ule3(temp___idx_132, a__last)) and
-  (to_rep5((a[temp___idx_132])) = to_rep5((b[add3(sub3(b__first, a__first),
-  temp___idx_132)])))) or (not (ule3(a__first, temp___idx_132) and
-  ule3(temp___idx_132, a__last)))))) -> (bool_eq12(a, a__first, a__last, b,
+  (forall temp___idx_154:t3. (((ule3(a__first, temp___idx_154) and
+  ule3(temp___idx_154, a__last)) and
+  (to_rep5((a[temp___idx_154])) = to_rep5((b[add3(sub3(b__first, a__first),
+  temp___idx_154)])))) or (not (ule3(a__first, temp___idx_154) and
+  ule3(temp___idx_154, a__last)))))) -> (bool_eq12(a, a__first, a__last, b,
   b__first, b__last) = true)) and ((not (((ule3(a__first, a__last) ->
   (ule3(b__first, b__last) and (sub3(a__last, a__first) = sub3(b__last,
   b__first)))) and ((not ule3(a__first, a__last)) -> ugt3(b__first,
   b__last))) and
-  (forall temp___idx_132:t3. ((ule3(a__first, temp___idx_132) and
-  ule3(temp___idx_132, a__last)) ->
-  (to_rep5((a[temp___idx_132])) = to_rep5((b[add3(sub3(b__first, a__first),
-  temp___idx_132)]))))))) -> (bool_eq12(a, a__first, a__last, b, b__first,
+  (forall temp___idx_154:t3. ((ule3(a__first, temp___idx_154) and
+  ule3(temp___idx_154, a__last)) ->
+  (to_rep5((a[temp___idx_154])) = to_rep5((b[add3(sub3(b__first, a__first),
+  temp___idx_154)]))))))) -> (bool_eq12(a, a__first, a__last, b, b__first,
   b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1974,39 +1963,10 @@ axiom bool_eq_rev :
   a__last) = true) -> (((ule3(a__first, a__last) -> (ule3(b__first,
   b__last) and (sub3(a__last, a__first) = sub3(b__last, b__first)))) and
   ((not ule3(a__first, a__last)) -> ugt3(b__first, b__last))) and
-  (forall temp___idx_132:t3. ((ule3(a__first, temp___idx_132) and
-  ule3(temp___idx_132, a__last)) ->
-  (to_rep5((a[temp___idx_132])) = to_rep5((b[add3(sub3(b__first, a__first),
-  temp___idx_132)])))))))))
-
-logic compare : (t3,byte) farray, t3, t3, (t3,byte) farray, t3, t3 -> int
-
-axiom compare_def_eq :
-  (forall a:(t3,byte) farray. forall b:(t3,byte) farray.
-  (forall a_first:t3. forall a_last:t3. forall b_first:t3. forall b_last:t3
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) = 0) <-> (bool_eq12(a, a_first, a_last, b,
-  b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(t3,byte) farray. forall b:(t3,byte) farray.
-  (forall a_first:t3. forall a_last:t3. forall b_first:t3. forall b_last:t3
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) <  0) <->
-  (exists i:t3. exists j:t3. (ule3(i, a_last) and (ult3(j, b_last) and
-  ((bool_eq12(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  (ult3(i, a_last) and ult(to_rep5((a[add3(i, one3)])), to_rep5((b[add3(j,
-  one3)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(t3,byte) farray. forall b:(t3,byte) farray.
-  (forall a_first:t3. forall a_last:t3. forall b_first:t3. forall b_last:t3
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((0 <  compare(a,
-  a_first, a_last, b, b_first, b_last)) <->
-  (exists i:t3. exists j:t3. (ule3(i, b_last) and (ult3(j, a_last) and
-  ((bool_eq12(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  (ult3(i, b_last) and ugt(to_rep5((a[add3(j, one3)])), to_rep5((b[add3(i,
-  one3)]))))))))))))
+  (forall temp___idx_154:t3. ((ule3(a__first, temp___idx_154) and
+  ule3(temp___idx_154, a__last)) ->
+  (to_rep5((a[temp___idx_154])) = to_rep5((b[add3(sub3(b__first, a__first),
+  temp___idx_154)])))))))))
 
 type t4
 
@@ -2089,7 +2049,11 @@ type skein_512_block_bytes_index
 
 logic attr__ATTRIBUTE_MODULUS6 : t3
 
-predicate in_range2(x: t3) = (ule3(of_int3(0), x) and ule3(x, of_int3(63)))
+logic rliteral2 : t3
+
+axiom rliteral_axiom2 : (tqtint3(rliteral2) = 63)
+
+predicate in_range2(x: t3) = (ule3(rliteral, x) and ule3(x, rliteral2))
 
 predicate in_range_int1(x: int) = ((0 <= x) and (x <= 63))
 
@@ -2119,7 +2083,15 @@ function skein_512_block_bytes_index__ref___projection(a: skein_512_block_bytes_
 
 type u7
 
-predicate in_range3(x: t) = (ule(of_int(0), x) and ule(x, of_int(127)))
+logic rliteral3 : t
+
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 0)
+
+logic rliteral4 : t
+
+axiom rliteral_axiom4 : (tqtint(rliteral4) = 127)
+
+predicate in_range3(x: t) = (ule(rliteral3, x) and ule(x, rliteral4))
 
 predicate in_range_int2(x: int) = ((0 <= x) and (x <= 127))
 
@@ -2153,9 +2125,13 @@ axiom inversion_axiom6 :
 
 axiom range_axiom6 : (forall x:u7 [to_rep6(x)]. in_range3(to_rep6(x)))
 
+logic rliteral5 : t
+
+axiom rliteral_axiom5 : (tqtint(rliteral5) = 128)
+
 axiom coerce_axiom6 :
-  (forall x:t [to_rep6(of_rep6(x))]. (in_range3(urem(x, of_int(128))) ->
-  (to_rep6(of_rep6(x)) = urem(x, of_int(128)))))
+  (forall x:t [to_rep6(of_rep6(x))]. (in_range3(urem(x, rliteral5)) ->
+  (to_rep6(of_rep6(x)) = urem(x, rliteral5))))
 
 function to_int11(x: u7) : int = tqtint(to_rep6(x))
 
@@ -2164,7 +2140,11 @@ axiom range_int_axiom6 :
 
 type u6
 
-predicate in_range4(x: t) = (ule(of_int(0), x) and ule(x, of_int(63)))
+logic rliteral6 : t
+
+axiom rliteral_axiom6 : (tqtint(rliteral6) = 63)
+
+predicate in_range4(x: t) = (ule(rliteral3, x) and ule(x, rliteral6))
 
 predicate in_range_int3(x: int) = ((0 <= x) and (x <= 63))
 
@@ -2198,9 +2178,13 @@ axiom inversion_axiom7 :
 
 axiom range_axiom7 : (forall x:u6 [to_rep7(x)]. in_range4(to_rep7(x)))
 
+logic rliteral7 : t
+
+axiom rliteral_axiom7 : (tqtint(rliteral7) = 64)
+
 axiom coerce_axiom7 :
-  (forall x:t [to_rep7(of_rep7(x))]. (in_range4(urem(x, of_int(64))) ->
-  (to_rep7(of_rep7(x)) = urem(x, of_int(64)))))
+  (forall x:t [to_rep7(of_rep7(x))]. (in_range4(urem(x, rliteral7)) ->
+  (to_rep7(of_rep7(x)) = urem(x, rliteral7))))
 
 function to_int12(x: u6) : int = tqtint(to_rep7(x))
 
@@ -2630,24 +2614,6 @@ axiom slide_def1 :
   (forall i:t3 [(slide1(a, old_first, new_first)[i])]. ((slide1(a, old_first,
   new_first)[i]) = (a[sub3(i, sub3(new_first, old_first))]))))))
 
-logic concat1 : (t3,u64) farray, t3, t3, (t3,u64) farray, t3,
-  t3 -> (t3,u64) farray
-
-axiom concat_def1 :
-  (forall a:(t3,u64) farray. forall b:(t3,u64) farray.
-  (forall a_first:t3. forall a_last:t3. forall b_first:t3. forall b_last:t3.
-  (forall i:t3 [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((ule3(a_first, i) and ule3(i, a_last)) -> ((concat1(a, a_first, a_last,
-  b, b_first, b_last)[i]) = (a[i]))) and (ugt3(i, a_last) -> ((concat1(a,
-  a_first, a_last, b, b_first, b_last)[i]) = (b[add3(sub3(i, a_last),
-  sub3(b_first, one3))])))))))
-
-logic singleton1 : u64, t3 -> (t3,u64) farray
-
-axiom singleton_def1 :
-  (forall v:u64.
-  (forall i:t3 [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq19 : (t3,u64) farray, t3, t3, (t3,u64) farray, t3, t3 -> bool
 
 axiom bool_eq_def17 :
@@ -2657,19 +2623,19 @@ axiom bool_eq_def17 :
   (((((ule3(a__first, a__last) and (ule3(b__first, b__last) and
   (sub3(a__last, a__first) = sub3(b__last, b__first)))) or
   ((not ule3(a__first, a__last)) and ugt3(b__first, b__last))) and
-  (forall temp___idx_133:t3. (((ule3(a__first, temp___idx_133) and
-  ule3(temp___idx_133, a__last)) and
-  (to_rep2((a[temp___idx_133])) = to_rep2((b[add3(sub3(b__first, a__first),
-  temp___idx_133)])))) or (not (ule3(a__first, temp___idx_133) and
-  ule3(temp___idx_133, a__last)))))) -> (bool_eq19(a, a__first, a__last, b,
+  (forall temp___idx_155:t3. (((ule3(a__first, temp___idx_155) and
+  ule3(temp___idx_155, a__last)) and
+  (to_rep2((a[temp___idx_155])) = to_rep2((b[add3(sub3(b__first, a__first),
+  temp___idx_155)])))) or (not (ule3(a__first, temp___idx_155) and
+  ule3(temp___idx_155, a__last)))))) -> (bool_eq19(a, a__first, a__last, b,
   b__first, b__last) = true)) and ((not (((ule3(a__first, a__last) ->
   (ule3(b__first, b__last) and (sub3(a__last, a__first) = sub3(b__last,
   b__first)))) and ((not ule3(a__first, a__last)) -> ugt3(b__first,
   b__last))) and
-  (forall temp___idx_133:t3. ((ule3(a__first, temp___idx_133) and
-  ule3(temp___idx_133, a__last)) ->
-  (to_rep2((a[temp___idx_133])) = to_rep2((b[add3(sub3(b__first, a__first),
-  temp___idx_133)]))))))) -> (bool_eq19(a, a__first, a__last, b, b__first,
+  (forall temp___idx_155:t3. ((ule3(a__first, temp___idx_155) and
+  ule3(temp___idx_155, a__last)) ->
+  (to_rep2((a[temp___idx_155])) = to_rep2((b[add3(sub3(b__first, a__first),
+  temp___idx_155)]))))))) -> (bool_eq19(a, a__first, a__last, b, b__first,
   b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -2679,39 +2645,10 @@ axiom bool_eq_rev1 :
   a__last) = true) -> (((ule3(a__first, a__last) -> (ule3(b__first,
   b__last) and (sub3(a__last, a__first) = sub3(b__last, b__first)))) and
   ((not ule3(a__first, a__last)) -> ugt3(b__first, b__last))) and
-  (forall temp___idx_133:t3. ((ule3(a__first, temp___idx_133) and
-  ule3(temp___idx_133, a__last)) ->
-  (to_rep2((a[temp___idx_133])) = to_rep2((b[add3(sub3(b__first, a__first),
-  temp___idx_133)])))))))))
-
-logic compare1 : (t3,u64) farray, t3, t3, (t3,u64) farray, t3, t3 -> int
-
-axiom compare_def_eq1 :
-  (forall a:(t3,u64) farray. forall b:(t3,u64) farray.
-  (forall a_first:t3. forall a_last:t3. forall b_first:t3. forall b_last:t3
-  [compare1(a, a_first, a_last, b, b_first, b_last)]. ((compare1(a, a_first,
-  a_last, b, b_first, b_last) = 0) <-> (bool_eq19(a, a_first, a_last, b,
-  b_first, b_last) = true))))
-
-axiom compare_def_lt1 :
-  (forall a:(t3,u64) farray. forall b:(t3,u64) farray.
-  (forall a_first:t3. forall a_last:t3. forall b_first:t3. forall b_last:t3
-  [compare1(a, a_first, a_last, b, b_first, b_last)]. ((compare1(a, a_first,
-  a_last, b, b_first, b_last) <  0) <->
-  (exists i:t3. exists j:t3. (ule3(i, a_last) and (ult3(j, b_last) and
-  ((bool_eq19(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  (ult3(i, a_last) and ult3(to_rep2((a[add3(i, one3)])), to_rep2((b[add3(j,
-  one3)]))))))))))))
-
-axiom compare_def_gt1 :
-  (forall a:(t3,u64) farray. forall b:(t3,u64) farray.
-  (forall a_first:t3. forall a_last:t3. forall b_first:t3. forall b_last:t3
-  [compare1(a, a_first, a_last, b, b_first, b_last)]. ((0 <  compare1(a,
-  a_first, a_last, b, b_first, b_last)) <->
-  (exists i:t3. exists j:t3. (ule3(i, b_last) and (ult3(j, a_last) and
-  ((bool_eq19(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  (ult3(i, b_last) and ugt3(to_rep2((a[add3(j, one3)])), to_rep2((b[add3(i,
-  one3)]))))))))))))
+  (forall temp___idx_155:t3. ((ule3(a__first, temp___idx_155) and
+  ule3(temp___idx_155, a__last)) ->
+  (to_rep2((a[temp___idx_155])) = to_rep2((b[add3(sub3(b__first, a__first),
+  temp___idx_155)])))))))))
 
 logic dummy29 : (t3,u64) farray
 
@@ -2801,6 +2738,10 @@ type us_rep2 = { us_split_fields5 : us_split_fields4
 function us_rep___3__projection(a: us_rep2) : us_split_fields4 =
   (a).us_split_fields5
 
+logic rliteral8 : t3
+
+axiom rliteral_axiom8 : (tqtint3(rliteral8) = 7)
+
 logic bool_eq20 : us_rep2, us_rep2 -> bool
 
 axiom bool_eq_def18 :
@@ -2808,23 +2749,23 @@ axiom bool_eq_def18 :
   (((((bool_eq18(((a).us_split_fields5).rec__skein__skein_512_context__h,
   ((b).us_split_fields5).rec__skein__skein_512_context__h) = true) and
   (bool_eq19(((a).us_split_fields5).rec__skein__skein_512_context__x,
-  of_int3(0), of_int3(7),
-  ((b).us_split_fields5).rec__skein__skein_512_context__x, of_int3(0),
-  of_int3(7)) = true)) and
+  rliteral, rliteral8,
+  ((b).us_split_fields5).rec__skein__skein_512_context__x, rliteral,
+  rliteral8) = true)) and
   (bool_eq12(((a).us_split_fields5).rec__skein__skein_512_context__b,
-  of_int3(0), of_int3(63),
-  ((b).us_split_fields5).rec__skein__skein_512_context__b, of_int3(0),
-  of_int3(63)) = true)) -> (bool_eq20(a, b) = true)) and
+  rliteral, rliteral2,
+  ((b).us_split_fields5).rec__skein__skein_512_context__b, rliteral,
+  rliteral2) = true)) -> (bool_eq20(a, b) = true)) and
   ((not (((bool_eq18(((a).us_split_fields5).rec__skein__skein_512_context__h,
   ((b).us_split_fields5).rec__skein__skein_512_context__h) = true) and
   (bool_eq19(((a).us_split_fields5).rec__skein__skein_512_context__x,
-  of_int3(0), of_int3(7),
-  ((b).us_split_fields5).rec__skein__skein_512_context__x, of_int3(0),
-  of_int3(7)) = true)) and
+  rliteral, rliteral8,
+  ((b).us_split_fields5).rec__skein__skein_512_context__x, rliteral,
+  rliteral8) = true)) and
   (bool_eq12(((a).us_split_fields5).rec__skein__skein_512_context__b,
-  of_int3(0), of_int3(63),
-  ((b).us_split_fields5).rec__skein__skein_512_context__b, of_int3(0),
-  of_int3(63)) = true))) -> (bool_eq20(a, b) = false))))
+  rliteral, rliteral2,
+  ((b).us_split_fields5).rec__skein__skein_512_context__b, rliteral,
+  rliteral2) = true))) -> (bool_eq20(a, b) = false))))
 
 logic value__size5 : int
 
@@ -2972,24 +2913,6 @@ axiom slide_def2 :
   (forall i:int [(slide2(a, old_first, new_first)[i])]. ((slide2(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat2 : (int,bool) farray, int, int, (int,bool) farray, int,
-  int -> (int,bool) farray
-
-axiom concat_def2 :
-  (forall a:(int,bool) farray. forall b:(int,bool) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat2(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat2(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat2(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton2 : bool, int -> (int,bool) farray
-
-axiom singleton_def2 :
-  (forall v:bool.
-  (forall i:int [(singleton2(v, i)[i])]. ((singleton2(v, i)[i]) = v)))
-
 logic bool_eq21 : (int,bool) farray, int, int, (int,bool) farray, int,
   int -> bool
 
@@ -3000,17 +2923,17 @@ axiom bool_eq_def19 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_134:int. ((((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) and
-  ((a[temp___idx_134]) = (b[((b__first - a__first) + temp___idx_134)]))) or
-  (not ((a__first <= temp___idx_134) and (temp___idx_134 <= a__last)))))) ->
+  (forall temp___idx_156:int. ((((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) and
+  ((a[temp___idx_156]) = (b[((b__first - a__first) + temp___idx_156)]))) or
+  (not ((a__first <= temp___idx_156) and (temp___idx_156 <= a__last)))))) ->
   (bool_eq21(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_134:int. (((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) ->
-  ((a[temp___idx_134]) = (b[((b__first - a__first) + temp___idx_134)])))))) ->
+  (forall temp___idx_156:int. (((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) ->
+  ((a[temp___idx_156]) = (b[((b__first - a__first) + temp___idx_156)])))))) ->
   (bool_eq21(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev2 :
@@ -3020,81 +2943,9 @@ axiom bool_eq_rev2 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_134:int. (((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) ->
-  ((a[temp___idx_134]) = (b[((b__first - a__first) + temp___idx_134)]))))))))
-
-logic compare2 : (int,bool) farray, int, int, (int,bool) farray, int,
-  int -> int
-
-axiom compare_def_eq2 :
-  (forall a:(int,bool) farray. forall b:(int,bool) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare2(a, a_first, a_last, b, b_first, b_last)].
-  ((compare2(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq21(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt2 :
-  (forall a:(int,bool) farray. forall b:(int,bool) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare2(a, a_first, a_last, b, b_first, b_last)].
-  ((compare2(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq21(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_int4((a[(i + 1)])) <  to_int4((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt2 :
-  (forall a:(int,bool) farray. forall b:(int,bool) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare2(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare2(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq21(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_int4((b[(i + 1)])) <  to_int4((a[(j + 1)]))))))))))))
-
-logic xorb1 : (int,bool) farray, int, int, (int,bool) farray, int,
-  int -> (int,bool) farray
-
-logic andb1 : (int,bool) farray, int, int, (int,bool) farray, int,
-  int -> (int,bool) farray
-
-logic orb1 : (int,bool) farray, int, int, (int,bool) farray, int,
-  int -> (int,bool) farray
-
-logic notb1 : (int,bool) farray, int, int -> (int,bool) farray
-
-axiom op_def :
-  (forall a:(int,bool) farray. forall b:(int,bool) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(orb1(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((a_first <= i) and (i <= a_last)) -> ((orb1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = match_bool((a[i]), true,
-  (b[((i - a_first) + b_first)])))))))
-
-axiom op_def1 :
-  (forall a:(int,bool) farray. forall b:(int,bool) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(andb1(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((a_first <= i) and (i <= a_last)) -> ((andb1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = match_bool((a[i]), (b[((i - a_first) + b_first)]),
-  false))))))
-
-axiom op_def2 :
-  (forall a:(int,bool) farray. forall b:(int,bool) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(xorb1(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((a_first <= i) and (i <= a_last)) -> ((xorb1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = xorb((a[i]), (b[((i - a_first) + b_first)])))))))
-
-axiom notb_def :
-  (forall a:(int,bool) farray.
-  (forall a_first:int. forall a_last:int.
-  (forall i:int [(notb1(a, a_first, a_last)[i])]. (((a_first <= i) and
-  (i <= a_last)) -> ((notb1(a, a_first, a_last)[i]) = match_bool((a[i]),
-  false, true))))))
+  (forall temp___idx_156:int. (((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) ->
+  ((a[temp___idx_156]) = (b[((b__first - a__first) + temp___idx_156)]))))))))
 
 logic debug_none : (int,bool) farray
 
@@ -3102,24 +2953,11 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic skein__debug_none__aggregate_def : bool -> (int,bool) farray
 
-axiom def_axiom :
-  (forall temp___136:bool.
-  (forall temp___137:int.
-  ((skein__debug_none__aggregate_def(temp___136)[temp___137]) = temp___136)))
-
 logic debug_final : (int,bool) farray
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic skein__debug_final__aggregate_def : bool, bool -> (int,bool) farray
-
-axiom def_axiom1 :
-  (forall temp___139:bool. forall temp___140:bool.
-  (forall temp___141:int. (((temp___141 = 9) ->
-  ((skein__debug_final__aggregate_def(temp___139,
-  temp___140)[temp___141]) = temp___139)) and ((not (temp___141 = 9)) ->
-  ((skein__debug_final__aggregate_def(temp___139,
-  temp___140)[temp___141]) = temp___140)))))
 
 logic debug_all : (int,bool) farray
 
@@ -3127,30 +2965,12 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic skein__debug_all__aggregate_def : bool, bool, bool -> (int,bool) farray
 
-axiom def_axiom2 :
-  (forall temp___143:bool. forall temp___144:bool. forall temp___145:bool.
-  (forall temp___146:int. (((temp___146 = 12) ->
-  ((skein__debug_all__aggregate_def(temp___143, temp___144,
-  temp___145)[temp___146]) = temp___144)) and ((not (temp___146 = 12)) ->
-  (((temp___146 = 11) -> ((skein__debug_all__aggregate_def(temp___143,
-  temp___144, temp___145)[temp___146]) = temp___143)) and
-  ((not (temp___146 = 11)) -> ((skein__debug_all__aggregate_def(temp___143,
-  temp___144, temp___145)[temp___146]) = temp___145)))))))
-
 logic threefish_debug_all : (int,bool) farray
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic skein__threefish_debug_all__aggregate_def : bool,
   bool -> (int,bool) farray
-
-axiom def_axiom3 :
-  (forall temp___148:bool. forall temp___149:bool.
-  (forall temp___150:int. (((temp___150 = 12) ->
-  ((skein__threefish_debug_all__aggregate_def(temp___148,
-  temp___149)[temp___150]) = temp___148)) and ((not (temp___150 = 12)) ->
-  ((skein__threefish_debug_all__aggregate_def(temp___148,
-  temp___149)[temp___150]) = temp___149)))))
 
 logic skein_block_type_key : t
 
@@ -3254,19 +3074,9 @@ logic null_skein_512_context11 : (t3,byte) farray
 
 logic attr__ATTRIBUTE_ADDRESS15 : int
 
-logic temp___151 : t3 -> (t3,u64) farray
+logic temp___173 : t3 -> (t3,u64) farray
 
-axiom def_axiom4 :
-  (forall temp___153:t3.
-  (forall temp___154:t3.
-  ((temp___151(temp___153)[temp___154]) = of_rep2(temp___153))))
-
-logic temp___155 : t -> (t3,byte) farray
-
-axiom def_axiom5 :
-  (forall temp___157:t.
-  (forall temp___158:t3.
-  ((temp___155(temp___157)[temp___158]) = of_rep5(temp___157))))
+logic temp___177 : t -> (t3,byte) farray
 
 type rotation_count
 
@@ -3498,54 +3308,127 @@ axiom r_512_7_2__def_axiom : (r_512_7_2 = 56)
 
 axiom r_512_7_3__def_axiom : (r_512_7_3 = 22)
 
-axiom skein_id_string_le__def_axiom :
-  (skein_id_string_le = of_int2(859916371))
+logic rliteral9 : t2
 
-axiom skein_schema_ver__def_axiom : (skein_schema_ver = of_int3(5154883667))
+axiom rliteral_axiom9 : (tqtint2(rliteral9) = 859916371)
 
-axiom skein_ks_parity__def_axiom :
-  (skein_ks_parity = of_int3(2004413935125273122))
+axiom skein_id_string_le__def_axiom : (skein_id_string_le = rliteral9)
+
+logic rliteral10 : t3
+
+axiom rliteral_axiom10 : (tqtint3(rliteral10) = 5154883667)
+
+axiom skein_schema_ver__def_axiom : (skein_schema_ver = rliteral10)
+
+logic rliteral11 : t3
+
+axiom rliteral_axiom11 : (tqtint3(rliteral11) = 2004413935125273122)
+
+axiom skein_ks_parity__def_axiom : (skein_ks_parity = rliteral11)
 
 axiom debug_none__def_axiom :
   (debug_none = skein__debug_none__aggregate_def(of_int4(0)))
 
+axiom def_axiom :
+  (forall temp___158:bool.
+  (forall temp___159:int.
+  ((skein__debug_none__aggregate_def(temp___158)[temp___159]) = temp___158)))
+
 axiom debug_final__def_axiom :
   (debug_final = skein__debug_final__aggregate_def(of_int4(1), of_int4(0)))
+
+axiom def_axiom1 :
+  (forall temp___161:bool. forall temp___162:bool.
+  (forall temp___163:int. (((temp___163 = 9) ->
+  ((skein__debug_final__aggregate_def(temp___161,
+  temp___162)[temp___163]) = temp___161)) and ((not (temp___163 = 9)) ->
+  ((skein__debug_final__aggregate_def(temp___161,
+  temp___162)[temp___163]) = temp___162)))))
 
 axiom debug_all__def_axiom :
   (debug_all = skein__debug_all__aggregate_def(of_int4(0), of_int4(0),
   of_int4(1)))
 
+axiom def_axiom2 :
+  (forall temp___165:bool. forall temp___166:bool. forall temp___167:bool.
+  (forall temp___168:int. (((temp___168 = 12) ->
+  ((skein__debug_all__aggregate_def(temp___165, temp___166,
+  temp___167)[temp___168]) = temp___166)) and ((not (temp___168 = 12)) ->
+  (((temp___168 = 11) -> ((skein__debug_all__aggregate_def(temp___165,
+  temp___166, temp___167)[temp___168]) = temp___165)) and
+  ((not (temp___168 = 11)) -> ((skein__debug_all__aggregate_def(temp___165,
+  temp___166, temp___167)[temp___168]) = temp___167)))))))
+
 axiom threefish_debug_all__def_axiom :
   (threefish_debug_all = skein__threefish_debug_all__aggregate_def(of_int4(0),
   of_int4(1)))
 
-axiom skein_block_type_key__def_axiom : (skein_block_type_key = of_int(0))
+axiom def_axiom3 :
+  (forall temp___170:bool. forall temp___171:bool.
+  (forall temp___172:int. (((temp___172 = 12) ->
+  ((skein__threefish_debug_all__aggregate_def(temp___170,
+  temp___171)[temp___172]) = temp___170)) and ((not (temp___172 = 12)) ->
+  ((skein__threefish_debug_all__aggregate_def(temp___170,
+  temp___171)[temp___172]) = temp___171)))))
 
-axiom skein_block_type_cfg__def_axiom : (skein_block_type_cfg = of_int(4))
+axiom skein_block_type_key__def_axiom : (skein_block_type_key = rliteral3)
 
-axiom skein_block_type_pers__def_axiom : (skein_block_type_pers = of_int(8))
+logic rliteral12 : t
 
-axiom skein_block_type_pk__def_axiom : (skein_block_type_pk = of_int(12))
+axiom rliteral_axiom12 : (tqtint(rliteral12) = 4)
 
-axiom skein_block_type_kdf__def_axiom : (skein_block_type_kdf = of_int(16))
+axiom skein_block_type_cfg__def_axiom : (skein_block_type_cfg = rliteral12)
+
+logic rliteral13 : t
+
+axiom rliteral_axiom13 : (tqtint(rliteral13) = 8)
+
+axiom skein_block_type_pers__def_axiom : (skein_block_type_pers = rliteral13)
+
+logic rliteral14 : t
+
+axiom rliteral_axiom14 : (tqtint(rliteral14) = 12)
+
+axiom skein_block_type_pk__def_axiom : (skein_block_type_pk = rliteral14)
+
+logic rliteral15 : t
+
+axiom rliteral_axiom15 : (tqtint(rliteral15) = 16)
+
+axiom skein_block_type_kdf__def_axiom : (skein_block_type_kdf = rliteral15)
+
+logic rliteral16 : t
+
+axiom rliteral_axiom16 : (tqtint(rliteral16) = 20)
 
 axiom skein_block_type_nonce__def_axiom :
-  (skein_block_type_nonce = of_int(20))
+  (skein_block_type_nonce = rliteral16)
 
-axiom skein_block_type_msg__def_axiom : (skein_block_type_msg = of_int(48))
+logic rliteral17 : t
 
-axiom skein_block_type_out__def_axiom : (skein_block_type_out = of_int(63))
+axiom rliteral_axiom17 : (tqtint(rliteral17) = 48)
 
-axiom skein_block_type_mask__def_axiom : (skein_block_type_mask = of_int(63))
+axiom skein_block_type_msg__def_axiom : (skein_block_type_msg = rliteral17)
+
+axiom skein_block_type_out__def_axiom : (skein_block_type_out = rliteral6)
+
+axiom skein_block_type_mask__def_axiom : (skein_block_type_mask = rliteral6)
+
+logic rliteral18 : t2
+
+axiom rliteral_axiom18 : (tqtint2(rliteral18) = 0)
+
+logic rliteral19 : t1
+
+axiom rliteral_axiom19 : (tqtint1(rliteral19) = 0)
 
 axiom null_tweak_value__def_axiom :
-  ((null_tweak_value = of_rep2(of_int3(0))) and
-  ((null_tweak_value1 = of_rep1(of_int2(0))) and
-  ((null_tweak_value2 = of_rep(of_int1(0))) and
-  ((null_tweak_value3 = of_rep6(of_int(0))) and
+  ((null_tweak_value = of_rep2(rliteral)) and
+  ((null_tweak_value1 = of_rep1(rliteral18)) and
+  ((null_tweak_value2 = of_rep(rliteral19)) and
+  ((null_tweak_value3 = of_rep6(rliteral3)) and
   ((null_tweak_value4 = of_int4(0)) and
-  ((null_tweak_value5 = of_rep7(of_int(0))) and
+  ((null_tweak_value5 = of_rep7(rliteral3)) and
   ((null_tweak_value6 = of_int4(0)) and
   (null_tweak_value7 = of_int4(0)))))))))
 
@@ -3558,8 +3441,8 @@ axiom null_context_header__def_axiom :
   ((null_context_header5 = null_tweak_value5) and
   ((null_context_header6 = null_tweak_value6) and
   (null_context_header7 = null_tweak_value7)))))))) and
-  ((null_context_header8 = of_rep3(of_int3(0))) and
-  (null_context_header9 = of_rep2(of_int3(0)))))
+  ((null_context_header8 = of_rep3(rliteral)) and
+  (null_context_header9 = of_rep2(rliteral))))
 
 axiom null_skein_512_context__def_axiom :
   ((((null_skein_512_context = null_context_header) and
@@ -3572,209 +3455,97 @@ axiom null_skein_512_context__def_axiom :
   (null_skein_512_context7 = null_context_header7)))))))) and
   ((null_skein_512_context8 = null_context_header8) and
   (null_skein_512_context9 = null_context_header9))) and
-  ((null_skein_512_context10 = temp___151(of_int3(0))) and
-  (null_skein_512_context11 = temp___155(of_int(0)))))
-
-logic o : u6
-
-logic o1 : u7
-
-logic o2 : u16
-
-logic o3 : u32
-
-logic o4 : u64
-
-logic o5 : u64
-
-logic o6 : u32
-
-logic o7 : u16
-
-logic o8 : u7
-
-logic o9 : bool
-
-logic o10 : u6
-
-logic o11 : bool
-
-logic o12 : bool
-
-logic skein__null_tweak_value__assume : u64
-
-logic skein__null_tweak_value__assume1 : u32
-
-logic skein__null_tweak_value__assume2 : u16
-
-logic skein__null_tweak_value__assume3 : u7
-
-logic skein__null_tweak_value__assume4 : bool
-
-logic skein__null_tweak_value__assume5 : u6
-
-logic skein__null_tweak_value__assume6 : bool
-
-logic skein__null_tweak_value__assume7 : bool
-
-logic o13 : u64
-
-logic o14 : hash_bit_length
-
-logic o15 : u64
-
-logic o16 : u32
-
-logic o17 : u16
-
-logic o18 : u7
-
-logic o19 : bool
-
-logic o20 : u6
-
-logic o21 : bool
-
-logic o22 : bool
-
-logic o23 : hash_bit_length
-
-logic o24 : u64
-
-logic skein__null_context_header__assume : u64
-
-logic skein__null_context_header__assume1 : u32
-
-logic skein__null_context_header__assume2 : u16
-
-logic skein__null_context_header__assume3 : u7
-
-logic skein__null_context_header__assume4 : bool
-
-logic skein__null_context_header__assume5 : u6
-
-logic skein__null_context_header__assume6 : bool
-
-logic skein__null_context_header__assume7 : bool
-
-logic skein__null_context_header__assume8 : hash_bit_length
-
-logic skein__null_context_header__assume9 : u64
-
-axiom H : (skein__debug_none__aggregate_def(of_int4(0)) = debug_none)
-
-axiom H1 : (skein__debug_final__aggregate_def(of_int4(1),
-  of_int4(0)) = debug_final)
-
-axiom H2 : (skein__debug_all__aggregate_def(of_int4(0), of_int4(0),
-  of_int4(1)) = debug_all)
-
-axiom H3 : (skein__threefish_debug_all__aggregate_def(of_int4(0),
-  of_int4(1)) = threefish_debug_all)
-
-axiom H4 : in_range4(skein_block_type_key)
-
-axiom H5 : in_range4(skein_block_type_cfg)
-
-axiom H6 : in_range4(skein_block_type_pers)
-
-axiom H7 : in_range4(skein_block_type_pk)
-
-axiom H8 : in_range4(skein_block_type_kdf)
-
-axiom H9 : in_range4(skein_block_type_nonce)
-
-axiom H10 : in_range4(skein_block_type_msg)
-
-axiom H11 : in_range4(skein_block_type_out)
-
-axiom H12 : in_range4(skein_block_type_mask)
-
-axiom H13 : (to_rep7(o) = of_int(0))
-
-axiom H14 : (to_rep6(o1) = of_int(0))
-
-axiom H15 : (to_rep(o2) = of_int1(0))
-
-axiom H16 : (to_rep1(o3) = of_int2(0))
-
-axiom H17 : (to_rep2(o4) = of_int3(0))
-
-axiom H18 : (o4 = o5)
-
-axiom H19 : (o3 = o6)
-
-axiom H20 : (o2 = o7)
-
-axiom H21 : (o1 = o8)
-
-axiom H22 : (of_int4(0) = o9)
-
-axiom H23 : (o = o10)
-
-axiom H24 : (of_int4(0) = o11)
-
-axiom H25 : (of_int4(0) = o12)
-
-axiom H26 : (skein__null_tweak_value__assume = o5)
-
-axiom H27 : (skein__null_tweak_value__assume1 = o6)
-
-axiom H28 : (skein__null_tweak_value__assume2 = o7)
-
-axiom H29 : (skein__null_tweak_value__assume3 = o8)
-
-axiom H30 : (skein__null_tweak_value__assume4 = o9)
-
-axiom H31 : (skein__null_tweak_value__assume5 = o10)
-
-axiom H32 : (skein__null_tweak_value__assume6 = o11)
-
-axiom H33 : (skein__null_tweak_value__assume7 = o12)
-
-axiom H34 : ((skein__null_tweak_value__assume = null_tweak_value) and
+  ((null_skein_512_context10 = temp___173(rliteral)) and
+  (null_skein_512_context11 = temp___177(rliteral3))))
+
+axiom def_axiom4 :
+  (forall temp___175:t3.
+  (forall temp___176:t3.
+  (to_rep2((temp___173(temp___175)[temp___176])) = temp___175)))
+
+axiom def_axiom5 :
+  (forall temp___179:t.
+  (forall temp___180:t3.
+  (to_rep5((temp___177(temp___179)[temp___180])) = temp___179)))
+
+logic rliteral20 : t3
+
+axiom rliteral_axiom20 : (tqtint3(rliteral20) = 18446744073709551615)
+
+ (* File "skein.adb", line 308, characters 0-0 *)
+goal WP_parameter_def :
+  (forall o:u6. forall o1:u7. forall o2:u16. forall o3:u32. forall o4:u64.
+  forall o5:u64. forall o6:u32. forall o7:u16. forall o8:u7. forall o9:bool.
+  forall o10:u6. forall o11:bool. forall o12:bool.
+  forall skein__null_tweak_value__assume:u64.
+  forall skein__null_tweak_value__assume1:u32.
+  forall skein__null_tweak_value__assume2:u16.
+  forall skein__null_tweak_value__assume3:u7.
+  forall skein__null_tweak_value__assume4:bool.
+  forall skein__null_tweak_value__assume5:u6.
+  forall skein__null_tweak_value__assume6:bool.
+  forall skein__null_tweak_value__assume7:bool. forall o13:u64.
+  forall o14:hash_bit_length. forall o15:u64. forall o16:u32. forall o17:u16.
+  forall o18:u7. forall o19:bool. forall o20:u6. forall o21:bool.
+  forall o22:bool. forall o23:hash_bit_length. forall o24:u64.
+  forall skein__null_context_header__assume:u64.
+  forall skein__null_context_header__assume1:u32.
+  forall skein__null_context_header__assume2:u16.
+  forall skein__null_context_header__assume3:u7.
+  forall skein__null_context_header__assume4:bool.
+  forall skein__null_context_header__assume5:u6.
+  forall skein__null_context_header__assume6:bool.
+  forall skein__null_context_header__assume7:bool.
+  forall skein__null_context_header__assume8:hash_bit_length.
+  forall skein__null_context_header__assume9:u64.
+  ((skein__debug_none__aggregate_def(of_int4(0)) = debug_none) ->
+  ((skein__debug_final__aggregate_def(of_int4(1),
+  of_int4(0)) = debug_final) -> ((skein__debug_all__aggregate_def(of_int4(0),
+  of_int4(0), of_int4(1)) = debug_all) ->
+  ((skein__threefish_debug_all__aggregate_def(of_int4(0),
+  of_int4(1)) = threefish_debug_all) -> (in_range4(skein_block_type_key) ->
+  (in_range4(skein_block_type_cfg) -> (in_range4(skein_block_type_pers) ->
+  (in_range4(skein_block_type_pk) -> (in_range4(skein_block_type_kdf) ->
+  (in_range4(skein_block_type_nonce) -> (in_range4(skein_block_type_msg) ->
+  (in_range4(skein_block_type_out) -> (in_range4(skein_block_type_mask) ->
+  (((((to_rep7(o) = rliteral3) and ((to_rep6(o1) = rliteral3) and
+  ((to_rep(o2) = rliteral19) and ((to_rep1(o3) = rliteral18) and
+  ((to_rep2(o4) = rliteral) and ((o4 = o5) and ((o3 = o6) and ((o2 = o7) and
+  ((o1 = o8) and ((of_int4(0) = o9) and ((o = o10) and
+  ((of_int4(0) = o11) and (of_int4(0) = o12))))))))))))) and
+  ((skein__null_tweak_value__assume = o5) and
+  ((skein__null_tweak_value__assume1 = o6) and
+  ((skein__null_tweak_value__assume2 = o7) and
+  ((skein__null_tweak_value__assume3 = o8) and
+  ((skein__null_tweak_value__assume4 = o9) and
+  ((skein__null_tweak_value__assume5 = o10) and
+  ((skein__null_tweak_value__assume6 = o11) and
+  (skein__null_tweak_value__assume7 = o12))))))))) and
+  ((skein__null_tweak_value__assume = null_tweak_value) and
   ((skein__null_tweak_value__assume1 = null_tweak_value1) and
   ((skein__null_tweak_value__assume2 = null_tweak_value2) and
   ((skein__null_tweak_value__assume3 = null_tweak_value3) and
   ((skein__null_tweak_value__assume4 = null_tweak_value4) and
   ((skein__null_tweak_value__assume5 = null_tweak_value5) and
   ((skein__null_tweak_value__assume6 = null_tweak_value6) and
-  (skein__null_tweak_value__assume7 = null_tweak_value7))))))))
-
-axiom H35 : (to_rep2(o13) = of_int3(0))
-
-axiom H36 : (to_rep3(o14) = of_int3(0))
-
-axiom H37 : ((null_tweak_value = o15) and ((null_tweak_value1 = o16) and
+  (skein__null_tweak_value__assume7 = null_tweak_value7))))))))) ->
+  (((((to_rep2(o13) = rliteral) and ((to_rep3(o14) = rliteral) and
+  (((null_tweak_value = o15) and ((null_tweak_value1 = o16) and
   ((null_tweak_value2 = o17) and ((null_tweak_value3 = o18) and
   ((null_tweak_value4 = o19) and ((null_tweak_value5 = o20) and
-  ((null_tweak_value6 = o21) and (null_tweak_value7 = o22))))))))
-
-axiom H38 : (o14 = o23)
-
-axiom H39 : (o13 = o24)
-
-axiom H40 : (skein__null_context_header__assume = o15)
-
-axiom H41 : (skein__null_context_header__assume1 = o16)
-
-axiom H42 : (skein__null_context_header__assume2 = o17)
-
-axiom H43 : (skein__null_context_header__assume3 = o18)
-
-axiom H44 : (skein__null_context_header__assume4 = o19)
-
-axiom H45 : (skein__null_context_header__assume5 = o20)
-
-axiom H46 : (skein__null_context_header__assume6 = o21)
-
-axiom H47 : (skein__null_context_header__assume7 = o22)
-
-axiom H48 : (skein__null_context_header__assume8 = o23)
-
-axiom H49 : (skein__null_context_header__assume9 = o24)
-
-axiom H50 : (((skein__null_context_header__assume = null_context_header) and
+  ((null_tweak_value6 = o21) and (null_tweak_value7 = o22)))))))) and
+  ((o14 = o23) and (o13 = o24))))) and
+  (((skein__null_context_header__assume = o15) and
+  ((skein__null_context_header__assume1 = o16) and
+  ((skein__null_context_header__assume2 = o17) and
+  ((skein__null_context_header__assume3 = o18) and
+  ((skein__null_context_header__assume4 = o19) and
+  ((skein__null_context_header__assume5 = o20) and
+  ((skein__null_context_header__assume6 = o21) and
+  (skein__null_context_header__assume7 = o22)))))))) and
+  ((skein__null_context_header__assume8 = o23) and
+  (skein__null_context_header__assume9 = o24)))) and
+  (((skein__null_context_header__assume = null_context_header) and
   ((skein__null_context_header__assume1 = null_context_header1) and
   ((skein__null_context_header__assume2 = null_context_header2) and
   ((skein__null_context_header__assume3 = null_context_header3) and
@@ -3783,8 +3554,5 @@ axiom H50 : (((skein__null_context_header__assume = null_context_header) and
   ((skein__null_context_header__assume6 = null_context_header6) and
   (skein__null_context_header__assume7 = null_context_header7)))))))) and
   ((skein__null_context_header__assume8 = null_context_header8) and
-  (skein__null_context_header__assume9 = null_context_header9)))
-
- (* File "skein.adb", line 308, characters 0-0 *)
-goal WP_parameter_def : ult3(to_rep4(last(mk(of_int3(0), of_int3(63)))),
-  of_int3(18446744073709551615))
+  (skein__null_context_header__assume9 = null_context_header9)))) ->
+  ult3(to_rep4(last(mk(rliteral, rliteral2))), rliteral20)))))))))))))))))

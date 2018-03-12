@@ -292,23 +292,10 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic n : int
-
-logic o : int
-
-logic result : int
-
-logic n1 : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range(n))
-
-axiom H1 : ((o = get_i({ us_split_fields1 = { rec__mixed__rec__b = r;
-  rec__mixed__rec__e = r1; rec__mixed__rec__i = r2 } })) and (in_range(o) and
-  (o = to_rep(r2))))
-
-axiom H2 : (result = n)
-
-axiom H3 : (n1 = o)
-
  (* File "mixed.adb", line 6, characters 0-0 *)
-goal WP_parameter_def : (n1 = 0)
+goal WP_parameter_def :
+  (forall n:int. forall o:int. forall result:int. forall n1:int.
+  ((((- 2147483648) <= 2147483647) -> in_range(n)) -> ((((o = get_i({
+  us_split_fields1 = { rec__mixed__rec__b = r; rec__mixed__rec__e = r1;
+  rec__mixed__rec__i = r2 } })) and (in_range(o) and (o = to_rep(r2)))) and
+  ((result = n) and (n1 = o))) -> (n1 = 0))))

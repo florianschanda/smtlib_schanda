@@ -109,35 +109,5 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic absolute_value__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic absolute_value__result1 : int
-
-logic result1 : int
-
-logic absolute_value__result2 : int
-
-logic absolute_value__result3 : int
-
-logic absolute_value__result4 : int
-
-logic absolute_value__result5 : int
-
-logic absolute_value__result6 : int
-
-logic absolute_value__result7 : int
-
-logic absolute_value__result8 : int
-
-axiom H : in_range(x)
-
-axiom H1 : (not (0 <  x))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((-x))
+goal WP_parameter_def : (in_range(x) -> ((not (0 <  x)) -> in_range((-x))))

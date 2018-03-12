@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1609,514 +1609,40 @@ axiom w_get__post_axiom :
   ((in_range2(witness1) and (has_witness(container, witness1) = true)) ->
   in_range12(w_get(container, witness1)))))
 
-logic l1__split_fields : us_main_type
-
-logic l2__split_fields : us_main_type
-
-logic l3__split_fields : us_main_type
-
-logic l4__split_fields : us_main_type
-
-logic c__split_fields : count_type
-
-logic e__split_fields : count_type
-
-logic e__split_fields1 : count_type
-
-logic e__split_fields2 : count_type
-
-logic e__split_fields3 : count_type
-
-logic e : int
-
-logic e1 : int
-
-logic e2 : int
-
-logic o : count_type
-
-logic o1 : count_type
-
-logic temp___443 : count_type
-
-logic us : int
-
-logic us1 : int
-
-logic us2 : int
-
-logic us3 : int
-
-logic o2 : count_type
-
-logic o3 : us_main_type
-
-logic o4 : count_type
-
-logic o5 : us_main_type
-
-logic temp___405 : count_type
-
-logic temp___4051 : us_main_type
-
-logic o6 : count_type
-
-logic o7 : count_type
-
-logic o8 : count_type
-
-logic o9 : count_type
-
-logic us4 : bool
-
-logic o10 : count_type
-
-logic o11 : count_type
-
-logic o12 : count_type
-
-logic o13 : us_main_type
-
-logic o14 : count_type
-
-logic o15 : us_main_type
-
-logic temp___408 : count_type
-
-logic temp___4081 : us_main_type
-
-logic o16 : count_type
-
-logic temp___409 : count_type
-
-logic o17 : count_type
-
-logic o18 : count_type
-
-logic o19 : count_type
-
-logic o20 : us_main_type
-
-logic o21 : count_type
-
-logic o22 : us_main_type
-
-logic temp___411 : count_type
-
-logic temp___4111 : us_main_type
-
-logic o23 : count_type
-
-logic o24 : count_type
-
-logic o25 : count_type
-
-logic o26 : count_type
-
-logic us5 : bool
-
-logic o27 : count_type
-
-logic o28 : count_type
-
-logic o29 : count_type
-
-logic o30 : count_type
-
-logic o31 : count_type
-
-logic o32 : count_type
-
-logic o33 : count_type
-
-logic o34 : count_type
-
-logic o35 : count_type
-
-logic o36 : count_type
-
-logic o37 : count_type
-
-logic o38 : count_type
-
-logic us6 : bool
-
-logic o39 : count_type
-
-logic o40 : count_type
-
-logic o41 : count_type
-
-logic o42 : count_type
-
-logic us7 : bool
-
-logic o43 : count_type
-
-logic o44 : count_type
-
-logic o45 : count_type
-
-logic o46 : count_type
-
-logic o47 : count_type
-
-logic o48 : count_type
-
-logic o49 : count_type
-
-logic o50 : count_type
-
-logic o51 : count_type
-
-logic o52 : count_type
-
-logic o53 : count_type
-
-logic o54 : count_type
-
-logic o55 : count_type
-
-logic o56 : count_type
-
-logic o57 : count_type
-
-logic o58 : count_type
-
-logic o59 : count_type
-
-logic o60 : count_type
-
-logic o61 : count_type
-
-logic temp___415 : count_type
-
-logic o62 : count_type
-
-logic o63 : us_main_type
-
-logic o64 : count_type
-
-logic o65 : us_main_type
-
-logic temp___418 : count_type
-
-logic temp___4181 : us_main_type
-
-logic o66 : count_type
-
-logic us8 : bool
-
-logic o67 : count_type
-
-logic o68 : count_type
-
-logic o69 : count_type
-
-logic o70 : count_type
-
-logic o71 : count_type
-
-logic o72 : count_type
-
-logic temp___420 : count_type
-
-logic o73 : count_type
-
-logic o74 : us_main_type
-
-logic o75 : count_type
-
-logic o76 : us_main_type
-
-logic temp___423 : count_type
-
-logic temp___4231 : us_main_type
-
-logic o77 : count_type
-
-logic us9 : bool
-
-logic o78 : count_type
-
-logic o79 : count_type
-
-logic o80 : count_type
-
-logic o81 : count_type
-
-logic us10 : bool
-
-logic o82 : count_type
-
-logic o83 : count_type
-
-logic o84 : count_type
-
-logic o85 : count_type
-
-logic o86 : count_type
-
-logic o87 : count_type
-
-logic o88 : count_type
-
-logic temp___427 : count_type
-
-logic o89 : count_type
-
-logic o90 : us_main_type
-
-logic o91 : count_type
-
-logic o92 : us_main_type
-
-logic temp___430 : count_type
-
-logic temp___4301 : us_main_type
-
-logic o93 : count_type
-
-logic us11 : bool
-
-logic o94 : count_type
-
-logic o95 : count_type
-
-logic o96 : count_type
-
-logic o97 : count_type
-
-logic o98 : count_type
-
-logic o99 : count_type
-
-logic temp___432 : count_type
-
-logic temp___438 : int
-
-logic temp___437 : count_type
-
-logic temp___4371 : us_main_type
-
-logic o100 : int
-
-logic o101 : int
-
-logic formal_container__vdll__insert__container__fields : us_main_type
-
-logic result : us_main_type
-
-logic l1__split_fields1 : us_main_type
-
-logic result1 : us_main_type
-
-logic l2__split_fields1 : us_main_type
-
-logic formal_container__vdll__append__container__fields : us_main_type
-
-logic result2 : us_main_type
-
-logic l2__split_fields2 : us_main_type
-
-logic formal_container__vdll__append__container__fields1 : us_main_type
-
-logic result3 : us_main_type
-
-logic l2__split_fields3 : us_main_type
-
-logic result4 : us_main_type
-
-logic l1__split_fields2 : us_main_type
-
-logic result5 : count_type
-
-logic c__split_fields1 : count_type
-
-logic c__split_fields2 : count_type
-
-logic formal_container__vdll__delete__container__fields : us_main_type
-
-logic result6 : us_main_type
-
-logic l2__split_fields4 : us_main_type
-
-logic result7 : us_main_type
-
-logic l1__split_fields3 : us_main_type
-
-logic formal_container__vdll__append__container__fields2 : us_main_type
-
-logic result8 : us_main_type
-
-logic l1__split_fields4 : us_main_type
-
-logic result9 : us_main_type
-
-logic l3__split_fields1 : us_main_type
-
-logic formal_container__vdll__delete_last__container__fields : us_main_type
-
-logic result10 : us_main_type
-
-logic l3__split_fields2 : us_main_type
-
-logic result11 : us_main_type
-
-logic l4__split_fields1 : us_main_type
-
-logic formal_container__vdll__delete_last__2__container__fields : us_main_type
-
-logic result12 : us_main_type
-
-logic l4__split_fields2 : us_main_type
-
-logic result13 : us_main_type
-
-logic l2__split_fields5 : us_main_type
-
-logic formal_container__vdll__delete_last__container__fields1 : us_main_type
-
-logic result14 : us_main_type
-
-logic l2__split_fields6 : us_main_type
-
-logic result15 : us_main_type
-
-logic l3__split_fields3 : us_main_type
-
-logic formal_container__vdll__delete_first__container__fields : us_main_type
-
-logic result16 : us_main_type
-
-logic l3__split_fields4 : us_main_type
-
-logic result17 : us_main_type
-
-logic l4__split_fields3 : us_main_type
-
-logic formal_container__vdll__delete_first__2__container__fields : us_main_type
-
-logic result18 : us_main_type
-
-logic l4__split_fields4 : us_main_type
-
-logic formal_container__vdll__clear__container__fields : us_main_type
-
-logic result19 : us_main_type
-
-logic l1__split_fields5 : us_main_type
-
-logic result20 : int
-
-logic e3 : int
-
-logic l1__split_fields6 : us_main_type
-
-logic e4 : int
-
-logic formal_container__vdll__append__container__fields3 : us_main_type
-
-logic result21 : us_main_type
-
-logic l1__split_fields7 : us_main_type
-
-logic result22 : int
-
-logic e5 : int
-
-logic l1__split_fields8 : us_main_type
-
-logic e6 : int
-
-logic l1__split_fields9 : us_main_type
-
-logic e7 : int
-
-logic l1__split_fields10 : us_main_type
-
-logic e8 : int
-
-logic l1__split_fields11 : us_main_type
-
-logic e9 : int
-
-logic l1__split_fields12 : us_main_type
-
-logic e10 : int
-
-logic l1__split_fields13 : us_main_type
-
-logic e11 : int
-
-logic formal_container__vdll__move__source__fields : us_main_type
-
-logic formal_container__vdll__move__target__fields : us_main_type
-
-logic result23 : us_main_type
-
-logic l2__split_fields7 : us_main_type
-
-logic result24 : us_main_type
-
-logic l1__split_fields14 : us_main_type
-
-axiom H : (to_rep(o) = 0)
-
-axiom H1 : (o1 = o)
-
-axiom H2 : (temp___443 = o1)
-
-axiom H3 : (temp___443 = no_element)
-
-axiom H4 : ((us = 3) and in_range2(3))
-
-axiom H5 : ((to_rep(l1__split_discrs) = 3) and (is_empty({ us_split_discrs1 =
-  { rec__formal_container__vdll__list__capacity = l1__split_discrs };
+ (* File "test_vdll.adb", line 18, characters 0-0 *)
+goal WP_parameter_def :
+  (forall l1__split_fields:us_main_type.
+  forall l2__split_fields:us_main_type. forall l3__split_fields:us_main_type.
+  forall l4__split_fields:us_main_type. forall c__split_fields:count_type.
+  forall o:count_type. forall o1:count_type. forall temp___489:count_type.
+  forall us:int. forall us1:int. forall us2:int. forall us3:int.
+  (((((to_rep(o) = 0) and (o = o1)) and (temp___489 = o1)) and
+  (no_element = temp___489)) -> (((us = 3) and in_range2(3)) ->
+  (((to_rep(l1__split_discrs) = 3) and (is_empty({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l1__split_discrs };
   us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields }
-  }) = true))
-
-axiom H6 : (3 = to_rep(l1__split_discrs))
-
-axiom H7 : ((us1 = 3) and in_range2(3))
-
-axiom H8 : ((to_rep(l2__split_discrs) = 3) and (is_empty({ us_split_discrs1 =
-  { rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields }
-  }) = true))
-
-axiom H9 : (3 = to_rep(l2__split_discrs))
-
-axiom H10 : ((us2 = 3) and in_range2(3))
-
-axiom H11 : ((to_rep(l3__split_discrs) = 3) and (is_empty({
+  }) = true)) -> ((3 = to_rep(l1__split_discrs)) -> (((us1 = 3) and
+  in_range2(3)) -> (((to_rep(l2__split_discrs) = 3) and (is_empty({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l3__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l3__split_fields } }) = true))
-
-axiom H12 : (3 = to_rep(l3__split_discrs))
-
-axiom H13 : ((us3 = 5) and in_range2(5))
-
-axiom H14 : ((to_rep(l4__split_discrs) = 5) and (is_empty({
+  l2__split_discrs }; us_split_fields1 = {
+  rec__formal_container__vdll__list = l2__split_fields } }) = true)) ->
+  ((3 = to_rep(l2__split_discrs)) -> (((us2 = 3) and in_range2(3)) ->
+  (((to_rep(l3__split_discrs) = 3) and (is_empty({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l3__split_discrs };
+  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields }
+  }) = true)) -> ((3 = to_rep(l3__split_discrs)) -> (((us3 = 5) and
+  in_range2(5)) -> (((to_rep(l4__split_discrs) = 5) and (is_empty({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
   l4__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l4__split_fields } }) = true))
-
-axiom H15 : (5 = to_rep(l4__split_discrs))
-
-axiom H16 : (to_rep(c__split_fields) = 0)
-
-axiom H17 : (not (has_key(positions({ us_split_discrs1 = {
+  rec__formal_container__vdll__list = l4__split_fields } }) = true)) ->
+  ((5 = to_rep(l4__split_discrs)) -> ((to_rep(c__split_fields) = 0) ->
+  ((not (has_key(positions({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l1__split_discrs };
   us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields }
   }), first({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l1__split_discrs };
   us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields }
-  })) = true))
-
- (* File "test_vdll.adb", line 18, characters 0-0 *)
-goal WP_parameter_def : (length({ us_split_discrs1 = {
+  })) = true)) -> (length({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l1__split_discrs };
   us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields }
-  }) <  to_rep(l1__split_discrs))
+  }) <  to_rep(l1__split_discrs))))))))))))))))))

@@ -105,5 +105,5 @@ type natural__ref = { natural__content : natural
 function natural__ref___projection(a: natural__ref) : natural =
   (a).natural__content
 
- (* File "private_with_attributes.ads", line 5, characters 0-0 *)
+ (* File "private_with_attributes.ads", line 14, characters 0-0 *)
 goal WP_parameter_def : in_range(0)

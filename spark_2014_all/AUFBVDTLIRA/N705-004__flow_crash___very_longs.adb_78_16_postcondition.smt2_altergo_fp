@@ -938,12 +938,6 @@ axiom toBig_to_uint : (forall x:t. (tqtint(x) = tqtint1(toBig(x))))
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int2 : bool -> int
 
 axiom to_int_def2 :
@@ -955,6 +949,12 @@ logic of_int2 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int2(i)]. (((i = 0) -> (of_int2(i) = false)) and
   ((not (i = 0)) -> (of_int2(i) = true))))
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1092,24 +1092,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,octet) farray, int, int, (int,octet) farray, int,
-  int -> (int,octet) farray
-
-axiom concat_def :
-  (forall a:(int,octet) farray. forall b:(int,octet) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : octet, int -> (int,octet) farray
-
-axiom singleton_def :
-  (forall v:octet.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq6 : (int,octet) farray, int, int, (int,octet) farray, int,
   int -> bool
 
@@ -1120,17 +1102,17 @@ axiom bool_eq_def5 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1140,37 +1122,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,octet) farray, int, int, (int,octet) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,octet) farray. forall b:(int,octet) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq6(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,octet) farray. forall b:(int,octet) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq6(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and ult(to_rep1((a[(i + 1)])), to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,octet) farray. forall b:(int,octet) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq6(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and ugt(to_rep1((a[(j + 1)])), to_rep1((b[(i + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type tdigit_index_typeB
 
@@ -1704,6 +1658,8 @@ function t23b__ref___projection(a: t23b__ref) : us_t2 = (a).t23b__content
 
 logic attr__ATTRIBUTE_ADDRESS8 : int
 
+logic temp___1240 : t, int, int -> us_t2
+
 type t5
 
 logic first6 : t5 -> tdigit_index_typeB
@@ -1783,331 +1739,144 @@ type digits_array_type__ref = { digits_array_type__content : us_t3
 function digits_array_type__ref___projection(a: digits_array_type__ref) : us_t3 =
   (a).digits_array_type__content
 
-logic temp___1169 : t, int, int -> us_t2
-
 axiom def_axiom :
-  (forall temp___1171:t.
-  (forall temp___1172:int. forall temp___1173:int. ((dynamic_property6(1,
-  2147483647, temp___1172, temp___1173) ->
-  ((to_rep2(first4((temp___1169(temp___1171, temp___1172,
-  temp___1173)).rt2)) = temp___1172) and
-  (to_rep2(last4((temp___1169(temp___1171, temp___1172,
-  temp___1173)).rt2)) = temp___1173))) and
-  (forall temp___1174:int. (((temp___1169(temp___1171, temp___1172,
-  temp___1173)).elts2[temp___1174]) = of_rep1(temp___1171))))))
-
-logic result____split_fields : (int,octet) farray
-
-logic result____split_fields1 : t2
-
-logic borrow : t1
-
-logic l_digit : t1
-
-logic r_digit : t1
-
-logic difference : t1
-
-logic i : int
-
-logic us : int
-
-logic us1 : int
-
-logic temp___1176 : (int,octet) farray
-
-logic temp___11761 : t4
-
-logic temp___1177 : (int,octet) farray
-
-logic temp___11771 : t3
-
-logic temp___1179 : (int,octet) farray
-
-logic temp___11791 : t3
-
-logic o : (int,octet) farray
-
-logic o1 : t2
-
-logic o2 : (int,octet) farray
-
-logic o3 : t2
-
-logic temp___1181 : digit_index_type
-
-logic temp___11811 : (int,octet) farray
-
-logic temp___11812 : t2
-
-logic temp___1193 : t1
-
-logic temp___1190 : digit_index_type
-
-logic temp___11901 : (int,octet) farray
-
-logic temp___11902 : t2
-
-logic temp___1189 : t1
-
-logic temp___1188 : t1
-
-logic temp___1187 : t1
-
-logic o4 : int
-
-logic o5 : octet
-
-logic o6 : t
-
-logic o7 : t1
-
-logic o8 : int
-
-logic o9 : octet
-
-logic o10 : t
-
-logic o11 : t1
-
-logic o12 : t
-
-logic o13 : octet
-
-logic o14 : int
-
-logic o15 : (int,octet) farray
-
-logic o16 : (int,octet) farray
-
-logic o17 : t2
-
-logic o18 : (int,octet) farray
-
-logic o19 : t2
-
-logic temp___1186 : digit_index_type
-
-logic temp___11861 : (int,octet) farray
-
-logic temp___11862 : t2
-
-logic l_digit1 : t1
-
-logic r_digit1 : t1
-
-logic difference1 : t1
-
-logic result : (int,octet) farray
-
-logic result1 : t2
-
-logic result____split_fields2 : (int,octet) farray
-
-logic result____split_fields3 : t2
-
-logic result2 : t1
-
-logic borrow1 : t1
-
-logic result3 : int
-
-logic i1 : int
-
-logic result____split_fields4 : (int,octet) farray
-
-logic result____split_fields5 : t2
-
-logic borrow2 : t1
-
-logic l_digit2 : t1
-
-logic r_digit2 : t1
-
-logic difference2 : t1
-
-logic i2 : int
-
-logic result4 : t1
-
-logic l_digit3 : t1
-
-logic result5 : t1
-
-logic r_digit3 : t1
-
-logic result6 : t1
-
-logic difference3 : t1
-
-logic result7 : t1
-
-logic borrow3 : t1
-
-logic result8 : t1
-
-logic borrow4 : t1
-
-logic result9 : (int,octet) farray
-
-logic result10 : t2
-
-logic result____split_fields6 : (int,octet) farray
-
-logic result____split_fields7 : t2
-
-logic result____split_fields8 : (int,octet) farray
-
-logic result____split_fields9 : t2
-
-logic borrow5 : t1
-
-logic l_digit4 : t1
-
-logic r_digit4 : t1
-
-logic difference4 : t1
-
-logic i3 : int
-
-logic result____split_fields10 : (int,octet) farray
-
-logic result____split_fields11 : t2
-
-logic borrow6 : t1
-
-logic l_digit5 : t1
-
-logic r_digit5 : t1
-
-logic difference5 : t1
-
-logic i4 : int
-
-logic result____split_fields12 : (int,octet) farray
-
-logic result____split_fields13 : t2
-
-logic borrow7 : t1
-
-logic l_digit6 : t1
-
-logic r_digit6 : t1
-
-logic difference6 : t1
-
-logic i5 : int
-
-logic result____split_fields14 : (int,octet) farray
-
-logic result____split_fields15 : t2
-
-logic borrow8 : t1
-
-logic l_digit7 : t1
-
-logic r_digit7 : t1
-
-logic difference7 : t1
-
-logic i6 : int
-
-logic result____split_fields16 : (int,octet) farray
-
-logic result____split_fields17 : t2
-
-logic borrow9 : t1
-
-logic l_digit8 : t1
-
-logic r_digit8 : t1
-
-logic difference8 : t1
-
-logic i7 : int
-
-logic result____split_fields18 : (int,octet) farray
-
-logic result____split_fields19 : t2
-
-logic borrow10 : t1
-
-logic l_digit9 : t1
-
-logic r_digit9 : t1
-
-logic difference9 : t1
-
-logic i8 : int
-
-axiom H : (dynamic_property1(1, to_rep(l), to_rep2(first(l2)),
+  (forall temp___1242:t.
+  (forall temp___1243:int. forall temp___1244:int. ((dynamic_property6(1,
+  2147483647, temp___1243, temp___1244) ->
+  ((to_rep2(first4((temp___1240(temp___1242, temp___1243,
+  temp___1244)).rt2)) = temp___1243) and
+  (to_rep2(last4((temp___1240(temp___1242, temp___1243,
+  temp___1244)).rt2)) = temp___1244))) and
+  (forall temp___1245:int. (to_rep1(((temp___1240(temp___1242, temp___1243,
+  temp___1244)).elts2[temp___1245])) = temp___1242)))))
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 0)
+
+logic rliteral2 : t1
+
+axiom rliteral_axiom2 : (tqtint1(rliteral2) = 0)
+
+logic rliteral3 : t1
+
+axiom rliteral_axiom3 : (tqtint1(rliteral3) = 65280)
+
+logic rliteral4 : t1
+
+axiom rliteral_axiom4 : (tqtint1(rliteral4) = 1)
+
+ (* File "very_longs.adb", line 84, characters 0-0 *)
+goal WP_parameter_def :
+  (forall result____split_fields:(int,octet) farray.
+  forall result____split_fields1:t2. forall borrow:t1. forall l_digit:t1.
+  forall r_digit:t1. forall difference:t1. forall i:int. forall us:int.
+  forall us1:int. forall temp___1247:(int,octet) farray.
+  forall temp___12471:t4. forall temp___1248:(int,octet) farray.
+  forall temp___12481:t3. forall temp___1250:(int,octet) farray.
+  forall temp___12501:t3. forall o:(int,octet) farray. forall o1:t2.
+  forall o2:(int,octet) farray. forall o3:t2.
+  forall temp___1252:digit_index_type.
+  forall temp___12521:(int,octet) farray. forall temp___12522:t2.
+  forall temp___1264:t1. forall temp___1261:digit_index_type.
+  forall temp___12611:(int,octet) farray. forall temp___12612:t2.
+  forall temp___1260:t1. forall temp___1259:t1. forall temp___1258:t1.
+  forall o4:int. forall o5:octet. forall o6:t. forall o7:t1. forall o8:int.
+  forall o9:octet. forall o10:t. forall o11:t1. forall o12:t.
+  forall o13:octet. forall o14:int. forall o15:(int,octet) farray.
+  forall o16:(int,octet) farray. forall o17:t2.
+  forall o18:(int,octet) farray. forall o19:t2.
+  forall temp___1257:digit_index_type.
+  forall temp___12571:(int,octet) farray. forall temp___12572:t2.
+  forall l_digit1:t1. forall r_digit1:t1. forall difference1:t1.
+  forall result:(int,octet) farray. forall result1:t2.
+  forall result____split_fields2:(int,octet) farray.
+  forall result____split_fields3:t2. forall result2:t1. forall borrow1:t1.
+  forall result3:int. forall i1:int.
+  forall result____split_fields4:(int,octet) farray.
+  forall result____split_fields5:t2. forall borrow2:t1. forall l_digit2:t1.
+  forall r_digit2:t1. forall difference2:t1. forall i2:int.
+  forall result4:t1. forall l_digit3:t1. forall result5:t1.
+  forall r_digit3:t1. forall result6:t1. forall difference3:t1.
+  forall result7:t1. forall borrow3:t1. forall result8:t1. forall borrow4:t1.
+  forall result9:us_split_fields__ref.
+  forall result____split_fields6:us_split_fields.
+  forall result____split_fields7:us_split_fields__ref.
+  forall borrow5:t__ref1. forall l_digit4:t__ref1. forall r_digit4:t__ref1.
+  forall difference4:t__ref1. forall i3:int__ref.
+  forall result____split_fields8:us_split_fields. forall borrow6:t1.
+  forall l_digit5:t1. forall r_digit5:t1. forall difference5:t1.
+  forall i4:int. forall result____split_fields9:us_split_fields__ref.
+  forall borrow7:t__ref1. forall l_digit6:t__ref1. forall r_digit6:t__ref1.
+  forall difference6:t__ref1. forall i5:int__ref.
+  forall result____split_fields10:us_split_fields. forall borrow8:t1.
+  forall l_digit7:t1. forall r_digit7:t1. forall difference7:t1.
+  forall i6:int. forall result____split_fields11:us_split_fields__ref.
+  forall borrow9:t__ref1. forall l_digit8:t__ref1. forall r_digit8:t__ref1.
+  forall difference8:t__ref1. forall i7:int__ref.
+  forall result____split_fields12:us_split_fields. forall borrow10:t1.
+  forall l_digit9:t1. forall r_digit9:t1. forall difference9:t1.
+  forall i8:int. (((dynamic_property1(1, to_rep(l), to_rep2(first(l2)),
   to_rep2(last(l2))) and ((to_rep2(first(l2)) = 1) and
-  (to_rep2(last(l2)) = to_rep(l))))
-
-axiom H1 : (dynamic_property1(1, to_rep(r), to_rep2(first(r2)),
-  to_rep2(last(r2))) and ((to_rep2(first(r2)) = 1) and
-  (to_rep2(last(r2)) = to_rep(r))))
-
-axiom H2 : (dynamic_property1(1, to_rep(result____split_discrs),
-  to_rep2(first(result____split_fields1)),
+  (to_rep2(last(l2)) = to_rep(l)))) and ((dynamic_property1(1, to_rep(r),
+  to_rep2(first(r2)), to_rep2(last(r2))) and ((to_rep2(first(r2)) = 1) and
+  (to_rep2(last(r2)) = to_rep(r)))) and ((dynamic_property1(1,
+  to_rep(result____split_discrs), to_rep2(first(result____split_fields1)),
   to_rep2(last(result____split_fields1))) and
   ((to_rep2(first(result____split_fields1)) = 1) and
-  (to_rep2(last(result____split_fields1)) = to_rep(result____split_discrs))))
-
-axiom H3 : true
-
-axiom H4 : (to_rep(l) = to_rep(r))
-
-axiom H5 : ((((us = to_rep(r)) and in_range1(to_rep(r))) and
-  (((us1 = to_rep(l)) and in_range1(to_rep(l))) and
+  (to_rep2(last(result____split_fields1)) = to_rep(result____split_discrs)))) and
+  ((to_rep(l) = to_rep(r)) and ((((us = to_rep(r)) and
+  in_range1(to_rep(r))) and (((us1 = to_rep(l)) and in_range1(to_rep(l))) and
   (((to_rep(result____split_discrs) = r21b) and in_range1(r21b)) and
-  (((((((((to_rep2(first4((temp___1169(of_int(0), 1, r21b)).rt2)) = 1) and
-  ((to_rep2(last4((temp___1169(of_int(0), 1, r21b)).rt2)) = r21b) and ({
-  elts2 = temp___1176; rt2 = temp___11761 } = temp___1169(of_int(0), 1,
+  (((((((((to_rep2(first4((temp___1240(rliteral1, 1, r21b)).rt2)) = 1) and
+  ((to_rep2(last4((temp___1240(rliteral1, 1, r21b)).rt2)) = r21b) and ({
+  elts2 = temp___1247; rt2 = temp___12471 } = temp___1240(rliteral1, 1,
   r21b)))) and
-  ((((to_rep2(first4(temp___11761)) <= to_rep2(last4(temp___11761))) ->
-  (((1 <= r21b) ->
-  (((to_rep2(last4(temp___11761)) - to_rep2(first4(temp___11761))) + 1) = ((r21b - 1) + 1))) and
-  ((not (1 <= r21b)) ->
-  (((to_rep2(last4(temp___11761)) - to_rep2(first4(temp___11761))) + 1) = 0)))) and
-  ((not (to_rep2(first4(temp___11761)) <= to_rep2(last4(temp___11761)))) ->
-  ((1 <= r21b) -> (0 = ((r21b - 1) + 1))))) and
-  ((temp___1176 = temp___1177) and (mk1(to_rep2(first4(temp___11761)),
-  to_rep2(last4(temp___11761))) = temp___11771)))) and
-  ((((to_rep2(first2(temp___11771)) <= to_rep2(last2(temp___11771))) ->
-  (((to_rep2(first(result____split_fields1)) <= to_rep2(last(result____split_fields1))) ->
-  (((to_rep2(last2(temp___11771)) - to_rep2(first2(temp___11771))) + 1) = ((to_rep2(last(result____split_fields1)) - to_rep2(first(result____split_fields1))) + 1))) and
-  ((not (to_rep2(first(result____split_fields1)) <= to_rep2(last(result____split_fields1)))) ->
-  (((to_rep2(last2(temp___11771)) - to_rep2(first2(temp___11771))) + 1) = 0)))) and
-  ((not (to_rep2(first2(temp___11771)) <= to_rep2(last2(temp___11771)))) ->
-  ((to_rep2(first(result____split_fields1)) <= to_rep2(last(result____split_fields1))) ->
-  (0 = ((to_rep2(last(result____split_fields1)) - to_rep2(first(result____split_fields1))) + 1))))) and
-  ((temp___1179 = temp___1177) and (temp___11791 = temp___11771)))) and
-  ((temp___1179 = o) and (mk(to_rep2(first2(temp___11791)),
-  to_rep2(last2(temp___11791))) = o1))) and ((o2 = o) and (o3 = o1))) and
-  ((result____split_discrs = temp___1181) and ((temp___11811 = o2) and
-  (temp___11812 = o3)))) and ((((result = result____split_fields) and
+  ((((to_rep2(first4(temp___12471)) <= to_rep2(last4(temp___12471))) and
+  (((1 <= r21b) and
+  (((to_rep2(last4(temp___12471)) - to_rep2(first4(temp___12471))) + 1) = ((r21b - 1) + 1))) or
+  ((not (1 <= r21b)) and
+  (((to_rep2(last4(temp___12471)) - to_rep2(first4(temp___12471))) + 1) = 0)))) or
+  ((not (to_rep2(first4(temp___12471)) <= to_rep2(last4(temp___12471)))) and
+  (((1 <= r21b) and (0 = ((r21b - 1) + 1))) or (not (1 <= r21b))))) and
+  ((temp___1247 = temp___1248) and (mk1(to_rep2(first4(temp___12471)),
+  to_rep2(last4(temp___12471))) = temp___12481)))) and
+  ((((to_rep2(first2(temp___12481)) <= to_rep2(last2(temp___12481))) and
+  (((to_rep2(first(result____split_fields1)) <= to_rep2(last(result____split_fields1))) and
+  (((to_rep2(last2(temp___12481)) - to_rep2(first2(temp___12481))) + 1) = ((to_rep2(last(result____split_fields1)) - to_rep2(first(result____split_fields1))) + 1))) or
+  ((not (to_rep2(first(result____split_fields1)) <= to_rep2(last(result____split_fields1)))) and
+  (((to_rep2(last2(temp___12481)) - to_rep2(first2(temp___12481))) + 1) = 0)))) or
+  ((not (to_rep2(first2(temp___12481)) <= to_rep2(last2(temp___12481)))) and
+  (((to_rep2(first(result____split_fields1)) <= to_rep2(last(result____split_fields1))) and
+  (0 = ((to_rep2(last(result____split_fields1)) - to_rep2(first(result____split_fields1))) + 1))) or
+  (not (to_rep2(first(result____split_fields1)) <= to_rep2(last(result____split_fields1))))))) and
+  ({ elts1 = temp___1250; rt1 = temp___12501 } = { elts1 = temp___1248; rt1 =
+  temp___12481 }))) and ((temp___1250 = o) and
+  (mk(to_rep2(first2(temp___12501)),
+  to_rep2(last2(temp___12501))) = o1))) and ((o2 = o) and (o3 = o1))) and
+  ((result____split_discrs = temp___1252) and ((temp___12521 = o2) and
+  (temp___12522 = o3)))) and ((((result = result____split_fields) and
   (result1 = result____split_fields1)) and
-  ((result____split_fields2 = temp___11811) and
-  (result____split_fields3 = temp___11812))) and
-  (result____split_discrs = temp___1181))) and (((result2 = borrow) and
-  (borrow1 = of_int1(0))) and (((result3 = i) and (i1 = 1)) and
-  ((((1 <= i1) and (i1 <= to_rep2(last(l2)))) ->
-  ((((temp___1193 = l_digit) and (((result____split_discrs = temp___1190) and
-  ((result____split_fields2 = temp___11901) and
-  (result____split_fields3 = temp___11902))) and
-  ((temp___1189 = difference) and ((temp___1188 = r_digit) and
-  ((temp___1187 = borrow1) and ((((dynamic_property1(1,
+  ((temp___12521 = result____split_fields2) and
+  (temp___12522 = result____split_fields3))) and
+  (result____split_discrs = temp___1252))) and (((result2 = borrow) and
+  (borrow1 = rliteral2)) and (((result3 = i) and (i1 = 1)) and
+  ((((1 <= i1) and (i1 <= to_rep2(last(l2)))) and
+  ((((temp___1264 = l_digit) and (((result____split_discrs = temp___1261) and
+  ((temp___12611 = result____split_fields2) and
+  (temp___12612 = result____split_fields3))) and
+  ((temp___1260 = difference) and ((temp___1259 = r_digit) and
+  ((temp___1258 = borrow1) and ((((dynamic_property1(1,
   to_rep(result____split_discrs), to_rep2(first(result____split_fields5)),
   to_rep2(last(result____split_fields5))) and
   ((to_rep2(first(result____split_fields5)) = 1) and
   (to_rep2(last(result____split_fields5)) = to_rep(result____split_discrs)))) and
-  ((result____split_discrs = temp___1190) and
-  (forall temp___1192:int.
-  (((to_rep2(first(result____split_fields5)) <= temp___1192) and
-  (temp___1192 <= to_rep2(last(result____split_fields5)))) ->
-  ((i2 <= temp___1192) ->
-  ((result____split_fields4[temp___1192]) = (temp___11901[temp___1192]))))))) and
+  ((result____split_discrs = temp___1261) and
+  (forall temp___1263:int.
+  (((to_rep2(first(result____split_fields5)) <= temp___1263) and
+  (temp___1263 <= to_rep2(last(result____split_fields5)))) ->
+  ((i2 <= temp___1263) ->
+  ((result____split_fields4[temp___1263]) = (temp___12611[temp___1263]))))))) and
   ((1 <= i2) and (i2 <= to_rep2(last(l2))))) and
   ((((((((to_rep2(first(l2)) <= i2) and (i2 <= to_rep2(last(l2)))) and
   (o4 = i2)) and (o5 = (l1[o4]))) and (o6 = to_rep1(o5))) and
@@ -2116,56 +1885,51 @@ axiom H5 : ((((us = to_rep(r)) and in_range1(to_rep(r))) and
   (o8 = i2)) and (o9 = (r1[o8]))) and (o10 = to_rep1(o9))) and
   (o11 = toBig(o10))) and ((result5 = r_digit2) and (r_digit3 = o11))) and
   (((result6 = difference2) and (difference3 = sub1(sub1(l_digit3, r_digit3),
-  borrow2))) and ((((not (bw_and1(difference3,
-  of_int1(65280)) = of_int1(0))) -> ((result7 = borrow2) and
-  (borrow3 = of_int1(1)))) and ((bw_and1(difference3,
-  of_int1(65280)) = of_int1(0)) -> (((result8 = borrow2) and
-  (borrow4 = of_int1(0))) and (borrow3 = borrow4)))) and
+  borrow2))) and ((((not (bw_and1(difference3, rliteral3) = rliteral2)) and
+  ((result7 = borrow2) and (borrow3 = rliteral4))) or ((bw_and1(difference3,
+  rliteral3) = rliteral2) and (((result8 = borrow2) and
+  (borrow4 = rliteral2)) and (borrow3 = borrow4)))) and
   ((((((((o12 = takelsb_from16(difference3)) and (to_rep1(o13) = o12)) and
   ((((to_rep2(first(result____split_fields5)) <= i2) and
   (i2 <= to_rep2(last(result____split_fields5)))) and (o14 = i2)) and
-  (o15 = (result____split_fields4[o14 <- o13])))) and ((o16 = o15) and
-  (o17 = result____split_fields5))) and ((o18 = o16) and (o19 = o17))) and
-  ((temp___1186 = result____split_discrs) and ((temp___11861 = o18) and
-  (temp___11862 = o19)))) and ((((result9 = result____split_fields4) and
-  (result10 = result____split_fields5)) and
-  ((result____split_fields6 = temp___11861) and
-  (result____split_fields7 = temp___11862))) and
-  (result____split_discrs = temp___1186))) and
-  (i2 = to_rep2(last(l2)))))))))))))) and (((i3 = i2) and
-  ((difference4 = difference3) and ((r_digit4 = r_digit3) and
-  ((l_digit4 = l_digit3) and ((borrow5 = borrow3) and
-  ((result____split_fields8 = result____split_fields6) and
-  (result____split_fields9 = result____split_fields7))))))) and
+  (o15 = (result____split_fields4[o14 <- o13])))) and ((o15 = o16) and
+  (result____split_fields5 = o17))) and ((o18 = o16) and (o19 = o17))) and
+  ((result____split_discrs = temp___1257) and ((temp___12571 = o18) and
+  (temp___12572 = o19)))) and (((result9 = { us_split_fields__content = {
+  rec__very_longs__very_long__long_digits = { elts = result____split_fields4;
+  rt = result____split_fields5 } } }) and (result____split_fields6 = {
+  rec__very_longs__very_long__long_digits = { elts = temp___12571; rt =
+  temp___12572 } })) and (result____split_discrs = temp___1257))) and
+  (i2 = to_rep2(last(l2)))))))))))))) and (((i3 = { int__content = i2 }) and
+  ((difference4 = { t__content1 = difference3 }) and ((r_digit4 = {
+  t__content1 = r_digit3 }) and ((l_digit4 = { t__content1 = l_digit3 }) and
+  ((borrow5 = { t__content1 = borrow3 }) and (result____split_fields7 = {
+  us_split_fields__content = result____split_fields6 })))))) and
   ((i4 = i2) and ((difference5 = difference3) and ((r_digit5 = r_digit3) and
   ((l_digit5 = l_digit3) and ((borrow6 = borrow3) and
-  ((result____split_fields10 = result____split_fields6) and
-  (result____split_fields11 = result____split_fields7))))))))) and
+  (result____split_fields8 = result____split_fields6)))))))) and
   (((i5 = i3) and ((difference6 = difference4) and ((r_digit6 = r_digit4) and
   ((l_digit6 = l_digit4) and ((borrow7 = borrow5) and
-  ((result____split_fields12 = result____split_fields8) and
-  (result____split_fields13 = result____split_fields9))))))) and
-  ((i6 = i4) and ((difference7 = difference5) and ((r_digit7 = r_digit5) and
+  (result____split_fields9 = result____split_fields7)))))) and ((i6 = i4) and
+  ((difference7 = difference5) and ((r_digit7 = r_digit5) and
   ((l_digit7 = l_digit5) and ((borrow8 = borrow6) and
-  ((result____split_fields14 = result____split_fields10) and
-  (result____split_fields15 = result____split_fields11)))))))))) and
-  ((not ((1 <= i1) and (i1 <= to_rep2(last(l2))))) -> (((i5 = i1) and
-  ((difference6 = difference) and ((r_digit6 = r_digit) and
-  ((l_digit6 = l_digit) and ((borrow7 = borrow1) and
-  ((result____split_fields12 = result____split_fields2) and
-  (result____split_fields13 = result____split_fields3))))))) and
-  ((i6 = i1) and ((difference7 = difference1) and ((r_digit7 = r_digit1) and
+  (result____split_fields10 = result____split_fields8))))))))) or
+  ((not ((1 <= i1) and (i1 <= to_rep2(last(l2))))) and (((i5 = {
+  int__content = i1 }) and ((difference6 = { t__content1 = difference }) and
+  ((r_digit6 = { t__content1 = r_digit }) and ((l_digit6 = { t__content1 =
+  l_digit }) and ((borrow7 = { t__content1 = borrow1 }) and
+  (result____split_fields9 = { us_split_fields__content = {
+  rec__very_longs__very_long__long_digits = { elts = result____split_fields2;
+  rt = result____split_fields3 } } })))))) and ((i6 = i1) and
+  ((difference7 = difference1) and ((r_digit7 = r_digit1) and
   ((l_digit7 = l_digit1) and ((borrow8 = borrow1) and
-  ((result____split_fields14 = result____split_fields2) and
-  (result____split_fields15 = result____split_fields3)))))))))))))))) and
-  (((i7 = i5) and ((difference8 = difference6) and ((r_digit8 = r_digit6) and
-  ((l_digit8 = l_digit6) and ((borrow9 = borrow7) and
-  ((result____split_fields16 = result____split_fields12) and
-  (result____split_fields17 = result____split_fields13))))))) and
+  (result____split_fields10 = { rec__very_longs__very_long__long_digits = {
+  elts = result____split_fields2; rt = result____split_fields3 }
+  }))))))))))))))) and (((i7 = i5) and ((difference8 = difference6) and
+  ((r_digit8 = r_digit6) and ((l_digit8 = l_digit6) and
+  ((borrow9 = borrow7) and
+  (result____split_fields11 = result____split_fields9)))))) and
   ((i8 = i6) and ((difference9 = difference7) and ((r_digit9 = r_digit7) and
   ((l_digit9 = l_digit7) and ((borrow10 = borrow8) and
-  ((result____split_fields18 = result____split_fields14) and
-  (result____split_fields19 = result____split_fields15)))))))))
-
- (* File "very_longs.adb", line 51, characters 0-0 *)
-goal WP_parameter_def : (to_rep(result____split_discrs) = to_rep(l))
+  (result____split_fields12 = result____split_fields10)))))))))))) ->
+  (to_rep(result____split_discrs) = to_rep(l))))

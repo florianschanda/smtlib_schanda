@@ -107,23 +107,8 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic gn : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-axiom H : in_range(gn)
-
-axiom H1 : ((o = (gn + 1)) and in_range((gn + 1)))
-
-axiom H2 : (o1 = (2 * o))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(o1)
+goal WP_parameter_def :
+  (forall gn:int. forall o:int. forall o1:int. (in_range(gn) ->
+  ((((o = (gn + 1)) and in_range((gn + 1))) and (o1 = (2 * o))) ->
+  in_range(o1))))

@@ -1045,21 +1045,5 @@ function unsigned_64__ref___projection(a: unsigned_64__ref) : unsigned_64 =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic value : t
-
-logic o : t1
-
-logic o1 : t
-
-logic o2 : t1
-
-logic o3 : t1
-
-logic foo__get__data : t1
-
-logic foo__get__data1 : t1
-
-axiom H : true
-
  (* File "main.adb", line 4, characters 0-0 *)
 goal WP_parameter_def : true

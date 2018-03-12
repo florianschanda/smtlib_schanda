@@ -665,17 +665,7 @@ logic b : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : t
-
-logic o1 : t
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : (not (a = b))
-
-axiom H3 : ((o = subst(a, b)) and (o = sub(a, b)))
-
  (* File "pack.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (not (o = zeros))
+goal WP_parameter_def :
+  (forall o:t. ((not (a = b)) -> (((o = subst(a, b)) and (o = sub(a, b))) ->
+  (not (o = zeros)))))

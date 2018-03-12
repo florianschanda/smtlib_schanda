@@ -221,77 +221,30 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic r : int
-
-logic alpha_launch_examples__example_7__result : int
-
-logic o : int
-
-logic result : int
-
-logic r1 : int
-
-logic result1 : int
-
-logic r2 : int
-
-logic result2 : int
-
-logic alpha_launch_examples__example_7__result1 : int
-
-logic alpha_launch_examples__example_7__result2 : int
-
-logic alpha_launch_examples__example_7__result3 : int
-
-logic r3 : int
-
-logic alpha_launch_examples__example_7__result4 : int
-
-logic r4 : int
-
-logic alpha_launch_examples__example_7__result5 : int
-
-logic result3 : int
-
-axiom H : in_range(x)
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(r))
-
-axiom H2 : ((x = (- 2147483648)) -> (result = r))
-
-axiom H3 : ((x = (- 2147483648)) -> (r1 = 73))
-
-axiom H4 : ((not (x = (- 2147483648))) -> ((o = abs_int(x)) and
-  in_range(abs_int(x))))
-
-axiom H5 : ((not (x = (- 2147483648))) -> (result1 = r))
-
-axiom H6 : ((not (x = (- 2147483648))) -> (r2 = o))
-
-axiom H7 : ((not (x = (- 2147483648))) -> (r1 = r2))
-
-axiom H8 :
-  (alpha_launch_examples__example_7__result1 = alpha_launch_examples__example_7__result2)
-
-axiom H9 :
-  (alpha_launch_examples__example_7__result3 = alpha_launch_examples__example_7__result1)
-
-axiom H10 : (result2 = alpha_launch_examples__example_7__result)
-
-axiom H11 : (alpha_launch_examples__example_7__result1 = r1)
-
-axiom H12 :
-  (alpha_launch_examples__example_7__result4 = alpha_launch_examples__example_7__result2)
-
-axiom H13 : (r1 = r3)
-
-axiom H14 :
-  (alpha_launch_examples__example_7__result5 = alpha_launch_examples__example_7__result3)
-
-axiom H15 : (r4 = r1)
-
-axiom H16 : (result3 = alpha_launch_examples__example_7__result4)
-
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def :
-  (not (comp_mod(73,alpha_launch_examples__example_7__result4) = 42))
+  (forall r:int. forall alpha_launch_examples__example_7__result:int.
+  forall o:int. forall result:int. forall r1:int. forall result1:int.
+  forall r2:int. forall result2:int.
+  forall alpha_launch_examples__example_7__result1:int.
+  forall alpha_launch_examples__example_7__result2:int.
+  forall alpha_launch_examples__example_7__result3:int. forall r3:int.
+  forall alpha_launch_examples__example_7__result4:int. forall r4:int.
+  forall alpha_launch_examples__example_7__result5:int.
+  (forall result3:int. ((in_range(x) and
+  ((((((- 2147483648) <= 2147483647) -> in_range(r)) and
+  ((((x = (- 2147483648)) and (({ int__content = result } = { int__content =
+  r }) and (r1 = 73))) or ((not (x = (- 2147483648))) and
+  ((((o = abs_int(x)) and in_range(abs_int(x))) and (({ int__content =
+  result1 } = { int__content = r }) and (r2 = o))) and (r1 = r2)))) and
+  (((alpha_launch_examples__example_7__result1 = alpha_launch_examples__example_7__result2) and
+  (alpha_launch_examples__example_7__result3 = alpha_launch_examples__example_7__result1)) and
+  (({ int__content = result2 } = { int__content =
+  alpha_launch_examples__example_7__result }) and
+  (alpha_launch_examples__example_7__result1 = r1))))) and ((({
+  int__content = alpha_launch_examples__example_7__result4 } = {
+  int__content = alpha_launch_examples__example_7__result2 }) and
+  (r1 = r3)) and
+  ((alpha_launch_examples__example_7__result5 = alpha_launch_examples__example_7__result3) and
+  (r4 = r1)))) and (result3 = alpha_launch_examples__example_7__result4))) ->
+  (not (comp_mod(73,alpha_launch_examples__example_7__result4) = 42)))))

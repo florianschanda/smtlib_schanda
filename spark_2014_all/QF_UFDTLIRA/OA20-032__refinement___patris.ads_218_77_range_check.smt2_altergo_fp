@@ -139,17 +139,6 @@ logic t : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : int
-
-logic o1 : int
-
-axiom H : in_range(d)
-
-axiom H1 : in_range1(t)
-
-axiom H2 : (not (t = 3))
-
-axiom H3 : (not (d = 3))
-
  (* File "patris.ads", line 70, characters 0-0 *)
-goal WP_parameter_def : (not (d = 3))
+goal WP_parameter_def : (in_range(d) -> (in_range1(t) -> ((not (t = 3)) ->
+  ((not (d = 3)) -> (not (d = 3))))))

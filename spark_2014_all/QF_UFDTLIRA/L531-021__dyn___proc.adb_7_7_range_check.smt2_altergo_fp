@@ -104,11 +104,7 @@ type t__ref = { t__content : t
 
 function t__ref___projection(a: t__ref) : t = (a).t__content
 
-logic temp___length_190 : int
-
-axiom H : in_range(temp___length_190)
-
-axiom H1 : (1 <= temp___length_190)
-
  (* File "proc.adb", line 19, characters 0-0 *)
-goal WP_parameter_def : (1 <= 1)
+goal WP_parameter_def :
+  (forall temp___length_221:int. (in_range(temp___length_221) ->
+  ((1 <= temp___length_221) -> (1 <= 1))))

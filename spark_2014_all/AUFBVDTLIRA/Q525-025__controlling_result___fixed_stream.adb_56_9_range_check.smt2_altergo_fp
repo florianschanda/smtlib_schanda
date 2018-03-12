@@ -817,25 +817,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,stream_element) farray, int, int,
-  (int,stream_element) farray, int, int -> (int,stream_element) farray
-
-axiom concat_def :
-  (forall a:(int,stream_element) farray.
-  forall b:(int,stream_element) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : stream_element, int -> (int,stream_element) farray
-
-axiom singleton_def :
-  (forall v:stream_element.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq7 : (int,stream_element) farray, int, int,
   (int,stream_element) farray, int, int -> bool
 
@@ -847,17 +828,17 @@ axiom bool_eq_def6 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep2((a[temp___idx_132])) = to_rep2((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep2((a[temp___idx_154])) = to_rep2((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep2((a[temp___idx_132])) = to_rep2((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep2((a[temp___idx_154])) = to_rep2((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -868,40 +849,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep2((a[temp___idx_132])) = to_rep2((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,stream_element) farray, int, int,
-  (int,stream_element) farray, int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,stream_element) farray.
-  forall b:(int,stream_element) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq7(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,stream_element) farray.
-  forall b:(int,stream_element) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq7(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and ult(to_rep2((a[(i + 1)])), to_rep2((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,stream_element) farray.
-  forall b:(int,stream_element) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq7(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and ugt(to_rep2((a[(j + 1)])), to_rep2((b[(i + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep2((a[temp___idx_154])) = to_rep2((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type t1
 
@@ -1037,24 +987,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,character) farray, int, int, (int,character) farray,
-  int, int -> (int,character) farray
-
-axiom concat_def1 :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : character, int -> (int,character) farray
-
-axiom singleton_def1 :
-  (forall v:character.
-  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq10 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -1065,17 +997,17 @@ axiom bool_eq_def8 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep3((a[temp___idx_78])) = to_rep3((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep3((a[temp___idx_91])) = to_rep3((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq10(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep3((a[temp___idx_78])) = to_rep3((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep3((a[temp___idx_91])) = to_rep3((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq10(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -1085,37 +1017,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep3((a[temp___idx_78])) = to_rep3((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare1 : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq1 :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq10(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt1 :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq10(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep3((a[(i + 1)])) <  to_rep3((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt1 :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare1(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq10(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep3((b[(i + 1)])) <  to_rep3((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep3((a[temp___idx_91])) = to_rep3((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 logic dummy8 : (int,character) farray
 
@@ -1263,12 +1167,7 @@ type object__ref = { object__content : us_rep
 function object__ref___projection(a: object__ref) : us_rep =
   (a).object__content
 
-logic temp___178 : int -> (int,character) farray
-
-axiom def_axiom :
-  (forall temp___180:int.
-  (forall temp___181:int.
-  ((temp___178(temp___180)[temp___181]) = of_rep3(temp___180))))
+logic temp___202 : int -> (int,character) farray
 
 logic elements : us_rep -> int
 
@@ -1543,70 +1442,24 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic fixed_stream__null_string__value__aggregate_def : t, int, int -> us_t2
 
-axiom def_axiom1 :
-  (forall temp___264:t.
-  (forall temp___265:int. forall temp___266:int.
+axiom def_axiom :
+  (forall temp___288:t.
+  (forall temp___289:int. forall temp___290:int.
   ((dynamic_property((- 9223372036854775808), 9223372036854775807,
-  temp___265, temp___266) ->
-  ((to_rep1(first4((fixed_stream__null_string__value__aggregate_def(temp___264,
-  temp___265, temp___266)).rt2)) = temp___265) and
-  (to_rep1(last4((fixed_stream__null_string__value__aggregate_def(temp___264,
-  temp___265, temp___266)).rt2)) = temp___266))) and
-  (forall temp___267:int.
-  (((fixed_stream__null_string__value__aggregate_def(temp___264, temp___265,
-  temp___266)).elts2[temp___267]) = of_rep2(temp___264))))))
+  temp___289, temp___290) ->
+  ((to_rep1(first4((fixed_stream__null_string__value__aggregate_def(temp___288,
+  temp___289, temp___290)).rt2)) = temp___289) and
+  (to_rep1(last4((fixed_stream__null_string__value__aggregate_def(temp___288,
+  temp___289, temp___290)).rt2)) = temp___290))) and
+  (forall temp___291:int.
+  (to_rep2(((fixed_stream__null_string__value__aggregate_def(temp___288,
+  temp___289, temp___290)).elts2[temp___291])) = temp___288)))))
 
-logic value : (int,stream_element) farray
-
-logic fixed_stream__null_string__result : (int,stream_element) farray
-
-logic fixed_stream__null_string__result1 : t1
-
-logic temp___269 : (int,stream_element) farray
-
-logic temp___2691 : t3
-
-logic fixed_stream__null_string__value__assume : (int,stream_element) farray
-
-logic fixed_stream__null_string__value__assume1 : t2
-
-logic o : int
-
-logic o1 : int
-
-logic result : (int,stream_element) farray
-
-logic value1 : (int,stream_element) farray
-
-logic result1 : (int,stream_element) farray
-
-logic result2 : t1
-
-logic fixed_stream__null_string__result2 : (int,stream_element) farray
-
-logic fixed_stream__null_string__result3 : t1
-
-logic fixed_stream__null_string__result4 : (int,stream_element) farray
-
-logic fixed_stream__null_string__result5 : t1
-
-logic fixed_stream__null_string__result6 : (int,stream_element) farray
-
-logic fixed_stream__null_string__result7 : t1
-
-logic value2 : (int,stream_element) farray
-
-logic fixed_stream__null_string__result8 : (int,stream_element) farray
-
-logic fixed_stream__null_string__result9 : t1
-
-logic value3 : (int,stream_element) farray
-
-logic fixed_stream__null_string__result10 : (int,stream_element) farray
-
-logic fixed_stream__null_string__result11 : t1
-
-axiom H : (1 <= to_rep(this))
+axiom def_axiom1 :
+  (forall temp___204:int. (in_range4(temp___204) ->
+  (forall temp___205:int.
+  (to_rep3((temp___202(temp___204)[temp___205])) = temp___204))))
 
  (* File "a-stream.ads", line 54, characters 0-0 *)
-goal WP_parameter_def : ((- 9223372036854775808) <= 1)
+goal WP_parameter_def : ((1 <= to_rep(this)) ->
+  ((- 9223372036854775808) <= 1))

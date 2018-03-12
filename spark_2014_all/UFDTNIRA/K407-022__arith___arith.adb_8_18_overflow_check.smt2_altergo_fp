@@ -231,133 +231,14 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic tmp1 : int
-
-logic tmp2 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : int
-
-logic o13 : int
-
-logic o14 : int
-
-logic o15 : int
-
-logic o16 : int
-
-logic o17 : int
-
-logic o18 : int
-
-logic o19 : int
-
-logic o20 : int
-
-logic o21 : int
-
-logic o22 : int
-
-logic o23 : int
-
-logic o24 : int
-
-logic o25 : int
-
-logic o26 : int
-
-logic o27 : int
-
-logic o28 : int
-
-logic o29 : int
-
-logic o30 : int
-
-logic o31 : int
-
-logic result : int
-
-logic tmp11 : int
-
-logic result1 : int
-
-logic tmp21 : int
-
-logic result2 : int
-
-logic tmp12 : int
-
-logic result3 : int
-
-logic tmp22 : int
-
-logic result4 : int
-
-logic tmp13 : int
-
-logic result5 : int
-
-logic tmp23 : int
-
-logic result6 : int
-
-logic tmp14 : int
-
-logic result7 : int
-
-logic tmp24 : int
-
-logic result8 : int
-
-logic tmp15 : int
-
-axiom H : in_range(x)
-
-axiom H1 : in_range(y)
-
-axiom H2 : in_range(z)
-
-axiom H3 : (((- 2147483648) <= 2147483647) -> in_range(tmp1))
-
-axiom H4 : (((- 2147483648) <= 2147483647) -> in_range(tmp2))
-
-axiom H5 : ((o = (x + y)) and in_range((x + y)))
-
-axiom H6 : (o1 = (o + z))
-
-axiom H7 : ((o2 = o1) and in_range(o1))
-
-axiom H8 : (result = tmp1)
-
-axiom H9 : (tmp11 = o2)
-
-axiom H10 : ((o3 = (x + y)) and in_range((x + y)))
-
-axiom H11 : (o4 = (o3 - z))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(o4)
+goal WP_parameter_def :
+  (forall tmp1:int. forall tmp2:int. forall o:int. forall o1:int.
+  forall o2:int. forall o3:int. forall o4:int. forall result:int.
+  forall tmp11:int. (in_range(x) -> (in_range(y) -> (in_range(z) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(tmp1)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(tmp2)) ->
+  ((((((o = (x + y)) and in_range((x + y))) and (o1 = (o + z))) and
+  ((o2 = o1) and in_range(o1))) and ((result = tmp1) and (tmp11 = o2))) ->
+  ((((o3 = (x + y)) and in_range((x + y))) and (o4 = (o3 - z))) ->
+  in_range(o4)))))))))

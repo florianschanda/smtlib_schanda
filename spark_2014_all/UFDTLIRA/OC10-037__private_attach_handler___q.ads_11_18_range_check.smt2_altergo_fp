@@ -347,15 +347,7 @@ logic po__split_discrs2 : integer
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic us : int
-
-logic us1 : int
-
-logic us2 : int
-
-axiom H : ((us = 3) and in_range(3))
-
-axiom H1 : ((us1 = 2) and in_range(2))
-
  (* File "s-multip.ads", line 19, characters 0-0 *)
-goal WP_parameter_def : in_range(1)
+goal WP_parameter_def :
+  (forall us:int. forall us1:int. (((us = 3) and in_range(3)) ->
+  (((us1 = 2) and in_range(2)) -> in_range(1))))

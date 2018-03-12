@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -329,64 +329,20 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic y : int
-
-logic f__v__result : bool
-
-logic o : int
-
-logic result : int
-
-logic y1 : int
-
-logic result1 : bool
-
-logic f__v__result1 : bool
-
-logic f__v__result2 : bool
-
-logic f__v__result3 : bool
-
-logic y2 : int
-
-logic f__v__result4 : bool
-
-logic y3 : int
-
-logic f__v__result5 : bool
-
-logic result2 : bool
-
-axiom H : ((1 <= 10) -> in_range1(y))
-
-axiom H1 : ((o = sf({ us_split_fields1 = { rec__bt__o__t__f1 = x;
-  rec__bt__o__t__f2 = x1 } })) and in_range1(o))
-
-axiom H2 : (result = y)
-
-axiom H3 : (y1 = o)
-
-axiom H4 : (f__v__result1 = f__v__result2)
-
-axiom H5 : (f__v__result3 = f__v__result1)
-
-axiom H6 : (result1 = f__v__result)
-
-axiom H7 : (((y1 = 2) -> (f__v__result1 = true)) and ((not (y1 = 2)) ->
-  (f__v__result1 = false)))
-
-axiom H8 : (f__v__result4 = f__v__result2)
-
-axiom H9 : (y2 = y1)
-
-axiom H10 : (f__v__result5 = f__v__result3)
-
-axiom H11 : (y3 = y1)
-
-axiom H12 : (result2 = f__v__result4)
-
-axiom H13 : (f__v__result4 = true)
-
  (* File "f.ads", line 10, characters 0-0 *)
-goal WP_parameter_def : (sf({ us_split_fields1 = { rec__bt__o__t__f1 = x;
-  rec__bt__o__t__f2 = x1 } }) = 2)
+goal WP_parameter_def :
+  (forall y:int. forall f__v__result:bool. forall o:int. forall result:int.
+  forall y1:int. forall result1:bool. forall f__v__result1:bool.
+  forall f__v__result2:bool. forall f__v__result3:bool. forall y2:int.
+  forall f__v__result4:bool. forall y3:int. forall f__v__result5:bool.
+  (forall result2:bool. ((((((1 <= 10) -> in_range1(y)) and ((((o = sf({
+  us_split_fields1 = { rec__bt__o__t__f1 = x; rec__bt__o__t__f2 = x1 }
+  })) and in_range1(o)) and ((result = y) and (y1 = o))) and
+  (((f__v__result1 = f__v__result2) and (f__v__result3 = f__v__result1)) and
+  ((result1 = f__v__result) and (((y1 = 2) and (f__v__result1 = true)) or
+  ((not (y1 = 2)) and (f__v__result1 = false))))))) and
+  (((f__v__result4 = f__v__result2) and (y2 = y1)) and
+  ((f__v__result5 = f__v__result3) and (y3 = y1)))) and
+  (result2 = f__v__result4)) -> ((f__v__result4 = true) -> (sf({
+  us_split_fields1 = { rec__bt__o__t__f1 = x; rec__bt__o__t__f2 = x1 }
+  }) = 2)))))

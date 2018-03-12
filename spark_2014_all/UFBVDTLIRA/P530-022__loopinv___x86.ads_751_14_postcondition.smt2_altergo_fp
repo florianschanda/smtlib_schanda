@@ -928,12 +928,6 @@ axiom bv_max_to_uint1 :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int2 : bool -> int
 
 axiom to_int_def2 :
@@ -945,6 +939,12 @@ logic of_int2 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int2(i)]. (((i = 0) -> (of_int2(i) = false)) and
   ((not (i = 0)) -> (of_int2(i) = true))))
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1070,58 +1070,47 @@ axiom toSmall_to_uint :
 
 axiom toBig_to_uint : (forall x:t. (tqtint(x) = tqtint1(toBig(x))))
 
+logic rliteral1 : t1
+
+axiom rliteral_axiom1 : (tqtint1(rliteral1) = 255)
+
 axiom readreglow8__post_axiom :
   (forall reg:t1 [readreglow8(reg)]. (readreglow8(reg) = toSmall(bw_and1(reg,
-  of_int1(255)))))
+  rliteral1))))
+
+logic rliteral2 : t1
+
+axiom rliteral_axiom2 : (tqtint1(rliteral2) = 18446744073709551360)
 
 axiom writereglow8post__post_axiom :
   (forall regold:t1. forall regnew:t1.
   (forall val__:t [writereglow8post(regold, regnew, val__)].
   ((writereglow8post(regold, regnew, val__) = true) <->
   ((readreglow8(regnew) = val__) and (bw_and1(regnew,
-  of_int1(18446744073709551360)) = bw_and1(regold,
-  of_int1(18446744073709551360)))))))
+  rliteral2) = bw_and1(regold, rliteral2))))))
 
 axiom writereglow8post__def_axiom :
   (forall regold:t1. forall regnew:t1.
   (forall val__:t [writereglow8post(regold, regnew, val__)].
   ((writereglow8post(regold, regnew, val__) = true) <->
   ((readreglow8(regnew) = val__) and (bw_and1(regnew,
-  of_int1(18446744073709551360)) = bw_and1(regold,
-  of_int1(18446744073709551360)))))))
+  rliteral2) = bw_and1(regold, rliteral2))))))
 
-logic zeroflag : bool
+logic rliteral3 : t
 
-logic carryflag : bool
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 1)
 
-logic rcx : t1
+logic rliteral4 : t
 
-logic rcx1 : t1
-
-logic rcx2 : t1
-
-logic rcx3 : t1
-
-logic rcx4 : t1
-
-axiom H : true
-
-axiom H1 : (((not (carryflag = true)) and (not (zeroflag = true))) ->
-  (writereglow8post(rcx, rcx1, of_int(1)) = true))
-
-axiom H2 : ((not ((not (carryflag = true)) and (not (zeroflag = true)))) ->
-  (writereglow8post(rcx, rcx2, of_int(0)) = true))
-
-axiom H3 : ((not ((not (carryflag = true)) and (not (zeroflag = true)))) ->
-  (rcx1 = rcx2))
-
-axiom H4 : (rcx1 = rcx3)
-
-axiom H5 : (rcx4 = rcx1)
-
-axiom H6 : (not (carryflag = true))
-
-axiom H7 : (not (zeroflag = true))
+axiom rliteral_axiom4 : (tqtint(rliteral4) = 0)
 
  (* File "x86.ads", line 251, characters 0-0 *)
-goal WP_parameter_def : (cl(rcx3) = of_int(1))
+goal WP_parameter_def :
+  (forall zeroflag:bool. forall carryflag:bool. forall rcx:t1.
+  forall rcx1:t1. forall rcx2:t1. forall rcx3:t1. forall rcx4:t1.
+  ((((((not (carryflag = true)) and (not (zeroflag = true))) and
+  (writereglow8post(rcx, rcx1, rliteral3) = true)) or
+  ((not ((not (carryflag = true)) and (not (zeroflag = true)))) and
+  ((writereglow8post(rcx, rcx2, rliteral4) = true) and (rcx1 = rcx2)))) and
+  ((rcx1 = rcx3) and (rcx4 = rcx1))) -> (((not (carryflag = true)) and
+  (not (zeroflag = true))) -> (cl(rcx3) = rliteral3))))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -394,53 +394,17 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic the_piece__split_fields : piece_type
-
-logic the_piece__split_fields1 : y_coord
-
-logic the_piece__split_fields2 : x_coord
-
-logic xnew : int
-
-logic ynew : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic result : int
-
-logic xnew1 : int
-
-logic result1 : int
-
-logic ynew1 : int
-
-axiom H : in_range3(direction)
-
-axiom H1 : (is_valid_move({ us_split_fields1 = { rec__tetris__piece__kind =
-  the_piece__split_fields; rec__tetris__piece__y = the_piece__split_fields1;
-  rec__tetris__piece__x = the_piece__split_fields2 } }, direction) = true)
-
-axiom H2 : (result = xnew)
-
-axiom H3 : (xnew1 = to_rep(the_piece__split_fields2))
-
-axiom H4 : in_range1(xnew1)
-
-axiom H5 : (result1 = ynew)
-
-axiom H6 : (ynew1 = to_rep1(the_piece__split_fields1))
-
-axiom H7 : in_range2(ynew1)
-
-axiom H8 : (not (direction = 1))
-
-axiom H9 : (direction = 2)
-
-axiom H10 : (xnew1 <  8)
-
  (* File "tetris.ads", line 59, characters 0-0 *)
-goal WP_parameter_def : in_range1((xnew1 + 1))
+goal WP_parameter_def :
+  (forall the_piece__split_fields:piece_type.
+  forall the_piece__split_fields1:y_coord.
+  forall the_piece__split_fields2:x_coord. forall xnew:int. forall ynew:int.
+  forall result:int. forall xnew1:int. forall result1:int. forall ynew1:int.
+  (in_range3(direction) -> ((is_valid_move({ us_split_fields1 = {
+  rec__tetris__piece__kind = the_piece__split_fields; rec__tetris__piece__y =
+  the_piece__split_fields1; rec__tetris__piece__x = the_piece__split_fields2
+  } }, direction) = true) -> (((result = xnew) and
+  (xnew1 = to_rep(the_piece__split_fields2))) -> (in_range1(xnew1) ->
+  (((result1 = ynew) and (ynew1 = to_rep1(the_piece__split_fields1))) ->
+  (in_range2(ynew1) -> ((not (direction = 1)) -> ((direction = 2) ->
+  ((xnew1 <  8) -> in_range1((xnew1 + 1))))))))))))

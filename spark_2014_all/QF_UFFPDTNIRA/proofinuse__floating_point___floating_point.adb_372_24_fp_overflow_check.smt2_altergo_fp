@@ -1070,17 +1070,6 @@ logic z : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-axiom H : tqtisFinite(x)
-
-axiom H1 : tqtisFinite(y)
-
-axiom H2 : tqtisFinite(z)
-
  (* File "floating_point.adb", line 363, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(sub(NearestTiesToEven, x, y))
+goal WP_parameter_def : (tqtisFinite(x) -> (tqtisFinite(y) ->
+  (tqtisFinite(z) -> tqtisFinite(sub(NearestTiesToEven, x, y)))))

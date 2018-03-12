@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -621,85 +621,15 @@ type t10b__ref = { t10b__content : us_rep
 
 function t10b__ref___projection(a: t10b__ref) : us_rep = (a).t10b__content
 
-logic o : dt
-
-logic o1 : integer
-
-logic o2 : bool
-
-logic o3 : integer
-
-logic o4 : bool
-
-logic o5 : dt
-
-logic o6 : dt
-
-logic temp___242 : dt
-
-logic temp___2421 : bool
-
-logic temp___2422 : integer
-
-logic temp___2423 : bool
-
-logic temp___2424 : dt
-
-logic o7 : dt
-
-logic o8 : dt
-
-logic o9 : bool
-
-logic o10 : integer
-
-logic o11 : bool
-
-logic o12 : dt
-
-logic o13 : dt
-
-logic temp___239 : dt
-
-logic temp___2391 : bool
-
-logic temp___2392 : integer
-
-logic temp___2393 : bool
-
-logic temp___2394 : dt
-
-axiom H : in_range1(x)
-
-axiom H1 : (not (0 <  x))
-
-axiom H2 : (to_rep1(r__split_discrs) = r9b)
-
-axiom H3 : in_range2(r9b)
-
-axiom H4 : (to_rep1(o8) = 1)
-
-axiom H5 : (of_int(0) = o9)
-
-axiom H6 : (dummy = o10)
-
-axiom H7 : (true = o11)
-
-axiom H8 : (o8 = o12)
-
-axiom H9 : (to_rep1(o7) = 2)
-
-axiom H10 : (o7 = o13)
-
-axiom H11 : (temp___239 = o13)
-
-axiom H12 : (temp___2391 = o9)
-
-axiom H13 : (temp___2392 = o10)
-
-axiom H14 : (temp___2393 = o11)
-
-axiom H15 : (temp___2394 = o12)
-
  (* File "test.adb", line 61, characters 0-0 *)
-goal WP_parameter_def : (temp___239 = r__split_discrs)
+goal WP_parameter_def :
+  (forall o:dt. forall o1:dt. forall o2:bool. forall o3:integer.
+  forall o4:bool. forall o5:dt. forall o6:dt. forall temp___272:dt.
+  forall temp___2721:bool. forall temp___2722:integer.
+  forall temp___2723:bool. forall temp___2724:dt. (in_range1(x) ->
+  ((not (0 <  x)) -> (((to_rep1(r__split_discrs) = r9b) and
+  in_range2(r9b)) -> ((((to_rep1(o1) = 1) and ((of_int(0) = o2) and
+  ((dummy = o3) and ((true = o4) and (o1 = o5))))) and (((to_rep1(o) = 2) and
+  (o = o6)) and ((temp___272 = o6) and ((temp___2721 = o2) and
+  ((temp___2722 = o3) and ((temp___2723 = o4) and (temp___2724 = o5))))))) ->
+  (temp___272 = r__split_discrs))))))

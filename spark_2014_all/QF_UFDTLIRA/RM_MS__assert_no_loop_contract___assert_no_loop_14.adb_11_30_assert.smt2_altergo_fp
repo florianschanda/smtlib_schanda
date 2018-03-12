@@ -139,51 +139,14 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic c : int
-
-logic o : int
-
-logic o1 : int
-
-logic c1 : int
-
-logic result : int
-
-logic c2 : int
-
-logic result1 : int
-
-logic c3 : int
-
-logic result2 : int
-
-logic c4 : int
-
-axiom H : in_range(a)
-
-axiom H1 : in_range(b)
-
-axiom H2 : in_range1(c)
-
-axiom H3 : ((c <= (a + b)) -> (result = c))
-
-axiom H4 : ((c <= (a + b)) -> (c2 = a))
-
-axiom H5 : ((c <= (a + b)) -> ((o = (c2 + b)) and in_range1((c2 + b))))
-
-axiom H6 : ((c <= (a + b)) -> (c2 = result1))
-
-axiom H7 : ((c <= (a + b)) -> (c3 = o))
-
-axiom H8 : ((c <= (a + b)) -> ((o1 = (c3 + 1)) and in_range1((c3 + 1))))
-
-axiom H9 : ((c <= (a + b)) -> (result2 = c3))
-
-axiom H10 : ((c <= (a + b)) -> (c4 = o1))
-
-axiom H11 : ((not (c <= (a + b))) -> (c4 = c))
-
-axiom H12 : ((not (c <= (a + b))) -> (c4 = c1))
-
  (* File "assert_no_loop_14.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : ((a + b) <  c4)
+goal WP_parameter_def :
+  (forall c:int. forall o:int. forall o1:int. forall c1:int.
+  forall result:int. forall c2:int. forall result1:int. forall c3:int.
+  forall result2:int. forall c4:int. (in_range(a) -> (in_range(b) ->
+  (in_range1(c) -> ((((c <= (a + b)) and ((({ int__content = result } = {
+  int__content = c }) and (c2 = a)) and ((((o = (c2 + b)) and
+  in_range1((c2 + b))) and ((c2 = result1) and (c3 = o))) and
+  (((o1 = (c3 + 1)) and in_range1((c3 + 1))) and ((result2 = c3) and
+  (c4 = o1)))))) or ((not (c <= (a + b))) and ((c4 = c) and (c4 = c1)))) ->
+  ((a + b) <  c4))))))

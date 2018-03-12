@@ -340,127 +340,48 @@ logic new_data_2 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic r__split_fields : integer
-
-logic r__split_fields1 : natural
-
-logic r__split_fields2 : my_range
-
-logic r__split_fields3 : integer
-
-logic o : int
-
-logic o1 : my_range
-
-logic o2 : natural
-
-logic o3 : integer
-
-logic o4 : natural
-
-logic o5 : my_range
-
-logic o6 : integer
-
-logic temp___218 : integer
-
-logic temp___2181 : natural
-
-logic temp___2182 : my_range
-
-logic temp___2183 : integer
-
-logic o7 : int
-
-logic o8 : my_range
-
-logic result : integer
-
-logic result1 : natural
-
-logic result2 : my_range
-
-logic result3 : integer
-
-logic r__split_fields4 : integer
-
-logic r__split_fields5 : natural
-
-logic r__split_fields6 : my_range
-
-logic r__split_fields7 : integer
-
-logic r__split_fields8 : integer
-
-logic r__split_fields9 : natural
-
-logic r__split_fields10 : my_range
-
-logic r__split_fields11 : integer
-
-logic r__split_fields12 : integer
-
-logic r__split_fields13 : natural
-
-logic r__split_fields14 : my_range
-
-logic r__split_fields15 : integer
-
-axiom H : in_range(new_data)
-
-axiom H1 : in_range2(new_data_2)
-
-axiom H2 : (to_rep1(o1) = new_data_2)
-
-axiom H3 : ((o = new_data) and in_range1(new_data))
-
-axiom H4 : (to_rep(o2) = o)
-
-axiom H5 : (r__split_fields = o3)
-
-axiom H6 : (o2 = o4)
-
-axiom H7 : (o1 = o5)
-
-axiom H8 : (r__split_fields3 = o6)
-
-axiom H9 : (temp___218 = o3)
-
-axiom H10 : (temp___2181 = o4)
-
-axiom H11 : (temp___2182 = o5)
-
-axiom H12 : (temp___2183 = o6)
-
-axiom H13 : ((result = r__split_fields) and ((result1 = r__split_fields1) and
-  ((result2 = r__split_fields2) and (result3 = r__split_fields3))))
-
-axiom H14 : (temp___218 = r__split_fields4)
-
-axiom H15 : (temp___2181 = r__split_fields5)
-
-axiom H16 : (temp___2182 = r__split_fields6)
-
-axiom H17 : (temp___2183 = r__split_fields7)
-
-axiom H18 : (r__split_fields8 = r__split_fields4)
-
-axiom H19 : (r__split_fields9 = r__split_fields5)
-
-axiom H20 : (r__split_fields10 = r__split_fields6)
-
-axiom H21 : (r__split_fields11 = r__split_fields7)
-
-axiom H22 : ((r__split_fields12 = r__split_fields4) and
-  ((r__split_fields13 = r__split_fields5) and
-  ((r__split_fields14 = r__split_fields6) and
-  (r__split_fields15 = r__split_fields7))))
-
  (* File "records.ads", line 16, characters 0-0 *)
-goal WP_parameter_def : (bool_eq4({ us_split_fields1 = {
-  rec__types__rec__s1 = r__split_fields8; rec__types__rec__s2 =
-  r__split_fields9; rec__types__rec__s3 = r__split_fields10;
-  rec__types__rec__s4 = r__split_fields11 } }, { us_split_fields1 = {
+goal WP_parameter_def :
+  (forall r__split_fields:integer. forall r__split_fields1:natural.
+  forall r__split_fields2:my_range. forall r__split_fields3:integer.
+  forall o:int. forall o1:my_range. forall o2:natural. forall o3:integer.
+  forall o4:natural. forall o5:my_range. forall o6:integer.
+  forall temp___247:integer. forall temp___2471:natural.
+  forall temp___2472:my_range. forall temp___2473:integer.
+  forall result:integer. forall result1:natural. forall result2:my_range.
+  forall result3:integer. forall r__split_fields4:integer.
+  forall r__split_fields5:natural. forall r__split_fields6:my_range.
+  forall r__split_fields7:integer. forall r__split_fields8:integer.
+  forall r__split_fields9:natural. forall r__split_fields10:my_range.
+  forall r__split_fields11:integer. forall r__split_fields12:integer.
+  forall r__split_fields13:natural. forall r__split_fields14:my_range.
+  forall r__split_fields15:integer. ((in_range(new_data) and
+  (in_range2(new_data_2) and (((((to_rep1(o1) = new_data_2) and
+  ((((o = new_data) and in_range1(new_data)) and (to_rep(o2) = o)) and
+  ((r__split_fields = o3) and ((o2 = o4) and ((o1 = o5) and
+  (r__split_fields3 = o6)))))) and ((temp___247 = o3) and
+  ((temp___2471 = o4) and ((temp___2472 = o5) and (temp___2473 = o6))))) and
+  (({ us_split_fields__content = { rec__types__rec__s1 = result;
+  rec__types__rec__s2 = result1; rec__types__rec__s3 = result2;
+  rec__types__rec__s4 = result3 } } = { us_split_fields__content = {
   rec__types__rec__s1 = r__split_fields; rec__types__rec__s2 =
-  of_rep(new_data); rec__types__rec__s3 = of_rep1(new_data_2);
-  rec__types__rec__s4 = r__split_fields3 } }) = true)
+  r__split_fields1; rec__types__rec__s3 = r__split_fields2;
+  rec__types__rec__s4 = r__split_fields3 } }) and
+  ((temp___247 = r__split_fields4) and ((temp___2471 = r__split_fields5) and
+  ((temp___2472 = r__split_fields6) and
+  (temp___2473 = r__split_fields7)))))) and
+  (((r__split_fields8 = r__split_fields4) and
+  ((r__split_fields9 = r__split_fields5) and
+  ((r__split_fields10 = r__split_fields6) and
+  (r__split_fields11 = r__split_fields7)))) and ({ rec__types__rec__s1 =
+  r__split_fields12; rec__types__rec__s2 = r__split_fields13;
+  rec__types__rec__s3 = r__split_fields14; rec__types__rec__s4 =
+  r__split_fields15 } = { rec__types__rec__s1 = r__split_fields4;
+  rec__types__rec__s2 = r__split_fields5; rec__types__rec__s3 =
+  r__split_fields6; rec__types__rec__s4 = r__split_fields7 }))))) ->
+  (bool_eq4({ us_split_fields1 = { rec__types__rec__s1 = r__split_fields8;
+  rec__types__rec__s2 = r__split_fields9; rec__types__rec__s3 =
+  r__split_fields10; rec__types__rec__s4 = r__split_fields11 } }, {
+  us_split_fields1 = { rec__types__rec__s1 = r__split_fields;
+  rec__types__rec__s2 = of_rep(new_data); rec__types__rec__s3 =
+  of_rep1(new_data_2); rec__types__rec__s4 = r__split_fields3 } }) = true)))

@@ -483,12 +483,6 @@ logic length__function_guard1 : int, us_rep3 -> prop
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq8 : bool, bool -> bool
-
-axiom bool_eq_def5 :
-  (forall x:bool. forall y:bool [bool_eq8(x, y)]. (((x = y) -> (bool_eq8(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq8(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -500,6 +494,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq8 : bool, bool -> bool
+
+axiom bool_eq_def5 :
+  (forall x:bool. forall y:bool [bool_eq8(x, y)]. (((x = y) -> (bool_eq8(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq8(x, y) = false))))
 
 predicate in_range3(x: int) = ((x = 0) or (x = 1))
 
@@ -748,19 +748,14 @@ axiom w_get__post_axiom :
   ((in_range1(witness1) and (has_witness(container2, witness1) = true)) ->
   in_range6(w_get(container2, witness1)))))
 
-logic o : int
-
-axiom H : in_range(result__)
-
-axiom H1 : (has_key(positions({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = container };
-  us_split_fields1 = { rec__formal_container__vdll__list = container1 } }), {
-  us_split_fields3 = { rec__formal_container__vdll__cursor__node = position }
-  }) = true)
-
  (* File "test_vdll.adb", line 15, characters 0-0 *)
-goal WP_parameter_def : (has_key(positions({ us_split_discrs1 = {
+goal WP_parameter_def : (in_range(result__) -> ((has_key(positions({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  container }; us_split_fields1 = { rec__formal_container__vdll__list =
+  container1 } }), { us_split_fields3 = {
+  rec__formal_container__vdll__cursor__node = position } }) = true) ->
+  (has_key(positions({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = container };
   us_split_fields1 = { rec__formal_container__vdll__list = container1 } }), {
   us_split_fields3 = { rec__formal_container__vdll__cursor__node = position }
-  }) = true)
+  }) = true)))

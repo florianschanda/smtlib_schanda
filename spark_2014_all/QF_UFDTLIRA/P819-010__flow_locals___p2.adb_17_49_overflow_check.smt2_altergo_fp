@@ -111,23 +111,8 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic visible_var : int
-
-logic private_var : int
-
-logic body_var : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-axiom H : in_range(visible_var)
-
-axiom H1 : in_range(private_var)
-
-axiom H2 : in_range(body_var)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((visible_var + private_var))
+goal WP_parameter_def :
+  (forall visible_var:int. forall private_var:int. forall body_var:int.
+  (in_range(visible_var) -> (in_range(private_var) -> (in_range(body_var) ->
+  in_range((visible_var + private_var))))))

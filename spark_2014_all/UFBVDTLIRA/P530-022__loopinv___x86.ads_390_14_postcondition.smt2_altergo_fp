@@ -1036,17 +1036,25 @@ logic readreg32 : t -> t1
 
 logic readreg32__function_guard : t1, t -> prop
 
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 18446744069414584320)
+
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 0)
+
 axiom writereg32post__post_axiom :
   (forall regnew:t.
   (forall val__:t1 [writereg32post(regnew, val__)]. ((writereg32post(regnew,
   val__) = true) <-> ((readreg32(regnew) = val__) and (bw_and(regnew,
-  of_int(18446744069414584320)) = of_int(0))))))
+  rliteral1) = rliteral2)))))
 
 axiom writereg32post__def_axiom :
   (forall regnew:t.
   (forall val__:t1 [writereg32post(regnew, val__)]. ((writereg32post(regnew,
   val__) = true) <-> ((readreg32(regnew) = val__) and (bw_and(regnew,
-  of_int(18446744069414584320)) = of_int(0))))))
+  rliteral1) = rliteral2)))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -1054,31 +1062,17 @@ logic val__ : t1
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic rliteral3 : t
+
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 4294967295)
+
 axiom readreg32__post_axiom :
   (forall reg:t [readreg32(reg)]. (readreg32(reg) = toSmall(bw_and(reg,
-  of_int(4294967295)))))
-
-logic rbp : t
-
-logic result : t
-
-logic rbp1 : t
-
-logic rbp2 : t
-
-logic rbp3 : t
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : (result = rbp)
-
-axiom H3 : (rbp1 = toBig(val__))
-
-axiom H4 : (rbp1 = rbp2)
-
-axiom H5 : (rbp3 = rbp1)
+  rliteral3))))
 
  (* File "x86.ads", line 8, characters 0-0 *)
-goal WP_parameter_def : (writereg32post(rbp2, val__) = true)
+goal WP_parameter_def :
+  (forall rbp:t. forall result:t. forall rbp1:t. forall rbp2:t.
+  forall rbp3:t. ((((result = rbp) and (rbp1 = toBig(val__))) and
+  ((rbp1 = rbp2) and (rbp3 = rbp1))) -> (writereg32post(rbp2,
+  val__) = true)))

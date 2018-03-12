@@ -244,15 +244,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic a : int
-
-logic b : int
-
-logic o : int
-
-axiom H : in_range1(a)
-
-axiom H1 : in_range1(b)
-
  (* File "foo.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(comp_div(a,b))
+goal WP_parameter_def :
+  (forall a:int. forall b:int. (in_range1(a) -> (in_range1(b) ->
+  in_range(comp_div(a,b)))))

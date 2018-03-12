@@ -1005,12 +1005,6 @@ axiom toBig_to_uint : (forall x:t. (tqtint(x) = tqtint1(toBig(x))))
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int2 : bool -> int
 
 axiom to_int_def2 :
@@ -1022,6 +1016,12 @@ logic of_int2 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int2(i)]. (((i = 0) -> (of_int2(i) = false)) and
   ((not (i = 0)) -> (of_int2(i) = true))))
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1172,24 +1172,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,octet) farray, int, int, (int,octet) farray, int,
-  int -> (int,octet) farray
-
-axiom concat_def :
-  (forall a:(int,octet) farray. forall b:(int,octet) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : octet, int -> (int,octet) farray
-
-axiom singleton_def :
-  (forall v:octet.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq7 : (int,octet) farray, int, int, (int,octet) farray, int,
   int -> bool
 
@@ -1200,17 +1182,17 @@ axiom bool_eq_def6 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1220,37 +1202,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,octet) farray, int, int, (int,octet) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,octet) farray. forall b:(int,octet) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq7(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,octet) farray. forall b:(int,octet) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq7(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and ult(to_rep((a[(i + 1)])), to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,octet) farray. forall b:(int,octet) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq7(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and ugt(to_rep((a[(j + 1)])), to_rep((b[(i + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type integer
 
@@ -1389,553 +1343,125 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
-logic value : t1
+logic rliteral1 : t1
 
-logic last2 : int
-
-logic temporary_1 : t1
-
-logic temporary_2 : t1
-
-logic i : int
-
-logic o : int
-
-logic o1 : octet
-
-logic o2 : t
-
-logic o3 : t1
-
-logic o4 : int
-
-logic o5 : octet
-
-logic o6 : t
-
-logic o7 : t1
-
-logic o8 : t1
-
-logic o9 : int
-
-logic o10 : octet
-
-logic o11 : t
-
-logic o12 : t1
-
-logic o13 : t1
-
-logic o14 : int
-
-logic o15 : octet
-
-logic o16 : t
-
-logic o17 : t1
-
-logic o18 : t1
-
-logic o19 : int
-
-logic o20 : octet
-
-logic o21 : t
-
-logic o22 : t1
-
-logic o23 : t1
-
-logic o24 : int
-
-logic o25 : octet
-
-logic o26 : t
-
-logic o27 : t1
-
-logic o28 : t1
-
-logic o29 : int
-
-logic o30 : octet
-
-logic o31 : t
-
-logic o32 : t1
-
-logic o33 : t1
-
-logic o34 : int
-
-logic o35 : octet
-
-logic o36 : t
-
-logic o37 : t1
-
-logic o38 : t1
-
-logic o39 : int
-
-logic result : t1
-
-logic temporary_11 : t1
-
-logic result1 : int
-
-logic i1 : int
-
-logic result2 : t1
-
-logic temporary_21 : t1
-
-logic result3 : t1
-
-logic temporary_22 : t1
-
-logic result4 : t1
-
-logic value1 : t1
-
-logic result5 : t1
-
-logic temporary_12 : t1
-
-logic result6 : int
-
-logic i2 : int
-
-logic result7 : t1
-
-logic temporary_23 : t1
-
-logic result8 : t1
-
-logic temporary_24 : t1
-
-logic result9 : t1
-
-logic value2 : t1
-
-logic result10 : t1
-
-logic temporary_13 : t1
-
-logic result11 : int
-
-logic i3 : int
-
-logic result12 : t1
-
-logic temporary_25 : t1
-
-logic result13 : t1
-
-logic temporary_26 : t1
-
-logic result14 : t1
-
-logic value3 : t1
-
-logic result15 : t1
-
-logic temporary_14 : t1
-
-logic result16 : int
-
-logic i4 : int
-
-logic result17 : t1
-
-logic temporary_27 : t1
-
-logic result18 : t1
-
-logic temporary_28 : t1
-
-logic result19 : t1
-
-logic value4 : t1
-
-logic result20 : t1
-
-logic temporary_15 : t1
-
-logic result21 : int
-
-logic i5 : int
-
-logic result22 : t1
-
-logic temporary_29 : t1
-
-logic result23 : t1
-
-logic temporary_210 : t1
-
-logic result24 : t1
-
-logic value5 : t1
-
-logic result25 : t1
-
-logic temporary_16 : t1
-
-logic result26 : int
-
-logic i6 : int
-
-logic result27 : t1
-
-logic temporary_211 : t1
-
-logic result28 : t1
-
-logic temporary_212 : t1
-
-logic result29 : t1
-
-logic value6 : t1
-
-logic result30 : t1
-
-logic temporary_17 : t1
-
-logic result31 : int
-
-logic i7 : int
-
-logic result32 : t1
-
-logic temporary_213 : t1
-
-logic result33 : t1
-
-logic temporary_214 : t1
-
-logic result34 : t1
-
-logic value7 : t1
-
-logic result35 : t1
-
-logic temporary_18 : t1
-
-logic result36 : int
-
-logic last3 : int
-
-logic value8 : t1
-
-logic last4 : int
-
-logic temporary_19 : t1
-
-logic temporary_215 : t1
-
-logic i8 : int
-
-logic value9 : t1
-
-logic last5 : int
-
-logic temporary_110 : t1
-
-logic temporary_216 : t1
-
-logic i9 : int
-
-axiom H : dynamic_property(0, 65535, to_rep1(first(data1)),
-  to_rep1(last(data1)))
-
-axiom H1 : in_range1(position)
-
-axiom H2 : true
-
-axiom H3 : ((0 <= 65535) -> in_range1(last2))
-
-axiom H4 : ((((comp_mod(position,4) = 0) and (comp_mod(length({ elts = data;
-  rt = data1 }),4) = 0)) and ((to_rep1(first(data1)) <= position) and
-  (position <= to_rep1(last(data1))))) and
-  ((position + 7) <= to_rep1(last(data1))))
-
-axiom H5 : ((to_rep1(first(data1)) <= position) and
-  (position <= to_rep1(last(data1))))
-
-axiom H6 : (o = position)
-
-axiom H7 : (o1 = (data[o]))
-
-axiom H8 : (o2 = to_rep(o1))
-
-axiom H9 : (o3 = toBig(o2))
-
-axiom H10 : (result = temporary_1)
-
-axiom H11 : (temporary_11 = o3)
-
-axiom H12 : true
-
-axiom H13 : true
-
-axiom H14 : (result1 = i)
-
-axiom H15 : (i1 = 1)
-
-axiom H16 : (result2 = temporary_2)
-
-axiom H17 : (temporary_21 = mul1(temporary_11, of_int1(256)))
-
-axiom H18 : ((to_rep1(first(data1)) <= (position + i1)) and
-  ((position + i1) <= to_rep1(last(data1))))
-
-axiom H19 : (o4 = (position + i1))
-
-axiom H20 : (o5 = (data[o4]))
-
-axiom H21 : (o6 = to_rep(o5))
-
-axiom H22 : (o7 = toBig(o6))
-
-axiom H23 : (o8 = add1(temporary_21, o7))
-
-axiom H24 : (temporary_21 = result3)
-
-axiom H25 : (temporary_22 = o8)
-
-axiom H26 : (result4 = value)
-
-axiom H27 : (value1 = temporary_22)
-
-axiom H28 : (temporary_11 = result5)
-
-axiom H29 : (temporary_12 = value1)
-
-axiom H30 : (i1 = result6)
-
-axiom H31 : (i2 = 2)
-
-axiom H32 : (temporary_22 = result7)
-
-axiom H33 : (temporary_23 = mul1(temporary_12, of_int1(256)))
-
-axiom H34 : ((to_rep1(first(data1)) <= (position + i2)) and
-  ((position + i2) <= to_rep1(last(data1))))
-
-axiom H35 : (o9 = (position + i2))
-
-axiom H36 : (o10 = (data[o9]))
-
-axiom H37 : (o11 = to_rep(o10))
-
-axiom H38 : (o12 = toBig(o11))
-
-axiom H39 : (o13 = add1(temporary_23, o12))
-
-axiom H40 : (temporary_23 = result8)
-
-axiom H41 : (temporary_24 = o13)
-
-axiom H42 : (value1 = result9)
-
-axiom H43 : (value2 = temporary_24)
-
-axiom H44 : (temporary_12 = result10)
-
-axiom H45 : (temporary_13 = value2)
-
-axiom H46 : (i2 = result11)
-
-axiom H47 : (i3 = 3)
-
-axiom H48 : (temporary_24 = result12)
-
-axiom H49 : (temporary_25 = mul1(temporary_13, of_int1(256)))
-
-axiom H50 : ((to_rep1(first(data1)) <= (position + i3)) and
-  ((position + i3) <= to_rep1(last(data1))))
-
-axiom H51 : (o14 = (position + i3))
-
-axiom H52 : (o15 = (data[o14]))
-
-axiom H53 : (o16 = to_rep(o15))
-
-axiom H54 : (o17 = toBig(o16))
-
-axiom H55 : (o18 = add1(temporary_25, o17))
-
-axiom H56 : (temporary_25 = result13)
-
-axiom H57 : (temporary_26 = o18)
-
-axiom H58 : (value2 = result14)
-
-axiom H59 : (value3 = temporary_26)
-
-axiom H60 : (temporary_13 = result15)
-
-axiom H61 : (temporary_14 = value3)
-
-axiom H62 : (result16 = i3)
-
-axiom H63 : (i4 = 4)
-
-axiom H64 : (result17 = temporary_26)
-
-axiom H65 : (temporary_27 = mul1(temporary_14, of_int1(256)))
-
-axiom H66 : ((to_rep1(first(data1)) <= (position + i4)) and
-  ((position + i4) <= to_rep1(last(data1))))
-
-axiom H67 : (o19 = (position + i4))
-
-axiom H68 : (o20 = (data[o19]))
-
-axiom H69 : (o21 = to_rep(o20))
-
-axiom H70 : (o22 = toBig(o21))
-
-axiom H71 : (o23 = add1(temporary_27, o22))
-
-axiom H72 : (result18 = temporary_27)
-
-axiom H73 : (temporary_28 = o23)
-
-axiom H74 : (result19 = value3)
-
-axiom H75 : (value4 = temporary_28)
-
-axiom H76 : (result20 = temporary_14)
-
-axiom H77 : (temporary_15 = value4)
-
-axiom H78 : (result21 = i4)
-
-axiom H79 : (i5 = 5)
-
-axiom H80 : (result22 = temporary_28)
-
-axiom H81 : (temporary_29 = mul1(temporary_15, of_int1(256)))
-
-axiom H82 : ((to_rep1(first(data1)) <= (position + i5)) and
-  ((position + i5) <= to_rep1(last(data1))))
-
-axiom H83 : (o24 = (position + i5))
-
-axiom H84 : (o25 = (data[o24]))
-
-axiom H85 : (o26 = to_rep(o25))
-
-axiom H86 : (o27 = toBig(o26))
-
-axiom H87 : (o28 = add1(temporary_29, o27))
-
-axiom H88 : (result23 = temporary_29)
-
-axiom H89 : (temporary_210 = o28)
-
-axiom H90 : (result24 = value4)
-
-axiom H91 : (value5 = temporary_210)
-
-axiom H92 : (result25 = temporary_15)
-
-axiom H93 : (temporary_16 = value5)
-
-axiom H94 : (result26 = i5)
-
-axiom H95 : (i6 = 6)
-
-axiom H96 : (result27 = temporary_210)
-
-axiom H97 : (temporary_211 = mul1(temporary_16, of_int1(256)))
-
-axiom H98 : ((to_rep1(first(data1)) <= (position + i6)) and
-  ((position + i6) <= to_rep1(last(data1))))
-
-axiom H99 : (o29 = (position + i6))
-
-axiom H100 : (o30 = (data[o29]))
-
-axiom H101 : (o31 = to_rep(o30))
-
-axiom H102 : (o32 = toBig(o31))
-
-axiom H103 : (o33 = add1(temporary_211, o32))
-
-axiom H104 : (result28 = temporary_211)
-
-axiom H105 : (temporary_212 = o33)
-
-axiom H106 : (result29 = value5)
-
-axiom H107 : (value6 = temporary_212)
-
-axiom H108 : (result30 = temporary_16)
-
-axiom H109 : (temporary_17 = value6)
-
-axiom H110 : (result31 = i6)
-
-axiom H111 : (i7 = 7)
-
-axiom H112 : (result32 = temporary_212)
-
-axiom H113 : (temporary_213 = mul1(temporary_17, of_int1(256)))
-
-axiom H114 : ((to_rep1(first(data1)) <= (position + i7)) and
-  ((position + i7) <= to_rep1(last(data1))))
-
-axiom H115 : (o34 = (position + i7))
-
-axiom H116 : (o35 = (data[o34]))
-
-axiom H117 : (o36 = to_rep(o35))
-
-axiom H118 : (o37 = toBig(o36))
-
-axiom H119 : (o38 = add1(temporary_213, o37))
-
-axiom H120 : (result33 = temporary_213)
-
-axiom H121 : (temporary_214 = o38)
-
-axiom H122 : (result34 = value6)
-
-axiom H123 : (value7 = temporary_214)
-
-axiom H124 : (result35 = temporary_17)
-
-axiom H125 : (temporary_18 = value7)
-
-axiom H126 : ((o39 = (position + 7)) and in_range1((position + 7)))
-
-axiom H127 : (result36 = last2)
-
-axiom H128 : (last3 = o39)
-
-axiom H129 : (i8 = i7)
-
-axiom H130 : (temporary_215 = temporary_214)
-
-axiom H131 : (temporary_19 = temporary_18)
-
-axiom H132 : (last4 = last3)
-
-axiom H133 : (value8 = value7)
-
-axiom H134 : (i9 = i7)
-
-axiom H135 : (temporary_216 = temporary_214)
-
-axiom H136 : (temporary_110 = temporary_18)
-
-axiom H137 : (last5 = last3)
-
-axiom H138 : (value9 = value7)
+axiom rliteral_axiom1 : (tqtint1(rliteral1) = 256)
 
  (* File "cubedos-lib-xdr.ads", line 228, characters 0-0 *)
-goal WP_parameter_def : (last4 = (position + 7))
+goal WP_parameter_def :
+  (forall value:t1. forall last2:int. forall temporary_1:t1.
+  forall temporary_2:t1. forall i:int. forall o:int. forall o1:octet.
+  forall o2:t. forall o3:t1. forall o4:int. forall o5:octet. forall o6:t.
+  forall o7:t1. forall o8:t1. forall o9:int. forall o10:octet. forall o11:t.
+  forall o12:t1. forall o13:t1. forall o14:int. forall o15:octet.
+  forall o16:t. forall o17:t1. forall o18:t1. forall o19:int.
+  forall o20:octet. forall o21:t. forall o22:t1. forall o23:t1.
+  forall o24:int. forall o25:octet. forall o26:t. forall o27:t1.
+  forall o28:t1. forall o29:int. forall o30:octet. forall o31:t.
+  forall o32:t1. forall o33:t1. forall o34:int. forall o35:octet.
+  forall o36:t. forall o37:t1. forall o38:t1. forall o39:int.
+  forall result:t1. forall temporary_11:t1. forall result1:int.
+  forall i1:int. forall result2:t1. forall temporary_21:t1.
+  forall result3:t1. forall temporary_22:t1. forall result4:t1.
+  forall value1:t1. forall result5:t1. forall temporary_12:t1.
+  forall result6:int. forall i2:int. forall result7:t1.
+  forall temporary_23:t1. forall result8:t1. forall temporary_24:t1.
+  forall result9:t1. forall value2:t1. forall result10:t1.
+  forall temporary_13:t1. forall result11:int. forall i3:int.
+  forall result12:t1. forall temporary_25:t1. forall result13:t1.
+  forall temporary_26:t1. forall result14:t1. forall value3:t1.
+  forall result15:t1. forall temporary_14:t1. forall result16:int.
+  forall i4:int. forall result17:t1. forall temporary_27:t1.
+  forall result18:t1. forall temporary_28:t1. forall result19:t1.
+  forall value4:t1. forall result20:t1. forall temporary_15:t1.
+  forall result21:int. forall i5:int. forall result22:t1.
+  forall temporary_29:t1. forall result23:t1. forall temporary_210:t1.
+  forall result24:t1. forall value5:t1. forall result25:t1.
+  forall temporary_16:t1. forall result26:int. forall i6:int.
+  forall result27:t1. forall temporary_211:t1. forall result28:t1.
+  forall temporary_212:t1. forall result29:t1. forall value6:t1.
+  forall result30:t1. forall temporary_17:t1. forall result31:int.
+  forall i7:int. forall result32:t1. forall temporary_213:t1.
+  forall result33:t1. forall temporary_214:t1. forall result34:t1.
+  forall value7:t1. forall result35:t1. forall temporary_18:t1.
+  forall result36:int. forall last3:int. forall value8:t__ref1.
+  forall last4:int__ref. forall temporary_19:t__ref1.
+  forall temporary_215:t__ref1. forall i8:int__ref. forall value9:t1.
+  forall last5:int. forall temporary_110:t1. forall temporary_216:t1.
+  forall i9:int. ((dynamic_property(0, 65535, to_rep1(first(data1)),
+  to_rep1(last(data1))) and (in_range1(position) and (((0 <= 65535) ->
+  in_range1(last2)) and (((((comp_mod(position,4) = 0) and (comp_mod(length({
+  elts = data; rt = data1 }),4) = 0)) and
+  ((to_rep1(first(data1)) <= position) and
+  (position <= to_rep1(last(data1))))) and
+  ((position + 7) <= to_rep1(last(data1)))) and
+  (((((((((to_rep1(first(data1)) <= position) and
+  (position <= to_rep1(last(data1)))) and (o = position)) and
+  (o1 = (data[o]))) and (o2 = to_rep(o1))) and (o3 = toBig(o2))) and (({
+  t__content1 = result } = { t__content1 = temporary_1 }) and
+  (temporary_11 = o3))) and (((({ int__content = result1 } = { int__content =
+  i }) and (i1 = 1)) and ((({ t__content1 = result2 } = { t__content1 =
+  temporary_2 }) and (temporary_21 = mul1(temporary_11, rliteral1))) and
+  (((((((((to_rep1(first(data1)) <= (position + i1)) and
+  ((position + i1) <= to_rep1(last(data1)))) and (o4 = (position + i1))) and
+  (o5 = (data[o4]))) and (o6 = to_rep(o5))) and (o7 = toBig(o6))) and
+  (o8 = add1(temporary_21, o7))) and ((temporary_21 = result3) and
+  (temporary_22 = o8))) and ((({ t__content1 = result4 } = { t__content1 =
+  value }) and (value1 = temporary_22)) and (((temporary_11 = result5) and
+  (temporary_12 = value1)) and (((i1 = result6) and (i2 = 2)) and
+  (((temporary_22 = result7) and (temporary_23 = mul1(temporary_12,
+  rliteral1))) and (((((((((to_rep1(first(data1)) <= (position + i2)) and
+  ((position + i2) <= to_rep1(last(data1)))) and (o9 = (position + i2))) and
+  (o10 = (data[o9]))) and (o11 = to_rep(o10))) and (o12 = toBig(o11))) and
+  (o13 = add1(temporary_23, o12))) and ((temporary_23 = result8) and
+  (temporary_24 = o13))) and (((value1 = result9) and
+  (value2 = temporary_24)) and (((temporary_12 = result10) and
+  (temporary_13 = value2)) and (((i2 = result11) and (i3 = 3)) and
+  (((temporary_24 = result12) and (temporary_25 = mul1(temporary_13,
+  rliteral1))) and (((((((((to_rep1(first(data1)) <= (position + i3)) and
+  ((position + i3) <= to_rep1(last(data1)))) and (o14 = (position + i3))) and
+  (o15 = (data[o14]))) and (o16 = to_rep(o15))) and (o17 = toBig(o16))) and
+  (o18 = add1(temporary_25, o17))) and ((temporary_25 = result13) and
+  (temporary_26 = o18))) and (((value2 = result14) and
+  (value3 = temporary_26)) and (((temporary_13 = result15) and
+  (temporary_14 = value3)) and (((result16 = i3) and (i4 = 4)) and
+  (((result17 = temporary_26) and (temporary_27 = mul1(temporary_14,
+  rliteral1))) and (((((((((to_rep1(first(data1)) <= (position + i4)) and
+  ((position + i4) <= to_rep1(last(data1)))) and (o19 = (position + i4))) and
+  (o20 = (data[o19]))) and (o21 = to_rep(o20))) and (o22 = toBig(o21))) and
+  (o23 = add1(temporary_27, o22))) and ((result18 = temporary_27) and
+  (temporary_28 = o23))) and (((result19 = value3) and
+  (value4 = temporary_28)) and (((result20 = temporary_14) and
+  (temporary_15 = value4)) and (((result21 = i4) and (i5 = 5)) and
+  (((result22 = temporary_28) and (temporary_29 = mul1(temporary_15,
+  rliteral1))) and (((((((((to_rep1(first(data1)) <= (position + i5)) and
+  ((position + i5) <= to_rep1(last(data1)))) and (o24 = (position + i5))) and
+  (o25 = (data[o24]))) and (o26 = to_rep(o25))) and (o27 = toBig(o26))) and
+  (o28 = add1(temporary_29, o27))) and ((result23 = temporary_29) and
+  (temporary_210 = o28))) and (((result24 = value4) and
+  (value5 = temporary_210)) and (((result25 = temporary_15) and
+  (temporary_16 = value5)) and (((result26 = i5) and (i6 = 6)) and
+  (((result27 = temporary_210) and (temporary_211 = mul1(temporary_16,
+  rliteral1))) and (((((((((to_rep1(first(data1)) <= (position + i6)) and
+  ((position + i6) <= to_rep1(last(data1)))) and (o29 = (position + i6))) and
+  (o30 = (data[o29]))) and (o31 = to_rep(o30))) and (o32 = toBig(o31))) and
+  (o33 = add1(temporary_211, o32))) and ((result28 = temporary_211) and
+  (temporary_212 = o33))) and (((result29 = value5) and
+  (value6 = temporary_212)) and (((result30 = temporary_16) and
+  (temporary_17 = value6)) and (((result31 = i6) and (i7 = 7)) and
+  (((result32 = temporary_212) and (temporary_213 = mul1(temporary_17,
+  rliteral1))) and (((((((((to_rep1(first(data1)) <= (position + i7)) and
+  ((position + i7) <= to_rep1(last(data1)))) and (o34 = (position + i7))) and
+  (o35 = (data[o34]))) and (o36 = to_rep(o35))) and (o37 = toBig(o36))) and
+  (o38 = add1(temporary_213, o37))) and ((result33 = temporary_213) and
+  (temporary_214 = o38))) and (((result34 = value6) and
+  (value7 = temporary_214)) and ((result35 = temporary_17) and
+  (temporary_18 = value7)))))))))))))))))))))))))))))))))))) and
+  (((o39 = (position + 7)) and in_range1((position + 7))) and
+  ((result36 = last2) and (last3 = o39))))) and (((i8 = { int__content = i7
+  }) and ((temporary_215 = { t__content1 = temporary_214 }) and
+  ((temporary_19 = { t__content1 = temporary_18 }) and ((last4 = {
+  int__content = last3 }) and (value8 = { t__content1 = value7 }))))) and
+  ((i9 = i7) and ((temporary_216 = temporary_214) and
+  ((temporary_110 = temporary_18) and ((last5 = last3) and
+  (value9 = value7))))))))))) -> ((last4).int__content = (position + 7))))

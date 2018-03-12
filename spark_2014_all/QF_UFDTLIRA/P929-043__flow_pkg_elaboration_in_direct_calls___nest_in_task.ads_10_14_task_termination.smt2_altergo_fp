@@ -105,7 +105,5 @@ type priority__ref = { priority__content : priority
 function priority__ref___projection(a: priority__ref) : priority =
   (a).priority__content
 
-axiom H : false
-
  (* File "nest_in_task.adb", line 10, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def : true

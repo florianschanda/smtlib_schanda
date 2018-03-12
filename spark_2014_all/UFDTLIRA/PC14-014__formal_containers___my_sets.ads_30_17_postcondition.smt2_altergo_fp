@@ -260,35 +260,18 @@ logic x1 : integer
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic my_sets__get_f__result : int
-
-logic result : int
-
-logic my_sets__get_f__result1 : int
-
-logic my_sets__get_f__result2 : int
-
-logic my_sets__get_f__result3 : int
-
-logic my_sets__get_f__result4 : int
-
-logic my_sets__get_f__result5 : int
-
-logic result1 : int
-
-axiom H : (my_sets__get_f__result1 = my_sets__get_f__result2)
-
-axiom H1 : (my_sets__get_f__result3 = my_sets__get_f__result1)
-
-axiom H2 : (result = my_sets__get_f__result)
-
-axiom H3 : (my_sets__get_f__result1 = to_rep(x))
-
-axiom H4 : (my_sets__get_f__result4 = my_sets__get_f__result2)
-
-axiom H5 : (my_sets__get_f__result5 = my_sets__get_f__result3)
-
-axiom H6 : (result1 = my_sets__get_f__result4)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (my_sets__get_f__result4 = to_rep(x))
+goal WP_parameter_def :
+  (forall my_sets__get_f__result:int. forall result:int.
+  forall my_sets__get_f__result1:int. forall my_sets__get_f__result2:int.
+  forall my_sets__get_f__result3:int. forall my_sets__get_f__result4:int.
+  forall my_sets__get_f__result5:int.
+  (forall result1:int.
+  ((((((my_sets__get_f__result1 = my_sets__get_f__result2) and
+  (my_sets__get_f__result3 = my_sets__get_f__result1)) and
+  ((result = my_sets__get_f__result) and
+  (my_sets__get_f__result1 = to_rep(x)))) and
+  ((my_sets__get_f__result4 = my_sets__get_f__result2) and
+  (my_sets__get_f__result5 = my_sets__get_f__result3))) and
+  (result1 = my_sets__get_f__result4)) ->
+  (my_sets__get_f__result4 = to_rep(x)))))

@@ -81,12 +81,6 @@ axiom bool_ge_axiom :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -98,6 +92,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -484,18 +484,11 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length1(container))))) ->
   in_range6(get(container, position)))))
 
-logic container__split_fields : us_main_type
-
-logic o : int
-
-axiom H : in_range2(index)
-
-axiom H1 : in_range1(count)
-
-axiom H2 : ((1 <= index) and (index <= (0 + length1(model__({
+ (* File "a-cofove.ads", line 549, characters 0-0 *)
+goal WP_parameter_def :
+  (forall container__split_fields:us_main_type. (in_range2(index) ->
+  (in_range1(count) -> (((1 <= index) and (index <= (0 + length1(model__({
   us_split_discrs1 = { rec__loop_types__vectors__vector__capacity =
   container__split_discrs }; us_split_fields1 = {
-  rec__loop_types__vectors__vector = container__split_fields } })))))
-
- (* File "a-cofove.ads", line 549, characters 0-0 *)
-goal WP_parameter_def : in_range1((index - 1))
+  rec__loop_types__vectors__vector = container__split_fields } }))))) ->
+  in_range1((index - 1))))))

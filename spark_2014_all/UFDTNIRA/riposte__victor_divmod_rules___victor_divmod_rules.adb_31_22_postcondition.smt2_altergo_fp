@@ -222,11 +222,6 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-axiom H : in_range(x)
-
-axiom H1 : in_range(y)
-
-axiom H2 : (y <  0)
-
  (* File "victor_divmod_rules.adb", line 18, characters 0-0 *)
-goal WP_parameter_def : (mod(x, y) <= 0)
+goal WP_parameter_def : ((in_range(x) and (in_range(y) and (y <  0))) ->
+  (mod(x, y) <= 0))

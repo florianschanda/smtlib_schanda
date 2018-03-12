@@ -223,19 +223,7 @@ axiom property__post_axiom : true
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : int
-
-logic result : int
-
-logic x1 : int
-
-logic x2 : int
-
-logic x3 : int
-
-axiom H : in_range(x)
-
-axiom H1 : (property(x, comp_div(x,2)) = true)
-
  (* File "transitive.adb", line 5, characters 0-0 *)
-goal WP_parameter_def : (not (2 = 0))
+goal WP_parameter_def :
+  (forall x:int. (in_range(x) -> ((property(x, comp_div(x,2)) = true) ->
+  (not (2 = 0)))))

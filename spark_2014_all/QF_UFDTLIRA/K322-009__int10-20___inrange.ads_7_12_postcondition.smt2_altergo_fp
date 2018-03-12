@@ -137,41 +137,17 @@ logic j : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic inrange__add1__result : int
-
-logic result : int
-
-logic inrange__add1__result1 : int
-
-logic inrange__add1__result2 : int
-
-logic inrange__add1__result3 : int
-
-logic inrange__add1__result4 : int
-
-logic inrange__add1__result5 : int
-
-logic result1 : int
-
-axiom H : in_range(i)
-
-axiom H1 : in_range1(j)
-
-axiom H2 : (i <= 10)
-
-axiom H3 : (inrange__add1__result1 = inrange__add1__result2)
-
-axiom H4 : (inrange__add1__result3 = inrange__add1__result1)
-
-axiom H5 : (result = inrange__add1__result)
-
-axiom H6 : (inrange__add1__result1 = (i + j))
-
-axiom H7 : (inrange__add1__result4 = inrange__add1__result2)
-
-axiom H8 : (inrange__add1__result5 = inrange__add1__result3)
-
-axiom H9 : (result1 = inrange__add1__result4)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (inrange__add1__result4 <= 20)
+goal WP_parameter_def :
+  (forall inrange__add1__result:int. forall result:int.
+  forall inrange__add1__result1:int. forall inrange__add1__result2:int.
+  forall inrange__add1__result3:int. forall inrange__add1__result4:int.
+  forall inrange__add1__result5:int.
+  (forall result1:int. ((in_range(i) and (in_range1(j) and ((i <= 10) and
+  (((((inrange__add1__result1 = inrange__add1__result2) and
+  (inrange__add1__result3 = inrange__add1__result1)) and
+  ((result = inrange__add1__result) and
+  (inrange__add1__result1 = (i + j)))) and
+  ((inrange__add1__result4 = inrange__add1__result2) and
+  (inrange__add1__result5 = inrange__add1__result3))) and
+  (result1 = inrange__add1__result4))))) -> (inrange__add1__result4 <= 20))))

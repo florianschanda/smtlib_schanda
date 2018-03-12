@@ -341,15 +341,9 @@ logic r__attr__tag : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic r__split_fields : natural
-
-logic r__split_fields1 : natural
-
-logic r__split_fields2 : natural
-
-logic r__split_fields3 : natural
-
-axiom H : (to_rep(r__split_fields2) = to_rep(r__split_fields))
-
  (* File "wrong_lsp.adb", line 8, characters 0-0 *)
-goal WP_parameter_def : (to_rep(r__split_fields3) = to_rep(r__split_fields1))
+goal WP_parameter_def :
+  (forall r__split_fields:natural. forall r__split_fields1:natural.
+  forall r__split_fields2:natural. forall r__split_fields3:natural.
+  ((to_rep(r__split_fields2) = to_rep(r__split_fields)) ->
+  (to_rep(r__split_fields3) = to_rep(r__split_fields1))))

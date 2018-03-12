@@ -56,12 +56,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -73,6 +67,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -434,47 +434,10 @@ logic ogt__2__function_guard : bool, us_rep1, us_rep1 -> prop
 
 axiom ogt__2__post_axiom : true
 
-logic o : duration
-
-logic o1 : duration
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : duration
-
-logic o7 : duration
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic result : bool
-
-logic result1 : bool
-
-axiom H : (result = olt__2(right, time_span_zero))
-
-axiom H1 : (result = true)
-
-axiom H2 : (o1 = to_duration__2(right))
-
-axiom H3 : (o2 = to_fixed(o1))
-
-axiom H4 : (o = to_duration__2(time_span_first))
-
-axiom H5 : (o3 = to_fixed(o))
-
-axiom H6 : (o4 = (o3 - o2))
-
  (* File "ada_real_time.ads", line 208, characters 0-0 *)
-goal WP_parameter_def : in_range1(o4)
+goal WP_parameter_def :
+  (forall o:duration. forall o1:duration. forall o2:int. forall o3:int.
+  forall o4:int. forall result:bool. ((result = olt__2(right,
+  time_span_zero)) -> ((result = true) -> ((((o1 = to_duration__2(right)) and
+  (o2 = to_fixed(o1))) and (((o = to_duration__2(time_span_first)) and
+  (o3 = to_fixed(o))) and (o4 = (o3 - o2)))) -> in_range1(o4)))))

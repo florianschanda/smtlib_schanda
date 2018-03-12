@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -273,165 +273,48 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic r__split_fields : integer
-
-logic r__split_fields1 : integer
-
-logic r__split_fields2 : integer
-
-logic tmp : int
-
-logic o : integer
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic o3 : integer
-
-logic temp___177 : integer
-
-logic temp___1771 : integer
-
-logic temp___1772 : integer
-
-logic o4 : integer
-
-logic o5 : integer
-
-logic o6 : integer
-
-logic o7 : integer
-
-logic temp___179 : integer
-
-logic temp___1791 : integer
-
-logic temp___1792 : integer
-
-logic result : int
-
-logic tmp1 : int
-
-logic result1 : integer
-
-logic result2 : integer
-
-logic result3 : integer
-
-logic r__split_fields3 : integer
-
-logic r__split_fields4 : integer
-
-logic r__split_fields5 : integer
-
-logic result4 : integer
-
-logic result5 : integer
-
-logic result6 : integer
-
-logic r__split_fields6 : integer
-
-logic r__split_fields7 : integer
-
-logic r__split_fields8 : integer
-
-logic r__split_fields9 : integer
-
-logic r__split_fields10 : integer
-
-logic r__split_fields11 : integer
-
-logic tmp2 : int
-
-logic r__split_fields12 : integer
-
-logic r__split_fields13 : integer
-
-logic r__split_fields14 : integer
-
-logic tmp3 : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range1(tmp))
-
-axiom H1 : (result = tmp)
-
-axiom H2 : (tmp1 = to_rep(r__split_fields))
-
-axiom H3 : (to_rep(o) = to_rep(r__split_fields2))
-
-axiom H4 : (o = o1)
-
-axiom H5 : (r__split_fields1 = o2)
-
-axiom H6 : (r__split_fields2 = o3)
-
-axiom H7 : (temp___177 = o1)
-
-axiom H8 : (temp___1771 = o2)
-
-axiom H9 : (temp___1772 = o3)
-
-axiom H10 : (result1 = r__split_fields)
-
-axiom H11 : (result2 = r__split_fields1)
-
-axiom H12 : (result3 = r__split_fields2)
-
-axiom H13 : (temp___177 = r__split_fields3)
-
-axiom H14 : (temp___1771 = r__split_fields4)
-
-axiom H15 : (temp___1772 = r__split_fields5)
-
-axiom H16 : (to_rep(o4) = tmp1)
-
-axiom H17 : (r__split_fields3 = o5)
-
-axiom H18 : (r__split_fields4 = o6)
-
-axiom H19 : (o4 = o7)
-
-axiom H20 : (temp___179 = o5)
-
-axiom H21 : (temp___1791 = o6)
-
-axiom H22 : (temp___1792 = o7)
-
-axiom H23 : (result4 = r__split_fields3)
-
-axiom H24 : (result5 = r__split_fields4)
-
-axiom H25 : (result6 = r__split_fields5)
-
-axiom H26 : (temp___179 = r__split_fields6)
-
-axiom H27 : (temp___1791 = r__split_fields7)
-
-axiom H28 : (temp___1792 = r__split_fields8)
-
-axiom H29 : (tmp2 = tmp1)
-
-axiom H30 : (r__split_fields9 = r__split_fields6)
-
-axiom H31 : (r__split_fields10 = r__split_fields7)
-
-axiom H32 : (r__split_fields11 = r__split_fields8)
-
-axiom H33 : (tmp3 = tmp1)
-
-axiom H34 : (r__split_fields12 = r__split_fields6)
-
-axiom H35 : (r__split_fields13 = r__split_fields7)
-
-axiom H36 : (r__split_fields14 = r__split_fields8)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (bool_eq3({ us_split_fields1 = {
-  rec__alpha_launch_examples__rec_t__a = r__split_fields9;
-  rec__alpha_launch_examples__rec_t__b = r__split_fields10;
+goal WP_parameter_def :
+  (forall r__split_fields:integer. forall r__split_fields1:integer.
+  forall r__split_fields2:integer. forall tmp:int. forall o:integer.
+  forall o1:integer. forall o2:integer. forall o3:integer.
+  forall temp___205:integer. forall temp___2051:integer.
+  forall temp___2052:integer. forall o4:integer. forall o5:integer.
+  forall o6:integer. forall o7:integer. forall temp___207:integer.
+  forall temp___2071:integer. forall temp___2072:integer. forall result:int.
+  forall tmp1:int. forall result1:integer. forall result2:integer.
+  forall result3:integer. forall r__split_fields3:integer.
+  forall r__split_fields4:integer. forall r__split_fields5:integer.
+  forall result4:integer. forall result5:integer. forall result6:integer.
+  forall r__split_fields6:integer. forall r__split_fields7:integer.
+  forall r__split_fields8:integer. forall r__split_fields9:integer.
+  forall r__split_fields10:integer. forall r__split_fields11:integer.
+  forall tmp2:int. forall r__split_fields12:integer.
+  forall r__split_fields13:integer. forall r__split_fields14:integer.
+  forall tmp3:int. ((((((- 2147483648) <= 2147483647) -> in_range1(tmp)) and
+  (((result = tmp) and (tmp1 = to_rep(r__split_fields))) and
+  (((((to_rep(o) = to_rep(r__split_fields2)) and ((o = o1) and
+  ((r__split_fields1 = o2) and (r__split_fields2 = o3)))) and
+  ((temp___205 = o1) and ((temp___2051 = o2) and (temp___2052 = o3)))) and
+  (((result1 = r__split_fields) and ((result2 = r__split_fields1) and
+  (result3 = r__split_fields2))) and ((temp___205 = r__split_fields3) and
+  ((temp___2051 = r__split_fields4) and
+  (temp___2052 = r__split_fields5))))) and ((((to_rep(o4) = tmp1) and
+  ((r__split_fields3 = o5) and ((r__split_fields4 = o6) and (o4 = o7)))) and
+  ((temp___207 = o5) and ((temp___2071 = o6) and (temp___2072 = o7)))) and
+  (((result4 = r__split_fields3) and ((result5 = r__split_fields4) and
+  (result6 = r__split_fields5))) and ((temp___207 = r__split_fields6) and
+  ((temp___2071 = r__split_fields7) and
+  (temp___2072 = r__split_fields8)))))))) and (((tmp2 = tmp1) and
+  ((r__split_fields9 = r__split_fields6) and
+  ((r__split_fields10 = r__split_fields7) and
+  (r__split_fields11 = r__split_fields8)))) and ((tmp3 = tmp1) and
+  ((r__split_fields12 = r__split_fields6) and
+  ((r__split_fields13 = r__split_fields7) and
+  (r__split_fields14 = r__split_fields8)))))) -> (bool_eq3({
+  us_split_fields1 = { rec__alpha_launch_examples__rec_t__a =
+  r__split_fields9; rec__alpha_launch_examples__rec_t__b = r__split_fields10;
   rec__alpha_launch_examples__rec_t__c = r__split_fields11 } }, {
   us_split_fields1 = { rec__alpha_launch_examples__rec_t__a =
   r__split_fields2; rec__alpha_launch_examples__rec_t__b = r__split_fields1;
-  rec__alpha_launch_examples__rec_t__c = r__split_fields } }) = true)
+  rec__alpha_launch_examples__rec_t__c = r__split_fields } }) = true)))

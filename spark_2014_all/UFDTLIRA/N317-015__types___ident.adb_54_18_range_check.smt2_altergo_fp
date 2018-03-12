@@ -198,113 +198,23 @@ logic c8b : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic x : int
-
-logic y : int
-
-logic res : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic ident__test__C8b__assume : int
-
-logic o4 : integer
-
-logic o5 : int
-
-logic result : int
-
-logic x1 : int
-
-logic result1 : int
-
-logic res1 : int
-
-logic result2 : int
-
-logic res2 : int
-
-logic result3 : int
-
-logic res3 : int
-
-logic ident__incr_public__y : int
-
-logic result4 : int
-
-logic y1 : int
-
-logic ident__incr_private__y : int
-
-logic result5 : int
-
-logic y2 : int
-
-logic result6 : int
-
-logic y3 : int
-
-axiom H : (result = x)
-
-axiom H1 : (x1 = 10)
-
-axiom H2 : in_range(x1)
-
-axiom H3 : (((- 2147483648) <= 2147483647) -> in_range(y))
-
-axiom H4 : (((- 2147483648) <= 2147483647) -> in_range(res))
-
-axiom H5 : ((o = id_public(x1)) and in_range(o))
-
-axiom H6 : (result1 = res)
-
-axiom H7 : (res1 = o)
-
-axiom H8 : (res1 = x1)
-
-axiom H9 : ((o1 = id_private(x1)) and in_range(o1))
-
-axiom H10 : (result2 = res1)
-
-axiom H11 : (res2 = o1)
-
-axiom H12 : (res2 = x1)
-
-axiom H13 : (x1 = c5b)
-
-axiom H14 : in_range(c5b)
-
-axiom H15 : (result3 = res2)
-
-axiom H16 : (res3 = c5b)
-
-axiom H17 : (res3 = x1)
-
-axiom H18 : ((o2 = x1) and in_range1(x1))
-
-axiom H19 : in_range2(ident__incr_public__y)
-
-axiom H20 : (result4 = y)
-
-axiom H21 : (y1 = ident__incr_public__y)
-
-axiom H22 : (y1 = 9)
-
-axiom H23 : ((o3 = x1) and in_range1(x1))
-
-axiom H24 : in_range2(ident__incr_private__y)
-
-axiom H25 : (result5 = y1)
-
-axiom H26 : (y2 = ident__incr_private__y)
-
-axiom H27 : (y2 = 9)
-
  (* File "ident.adb", line 23, characters 0-0 *)
-goal WP_parameter_def : in_range1(x1)
+goal WP_parameter_def :
+  (forall x:int. forall y:int. forall res:int. forall o:int. forall o1:int.
+  forall o2:int. forall o3:int. forall result:int. forall x1:int.
+  forall result1:int. forall res1:int. forall result2:int. forall res2:int.
+  forall result3:int. forall res3:int. forall ident__incr_public__y:int.
+  forall result4:int. forall y1:int. forall ident__incr_private__y:int.
+  forall result5:int. forall y2:int. (((result = x) and (x1 = 10)) ->
+  (in_range(x1) -> ((((- 2147483648) <= 2147483647) -> in_range(y)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(res)) ->
+  ((((o = id_public(x1)) and in_range(o)) and ((result1 = res) and
+  (res1 = o))) -> ((res1 = x1) -> ((((o1 = id_private(x1)) and
+  in_range(o1)) and ((result2 = res1) and (res2 = o1))) -> ((res2 = x1) ->
+  (((x1 = c5b) and in_range(c5b)) -> (((result3 = res2) and (res3 = c5b)) ->
+  ((res3 = x1) -> (((((o2 = x1) and in_range1(x1)) and
+  in_range2(ident__incr_public__y)) and ((result4 = y) and
+  (y1 = ident__incr_public__y))) -> ((y1 = 9) -> (((((o3 = x1) and
+  in_range1(x1)) and in_range2(ident__incr_private__y)) and
+  ((result5 = y1) and (y2 = ident__incr_private__y))) -> ((y2 = 9) ->
+  in_range1(x1)))))))))))))))))

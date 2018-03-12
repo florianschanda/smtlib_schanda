@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -876,51 +876,12 @@ axiom w_get__post_axiom :
   ((in_range2(witness1) and (has_witness(container, witness1) = true)) ->
   in_range8(w_get(container, witness1)))))
 
-logic l__split_fields : us_main_type
-
-logic c : count_type
-
-logic o : bool
-
-logic o1 : bool
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : count_type
-
-logic o9 : int
-
-logic l__split_fields1 : us_main_type
-
-logic l__split_fields2 : us_main_type
-
-logic l__split_fields3 : us_main_type
-
-logic result : bool
-
-logic result1 : bool
-
-logic result2 : bool
-
-axiom H : in_range3(i)
-
-axiom H1 : (length({ us_split_discrs1 = {
-  rec__int_list__my_lists__list__capacity = l__split_discrs };
-  us_split_fields1 = { rec__int_list__my_lists__list = l__split_fields }
-  }) <  to_rep(l__split_discrs))
-
  (* File "a-cfdlli.ads", line 1514, characters 0-0 *)
-goal WP_parameter_def : (length({ us_split_discrs1 = {
-  rec__int_list__my_lists__list__capacity = l__split_discrs };
-  us_split_fields1 = { rec__int_list__my_lists__list = l__split_fields }
-  }) <  to_rep(l__split_discrs))
+goal WP_parameter_def :
+  (forall l__split_fields:us_main_type. (in_range3(i) -> ((length({
+  us_split_discrs1 = { rec__int_list__my_lists__list__capacity =
+  l__split_discrs }; us_split_fields1 = { rec__int_list__my_lists__list =
+  l__split_fields } }) <  to_rep(l__split_discrs)) -> (length({
+  us_split_discrs1 = { rec__int_list__my_lists__list__capacity =
+  l__split_discrs }; us_split_fields1 = { rec__int_list__my_lists__list =
+  l__split_fields } }) <  to_rep(l__split_discrs)))))

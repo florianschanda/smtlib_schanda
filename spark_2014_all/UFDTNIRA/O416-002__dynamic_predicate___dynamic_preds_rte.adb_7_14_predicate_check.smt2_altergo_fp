@@ -293,67 +293,20 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic x__split_fields : small
-
-logic x__split_fields1 : very_small
-
-logic temp___204 : int
-
-logic o : int
-
-logic o1 : small
-
-logic o2 : small
-
-logic o3 : very_small
-
-logic temp___207 : small
-
-logic temp___2071 : very_small
-
-logic temp___208 : int
-
-logic result : small
-
-logic result1 : very_small
-
-logic x__split_fields2 : small
-
-logic x__split_fields3 : very_small
-
-axiom H : (in_range1(i3s) and ((2 * i3s) <  100000))
-
-axiom H1 : (in_range2(i5s) and ((i5s * i5s) <  100000))
-
-axiom H2 : true
-
-axiom H3 : in_range(y)
-
-axiom H4 : ((temp___204 = y) and in_range1(y))
-
-axiom H5 : ((2 * temp___204) <  100000)
-
-axiom H6 : (o = temp___204)
-
-axiom H7 : (to_rep(o1) = o)
-
-axiom H8 : (o1 = o2)
-
-axiom H9 : (x__split_fields1 = o3)
-
-axiom H10 : (temp___207 = o2)
-
-axiom H11 : (temp___2071 = o3)
-
-axiom H12 : (result = x__split_fields)
-
-axiom H13 : (result1 = x__split_fields1)
-
-axiom H14 : (x__split_fields2 = temp___207)
-
-axiom H15 : (x__split_fields3 = temp___2071)
-
-axiom H16 : ((temp___208 = y) and in_range2(y))
-
  (* File "dynamic_preds_rte.ads", line 17, characters 0-0 *)
-goal WP_parameter_def : ((temp___208 * temp___208) <  100000)
+goal WP_parameter_def :
+  (forall x__split_fields:small. forall x__split_fields1:very_small.
+  forall temp___232:int. forall o:int. forall o1:small. forall o2:small.
+  forall o3:very_small. forall temp___235:small.
+  forall temp___2351:very_small. forall temp___236:int. forall result:small.
+  forall result1:very_small. forall x__split_fields2:small.
+  forall x__split_fields3:very_small. ((in_range1(i3s) and
+  ((2 * i3s) <  100000)) -> ((in_range2(i5s) and ((i5s * i5s) <  100000)) ->
+  (in_range(y) -> ((((((((temp___232 = y) and in_range1(y)) and
+  (((2 * temp___232) <  100000) and (o = temp___232))) and
+  (to_rep(o1) = o)) and ((o1 = o2) and (x__split_fields1 = o3))) and
+  ((temp___235 = o2) and (temp___2351 = o3))) and
+  (((result = x__split_fields) and (result1 = x__split_fields1)) and
+  ((x__split_fields2 = temp___235) and (x__split_fields3 = temp___2351)))) ->
+  (((temp___236 = y) and in_range2(y)) ->
+  ((temp___236 * temp___236) <  100000)))))))

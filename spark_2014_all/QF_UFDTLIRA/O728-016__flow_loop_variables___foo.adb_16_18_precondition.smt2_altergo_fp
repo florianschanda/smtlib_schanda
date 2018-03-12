@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -141,118 +141,6 @@ logic f : bool, int -> bool
 logic f__function_guard : bool, bool, int -> prop
 
 axiom f__post_axiom : true
-
-logic o : bool
-
-logic i : int
-
-logic o1 : bool
-
-logic o2 : bool
-
-logic o3 : bool
-
-logic o4 : bool
-
-logic o5 : bool
-
-logic o6 : bool
-
-logic o7 : bool
-
-logic o8 : bool
-
-logic o9 : bool
-
-logic o10 : bool
-
-logic result : bool
-
-logic o11 : bool
-
-logic result1 : int
-
-logic i1 : int
-
-logic result2 : bool
-
-logic o12 : bool
-
-logic result3 : int
-
-logic i2 : int
-
-logic result4 : bool
-
-logic o13 : bool
-
-logic result5 : int
-
-logic i3 : int
-
-logic result6 : bool
-
-logic o14 : bool
-
-logic result7 : int
-
-logic i4 : int
-
-logic result8 : bool
-
-logic o15 : bool
-
-logic result9 : int
-
-logic i5 : int
-
-logic result10 : bool
-
-logic o16 : bool
-
-logic result11 : int
-
-logic i6 : int
-
-logic result12 : bool
-
-logic o17 : bool
-
-logic result13 : int
-
-logic i7 : int
-
-logic result14 : bool
-
-logic o18 : bool
-
-logic result15 : int
-
-logic i8 : int
-
-logic result16 : bool
-
-logic o19 : bool
-
-logic result17 : int
-
-logic i9 : int
-
-logic result18 : bool
-
-logic o20 : bool
-
-logic result19 : int
-
-logic i10 : int
-
-axiom H : (result = o)
-
-axiom H1 : (o11 = of_int(0))
-
-axiom H2 : (result1 = i)
-
-axiom H3 : (i1 = 1)
 
  (* File "foo.adb", line 7, characters 0-0 *)
 goal WP_parameter_def : true

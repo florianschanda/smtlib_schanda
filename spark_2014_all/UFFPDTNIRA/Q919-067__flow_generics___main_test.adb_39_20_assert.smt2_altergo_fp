@@ -1120,14 +1120,14 @@ axiom bool_eq_def2 :
   (((a__first_2 <= a__last_2) and ((b__first_2 <= b__last_2) and
   ((a__last_2 - a__first_2) = (b__last_2 - b__first_2)))) or
   ((not (a__first_2 <= a__last_2)) and (b__last_2 <  b__first_2)))) and
-  (forall temp___idx_133:int. forall temp___idx_134:int.
-  (((((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)) and
-  ((a__first_2 <= temp___idx_134) and (temp___idx_134 <= a__last_2))) and
-  (to_rep(get(a, temp___idx_133, temp___idx_134)) = to_rep(get(b,
-  ((b__first - a__first) + temp___idx_133),
-  ((b__first_2 - a__first_2) + temp___idx_134))))) or
-  (not (((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)) and
-  ((a__first_2 <= temp___idx_134) and (temp___idx_134 <= a__last_2))))))) ->
+  (forall temp___idx_155:int. forall temp___idx_156:int.
+  (((((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)) and
+  ((a__first_2 <= temp___idx_156) and (temp___idx_156 <= a__last_2))) and
+  (to_rep(get(a, temp___idx_155, temp___idx_156)) = to_rep(get(b,
+  ((b__first - a__first) + temp___idx_155),
+  ((b__first_2 - a__first_2) + temp___idx_156))))) or
+  (not (((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)) and
+  ((a__first_2 <= temp___idx_156) and (temp___idx_156 <= a__last_2))))))) ->
   (bool_eq2(a, a__first, a__last, a__first_2, a__last_2, b, b__first,
   b__last, b__first_2, b__last_2) = true)) and
   ((not (((((a__first <= a__last) -> ((b__first <= b__last) and
@@ -1136,12 +1136,12 @@ axiom bool_eq_def2 :
   (((a__first_2 <= a__last_2) -> ((b__first_2 <= b__last_2) and
   ((a__last_2 - a__first_2) = (b__last_2 - b__first_2)))) and
   ((not (a__first_2 <= a__last_2)) -> (b__last_2 <  b__first_2)))) and
-  (forall temp___idx_133:int. forall temp___idx_134:int.
-  ((((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)) and
-  ((a__first_2 <= temp___idx_134) and (temp___idx_134 <= a__last_2))) ->
-  (to_rep(get(a, temp___idx_133, temp___idx_134)) = to_rep(get(b,
-  ((b__first - a__first) + temp___idx_133),
-  ((b__first_2 - a__first_2) + temp___idx_134)))))))) -> (bool_eq2(a,
+  (forall temp___idx_155:int. forall temp___idx_156:int.
+  ((((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)) and
+  ((a__first_2 <= temp___idx_156) and (temp___idx_156 <= a__last_2))) ->
+  (to_rep(get(a, temp___idx_155, temp___idx_156)) = to_rep(get(b,
+  ((b__first - a__first) + temp___idx_155),
+  ((b__first_2 - a__first_2) + temp___idx_156)))))))) -> (bool_eq2(a,
   a__first, a__last, a__first_2, a__last_2, b, b__first, b__last, b__first_2,
   b__last_2) = false))))
 
@@ -1158,12 +1158,12 @@ axiom bool_eq_rev :
   (((a__first_2 <= a__last_2) -> ((b__first_2 <= b__last_2) and
   ((a__last_2 - a__first_2) = (b__last_2 - b__first_2)))) and
   ((not (a__first_2 <= a__last_2)) -> (b__last_2 <  b__first_2)))) and
-  (forall temp___idx_133:int. forall temp___idx_134:int.
-  ((((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)) and
-  ((a__first_2 <= temp___idx_134) and (temp___idx_134 <= a__last_2))) ->
-  (to_rep(get(a, temp___idx_133, temp___idx_134)) = to_rep(get(b,
-  ((b__first - a__first) + temp___idx_133),
-  ((b__first_2 - a__first_2) + temp___idx_134))))))))))
+  (forall temp___idx_155:int. forall temp___idx_156:int.
+  ((((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)) and
+  ((a__first_2 <= temp___idx_156) and (temp___idx_156 <= a__last_2))) ->
+  (to_rep(get(a, temp___idx_155, temp___idx_156)) = to_rep(get(b,
+  ((b__first - a__first) + temp___idx_155),
+  ((b__first_2 - a__first_2) + temp___idx_156))))))))))
 
 type tbxb_matrixP1
 
@@ -1578,10 +1578,10 @@ axiom manipulate__def_axiom :
   (manipulate1(original, map1) = slide((omultiply__4(omultiply__4(transpose({
   elts = map1; rt = mk(1, 3); rt_2 = mk1(1, 2) }), { elts = original; rt =
   mk(1, 3); rt_2 = mk1(1, 3) }), { elts = map1; rt = mk(1, 3); rt_2 = mk1(1,
-  2) })).elts, to_rep1(first1((omultiply__4(omultiply__4(transpose({ elts =
+  2) })).elts, to_rep1(first((omultiply__4(omultiply__4(transpose({ elts =
   map1; rt = mk(1, 3); rt_2 = mk1(1, 2) }), { elts = original; rt = mk(1, 3);
   rt_2 = mk1(1, 3) }), { elts = map1; rt = mk(1, 3); rt_2 = mk1(1, 2)
-  })).rt_2)), 1, to_rep1(first1((omultiply__4(omultiply__4(transpose({ elts =
+  })).rt)), 1, to_rep1(first1((omultiply__4(omultiply__4(transpose({ elts =
   map1; rt = mk(1, 3); rt_2 = mk1(1, 2) }), { elts = original; rt = mk(1, 3);
   rt_2 = mk1(1, 3) }), { elts = map1; rt = mk(1, 3); rt_2 = mk1(1, 2)
   })).rt_2)), 1)))
@@ -1704,163 +1704,183 @@ function t25b__ref___projection(a: t25b__ref) : t25b = (a).t25b__content
 
 logic main_test__mat_in__aggregate_def : t, t, t, t, t, t, t, t, t -> map
 
-axiom def_axiom :
-  (forall temp___1760:t. forall temp___1761:t. forall temp___1762:t.
-  forall temp___1763:t. forall temp___1764:t. forall temp___1765:t.
-  forall temp___1766:t. forall temp___1767:t. forall temp___1768:t.
-  (((((get(main_test__mat_in__aggregate_def(temp___1760, temp___1761,
-  temp___1762, temp___1763, temp___1764, temp___1765, temp___1766,
-  temp___1767, temp___1768), 1, 1) = of_rep(temp___1760)) and
-  (get(main_test__mat_in__aggregate_def(temp___1760, temp___1761,
-  temp___1762, temp___1763, temp___1764, temp___1765, temp___1766,
-  temp___1767, temp___1768), 1, 2) = of_rep(temp___1761))) and
-  (get(main_test__mat_in__aggregate_def(temp___1760, temp___1761,
-  temp___1762, temp___1763, temp___1764, temp___1765, temp___1766,
-  temp___1767, temp___1768), 1, 3) = of_rep(temp___1762))) and
-  (((get(main_test__mat_in__aggregate_def(temp___1760, temp___1761,
-  temp___1762, temp___1763, temp___1764, temp___1765, temp___1766,
-  temp___1767, temp___1768), 2, 1) = of_rep(temp___1763)) and
-  (get(main_test__mat_in__aggregate_def(temp___1760, temp___1761,
-  temp___1762, temp___1763, temp___1764, temp___1765, temp___1766,
-  temp___1767, temp___1768), 2, 2) = of_rep(temp___1764))) and
-  (get(main_test__mat_in__aggregate_def(temp___1760, temp___1761,
-  temp___1762, temp___1763, temp___1764, temp___1765, temp___1766,
-  temp___1767, temp___1768), 2, 3) = of_rep(temp___1765)))) and
-  (((get(main_test__mat_in__aggregate_def(temp___1760, temp___1761,
-  temp___1762, temp___1763, temp___1764, temp___1765, temp___1766,
-  temp___1767, temp___1768), 3, 1) = of_rep(temp___1766)) and
-  (get(main_test__mat_in__aggregate_def(temp___1760, temp___1761,
-  temp___1762, temp___1763, temp___1764, temp___1765, temp___1766,
-  temp___1767, temp___1768), 3, 2) = of_rep(temp___1767))) and
-  (get(main_test__mat_in__aggregate_def(temp___1760, temp___1761,
-  temp___1762, temp___1763, temp___1764, temp___1765, temp___1766,
-  temp___1767, temp___1768), 3, 3) = of_rep(temp___1768)))))
-
 logic main_test__mat_map__aggregate_def : t, t, t, t, t, t -> map
-
-axiom def_axiom1 :
-  (forall temp___1772:t. forall temp___1773:t. forall temp___1774:t.
-  forall temp___1775:t. forall temp___1776:t. forall temp___1777:t.
-  ((((get(main_test__mat_map__aggregate_def(temp___1772, temp___1773,
-  temp___1774, temp___1775, temp___1776, temp___1777), 1,
-  1) = of_rep(temp___1772)) and
-  (get(main_test__mat_map__aggregate_def(temp___1772, temp___1773,
-  temp___1774, temp___1775, temp___1776, temp___1777), 1,
-  2) = of_rep(temp___1773))) and
-  ((get(main_test__mat_map__aggregate_def(temp___1772, temp___1773,
-  temp___1774, temp___1775, temp___1776, temp___1777), 2,
-  1) = of_rep(temp___1774)) and
-  (get(main_test__mat_map__aggregate_def(temp___1772, temp___1773,
-  temp___1774, temp___1775, temp___1776, temp___1777), 2,
-  2) = of_rep(temp___1775)))) and
-  ((get(main_test__mat_map__aggregate_def(temp___1772, temp___1773,
-  temp___1774, temp___1775, temp___1776, temp___1777), 3,
-  1) = of_rep(temp___1776)) and
-  (get(main_test__mat_map__aggregate_def(temp___1772, temp___1773,
-  temp___1774, temp___1775, temp___1776, temp___1777), 3,
-  2) = of_rep(temp___1777)))))
 
 logic main_test__mat_out__aggregate_def : t -> map
 
-axiom def_axiom2 :
-  (forall temp___1781:t.
-  (forall temp___1782:int. forall temp___1783:int.
-  (get(main_test__mat_out__aggregate_def(temp___1781), temp___1782,
-  temp___1783) = of_rep(temp___1781))))
-
 logic main_test__mat_in2__aggregate_def : t, t, t, t, t, t, t, t, t -> map
-
-axiom def_axiom3 :
-  (forall temp___1785:t. forall temp___1786:t. forall temp___1787:t.
-  forall temp___1788:t. forall temp___1789:t. forall temp___1790:t.
-  forall temp___1791:t. forall temp___1792:t. forall temp___1793:t.
-  (((((get(main_test__mat_in2__aggregate_def(temp___1785, temp___1786,
-  temp___1787, temp___1788, temp___1789, temp___1790, temp___1791,
-  temp___1792, temp___1793), 1, 1) = of_rep(temp___1785)) and
-  (get(main_test__mat_in2__aggregate_def(temp___1785, temp___1786,
-  temp___1787, temp___1788, temp___1789, temp___1790, temp___1791,
-  temp___1792, temp___1793), 1, 2) = of_rep(temp___1786))) and
-  (get(main_test__mat_in2__aggregate_def(temp___1785, temp___1786,
-  temp___1787, temp___1788, temp___1789, temp___1790, temp___1791,
-  temp___1792, temp___1793), 1, 3) = of_rep(temp___1787))) and
-  (((get(main_test__mat_in2__aggregate_def(temp___1785, temp___1786,
-  temp___1787, temp___1788, temp___1789, temp___1790, temp___1791,
-  temp___1792, temp___1793), 2, 1) = of_rep(temp___1788)) and
-  (get(main_test__mat_in2__aggregate_def(temp___1785, temp___1786,
-  temp___1787, temp___1788, temp___1789, temp___1790, temp___1791,
-  temp___1792, temp___1793), 2, 2) = of_rep(temp___1789))) and
-  (get(main_test__mat_in2__aggregate_def(temp___1785, temp___1786,
-  temp___1787, temp___1788, temp___1789, temp___1790, temp___1791,
-  temp___1792, temp___1793), 2, 3) = of_rep(temp___1790)))) and
-  (((get(main_test__mat_in2__aggregate_def(temp___1785, temp___1786,
-  temp___1787, temp___1788, temp___1789, temp___1790, temp___1791,
-  temp___1792, temp___1793), 3, 1) = of_rep(temp___1791)) and
-  (get(main_test__mat_in2__aggregate_def(temp___1785, temp___1786,
-  temp___1787, temp___1788, temp___1789, temp___1790, temp___1791,
-  temp___1792, temp___1793), 3, 2) = of_rep(temp___1792))) and
-  (get(main_test__mat_in2__aggregate_def(temp___1785, temp___1786,
-  temp___1787, temp___1788, temp___1789, temp___1790, temp___1791,
-  temp___1792, temp___1793), 3, 3) = of_rep(temp___1793)))))
 
 logic main_test__mat_map2__aggregate_def : t, t, t, t, t, t -> map
 
-axiom def_axiom4 :
-  (forall temp___1797:t. forall temp___1798:t. forall temp___1799:t.
-  forall temp___1800:t. forall temp___1801:t. forall temp___1802:t.
-  ((((get(main_test__mat_map2__aggregate_def(temp___1797, temp___1798,
-  temp___1799, temp___1800, temp___1801, temp___1802), 1,
-  1) = of_rep(temp___1797)) and
-  (get(main_test__mat_map2__aggregate_def(temp___1797, temp___1798,
-  temp___1799, temp___1800, temp___1801, temp___1802), 1,
-  2) = of_rep(temp___1798))) and
-  ((get(main_test__mat_map2__aggregate_def(temp___1797, temp___1798,
-  temp___1799, temp___1800, temp___1801, temp___1802), 2,
-  1) = of_rep(temp___1799)) and
-  (get(main_test__mat_map2__aggregate_def(temp___1797, temp___1798,
-  temp___1799, temp___1800, temp___1801, temp___1802), 2,
-  2) = of_rep(temp___1800)))) and
-  ((get(main_test__mat_map2__aggregate_def(temp___1797, temp___1798,
-  temp___1799, temp___1800, temp___1801, temp___1802), 3,
-  1) = of_rep(temp___1801)) and
-  (get(main_test__mat_map2__aggregate_def(temp___1797, temp___1798,
-  temp___1799, temp___1800, temp___1801, temp___1802), 3,
-  2) = of_rep(temp___1802)))))
-
 logic main_test__mat_out2__aggregate_def : t -> map
 
-axiom def_axiom5 :
-  (forall temp___1806:t.
-  (forall temp___1807:int. forall temp___1808:int.
-  (get(main_test__mat_out2__aggregate_def(temp___1806), temp___1807,
-  temp___1808) = of_rep(temp___1806))))
+logic temp___1988 : t, t, t, t -> map
 
-logic temp___1809 : t, t, t, t -> map
+logic temp___1998 : t, t, t, t -> map
+
+axiom def_axiom :
+  (forall temp___1939:t. forall temp___1940:t. forall temp___1941:t.
+  forall temp___1942:t. forall temp___1943:t. forall temp___1944:t.
+  forall temp___1945:t. forall temp___1946:t. forall temp___1947:t.
+  (((((((((tqtisFinite(temp___1939) and tqtisFinite(temp___1940)) and
+  tqtisFinite(temp___1941)) and tqtisFinite(temp___1942)) and
+  tqtisFinite(temp___1943)) and tqtisFinite(temp___1944)) and
+  tqtisFinite(temp___1945)) and tqtisFinite(temp___1946)) and
+  tqtisFinite(temp___1947)) ->
+  (((((to_rep(get(main_test__mat_in__aggregate_def(temp___1939, temp___1940,
+  temp___1941, temp___1942, temp___1943, temp___1944, temp___1945,
+  temp___1946, temp___1947), 1, 1)) = temp___1939) and
+  (to_rep(get(main_test__mat_in__aggregate_def(temp___1939, temp___1940,
+  temp___1941, temp___1942, temp___1943, temp___1944, temp___1945,
+  temp___1946, temp___1947), 1, 2)) = temp___1940)) and
+  (to_rep(get(main_test__mat_in__aggregate_def(temp___1939, temp___1940,
+  temp___1941, temp___1942, temp___1943, temp___1944, temp___1945,
+  temp___1946, temp___1947), 1, 3)) = temp___1941)) and
+  (((to_rep(get(main_test__mat_in__aggregate_def(temp___1939, temp___1940,
+  temp___1941, temp___1942, temp___1943, temp___1944, temp___1945,
+  temp___1946, temp___1947), 2, 1)) = temp___1942) and
+  (to_rep(get(main_test__mat_in__aggregate_def(temp___1939, temp___1940,
+  temp___1941, temp___1942, temp___1943, temp___1944, temp___1945,
+  temp___1946, temp___1947), 2, 2)) = temp___1943)) and
+  (to_rep(get(main_test__mat_in__aggregate_def(temp___1939, temp___1940,
+  temp___1941, temp___1942, temp___1943, temp___1944, temp___1945,
+  temp___1946, temp___1947), 2, 3)) = temp___1944))) and
+  (((to_rep(get(main_test__mat_in__aggregate_def(temp___1939, temp___1940,
+  temp___1941, temp___1942, temp___1943, temp___1944, temp___1945,
+  temp___1946, temp___1947), 3, 1)) = temp___1945) and
+  (to_rep(get(main_test__mat_in__aggregate_def(temp___1939, temp___1940,
+  temp___1941, temp___1942, temp___1943, temp___1944, temp___1945,
+  temp___1946, temp___1947), 3, 2)) = temp___1946)) and
+  (to_rep(get(main_test__mat_in__aggregate_def(temp___1939, temp___1940,
+  temp___1941, temp___1942, temp___1943, temp___1944, temp___1945,
+  temp___1946, temp___1947), 3, 3)) = temp___1947)))))
+
+axiom def_axiom1 :
+  (forall temp___1951:t. forall temp___1952:t. forall temp___1953:t.
+  forall temp___1954:t. forall temp___1955:t. forall temp___1956:t.
+  ((((((tqtisFinite(temp___1951) and tqtisFinite(temp___1952)) and
+  tqtisFinite(temp___1953)) and tqtisFinite(temp___1954)) and
+  tqtisFinite(temp___1955)) and tqtisFinite(temp___1956)) ->
+  ((((to_rep(get(main_test__mat_map__aggregate_def(temp___1951, temp___1952,
+  temp___1953, temp___1954, temp___1955, temp___1956), 1,
+  1)) = temp___1951) and
+  (to_rep(get(main_test__mat_map__aggregate_def(temp___1951, temp___1952,
+  temp___1953, temp___1954, temp___1955, temp___1956), 1,
+  2)) = temp___1952)) and
+  ((to_rep(get(main_test__mat_map__aggregate_def(temp___1951, temp___1952,
+  temp___1953, temp___1954, temp___1955, temp___1956), 2,
+  1)) = temp___1953) and
+  (to_rep(get(main_test__mat_map__aggregate_def(temp___1951, temp___1952,
+  temp___1953, temp___1954, temp___1955, temp___1956), 2,
+  2)) = temp___1954))) and
+  ((to_rep(get(main_test__mat_map__aggregate_def(temp___1951, temp___1952,
+  temp___1953, temp___1954, temp___1955, temp___1956), 3,
+  1)) = temp___1955) and
+  (to_rep(get(main_test__mat_map__aggregate_def(temp___1951, temp___1952,
+  temp___1953, temp___1954, temp___1955, temp___1956), 3,
+  2)) = temp___1956)))))
+
+axiom def_axiom2 :
+  (forall temp___1960:t. (tqtisFinite(temp___1960) ->
+  (forall temp___1961:int. forall temp___1962:int.
+  (to_rep(get(main_test__mat_out__aggregate_def(temp___1960), temp___1961,
+  temp___1962)) = temp___1960))))
+
+axiom def_axiom3 :
+  (forall temp___1964:t. forall temp___1965:t. forall temp___1966:t.
+  forall temp___1967:t. forall temp___1968:t. forall temp___1969:t.
+  forall temp___1970:t. forall temp___1971:t. forall temp___1972:t.
+  (((((((((tqtisFinite(temp___1964) and tqtisFinite(temp___1965)) and
+  tqtisFinite(temp___1966)) and tqtisFinite(temp___1967)) and
+  tqtisFinite(temp___1968)) and tqtisFinite(temp___1969)) and
+  tqtisFinite(temp___1970)) and tqtisFinite(temp___1971)) and
+  tqtisFinite(temp___1972)) ->
+  (((((to_rep(get(main_test__mat_in2__aggregate_def(temp___1964, temp___1965,
+  temp___1966, temp___1967, temp___1968, temp___1969, temp___1970,
+  temp___1971, temp___1972), 1, 1)) = temp___1964) and
+  (to_rep(get(main_test__mat_in2__aggregate_def(temp___1964, temp___1965,
+  temp___1966, temp___1967, temp___1968, temp___1969, temp___1970,
+  temp___1971, temp___1972), 1, 2)) = temp___1965)) and
+  (to_rep(get(main_test__mat_in2__aggregate_def(temp___1964, temp___1965,
+  temp___1966, temp___1967, temp___1968, temp___1969, temp___1970,
+  temp___1971, temp___1972), 1, 3)) = temp___1966)) and
+  (((to_rep(get(main_test__mat_in2__aggregate_def(temp___1964, temp___1965,
+  temp___1966, temp___1967, temp___1968, temp___1969, temp___1970,
+  temp___1971, temp___1972), 2, 1)) = temp___1967) and
+  (to_rep(get(main_test__mat_in2__aggregate_def(temp___1964, temp___1965,
+  temp___1966, temp___1967, temp___1968, temp___1969, temp___1970,
+  temp___1971, temp___1972), 2, 2)) = temp___1968)) and
+  (to_rep(get(main_test__mat_in2__aggregate_def(temp___1964, temp___1965,
+  temp___1966, temp___1967, temp___1968, temp___1969, temp___1970,
+  temp___1971, temp___1972), 2, 3)) = temp___1969))) and
+  (((to_rep(get(main_test__mat_in2__aggregate_def(temp___1964, temp___1965,
+  temp___1966, temp___1967, temp___1968, temp___1969, temp___1970,
+  temp___1971, temp___1972), 3, 1)) = temp___1970) and
+  (to_rep(get(main_test__mat_in2__aggregate_def(temp___1964, temp___1965,
+  temp___1966, temp___1967, temp___1968, temp___1969, temp___1970,
+  temp___1971, temp___1972), 3, 2)) = temp___1971)) and
+  (to_rep(get(main_test__mat_in2__aggregate_def(temp___1964, temp___1965,
+  temp___1966, temp___1967, temp___1968, temp___1969, temp___1970,
+  temp___1971, temp___1972), 3, 3)) = temp___1972)))))
+
+axiom def_axiom4 :
+  (forall temp___1976:t. forall temp___1977:t. forall temp___1978:t.
+  forall temp___1979:t. forall temp___1980:t. forall temp___1981:t.
+  ((((((tqtisFinite(temp___1976) and tqtisFinite(temp___1977)) and
+  tqtisFinite(temp___1978)) and tqtisFinite(temp___1979)) and
+  tqtisFinite(temp___1980)) and tqtisFinite(temp___1981)) ->
+  ((((to_rep(get(main_test__mat_map2__aggregate_def(temp___1976, temp___1977,
+  temp___1978, temp___1979, temp___1980, temp___1981), 1,
+  1)) = temp___1976) and
+  (to_rep(get(main_test__mat_map2__aggregate_def(temp___1976, temp___1977,
+  temp___1978, temp___1979, temp___1980, temp___1981), 1,
+  2)) = temp___1977)) and
+  ((to_rep(get(main_test__mat_map2__aggregate_def(temp___1976, temp___1977,
+  temp___1978, temp___1979, temp___1980, temp___1981), 2,
+  1)) = temp___1978) and
+  (to_rep(get(main_test__mat_map2__aggregate_def(temp___1976, temp___1977,
+  temp___1978, temp___1979, temp___1980, temp___1981), 2,
+  2)) = temp___1979))) and
+  ((to_rep(get(main_test__mat_map2__aggregate_def(temp___1976, temp___1977,
+  temp___1978, temp___1979, temp___1980, temp___1981), 3,
+  1)) = temp___1980) and
+  (to_rep(get(main_test__mat_map2__aggregate_def(temp___1976, temp___1977,
+  temp___1978, temp___1979, temp___1980, temp___1981), 3,
+  2)) = temp___1981)))))
+
+axiom def_axiom5 :
+  (forall temp___1985:t. (tqtisFinite(temp___1985) ->
+  (forall temp___1986:int. forall temp___1987:int.
+  (to_rep(get(main_test__mat_out2__aggregate_def(temp___1985), temp___1986,
+  temp___1987)) = temp___1985))))
 
 axiom def_axiom6 :
-  (forall temp___1811:t. forall temp___1812:t. forall temp___1813:t.
-  forall temp___1814:t. (((get(temp___1809(temp___1811, temp___1812,
-  temp___1813, temp___1814), (- 2147483648),
-  (- 2147483648)) = of_rep(temp___1811)) and (get(temp___1809(temp___1811,
-  temp___1812, temp___1813, temp___1814), (- 2147483648),
-  (- 2147483647)) = of_rep(temp___1812))) and ((get(temp___1809(temp___1811,
-  temp___1812, temp___1813, temp___1814), (- 2147483647),
-  (- 2147483648)) = of_rep(temp___1813)) and (get(temp___1809(temp___1811,
-  temp___1812, temp___1813, temp___1814), (- 2147483647),
-  (- 2147483647)) = of_rep(temp___1814)))))
-
-logic temp___1819 : t, t, t, t -> map
+  (forall temp___1990:t. forall temp___1991:t. forall temp___1992:t.
+  forall temp___1993:t. ((((tqtisFinite(temp___1990) and
+  tqtisFinite(temp___1991)) and tqtisFinite(temp___1992)) and
+  tqtisFinite(temp___1993)) -> (((to_rep(get(temp___1988(temp___1990,
+  temp___1991, temp___1992, temp___1993), (- 2147483648),
+  (- 2147483648))) = temp___1990) and (to_rep(get(temp___1988(temp___1990,
+  temp___1991, temp___1992, temp___1993), (- 2147483648),
+  (- 2147483647))) = temp___1991)) and ((to_rep(get(temp___1988(temp___1990,
+  temp___1991, temp___1992, temp___1993), (- 2147483647),
+  (- 2147483648))) = temp___1992) and (to_rep(get(temp___1988(temp___1990,
+  temp___1991, temp___1992, temp___1993), (- 2147483647),
+  (- 2147483647))) = temp___1993)))))
 
 axiom def_axiom7 :
-  (forall temp___1821:t. forall temp___1822:t. forall temp___1823:t.
-  forall temp___1824:t. (((get(temp___1819(temp___1821, temp___1822,
-  temp___1823, temp___1824), (- 2147483648),
-  (- 2147483648)) = of_rep(temp___1821)) and (get(temp___1819(temp___1821,
-  temp___1822, temp___1823, temp___1824), (- 2147483648),
-  (- 2147483647)) = of_rep(temp___1822))) and ((get(temp___1819(temp___1821,
-  temp___1822, temp___1823, temp___1824), (- 2147483647),
-  (- 2147483648)) = of_rep(temp___1823)) and (get(temp___1819(temp___1821,
-  temp___1822, temp___1823, temp___1824), (- 2147483647),
-  (- 2147483647)) = of_rep(temp___1824)))))
+  (forall temp___2000:t. forall temp___2001:t. forall temp___2002:t.
+  forall temp___2003:t. ((((tqtisFinite(temp___2000) and
+  tqtisFinite(temp___2001)) and tqtisFinite(temp___2002)) and
+  tqtisFinite(temp___2003)) -> (((to_rep(get(temp___1998(temp___2000,
+  temp___2001, temp___2002, temp___2003), (- 2147483648),
+  (- 2147483648))) = temp___2000) and (to_rep(get(temp___1998(temp___2000,
+  temp___2001, temp___2002, temp___2003), (- 2147483648),
+  (- 2147483647))) = temp___2001)) and ((to_rep(get(temp___1998(temp___2000,
+  temp___2001, temp___2002, temp___2003), (- 2147483647),
+  (- 2147483648))) = temp___2002) and (to_rep(get(temp___1998(temp___2000,
+  temp___2001, temp___2002, temp___2003), (- 2147483647),
+  (- 2147483647))) = temp___2003)))))
 
 axiom transpose__post_axiom :
   (forall x:map. forall x1:t1. forall x2:t2 [transpose({ elts = x; rt = x1;
@@ -1884,65 +1904,10 @@ axiom omultiply__4__post_axiom :
   })).rt_2)), to_rep1(last1((omultiply__4({ elts = left; rt = left1; rt_2 =
   left2 }, { elts = right; rt = right1; rt_2 = right2 })).rt_2))))
 
-logic mat_in : map
-
-logic mat_map : map
-
-logic mat_out : map
-
-logic mat_in2 : map
-
-logic mat_map2 : map
-
-logic mat_out2 : map
-
-logic o : map
-
-logic o1 : map
-
-logic result : map
-
-logic mat_in1 : map
-
-logic result1 : map
-
-logic mat_map1 : map
-
-logic result2 : map
-
-logic mat_out1 : map
-
-logic result3 : map
-
-logic mat_in21 : map
-
-logic result4 : map
-
-logic mat_map21 : map
-
-logic result5 : map
-
-logic mat_out21 : map
-
-logic result6 : map
-
-logic mat_out3 : map
-
-logic result7 : map
-
-logic mat_out22 : map
-
-axiom H : (result = mat_in)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
-
-axiom H1 : (mat_in1 = main_test__mat_in__aggregate_def(fliteral, fliteral1,
-  fliteral1, fliteral1, fliteral, fliteral1, fliteral1, fliteral1, fliteral))
-
-axiom H2 : (result1 = mat_map)
 
 logic fliteral2 : t
 
@@ -1954,43 +1919,6 @@ logic fliteral3 : t
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 3.0))
 
-axiom H3 : (mat_map1 = main_test__mat_map__aggregate_def(fliteral2,
-  fliteral1, fliteral1, fliteral1, fliteral1, fliteral3))
-
-axiom H4 : (result2 = mat_out)
-
-axiom H5 : (mat_out1 = main_test__mat_out__aggregate_def(fliteral1))
-
-axiom H6 : (result3 = mat_in2)
-
-axiom H7 : (mat_in21 = main_test__mat_in2__aggregate_def(fliteral, fliteral1,
-  fliteral1, fliteral1, fliteral, fliteral1, fliteral1, fliteral1, fliteral))
-
-axiom H8 : (result4 = mat_map2)
-
-axiom H9 : (mat_map21 = main_test__mat_map2__aggregate_def(fliteral2,
-  fliteral1, fliteral1, fliteral1, fliteral1, fliteral3))
-
-axiom H10 : (result5 = mat_out2)
-
-axiom H11 : (mat_out21 = main_test__mat_out2__aggregate_def(fliteral1))
-
-axiom H12 : ((o = manipulate1(mat_in1, mat_map1)) and
-  (o = slide((omultiply__4(omultiply__4(transpose({ elts = mat_map1; rt =
-  mk(1, 3); rt_2 = mk1(1, 2) }), { elts = mat_in1; rt = mk(1, 3); rt_2 =
-  mk1(1, 3) }), { elts = mat_map1; rt = mk(1, 3); rt_2 = mk1(1, 2) })).elts,
-  to_rep1(first1((omultiply__4(omultiply__4(transpose({ elts = mat_map1; rt =
-  mk(1, 3); rt_2 = mk1(1, 2) }), { elts = mat_in1; rt = mk(1, 3); rt_2 =
-  mk1(1, 3) }), { elts = mat_map1; rt = mk(1, 3); rt_2 = mk1(1, 2)
-  })).rt_2)), 1, to_rep1(first1((omultiply__4(omultiply__4(transpose({ elts =
-  mat_map1; rt = mk(1, 3); rt_2 = mk1(1, 2) }), { elts = mat_in1; rt = mk(1,
-  3); rt_2 = mk1(1, 3) }), { elts = mat_map1; rt = mk(1, 3); rt_2 = mk1(1, 2)
-  })).rt_2)), 1)))
-
-axiom H13 : (result6 = mat_out1)
-
-axiom H14 : (mat_out3 = o)
-
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
@@ -2001,7 +1929,39 @@ logic fliteral5 : t
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 9.0))
 
- (* File "generic_matrix_thing.adb", line 13, characters 0-0 *)
-goal WP_parameter_def : (bool_eq2(mat_out3, 1, 2, 1, 2,
-  temp___1809(fliteral4, fliteral1, fliteral1, fliteral5), (- 2147483648),
-  (- 2147483647), (- 2147483648), (- 2147483647)) = true)
+ (* File "main_test.adb", line 43, characters 0-0 *)
+goal WP_parameter_def :
+  (forall mat_in:map. forall mat_map:map. forall mat_out:map.
+  forall mat_in2:map. forall mat_map2:map. forall mat_out2:map. forall o:map.
+  forall result:map. forall mat_in1:map. forall result1:map.
+  forall mat_map1:map. forall result2:map. forall mat_out1:map.
+  forall result3:map. forall mat_in21:map. forall result4:map.
+  forall mat_map21:map. forall result5:map. forall mat_out21:map.
+  forall result6:map. forall mat_out3:map. (((result = mat_in) and
+  (mat_in1 = main_test__mat_in__aggregate_def(fliteral, fliteral1, fliteral1,
+  fliteral1, fliteral, fliteral1, fliteral1, fliteral1, fliteral))) ->
+  (((result1 = mat_map) and
+  (mat_map1 = main_test__mat_map__aggregate_def(fliteral2, fliteral1,
+  fliteral1, fliteral1, fliteral1, fliteral3))) -> (((result2 = mat_out) and
+  (mat_out1 = main_test__mat_out__aggregate_def(fliteral1))) ->
+  (((result3 = mat_in2) and
+  (mat_in21 = main_test__mat_in2__aggregate_def(fliteral, fliteral1,
+  fliteral1, fliteral1, fliteral, fliteral1, fliteral1, fliteral1,
+  fliteral))) -> (((result4 = mat_map2) and
+  (mat_map21 = main_test__mat_map2__aggregate_def(fliteral2, fliteral1,
+  fliteral1, fliteral1, fliteral1, fliteral3))) -> (((result5 = mat_out2) and
+  (mat_out21 = main_test__mat_out2__aggregate_def(fliteral1))) ->
+  ((((o = manipulate1(mat_in1, mat_map1)) and
+  (o = slide((omultiply__4(omultiply__4(transpose({ elts = mat_map1; rt =
+  mk(1, 3); rt_2 = mk1(1, 2) }), { elts = mat_in1; rt = mk(1, 3); rt_2 =
+  mk1(1, 3) }), { elts = mat_map1; rt = mk(1, 3); rt_2 = mk1(1, 2) })).elts,
+  to_rep1(first((omultiply__4(omultiply__4(transpose({ elts = mat_map1; rt =
+  mk(1, 3); rt_2 = mk1(1, 2) }), { elts = mat_in1; rt = mk(1, 3); rt_2 =
+  mk1(1, 3) }), { elts = mat_map1; rt = mk(1, 3); rt_2 = mk1(1, 2) })).rt)),
+  1, to_rep1(first1((omultiply__4(omultiply__4(transpose({ elts = mat_map1;
+  rt = mk(1, 3); rt_2 = mk1(1, 2) }), { elts = mat_in1; rt = mk(1, 3); rt_2 =
+  mk1(1, 3) }), { elts = mat_map1; rt = mk(1, 3); rt_2 = mk1(1, 2)
+  })).rt_2)), 1))) and ((result6 = mat_out1) and (mat_out3 = o))) ->
+  (bool_eq2(mat_out3, 1, 2, 1, 2, temp___1988(fliteral4, fliteral1,
+  fliteral1, fliteral5), (- 2147483648), (- 2147483647), (- 2147483648),
+  (- 2147483647)) = true)))))))))

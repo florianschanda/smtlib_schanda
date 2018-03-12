@@ -29,7 +29,7 @@
 (declare-const dummy unsigned_byte)
 (declare-datatypes () ((unsigned_byte__ref (mk_unsigned_byte__ref (unsigned_byte__content unsigned_byte)))))
 (define-fun unsigned_byte__ref___projection ((a unsigned_byte__ref)) unsigned_byte (unsigned_byte__content a))
-(define-fun dynamic_invariant ((temp___expr_135 Int) (temp___is_init_132 Bool) (temp___skip_constant_133 Bool) (temp___do_toplevel_134 Bool)) Bool (=> (or (= temp___is_init_132 true) (<= 0 255)) (in_range temp___expr_135)))
+(define-fun dynamic_invariant ((temp___expr_158 Int) (temp___is_init_154 Bool) (temp___skip_constant_155 Bool) (temp___do_toplevel_156 Bool) (temp___do_typ_inv_157 Bool)) Bool (=> (or (= temp___is_init_154 true) (<= 0 255)) (in_range temp___expr_158)))
 (declare-const a Int)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const b Int)

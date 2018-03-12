@@ -2128,12 +2128,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int5 : bool -> int
 
 axiom to_int_def4 :
@@ -2145,6 +2139,12 @@ logic of_int5 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int5(i)]. (((i = 0) -> (of_int5(i) = false)) and
   ((not (i = 0)) -> (of_int5(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -2422,50 +2422,15 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic value : t
-
-logic x : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic result : t
-
-logic x1 : t
-
-logic result1 : t
-
-logic x2 : t
-
-logic result2 : t
-
-logic x3 : t
-
-axiom H : true
-
-axiom H1 : in_range2(scale)
-
-axiom H2 : (le(neg(fliteral2), fliteral2) -> in_range3(value))
-
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 340282346638528859811704183484516925440.0))
 
-axiom H3 : (le(neg(fliteral3), fliteral3) -> tqtisFinite(x))
-
-axiom H4 : (result = x)
-
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 3276.800048828125))
-
-axiom H5 : (x1 = div(NearestTiesToEven, of_ubv16(NearestTiesToEven, raw_in),
-  fliteral4))
 
 logic fliteral5 : t
 
@@ -2477,16 +2442,15 @@ logic fliteral6 : t
 axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
   (tqtreal(fliteral6) = 20.0))
 
-axiom H6 : (le(fliteral5, x1) -> ((o = sub(NearestTiesToEven, x1,
-  fliteral6)) and tqtisFinite(sub(NearestTiesToEven, x1, fliteral6))))
-
-axiom H7 : (le(fliteral5, x1) -> (result1 = x1))
-
-axiom H8 : (le(fliteral5, x1) -> (x2 = o))
-
-axiom H9 : ((not le(fliteral5, x1)) -> (x2 = x1))
-
-axiom H10 : (le(neg(fliteral6), x2) and le(x2, fliteral6))
-
  (* File "q.ads", line 11, characters 0-0 *)
-goal WP_parameter_def : (not is_zero(scale))
+goal WP_parameter_def :
+  (forall value:t. forall x:t. forall o:t. forall result:t. forall x1:t.
+  forall result1:t. forall x2:t. (in_range2(scale) -> ((le(neg(fliteral2),
+  fliteral2) -> in_range3(value)) -> ((le(neg(fliteral3), fliteral3) ->
+  tqtisFinite(x)) -> (((result = x) and (x1 = div(NearestTiesToEven,
+  of_ubv16(NearestTiesToEven, raw_in), fliteral4))) -> (((le(fliteral5,
+  x1) and (((o = sub(NearestTiesToEven, x1, fliteral6)) and
+  tqtisFinite(sub(NearestTiesToEven, x1, fliteral6))) and ((result1 = x1) and
+  (x2 = o)))) or ((not le(fliteral5, x1)) and (x2 = x1))) ->
+  ((le(neg(fliteral6), x2) and le(x2, fliteral6)) ->
+  (not is_zero(scale)))))))))

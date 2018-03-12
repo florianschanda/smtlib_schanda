@@ -111,82 +111,25 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic res : int
-
-logic casing__f__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic res1 : int
-
-logic result1 : int
-
-logic res2 : int
-
-logic result2 : int
-
-logic res3 : int
-
-logic result3 : int
-
-logic casing__f__result1 : int
-
-logic casing__f__result2 : int
-
-logic casing__f__result3 : int
-
-logic res4 : int
-
-logic casing__f__result4 : int
-
-logic res5 : int
-
-logic casing__f__result5 : int
-
-axiom H : in_range(x)
-
-axiom H1 : (x <  2147483647)
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range(res))
-
-axiom H3 : ((x = 0) -> (result = res))
-
-axiom H4 : ((x = 0) -> (res1 = 1))
-
-axiom H5 : ((not (x = 0)) -> ((x = 1) -> (result1 = res)))
-
-axiom H6 : ((not (x = 0)) -> ((x = 1) -> (res2 = 2)))
-
-axiom H7 : ((not (x = 0)) -> ((not (x = 1)) -> ((o = (x + 1)) and
-  in_range((x + 1)))))
-
-axiom H8 : ((not (x = 0)) -> ((not (x = 1)) -> (result2 = res)))
-
-axiom H9 : ((not (x = 0)) -> ((not (x = 1)) -> (res3 = o)))
-
-axiom H10 : ((not (x = 0)) -> ((not (x = 1)) -> (res2 = res3)))
-
-axiom H11 : ((not (x = 0)) -> (res1 = res2))
-
-axiom H12 : (casing__f__result1 = casing__f__result2)
-
-axiom H13 : (casing__f__result3 = casing__f__result1)
-
-axiom H14 : (result3 = casing__f__result)
-
-axiom H15 : (casing__f__result1 = res1)
-
-axiom H16 : (casing__f__result4 = casing__f__result2)
-
-axiom H17 : (res1 = res4)
-
-axiom H18 : (casing__f__result5 = casing__f__result3)
-
-axiom H19 : (res5 = res1)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((x + 1))
+goal WP_parameter_def :
+  (forall res:int. forall casing__f__result:int. forall o:int.
+  forall result:int. forall res1:int. forall result1:int. forall res2:int.
+  forall result2:int. forall res3:int. forall result3:int.
+  forall casing__f__result1:int. forall casing__f__result2:int.
+  forall casing__f__result3:int. forall res4:int.
+  forall casing__f__result4:int. forall res5:int.
+  forall casing__f__result5:int. (in_range(x) -> ((x <  2147483647) ->
+  ((((((- 2147483648) <= 2147483647) -> in_range(res)) and ((((x = 0) and (({
+  int__content = result } = { int__content = res }) and (res1 = 1))) or
+  ((not (x = 0)) and ((((x = 1) and (({ int__content = result1 } = {
+  int__content = res }) and (res2 = 2))) or ((not (x = 1)) and
+  ((((o = (x + 1)) and in_range((x + 1))) and (({ int__content = result2
+  } = { int__content = res }) and (res3 = o))) and (res2 = res3)))) and
+  (res1 = res2)))) and (((casing__f__result1 = casing__f__result2) and
+  (casing__f__result3 = casing__f__result1)) and (({ int__content = result3
+  } = { int__content = casing__f__result }) and
+  (casing__f__result1 = res1))))) and ((({ int__content = casing__f__result4
+  } = { int__content = casing__f__result2 }) and (res1 = res4)) and
+  ((casing__f__result5 = casing__f__result3) and (res5 = res1)))) ->
+  in_range((x + 1))))))

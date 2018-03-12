@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -199,250 +199,81 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
-logic result__ : int
-
-logic i : int
-
-logic j : int
-
-logic totalsum : int
-
-logic innersum : int
-
-logic temp___514 : int
-
-logic temp___513 : int
-
-logic temp___512 : int
-
-logic temp___511 : int
-
-logic temp___510 : int
-
-logic temp___509 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic result : int
-
-logic i1 : int
-
-logic result1 : int
-
-logic j1 : int
-
-logic result2 : int
-
-logic totalsum1 : int
-
-logic result3 : int
-
-logic innersum1 : int
-
-logic i2 : int
-
-logic j2 : int
-
-logic totalsum2 : int
-
-logic innersum2 : int
-
-logic result4 : int
-
-logic innersum3 : int
-
-logic result5 : int
-
-logic j3 : int
-
-logic j4 : int
-
-logic innersum4 : int
-
-logic result6 : int
-
-logic innersum5 : int
-
-logic result7 : int
-
-logic j5 : int
-
-logic j6 : int
-
-logic innersum6 : int
-
-logic j7 : int
-
-logic innersum7 : int
-
-logic j8 : int
-
-logic innersum8 : int
-
-logic j9 : int
-
-logic innersum9 : int
-
-logic j10 : int
-
-logic innersum10 : int
-
-logic j11 : int
-
-logic innersum11 : int
-
-logic result8 : int
-
-logic totalsum3 : int
-
-logic result9 : int
-
-logic i3 : int
-
-logic i4 : int
-
-logic j12 : int
-
-logic totalsum4 : int
-
-logic innersum12 : int
-
-logic i5 : int
-
-logic j13 : int
-
-logic totalsum5 : int
-
-logic innersum13 : int
-
-logic i6 : int
-
-logic j14 : int
-
-logic totalsum6 : int
-
-logic innersum14 : int
-
-logic i7 : int
-
-logic j15 : int
-
-logic totalsum7 : int
-
-logic innersum15 : int
-
-logic i8 : int
-
-logic j16 : int
-
-logic totalsum8 : int
-
-logic innersum16 : int
-
-logic i9 : int
-
-logic j17 : int
-
-logic totalsum9 : int
-
-logic innersum17 : int
-
-logic i10 : int
-
-logic j18 : int
-
-logic totalsum10 : int
-
-logic innersum18 : int
-
-logic i11 : int
-
-logic j19 : int
-
-logic totalsum11 : int
-
-logic innersum19 : int
-
-logic result10 : int
-
-logic result__1 : int
-
-logic result__2 : int
-
-logic i12 : int
-
-logic j20 : int
-
-logic totalsum12 : int
-
-logic innersum20 : int
-
-logic result__3 : int
-
-logic i13 : int
-
-logic j21 : int
-
-logic totalsum13 : int
-
-logic innersum21 : int
-
-axiom H : in_range3(n)
-
-axiom H1 : ((1 <= 2147483647) -> in_range3(result__))
-
-axiom H2 : ((((result = i) and (i1 = 1)) and (in_range3(i1) and
-  (((result1 = j) and (j1 = 1)) and (in_range3(j1) and
-  (((result2 = totalsum) and (totalsum1 = 0)) and (in_range2(totalsum1) and
-  (((result3 = innersum) and (innersum1 = 0)) and (in_range2(innersum1) and
-  ((((i1 <= n) -> ((((temp___514 = totalsum1) and ((temp___513 = j1) and
-  ((temp___512 = i1) and ((temp___511 = innersum1) and
+ (* File "power_and_sum.ads", line 5, characters 0-0 *)
+goal WP_parameter_def :
+  (forall result__:int. forall i:int. forall j:int. forall totalsum:int.
+  forall innersum:int. forall temp___584:int. forall temp___583:int.
+  forall temp___582:int. forall temp___581:int. forall temp___580:int.
+  forall temp___579:int. forall o:int. forall o1:int. forall o2:int.
+  forall o3:int. forall o4:int. forall result:int. forall i1:int.
+  forall result1:int. forall j1:int. forall result2:int.
+  forall totalsum1:int. forall result3:int. forall innersum1:int.
+  forall i2:int. forall j2:int. forall totalsum2:int. forall innersum2:int.
+  forall result4:int. forall innersum3:int. forall result5:int.
+  forall j3:int. forall j4:int. forall innersum4:int. forall result6:int.
+  forall innersum5:int. forall result7:int. forall j5:int. forall j6:int.
+  forall innersum6:int. forall j7:int. forall innersum7:int. forall j8:int.
+  forall innersum8:int. forall j9:int. forall innersum9:int.
+  forall result8:int. forall totalsum3:int. forall result9:int.
+  forall i3:int. forall i4:int. forall j10:int. forall totalsum4:int.
+  forall innersum10:int. forall i5:int. forall j11:int. forall totalsum5:int.
+  forall innersum11:int. forall i6:int. forall j12:int. forall totalsum6:int.
+  forall innersum12:int. forall i7:int. forall j13:int. forall totalsum7:int.
+  forall innersum13:int. forall result10:int. forall result__1:int.
+  forall result__2:int. forall i8:int. forall j14:int. forall totalsum8:int.
+  forall innersum14:int__ref. forall result__3:int. forall i9:int.
+  forall j15:int. forall totalsum9:int. forall innersum15:int.
+  ((in_range3(n) and (((1 <= 2147483647) -> in_range3(result__)) and (((({
+  int__content = result } = { int__content = i }) and (i1 = 1)) and
+  (in_range3(i1) and ((({ int__content = result1 } = { int__content = j
+  }) and (j1 = 1)) and (in_range3(j1) and ((({ int__content = result2 } = {
+  int__content = totalsum }) and (totalsum1 = 0)) and
+  (in_range2(totalsum1) and ((({ int__content = result3 } = { int__content =
+  innersum }) and (innersum1 = 0)) and (in_range2(innersum1) and
+  ((((i1 <= n) and ((((temp___584 = totalsum1) and ((temp___583 = j1) and
+  ((temp___582 = i1) and ((temp___581 = innersum1) and
   (((6 * totalsum2) = (((i2 - 1) * i2) * (i2 + 1))) and
   (((((((0 <= 2147483647) -> in_range2(innersum2)) and ((1 <= 2147483647) ->
   in_range3(i2))) and ((1 <= 2147483647) -> in_range3(j2))) and
   ((0 <= 2147483647) -> in_range2(totalsum2))) and (i2 <= n)) and
   (((innersum2 = result4) and (innersum3 = 0)) and (((j2 = result5) and
-  (j3 = 1)) and ((((j3 <= i2) -> ((((temp___510 = j3) and
-  ((temp___509 = innersum3) and (((2 * innersum4) = (j4 * (j4 - 1))) and
+  (j3 = 1)) and ((((j3 <= i2) and ((((temp___580 = j3) and
+  ((temp___579 = innersum3) and (((2 * innersum4) = (j4 * (j4 - 1))) and
   (((((0 <= 2147483647) -> in_range2(innersum4)) and ((1 <= 2147483647) ->
   in_range3(j4))) and (j4 <= i2)) and ((((o = (innersum4 + j4)) and
   in_range1((innersum4 + j4))) and ((innersum4 = result6) and
   (innersum5 = o))) and ((((o1 = (j4 + 1)) and in_range1((j4 + 1))) and
   ((j4 = result7) and (j5 = o1))) and (not (j5 <= i2)))))))) and
-  (((innersum5 = innersum8) and (j5 = j8)) and ((innersum9 = innersum5) and
-  (j9 = j5)))) and (((innersum10 = innersum8) and (j10 = j8)) and
-  ((innersum11 = innersum9) and (j11 = j9))))) and ((not (j3 <= i2)) ->
-  (((innersum3 = innersum10) and (j3 = j10)) and
-  ((innersum11 = innersum3) and (j11 = j3))))) and ((j10 = (i2 + 1)) and
-  (((2 * innersum10) = (i2 * (i2 + 1))) and
-  ((((o2 = (totalsum2 + innersum10)) and
-  in_range1((totalsum2 + innersum10))) and ((totalsum2 = result8) and
+  (((innersum5 = innersum6) and (j5 = j6)) and ((innersum7 = innersum5) and
+  (j7 = j5)))) and ((({ int__content = innersum8 } = { int__content =
+  innersum6 }) and ({ int__content = j8 } = { int__content = j6 })) and
+  ((innersum9 = innersum7) and (j9 = j7))))) or ((not (j3 <= i2)) and
+  (((innersum3 = innersum8) and (j3 = j8)) and ((innersum9 = innersum3) and
+  (j9 = j3))))) and ((j8 = (i2 + 1)) and
+  (((2 * innersum8) = (i2 * (i2 + 1))) and
+  ((((o2 = (totalsum2 + innersum8)) and
+  in_range1((totalsum2 + innersum8))) and ((totalsum2 = result8) and
   (totalsum3 = o2))) and ((((o3 = (i2 + 1)) and in_range1((i2 + 1))) and
-  ((i2 = result9) and (i3 = o3))) and (not (i3 <= n))))))))))))))) and
-  (((innersum16 = innersum10) and ((totalsum8 = totalsum3) and
-  ((j16 = j10) and (i8 = i3)))) and ((innersum17 = innersum11) and
-  ((totalsum9 = totalsum3) and ((j17 = j11) and (i9 = i3)))))) and
-  (((innersum18 = innersum16) and ((totalsum10 = totalsum8) and
-  ((j18 = j16) and (i10 = i8)))) and ((innersum19 = innersum17) and
-  ((totalsum11 = totalsum9) and ((j19 = j17) and (i11 = i9))))))) and
-  ((not (i1 <= n)) -> (((innersum18 = innersum1) and
-  ((totalsum10 = totalsum1) and ((j18 = j1) and (i10 = i1)))) and
-  ((innersum19 = innersum1) and ((totalsum11 = totalsum1) and ((j19 = j1) and
-  (i11 = i1))))))) and (((6 * totalsum10) = ((n * (n + 1)) * (n + 2))) and
-  (((o4 = totalsum10) and in_range3(totalsum10)) and
-  ((result10 = result__) and (result__1 = o4))))))))))))) and
-  (((innersum20 = innersum18) and ((totalsum12 = totalsum10) and
-  ((j20 = j18) and ((i12 = i10) and (result__2 = result__1))))) and
-  ((innersum21 = innersum19) and ((totalsum13 = totalsum11) and
-  ((j21 = j19) and ((i13 = i11) and (result__3 = result__1)))))))
-
- (* File "power_and_sum.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : ((6 * result__2) = ((n * (n + 1)) * (n + 2)))
+  ((i2 = result9) and (i3 = o3))) and (not (i3 <= n))))))))))))))) and ((({
+  int__content = innersum10 } = { int__content = innersum8 }) and
+  ((totalsum3 = totalsum4) and (({ int__content = j10 } = { int__content = j8
+  }) and (i3 = i4)))) and ((innersum11 = innersum9) and
+  ((totalsum5 = totalsum3) and ((j11 = j9) and (i5 = i3)))))) and ((({
+  int__content = innersum12 } = { int__content = innersum10 }) and (({
+  int__content = totalsum6 } = { int__content = totalsum4 }) and (({
+  int__content = j12 } = { int__content = j10 }) and ({ int__content = i6
+  } = { int__content = i4 })))) and ((innersum13 = innersum11) and
+  ((totalsum7 = totalsum5) and ((j13 = j11) and (i7 = i5))))))) or
+  ((not (i1 <= n)) and (((innersum1 = innersum12) and
+  ((totalsum1 = totalsum6) and ((j1 = j12) and (i1 = i6)))) and
+  ((innersum13 = innersum1) and ((totalsum7 = totalsum1) and ((j13 = j1) and
+  (i7 = i1))))))) and (((6 * totalsum6) = ((n * (n + 1)) * (n + 2))) and
+  (((o4 = totalsum6) and in_range3(totalsum6)) and ((result10 = result__) and
+  (result__1 = o4))))))))))))) and (((innersum14 = { int__content =
+  innersum12 }) and (({ int__content = totalsum8 } = { int__content =
+  totalsum6 }) and (({ int__content = j14 } = { int__content = j12 }) and (({
+  int__content = i8 } = { int__content = i6 }) and
+  (result__1 = result__2))))) and ((innersum15 = innersum13) and
+  ((totalsum9 = totalsum7) and ((j15 = j13) and ((i9 = i7) and
+  (result__3 = result__1))))))))) ->
+  ((6 * result__2) = ((n * (n + 1)) * (n + 2)))))

@@ -109,23 +109,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic hidden : int
-
-logic hidden2 : int
-
-logic o : int
-
-logic hidden1 : int
-
-logic result : int
-
-logic hidden3 : int
-
-axiom H : in_range(hidden)
-
-axiom H1 : in_range(hidden2)
-
-axiom H2 : (hidden2 <= 0)
-
  (* File "prot.adb", line 24, characters 0-0 *)
-goal WP_parameter_def : in_range((hidden + 1))
+goal WP_parameter_def :
+  (forall hidden:int. forall hidden2:int. (in_range(hidden) ->
+  (in_range(hidden2) -> ((hidden2 <= 0) -> in_range((hidden + 1))))))

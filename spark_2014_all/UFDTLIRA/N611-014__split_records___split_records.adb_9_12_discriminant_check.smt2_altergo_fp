@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -360,89 +360,13 @@ type t3b__ref = { t3b__content : us_rep
 
 function t3b__ref___projection(a: t3b__ref) : us_rep = (a).t3b__content
 
-logic r__split_fields : natural
-
-logic r__split_discrs : bool
-
-logic o : natural
-
-logic o1 : natural
-
-logic temp___241 : bool
-
-logic temp___2411 : natural
-
-logic temp___2412 : bool
-
-logic o2 : natural
-
-logic o3 : natural
-
-logic temp___237 : bool
-
-logic temp___2371 : natural
-
-logic temp___2372 : bool
-
-logic usq_ : bool
-
-logic usq_1 : natural
-
-logic usq_2 : bool
-
-logic temp___239 : bool
-
-logic temp___2391 : natural
-
-logic temp___2392 : bool
-
-logic r__split_fields1 : natural
-
-logic r__split_discrs1 : bool
-
-logic result : natural
-
-logic r__split_fields2 : natural
-
-logic result1 : bool
-
-logic r__split_discrs2 : bool
-
-logic result2 : natural
-
-logic r__split_fields3 : natural
-
-logic result3 : bool
-
-logic r__split_discrs3 : bool
-
-logic r__split_fields4 : natural
-
-logic r__split_discrs4 : bool
-
-logic r__split_fields5 : natural
-
-logic r__split_discrs5 : bool
-
-axiom H : in_range1(new_field)
-
-axiom H1 : (not (r__split_discrs = true))
-
-axiom H2 : (not (r__attr__constrained = true))
-
-axiom H3 : (r__split_discrs = r2b)
-
-axiom H4 : (to_rep(o2) = new_field)
-
-axiom H5 : (o2 = o3)
-
-axiom H6 : (of_int(1) = temp___237)
-
-axiom H7 : (temp___2371 = o3)
-
-axiom H8 : (true = temp___2372)
-
-axiom H9 : (r__attr__constrained = true)
-
  (* File "split_records.ads", line 16, characters 0-0 *)
-goal WP_parameter_def : (temp___237 = r__split_discrs)
+goal WP_parameter_def :
+  (forall r__split_discrs:bool. forall o:natural. forall o1:natural.
+  forall temp___269:bool. forall temp___2691:natural.
+  forall temp___2692:bool. (in_range1(new_field) ->
+  ((not (r__split_discrs = true)) -> ((not (r__attr__constrained = true)) ->
+  ((r__split_discrs = r2b) -> ((((to_rep(o) = new_field) and (o = o1)) and
+  ((of_int(1) = temp___269) and ((temp___2691 = o1) and
+  (true = temp___2692)))) -> ((r__attr__constrained = true) ->
+  (temp___269 = r__split_discrs))))))))

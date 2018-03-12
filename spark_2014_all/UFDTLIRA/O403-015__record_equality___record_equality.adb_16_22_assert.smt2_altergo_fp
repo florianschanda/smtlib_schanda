@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1357,240 +1357,94 @@ logic c_gp24 : int
 
 logic attr__ATTRIBUTE_ADDRESS9 : int
 
-logic r_pu1__split_fields : natural
-
-logic r_pu1__split_fields1 : us_private
-
-logic r_pu2__split_fields : natural
-
-logic r_pu2__split_fields1 : us_private
-
-logic c_pu1__split_fields : natural
-
-logic c_pu1__split_fields1 : natural
-
-logic c_pu1__split_fields2 : us_private
-
-logic c_pu2__split_fields : natural
-
-logic c_pu2__split_fields1 : natural
-
-logic c_pu2__split_fields2 : us_private
-
-logic g_pu1__split_fields : natural
-
-logic g_pu1__split_fields1 : natural
-
-logic g_pu1__split_fields2 : natural
-
-logic g_pu1__split_fields3 : us_private
-
-logic g_pu2__split_fields : natural
-
-logic g_pu2__split_fields1 : natural
-
-logic g_pu2__split_fields2 : natural
-
-logic g_pu2__split_fields3 : us_private
-
-logic us : int
-
-logic us1 : int
-
-logic o : natural
-
-logic o1 : natural
-
-logic o2 : natural
-
-logic o3 : natural
-
-logic o4 : us_private
-
-logic record_equality__test_eq_ok__g_pu1__assume : natural
-
-logic record_equality__test_eq_ok__g_pu1__assume1 : natural
-
-logic record_equality__test_eq_ok__g_pu1__assume2 : natural
-
-logic record_equality__test_eq_ok__g_pu1__assume3 : natural
-
-logic record_equality__test_eq_ok__g_pu1__assume4 : us_private
-
-logic record_equality__test_eq_ok__g_pu1__assume5 : int
-
-logic o5 : natural
-
-logic o6 : natural
-
-logic o7 : natural
-
-logic o8 : natural
-
-logic o9 : us_private
-
-logic record_equality__test_eq_ok__g_pu2__assume : natural
-
-logic record_equality__test_eq_ok__g_pu2__assume1 : natural
-
-logic record_equality__test_eq_ok__g_pu2__assume2 : natural
-
-logic record_equality__test_eq_ok__g_pu2__assume3 : natural
-
-logic record_equality__test_eq_ok__g_pu2__assume4 : us_private
-
-logic record_equality__test_eq_ok__g_pu2__assume5 : int
-
-logic us2 : int
-
-logic result : natural
-
-logic result1 : natural
-
-logic result2 : natural
-
-logic result3 : us_private
-
-logic g_pu1__split_fields4 : natural
-
-logic g_pu1__split_fields5 : natural
-
-logic g_pu1__split_fields6 : natural
-
-logic g_pu1__split_fields7 : us_private
-
-logic result4 : natural
-
-logic result5 : natural
-
-logic result6 : natural
-
-logic result7 : us_private
-
-logic g_pu2__split_fields4 : natural
-
-logic g_pu2__split_fields5 : natural
-
-logic g_pu2__split_fields6 : natural
-
-logic g_pu2__split_fields7 : us_private
-
-axiom H : ((us = 0) and in_range1(0))
-
-axiom H1 : ((r_pu1__attr__tag = us_tag5) and
-  ((to_rep(r_pu1__split_discrs) = 0) and (to_rep(r_pu1__split_fields) = 0)))
-
-axiom H2 : (0 = to_rep(r_pu1__split_discrs))
-
-axiom H3 : ((r_pu2__attr__tag = us_tag3) and
-  ((to_rep(r_pu2__split_discrs) = 0) and (to_rep(r_pu2__split_fields) = 0)))
-
-axiom H4 : (0 = to_rep(r_pu2__split_discrs))
-
-axiom H5 : ((us1 = 0) and in_range1(0))
-
-axiom H6 : ((c_pu1__attr__tag = us_tag6) and
-  (((to_rep(c_pu1__split_discrs) = 0) and
-  (to_rep(c_pu1__split_fields1) = 0)) and (to_rep(c_pu1__split_fields) = 0)))
-
-axiom H7 : (0 = to_rep(c_pu1__split_discrs))
-
-axiom H8 : ((c_pu2__attr__tag = us_tag4) and
+ (* File "record_equality.ads", line 13, characters 0-0 *)
+goal WP_parameter_def :
+  (forall r_pu1__split_fields:natural.
+  forall r_pu1__split_fields1:us_private. forall r_pu2__split_fields:natural.
+  forall r_pu2__split_fields1:us_private. forall c_pu1__split_fields:natural.
+  forall c_pu1__split_fields1:natural.
+  forall c_pu1__split_fields2:us_private. forall c_pu2__split_fields:natural.
+  forall c_pu2__split_fields1:natural.
+  forall c_pu2__split_fields2:us_private. forall g_pu1__split_fields:natural.
+  forall g_pu1__split_fields1:natural. forall g_pu1__split_fields2:natural.
+  forall g_pu1__split_fields3:us_private. forall g_pu2__split_fields:natural.
+  forall g_pu2__split_fields1:natural. forall g_pu2__split_fields2:natural.
+  forall g_pu2__split_fields3:us_private. forall us:int. forall us1:int.
+  forall o:natural. forall o1:natural. forall o2:natural. forall o3:natural.
+  forall o4:us_private.
+  forall record_equality__test_eq_ok__g_pu1__assume:natural.
+  forall record_equality__test_eq_ok__g_pu1__assume1:natural.
+  forall record_equality__test_eq_ok__g_pu1__assume2:natural.
+  forall record_equality__test_eq_ok__g_pu1__assume3:natural.
+  forall record_equality__test_eq_ok__g_pu1__assume4:us_private.
+  forall record_equality__test_eq_ok__g_pu1__assume5:int. forall o5:natural.
+  forall o6:natural. forall o7:natural. forall o8:natural.
+  forall o9:us_private.
+  forall record_equality__test_eq_ok__g_pu2__assume:natural.
+  forall record_equality__test_eq_ok__g_pu2__assume1:natural.
+  forall record_equality__test_eq_ok__g_pu2__assume2:natural.
+  forall record_equality__test_eq_ok__g_pu2__assume3:natural.
+  forall record_equality__test_eq_ok__g_pu2__assume4:us_private.
+  forall record_equality__test_eq_ok__g_pu2__assume5:int. forall us2:int.
+  forall result:natural. forall result1:natural. forall result2:natural.
+  forall result3:us_private. forall g_pu1__split_fields4:natural.
+  forall g_pu1__split_fields5:natural. forall g_pu1__split_fields6:natural.
+  forall g_pu1__split_fields7:us_private. forall result4:natural.
+  forall result5:natural. forall result6:natural. forall result7:us_private.
+  forall g_pu2__split_fields4:natural. forall g_pu2__split_fields5:natural.
+  forall g_pu2__split_fields6:natural.
+  forall g_pu2__split_fields7:us_private. (((us = 0) and in_range1(0)) ->
+  (((r_pu1__attr__tag = us_tag5) and ((to_rep(r_pu1__split_discrs) = 0) and
+  (to_rep(r_pu1__split_fields) = 0))) ->
+  ((0 = to_rep(r_pu1__split_discrs)) -> (((r_pu2__attr__tag = us_tag3) and
+  ((to_rep(r_pu2__split_discrs) = 0) and
+  (to_rep(r_pu2__split_fields) = 0))) ->
+  ((0 = to_rep(r_pu2__split_discrs)) -> (((us1 = 0) and in_range1(0)) ->
+  (((c_pu1__attr__tag = us_tag6) and (((to_rep(c_pu1__split_discrs) = 0) and
+  (to_rep(c_pu1__split_fields1) = 0)) and
+  (to_rep(c_pu1__split_fields) = 0))) ->
+  ((0 = to_rep(c_pu1__split_discrs)) -> (((c_pu2__attr__tag = us_tag4) and
   (((to_rep(c_pu2__split_discrs) = 0) and
-  (to_rep(c_pu2__split_fields1) = 0)) and (to_rep(c_pu2__split_fields) = 0)))
-
-axiom H9 : (0 = to_rep(c_pu2__split_discrs))
-
-axiom H10 : (to_rep(c_pu1__split_discrs) = r2b)
-
-axiom H11 : in_range1(r2b)
-
-axiom H12 : (to_rep(o) = 0)
-
-axiom H13 : (o = o1)
-
-axiom H14 : (c_pu1__split_fields1 = o2)
-
-axiom H15 : (c_pu1__split_fields = o3)
-
-axiom H16 : (us_null_ext__ = o4)
-
-axiom H17 :
-  (c_pu1__split_discrs = record_equality__test_eq_ok__g_pu1__assume)
-
-axiom H18 : (record_equality__test_eq_ok__g_pu1__assume1 = o1)
-
-axiom H19 : (record_equality__test_eq_ok__g_pu1__assume2 = o2)
-
-axiom H20 : (record_equality__test_eq_ok__g_pu1__assume3 = o3)
-
-axiom H21 : (record_equality__test_eq_ok__g_pu1__assume4 = o4)
-
-axiom H22 : (us_tag7 = record_equality__test_eq_ok__g_pu1__assume5)
-
-axiom H23 : (result = g_pu1__split_fields)
-
-axiom H24 : (result1 = g_pu1__split_fields1)
-
-axiom H25 : (result2 = g_pu1__split_fields2)
-
-axiom H26 : (result3 = g_pu1__split_fields3)
-
-axiom H27 :
-  ((g_pu1__split_fields4 = record_equality__test_eq_ok__g_pu1__assume1) and
-  ((g_pu1__split_fields5 = record_equality__test_eq_ok__g_pu1__assume2) and
-  ((g_pu1__split_fields6 = record_equality__test_eq_ok__g_pu1__assume3) and
-  (g_pu1__split_fields7 = record_equality__test_eq_ok__g_pu1__assume4))))
-
-axiom H28 :
-  (g_pu1__split_discrs = record_equality__test_eq_ok__g_pu1__assume)
-
-axiom H29 : (g_pu1__attr__tag = us_tag2)
-
-axiom H30 : (to_rep(c_pu1__split_discrs) = r4b)
-
-axiom H31 : in_range1(r4b)
-
-axiom H32 : (to_rep(o5) = 1)
-
-axiom H33 : (o5 = o6)
-
-axiom H34 : (c_pu1__split_fields1 = o7)
-
-axiom H35 : (c_pu1__split_fields = o8)
-
-axiom H36 : (us_null_ext__ = o9)
-
-axiom H37 :
-  (c_pu1__split_discrs = record_equality__test_eq_ok__g_pu2__assume)
-
-axiom H38 : (record_equality__test_eq_ok__g_pu2__assume1 = o6)
-
-axiom H39 : (record_equality__test_eq_ok__g_pu2__assume2 = o7)
-
-axiom H40 : (record_equality__test_eq_ok__g_pu2__assume3 = o8)
-
-axiom H41 : (record_equality__test_eq_ok__g_pu2__assume4 = o9)
-
-axiom H42 : (us_tag8 = record_equality__test_eq_ok__g_pu2__assume5)
-
-axiom H43 : ((result4 = g_pu2__split_fields) and
+  (to_rep(c_pu2__split_fields1) = 0)) and
+  (to_rep(c_pu2__split_fields) = 0))) ->
+  ((0 = to_rep(c_pu2__split_discrs)) ->
+  ((to_rep(c_pu1__split_discrs) = r2b) -> (in_range1(r2b) ->
+  (((((to_rep(o) = 0) and ((o = o1) and ((c_pu1__split_fields1 = o2) and
+  ((c_pu1__split_fields = o3) and (us_null_ext__ = o4))))) and
+  ((c_pu1__split_discrs = record_equality__test_eq_ok__g_pu1__assume) and
+  (((record_equality__test_eq_ok__g_pu1__assume1 = o1) and
+  ((record_equality__test_eq_ok__g_pu1__assume2 = o2) and
+  ((record_equality__test_eq_ok__g_pu1__assume3 = o3) and
+  (record_equality__test_eq_ok__g_pu1__assume4 = o4)))) and
+  (us_tag7 = record_equality__test_eq_ok__g_pu1__assume5)))) and
+  ((((result = g_pu1__split_fields) and ((result1 = g_pu1__split_fields1) and
+  ((result2 = g_pu1__split_fields2) and
+  (result3 = g_pu1__split_fields3)))) and
+  ((record_equality__test_eq_ok__g_pu1__assume1 = g_pu1__split_fields4) and
+  ((record_equality__test_eq_ok__g_pu1__assume2 = g_pu1__split_fields5) and
+  ((record_equality__test_eq_ok__g_pu1__assume3 = g_pu1__split_fields6) and
+  (record_equality__test_eq_ok__g_pu1__assume4 = g_pu1__split_fields7))))) and
+  ((g_pu1__split_discrs = record_equality__test_eq_ok__g_pu1__assume) and
+  (g_pu1__attr__tag = us_tag2)))) -> ((to_rep(c_pu1__split_discrs) = r4b) ->
+  (in_range1(r4b) -> (((((to_rep(o5) = 1) and ((o5 = o6) and
+  ((c_pu1__split_fields1 = o7) and ((c_pu1__split_fields = o8) and
+  (us_null_ext__ = o9))))) and
+  ((c_pu1__split_discrs = record_equality__test_eq_ok__g_pu2__assume) and
+  (((record_equality__test_eq_ok__g_pu2__assume1 = o6) and
+  ((record_equality__test_eq_ok__g_pu2__assume2 = o7) and
+  ((record_equality__test_eq_ok__g_pu2__assume3 = o8) and
+  (record_equality__test_eq_ok__g_pu2__assume4 = o9)))) and
+  (us_tag8 = record_equality__test_eq_ok__g_pu2__assume5)))) and
+  ((((result4 = g_pu2__split_fields) and
   ((result5 = g_pu2__split_fields1) and ((result6 = g_pu2__split_fields2) and
-  (result7 = g_pu2__split_fields3))))
-
-axiom H44 :
-  ((g_pu2__split_fields4 = record_equality__test_eq_ok__g_pu2__assume1) and
-  ((g_pu2__split_fields5 = record_equality__test_eq_ok__g_pu2__assume2) and
-  ((g_pu2__split_fields6 = record_equality__test_eq_ok__g_pu2__assume3) and
-  (g_pu2__split_fields7 = record_equality__test_eq_ok__g_pu2__assume4))))
-
-axiom H45 :
-  (g_pu2__split_discrs = record_equality__test_eq_ok__g_pu2__assume)
-
-axiom H46 : (g_pu2__attr__tag = us_tag2)
-
-axiom H47 : (((of_base({ us_split_discrs1 = { rec__record_equality__root__c =
-  g_pu1__split_discrs }; us_split_fields1 = {
+  (result7 = g_pu2__split_fields3)))) and
+  ((record_equality__test_eq_ok__g_pu2__assume1 = g_pu2__split_fields4) and
+  ((record_equality__test_eq_ok__g_pu2__assume2 = g_pu2__split_fields5) and
+  ((record_equality__test_eq_ok__g_pu2__assume3 = g_pu2__split_fields6) and
+  (record_equality__test_eq_ok__g_pu2__assume4 = g_pu2__split_fields7))))) and
+  ((g_pu2__split_discrs = record_equality__test_eq_ok__g_pu2__assume) and
+  (g_pu2__attr__tag = us_tag2)))) -> ((((of_base({ us_split_discrs1 = {
+  rec__record_equality__root__c = g_pu1__split_discrs }; us_split_fields1 = {
   rec__record_equality__root__f1 = g_pu1__split_fields5; rec__ext__ =
   hide_ext__1(g_pu1__split_fields4, g_pu1__split_fields6,
   g_pu1__split_fields7) }; attr__tag = g_pu1__attr__tag
@@ -1602,11 +1456,8 @@ axiom H47 : (((of_base({ us_split_discrs1 = { rec__record_equality__root__c =
   g_pu1__split_fields7) }; attr__tag = g_pu1__attr__tag
   })).us_split_fields3 = { rec__record_equality__child__f2 = c_gp11;
   rec__record_equality__root__f11 = c_gp12; rec__ext__1 = c_gp13 }) and
-  (us_tag1 = c_gp14)))
-
-axiom H48 : ((us2 = 0) and in_range1(0))
-
-axiom H49 : (((of_base({ us_split_discrs1 = (of_base({ us_split_discrs1 = {
+  (us_tag1 = c_gp14))) -> (((us2 = 0) and in_range1(0)) -> ((((of_base({
+  us_split_discrs1 = (of_base({ us_split_discrs1 = {
   rec__record_equality__root__c = g_pu2__split_discrs }; us_split_fields1 = {
   rec__record_equality__root__f1 = g_pu2__split_fields5; rec__ext__ =
   hide_ext__1(g_pu2__split_fields4, g_pu2__split_fields6,
@@ -1661,30 +1512,22 @@ axiom H49 : (((of_base({ us_split_discrs1 = (of_base({ us_split_discrs1 = {
   g_pu2__split_fields7) }; attr__tag = g_pu2__attr__tag })).attr__tag1
   })).us_split_fields3 = { rec__record_equality__child__f2 = c_gp21;
   rec__record_equality__root__f11 = c_gp22; rec__ext__1 = c_gp23 }) and
-  (us_tag9 = c_gp24)))
-
-axiom H50 : (0 = to_rep(c_gp2))
-
-axiom H51 : (bool_eq3({ us_split_discrs1 = { rec__record_equality__root__c =
-  r_pu1__split_discrs }; us_split_fields1 = {
-  rec__record_equality__root__f1 = r_pu1__split_fields; rec__ext__ =
-  r_pu1__split_fields1 }; attr__tag = r_pu1__attr__tag }, {
+  (us_tag9 = c_gp24))) -> ((0 = to_rep(c_gp2)) -> ((bool_eq3({
+  us_split_discrs1 = { rec__record_equality__root__c = r_pu1__split_discrs };
+  us_split_fields1 = { rec__record_equality__root__f1 = r_pu1__split_fields;
+  rec__ext__ = r_pu1__split_fields1 }; attr__tag = r_pu1__attr__tag }, {
   us_split_discrs1 = { rec__record_equality__root__c = r_pu2__split_discrs };
   us_split_fields1 = { rec__record_equality__root__f1 = r_pu2__split_fields;
   rec__ext__ = r_pu2__split_fields1 }; attr__tag = r_pu2__attr__tag
-  }) = true)
-
-axiom H52 : (bool_eq3({ us_split_discrs1 = { rec__record_equality__root__c =
-  c_pu1__split_discrs }; us_split_fields1 = {
+  }) = true) -> ((bool_eq3({ us_split_discrs1 = {
+  rec__record_equality__root__c = c_pu1__split_discrs }; us_split_fields1 = {
   rec__record_equality__root__f1 = c_pu1__split_fields1; rec__ext__ =
   hide_ext__(c_pu1__split_fields, c_pu1__split_fields2) }; attr__tag =
   c_pu1__attr__tag }, { us_split_discrs1 = { rec__record_equality__root__c =
   c_pu2__split_discrs }; us_split_fields1 = {
   rec__record_equality__root__f1 = c_pu2__split_fields1; rec__ext__ =
   hide_ext__(c_pu2__split_fields, c_pu2__split_fields2) }; attr__tag =
-  c_pu2__attr__tag }) = true)
-
-axiom H53 : (bool_eq4(of_base({ us_split_discrs1 = {
+  c_pu2__attr__tag }) = true) -> ((bool_eq4(of_base({ us_split_discrs1 = {
   rec__record_equality__root__c = g_pu1__split_discrs }; us_split_fields1 = {
   rec__record_equality__root__f1 = g_pu1__split_fields5; rec__ext__ =
   hide_ext__1(g_pu1__split_fields4, g_pu1__split_fields6,
@@ -1692,19 +1535,16 @@ axiom H53 : (bool_eq4(of_base({ us_split_discrs1 = {
   us_split_discrs1 = { rec__record_equality__root__c = g_pu2__split_discrs };
   us_split_fields1 = { rec__record_equality__root__f1 = g_pu2__split_fields5;
   rec__ext__ = hide_ext__1(g_pu2__split_fields4, g_pu2__split_fields6,
-  g_pu2__split_fields7) }; attr__tag = g_pu2__attr__tag })) = true)
-
-axiom H54 : (bool_eq4({ us_split_discrs2 = { rec__record_equality__root__c =
-  c_gp1 }; us_split_fields3 = { rec__record_equality__child__f2 = c_gp11;
+  g_pu2__split_fields7) }; attr__tag = g_pu2__attr__tag })) = true) ->
+  ((bool_eq4({ us_split_discrs2 = { rec__record_equality__root__c = c_gp1 };
+  us_split_fields3 = { rec__record_equality__child__f2 = c_gp11;
   rec__record_equality__root__f11 = c_gp12; rec__ext__1 = c_gp13 };
   attr__tag1 = c_gp14 }, { us_split_discrs2 = {
   rec__record_equality__root__c = c_gp2 }; us_split_fields3 = {
   rec__record_equality__child__f2 = c_gp21; rec__record_equality__root__f11 =
-  c_gp22; rec__ext__1 = c_gp23 }; attr__tag1 = c_gp24 }) = true)
-
- (* File "record_equality.ads", line 13, characters 0-0 *)
-goal WP_parameter_def : (not (bool_eq5({ us_split_discrs3 = {
-  rec__record_equality__root__c = g_pu1__split_discrs }; us_split_fields5 = {
+  c_gp22; rec__ext__1 = c_gp23 }; attr__tag1 = c_gp24 }) = true) ->
+  (not (bool_eq5({ us_split_discrs3 = { rec__record_equality__root__c =
+  g_pu1__split_discrs }; us_split_fields5 = {
   rec__record_equality__grandchild__f3 = g_pu1__split_fields4;
   rec__record_equality__root__f12 = g_pu1__split_fields5;
   rec__record_equality__child__f21 = g_pu1__split_fields6; rec__ext__2 =
@@ -1714,4 +1554,4 @@ goal WP_parameter_def : (not (bool_eq5({ us_split_discrs3 = {
   g_pu2__split_fields4; rec__record_equality__root__f12 =
   g_pu2__split_fields5; rec__record_equality__child__f21 =
   g_pu2__split_fields6; rec__ext__2 = g_pu2__split_fields7 }; attr__tag2 =
-  g_pu2__attr__tag }) = true))
+  g_pu2__attr__tag }) = true)))))))))))))))))))))))))))

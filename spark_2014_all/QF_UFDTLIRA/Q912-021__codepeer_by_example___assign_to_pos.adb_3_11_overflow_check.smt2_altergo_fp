@@ -137,15 +137,7 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : int
-
-logic o : int
-
-logic o1 : int
-
-axiom H : ((1 <= 2147483647) -> in_range1(x))
-
-axiom H1 : in_range(y)
-
  (* File "assign_to_pos.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((y + 1))
+goal WP_parameter_def :
+  (forall x:int. (((1 <= 2147483647) -> in_range1(x)) -> (in_range(y) ->
+  in_range((y + 1)))))

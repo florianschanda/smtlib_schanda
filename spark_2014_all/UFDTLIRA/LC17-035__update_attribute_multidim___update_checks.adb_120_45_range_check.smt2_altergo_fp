@@ -251,18 +251,18 @@ axiom bool_eq_def4 :
   (((a__first_3 <= a__last_3) and ((b__first_3 <= b__last_3) and
   ((a__last_3 - a__first_3) = (b__last_3 - b__first_3)))) or
   ((not (a__first_3 <= a__last_3)) and (b__last_3 <  b__first_3)))) and
-  (forall temp___idx_132:int. forall temp___idx_133:int.
-  forall temp___idx_134:int. ((((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and ((a__first_2 <= temp___idx_133) and
-  (temp___idx_133 <= a__last_2))) and ((a__first_3 <= temp___idx_134) and
-  (temp___idx_134 <= a__last_3))) and (to_rep(get(a, temp___idx_132,
-  temp___idx_133, temp___idx_134)) = to_rep(get(b,
-  ((b__first - a__first) + temp___idx_132),
-  ((b__first_2 - a__first_2) + temp___idx_133),
-  ((b__first_3 - a__first_3) + temp___idx_134))))) or
-  (not ((((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)) and
-  ((a__first_2 <= temp___idx_133) and (temp___idx_133 <= a__last_2))) and
-  ((a__first_3 <= temp___idx_134) and (temp___idx_134 <= a__last_3))))))) ->
+  (forall temp___idx_154:int. forall temp___idx_155:int.
+  forall temp___idx_156:int. ((((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and ((a__first_2 <= temp___idx_155) and
+  (temp___idx_155 <= a__last_2))) and ((a__first_3 <= temp___idx_156) and
+  (temp___idx_156 <= a__last_3))) and (to_rep(get(a, temp___idx_154,
+  temp___idx_155, temp___idx_156)) = to_rep(get(b,
+  ((b__first - a__first) + temp___idx_154),
+  ((b__first_2 - a__first_2) + temp___idx_155),
+  ((b__first_3 - a__first_3) + temp___idx_156))))) or
+  (not ((((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)) and
+  ((a__first_2 <= temp___idx_155) and (temp___idx_155 <= a__last_2))) and
+  ((a__first_3 <= temp___idx_156) and (temp___idx_156 <= a__last_3))))))) ->
   (bool_eq5(a, a__first, a__last, a__first_2, a__last_2, a__first_3,
   a__last_3, b, b__first, b__last, b__first_2, b__last_2, b__first_3,
   b__last_3) = true)) and ((not ((((((a__first <= a__last) ->
@@ -275,15 +275,15 @@ axiom bool_eq_def4 :
   (((a__first_3 <= a__last_3) -> ((b__first_3 <= b__last_3) and
   ((a__last_3 - a__first_3) = (b__last_3 - b__first_3)))) and
   ((not (a__first_3 <= a__last_3)) -> (b__last_3 <  b__first_3)))) and
-  (forall temp___idx_132:int. forall temp___idx_133:int.
-  forall temp___idx_134:int. (((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and ((a__first_2 <= temp___idx_133) and
-  (temp___idx_133 <= a__last_2))) and ((a__first_3 <= temp___idx_134) and
-  (temp___idx_134 <= a__last_3))) -> (to_rep(get(a, temp___idx_132,
-  temp___idx_133, temp___idx_134)) = to_rep(get(b,
-  ((b__first - a__first) + temp___idx_132),
-  ((b__first_2 - a__first_2) + temp___idx_133),
-  ((b__first_3 - a__first_3) + temp___idx_134)))))))) -> (bool_eq5(a,
+  (forall temp___idx_154:int. forall temp___idx_155:int.
+  forall temp___idx_156:int. (((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and ((a__first_2 <= temp___idx_155) and
+  (temp___idx_155 <= a__last_2))) and ((a__first_3 <= temp___idx_156) and
+  (temp___idx_156 <= a__last_3))) -> (to_rep(get(a, temp___idx_154,
+  temp___idx_155, temp___idx_156)) = to_rep(get(b,
+  ((b__first - a__first) + temp___idx_154),
+  ((b__first_2 - a__first_2) + temp___idx_155),
+  ((b__first_3 - a__first_3) + temp___idx_156)))))))) -> (bool_eq5(a,
   a__first, a__last, a__first_2, a__last_2, a__first_3, a__last_3, b,
   b__first, b__last, b__first_2, b__last_2, b__first_3,
   b__last_3) = false))))
@@ -306,15 +306,15 @@ axiom bool_eq_rev :
   (((a__first_3 <= a__last_3) -> ((b__first_3 <= b__last_3) and
   ((a__last_3 - a__first_3) = (b__last_3 - b__first_3)))) and
   ((not (a__first_3 <= a__last_3)) -> (b__last_3 <  b__first_3)))) and
-  (forall temp___idx_132:int. forall temp___idx_133:int.
-  forall temp___idx_134:int. (((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and ((a__first_2 <= temp___idx_133) and
-  (temp___idx_133 <= a__last_2))) and ((a__first_3 <= temp___idx_134) and
-  (temp___idx_134 <= a__last_3))) -> (to_rep(get(a, temp___idx_132,
-  temp___idx_133, temp___idx_134)) = to_rep(get(b,
-  ((b__first - a__first) + temp___idx_132),
-  ((b__first_2 - a__first_2) + temp___idx_133),
-  ((b__first_3 - a__first_3) + temp___idx_134))))))))))
+  (forall temp___idx_154:int. forall temp___idx_155:int.
+  forall temp___idx_156:int. (((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and ((a__first_2 <= temp___idx_155) and
+  (temp___idx_155 <= a__last_2))) and ((a__first_3 <= temp___idx_156) and
+  (temp___idx_156 <= a__last_3))) -> (to_rep(get(a, temp___idx_154,
+  temp___idx_155, temp___idx_156)) = to_rep(get(b,
+  ((b__first - a__first) + temp___idx_154),
+  ((b__first_2 - a__first_2) + temp___idx_155),
+  ((b__first_3 - a__first_3) + temp___idx_156))))))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -362,104 +362,50 @@ logic new_val_2 : int
 
 logic attr__ATTRIBUTE_ADDRESS11 : int
 
-logic temp___314 : map, int, int, int, int, int, int, int, int, int, int,
+logic temp___342 : map, int, int, int, int, int, int, int, int, int, int,
   int -> map
 
 axiom def_axiom :
-  (forall temp___316:map.
-  (forall temp___317:int. forall temp___318:int. forall temp___319:int.
-  forall temp___320:int. forall temp___321:int. forall temp___322:int.
-  forall temp___323:int. forall temp___324:int. forall temp___325:int.
-  forall temp___326:int. forall temp___327:int.
-  (forall temp___328:int. forall temp___329:int. forall temp___330:int.
-  (((((temp___328 = temp___324) and (temp___329 = temp___325)) and
-  (temp___330 = temp___326)) -> (get(temp___314(temp___316, temp___317,
-  temp___318, temp___319, temp___320, temp___321, temp___322, temp___323,
-  temp___324, temp___325, temp___326, temp___327), temp___328, temp___329,
-  temp___330) = of_rep(temp___327))) and
-  ((not (((temp___328 = temp___324) and (temp___329 = temp___325)) and
-  (temp___330 = temp___326))) -> ((((((temp___328 = temp___317) and
-  (temp___329 = temp___318)) and (temp___330 = temp___319)) or
-  (((temp___328 = temp___320) and (temp___329 = temp___321)) and
-  (temp___330 = temp___322))) -> (get(temp___314(temp___316, temp___317,
-  temp___318, temp___319, temp___320, temp___321, temp___322, temp___323,
-  temp___324, temp___325, temp___326, temp___327), temp___328, temp___329,
-  temp___330) = of_rep(temp___323))) and
-  ((not ((((temp___328 = temp___317) and (temp___329 = temp___318)) and
-  (temp___330 = temp___319)) or (((temp___328 = temp___320) and
-  (temp___329 = temp___321)) and (temp___330 = temp___322)))) ->
-  (get(temp___314(temp___316, temp___317, temp___318, temp___319, temp___320,
-  temp___321, temp___322, temp___323, temp___324, temp___325, temp___326,
-  temp___327), temp___328, temp___329, temp___330) = get(temp___316,
-  temp___328, temp___329, temp___330)))))))))
+  (forall temp___344:map.
+  (forall temp___345:int. forall temp___346:int. forall temp___347:int.
+  forall temp___348:int. forall temp___349:int. forall temp___350:int.
+  forall temp___351:int. forall temp___352:int. forall temp___353:int.
+  forall temp___354:int. forall temp___355:int.
+  (((((((((((in_range(temp___345) and in_range1(temp___346)) and
+  in_range2(temp___347)) and in_range(temp___348)) and
+  in_range1(temp___349)) and in_range2(temp___350)) and
+  in_range3(temp___351)) and in_range(temp___352)) and
+  in_range1(temp___353)) and in_range2(temp___354)) and
+  in_range3(temp___355)) ->
+  (forall temp___356:int. forall temp___357:int. forall temp___358:int.
+  (((((temp___356 = temp___352) and (temp___357 = temp___353)) and
+  (temp___358 = temp___354)) -> (to_rep(get(temp___342(temp___344,
+  temp___345, temp___346, temp___347, temp___348, temp___349, temp___350,
+  temp___351, temp___352, temp___353, temp___354, temp___355), temp___356,
+  temp___357, temp___358)) = temp___355)) and
+  ((not (((temp___356 = temp___352) and (temp___357 = temp___353)) and
+  (temp___358 = temp___354))) -> ((((((temp___356 = temp___345) and
+  (temp___357 = temp___346)) and (temp___358 = temp___347)) or
+  (((temp___356 = temp___348) and (temp___357 = temp___349)) and
+  (temp___358 = temp___350))) -> (to_rep(get(temp___342(temp___344,
+  temp___345, temp___346, temp___347, temp___348, temp___349, temp___350,
+  temp___351, temp___352, temp___353, temp___354, temp___355), temp___356,
+  temp___357, temp___358)) = temp___351)) and
+  ((not ((((temp___356 = temp___345) and (temp___357 = temp___346)) and
+  (temp___358 = temp___347)) or (((temp___356 = temp___348) and
+  (temp___357 = temp___349)) and (temp___358 = temp___350)))) ->
+  (get(temp___342(temp___344, temp___345, temp___346, temp___347, temp___348,
+  temp___349, temp___350, temp___351, temp___352, temp___353, temp___354,
+  temp___355), temp___356, temp___357, temp___358) = get(temp___344,
+  temp___356, temp___357, temp___358))))))))))
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-axiom H : in_range(x1)
-
-axiom H1 : in_range(x2)
-
-axiom H2 : in_range(x3)
-
-axiom H3 : in_range1(y1)
-
-axiom H4 : in_range1(y2)
-
-axiom H5 : in_range1(y3)
-
-axiom H6 : in_range2(z1)
-
-axiom H7 : in_range2(z2)
-
-axiom H8 : in_range2(z3)
-
-axiom H9 : in_range3(new_val_1)
-
-axiom H10 : in_range3(new_val_2)
-
-axiom H11 : (1 <  x1)
-
-axiom H12 : (1 <  y1)
-
-axiom H13 : (1 <  z1)
-
-axiom H14 : (x2 <  3)
-
-axiom H15 : (y2 <  5)
-
-axiom H16 : (z2 <  10)
-
-axiom H17 : (x3 <  3)
-
-axiom H18 : (y3 <  5)
-
-axiom H19 : (z3 <  10)
-
-axiom H20 : (new_val_1 <  99)
-
-axiom H21 : (0 <  new_val_2)
-
-axiom H22 : ((o = (new_val_2 - 1)) and in_range3((new_val_2 - 1)))
-
- (* File "update_checks.adb", line 91, characters 0-0 *)
-goal WP_parameter_def : in_range2((z3 + 1))
+ (* File "update_checks.adb", line 118, characters 0-0 *)
+goal WP_parameter_def :
+  (forall o:int. (in_range(x1) -> (in_range(x2) -> (in_range(x3) ->
+  (in_range1(y1) -> (in_range1(y2) -> (in_range1(y3) -> (in_range2(z1) ->
+  (in_range2(z2) -> (in_range2(z3) -> (in_range3(new_val_1) ->
+  (in_range3(new_val_2) -> ((((((((((((1 <  x1) and (1 <  y1)) and
+  (1 <  z1)) and (x2 <  3)) and (y2 <  5)) and (z2 <  10)) and (x3 <  3)) and
+  (y3 <  5)) and (z3 <  10)) and (new_val_1 <  99)) and (0 <  new_val_2)) ->
+  (((o = (new_val_2 - 1)) and in_range3((new_val_2 - 1))) ->
+  in_range2((z3 + 1))))))))))))))))

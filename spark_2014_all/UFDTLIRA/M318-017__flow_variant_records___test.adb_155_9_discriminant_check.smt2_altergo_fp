@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -435,49 +435,14 @@ type t46b__ref = { t46b__content : us_rep
 
 function t46b__ref___projection(a: t46b__ref) : us_rep = (a).t46b__content
 
-logic x__split_discrs : bool
-
-logic y : bool
-
-logic o : failure_reason
-
-logic o1 : integer
-
-logic o2 : failure_reason
-
-logic temp___290 : bool
-
-logic temp___2901 : integer
-
-logic temp___2902 : failure_reason
-
-logic temp___2903 : bool
-
-logic result : bool
-
-logic y1 : bool
-
-axiom H : (result = y)
-
-axiom H1 : (y1 = of_int(0))
-
-axiom H2 : (x__split_discrs = r45b)
-
-axiom H3 : (to_rep(o) = 2)
-
-axiom H4 : (dummy = o1)
-
-axiom H5 : (o = o2)
-
-axiom H6 : (of_int(0) = temp___290)
-
-axiom H7 : (temp___2901 = o1)
-
-axiom H8 : (temp___2902 = o2)
-
-axiom H9 : (true = temp___2903)
-
-axiom H10 : (x__attr__constrained = true)
-
  (* File "test.adb", line 135, characters 0-0 *)
-goal WP_parameter_def : (temp___290 = x__split_discrs)
+goal WP_parameter_def :
+  (forall x__split_discrs:bool. forall y:bool. forall o:failure_reason.
+  forall o1:integer. forall o2:failure_reason. forall temp___323:bool.
+  forall temp___3231:integer. forall temp___3232:failure_reason.
+  forall temp___3233:bool. forall result:bool. forall y1:bool.
+  (((result = y) and (y1 = of_int(0))) -> ((x__split_discrs = r45b) ->
+  ((((to_rep(o) = 2) and ((dummy = o1) and (o = o2))) and
+  ((of_int(0) = temp___323) and (((temp___3231 = o1) and
+  (temp___3232 = o2)) and (true = temp___3233)))) ->
+  ((x__attr__constrained = true) -> (temp___323 = x__split_discrs))))))

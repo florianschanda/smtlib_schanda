@@ -109,32 +109,11 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic hidden : int
-
-logic hidden2 : int
-
-logic o : int
-
-logic hidden1 : int
-
-logic result : int
-
-logic hidden3 : int
-
-axiom H : in_range(hidden)
-
-axiom H1 : in_range(hidden2)
-
-axiom H2 : ((hidden2 <= 0) -> ((o = (hidden + 1)) and
-  in_range((hidden + 1))))
-
-axiom H3 : ((hidden2 <= 0) -> (result = hidden))
-
-axiom H4 : ((hidden2 <= 0) -> (hidden3 = o))
-
-axiom H5 : ((not (hidden2 <= 0)) -> (hidden3 = hidden))
-
-axiom H6 : ((not (hidden2 <= 0)) -> (hidden3 = hidden1))
-
  (* File "prot.adb", line 24, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def :
+  (forall hidden:int. forall hidden2:int. forall o:int. forall hidden1:int.
+  forall result:int. forall hidden3:int. (not (in_range(hidden) and
+  (in_range(hidden2) and (((hidden2 <= 0) and (((o = (hidden + 1)) and
+  in_range((hidden + 1))) and ((result = hidden) and (hidden3 = o)))) or
+  ((not (hidden2 <= 0)) and ((hidden3 = hidden) and
+  (hidden3 = hidden1))))))))

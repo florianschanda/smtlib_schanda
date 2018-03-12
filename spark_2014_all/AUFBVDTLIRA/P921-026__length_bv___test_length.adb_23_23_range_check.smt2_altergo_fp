@@ -925,12 +925,6 @@ axiom bv_max_to_uint1 :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int2 : bool -> int
 
 axiom to_int_def2 :
@@ -942,6 +936,12 @@ logic of_int2 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int2(i)]. (((i = 0) -> (of_int2(i) = false)) and
   ((not (i = 0)) -> (of_int2(i) = true))))
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1104,24 +1104,6 @@ axiom slide_def :
   (forall i:t1 [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[sub1(i, sub1(new_first, old_first))]))))))
 
-logic concat : (t1,natural) farray, t1, t1, (t1,natural) farray, t1,
-  t1 -> (t1,natural) farray
-
-axiom concat_def :
-  (forall a:(t1,natural) farray. forall b:(t1,natural) farray.
-  (forall a_first:t1. forall a_last:t1. forall b_first:t1. forall b_last:t1.
-  (forall i:t1 [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((ule1(a_first, i) and ule1(i, a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and (ugt1(i, a_last) -> ((concat(a,
-  a_first, a_last, b, b_first, b_last)[i]) = (b[add1(sub1(i, a_last),
-  sub1(b_first, one1))])))))))
-
-logic singleton : natural, t1 -> (t1,natural) farray
-
-axiom singleton_def :
-  (forall v:natural.
-  (forall i:t1 [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq7 : (t1,natural) farray, t1, t1, (t1,natural) farray, t1,
   t1 -> bool
 
@@ -1132,19 +1114,19 @@ axiom bool_eq_def6 :
   a__last) and (ule1(b__first, b__last) and (sub1(a__last,
   a__first) = sub1(b__last, b__first)))) or ((not ule1(a__first,
   a__last)) and ugt1(b__first, b__last))) and
-  (forall temp___idx_132:t1. (((ule1(a__first, temp___idx_132) and
-  ule1(temp___idx_132, a__last)) and
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[add1(sub1(b__first, a__first),
-  temp___idx_132)])))) or (not (ule1(a__first, temp___idx_132) and
-  ule1(temp___idx_132, a__last)))))) -> (bool_eq7(a, a__first, a__last, b,
+  (forall temp___idx_154:t1. (((ule1(a__first, temp___idx_154) and
+  ule1(temp___idx_154, a__last)) and
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[add1(sub1(b__first, a__first),
+  temp___idx_154)])))) or (not (ule1(a__first, temp___idx_154) and
+  ule1(temp___idx_154, a__last)))))) -> (bool_eq7(a, a__first, a__last, b,
   b__first, b__last) = true)) and ((not (((ule1(a__first, a__last) ->
   (ule1(b__first, b__last) and (sub1(a__last, a__first) = sub1(b__last,
   b__first)))) and ((not ule1(a__first, a__last)) -> ugt1(b__first,
   b__last))) and
-  (forall temp___idx_132:t1. ((ule1(a__first, temp___idx_132) and
-  ule1(temp___idx_132, a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[add1(sub1(b__first, a__first),
-  temp___idx_132)]))))))) -> (bool_eq7(a, a__first, a__last, b, b__first,
+  (forall temp___idx_154:t1. ((ule1(a__first, temp___idx_154) and
+  ule1(temp___idx_154, a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[add1(sub1(b__first, a__first),
+  temp___idx_154)]))))))) -> (bool_eq7(a, a__first, a__last, b, b__first,
   b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1154,40 +1136,10 @@ axiom bool_eq_rev :
   a__last) = true) -> (((ule1(a__first, a__last) -> (ule1(b__first,
   b__last) and (sub1(a__last, a__first) = sub1(b__last, b__first)))) and
   ((not ule1(a__first, a__last)) -> ugt1(b__first, b__last))) and
-  (forall temp___idx_132:t1. ((ule1(a__first, temp___idx_132) and
-  ule1(temp___idx_132, a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[add1(sub1(b__first, a__first),
-  temp___idx_132)])))))))))
-
-logic compare : (t1,natural) farray, t1, t1, (t1,natural) farray, t1,
-  t1 -> int
-
-axiom compare_def_eq :
-  (forall a:(t1,natural) farray. forall b:(t1,natural) farray.
-  (forall a_first:t1. forall a_last:t1. forall b_first:t1. forall b_last:t1
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) = 0) <-> (bool_eq7(a, a_first, a_last, b,
-  b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(t1,natural) farray. forall b:(t1,natural) farray.
-  (forall a_first:t1. forall a_last:t1. forall b_first:t1. forall b_last:t1
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) <  0) <->
-  (exists i:t1. exists j:t1. (ule1(i, a_last) and (ult1(j, b_last) and
-  ((bool_eq7(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  (ult1(i, a_last) and (to_rep1((a[add1(i, one1)])) <  to_rep1((b[add1(j,
-  one1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(t1,natural) farray. forall b:(t1,natural) farray.
-  (forall a_first:t1. forall a_last:t1. forall b_first:t1. forall b_last:t1
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((0 <  compare(a,
-  a_first, a_last, b, b_first, b_last)) <->
-  (exists i:t1. exists j:t1. (ule1(i, b_last) and (ult1(j, a_last) and
-  ((bool_eq7(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  (ult1(i, b_last) and (to_rep1((b[add1(i, one1)])) <  to_rep1((a[add1(j,
-  one1)]))))))))))))
+  (forall temp___idx_154:t1. ((ule1(a__first, temp___idx_154) and
+  ule1(temp___idx_154, a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[add1(sub1(b__first, a__first),
+  temp___idx_154)])))))))))
 
 type t2
 
@@ -1270,12 +1222,18 @@ logic create : t1 -> us_t
 
 logic create__function_guard : us_t, t1 -> prop
 
+logic rliteral : t1
+
+axiom rliteral_axiom : (tqtint1(rliteral) = 0)
+
+logic rliteral1 : t1
+
+axiom rliteral_axiom1 : (tqtint1(rliteral1) = 65535)
+
 axiom create__post_axiom :
-  (forall c:t1 [create(c)].
-  (((to_rep(first((create(c)).rt)) = of_int1(0)) and
-  (to_rep(last((create(c)).rt)) = c)) and dynamic_property(of_int1(0),
-  of_int1(65535), to_rep(first((create(c)).rt)),
-  to_rep(last((create(c)).rt)))))
+  (forall c:t1 [create(c)]. (((to_rep(first((create(c)).rt)) = rliteral) and
+  (to_rep(last((create(c)).rt)) = c)) and dynamic_property(rliteral,
+  rliteral1, to_rep(first((create(c)).rt)), to_rep(last((create(c)).rt)))))
 
 logic a2__first : mod_16
 
@@ -1285,45 +1243,28 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic a2 : (t1,natural) farray
+logic rliteral2 : t1
 
-logic test_length__p3__a2__assume : (t1,natural) farray
-
-logic test_length__p3__a2__assume1 : t2
-
-logic o : int
-
-logic o1 : int
-
-logic result : (t1,natural) farray
-
-logic a21 : (t1,natural) farray
-
-axiom H : (({ elts = test_length__p3__a2__assume; rt =
-  test_length__p3__a2__assume1 } = create(of_int1(65532))) and
-  (dynamic_property(of_int1(0), of_int1(65535),
-  to_rep(first(test_length__p3__a2__assume1)),
-  to_rep(last(test_length__p3__a2__assume1))) and
-  ((to_rep(first(test_length__p3__a2__assume1)) = of_int1(0)) and
-  (to_rep(last(test_length__p3__a2__assume1)) = of_int1(65532)))))
-
-axiom H1 : (result = a2)
-
-axiom H2 : (a21 = test_length__p3__a2__assume)
-
-axiom H3 : (to_rep(a2__first) = to_rep(first(test_length__p3__a2__assume1)))
-
-axiom H4 : (to_rep(a2__last) = to_rep(last(test_length__p3__a2__assume1)))
-
-axiom H5 : dynamic_property(of_int1(0), of_int1(65535), to_rep(a2__first),
-  to_rep(a2__last))
-
-axiom H6 : ((tqtint1(to_rep(a2__first)) <= tqtint1(to_rep(a2__last))) ->
-  (o = ((tqtint1(to_rep(a2__last)) - tqtint1(to_rep(a2__first))) + 1)))
-
-axiom H7 :
-  ((not (tqtint1(to_rep(a2__first)) <= tqtint1(to_rep(a2__last)))) ->
-  (o = 0))
+axiom rliteral_axiom2 : (tqtint1(rliteral2) = 65532)
 
  (* File "test_length.adb", line 12, characters 0-0 *)
-goal WP_parameter_def : uint_in_range(o)
+goal WP_parameter_def :
+  (forall a2:(t1,natural) farray.
+  forall test_length__p3__a2__assume:(t1,natural) farray.
+  forall test_length__p3__a2__assume1:t2. forall o:int.
+  forall result:(t1,natural) farray. forall a21:(t1,natural) farray. (((({
+  elts = test_length__p3__a2__assume; rt = test_length__p3__a2__assume1
+  } = create(rliteral2)) and (dynamic_property(rliteral, rliteral1,
+  to_rep(first(test_length__p3__a2__assume1)),
+  to_rep(last(test_length__p3__a2__assume1))) and
+  ((to_rep(first(test_length__p3__a2__assume1)) = rliteral) and
+  (to_rep(last(test_length__p3__a2__assume1)) = rliteral2)))) and
+  (((result = a2) and (a21 = test_length__p3__a2__assume)) and
+  ((to_rep(a2__first) = to_rep(first(test_length__p3__a2__assume1))) and
+  (to_rep(a2__last) = to_rep(last(test_length__p3__a2__assume1)))))) ->
+  (dynamic_property(rliteral, rliteral1, to_rep(a2__first),
+  to_rep(a2__last)) ->
+  ((((tqtint1(to_rep(a2__first)) <= tqtint1(to_rep(a2__last))) and
+  (o = ((tqtint1(to_rep(a2__last)) - tqtint1(to_rep(a2__first))) + 1))) or
+  ((not (tqtint1(to_rep(a2__first)) <= tqtint1(to_rep(a2__last)))) and
+  (o = 0))) -> uint_in_range(o)))))

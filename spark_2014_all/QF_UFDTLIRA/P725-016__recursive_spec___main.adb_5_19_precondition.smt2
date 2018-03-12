@@ -22,7 +22,6 @@
 (define-fun us_private__ref___projection ((a us_private__ref)) us_private (us_private__content a))
 (declare-fun rec__ (Int) Bool)
 (declare-fun rec____function_guard (Bool Int) Bool)
-(declare-const us Bool)
 (assert (not (< 0 3)))
 (check-sat)
 (exit)

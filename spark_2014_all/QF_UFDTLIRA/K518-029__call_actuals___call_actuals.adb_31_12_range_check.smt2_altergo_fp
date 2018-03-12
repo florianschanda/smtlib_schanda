@@ -161,45 +161,8 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic x : int
-
-logic y : int
-
-logic g : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic result : int
-
-logic x1 : int
-
-logic result1 : int
-
-logic y1 : int
-
-logic x2 : int
-
-logic y2 : int
-
-logic x3 : int
-
-logic y3 : int
-
-axiom H : in_range(g)
-
-axiom H1 : in_range2(x)
-
-axiom H2 : in_range2(y)
-
-axiom H3 : ((o = g) and in_range1(g))
-
  (* File "call_actuals.ads", line 4, characters 0-0 *)
-goal WP_parameter_def : in_range2(o)
+goal WP_parameter_def :
+  (forall x:int. forall y:int. forall g:int. forall o:int. (in_range(g) ->
+  (in_range2(x) -> (in_range2(y) -> (((o = g) and in_range1(g)) ->
+  in_range2(o))))))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -679,85 +679,24 @@ axiom length__post_axiom1 :
 
 axiom get__post_axiom : true
 
-logic j : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : bool
-
-logic o3 : bool
-
-logic o4 : int
-
-logic o5 : index
-
-logic o6 : index
-
-logic o7 : int
-
-logic o8 : index
-
-logic o9 : index
-
-logic o10 : index
-
-logic o11 : index
-
-logic o12 : index
-
-logic o13 : int
-
-logic o14 : int
-
-logic o15 : int
-
-logic o16 : int
-
-logic o17 : bool
-
-logic o18 : index
-
-logic o19 : index
-
-logic o20 : index
-
-logic o21 : index
-
-logic o22 : index
-
-logic o23 : index
-
-logic o24 : index
-
-logic o25 : int
-
-logic result : bool
-
-logic result1 : bool
-
-axiom H : in_range2(x)
-
-axiom H1 : (((0 <= x) and (x <= (length({ us_split_discrs1 = {
-  rec__sum_elem__partitions__vector__capacity = p }; us_split_fields3 = {
-  rec__sum_elem__partitions__vector = p1 } }) - 1))) and
-  (forall j1:int. (((0 <= j1) and (j1 <= ((- 1) + length1(model__({
+ (* File "a-cofove.ads", line 807, characters 0-0 *)
+goal WP_parameter_def : (in_range2(x) -> ((((0 <= x) and (x <= (length({
+  us_split_discrs1 = { rec__sum_elem__partitions__vector__capacity = p };
+  us_split_fields3 = { rec__sum_elem__partitions__vector = p1 } }) - 1))) and
+  (forall j:int. (((0 <= j) and (j <= ((- 1) + length1(model__({
   us_split_discrs1 = { rec__sum_elem__partitions__vector__capacity = p };
   us_split_fields3 = { rec__sum_elem__partitions__vector = p1 } }))))) ->
   in_range1((to_rep(((get(model__({ us_split_discrs1 = {
   rec__sum_elem__partitions__vector__capacity = p }; us_split_fields3 = {
   rec__sum_elem__partitions__vector = p1 } }),
-  j1)).us_split_fields1).rec__sum_elem__interval__first) + to_rep(((get(model__({
+  j)).us_split_fields1).rec__sum_elem__interval__first) + to_rep(((get(model__({
   us_split_discrs1 = { rec__sum_elem__partitions__vector__capacity = p };
   us_split_fields3 = { rec__sum_elem__partitions__vector = p1 } }),
-  j1)).us_split_fields1).rec__sum_elem__interval__last))))))
-
- (* File "a-cofove.ads", line 807, characters 0-0 *)
-goal WP_parameter_def : in_range1((to_rep(((get(model__({ us_split_discrs1 =
-  { rec__sum_elem__partitions__vector__capacity = p }; us_split_fields3 = {
+  j)).us_split_fields1).rec__sum_elem__interval__last)))))) ->
+  in_range1((to_rep(((get(model__({ us_split_discrs1 = {
+  rec__sum_elem__partitions__vector__capacity = p }; us_split_fields3 = {
   rec__sum_elem__partitions__vector = p1 } }),
   x)).us_split_fields1).rec__sum_elem__interval__first) + to_rep(((get(model__({
   us_split_discrs1 = { rec__sum_elem__partitions__vector__capacity = p };
   us_split_fields3 = { rec__sum_elem__partitions__vector = p1 } }),
-  x)).us_split_fields1).rec__sum_elem__interval__last)))
+  x)).us_split_fields1).rec__sum_elem__interval__last)))))

@@ -366,11 +366,7 @@ logic c3 : natural
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic us : int
-
-logic us1 : int
-
-axiom H : ((us = to_rep1(c1)) and in_range1(to_rep1(c1)))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range2(to_rep2(c))
+goal WP_parameter_def :
+  (forall us:int. (((us = to_rep1(c1)) and in_range1(to_rep1(c1))) ->
+  in_range2(to_rep2(c))))

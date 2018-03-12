@@ -140,32 +140,10 @@ logic y : us_rep
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : us_rep
-
-logic o : us_rep
-
-logic o1 : us_rep
-
-logic o2 : us_rep
-
-logic result : bool
-
-logic result1 : us_rep
-
-logic x1 : us_rep
-
-axiom H : (result = is_zero(y))
-
-axiom H1 : (not (result = true))
-
-axiom H2 : ((o = n(x)) and ((not (is_zero(o) = true)) and (oeq(p(o),
-  x) = true)))
-
-axiom H3 : (o1 = o)
-
-axiom H4 : (result1 = x)
-
-axiom H5 : (x1 = o1)
-
  (* File "use_simple_private_type.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (not (is_zero(y) = true))
+goal WP_parameter_def :
+  (forall x:us_rep. forall o:us_rep. forall o1:us_rep. forall result:bool.
+  forall result1:us_rep. forall x1:us_rep. (((result = is_zero(y)) and
+  (not (result = true))) -> (((((o = n(x)) and ((not (is_zero(o) = true)) and
+  (oeq(p(o), x) = true))) and (o1 = o)) and ((result1 = x) and (x1 = o1))) ->
+  (not (is_zero(y) = true)))))

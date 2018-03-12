@@ -257,61 +257,16 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic r1 : int
-
-logic r2 : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic r11 : int
-
-logic result1 : int
-
-logic r21 : int
-
-logic r12 : int
-
-logic r22 : int
-
-logic r13 : int
-
-logic r23 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : in_range1(y)
-
-axiom H2 : in_range1(z)
-
-axiom H3 : ((0 <= 2147483647) -> in_range(r1))
-
-axiom H4 : ((0 <= 2147483647) -> in_range(r2))
-
-axiom H5 : (z <  y)
-
-axiom H6 : ((o = comp_div(x,y)) and in_range(comp_div(x,y)))
-
-axiom H7 : (result = r1)
-
-axiom H8 : (r11 = o)
-
-axiom H9 : ((o1 = comp_div(x,z)) and in_range(comp_div(x,z)))
-
-axiom H10 : (result1 = r2)
-
-axiom H11 : (r21 = o1)
-
-axiom H12 : (r21 = r22)
-
-axiom H13 : (r11 = r12)
-
-axiom H14 : (r23 = r21)
-
-axiom H15 : (r13 = r11)
-
  (* File "nonlinear.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : (r12 <= r22)
+goal WP_parameter_def :
+  (forall r1:int. forall r2:int. forall o:int. forall o1:int.
+  forall result:int. forall r11:int. forall result1:int. forall r21:int.
+  forall r12:int. forall r22:int. forall r13:int. forall r23:int.
+  ((in_range1(x) and (in_range1(y) and (in_range1(z) and
+  (((0 <= 2147483647) -> in_range(r1)) and (((0 <= 2147483647) ->
+  in_range(r2)) and ((z <  y) and (((((o = comp_div(x,y)) and
+  in_range(comp_div(x,y))) and (({ int__content = result } = { int__content =
+  r1 }) and (r11 = o))) and (((o1 = comp_div(x,z)) and
+  in_range(comp_div(x,z))) and ((result1 = r2) and (r21 = o1)))) and
+  (((r21 = r22) and (r11 = r12)) and ((r23 = r21) and (r13 = r11)))))))))) ->
+  (r12 <= r22)))

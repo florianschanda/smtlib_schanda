@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -187,24 +187,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> (int,integer) farray
-
-axiom concat_def :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : integer, int -> (int,integer) farray
-
-axiom singleton_def :
-  (forall v:integer.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,integer) farray, int, int, (int,integer) farray, int,
   int -> bool
 
@@ -215,17 +197,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -235,37 +217,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic a : (int,integer) farray
 
@@ -277,108 +231,38 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic i : int
-
-logic assert_loop_14__value_present__result : bool
-
-logic temp___149 : int
-
-logic m : int
-
-logic o : int
-
-logic result : int
-
-logic i1 : int
-
-logic i2 : int
-
-logic result1 : int
-
-logic i3 : int
-
-logic i4 : int
-
-logic i5 : int
-
-logic i6 : int
-
-logic i7 : int
-
-logic i8 : int
-
-logic i9 : int
-
-logic result2 : bool
-
-logic assert_loop_14__value_present__result1 : bool
-
-logic assert_loop_14__value_present__result2 : bool
-
-logic assert_loop_14__value_present__result3 : bool
-
-logic i10 : int
-
-logic assert_loop_14__value_present__result4 : bool
-
-logic i11 : int
-
-logic assert_loop_14__value_present__result5 : bool
-
-logic result3 : bool
-
-axiom H : in_range1(x)
-
-axiom H1 : (result = i)
-
-axiom H2 : (i1 = 1)
-
-axiom H3 : in_range2(i1)
-
-axiom H4 : (((not (to_rep((a[i1])) = x)) and (i1 <  10)) ->
-  (((temp___149 = i1) and (((i2 <  10) and
-  (forall m1:int. (((1 <= m1) and (m1 <= i2)) ->
-  (not (to_rep((a[m1])) = x))))) and ((((1 <= 10) -> in_range2(i2)) and
-  ((not (to_rep((a[i2])) = x)) and (i2 <  10))) and ((((o = (i2 + 1)) and
-  in_range2((i2 + 1))) and ((i2 = result1) and (i3 = o))) and
-  (not ((not (to_rep((a[i3])) = x)) and (i3 <  10))))))) and ((i3 = i6) and
-  (i7 = i3))))
-
-axiom H5 : (((not (to_rep((a[i1])) = x)) and (i1 <  10)) -> (i8 = i6))
-
-axiom H6 : (((not (to_rep((a[i1])) = x)) and (i1 <  10)) -> (i9 = i7))
-
-axiom H7 : ((not ((not (to_rep((a[i1])) = x)) and (i1 <  10))) -> (i1 = i8))
-
-axiom H8 : ((not ((not (to_rep((a[i1])) = x)) and (i1 <  10))) -> (i9 = i1))
-
-axiom H9 :
-  (assert_loop_14__value_present__result1 = assert_loop_14__value_present__result2)
-
-axiom H10 :
-  (assert_loop_14__value_present__result3 = assert_loop_14__value_present__result1)
-
-axiom H11 : (result2 = assert_loop_14__value_present__result)
-
-axiom H12 : (((to_rep((a[i8])) = x) ->
-  (assert_loop_14__value_present__result1 = true)) and
-  ((not (to_rep((a[i8])) = x)) ->
-  (assert_loop_14__value_present__result1 = false)))
-
-axiom H13 :
-  (assert_loop_14__value_present__result4 = assert_loop_14__value_present__result2)
-
-axiom H14 : (i10 = i8)
-
-axiom H15 :
-  (assert_loop_14__value_present__result5 = assert_loop_14__value_present__result3)
-
-axiom H16 : (i11 = i9)
-
-axiom H17 : (result3 = assert_loop_14__value_present__result4)
-
-axiom H18 : (assert_loop_14__value_present__result4 = true)
-
  (* File "assert_loop_14.ads", line 7, characters 0-0 *)
 goal WP_parameter_def :
-  (exists m1:int. (((1 <= m1) and (m1 <= 10)) and (to_rep((a[m1])) = x)))
+  (forall i:int. forall assert_loop_14__value_present__result:bool.
+  forall temp___173:int. forall o:int. forall result:int. forall i1:int.
+  forall i2:int. forall result1:int. forall i3:int. forall i4:int.
+  forall i5:int. forall i6:int. forall i7:int. forall result2:bool.
+  forall assert_loop_14__value_present__result1:bool.
+  forall assert_loop_14__value_present__result2:bool.
+  forall assert_loop_14__value_present__result3:bool. forall i8:int.
+  forall assert_loop_14__value_present__result4:bool. forall i9:int.
+  forall assert_loop_14__value_present__result5:bool.
+  (forall result3:bool. ((in_range1(x) and ((((({ int__content = result } = {
+  int__content = i }) and (i1 = 1)) and (in_range2(i1) and
+  (((((not (to_rep((a[i1])) = x)) and (i1 <  10)) and
+  ((((temp___173 = i1) and (((i2 <  10) and
+  (forall m:int. (((1 <= m) and (m <= i2)) -> (not (to_rep((a[m])) = x))))) and
+  ((((1 <= 10) -> in_range2(i2)) and ((not (to_rep((a[i2])) = x)) and
+  (i2 <  10))) and ((((o = (i2 + 1)) and in_range2((i2 + 1))) and
+  ((i2 = result1) and (i3 = o))) and (not ((not (to_rep((a[i3])) = x)) and
+  (i3 <  10))))))) and ((i3 = i4) and (i5 = i3))) and ((i6 = i4) and
+  (i7 = i5)))) or ((not ((not (to_rep((a[i1])) = x)) and (i1 <  10))) and
+  ((i1 = i6) and (i7 = i1)))) and
+  (((assert_loop_14__value_present__result1 = assert_loop_14__value_present__result2) and
+  (assert_loop_14__value_present__result3 = assert_loop_14__value_present__result1)) and
+  ((result2 = assert_loop_14__value_present__result) and
+  (((to_rep((a[i6])) = x) and
+  (assert_loop_14__value_present__result1 = true)) or
+  ((not (to_rep((a[i6])) = x)) and
+  (assert_loop_14__value_present__result1 = false)))))))) and
+  (((assert_loop_14__value_present__result4 = assert_loop_14__value_present__result2) and
+  (i8 = i6)) and
+  ((assert_loop_14__value_present__result5 = assert_loop_14__value_present__result3) and
+  (i9 = i7)))) and (result3 = assert_loop_14__value_present__result4))) ->
+  ((assert_loop_14__value_present__result4 = true) ->
+  (exists m:int. (((1 <= m) and (m <= 10)) and (to_rep((a[m])) = x)))))))

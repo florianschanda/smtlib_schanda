@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -483,36 +483,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def :
-  (forall v:decision_kind. forall v1:node_id. forall v2:node_id.
-  forall v3:node_id. forall v4:node_id. forall v5:bool.
-  (forall i:int [(singleton({ us_split_discrs1 = { rec__var__decision__kind =
-  v }; us_split_fields1 = { rec__var__decision__id = v1;
-  rec__var__decision__operand = v2; rec__var__decision__left = v3;
-  rec__var__decision__right = v4 }; attr__constrained = v5 }, i)[i])].
-  ((singleton({ us_split_discrs1 = { rec__var__decision__kind = v };
-  us_split_fields1 = { rec__var__decision__id = v1;
-  rec__var__decision__operand = v2; rec__var__decision__left = v3;
-  rec__var__decision__right = v4 }; attr__constrained = v5 }, i)[i]) = {
-  us_split_discrs1 = { rec__var__decision__kind = v }; us_split_fields1 = {
-  rec__var__decision__id = v1; rec__var__decision__operand = v2;
-  rec__var__decision__left = v3; rec__var__decision__right = v4 };
-  attr__constrained = v5 })))
-
 logic bool_eq6 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -523,17 +493,17 @@ axiom bool_eq_def5 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and (bool_eq5((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and (bool_eq5((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq5((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq6(a,
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq5((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq6(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -543,9 +513,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq5((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq5((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -565,24 +535,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,tristate) farray, int, int, (int,tristate) farray, int,
-  int -> (int,tristate) farray
-
-axiom concat_def1 :
-  (forall a:(int,tristate) farray. forall b:(int,tristate) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : tristate, int -> (int,tristate) farray
-
-axiom singleton_def1 :
-  (forall v:tristate.
-  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq7 : (int,tristate) farray, int, int, (int,tristate) farray, int,
   int -> bool
 
@@ -593,17 +545,17 @@ axiom bool_eq_def6 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) and
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)])))) or
-  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (forall temp___idx_155:int. ((((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) and
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)])))) or
+  (not ((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) ->
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)]))))))) ->
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) ->
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)]))))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -613,37 +565,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) ->
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)])))))))))
-
-logic compare : (int,tristate) farray, int, int, (int,tristate) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,tristate) farray. forall b:(int,tristate) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq7(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,tristate) farray. forall b:(int,tristate) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq7(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,tristate) farray. forall b:(int,tristate) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq7(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) ->
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)])))))))))
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
@@ -662,164 +586,40 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic decision_table : (int,us_rep) farray
-
-logic condition_values : (int,tristate) farray
-
-logic d__split_fields : node_id
-
-logic d__split_fields1 : node_id
-
-logic d__split_fields2 : node_id
-
-logic d__split_fields3 : node_id
-
-logic d__split_discrs : decision_kind
-
-logic kind : int
-
-logic var_test__decision_eval__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic result : node_id
-
-logic result1 : node_id
-
-logic result2 : node_id
-
-logic result3 : node_id
-
-logic d__split_fields4 : node_id
-
-logic d__split_fields5 : node_id
-
-logic d__split_fields6 : node_id
-
-logic d__split_fields7 : node_id
-
-logic result4 : decision_kind
-
-logic d__split_discrs1 : decision_kind
-
-logic result5 : int
-
-logic kind1 : int
-
-logic result6 : int
-
-logic var_test__decision_eval__result1 : int
-
-logic result7 : int
-
-logic var_test__decision_eval__result2 : int
-
-logic result8 : int
-
-logic var_test__decision_eval__result3 : int
-
-logic result9 : int
-
-logic var_test__decision_eval__result4 : int
-
-logic var_test__decision_eval__result5 : int
-
-logic var_test__decision_eval__result6 : int
-
-logic var_test__decision_eval__result7 : int
-
-logic var_test__decision_eval__result8 : int
-
-logic var_test__decision_eval__result9 : int
-
-logic var_test__decision_eval__result10 : int
-
-logic var_test__decision_eval__result11 : int
-
-logic var_test__decision_eval__result12 : int
-
-logic d__split_fields8 : node_id
-
-logic d__split_fields9 : node_id
-
-logic d__split_fields10 : node_id
-
-logic d__split_fields11 : node_id
-
-logic d__split_discrs2 : decision_kind
-
-logic kind2 : int
-
-logic var_test__decision_eval__result13 : int
-
-logic d__split_fields12 : node_id
-
-logic d__split_fields13 : node_id
-
-logic d__split_fields14 : node_id
-
-logic d__split_fields15 : node_id
-
-logic d__split_discrs3 : decision_kind
-
-logic kind3 : int
-
-logic var_test__decision_eval__result14 : int
-
-axiom H :
-  (forall temp___175:int. (((1 <= temp___175) and (temp___175 <= 1000)) ->
-  (((decision_table[temp___175])).attr__constrained = false)))
-
-axiom H1 : in_range3(root_id)
-
-axiom H2 :
-  (forall x:int. (((1 <= x) and (x <= 1000)) ->
-  (not (to_rep((condition_values[x])) = 2))))
-
-axiom H3 : ((result = d__split_fields) and ((result1 = d__split_fields1) and
-  ((result2 = d__split_fields2) and (result3 = d__split_fields3))))
-
-axiom H4 : ({ rec__var__decision__id = d__split_fields4;
-  rec__var__decision__operand = d__split_fields5; rec__var__decision__left =
-  d__split_fields6; rec__var__decision__right = d__split_fields7
-  } = ((decision_table[root_id])).us_split_fields1)
-
-axiom H5 : (result4 = d__split_discrs)
-
-axiom H6 : ({ rec__var__decision__kind = d__split_discrs1
-  } = ((decision_table[root_id])).us_split_discrs1)
-
-axiom H7 : (d__attr__constrained = false)
-
-axiom H8 : (result5 = kind)
-
-axiom H9 : (kind1 = to_rep1(d__split_discrs1))
-
-axiom H10 : in_range2(kind1)
-
-axiom H11 : (not (kind1 = 0))
-
-axiom H12 : (kind1 = 1)
-
-logic x : int
-
-axiom H13 : (1 <= x)
-
-axiom H14 : (x <= 1000)
-
  (* File "tristates.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (not (to_rep((condition_values[x])) = 2))
+goal WP_parameter_def :
+  (forall decision_table:(int,us_rep) farray.
+  forall condition_values:(int,tristate) farray.
+  forall d__split_fields:node_id. forall d__split_fields1:node_id.
+  forall d__split_fields2:node_id. forall d__split_fields3:node_id.
+  forall d__split_discrs:decision_kind. forall kind:int.
+  forall result:node_id. forall result1:node_id. forall result2:node_id.
+  forall result3:node_id. forall d__split_fields4:node_id.
+  forall d__split_fields5:node_id. forall d__split_fields6:node_id.
+  forall d__split_fields7:node_id. forall result4:decision_kind.
+  forall d__split_discrs1:decision_kind. forall result5:int.
+  forall kind1:int.
+  ((forall temp___201:int. (((1 <= temp___201) and (temp___201 <= 1000)) ->
+   (((decision_table[temp___201])).attr__constrained = false))) ->
+  (in_range3(root_id) ->
+  ((forall x:int. (((1 <= x) and (x <= 1000)) ->
+   (not (to_rep((condition_values[x])) = 2)))) ->
+  (((({ us_split_fields__content = { rec__var__decision__id = result;
+  rec__var__decision__operand = result1; rec__var__decision__left = result2;
+  rec__var__decision__right = result3 } } = { us_split_fields__content = {
+  rec__var__decision__id = d__split_fields; rec__var__decision__operand =
+  d__split_fields1; rec__var__decision__left = d__split_fields2;
+  rec__var__decision__right = d__split_fields3 } }) and ({
+  rec__var__decision__id = d__split_fields4; rec__var__decision__operand =
+  d__split_fields5; rec__var__decision__left = d__split_fields6;
+  rec__var__decision__right = d__split_fields7
+  } = ((decision_table[root_id])).us_split_fields1)) and ((({
+  us_split_discrs__content = { rec__var__decision__kind = result4 } } = {
+  us_split_discrs__content = { rec__var__decision__kind = d__split_discrs }
+  }) and ({ rec__var__decision__kind = d__split_discrs1
+  } = ((decision_table[root_id])).us_split_discrs1)) and
+  (d__attr__constrained = false))) -> ((({ int__content = result5 } = {
+  int__content = kind }) and (kind1 = to_rep1(d__split_discrs1))) ->
+  (in_range2(kind1) -> ((not (kind1 = 0)) -> ((kind1 = 1) ->
+  (forall x:int. (((1 <= x) and (x <= 1000)) ->
+  (not (to_rep((condition_values[x])) = 2)))))))))))))

@@ -190,7 +190,5 @@ axiom coerce_axiom :
 
 logic self__ : natural
 
-logic us : int
-
  (* File "init_concurrent.ads", line 8, characters 0-0 *)
 goal WP_parameter_def : (0 <  0)

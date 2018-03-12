@@ -143,23 +143,8 @@ logic c2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic a : int
-
-logic b : int
-
-axiom H : in_range1(a)
-
-axiom H1 : in_range1(b)
-
-axiom H2 : (a = c1)
-
-axiom H3 : in_range1(c1)
-
-axiom H4 : (b = c2)
-
-axiom H5 : in_range1(c2)
-
-axiom H6 : (0 <= c2)
-
  (* File "info_flow_tests.adb", line 4, characters 0-0 *)
-goal WP_parameter_def : ((- 2147483648) <= 0)
+goal WP_parameter_def :
+  (forall a:int. forall b:int. (in_range1(a) -> (in_range1(b) -> ((a = c1) ->
+  (in_range1(c1) -> ((b = c2) -> (in_range1(c2) -> ((0 <= c2) ->
+  ((- 2147483648) <= 0)))))))))

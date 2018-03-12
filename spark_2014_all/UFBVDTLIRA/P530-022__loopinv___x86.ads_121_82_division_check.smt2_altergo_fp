@@ -1025,34 +1025,25 @@ logic reg : t1
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x86__readreghigh8__result : t
+logic rliteral1 : t1
 
-logic result : t
+axiom rliteral_axiom1 : (tqtint1(rliteral1) = 65280)
 
-logic x86__readreghigh8__result1 : t
+logic rliteral2 : t1
 
-logic x86__readreghigh8__result2 : t
-
-logic x86__readreghigh8__result3 : t
-
-logic x86__readreghigh8__result4 : t
-
-logic x86__readreghigh8__result5 : t
-
-axiom H : true
-
-axiom H1 : (x86__readreghigh8__result1 = x86__readreghigh8__result2)
-
-axiom H2 : (x86__readreghigh8__result3 = x86__readreghigh8__result1)
-
-axiom H3 : (result = x86__readreghigh8__result)
-
-axiom H4 : (x86__readreghigh8__result1 = toSmall(udiv1(bw_and1(reg,
-  of_int1(65280)), of_int1(256))))
-
-axiom H5 : (x86__readreghigh8__result4 = x86__readreghigh8__result2)
-
-axiom H6 : (x86__readreghigh8__result5 = x86__readreghigh8__result3)
+axiom rliteral_axiom2 : (tqtint1(rliteral2) = 256)
 
  (* File "x86.ads", line 10, characters 0-0 *)
-goal WP_parameter_def : (not (of_int1(256) = zeros1))
+goal WP_parameter_def :
+  (forall x86__readreghigh8__result:t. forall result:t.
+  forall x86__readreghigh8__result1:t. forall x86__readreghigh8__result2:t.
+  forall x86__readreghigh8__result3:t. forall x86__readreghigh8__result4:t.
+  forall x86__readreghigh8__result5:t.
+  (((((x86__readreghigh8__result1 = x86__readreghigh8__result2) and
+  (x86__readreghigh8__result3 = x86__readreghigh8__result1)) and (({
+  t__content = result } = { t__content = x86__readreghigh8__result }) and
+  (x86__readreghigh8__result1 = toSmall(udiv1(bw_and1(reg, rliteral1),
+  rliteral2))))) and (({ t__content = x86__readreghigh8__result4 } = {
+  t__content = x86__readreghigh8__result2 }) and
+  (x86__readreghigh8__result5 = x86__readreghigh8__result3))) ->
+  (not (rliteral2 = zeros1))))

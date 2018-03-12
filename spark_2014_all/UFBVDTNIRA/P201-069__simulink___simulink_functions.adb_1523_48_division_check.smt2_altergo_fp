@@ -751,15 +751,7 @@ logic right : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : int
-
-logic o1 : int
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : ((o = tqtint(right)) and in_range(tqtint(right)))
-
  (* File "interfac.ads", line 74, characters 0-0 *)
-goal WP_parameter_def : (not (32 = 0))
+goal WP_parameter_def :
+  (forall o:int. (((o = tqtint(right)) and in_range(tqtint(right))) ->
+  (not (32 = 0))))

@@ -601,12 +601,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -618,6 +612,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -691,52 +691,45 @@ logic rsp : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x86__insaferegion64__result : bool
+logic rliteral : t
 
-logic result : bool
+axiom rliteral_axiom : (tqtint(rliteral) = 8)
 
-logic x86__insaferegion64__result1 : bool
+logic rliteral1 : t
 
-logic x86__insaferegion64__result2 : bool
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 14987979559889010687)
 
-logic x86__insaferegion64__result3 : bool
+logic rliteral2 : t
 
-logic x86__insaferegion64__result4 : bool
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 4611686018427387903)
 
-logic x86__insaferegion64__result5 : bool
+logic rliteral3 : t
 
-logic result1 : bool
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : (x86__insaferegion64__result1 = x86__insaferegion64__result2)
-
-axiom H3 : (x86__insaferegion64__result3 = x86__insaferegion64__result1)
-
-axiom H4 : (result = x86__insaferegion64__result)
-
-axiom H5 : ((uge(var, add(rsp, of_int(8))) -> ((ult(var,
-  of_int(14987979559889010687)) -> (x86__insaferegion64__result1 = true)) and
-  ((not ult(var, of_int(14987979559889010687))) -> ((ule(var,
-  of_int(4611686018427387903)) ->
-  (x86__insaferegion64__result1 = of_int1(1))) and ((not ule(var,
-  of_int(4611686018427387903))) ->
-  (x86__insaferegion64__result1 = false)))))) and ((not uge(var, add(rsp,
-  of_int(8)))) -> ((ule(var, of_int(4611686018427387903)) ->
-  (x86__insaferegion64__result1 = of_int1(1))) and ((not ule(var,
-  of_int(4611686018427387903))) -> (x86__insaferegion64__result1 = false)))))
-
-axiom H6 : (x86__insaferegion64__result4 = x86__insaferegion64__result2)
-
-axiom H7 : (x86__insaferegion64__result5 = x86__insaferegion64__result3)
-
-axiom H8 : (result1 = x86__insaferegion64__result4)
-
-axiom H9 : (x86__insaferegion64__result4 = true)
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 0)
 
  (* File "x86.ads", line 90, characters 0-0 *)
-goal WP_parameter_def : ((uge(var, add(rsp, of_int(8))) and ult(var,
-  of_int(14987979559889010687))) or (ule(var,
-  of_int(4611686018427387903)) and uge(var, of_int(0))))
+goal WP_parameter_def :
+  (forall x86__insaferegion64__result:bool. forall result:bool.
+  forall x86__insaferegion64__result1:bool.
+  forall x86__insaferegion64__result2:bool.
+  forall x86__insaferegion64__result3:bool.
+  forall x86__insaferegion64__result4:bool.
+  forall x86__insaferegion64__result5:bool.
+  (forall result1:bool.
+  ((((((x86__insaferegion64__result1 = x86__insaferegion64__result2) and
+  (x86__insaferegion64__result3 = x86__insaferegion64__result1)) and
+  ((result = x86__insaferegion64__result) and ((uge(var, add(rsp,
+  rliteral)) and ((ult(var, rliteral1) and
+  (x86__insaferegion64__result1 = true)) or ((not ult(var, rliteral1)) and
+  ((ule(var, rliteral2) and (x86__insaferegion64__result1 = of_int1(1))) or
+  ((not ule(var, rliteral2)) and
+  (x86__insaferegion64__result1 = false)))))) or ((not uge(var, add(rsp,
+  rliteral))) and ((ule(var, rliteral2) and
+  (x86__insaferegion64__result1 = of_int1(1))) or ((not ule(var,
+  rliteral2)) and (x86__insaferegion64__result1 = false))))))) and
+  ((x86__insaferegion64__result4 = x86__insaferegion64__result2) and
+  (x86__insaferegion64__result5 = x86__insaferegion64__result3))) and
+  (result1 = x86__insaferegion64__result4)) ->
+  ((x86__insaferegion64__result4 = true) -> ((uge(var, add(rsp,
+  rliteral)) and ult(var, rliteral1)) or (ule(var, rliteral2) and uge(var,
+  rliteral3)))))))

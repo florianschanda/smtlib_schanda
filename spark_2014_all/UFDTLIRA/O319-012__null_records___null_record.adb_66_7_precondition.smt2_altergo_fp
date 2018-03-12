@@ -171,27 +171,5 @@ logic t31 : int
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
-logic o : null_rec
-
-logic t__split_fields : us_private
-
-logic o1 : null_rec
-
-logic t1__split_fields : us_private
-
-axiom H : (o1 = o2)
-
-axiom H1 : (o = o3)
-
-axiom H2 : (t1__attr__tag = us_tag)
-
-axiom H3 : ((t1__split_fields = t2) and (us_tag = t21))
-
-axiom H4 : ((t__split_fields = t3) and (us_tag = t31))
-
-axiom H5 : true
-
-axiom H6 : true
-
  (* File "null_record.adb", line 14, characters 0-0 *)
 goal WP_parameter_def : true

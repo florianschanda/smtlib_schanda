@@ -1026,41 +1026,23 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic fsthalf : t
+logic rliteral1 : t1
 
-logic sndhalf : t
+axiom rliteral_axiom1 : (tqtint1(rliteral1) = 255)
 
-logic o : t1
+logic rliteral2 : t1
 
-logic o1 : t1
+axiom rliteral_axiom2 : (tqtint1(rliteral2) = 0)
 
-logic o2 : t1
+logic rliteral3 : t
 
-logic o3 : t
-
-logic result : t
-
-logic fsthalf1 : t
-
-logic result1 : t
-
-logic sndhalf1 : t
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : true
-
-axiom H3 : (result = fsthalf)
-
-axiom H4 : (fsthalf1 = toSmall(bw_and1(val__, of_int1(255))))
-
-axiom H5 : ((8 <  16) -> (o = lsr_bv1(val__, of_int1(8))))
-
-axiom H6 : ((not (8 <  16)) -> (o = of_int1(0)))
-
-axiom H7 : (o1 = bw_and1(o, of_int1(255)))
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 0)
 
  (* File "bitwise.adb", line 25, characters 0-0 *)
-goal WP_parameter_def : ule1(toBig(of_int(0)), o1)
+goal WP_parameter_def :
+  (forall fsthalf:t. forall o:t1. forall o1:t1. forall result:t.
+  forall fsthalf1:t. (((result = fsthalf) and
+  (fsthalf1 = toSmall(bw_and1(val__, rliteral1)))) -> (((((8 <  16) and
+  (o = lsr_bv1(val__, of_int1(8)))) or ((not (8 <  16)) and
+  (o = rliteral2))) and (o1 = bw_and1(o, rliteral1))) ->
+  ule1(toBig(rliteral3), o1))))

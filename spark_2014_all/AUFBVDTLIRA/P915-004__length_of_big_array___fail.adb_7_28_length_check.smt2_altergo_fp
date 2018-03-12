@@ -601,12 +601,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -618,6 +612,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -716,24 +716,6 @@ axiom slide_def :
   (forall i:t [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[sub(i, sub(new_first, old_first))]))))))
 
-logic concat : (t,bool) farray, t, t, (t,bool) farray, t,
-  t -> (t,bool) farray
-
-axiom concat_def :
-  (forall a:(t,bool) farray. forall b:(t,bool) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t.
-  (forall i:t [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((ule(a_first, i) and ule(i, a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and (ugt(i, a_last) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[add(sub(i, a_last), sub(b_first,
-  one))])))))))
-
-logic singleton : bool, t -> (t,bool) farray
-
-axiom singleton_def :
-  (forall v:bool.
-  (forall i:t [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (t,bool) farray, t, t, (t,bool) farray, t, t -> bool
 
 axiom bool_eq_def3 :
@@ -743,18 +725,18 @@ axiom bool_eq_def3 :
   (ule(b__first, b__last) and (sub(a__last, a__first) = sub(b__last,
   b__first)))) or ((not ule(a__first, a__last)) and ugt(b__first,
   b__last))) and
-  (forall temp___idx_133:t. (((ule(a__first, temp___idx_133) and
-  ule(temp___idx_133, a__last)) and
-  ((a[temp___idx_133]) = (b[add(sub(b__first, a__first),
-  temp___idx_133)]))) or (not (ule(a__first, temp___idx_133) and
-  ule(temp___idx_133, a__last)))))) -> (bool_eq4(a, a__first, a__last, b,
+  (forall temp___idx_155:t. (((ule(a__first, temp___idx_155) and
+  ule(temp___idx_155, a__last)) and
+  ((a[temp___idx_155]) = (b[add(sub(b__first, a__first),
+  temp___idx_155)]))) or (not (ule(a__first, temp___idx_155) and
+  ule(temp___idx_155, a__last)))))) -> (bool_eq4(a, a__first, a__last, b,
   b__first, b__last) = true)) and ((not (((ule(a__first, a__last) ->
   (ule(b__first, b__last) and (sub(a__last, a__first) = sub(b__last,
   b__first)))) and ((not ule(a__first, a__last)) -> ugt(b__first,
   b__last))) and
-  (forall temp___idx_133:t. ((ule(a__first, temp___idx_133) and
-  ule(temp___idx_133, a__last)) ->
-  ((a[temp___idx_133]) = (b[add(sub(b__first, a__first), temp___idx_133)])))))) ->
+  (forall temp___idx_155:t. ((ule(a__first, temp___idx_155) and
+  ule(temp___idx_155, a__last)) ->
+  ((a[temp___idx_155]) = (b[add(sub(b__first, a__first), temp___idx_155)])))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -764,76 +746,9 @@ axiom bool_eq_rev :
   (((ule(a__first, a__last) -> (ule(b__first, b__last) and (sub(a__last,
   a__first) = sub(b__last, b__first)))) and ((not ule(a__first, a__last)) ->
   ugt(b__first, b__last))) and
-  (forall temp___idx_133:t. ((ule(a__first, temp___idx_133) and
-  ule(temp___idx_133, a__last)) ->
-  ((a[temp___idx_133]) = (b[add(sub(b__first, a__first), temp___idx_133)]))))))))
-
-logic compare : (t,bool) farray, t, t, (t,bool) farray, t, t -> int
-
-axiom compare_def_eq :
-  (forall a:(t,bool) farray. forall b:(t,bool) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a, a_first, a_last, b,
-  b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(t,bool) farray. forall b:(t,bool) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) <  0) <->
-  (exists i:t. exists j:t. (ule(i, a_last) and (ult(j, b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  (ult(i, a_last) and (to_int1((a[add(i, one)])) <  to_int1((b[add(j,
-  one)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(t,bool) farray. forall b:(t,bool) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((0 <  compare(a,
-  a_first, a_last, b, b_first, b_last)) <->
-  (exists i:t. exists j:t. (ule(i, b_last) and (ult(j, a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  (ult(i, b_last) and (to_int1((b[add(i, one)])) <  to_int1((a[add(j,
-  one)]))))))))))))
-
-logic xorb1 : (t,bool) farray, t, t, (t,bool) farray, t, t -> (t,bool) farray
-
-logic andb1 : (t,bool) farray, t, t, (t,bool) farray, t, t -> (t,bool) farray
-
-logic orb1 : (t,bool) farray, t, t, (t,bool) farray, t, t -> (t,bool) farray
-
-logic notb1 : (t,bool) farray, t, t -> (t,bool) farray
-
-axiom op_def :
-  (forall a:(t,bool) farray. forall b:(t,bool) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t.
-  (forall i:t [(orb1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((ule(a_first, i) and ule(i, a_last)) -> ((orb1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = match_bool((a[i]), true, (b[add(sub(i, a_first),
-  b_first)])))))))
-
-axiom op_def1 :
-  (forall a:(t,bool) farray. forall b:(t,bool) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t.
-  (forall i:t [(andb1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((ule(a_first, i) and ule(i, a_last)) -> ((andb1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = match_bool((a[i]), (b[add(sub(i, a_first),
-  b_first)]), false))))))
-
-axiom op_def2 :
-  (forall a:(t,bool) farray. forall b:(t,bool) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t.
-  (forall i:t [(xorb1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((ule(a_first, i) and ule(i, a_last)) -> ((xorb1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = xorb((a[i]), (b[add(sub(i, a_first), b_first)])))))))
-
-axiom notb_def :
-  (forall a:(t,bool) farray.
-  (forall a_first:t. forall a_last:t.
-  (forall i:t [(notb1(a, a_first, a_last)[i])]. ((ule(a_first, i) and ule(i,
-  a_last)) -> ((notb1(a, a_first, a_last)[i]) = match_bool((a[i]), false,
-  true))))))
+  (forall temp___idx_155:t. ((ule(a__first, temp___idx_155) and
+  ule(temp___idx_155, a__last)) ->
+  ((a[temp___idx_155]) = (b[add(sub(b__first, a__first), temp___idx_155)]))))))))
 
 type t1
 
@@ -1135,81 +1050,38 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic fail__create__r__aggregate_def : bool, t, t -> us_t2
 
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 18446744073709551615)
+
 axiom def_axiom :
-  (forall temp___626:bool.
-  (forall temp___627:t. forall temp___628:t. ((dynamic_property(of_int(0),
-  of_int(18446744073709551615), temp___627, temp___628) ->
-  ((to_rep(first4((fail__create__r__aggregate_def(temp___626, temp___627,
-  temp___628)).rt2)) = temp___627) and
-  (to_rep(last5((fail__create__r__aggregate_def(temp___626, temp___627,
-  temp___628)).rt2)) = temp___628))) and
-  (forall temp___629:t. (((fail__create__r__aggregate_def(temp___626,
-  temp___627, temp___628)).elts2[temp___629]) = temp___626)))))
-
-logic r : (t,bool) farray
-
-logic fail__create__result : (t,bool) farray
-
-logic fail__create__result1 : t1
-
-logic temp___631 : (t,bool) farray
-
-logic temp___6311 : t3
-
-logic fail__create__r__assume : (t,bool) farray
-
-logic fail__create__r__assume1 : t2
-
-logic result : (t,bool) farray
-
-logic r1 : (t,bool) farray
-
-logic result1 : (t,bool) farray
-
-logic result2 : t1
-
-logic fail__create__result2 : (t,bool) farray
-
-logic fail__create__result3 : t1
-
-logic fail__create__result4 : (t,bool) farray
-
-logic fail__create__result5 : t1
-
-logic fail__create__result6 : (t,bool) farray
-
-logic fail__create__result7 : t1
-
-logic r2 : (t,bool) farray
-
-logic fail__create__result8 : (t,bool) farray
-
-logic fail__create__result9 : t1
-
-logic r3 : (t,bool) farray
-
-logic fail__create__result10 : (t,bool) farray
-
-logic fail__create__result11 : t1
-
-axiom H : true
-
-axiom H1 : (to_rep(first4((fail__create__r__aggregate_def(of_int1(0),
-  of_int(0), last2)).rt2)) = of_int(0))
-
-axiom H2 : (to_rep(last5((fail__create__r__aggregate_def(of_int1(0),
-  of_int(0), last2)).rt2)) = last2)
-
-axiom H3 : ({ elts2 = temp___631; rt2 = temp___6311
-  } = fail__create__r__aggregate_def(of_int1(0), of_int(0), last2))
+  (forall temp___715:bool.
+  (forall temp___716:t. forall temp___717:t. ((dynamic_property(rliteral,
+  rliteral1, temp___716, temp___717) ->
+  ((to_rep(first4((fail__create__r__aggregate_def(temp___715, temp___716,
+  temp___717)).rt2)) = temp___716) and
+  (to_rep(last5((fail__create__r__aggregate_def(temp___715, temp___716,
+  temp___717)).rt2)) = temp___717))) and
+  (forall temp___718:t. (((fail__create__r__aggregate_def(temp___715,
+  temp___716, temp___717)).elts2[temp___718]) = temp___715)))))
 
  (* File "mod_array.ads", line 4, characters 0-0 *)
 goal WP_parameter_def :
-  (((tqtint(to_rep(first4(temp___6311))) <= tqtint(to_rep(last5(temp___6311)))) ->
-  (((tqtint(of_int(0)) <= tqtint(last2)) ->
-  (((tqtint(to_rep(last5(temp___6311))) - tqtint(to_rep(first4(temp___6311)))) + 1) = ((tqtint(last2) - tqtint(of_int(0))) + 1))) and
-  ((not (tqtint(of_int(0)) <= tqtint(last2))) ->
-  (((tqtint(to_rep(last5(temp___6311))) - tqtint(to_rep(first4(temp___6311)))) + 1) = 0)))) and
-  ((not (tqtint(to_rep(first4(temp___6311))) <= tqtint(to_rep(last5(temp___6311))))) ->
-  ((tqtint(of_int(0)) <= tqtint(last2)) ->
-  (0 = ((tqtint(last2) - tqtint(of_int(0))) + 1)))))
+  (forall temp___720:(t,bool) farray. forall temp___7201:t3.
+  (((to_rep(first4((fail__create__r__aggregate_def(of_int1(0), rliteral,
+  last2)).rt2)) = rliteral) and
+  ((to_rep(last5((fail__create__r__aggregate_def(of_int1(0), rliteral,
+  last2)).rt2)) = last2) and ({ elts2 = temp___720; rt2 = temp___7201
+  } = fail__create__r__aggregate_def(of_int1(0), rliteral, last2)))) ->
+  (((tqtint(to_rep(first4(temp___7201))) <= tqtint(to_rep(last5(temp___7201)))) ->
+  (((tqtint(rliteral) <= tqtint(last2)) ->
+  (((tqtint(to_rep(last5(temp___7201))) - tqtint(to_rep(first4(temp___7201)))) + 1) = ((tqtint(last2) - tqtint(rliteral)) + 1))) and
+  ((not (tqtint(rliteral) <= tqtint(last2))) ->
+  (((tqtint(to_rep(last5(temp___7201))) - tqtint(to_rep(first4(temp___7201)))) + 1) = 0)))) and
+  ((not (tqtint(to_rep(first4(temp___7201))) <= tqtint(to_rep(last5(temp___7201))))) ->
+  ((tqtint(rliteral) <= tqtint(last2)) ->
+  (0 = ((tqtint(last2) - tqtint(rliteral)) + 1)))))))

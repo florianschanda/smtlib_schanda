@@ -436,18 +436,8 @@ logic ts : us_rep
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-axiom H : in_range1(sc)
-
-axiom H1 : ((o = ts_sc(ts)) and (in_range1(o) and
-  (o = to_int(to_fixed(to_duration__2(ts))))))
-
-axiom H2 : (o1 = (sc + o))
-
  (* File "ada_real_time.ads", line 239, characters 0-0 *)
-goal WP_parameter_def : in_range(o1)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. (in_range1(sc) -> ((((o = ts_sc(ts)) and
+  (in_range1(o) and (o = to_int(to_fixed(to_duration__2(ts)))))) and
+  (o1 = (sc + o))) -> in_range(o1))))

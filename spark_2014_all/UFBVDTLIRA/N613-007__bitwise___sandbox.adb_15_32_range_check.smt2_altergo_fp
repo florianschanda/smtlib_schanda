@@ -1034,24 +1034,16 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic msw : t
+logic rliteral1 : t
 
-logic lsw : t
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 0)
 
-logic result : t
+logic rliteral2 : t1
 
-logic msw1 : t
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : true
-
-axiom H3 : (result = msw)
-
-axiom H4 : (msw1 = toSmall(lsr_bv1(whole, of_int1(32))))
+axiom rliteral_axiom2 : (tqtint1(rliteral2) = 4294967295)
 
  (* File "sandbox.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : ule1(toBig(of_int(0)), bw_and1(whole,
-  of_int1(4294967295)))
+goal WP_parameter_def :
+  (forall msw:t. forall result:t. forall msw1:t. (((result = msw) and
+  (msw1 = toSmall(lsr_bv1(whole, of_int1(32))))) -> ule1(toBig(rliteral1),
+  bw_and1(whole, rliteral2))))

@@ -113,41 +113,11 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic x : int
-
-logic g : int
-
-logic i : int
-
-logic h : int
-
-logic o : int
-
-logic result : int
-
-logic g1 : int
-
-logic result1 : int
-
-logic x1 : int
-
-axiom H : in_range(h)
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(x))
-
-axiom H2 : in_range(g)
-
-axiom H3 : in_range(i)
-
-axiom H4 : ((o = (g + 1)) and in_range((g + 1)))
-
-axiom H5 : (result = g)
-
-axiom H6 : (g1 = o)
-
-axiom H7 : (result1 = x)
-
-axiom H8 : (x1 = h)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (0 <  i)
+goal WP_parameter_def :
+  (forall x:int. forall g:int. forall i:int. forall h:int. forall o:int.
+  forall result:int. forall g1:int. forall result1:int. forall x1:int.
+  (in_range(h) -> ((((- 2147483648) <= 2147483647) -> in_range(x)) ->
+  (in_range(g) -> (in_range(i) -> ((((o = (g + 1)) and in_range((g + 1))) and
+  ((result = g) and (g1 = o))) -> (((result1 = x) and (x1 = h)) ->
+  (0 <  i))))))))

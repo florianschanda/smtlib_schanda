@@ -946,12 +946,6 @@ axiom toBig_to_uint : (forall x:t. (tqtint(x) = tqtint1(toBig(x))))
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int2 : bool -> int
 
 axiom to_int_def2 :
@@ -963,6 +957,12 @@ logic of_int2 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int2(i)]. (((i = 0) -> (of_int2(i) = false)) and
   ((not (i = 0)) -> (of_int2(i) = true))))
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1060,36 +1060,25 @@ logic ebx : t1 -> t
 
 logic ebx__function_guard : t, t1 -> prop
 
+logic rliteral1 : t1
+
+axiom rliteral_axiom1 : (tqtint1(rliteral1) = 4294967295)
+
 axiom ebx__post_axiom :
   (forall x86__rbx:t1 [ebx(x86__rbx)].
-  (ebx(x86__rbx) = toSmall(bw_and1(x86__rbx, of_int1(4294967295)))))
+  (ebx(x86__rbx) = toSmall(bw_and1(x86__rbx, rliteral1))))
 
 logic val__ : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic rbx : t1
+logic rliteral2 : t1
 
-logic result : t1
-
-logic rbx1 : t1
-
-logic rbx2 : t1
-
-logic rbx3 : t1
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : (result = rbx)
-
-axiom H3 : (rbx1 = bw_or1(bw_and1(rbx, of_int1(18446744069414584320)),
-  toBig(val__)))
-
-axiom H4 : (rbx1 = rbx2)
-
-axiom H5 : (rbx3 = rbx1)
+axiom rliteral_axiom2 : (tqtint1(rliteral2) = 18446744069414584320)
 
  (* File "x86.ads", line 8, characters 0-0 *)
-goal WP_parameter_def : (ebx(rbx2) = val__)
+goal WP_parameter_def :
+  (forall rbx:t1. forall result:t1. forall rbx1:t1. forall rbx2:t1.
+  forall rbx3:t1. ((((result = rbx) and (rbx1 = bw_or1(bw_and1(rbx,
+  rliteral2), toBig(val__)))) and ((rbx1 = rbx2) and (rbx3 = rbx1))) ->
+  (ebx(rbx2) = val__)))

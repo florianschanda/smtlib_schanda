@@ -293,70 +293,28 @@ logic d__attr__constrained : bool
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic d__split_fields : us_main_type
-
-logic us : int
-
-logic o : natural
-
-logic o1 : us_main_type
-
-logic o2 : bool
-
-logic o3 : natural
-
-logic o4 : us_main_type
-
-logic o5 : bool
-
-logic temp___332 : natural
-
-logic temp___3321 : us_main_type
-
-logic temp___3322 : bool
-
-logic o6 : natural
-
-logic o7 : us_main_type
-
-logic o8 : bool
-
-logic o9 : natural
-
-logic o10 : us_main_type
-
-logic o11 : bool
-
-logic result : us_main_type
-
-logic d__split_fields1 : us_main_type
-
-axiom H : in_range(c)
-
-axiom H1 : ((us = c) and in_range(c))
-
-axiom H2 : ((d__attr__constrained = true) and (to_rep(d__split_discrs) = c))
-
-axiom H3 : ((c = to_rep(d__split_discrs)) and (d__attr__constrained = true))
-
-axiom H4 : (({ us_split_discrs1 = { rec__private_discr__p_with_default__c = o
-  }; us_split_fields1 = { rec__private_discr__p_with_default = o1 };
-  attr__constrained = o2 } = new_with_default(c)) and (to_rep(o) = c))
-
-axiom H5 : ((o3 = o) and ((o4 = o1) and (o5 = o2)))
-
-axiom H6 : ((temp___332 = o3) and ((temp___3321 = o4) and
-  (temp___3322 = o5)))
-
-axiom H7 : (result = d__split_fields)
-
-axiom H8 : (d__split_fields1 = temp___3321)
-
-axiom H9 : (d__split_discrs = temp___332)
-
-axiom H10 : (({ us_split_discrs1 = { rec__private_discr__p_with_default__c =
-  o6 }; us_split_fields1 = { rec__private_discr__p_with_default = o7 };
-  attr__constrained = o8 } = new_with_default(0)) and (to_rep(o6) = 0))
-
  (* File "discr.adb", line 96, characters 0-0 *)
-goal WP_parameter_def : (c = to_rep(o6))
+goal WP_parameter_def :
+  (forall d__split_fields:us_main_type. forall us:int. forall o:natural.
+  forall o1:us_main_type. forall o2:bool. forall o3:natural.
+  forall o4:us_main_type. forall o5:bool. forall temp___370:natural.
+  forall temp___3701:us_main_type. forall temp___3702:bool.
+  forall o6:natural. forall o7:us_main_type. forall o8:bool.
+  forall result:us_main_type. forall d__split_fields1:us_main_type.
+  (in_range(c) -> (((us = c) and in_range(c)) ->
+  (((d__attr__constrained = true) and (to_rep(d__split_discrs) = c)) ->
+  (((c = to_rep(d__split_discrs)) and (d__attr__constrained = true)) ->
+  (((((({ us_split_discrs1 = { rec__private_discr__p_with_default__c = o };
+  us_split_fields1 = { rec__private_discr__p_with_default = o1 };
+  attr__constrained = o2 } = new_with_default(c)) and (to_rep(o) = c)) and ({
+  us_split_discrs1 = { rec__private_discr__p_with_default__c = o3 };
+  us_split_fields1 = { rec__private_discr__p_with_default = o4 };
+  attr__constrained = o5 } = { us_split_discrs1 = {
+  rec__private_discr__p_with_default__c = o }; us_split_fields1 = {
+  rec__private_discr__p_with_default = o1 }; attr__constrained = o2 })) and
+  ((temp___370 = o3) and ((temp___3701 = o4) and (temp___3702 = o5)))) and
+  (((result = d__split_fields) and (d__split_fields1 = temp___3701)) and
+  (d__split_discrs = temp___370))) -> ((({ us_split_discrs1 = {
+  rec__private_discr__p_with_default__c = o6 }; us_split_fields1 = {
+  rec__private_discr__p_with_default = o7 }; attr__constrained = o8
+  } = new_with_default(0)) and (to_rep(o6) = 0)) -> (c = to_rep(o6)))))))))

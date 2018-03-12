@@ -217,25 +217,8 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : int
-
-logic o : int
-
-logic x1 : int
-
-logic result : int
-
-logic x2 : int
-
-axiom H : in_range(x)
-
-axiom H1 : in_range(x1)
-
-axiom H2 : ((o = (x1 + 1)) and in_range((x1 + 1)))
-
-axiom H3 : (result = x1)
-
-axiom H4 : (x2 = o)
-
  (* File "test.adb", line 140, characters 0-0 *)
-goal WP_parameter_def : (not (2 = 0))
+goal WP_parameter_def :
+  (forall x:int. forall o:int. forall x1:int. forall result:int.
+  forall x2:int. (in_range(x) -> (in_range(x1) -> ((((o = (x1 + 1)) and
+  in_range((x1 + 1))) and ((result = x1) and (x2 = o))) -> (not (2 = 0))))))

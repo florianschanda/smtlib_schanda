@@ -170,77 +170,15 @@ axiom e_priv__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : int
-
-logic tmp : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic result : int
-
-logic x1 : int
-
-logic result1 : int
-
-logic tmp1 : int
-
-logic result2 : int
-
-logic tmp2 : int
-
-logic x2 : int
-
-logic result3 : int
-
-logic tmp3 : int
-
-logic result4 : int
-
-logic tmp4 : int
-
-logic x3 : int
-
-logic tmp5 : int
-
-logic x4 : int
-
-logic tmp6 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : (not (x = 0))
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range(tmp))
-
-axiom H3 : ((o = (x - 1)) and in_range1((x - 1)))
-
-axiom H4 : (result = x)
-
-axiom H5 : (x1 = o)
-
-axiom H6 : (not (x1 = 0))
-
-axiom H7 : ((o1 = pub(x1)) and in_range(o1))
-
-axiom H8 : (result1 = tmp)
-
-axiom H9 : (tmp1 = o1)
-
-axiom H10 : ((o2 = priv(x1)) and in_range(o2))
-
-axiom H11 : (tmp1 = result2)
-
-axiom H12 : (tmp2 = o2)
-
-axiom H13 : in_range1(x2)
-
  (* File "type_invariant_legal_2.ads", line 20, characters 0-0 *)
-goal WP_parameter_def : (not (x2 = 0))
+goal WP_parameter_def :
+  (forall x:int. forall tmp:int. forall o:int. forall o1:int. forall o2:int.
+  forall result:int. forall x1:int. forall result1:int. forall tmp1:int.
+  forall result2:int. forall tmp2:int. forall x2:int. (in_range1(x) ->
+  ((not (x = 0)) -> ((((- 2147483648) <= 2147483647) -> in_range(tmp)) ->
+  ((((o = (x - 1)) and in_range1((x - 1))) and (({ int__content = result
+  } = { int__content = x }) and (x1 = o))) -> ((((not (x1 = 0)) and
+  ((o1 = pub(x1)) and in_range(o1))) and (({ int__content = result1 } = {
+  int__content = tmp }) and (tmp1 = o1))) -> ((((o2 = priv(x1)) and
+  in_range(o2)) and ((tmp1 = result2) and (tmp2 = o2))) -> (in_range1(x2) ->
+  (not (x2 = 0))))))))))

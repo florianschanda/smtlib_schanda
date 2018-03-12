@@ -147,19 +147,8 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 axiom x__def_axiom : (x = (ident(2147483647) + 1))
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic bad_constant__x__assume : int
-
-axiom H : ((o = ident(2147483647)) and (in_range(o) and (o = 2147483647)))
-
-axiom H1 : (o1 = (o + 1))
-
-axiom H2 : ((o2 = o1) and in_range(o1))
-
  (* File "bad_constant.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : in_range1(o2)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. forall o2:int.
+  (((((o = ident(2147483647)) and (in_range(o) and (o = 2147483647))) and
+  (o1 = (o + 1))) and ((o2 = o1) and in_range(o1))) -> in_range1(o2)))

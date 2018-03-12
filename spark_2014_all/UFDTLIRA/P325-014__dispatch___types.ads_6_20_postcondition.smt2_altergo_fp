@@ -216,12 +216,6 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq3 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -233,6 +227,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq3 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -344,11 +344,8 @@ axiom check__2__def_axiom :
   x2 })]. (not (check__2({ us_split_fields1 = { rec__types__t1__j = x;
   rec__ext__ = x1 }; attr__tag = x2 }) = true)))
 
-logic x__split_fields : integer
-
-logic x__split_fields1 : us_private
-
  (* File "types.ads", line 4, characters 0-0 *)
-goal WP_parameter_def : (check__({ us_split_fields1 = { rec__types__t1__j =
-  x__split_fields; rec__ext__ = x__split_fields1 }; attr__tag = x__attr__tag
-  }) = true)
+goal WP_parameter_def :
+  (forall x__split_fields:integer. forall x__split_fields1:us_private.
+  (check__({ us_split_fields1 = { rec__types__t1__j = x__split_fields;
+  rec__ext__ = x__split_fields1 }; attr__tag = x__attr__tag }) = true))

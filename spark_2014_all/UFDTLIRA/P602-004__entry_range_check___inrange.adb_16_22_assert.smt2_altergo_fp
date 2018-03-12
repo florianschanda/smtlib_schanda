@@ -160,75 +160,19 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic x : int
-
-logic y : int
-
-logic o : int
-
-logic inrange__pt__add_out__i : int
-
-logic o1 : pt
-
-logic us_self__compl : pt
-
-logic o2 : int
-
-logic result : int
-
-logic x1 : int
-
-logic result1 : int
-
-logic y1 : int
-
-logic po : pt
-
-logic inrange__pt__add_out__i1 : int
-
-logic us_self__compl1 : pt
-
-logic result2 : pt
-
-logic po1 : pt
-
-logic result3 : int
-
-logic x2 : int
-
-axiom H : (result = x)
-
-axiom H1 : (x1 = 10)
-
-axiom H2 : in_range1(x1)
-
-axiom H3 : (result1 = y)
-
-axiom H4 : (y1 = 10)
-
-axiom H5 : in_range1(y1)
-
-axiom H6 : ((o = x1) and in_range(x1))
-
-axiom H7 : (o = inrange__pt__add_out__i)
-
-axiom H8 : (o1 = po)
-
-axiom H9 : (o1 = us_self__compl)
-
-axiom H10 : ((inrange__pt__add_out__i1 = (inrange__pt__add_out__i + y1)) and
-  in_range(inrange__pt__add_out__i1))
-
-axiom H11 : (po = result2)
-
-axiom H12 : (po1 = us_self__compl1)
-
-axiom H13 : ((o2 = inrange__pt__add_out__i1) and
-  in_range1(inrange__pt__add_out__i1))
-
-axiom H14 : (result3 = x1)
-
-axiom H15 : (x2 = o2)
-
  (* File "inrange.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : (x2 <= 10)
+goal WP_parameter_def :
+  (forall x:int. forall y:int. forall o:int.
+  forall inrange__pt__add_out__i:int. forall o1:pt. forall us_self__compl:pt.
+  forall o2:int. forall result:int. forall x1:int. forall result1:int.
+  forall y1:int. forall po:pt. forall inrange__pt__add_out__i1:int.
+  forall us_self__compl1:pt. forall result2:pt. forall po1:pt.
+  forall result3:int. forall x2:int. (((result = x) and (x1 = 10)) ->
+  (in_range1(x1) -> (((result1 = y) and (y1 = 10)) -> (in_range1(y1) ->
+  (((((o = x1) and in_range(x1)) and (o = inrange__pt__add_out__i)) and
+  (((o1 = po) and (o1 = us_self__compl)) and
+  (((inrange__pt__add_out__i1 = (inrange__pt__add_out__i + y1)) and
+  in_range(inrange__pt__add_out__i1)) and (((po = result2) and
+  (po1 = us_self__compl1)) and (((o2 = inrange__pt__add_out__i1) and
+  in_range1(inrange__pt__add_out__i1)) and ((result3 = x1) and
+  (x2 = o2))))))) -> (x2 <= 10)))))))

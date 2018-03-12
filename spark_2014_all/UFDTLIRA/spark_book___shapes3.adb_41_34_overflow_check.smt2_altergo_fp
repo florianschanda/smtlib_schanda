@@ -371,49 +371,10 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic delta_x : int
-
-logic delta_y : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic result : int
-
-logic delta_x1 : int
-
-logic result1 : int
-
-logic delta_y1 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : in_range1(y)
-
-axiom H2 : (in_bounds({ us_split_fields1 = { rec__shapes3__circle__center_x =
-  c; rec__shapes3__circle__center_y = c1; rec__shapes3__circle__radius = c2 }
-  }) = true)
-
-axiom H3 : ((0 <= 200) -> in_range3(delta_x))
-
-axiom H4 : ((0 <= 200) -> in_range3(delta_y))
-
  (* File "shapes3.ads", line 14, characters 0-0 *)
-goal WP_parameter_def : in_range(abs_int((x - to_rep(c))))
+goal WP_parameter_def :
+  (forall delta_x:int. forall delta_y:int. (in_range1(x) -> (in_range1(y) ->
+  ((in_bounds({ us_split_fields1 = { rec__shapes3__circle__center_x = c;
+  rec__shapes3__circle__center_y = c1; rec__shapes3__circle__radius = c2 }
+  }) = true) -> (((0 <= 200) -> in_range3(delta_x)) -> (((0 <= 200) ->
+  in_range3(delta_y)) -> in_range(abs_int((x - to_rep(c))))))))))

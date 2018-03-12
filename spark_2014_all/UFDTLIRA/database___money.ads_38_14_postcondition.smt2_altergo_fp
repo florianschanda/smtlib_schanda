@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -293,93 +293,43 @@ logic b1 : raw_amount
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic money__Osubtract__result : cur
-
-logic money__Osubtract__result1 : raw_amount
-
-logic o : int
-
-logic o1 : raw_amount
-
-logic o2 : cur
-
-logic o3 : raw_amount
-
-logic o4 : cur
-
-logic o5 : raw_amount
-
-logic result : cur
-
-logic result1 : raw_amount
-
-logic money__Osubtract__result2 : cur
-
-logic money__Osubtract__result3 : raw_amount
-
-logic money__Osubtract__result4 : cur
-
-logic money__Osubtract__result5 : raw_amount
-
-logic money__Osubtract__result6 : cur
-
-logic money__Osubtract__result7 : raw_amount
-
-logic money__Osubtract__result8 : cur
-
-logic money__Osubtract__result9 : raw_amount
-
-logic money__Osubtract__result10 : cur
-
-logic money__Osubtract__result11 : raw_amount
-
-logic result2 : cur
-
-logic result3 : raw_amount
-
-axiom H : ((to_rep(a) = to_rep(b)) and (to_rep1(b1) <= to_rep1(a1)))
-
-axiom H1 : (money__Osubtract__result4 = money__Osubtract__result2)
-
-axiom H2 : (money__Osubtract__result5 = money__Osubtract__result3)
-
-axiom H3 : ((money__Osubtract__result6 = money__Osubtract__result2) and
-  (money__Osubtract__result7 = money__Osubtract__result3))
-
-axiom H4 : ((o = (to_rep1(a1) - to_rep1(b1))) and
-  in_range2((to_rep1(a1) - to_rep1(b1))))
-
-axiom H5 : (to_rep1(o1) = o)
-
-axiom H6 : (a = o2)
-
-axiom H7 : (o1 = o3)
-
-axiom H8 : (o4 = o2)
-
-axiom H9 : (o5 = o3)
-
-axiom H10 : (result = money__Osubtract__result)
-
-axiom H11 : (result1 = money__Osubtract__result1)
-
-axiom H12 : ((money__Osubtract__result2 = o4) and
-  (money__Osubtract__result3 = o5))
-
-axiom H13 : ((money__Osubtract__result8 = money__Osubtract__result4) and
-  (money__Osubtract__result9 = money__Osubtract__result5))
-
-axiom H14 : (money__Osubtract__result10 = money__Osubtract__result6)
-
-axiom H15 : (money__Osubtract__result11 = money__Osubtract__result7)
-
-axiom H16 : (result2 = money__Osubtract__result8)
-
-axiom H17 : (result3 = money__Osubtract__result9)
-
  (* File "money.ads", line 17, characters 0-0 *)
-goal WP_parameter_def : (bool_eq4({ us_split_fields1 = {
-  rec__money__amount__currency = money__Osubtract__result8;
+goal WP_parameter_def :
+  (forall money__Osubtract__result:cur.
+  forall money__Osubtract__result1:raw_amount. forall o:int.
+  forall o1:raw_amount. forall o2:cur. forall o3:raw_amount. forall o4:cur.
+  forall o5:raw_amount. forall result:cur. forall result1:raw_amount.
+  forall money__Osubtract__result2:cur.
+  forall money__Osubtract__result3:raw_amount.
+  forall money__Osubtract__result4:cur.
+  forall money__Osubtract__result5:raw_amount.
+  forall money__Osubtract__result6:cur.
+  forall money__Osubtract__result7:raw_amount.
+  forall money__Osubtract__result8:cur.
+  forall money__Osubtract__result9:raw_amount.
+  forall money__Osubtract__result10:cur.
+  forall money__Osubtract__result11:raw_amount.
+  (forall result2:cur. forall result3:raw_amount.
+  ((((to_rep(a) = to_rep(b)) and (to_rep1(b1) <= to_rep1(a1))) and
+  ((((((money__Osubtract__result4 = money__Osubtract__result2) and
+  (money__Osubtract__result5 = money__Osubtract__result3)) and
+  ((money__Osubtract__result6 = money__Osubtract__result2) and
+  (money__Osubtract__result7 = money__Osubtract__result3))) and
+  ((((((o = (to_rep1(a1) - to_rep1(b1))) and
+  in_range2((to_rep1(a1) - to_rep1(b1)))) and (to_rep1(o1) = o)) and
+  ((a = o2) and (o1 = o3))) and ((o4 = o2) and (o5 = o3))) and
+  (((result = money__Osubtract__result) and
+  (result1 = money__Osubtract__result1)) and
+  ((o4 = money__Osubtract__result2) and
+  (o5 = money__Osubtract__result3))))) and
+  (((money__Osubtract__result8 = money__Osubtract__result4) and
+  (money__Osubtract__result9 = money__Osubtract__result5)) and
+  ((money__Osubtract__result10 = money__Osubtract__result6) and
+  (money__Osubtract__result11 = money__Osubtract__result7)))) and
+  ((result2 = money__Osubtract__result8) and
+  (result3 = money__Osubtract__result9)))) -> (bool_eq4({ us_split_fields1 =
+  { rec__money__amount__currency = money__Osubtract__result8;
   rec__money__amount__raw = money__Osubtract__result9 } }, {
   us_split_fields1 = { rec__money__amount__currency = a;
-  rec__money__amount__raw = of_rep1((to_rep1(a1) - to_rep1(b1))) } }) = true)
+  rec__money__amount__raw = of_rep1((to_rep1(a1) - to_rep1(b1))) }
+  }) = true))))

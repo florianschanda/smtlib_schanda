@@ -97,7 +97,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 (declare-const y us_rep1)
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
-(define-fun dynamic_invariant ((temp___expr_171 Int) (temp___is_init_168 Bool) (temp___skip_constant_169 Bool) (temp___do_toplevel_170 Bool)) Bool (=> (or (= temp___is_init_168 true) (<= 0 7)) (in_range temp___expr_171)))
+(define-fun dynamic_invariant ((temp___expr_200 Int) (temp___is_init_196 Bool) (temp___skip_constant_197 Bool) (temp___do_toplevel_198 Bool) (temp___do_typ_inv_199 Bool)) Bool (=> (or (= temp___is_init_196 true) (<= 0 7)) (in_range temp___expr_200)))
 (assert (= content_x (mk___rep (mk___split_fields (of_rep 1)))))
 (assert (= content_y (mk___rep (mk___split_fields (of_rep 5)))))
 (assert (= x (mk___rep1 (mk___split_fields1 content_x))))

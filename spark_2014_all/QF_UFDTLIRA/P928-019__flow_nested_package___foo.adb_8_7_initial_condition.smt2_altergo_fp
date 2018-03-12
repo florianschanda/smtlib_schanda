@@ -113,44 +113,12 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic v : int
-
-logic w : int
-
-logic result : int
-
-logic v1 : int
-
-logic result1 : int
-
-logic w1 : int
-
-logic result2 : int
-
-logic v2 : int
-
-logic result3 : bool
-
-axiom H : in_range(secret)
-
-axiom H1 : (result = v)
-
-axiom H2 : (v1 = secret)
-
-axiom H3 : in_range(v1)
-
-axiom H4 : (result1 = w)
-
-axiom H5 : (w1 = secret)
-
-axiom H6 : in_range(w1)
-
-axiom H7 : (result2 = v1)
-
-axiom H8 : (v2 = 0)
-
-axiom H9 : (((v2 = 0) -> (result3 = true)) and ((not (v2 = 0)) ->
-  (result3 = false)))
-
  (* File "foo.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (v2 = 0)
+goal WP_parameter_def :
+  (forall v:int. forall w:int. forall result:int. forall v1:int.
+  forall result1:int. forall w1:int. forall result2:int. forall v2:int.
+  (forall result3:bool. ((in_range(secret) and (((result = v) and
+  (v1 = secret)) and (in_range(v1) and (((result1 = w) and (w1 = secret)) and
+  (in_range(w1) and (((result2 = v1) and (v2 = 0)) and (((v2 = 0) and
+  (result3 = true)) or ((not (v2 = 0)) and (result3 = false))))))))) ->
+  (v2 = 0))))

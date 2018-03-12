@@ -281,20 +281,11 @@ logic res : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-axiom H : in_range(val__)
-
-axiom H1 : in_range1(scale_num)
-
-axiom H2 : in_range2(scale_denom)
-
-axiom H3 : in_range(res)
-
-axiom H4 : ((scale_num <= scale_denom) and
-  (res = comp_div((val__ * scale_num),scale_denom)))
-
-axiom H5 : ((0 <= res) -> (abs_int(res) <= abs_int(val__)))
-
-axiom H6 : ((not (0 <= res)) -> (abs_int(res) <= abs_int(val__)))
-
  (* File "spark-arithmetic_lemmas.ads", line 87, characters 0-0 *)
-goal WP_parameter_def : (abs_int(res) <= abs_int(val__))
+goal WP_parameter_def : ((in_range(val__) and (in_range1(scale_num) and
+  (in_range2(scale_denom) and (in_range(res) and
+  (((scale_num <= scale_denom) and
+  (res = comp_div((val__ * scale_num),scale_denom))) and (((0 <= res) and
+  (abs_int(res) <= abs_int(val__))) or ((not (0 <= res)) and
+  (abs_int(res) <= abs_int(val__))))))))) ->
+  (abs_int(res) <= abs_int(val__)))

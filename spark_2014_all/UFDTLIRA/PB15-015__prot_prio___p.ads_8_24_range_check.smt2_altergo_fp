@@ -134,7 +134,5 @@ function poT__ref___projection(a: poT__ref) : poT = (a).poT__content
 
 logic self__ : poT
 
-logic x : int
-
  (* File "p.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : (0 <= x)
+goal WP_parameter_def : (forall x:int. (0 <= x))

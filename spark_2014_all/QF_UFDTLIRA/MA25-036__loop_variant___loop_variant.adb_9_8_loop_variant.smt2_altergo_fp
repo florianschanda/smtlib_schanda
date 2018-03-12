@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -189,95 +189,23 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic result__ : int
-
-logic i : int
-
-logic r : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic i1 : int
-
-logic result1 : int
-
-logic r1 : int
-
-logic i2 : int
-
-logic r2 : int
-
-logic temp___147 : int
-
-logic temp___146 : int
-
-logic result2 : int
-
-logic temp___1471 : int
-
-logic result3 : int
-
-logic temp___1461 : int
-
-logic result4 : int
-
-logic r3 : int
-
-logic result5 : int
-
-logic i3 : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range1(result__))
-
-axiom H1 : (result = i)
-
-axiom H2 : (i1 = 1)
-
-axiom H3 : in_range3(i1)
-
-axiom H4 : (result1 = r)
-
-axiom H5 : (r1 = 100)
-
-axiom H6 : in_range2(r1)
-
-axiom H7 : (i1 <  10)
-
-axiom H8 : (10 <  r1)
-
-axiom H9 : ((((1 <= 10) -> in_range3(i2)) and ((1 <= 100) ->
-  in_range2(r2))) and ((i2 <  10) and (10 <  r2)))
-
-axiom H10 : (result2 = temp___147)
-
-axiom H11 : (temp___1471 = i2)
-
-axiom H12 : (result3 = temp___146)
-
-axiom H13 : (temp___1461 = r2)
-
-axiom H14 : ((o = (r2 - i2)) and in_range2((r2 - i2)))
-
-axiom H15 : (result4 = r2)
-
-axiom H16 : (r3 = o)
-
-axiom H17 : ((i2 <  5) -> ((o1 = (i2 + 1)) and in_range3((i2 + 1))))
-
-axiom H18 : ((i2 <  5) -> (result5 = i2))
-
-axiom H19 : ((i2 <  5) -> (i3 = o1))
-
-axiom H20 : ((not (i2 <  5)) -> (i3 = i2))
-
-axiom H21 : (i3 <  10)
-
-axiom H22 : (10 <  r3)
-
  (* File "loop_variant.adb", line 2, characters 0-0 *)
-goal WP_parameter_def : ((temp___1471 <  i3) or ((i3 = temp___1471) and
-  (r3 <  temp___1461)))
+goal WP_parameter_def :
+  (forall result__:int. forall i:int. forall r:int. forall o:int.
+  forall o1:int. forall result:int. forall i1:int. forall result1:int.
+  forall r1:int. forall i2:int. forall r2:int. forall temp___171:int.
+  forall temp___170:int. forall result2:int. forall temp___1711:int.
+  forall result3:int. forall temp___1701:int. forall result4:int.
+  forall r3:int. forall result5:int. forall i3:int.
+  ((((- 2147483648) <= 2147483647) -> in_range1(result__)) ->
+  (((result = i) and (i1 = 1)) -> (in_range3(i1) -> (((result1 = r) and
+  (r1 = 100)) -> (in_range2(r1) -> (((i1 <  10) and (10 <  r1)) ->
+  (((((1 <= 10) -> in_range3(i2)) and ((1 <= 100) -> in_range2(r2))) and
+  ((i2 <  10) and (10 <  r2))) -> (((result2 = temp___171) and
+  (temp___1711 = i2)) -> (((result3 = temp___170) and (temp___1701 = r2)) ->
+  ((((o = (r2 - i2)) and in_range2((r2 - i2))) and ((result4 = r2) and
+  (r3 = o))) -> ((((i2 <  5) and (((o1 = (i2 + 1)) and
+  in_range3((i2 + 1))) and ((result5 = i2) and (i3 = o1)))) or
+  ((not (i2 <  5)) and (i3 = i2))) -> (((i3 <  10) and (10 <  r3)) ->
+  ((temp___1711 <  i3) or ((i3 = temp___1711) and
+  (r3 <  temp___1701))))))))))))))))

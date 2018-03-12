@@ -594,7 +594,15 @@ axiom bv_max_to_uint :
 
 type t1
 
-predicate in_range(x: t) = (ule(of_int(0), x) and ule(x, of_int(15)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 15)
+
+predicate in_range(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 15))
 
@@ -655,59 +663,24 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic y : t
+logic rliteral2 : t
 
-logic p__f__result : int
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 2)
 
-logic result : t
+logic rliteral3 : t
 
-logic y1 : t
-
-logic result1 : int
-
-logic p__f__result1 : int
-
-logic p__f__result2 : int
-
-logic p__f__result3 : int
-
-logic y2 : t
-
-logic p__f__result4 : int
-
-logic y3 : t
-
-logic p__f__result5 : int
-
-logic result2 : int
-
-axiom H : in_range(x)
-
-axiom H1 : (x = of_int(15))
-
-axiom H2 : (result = y)
-
-axiom H3 : (y1 = urem(add(x, of_int(2)), of_int(16)))
-
-axiom H4 : in_range(y1)
-
-axiom H5 : (p__f__result1 = p__f__result2)
-
-axiom H6 : (p__f__result3 = p__f__result1)
-
-axiom H7 : (result1 = p__f__result)
-
-axiom H8 : (p__f__result1 = tqtint(y1))
-
-axiom H9 : (p__f__result4 = p__f__result2)
-
-axiom H10 : (y2 = y1)
-
-axiom H11 : (p__f__result5 = p__f__result3)
-
-axiom H12 : (y3 = y1)
-
-axiom H13 : (result2 = p__f__result4)
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 16)
 
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (p__f__result4 = 17)
+goal WP_parameter_def :
+  (forall y:t. forall p__f__result:int. forall result:t. forall y1:t.
+  forall result1:int. forall p__f__result1:int. forall p__f__result2:int.
+  forall p__f__result3:int. forall y2:t. forall p__f__result4:int.
+  forall y3:t. forall p__f__result5:int.
+  (forall result2:int. ((in_range(x) and ((x = rliteral1) and
+  (((((result = y) and (y1 = urem(add(x, rliteral2), rliteral3))) and
+  (in_range(y1) and (((p__f__result1 = p__f__result2) and
+  (p__f__result3 = p__f__result1)) and ((result1 = p__f__result) and
+  (p__f__result1 = tqtint(y1)))))) and (((p__f__result4 = p__f__result2) and
+  (y2 = y1)) and ((p__f__result5 = p__f__result3) and (y3 = y1)))) and
+  (result2 = p__f__result4)))) -> (p__f__result4 = 17))))

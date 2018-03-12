@@ -1025,23 +1025,13 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic msb : t
+logic rliteral1 : t
 
-logic lsb : t
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 0)
 
-logic o : t1
+logic rliteral2 : t1
 
-logic o1 : t1
-
-logic result : t
-
-logic msb1 : t
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : true
+axiom rliteral_axiom2 : (tqtint1(rliteral2) = 255)
 
  (* File "network-helpers0.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : ule1(toBig(of_int(0)), bw_and1(value, of_int1(255)))
+goal WP_parameter_def : ule1(toBig(rliteral1), bw_and1(value, rliteral2))

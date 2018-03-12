@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -214,24 +214,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -242,17 +224,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -262,37 +244,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 logic to_rep1 : integer -> int
 
@@ -388,6 +342,58 @@ type string__ref = { string__content : us_t
 
 function string__ref___projection(a: string__ref) : us_t =
   (a).string__content
+
+logic concat : (int,character) farray, int, int, (int,character) farray, int,
+  int -> (int,character) farray
+
+axiom concat_def :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic concat_singleton_left : character, int, (int,character) farray, int,
+  int -> (int,character) farray
+
+axiom concat_singleton_left_def :
+  (forall a:character.
+  (forall b:(int,character) farray.
+  (forall a_first:int. forall b_first:int. forall b_last:int
+  [concat_singleton_left(a, a_first, b, b_first, b_last)].
+  (((concat_singleton_left(a, a_first, b, b_first, b_last)[a_first]) = a) and
+  (forall i:int [(concat_singleton_left(a, a_first, b, b_first, b_last)[i])].
+  ((a_first <  i) -> ((concat_singleton_left(a, a_first, b, b_first,
+  b_last)[i]) = (b[((i - a_first) + (b_first - 1))]))))))))
+
+logic concat_singleton_right : (int,character) farray, int, int,
+  character -> (int,character) farray
+
+axiom concat_singleton_right_def :
+  (forall a:(int,character) farray.
+  (forall b:character.
+  (forall a_first:int. forall a_last:int [concat_singleton_right(a, a_first,
+  a_last, b)]. (((concat_singleton_right(a, a_first, a_last,
+  b)[(a_last + 1)]) = b) and
+  (forall i:int [(concat_singleton_right(a, a_first, a_last, b)[i])| (a[i])].
+  (((a_first <= i) and (i <= a_last)) -> ((concat_singleton_right(a, a_first,
+  a_last, b)[i]) = (a[i]))))))))
+
+logic concat_singletons : character, int, character -> (int,character) farray
+
+axiom concat_singletons_def :
+  (forall a:character. forall b:character.
+  (forall a_first:int [concat_singletons(a, a_first, b)].
+  (((concat_singletons(a, a_first, b)[a_first]) = a) and
+  ((concat_singletons(a, a_first, b)[(a_first + 1)]) = b))))
+
+logic singleton : character, int -> (int,character) farray
+
+axiom singleton_def :
+  (forall v:character.
+  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
 
 type year_type
 
@@ -1275,54 +1281,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,us_rep3) farray, int, int, (int,us_rep3) farray, int,
-  int -> (int,us_rep3) farray
-
-axiom concat_def1 :
-  (forall a:(int,us_rep3) farray. forall b:(int,us_rep3) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : us_rep3, int -> (int,us_rep3) farray
-
-axiom singleton_def1 :
-  (forall v:(int,character) farray. forall v1:description_count_type.
-  forall v2:day_type. forall v3:month_type. forall v4:year_type.
-  forall v5:hour_type. forall v6:minute_type. forall v7:second_type.
-  forall v8:bool.
-  (forall i:int [(singleton1({ us_split_fields7 = {
-  rec__datebook__event_record__description_text = v;
-  rec__datebook__event_record__description_size = v1;
-  rec__datebook__event_record__date = { us_split_fields5 = {
-  rec__dates__datetime__date_part = { us_split_fields1 = {
-  rec__dates__date__day = v2; rec__dates__date__month = v3;
-  rec__dates__date__year = v4 } }; rec__dates__datetime__time_part = {
-  us_split_fields3 = { rec__dates__time__hour = v5;
-  rec__dates__time__minute = v6; rec__dates__time__second = v7 } } } };
-  rec__datebook__event_record__is_used = v8 } }, i)[i])]. ((singleton1({
-  us_split_fields7 = { rec__datebook__event_record__description_text = v;
-  rec__datebook__event_record__description_size = v1;
-  rec__datebook__event_record__date = { us_split_fields5 = {
-  rec__dates__datetime__date_part = { us_split_fields1 = {
-  rec__dates__date__day = v2; rec__dates__date__month = v3;
-  rec__dates__date__year = v4 } }; rec__dates__datetime__time_part = {
-  us_split_fields3 = { rec__dates__time__hour = v5;
-  rec__dates__time__minute = v6; rec__dates__time__second = v7 } } } };
-  rec__datebook__event_record__is_used = v8 } }, i)[i]) = {
-  us_split_fields7 = { rec__datebook__event_record__description_text = v;
-  rec__datebook__event_record__description_size = v1;
-  rec__datebook__event_record__date = { us_split_fields5 = {
-  rec__dates__datetime__date_part = { us_split_fields1 = {
-  rec__dates__date__day = v2; rec__dates__date__month = v3;
-  rec__dates__date__year = v4 } }; rec__dates__datetime__time_part = {
-  us_split_fields3 = { rec__dates__time__hour = v5;
-  rec__dates__time__minute = v6; rec__dates__time__second = v7 } } } };
-  rec__datebook__event_record__is_used = v8 } })))
-
 logic bool_eq19 : (int,us_rep3) farray, int, int, (int,us_rep3) farray, int,
   int -> bool
 
@@ -1333,17 +1291,17 @@ axiom bool_eq_def17 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and (bool_eq18((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and (bool_eq18((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq19(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq18((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq19(a,
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq18((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq19(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -1353,9 +1311,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq18((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq18((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -1542,297 +1500,92 @@ type t9b__ref = { t9b__content : us_t1
 
 function t9b__ref___projection(a: t9b__ref) : us_t1 = (a).t9b__content
 
-logic temp___354 : int, int, int -> us_t1
+logic temp___397 : int, int, int -> us_t1
 
 axiom def_axiom :
-  (forall temp___356:int. forall temp___357:int. forall temp___358:int.
-  ((dynamic_property(1, 2147483647, temp___357, temp___358) ->
-  ((to_rep1(first2((temp___354(temp___356, temp___357,
-  temp___358)).rt1)) = temp___357) and (to_rep1(last2((temp___354(temp___356,
-  temp___357, temp___358)).rt1)) = temp___358))) and
-  (forall temp___359:int. (((temp___354(temp___356, temp___357,
-  temp___358)).elts1[temp___359]) = of_rep(temp___356)))))
-
-logic status : int
-
-logic event_array : (int,us_rep3) farray
-
-logic found : bool
-
-logic available : int
-
-logic index : int
-
-logic temp___351 : int
-
-logic temp___350 : bool
-
-logic o : int
-
-logic o1 : int
-
-logic temp___361 : (int,character) farray
-
-logic temp___3611 : t1
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic temp___362 : (int,character) farray
-
-logic temp___3621 : t
-
-logic o8 : (int,character) farray
-
-logic o9 : (int,character) farray
-
-logic o10 : description_count_type
-
-logic o11 : day_type
-
-logic o12 : month_type
-
-logic o13 : year_type
-
-logic o14 : hour_type
-
-logic o15 : minute_type
-
-logic o16 : second_type
-
-logic o17 : bool
-
-logic o18 : (int,character) farray
-
-logic o19 : description_count_type
-
-logic o20 : day_type
-
-logic o21 : month_type
-
-logic o22 : year_type
-
-logic o23 : hour_type
-
-logic o24 : minute_type
-
-logic o25 : second_type
-
-logic o26 : bool
-
-logic o27 : (int,us_rep3) farray
-
-logic o28 : int
-
-logic result : int
-
-logic available1 : int
-
-logic result1 : bool
-
-logic found1 : bool
-
-logic result2 : int
-
-logic index1 : int
-
-logic found2 : bool
-
-logic available2 : int
-
-logic index2 : int
-
-logic result3 : int
-
-logic available3 : int
-
-logic result4 : bool
-
-logic found3 : bool
-
-logic found4 : bool
-
-logic available4 : int
-
-logic found5 : bool
-
-logic available5 : int
-
-logic found6 : bool
-
-logic available6 : int
-
-logic index3 : int
-
-logic found7 : bool
-
-logic available7 : int
-
-logic index4 : int
-
-logic found8 : bool
-
-logic available8 : int
-
-logic index5 : int
-
-logic found9 : bool
-
-logic available9 : int
-
-logic index6 : int
-
-logic result5 : (int,us_rep3) farray
-
-logic event_array1 : (int,us_rep3) farray
-
-axiom H : dynamic_property(1, 2147483647, to_rep1(first(description1)),
-  to_rep1(last(description1)))
-
-axiom H1 : ((0 <= 3) -> in_range10(status))
-
-axiom H2 : (result = available)
-
-axiom H3 : (available1 = 1)
-
-axiom H4 : in_range13(available1)
-
-axiom H5 : (not (128 <  length({ elts = description; rt = description1 })))
-
-axiom H6 : (result1 = found)
-
-axiom H7 : (found1 = of_int(0))
-
-axiom H8 : (result2 = index)
-
-axiom H9 : (index1 = 1)
-
-axiom H10 : (((1 <= index1) and (index1 <= 64)) -> (temp___351 = available1))
-
-axiom H11 : (((1 <= index1) and (index1 <= 64)) -> (temp___350 = found1))
-
-axiom H12 : (((1 <= index1) and (index1 <= 64)) -> (((1 <= 64) ->
-  in_range13(available2)) and ((1 <= index2) and (index2 <= 64))))
-
-axiom H13 : (((1 <= index1) and (index1 <= 64)) ->
-  (((((available4 = available3) and (found4 = found3)) and
+  (forall temp___399:int. forall temp___400:int. forall temp___401:int.
+  (in_range3(temp___399) -> ((dynamic_property(1, 2147483647, temp___400,
+  temp___401) -> ((to_rep1(first2((temp___397(temp___399, temp___400,
+  temp___401)).rt1)) = temp___400) and (to_rep1(last2((temp___397(temp___399,
+  temp___400, temp___401)).rt1)) = temp___401))) and
+  (forall temp___402:int. (to_rep(((temp___397(temp___399, temp___400,
+  temp___401)).elts1[temp___402])) = temp___399)))))
+
+ (* File "datebook.adb", line 87, characters 0-0 *)
+goal WP_parameter_def :
+  (forall status:int. forall event_array:(int,us_rep3) farray.
+  forall found:bool. forall available:int. forall index:int.
+  forall temp___394:int. forall temp___393:bool.
+  forall temp___404:(int,character) farray. forall temp___4041:t1.
+  forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
+  forall o5:int. forall temp___405:(int,character) farray.
+  forall temp___4051:t. forall result:int. forall available1:int.
+  forall result1:bool. forall found1:bool. forall result2:int.
+  forall index1:int. forall found2:bool. forall available2:int.
+  forall index2:int. forall result3:int. forall available3:int.
+  forall result4:bool. forall found3:bool. forall found4:bool.
+  forall available4:int. forall found5:bool. forall available5:int.
+  forall found6:bool. forall available6:int. forall index3:int.
+  forall found7:bool. forall available7:int. forall index4:int.
+  forall found8:bool. forall available8:int. forall index5:int.
+  forall found9:bool. forall available9:int. forall index6:int.
+  (dynamic_property(1, 2147483647, to_rep1(first(description1)),
+  to_rep1(last(description1))) -> (((0 <= 3) -> in_range10(status)) ->
+  (((result = available) and (available1 = 1)) -> (in_range13(available1) ->
+  ((not (128 <  length({ elts = description; rt = description1 }))) ->
+  (((result1 = found) and (found1 = of_int(0))) -> ((((result2 = index) and
+  (index1 = 1)) and ((((1 <= index1) and (index1 <= 64)) and
+  ((((temp___394 = available1) and ((temp___393 = found1) and ((((1 <= 64) ->
+  in_range13(available2)) and ((1 <= index2) and (index2 <= 64))) and
+  (((((available3 = available4) and (found3 = found4)) and
   ((available5 = available3) and (found5 = found3))) and
   ((not ((((event_array[index2])).us_split_fields7).rec__datebook__event_record__is_used = true)) and
   (((result3 = available2) and (available3 = index2)) and
   ((result4 = found2) and (found3 = of_int(1)))))) or
   ((((((event_array[index2])).us_split_fields7).rec__datebook__event_record__is_used = true) and
   ((available3 = available2) and (found3 = found2))) and
-  ((((available4 = available3) and (found4 = found3)) and
-  ((available5 = available3) and (found5 = found3))) and (index2 = 64)))))
-
-axiom H14 : (((1 <= index1) and (index1 <= 64)) -> (index3 = index2))
-
-axiom H15 : (((1 <= index1) and (index1 <= 64)) -> (available6 = available4))
-
-axiom H16 : (((1 <= index1) and (index1 <= 64)) -> (found6 = found4))
-
-axiom H17 : (((1 <= index1) and (index1 <= 64)) -> (index4 = index2))
-
-axiom H18 : (((1 <= index1) and (index1 <= 64)) -> (available7 = available5))
-
-axiom H19 : (((1 <= index1) and (index1 <= 64)) -> (found7 = found5))
-
-axiom H20 : (((1 <= index1) and (index1 <= 64)) -> (index5 = index3))
-
-axiom H21 : (((1 <= index1) and (index1 <= 64)) -> (available8 = available6))
-
-axiom H22 : (((1 <= index1) and (index1 <= 64)) -> (found8 = found6))
-
-axiom H23 : (((1 <= index1) and (index1 <= 64)) -> (index6 = index4))
-
-axiom H24 : (((1 <= index1) and (index1 <= 64)) -> (available9 = available7))
-
-axiom H25 : (((1 <= index1) and (index1 <= 64)) -> (found9 = found7))
-
-axiom H26 : ((not ((1 <= index1) and (index1 <= 64))) -> (index5 = index1))
-
-axiom H27 : ((not ((1 <= index1) and (index1 <= 64))) ->
-  (available8 = available1))
-
-axiom H28 : ((not ((1 <= index1) and (index1 <= 64))) -> (found8 = found1))
-
-axiom H29 : ((not ((1 <= index1) and (index1 <= 64))) -> (index6 = index1))
-
-axiom H30 : ((not ((1 <= index1) and (index1 <= 64))) ->
-  (available9 = available1))
-
-axiom H31 : ((not ((1 <= index1) and (index1 <= 64))) -> (found9 = found1))
-
-axiom H32 : (found8 = true)
-
-axiom H33 : (to_rep1(first2((temp___354(32, 1, (128 - length({ elts =
-  description; rt = description1 })))).rt1)) = 1)
-
-axiom H34 : (to_rep1(last2((temp___354(32, 1, (128 - length({ elts =
-  description; rt = description1 })))).rt1)) = (128 - length({ elts =
-  description; rt = description1 })))
-
-axiom H35 : ({ elts1 = temp___361; rt1 = temp___3611 } = temp___354(32, 1,
-  (128 - length({ elts = description; rt = description1 }))))
-
-axiom H36 : ((length({ elts = description; rt = description1 }) = 0) ->
-  (temp___361 = temp___362))
-
-axiom H37 : ((length({ elts = description; rt = description1 }) = 0) ->
-  (mk(to_rep1(first2(temp___3611)),
-  to_rep1(last2(temp___3611))) = temp___3621))
-
-axiom H38 : ((not (length({ elts = description; rt = description1 }) = 0)) ->
-  ((to_rep1(first2(temp___3611)) <= to_rep1(last2(temp___3611))) ->
-  (o2 = ((to_rep1(last2(temp___3611)) - to_rep1(first2(temp___3611))) + 1))))
-
-axiom H39 : ((not (length({ elts = description; rt = description1 }) = 0)) ->
-  ((not (to_rep1(first2(temp___3611)) <= to_rep1(last2(temp___3611)))) ->
-  (o2 = 0)))
-
-axiom H40 : ((not (length({ elts = description; rt = description1 }) = 0)) ->
-  ((to_rep1(first(description1)) <= to_rep1(last(description1))) ->
-  (o3 = ((to_rep1(last(description1)) - to_rep1(first(description1))) + 1))))
-
-axiom H41 : ((not (length({ elts = description; rt = description1 }) = 0)) ->
-  ((not (to_rep1(first(description1)) <= to_rep1(last(description1)))) ->
-  (o3 = 0)))
-
-axiom H42 : ((not (length({ elts = description; rt = description1 }) = 0)) ->
-  (o4 = (o3 + o2)))
-
-axiom H43 : ((not (length({ elts = description; rt = description1 }) = 0)) ->
-  (o5 = (to_rep1(first(description1)) + o4)))
-
-axiom H44 : ((not (length({ elts = description; rt = description1 }) = 0)) ->
-  (o6 = (o5 - 1)))
-
-axiom H45 : ((not (length({ elts = description; rt = description1 }) = 0)) ->
-  ((o7 = o6) and in_range2(o6)))
-
-axiom H46 : ((not (length({ elts = description; rt = description1 }) = 0)) ->
-  (concat(description, to_rep1(first(description1)),
-  to_rep1(last(description1)), temp___361, to_rep1(first2(temp___3611)),
-  to_rep1(last2(temp___3611))) = temp___362))
-
-axiom H47 : ((not (length({ elts = description; rt = description1 }) = 0)) ->
-  (mk(to_rep1(first(description1)), o7) = temp___3621))
-
- (* File "datebook.adb", line 38, characters 0-0 *)
-goal WP_parameter_def :
-  (((to_rep1(first(temp___3621)) <= to_rep1(last(temp___3621))) ->
+  ((((available3 = available4) and (found3 = found4)) and
+  ((available5 = available3) and (found5 = found3))) and
+  (index2 = 64))))))) and (((index2 = index3) and (({ int__content =
+  available6 } = { int__content = available4 }) and ({ bool__content = found6
+  } = { bool__content = found4 }))) and ((index4 = index2) and
+  ((available7 = available5) and (found7 = found5))))) and ((({
+  int__content = index5 } = { int__content = index3 }) and (({ int__content =
+  available8 } = { int__content = available6 }) and ({ bool__content = found8
+  } = { bool__content = found6 }))) and ((index6 = index4) and
+  ((available9 = available7) and (found9 = found7)))))) or
+  ((not ((1 <= index1) and (index1 <= 64))) and (((index1 = index5) and
+  ((available1 = available8) and (found1 = found8))) and
+  ((index6 = index1) and ((available9 = available1) and
+  (found9 = found1))))))) -> ((found8 = true) ->
+  ((((to_rep1(first2((temp___397(32, 1, (128 - length({ elts = description;
+  rt = description1 })))).rt1)) = 1) and ((to_rep1(last2((temp___397(32, 1,
+  (128 - length({ elts = description; rt = description1
+  })))).rt1)) = (128 - length({ elts = description; rt = description1
+  }))) and ({ elts1 = temp___404; rt1 = temp___4041 } = temp___397(32, 1,
+  (128 - length({ elts = description; rt = description1 })))))) and
+  (((length({ elts = description; rt = description1 }) = 0) and
+  ((temp___404 = temp___405) and (mk(to_rep1(first2(temp___4041)),
+  to_rep1(last2(temp___4041))) = temp___4051))) or ((not (length({ elts =
+  description; rt = description1 }) = 0)) and
+  ((((((((to_rep1(first2(temp___4041)) <= to_rep1(last2(temp___4041))) and
+  (o = ((to_rep1(last2(temp___4041)) - to_rep1(first2(temp___4041))) + 1))) or
+  ((not (to_rep1(first2(temp___4041)) <= to_rep1(last2(temp___4041)))) and
+  (o = 0))) and
+  ((((to_rep1(first(description1)) <= to_rep1(last(description1))) and
+  (o1 = ((to_rep1(last(description1)) - to_rep1(first(description1))) + 1))) or
+  ((not (to_rep1(first(description1)) <= to_rep1(last(description1)))) and
+  (o1 = 0))) and (o2 = (o1 + o)))) and
+  (o3 = (to_rep1(first(description1)) + o2))) and (o4 = (o3 - 1))) and
+  ((o5 = o4) and in_range2(o4))) and ((concat(description,
+  to_rep1(first(description1)), to_rep1(last(description1)), temp___404,
+  to_rep1(first2(temp___4041)),
+  to_rep1(last2(temp___4041))) = temp___405) and
+  (mk(to_rep1(first(description1)), o5) = temp___4051)))))) ->
+  (((to_rep1(first(temp___4051)) <= to_rep1(last(temp___4051))) ->
   (((1 <= 128) ->
-  (((to_rep1(last(temp___3621)) - to_rep1(first(temp___3621))) + 1) = ((128 - 1) + 1))) and
+  (((to_rep1(last(temp___4051)) - to_rep1(first(temp___4051))) + 1) = ((128 - 1) + 1))) and
   ((not (1 <= 128)) ->
-  (((to_rep1(last(temp___3621)) - to_rep1(first(temp___3621))) + 1) = 0)))) and
-  ((not (to_rep1(first(temp___3621)) <= to_rep1(last(temp___3621)))) ->
-  ((1 <= 128) -> (0 = ((128 - 1) + 1)))))
+  (((to_rep1(last(temp___4051)) - to_rep1(first(temp___4051))) + 1) = 0)))) and
+  ((not (to_rep1(first(temp___4051)) <= to_rep1(last(temp___4051)))) ->
+  ((1 <= 128) -> (0 = ((128 - 1) + 1)))))))))))))))

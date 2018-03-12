@@ -231,205 +231,39 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic tmp1 : int
-
-logic tmp2 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : int
-
-logic o13 : int
-
-logic o14 : int
-
-logic o15 : int
-
-logic o16 : int
-
-logic o17 : int
-
-logic o18 : int
-
-logic o19 : int
-
-logic o20 : int
-
-logic o21 : int
-
-logic o22 : int
-
-logic o23 : int
-
-logic o24 : int
-
-logic o25 : int
-
-logic o26 : int
-
-logic o27 : int
-
-logic o28 : int
-
-logic o29 : int
-
-logic o30 : int
-
-logic o31 : int
-
-logic result : int
-
-logic tmp11 : int
-
-logic result1 : int
-
-logic tmp21 : int
-
-logic result2 : int
-
-logic tmp12 : int
-
-logic result3 : int
-
-logic tmp22 : int
-
-logic result4 : int
-
-logic tmp13 : int
-
-logic result5 : int
-
-logic tmp23 : int
-
-logic result6 : int
-
-logic tmp14 : int
-
-logic result7 : int
-
-logic tmp24 : int
-
-logic result8 : int
-
-logic tmp15 : int
-
-axiom H : in_range(x)
-
-axiom H1 : in_range(y)
-
-axiom H2 : in_range(z)
-
-axiom H3 : (((- 2147483648) <= 2147483647) -> in_range(tmp1))
-
-axiom H4 : (((- 2147483648) <= 2147483647) -> in_range(tmp2))
-
-axiom H5 : ((o = (x + y)) and in_range((x + y)))
-
-axiom H6 : (o1 = (o + z))
-
-axiom H7 : ((o2 = o1) and in_range(o1))
-
-axiom H8 : (result = tmp1)
-
-axiom H9 : (tmp11 = o2)
-
-axiom H10 : ((o3 = (x + y)) and in_range((x + y)))
-
-axiom H11 : (o4 = (o3 - z))
-
-axiom H12 : ((o5 = o4) and in_range(o4))
-
-axiom H13 : (result1 = tmp2)
-
-axiom H14 : (tmp21 = o5)
-
-axiom H15 : ((o6 = (x + y)) and in_range((x + y)))
-
-axiom H16 : (o7 = (o6 + z))
-
-axiom H17 : ((o8 = o7) and in_range(o7))
-
-axiom H18 : (result2 = tmp11)
-
-axiom H19 : (tmp12 = o8)
-
-axiom H20 : ((o9 = (y - z)) and in_range((y - z)))
-
-axiom H21 : (o10 = (x + o9))
-
-axiom H22 : ((o11 = o10) and in_range(o10))
-
-axiom H23 : (result3 = tmp21)
-
-axiom H24 : (tmp22 = o11)
-
-axiom H25 : ((o12 = (x * y)) and in_range((x * y)))
-
-axiom H26 : (o13 = mod(o12, z))
-
-axiom H27 : (result4 = tmp12)
-
-axiom H28 : (tmp13 = o13)
-
-axiom H29 : ((o14 = comp_div(x,y)) and in_range(comp_div(x,y)))
-
-axiom H30 : (o15 = (o14 * z))
-
-axiom H31 : ((o16 = o15) and in_range(o15))
-
-axiom H32 : (result5 = tmp22)
-
-axiom H33 : (tmp23 = o16)
-
-axiom H34 : ((o17 = (x * y)) and in_range((x * y)))
-
-axiom H35 : (o18 = (o17 + z))
-
-axiom H36 : ((o19 = o18) and in_range(o18))
-
-axiom H37 : (result6 = tmp13)
-
-axiom H38 : (tmp14 = o19)
-
-axiom H39 : ((o20 = comp_div(x,y)) and in_range(comp_div(x,y)))
-
-axiom H40 : (o21 = (o20 - z))
-
-axiom H41 : ((o22 = o21) and in_range(o21))
-
-axiom H42 : (result7 = tmp23)
-
-axiom H43 : (tmp24 = o22)
-
-axiom H44 : ((o23 = (x - y)) and in_range((x - y)))
-
-axiom H45 : (o24 = (o23 - z))
-
-axiom H46 : ((o25 = o24) and in_range(o24))
-
-axiom H47 : (o26 = (x * o25))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(o26)
+goal WP_parameter_def :
+  (forall tmp1:int. forall tmp2:int. forall o:int. forall o1:int.
+  forall o2:int. forall o3:int. forall o4:int. forall o5:int. forall o6:int.
+  forall o7:int. forall o8:int. forall o9:int. forall o10:int.
+  forall o11:int. forall o12:int. forall o13:int. forall o14:int.
+  forall o15:int. forall o16:int. forall o17:int. forall o18:int.
+  forall o19:int. forall o20:int. forall o21:int. forall o22:int.
+  forall o23:int. forall o24:int. forall o25:int. forall o26:int.
+  forall result:int. forall tmp11:int. forall result1:int. forall tmp21:int.
+  forall result2:int. forall tmp12:int. forall result3:int. forall tmp22:int.
+  forall result4:int. forall tmp13:int. forall result5:int. forall tmp23:int.
+  forall result6:int. forall tmp14:int. forall result7:int. forall tmp24:int.
+  (in_range(x) -> (in_range(y) -> (in_range(z) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(tmp1)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(tmp2)) ->
+  ((((((o = (x + y)) and in_range((x + y))) and (o1 = (o + z))) and
+  ((o2 = o1) and in_range(o1))) and ((result = tmp1) and (tmp11 = o2))) ->
+  ((((((o3 = (x + y)) and in_range((x + y))) and (o4 = (o3 - z))) and
+  ((o5 = o4) and in_range(o4))) and ((result1 = tmp2) and (tmp21 = o5))) ->
+  ((((((o6 = (x + y)) and in_range((x + y))) and (o7 = (o6 + z))) and
+  ((o8 = o7) and in_range(o7))) and ((result2 = tmp11) and (tmp12 = o8))) ->
+  ((((((o9 = (y - z)) and in_range((y - z))) and (o10 = (x + o9))) and
+  ((o11 = o10) and in_range(o10))) and ((result3 = tmp21) and
+  (tmp22 = o11))) -> (((((o12 = (x * y)) and in_range((x * y))) and
+  (o13 = mod(o12, z))) and ((result4 = tmp12) and (tmp13 = o13))) ->
+  ((((((o14 = comp_div(x,y)) and in_range(comp_div(x,y))) and
+  (o15 = (o14 * z))) and ((o16 = o15) and in_range(o15))) and
+  ((result5 = tmp22) and (tmp23 = o16))) -> ((((((o17 = (x * y)) and
+  in_range((x * y))) and (o18 = (o17 + z))) and ((o19 = o18) and
+  in_range(o18))) and ((result6 = tmp13) and (tmp14 = o19))) ->
+  ((((((o20 = comp_div(x,y)) and in_range(comp_div(x,y))) and
+  (o21 = (o20 - z))) and ((o22 = o21) and in_range(o21))) and
+  ((result7 = tmp23) and (tmp24 = o22))) -> ((((((o23 = (x - y)) and
+  in_range((x - y))) and (o24 = (o23 - z))) and ((o25 = o24) and
+  in_range(o24))) and (o26 = (x * o25))) -> in_range(o26))))))))))))))))

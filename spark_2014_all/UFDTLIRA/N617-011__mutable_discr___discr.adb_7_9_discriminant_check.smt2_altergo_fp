@@ -339,41 +339,11 @@ type t3b__ref = { t3b__content : us_rep
 
 function t3b__ref___projection(a: t3b__ref) : us_rep = (a).t3b__content
 
-logic o : natural
-
-logic o1 : natural
-
-logic discr__r1__d__assume : natural
-
-logic o2 : natural
-
-logic o3 : natural
-
-logic temp___260 : natural
-
-logic temp___262 : natural
-
-logic o4 : natural
-
-logic o5 : natural
-
-logic temp___263 : natural
-
-axiom H : in_range(c)
-
-axiom H1 : (to_rep(o) = c)
-
-axiom H2 : (o = o1)
-
-axiom H3 : (discr__r1__d__assume = o1)
-
-axiom H4 : (d__split_discrs = discr__r1__d__assume)
-
-axiom H5 : (to_rep(o2) = c)
-
-axiom H6 : (o2 = o3)
-
-axiom H7 : (temp___260 = o3)
-
  (* File "discr.adb", line 130, characters 0-0 *)
-goal WP_parameter_def : (temp___260 = d__split_discrs)
+goal WP_parameter_def :
+  (forall o:natural. forall o1:natural. forall discr__r1__d__assume:natural.
+  forall o2:natural. forall o3:natural. forall temp___298:natural.
+  (in_range(c) -> (((((to_rep(o) = c) and (o = o1)) and
+  (discr__r1__d__assume = o1)) and
+  (d__split_discrs = discr__r1__d__assume)) -> ((((to_rep(o2) = c) and
+  (o2 = o3)) and (temp___298 = o3)) -> (temp___298 = d__split_discrs)))))

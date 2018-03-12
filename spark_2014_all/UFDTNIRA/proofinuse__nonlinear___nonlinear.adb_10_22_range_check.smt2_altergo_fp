@@ -255,35 +255,9 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic res : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic result : int
-
-logic res1 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : in_range1(y)
-
-axiom H2 : in_range1(z)
-
-axiom H3 : ((0 <= 2147483647) -> in_range1(res))
-
-axiom H4 : (x <= y)
-
-axiom H5 : (y <  z)
-
-axiom H6 : (y <  32768)
-
-axiom H7 : ((o = (x * y)) and in_range((x * y)))
-
-axiom H8 : (o1 = comp_div(o,z))
-
  (* File "nonlinear.ads", line 23, characters 0-0 *)
-goal WP_parameter_def : in_range1(o1)
+goal WP_parameter_def :
+  (forall res:int. forall o:int. forall o1:int. (in_range1(x) ->
+  (in_range1(y) -> (in_range1(z) -> (((0 <= 2147483647) -> in_range1(res)) ->
+  ((x <= y) -> ((y <  z) -> ((y <  32768) -> ((((o = (x * y)) and
+  in_range((x * y))) and (o1 = comp_div(o,z))) -> in_range1(o1))))))))))

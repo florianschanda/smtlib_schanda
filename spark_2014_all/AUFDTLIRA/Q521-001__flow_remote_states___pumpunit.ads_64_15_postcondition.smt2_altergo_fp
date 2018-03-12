@@ -186,24 +186,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -214,17 +196,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -234,37 +216,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 logic to_rep1 : integer -> int
 
@@ -765,123 +719,41 @@ axiom is_pumping__def_axiom :
   (forall pumpunit__cur_state:int [is_pumping(pumpunit__cur_state)].
   ((is_pumping(pumpunit__cur_state) = true) <-> (pumpunit__cur_state = 0)))
 
-logic cur_state : int
-
-logic cur_pump__split_fields : (int,character) farray
-
-logic cur_pump__split_fields1 : nat_type
-
-logic cur_pump__split_fields2 : nat_type
-
-logic cur_pump__split_fields3 : nat_type
-
-logic outstanding : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : nat_type
-
-logic o6 : (int,character) farray
-
-logic o7 : nat_type
-
-logic o8 : nat_type
-
-logic o9 : nat_type
-
-logic temp___569 : (int,character) farray
-
-logic temp___5691 : nat_type
-
-logic temp___5692 : nat_type
-
-logic temp___5693 : nat_type
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : int
-
-logic cur_state1 : int
-
-logic cur_pump__split_fields4 : (int,character) farray
-
-logic cur_pump__split_fields5 : nat_type
-
-logic cur_pump__split_fields6 : nat_type
-
-logic cur_pump__split_fields7 : nat_type
-
-logic outstanding1 : int
-
-logic result : bool
-
-logic result1 : bool
-
-logic result2 : int
-
-logic cur_state2 : int
-
-logic result3 : int
-
-logic outstanding2 : int
-
-logic result4 : (int,character) farray
-
-logic result5 : nat_type
-
-logic result6 : nat_type
-
-logic result7 : nat_type
-
-logic cur_pump__split_fields8 : (int,character) farray
-
-logic cur_pump__split_fields9 : nat_type
-
-logic cur_pump__split_fields10 : nat_type
-
-logic cur_pump__split_fields11 : nat_type
-
-logic cur_state3 : int
-
-logic cur_pump__split_fields12 : (int,character) farray
-
-logic cur_pump__split_fields13 : nat_type
-
-logic cur_pump__split_fields14 : nat_type
-
-logic cur_pump__split_fields15 : nat_type
-
-logic outstanding3 : int
-
-logic cur_state4 : int
-
-logic cur_pump__split_fields16 : (int,character) farray
-
-logic cur_pump__split_fields17 : nat_type
-
-logic cur_pump__split_fields18 : nat_type
-
-logic cur_pump__split_fields19 : nat_type
-
-logic outstanding4 : int
-
-logic result8 : bool
-
-axiom H : in_range6(cur_state)
-
-axiom H1 : in_range3(outstanding)
-
-axiom H2 : ((is_ready(cur_state) = true) and
+ (* File "pumpunit.adb", line 71, characters 0-0 *)
+goal WP_parameter_def :
+  (forall cur_state:int.
+  forall cur_pump__split_fields:(int,character) farray.
+  forall cur_pump__split_fields1:nat_type.
+  forall cur_pump__split_fields2:nat_type.
+  forall cur_pump__split_fields3:nat_type. forall outstanding:int.
+  forall o:int. forall o1:int. forall o2:nat_type.
+  forall o3:(int,character) farray. forall o4:nat_type. forall o5:nat_type.
+  forall o6:nat_type. forall temp___643:(int,character) farray.
+  forall temp___6431:nat_type. forall temp___6432:nat_type.
+  forall temp___6433:nat_type. forall cur_state1:int.
+  forall cur_pump__split_fields4:(int,character) farray.
+  forall cur_pump__split_fields5:nat_type.
+  forall cur_pump__split_fields6:nat_type.
+  forall cur_pump__split_fields7:nat_type. forall outstanding1:int.
+  forall result:bool. forall result1:int. forall cur_state2:int.
+  forall result2:int. forall outstanding2:int.
+  forall result3:(int,character) farray. forall result4:nat_type.
+  forall result5:nat_type. forall result6:nat_type.
+  forall cur_pump__split_fields8:(int,character) farray.
+  forall cur_pump__split_fields9:nat_type.
+  forall cur_pump__split_fields10:nat_type.
+  forall cur_pump__split_fields11:nat_type. forall cur_state3:int.
+  forall cur_pump__split_fields12:(int,character) farray.
+  forall cur_pump__split_fields13:nat_type.
+  forall cur_pump__split_fields14:nat_type.
+  forall cur_pump__split_fields15:nat_type. forall outstanding3:int.
+  forall cur_state4:int.
+  forall cur_pump__split_fields16:(int,character) farray.
+  forall cur_pump__split_fields17:nat_type.
+  forall cur_pump__split_fields18:nat_type.
+  forall cur_pump__split_fields19:nat_type. forall outstanding4:int.
+  ((in_range6(cur_state) and (in_range3(outstanding) and
+  (((is_ready(cur_state) = true) and
   ((get_outstanding(outstanding) <  (2147483647 - get_cur_price({
   rec__pump__pump_record__name = cur_pump__split_fields;
   rec__pump__pump_record__resevoir = cur_pump__split_fields1;
@@ -891,104 +763,58 @@ axiom H2 : ((is_ready(cur_state) = true) and
   cur_pump__split_fields; rec__pump__pump_record__resevoir =
   cur_pump__split_fields1; rec__pump__pump_record__price =
   cur_pump__split_fields2; rec__pump__pump_record__remaining =
-  cur_pump__split_fields3 }))))
-
-axiom H3 : ((result1 = is_ready(cur_state)) and ((result1 = true) <->
-  (cur_state = 1)))
-
-axiom H4 : ((result1 = true) -> (result2 = cur_state))
-
-axiom H5 : ((result1 = true) -> (cur_state2 = 0))
-
-axiom H6 : ((result1 = true) ->
-  ((o3 = (outstanding + to_rep2(cur_pump__split_fields2))) and
-  in_range((outstanding + to_rep2(cur_pump__split_fields2)))))
-
-axiom H7 : ((result1 = true) -> (result3 = outstanding))
-
-axiom H8 : ((result1 = true) -> (outstanding2 = o3))
-
-axiom H9 : ((result1 = true) ->
-  ((o4 = (to_rep2(cur_pump__split_fields1) - 1)) and
-  in_range4((to_rep2(cur_pump__split_fields1) - 1))))
-
-axiom H10 : ((result1 = true) -> (to_rep2(o5) = o4))
-
-axiom H11 : ((result1 = true) -> (cur_pump__split_fields = o6))
-
-axiom H12 : ((result1 = true) -> (o5 = o7))
-
-axiom H13 : ((result1 = true) -> (cur_pump__split_fields2 = o8))
-
-axiom H14 : ((result1 = true) -> (cur_pump__split_fields3 = o9))
-
-axiom H15 : ((result1 = true) -> (temp___569 = o6))
-
-axiom H16 : ((result1 = true) -> (temp___5691 = o7))
-
-axiom H17 : ((result1 = true) -> (temp___5692 = o8))
-
-axiom H18 : ((result1 = true) -> (temp___5693 = o9))
-
-axiom H19 : ((result1 = true) -> ((result4 = cur_pump__split_fields) and
-  ((result5 = cur_pump__split_fields1) and
-  ((result6 = cur_pump__split_fields2) and
-  (result7 = cur_pump__split_fields3)))))
-
-axiom H20 : ((result1 = true) -> (temp___569 = cur_pump__split_fields8))
-
-axiom H21 : ((result1 = true) -> (temp___5691 = cur_pump__split_fields9))
-
-axiom H22 : ((result1 = true) -> (temp___5692 = cur_pump__split_fields10))
-
-axiom H23 : ((result1 = true) -> (temp___5693 = cur_pump__split_fields11))
-
-axiom H24 : ((not (result1 = true)) -> (outstanding2 = outstanding))
-
-axiom H25 : ((not (result1 = true)) ->
-  (cur_pump__split_fields = cur_pump__split_fields8))
-
-axiom H26 : ((not (result1 = true)) ->
-  (cur_pump__split_fields1 = cur_pump__split_fields9))
-
-axiom H27 : ((not (result1 = true)) ->
-  (cur_pump__split_fields2 = cur_pump__split_fields10))
-
-axiom H28 : ((not (result1 = true)) ->
-  (cur_pump__split_fields3 = cur_pump__split_fields11))
-
-axiom H29 : ((not (result1 = true)) -> (cur_state2 = cur_state))
-
-axiom H30 : ((not (result1 = true)) -> (outstanding2 = outstanding1))
-
-axiom H31 : ((not (result1 = true)) ->
-  ((cur_pump__split_fields8 = cur_pump__split_fields4) and
-  ((cur_pump__split_fields9 = cur_pump__split_fields5) and
-  ((cur_pump__split_fields10 = cur_pump__split_fields6) and
-  (cur_pump__split_fields11 = cur_pump__split_fields7)))))
-
-axiom H32 : ((not (result1 = true)) -> (cur_state2 = cur_state1))
-
-axiom H33 : (outstanding2 = outstanding3)
-
-axiom H34 : (cur_pump__split_fields12 = cur_pump__split_fields8)
-
-axiom H35 : (cur_pump__split_fields13 = cur_pump__split_fields9)
-
-axiom H36 : (cur_pump__split_fields14 = cur_pump__split_fields10)
-
-axiom H37 : (cur_pump__split_fields15 = cur_pump__split_fields11)
-
-axiom H38 : (cur_state2 = cur_state3)
-
-axiom H39 : (outstanding4 = outstanding2)
-
-axiom H40 : ((cur_pump__split_fields16 = cur_pump__split_fields8) and
-  ((cur_pump__split_fields17 = cur_pump__split_fields9) and
-  ((cur_pump__split_fields18 = cur_pump__split_fields10) and
-  (cur_pump__split_fields19 = cur_pump__split_fields11))))
-
-axiom H41 : (cur_state4 = cur_state2)
-
- (* File "pumpunit.adb", line 71, characters 0-0 *)
-goal WP_parameter_def : (is_pumping(cur_state3) = true)
+  cur_pump__split_fields3 })))) and ((((result = is_ready(cur_state)) and
+  ((result = true) <-> (cur_state = 1))) and (((result = true) and ((({
+  int__content = result1 } = { int__content = cur_state }) and
+  (cur_state2 = 0)) and
+  ((((o = (outstanding + to_rep2(cur_pump__split_fields2))) and
+  in_range((outstanding + to_rep2(cur_pump__split_fields2)))) and (({
+  int__content = result2 } = { int__content = outstanding }) and
+  (outstanding2 = o))) and
+  ((((((o1 = (to_rep2(cur_pump__split_fields1) - 1)) and
+  in_range4((to_rep2(cur_pump__split_fields1) - 1))) and
+  (to_rep2(o2) = o1)) and ((cur_pump__split_fields = o3) and ((o2 = o4) and
+  ((cur_pump__split_fields2 = o5) and (cur_pump__split_fields3 = o6))))) and
+  ((temp___643 = o3) and ((temp___6431 = o4) and ((temp___6432 = o5) and
+  (temp___6433 = o6))))) and (({ us_split_fields__content = {
+  rec__pump__pump_record__name = result3; rec__pump__pump_record__resevoir =
+  result4; rec__pump__pump_record__price = result5;
+  rec__pump__pump_record__remaining = result6 } } = {
+  us_split_fields__content = { rec__pump__pump_record__name =
+  cur_pump__split_fields; rec__pump__pump_record__resevoir =
+  cur_pump__split_fields1; rec__pump__pump_record__price =
+  cur_pump__split_fields2; rec__pump__pump_record__remaining =
+  cur_pump__split_fields3 } }) and
+  ((temp___643 = cur_pump__split_fields8) and
+  ((temp___6431 = cur_pump__split_fields9) and
+  ((temp___6432 = cur_pump__split_fields10) and
+  (temp___6433 = cur_pump__split_fields11))))))))) or
+  ((not (result = true)) and (((outstanding2 = outstanding) and
+  (((cur_pump__split_fields = cur_pump__split_fields8) and
+  ((cur_pump__split_fields1 = cur_pump__split_fields9) and
+  ((cur_pump__split_fields2 = cur_pump__split_fields10) and
+  (cur_pump__split_fields3 = cur_pump__split_fields11)))) and
+  (cur_state2 = cur_state))) and ((outstanding2 = outstanding1) and (({
+  rec__pump__pump_record__name = cur_pump__split_fields8;
+  rec__pump__pump_record__resevoir = cur_pump__split_fields9;
+  rec__pump__pump_record__price = cur_pump__split_fields10;
+  rec__pump__pump_record__remaining = cur_pump__split_fields11 } = {
+  rec__pump__pump_record__name = cur_pump__split_fields4;
+  rec__pump__pump_record__resevoir = cur_pump__split_fields5;
+  rec__pump__pump_record__price = cur_pump__split_fields6;
+  rec__pump__pump_record__remaining = cur_pump__split_fields7 }) and
+  (cur_state2 = cur_state1))))))) and (((outstanding2 = outstanding3) and
+  (((cur_pump__split_fields12 = cur_pump__split_fields8) and
+  ((cur_pump__split_fields13 = cur_pump__split_fields9) and
+  ((cur_pump__split_fields14 = cur_pump__split_fields10) and
+  (cur_pump__split_fields15 = cur_pump__split_fields11)))) and
+  (cur_state2 = cur_state3))) and ((outstanding4 = outstanding2) and (({
+  rec__pump__pump_record__name = cur_pump__split_fields16;
+  rec__pump__pump_record__resevoir = cur_pump__split_fields17;
+  rec__pump__pump_record__price = cur_pump__split_fields18;
+  rec__pump__pump_record__remaining = cur_pump__split_fields19 } = {
+  rec__pump__pump_record__name = cur_pump__split_fields8;
+  rec__pump__pump_record__resevoir = cur_pump__split_fields9;
+  rec__pump__pump_record__price = cur_pump__split_fields10;
+  rec__pump__pump_record__remaining = cur_pump__split_fields11 }) and
+  (cur_state4 = cur_state2)))))))) -> (is_pumping(cur_state3) = true)))

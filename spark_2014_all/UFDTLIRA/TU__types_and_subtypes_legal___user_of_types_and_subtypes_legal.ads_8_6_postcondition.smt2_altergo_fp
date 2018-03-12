@@ -170,59 +170,26 @@ axiom oeq__def_axiom :
   (forall x:us_rep. forall y:us_rep [oeq(x, y)]. ((oeq(x, y) = true) <->
   (get_data(x) = get_data(y))))
 
-logic user_of_types_and_subtypes_legal__same_as_next__result : bool
-
-logic o : us_rep
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : bool
-
-logic result : bool
-
-logic user_of_types_and_subtypes_legal__same_as_next__result1 : bool
-
-logic user_of_types_and_subtypes_legal__same_as_next__result2 : bool
-
-logic user_of_types_and_subtypes_legal__same_as_next__result3 : bool
-
-logic user_of_types_and_subtypes_legal__same_as_next__result4 : bool
-
-logic user_of_types_and_subtypes_legal__same_as_next__result5 : bool
-
-logic result1 : bool
-
-axiom H :
-  (user_of_types_and_subtypes_legal__same_as_next__result1 = user_of_types_and_subtypes_legal__same_as_next__result2)
-
-axiom H1 :
-  (user_of_types_and_subtypes_legal__same_as_next__result3 = user_of_types_and_subtypes_legal__same_as_next__result1)
-
-axiom H2 : (o = get_next(n))
-
-axiom H3 : ((o1 = get_data(o)) and in_range(o1))
-
-axiom H4 : ((o2 = get_data(n)) and in_range(o2))
-
-axiom H5 : (((o2 = o1) -> (o3 = true)) and ((not (o2 = o1)) -> (o3 = false)))
-
-axiom H6 : (result = user_of_types_and_subtypes_legal__same_as_next__result)
-
-axiom H7 : (user_of_types_and_subtypes_legal__same_as_next__result1 = o3)
-
-axiom H8 :
-  (user_of_types_and_subtypes_legal__same_as_next__result4 = user_of_types_and_subtypes_legal__same_as_next__result2)
-
-axiom H9 :
-  (user_of_types_and_subtypes_legal__same_as_next__result5 = user_of_types_and_subtypes_legal__same_as_next__result3)
-
-axiom H10 :
-  (result1 = user_of_types_and_subtypes_legal__same_as_next__result4)
-
-axiom H11 : (not (get_data(n) = get_data(get_next(n))))
-
  (* File "user_of_types_and_subtypes_legal.ads", line 6, characters 0-0 *)
 goal WP_parameter_def :
-  (not (user_of_types_and_subtypes_legal__same_as_next__result4 = true))
+  (forall user_of_types_and_subtypes_legal__same_as_next__result:bool.
+  forall o:us_rep. forall o1:int. forall o2:int. forall o3:bool.
+  forall result:bool.
+  forall user_of_types_and_subtypes_legal__same_as_next__result1:bool.
+  forall user_of_types_and_subtypes_legal__same_as_next__result2:bool.
+  forall user_of_types_and_subtypes_legal__same_as_next__result3:bool.
+  forall user_of_types_and_subtypes_legal__same_as_next__result4:bool.
+  forall user_of_types_and_subtypes_legal__same_as_next__result5:bool.
+  (forall result1:bool.
+  ((((((user_of_types_and_subtypes_legal__same_as_next__result1 = user_of_types_and_subtypes_legal__same_as_next__result2) and
+  (user_of_types_and_subtypes_legal__same_as_next__result3 = user_of_types_and_subtypes_legal__same_as_next__result1)) and
+  ((((o = get_next(n)) and ((o1 = get_data(o)) and in_range(o1))) and
+  (((o2 = get_data(n)) and in_range(o2)) and (((o2 = o1) and (o3 = true)) or
+  ((not (o2 = o1)) and (o3 = false))))) and
+  ((result = user_of_types_and_subtypes_legal__same_as_next__result) and
+  (user_of_types_and_subtypes_legal__same_as_next__result1 = o3)))) and
+  ((user_of_types_and_subtypes_legal__same_as_next__result4 = user_of_types_and_subtypes_legal__same_as_next__result2) and
+  (user_of_types_and_subtypes_legal__same_as_next__result5 = user_of_types_and_subtypes_legal__same_as_next__result3))) and
+  (result1 = user_of_types_and_subtypes_legal__same_as_next__result4)) ->
+  ((not (get_data(n) = get_data(get_next(n)))) ->
+  (not (user_of_types_and_subtypes_legal__same_as_next__result4 = true))))))

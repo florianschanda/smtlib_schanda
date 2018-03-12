@@ -3302,6 +3302,14 @@ axiom convert_bit_64_to_bit_32__post_axiom :
   rec__discrimrec__register_type__value_low = reg10 }; attr__constrained =
   reg11 })).attr__constrained = true))))
 
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 0)
+
+logic rliteral2 : t1
+
+axiom rliteral_axiom2 : (tqtint1(rliteral2) = 4294967296)
+
 axiom convert_bit_64_to_bit_32__def_axiom :
   (forall reg:register_option. forall reg1:unsigned_64.
   forall reg2:unsigned_32. forall reg3:unsigned_32. forall reg4:unsigned_32.
@@ -3334,9 +3342,9 @@ axiom convert_bit_64_to_bit_32__def_axiom :
   reg11 }) = { us_split_discrs1 = { rec__discrimrec__register_type__option =
   of_rep2(1) }; us_split_fields1 = {
   rec__discrimrec__register_type__value_64 = dummy;
-  rec__discrimrec__register_type__ignore_32a = of_rep1(of_int(0));
+  rec__discrimrec__register_type__ignore_32a = of_rep1(rliteral1);
   rec__discrimrec__register_type__value_32 =
-  of_rep1(toSmall(urem1(to_rep(reg1), of_int1(4294967296))));
+  of_rep1(toSmall(urem1(to_rep(reg1), rliteral2)));
   rec__discrimrec__register_type__ignore_32b = dummy1;
   rec__discrimrec__register_type__ignore_16a = dummy2;
   rec__discrimrec__register_type__value_16 = dummy2;
@@ -4102,653 +4110,56 @@ type t3b__ref = { t3b__content : us_rep
 
 function t3b__ref___projection(a: t3b__ref) : us_rep = (a).t3b__content
 
-logic rax__split_fields : unsigned_64
+logic rliteral3 : t1
 
-logic rax__split_fields1 : unsigned_32
-
-logic rax__split_fields2 : unsigned_32
-
-logic rax__split_fields3 : unsigned_32
-
-logic rax__split_fields4 : unsigned_16
-
-logic rax__split_fields5 : unsigned_16
-
-logic rax__split_fields6 : unsigned_32
-
-logic rax__split_fields7 : unsigned_16
-
-logic rax__split_fields8 : unsigned_8
-
-logic rax__split_fields9 : unsigned_8
-
-logic eax__split_fields : unsigned_64
-
-logic eax__split_fields1 : unsigned_32
-
-logic eax__split_fields2 : unsigned_32
-
-logic eax__split_fields3 : unsigned_32
-
-logic eax__split_fields4 : unsigned_16
-
-logic eax__split_fields5 : unsigned_16
-
-logic eax__split_fields6 : unsigned_32
-
-logic eax__split_fields7 : unsigned_16
-
-logic eax__split_fields8 : unsigned_8
-
-logic eax__split_fields9 : unsigned_8
-
-logic us : int
-
-logic o : register_option
-
-logic o1 : unsigned_64
-
-logic o2 : unsigned_64
-
-logic o3 : unsigned_32
-
-logic o4 : unsigned_32
-
-logic o5 : unsigned_32
-
-logic o6 : unsigned_16
-
-logic o7 : unsigned_16
-
-logic o8 : unsigned_32
-
-logic o9 : unsigned_16
-
-logic o10 : unsigned_8
-
-logic o11 : unsigned_8
-
-logic o12 : register_option
-
-logic o13 : register_option
-
-logic o14 : unsigned_64
-
-logic o15 : unsigned_32
-
-logic o16 : unsigned_32
-
-logic o17 : unsigned_32
-
-logic o18 : unsigned_16
-
-logic o19 : unsigned_16
-
-logic o20 : unsigned_32
-
-logic o21 : unsigned_16
-
-logic o22 : unsigned_8
-
-logic o23 : unsigned_8
-
-logic o24 : bool
-
-logic o25 : register_option
-
-logic o26 : unsigned_64
-
-logic o27 : unsigned_32
-
-logic o28 : unsigned_32
-
-logic o29 : unsigned_32
-
-logic o30 : unsigned_16
-
-logic o31 : unsigned_16
-
-logic o32 : unsigned_32
-
-logic o33 : unsigned_16
-
-logic o34 : unsigned_8
-
-logic o35 : unsigned_8
-
-logic o36 : bool
-
-logic o37 : register_option
-
-logic o38 : unsigned_64
-
-logic o39 : unsigned_32
-
-logic o40 : unsigned_32
-
-logic o41 : unsigned_32
-
-logic o42 : unsigned_16
-
-logic o43 : unsigned_16
-
-logic o44 : unsigned_32
-
-logic o45 : unsigned_16
-
-logic o46 : unsigned_8
-
-logic o47 : unsigned_8
-
-logic o48 : bool
-
-logic temp___260 : register_option
-
-logic temp___2601 : unsigned_64
-
-logic temp___2602 : unsigned_32
-
-logic temp___2603 : unsigned_32
-
-logic temp___2604 : unsigned_32
-
-logic temp___2605 : unsigned_16
-
-logic temp___2606 : unsigned_16
-
-logic temp___2607 : unsigned_32
-
-logic temp___2608 : unsigned_16
-
-logic temp___2609 : unsigned_8
-
-logic temp___26010 : unsigned_8
-
-logic temp___26011 : bool
-
-logic o49 : register_option
-
-logic o50 : unsigned_64
-
-logic o51 : unsigned_32
-
-logic o52 : unsigned_32
-
-logic o53 : unsigned_32
-
-logic o54 : unsigned_16
-
-logic o55 : unsigned_16
-
-logic o56 : unsigned_32
-
-logic o57 : unsigned_16
-
-logic o58 : unsigned_8
-
-logic o59 : unsigned_8
-
-logic o60 : bool
-
-logic o61 : register_option
-
-logic o62 : unsigned_64
-
-logic o63 : unsigned_32
-
-logic o64 : unsigned_32
-
-logic o65 : unsigned_32
-
-logic o66 : unsigned_16
-
-logic o67 : unsigned_16
-
-logic o68 : unsigned_32
-
-logic o69 : unsigned_16
-
-logic o70 : unsigned_8
-
-logic o71 : unsigned_8
-
-logic o72 : bool
-
-logic o73 : register_option
-
-logic o74 : unsigned_64
-
-logic o75 : unsigned_32
-
-logic o76 : unsigned_32
-
-logic o77 : unsigned_32
-
-logic o78 : unsigned_16
-
-logic o79 : unsigned_16
-
-logic o80 : unsigned_32
-
-logic o81 : unsigned_16
-
-logic o82 : unsigned_8
-
-logic o83 : unsigned_8
-
-logic o84 : bool
-
-logic temp___261 : register_option
-
-logic temp___2611 : unsigned_64
-
-logic temp___2612 : unsigned_32
-
-logic temp___2613 : unsigned_32
-
-logic temp___2614 : unsigned_32
-
-logic temp___2615 : unsigned_16
-
-logic temp___2616 : unsigned_16
-
-logic temp___2617 : unsigned_32
-
-logic temp___2618 : unsigned_16
-
-logic temp___2619 : unsigned_8
-
-logic temp___26110 : unsigned_8
-
-logic temp___26111 : bool
-
-logic o85 : register_option
-
-logic o86 : unsigned_64
-
-logic o87 : unsigned_64
-
-logic o88 : unsigned_32
-
-logic o89 : unsigned_32
-
-logic o90 : unsigned_32
-
-logic o91 : unsigned_16
-
-logic o92 : unsigned_16
-
-logic o93 : unsigned_32
-
-logic o94 : unsigned_16
-
-logic o95 : unsigned_8
-
-logic o96 : unsigned_8
-
-logic o97 : register_option
-
-logic o98 : register_option
-
-logic o99 : unsigned_64
-
-logic o100 : unsigned_32
-
-logic o101 : unsigned_32
-
-logic o102 : unsigned_32
-
-logic o103 : unsigned_16
-
-logic o104 : unsigned_16
-
-logic o105 : unsigned_32
-
-logic o106 : unsigned_16
-
-logic o107 : unsigned_8
-
-logic o108 : unsigned_8
-
-logic o109 : bool
-
-logic o110 : register_option
-
-logic o111 : unsigned_64
-
-logic o112 : unsigned_32
-
-logic o113 : unsigned_32
-
-logic o114 : unsigned_32
-
-logic o115 : unsigned_16
-
-logic o116 : unsigned_16
-
-logic o117 : unsigned_32
-
-logic o118 : unsigned_16
-
-logic o119 : unsigned_8
-
-logic o120 : unsigned_8
-
-logic o121 : bool
-
-logic o122 : register_option
-
-logic o123 : unsigned_64
-
-logic o124 : unsigned_32
-
-logic o125 : unsigned_32
-
-logic o126 : unsigned_32
-
-logic o127 : unsigned_16
-
-logic o128 : unsigned_16
-
-logic o129 : unsigned_32
-
-logic o130 : unsigned_16
-
-logic o131 : unsigned_8
-
-logic o132 : unsigned_8
-
-logic o133 : bool
-
-logic temp___262 : register_option
-
-logic temp___2621 : unsigned_64
-
-logic temp___2622 : unsigned_32
-
-logic temp___2623 : unsigned_32
-
-logic temp___2624 : unsigned_32
-
-logic temp___2625 : unsigned_16
-
-logic temp___2626 : unsigned_16
-
-logic temp___2627 : unsigned_32
-
-logic temp___2628 : unsigned_16
-
-logic temp___2629 : unsigned_8
-
-logic temp___26210 : unsigned_8
-
-logic temp___26211 : bool
-
-logic result : unsigned_64
-
-logic result1 : unsigned_32
-
-logic result2 : unsigned_32
-
-logic result3 : unsigned_32
-
-logic result4 : unsigned_16
-
-logic result5 : unsigned_16
-
-logic result6 : unsigned_32
-
-logic result7 : unsigned_16
-
-logic result8 : unsigned_8
-
-logic result9 : unsigned_8
-
-logic rax__split_fields10 : unsigned_64
-
-logic rax__split_fields11 : unsigned_32
-
-logic rax__split_fields12 : unsigned_32
-
-logic rax__split_fields13 : unsigned_32
-
-logic rax__split_fields14 : unsigned_16
-
-logic rax__split_fields15 : unsigned_16
-
-logic rax__split_fields16 : unsigned_32
-
-logic rax__split_fields17 : unsigned_16
-
-logic rax__split_fields18 : unsigned_8
-
-logic rax__split_fields19 : unsigned_8
-
-logic result10 : unsigned_64
-
-logic result11 : unsigned_32
-
-logic result12 : unsigned_32
-
-logic result13 : unsigned_32
-
-logic result14 : unsigned_16
-
-logic result15 : unsigned_16
-
-logic result16 : unsigned_32
-
-logic result17 : unsigned_16
-
-logic result18 : unsigned_8
-
-logic result19 : unsigned_8
-
-logic eax__split_fields10 : unsigned_64
-
-logic eax__split_fields11 : unsigned_32
-
-logic eax__split_fields12 : unsigned_32
-
-logic eax__split_fields13 : unsigned_32
-
-logic eax__split_fields14 : unsigned_16
-
-logic eax__split_fields15 : unsigned_16
-
-logic eax__split_fields16 : unsigned_32
-
-logic eax__split_fields17 : unsigned_16
-
-logic eax__split_fields18 : unsigned_8
-
-logic eax__split_fields19 : unsigned_8
-
-logic result20 : unsigned_64
-
-logic result21 : unsigned_32
-
-logic result22 : unsigned_32
-
-logic result23 : unsigned_32
-
-logic result24 : unsigned_16
-
-logic result25 : unsigned_16
-
-logic result26 : unsigned_32
-
-logic result27 : unsigned_16
-
-logic result28 : unsigned_8
-
-logic result29 : unsigned_8
-
-logic rax__split_fields20 : unsigned_64
-
-logic rax__split_fields21 : unsigned_32
-
-logic rax__split_fields22 : unsigned_32
-
-logic rax__split_fields23 : unsigned_32
-
-logic rax__split_fields24 : unsigned_16
-
-logic rax__split_fields25 : unsigned_16
-
-logic rax__split_fields26 : unsigned_32
-
-logic rax__split_fields27 : unsigned_16
-
-logic rax__split_fields28 : unsigned_8
-
-logic rax__split_fields29 : unsigned_8
-
-logic rax__split_fields30 : unsigned_64
-
-logic rax__split_fields31 : unsigned_32
-
-logic rax__split_fields32 : unsigned_32
-
-logic rax__split_fields33 : unsigned_32
-
-logic rax__split_fields34 : unsigned_16
-
-logic rax__split_fields35 : unsigned_16
-
-logic rax__split_fields36 : unsigned_32
-
-logic rax__split_fields37 : unsigned_16
-
-logic rax__split_fields38 : unsigned_8
-
-logic rax__split_fields39 : unsigned_8
-
-logic eax__split_fields20 : unsigned_64
-
-logic eax__split_fields21 : unsigned_32
-
-logic eax__split_fields22 : unsigned_32
-
-logic eax__split_fields23 : unsigned_32
-
-logic eax__split_fields24 : unsigned_16
-
-logic eax__split_fields25 : unsigned_16
-
-logic eax__split_fields26 : unsigned_32
-
-logic eax__split_fields27 : unsigned_16
-
-logic eax__split_fields28 : unsigned_8
-
-logic eax__split_fields29 : unsigned_8
-
-logic rax__split_fields40 : unsigned_64
-
-logic rax__split_fields41 : unsigned_32
-
-logic rax__split_fields42 : unsigned_32
-
-logic rax__split_fields43 : unsigned_32
-
-logic rax__split_fields44 : unsigned_16
-
-logic rax__split_fields45 : unsigned_16
-
-logic rax__split_fields46 : unsigned_32
-
-logic rax__split_fields47 : unsigned_16
-
-logic rax__split_fields48 : unsigned_8
-
-logic rax__split_fields49 : unsigned_8
-
-logic eax__split_fields30 : unsigned_64
-
-logic eax__split_fields31 : unsigned_32
-
-logic eax__split_fields32 : unsigned_32
-
-logic eax__split_fields33 : unsigned_32
-
-logic eax__split_fields34 : unsigned_16
-
-logic eax__split_fields35 : unsigned_16
-
-logic eax__split_fields36 : unsigned_32
-
-logic eax__split_fields37 : unsigned_16
-
-logic eax__split_fields38 : unsigned_8
-
-logic eax__split_fields39 : unsigned_8
-
-axiom H : ((0 = to_rep2(rax__split_discrs)) and
-  (rax__attr__constrained = true))
-
-axiom H1 : ((us = 1) and in_range(1))
-
-axiom H2 : ((eax__attr__constrained = true) and
-  (to_rep2(eax__split_discrs) = 1))
-
-axiom H3 : ((1 = to_rep2(eax__split_discrs)) and
-  (eax__attr__constrained = true))
-
-axiom H4 : (to_rep(o1) = of_int1(16))
-
-axiom H5 : (o1 = o2)
-
-axiom H6 : (dummy1 = o3)
-
-axiom H7 : (dummy1 = o4)
-
-axiom H8 : (dummy1 = o5)
-
-axiom H9 : (dummy2 = o6)
-
-axiom H10 : (dummy2 = o7)
-
-axiom H11 : (dummy1 = o8)
-
-axiom H12 : (dummy2 = o9)
-
-axiom H13 : (dummy3 = o10)
-
-axiom H14 : (dummy3 = o11)
-
-axiom H15 : (to_rep2(o) = 0)
-
-axiom H16 : (o = o12)
-
-axiom H17 : (o13 = o12)
-
-axiom H18 : (o14 = o2)
-
-axiom H19 : (o15 = o3)
-
-axiom H20 : (o16 = o4)
-
-axiom H21 : (o17 = o5)
-
-axiom H22 : (o18 = o6)
-
-axiom H23 : (o19 = o7)
-
-axiom H24 : (o20 = o8)
-
-axiom H25 : (o21 = o9)
-
-axiom H26 : (o22 = o10)
-
-axiom H27 : (o23 = o11)
-
-axiom H28 : (true = o24)
-
-axiom H29 : ((o25 = o13) and (((o26 = o14) and ((o27 = o15) and
-  ((o28 = o16) and ((o29 = o17) and ((o30 = o18) and ((o31 = o19) and
-  ((o32 = o20) and ((o33 = o21) and ((o34 = o22) and (o35 = o23)))))))))) and
-  (o36 = o24)))
+axiom rliteral_axiom3 : (tqtint1(rliteral3) = 16)
 
  (* File "discrimrec.adb", line 6, characters 0-0 *)
-goal WP_parameter_def : (0 = to_rep2(o25))
+goal WP_parameter_def :
+  (forall us:int. forall o:register_option. forall o1:unsigned_64.
+  forall o2:unsigned_64. forall o3:unsigned_32. forall o4:unsigned_32.
+  forall o5:unsigned_32. forall o6:unsigned_16. forall o7:unsigned_16.
+  forall o8:unsigned_32. forall o9:unsigned_16. forall o10:unsigned_8.
+  forall o11:unsigned_8. forall o12:register_option.
+  forall o13:register_option. forall o14:unsigned_64. forall o15:unsigned_32.
+  forall o16:unsigned_32. forall o17:unsigned_32. forall o18:unsigned_16.
+  forall o19:unsigned_16. forall o20:unsigned_32. forall o21:unsigned_16.
+  forall o22:unsigned_8. forall o23:unsigned_8. forall o24:bool.
+  forall o25:register_option. forall o26:unsigned_64. forall o27:unsigned_32.
+  forall o28:unsigned_32. forall o29:unsigned_32. forall o30:unsigned_16.
+  forall o31:unsigned_16. forall o32:unsigned_32. forall o33:unsigned_16.
+  forall o34:unsigned_8. forall o35:unsigned_8. forall o36:bool.
+  (((0 = to_rep2(rax__split_discrs)) and (rax__attr__constrained = true)) ->
+  (((us = 1) and in_range(1)) -> (((eax__attr__constrained = true) and
+  (to_rep2(eax__split_discrs) = 1)) -> (((1 = to_rep2(eax__split_discrs)) and
+  (eax__attr__constrained = true)) -> (((((to_rep(o1) = rliteral3) and
+  ((o1 = o2) and ((dummy1 = o3) and ((dummy1 = o4) and ((dummy1 = o5) and
+  ((dummy2 = o6) and ((dummy2 = o7) and ((dummy1 = o8) and ((dummy2 = o9) and
+  ((dummy3 = o10) and (dummy3 = o11))))))))))) and (((to_rep2(o) = 0) and
+  (o = o12)) and ((o13 = o12) and (((o14 = o2) and ((o15 = o3) and
+  ((o16 = o4) and ((o17 = o5) and ((o18 = o6) and ((o19 = o7) and
+  ((o20 = o8) and ((o21 = o9) and ((o22 = o10) and (o23 = o11)))))))))) and
+  (true = o24))))) and ({ us_split_discrs1 = {
+  rec__discrimrec__register_type__option = o25 }; us_split_fields1 = {
+  rec__discrimrec__register_type__value_64 = o26;
+  rec__discrimrec__register_type__ignore_32a = o27;
+  rec__discrimrec__register_type__value_32 = o28;
+  rec__discrimrec__register_type__ignore_32b = o29;
+  rec__discrimrec__register_type__ignore_16a = o30;
+  rec__discrimrec__register_type__value_16 = o31;
+  rec__discrimrec__register_type__ignore_32c = o32;
+  rec__discrimrec__register_type__ignore_16b = o33;
+  rec__discrimrec__register_type__value_high = o34;
+  rec__discrimrec__register_type__value_low = o35 }; attr__constrained = o36
+  } = { us_split_discrs1 = { rec__discrimrec__register_type__option = o13 };
+  us_split_fields1 = { rec__discrimrec__register_type__value_64 = o14;
+  rec__discrimrec__register_type__ignore_32a = o15;
+  rec__discrimrec__register_type__value_32 = o16;
+  rec__discrimrec__register_type__ignore_32b = o17;
+  rec__discrimrec__register_type__ignore_16a = o18;
+  rec__discrimrec__register_type__value_16 = o19;
+  rec__discrimrec__register_type__ignore_32c = o20;
+  rec__discrimrec__register_type__ignore_16b = o21;
+  rec__discrimrec__register_type__value_high = o22;
+  rec__discrimrec__register_type__value_low = o23 }; attr__constrained = o24
+  })) -> (0 = to_rep2(o25))))))))

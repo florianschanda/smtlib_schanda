@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -226,11 +226,6 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 axiom x1__def_axiom : (x1 = of_int(1))
 
-axiom H : (of_int(1) = x1)
-
-axiom H1 : (not (b = true))
-
-axiom H2 : (query_x1(void) = true)
-
  (* File "user.adb", line 2, characters 0-0 *)
-goal WP_parameter_def : (query_x2(void) = 3)
+goal WP_parameter_def : ((of_int(1) = x1) -> ((not (b = true)) ->
+  ((query_x1(void) = true) -> (query_x2(void) = 3))))

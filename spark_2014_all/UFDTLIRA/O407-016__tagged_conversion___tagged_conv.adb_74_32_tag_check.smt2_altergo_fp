@@ -56,12 +56,6 @@ axiom us_compatible_tags_refl :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -73,6 +67,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -204,31 +204,14 @@ axiom c__def_axiom : ((c = us_null_ext__) and (c1 = us_tag1))
 
 axiom cc__def_axiom : ((cc = c) and (cc1 = c1))
 
-logic cc2__split_fields : us_private
-
-logic cc3__split_fields : us_private
-
-logic result : us_private
-
-logic cc2__split_fields1 : us_private
-
-logic result1 : us_private
-
-logic cc3__split_fields1 : us_private
-
-axiom H : ((c = cc) and (c1 = cc1))
-
-axiom H1 : (result = cc2__split_fields)
-
-axiom H2 : (cc2__split_fields1 = cc)
-
-axiom H3 : (cc2__attr__tag = us_tag)
-
-axiom H4 : (result1 = cc3__split_fields)
-
-axiom H5 : (cc3__split_fields1 = cc2__split_fields1)
-
-axiom H6 : (cc3__attr__tag = cc2__attr__tag)
-
  (* File "tagged_conv.adb", line 63, characters 0-0 *)
-goal WP_parameter_def : us_compatible_tags(cc3__attr__tag, us_tag1)
+goal WP_parameter_def :
+  (forall cc2__split_fields:us_private. forall cc3__split_fields:us_private.
+  forall result:us_private. forall cc2__split_fields1:us_private.
+  forall result1:us_private. forall cc3__split_fields1:us_private.
+  (((c = cc) and (c1 = cc1)) -> ((((result = cc2__split_fields) and
+  (cc = cc2__split_fields1)) and (cc2__attr__tag = us_tag)) ->
+  ((((result1 = cc3__split_fields) and
+  (cc3__split_fields1 = cc2__split_fields1)) and
+  (cc3__attr__tag = cc2__attr__tag)) -> us_compatible_tags(cc3__attr__tag,
+  us_tag1)))))

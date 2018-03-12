@@ -111,21 +111,7 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic x1 : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range(x))
-
-axiom H1 : in_range(y)
-
-axiom H2 : in_range(x1)
-
  (* File "call_unknown_rel.adb", line 2, characters 0-0 *)
-goal WP_parameter_def : in_range((2 * y))
+goal WP_parameter_def :
+  (forall x:int. forall x1:int. ((((- 2147483648) <= 2147483647) ->
+  in_range(x)) -> (in_range(y) -> (in_range(x1) -> in_range((2 * y))))))

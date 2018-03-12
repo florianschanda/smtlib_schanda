@@ -173,24 +173,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> (int,integer) farray
-
-axiom concat_def :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : integer, int -> (int,integer) farray
-
-axiom singleton_def :
-  (forall v:integer.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq3 : (int,integer) farray, int, int, (int,integer) farray, int,
   int -> bool
 
@@ -201,17 +183,17 @@ axiom bool_eq_def2 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq3(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq3(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -221,37 +203,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq3(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq3(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep1((a[(i + 1)])) <  to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq3(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep1((b[(i + 1)])) <  to_rep1((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic dummy2 : (int,integer) farray
 
@@ -386,12 +340,7 @@ logic null_stack1 : (int,integer) farray
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic temp___133 : int -> (int,integer) farray
-
-axiom def_axiom :
-  (forall temp___135:int.
-  (forall temp___136:int.
-  ((temp___133(temp___135)[temp___136]) = of_rep1(temp___135))))
+logic temp___155 : int -> (int,integer) farray
 
 type us_split_fields2 = { rec__private_a__optional_stack__exists : bool;
 rec__private_a__optional_stack__the_stack : us_rep
@@ -507,114 +456,57 @@ logic src1 : (int,integer) farray
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
 axiom null_stack__def_axiom : ((null_stack = of_rep(0)) and
-  (null_stack1 = temp___133((- 2147483648))))
+  (null_stack1 = temp___155((- 2147483648))))
 
-logic dst__split_fields : bool
-
-logic dst__split_fields1 : length_t
-
-logic dst__split_fields2 : (int,integer) farray
-
-logic o : length_t
-
-logic o1 : length_t
-
-logic o2 : (int,integer) farray
-
-logic temp___249 : length_t
-
-logic temp___2491 : (int,integer) farray
-
-logic result : bool
-
-logic result1 : length_t
-
-logic result2 : (int,integer) farray
-
-logic dst__split_fields3 : bool
-
-logic dst__split_fields4 : length_t
-
-logic dst__split_fields5 : (int,integer) farray
-
-logic result3 : bool
-
-logic result4 : length_t
-
-logic result5 : (int,integer) farray
-
-logic dst__split_fields6 : bool
-
-logic dst__split_fields7 : length_t
-
-logic dst__split_fields8 : (int,integer) farray
-
-logic dst__split_fields9 : bool
-
-logic dst__split_fields10 : length_t
-
-logic dst__split_fields11 : (int,integer) farray
-
-logic dst__split_fields12 : bool
-
-logic dst__split_fields13 : length_t
-
-logic dst__split_fields14 : (int,integer) farray
-
-axiom H : (to_rep(o) = 0)
-
-axiom H1 : (o = o1)
-
-axiom H2 : (temp___133((- 2147483648)) = o2)
-
-axiom H3 : (temp___249 = o1)
-
-axiom H4 : (temp___2491 = o2)
-
-axiom H5 : ((temp___249 = null_stack) and (temp___2491 = null_stack1))
-
-axiom H6 : (result = dst__split_fields)
-
-axiom H7 : (result1 = dst__split_fields1)
-
-axiom H8 : (result2 = dst__split_fields2)
-
-axiom H9 : (dst__split_fields = dst__split_fields3)
-
-axiom H10 : ((src = dst__split_fields4) and (src1 = dst__split_fields5))
-
-axiom H11 : (result3 = dst__split_fields3)
-
-axiom H12 : (result4 = dst__split_fields4)
-
-axiom H13 : (result5 = dst__split_fields5)
-
-axiom H14 : (bool_eq4({ us_split_fields1 = { rec__stack__t__len =
-  dst__split_fields4; rec__stack__t__elements = dst__split_fields5 } }, {
-  us_split_fields1 = { rec__stack__t__len = null_stack;
-  rec__stack__t__elements = null_stack1 } }) = dst__split_fields6)
-
-axiom H15 : (dst__split_fields4 = dst__split_fields7)
-
-axiom H16 : (dst__split_fields5 = dst__split_fields8)
-
-axiom H17 : ((dst__split_fields9 = dst__split_fields6) and
-  ((dst__split_fields10 = dst__split_fields7) and
-  (dst__split_fields11 = dst__split_fields8)))
-
-axiom H18 : ((dst__split_fields12 = dst__split_fields6) and
-  ((dst__split_fields13 = dst__split_fields7) and
-  (dst__split_fields14 = dst__split_fields8)))
+axiom def_axiom :
+  (forall temp___157:int. (in_range1(temp___157) ->
+  (forall temp___158:int.
+  (to_rep1((temp___155(temp___157)[temp___158])) = temp___157))))
 
  (* File "private_a.adb", line 62, characters 0-0 *)
-goal WP_parameter_def : (bool_eq5({ us_split_fields3 = {
-  rec__private_a__optional_stack__exists = dst__split_fields9;
-  rec__private_a__optional_stack__the_stack = { us_split_fields1 = {
-  rec__stack__t__len = dst__split_fields10; rec__stack__t__elements =
-  dst__split_fields11 } } } }, { us_split_fields3 = {
-  rec__private_a__optional_stack__exists = bool_eq4({ us_split_fields1 = {
+goal WP_parameter_def :
+  (forall dst__split_fields:bool. forall dst__split_fields1:length_t.
+  forall dst__split_fields2:(int,integer) farray. forall o:length_t.
+  forall o1:length_t. forall o2:(int,integer) farray.
+  forall temp___280:length_t. forall temp___2801:(int,integer) farray.
+  forall result:bool. forall result1:length_t.
+  forall result2:(int,integer) farray. forall dst__split_fields3:bool.
+  forall dst__split_fields4:length_t.
+  forall dst__split_fields5:(int,integer) farray. forall result3:bool.
+  forall result4:length_t. forall result5:(int,integer) farray.
+  forall dst__split_fields6:bool. forall dst__split_fields7:length_t.
+  forall dst__split_fields8:(int,integer) farray.
+  forall dst__split_fields9:bool. forall dst__split_fields10:length_t.
+  forall dst__split_fields11:(int,integer) farray.
+  forall dst__split_fields12:bool. forall dst__split_fields13:length_t.
+  forall dst__split_fields14:(int,integer) farray. ((((((to_rep(o) = 0) and
+  ((o = o1) and (temp___155((- 2147483648)) = o2))) and
+  ((temp___280 = o1) and (temp___2801 = o2))) and
+  ((temp___280 = null_stack) and (temp___2801 = null_stack1))) and
+  (((((result = dst__split_fields) and ((result1 = dst__split_fields1) and
+  (result2 = dst__split_fields2))) and
+  ((dst__split_fields = dst__split_fields3) and
+  ((src = dst__split_fields4) and (src1 = dst__split_fields5)))) and
+  (((result3 = dst__split_fields3) and ((result4 = dst__split_fields4) and
+  (result5 = dst__split_fields5))) and ((bool_eq4({ us_split_fields1 = {
+  rec__stack__t__len = dst__split_fields4; rec__stack__t__elements =
+  dst__split_fields5 } }, { us_split_fields1 = { rec__stack__t__len =
+  null_stack; rec__stack__t__elements = null_stack1 }
+  }) = dst__split_fields6) and ((dst__split_fields4 = dst__split_fields7) and
+  (dst__split_fields5 = dst__split_fields8))))) and
+  (((dst__split_fields9 = dst__split_fields6) and
+  ((dst__split_fields10 = dst__split_fields7) and
+  (dst__split_fields11 = dst__split_fields8))) and
+  ((dst__split_fields12 = dst__split_fields6) and
+  ((dst__split_fields13 = dst__split_fields7) and
+  (dst__split_fields14 = dst__split_fields8)))))) -> (bool_eq5({
+  us_split_fields3 = { rec__private_a__optional_stack__exists =
+  dst__split_fields9; rec__private_a__optional_stack__the_stack = {
+  us_split_fields1 = { rec__stack__t__len = dst__split_fields10;
+  rec__stack__t__elements = dst__split_fields11 } } } }, { us_split_fields3 =
+  { rec__private_a__optional_stack__exists = bool_eq4({ us_split_fields1 = {
   rec__stack__t__len = src; rec__stack__t__elements = src1 } }, {
   us_split_fields1 = { rec__stack__t__len = null_stack;
   rec__stack__t__elements = null_stack1 } });
   rec__private_a__optional_stack__the_stack = { us_split_fields1 = {
-  rec__stack__t__len = src; rec__stack__t__elements = src1 } } } }) = true)
+  rec__stack__t__len = src; rec__stack__t__elements = src1 } } } }) = true)))

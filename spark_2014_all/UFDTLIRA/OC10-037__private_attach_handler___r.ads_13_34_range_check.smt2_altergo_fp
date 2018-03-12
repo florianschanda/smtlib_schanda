@@ -347,11 +347,5 @@ logic po__split_discrs2 : integer
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic us : int
-
-logic us1 : int
-
-logic us2 : int
-
  (* File "r.ads", line 5, characters 0-0 *)
 goal WP_parameter_def : in_range(3)

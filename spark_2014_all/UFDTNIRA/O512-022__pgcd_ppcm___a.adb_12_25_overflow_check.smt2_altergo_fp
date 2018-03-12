@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -257,188 +257,22 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic ao : int
-
-logic an : int
-
-logic bn : int
-
-logic a__pgcd__result : int
-
-logic temp___134 : int
-
-logic temp___133 : int
-
-logic temp___132 : int
-
-logic temp___135 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : bool
-
-logic ao1 : int
-
-logic result : int
-
-logic an1 : int
-
-logic result1 : int
-
-logic bn1 : int
-
-logic ao2 : int
-
-logic an2 : int
-
-logic bn2 : int
-
-logic temp___1351 : int
-
-logic result2 : bool
-
-logic result3 : bool
-
-logic result4 : bool
-
-logic result5 : int
-
-logic temp___1352 : int
-
-logic result6 : int
-
-logic ao3 : int
-
-logic result7 : int
-
-logic an3 : int
-
-logic result8 : int
-
-logic bn3 : int
-
-logic ao4 : int
-
-logic an4 : int
-
-logic bn4 : int
-
-logic temp___1353 : int
-
-logic ao5 : int
-
-logic an5 : int
-
-logic bn5 : int
-
-logic temp___1354 : int
-
-logic ao6 : int
-
-logic an6 : int
-
-logic bn6 : int
-
-logic ao7 : int
-
-logic an7 : int
-
-logic bn7 : int
-
-logic ao8 : int
-
-logic an8 : int
-
-logic bn8 : int
-
-logic ao9 : int
-
-logic an9 : int
-
-logic bn9 : int
-
-logic result9 : int
-
-logic a__pgcd__result1 : int
-
-logic a__pgcd__result2 : int
-
-logic a__pgcd__result3 : int
-
-logic ao10 : int
-
-logic an10 : int
-
-logic bn10 : int
-
-logic a__pgcd__result4 : int
-
-logic ao11 : int
-
-logic an11 : int
-
-logic bn11 : int
-
-logic a__pgcd__result5 : int
-
-logic result10 : bool
-
-axiom H : in_range1(a)
-
-axiom H1 : in_range1(b)
-
-axiom H2 : ((not (a = (- 2147483648))) and (not (b = (- 2147483648))))
-
-axiom H3 : (((- 2147483648) <= 2147483647) -> in_range1(ao))
-
-axiom H4 : (result = an)
-
-axiom H5 : (an1 = a)
-
-axiom H6 : in_range1(an1)
-
-axiom H7 : (result1 = bn)
-
-axiom H8 : (bn1 = b)
-
-axiom H9 : in_range1(bn1)
-
-axiom H10 : (not (bn1 = 0))
-
-axiom H11 : ((((not (an2 = (- 2147483648))) and
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (forall ao:int. forall an:int. forall bn:int. forall o:int.
+  forall result:int. forall an1:int. forall result1:int. forall bn1:int.
+  forall ao1:int. forall an2:int. forall bn2:int. (in_range1(a) ->
+  (in_range1(b) -> (((not (a = (- 2147483648))) and
+  (not (b = (- 2147483648)))) -> ((((- 2147483648) <= 2147483647) ->
+  in_range1(ao)) -> ((({ int__content = result } = { int__content = an }) and
+  (an1 = a)) -> (in_range1(an1) -> ((({ int__content = result1 } = {
+  int__content = bn }) and (bn1 = b)) -> (in_range1(bn1) ->
+  ((not (bn1 = 0)) -> (((((not (an2 = (- 2147483648))) and
   (not (bn2 = (- 2147483648)))) and ((abs_int(an2) <= abs_int(a)) or
   (abs_int(an2) <= abs_int(b)))) and ((abs_int(bn2) <= abs_int(a)) or
-  (abs_int(bn2) <= abs_int(b))))
-
-axiom H12 : ((((((- 2147483648) <= 2147483647) -> in_range1(ao2)) and
-  (((- 2147483648) <= 2147483647) -> in_range1(an2))) and
-  (((- 2147483648) <= 2147483647) -> in_range1(bn2))) and (not (bn2 = 0)))
-
-axiom H13 : (not (an2 = (- 2147483648)))
-
-axiom H14 : (not (bn2 = (- 2147483648)))
-
-axiom H15 : ((o6 = abs_int(a)) and in_range1(abs_int(a)))
-
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range1(abs_int(an2))
+  (abs_int(bn2) <= abs_int(b)))) -> (((((((- 2147483648) <= 2147483647) ->
+  in_range1(ao1)) and (((- 2147483648) <= 2147483647) -> in_range1(an2))) and
+  (((- 2147483648) <= 2147483647) -> in_range1(bn2))) and (not (bn2 = 0))) ->
+  (((not (an2 = (- 2147483648))) and (not (bn2 = (- 2147483648)))) ->
+  (((o = abs_int(a)) and in_range1(abs_int(a))) ->
+  in_range1(abs_int(an2))))))))))))))))

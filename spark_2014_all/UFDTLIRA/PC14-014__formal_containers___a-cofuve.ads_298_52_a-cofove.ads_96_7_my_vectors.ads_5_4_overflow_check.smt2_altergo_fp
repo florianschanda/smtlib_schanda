@@ -198,12 +198,6 @@ logic length__function_guard : int, us_rep -> prop
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq5 : bool, bool -> bool
-
-axiom bool_eq_def3 :
-  (forall x:bool. forall y:bool [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -215,6 +209,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq5 : bool, bool -> bool
+
+axiom bool_eq_def3 :
+  (forall x:bool. forall y:bool [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
 
 predicate in_range3(x: int) = ((x = 0) or (x = 1))
 
@@ -318,40 +318,15 @@ axiom get__post_axiom :
   (position1 <= (0 + length(container1))))) -> in_range2(get(container1,
   position1)))))
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic result : bool
-
-logic result1 : bool
-
-axiom H : in_range1(position)
-
-axiom H1 : in_range2(new_item)
-
-axiom H2 : ((o3 = length(container)) and (in_range4(o3) and
-  ((0 + o3) <= 10)))
-
-axiom H3 : (((o3 <  2147483647) -> (result = true)) and
-  ((not (o3 <  2147483647)) -> (result = false)))
-
-axiom H4 : (result = true)
-
-axiom H5 : ((o2 = (0 + length(container))) and (in_range5(o2) and
-  (o2 = (0 + length(container)))))
-
-axiom H6 : (((o2 <  10) -> (result1 = true)) and ((not (o2 <  10)) ->
-  (result1 = false)))
-
-axiom H7 : (result1 = true)
-
-axiom H8 : ((o = (0 + length(container))) and (in_range5(o) and
-  (o = (0 + length(container)))))
-
  (* File "a-cofuve.ads", line 272, characters 0-0 *)
-goal WP_parameter_def : (not (o = 2147483647))
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. forall o2:int. forall result:bool.
+  forall result1:bool. (in_range1(position) -> (in_range2(new_item) ->
+  ((((o2 = length(container)) and (in_range4(o2) and ((0 + o2) <= 10))) and
+  (((o2 <  2147483647) and (result = true)) or ((not (o2 <  2147483647)) and
+  (result = false)))) -> ((result = true) ->
+  ((((o1 = (0 + length(container))) and (in_range5(o1) and
+  (o1 = (0 + length(container))))) and (((o1 <  10) and (result1 = true)) or
+  ((not (o1 <  10)) and (result1 = false)))) -> ((result1 = true) ->
+  (((o = (0 + length(container))) and (in_range5(o) and
+  (o = (0 + length(container))))) -> (not (o = 2147483647))))))))))

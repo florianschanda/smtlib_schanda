@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -757,152 +757,28 @@ axiom w_get__post_axiom :
   ((in_range1(witness1) and (has_witness(container, witness1) = true)) ->
   in_range4(w_get(container, witness1)))))
 
-logic cu__split_fields : count_type
-
-logic linked_list__search__result : count_type
-
-logic o : count_type
-
-logic o1 : count_type
-
-logic temp___455 : count_type
-
-logic linked_list__search__cu__assume : count_type
-
-logic temp___453 : count_type
-
-logic i : int
-
-logic o2 : us_rep3
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : bool
-
-logic o6 : us_rep2
-
-logic o7 : int
-
-logic o8 : int
-
-logic i1 : int
-
-logic o9 : us_rep3
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : bool
-
-logic o13 : us_rep2
-
-logic o14 : int
-
-logic o15 : int
-
-logic o16 : bool
-
-logic linked_list__search__result1 : count_type
-
-logic result : count_type
-
-logic cu__split_fields1 : count_type
-
-logic cu__split_fields2 : count_type
-
-logic linked_list__search__result2 : count_type
-
-logic result1 : bool
-
-logic result2 : bool
-
-logic result3 : bool
-
-logic result4 : count_type
-
-logic linked_list__search__result3 : count_type
-
-logic cu__split_fields3 : count_type
-
-logic cu__split_fields4 : count_type
-
-logic linked_list__search__result4 : count_type
-
-logic cu__split_fields5 : count_type
-
-logic linked_list__search__result5 : count_type
-
-logic cu__split_fields6 : count_type
-
-logic linked_list__search__result6 : count_type
-
-logic cu__split_fields7 : count_type
-
-logic linked_list__search__result7 : count_type
-
-logic cu__split_fields8 : count_type
-
-logic linked_list__search__result8 : count_type
-
-logic cu__split_fields9 : count_type
-
-logic linked_list__search__result9 : count_type
-
-logic result5 : count_type
-
-logic linked_list__search__result10 : count_type
-
-logic linked_list__search__result11 : count_type
-
-logic linked_list__search__result12 : count_type
-
-logic cu__split_fields10 : count_type
-
-logic linked_list__search__result13 : count_type
-
-logic cu__split_fields11 : count_type
-
-logic linked_list__search__result14 : count_type
-
-logic cu__split_fields12 : count_type
-
-logic linked_list__search__result15 : count_type
-
-logic cu__split_fields13 : count_type
-
-logic linked_list__search__result16 : count_type
-
-logic result6 : bool
-
-logic result7 : bool
-
-logic result8 : bool
-
-logic result9 : bool
-
-axiom H : (to_rep(o) = 0)
-
-axiom H1 : (o = o1)
-
-axiom H2 : (temp___455 = o1)
-
-axiom H3 : (temp___455 = no_element)
-
-axiom H4 : (({ us_split_fields3 = { rec__linked_list__mylists__cursor__node =
+ (* File "a-cfdlli.ads", line 51, characters 0-0 *)
+goal WP_parameter_def :
+  (forall cu__split_fields:count_type. forall o:count_type.
+  forall o1:count_type. forall temp___497:count_type.
+  forall linked_list__search__cu__assume:count_type. forall i:int.
+  forall o2:us_rep3. forall o3:int. forall o4:int. forall o5:bool.
+  forall o6:us_rep2. forall result:count_type.
+  forall cu__split_fields1:count_type. forall cu__split_fields2:count_type.
+  forall result1:bool. forall result2:bool. (((((to_rep(o) = 0) and
+  (o = o1)) and (temp___497 = o1)) and (no_element = temp___497)) -> (((({
+  us_split_fields3 = { rec__linked_list__mylists__cursor__node =
   linked_list__search__cu__assume } } = first({ us_split_discrs1 = {
   rec__linked_list__mylists__list__capacity = l }; us_split_fields1 = {
   rec__linked_list__mylists__list = l1 } })) and (((bool_eq1(length2({
   us_split_discrs1 = { rec__linked_list__mylists__list__capacity = l };
   us_split_fields1 = { rec__linked_list__mylists__list = l1 } }),
-  0) = true) -> (bool_eq4({ us_split_fields3 = {
+  0) = true) and (bool_eq4({ us_split_fields3 = {
   rec__linked_list__mylists__cursor__node = linked_list__search__cu__assume }
   }, { us_split_fields3 = { rec__linked_list__mylists__cursor__node =
-  no_element } }) = true)) and ((not (bool_eq1(length2({ us_split_discrs1 = {
+  no_element } }) = true)) or ((not (bool_eq1(length2({ us_split_discrs1 = {
   rec__linked_list__mylists__list__capacity = l }; us_split_fields1 = {
-  rec__linked_list__mylists__list = l1 } }), 0) = true)) ->
+  rec__linked_list__mylists__list = l1 } }), 0) = true)) and
   ((has_key(positions({ us_split_discrs1 = {
   rec__linked_list__mylists__list__capacity = l }; us_split_fields1 = {
   rec__linked_list__mylists__list = l1 } }), { us_split_fields3 = {
@@ -911,94 +787,62 @@ axiom H4 : (({ us_split_fields3 = { rec__linked_list__mylists__cursor__node =
   rec__linked_list__mylists__list__capacity = l }; us_split_fields1 = {
   rec__linked_list__mylists__list = l1 } }), { us_split_fields3 = {
   rec__linked_list__mylists__cursor__node = linked_list__search__cu__assume }
-  }) = 1)))))
-
-axiom H5 : (result = cu__split_fields)
-
-axiom H6 : (linked_list__search__cu__assume = cu__split_fields1)
-
-axiom H7 : (not (bool_eq4({ us_split_fields3 = {
+  }) = 1))))) and (({ us_split_fields__content1 = {
+  rec__linked_list__mylists__cursor__node = result } } = {
+  us_split_fields__content1 = { rec__linked_list__mylists__cursor__node =
+  cu__split_fields } }) and
+  (linked_list__search__cu__assume = cu__split_fields1))) ->
+  ((not (bool_eq4({ us_split_fields3 = {
   rec__linked_list__mylists__cursor__node = cu__split_fields1 } }, {
   us_split_fields3 = { rec__linked_list__mylists__cursor__node = no_element }
-  }) = true))
-
-axiom H8 : ((has_key(positions({ us_split_discrs1 = {
+  }) = true)) -> (((has_key(positions({ us_split_discrs1 = {
   rec__linked_list__mylists__list__capacity = l }; us_split_fields1 = {
   rec__linked_list__mylists__list = l1 } }), { us_split_fields3 = {
   rec__linked_list__mylists__cursor__node = cu__split_fields2 }
   }) = true) and
-  (forall i2:int. (((1 <= i2) and (i2 <= (get1(positions({ us_split_discrs1 =
+  (forall i1:int. (((1 <= i1) and (i1 <= (get1(positions({ us_split_discrs1 =
   { rec__linked_list__mylists__list__capacity = l }; us_split_fields1 = {
   rec__linked_list__mylists__list = l1 } }), { us_split_fields3 = {
   rec__linked_list__mylists__cursor__node = cu__split_fields2 } }) - 1))) ->
   (not (get(model__({ us_split_discrs1 = {
   rec__linked_list__mylists__list__capacity = l }; us_split_fields1 = {
-  rec__linked_list__mylists__list = l1 } }), i2) = 0)))))
-
-axiom H9 : (not (bool_eq4({ us_split_fields3 = {
+  rec__linked_list__mylists__list = l1 } }), i1) = 0))))) ->
+  ((not (bool_eq4({ us_split_fields3 = {
   rec__linked_list__mylists__cursor__node = cu__split_fields2 } }, {
   us_split_fields3 = { rec__linked_list__mylists__cursor__node = no_element }
-  }) = true))
-
-axiom H10 : ((result1 = has_key(positions({ us_split_discrs1 = {
+  }) = true)) -> (((result1 = has_key(positions({ us_split_discrs1 = {
   rec__linked_list__mylists__list__capacity = l }; us_split_fields1 = {
   rec__linked_list__mylists__list = l1 } }), { us_split_fields3 = {
   rec__linked_list__mylists__cursor__node = cu__split_fields2 } })) and
   ((result1 = true) <-> (has_key(positions({ us_split_discrs1 = {
   rec__linked_list__mylists__list__capacity = l }; us_split_fields1 = {
   rec__linked_list__mylists__list = l1 } }), { us_split_fields3 = {
-  rec__linked_list__mylists__cursor__node = cu__split_fields2 } }) = true)))
-
-axiom H11 : (result1 = true)
-
-axiom H12 : ((o2 = positions({ us_split_discrs1 = {
-  rec__linked_list__mylists__list__capacity = l }; us_split_fields1 = {
-  rec__linked_list__mylists__list = l1 } })) and ((not (has_key(o2, {
-  us_split_fields3 = { rec__linked_list__mylists__cursor__node = no_element }
-  }) = true)) and
-  (forall i2:count_type. ((has_key(o2, { us_split_fields3 = {
-  rec__linked_list__mylists__cursor__node = i2 } }) = true) ->
-  (((1 <= get1(o2, { us_split_fields3 = {
-  rec__linked_list__mylists__cursor__node = i2 } })) and (get1(o2, {
-  us_split_fields3 = { rec__linked_list__mylists__cursor__node = i2 }
-  }) <= length2({ us_split_discrs1 = {
+  rec__linked_list__mylists__cursor__node = cu__split_fields2 }
+  }) = true))) -> ((result1 = true) -> (((((((o2 = positions({
+  us_split_discrs1 = { rec__linked_list__mylists__list__capacity = l };
+  us_split_fields1 = { rec__linked_list__mylists__list = l1 } })) and
+  ((not (has_key(o2, { us_split_fields3 = {
+  rec__linked_list__mylists__cursor__node = no_element } }) = true)) and
+  (forall i1:us_rep1. ((has_key(o2, i1) = true) -> (((1 <= get1(o2, i1)) and
+  (get1(o2, i1) <= length2({ us_split_discrs1 = {
   rec__linked_list__mylists__list__capacity = l }; us_split_fields1 = {
   rec__linked_list__mylists__list = l1 } }))) and
-  (forall j:count_type. ((has_key(o2, { us_split_fields3 = {
-  rec__linked_list__mylists__cursor__node = j } }) = true) -> ((get1(o2, {
-  us_split_fields3 = { rec__linked_list__mylists__cursor__node = i2 }
-  }) = get1(o2, { us_split_fields3 = {
-  rec__linked_list__mylists__cursor__node = j } })) -> (bool_eq4({
-  us_split_fields3 = { rec__linked_list__mylists__cursor__node = i2 } }, {
-  us_split_fields3 = { rec__linked_list__mylists__cursor__node = j }
-  }) = true)))))))))
-
-axiom H13 : ((o3 = get1(o2, { us_split_fields3 = {
-  rec__linked_list__mylists__cursor__node = cu__split_fields2 } })) and
-  (in_range4(o3) and ((of_int(0) = true) -> ((o3 = w_get(o2, witness(o2, {
+  (forall j:us_rep1. ((has_key(o2, j) = true) -> ((get1(o2, i1) = get1(o2,
+  j)) -> (bool_eq4(i1, j) = true))))))))) and ((o3 = get1(o2, {
   us_split_fields3 = { rec__linked_list__mylists__cursor__node =
-  cu__split_fields2 } }))) and
+  cu__split_fields2 } })) and (in_range4(o3) and ((of_int(0) = true) ->
+  ((o3 = w_get(o2, witness(o2, { us_split_fields3 = {
+  rec__linked_list__mylists__cursor__node = cu__split_fields2 } }))) and
   (forall k:us_rep1. ((has_key(o2, k) = true) -> ((bool_eq4(k, {
   us_split_fields3 = { rec__linked_list__mylists__cursor__node =
   cu__split_fields2 } }) = true) <-> (witness(o2, { us_split_fields3 = {
   rec__linked_list__mylists__cursor__node = cu__split_fields2 }
-  }) = witness(o2, k)))))))))
-
-axiom H14 : (o4 = (o3 - 1))
-
-axiom H15 : (((i <= o4) -> (o5 = true)) and ((not (i <= o4)) ->
-  (o5 = false)))
-
-axiom H16 : (((1 <= i) -> (result2 = o5)) and ((not (1 <= i)) ->
-  (result2 = false)))
-
-axiom H17 : (result2 = true)
-
-axiom H18 : ((o6 = model__({ us_split_discrs1 = {
+  }) = witness(o2, k)))))))))) and (o4 = (o3 - 1))) and (((i <= o4) and
+  (o5 = true)) or ((not (i <= o4)) and (o5 = false)))) and (((1 <= i) and
+  (result2 = o5)) or ((not (1 <= i)) and (result2 = false)))) ->
+  ((result2 = true) -> (((o6 = model__({ us_split_discrs1 = {
   rec__linked_list__mylists__list__capacity = l }; us_split_fields1 = {
   rec__linked_list__mylists__list = l1 } })) and (length(o6) = length2({
   us_split_discrs1 = { rec__linked_list__mylists__list__capacity = l };
-  us_split_fields1 = { rec__linked_list__mylists__list = l1 } })))
-
- (* File "a-cfdlli.ads", line 51, characters 0-0 *)
-goal WP_parameter_def : (1 <= i)
+  us_split_fields1 = { rec__linked_list__mylists__list = l1 } }))) ->
+  (1 <= i))))))))))))

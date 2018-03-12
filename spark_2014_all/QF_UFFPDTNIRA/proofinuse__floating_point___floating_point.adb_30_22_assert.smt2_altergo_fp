@@ -1097,32 +1097,10 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic res : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic result : t
-
-logic res1 : t
-
-axiom H : tqtisFinite(x)
-
-axiom H1 : tqtisFinite(y)
-
-axiom H2 : tqtisFinite(z)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
-
-axiom H3 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(res))
 
 logic fliteral2 : t
 
@@ -1134,24 +1112,15 @@ logic fliteral3 : t
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 180.0))
 
-axiom H4 : (le(fliteral2, x) and le(x, fliteral3))
-
-axiom H5 : (le(neg(fliteral3), y) and le(y, fliteral2))
-
-axiom H6 : (le(fliteral2, z) and le(z, fliteral))
-
-axiom H7 : le(fliteral2, add(NearestTiesToEven, x, y))
-
-axiom H8 : ((o1 = mul(NearestTiesToEven, y, z)) and
-  tqtisFinite(mul(NearestTiesToEven, y, z)))
-
-axiom H9 : (o2 = add(NearestTiesToEven, x, o1))
-
-axiom H10 : ((o3 = o2) and tqtisFinite(o2))
-
-axiom H11 : (result = res)
-
-axiom H12 : (res1 = o3)
-
  (* File "floating_point.adb", line 15, characters 0-0 *)
-goal WP_parameter_def : le(fliteral2, res1)
+goal WP_parameter_def :
+  (forall res:t. forall o:t. forall o1:t. forall o2:t. forall result:t.
+  forall res1:t. (tqtisFinite(x) -> (tqtisFinite(y) -> (tqtisFinite(z) ->
+  ((le(neg(fliteral1), fliteral1) -> tqtisFinite(res)) -> ((le(fliteral2,
+  x) and le(x, fliteral3)) -> ((le(neg(fliteral3), y) and le(y,
+  fliteral2)) -> ((le(fliteral2, z) and le(z, fliteral)) -> (le(fliteral2,
+  add(NearestTiesToEven, x, y)) -> ((((((o = mul(NearestTiesToEven, y,
+  z)) and tqtisFinite(mul(NearestTiesToEven, y, z))) and
+  (o1 = add(NearestTiesToEven, x, o))) and ((o2 = o1) and
+  tqtisFinite(o1))) and ((result = res) and (res1 = o2))) -> le(fliteral2,
+  res1)))))))))))

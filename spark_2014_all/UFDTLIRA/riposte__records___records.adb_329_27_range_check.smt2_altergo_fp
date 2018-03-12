@@ -335,123 +335,22 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic tmp__split_fields : bool
-
-logic tmp__split_fields1 : unsigned_byte
-
-logic tmp__split_fields2 : unsigned_byte
-
-logic records__update_b__result : bool
-
-logic records__update_b__result1 : unsigned_byte
-
-logic records__update_b__result2 : unsigned_byte
-
-logic o : int
-
-logic o1 : unsigned_byte
-
-logic o2 : unsigned_byte
-
-logic o3 : unsigned_byte
-
-logic o4 : unsigned_byte
-
-logic o5 : unsigned_byte
-
-logic o6 : bool
-
-logic o7 : unsigned_byte
-
-logic o8 : unsigned_byte
-
-logic temp___389 : bool
-
-logic temp___3891 : unsigned_byte
-
-logic temp___3892 : unsigned_byte
-
-logic result : bool
-
-logic result1 : unsigned_byte
-
-logic result2 : unsigned_byte
-
-logic tmp__split_fields3 : bool
-
-logic tmp__split_fields4 : unsigned_byte
-
-logic tmp__split_fields5 : unsigned_byte
-
-logic result3 : bool
-
-logic result4 : unsigned_byte
-
-logic result5 : unsigned_byte
-
-logic tmp__split_fields6 : bool
-
-logic tmp__split_fields7 : unsigned_byte
-
-logic tmp__split_fields8 : unsigned_byte
-
-logic result6 : bool
-
-logic result7 : unsigned_byte
-
-logic result8 : unsigned_byte
-
-logic records__update_b__result3 : bool
-
-logic records__update_b__result4 : unsigned_byte
-
-logic records__update_b__result5 : unsigned_byte
-
-logic records__update_b__result6 : bool
-
-logic records__update_b__result7 : unsigned_byte
-
-logic records__update_b__result8 : unsigned_byte
-
-logic records__update_b__result9 : bool
-
-logic records__update_b__result10 : unsigned_byte
-
-logic records__update_b__result11 : unsigned_byte
-
-logic tmp__split_fields9 : bool
-
-logic tmp__split_fields10 : unsigned_byte
-
-logic tmp__split_fields11 : unsigned_byte
-
-logic records__update_b__result12 : bool
-
-logic records__update_b__result13 : unsigned_byte
-
-logic records__update_b__result14 : unsigned_byte
-
-logic tmp__split_fields12 : bool
-
-logic tmp__split_fields13 : unsigned_byte
-
-logic tmp__split_fields14 : unsigned_byte
-
-logic records__update_b__result15 : bool
-
-logic records__update_b__result16 : unsigned_byte
-
-logic records__update_b__result17 : unsigned_byte
-
-axiom H : in_range(n)
-
-axiom H1 : (n <  255)
-
-axiom H2 : ((result = tmp__split_fields) and
-  ((result1 = tmp__split_fields1) and (result2 = tmp__split_fields2)))
-
-axiom H3 : ((tmp__split_fields3 = x) and ((tmp__split_fields4 = x1) and
-  (tmp__split_fields5 = x2)))
-
  (* File "records_prooffuncs.ads", line 19, characters 0-0 *)
-goal WP_parameter_def : in_range((n + 1))
+goal WP_parameter_def :
+  (forall tmp__split_fields:bool. forall tmp__split_fields1:unsigned_byte.
+  forall tmp__split_fields2:unsigned_byte. forall result:bool.
+  forall result1:unsigned_byte. forall result2:unsigned_byte.
+  forall tmp__split_fields3:bool. forall tmp__split_fields4:unsigned_byte.
+  forall tmp__split_fields5:unsigned_byte. (in_range(n) -> ((n <  255) ->
+  ((({ us_split_fields__content1 = {
+  rec__records_prooffuncs__optional_pair__exists = result;
+  rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
+  rec__records_prooffuncs__pair__a = result1;
+  rec__records_prooffuncs__pair__b = result2 } } } } = {
+  us_split_fields__content1 = {
+  rec__records_prooffuncs__optional_pair__exists = tmp__split_fields;
+  rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
+  rec__records_prooffuncs__pair__a = tmp__split_fields1;
+  rec__records_prooffuncs__pair__b = tmp__split_fields2 } } } }) and
+  ((tmp__split_fields3 = x) and ((tmp__split_fields4 = x1) and
+  (tmp__split_fields5 = x2)))) -> in_range((n + 1))))))

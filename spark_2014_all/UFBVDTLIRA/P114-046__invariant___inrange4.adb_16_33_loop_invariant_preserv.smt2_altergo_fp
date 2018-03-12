@@ -601,12 +601,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -618,6 +612,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -773,157 +773,41 @@ function t1b__ref___projection(a: t1b__ref) : unsigned_64 = (a).t1b__content
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
-logic matched : bool
+logic rliteral : t
 
-logic i : t
+axiom rliteral_axiom : (tqtint(rliteral) = 2)
 
-logic i1 : t
+logic rliteral1 : t
 
-logic inrange4__inrange64__result : bool
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 65535)
 
-logic temp___205 : bool
+logic rliteral2 : t
 
-logic temp___204 : t
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 0)
 
-logic result : bool
+logic rliteral3 : t
 
-logic matched1 : bool
-
-logic result1 : t
-
-logic i2 : t
-
-logic result2 : t
-
-logic i3 : t
-
-logic result3 : bool
-
-logic matched2 : bool
-
-logic matched3 : bool
-
-logic i4 : t
-
-logic result4 : t
-
-logic i5 : t
-
-logic result5 : bool
-
-logic matched4 : bool
-
-logic matched5 : bool
-
-logic i6 : t
-
-logic matched6 : bool
-
-logic i7 : t
-
-logic matched7 : bool
-
-logic i8 : t
-
-logic matched8 : bool
-
-logic i9 : t
-
-logic matched9 : bool
-
-logic i10 : t
-
-logic matched10 : bool
-
-logic i11 : t
-
-logic matched11 : bool
-
-logic i12 : t
-
-logic matched12 : bool
-
-logic i13 : t
-
-logic result6 : bool
-
-logic inrange4__inrange64__result1 : bool
-
-logic inrange4__inrange64__result2 : bool
-
-logic inrange4__inrange64__result3 : bool
-
-logic matched13 : bool
-
-logic i14 : t
-
-logic i15 : t
-
-logic inrange4__inrange64__result4 : bool
-
-logic matched14 : bool
-
-logic i16 : t
-
-logic i17 : t
-
-logic inrange4__inrange64__result5 : bool
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : true
-
-axiom H3 : (uge(range_size, of_int(2)) and ule(range_size, of_int(65535)))
-
-axiom H4 : (result = matched)
-
-axiom H5 : (matched1 = of_int1(0))
-
-axiom H6 : (result1 = i)
-
-axiom H7 : (i2 = of_int(0))
-
-axiom H8 : true
-
-axiom H9 : (result2 = i1)
-
-axiom H10 : (i3 = of_int(0))
-
-axiom H11 : ule(of_int(0), i3)
-
-axiom H12 : ule(i3, sub(range_size, of_int(1)))
-
-axiom H13 : (not (var = add(bottom, i3)))
-
-axiom H14 : (matched2 = matched1)
-
-axiom H15 :
-  (forall k:t. ((ule(of_int(0), k) and ule(k, i4)) -> (not (var = add(bottom,
-  k)))))
-
-axiom H16 : (not (matched3 = true))
-
-axiom H17 : ((ule(of_int(0), sub(range_size, of_int(1))) ->
-  dynamic_property(of_int(0), sub(range_size, of_int(1)), i4)) and
-  (ule(of_int(0), i4) and ule(i4, sub(range_size, of_int(1)))))
-
-axiom H18 : (not (i4 = sub(range_size, of_int(1))))
-
-axiom H19 : (i4 = result4)
-
-axiom H20 : (i5 = add(i4, of_int(1)))
-
-axiom H21 : (not (var = add(bottom, i5)))
-
-axiom H22 : (matched4 = matched3)
-
-logic k : t
-
-axiom H23 : ule(of_int(0), k)
-
-axiom H24 : ule(k, i5)
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 1)
 
  (* File "inrange4.ads", line 15, characters 0-0 *)
-goal WP_parameter_def : (not (var = add(bottom, k)))
+goal WP_parameter_def :
+  (forall matched:bool. forall i:t. forall i1:t. forall result:bool.
+  forall matched1:bool. forall result1:t. forall i2:t. forall result2:t.
+  forall i3:t. forall matched2:bool. forall matched3:bool. forall i4:t.
+  forall result3:t. forall i5:t. forall matched4:bool. ((uge(range_size,
+  rliteral) and ule(range_size, rliteral1)) -> ((({ bool__content = result
+  } = { bool__content = matched }) and (matched1 = of_int1(0))) -> ((({
+  t__content = result1 } = { t__content = i }) and (i2 = rliteral2)) -> ((({
+  t__content = result2 } = { t__content = i1 }) and (i3 = rliteral2)) ->
+  ((ule(rliteral2, i3) and ule(i3, sub(range_size, rliteral3))) ->
+  (((not (var = add(bottom, i3))) and (matched2 = matched1)) ->
+  (((forall k:t. ((ule(rliteral2, k) and ule(k, i4)) ->
+    (not (var = add(bottom, k))))) and
+  (not (matched3 = true))) -> ((((ule(rliteral2, sub(range_size,
+  rliteral3)) -> dynamic_property(rliteral2, sub(range_size, rliteral3),
+  i4)) and (ule(rliteral2, i4) and ule(i4, sub(range_size, rliteral3)))) and
+  ((not (i4 = sub(range_size, rliteral3))) and (((i4 = result3) and
+  (i5 = add(i4, rliteral3))) and ((not (var = add(bottom, i5))) and
+  (matched4 = matched3))))) ->
+  (forall k:t. ((ule(rliteral2, k) and ule(k, i5)) -> (not (var = add(bottom,
+  k))))))))))))))

@@ -350,12 +350,6 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq4 : bool, bool -> bool
-
-axiom bool_eq_def3 :
-  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -367,6 +361,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq4 : bool, bool -> bool
+
+axiom bool_eq_def3 :
+  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -442,29 +442,19 @@ axiom is_max__def_axiom1 :
   x2 })]. ((is_max2({ us_split_fields1 = { rec__unit1__t1__c1 = x;
   rec__ext__ = x1 }; attr__tag = x2 }) = true) <-> (to_rep(x) = 2147483647)))
 
-logic x__split_fields : integer
-
-logic x__split_fields1 : integer
-
-logic x__split_fields2 : us_private
-
-logic x__split_fields3 : integer
-
-logic x__split_fields4 : integer
-
-logic x__split_fields5 : us_private
-
-axiom H : (not (is_max({ us_split_fields3 = { rec__unit2__t2__c2 =
-  x__split_fields; rec__unit1__t1__c11 = x__split_fields1; rec__ext__1 =
-  x__split_fields2 }; attr__tag1 = x__attr__tag }) = true))
-
-axiom H1 : ((to_rep(x__split_fields4) = (to_rep(x__split_fields1) + 1)) and
-  (to_rep(x__split_fields3) = (to_rep(x__split_fields) + 1)))
-
  (* File "unit2.ads", line 23, characters 0-0 *)
-goal WP_parameter_def : (bool_eq3({ us_split_fields3 = { rec__unit2__t2__c2 =
-  x__split_fields3; rec__unit1__t1__c11 = x__split_fields4; rec__ext__1 =
-  x__split_fields5 }; attr__tag1 = x__attr__tag }, next({ us_split_fields3 =
-  { rec__unit2__t2__c2 = x__split_fields; rec__unit1__t1__c11 =
+goal WP_parameter_def :
+  (forall x__split_fields:integer. forall x__split_fields1:integer.
+  forall x__split_fields2:us_private. forall x__split_fields3:integer.
+  forall x__split_fields4:integer. forall x__split_fields5:us_private.
+  ((not (is_max({ us_split_fields3 = { rec__unit2__t2__c2 = x__split_fields;
+  rec__unit1__t1__c11 = x__split_fields1; rec__ext__1 = x__split_fields2 };
+  attr__tag1 = x__attr__tag }) = true)) ->
+  (((to_rep(x__split_fields4) = (to_rep(x__split_fields1) + 1)) and
+  (to_rep(x__split_fields3) = (to_rep(x__split_fields) + 1))) -> (bool_eq3({
+  us_split_fields3 = { rec__unit2__t2__c2 = x__split_fields3;
+  rec__unit1__t1__c11 = x__split_fields4; rec__ext__1 = x__split_fields5 };
+  attr__tag1 = x__attr__tag }, next({ us_split_fields3 = {
+  rec__unit2__t2__c2 = x__split_fields; rec__unit1__t1__c11 =
   x__split_fields1; rec__ext__1 = x__split_fields2 }; attr__tag1 =
-  x__attr__tag })) = true)
+  x__attr__tag })) = true))))

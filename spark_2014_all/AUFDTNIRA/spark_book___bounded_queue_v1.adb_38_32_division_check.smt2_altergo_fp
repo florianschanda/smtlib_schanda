@@ -350,24 +350,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,element_type) farray, int, int,
-  (int,element_type) farray, int, int -> (int,element_type) farray
-
-axiom concat_def :
-  (forall a:(int,element_type) farray. forall b:(int,element_type) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : element_type, int -> (int,element_type) farray
-
-axiom singleton_def :
-  (forall v:element_type.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,element_type) farray, int, int,
   (int,element_type) farray, int, int -> bool
 
@@ -379,17 +361,17 @@ axiom bool_eq_def4 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep2((a[temp___idx_132])) = to_rep2((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep2((a[temp___idx_154])) = to_rep2((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep2((a[temp___idx_132])) = to_rep2((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep2((a[temp___idx_154])) = to_rep2((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -399,37 +381,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep2((a[temp___idx_132])) = to_rep2((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,element_type) farray, int, int,
-  (int,element_type) farray, int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,element_type) farray. forall b:(int,element_type) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,element_type) farray. forall b:(int,element_type) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep2((a[(i + 1)])) <  to_rep2((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,element_type) farray. forall b:(int,element_type) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep2((b[(i + 1)])) <  to_rep2((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep2((a[temp___idx_154])) = to_rep2((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic to_rep3 : integer -> int
 
@@ -811,213 +765,21 @@ logic item : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic queue__split_fields : natural
-
-logic queue__split_fields1 : positive
-
-logic queue__split_fields2 : positive
-
-logic queue__split_fields3 : (int,element_type) farray
-
-logic queue__split_fields4 : t
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : positive
-
-logic o3 : natural
-
-logic o4 : positive
-
-logic o5 : positive
-
-logic o6 : (int,element_type) farray
-
-logic o7 : t
-
-logic temp___293 : positive
-
-logic temp___2931 : natural
-
-logic temp___2932 : positive
-
-logic temp___2933 : positive
-
-logic temp___2934 : (int,element_type) farray
-
-logic temp___2935 : t
-
-logic o8 : element_type
-
-logic o9 : int
-
-logic o10 : (int,element_type) farray
-
-logic o11 : (int,element_type) farray
-
-logic o12 : t
-
-logic o13 : natural
-
-logic o14 : positive
-
-logic o15 : positive
-
-logic o16 : (int,element_type) farray
-
-logic o17 : t
-
-logic temp___297 : positive
-
-logic temp___2971 : natural
-
-logic temp___2972 : positive
-
-logic temp___2973 : positive
-
-logic temp___2974 : (int,element_type) farray
-
-logic temp___2975 : t
-
-logic o18 : int
-
-logic o19 : natural
-
-logic o20 : natural
-
-logic o21 : positive
-
-logic o22 : positive
-
-logic o23 : (int,element_type) farray
-
-logic o24 : t
-
-logic temp___299 : positive
-
-logic temp___2991 : natural
-
-logic temp___2992 : positive
-
-logic temp___2993 : positive
-
-logic temp___2994 : (int,element_type) farray
-
-logic temp___2995 : t
-
-logic o25 : int
-
-logic o26 : int
-
-logic o27 : int
-
-logic o28 : int
-
-logic o29 : int
-
-logic o30 : bool
-
-logic result : natural
-
-logic result1 : positive
-
-logic result2 : positive
-
-logic result3 : (int,element_type) farray
-
-logic result4 : t
-
-logic queue__split_fields5 : natural
-
-logic queue__split_fields6 : positive
-
-logic queue__split_fields7 : positive
-
-logic queue__split_fields8 : (int,element_type) farray
-
-logic queue__split_fields9 : t
-
-logic result5 : natural
-
-logic result6 : positive
-
-logic result7 : positive
-
-logic result8 : (int,element_type) farray
-
-logic result9 : t
-
-logic queue__split_fields10 : natural
-
-logic queue__split_fields11 : positive
-
-logic queue__split_fields12 : positive
-
-logic queue__split_fields13 : (int,element_type) farray
-
-logic queue__split_fields14 : t
-
-logic result10 : natural
-
-logic result11 : positive
-
-logic result12 : positive
-
-logic result13 : (int,element_type) farray
-
-logic result14 : t
-
-logic queue__split_fields15 : natural
-
-logic queue__split_fields16 : positive
-
-logic queue__split_fields17 : positive
-
-logic queue__split_fields18 : (int,element_type) farray
-
-logic queue__split_fields19 : t
-
-logic queue__split_fields20 : natural
-
-logic queue__split_fields21 : positive
-
-logic queue__split_fields22 : positive
-
-logic queue__split_fields23 : (int,element_type) farray
-
-logic queue__split_fields24 : t
-
-logic queue__split_fields25 : natural
-
-logic queue__split_fields26 : positive
-
-logic queue__split_fields27 : positive
-
-logic queue__split_fields28 : (int,element_type) farray
-
-logic queue__split_fields29 : t
-
-logic result15 : bool
-
-logic result16 : bool
-
-axiom H : (dynamic_property1(1, to_rep1(queue__split_discrs),
-  to_rep3(first(queue__split_fields4)),
+ (* File "bounded_queue_v1.ads", line 29, characters 0-0 *)
+goal WP_parameter_def :
+  (forall queue__split_fields:natural. forall queue__split_fields1:positive.
+  forall queue__split_fields2:positive.
+  forall queue__split_fields3:(int,element_type) farray.
+  forall queue__split_fields4:t. ((dynamic_property1(1,
+  to_rep1(queue__split_discrs), to_rep3(first(queue__split_fields4)),
   to_rep3(last(queue__split_fields4))) and
   ((to_rep3(first(queue__split_fields4)) = 1) and
-  (to_rep3(last(queue__split_fields4)) = to_rep1(queue__split_discrs))))
-
-axiom H1 : in_range3(item)
-
-axiom H2 : (not (full({ us_split_discrs1 = {
+  (to_rep3(last(queue__split_fields4)) = to_rep1(queue__split_discrs)))) ->
+  (in_range3(item) -> ((not (full({ us_split_discrs1 = {
   rec__bounded_queue_v1__queue_type__max_size = queue__split_discrs };
   us_split_fields1 = { rec__bounded_queue_v1__queue_type__count =
   queue__split_fields; rec__bounded_queue_v1__queue_type__front =
   queue__split_fields1; rec__bounded_queue_v1__queue_type__rear =
   queue__split_fields2; rec__bounded_queue_v1__queue_type__items = { elts =
-  queue__split_fields3; rt = queue__split_fields4 } } }) = true))
-
- (* File "bounded_queue_v1.ads", line 29, characters 0-0 *)
-goal WP_parameter_def : (not (to_rep1(queue__split_discrs) = 0))
+  queue__split_fields3; rt = queue__split_fields4 } } }) = true)) ->
+  (not (to_rep1(queue__split_discrs) = 0))))))

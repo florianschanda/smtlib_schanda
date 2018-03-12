@@ -213,12 +213,9 @@ logic p12__function_guard : bool, us_rep -> prop
 
 axiom p12__post_axiom : true
 
-logic temp___238 : integer
-
-logic temp___2381 : integer
-
-axiom H : ((to_rep(temp___238) = 0) and (to_rep(temp___2381) = 0))
-
  (* File "p.ads", line 63, characters 0-0 *)
-goal WP_parameter_def : (p12({ us_split_fields1 = { rec__p__t12__f1 =
-  temp___238; rec__p__t12__f2 = temp___2381 } }) = true)
+goal WP_parameter_def :
+  (forall temp___272:integer. forall temp___2721:integer.
+  (((to_rep(temp___272) = 0) and (to_rep(temp___2721) = 0)) -> (p12({
+  us_split_fields1 = { rec__p__t12__f1 = temp___272; rec__p__t12__f2 =
+  temp___2721 } }) = true)))

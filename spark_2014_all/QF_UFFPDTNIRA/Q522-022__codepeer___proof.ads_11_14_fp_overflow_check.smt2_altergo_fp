@@ -1091,19 +1091,12 @@ logic x2 : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : t
-
-axiom H : tqtisFinite(x1)
-
-axiom H1 : tqtisFinite(x2)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 170141173319264429905852091742258462720.0))
 
-axiom H2 : (le(x1, fliteral1) and (le(neg(fliteral1), x1) and (le(x2,
-  fliteral1) and le(neg(fliteral1), x2))))
-
  (* File "proof.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(sub(NearestTiesToEven, x1, x2))
+goal WP_parameter_def : (tqtisFinite(x1) -> (tqtisFinite(x2) -> ((le(x1,
+  fliteral1) and (le(neg(fliteral1), x1) and (le(x2, fliteral1) and
+  le(neg(fliteral1), x2)))) -> tqtisFinite(sub(NearestTiesToEven, x1, x2)))))

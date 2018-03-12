@@ -126,17 +126,5 @@ axiom foo__def_axiom :
   (in_range(p__nested__hidden) ->
   (foo(p__nested__hidden) = (p__nested__hidden + const))))
 
-logic x : int
-
-logic hidden : int
-
-logic o : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range(x))
-
-axiom H1 : in_range(hidden)
-
-axiom H2 : in_range(const)
-
  (* File "p.adb", line 13, characters 0-0 *)
 goal WP_parameter_def : true

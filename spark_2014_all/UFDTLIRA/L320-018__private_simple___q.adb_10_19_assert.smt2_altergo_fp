@@ -95,33 +95,10 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic y : us_rep
-
-logic z : us_rep
-
-logic o : us_rep
-
-logic o1 : us_rep
-
-logic result : us_rep
-
-logic y1 : us_rep
-
-logic result1 : us_rep
-
-logic z1 : us_rep
-
-axiom H : (o = init(void))
-
-axiom H1 : (result = y)
-
-axiom H2 : (y1 = o)
-
-axiom H3 : ((o1 = get(y1)) and (bool_eq(o1, y1) = true))
-
-axiom H4 : (result1 = z)
-
-axiom H5 : (z1 = o1)
-
  (* File "q.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (bool_eq(z1, y1) = true)
+goal WP_parameter_def :
+  (forall y:us_rep. forall z:us_rep. forall o:us_rep. forall o1:us_rep.
+  forall result:us_rep. forall y1:us_rep. forall result1:us_rep.
+  forall z1:us_rep. (((o = init(void)) and ((result = y) and (y1 = o))) ->
+  ((((o1 = get(y1)) and (bool_eq(o1, y1) = true)) and ((result1 = z) and
+  (z1 = o1))) -> (bool_eq(z1, y1) = true))))

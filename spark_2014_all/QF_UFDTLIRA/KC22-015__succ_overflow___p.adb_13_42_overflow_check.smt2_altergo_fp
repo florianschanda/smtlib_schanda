@@ -109,15 +109,6 @@ logic n : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-axiom H : in_range(n)
-
-axiom H1 : (n = 2147483647)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (not (n = 2147483647))
+goal WP_parameter_def : (in_range(n) -> ((n = 2147483647) ->
+  (not (n = 2147483647))))

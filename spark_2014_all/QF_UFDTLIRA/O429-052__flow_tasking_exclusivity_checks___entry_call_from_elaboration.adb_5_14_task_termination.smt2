@@ -22,7 +22,6 @@
 (define-fun us_private__ref___projection ((a us_private__ref)) us_private (us_private__content a))
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
-(assert false)
-(assert (not false))
+(assert (not true))
 (check-sat)
 (exit)

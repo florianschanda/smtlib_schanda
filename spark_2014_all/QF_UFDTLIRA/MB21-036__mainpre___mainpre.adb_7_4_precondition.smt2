@@ -25,7 +25,6 @@
 (assert true)
 (declare-const state us_private)
 (assert (= (is_valid state) true))
-(assert (= (is_valid state) true))
 (assert (not (= (is_valid state) true)))
 (check-sat)
 (exit)

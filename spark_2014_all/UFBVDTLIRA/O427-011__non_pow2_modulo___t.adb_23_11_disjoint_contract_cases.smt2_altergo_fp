@@ -594,12 +594,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -612,6 +606,12 @@ axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
 
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
+
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
 logic attr__ATTRIBUTE_IMAGE : bool -> us_image
@@ -622,7 +622,15 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type m
 
-predicate in_range1(x: t) = (ule(of_int(0), x) and ule(x, of_int(229)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 229)
+
+predicate in_range1(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 229))
 
@@ -685,126 +693,114 @@ logic y : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic t__msub__result : t
+logic rliteral2 : t
 
-logic o : t
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 2)
 
-logic result : t
+logic rliteral3 : t
 
-logic t__msub__result1 : t
-
-logic t__msub__result2 : t
-
-logic t__msub__result3 : t
-
-logic t__msub__result4 : t
-
-logic t__msub__result5 : t
-
-axiom H : in_range1(x)
-
-axiom H1 : in_range1(y)
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 4)
 
  (* File "t.adb", line 6, characters 0-0 *)
-goal WP_parameter_def : (((match_bool(bool_eq(x, of_int(0)), bool_eq(y,
-  of_int(0)), false) = true) -> (((match_bool(bool_ne(x, of_int(0)),
-  bool_eq(y, of_int(0)), false) = true) -> (((match_bool(bool_eq(x,
-  of_int(0)), bool_ne(y, of_int(0)), false) = true) ->
-  (((match_bool(bool_eq(x, of_int(2)), bool_eq(y, of_int(4)),
-  false) = true) -> (((match_bool(bool_eq(x, of_int(4)), bool_eq(y,
-  of_int(2)), false) = true) -> ((((((0 + 1) + 1) + 1) + 1) + 1) <= 1)) and
-  ((not (match_bool(bool_eq(x, of_int(4)), bool_eq(y, of_int(2)),
+goal WP_parameter_def : (in_range1(x) -> (in_range1(y) ->
+  (((match_bool(bool_eq(x, rliteral), bool_eq(y, rliteral), false) = true) ->
+  (((match_bool(bool_ne(x, rliteral), bool_eq(y, rliteral), false) = true) ->
+  (((match_bool(bool_eq(x, rliteral), bool_ne(y, rliteral), false) = true) ->
+  (((match_bool(bool_eq(x, rliteral2), bool_eq(y, rliteral3),
+  false) = true) -> (((match_bool(bool_eq(x, rliteral3), bool_eq(y,
+  rliteral2), false) = true) -> ((((((0 + 1) + 1) + 1) + 1) + 1) <= 1)) and
+  ((not (match_bool(bool_eq(x, rliteral3), bool_eq(y, rliteral2),
   false) = true)) -> ((((((0 + 1) + 1) + 1) + 1) + 0) <= 1)))) and
-  ((not (match_bool(bool_eq(x, of_int(2)), bool_eq(y, of_int(4)),
-  false) = true)) -> (((match_bool(bool_eq(x, of_int(4)), bool_eq(y,
-  of_int(2)), false) = true) -> ((((((0 + 1) + 1) + 1) + 0) + 1) <= 1)) and
-  ((not (match_bool(bool_eq(x, of_int(4)), bool_eq(y, of_int(2)),
+  ((not (match_bool(bool_eq(x, rliteral2), bool_eq(y, rliteral3),
+  false) = true)) -> (((match_bool(bool_eq(x, rliteral3), bool_eq(y,
+  rliteral2), false) = true) -> ((((((0 + 1) + 1) + 1) + 0) + 1) <= 1)) and
+  ((not (match_bool(bool_eq(x, rliteral3), bool_eq(y, rliteral2),
   false) = true)) -> ((((((0 + 1) + 1) + 1) + 0) + 0) <= 1)))))) and
-  ((not (match_bool(bool_eq(x, of_int(0)), bool_ne(y, of_int(0)),
-  false) = true)) -> (((match_bool(bool_eq(x, of_int(2)), bool_eq(y,
-  of_int(4)), false) = true) -> (((match_bool(bool_eq(x, of_int(4)),
-  bool_eq(y, of_int(2)), false) = true) ->
+  ((not (match_bool(bool_eq(x, rliteral), bool_ne(y, rliteral),
+  false) = true)) -> (((match_bool(bool_eq(x, rliteral2), bool_eq(y,
+  rliteral3), false) = true) -> (((match_bool(bool_eq(x, rliteral3),
+  bool_eq(y, rliteral2), false) = true) ->
   ((((((0 + 1) + 1) + 0) + 1) + 1) <= 1)) and ((not (match_bool(bool_eq(x,
-  of_int(4)), bool_eq(y, of_int(2)), false) = true)) ->
+  rliteral3), bool_eq(y, rliteral2), false) = true)) ->
   ((((((0 + 1) + 1) + 0) + 1) + 0) <= 1)))) and ((not (match_bool(bool_eq(x,
-  of_int(2)), bool_eq(y, of_int(4)), false) = true)) ->
-  (((match_bool(bool_eq(x, of_int(4)), bool_eq(y, of_int(2)),
+  rliteral2), bool_eq(y, rliteral3), false) = true)) ->
+  (((match_bool(bool_eq(x, rliteral3), bool_eq(y, rliteral2),
   false) = true) -> ((((((0 + 1) + 1) + 0) + 0) + 1) <= 1)) and
-  ((not (match_bool(bool_eq(x, of_int(4)), bool_eq(y, of_int(2)),
+  ((not (match_bool(bool_eq(x, rliteral3), bool_eq(y, rliteral2),
   false) = true)) -> ((((((0 + 1) + 1) + 0) + 0) + 0) <= 1)))))))) and
-  ((not (match_bool(bool_ne(x, of_int(0)), bool_eq(y, of_int(0)),
-  false) = true)) -> (((match_bool(bool_eq(x, of_int(0)), bool_ne(y,
-  of_int(0)), false) = true) -> (((match_bool(bool_eq(x, of_int(2)),
-  bool_eq(y, of_int(4)), false) = true) -> (((match_bool(bool_eq(x,
-  of_int(4)), bool_eq(y, of_int(2)), false) = true) ->
+  ((not (match_bool(bool_ne(x, rliteral), bool_eq(y, rliteral),
+  false) = true)) -> (((match_bool(bool_eq(x, rliteral), bool_ne(y,
+  rliteral), false) = true) -> (((match_bool(bool_eq(x, rliteral2),
+  bool_eq(y, rliteral3), false) = true) -> (((match_bool(bool_eq(x,
+  rliteral3), bool_eq(y, rliteral2), false) = true) ->
   ((((((0 + 1) + 0) + 1) + 1) + 1) <= 1)) and ((not (match_bool(bool_eq(x,
-  of_int(4)), bool_eq(y, of_int(2)), false) = true)) ->
+  rliteral3), bool_eq(y, rliteral2), false) = true)) ->
   ((((((0 + 1) + 0) + 1) + 1) + 0) <= 1)))) and ((not (match_bool(bool_eq(x,
-  of_int(2)), bool_eq(y, of_int(4)), false) = true)) ->
-  (((match_bool(bool_eq(x, of_int(4)), bool_eq(y, of_int(2)),
+  rliteral2), bool_eq(y, rliteral3), false) = true)) ->
+  (((match_bool(bool_eq(x, rliteral3), bool_eq(y, rliteral2),
   false) = true) -> ((((((0 + 1) + 0) + 1) + 0) + 1) <= 1)) and
-  ((not (match_bool(bool_eq(x, of_int(4)), bool_eq(y, of_int(2)),
+  ((not (match_bool(bool_eq(x, rliteral3), bool_eq(y, rliteral2),
   false) = true)) -> ((((((0 + 1) + 0) + 1) + 0) + 0) <= 1)))))) and
-  ((not (match_bool(bool_eq(x, of_int(0)), bool_ne(y, of_int(0)),
-  false) = true)) -> (((match_bool(bool_eq(x, of_int(2)), bool_eq(y,
-  of_int(4)), false) = true) -> (((match_bool(bool_eq(x, of_int(4)),
-  bool_eq(y, of_int(2)), false) = true) ->
+  ((not (match_bool(bool_eq(x, rliteral), bool_ne(y, rliteral),
+  false) = true)) -> (((match_bool(bool_eq(x, rliteral2), bool_eq(y,
+  rliteral3), false) = true) -> (((match_bool(bool_eq(x, rliteral3),
+  bool_eq(y, rliteral2), false) = true) ->
   ((((((0 + 1) + 0) + 0) + 1) + 1) <= 1)) and ((not (match_bool(bool_eq(x,
-  of_int(4)), bool_eq(y, of_int(2)), false) = true)) ->
+  rliteral3), bool_eq(y, rliteral2), false) = true)) ->
   ((((((0 + 1) + 0) + 0) + 1) + 0) <= 1)))) and ((not (match_bool(bool_eq(x,
-  of_int(2)), bool_eq(y, of_int(4)), false) = true)) ->
-  (((match_bool(bool_eq(x, of_int(4)), bool_eq(y, of_int(2)),
+  rliteral2), bool_eq(y, rliteral3), false) = true)) ->
+  (((match_bool(bool_eq(x, rliteral3), bool_eq(y, rliteral2),
   false) = true) -> ((((((0 + 1) + 0) + 0) + 0) + 1) <= 1)) and
-  ((not (match_bool(bool_eq(x, of_int(4)), bool_eq(y, of_int(2)),
+  ((not (match_bool(bool_eq(x, rliteral3), bool_eq(y, rliteral2),
   false) = true)) -> ((((((0 + 1) + 0) + 0) + 0) + 0) <= 1)))))))))) and
-  ((not (match_bool(bool_eq(x, of_int(0)), bool_eq(y, of_int(0)),
-  false) = true)) -> (((match_bool(bool_ne(x, of_int(0)), bool_eq(y,
-  of_int(0)), false) = true) -> (((match_bool(bool_eq(x, of_int(0)),
-  bool_ne(y, of_int(0)), false) = true) -> (((match_bool(bool_eq(x,
-  of_int(2)), bool_eq(y, of_int(4)), false) = true) ->
-  (((match_bool(bool_eq(x, of_int(4)), bool_eq(y, of_int(2)),
-  false) = true) -> ((((((0 + 0) + 1) + 1) + 1) + 1) <= 1)) and
-  ((not (match_bool(bool_eq(x, of_int(4)), bool_eq(y, of_int(2)),
-  false) = true)) -> ((((((0 + 0) + 1) + 1) + 1) + 0) <= 1)))) and
-  ((not (match_bool(bool_eq(x, of_int(2)), bool_eq(y, of_int(4)),
-  false) = true)) -> (((match_bool(bool_eq(x, of_int(4)), bool_eq(y,
-  of_int(2)), false) = true) -> ((((((0 + 0) + 1) + 1) + 0) + 1) <= 1)) and
-  ((not (match_bool(bool_eq(x, of_int(4)), bool_eq(y, of_int(2)),
+  ((not (match_bool(bool_eq(x, rliteral), bool_eq(y, rliteral),
+  false) = true)) -> (((match_bool(bool_ne(x, rliteral), bool_eq(y,
+  rliteral), false) = true) -> (((match_bool(bool_eq(x, rliteral), bool_ne(y,
+  rliteral), false) = true) -> (((match_bool(bool_eq(x, rliteral2),
+  bool_eq(y, rliteral3), false) = true) -> (((match_bool(bool_eq(x,
+  rliteral3), bool_eq(y, rliteral2), false) = true) ->
+  ((((((0 + 0) + 1) + 1) + 1) + 1) <= 1)) and ((not (match_bool(bool_eq(x,
+  rliteral3), bool_eq(y, rliteral2), false) = true)) ->
+  ((((((0 + 0) + 1) + 1) + 1) + 0) <= 1)))) and ((not (match_bool(bool_eq(x,
+  rliteral2), bool_eq(y, rliteral3), false) = true)) ->
+  (((match_bool(bool_eq(x, rliteral3), bool_eq(y, rliteral2),
+  false) = true) -> ((((((0 + 0) + 1) + 1) + 0) + 1) <= 1)) and
+  ((not (match_bool(bool_eq(x, rliteral3), bool_eq(y, rliteral2),
   false) = true)) -> ((((((0 + 0) + 1) + 1) + 0) + 0) <= 1)))))) and
-  ((not (match_bool(bool_eq(x, of_int(0)), bool_ne(y, of_int(0)),
-  false) = true)) -> (((match_bool(bool_eq(x, of_int(2)), bool_eq(y,
-  of_int(4)), false) = true) -> (((match_bool(bool_eq(x, of_int(4)),
-  bool_eq(y, of_int(2)), false) = true) ->
+  ((not (match_bool(bool_eq(x, rliteral), bool_ne(y, rliteral),
+  false) = true)) -> (((match_bool(bool_eq(x, rliteral2), bool_eq(y,
+  rliteral3), false) = true) -> (((match_bool(bool_eq(x, rliteral3),
+  bool_eq(y, rliteral2), false) = true) ->
   ((((((0 + 0) + 1) + 0) + 1) + 1) <= 1)) and ((not (match_bool(bool_eq(x,
-  of_int(4)), bool_eq(y, of_int(2)), false) = true)) ->
+  rliteral3), bool_eq(y, rliteral2), false) = true)) ->
   ((((((0 + 0) + 1) + 0) + 1) + 0) <= 1)))) and ((not (match_bool(bool_eq(x,
-  of_int(2)), bool_eq(y, of_int(4)), false) = true)) ->
-  (((match_bool(bool_eq(x, of_int(4)), bool_eq(y, of_int(2)),
+  rliteral2), bool_eq(y, rliteral3), false) = true)) ->
+  (((match_bool(bool_eq(x, rliteral3), bool_eq(y, rliteral2),
   false) = true) -> ((((((0 + 0) + 1) + 0) + 0) + 1) <= 1)) and
-  ((not (match_bool(bool_eq(x, of_int(4)), bool_eq(y, of_int(2)),
+  ((not (match_bool(bool_eq(x, rliteral3), bool_eq(y, rliteral2),
   false) = true)) -> ((((((0 + 0) + 1) + 0) + 0) + 0) <= 1)))))))) and
-  ((not (match_bool(bool_ne(x, of_int(0)), bool_eq(y, of_int(0)),
-  false) = true)) -> (((match_bool(bool_eq(x, of_int(0)), bool_ne(y,
-  of_int(0)), false) = true) -> (((match_bool(bool_eq(x, of_int(2)),
-  bool_eq(y, of_int(4)), false) = true) -> (((match_bool(bool_eq(x,
-  of_int(4)), bool_eq(y, of_int(2)), false) = true) ->
+  ((not (match_bool(bool_ne(x, rliteral), bool_eq(y, rliteral),
+  false) = true)) -> (((match_bool(bool_eq(x, rliteral), bool_ne(y,
+  rliteral), false) = true) -> (((match_bool(bool_eq(x, rliteral2),
+  bool_eq(y, rliteral3), false) = true) -> (((match_bool(bool_eq(x,
+  rliteral3), bool_eq(y, rliteral2), false) = true) ->
   ((((((0 + 0) + 0) + 1) + 1) + 1) <= 1)) and ((not (match_bool(bool_eq(x,
-  of_int(4)), bool_eq(y, of_int(2)), false) = true)) ->
+  rliteral3), bool_eq(y, rliteral2), false) = true)) ->
   ((((((0 + 0) + 0) + 1) + 1) + 0) <= 1)))) and ((not (match_bool(bool_eq(x,
-  of_int(2)), bool_eq(y, of_int(4)), false) = true)) ->
-  (((match_bool(bool_eq(x, of_int(4)), bool_eq(y, of_int(2)),
+  rliteral2), bool_eq(y, rliteral3), false) = true)) ->
+  (((match_bool(bool_eq(x, rliteral3), bool_eq(y, rliteral2),
   false) = true) -> ((((((0 + 0) + 0) + 1) + 0) + 1) <= 1)) and
-  ((not (match_bool(bool_eq(x, of_int(4)), bool_eq(y, of_int(2)),
+  ((not (match_bool(bool_eq(x, rliteral3), bool_eq(y, rliteral2),
   false) = true)) -> ((((((0 + 0) + 0) + 1) + 0) + 0) <= 1)))))) and
-  ((not (match_bool(bool_eq(x, of_int(0)), bool_ne(y, of_int(0)),
-  false) = true)) -> (((match_bool(bool_eq(x, of_int(2)), bool_eq(y,
-  of_int(4)), false) = true) -> (((match_bool(bool_eq(x, of_int(4)),
-  bool_eq(y, of_int(2)), false) = true) ->
+  ((not (match_bool(bool_eq(x, rliteral), bool_ne(y, rliteral),
+  false) = true)) -> (((match_bool(bool_eq(x, rliteral2), bool_eq(y,
+  rliteral3), false) = true) -> (((match_bool(bool_eq(x, rliteral3),
+  bool_eq(y, rliteral2), false) = true) ->
   ((((((0 + 0) + 0) + 0) + 1) + 1) <= 1)) and ((not (match_bool(bool_eq(x,
-  of_int(4)), bool_eq(y, of_int(2)), false) = true)) ->
+  rliteral3), bool_eq(y, rliteral2), false) = true)) ->
   ((((((0 + 0) + 0) + 0) + 1) + 0) <= 1)))) and ((not (match_bool(bool_eq(x,
-  of_int(2)), bool_eq(y, of_int(4)), false) = true)) ->
-  (((match_bool(bool_eq(x, of_int(4)), bool_eq(y, of_int(2)),
+  rliteral2), bool_eq(y, rliteral3), false) = true)) ->
+  (((match_bool(bool_eq(x, rliteral3), bool_eq(y, rliteral2),
   false) = true) -> ((((((0 + 0) + 0) + 0) + 0) + 1) <= 1)) and
-  ((not (match_bool(bool_eq(x, of_int(4)), bool_eq(y, of_int(2)),
-  false) = true)) -> ((((((0 + 0) + 0) + 0) + 0) + 0) <= 1)))))))))))
+  ((not (match_bool(bool_eq(x, rliteral3), bool_eq(y, rliteral2),
+  false) = true)) -> ((((((0 + 0) + 0) + 0) + 0) + 0) <= 1)))))))))))))

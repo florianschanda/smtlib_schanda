@@ -1005,12 +1005,6 @@ axiom toBig_to_uint : (forall x:t. (tqtint(x) = tqtint1(toBig(x))))
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int2 : bool -> int
 
 axiom to_int_def2 :
@@ -1022,6 +1016,12 @@ logic of_int2 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int2(i)]. (((i = 0) -> (of_int2(i) = false)) and
   ((not (i = 0)) -> (of_int2(i) = true))))
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1170,24 +1170,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,byte) farray, int, int, (int,byte) farray, int,
-  int -> (int,byte) farray
-
-axiom concat_def :
-  (forall a:(int,byte) farray. forall b:(int,byte) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : byte, int -> (int,byte) farray
-
-axiom singleton_def :
-  (forall v:byte.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq7 : (int,byte) farray, int, int, (int,byte) farray, int,
   int -> bool
 
@@ -1198,17 +1180,17 @@ axiom bool_eq_def6 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1218,37 +1200,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,byte) farray, int, int, (int,byte) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,byte) farray. forall b:(int,byte) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq7(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,byte) farray. forall b:(int,byte) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq7(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and ult(to_rep((a[(i + 1)])), to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,byte) farray. forall b:(int,byte) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq7(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and ugt(to_rep((a[(j + 1)])), to_rep((b[(i + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic to_rep1 : integer -> int
 
@@ -1412,7 +1366,15 @@ axiom range_int_axiom1 :
 
 type x_coord
 
-predicate in_range4(x: t) = (ule(of_int(0), x) and ule(x, of_int(4)))
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 0)
+
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 4)
+
+predicate in_range4(x: t) = (ule(rliteral1, x) and ule(x, rliteral2))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 4))
 
@@ -1440,7 +1402,7 @@ function x_coord__ref___projection(a: x_coord__ref) : x_coord =
 
 type y_coord
 
-predicate in_range5(x: t) = (ule(of_int(0), x) and ule(x, of_int(4)))
+predicate in_range5(x: t) = (ule(rliteral1, x) and ule(x, rliteral2))
 
 predicate in_range_int1(x: int) = ((0 <= x) and (x <= 4))
 
@@ -1514,14 +1476,14 @@ axiom bool_eq_def11 :
   (ule(b__first_2, b__last_2) and (sub(a__last_2,
   a__first_2) = sub(b__last_2, b__first_2)))) or ((not ule(a__first_2,
   a__last_2)) and ugt(b__first_2, b__last_2)))) and
-  (forall temp___idx_133:t. forall temp___idx_134:t. ((((ule(a__first,
-  temp___idx_133) and ule(temp___idx_133, a__last)) and (ule(a__first_2,
-  temp___idx_134) and ule(temp___idx_134, a__last_2))) and (to_rep2(get(a,
-  temp___idx_133, temp___idx_134)) = to_rep2(get(b, add(sub(b__first,
-  a__first), temp___idx_133), add(sub(b__first_2, a__first_2),
-  temp___idx_134))))) or (not ((ule(a__first, temp___idx_133) and
-  ule(temp___idx_133, a__last)) and (ule(a__first_2, temp___idx_134) and
-  ule(temp___idx_134, a__last_2))))))) -> (bool_eq13(a, a__first, a__last,
+  (forall temp___idx_155:t. forall temp___idx_156:t. ((((ule(a__first,
+  temp___idx_155) and ule(temp___idx_155, a__last)) and (ule(a__first_2,
+  temp___idx_156) and ule(temp___idx_156, a__last_2))) and (to_rep2(get(a,
+  temp___idx_155, temp___idx_156)) = to_rep2(get(b, add(sub(b__first,
+  a__first), temp___idx_155), add(sub(b__first_2, a__first_2),
+  temp___idx_156))))) or (not ((ule(a__first, temp___idx_155) and
+  ule(temp___idx_155, a__last)) and (ule(a__first_2, temp___idx_156) and
+  ule(temp___idx_156, a__last_2))))))) -> (bool_eq13(a, a__first, a__last,
   a__first_2, a__last_2, b, b__first, b__last, b__first_2,
   b__last_2) = true)) and ((not ((((ule(a__first, a__last) -> (ule(b__first,
   b__last) and (sub(a__last, a__first) = sub(b__last, b__first)))) and
@@ -1529,12 +1491,12 @@ axiom bool_eq_def11 :
   ((ule(a__first_2, a__last_2) -> (ule(b__first_2, b__last_2) and
   (sub(a__last_2, a__first_2) = sub(b__last_2, b__first_2)))) and
   ((not ule(a__first_2, a__last_2)) -> ugt(b__first_2, b__last_2)))) and
-  (forall temp___idx_133:t. forall temp___idx_134:t. (((ule(a__first,
-  temp___idx_133) and ule(temp___idx_133, a__last)) and (ule(a__first_2,
-  temp___idx_134) and ule(temp___idx_134, a__last_2))) -> (to_rep2(get(a,
-  temp___idx_133, temp___idx_134)) = to_rep2(get(b, add(sub(b__first,
-  a__first), temp___idx_133), add(sub(b__first_2, a__first_2),
-  temp___idx_134)))))))) -> (bool_eq13(a, a__first, a__last, a__first_2,
+  (forall temp___idx_155:t. forall temp___idx_156:t. (((ule(a__first,
+  temp___idx_155) and ule(temp___idx_155, a__last)) and (ule(a__first_2,
+  temp___idx_156) and ule(temp___idx_156, a__last_2))) -> (to_rep2(get(a,
+  temp___idx_155, temp___idx_156)) = to_rep2(get(b, add(sub(b__first,
+  a__first), temp___idx_155), add(sub(b__first_2, a__first_2),
+  temp___idx_156)))))))) -> (bool_eq13(a, a__first, a__last, a__first_2,
   a__last_2, b, b__first, b__last, b__first_2, b__last_2) = false))))
 
 axiom bool_eq_rev1 :
@@ -1549,12 +1511,12 @@ axiom bool_eq_rev1 :
   ((ule(a__first_2, a__last_2) -> (ule(b__first_2, b__last_2) and
   (sub(a__last_2, a__first_2) = sub(b__last_2, b__first_2)))) and
   ((not ule(a__first_2, a__last_2)) -> ugt(b__first_2, b__last_2)))) and
-  (forall temp___idx_133:t. forall temp___idx_134:t. (((ule(a__first,
-  temp___idx_133) and ule(temp___idx_133, a__last)) and (ule(a__first_2,
-  temp___idx_134) and ule(temp___idx_134, a__last_2))) -> (to_rep2(get(a,
-  temp___idx_133, temp___idx_134)) = to_rep2(get(b, add(sub(b__first,
-  a__first), temp___idx_133), add(sub(b__first_2, a__first_2),
-  temp___idx_134))))))))))
+  (forall temp___idx_155:t. forall temp___idx_156:t. (((ule(a__first,
+  temp___idx_155) and ule(temp___idx_155, a__last)) and (ule(a__first_2,
+  temp___idx_156) and ule(temp___idx_156, a__last_2))) -> (to_rep2(get(a,
+  temp___idx_155, temp___idx_156)) = to_rep2(get(b, add(sub(b__first,
+  a__first), temp___idx_155), add(sub(b__first_2, a__first_2),
+  temp___idx_156))))))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -1592,780 +1554,222 @@ logic attr__ATTRIBUTE_ADDRESS12 : int
 
 logic attr__ATTRIBUTE_ADDRESS13 : int
 
-logic a : map
+logic rliteral3 : t1
 
-logic x : t
+axiom rliteral_axiom3 : (tqtint1(rliteral3) = 0)
 
-logic y : t
+logic rliteral4 : t
 
-logic remaining_bits : int
+axiom rliteral_axiom4 : (tqtint(rliteral4) = 5)
 
-logic offset : int
+logic rliteral5 : t
 
-logic initial_byte_len : int
-
-logic lane : t1
-
-logic i : int
-
-logic word : t1
-
-logic remaining_bytes : int
-
-logic i1 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic temp___724 : map
-
-logic temp___723 : int
-
-logic temp___722 : int
-
-logic temp___721 : t
-
-logic temp___720 : t
-
-logic temp___728 : int
-
-logic temp___727 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : bool
-
-logic o12 : int
-
-logic o13 : int
-
-logic temp___714 : int
-
-logic o14 : int
-
-logic o15 : byte
-
-logic o16 : t
-
-logic o17 : int
-
-logic o18 : int
-
-logic o19 : t1
-
-logic o20 : t1
-
-logic o21 : t1
-
-logic o22 : t1
-
-logic o23 : int
-
-logic o24 : int
-
-logic temp___7141 : int
-
-logic o25 : int
-
-logic o26 : byte
-
-logic o27 : t
-
-logic o28 : int
-
-logic o29 : int
-
-logic o30 : t1
-
-logic o31 : t1
-
-logic o32 : t1
-
-logic o33 : t1
-
-logic o34 : int
-
-logic o35 : int
-
-logic temp___7142 : int
-
-logic o36 : int
-
-logic o37 : byte
-
-logic o38 : t
-
-logic o39 : int
-
-logic o40 : int
-
-logic o41 : t1
-
-logic o42 : t1
-
-logic o43 : t1
-
-logic o44 : t1
-
-logic o45 : int
-
-logic o46 : int
-
-logic temp___7143 : int
-
-logic o47 : int
-
-logic o48 : byte
-
-logic o49 : t
-
-logic o50 : int
-
-logic o51 : int
-
-logic o52 : t1
-
-logic o53 : t1
-
-logic o54 : t1
-
-logic o55 : t1
-
-logic o56 : int
-
-logic o57 : int
-
-logic temp___7144 : int
-
-logic o58 : int
-
-logic o59 : byte
-
-logic o60 : t
-
-logic o61 : int
-
-logic o62 : int
-
-logic o63 : t1
-
-logic o64 : t1
-
-logic o65 : t1
-
-logic o66 : t1
-
-logic o67 : int
-
-logic o68 : int
-
-logic temp___7145 : int
-
-logic o69 : int
-
-logic o70 : byte
-
-logic o71 : t
-
-logic o72 : int
-
-logic o73 : int
-
-logic o74 : t1
-
-logic o75 : t1
-
-logic o76 : t1
-
-logic o77 : t1
-
-logic o78 : int
-
-logic o79 : int
-
-logic temp___7146 : int
-
-logic o80 : int
-
-logic o81 : byte
-
-logic o82 : t
-
-logic o83 : int
-
-logic o84 : int
-
-logic o85 : t1
-
-logic o86 : t1
-
-logic o87 : t1
-
-logic o88 : t1
-
-logic o89 : int
-
-logic o90 : int
-
-logic temp___7147 : int
-
-logic o91 : int
-
-logic o92 : byte
-
-logic o93 : t
-
-logic o94 : int
-
-logic o95 : int
-
-logic o96 : t1
-
-logic o97 : t1
-
-logic o98 : t1
-
-logic o99 : t1
-
-logic o100 : lane_type
-
-logic o101 : map
-
-logic o102 : t
-
-logic o103 : t
-
-logic o104 : int
-
-logic o105 : int
-
-logic o106 : int
-
-logic o107 : int
-
-logic o108 : int
-
-logic o109 : int
-
-logic o110 : int
-
-logic temp___729 : int
-
-logic o111 : int
-
-logic o112 : int
-
-logic o113 : t1
-
-logic a1 : map
-
-logic lane1 : t1
-
-logic i2 : int
-
-logic result : bool
-
-logic result1 : t
-
-logic x1 : t
-
-logic result2 : t
-
-logic y1 : t
-
-logic result3 : int
-
-logic remaining_bits1 : int
-
-logic result4 : int
-
-logic offset1 : int
-
-logic result5 : int
-
-logic initial_byte_len1 : int
-
-logic a2 : map
-
-logic x2 : t
-
-logic y2 : t
-
-logic remaining_bits2 : int
-
-logic offset2 : int
-
-logic lane2 : t1
-
-logic i3 : int
-
-logic temp___7281 : int
-
-logic temp___7271 : int
-
-logic result6 : int
-
-logic temp___7282 : int
-
-logic result7 : int
-
-logic temp___7272 : int
-
-logic result8 : t1
-
-logic lane3 : t1
-
-logic result9 : int
-
-logic i4 : int
-
-logic result10 : t1
-
-logic lane4 : t1
-
-logic result11 : int
-
-logic i5 : int
-
-logic result12 : t1
-
-logic lane5 : t1
-
-logic result13 : int
-
-logic i6 : int
-
-logic result14 : t1
-
-logic lane6 : t1
-
-logic result15 : int
-
-logic i7 : int
-
-logic result16 : t1
-
-logic lane7 : t1
-
-logic result17 : int
-
-logic i8 : int
-
-logic result18 : t1
-
-logic lane8 : t1
-
-logic result19 : int
-
-logic i9 : int
-
-logic result20 : t1
-
-logic lane9 : t1
-
-logic result21 : int
-
-logic i10 : int
-
-logic result22 : t1
-
-logic lane10 : t1
-
-logic result23 : int
-
-logic i11 : int
-
-logic result24 : t1
-
-logic lane11 : t1
-
-logic result25 : map
-
-logic a3 : map
-
-logic result26 : t
-
-logic x3 : t
-
-logic result27 : t
-
-logic y3 : t
-
-logic result28 : int
-
-logic offset3 : int
-
-logic result29 : int
-
-logic remaining_bits3 : int
-
-logic a4 : map
-
-logic x4 : t
-
-logic y4 : t
-
-logic remaining_bits4 : int
-
-logic offset4 : int
-
-logic lane12 : t1
-
-logic i12 : int
-
-logic temp___7283 : int
-
-logic temp___7273 : int
-
-logic a5 : map
-
-logic x5 : t
-
-logic y5 : t
-
-logic remaining_bits5 : int
-
-logic offset5 : int
-
-logic lane13 : t1
-
-logic i13 : int
-
-logic temp___7284 : int
-
-logic temp___7274 : int
-
-logic a6 : map
-
-logic x6 : t
-
-logic y6 : t
-
-logic remaining_bits6 : int
-
-logic offset6 : int
-
-logic lane14 : t1
-
-logic i14 : int
-
-logic a7 : map
-
-logic x7 : t
-
-logic y7 : t
-
-logic remaining_bits7 : int
-
-logic offset7 : int
-
-logic lane15 : t1
-
-logic i15 : int
-
-logic a8 : map
-
-logic x8 : t
-
-logic y8 : t
-
-logic remaining_bits8 : int
-
-logic offset8 : int
-
-logic lane16 : t1
-
-logic i16 : int
-
-logic a9 : map
-
-logic x9 : t
-
-logic y9 : t
-
-logic remaining_bits9 : int
-
-logic offset9 : int
-
-logic lane17 : t1
-
-logic i17 : int
-
-logic result30 : t1
-
-logic word1 : t1
-
-logic result31 : int
-
-logic remaining_bytes1 : int
-
-logic result32 : int
-
-logic i18 : int
-
-logic word2 : t1
-
-logic i19 : int
-
-axiom H : dynamic_property(0, 2147483647, to_rep1(first(data1)),
-  to_rep1(last(data1)))
-
-axiom H1 : in_range2(bit_len)
-
-axiom H2 : ((length({ elts = data; rt = data1 }) <= 268435455) and
-  ((bit_len <= (length({ elts = data; rt = data1 }) * 8)) and
-  (bit_len <= 1600)))
-
-axiom H3 : (result1 = x)
-
-axiom H4 : (x1 = of_int(0))
-
-axiom H5 : in_range4(x1)
-
-axiom H6 : (result2 = y)
-
-axiom H7 : (y1 = of_int(0))
-
-axiom H8 : in_range5(y1)
-
-axiom H9 : (result3 = remaining_bits)
-
-axiom H10 : (remaining_bits1 = bit_len)
-
-axiom H11 : in_range2(remaining_bits1)
-
-axiom H12 : (result4 = offset)
-
-axiom H13 : (offset1 = 0)
-
-axiom H14 : in_range2(offset1)
-
-axiom H15 : ((o4 = (bit_len + 7)) and in_range1((bit_len + 7)))
-
-axiom H16 : (o5 = comp_div(o4,8))
-
-axiom H17 : ((o6 = o5) and in_range2(o5))
-
-axiom H18 : (result5 = initial_byte_len)
-
-axiom H19 : (initial_byte_len1 = o6)
-
-axiom H20 : in_range2(initial_byte_len1)
-
-axiom H21 : ((64 <= remaining_bits1) -> (((temp___724 = a) and
-  ((temp___723 = offset1) and ((temp___722 = remaining_bits1) and
-  ((temp___721 = y1) and ((temp___720 = x1) and ((0 = temp___728) and
-  ((0 = temp___727) and (((mod(offset2, 8) = 0) and
-  ((offset2 + comp_div((remaining_bits2 + 7),8)) = initial_byte_len1)) and
-  ((((((ule(of_int(0), of_int(4)) -> in_range4(x2)) and (ule(of_int(0),
-  of_int(4)) -> in_range5(y2))) and ((0 <= 2147483647) ->
-  in_range2(remaining_bits2))) and ((0 <= 2147483647) ->
-  in_range2(offset2))) and (64 <= remaining_bits2)) and
-  (((temp___7281 = result6) and (temp___7282 = offset2)) and
-  (((temp___7271 = result7) and (temp___7272 = remaining_bits2)) and
-  (((lane2 = result8) and (lane3 = of_int1(0))) and ((((result9 = i3) and
-  (i4 = 0)) and ((((((((o17 = (i4 * 8)) and in_range1((i4 * 8))) and
-  ((o18 = o17) and in_range2(o17))) and (o19 = of_int1(o18))) and
-  (((((((((o12 = (to_rep1(first(data1)) + offset2)) and
-  in_range1((to_rep1(first(data1)) + offset2))) and (o13 = (o12 + i4))) and
-  ((temp___714 = o13) and in_range1(o13))) and
-  (((to_rep1(first(data1)) <= temp___714) and
-  (temp___714 <= to_rep1(last(data1)))) and (o14 = temp___714))) and
-  (o15 = (data[o14]))) and (o16 = to_rep(o15))) and (o20 = toBig(o16))) and
-  (o21 = lsl_bv1(o20, o19)))) and (o22 = bw_or1(lane3, o21))) and
-  ((result10 = lane3) and (lane4 = o22))) and (((result11 = i4) and
-  (i5 = 1)) and ((((((((o28 = (i5 * 8)) and in_range1((i5 * 8))) and
-  ((o29 = o28) and in_range2(o28))) and (o30 = of_int1(o29))) and
-  (((((((((o23 = (to_rep1(first(data1)) + offset2)) and
-  in_range1((to_rep1(first(data1)) + offset2))) and (o24 = (o23 + i5))) and
-  ((temp___7141 = o24) and in_range1(o24))) and
-  (((to_rep1(first(data1)) <= temp___7141) and
-  (temp___7141 <= to_rep1(last(data1)))) and (o25 = temp___7141))) and
-  (o26 = (data[o25]))) and (o27 = to_rep(o26))) and (o31 = toBig(o27))) and
-  (o32 = lsl_bv1(o31, o30)))) and (o33 = bw_or1(lane4, o32))) and
-  ((result12 = lane4) and (lane5 = o33))) and (((result13 = i5) and
-  (i6 = 2)) and ((((((((o39 = (i6 * 8)) and in_range1((i6 * 8))) and
-  ((o40 = o39) and in_range2(o39))) and (o41 = of_int1(o40))) and
-  (((((((((o34 = (to_rep1(first(data1)) + offset2)) and
-  in_range1((to_rep1(first(data1)) + offset2))) and (o35 = (o34 + i6))) and
-  ((temp___7142 = o35) and in_range1(o35))) and
-  (((to_rep1(first(data1)) <= temp___7142) and
-  (temp___7142 <= to_rep1(last(data1)))) and (o36 = temp___7142))) and
-  (o37 = (data[o36]))) and (o38 = to_rep(o37))) and (o42 = toBig(o38))) and
-  (o43 = lsl_bv1(o42, o41)))) and (o44 = bw_or1(lane5, o43))) and
-  ((result14 = lane5) and (lane6 = o44))) and (((result15 = i6) and
-  (i7 = 3)) and ((((((((o50 = (i7 * 8)) and in_range1((i7 * 8))) and
-  ((o51 = o50) and in_range2(o50))) and (o52 = of_int1(o51))) and
-  (((((((((o45 = (to_rep1(first(data1)) + offset2)) and
-  in_range1((to_rep1(first(data1)) + offset2))) and (o46 = (o45 + i7))) and
-  ((temp___7143 = o46) and in_range1(o46))) and
-  (((to_rep1(first(data1)) <= temp___7143) and
-  (temp___7143 <= to_rep1(last(data1)))) and (o47 = temp___7143))) and
-  (o48 = (data[o47]))) and (o49 = to_rep(o48))) and (o53 = toBig(o49))) and
-  (o54 = lsl_bv1(o53, o52)))) and (o55 = bw_or1(lane6, o54))) and
-  ((result16 = lane6) and (lane7 = o55))) and (((result17 = i7) and
-  (i8 = 4)) and ((((((((o61 = (i8 * 8)) and in_range1((i8 * 8))) and
-  ((o62 = o61) and in_range2(o61))) and (o63 = of_int1(o62))) and
-  (((((((((o56 = (to_rep1(first(data1)) + offset2)) and
-  in_range1((to_rep1(first(data1)) + offset2))) and (o57 = (o56 + i8))) and
-  ((temp___7144 = o57) and in_range1(o57))) and
-  (((to_rep1(first(data1)) <= temp___7144) and
-  (temp___7144 <= to_rep1(last(data1)))) and (o58 = temp___7144))) and
-  (o59 = (data[o58]))) and (o60 = to_rep(o59))) and (o64 = toBig(o60))) and
-  (o65 = lsl_bv1(o64, o63)))) and (o66 = bw_or1(lane7, o65))) and
-  ((result18 = lane7) and (lane8 = o66))) and (((result19 = i8) and
-  (i9 = 5)) and ((((((((o72 = (i9 * 8)) and in_range1((i9 * 8))) and
-  ((o73 = o72) and in_range2(o72))) and (o74 = of_int1(o73))) and
-  (((((((((o67 = (to_rep1(first(data1)) + offset2)) and
-  in_range1((to_rep1(first(data1)) + offset2))) and (o68 = (o67 + i9))) and
-  ((temp___7145 = o68) and in_range1(o68))) and
-  (((to_rep1(first(data1)) <= temp___7145) and
-  (temp___7145 <= to_rep1(last(data1)))) and (o69 = temp___7145))) and
-  (o70 = (data[o69]))) and (o71 = to_rep(o70))) and (o75 = toBig(o71))) and
-  (o76 = lsl_bv1(o75, o74)))) and (o77 = bw_or1(lane8, o76))) and
-  ((result20 = lane8) and (lane9 = o77))) and (((result21 = i9) and
-  (i10 = 6)) and ((((((((o83 = (i10 * 8)) and in_range1((i10 * 8))) and
-  ((o84 = o83) and in_range2(o83))) and (o85 = of_int1(o84))) and
-  (((((((((o78 = (to_rep1(first(data1)) + offset2)) and
-  in_range1((to_rep1(first(data1)) + offset2))) and (o79 = (o78 + i10))) and
-  ((temp___7146 = o79) and in_range1(o79))) and
-  (((to_rep1(first(data1)) <= temp___7146) and
-  (temp___7146 <= to_rep1(last(data1)))) and (o80 = temp___7146))) and
-  (o81 = (data[o80]))) and (o82 = to_rep(o81))) and (o86 = toBig(o82))) and
-  (o87 = lsl_bv1(o86, o85)))) and (o88 = bw_or1(lane9, o87))) and
-  ((result22 = lane9) and (lane10 = o88))) and (((result23 = i10) and
-  (i11 = 7)) and (((((((o94 = (i11 * 8)) and in_range1((i11 * 8))) and
-  ((o95 = o94) and in_range2(o94))) and (o96 = of_int1(o95))) and
-  (((((((((o89 = (to_rep1(first(data1)) + offset2)) and
-  in_range1((to_rep1(first(data1)) + offset2))) and (o90 = (o89 + i11))) and
-  ((temp___7147 = o90) and in_range1(o90))) and
-  (((to_rep1(first(data1)) <= temp___7147) and
-  (temp___7147 <= to_rep1(last(data1)))) and (o91 = temp___7147))) and
-  (o92 = (data[o91]))) and (o93 = to_rep(o92))) and (o97 = toBig(o93))) and
-  (o98 = lsl_bv1(o97, o96)))) and (o99 = bw_or1(lane10, o98))) and
-  ((result24 = lane10) and (lane11 = o99)))))))))))))))))) and
-  ((((to_rep2(o100) = bw_xor1(to_rep2(get(a2, x2, y2)), lane11)) and
-  (o101 = set(a2, x2, y2, o100))) and ((result25 = a2) and (a3 = o101))) and
-  ((((ule(sub(of_int(5), x2), of_int(1)) -> (o102 = sub(add(x2, of_int(1)),
-  of_int(5)))) and ((not ule(sub(of_int(5), x2), of_int(1))) ->
-  (o102 = add(x2, of_int(1))))) and ((result26 = x2) and (x3 = o102))) and
-  ((((x3 = of_int(0)) -> (((ule(sub(of_int(5), y2), of_int(1)) ->
-  (o103 = sub(add(y2, of_int(1)), of_int(5)))) and ((not ule(sub(of_int(5),
-  y2), of_int(1))) -> (o103 = add(y2, of_int(1))))) and ((result27 = y2) and
-  (y3 = o103)))) and ((not (x3 = of_int(0))) -> (y3 = y2))) and
-  ((((o104 = (offset2 + 8)) and in_range1((offset2 + 8))) and
-  ((result28 = offset2) and (offset3 = o104))) and
-  ((((o105 = (remaining_bits2 - 64)) and
-  in_range2((remaining_bits2 - 64))) and ((result29 = remaining_bits2) and
-  (remaining_bits3 = o105))) and
-  (not (64 <= remaining_bits3)))))))))))))))))))) and (((i14 = i11) and
-  ((lane14 = lane11) and ((offset6 = offset3) and
-  ((remaining_bits6 = remaining_bits3) and ((y6 = y3) and ((x6 = x3) and
-  (a6 = a3))))))) and ((i15 = i11) and ((lane15 = lane11) and
-  ((offset7 = offset3) and ((remaining_bits7 = remaining_bits3) and
-  ((y7 = y3) and ((x7 = x3) and (a7 = a3))))))))))
-
-axiom H22 : ((64 <= remaining_bits1) -> (i16 = i14))
-
-axiom H23 : ((64 <= remaining_bits1) -> (lane16 = lane14))
-
-axiom H24 : ((64 <= remaining_bits1) -> (offset8 = offset6))
-
-axiom H25 : ((64 <= remaining_bits1) -> (remaining_bits8 = remaining_bits6))
-
-axiom H26 : ((64 <= remaining_bits1) -> (y8 = y6))
-
-axiom H27 : ((64 <= remaining_bits1) -> (x8 = x6))
-
-axiom H28 : ((64 <= remaining_bits1) -> (a8 = a6))
-
-axiom H29 : ((64 <= remaining_bits1) -> (i17 = i15))
-
-axiom H30 : ((64 <= remaining_bits1) -> (lane17 = lane15))
-
-axiom H31 : ((64 <= remaining_bits1) -> (offset9 = offset7))
-
-axiom H32 : ((64 <= remaining_bits1) -> (remaining_bits9 = remaining_bits7))
-
-axiom H33 : ((64 <= remaining_bits1) -> (y9 = y7))
-
-axiom H34 : ((64 <= remaining_bits1) -> (x9 = x7))
-
-axiom H35 : ((64 <= remaining_bits1) -> (a9 = a7))
-
-axiom H36 : ((not (64 <= remaining_bits1)) -> (i16 = i))
-
-axiom H37 : ((not (64 <= remaining_bits1)) -> (lane16 = lane))
-
-axiom H38 : ((not (64 <= remaining_bits1)) -> (offset8 = offset1))
-
-axiom H39 : ((not (64 <= remaining_bits1)) ->
-  (remaining_bits8 = remaining_bits1))
-
-axiom H40 : ((not (64 <= remaining_bits1)) -> (y8 = y1))
-
-axiom H41 : ((not (64 <= remaining_bits1)) -> (x8 = x1))
-
-axiom H42 : ((not (64 <= remaining_bits1)) -> (a8 = a))
-
-axiom H43 : ((not (64 <= remaining_bits1)) -> (i17 = i2))
-
-axiom H44 : ((not (64 <= remaining_bits1)) -> (lane17 = lane1))
-
-axiom H45 : ((not (64 <= remaining_bits1)) -> (offset9 = offset1))
-
-axiom H46 : ((not (64 <= remaining_bits1)) ->
-  (remaining_bits9 = remaining_bits1))
-
-axiom H47 : ((not (64 <= remaining_bits1)) -> (y9 = y1))
-
-axiom H48 : ((not (64 <= remaining_bits1)) -> (x9 = x1))
-
-axiom H49 : ((not (64 <= remaining_bits1)) -> (a9 = a1))
-
-axiom H50 : (0 <  remaining_bits8)
-
-axiom H51 : (result30 = word)
-
-axiom H52 : (word1 = of_int1(0))
-
-axiom H53 : true
-
-axiom H54 : ((o106 = (remaining_bits8 + 7)) and
-  in_range1((remaining_bits8 + 7)))
-
-axiom H55 : (o107 = comp_div(o106,8))
-
-axiom H56 : ((o108 = o107) and in_range2(o107))
-
-axiom H57 : (result31 = remaining_bytes)
-
-axiom H58 : (remaining_bytes1 = o108)
-
-axiom H59 : in_range2(remaining_bytes1)
-
-axiom H60 : ((remaining_bytes1 - 1) = r64s)
-
-axiom H61 : in_range1(r64s)
-
-axiom H62 : (0 <= r64s)
+axiom rliteral_axiom5 : (tqtint(rliteral5) = 1)
 
  (* File "keccak-keccakf-permutation.adb", line 30, characters 0-0 *)
-goal WP_parameter_def : (0 <= 0)
+goal WP_parameter_def :
+  (forall a:map. forall x:t. forall y:t. forall remaining_bits:int.
+  forall offset:int. forall initial_byte_len:int. forall lane:t1.
+  forall i:int. forall word:t1. forall remaining_bytes:int. forall o:int.
+  forall o1:int. forall o2:int. forall temp___793:map. forall temp___792:int.
+  forall temp___791:int. forall temp___790:t. forall temp___789:t.
+  forall temp___797:int. forall temp___796:int. forall o3:int. forall o4:int.
+  forall temp___783:int. forall o5:int. forall o6:byte. forall o7:t.
+  forall o8:int. forall o9:int. forall o10:t1. forall o11:t1. forall o12:t1.
+  forall o13:t1. forall o14:int. forall o15:int. forall temp___7831:int.
+  forall o16:int. forall o17:byte. forall o18:t. forall o19:int.
+  forall o20:int. forall o21:t1. forall o22:t1. forall o23:t1. forall o24:t1.
+  forall o25:int. forall o26:int. forall temp___7832:int. forall o27:int.
+  forall o28:byte. forall o29:t. forall o30:int. forall o31:int.
+  forall o32:t1. forall o33:t1. forall o34:t1. forall o35:t1. forall o36:int.
+  forall o37:int. forall temp___7833:int. forall o38:int. forall o39:byte.
+  forall o40:t. forall o41:int. forall o42:int. forall o43:t1. forall o44:t1.
+  forall o45:t1. forall o46:t1. forall o47:int. forall o48:int.
+  forall temp___7834:int. forall o49:int. forall o50:byte. forall o51:t.
+  forall o52:int. forall o53:int. forall o54:t1. forall o55:t1.
+  forall o56:t1. forall o57:t1. forall o58:int. forall o59:int.
+  forall temp___7835:int. forall o60:int. forall o61:byte. forall o62:t.
+  forall o63:int. forall o64:int. forall o65:t1. forall o66:t1.
+  forall o67:t1. forall o68:t1. forall o69:int. forall o70:int.
+  forall temp___7836:int. forall o71:int. forall o72:byte. forall o73:t.
+  forall o74:int. forall o75:int. forall o76:t1. forall o77:t1.
+  forall o78:t1. forall o79:t1. forall o80:int. forall o81:int.
+  forall temp___7837:int. forall o82:int. forall o83:byte. forall o84:t.
+  forall o85:int. forall o86:int. forall o87:t1. forall o88:t1.
+  forall o89:t1. forall o90:t1. forall o91:lane_type. forall o92:map.
+  forall o93:t. forall o94:t. forall o95:int. forall o96:int. forall o97:int.
+  forall o98:int. forall o99:int. forall a1:map. forall lane1:t1.
+  forall i1:int. forall result:t. forall x1:t. forall result1:t. forall y1:t.
+  forall result2:int. forall remaining_bits1:int. forall result3:int.
+  forall offset1:int. forall result4:int. forall initial_byte_len1:int.
+  forall a2:map. forall x2:t. forall y2:t. forall remaining_bits2:int.
+  forall offset2:int. forall lane2:t1. forall i2:int. forall temp___7971:int.
+  forall temp___7961:int. forall result5:int. forall temp___7972:int.
+  forall result6:int. forall temp___7962:int. forall result7:t1.
+  forall lane3:t1. forall result8:int. forall i3:int. forall result9:t1.
+  forall lane4:t1. forall result10:int. forall i4:int. forall result11:t1.
+  forall lane5:t1. forall result12:int. forall i5:int. forall result13:t1.
+  forall lane6:t1. forall result14:int. forall i6:int. forall result15:t1.
+  forall lane7:t1. forall result16:int. forall i7:int. forall result17:t1.
+  forall lane8:t1. forall result18:int. forall i8:int. forall result19:t1.
+  forall lane9:t1. forall result20:int. forall i9:int. forall result21:t1.
+  forall lane10:t1. forall result22:int. forall i10:int. forall result23:t1.
+  forall lane11:t1. forall result24:map. forall a3:map. forall result25:t.
+  forall x3:t. forall result26:t. forall y3:t. forall result27:int.
+  forall offset3:int. forall result28:int. forall remaining_bits3:int.
+  forall a4:map__ref1. forall x4:t__ref. forall y4:t__ref.
+  forall remaining_bits4:int__ref. forall offset4:int__ref.
+  forall lane12:t__ref1. forall i11:int__ref. forall a5:map. forall x5:t.
+  forall y5:t. forall remaining_bits5:int. forall offset5:int.
+  forall lane13:t1. forall i12:int. forall a6:map__ref1. forall x6:t__ref.
+  forall y6:t__ref. forall remaining_bits6:int__ref. forall offset6:int__ref.
+  forall lane14:t__ref1. forall i13:int__ref. forall a7:map. forall x7:t.
+  forall y7:t. forall remaining_bits7:int. forall offset7:int.
+  forall lane15:t1. forall i14:int. forall result29:t__ref1. forall word1:t1.
+  forall result30:int__ref. forall remaining_bytes1:int. (dynamic_property(0,
+  2147483647, to_rep1(first(data1)), to_rep1(last(data1))) ->
+  (in_range2(bit_len) -> (((length({ elts = data; rt = data1
+  }) <= 268435455) and ((bit_len <= (length({ elts = data; rt = data1
+  }) * 8)) and (bit_len <= 1600))) -> (((result = x) and (x1 = rliteral1)) ->
+  (in_range4(x1) -> (((result1 = y) and (y1 = rliteral1)) ->
+  (in_range5(y1) -> (((result2 = remaining_bits) and
+  (remaining_bits1 = bit_len)) -> (in_range2(remaining_bits1) ->
+  (((result3 = offset) and (offset1 = 0)) -> (in_range2(offset1) ->
+  ((((((o = (bit_len + 7)) and in_range1((bit_len + 7))) and
+  (o1 = comp_div(o,8))) and ((o2 = o1) and in_range2(o1))) and
+  ((result4 = initial_byte_len) and (initial_byte_len1 = o2))) ->
+  (in_range2(initial_byte_len1) -> ((((64 <= remaining_bits1) and
+  ((((temp___793 = a) and ((temp___792 = offset1) and
+  ((temp___791 = remaining_bits1) and ((temp___790 = y1) and
+  ((temp___789 = x1) and ((0 = temp___797) and ((0 = temp___796) and
+  (((mod(offset2, 8) = 0) and
+  ((offset2 + comp_div((remaining_bits2 + 7),8)) = initial_byte_len1)) and
+  ((((((ule(rliteral1, rliteral2) -> in_range4(x2)) and (ule(rliteral1,
+  rliteral2) -> in_range5(y2))) and ((0 <= 2147483647) ->
+  in_range2(remaining_bits2))) and ((0 <= 2147483647) ->
+  in_range2(offset2))) and (64 <= remaining_bits2)) and
+  (((temp___7971 = result5) and (temp___7972 = offset2)) and
+  (((temp___7961 = result6) and (temp___7962 = remaining_bits2)) and
+  (((lane2 = result7) and (lane3 = rliteral3)) and ((((result8 = i2) and
+  (i3 = 0)) and ((((((((o8 = (i3 * 8)) and in_range1((i3 * 8))) and
+  ((o9 = o8) and in_range2(o8))) and (o10 = of_int1(o9))) and
+  (((((((((o3 = (to_rep1(first(data1)) + offset2)) and
+  in_range1((to_rep1(first(data1)) + offset2))) and (o4 = (o3 + i3))) and
+  ((temp___783 = o4) and in_range1(o4))) and
+  (((to_rep1(first(data1)) <= temp___783) and
+  (temp___783 <= to_rep1(last(data1)))) and (o5 = temp___783))) and
+  (o6 = (data[o5]))) and (o7 = to_rep(o6))) and (o11 = toBig(o7))) and
+  (o12 = lsl_bv1(o11, o10)))) and (o13 = bw_or1(lane3, o12))) and
+  ((result9 = lane3) and (lane4 = o13))) and (((result10 = i3) and
+  (i4 = 1)) and ((((((((o19 = (i4 * 8)) and in_range1((i4 * 8))) and
+  ((o20 = o19) and in_range2(o19))) and (o21 = of_int1(o20))) and
+  (((((((((o14 = (to_rep1(first(data1)) + offset2)) and
+  in_range1((to_rep1(first(data1)) + offset2))) and (o15 = (o14 + i4))) and
+  ((temp___7831 = o15) and in_range1(o15))) and
+  (((to_rep1(first(data1)) <= temp___7831) and
+  (temp___7831 <= to_rep1(last(data1)))) and (o16 = temp___7831))) and
+  (o17 = (data[o16]))) and (o18 = to_rep(o17))) and (o22 = toBig(o18))) and
+  (o23 = lsl_bv1(o22, o21)))) and (o24 = bw_or1(lane4, o23))) and
+  ((result11 = lane4) and (lane5 = o24))) and (((result12 = i4) and
+  (i5 = 2)) and ((((((((o30 = (i5 * 8)) and in_range1((i5 * 8))) and
+  ((o31 = o30) and in_range2(o30))) and (o32 = of_int1(o31))) and
+  (((((((((o25 = (to_rep1(first(data1)) + offset2)) and
+  in_range1((to_rep1(first(data1)) + offset2))) and (o26 = (o25 + i5))) and
+  ((temp___7832 = o26) and in_range1(o26))) and
+  (((to_rep1(first(data1)) <= temp___7832) and
+  (temp___7832 <= to_rep1(last(data1)))) and (o27 = temp___7832))) and
+  (o28 = (data[o27]))) and (o29 = to_rep(o28))) and (o33 = toBig(o29))) and
+  (o34 = lsl_bv1(o33, o32)))) and (o35 = bw_or1(lane5, o34))) and
+  ((result13 = lane5) and (lane6 = o35))) and (((result14 = i5) and
+  (i6 = 3)) and ((((((((o41 = (i6 * 8)) and in_range1((i6 * 8))) and
+  ((o42 = o41) and in_range2(o41))) and (o43 = of_int1(o42))) and
+  (((((((((o36 = (to_rep1(first(data1)) + offset2)) and
+  in_range1((to_rep1(first(data1)) + offset2))) and (o37 = (o36 + i6))) and
+  ((temp___7833 = o37) and in_range1(o37))) and
+  (((to_rep1(first(data1)) <= temp___7833) and
+  (temp___7833 <= to_rep1(last(data1)))) and (o38 = temp___7833))) and
+  (o39 = (data[o38]))) and (o40 = to_rep(o39))) and (o44 = toBig(o40))) and
+  (o45 = lsl_bv1(o44, o43)))) and (o46 = bw_or1(lane6, o45))) and
+  ((result15 = lane6) and (lane7 = o46))) and (((result16 = i6) and
+  (i7 = 4)) and ((((((((o52 = (i7 * 8)) and in_range1((i7 * 8))) and
+  ((o53 = o52) and in_range2(o52))) and (o54 = of_int1(o53))) and
+  (((((((((o47 = (to_rep1(first(data1)) + offset2)) and
+  in_range1((to_rep1(first(data1)) + offset2))) and (o48 = (o47 + i7))) and
+  ((temp___7834 = o48) and in_range1(o48))) and
+  (((to_rep1(first(data1)) <= temp___7834) and
+  (temp___7834 <= to_rep1(last(data1)))) and (o49 = temp___7834))) and
+  (o50 = (data[o49]))) and (o51 = to_rep(o50))) and (o55 = toBig(o51))) and
+  (o56 = lsl_bv1(o55, o54)))) and (o57 = bw_or1(lane7, o56))) and
+  ((result17 = lane7) and (lane8 = o57))) and (((result18 = i7) and
+  (i8 = 5)) and ((((((((o63 = (i8 * 8)) and in_range1((i8 * 8))) and
+  ((o64 = o63) and in_range2(o63))) and (o65 = of_int1(o64))) and
+  (((((((((o58 = (to_rep1(first(data1)) + offset2)) and
+  in_range1((to_rep1(first(data1)) + offset2))) and (o59 = (o58 + i8))) and
+  ((temp___7835 = o59) and in_range1(o59))) and
+  (((to_rep1(first(data1)) <= temp___7835) and
+  (temp___7835 <= to_rep1(last(data1)))) and (o60 = temp___7835))) and
+  (o61 = (data[o60]))) and (o62 = to_rep(o61))) and (o66 = toBig(o62))) and
+  (o67 = lsl_bv1(o66, o65)))) and (o68 = bw_or1(lane8, o67))) and
+  ((result19 = lane8) and (lane9 = o68))) and (((result20 = i8) and
+  (i9 = 6)) and ((((((((o74 = (i9 * 8)) and in_range1((i9 * 8))) and
+  ((o75 = o74) and in_range2(o74))) and (o76 = of_int1(o75))) and
+  (((((((((o69 = (to_rep1(first(data1)) + offset2)) and
+  in_range1((to_rep1(first(data1)) + offset2))) and (o70 = (o69 + i9))) and
+  ((temp___7836 = o70) and in_range1(o70))) and
+  (((to_rep1(first(data1)) <= temp___7836) and
+  (temp___7836 <= to_rep1(last(data1)))) and (o71 = temp___7836))) and
+  (o72 = (data[o71]))) and (o73 = to_rep(o72))) and (o77 = toBig(o73))) and
+  (o78 = lsl_bv1(o77, o76)))) and (o79 = bw_or1(lane9, o78))) and
+  ((result21 = lane9) and (lane10 = o79))) and (((result22 = i9) and
+  (i10 = 7)) and (((((((o85 = (i10 * 8)) and in_range1((i10 * 8))) and
+  ((o86 = o85) and in_range2(o85))) and (o87 = of_int1(o86))) and
+  (((((((((o80 = (to_rep1(first(data1)) + offset2)) and
+  in_range1((to_rep1(first(data1)) + offset2))) and (o81 = (o80 + i10))) and
+  ((temp___7837 = o81) and in_range1(o81))) and
+  (((to_rep1(first(data1)) <= temp___7837) and
+  (temp___7837 <= to_rep1(last(data1)))) and (o82 = temp___7837))) and
+  (o83 = (data[o82]))) and (o84 = to_rep(o83))) and (o88 = toBig(o84))) and
+  (o89 = lsl_bv1(o88, o87)))) and (o90 = bw_or1(lane10, o89))) and
+  ((result23 = lane10) and (lane11 = o90)))))))))))))))))) and
+  ((((to_rep2(o91) = bw_xor1(to_rep2(get(a2, x2, y2)), lane11)) and
+  (o92 = set(a2, x2, y2, o91))) and ((result24 = a2) and (a3 = o92))) and
+  ((((ule(sub(rliteral4, x2), rliteral5) and (o93 = sub(add(x2, rliteral5),
+  rliteral4))) or ((not ule(sub(rliteral4, x2), rliteral5)) and
+  (o93 = add(x2, rliteral5)))) and ((result25 = x2) and (x3 = o93))) and
+  ((((x3 = rliteral1) and (((ule(sub(rliteral4, y2), rliteral5) and
+  (o94 = sub(add(y2, rliteral5), rliteral4))) or ((not ule(sub(rliteral4,
+  y2), rliteral5)) and (o94 = add(y2, rliteral5)))) and ((result26 = y2) and
+  (y3 = o94)))) or ((not (x3 = rliteral1)) and (y3 = y2))) and
+  ((((o95 = (offset2 + 8)) and in_range1((offset2 + 8))) and
+  ((result27 = offset2) and (offset3 = o95))) and
+  ((((o96 = (remaining_bits2 - 64)) and
+  in_range2((remaining_bits2 - 64))) and ((result28 = remaining_bits2) and
+  (remaining_bits3 = o96))) and
+  (not (64 <= remaining_bits3)))))))))))))))))))) and (((i11 = {
+  int__content = i10 }) and ((lane12 = { t__content1 = lane11 }) and
+  ((offset4 = { int__content = offset3 }) and ((remaining_bits4 = {
+  int__content = remaining_bits3 }) and ((y4 = { t__content = y3 }) and
+  ((x4 = { t__content = x3 }) and (a4 = { map__content1 = a3 }))))))) and
+  ((i12 = i10) and ((lane13 = lane11) and ((offset5 = offset3) and
+  ((remaining_bits5 = remaining_bits3) and ((y5 = y3) and ((x5 = x3) and
+  (a5 = a3))))))))) and (((i13 = i11) and ((lane14 = lane12) and
+  ((offset6 = offset4) and ((remaining_bits6 = remaining_bits4) and
+  ((y6 = y4) and ((x6 = x4) and (a6 = a4))))))) and ((i14 = i12) and
+  ((lane15 = lane13) and ((offset7 = offset5) and
+  ((remaining_bits7 = remaining_bits5) and ((y7 = y5) and ((x7 = x5) and
+  (a7 = a5)))))))))) or ((not (64 <= remaining_bits1)) and (((i13 = {
+  int__content = i }) and ((lane14 = { t__content1 = lane }) and
+  ((offset6 = { int__content = offset1 }) and ((remaining_bits6 = {
+  int__content = remaining_bits1 }) and ((y6 = { t__content = y1 }) and
+  ((x6 = { t__content = x1 }) and (a6 = { map__content1 = a }))))))) and
+  ((i14 = i1) and ((lane15 = lane1) and ((offset7 = offset1) and
+  ((remaining_bits7 = remaining_bits1) and ((y7 = y1) and ((x7 = x1) and
+  (a7 = a1)))))))))) -> ((0 <  (remaining_bits6).int__content) ->
+  (((result29 = { t__content1 = word }) and (word1 = rliteral3)) ->
+  ((((((o97 = ((remaining_bits6).int__content + 7)) and
+  in_range1(((remaining_bits6).int__content + 7))) and
+  (o98 = comp_div(o97,8))) and ((o99 = o98) and in_range2(o98))) and
+  ((result30 = { int__content = remaining_bytes }) and
+  (remaining_bytes1 = o99))) -> (in_range2(remaining_bytes1) ->
+  ((((remaining_bytes1 - 1) = r64s) and in_range1(r64s)) -> ((0 <= r64s) ->
+  (0 <= 0))))))))))))))))))))))

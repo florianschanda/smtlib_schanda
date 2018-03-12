@@ -684,7 +684,15 @@ axiom id__def_axiom : (forall x:int [id(x)]. (in_range(x) -> (id(x) = x)))
 
 type t2
 
-predicate in_range1(x: t) = (ule(of_int(0), x) and ule(x, of_int(7)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 7)
+
+predicate in_range1(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 7))
 
@@ -713,59 +721,25 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : t
+logic rliteral2 : t
 
-logic y : t
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 1)
 
-logic temp___180 : int
+logic rliteral3 : t
 
-logic o : t
-
-logic temp___181 : int
-
-logic o1 : t
-
-logic o2 : t
-
-logic result : t
-
-logic x1 : t
-
-logic result1 : t
-
-logic y1 : t
-
-axiom H : true
-
-axiom H1 : (ule(of_int(0), of_int(7)) -> in_range1(y))
-
-axiom H2 : ((temp___180 = id(257)) and (in_range(temp___180) and
-  (temp___180 = 257)))
-
-axiom H3 : ((temp___180 <  256) -> (o = lsl_bv(of_int(1),
-  of_int(temp___180))))
-
-axiom H4 : ((not (temp___180 <  256)) -> (o = of_int(0)))
-
-axiom H5 : (result = x)
-
-axiom H6 : (x1 = o)
-
-axiom H7 : (x1 = of_int(0))
-
-axiom H8 : ((temp___181 = id(3)) and (in_range(temp___181) and
-  (temp___181 = 3)))
-
-axiom H9 : ((temp___181 <  256) -> (o1 = lsl_bv(of_int(1),
-  of_int(temp___181))))
-
-axiom H10 : ((not (temp___181 <  256)) -> (o1 = of_int(0)))
-
-axiom H11 : (o2 = urem(o1, of_int(8)))
-
-axiom H12 : (result1 = y)
-
-axiom H13 : (y1 = o2)
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 8)
 
  (* File "overflow_modulus.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (y1 = of_int(0))
+goal WP_parameter_def :
+  (forall x:t. forall y:t. forall temp___210:int. forall o:t.
+  forall temp___211:int. forall o1:t. forall o2:t. forall result:t.
+  forall x1:t. forall result1:t. forall y1:t. ((ule(rliteral, rliteral1) ->
+  in_range1(y)) -> (((((temp___210 = id(257)) and (in_range(temp___210) and
+  (temp___210 = 257))) and (((temp___210 <  256) and (o = lsl_bv(rliteral2,
+  of_int(temp___210)))) or ((not (temp___210 <  256)) and
+  (o = rliteral)))) and ((result = x) and (x1 = o))) -> ((x1 = rliteral) ->
+  (((((temp___211 = id(3)) and (in_range(temp___211) and
+  (temp___211 = 3))) and ((((temp___211 <  256) and (o1 = lsl_bv(rliteral2,
+  of_int(temp___211)))) or ((not (temp___211 <  256)) and
+  (o1 = rliteral))) and (o2 = urem(o1, rliteral3)))) and ((result1 = y) and
+  (y1 = o2))) -> (y1 = rliteral))))))

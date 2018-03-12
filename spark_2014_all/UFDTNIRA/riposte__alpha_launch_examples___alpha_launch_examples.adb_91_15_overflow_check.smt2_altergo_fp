@@ -221,41 +221,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic r : int
-
-logic alpha_launch_examples__example_7__result : int
-
-logic o : int
-
-logic result : int
-
-logic r1 : int
-
-logic result1 : int
-
-logic r2 : int
-
-logic result2 : int
-
-logic alpha_launch_examples__example_7__result1 : int
-
-logic alpha_launch_examples__example_7__result2 : int
-
-logic alpha_launch_examples__example_7__result3 : int
-
-logic r3 : int
-
-logic alpha_launch_examples__example_7__result4 : int
-
-logic r4 : int
-
-logic alpha_launch_examples__example_7__result5 : int
-
-axiom H : in_range(x)
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(r))
-
-axiom H2 : (not (x = (- 2147483648)))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(abs_int(x))
+goal WP_parameter_def :
+  (forall r:int. (in_range(x) -> ((((- 2147483648) <= 2147483647) ->
+  in_range(r)) -> ((not (x = (- 2147483648))) -> in_range(abs_int(x))))))

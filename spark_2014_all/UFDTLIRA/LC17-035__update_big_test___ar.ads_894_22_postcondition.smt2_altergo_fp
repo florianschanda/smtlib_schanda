@@ -590,164 +590,48 @@ logic e : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic r__split_fields : et3
-
-logic r__split_fields1 : et1
-
-logic r__split_fields2 : et2
-
-logic r__split_fields3 : enum1ta
-
-logic r__split_fields4 : et4
-
-logic o : et1
-
-logic o1 : et1
-
-logic o2 : et2
-
-logic o3 : et1
-
-logic o4 : et2
-
-logic o5 : et3
-
-logic o6 : et1
-
-logic o7 : et2
-
-logic o8 : enum1ta
-
-logic o9 : et3
-
-logic o10 : et1
-
-logic o11 : et2
-
-logic o12 : enum1ta
-
-logic o13 : et3
-
-logic o14 : et1
-
-logic o15 : et2
-
-logic o16 : enum1ta
-
-logic o17 : et4
-
-logic temp___6824 : et3
-
-logic temp___68241 : et1
-
-logic temp___68242 : et2
-
-logic temp___68243 : enum1ta
-
-logic temp___68244 : et4
-
-logic result : et3
-
-logic result1 : et1
-
-logic result2 : et2
-
-logic result3 : enum1ta
-
-logic result4 : et4
-
-logic r__split_fields5 : et3
-
-logic r__split_fields6 : et1
-
-logic r__split_fields7 : et2
-
-logic r__split_fields8 : enum1ta
-
-logic r__split_fields9 : et4
-
-logic r__split_fields10 : et3
-
-logic r__split_fields11 : et1
-
-logic r__split_fields12 : et2
-
-logic r__split_fields13 : enum1ta
-
-logic r__split_fields14 : et4
-
-logic r__split_fields15 : et3
-
-logic r__split_fields16 : et1
-
-logic r__split_fields17 : et2
-
-logic r__split_fields18 : enum1ta
-
-logic r__split_fields19 : et4
-
-axiom H : in_range(e)
-
-axiom H1 : (to_rep(o) = e)
-
-axiom H2 : (o = o1)
-
-axiom H3 : (r__split_fields2 = o2)
-
-axiom H4 : (o3 = o1)
-
-axiom H5 : (o4 = o2)
-
-axiom H6 : (r__split_fields = o5)
-
-axiom H7 : (o6 = o3)
-
-axiom H8 : (o7 = o4)
-
-axiom H9 : (r__split_fields3 = o8)
-
-axiom H10 : (o9 = o5)
-
-axiom H11 : (o10 = o6)
-
-axiom H12 : (o11 = o7)
-
-axiom H13 : (o12 = o8)
-
-axiom H14 : (o13 = o9)
-
-axiom H15 : (o14 = o10)
-
-axiom H16 : (o15 = o11)
-
-axiom H17 : (o16 = o12)
-
-axiom H18 : (r__split_fields4 = o17)
-
-axiom H19 : (((temp___6824 = o13) and (((temp___68241 = o14) and
-  (temp___68242 = o15)) and (temp___68243 = o16))) and (temp___68244 = o17))
-
-axiom H20 : (((result = r__split_fields) and
+ (* File "ar.ads", line 887, characters 0-0 *)
+goal WP_parameter_def :
+  (forall r__split_fields:et3. forall r__split_fields1:et1.
+  forall r__split_fields2:et2. forall r__split_fields3:enum1ta.
+  forall r__split_fields4:et4. forall o:et1. forall o1:et1. forall o2:et2.
+  forall o3:et1. forall o4:et2. forall o5:et3. forall o6:et1. forall o7:et2.
+  forall o8:enum1ta. forall o9:et3. forall o10:et1. forall o11:et2.
+  forall o12:enum1ta. forall o13:et3. forall o14:et1. forall o15:et2.
+  forall o16:enum1ta. forall o17:et4. forall temp___6883:et3.
+  forall temp___68831:et1. forall temp___68832:et2.
+  forall temp___68833:enum1ta. forall temp___68834:et4. forall result:et3.
+  forall result1:et1. forall result2:et2. forall result3:enum1ta.
+  forall result4:et4. forall r__split_fields5:et3.
+  forall r__split_fields6:et1. forall r__split_fields7:et2.
+  forall r__split_fields8:enum1ta. forall r__split_fields9:et4.
+  forall r__split_fields10:et3. forall r__split_fields11:et1.
+  forall r__split_fields12:et2. forall r__split_fields13:enum1ta.
+  forall r__split_fields14:et4. forall r__split_fields15:us_split_fields4.
+  ((in_range(e) and (((((((((to_rep(o) = e) and ((o = o1) and
+  (r__split_fields2 = o2))) and ((o3 = o1) and (o4 = o2))) and
+  ((r__split_fields = o5) and (((o6 = o3) and (o7 = o4)) and
+  (r__split_fields3 = o8)))) and ((o9 = o5) and (((o10 = o6) and
+  (o11 = o7)) and (o12 = o8)))) and (((o13 = o9) and (((o14 = o10) and
+  (o15 = o11)) and (o16 = o12))) and (r__split_fields4 = o17))) and
+  (((o13 = temp___6883) and (((o14 = temp___68831) and
+  (o15 = temp___68832)) and (o16 = temp___68833))) and
+  (o17 = temp___68834))) and ((((result = r__split_fields) and
   (((result1 = r__split_fields1) and (result2 = r__split_fields2)) and
-  (result3 = r__split_fields3))) and (result4 = r__split_fields4))
-
-axiom H21 : (((r__split_fields5 = temp___6824) and
-  (((r__split_fields6 = temp___68241) and
-  (r__split_fields7 = temp___68242)) and
-  (r__split_fields8 = temp___68243))) and (r__split_fields9 = temp___68244))
-
-axiom H22 : (((r__split_fields10 = r__split_fields5) and
+  (result3 = r__split_fields3))) and (result4 = r__split_fields4)) and
+  (((temp___6883 = r__split_fields5) and
+  (((temp___68831 = r__split_fields6) and
+  (temp___68832 = r__split_fields7)) and
+  (temp___68833 = r__split_fields8))) and
+  (temp___68834 = r__split_fields9)))) and
+  ((((r__split_fields10 = r__split_fields5) and
   (((r__split_fields11 = r__split_fields6) and
   (r__split_fields12 = r__split_fields7)) and
   (r__split_fields13 = r__split_fields8))) and
-  (r__split_fields14 = r__split_fields9))
-
-axiom H23 : (((r__split_fields15 = r__split_fields5) and
-  (((r__split_fields16 = r__split_fields6) and
-  (r__split_fields17 = r__split_fields7)) and
-  (r__split_fields18 = r__split_fields8))) and
-  (r__split_fields19 = r__split_fields9))
-
- (* File "ar.ads", line 887, characters 0-0 *)
-goal WP_parameter_def :
-  (to_rep3(r__split_fields14) = to_rep3(r__split_fields4))
+  (r__split_fields14 = r__split_fields9)) and (r__split_fields15 = {
+  rec__ar__rec3t__f3 = { us_split_fields3 = { rec__ar__rec2t__f2 =
+  r__split_fields5; rec__ar__rec2t__g2 = { us_split_fields1 = {
+  rec__ar__rec1t__f1 = r__split_fields6; rec__ar__rec1t__g1 =
+  r__split_fields7 } }; rec__ar__rec2t__h2 = r__split_fields8 } };
+  rec__ar__rec3t__g3 = r__split_fields9 })))) ->
+  (to_rep3(r__split_fields14) = to_rep3(r__split_fields4))))

@@ -391,27 +391,8 @@ logic z : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic x : duration
-
-logic o : duration
-
-logic o1 : int
-
-logic fxp_div2__y__assume : int
-
-logic o2 : int
-
-logic fxp_div2__z__assume : int
-
-logic result : duration
-
-logic x1 : duration
-
-axiom H : (to_fixed(o) = 3000000000)
-
-axiom H1 : (result = x)
-
-axiom H2 : (x1 = o)
-
  (* File "fxp_div2.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : (not (to_fixed(x1) = 0))
+goal WP_parameter_def :
+  (forall x:duration. forall o:duration. forall result:duration.
+  forall x1:duration. (((to_fixed(o) = 3000000000) and ((result = x) and
+  (x1 = o))) -> (not (to_fixed(x1) = 0))))

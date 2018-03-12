@@ -113,27 +113,7 @@ logic par2 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic par1 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic g : int
-
-logic g1 : int
-
-axiom H : in_range(par1)
-
-axiom H1 : in_range(par2)
-
-axiom H2 : (par2 = 3)
-
-axiom H3 : (not (par2 = 0))
-
-axiom H4 : (not (par2 = 1))
-
  (* File "raise_statements.adb", line 11, characters 0-0 *)
-goal WP_parameter_def : in_range((par1 + par2))
+goal WP_parameter_def :
+  (forall par1:int. (in_range(par1) -> (in_range(par2) -> ((par2 = 3) ->
+  ((not (par2 = 0)) -> ((not (par2 = 1)) -> in_range((par1 + par2))))))))

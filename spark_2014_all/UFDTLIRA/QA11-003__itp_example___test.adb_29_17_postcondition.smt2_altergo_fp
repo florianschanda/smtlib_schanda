@@ -213,35 +213,17 @@ logic a1 : integer
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic test__test_3__result : int
-
-logic result : int
-
-logic test__test_3__result1 : int
-
-logic test__test_3__result2 : int
-
-logic test__test_3__result3 : int
-
-logic test__test_3__result4 : int
-
-logic test__test_3__result5 : int
-
-logic result1 : int
-
-axiom H : (test__test_3__result1 = test__test_3__result2)
-
-axiom H1 : (test__test_3__result3 = test__test_3__result1)
-
-axiom H2 : (result = test__test_3__result)
-
-axiom H3 : (test__test_3__result1 = to_rep(a))
-
-axiom H4 : (test__test_3__result4 = test__test_3__result2)
-
-axiom H5 : (test__test_3__result5 = test__test_3__result3)
-
-axiom H6 : (result1 = test__test_3__result4)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (test__test_3__result4 = 2)
+goal WP_parameter_def :
+  (forall test__test_3__result:int. forall result:int.
+  forall test__test_3__result1:int. forall test__test_3__result2:int.
+  forall test__test_3__result3:int. forall test__test_3__result4:int.
+  forall test__test_3__result5:int.
+  (forall result1:int.
+  ((((((test__test_3__result1 = test__test_3__result2) and
+  (test__test_3__result3 = test__test_3__result1)) and
+  ((result = test__test_3__result) and
+  (test__test_3__result1 = to_rep(a)))) and
+  ((test__test_3__result4 = test__test_3__result2) and
+  (test__test_3__result5 = test__test_3__result3))) and
+  (result1 = test__test_3__result4)) -> (test__test_3__result4 = 2))))

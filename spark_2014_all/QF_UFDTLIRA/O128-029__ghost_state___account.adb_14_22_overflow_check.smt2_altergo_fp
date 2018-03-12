@@ -113,17 +113,8 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic total : int
-
-logic last_incr : int
-
-logic o : int
-
-axiom H : in_range(total)
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(last_incr))
-
-axiom H2 : in_range(incr)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((total + incr))
+goal WP_parameter_def :
+  (forall total:int. forall last_incr:int. (in_range(total) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(last_incr)) ->
+  (in_range(incr) -> in_range((total + incr))))))

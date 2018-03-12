@@ -227,41 +227,19 @@ axiom prim_func__def_axiom :
   foo__t1_pkg__t1_var__fields }) = { us_split_fields1 = { rec__ext__ =
   foo__t1_pkg__t1_var__fields }; attr__tag = t1_var__attr__tag }))
 
-logic t1_var__split_fields : us_private
-
-logic temp___205 : us_private
-
-logic temp___2051 : int
-
-logic temp___206 : us_private
-
-logic temp___2061 : int
-
-logic o : us_private
-
-logic o1 : int
-
-logic o2 : us_private
-
-logic o3 : int
-
-axiom H : (({ us_split_fields1 = { rec__ext__ = temp___206 }; attr__tag =
-  temp___2061 } = prim_func({ rec__ext__ = t1_var__split_fields })) and
-  ((t1_var__split_fields = temp___206) and
-  (t1_var__attr__tag = temp___2061)))
-
-axiom H1 : us_compatible_tags(temp___2061, us_tag1)
-
-axiom H2 : ((o = temp___206) and (o1 = temp___2061))
-
-axiom H3 : (o2 = o)
-
-axiom H4 : (o3 = o1)
-
-axiom H5 : (({ us_split_fields1 = { rec__ext__ = temp___205 }; attr__tag =
-  temp___2051 } = prim_func({ rec__ext__ = t1_var__split_fields })) and
-  ((t1_var__split_fields = temp___205) and
-  (t1_var__attr__tag = temp___2051)))
-
  (* File "foo.adb", line 34, characters 0-0 *)
-goal WP_parameter_def : us_compatible_tags(temp___2051, us_tag1)
+goal WP_parameter_def :
+  (forall t1_var__split_fields:us_private. forall temp___239:us_private.
+  forall temp___2391:int. forall temp___240:us_private.
+  forall temp___2401:int. forall o:us_private. forall o1:int.
+  forall o2:us_private. forall o3:int. ((((({ us_split_fields1 = {
+  rec__ext__ = temp___240 }; attr__tag = temp___2401 } = prim_func({
+  rec__ext__ = t1_var__split_fields })) and
+  ((t1_var__split_fields = temp___240) and
+  (t1_var__attr__tag = temp___2401))) and (us_compatible_tags(temp___2401,
+  us_tag1) and ((o = temp___240) and (o1 = temp___2401)))) and ((o2 = o) and
+  (o3 = o1))) -> ((({ us_split_fields1 = { rec__ext__ = temp___239 };
+  attr__tag = temp___2391 } = prim_func({ rec__ext__ = t1_var__split_fields
+  })) and ((t1_var__split_fields = temp___239) and
+  (t1_var__attr__tag = temp___2391))) -> us_compatible_tags(temp___2391,
+  us_tag1))))

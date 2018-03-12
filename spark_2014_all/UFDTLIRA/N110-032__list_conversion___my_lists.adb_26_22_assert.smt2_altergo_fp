@@ -643,201 +643,94 @@ axiom is_empty__post_axiom :
   rec__my_lists__my_lists__list__capacity = container }; us_split_fields1 = {
   rec__my_lists__my_lists__list = container1 } }) = 0)))
 
-logic l1__split_fields : us_main_type
-
-logic l2__split_fields : us_main_type
-
-logic l3__split_fields : us_main_type
-
-logic l4__split_fields : us_main_type
-
-logic l5__split_fields : us_main_type
-
-logic l6__split_fields : us_main_type
-
-logic l7__split_fields : us_main_type
-
-logic us : int
-
-logic result : us_main_type
-
-logic l2__split_fields1 : us_main_type
-
-logic my_lists__my_lists__clear__container__fields : us_main_type
-
-logic result1 : us_main_type
-
-logic l1__split_fields1 : us_main_type
-
-logic my_lists__my_lists__clear__container__fields1 : us_main_type
-
-logic result2 : us_main_type
-
-logic l2__split_fields2 : us_main_type
-
-logic my_lists__my_lists__clear__container__fields2 : us_main_type
-
-logic result3 : us_main_type
-
-logic l3__split_fields1 : us_main_type
-
-logic my_lists__my_lists__clear__container__fields3 : us_main_type
-
-logic result4 : us_main_type
-
-logic l4__split_fields1 : us_main_type
-
-logic my_lists__my_lists__clear__container__fields4 : us_main_type
-
-logic result5 : us_main_type
-
-logic l5__split_fields1 : us_main_type
-
-logic my_lists__my_lists__clear__container__fields5 : us_main_type
-
-logic result6 : us_main_type
-
-logic l6__split_fields1 : us_main_type
-
-logic my_lists__my_lists__clear__container__fields6 : us_main_type
-
-logic result7 : us_main_type
-
-logic l7__split_fields1 : us_main_type
-
-axiom H : ((us = 100) and in_range(100))
-
-axiom H1 : ((to_rep(l1__split_discrs) = 100) and (is_empty({
+ (* File "a-contai.ads", line 20, characters 0-0 *)
+goal WP_parameter_def :
+  (forall l1__split_fields:us_main_type.
+  forall l2__split_fields:us_main_type. forall l3__split_fields:us_main_type.
+  forall l4__split_fields:us_main_type. forall l5__split_fields:us_main_type.
+  forall l6__split_fields:us_main_type. forall l7__split_fields:us_main_type.
+  forall us:int. forall result:us_main_type.
+  forall l2__split_fields1:us_main_type.
+  forall my_lists__my_lists__clear__container__fields:us_main_type.
+  forall result1:us_main_type. forall l1__split_fields1:us_main_type.
+  forall my_lists__my_lists__clear__container__fields1:us_main_type.
+  forall result2:us_main_type. forall l2__split_fields2:us_main_type.
+  forall my_lists__my_lists__clear__container__fields2:us_main_type.
+  forall result3:us_main_type. forall l3__split_fields1:us_main_type.
+  forall my_lists__my_lists__clear__container__fields3:us_main_type.
+  forall result4:us_main_type. forall l4__split_fields1:us_main_type.
+  forall my_lists__my_lists__clear__container__fields4:us_main_type.
+  forall result5:us_main_type. forall l5__split_fields1:us_main_type.
+  forall my_lists__my_lists__clear__container__fields5:us_main_type.
+  forall result6:us_main_type. forall l6__split_fields1:us_main_type.
+  forall my_lists__my_lists__clear__container__fields6:us_main_type.
+  forall result7:us_split_fields__ref.
+  forall l7__split_fields1:us_split_fields. (((us = 100) and
+  in_range(100)) -> (((to_rep(l1__split_discrs) = 100) and (is_empty({
   us_split_discrs1 = { rec__my_lists__my_lists__list__capacity =
   l1__split_discrs }; us_split_fields1 = { rec__my_lists__my_lists__list =
-  l1__split_fields } }) = true))
-
-axiom H2 : (100 = to_rep(l1__split_discrs))
-
-axiom H3 : (result = l2__split_fields)
-
-axiom H4 : (l1__split_fields = l2__split_fields1)
-
-axiom H5 : (l2__split_discrs = l1__split_discrs)
-
-axiom H6 : (100 = to_rep(l2__split_discrs))
-
-axiom H7 : ((to_rep(l3__split_discrs) = 100) and (is_empty({
-  us_split_discrs1 = { rec__my_lists__my_lists__list__capacity =
+  l1__split_fields } }) = true)) -> ((100 = to_rep(l1__split_discrs)) ->
+  ((((result = l2__split_fields) and
+  (l1__split_fields = l2__split_fields1)) and
+  (l2__split_discrs = l1__split_discrs)) ->
+  ((100 = to_rep(l2__split_discrs)) -> (((to_rep(l3__split_discrs) = 100) and
+  (is_empty({ us_split_discrs1 = { rec__my_lists__my_lists__list__capacity =
   l3__split_discrs }; us_split_fields1 = { rec__my_lists__my_lists__list =
-  l3__split_fields } }) = true))
-
-axiom H8 : (100 = to_rep(l3__split_discrs))
-
-axiom H9 : ((to_rep(l4__split_discrs) = 100) and (is_empty({
-  us_split_discrs1 = { rec__my_lists__my_lists__list__capacity =
-  l4__split_discrs }; us_split_fields1 = { rec__my_lists__my_lists__list =
-  l4__split_fields } }) = true))
-
-axiom H10 : (100 = to_rep(l4__split_discrs))
-
-axiom H11 : ((to_rep(l5__split_discrs) = 100) and (is_empty({
-  us_split_discrs1 = { rec__my_lists__my_lists__list__capacity =
-  l5__split_discrs }; us_split_fields1 = { rec__my_lists__my_lists__list =
-  l5__split_fields } }) = true))
-
-axiom H12 : (100 = to_rep(l5__split_discrs))
-
-axiom H13 : ((to_rep(l6__split_discrs) = 100) and (is_empty({
-  us_split_discrs1 = { rec__my_lists__my_lists__list__capacity =
-  l6__split_discrs }; us_split_fields1 = { rec__my_lists__my_lists__list =
-  l6__split_fields } }) = true))
-
-axiom H14 : (100 = to_rep(l6__split_discrs))
-
-axiom H15 : ((to_rep(l7__split_discrs) = 100) and (is_empty({
-  us_split_discrs1 = { rec__my_lists__my_lists__list__capacity =
-  l7__split_discrs }; us_split_fields1 = { rec__my_lists__my_lists__list =
-  l7__split_fields } }) = true))
-
-axiom H16 : (100 = to_rep(l7__split_discrs))
-
-axiom H17 : (length({ us_split_discrs1 = {
-  rec__my_lists__my_lists__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__my_lists__my_lists__list =
-  my_lists__my_lists__clear__container__fields } }) = 0)
-
-axiom H18 : (result1 = l1__split_fields)
-
-axiom H19 :
-  (l1__split_fields1 = my_lists__my_lists__clear__container__fields)
-
-axiom H20 : (length({ us_split_discrs1 = {
-  rec__my_lists__my_lists__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__my_lists__my_lists__list =
-  my_lists__my_lists__clear__container__fields1 } }) = 0)
-
-axiom H21 : (result2 = l2__split_fields1)
-
-axiom H22 :
-  (l2__split_fields2 = my_lists__my_lists__clear__container__fields1)
-
-axiom H23 : (length({ us_split_discrs1 = {
-  rec__my_lists__my_lists__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__my_lists__my_lists__list =
-  my_lists__my_lists__clear__container__fields2 } }) = 0)
-
-axiom H24 : (result3 = l3__split_fields)
-
-axiom H25 :
-  (l3__split_fields1 = my_lists__my_lists__clear__container__fields2)
-
-axiom H26 : (length({ us_split_discrs1 = {
+  l3__split_fields } }) = true)) -> ((100 = to_rep(l3__split_discrs)) ->
+  (((to_rep(l4__split_discrs) = 100) and (is_empty({ us_split_discrs1 = {
   rec__my_lists__my_lists__list__capacity = l4__split_discrs };
-  us_split_fields1 = { rec__my_lists__my_lists__list =
-  my_lists__my_lists__clear__container__fields3 } }) = 0)
-
-axiom H27 : (result4 = l4__split_fields)
-
-axiom H28 :
-  (l4__split_fields1 = my_lists__my_lists__clear__container__fields3)
-
-axiom H29 : (length({ us_split_discrs1 = {
+  us_split_fields1 = { rec__my_lists__my_lists__list = l4__split_fields }
+  }) = true)) -> ((100 = to_rep(l4__split_discrs)) ->
+  (((to_rep(l5__split_discrs) = 100) and (is_empty({ us_split_discrs1 = {
   rec__my_lists__my_lists__list__capacity = l5__split_discrs };
-  us_split_fields1 = { rec__my_lists__my_lists__list =
-  my_lists__my_lists__clear__container__fields4 } }) = 0)
-
-axiom H30 : (result5 = l5__split_fields)
-
-axiom H31 :
-  (l5__split_fields1 = my_lists__my_lists__clear__container__fields4)
-
-axiom H32 : (length({ us_split_discrs1 = {
+  us_split_fields1 = { rec__my_lists__my_lists__list = l5__split_fields }
+  }) = true)) -> ((100 = to_rep(l5__split_discrs)) ->
+  (((to_rep(l6__split_discrs) = 100) and (is_empty({ us_split_discrs1 = {
   rec__my_lists__my_lists__list__capacity = l6__split_discrs };
-  us_split_fields1 = { rec__my_lists__my_lists__list =
-  my_lists__my_lists__clear__container__fields5 } }) = 0)
-
-axiom H33 : (result6 = l6__split_fields)
-
-axiom H34 :
-  (l6__split_fields1 = my_lists__my_lists__clear__container__fields5)
-
-axiom H35 : (length({ us_split_discrs1 = {
+  us_split_fields1 = { rec__my_lists__my_lists__list = l6__split_fields }
+  }) = true)) -> ((100 = to_rep(l6__split_discrs)) ->
+  (((to_rep(l7__split_discrs) = 100) and (is_empty({ us_split_discrs1 = {
   rec__my_lists__my_lists__list__capacity = l7__split_discrs };
-  us_split_fields1 = { rec__my_lists__my_lists__list =
-  my_lists__my_lists__clear__container__fields6 } }) = 0)
-
-axiom H36 : (result7 = l7__split_fields)
-
-axiom H37 :
-  (l7__split_fields1 = my_lists__my_lists__clear__container__fields6)
-
-axiom H38 : (to_rep(l1__split_discrs) = 100)
-
-axiom H39 : (to_rep(l2__split_discrs) = 100)
-
-axiom H40 : (to_rep(l3__split_discrs) = 100)
-
-axiom H41 : (to_rep(l4__split_discrs) = 100)
-
-axiom H42 : (to_rep(l5__split_discrs) = 100)
-
-axiom H43 : (to_rep(l6__split_discrs) = 100)
-
- (* File "a-contai.ads", line 20, characters 0-0 *)
-goal WP_parameter_def : (to_rep(l7__split_discrs) = 100)
+  us_split_fields1 = { rec__my_lists__my_lists__list = l7__split_fields }
+  }) = true)) -> ((100 = to_rep(l7__split_discrs)) -> (((length({
+  us_split_discrs1 = { rec__my_lists__my_lists__list__capacity =
+  l1__split_discrs }; us_split_fields1 = { rec__my_lists__my_lists__list =
+  my_lists__my_lists__clear__container__fields } }) = 0) and
+  ((result1 = l1__split_fields) and
+  (l1__split_fields1 = my_lists__my_lists__clear__container__fields))) ->
+  (((length({ us_split_discrs1 = { rec__my_lists__my_lists__list__capacity =
+  l2__split_discrs }; us_split_fields1 = { rec__my_lists__my_lists__list =
+  my_lists__my_lists__clear__container__fields1 } }) = 0) and
+  ((result2 = l2__split_fields1) and
+  (l2__split_fields2 = my_lists__my_lists__clear__container__fields1))) ->
+  (((length({ us_split_discrs1 = { rec__my_lists__my_lists__list__capacity =
+  l3__split_discrs }; us_split_fields1 = { rec__my_lists__my_lists__list =
+  my_lists__my_lists__clear__container__fields2 } }) = 0) and
+  ((result3 = l3__split_fields) and
+  (l3__split_fields1 = my_lists__my_lists__clear__container__fields2))) ->
+  (((length({ us_split_discrs1 = { rec__my_lists__my_lists__list__capacity =
+  l4__split_discrs }; us_split_fields1 = { rec__my_lists__my_lists__list =
+  my_lists__my_lists__clear__container__fields3 } }) = 0) and
+  ((result4 = l4__split_fields) and
+  (l4__split_fields1 = my_lists__my_lists__clear__container__fields3))) ->
+  (((length({ us_split_discrs1 = { rec__my_lists__my_lists__list__capacity =
+  l5__split_discrs }; us_split_fields1 = { rec__my_lists__my_lists__list =
+  my_lists__my_lists__clear__container__fields4 } }) = 0) and
+  ((result5 = l5__split_fields) and
+  (l5__split_fields1 = my_lists__my_lists__clear__container__fields4))) ->
+  (((length({ us_split_discrs1 = { rec__my_lists__my_lists__list__capacity =
+  l6__split_discrs }; us_split_fields1 = { rec__my_lists__my_lists__list =
+  my_lists__my_lists__clear__container__fields5 } }) = 0) and
+  ((result6 = l6__split_fields) and
+  (l6__split_fields1 = my_lists__my_lists__clear__container__fields5))) ->
+  (((length({ us_split_discrs1 = { rec__my_lists__my_lists__list__capacity =
+  l7__split_discrs }; us_split_fields1 = { rec__my_lists__my_lists__list =
+  my_lists__my_lists__clear__container__fields6 } }) = 0) and ((result7 = {
+  us_split_fields__content = { rec__my_lists__my_lists__list =
+  l7__split_fields } }) and (l7__split_fields1 = {
+  rec__my_lists__my_lists__list =
+  my_lists__my_lists__clear__container__fields6 }))) ->
+  ((to_rep(l1__split_discrs) = 100) -> ((to_rep(l2__split_discrs) = 100) ->
+  ((to_rep(l3__split_discrs) = 100) -> ((to_rep(l4__split_discrs) = 100) ->
+  ((to_rep(l5__split_discrs) = 100) -> ((to_rep(l6__split_discrs) = 100) ->
+  (to_rep(l7__split_discrs) = 100))))))))))))))))))))))))))))))

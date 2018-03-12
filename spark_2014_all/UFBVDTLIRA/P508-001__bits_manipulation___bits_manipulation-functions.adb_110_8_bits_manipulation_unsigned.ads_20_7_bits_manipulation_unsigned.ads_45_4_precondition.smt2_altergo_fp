@@ -1721,17 +1721,24 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 axiom shift_right__post_axiom : true
 
+logic rliteral3 : t1
+
+axiom rliteral_axiom3 : (tqtint1(rliteral3) = 0)
+
+logic rliteral4 : t2
+
+axiom rliteral_axiom4 : (tqtint2(rliteral4) = 0)
+
 axiom shift_right__def_axiom :
   (forall v:t.
   (forall amount:int [shift_right(v, amount)]. (in_range(amount) ->
   ((((1 <= 64) and (64 <= 8)) -> (((amount <  8) -> (shift_right(v,
   amount) = toBig2(lsr_bv1(toSmall2(v), of_int1(amount))))) and
-  ((not (amount <  8)) -> (shift_right(v,
-  amount) = toBig2(of_int1(0)))))) and ((not ((1 <= 64) and (64 <= 8))) ->
-  ((((9 <= 64) and (64 <= 16)) -> (((amount <  16) -> (shift_right(v,
-  amount) = toBig1(lsr_bv2(toSmall1(v), of_int2(amount))))) and
-  ((not (amount <  16)) -> (shift_right(v,
-  amount) = toBig1(of_int2(0)))))) and ((not ((9 <= 64) and (64 <= 16))) ->
+  ((not (amount <  8)) -> (shift_right(v, amount) = toBig2(rliteral3))))) and
+  ((not ((1 <= 64) and (64 <= 8))) -> ((((9 <= 64) and (64 <= 16)) ->
+  (((amount <  16) -> (shift_right(v, amount) = toBig1(lsr_bv2(toSmall1(v),
+  of_int2(amount))))) and ((not (amount <  16)) -> (shift_right(v,
+  amount) = toBig1(rliteral4))))) and ((not ((9 <= 64) and (64 <= 16))) ->
   ((((17 <= 64) and (64 <= 32)) -> (shift_right(v,
   amount) = toBig(lsr_bv3(toSmall(v), of_int3(amount))))) and
   ((not ((17 <= 64) and (64 <= 32))) -> (shift_right(v, amount) = lsr_bv(v,
@@ -1771,25 +1778,10 @@ logic value : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic bits_manipulation_unsigned__unsigned_64__functions__msb_index_fast_not_inline__result : int
+logic rliteral5 : t
 
-logic o : int
-
-logic result : int
-
-logic bits_manipulation_unsigned__unsigned_64__functions__msb_index_fast_not_inline__result1 : int
-
-logic bits_manipulation_unsigned__unsigned_64__functions__msb_index_fast_not_inline__result2 : int
-
-logic bits_manipulation_unsigned__unsigned_64__functions__msb_index_fast_not_inline__result3 : int
-
-logic bits_manipulation_unsigned__unsigned_64__functions__msb_index_fast_not_inline__result4 : int
-
-logic bits_manipulation_unsigned__unsigned_64__functions__msb_index_fast_not_inline__result5 : int
-
-axiom H : true
-
-axiom H1 : (not (value = of_int(0)))
+axiom rliteral_axiom5 : (tqtint(rliteral5) = 0)
 
  (* File "bits_manipulation.ads", line 10, characters 0-0 *)
-goal WP_parameter_def : (not (value = of_int(0)))
+goal WP_parameter_def : ((not (value = rliteral5)) ->
+  (not (value = rliteral5)))

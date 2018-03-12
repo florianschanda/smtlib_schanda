@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -187,24 +187,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> (int,integer) farray
-
-axiom concat_def :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : integer, int -> (int,integer) farray
-
-axiom singleton_def :
-  (forall v:integer.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,integer) farray, int, int, (int,integer) farray, int,
   int -> bool
 
@@ -215,17 +197,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -235,37 +217,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type t
 
@@ -569,117 +523,37 @@ axiom occ_def__def_axiom :
   ((not (to_rep((a2[to_rep(last(a3))])) = e1)) -> (occ_def({ elts = a2; rt =
   a3 }, e1) = occ_def(remove_last({ elts = a2; rt = a3 }), e1)))))))))
 
-logic b : (int,integer) farray
-
-logic perm__occ_set__b__assume : (int,integer) farray
-
-logic perm__occ_set__b__assume1 : t
-
-logic o : (int,integer) farray
-
-logic o1 : t
-
-logic o2 : integer
-
-logic o3 : int
-
-logic temp___238 : (int,integer) farray
-
-logic o4 : (int,integer) farray
-
-logic o5 : (int,integer) farray
-
-logic o6 : t
-
-logic o7 : (int,integer) farray
-
-logic o8 : t
-
-logic o9 : int
-
-logic o10 : integer
-
-logic o11 : int
-
-logic o12 : int
-
-logic o13 : int
-
-logic o14 : int
-
-logic result : (int,integer) farray
-
-logic b1 : (int,integer) farray
-
-logic result1 : (int,integer) farray
-
-logic b2 : (int,integer) farray
-
-logic b3 : (int,integer) farray
-
-logic b4 : (int,integer) farray
-
-logic b5 : (int,integer) farray
-
-logic b6 : (int,integer) farray
-
-logic result2 : bool
-
-axiom H : (dynamic_property(0, 2147483646, to_rep(first(a1)),
-  to_rep(last(a1))) and (to_rep(first(a1)) = 0))
-
-axiom H1 : in_range2(i)
-
-axiom H2 : in_range1(v)
-
-axiom H3 : in_range1(e)
-
-axiom H4 : (dynamic_property(0, 2147483646, to_rep(first(r1)),
-  to_rep(last(r1))) and (to_rep(first(r1)) = 0))
-
-axiom H5 : (((to_rep(first(a1)) <= i) and (i <= to_rep(last(a1)))) and
-  (is_set({ elts = a; rt = a1 }, i, v, { elts = r; rt = r1 }) = true))
-
-axiom H6 : (({ elts = perm__occ_set__b__assume; rt =
-  perm__occ_set__b__assume1 } = remove_last({ elts = a; rt = a1 })) and
-  ((dynamic_property(0, 2147483646, to_rep(first(perm__occ_set__b__assume1)),
+ (* File "perm.ads", line 26, characters 0-0 *)
+goal WP_parameter_def :
+  (forall b:(int,integer) farray.
+  forall perm__occ_set__b__assume:(int,integer) farray.
+  forall perm__occ_set__b__assume1:t. forall o:integer. forall o1:int.
+  forall temp___267:(int,integer) farray. forall o2:(int,integer) farray.
+  forall result:(int,integer) farray. forall b1:(int,integer) farray.
+  forall result1:(int,integer) farray. forall b2:(int,integer) farray.
+  ((dynamic_property(0, 2147483646, to_rep(first(a1)), to_rep(last(a1))) and
+  (to_rep(first(a1)) = 0)) -> (in_range2(i) -> (in_range1(v) ->
+  (in_range1(e) -> ((dynamic_property(0, 2147483646, to_rep(first(r1)),
+  to_rep(last(r1))) and (to_rep(first(r1)) = 0)) ->
+  ((((to_rep(first(a1)) <= i) and (i <= to_rep(last(a1)))) and (is_set({
+  elts = a; rt = a1 }, i, v, { elts = r; rt = r1 }) = true)) -> (((({ elts =
+  perm__occ_set__b__assume; rt = perm__occ_set__b__assume1 } = remove_last({
+  elts = a; rt = a1 })) and ((dynamic_property(0, 2147483646,
+  to_rep(first(perm__occ_set__b__assume1)),
   to_rep(last(perm__occ_set__b__assume1))) and
   (to_rep(first(perm__occ_set__b__assume1)) = 0)) and
   ((a = perm__occ_set__b__assume) and
   (mk(to_rep(first2(mk1(to_rep(first(a1)), (to_rep(last(a1)) - 1)))),
   to_rep(last2(mk1(to_rep(first(a1)),
-  (to_rep(last(a1)) - 1))))) = perm__occ_set__b__assume1))))
-
-axiom H7 : (result = b)
-
-axiom H8 : (b1 = perm__occ_set__b__assume)
-
-axiom H9 : (to_rep(b__first) = to_rep(first(perm__occ_set__b__assume1)))
-
-axiom H10 : (to_rep(b__last) = to_rep(last(perm__occ_set__b__assume1)))
-
-axiom H11 : (dynamic_property(0, 2147483646, to_rep(b__first),
-  to_rep(b__last)) and (to_rep(b__first) = 0))
-
-axiom H12 : (not (length({ elts = a; rt = a1 }) = 0))
-
-axiom H13 : (not (i = to_rep(last(a1))))
-
-axiom H14 : (to_rep(o2) = v)
-
-axiom H15 : ((to_rep(b__first) <= i) and (i <= to_rep(b__last)))
-
-axiom H16 : (o3 = i)
-
-axiom H17 : (temp___238 = (b1[o3 <- o2]))
-
-axiom H18 : (to_rep(b__first) = 0)
-
-axiom H19 : (o4 = temp___238)
-
-axiom H20 : (b1 = result1)
-
-axiom H21 : (b2 = o4)
-
- (* File "perm.ads", line 26, characters 0-0 *)
-goal WP_parameter_def : (0 <  length({ elts = r; rt = r1 }))
+  (to_rep(last(a1)) - 1))))) = perm__occ_set__b__assume1)))) and ((({
+  map__content = result } = { map__content = b }) and
+  (b1 = perm__occ_set__b__assume)) and
+  ((to_rep(b__first) = to_rep(first(perm__occ_set__b__assume1))) and
+  (to_rep(b__last) = to_rep(last(perm__occ_set__b__assume1)))))) ->
+  ((dynamic_property(0, 2147483646, to_rep(b__first), to_rep(b__last)) and
+  (to_rep(b__first) = 0)) -> ((not (length({ elts = a; rt = a1 }) = 0)) ->
+  ((not (i = to_rep(last(a1)))) -> (((((to_rep(o) = v) and
+  ((((to_rep(b__first) <= i) and (i <= to_rep(b__last))) and (o1 = i)) and
+  (temp___267 = (b1[o1 <- o])))) and ((to_rep(b__first) = 0) and
+  (o2 = temp___267))) and ((b1 = result1) and (b2 = o2))) -> (0 <  length({
+  elts = r; rt = r1 }))))))))))))))

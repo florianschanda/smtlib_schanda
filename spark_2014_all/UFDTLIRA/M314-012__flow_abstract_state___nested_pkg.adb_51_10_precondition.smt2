@@ -34,7 +34,6 @@
 (declare-fun h__function_guard (Bool Bool) Bool)
 (assert true)
 (assert (forall ((nested_pkg__z__bar Bool)) (! (= (= (h nested_pkg__z__bar) true) (= nested_pkg__z__bar true)) :pattern ((h nested_pkg__z__bar)))))
-(declare-const bar Bool)
 (assert (= (f Tuple0) true))
 (assert (= (g Tuple0) true))
 (assert (not (= (g Tuple0) true)))

@@ -204,11 +204,6 @@ axiom f__2__post_axiom : true
 
 axiom f__2__def_axiom : (forall x:int [f__2(x)]. (f__2(x) = true))
 
-logic temp___149 : int
-
-logic temp___148 : int
-
-axiom H : in_range(temp___149)
-
  (* File "type_invariant_legal_3.ads", line 13, characters 0-0 *)
-goal WP_parameter_def : (f(temp___149) = true)
+goal WP_parameter_def :
+  (forall temp___173:int. (in_range(temp___173) -> (f(temp___173) = true)))

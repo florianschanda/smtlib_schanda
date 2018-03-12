@@ -90,12 +90,6 @@ axiom Power_monotonic :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -107,6 +101,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -236,122 +236,32 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic result__ : int
-
-logic i : int
-
-logic temp___506 : int
-
-logic temp___505 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic result : int
-
-logic i1 : int
-
-logic result1 : int
-
-logic result__1 : int
-
-logic result__2 : int
-
-logic i2 : int
-
-logic result2 : int
-
-logic result__3 : int
-
-logic result3 : int
-
-logic i3 : int
-
-logic result__4 : int
-
-logic i4 : int
-
-logic result__5 : int
-
-logic i5 : int
-
-logic result__6 : int
-
-logic i6 : int
-
-logic result__7 : int
-
-logic i7 : int
-
-logic result__8 : int
-
-logic i8 : int
-
-logic result__9 : int
-
-logic i9 : int
-
-logic result__10 : int
-
-logic i10 : int
-
-logic result__11 : int
-
-logic i11 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : in_range3(n)
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range1(result__))
-
-axiom H3 : (result = i)
-
-axiom H4 : (i1 = 1)
-
-axiom H5 : in_range1(i1)
-
-axiom H6 : (result1 = result__)
-
-axiom H7 : (result__1 = x)
-
-axiom H8 : ((i1 <  n) -> (((temp___506 = result__1) and
-  ((temp___505 = i1) and (((result__2 = power(x, i2)) and (1 <= i2)) and
+ (* File "power_and_sum.ads", line 8, characters 0-0 *)
+goal WP_parameter_def :
+  (forall result__:int. forall i:int. forall temp___576:int.
+  forall temp___575:int. forall o:int. forall o1:int. forall result:int.
+  forall i1:int. forall result1:int. forall result__1:int.
+  forall result__2:int. forall i2:int. forall result2:int.
+  forall result__3:int. forall result3:int. forall i3:int.
+  forall result__4:int. forall i4:int. forall result__5:int. forall i5:int.
+  forall result__6:int. forall i6:int. forall result__7:int. forall i7:int.
+  forall result__8:int. forall i8:int. forall result__9:int. forall i9:int.
+  ((in_range1(x) and (in_range3(n) and ((((- 2147483648) <= 2147483647) ->
+  in_range1(result__)) and (((({ int__content = result } = { int__content = i
+  }) and (i1 = 1)) and (in_range1(i1) and ((({ int__content = result1 } = {
+  int__content = result__ }) and (result__1 = x)) and (((i1 <  n) and
+  ((((temp___576 = result__1) and ((temp___575 = i1) and
+  (((result__2 = power(x, i2)) and (1 <= i2)) and
   ((((((- 2147483648) <= 2147483647) -> in_range1(i2)) and
   (((- 2147483648) <= 2147483647) -> in_range1(result__2))) and
-  (i2 <  n)) and ((((o1 = (result__2 * x)) and
-  in_range1((result__2 * x))) and ((result__2 = result2) and
-  (result__3 = o1))) and ((((o2 = (i2 + 1)) and in_range1((i2 + 1))) and
-  ((i2 = result3) and (i3 = o2))) and (not (i3 <  n)))))))) and
-  (((i3 = i6) and (result__3 = result__6)) and ((i7 = i3) and
-  (result__7 = result__3)))))
-
-axiom H9 : ((i1 <  n) -> (i8 = i6))
-
-axiom H10 : ((i1 <  n) -> (result__8 = result__6))
-
-axiom H11 : ((i1 <  n) -> (i9 = i7))
-
-axiom H12 : ((i1 <  n) -> (result__9 = result__7))
-
-axiom H13 : ((not (i1 <  n)) -> (i1 = i8))
-
-axiom H14 : ((not (i1 <  n)) -> (result__1 = result__8))
-
-axiom H15 : ((not (i1 <  n)) -> (i9 = i1))
-
-axiom H16 : ((not (i1 <  n)) -> (result__9 = result__1))
-
-axiom H17 : (i10 = i8)
-
-axiom H18 : (result__10 = result__8)
-
-axiom H19 : (i11 = i9)
-
-axiom H20 : (result__11 = result__9)
-
- (* File "power_and_sum.ads", line 8, characters 0-0 *)
-goal WP_parameter_def : (power(x, n) = result__10)
+  (i2 <  n)) and ((((o = (result__2 * x)) and in_range1((result__2 * x))) and
+  ((result__2 = result2) and (result__3 = o))) and ((((o1 = (i2 + 1)) and
+  in_range1((i2 + 1))) and ((i2 = result3) and (i3 = o1))) and
+  (not (i3 <  n)))))))) and (((i3 = i4) and (result__3 = result__4)) and
+  ((i5 = i3) and (result__5 = result__3)))) and (((i6 = i4) and ({
+  int__content = result__6 } = { int__content = result__4 })) and
+  ((i7 = i5) and (result__7 = result__5))))) or ((not (i1 <  n)) and
+  (((i1 = i6) and (result__1 = result__6)) and ((i7 = i1) and
+  (result__7 = result__1)))))))) and (((i8 = i6) and
+  (result__8 = result__6)) and ((i9 = i7) and
+  (result__9 = result__7))))))) -> (power(x, n) = result__8)))

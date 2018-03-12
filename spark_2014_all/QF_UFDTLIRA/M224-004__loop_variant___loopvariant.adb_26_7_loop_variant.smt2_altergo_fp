@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -137,332 +137,57 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic i : int
-
-logic j : int
-
-logic temp___169 : int
-
-logic temp___168 : int
-
-logic temp___171 : int
-
-logic temp___170 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic result : int
-
-logic i1 : int
-
-logic result1 : int
-
-logic j1 : int
-
-logic result2 : int
-
-logic j2 : int
-
-logic result3 : int
-
-logic j3 : int
-
-logic result4 : int
-
-logic i2 : int
-
-logic i3 : int
-
-logic j4 : int
-
-logic temp___1711 : int
-
-logic temp___1701 : int
-
-logic result5 : int
-
-logic temp___1712 : int
-
-logic result6 : int
-
-logic temp___1702 : int
-
-logic result7 : int
-
-logic j5 : int
-
-logic result8 : int
-
-logic j6 : int
-
-logic result9 : int
-
-logic i4 : int
-
-logic i5 : int
-
-logic j7 : int
-
-logic i6 : int
-
-logic j8 : int
-
-logic i7 : int
-
-logic j9 : int
-
-logic i8 : int
-
-logic j10 : int
-
-logic result10 : int
-
-logic i9 : int
-
-logic result11 : int
-
-logic j11 : int
-
-logic result12 : int
-
-logic j12 : int
-
-logic result13 : int
-
-logic j13 : int
-
-logic result14 : int
-
-logic i10 : int
-
-logic i11 : int
-
-logic j14 : int
-
-logic i12 : int
-
-logic j15 : int
-
-logic i13 : int
-
-logic j16 : int
-
-logic temp___175 : int
-
-logic temp___174 : int
-
-logic result15 : int
-
-logic temp___1751 : int
-
-logic result16 : int
-
-logic temp___1741 : int
-
-logic result17 : int
-
-logic j17 : int
-
-logic result18 : int
-
-logic j18 : int
-
-logic result19 : int
-
-logic i14 : int
-
-logic i15 : int
-
-logic j19 : int
-
-logic i16 : int
-
-logic j20 : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range1(i))
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(j))
-
-axiom H2 : (result = i)
-
-axiom H3 : (i1 = 1)
-
-axiom H4 : (result1 = j)
-
-axiom H5 : (j1 = 3)
-
-axiom H6 : ((i1 <  3) -> (temp___169 = j1))
-
-axiom H7 : ((i1 <  3) -> (temp___168 = i1))
-
-axiom H8 : ((i1 <  3) -> (0 = temp___171))
-
-axiom H9 : ((i1 <  3) -> (0 = temp___170))
-
-axiom H10 : ((i1 <  3) -> ((0 <  j1) -> ((o = (j1 - 1)) and
-  in_range1((j1 - 1)))))
-
-axiom H11 : ((i1 <  3) -> ((0 <  j1) -> (j1 = result2)))
-
-axiom H12 : ((i1 <  3) -> ((0 <  j1) -> (j2 = o)))
-
-axiom H13 : ((i1 <  3) -> ((0 <  j1) -> (i2 = i1)))
-
-axiom H14 : ((i1 <  3) -> ((not (0 <  j1)) -> (j1 = result3)))
-
-axiom H15 : ((i1 <  3) -> ((not (0 <  j1)) -> (j3 = 3)))
-
-axiom H16 : ((i1 <  3) -> ((not (0 <  j1)) -> ((o1 = (i1 + 1)) and
-  in_range1((i1 + 1)))))
-
-axiom H17 : ((i1 <  3) -> ((not (0 <  j1)) -> (i1 = result4)))
-
-axiom H18 : ((i1 <  3) -> ((not (0 <  j1)) -> (i2 = o1)))
-
-axiom H19 : ((i1 <  3) -> ((not (0 <  j1)) -> (j2 = j3)))
-
-axiom H20 : ((i1 <  3) -> ((((- 2147483648) <= 2147483647) ->
-  in_range1(i3)) and (((- 2147483648) <= 2147483647) -> in_range1(j4))))
-
-axiom H21 : ((i1 <  3) -> (temp___1711 = result5))
-
-axiom H22 : ((i1 <  3) -> (temp___1712 = i3))
-
-axiom H23 : ((i1 <  3) -> (temp___1701 = result6))
-
-axiom H24 : ((i1 <  3) -> (temp___1702 = j4))
-
-axiom H25 : ((i1 <  3) -> (not (i3 <  3)))
-
-axiom H26 : ((i1 <  3) -> (j4 = j7))
-
-axiom H27 : ((i1 <  3) -> (i3 = i5))
-
-axiom H28 : ((i1 <  3) -> (j8 = j4))
-
-axiom H29 : ((i1 <  3) -> (i6 = i3))
-
-axiom H30 : ((i1 <  3) -> (j9 = j7))
-
-axiom H31 : ((i1 <  3) -> (i7 = i5))
-
-axiom H32 : ((i1 <  3) -> (j10 = j8))
-
-axiom H33 : ((i1 <  3) -> (i8 = i6))
-
-axiom H34 : ((not (i1 <  3)) -> (j9 = j1))
-
-axiom H35 : ((not (i1 <  3)) -> (i1 = i7))
-
-axiom H36 : ((not (i1 <  3)) -> (j10 = j1))
-
-axiom H37 : ((not (i1 <  3)) -> (i8 = i1))
-
-axiom H38 : (result10 = i7)
-
-axiom H39 : (i9 = 1)
-
-axiom H40 : (result11 = j9)
-
-axiom H41 : (j11 = 3)
-
-axiom H42 : (i9 <  3)
-
-axiom H43 : ((0 <  j11) -> ((o4 = (j11 - 1)) and in_range1((j11 - 1))))
-
-axiom H44 : ((0 <  j11) -> (result12 = j11))
-
-axiom H45 : ((0 <  j11) -> (j12 = o4))
-
-axiom H46 : ((0 <  j11) -> (j14 = j12))
-
-axiom H47 : ((0 <  j11) -> (i11 = i9))
-
-axiom H48 : ((0 <  j11) -> (j15 = j12))
-
-axiom H49 : ((0 <  j11) -> (i12 = i9))
-
-axiom H50 : ((not (0 <  j11)) -> (result13 = j11))
-
-axiom H51 : ((not (0 <  j11)) -> (j13 = 3))
-
-axiom H52 : ((not (0 <  j11)) -> ((o5 = (i9 - 1)) and in_range1((i9 - 1))))
-
-axiom H53 : ((not (0 <  j11)) -> (result14 = i9))
-
-axiom H54 : ((not (0 <  j11)) -> (i10 = o5))
-
-axiom H55 : ((not (0 <  j11)) -> (j14 = j13))
-
-axiom H56 : ((not (0 <  j11)) -> (i11 = i10))
-
-axiom H57 : ((not (0 <  j11)) -> (j15 = j13))
-
-axiom H58 : ((not (0 <  j11)) -> (i12 = i10))
-
-axiom H59 : ((((- 2147483648) <= 2147483647) -> in_range1(i13)) and
-  (((- 2147483648) <= 2147483647) -> in_range1(j16)))
-
-axiom H60 : (result15 = temp___175)
-
-axiom H61 : (temp___1751 = i13)
-
-axiom H62 : (result16 = temp___174)
-
-axiom H63 : (temp___1741 = j16)
-
-axiom H64 : (0 <= i13)
-
-axiom H65 : (i13 <= 3)
-
-axiom H66 : (i13 <  3)
-
-axiom H67 : ((0 <  j16) -> ((o6 = (j16 - 1)) and in_range1((j16 - 1))))
-
-axiom H68 : ((0 <  j16) -> (result17 = j16))
-
-axiom H69 : ((0 <  j16) -> (j17 = o6))
-
-axiom H70 : ((0 <  j16) -> (j19 = j17))
-
-axiom H71 : ((0 <  j16) -> (i15 = i13))
-
-axiom H72 : ((0 <  j16) -> (j20 = j17))
-
-axiom H73 : ((0 <  j16) -> (i16 = i13))
-
-axiom H74 : ((not (0 <  j16)) -> (result18 = j16))
-
-axiom H75 : ((not (0 <  j16)) -> (j18 = 3))
-
-axiom H76 : ((not (0 <  j16)) -> ((o7 = (i13 - 1)) and in_range1((i13 - 1))))
-
-axiom H77 : ((not (0 <  j16)) -> (result19 = i13))
-
-axiom H78 : ((not (0 <  j16)) -> (i14 = o7))
-
-axiom H79 : ((not (0 <  j16)) -> (j19 = j18))
-
-axiom H80 : ((not (0 <  j16)) -> (i15 = i14))
-
-axiom H81 : ((not (0 <  j16)) -> (j20 = j18))
-
-axiom H82 : ((not (0 <  j16)) -> (i16 = i14))
-
  (* File "loopvariant.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : ((temp___1751 <  i15) or ((i15 = temp___1751) and
-  (j19 <  temp___1741)))
+goal WP_parameter_def :
+  (forall i:int. forall j:int. forall temp___197:int. forall temp___196:int.
+  forall temp___199:int. forall temp___198:int. forall o:int. forall o1:int.
+  forall o2:int. forall o3:int. forall o4:int. forall o5:int.
+  forall result:int. forall i1:int. forall result1:int. forall j1:int.
+  forall result2:int. forall j2:int. forall result3:int. forall j3:int.
+  forall result4:int. forall i2:int. forall i3:int. forall j4:int.
+  forall temp___1991:int. forall temp___1981:int. forall result5:int.
+  forall temp___1992:int. forall result6:int. forall temp___1982:int.
+  forall i4:int. forall j5:int. forall i5:int. forall j6:int. forall i6:int.
+  forall j7:int. forall i7:int. forall j8:int. forall result7:int.
+  forall i8:int. forall result8:int. forall j9:int. forall result9:int.
+  forall j10:int. forall result10:int. forall j11:int. forall result11:int.
+  forall i9:int. forall i10:int. forall j12:int. forall i11:int.
+  forall j13:int. forall i12:int. forall j14:int. forall temp___203:int.
+  forall temp___202:int. forall result12:int. forall temp___2031:int.
+  forall result13:int. forall temp___2021:int. forall result14:int.
+  forall j15:int. forall result15:int. forall j16:int. forall result16:int.
+  forall i13:int. forall i14:int. forall j17:int. forall i15:int.
+  forall j18:int. ((((- 2147483648) <= 2147483647) -> in_range1(i)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range1(j)) -> (((result = i) and
+  (i1 = 1)) -> (((result1 = j) and (j1 = 3)) -> ((((i1 <  3) and
+  ((((temp___197 = j1) and ((temp___196 = i1) and ((0 = temp___199) and
+  ((0 = temp___198) and ((((0 <  j1) and ((((o = (j1 - 1)) and
+  in_range1((j1 - 1))) and ((j1 = result2) and (j2 = o))) and (i2 = i1))) or
+  ((not (0 <  j1)) and ((((j1 = result3) and (j3 = 3)) and
+  (((o1 = (i1 + 1)) and in_range1((i1 + 1))) and ((i1 = result4) and
+  (i2 = o1)))) and (j2 = j3)))) and (((((- 2147483648) <= 2147483647) ->
+  in_range1(i3)) and (((- 2147483648) <= 2147483647) -> in_range1(j4))) and
+  (((temp___1991 = result5) and (temp___1992 = i3)) and
+  (((temp___1981 = result6) and (temp___1982 = j4)) and
+  (not (i3 <  3)))))))))) and (((j4 = j5) and (i3 = i4)) and ((j6 = j4) and
+  (i5 = i3)))) and (((j5 = j7) and (i4 = i6)) and ((j8 = j6) and
+  (i7 = i5))))) or ((not (i1 <  3)) and (((j1 = j7) and (i1 = i6)) and
+  ((j8 = j1) and (i7 = i1))))) -> (((result7 = i6) and (i8 = 1)) ->
+  (((result8 = j7) and (j9 = 3)) -> ((i8 <  3) -> ((((0 <  j9) and
+  ((((o2 = (j9 - 1)) and in_range1((j9 - 1))) and ((result9 = j9) and
+  (j10 = o2))) and (((j10 = j12) and (i8 = i10)) and ((j13 = j10) and
+  (i11 = i8))))) or ((not (0 <  j9)) and ((((result10 = j9) and
+  (j11 = 3)) and (((o3 = (i8 - 1)) and in_range1((i8 - 1))) and
+  ((result11 = i8) and (i9 = o3)))) and (((j11 = j12) and (i9 = i10)) and
+  ((j13 = j11) and (i11 = i9)))))) -> (((((- 2147483648) <= 2147483647) ->
+  in_range1(i12)) and (((- 2147483648) <= 2147483647) -> in_range1(j14))) ->
+  (((result12 = temp___203) and (temp___2031 = i12)) ->
+  (((result13 = temp___202) and (temp___2021 = j14)) -> (((0 <= i12) and
+  (i12 <= 3)) -> ((i12 <  3) -> ((((0 <  j14) and ((((o4 = (j14 - 1)) and
+  in_range1((j14 - 1))) and ((result14 = j14) and (j15 = o4))) and
+  (((j15 = j17) and (i12 = i14)) and ((j18 = j15) and (i15 = i12))))) or
+  ((not (0 <  j14)) and ((((result15 = j14) and (j16 = 3)) and
+  (((o5 = (i12 - 1)) and in_range1((i12 - 1))) and ((result16 = i12) and
+  (i13 = o5)))) and (((j16 = j17) and (i13 = i14)) and ((j18 = j16) and
+  (i15 = i13)))))) -> ((temp___2031 <  i14) or ((i14 = temp___2031) and
+  (j17 <  temp___2021)))))))))))))))))))

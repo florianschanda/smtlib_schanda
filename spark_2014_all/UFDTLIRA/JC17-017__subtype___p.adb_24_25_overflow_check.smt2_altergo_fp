@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -191,62 +191,15 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic tmp_s : int
-
-logic v : int
-
-logic us : int
-
-logic o : int
-
-logic us1 : int
-
-logic temp___141 : int
-
-logic temp___138 : int
-
-logic us2 : int
-
-logic result : int
-
-logic tmp_s1 : int
-
-logic result1 : int
-
-logic v1 : int
-
-logic tmp_s2 : int
-
-logic v2 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : in_range1(y)
-
-axiom H2 : (x <= y)
-
-axiom H3 : ((first <= last) -> dynamic_property(first, last, tmp_s))
-
-axiom H4 : ((us = x) and dynamic_property(first, last, x))
-
-axiom H5 : (o = x)
-
-axiom H6 : (result = tmp_s)
-
-axiom H7 : (tmp_s1 = o)
-
-axiom H8 : ((temp___141 = (y - x)) and in_range1((y - x)))
-
-axiom H9 : (result1 = v)
-
-axiom H10 : (v1 = 1)
-
-axiom H11 : (1 <= v1)
-
-axiom H12 : (v1 <= temp___141)
-
-axiom H13 : (((first <= last) -> dynamic_property(first, last, tmp_s2)) and
-  ((1 <= v2) and (v2 <= (y - x))))
-
  (* File "p.adb", line 4, characters 0-0 *)
-goal WP_parameter_def : in_range1((tmp_s2 + 1))
+goal WP_parameter_def :
+  (forall tmp_s:int. forall v:int. forall us:int. forall o:int.
+  forall temp___164:int. forall result:int. forall tmp_s1:int.
+  forall result1:int. forall v1:int. forall tmp_s2:int. forall v2:int.
+  (in_range1(x) -> (in_range1(y) -> ((x <= y) -> (((first <= last) ->
+  dynamic_property(first, last, tmp_s)) -> (((((us = x) and
+  dynamic_property(first, last, x)) and (o = x)) and ((result = tmp_s) and
+  (tmp_s1 = o))) -> (((temp___164 = (y - x)) and in_range1((y - x))) ->
+  (((result1 = v) and (v1 = 1)) -> (((1 <= v1) and (v1 <= temp___164)) ->
+  ((((first <= last) -> dynamic_property(first, last, tmp_s2)) and
+  ((1 <= v2) and (v2 <= (y - x)))) -> in_range1((tmp_s2 + 1))))))))))))

@@ -107,39 +107,18 @@ function id_index__ref___projection(a: id_index__ref) : id_index =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic current_id : int
-
-logic entities__get_current_id__result : int
-
-logic result : int
-
-logic entities__get_current_id__result1 : int
-
-logic entities__get_current_id__result2 : int
-
-logic entities__get_current_id__result3 : int
-
-logic entities__get_current_id__result4 : int
-
-logic entities__get_current_id__result5 : int
-
-axiom H : in_range(current_id)
-
-axiom H1 :
-  (entities__get_current_id__result1 = entities__get_current_id__result2)
-
-axiom H2 :
-  (entities__get_current_id__result3 = entities__get_current_id__result1)
-
-axiom H3 : (result = entities__get_current_id__result)
-
-axiom H4 : (entities__get_current_id__result1 = current_id)
-
-axiom H5 :
-  (entities__get_current_id__result4 = entities__get_current_id__result2)
-
-axiom H6 :
-  (entities__get_current_id__result5 = entities__get_current_id__result3)
-
  (* File "entities.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : (entities__get_current_id__result4 = current_id)
+goal WP_parameter_def :
+  (forall current_id:int. forall entities__get_current_id__result:int.
+  forall result:int. forall entities__get_current_id__result1:int.
+  forall entities__get_current_id__result2:int.
+  forall entities__get_current_id__result3:int.
+  forall entities__get_current_id__result4:int.
+  forall entities__get_current_id__result5:int. (in_range(current_id) ->
+  (((((entities__get_current_id__result1 = entities__get_current_id__result2) and
+  (entities__get_current_id__result3 = entities__get_current_id__result1)) and
+  ((result = entities__get_current_id__result) and
+  (entities__get_current_id__result1 = current_id))) and
+  ((entities__get_current_id__result4 = entities__get_current_id__result2) and
+  (entities__get_current_id__result5 = entities__get_current_id__result3))) ->
+  (entities__get_current_id__result4 = current_id))))

@@ -278,30 +278,6 @@ axiom slide_def :
   (forall i1:int [(slide(a, old_first, new_first)[i1])]. ((slide(a,
   old_first, new_first)[i1]) = (a[(i1 - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i1:int [(concat(a, a_first, a_last, b, b_first, b_last)[i1])].
-  ((((a_first <= i1) and (i1 <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i1]) = (a[i1]))) and ((a_last <  i1) -> ((concat(a,
-  a_first, a_last, b, b_first,
-  b_last)[i1]) = (b[((i1 - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def :
-  (forall v:bool. forall v1:null_record_type.
-  (forall i1:int [(singleton({ us_split_fields1 = {
-  rec__test__crash__foo__valid = v; rec__test__crash__foo__field = v1 } },
-  i1)[i1])]. ((singleton({ us_split_fields1 = {
-  rec__test__crash__foo__valid = v; rec__test__crash__foo__field = v1 } },
-  i1)[i1]) = { us_split_fields1 = { rec__test__crash__foo__valid = v;
-  rec__test__crash__foo__field = v1 } })))
-
 logic bool_eq3 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -312,17 +288,17 @@ axiom bool_eq_def2 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and (bool_eq2((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and (bool_eq2((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq3(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq2((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq3(a,
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq2((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq3(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -332,9 +308,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq2((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq2((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)))))))
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
@@ -363,70 +339,20 @@ type taD1__ref = { taD1__content : taD1
 
 function taD1__ref___projection(a: taD1__ref) : taD1 = (a).taD1__content
 
-logic x__split_fields : bool
-
-logic x__split_fields1 : null_record_type
-
-logic cache : (int,us_rep) farray
-
-logic o : int
-
-logic o1 : bool
-
-logic o2 : null_record_type
-
-logic o3 : bool
-
-logic o4 : null_record_type
-
-logic o5 : bool
-
-logic o6 : bool
-
-logic o7 : null_record_type
-
-logic temp___168 : bool
-
-logic temp___1681 : null_record_type
-
-logic result : bool
-
-logic result1 : null_record_type
-
-logic x__split_fields2 : bool
-
-logic x__split_fields3 : null_record_type
-
-axiom H : in_range(i)
-
-axiom H1 : ((1 <= i) and (i <= 10))
-
-axiom H2 : (o = i)
-
-axiom H3 : ({ us_split_fields1 = { rec__test__crash__foo__valid = o1;
-  rec__test__crash__foo__field = o2 } } = (cache[o]))
-
-axiom H4 : (o1 = o3)
-
-axiom H5 : (o2 = o4)
-
-axiom H6 : (o5 = o3)
-
-axiom H7 : (o5 = o6)
-
-axiom H8 : (x__split_fields1 = o7)
-
-axiom H9 : (temp___168 = o6)
-
-axiom H10 : (temp___1681 = o7)
-
-axiom H11 : (result = x__split_fields)
-
-axiom H12 : (result1 = x__split_fields1)
-
-axiom H13 : (x__split_fields2 = temp___168)
-
-axiom H14 : (x__split_fields3 = temp___1681)
-
  (* File "my_generic.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (1 <= i)
+goal WP_parameter_def :
+  (forall x__split_fields:bool. forall x__split_fields1:null_record_type.
+  forall cache:(int,us_rep) farray. forall o:int. forall o1:bool.
+  forall o2:null_record_type. forall o3:bool. forall o4:null_record_type.
+  forall o5:bool. forall o6:bool. forall o7:null_record_type.
+  forall temp___194:bool. forall temp___1941:null_record_type.
+  forall result:bool. forall result1:null_record_type.
+  forall x__split_fields2:bool. forall x__split_fields3:null_record_type.
+  (in_range(i) -> ((((((((((1 <= i) and (i <= 10)) and (o = i)) and ({
+  us_split_fields1 = { rec__test__crash__foo__valid = o1;
+  rec__test__crash__foo__field = o2 } } = (cache[o]))) and ((o1 = o3) and
+  (o2 = o4))) and (o5 = o3)) and ((o5 = o6) and (x__split_fields1 = o7))) and
+  ((temp___194 = o6) and (temp___1941 = o7))) and
+  (((result = x__split_fields) and (result1 = x__split_fields1)) and
+  ((x__split_fields2 = temp___194) and (x__split_fields3 = temp___1941)))) ->
+  (1 <= i))))

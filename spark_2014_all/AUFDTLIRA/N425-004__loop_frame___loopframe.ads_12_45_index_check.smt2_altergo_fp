@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -174,24 +174,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,bool) farray, int, int, (int,bool) farray, int,
-  int -> (int,bool) farray
-
-axiom concat_def :
-  (forall a:(int,bool) farray. forall b:(int,bool) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : bool, int -> (int,bool) farray
-
-axiom singleton_def :
-  (forall v:bool.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,bool) farray, int, int, (int,bool) farray, int,
   int -> bool
 
@@ -202,17 +184,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  ((a[temp___idx_132]) = (b[((b__first - a__first) + temp___idx_132)]))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  ((a[temp___idx_154]) = (b[((b__first - a__first) + temp___idx_154)]))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  ((a[temp___idx_132]) = (b[((b__first - a__first) + temp___idx_132)])))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  ((a[temp___idx_154]) = (b[((b__first - a__first) + temp___idx_154)])))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -222,81 +204,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  ((a[temp___idx_132]) = (b[((b__first - a__first) + temp___idx_132)]))))))))
-
-logic compare : (int,bool) farray, int, int, (int,bool) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,bool) farray. forall b:(int,bool) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,bool) farray. forall b:(int,bool) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_int((a[(i + 1)])) <  to_int((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,bool) farray. forall b:(int,bool) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_int((b[(i + 1)])) <  to_int((a[(j + 1)]))))))))))))
-
-logic xorb1 : (int,bool) farray, int, int, (int,bool) farray, int,
-  int -> (int,bool) farray
-
-logic andb1 : (int,bool) farray, int, int, (int,bool) farray, int,
-  int -> (int,bool) farray
-
-logic orb1 : (int,bool) farray, int, int, (int,bool) farray, int,
-  int -> (int,bool) farray
-
-logic notb1 : (int,bool) farray, int, int -> (int,bool) farray
-
-axiom op_def :
-  (forall a:(int,bool) farray. forall b:(int,bool) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(orb1(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((a_first <= i) and (i <= a_last)) -> ((orb1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = match_bool((a[i]), true,
-  (b[((i - a_first) + b_first)])))))))
-
-axiom op_def1 :
-  (forall a:(int,bool) farray. forall b:(int,bool) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(andb1(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((a_first <= i) and (i <= a_last)) -> ((andb1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = match_bool((a[i]), (b[((i - a_first) + b_first)]),
-  false))))))
-
-axiom op_def2 :
-  (forall a:(int,bool) farray. forall b:(int,bool) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(xorb1(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((a_first <= i) and (i <= a_last)) -> ((xorb1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = xorb((a[i]), (b[((i - a_first) + b_first)])))))))
-
-axiom notb_def :
-  (forall a:(int,bool) farray.
-  (forall a_first:int. forall a_last:int.
-  (forall i:int [(notb1(a, a_first, a_last)[i])]. (((a_first <= i) and
-  (i <= a_last)) -> ((notb1(a, a_first, a_last)[i]) = match_bool((a[i]),
-  false, true))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  ((a[temp___idx_154]) = (b[((b__first - a__first) + temp___idx_154)]))))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -304,175 +214,63 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic a : (int,bool) farray
-
-logic v : int
-
-logic x : int
-
-logic loopframe__get__result : int
-
-logic temp___156 : int
-
-logic result : int
-
-logic v1 : int
-
-logic result1 : int
-
-logic x1 : int
-
-logic result2 : int
-
-logic v2 : int
-
-logic result3 : int
-
-logic x2 : int
-
-logic result4 : int
-
-logic v3 : int
-
-logic result5 : int
-
-logic x3 : int
-
-logic result6 : int
-
-logic v4 : int
-
-logic result7 : int
-
-logic x4 : int
-
-logic result8 : int
-
-logic v5 : int
-
-logic result9 : int
-
-logic x5 : int
-
-logic result10 : int
-
-logic v6 : int
-
-logic v7 : int
-
-logic x6 : int
-
-logic v8 : int
-
-logic x7 : int
-
-logic v9 : int
-
-logic x8 : int
-
-logic v10 : int
-
-logic x9 : int
-
-logic v11 : int
-
-logic x10 : int
-
-logic v12 : int
-
-logic x11 : int
-
-logic v13 : int
-
-logic x12 : int
-
-logic v14 : int
-
-logic x13 : int
-
-logic v15 : int
-
-logic x14 : int
-
-logic v16 : int
-
-logic x15 : int
-
-logic result11 : int
-
-logic loopframe__get__result1 : int
-
-logic loopframe__get__result2 : int
-
-logic loopframe__get__result3 : int
-
-logic v17 : int
-
-logic x16 : int
-
-logic loopframe__get__result4 : int
-
-logic v18 : int
-
-logic x17 : int
-
-logic loopframe__get__result5 : int
-
-axiom H : (result = v)
-
-axiom H1 : (v1 = 0)
-
-axiom H2 : in_range1(v1)
-
-axiom H3 : (((((result1 = x) and (x1 = 1)) and (((not ((a[x1]) = true)) and
-  (v2 = v1)) and (((x1 = result3) and (x2 = 2)) and
-  (((not ((a[x2]) = true)) and (v3 = v2)) and (((x2 = result5) and
-  (x3 = 3)) and (((not ((a[x3]) = true)) and (v4 = v3)) and
-  (((x3 = result7) and (x4 = 4)) and (((not ((a[x4]) = true)) and
-  (v5 = v4)) and (((x4 = result9) and (x5 = 5)) and
-  ((not ((a[x5]) = true)) and (v6 = v5))))))))))) and (((x14 = x5) and
-  (v15 = v6)) and ((x15 = x5) and (v16 = v6)))) or (((temp___156 = v1) and
-  (((result1 = x) and (x1 = 1)) and (((((x12 = x1) and (v13 = v2)) and
+ (* File "loopframe.ads", line 5, characters 0-0 *)
+goal WP_parameter_def :
+  (forall a:(int,bool) farray. forall v:int. forall x:int.
+  forall loopframe__get__result:int. forall temp___181:int.
+  forall result:int. forall v1:int. forall result1:int. forall x1:int.
+  forall result2:int. forall v2:int. forall result3:int. forall x2:int.
+  forall result4:int. forall v3:int. forall result5:int. forall x3:int.
+  forall result6:int. forall v4:int. forall result7:int. forall x4:int.
+  forall result8:int. forall v5:int. forall result9:int. forall x5:int.
+  forall result10:int. forall v6:int. forall v7:int. forall x6:int.
+  forall v8:int. forall x7:int. forall v9:int. forall x8:int. forall v10:int.
+  forall x9:int. forall v11:int. forall x10:int. forall v12:int.
+  forall x11:int. forall v13:int. forall x12:int. forall v14:int.
+  forall x13:int. forall v15:int. forall x14:int. forall v16:int.
+  forall x15:int. forall result11:int. forall loopframe__get__result1:int.
+  forall loopframe__get__result2:int. forall loopframe__get__result3:int.
+  forall v17:int. forall x16:int. forall loopframe__get__result4:int.
+  forall v18:int. forall x17:int. forall loopframe__get__result5:int. ((((({
+  int__content = result } = { int__content = v }) and (v1 = 0)) and
+  (in_range1(v1) and (((((({ int__content = result1 } = { int__content = x
+  }) and (x1 = 1)) and (((not ((a[x1]) = true)) and (v2 = v1)) and
+  (((x1 = result3) and (x2 = 2)) and (((not ((a[x2]) = true)) and
+  (v3 = v2)) and (((x2 = result5) and (x3 = 3)) and
+  (((not ((a[x3]) = true)) and (v4 = v3)) and (((x3 = result7) and
+  (x4 = 4)) and (((not ((a[x4]) = true)) and (v5 = v4)) and
+  (((x4 = result9) and (x5 = 5)) and ((not ((a[x5]) = true)) and
+  (v6 = v5))))))))))) and (((x5 = x14) and (v6 = v15)) and ((x15 = x5) and
+  (v16 = v6)))) or (((temp___181 = v1) and ((({ int__content = result1 } = {
+  int__content = x }) and (x1 = 1)) and (((((x1 = x12) and (v2 = v13)) and
   ((x13 = x1) and (v14 = v2))) and (((a[x1]) = true) and ((v1 = result2) and
-  (v2 = x1)))) or (((not ((a[x1]) = true)) and (v2 = v1)) and
-  ((((x12 = x10) and (v13 = v11)) and ((x13 = x11) and (v14 = v12))) and
+  (v2 = x1)))) or (((not ((a[x1]) = true)) and (v2 = v1)) and (((({
+  int__content = x12 } = { int__content = x10 }) and ({ int__content = v13
+  } = { int__content = v11 })) and ((x13 = x11) and (v14 = v12))) and
   (((x1 = result3) and (x2 = 2)) and (((((x2 = x10) and (v3 = v11)) and
   ((x11 = x2) and (v12 = v3))) and (((a[x2]) = true) and ((v2 = result4) and
-  (v3 = x2)))) or (((not ((a[x2]) = true)) and (v3 = v2)) and
-  ((((x10 = x8) and (v11 = v9)) and ((x11 = x9) and (v12 = v10))) and
+  (v3 = x2)))) or (((not ((a[x2]) = true)) and (v3 = v2)) and (((({
+  int__content = x10 } = { int__content = x8 }) and ({ int__content = v11
+  } = { int__content = v9 })) and ((x11 = x9) and (v12 = v10))) and
   (((x2 = result5) and (x3 = 3)) and (((((x3 = x8) and (v4 = v9)) and
   ((x9 = x3) and (v10 = v4))) and (((a[x3]) = true) and ((v3 = result6) and
-  (v4 = x3)))) or (((not ((a[x3]) = true)) and (v4 = v3)) and
-  ((((x8 = x6) and (v9 = v7)) and ((x9 = x7) and (v10 = v8))) and
+  (v4 = x3)))) or (((not ((a[x3]) = true)) and (v4 = v3)) and (((({
+  int__content = x8 } = { int__content = x6 }) and ({ int__content = v9 } = {
+  int__content = v7 })) and ((x9 = x7) and (v10 = v8))) and
   (((x3 = result7) and (x4 = 4)) and (((((x4 = x6) and (v5 = v7)) and
   ((x7 = x4) and (v8 = v5))) and (((a[x4]) = true) and ((v4 = result8) and
   (v5 = x4)))) or (((not ((a[x4]) = true)) and (v5 = v4)) and
   ((((x5 = x6) and (v6 = v7)) and ((x7 = x5) and (v8 = v6))) and
   (((x4 = result9) and (x5 = 5)) and (((a[x5]) = true) and
-  ((v5 = result10) and (v6 = x5))))))))))))))))))))) and (((x14 = x12) and
-  (v15 = v13)) and ((x15 = x13) and (v16 = v14)))))
-
-axiom H4 : (loopframe__get__result2 = loopframe__get__result1)
-
-axiom H5 : (loopframe__get__result3 = loopframe__get__result1)
-
-axiom H6 : (result11 = loopframe__get__result)
-
-axiom H7 : (loopframe__get__result1 = v15)
-
-axiom H8 : (loopframe__get__result4 = loopframe__get__result2)
-
-axiom H9 : (x16 = x14)
-
-axiom H10 : (v17 = v15)
-
-axiom H11 : (loopframe__get__result5 = loopframe__get__result3)
-
-axiom H12 : (x17 = x15)
-
-axiom H13 : (v18 = v16)
-
-axiom H14 : (not (loopframe__get__result4 = 0))
-
- (* File "loopframe.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : (1 <= loopframe__get__result4)
+  ((v5 = result10) and (v6 = x5))))))))))))))))))))) and ((({ int__content =
+  x14 } = { int__content = x12 }) and ({ int__content = v15 } = {
+  int__content = v13 })) and ((x15 = x13) and (v16 = v14))))) and
+  (((loopframe__get__result1 = loopframe__get__result2) and
+  (loopframe__get__result3 = loopframe__get__result1)) and
+  ((result11 = loopframe__get__result) and
+  (loopframe__get__result1 = v15)))))) and ((({ int__content =
+  loopframe__get__result4 } = { int__content = loopframe__get__result2 }) and
+  ((x16 = x14) and (v17 = v15))) and
+  ((loopframe__get__result5 = loopframe__get__result3) and ((x17 = x15) and
+  (v18 = v16))))) -> ((not (loopframe__get__result4 = 0)) ->
+  (1 <= loopframe__get__result4))))

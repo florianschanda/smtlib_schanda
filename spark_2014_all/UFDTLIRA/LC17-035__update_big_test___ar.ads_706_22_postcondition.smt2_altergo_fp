@@ -249,63 +249,21 @@ logic e : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic r__split_fields : et1
-
-logic r__split_fields1 : et2
-
-logic o : et1
-
-logic o1 : et1
-
-logic o2 : et2
-
-logic temp___6590 : et1
-
-logic temp___65901 : et2
-
-logic result : et1
-
-logic result1 : et2
-
-logic r__split_fields2 : et1
-
-logic r__split_fields3 : et2
-
-logic r__split_fields4 : et1
-
-logic r__split_fields5 : et2
-
-logic r__split_fields6 : et1
-
-logic r__split_fields7 : et2
-
-axiom H : in_range(e)
-
-axiom H1 : (to_rep(o) = e)
-
-axiom H2 : (o = o1)
-
-axiom H3 : (r__split_fields1 = o2)
-
-axiom H4 : (temp___6590 = o1)
-
-axiom H5 : (temp___65901 = o2)
-
-axiom H6 : (result = r__split_fields)
-
-axiom H7 : (result1 = r__split_fields1)
-
-axiom H8 : (temp___6590 = r__split_fields2)
-
-axiom H9 : (temp___65901 = r__split_fields3)
-
-axiom H10 : (r__split_fields4 = r__split_fields2)
-
-axiom H11 : (r__split_fields5 = r__split_fields3)
-
-axiom H12 : (r__split_fields6 = r__split_fields2)
-
-axiom H13 : (r__split_fields7 = r__split_fields3)
-
  (* File "ar.ads", line 699, characters 0-0 *)
-goal WP_parameter_def : (to_rep(r__split_fields4) = e)
+goal WP_parameter_def :
+  (forall r__split_fields:et1. forall r__split_fields1:et2. forall o:et1.
+  forall o1:et1. forall o2:et2. forall temp___6649:et1.
+  forall temp___66491:et2. forall result:et1. forall result1:et2.
+  forall r__split_fields2:et1. forall r__split_fields3:et2.
+  forall r__split_fields4:et1. forall r__split_fields5:et2.
+  forall r__split_fields6:et1. forall r__split_fields7:et2. ((in_range(e) and
+  (((((to_rep(o) = e) and ((o = o1) and (r__split_fields1 = o2))) and
+  ((temp___6649 = o1) and (temp___66491 = o2))) and
+  (((result = r__split_fields) and (result1 = r__split_fields1)) and
+  ((temp___6649 = r__split_fields2) and
+  (temp___66491 = r__split_fields3)))) and
+  (((r__split_fields4 = r__split_fields2) and
+  (r__split_fields5 = r__split_fields3)) and
+  ((r__split_fields6 = r__split_fields2) and
+  (r__split_fields7 = r__split_fields3))))) ->
+  (to_rep(r__split_fields4) = e)))

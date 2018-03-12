@@ -1251,9 +1251,6 @@ axiom is_valid_speed_km_per_h__def_axiom :
   ((is_valid_speed_km_per_h(speed) = true) <-> (le(fliteral6, speed) and
   le(speed, fliteral4))))
 
-logic deceleration_curve__maximum_valid_speed__assume : t
-
-axiom H : in_range1(distance_resolution)
-
  (* File "deceleration_curve.ads", line 47, characters 0-0 *)
-goal WP_parameter_def : (is_valid_speed_km_per_h(fliteral4) = true)
+goal WP_parameter_def : (in_range1(distance_resolution) ->
+  (is_valid_speed_km_per_h(fliteral4) = true))

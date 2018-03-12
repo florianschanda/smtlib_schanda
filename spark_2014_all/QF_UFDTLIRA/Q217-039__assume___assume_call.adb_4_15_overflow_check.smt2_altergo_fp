@@ -109,25 +109,5 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic assume_call__f1__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic assume_call__f1__result1 : int
-
-logic assume_call__f1__result2 : int
-
-logic assume_call__f1__result3 : int
-
-logic assume_call__f1__result4 : int
-
-logic assume_call__f1__result5 : int
-
-axiom H : in_range(x)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((x + 1))
+goal WP_parameter_def : (in_range(x) -> in_range((x + 1)))

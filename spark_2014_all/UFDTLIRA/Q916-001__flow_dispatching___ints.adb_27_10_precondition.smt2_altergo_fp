@@ -533,42 +533,8 @@ logic arg__attr__tag : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic arg__split_fields : integer
-
-logic arg__split_fields1 : integer
-
-logic arg__split_fields2 : integer
-
-logic arg__split_fields3 : us_private
-
-logic o : int
-
-logic arg__split_fields4 : integer
-
-logic arg__split_fields5 : integer
-
-logic arg__split_fields6 : integer
-
-logic arg__split_fields7 : us_private
-
-logic arg__split_fields8 : integer
-
-logic arg__split_fields9 : integer
-
-logic arg__split_fields10 : integer
-
-logic arg__split_fields11 : us_private
-
-logic arg__split_fields12 : integer
-
-logic arg__split_fields13 : integer
-
-logic arg__split_fields14 : integer
-
-logic arg__split_fields15 : us_private
-
-axiom H : (to_rep(arg__split_fields2) <  (to_rep(arg__split_fields1) - 10))
-
  (* File "ints.ads", line 13, characters 0-0 *)
 goal WP_parameter_def :
-  (to_rep(arg__split_fields2) <  (to_rep(arg__split_fields1) - 10))
+  (forall arg__split_fields:integer. forall arg__split_fields1:integer.
+  ((to_rep(arg__split_fields1) <  (to_rep(arg__split_fields) - 10)) ->
+  (to_rep(arg__split_fields1) <  (to_rep(arg__split_fields) - 10))))

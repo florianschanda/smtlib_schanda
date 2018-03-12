@@ -663,7 +663,15 @@ axiom bv_max_to_uint :
 
 type entry_id
 
-predicate in_range1(x: t) = (ule(of_int(0), x) and ule(x, of_int(4)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 4)
+
+predicate in_range1(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 4))
 
@@ -705,24 +713,6 @@ axiom slide_def :
   (forall i:t [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[sub(i, sub(new_first, old_first))]))))))
 
-logic concat : (t,integer) farray, t, t, (t,integer) farray, t,
-  t -> (t,integer) farray
-
-axiom concat_def :
-  (forall a:(t,integer) farray. forall b:(t,integer) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t.
-  (forall i:t [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((ule(a_first, i) and ule(i, a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and (ugt(i, a_last) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[add(sub(i, a_last), sub(b_first,
-  one))])))))))
-
-logic singleton : integer, t -> (t,integer) farray
-
-axiom singleton_def :
-  (forall v:integer.
-  (forall i:t [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (t,integer) farray, t, t, (t,integer) farray, t, t -> bool
 
 axiom bool_eq_def3 :
@@ -732,19 +722,19 @@ axiom bool_eq_def3 :
   a__last) and (ule(b__first, b__last) and (sub(a__last,
   a__first) = sub(b__last, b__first)))) or ((not ule(a__first, a__last)) and
   ugt(b__first, b__last))) and
-  (forall temp___idx_132:t. (((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[add(sub(b__first, a__first),
-  temp___idx_132)])))) or (not (ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)))))) -> (bool_eq4(a, a__first, a__last, b,
+  (forall temp___idx_154:t. (((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[add(sub(b__first, a__first),
+  temp___idx_154)])))) or (not (ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)))))) -> (bool_eq4(a, a__first, a__last, b,
   b__first, b__last) = true)) and ((not (((ule(a__first, a__last) ->
   (ule(b__first, b__last) and (sub(a__last, a__first) = sub(b__last,
   b__first)))) and ((not ule(a__first, a__last)) -> ugt(b__first,
   b__last))) and
-  (forall temp___idx_132:t. ((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[add(sub(b__first, a__first),
-  temp___idx_132)]))))))) -> (bool_eq4(a, a__first, a__last, b, b__first,
+  (forall temp___idx_154:t. ((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[add(sub(b__first, a__first),
+  temp___idx_154)]))))))) -> (bool_eq4(a, a__first, a__last, b, b__first,
   b__last) = false))))
 
 axiom bool_eq_rev :
@@ -754,39 +744,10 @@ axiom bool_eq_rev :
   (((ule(a__first, a__last) -> (ule(b__first, b__last) and (sub(a__last,
   a__first) = sub(b__last, b__first)))) and ((not ule(a__first, a__last)) ->
   ugt(b__first, b__last))) and
-  (forall temp___idx_132:t. ((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[add(sub(b__first, a__first),
-  temp___idx_132)])))))))))
-
-logic compare : (t,integer) farray, t, t, (t,integer) farray, t, t -> int
-
-axiom compare_def_eq :
-  (forall a:(t,integer) farray. forall b:(t,integer) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a, a_first, a_last, b,
-  b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(t,integer) farray. forall b:(t,integer) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) <  0) <->
-  (exists i:t. exists j:t. (ule(i, a_last) and (ult(j, b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  (ult(i, a_last) and (to_rep((a[add(i, one)])) <  to_rep((b[add(j,
-  one)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(t,integer) farray. forall b:(t,integer) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((0 <  compare(a,
-  a_first, a_last, b, b_first, b_last)) <->
-  (exists i:t. exists j:t. (ule(i, b_last) and (ult(j, a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  (ult(i, b_last) and (to_rep((b[add(i, one)])) <  to_rep((a[add(j,
-  one)]))))))))))))
+  (forall temp___idx_154:t. ((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[add(sub(b__first, a__first),
+  temp___idx_154)])))))))))
 
 type length_type
 
@@ -837,9 +798,13 @@ axiom inversion_axiom2 :
 
 axiom range_axiom2 : (forall x:entry_id [to_rep2(x)]. in_range1(to_rep2(x)))
 
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 5)
+
 axiom coerce_axiom2 :
-  (forall x:t [to_rep2(of_rep2(x))]. (in_range1(urem(x, of_int(5))) ->
-  (to_rep2(of_rep2(x)) = urem(x, of_int(5)))))
+  (forall x:t [to_rep2(of_rep2(x))]. (in_range1(urem(x, rliteral2)) ->
+  (to_rep2(of_rep2(x)) = urem(x, rliteral2))))
 
 function to_int1(x: entry_id) : int = tqtint(to_rep2(x))
 
@@ -908,14 +873,14 @@ axiom bool_eq_def5 :
   (forall a:us_rep. forall b:us_rep [bool_eq6(a, b)].
   (((((to_rep1(((a).us_split_fields1).rec__test__t__remaining) = to_rep1(((b).us_split_fields1).rec__test__t__remaining)) and
   (to_rep2(((a).us_split_fields1).rec__test__t__index) = to_rep2(((b).us_split_fields1).rec__test__t__index))) and
-  (bool_eq4(((a).us_split_fields1).rec__test__t__cards, of_int(0), of_int(4),
-  ((b).us_split_fields1).rec__test__t__cards, of_int(0),
-  of_int(4)) = true)) -> (bool_eq6(a, b) = true)) and
+  (bool_eq4(((a).us_split_fields1).rec__test__t__cards, rliteral, rliteral1,
+  ((b).us_split_fields1).rec__test__t__cards, rliteral,
+  rliteral1) = true)) -> (bool_eq6(a, b) = true)) and
   ((not (((to_rep1(((a).us_split_fields1).rec__test__t__remaining) = to_rep1(((b).us_split_fields1).rec__test__t__remaining)) and
   (to_rep2(((a).us_split_fields1).rec__test__t__index) = to_rep2(((b).us_split_fields1).rec__test__t__index))) and
-  (bool_eq4(((a).us_split_fields1).rec__test__t__cards, of_int(0), of_int(4),
-  ((b).us_split_fields1).rec__test__t__cards, of_int(0),
-  of_int(4)) = true))) -> (bool_eq6(a, b) = false))))
+  (bool_eq4(((a).us_split_fields1).rec__test__t__cards, rliteral, rliteral1,
+  ((b).us_split_fields1).rec__test__t__cards, rliteral,
+  rliteral1) = true))) -> (bool_eq6(a, b) = false))))
 
 logic value__size1 : int
 
@@ -1023,176 +988,53 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic s__split_fields : length_type
-
-logic s__split_fields1 : entry_id
-
-logic s__split_fields2 : (t,integer) farray
-
-logic tmp : int
-
-logic o : integer
-
-logic o1 : (t,integer) farray
-
-logic o2 : length_type
-
-logic o3 : entry_id
-
-logic o4 : (t,integer) farray
-
-logic temp___190 : length_type
-
-logic temp___1901 : entry_id
-
-logic temp___1902 : (t,integer) farray
-
-logic o5 : integer
-
-logic o6 : (t,integer) farray
-
-logic o7 : length_type
-
-logic o8 : entry_id
-
-logic o9 : (t,integer) farray
-
-logic temp___193 : length_type
-
-logic temp___1931 : entry_id
-
-logic temp___1932 : (t,integer) farray
-
-logic result : int
-
-logic tmp1 : int
-
-logic result1 : length_type
-
-logic result2 : entry_id
-
-logic result3 : (t,integer) farray
-
-logic s__split_fields3 : length_type
-
-logic s__split_fields4 : entry_id
-
-logic s__split_fields5 : (t,integer) farray
-
-logic result4 : length_type
-
-logic result5 : entry_id
-
-logic result6 : (t,integer) farray
-
-logic s__split_fields6 : length_type
-
-logic s__split_fields7 : entry_id
-
-logic s__split_fields8 : (t,integer) farray
-
-logic s__split_fields9 : length_type
-
-logic s__split_fields10 : entry_id
-
-logic s__split_fields11 : (t,integer) farray
-
-logic tmp2 : int
-
-logic s__split_fields12 : length_type
-
-logic s__split_fields13 : entry_id
-
-logic s__split_fields14 : (t,integer) farray
-
-logic tmp3 : int
-
-axiom H : in_range1(i1)
-
-axiom H1 : in_range1(i2)
-
-axiom H2 : (result = tmp)
-
-axiom H3 : (tmp1 = to_rep((s__split_fields2[i1])))
-
-axiom H4 : in_range(tmp1)
-
-axiom H5 : (to_rep(o) = to_rep((s__split_fields2[i2])))
-
-axiom H6 : (o1 = (s__split_fields2[i1 <- o]))
-
-axiom H7 : (s__split_fields = o2)
-
-axiom H8 : (s__split_fields1 = o3)
-
-axiom H9 : (o1 = o4)
-
-axiom H10 : (temp___190 = o2)
-
-axiom H11 : (temp___1901 = o3)
-
-axiom H12 : (temp___1902 = o4)
-
-axiom H13 : (result1 = s__split_fields)
-
-axiom H14 : (result2 = s__split_fields1)
-
-axiom H15 : (result3 = s__split_fields2)
-
-axiom H16 : (temp___190 = s__split_fields3)
-
-axiom H17 : (temp___1901 = s__split_fields4)
-
-axiom H18 : (temp___1902 = s__split_fields5)
-
-axiom H19 : (to_rep(o5) = tmp1)
-
-axiom H20 : (o6 = (s__split_fields5[i2 <- o5]))
-
-axiom H21 : (s__split_fields3 = o7)
-
-axiom H22 : (s__split_fields4 = o8)
-
-axiom H23 : (o6 = o9)
-
-axiom H24 : (temp___193 = o7)
-
-axiom H25 : (temp___1931 = o8)
-
-axiom H26 : (temp___1932 = o9)
-
-axiom H27 : (result4 = s__split_fields3)
-
-axiom H28 : (result5 = s__split_fields4)
-
-axiom H29 : (result6 = s__split_fields5)
-
-axiom H30 : (temp___193 = s__split_fields6)
-
-axiom H31 : (temp___1931 = s__split_fields7)
-
-axiom H32 : (temp___1932 = s__split_fields8)
-
-axiom H33 : (tmp2 = tmp1)
-
-axiom H34 : (s__split_fields9 = s__split_fields6)
-
-axiom H35 : (s__split_fields10 = s__split_fields7)
-
-axiom H36 : (s__split_fields11 = s__split_fields8)
-
-axiom H37 : (tmp3 = tmp1)
-
-axiom H38 : (s__split_fields12 = s__split_fields6)
-
-axiom H39 : (s__split_fields13 = s__split_fields7)
-
-axiom H40 : (s__split_fields14 = s__split_fields8)
-
  (* File "test.ads", line 11, characters 0-0 *)
-goal WP_parameter_def : (get_remaining({ us_split_fields1 = {
-  rec__test__t__remaining = s__split_fields9; rec__test__t__index =
-  s__split_fields10; rec__test__t__cards = s__split_fields11 }
-  }) = get_remaining({ us_split_fields1 = { rec__test__t__remaining =
-  s__split_fields; rec__test__t__index = s__split_fields1;
-  rec__test__t__cards = s__split_fields2 } }))
+goal WP_parameter_def :
+  (forall s__split_fields:length_type. forall s__split_fields1:entry_id.
+  forall s__split_fields2:(t,integer) farray. forall tmp:int.
+  forall o:integer. forall o1:(t,integer) farray. forall o2:length_type.
+  forall o3:entry_id. forall o4:(t,integer) farray.
+  forall temp___216:length_type. forall temp___2161:entry_id.
+  forall temp___2162:(t,integer) farray. forall o5:integer.
+  forall o6:(t,integer) farray. forall o7:length_type. forall o8:entry_id.
+  forall o9:(t,integer) farray. forall temp___219:length_type.
+  forall temp___2191:entry_id. forall temp___2192:(t,integer) farray.
+  forall result:int. forall tmp1:int. forall result1:length_type.
+  forall result2:entry_id. forall result3:(t,integer) farray.
+  forall s__split_fields3:length_type. forall s__split_fields4:entry_id.
+  forall s__split_fields5:(t,integer) farray. forall result4:length_type.
+  forall result5:entry_id. forall result6:(t,integer) farray.
+  forall s__split_fields6:length_type. forall s__split_fields7:entry_id.
+  forall s__split_fields8:(t,integer) farray.
+  forall s__split_fields9:length_type. forall s__split_fields10:entry_id.
+  forall s__split_fields11:(t,integer) farray. forall tmp2:int.
+  forall s__split_fields12:length_type. forall s__split_fields13:entry_id.
+  forall s__split_fields14:(t,integer) farray. forall tmp3:int.
+  ((in_range1(i1) and (in_range1(i2) and ((((result = tmp) and
+  (tmp1 = to_rep((s__split_fields2[i1])))) and (in_range(tmp1) and
+  ((((((to_rep(o) = to_rep((s__split_fields2[i2]))) and
+  (o1 = (s__split_fields2[i1 <- o]))) and ((s__split_fields = o2) and
+  ((s__split_fields1 = o3) and (o1 = o4)))) and ((temp___216 = o2) and
+  ((temp___2161 = o3) and (temp___2162 = o4)))) and
+  (((result1 = s__split_fields) and ((result2 = s__split_fields1) and
+  (result3 = s__split_fields2))) and ((temp___216 = s__split_fields3) and
+  ((temp___2161 = s__split_fields4) and
+  (temp___2162 = s__split_fields5))))) and (((((to_rep(o5) = tmp1) and
+  (o6 = (s__split_fields5[i2 <- o5]))) and ((s__split_fields3 = o7) and
+  ((s__split_fields4 = o8) and (o6 = o9)))) and ((temp___219 = o7) and
+  ((temp___2191 = o8) and (temp___2192 = o9)))) and
+  (((result4 = s__split_fields3) and ((result5 = s__split_fields4) and
+  (result6 = s__split_fields5))) and ((temp___219 = s__split_fields6) and
+  ((temp___2191 = s__split_fields7) and
+  (temp___2192 = s__split_fields8)))))))) and (((tmp2 = tmp1) and
+  ((s__split_fields9 = s__split_fields6) and
+  ((s__split_fields10 = s__split_fields7) and
+  (s__split_fields11 = s__split_fields8)))) and ((tmp3 = tmp1) and
+  ((s__split_fields12 = s__split_fields6) and
+  ((s__split_fields13 = s__split_fields7) and
+  (s__split_fields14 = s__split_fields8)))))))) -> (get_remaining({
+  us_split_fields1 = { rec__test__t__remaining = s__split_fields9;
+  rec__test__t__index = s__split_fields10; rec__test__t__cards =
+  s__split_fields11 } }) = get_remaining({ us_split_fields1 = {
+  rec__test__t__remaining = s__split_fields; rec__test__t__index =
+  s__split_fields1; rec__test__t__cards = s__split_fields2 } }))))

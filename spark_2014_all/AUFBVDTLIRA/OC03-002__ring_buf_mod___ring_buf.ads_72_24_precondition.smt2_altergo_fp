@@ -596,12 +596,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -613,6 +607,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -790,24 +790,6 @@ axiom slide_def :
   (forall i:t [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[sub(i, sub(new_first, old_first))]))))))
 
-logic concat : (t,integer) farray, t, t, (t,integer) farray, t,
-  t -> (t,integer) farray
-
-axiom concat_def :
-  (forall a:(t,integer) farray. forall b:(t,integer) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t.
-  (forall i:t [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((ule(a_first, i) and ule(i, a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and (ugt(i, a_last) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[add(sub(i, a_last), sub(b_first,
-  one))])))))))
-
-logic singleton : integer, t -> (t,integer) farray
-
-axiom singleton_def :
-  (forall v:integer.
-  (forall i:t [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq6 : (t,integer) farray, t, t, (t,integer) farray, t, t -> bool
 
 axiom bool_eq_def5 :
@@ -817,19 +799,19 @@ axiom bool_eq_def5 :
   a__last) and (ule(b__first, b__last) and (sub(a__last,
   a__first) = sub(b__last, b__first)))) or ((not ule(a__first, a__last)) and
   ugt(b__first, b__last))) and
-  (forall temp___idx_132:t. (((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[add(sub(b__first, a__first),
-  temp___idx_132)])))) or (not (ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)))))) -> (bool_eq6(a, a__first, a__last, b,
+  (forall temp___idx_154:t. (((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[add(sub(b__first, a__first),
+  temp___idx_154)])))) or (not (ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)))))) -> (bool_eq6(a, a__first, a__last, b,
   b__first, b__last) = true)) and ((not (((ule(a__first, a__last) ->
   (ule(b__first, b__last) and (sub(a__last, a__first) = sub(b__last,
   b__first)))) and ((not ule(a__first, a__last)) -> ugt(b__first,
   b__last))) and
-  (forall temp___idx_132:t. ((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[add(sub(b__first, a__first),
-  temp___idx_132)]))))))) -> (bool_eq6(a, a__first, a__last, b, b__first,
+  (forall temp___idx_154:t. ((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[add(sub(b__first, a__first),
+  temp___idx_154)]))))))) -> (bool_eq6(a, a__first, a__last, b, b__first,
   b__last) = false))))
 
 axiom bool_eq_rev :
@@ -839,39 +821,10 @@ axiom bool_eq_rev :
   (((ule(a__first, a__last) -> (ule(b__first, b__last) and (sub(a__last,
   a__first) = sub(b__last, b__first)))) and ((not ule(a__first, a__last)) ->
   ugt(b__first, b__last))) and
-  (forall temp___idx_132:t. ((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[add(sub(b__first, a__first),
-  temp___idx_132)])))))))))
-
-logic compare : (t,integer) farray, t, t, (t,integer) farray, t, t -> int
-
-axiom compare_def_eq :
-  (forall a:(t,integer) farray. forall b:(t,integer) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) = 0) <-> (bool_eq6(a, a_first, a_last, b,
-  b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(t,integer) farray. forall b:(t,integer) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) <  0) <->
-  (exists i:t. exists j:t. (ule(i, a_last) and (ult(j, b_last) and
-  ((bool_eq6(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  (ult(i, a_last) and (to_rep((a[add(i, one)])) <  to_rep((b[add(j,
-  one)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(t,integer) farray. forall b:(t,integer) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((0 <  compare(a,
-  a_first, a_last, b, b_first, b_last)) <->
-  (exists i:t. exists j:t. (ule(i, b_last) and (ult(j, a_last) and
-  ((bool_eq6(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  (ult(i, b_last) and (to_rep((b[add(i, one)])) <  to_rep((a[add(j,
-  one)]))))))))))))
+  (forall temp___idx_154:t. ((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[add(sub(b__first, a__first),
+  temp___idx_154)])))))))))
 
 type t1
 
@@ -1007,21 +960,29 @@ type us_rep = { us_split_fields1 : us_split_fields
 function us_rep___projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 65535)
+
 logic bool_eq8 : us_rep, us_rep -> bool
 
 axiom bool_eq_def6 :
   (forall a:us_rep. forall b:us_rep [bool_eq8(a, b)].
   (((((bool_eq6(((a).us_split_fields1).rec__ring_buf__ring_buffer__data,
-  of_int(0), of_int(65535),
-  ((b).us_split_fields1).rec__ring_buf__ring_buffer__data, of_int(0),
-  of_int(65535)) = true) and
+  rliteral, rliteral1,
+  ((b).us_split_fields1).rec__ring_buf__ring_buffer__data, rliteral,
+  rliteral1) = true) and
   (to_rep1(((a).us_split_fields1).rec__ring_buf__ring_buffer__first) = to_rep1(((b).us_split_fields1).rec__ring_buf__ring_buffer__first))) and
   (to_rep2(((a).us_split_fields1).rec__ring_buf__ring_buffer__length) = to_rep2(((b).us_split_fields1).rec__ring_buf__ring_buffer__length))) ->
   (bool_eq8(a, b) = true)) and
   ((not (((bool_eq6(((a).us_split_fields1).rec__ring_buf__ring_buffer__data,
-  of_int(0), of_int(65535),
-  ((b).us_split_fields1).rec__ring_buf__ring_buffer__data, of_int(0),
-  of_int(65535)) = true) and
+  rliteral, rliteral1,
+  ((b).us_split_fields1).rec__ring_buf__ring_buffer__data, rliteral,
+  rliteral1) = true) and
   (to_rep1(((a).us_split_fields1).rec__ring_buf__ring_buffer__first) = to_rep1(((b).us_split_fields1).rec__ring_buf__ring_buffer__first))) and
   (to_rep2(((a).us_split_fields1).rec__ring_buf__ring_buffer__length) = to_rep2(((b).us_split_fields1).rec__ring_buf__ring_buffer__length)))) ->
   (bool_eq8(a, b) = false))))
@@ -1112,6 +1073,58 @@ function ring_buffer__ref___projection(a: ring_buffer__ref) : us_rep =
 logic to_model : us_rep -> us_t
 
 logic to_model__function_guard : us_t, us_rep -> prop
+
+logic concat : (t,integer) farray, t, t, (t,integer) farray, t,
+  t -> (t,integer) farray
+
+axiom concat_def :
+  (forall a:(t,integer) farray. forall b:(t,integer) farray.
+  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t.
+  (forall i:t [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
+  (((ule(a_first, i) and ule(i, a_last)) -> ((concat(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and (ugt(i, a_last) -> ((concat(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[add(sub(i, a_last), sub(b_first,
+  one))])))))))
+
+logic concat_singleton_left : integer, t, (t,integer) farray, t,
+  t -> (t,integer) farray
+
+axiom concat_singleton_left_def :
+  (forall a:integer.
+  (forall b:(t,integer) farray.
+  (forall a_first:t. forall b_first:t. forall b_last:t
+  [concat_singleton_left(a, a_first, b, b_first, b_last)].
+  (((concat_singleton_left(a, a_first, b, b_first, b_last)[a_first]) = a) and
+  (forall i:t [(concat_singleton_left(a, a_first, b, b_first, b_last)[i])].
+  (ugt(i, a_first) -> ((concat_singleton_left(a, a_first, b, b_first,
+  b_last)[i]) = (b[add(sub(i, a_first), sub(b_first, one))]))))))))
+
+logic concat_singleton_right : (t,integer) farray, t, t,
+  integer -> (t,integer) farray
+
+axiom concat_singleton_right_def :
+  (forall a:(t,integer) farray.
+  (forall b:integer.
+  (forall a_first:t. forall a_last:t [concat_singleton_right(a, a_first,
+  a_last, b)]. (((concat_singleton_right(a, a_first, a_last, b)[add(a_last,
+  one)]) = b) and
+  (forall i:t [(concat_singleton_right(a, a_first, a_last, b)[i])| (a[i])].
+  ((ule(a_first, i) and ule(i, a_last)) -> ((concat_singleton_right(a,
+  a_first, a_last, b)[i]) = (a[i]))))))))
+
+logic concat_singletons : integer, t, integer -> (t,integer) farray
+
+axiom concat_singletons_def :
+  (forall a:integer. forall b:integer.
+  (forall a_first:t [concat_singletons(a, a_first, b)].
+  (((concat_singletons(a, a_first, b)[a_first]) = a) and
+  ((concat_singletons(a, a_first, b)[add(a_first, one)]) = b))))
+
+logic singleton : integer, t -> (t,integer) farray
+
+axiom singleton_def :
+  (forall v:integer.
+  (forall i:t [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
 
 logic attr__ATTRIBUTE_MODULUS1 : t
 
@@ -1435,13 +1448,17 @@ axiom to_model__post_axiom :
   (forall r:(t,integer) farray. forall r1:ar_index. forall r2:length_type
   [to_model({ us_split_fields1 = { rec__ring_buf__ring_buffer__data = r;
   rec__ring_buf__ring_buffer__first = r1;
-  rec__ring_buf__ring_buffer__length = r2 } })]. dynamic_property(of_int(0),
-  of_int(65535), to_rep1(first((to_model({ us_split_fields1 = {
+  rec__ring_buf__ring_buffer__length = r2 } })]. dynamic_property(rliteral,
+  rliteral1, to_rep1(first((to_model({ us_split_fields1 = {
   rec__ring_buf__ring_buffer__data = r; rec__ring_buf__ring_buffer__first =
   r1; rec__ring_buf__ring_buffer__length = r2 } })).rt)),
   to_rep1(last((to_model({ us_split_fields1 = {
   rec__ring_buf__ring_buffer__data = r; rec__ring_buf__ring_buffer__first =
   r1; rec__ring_buf__ring_buffer__length = r2 } })).rt))))
+
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 1)
 
 axiom to_model__def_axiom :
   (forall r:(t,integer) farray. forall r1:ar_index. forall r2:length_type
@@ -1449,102 +1466,97 @@ axiom to_model__def_axiom :
   rec__ring_buf__ring_buffer__first = r1;
   rec__ring_buf__ring_buffer__length = r2 } })].
   (((65535 <  ((tqtint(to_rep1(r1)) + to_rep2(r2)) - 1)) -> (((length1({
-  elts1 = r; rt1 = mk1(to_rep1(r1), of_int(65535)) }) = 0) -> (to_model({
+  elts1 = r; rt1 = mk1(to_rep1(r1), rliteral1) }) = 0) -> (to_model({
   us_split_fields1 = { rec__ring_buf__ring_buffer__data = r;
   rec__ring_buf__ring_buffer__first = r1;
   rec__ring_buf__ring_buffer__length = r2 } }) = { elts = r; rt =
-  mk(to_rep1(first4(mk2(of_int(0), sub(sub(add(of_int(0),
-  of_int(to_rep2(r2))), sub(of_int(65535), to_rep1(r1))), of_int(1))))),
-  to_rep1(last4(mk2(of_int(0), sub(sub(add(of_int(0), of_int(to_rep2(r2))),
-  sub(of_int(65535), to_rep1(r1))), of_int(1)))))) })) and ((not (length1({
-  elts1 = r; rt1 = mk1(to_rep1(r1), of_int(65535)) }) = 0)) ->
-  (((tqtint(to_rep1(first2(mk1(to_rep1(r1),
-  of_int(65535))))) <= tqtint(to_rep1(last2(mk1(to_rep1(r1),
-  of_int(65535)))))) -> (((tqtint(to_rep1(first4(mk2(of_int(0),
-  sub(sub(add(of_int(0), of_int(to_rep2(r2))), sub(of_int(65535),
-  to_rep1(r1))), of_int(1)))))) <= tqtint(to_rep1(last4(mk2(of_int(0),
-  sub(sub(add(of_int(0), of_int(to_rep2(r2))), sub(of_int(65535),
-  to_rep1(r1))), of_int(1))))))) -> (to_model({ us_split_fields1 = {
-  rec__ring_buf__ring_buffer__data = r; rec__ring_buf__ring_buffer__first =
-  r1; rec__ring_buf__ring_buffer__length = r2 } }) = { elts = concat(r,
-  to_rep1(first2(mk1(to_rep1(r1), of_int(65535)))),
-  to_rep1(last2(mk1(to_rep1(r1), of_int(65535)))), r,
-  to_rep1(first4(mk2(of_int(0), sub(sub(add(of_int(0), of_int(to_rep2(r2))),
-  sub(of_int(65535), to_rep1(r1))), of_int(1))))),
-  to_rep1(last4(mk2(of_int(0), sub(sub(add(of_int(0), of_int(to_rep2(r2))),
-  sub(of_int(65535), to_rep1(r1))), of_int(1)))))); rt =
-  mk(to_rep1(first2(mk1(to_rep1(r1), of_int(65535)))),
+  mk(to_rep1(first4(mk2(rliteral, sub(sub(add(rliteral, of_int(to_rep2(r2))),
+  sub(rliteral1, to_rep1(r1))), rliteral2)))), to_rep1(last4(mk2(rliteral,
+  sub(sub(add(rliteral, of_int(to_rep2(r2))), sub(rliteral1, to_rep1(r1))),
+  rliteral2))))) })) and ((not (length1({ elts1 = r; rt1 = mk1(to_rep1(r1),
+  rliteral1) }) = 0)) -> (((tqtint(to_rep1(first2(mk1(to_rep1(r1),
+  rliteral1)))) <= tqtint(to_rep1(last2(mk1(to_rep1(r1), rliteral1))))) ->
+  (((tqtint(to_rep1(first4(mk2(rliteral, sub(sub(add(rliteral,
+  of_int(to_rep2(r2))), sub(rliteral1, to_rep1(r1))),
+  rliteral2))))) <= tqtint(to_rep1(last4(mk2(rliteral, sub(sub(add(rliteral,
+  of_int(to_rep2(r2))), sub(rliteral1, to_rep1(r1))), rliteral2)))))) ->
+  (to_model({ us_split_fields1 = { rec__ring_buf__ring_buffer__data = r;
+  rec__ring_buf__ring_buffer__first = r1;
+  rec__ring_buf__ring_buffer__length = r2 } }) = { elts = concat(r,
+  to_rep1(first2(mk1(to_rep1(r1), rliteral1))),
+  to_rep1(last2(mk1(to_rep1(r1), rliteral1))), r,
+  to_rep1(first4(mk2(rliteral, sub(sub(add(rliteral, of_int(to_rep2(r2))),
+  sub(rliteral1, to_rep1(r1))), rliteral2)))), to_rep1(last4(mk2(rliteral,
+  sub(sub(add(rliteral, of_int(to_rep2(r2))), sub(rliteral1, to_rep1(r1))),
+  rliteral2))))); rt = mk(to_rep1(first2(mk1(to_rep1(r1), rliteral1))),
   of_int(((tqtint(to_rep1(first2(mk1(to_rep1(r1),
-  of_int(65535))))) + (((tqtint(to_rep1(last2(mk1(to_rep1(r1),
-  of_int(65535))))) - tqtint(to_rep1(first2(mk1(to_rep1(r1),
-  of_int(65535)))))) + 1) + ((tqtint(to_rep1(last4(mk2(of_int(0),
-  sub(sub(add(of_int(0), of_int(to_rep2(r2))), sub(of_int(65535),
-  to_rep1(r1))), of_int(1)))))) - tqtint(to_rep1(first4(mk2(of_int(0),
-  sub(sub(add(of_int(0), of_int(to_rep2(r2))), sub(of_int(65535),
-  to_rep1(r1))), of_int(1))))))) + 1))) - 1))) })) and
-  ((not (tqtint(to_rep1(first4(mk2(of_int(0), sub(sub(add(of_int(0),
-  of_int(to_rep2(r2))), sub(of_int(65535), to_rep1(r1))),
-  of_int(1)))))) <= tqtint(to_rep1(last4(mk2(of_int(0),
-  sub(sub(add(of_int(0), of_int(to_rep2(r2))), sub(of_int(65535),
-  to_rep1(r1))), of_int(1)))))))) -> (to_model({ us_split_fields1 = {
-  rec__ring_buf__ring_buffer__data = r; rec__ring_buf__ring_buffer__first =
-  r1; rec__ring_buf__ring_buffer__length = r2 } }) = { elts = concat(r,
-  to_rep1(first2(mk1(to_rep1(r1), of_int(65535)))),
-  to_rep1(last2(mk1(to_rep1(r1), of_int(65535)))), r,
-  to_rep1(first4(mk2(of_int(0), sub(sub(add(of_int(0), of_int(to_rep2(r2))),
-  sub(of_int(65535), to_rep1(r1))), of_int(1))))),
-  to_rep1(last4(mk2(of_int(0), sub(sub(add(of_int(0), of_int(to_rep2(r2))),
-  sub(of_int(65535), to_rep1(r1))), of_int(1)))))); rt =
-  mk(to_rep1(first2(mk1(to_rep1(r1), of_int(65535)))),
+  rliteral1)))) + (((tqtint(to_rep1(last2(mk1(to_rep1(r1),
+  rliteral1)))) - tqtint(to_rep1(first2(mk1(to_rep1(r1),
+  rliteral1))))) + 1) + ((tqtint(to_rep1(last4(mk2(rliteral,
+  sub(sub(add(rliteral, of_int(to_rep2(r2))), sub(rliteral1, to_rep1(r1))),
+  rliteral2))))) - tqtint(to_rep1(first4(mk2(rliteral, sub(sub(add(rliteral,
+  of_int(to_rep2(r2))), sub(rliteral1, to_rep1(r1))),
+  rliteral2)))))) + 1))) - 1))) })) and
+  ((not (tqtint(to_rep1(first4(mk2(rliteral, sub(sub(add(rliteral,
+  of_int(to_rep2(r2))), sub(rliteral1, to_rep1(r1))),
+  rliteral2))))) <= tqtint(to_rep1(last4(mk2(rliteral, sub(sub(add(rliteral,
+  of_int(to_rep2(r2))), sub(rliteral1, to_rep1(r1))), rliteral2))))))) ->
+  (to_model({ us_split_fields1 = { rec__ring_buf__ring_buffer__data = r;
+  rec__ring_buf__ring_buffer__first = r1;
+  rec__ring_buf__ring_buffer__length = r2 } }) = { elts = concat(r,
+  to_rep1(first2(mk1(to_rep1(r1), rliteral1))),
+  to_rep1(last2(mk1(to_rep1(r1), rliteral1))), r,
+  to_rep1(first4(mk2(rliteral, sub(sub(add(rliteral, of_int(to_rep2(r2))),
+  sub(rliteral1, to_rep1(r1))), rliteral2)))), to_rep1(last4(mk2(rliteral,
+  sub(sub(add(rliteral, of_int(to_rep2(r2))), sub(rliteral1, to_rep1(r1))),
+  rliteral2))))); rt = mk(to_rep1(first2(mk1(to_rep1(r1), rliteral1))),
   of_int(((tqtint(to_rep1(first2(mk1(to_rep1(r1),
-  of_int(65535))))) + (((tqtint(to_rep1(last2(mk1(to_rep1(r1),
-  of_int(65535))))) - tqtint(to_rep1(first2(mk1(to_rep1(r1),
-  of_int(65535)))))) + 1) + 0)) - 1))) })))) and
+  rliteral1)))) + (((tqtint(to_rep1(last2(mk1(to_rep1(r1),
+  rliteral1)))) - tqtint(to_rep1(first2(mk1(to_rep1(r1),
+  rliteral1))))) + 1) + 0)) - 1))) })))) and
   ((not (tqtint(to_rep1(first2(mk1(to_rep1(r1),
-  of_int(65535))))) <= tqtint(to_rep1(last2(mk1(to_rep1(r1),
-  of_int(65535))))))) -> (((tqtint(to_rep1(first4(mk2(of_int(0),
-  sub(sub(add(of_int(0), of_int(to_rep2(r2))), sub(of_int(65535),
-  to_rep1(r1))), of_int(1)))))) <= tqtint(to_rep1(last4(mk2(of_int(0),
-  sub(sub(add(of_int(0), of_int(to_rep2(r2))), sub(of_int(65535),
-  to_rep1(r1))), of_int(1))))))) -> (to_model({ us_split_fields1 = {
-  rec__ring_buf__ring_buffer__data = r; rec__ring_buf__ring_buffer__first =
-  r1; rec__ring_buf__ring_buffer__length = r2 } }) = { elts = concat(r,
-  to_rep1(first2(mk1(to_rep1(r1), of_int(65535)))),
-  to_rep1(last2(mk1(to_rep1(r1), of_int(65535)))), r,
-  to_rep1(first4(mk2(of_int(0), sub(sub(add(of_int(0), of_int(to_rep2(r2))),
-  sub(of_int(65535), to_rep1(r1))), of_int(1))))),
-  to_rep1(last4(mk2(of_int(0), sub(sub(add(of_int(0), of_int(to_rep2(r2))),
-  sub(of_int(65535), to_rep1(r1))), of_int(1)))))); rt =
-  mk(to_rep1(first2(mk1(to_rep1(r1), of_int(65535)))),
+  rliteral1)))) <= tqtint(to_rep1(last2(mk1(to_rep1(r1), rliteral1)))))) ->
+  (((tqtint(to_rep1(first4(mk2(rliteral, sub(sub(add(rliteral,
+  of_int(to_rep2(r2))), sub(rliteral1, to_rep1(r1))),
+  rliteral2))))) <= tqtint(to_rep1(last4(mk2(rliteral, sub(sub(add(rliteral,
+  of_int(to_rep2(r2))), sub(rliteral1, to_rep1(r1))), rliteral2)))))) ->
+  (to_model({ us_split_fields1 = { rec__ring_buf__ring_buffer__data = r;
+  rec__ring_buf__ring_buffer__first = r1;
+  rec__ring_buf__ring_buffer__length = r2 } }) = { elts = concat(r,
+  to_rep1(first2(mk1(to_rep1(r1), rliteral1))),
+  to_rep1(last2(mk1(to_rep1(r1), rliteral1))), r,
+  to_rep1(first4(mk2(rliteral, sub(sub(add(rliteral, of_int(to_rep2(r2))),
+  sub(rliteral1, to_rep1(r1))), rliteral2)))), to_rep1(last4(mk2(rliteral,
+  sub(sub(add(rliteral, of_int(to_rep2(r2))), sub(rliteral1, to_rep1(r1))),
+  rliteral2))))); rt = mk(to_rep1(first2(mk1(to_rep1(r1), rliteral1))),
   of_int(((tqtint(to_rep1(first2(mk1(to_rep1(r1),
-  of_int(65535))))) + (0 + ((tqtint(to_rep1(last4(mk2(of_int(0),
-  sub(sub(add(of_int(0), of_int(to_rep2(r2))), sub(of_int(65535),
-  to_rep1(r1))), of_int(1)))))) - tqtint(to_rep1(first4(mk2(of_int(0),
-  sub(sub(add(of_int(0), of_int(to_rep2(r2))), sub(of_int(65535),
-  to_rep1(r1))), of_int(1))))))) + 1))) - 1))) })) and
-  ((not (tqtint(to_rep1(first4(mk2(of_int(0), sub(sub(add(of_int(0),
-  of_int(to_rep2(r2))), sub(of_int(65535), to_rep1(r1))),
-  of_int(1)))))) <= tqtint(to_rep1(last4(mk2(of_int(0),
-  sub(sub(add(of_int(0), of_int(to_rep2(r2))), sub(of_int(65535),
-  to_rep1(r1))), of_int(1)))))))) -> (to_model({ us_split_fields1 = {
-  rec__ring_buf__ring_buffer__data = r; rec__ring_buf__ring_buffer__first =
-  r1; rec__ring_buf__ring_buffer__length = r2 } }) = { elts = concat(r,
-  to_rep1(first2(mk1(to_rep1(r1), of_int(65535)))),
-  to_rep1(last2(mk1(to_rep1(r1), of_int(65535)))), r,
-  to_rep1(first4(mk2(of_int(0), sub(sub(add(of_int(0), of_int(to_rep2(r2))),
-  sub(of_int(65535), to_rep1(r1))), of_int(1))))),
-  to_rep1(last4(mk2(of_int(0), sub(sub(add(of_int(0), of_int(to_rep2(r2))),
-  sub(of_int(65535), to_rep1(r1))), of_int(1)))))); rt =
-  mk(to_rep1(first2(mk1(to_rep1(r1), of_int(65535)))),
+  rliteral1)))) + (0 + ((tqtint(to_rep1(last4(mk2(rliteral,
+  sub(sub(add(rliteral, of_int(to_rep2(r2))), sub(rliteral1, to_rep1(r1))),
+  rliteral2))))) - tqtint(to_rep1(first4(mk2(rliteral, sub(sub(add(rliteral,
+  of_int(to_rep2(r2))), sub(rliteral1, to_rep1(r1))),
+  rliteral2)))))) + 1))) - 1))) })) and
+  ((not (tqtint(to_rep1(first4(mk2(rliteral, sub(sub(add(rliteral,
+  of_int(to_rep2(r2))), sub(rliteral1, to_rep1(r1))),
+  rliteral2))))) <= tqtint(to_rep1(last4(mk2(rliteral, sub(sub(add(rliteral,
+  of_int(to_rep2(r2))), sub(rliteral1, to_rep1(r1))), rliteral2))))))) ->
+  (to_model({ us_split_fields1 = { rec__ring_buf__ring_buffer__data = r;
+  rec__ring_buf__ring_buffer__first = r1;
+  rec__ring_buf__ring_buffer__length = r2 } }) = { elts = concat(r,
+  to_rep1(first2(mk1(to_rep1(r1), rliteral1))),
+  to_rep1(last2(mk1(to_rep1(r1), rliteral1))), r,
+  to_rep1(first4(mk2(rliteral, sub(sub(add(rliteral, of_int(to_rep2(r2))),
+  sub(rliteral1, to_rep1(r1))), rliteral2)))), to_rep1(last4(mk2(rliteral,
+  sub(sub(add(rliteral, of_int(to_rep2(r2))), sub(rliteral1, to_rep1(r1))),
+  rliteral2))))); rt = mk(to_rep1(first2(mk1(to_rep1(r1), rliteral1))),
   of_int(((tqtint(to_rep1(first2(mk1(to_rep1(r1),
-  of_int(65535))))) + (0 + 0)) - 1))) })))))))) and
+  rliteral1)))) + (0 + 0)) - 1))) })))))))) and
   ((not (65535 <  ((tqtint(to_rep1(r1)) + to_rep2(r2)) - 1))) -> (to_model({
   us_split_fields1 = { rec__ring_buf__ring_buffer__data = r;
   rec__ring_buf__ring_buffer__first = r1;
   rec__ring_buf__ring_buffer__length = r2 } }) = { elts = r; rt =
   mk(to_rep1(first6(mk3(to_rep1(r1), sub(add(to_rep1(r1),
-  of_int(to_rep2(r2))), of_int(1))))), to_rep1(last6(mk3(to_rep1(r1),
-  sub(add(to_rep1(r1), of_int(to_rep2(r2))), of_int(1)))))) }))))
+  of_int(to_rep2(r2))), rliteral2)))), to_rep1(last6(mk3(to_rep1(r1),
+  sub(add(to_rep1(r1), of_int(to_rep2(r2))), rliteral2))))) }))))
 
 logic func_head : us_t -> int
 
@@ -1671,16 +1683,16 @@ function t32s__ref___projection(a: t32s__ref) : us_t4 = (a).t32s__content
 
 axiom func_pop__post_axiom :
   (forall m:(t,integer) farray. forall m1:t1 [func_pop({ elts = m; rt = m1
-  })]. ((0 <  length({ elts = m; rt = m1 })) -> dynamic_property(of_int(0),
-  of_int(65535), to_rep1(first((func_pop({ elts = m; rt = m1 })).rt)),
+  })]. ((0 <  length({ elts = m; rt = m1 })) -> dynamic_property(rliteral,
+  rliteral1, to_rep1(first((func_pop({ elts = m; rt = m1 })).rt)),
   to_rep1(last((func_pop({ elts = m; rt = m1 })).rt)))))
 
 axiom func_pop__def_axiom :
   (forall m:(t,integer) farray. forall m1:t1 [func_pop({ elts = m; rt = m1
   })]. (func_pop({ elts = m; rt = m1 }) = { elts = m; rt =
   mk(to_rep1(first8(mk4(to_rep1(first(m1)), sub(to_rep1(last(m1)),
-  of_int(1))))), to_rep1(last8(mk4(to_rep1(first(m1)), sub(to_rep1(last(m1)),
-  of_int(1)))))) }))
+  rliteral2)))), to_rep1(last8(mk4(to_rep1(first(m1)), sub(to_rep1(last(m1)),
+  rliteral2))))) }))
 
 logic is_empty : us_rep -> bool
 
@@ -1702,175 +1714,63 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic r__split_fields : (t,integer) farray
-
-logic r__split_fields1 : ar_index
-
-logic r__split_fields2 : length_type
-
-logic element : int
-
-logic o : ar_index
-
-logic o1 : (t,integer) farray
-
-logic o2 : ar_index
-
-logic o3 : length_type
-
-logic temp___294 : (t,integer) farray
-
-logic temp___2941 : ar_index
-
-logic temp___2942 : length_type
-
-logic o4 : int
-
-logic o5 : length_type
-
-logic o6 : (t,integer) farray
-
-logic o7 : ar_index
-
-logic o8 : length_type
-
-logic temp___296 : (t,integer) farray
-
-logic temp___2961 : ar_index
-
-logic temp___2962 : length_type
-
-logic temp___300 : (t,integer) farray
-
-logic temp___3001 : t1
-
-logic o9 : int
-
-logic o10 : bool
-
-logic result : int
-
-logic element1 : int
-
-logic result1 : (t,integer) farray
-
-logic result2 : ar_index
-
-logic result3 : length_type
-
-logic r__split_fields3 : (t,integer) farray
-
-logic r__split_fields4 : ar_index
-
-logic r__split_fields5 : length_type
-
-logic result4 : (t,integer) farray
-
-logic result5 : ar_index
-
-logic result6 : length_type
-
-logic r__split_fields6 : (t,integer) farray
-
-logic r__split_fields7 : ar_index
-
-logic r__split_fields8 : length_type
-
-logic r__split_fields9 : (t,integer) farray
-
-logic r__split_fields10 : ar_index
-
-logic r__split_fields11 : length_type
-
-logic element2 : int
-
-logic r__split_fields12 : (t,integer) farray
-
-logic r__split_fields13 : ar_index
-
-logic r__split_fields14 : length_type
-
-logic element3 : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range1(element))
-
-axiom H1 : (not (is_empty({ us_split_fields1 = {
-  rec__ring_buf__ring_buffer__data = r__split_fields;
-  rec__ring_buf__ring_buffer__first = r__split_fields1;
-  rec__ring_buf__ring_buffer__length = r__split_fields2 } }) = true))
-
-axiom H2 : (result = element)
-
-axiom H3 : (element1 = to_rep((r__split_fields[to_rep1(r__split_fields1)])))
-
-axiom H4 : (to_rep1(o) = add(to_rep1(r__split_fields1), of_int(1)))
-
-axiom H5 : (r__split_fields = o1)
-
-axiom H6 : (o = o2)
-
-axiom H7 : (r__split_fields2 = o3)
-
-axiom H8 : (temp___294 = o1)
-
-axiom H9 : (temp___2941 = o2)
-
-axiom H10 : (temp___2942 = o3)
-
-axiom H11 : ((result1 = r__split_fields) and
-  ((result2 = r__split_fields1) and (result3 = r__split_fields2)))
-
-axiom H12 : (temp___294 = r__split_fields3)
-
-axiom H13 : (temp___2941 = r__split_fields4)
-
-axiom H14 : (temp___2942 = r__split_fields5)
-
-axiom H15 : ((o4 = (to_rep2(r__split_fields5) - 1)) and
-  in_range2((to_rep2(r__split_fields5) - 1)))
-
-axiom H16 : (to_rep2(o5) = o4)
-
-axiom H17 : (r__split_fields3 = o6)
-
-axiom H18 : (r__split_fields4 = o7)
-
-axiom H19 : (o5 = o8)
-
-axiom H20 : (temp___296 = o6)
-
-axiom H21 : (temp___2961 = o7)
-
-axiom H22 : (temp___2962 = o8)
-
-axiom H23 : (result4 = r__split_fields3)
-
-axiom H24 : (result5 = r__split_fields4)
-
-axiom H25 : (result6 = r__split_fields5)
-
-axiom H26 : (temp___296 = r__split_fields6)
-
-axiom H27 : (temp___2961 = r__split_fields7)
-
-axiom H28 : (temp___2962 = r__split_fields8)
-
-axiom H29 : (element1 = element2)
-
-axiom H30 : (r__split_fields9 = r__split_fields6)
-
-axiom H31 : (r__split_fields10 = r__split_fields7)
-
-axiom H32 : (r__split_fields11 = r__split_fields8)
-
-axiom H33 : (element3 = element1)
-
-axiom H34 : ((r__split_fields12 = r__split_fields6) and
-  ((r__split_fields13 = r__split_fields7) and
-  (r__split_fields14 = r__split_fields8)))
-
  (* File "ring_buf.ads", line 67, characters 0-0 *)
-goal WP_parameter_def : (0 <  length(to_model({ us_split_fields1 = {
+goal WP_parameter_def :
+  (forall r__split_fields:(t,integer) farray.
+  forall r__split_fields1:ar_index. forall r__split_fields2:length_type.
+  forall element:int. forall o:ar_index. forall o1:(t,integer) farray.
+  forall o2:ar_index. forall o3:length_type.
+  forall temp___321:(t,integer) farray. forall temp___3211:ar_index.
+  forall temp___3212:length_type. forall o4:int. forall o5:length_type.
+  forall o6:(t,integer) farray. forall o7:ar_index. forall o8:length_type.
+  forall temp___323:(t,integer) farray. forall temp___3231:ar_index.
+  forall temp___3232:length_type. forall result:int. forall element1:int.
+  forall result1:(t,integer) farray. forall result2:ar_index.
+  forall result3:length_type. forall r__split_fields3:(t,integer) farray.
+  forall r__split_fields4:ar_index. forall r__split_fields5:length_type.
+  forall result4:(t,integer) farray. forall result5:ar_index.
+  forall result6:length_type. forall r__split_fields6:(t,integer) farray.
+  forall r__split_fields7:ar_index. forall r__split_fields8:length_type.
+  forall r__split_fields9:(t,integer) farray.
+  forall r__split_fields10:ar_index. forall r__split_fields11:length_type.
+  forall element2:int. forall r__split_fields12:(t,integer) farray.
+  forall r__split_fields13:ar_index. forall r__split_fields14:length_type.
+  forall element3:int. ((((- 2147483648) <= 2147483647) ->
+  in_range1(element)) -> ((not (is_empty({ us_split_fields1 = {
   rec__ring_buf__ring_buffer__data = r__split_fields;
   rec__ring_buf__ring_buffer__first = r__split_fields1;
-  rec__ring_buf__ring_buffer__length = r__split_fields2 } })))
+  rec__ring_buf__ring_buffer__length = r__split_fields2 } }) = true)) ->
+  ((((({ int__content = result } = { int__content = element }) and
+  (element1 = to_rep((r__split_fields[to_rep1(r__split_fields1)])))) and
+  (((((to_rep1(o) = add(to_rep1(r__split_fields1), rliteral2)) and
+  ((r__split_fields = o1) and ((o = o2) and (r__split_fields2 = o3)))) and
+  ((temp___321 = o1) and ((temp___3211 = o2) and (temp___3212 = o3)))) and
+  (({ us_split_fields__content = { rec__ring_buf__ring_buffer__data =
+  result1; rec__ring_buf__ring_buffer__first = result2;
+  rec__ring_buf__ring_buffer__length = result3 } } = {
+  us_split_fields__content = { rec__ring_buf__ring_buffer__data =
+  r__split_fields; rec__ring_buf__ring_buffer__first = r__split_fields1;
+  rec__ring_buf__ring_buffer__length = r__split_fields2 } }) and
+  ((temp___321 = r__split_fields3) and ((temp___3211 = r__split_fields4) and
+  (temp___3212 = r__split_fields5))))) and
+  ((((((o4 = (to_rep2(r__split_fields5) - 1)) and
+  in_range2((to_rep2(r__split_fields5) - 1))) and (to_rep2(o5) = o4)) and
+  ((r__split_fields3 = o6) and ((r__split_fields4 = o7) and (o5 = o8)))) and
+  ((temp___323 = o6) and ((temp___3231 = o7) and (temp___3232 = o8)))) and
+  (((result4 = r__split_fields3) and ((result5 = r__split_fields4) and
+  (result6 = r__split_fields5))) and ((temp___323 = r__split_fields6) and
+  ((temp___3231 = r__split_fields7) and
+  (temp___3232 = r__split_fields8))))))) and (((element1 = element2) and
+  ((r__split_fields9 = r__split_fields6) and
+  ((r__split_fields10 = r__split_fields7) and
+  (r__split_fields11 = r__split_fields8)))) and ((element3 = element1) and ({
+  rec__ring_buf__ring_buffer__data = r__split_fields12;
+  rec__ring_buf__ring_buffer__first = r__split_fields13;
+  rec__ring_buf__ring_buffer__length = r__split_fields14 } = {
+  rec__ring_buf__ring_buffer__data = r__split_fields6;
+  rec__ring_buf__ring_buffer__first = r__split_fields7;
+  rec__ring_buf__ring_buffer__length = r__split_fields8 })))) ->
+  (0 <  length(to_model({ us_split_fields1 = {
+  rec__ring_buf__ring_buffer__data = r__split_fields;
+  rec__ring_buf__ring_buffer__first = r__split_fields1;
+  rec__ring_buf__ring_buffer__length = r__split_fields2 } })))))))

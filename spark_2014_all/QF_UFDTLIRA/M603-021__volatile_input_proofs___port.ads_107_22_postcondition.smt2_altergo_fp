@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -135,46 +135,6 @@ function e__ref___projection(a: e__ref) : e = (a).e__content
 logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
-
-logic ve : int
-
-logic x : int
-
-logic o : int
-
-logic ve1 : int
-
-logic result : int
-
-logic x1 : int
-
-logic ve2 : int
-
-logic x2 : int
-
-logic ve3 : int
-
-logic x3 : int
-
-axiom H : in_range1(ve)
-
-axiom H1 : ((0 <= 2) -> in_range1(x))
-
-axiom H2 : in_range1(ve1)
-
-axiom H3 : (o = ve1)
-
-axiom H4 : (result = x)
-
-axiom H5 : (x1 = o)
-
-axiom H6 : (x1 = x2)
-
-axiom H7 : (ve2 = ve1)
-
-axiom H8 : (x3 = x1)
-
-axiom H9 : (ve3 = ve1)
 
  (* File "port.ads", line 95, characters 0-0 *)
 goal WP_parameter_def : true

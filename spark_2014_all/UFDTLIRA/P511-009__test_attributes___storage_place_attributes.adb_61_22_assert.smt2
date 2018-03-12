@@ -61,7 +61,7 @@
 (define-fun r3__ref___projection ((a r3__ref)) us_rep (r3__content a))
 (declare-const x us_rep)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
-(define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool) (temp___skip_constant_13 Bool) (temp___do_toplevel_14 Bool)) Bool (=> (or (= temp___is_init_12 true) (<= (- 2147483648) 2147483647)) (in_range temp___expr_15)))
+(define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool) (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool) (temp___do_typ_inv_17 Bool)) Bool (=> (or (= temp___is_init_14 true) (<= (- 2147483648) 2147483647)) (in_range temp___expr_18)))
 (assert (not (<= 0 storage_place_attributes__r3__e1__first__bit)))
 (check-sat)
 (exit)

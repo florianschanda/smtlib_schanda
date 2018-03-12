@@ -287,12 +287,6 @@ function vector__ref___projection(a: vector__ref) : us_rep =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq5 : bool, bool -> bool
-
-axiom bool_eq_def4 :
-  (forall x:bool. forall y:bool [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -304,6 +298,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq5 : bool, bool -> bool
+
+axiom bool_eq_def4 :
+  (forall x:bool. forall y:bool [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
 
 predicate in_range3(x: int) = ((x = 0) or (x = 1))
 
@@ -453,27 +453,12 @@ axiom first__def_axiom : (first = fst)
 
 axiom last__def_axiom1 : (last1 = lst)
 
-logic container__split_fields : us_main_type
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-axiom H : dynamic_property(0, last, to_rep(container__split_discrs))
-
-axiom H1 : in_range2(new_item)
-
-axiom H2 : in_range1(count)
-
-axiom H3 : ((((of_int(0) = true) ->
-  (o = to_rep(container__split_discrs))) and ((not (of_int(0) = true)) ->
-  (o = last))) and (dynamic_property(0, last, o) and (((of_int(0) = true) ->
-  (o = to_rep(container__split_discrs))) and ((not (of_int(0) = true)) ->
-  (o = last)))))
-
-axiom H4 : (o1 = (o - count))
-
  (* File "a-cofove.ads", line 510, characters 0-0 *)
-goal WP_parameter_def : in_range(o1)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. (dynamic_property(0, last,
+  to_rep(container__split_discrs)) -> (in_range2(new_item) ->
+  (in_range1(count) -> ((((((of_int(0) = true) and
+  (o = to_rep(container__split_discrs))) or ((not (of_int(0) = true)) and
+  (o = last))) and (dynamic_property(0, last, o) and (((of_int(0) = true) and
+  (o = to_rep(container__split_discrs))) or ((not (of_int(0) = true)) and
+  (o = last))))) and (o1 = (o - count))) -> in_range(o1))))))

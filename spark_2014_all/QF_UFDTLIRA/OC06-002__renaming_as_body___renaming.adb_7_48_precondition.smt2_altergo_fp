@@ -115,11 +115,5 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : bool
-
-axiom H : in_range(x)
-
-axiom H1 : (not (x = 0))
-
  (* File "renaming.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : (not (x = 0))
+goal WP_parameter_def : (in_range(x) -> ((not (x = 0)) -> (not (x = 0))))

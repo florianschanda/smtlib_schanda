@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -375,24 +375,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,value) farray, int, int, (int,value) farray, int,
-  int -> (int,value) farray
-
-axiom concat_def :
-  (forall a:(int,value) farray. forall b:(int,value) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : value, int -> (int,value) farray
-
-axiom singleton_def :
-  (forall v:value.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq6 : (int,value) farray, int, int, (int,value) farray, int,
   int -> bool
 
@@ -403,17 +385,17 @@ axiom bool_eq_def5 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_151:int. ((((a__first <= temp___idx_151) and
-  (temp___idx_151 <= a__last)) and
-  (to_rep2((a[temp___idx_151])) = to_rep2((b[((b__first - a__first) + temp___idx_151)])))) or
-  (not ((a__first <= temp___idx_151) and (temp___idx_151 <= a__last)))))) ->
+  (forall temp___idx_173:int. ((((a__first <= temp___idx_173) and
+  (temp___idx_173 <= a__last)) and
+  (to_rep2((a[temp___idx_173])) = to_rep2((b[((b__first - a__first) + temp___idx_173)])))) or
+  (not ((a__first <= temp___idx_173) and (temp___idx_173 <= a__last)))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_151:int. (((a__first <= temp___idx_151) and
-  (temp___idx_151 <= a__last)) ->
-  (to_rep2((a[temp___idx_151])) = to_rep2((b[((b__first - a__first) + temp___idx_151)]))))))) ->
+  (forall temp___idx_173:int. (((a__first <= temp___idx_173) and
+  (temp___idx_173 <= a__last)) ->
+  (to_rep2((a[temp___idx_173])) = to_rep2((b[((b__first - a__first) + temp___idx_173)]))))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -423,37 +405,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_151:int. (((a__first <= temp___idx_151) and
-  (temp___idx_151 <= a__last)) ->
-  (to_rep2((a[temp___idx_151])) = to_rep2((b[((b__first - a__first) + temp___idx_151)])))))))))
-
-logic compare : (int,value) farray, int, int, (int,value) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,value) farray. forall b:(int,value) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq6(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,value) farray. forall b:(int,value) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq6(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep2((a[(i + 1)])) <  to_rep2((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,value) farray. forall b:(int,value) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq6(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep2((b[(i + 1)])) <  to_rep2((a[(j + 1)]))))))))))))
+  (forall temp___idx_173:int. (((a__first <= temp___idx_173) and
+  (temp___idx_173 <= a__last)) ->
+  (to_rep2((a[temp___idx_173])) = to_rep2((b[((b__first - a__first) + temp___idx_173)])))))))))
 
 type t
 
@@ -876,260 +830,19 @@ type s62b__ref = { s62b__content : us_t2
 
 function s62b__ref___projection(a: s62b__ref) : us_t2 = (a).s62b__content
 
-logic a__split_fields : (int,value) farray
-
-logic a__split_fields1 : t1
-
-logic pivot_index : int
-
-logic right : int
-
-logic left : int
-
-logic pivot_value : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : value
-
-logic o6 : int
-
-logic temp___978 : int
-
-logic temp___977 : int
-
-logic temp___975 : natural
-
-logic temp___9751 : (int,value) farray
-
-logic temp___9752 : t1
-
-logic o7 : int
-
-logic o8 : value
-
-logic o9 : int
-
-logic temp___964 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : value
-
-logic o13 : int
-
-logic o14 : bool
-
-logic o15 : int
-
-logic o16 : value
-
-logic o17 : int
-
-logic temp___967 : int
-
-logic o18 : int
-
-logic o19 : int
-
-logic o20 : value
-
-logic o21 : int
-
-logic o22 : bool
-
-logic simple_unc_arrays__swap_cells__a__compl : (int,value) farray
-
-logic simple_unc_arrays__swap_cells__a__compl1 : t2
-
-logic o23 : integer
-
-logic o24 : integer
-
-logic o25 : int
-
-logic o26 : int
-
-logic o27 : int
-
-logic o28 : int
-
-logic o29 : int
-
-logic result : int
-
-logic pivot_index1 : int
-
-logic result1 : int
-
-logic pivot_value1 : int
-
-logic result2 : int
-
-logic left1 : int
-
-logic result3 : int
-
-logic right1 : int
-
-logic a__split_fields2 : (int,value) farray
-
-logic a__split_fields3 : t1
-
-logic right2 : int
-
-logic left2 : int
-
-logic rho : (int,value) farray
-
-logic result4 : bool
-
-logic left3 : int
-
-logic result5 : int
-
-logic left4 : int
-
-logic result6 : bool
-
-logic left5 : int
-
-logic left6 : int
-
-logic left7 : int
-
-logic left8 : int
-
-logic result7 : bool
-
-logic right3 : int
-
-logic result8 : int
-
-logic right4 : int
-
-logic result9 : bool
-
-logic right5 : int
-
-logic right6 : int
-
-logic right7 : int
-
-logic right8 : int
-
-logic simple_unc_arrays__swap_cells__a : (int,value) farray
-
-logic result10 : (int,value) farray
-
-logic result11 : t1
-
-logic a__split_fields4 : (int,value) farray
-
-logic a__split_fields5 : t1
-
-logic result12 : int
-
-logic left9 : int
-
-logic a__split_fields6 : (int,value) farray
-
-logic a__split_fields7 : t1
-
-logic right9 : int
-
-logic left10 : int
-
-logic a__split_fields8 : (int,value) farray
-
-logic a__split_fields9 : t1
-
-logic right10 : int
-
-logic left11 : int
-
-logic rho1 : (int,value) farray
-
-logic a__split_fields10 : (int,value) farray
-
-logic a__split_fields11 : t1
-
-logic right11 : int
-
-logic left12 : int
-
-logic a__split_fields12 : (int,value) farray
-
-logic a__split_fields13 : t1
-
-logic right12 : int
-
-logic left13 : int
-
-logic a__split_fields14 : (int,value) farray
-
-logic a__split_fields15 : t1
-
-logic right13 : int
-
-logic left14 : int
-
-logic a__split_fields16 : (int,value) farray
-
-logic a__split_fields17 : t1
-
-logic right14 : int
-
-logic left15 : int
-
-logic a__split_fields18 : (int,value) farray
-
-logic a__split_fields19 : t1
-
-logic a__split_fields20 : (int,value) farray
-
-logic a__split_fields21 : t1
-
-logic a__split_fields22 : (int,value) farray
-
-logic a__split_fields23 : t1
-
-axiom H : in_range2(first4)
-
-axiom H1 : in_range2(last4)
-
-axiom H2 : (dynamic_property2(1, to_rep(a__split_discrs),
-  to_rep1(first2(a__split_fields1)), to_rep1(last2(a__split_fields1))) and
-  ((to_rep1(first2(a__split_fields1)) = 1) and
-  (to_rep1(last2(a__split_fields1)) = to_rep(a__split_discrs))))
-
-axiom H3 : ((last4 = 0) or (first4 <= last4))
-
-axiom H4 : ((0 <= 2147483647) -> in_range2(pivot_index))
-
-axiom H5 : ((0 <= 2147483647) -> in_range2(right))
-
-axiom H6 : ((0 <= 2147483647) -> in_range2(left))
-
-axiom H7 : (((- 2147483648) <= 2147483647) -> in_range4(pivot_value))
-
-axiom H8 : (first4 <  last4)
-
-axiom H9 : ((o = (first4 + last4)) and in_range1((first4 + last4)))
-
-axiom H10 : (o1 = (o + 1))
-
-axiom H11 : ((o2 = o1) and in_range1(o1))
-
  (* File "simple_unc_arrays.ads", line 126, characters 0-0 *)
-goal WP_parameter_def : (not (2 = 0))
+goal WP_parameter_def :
+  (forall a__split_fields:t1. forall pivot_index:int. forall right:int.
+  forall left:int. forall pivot_value:int. forall o:int. forall o1:int.
+  forall o2:int. (in_range2(first4) -> (in_range2(last4) ->
+  ((dynamic_property2(1, to_rep(a__split_discrs),
+  to_rep1(first2(a__split_fields)), to_rep1(last2(a__split_fields))) and
+  ((to_rep1(first2(a__split_fields)) = 1) and
+  (to_rep1(last2(a__split_fields)) = to_rep(a__split_discrs)))) ->
+  (((last4 = 0) or (first4 <= last4)) -> (((0 <= 2147483647) ->
+  in_range2(pivot_index)) -> (((0 <= 2147483647) -> in_range2(right)) ->
+  (((0 <= 2147483647) -> in_range2(left)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range4(pivot_value)) ->
+  ((first4 <  last4) -> (((((o = (first4 + last4)) and
+  in_range1((first4 + last4))) and (o1 = (o + 1))) and ((o2 = o1) and
+  in_range1(o1))) -> (not (2 = 0)))))))))))))

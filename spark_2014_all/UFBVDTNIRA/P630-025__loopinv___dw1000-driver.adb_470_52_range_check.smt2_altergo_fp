@@ -1071,7 +1071,15 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type bits_3
 
-predicate in_range2(x: t) = (ule(of_int(0), x) and ule(x, of_int(7)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 7)
+
+predicate in_range2(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 7))
 
@@ -1106,9 +1114,13 @@ axiom inversion_axiom :
 
 axiom range_axiom : (forall x:bits_3 [to_rep(x)]. in_range2(to_rep(x)))
 
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 8)
+
 axiom coerce_axiom :
-  (forall x:t [to_rep(of_rep(x))]. (in_range2(urem(x, of_int(8))) ->
-  (to_rep(of_rep(x)) = urem(x, of_int(8)))))
+  (forall x:t [to_rep(of_rep(x))]. (in_range2(urem(x, rliteral2)) ->
+  (to_rep(of_rep(x)) = urem(x, rliteral2))))
 
 function to_int2(x: bits_3) : int = tqtint(to_rep(x))
 
@@ -1117,7 +1129,11 @@ axiom range_int_axiom :
 
 type bits_7
 
-predicate in_range3(x: t) = (ule(of_int(0), x) and ule(x, of_int(127)))
+logic rliteral3 : t
+
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 127)
+
+predicate in_range3(x: t) = (ule(rliteral, x) and ule(x, rliteral3))
 
 predicate in_range_int1(x: int) = ((0 <= x) and (x <= 127))
 
@@ -1152,9 +1168,13 @@ axiom inversion_axiom1 :
 
 axiom range_axiom1 : (forall x:bits_7 [to_rep1(x)]. in_range3(to_rep1(x)))
 
+logic rliteral4 : t
+
+axiom rliteral_axiom4 : (tqtint(rliteral4) = 128)
+
 axiom coerce_axiom1 :
-  (forall x:t [to_rep1(of_rep1(x))]. (in_range3(urem(x, of_int(128))) ->
-  (to_rep1(of_rep1(x)) = urem(x, of_int(128)))))
+  (forall x:t [to_rep1(of_rep1(x))]. (in_range3(urem(x, rliteral4)) ->
+  (to_rep1(of_rep1(x)) = urem(x, rliteral4))))
 
 function to_int3(x: bits_7) : int = tqtint(to_rep1(x))
 
@@ -1163,7 +1183,15 @@ axiom range_int_axiom1 :
 
 type bits_10
 
-predicate in_range4(x: t1) = (ule1(of_int1(0), x) and ule1(x, of_int1(1023)))
+logic rliteral5 : t1
+
+axiom rliteral_axiom5 : (tqtint1(rliteral5) = 0)
+
+logic rliteral6 : t1
+
+axiom rliteral_axiom6 : (tqtint1(rliteral6) = 1023)
+
+predicate in_range4(x: t1) = (ule1(rliteral5, x) and ule1(x, rliteral6))
 
 predicate in_range_int2(x: int) = ((0 <= x) and (x <= 1023))
 
@@ -1198,9 +1226,13 @@ axiom inversion_axiom2 :
 
 axiom range_axiom2 : (forall x:bits_10 [to_rep2(x)]. in_range4(to_rep2(x)))
 
+logic rliteral7 : t1
+
+axiom rliteral_axiom7 : (tqtint1(rliteral7) = 1024)
+
 axiom coerce_axiom2 :
-  (forall x:t1 [to_rep2(of_rep2(x))]. (in_range4(urem1(x, of_int1(1024))) ->
-  (to_rep2(of_rep2(x)) = urem1(x, of_int1(1024)))))
+  (forall x:t1 [to_rep2(of_rep2(x))]. (in_range4(urem1(x, rliteral7)) ->
+  (to_rep2(of_rep2(x)) = urem1(x, rliteral7))))
 
 function to_int4(x: bits_10) : int = tqtint1(to_rep2(x))
 
@@ -1209,7 +1241,11 @@ axiom range_int_axiom2 :
 
 type bits_1
 
-predicate in_range5(x: t) = (ule(of_int(0), x) and ule(x, of_int(1)))
+logic rliteral8 : t
+
+axiom rliteral_axiom8 : (tqtint(rliteral8) = 1)
+
+predicate in_range5(x: t) = (ule(rliteral, x) and ule(x, rliteral8))
 
 predicate in_range_int3(x: int) = ((0 <= x) and (x <= 1))
 
@@ -1244,9 +1280,13 @@ axiom inversion_axiom3 :
 
 axiom range_axiom3 : (forall x:bits_1 [to_rep3(x)]. in_range5(to_rep3(x)))
 
+logic rliteral9 : t
+
+axiom rliteral_axiom9 : (tqtint(rliteral9) = 2)
+
 axiom coerce_axiom3 :
-  (forall x:t [to_rep3(of_rep3(x))]. (in_range5(urem(x, of_int(2))) ->
-  (to_rep3(of_rep3(x)) = urem(x, of_int(2)))))
+  (forall x:t [to_rep3(of_rep3(x))]. (in_range5(urem(x, rliteral9)) ->
+  (to_rep3(of_rep3(x)) = urem(x, rliteral9))))
 
 function to_int5(x: bits_1) : int = tqtint(to_rep3(x))
 
@@ -1255,7 +1295,11 @@ axiom range_int_axiom3 :
 
 type bits_2
 
-predicate in_range6(x: t) = (ule(of_int(0), x) and ule(x, of_int(3)))
+logic rliteral10 : t
+
+axiom rliteral_axiom10 : (tqtint(rliteral10) = 3)
+
+predicate in_range6(x: t) = (ule(rliteral, x) and ule(x, rliteral10))
 
 predicate in_range_int4(x: int) = ((0 <= x) and (x <= 3))
 
@@ -1290,9 +1334,13 @@ axiom inversion_axiom4 :
 
 axiom range_axiom4 : (forall x:bits_2 [to_rep4(x)]. in_range6(to_rep4(x)))
 
+logic rliteral11 : t
+
+axiom rliteral_axiom11 : (tqtint(rliteral11) = 4)
+
 axiom coerce_axiom4 :
-  (forall x:t [to_rep4(of_rep4(x))]. (in_range6(urem(x, of_int(4))) ->
-  (to_rep4(of_rep4(x)) = urem(x, of_int(4)))))
+  (forall x:t [to_rep4(of_rep4(x))]. (in_range6(urem(x, rliteral11)) ->
+  (to_rep4(of_rep4(x)) = urem(x, rliteral11))))
 
 function to_int6(x: bits_2) : int = tqtint(to_rep4(x))
 
@@ -1659,290 +1707,53 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic tx_fctrl_reg__split_fields : bits_7
-
-logic tx_fctrl_reg__split_fields1 : bits_3
-
-logic tx_fctrl_reg__split_fields2 : bits_3
-
-logic tx_fctrl_reg__split_fields3 : bits_2
-
-logic tx_fctrl_reg__split_fields4 : bits_1
-
-logic tx_fctrl_reg__split_fields5 : bits_2
-
-logic tx_fctrl_reg__split_fields6 : bits_2
-
-logic tx_fctrl_reg__split_fields7 : bits_2
-
-logic tx_fctrl_reg__split_fields8 : bits_10
-
-logic tx_fctrl_reg__split_fields9 : bits_8
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : t
-
-logic o3 : bits_7
-
-logic o4 : bits_7
-
-logic o5 : bits_3
-
-logic o6 : bits_3
-
-logic o7 : bits_2
-
-logic o8 : bits_1
-
-logic o9 : bits_2
-
-logic o10 : bits_2
-
-logic o11 : bits_2
-
-logic o12 : bits_10
-
-logic o13 : bits_8
-
-logic temp___3261 : bits_7
-
-logic temp___32611 : bits_3
-
-logic temp___32612 : bits_3
-
-logic temp___32613 : bits_2
-
-logic temp___32614 : bits_1
-
-logic temp___32615 : bits_2
-
-logic temp___32616 : bits_2
-
-logic temp___32617 : bits_2
-
-logic temp___32618 : bits_10
-
-logic temp___32619 : bits_8
-
-logic o14 : int
-
-logic o15 : t
-
-logic o16 : bits_3
-
-logic o17 : bits_7
-
-logic o18 : bits_3
-
-logic o19 : bits_3
-
-logic o20 : bits_2
-
-logic o21 : bits_1
-
-logic o22 : bits_2
-
-logic o23 : bits_2
-
-logic o24 : bits_2
-
-logic o25 : bits_10
-
-logic o26 : bits_8
-
-logic temp___3263 : bits_7
-
-logic temp___32631 : bits_3
-
-logic temp___32632 : bits_3
-
-logic temp___32633 : bits_2
-
-logic temp___32634 : bits_1
-
-logic temp___32635 : bits_2
-
-logic temp___32636 : bits_2
-
-logic temp___32637 : bits_2
-
-logic temp___32638 : bits_10
-
-logic temp___32639 : bits_8
-
-logic o27 : int
-
-logic dw1000__registers__tx_fctrl__read__reg__fields : bits_7
-
-logic dw1000__registers__tx_fctrl__read__reg__fields1 : bits_3
-
-logic dw1000__registers__tx_fctrl__read__reg__fields2 : bits_3
-
-logic dw1000__registers__tx_fctrl__read__reg__fields3 : bits_2
-
-logic dw1000__registers__tx_fctrl__read__reg__fields4 : bits_1
-
-logic dw1000__registers__tx_fctrl__read__reg__fields5 : bits_2
-
-logic dw1000__registers__tx_fctrl__read__reg__fields6 : bits_2
-
-logic dw1000__registers__tx_fctrl__read__reg__fields7 : bits_2
-
-logic dw1000__registers__tx_fctrl__read__reg__fields8 : bits_10
-
-logic dw1000__registers__tx_fctrl__read__reg__fields9 : bits_8
-
-logic result : bits_7
-
-logic result1 : bits_3
-
-logic result2 : bits_3
-
-logic result3 : bits_2
-
-logic result4 : bits_1
-
-logic result5 : bits_2
-
-logic result6 : bits_2
-
-logic result7 : bits_2
-
-logic result8 : bits_10
-
-logic result9 : bits_8
-
-logic tx_fctrl_reg__split_fields10 : bits_7
-
-logic tx_fctrl_reg__split_fields11 : bits_3
-
-logic tx_fctrl_reg__split_fields12 : bits_3
-
-logic tx_fctrl_reg__split_fields13 : bits_2
-
-logic tx_fctrl_reg__split_fields14 : bits_1
-
-logic tx_fctrl_reg__split_fields15 : bits_2
-
-logic tx_fctrl_reg__split_fields16 : bits_2
-
-logic tx_fctrl_reg__split_fields17 : bits_2
-
-logic tx_fctrl_reg__split_fields18 : bits_10
-
-logic tx_fctrl_reg__split_fields19 : bits_8
-
-logic result10 : bits_7
-
-logic result11 : bits_3
-
-logic result12 : bits_3
-
-logic result13 : bits_2
-
-logic result14 : bits_1
-
-logic result15 : bits_2
-
-logic result16 : bits_2
-
-logic result17 : bits_2
-
-logic result18 : bits_10
-
-logic result19 : bits_8
-
-logic tx_fctrl_reg__split_fields20 : bits_7
-
-logic tx_fctrl_reg__split_fields21 : bits_3
-
-logic tx_fctrl_reg__split_fields22 : bits_3
-
-logic tx_fctrl_reg__split_fields23 : bits_2
-
-logic tx_fctrl_reg__split_fields24 : bits_1
-
-logic tx_fctrl_reg__split_fields25 : bits_2
-
-logic tx_fctrl_reg__split_fields26 : bits_2
-
-logic tx_fctrl_reg__split_fields27 : bits_2
-
-logic tx_fctrl_reg__split_fields28 : bits_10
-
-logic tx_fctrl_reg__split_fields29 : bits_8
-
-logic result20 : bits_7
-
-logic result21 : bits_3
-
-logic result22 : bits_3
-
-logic result23 : bits_2
-
-logic result24 : bits_1
-
-logic result25 : bits_2
-
-logic result26 : bits_2
-
-logic result27 : bits_2
-
-logic result28 : bits_10
-
-logic result29 : bits_8
-
-logic tx_fctrl_reg__split_fields30 : bits_7
-
-logic tx_fctrl_reg__split_fields31 : bits_3
-
-logic tx_fctrl_reg__split_fields32 : bits_3
-
-logic tx_fctrl_reg__split_fields33 : bits_2
-
-logic tx_fctrl_reg__split_fields34 : bits_1
-
-logic tx_fctrl_reg__split_fields35 : bits_2
-
-logic tx_fctrl_reg__split_fields36 : bits_2
-
-logic tx_fctrl_reg__split_fields37 : bits_2
-
-logic tx_fctrl_reg__split_fields38 : bits_10
-
-logic tx_fctrl_reg__split_fields39 : bits_8
-
-axiom H : in_range1(length)
-
-axiom H1 : in_range1(offset)
-
-axiom H2 : ((length <  1024) and ((offset <  1024) and
-  ((length + offset) <= 1024)))
-
-axiom H3 : (result = tx_fctrl_reg__split_fields)
-
-axiom H4 : (result1 = tx_fctrl_reg__split_fields1)
-
-axiom H5 : (result2 = tx_fctrl_reg__split_fields2)
-
-axiom H6 : (result3 = tx_fctrl_reg__split_fields3)
-
-axiom H7 : (result4 = tx_fctrl_reg__split_fields4)
-
-axiom H8 : (result5 = tx_fctrl_reg__split_fields5)
-
-axiom H9 : (result6 = tx_fctrl_reg__split_fields6)
-
-axiom H10 : (result7 = tx_fctrl_reg__split_fields7)
-
-axiom H11 : (result8 = tx_fctrl_reg__split_fields8)
-
-axiom H12 : (result9 = tx_fctrl_reg__split_fields9)
-
-axiom H13 :
+ (* File "dw1000-driver.adb", line 451, characters 0-0 *)
+goal WP_parameter_def :
+  (forall tx_fctrl_reg__split_fields:bits_7.
+  forall tx_fctrl_reg__split_fields1:bits_3.
+  forall tx_fctrl_reg__split_fields2:bits_3.
+  forall tx_fctrl_reg__split_fields3:bits_2.
+  forall tx_fctrl_reg__split_fields4:bits_1.
+  forall tx_fctrl_reg__split_fields5:bits_2.
+  forall tx_fctrl_reg__split_fields6:bits_2.
+  forall tx_fctrl_reg__split_fields7:bits_2.
+  forall tx_fctrl_reg__split_fields8:bits_10.
+  forall tx_fctrl_reg__split_fields9:bits_8.
+  forall dw1000__registers__tx_fctrl__read__reg__fields:bits_7.
+  forall dw1000__registers__tx_fctrl__read__reg__fields1:bits_3.
+  forall dw1000__registers__tx_fctrl__read__reg__fields2:bits_3.
+  forall dw1000__registers__tx_fctrl__read__reg__fields3:bits_2.
+  forall dw1000__registers__tx_fctrl__read__reg__fields4:bits_1.
+  forall dw1000__registers__tx_fctrl__read__reg__fields5:bits_2.
+  forall dw1000__registers__tx_fctrl__read__reg__fields6:bits_2.
+  forall dw1000__registers__tx_fctrl__read__reg__fields7:bits_2.
+  forall dw1000__registers__tx_fctrl__read__reg__fields8:bits_10.
+  forall dw1000__registers__tx_fctrl__read__reg__fields9:bits_8.
+  forall result:bits_7. forall result1:bits_3. forall result2:bits_3.
+  forall result3:bits_2. forall result4:bits_1. forall result5:bits_2.
+  forall result6:bits_2. forall result7:bits_2. forall result8:bits_10.
+  forall result9:bits_8. forall tx_fctrl_reg__split_fields10:bits_7.
+  forall tx_fctrl_reg__split_fields11:bits_3.
+  forall tx_fctrl_reg__split_fields12:bits_3.
+  forall tx_fctrl_reg__split_fields13:bits_2.
+  forall tx_fctrl_reg__split_fields14:bits_1.
+  forall tx_fctrl_reg__split_fields15:bits_2.
+  forall tx_fctrl_reg__split_fields16:bits_2.
+  forall tx_fctrl_reg__split_fields17:bits_2.
+  forall tx_fctrl_reg__split_fields18:bits_10.
+  forall tx_fctrl_reg__split_fields19:bits_8. (in_range1(length) ->
+  (in_range1(offset) -> (((length <  1024) and ((offset <  1024) and
+  ((length + offset) <= 1024))) ->
+  ((((result = tx_fctrl_reg__split_fields) and
+  ((result1 = tx_fctrl_reg__split_fields1) and
+  ((result2 = tx_fctrl_reg__split_fields2) and
+  ((result3 = tx_fctrl_reg__split_fields3) and
+  ((result4 = tx_fctrl_reg__split_fields4) and
+  ((result5 = tx_fctrl_reg__split_fields5) and
+  ((result6 = tx_fctrl_reg__split_fields6) and
+  ((result7 = tx_fctrl_reg__split_fields7) and
+  ((result8 = tx_fctrl_reg__split_fields8) and
+  (result9 = tx_fctrl_reg__split_fields9)))))))))) and
   ((tx_fctrl_reg__split_fields10 = dw1000__registers__tx_fctrl__read__reg__fields) and
   ((tx_fctrl_reg__split_fields11 = dw1000__registers__tx_fctrl__read__reg__fields1) and
   ((tx_fctrl_reg__split_fields12 = dw1000__registers__tx_fctrl__read__reg__fields2) and
@@ -1952,7 +1763,5 @@ axiom H13 :
   ((tx_fctrl_reg__split_fields16 = dw1000__registers__tx_fctrl__read__reg__fields6) and
   ((tx_fctrl_reg__split_fields17 = dw1000__registers__tx_fctrl__read__reg__fields7) and
   ((tx_fctrl_reg__split_fields18 = dw1000__registers__tx_fctrl__read__reg__fields8) and
-  (tx_fctrl_reg__split_fields19 = dw1000__registers__tx_fctrl__read__reg__fields9))))))))))
-
- (* File "dw1000-driver.adb", line 451, characters 0-0 *)
-goal WP_parameter_def : in_range_int1(mod(length, 128))
+  (tx_fctrl_reg__split_fields19 = dw1000__registers__tx_fctrl__read__reg__fields9))))))))))) ->
+  in_range_int1(mod(length, 128)))))))

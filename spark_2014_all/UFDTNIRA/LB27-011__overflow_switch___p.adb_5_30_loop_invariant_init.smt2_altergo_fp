@@ -90,12 +90,6 @@ axiom Power_monotonic :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -107,6 +101,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -205,47 +205,10 @@ function t1b__ref___projection(a: t1b__ref) : t1b = (a).t1b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic result__ : int
-
-logic j : int
-
-logic o : int
-
-logic result : int
-
-logic result__1 : int
-
-logic result1 : int
-
-logic j1 : int
-
-logic result__2 : int
-
-logic j2 : int
-
-logic result2 : int
-
-logic result__3 : int
-
-logic result3 : int
-
-logic j3 : int
-
-axiom H : in_range1(n)
-
-axiom H1 : (result = result__)
-
-axiom H2 : (result__1 = n)
-
-axiom H3 : in_range1(result__1)
-
-axiom H4 : (result1 = j)
-
-axiom H5 : (j1 = 1)
-
-axiom H6 : (1 <= j1)
-
-axiom H7 : (j1 <= 5)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (result__1 = power(n, j1))
+goal WP_parameter_def :
+  (forall result__:int. forall j:int. forall result:int.
+  forall result__1:int. forall result1:int. forall j1:int. (in_range1(n) ->
+  (((result = result__) and (result__1 = n)) -> (in_range1(result__1) ->
+  (((result1 = j) and (j1 = 1)) -> (((1 <= j1) and (j1 <= 5)) ->
+  (result__1 = power(n, j1))))))))

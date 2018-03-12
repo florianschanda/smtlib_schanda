@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -291,94 +291,10 @@ logic p : us_rep
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic i : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : bool
-
-logic o5 : bool
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : int
-
-logic i1 : int
-
-logic o13 : int
-
-logic o14 : bool
-
-logic o15 : int
-
-logic o16 : int
-
-logic o17 : int
-
-logic o18 : int
-
-logic o19 : int
-
-logic i2 : int
-
-logic o20 : int
-
-logic o21 : bool
-
-logic o22 : int
-
-logic o23 : int
-
-logic o24 : int
-
-logic o25 : int
-
-logic o26 : int
-
-logic o27 : int
-
-logic o28 : int
-
-logic result : bool
-
-logic result1 : bool
-
-logic result2 : bool
-
-logic result3 : bool
-
-logic result4 : bool
-
-logic result5 : bool
-
-axiom H : (length(q) <= 100)
-
-axiom H1 : ((o27 = length(q)) and (in_range3(o27) and
-  ((0 + o27) <= 2147483647)))
-
-axiom H2 : ((o24 = length(v)) and (in_range3(o24) and
-  ((0 + o24) <= 2147483647)))
-
-axiom H3 : ((o25 = length(p)) and (in_range3(o25) and
-  ((0 + o25) <= 2147483647)))
-
-axiom H4 : (o26 = (o25 - o24))
-
  (* File "tree_model.ads", line 40, characters 0-0 *)
-goal WP_parameter_def : in_range1(o26)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. forall o2:int. forall o3:int.
+  ((length(q) <= 100) -> (((o3 = length(q)) and (in_range3(o3) and
+  ((0 + o3) <= 2147483647))) -> ((((o = length(v)) and (in_range3(o) and
+  ((0 + o) <= 2147483647))) and (((o1 = length(p)) and (in_range3(o1) and
+  ((0 + o1) <= 2147483647))) and (o2 = (o1 - o)))) -> in_range1(o2)))))

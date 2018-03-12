@@ -119,35 +119,9 @@ axiom b__def_axiom : (b = 0)
 
 axiom a__def_axiom : (a = 0)
 
-logic x : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-axiom H : in_range(b)
-
-axiom H1 : (0 = b)
-
-axiom H2 : in_range(a)
-
-axiom H3 : (0 = a)
-
-axiom H4 : in_range(b)
-
-axiom H5 : (0 = b)
-
-axiom H6 : in_range(a)
-
-axiom H7 : (0 = a)
-
-axiom H8 : in_range(x)
-
-axiom H9 : ((o = (x + 0)) and in_range((x + 0)))
-
-axiom H10 : (o1 = (o + 0))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(o1)
+goal WP_parameter_def :
+  (forall x:int. forall o:int. forall o1:int. (in_range(b) -> ((0 = b) ->
+  (in_range(a) -> ((0 = a) -> (in_range(b) -> ((0 = b) -> (in_range(a) ->
+  ((0 = a) -> (in_range(x) -> ((((o = (x + 0)) and in_range((x + 0))) and
+  (o1 = (o + 0))) -> in_range(o1))))))))))))

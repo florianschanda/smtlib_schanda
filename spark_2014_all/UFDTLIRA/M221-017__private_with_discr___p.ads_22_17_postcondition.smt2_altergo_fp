@@ -274,37 +274,17 @@ logic l1 : us_main_type
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic p__my_capacity__result : int
-
-logic result : int
-
-logic p__my_capacity__result1 : int
-
-logic p__my_capacity__result2 : int
-
-logic p__my_capacity__result3 : int
-
-logic p__my_capacity__result4 : int
-
-logic p__my_capacity__result5 : int
-
-logic result1 : int
-
-axiom H : (10 = to_rep(l))
-
-axiom H1 : (p__my_capacity__result1 = p__my_capacity__result2)
-
-axiom H2 : (p__my_capacity__result3 = p__my_capacity__result1)
-
-axiom H3 : (result = p__my_capacity__result)
-
-axiom H4 : (p__my_capacity__result1 = to_rep(l))
-
-axiom H5 : (p__my_capacity__result4 = p__my_capacity__result2)
-
-axiom H6 : (p__my_capacity__result5 = p__my_capacity__result3)
-
-axiom H7 : (result1 = p__my_capacity__result4)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (p__my_capacity__result4 = 10)
+goal WP_parameter_def :
+  (forall p__my_capacity__result:int. forall result:int.
+  forall p__my_capacity__result1:int. forall p__my_capacity__result2:int.
+  forall p__my_capacity__result3:int. forall p__my_capacity__result4:int.
+  forall p__my_capacity__result5:int.
+  (forall result1:int. (((10 = to_rep(l)) and
+  (((((p__my_capacity__result1 = p__my_capacity__result2) and
+  (p__my_capacity__result3 = p__my_capacity__result1)) and
+  ((result = p__my_capacity__result) and
+  (p__my_capacity__result1 = to_rep(l)))) and
+  ((p__my_capacity__result4 = p__my_capacity__result2) and
+  (p__my_capacity__result5 = p__my_capacity__result3))) and
+  (result1 = p__my_capacity__result4))) -> (p__my_capacity__result4 = 10))))

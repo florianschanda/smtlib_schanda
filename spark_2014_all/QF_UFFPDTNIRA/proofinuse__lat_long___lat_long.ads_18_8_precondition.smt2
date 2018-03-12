@@ -47,7 +47,7 @@
 (declare-const dummy float_with_approx)
 (declare-datatypes () ((float_with_approx__ref (mk_float_with_approx__ref (float_with_approx__content float_with_approx)))))
 (define-fun float_with_approx__ref___projection ((a float_with_approx__ref)) float_with_approx (float_with_approx__content a))
-(define-fun dynamic_invariant ((temp___expr_141 Float32) (temp___is_init_138 Bool) (temp___skip_constant_139 Bool) (temp___do_toplevel_140 Bool)) Bool (=> (or (= temp___is_init_138 true) (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))) (fp.isFinite32 temp___expr_141)))
+(define-fun dynamic_invariant ((temp___expr_165 Float32) (temp___is_init_161 Bool) (temp___skip_constant_162 Bool) (temp___do_toplevel_163 Bool) (temp___do_typ_inv_164 Bool)) Bool (=> (or (= temp___is_init_161 true) (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))) (fp.isFinite32 temp___expr_165)))
 (declare-const x Float32)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (assert (fp.isFinite32 x))

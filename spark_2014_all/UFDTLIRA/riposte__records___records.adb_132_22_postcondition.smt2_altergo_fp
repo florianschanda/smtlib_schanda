@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -388,66 +388,31 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 axiom null_pair__def_axiom : ((null_pair = of_rep(0)) and
   (null_pair1 = of_rep(0)))
 
-logic dst__split_fields : bool
-
-logic dst__split_fields1 : unsigned_byte
-
-logic dst__split_fields2 : unsigned_byte
-
-logic result : bool
-
-logic result1 : unsigned_byte
-
-logic result2 : unsigned_byte
-
-logic dst__split_fields3 : bool
-
-logic dst__split_fields4 : unsigned_byte
-
-logic dst__split_fields5 : unsigned_byte
-
-logic dst__split_fields6 : bool
-
-logic dst__split_fields7 : unsigned_byte
-
-logic dst__split_fields8 : unsigned_byte
-
-logic dst__split_fields9 : bool
-
-logic dst__split_fields10 : unsigned_byte
-
-logic dst__split_fields11 : unsigned_byte
-
-axiom H : (is_valid({ us_split_fields3 = {
-  rec__records_prooffuncs__optional_pair__exists = src;
+ (* File "records.adb", line 118, characters 0-0 *)
+goal WP_parameter_def :
+  (forall dst__split_fields:bool. forall dst__split_fields1:unsigned_byte.
+  forall dst__split_fields2:unsigned_byte. forall result:bool.
+  forall result1:unsigned_byte. forall result2:unsigned_byte.
+  forall dst__split_fields3:bool. forall dst__split_fields4:unsigned_byte.
+  forall dst__split_fields5:unsigned_byte. forall dst__split_fields6:bool.
+  forall dst__split_fields7:unsigned_byte.
+  forall dst__split_fields8:unsigned_byte. forall dst__split_fields9:bool.
+  forall dst__split_fields10:unsigned_byte.
+  forall dst__split_fields11:unsigned_byte. (((is_valid({ us_split_fields3 =
+  { rec__records_prooffuncs__optional_pair__exists = src;
   rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
   rec__records_prooffuncs__pair__a = src1; rec__records_prooffuncs__pair__b =
-  src2 } } } }) = true)
-
-axiom H1 : (result = dst__split_fields)
-
-axiom H2 : (result1 = dst__split_fields1)
-
-axiom H3 : (result2 = dst__split_fields2)
-
-axiom H4 : ((dst__split_fields3 = src) and ((dst__split_fields4 = src1) and
-  (dst__split_fields5 = src2)))
-
-axiom H5 : (dst__split_fields6 = dst__split_fields3)
-
-axiom H6 : (dst__split_fields7 = dst__split_fields4)
-
-axiom H7 : (dst__split_fields8 = dst__split_fields5)
-
-axiom H8 : (dst__split_fields9 = dst__split_fields3)
-
-axiom H9 : (dst__split_fields10 = dst__split_fields4)
-
-axiom H10 : (dst__split_fields11 = dst__split_fields5)
-
- (* File "records.adb", line 118, characters 0-0 *)
-goal WP_parameter_def : (is_valid({ us_split_fields3 = {
-  rec__records_prooffuncs__optional_pair__exists = dst__split_fields6;
-  rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
-  rec__records_prooffuncs__pair__a = dst__split_fields7;
-  rec__records_prooffuncs__pair__b = dst__split_fields8 } } } }) = true)
+  src2 } } } }) = true) and ((((result = dst__split_fields) and
+  ((result1 = dst__split_fields1) and (result2 = dst__split_fields2))) and
+  ((dst__split_fields3 = src) and ((dst__split_fields4 = src1) and
+  (dst__split_fields5 = src2)))) and
+  (((dst__split_fields6 = dst__split_fields3) and
+  ((dst__split_fields7 = dst__split_fields4) and
+  (dst__split_fields8 = dst__split_fields5))) and
+  ((dst__split_fields9 = dst__split_fields3) and
+  ((dst__split_fields10 = dst__split_fields4) and
+  (dst__split_fields11 = dst__split_fields5)))))) -> (is_valid({
+  us_split_fields3 = { rec__records_prooffuncs__optional_pair__exists =
+  dst__split_fields6; rec__records_prooffuncs__optional_pair__the_pair = {
+  us_split_fields1 = { rec__records_prooffuncs__pair__a = dst__split_fields7;
+  rec__records_prooffuncs__pair__b = dst__split_fields8 } } } }) = true)))

@@ -1285,12 +1285,6 @@ axiom toBig_to_uint1 : (forall x:t. (tqtint(x) = tqtint1(toBig1(x))))
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq3 : bool, bool -> bool
-
-axiom bool_eq_def3 :
-  (forall x:bool. forall y:bool [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
-
 logic to_int3 : bool -> int
 
 axiom to_int_def3 :
@@ -1302,6 +1296,12 @@ logic of_int3 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int3(i)]. (((i = 0) -> (of_int3(i) = false)) and
   ((not (i = 0)) -> (of_int3(i) = true))))
+
+logic bool_eq3 : bool, bool -> bool
+
+axiom bool_eq_def3 :
+  (forall x:bool. forall y:bool [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1412,37 +1412,34 @@ axiom toSmall_to_uint2 :
 
 axiom toBig_to_uint2 : (forall x:t. (tqtint(x) = tqtint2(toBig2(x))))
 
+logic rliteral3 : t2
+
+axiom rliteral_axiom3 : (tqtint2(rliteral3) = 65280)
+
+logic rliteral4 : t2
+
+axiom rliteral_axiom4 : (tqtint2(rliteral4) = 256)
+
 axiom bh__post_axiom :
   (forall x86__rbx:t2 [bh(x86__rbx)].
-  (bh(x86__rbx) = toSmall2(urem2(udiv2(bw_and2(x86__rbx, of_int2(65280)),
-  of_int2(256)), of_int2(256)))))
+  (bh(x86__rbx) = toSmall2(urem2(udiv2(bw_and2(x86__rbx, rliteral3),
+  rliteral4), of_int2(256)))))
 
 logic val__ : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic rbx : t2
+logic rliteral5 : t2
 
-logic result : t2
+axiom rliteral_axiom5 : (tqtint2(rliteral5) = 18446744073709486335)
 
-logic rbx1 : t2
+logic rliteral6 : t1
 
-logic rbx2 : t2
-
-logic rbx3 : t2
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : (result = rbx)
-
-axiom H3 : (rbx1 = bw_or2(bw_and2(rbx, of_int2(18446744073709486335)),
-  toBig(mul1(toBig1(val__), of_int1(256)))))
-
-axiom H4 : (rbx1 = rbx2)
-
-axiom H5 : (rbx3 = rbx1)
+axiom rliteral_axiom6 : (tqtint1(rliteral6) = 256)
 
  (* File "x86.ads", line 10, characters 0-0 *)
-goal WP_parameter_def : (bh(rbx2) = val__)
+goal WP_parameter_def :
+  (forall rbx:t2. forall result:t2. forall rbx1:t2. forall rbx2:t2.
+  forall rbx3:t2. ((((result = rbx) and (rbx1 = bw_or2(bw_and2(rbx,
+  rliteral5), toBig(mul1(toBig1(val__), rliteral6))))) and ((rbx1 = rbx2) and
+  (rbx3 = rbx1))) -> (bh(rbx2) = val__)))

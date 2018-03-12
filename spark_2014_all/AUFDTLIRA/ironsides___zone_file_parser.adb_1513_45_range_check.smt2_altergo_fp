@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -188,24 +188,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -216,17 +198,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -236,37 +218,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 type rritemtype
 
@@ -352,11 +306,6 @@ logic blankdomainname : (int,character) farray
 logic attr__ATTRIBUTE_ADDRESS : int
 
 logic rr_type__blankdomainname__aggregate_def : int -> (int,character) farray
-
-axiom def_axiom :
-  (forall temp___136:int.
-  (forall temp___137:int.
-  ((rr_type__blankdomainname__aggregate_def(temp___136)[temp___137]) = of_rep(temp___136))))
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
@@ -527,541 +476,73 @@ logic attr__ATTRIBUTE_ADDRESS19 : int
 axiom blankdomainname__def_axiom :
   (blankdomainname = rr_type__blankdomainname__aggregate_def(32))
 
-logic newnameserver : (int,character) farray
-
-logic newemail : (int,character) farray
-
-logic success : bool
-
-logic begidx : int
-
-logic endidx : int
-
-logic foundtype : int
-
-logic lengthoftoken : int
-
-logic i : int
-
-logic i1 : int
-
-logic i2 : int
-
-logic i3 : int
-
-logic temp___1731 : int
-
-logic temp___1730 : int
-
-logic temp___1729 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic temp___1736 : int
-
-logic temp___1734 : (int,character) farray
-
-logic temp___1733 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic temp___1732 : int
-
-logic o5 : character
-
-logic o6 : int
-
-logic o7 : (int,character) farray
-
-logic temp___1740 : (int,character) farray
-
-logic temp___1739 : int
-
-logic o8 : character
-
-logic o9 : (int,character) farray
-
-logic o10 : int
-
-logic o11 : int
-
-logic temp___1747 : int
-
-logic temp___1748 : int
-
-logic temp___1745 : (int,character) farray
-
-logic o12 : int
-
-logic o13 : int
-
-logic temp___1744 : int
-
-logic o14 : character
-
-logic o15 : int
-
-logic o16 : (int,character) farray
-
-logic o17 : character
-
-logic o18 : (int,character) farray
-
-logic success1 : bool
-
-logic lengthoftoken1 : int
-
-logic i4 : int
-
-logic i5 : int
-
-logic result : int
-
-logic begidx1 : int
-
-logic result1 : (int,character) farray
-
-logic newnameserver1 : (int,character) farray
-
-logic result2 : (int,character) farray
-
-logic newemail1 : (int,character) farray
-
-logic begidx2 : int
-
-logic endidx1 : int
-
-logic foundtype1 : int
-
-logic begidx3 : int
-
-logic endidx2 : int
-
-logic foundtype2 : int
-
-logic result3 : int
-
-logic begidx4 : int
-
-logic begidx5 : int
-
-logic endidx3 : int
-
-logic foundtype3 : int
-
-logic begidx6 : int
-
-logic endidx4 : int
-
-logic foundtype4 : int
-
-logic begidx7 : int
-
-logic endidx5 : int
-
-logic foundtype5 : int
-
-logic begidx8 : int
-
-logic endidx6 : int
-
-logic foundtype6 : int
-
-logic begidx9 : int
-
-logic endidx7 : int
-
-logic foundtype7 : int
-
-logic begidx10 : int
-
-logic endidx8 : int
-
-logic foundtype8 : int
-
-logic begidx11 : int
-
-logic endidx9 : int
-
-logic foundtype9 : int
-
-logic result4 : bool
-
-logic success2 : bool
-
-logic result5 : int
-
-logic begidx12 : int
-
-logic begidx13 : int
-
-logic endidx10 : int
-
-logic foundtype10 : int
-
-logic result6 : int
-
-logic lengthoftoken2 : int
-
-logic result7 : bool
-
-logic success3 : bool
-
-logic result8 : bool
-
-logic success4 : bool
-
-logic result9 : int
-
-logic i6 : int
-
-logic newnameserver2 : (int,character) farray
-
-logic i7 : int
-
-logic result10 : (int,character) farray
-
-logic newnameserver3 : (int,character) farray
-
-logic result11 : int
-
-logic i8 : int
-
-logic newnameserver4 : (int,character) farray
-
-logic i9 : int
-
-logic newnameserver5 : (int,character) farray
-
-logic i10 : int
-
-logic newnameserver6 : (int,character) farray
-
-logic i11 : int
-
-logic newnameserver7 : (int,character) farray
-
-logic i12 : int
-
-logic newnameserver8 : (int,character) farray
-
-logic i13 : int
-
-logic newnameserver9 : (int,character) farray
-
-logic i14 : int
-
-logic newnameserver10 : (int,character) farray
-
-logic i15 : int
-
-logic newnameserver11 : (int,character) farray
-
-logic i16 : int
-
-logic result12 : int
-
-logic i17 : int
-
-logic newnameserver12 : (int,character) farray
-
-logic i18 : int
-
-logic result13 : (int,character) farray
-
-logic newnameserver13 : (int,character) farray
-
-logic result14 : int
-
-logic i19 : int
-
-logic newnameserver14 : (int,character) farray
-
-logic i20 : int
-
-logic newnameserver15 : (int,character) farray
-
-logic i21 : int
-
-logic newnameserver16 : (int,character) farray
-
-logic i22 : int
-
-logic newnameserver17 : (int,character) farray
-
-logic i23 : int
-
-logic newnameserver18 : (int,character) farray
-
-logic i24 : int
-
-logic newnameserver19 : (int,character) farray
-
-logic i25 : int
-
-logic newnameserver20 : (int,character) farray
-
-logic i26 : int
-
-logic newnameserver21 : (int,character) farray
-
-logic i27 : int
-
-logic newnameserver22 : (int,character) farray
-
-logic success5 : bool
-
-logic i28 : int
-
-logic i29 : int
-
-logic newnameserver23 : (int,character) farray
-
-logic success6 : bool
-
-logic i30 : int
-
-logic i31 : int
-
-logic newnameserver24 : (int,character) farray
-
-logic success7 : bool
-
-logic i32 : int
-
-logic i33 : int
-
-logic newnameserver25 : (int,character) farray
-
-logic success8 : bool
-
-logic i34 : int
-
-logic i35 : int
-
-logic newnameserver26 : (int,character) farray
-
-logic success9 : bool
-
-logic begidx14 : int
-
-logic endidx11 : int
-
-logic foundtype11 : int
-
-logic lengthoftoken3 : int
-
-logic i36 : int
-
-logic i37 : int
-
-logic newnameserver27 : (int,character) farray
-
-logic success10 : bool
-
-logic begidx15 : int
-
-logic endidx12 : int
-
-logic foundtype12 : int
-
-logic lengthoftoken4 : int
-
-logic i38 : int
-
-logic i39 : int
-
-logic result15 : int
-
-logic begidx16 : int
-
-logic begidx17 : int
-
-logic endidx13 : int
-
-logic foundtype13 : int
-
-logic result16 : int
-
-logic lengthoftoken5 : int
-
-logic result17 : int
-
-logic i40 : int
-
-logic newemail2 : (int,character) farray
-
-logic i41 : int
-
-logic result18 : (int,character) farray
-
-logic newemail3 : (int,character) farray
-
-logic result19 : int
-
-logic i42 : int
-
-logic newemail4 : (int,character) farray
-
-logic i43 : int
-
-logic newemail5 : (int,character) farray
-
-logic i44 : int
-
-logic newemail6 : (int,character) farray
-
-logic i45 : int
-
-logic newemail7 : (int,character) farray
-
-logic i46 : int
-
-logic newemail8 : (int,character) farray
-
-logic i47 : int
-
-logic newemail9 : (int,character) farray
-
-logic i48 : int
-
-logic newemail10 : (int,character) farray
-
-logic i49 : int
-
-logic newemail11 : (int,character) farray
-
-logic i50 : int
-
-logic result20 : int
-
-logic i51 : int
-
-logic newemail12 : (int,character) farray
-
-logic i52 : int
-
-logic result21 : (int,character) farray
-
-logic newemail13 : (int,character) farray
-
-logic result22 : int
-
-logic i53 : int
-
-logic newemail14 : (int,character) farray
-
-logic i54 : int
-
-logic newemail15 : (int,character) farray
-
-logic i55 : int
-
-axiom H : (rr_type__blankdomainname__aggregate_def(32) = blankdomainname)
-
-axiom H1 : in_range4(zlength)
-
-axiom H2 : (result = begidx)
-
-axiom H3 : (begidx1 = 1)
-
-axiom H4 : in_range4(begidx1)
-
-axiom H5 : ((1 <= 256) -> in_range4(endidx))
-
-axiom H6 : ((0 <= 10) -> in_range3(foundtype))
-
-axiom H7 : ((1 <= 256) -> in_range4(lengthoftoken))
-
-axiom H8 : (result1 = newnameserver)
-
-axiom H9 : (newnameserver1 = blankdomainname)
-
-axiom H10 : (result2 = newemail)
-
-axiom H11 : (newemail1 = blankdomainname)
-
-axiom H12 : (((((begidx2 <= endidx1) and (begidx2 <= zlength)) and
+axiom def_axiom :
+  (forall temp___158:int. (in_range2(temp___158) ->
+  (forall temp___159:int.
+  (to_rep((rr_type__blankdomainname__aggregate_def(temp___158)[temp___159])) = temp___158))))
+
+ (* File "zone_file_parser.adb", line 1186, characters 0-0 *)
+goal WP_parameter_def :
+  (forall newnameserver:(int,character) farray.
+  forall newemail:(int,character) farray. forall begidx:int.
+  forall endidx:int. forall foundtype:int. forall lengthoftoken:int.
+  forall temp___1790:int. forall temp___1789:int. forall temp___1788:int.
+  forall o:int. forall o1:int. forall result:int. forall begidx1:int.
+  forall result1:(int,character) farray.
+  forall newnameserver1:(int,character) farray.
+  forall result2:(int,character) farray.
+  forall newemail1:(int,character) farray. forall begidx2:int.
+  forall endidx1:int. forall foundtype1:int. forall begidx3:int.
+  forall endidx2:int. forall foundtype2:int. forall result3:int.
+  forall begidx4:int. forall begidx5:int. forall endidx3:int.
+  forall foundtype3:int. forall begidx6:int. forall endidx4:int.
+  forall foundtype4:int. forall begidx7:int. forall endidx5:int.
+  forall foundtype5:int. forall begidx8:int. forall endidx6:int.
+  forall foundtype6:int. forall begidx9:int. forall endidx7:int.
+  forall foundtype7:int. forall result4:int. forall begidx10:int.
+  forall begidx11:int. forall endidx8:int. forall foundtype8:int.
+  ((rr_type__blankdomainname__aggregate_def(32) = blankdomainname) ->
+  (in_range4(zlength) -> (((result = begidx) and (begidx1 = 1)) ->
+  (in_range4(begidx1) -> (((1 <= 256) -> in_range4(endidx)) -> (((0 <= 10) ->
+  in_range3(foundtype)) -> (((1 <= 256) -> in_range4(lengthoftoken)) ->
+  (((result1 = newnameserver) and (newnameserver1 = blankdomainname)) ->
+  (((result2 = newemail) and (newemail1 = blankdomainname)) ->
+  ((((((begidx2 <= endidx1) and (begidx2 <= zlength)) and
   (endidx1 <= zlength)) and ((foundtype1 = 1) ->
-  (forall i56:int. (((begidx2 <= i56) and (i56 <= endidx1)) ->
-  ((48 <= to_rep((zonefileline[i56]))) and
-  (to_rep((zonefileline[i56])) <= 57)))))) and ((in_range4(begidx2) and
-  in_range4(endidx1)) and in_range3(foundtype1)))
-
-axiom H13 : (((not (foundtype1 = 3)) and (endidx1 <  zlength)) ->
-  (((temp___1731 = foundtype1) and ((temp___1730 = endidx1) and
-  ((temp___1729 = begidx2) and ((endidx2 <  zlength) and ((((((1 <= 256) ->
+  (forall i:int. (((begidx2 <= i) and (i <= endidx1)) ->
+  ((48 <= to_rep((zonefileline[i]))) and (to_rep((zonefileline[i])) <= 57)))))) and
+  ((in_range4(begidx2) and in_range4(endidx1)) and in_range3(foundtype1))) ->
+  (((((not (foundtype1 = 3)) and (endidx1 <  zlength)) and
+  ((((temp___1790 = foundtype1) and ((temp___1789 = endidx1) and
+  ((temp___1788 = begidx2) and ((endidx2 <  zlength) and ((((((1 <= 256) ->
   in_range4(begidx3)) and ((1 <= 256) -> in_range4(endidx2))) and
   ((0 <= 10) -> in_range3(foundtype2))) and ((not (foundtype2 = 3)) and
   (endidx2 <  zlength))) and ((((o = (endidx2 + 1)) and
   in_range4((endidx2 + 1))) and ((begidx3 = result3) and (begidx4 = o))) and
   ((((((begidx5 <= endidx3) and (begidx5 <= zlength)) and
   (endidx3 <= zlength)) and ((foundtype3 = 1) ->
-  (forall i56:int. (((begidx5 <= i56) and (i56 <= endidx3)) ->
-  ((48 <= to_rep((zonefileline[i56]))) and
-  (to_rep((zonefileline[i56])) <= 57)))))) and ((in_range4(begidx5) and
-  in_range4(endidx3)) and in_range3(foundtype3))) and
-  (not ((not (foundtype3 = 3)) and (endidx3 <  zlength)))))))))) and
-  (((foundtype3 = foundtype6) and ((endidx3 = endidx6) and
-  (begidx5 = begidx8))) and ((foundtype7 = foundtype3) and
-  ((endidx7 = endidx3) and (begidx9 = begidx5))))))
-
-axiom H14 : (((not (foundtype1 = 3)) and (endidx1 <  zlength)) ->
-  (foundtype8 = foundtype6))
-
-axiom H15 : (((not (foundtype1 = 3)) and (endidx1 <  zlength)) ->
-  (endidx8 = endidx6))
-
-axiom H16 : (((not (foundtype1 = 3)) and (endidx1 <  zlength)) ->
-  (begidx10 = begidx8))
-
-axiom H17 : (((not (foundtype1 = 3)) and (endidx1 <  zlength)) ->
-  (foundtype9 = foundtype7))
-
-axiom H18 : (((not (foundtype1 = 3)) and (endidx1 <  zlength)) ->
-  (endidx9 = endidx7))
-
-axiom H19 : (((not (foundtype1 = 3)) and (endidx1 <  zlength)) ->
-  (begidx11 = begidx9))
-
-axiom H20 : ((not ((not (foundtype1 = 3)) and (endidx1 <  zlength))) ->
-  (foundtype8 = foundtype1))
-
-axiom H21 : ((not ((not (foundtype1 = 3)) and (endidx1 <  zlength))) ->
-  (endidx8 = endidx1))
-
-axiom H22 : ((not ((not (foundtype1 = 3)) and (endidx1 <  zlength))) ->
-  (begidx10 = begidx2))
-
-axiom H23 : ((not ((not (foundtype1 = 3)) and (endidx1 <  zlength))) ->
-  (foundtype9 = foundtype1))
-
-axiom H24 : ((not ((not (foundtype1 = 3)) and (endidx1 <  zlength))) ->
-  (endidx9 = endidx1))
-
-axiom H25 : ((not ((not (foundtype1 = 3)) and (endidx1 <  zlength))) ->
-  (begidx11 = begidx2))
-
-axiom H26 : (not (zlength <= endidx8))
-
-axiom H27 : ((o1 = (endidx8 + 1)) and in_range4((endidx8 + 1)))
-
-axiom H28 : (result5 = begidx10)
-
-axiom H29 : (begidx12 = o1)
-
-axiom H30 : (((((begidx13 <= endidx10) and (begidx13 <= zlength)) and
-  (endidx10 <= zlength)) and ((foundtype10 = 1) ->
-  (forall i56:int. (((begidx13 <= i56) and (i56 <= endidx10)) ->
-  ((48 <= to_rep((zonefileline[i56]))) and
-  (to_rep((zonefileline[i56])) <= 57)))))) and ((in_range4(begidx13) and
-  in_range4(endidx10)) and in_range3(foundtype10)))
-
- (* File "zone_file_parser.adb", line 1186, characters 0-0 *)
-goal WP_parameter_def : in_range4(((endidx10 - begidx13) + 1))
+  (forall i:int. (((begidx5 <= i) and (i <= endidx3)) ->
+  ((48 <= to_rep((zonefileline[i]))) and (to_rep((zonefileline[i])) <= 57)))))) and
+  ((in_range4(begidx5) and in_range4(endidx3)) and
+  in_range3(foundtype3))) and (not ((not (foundtype3 = 3)) and
+  (endidx3 <  zlength)))))))))) and (((foundtype3 = foundtype4) and
+  ((endidx3 = endidx4) and (begidx5 = begidx6))) and
+  ((foundtype5 = foundtype3) and ((endidx5 = endidx3) and
+  (begidx7 = begidx5))))) and ((({ int__content = foundtype6 } = {
+  int__content = foundtype4 }) and (({ int__content = endidx6 } = {
+  int__content = endidx4 }) and ({ int__content = begidx8 } = {
+  int__content = begidx6 }))) and ((foundtype7 = foundtype5) and
+  ((endidx7 = endidx5) and (begidx9 = begidx7)))))) or
+  ((not ((not (foundtype1 = 3)) and (endidx1 <  zlength))) and
+  (((foundtype1 = foundtype6) and ((endidx1 = endidx6) and
+  (begidx2 = begidx8))) and ((foundtype7 = foundtype1) and
+  ((endidx7 = endidx1) and (begidx9 = begidx2)))))) ->
+  ((not (zlength <= endidx6)) -> ((((o1 = (endidx6 + 1)) and
+  in_range4((endidx6 + 1))) and ((result4 = begidx8) and (begidx10 = o1))) ->
+  ((((((begidx11 <= endidx8) and (begidx11 <= zlength)) and
+  (endidx8 <= zlength)) and ((foundtype8 = 1) ->
+  (forall i:int. (((begidx11 <= i) and (i <= endidx8)) ->
+  ((48 <= to_rep((zonefileline[i]))) and (to_rep((zonefileline[i])) <= 57)))))) and
+  ((in_range4(begidx11) and in_range4(endidx8)) and
+  in_range3(foundtype8))) ->
+  in_range4(((endidx8 - begidx11) + 1)))))))))))))))))

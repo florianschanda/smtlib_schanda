@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -532,148 +532,54 @@ logic r40b : bool
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic x__split_discrs : bool
-
-logic r__split_fields : integer
-
-logic r__split_fields1 : failure_reason
-
-logic o : integer
-
-logic o1 : integer
-
-logic o2 : failure_reason
-
-logic temp___282 : bool
-
-logic temp___2821 : integer
-
-logic temp___2822 : failure_reason
-
-logic temp___2823 : bool
-
-logic o3 : failure_reason
-
-logic o4 : integer
-
-logic o5 : failure_reason
-
-logic o6 : bool
-
-logic o7 : integer
-
-logic o8 : failure_reason
-
-logic o9 : bool
-
-logic o10 : bool
-
-logic o11 : integer
-
-logic o12 : failure_reason
-
-logic o13 : bool
-
-logic o14 : bool
-
-logic o15 : integer
-
-logic o16 : failure_reason
-
-logic o17 : bool
-
-logic temp___283 : bool
-
-logic temp___2831 : integer
-
-logic temp___2832 : failure_reason
-
-logic temp___2833 : bool
-
-logic result : integer
-
-logic result1 : failure_reason
-
-logic r__split_fields2 : integer
-
-logic r__split_fields3 : failure_reason
-
-logic result2 : integer
-
-logic result3 : failure_reason
-
-logic r__split_fields4 : integer
-
-logic r__split_fields5 : failure_reason
-
-axiom H : (x__split_discrs = tmp)
-
-axiom H1 : ((r__attr__constrained = true) and (r__split_discrs = tmp))
-
-axiom H2 : ((tmp = r__split_discrs) and (r__attr__constrained = true))
-
-axiom H3 : ((to_int(r__split_discrs) = 1) -> (to_rep(o) = 12))
-
-axiom H4 : ((to_int(r__split_discrs) = 1) -> (o = o1))
-
-axiom H5 : ((to_int(r__split_discrs) = 1) -> (r__split_fields1 = o2))
-
-axiom H6 : ((to_int(r__split_discrs) = 1) -> (r__split_discrs = temp___282))
-
-axiom H7 : ((to_int(r__split_discrs) = 1) -> (temp___2821 = o1))
-
-axiom H8 : ((to_int(r__split_discrs) = 1) -> (temp___2822 = o2))
-
-axiom H9 : ((to_int(r__split_discrs) = 1) ->
-  (r__attr__constrained = temp___2823))
-
-axiom H10 : ((to_int(r__split_discrs) = 1) -> ((result = r__split_fields) and
-  (result1 = r__split_fields1)))
-
-axiom H11 : ((to_int(r__split_discrs) = 1) ->
-  ((r__split_fields2 = temp___2821) and (r__split_fields3 = temp___2822)))
-
-axiom H12 : ((to_int(r__split_discrs) = 1) -> (r__split_discrs = temp___282))
-
-axiom H13 : ((not (to_int(r__split_discrs) = 1)) -> (to_rep1(o3) = 0))
-
-axiom H14 : ((not (to_int(r__split_discrs) = 1)) -> (dummy = o4))
-
-axiom H15 : ((not (to_int(r__split_discrs) = 1)) -> (o3 = o5))
-
-axiom H16 : ((not (to_int(r__split_discrs) = 1)) -> (of_int(0) = o6))
-
-axiom H17 : ((not (to_int(r__split_discrs) = 1)) -> (o7 = o4))
-
-axiom H18 : ((not (to_int(r__split_discrs) = 1)) -> (o8 = o5))
-
-axiom H19 : ((not (to_int(r__split_discrs) = 1)) -> (true = o9))
-
-axiom H20 : ((not (to_int(r__split_discrs) = 1)) -> ((o10 = o6) and
-  (((o11 = o7) and (o12 = o8)) and (o13 = o9))))
-
-axiom H21 : ((not (to_int(r__split_discrs) = 1)) -> ((o14 = o10) and
-  (((o15 = o11) and (o16 = o12)) and (o17 = o13))))
-
-axiom H22 : ((not (to_int(r__split_discrs) = 1)) -> ((temp___283 = o14) and
-  (((temp___2831 = o15) and (temp___2832 = o16)) and (temp___2833 = o17))))
-
-axiom H23 : ((not (to_int(r__split_discrs) = 1)) ->
-  ((result2 = r__split_fields) and (result3 = r__split_fields1)))
-
-axiom H24 : ((not (to_int(r__split_discrs) = 1)) ->
-  ((r__split_fields4 = temp___2831) and (r__split_fields5 = temp___2832)))
-
-axiom H25 : ((not (to_int(r__split_discrs) = 1)) ->
-  (r__split_discrs = temp___283))
-
-axiom H26 : ((not (to_int(r__split_discrs) = 1)) ->
-  ((r__split_fields2 = r__split_fields4) and
-  (r__split_fields3 = r__split_fields5)))
-
-axiom H27 : (x__split_discrs = r40b)
-
-axiom H28 : (x__attr__constrained = true)
-
  (* File "test.adb", line 108, characters 0-0 *)
-goal WP_parameter_def : (r__split_discrs = x__split_discrs)
+goal WP_parameter_def :
+  (forall x__split_discrs:bool. forall r__split_fields:integer.
+  forall r__split_fields1:failure_reason. forall o:integer.
+  forall o1:integer. forall o2:failure_reason. forall temp___315:bool.
+  forall temp___3151:integer. forall temp___3152:failure_reason.
+  forall temp___3153:bool. forall o3:failure_reason. forall o4:integer.
+  forall o5:failure_reason. forall o6:bool. forall o7:integer.
+  forall o8:failure_reason. forall o9:bool. forall o10:bool.
+  forall o11:integer. forall o12:failure_reason. forall o13:bool.
+  forall o14:bool. forall o15:integer. forall o16:failure_reason.
+  forall o17:bool. forall temp___316:bool. forall temp___3161:integer.
+  forall temp___3162:failure_reason. forall temp___3163:bool.
+  forall result:integer. forall result1:failure_reason.
+  forall r__split_fields2:integer. forall r__split_fields3:failure_reason.
+  forall result2:integer. forall result3:failure_reason.
+  forall r__split_fields4:integer. forall r__split_fields5:failure_reason.
+  ((x__split_discrs = tmp) -> (((r__attr__constrained = true) and
+  (r__split_discrs = tmp)) -> (((tmp = r__split_discrs) and
+  (r__attr__constrained = true)) -> ((((to_int(r__split_discrs) = 1) and
+  ((((to_rep(o) = 12) and ((o = o1) and (r__split_fields1 = o2))) and
+  ((r__split_discrs = temp___315) and (((temp___3151 = o1) and
+  (temp___3152 = o2)) and (r__attr__constrained = temp___3153)))) and
+  ((((result = r__split_fields) and (result1 = r__split_fields1)) and
+  ((temp___3151 = r__split_fields2) and
+  (temp___3152 = r__split_fields3))) and (r__split_discrs = temp___315)))) or
+  ((not (to_int(r__split_discrs) = 1)) and ((((((((to_rep1(o3) = 0) and
+  ((dummy = o4) and (o3 = o5))) and ((of_int(0) = o6) and (((o7 = o4) and
+  (o8 = o5)) and (true = o9)))) and ({ us_split_discrs1 = {
+  rec__test__search_result__found = o10 }; us_split_fields1 = {
+  rec__test__search_result__index = o11; rec__test__search_result__reason =
+  o12 }; attr__constrained = o13 } = { us_split_discrs1 = {
+  rec__test__search_result__found = o6 }; us_split_fields1 = {
+  rec__test__search_result__index = o7; rec__test__search_result__reason = o8
+  }; attr__constrained = o9 })) and ({ us_split_discrs1 = {
+  rec__test__search_result__found = o14 }; us_split_fields1 = {
+  rec__test__search_result__index = o15; rec__test__search_result__reason =
+  o16 }; attr__constrained = o17 } = { us_split_discrs1 = {
+  rec__test__search_result__found = o10 }; us_split_fields1 = {
+  rec__test__search_result__index = o11; rec__test__search_result__reason =
+  o12 }; attr__constrained = o13 })) and ((temp___316 = o14) and
+  (((temp___3161 = o15) and (temp___3162 = o16)) and
+  (temp___3163 = o17)))) and ((((result2 = r__split_fields) and
+  (result3 = r__split_fields1)) and ((temp___3161 = r__split_fields4) and
+  (temp___3162 = r__split_fields5))) and (r__split_discrs = temp___316))) and
+  ({ rec__test__search_result__index = r__split_fields2;
+  rec__test__search_result__reason = r__split_fields3 } = {
+  rec__test__search_result__index = r__split_fields4;
+  rec__test__search_result__reason = r__split_fields5 })))) ->
+  ((x__split_discrs = r40b) -> ((x__attr__constrained = true) ->
+  (r__split_discrs = x__split_discrs))))))))

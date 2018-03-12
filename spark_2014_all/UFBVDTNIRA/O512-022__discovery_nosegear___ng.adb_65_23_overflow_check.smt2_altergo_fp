@@ -660,12 +660,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -677,6 +671,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -899,222 +899,31 @@ logic attr__ATTRIBUTE_ADDRESS9 : int
 
 logic attr__ATTRIBUTE_ADDRESS10 : int
 
-logic prevtime : t
-
-logic prevcount : t
-
-logic success : bool
-
-logic result__ : int
-
-logic t1 : int
-
-logic t2 : int
-
-logic d1 : int
-
-logic d2 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : int
-
-logic o13 : int
-
-logic o14 : int
-
-logic o15 : int
-
-logic o16 : int
-
-logic o17 : int
-
-logic o18 : int
-
-logic o19 : int
-
-logic o20 : int
-
-logic o21 : int
-
-logic success1 : bool
-
-logic result__1 : int
-
-logic t11 : int
-
-logic t21 : int
-
-logic d11 : int
-
-logic d21 : int
-
-logic result : bool
-
-logic success2 : bool
-
-logic result1 : int
-
-logic result__2 : int
-
-logic result2 : int
-
-logic t12 : int
-
-logic result3 : int
-
-logic t22 : int
-
-logic result4 : int
-
-logic d12 : int
-
-logic result5 : int
-
-logic d22 : int
-
-logic result6 : bool
-
-logic success3 : bool
-
-logic result7 : int
-
-logic result__3 : int
-
-logic success4 : bool
-
-logic result__4 : int
-
-logic t13 : int
-
-logic t23 : int
-
-logic d13 : int
-
-logic d23 : int
-
-logic success5 : bool
-
-logic result__5 : int
-
-logic t14 : int
-
-logic t24 : int
-
-logic d14 : int
-
-logic d24 : int
-
-logic success6 : bool
-
-logic result__6 : int
-
-logic t15 : int
-
-logic t25 : int
-
-logic d15 : int
-
-logic d25 : int
-
-logic success7 : bool
-
-logic result__7 : int
-
-logic t16 : int
-
-logic t26 : int
-
-logic d16 : int
-
-logic d26 : int
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : true
-
-axiom H3 : ((0 <= 2147483647) -> in_range4(result__))
-
-axiom H4 : true
-
-axiom H5 : true
-
-axiom H6 : ((not (thistime = prevtime)) and (not (thiscount = prevcount)))
-
-axiom H7 : ((0 <= 2147483647) -> in_range2(t1))
-
-axiom H8 : ((0 <= 2147483647) -> in_range2(t2))
-
-axiom H9 : ((0 <= 2147483647) -> in_range3(d1))
-
-axiom H10 : ((0 <= 2147483647) -> in_range3(d2))
-
-axiom H11 : (not ult(sub(thiscount, prevcount), sub(thistime, prevtime)))
-
-axiom H12 : (result__2 = result__)
-
-axiom H13 : (success2 = success)
-
-axiom H14 : (result__2 = result__1)
-
-axiom H15 : (success2 = success1)
-
-axiom H16 : (result2 = t1)
-
-axiom H17 : (t12 = tqtint(sub(thistime, prevtime)))
-
-axiom H18 : (result3 = t2)
-
-axiom H19 : (t22 = tqtint(sub(currtime, thistime)))
-
-axiom H20 : ((o = (207 * tqtint(sub(thiscount, prevcount)))) and
-  in_range1((207 * tqtint(sub(thiscount, prevcount)))))
-
-axiom H21 : ((o1 = o) and in_range3(o))
-
-axiom H22 : (result4 = d1)
-
-axiom H23 : (d12 = o1)
-
-axiom H24 : ((o2 = (d12 * t22)) and in_range1((d12 * t22)))
-
-axiom H25 : (o3 = comp_div(o2,t12))
-
-axiom H26 : ((o4 = o3) and in_range3(o3))
-
-axiom H27 : (result5 = d2)
-
-axiom H28 : (d22 = o4)
-
-axiom H29 : (success2 = result6)
-
-axiom H30 : (success3 = of_int1(1))
-
-axiom H31 : ((o8 = (t12 + t22)) and in_range1((t12 + t22)))
-
  (* File "ng.adb", line 68, characters 0-0 *)
-goal WP_parameter_def : in_range1((d12 + d22))
+goal WP_parameter_def :
+  (forall prevtime:t. forall prevcount:t. forall success:bool.
+  forall result__:int. forall t1:int. forall t2:int. forall d1:int.
+  forall d2:int. forall o:int. forall o1:int. forall o2:int. forall o3:int.
+  forall o4:int. forall o5:int. forall success1:bool. forall result__1:int.
+  forall success2:bool. forall result__2:int. forall result:int.
+  forall t11:int. forall result1:int. forall t21:int. forall result2:int.
+  forall d11:int. forall result3:int. forall d21:int. forall result4:bool.
+  forall success3:bool. (((0 <= 2147483647) -> in_range4(result__)) ->
+  (((not (thistime = prevtime)) and (not (thiscount = prevcount))) ->
+  (((0 <= 2147483647) -> in_range2(t1)) -> (((0 <= 2147483647) ->
+  in_range2(t2)) -> (((0 <= 2147483647) -> in_range3(d1)) ->
+  (((0 <= 2147483647) -> in_range3(d2)) -> (((not ult(sub(thiscount,
+  prevcount), sub(thistime, prevtime))) and (((result__2 = result__) and
+  (success2 = success)) and ((result__2 = result__1) and
+  (success2 = success1)))) -> ((({ int__content = result } = { int__content =
+  t1 }) and (t11 = tqtint(sub(thistime, prevtime)))) -> ((({ int__content =
+  result1 } = { int__content = t2 }) and (t21 = tqtint(sub(currtime,
+  thistime)))) -> (((((o = (207 * tqtint(sub(thiscount, prevcount)))) and
+  in_range1((207 * tqtint(sub(thiscount, prevcount))))) and ((o1 = o) and
+  in_range3(o))) and (({ int__content = result2 } = { int__content = d1
+  }) and (d11 = o1))) -> ((((((o2 = (d11 * t21)) and
+  in_range1((d11 * t21))) and (o3 = comp_div(o2,t11))) and ((o4 = o3) and
+  in_range3(o3))) and (({ int__content = result3 } = { int__content = d2
+  }) and (d21 = o4))) -> (((success2 = result4) and
+  (success3 = of_int1(1))) -> (((o5 = (t11 + t21)) and
+  in_range1((t11 + t21))) -> in_range1((d11 + d21))))))))))))))))

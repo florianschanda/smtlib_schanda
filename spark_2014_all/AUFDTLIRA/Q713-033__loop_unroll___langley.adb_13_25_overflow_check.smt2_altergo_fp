@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -188,24 +188,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,integer_32) farray, int, int, (int,integer_32) farray,
-  int, int -> (int,integer_32) farray
-
-axiom concat_def :
-  (forall a:(int,integer_32) farray. forall b:(int,integer_32) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : integer_32, int -> (int,integer_32) farray
-
-axiom singleton_def :
-  (forall v:integer_32.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,integer_32) farray, int, int, (int,integer_32) farray,
   int, int -> bool
 
@@ -216,17 +198,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -236,37 +218,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,integer_32) farray, int, int, (int,integer_32) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,integer_32) farray. forall b:(int,integer_32) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,integer_32) farray. forall b:(int,integer_32) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,integer_32) farray. forall b:(int,integer_32) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic x : (int,integer_32) farray
 
@@ -280,186 +234,13 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic sum : (int,integer_32) farray
-
-logic i : int
-
-logic langley__add__result : (int,integer_32) farray
-
-logic o : int
-
-logic o1 : integer_32
-
-logic o2 : (int,integer_32) farray
-
-logic o3 : int
-
-logic o4 : integer_32
-
-logic o5 : (int,integer_32) farray
-
-logic o6 : int
-
-logic o7 : integer_32
-
-logic o8 : (int,integer_32) farray
-
-logic o9 : int
-
-logic o10 : integer_32
-
-logic o11 : (int,integer_32) farray
-
-logic o12 : int
-
-logic o13 : integer_32
-
-logic o14 : (int,integer_32) farray
-
-logic o15 : int
-
-logic o16 : integer_32
-
-logic o17 : (int,integer_32) farray
-
-logic o18 : int
-
-logic o19 : integer_32
-
-logic o20 : (int,integer_32) farray
-
-logic o21 : int
-
-logic o22 : integer_32
-
-logic o23 : (int,integer_32) farray
-
-logic o24 : int
-
-logic o25 : integer_32
-
-logic o26 : (int,integer_32) farray
-
-logic o27 : int
-
-logic o28 : integer_32
-
-logic o29 : (int,integer_32) farray
-
-logic i1 : int
-
-logic o30 : int
-
-logic result : int
-
-logic i2 : int
-
-logic result1 : (int,integer_32) farray
-
-logic sum1 : (int,integer_32) farray
-
-logic result2 : int
-
-logic i3 : int
-
-logic result3 : (int,integer_32) farray
-
-logic sum2 : (int,integer_32) farray
-
-logic result4 : int
-
-logic i4 : int
-
-logic result5 : (int,integer_32) farray
-
-logic sum3 : (int,integer_32) farray
-
-logic result6 : int
-
-logic i5 : int
-
-logic result7 : (int,integer_32) farray
-
-logic sum4 : (int,integer_32) farray
-
-logic result8 : int
-
-logic i6 : int
-
-logic result9 : (int,integer_32) farray
-
-logic sum5 : (int,integer_32) farray
-
-logic result10 : int
-
-logic i7 : int
-
-logic result11 : (int,integer_32) farray
-
-logic sum6 : (int,integer_32) farray
-
-logic result12 : int
-
-logic i8 : int
-
-logic result13 : (int,integer_32) farray
-
-logic sum7 : (int,integer_32) farray
-
-logic result14 : int
-
-logic i9 : int
-
-logic result15 : (int,integer_32) farray
-
-logic sum8 : (int,integer_32) farray
-
-logic result16 : int
-
-logic i10 : int
-
-logic result17 : (int,integer_32) farray
-
-logic sum9 : (int,integer_32) farray
-
-logic result18 : int
-
-logic i11 : int
-
-logic result19 : (int,integer_32) farray
-
-logic sum10 : (int,integer_32) farray
-
-logic result20 : (int,integer_32) farray
-
-logic langley__add__result1 : (int,integer_32) farray
-
-logic langley__add__result2 : (int,integer_32) farray
-
-logic langley__add__result3 : (int,integer_32) farray
-
-logic sum11 : (int,integer_32) farray
-
-logic i12 : int
-
-logic langley__add__result4 : (int,integer_32) farray
-
-logic sum12 : (int,integer_32) farray
-
-logic i13 : int
-
-logic langley__add__result5 : (int,integer_32) farray
-
-axiom H :
-  (forall i14:int. (((0 <= i14) and (i14 <= 9)) ->
-  ((((to_rep((x[i14])) <  1073741824) and
-  ((- 1073741824) <  to_rep((x[i14])))) and
-  (to_rep((y[i14])) <  1073741824)) and
-  ((- 1073741824) <  to_rep((y[i14]))))))
-
-axiom H1 : (result = i)
-
-axiom H2 : (i2 = 0)
-
  (* File "langley.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : in_range1((to_rep((x[i2])) + to_rep((y[i2]))))
+goal WP_parameter_def :
+  (forall i:int. forall result:int. forall i1:int.
+  ((forall i2:int. (((0 <= i2) and (i2 <= 9)) ->
+   ((((to_rep((x[i2])) <  1073741824) and
+   ((- 1073741824) <  to_rep((x[i2])))) and
+   (to_rep((y[i2])) <  1073741824)) and
+   ((- 1073741824) <  to_rep((y[i2])))))) ->
+  ((({ int__content = result } = { int__content = i }) and (i1 = 0)) ->
+  in_range1((to_rep((x[i1])) + to_rep((y[i1])))))))

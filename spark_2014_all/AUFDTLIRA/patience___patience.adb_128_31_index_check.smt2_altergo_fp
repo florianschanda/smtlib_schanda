@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -186,24 +186,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,card) farray, int, int, (int,card) farray, int,
-  int -> (int,card) farray
-
-axiom concat_def :
-  (forall a:(int,card) farray. forall b:(int,card) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : card, int -> (int,card) farray
-
-axiom singleton_def :
-  (forall v:card.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,card) farray, int, int, (int,card) farray, int,
   int -> bool
 
@@ -214,17 +196,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -234,37 +216,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,card) farray, int, int, (int,card) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,card) farray. forall b:(int,card) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,card) farray. forall b:(int,card) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,card) farray. forall b:(int,card) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type cardindex
 
@@ -373,24 +327,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,cardindex) farray, int, int, (int,cardindex) farray,
-  int, int -> (int,cardindex) farray
-
-axiom concat_def1 :
-  (forall a:(int,cardindex) farray. forall b:(int,cardindex) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : cardindex, int -> (int,cardindex) farray
-
-axiom singleton_def1 :
-  (forall v:cardindex.
-  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq8 : (int,cardindex) farray, int, int, (int,cardindex) farray,
   int, int -> bool
 
@@ -401,17 +337,17 @@ axiom bool_eq_def7 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) and
-  (to_rep1((a[temp___idx_133])) = to_rep1((b[((b__first - a__first) + temp___idx_133)])))) or
-  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (forall temp___idx_155:int. ((((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) and
+  (to_rep1((a[temp___idx_155])) = to_rep1((b[((b__first - a__first) + temp___idx_155)])))) or
+  (not ((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)))))) ->
   (bool_eq8(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) ->
-  (to_rep1((a[temp___idx_133])) = to_rep1((b[((b__first - a__first) + temp___idx_133)]))))))) ->
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) ->
+  (to_rep1((a[temp___idx_155])) = to_rep1((b[((b__first - a__first) + temp___idx_155)]))))))) ->
   (bool_eq8(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -421,37 +357,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) ->
-  (to_rep1((a[temp___idx_133])) = to_rep1((b[((b__first - a__first) + temp___idx_133)])))))))))
-
-logic compare1 : (int,cardindex) farray, int, int, (int,cardindex) farray,
-  int, int -> int
-
-axiom compare_def_eq1 :
-  (forall a:(int,cardindex) farray. forall b:(int,cardindex) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq8(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt1 :
-  (forall a:(int,cardindex) farray. forall b:(int,cardindex) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq8(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep1((a[(i + 1)])) <  to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt1 :
-  (forall a:(int,cardindex) farray. forall b:(int,cardindex) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare1(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq8(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep1((b[(i + 1)])) <  to_rep1((a[(j + 1)]))))))))))))
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) ->
+  (to_rep1((a[temp___idx_155])) = to_rep1((b[((b__first - a__first) + temp___idx_155)])))))))))
 
 type tindexmatrixD1
 
@@ -527,27 +435,6 @@ axiom slide_def2 :
   (forall i:int [(slide2(a, old_first, new_first)[i])]. ((slide2(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat2 : (int,(int,cardindex) farray) farray, int, int,
-  (int,(int,cardindex) farray) farray, int,
-  int -> (int,(int,cardindex) farray) farray
-
-axiom concat_def2 :
-  (forall a:(int,(int,cardindex) farray) farray.
-  forall b:(int,(int,cardindex) farray) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat2(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat2(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat2(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton2 : (int,cardindex) farray,
-  int -> (int,(int,cardindex) farray) farray
-
-axiom singleton_def2 :
-  (forall v:(int,cardindex) farray.
-  (forall i:int [(singleton2(v, i)[i])]. ((singleton2(v, i)[i]) = v)))
-
 logic bool_eq10 : (int,(int,cardindex) farray) farray, int, int,
   (int,(int,cardindex) farray) farray, int, int -> bool
 
@@ -559,17 +446,17 @@ axiom bool_eq_def9 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_134:int. ((((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) and (bool_eq8((a[temp___idx_134]), 0, 99,
-  (b[((b__first - a__first) + temp___idx_134)]), 0, 99) = true)) or
-  (not ((a__first <= temp___idx_134) and (temp___idx_134 <= a__last)))))) ->
+  (forall temp___idx_156:int. ((((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) and (bool_eq8((a[temp___idx_156]), 0, 99,
+  (b[((b__first - a__first) + temp___idx_156)]), 0, 99) = true)) or
+  (not ((a__first <= temp___idx_156) and (temp___idx_156 <= a__last)))))) ->
   (bool_eq10(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_134:int. (((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) -> (bool_eq8((a[temp___idx_134]), 0, 99,
-  (b[((b__first - a__first) + temp___idx_134)]), 0, 99) = true))))) ->
+  (forall temp___idx_156:int. (((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) -> (bool_eq8((a[temp___idx_156]), 0, 99,
+  (b[((b__first - a__first) + temp___idx_156)]), 0, 99) = true))))) ->
   (bool_eq10(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev2 :
@@ -580,9 +467,9 @@ axiom bool_eq_rev2 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_134:int. (((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) -> (bool_eq8((a[temp___idx_134]), 0, 99,
-  (b[((b__first - a__first) + temp___idx_134)]), 0, 99) = true)))))))
+  (forall temp___idx_156:int. (((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) -> (bool_eq8((a[temp___idx_156]), 0, 99,
+  (b[((b__first - a__first) + temp___idx_156)]), 0, 99) = true)))))))
 
 logic dummy7 : (int,card) farray
 
@@ -1015,2528 +902,649 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
-logic s__split_fields : cardindex
-
-logic s__split_fields1 : (int,card) farray
-
-logic s__split_fields2 : cardindex
-
-logic s__split_fields3 : (int,cardindex) farray
-
-logic s__split_fields4 : (int,(int,cardindex) farray) farray
-
-logic s__split_fields5 : (int,cardindex) farray
-
-logic s__split_fields6 : (int,cardindex) farray
-
-logic s__split_fields7 : (int,cardindex) farray
-
-logic idx : int
-
-logic pred : int
-
-logic i : int
-
-logic stackisize : int
-
-logic topstacki : int
-
-logic temp___568 : int
-
-logic temp___567 : int
-
-logic temp___566 : int
-
-logic temp___565 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : card
-
-logic o3 : int
-
-logic temp___570 : int
-
-logic o4 : int
-
-logic temp___571 : (int,cardindex) farray
-
-logic temp___573 : int
-
-logic o5 : int
-
-logic o6 : cardindex
-
-logic o7 : int
-
-logic temp___574 : int
-
-logic o8 : int
-
-logic o9 : cardindex
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : cardindex
-
-logic o13 : int
-
-logic o14 : int
-
-logic temp___535 : (int,cardindex) farray
-
-logic o15 : int
-
-logic o16 : cardindex
-
-logic o17 : int
-
-logic o18 : int
-
-logic o19 : card
-
-logic o20 : int
-
-logic o21 : int
-
-logic o22 : cardindex
-
-logic o23 : int
-
-logic o24 : int
-
-logic o25 : cardindex
-
-logic temp___547 : int
-
-logic o26 : int
-
-logic temp___548 : (int,cardindex) farray
-
-logic o27 : int
-
-logic o28 : cardindex
-
-logic temp___550 : int
-
-logic o29 : int
-
-logic o30 : cardindex
-
-logic o31 : int
-
-logic o32 : int
-
-logic o33 : cardindex
-
-logic o34 : int
-
-logic o35 : cardindex
-
-logic temp___544 : int
-
-logic o36 : int
-
-logic o37 : cardindex
-
-logic o38 : int
-
-logic o39 : int
-
-logic o40 : int
-
-logic o41 : cardindex
-
-logic o42 : int
-
-logic o43 : int
-
-logic o44 : cardindex
-
-logic o45 : int
-
-logic o46 : int
-
-logic o47 : cardindex
-
-logic o48 : int
-
-logic o49 : int
-
-logic o50 : card
-
-logic o51 : int
-
-logic o52 : (int,card) farray
-
-logic o53 : cardindex
-
-logic o54 : (int,card) farray
-
-logic o55 : cardindex
-
-logic o56 : (int,cardindex) farray
-
-logic o57 : (int,(int,cardindex) farray) farray
-
-logic o58 : (int,cardindex) farray
-
-logic o59 : (int,cardindex) farray
-
-logic o60 : (int,cardindex) farray
-
-logic temp___584 : cardindex
-
-logic temp___5841 : (int,card) farray
-
-logic temp___5842 : cardindex
-
-logic temp___5843 : (int,cardindex) farray
-
-logic temp___5844 : (int,(int,cardindex) farray) farray
-
-logic temp___5845 : (int,cardindex) farray
-
-logic temp___5846 : (int,cardindex) farray
-
-logic temp___5847 : (int,cardindex) farray
-
-logic o61 : int
-
-logic o62 : int
-
-logic o63 : cardindex
-
-logic o64 : cardindex
-
-logic o65 : (int,card) farray
-
-logic o66 : cardindex
-
-logic o67 : (int,cardindex) farray
-
-logic o68 : (int,(int,cardindex) farray) farray
-
-logic o69 : (int,cardindex) farray
-
-logic o70 : (int,cardindex) farray
-
-logic o71 : (int,cardindex) farray
-
-logic temp___586 : cardindex
-
-logic temp___5861 : (int,card) farray
-
-logic temp___5862 : cardindex
-
-logic temp___5863 : (int,cardindex) farray
-
-logic temp___5864 : (int,(int,cardindex) farray) farray
-
-logic temp___5865 : (int,cardindex) farray
-
-logic temp___5866 : (int,cardindex) farray
-
-logic temp___5867 : (int,cardindex) farray
-
-logic o72 : int
-
-logic o73 : cardindex
-
-logic o74 : int
-
-logic o75 : (int,cardindex) farray
-
-logic o76 : cardindex
-
-logic o77 : (int,card) farray
-
-logic o78 : cardindex
-
-logic o79 : (int,cardindex) farray
-
-logic o80 : (int,(int,cardindex) farray) farray
-
-logic o81 : (int,cardindex) farray
-
-logic o82 : (int,cardindex) farray
-
-logic o83 : (int,cardindex) farray
-
-logic temp___589 : cardindex
-
-logic temp___5891 : (int,card) farray
-
-logic temp___5892 : cardindex
-
-logic temp___5893 : (int,cardindex) farray
-
-logic temp___5894 : (int,(int,cardindex) farray) farray
-
-logic temp___5895 : (int,cardindex) farray
-
-logic temp___5896 : (int,cardindex) farray
-
-logic temp___5897 : (int,cardindex) farray
-
-logic o84 : int
-
-logic o85 : cardindex
-
-logic o86 : cardindex
-
-logic o87 : (int,card) farray
-
-logic o88 : cardindex
-
-logic o89 : (int,cardindex) farray
-
-logic o90 : (int,(int,cardindex) farray) farray
-
-logic o91 : (int,cardindex) farray
-
-logic o92 : (int,cardindex) farray
-
-logic o93 : (int,cardindex) farray
-
-logic temp___606 : cardindex
-
-logic temp___6061 : (int,card) farray
-
-logic temp___6062 : cardindex
-
-logic temp___6063 : (int,cardindex) farray
-
-logic temp___6064 : (int,(int,cardindex) farray) farray
-
-logic temp___6065 : (int,cardindex) farray
-
-logic temp___6066 : (int,cardindex) farray
-
-logic temp___6067 : (int,cardindex) farray
-
-logic o94 : cardindex
-
-logic o95 : int
-
-logic o96 : (int,cardindex) farray
-
-logic o97 : cardindex
-
-logic o98 : (int,card) farray
-
-logic o99 : cardindex
-
-logic o100 : (int,cardindex) farray
-
-logic o101 : (int,(int,cardindex) farray) farray
-
-logic o102 : (int,cardindex) farray
-
-logic o103 : (int,cardindex) farray
-
-logic o104 : (int,cardindex) farray
-
-logic temp___609 : cardindex
-
-logic temp___6091 : (int,card) farray
-
-logic temp___6092 : cardindex
-
-logic temp___6093 : (int,cardindex) farray
-
-logic temp___6094 : (int,(int,cardindex) farray) farray
-
-logic temp___6095 : (int,cardindex) farray
-
-logic temp___6096 : (int,cardindex) farray
-
-logic temp___6097 : (int,cardindex) farray
-
-logic o105 : int
-
-logic o106 : cardindex
-
-logic o107 : (int,cardindex) farray
-
-logic o108 : int
-
-logic o109 : (int,(int,cardindex) farray) farray
-
-logic o110 : cardindex
-
-logic o111 : (int,card) farray
-
-logic o112 : cardindex
-
-logic o113 : (int,cardindex) farray
-
-logic o114 : (int,(int,cardindex) farray) farray
-
-logic o115 : (int,cardindex) farray
-
-logic o116 : (int,cardindex) farray
-
-logic o117 : (int,cardindex) farray
-
-logic temp___614 : cardindex
-
-logic temp___6141 : (int,card) farray
-
-logic temp___6142 : cardindex
-
-logic temp___6143 : (int,cardindex) farray
-
-logic temp___6144 : (int,(int,cardindex) farray) farray
-
-logic temp___6145 : (int,cardindex) farray
-
-logic temp___6146 : (int,cardindex) farray
-
-logic temp___6147 : (int,cardindex) farray
-
-logic o118 : int
-
-logic o119 : cardindex
-
-logic o120 : int
-
-logic o121 : (int,cardindex) farray
-
-logic o122 : cardindex
-
-logic o123 : (int,card) farray
-
-logic o124 : cardindex
-
-logic o125 : (int,cardindex) farray
-
-logic o126 : (int,(int,cardindex) farray) farray
-
-logic o127 : (int,cardindex) farray
-
-logic o128 : (int,cardindex) farray
-
-logic o129 : (int,cardindex) farray
-
-logic temp___617 : cardindex
-
-logic temp___6171 : (int,card) farray
-
-logic temp___6172 : cardindex
-
-logic temp___6173 : (int,cardindex) farray
-
-logic temp___6174 : (int,(int,cardindex) farray) farray
-
-logic temp___6175 : (int,cardindex) farray
-
-logic temp___6176 : (int,cardindex) farray
-
-logic temp___6177 : (int,cardindex) farray
-
-logic o130 : cardindex
-
-logic o131 : int
-
-logic o132 : (int,cardindex) farray
-
-logic o133 : cardindex
-
-logic o134 : (int,card) farray
-
-logic o135 : cardindex
-
-logic o136 : (int,cardindex) farray
-
-logic o137 : (int,(int,cardindex) farray) farray
-
-logic o138 : (int,cardindex) farray
-
-logic o139 : (int,cardindex) farray
-
-logic o140 : (int,cardindex) farray
-
-logic temp___620 : cardindex
-
-logic temp___6201 : (int,card) farray
-
-logic temp___6202 : cardindex
-
-logic temp___6203 : (int,cardindex) farray
-
-logic temp___6204 : (int,(int,cardindex) farray) farray
-
-logic temp___6205 : (int,cardindex) farray
-
-logic temp___6206 : (int,cardindex) farray
-
-logic temp___6207 : (int,cardindex) farray
-
-logic o141 : int
-
-logic o142 : cardindex
-
-logic o143 : int
-
-logic o144 : int
-
-logic o145 : cardindex
-
-logic o146 : int
-
-logic o147 : (int,cardindex) farray
-
-logic o148 : cardindex
-
-logic o149 : (int,card) farray
-
-logic o150 : cardindex
-
-logic o151 : (int,cardindex) farray
-
-logic o152 : (int,(int,cardindex) farray) farray
-
-logic o153 : (int,cardindex) farray
-
-logic o154 : (int,cardindex) farray
-
-logic o155 : (int,cardindex) farray
-
-logic temp___593 : cardindex
-
-logic temp___5931 : (int,card) farray
-
-logic temp___5932 : cardindex
-
-logic temp___5933 : (int,cardindex) farray
-
-logic temp___5934 : (int,(int,cardindex) farray) farray
-
-logic temp___5935 : (int,cardindex) farray
-
-logic temp___5936 : (int,cardindex) farray
-
-logic temp___5937 : (int,cardindex) farray
-
-logic o156 : int
-
-logic o157 : cardindex
-
-logic o158 : int
-
-logic o159 : (int,cardindex) farray
-
-logic o160 : int
-
-logic o161 : (int,(int,cardindex) farray) farray
-
-logic o162 : cardindex
-
-logic o163 : (int,card) farray
-
-logic o164 : cardindex
-
-logic o165 : (int,cardindex) farray
-
-logic o166 : (int,(int,cardindex) farray) farray
-
-logic o167 : (int,cardindex) farray
-
-logic o168 : (int,cardindex) farray
-
-logic o169 : (int,cardindex) farray
-
-logic temp___598 : cardindex
-
-logic temp___5981 : (int,card) farray
-
-logic temp___5982 : cardindex
-
-logic temp___5983 : (int,cardindex) farray
-
-logic temp___5984 : (int,(int,cardindex) farray) farray
-
-logic temp___5985 : (int,cardindex) farray
-
-logic temp___5986 : (int,cardindex) farray
-
-logic temp___5987 : (int,cardindex) farray
-
-logic o170 : int
-
-logic o171 : cardindex
-
-logic o172 : int
-
-logic o173 : (int,cardindex) farray
-
-logic o174 : cardindex
-
-logic o175 : (int,card) farray
-
-logic o176 : cardindex
-
-logic o177 : (int,cardindex) farray
-
-logic o178 : (int,(int,cardindex) farray) farray
-
-logic o179 : (int,cardindex) farray
-
-logic o180 : (int,cardindex) farray
-
-logic o181 : (int,cardindex) farray
-
-logic temp___601 : cardindex
-
-logic temp___6011 : (int,card) farray
-
-logic temp___6012 : cardindex
-
-logic temp___6013 : (int,cardindex) farray
-
-logic temp___6014 : (int,(int,cardindex) farray) farray
-
-logic temp___6015 : (int,cardindex) farray
-
-logic temp___6016 : (int,cardindex) farray
-
-logic temp___6017 : (int,cardindex) farray
-
-logic o182 : cardindex
-
-logic o183 : int
-
-logic o184 : (int,cardindex) farray
-
-logic o185 : cardindex
-
-logic o186 : (int,card) farray
-
-logic o187 : cardindex
-
-logic o188 : (int,cardindex) farray
-
-logic o189 : (int,(int,cardindex) farray) farray
-
-logic o190 : (int,cardindex) farray
-
-logic o191 : (int,cardindex) farray
-
-logic o192 : (int,cardindex) farray
-
-logic temp___604 : cardindex
-
-logic temp___6041 : (int,card) farray
-
-logic temp___6042 : cardindex
-
-logic temp___6043 : (int,cardindex) farray
-
-logic temp___6044 : (int,(int,cardindex) farray) farray
-
-logic temp___6045 : (int,cardindex) farray
-
-logic temp___6046 : (int,cardindex) farray
-
-logic temp___6047 : (int,cardindex) farray
-
-logic i1 : int
-
-logic i2 : int
-
-logic j : int
-
-logic o193 : int
-
-logic o194 : cardindex
-
-logic o195 : int
-
-logic o196 : int
-
-logic o197 : bool
-
-logic o198 : int
-
-logic temp___627 : (int,cardindex) farray
-
-logic o199 : int
-
-logic temp___629 : (int,cardindex) farray
-
-logic o200 : int
-
-logic o201 : cardindex
-
-logic o202 : int
-
-logic o203 : bool
-
-logic o204 : bool
-
-logic i3 : int
-
-logic o205 : int
-
-logic o206 : cardindex
-
-logic o207 : int
-
-logic o208 : int
-
-logic o209 : cardindex
-
-logic temp___755 : int
-
-logic o210 : int
-
-logic o211 : cardindex
-
-logic o212 : int
-
-logic o213 : int
-
-logic o214 : int
-
-logic o215 : cardindex
-
-logic o216 : int
-
-logic o217 : int
-
-logic o218 : cardindex
-
-logic temp___750 : int
-
-logic o219 : int
-
-logic o220 : card
-
-logic o221 : int
-
-logic o222 : card
-
-logic o223 : int
-
-logic o224 : int
-
-logic o225 : int
-
-logic o226 : cardindex
-
-logic o227 : int
-
-logic o228 : int
-
-logic o229 : cardindex
-
-logic o230 : int
-
-logic o231 : int
-
-logic o232 : cardindex
-
-logic o233 : int
-
-logic o234 : bool
-
-logic o235 : bool
-
-logic i4 : int
-
-logic j1 : int
-
-logic o236 : int
-
-logic o237 : cardindex
-
-logic o238 : int
-
-logic o239 : int
-
-logic o240 : bool
-
-logic k : int
-
-logic o241 : int
-
-logic o242 : int
-
-logic o243 : cardindex
-
-logic o244 : int
-
-logic o245 : int
-
-logic o246 : bool
-
-logic o247 : bool
-
-logic o248 : int
-
-logic temp___716 : (int,cardindex) farray
-
-logic o249 : int
-
-logic o250 : cardindex
-
-logic temp___717 : int
-
-logic o251 : int
-
-logic temp___720 : (int,cardindex) farray
-
-logic o252 : int
-
-logic o253 : cardindex
-
-logic temp___721 : int
-
-logic o254 : int
-
-logic o255 : card
-
-logic o256 : int
-
-logic i5 : int
-
-logic j2 : int
-
-logic o257 : int
-
-logic o258 : cardindex
-
-logic o259 : int
-
-logic o260 : int
-
-logic o261 : bool
-
-logic k1 : int
-
-logic o262 : int
-
-logic o263 : int
-
-logic o264 : cardindex
-
-logic o265 : int
-
-logic o266 : int
-
-logic o267 : bool
-
-logic o268 : bool
-
-logic o269 : int
-
-logic temp___692 : (int,cardindex) farray
-
-logic o270 : int
-
-logic temp___694 : (int,cardindex) farray
-
-logic o271 : int
-
-logic o272 : cardindex
-
-logic o273 : int
-
-logic ist : int
-
-logic ip : int
-
-logic o274 : int
-
-logic o275 : cardindex
-
-logic o276 : int
-
-logic o277 : int
-
-logic o278 : bool
-
-logic o279 : int
-
-logic temp___669 : (int,cardindex) farray
-
-logic o280 : int
-
-logic o281 : cardindex
-
-logic temp___670 : int
-
-logic o282 : int
-
-logic temp___673 : (int,cardindex) farray
-
-logic o283 : int
-
-logic o284 : cardindex
-
-logic temp___674 : int
-
-logic o285 : int
-
-logic o286 : cardindex
-
-logic o287 : int
-
-logic o288 : bool
-
-logic i6 : int
-
-logic o289 : int
-
-logic o290 : cardindex
-
-logic temp___654 : int
-
-logic o291 : int
-
-logic temp___655 : (int,cardindex) farray
-
-logic o292 : int
-
-logic o293 : cardindex
-
-logic temp___657 : int
-
-logic o294 : int
-
-logic o295 : cardindex
-
-logic o296 : int
-
-logic o297 : int
-
-logic o298 : cardindex
-
-logic o299 : int
-
-logic o300 : cardindex
-
-logic temp___651 : int
-
-logic o301 : int
-
-logic o302 : cardindex
-
-logic o303 : int
-
-logic o304 : int
-
-logic o305 : int
-
-logic o306 : bool
-
-logic o307 : bool
-
-logic o308 : int
-
-logic o309 : cardindex
-
-logic o310 : int
-
-logic o311 : int
-
-logic o312 : cardindex
-
-logic o313 : int
-
-logic o314 : bool
-
-logic o315 : bool
-
-logic stackisize1 : int
-
-logic topstacki1 : int
-
-logic result : int
-
-logic pred1 : int
-
-logic result1 : int
-
-logic i7 : int
-
-logic pred2 : int
-
-logic i8 : int
-
-logic stackisize2 : int
-
-logic topstacki2 : int
-
-logic result2 : bool
-
-logic result3 : bool
-
-logic result4 : int
-
-logic stackisize3 : int
-
-logic result5 : int
-
-logic topstacki3 : int
-
-logic result6 : bool
-
-logic result7 : bool
-
-logic result8 : bool
-
-logic result9 : bool
-
-logic result10 : bool
-
-logic result11 : bool
-
-logic result12 : bool
-
-logic result13 : int
-
-logic pred3 : int
-
-logic result14 : int
-
-logic i9 : int
-
-logic pred4 : int
-
-logic i10 : int
-
-logic pred5 : int
-
-logic i11 : int
-
-logic pred6 : int
-
-logic i12 : int
-
-logic stackisize4 : int
-
-logic topstacki4 : int
-
-logic pred7 : int
-
-logic i13 : int
-
-logic stackisize5 : int
-
-logic topstacki5 : int
-
-logic pred8 : int
-
-logic i14 : int
-
-logic stackisize6 : int
-
-logic topstacki6 : int
-
-logic pred9 : int
-
-logic i15 : int
-
-logic stackisize7 : int
-
-logic topstacki7 : int
-
-logic result15 : int
-
-logic idx1 : int
-
-logic result16 : cardindex
-
-logic result17 : (int,card) farray
-
-logic result18 : cardindex
-
-logic result19 : (int,cardindex) farray
-
-logic result20 : (int,(int,cardindex) farray) farray
-
-logic result21 : (int,cardindex) farray
-
-logic result22 : (int,cardindex) farray
-
-logic result23 : (int,cardindex) farray
-
-logic s__split_fields8 : cardindex
-
-logic s__split_fields9 : (int,card) farray
-
-logic s__split_fields10 : cardindex
-
-logic s__split_fields11 : (int,cardindex) farray
-
-logic s__split_fields12 : (int,(int,cardindex) farray) farray
-
-logic s__split_fields13 : (int,cardindex) farray
-
-logic s__split_fields14 : (int,cardindex) farray
-
-logic s__split_fields15 : (int,cardindex) farray
-
-logic result24 : cardindex
-
-logic result25 : (int,card) farray
-
-logic result26 : cardindex
-
-logic result27 : (int,cardindex) farray
-
-logic result28 : (int,(int,cardindex) farray) farray
-
-logic result29 : (int,cardindex) farray
-
-logic result30 : (int,cardindex) farray
-
-logic result31 : (int,cardindex) farray
-
-logic s__split_fields16 : cardindex
-
-logic s__split_fields17 : (int,card) farray
-
-logic s__split_fields18 : cardindex
-
-logic s__split_fields19 : (int,cardindex) farray
-
-logic s__split_fields20 : (int,(int,cardindex) farray) farray
-
-logic s__split_fields21 : (int,cardindex) farray
-
-logic s__split_fields22 : (int,cardindex) farray
-
-logic s__split_fields23 : (int,cardindex) farray
-
-logic result32 : cardindex
-
-logic result33 : (int,card) farray
-
-logic result34 : cardindex
-
-logic result35 : (int,cardindex) farray
-
-logic result36 : (int,(int,cardindex) farray) farray
-
-logic result37 : (int,cardindex) farray
-
-logic result38 : (int,cardindex) farray
-
-logic result39 : (int,cardindex) farray
-
-logic s__split_fields24 : cardindex
-
-logic s__split_fields25 : (int,card) farray
-
-logic s__split_fields26 : cardindex
-
-logic s__split_fields27 : (int,cardindex) farray
-
-logic s__split_fields28 : (int,(int,cardindex) farray) farray
-
-logic s__split_fields29 : (int,cardindex) farray
-
-logic s__split_fields30 : (int,cardindex) farray
-
-logic s__split_fields31 : (int,cardindex) farray
-
-logic result40 : int
-
-logic i16 : int
-
-logic result41 : cardindex
-
-logic result42 : (int,card) farray
-
-logic result43 : cardindex
-
-logic result44 : (int,cardindex) farray
-
-logic result45 : (int,(int,cardindex) farray) farray
-
-logic result46 : (int,cardindex) farray
-
-logic result47 : (int,cardindex) farray
-
-logic result48 : (int,cardindex) farray
-
-logic s__split_fields32 : cardindex
-
-logic s__split_fields33 : (int,card) farray
-
-logic s__split_fields34 : cardindex
-
-logic s__split_fields35 : (int,cardindex) farray
-
-logic s__split_fields36 : (int,(int,cardindex) farray) farray
-
-logic s__split_fields37 : (int,cardindex) farray
-
-logic s__split_fields38 : (int,cardindex) farray
-
-logic s__split_fields39 : (int,cardindex) farray
-
-logic result49 : cardindex
-
-logic result50 : (int,card) farray
-
-logic result51 : cardindex
-
-logic result52 : (int,cardindex) farray
-
-logic result53 : (int,(int,cardindex) farray) farray
-
-logic result54 : (int,cardindex) farray
-
-logic result55 : (int,cardindex) farray
-
-logic result56 : (int,cardindex) farray
-
-logic s__split_fields40 : cardindex
-
-logic s__split_fields41 : (int,card) farray
-
-logic s__split_fields42 : cardindex
-
-logic s__split_fields43 : (int,cardindex) farray
-
-logic s__split_fields44 : (int,(int,cardindex) farray) farray
-
-logic s__split_fields45 : (int,cardindex) farray
-
-logic s__split_fields46 : (int,cardindex) farray
-
-logic s__split_fields47 : (int,cardindex) farray
-
-logic result57 : cardindex
-
-logic result58 : (int,card) farray
-
-logic result59 : cardindex
-
-logic result60 : (int,cardindex) farray
-
-logic result61 : (int,(int,cardindex) farray) farray
-
-logic result62 : (int,cardindex) farray
-
-logic result63 : (int,cardindex) farray
-
-logic result64 : (int,cardindex) farray
-
-logic s__split_fields48 : cardindex
-
-logic s__split_fields49 : (int,card) farray
-
-logic s__split_fields50 : cardindex
-
-logic s__split_fields51 : (int,cardindex) farray
-
-logic s__split_fields52 : (int,(int,cardindex) farray) farray
-
-logic s__split_fields53 : (int,cardindex) farray
-
-logic s__split_fields54 : (int,cardindex) farray
-
-logic s__split_fields55 : (int,cardindex) farray
-
-logic result65 : cardindex
-
-logic result66 : (int,card) farray
-
-logic result67 : cardindex
-
-logic result68 : (int,cardindex) farray
-
-logic result69 : (int,(int,cardindex) farray) farray
-
-logic result70 : (int,cardindex) farray
-
-logic result71 : (int,cardindex) farray
-
-logic result72 : (int,cardindex) farray
-
-logic s__split_fields56 : cardindex
-
-logic s__split_fields57 : (int,card) farray
-
-logic s__split_fields58 : cardindex
-
-logic s__split_fields59 : (int,cardindex) farray
-
-logic s__split_fields60 : (int,(int,cardindex) farray) farray
-
-logic s__split_fields61 : (int,cardindex) farray
-
-logic s__split_fields62 : (int,cardindex) farray
-
-logic s__split_fields63 : (int,cardindex) farray
-
-logic result73 : cardindex
-
-logic result74 : (int,card) farray
-
-logic result75 : cardindex
-
-logic result76 : (int,cardindex) farray
-
-logic result77 : (int,(int,cardindex) farray) farray
-
-logic result78 : (int,cardindex) farray
-
-logic result79 : (int,cardindex) farray
-
-logic result80 : (int,cardindex) farray
-
-logic s__split_fields64 : cardindex
-
-logic s__split_fields65 : (int,card) farray
-
-logic s__split_fields66 : cardindex
-
-logic s__split_fields67 : (int,cardindex) farray
-
-logic s__split_fields68 : (int,(int,cardindex) farray) farray
-
-logic s__split_fields69 : (int,cardindex) farray
-
-logic s__split_fields70 : (int,cardindex) farray
-
-logic s__split_fields71 : (int,cardindex) farray
-
-logic result81 : int
-
-logic stackisize8 : int
-
-logic result82 : cardindex
-
-logic result83 : (int,card) farray
-
-logic result84 : cardindex
-
-logic result85 : (int,cardindex) farray
-
-logic result86 : (int,(int,cardindex) farray) farray
-
-logic result87 : (int,cardindex) farray
-
-logic result88 : (int,cardindex) farray
-
-logic result89 : (int,cardindex) farray
-
-logic s__split_fields72 : cardindex
-
-logic s__split_fields73 : (int,card) farray
-
-logic s__split_fields74 : cardindex
-
-logic s__split_fields75 : (int,cardindex) farray
-
-logic s__split_fields76 : (int,(int,cardindex) farray) farray
-
-logic s__split_fields77 : (int,cardindex) farray
-
-logic s__split_fields78 : (int,cardindex) farray
-
-logic s__split_fields79 : (int,cardindex) farray
-
-logic result90 : cardindex
-
-logic result91 : (int,card) farray
-
-logic result92 : cardindex
-
-logic result93 : (int,cardindex) farray
-
-logic result94 : (int,(int,cardindex) farray) farray
-
-logic result95 : (int,cardindex) farray
-
-logic result96 : (int,cardindex) farray
-
-logic result97 : (int,cardindex) farray
-
-logic s__split_fields80 : cardindex
-
-logic s__split_fields81 : (int,card) farray
-
-logic s__split_fields82 : cardindex
-
-logic s__split_fields83 : (int,cardindex) farray
-
-logic s__split_fields84 : (int,(int,cardindex) farray) farray
-
-logic s__split_fields85 : (int,cardindex) farray
-
-logic s__split_fields86 : (int,cardindex) farray
-
-logic s__split_fields87 : (int,cardindex) farray
-
-logic result98 : cardindex
-
-logic result99 : (int,card) farray
-
-logic result100 : cardindex
-
-logic result101 : (int,cardindex) farray
-
-logic result102 : (int,(int,cardindex) farray) farray
-
-logic result103 : (int,cardindex) farray
-
-logic result104 : (int,cardindex) farray
-
-logic result105 : (int,cardindex) farray
-
-logic s__split_fields88 : cardindex
-
-logic s__split_fields89 : (int,card) farray
-
-logic s__split_fields90 : cardindex
-
-logic s__split_fields91 : (int,cardindex) farray
-
-logic s__split_fields92 : (int,(int,cardindex) farray) farray
-
-logic s__split_fields93 : (int,cardindex) farray
-
-logic s__split_fields94 : (int,cardindex) farray
-
-logic s__split_fields95 : (int,cardindex) farray
-
-logic result106 : cardindex
-
-logic result107 : (int,card) farray
-
-logic result108 : cardindex
-
-logic result109 : (int,cardindex) farray
-
-logic result110 : (int,(int,cardindex) farray) farray
-
-logic result111 : (int,cardindex) farray
-
-logic result112 : (int,cardindex) farray
-
-logic result113 : (int,cardindex) farray
-
-logic s__split_fields96 : cardindex
-
-logic s__split_fields97 : (int,card) farray
-
-logic s__split_fields98 : cardindex
-
-logic s__split_fields99 : (int,cardindex) farray
-
-logic s__split_fields100 : (int,(int,cardindex) farray) farray
-
-logic s__split_fields101 : (int,cardindex) farray
-
-logic s__split_fields102 : (int,cardindex) farray
-
-logic s__split_fields103 : (int,cardindex) farray
-
-logic s__split_fields104 : cardindex
-
-logic s__split_fields105 : (int,card) farray
-
-logic s__split_fields106 : cardindex
-
-logic s__split_fields107 : (int,cardindex) farray
-
-logic s__split_fields108 : (int,(int,cardindex) farray) farray
-
-logic s__split_fields109 : (int,cardindex) farray
-
-logic s__split_fields110 : (int,cardindex) farray
-
-logic s__split_fields111 : (int,cardindex) farray
-
-logic i17 : int
-
-logic stackisize9 : int
-
-logic s__split_fields112 : cardindex
-
-logic s__split_fields113 : (int,card) farray
-
-logic s__split_fields114 : cardindex
-
-logic s__split_fields115 : (int,cardindex) farray
-
-logic s__split_fields116 : (int,(int,cardindex) farray) farray
-
-logic s__split_fields117 : (int,cardindex) farray
-
-logic s__split_fields118 : (int,cardindex) farray
-
-logic s__split_fields119 : (int,cardindex) farray
-
-logic i18 : int
-
-logic stackisize10 : int
-
-logic result114 : bool
-
-logic result115 : bool
-
-logic result116 : bool
-
-logic result117 : bool
-
-logic result118 : bool
-
-logic result119 : bool
-
-logic result120 : bool
-
-logic result121 : bool
-
-logic result122 : bool
-
-logic result123 : bool
-
-logic result124 : bool
-
-logic result125 : bool
-
-logic result126 : bool
-
-logic result127 : bool
-
-logic result128 : bool
-
-logic result129 : bool
-
-logic result130 : bool
-
-logic s__split_fields120 : cardindex
-
-logic s__split_fields121 : (int,card) farray
-
-logic s__split_fields122 : cardindex
-
-logic s__split_fields123 : (int,cardindex) farray
-
-logic s__split_fields124 : (int,(int,cardindex) farray) farray
-
-logic s__split_fields125 : (int,cardindex) farray
-
-logic s__split_fields126 : (int,cardindex) farray
-
-logic s__split_fields127 : (int,cardindex) farray
-
-logic idx2 : int
-
-logic pred10 : int
-
-logic i19 : int
-
-logic stackisize11 : int
-
-logic topstacki8 : int
-
-logic s__split_fields128 : cardindex
-
-logic s__split_fields129 : (int,card) farray
-
-logic s__split_fields130 : cardindex
-
-logic s__split_fields131 : (int,cardindex) farray
-
-logic s__split_fields132 : (int,(int,cardindex) farray) farray
-
-logic s__split_fields133 : (int,cardindex) farray
-
-logic s__split_fields134 : (int,cardindex) farray
-
-logic s__split_fields135 : (int,cardindex) farray
-
-logic idx3 : int
-
-logic pred11 : int
-
-logic i20 : int
-
-logic stackisize12 : int
-
-logic topstacki9 : int
-
-axiom H : in_range2(c)
-
-axiom H1 : ((inv({ us_split_fields1 = { rec__patience__state__numelts =
-  s__split_fields; rec__patience__state__values = s__split_fields1;
+ (* File "patience.ads", line 53, characters 0-0 *)
+goal WP_parameter_def :
+  (forall s__split_fields:cardindex.
+  forall s__split_fields1:(int,card) farray.
+  forall s__split_fields2:cardindex.
+  forall s__split_fields3:(int,cardindex) farray.
+  forall s__split_fields4:(int,(int,cardindex) farray) farray.
+  forall s__split_fields5:(int,cardindex) farray.
+  forall s__split_fields6:(int,cardindex) farray.
+  forall s__split_fields7:(int,cardindex) farray. forall idx:int.
+  forall pred:int. forall i:int. forall stackisize:int. forall topstacki:int.
+  forall temp___598:int. forall temp___597:int. forall temp___596:int.
+  forall temp___595:int. forall o:int. forall o1:cardindex. forall o2:int.
+  forall o3:int. forall temp___565:(int,cardindex) farray. forall o4:int.
+  forall o5:cardindex. forall o6:int. forall o7:int. forall o8:card.
+  forall o9:int. forall o10:int. forall o11:card. forall o12:int.
+  forall o13:(int,card) farray. forall o14:cardindex.
+  forall o15:(int,card) farray. forall o16:cardindex.
+  forall o17:(int,cardindex) farray.
+  forall o18:(int,(int,cardindex) farray) farray.
+  forall o19:(int,cardindex) farray. forall o20:(int,cardindex) farray.
+  forall o21:(int,cardindex) farray. forall temp___614:cardindex.
+  forall temp___6141:(int,card) farray. forall temp___6142:cardindex.
+  forall temp___6143:(int,cardindex) farray.
+  forall temp___6144:(int,(int,cardindex) farray) farray.
+  forall temp___6145:(int,cardindex) farray.
+  forall temp___6146:(int,cardindex) farray.
+  forall temp___6147:(int,cardindex) farray. forall o22:int. forall o23:int.
+  forall o24:cardindex. forall o25:cardindex. forall o26:(int,card) farray.
+  forall o27:cardindex. forall o28:(int,cardindex) farray.
+  forall o29:(int,(int,cardindex) farray) farray.
+  forall o30:(int,cardindex) farray. forall o31:(int,cardindex) farray.
+  forall o32:(int,cardindex) farray. forall temp___616:cardindex.
+  forall temp___6161:(int,card) farray. forall temp___6162:cardindex.
+  forall temp___6163:(int,cardindex) farray.
+  forall temp___6164:(int,(int,cardindex) farray) farray.
+  forall temp___6165:(int,cardindex) farray.
+  forall temp___6166:(int,cardindex) farray.
+  forall temp___6167:(int,cardindex) farray. forall o33:int.
+  forall o34:cardindex. forall o35:int. forall o36:(int,cardindex) farray.
+  forall o37:cardindex. forall o38:(int,card) farray. forall o39:cardindex.
+  forall o40:(int,cardindex) farray.
+  forall o41:(int,(int,cardindex) farray) farray.
+  forall o42:(int,cardindex) farray. forall o43:(int,cardindex) farray.
+  forall o44:(int,cardindex) farray. forall temp___619:cardindex.
+  forall temp___6191:(int,card) farray. forall temp___6192:cardindex.
+  forall temp___6193:(int,cardindex) farray.
+  forall temp___6194:(int,(int,cardindex) farray) farray.
+  forall temp___6195:(int,cardindex) farray.
+  forall temp___6196:(int,cardindex) farray.
+  forall temp___6197:(int,cardindex) farray. forall o45:int.
+  forall o46:cardindex. forall o47:cardindex. forall o48:(int,card) farray.
+  forall o49:cardindex. forall o50:(int,cardindex) farray.
+  forall o51:(int,(int,cardindex) farray) farray.
+  forall o52:(int,cardindex) farray. forall o53:(int,cardindex) farray.
+  forall o54:(int,cardindex) farray. forall temp___636:cardindex.
+  forall temp___6361:(int,card) farray. forall temp___6362:cardindex.
+  forall temp___6363:(int,cardindex) farray.
+  forall temp___6364:(int,(int,cardindex) farray) farray.
+  forall temp___6365:(int,cardindex) farray.
+  forall temp___6366:(int,cardindex) farray.
+  forall temp___6367:(int,cardindex) farray. forall o55:cardindex.
+  forall o56:int. forall o57:(int,cardindex) farray. forall o58:cardindex.
+  forall o59:(int,card) farray. forall o60:cardindex.
+  forall o61:(int,cardindex) farray.
+  forall o62:(int,(int,cardindex) farray) farray.
+  forall o63:(int,cardindex) farray. forall o64:(int,cardindex) farray.
+  forall o65:(int,cardindex) farray. forall temp___639:cardindex.
+  forall temp___6391:(int,card) farray. forall temp___6392:cardindex.
+  forall temp___6393:(int,cardindex) farray.
+  forall temp___6394:(int,(int,cardindex) farray) farray.
+  forall temp___6395:(int,cardindex) farray.
+  forall temp___6396:(int,cardindex) farray.
+  forall temp___6397:(int,cardindex) farray. forall o66:int.
+  forall o67:cardindex. forall o68:(int,cardindex) farray. forall o69:int.
+  forall o70:(int,(int,cardindex) farray) farray. forall o71:cardindex.
+  forall o72:(int,card) farray. forall o73:cardindex.
+  forall o74:(int,cardindex) farray.
+  forall o75:(int,(int,cardindex) farray) farray.
+  forall o76:(int,cardindex) farray. forall o77:(int,cardindex) farray.
+  forall o78:(int,cardindex) farray. forall temp___644:cardindex.
+  forall temp___6441:(int,card) farray. forall temp___6442:cardindex.
+  forall temp___6443:(int,cardindex) farray.
+  forall temp___6444:(int,(int,cardindex) farray) farray.
+  forall temp___6445:(int,cardindex) farray.
+  forall temp___6446:(int,cardindex) farray.
+  forall temp___6447:(int,cardindex) farray. forall o79:int.
+  forall o80:cardindex. forall o81:int. forall o82:(int,cardindex) farray.
+  forall o83:cardindex. forall o84:(int,card) farray. forall o85:cardindex.
+  forall o86:(int,cardindex) farray.
+  forall o87:(int,(int,cardindex) farray) farray.
+  forall o88:(int,cardindex) farray. forall o89:(int,cardindex) farray.
+  forall o90:(int,cardindex) farray. forall temp___647:cardindex.
+  forall temp___6471:(int,card) farray. forall temp___6472:cardindex.
+  forall temp___6473:(int,cardindex) farray.
+  forall temp___6474:(int,(int,cardindex) farray) farray.
+  forall temp___6475:(int,cardindex) farray.
+  forall temp___6476:(int,cardindex) farray.
+  forall temp___6477:(int,cardindex) farray. forall o91:cardindex.
+  forall o92:int. forall o93:(int,cardindex) farray. forall o94:cardindex.
+  forall o95:(int,card) farray. forall o96:cardindex.
+  forall o97:(int,cardindex) farray.
+  forall o98:(int,(int,cardindex) farray) farray.
+  forall o99:(int,cardindex) farray. forall o100:(int,cardindex) farray.
+  forall o101:(int,cardindex) farray. forall temp___650:cardindex.
+  forall temp___6501:(int,card) farray. forall temp___6502:cardindex.
+  forall temp___6503:(int,cardindex) farray.
+  forall temp___6504:(int,(int,cardindex) farray) farray.
+  forall temp___6505:(int,cardindex) farray.
+  forall temp___6506:(int,cardindex) farray.
+  forall temp___6507:(int,cardindex) farray. forall o102:int.
+  forall o103:cardindex. forall o104:int. forall o105:int.
+  forall o106:cardindex. forall o107:int. forall o108:(int,cardindex) farray.
+  forall o109:cardindex. forall o110:(int,card) farray.
+  forall o111:cardindex. forall o112:(int,cardindex) farray.
+  forall o113:(int,(int,cardindex) farray) farray.
+  forall o114:(int,cardindex) farray. forall o115:(int,cardindex) farray.
+  forall o116:(int,cardindex) farray. forall temp___623:cardindex.
+  forall temp___6231:(int,card) farray. forall temp___6232:cardindex.
+  forall temp___6233:(int,cardindex) farray.
+  forall temp___6234:(int,(int,cardindex) farray) farray.
+  forall temp___6235:(int,cardindex) farray.
+  forall temp___6236:(int,cardindex) farray.
+  forall temp___6237:(int,cardindex) farray. forall o117:int.
+  forall o118:cardindex. forall o119:int. forall o120:(int,cardindex) farray.
+  forall o121:int. forall o122:(int,(int,cardindex) farray) farray.
+  forall o123:cardindex. forall o124:(int,card) farray.
+  forall o125:cardindex. forall o126:(int,cardindex) farray.
+  forall o127:(int,(int,cardindex) farray) farray.
+  forall o128:(int,cardindex) farray. forall o129:(int,cardindex) farray.
+  forall o130:(int,cardindex) farray. forall temp___628:cardindex.
+  forall temp___6281:(int,card) farray. forall temp___6282:cardindex.
+  forall temp___6283:(int,cardindex) farray.
+  forall temp___6284:(int,(int,cardindex) farray) farray.
+  forall temp___6285:(int,cardindex) farray.
+  forall temp___6286:(int,cardindex) farray.
+  forall temp___6287:(int,cardindex) farray. forall o131:int.
+  forall o132:cardindex. forall o133:int. forall o134:(int,cardindex) farray.
+  forall o135:cardindex. forall o136:(int,card) farray.
+  forall o137:cardindex. forall o138:(int,cardindex) farray.
+  forall o139:(int,(int,cardindex) farray) farray.
+  forall o140:(int,cardindex) farray. forall o141:(int,cardindex) farray.
+  forall o142:(int,cardindex) farray. forall temp___631:cardindex.
+  forall temp___6311:(int,card) farray. forall temp___6312:cardindex.
+  forall temp___6313:(int,cardindex) farray.
+  forall temp___6314:(int,(int,cardindex) farray) farray.
+  forall temp___6315:(int,cardindex) farray.
+  forall temp___6316:(int,cardindex) farray.
+  forall temp___6317:(int,cardindex) farray. forall o143:cardindex.
+  forall o144:int. forall o145:(int,cardindex) farray. forall o146:cardindex.
+  forall o147:(int,card) farray. forall o148:cardindex.
+  forall o149:(int,cardindex) farray.
+  forall o150:(int,(int,cardindex) farray) farray.
+  forall o151:(int,cardindex) farray. forall o152:(int,cardindex) farray.
+  forall o153:(int,cardindex) farray. forall temp___634:cardindex.
+  forall temp___6341:(int,card) farray. forall temp___6342:cardindex.
+  forall temp___6343:(int,cardindex) farray.
+  forall temp___6344:(int,(int,cardindex) farray) farray.
+  forall temp___6345:(int,cardindex) farray.
+  forall temp___6346:(int,cardindex) farray.
+  forall temp___6347:(int,cardindex) farray. forall i1:int. forall o154:int.
+  forall o155:cardindex. forall o156:int. forall o157:int. forall o158:card.
+  forall o159:int. forall o160:int. forall o161:cardindex. forall o162:int.
+  forall o163:int. forall o164:cardindex. forall o165:int. forall o166:int.
+  forall o167:cardindex. forall o168:int. forall o169:bool. forall o170:bool.
+  forall stackisize1:int. forall topstacki1:int. forall result:int__ref.
+  forall pred1:int. forall result1:int__ref. forall i2:int. forall pred2:int.
+  forall i3:int. forall stackisize2:int. forall topstacki2:int.
+  forall result2:int__ref. forall stackisize3:int. forall result3:int__ref.
+  forall topstacki3:int. forall result4:bool. forall result5:int__ref.
+  forall pred3:int. forall result6:int__ref. forall i4:int.
+  forall pred4:int__ref. forall i5:int__ref. forall pred5:int. forall i6:int.
+  forall pred6:int__ref. forall i7:int__ref. forall stackisize4:int__ref.
+  forall topstacki4:int__ref. forall pred7:int. forall i8:int.
+  forall stackisize5:int. forall topstacki5:int. forall pred8:int__ref.
+  forall i9:int__ref. forall stackisize6:int__ref.
+  forall topstacki6:int__ref. forall pred9:int. forall i10:int.
+  forall stackisize7:int. forall topstacki7:int. forall result7:int__ref.
+  forall idx1:int. forall result8:us_split_fields__ref.
+  forall s__split_fields8:us_split_fields.
+  forall result9:us_split_fields__ref.
+  forall s__split_fields9:us_split_fields.
+  forall result10:us_split_fields__ref.
+  forall s__split_fields10:us_split_fields. forall result11:int__ref.
+  forall i11:int. forall result12:us_split_fields__ref.
+  forall s__split_fields11:us_split_fields.
+  forall result13:us_split_fields__ref.
+  forall s__split_fields12:us_split_fields.
+  forall result14:us_split_fields__ref.
+  forall s__split_fields13:us_split_fields.
+  forall result15:us_split_fields__ref.
+  forall s__split_fields14:us_split_fields.
+  forall result16:us_split_fields__ref.
+  forall s__split_fields15:us_split_fields. forall result17:int__ref.
+  forall stackisize8:int. forall result18:us_split_fields__ref.
+  forall s__split_fields16:us_split_fields.
+  forall result19:us_split_fields__ref.
+  forall s__split_fields17:us_split_fields.
+  forall result20:us_split_fields__ref.
+  forall s__split_fields18:us_split_fields.
+  forall result21:us_split_fields__ref.
+  forall s__split_fields19:us_split_fields.
+  forall s__split_fields20:us_split_fields__ref. forall i12:int__ref.
+  forall stackisize9:int__ref. forall s__split_fields21:us_split_fields.
+  forall i13:int. forall stackisize10:int. forall result22:bool.
+  forall result23:bool. forall result24:bool. forall result25:bool.
+  forall result26:bool. forall result27:bool. forall result28:bool.
+  (in_range2(c) -> (((inv({ us_split_fields1 = {
+  rec__patience__state__numelts = s__split_fields;
+  rec__patience__state__values = s__split_fields1;
   rec__patience__state__numstacks = s__split_fields2;
   rec__patience__state__stacksizes = s__split_fields3;
   rec__patience__state__stacks = s__split_fields4;
   rec__patience__state__posstack = s__split_fields5;
   rec__patience__state__posheight = s__split_fields6;
   rec__patience__state__preds = s__split_fields7 } }) = true) and
-  (to_rep1(s__split_fields) <  100))
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range1(idx))
-
-axiom H3 : (((- 2147483648) <= 2147483647) -> in_range1(pred))
-
-axiom H4 : (((- 2147483648) <= 2147483647) -> in_range1(i))
-
-axiom H5 : (((- 1) <= 100) -> in_range3(stackisize))
-
-axiom H6 : (((- 1) <= 100) -> in_range3(topstacki))
-
-axiom H7 : (result = pred)
-
-axiom H8 : (pred1 = (- 1))
-
-axiom H9 : (result1 = i)
-
-axiom H10 : (i7 = 0)
-
-axiom H11 : ((i7 <  to_rep1(s__split_fields2)) -> (temp___568 = topstacki))
-
-axiom H12 : ((i7 <  to_rep1(s__split_fields2)) -> (temp___567 = stackisize))
-
-axiom H13 : ((i7 <  to_rep1(s__split_fields2)) -> (temp___566 = i7))
-
-axiom H14 : ((i7 <  to_rep1(s__split_fields2)) -> (temp___565 = pred1))
-
-axiom H15 : ((i7 <  to_rep1(s__split_fields2)) -> ((0 <= i8) and
-  (i8 <= to_rep1(s__split_fields2))))
-
-axiom H16 : ((i7 <  to_rep1(s__split_fields2)) -> (((i8 = 0) ->
-  (pred2 = (- 1))) and ((not (i8 = 0)) -> (((((0 <= pred2) and
+  (to_rep1(s__split_fields) <  100)) -> ((((- 2147483648) <= 2147483647) ->
+  in_range1(idx)) -> ((((- 2147483648) <= 2147483647) -> in_range1(pred)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range1(i)) -> ((((- 1) <= 100) ->
+  in_range3(stackisize)) -> ((((- 1) <= 100) -> in_range3(topstacki)) ->
+  (((result = { int__content = pred }) and (pred1 = (- 1))) -> (((result1 = {
+  int__content = i }) and (i2 = 0)) ->
+  ((((i2 <  to_rep1(s__split_fields2)) and ((((temp___598 = topstacki) and
+  ((temp___597 = stackisize) and ((temp___596 = i2) and
+  ((temp___595 = pred1) and ((((0 <= i3) and
+  (i3 <= to_rep1(s__split_fields2))) and (((i3 = 0) and (pred2 = (- 1))) or
+  ((not (i3 = 0)) and (((((0 <= pred2) and
   (pred2 <= (to_rep1(s__split_fields) - 1))) and
-  (pred2 = to_rep1(((s__split_fields4[(i8 - 1)])[(to_rep1((s__split_fields3[(i8 - 1)])) - 1)])))) and
+  (pred2 = to_rep1(((s__split_fields4[(i3 - 1)])[(to_rep1((s__split_fields3[(i3 - 1)])) - 1)])))) and
   (to_rep((s__split_fields1[pred2])) <  c)) and
-  (to_rep1((s__split_fields5[pred2])) = (i8 - 1))))))
-
-axiom H17 : ((i7 <  to_rep1(s__split_fields2)) ->
-  (((((((- 2147483648) <= 2147483647) -> in_range1(pred2)) and
-  (((- 2147483648) <= 2147483647) -> in_range1(i8))) and (((- 1) <= 100) ->
+  (to_rep1((s__split_fields5[pred2])) = (i3 - 1)))))) and
+  ((((((((- 2147483648) <= 2147483647) -> in_range1(pred2)) and
+  (((- 2147483648) <= 2147483647) -> in_range1(i3))) and (((- 1) <= 100) ->
   in_range3(stackisize2))) and (((- 1) <= 100) -> in_range3(topstacki2))) and
-  (i8 <  to_rep1(s__split_fields2))))
-
-axiom H18 : ((i7 <  to_rep1(s__split_fields2)) -> ((0 <= i8) and (i8 <= 99)))
-
-axiom H19 : ((i7 <  to_rep1(s__split_fields2)) -> (o11 = i8))
-
-axiom H20 : ((i7 <  to_rep1(s__split_fields2)) ->
-  (o12 = (s__split_fields3[o11])))
-
-axiom H21 : ((i7 <  to_rep1(s__split_fields2)) -> (o13 = to_rep1(o12)))
-
-axiom H22 : ((i7 <  to_rep1(s__split_fields2)) -> (result4 = stackisize2))
-
-axiom H23 : ((i7 <  to_rep1(s__split_fields2)) -> (stackisize3 = o13))
-
-axiom H24 : ((i7 <  to_rep1(s__split_fields2)) -> ((0 <= i8) and (i8 <= 99)))
-
-axiom H25 : ((i7 <  to_rep1(s__split_fields2)) -> (o14 = i8))
-
-axiom H26 : ((i7 <  to_rep1(s__split_fields2)) ->
-  (temp___535 = (s__split_fields4[o14])))
-
-axiom H27 : ((i7 <  to_rep1(s__split_fields2)) ->
-  ((0 <= (stackisize3 - 1)) and ((stackisize3 - 1) <= 99)))
-
-axiom H28 : ((i7 <  to_rep1(s__split_fields2)) -> (o15 = (stackisize3 - 1)))
-
-axiom H29 : ((i7 <  to_rep1(s__split_fields2)) -> (o16 = (temp___535[o15])))
-
-axiom H30 : ((i7 <  to_rep1(s__split_fields2)) -> (o17 = to_rep1(o16)))
-
-axiom H31 : ((i7 <  to_rep1(s__split_fields2)) -> (result5 = topstacki2))
-
-axiom H32 : ((i7 <  to_rep1(s__split_fields2)) -> (topstacki3 = o17))
-
-axiom H33 : ((i7 <  to_rep1(s__split_fields2)) -> (((((i10 = i8) and
-  (pred4 = pred2)) and ((i11 = i8) and (pred5 = pred2))) and
-  (((((((0 <= topstacki3) and (topstacki3 <= 99)) and (o18 = topstacki3)) and
-  (o19 = (s__split_fields1[o18]))) and (o20 = to_rep(o19))) and
-  (((c <= o20) -> (result6 = true)) and ((not (c <= o20)) ->
-  (result6 = false)))) and (result6 = true))) or ((((((((0 <= topstacki3) and
-  (topstacki3 <= 99)) and (o18 = topstacki3)) and
-  (o19 = (s__split_fields1[o18]))) and (o20 = to_rep(o19))) and
-  (((c <= o20) -> (result6 = true)) and ((not (c <= o20)) ->
-  (result6 = false)))) and (not (result6 = true))) and ((((i10 = i9) and
-  (pred4 = pred3)) and ((i11 = i9) and (pred5 = pred3))) and
-  (((0 <= topstacki3) and (topstacki3 <  to_rep1(s__split_fields))) and
+  (i3 <  to_rep1(s__split_fields2))) and (((((((0 <= i3) and (i3 <= 99)) and
+  (o = i3)) and (o1 = (s__split_fields3[o]))) and (o2 = to_rep1(o1))) and
+  ((result2 = { int__content = stackisize2 }) and (stackisize3 = o2))) and
+  ((((((((0 <= i3) and (i3 <= 99)) and (o3 = i3)) and
+  (temp___565 = (s__split_fields4[o3]))) and ((((0 <= (stackisize3 - 1)) and
+  ((stackisize3 - 1) <= 99)) and (o4 = (stackisize3 - 1))) and
+  (o5 = (temp___565[o4])))) and (o6 = to_rep1(o5))) and ((result3 = {
+  int__content = topstacki2 }) and (topstacki3 = o6))) and (((((i5 = {
+  int__content = i3 }) and (pred4 = { int__content = pred2 })) and
+  ((i6 = i3) and (pred5 = pred2))) and (((((((0 <= topstacki3) and
+  (topstacki3 <= 99)) and (o7 = topstacki3)) and
+  (o8 = (s__split_fields1[o7]))) and (o9 = to_rep(o8))) and (((c <= o9) and
+  (result4 = true)) or ((not (c <= o9)) and (result4 = false)))) and
+  (result4 = true))) or ((((((((0 <= topstacki3) and (topstacki3 <= 99)) and
+  (o7 = topstacki3)) and (o8 = (s__split_fields1[o7]))) and
+  (o9 = to_rep(o8))) and (((c <= o9) and (result4 = true)) or
+  ((not (c <= o9)) and (result4 = false)))) and (not (result4 = true))) and
+  ((((i5 = { int__content = i4 }) and (pred4 = { int__content = pred3 })) and
+  ((i6 = i4) and (pred5 = pred3))) and (((0 <= topstacki3) and
+  (topstacki3 <  to_rep1(s__split_fields))) and
   ((((((((0 <= to_rep1((s__split_fields5[topstacki3]))) and
   (to_rep1((s__split_fields5[topstacki3])) <  to_rep1(s__split_fields2))) and
   (0 <= to_rep1((s__split_fields6[topstacki3])))) and
   (to_rep1((s__split_fields6[topstacki3])) <  to_rep1((s__split_fields3[to_rep1((s__split_fields5[topstacki3]))])))) and
   (to_rep1(((s__split_fields4[to_rep1((s__split_fields5[topstacki3]))])[to_rep1((s__split_fields6[topstacki3]))])) = topstacki3)) and
-  (to_rep1((s__split_fields5[topstacki3])) = i8)) and
+  (to_rep1((s__split_fields5[topstacki3])) = i3)) and
   (to_rep1((s__split_fields6[topstacki3])) = (stackisize3 - 1))) and
-  (((result13 = pred2) and (pred3 = topstacki3)) and ((((o49 = (i8 + 1)) and
-  in_range1((i8 + 1))) and ((result14 = i8) and (i9 = o49))) and
-  (not (i9 <  to_rep1(s__split_fields2)))))))))))
-
-axiom H34 : ((i7 <  to_rep1(s__split_fields2)) -> (topstacki4 = topstacki3))
-
-axiom H35 : ((i7 <  to_rep1(s__split_fields2)) ->
-  (stackisize4 = stackisize3))
-
-axiom H36 : ((i7 <  to_rep1(s__split_fields2)) -> (i12 = i10))
-
-axiom H37 : ((i7 <  to_rep1(s__split_fields2)) -> (pred6 = pred4))
-
-axiom H38 : ((i7 <  to_rep1(s__split_fields2)) -> (topstacki5 = topstacki3))
-
-axiom H39 : ((i7 <  to_rep1(s__split_fields2)) ->
-  (stackisize5 = stackisize3))
-
-axiom H40 : ((i7 <  to_rep1(s__split_fields2)) -> (i13 = i11))
-
-axiom H41 : ((i7 <  to_rep1(s__split_fields2)) -> (pred7 = pred5))
-
-axiom H42 : ((i7 <  to_rep1(s__split_fields2)) -> (topstacki6 = topstacki4))
-
-axiom H43 : ((i7 <  to_rep1(s__split_fields2)) ->
-  (stackisize6 = stackisize4))
-
-axiom H44 : ((i7 <  to_rep1(s__split_fields2)) -> (i14 = i12))
-
-axiom H45 : ((i7 <  to_rep1(s__split_fields2)) -> (pred8 = pred6))
-
-axiom H46 : ((i7 <  to_rep1(s__split_fields2)) -> (topstacki7 = topstacki5))
-
-axiom H47 : ((i7 <  to_rep1(s__split_fields2)) ->
-  (stackisize7 = stackisize5))
-
-axiom H48 : ((i7 <  to_rep1(s__split_fields2)) -> (i15 = i13))
-
-axiom H49 : ((i7 <  to_rep1(s__split_fields2)) -> (pred9 = pred7))
-
-axiom H50 : ((not (i7 <  to_rep1(s__split_fields2))) ->
-  (topstacki6 = topstacki))
-
-axiom H51 : ((not (i7 <  to_rep1(s__split_fields2))) ->
-  (stackisize6 = stackisize))
-
-axiom H52 : ((not (i7 <  to_rep1(s__split_fields2))) -> (i14 = i7))
-
-axiom H53 : ((not (i7 <  to_rep1(s__split_fields2))) -> (pred8 = pred1))
-
-axiom H54 : ((not (i7 <  to_rep1(s__split_fields2))) ->
-  (topstacki7 = topstacki1))
-
-axiom H55 : ((not (i7 <  to_rep1(s__split_fields2))) ->
-  (stackisize7 = stackisize1))
-
-axiom H56 : ((not (i7 <  to_rep1(s__split_fields2))) -> (i15 = i7))
-
-axiom H57 : ((not (i7 <  to_rep1(s__split_fields2))) -> (pred9 = pred1))
-
-axiom H58 : (result15 = idx)
-
-axiom H59 : (idx1 = to_rep1(s__split_fields))
-
-axiom H60 : (to_rep(o50) = c)
-
-axiom H61 : ((0 <= idx1) and (idx1 <= 99))
-
-axiom H62 : (o51 = idx1)
-
-axiom H63 : (o52 = (s__split_fields1[o51 <- o50]))
-
-axiom H64 : (s__split_fields = o53)
-
-axiom H65 : (o52 = o54)
-
-axiom H66 : (s__split_fields2 = o55)
-
-axiom H67 : (s__split_fields3 = o56)
-
-axiom H68 : (s__split_fields4 = o57)
-
-axiom H69 : (s__split_fields5 = o58)
-
-axiom H70 : (s__split_fields6 = o59)
-
-axiom H71 : (s__split_fields7 = o60)
-
-axiom H72 : (temp___584 = o53)
-
-axiom H73 : (temp___5841 = o54)
-
-axiom H74 : (temp___5842 = o55)
-
-axiom H75 : (temp___5843 = o56)
-
-axiom H76 : (temp___5844 = o57)
-
-axiom H77 : (temp___5845 = o58)
-
-axiom H78 : (temp___5846 = o59)
-
-axiom H79 : (temp___5847 = o60)
-
-axiom H80 : ((result16 = s__split_fields) and
-  ((result17 = s__split_fields1) and ((result18 = s__split_fields2) and
-  ((result19 = s__split_fields3) and ((result20 = s__split_fields4) and
-  ((result21 = s__split_fields5) and ((result22 = s__split_fields6) and
-  (result23 = s__split_fields7))))))))
-
-axiom H81 : ((s__split_fields8 = temp___584) and
-  ((s__split_fields9 = temp___5841) and
-  ((s__split_fields10 = temp___5842) and
-  ((s__split_fields11 = temp___5843) and
-  ((s__split_fields12 = temp___5844) and
-  ((s__split_fields13 = temp___5845) and
-  ((s__split_fields14 = temp___5846) and
-  (s__split_fields15 = temp___5847))))))))
-
-axiom H82 : ((o61 = (idx1 + 1)) and in_range1((idx1 + 1)))
-
-axiom H83 : ((o62 = o61) and in_range3(o61))
-
-axiom H84 : (to_rep1(o63) = o62)
-
-axiom H85 : (o63 = o64)
-
-axiom H86 : (s__split_fields9 = o65)
-
-axiom H87 : (s__split_fields10 = o66)
-
-axiom H88 : (s__split_fields11 = o67)
-
-axiom H89 : (s__split_fields12 = o68)
-
-axiom H90 : (s__split_fields13 = o69)
-
-axiom H91 : (s__split_fields14 = o70)
-
-axiom H92 : (s__split_fields15 = o71)
-
-axiom H93 : (temp___586 = o64)
-
-axiom H94 : (temp___5861 = o65)
-
-axiom H95 : (temp___5862 = o66)
-
-axiom H96 : (temp___5863 = o67)
-
-axiom H97 : (temp___5864 = o68)
-
-axiom H98 : (temp___5865 = o69)
-
-axiom H99 : (temp___5866 = o70)
-
-axiom H100 : (temp___5867 = o71)
-
-axiom H101 : ((result24 = s__split_fields8) and
-  ((result25 = s__split_fields9) and ((result26 = s__split_fields10) and
-  ((result27 = s__split_fields11) and ((result28 = s__split_fields12) and
-  ((result29 = s__split_fields13) and ((result30 = s__split_fields14) and
-  (result31 = s__split_fields15))))))))
-
-axiom H102 : ((s__split_fields16 = temp___586) and
-  ((s__split_fields17 = temp___5861) and
-  ((s__split_fields18 = temp___5862) and
-  ((s__split_fields19 = temp___5863) and
-  ((s__split_fields20 = temp___5864) and
-  ((s__split_fields21 = temp___5865) and
-  ((s__split_fields22 = temp___5866) and
-  (s__split_fields23 = temp___5867))))))))
-
-axiom H103 : ((o72 = pred8) and in_range3(pred8))
-
-axiom H104 : (to_rep1(o73) = o72)
-
-axiom H105 : ((0 <= idx1) and (idx1 <= 99))
-
-axiom H106 : (o74 = idx1)
-
-axiom H107 : (o75 = (s__split_fields23[o74 <- o73]))
-
-axiom H108 : (s__split_fields16 = o76)
-
-axiom H109 : (s__split_fields17 = o77)
-
-axiom H110 : (s__split_fields18 = o78)
-
-axiom H111 : (s__split_fields19 = o79)
-
-axiom H112 : (s__split_fields20 = o80)
-
-axiom H113 : (s__split_fields21 = o81)
-
-axiom H114 : (s__split_fields22 = o82)
-
-axiom H115 : (o75 = o83)
-
-axiom H116 : (temp___589 = o76)
-
-axiom H117 : (temp___5891 = o77)
-
-axiom H118 : (temp___5892 = o78)
-
-axiom H119 : (temp___5893 = o79)
-
-axiom H120 : (temp___5894 = o80)
-
-axiom H121 : (temp___5895 = o81)
-
-axiom H122 : (temp___5896 = o82)
-
-axiom H123 : (temp___5897 = o83)
-
-axiom H124 : ((result32 = s__split_fields16) and
-  ((result33 = s__split_fields17) and ((result34 = s__split_fields18) and
-  ((result35 = s__split_fields19) and ((result36 = s__split_fields20) and
-  ((result37 = s__split_fields21) and ((result38 = s__split_fields22) and
-  (result39 = s__split_fields23))))))))
-
-axiom H125 : ((s__split_fields24 = temp___589) and
-  ((s__split_fields25 = temp___5891) and
-  ((s__split_fields26 = temp___5892) and
-  ((s__split_fields27 = temp___5893) and
-  ((s__split_fields28 = temp___5894) and
-  ((s__split_fields29 = temp___5895) and
-  ((s__split_fields30 = temp___5896) and
-  (s__split_fields31 = temp___5897))))))))
-
-axiom H126 : ((i14 = to_rep1(s__split_fields26)) -> (result40 = i14))
-
-axiom H127 : ((i14 = to_rep1(s__split_fields26)) ->
-  (i16 = to_rep1(s__split_fields26)))
-
-axiom H128 : ((i14 = to_rep1(s__split_fields26)) ->
-  ((o84 = (to_rep1(s__split_fields26) + 1)) and
-  in_range3((to_rep1(s__split_fields26) + 1))))
-
-axiom H129 : ((i14 = to_rep1(s__split_fields26)) -> (to_rep1(o85) = o84))
-
-axiom H130 : ((i14 = to_rep1(s__split_fields26)) ->
-  (s__split_fields24 = o86))
-
-axiom H131 : ((i14 = to_rep1(s__split_fields26)) ->
-  (s__split_fields25 = o87))
-
-axiom H132 : ((i14 = to_rep1(s__split_fields26)) -> (o85 = o88))
-
-axiom H133 : ((i14 = to_rep1(s__split_fields26)) ->
-  (s__split_fields27 = o89))
-
-axiom H134 : ((i14 = to_rep1(s__split_fields26)) ->
-  (s__split_fields28 = o90))
-
-axiom H135 : ((i14 = to_rep1(s__split_fields26)) ->
-  (s__split_fields29 = o91))
-
-axiom H136 : ((i14 = to_rep1(s__split_fields26)) ->
-  (s__split_fields30 = o92))
-
-axiom H137 : ((i14 = to_rep1(s__split_fields26)) ->
-  (s__split_fields31 = o93))
-
-axiom H138 : ((i14 = to_rep1(s__split_fields26)) -> (temp___606 = o86))
-
-axiom H139 : ((i14 = to_rep1(s__split_fields26)) -> (temp___6061 = o87))
-
-axiom H140 : ((i14 = to_rep1(s__split_fields26)) -> (temp___6062 = o88))
-
-axiom H141 : ((i14 = to_rep1(s__split_fields26)) -> (temp___6063 = o89))
-
-axiom H142 : ((i14 = to_rep1(s__split_fields26)) -> (temp___6064 = o90))
-
-axiom H143 : ((i14 = to_rep1(s__split_fields26)) -> (temp___6065 = o91))
-
-axiom H144 : ((i14 = to_rep1(s__split_fields26)) -> (temp___6066 = o92))
-
-axiom H145 : ((i14 = to_rep1(s__split_fields26)) -> (temp___6067 = o93))
-
-axiom H146 : ((i14 = to_rep1(s__split_fields26)) ->
-  ((result41 = s__split_fields24) and ((result42 = s__split_fields25) and
-  ((result43 = s__split_fields26) and ((result44 = s__split_fields27) and
-  ((result45 = s__split_fields28) and ((result46 = s__split_fields29) and
-  ((result47 = s__split_fields30) and (result48 = s__split_fields31)))))))))
-
-axiom H147 : ((i14 = to_rep1(s__split_fields26)) ->
-  ((s__split_fields32 = temp___606) and
-  ((s__split_fields33 = temp___6061) and
-  ((s__split_fields34 = temp___6062) and
-  ((s__split_fields35 = temp___6063) and
-  ((s__split_fields36 = temp___6064) and
-  ((s__split_fields37 = temp___6065) and
-  ((s__split_fields38 = temp___6066) and
-  (s__split_fields39 = temp___6067)))))))))
-
-axiom H148 : ((i14 = to_rep1(s__split_fields26)) -> (to_rep1(o94) = 1))
-
-axiom H149 : ((i14 = to_rep1(s__split_fields26)) -> ((0 <= i16) and
-  (i16 <= 99)))
-
-axiom H150 : ((i14 = to_rep1(s__split_fields26)) -> (o95 = i16))
-
-axiom H151 : ((i14 = to_rep1(s__split_fields26)) ->
-  (o96 = (s__split_fields35[o95 <- o94])))
-
-axiom H152 : ((i14 = to_rep1(s__split_fields26)) ->
-  (s__split_fields32 = o97))
-
-axiom H153 : ((i14 = to_rep1(s__split_fields26)) ->
-  (s__split_fields33 = o98))
-
-axiom H154 : ((i14 = to_rep1(s__split_fields26)) ->
-  (s__split_fields34 = o99))
-
-axiom H155 : ((i14 = to_rep1(s__split_fields26)) -> (o96 = o100))
-
-axiom H156 : ((i14 = to_rep1(s__split_fields26)) ->
-  (s__split_fields36 = o101))
-
-axiom H157 : ((i14 = to_rep1(s__split_fields26)) ->
-  (s__split_fields37 = o102))
-
-axiom H158 : ((i14 = to_rep1(s__split_fields26)) ->
-  (s__split_fields38 = o103))
-
-axiom H159 : ((i14 = to_rep1(s__split_fields26)) ->
-  (s__split_fields39 = o104))
-
-axiom H160 : ((i14 = to_rep1(s__split_fields26)) -> (temp___609 = o97))
-
-axiom H161 : ((i14 = to_rep1(s__split_fields26)) -> (temp___6091 = o98))
-
-axiom H162 : ((i14 = to_rep1(s__split_fields26)) -> (temp___6092 = o99))
-
-axiom H163 : ((i14 = to_rep1(s__split_fields26)) -> (temp___6093 = o100))
-
-axiom H164 : ((i14 = to_rep1(s__split_fields26)) -> (temp___6094 = o101))
-
-axiom H165 : ((i14 = to_rep1(s__split_fields26)) -> (temp___6095 = o102))
-
-axiom H166 : ((i14 = to_rep1(s__split_fields26)) -> (temp___6096 = o103))
-
-axiom H167 : ((i14 = to_rep1(s__split_fields26)) -> (temp___6097 = o104))
-
-axiom H168 : ((i14 = to_rep1(s__split_fields26)) ->
-  ((result49 = s__split_fields32) and ((result50 = s__split_fields33) and
-  ((result51 = s__split_fields34) and ((result52 = s__split_fields35) and
-  ((result53 = s__split_fields36) and ((result54 = s__split_fields37) and
-  ((result55 = s__split_fields38) and (result56 = s__split_fields39)))))))))
-
-axiom H169 : ((i14 = to_rep1(s__split_fields26)) ->
-  ((s__split_fields40 = temp___609) and
-  ((s__split_fields41 = temp___6091) and
-  ((s__split_fields42 = temp___6092) and
-  ((s__split_fields43 = temp___6093) and
-  ((s__split_fields44 = temp___6094) and
-  ((s__split_fields45 = temp___6095) and
-  ((s__split_fields46 = temp___6096) and
-  (s__split_fields47 = temp___6097)))))))))
-
-axiom H170 : ((i14 = to_rep1(s__split_fields26)) -> ((o105 = idx1) and
-  in_range3(idx1)))
-
-axiom H171 : ((i14 = to_rep1(s__split_fields26)) -> (to_rep1(o106) = o105))
-
-axiom H172 : ((i14 = to_rep1(s__split_fields26)) ->
-  (o107 = ((s__split_fields44[i16])[0 <- o106])))
-
-axiom H173 : ((i14 = to_rep1(s__split_fields26)) -> ((0 <= i16) and
-  (i16 <= 99)))
-
-axiom H174 : ((i14 = to_rep1(s__split_fields26)) -> (o108 = i16))
-
-axiom H175 : ((i14 = to_rep1(s__split_fields26)) ->
-  (o109 = (s__split_fields44[o108 <- o107])))
-
-axiom H176 : ((i14 = to_rep1(s__split_fields26)) ->
-  ((o110 = s__split_fields40) and ((o111 = s__split_fields41) and
-  ((o112 = s__split_fields42) and ((o113 = s__split_fields43) and
-  ((o114 = o109) and ((o115 = s__split_fields45) and
-  ((o116 = s__split_fields46) and (o117 = s__split_fields47)))))))))
-
-axiom H177 : ((i14 = to_rep1(s__split_fields26)) -> ((temp___614 = o110) and
-  ((temp___6141 = o111) and ((temp___6142 = o112) and
-  ((temp___6143 = o113) and ((temp___6144 = o114) and
-  ((temp___6145 = o115) and ((temp___6146 = o116) and
-  (temp___6147 = o117)))))))))
-
-axiom H178 : ((i14 = to_rep1(s__split_fields26)) ->
-  ((result57 = s__split_fields40) and ((result58 = s__split_fields41) and
-  ((result59 = s__split_fields42) and ((result60 = s__split_fields43) and
-  ((result61 = s__split_fields44) and ((result62 = s__split_fields45) and
-  ((result63 = s__split_fields46) and (result64 = s__split_fields47)))))))))
-
-axiom H179 : ((i14 = to_rep1(s__split_fields26)) ->
-  ((s__split_fields48 = temp___614) and
-  ((s__split_fields49 = temp___6141) and
-  ((s__split_fields50 = temp___6142) and
-  ((s__split_fields51 = temp___6143) and
-  ((s__split_fields52 = temp___6144) and
-  ((s__split_fields53 = temp___6145) and
-  ((s__split_fields54 = temp___6146) and
-  (s__split_fields55 = temp___6147)))))))))
-
-axiom H180 : ((i14 = to_rep1(s__split_fields26)) -> ((o118 = i16) and
-  in_range3(i16)))
-
-axiom H181 : ((i14 = to_rep1(s__split_fields26)) -> (to_rep1(o119) = o118))
-
-axiom H182 : ((i14 = to_rep1(s__split_fields26)) -> ((0 <= idx1) and
-  (idx1 <= 99)))
-
-axiom H183 : ((i14 = to_rep1(s__split_fields26)) -> (o120 = idx1))
-
-axiom H184 : ((i14 = to_rep1(s__split_fields26)) ->
-  (o121 = (s__split_fields53[o120 <- o119])))
-
-axiom H185 : ((i14 = to_rep1(s__split_fields26)) ->
-  ((o122 = s__split_fields48) and ((o123 = s__split_fields49) and
-  ((o124 = s__split_fields50) and ((o125 = s__split_fields51) and
-  ((o126 = s__split_fields52) and ((o127 = o121) and
-  ((o128 = s__split_fields54) and (o129 = s__split_fields55)))))))))
-
-axiom H186 : ((i14 = to_rep1(s__split_fields26)) -> ((temp___617 = o122) and
-  ((temp___6171 = o123) and ((temp___6172 = o124) and
-  ((temp___6173 = o125) and ((temp___6174 = o126) and
-  ((temp___6175 = o127) and ((temp___6176 = o128) and
-  (temp___6177 = o129)))))))))
-
-axiom H187 : ((i14 = to_rep1(s__split_fields26)) ->
-  ((result65 = s__split_fields48) and ((result66 = s__split_fields49) and
-  ((result67 = s__split_fields50) and ((result68 = s__split_fields51) and
-  ((result69 = s__split_fields52) and ((result70 = s__split_fields53) and
-  ((result71 = s__split_fields54) and (result72 = s__split_fields55)))))))))
-
-axiom H188 : ((i14 = to_rep1(s__split_fields26)) ->
-  ((s__split_fields56 = temp___617) and
-  ((s__split_fields57 = temp___6171) and
-  ((s__split_fields58 = temp___6172) and
-  ((s__split_fields59 = temp___6173) and
-  ((s__split_fields60 = temp___6174) and
-  ((s__split_fields61 = temp___6175) and
-  ((s__split_fields62 = temp___6176) and
-  (s__split_fields63 = temp___6177)))))))))
-
-axiom H189 : ((i14 = to_rep1(s__split_fields26)) -> (to_rep1(o130) = 0))
-
-axiom H190 : ((i14 = to_rep1(s__split_fields26)) -> ((0 <= idx1) and
-  (idx1 <= 99)))
-
-axiom H191 : ((i14 = to_rep1(s__split_fields26)) -> (o131 = idx1))
-
-axiom H192 : ((i14 = to_rep1(s__split_fields26)) ->
-  (o132 = (s__split_fields62[o131 <- o130])))
-
-axiom H193 : ((i14 = to_rep1(s__split_fields26)) ->
-  ((o133 = s__split_fields56) and ((o134 = s__split_fields57) and
-  ((o135 = s__split_fields58) and ((o136 = s__split_fields59) and
-  ((o137 = s__split_fields60) and ((o138 = s__split_fields61) and
-  ((o139 = o132) and (o140 = s__split_fields63)))))))))
-
-axiom H194 : ((i14 = to_rep1(s__split_fields26)) -> ((temp___620 = o133) and
-  ((temp___6201 = o134) and ((temp___6202 = o135) and
-  ((temp___6203 = o136) and ((temp___6204 = o137) and
-  ((temp___6205 = o138) and ((temp___6206 = o139) and
-  (temp___6207 = o140)))))))))
-
-axiom H195 : ((i14 = to_rep1(s__split_fields26)) ->
-  ((result73 = s__split_fields56) and ((result74 = s__split_fields57) and
-  ((result75 = s__split_fields58) and ((result76 = s__split_fields59) and
-  ((result77 = s__split_fields60) and ((result78 = s__split_fields61) and
-  ((result79 = s__split_fields62) and (result80 = s__split_fields63)))))))))
-
-axiom H196 : ((i14 = to_rep1(s__split_fields26)) ->
-  ((s__split_fields64 = temp___620) and
-  ((s__split_fields65 = temp___6201) and
-  ((s__split_fields66 = temp___6202) and
-  ((s__split_fields67 = temp___6203) and
-  ((s__split_fields68 = temp___6204) and
-  ((s__split_fields69 = temp___6205) and
-  ((s__split_fields70 = temp___6206) and
-  (s__split_fields71 = temp___6207)))))))))
-
-axiom H197 : ((i14 = to_rep1(s__split_fields26)) ->
-  (stackisize9 = stackisize6))
-
-axiom H198 : ((i14 = to_rep1(s__split_fields26)) -> (i17 = i16))
-
-axiom H199 : ((i14 = to_rep1(s__split_fields26)) ->
-  ((s__split_fields104 = s__split_fields64) and
-  ((s__split_fields105 = s__split_fields65) and
-  ((s__split_fields106 = s__split_fields66) and
-  ((s__split_fields107 = s__split_fields67) and
-  ((s__split_fields108 = s__split_fields68) and
-  ((s__split_fields109 = s__split_fields69) and
-  ((s__split_fields110 = s__split_fields70) and
-  (s__split_fields111 = s__split_fields71)))))))))
-
-axiom H200 : ((i14 = to_rep1(s__split_fields26)) ->
-  (stackisize10 = stackisize7))
-
-axiom H201 : ((i14 = to_rep1(s__split_fields26)) -> (i18 = i16))
-
-axiom H202 : ((i14 = to_rep1(s__split_fields26)) ->
-  ((s__split_fields112 = s__split_fields64) and
-  ((s__split_fields113 = s__split_fields65) and
-  ((s__split_fields114 = s__split_fields66) and
-  ((s__split_fields115 = s__split_fields67) and
-  ((s__split_fields116 = s__split_fields68) and
-  ((s__split_fields117 = s__split_fields69) and
-  ((s__split_fields118 = s__split_fields70) and
-  (s__split_fields119 = s__split_fields71)))))))))
-
-axiom H203 : ((not (i14 = to_rep1(s__split_fields26))) -> ((0 <= i14) and
-  (i14 <= 99)))
-
-axiom H204 : ((not (i14 = to_rep1(s__split_fields26))) -> (o141 = i14))
-
-axiom H205 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  (o142 = (s__split_fields27[o141])))
-
-axiom H206 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  (o143 = to_rep1(o142)))
-
-axiom H207 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  (result81 = stackisize6))
-
-axiom H208 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  (stackisize8 = o143))
-
-axiom H209 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  ((o144 = (stackisize8 + 1)) and in_range3((stackisize8 + 1))))
-
-axiom H210 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  (to_rep1(o145) = o144))
-
-axiom H211 : ((not (i14 = to_rep1(s__split_fields26))) -> ((0 <= i14) and
-  (i14 <= 99)))
-
-axiom H212 : ((not (i14 = to_rep1(s__split_fields26))) -> (o146 = i14))
-
-axiom H213 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  (o147 = (s__split_fields27[o146 <- o145])))
-
-axiom H214 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  ((o148 = s__split_fields24) and ((o149 = s__split_fields25) and
-  ((o150 = s__split_fields26) and ((o151 = o147) and
-  ((o152 = s__split_fields28) and ((o153 = s__split_fields29) and
-  ((o154 = s__split_fields30) and (o155 = s__split_fields31)))))))))
-
-axiom H215 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  ((temp___593 = o148) and ((temp___5931 = o149) and
-  ((temp___5932 = o150) and ((temp___5933 = o151) and
-  ((temp___5934 = o152) and ((temp___5935 = o153) and
-  ((temp___5936 = o154) and (temp___5937 = o155)))))))))
-
-axiom H216 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  ((result82 = s__split_fields24) and ((result83 = s__split_fields25) and
-  ((result84 = s__split_fields26) and ((result85 = s__split_fields27) and
-  ((result86 = s__split_fields28) and ((result87 = s__split_fields29) and
-  ((result88 = s__split_fields30) and (result89 = s__split_fields31)))))))))
-
-axiom H217 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  ((s__split_fields72 = temp___593) and
-  ((s__split_fields73 = temp___5931) and
-  ((s__split_fields74 = temp___5932) and
-  ((s__split_fields75 = temp___5933) and
-  ((s__split_fields76 = temp___5934) and
-  ((s__split_fields77 = temp___5935) and
-  ((s__split_fields78 = temp___5936) and
-  (s__split_fields79 = temp___5937)))))))))
-
-axiom H218 : ((not (i14 = to_rep1(s__split_fields26))) -> ((o156 = idx1) and
-  in_range3(idx1)))
-
-axiom H219 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  (to_rep1(o157) = o156))
-
-axiom H220 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  ((0 <= stackisize8) and (stackisize8 <= 99)))
-
-axiom H221 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  (o158 = stackisize8))
-
-axiom H222 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  (o159 = ((s__split_fields76[i14])[o158 <- o157])))
-
-axiom H223 : ((not (i14 = to_rep1(s__split_fields26))) -> ((0 <= i14) and
-  (i14 <= 99)))
-
-axiom H224 : ((not (i14 = to_rep1(s__split_fields26))) -> (o160 = i14))
-
-axiom H225 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  (o161 = (s__split_fields76[o160 <- o159])))
-
-axiom H226 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  ((o162 = s__split_fields72) and ((o163 = s__split_fields73) and
-  ((o164 = s__split_fields74) and ((o165 = s__split_fields75) and
-  ((o166 = o161) and ((o167 = s__split_fields77) and
-  ((o168 = s__split_fields78) and (o169 = s__split_fields79)))))))))
-
-axiom H227 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  ((temp___598 = o162) and ((temp___5981 = o163) and
-  ((temp___5982 = o164) and ((temp___5983 = o165) and
-  ((temp___5984 = o166) and ((temp___5985 = o167) and
-  ((temp___5986 = o168) and (temp___5987 = o169)))))))))
-
-axiom H228 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  ((result90 = s__split_fields72) and ((result91 = s__split_fields73) and
-  ((result92 = s__split_fields74) and ((result93 = s__split_fields75) and
-  ((result94 = s__split_fields76) and ((result95 = s__split_fields77) and
-  ((result96 = s__split_fields78) and (result97 = s__split_fields79)))))))))
-
-axiom H229 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  ((s__split_fields80 = temp___598) and
-  ((s__split_fields81 = temp___5981) and
-  ((s__split_fields82 = temp___5982) and
-  ((s__split_fields83 = temp___5983) and
-  ((s__split_fields84 = temp___5984) and
-  ((s__split_fields85 = temp___5985) and
-  ((s__split_fields86 = temp___5986) and
-  (s__split_fields87 = temp___5987)))))))))
-
-axiom H230 : ((not (i14 = to_rep1(s__split_fields26))) -> ((o170 = i14) and
-  in_range3(i14)))
-
-axiom H231 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  (to_rep1(o171) = o170))
-
-axiom H232 : ((not (i14 = to_rep1(s__split_fields26))) -> ((0 <= idx1) and
-  (idx1 <= 99)))
-
-axiom H233 : ((not (i14 = to_rep1(s__split_fields26))) -> (o172 = idx1))
-
-axiom H234 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  (o173 = (s__split_fields85[o172 <- o171])))
-
-axiom H235 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  ((o174 = s__split_fields80) and ((o175 = s__split_fields81) and
-  ((o176 = s__split_fields82) and ((o177 = s__split_fields83) and
-  ((o178 = s__split_fields84) and ((o179 = o173) and
-  ((o180 = s__split_fields86) and (o181 = s__split_fields87)))))))))
-
-axiom H236 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  ((temp___601 = o174) and ((temp___6011 = o175) and
-  ((temp___6012 = o176) and ((temp___6013 = o177) and
-  ((temp___6014 = o178) and ((temp___6015 = o179) and
-  ((temp___6016 = o180) and (temp___6017 = o181)))))))))
-
-axiom H237 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  ((result98 = s__split_fields80) and ((result99 = s__split_fields81) and
-  ((result100 = s__split_fields82) and ((result101 = s__split_fields83) and
-  ((result102 = s__split_fields84) and ((result103 = s__split_fields85) and
-  ((result104 = s__split_fields86) and
-  (result105 = s__split_fields87)))))))))
-
-axiom H238 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  ((s__split_fields88 = temp___601) and
-  ((s__split_fields89 = temp___6011) and
-  ((s__split_fields90 = temp___6012) and
-  ((s__split_fields91 = temp___6013) and
-  ((s__split_fields92 = temp___6014) and
-  ((s__split_fields93 = temp___6015) and
-  ((s__split_fields94 = temp___6016) and
-  (s__split_fields95 = temp___6017)))))))))
-
-axiom H239 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  (to_rep1(o182) = stackisize8))
-
-axiom H240 : ((not (i14 = to_rep1(s__split_fields26))) -> ((0 <= idx1) and
-  (idx1 <= 99)))
-
-axiom H241 : ((not (i14 = to_rep1(s__split_fields26))) -> (o183 = idx1))
-
-axiom H242 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  (o184 = (s__split_fields94[o183 <- o182])))
-
-axiom H243 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  ((o185 = s__split_fields88) and ((o186 = s__split_fields89) and
-  ((o187 = s__split_fields90) and ((o188 = s__split_fields91) and
-  ((o189 = s__split_fields92) and ((o190 = s__split_fields93) and
-  ((o191 = o184) and (o192 = s__split_fields95)))))))))
-
-axiom H244 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  ((temp___604 = o185) and ((temp___6041 = o186) and
-  ((temp___6042 = o187) and ((temp___6043 = o188) and
-  ((temp___6044 = o189) and ((temp___6045 = o190) and
-  ((temp___6046 = o191) and (temp___6047 = o192)))))))))
-
-axiom H245 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  ((result106 = s__split_fields88) and ((result107 = s__split_fields89) and
-  ((result108 = s__split_fields90) and ((result109 = s__split_fields91) and
-  ((result110 = s__split_fields92) and ((result111 = s__split_fields93) and
-  ((result112 = s__split_fields94) and
-  (result113 = s__split_fields95)))))))))
-
-axiom H246 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  ((s__split_fields96 = temp___604) and
-  ((s__split_fields97 = temp___6041) and
-  ((s__split_fields98 = temp___6042) and
-  ((s__split_fields99 = temp___6043) and
-  ((s__split_fields100 = temp___6044) and
-  ((s__split_fields101 = temp___6045) and
-  ((s__split_fields102 = temp___6046) and
-  (s__split_fields103 = temp___6047)))))))))
-
-axiom H247 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  (stackisize9 = stackisize8))
-
-axiom H248 : ((not (i14 = to_rep1(s__split_fields26))) -> (i17 = i14))
-
-axiom H249 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  ((s__split_fields104 = s__split_fields96) and
-  ((s__split_fields105 = s__split_fields97) and
-  ((s__split_fields106 = s__split_fields98) and
-  ((s__split_fields107 = s__split_fields99) and
-  ((s__split_fields108 = s__split_fields100) and
-  ((s__split_fields109 = s__split_fields101) and
-  ((s__split_fields110 = s__split_fields102) and
-  (s__split_fields111 = s__split_fields103)))))))))
-
-axiom H250 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  (stackisize10 = stackisize8))
-
-axiom H251 : ((not (i14 = to_rep1(s__split_fields26))) -> (i18 = i15))
-
-axiom H252 : ((not (i14 = to_rep1(s__split_fields26))) ->
-  ((s__split_fields112 = s__split_fields96) and
-  ((s__split_fields113 = s__split_fields97) and
-  ((s__split_fields114 = s__split_fields98) and
-  ((s__split_fields115 = s__split_fields99) and
-  ((s__split_fields116 = s__split_fields100) and
-  ((s__split_fields117 = s__split_fields101) and
-  ((s__split_fields118 = s__split_fields102) and
-  (s__split_fields119 = s__split_fields103)))))))))
-
-axiom H253 : ((((0 <= to_rep1(s__split_fields106)) and
-  (to_rep1(s__split_fields106) <= to_rep1(s__split_fields104))) and
-  (to_rep1(s__split_fields104) <= 100)) and
-  ((to_rep1(s__split_fields104) = 0) or (0 <  to_rep1(s__split_fields106))))
-
-axiom H254 :
-  (forall i21:int. (((0 <= i21) and
-  (i21 <= (to_rep1(s__split_fields106) - 1))) ->
-  (1 <= to_rep1((s__split_fields107[i21])))))
-
-axiom H255 :
-  (forall i21:int. (((0 <= i21) and
-  (i21 <= (to_rep1(s__split_fields106) - 1))) ->
-  ((to_rep1((s__split_fields107[i21])) <= to_rep1(s__split_fields104)) and
-  (forall j3:int. (((0 <= j3) and
-  (j3 <= (to_rep1((s__split_fields107[i21])) - 1))) ->
-  ((0 <= to_rep1(((s__split_fields108[i21])[j3]))) and
-  (to_rep1(((s__split_fields108[i21])[j3])) <  to_rep1(s__split_fields104))))))))
-
-axiom H256 : ((result118 = true) <->
-  (forall i21:int. (((0 <= i21) and
-  (i21 <= (to_rep1(s__split_fields104) - 1))) ->
-  ((((0 <= to_rep1((s__split_fields109[i21]))) and
-  (to_rep1((s__split_fields109[i21])) <= (to_rep1(s__split_fields106) - 1))) and
-  ((0 <= to_rep1((s__split_fields110[i21]))) and
-  (to_rep1((s__split_fields110[i21])) <= (to_rep1((s__split_fields107[to_rep1((s__split_fields109[i21]))])) - 1)))) and
-  (to_rep1(((s__split_fields108[to_rep1((s__split_fields109[i21]))])[to_rep1((s__split_fields110[i21]))])) = i21)))))
-
-axiom H257 : ((result118 = true) -> ((result117 = true) <->
-  (forall ist1:int. (((0 <= ist1) and
-  (ist1 <= (to_rep1(s__split_fields106) - 1))) ->
-  (forall ip1:int. (((0 <= ip1) and
-  (ip1 <= (to_rep1((s__split_fields107[ist1])) - 1))) ->
-  ((ist1 = to_rep1((s__split_fields109[to_rep1(((s__split_fields108[ist1])[ip1]))]))) and
-  (ip1 = to_rep1((s__split_fields110[to_rep1(((s__split_fields108[ist1])[ip1]))]))))))))))
-
-axiom H258 : ((not (result118 = true)) -> (result117 = false))
-
-axiom H259 : ((result117 = true) -> ((result116 = true) <->
-  (forall i21:int. (((0 <= i21) and
-  (i21 <= (to_rep1(s__split_fields106) - 1))) ->
-  (forall j3:int. (((0 <= j3) and
-  (j3 <= (to_rep1((s__split_fields107[i21])) - 2))) ->
-  (forall k2:int. ((((j3 + 1) <= k2) and
-  (k2 <= (to_rep1((s__split_fields107[i21])) - 1))) ->
-  (to_rep1(((s__split_fields108[i21])[j3])) <  to_rep1(((s__split_fields108[i21])[k2])))))))))))
-
-axiom H260 : ((not (result117 = true)) -> (result116 = false))
-
-axiom H261 : ((result116 = true) -> ((result115 = true) <->
-  (forall i21:int. (((0 <= i21) and
-  (i21 <= (to_rep1(s__split_fields106) - 1))) ->
-  (forall j3:int. (((0 <= j3) and
-  (j3 <= (to_rep1((s__split_fields107[i21])) - 2))) ->
-  (forall k2:int. ((((j3 + 1) <= k2) and
-  (k2 <= (to_rep1((s__split_fields107[i21])) - 1))) ->
-  (to_rep((s__split_fields105[to_rep1(((s__split_fields108[i21])[k2]))])) <= to_rep((s__split_fields105[to_rep1(((s__split_fields108[i21])[j3]))])))))))))))
-
-axiom H262 : ((not (result116 = true)) -> (result115 = false))
-
-axiom H263 : (result115 = true)
-
-axiom H264 : (0 <= i3)
-
-axiom H265 : (i3 <= (to_rep1(s__split_fields104) - 1))
-
-axiom H266 : ((0 <= i3) and (i3 <= 99))
-
-axiom H267 : (o231 = i3)
-
-axiom H268 : (o232 = (s__split_fields111[o231]))
-
-axiom H269 : (o233 = to_rep1(o232))
-
-axiom H270 : (((o233 <= (to_rep1(s__split_fields104) - 1)) ->
-  (o234 = true)) and ((not (o233 <= (to_rep1(s__split_fields104) - 1))) ->
-  (o234 = false)))
-
-axiom H271 : ((0 <= i3) and (i3 <= 99))
-
-axiom H272 : (o228 = i3)
-
-axiom H273 : (o229 = (s__split_fields111[o228]))
-
-axiom H274 : (o230 = to_rep1(o229))
-
-axiom H275 : ((((- 1) <= o230) -> (o235 = true)) and
-  ((not ((- 1) <= o230)) -> (o235 = false)))
-
-axiom H276 : (result127 = match_bool(o235, o234, false))
-
-axiom H277 : ((result127 = true) -> ((0 <= i3) and (i3 <= 99)))
-
-axiom H278 : ((result127 = true) -> (o225 = i3))
-
-axiom H279 : ((result127 = true) -> (o226 = (s__split_fields111[o225])))
-
-axiom H280 : ((result127 = true) -> (o227 = to_rep1(o226)))
-
-axiom H281 : ((result127 = true) -> (((o227 <  i3) -> (result126 = true)) and
-  ((not (o227 <  i3)) -> (result126 = false))))
-
-axiom H282 : ((not (result127 = true)) -> (result126 = false))
-
-axiom H283 : (result126 = true)
-
-axiom H284 : ((0 <= i3) and (i3 <= 99))
-
-axiom H285 : (o205 = i3)
-
-axiom H286 : (o206 = (s__split_fields111[o205]))
-
-axiom H287 : (o207 = to_rep1(o206))
-
-axiom H288 : (((o207 <  0) -> (result128 = true)) and ((not (o207 <  0)) ->
-  (result128 = false)))
-
-axiom H289 : (not (result128 = true))
-
-axiom H290 : ((0 <= i3) and (i3 <= 99))
-
-axiom H291 : (o221 = i3)
-
-axiom H292 : (o222 = (s__split_fields105[o221]))
-
-axiom H293 : (o223 = to_rep(o222))
-
- (* File "patience.ads", line 53, characters 0-0 *)
-goal WP_parameter_def : (0 <= i3)
+  (((result5 = { int__content = pred2 }) and (pred3 = topstacki3)) and
+  ((((o10 = (i3 + 1)) and in_range1((i3 + 1))) and ((result6 = {
+  int__content = i3 }) and (i4 = o10))) and
+  (not (i4 <  to_rep1(s__split_fields2)))))))))))))))))) and
+  (((topstacki4 = { int__content = topstacki3 }) and ((stackisize4 = {
+  int__content = stackisize3 }) and ((i7 = i5) and (pred6 = pred4)))) and
+  ((topstacki5 = topstacki3) and ((stackisize5 = stackisize3) and
+  ((i8 = i6) and (pred7 = pred5)))))) and (((topstacki6 = topstacki4) and
+  ((stackisize6 = stackisize4) and ((i9 = i7) and (pred8 = pred6)))) and
+  ((topstacki7 = topstacki5) and ((stackisize7 = stackisize5) and
+  ((i10 = i8) and (pred9 = pred7))))))) or
+  ((not (i2 <  to_rep1(s__split_fields2))) and (((topstacki6 = {
+  int__content = topstacki }) and ((stackisize6 = { int__content = stackisize
+  }) and ((i9 = { int__content = i2 }) and (pred8 = { int__content = pred1
+  })))) and ((topstacki7 = topstacki1) and ((stackisize7 = stackisize1) and
+  ((i10 = i2) and (pred9 = pred1))))))) -> (((result7 = { int__content = idx
+  }) and (idx1 = to_rep1(s__split_fields))) -> ((((((to_rep(o11) = c) and
+  ((((0 <= idx1) and (idx1 <= 99)) and (o12 = idx1)) and
+  (o13 = (s__split_fields1[o12 <- o11])))) and ((s__split_fields = o14) and
+  ((o13 = o15) and ((s__split_fields2 = o16) and
+  ((s__split_fields3 = o17) and ((s__split_fields4 = o18) and
+  ((s__split_fields5 = o19) and ((s__split_fields6 = o20) and
+  (s__split_fields7 = o21))))))))) and ((temp___614 = o14) and
+  ((temp___6141 = o15) and ((temp___6142 = o16) and ((temp___6143 = o17) and
+  ((temp___6144 = o18) and ((temp___6145 = o19) and ((temp___6146 = o20) and
+  (temp___6147 = o21))))))))) and ((result8 = { us_split_fields__content = {
+  rec__patience__state__numelts = s__split_fields;
+  rec__patience__state__values = s__split_fields1;
+  rec__patience__state__numstacks = s__split_fields2;
+  rec__patience__state__stacksizes = s__split_fields3;
+  rec__patience__state__stacks = s__split_fields4;
+  rec__patience__state__posstack = s__split_fields5;
+  rec__patience__state__posheight = s__split_fields6;
+  rec__patience__state__preds = s__split_fields7 } }) and
+  (s__split_fields8 = { rec__patience__state__numelts = temp___614;
+  rec__patience__state__values = temp___6141;
+  rec__patience__state__numstacks = temp___6142;
+  rec__patience__state__stacksizes = temp___6143;
+  rec__patience__state__stacks = temp___6144;
+  rec__patience__state__posstack = temp___6145;
+  rec__patience__state__posheight = temp___6146;
+  rec__patience__state__preds = temp___6147 }))) ->
+  ((((((((o22 = (idx1 + 1)) and in_range1((idx1 + 1))) and ((o23 = o22) and
+  in_range3(o22))) and (to_rep1(o24) = o23)) and ((o24 = o25) and
+  (((s__split_fields8).rec__patience__state__values = o26) and
+  (((s__split_fields8).rec__patience__state__numstacks = o27) and
+  (((s__split_fields8).rec__patience__state__stacksizes = o28) and
+  (((s__split_fields8).rec__patience__state__stacks = o29) and
+  (((s__split_fields8).rec__patience__state__posstack = o30) and
+  (((s__split_fields8).rec__patience__state__posheight = o31) and
+  ((s__split_fields8).rec__patience__state__preds = o32))))))))) and
+  ((temp___616 = o25) and ((temp___6161 = o26) and ((temp___6162 = o27) and
+  ((temp___6163 = o28) and ((temp___6164 = o29) and ((temp___6165 = o30) and
+  ((temp___6166 = o31) and (temp___6167 = o32))))))))) and ((result9 = {
+  us_split_fields__content = s__split_fields8 }) and (s__split_fields9 = {
+  rec__patience__state__numelts = temp___616; rec__patience__state__values =
+  temp___6161; rec__patience__state__numstacks = temp___6162;
+  rec__patience__state__stacksizes = temp___6163;
+  rec__patience__state__stacks = temp___6164;
+  rec__patience__state__posstack = temp___6165;
+  rec__patience__state__posheight = temp___6166;
+  rec__patience__state__preds = temp___6167 }))) ->
+  ((((((((o33 = (pred8).int__content) and
+  in_range3((pred8).int__content)) and (to_rep1(o34) = o33)) and
+  ((((0 <= idx1) and (idx1 <= 99)) and (o35 = idx1)) and
+  (o36 = ((s__split_fields9).rec__patience__state__preds[o35 <- o34])))) and
+  (((s__split_fields9).rec__patience__state__numelts = o37) and
+  (((s__split_fields9).rec__patience__state__values = o38) and
+  (((s__split_fields9).rec__patience__state__numstacks = o39) and
+  (((s__split_fields9).rec__patience__state__stacksizes = o40) and
+  (((s__split_fields9).rec__patience__state__stacks = o41) and
+  (((s__split_fields9).rec__patience__state__posstack = o42) and
+  (((s__split_fields9).rec__patience__state__posheight = o43) and
+  (o36 = o44))))))))) and ((temp___619 = o37) and ((temp___6191 = o38) and
+  ((temp___6192 = o39) and ((temp___6193 = o40) and ((temp___6194 = o41) and
+  ((temp___6195 = o42) and ((temp___6196 = o43) and
+  (temp___6197 = o44))))))))) and ((result10 = { us_split_fields__content =
+  s__split_fields9 }) and (s__split_fields10 = {
+  rec__patience__state__numelts = temp___619; rec__patience__state__values =
+  temp___6191; rec__patience__state__numstacks = temp___6192;
+  rec__patience__state__stacksizes = temp___6193;
+  rec__patience__state__stacks = temp___6194;
+  rec__patience__state__posstack = temp___6195;
+  rec__patience__state__posheight = temp___6196;
+  rec__patience__state__preds = temp___6197 }))) ->
+  (((((i9).int__content = to_rep1((s__split_fields10).rec__patience__state__numstacks)) and
+  ((((result11 = i9) and
+  (i11 = to_rep1((s__split_fields10).rec__patience__state__numstacks))) and
+  (((((((o45 = (to_rep1((s__split_fields10).rec__patience__state__numstacks) + 1)) and
+  in_range3((to_rep1((s__split_fields10).rec__patience__state__numstacks) + 1))) and
+  (to_rep1(o46) = o45)) and
+  (((s__split_fields10).rec__patience__state__numelts = o47) and
+  (((s__split_fields10).rec__patience__state__values = o48) and
+  ((o46 = o49) and
+  (((s__split_fields10).rec__patience__state__stacksizes = o50) and
+  (((s__split_fields10).rec__patience__state__stacks = o51) and
+  (((s__split_fields10).rec__patience__state__posstack = o52) and
+  (((s__split_fields10).rec__patience__state__posheight = o53) and
+  ((s__split_fields10).rec__patience__state__preds = o54))))))))) and
+  ((temp___636 = o47) and ((temp___6361 = o48) and ((temp___6362 = o49) and
+  ((temp___6363 = o50) and ((temp___6364 = o51) and ((temp___6365 = o52) and
+  ((temp___6366 = o53) and (temp___6367 = o54))))))))) and ((result12 = {
+  us_split_fields__content = s__split_fields10 }) and (s__split_fields11 = {
+  rec__patience__state__numelts = temp___636; rec__patience__state__values =
+  temp___6361; rec__patience__state__numstacks = temp___6362;
+  rec__patience__state__stacksizes = temp___6363;
+  rec__patience__state__stacks = temp___6364;
+  rec__patience__state__posstack = temp___6365;
+  rec__patience__state__posheight = temp___6366;
+  rec__patience__state__preds = temp___6367 }))) and
+  ((((((to_rep1(o55) = 1) and ((((0 <= i11) and (i11 <= 99)) and
+  (o56 = i11)) and
+  (o57 = ((s__split_fields11).rec__patience__state__stacksizes[o56 <- o55])))) and
+  (((s__split_fields11).rec__patience__state__numelts = o58) and
+  (((s__split_fields11).rec__patience__state__values = o59) and
+  (((s__split_fields11).rec__patience__state__numstacks = o60) and
+  ((o57 = o61) and
+  (((s__split_fields11).rec__patience__state__stacks = o62) and
+  (((s__split_fields11).rec__patience__state__posstack = o63) and
+  (((s__split_fields11).rec__patience__state__posheight = o64) and
+  ((s__split_fields11).rec__patience__state__preds = o65))))))))) and
+  ((temp___639 = o58) and ((temp___6391 = o59) and ((temp___6392 = o60) and
+  ((temp___6393 = o61) and ((temp___6394 = o62) and ((temp___6395 = o63) and
+  ((temp___6396 = o64) and (temp___6397 = o65))))))))) and ((result13 = {
+  us_split_fields__content = s__split_fields11 }) and (s__split_fields12 = {
+  rec__patience__state__numelts = temp___639; rec__patience__state__values =
+  temp___6391; rec__patience__state__numstacks = temp___6392;
+  rec__patience__state__stacksizes = temp___6393;
+  rec__patience__state__stacks = temp___6394;
+  rec__patience__state__posstack = temp___6395;
+  rec__patience__state__posheight = temp___6396;
+  rec__patience__state__preds = temp___6397 }))) and (((((((((o66 = idx1) and
+  in_range3(idx1)) and (to_rep1(o67) = o66)) and
+  (o68 = (((s__split_fields12).rec__patience__state__stacks[i11])[0 <- o67]))) and
+  ((((0 <= i11) and (i11 <= 99)) and (o69 = i11)) and
+  (o70 = ((s__split_fields12).rec__patience__state__stacks[o69 <- o68])))) and
+  (((s__split_fields12).rec__patience__state__numelts = o71) and
+  (((s__split_fields12).rec__patience__state__values = o72) and
+  (((s__split_fields12).rec__patience__state__numstacks = o73) and
+  (((s__split_fields12).rec__patience__state__stacksizes = o74) and
+  ((o70 = o75) and
+  (((s__split_fields12).rec__patience__state__posstack = o76) and
+  (((s__split_fields12).rec__patience__state__posheight = o77) and
+  ((s__split_fields12).rec__patience__state__preds = o78))))))))) and
+  ((temp___644 = o71) and ((temp___6441 = o72) and ((temp___6442 = o73) and
+  ((temp___6443 = o74) and ((temp___6444 = o75) and ((temp___6445 = o76) and
+  ((temp___6446 = o77) and (temp___6447 = o78))))))))) and ((result14 = {
+  us_split_fields__content = s__split_fields12 }) and (s__split_fields13 = {
+  rec__patience__state__numelts = temp___644; rec__patience__state__values =
+  temp___6441; rec__patience__state__numstacks = temp___6442;
+  rec__patience__state__stacksizes = temp___6443;
+  rec__patience__state__stacks = temp___6444;
+  rec__patience__state__posstack = temp___6445;
+  rec__patience__state__posheight = temp___6446;
+  rec__patience__state__preds = temp___6447 }))) and ((((((((o79 = i11) and
+  in_range3(i11)) and (to_rep1(o80) = o79)) and ((((0 <= idx1) and
+  (idx1 <= 99)) and (o81 = idx1)) and
+  (o82 = ((s__split_fields13).rec__patience__state__posstack[o81 <- o80])))) and
+  (((s__split_fields13).rec__patience__state__numelts = o83) and
+  (((s__split_fields13).rec__patience__state__values = o84) and
+  (((s__split_fields13).rec__patience__state__numstacks = o85) and
+  (((s__split_fields13).rec__patience__state__stacksizes = o86) and
+  (((s__split_fields13).rec__patience__state__stacks = o87) and
+  ((o82 = o88) and
+  (((s__split_fields13).rec__patience__state__posheight = o89) and
+  ((s__split_fields13).rec__patience__state__preds = o90))))))))) and
+  ((temp___647 = o83) and ((temp___6471 = o84) and ((temp___6472 = o85) and
+  ((temp___6473 = o86) and ((temp___6474 = o87) and ((temp___6475 = o88) and
+  ((temp___6476 = o89) and (temp___6477 = o90))))))))) and ((result15 = {
+  us_split_fields__content = s__split_fields13 }) and (s__split_fields14 = {
+  rec__patience__state__numelts = temp___647; rec__patience__state__values =
+  temp___6471; rec__patience__state__numstacks = temp___6472;
+  rec__patience__state__stacksizes = temp___6473;
+  rec__patience__state__stacks = temp___6474;
+  rec__patience__state__posstack = temp___6475;
+  rec__patience__state__posheight = temp___6476;
+  rec__patience__state__preds = temp___6477 }))) and
+  (((((to_rep1(o91) = 0) and ((((0 <= idx1) and (idx1 <= 99)) and
+  (o92 = idx1)) and
+  (o93 = ((s__split_fields14).rec__patience__state__posheight[o92 <- o91])))) and
+  (((s__split_fields14).rec__patience__state__numelts = o94) and
+  (((s__split_fields14).rec__patience__state__values = o95) and
+  (((s__split_fields14).rec__patience__state__numstacks = o96) and
+  (((s__split_fields14).rec__patience__state__stacksizes = o97) and
+  (((s__split_fields14).rec__patience__state__stacks = o98) and
+  (((s__split_fields14).rec__patience__state__posstack = o99) and
+  ((o93 = o100) and
+  ((s__split_fields14).rec__patience__state__preds = o101))))))))) and
+  ((temp___650 = o94) and ((temp___6501 = o95) and ((temp___6502 = o96) and
+  ((temp___6503 = o97) and ((temp___6504 = o98) and ((temp___6505 = o99) and
+  ((temp___6506 = o100) and (temp___6507 = o101))))))))) and ((result16 = {
+  us_split_fields__content = s__split_fields14 }) and (s__split_fields15 = {
+  rec__patience__state__numelts = temp___650; rec__patience__state__values =
+  temp___6501; rec__patience__state__numstacks = temp___6502;
+  rec__patience__state__stacksizes = temp___6503;
+  rec__patience__state__stacks = temp___6504;
+  rec__patience__state__posstack = temp___6505;
+  rec__patience__state__posheight = temp___6506;
+  rec__patience__state__preds = temp___6507 })))))))) and
+  (((stackisize9 = stackisize6) and ((i12 = { int__content = i11 }) and
+  (s__split_fields20 = { us_split_fields__content = s__split_fields15
+  }))) and ((stackisize10 = stackisize7) and ((i13 = i11) and
+  (s__split_fields21 = s__split_fields15)))))) or
+  ((not ((i9).int__content = to_rep1((s__split_fields10).rec__patience__state__numstacks))) and
+  ((((((((0 <= (i9).int__content) and ((i9).int__content <= 99)) and
+  (o102 = (i9).int__content)) and
+  (o103 = ((s__split_fields10).rec__patience__state__stacksizes[o102]))) and
+  (o104 = to_rep1(o103))) and ((result17 = stackisize6) and
+  (stackisize8 = o104))) and ((((((((o105 = (stackisize8 + 1)) and
+  in_range3((stackisize8 + 1))) and (to_rep1(o106) = o105)) and
+  ((((0 <= (i9).int__content) and ((i9).int__content <= 99)) and
+  (o107 = (i9).int__content)) and
+  (o108 = ((s__split_fields10).rec__patience__state__stacksizes[o107 <- o106])))) and
+  (((s__split_fields10).rec__patience__state__numelts = o109) and
+  (((s__split_fields10).rec__patience__state__values = o110) and
+  (((s__split_fields10).rec__patience__state__numstacks = o111) and
+  ((o108 = o112) and
+  (((s__split_fields10).rec__patience__state__stacks = o113) and
+  (((s__split_fields10).rec__patience__state__posstack = o114) and
+  (((s__split_fields10).rec__patience__state__posheight = o115) and
+  ((s__split_fields10).rec__patience__state__preds = o116))))))))) and
+  ((temp___623 = o109) and ((temp___6231 = o110) and
+  ((temp___6232 = o111) and ((temp___6233 = o112) and
+  ((temp___6234 = o113) and ((temp___6235 = o114) and
+  ((temp___6236 = o115) and (temp___6237 = o116))))))))) and ((result18 = {
+  us_split_fields__content = s__split_fields10 }) and (s__split_fields16 = {
+  rec__patience__state__numelts = temp___623; rec__patience__state__values =
+  temp___6231; rec__patience__state__numstacks = temp___6232;
+  rec__patience__state__stacksizes = temp___6233;
+  rec__patience__state__stacks = temp___6234;
+  rec__patience__state__posstack = temp___6235;
+  rec__patience__state__posheight = temp___6236;
+  rec__patience__state__preds = temp___6237 }))) and
+  (((((((((o117 = idx1) and in_range3(idx1)) and (to_rep1(o118) = o117)) and
+  ((((0 <= stackisize8) and (stackisize8 <= 99)) and
+  (o119 = stackisize8)) and
+  (o120 = (((s__split_fields16).rec__patience__state__stacks[(i9).int__content])[o119 <- o118])))) and
+  ((((0 <= (i9).int__content) and ((i9).int__content <= 99)) and
+  (o121 = (i9).int__content)) and
+  (o122 = ((s__split_fields16).rec__patience__state__stacks[o121 <- o120])))) and
+  (((s__split_fields16).rec__patience__state__numelts = o123) and
+  (((s__split_fields16).rec__patience__state__values = o124) and
+  (((s__split_fields16).rec__patience__state__numstacks = o125) and
+  (((s__split_fields16).rec__patience__state__stacksizes = o126) and
+  ((o122 = o127) and
+  (((s__split_fields16).rec__patience__state__posstack = o128) and
+  (((s__split_fields16).rec__patience__state__posheight = o129) and
+  ((s__split_fields16).rec__patience__state__preds = o130))))))))) and
+  ((temp___628 = o123) and ((temp___6281 = o124) and
+  ((temp___6282 = o125) and ((temp___6283 = o126) and
+  ((temp___6284 = o127) and ((temp___6285 = o128) and
+  ((temp___6286 = o129) and (temp___6287 = o130))))))))) and ((result19 = {
+  us_split_fields__content = s__split_fields16 }) and (s__split_fields17 = {
+  rec__patience__state__numelts = temp___628; rec__patience__state__values =
+  temp___6281; rec__patience__state__numstacks = temp___6282;
+  rec__patience__state__stacksizes = temp___6283;
+  rec__patience__state__stacks = temp___6284;
+  rec__patience__state__posstack = temp___6285;
+  rec__patience__state__posheight = temp___6286;
+  rec__patience__state__preds = temp___6287 }))) and
+  ((((((((o131 = (i9).int__content) and in_range3((i9).int__content)) and
+  (to_rep1(o132) = o131)) and ((((0 <= idx1) and (idx1 <= 99)) and
+  (o133 = idx1)) and
+  (o134 = ((s__split_fields17).rec__patience__state__posstack[o133 <- o132])))) and
+  (((s__split_fields17).rec__patience__state__numelts = o135) and
+  (((s__split_fields17).rec__patience__state__values = o136) and
+  (((s__split_fields17).rec__patience__state__numstacks = o137) and
+  (((s__split_fields17).rec__patience__state__stacksizes = o138) and
+  (((s__split_fields17).rec__patience__state__stacks = o139) and
+  ((o134 = o140) and
+  (((s__split_fields17).rec__patience__state__posheight = o141) and
+  ((s__split_fields17).rec__patience__state__preds = o142))))))))) and
+  ((temp___631 = o135) and ((temp___6311 = o136) and
+  ((temp___6312 = o137) and ((temp___6313 = o138) and
+  ((temp___6314 = o139) and ((temp___6315 = o140) and
+  ((temp___6316 = o141) and (temp___6317 = o142))))))))) and ((result20 = {
+  us_split_fields__content = s__split_fields17 }) and (s__split_fields18 = {
+  rec__patience__state__numelts = temp___631; rec__patience__state__values =
+  temp___6311; rec__patience__state__numstacks = temp___6312;
+  rec__patience__state__stacksizes = temp___6313;
+  rec__patience__state__stacks = temp___6314;
+  rec__patience__state__posstack = temp___6315;
+  rec__patience__state__posheight = temp___6316;
+  rec__patience__state__preds = temp___6317 }))) and
+  (((((to_rep1(o143) = stackisize8) and ((((0 <= idx1) and (idx1 <= 99)) and
+  (o144 = idx1)) and
+  (o145 = ((s__split_fields18).rec__patience__state__posheight[o144 <- o143])))) and
+  (((s__split_fields18).rec__patience__state__numelts = o146) and
+  (((s__split_fields18).rec__patience__state__values = o147) and
+  (((s__split_fields18).rec__patience__state__numstacks = o148) and
+  (((s__split_fields18).rec__patience__state__stacksizes = o149) and
+  (((s__split_fields18).rec__patience__state__stacks = o150) and
+  (((s__split_fields18).rec__patience__state__posstack = o151) and
+  ((o145 = o152) and
+  ((s__split_fields18).rec__patience__state__preds = o153))))))))) and
+  ((temp___634 = o146) and ((temp___6341 = o147) and
+  ((temp___6342 = o148) and ((temp___6343 = o149) and
+  ((temp___6344 = o150) and ((temp___6345 = o151) and
+  ((temp___6346 = o152) and (temp___6347 = o153))))))))) and ((result21 = {
+  us_split_fields__content = s__split_fields18 }) and (s__split_fields19 = {
+  rec__patience__state__numelts = temp___634; rec__patience__state__values =
+  temp___6341; rec__patience__state__numstacks = temp___6342;
+  rec__patience__state__stacksizes = temp___6343;
+  rec__patience__state__stacks = temp___6344;
+  rec__patience__state__posstack = temp___6345;
+  rec__patience__state__posheight = temp___6346;
+  rec__patience__state__preds = temp___6347 }))))))) and (((stackisize9 = {
+  int__content = stackisize8 }) and ((i12 = i9) and (s__split_fields20 = {
+  us_split_fields__content = s__split_fields19 }))) and
+  ((stackisize10 = stackisize8) and ((i13 = i10) and
+  (s__split_fields21 = s__split_fields19))))))) ->
+  (((((0 <= to_rep1(((s__split_fields20).us_split_fields__content).rec__patience__state__numstacks)) and
+  (to_rep1(((s__split_fields20).us_split_fields__content).rec__patience__state__numstacks) <= to_rep1(((s__split_fields20).us_split_fields__content).rec__patience__state__numelts))) and
+  (to_rep1(((s__split_fields20).us_split_fields__content).rec__patience__state__numelts) <= 100)) and
+  ((to_rep1(((s__split_fields20).us_split_fields__content).rec__patience__state__numelts) = 0) or
+  (0 <  to_rep1(((s__split_fields20).us_split_fields__content).rec__patience__state__numstacks)))) ->
+  ((forall i14:int. (((0 <= i14) and
+   (i14 <= (to_rep1(((s__split_fields20).us_split_fields__content).rec__patience__state__numstacks) - 1))) ->
+   (1 <= to_rep1((((s__split_fields20).us_split_fields__content).rec__patience__state__stacksizes[i14]))))) ->
+  ((forall i14:int. (((0 <= i14) and
+   (i14 <= (to_rep1(((s__split_fields20).us_split_fields__content).rec__patience__state__numstacks) - 1))) ->
+   ((to_rep1((((s__split_fields20).us_split_fields__content).rec__patience__state__stacksizes[i14])) <= to_rep1(((s__split_fields20).us_split_fields__content).rec__patience__state__numelts)) and
+   (forall j:int. (((0 <= j) and
+   (j <= (to_rep1((((s__split_fields20).us_split_fields__content).rec__patience__state__stacksizes[i14])) - 1))) ->
+   ((0 <= to_rep1(((((s__split_fields20).us_split_fields__content).rec__patience__state__stacks[i14])[j]))) and
+   (to_rep1(((((s__split_fields20).us_split_fields__content).rec__patience__state__stacks[i14])[j])) <  to_rep1(((s__split_fields20).us_split_fields__content).rec__patience__state__numelts)))))))) ->
+  ((((((result25 = true) <->
+  (forall i14:int. (((0 <= i14) and
+  (i14 <= (to_rep1(((s__split_fields20).us_split_fields__content).rec__patience__state__numelts) - 1))) ->
+  ((((0 <= to_rep1((((s__split_fields20).us_split_fields__content).rec__patience__state__posstack[i14]))) and
+  (to_rep1((((s__split_fields20).us_split_fields__content).rec__patience__state__posstack[i14])) <= (to_rep1(((s__split_fields20).us_split_fields__content).rec__patience__state__numstacks) - 1))) and
+  ((0 <= to_rep1((((s__split_fields20).us_split_fields__content).rec__patience__state__posheight[i14]))) and
+  (to_rep1((((s__split_fields20).us_split_fields__content).rec__patience__state__posheight[i14])) <= (to_rep1((((s__split_fields20).us_split_fields__content).rec__patience__state__stacksizes[to_rep1((((s__split_fields20).us_split_fields__content).rec__patience__state__posstack[i14]))])) - 1)))) and
+  (to_rep1(((((s__split_fields20).us_split_fields__content).rec__patience__state__stacks[to_rep1((((s__split_fields20).us_split_fields__content).rec__patience__state__posstack[i14]))])[to_rep1((((s__split_fields20).us_split_fields__content).rec__patience__state__posheight[i14]))])) = i14))))) and
+  (((result25 = true) and ((result24 = true) <->
+  (forall ist:int. (((0 <= ist) and
+  (ist <= (to_rep1(((s__split_fields20).us_split_fields__content).rec__patience__state__numstacks) - 1))) ->
+  (forall ip:int. (((0 <= ip) and
+  (ip <= (to_rep1((((s__split_fields20).us_split_fields__content).rec__patience__state__stacksizes[ist])) - 1))) ->
+  ((ist = to_rep1((((s__split_fields20).us_split_fields__content).rec__patience__state__posstack[to_rep1(((((s__split_fields20).us_split_fields__content).rec__patience__state__stacks[ist])[ip]))]))) and
+  (ip = to_rep1((((s__split_fields20).us_split_fields__content).rec__patience__state__posheight[to_rep1(((((s__split_fields20).us_split_fields__content).rec__patience__state__stacks[ist])[ip]))])))))))))) or
+  ((not (result25 = true)) and (result24 = false)))) and
+  (((result24 = true) and ((result23 = true) <->
+  (forall i14:int. (((0 <= i14) and
+  (i14 <= (to_rep1(((s__split_fields20).us_split_fields__content).rec__patience__state__numstacks) - 1))) ->
+  (forall j:int. (((0 <= j) and
+  (j <= (to_rep1((((s__split_fields20).us_split_fields__content).rec__patience__state__stacksizes[i14])) - 2))) ->
+  (forall k:int. ((((j + 1) <= k) and
+  (k <= (to_rep1((((s__split_fields20).us_split_fields__content).rec__patience__state__stacksizes[i14])) - 1))) ->
+  (to_rep1(((((s__split_fields20).us_split_fields__content).rec__patience__state__stacks[i14])[j])) <  to_rep1(((((s__split_fields20).us_split_fields__content).rec__patience__state__stacks[i14])[k]))))))))))) or
+  ((not (result24 = true)) and (result23 = false)))) and
+  (((result23 = true) and ((result22 = true) <->
+  (forall i14:int. (((0 <= i14) and
+  (i14 <= (to_rep1(((s__split_fields20).us_split_fields__content).rec__patience__state__numstacks) - 1))) ->
+  (forall j:int. (((0 <= j) and
+  (j <= (to_rep1((((s__split_fields20).us_split_fields__content).rec__patience__state__stacksizes[i14])) - 2))) ->
+  (forall k:int. ((((j + 1) <= k) and
+  (k <= (to_rep1((((s__split_fields20).us_split_fields__content).rec__patience__state__stacksizes[i14])) - 1))) ->
+  (to_rep((((s__split_fields20).us_split_fields__content).rec__patience__state__values[to_rep1(((((s__split_fields20).us_split_fields__content).rec__patience__state__stacks[i14])[k]))])) <= to_rep((((s__split_fields20).us_split_fields__content).rec__patience__state__values[to_rep1(((((s__split_fields20).us_split_fields__content).rec__patience__state__stacks[i14])[j]))]))))))))))) or
+  ((not (result23 = true)) and (result22 = false)))) -> ((result22 = true) ->
+  (((0 <= i1) and
+  (i1 <= (to_rep1(((s__split_fields20).us_split_fields__content).rec__patience__state__numelts) - 1))) ->
+  (((((((((0 <= i1) and (i1 <= 99)) and (o166 = i1)) and
+  (o167 = (((s__split_fields20).us_split_fields__content).rec__patience__state__preds[o166]))) and
+  (o168 = to_rep1(o167))) and
+  (((o168 <= (to_rep1(((s__split_fields20).us_split_fields__content).rec__patience__state__numelts) - 1)) and
+  (o169 = true)) or
+  ((not (o168 <= (to_rep1(((s__split_fields20).us_split_fields__content).rec__patience__state__numelts) - 1))) and
+  (o169 = false)))) and (((((((0 <= i1) and (i1 <= 99)) and (o163 = i1)) and
+  (o164 = (((s__split_fields20).us_split_fields__content).rec__patience__state__preds[o163]))) and
+  (o165 = to_rep1(o164))) and ((((- 1) <= o165) and (o170 = true)) or
+  ((not ((- 1) <= o165)) and (o170 = false)))) and
+  (result27 = match_bool(o170, o169, false)))) and (((result27 = true) and
+  ((((((0 <= i1) and (i1 <= 99)) and (o160 = i1)) and
+  (o161 = (((s__split_fields20).us_split_fields__content).rec__patience__state__preds[o160]))) and
+  (o162 = to_rep1(o161))) and (((o162 <  i1) and (result26 = true)) or
+  ((not (o162 <  i1)) and (result26 = false))))) or
+  ((not (result27 = true)) and (result26 = false)))) -> ((result26 = true) ->
+  (((((((0 <= i1) and (i1 <= 99)) and (o154 = i1)) and
+  (o155 = (((s__split_fields20).us_split_fields__content).rec__patience__state__preds[o154]))) and
+  (o156 = to_rep1(o155))) and (((o156 <  0) and (result28 = true)) or
+  ((not (o156 <  0)) and (result28 = false)))) -> ((not (result28 = true)) ->
+  ((((((0 <= i1) and (i1 <= 99)) and (o157 = i1)) and
+  (o158 = (((s__split_fields20).us_split_fields__content).rec__patience__state__values[o157]))) and
+  (o159 = to_rep(o158))) -> (0 <= i1))))))))))))))))))))))))))))

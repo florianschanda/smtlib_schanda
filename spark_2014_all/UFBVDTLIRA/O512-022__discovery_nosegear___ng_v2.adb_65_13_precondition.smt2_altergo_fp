@@ -596,12 +596,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -613,6 +607,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -773,11 +773,15 @@ axiom timesincelastupdate__def_axiom :
 
 axiom distancefromlastclicktolastupdate__post_axiom : true
 
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 207)
+
 axiom distancefromlastclicktolastupdate__def_axiom :
   (forall ng_v2__prevcount:t. forall ng_v2__thiscount:t
   [distancefromlastclicktolastupdate(ng_v2__prevcount, ng_v2__thiscount)].
   (distancefromlastclicktolastupdate(ng_v2__prevcount,
-  ng_v2__thiscount) = mul(of_int(207), sub(ng_v2__thiscount,
+  ng_v2__thiscount) = mul(rliteral, sub(ng_v2__thiscount,
   ng_v2__prevcount))))
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
@@ -788,180 +792,23 @@ logic attr__ATTRIBUTE_ADDRESS9 : int
 
 logic attr__ATTRIBUTE_ADDRESS10 : int
 
-logic estimatedgroundvelocityisavailable : bool
-
-logic estimatedgroundvelocity : t
-
-logic prevtime : t
-
-logic prevcount : t
-
-logic currtime : t
-
-logic thistime : t
-
-logic thiscount : t
-
-logic t1 : t
-
-logic t2 : t
-
-logic d1 : t
-
-logic d2 : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : t
-
-logic o6 : t
-
-logic o7 : t
-
-logic estimatedgroundvelocityisavailable1 : bool
-
-logic estimatedgroundvelocity1 : t
-
-logic t11 : t
-
-logic t21 : t
-
-logic d11 : t
-
-logic d21 : t
-
-logic result : bool
-
-logic estimatedgroundvelocityisavailable2 : bool
-
-logic result1 : t
-
-logic t12 : t
-
-logic result2 : t
-
-logic t22 : t
-
-logic result3 : t
-
-logic d12 : t
-
-logic result4 : t
-
-logic d22 : t
-
-logic result5 : bool
-
-logic estimatedgroundvelocityisavailable3 : bool
-
-logic result6 : t
-
-logic estimatedgroundvelocity2 : t
-
-logic estimatedgroundvelocityisavailable4 : bool
-
-logic estimatedgroundvelocity3 : t
-
-logic t13 : t
-
-logic t23 : t
-
-logic d13 : t
-
-logic d23 : t
-
-logic estimatedgroundvelocityisavailable5 : bool
-
-logic estimatedgroundvelocity4 : t
-
-logic t14 : t
-
-logic t24 : t
-
-logic d14 : t
-
-logic d24 : t
-
-logic estimatedgroundvelocityisavailable6 : bool
-
-logic estimatedgroundvelocity5 : t
-
-logic t15 : t
-
-logic t25 : t
-
-logic d15 : t
-
-logic d25 : t
-
-logic estimatedgroundvelocityisavailable7 : bool
-
-logic estimatedgroundvelocity6 : t
-
-logic t16 : t
-
-logic t26 : t
-
-logic d16 : t
-
-logic d26 : t
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : true
-
-axiom H3 : true
-
-axiom H4 : true
-
-axiom H5 : true
-
-axiom H6 : true
-
-axiom H7 : true
-
-axiom H8 : true
-
-axiom H9 : true
-
-axiom H10 : (not (thistime = prevtime))
-
-axiom H11 :
-  (estimatedgroundvelocityisavailable2 = estimatedgroundvelocityisavailable)
-
-axiom H12 :
-  (estimatedgroundvelocityisavailable2 = estimatedgroundvelocityisavailable1)
-
-axiom H13 : ((o = timefromlastclicktolastupdate(prevtime, thistime)) and
-  (o = sub(thistime, prevtime)))
-
-axiom H14 : (result1 = t1)
-
-axiom H15 : (t12 = o)
-
-axiom H16 : ((o1 = timesincelastupdate(currtime, thistime)) and
-  (o1 = sub(currtime, thistime)))
-
-axiom H17 : (result2 = t2)
-
-axiom H18 : (t22 = o1)
-
-axiom H19 : ((o2 = distancefromlastclicktolastupdate(prevcount,
-  thiscount)) and (o2 = mul(of_int(207), sub(thiscount, prevcount))))
-
-axiom H20 : (result3 = d1)
-
-axiom H21 : (d12 = o2)
-
  (* File "interfac.ads", line 66, characters 0-0 *)
-goal WP_parameter_def : (not (thistime = prevtime))
+goal WP_parameter_def :
+  (forall estimatedgroundvelocityisavailable:bool. forall prevtime:t.
+  forall prevcount:t. forall currtime:t. forall thistime:t.
+  forall thiscount:t. forall t1:t. forall t2:t. forall d1:t. forall o:t.
+  forall o1:t. forall o2:t. forall estimatedgroundvelocityisavailable1:bool.
+  forall estimatedgroundvelocityisavailable2:bool. forall result:t.
+  forall t11:t. forall result1:t. forall t21:t. forall result2:t.
+  forall d11:t. (((not (thistime = prevtime)) and
+  ((estimatedgroundvelocityisavailable2 = estimatedgroundvelocityisavailable) and
+  (estimatedgroundvelocityisavailable2 = estimatedgroundvelocityisavailable1))) ->
+  ((((o = timefromlastclicktolastupdate(prevtime, thistime)) and
+  (o = sub(thistime, prevtime))) and (({ t__content = result } = {
+  t__content = t1 }) and (t11 = o))) ->
+  ((((o1 = timesincelastupdate(currtime, thistime)) and (o1 = sub(currtime,
+  thistime))) and (({ t__content = result1 } = { t__content = t2 }) and
+  (t21 = o1))) -> ((((o2 = distancefromlastclicktolastupdate(prevcount,
+  thiscount)) and (o2 = mul(rliteral, sub(thiscount, prevcount)))) and (({
+  t__content = result2 } = { t__content = d1 }) and (d11 = o2))) ->
+  (not (thistime = prevtime)))))))

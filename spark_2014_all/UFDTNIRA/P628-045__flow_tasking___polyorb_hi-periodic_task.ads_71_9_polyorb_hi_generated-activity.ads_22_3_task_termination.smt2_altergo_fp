@@ -517,11 +517,5 @@ axiom dispatch_offset__def_axiom :
 
 axiom task_period__def_axiom : (task_period = milliseconds(1000))
 
-logic o : duration
-
-logic temp___1628 : us_rep1
-
-axiom H : false
-
  (* File "polyorb_hi-periodic_task.ads", line 65, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def : true

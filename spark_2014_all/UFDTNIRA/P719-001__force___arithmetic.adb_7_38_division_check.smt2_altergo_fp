@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -276,156 +276,48 @@ function t2b__ref___projection(a: t2b__ref) : t2b = (a).t2b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic r : int
-
-logic i : int
-
-logic arithmetic__halve_d__result : int
-
-logic temp___145 : int
-
-logic temp___144 : int
-
-logic r1 : int
-
-logic result : int
-
-logic i1 : int
-
-logic result1 : int
-
-logic r2 : int
-
-logic r3 : int
-
-logic i2 : int
-
-logic result2 : int
-
-logic i3 : int
-
-logic result3 : int
-
-logic r4 : int
-
-logic r5 : int
-
-logic i4 : int
-
-logic r6 : int
-
-logic i5 : int
-
-logic r7 : int
-
-logic i6 : int
-
-logic r8 : int
-
-logic i7 : int
-
-logic r9 : int
-
-logic i8 : int
-
-logic r10 : int
-
-logic i9 : int
-
-logic r11 : int
-
-logic i10 : int
-
-logic r12 : int
-
-logic i11 : int
-
-logic r13 : int
-
-logic i12 : int
-
-logic r14 : int
-
-logic i13 : int
-
-logic result4 : int
-
-logic arithmetic__halve_d__result1 : int
-
-logic arithmetic__halve_d__result2 : int
-
-logic arithmetic__halve_d__result3 : int
-
-logic r15 : int
-
-logic i14 : int
-
-logic arithmetic__halve_d__result4 : int
-
-logic r16 : int
-
-logic i15 : int
-
-logic arithmetic__halve_d__result5 : int
-
-axiom H : in_range1(n)
-
-axiom H1 : ((0 <= 255) -> in_range1(r))
-
-axiom H2 : (result = i)
-
-axiom H3 : (i1 = 0)
-
-axiom H4 : (((0 <= i1) and (i1 <= 127)) -> (((temp___145 = r) and
-  ((temp___144 = i1) and (((result1 = r) and (r2 = i1)) and (((((i1 = i8) and
-  (r2 = r9)) and ((i9 = i1) and (r10 = r2))) and ((not ((r2 + r2) = n)) ->
-  (((r2 + r2) + 1) = n))) or ((not ((not ((r2 + r2) = n)) ->
-  (((r2 + r2) + 1) = n))) and ((((i8 = i4) and (r9 = r5)) and ((i9 = i5) and
-  (r10 = r6))) and ((((r3 = i2) and (((r3 + r3) + 1) <  n)) and
-  in_range1(r3)) and (((((0 <= 127) -> in_range2(i2)) and ((0 <= 255) ->
-  in_range1(r3))) and ((0 <= i2) and (i2 <= 127))) and (((((i2 = i4) and
-  (r3 = r5)) and ((i5 = i2) and (r6 = r3))) and (i2 = 127)) or
-  ((not (i2 = 127)) and ((((i3 = i4) and (r4 = r5)) and ((i5 = i3) and
-  (r6 = r4))) and (((i2 = result2) and (i3 = (i2 + 1))) and
-  (((r3 = result3) and (r4 = i3)) and ((not ((r4 + r4) = n)) ->
-  (((r4 + r4) + 1) = n))))))))))))))) and (((i10 = i8) and (r11 = r9)) and
-  ((i11 = i9) and (r12 = r10)))))
-
-axiom H5 : (((0 <= i1) and (i1 <= 127)) -> (i12 = i10))
-
-axiom H6 : (((0 <= i1) and (i1 <= 127)) -> (r13 = r11))
-
-axiom H7 : (((0 <= i1) and (i1 <= 127)) -> (i13 = i11))
-
-axiom H8 : (((0 <= i1) and (i1 <= 127)) -> (r14 = r12))
-
-axiom H9 : ((not ((0 <= i1) and (i1 <= 127))) -> (i1 = i12))
-
-axiom H10 : ((not ((0 <= i1) and (i1 <= 127))) -> (r13 = r))
-
-axiom H11 : ((not ((0 <= i1) and (i1 <= 127))) -> (i13 = i1))
-
-axiom H12 : ((not ((0 <= i1) and (i1 <= 127))) -> (r14 = r1))
-
-axiom H13 : (arithmetic__halve_d__result1 = arithmetic__halve_d__result2)
-
-axiom H14 : (arithmetic__halve_d__result3 = arithmetic__halve_d__result1)
-
-axiom H15 : (result4 = arithmetic__halve_d__result)
-
-axiom H16 : (arithmetic__halve_d__result1 = r13)
-
-axiom H17 : (arithmetic__halve_d__result4 = arithmetic__halve_d__result2)
-
-axiom H18 : (i14 = i12)
-
-axiom H19 : (r15 = r13)
-
-axiom H20 : (arithmetic__halve_d__result5 = arithmetic__halve_d__result3)
-
-axiom H21 : (i15 = i13)
-
-axiom H22 : (r16 = r14)
-
  (* File "arithmetic.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (not (2 = 0))
+goal WP_parameter_def :
+  (forall r:int. forall i:int. forall arithmetic__halve_d__result:int.
+  forall temp___169:int. forall temp___168:int. forall r1:int.
+  forall result:int. forall i1:int. forall result1:int. forall r2:int.
+  forall r3:int. forall i2:int. forall result2:int. forall i3:int.
+  forall result3:int. forall r4:int. forall r5:int. forall i4:int.
+  forall r6:int. forall i5:int. forall r7:int. forall i6:int. forall r8:int.
+  forall i7:int. forall r9:int. forall i8:int. forall r10:int. forall i9:int.
+  forall r11:int. forall i10:int. forall r12:int. forall i11:int.
+  forall result4:int. forall arithmetic__halve_d__result1:int.
+  forall arithmetic__halve_d__result2:int.
+  forall arithmetic__halve_d__result3:int. forall r13:int. forall i12:int.
+  forall arithmetic__halve_d__result4:int. forall r14:int. forall i13:int.
+  forall arithmetic__halve_d__result5:int. (in_range1(n) -> (((((0 <= 255) ->
+  in_range1(r)) and (((({ int__content = result } = { int__content = i }) and
+  (i1 = 0)) and ((((0 <= i1) and (i1 <= 127)) and ((((temp___169 = r) and
+  ((temp___168 = i1) and ((({ int__content = result1 } = { int__content = r
+  }) and (r2 = i1)) and (((((i1 = i6) and (r2 = r7)) and ((i7 = i1) and
+  (r8 = r2))) and ((not ((r2 + r2) = n)) -> (((r2 + r2) + 1) = n))) or
+  ((not ((not ((r2 + r2) = n)) -> (((r2 + r2) + 1) = n))) and (((({
+  int__content = i6 } = { int__content = i4 }) and ({ int__content = r7 } = {
+  int__content = r5 })) and ((i7 = i5) and (r8 = r6))) and ((((r3 = i2) and
+  (((r3 + r3) + 1) <  n)) and in_range1(r3)) and (((((0 <= 127) ->
+  in_range2(i2)) and ((0 <= 255) -> in_range1(r3))) and ((0 <= i2) and
+  (i2 <= 127))) and (((((i2 = i4) and (r3 = r5)) and ((i5 = i2) and
+  (r6 = r3))) and (i2 = 127)) or ((not (i2 = 127)) and ((((i3 = i4) and
+  (r4 = r5)) and ((i5 = i3) and (r6 = r4))) and (((i2 = result2) and
+  (i3 = (i2 + 1))) and (((r3 = result3) and (r4 = i3)) and
+  ((not ((r4 + r4) = n)) -> (((r4 + r4) + 1) = n))))))))))))))) and ((({
+  int__content = i8 } = { int__content = i6 }) and ({ int__content = r9 } = {
+  int__content = r7 })) and ((i9 = i7) and (r10 = r8)))) and ((({
+  int__content = i10 } = { int__content = i8 }) and ({ int__content = r11
+  } = { int__content = r9 })) and ((i11 = i9) and (r12 = r10))))) or
+  ((not ((0 <= i1) and (i1 <= 127))) and (((i1 = i10) and ({ int__content =
+  r11 } = { int__content = r })) and ((i11 = i1) and (r12 = r1)))))) and
+  (((arithmetic__halve_d__result1 = arithmetic__halve_d__result2) and
+  (arithmetic__halve_d__result3 = arithmetic__halve_d__result1)) and (({
+  int__content = result4 } = { int__content = arithmetic__halve_d__result
+  }) and (arithmetic__halve_d__result1 = r11))))) and
+  (((arithmetic__halve_d__result4 = arithmetic__halve_d__result2) and (({
+  int__content = i12 } = { int__content = i10 }) and ({ int__content = r13
+  } = { int__content = r11 }))) and
+  ((arithmetic__halve_d__result5 = arithmetic__halve_d__result3) and
+  ((i13 = i11) and (r14 = r12))))) -> (not (2 = 0)))))

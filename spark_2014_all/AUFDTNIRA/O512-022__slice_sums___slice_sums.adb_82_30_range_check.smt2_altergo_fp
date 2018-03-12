@@ -55,12 +55,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -72,6 +66,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -324,25 +324,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,vector_element) farray, int, int,
-  (int,vector_element) farray, int, int -> (int,vector_element) farray
-
-axiom concat_def :
-  (forall a:(int,vector_element) farray.
-  forall b:(int,vector_element) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : vector_element, int -> (int,vector_element) farray
-
-axiom singleton_def :
-  (forall v:vector_element.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,vector_element) farray, int, int,
   (int,vector_element) farray, int, int -> bool
 
@@ -421,24 +402,6 @@ axiom slide_def1 :
   (forall new_first:t.
   (forall i:t [(slide1(a, old_first, new_first)[i])]. ((slide1(a, old_first,
   new_first)[i]) = (a[sub(i, sub(new_first, old_first))]))))))
-
-logic concat1 : (t,component_type) farray, t, t, (t,component_type) farray,
-  t, t -> (t,component_type) farray
-
-axiom concat_def1 :
-  (forall a:(t,component_type) farray. forall b:(t,component_type) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t.
-  (forall i:t [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((le(a_first, i) and le(i, a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and (gt(i, a_last) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[add(sub(i, a_last), sub(b_first,
-  one))])))))))
-
-logic singleton1 : component_type, t -> (t,component_type) farray
-
-axiom singleton_def1 :
-  (forall v:component_type.
-  (forall i:t [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
 
 type index
 
@@ -631,8 +594,8 @@ type vector__ref = { vector__content : us_t
 }
 
 predicate dynamic_invariant(expr: us_t, us: bool, skip_bounds: bool,
-  us1: bool) = ((not (skip_bounds = true)) -> dynamic_property(1, 65536,
-  first1(expr), last1(expr)))
+  us1: bool, us2: bool) = ((not (skip_bounds = true)) -> dynamic_property(1,
+  65536, first1(expr), last1(expr)))
 
 logic sum__logic : us_t, slice_bounds -> int
 
@@ -711,521 +674,74 @@ function t26b__ref___projection(a: t26b__ref) : integer = (a).t26b__content
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
-logic max_sum : int
-
-logic current_sum : int
-
-logic current_lo : int
-
-logic result____split_fields : index
-
-logic result____split_fields1 : extended_index
-
-logic current_hi : int
-
-logic slice_sums__maximal_sum_slice_bounds_2__result : index
-
-logic slice_sums__maximal_sum_slice_bounds_2__result1 : extended_index
-
-logic o : extended_index
-
-logic o1 : index
-
-logic o2 : index
-
-logic o3 : extended_index
-
-logic temp___188 : index
-
-logic temp___1881 : extended_index
-
-logic o4 : int
-
-logic o5 : extended_index
-
-logic o6 : index
-
-logic o7 : index
-
-logic o8 : extended_index
-
-logic temp___176 : index
-
-logic temp___1761 : extended_index
-
-logic temp___185 : index
-
-logic temp___1851 : extended_index
-
-logic temp___184 : int
-
-logic temp___183 : int
-
-logic temp___182 : int
-
-logic temp___181 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : int
-
-logic o13 : int
-
-logic o14 : extended_index
-
-logic o15 : index
-
-logic o16 : index
-
-logic o17 : extended_index
-
-logic o18 : index
-
-logic o19 : extended_index
-
-logic o20 : int
-
-logic lo_index : int
-
-logic us : int
-
-logic o21 : int
-
-logic o22 : bool
-
-logic hi_index : int
-
-logic us1 : int
-
-logic o23 : int
-
-logic o24 : bool
-
-logic o25 : extended_index
-
-logic o26 : index
-
-logic o27 : index
-
-logic o28 : extended_index
-
-logic o29 : index
-
-logic o30 : extended_index
-
-logic o31 : int
-
-logic lo_index1 : int
-
-logic o32 : extended_index
-
-logic o33 : index
-
-logic o34 : index
-
-logic o35 : extended_index
-
-logic o36 : index
-
-logic o37 : extended_index
-
-logic o38 : int
-
-logic hi_index1 : int
-
-logic us2 : int
-
-logic o39 : int
-
-logic o40 : bool
-
-logic o41 : extended_index
-
-logic o42 : index
-
-logic o43 : index
-
-logic o44 : extended_index
-
-logic o45 : index
-
-logic o46 : extended_index
-
-logic o47 : int
-
-logic o48 : int
-
-logic o49 : int
-
-logic o50 : index
-
-logic o51 : index
-
-logic o52 : extended_index
-
-logic temp___178 : index
-
-logic temp___1781 : extended_index
-
-logic o53 : int
-
-logic o54 : extended_index
-
-logic o55 : index
-
-logic o56 : extended_index
-
-logic temp___180 : index
-
-logic temp___1801 : extended_index
-
-logic o57 : int
-
-logic o58 : int
-
-logic lo : int
-
-logic hi : int
-
-logic o59 : extended_index
-
-logic o60 : index
-
-logic o61 : index
-
-logic o62 : extended_index
-
-logic o63 : index
-
-logic o64 : extended_index
-
-logic o65 : int
-
-logic current_lo1 : int
-
-logic current_hi1 : int
-
-logic result : int
-
-logic max_sum1 : int
-
-logic result1 : int
-
-logic current_sum1 : int
-
-logic result2 : index
-
-logic result3 : extended_index
-
-logic result____split_fields2 : index
-
-logic result____split_fields3 : extended_index
-
-logic result4 : index
-
-logic result5 : extended_index
-
-logic result____split_fields4 : index
-
-logic result____split_fields5 : extended_index
-
-logic result6 : int
-
-logic current_lo2 : int
-
-logic result7 : int
-
-logic current_hi2 : int
-
-logic max_sum2 : int
-
-logic current_sum2 : int
-
-logic current_lo3 : int
-
-logic result____split_fields6 : index
-
-logic result____split_fields7 : extended_index
-
-logic current_hi3 : int
-
-logic result8 : bool
-
-logic result9 : bool
-
-logic result10 : bool
-
-logic result11 : bool
-
-logic result12 : int
-
-logic current_sum3 : int
-
-logic result13 : int
-
-logic max_sum3 : int
-
-logic result14 : index
-
-logic result15 : extended_index
-
-logic result____split_fields8 : index
-
-logic result____split_fields9 : extended_index
-
-logic result16 : index
-
-logic result17 : extended_index
-
-logic result____split_fields10 : index
-
-logic result____split_fields11 : extended_index
-
-logic result18 : int
-
-logic current_lo4 : int
-
-logic result19 : int
-
-logic current_sum4 : int
-
-logic result20 : int
-
-logic current_hi4 : int
-
-logic max_sum4 : int
-
-logic current_sum5 : int
-
-logic current_lo5 : int
-
-logic result____split_fields12 : index
-
-logic result____split_fields13 : extended_index
-
-logic current_hi5 : int
-
-logic max_sum5 : int
-
-logic current_sum6 : int
-
-logic current_lo6 : int
-
-logic result____split_fields14 : index
-
-logic result____split_fields15 : extended_index
-
-logic current_hi6 : int
-
-logic max_sum6 : int
-
-logic current_sum7 : int
-
-logic current_lo7 : int
-
-logic result____split_fields16 : index
-
-logic result____split_fields17 : extended_index
-
-logic current_hi7 : int
-
-logic max_sum7 : int
-
-logic current_sum8 : int
-
-logic current_lo8 : int
-
-logic result____split_fields18 : index
-
-logic result____split_fields19 : extended_index
-
-logic current_hi8 : int
-
-logic max_sum8 : int
-
-logic current_sum9 : int
-
-logic current_lo9 : int
-
-logic result____split_fields20 : index
-
-logic result____split_fields21 : extended_index
-
-logic current_hi9 : int
-
-logic max_sum9 : int
-
-logic current_sum10 : int
-
-logic current_lo10 : int
-
-logic result____split_fields22 : index
-
-logic result____split_fields23 : extended_index
-
-logic current_hi10 : int
-
-logic result21 : index
-
-logic result22 : extended_index
-
-logic slice_sums__maximal_sum_slice_bounds_2__result2 : index
-
-logic slice_sums__maximal_sum_slice_bounds_2__result3 : extended_index
-
-logic slice_sums__maximal_sum_slice_bounds_2__result4 : index
-
-logic slice_sums__maximal_sum_slice_bounds_2__result5 : extended_index
-
-logic slice_sums__maximal_sum_slice_bounds_2__result6 : index
-
-logic slice_sums__maximal_sum_slice_bounds_2__result7 : extended_index
-
-logic max_sum10 : int
-
-logic current_sum11 : int
-
-logic current_lo11 : int
-
-logic result____split_fields24 : index
-
-logic result____split_fields25 : extended_index
-
-logic current_hi11 : int
-
-logic slice_sums__maximal_sum_slice_bounds_2__result8 : index
-
-logic slice_sums__maximal_sum_slice_bounds_2__result9 : extended_index
-
-logic max_sum11 : int
-
-logic current_sum12 : int
-
-logic current_lo12 : int
-
-logic result____split_fields26 : index
-
-logic result____split_fields27 : extended_index
-
-logic current_hi12 : int
-
-logic slice_sums__maximal_sum_slice_bounds_2__result10 : index
-
-logic slice_sums__maximal_sum_slice_bounds_2__result11 : extended_index
-
-logic result23 : bool
-
-logic result24 : bool
-
-axiom H : dynamic_invariant({ elts = x; rt = x1 }, true, false, true)
-
-axiom H1 : (result = max_sum)
-
-axiom H2 : (max_sum1 = 0)
-
-axiom H3 : in_range2(max_sum1)
-
-axiom H4 : (result1 = current_sum)
-
-axiom H5 : (current_sum1 = 0)
-
-axiom H6 : in_range1(current_sum1)
-
-axiom H7 : in_range4(current_lo)
-
-axiom H8 : (not (to_rep3(last(x1)) <  to_rep3(first(x1))))
-
-axiom H9 : (to_rep2(o5) = 0)
-
-axiom H10 : ((o4 = to_rep3(first(x1))) and in_range4(to_rep3(first(x1))))
-
-axiom H11 : (to_rep1(o6) = o4)
-
-axiom H12 : (o6 = o7)
-
-axiom H13 : (o5 = o8)
-
-axiom H14 : (temp___176 = o7)
-
-axiom H15 : (temp___1761 = o8)
-
-axiom H16 : ((result4 = result____split_fields) and
-  (result5 = result____split_fields1))
-
-axiom H17 : ((result____split_fields4 = temp___176) and
-  (result____split_fields5 = temp___1761))
-
-axiom H18 : (result6 = current_lo)
-
-axiom H19 : (current_lo2 = to_rep1(result____split_fields4))
-
-axiom H20 : (result7 = current_hi)
-
-axiom H21 : (current_hi2 = to_rep3(first(x1)))
-
-axiom H22 : (to_rep3(first(x1)) <= current_hi2)
-
-axiom H23 : (current_hi2 <= to_rep3(last(x1)))
-
-axiom H24 : ((((to_rep3(first(x1)) <= current_lo3) and
-  (current_lo3 <= current_hi3)) and (0 <= current_sum2)) and
-  (current_sum2 <= ((current_hi3 - current_lo3) * 32767)))
-
-axiom H25 : (current_sum2 = sum__logic({ elts = x; rt = x1 }, {
-  us_split_fields1 = { rec__sums__slice_bounds__lo = of_rep1(current_lo3);
-  rec__sums__slice_bounds__hi = of_rep2((current_hi3 - 1)) } }))
-
-axiom H26 :
-  ((to_rep1(result____split_fields6) <= to_rep2(result____split_fields7)) ->
-  (((to_rep3(first(x1)) <= to_rep1(result____split_fields6)) and
-  (to_rep2(result____split_fields7) <= to_rep3(last(x1)))) and
-  (max_sum2 = sum__logic({ elts = x; rt = x1 }, { us_split_fields1 = {
-  rec__sums__slice_bounds__lo = result____split_fields6;
-  rec__sums__slice_bounds__hi = result____split_fields7 } }))))
-
-axiom H27 :
-  (forall lo_index2:int. (((to_rep3(first(x1)) <= lo_index2) and
-  (lo_index2 <= (current_hi3 - 1))) ->
-  (forall hi_index2:int. (((to_rep3(first(x1)) <= hi_index2) and
-  (hi_index2 <= (current_hi3 - 1))) -> (sum__logic({ elts = x; rt = x1 }, {
-  us_split_fields1 = { rec__sums__slice_bounds__lo = of_rep1(lo_index2);
-  rec__sums__slice_bounds__hi = of_rep2(hi_index2) } }) <= max_sum2)))))
-
-axiom H28 :
-  (forall lo_index2:int. (((to_rep3(first(x1)) <= lo_index2) and
-  (lo_index2 <= (current_lo3 - 1))) -> (sum__logic({ elts = x; rt = x1 }, {
-  us_split_fields1 = { rec__sums__slice_bounds__lo = of_rep1(lo_index2);
-  rec__sums__slice_bounds__hi = of_rep2((current_lo3 - 1)) } }) <= 0)))
-
-axiom H29 :
-  (forall hi_index2:int. (((current_lo3 <= hi_index2) and
-  (hi_index2 <= (current_hi3 - 1))) -> (0 <= sum__logic({ elts = x; rt = x1
-  }, { us_split_fields1 = { rec__sums__slice_bounds__lo =
-  of_rep1(current_lo3); rec__sums__slice_bounds__hi = of_rep2(hi_index2) }
-  }))))
-
-axiom H30 : ((((((0 <= 2147483647) -> in_range2(max_sum2)) and
-  (((- 2147483648) <= 2147483647) -> in_range1(current_sum2))) and
-  in_range4(current_lo3)) and ((to_rep3(first(x1)) <= to_rep3(last(x1))) ->
-  dynamic_property1(to_rep3(first(x1)), to_rep3(last(x1)), current_hi3))) and
-  ((to_rep3(first(x1)) <= current_hi3) and
-  (current_hi3 <= to_rep3(last(x1)))))
-
-axiom H31 : ((o21 = (current_hi3 - 1)) and in_range1((current_hi3 - 1)))
-
-axiom H32 : (((lo_index <= o21) -> (o22 = true)) and
-  ((not (lo_index <= o21)) -> (o22 = false)))
-
-axiom H33 : (((to_rep3(first(x1)) <= lo_index) -> (result9 = o22)) and
-  ((not (to_rep3(first(x1)) <= lo_index)) -> (result9 = false)))
-
-axiom H34 : (result9 = true)
-
-axiom H35 : (to_rep3(first(x1)) <= (current_hi3 - 1))
-
  (* File "sums.ads", line 12, characters 0-0 *)
-goal WP_parameter_def : (1 <= to_rep3(first(x1)))
+goal WP_parameter_def :
+  (forall max_sum:int. forall current_sum:int. forall current_lo:int.
+  forall result____split_fields:index.
+  forall result____split_fields1:extended_index. forall current_hi:int.
+  forall o:int. forall o1:extended_index. forall o2:index. forall o3:index.
+  forall o4:extended_index. forall temp___200:index.
+  forall temp___2001:extended_index. forall lo_index:int. forall o5:int.
+  forall o6:bool. forall result:int. forall max_sum1:int. forall result1:int.
+  forall current_sum1:int. forall result2:us_split_fields__ref.
+  forall result____split_fields2:us_split_fields. forall result3:int__ref.
+  forall current_lo1:int. forall result4:int__ref. forall current_hi1:int.
+  forall max_sum2:int. forall current_sum2:int. forall current_lo2:int.
+  forall result____split_fields3:us_split_fields. forall current_hi2:int.
+  forall result5:bool. (dynamic_invariant({ elts = x; rt = x1 }, true, false,
+  true, true) -> (((result = max_sum) and (max_sum1 = 0)) ->
+  (in_range2(max_sum1) -> (((result1 = current_sum) and
+  (current_sum1 = 0)) -> (in_range1(current_sum1) ->
+  (in_range4(current_lo) ->
+  ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((((to_rep2(o1) = 0) and ((((o = to_rep3(first(x1))) and
+  in_range4(to_rep3(first(x1)))) and (to_rep1(o2) = o)) and ((o2 = o3) and
+  (o1 = o4)))) and ((temp___200 = o3) and (temp___2001 = o4))) and
+  ((result2 = { us_split_fields__content = { rec__sums__slice_bounds__lo =
+  result____split_fields; rec__sums__slice_bounds__hi =
+  result____split_fields1 } }) and (result____split_fields2 = {
+  rec__sums__slice_bounds__lo = temp___200; rec__sums__slice_bounds__hi =
+  temp___2001 }))) -> (((result3 = { int__content = current_lo }) and
+  (current_lo1 = to_rep1((result____split_fields2).rec__sums__slice_bounds__lo))) ->
+  (((result4 = { int__content = current_hi }) and
+  (current_hi1 = to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi1) and
+  (current_hi1 <= to_rep3(last(x1)))) ->
+  ((((((to_rep3(first(x1)) <= current_lo2) and
+  (current_lo2 <= current_hi2)) and (0 <= current_sum2)) and
+  (current_sum2 <= ((current_hi2 - current_lo2) * 32767))) and
+  ((current_sum2 = sum__logic({ elts = x; rt = x1 }, { us_split_fields1 = {
+  rec__sums__slice_bounds__lo = of_rep1(current_lo2);
+  rec__sums__slice_bounds__hi = of_rep2((current_hi2 - 1)) } })) and
+  ((((to_rep1((result____split_fields3).rec__sums__slice_bounds__lo) <= to_rep2((result____split_fields3).rec__sums__slice_bounds__hi)) and
+  (((to_rep3(first(x1)) <= to_rep1((result____split_fields3).rec__sums__slice_bounds__lo)) and
+  (to_rep2((result____split_fields3).rec__sums__slice_bounds__hi) <= to_rep3(last(x1)))) and
+  (max_sum2 = sum__logic({ elts = x; rt = x1 }, { us_split_fields1 =
+  result____split_fields3 })))) or
+  (not (to_rep1((result____split_fields3).rec__sums__slice_bounds__lo) <= to_rep2((result____split_fields3).rec__sums__slice_bounds__hi)))) and
+  ((forall lo_index1:int. (((to_rep3(first(x1)) <= lo_index1) and
+   (lo_index1 <= (current_hi2 - 1))) ->
+   (forall hi_index:int. (((to_rep3(first(x1)) <= hi_index) and
+   (hi_index <= (current_hi2 - 1))) -> (sum__logic({ elts = x; rt = x1 }, {
+   us_split_fields1 = { rec__sums__slice_bounds__lo = of_rep1(lo_index1);
+   rec__sums__slice_bounds__hi = of_rep2(hi_index) } }) <= max_sum2))))) and
+  ((forall lo_index1:int. (((to_rep3(first(x1)) <= lo_index1) and
+   (lo_index1 <= (current_lo2 - 1))) -> (sum__logic({ elts = x; rt = x1 }, {
+   us_split_fields1 = { rec__sums__slice_bounds__lo = of_rep1(lo_index1);
+   rec__sums__slice_bounds__hi = of_rep2((current_lo2 - 1)) } }) <= 0))) and
+  (forall hi_index:int. (((current_lo2 <= hi_index) and
+  (hi_index <= (current_hi2 - 1))) -> (0 <= sum__logic({ elts = x; rt = x1 },
+  { us_split_fields1 = { rec__sums__slice_bounds__lo = of_rep1(current_lo2);
+  rec__sums__slice_bounds__hi = of_rep2(hi_index) } }))))))))) ->
+  (((((((0 <= 2147483647) -> in_range2(max_sum2)) and
+  (((- 2147483648) <= 2147483647) -> in_range1(current_sum2))) and
+  in_range4(current_lo2)) and ((to_rep3(first(x1)) <= to_rep3(last(x1))) ->
+  dynamic_property1(to_rep3(first(x1)), to_rep3(last(x1)), current_hi2))) and
+  ((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1))))) -> (((((o5 = (current_hi2 - 1)) and
+  in_range1((current_hi2 - 1))) and (((lo_index <= o5) and (o6 = true)) or
+  ((not (lo_index <= o5)) and (o6 = false)))) and
+  (((to_rep3(first(x1)) <= lo_index) and (result5 = o6)) or
+  ((not (to_rep3(first(x1)) <= lo_index)) and (result5 = false)))) ->
+  ((result5 = true) -> ((to_rep3(first(x1)) <= (current_hi2 - 1)) ->
+  (1 <= to_rep3(first(x1))))))))))))))))))))

@@ -223,7 +223,5 @@ axiom bad_interrupt_priority__post_axiom :
 
 axiom bad_interrupt_priority__def_axiom : (bad_interrupt_priority(void) = 99)
 
-axiom H : false
-
  (* File "t.adb", line 8, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def : true

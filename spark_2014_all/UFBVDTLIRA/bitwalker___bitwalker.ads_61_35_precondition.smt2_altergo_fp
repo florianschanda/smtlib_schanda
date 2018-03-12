@@ -601,12 +601,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -618,6 +612,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -717,69 +717,13 @@ logic left : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic bitwalker__peekbit64__result : bool
+logic rliteral : t
 
-logic o : int
+axiom rliteral_axiom : (tqtint(rliteral) = 1)
 
-logic o1 : t
+logic rliteral1 : t
 
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : bool
-
-logic o5 : bool
-
-logic o6 : int
-
-logic o7 : bool
-
-logic result : bool
-
-logic bitwalker__peekbit64__result1 : bool
-
-logic bitwalker__peekbit64__result2 : bool
-
-logic bitwalker__peekbit64__result3 : bool
-
-logic bitwalker__peekbit64__result4 : bool
-
-logic bitwalker__peekbit64__result5 : bool
-
-axiom H : true
-
-axiom H1 : in_range1(left)
-
-axiom H2 : (left <  64)
-
-axiom H3 : (bitwalker__peekbit64__result1 = bitwalker__peekbit64__result2)
-
-axiom H4 : (bitwalker__peekbit64__result3 = bitwalker__peekbit64__result1)
-
-axiom H5 : ((o = (63 - left)) and in_range1((63 - left)))
-
-axiom H6 : (o1 = of_int(o))
-
-axiom H7 : (o2 = lsl_bv(of_int(1), o1))
-
-axiom H8 : (o3 = bw_and(value, o2))
-
-axiom H9 : (((o3 = of_int(0)) -> (o4 = true)) and ((not (o3 = of_int(0))) ->
-  (o4 = false)))
-
-axiom H10 : (((not (o4 = true)) -> (o5 = true)) and ((o4 = true) ->
-  (o5 = false)))
-
-axiom H11 : (result = bitwalker__peekbit64__result)
-
-axiom H12 : (bitwalker__peekbit64__result1 = o5)
-
-axiom H13 : (bitwalker__peekbit64__result4 = bitwalker__peekbit64__result2)
-
-axiom H14 : (bitwalker__peekbit64__result5 = bitwalker__peekbit64__result3)
-
-axiom H15 : ((o6 = (63 - left)) and in_range1((63 - left)))
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 0)
 
  (* File "bitwalker.ads", line 54, characters 0-0 *)
 goal WP_parameter_def : true

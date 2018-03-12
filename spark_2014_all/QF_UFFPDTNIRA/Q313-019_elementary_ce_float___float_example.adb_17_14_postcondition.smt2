@@ -55,7 +55,7 @@
 (declare-const dummy1 float_7)
 (declare-datatypes () ((float_7__ref (mk_float_7__ref (float_7__content float_7)))))
 (define-fun float_7__ref___projection ((a float_7__ref)) float_7 (float_7__content a))
-(define-fun dynamic_invariant ((temp___expr_135 Float64) (temp___is_init_132 Bool) (temp___skip_constant_133 Bool) (temp___do_toplevel_134 Bool)) Bool (=> (or (= temp___is_init_132 true) (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))) (fp.isFinite64 temp___expr_135)))
+(define-fun dynamic_invariant ((temp___expr_158 Float64) (temp___is_init_154 Bool) (temp___skip_constant_155 Bool) (temp___do_toplevel_156 Bool) (temp___do_typ_inv_157 Bool)) Bool (=> (or (= temp___is_init_154 true) (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))) (fp.isFinite64 temp___expr_158)))
 (declare-const a Float64)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const b Float64)

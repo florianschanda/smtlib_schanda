@@ -727,275 +727,105 @@ logic pow2__function_guard : t, int -> prop
 
 axiom pow2__post_axiom : true
 
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 1)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 0)
+
 axiom pow2__def_axiom :
   (forall i:int [pow21(i)]. (in_range(i) -> (((i <  4294967296) ->
-  (pow21(i) = lsl_bv(of_int(1), of_int(i)))) and ((not (i <  4294967296)) ->
-  (pow21(i) = of_int(0))))))
-
-logic cur_exp : t
-
-logic cur_val : t
-
-logic result__ : t
-
-logic iter : int
-
-logic exponentiate__result : t
-
-logic temp___207 : t
-
-logic temp___208 : t
-
-logic temp___206 : t
-
-logic temp___205 : t
-
-logic temp___204 : int
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : t
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : t
-
-logic o8 : t
-
-logic o9 : int
-
-logic exponentiate__result1 : t
-
-logic result : t
-
-logic cur_exp1 : t
-
-logic result1 : t
-
-logic cur_val1 : t
-
-logic result2 : t
-
-logic result__1 : t
-
-logic result3 : int
-
-logic iter1 : int
-
-logic result4 : t
-
-logic exponentiate__result2 : t
-
-logic cur_exp2 : t
-
-logic cur_val2 : t
-
-logic result__2 : t
-
-logic iter2 : int
-
-logic result5 : t
-
-logic result__3 : t
-
-logic result6 : t
-
-logic cur_exp3 : t
-
-logic result7 : t
-
-logic cur_val3 : t
-
-logic result8 : int
-
-logic iter3 : int
-
-logic cur_exp4 : t
-
-logic cur_val4 : t
-
-logic result__4 : t
-
-logic iter4 : int
-
-logic cur_exp5 : t
-
-logic cur_val5 : t
-
-logic result__5 : t
-
-logic iter5 : int
-
-logic cur_exp6 : t
-
-logic cur_val6 : t
-
-logic result__6 : t
-
-logic iter6 : int
-
-logic cur_exp7 : t
-
-logic cur_val7 : t
-
-logic result__7 : t
-
-logic iter7 : int
-
-logic result9 : t
-
-logic exponentiate__result3 : t
-
-logic exponentiate__result4 : t
-
-logic exponentiate__result5 : t
-
-logic cur_exp8 : t
-
-logic cur_val8 : t
-
-logic result__8 : t
-
-logic iter8 : int
-
-logic exponentiate__result6 : t
-
-logic cur_exp9 : t
-
-logic cur_val9 : t
-
-logic result__9 : t
-
-logic iter9 : int
-
-logic exponentiate__result7 : t
-
-logic cur_exp10 : t
-
-logic cur_val10 : t
-
-logic result__10 : t
-
-logic iter10 : int
-
-logic exponentiate__result8 : t
-
-logic cur_exp11 : t
-
-logic cur_val11 : t
-
-logic result__11 : t
-
-logic iter11 : int
-
-logic exponentiate__result9 : t
-
-logic result10 : t
-
-axiom H : true
-
-axiom H1 : in_range(exp)
-
-axiom H2 : (result = cur_exp)
-
-axiom H3 : (cur_exp1 = of_int(exp))
-
-axiom H4 : true
-
-axiom H5 : (result1 = cur_val)
-
-axiom H6 : (cur_val1 = val__)
-
-axiom H7 : true
-
-axiom H8 : (result2 = result__)
-
-axiom H9 : (result__1 = of_int(1))
-
-axiom H10 : true
-
-axiom H11 : (result3 = iter)
-
-axiom H12 : (iter1 = 0)
-
-axiom H13 : in_range1(iter1)
-
-axiom H14 : (((((exponentiate__result6 = exponentiate__result2) and
-  ((iter8 = iter1) and ((result__8 = result__1) and
-  ((cur_val8 = cur_val1) and (cur_exp8 = cur_exp1))))) and
+  (pow21(i) = lsl_bv(rliteral, of_int(i)))) and ((not (i <  4294967296)) ->
+  (pow21(i) = rliteral1)))))
+
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 2)
+
+ (* File "interfac.ads", line 74, characters 0-0 *)
+goal WP_parameter_def :
+  (forall cur_exp:t. forall cur_val:t. forall result__:t. forall iter:int.
+  forall exponentiate__result:t. forall temp___241:t. forall temp___242:t.
+  forall temp___240:t. forall temp___239:t. forall temp___238:int.
+  forall o:int. forall exponentiate__result1:t. forall result:t.
+  forall cur_exp1:t. forall result1:t. forall cur_val1:t. forall result2:t.
+  forall result__1:t. forall result3:int. forall iter1:int. forall result4:t.
+  forall exponentiate__result2:t. forall cur_exp2:t. forall cur_val2:t.
+  forall result__2:t. forall iter2:int. forall result5:t. forall result__3:t.
+  forall result6:t. forall cur_exp3:t. forall result7:t. forall cur_val3:t.
+  forall result8:int. forall iter3:int. forall cur_exp4:t. forall cur_val4:t.
+  forall result__4:t. forall iter4:int. forall cur_exp5:t. forall cur_val5:t.
+  forall result__5:t. forall iter5:int. forall cur_exp6:t. forall cur_val6:t.
+  forall result__6:t. forall iter6:int. forall cur_exp7:t. forall cur_val7:t.
+  forall result__7:t. forall iter7:int. forall result9:t.
+  forall exponentiate__result3:t. forall exponentiate__result4:t.
+  forall exponentiate__result5:t. forall cur_exp8:t. forall cur_val8:t.
+  forall result__8:t. forall iter8:int. forall exponentiate__result6:t.
+  forall cur_exp9:t. forall cur_val9:t. forall result__9:t. forall iter9:int.
+  forall exponentiate__result7:t. forall cur_exp10:t. forall cur_val10:t.
+  forall result__10:t. forall iter10:int. forall exponentiate__result8:t.
+  forall cur_exp11:t. forall cur_val11:t. forall result__11:t.
+  forall iter11:int. forall exponentiate__result9:t.
+  (forall result10:t. ((in_range(exp) and ((((({ t__content = result } = {
+  t__content = cur_exp }) and (cur_exp1 = of_int(exp))) and ((({ t__content =
+  result1 } = { t__content = cur_val }) and (cur_val1 = val__)) and ((({
+  t__content = result2 } = { t__content = result__ }) and
+  (result__1 = rliteral)) and ((({ int__content = result3 } = {
+  int__content = iter }) and (iter1 = 0)) and (in_range1(iter1) and
+  (((((exponentiate__result2 = exponentiate__result6) and
+  ((iter1 = iter8) and ((result__1 = result__8) and
+  ((cur_val1 = cur_val8) and (cur_exp1 = cur_exp8))))) and
   ((exponentiate__result7 = exponentiate__result2) and ((iter9 = iter1) and
   ((result__9 = result__1) and ((cur_val9 = cur_val1) and
   (cur_exp9 = cur_exp1)))))) and ((exp = 0) and
   ((result4 = exponentiate__result) and
-  (exponentiate__result2 = of_int(1))))) or (((not (exp = 0)) and
+  (exponentiate__result2 = rliteral)))) or (((not (exp = 0)) and
   ((exponentiate__result2 = exponentiate__result) and
-  (exponentiate__result2 = exponentiate__result1))) and
-  ((((exponentiate__result6 = exponentiate__result4) and ((iter8 = iter6) and
-  ((result__8 = result__6) and ((cur_val8 = cur_val6) and
-  (cur_exp8 = cur_exp6))))) and
+  (exponentiate__result2 = exponentiate__result1))) and (((({ t__content =
+  exponentiate__result6 } = { t__content = exponentiate__result4 }) and (({
+  int__content = iter8 } = { int__content = iter6 }) and (({ t__content =
+  result__8 } = { t__content = result__6 }) and (({ t__content = cur_val8
+  } = { t__content = cur_val6 }) and ({ t__content = cur_exp8 } = {
+  t__content = cur_exp6 }))))) and
   ((exponentiate__result7 = exponentiate__result5) and ((iter9 = iter7) and
   ((result__9 = result__7) and ((cur_val9 = cur_val7) and
-  (cur_exp9 = cur_exp7)))))) and ((((not (cur_exp1 = of_int(0))) ->
-  ((((temp___207 = result__1) and ((temp___208 = cur_exp1) and
-  ((temp___206 = cur_val1) and ((temp___205 = cur_exp1) and
-  ((temp___204 = iter1) and (((result__2 = power(val__,
+  (cur_exp9 = cur_exp7)))))) and ((((not (cur_exp1 = rliteral1)) and
+  ((((temp___241 = result__1) and ((temp___242 = cur_exp1) and
+  ((temp___240 = cur_val1) and ((temp___239 = cur_exp1) and
+  ((temp___238 = iter1) and (((result__2 = power(val__,
   tqtint(urem(of_int(exp), pow21(iter2))))) and ((cur_val2 = power(val__,
-  tqtint(pow21(iter2)))) and (cur_exp2 = udiv(temp___208,
+  tqtint(pow21(iter2)))) and (cur_exp2 = udiv(temp___242,
   pow21(iter2))))) and (((0 <= 31) -> in_range1(iter2)) and
-  ((((urem(cur_exp2, of_int(2)) = of_int(1)) -> ((result__2 = result5) and
-  (result__3 = mul(result__2, cur_val2)))) and ((not (urem(cur_exp2,
-  of_int(2)) = of_int(1))) -> (result__3 = result__2))) and
-  (((cur_exp2 = result6) and (cur_exp3 = udiv(cur_exp2, of_int(2)))) and
+  ((((urem(cur_exp2, rliteral2) = rliteral) and ((result__2 = result5) and
+  (result__3 = mul(result__2, cur_val2)))) or ((not (urem(cur_exp2,
+  rliteral2) = rliteral)) and (result__3 = result__2))) and
+  (((cur_exp2 = result6) and (cur_exp3 = udiv(cur_exp2, rliteral2))) and
   (((cur_val2 = result7) and (cur_val3 = mul(cur_val2, cur_val2))) and
-  ((((o9 = (iter2 + 1)) and in_range1((iter2 + 1))) and
-  ((iter2 = result8) and (iter3 = o9))) and
-  (cur_exp3 = of_int(0))))))))))))) and (((iter4 = iter3) and
-  ((result__3 = result__4) and ((cur_val3 = cur_val4) and
-  (cur_exp3 = cur_exp4)))) and ((iter5 = iter3) and
-  ((result__5 = result__3) and ((cur_val5 = cur_val3) and
-  (cur_exp5 = cur_exp3)))))) and (((iter6 = iter4) and
-  ((result__6 = result__4) and ((cur_val6 = cur_val4) and
-  (cur_exp6 = cur_exp4)))) and ((iter7 = iter5) and
+  ((((o = (iter2 + 1)) and in_range1((iter2 + 1))) and ((iter2 = result8) and
+  (iter3 = o))) and (cur_exp3 = rliteral1)))))))))))) and
+  (((iter3 = iter4) and ((result__3 = result__4) and
+  ((cur_val3 = cur_val4) and (cur_exp3 = cur_exp4)))) and
+  ((iter5 = iter3) and ((result__5 = result__3) and
+  ((cur_val5 = cur_val3) and (cur_exp5 = cur_exp3)))))) and ((({
+  int__content = iter6 } = { int__content = iter4 }) and
+  ((result__4 = result__6) and ((cur_val4 = cur_val6) and
+  (cur_exp4 = cur_exp6)))) and ((iter7 = iter5) and
   ((result__7 = result__5) and ((cur_val7 = cur_val5) and
-  (cur_exp7 = cur_exp5))))))) and ((cur_exp1 = of_int(0)) ->
-  (((iter6 = iter1) and ((result__6 = result__1) and
-  ((cur_val6 = cur_val1) and (cur_exp6 = cur_exp1)))) and
+  (cur_exp7 = cur_exp5))))))) or ((cur_exp1 = rliteral1) and
+  (((iter1 = iter6) and ((result__1 = result__6) and
+  ((cur_val1 = cur_val6) and (cur_exp1 = cur_exp6)))) and
   ((iter7 = iter1) and ((result__7 = result__1) and
   ((cur_val7 = cur_val1) and (cur_exp7 = cur_exp1))))))) and
-  (((exponentiate__result4 = exponentiate__result3) and
+  (((exponentiate__result3 = exponentiate__result4) and
   (exponentiate__result5 = exponentiate__result3)) and
   ((result9 = exponentiate__result2) and
-  (exponentiate__result3 = result__6)))))))
-
-axiom H15 : (exponentiate__result8 = exponentiate__result6)
-
-axiom H16 : (iter10 = iter8)
-
-axiom H17 : (result__10 = result__8)
-
-axiom H18 : (cur_val10 = cur_val8)
-
-axiom H19 : (cur_exp10 = cur_exp8)
-
-axiom H20 : (exponentiate__result9 = exponentiate__result7)
-
-axiom H21 : (iter11 = iter9)
-
-axiom H22 : (result__11 = result__9)
-
-axiom H23 : (cur_val11 = cur_val9)
-
-axiom H24 : (cur_exp11 = cur_exp9)
-
-axiom H25 : (result10 = exponentiate__result8)
-
- (* File "interfac.ads", line 74, characters 0-0 *)
-goal WP_parameter_def : (exponentiate__result8 = power(val__, exp))
+  (exponentiate__result3 = result__6)))))))))))) and ((({ t__content =
+  exponentiate__result8 } = { t__content = exponentiate__result6 }) and
+  ((iter10 = iter8) and ((result__10 = result__8) and
+  ((cur_val10 = cur_val8) and (cur_exp10 = cur_exp8))))) and
+  ((exponentiate__result9 = exponentiate__result7) and ((iter11 = iter9) and
+  ((result__11 = result__9) and ((cur_val11 = cur_val9) and
+  (cur_exp11 = cur_exp9))))))) and (result10 = exponentiate__result8))) ->
+  (exponentiate__result8 = power(val__, exp)))))

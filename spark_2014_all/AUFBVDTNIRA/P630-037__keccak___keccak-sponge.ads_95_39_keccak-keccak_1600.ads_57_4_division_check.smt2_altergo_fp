@@ -658,12 +658,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -675,6 +669,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1165,14 +1165,14 @@ axiom bool_eq_def5 :
   (ule(b__first_2, b__last_2) and (sub(a__last_2,
   a__first_2) = sub(b__last_2, b__first_2)))) or ((not ule(a__first_2,
   a__last_2)) and ugt(b__first_2, b__last_2)))) and
-  (forall temp___idx_133:t. forall temp___idx_134:t. ((((ule(a__first,
-  temp___idx_133) and ule(temp___idx_133, a__last)) and (ule(a__first_2,
-  temp___idx_134) and ule(temp___idx_134, a__last_2))) and (to_rep(get(a,
-  temp___idx_133, temp___idx_134)) = to_rep(get(b, add(sub(b__first,
-  a__first), temp___idx_133), add(sub(b__first_2, a__first_2),
-  temp___idx_134))))) or (not ((ule(a__first, temp___idx_133) and
-  ule(temp___idx_133, a__last)) and (ule(a__first_2, temp___idx_134) and
-  ule(temp___idx_134, a__last_2))))))) -> (bool_eq6(a, a__first, a__last,
+  (forall temp___idx_155:t. forall temp___idx_156:t. ((((ule(a__first,
+  temp___idx_155) and ule(temp___idx_155, a__last)) and (ule(a__first_2,
+  temp___idx_156) and ule(temp___idx_156, a__last_2))) and (to_rep(get(a,
+  temp___idx_155, temp___idx_156)) = to_rep(get(b, add(sub(b__first,
+  a__first), temp___idx_155), add(sub(b__first_2, a__first_2),
+  temp___idx_156))))) or (not ((ule(a__first, temp___idx_155) and
+  ule(temp___idx_155, a__last)) and (ule(a__first_2, temp___idx_156) and
+  ule(temp___idx_156, a__last_2))))))) -> (bool_eq6(a, a__first, a__last,
   a__first_2, a__last_2, b, b__first, b__last, b__first_2,
   b__last_2) = true)) and ((not ((((ule(a__first, a__last) -> (ule(b__first,
   b__last) and (sub(a__last, a__first) = sub(b__last, b__first)))) and
@@ -1180,12 +1180,12 @@ axiom bool_eq_def5 :
   ((ule(a__first_2, a__last_2) -> (ule(b__first_2, b__last_2) and
   (sub(a__last_2, a__first_2) = sub(b__last_2, b__first_2)))) and
   ((not ule(a__first_2, a__last_2)) -> ugt(b__first_2, b__last_2)))) and
-  (forall temp___idx_133:t. forall temp___idx_134:t. (((ule(a__first,
-  temp___idx_133) and ule(temp___idx_133, a__last)) and (ule(a__first_2,
-  temp___idx_134) and ule(temp___idx_134, a__last_2))) -> (to_rep(get(a,
-  temp___idx_133, temp___idx_134)) = to_rep(get(b, add(sub(b__first,
-  a__first), temp___idx_133), add(sub(b__first_2, a__first_2),
-  temp___idx_134)))))))) -> (bool_eq6(a, a__first, a__last, a__first_2,
+  (forall temp___idx_155:t. forall temp___idx_156:t. (((ule(a__first,
+  temp___idx_155) and ule(temp___idx_155, a__last)) and (ule(a__first_2,
+  temp___idx_156) and ule(temp___idx_156, a__last_2))) -> (to_rep(get(a,
+  temp___idx_155, temp___idx_156)) = to_rep(get(b, add(sub(b__first,
+  a__first), temp___idx_155), add(sub(b__first_2, a__first_2),
+  temp___idx_156)))))))) -> (bool_eq6(a, a__first, a__last, a__first_2,
   a__last_2, b, b__first, b__last, b__first_2, b__last_2) = false))))
 
 axiom bool_eq_rev :
@@ -1200,12 +1200,12 @@ axiom bool_eq_rev :
   ((ule(a__first_2, a__last_2) -> (ule(b__first_2, b__last_2) and
   (sub(a__last_2, a__first_2) = sub(b__last_2, b__first_2)))) and
   ((not ule(a__first_2, a__last_2)) -> ugt(b__first_2, b__last_2)))) and
-  (forall temp___idx_133:t. forall temp___idx_134:t. (((ule(a__first,
-  temp___idx_133) and ule(temp___idx_133, a__last)) and (ule(a__first_2,
-  temp___idx_134) and ule(temp___idx_134, a__last_2))) -> (to_rep(get(a,
-  temp___idx_133, temp___idx_134)) = to_rep(get(b, add(sub(b__first,
-  a__first), temp___idx_133), add(sub(b__first_2, a__first_2),
-  temp___idx_134))))))))))
+  (forall temp___idx_155:t. forall temp___idx_156:t. (((ule(a__first,
+  temp___idx_155) and ule(temp___idx_155, a__last)) and (ule(a__first_2,
+  temp___idx_156) and ule(temp___idx_156, a__last_2))) -> (to_rep(get(a,
+  temp___idx_155, temp___idx_156)) = to_rep(get(b, add(sub(b__first,
+  a__first), temp___idx_155), add(sub(b__first_2, a__first_2),
+  temp___idx_156))))))))))
 
 type states
 
@@ -1455,24 +1455,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,byte) farray, int, int, (int,byte) farray, int,
-  int -> (int,byte) farray
-
-axiom concat_def :
-  (forall a:(int,byte) farray. forall b:(int,byte) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : byte, int -> (int,byte) farray
-
-axiom singleton_def :
-  (forall v:byte.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq12 : (int,byte) farray, int, int, (int,byte) farray, int,
   int -> bool
 
@@ -1483,17 +1465,17 @@ axiom bool_eq_def11 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep5((a[temp___idx_132])) = to_rep5((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep5((a[temp___idx_154])) = to_rep5((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq12(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep5((a[temp___idx_132])) = to_rep5((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep5((a[temp___idx_154])) = to_rep5((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq12(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -1503,37 +1485,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep5((a[temp___idx_132])) = to_rep5((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,byte) farray, int, int, (int,byte) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,byte) farray. forall b:(int,byte) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq12(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,byte) farray. forall b:(int,byte) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq12(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and ult(to_rep5((a[(i + 1)])), to_rep5((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,byte) farray. forall b:(int,byte) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq12(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and ugt(to_rep5((a[(j + 1)])), to_rep5((b[(i + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep5((a[temp___idx_154])) = to_rep5((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic dummy8 : (int,byte) farray
 
@@ -1605,14 +1559,22 @@ type us_rep = { us_split_fields1 : us_split_fields
 function us_rep___projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 4)
+
 logic bool_eq13 : us_rep, us_rep -> bool
 
 axiom bool_eq_def12 :
   (forall a:us_rep. forall b:us_rep [bool_eq13(a, b)].
   ((((((((bool_eq6(((a).us_split_fields1).rec__keccak__keccak_1600__sponge__context__state,
-  of_int(0), of_int(4), of_int(0), of_int(4),
+  rliteral, rliteral1, rliteral, rliteral1,
   ((b).us_split_fields1).rec__keccak__keccak_1600__sponge__context__state,
-  of_int(0), of_int(4), of_int(0), of_int(4)) = true) and
+  rliteral, rliteral1, rliteral, rliteral1) = true) and
   (bool_eq12(((a).us_split_fields1).rec__keccak__keccak_1600__sponge__context__block,
   0, 199,
   ((b).us_split_fields1).rec__keccak__keccak_1600__sponge__context__block, 0,
@@ -1623,9 +1585,9 @@ axiom bool_eq_def12 :
   (to_rep1(((a).us_split_fields1).rec__keccak__keccak_1600__sponge__context__curr_state) = to_rep1(((b).us_split_fields1).rec__keccak__keccak_1600__sponge__context__curr_state))) ->
   (bool_eq13(a, b) = true)) and
   ((not ((((((bool_eq6(((a).us_split_fields1).rec__keccak__keccak_1600__sponge__context__state,
-  of_int(0), of_int(4), of_int(0), of_int(4),
+  rliteral, rliteral1, rliteral, rliteral1,
   ((b).us_split_fields1).rec__keccak__keccak_1600__sponge__context__state,
-  of_int(0), of_int(4), of_int(0), of_int(4)) = true) and
+  rliteral, rliteral1, rliteral, rliteral1) = true) and
   (bool_eq12(((a).us_split_fields1).rec__keccak__keccak_1600__sponge__context__block,
   0, 199,
   ((b).us_split_fields1).rec__keccak__keccak_1600__sponge__context__block, 0,
@@ -1949,302 +1911,12 @@ axiom in_queue_bit_length__def_axiom :
   rec__keccak__keccak_1600__sponge__context__curr_state = ctx5 }
   }) = to_rep3(ctx2)))
 
-logic temp___799 : t -> (int,byte) farray
+logic temp___868 : t -> (int,byte) farray
 
 axiom def_axiom :
-  (forall temp___801:t.
-  (forall temp___802:int.
-  ((temp___799(temp___801)[temp___802]) = of_rep5(temp___801))))
-
-logic ctx__split_fields : map
-
-logic ctx__split_fields1 : (int,byte) farray
-
-logic ctx__split_fields2 : bit_absorption_number
-
-logic ctx__split_fields3 : byte_absorption_number
-
-logic ctx__split_fields4 : rate_number
-
-logic ctx__split_fields5 : states
-
-logic o : bit_absorption_number
-
-logic o1 : map
-
-logic o2 : (int,byte) farray
-
-logic o3 : bit_absorption_number
-
-logic o4 : byte_absorption_number
-
-logic o5 : rate_number
-
-logic o6 : states
-
-logic temp___806 : map
-
-logic temp___8061 : (int,byte) farray
-
-logic temp___8062 : bit_absorption_number
-
-logic temp___8063 : byte_absorption_number
-
-logic temp___8064 : rate_number
-
-logic temp___8065 : states
-
-logic o7 : byte_absorption_number
-
-logic o8 : map
-
-logic o9 : (int,byte) farray
-
-logic o10 : bit_absorption_number
-
-logic o11 : byte_absorption_number
-
-logic o12 : rate_number
-
-logic o13 : states
-
-logic temp___808 : map
-
-logic temp___8081 : (int,byte) farray
-
-logic temp___8082 : bit_absorption_number
-
-logic temp___8083 : byte_absorption_number
-
-logic temp___8084 : rate_number
-
-logic temp___8085 : states
-
-logic o14 : int
-
-logic o15 : rate_number
-
-logic o16 : map
-
-logic o17 : (int,byte) farray
-
-logic o18 : bit_absorption_number
-
-logic o19 : byte_absorption_number
-
-logic o20 : rate_number
-
-logic o21 : states
-
-logic temp___810 : map
-
-logic temp___8101 : (int,byte) farray
-
-logic temp___8102 : bit_absorption_number
-
-logic temp___8103 : byte_absorption_number
-
-logic temp___8104 : rate_number
-
-logic temp___8105 : states
-
-logic o22 : states
-
-logic o23 : map
-
-logic o24 : (int,byte) farray
-
-logic o25 : bit_absorption_number
-
-logic o26 : byte_absorption_number
-
-logic o27 : rate_number
-
-logic o28 : states
-
-logic temp___812 : map
-
-logic temp___8121 : (int,byte) farray
-
-logic temp___8122 : bit_absorption_number
-
-logic temp___8123 : byte_absorption_number
-
-logic temp___8124 : rate_number
-
-logic temp___8125 : states
-
-logic keccak__keccak_1600__keccakf_1600__init__a : map
-
-logic result : map
-
-logic result1 : (int,byte) farray
-
-logic result2 : bit_absorption_number
-
-logic result3 : byte_absorption_number
-
-logic result4 : rate_number
-
-logic result5 : states
-
-logic ctx__split_fields6 : map
-
-logic ctx__split_fields7 : (int,byte) farray
-
-logic ctx__split_fields8 : bit_absorption_number
-
-logic ctx__split_fields9 : byte_absorption_number
-
-logic ctx__split_fields10 : rate_number
-
-logic ctx__split_fields11 : states
-
-logic result6 : map
-
-logic result7 : (int,byte) farray
-
-logic result8 : bit_absorption_number
-
-logic result9 : byte_absorption_number
-
-logic result10 : rate_number
-
-logic result11 : states
-
-logic ctx__split_fields12 : map
-
-logic ctx__split_fields13 : (int,byte) farray
-
-logic ctx__split_fields14 : bit_absorption_number
-
-logic ctx__split_fields15 : byte_absorption_number
-
-logic ctx__split_fields16 : rate_number
-
-logic ctx__split_fields17 : states
-
-logic result12 : map
-
-logic result13 : (int,byte) farray
-
-logic result14 : bit_absorption_number
-
-logic result15 : byte_absorption_number
-
-logic result16 : rate_number
-
-logic result17 : states
-
-logic ctx__split_fields18 : map
-
-logic ctx__split_fields19 : (int,byte) farray
-
-logic ctx__split_fields20 : bit_absorption_number
-
-logic ctx__split_fields21 : byte_absorption_number
-
-logic ctx__split_fields22 : rate_number
-
-logic ctx__split_fields23 : states
-
-logic result18 : map
-
-logic result19 : (int,byte) farray
-
-logic result20 : bit_absorption_number
-
-logic result21 : byte_absorption_number
-
-logic result22 : rate_number
-
-logic result23 : states
-
-logic ctx__split_fields24 : map
-
-logic ctx__split_fields25 : (int,byte) farray
-
-logic ctx__split_fields26 : bit_absorption_number
-
-logic ctx__split_fields27 : byte_absorption_number
-
-logic ctx__split_fields28 : rate_number
-
-logic ctx__split_fields29 : states
-
-logic result24 : map
-
-logic result25 : (int,byte) farray
-
-logic result26 : bit_absorption_number
-
-logic result27 : byte_absorption_number
-
-logic result28 : rate_number
-
-logic result29 : states
-
-logic ctx__split_fields30 : map
-
-logic ctx__split_fields31 : (int,byte) farray
-
-logic ctx__split_fields32 : bit_absorption_number
-
-logic ctx__split_fields33 : byte_absorption_number
-
-logic ctx__split_fields34 : rate_number
-
-logic ctx__split_fields35 : states
-
-logic result30 : map
-
-logic result31 : (int,byte) farray
-
-logic result32 : bit_absorption_number
-
-logic result33 : byte_absorption_number
-
-logic result34 : rate_number
-
-logic result35 : states
-
-logic ctx__split_fields36 : map
-
-logic ctx__split_fields37 : (int,byte) farray
-
-logic ctx__split_fields38 : bit_absorption_number
-
-logic ctx__split_fields39 : byte_absorption_number
-
-logic ctx__split_fields40 : rate_number
-
-logic ctx__split_fields41 : states
-
-logic ctx__split_fields42 : map
-
-logic ctx__split_fields43 : (int,byte) farray
-
-logic ctx__split_fields44 : bit_absorption_number
-
-logic ctx__split_fields45 : byte_absorption_number
-
-logic ctx__split_fields46 : rate_number
-
-logic ctx__split_fields47 : states
-
-logic ctx__split_fields48 : map
-
-logic ctx__split_fields49 : (int,byte) farray
-
-logic ctx__split_fields50 : bit_absorption_number
-
-logic ctx__split_fields51 : byte_absorption_number
-
-logic ctx__split_fields52 : rate_number
-
-logic ctx__split_fields53 : states
-
-axiom H : in_range1(capacity)
-
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (not (8 = 0))
+  (forall temp___870:t.
+  (forall temp___871:int.
+  (to_rep5((temp___868(temp___870)[temp___871])) = temp___870)))
+
+ (* File "keccak-sponge.adb", line 39, characters 0-0 *)
+goal WP_parameter_def : (in_range1(capacity) -> (not (8 = 0)))

@@ -251,75 +251,24 @@ logic s1 : et2
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic r__split_fields : et1
-
-logic r__split_fields1 : et2
-
-logic o : et1
-
-logic o1 : et1
-
-logic o2 : et2
-
-logic temp___6626 : et1
-
-logic temp___66261 : et2
-
-logic result : et1
-
-logic result1 : et2
-
-logic r__split_fields2 : et1
-
-logic r__split_fields3 : et2
-
-logic result2 : et1
-
-logic result3 : et2
-
-logic r__split_fields4 : et1
-
-logic r__split_fields5 : et2
-
-logic r__split_fields6 : et1
-
-logic r__split_fields7 : et2
-
-logic r__split_fields8 : et1
-
-logic r__split_fields9 : et2
-
-axiom H : (result = r__split_fields)
-
-axiom H1 : (result1 = r__split_fields1)
-
-axiom H2 : ((r__split_fields2 = s) and (r__split_fields3 = s1))
-
-axiom H3 : (to_rep(o) = 25)
-
-axiom H4 : (o = o1)
-
-axiom H5 : (r__split_fields3 = o2)
-
-axiom H6 : (temp___6626 = o1)
-
-axiom H7 : (temp___66261 = o2)
-
-axiom H8 : (result2 = r__split_fields2)
-
-axiom H9 : (result3 = r__split_fields3)
-
-axiom H10 : (temp___6626 = r__split_fields4)
-
-axiom H11 : (temp___66261 = r__split_fields5)
-
-axiom H12 : (r__split_fields6 = r__split_fields4)
-
-axiom H13 : (r__split_fields7 = r__split_fields5)
-
-axiom H14 : (r__split_fields8 = r__split_fields4)
-
-axiom H15 : (r__split_fields9 = r__split_fields5)
-
  (* File "ar.ads", line 744, characters 0-0 *)
-goal WP_parameter_def : (to_rep(r__split_fields6) = 25)
+goal WP_parameter_def :
+  (forall r__split_fields:et1. forall r__split_fields1:et2. forall o:et1.
+  forall o1:et1. forall o2:et2. forall temp___6685:et1.
+  forall temp___66851:et2. forall result:et1. forall result1:et2.
+  forall r__split_fields2:et1. forall r__split_fields3:et2.
+  forall result2:et1. forall result3:et2. forall r__split_fields4:et1.
+  forall r__split_fields5:et2. forall r__split_fields6:et1.
+  forall r__split_fields7:et2. forall r__split_fields8:et1.
+  forall r__split_fields9:et2. ((((((result = r__split_fields) and
+  (result1 = r__split_fields1)) and ((r__split_fields2 = s) and
+  (r__split_fields3 = s1))) and ((((to_rep(o) = 25) and ((o = o1) and
+  (r__split_fields3 = o2))) and ((temp___6685 = o1) and
+  (temp___66851 = o2))) and (((result2 = r__split_fields2) and
+  (result3 = r__split_fields3)) and ((temp___6685 = r__split_fields4) and
+  (temp___66851 = r__split_fields5))))) and
+  (((r__split_fields6 = r__split_fields4) and
+  (r__split_fields7 = r__split_fields5)) and
+  ((r__split_fields8 = r__split_fields4) and
+  (r__split_fields9 = r__split_fields5)))) ->
+  (to_rep(r__split_fields6) = 25)))

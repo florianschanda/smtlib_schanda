@@ -636,12 +636,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -653,6 +647,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1815,55 +1815,44 @@ function modular__ref___4__projection(a: modular__ref) : modular =
 
 axiom shift_right__post_axiom : true
 
+logic rliteral3 : t1
+
+axiom rliteral_axiom3 : (tqtint1(rliteral3) = 0)
+
+logic rliteral4 : t
+
+axiom rliteral_axiom4 : (tqtint(rliteral4) = 0)
+
 axiom shift_right__def_axiom :
   (forall v:t.
   (forall amount:int [shift_right(v, amount)]. (in_range2(amount) ->
   ((((1 <= 16) and (16 <= 8)) -> (((amount <  8) -> (shift_right(v,
   amount) = toBig2(lsr_bv1(toSmall2(v), of_int2(amount))))) and
-  ((not (amount <  8)) -> (shift_right(v,
-  amount) = toBig2(of_int2(0)))))) and ((not ((1 <= 16) and (16 <= 8))) ->
-  ((((9 <= 16) and (16 <= 16)) -> (((amount <  16) -> (shift_right(v,
-  amount) = lsr_bv(v, of_int(amount)))) and ((not (amount <  16)) ->
-  (shift_right(v, amount) = of_int(0))))) and ((not ((9 <= 16) and
-  (16 <= 16))) -> ((((17 <= 16) and (16 <= 32)) -> (shift_right(v,
+  ((not (amount <  8)) -> (shift_right(v, amount) = toBig2(rliteral3))))) and
+  ((not ((1 <= 16) and (16 <= 8))) -> ((((9 <= 16) and (16 <= 16)) ->
+  (((amount <  16) -> (shift_right(v, amount) = lsr_bv(v,
+  of_int(amount)))) and ((not (amount <  16)) -> (shift_right(v,
+  amount) = rliteral4)))) and ((not ((9 <= 16) and (16 <= 16))) ->
+  ((((17 <= 16) and (16 <= 32)) -> (shift_right(v,
   amount) = toSmall1(lsr_bv2(toBig1(v), of_int3(amount))))) and
   ((not ((17 <= 16) and (16 <= 32))) -> (shift_right(v,
   amount) = toSmall(lsr_bv3(toBig(v), of_int4(amount)))))))))))))
 
-logic val__ : t
+logic rliteral5 : t
 
-logic n : int
+axiom rliteral_axiom5 : (tqtint(rliteral5) = 65535)
 
-logic o : t
+logic rliteral6 : t
 
-logic o1 : t
-
-logic o2 : int
-
-logic o3 : bool
-
-logic result : bool
-
-axiom H : ule(of_int(0), val__)
-
-axiom H1 : ule(val__, of_int(65535))
-
-axiom H2 : (0 <= n)
-
-axiom H3 : (n <= 15)
-
-axiom H4 : ((o2 = power(2, n)) and in_range1(power(2, n)))
-
-axiom H5 : (((o2 = 0) -> (o3 = true)) and ((not (o2 = 0)) -> (o3 = false)))
-
-axiom H6 : (((not (o3 = true)) -> (result = true)) and ((o3 = true) ->
-  (result = false)))
-
-axiom H7 : (result = true)
-
-axiom H8 : ((n <  65536) -> (o = lsl_bv(of_int(1), of_int(n))))
-
-axiom H9 : ((not (n <  65536)) -> (o = of_int(0)))
+axiom rliteral_axiom6 : (tqtint(rliteral6) = 1)
 
  (* File "bits_manipulation-functions.ads", line 35, characters 0-0 *)
-goal WP_parameter_def : (not (o = zeros))
+goal WP_parameter_def :
+  (forall val__:t. forall n:int. forall o:t. forall o1:int. forall o2:bool.
+  forall result:bool. ((ule(rliteral4, val__) and ule(val__, rliteral5)) ->
+  (((0 <= n) and (n <= 15)) -> (((((o1 = power(2, n)) and in_range1(power(2,
+  n))) and (((o1 = 0) and (o2 = true)) or ((not (o1 = 0)) and
+  (o2 = false)))) and (((not (o2 = true)) and (result = true)) or
+  ((o2 = true) and (result = false)))) -> ((result = true) ->
+  ((((n <  65536) and (o = lsl_bv(rliteral6, of_int(n)))) or
+  ((not (n <  65536)) and (o = rliteral4))) -> (not (o = zeros))))))))

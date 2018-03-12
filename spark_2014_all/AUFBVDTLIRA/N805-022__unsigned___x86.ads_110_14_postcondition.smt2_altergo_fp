@@ -1619,12 +1619,6 @@ axiom toBig_to_uint1 : (forall x:t. (tqtint(x) = tqtint1(toBig1(x))))
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq4 : bool, bool -> bool
-
-axiom bool_eq_def4 :
-  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
-
 logic to_int4 : bool -> int
 
 axiom to_int_def4 :
@@ -1636,6 +1630,12 @@ logic of_int4 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int4(i)]. (((i = 0) -> (of_int4(i) = false)) and
   ((not (i = 0)) -> (of_int4(i) = true))))
+
+logic bool_eq4 : bool, bool -> bool
+
+axiom bool_eq_def4 :
+  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1734,24 +1734,6 @@ axiom slide_def :
   (forall i:t3 [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[sub3(i, sub3(new_first, old_first))]))))))
 
-logic concat : (t3,unsigned_8) farray, t3, t3, (t3,unsigned_8) farray, t3,
-  t3 -> (t3,unsigned_8) farray
-
-axiom concat_def :
-  (forall a:(t3,unsigned_8) farray. forall b:(t3,unsigned_8) farray.
-  (forall a_first:t3. forall a_last:t3. forall b_first:t3. forall b_last:t3.
-  (forall i:t3 [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((ule3(a_first, i) and ule3(i, a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and (ugt3(i, a_last) -> ((concat(a,
-  a_first, a_last, b, b_first, b_last)[i]) = (b[add3(sub3(i, a_last),
-  sub3(b_first, one3))])))))))
-
-logic singleton : unsigned_8, t3 -> (t3,unsigned_8) farray
-
-axiom singleton_def :
-  (forall v:unsigned_8.
-  (forall i:t3 [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq7 : (t3,unsigned_8) farray, t3, t3, (t3,unsigned_8) farray, t3,
   t3 -> bool
 
@@ -1762,19 +1744,19 @@ axiom bool_eq_def6 :
   a__last) and (ule3(b__first, b__last) and (sub3(a__last,
   a__first) = sub3(b__last, b__first)))) or ((not ule3(a__first,
   a__last)) and ugt3(b__first, b__last))) and
-  (forall temp___idx_132:t3. (((ule3(a__first, temp___idx_132) and
-  ule3(temp___idx_132, a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[add3(sub3(b__first, a__first),
-  temp___idx_132)])))) or (not (ule3(a__first, temp___idx_132) and
-  ule3(temp___idx_132, a__last)))))) -> (bool_eq7(a, a__first, a__last, b,
+  (forall temp___idx_154:t3. (((ule3(a__first, temp___idx_154) and
+  ule3(temp___idx_154, a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[add3(sub3(b__first, a__first),
+  temp___idx_154)])))) or (not (ule3(a__first, temp___idx_154) and
+  ule3(temp___idx_154, a__last)))))) -> (bool_eq7(a, a__first, a__last, b,
   b__first, b__last) = true)) and ((not (((ule3(a__first, a__last) ->
   (ule3(b__first, b__last) and (sub3(a__last, a__first) = sub3(b__last,
   b__first)))) and ((not ule3(a__first, a__last)) -> ugt3(b__first,
   b__last))) and
-  (forall temp___idx_132:t3. ((ule3(a__first, temp___idx_132) and
-  ule3(temp___idx_132, a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[add3(sub3(b__first, a__first),
-  temp___idx_132)]))))))) -> (bool_eq7(a, a__first, a__last, b, b__first,
+  (forall temp___idx_154:t3. ((ule3(a__first, temp___idx_154) and
+  ule3(temp___idx_154, a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[add3(sub3(b__first, a__first),
+  temp___idx_154)]))))))) -> (bool_eq7(a, a__first, a__last, b, b__first,
   b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1784,40 +1766,10 @@ axiom bool_eq_rev :
   a__last) = true) -> (((ule3(a__first, a__last) -> (ule3(b__first,
   b__last) and (sub3(a__last, a__first) = sub3(b__last, b__first)))) and
   ((not ule3(a__first, a__last)) -> ugt3(b__first, b__last))) and
-  (forall temp___idx_132:t3. ((ule3(a__first, temp___idx_132) and
-  ule3(temp___idx_132, a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[add3(sub3(b__first, a__first),
-  temp___idx_132)])))))))))
-
-logic compare : (t3,unsigned_8) farray, t3, t3, (t3,unsigned_8) farray, t3,
-  t3 -> int
-
-axiom compare_def_eq :
-  (forall a:(t3,unsigned_8) farray. forall b:(t3,unsigned_8) farray.
-  (forall a_first:t3. forall a_last:t3. forall b_first:t3. forall b_last:t3
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) = 0) <-> (bool_eq7(a, a_first, a_last, b,
-  b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(t3,unsigned_8) farray. forall b:(t3,unsigned_8) farray.
-  (forall a_first:t3. forall a_last:t3. forall b_first:t3. forall b_last:t3
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) <  0) <->
-  (exists i:t3. exists j:t3. (ule3(i, a_last) and (ult3(j, b_last) and
-  ((bool_eq7(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  (ult3(i, a_last) and ult(to_rep((a[add3(i, one3)])), to_rep((b[add3(j,
-  one3)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(t3,unsigned_8) farray. forall b:(t3,unsigned_8) farray.
-  (forall a_first:t3. forall a_last:t3. forall b_first:t3. forall b_last:t3
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((0 <  compare(a,
-  a_first, a_last, b, b_first, b_last)) <->
-  (exists i:t3. exists j:t3. (ule3(i, b_last) and (ult3(j, a_last) and
-  ((bool_eq7(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  (ult3(i, b_last) and ugt(to_rep((a[add3(j, one3)])), to_rep((b[add3(i,
-  one3)]))))))))))))
+  (forall temp___idx_154:t3. ((ule3(a__first, temp___idx_154) and
+  ule3(temp___idx_154, a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[add3(sub3(b__first, a__first),
+  temp___idx_154)])))))))))
 
 type map__ref1 = { map__content1 : (int,unsigned_8) farray
 }
@@ -1835,24 +1787,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,unsigned_8) farray, int, int, (int,unsigned_8) farray,
-  int, int -> (int,unsigned_8) farray
-
-axiom concat_def1 :
-  (forall a:(int,unsigned_8) farray. forall b:(int,unsigned_8) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : unsigned_8, int -> (int,unsigned_8) farray
-
-axiom singleton_def1 :
-  (forall v:unsigned_8.
-  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq8 : (int,unsigned_8) farray, int, int, (int,unsigned_8) farray,
   int, int -> bool
 
@@ -1863,17 +1797,17 @@ axiom bool_eq_def7 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) and
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)])))) or
-  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (forall temp___idx_155:int. ((((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) and
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)])))) or
+  (not ((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)))))) ->
   (bool_eq8(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) ->
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)]))))))) ->
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) ->
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)]))))))) ->
   (bool_eq8(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -1883,37 +1817,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) ->
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)])))))))))
-
-logic compare1 : (int,unsigned_8) farray, int, int, (int,unsigned_8) farray,
-  int, int -> int
-
-axiom compare_def_eq1 :
-  (forall a:(int,unsigned_8) farray. forall b:(int,unsigned_8) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq8(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt1 :
-  (forall a:(int,unsigned_8) farray. forall b:(int,unsigned_8) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq8(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and ult(to_rep((a[(i + 1)])), to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt1 :
-  (forall a:(int,unsigned_8) farray. forall b:(int,unsigned_8) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare1(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq8(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and ugt(to_rep((a[(j + 1)])), to_rep((b[(i + 1)]))))))))))))
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) ->
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)])))))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -1966,12 +1872,24 @@ type unsigned_32__ref = { unsigned_32__content : unsigned_32
 function unsigned_32__ref___projection(a: unsigned_32__ref) : unsigned_32 =
   (a).unsigned_32__content
 
+logic rliteral3 : t2
+
+axiom rliteral_axiom3 : (tqtint2(rliteral3) = 256)
+
+logic rliteral4 : t2
+
+axiom rliteral_axiom4 : (tqtint2(rliteral4) = 65536)
+
+logic rliteral5 : t2
+
+axiom rliteral_axiom5 : (tqtint2(rliteral5) = 16777216)
+
 axiom ecx__post_axiom :
   (forall x86__xcx:(int,unsigned_8) farray [ecx(x86__xcx)].
   (ecx(x86__xcx) = add2(add2(add2(toBig2(to_rep((x86__xcx[0]))),
-  mul2(toBig2(to_rep((x86__xcx[1]))), of_int2(256))),
-  mul2(toBig2(to_rep((x86__xcx[2]))), of_int2(65536))),
-  mul2(toBig2(to_rep((x86__xcx[3]))), of_int2(16777216)))))
+  mul2(toBig2(to_rep((x86__xcx[1]))), rliteral3)),
+  mul2(toBig2(to_rep((x86__xcx[2]))), rliteral4)),
+  mul2(toBig2(to_rep((x86__xcx[3]))), rliteral5))))
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
@@ -1982,9 +1900,9 @@ logic esi__function_guard : t2, (int,unsigned_8) farray -> prop
 axiom esi__post_axiom :
   (forall x86__xsi:(int,unsigned_8) farray [esi(x86__xsi)].
   (esi(x86__xsi) = add2(add2(add2(toBig2(to_rep((x86__xsi[0]))),
-  mul2(toBig2(to_rep((x86__xsi[1]))), of_int2(256))),
-  mul2(toBig2(to_rep((x86__xsi[2]))), of_int2(65536))),
-  mul2(toBig2(to_rep((x86__xsi[3]))), of_int2(16777216)))))
+  mul2(toBig2(to_rep((x86__xsi[1]))), rliteral3)),
+  mul2(toBig2(to_rep((x86__xsi[2]))), rliteral4)),
+  mul2(toBig2(to_rep((x86__xsi[3]))), rliteral5))))
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
@@ -1995,9 +1913,9 @@ logic edi__function_guard : t2, (int,unsigned_8) farray -> prop
 axiom edi__post_axiom :
   (forall x86__xdi:(int,unsigned_8) farray [edi(x86__xdi)].
   (edi(x86__xdi) = add2(add2(add2(toBig2(to_rep((x86__xdi[0]))),
-  mul2(toBig2(to_rep((x86__xdi[1]))), of_int2(256))),
-  mul2(toBig2(to_rep((x86__xdi[2]))), of_int2(65536))),
-  mul2(toBig2(to_rep((x86__xdi[3]))), of_int2(16777216)))))
+  mul2(toBig2(to_rep((x86__xdi[1]))), rliteral3)),
+  mul2(toBig2(to_rep((x86__xdi[2]))), rliteral4)),
+  mul2(toBig2(to_rep((x86__xdi[3]))), rliteral5))))
 
 type unsigned_64
 
@@ -2029,487 +1947,182 @@ logic readmem8 : t3, (t3,unsigned_8) farray -> t
 
 logic readmem8__function_guard : t, t3, (t3,unsigned_8) farray -> prop
 
+logic rliteral6 : t
+
+axiom rliteral_axiom6 : (tqtint(rliteral6) = 0)
+
 axiom readmem8__post_axiom :
   (forall addr:t3.
   (forall x86__memory:(t3,unsigned_8) farray [readmem8(addr, x86__memory)].
   ((readmem8(addr, x86__memory) = to_rep((x86__memory[addr]))) and
-  uge(readmem8(addr, x86__memory), of_int(0)))))
+  uge(readmem8(addr, x86__memory), rliteral6))))
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
-logic zeroflag : bool
-
-logic carryflag : bool
-
-logic memory : (t3,unsigned_8) farray
-
-logic xcx : (int,unsigned_8) farray
-
-logic xsi : (int,unsigned_8) farray
-
-logic xdi : (int,unsigned_8) farray
-
-logic val1 : t
-
-logic val2 : t
-
-logic o : t2
-
-logic o1 : bool
-
-logic temp___257 : bool
-
-logic temp___256 : t
-
-logic temp___255 : bool
-
-logic temp___254 : t
-
-logic temp___253 : (int,unsigned_8) farray
-
-logic temp___252 : (int,unsigned_8) farray
-
-logic temp___251 : (int,unsigned_8) farray
-
-logic o2 : t2
-
-logic o3 : t3
-
-logic o4 : t
-
-logic o5 : t2
-
-logic o6 : t3
-
-logic o7 : t
-
-logic o8 : t2
-
-logic o9 : t2
-
-logic o10 : t2
-
-logic o11 : bool
-
-logic o12 : t2
-
-logic o13 : t2
-
-logic o14 : t2
-
-logic o15 : t2
-
-logic o16 : t2
-
-logic o17 : bool
-
-logic o18 : bool
-
-logic zeroflag1 : bool
-
-logic carryflag1 : bool
-
-logic xcx1 : (int,unsigned_8) farray
-
-logic xsi1 : (int,unsigned_8) farray
-
-logic xdi1 : (int,unsigned_8) farray
-
-logic val11 : t
-
-logic val21 : t
-
-logic result : bool
-
-logic zeroflag2 : bool
-
-logic carryflag2 : bool
-
-logic xcx2 : (int,unsigned_8) farray
-
-logic xsi2 : (int,unsigned_8) farray
-
-logic xdi2 : (int,unsigned_8) farray
-
-logic val12 : t
-
-logic val22 : t
-
-logic result1 : t
-
-logic val13 : t
-
-logic result2 : t
-
-logic val23 : t
-
-logic result3 : bool
-
-logic zeroflag3 : bool
-
-logic result4 : bool
-
-logic carryflag3 : bool
-
-logic xcx3 : (int,unsigned_8) farray
-
-logic result5 : bool
-
-logic xsi3 : (int,unsigned_8) farray
-
-logic xdi3 : (int,unsigned_8) farray
-
-logic result6 : bool
-
-logic xsi4 : (int,unsigned_8) farray
-
-logic xdi4 : (int,unsigned_8) farray
-
-logic xsi5 : (int,unsigned_8) farray
-
-logic xdi5 : (int,unsigned_8) farray
-
-logic zeroflag4 : bool
-
-logic carryflag4 : bool
-
-logic xcx4 : (int,unsigned_8) farray
-
-logic xsi6 : (int,unsigned_8) farray
-
-logic xdi6 : (int,unsigned_8) farray
-
-logic val14 : t
-
-logic val24 : t
-
-logic zeroflag5 : bool
-
-logic carryflag5 : bool
-
-logic xcx5 : (int,unsigned_8) farray
-
-logic xsi7 : (int,unsigned_8) farray
-
-logic xdi7 : (int,unsigned_8) farray
-
-logic val15 : t
-
-logic val25 : t
-
-logic zeroflag6 : bool
-
-logic carryflag6 : bool
-
-logic xcx6 : (int,unsigned_8) farray
-
-logic xsi8 : (int,unsigned_8) farray
-
-logic xdi8 : (int,unsigned_8) farray
-
-logic val16 : t
-
-logic val26 : t
-
-logic zeroflag7 : bool
-
-logic carryflag7 : bool
-
-logic xcx7 : (int,unsigned_8) farray
-
-logic xsi9 : (int,unsigned_8) farray
-
-logic xdi9 : (int,unsigned_8) farray
-
-logic val17 : t
-
-logic val27 : t
-
-logic zeroflag8 : bool
-
-logic carryflag8 : bool
-
-logic xcx8 : (int,unsigned_8) farray
-
-logic xsi10 : (int,unsigned_8) farray
-
-logic xdi10 : (int,unsigned_8) farray
-
-logic val18 : t
-
-logic val28 : t
-
-logic zeroflag9 : bool
-
-logic carryflag9 : bool
-
-logic xcx9 : (int,unsigned_8) farray
-
-logic xsi11 : (int,unsigned_8) farray
-
-logic xdi11 : (int,unsigned_8) farray
-
-logic val19 : t
-
-logic val29 : t
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : ((o = ecx(xcx)) and (o = add2(add2(add2(toBig2(to_rep((xcx[0]))),
-  mul2(toBig2(to_rep((xcx[1]))), of_int2(256))),
-  mul2(toBig2(to_rep((xcx[2]))), of_int2(65536))),
-  mul2(toBig2(to_rep((xcx[3]))), of_int2(16777216)))))
-
-axiom H3 : (((o = of_int2(0)) -> (o1 = true)) and ((not (o = of_int2(0))) ->
-  (o1 = false)))
-
-axiom H4 : (((not (o1 = true)) -> (result = true)) and ((o1 = true) ->
-  (result = false)))
-
-axiom H5 : ((result = true) -> (temp___257 = carryflag))
-
-axiom H6 : ((result = true) -> (temp___256 = val2))
-
-axiom H7 : ((result = true) -> (temp___255 = zeroflag))
-
-axiom H8 : ((result = true) -> (temp___254 = val1))
-
-axiom H9 : ((result = true) -> (temp___253 = xdi))
-
-axiom H10 : ((result = true) -> (temp___252 = xsi))
-
-axiom H11 : ((result = true) -> (temp___251 = xcx))
-
-axiom H12 : ((result = true) -> (not (ecx(xcx2) = of_int2(0))))
-
-axiom H13 : ((result = true) -> (not (ecx(xcx2) = of_int2(0))))
-
-axiom H14 : ((result = true) -> ((o2 = esi(xsi2)) and
-  (o2 = add2(add2(add2(toBig2(to_rep((xsi2[0]))),
-  mul2(toBig2(to_rep((xsi2[1]))), of_int2(256))),
-  mul2(toBig2(to_rep((xsi2[2]))), of_int2(65536))),
-  mul2(toBig2(to_rep((xsi2[3]))), of_int2(16777216))))))
-
-axiom H15 : ((result = true) -> (o3 = toBig(o2)))
-
-axiom H16 : ((result = true) -> ((o4 = readmem8(o3, memory)) and
-  ((o4 = to_rep((memory[o3]))) and uge(o4, of_int(0)))))
-
-axiom H17 : ((result = true) -> (result1 = val12))
-
-axiom H18 : ((result = true) -> (val13 = o4))
-
-axiom H19 : ((result = true) -> ((o5 = edi(xdi2)) and
-  (o5 = add2(add2(add2(toBig2(to_rep((xdi2[0]))),
-  mul2(toBig2(to_rep((xdi2[1]))), of_int2(256))),
-  mul2(toBig2(to_rep((xdi2[2]))), of_int2(65536))),
-  mul2(toBig2(to_rep((xdi2[3]))), of_int2(16777216))))))
-
-axiom H20 : ((result = true) -> (o6 = toBig(o5)))
-
-axiom H21 : ((result = true) -> ((o7 = readmem8(o6, memory)) and
-  ((o7 = to_rep((memory[o6]))) and uge(o7, of_int(0)))))
-
-axiom H22 : ((result = true) -> (result2 = val22))
-
-axiom H23 : ((result = true) -> (val23 = o7))
-
-axiom H24 : ((result = true) -> (result3 = zeroflag2))
-
-axiom H25 : ((result = true) -> (((sub(val13, val23) = of_int(0)) ->
-  (zeroflag3 = true)) and ((not (sub(val13, val23) = of_int(0))) ->
-  (zeroflag3 = false))))
-
-axiom H26 : ((result = true) -> (result4 = carryflag2))
-
-axiom H27 : ((result = true) -> ((ugt1(add1(toBig1(val13), toBig1(val23)),
-  toBig1(add(val13, val23))) -> (carryflag3 = true)) and
-  ((not ugt1(add1(toBig1(val13), toBig1(val23)), toBig1(add(val13,
-  val23)))) -> (carryflag3 = false))))
-
-axiom H28 : ((result = true) -> ((o8 = ecx(xcx2)) and
-  (o8 = add2(add2(add2(toBig2(to_rep((xcx2[0]))),
-  mul2(toBig2(to_rep((xcx2[1]))), of_int2(256))),
-  mul2(toBig2(to_rep((xcx2[2]))), of_int2(65536))),
-  mul2(toBig2(to_rep((xcx2[3]))), of_int2(16777216))))))
-
-axiom H29 : ((result = true) -> (o9 = sub2(o8, of_int2(1))))
-
-axiom H30 : ((result = true) -> ((add2(add2(add2(toBig2(to_rep((xcx3[0]))),
-  mul2(toBig2(to_rep((xcx3[1]))), of_int2(256))),
-  mul2(toBig2(to_rep((xcx3[2]))), of_int2(65536))),
-  mul2(toBig2(to_rep((xcx3[3]))), of_int2(16777216))) = o9) and
+logic rliteral7 : t2
+
+axiom rliteral_axiom7 : (tqtint2(rliteral7) = 0)
+
+logic rliteral8 : t2
+
+axiom rliteral_axiom8 : (tqtint2(rliteral8) = 1)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (forall zeroflag:bool. forall carryflag:bool.
+  forall memory:(t3,unsigned_8) farray. forall xcx:(int,unsigned_8) farray.
+  forall xsi:(int,unsigned_8) farray. forall xdi:(int,unsigned_8) farray.
+  forall val1:t. forall val2:t. forall o:t2. forall o1:bool.
+  forall temp___286:bool. forall temp___285:t. forall temp___284:bool.
+  forall temp___283:t. forall temp___282:(int,unsigned_8) farray.
+  forall temp___281:(int,unsigned_8) farray.
+  forall temp___280:(int,unsigned_8) farray. forall o2:t2. forall o3:t3.
+  forall o4:t. forall o5:t2. forall o6:t3. forall o7:t. forall o8:t2.
+  forall o9:t2. forall o10:t2. forall o11:bool. forall o12:t2. forall o13:t2.
+  forall o14:t2. forall o15:t2. forall o16:t2. forall o17:bool.
+  forall o18:bool. forall zeroflag1:bool. forall carryflag1:bool.
+  forall xcx1:(int,unsigned_8) farray. forall xsi1:(int,unsigned_8) farray.
+  forall xdi1:(int,unsigned_8) farray. forall val11:t. forall val21:t.
+  forall result:bool. forall zeroflag2:bool. forall carryflag2:bool.
+  forall xcx2:(int,unsigned_8) farray. forall xsi2:(int,unsigned_8) farray.
+  forall xdi2:(int,unsigned_8) farray. forall val12:t. forall val22:t.
+  forall result1:t. forall val13:t. forall result2:t. forall val23:t.
+  forall result3:bool. forall zeroflag3:bool. forall result4:bool.
+  forall carryflag3:bool. forall xcx3:(int,unsigned_8) farray.
+  forall result5:bool. forall xsi3:(int,unsigned_8) farray.
+  forall xdi3:(int,unsigned_8) farray. forall result6:bool.
+  forall xsi4:(int,unsigned_8) farray. forall xdi4:(int,unsigned_8) farray.
+  forall xsi5:(int,unsigned_8) farray. forall xdi5:(int,unsigned_8) farray.
+  forall zeroflag4:bool. forall carryflag4:bool.
+  forall xcx4:(int,unsigned_8) farray. forall xsi6:(int,unsigned_8) farray.
+  forall xdi6:(int,unsigned_8) farray. forall val14:t. forall val24:t.
+  forall zeroflag5:bool. forall carryflag5:bool.
+  forall xcx5:(int,unsigned_8) farray. forall xsi7:(int,unsigned_8) farray.
+  forall xdi7:(int,unsigned_8) farray. forall val15:t. forall val25:t.
+  forall zeroflag6:bool. forall carryflag6:bool.
+  forall xcx6:(int,unsigned_8) farray. forall xsi8:(int,unsigned_8) farray.
+  forall xdi8:(int,unsigned_8) farray. forall val16:t. forall val26:t.
+  forall zeroflag7:bool. forall carryflag7:bool.
+  forall xcx7:(int,unsigned_8) farray. forall xsi9:(int,unsigned_8) farray.
+  forall xdi9:(int,unsigned_8) farray. forall val17:t. forall val27:t.
+  forall zeroflag8:bool. forall carryflag8:bool.
+  forall xcx8:(int,unsigned_8) farray. forall xsi10:(int,unsigned_8) farray.
+  forall xdi10:(int,unsigned_8) farray. forall val18:t. forall val28:t.
+  forall zeroflag9:bool. forall carryflag9:bool.
+  forall xcx9:(int,unsigned_8) farray. forall xsi11:(int,unsigned_8) farray.
+  forall xdi11:(int,unsigned_8) farray. forall val19:t. forall val29:t.
+  ((((((((o = ecx(xcx)) and (o = add2(add2(add2(toBig2(to_rep((xcx[0]))),
+  mul2(toBig2(to_rep((xcx[1]))), rliteral3)), mul2(toBig2(to_rep((xcx[2]))),
+  rliteral4)), mul2(toBig2(to_rep((xcx[3]))), rliteral5)))) and
+  (((o = rliteral7) and (o1 = true)) or ((not (o = rliteral7)) and
+  (o1 = false)))) and (((not (o1 = true)) and (result = true)) or
+  ((o1 = true) and (result = false)))) and (((result = true) and
+  ((((temp___286 = carryflag) and ((temp___285 = val2) and
+  ((temp___284 = zeroflag) and ((temp___283 = val1) and
+  ((temp___282 = xdi) and ((temp___281 = xsi) and ((temp___280 = xcx) and
+  ((not (ecx(xcx2) = rliteral7)) and ((not (ecx(xcx2) = rliteral7)) and
+  ((((((o2 = esi(xsi2)) and (o2 = add2(add2(add2(toBig2(to_rep((xsi2[0]))),
+  mul2(toBig2(to_rep((xsi2[1]))), rliteral3)),
+  mul2(toBig2(to_rep((xsi2[2]))), rliteral4)),
+  mul2(toBig2(to_rep((xsi2[3]))), rliteral5)))) and (o3 = toBig(o2))) and
+  ((o4 = readmem8(o3, memory)) and ((o4 = to_rep((memory[o3]))) and uge(o4,
+  rliteral6)))) and ((result1 = val12) and (val13 = o4))) and
+  ((((((o5 = edi(xdi2)) and (o5 = add2(add2(add2(toBig2(to_rep((xdi2[0]))),
+  mul2(toBig2(to_rep((xdi2[1]))), rliteral3)),
+  mul2(toBig2(to_rep((xdi2[2]))), rliteral4)),
+  mul2(toBig2(to_rep((xdi2[3]))), rliteral5)))) and (o6 = toBig(o5))) and
+  ((o7 = readmem8(o6, memory)) and ((o7 = to_rep((memory[o6]))) and uge(o7,
+  rliteral6)))) and ((result2 = val22) and (val23 = o7))) and
+  (((result3 = zeroflag2) and (((sub(val13, val23) = rliteral6) and
+  (zeroflag3 = true)) or ((not (sub(val13, val23) = rliteral6)) and
+  (zeroflag3 = false)))) and (((result4 = carryflag2) and
+  ((ugt1(add1(toBig1(val13), toBig1(val23)), toBig1(add(val13, val23))) and
+  (carryflag3 = true)) or ((not ugt1(add1(toBig1(val13), toBig1(val23)),
+  toBig1(add(val13, val23)))) and (carryflag3 = false)))) and
+  (((((o8 = ecx(xcx2)) and (o8 = add2(add2(add2(toBig2(to_rep((xcx2[0]))),
+  mul2(toBig2(to_rep((xcx2[1]))), rliteral3)),
+  mul2(toBig2(to_rep((xcx2[2]))), rliteral4)),
+  mul2(toBig2(to_rep((xcx2[3]))), rliteral5)))) and (o9 = sub2(o8,
+  rliteral8))) and ((add2(add2(add2(toBig2(to_rep((xcx3[0]))),
+  mul2(toBig2(to_rep((xcx3[1]))), rliteral3)),
+  mul2(toBig2(to_rep((xcx3[2]))), rliteral4)),
+  mul2(toBig2(to_rep((xcx3[3]))), rliteral5)) = o9) and
   (forall i:int. (((4 <= i) and (i <= 7)) ->
-  (to_rep((xcx3[i])) = to_rep((xcx2[i])))))))
-
-axiom H31 : ((result = true) -> (((((xdi2 = xdi4) and (xsi2 = xsi4)) and
-  ((xdi5 = xdi2) and (xsi5 = xsi2))) and (((((o10 = ecx(xcx3)) and
+  (to_rep((xcx3[i])) = to_rep((xcx2[i]))))))) and (((((xdi2 = xdi4) and
+  (xsi2 = xsi4)) and ((xdi5 = xdi2) and (xsi5 = xsi2))) and
+  (((((o10 = ecx(xcx3)) and (o10 = add2(add2(add2(toBig2(to_rep((xcx3[0]))),
+  mul2(toBig2(to_rep((xcx3[1]))), rliteral3)),
+  mul2(toBig2(to_rep((xcx3[2]))), rliteral4)),
+  mul2(toBig2(to_rep((xcx3[3]))), rliteral5)))) and (((o10 = rliteral7) and
+  (o11 = true)) or ((not (o10 = rliteral7)) and (o11 = false)))) and
+  (((not (zeroflag3 = true)) and (result5 = match_bool(o11, true, true))) or
+  ((zeroflag3 = true) and (result5 = match_bool(o11, true, false))))) and
+  (result5 = true))) or ((((((o10 = ecx(xcx3)) and
   (o10 = add2(add2(add2(toBig2(to_rep((xcx3[0]))),
-  mul2(toBig2(to_rep((xcx3[1]))), of_int2(256))),
-  mul2(toBig2(to_rep((xcx3[2]))), of_int2(65536))),
-  mul2(toBig2(to_rep((xcx3[3]))), of_int2(16777216))))) and
-  (((o10 = of_int2(0)) -> (o11 = true)) and ((not (o10 = of_int2(0))) ->
-  (o11 = false)))) and (((not (zeroflag3 = true)) ->
-  (result5 = match_bool(o11, true, true))) and ((zeroflag3 = true) ->
-  (result5 = match_bool(o11, true, false))))) and (result5 = true))) or
-  ((((((o10 = ecx(xcx3)) and (o10 = add2(add2(add2(toBig2(to_rep((xcx3[0]))),
-  mul2(toBig2(to_rep((xcx3[1]))), of_int2(256))),
-  mul2(toBig2(to_rep((xcx3[2]))), of_int2(65536))),
-  mul2(toBig2(to_rep((xcx3[3]))), of_int2(16777216))))) and
-  (((o10 = of_int2(0)) -> (o11 = true)) and ((not (o10 = of_int2(0))) ->
-  (o11 = false)))) and (((not (zeroflag3 = true)) ->
-  (result5 = match_bool(o11, true, true))) and ((zeroflag3 = true) ->
-  (result5 = match_bool(o11, true, false))))) and (not (result5 = true))) and
-  ((((xdi3 = xdi4) and (xsi3 = xsi4)) and ((xdi5 = xdi3) and
-  (xsi5 = xsi3))) and (((((o12 = esi(xsi2)) and
+  mul2(toBig2(to_rep((xcx3[1]))), rliteral3)),
+  mul2(toBig2(to_rep((xcx3[2]))), rliteral4)),
+  mul2(toBig2(to_rep((xcx3[3]))), rliteral5)))) and (((o10 = rliteral7) and
+  (o11 = true)) or ((not (o10 = rliteral7)) and (o11 = false)))) and
+  (((not (zeroflag3 = true)) and (result5 = match_bool(o11, true, true))) or
+  ((zeroflag3 = true) and (result5 = match_bool(o11, true, false))))) and
+  (not (result5 = true))) and ((((xdi3 = xdi4) and (xsi3 = xsi4)) and
+  ((xdi5 = xdi3) and (xsi5 = xsi3))) and (((((o12 = esi(xsi2)) and
   (o12 = add2(add2(add2(toBig2(to_rep((xsi2[0]))),
-  mul2(toBig2(to_rep((xsi2[1]))), of_int2(256))),
-  mul2(toBig2(to_rep((xsi2[2]))), of_int2(65536))),
-  mul2(toBig2(to_rep((xsi2[3]))), of_int2(16777216))))) and (o13 = add2(o12,
-  of_int2(1)))) and ((add2(add2(add2(toBig2(to_rep((xsi3[0]))),
-  mul2(toBig2(to_rep((xsi3[1]))), of_int2(256))),
-  mul2(toBig2(to_rep((xsi3[2]))), of_int2(65536))),
-  mul2(toBig2(to_rep((xsi3[3]))), of_int2(16777216))) = o13) and
+  mul2(toBig2(to_rep((xsi2[1]))), rliteral3)),
+  mul2(toBig2(to_rep((xsi2[2]))), rliteral4)),
+  mul2(toBig2(to_rep((xsi2[3]))), rliteral5)))) and (o13 = add2(o12,
+  rliteral8))) and ((add2(add2(add2(toBig2(to_rep((xsi3[0]))),
+  mul2(toBig2(to_rep((xsi3[1]))), rliteral3)),
+  mul2(toBig2(to_rep((xsi3[2]))), rliteral4)),
+  mul2(toBig2(to_rep((xsi3[3]))), rliteral5)) = o13) and
   (forall i:int. (((4 <= i) and (i <= 7)) ->
   (to_rep((xsi3[i])) = to_rep((xsi2[i]))))))) and (((((o14 = edi(xdi2)) and
   (o14 = add2(add2(add2(toBig2(to_rep((xdi2[0]))),
-  mul2(toBig2(to_rep((xdi2[1]))), of_int2(256))),
-  mul2(toBig2(to_rep((xdi2[2]))), of_int2(65536))),
-  mul2(toBig2(to_rep((xdi2[3]))), of_int2(16777216))))) and (o15 = add2(o14,
-  of_int2(1)))) and ((add2(add2(add2(toBig2(to_rep((xdi3[0]))),
-  mul2(toBig2(to_rep((xdi3[1]))), of_int2(256))),
-  mul2(toBig2(to_rep((xdi3[2]))), of_int2(65536))),
-  mul2(toBig2(to_rep((xdi3[3]))), of_int2(16777216))) = o15) and
+  mul2(toBig2(to_rep((xdi2[1]))), rliteral3)),
+  mul2(toBig2(to_rep((xdi2[2]))), rliteral4)),
+  mul2(toBig2(to_rep((xdi2[3]))), rliteral5)))) and (o15 = add2(o14,
+  rliteral8))) and ((add2(add2(add2(toBig2(to_rep((xdi3[0]))),
+  mul2(toBig2(to_rep((xdi3[1]))), rliteral3)),
+  mul2(toBig2(to_rep((xdi3[2]))), rliteral4)),
+  mul2(toBig2(to_rep((xdi3[3]))), rliteral5)) = o15) and
   (forall i:int. (((4 <= i) and (i <= 7)) ->
   (to_rep((xdi3[i])) = to_rep((xdi2[i]))))))) and ((((((o16 = ecx(xcx3)) and
   (o16 = add2(add2(add2(toBig2(to_rep((xcx3[0]))),
-  mul2(toBig2(to_rep((xcx3[1]))), of_int2(256))),
-  mul2(toBig2(to_rep((xcx3[2]))), of_int2(65536))),
-  mul2(toBig2(to_rep((xcx3[3]))), of_int2(16777216))))) and
-  (((o16 = of_int2(0)) -> (o17 = true)) and ((not (o16 = of_int2(0))) ->
-  (o17 = false)))) and (((not (o17 = true)) -> (o18 = true)) and
-  ((o17 = true) -> (o18 = false)))) and (((not (o18 = true)) ->
-  (result6 = true)) and ((o18 = true) -> (result6 = false)))) and
-  (result6 = true))))))))
-
-axiom H32 : ((result = true) -> (val24 = val23))
-
-axiom H33 : ((result = true) -> (val14 = val13))
-
-axiom H34 : ((result = true) -> (xdi6 = xdi4))
-
-axiom H35 : ((result = true) -> (xsi6 = xsi4))
-
-axiom H36 : ((result = true) -> (xcx4 = xcx3))
-
-axiom H37 : ((result = true) -> (carryflag4 = carryflag3))
-
-axiom H38 : ((result = true) -> (zeroflag4 = zeroflag3))
-
-axiom H39 : ((result = true) -> (val25 = val23))
-
-axiom H40 : ((result = true) -> (val15 = val13))
-
-axiom H41 : ((result = true) -> (xdi7 = xdi5))
-
-axiom H42 : ((result = true) -> (xsi7 = xsi5))
-
-axiom H43 : ((result = true) -> (xcx5 = xcx3))
-
-axiom H44 : ((result = true) -> (carryflag5 = carryflag3))
-
-axiom H45 : ((result = true) -> (zeroflag5 = zeroflag3))
-
-axiom H46 : ((result = true) -> (val26 = val24))
-
-axiom H47 : ((result = true) -> (val16 = val14))
-
-axiom H48 : ((result = true) -> (xdi8 = xdi6))
-
-axiom H49 : ((result = true) -> (xsi8 = xsi6))
-
-axiom H50 : ((result = true) -> (xcx6 = xcx4))
-
-axiom H51 : ((result = true) -> (carryflag6 = carryflag4))
-
-axiom H52 : ((result = true) -> (zeroflag6 = zeroflag4))
-
-axiom H53 : ((result = true) -> (val27 = val25))
-
-axiom H54 : ((result = true) -> (val17 = val15))
-
-axiom H55 : ((result = true) -> (xdi9 = xdi7))
-
-axiom H56 : ((result = true) -> (xsi9 = xsi7))
-
-axiom H57 : ((result = true) -> (xcx7 = xcx5))
-
-axiom H58 : ((result = true) -> (carryflag7 = carryflag5))
-
-axiom H59 : ((result = true) -> (zeroflag7 = zeroflag5))
-
-axiom H60 : ((not (result = true)) -> (val26 = val2))
-
-axiom H61 : ((not (result = true)) -> (val16 = val1))
-
-axiom H62 : ((not (result = true)) -> (xdi8 = xdi))
-
-axiom H63 : ((not (result = true)) -> (xsi8 = xsi))
-
-axiom H64 : ((not (result = true)) -> (xcx6 = xcx))
-
-axiom H65 : ((not (result = true)) -> (carryflag6 = carryflag))
-
-axiom H66 : ((not (result = true)) -> (zeroflag6 = zeroflag))
-
-axiom H67 : ((not (result = true)) -> (val27 = val21))
-
-axiom H68 : ((not (result = true)) -> (val17 = val11))
-
-axiom H69 : ((not (result = true)) -> (xdi9 = xdi1))
-
-axiom H70 : ((not (result = true)) -> (xsi9 = xsi1))
-
-axiom H71 : ((not (result = true)) -> (xcx7 = xcx1))
-
-axiom H72 : ((not (result = true)) -> (carryflag7 = carryflag1))
-
-axiom H73 : ((not (result = true)) -> (zeroflag7 = zeroflag1))
-
-axiom H74 : ((ecx(xcx6) = of_int2(0)) or (not (zeroflag6 = true)))
-
-axiom H75 : (val28 = val26)
-
-axiom H76 : (val18 = val16)
-
-axiom H77 : (xdi10 = xdi8)
-
-axiom H78 : (xsi10 = xsi8)
-
-axiom H79 : (xcx8 = xcx6)
-
-axiom H80 : (carryflag8 = carryflag6)
-
-axiom H81 : (zeroflag8 = zeroflag6)
-
-axiom H82 : (val29 = val27)
-
-axiom H83 : (val19 = val17)
-
-axiom H84 : (xdi11 = xdi9)
-
-axiom H85 : (xsi11 = xsi9)
-
-axiom H86 : (xcx9 = xcx7)
-
-axiom H87 : (carryflag9 = carryflag7)
-
-axiom H88 : (zeroflag9 = zeroflag7)
-
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : ((ecx(xcx8) = of_int2(0)) or
-  (not (zeroflag8 = true)))
+  mul2(toBig2(to_rep((xcx3[1]))), rliteral3)),
+  mul2(toBig2(to_rep((xcx3[2]))), rliteral4)),
+  mul2(toBig2(to_rep((xcx3[3]))), rliteral5)))) and (((o16 = rliteral7) and
+  (o17 = true)) or ((not (o16 = rliteral7)) and (o17 = false)))) and
+  (((not (o17 = true)) and (o18 = true)) or ((o17 = true) and
+  (o18 = false)))) and (((not (o18 = true)) and (result6 = true)) or
+  ((o18 = true) and (result6 = false)))) and
+  (result6 = true))))))))))))))))))))) and (((val23 = val24) and
+  ((val13 = val14) and ((xdi4 = xdi6) and ((xsi4 = xsi6) and
+  ((xcx3 = xcx4) and ((carryflag3 = carryflag4) and
+  (zeroflag3 = zeroflag4))))))) and ((val25 = val23) and ((val15 = val13) and
+  ((xdi7 = xdi5) and ((xsi7 = xsi5) and ((xcx5 = xcx3) and
+  ((carryflag5 = carryflag3) and (zeroflag5 = zeroflag3))))))))) and ((({
+  t__content = val26 } = { t__content = val24 }) and (({ t__content = val16
+  } = { t__content = val14 }) and (({ map__content1 = xdi8 } = {
+  map__content1 = xdi6 }) and (({ map__content1 = xsi8 } = { map__content1 =
+  xsi6 }) and (({ map__content1 = xcx6 } = { map__content1 = xcx4 }) and (({
+  bool__content = carryflag6 } = { bool__content = carryflag4 }) and ({
+  bool__content = zeroflag6 } = { bool__content = zeroflag4 }))))))) and
+  ((val27 = val25) and ((val17 = val15) and ((xdi9 = xdi7) and
+  ((xsi9 = xsi7) and ((xcx7 = xcx5) and ((carryflag7 = carryflag5) and
+  (zeroflag7 = zeroflag5)))))))))) or ((not (result = true)) and
+  (((val2 = val26) and ((val1 = val16) and ((xdi = xdi8) and
+  ((xsi = xsi8) and ((xcx = xcx6) and ((carryflag = carryflag6) and
+  (zeroflag = zeroflag6))))))) and ((val27 = val21) and ((val17 = val11) and
+  ((xdi9 = xdi1) and ((xsi9 = xsi1) and ((xcx7 = xcx1) and
+  ((carryflag7 = carryflag1) and (zeroflag7 = zeroflag1))))))))))) and
+  ((ecx(xcx6) = rliteral7) or (not (zeroflag6 = true)))) and
+  (((val28 = val26) and ((val18 = val16) and ((xdi10 = xdi8) and
+  ((xsi10 = xsi8) and (({ map__content1 = xcx8 } = { map__content1 = xcx6
+  }) and ((carryflag8 = carryflag6) and ({ bool__content = zeroflag8 } = {
+  bool__content = zeroflag6 }))))))) and ((val29 = val27) and
+  ((val19 = val17) and ((xdi11 = xdi9) and ((xsi11 = xsi9) and
+  ((xcx9 = xcx7) and ((carryflag9 = carryflag7) and
+  (zeroflag9 = zeroflag7))))))))) -> ((ecx(xcx8) = rliteral7) or
+  (not (zeroflag8 = true)))))

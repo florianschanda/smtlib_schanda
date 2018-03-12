@@ -254,17 +254,8 @@ function t__ref___projection(a: t__ref) : us_rep1 = (a).t__content
 
 logic self__ : integer
 
-logic o : integer
-
-logic o1 : integer
-
-logic temp___192 : integer
-
-axiom H : (to_rep(o) = 0)
-
-axiom H1 : (o = o1)
-
-axiom H2 : (temp___192 = o1)
-
  (* File "prot.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : (0 <= to_rep(temp___192))
+goal WP_parameter_def :
+  (forall o:integer. forall o1:integer. forall temp___223:integer.
+  ((((to_rep(o) = 0) and (o = o1)) and (temp___223 = o1)) ->
+  (0 <= to_rep(temp___223))))

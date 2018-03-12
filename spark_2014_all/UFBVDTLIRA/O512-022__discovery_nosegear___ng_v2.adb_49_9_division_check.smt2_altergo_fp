@@ -690,55 +690,25 @@ logic distancefromlastclicktolastupdate__function_guard : t, t, t -> prop
 
 axiom distancefromlastclicktolastupdate__post_axiom : true
 
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 207)
+
 axiom distancefromlastclicktolastupdate__def_axiom :
   (forall ng_v2__prevcount:t. forall ng_v2__thiscount:t
   [distancefromlastclicktolastupdate(ng_v2__prevcount, ng_v2__thiscount)].
   (distancefromlastclicktolastupdate(ng_v2__prevcount,
-  ng_v2__thiscount) = mul(of_int(207), sub(ng_v2__thiscount,
+  ng_v2__thiscount) = mul(rliteral, sub(ng_v2__thiscount,
   ng_v2__prevcount))))
 
-logic prevtime : t
-
-logic prevcount : t
-
-logic currtime : t
-
-logic thistime : t
-
-logic thiscount : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : true
-
-axiom H3 : true
-
-axiom H4 : true
-
-axiom H5 : (not (thistime = prevtime))
-
-axiom H6 : ((o3 = timefromlastclicktolastupdate(prevtime, thistime)) and
-  (o3 = sub(thistime, prevtime)))
-
-axiom H7 : ((o = timesincelastupdate(currtime, thistime)) and
-  (o = sub(currtime, thistime)))
-
-axiom H8 : ((o1 = distancefromlastclicktolastupdate(prevcount,
-  thiscount)) and (o1 = mul(of_int(207), sub(thiscount, prevcount))))
-
-axiom H9 : (o2 = mul(o1, o))
-
  (* File "interfac.ads", line 66, characters 0-0 *)
-goal WP_parameter_def : (not (o3 = zeros))
+goal WP_parameter_def :
+  (forall prevtime:t. forall prevcount:t. forall currtime:t.
+  forall thistime:t. forall thiscount:t. forall o:t. forall o1:t.
+  forall o2:t. forall o3:t. ((not (thistime = prevtime)) ->
+  (((o3 = timefromlastclicktolastupdate(prevtime, thistime)) and
+  (o3 = sub(thistime, prevtime))) -> ((((o = timesincelastupdate(currtime,
+  thistime)) and (o = sub(currtime, thistime))) and
+  (((o1 = distancefromlastclicktolastupdate(prevcount, thiscount)) and
+  (o1 = mul(rliteral, sub(thiscount, prevcount)))) and (o2 = mul(o1, o)))) ->
+  (not (o3 = zeros))))))

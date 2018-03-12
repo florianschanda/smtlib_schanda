@@ -1025,31 +1025,21 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic msb : t
+logic rliteral1 : t1
 
-logic lsb : t
+axiom rliteral_axiom1 : (tqtint1(rliteral1) = 255)
 
-logic o : t1
+logic rliteral2 : t1
 
-logic o1 : t1
+axiom rliteral_axiom2 : (tqtint1(rliteral2) = 0)
 
-logic result : t
+logic rliteral3 : t
 
-logic msb1 : t
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : true
-
-axiom H3 : (result = msb)
-
-axiom H4 : (msb1 = toSmall(bw_and1(value, of_int1(255))))
-
-axiom H5 : ((8 <  16) -> (o = lsr_bv1(value, of_int1(8))))
-
-axiom H6 : ((not (8 <  16)) -> (o = of_int1(0)))
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 0)
 
  (* File "network-helpers0.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : ule1(toBig(of_int(0)), o)
+goal WP_parameter_def :
+  (forall msb:t. forall o:t1. forall result:t. forall msb1:t.
+  (((result = msb) and (msb1 = toSmall(bw_and1(value, rliteral1)))) ->
+  ((((8 <  16) and (o = lsr_bv1(value, of_int1(8)))) or ((not (8 <  16)) and
+  (o = rliteral2))) -> ule1(toBig(rliteral3), o))))

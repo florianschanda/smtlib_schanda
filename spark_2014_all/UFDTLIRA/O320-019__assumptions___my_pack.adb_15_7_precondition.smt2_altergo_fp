@@ -116,23 +116,6 @@ axiom id__post_axiom :
 
 axiom id__def_axiom : (forall x:int [id(x)]. (in_range(x) -> (id(x) = x)))
 
-logic z : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic z1 : int
-
-logic z2 : int
-
-logic z3 : int
-
-axiom H : in_range(z)
-
-axiom H1 : (z = 0)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (z <  2147483647)
+goal WP_parameter_def :
+  (forall z:int. (in_range(z) -> ((z = 0) -> (z <  2147483647))))

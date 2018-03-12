@@ -256,21 +256,11 @@ axiom valid__def_axiom :
   us_split_discrs1 = { rec__types__t__d = x }; us_split_fields1 = {
   rec__types__t__c = x1; rec__ext__ = x2 }; attr__tag = x3 }) = true))
 
-logic temp___146 : int
-
-logic temp___147 : integer
-
-logic temp___1471 : integer
-
-logic temp___1472 : us_private
-
-logic temp___1473 : int
-
-axiom H : in_range(temp___146)
-
-axiom H1 : (temp___1473 = us_tag)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (valid({ us_split_discrs1 = { rec__types__t__d =
-  temp___147 }; us_split_fields1 = { rec__types__t__c = temp___1471;
-  rec__ext__ = temp___1472 }; attr__tag = temp___1473 }) = true)
+goal WP_parameter_def :
+  (forall temp___164:int. forall temp___165:integer.
+  forall temp___1651:integer. forall temp___1652:us_private.
+  forall temp___1653:int. (in_range(temp___164) -> ((temp___1653 = us_tag) ->
+  (valid({ us_split_discrs1 = { rec__types__t__d = temp___165 };
+  us_split_fields1 = { rec__types__t__c = temp___1651; rec__ext__ =
+  temp___1652 }; attr__tag = temp___1653 }) = true))))

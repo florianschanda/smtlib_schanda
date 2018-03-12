@@ -358,12 +358,6 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq4 : bool, bool -> bool
-
-axiom bool_eq_def3 :
-  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -375,6 +369,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq4 : bool, bool -> bool
+
+axiom bool_eq_def3 :
+  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -412,79 +412,25 @@ axiom less_than_max__2__def_axiom :
   o3 }) = true) <-> ((to_rep(o1) <  2147483647) and
   (to_rep(o) <  2147483647))))
 
-logic o__split_fields : integer
-
-logic o__split_fields1 : integer
-
-logic o__split_fields2 : us_private
-
-logic o : int
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic o3 : integer
-
-logic o4 : us_private
-
-logic temp___166 : integer
-
-logic temp___1661 : integer
-
-logic temp___1662 : us_private
-
-logic temp___1663 : int
-
-logic o5 : int
-
-logic result : integer
-
-logic result1 : integer
-
-logic result2 : us_private
-
-logic o__split_fields3 : integer
-
-logic o__split_fields4 : integer
-
-logic o__split_fields5 : us_private
-
-axiom H : (less_than_max__2({ us_split_fields3 = {
-  rec__dispatch_in_contract__child__f2 = o__split_fields;
-  rec__dispatch_in_contract__root__f11 = o__split_fields1; rec__ext__1 =
-  o__split_fields2 }; attr__tag1 = o__attr__tag }) = true)
-
-axiom H1 : ((o = (to_rep(o__split_fields1) + 1)) and
-  in_range((to_rep(o__split_fields1) + 1)))
-
-axiom H2 : (to_rep(o1) = o)
-
-axiom H3 : (o__split_fields = o2)
-
-axiom H4 : (o1 = o3)
-
-axiom H5 : (o__split_fields2 = o4)
-
-axiom H6 : (temp___166 = o2)
-
-axiom H7 : (temp___1661 = o3)
-
-axiom H8 : (temp___1662 = o4)
-
-axiom H9 : (o__attr__tag = temp___1663)
-
-axiom H10 : (result = o__split_fields)
-
-axiom H11 : (result1 = o__split_fields1)
-
-axiom H12 : (result2 = o__split_fields2)
-
-axiom H13 : (temp___166 = o__split_fields3)
-
-axiom H14 : (temp___1661 = o__split_fields4)
-
-axiom H15 : (temp___1662 = o__split_fields5)
-
  (* File "dispatch_in_contract.ads", line 19, characters 0-0 *)
-goal WP_parameter_def : in_range((to_rep(o__split_fields3) + 1))
+goal WP_parameter_def :
+  (forall o__split_fields:integer. forall o__split_fields1:integer.
+  forall o__split_fields2:us_private. forall o:int. forall o1:integer.
+  forall o2:integer. forall o3:integer. forall o4:us_private.
+  forall temp___192:integer. forall temp___1921:integer.
+  forall temp___1922:us_private. forall temp___1923:int.
+  forall result:integer. forall result1:integer. forall result2:us_private.
+  forall o__split_fields3:integer. forall o__split_fields4:integer.
+  forall o__split_fields5:us_private. ((less_than_max__2({ us_split_fields3 =
+  { rec__dispatch_in_contract__child__f2 = o__split_fields;
+  rec__dispatch_in_contract__root__f11 = o__split_fields1; rec__ext__1 =
+  o__split_fields2 }; attr__tag1 = o__attr__tag }) = true) ->
+  (((((((o = (to_rep(o__split_fields1) + 1)) and
+  in_range((to_rep(o__split_fields1) + 1))) and (to_rep(o1) = o)) and
+  ((o__split_fields = o2) and ((o1 = o3) and (o__split_fields2 = o4)))) and
+  (((temp___192 = o2) and ((temp___1921 = o3) and (temp___1922 = o4))) and
+  (o__attr__tag = temp___1923))) and (((result = o__split_fields) and
+  ((result1 = o__split_fields1) and (result2 = o__split_fields2))) and
+  ((temp___192 = o__split_fields3) and ((temp___1921 = o__split_fields4) and
+  (temp___1922 = o__split_fields5))))) ->
+  in_range((to_rep(o__split_fields3) + 1)))))

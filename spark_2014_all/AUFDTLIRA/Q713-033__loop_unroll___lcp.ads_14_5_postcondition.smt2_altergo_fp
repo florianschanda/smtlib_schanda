@@ -81,12 +81,6 @@ axiom bool_ge_axiom :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -98,6 +92,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -188,24 +188,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> (int,integer) farray
-
-axiom concat_def :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : integer, int -> (int,integer) farray
-
-axiom singleton_def :
-  (forall v:integer.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,integer) farray, int, int, (int,integer) farray, int,
   int -> bool
 
@@ -216,17 +198,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -236,37 +218,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type index
 
@@ -388,1197 +342,700 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic l : int
-
-logic j : int
-
-logic lcp__result : int
-
-logic o : int
-
-logic o1 : integer
-
-logic o2 : int
-
-logic temp___160 : int
-
-logic temp___158 : int
-
-logic o3 : int
-
-logic o4 : integer
-
-logic temp___159 : int
-
-logic o5 : int
-
-logic o6 : integer
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : bool
-
-logic o12 : int
-
-logic temp___1581 : int
-
-logic o13 : int
-
-logic o14 : integer
-
-logic temp___1591 : int
-
-logic o15 : int
-
-logic o16 : integer
-
-logic o17 : int
-
-logic o18 : int
-
-logic o19 : int
-
-logic o20 : int
-
-logic o21 : bool
-
-logic o22 : int
-
-logic temp___1582 : int
-
-logic o23 : int
-
-logic o24 : integer
-
-logic temp___1592 : int
-
-logic o25 : int
-
-logic o26 : integer
-
-logic o27 : int
-
-logic o28 : int
-
-logic o29 : int
-
-logic o30 : int
-
-logic o31 : bool
-
-logic o32 : int
-
-logic temp___1583 : int
-
-logic o33 : int
-
-logic o34 : integer
-
-logic temp___1593 : int
-
-logic o35 : int
-
-logic o36 : integer
-
-logic o37 : int
-
-logic o38 : int
-
-logic o39 : int
-
-logic o40 : int
-
-logic o41 : bool
-
-logic o42 : int
-
-logic temp___1584 : int
-
-logic o43 : int
-
-logic o44 : integer
-
-logic temp___1594 : int
-
-logic o45 : int
-
-logic o46 : integer
-
-logic o47 : int
-
-logic o48 : int
-
-logic o49 : int
-
-logic o50 : int
-
-logic o51 : bool
-
-logic o52 : int
-
-logic temp___1585 : int
-
-logic o53 : int
-
-logic o54 : integer
-
-logic temp___1595 : int
-
-logic o55 : int
-
-logic o56 : integer
-
-logic o57 : int
-
-logic o58 : int
-
-logic o59 : int
-
-logic o60 : int
-
-logic o61 : bool
-
-logic o62 : int
-
-logic temp___1586 : int
-
-logic o63 : int
-
-logic o64 : integer
-
-logic temp___1596 : int
-
-logic o65 : int
-
-logic o66 : integer
-
-logic o67 : int
-
-logic o68 : int
-
-logic o69 : int
-
-logic o70 : int
-
-logic o71 : bool
-
-logic o72 : int
-
-logic temp___1587 : int
-
-logic o73 : int
-
-logic o74 : integer
-
-logic temp___1597 : int
-
-logic o75 : int
-
-logic o76 : integer
-
-logic o77 : int
-
-logic o78 : int
-
-logic o79 : int
-
-logic o80 : int
-
-logic o81 : bool
-
-logic o82 : int
-
-logic temp___1588 : int
-
-logic o83 : int
-
-logic o84 : integer
-
-logic temp___1598 : int
-
-logic o85 : int
-
-logic o86 : integer
-
-logic o87 : int
-
-logic o88 : int
-
-logic o89 : int
-
-logic o90 : int
-
-logic o91 : bool
-
-logic o92 : int
-
-logic temp___1589 : int
-
-logic o93 : int
-
-logic o94 : integer
-
-logic temp___1599 : int
-
-logic o95 : int
-
-logic o96 : integer
-
-logic o97 : int
-
-logic o98 : int
-
-logic o99 : int
-
-logic o100 : int
-
-logic o101 : bool
-
-logic o102 : int
-
-logic temp___163 : int
-
-logic temp___164 : int
-
-logic o103 : int
-
-logic o104 : integer
-
-logic o105 : int
-
-logic o106 : int
-
-logic o107 : int
-
-logic o108 : int
-
-logic o109 : int
-
-logic k : int
-
-logic temp___165 : int
-
-logic temp___166 : int
-
-logic o110 : int
-
-logic o111 : integer
-
-logic o112 : int
-
-logic o113 : int
-
-logic o114 : int
-
-logic o115 : int
-
-logic result : int
-
-logic l1 : int
-
-logic result1 : int
-
-logic j1 : int
-
-logic result2 : bool
-
-logic result3 : bool
-
-logic result4 : bool
-
-logic result5 : int
-
-logic l2 : int
-
-logic result6 : int
-
-logic j2 : int
-
-logic result7 : bool
-
-logic result8 : bool
-
-logic result9 : bool
-
-logic result10 : int
-
-logic l3 : int
-
-logic result11 : int
-
-logic j3 : int
-
-logic result12 : bool
-
-logic result13 : bool
-
-logic result14 : bool
-
-logic result15 : int
-
-logic l4 : int
-
-logic result16 : int
-
-logic j4 : int
-
-logic result17 : bool
-
-logic result18 : bool
-
-logic result19 : bool
-
-logic result20 : int
-
-logic l5 : int
-
-logic result21 : int
-
-logic j5 : int
-
-logic result22 : bool
-
-logic result23 : bool
-
-logic result24 : bool
-
-logic result25 : int
-
-logic l6 : int
-
-logic result26 : int
-
-logic j6 : int
-
-logic result27 : bool
-
-logic result28 : bool
-
-logic result29 : bool
-
-logic result30 : int
-
-logic l7 : int
-
-logic result31 : int
-
-logic j7 : int
-
-logic result32 : bool
-
-logic result33 : bool
-
-logic result34 : bool
-
-logic result35 : int
-
-logic l8 : int
-
-logic result36 : int
-
-logic j8 : int
-
-logic result37 : bool
-
-logic result38 : bool
-
-logic result39 : bool
-
-logic result40 : int
-
-logic l9 : int
-
-logic result41 : int
-
-logic j9 : int
-
-logic result42 : bool
-
-logic result43 : bool
-
-logic result44 : bool
-
-logic result45 : int
-
-logic l10 : int
-
-logic result46 : int
-
-logic j10 : int
-
-logic result47 : bool
-
-logic result48 : bool
-
-logic result49 : bool
-
-logic result50 : int
-
-logic l11 : int
-
-logic l12 : int
-
-logic j11 : int
-
-logic l13 : int
-
-logic j12 : int
-
-logic l14 : int
-
-logic j13 : int
-
-logic l15 : int
-
-logic j14 : int
-
-logic l16 : int
-
-logic j15 : int
-
-logic l17 : int
-
-logic j16 : int
-
-logic l18 : int
-
-logic j17 : int
-
-logic l19 : int
-
-logic j18 : int
-
-logic l20 : int
-
-logic j19 : int
-
-logic l21 : int
-
-logic j20 : int
-
-logic l22 : int
-
-logic j21 : int
-
-logic l23 : int
-
-logic j22 : int
-
-logic l24 : int
-
-logic j23 : int
-
-logic l25 : int
-
-logic j24 : int
-
-logic l26 : int
-
-logic j25 : int
-
-logic l27 : int
-
-logic j26 : int
-
-logic l28 : int
-
-logic j27 : int
-
-logic l29 : int
-
-logic j28 : int
-
-logic l30 : int
-
-logic j29 : int
-
-logic l31 : int
-
-logic j30 : int
-
-logic result51 : int
-
-logic lcp__result1 : int
-
-logic lcp__result2 : int
-
-logic lcp__result3 : int
-
-logic l32 : int
-
-logic j31 : int
-
-logic lcp__result4 : int
-
-logic l33 : int
-
-logic j32 : int
-
-logic lcp__result5 : int
-
-logic result52 : bool
-
-logic result53 : bool
-
-logic result54 : bool
-
-logic result55 : int
-
-axiom H : dynamic_property(1, 10, to_rep(first(a1)), to_rep(last(a1)))
-
-axiom H1 : in_range1(x)
-
-axiom H2 : in_range1(y)
-
-axiom H3 : (((to_rep(first(a1)) <= x) and (x <= to_rep(last(a1)))) and
-  ((to_rep(first(a1)) <= y) and (y <= to_rep(last(a1)))))
-
-axiom H4 : ((0 <= 2147483647) -> in_range2(l))
-
-axiom H5 : (result = l)
-
-axiom H6 : (l1 = 0)
-
-axiom H7 : (((((result1 = j) and (j1 = 1)) and ((((((((o10 = (x + l1)) and
-  in_range1((x + l1))) and (((o10 <= to_rep(last(a1))) ->
-  (result4 = true)) and ((not (o10 <= to_rep(last(a1)))) ->
-  (result4 = false)))) and (((result4 = true) -> (((o9 = (y + l1)) and
-  in_range1((y + l1))) and (((o9 <= to_rep(last(a1))) ->
-  (result3 = true)) and ((not (o9 <= to_rep(last(a1)))) ->
-  (result3 = false))))) and ((not (result4 = true)) ->
-  (result3 = false)))) and (((result3 = true) ->
-  ((((((temp___159 = (y + l1)) and in_range1((y + l1))) and
-  (((to_rep(first(a1)) <= temp___159) and
-  (temp___159 <= to_rep(last(a1)))) and (o5 = temp___159))) and
-  (o6 = (a[o5]))) and (o7 = to_rep(o6))) and ((((((temp___158 = (x + l1)) and
-  in_range1((x + l1))) and (((to_rep(first(a1)) <= temp___158) and
-  (temp___158 <= to_rep(last(a1)))) and (o3 = temp___158))) and
-  (o4 = (a[o3]))) and (o8 = to_rep(o4))) and (((o8 = o7) -> (o11 = true)) and
-  ((not (o8 = o7)) -> (o11 = false)))))) and ((not (result3 = true)) ->
-  (o11 = false)))) and (((not (o11 = true)) -> (result2 = true)) and
-  ((o11 = true) -> (result2 = false)))) and (not (result2 = true))) and
-  ((((o12 = (l1 + 1)) and in_range1((l1 + 1))) and ((l1 = result5) and
-  (l2 = o12))) and (((j1 = result6) and (j2 = 2)) and
-  ((((((((o20 = (x + l2)) and in_range1((x + l2))) and
-  (((o20 <= to_rep(last(a1))) -> (result9 = true)) and
-  ((not (o20 <= to_rep(last(a1)))) -> (result9 = false)))) and
-  (((result9 = true) -> (((o19 = (y + l2)) and in_range1((y + l2))) and
-  (((o19 <= to_rep(last(a1))) -> (result8 = true)) and
-  ((not (o19 <= to_rep(last(a1)))) -> (result8 = false))))) and
-  ((not (result9 = true)) -> (result8 = false)))) and (((result8 = true) ->
-  ((((((temp___1591 = (y + l2)) and in_range1((y + l2))) and
-  (((to_rep(first(a1)) <= temp___1591) and
-  (temp___1591 <= to_rep(last(a1)))) and (o15 = temp___1591))) and
-  (o16 = (a[o15]))) and (o17 = to_rep(o16))) and
-  ((((((temp___1581 = (x + l2)) and in_range1((x + l2))) and
-  (((to_rep(first(a1)) <= temp___1581) and
-  (temp___1581 <= to_rep(last(a1)))) and (o13 = temp___1581))) and
-  (o14 = (a[o13]))) and (o18 = to_rep(o14))) and (((o18 = o17) ->
-  (o21 = true)) and ((not (o18 = o17)) -> (o21 = false)))))) and
-  ((not (result8 = true)) -> (o21 = false)))) and (((not (o21 = true)) ->
-  (result7 = true)) and ((o21 = true) -> (result7 = false)))) and
-  (not (result7 = true))) and ((((o22 = (l2 + 1)) and
-  in_range1((l2 + 1))) and ((l2 = result10) and (l3 = o22))) and
-  (((j2 = result11) and (j3 = 3)) and ((((((((o30 = (x + l3)) and
-  in_range1((x + l3))) and (((o30 <= to_rep(last(a1))) ->
-  (result14 = true)) and ((not (o30 <= to_rep(last(a1)))) ->
-  (result14 = false)))) and (((result14 = true) -> (((o29 = (y + l3)) and
-  in_range1((y + l3))) and (((o29 <= to_rep(last(a1))) ->
-  (result13 = true)) and ((not (o29 <= to_rep(last(a1)))) ->
-  (result13 = false))))) and ((not (result14 = true)) ->
-  (result13 = false)))) and (((result13 = true) ->
-  ((((((temp___1592 = (y + l3)) and in_range1((y + l3))) and
-  (((to_rep(first(a1)) <= temp___1592) and
-  (temp___1592 <= to_rep(last(a1)))) and (o25 = temp___1592))) and
-  (o26 = (a[o25]))) and (o27 = to_rep(o26))) and
-  ((((((temp___1582 = (x + l3)) and in_range1((x + l3))) and
-  (((to_rep(first(a1)) <= temp___1582) and
-  (temp___1582 <= to_rep(last(a1)))) and (o23 = temp___1582))) and
-  (o24 = (a[o23]))) and (o28 = to_rep(o24))) and (((o28 = o27) ->
-  (o31 = true)) and ((not (o28 = o27)) -> (o31 = false)))))) and
-  ((not (result13 = true)) -> (o31 = false)))) and (((not (o31 = true)) ->
-  (result12 = true)) and ((o31 = true) -> (result12 = false)))) and
-  (not (result12 = true))) and ((((o32 = (l3 + 1)) and
-  in_range1((l3 + 1))) and ((l3 = result15) and (l4 = o32))) and
-  (((j3 = result16) and (j4 = 4)) and ((((((((o40 = (x + l4)) and
-  in_range1((x + l4))) and (((o40 <= to_rep(last(a1))) ->
-  (result19 = true)) and ((not (o40 <= to_rep(last(a1)))) ->
-  (result19 = false)))) and (((result19 = true) -> (((o39 = (y + l4)) and
-  in_range1((y + l4))) and (((o39 <= to_rep(last(a1))) ->
-  (result18 = true)) and ((not (o39 <= to_rep(last(a1)))) ->
-  (result18 = false))))) and ((not (result19 = true)) ->
-  (result18 = false)))) and (((result18 = true) ->
-  ((((((temp___1593 = (y + l4)) and in_range1((y + l4))) and
-  (((to_rep(first(a1)) <= temp___1593) and
-  (temp___1593 <= to_rep(last(a1)))) and (o35 = temp___1593))) and
-  (o36 = (a[o35]))) and (o37 = to_rep(o36))) and
-  ((((((temp___1583 = (x + l4)) and in_range1((x + l4))) and
-  (((to_rep(first(a1)) <= temp___1583) and
-  (temp___1583 <= to_rep(last(a1)))) and (o33 = temp___1583))) and
-  (o34 = (a[o33]))) and (o38 = to_rep(o34))) and (((o38 = o37) ->
-  (o41 = true)) and ((not (o38 = o37)) -> (o41 = false)))))) and
-  ((not (result18 = true)) -> (o41 = false)))) and (((not (o41 = true)) ->
-  (result17 = true)) and ((o41 = true) -> (result17 = false)))) and
-  (not (result17 = true))) and ((((o42 = (l4 + 1)) and
-  in_range1((l4 + 1))) and ((l4 = result20) and (l5 = o42))) and
-  (((j4 = result21) and (j5 = 5)) and ((((((((o50 = (x + l5)) and
-  in_range1((x + l5))) and (((o50 <= to_rep(last(a1))) ->
-  (result24 = true)) and ((not (o50 <= to_rep(last(a1)))) ->
-  (result24 = false)))) and (((result24 = true) -> (((o49 = (y + l5)) and
-  in_range1((y + l5))) and (((o49 <= to_rep(last(a1))) ->
-  (result23 = true)) and ((not (o49 <= to_rep(last(a1)))) ->
-  (result23 = false))))) and ((not (result24 = true)) ->
-  (result23 = false)))) and (((result23 = true) ->
-  ((((((temp___1594 = (y + l5)) and in_range1((y + l5))) and
-  (((to_rep(first(a1)) <= temp___1594) and
-  (temp___1594 <= to_rep(last(a1)))) and (o45 = temp___1594))) and
-  (o46 = (a[o45]))) and (o47 = to_rep(o46))) and
-  ((((((temp___1584 = (x + l5)) and in_range1((x + l5))) and
-  (((to_rep(first(a1)) <= temp___1584) and
-  (temp___1584 <= to_rep(last(a1)))) and (o43 = temp___1584))) and
-  (o44 = (a[o43]))) and (o48 = to_rep(o44))) and (((o48 = o47) ->
-  (o51 = true)) and ((not (o48 = o47)) -> (o51 = false)))))) and
-  ((not (result23 = true)) -> (o51 = false)))) and (((not (o51 = true)) ->
-  (result22 = true)) and ((o51 = true) -> (result22 = false)))) and
-  (not (result22 = true))) and ((((o52 = (l5 + 1)) and
-  in_range1((l5 + 1))) and ((l5 = result25) and (l6 = o52))) and
-  (((j5 = result26) and (j6 = 6)) and ((((((((o60 = (x + l6)) and
-  in_range1((x + l6))) and (((o60 <= to_rep(last(a1))) ->
-  (result29 = true)) and ((not (o60 <= to_rep(last(a1)))) ->
-  (result29 = false)))) and (((result29 = true) -> (((o59 = (y + l6)) and
-  in_range1((y + l6))) and (((o59 <= to_rep(last(a1))) ->
-  (result28 = true)) and ((not (o59 <= to_rep(last(a1)))) ->
-  (result28 = false))))) and ((not (result29 = true)) ->
-  (result28 = false)))) and (((result28 = true) ->
-  ((((((temp___1595 = (y + l6)) and in_range1((y + l6))) and
-  (((to_rep(first(a1)) <= temp___1595) and
-  (temp___1595 <= to_rep(last(a1)))) and (o55 = temp___1595))) and
-  (o56 = (a[o55]))) and (o57 = to_rep(o56))) and
-  ((((((temp___1585 = (x + l6)) and in_range1((x + l6))) and
-  (((to_rep(first(a1)) <= temp___1585) and
-  (temp___1585 <= to_rep(last(a1)))) and (o53 = temp___1585))) and
-  (o54 = (a[o53]))) and (o58 = to_rep(o54))) and (((o58 = o57) ->
-  (o61 = true)) and ((not (o58 = o57)) -> (o61 = false)))))) and
-  ((not (result28 = true)) -> (o61 = false)))) and (((not (o61 = true)) ->
-  (result27 = true)) and ((o61 = true) -> (result27 = false)))) and
-  (not (result27 = true))) and ((((o62 = (l6 + 1)) and
-  in_range1((l6 + 1))) and ((l6 = result30) and (l7 = o62))) and
-  (((j6 = result31) and (j7 = 7)) and ((((((((o70 = (x + l7)) and
-  in_range1((x + l7))) and (((o70 <= to_rep(last(a1))) ->
-  (result34 = true)) and ((not (o70 <= to_rep(last(a1)))) ->
-  (result34 = false)))) and (((result34 = true) -> (((o69 = (y + l7)) and
-  in_range1((y + l7))) and (((o69 <= to_rep(last(a1))) ->
-  (result33 = true)) and ((not (o69 <= to_rep(last(a1)))) ->
-  (result33 = false))))) and ((not (result34 = true)) ->
-  (result33 = false)))) and (((result33 = true) ->
-  ((((((temp___1596 = (y + l7)) and in_range1((y + l7))) and
-  (((to_rep(first(a1)) <= temp___1596) and
-  (temp___1596 <= to_rep(last(a1)))) and (o65 = temp___1596))) and
-  (o66 = (a[o65]))) and (o67 = to_rep(o66))) and
-  ((((((temp___1586 = (x + l7)) and in_range1((x + l7))) and
-  (((to_rep(first(a1)) <= temp___1586) and
-  (temp___1586 <= to_rep(last(a1)))) and (o63 = temp___1586))) and
-  (o64 = (a[o63]))) and (o68 = to_rep(o64))) and (((o68 = o67) ->
-  (o71 = true)) and ((not (o68 = o67)) -> (o71 = false)))))) and
-  ((not (result33 = true)) -> (o71 = false)))) and (((not (o71 = true)) ->
-  (result32 = true)) and ((o71 = true) -> (result32 = false)))) and
-  (not (result32 = true))) and ((((o72 = (l7 + 1)) and
-  in_range1((l7 + 1))) and ((l7 = result35) and (l8 = o72))) and
-  (((j7 = result36) and (j8 = 8)) and ((((((((o80 = (x + l8)) and
-  in_range1((x + l8))) and (((o80 <= to_rep(last(a1))) ->
-  (result39 = true)) and ((not (o80 <= to_rep(last(a1)))) ->
-  (result39 = false)))) and (((result39 = true) -> (((o79 = (y + l8)) and
-  in_range1((y + l8))) and (((o79 <= to_rep(last(a1))) ->
-  (result38 = true)) and ((not (o79 <= to_rep(last(a1)))) ->
-  (result38 = false))))) and ((not (result39 = true)) ->
-  (result38 = false)))) and (((result38 = true) ->
-  ((((((temp___1597 = (y + l8)) and in_range1((y + l8))) and
-  (((to_rep(first(a1)) <= temp___1597) and
-  (temp___1597 <= to_rep(last(a1)))) and (o75 = temp___1597))) and
-  (o76 = (a[o75]))) and (o77 = to_rep(o76))) and
-  ((((((temp___1587 = (x + l8)) and in_range1((x + l8))) and
-  (((to_rep(first(a1)) <= temp___1587) and
-  (temp___1587 <= to_rep(last(a1)))) and (o73 = temp___1587))) and
-  (o74 = (a[o73]))) and (o78 = to_rep(o74))) and (((o78 = o77) ->
-  (o81 = true)) and ((not (o78 = o77)) -> (o81 = false)))))) and
-  ((not (result38 = true)) -> (o81 = false)))) and (((not (o81 = true)) ->
-  (result37 = true)) and ((o81 = true) -> (result37 = false)))) and
-  (not (result37 = true))) and ((((o82 = (l8 + 1)) and
-  in_range1((l8 + 1))) and ((l8 = result40) and (l9 = o82))) and
-  (((j8 = result41) and (j9 = 9)) and ((((((((o90 = (x + l9)) and
-  in_range1((x + l9))) and (((o90 <= to_rep(last(a1))) ->
-  (result44 = true)) and ((not (o90 <= to_rep(last(a1)))) ->
-  (result44 = false)))) and (((result44 = true) -> (((o89 = (y + l9)) and
-  in_range1((y + l9))) and (((o89 <= to_rep(last(a1))) ->
-  (result43 = true)) and ((not (o89 <= to_rep(last(a1)))) ->
-  (result43 = false))))) and ((not (result44 = true)) ->
-  (result43 = false)))) and (((result43 = true) ->
-  ((((((temp___1598 = (y + l9)) and in_range1((y + l9))) and
-  (((to_rep(first(a1)) <= temp___1598) and
-  (temp___1598 <= to_rep(last(a1)))) and (o85 = temp___1598))) and
-  (o86 = (a[o85]))) and (o87 = to_rep(o86))) and
-  ((((((temp___1588 = (x + l9)) and in_range1((x + l9))) and
-  (((to_rep(first(a1)) <= temp___1588) and
-  (temp___1588 <= to_rep(last(a1)))) and (o83 = temp___1588))) and
-  (o84 = (a[o83]))) and (o88 = to_rep(o84))) and (((o88 = o87) ->
-  (o91 = true)) and ((not (o88 = o87)) -> (o91 = false)))))) and
-  ((not (result43 = true)) -> (o91 = false)))) and (((not (o91 = true)) ->
-  (result42 = true)) and ((o91 = true) -> (result42 = false)))) and
-  (not (result42 = true))) and ((((o92 = (l9 + 1)) and
-  in_range1((l9 + 1))) and ((result45 = l9) and (l10 = o92))) and
-  (((result46 = j9) and (j10 = 10)) and ((((((((o100 = (x + l10)) and
-  in_range1((x + l10))) and (((o100 <= to_rep(last(a1))) ->
-  (result49 = true)) and ((not (o100 <= to_rep(last(a1)))) ->
-  (result49 = false)))) and (((result49 = true) -> (((o99 = (y + l10)) and
-  in_range1((y + l10))) and (((o99 <= to_rep(last(a1))) ->
-  (result48 = true)) and ((not (o99 <= to_rep(last(a1)))) ->
-  (result48 = false))))) and ((not (result49 = true)) ->
-  (result48 = false)))) and (((result48 = true) ->
-  ((((((temp___1599 = (y + l10)) and in_range1((y + l10))) and
-  (((to_rep(first(a1)) <= temp___1599) and
-  (temp___1599 <= to_rep(last(a1)))) and (o95 = temp___1599))) and
-  (o96 = (a[o95]))) and (o97 = to_rep(o96))) and
-  ((((((temp___1589 = (x + l10)) and in_range1((x + l10))) and
-  (((to_rep(first(a1)) <= temp___1589) and
-  (temp___1589 <= to_rep(last(a1)))) and (o93 = temp___1589))) and
-  (o94 = (a[o93]))) and (o98 = to_rep(o94))) and (((o98 = o97) ->
-  (o101 = true)) and ((not (o98 = o97)) -> (o101 = false)))))) and
-  ((not (result48 = true)) -> (o101 = false)))) and (((not (o101 = true)) ->
-  (result47 = true)) and ((o101 = true) -> (result47 = false)))) and
-  (not (result47 = true))) and (((o102 = (l10 + 1)) and
-  in_range1((l10 + 1))) and ((result50 = l10) and
-  (l11 = o102)))))))))))))))))))))))))))))))) and (((j29 = j10) and
-  (l30 = l11)) and ((j30 = j10) and (l31 = l11)))) or (((temp___160 = l1) and
-  (((result1 = j) and (j1 = 1)) and (((((j27 = j1) and (l28 = l1)) and
-  ((j28 = j1) and (l29 = l1))) and (((((((o10 = (x + l1)) and
-  in_range1((x + l1))) and (((o10 <= to_rep(last(a1))) ->
-  (result4 = true)) and ((not (o10 <= to_rep(last(a1)))) ->
-  (result4 = false)))) and (((result4 = true) -> (((o9 = (y + l1)) and
-  in_range1((y + l1))) and (((o9 <= to_rep(last(a1))) ->
-  (result3 = true)) and ((not (o9 <= to_rep(last(a1)))) ->
-  (result3 = false))))) and ((not (result4 = true)) ->
-  (result3 = false)))) and (((result3 = true) ->
-  ((((((temp___159 = (y + l1)) and in_range1((y + l1))) and
-  (((to_rep(first(a1)) <= temp___159) and
-  (temp___159 <= to_rep(last(a1)))) and (o5 = temp___159))) and
-  (o6 = (a[o5]))) and (o7 = to_rep(o6))) and ((((((temp___158 = (x + l1)) and
-  in_range1((x + l1))) and (((to_rep(first(a1)) <= temp___158) and
-  (temp___158 <= to_rep(last(a1)))) and (o3 = temp___158))) and
-  (o4 = (a[o3]))) and (o8 = to_rep(o4))) and (((o8 = o7) -> (o11 = true)) and
-  ((not (o8 = o7)) -> (o11 = false)))))) and ((not (result3 = true)) ->
-  (o11 = false)))) and (((not (o11 = true)) -> (result2 = true)) and
-  ((o11 = true) -> (result2 = false)))) and (result2 = true))) or
-  ((((((((o10 = (x + l1)) and in_range1((x + l1))) and
-  (((o10 <= to_rep(last(a1))) -> (result4 = true)) and
-  ((not (o10 <= to_rep(last(a1)))) -> (result4 = false)))) and
-  (((result4 = true) -> (((o9 = (y + l1)) and in_range1((y + l1))) and
-  (((o9 <= to_rep(last(a1))) -> (result3 = true)) and
-  ((not (o9 <= to_rep(last(a1)))) -> (result3 = false))))) and
-  ((not (result4 = true)) -> (result3 = false)))) and (((result3 = true) ->
-  ((((((temp___159 = (y + l1)) and in_range1((y + l1))) and
-  (((to_rep(first(a1)) <= temp___159) and
-  (temp___159 <= to_rep(last(a1)))) and (o5 = temp___159))) and
-  (o6 = (a[o5]))) and (o7 = to_rep(o6))) and ((((((temp___158 = (x + l1)) and
-  in_range1((x + l1))) and (((to_rep(first(a1)) <= temp___158) and
-  (temp___158 <= to_rep(last(a1)))) and (o3 = temp___158))) and
-  (o4 = (a[o3]))) and (o8 = to_rep(o4))) and (((o8 = o7) -> (o11 = true)) and
-  ((not (o8 = o7)) -> (o11 = false)))))) and ((not (result3 = true)) ->
-  (o11 = false)))) and (((not (o11 = true)) -> (result2 = true)) and
-  ((o11 = true) -> (result2 = false)))) and (not (result2 = true))) and
-  ((((j27 = j25) and (l28 = l26)) and ((j28 = j26) and (l29 = l27))) and
-  ((((o12 = (l1 + 1)) and in_range1((l1 + 1))) and ((l1 = result5) and
-  (l2 = o12))) and (((j1 = result6) and (j2 = 2)) and (((((j25 = j2) and
-  (l26 = l2)) and ((j26 = j2) and (l27 = l2))) and (((((((o20 = (x + l2)) and
-  in_range1((x + l2))) and (((o20 <= to_rep(last(a1))) ->
-  (result9 = true)) and ((not (o20 <= to_rep(last(a1)))) ->
-  (result9 = false)))) and (((result9 = true) -> (((o19 = (y + l2)) and
-  in_range1((y + l2))) and (((o19 <= to_rep(last(a1))) ->
-  (result8 = true)) and ((not (o19 <= to_rep(last(a1)))) ->
-  (result8 = false))))) and ((not (result9 = true)) ->
-  (result8 = false)))) and (((result8 = true) ->
-  ((((((temp___1591 = (y + l2)) and in_range1((y + l2))) and
-  (((to_rep(first(a1)) <= temp___1591) and
-  (temp___1591 <= to_rep(last(a1)))) and (o15 = temp___1591))) and
-  (o16 = (a[o15]))) and (o17 = to_rep(o16))) and
-  ((((((temp___1581 = (x + l2)) and in_range1((x + l2))) and
-  (((to_rep(first(a1)) <= temp___1581) and
-  (temp___1581 <= to_rep(last(a1)))) and (o13 = temp___1581))) and
-  (o14 = (a[o13]))) and (o18 = to_rep(o14))) and (((o18 = o17) ->
-  (o21 = true)) and ((not (o18 = o17)) -> (o21 = false)))))) and
-  ((not (result8 = true)) -> (o21 = false)))) and (((not (o21 = true)) ->
-  (result7 = true)) and ((o21 = true) -> (result7 = false)))) and
-  (result7 = true))) or ((((((((o20 = (x + l2)) and in_range1((x + l2))) and
-  (((o20 <= to_rep(last(a1))) -> (result9 = true)) and
-  ((not (o20 <= to_rep(last(a1)))) -> (result9 = false)))) and
-  (((result9 = true) -> (((o19 = (y + l2)) and in_range1((y + l2))) and
-  (((o19 <= to_rep(last(a1))) -> (result8 = true)) and
-  ((not (o19 <= to_rep(last(a1)))) -> (result8 = false))))) and
-  ((not (result9 = true)) -> (result8 = false)))) and (((result8 = true) ->
-  ((((((temp___1591 = (y + l2)) and in_range1((y + l2))) and
-  (((to_rep(first(a1)) <= temp___1591) and
-  (temp___1591 <= to_rep(last(a1)))) and (o15 = temp___1591))) and
-  (o16 = (a[o15]))) and (o17 = to_rep(o16))) and
-  ((((((temp___1581 = (x + l2)) and in_range1((x + l2))) and
-  (((to_rep(first(a1)) <= temp___1581) and
-  (temp___1581 <= to_rep(last(a1)))) and (o13 = temp___1581))) and
-  (o14 = (a[o13]))) and (o18 = to_rep(o14))) and (((o18 = o17) ->
-  (o21 = true)) and ((not (o18 = o17)) -> (o21 = false)))))) and
-  ((not (result8 = true)) -> (o21 = false)))) and (((not (o21 = true)) ->
-  (result7 = true)) and ((o21 = true) -> (result7 = false)))) and
-  (not (result7 = true))) and ((((j25 = j23) and (l26 = l24)) and
-  ((j26 = j24) and (l27 = l25))) and ((((o22 = (l2 + 1)) and
-  in_range1((l2 + 1))) and ((l2 = result10) and (l3 = o22))) and
-  (((j2 = result11) and (j3 = 3)) and (((((j23 = j3) and (l24 = l3)) and
-  ((j24 = j3) and (l25 = l3))) and (((((((o30 = (x + l3)) and
-  in_range1((x + l3))) and (((o30 <= to_rep(last(a1))) ->
-  (result14 = true)) and ((not (o30 <= to_rep(last(a1)))) ->
-  (result14 = false)))) and (((result14 = true) -> (((o29 = (y + l3)) and
-  in_range1((y + l3))) and (((o29 <= to_rep(last(a1))) ->
-  (result13 = true)) and ((not (o29 <= to_rep(last(a1)))) ->
-  (result13 = false))))) and ((not (result14 = true)) ->
-  (result13 = false)))) and (((result13 = true) ->
-  ((((((temp___1592 = (y + l3)) and in_range1((y + l3))) and
-  (((to_rep(first(a1)) <= temp___1592) and
-  (temp___1592 <= to_rep(last(a1)))) and (o25 = temp___1592))) and
-  (o26 = (a[o25]))) and (o27 = to_rep(o26))) and
-  ((((((temp___1582 = (x + l3)) and in_range1((x + l3))) and
-  (((to_rep(first(a1)) <= temp___1582) and
-  (temp___1582 <= to_rep(last(a1)))) and (o23 = temp___1582))) and
-  (o24 = (a[o23]))) and (o28 = to_rep(o24))) and (((o28 = o27) ->
-  (o31 = true)) and ((not (o28 = o27)) -> (o31 = false)))))) and
-  ((not (result13 = true)) -> (o31 = false)))) and (((not (o31 = true)) ->
-  (result12 = true)) and ((o31 = true) -> (result12 = false)))) and
-  (result12 = true))) or ((((((((o30 = (x + l3)) and in_range1((x + l3))) and
-  (((o30 <= to_rep(last(a1))) -> (result14 = true)) and
-  ((not (o30 <= to_rep(last(a1)))) -> (result14 = false)))) and
-  (((result14 = true) -> (((o29 = (y + l3)) and in_range1((y + l3))) and
-  (((o29 <= to_rep(last(a1))) -> (result13 = true)) and
-  ((not (o29 <= to_rep(last(a1)))) -> (result13 = false))))) and
-  ((not (result14 = true)) -> (result13 = false)))) and
-  (((result13 = true) -> ((((((temp___1592 = (y + l3)) and
-  in_range1((y + l3))) and (((to_rep(first(a1)) <= temp___1592) and
-  (temp___1592 <= to_rep(last(a1)))) and (o25 = temp___1592))) and
-  (o26 = (a[o25]))) and (o27 = to_rep(o26))) and
-  ((((((temp___1582 = (x + l3)) and in_range1((x + l3))) and
-  (((to_rep(first(a1)) <= temp___1582) and
-  (temp___1582 <= to_rep(last(a1)))) and (o23 = temp___1582))) and
-  (o24 = (a[o23]))) and (o28 = to_rep(o24))) and (((o28 = o27) ->
-  (o31 = true)) and ((not (o28 = o27)) -> (o31 = false)))))) and
-  ((not (result13 = true)) -> (o31 = false)))) and (((not (o31 = true)) ->
-  (result12 = true)) and ((o31 = true) -> (result12 = false)))) and
-  (not (result12 = true))) and ((((j23 = j21) and (l24 = l22)) and
-  ((j24 = j22) and (l25 = l23))) and ((((o32 = (l3 + 1)) and
-  in_range1((l3 + 1))) and ((l3 = result15) and (l4 = o32))) and
-  (((j3 = result16) and (j4 = 4)) and (((((j21 = j4) and (l22 = l4)) and
-  ((j22 = j4) and (l23 = l4))) and (((((((o40 = (x + l4)) and
-  in_range1((x + l4))) and (((o40 <= to_rep(last(a1))) ->
-  (result19 = true)) and ((not (o40 <= to_rep(last(a1)))) ->
-  (result19 = false)))) and (((result19 = true) -> (((o39 = (y + l4)) and
-  in_range1((y + l4))) and (((o39 <= to_rep(last(a1))) ->
-  (result18 = true)) and ((not (o39 <= to_rep(last(a1)))) ->
-  (result18 = false))))) and ((not (result19 = true)) ->
-  (result18 = false)))) and (((result18 = true) ->
-  ((((((temp___1593 = (y + l4)) and in_range1((y + l4))) and
-  (((to_rep(first(a1)) <= temp___1593) and
-  (temp___1593 <= to_rep(last(a1)))) and (o35 = temp___1593))) and
-  (o36 = (a[o35]))) and (o37 = to_rep(o36))) and
-  ((((((temp___1583 = (x + l4)) and in_range1((x + l4))) and
-  (((to_rep(first(a1)) <= temp___1583) and
-  (temp___1583 <= to_rep(last(a1)))) and (o33 = temp___1583))) and
-  (o34 = (a[o33]))) and (o38 = to_rep(o34))) and (((o38 = o37) ->
-  (o41 = true)) and ((not (o38 = o37)) -> (o41 = false)))))) and
-  ((not (result18 = true)) -> (o41 = false)))) and (((not (o41 = true)) ->
-  (result17 = true)) and ((o41 = true) -> (result17 = false)))) and
-  (result17 = true))) or ((((((((o40 = (x + l4)) and in_range1((x + l4))) and
-  (((o40 <= to_rep(last(a1))) -> (result19 = true)) and
-  ((not (o40 <= to_rep(last(a1)))) -> (result19 = false)))) and
-  (((result19 = true) -> (((o39 = (y + l4)) and in_range1((y + l4))) and
-  (((o39 <= to_rep(last(a1))) -> (result18 = true)) and
-  ((not (o39 <= to_rep(last(a1)))) -> (result18 = false))))) and
-  ((not (result19 = true)) -> (result18 = false)))) and
-  (((result18 = true) -> ((((((temp___1593 = (y + l4)) and
-  in_range1((y + l4))) and (((to_rep(first(a1)) <= temp___1593) and
-  (temp___1593 <= to_rep(last(a1)))) and (o35 = temp___1593))) and
-  (o36 = (a[o35]))) and (o37 = to_rep(o36))) and
-  ((((((temp___1583 = (x + l4)) and in_range1((x + l4))) and
-  (((to_rep(first(a1)) <= temp___1583) and
-  (temp___1583 <= to_rep(last(a1)))) and (o33 = temp___1583))) and
-  (o34 = (a[o33]))) and (o38 = to_rep(o34))) and (((o38 = o37) ->
-  (o41 = true)) and ((not (o38 = o37)) -> (o41 = false)))))) and
-  ((not (result18 = true)) -> (o41 = false)))) and (((not (o41 = true)) ->
-  (result17 = true)) and ((o41 = true) -> (result17 = false)))) and
-  (not (result17 = true))) and ((((j21 = j19) and (l22 = l20)) and
-  ((j22 = j20) and (l23 = l21))) and ((((o42 = (l4 + 1)) and
-  in_range1((l4 + 1))) and ((l4 = result20) and (l5 = o42))) and
-  (((j4 = result21) and (j5 = 5)) and (((((j19 = j5) and (l20 = l5)) and
-  ((j20 = j5) and (l21 = l5))) and (((((((o50 = (x + l5)) and
-  in_range1((x + l5))) and (((o50 <= to_rep(last(a1))) ->
-  (result24 = true)) and ((not (o50 <= to_rep(last(a1)))) ->
-  (result24 = false)))) and (((result24 = true) -> (((o49 = (y + l5)) and
-  in_range1((y + l5))) and (((o49 <= to_rep(last(a1))) ->
-  (result23 = true)) and ((not (o49 <= to_rep(last(a1)))) ->
-  (result23 = false))))) and ((not (result24 = true)) ->
-  (result23 = false)))) and (((result23 = true) ->
-  ((((((temp___1594 = (y + l5)) and in_range1((y + l5))) and
-  (((to_rep(first(a1)) <= temp___1594) and
-  (temp___1594 <= to_rep(last(a1)))) and (o45 = temp___1594))) and
-  (o46 = (a[o45]))) and (o47 = to_rep(o46))) and
-  ((((((temp___1584 = (x + l5)) and in_range1((x + l5))) and
-  (((to_rep(first(a1)) <= temp___1584) and
-  (temp___1584 <= to_rep(last(a1)))) and (o43 = temp___1584))) and
-  (o44 = (a[o43]))) and (o48 = to_rep(o44))) and (((o48 = o47) ->
-  (o51 = true)) and ((not (o48 = o47)) -> (o51 = false)))))) and
-  ((not (result23 = true)) -> (o51 = false)))) and (((not (o51 = true)) ->
-  (result22 = true)) and ((o51 = true) -> (result22 = false)))) and
-  (result22 = true))) or ((((((((o50 = (x + l5)) and in_range1((x + l5))) and
-  (((o50 <= to_rep(last(a1))) -> (result24 = true)) and
-  ((not (o50 <= to_rep(last(a1)))) -> (result24 = false)))) and
-  (((result24 = true) -> (((o49 = (y + l5)) and in_range1((y + l5))) and
-  (((o49 <= to_rep(last(a1))) -> (result23 = true)) and
-  ((not (o49 <= to_rep(last(a1)))) -> (result23 = false))))) and
-  ((not (result24 = true)) -> (result23 = false)))) and
-  (((result23 = true) -> ((((((temp___1594 = (y + l5)) and
-  in_range1((y + l5))) and (((to_rep(first(a1)) <= temp___1594) and
-  (temp___1594 <= to_rep(last(a1)))) and (o45 = temp___1594))) and
-  (o46 = (a[o45]))) and (o47 = to_rep(o46))) and
-  ((((((temp___1584 = (x + l5)) and in_range1((x + l5))) and
-  (((to_rep(first(a1)) <= temp___1584) and
-  (temp___1584 <= to_rep(last(a1)))) and (o43 = temp___1584))) and
-  (o44 = (a[o43]))) and (o48 = to_rep(o44))) and (((o48 = o47) ->
-  (o51 = true)) and ((not (o48 = o47)) -> (o51 = false)))))) and
-  ((not (result23 = true)) -> (o51 = false)))) and (((not (o51 = true)) ->
-  (result22 = true)) and ((o51 = true) -> (result22 = false)))) and
-  (not (result22 = true))) and ((((j19 = j17) and (l20 = l18)) and
-  ((j20 = j18) and (l21 = l19))) and ((((o52 = (l5 + 1)) and
-  in_range1((l5 + 1))) and ((l5 = result25) and (l6 = o52))) and
-  (((j5 = result26) and (j6 = 6)) and (((((j17 = j6) and (l18 = l6)) and
-  ((j18 = j6) and (l19 = l6))) and (((((((o60 = (x + l6)) and
-  in_range1((x + l6))) and (((o60 <= to_rep(last(a1))) ->
-  (result29 = true)) and ((not (o60 <= to_rep(last(a1)))) ->
-  (result29 = false)))) and (((result29 = true) -> (((o59 = (y + l6)) and
-  in_range1((y + l6))) and (((o59 <= to_rep(last(a1))) ->
-  (result28 = true)) and ((not (o59 <= to_rep(last(a1)))) ->
-  (result28 = false))))) and ((not (result29 = true)) ->
-  (result28 = false)))) and (((result28 = true) ->
-  ((((((temp___1595 = (y + l6)) and in_range1((y + l6))) and
-  (((to_rep(first(a1)) <= temp___1595) and
-  (temp___1595 <= to_rep(last(a1)))) and (o55 = temp___1595))) and
-  (o56 = (a[o55]))) and (o57 = to_rep(o56))) and
-  ((((((temp___1585 = (x + l6)) and in_range1((x + l6))) and
-  (((to_rep(first(a1)) <= temp___1585) and
-  (temp___1585 <= to_rep(last(a1)))) and (o53 = temp___1585))) and
-  (o54 = (a[o53]))) and (o58 = to_rep(o54))) and (((o58 = o57) ->
-  (o61 = true)) and ((not (o58 = o57)) -> (o61 = false)))))) and
-  ((not (result28 = true)) -> (o61 = false)))) and (((not (o61 = true)) ->
-  (result27 = true)) and ((o61 = true) -> (result27 = false)))) and
-  (result27 = true))) or ((((((((o60 = (x + l6)) and in_range1((x + l6))) and
-  (((o60 <= to_rep(last(a1))) -> (result29 = true)) and
-  ((not (o60 <= to_rep(last(a1)))) -> (result29 = false)))) and
-  (((result29 = true) -> (((o59 = (y + l6)) and in_range1((y + l6))) and
-  (((o59 <= to_rep(last(a1))) -> (result28 = true)) and
-  ((not (o59 <= to_rep(last(a1)))) -> (result28 = false))))) and
-  ((not (result29 = true)) -> (result28 = false)))) and
-  (((result28 = true) -> ((((((temp___1595 = (y + l6)) and
-  in_range1((y + l6))) and (((to_rep(first(a1)) <= temp___1595) and
-  (temp___1595 <= to_rep(last(a1)))) and (o55 = temp___1595))) and
-  (o56 = (a[o55]))) and (o57 = to_rep(o56))) and
-  ((((((temp___1585 = (x + l6)) and in_range1((x + l6))) and
-  (((to_rep(first(a1)) <= temp___1585) and
-  (temp___1585 <= to_rep(last(a1)))) and (o53 = temp___1585))) and
-  (o54 = (a[o53]))) and (o58 = to_rep(o54))) and (((o58 = o57) ->
-  (o61 = true)) and ((not (o58 = o57)) -> (o61 = false)))))) and
-  ((not (result28 = true)) -> (o61 = false)))) and (((not (o61 = true)) ->
-  (result27 = true)) and ((o61 = true) -> (result27 = false)))) and
-  (not (result27 = true))) and ((((j17 = j15) and (l18 = l16)) and
-  ((j18 = j16) and (l19 = l17))) and ((((o62 = (l6 + 1)) and
-  in_range1((l6 + 1))) and ((l6 = result30) and (l7 = o62))) and
-  (((j6 = result31) and (j7 = 7)) and (((((j15 = j7) and (l16 = l7)) and
-  ((j16 = j7) and (l17 = l7))) and (((((((o70 = (x + l7)) and
-  in_range1((x + l7))) and (((o70 <= to_rep(last(a1))) ->
-  (result34 = true)) and ((not (o70 <= to_rep(last(a1)))) ->
-  (result34 = false)))) and (((result34 = true) -> (((o69 = (y + l7)) and
-  in_range1((y + l7))) and (((o69 <= to_rep(last(a1))) ->
-  (result33 = true)) and ((not (o69 <= to_rep(last(a1)))) ->
-  (result33 = false))))) and ((not (result34 = true)) ->
-  (result33 = false)))) and (((result33 = true) ->
-  ((((((temp___1596 = (y + l7)) and in_range1((y + l7))) and
-  (((to_rep(first(a1)) <= temp___1596) and
-  (temp___1596 <= to_rep(last(a1)))) and (o65 = temp___1596))) and
-  (o66 = (a[o65]))) and (o67 = to_rep(o66))) and
-  ((((((temp___1586 = (x + l7)) and in_range1((x + l7))) and
-  (((to_rep(first(a1)) <= temp___1586) and
-  (temp___1586 <= to_rep(last(a1)))) and (o63 = temp___1586))) and
-  (o64 = (a[o63]))) and (o68 = to_rep(o64))) and (((o68 = o67) ->
-  (o71 = true)) and ((not (o68 = o67)) -> (o71 = false)))))) and
-  ((not (result33 = true)) -> (o71 = false)))) and (((not (o71 = true)) ->
-  (result32 = true)) and ((o71 = true) -> (result32 = false)))) and
-  (result32 = true))) or ((((((((o70 = (x + l7)) and in_range1((x + l7))) and
-  (((o70 <= to_rep(last(a1))) -> (result34 = true)) and
-  ((not (o70 <= to_rep(last(a1)))) -> (result34 = false)))) and
-  (((result34 = true) -> (((o69 = (y + l7)) and in_range1((y + l7))) and
-  (((o69 <= to_rep(last(a1))) -> (result33 = true)) and
-  ((not (o69 <= to_rep(last(a1)))) -> (result33 = false))))) and
-  ((not (result34 = true)) -> (result33 = false)))) and
-  (((result33 = true) -> ((((((temp___1596 = (y + l7)) and
-  in_range1((y + l7))) and (((to_rep(first(a1)) <= temp___1596) and
-  (temp___1596 <= to_rep(last(a1)))) and (o65 = temp___1596))) and
-  (o66 = (a[o65]))) and (o67 = to_rep(o66))) and
-  ((((((temp___1586 = (x + l7)) and in_range1((x + l7))) and
-  (((to_rep(first(a1)) <= temp___1586) and
-  (temp___1586 <= to_rep(last(a1)))) and (o63 = temp___1586))) and
-  (o64 = (a[o63]))) and (o68 = to_rep(o64))) and (((o68 = o67) ->
-  (o71 = true)) and ((not (o68 = o67)) -> (o71 = false)))))) and
-  ((not (result33 = true)) -> (o71 = false)))) and (((not (o71 = true)) ->
-  (result32 = true)) and ((o71 = true) -> (result32 = false)))) and
-  (not (result32 = true))) and ((((j15 = j13) and (l16 = l14)) and
-  ((j16 = j14) and (l17 = l15))) and ((((o72 = (l7 + 1)) and
-  in_range1((l7 + 1))) and ((l7 = result35) and (l8 = o72))) and
-  (((j7 = result36) and (j8 = 8)) and (((((j13 = j8) and (l14 = l8)) and
-  ((j14 = j8) and (l15 = l8))) and (((((((o80 = (x + l8)) and
-  in_range1((x + l8))) and (((o80 <= to_rep(last(a1))) ->
-  (result39 = true)) and ((not (o80 <= to_rep(last(a1)))) ->
-  (result39 = false)))) and (((result39 = true) -> (((o79 = (y + l8)) and
-  in_range1((y + l8))) and (((o79 <= to_rep(last(a1))) ->
-  (result38 = true)) and ((not (o79 <= to_rep(last(a1)))) ->
-  (result38 = false))))) and ((not (result39 = true)) ->
-  (result38 = false)))) and (((result38 = true) ->
-  ((((((temp___1597 = (y + l8)) and in_range1((y + l8))) and
-  (((to_rep(first(a1)) <= temp___1597) and
-  (temp___1597 <= to_rep(last(a1)))) and (o75 = temp___1597))) and
-  (o76 = (a[o75]))) and (o77 = to_rep(o76))) and
-  ((((((temp___1587 = (x + l8)) and in_range1((x + l8))) and
-  (((to_rep(first(a1)) <= temp___1587) and
-  (temp___1587 <= to_rep(last(a1)))) and (o73 = temp___1587))) and
-  (o74 = (a[o73]))) and (o78 = to_rep(o74))) and (((o78 = o77) ->
-  (o81 = true)) and ((not (o78 = o77)) -> (o81 = false)))))) and
-  ((not (result38 = true)) -> (o81 = false)))) and (((not (o81 = true)) ->
-  (result37 = true)) and ((o81 = true) -> (result37 = false)))) and
-  (result37 = true))) or ((((((((o80 = (x + l8)) and in_range1((x + l8))) and
-  (((o80 <= to_rep(last(a1))) -> (result39 = true)) and
-  ((not (o80 <= to_rep(last(a1)))) -> (result39 = false)))) and
-  (((result39 = true) -> (((o79 = (y + l8)) and in_range1((y + l8))) and
-  (((o79 <= to_rep(last(a1))) -> (result38 = true)) and
-  ((not (o79 <= to_rep(last(a1)))) -> (result38 = false))))) and
-  ((not (result39 = true)) -> (result38 = false)))) and
-  (((result38 = true) -> ((((((temp___1597 = (y + l8)) and
-  in_range1((y + l8))) and (((to_rep(first(a1)) <= temp___1597) and
-  (temp___1597 <= to_rep(last(a1)))) and (o75 = temp___1597))) and
-  (o76 = (a[o75]))) and (o77 = to_rep(o76))) and
-  ((((((temp___1587 = (x + l8)) and in_range1((x + l8))) and
-  (((to_rep(first(a1)) <= temp___1587) and
-  (temp___1587 <= to_rep(last(a1)))) and (o73 = temp___1587))) and
-  (o74 = (a[o73]))) and (o78 = to_rep(o74))) and (((o78 = o77) ->
-  (o81 = true)) and ((not (o78 = o77)) -> (o81 = false)))))) and
-  ((not (result38 = true)) -> (o81 = false)))) and (((not (o81 = true)) ->
-  (result37 = true)) and ((o81 = true) -> (result37 = false)))) and
-  (not (result37 = true))) and ((((j13 = j11) and (l14 = l12)) and
-  ((j14 = j12) and (l15 = l13))) and ((((o82 = (l8 + 1)) and
-  in_range1((l8 + 1))) and ((l8 = result40) and (l9 = o82))) and
-  (((j8 = result41) and (j9 = 9)) and (((((j11 = j9) and (l12 = l9)) and
-  ((j12 = j9) and (l13 = l9))) and (((((((o90 = (x + l9)) and
-  in_range1((x + l9))) and (((o90 <= to_rep(last(a1))) ->
-  (result44 = true)) and ((not (o90 <= to_rep(last(a1)))) ->
-  (result44 = false)))) and (((result44 = true) -> (((o89 = (y + l9)) and
-  in_range1((y + l9))) and (((o89 <= to_rep(last(a1))) ->
-  (result43 = true)) and ((not (o89 <= to_rep(last(a1)))) ->
-  (result43 = false))))) and ((not (result44 = true)) ->
-  (result43 = false)))) and (((result43 = true) ->
-  ((((((temp___1598 = (y + l9)) and in_range1((y + l9))) and
-  (((to_rep(first(a1)) <= temp___1598) and
-  (temp___1598 <= to_rep(last(a1)))) and (o85 = temp___1598))) and
-  (o86 = (a[o85]))) and (o87 = to_rep(o86))) and
-  ((((((temp___1588 = (x + l9)) and in_range1((x + l9))) and
-  (((to_rep(first(a1)) <= temp___1588) and
-  (temp___1588 <= to_rep(last(a1)))) and (o83 = temp___1588))) and
-  (o84 = (a[o83]))) and (o88 = to_rep(o84))) and (((o88 = o87) ->
-  (o91 = true)) and ((not (o88 = o87)) -> (o91 = false)))))) and
-  ((not (result43 = true)) -> (o91 = false)))) and (((not (o91 = true)) ->
-  (result42 = true)) and ((o91 = true) -> (result42 = false)))) and
-  (result42 = true))) or ((((((((o90 = (x + l9)) and in_range1((x + l9))) and
-  (((o90 <= to_rep(last(a1))) -> (result44 = true)) and
-  ((not (o90 <= to_rep(last(a1)))) -> (result44 = false)))) and
-  (((result44 = true) -> (((o89 = (y + l9)) and in_range1((y + l9))) and
-  (((o89 <= to_rep(last(a1))) -> (result43 = true)) and
-  ((not (o89 <= to_rep(last(a1)))) -> (result43 = false))))) and
-  ((not (result44 = true)) -> (result43 = false)))) and
-  (((result43 = true) -> ((((((temp___1598 = (y + l9)) and
-  in_range1((y + l9))) and (((to_rep(first(a1)) <= temp___1598) and
-  (temp___1598 <= to_rep(last(a1)))) and (o85 = temp___1598))) and
-  (o86 = (a[o85]))) and (o87 = to_rep(o86))) and
-  ((((((temp___1588 = (x + l9)) and in_range1((x + l9))) and
-  (((to_rep(first(a1)) <= temp___1588) and
-  (temp___1588 <= to_rep(last(a1)))) and (o83 = temp___1588))) and
-  (o84 = (a[o83]))) and (o88 = to_rep(o84))) and (((o88 = o87) ->
-  (o91 = true)) and ((not (o88 = o87)) -> (o91 = false)))))) and
-  ((not (result43 = true)) -> (o91 = false)))) and (((not (o91 = true)) ->
-  (result42 = true)) and ((o91 = true) -> (result42 = false)))) and
-  (not (result42 = true))) and ((((j11 = j10) and (l12 = l10)) and
-  ((j12 = j10) and (l13 = l10))) and ((((o92 = (l9 + 1)) and
-  in_range1((l9 + 1))) and ((result45 = l9) and (l10 = o92))) and
-  (((result46 = j9) and (j10 = 10)) and (((((((o100 = (x + l10)) and
-  in_range1((x + l10))) and (((o100 <= to_rep(last(a1))) ->
-  (result49 = true)) and ((not (o100 <= to_rep(last(a1)))) ->
-  (result49 = false)))) and (((result49 = true) -> (((o99 = (y + l10)) and
-  in_range1((y + l10))) and (((o99 <= to_rep(last(a1))) ->
-  (result48 = true)) and ((not (o99 <= to_rep(last(a1)))) ->
-  (result48 = false))))) and ((not (result49 = true)) ->
-  (result48 = false)))) and (((result48 = true) ->
-  ((((((temp___1599 = (y + l10)) and in_range1((y + l10))) and
-  (((to_rep(first(a1)) <= temp___1599) and
-  (temp___1599 <= to_rep(last(a1)))) and (o95 = temp___1599))) and
-  (o96 = (a[o95]))) and (o97 = to_rep(o96))) and
-  ((((((temp___1589 = (x + l10)) and in_range1((x + l10))) and
-  (((to_rep(first(a1)) <= temp___1589) and
-  (temp___1589 <= to_rep(last(a1)))) and (o93 = temp___1589))) and
-  (o94 = (a[o93]))) and (o98 = to_rep(o94))) and (((o98 = o97) ->
-  (o101 = true)) and ((not (o98 = o97)) -> (o101 = false)))))) and
-  ((not (result48 = true)) -> (o101 = false)))) and (((not (o101 = true)) ->
-  (result47 = true)) and ((o101 = true) -> (result47 = false)))) and
-  (result47 = true))))))))))))))))))))))))))))))))))))))))))))))))) and
-  (((j29 = j27) and (l30 = l28)) and ((j30 = j28) and (l31 = l29)))))
-
-axiom H8 : (lcp__result2 = lcp__result1)
-
-axiom H9 : (lcp__result3 = lcp__result1)
-
-axiom H10 : (result51 = lcp__result)
-
-axiom H11 : (lcp__result1 = l30)
-
-axiom H12 : (lcp__result4 = lcp__result2)
-
-axiom H13 : (j31 = j29)
-
-axiom H14 : (l32 = l30)
-
-axiom H15 : (lcp__result5 = lcp__result3)
-
-axiom H16 : (j32 = j30)
-
-axiom H17 : (l33 = l31)
-
-axiom H18 : ((bool_ne(to_rep((a[x])), to_rep((a[y]))) = true) ->
-  (lcp__result4 = 0))
-
-axiom H19 : ((bool_eq(x, y) = true) ->
-  (lcp__result4 = ((to_rep(last(a1)) - x) + 1)))
-
-axiom H20 : ((not (match_bool(bool_ne(to_rep((a[x])), to_rep((a[y]))), true,
-  bool_eq(x, y)) = true)) -> (0 <  lcp__result4))
-
-axiom H21 : (result55 = lcp__result4)
-
-logic k1 : int
-
-axiom H22 : (0 <= k1)
-
-axiom H23 : (k1 <= (lcp__result4 - 1))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (to_rep((a[(x + k1)])) = to_rep((a[(y + k1)])))
+goal WP_parameter_def :
+  (forall l:int. forall j:int. forall lcp__result:int. forall temp___185:int.
+  forall temp___183:int. forall o:int. forall o1:integer.
+  forall temp___184:int. forall o2:int. forall o3:integer. forall o4:int.
+  forall o5:int. forall o6:int. forall o7:int. forall o8:bool. forall o9:int.
+  forall temp___1831:int. forall o10:int. forall o11:integer.
+  forall temp___1841:int. forall o12:int. forall o13:integer. forall o14:int.
+  forall o15:int. forall o16:int. forall o17:int. forall o18:bool.
+  forall o19:int. forall temp___1832:int. forall o20:int. forall o21:integer.
+  forall temp___1842:int. forall o22:int. forall o23:integer. forall o24:int.
+  forall o25:int. forall o26:int. forall o27:int. forall o28:bool.
+  forall o29:int. forall temp___1833:int. forall o30:int. forall o31:integer.
+  forall temp___1843:int. forall o32:int. forall o33:integer. forall o34:int.
+  forall o35:int. forall o36:int. forall o37:int. forall o38:bool.
+  forall o39:int. forall temp___1834:int. forall o40:int. forall o41:integer.
+  forall temp___1844:int. forall o42:int. forall o43:integer. forall o44:int.
+  forall o45:int. forall o46:int. forall o47:int. forall o48:bool.
+  forall o49:int. forall temp___1835:int. forall o50:int. forall o51:integer.
+  forall temp___1845:int. forall o52:int. forall o53:integer. forall o54:int.
+  forall o55:int. forall o56:int. forall o57:int. forall o58:bool.
+  forall o59:int. forall temp___1836:int. forall o60:int. forall o61:integer.
+  forall temp___1846:int. forall o62:int. forall o63:integer. forall o64:int.
+  forall o65:int. forall o66:int. forall o67:int. forall o68:bool.
+  forall o69:int. forall temp___1837:int. forall o70:int. forall o71:integer.
+  forall temp___1847:int. forall o72:int. forall o73:integer. forall o74:int.
+  forall o75:int. forall o76:int. forall o77:int. forall o78:bool.
+  forall o79:int. forall temp___1838:int. forall o80:int. forall o81:integer.
+  forall temp___1848:int. forall o82:int. forall o83:integer. forall o84:int.
+  forall o85:int. forall o86:int. forall o87:int. forall o88:bool.
+  forall o89:int. forall temp___1839:int. forall o90:int. forall o91:integer.
+  forall temp___1849:int. forall o92:int. forall o93:integer. forall o94:int.
+  forall o95:int. forall o96:int. forall o97:int. forall o98:bool.
+  forall o99:int. forall result:int. forall l1:int. forall result1:int.
+  forall j1:int. forall result2:bool. forall result3:bool.
+  forall result4:bool. forall result5:int. forall l2:int. forall result6:int.
+  forall j2:int. forall result7:bool. forall result8:bool.
+  forall result9:bool. forall result10:int. forall l3:int.
+  forall result11:int. forall j3:int. forall result12:bool.
+  forall result13:bool. forall result14:bool. forall result15:int.
+  forall l4:int. forall result16:int. forall j4:int. forall result17:bool.
+  forall result18:bool. forall result19:bool. forall result20:int.
+  forall l5:int. forall result21:int. forall j5:int. forall result22:bool.
+  forall result23:bool. forall result24:bool. forall result25:int.
+  forall l6:int. forall result26:int. forall j6:int. forall result27:bool.
+  forall result28:bool. forall result29:bool. forall result30:int.
+  forall l7:int. forall result31:int. forall j7:int. forall result32:bool.
+  forall result33:bool. forall result34:bool. forall result35:int.
+  forall l8:int. forall result36:int. forall j8:int. forall result37:bool.
+  forall result38:bool. forall result39:bool. forall result40:int.
+  forall l9:int. forall result41:int. forall j9:int. forall result42:bool.
+  forall result43:bool. forall result44:bool. forall result45:int.
+  forall l10:int. forall result46:int. forall j10:int. forall result47:bool.
+  forall result48:bool. forall result49:bool. forall result50:int.
+  forall l11:int. forall l12:int. forall j11:int. forall l13:int.
+  forall j12:int. forall l14:int. forall j13:int. forall l15:int.
+  forall j14:int. forall l16:int. forall j15:int. forall l17:int.
+  forall j16:int. forall l18:int. forall j17:int. forall l19:int.
+  forall j18:int. forall l20:int. forall j19:int. forall l21:int.
+  forall j20:int. forall l22:int. forall j21:int. forall l23:int.
+  forall j22:int. forall l24:int. forall j23:int. forall l25:int.
+  forall j24:int. forall l26:int. forall j25:int. forall l27:int.
+  forall j26:int. forall l28:int. forall j27:int. forall l29:int.
+  forall j28:int. forall l30:int__ref. forall j29:int__ref. forall l31:int.
+  forall j30:int. forall result51:int__ref. forall lcp__result1:int.
+  forall lcp__result2:int__ref. forall lcp__result3:int. forall l32:int__ref.
+  forall j31:int__ref. forall lcp__result4:int__ref. forall l33:int.
+  forall j32:int. forall lcp__result5:int.
+  (forall result52:int. ((dynamic_property(1, 10, to_rep(first(a1)),
+  to_rep(last(a1))) and (in_range1(x) and (in_range1(y) and
+  ((((to_rep(first(a1)) <= x) and (x <= to_rep(last(a1)))) and
+  ((to_rep(first(a1)) <= y) and (y <= to_rep(last(a1))))) and
+  (((((0 <= 2147483647) -> in_range2(l)) and ((({ int__content = result } = {
+  int__content = l }) and (l1 = 0)) and (((((({ int__content = result1 } = {
+  int__content = j }) and (j1 = 1)) and ((((((((o7 = (x + l1)) and
+  in_range1((x + l1))) and (((o7 <= to_rep(last(a1))) and
+  (result4 = true)) or ((not (o7 <= to_rep(last(a1)))) and
+  (result4 = false)))) and (((result4 = true) and (((o6 = (y + l1)) and
+  in_range1((y + l1))) and (((o6 <= to_rep(last(a1))) and
+  (result3 = true)) or ((not (o6 <= to_rep(last(a1)))) and
+  (result3 = false))))) or ((not (result4 = true)) and
+  (result3 = false)))) and (((result3 = true) and
+  ((((((temp___184 = (y + l1)) and in_range1((y + l1))) and
+  (((to_rep(first(a1)) <= temp___184) and
+  (temp___184 <= to_rep(last(a1)))) and (o2 = temp___184))) and
+  (o3 = (a[o2]))) and (o4 = to_rep(o3))) and ((((((temp___183 = (x + l1)) and
+  in_range1((x + l1))) and (((to_rep(first(a1)) <= temp___183) and
+  (temp___183 <= to_rep(last(a1)))) and (o = temp___183))) and
+  (o1 = (a[o]))) and (o5 = to_rep(o1))) and (((o5 = o4) and (o8 = true)) or
+  ((not (o5 = o4)) and (o8 = false)))))) or ((not (result3 = true)) and
+  (o8 = false)))) and (((not (o8 = true)) and (result2 = true)) or
+  ((o8 = true) and (result2 = false)))) and (not (result2 = true))) and
+  ((((o9 = (l1 + 1)) and in_range1((l1 + 1))) and ((l1 = result5) and
+  (l2 = o9))) and (((j1 = result6) and (j2 = 2)) and
+  ((((((((o17 = (x + l2)) and in_range1((x + l2))) and
+  (((o17 <= to_rep(last(a1))) and (result9 = true)) or
+  ((not (o17 <= to_rep(last(a1)))) and (result9 = false)))) and
+  (((result9 = true) and (((o16 = (y + l2)) and in_range1((y + l2))) and
+  (((o16 <= to_rep(last(a1))) and (result8 = true)) or
+  ((not (o16 <= to_rep(last(a1)))) and (result8 = false))))) or
+  ((not (result9 = true)) and (result8 = false)))) and (((result8 = true) and
+  ((((((temp___1841 = (y + l2)) and in_range1((y + l2))) and
+  (((to_rep(first(a1)) <= temp___1841) and
+  (temp___1841 <= to_rep(last(a1)))) and (o12 = temp___1841))) and
+  (o13 = (a[o12]))) and (o14 = to_rep(o13))) and
+  ((((((temp___1831 = (x + l2)) and in_range1((x + l2))) and
+  (((to_rep(first(a1)) <= temp___1831) and
+  (temp___1831 <= to_rep(last(a1)))) and (o10 = temp___1831))) and
+  (o11 = (a[o10]))) and (o15 = to_rep(o11))) and (((o15 = o14) and
+  (o18 = true)) or ((not (o15 = o14)) and (o18 = false)))))) or
+  ((not (result8 = true)) and (o18 = false)))) and (((not (o18 = true)) and
+  (result7 = true)) or ((o18 = true) and (result7 = false)))) and
+  (not (result7 = true))) and ((((o19 = (l2 + 1)) and
+  in_range1((l2 + 1))) and ((l2 = result10) and (l3 = o19))) and
+  (((j2 = result11) and (j3 = 3)) and ((((((((o27 = (x + l3)) and
+  in_range1((x + l3))) and (((o27 <= to_rep(last(a1))) and
+  (result14 = true)) or ((not (o27 <= to_rep(last(a1)))) and
+  (result14 = false)))) and (((result14 = true) and (((o26 = (y + l3)) and
+  in_range1((y + l3))) and (((o26 <= to_rep(last(a1))) and
+  (result13 = true)) or ((not (o26 <= to_rep(last(a1)))) and
+  (result13 = false))))) or ((not (result14 = true)) and
+  (result13 = false)))) and (((result13 = true) and
+  ((((((temp___1842 = (y + l3)) and in_range1((y + l3))) and
+  (((to_rep(first(a1)) <= temp___1842) and
+  (temp___1842 <= to_rep(last(a1)))) and (o22 = temp___1842))) and
+  (o23 = (a[o22]))) and (o24 = to_rep(o23))) and
+  ((((((temp___1832 = (x + l3)) and in_range1((x + l3))) and
+  (((to_rep(first(a1)) <= temp___1832) and
+  (temp___1832 <= to_rep(last(a1)))) and (o20 = temp___1832))) and
+  (o21 = (a[o20]))) and (o25 = to_rep(o21))) and (((o25 = o24) and
+  (o28 = true)) or ((not (o25 = o24)) and (o28 = false)))))) or
+  ((not (result13 = true)) and (o28 = false)))) and (((not (o28 = true)) and
+  (result12 = true)) or ((o28 = true) and (result12 = false)))) and
+  (not (result12 = true))) and ((((o29 = (l3 + 1)) and
+  in_range1((l3 + 1))) and ((l3 = result15) and (l4 = o29))) and
+  (((j3 = result16) and (j4 = 4)) and ((((((((o37 = (x + l4)) and
+  in_range1((x + l4))) and (((o37 <= to_rep(last(a1))) and
+  (result19 = true)) or ((not (o37 <= to_rep(last(a1)))) and
+  (result19 = false)))) and (((result19 = true) and (((o36 = (y + l4)) and
+  in_range1((y + l4))) and (((o36 <= to_rep(last(a1))) and
+  (result18 = true)) or ((not (o36 <= to_rep(last(a1)))) and
+  (result18 = false))))) or ((not (result19 = true)) and
+  (result18 = false)))) and (((result18 = true) and
+  ((((((temp___1843 = (y + l4)) and in_range1((y + l4))) and
+  (((to_rep(first(a1)) <= temp___1843) and
+  (temp___1843 <= to_rep(last(a1)))) and (o32 = temp___1843))) and
+  (o33 = (a[o32]))) and (o34 = to_rep(o33))) and
+  ((((((temp___1833 = (x + l4)) and in_range1((x + l4))) and
+  (((to_rep(first(a1)) <= temp___1833) and
+  (temp___1833 <= to_rep(last(a1)))) and (o30 = temp___1833))) and
+  (o31 = (a[o30]))) and (o35 = to_rep(o31))) and (((o35 = o34) and
+  (o38 = true)) or ((not (o35 = o34)) and (o38 = false)))))) or
+  ((not (result18 = true)) and (o38 = false)))) and (((not (o38 = true)) and
+  (result17 = true)) or ((o38 = true) and (result17 = false)))) and
+  (not (result17 = true))) and ((((o39 = (l4 + 1)) and
+  in_range1((l4 + 1))) and ((l4 = result20) and (l5 = o39))) and
+  (((j4 = result21) and (j5 = 5)) and ((((((((o47 = (x + l5)) and
+  in_range1((x + l5))) and (((o47 <= to_rep(last(a1))) and
+  (result24 = true)) or ((not (o47 <= to_rep(last(a1)))) and
+  (result24 = false)))) and (((result24 = true) and (((o46 = (y + l5)) and
+  in_range1((y + l5))) and (((o46 <= to_rep(last(a1))) and
+  (result23 = true)) or ((not (o46 <= to_rep(last(a1)))) and
+  (result23 = false))))) or ((not (result24 = true)) and
+  (result23 = false)))) and (((result23 = true) and
+  ((((((temp___1844 = (y + l5)) and in_range1((y + l5))) and
+  (((to_rep(first(a1)) <= temp___1844) and
+  (temp___1844 <= to_rep(last(a1)))) and (o42 = temp___1844))) and
+  (o43 = (a[o42]))) and (o44 = to_rep(o43))) and
+  ((((((temp___1834 = (x + l5)) and in_range1((x + l5))) and
+  (((to_rep(first(a1)) <= temp___1834) and
+  (temp___1834 <= to_rep(last(a1)))) and (o40 = temp___1834))) and
+  (o41 = (a[o40]))) and (o45 = to_rep(o41))) and (((o45 = o44) and
+  (o48 = true)) or ((not (o45 = o44)) and (o48 = false)))))) or
+  ((not (result23 = true)) and (o48 = false)))) and (((not (o48 = true)) and
+  (result22 = true)) or ((o48 = true) and (result22 = false)))) and
+  (not (result22 = true))) and ((((o49 = (l5 + 1)) and
+  in_range1((l5 + 1))) and ((l5 = result25) and (l6 = o49))) and
+  (((j5 = result26) and (j6 = 6)) and ((((((((o57 = (x + l6)) and
+  in_range1((x + l6))) and (((o57 <= to_rep(last(a1))) and
+  (result29 = true)) or ((not (o57 <= to_rep(last(a1)))) and
+  (result29 = false)))) and (((result29 = true) and (((o56 = (y + l6)) and
+  in_range1((y + l6))) and (((o56 <= to_rep(last(a1))) and
+  (result28 = true)) or ((not (o56 <= to_rep(last(a1)))) and
+  (result28 = false))))) or ((not (result29 = true)) and
+  (result28 = false)))) and (((result28 = true) and
+  ((((((temp___1845 = (y + l6)) and in_range1((y + l6))) and
+  (((to_rep(first(a1)) <= temp___1845) and
+  (temp___1845 <= to_rep(last(a1)))) and (o52 = temp___1845))) and
+  (o53 = (a[o52]))) and (o54 = to_rep(o53))) and
+  ((((((temp___1835 = (x + l6)) and in_range1((x + l6))) and
+  (((to_rep(first(a1)) <= temp___1835) and
+  (temp___1835 <= to_rep(last(a1)))) and (o50 = temp___1835))) and
+  (o51 = (a[o50]))) and (o55 = to_rep(o51))) and (((o55 = o54) and
+  (o58 = true)) or ((not (o55 = o54)) and (o58 = false)))))) or
+  ((not (result28 = true)) and (o58 = false)))) and (((not (o58 = true)) and
+  (result27 = true)) or ((o58 = true) and (result27 = false)))) and
+  (not (result27 = true))) and ((((o59 = (l6 + 1)) and
+  in_range1((l6 + 1))) and ((l6 = result30) and (l7 = o59))) and
+  (((j6 = result31) and (j7 = 7)) and ((((((((o67 = (x + l7)) and
+  in_range1((x + l7))) and (((o67 <= to_rep(last(a1))) and
+  (result34 = true)) or ((not (o67 <= to_rep(last(a1)))) and
+  (result34 = false)))) and (((result34 = true) and (((o66 = (y + l7)) and
+  in_range1((y + l7))) and (((o66 <= to_rep(last(a1))) and
+  (result33 = true)) or ((not (o66 <= to_rep(last(a1)))) and
+  (result33 = false))))) or ((not (result34 = true)) and
+  (result33 = false)))) and (((result33 = true) and
+  ((((((temp___1846 = (y + l7)) and in_range1((y + l7))) and
+  (((to_rep(first(a1)) <= temp___1846) and
+  (temp___1846 <= to_rep(last(a1)))) and (o62 = temp___1846))) and
+  (o63 = (a[o62]))) and (o64 = to_rep(o63))) and
+  ((((((temp___1836 = (x + l7)) and in_range1((x + l7))) and
+  (((to_rep(first(a1)) <= temp___1836) and
+  (temp___1836 <= to_rep(last(a1)))) and (o60 = temp___1836))) and
+  (o61 = (a[o60]))) and (o65 = to_rep(o61))) and (((o65 = o64) and
+  (o68 = true)) or ((not (o65 = o64)) and (o68 = false)))))) or
+  ((not (result33 = true)) and (o68 = false)))) and (((not (o68 = true)) and
+  (result32 = true)) or ((o68 = true) and (result32 = false)))) and
+  (not (result32 = true))) and ((((o69 = (l7 + 1)) and
+  in_range1((l7 + 1))) and ((l7 = result35) and (l8 = o69))) and
+  (((j7 = result36) and (j8 = 8)) and ((((((((o77 = (x + l8)) and
+  in_range1((x + l8))) and (((o77 <= to_rep(last(a1))) and
+  (result39 = true)) or ((not (o77 <= to_rep(last(a1)))) and
+  (result39 = false)))) and (((result39 = true) and (((o76 = (y + l8)) and
+  in_range1((y + l8))) and (((o76 <= to_rep(last(a1))) and
+  (result38 = true)) or ((not (o76 <= to_rep(last(a1)))) and
+  (result38 = false))))) or ((not (result39 = true)) and
+  (result38 = false)))) and (((result38 = true) and
+  ((((((temp___1847 = (y + l8)) and in_range1((y + l8))) and
+  (((to_rep(first(a1)) <= temp___1847) and
+  (temp___1847 <= to_rep(last(a1)))) and (o72 = temp___1847))) and
+  (o73 = (a[o72]))) and (o74 = to_rep(o73))) and
+  ((((((temp___1837 = (x + l8)) and in_range1((x + l8))) and
+  (((to_rep(first(a1)) <= temp___1837) and
+  (temp___1837 <= to_rep(last(a1)))) and (o70 = temp___1837))) and
+  (o71 = (a[o70]))) and (o75 = to_rep(o71))) and (((o75 = o74) and
+  (o78 = true)) or ((not (o75 = o74)) and (o78 = false)))))) or
+  ((not (result38 = true)) and (o78 = false)))) and (((not (o78 = true)) and
+  (result37 = true)) or ((o78 = true) and (result37 = false)))) and
+  (not (result37 = true))) and ((((o79 = (l8 + 1)) and
+  in_range1((l8 + 1))) and ((l8 = result40) and (l9 = o79))) and
+  (((j8 = result41) and (j9 = 9)) and ((((((((o87 = (x + l9)) and
+  in_range1((x + l9))) and (((o87 <= to_rep(last(a1))) and
+  (result44 = true)) or ((not (o87 <= to_rep(last(a1)))) and
+  (result44 = false)))) and (((result44 = true) and (((o86 = (y + l9)) and
+  in_range1((y + l9))) and (((o86 <= to_rep(last(a1))) and
+  (result43 = true)) or ((not (o86 <= to_rep(last(a1)))) and
+  (result43 = false))))) or ((not (result44 = true)) and
+  (result43 = false)))) and (((result43 = true) and
+  ((((((temp___1848 = (y + l9)) and in_range1((y + l9))) and
+  (((to_rep(first(a1)) <= temp___1848) and
+  (temp___1848 <= to_rep(last(a1)))) and (o82 = temp___1848))) and
+  (o83 = (a[o82]))) and (o84 = to_rep(o83))) and
+  ((((((temp___1838 = (x + l9)) and in_range1((x + l9))) and
+  (((to_rep(first(a1)) <= temp___1838) and
+  (temp___1838 <= to_rep(last(a1)))) and (o80 = temp___1838))) and
+  (o81 = (a[o80]))) and (o85 = to_rep(o81))) and (((o85 = o84) and
+  (o88 = true)) or ((not (o85 = o84)) and (o88 = false)))))) or
+  ((not (result43 = true)) and (o88 = false)))) and (((not (o88 = true)) and
+  (result42 = true)) or ((o88 = true) and (result42 = false)))) and
+  (not (result42 = true))) and ((((o89 = (l9 + 1)) and
+  in_range1((l9 + 1))) and ((l9 = result45) and (l10 = o89))) and
+  (((j9 = result46) and (j10 = 10)) and ((((((((o97 = (x + l10)) and
+  in_range1((x + l10))) and (((o97 <= to_rep(last(a1))) and
+  (result49 = true)) or ((not (o97 <= to_rep(last(a1)))) and
+  (result49 = false)))) and (((result49 = true) and (((o96 = (y + l10)) and
+  in_range1((y + l10))) and (((o96 <= to_rep(last(a1))) and
+  (result48 = true)) or ((not (o96 <= to_rep(last(a1)))) and
+  (result48 = false))))) or ((not (result49 = true)) and
+  (result48 = false)))) and (((result48 = true) and
+  ((((((temp___1849 = (y + l10)) and in_range1((y + l10))) and
+  (((to_rep(first(a1)) <= temp___1849) and
+  (temp___1849 <= to_rep(last(a1)))) and (o92 = temp___1849))) and
+  (o93 = (a[o92]))) and (o94 = to_rep(o93))) and
+  ((((((temp___1839 = (x + l10)) and in_range1((x + l10))) and
+  (((to_rep(first(a1)) <= temp___1839) and
+  (temp___1839 <= to_rep(last(a1)))) and (o90 = temp___1839))) and
+  (o91 = (a[o90]))) and (o95 = to_rep(o91))) and (((o95 = o94) and
+  (o98 = true)) or ((not (o95 = o94)) and (o98 = false)))))) or
+  ((not (result48 = true)) and (o98 = false)))) and (((not (o98 = true)) and
+  (result47 = true)) or ((o98 = true) and (result47 = false)))) and
+  (not (result47 = true))) and (((o99 = (l10 + 1)) and
+  in_range1((l10 + 1))) and ((result50 = l10) and
+  (l11 = o99)))))))))))))))))))))))))))))))) and (((j29 = { int__content =
+  j10 }) and (l30 = { int__content = l11 })) and ((j30 = j10) and
+  (l31 = l11)))) or (((temp___185 = l1) and ((({ int__content = result1 } = {
+  int__content = j }) and (j1 = 1)) and (((((j1 = j27) and (l1 = l28)) and
+  ((j28 = j1) and (l29 = l1))) and (((((((o7 = (x + l1)) and
+  in_range1((x + l1))) and (((o7 <= to_rep(last(a1))) and
+  (result4 = true)) or ((not (o7 <= to_rep(last(a1)))) and
+  (result4 = false)))) and (((result4 = true) and (((o6 = (y + l1)) and
+  in_range1((y + l1))) and (((o6 <= to_rep(last(a1))) and
+  (result3 = true)) or ((not (o6 <= to_rep(last(a1)))) and
+  (result3 = false))))) or ((not (result4 = true)) and
+  (result3 = false)))) and (((result3 = true) and
+  ((((((temp___184 = (y + l1)) and in_range1((y + l1))) and
+  (((to_rep(first(a1)) <= temp___184) and
+  (temp___184 <= to_rep(last(a1)))) and (o2 = temp___184))) and
+  (o3 = (a[o2]))) and (o4 = to_rep(o3))) and ((((((temp___183 = (x + l1)) and
+  in_range1((x + l1))) and (((to_rep(first(a1)) <= temp___183) and
+  (temp___183 <= to_rep(last(a1)))) and (o = temp___183))) and
+  (o1 = (a[o]))) and (o5 = to_rep(o1))) and (((o5 = o4) and (o8 = true)) or
+  ((not (o5 = o4)) and (o8 = false)))))) or ((not (result3 = true)) and
+  (o8 = false)))) and (((not (o8 = true)) and (result2 = true)) or
+  ((o8 = true) and (result2 = false)))) and (result2 = true))) or
+  ((((((((o7 = (x + l1)) and in_range1((x + l1))) and
+  (((o7 <= to_rep(last(a1))) and (result4 = true)) or
+  ((not (o7 <= to_rep(last(a1)))) and (result4 = false)))) and
+  (((result4 = true) and (((o6 = (y + l1)) and in_range1((y + l1))) and
+  (((o6 <= to_rep(last(a1))) and (result3 = true)) or
+  ((not (o6 <= to_rep(last(a1)))) and (result3 = false))))) or
+  ((not (result4 = true)) and (result3 = false)))) and (((result3 = true) and
+  ((((((temp___184 = (y + l1)) and in_range1((y + l1))) and
+  (((to_rep(first(a1)) <= temp___184) and
+  (temp___184 <= to_rep(last(a1)))) and (o2 = temp___184))) and
+  (o3 = (a[o2]))) and (o4 = to_rep(o3))) and ((((((temp___183 = (x + l1)) and
+  in_range1((x + l1))) and (((to_rep(first(a1)) <= temp___183) and
+  (temp___183 <= to_rep(last(a1)))) and (o = temp___183))) and
+  (o1 = (a[o]))) and (o5 = to_rep(o1))) and (((o5 = o4) and (o8 = true)) or
+  ((not (o5 = o4)) and (o8 = false)))))) or ((not (result3 = true)) and
+  (o8 = false)))) and (((not (o8 = true)) and (result2 = true)) or
+  ((o8 = true) and (result2 = false)))) and (not (result2 = true))) and (((({
+  int__content = j27 } = { int__content = j25 }) and ({ int__content = l28
+  } = { int__content = l26 })) and ((j28 = j26) and (l29 = l27))) and
+  ((((o9 = (l1 + 1)) and in_range1((l1 + 1))) and ((l1 = result5) and
+  (l2 = o9))) and (((j1 = result6) and (j2 = 2)) and (((((j2 = j25) and
+  (l2 = l26)) and ((j26 = j2) and (l27 = l2))) and (((((((o17 = (x + l2)) and
+  in_range1((x + l2))) and (((o17 <= to_rep(last(a1))) and
+  (result9 = true)) or ((not (o17 <= to_rep(last(a1)))) and
+  (result9 = false)))) and (((result9 = true) and (((o16 = (y + l2)) and
+  in_range1((y + l2))) and (((o16 <= to_rep(last(a1))) and
+  (result8 = true)) or ((not (o16 <= to_rep(last(a1)))) and
+  (result8 = false))))) or ((not (result9 = true)) and
+  (result8 = false)))) and (((result8 = true) and
+  ((((((temp___1841 = (y + l2)) and in_range1((y + l2))) and
+  (((to_rep(first(a1)) <= temp___1841) and
+  (temp___1841 <= to_rep(last(a1)))) and (o12 = temp___1841))) and
+  (o13 = (a[o12]))) and (o14 = to_rep(o13))) and
+  ((((((temp___1831 = (x + l2)) and in_range1((x + l2))) and
+  (((to_rep(first(a1)) <= temp___1831) and
+  (temp___1831 <= to_rep(last(a1)))) and (o10 = temp___1831))) and
+  (o11 = (a[o10]))) and (o15 = to_rep(o11))) and (((o15 = o14) and
+  (o18 = true)) or ((not (o15 = o14)) and (o18 = false)))))) or
+  ((not (result8 = true)) and (o18 = false)))) and (((not (o18 = true)) and
+  (result7 = true)) or ((o18 = true) and (result7 = false)))) and
+  (result7 = true))) or ((((((((o17 = (x + l2)) and in_range1((x + l2))) and
+  (((o17 <= to_rep(last(a1))) and (result9 = true)) or
+  ((not (o17 <= to_rep(last(a1)))) and (result9 = false)))) and
+  (((result9 = true) and (((o16 = (y + l2)) and in_range1((y + l2))) and
+  (((o16 <= to_rep(last(a1))) and (result8 = true)) or
+  ((not (o16 <= to_rep(last(a1)))) and (result8 = false))))) or
+  ((not (result9 = true)) and (result8 = false)))) and (((result8 = true) and
+  ((((((temp___1841 = (y + l2)) and in_range1((y + l2))) and
+  (((to_rep(first(a1)) <= temp___1841) and
+  (temp___1841 <= to_rep(last(a1)))) and (o12 = temp___1841))) and
+  (o13 = (a[o12]))) and (o14 = to_rep(o13))) and
+  ((((((temp___1831 = (x + l2)) and in_range1((x + l2))) and
+  (((to_rep(first(a1)) <= temp___1831) and
+  (temp___1831 <= to_rep(last(a1)))) and (o10 = temp___1831))) and
+  (o11 = (a[o10]))) and (o15 = to_rep(o11))) and (((o15 = o14) and
+  (o18 = true)) or ((not (o15 = o14)) and (o18 = false)))))) or
+  ((not (result8 = true)) and (o18 = false)))) and (((not (o18 = true)) and
+  (result7 = true)) or ((o18 = true) and (result7 = false)))) and
+  (not (result7 = true))) and (((({ int__content = j25 } = { int__content =
+  j23 }) and ({ int__content = l26 } = { int__content = l24 })) and
+  ((j26 = j24) and (l27 = l25))) and ((((o19 = (l2 + 1)) and
+  in_range1((l2 + 1))) and ((l2 = result10) and (l3 = o19))) and
+  (((j2 = result11) and (j3 = 3)) and (((((j3 = j23) and (l3 = l24)) and
+  ((j24 = j3) and (l25 = l3))) and (((((((o27 = (x + l3)) and
+  in_range1((x + l3))) and (((o27 <= to_rep(last(a1))) and
+  (result14 = true)) or ((not (o27 <= to_rep(last(a1)))) and
+  (result14 = false)))) and (((result14 = true) and (((o26 = (y + l3)) and
+  in_range1((y + l3))) and (((o26 <= to_rep(last(a1))) and
+  (result13 = true)) or ((not (o26 <= to_rep(last(a1)))) and
+  (result13 = false))))) or ((not (result14 = true)) and
+  (result13 = false)))) and (((result13 = true) and
+  ((((((temp___1842 = (y + l3)) and in_range1((y + l3))) and
+  (((to_rep(first(a1)) <= temp___1842) and
+  (temp___1842 <= to_rep(last(a1)))) and (o22 = temp___1842))) and
+  (o23 = (a[o22]))) and (o24 = to_rep(o23))) and
+  ((((((temp___1832 = (x + l3)) and in_range1((x + l3))) and
+  (((to_rep(first(a1)) <= temp___1832) and
+  (temp___1832 <= to_rep(last(a1)))) and (o20 = temp___1832))) and
+  (o21 = (a[o20]))) and (o25 = to_rep(o21))) and (((o25 = o24) and
+  (o28 = true)) or ((not (o25 = o24)) and (o28 = false)))))) or
+  ((not (result13 = true)) and (o28 = false)))) and (((not (o28 = true)) and
+  (result12 = true)) or ((o28 = true) and (result12 = false)))) and
+  (result12 = true))) or ((((((((o27 = (x + l3)) and in_range1((x + l3))) and
+  (((o27 <= to_rep(last(a1))) and (result14 = true)) or
+  ((not (o27 <= to_rep(last(a1)))) and (result14 = false)))) and
+  (((result14 = true) and (((o26 = (y + l3)) and in_range1((y + l3))) and
+  (((o26 <= to_rep(last(a1))) and (result13 = true)) or
+  ((not (o26 <= to_rep(last(a1)))) and (result13 = false))))) or
+  ((not (result14 = true)) and (result13 = false)))) and
+  (((result13 = true) and ((((((temp___1842 = (y + l3)) and
+  in_range1((y + l3))) and (((to_rep(first(a1)) <= temp___1842) and
+  (temp___1842 <= to_rep(last(a1)))) and (o22 = temp___1842))) and
+  (o23 = (a[o22]))) and (o24 = to_rep(o23))) and
+  ((((((temp___1832 = (x + l3)) and in_range1((x + l3))) and
+  (((to_rep(first(a1)) <= temp___1832) and
+  (temp___1832 <= to_rep(last(a1)))) and (o20 = temp___1832))) and
+  (o21 = (a[o20]))) and (o25 = to_rep(o21))) and (((o25 = o24) and
+  (o28 = true)) or ((not (o25 = o24)) and (o28 = false)))))) or
+  ((not (result13 = true)) and (o28 = false)))) and (((not (o28 = true)) and
+  (result12 = true)) or ((o28 = true) and (result12 = false)))) and
+  (not (result12 = true))) and (((({ int__content = j23 } = { int__content =
+  j21 }) and ({ int__content = l24 } = { int__content = l22 })) and
+  ((j24 = j22) and (l25 = l23))) and ((((o29 = (l3 + 1)) and
+  in_range1((l3 + 1))) and ((l3 = result15) and (l4 = o29))) and
+  (((j3 = result16) and (j4 = 4)) and (((((j4 = j21) and (l4 = l22)) and
+  ((j22 = j4) and (l23 = l4))) and (((((((o37 = (x + l4)) and
+  in_range1((x + l4))) and (((o37 <= to_rep(last(a1))) and
+  (result19 = true)) or ((not (o37 <= to_rep(last(a1)))) and
+  (result19 = false)))) and (((result19 = true) and (((o36 = (y + l4)) and
+  in_range1((y + l4))) and (((o36 <= to_rep(last(a1))) and
+  (result18 = true)) or ((not (o36 <= to_rep(last(a1)))) and
+  (result18 = false))))) or ((not (result19 = true)) and
+  (result18 = false)))) and (((result18 = true) and
+  ((((((temp___1843 = (y + l4)) and in_range1((y + l4))) and
+  (((to_rep(first(a1)) <= temp___1843) and
+  (temp___1843 <= to_rep(last(a1)))) and (o32 = temp___1843))) and
+  (o33 = (a[o32]))) and (o34 = to_rep(o33))) and
+  ((((((temp___1833 = (x + l4)) and in_range1((x + l4))) and
+  (((to_rep(first(a1)) <= temp___1833) and
+  (temp___1833 <= to_rep(last(a1)))) and (o30 = temp___1833))) and
+  (o31 = (a[o30]))) and (o35 = to_rep(o31))) and (((o35 = o34) and
+  (o38 = true)) or ((not (o35 = o34)) and (o38 = false)))))) or
+  ((not (result18 = true)) and (o38 = false)))) and (((not (o38 = true)) and
+  (result17 = true)) or ((o38 = true) and (result17 = false)))) and
+  (result17 = true))) or ((((((((o37 = (x + l4)) and in_range1((x + l4))) and
+  (((o37 <= to_rep(last(a1))) and (result19 = true)) or
+  ((not (o37 <= to_rep(last(a1)))) and (result19 = false)))) and
+  (((result19 = true) and (((o36 = (y + l4)) and in_range1((y + l4))) and
+  (((o36 <= to_rep(last(a1))) and (result18 = true)) or
+  ((not (o36 <= to_rep(last(a1)))) and (result18 = false))))) or
+  ((not (result19 = true)) and (result18 = false)))) and
+  (((result18 = true) and ((((((temp___1843 = (y + l4)) and
+  in_range1((y + l4))) and (((to_rep(first(a1)) <= temp___1843) and
+  (temp___1843 <= to_rep(last(a1)))) and (o32 = temp___1843))) and
+  (o33 = (a[o32]))) and (o34 = to_rep(o33))) and
+  ((((((temp___1833 = (x + l4)) and in_range1((x + l4))) and
+  (((to_rep(first(a1)) <= temp___1833) and
+  (temp___1833 <= to_rep(last(a1)))) and (o30 = temp___1833))) and
+  (o31 = (a[o30]))) and (o35 = to_rep(o31))) and (((o35 = o34) and
+  (o38 = true)) or ((not (o35 = o34)) and (o38 = false)))))) or
+  ((not (result18 = true)) and (o38 = false)))) and (((not (o38 = true)) and
+  (result17 = true)) or ((o38 = true) and (result17 = false)))) and
+  (not (result17 = true))) and (((({ int__content = j21 } = { int__content =
+  j19 }) and ({ int__content = l22 } = { int__content = l20 })) and
+  ((j22 = j20) and (l23 = l21))) and ((((o39 = (l4 + 1)) and
+  in_range1((l4 + 1))) and ((l4 = result20) and (l5 = o39))) and
+  (((j4 = result21) and (j5 = 5)) and (((((j5 = j19) and (l5 = l20)) and
+  ((j20 = j5) and (l21 = l5))) and (((((((o47 = (x + l5)) and
+  in_range1((x + l5))) and (((o47 <= to_rep(last(a1))) and
+  (result24 = true)) or ((not (o47 <= to_rep(last(a1)))) and
+  (result24 = false)))) and (((result24 = true) and (((o46 = (y + l5)) and
+  in_range1((y + l5))) and (((o46 <= to_rep(last(a1))) and
+  (result23 = true)) or ((not (o46 <= to_rep(last(a1)))) and
+  (result23 = false))))) or ((not (result24 = true)) and
+  (result23 = false)))) and (((result23 = true) and
+  ((((((temp___1844 = (y + l5)) and in_range1((y + l5))) and
+  (((to_rep(first(a1)) <= temp___1844) and
+  (temp___1844 <= to_rep(last(a1)))) and (o42 = temp___1844))) and
+  (o43 = (a[o42]))) and (o44 = to_rep(o43))) and
+  ((((((temp___1834 = (x + l5)) and in_range1((x + l5))) and
+  (((to_rep(first(a1)) <= temp___1834) and
+  (temp___1834 <= to_rep(last(a1)))) and (o40 = temp___1834))) and
+  (o41 = (a[o40]))) and (o45 = to_rep(o41))) and (((o45 = o44) and
+  (o48 = true)) or ((not (o45 = o44)) and (o48 = false)))))) or
+  ((not (result23 = true)) and (o48 = false)))) and (((not (o48 = true)) and
+  (result22 = true)) or ((o48 = true) and (result22 = false)))) and
+  (result22 = true))) or ((((((((o47 = (x + l5)) and in_range1((x + l5))) and
+  (((o47 <= to_rep(last(a1))) and (result24 = true)) or
+  ((not (o47 <= to_rep(last(a1)))) and (result24 = false)))) and
+  (((result24 = true) and (((o46 = (y + l5)) and in_range1((y + l5))) and
+  (((o46 <= to_rep(last(a1))) and (result23 = true)) or
+  ((not (o46 <= to_rep(last(a1)))) and (result23 = false))))) or
+  ((not (result24 = true)) and (result23 = false)))) and
+  (((result23 = true) and ((((((temp___1844 = (y + l5)) and
+  in_range1((y + l5))) and (((to_rep(first(a1)) <= temp___1844) and
+  (temp___1844 <= to_rep(last(a1)))) and (o42 = temp___1844))) and
+  (o43 = (a[o42]))) and (o44 = to_rep(o43))) and
+  ((((((temp___1834 = (x + l5)) and in_range1((x + l5))) and
+  (((to_rep(first(a1)) <= temp___1834) and
+  (temp___1834 <= to_rep(last(a1)))) and (o40 = temp___1834))) and
+  (o41 = (a[o40]))) and (o45 = to_rep(o41))) and (((o45 = o44) and
+  (o48 = true)) or ((not (o45 = o44)) and (o48 = false)))))) or
+  ((not (result23 = true)) and (o48 = false)))) and (((not (o48 = true)) and
+  (result22 = true)) or ((o48 = true) and (result22 = false)))) and
+  (not (result22 = true))) and (((({ int__content = j19 } = { int__content =
+  j17 }) and ({ int__content = l20 } = { int__content = l18 })) and
+  ((j20 = j18) and (l21 = l19))) and ((((o49 = (l5 + 1)) and
+  in_range1((l5 + 1))) and ((l5 = result25) and (l6 = o49))) and
+  (((j5 = result26) and (j6 = 6)) and (((((j6 = j17) and (l6 = l18)) and
+  ((j18 = j6) and (l19 = l6))) and (((((((o57 = (x + l6)) and
+  in_range1((x + l6))) and (((o57 <= to_rep(last(a1))) and
+  (result29 = true)) or ((not (o57 <= to_rep(last(a1)))) and
+  (result29 = false)))) and (((result29 = true) and (((o56 = (y + l6)) and
+  in_range1((y + l6))) and (((o56 <= to_rep(last(a1))) and
+  (result28 = true)) or ((not (o56 <= to_rep(last(a1)))) and
+  (result28 = false))))) or ((not (result29 = true)) and
+  (result28 = false)))) and (((result28 = true) and
+  ((((((temp___1845 = (y + l6)) and in_range1((y + l6))) and
+  (((to_rep(first(a1)) <= temp___1845) and
+  (temp___1845 <= to_rep(last(a1)))) and (o52 = temp___1845))) and
+  (o53 = (a[o52]))) and (o54 = to_rep(o53))) and
+  ((((((temp___1835 = (x + l6)) and in_range1((x + l6))) and
+  (((to_rep(first(a1)) <= temp___1835) and
+  (temp___1835 <= to_rep(last(a1)))) and (o50 = temp___1835))) and
+  (o51 = (a[o50]))) and (o55 = to_rep(o51))) and (((o55 = o54) and
+  (o58 = true)) or ((not (o55 = o54)) and (o58 = false)))))) or
+  ((not (result28 = true)) and (o58 = false)))) and (((not (o58 = true)) and
+  (result27 = true)) or ((o58 = true) and (result27 = false)))) and
+  (result27 = true))) or ((((((((o57 = (x + l6)) and in_range1((x + l6))) and
+  (((o57 <= to_rep(last(a1))) and (result29 = true)) or
+  ((not (o57 <= to_rep(last(a1)))) and (result29 = false)))) and
+  (((result29 = true) and (((o56 = (y + l6)) and in_range1((y + l6))) and
+  (((o56 <= to_rep(last(a1))) and (result28 = true)) or
+  ((not (o56 <= to_rep(last(a1)))) and (result28 = false))))) or
+  ((not (result29 = true)) and (result28 = false)))) and
+  (((result28 = true) and ((((((temp___1845 = (y + l6)) and
+  in_range1((y + l6))) and (((to_rep(first(a1)) <= temp___1845) and
+  (temp___1845 <= to_rep(last(a1)))) and (o52 = temp___1845))) and
+  (o53 = (a[o52]))) and (o54 = to_rep(o53))) and
+  ((((((temp___1835 = (x + l6)) and in_range1((x + l6))) and
+  (((to_rep(first(a1)) <= temp___1835) and
+  (temp___1835 <= to_rep(last(a1)))) and (o50 = temp___1835))) and
+  (o51 = (a[o50]))) and (o55 = to_rep(o51))) and (((o55 = o54) and
+  (o58 = true)) or ((not (o55 = o54)) and (o58 = false)))))) or
+  ((not (result28 = true)) and (o58 = false)))) and (((not (o58 = true)) and
+  (result27 = true)) or ((o58 = true) and (result27 = false)))) and
+  (not (result27 = true))) and (((({ int__content = j17 } = { int__content =
+  j15 }) and ({ int__content = l18 } = { int__content = l16 })) and
+  ((j18 = j16) and (l19 = l17))) and ((((o59 = (l6 + 1)) and
+  in_range1((l6 + 1))) and ((l6 = result30) and (l7 = o59))) and
+  (((j6 = result31) and (j7 = 7)) and (((((j7 = j15) and (l7 = l16)) and
+  ((j16 = j7) and (l17 = l7))) and (((((((o67 = (x + l7)) and
+  in_range1((x + l7))) and (((o67 <= to_rep(last(a1))) and
+  (result34 = true)) or ((not (o67 <= to_rep(last(a1)))) and
+  (result34 = false)))) and (((result34 = true) and (((o66 = (y + l7)) and
+  in_range1((y + l7))) and (((o66 <= to_rep(last(a1))) and
+  (result33 = true)) or ((not (o66 <= to_rep(last(a1)))) and
+  (result33 = false))))) or ((not (result34 = true)) and
+  (result33 = false)))) and (((result33 = true) and
+  ((((((temp___1846 = (y + l7)) and in_range1((y + l7))) and
+  (((to_rep(first(a1)) <= temp___1846) and
+  (temp___1846 <= to_rep(last(a1)))) and (o62 = temp___1846))) and
+  (o63 = (a[o62]))) and (o64 = to_rep(o63))) and
+  ((((((temp___1836 = (x + l7)) and in_range1((x + l7))) and
+  (((to_rep(first(a1)) <= temp___1836) and
+  (temp___1836 <= to_rep(last(a1)))) and (o60 = temp___1836))) and
+  (o61 = (a[o60]))) and (o65 = to_rep(o61))) and (((o65 = o64) and
+  (o68 = true)) or ((not (o65 = o64)) and (o68 = false)))))) or
+  ((not (result33 = true)) and (o68 = false)))) and (((not (o68 = true)) and
+  (result32 = true)) or ((o68 = true) and (result32 = false)))) and
+  (result32 = true))) or ((((((((o67 = (x + l7)) and in_range1((x + l7))) and
+  (((o67 <= to_rep(last(a1))) and (result34 = true)) or
+  ((not (o67 <= to_rep(last(a1)))) and (result34 = false)))) and
+  (((result34 = true) and (((o66 = (y + l7)) and in_range1((y + l7))) and
+  (((o66 <= to_rep(last(a1))) and (result33 = true)) or
+  ((not (o66 <= to_rep(last(a1)))) and (result33 = false))))) or
+  ((not (result34 = true)) and (result33 = false)))) and
+  (((result33 = true) and ((((((temp___1846 = (y + l7)) and
+  in_range1((y + l7))) and (((to_rep(first(a1)) <= temp___1846) and
+  (temp___1846 <= to_rep(last(a1)))) and (o62 = temp___1846))) and
+  (o63 = (a[o62]))) and (o64 = to_rep(o63))) and
+  ((((((temp___1836 = (x + l7)) and in_range1((x + l7))) and
+  (((to_rep(first(a1)) <= temp___1836) and
+  (temp___1836 <= to_rep(last(a1)))) and (o60 = temp___1836))) and
+  (o61 = (a[o60]))) and (o65 = to_rep(o61))) and (((o65 = o64) and
+  (o68 = true)) or ((not (o65 = o64)) and (o68 = false)))))) or
+  ((not (result33 = true)) and (o68 = false)))) and (((not (o68 = true)) and
+  (result32 = true)) or ((o68 = true) and (result32 = false)))) and
+  (not (result32 = true))) and (((({ int__content = j15 } = { int__content =
+  j13 }) and ({ int__content = l16 } = { int__content = l14 })) and
+  ((j16 = j14) and (l17 = l15))) and ((((o69 = (l7 + 1)) and
+  in_range1((l7 + 1))) and ((l7 = result35) and (l8 = o69))) and
+  (((j7 = result36) and (j8 = 8)) and (((((j8 = j13) and (l8 = l14)) and
+  ((j14 = j8) and (l15 = l8))) and (((((((o77 = (x + l8)) and
+  in_range1((x + l8))) and (((o77 <= to_rep(last(a1))) and
+  (result39 = true)) or ((not (o77 <= to_rep(last(a1)))) and
+  (result39 = false)))) and (((result39 = true) and (((o76 = (y + l8)) and
+  in_range1((y + l8))) and (((o76 <= to_rep(last(a1))) and
+  (result38 = true)) or ((not (o76 <= to_rep(last(a1)))) and
+  (result38 = false))))) or ((not (result39 = true)) and
+  (result38 = false)))) and (((result38 = true) and
+  ((((((temp___1847 = (y + l8)) and in_range1((y + l8))) and
+  (((to_rep(first(a1)) <= temp___1847) and
+  (temp___1847 <= to_rep(last(a1)))) and (o72 = temp___1847))) and
+  (o73 = (a[o72]))) and (o74 = to_rep(o73))) and
+  ((((((temp___1837 = (x + l8)) and in_range1((x + l8))) and
+  (((to_rep(first(a1)) <= temp___1837) and
+  (temp___1837 <= to_rep(last(a1)))) and (o70 = temp___1837))) and
+  (o71 = (a[o70]))) and (o75 = to_rep(o71))) and (((o75 = o74) and
+  (o78 = true)) or ((not (o75 = o74)) and (o78 = false)))))) or
+  ((not (result38 = true)) and (o78 = false)))) and (((not (o78 = true)) and
+  (result37 = true)) or ((o78 = true) and (result37 = false)))) and
+  (result37 = true))) or ((((((((o77 = (x + l8)) and in_range1((x + l8))) and
+  (((o77 <= to_rep(last(a1))) and (result39 = true)) or
+  ((not (o77 <= to_rep(last(a1)))) and (result39 = false)))) and
+  (((result39 = true) and (((o76 = (y + l8)) and in_range1((y + l8))) and
+  (((o76 <= to_rep(last(a1))) and (result38 = true)) or
+  ((not (o76 <= to_rep(last(a1)))) and (result38 = false))))) or
+  ((not (result39 = true)) and (result38 = false)))) and
+  (((result38 = true) and ((((((temp___1847 = (y + l8)) and
+  in_range1((y + l8))) and (((to_rep(first(a1)) <= temp___1847) and
+  (temp___1847 <= to_rep(last(a1)))) and (o72 = temp___1847))) and
+  (o73 = (a[o72]))) and (o74 = to_rep(o73))) and
+  ((((((temp___1837 = (x + l8)) and in_range1((x + l8))) and
+  (((to_rep(first(a1)) <= temp___1837) and
+  (temp___1837 <= to_rep(last(a1)))) and (o70 = temp___1837))) and
+  (o71 = (a[o70]))) and (o75 = to_rep(o71))) and (((o75 = o74) and
+  (o78 = true)) or ((not (o75 = o74)) and (o78 = false)))))) or
+  ((not (result38 = true)) and (o78 = false)))) and (((not (o78 = true)) and
+  (result37 = true)) or ((o78 = true) and (result37 = false)))) and
+  (not (result37 = true))) and (((({ int__content = j13 } = { int__content =
+  j11 }) and ({ int__content = l14 } = { int__content = l12 })) and
+  ((j14 = j12) and (l15 = l13))) and ((((o79 = (l8 + 1)) and
+  in_range1((l8 + 1))) and ((l8 = result40) and (l9 = o79))) and
+  (((j8 = result41) and (j9 = 9)) and (((((j9 = j11) and (l9 = l12)) and
+  ((j12 = j9) and (l13 = l9))) and (((((((o87 = (x + l9)) and
+  in_range1((x + l9))) and (((o87 <= to_rep(last(a1))) and
+  (result44 = true)) or ((not (o87 <= to_rep(last(a1)))) and
+  (result44 = false)))) and (((result44 = true) and (((o86 = (y + l9)) and
+  in_range1((y + l9))) and (((o86 <= to_rep(last(a1))) and
+  (result43 = true)) or ((not (o86 <= to_rep(last(a1)))) and
+  (result43 = false))))) or ((not (result44 = true)) and
+  (result43 = false)))) and (((result43 = true) and
+  ((((((temp___1848 = (y + l9)) and in_range1((y + l9))) and
+  (((to_rep(first(a1)) <= temp___1848) and
+  (temp___1848 <= to_rep(last(a1)))) and (o82 = temp___1848))) and
+  (o83 = (a[o82]))) and (o84 = to_rep(o83))) and
+  ((((((temp___1838 = (x + l9)) and in_range1((x + l9))) and
+  (((to_rep(first(a1)) <= temp___1838) and
+  (temp___1838 <= to_rep(last(a1)))) and (o80 = temp___1838))) and
+  (o81 = (a[o80]))) and (o85 = to_rep(o81))) and (((o85 = o84) and
+  (o88 = true)) or ((not (o85 = o84)) and (o88 = false)))))) or
+  ((not (result43 = true)) and (o88 = false)))) and (((not (o88 = true)) and
+  (result42 = true)) or ((o88 = true) and (result42 = false)))) and
+  (result42 = true))) or ((((((((o87 = (x + l9)) and in_range1((x + l9))) and
+  (((o87 <= to_rep(last(a1))) and (result44 = true)) or
+  ((not (o87 <= to_rep(last(a1)))) and (result44 = false)))) and
+  (((result44 = true) and (((o86 = (y + l9)) and in_range1((y + l9))) and
+  (((o86 <= to_rep(last(a1))) and (result43 = true)) or
+  ((not (o86 <= to_rep(last(a1)))) and (result43 = false))))) or
+  ((not (result44 = true)) and (result43 = false)))) and
+  (((result43 = true) and ((((((temp___1848 = (y + l9)) and
+  in_range1((y + l9))) and (((to_rep(first(a1)) <= temp___1848) and
+  (temp___1848 <= to_rep(last(a1)))) and (o82 = temp___1848))) and
+  (o83 = (a[o82]))) and (o84 = to_rep(o83))) and
+  ((((((temp___1838 = (x + l9)) and in_range1((x + l9))) and
+  (((to_rep(first(a1)) <= temp___1838) and
+  (temp___1838 <= to_rep(last(a1)))) and (o80 = temp___1838))) and
+  (o81 = (a[o80]))) and (o85 = to_rep(o81))) and (((o85 = o84) and
+  (o88 = true)) or ((not (o85 = o84)) and (o88 = false)))))) or
+  ((not (result43 = true)) and (o88 = false)))) and (((not (o88 = true)) and
+  (result42 = true)) or ((o88 = true) and (result42 = false)))) and
+  (not (result42 = true))) and ((((j10 = j11) and (l10 = l12)) and
+  ((j12 = j10) and (l13 = l10))) and ((((o89 = (l9 + 1)) and
+  in_range1((l9 + 1))) and ((l9 = result45) and (l10 = o89))) and
+  (((j9 = result46) and (j10 = 10)) and (((((((o97 = (x + l10)) and
+  in_range1((x + l10))) and (((o97 <= to_rep(last(a1))) and
+  (result49 = true)) or ((not (o97 <= to_rep(last(a1)))) and
+  (result49 = false)))) and (((result49 = true) and (((o96 = (y + l10)) and
+  in_range1((y + l10))) and (((o96 <= to_rep(last(a1))) and
+  (result48 = true)) or ((not (o96 <= to_rep(last(a1)))) and
+  (result48 = false))))) or ((not (result49 = true)) and
+  (result48 = false)))) and (((result48 = true) and
+  ((((((temp___1849 = (y + l10)) and in_range1((y + l10))) and
+  (((to_rep(first(a1)) <= temp___1849) and
+  (temp___1849 <= to_rep(last(a1)))) and (o92 = temp___1849))) and
+  (o93 = (a[o92]))) and (o94 = to_rep(o93))) and
+  ((((((temp___1839 = (x + l10)) and in_range1((x + l10))) and
+  (((to_rep(first(a1)) <= temp___1839) and
+  (temp___1839 <= to_rep(last(a1)))) and (o90 = temp___1839))) and
+  (o91 = (a[o90]))) and (o95 = to_rep(o91))) and (((o95 = o94) and
+  (o98 = true)) or ((not (o95 = o94)) and (o98 = false)))))) or
+  ((not (result48 = true)) and (o98 = false)))) and (((not (o98 = true)) and
+  (result47 = true)) or ((o98 = true) and (result47 = false)))) and
+  (result47 = true))))))))))))))))))))))))))))))))))))))))))))))))) and
+  (((j29 = { int__content = j27 }) and (l30 = { int__content = l28 })) and
+  ((j30 = j28) and (l31 = l29))))) and (((lcp__result2 = { int__content =
+  lcp__result1 }) and (lcp__result3 = lcp__result1)) and ((result51 = {
+  int__content = lcp__result }) and
+  (lcp__result1 = (l30).int__content)))))) and
+  (((lcp__result4 = lcp__result2) and ((j31 = j29) and (l32 = l30))) and
+  ((lcp__result5 = lcp__result3) and ((j32 = j30) and (l33 = l31))))) and
+  ((((bool_ne(to_rep((a[x])), to_rep((a[y]))) = true) and
+  ((lcp__result4).int__content = 0)) or (not (bool_ne(to_rep((a[x])),
+  to_rep((a[y]))) = true))) and ((((bool_eq(x, y) = true) and
+  ((lcp__result4).int__content = ((to_rep(last(a1)) - x) + 1))) or
+  (not (bool_eq(x, y) = true))) and
+  ((((not (match_bool(bool_ne(to_rep((a[x])), to_rep((a[y]))), true,
+  bool_eq(x, y)) = true)) and (0 <  (lcp__result4).int__content)) or
+  (match_bool(bool_ne(to_rep((a[x])), to_rep((a[y]))), true, bool_eq(x,
+  y)) = true)) and (result52 = (lcp__result4).int__content))))))))) ->
+  (forall k:int. (((0 <= k) and (k <= ((lcp__result4).int__content - 1))) ->
+  (to_rep((a[(x + k)])) = to_rep((a[(y + k)]))))))))

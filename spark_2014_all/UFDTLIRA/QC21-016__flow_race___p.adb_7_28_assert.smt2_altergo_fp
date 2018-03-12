@@ -134,7 +134,5 @@ logic arg : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-axiom H : in_range(arg)
-
  (* File "p.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (arg = 0)
+goal WP_parameter_def : (in_range(arg) -> (arg = 0))

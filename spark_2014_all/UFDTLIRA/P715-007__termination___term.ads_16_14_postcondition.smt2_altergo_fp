@@ -157,38 +157,11 @@ logic loop_if_c_is_neg__function_guard : int, unit -> prop
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : int
-
-logic o : int
-
-logic x1 : int
-
-logic result : int
-
-logic x2 : int
-
-logic x3 : int
-
-logic x4 : int
-
-axiom H : in_range(c)
-
-axiom H1 : ((0 <= last) -> dynamic_property(0, last, x))
-
-axiom H2 : ((0 <= c) -> ((o = loop_if_c_is_neg(void)) and dynamic_property(0,
-  last, o)))
-
-axiom H3 : ((0 <= c) -> (result = x))
-
-axiom H4 : ((0 <= c) -> (x2 = o))
-
-axiom H5 : ((not (0 <= c)) -> (x2 = x))
-
-axiom H6 : ((not (0 <= c)) -> (x2 = x1))
-
-axiom H7 : (x3 = x2)
-
-axiom H8 : (x4 = x2)
-
  (* File "term.ads", line 11, characters 0-0 *)
-goal WP_parameter_def : (0 <= c)
+goal WP_parameter_def :
+  (forall x:int. forall o:int. forall x1:int. forall result:int.
+  forall x2:int. forall x3:int. forall x4:int. ((in_range(c) and
+  ((((0 <= last) -> dynamic_property(0, last, x)) and (((0 <= c) and
+  (((o = loop_if_c_is_neg(void)) and dynamic_property(0, last, o)) and
+  ((result = x) and (x2 = o)))) or ((not (0 <= c)) and ((x2 = x) and
+  (x2 = x1))))) and ((x3 = x2) and (x4 = x2)))) -> (0 <= c)))

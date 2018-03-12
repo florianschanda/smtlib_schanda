@@ -212,24 +212,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -240,17 +222,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep2((a[temp___idx_78])) = to_rep2((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep2((a[temp___idx_91])) = to_rep2((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep2((a[temp___idx_78])) = to_rep2((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep2((a[temp___idx_91])) = to_rep2((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -260,37 +242,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep2((a[temp___idx_78])) = to_rep2((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep2((a[(i + 1)])) <  to_rep2((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep2((b[(i + 1)])) <  to_rep2((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep2((a[temp___idx_91])) = to_rep2((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 logic dummy3 : (int,character) farray
 
@@ -426,6 +380,34 @@ type message__ref = { message__content : us_rep
 function message__ref___projection(a: message__ref) : us_rep =
   (a).message__content
 
+logic compare : (int,character) farray, int, int, (int,character) farray,
+  int, int -> int
+
+axiom compare_def_eq :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
+  a_first, a_last, b, b_first, b_last) = true))))
+
+axiom compare_def_lt :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
+  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
+  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
+  ((i <  a_last) and (to_rep2((a[(i + 1)])) <  to_rep2((b[(j + 1)]))))))))))))
+
+axiom compare_def_gt :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
+  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
+  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
+  ((i <  b_last) and (to_rep2((b[(i + 1)])) <  to_rep2((a[(j + 1)]))))))))))))
+
 type tdayP1
 
 predicate in_range3(x: int) = ((1 <= x) and (x <= 10))
@@ -468,29 +450,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def1 :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def1 :
-  (forall v:(int,character) farray. forall v1:(int,character) farray.
-  (forall i:int [(singleton1({ us_split_fields1 = {
-  rec__messages__message__sent = v; rec__messages__message__received = v1 }
-  }, i)[i])]. ((singleton1({ us_split_fields1 = {
-  rec__messages__message__sent = v; rec__messages__message__received = v1 }
-  }, i)[i]) = { us_split_fields1 = { rec__messages__message__sent = v;
-  rec__messages__message__received = v1 } })))
-
 logic bool_eq7 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -501,17 +460,17 @@ axiom bool_eq_def6 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and (bool_eq5((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and (bool_eq5((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq5((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq7(a,
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq5((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq7(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -521,9 +480,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq5((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq5((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)))))))
 
 type t
 
@@ -1032,142 +991,111 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic main__a__aggregate_def : us_rep, us_rep -> (int,us_rep) farray
 
+logic temp___String_Literal_298 : unit -> (int,character) farray
+
+axiom temp___String_Literal_298__def_axiom :
+  ((((((((((to_rep2((temp___String_Literal_298(void)[1])) = 48) and
+  (to_rep2((temp___String_Literal_298(void)[2])) = 48)) and
+  (to_rep2((temp___String_Literal_298(void)[3])) = 48)) and
+  (to_rep2((temp___String_Literal_298(void)[4])) = 48)) and
+  (to_rep2((temp___String_Literal_298(void)[5])) = 45)) and
+  (to_rep2((temp___String_Literal_298(void)[6])) = 49)) and
+  (to_rep2((temp___String_Literal_298(void)[7])) = 50)) and
+  (to_rep2((temp___String_Literal_298(void)[8])) = 45)) and
+  (to_rep2((temp___String_Literal_298(void)[9])) = 50)) and
+  (to_rep2((temp___String_Literal_298(void)[10])) = 53))
+
+logic temp___String_Literal_299 : unit -> (int,character) farray
+
+axiom temp___String_Literal_299__def_axiom :
+  ((((((((((to_rep2((temp___String_Literal_299(void)[1])) = 48) and
+  (to_rep2((temp___String_Literal_299(void)[2])) = 48)) and
+  (to_rep2((temp___String_Literal_299(void)[3])) = 51)) and
+  (to_rep2((temp___String_Literal_299(void)[4])) = 51)) and
+  (to_rep2((temp___String_Literal_299(void)[5])) = 45)) and
+  (to_rep2((temp___String_Literal_299(void)[6])) = 48)) and
+  (to_rep2((temp___String_Literal_299(void)[7])) = 52)) and
+  (to_rep2((temp___String_Literal_299(void)[8])) = 45)) and
+  (to_rep2((temp___String_Literal_299(void)[9])) = 48)) and
+  (to_rep2((temp___String_Literal_299(void)[10])) = 51))
+
+logic temp___String_Literal_301 : unit -> (int,character) farray
+
+axiom temp___String_Literal_301__def_axiom :
+  ((((((((((to_rep2((temp___String_Literal_301(void)[1])) = 48) and
+  (to_rep2((temp___String_Literal_301(void)[2])) = 53)) and
+  (to_rep2((temp___String_Literal_301(void)[3])) = 55)) and
+  (to_rep2((temp___String_Literal_301(void)[4])) = 48)) and
+  (to_rep2((temp___String_Literal_301(void)[5])) = 45)) and
+  (to_rep2((temp___String_Literal_301(void)[6])) = 48)) and
+  (to_rep2((temp___String_Literal_301(void)[7])) = 48)) and
+  (to_rep2((temp___String_Literal_301(void)[8])) = 45)) and
+  (to_rep2((temp___String_Literal_301(void)[9])) = 48)) and
+  (to_rep2((temp___String_Literal_301(void)[10])) = 48))
+
+logic temp___String_Literal_302 : unit -> (int,character) farray
+
+axiom temp___String_Literal_302__def_axiom :
+  ((((((((((to_rep2((temp___String_Literal_302(void)[1])) = 48) and
+  (to_rep2((temp___String_Literal_302(void)[2])) = 54)) and
+  (to_rep2((temp___String_Literal_302(void)[3])) = 51)) and
+  (to_rep2((temp___String_Literal_302(void)[4])) = 50)) and
+  (to_rep2((temp___String_Literal_302(void)[5])) = 45)) and
+  (to_rep2((temp___String_Literal_302(void)[6])) = 48)) and
+  (to_rep2((temp___String_Literal_302(void)[7])) = 54)) and
+  (to_rep2((temp___String_Literal_302(void)[8])) = 45)) and
+  (to_rep2((temp___String_Literal_302(void)[9])) = 48)) and
+  (to_rep2((temp___String_Literal_302(void)[10])) = 56))
+
 axiom def_axiom :
-  (forall temp___263:(int,character) farray.
-  forall temp___2631:(int,character) farray.
-  forall temp___264:(int,character) farray.
-  forall temp___2641:(int,character) farray. (((main__a__aggregate_def({
-  us_split_fields1 = { rec__messages__message__sent = temp___263;
-  rec__messages__message__received = temp___2631 } }, { us_split_fields1 = {
-  rec__messages__message__sent = temp___264;
-  rec__messages__message__received = temp___2641 } })[(- 2147483648)]) = {
-  us_split_fields1 = { rec__messages__message__sent = temp___263;
-  rec__messages__message__received = temp___2631 } }) and
+  (forall temp___295:(int,character) farray.
+  forall temp___2951:(int,character) farray.
+  forall temp___296:(int,character) farray.
+  forall temp___2961:(int,character) farray. (((compare(temp___295, 1, 10,
+  temp___2951, 1, 10) <= 0) and (compare(temp___296, 1, 10, temp___2961, 1,
+  10) <= 0)) -> (((main__a__aggregate_def({ us_split_fields1 = {
+  rec__messages__message__sent = temp___295;
+  rec__messages__message__received = temp___2951 } }, { us_split_fields1 = {
+  rec__messages__message__sent = temp___296;
+  rec__messages__message__received = temp___2961 } })[(- 2147483648)]) = {
+  us_split_fields1 = { rec__messages__message__sent = temp___295;
+  rec__messages__message__received = temp___2951 } }) and
   ((main__a__aggregate_def({ us_split_fields1 = {
-  rec__messages__message__sent = temp___263;
-  rec__messages__message__received = temp___2631 } }, { us_split_fields1 = {
-  rec__messages__message__sent = temp___264;
-  rec__messages__message__received = temp___2641 } })[(- 2147483647)]) = {
-  us_split_fields1 = { rec__messages__message__sent = temp___264;
-  rec__messages__message__received = temp___2641 } })))
+  rec__messages__message__sent = temp___295;
+  rec__messages__message__received = temp___2951 } }, { us_split_fields1 = {
+  rec__messages__message__sent = temp___296;
+  rec__messages__message__received = temp___2961 } })[(- 2147483647)]) = {
+  us_split_fields1 = { rec__messages__message__sent = temp___296;
+  rec__messages__message__received = temp___2961 } }))))
 
-logic temp___String_Literal_266 : unit -> (int,character) farray
-
-axiom temp___String_Literal_266__def_axiom :
-  ((((((((((to_rep2((temp___String_Literal_266(void)[1])) = 48) and
-  (to_rep2((temp___String_Literal_266(void)[2])) = 48)) and
-  (to_rep2((temp___String_Literal_266(void)[3])) = 48)) and
-  (to_rep2((temp___String_Literal_266(void)[4])) = 48)) and
-  (to_rep2((temp___String_Literal_266(void)[5])) = 45)) and
-  (to_rep2((temp___String_Literal_266(void)[6])) = 49)) and
-  (to_rep2((temp___String_Literal_266(void)[7])) = 50)) and
-  (to_rep2((temp___String_Literal_266(void)[8])) = 45)) and
-  (to_rep2((temp___String_Literal_266(void)[9])) = 50)) and
-  (to_rep2((temp___String_Literal_266(void)[10])) = 53))
-
-logic temp___String_Literal_267 : unit -> (int,character) farray
-
-axiom temp___String_Literal_267__def_axiom :
-  ((((((((((to_rep2((temp___String_Literal_267(void)[1])) = 48) and
-  (to_rep2((temp___String_Literal_267(void)[2])) = 48)) and
-  (to_rep2((temp___String_Literal_267(void)[3])) = 51)) and
-  (to_rep2((temp___String_Literal_267(void)[4])) = 51)) and
-  (to_rep2((temp___String_Literal_267(void)[5])) = 45)) and
-  (to_rep2((temp___String_Literal_267(void)[6])) = 48)) and
-  (to_rep2((temp___String_Literal_267(void)[7])) = 52)) and
-  (to_rep2((temp___String_Literal_267(void)[8])) = 45)) and
-  (to_rep2((temp___String_Literal_267(void)[9])) = 48)) and
-  (to_rep2((temp___String_Literal_267(void)[10])) = 51))
-
-logic temp___String_Literal_269 : unit -> (int,character) farray
-
-axiom temp___String_Literal_269__def_axiom :
-  ((((((((((to_rep2((temp___String_Literal_269(void)[1])) = 48) and
-  (to_rep2((temp___String_Literal_269(void)[2])) = 53)) and
-  (to_rep2((temp___String_Literal_269(void)[3])) = 55)) and
-  (to_rep2((temp___String_Literal_269(void)[4])) = 48)) and
-  (to_rep2((temp___String_Literal_269(void)[5])) = 45)) and
-  (to_rep2((temp___String_Literal_269(void)[6])) = 48)) and
-  (to_rep2((temp___String_Literal_269(void)[7])) = 48)) and
-  (to_rep2((temp___String_Literal_269(void)[8])) = 45)) and
-  (to_rep2((temp___String_Literal_269(void)[9])) = 48)) and
-  (to_rep2((temp___String_Literal_269(void)[10])) = 48))
-
-logic temp___String_Literal_270 : unit -> (int,character) farray
-
-axiom temp___String_Literal_270__def_axiom :
-  ((((((((((to_rep2((temp___String_Literal_270(void)[1])) = 48) and
-  (to_rep2((temp___String_Literal_270(void)[2])) = 54)) and
-  (to_rep2((temp___String_Literal_270(void)[3])) = 51)) and
-  (to_rep2((temp___String_Literal_270(void)[4])) = 50)) and
-  (to_rep2((temp___String_Literal_270(void)[5])) = 45)) and
-  (to_rep2((temp___String_Literal_270(void)[6])) = 48)) and
-  (to_rep2((temp___String_Literal_270(void)[7])) = 54)) and
-  (to_rep2((temp___String_Literal_270(void)[8])) = 45)) and
-  (to_rep2((temp___String_Literal_270(void)[9])) = 48)) and
-  (to_rep2((temp___String_Literal_270(void)[10])) = 56))
-
-logic a : (int,us_rep) farray
-
-logic o : (int,character) farray
-
-logic o1 : (int,character) farray
-
-logic o2 : (int,character) farray
-
-logic o3 : (int,character) farray
-
-logic o4 : (int,us_rep) farray
-
-logic main__a__assume : (int,us_rep) farray
-
-logic main__a__assume1 : t
-
-logic us : int
-
-logic result : (int,us_rep) farray
-
-logic a1 : (int,us_rep) farray
-
-axiom H : (compare(temp___String_Literal_269(void), 1, 10,
-  temp___String_Literal_270(void), 1, 10) <= 0)
-
-axiom H1 : (temp___String_Literal_269(void) = o)
-
-axiom H2 : (temp___String_Literal_270(void) = o1)
-
-axiom H3 : (compare(temp___String_Literal_266(void), 1, 10,
-  temp___String_Literal_267(void), 1, 10) <= 0)
-
-axiom H4 : (temp___String_Literal_266(void) = o2)
-
-axiom H5 : (temp___String_Literal_267(void) = o3)
-
-axiom H6 : (o4 = main__a__aggregate_def({ us_split_fields1 = {
-  rec__messages__message__sent = o2; rec__messages__message__received = o3 }
-  }, { us_split_fields1 = { rec__messages__message__sent = o;
-  rec__messages__message__received = o1 } }))
-
-axiom H7 : (o4 = main__a__assume)
-
-axiom H8 : (mk((- 2147483648), (- 2147483647)) = main__a__assume1)
-
-axiom H9 : (result = a)
-
-axiom H10 : (a1 = main__a__assume)
-
-axiom H11 : (to_rep1(a__first) = to_rep1(first(main__a__assume1)))
-
-axiom H12 : (to_rep1(a__last) = to_rep1(last(main__a__assume1)))
-
-axiom H13 : (dynamic_property((- 2147483648), 2147483647, to_rep1(a__first),
+ (* File "main.adb", line 6, characters 0-0 *)
+goal WP_parameter_def :
+  (forall a:(int,us_rep) farray. forall o:(int,character) farray.
+  forall o1:(int,character) farray. forall o2:(int,character) farray.
+  forall o3:(int,character) farray. forall o4:(int,us_rep) farray.
+  forall main__a__assume:(int,us_rep) farray. forall main__a__assume1:t.
+  forall result:(int,us_rep) farray. forall a1:(int,us_rep) farray.
+  ((((((compare(temp___String_Literal_301(void), 1, 10,
+  temp___String_Literal_302(void), 1, 10) <= 0) and
+  ((temp___String_Literal_301(void) = o) and
+  (temp___String_Literal_302(void) = o1))) and
+  (((compare(temp___String_Literal_298(void), 1, 10,
+  temp___String_Literal_299(void), 1, 10) <= 0) and
+  ((temp___String_Literal_298(void) = o2) and
+  (temp___String_Literal_299(void) = o3))) and (o4 = main__a__aggregate_def({
+  us_split_fields1 = { rec__messages__message__sent = o2;
+  rec__messages__message__received = o3 } }, { us_split_fields1 = {
+  rec__messages__message__sent = o; rec__messages__message__received = o1 }
+  })))) and ((o4 = main__a__assume) and (mk((- 2147483648),
+  (- 2147483647)) = main__a__assume1))) and (((result = a) and
+  (a1 = main__a__assume)) and
+  ((to_rep1(a__first) = to_rep1(first(main__a__assume1))) and
+  (to_rep1(a__last) = to_rep1(last(main__a__assume1)))))) ->
+  ((dynamic_property((- 2147483648), 2147483647, to_rep1(a__first),
   to_rep1(a__last)) and
-  (forall temp___272:int. (((to_rep1(a__first) <= temp___272) and
-  (temp___272 <= to_rep1(a__last))) ->
-  (compare((((a1[temp___272])).us_split_fields1).rec__messages__message__sent,
+  (forall temp___304:int. (((to_rep1(a__first) <= temp___304) and
+  (temp___304 <= to_rep1(a__last))) ->
+  (compare((((a1[temp___304])).us_split_fields1).rec__messages__message__sent,
   1, 10,
-  (((a1[temp___272])).us_split_fields1).rec__messages__message__received, 1,
-  10) <= 0))))
-
- (* File "main.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : in_range1(2)
+  (((a1[temp___304])).us_split_fields1).rec__messages__message__received, 1,
+  10) <= 0)))) -> in_range1(2))))

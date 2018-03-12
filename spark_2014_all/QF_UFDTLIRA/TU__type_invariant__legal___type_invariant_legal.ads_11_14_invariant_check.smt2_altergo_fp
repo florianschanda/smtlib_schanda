@@ -106,25 +106,8 @@ function t__ref___projection(a: t__ref) : t = (a).t__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : int
-
-logic result : int
-
-logic x1 : int
-
-logic x2 : int
-
-logic x3 : int
-
-axiom H : ((0 <= 2147483647) -> in_range(x))
-
-axiom H1 : (result = x)
-
-axiom H2 : (x1 = 1)
-
-axiom H3 : (x1 = x2)
-
-axiom H4 : (x3 = x1)
-
  (* File "type_invariant_legal.adb", line 17, characters 0-0 *)
-goal WP_parameter_def : (not (x2 = 0))
+goal WP_parameter_def :
+  (forall x:int. forall result:int. forall x1:int. forall x2:int.
+  forall x3:int. (((0 <= 2147483647) -> in_range(x)) -> ((((result = x) and
+  (x1 = 1)) and ((x1 = x2) and (x3 = x1))) -> (not (x2 = 0)))))

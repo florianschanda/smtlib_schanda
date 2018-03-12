@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -222,42 +222,12 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic a : int
-
-logic b : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic a1 : int
-
-logic result1 : int
-
-logic b1 : int
-
-axiom H : in_range1(havok_a)
-
-axiom H1 : in_range1(havok_b)
-
-axiom H2 : (((1 <= havok_a) and (havok_a <= 10)) and ((1 <= havok_b) and
-  (havok_b <= 11)))
-
-axiom H3 : (result = a)
-
-axiom H4 : (a1 = 1)
-
-axiom H5 : in_range2(a1)
-
-axiom H6 : ((o = havok_a) and in_range3(havok_a))
-
-axiom H7 : (result1 = b)
-
-axiom H8 : (b1 = o)
-
-axiom H9 : in_range3(b1)
-
  (* File "p.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : in_range4(havok_b)
+goal WP_parameter_def :
+  (forall a:int. forall b:int. forall o:int. forall result:int.
+  forall a1:int. forall result1:int. forall b1:int. (in_range1(havok_a) ->
+  (in_range1(havok_b) -> ((((1 <= havok_a) and (havok_a <= 10)) and
+  ((1 <= havok_b) and (havok_b <= 11))) -> (((result = a) and (a1 = 1)) ->
+  (in_range2(a1) -> ((((o = havok_a) and in_range3(havok_a)) and
+  ((result1 = b) and (b1 = o))) -> (in_range3(b1) ->
+  in_range4(havok_b)))))))))

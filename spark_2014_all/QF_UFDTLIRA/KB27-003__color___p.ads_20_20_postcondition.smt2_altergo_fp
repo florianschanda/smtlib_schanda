@@ -108,39 +108,14 @@ logic r : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic p__q__result : int
-
-logic result : int
-
-logic p__q__result1 : int
-
-logic p__q__result2 : int
-
-logic p__q__result3 : int
-
-logic p__q__result4 : int
-
-logic p__q__result5 : int
-
-logic result1 : int
-
-axiom H : in_range(r)
-
-axiom H1 : (r = 2)
-
-axiom H2 : (p__q__result1 = p__q__result2)
-
-axiom H3 : (p__q__result3 = p__q__result1)
-
-axiom H4 : (result = p__q__result)
-
-axiom H5 : (p__q__result1 = r)
-
-axiom H6 : (p__q__result4 = p__q__result2)
-
-axiom H7 : (p__q__result5 = p__q__result3)
-
-axiom H8 : (result1 = p__q__result4)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (p__q__result4 = 2)
+goal WP_parameter_def :
+  (forall p__q__result:int. forall result:int. forall p__q__result1:int.
+  forall p__q__result2:int. forall p__q__result3:int.
+  forall p__q__result4:int. forall p__q__result5:int.
+  (forall result1:int. ((in_range(r) and ((r = 2) and
+  (((((p__q__result1 = p__q__result2) and
+  (p__q__result3 = p__q__result1)) and ((result = p__q__result) and
+  (p__q__result1 = r))) and ((p__q__result4 = p__q__result2) and
+  (p__q__result5 = p__q__result3))) and (result1 = p__q__result4)))) ->
+  (p__q__result4 = 2))))

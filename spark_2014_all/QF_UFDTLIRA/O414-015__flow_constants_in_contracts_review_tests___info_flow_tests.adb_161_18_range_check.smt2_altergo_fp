@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -151,17 +151,7 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 axiom c1__def_axiom : (c1 = a)
 
-logic x : int
-
-axiom H : in_range1(a)
-
-axiom H1 : in_range1(c1)
-
-axiom H2 : (a = c1)
-
-axiom H3 : ((0 <= 2147483647) -> in_range1(x))
-
-axiom H4 : (c1 <= c2)
-
  (* File "info_flow_tests.adb", line 151, characters 0-0 *)
-goal WP_parameter_def : (0 <= c1)
+goal WP_parameter_def :
+  (forall x:int. (in_range1(a) -> (in_range1(c1) -> ((a = c1) ->
+  (((0 <= 2147483647) -> in_range1(x)) -> ((c1 <= c2) -> (0 <= c1)))))))

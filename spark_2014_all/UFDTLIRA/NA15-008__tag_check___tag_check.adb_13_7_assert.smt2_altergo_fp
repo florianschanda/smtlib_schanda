@@ -215,47 +215,15 @@ logic y2 : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x__split_fields : integer
-
-logic x__split_fields1 : us_private
-
-logic usq_ : integer
-
-logic usq_1 : us_private
-
-logic usq_2 : int
-
-logic temp___149 : integer
-
-logic temp___1491 : us_private
-
-logic temp___1492 : int
-
-logic result : integer
-
-logic result1 : us_private
-
-logic x__split_fields2 : integer
-
-logic x__split_fields3 : us_private
-
-axiom H : (x__attr__tag = y2)
-
-axiom H1 : (((usq_ = y) and (usq_1 = y1)) and (usq_2 = y2))
-
-axiom H2 : (usq_ = temp___149)
-
-axiom H3 : (usq_1 = temp___1491)
-
-axiom H4 : (x__attr__tag = temp___1492)
-
-axiom H5 : (result = x__split_fields)
-
-axiom H6 : (result1 = x__split_fields1)
-
-axiom H7 : (x__split_fields2 = temp___149)
-
-axiom H8 : (x__split_fields3 = temp___1491)
-
  (* File "tag_check.ads", line 10, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def :
+  (forall x__split_fields:integer. forall x__split_fields1:us_private.
+  forall usq_:integer. forall usq_1:us_private. forall usq_2:int.
+  forall temp___173:integer. forall temp___1731:us_private.
+  forall temp___1732:int. forall result:integer. forall result1:us_private.
+  forall x__split_fields2:integer. forall x__split_fields3:us_private.
+  (not ((((x__attr__tag = y2) and (((usq_ = y) and (usq_1 = y1)) and
+  (usq_2 = y2))) and (((usq_ = temp___173) and (usq_1 = temp___1731)) and
+  (x__attr__tag = temp___1732))) and (((result = x__split_fields) and
+  (result1 = x__split_fields1)) and ((x__split_fields2 = temp___173) and
+  (x__split_fields3 = temp___1731))))))

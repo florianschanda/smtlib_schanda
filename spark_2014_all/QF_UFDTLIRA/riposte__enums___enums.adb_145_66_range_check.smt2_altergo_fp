@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -193,77 +193,22 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic result__ : int
-
-logic success : bool
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic result : bool
-
-logic success1 : bool
-
-logic result1 : int
-
-logic result__1 : int
-
-logic result2 : bool
-
-logic success2 : bool
-
-logic result3 : int
-
-logic result__2 : int
-
-logic result__3 : int
-
-logic success3 : bool
-
-logic result__4 : int
-
-logic success4 : bool
-
-axiom H : in_range1(i)
-
-axiom H1 : ((3 <= 5) -> in_range3(result__))
-
-axiom H2 : (((3 <= i) and (i <= 5)) -> (result = success))
-
-axiom H3 : (((3 <= i) and (i <= 5)) -> (success1 = of_int(1)))
-
-axiom H4 : (((3 <= i) and (i <= 5)) -> ((o = i) and in_range2(i)))
-
-axiom H5 : (((3 <= i) and (i <= 5)) -> ((o1 = o) and in_range3(o)))
-
-axiom H6 : (((3 <= i) and (i <= 5)) -> (result1 = result__))
-
-axiom H7 : (((3 <= i) and (i <= 5)) -> (result__1 = o1))
-
-axiom H8 : ((not ((3 <= i) and (i <= 5))) -> (result2 = success))
-
-axiom H9 : ((not ((3 <= i) and (i <= 5))) -> (success2 = of_int(0)))
-
-axiom H10 : ((not ((3 <= i) and (i <= 5))) -> (result3 = result__))
-
-axiom H11 : ((not ((3 <= i) and (i <= 5))) -> (result__2 = 3))
-
-axiom H12 : ((not ((3 <= i) and (i <= 5))) -> (success1 = success2))
-
-axiom H13 : ((not ((3 <= i) and (i <= 5))) -> (result__1 = result__2))
-
-axiom H14 : (success1 = success3)
-
-axiom H15 : (result__1 = result__3)
-
-axiom H16 : (success4 = success1)
-
-axiom H17 : (result__4 = result__1)
-
-axiom H18 : (success3 = true)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range2(i)
+goal WP_parameter_def :
+  (forall result__:int. forall success:bool. forall o:int. forall o1:int.
+  forall result:bool. forall success1:bool. forall result1:int.
+  forall result__1:int. forall result2:bool. forall success2:bool.
+  forall result3:int. forall result__2:int. forall result__3:int.
+  forall success3:bool. forall result__4:int. forall success4:bool.
+  (in_range1(i) -> (((3 <= 5) -> in_range3(result__)) -> ((((((3 <= i) and
+  (i <= 5)) and ((({ bool__content = result } = { bool__content = success
+  }) and (success1 = of_int(1))) and ((((o = i) and in_range2(i)) and
+  ((o1 = o) and in_range3(o))) and (({ int__content = result1 } = {
+  int__content = result__ }) and (result__1 = o1))))) or ((not ((3 <= i) and
+  (i <= 5))) and (((({ bool__content = result2 } = { bool__content = success
+  }) and (success2 = of_int(0))) and (({ int__content = result3 } = {
+  int__content = result__ }) and (result__2 = 3))) and
+  ((success1 = success2) and (result__1 = result__2))))) and
+  (((success1 = success3) and (result__1 = result__3)) and
+  ((success4 = success1) and (result__4 = result__1)))) ->
+  ((success3 = true) -> in_range2(i))))))

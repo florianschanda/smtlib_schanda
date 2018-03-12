@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -69,6 +63,12 @@ axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
 
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
 logic attr__ATTRIBUTE_IMAGE : bool -> us_image
@@ -77,35 +77,17 @@ logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
-logic blocking_true__result : bool
-
-logic result : bool
-
-logic blocking_true__result1 : bool
-
-logic blocking_true__result2 : bool
-
-logic blocking_true__result3 : bool
-
-logic blocking_true__result4 : bool
-
-logic blocking_true__result5 : bool
-
-logic result1 : bool
-
-axiom H : (blocking_true__result1 = blocking_true__result2)
-
-axiom H1 : (blocking_true__result3 = blocking_true__result1)
-
-axiom H2 : (result = blocking_true__result)
-
-axiom H3 : (blocking_true__result1 = of_int(1))
-
-axiom H4 : (blocking_true__result4 = blocking_true__result2)
-
-axiom H5 : (blocking_true__result5 = blocking_true__result3)
-
-axiom H6 : (result1 = blocking_true__result4)
-
  (* File "blocking_true.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (blocking_true__result4 = true)
+goal WP_parameter_def :
+  (forall blocking_true__result:bool. forall result:bool.
+  forall blocking_true__result1:bool. forall blocking_true__result2:bool.
+  forall blocking_true__result3:bool. forall blocking_true__result4:bool.
+  forall blocking_true__result5:bool.
+  (forall result1:bool.
+  ((((((blocking_true__result1 = blocking_true__result2) and
+  (blocking_true__result3 = blocking_true__result1)) and
+  ((result = blocking_true__result) and
+  (blocking_true__result1 = of_int(1)))) and
+  ((blocking_true__result4 = blocking_true__result2) and
+  (blocking_true__result5 = blocking_true__result3))) and
+  (result1 = blocking_true__result4)) -> (blocking_true__result4 = true))))

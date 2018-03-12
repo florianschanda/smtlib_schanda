@@ -655,25 +655,9 @@ function my_int__ref___projection(a: my_int__ref) : my_int =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : t
+logic rliteral : t
 
-logic result : t
-
-logic x1 : t
-
-logic result1 : t
-
-logic x2 : t
-
-logic result2 : t
-
-logic x3 : t
-
-logic x4 : t
-
-logic x5 : t
-
-axiom H : true
+axiom rliteral_axiom : (tqtint(rliteral) = 4)
 
  (* File "my_div.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : (not (of_int(4) = zeros))
+goal WP_parameter_def : (not (rliteral = zeros))

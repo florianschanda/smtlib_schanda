@@ -113,27 +113,9 @@ logic ok : bool
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic g : int
-
-logic g1 : int
-
-logic result : int
-
-logic g2 : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range(g))
-
-axiom H1 : (ok = true)
-
-axiom H2 : (not (ok = true))
-
-axiom H3 : ((g = 0) -> (result = g))
-
-axiom H4 : ((g = 0) -> (g2 = 2))
-
-axiom H5 : ((not (g = 0)) -> (g2 = g))
-
-axiom H6 : ((not (g = 0)) -> (g2 = g1))
-
  (* File "raise_statements.adb", line 39, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def :
+  (forall g:int. forall g1:int. forall result:int. forall g2:int.
+  ((((- 2147483648) <= 2147483647) -> in_range(g)) -> ((ok = true) ->
+  ((not (ok = true)) -> (not (((g = 0) and ((result = g) and (g2 = 2))) or
+  ((not (g = 0)) and ((g2 = g) and (g2 = g1)))))))))

@@ -596,12 +596,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -613,6 +607,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1773,17 +1773,25 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 axiom shift_right__post_axiom : true
 
+logic rliteral3 : t1
+
+axiom rliteral_axiom3 : (tqtint1(rliteral3) = 0)
+
+logic rliteral4 : t
+
+axiom rliteral_axiom4 : (tqtint(rliteral4) = 0)
+
 axiom shift_right__def_axiom :
   (forall v:t.
   (forall amount:int [shift_right(v, amount)]. (in_range2(amount) ->
   ((((1 <= 16) and (16 <= 8)) -> (((amount <  8) -> (shift_right(v,
   amount) = toBig2(lsr_bv1(toSmall2(v), of_int2(amount))))) and
-  ((not (amount <  8)) -> (shift_right(v,
-  amount) = toBig2(of_int2(0)))))) and ((not ((1 <= 16) and (16 <= 8))) ->
-  ((((9 <= 16) and (16 <= 16)) -> (((amount <  16) -> (shift_right(v,
-  amount) = lsr_bv(v, of_int(amount)))) and ((not (amount <  16)) ->
-  (shift_right(v, amount) = of_int(0))))) and ((not ((9 <= 16) and
-  (16 <= 16))) -> ((((17 <= 16) and (16 <= 32)) -> (shift_right(v,
+  ((not (amount <  8)) -> (shift_right(v, amount) = toBig2(rliteral3))))) and
+  ((not ((1 <= 16) and (16 <= 8))) -> ((((9 <= 16) and (16 <= 16)) ->
+  (((amount <  16) -> (shift_right(v, amount) = lsr_bv(v,
+  of_int(amount)))) and ((not (amount <  16)) -> (shift_right(v,
+  amount) = rliteral4)))) and ((not ((9 <= 16) and (16 <= 16))) ->
+  ((((17 <= 16) and (16 <= 32)) -> (shift_right(v,
   amount) = toSmall1(lsr_bv2(toBig1(v), of_int3(amount))))) and
   ((not ((17 <= 16) and (16 <= 32))) -> (shift_right(v,
   amount) = toSmall(lsr_bv3(toBig(v), of_int4(amount)))))))))))))
@@ -1808,224 +1816,109 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 axiom lemma6__post_axiom1 : true
 
+logic rliteral5 : t
+
+axiom rliteral_axiom5 : (tqtint(rliteral5) = 65535)
+
+logic rliteral6 : t
+
+axiom rliteral_axiom6 : (tqtint(rliteral6) = 1)
+
 axiom lemma6__def_axiom : ((lemma61(void) = true) <->
-  (forall val__:t. ((ule(of_int(0), val__) and ule(val__, of_int(65535))) ->
-  ((not (val__ = of_int(0))) -> ((shift_right(val__, 0) = val__) and
+  (forall val__:t. ((ule(rliteral4, val__) and ule(val__, rliteral5)) ->
+  ((not (val__ = rliteral4)) -> ((shift_right(val__, 0) = val__) and
   (exists n:int. (((0 <= n) and (n <= 15)) and (((shift_right(val__,
-  n) = of_int(1)) and
+  n) = rliteral6) and
   (forall j:int. (((0 <= j) and (j <= n)) -> uge(shift_right(val__, j),
-  of_int(1))))) and
+  rliteral6)))) and
   (forall j:int. (((n <= j) and (j <= 15)) -> ule(shift_right(val__, j),
-  of_int(1))))))))))))
+  rliteral6)))))))))))
 
-logic result__ : int
-
-logic i : int
-
-logic bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result : int
-
-logic temp___424 : int
-
-logic temp___423 : int
-
-logic o : t
-
-logic o1 : t
-
-logic result__1 : int
-
-logic result : int
-
-logic i1 : int
-
-logic result1 : int
-
-logic result__2 : int
-
-logic result2 : bool
-
-logic result__3 : int
-
-logic i2 : int
-
-logic result3 : int
-
-logic i3 : int
-
-logic result4 : int
-
-logic result__4 : int
-
-logic result5 : bool
-
-logic result__5 : int
-
-logic i4 : int
-
-logic result__6 : int
-
-logic i5 : int
-
-logic result__7 : int
-
-logic i6 : int
-
-logic result__8 : int
-
-logic i7 : int
-
-logic result__9 : int
-
-logic i8 : int
-
-logic result__10 : int
-
-logic i9 : int
-
-logic result__11 : int
-
-logic i10 : int
-
-logic result__12 : int
-
-logic i11 : int
-
-logic result__13 : int
-
-logic i12 : int
-
-logic result__14 : int
-
-logic i13 : int
-
-logic result6 : int
-
-logic bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result1 : int
-
-logic bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result2 : int
-
-logic bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result3 : int
-
-logic result__15 : int
-
-logic i14 : int
-
-logic bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result4 : int
-
-logic result__16 : int
-
-logic i15 : int
-
-logic bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result5 : int
-
-logic result7 : int
-
-axiom H : true
-
-axiom H1 : (not (value = of_int(0)))
-
-axiom H2 : ((0 <= 15) -> in_range1(result__))
-
-axiom H3 : (lemma6(void) = true)
-
-axiom H4 : (result = i)
-
-axiom H5 : (i1 = 0)
-
-axiom H6 : (((0 <= i1) and (i1 <= 15)) -> (((temp___424 = result__) and
-  ((temp___423 = i1) and (((result1 = result__) and (result__2 = i1)) and
-  (((((i1 = i8) and (result__2 = result__9)) and ((i9 = i1) and
-  (result__10 = result__2))) and ((((o = shift_right(value, i1)) and
-  ((((1 <= 16) and (16 <= 8)) -> (((i1 <  8) ->
-  (o = toBig2(lsr_bv1(toSmall2(value), of_int2(i1))))) and
-  ((not (i1 <  8)) -> (o = toBig2(of_int2(0)))))) and ((not ((1 <= 16) and
-  (16 <= 8))) -> ((((9 <= 16) and (16 <= 16)) -> (((i1 <  16) ->
-  (o = lsr_bv(value, of_int(i1)))) and ((not (i1 <  16)) ->
-  (o = of_int(0))))) and ((not ((9 <= 16) and (16 <= 16))) ->
-  ((((17 <= 16) and (16 <= 32)) -> (o = toSmall1(lsr_bv2(toBig1(value),
-  of_int3(i1))))) and ((not ((17 <= 16) and (16 <= 32))) ->
+ (* File "bits_manipulation.ads", line 10, characters 0-0 *)
+goal WP_parameter_def :
+  (forall result__:int. forall i:int.
+  forall bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result:int.
+  forall temp___484:int. forall temp___483:int. forall o:t. forall o1:t.
+  forall result__1:int. forall result:int. forall i1:int. forall result1:int.
+  forall result__2:int. forall result2:bool. forall result__3:int.
+  forall i2:int. forall result3:int. forall i3:int. forall result4:int.
+  forall result__4:int. forall result5:bool. forall result__5:int.
+  forall i4:int. forall result__6:int. forall i5:int. forall result__7:int.
+  forall i6:int. forall result__8:int. forall i7:int. forall result__9:int.
+  forall i8:int. forall result__10:int. forall i9:int. forall result__11:int.
+  forall i10:int. forall result__12:int. forall i11:int. forall result6:int.
+  forall bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result1:int.
+  forall bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result2:int.
+  forall bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result3:int.
+  forall result__13:int. forall i12:int.
+  forall bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result4:int.
+  forall result__14:int. forall i13:int.
+  forall bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result5:int.
+  (forall result7:int. (((not (value = rliteral4)) and (((((0 <= 15) ->
+  in_range1(result__)) and ((lemma6(void) = true) and (((({ int__content =
+  result } = { int__content = i }) and (i1 = 0)) and ((((0 <= i1) and
+  (i1 <= 15)) and ((((temp___484 = result__) and ((temp___483 = i1) and ((({
+  int__content = result1 } = { int__content = result__ }) and
+  (result__2 = i1)) and (((((i1 = i6) and (result__2 = result__7)) and
+  ((i7 = i1) and (result__8 = result__2))) and ((((o = shift_right(value,
+  i1)) and ((((1 <= 16) and (16 <= 8)) and (((i1 <  8) and
+  (o = toBig2(lsr_bv1(toSmall2(value), of_int2(i1))))) or
+  ((not (i1 <  8)) and (o = toBig2(rliteral3))))) or ((not ((1 <= 16) and
+  (16 <= 8))) and ((((9 <= 16) and (16 <= 16)) and (((i1 <  16) and
+  (o = lsr_bv(value, of_int(i1)))) or ((not (i1 <  16)) and
+  (o = rliteral4)))) or ((not ((9 <= 16) and (16 <= 16))) and
+  ((((17 <= 16) and (16 <= 32)) and (o = toSmall1(lsr_bv2(toBig1(value),
+  of_int3(i1))))) or ((not ((17 <= 16) and (16 <= 32))) and
   (o = toSmall(lsr_bv3(toBig(value), of_int4(i1))))))))))) and
-  (((o = of_int(1)) -> (result2 = true)) and ((not (o = of_int(1))) ->
+  (((o = rliteral6) and (result2 = true)) or ((not (o = rliteral6)) and
   (result2 = false)))) and (result2 = true))) or (((((o = shift_right(value,
-  i1)) and ((((1 <= 16) and (16 <= 8)) -> (((i1 <  8) ->
-  (o = toBig2(lsr_bv1(toSmall2(value), of_int2(i1))))) and
-  ((not (i1 <  8)) -> (o = toBig2(of_int2(0)))))) and ((not ((1 <= 16) and
-  (16 <= 8))) -> ((((9 <= 16) and (16 <= 16)) -> (((i1 <  16) ->
-  (o = lsr_bv(value, of_int(i1)))) and ((not (i1 <  16)) ->
-  (o = of_int(0))))) and ((not ((9 <= 16) and (16 <= 16))) ->
-  ((((17 <= 16) and (16 <= 32)) -> (o = toSmall1(lsr_bv2(toBig1(value),
-  of_int3(i1))))) and ((not ((17 <= 16) and (16 <= 32))) ->
+  i1)) and ((((1 <= 16) and (16 <= 8)) and (((i1 <  8) and
+  (o = toBig2(lsr_bv1(toSmall2(value), of_int2(i1))))) or
+  ((not (i1 <  8)) and (o = toBig2(rliteral3))))) or ((not ((1 <= 16) and
+  (16 <= 8))) and ((((9 <= 16) and (16 <= 16)) and (((i1 <  16) and
+  (o = lsr_bv(value, of_int(i1)))) or ((not (i1 <  16)) and
+  (o = rliteral4)))) or ((not ((9 <= 16) and (16 <= 16))) and
+  ((((17 <= 16) and (16 <= 32)) and (o = toSmall1(lsr_bv2(toBig1(value),
+  of_int3(i1))))) or ((not ((17 <= 16) and (16 <= 32))) and
   (o = toSmall(lsr_bv3(toBig(value), of_int4(i1))))))))))) and
-  (((o = of_int(1)) -> (result2 = true)) and ((not (o = of_int(1))) ->
-  (result2 = false)))) and (not (result2 = true))) and ((((i8 = i4) and
-  (result__9 = result__5)) and ((i9 = i5) and (result__10 = result__6))) and
+  (((o = rliteral6) and (result2 = true)) or ((not (o = rliteral6)) and
+  (result2 = false)))) and (not (result2 = true))) and ((((i4 = i6) and
+  (result__5 = result__7)) and ((i7 = i5) and (result__8 = result__6))) and
   ((forall j:int. (((0 <= j) and (j <= i2)) -> ugt(shift_right(value, j),
-   of_int(1)))) and (((((0 <= 15) -> in_range1(i2)) and ((0 <= 15) ->
+   rliteral6))) and
+  (((((0 <= 15) -> in_range1(i2)) and ((0 <= 15) ->
   in_range1(result__3))) and ((0 <= i2) and (i2 <= 15))) and
   (((((i2 = i4) and (result__3 = result__5)) and ((i5 = i2) and
   (result__6 = result__3))) and (i2 = 15)) or ((not (i2 = 15)) and
   ((((i3 = i4) and (result__4 = result__5)) and ((i5 = i3) and
   (result__6 = result__4))) and (((i2 = result3) and (i3 = (i2 + 1))) and
   (((result__3 = result4) and (result__4 = i3)) and
-  ((((o1 = shift_right(value, i3)) and ((((1 <= 16) and (16 <= 8)) ->
-  (((i3 <  8) -> (o1 = toBig2(lsr_bv1(toSmall2(value), of_int2(i3))))) and
-  ((not (i3 <  8)) -> (o1 = toBig2(of_int2(0)))))) and ((not ((1 <= 16) and
-  (16 <= 8))) -> ((((9 <= 16) and (16 <= 16)) -> (((i3 <  16) ->
-  (o1 = lsr_bv(value, of_int(i3)))) and ((not (i3 <  16)) ->
-  (o1 = of_int(0))))) and ((not ((9 <= 16) and (16 <= 16))) ->
-  ((((17 <= 16) and (16 <= 32)) -> (o1 = toSmall1(lsr_bv2(toBig1(value),
-  of_int3(i3))))) and ((not ((17 <= 16) and (16 <= 32))) ->
+  ((((o1 = shift_right(value, i3)) and ((((1 <= 16) and (16 <= 8)) and
+  (((i3 <  8) and (o1 = toBig2(lsr_bv1(toSmall2(value), of_int2(i3))))) or
+  ((not (i3 <  8)) and (o1 = toBig2(rliteral3))))) or ((not ((1 <= 16) and
+  (16 <= 8))) and ((((9 <= 16) and (16 <= 16)) and (((i3 <  16) and
+  (o1 = lsr_bv(value, of_int(i3)))) or ((not (i3 <  16)) and
+  (o1 = rliteral4)))) or ((not ((9 <= 16) and (16 <= 16))) and
+  ((((17 <= 16) and (16 <= 32)) and (o1 = toSmall1(lsr_bv2(toBig1(value),
+  of_int3(i3))))) or ((not ((17 <= 16) and (16 <= 32))) and
   (o1 = toSmall(lsr_bv3(toBig(value), of_int4(i3))))))))))) and
-  (((o1 = of_int(1)) -> (result5 = true)) and ((not (o1 = of_int(1))) ->
-  (result5 = false)))) and (result5 = true))))))))))))))) and
-  (((i10 = i8) and (result__11 = result__9)) and ((i11 = i9) and
-  (result__12 = result__10)))))
-
-axiom H7 : (((0 <= i1) and (i1 <= 15)) -> (i12 = i10))
-
-axiom H8 : (((0 <= i1) and (i1 <= 15)) -> (result__13 = result__11))
-
-axiom H9 : (((0 <= i1) and (i1 <= 15)) -> (i13 = i11))
-
-axiom H10 : (((0 <= i1) and (i1 <= 15)) -> (result__14 = result__12))
-
-axiom H11 : ((not ((0 <= i1) and (i1 <= 15))) -> (i1 = i12))
-
-axiom H12 : ((not ((0 <= i1) and (i1 <= 15))) -> (result__13 = result__))
-
-axiom H13 : ((not ((0 <= i1) and (i1 <= 15))) -> (i13 = i1))
-
-axiom H14 : ((not ((0 <= i1) and (i1 <= 15))) -> (result__14 = result__1))
-
-axiom H15 :
-  (bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result1 = bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result2)
-
-axiom H16 :
-  (bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result3 = bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result1)
-
-axiom H17 :
-  (result6 = bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result)
-
-axiom H18 :
-  (bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result1 = result__13)
-
-axiom H19 :
-  (bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result4 = bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result2)
-
-axiom H20 : (i14 = i12)
-
-axiom H21 : (result__15 = result__13)
-
-axiom H22 :
-  (bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result5 = bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result3)
-
-axiom H23 : (i15 = i13)
-
-axiom H24 : (result__16 = result__14)
-
-axiom H25 :
-  (result7 = bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result4)
-
- (* File "bits_manipulation.ads", line 10, characters 0-0 *)
-goal WP_parameter_def : (shift_right(value,
-  bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result4) = of_int(1))
+  (((o1 = rliteral6) and (result5 = true)) or ((not (o1 = rliteral6)) and
+  (result5 = false)))) and (result5 = true))))))))))))))) and ((({
+  int__content = i8 } = { int__content = i6 }) and ({ int__content =
+  result__9 } = { int__content = result__7 })) and ((i9 = i7) and
+  (result__10 = result__8)))) and (((i10 = i8) and ({ int__content =
+  result__11 } = { int__content = result__9 })) and ((i11 = i9) and
+  (result__12 = result__10))))) or ((not ((0 <= i1) and (i1 <= 15))) and
+  (((i1 = i10) and ({ int__content = result__11 } = { int__content = result__
+  })) and ((i11 = i1) and (result__12 = result__1)))))) and
+  (((bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result1 = bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result2) and
+  (bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result3 = bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result1)) and
+  ((result6 = bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result) and
+  (bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result1 = result__11)))))) and
+  (((bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result2 = bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result4) and
+  ((i12 = i10) and (result__13 = result__11))) and
+  ((bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result5 = bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result3) and
+  ((i13 = i11) and (result__14 = result__12))))) and
+  (result7 = bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result4))) ->
+  (shift_right(value,
+  bits_manipulation_unsigned__unsigned_16__functions__msb_index_slow_inline_always__result4) = rliteral6))))

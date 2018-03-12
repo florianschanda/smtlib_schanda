@@ -487,26 +487,9 @@ logic a : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-axiom H : in_range4(a)
-
-axiom H1 : (move_is_possible({ us_split_fields1 = {
-  rec__tetris_functional__piece__s = p; rec__tetris_functional__piece__d =
-  p1; rec__tetris_functional__piece__x = p2;
-  rec__tetris_functional__piece__y = p3 } }, a) = true)
-
-axiom H2 : (not (a = 0))
-
-axiom H3 : (not (a = 1))
-
-axiom H4 : (not (a = 2))
-
  (* File "tetris_functional.ads", line 65, characters 0-0 *)
-goal WP_parameter_def : in_range5(a)
+goal WP_parameter_def : (in_range4(a) -> ((move_is_possible({
+  us_split_fields1 = { rec__tetris_functional__piece__s = p;
+  rec__tetris_functional__piece__d = p1; rec__tetris_functional__piece__x =
+  p2; rec__tetris_functional__piece__y = p3 } }, a) = true) ->
+  ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) -> in_range5(a))))))

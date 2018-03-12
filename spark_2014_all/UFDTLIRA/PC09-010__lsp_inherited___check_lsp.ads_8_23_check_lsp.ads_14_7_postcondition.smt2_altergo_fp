@@ -354,40 +354,20 @@ logic x3 : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic check_lsp__p_overridden__get_f__2__result : int
-
-logic result : int
-
-logic check_lsp__p_overridden__get_f__2__result1 : int
-
-logic check_lsp__p_overridden__get_f__2__result2 : int
-
-logic check_lsp__p_overridden__get_f__2__result3 : int
-
-logic check_lsp__p_overridden__get_f__2__result4 : int
-
-logic check_lsp__p_overridden__get_f__2__result5 : int
-
-logic result1 : int
-
-axiom H :
-  (check_lsp__p_overridden__get_f__2__result1 = check_lsp__p_overridden__get_f__2__result2)
-
-axiom H1 :
-  (check_lsp__p_overridden__get_f__2__result3 = check_lsp__p_overridden__get_f__2__result1)
-
-axiom H2 : (result = check_lsp__p_overridden__get_f__2__result)
-
-axiom H3 : (check_lsp__p_overridden__get_f__2__result1 = to_rep(x))
-
-axiom H4 :
-  (check_lsp__p_overridden__get_f__2__result4 = check_lsp__p_overridden__get_f__2__result2)
-
-axiom H5 :
-  (check_lsp__p_overridden__get_f__2__result5 = check_lsp__p_overridden__get_f__2__result3)
-
-axiom H6 : (result1 = check_lsp__p_overridden__get_f__2__result4)
-
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def :
-  (check_lsp__p_overridden__get_f__2__result4 = to_rep(x1))
+  (forall check_lsp__p_overridden__get_f__2__result:int. forall result:int.
+  forall check_lsp__p_overridden__get_f__2__result1:int.
+  forall check_lsp__p_overridden__get_f__2__result2:int.
+  forall check_lsp__p_overridden__get_f__2__result3:int.
+  forall check_lsp__p_overridden__get_f__2__result4:int.
+  forall check_lsp__p_overridden__get_f__2__result5:int.
+  (forall result1:int.
+  ((((((check_lsp__p_overridden__get_f__2__result1 = check_lsp__p_overridden__get_f__2__result2) and
+  (check_lsp__p_overridden__get_f__2__result3 = check_lsp__p_overridden__get_f__2__result1)) and
+  ((result = check_lsp__p_overridden__get_f__2__result) and
+  (check_lsp__p_overridden__get_f__2__result1 = to_rep(x)))) and
+  ((check_lsp__p_overridden__get_f__2__result4 = check_lsp__p_overridden__get_f__2__result2) and
+  (check_lsp__p_overridden__get_f__2__result5 = check_lsp__p_overridden__get_f__2__result3))) and
+  (result1 = check_lsp__p_overridden__get_f__2__result4)) ->
+  (check_lsp__p_overridden__get_f__2__result4 = to_rep(x1)))))

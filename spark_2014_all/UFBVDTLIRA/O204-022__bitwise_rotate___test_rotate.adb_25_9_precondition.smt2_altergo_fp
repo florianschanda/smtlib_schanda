@@ -659,18 +659,28 @@ logic r : t, t -> t
 
 logic r__function_guard : t, t, t -> prop
 
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 18446744073709551615)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 0)
+
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 2147483647)
+
 axiom r__post_axiom :
-  (forall a:t. forall b:t [r(a, b)]. ((ule(a,
-  of_int(18446744073709551615)) and ((not (a = of_int(0))) and ule(b,
-  of_int(2147483647)))) -> (not (r(a, b) = of_int(0)))))
+  (forall a:t. forall b:t [r(a, b)]. ((ule(a, rliteral) and
+  ((not (a = rliteral1)) and ule(b, rliteral2))) -> (not (r(a,
+  b) = rliteral1))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : t
+logic rliteral3 : t
 
-logic o : t
-
-axiom H : true
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 1)
 
  (* File "test_rotate.adb", line 8, characters 0-0 *)
-goal WP_parameter_def : ule(of_int(1), of_int(18446744073709551615))
+goal WP_parameter_def : ule(rliteral3, rliteral)

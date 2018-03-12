@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -814,54 +814,6 @@ axiom w_get__post_axiom :
   (forall witness1:int [w_get(container, witness1)].
   ((in_range1(witness1) and (has_witness(container, witness1) = true)) ->
   in_range4(w_get(container, witness1)))))
-
-logic r__split_fields : us_main_type
-
-logic queue__tail__result : count_type
-
-logic queue__tail__result1 : us_main_type
-
-logic queue__tail__r__assume : count_type
-
-logic queue__tail__r__assume1 : us_main_type
-
-logic result : us_main_type
-
-logic r__split_fields1 : us_main_type
-
-logic r__split_fields2 : us_main_type
-
-logic result1 : count_type
-
-logic result2 : us_main_type
-
-logic queue__tail__result2 : count_type
-
-logic queue__tail__result3 : us_main_type
-
-logic queue__tail__result4 : count_type
-
-logic queue__tail__result5 : us_main_type
-
-logic queue__tail__result6 : count_type
-
-logic queue__tail__result7 : us_main_type
-
-logic r__split_fields3 : us_main_type
-
-logic queue__tail__result8 : count_type
-
-logic queue__tail__result9 : us_main_type
-
-logic r__split_fields4 : us_main_type
-
-logic queue__tail__result10 : count_type
-
-logic queue__tail__result11 : us_main_type
-
-axiom H : (0 <  length({ us_split_discrs1 = {
-  rec__queue__mylists__list__capacity = q }; us_split_fields1 = {
-  rec__queue__mylists__list = q1 } }))
 
  (* File "a-cfdlli.ads", line 43, characters 0-0 *)
 goal WP_parameter_def : true

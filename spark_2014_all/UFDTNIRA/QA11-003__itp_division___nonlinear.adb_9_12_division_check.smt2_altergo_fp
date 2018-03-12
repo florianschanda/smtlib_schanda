@@ -257,47 +257,11 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic r1 : int
-
-logic r2 : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic r11 : int
-
-logic result1 : int
-
-logic r21 : int
-
-logic r12 : int
-
-logic r22 : int
-
-logic r13 : int
-
-logic r23 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : in_range1(y)
-
-axiom H2 : in_range1(z)
-
-axiom H3 : ((0 <= 2147483647) -> in_range(r1))
-
-axiom H4 : ((0 <= 2147483647) -> in_range(r2))
-
-axiom H5 : (z <  y)
-
-axiom H6 : ((o = comp_div(x,y)) and in_range(comp_div(x,y)))
-
-axiom H7 : (result = r1)
-
-axiom H8 : (r11 = o)
-
  (* File "nonlinear.adb", line 2, characters 0-0 *)
-goal WP_parameter_def : (not (z = 0))
+goal WP_parameter_def :
+  (forall r1:int. forall r2:int. forall o:int. forall result:int.
+  forall r11:int. (in_range1(x) -> (in_range1(y) -> (in_range1(z) ->
+  (((0 <= 2147483647) -> in_range(r1)) -> (((0 <= 2147483647) ->
+  in_range(r2)) -> ((z <  y) -> ((((o = comp_div(x,y)) and
+  in_range(comp_div(x,y))) and (({ int__content = result } = { int__content =
+  r1 }) and (r11 = o))) -> (not (z = 0))))))))))

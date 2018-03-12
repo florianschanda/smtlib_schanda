@@ -130,19 +130,9 @@ axiom my_abs__post_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic max : int
-
-logic o : int
-
-axiom H : in_range(position_x)
-
-axiom H1 : in_range(position_y)
-
-axiom H2 : in_range(target_x)
-
-axiom H3 : in_range(target_y)
-
-axiom H4 : (((- 2147483648) <= 2147483647) -> in_range(max))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((position_x - target_x))
+goal WP_parameter_def :
+  (forall max:int. (in_range(position_x) -> (in_range(position_y) ->
+  (in_range(target_x) -> (in_range(target_y) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(max)) ->
+  in_range((position_x - target_x))))))))

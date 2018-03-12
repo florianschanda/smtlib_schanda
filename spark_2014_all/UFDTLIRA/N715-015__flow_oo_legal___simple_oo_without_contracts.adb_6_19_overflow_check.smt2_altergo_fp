@@ -223,37 +223,10 @@ logic par2 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic g1 : int
-
-logic g2 : int
-
-logic g3 : int
-
-logic g4 : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic g31 : int
-
-axiom H : in_range(g1)
-
-axiom H1 : in_range(g2)
-
-axiom H2 : in_range(g3)
-
-axiom H3 : (((- 2147483648) <= 2147483647) -> in_range(g4))
-
-axiom H4 : (g1 = g2)
-
-axiom H5 : ((o = (g3 + g2)) and in_range((g3 + g2)))
-
-axiom H6 : (result = g3)
-
-axiom H7 : (g31 = o)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((to_rep(par) + g31))
+goal WP_parameter_def :
+  (forall g1:int. forall g2:int. forall g3:int. forall g4:int. forall o:int.
+  forall result:int. forall g31:int. (in_range(g1) -> (in_range(g2) ->
+  (in_range(g3) -> ((((- 2147483648) <= 2147483647) -> in_range(g4)) ->
+  ((g1 = g2) -> ((((o = (g3 + g2)) and in_range((g3 + g2))) and
+  ((result = g3) and (g31 = o))) -> in_range((to_rep(par) + g31)))))))))

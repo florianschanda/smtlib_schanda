@@ -37,8 +37,6 @@
 (assert (forall ((x Int) (y Int) (z Int)) (! (=> (and (< 0 x) (and (<= 0 y) (<= 0 z))) (= (div1 (+ (* x y) z) x) (+ y (div1 z x)))) :pattern ((div1 (+ (* x y) z) x)))))
 (assert (forall ((x Int) (y Int) (z Int)) (! (=> (and (< 0 x) (and (<= 0 y) (<= 0 z))) (= (mod1 (+ (* x y) z) x) (mod1 z x))) :pattern ((mod1 (+ (* x y) z) x)))))
 (define-fun mod2 ((x Int) (y Int)) Int (ite (< 0 y) (mod x y) (+ (mod x y) y)))
-(define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
-(define-fun of_int ((i Int)) Bool (ite (= i 0) false true))
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)

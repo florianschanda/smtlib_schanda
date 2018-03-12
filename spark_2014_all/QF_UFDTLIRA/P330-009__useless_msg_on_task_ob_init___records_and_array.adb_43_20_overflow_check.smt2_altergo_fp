@@ -107,17 +107,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic z : int
-
-logic o : int
-
-logic z1 : int
-
-axiom H : in_range(z)
-
-axiom H1 : in_range(z1)
-
-axiom H2 : (z1 <  2147483646)
-
  (* File "records_and_array.adb", line 22, characters 0-0 *)
-goal WP_parameter_def : in_range((z1 + 2))
+goal WP_parameter_def :
+  (forall z:int. forall z1:int. (in_range(z) -> (in_range(z1) ->
+  ((z1 <  2147483646) -> in_range((z1 + 2))))))

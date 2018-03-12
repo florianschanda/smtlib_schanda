@@ -902,12 +902,6 @@ logic get__function_guard : t, us_rep2, int -> prop
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq7 : bool, bool -> bool
-
-axiom bool_eq_def5 :
-  (forall x:bool. forall y:bool [bool_eq7(x, y)]. (((x = y) -> (bool_eq7(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq7(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -919,6 +913,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq7 : bool, bool -> bool
+
+axiom bool_eq_def5 :
+  (forall x:bool. forall y:bool [bool_eq7(x, y)]. (((x = y) -> (bool_eq7(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq7(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1357,33 +1357,18 @@ axiom w_get__post_axiom :
   (has_witness(container, witness1) = true)) -> in_range4(w_get(container,
   witness1)))))
 
-logic x : t
+logic rliteral : t
 
-logic l__split_fields : us_main_type
-
-logic us : int
-
-logic result : t
-
-logic x1 : t
-
-logic foo__lists__append__container__fields : us_main_type
-
-axiom H : true
-
-axiom H1 : ((us = 5) and in_range(5))
-
-axiom H2 : ((to_rep(l__split_discrs) = 5) and (is_empty({ us_split_discrs1 =
-  { rec__foo__lists__list__capacity = l__split_discrs }; us_split_fields1 = {
-  rec__foo__lists__list = l__split_fields } }) = true))
-
-axiom H3 : (5 = to_rep(l__split_discrs))
-
-axiom H4 : (result = x)
-
-axiom H5 : (x1 = of_int(0))
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
 
  (* File "a-cfdlli.ads", line 1514, characters 0-0 *)
-goal WP_parameter_def : (length({ us_split_discrs1 = {
+goal WP_parameter_def :
+  (forall x:t. forall l__split_fields:us_main_type. forall us:int.
+  forall result:t. forall x1:t. (((us = 5) and in_range(5)) ->
+  (((to_rep(l__split_discrs) = 5) and (is_empty({ us_split_discrs1 = {
   rec__foo__lists__list__capacity = l__split_discrs }; us_split_fields1 = {
-  rec__foo__lists__list = l__split_fields } }) <  to_rep(l__split_discrs))
+  rec__foo__lists__list = l__split_fields } }) = true)) ->
+  ((5 = to_rep(l__split_discrs)) -> (((result = x) and (x1 = rliteral)) ->
+  (length({ us_split_discrs1 = { rec__foo__lists__list__capacity =
+  l__split_discrs }; us_split_fields1 = { rec__foo__lists__list =
+  l__split_fields } }) <  to_rep(l__split_discrs)))))))

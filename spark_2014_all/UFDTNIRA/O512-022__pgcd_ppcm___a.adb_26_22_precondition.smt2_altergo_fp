@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -292,80 +292,7 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic r : int
-
-logic a__ppcm__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : bool
-
-logic o13 : int
-
-logic o14 : int
-
-logic o15 : int
-
-logic o16 : int
-
-logic o17 : bool
-
-logic o18 : bool
-
-logic result : int
-
-logic r1 : int
-
-logic result1 : int
-
-logic r2 : int
-
-logic result2 : int
-
-logic a__ppcm__result1 : int
-
-logic a__ppcm__result2 : int
-
-logic a__ppcm__result3 : int
-
-logic r3 : int
-
-logic a__ppcm__result4 : int
-
-logic r4 : int
-
-logic a__ppcm__result5 : int
-
-logic result3 : bool
-
-axiom H : in_range1(a)
-
-axiom H1 : in_range1(b)
-
-axiom H2 : ((not (a = (- 2147483648))) and ((not (b = (- 2147483648))) and
-  (abs_int((a * b)) <= 2147483647)))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (not (a = (- 2147483648)))
+goal WP_parameter_def : (in_range1(a) -> (in_range1(b) ->
+  (((not (a = (- 2147483648))) and ((not (b = (- 2147483648))) and
+  (abs_int((a * b)) <= 2147483647))) -> (not (a = (- 2147483648))))))

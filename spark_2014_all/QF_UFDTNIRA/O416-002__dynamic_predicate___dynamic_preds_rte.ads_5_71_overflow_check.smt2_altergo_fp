@@ -135,9 +135,5 @@ logic i5s : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : int
-
-axiom H : in_range1(i5s)
-
  (* File "dynamic_preds_rte.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : in_range((i5s * i5s))
+goal WP_parameter_def : (in_range1(i5s) -> in_range((i5s * i5s)))

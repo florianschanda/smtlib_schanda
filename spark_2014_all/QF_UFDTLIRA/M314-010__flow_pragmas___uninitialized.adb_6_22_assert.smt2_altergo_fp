@@ -109,21 +109,9 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic a : int
-
-logic b : int
-
-logic result : int
-
-logic a1 : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range(a))
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(b))
-
-axiom H2 : (result = a)
-
-axiom H3 : (a1 = 100)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (b <  a1)
+goal WP_parameter_def :
+  (forall a:int. forall b:int. forall result:int. forall a1:int.
+  ((((- 2147483648) <= 2147483647) -> in_range(a)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(b)) -> (((result = a) and
+  (a1 = 100)) -> (b <  a1)))))

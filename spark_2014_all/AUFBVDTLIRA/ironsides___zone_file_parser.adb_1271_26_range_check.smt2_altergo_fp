@@ -596,12 +596,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -613,6 +607,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -733,24 +733,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -761,17 +743,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -781,37 +763,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 type unsigned16
 
@@ -923,11 +877,6 @@ logic blankdomainname : (int,character) farray
 logic attr__ATTRIBUTE_ADDRESS : int
 
 logic rr_type__blankdomainname__aggregate_def : int -> (int,character) farray
-
-axiom def_axiom :
-  (forall temp___136:int.
-  (forall temp___137:int.
-  ((rr_type__blankdomainname__aggregate_def(temp___136)[temp___137]) = of_rep(temp___136))))
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
@@ -1141,734 +1090,135 @@ logic attr__ATTRIBUTE_ADDRESS27 : int
 axiom blankdomainname__def_axiom :
   (blankdomainname = rr_type__blankdomainname__aggregate_def(32))
 
-logic newpref : t
-
-logic newweight : t
-
-logic newport : t
-
-logic newdomainname : (int,character) farray
-
-logic begidx : int
-
-logic endidx : int
-
-logic foundtype : int
-
-logic digitval : t
-
-logic tmpval : t
-
-logic lengthoftoken : int
-
-logic i : int
-
-logic i1 : int
-
-logic i2 : int
-
-logic i3 : int
-
-logic i4 : int
-
-logic temp___1698 : int
-
-logic temp___1697 : int
-
-logic temp___1696 : int
-
-logic o : int
-
-logic o1 : int
-
-logic temp___1701 : int
-
-logic temp___1700 : t
-
-logic temp___1699 : t
-
-logic o2 : int
-
-logic temp___1706 : int
-
-logic temp___1705 : t
-
-logic temp___1704 : t
-
-logic o3 : int
-
-logic temp___1711 : int
-
-logic temp___1710 : t
-
-logic temp___1709 : t
-
-logic o4 : int
-
-logic o5 : int
-
-logic temp___1718 : int
-
-logic temp___1716 : (int,character) farray
-
-logic temp___1715 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic temp___1714 : int
-
-logic o8 : character
-
-logic o9 : int
-
-logic o10 : (int,character) farray
-
-logic o11 : character
-
-logic o12 : (int,character) farray
-
-logic digitval1 : t
-
-logic result : int
-
-logic begidx1 : int
-
-logic result1 : t
-
-logic newpref1 : t
-
-logic result2 : t
-
-logic newweight1 : t
-
-logic result3 : t
-
-logic newport1 : t
-
-logic result4 : (int,character) farray
-
-logic newdomainname1 : (int,character) farray
-
-logic begidx2 : int
-
-logic endidx1 : int
-
-logic foundtype1 : int
-
-logic begidx3 : int
-
-logic endidx2 : int
-
-logic foundtype2 : int
-
-logic result5 : int
-
-logic begidx4 : int
-
-logic begidx5 : int
-
-logic endidx3 : int
-
-logic foundtype3 : int
-
-logic begidx6 : int
-
-logic endidx4 : int
-
-logic foundtype4 : int
-
-logic begidx7 : int
-
-logic endidx5 : int
-
-logic foundtype5 : int
-
-logic begidx8 : int
-
-logic endidx6 : int
-
-logic foundtype6 : int
-
-logic begidx9 : int
-
-logic endidx7 : int
-
-logic foundtype7 : int
-
-logic begidx10 : int
-
-logic endidx8 : int
-
-logic foundtype8 : int
-
-logic begidx11 : int
-
-logic endidx9 : int
-
-logic foundtype9 : int
-
-logic result6 : int
-
-logic begidx12 : int
-
-logic begidx13 : int
-
-logic endidx10 : int
-
-logic foundtype10 : int
-
-logic result7 : t
-
-logic tmpval1 : t
-
-logic result8 : int
-
-logic i5 : int
-
-logic digitval2 : t
-
-logic tmpval2 : t
-
-logic i6 : int
-
-logic result9 : t
-
-logic digitval3 : t
-
-logic result10 : t
-
-logic tmpval3 : t
-
-logic result11 : int
-
-logic i7 : int
-
-logic digitval4 : t
-
-logic tmpval4 : t
-
-logic i8 : int
-
-logic digitval5 : t
-
-logic tmpval5 : t
-
-logic i9 : int
-
-logic digitval6 : t
-
-logic tmpval6 : t
-
-logic i10 : int
-
-logic digitval7 : t
-
-logic tmpval7 : t
-
-logic i11 : int
-
-logic digitval8 : t
-
-logic tmpval8 : t
-
-logic i12 : int
-
-logic digitval9 : t
-
-logic tmpval9 : t
-
-logic i13 : int
-
-logic digitval10 : t
-
-logic tmpval10 : t
-
-logic i14 : int
-
-logic digitval11 : t
-
-logic tmpval11 : t
-
-logic i15 : int
-
-logic result12 : t
-
-logic newpref2 : t
-
-logic result13 : int
-
-logic begidx14 : int
-
-logic begidx15 : int
-
-logic endidx11 : int
-
-logic foundtype11 : int
-
-logic result14 : t
-
-logic tmpval12 : t
-
-logic result15 : int
-
-logic i16 : int
-
-logic digitval12 : t
-
-logic tmpval13 : t
-
-logic i17 : int
-
-logic result16 : t
-
-logic digitval13 : t
-
-logic result17 : t
-
-logic tmpval14 : t
-
-logic result18 : int
-
-logic i18 : int
-
-logic digitval14 : t
-
-logic tmpval15 : t
-
-logic i19 : int
-
-logic digitval15 : t
-
-logic tmpval16 : t
-
-logic i20 : int
-
-logic digitval16 : t
-
-logic tmpval17 : t
-
-logic i21 : int
-
-logic digitval17 : t
-
-logic tmpval18 : t
-
-logic i22 : int
-
-logic digitval18 : t
-
-logic tmpval19 : t
-
-logic i23 : int
-
-logic digitval19 : t
-
-logic tmpval20 : t
-
-logic i24 : int
-
-logic digitval20 : t
-
-logic tmpval21 : t
-
-logic i25 : int
-
-logic digitval21 : t
-
-logic tmpval22 : t
-
-logic i26 : int
-
-logic result19 : t
-
-logic newweight2 : t
-
-logic result20 : int
-
-logic begidx16 : int
-
-logic begidx17 : int
-
-logic endidx12 : int
-
-logic foundtype12 : int
-
-logic result21 : t
-
-logic tmpval23 : t
-
-logic result22 : int
-
-logic i27 : int
-
-logic digitval22 : t
-
-logic tmpval24 : t
-
-logic i28 : int
-
-logic result23 : t
-
-logic digitval23 : t
-
-logic result24 : t
-
-logic tmpval25 : t
-
-logic result25 : int
-
-logic i29 : int
-
-logic digitval24 : t
-
-logic tmpval26 : t
-
-logic i30 : int
-
-logic digitval25 : t
-
-logic tmpval27 : t
-
-logic i31 : int
-
-logic digitval26 : t
-
-logic tmpval28 : t
-
-logic i32 : int
-
-logic digitval27 : t
-
-logic tmpval29 : t
-
-logic i33 : int
-
-logic digitval28 : t
-
-logic tmpval30 : t
-
-logic i34 : int
-
-logic digitval29 : t
-
-logic tmpval31 : t
-
-logic i35 : int
-
-logic digitval30 : t
-
-logic tmpval32 : t
-
-logic i36 : int
-
-logic digitval31 : t
-
-logic tmpval33 : t
-
-logic i37 : int
-
-logic result26 : t
-
-logic newport2 : t
-
-logic result27 : int
-
-logic begidx18 : int
-
-logic begidx19 : int
-
-logic endidx13 : int
-
-logic foundtype13 : int
-
-logic result28 : int
-
-logic lengthoftoken1 : int
-
-logic result29 : int
-
-logic i38 : int
-
-logic newdomainname2 : (int,character) farray
-
-logic i39 : int
-
-logic result30 : (int,character) farray
-
-logic newdomainname3 : (int,character) farray
-
-logic result31 : int
-
-logic i40 : int
-
-logic newdomainname4 : (int,character) farray
-
-logic i41 : int
-
-logic newdomainname5 : (int,character) farray
-
-logic i42 : int
-
-logic newdomainname6 : (int,character) farray
-
-logic i43 : int
-
-logic newdomainname7 : (int,character) farray
-
-logic i44 : int
-
-logic newdomainname8 : (int,character) farray
-
-logic i45 : int
-
-logic newdomainname9 : (int,character) farray
-
-logic i46 : int
-
-logic newdomainname10 : (int,character) farray
-
-logic i47 : int
-
-logic newdomainname11 : (int,character) farray
-
-logic i48 : int
-
-logic result32 : int
-
-logic i49 : int
-
-logic newdomainname12 : (int,character) farray
-
-logic i50 : int
-
-logic result33 : (int,character) farray
-
-logic newdomainname13 : (int,character) farray
-
-logic result34 : int
-
-logic i51 : int
-
-logic newdomainname14 : (int,character) farray
-
-logic i52 : int
-
-logic newdomainname15 : (int,character) farray
-
-logic i53 : int
-
-axiom H : (rr_type__blankdomainname__aggregate_def(32) = blankdomainname)
-
-axiom H1 : true
-
-axiom H2 : true
-
-axiom H3 : true
-
-axiom H4 : in_range4(zlength)
-
-axiom H5 : (result = begidx)
-
-axiom H6 : (begidx1 = 1)
-
-axiom H7 : in_range4(begidx1)
-
-axiom H8 : ((1 <= 256) -> in_range4(endidx))
-
-axiom H9 : ((0 <= 10) -> in_range3(foundtype))
-
-axiom H10 : true
-
-axiom H11 : true
-
-axiom H12 : ((1 <= 256) -> in_range4(lengthoftoken))
-
-axiom H13 : (result1 = newpref)
-
-axiom H14 : (newpref1 = of_int(0))
-
-axiom H15 : (result2 = newweight)
-
-axiom H16 : (newweight1 = of_int(0))
-
-axiom H17 : (result3 = newport)
-
-axiom H18 : (newport1 = of_int(0))
-
-axiom H19 : (result4 = newdomainname)
-
-axiom H20 : (newdomainname1 = blankdomainname)
-
-axiom H21 : (((((begidx2 <= endidx1) and (begidx2 <= zlength)) and
+axiom def_axiom :
+  (forall temp___158:int. (in_range2(temp___158) ->
+  (forall temp___159:int.
+  (to_rep((rr_type__blankdomainname__aggregate_def(temp___158)[temp___159])) = temp___158))))
+
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 32767)
+
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 48)
+
+logic rliteral3 : t
+
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 10)
+
+ (* File "zone_file_parser.adb", line 1074, characters 0-0 *)
+goal WP_parameter_def :
+  (forall newpref:t. forall newweight:t. forall newport:t.
+  forall newdomainname:(int,character) farray. forall begidx:int.
+  forall endidx:int. forall foundtype:int. forall digitval:t.
+  forall tmpval:t. forall lengthoftoken:int. forall i:int.
+  forall temp___1757:int. forall temp___1756:int. forall temp___1755:int.
+  forall o:int. forall o1:int. forall temp___1760:int. forall temp___1759:t.
+  forall temp___1758:t. forall o2:int. forall digitval1:t. forall result:int.
+  forall begidx1:int. forall result1:t. forall newpref1:t. forall result2:t.
+  forall newweight1:t. forall result3:t. forall newport1:t.
+  forall result4:(int,character) farray.
+  forall newdomainname1:(int,character) farray. forall begidx2:int.
+  forall endidx1:int. forall foundtype1:int. forall begidx3:int.
+  forall endidx2:int. forall foundtype2:int. forall result5:int.
+  forall begidx4:int. forall begidx5:int. forall endidx3:int.
+  forall foundtype3:int. forall begidx6:int. forall endidx4:int.
+  forall foundtype4:int. forall begidx7:int. forall endidx5:int.
+  forall foundtype5:int. forall begidx8:int. forall endidx6:int.
+  forall foundtype6:int. forall begidx9:int. forall endidx7:int.
+  forall foundtype7:int. forall result6:int. forall begidx10:int.
+  forall begidx11:int. forall endidx8:int. forall foundtype8:int.
+  forall result7:t. forall tmpval1:t. forall result8:int. forall i1:int.
+  forall digitval2:t. forall tmpval2:t. forall i2:int. forall result9:t.
+  forall digitval3:t. forall result10:t. forall tmpval3:t.
+  forall digitval4:t__ref. forall tmpval4:t__ref. forall i3:int__ref.
+  forall digitval5:t. forall tmpval5:t. forall i4:int.
+  forall digitval6:t__ref. forall tmpval6:t__ref. forall i5:int__ref.
+  forall digitval7:t. forall tmpval7:t. forall i6:int.
+  forall result11:t__ref. forall newpref2:t. forall result12:int__ref.
+  forall begidx12:int. forall begidx13:int. forall endidx9:int.
+  forall foundtype9:int. forall result13:t__ref. forall tmpval8:t.
+  ((rr_type__blankdomainname__aggregate_def(32) = blankdomainname) ->
+  (in_range4(zlength) -> (((result = begidx) and (begidx1 = 1)) ->
+  (in_range4(begidx1) -> (((1 <= 256) -> in_range4(endidx)) -> (((0 <= 10) ->
+  in_range3(foundtype)) -> (((1 <= 256) -> in_range4(lengthoftoken)) ->
+  (((result1 = newpref) and (newpref1 = rliteral)) ->
+  (((result2 = newweight) and (newweight1 = rliteral)) ->
+  (((result3 = newport) and (newport1 = rliteral)) ->
+  (((result4 = newdomainname) and (newdomainname1 = blankdomainname)) ->
+  ((((((begidx2 <= endidx1) and (begidx2 <= zlength)) and
   (endidx1 <= zlength)) and ((foundtype1 = 1) ->
-  (forall i54:int. (((begidx2 <= i54) and (i54 <= endidx1)) ->
-  ((48 <= to_rep((zonefileline[i54]))) and
-  (to_rep((zonefileline[i54])) <= 57)))))) and ((in_range4(begidx2) and
-  in_range4(endidx1)) and in_range3(foundtype1)))
-
-axiom H22 : (((not (foundtype1 = 3)) and (endidx1 <  zlength)) ->
-  (((temp___1698 = endidx1) and ((temp___1697 = begidx2) and
-  ((temp___1696 = foundtype1) and ((endidx2 <  zlength) and ((((((0 <= 10) ->
+  (forall i7:int. (((begidx2 <= i7) and (i7 <= endidx1)) ->
+  ((48 <= to_rep((zonefileline[i7]))) and
+  (to_rep((zonefileline[i7])) <= 57)))))) and ((in_range4(begidx2) and
+  in_range4(endidx1)) and in_range3(foundtype1))) ->
+  (((((not (foundtype1 = 3)) and (endidx1 <  zlength)) and
+  ((((temp___1757 = endidx1) and ((temp___1756 = begidx2) and
+  ((temp___1755 = foundtype1) and ((endidx2 <  zlength) and ((((((0 <= 10) ->
   in_range3(foundtype2)) and ((1 <= 256) -> in_range4(begidx3))) and
   ((1 <= 256) -> in_range4(endidx2))) and ((not (foundtype2 = 3)) and
   (endidx2 <  zlength))) and ((((o = (endidx2 + 1)) and
   in_range4((endidx2 + 1))) and ((begidx3 = result5) and (begidx4 = o))) and
   ((((((begidx5 <= endidx3) and (begidx5 <= zlength)) and
   (endidx3 <= zlength)) and ((foundtype3 = 1) ->
-  (forall i54:int. (((begidx5 <= i54) and (i54 <= endidx3)) ->
-  ((48 <= to_rep((zonefileline[i54]))) and
-  (to_rep((zonefileline[i54])) <= 57)))))) and ((in_range4(begidx5) and
+  (forall i7:int. (((begidx5 <= i7) and (i7 <= endidx3)) ->
+  ((48 <= to_rep((zonefileline[i7]))) and
+  (to_rep((zonefileline[i7])) <= 57)))))) and ((in_range4(begidx5) and
   in_range4(endidx3)) and in_range3(foundtype3))) and
   (not ((not (foundtype3 = 3)) and (endidx3 <  zlength)))))))))) and
-  (((foundtype6 = foundtype3) and ((endidx6 = endidx3) and
-  (begidx8 = begidx5))) and ((foundtype7 = foundtype3) and
-  ((endidx7 = endidx3) and (begidx9 = begidx5))))))
-
-axiom H23 : (((not (foundtype1 = 3)) and (endidx1 <  zlength)) ->
-  (foundtype8 = foundtype6))
-
-axiom H24 : (((not (foundtype1 = 3)) and (endidx1 <  zlength)) ->
-  (endidx8 = endidx6))
-
-axiom H25 : (((not (foundtype1 = 3)) and (endidx1 <  zlength)) ->
-  (begidx10 = begidx8))
-
-axiom H26 : (((not (foundtype1 = 3)) and (endidx1 <  zlength)) ->
-  (foundtype9 = foundtype7))
-
-axiom H27 : (((not (foundtype1 = 3)) and (endidx1 <  zlength)) ->
-  (endidx9 = endidx7))
-
-axiom H28 : (((not (foundtype1 = 3)) and (endidx1 <  zlength)) ->
-  (begidx11 = begidx9))
-
-axiom H29 : ((not ((not (foundtype1 = 3)) and (endidx1 <  zlength))) ->
-  (foundtype8 = foundtype1))
-
-axiom H30 : ((not ((not (foundtype1 = 3)) and (endidx1 <  zlength))) ->
-  (endidx8 = endidx1))
-
-axiom H31 : ((not ((not (foundtype1 = 3)) and (endidx1 <  zlength))) ->
-  (begidx10 = begidx2))
-
-axiom H32 : ((not ((not (foundtype1 = 3)) and (endidx1 <  zlength))) ->
-  (foundtype9 = foundtype1))
-
-axiom H33 : ((not ((not (foundtype1 = 3)) and (endidx1 <  zlength))) ->
-  (endidx9 = endidx1))
-
-axiom H34 : ((not ((not (foundtype1 = 3)) and (endidx1 <  zlength))) ->
-  (begidx11 = begidx2))
-
-axiom H35 : (not (endidx8 = zlength))
-
-axiom H36 : ((o1 = (endidx8 + 1)) and in_range4((endidx8 + 1)))
-
-axiom H37 : (result6 = begidx10)
-
-axiom H38 : (begidx12 = o1)
-
-axiom H39 : (((((begidx13 <= endidx10) and (begidx13 <= zlength)) and
-  (endidx10 <= zlength)) and ((foundtype10 = 1) ->
-  (forall i54:int. (((begidx13 <= i54) and (i54 <= endidx10)) ->
-  ((48 <= to_rep((zonefileline[i54]))) and
-  (to_rep((zonefileline[i54])) <= 57)))))) and ((in_range4(begidx13) and
-  in_range4(endidx10)) and in_range3(foundtype10)))
-
-axiom H40 : (foundtype10 = 1)
-
-axiom H41 : (result7 = tmpval)
-
-axiom H42 : (tmpval1 = of_int(0))
-
-axiom H43 : (begidx13 = r83b)
-
-axiom H44 : in_range4(r83b)
-
-axiom H45 : (endidx10 = r84b)
-
-axiom H46 : in_range4(r84b)
-
-axiom H47 : (result8 = i)
-
-axiom H48 : (i5 = r83b)
-
-axiom H49 : (((r83b <= i5) and (i5 <= r84b)) -> (((temp___1701 = i5) and
-  ((temp___1700 = tmpval1) and ((temp___1699 = digitval) and
-  (((1 <= begidx13) and ule(tmpval2, of_int(32767))) and ((((r83b <= r84b) ->
-  dynamic_property(r83b, r84b, i6)) and ((r83b <= i6) and (i6 <= r84b))) and
-  (((result9 = digitval2) and
-  (digitval3 = sub(of_int(to_rep((zonefileline[i6]))), of_int(48)))) and
-  (((result10 = tmpval2) and (tmpval3 = add(mul(of_int(10), tmpval2),
-  digitval3))) and (ugt(tmpval3, of_int(32767)) or ((not ugt(tmpval3,
-  of_int(32767))) and (i6 = r84b)))))))))) and (((i12 = i6) and
-  ((tmpval8 = tmpval3) and (digitval8 = digitval3))) and ((i13 = i6) and
-  ((tmpval9 = tmpval3) and (digitval9 = digitval3))))))
-
-axiom H50 : (((r83b <= i5) and (i5 <= r84b)) -> (i14 = i12))
-
-axiom H51 : (((r83b <= i5) and (i5 <= r84b)) -> (tmpval10 = tmpval8))
-
-axiom H52 : (((r83b <= i5) and (i5 <= r84b)) -> (digitval10 = digitval8))
-
-axiom H53 : (((r83b <= i5) and (i5 <= r84b)) -> (i15 = i13))
-
-axiom H54 : (((r83b <= i5) and (i5 <= r84b)) -> (tmpval11 = tmpval9))
-
-axiom H55 : (((r83b <= i5) and (i5 <= r84b)) -> (digitval11 = digitval9))
-
-axiom H56 : ((not ((r83b <= i5) and (i5 <= r84b))) -> (i14 = i5))
-
-axiom H57 : ((not ((r83b <= i5) and (i5 <= r84b))) -> (tmpval10 = tmpval1))
-
-axiom H58 : ((not ((r83b <= i5) and (i5 <= r84b))) ->
-  (digitval10 = digitval))
-
-axiom H59 : ((not ((r83b <= i5) and (i5 <= r84b))) -> (i15 = i5))
-
-axiom H60 : ((not ((r83b <= i5) and (i5 <= r84b))) -> (tmpval11 = tmpval1))
-
-axiom H61 : ((not ((r83b <= i5) and (i5 <= r84b))) ->
-  (digitval11 = digitval1))
-
-axiom H62 : (not ugt(tmpval10, of_int(32767)))
-
-axiom H63 : (result12 = newpref1)
-
-axiom H64 : (newpref2 = tmpval10)
-
-axiom H65 : (not (zlength <= endidx10))
-
-axiom H66 : ((o2 = (endidx10 + 1)) and in_range4((endidx10 + 1)))
-
-axiom H67 : (result13 = begidx13)
-
-axiom H68 : (begidx14 = o2)
-
-axiom H69 : (((((begidx15 <= endidx11) and (begidx15 <= zlength)) and
-  (endidx11 <= zlength)) and ((foundtype11 = 1) ->
-  (forall i54:int. (((begidx15 <= i54) and (i54 <= endidx11)) ->
-  ((48 <= to_rep((zonefileline[i54]))) and
-  (to_rep((zonefileline[i54])) <= 57)))))) and ((in_range4(begidx15) and
-  in_range4(endidx11)) and in_range3(foundtype11)))
-
-axiom H70 : (foundtype11 = 1)
-
-axiom H71 : (result14 = tmpval10)
-
-axiom H72 : (tmpval12 = of_int(0))
-
-axiom H73 : (begidx15 = r86b)
-
-axiom H74 : in_range4(r86b)
-
-axiom H75 : (endidx11 = r87b)
-
-axiom H76 : in_range4(r87b)
-
-axiom H77 : (r86b <= r87b)
-
- (* File "zone_file_parser.adb", line 1074, characters 0-0 *)
-goal WP_parameter_def : ((- 2147483648) <= r86b)
+  (((foundtype3 = foundtype4) and ((endidx3 = endidx4) and
+  (begidx5 = begidx6))) and ((foundtype5 = foundtype3) and
+  ((endidx5 = endidx3) and (begidx7 = begidx5))))) and ((({ int__content =
+  foundtype6 } = { int__content = foundtype4 }) and (({ int__content =
+  endidx6 } = { int__content = endidx4 }) and ({ int__content = begidx8 } = {
+  int__content = begidx6 }))) and ((foundtype7 = foundtype5) and
+  ((endidx7 = endidx5) and (begidx9 = begidx7)))))) or
+  ((not ((not (foundtype1 = 3)) and (endidx1 <  zlength))) and
+  (((foundtype1 = foundtype6) and ((endidx1 = endidx6) and
+  (begidx2 = begidx8))) and ((foundtype7 = foundtype1) and
+  ((endidx7 = endidx1) and (begidx9 = begidx2)))))) ->
+  ((not (endidx6 = zlength)) -> ((((o1 = (endidx6 + 1)) and
+  in_range4((endidx6 + 1))) and ((result6 = begidx8) and (begidx10 = o1))) ->
+  ((((((begidx11 <= endidx8) and (begidx11 <= zlength)) and
+  (endidx8 <= zlength)) and ((foundtype8 = 1) ->
+  (forall i7:int. (((begidx11 <= i7) and (i7 <= endidx8)) ->
+  ((48 <= to_rep((zonefileline[i7]))) and
+  (to_rep((zonefileline[i7])) <= 57)))))) and ((in_range4(begidx11) and
+  in_range4(endidx8)) and in_range3(foundtype8))) -> ((foundtype8 = 1) ->
+  (((result7 = tmpval) and (tmpval1 = rliteral)) -> (((begidx11 = r83b) and
+  in_range4(r83b)) -> (((endidx8 = r84b) and in_range4(r84b)) ->
+  ((((result8 = i) and (i1 = r83b)) and ((((r83b <= i1) and (i1 <= r84b)) and
+  ((((temp___1760 = i1) and ((temp___1759 = tmpval1) and
+  ((temp___1758 = digitval) and (((1 <= begidx11) and ule(tmpval2,
+  rliteral1)) and ((((r83b <= r84b) -> dynamic_property(r83b, r84b, i2)) and
+  ((r83b <= i2) and (i2 <= r84b))) and (((result9 = digitval2) and
+  (digitval3 = sub(of_int(to_rep((zonefileline[i2]))), rliteral2))) and
+  (((result10 = tmpval2) and (tmpval3 = add(mul(rliteral3, tmpval2),
+  digitval3))) and (ugt(tmpval3, rliteral1) or ((not ugt(tmpval3,
+  rliteral1)) and (i2 = r84b)))))))))) and (((i3 = { int__content = i2 }) and
+  ((tmpval4 = { t__content = tmpval3 }) and (digitval4 = { t__content =
+  digitval3 }))) and ((i4 = i2) and ((tmpval5 = tmpval3) and
+  (digitval5 = digitval3))))) and (((i5 = i3) and ((tmpval6 = tmpval4) and
+  (digitval6 = digitval4))) and ((i6 = i4) and ((tmpval7 = tmpval5) and
+  (digitval7 = digitval5)))))) or ((not ((r83b <= i1) and (i1 <= r84b))) and
+  (((i5 = { int__content = i1 }) and ((tmpval6 = { t__content = tmpval1
+  }) and (digitval6 = { t__content = digitval }))) and ((i6 = i1) and
+  ((tmpval7 = tmpval1) and (digitval7 = digitval1))))))) ->
+  ((not ugt((tmpval6).t__content, rliteral1)) -> (((result11 = { t__content =
+  newpref1 }) and (newpref2 = (tmpval6).t__content)) ->
+  ((not (zlength <= endidx8)) -> ((((o2 = (endidx8 + 1)) and
+  in_range4((endidx8 + 1))) and ((result12 = { int__content = begidx11 }) and
+  (begidx12 = o2))) -> ((((((begidx13 <= endidx9) and
+  (begidx13 <= zlength)) and (endidx9 <= zlength)) and ((foundtype9 = 1) ->
+  (forall i7:int. (((begidx13 <= i7) and (i7 <= endidx9)) ->
+  ((48 <= to_rep((zonefileline[i7]))) and
+  (to_rep((zonefileline[i7])) <= 57)))))) and ((in_range4(begidx13) and
+  in_range4(endidx9)) and in_range3(foundtype9))) -> ((foundtype9 = 1) ->
+  (((result13 = tmpval6) and (tmpval8 = rliteral)) -> (((begidx13 = r86b) and
+  in_range4(r86b)) -> (((endidx9 = r87b) and in_range4(r87b)) ->
+  ((r86b <= r87b) -> ((- 2147483648) <= r86b)))))))))))))))))))))))))))))))))

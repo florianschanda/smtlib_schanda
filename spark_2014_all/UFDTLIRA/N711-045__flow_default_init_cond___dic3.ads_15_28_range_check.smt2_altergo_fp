@@ -141,9 +141,5 @@ axiom to_int__post_axiom :
 axiom to_int__def_axiom :
   (forall r:int [to_int(r)]. (in_range(r) -> (to_int(r) = r)))
 
-logic us : int
-
-logic temp___146 : int
-
  (* File "dic3.ads", line 12, characters 0-0 *)
 goal WP_parameter_def : in_range(5)

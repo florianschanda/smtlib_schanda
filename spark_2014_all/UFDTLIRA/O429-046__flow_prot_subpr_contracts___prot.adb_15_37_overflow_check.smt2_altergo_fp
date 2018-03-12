@@ -236,27 +236,10 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic visible : int
-
-logic self__ : integer
-
-logic self__1 : bool
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-axiom H : in_range(visible)
-
-axiom H1 : in_range(x)
-
-axiom H2 : (self__1 = true)
-
-axiom H3 : ((o = (x + to_rep(self__))) and in_range((x + to_rep(self__))))
-
-axiom H4 : (o1 = (o - visible))
-
  (* File "prot.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : in_range(o1)
+goal WP_parameter_def :
+  (forall visible:int. forall self__:integer. forall self__1:bool.
+  forall o:int. forall o1:int. (in_range(visible) -> (in_range(x) ->
+  ((self__1 = true) -> ((((o = (x + to_rep(self__))) and
+  in_range((x + to_rep(self__)))) and (o1 = (o - visible))) ->
+  in_range(o1))))))

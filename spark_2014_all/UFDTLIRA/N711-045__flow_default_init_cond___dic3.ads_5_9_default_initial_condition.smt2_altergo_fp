@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -169,13 +169,8 @@ axiom to_int__2__post_axiom :
 axiom to_int__2__def_axiom :
   (forall d:int [to_int__2(d)]. (in_range1(d) -> (to_int__2(d) = d)))
 
-logic us : int
-
-logic temp___148 : int
-
-axiom H : ((us = 5) and in_range1(5))
-
-axiom H1 : (in_range1(temp___148) and (temp___148 = 5))
-
  (* File "dic3.ads", line 14, characters 0-0 *)
-goal WP_parameter_def : (1 <= to_int__2(temp___148))
+goal WP_parameter_def :
+  (forall us:int. forall temp___172:int. (((us = 5) and in_range1(5)) ->
+  ((in_range1(temp___172) and (temp___172 = 5)) ->
+  (1 <= to_int__2(temp___172)))))

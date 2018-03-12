@@ -68,7 +68,6 @@
 (declare-fun mul (us_rep us_rep) us_rep)
 (declare-fun mul__function_guard (us_rep us_rep us_rep) Bool)
 (declare-const use_simple_private_type__mul__result us_rep)
-(declare-const o1 us_rep)
 (declare-const use_simple_private_type__mul__result1 us_rep)
 (declare-const result Bool)
 (declare-const use_simple_private_type__mul__result2 us_rep)

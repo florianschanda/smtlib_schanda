@@ -81,12 +81,6 @@ axiom bool_ge_axiom :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -98,6 +92,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -115,45 +115,12 @@ logic z : bool
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic x : bool
-
-logic y : bool
-
-logic result : bool
-
-logic x1 : bool
-
-logic result1 : bool
-
-logic y1 : bool
-
-logic x2 : bool
-
-logic y2 : bool
-
-logic x3 : bool
-
-logic y3 : bool
-
-axiom H : (match_bool(x, y, false) = z)
-
-axiom H1 : (result = x)
-
-axiom H2 : (((not (x = true)) -> (x1 = true)) and ((x = true) -> (x1 = z)))
-
-axiom H3 : (result1 = y)
-
-axiom H4 : (((not (y = true)) -> (y1 = true)) and ((y = true) -> (y1 = z)))
-
-axiom H5 : (y1 = y2)
-
-axiom H6 : (x1 = x2)
-
-axiom H7 : (y3 = y1)
-
-axiom H8 : (x3 = x1)
-
-axiom H9 : (x2 = true)
-
  (* File "bool.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (to_int(x) <= to_int(y))
+goal WP_parameter_def :
+  (forall x:bool. forall y:bool. forall result:bool. forall x1:bool.
+  forall result1:bool. forall y1:bool. forall x2:bool. forall y2:bool.
+  forall x3:bool. forall y3:bool. ((((match_bool(x, y, false) = z) and
+  (((result = x) and (((not (x = true)) and (x1 = true)) or ((x = true) and
+  (x1 = z)))) and ((result1 = y) and (((not (y = true)) and (y1 = true)) or
+  ((y = true) and (y1 = z)))))) and (((y1 = y2) and (x1 = x2)) and
+  ((y3 = y1) and (x3 = x1)))) -> ((x2 = true) -> (to_int(x) <= to_int(y)))))

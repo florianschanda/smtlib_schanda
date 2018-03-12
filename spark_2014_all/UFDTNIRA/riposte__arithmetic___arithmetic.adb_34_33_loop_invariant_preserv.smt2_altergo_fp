@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -236,80 +236,18 @@ function t9b__ref___projection(a1: t9b__ref) : tunsigned_byteB =
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic r : int
-
-logic i : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic result : int
-
-logic r1 : int
-
-logic result1 : int
-
-logic i1 : int
-
-logic result2 : int
-
-logic r2 : int
-
-logic r3 : int
-
-logic i2 : int
-
-logic result3 : int
-
-logic i3 : int
-
-logic result4 : int
-
-logic r4 : int
-
-axiom H : in_range2(a)
-
-axiom H1 : in_range2(b)
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range1(r))
-
-axiom H3 : (result = r)
-
-axiom H4 : (r1 = 0)
-
-axiom H5 : (result1 = i)
-
-axiom H6 : (i1 = 1)
-
-axiom H7 : (1 <= i1)
-
-axiom H8 : (i1 <= b)
-
-axiom H9 : ((o = (r1 + a)) and in_range1((r1 + a)))
-
-axiom H10 : (result2 = r1)
-
-axiom H11 : (r2 = o)
-
-axiom H12 : (r3 = (i2 * a))
-
-axiom H13 : (((((- 2147483648) <= 2147483647) -> in_range1(r3)) and
-  ((1 <= b) -> dynamic_property(1, b, i2))) and ((1 <= i2) and (i2 <= b)))
-
-axiom H14 : (not (i2 = b))
-
-axiom H15 : (i2 = result3)
-
-axiom H16 : (i3 = (i2 + 1))
-
-axiom H17 : ((o2 = (r3 + a)) and in_range1((r3 + a)))
-
-axiom H18 : (result4 = r3)
-
-axiom H19 : (r4 = o2)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (r4 = (i3 * a))
+goal WP_parameter_def :
+  (forall r:int. forall i:int. forall o:int. forall o1:int.
+  forall result:int. forall r1:int. forall result1:int. forall i1:int.
+  forall result2:int. forall r2:int. forall r3:int. forall i2:int.
+  forall result3:int. forall i3:int. forall result4:int. forall r4:int.
+  (in_range2(a) -> (in_range2(b) -> ((((- 2147483648) <= 2147483647) ->
+  in_range1(r)) -> (((result = r) and (r1 = 0)) -> (((result1 = i) and
+  (i1 = 1)) -> (((1 <= i1) and (i1 <= b)) -> ((((o = (r1 + a)) and
+  in_range1((r1 + a))) and ((result2 = r1) and (r2 = o))) ->
+  ((r3 = (i2 * a)) -> (((((((- 2147483648) <= 2147483647) ->
+  in_range1(r3)) and ((1 <= b) -> dynamic_property(1, b, i2))) and
+  ((1 <= i2) and (i2 <= b))) and ((not (i2 = b)) and (((i2 = result3) and
+  (i3 = (i2 + 1))) and (((o1 = (r3 + a)) and in_range1((r3 + a))) and
+  ((result4 = r3) and (r4 = o1)))))) -> (r4 = (i3 * a))))))))))))

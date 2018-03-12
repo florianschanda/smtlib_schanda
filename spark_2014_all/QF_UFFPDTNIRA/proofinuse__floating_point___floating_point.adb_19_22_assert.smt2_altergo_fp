@@ -1037,12 +1037,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1054,6 +1048,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1117,26 +1117,10 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic res : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic result : t
-
-logic res1 : t
-
-axiom H : tqtisFinite(x)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
-
-axiom H1 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(res))
 
 logic fliteral2 : t
 
@@ -1148,23 +1132,17 @@ logic fliteral3 : t
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 10.0))
 
-axiom H2 : (le(fliteral2, x) and le(x, fliteral3))
-
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 2.0))
 
-axiom H3 : ((o = mul(NearestTiesToEven, x, fliteral4)) and
-  tqtisFinite(mul(NearestTiesToEven, x, fliteral4)))
-
-axiom H4 : (o1 = sub(NearestTiesToEven, o, fliteral2))
-
-axiom H5 : ((o2 = o1) and tqtisFinite(o1))
-
-axiom H6 : (result = res)
-
-axiom H7 : (res1 = o2)
-
  (* File "floating_point.adb", line 7, characters 0-0 *)
-goal WP_parameter_def : le(x, res1)
+goal WP_parameter_def :
+  (forall res:t. forall o:t. forall o1:t. forall o2:t. forall result:t.
+  forall res1:t. (tqtisFinite(x) -> ((le(neg(fliteral1), fliteral1) ->
+  tqtisFinite(res)) -> ((le(fliteral2, x) and le(x, fliteral3)) ->
+  ((((((o = mul(NearestTiesToEven, x, fliteral4)) and
+  tqtisFinite(mul(NearestTiesToEven, x, fliteral4))) and
+  (o1 = sub(NearestTiesToEven, o, fliteral2))) and ((o2 = o1) and
+  tqtisFinite(o1))) and ((result = res) and (res1 = o2))) -> le(x, res1))))))

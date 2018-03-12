@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -313,34 +313,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def :
-  (forall v:bool. forall v1:ext_account_num. forall v2:ext_account_num.
-  (forall i:int [(singleton({ us_split_fields1 = {
-  rec__database__availability__account_link__available = v;
-  rec__database__availability__account_link__prev = v1;
-  rec__database__availability__account_link__next = v2 } }, i)[i])].
-  ((singleton({ us_split_fields1 = {
-  rec__database__availability__account_link__available = v;
-  rec__database__availability__account_link__prev = v1;
-  rec__database__availability__account_link__next = v2 } }, i)[i]) = {
-  us_split_fields1 = { rec__database__availability__account_link__available =
-  v; rec__database__availability__account_link__prev = v1;
-  rec__database__availability__account_link__next = v2 } })))
-
 logic bool_eq5 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -351,17 +323,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_141:int. ((((a__first <= temp___idx_141) and
-  (temp___idx_141 <= a__last)) and (bool_eq4((a[temp___idx_141]),
-  (b[((b__first - a__first) + temp___idx_141)])) = true)) or
-  (not ((a__first <= temp___idx_141) and (temp___idx_141 <= a__last)))))) ->
+  (forall temp___idx_163:int. ((((a__first <= temp___idx_163) and
+  (temp___idx_163 <= a__last)) and (bool_eq4((a[temp___idx_163]),
+  (b[((b__first - a__first) + temp___idx_163)])) = true)) or
+  (not ((a__first <= temp___idx_163) and (temp___idx_163 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_141:int. (((a__first <= temp___idx_141) and
-  (temp___idx_141 <= a__last)) -> (bool_eq4((a[temp___idx_141]),
-  (b[((b__first - a__first) + temp___idx_141)])) = true))))) -> (bool_eq5(a,
+  (forall temp___idx_163:int. (((a__first <= temp___idx_163) and
+  (temp___idx_163 <= a__last)) -> (bool_eq4((a[temp___idx_163]),
+  (b[((b__first - a__first) + temp___idx_163)])) = true))))) -> (bool_eq5(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -371,9 +343,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_141:int. (((a__first <= temp___idx_141) and
-  (temp___idx_141 <= a__last)) -> (bool_eq4((a[temp___idx_141]),
-  (b[((b__first - a__first) + temp___idx_141)])) = true)))))))
+  (forall temp___idx_163:int. (((a__first <= temp___idx_163) and
+  (temp___idx_163 <= a__last)) -> (bool_eq4((a[temp___idx_163]),
+  (b[((b__first - a__first) + temp___idx_163)])) = true)))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -396,156 +368,16 @@ logic account : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic links : (int,us_rep) farray
-
-logic first_available : int
-
-logic o : ext_account_num
-
-logic o1 : bool
-
-logic o2 : ext_account_num
-
-logic o3 : ext_account_num
-
-logic o4 : bool
-
-logic o5 : ext_account_num
-
-logic o6 : ext_account_num
-
-logic o7 : int
-
-logic o8 : (int,us_rep) farray
-
-logic o9 : ext_account_num
-
-logic o10 : bool
-
-logic o11 : ext_account_num
-
-logic o12 : ext_account_num
-
-logic o13 : bool
-
-logic o14 : ext_account_num
-
-logic o15 : ext_account_num
-
-logic o16 : int
-
-logic o17 : (int,us_rep) farray
-
-logic o18 : int
-
-logic o19 : bool
-
-logic o20 : ext_account_num
-
-logic o21 : ext_account_num
-
-logic o22 : bool
-
-logic o23 : ext_account_num
-
-logic o24 : ext_account_num
-
-logic o25 : ext_account_num
-
-logic o26 : int
-
-logic o27 : ext_account_num
-
-logic o28 : bool
-
-logic o29 : ext_account_num
-
-logic o30 : ext_account_num
-
-logic o31 : bool
-
-logic o32 : ext_account_num
-
-logic o33 : ext_account_num
-
-logic o34 : (int,us_rep) farray
-
-logic o35 : ext_account_num
-
-logic o36 : bool
-
-logic o37 : ext_account_num
-
-logic o38 : ext_account_num
-
-logic o39 : bool
-
-logic o40 : ext_account_num
-
-logic o41 : ext_account_num
-
-logic o42 : (int,us_rep) farray
-
-logic links1 : (int,us_rep) farray
-
-logic result : (int,us_rep) farray
-
-logic links2 : (int,us_rep) farray
-
-logic result1 : (int,us_rep) farray
-
-logic links3 : (int,us_rep) farray
-
-logic result2 : (int,us_rep) farray
-
-logic links4 : (int,us_rep) farray
-
-logic result3 : (int,us_rep) farray
-
-logic links5 : (int,us_rep) farray
-
-logic result4 : (int,us_rep) farray
-
-logic links6 : (int,us_rep) farray
-
-logic result5 : int
-
-logic first_available1 : int
-
-logic links7 : (int,us_rep) farray
-
-logic first_available2 : int
-
-logic links8 : (int,us_rep) farray
-
-logic first_available3 : int
-
-axiom H : in_range1(first_available)
-
-axiom H1 : in_range2(account)
-
-axiom H2 : (not (is_available(account, links) = true))
-
-axiom H3 :
-  (not (to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev) = 0))
-
-axiom H4 :
-  (to_rep(o) = to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__next))
-
-axiom H5 :
-  ((((links[to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev)])).us_split_fields1).rec__database__availability__account_link__available = o1)
-
-axiom H6 :
-  ((((links[to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev)])).us_split_fields1).rec__database__availability__account_link__prev = o2)
-
-axiom H7 : (o = o3)
-
-axiom H8 : (o4 = o1)
-
-axiom H9 : (o5 = o2)
-
-axiom H10 : (o6 = o3)
-
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def :
-  (1 <= to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev))
+  (forall links:(int,us_rep) farray. forall first_available:int.
+  forall o:ext_account_num. forall o1:bool. forall o2:ext_account_num.
+  forall o3:ext_account_num. forall o4:bool. forall o5:ext_account_num.
+  forall o6:ext_account_num. (in_range1(first_available) ->
+  (in_range2(account) -> ((not (is_available(account, links) = true)) ->
+  ((not (to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev) = 0)) ->
+  ((((to_rep(o) = to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__next)) and
+  (((((links[to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev)])).us_split_fields1).rec__database__availability__account_link__available = o1) and
+  (((((links[to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev)])).us_split_fields1).rec__database__availability__account_link__prev = o2) and
+  (o = o3)))) and ((o4 = o1) and ((o5 = o2) and (o6 = o3)))) ->
+  (1 <= to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev))))))))

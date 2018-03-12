@@ -601,12 +601,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -618,6 +612,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1088,24 +1088,6 @@ axiom slide_def :
   (forall i:t [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[sub(i, sub(new_first, old_first))]))))))
 
-logic concat : (t,byte) farray, t, t, (t,byte) farray, t,
-  t -> (t,byte) farray
-
-axiom concat_def :
-  (forall a:(t,byte) farray. forall b:(t,byte) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t.
-  (forall i:t [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((ule(a_first, i) and ule(i, a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and (ugt(i, a_last) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[add(sub(i, a_last), sub(b_first,
-  one))])))))))
-
-logic singleton : byte, t -> (t,byte) farray
-
-axiom singleton_def :
-  (forall v:byte.
-  (forall i:t [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq6 : (t,byte) farray, t, t, (t,byte) farray, t, t -> bool
 
 axiom bool_eq_def5 :
@@ -1115,19 +1097,19 @@ axiom bool_eq_def5 :
   (ule(b__first, b__last) and (sub(a__last, a__first) = sub(b__last,
   b__first)))) or ((not ule(a__first, a__last)) and ugt(b__first,
   b__last))) and
-  (forall temp___idx_132:t. (((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) and
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[add(sub(b__first, a__first),
-  temp___idx_132)])))) or (not (ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)))))) -> (bool_eq6(a, a__first, a__last, b,
+  (forall temp___idx_154:t. (((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) and
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[add(sub(b__first, a__first),
+  temp___idx_154)])))) or (not (ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)))))) -> (bool_eq6(a, a__first, a__last, b,
   b__first, b__last) = true)) and ((not (((ule(a__first, a__last) ->
   (ule(b__first, b__last) and (sub(a__last, a__first) = sub(b__last,
   b__first)))) and ((not ule(a__first, a__last)) -> ugt(b__first,
   b__last))) and
-  (forall temp___idx_132:t. ((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[add(sub(b__first, a__first),
-  temp___idx_132)]))))))) -> (bool_eq6(a, a__first, a__last, b, b__first,
+  (forall temp___idx_154:t. ((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[add(sub(b__first, a__first),
+  temp___idx_154)]))))))) -> (bool_eq6(a, a__first, a__last, b, b__first,
   b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1137,39 +1119,10 @@ axiom bool_eq_rev :
   (((ule(a__first, a__last) -> (ule(b__first, b__last) and (sub(a__last,
   a__first) = sub(b__last, b__first)))) and ((not ule(a__first, a__last)) ->
   ugt(b__first, b__last))) and
-  (forall temp___idx_132:t. ((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[add(sub(b__first, a__first),
-  temp___idx_132)])))))))))
-
-logic compare : (t,byte) farray, t, t, (t,byte) farray, t, t -> int
-
-axiom compare_def_eq :
-  (forall a:(t,byte) farray. forall b:(t,byte) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) = 0) <-> (bool_eq6(a, a_first, a_last, b,
-  b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(t,byte) farray. forall b:(t,byte) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) <  0) <->
-  (exists i:t. exists j:t. (ule(i, a_last) and (ult(j, b_last) and
-  ((bool_eq6(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  (ult(i, a_last) and ult1(to_rep1((a[add(i, one)])), to_rep1((b[add(j,
-  one)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(t,byte) farray. forall b:(t,byte) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((0 <  compare(a,
-  a_first, a_last, b, b_first, b_last)) <->
-  (exists i:t. exists j:t. (ule(i, b_last) and (ult(j, a_last) and
-  ((bool_eq6(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  (ult(i, b_last) and ugt1(to_rep1((a[add(j, one)])), to_rep1((b[add(i,
-  one)]))))))))))))
+  (forall temp___idx_154:t. ((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[add(sub(b__first, a__first),
+  temp___idx_154)])))))))))
 
 type u64
 
@@ -1276,7 +1229,15 @@ type skein_512_state_bytes_index
 
 logic attr__ATTRIBUTE_MODULUS3 : t
 
-predicate in_range1(x: t) = (ule(of_int(0), x) and ule(x, of_int(63)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 63)
+
+predicate in_range1(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 63))
 
@@ -1338,23 +1299,6 @@ axiom slide_def1 :
   (forall i:t [(slide1(a, old_first, new_first)[i])]. ((slide1(a, old_first,
   new_first)[i]) = (a[sub(i, sub(new_first, old_first))]))))))
 
-logic concat1 : (t,u64) farray, t, t, (t,u64) farray, t, t -> (t,u64) farray
-
-axiom concat_def1 :
-  (forall a:(t,u64) farray. forall b:(t,u64) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t.
-  (forall i:t [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((ule(a_first, i) and ule(i, a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and (ugt(i, a_last) -> ((concat1(a,
-  a_first, a_last, b, b_first, b_last)[i]) = (b[add(sub(i, a_last),
-  sub(b_first, one))])))))))
-
-logic singleton1 : u64, t -> (t,u64) farray
-
-axiom singleton_def1 :
-  (forall v:u64.
-  (forall i:t [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq10 : (t,u64) farray, t, t, (t,u64) farray, t, t -> bool
 
 axiom bool_eq_def8 :
@@ -1364,19 +1308,19 @@ axiom bool_eq_def8 :
   (ule(b__first, b__last) and (sub(a__last, a__first) = sub(b__last,
   b__first)))) or ((not ule(a__first, a__last)) and ugt(b__first,
   b__last))) and
-  (forall temp___idx_133:t. (((ule(a__first, temp___idx_133) and
-  ule(temp___idx_133, a__last)) and
-  (to_rep2((a[temp___idx_133])) = to_rep2((b[add(sub(b__first, a__first),
-  temp___idx_133)])))) or (not (ule(a__first, temp___idx_133) and
-  ule(temp___idx_133, a__last)))))) -> (bool_eq10(a, a__first, a__last, b,
+  (forall temp___idx_155:t. (((ule(a__first, temp___idx_155) and
+  ule(temp___idx_155, a__last)) and
+  (to_rep2((a[temp___idx_155])) = to_rep2((b[add(sub(b__first, a__first),
+  temp___idx_155)])))) or (not (ule(a__first, temp___idx_155) and
+  ule(temp___idx_155, a__last)))))) -> (bool_eq10(a, a__first, a__last, b,
   b__first, b__last) = true)) and ((not (((ule(a__first, a__last) ->
   (ule(b__first, b__last) and (sub(a__last, a__first) = sub(b__last,
   b__first)))) and ((not ule(a__first, a__last)) -> ugt(b__first,
   b__last))) and
-  (forall temp___idx_133:t. ((ule(a__first, temp___idx_133) and
-  ule(temp___idx_133, a__last)) ->
-  (to_rep2((a[temp___idx_133])) = to_rep2((b[add(sub(b__first, a__first),
-  temp___idx_133)]))))))) -> (bool_eq10(a, a__first, a__last, b, b__first,
+  (forall temp___idx_155:t. ((ule(a__first, temp___idx_155) and
+  ule(temp___idx_155, a__last)) ->
+  (to_rep2((a[temp___idx_155])) = to_rep2((b[add(sub(b__first, a__first),
+  temp___idx_155)]))))))) -> (bool_eq10(a, a__first, a__last, b, b__first,
   b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -1386,39 +1330,10 @@ axiom bool_eq_rev1 :
   (((ule(a__first, a__last) -> (ule(b__first, b__last) and (sub(a__last,
   a__first) = sub(b__last, b__first)))) and ((not ule(a__first, a__last)) ->
   ugt(b__first, b__last))) and
-  (forall temp___idx_133:t. ((ule(a__first, temp___idx_133) and
-  ule(temp___idx_133, a__last)) ->
-  (to_rep2((a[temp___idx_133])) = to_rep2((b[add(sub(b__first, a__first),
-  temp___idx_133)])))))))))
-
-logic compare1 : (t,u64) farray, t, t, (t,u64) farray, t, t -> int
-
-axiom compare_def_eq1 :
-  (forall a:(t,u64) farray. forall b:(t,u64) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare1(a, a_first, a_last, b, b_first, b_last)]. ((compare1(a, a_first,
-  a_last, b, b_first, b_last) = 0) <-> (bool_eq10(a, a_first, a_last, b,
-  b_first, b_last) = true))))
-
-axiom compare_def_lt1 :
-  (forall a:(t,u64) farray. forall b:(t,u64) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare1(a, a_first, a_last, b, b_first, b_last)]. ((compare1(a, a_first,
-  a_last, b, b_first, b_last) <  0) <->
-  (exists i:t. exists j:t. (ule(i, a_last) and (ult(j, b_last) and
-  ((bool_eq10(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  (ult(i, a_last) and ult(to_rep2((a[add(i, one)])), to_rep2((b[add(j,
-  one)]))))))))))))
-
-axiom compare_def_gt1 :
-  (forall a:(t,u64) farray. forall b:(t,u64) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare1(a, a_first, a_last, b, b_first, b_last)]. ((0 <  compare1(a,
-  a_first, a_last, b, b_first, b_last)) <->
-  (exists i:t. exists j:t. (ule(i, b_last) and (ult(j, a_last) and
-  ((bool_eq10(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  (ult(i, b_last) and ugt(to_rep2((a[add(j, one)])), to_rep2((b[add(i,
-  one)]))))))))))))
+  (forall temp___idx_155:t. ((ule(a__first, temp___idx_155) and
+  ule(temp___idx_155, a__last)) ->
+  (to_rep2((a[temp___idx_155])) = to_rep2((b[add(sub(b__first, a__first),
+  temp___idx_155)])))))))))
 
 logic dummy6 : (t,u64) farray
 
@@ -1486,8 +1401,11 @@ type hash_bit_length
 
 logic attr__ATTRIBUTE_MODULUS4 : t
 
-predicate in_range2(x: t) = (ule(of_int(0), x) and ule(x,
-  of_int(18446744073709551608)))
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 18446744073709551608)
+
+predicate in_range2(x: t) = (ule(rliteral, x) and ule(x, rliteral2))
 
 predicate in_range_int1(x: int) = ((0 <= x) and (x <= 18446744073709551608))
 
@@ -2283,7 +2201,15 @@ axiom range_int_axiom5 :
 
 type u7
 
-predicate in_range3(x: t1) = (ule1(of_int2(0), x) and ule1(x, of_int2(127)))
+logic rliteral3 : t1
+
+axiom rliteral_axiom3 : (tqtint1(rliteral3) = 0)
+
+logic rliteral4 : t1
+
+axiom rliteral_axiom4 : (tqtint1(rliteral4) = 127)
+
+predicate in_range3(x: t1) = (ule1(rliteral3, x) and ule1(x, rliteral4))
 
 predicate in_range_int2(x: int) = ((0 <= x) and (x <= 127))
 
@@ -2317,9 +2243,13 @@ axiom inversion_axiom6 :
 
 axiom range_axiom6 : (forall x:u7 [to_rep6(x)]. in_range3(to_rep6(x)))
 
+logic rliteral5 : t1
+
+axiom rliteral_axiom5 : (tqtint1(rliteral5) = 128)
+
 axiom coerce_axiom6 :
-  (forall x:t1 [to_rep6(of_rep6(x))]. (in_range3(urem1(x, of_int2(128))) ->
-  (to_rep6(of_rep6(x)) = urem1(x, of_int2(128)))))
+  (forall x:t1 [to_rep6(of_rep6(x))]. (in_range3(urem1(x, rliteral5)) ->
+  (to_rep6(of_rep6(x)) = urem1(x, rliteral5))))
 
 function to_int11(x: u7) : int = tqtint1(to_rep6(x))
 
@@ -2328,7 +2258,11 @@ axiom range_int_axiom6 :
 
 type u6
 
-predicate in_range4(x: t1) = (ule1(of_int2(0), x) and ule1(x, of_int2(63)))
+logic rliteral6 : t1
+
+axiom rliteral_axiom6 : (tqtint1(rliteral6) = 63)
+
+predicate in_range4(x: t1) = (ule1(rliteral3, x) and ule1(x, rliteral6))
 
 predicate in_range_int3(x: int) = ((0 <= x) and (x <= 63))
 
@@ -2362,9 +2296,13 @@ axiom inversion_axiom7 :
 
 axiom range_axiom7 : (forall x:u6 [to_rep7(x)]. in_range4(to_rep7(x)))
 
+logic rliteral7 : t1
+
+axiom rliteral_axiom7 : (tqtint1(rliteral7) = 64)
+
 axiom coerce_axiom7 :
-  (forall x:t1 [to_rep7(of_rep7(x))]. (in_range4(urem1(x, of_int2(64))) ->
-  (to_rep7(of_rep7(x)) = urem1(x, of_int2(64)))))
+  (forall x:t1 [to_rep7(of_rep7(x))]. (in_range4(urem1(x, rliteral7)) ->
+  (to_rep7(of_rep7(x)) = urem1(x, rliteral7))))
 
 function to_int12(x: u6) : int = tqtint1(to_rep7(x))
 
@@ -2803,6 +2741,10 @@ type us_rep2 = { us_split_fields5 : us_split_fields4
 function us_rep___3__projection(a: us_rep2) : us_split_fields4 =
   (a).us_split_fields5
 
+logic rliteral8 : t
+
+axiom rliteral_axiom8 : (tqtint(rliteral8) = 7)
+
 logic bool_eq20 : us_rep2, us_rep2 -> bool
 
 axiom bool_eq_def18 :
@@ -2810,23 +2752,23 @@ axiom bool_eq_def18 :
   (((((bool_eq19(((a).us_split_fields5).rec__skein__skein_512_context__h,
   ((b).us_split_fields5).rec__skein__skein_512_context__h) = true) and
   (bool_eq10(((a).us_split_fields5).rec__skein__skein_512_context__x,
-  of_int(0), of_int(7),
-  ((b).us_split_fields5).rec__skein__skein_512_context__x, of_int(0),
-  of_int(7)) = true)) and
+  rliteral, rliteral8,
+  ((b).us_split_fields5).rec__skein__skein_512_context__x, rliteral,
+  rliteral8) = true)) and
   (bool_eq6(((a).us_split_fields5).rec__skein__skein_512_context__b,
-  of_int(0), of_int(63),
-  ((b).us_split_fields5).rec__skein__skein_512_context__b, of_int(0),
-  of_int(63)) = true)) -> (bool_eq20(a, b) = true)) and
+  rliteral, rliteral1,
+  ((b).us_split_fields5).rec__skein__skein_512_context__b, rliteral,
+  rliteral1) = true)) -> (bool_eq20(a, b) = true)) and
   ((not (((bool_eq19(((a).us_split_fields5).rec__skein__skein_512_context__h,
   ((b).us_split_fields5).rec__skein__skein_512_context__h) = true) and
   (bool_eq10(((a).us_split_fields5).rec__skein__skein_512_context__x,
-  of_int(0), of_int(7),
-  ((b).us_split_fields5).rec__skein__skein_512_context__x, of_int(0),
-  of_int(7)) = true)) and
+  rliteral, rliteral8,
+  ((b).us_split_fields5).rec__skein__skein_512_context__x, rliteral,
+  rliteral8) = true)) and
   (bool_eq6(((a).us_split_fields5).rec__skein__skein_512_context__b,
-  of_int(0), of_int(63),
-  ((b).us_split_fields5).rec__skein__skein_512_context__b, of_int(0),
-  of_int(63)) = true))) -> (bool_eq20(a, b) = false))))
+  rliteral, rliteral1,
+  ((b).us_split_fields5).rec__skein__skein_512_context__b, rliteral,
+  rliteral1) = true))) -> (bool_eq20(a, b) = false))))
 
 logic value__size5 : int
 
@@ -2961,7 +2903,7 @@ type skein_512_block_bytes_index
 
 logic attr__ATTRIBUTE_MODULUS7 : t
 
-predicate in_range5(x: t) = (ule(of_int(0), x) and ule(x, of_int(63)))
+predicate in_range5(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int4(x: int) = ((0 <= x) and (x <= 63))
 
@@ -2995,16 +2937,23 @@ logic add_in_range__function_guard : bool, t, t -> prop
 
 axiom add_in_range__post_axiom : true
 
+logic rliteral9 : t
+
+axiom rliteral_axiom9 : (tqtint(rliteral9) = 18446744073709551615)
+
 axiom add_in_range__def_axiom :
   (forall x:t. forall y:t [add_in_range(x, y)]. ((add_in_range(x,
-  y) = true) <-> ule(y, sub(of_int(18446744073709551615), x))))
+  y) = true) <-> ule(y, sub(rliteral9, x))))
 
 type initialized_hash_bit_length
 
 logic attr__ATTRIBUTE_MODULUS8 : t
 
-predicate in_range6(x: t) = (ule(of_int(1), x) and ule(x,
-  of_int(18446744073709551608)))
+logic rliteral10 : t
+
+axiom rliteral_axiom10 : (tqtint(rliteral10) = 1)
+
+predicate in_range6(x: t) = (ule(rliteral10, x) and ule(x, rliteral2))
 
 predicate in_range_int5(x: int) = ((1 <= x) and (x <= 18446744073709551608))
 
@@ -3036,7 +2985,11 @@ type skein_512_block_bytes_count
 
 logic attr__ATTRIBUTE_MODULUS9 : t
 
-predicate in_range7(x: t) = (ule(of_int(0), x) and ule(x, of_int(64)))
+logic rliteral11 : t
+
+axiom rliteral_axiom11 : (tqtint(rliteral11) = 64)
+
+predicate in_range7(x: t) = (ule(rliteral, x) and ule(x, rliteral11))
 
 predicate in_range_int6(x: int) = ((0 <= x) and (x <= 64))
 
@@ -3101,11 +3054,11 @@ axiom hash_bit_len_of__post_axiom :
   rec__skein__context_header__byte_count = ctx9 } };
   rec__skein__skein_512_context__x = ctx10;
   rec__skein__skein_512_context__b = ctx11 } })].
-  (ult(to_rep(last(mk(of_int(0), of_int(63)))),
-  of_int(18446744073709551615)) -> in_range2(hash_bit_len_of({
-  us_split_fields5 = { rec__skein__skein_512_context__h = {
-  us_split_fields3 = { rec__skein__context_header__tweak_words = {
-  us_split_fields1 = { rec__skein__tweak_value__byte_count_lsb = ctx;
+  (ult(to_rep(last(mk(rliteral, rliteral1))), rliteral9) ->
+  in_range2(hash_bit_len_of({ us_split_fields5 = {
+  rec__skein__skein_512_context__h = { us_split_fields3 = {
+  rec__skein__context_header__tweak_words = { us_split_fields1 = {
+  rec__skein__tweak_value__byte_count_lsb = ctx;
   rec__skein__tweak_value__byte_count_msb = ctx1;
   rec__skein__tweak_value__reserved = ctx2;
   rec__skein__tweak_value__tree_level = ctx3;
@@ -3137,11 +3090,10 @@ axiom hash_bit_len_of__def_axiom :
   rec__skein__context_header__byte_count = ctx9 } };
   rec__skein__skein_512_context__x = ctx10;
   rec__skein__skein_512_context__b = ctx11 } })].
-  (ult(to_rep(last(mk(of_int(0), of_int(63)))),
-  of_int(18446744073709551615)) -> (hash_bit_len_of({ us_split_fields5 = {
-  rec__skein__skein_512_context__h = { us_split_fields3 = {
-  rec__skein__context_header__tweak_words = { us_split_fields1 = {
-  rec__skein__tweak_value__byte_count_lsb = ctx;
+  (ult(to_rep(last(mk(rliteral, rliteral1))), rliteral9) ->
+  (hash_bit_len_of({ us_split_fields5 = { rec__skein__skein_512_context__h =
+  { us_split_fields3 = { rec__skein__context_header__tweak_words = {
+  us_split_fields1 = { rec__skein__tweak_value__byte_count_lsb = ctx;
   rec__skein__tweak_value__byte_count_msb = ctx1;
   rec__skein__tweak_value__reserved = ctx2;
   rec__skein__tweak_value__tree_level = ctx3;
@@ -3175,11 +3127,10 @@ axiom byte_count_of__def_axiom :
   rec__skein__context_header__byte_count = ctx9 } };
   rec__skein__skein_512_context__x = ctx10;
   rec__skein__skein_512_context__b = ctx11 } })].
-  (ult(to_rep(last(mk(of_int(0), of_int(63)))),
-  of_int(18446744073709551615)) -> (byte_count_of({ us_split_fields5 = {
-  rec__skein__skein_512_context__h = { us_split_fields3 = {
-  rec__skein__context_header__tweak_words = { us_split_fields1 = {
-  rec__skein__tweak_value__byte_count_lsb = ctx;
+  (ult(to_rep(last(mk(rliteral, rliteral1))), rliteral9) -> (byte_count_of({
+  us_split_fields5 = { rec__skein__skein_512_context__h = {
+  us_split_fields3 = { rec__skein__context_header__tweak_words = {
+  us_split_fields1 = { rec__skein__tweak_value__byte_count_lsb = ctx;
   rec__skein__tweak_value__byte_count_msb = ctx1;
   rec__skein__tweak_value__reserved = ctx2;
   rec__skein__tweak_value__tree_level = ctx3;
@@ -3192,75 +3143,31 @@ axiom byte_count_of__def_axiom :
   rec__skein__skein_512_context__x = ctx10;
   rec__skein__skein_512_context__b = ctx11 } }) = to_rep2(ctx9))))
 
-logic result__ : (t,byte) farray
+logic rliteral12 : t
 
-logic o : unsigned_64
+axiom rliteral_axiom12 : (tqtint(rliteral12) = 512)
 
-logic o1 : unsigned_64
-
-logic ctx__split_fields : u64
-
-logic ctx__split_fields1 : u32
-
-logic ctx__split_fields2 : u16
-
-logic ctx__split_fields3 : u7
-
-logic ctx__split_fields4 : bool
-
-logic ctx__split_fields5 : u6
-
-logic ctx__split_fields6 : bool
-
-logic ctx__split_fields7 : bool
-
-logic ctx__split_fields8 : hash_bit_length
-
-logic ctx__split_fields9 : u64
-
-logic ctx__split_fields10 : (t,u64) farray
-
-logic ctx__split_fields11 : (t,byte) farray
-
-logic ctx__split_fields12 : u64
-
-logic ctx__split_fields13 : u32
-
-logic ctx__split_fields14 : u16
-
-logic ctx__split_fields15 : u7
-
-logic ctx__split_fields16 : bool
-
-logic ctx__split_fields17 : u6
-
-logic ctx__split_fields18 : bool
-
-logic ctx__split_fields19 : bool
-
-logic ctx__split_fields20 : hash_bit_length
-
-logic ctx__split_fields21 : u64
-
-logic ctx__split_fields22 : (t,u64) farray
-
-logic ctx__split_fields23 : (t,byte) farray
-
-logic skein__skein_512_final__hash : (t,byte) farray
-
-logic result : (t,byte) farray
-
-logic result__1 : (t,byte) farray
-
-axiom H : (dynamic_property(of_int(0), of_int(18446744073709551615),
-  to_rep(first(data1)), to_rep(last(data1))) and ult(to_rep(last(data1)),
-  of_int(18446744073709551615)))
-
-axiom H1 : (((to_rep(first(data1)) = of_int(0)) and
-  (add_in_range(to_rep(last(data1)), of_int(64)) = true)) and
-  ult(add(to_rep(last(data1)), of_int(64)), of_int(18446744073709551615)))
-
-axiom H2 : ((((in_range6(hash_bit_len_of({ us_split_fields5 = {
+ (* File "skein.ads", line 110, characters 0-0 *)
+goal WP_parameter_def :
+  (forall o:unsigned_64. forall o1:unsigned_64. forall ctx__split_fields:u64.
+  forall ctx__split_fields1:u32. forall ctx__split_fields2:u16.
+  forall ctx__split_fields3:u7. forall ctx__split_fields4:bool.
+  forall ctx__split_fields5:u6. forall ctx__split_fields6:bool.
+  forall ctx__split_fields7:bool. forall ctx__split_fields8:hash_bit_length.
+  forall ctx__split_fields9:u64. forall ctx__split_fields10:(t,u64) farray.
+  forall ctx__split_fields11:(t,byte) farray. forall ctx__split_fields12:u64.
+  forall ctx__split_fields13:u32. forall ctx__split_fields14:u16.
+  forall ctx__split_fields15:u7. forall ctx__split_fields16:bool.
+  forall ctx__split_fields17:u6. forall ctx__split_fields18:bool.
+  forall ctx__split_fields19:bool.
+  forall ctx__split_fields20:hash_bit_length. forall ctx__split_fields21:u64.
+  forall ctx__split_fields22:(t,u64) farray.
+  forall ctx__split_fields23:(t,byte) farray. ((dynamic_property(rliteral,
+  rliteral9, to_rep(first(data1)), to_rep(last(data1))) and
+  ult(to_rep(last(data1)), rliteral9)) ->
+  ((((to_rep(first(data1)) = rliteral) and (add_in_range(to_rep(last(data1)),
+  rliteral11) = true)) and ult(add(to_rep(last(data1)), rliteral11),
+  rliteral9)) -> (((((in_range6(hash_bit_len_of({ us_split_fields5 = {
   rec__skein__skein_512_context__h = { us_split_fields3 = {
   rec__skein__context_header__tweak_words = { us_split_fields1 = {
   rec__skein__tweak_value__byte_count_lsb = ctx__split_fields;
@@ -3289,7 +3196,7 @@ axiom H2 : ((((in_range6(hash_bit_len_of({ us_split_fields5 = {
   rec__skein__context_header__byte_count = ctx__split_fields9 } };
   rec__skein__skein_512_context__x = ctx__split_fields10;
   rec__skein__skein_512_context__b = ctx__split_fields11 }
-  }) = of_int(512))) and (byte_count_of({ us_split_fields5 = {
+  }) = rliteral12)) and (byte_count_of({ us_split_fields5 = {
   rec__skein__skein_512_context__h = { us_split_fields3 = {
   rec__skein__context_header__tweak_words = { us_split_fields1 = {
   rec__skein__tweak_value__byte_count_lsb = ctx__split_fields;
@@ -3304,7 +3211,7 @@ axiom H2 : ((((in_range6(hash_bit_len_of({ us_split_fields5 = {
   rec__skein__context_header__byte_count = ctx__split_fields9 } };
   rec__skein__skein_512_context__x = ctx__split_fields10;
   rec__skein__skein_512_context__b = ctx__split_fields11 }
-  }) = of_int(0))) and in_range7(byte_count_of({ us_split_fields5 = {
+  }) = rliteral)) and in_range7(byte_count_of({ us_split_fields5 = {
   rec__skein__skein_512_context__h = { us_split_fields3 = {
   rec__skein__context_header__tweak_words = { us_split_fields1 = {
   rec__skein__tweak_value__byte_count_lsb = ctx__split_fields;
@@ -3319,9 +3226,8 @@ axiom H2 : ((((in_range6(hash_bit_len_of({ us_split_fields5 = {
   rec__skein__context_header__byte_count = ctx__split_fields9 } };
   rec__skein__skein_512_context__x = ctx__split_fields10;
   rec__skein__skein_512_context__b = ctx__split_fields11 } }))) and
-  ult(to_rep(last(mk(of_int(0), of_int(63)))), of_int(18446744073709551615)))
-
-axiom H3 : (((in_range6(hash_bit_len_of({ us_split_fields5 = {
+  ult(to_rep(last(mk(rliteral, rliteral1))), rliteral9)) ->
+  ((((in_range6(hash_bit_len_of({ us_split_fields5 = {
   rec__skein__skein_512_context__h = { us_split_fields3 = {
   rec__skein__context_header__tweak_words = { us_split_fields1 = {
   rec__skein__tweak_value__byte_count_lsb = ctx__split_fields12;
@@ -3380,14 +3286,9 @@ axiom H3 : (((in_range6(hash_bit_len_of({ us_split_fields5 = {
   rec__skein__context_header__byte_count = ctx__split_fields21 } };
   rec__skein__skein_512_context__x = ctx__split_fields22;
   rec__skein__skein_512_context__b = ctx__split_fields23 } }))) and
-  ult(to_rep(last(mk(of_int(0), of_int(63)))), of_int(18446744073709551615)))
-
-axiom H4 : (to_rep(o1) = of_int(63))
-
-axiom H5 : (to_rep(o) = of_int(0))
-
- (* File "skein.ads", line 110, characters 0-0 *)
-goal WP_parameter_def : in_range6(hash_bit_len_of({ us_split_fields5 = {
+  ult(to_rep(last(mk(rliteral, rliteral1))), rliteral9)) ->
+  ((to_rep(o1) = rliteral1) -> ((to_rep(o) = rliteral) ->
+  in_range6(hash_bit_len_of({ us_split_fields5 = {
   rec__skein__skein_512_context__h = { us_split_fields3 = {
   rec__skein__context_header__tweak_words = { us_split_fields1 = {
   rec__skein__tweak_value__byte_count_lsb = ctx__split_fields12;
@@ -3401,4 +3302,4 @@ goal WP_parameter_def : in_range6(hash_bit_len_of({ us_split_fields5 = {
   rec__skein__context_header__hash_bit_len = ctx__split_fields20;
   rec__skein__context_header__byte_count = ctx__split_fields21 } };
   rec__skein__skein_512_context__x = ctx__split_fields22;
-  rec__skein__skein_512_context__b = ctx__split_fields23 } }))
+  rec__skein__skein_512_context__b = ctx__split_fields23 } })))))))))

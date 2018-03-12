@@ -221,19 +221,8 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic tmp_a : int
-
-logic result : int
-
-logic tmp_a1 : int
-
-axiom H : in_range(x)
-
-axiom H1 : (result = tmp_a)
-
-axiom H2 : (tmp_a1 = x)
-
-axiom H3 : in_range(tmp_a1)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (not (2 = 0))
+goal WP_parameter_def :
+  (forall tmp_a:int. forall result:int. forall tmp_a1:int. (in_range(x) ->
+  (((result = tmp_a) and (tmp_a1 = x)) -> (in_range(tmp_a1) ->
+  (not (2 = 0))))))

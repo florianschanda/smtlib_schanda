@@ -1085,24 +1085,6 @@ axiom slide_def :
   (forall i:t [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[sub(i, sub(new_first, old_first))]))))))
 
-logic concat : (t,byte) farray, t, t, (t,byte) farray, t,
-  t -> (t,byte) farray
-
-axiom concat_def :
-  (forall a:(t,byte) farray. forall b:(t,byte) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t.
-  (forall i:t [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((ule(a_first, i) and ule(i, a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and (ugt(i, a_last) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[add(sub(i, a_last), sub(b_first,
-  one))])))))))
-
-logic singleton : byte, t -> (t,byte) farray
-
-axiom singleton_def :
-  (forall v:byte.
-  (forall i:t [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq6 : (t,byte) farray, t, t, (t,byte) farray, t, t -> bool
 
 axiom bool_eq_def5 :
@@ -1112,19 +1094,19 @@ axiom bool_eq_def5 :
   (ule(b__first, b__last) and (sub(a__last, a__first) = sub(b__last,
   b__first)))) or ((not ule(a__first, a__last)) and ugt(b__first,
   b__last))) and
-  (forall temp___idx_132:t. (((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) and
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[add(sub(b__first, a__first),
-  temp___idx_132)])))) or (not (ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)))))) -> (bool_eq6(a, a__first, a__last, b,
+  (forall temp___idx_154:t. (((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) and
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[add(sub(b__first, a__first),
+  temp___idx_154)])))) or (not (ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)))))) -> (bool_eq6(a, a__first, a__last, b,
   b__first, b__last) = true)) and ((not (((ule(a__first, a__last) ->
   (ule(b__first, b__last) and (sub(a__last, a__first) = sub(b__last,
   b__first)))) and ((not ule(a__first, a__last)) -> ugt(b__first,
   b__last))) and
-  (forall temp___idx_132:t. ((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[add(sub(b__first, a__first),
-  temp___idx_132)]))))))) -> (bool_eq6(a, a__first, a__last, b, b__first,
+  (forall temp___idx_154:t. ((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[add(sub(b__first, a__first),
+  temp___idx_154)]))))))) -> (bool_eq6(a, a__first, a__last, b, b__first,
   b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1134,39 +1116,10 @@ axiom bool_eq_rev :
   (((ule(a__first, a__last) -> (ule(b__first, b__last) and (sub(a__last,
   a__first) = sub(b__last, b__first)))) and ((not ule(a__first, a__last)) ->
   ugt(b__first, b__last))) and
-  (forall temp___idx_132:t. ((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[add(sub(b__first, a__first),
-  temp___idx_132)])))))))))
-
-logic compare : (t,byte) farray, t, t, (t,byte) farray, t, t -> int
-
-axiom compare_def_eq :
-  (forall a:(t,byte) farray. forall b:(t,byte) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) = 0) <-> (bool_eq6(a, a_first, a_last, b,
-  b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(t,byte) farray. forall b:(t,byte) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) <  0) <->
-  (exists i:t. exists j:t. (ule(i, a_last) and (ult(j, b_last) and
-  ((bool_eq6(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  (ult(i, a_last) and ult1(to_rep1((a[add(i, one)])), to_rep1((b[add(j,
-  one)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(t,byte) farray. forall b:(t,byte) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((0 <  compare(a,
-  a_first, a_last, b, b_first, b_last)) <->
-  (exists i:t. exists j:t. (ule(i, b_last) and (ult(j, a_last) and
-  ((bool_eq6(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  (ult(i, b_last) and ugt1(to_rep1((a[add(j, one)])), to_rep1((b[add(i,
-  one)]))))))))))))
+  (forall temp___idx_154:t. ((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[add(sub(b__first, a__first),
+  temp___idx_154)])))))))))
 
 type t2
 
@@ -1254,13 +1207,15 @@ logic count : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : int
+logic rliteral : t
 
-axiom H : (dynamic_property(of_int(0), of_int(18446744073709551615),
-  to_rep(first(s1)), to_rep(last(s1))) and ult(to_rep(last(s1)),
-  of_int(18446744073709551615)))
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
 
-axiom H1 : true
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 18446744073709551615)
 
  (* File "skein.adb", line 100, characters 0-0 *)
-goal WP_parameter_def : uint_in_range(length({ elts = s; rt = s1 }))
+goal WP_parameter_def : ((dynamic_property(rliteral, rliteral1,
+  to_rep(first(s1)), to_rep(last(s1))) and ult(to_rep(last(s1)),
+  rliteral1)) -> uint_in_range(length({ elts = s; rt = s1 })))

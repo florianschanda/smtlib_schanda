@@ -342,13 +342,6 @@ logic i5b : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic o : bool
-
-axiom H : in_range(x)
-
-axiom H1 : in_range(y)
-
-axiom H2 : dynamic_property(first, last, i5b)
-
  (* File "pred.adb", line 8, characters 0-0 *)
-goal WP_parameter_def : (not (i5b = 0))
+goal WP_parameter_def : (in_range(x) -> (in_range(y) ->
+  (dynamic_property(first, last, i5b) -> (not (i5b = 0)))))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -389,72 +389,6 @@ axiom condition_50__def_axiom :
   (((section_4_6__an_acknowledge_request_for_shunting_is_displayed_to_the_driver = true) and
   (section_4_6__driver_acknowledges = true)) and
   (section_4_6__note_5_conditions_for_shunting_mode = true))))
-
-logic ertms_etcs_level : int
-
-logic an_acknowledge_request_for_shunting_is_displayed_to_the_driver : bool
-
-logic driver_acknowledges : bool
-
-logic driver_isolates_ertms_etcs_on_board_equipment : bool
-
-logic driver_selects_shunting_mode : bool
-
-logic ma_ssp_gardient_on_board : bool
-
-logic no_specific_mode_is_required_by_a_mode_profile : bool
-
-logic note_5_conditions_for_shunting_mode : bool
-
-logic reception_of_information_shunting_granted_by_rbc : bool
-
-logic train_is_at_standstill : bool
-
-logic valid_train_data_is_stored_on_board : bool
-
-logic priority : int
-
-logic section_4_6__transition__result : int
-
-logic result : int
-
-logic section_4_6__transition__result1 : int
-
-logic section_4_6__transition__result2 : int
-
-logic section_4_6__transition__result3 : int
-
-logic section_4_6__transition__result4 : int
-
-logic section_4_6__transition__result5 : int
-
-axiom H : in_range3(priority)
-
-axiom H1 : in_range1(mode)
-
-axiom H2 : in_range2(ertms_etcs_level)
-
-axiom H3 :
-  (section_4_6__transition__result1 = section_4_6__transition__result2)
-
-axiom H4 :
-  (section_4_6__transition__result3 = section_4_6__transition__result1)
-
-axiom H5 : (result = section_4_6__transition__result)
-
-axiom H6 : (section_4_6__transition__result1 = 13)
-
-axiom H7 :
-  (section_4_6__transition__result4 = section_4_6__transition__result2)
-
-axiom H8 :
-  (section_4_6__transition__result5 = section_4_6__transition__result3)
-
-axiom H9 : true
-
-axiom H10 : (condition_transition_sb_to_fs(ma_ssp_gardient_on_board,
-  no_specific_mode_is_required_by_a_mode_profile,
-  valid_train_data_is_stored_on_board, priority) = true)
 
  (* File "section_4_3_2.ads", line 25, characters 0-0 *)
 goal WP_parameter_def : true

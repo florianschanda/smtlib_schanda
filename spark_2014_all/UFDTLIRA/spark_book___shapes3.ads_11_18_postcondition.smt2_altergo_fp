@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -340,124 +340,22 @@ axiom in_bounds__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic r : int
-
-logic shapes3__make_circle__result : coordinate_type
-
-logic shapes3__make_circle__result1 : coordinate_type
-
-logic shapes3__make_circle__result2 : radius_type
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : radius_type
-
-logic o5 : coordinate_type
-
-logic o6 : coordinate_type
-
-logic o7 : coordinate_type
-
-logic o8 : coordinate_type
-
-logic o9 : radius_type
-
-logic o10 : coordinate_type
-
-logic o11 : coordinate_type
-
-logic o12 : radius_type
-
-logic result : int
-
-logic r1 : int
-
-logic result1 : int
-
-logic r2 : int
-
-logic result2 : int
-
-logic r3 : int
-
-logic result3 : int
-
-logic r4 : int
-
-logic result4 : int
-
-logic r5 : int
-
-logic result5 : coordinate_type
-
-logic result6 : coordinate_type
-
-logic result7 : radius_type
-
-logic shapes3__make_circle__result3 : coordinate_type
-
-logic shapes3__make_circle__result4 : coordinate_type
-
-logic shapes3__make_circle__result5 : radius_type
-
-logic shapes3__make_circle__result6 : coordinate_type
-
-logic shapes3__make_circle__result7 : coordinate_type
-
-logic shapes3__make_circle__result8 : radius_type
-
-logic shapes3__make_circle__result9 : coordinate_type
-
-logic shapes3__make_circle__result10 : coordinate_type
-
-logic shapes3__make_circle__result11 : radius_type
-
-logic r6 : int
-
-logic shapes3__make_circle__result12 : coordinate_type
-
-logic shapes3__make_circle__result13 : coordinate_type
-
-logic shapes3__make_circle__result14 : radius_type
-
-logic r7 : int
-
-logic shapes3__make_circle__result15 : coordinate_type
-
-logic shapes3__make_circle__result16 : coordinate_type
-
-logic shapes3__make_circle__result17 : radius_type
-
-logic result8 : coordinate_type
-
-logic result9 : coordinate_type
-
-logic result10 : radius_type
-
-axiom H : in_range1(x)
-
-axiom H1 : in_range1(y)
-
-axiom H2 : in_range2(radius)
-
-axiom H3 :
-  (((in_range1((to_rep(shapes3__make_circle__result12) + to_rep1(shapes3__make_circle__result14))) and
-  in_range1((to_rep(shapes3__make_circle__result12) - to_rep1(shapes3__make_circle__result14)))) and
-  in_range1((to_rep(shapes3__make_circle__result13) + to_rep1(shapes3__make_circle__result14)))) and
-  in_range1((to_rep(shapes3__make_circle__result13) - to_rep1(shapes3__make_circle__result14))))
-
-axiom H4 : ((result8 = shapes3__make_circle__result12) and
-  ((result9 = shapes3__make_circle__result13) and
-  (result10 = shapes3__make_circle__result14)))
-
  (* File "shapes3.ads", line 23, characters 0-0 *)
-goal WP_parameter_def : (in_bounds({ us_split_fields1 = {
-  rec__shapes3__circle__center_x = shapes3__make_circle__result12;
-  rec__shapes3__circle__center_y = shapes3__make_circle__result13;
-  rec__shapes3__circle__radius = shapes3__make_circle__result14 } }) = true)
+goal WP_parameter_def :
+  (forall shapes3__make_circle__result:coordinate_type.
+  forall shapes3__make_circle__result1:coordinate_type.
+  forall shapes3__make_circle__result2:radius_type.
+  (forall result:coordinate_type. forall result1:coordinate_type.
+  forall result2:radius_type. ((in_range1(x) and (in_range1(y) and
+  (in_range2(radius) and
+  ((((in_range1((to_rep(shapes3__make_circle__result) + to_rep1(shapes3__make_circle__result2))) and
+  in_range1((to_rep(shapes3__make_circle__result) - to_rep1(shapes3__make_circle__result2)))) and
+  in_range1((to_rep(shapes3__make_circle__result1) + to_rep1(shapes3__make_circle__result2)))) and
+  in_range1((to_rep(shapes3__make_circle__result1) - to_rep1(shapes3__make_circle__result2)))) and
+  ((result = shapes3__make_circle__result) and
+  ((result1 = shapes3__make_circle__result1) and
+  (result2 = shapes3__make_circle__result2))))))) -> (in_bounds({
+  us_split_fields1 = { rec__shapes3__circle__center_x =
+  shapes3__make_circle__result; rec__shapes3__circle__center_y =
+  shapes3__make_circle__result1; rec__shapes3__circle__radius =
+  shapes3__make_circle__result2 } }) = true))))

@@ -222,24 +222,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> (int,integer) farray
-
-axiom concat_def :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : integer, int -> (int,integer) farray
-
-axiom singleton_def :
-  (forall v:integer.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,integer) farray, int, int, (int,integer) farray, int,
   int -> bool
 
@@ -250,17 +232,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -270,37 +252,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep1((a[(i + 1)])) <  to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep1((b[(i + 1)])) <  to_rep1((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic dummy4 : (int,integer) farray
 
@@ -615,89 +569,42 @@ type t5b__ref = { t5b__content : us_t1
 
 function t5b__ref___projection(a: t5b__ref) : us_t1 = (a).t5b__content
 
-logic stack__model__to__result : (int,integer) farray
-
-logic stack__model__to__result1 : t
-
-logic o : (int,integer) farray
-
-logic temp___211 : (int,integer) farray
-
-logic temp___2111 : t1
-
-logic o1 : (int,integer) farray
-
-logic o2 : t
-
-logic result : (int,integer) farray
-
-logic result1 : t
-
-logic stack__model__to__result2 : (int,integer) farray
-
-logic stack__model__to__result3 : t
-
-logic stack__model__to__result4 : (int,integer) farray
-
-logic stack__model__to__result5 : t
-
-logic stack__model__to__result6 : (int,integer) farray
-
-logic stack__model__to__result7 : t
-
-logic stack__model__to__result8 : (int,integer) farray
-
-logic stack__model__to__result9 : t
-
-logic stack__model__to__result10 : (int,integer) farray
-
-logic stack__model__to__result11 : t
-
-logic result2 : (int,integer) farray
-
-logic result3 : t
-
-axiom H : (stack__model__to__result4 = stack__model__to__result2)
-
-axiom H1 : (stack__model__to__result5 = stack__model__to__result3)
-
-axiom H2 : ((stack__model__to__result6 = stack__model__to__result2) and
-  (stack__model__to__result7 = stack__model__to__result3))
-
-axiom H3 : ((1 <= to_rep(s)) -> (((1 <= 1) and (1 <= 100)) and
-  ((1 <= to_rep(s)) and (to_rep(s) <= 100))))
-
-axiom H4 : (o = s1)
-
-axiom H5 : (o = temp___211)
-
-axiom H6 : (mk1(1, to_rep(s)) = temp___2111)
-
-axiom H7 : dynamic_property(1, 2147483647, to_rep1(first2(temp___2111)),
-  to_rep1(last2(temp___2111)))
-
-axiom H8 : (temp___211 = o1)
-
-axiom H9 : (mk(to_rep1(first2(temp___2111)),
-  to_rep1(last2(temp___2111))) = o2)
-
-axiom H10 : (result = stack__model__to__result)
-
-axiom H11 : (result1 = stack__model__to__result1)
-
-axiom H12 : ((stack__model__to__result2 = o1) and
-  (stack__model__to__result3 = o2))
-
-axiom H13 : ((stack__model__to__result8 = stack__model__to__result4) and
-  (stack__model__to__result9 = stack__model__to__result5))
-
-axiom H14 : (stack__model__to__result10 = stack__model__to__result6)
-
-axiom H15 : (stack__model__to__result11 = stack__model__to__result7)
-
-axiom H16 : (result2 = stack__model__to__result8)
-
-axiom H17 : (result3 = stack__model__to__result9)
-
  (* File "stack.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : (to_rep1(first(stack__model__to__result9)) = 1)
+goal WP_parameter_def :
+  (forall stack__model__to__result:(int,integer) farray.
+  forall stack__model__to__result1:t. forall o:(int,integer) farray.
+  forall temp___238:(int,integer) farray. forall temp___2381:t1.
+  forall o1:(int,integer) farray. forall o2:t.
+  forall result:(int,integer) farray. forall result1:t.
+  forall stack__model__to__result2:(int,integer) farray.
+  forall stack__model__to__result3:t.
+  forall stack__model__to__result4:(int,integer) farray.
+  forall stack__model__to__result5:t.
+  forall stack__model__to__result6:(int,integer) farray.
+  forall stack__model__to__result7:t.
+  forall stack__model__to__result8:(int,integer) farray.
+  forall stack__model__to__result9:t.
+  forall stack__model__to__result10:(int,integer) farray.
+  forall stack__model__to__result11:t.
+  (forall result2:(int,integer) farray. forall result3:t.
+  (((((((stack__model__to__result4 = stack__model__to__result2) and
+  (stack__model__to__result5 = stack__model__to__result3)) and
+  ((stack__model__to__result6 = stack__model__to__result2) and
+  (stack__model__to__result7 = stack__model__to__result3))) and
+  ((((((1 <= to_rep(s)) -> (((1 <= 1) and (1 <= 100)) and
+  ((1 <= to_rep(s)) and (to_rep(s) <= 100)))) and (o = s1)) and
+  ((o = temp___238) and (mk1(1, to_rep(s)) = temp___2381))) and
+  (dynamic_property(1, 2147483647, to_rep1(first2(temp___2381)),
+  to_rep1(last2(temp___2381))) and ((temp___238 = o1) and
+  (mk(to_rep1(first2(temp___2381)), to_rep1(last2(temp___2381))) = o2)))) and
+  (((result = stack__model__to__result) and
+  (result1 = stack__model__to__result1)) and
+  ((o1 = stack__model__to__result2) and
+  (o2 = stack__model__to__result3))))) and
+  (((stack__model__to__result8 = stack__model__to__result4) and
+  (stack__model__to__result9 = stack__model__to__result5)) and
+  ((stack__model__to__result10 = stack__model__to__result6) and
+  (stack__model__to__result11 = stack__model__to__result7)))) and
+  ((result2 = stack__model__to__result8) and
+  (result3 = stack__model__to__result9))) ->
+  (to_rep1(first(stack__model__to__result9)) = 1))))

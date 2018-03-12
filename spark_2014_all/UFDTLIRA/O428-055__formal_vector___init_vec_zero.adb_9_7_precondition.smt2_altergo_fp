@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -628,134 +628,24 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length(container))))) ->
   in_range8(get(container, position)))))
 
-logic v__split_fields : us_main_type
-
-logic j : int
-
-logic init_vec_zero__L_1__R4b__assume : int
-
-logic init_vec_zero__L_1__R5b__assume : int
-
-logic temp___529 : int
-
-logic temp___530 : int
-
-logic temp___528 : capacity_range
-
-logic temp___5281 : us_main_type
-
-logic o : int
-
-logic k : int
-
-logic o1 : int
-
-logic o2 : bool
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic j1 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : bool
-
-logic o9 : bool
-
-logic o10 : int
-
-logic o11 : int
-
-logic v__split_fields1 : us_main_type
-
-logic result : int
-
-logic j2 : int
-
-logic loop_types__vectors__replace_element__container__fields : us_main_type
-
-logic result1 : us_main_type
-
-logic v__split_fields2 : us_main_type
-
-logic v__split_fields3 : us_main_type
-
-logic j3 : int
-
-logic result2 : bool
-
-logic result3 : int
-
-logic j4 : int
-
-logic loop_types__vectors__replace_element__container__fields1 : us_main_type
-
-logic result4 : us_main_type
-
-logic v__split_fields4 : us_main_type
-
-logic v__split_fields5 : us_main_type
-
-logic j5 : int
-
-logic v__split_fields6 : us_main_type
-
-logic j6 : int
-
-logic v__split_fields7 : us_main_type
-
-logic j7 : int
-
-logic v__split_fields8 : us_main_type
-
-logic j8 : int
-
-logic v__split_fields9 : us_main_type
-
-logic j9 : int
-
-logic v__split_fields10 : us_main_type
-
-logic j10 : int
-
-logic result5 : bool
-
-axiom H : ((init_vec_zero__L_1__R4b__assume = 1) and
+ (* File "init_vec_zero.adb", line 3, characters 0-0 *)
+goal WP_parameter_def :
+  (forall v__split_fields:us_main_type. forall j:int.
+  forall init_vec_zero__L_1__R4b__assume:int.
+  forall init_vec_zero__L_1__R5b__assume:int. forall o:int.
+  forall result:int. forall j1:int.
+  (((((init_vec_zero__L_1__R4b__assume = 1) and
   (in_range1(init_vec_zero__L_1__R4b__assume) and
-  (init_vec_zero__L_1__R4b__assume = 1)))
-
-axiom H1 : (init_vec_zero__L_1__R4b__assume = r4b)
-
-axiom H2 : in_range1(r4b)
-
-axiom H3 : ((init_vec_zero__L_1__R5b__assume = (0 + length(model__({
+  (init_vec_zero__L_1__R4b__assume = 1))) and
+  (init_vec_zero__L_1__R4b__assume = r4b)) and in_range1(r4b)) ->
+  (((((init_vec_zero__L_1__R5b__assume = (0 + length(model__({
   us_split_discrs1 = { rec__loop_types__vectors__vector__capacity =
   v__split_discrs }; us_split_fields1 = { rec__loop_types__vectors__vector =
   v__split_fields } })))) and (in_range2(init_vec_zero__L_1__R5b__assume) and
   (init_vec_zero__L_1__R5b__assume = (0 + length(model__({ us_split_discrs1 =
   { rec__loop_types__vectors__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__loop_types__vectors__vector = v__split_fields }
-  }))))))
-
-axiom H4 : (init_vec_zero__L_1__R5b__assume = r5b)
-
-axiom H5 : in_range2(r5b)
-
-axiom H6 : (result = j)
-
-axiom H7 : (j2 = r4b)
-
-axiom H8 : (r4b <= j2)
-
-axiom H9 : (j2 <= r5b)
-
-axiom H10 : ((o = j2) and in_range1(j2))
-
- (* File "init_vec_zero.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (1 <= o)
+  })))))) and (init_vec_zero__L_1__R5b__assume = r5b)) and in_range2(r5b)) ->
+  ((({ int__content = result } = { int__content = j }) and (j1 = r4b)) ->
+  (((r4b <= j1) and (j1 <= r5b)) -> (((o = j1) and in_range1(j1)) ->
+  (1 <= o)))))))

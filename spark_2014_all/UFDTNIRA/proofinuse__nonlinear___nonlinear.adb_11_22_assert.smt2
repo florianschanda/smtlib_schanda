@@ -55,7 +55,7 @@
 (declare-const dummy1 natural_32)
 (declare-datatypes () ((natural_32__ref (mk_natural_32__ref (natural_32__content natural_32)))))
 (define-fun natural_32__ref___projection ((a natural_32__ref)) natural_32 (natural_32__content a))
-(define-fun dynamic_invariant ((temp___expr_160 Int) (temp___is_init_157 Bool) (temp___skip_constant_158 Bool) (temp___do_toplevel_159 Bool)) Bool (=> (or (= temp___is_init_157 true) (<= 0 2147483647)) (in_range1 temp___expr_160)))
+(define-fun dynamic_invariant ((temp___expr_187 Int) (temp___is_init_183 Bool) (temp___skip_constant_184 Bool) (temp___do_toplevel_185 Bool) (temp___do_typ_inv_186 Bool)) Bool (=> (or (= temp___is_init_183 true) (<= 0 2147483647)) (in_range1 temp___expr_187)))
 (declare-const x Int)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const y Int)

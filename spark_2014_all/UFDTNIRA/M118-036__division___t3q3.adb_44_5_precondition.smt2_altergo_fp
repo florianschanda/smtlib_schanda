@@ -55,12 +55,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -72,6 +66,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -253,62 +253,11 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic x : int
-
-logic y : int
-
-logic p : int
-
-logic q : int
-
-logic r : int
-
-logic q1 : int
-
-logic r1 : int
-
-logic p1 : int
-
-logic x1 : int
-
-logic y1 : int
-
-logic r2 : int
-
-logic x2 : int
-
-logic y2 : int
-
-logic p2 : int
-
-logic q2 : int
-
-logic r3 : int
-
-logic x3 : int
-
-logic y3 : int
-
-logic p3 : int
-
-logic q3 : int
-
-logic r4 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : in_range1(y)
-
-axiom H2 : ((0 <  y) and (0 <= x))
-
-axiom H3 : ((0 <= 2147483647) -> in_range1(p))
-
-axiom H4 : ((0 <= 2147483647) -> in_range1(q))
-
-axiom H5 : ((0 <= 2147483647) -> in_range1(r))
-
-axiom H6 : (((q1 = comp_div(x,y)) and (r1 = (x - (q1 * y)))) and
-  (in_range1(q1) and in_range1(r1)))
-
  (* File "t3q3.adb", line 27, characters 0-0 *)
-goal WP_parameter_def : ((q1 * y) <= 2147483647)
+goal WP_parameter_def :
+  (forall x:int. forall y:int. forall p:int. forall q:int. forall r:int.
+  forall q1:int. forall r1:int. (in_range1(x) -> (in_range1(y) ->
+  (((0 <  y) and (0 <= x)) -> (((0 <= 2147483647) -> in_range1(p)) ->
+  (((0 <= 2147483647) -> in_range1(q)) -> (((0 <= 2147483647) ->
+  in_range1(r)) -> ((((q1 = comp_div(x,y)) and (r1 = (x - (q1 * y)))) and
+  (in_range1(q1) and in_range1(r1))) -> ((q1 * y) <= 2147483647)))))))))

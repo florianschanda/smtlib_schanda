@@ -126,20 +126,11 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic x : int
-
-logic temp___339 : int
-
-logic temp___341 : sub_intp_bad
-
-axiom H : (in_range(i17s) and ((((- 2147483648) <= i17s) and
-  (i17s <= (- 1))) or ((1 <= i17s) and (i17s <= 2147483647))))
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(x))
-
-axiom H2 : ((temp___339 = 0) and in_range(0))
-
  (* File "preds.adb", line 27, characters 0-0 *)
-goal WP_parameter_def : ((((- 2147483648) <= temp___339) and
-  (temp___339 <= (- 1))) or ((1 <= temp___339) and
-  (temp___339 <= 2147483647)))
+goal WP_parameter_def :
+  (forall x:int. forall temp___378:int. ((in_range(i17s) and
+  ((((- 2147483648) <= i17s) and (i17s <= (- 1))) or ((1 <= i17s) and
+  (i17s <= 2147483647)))) -> ((((- 2147483648) <= 2147483647) ->
+  in_range(x)) -> (((temp___378 = 0) and in_range(0)) ->
+  ((((- 2147483648) <= temp___378) and (temp___378 <= (- 1))) or
+  ((1 <= temp___378) and (temp___378 <= 2147483647)))))))

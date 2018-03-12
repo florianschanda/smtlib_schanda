@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -141,37 +141,7 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic swap_add_max_14__add__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic result : int
-
-logic swap_add_max_14__add__result1 : int
-
-logic swap_add_max_14__add__result2 : int
-
-logic swap_add_max_14__add__result3 : int
-
-logic swap_add_max_14__add__result4 : int
-
-logic swap_add_max_14__add__result5 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : in_range1(y)
-
-axiom H2 : (not ((0 <= x) and (0 <= y)))
-
-axiom H3 : (x <  0)
-
-axiom H4 : (y <  0)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range1(((- 2147483648) - y))
+goal WP_parameter_def : (in_range1(x) -> (in_range1(y) -> ((not ((0 <= x) and
+  (0 <= y))) -> (((x <  0) and (y <  0)) ->
+  in_range1(((- 2147483648) - y))))))

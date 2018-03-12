@@ -112,33 +112,10 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic v2 : int
-
-logic t1 : int
-
-logic t2 : int
-
-logic result : int
-
-logic t11 : int
-
-logic result1 : int
-
-logic t21 : int
-
-axiom H : in_range(v2)
-
-axiom H1 : ((0 <= 17) -> in_range(t1))
-
-axiom H2 : ((0 <= 17) -> in_range(t2))
-
-axiom H3 : (result = t1)
-
-axiom H4 : (t11 = v2)
-
-axiom H5 : (result1 = t2)
-
-axiom H6 : (t21 = v2)
-
  (* File "port.adb", line 133, characters 0-0 *)
-goal WP_parameter_def : (t11 = t21)
+goal WP_parameter_def :
+  (forall v2:int. forall t1:int. forall t2:int. forall result:int.
+  forall t11:int. forall result1:int. forall t21:int. (in_range(v2) ->
+  (((0 <= 17) -> in_range(t1)) -> (((0 <= 17) -> in_range(t2)) ->
+  (((result = t1) and (t11 = v2)) -> (((result1 = t2) and (t21 = v2)) ->
+  (t11 = t21)))))))

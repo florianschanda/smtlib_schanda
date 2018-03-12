@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -69,6 +63,12 @@ axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
 
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
 logic attr__ATTRIBUTE_IMAGE : bool -> us_image
@@ -79,28 +79,12 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic z : bool
-
-logic result : bool
-
-logic z1 : bool
-
-logic z2 : bool
-
-logic z3 : bool
-
-logic z4 : bool
-
-logic z5 : bool
-
-axiom H : ((((z1 = z2) and (z3 = z1)) and (((result = z) and
-  (z1 = of_int(1))) and (of_int(1) = true))) or ((((result = z) and
-  (z1 = of_int(1))) and (not (of_int(1) = true))) and ((z1 = z2) and
-  (z3 = z1))))
-
-axiom H1 : (z4 = z2)
-
-axiom H2 : (z5 = z3)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def :
+  (forall z:bool. forall result:bool. forall z1:bool. forall z2:bool.
+  forall z3:bool. forall z4:bool. forall z5:bool. (not (((((z1 = z2) and
+  (z3 = z1)) and ((({ bool__content = result } = { bool__content = z }) and
+  (z1 = of_int(1))) and (of_int(1) = true))) or (((({ bool__content = result
+  } = { bool__content = z }) and (z1 = of_int(1))) and
+  (not (of_int(1) = true))) and ((z1 = z2) and (z3 = z1)))) and
+  ((z4 = z2) and (z5 = z3)))))

@@ -235,57 +235,11 @@ logic attr__ATTRIBUTE_ADDRESS7 : int
 
 logic attr__ATTRIBUTE_ADDRESS8 : int
 
-logic x : int
-
-logic y : int
-
-logic temp1 : int
-
-logic temp2 : int
-
-logic temp11 : int
-
-logic temp21 : int
-
-logic temp12 : int
-
-logic temp22 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic result : int
-
-logic temp13 : int
-
-logic result1 : int
-
-logic temp14 : int
-
-logic result2 : int
-
-logic temp15 : int
-
-axiom H : in_range(operation)
-
-axiom H1 : in_range(x)
-
-axiom H2 : in_range(y)
-
-axiom H3 : (not (operation = 1))
-
-axiom H4 : (not (operation = 2))
-
-axiom H5 : (operation = 3)
-
-axiom H6 : (((- 2147483648) <= 2147483647) -> in_range(temp12))
-
-axiom H7 : (((- 2147483648) <= 2147483647) -> in_range(temp22))
-
  (* File "test.adb", line 2, characters 0-0 *)
-goal WP_parameter_def : (not (y = 0))
+goal WP_parameter_def :
+  (forall x:int. forall y:int. forall temp1:int. forall temp2:int.
+  (in_range(operation) -> (in_range(x) -> (in_range(y) ->
+  ((not (operation = 1)) -> ((not (operation = 2)) -> ((operation = 3) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(temp1)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(temp2)) ->
+  (not (y = 0)))))))))))

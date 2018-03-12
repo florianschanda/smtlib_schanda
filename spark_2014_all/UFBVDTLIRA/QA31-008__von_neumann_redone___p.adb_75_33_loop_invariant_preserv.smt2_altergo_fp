@@ -596,12 +596,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -613,6 +607,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -687,10 +687,18 @@ logic pow2__function_guard : t, t -> prop
 
 axiom pow2__post_axiom : true
 
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 1)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 0)
+
 axiom pow2__def_axiom :
   (forall x1:t [pow21(x1)]. (((tqtint(x1) <  16) ->
-  (pow21(x1) = lsl_bv(of_int(1), of_int(tqtint(x1))))) and
-  ((not (tqtint(x1) <  16)) -> (pow21(x1) = of_int(0)))))
+  (pow21(x1) = lsl_bv(rliteral, of_int(tqtint(x1))))) and
+  ((not (tqtint(x1) <  16)) -> (pow21(x1) = rliteral1))))
 
 logic sqr : t -> t
 
@@ -716,420 +724,77 @@ logic attr__ATTRIBUTE_ADDRESS7 : int
 
 logic attr__ATTRIBUTE_ADDRESS8 : int
 
-logic num : t
+logic rliteral2 : t
 
-logic bits : t
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 65535)
 
-logic res : t
+logic rliteral3 : t
 
-logic b : t
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 16384)
 
-logic i : t
+logic rliteral4 : t
 
-logic m : t
+axiom rliteral_axiom4 : (tqtint(rliteral4) = 8)
 
-logic bits_g : t
+logic rliteral5 : t
 
-logic res_g : t
+axiom rliteral_axiom5 : (tqtint(rliteral5) = 128)
 
-logic p__sqrt_von_neumann_aux16__result : t
+logic rliteral6 : t
 
-logic temp___234 : t
+axiom rliteral_axiom6 : (tqtint(rliteral6) = 2)
 
-logic temp___235 : t
+logic rliteral7 : t
 
-logic temp___233 : t
-
-logic temp___232 : t
-
-logic temp___230 : t
-
-logic temp___231 : t
-
-logic temp___228 : t
-
-logic temp___229 : t
-
-logic temp___236 : t
-
-logic o : t
-
-logic o1 : t
-
-logic b1 : t
-
-logic result : t
-
-logic i1 : t
-
-logic result1 : t
-
-logic num1 : t
-
-logic result2 : t
-
-logic bits1 : t
-
-logic result3 : t
-
-logic res1 : t
-
-logic result4 : t
-
-logic m1 : t
-
-logic result5 : t
-
-logic bits_g1 : t
-
-logic result6 : t
-
-logic res_g1 : t
-
-logic num2 : t
-
-logic bits2 : t
-
-logic res2 : t
-
-logic b2 : t
-
-logic i2 : t
-
-logic m2 : t
-
-logic bits_g2 : t
-
-logic res_g2 : t
-
-logic temp___2361 : t
-
-logic result7 : t
-
-logic temp___2362 : t
-
-logic result8 : t
-
-logic i3 : t
-
-logic result9 : t
-
-logic m3 : t
-
-logic result10 : t
-
-logic b3 : t
-
-logic result11 : t
-
-logic res3 : t
-
-logic result12 : t
-
-logic num3 : t
-
-logic result13 : t
-
-logic res4 : t
-
-logic result14 : t
-
-logic res_g3 : t
-
-logic result15 : t
-
-logic bits3 : t
-
-logic result16 : t
-
-logic bits_g3 : t
-
-logic num4 : t
-
-logic bits4 : t
-
-logic res5 : t
-
-logic b4 : t
-
-logic i4 : t
-
-logic m4 : t
-
-logic bits_g4 : t
-
-logic res_g4 : t
-
-logic num5 : t
-
-logic bits5 : t
-
-logic res6 : t
-
-logic b5 : t
-
-logic i5 : t
-
-logic m5 : t
-
-logic bits_g5 : t
-
-logic res_g5 : t
-
-logic num6 : t
-
-logic bits6 : t
-
-logic res7 : t
-
-logic b6 : t
-
-logic i6 : t
-
-logic m6 : t
-
-logic bits_g6 : t
-
-logic res_g6 : t
-
-logic num7 : t
-
-logic bits7 : t
-
-logic res8 : t
-
-logic b7 : t
-
-logic i7 : t
-
-logic m7 : t
-
-logic bits_g7 : t
-
-logic res_g7 : t
-
-logic num8 : t
-
-logic bits8 : t
-
-logic res9 : t
-
-logic b8 : t
-
-logic i8 : t
-
-logic m8 : t
-
-logic bits_g8 : t
-
-logic res_g8 : t
-
-logic num9 : t
-
-logic bits9 : t
-
-logic res10 : t
-
-logic b9 : t
-
-logic i9 : t
-
-logic m9 : t
-
-logic bits_g9 : t
-
-logic res_g9 : t
-
-logic result17 : t
-
-logic p__sqrt_von_neumann_aux16__result1 : t
-
-logic p__sqrt_von_neumann_aux16__result2 : t
-
-logic p__sqrt_von_neumann_aux16__result3 : t
-
-logic num10 : t
-
-logic bits10 : t
-
-logic res11 : t
-
-logic b10 : t
-
-logic i10 : t
-
-logic m10 : t
-
-logic bits_g10 : t
-
-logic res_g10 : t
-
-logic p__sqrt_von_neumann_aux16__result4 : t
-
-logic num11 : t
-
-logic bits11 : t
-
-logic res12 : t
-
-logic b11 : t
-
-logic i11 : t
-
-logic m11 : t
-
-logic bits_g11 : t
-
-logic res_g11 : t
-
-logic p__sqrt_von_neumann_aux16__result5 : t
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : true
-
-axiom H3 : true
-
-axiom H4 : true
-
-axiom H5 : (result = i)
-
-axiom H6 : (i1 = of_int(0))
-
-axiom H7 : true
-
-axiom H8 : true
-
-axiom H9 : true
-
-axiom H10 : true
-
-axiom H11 : (result1 = num)
-
-axiom H12 : (num1 = x)
-
-axiom H13 : ule(num1, of_int(65535))
-
-axiom H14 : (result2 = bits)
-
-axiom H15 : (bits1 = of_int(16384))
-
-axiom H16 : (result3 = res)
-
-axiom H17 : (res1 = of_int(0))
-
-axiom H18 : (result4 = m)
-
-axiom H19 : (m1 = of_int(8))
-
-axiom H20 : (result5 = bits_g)
-
-axiom H21 : (bits_g1 = of_int(128))
-
-axiom H22 : (result6 = res_g)
-
-axiom H23 : (res_g1 = of_int(0))
-
-axiom H24 : (not (bits1 = of_int(0)))
-
-axiom H25 : (not (bits1 = of_int(0)))
-
-axiom H26 : (not (bits2 = of_int(0)))
-
-axiom H27 : ule(m2, of_int(8))
-
-axiom H28 : (((m2 = of_int(0)) -> (bits_g2 = of_int(0))) and
-  ((not (m2 = of_int(0))) -> (bits_g2 = pow21(sub(m2, of_int(1))))))
-
-axiom H29 : (bits2 = sqr(bits_g2))
-
-axiom H30 : (bw_and(res_g2, sub(pow21(m2), of_int(1))) = of_int(0))
-
-axiom H31 : ult(res_g2, pow21(of_int(8)))
-
-axiom H32 : (res2 = mul(res_g2, pow21(m2)))
-
-axiom H33 : ule(num2, x)
-
-axiom H34 : (sub(x, num2) = sqr(res_g2))
-
-axiom H35 : ule(x, sub(sqr(add(res_g2, pow21(m2))), of_int(1)))
-
-axiom H36 : true
-
-axiom H37 : (temp___2361 = result7)
-
-axiom H38 : (temp___2362 = bits2)
-
-axiom H39 : (not (bits2 = of_int(0)))
-
-axiom H40 : (not (bits_g2 = of_int(0)))
-
-axiom H41 : (not (m2 = of_int(0)))
-
-axiom H42 : (i2 = result8)
-
-axiom H43 : (i3 = add(i2, of_int(1)))
-
-axiom H44 : (m2 = result9)
-
-axiom H45 : (m3 = sub(m2, of_int(1)))
-
-axiom H46 : (res2 = mul(res_g2, pow21(add(m3, of_int(1)))))
-
-axiom H47 : (bits_g2 = pow21(m3))
-
-axiom H48 : (b2 = result10)
-
-axiom H49 : (b3 = bw_or(res2, bits2))
-
-axiom H50 : (b3 = add(res2, bits2))
-
-axiom H51 : (b3 = mul(add(mul(of_int(2), res_g2), bits_g2), pow21(m3)))
-
-axiom H52 : ((1 <  16) -> (o = lsr_bv(res2, of_int(1))))
-
-axiom H53 : ((not (1 <  16)) -> (o = of_int(0)))
-
-axiom H54 : (result11 = res2)
-
-axiom H55 : (res3 = o)
-
-axiom H56 : (uge(num2, b3) -> (result12 = num2))
-
-axiom H57 : (uge(num2, b3) -> (num3 = sub(num2, b3)))
-
-axiom H58 : (uge(num2, b3) -> (result13 = res3))
-
-axiom H59 : (uge(num2, b3) -> (res4 = bw_or(res3, bits2)))
-
-axiom H60 : (uge(num2, b3) -> (result14 = res_g2))
-
-axiom H61 : (uge(num2, b3) -> (res_g3 = add(res_g2, bits_g2)))
-
-axiom H62 : ((not uge(num2, b3)) -> (res_g3 = res_g2))
-
-axiom H63 : ((not uge(num2, b3)) -> (res4 = res3))
-
-axiom H64 : ((not uge(num2, b3)) -> (num3 = num2))
-
-axiom H65 : (result15 = bits2)
-
-axiom H66 : (bits3 = udiv(bits2, of_int(4)))
-
-axiom H67 : ((1 <  16) -> (o1 = lsr_bv(bits_g2, of_int(1))))
-
-axiom H68 : ((not (1 <  16)) -> (o1 = of_int(0)))
-
-axiom H69 : (result16 = bits_g2)
-
-axiom H70 : (bits_g3 = o1)
-
-axiom H71 : (not (bits3 = of_int(0)))
-
-axiom H72 : (not (bits3 = of_int(0)))
+axiom rliteral_axiom7 : (tqtint(rliteral7) = 4)
 
  (* File "p.ads", line 16, characters 0-0 *)
-goal WP_parameter_def : ule(num3, x)
+goal WP_parameter_def :
+  (forall num:t. forall bits:t. forall res:t. forall i:t. forall m:t.
+  forall bits_g:t. forall res_g:t. forall o:t. forall o1:t. forall result:t.
+  forall i1:t. forall result1:t. forall num1:t. forall result2:t.
+  forall bits1:t. forall result3:t. forall res1:t. forall result4:t.
+  forall m1:t. forall result5:t. forall bits_g1:t. forall result6:t.
+  forall res_g1:t. forall num2:t. forall bits2:t. forall res2:t. forall b:t.
+  forall i2:t. forall m2:t. forall bits_g2:t. forall res_g2:t.
+  forall temp___274:t. forall result7:t. forall temp___2741:t.
+  forall result8:t. forall i3:t. forall result9:t. forall m3:t.
+  forall result10:t. forall b1:t. forall result11:t. forall res3:t.
+  forall result12:t. forall num3:t. forall result13:t. forall res4:t.
+  forall result14:t. forall res_g3:t. forall result15:t. forall bits3:t.
+  forall result16:t. forall bits_g3:t. ((({ t__content = result } = {
+  t__content = i }) and (i1 = rliteral1)) -> ((({ t__content = result1 } = {
+  t__content = num }) and (num1 = x)) -> (ule(num1, rliteral2) -> ((({
+  t__content = result2 } = { t__content = bits }) and (bits1 = rliteral3)) ->
+  ((({ t__content = result3 } = { t__content = res }) and
+  (res1 = rliteral1)) -> ((({ t__content = result4 } = { t__content = m
+  }) and (m1 = rliteral4)) -> ((({ t__content = result5 } = { t__content =
+  bits_g }) and (bits_g1 = rliteral5)) -> ((({ t__content = result6 } = {
+  t__content = res_g }) and (res_g1 = rliteral1)) ->
+  ((not (bits1 = rliteral1)) -> ((not (bits1 = rliteral1)) ->
+  (((not (bits2 = rliteral1)) and (ule(m2, rliteral4) and
+  ((((m2 = rliteral1) and (bits_g2 = rliteral1)) or
+  ((not (m2 = rliteral1)) and (bits_g2 = pow21(sub(m2, rliteral))))) and
+  ((bits2 = sqr(bits_g2)) and ((bw_and(res_g2, sub(pow21(m2),
+  rliteral)) = rliteral1) and (ult(res_g2, pow21(rliteral4)) and
+  ((res2 = mul(res_g2, pow21(m2))) and (ule(num2, x) and ((sub(x,
+  num2) = sqr(res_g2)) and ule(x, sub(sqr(add(res_g2, pow21(m2))),
+  rliteral))))))))))) -> ((((temp___274 = result7) and
+  (temp___2741 = bits2)) and ((not (bits2 = rliteral1)) and
+  ((not (bits_g2 = rliteral1)) and ((not (m2 = rliteral1)) and
+  (((i2 = result8) and (i3 = add(i2, rliteral))) and (((m2 = result9) and
+  (m3 = sub(m2, rliteral))) and ((res2 = mul(res_g2, pow21(add(m3,
+  rliteral)))) and ((bits_g2 = pow21(m3)) and (((b = result10) and
+  (b1 = bw_or(res2, bits2))) and ((b1 = add(res2, bits2)) and
+  ((b1 = mul(add(mul(rliteral6, res_g2), bits_g2), pow21(m3))) and
+  (((((1 <  16) and (o = lsr_bv(res2, of_int(1)))) or ((not (1 <  16)) and
+  (o = rliteral1))) and ((result11 = res2) and (res3 = o))) and (((uge(num2,
+  b1) and (((result12 = num2) and (num3 = sub(num2, b1))) and
+  (((result13 = res3) and (res4 = bw_or(res3, bits2))) and
+  ((result14 = res_g2) and (res_g3 = add(res_g2, bits_g2)))))) or
+  ((not uge(num2, b1)) and ((res_g3 = res_g2) and ((res4 = res3) and
+  (num3 = num2))))) and (((result15 = bits2) and (bits3 = udiv(bits2,
+  rliteral7))) and (((((1 <  16) and (o1 = lsr_bv(bits_g2, of_int(1)))) or
+  ((not (1 <  16)) and (o1 = rliteral1))) and ((result16 = bits_g2) and
+  (bits_g3 = o1))) and ((not (bits3 = rliteral1)) and
+  (not (bits3 = rliteral1)))))))))))))))))) -> ule(num3, x))))))))))))))

@@ -1037,12 +1037,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1054,6 +1048,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1141,28 +1141,10 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : t
-
-logic z : t
-
-logic o : t
-
-logic result : t
-
-logic z1 : t
-
-axiom H : in_range2(x)
-
-axiom H1 : (le(fliteral3, fliteral4) -> in_range3(z))
-
-axiom H2 : (result = z)
-
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 2.3299999237060546875000))
-
-axiom H3 : (z1 = mul(NearestTiesToEven, fliteral5, x))
 
 logic fliteral6 : t
 
@@ -1170,4 +1152,8 @@ axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
   (tqtreal(fliteral6) = 2.3399999141693115234375))
 
  (* File "fr.adb", line 18, characters 0-0 *)
-goal WP_parameter_def : in_range3(mul(NearestTiesToEven, fliteral6, x))
+goal WP_parameter_def :
+  (forall x:t. forall z:t. forall result:t. forall z1:t. (in_range2(x) ->
+  ((le(fliteral3, fliteral4) -> in_range3(z)) -> (((result = z) and
+  (z1 = mul(NearestTiesToEven, fliteral5, x))) ->
+  in_range3(mul(NearestTiesToEven, fliteral6, x))))))

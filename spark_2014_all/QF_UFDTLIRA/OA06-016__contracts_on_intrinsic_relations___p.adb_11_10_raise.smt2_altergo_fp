@@ -121,15 +121,6 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 axiom t_zero__def_axiom : (t_zero = 0)
 
-axiom H : in_range(t_zero)
-
-axiom H1 : (0 = t_zero)
-
-axiom H2 : in_range(x)
-
-axiom H3 : (ogt(x, t_zero) = true)
-
-axiom H4 : (not (0 <  x))
-
  (* File "p.ads", line 12, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def : (in_range(t_zero) -> ((0 = t_zero) -> (in_range(x) ->
+  ((ogt(x, t_zero) = true) -> (0 <  x)))))

@@ -109,17 +109,5 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : int
-
-logic n : int
-
-logic x1 : int
-
-logic n1 : int
-
-axiom H : in_range(x)
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(n))
-
  (* File "foo.adb", line 21, characters 0-0 *)
 goal WP_parameter_def : true

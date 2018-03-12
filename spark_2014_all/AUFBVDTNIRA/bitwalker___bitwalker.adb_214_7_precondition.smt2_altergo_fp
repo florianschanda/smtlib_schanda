@@ -605,12 +605,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -622,6 +616,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1167,24 +1167,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,unsigned_8) farray, int, int, (int,unsigned_8) farray,
-  int, int -> (int,unsigned_8) farray
-
-axiom concat_def :
-  (forall a:(int,unsigned_8) farray. forall b:(int,unsigned_8) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : unsigned_8, int -> (int,unsigned_8) farray
-
-axiom singleton_def :
-  (forall v:unsigned_8.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq9 : (int,unsigned_8) farray, int, int, (int,unsigned_8) farray,
   int, int -> bool
 
@@ -1195,17 +1177,17 @@ axiom bool_eq_def8 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq9(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq9(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1215,37 +1197,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,unsigned_8) farray, int, int, (int,unsigned_8) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,unsigned_8) farray. forall b:(int,unsigned_8) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq9(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,unsigned_8) farray. forall b:(int,unsigned_8) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq9(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and ult1(to_rep1((a[(i + 1)])), to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,unsigned_8) farray. forall b:(int,unsigned_8) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq9(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and ugt1(to_rep1((a[(j + 1)])), to_rep1((b[(i + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type t2
 
@@ -1338,9 +1292,13 @@ logic maxvalue__function_guard : t, int -> prop
 
 axiom maxvalue__post_axiom : true
 
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 1)
+
 axiom maxvalue__def_axiom :
   (forall len:int [maxvalue(len)]. (in_range2(len) ->
-  (maxvalue(len) = lsl_bv(of_int(1), of_int(len)))))
+  (maxvalue(len) = lsl_bv(rliteral, of_int(len)))))
 
 type unit__
 
@@ -1376,6 +1334,10 @@ logic peek : int, int, us_t -> t
 
 logic peek__function_guard : t, int, int, us_t -> prop
 
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 0)
+
 axiom peek__post_axiom :
   (forall start:int. forall length1:int.
   (forall addr:(int,unsigned_8) farray. forall addr1:t2 [peek(start, length1,
@@ -1384,7 +1346,7 @@ axiom peek__post_axiom :
   ((length1 <= 64) and (((start + length1) <= 2147483647) and ((8 * length({
   elts = addr; rt = addr1 })) <= 2147483647))))) -> ((((8 * length({ elts =
   addr; rt = addr1 })) <  (start + length1)) -> (peek(start, length1, {
-  elts = addr; rt = addr1 }) = of_int(0))) and ((not ((8 * length({ elts =
+  elts = addr; rt = addr1 }) = rliteral1)) and ((not ((8 * length({ elts =
   addr; rt = addr1 })) <  (start + length1))) ->
   (((start + length1) <= (8 * length({ elts = addr; rt = addr1 }))) ->
   ((forall i:int. (((0 <= i) and (i <= (length1 - 1))) -> ((nth8_stream({
@@ -1497,91 +1459,23 @@ axiom nth8_stream__def_axiom :
   ((nth8_stream({ elts = stream; rt = stream1 }, pos) = true) <->
   (nth1(to_rep1((stream[comp_div(pos,8)])), (7 - comp_mod(pos,8))) = true))))
 
-logic addr : (int,unsigned_8) farray
-
-logic result__ : t
-
-logic pokeresult : int
-
-logic v : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : t
-
-logic result : bool
-
-logic result1 : int
-
-logic v1 : int
-
-logic addr1 : (int,unsigned_8) farray
-
-logic pokeresult1 : int
-
-logic result2 : t
-
-logic result__1 : t
-
-logic addr2 : (int,unsigned_8) farray
-
-logic result__2 : t
-
-logic pokeresult2 : int
-
-logic v2 : int
-
-logic addr3 : (int,unsigned_8) farray
-
-logic result__3 : t
-
-logic pokeresult3 : int
-
-logic v3 : int
-
-axiom H : in_range2(start)
-
-axiom H1 : in_range2(len)
-
-axiom H2 : dynamic_property(0, 2147483646, to_rep(addr__first),
-  to_rep(addr__last))
-
-axiom H3 : true
-
-axiom H4 : true
-
-axiom H5 : ((to_rep(addr__first) = 0) and
-  ((((to_rep(addr__first) <= to_rep(addr__last)) ->
-  ((8 * ((to_rep(addr__last) - to_rep(addr__first)) + 1)) <  2147483647)) and
-  ((not (to_rep(addr__first) <= to_rep(addr__last))) ->
-  ((8 * 0) <  2147483647))) and (((0 <= len) and (len <= 63)) and
-  ((((to_rep(addr__first) <= to_rep(addr__last)) ->
-  ((start + len) <= ((to_rep(addr__last) - to_rep(addr__first)) + 1))) and
-  ((not (to_rep(addr__first) <= to_rep(addr__last))) ->
-  ((start + len) <= 0))) and ult(value, maxvalue(len))))))
-
-axiom H6 : (((- 2147483648) <= 2147483647) -> in_range1(pokeresult))
-
-axiom H7 : ((0 <= 0) -> in_range4(v))
-
-axiom H8 : ((o5 = lemmafunction2(value, len)) and (in_range4(o5) and
-  ((o5 = 0) and
-  (forall i:int. (((len <= i) and (i <= 63)) -> (not (nth(value,
-  i) = true)))))))
-
-axiom H9 : (result1 = v)
-
-axiom H10 : (v1 = o5)
-
  (* File "bitwalker.ads", line 134, characters 0-0 *)
-goal WP_parameter_def : (to_rep(addr__first) = 0)
+goal WP_parameter_def :
+  (forall pokeresult:int. forall v:int. forall o:int. forall result:int.
+  forall v1:int. (in_range2(start) -> (in_range2(len) -> (dynamic_property(0,
+  2147483646, to_rep(addr__first), to_rep(addr__last)) ->
+  (((to_rep(addr__first) = 0) and
+  ((((to_rep(addr__first) <= to_rep(addr__last)) and
+  ((8 * ((to_rep(addr__last) - to_rep(addr__first)) + 1)) <  2147483647)) or
+  ((not (to_rep(addr__first) <= to_rep(addr__last))) and
+  ((8 * 0) <  2147483647))) and (((0 <= len) and (len <= 63)) and
+  ((((to_rep(addr__first) <= to_rep(addr__last)) and
+  ((start + len) <= ((to_rep(addr__last) - to_rep(addr__first)) + 1))) or
+  ((not (to_rep(addr__first) <= to_rep(addr__last))) and
+  ((start + len) <= 0))) and ult(value, maxvalue(len)))))) ->
+  ((((- 2147483648) <= 2147483647) -> in_range1(pokeresult)) -> (((0 <= 0) ->
+  in_range4(v)) -> ((((o = lemmafunction2(value, len)) and (in_range4(o) and
+  ((o = 0) and
+  (forall i:int. (((len <= i) and (i <= 63)) -> (not (nth(value,
+  i) = true))))))) and (({ int__content = result } = { int__content = v
+  }) and (v1 = o))) -> (to_rep(addr__first) = 0)))))))))

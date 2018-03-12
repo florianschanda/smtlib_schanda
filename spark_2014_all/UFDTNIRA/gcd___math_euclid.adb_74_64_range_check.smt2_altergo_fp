@@ -189,12 +189,6 @@ axiom Max_assoc :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -206,6 +200,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -321,211 +321,29 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic an : int
-
-logic bn : int
-
-logic c : int
-
-logic math_euclid__gcd__result : int
-
-logic o : int
-
-logic temp___134 : int
-
-logic temp___133 : int
-
-logic temp___132 : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic x : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic x1 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : bool
-
-logic x2 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : bool
-
-logic c1 : int
-
-logic result : int
-
-logic an1 : int
-
-logic result1 : int
-
-logic bn1 : int
-
-logic result2 : int
-
-logic c2 : int
-
-logic result3 : int
-
-logic an2 : int
-
-logic result4 : int
-
-logic bn2 : int
-
-logic an3 : int
-
-logic bn3 : int
-
-logic c3 : int
-
-logic result5 : int
-
-logic c4 : int
-
-logic result6 : int
-
-logic an4 : int
-
-logic result7 : int
-
-logic bn4 : int
-
-logic an5 : int
-
-logic bn5 : int
-
-logic c5 : int
-
-logic an6 : int
-
-logic bn6 : int
-
-logic c6 : int
-
-logic an7 : int
-
-logic bn7 : int
-
-logic c7 : int
-
-logic an8 : int
-
-logic bn8 : int
-
-logic c8 : int
-
-logic an9 : int
-
-logic bn9 : int
-
-logic c9 : int
-
-logic an10 : int
-
-logic bn10 : int
-
-logic c10 : int
-
-logic result8 : int
-
-logic math_euclid__gcd__result1 : int
-
-logic math_euclid__gcd__result2 : int
-
-logic math_euclid__gcd__result3 : int
-
-logic an11 : int
-
-logic bn11 : int
-
-logic c11 : int
-
-logic math_euclid__gcd__result4 : int
-
-logic an12 : int
-
-logic bn12 : int
-
-logic c12 : int
-
-logic math_euclid__gcd__result5 : int
-
-logic result9 : bool
-
-logic result10 : bool
-
-axiom H : in_range2(a)
-
-axiom H1 : in_range2(b)
-
-axiom H2 : (result = an)
-
-axiom H3 : (an1 = a)
-
-axiom H4 : in_range2(an1)
-
-axiom H5 : ((o = b) and in_range1(b))
-
-axiom H6 : (result1 = bn)
-
-axiom H7 : (bn1 = o)
-
-axiom H8 : in_range1(bn1)
-
-axiom H9 : ((1 <= 2147483647) -> in_range2(c))
-
-axiom H10 : (not (bn1 = 0))
-
-axiom H11 : (result2 = c)
-
-axiom H12 : (c2 = an1)
-
-axiom H13 : ((o1 = bn1) and in_range2(bn1))
-
-axiom H14 : (an1 = result3)
-
-axiom H15 : (an2 = o1)
-
-axiom H16 : ((o2 = mod(c2, bn1)) and in_range1(mod(c2, bn1)))
-
-axiom H17 : (bn1 = result4)
-
-axiom H18 : (bn2 = o2)
-
-axiom H19 :
-  (forall x3:int. (((1 <= x3) and (x3 <= 2147483647)) -> (((divides(x3,
-  c2) = true) and (divides(x3, an2) = true)) <-> ((divides(x3,
-  an2) = true) and ((divides(an2, c2) = true) or (divides(x3, mod(c2,
-  an2)) = true))))))
-
-axiom H20 :
-  (forall x3:int. (((1 <= x3) and (x3 <= 2147483647)) -> (((divides(x3,
-  a) = true) and (divides(x3, b) = true)) <-> ((divides(x3, an3) = true) and
-  ((bn3 = 0) or (divides(x3, bn3) = true))))))
-
-axiom H21 : ((((1 <= 2147483647) -> in_range2(an3)) and ((0 <= 2147483647) ->
-  in_range1(bn3))) and ((1 <= 2147483647) -> in_range2(c3)))
-
-axiom H22 : (1 <= x)
-
-axiom H23 : (x <= 2147483647)
-
-axiom H24 : (not (bn3 = 0))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range2(bn3)
+goal WP_parameter_def :
+  (forall an:int. forall bn:int. forall c:int. forall o:int. forall o1:int.
+  forall o2:int. forall x:int. forall result:int. forall an1:int.
+  forall result1:int. forall bn1:int. forall result2:int. forall c1:int.
+  forall result3:int. forall an2:int. forall result4:int. forall bn2:int.
+  forall an3:int. forall bn3:int. forall c2:int. (in_range2(a) ->
+  (in_range2(b) -> ((({ int__content = result } = { int__content = an }) and
+  (an1 = a)) -> (in_range2(an1) -> ((((o = b) and in_range1(b)) and (({
+  int__content = result1 } = { int__content = bn }) and (bn1 = o))) ->
+  (in_range1(bn1) -> (((1 <= 2147483647) -> in_range2(c)) ->
+  ((not (bn1 = 0)) -> ((({ int__content = result2 } = { int__content = c
+  }) and (c1 = an1)) -> ((((o1 = bn1) and in_range2(bn1)) and
+  ((an1 = result3) and (an2 = o1))) -> ((((o2 = mod(c1, bn1)) and
+  in_range1(mod(c1, bn1))) and ((bn1 = result4) and (bn2 = o2))) ->
+  ((forall x1:int. (((1 <= x1) and (x1 <= 2147483647)) -> (((divides(x1,
+   c1) = true) and (divides(x1, an2) = true)) <-> ((divides(x1,
+   an2) = true) and ((divides(an2, c1) = true) or (divides(x1, mod(c1,
+   an2)) = true)))))) ->
+  ((forall x1:int. (((1 <= x1) and (x1 <= 2147483647)) -> (((divides(x1,
+   a) = true) and (divides(x1, b) = true)) <-> ((divides(x1, an3) = true) and
+   ((bn3 = 0) or (divides(x1, bn3) = true)))))) ->
+  (((((1 <= 2147483647) -> in_range2(an3)) and ((0 <= 2147483647) ->
+  in_range1(bn3))) and ((1 <= 2147483647) -> in_range2(c2))) ->
+  (((1 <= x) and (x <= 2147483647)) -> ((not (bn3 = 0)) ->
+  in_range2(bn3))))))))))))))))))

@@ -530,13 +530,7 @@ logic par4 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic g3 : int
-
-logic g4 : int
-
-axiom H : in_range(g3)
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(g4))
-
  (* File "simple_oo_without_contracts.ads", line 15, characters 0-0 *)
-goal WP_parameter_def : (g3 = to_rep(par))
+goal WP_parameter_def :
+  (forall g3:int. forall g4:int. (in_range(g3) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(g4)) -> (g3 = to_rep(par)))))

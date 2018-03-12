@@ -331,17 +331,6 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic x__split_fields : even
-
-logic x__split_fields1 : even
-
-logic o : int
-
-logic o1 : even
-
-axiom H : (in_range(i7s) and (mod(i7s, 2) = 0))
-
-axiom H1 : true
-
  (* File "dynamic_preds.adb", line 38, characters 0-0 *)
-goal WP_parameter_def : (mod(2, 2) = 0)
+goal WP_parameter_def : ((in_range(i7s) and (mod(i7s, 2) = 0)) -> (mod(2,
+  2) = 0))

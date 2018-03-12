@@ -135,59 +135,20 @@ logic n : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic p__ident__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic result : int
-
-logic p__ident__result1 : int
-
-logic p__ident__result2 : int
-
-logic p__ident__result3 : int
-
-logic p__ident__result4 : int
-
-logic p__ident__result5 : int
-
-logic result1 : int
-
-axiom H : in_range1(n)
-
-axiom H1 : (not (n = 2147483647))
-
-axiom H2 : (p__ident__result1 = p__ident__result2)
-
-axiom H3 : (p__ident__result3 = p__ident__result1)
-
-axiom H4 : ((o = n) and (not (n = 2147483647)))
-
-axiom H5 : (o1 = (o + 1))
-
-axiom H6 : ((o2 = o1) and (not (o1 = (- 2147483648))))
-
-axiom H7 : (o3 = (o2 - 1))
-
-axiom H8 : ((o4 = o3) and in_range1(o3))
-
-axiom H9 : (result = p__ident__result)
-
-axiom H10 : (p__ident__result1 = o4)
-
-axiom H11 : (p__ident__result4 = p__ident__result2)
-
-axiom H12 : (p__ident__result5 = p__ident__result3)
-
-axiom H13 : (result1 = p__ident__result4)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (p__ident__result4 = n)
+goal WP_parameter_def :
+  (forall p__ident__result:int. forall o:int. forall o1:int. forall o2:int.
+  forall o3:int. forall o4:int. forall result:int.
+  forall p__ident__result1:int. forall p__ident__result2:int.
+  forall p__ident__result3:int. forall p__ident__result4:int.
+  forall p__ident__result5:int.
+  (forall result1:int. ((in_range1(n) and ((not (n = 2147483647)) and
+  (((((p__ident__result1 = p__ident__result2) and
+  (p__ident__result3 = p__ident__result1)) and (((((((o = n) and
+  (not (n = 2147483647))) and (o1 = (o + 1))) and ((o2 = o1) and
+  (not (o1 = (- 2147483648))))) and (o3 = (o2 - 1))) and ((o4 = o3) and
+  in_range1(o3))) and ((result = p__ident__result) and
+  (p__ident__result1 = o4)))) and
+  ((p__ident__result4 = p__ident__result2) and
+  (p__ident__result5 = p__ident__result3))) and
+  (result1 = p__ident__result4)))) -> (p__ident__result4 = n))))

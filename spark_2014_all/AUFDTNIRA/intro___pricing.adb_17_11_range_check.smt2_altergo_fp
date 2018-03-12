@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -341,28 +341,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def :
-  (forall v:my_int. forall v1:my_int.
-  (forall i:int [(singleton({ us_split_fields1 = {
-  rec__pricing__item__price = v; rec__pricing__item__number = v1 } },
-  i)[i])]. ((singleton({ us_split_fields1 = { rec__pricing__item__price = v;
-  rec__pricing__item__number = v1 } }, i)[i]) = { us_split_fields1 = {
-  rec__pricing__item__price = v; rec__pricing__item__number = v1 } })))
-
 logic bool_eq6 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -373,17 +351,17 @@ axiom bool_eq_def5 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and (bool_eq5((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and (bool_eq5((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq5((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq6(a,
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq5((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq6(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -393,9 +371,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq5((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq5((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)))))))
 
 logic to_rep1 : integer -> int
 
@@ -528,106 +506,11 @@ axiom mult__post_axiom :
   ((not ((x * y) <  10000)) -> ((10000 <= (x * y)) -> (mult(x,
   y) = 10000)))) and in_range3(mult(x, y)))))
 
-logic total : int
-
-logic it : int
-
-logic pricing__price_of_basket__result : int
-
-logic temp___166 : int
-
-logic temp___165 : int
-
-logic k : int
-
-logic us : int
-
-logic o : int
-
-logic o1 : bool
-
-logic o2 : int
-
-logic o3 : int
-
-logic it1 : int
-
-logic result : int
-
-logic total1 : int
-
-logic result1 : int
-
-logic it2 : int
-
-logic total2 : int
-
-logic it3 : int
-
-logic result2 : bool
-
-logic result3 : int
-
-logic total3 : int
-
-logic result4 : int
-
-logic it4 : int
-
-logic total4 : int
-
-logic it5 : int
-
-logic total5 : int
-
-logic it6 : int
-
-logic total6 : int
-
-logic it7 : int
-
-logic total7 : int
-
-logic it8 : int
-
-logic total8 : int
-
-logic it9 : int
-
-logic total9 : int
-
-logic it10 : int
-
-logic result5 : int
-
-logic pricing__price_of_basket__result1 : int
-
-logic pricing__price_of_basket__result2 : int
-
-logic pricing__price_of_basket__result3 : int
-
-logic total10 : int
-
-logic it11 : int
-
-logic pricing__price_of_basket__result4 : int
-
-logic total11 : int
-
-logic it12 : int
-
-logic pricing__price_of_basket__result5 : int
-
-axiom H : dynamic_property(1, 2147483647, to_rep1(first(bk1)),
-  to_rep1(last(bk1)))
-
-axiom H1 : (result = total)
-
-axiom H2 : (total1 = 0)
-
-axiom H3 : in_range3(total1)
-
-axiom H4 : (to_rep1(first(bk1)) <= to_rep1(last(bk1)))
-
  (* File "sat.ads", line 12, characters 0-0 *)
-goal WP_parameter_def : (1 <= to_rep1(first(bk1)))
+goal WP_parameter_def :
+  (forall total:int. forall result:int. forall total1:int.
+  (dynamic_property(1, 2147483647, to_rep1(first(bk1)),
+  to_rep1(last(bk1))) -> ((({ int__content = result } = { int__content =
+  total }) and (total1 = 0)) -> (in_range3(total1) ->
+  ((to_rep1(first(bk1)) <= to_rep1(last(bk1))) ->
+  (1 <= to_rep1(first(bk1))))))))

@@ -147,19 +147,13 @@ axiom get_current_id__post_axiom :
   (forall entities__state:us_private [get_current_id(entities__state)].
   in_range1(get_current_id(entities__state)))
 
-logic state : us_private
-
-logic state1 : us_private
-
-axiom H : ((get_current_id(state) = 1) and
-  (get_current_cycles(state) = 2147483647))
-
-axiom H1 : (get_current_id(state) = 1)
-
-axiom H2 : (get_current_cycles(state) = 2147483647)
-
-axiom H3 : ((get_current_id(state1) = 9) and
-  (get_current_cycles(state1) = get_current_cycles(state)))
-
  (* File "main.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (get_current_id(state1) = 9)
+goal WP_parameter_def :
+  (forall state:us_private. forall state1:us_private.
+  (((get_current_id(state) = 1) and
+  (get_current_cycles(state) = 2147483647)) ->
+  ((get_current_id(state) = 1) ->
+  ((get_current_cycles(state) = 2147483647) ->
+  (((get_current_id(state1) = 9) and
+  (get_current_cycles(state1) = get_current_cycles(state))) ->
+  (get_current_id(state1) = 9))))))

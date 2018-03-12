@@ -1034,19 +1034,9 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic msw : t
+logic rliteral1 : t
 
-logic lsw : t
-
-logic result : t
-
-logic msw1 : t
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : true
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 0)
 
  (* File "sandbox.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : ule1(toBig(of_int(0)), lsr_bv1(whole, of_int1(32)))
+goal WP_parameter_def : ule1(toBig(rliteral1), lsr_bv1(whole, of_int1(32)))

@@ -143,24 +143,9 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : (1 <  x)
-
-axiom H2 : ((o = (x - 1)) and in_range1((x - 1)))
-
-axiom H3 : ((o1 = down(o)) and (in_range1(o1) and (((o = 1) -> (o1 = o)) and
-  ((not (o = 1)) -> (o1 = (down((o - 1)) + 1))))))
-
-axiom H4 : (o2 = (o1 + 1))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(o2)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. forall o2:int. (in_range1(x) -> ((1 <  x) ->
+  (((((o = (x - 1)) and in_range1((x - 1))) and ((o1 = down(o)) and
+  (in_range1(o1) and (((o = 1) and (o1 = o)) or ((not (o = 1)) and
+  (o1 = (down((o - 1)) + 1))))))) and (o2 = (o1 + 1))) -> in_range(o2)))))

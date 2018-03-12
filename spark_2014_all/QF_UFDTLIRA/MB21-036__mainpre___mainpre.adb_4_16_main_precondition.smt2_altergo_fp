@@ -54,9 +54,5 @@ logic is_valid__function_guard : bool, us_private -> prop
 
 axiom is_valid__post_axiom : true
 
-logic state : us_private
-
-axiom H : (is_valid(state) = true)
-
  (* File "pack.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : (is_valid(state) = true)
+goal WP_parameter_def : (forall state:us_private. (is_valid(state) = true))

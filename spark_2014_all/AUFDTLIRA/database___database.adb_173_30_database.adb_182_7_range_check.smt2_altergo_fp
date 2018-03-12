@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -313,34 +313,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def :
-  (forall v:bool. forall v1:ext_account_num. forall v2:ext_account_num.
-  (forall i:int [(singleton({ us_split_fields1 = {
-  rec__database__availability__account_link__available = v;
-  rec__database__availability__account_link__prev = v1;
-  rec__database__availability__account_link__next = v2 } }, i)[i])].
-  ((singleton({ us_split_fields1 = {
-  rec__database__availability__account_link__available = v;
-  rec__database__availability__account_link__prev = v1;
-  rec__database__availability__account_link__next = v2 } }, i)[i]) = {
-  us_split_fields1 = { rec__database__availability__account_link__available =
-  v; rec__database__availability__account_link__prev = v1;
-  rec__database__availability__account_link__next = v2 } })))
-
 logic bool_eq5 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -351,17 +323,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_141:int. ((((a__first <= temp___idx_141) and
-  (temp___idx_141 <= a__last)) and (bool_eq4((a[temp___idx_141]),
-  (b[((b__first - a__first) + temp___idx_141)])) = true)) or
-  (not ((a__first <= temp___idx_141) and (temp___idx_141 <= a__last)))))) ->
+  (forall temp___idx_163:int. ((((a__first <= temp___idx_163) and
+  (temp___idx_163 <= a__last)) and (bool_eq4((a[temp___idx_163]),
+  (b[((b__first - a__first) + temp___idx_163)])) = true)) or
+  (not ((a__first <= temp___idx_163) and (temp___idx_163 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_141:int. (((a__first <= temp___idx_141) and
-  (temp___idx_141 <= a__last)) -> (bool_eq4((a[temp___idx_141]),
-  (b[((b__first - a__first) + temp___idx_141)])) = true))))) -> (bool_eq5(a,
+  (forall temp___idx_163:int. (((a__first <= temp___idx_163) and
+  (temp___idx_163 <= a__last)) -> (bool_eq4((a[temp___idx_163]),
+  (b[((b__first - a__first) + temp___idx_163)])) = true))))) -> (bool_eq5(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -371,9 +343,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_141:int. (((a__first <= temp___idx_141) and
-  (temp___idx_141 <= a__last)) -> (bool_eq4((a[temp___idx_141]),
-  (b[((b__first - a__first) + temp___idx_141)])) = true)))))))
+  (forall temp___idx_163:int. (((a__first <= temp___idx_163) and
+  (temp___idx_163 <= a__last)) -> (bool_eq4((a[temp___idx_163]),
+  (b[((b__first - a__first) + temp___idx_163)])) = true)))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -396,114 +368,36 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 axiom no_account_link__def_axiom : ((no_account_link = of_int(0)) and
   ((no_account_link1 = of_rep(0)) and (no_account_link2 = of_rep(0))))
 
-logic links : (int,us_rep) farray
-
-logic first_available : int
-
-logic tmp_prev : int
-
-logic tmp_next : int
-
-logic i : int
-
-logic o : ext_account_num
-
-logic o1 : ext_account_num
-
-logic o2 : bool
-
-logic o3 : ext_account_num
-
-logic o4 : ext_account_num
-
-logic database__availability__no_account_link__assume : bool
-
-logic database__availability__no_account_link__assume1 : ext_account_num
-
-logic database__availability__no_account_link__assume2 : ext_account_num
-
-logic o5 : int
-
-logic result : int
-
-logic first_available1 : int
-
-logic result1 : int
-
-logic i1 : int
-
-logic links1 : (int,us_rep) farray
-
-logic tmp_prev1 : int
-
-logic tmp_next1 : int
-
-logic i2 : int
-
-logic result2 : int
-
-logic tmp_prev2 : int
-
-logic result3 : int
-
-logic tmp_prev3 : int
-
-axiom H : (to_rep(o) = 0)
-
-axiom H1 : (to_rep(o1) = 0)
-
-axiom H2 : (of_int(0) = o2)
-
-axiom H3 : (o1 = o3)
-
-axiom H4 : (o = o4)
-
-axiom H5 : (database__availability__no_account_link__assume = o2)
-
-axiom H6 : (database__availability__no_account_link__assume1 = o3)
-
-axiom H7 : (database__availability__no_account_link__assume2 = o4)
-
-axiom H8 :
+ (* File "database.ads", line 121, characters 0-0 *)
+goal WP_parameter_def :
+  (forall links:(int,us_rep) farray. forall first_available:int.
+  forall tmp_prev:int. forall tmp_next:int. forall i:int.
+  forall o:ext_account_num. forall o1:ext_account_num. forall o2:bool.
+  forall o3:ext_account_num. forall o4:ext_account_num.
+  forall database__availability__no_account_link__assume:bool.
+  forall database__availability__no_account_link__assume1:ext_account_num.
+  forall database__availability__no_account_link__assume2:ext_account_num.
+  forall result:int. forall first_available1:int. forall result1:int.
+  forall i1:int. forall links1:(int,us_rep) farray. forall tmp_prev1:int.
+  forall tmp_next1:int. forall i2:int. forall result2:int.
+  forall tmp_prev2:int. forall result3:int. forall tmp_prev3:int.
+  (((((to_rep(o) = 0) and ((to_rep(o1) = 0) and ((of_int(0) = o2) and
+  ((o1 = o3) and (o = o4))))) and
+  ((database__availability__no_account_link__assume = o2) and
+  ((database__availability__no_account_link__assume1 = o3) and
+  (database__availability__no_account_link__assume2 = o4)))) and
   ((database__availability__no_account_link__assume = no_account_link) and
   ((database__availability__no_account_link__assume1 = no_account_link1) and
-  (database__availability__no_account_link__assume2 = no_account_link2)))
-
-axiom H9 : (result = first_available)
-
-axiom H10 : (first_available1 = 1)
-
-axiom H11 : in_range1(first_available1)
-
-axiom H12 : ((0 <= 200000) -> in_range1(tmp_prev))
-
-axiom H13 : ((0 <= 200000) -> in_range1(tmp_next))
-
-axiom H14 : (result1 = i)
-
-axiom H15 : (i1 = 1)
-
-axiom H16 : (1 <= i1)
-
-axiom H17 : (i1 <= 200000)
-
-axiom H18 : (((((0 <= 200000) -> in_range1(tmp_prev1)) and ((0 <= 200000) ->
-  in_range1(tmp_next1))) and
-  (forall temp___416:int. (((1 <= temp___416) and (temp___416 <= 200000)) ->
-  ((i2 <= temp___416) -> ((links1[temp___416]) = (links[temp___416])))))) and
-  ((1 <= i2) and (i2 <= 200000)))
-
-axiom H19 : ((i2 = 1) -> (result2 = tmp_prev1))
-
-axiom H20 : ((i2 = 1) -> (tmp_prev2 = 0))
-
-axiom H21 : ((not (i2 = 1)) -> (result3 = tmp_prev1))
-
-axiom H22 : ((not (i2 = 1)) -> (tmp_prev3 = (i2 - 1)))
-
-axiom H23 : ((not (i2 = 1)) -> (tmp_prev2 = tmp_prev3))
-
-axiom H24 : (not (i2 = 200000))
-
- (* File "database.ads", line 121, characters 0-0 *)
-goal WP_parameter_def : in_range1((i2 + 1))
+  (database__availability__no_account_link__assume2 = no_account_link2)))) ->
+  (((result = first_available) and (first_available1 = 1)) ->
+  (in_range1(first_available1) -> (((0 <= 200000) -> in_range1(tmp_prev)) ->
+  (((0 <= 200000) -> in_range1(tmp_next)) -> (((result1 = i) and (i1 = 1)) ->
+  (((1 <= i1) and (i1 <= 200000)) -> ((((((0 <= 200000) ->
+  in_range1(tmp_prev1)) and ((0 <= 200000) -> in_range1(tmp_next1))) and
+  (forall temp___455:int. (((1 <= temp___455) and (temp___455 <= 200000)) ->
+  ((i2 <= temp___455) -> ((links1[temp___455]) = (links[temp___455])))))) and
+  ((1 <= i2) and (i2 <= 200000))) -> ((((i2 = 1) and
+  ((result2 = tmp_prev1) and (tmp_prev2 = 0))) or ((not (i2 = 1)) and
+  (((result3 = tmp_prev1) and (tmp_prev3 = (i2 - 1))) and
+  (tmp_prev2 = tmp_prev3)))) -> ((not (i2 = 200000)) ->
+  in_range1((i2 + 1)))))))))))))

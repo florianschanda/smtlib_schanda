@@ -1773,17 +1773,24 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 axiom shift_right__post_axiom : true
 
+logic rliteral3 : t1
+
+axiom rliteral_axiom3 : (tqtint1(rliteral3) = 0)
+
+logic rliteral4 : t2
+
+axiom rliteral_axiom4 : (tqtint2(rliteral4) = 0)
+
 axiom shift_right__def_axiom :
   (forall v:t.
   (forall amount:int [shift_right(v, amount)]. (in_range2(amount) ->
   ((((1 <= 64) and (64 <= 8)) -> (((amount <  8) -> (shift_right(v,
   amount) = toBig2(lsr_bv1(toSmall2(v), of_int1(amount))))) and
-  ((not (amount <  8)) -> (shift_right(v,
-  amount) = toBig2(of_int1(0)))))) and ((not ((1 <= 64) and (64 <= 8))) ->
-  ((((9 <= 64) and (64 <= 16)) -> (((amount <  16) -> (shift_right(v,
-  amount) = toBig1(lsr_bv2(toSmall1(v), of_int2(amount))))) and
-  ((not (amount <  16)) -> (shift_right(v,
-  amount) = toBig1(of_int2(0)))))) and ((not ((9 <= 64) and (64 <= 16))) ->
+  ((not (amount <  8)) -> (shift_right(v, amount) = toBig2(rliteral3))))) and
+  ((not ((1 <= 64) and (64 <= 8))) -> ((((9 <= 64) and (64 <= 16)) ->
+  (((amount <  16) -> (shift_right(v, amount) = toBig1(lsr_bv2(toSmall1(v),
+  of_int2(amount))))) and ((not (amount <  16)) -> (shift_right(v,
+  amount) = toBig1(rliteral4))))) and ((not ((9 <= 64) and (64 <= 16))) ->
   ((((17 <= 64) and (64 <= 32)) -> (shift_right(v,
   amount) = toBig(lsr_bv3(toSmall(v), of_int3(amount))))) and
   ((not ((17 <= 64) and (64 <= 32))) -> (shift_right(v, amount) = lsr_bv(v,
@@ -1800,11 +1807,11 @@ axiom shift_left__def_axiom :
   (forall amount:int [shift_left(v, amount)]. (in_range2(amount) ->
   ((((1 <= 64) and (64 <= 8)) -> (((amount <  8) -> (shift_left(v,
   amount) = toBig2(lsl_bv1(toSmall2(v), of_int1(amount))))) and
-  ((not (amount <  8)) -> (shift_left(v, amount) = toBig2(of_int1(0)))))) and
+  ((not (amount <  8)) -> (shift_left(v, amount) = toBig2(rliteral3))))) and
   ((not ((1 <= 64) and (64 <= 8))) -> ((((9 <= 64) and (64 <= 16)) ->
   (((amount <  16) -> (shift_left(v, amount) = toBig1(lsl_bv2(toSmall1(v),
   of_int2(amount))))) and ((not (amount <  16)) -> (shift_left(v,
-  amount) = toBig1(of_int2(0)))))) and ((not ((9 <= 64) and (64 <= 16))) ->
+  amount) = toBig1(rliteral4))))) and ((not ((9 <= 64) and (64 <= 16))) ->
   ((((17 <= 64) and (64 <= 32)) -> (shift_left(v,
   amount) = toBig(lsl_bv3(toSmall(v), of_int3(amount))))) and
   ((not ((17 <= 64) and (64 <= 32))) -> (shift_left(v, amount) = lsl_bv(v,
@@ -1816,10 +1823,13 @@ logic make_mask__function_guard : t, int -> prop
 
 axiom make_mask__post_axiom : true
 
+logic rliteral5 : t
+
+axiom rliteral_axiom5 : (tqtint(rliteral5) = 18446744073709551615)
+
 axiom make_mask__def_axiom :
   (forall num_bits:int [make_mask(num_bits)]. (in_range1(num_bits) ->
-  (make_mask(num_bits) = shift_right(of_int(18446744073709551615),
-  (64 - num_bits)))))
+  (make_mask(num_bits) = shift_right(rliteral5, (64 - num_bits)))))
 
 logic extract_bits_inline_always : t, int, int -> t
 
@@ -1849,110 +1859,54 @@ logic to__ : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result : t
-
-logic o : t
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : t
-
-logic o4 : int
-
-logic o5 : t
-
-logic o6 : t
-
-logic o7 : t
-
-logic result : t
-
-logic bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result1 : t
-
-logic bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result2 : t
-
-logic bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result3 : t
-
-logic bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result4 : t
-
-logic bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result5 : t
-
-logic result1 : bool
-
-logic result2 : bool
-
-axiom H : true
-
-axiom H1 : in_range(from)
-
-axiom H2 : in_range(to__)
-
-axiom H3 : (from <= to__)
-
-axiom H4 :
-  (bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result1 = bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result2)
-
-axiom H5 :
-  (bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result3 = bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result1)
-
-axiom H6 : ((o = extract_bits_inline_always(value, from, to__)) and
+ (* File "bits_manipulation.ads", line 3, characters 0-0 *)
+goal WP_parameter_def :
+  (forall bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result:t.
+  forall o:t. forall o1:int. forall o2:t. forall o3:int. forall o4:t.
+  forall o5:t. forall o6:t. forall result:t.
+  forall bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result1:t.
+  forall bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result2:t.
+  forall bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result3:t.
+  forall bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result4:t.
+  forall bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result5:t.
+  forall result1:bool. forall result2:bool. (in_range(from) ->
+  (in_range(to__) -> ((from <= to__) ->
+  (((((bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result1 = bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result2) and
+  (bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result3 = bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result1)) and
+  (((o = extract_bits_inline_always(value, from, to__)) and
   ((o = bw_and(shift_right(value, from), make_mask(((to__ - from) + 1)))) and
   (ule(o, make_mask(((to__ - from) + 1))) and (shift_left(o,
-  from) = bw_and(value, shift_left(make_mask(((to__ - from) + 1)), from))))))
-
-axiom H7 :
-  (result = bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result)
-
-axiom H8 :
-  (bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result1 = o)
-
-axiom H9 :
-  (bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result4 = bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result2)
-
-axiom H10 :
-  (bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result5 = bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result3)
-
-axiom H11 : ((o4 = ((to__ - from) + 1)) and in_range1(((to__ - from) + 1)))
-
-axiom H12 : ((o5 = make_mask(o4)) and
-  (o5 = shift_right(of_int(18446744073709551615), (64 - o4))))
-
-axiom H13 : ((o6 = shift_right(value, from)) and ((((1 <= 64) and
-  (64 <= 8)) -> (((from <  8) -> (o6 = toBig2(lsr_bv1(toSmall2(value),
-  of_int1(from))))) and ((not (from <  8)) ->
-  (o6 = toBig2(of_int1(0)))))) and ((not ((1 <= 64) and (64 <= 8))) ->
-  ((((9 <= 64) and (64 <= 16)) -> (((from <  16) ->
-  (o6 = toBig1(lsr_bv2(toSmall1(value), of_int2(from))))) and
-  ((not (from <  16)) -> (o6 = toBig1(of_int2(0)))))) and
-  ((not ((9 <= 64) and (64 <= 16))) -> ((((17 <= 64) and (64 <= 32)) ->
-  (o6 = toBig(lsr_bv3(toSmall(value), of_int3(from))))) and
-  ((not ((17 <= 64) and (64 <= 32))) -> (o6 = lsr_bv(value,
-  of_int(from))))))))))
-
-axiom H14 : (o7 = bw_and(o6, o5))
-
-axiom H15 :
-  (((bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result4 = o7) ->
-  (result1 = true)) and
-  ((not (bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result4 = o7)) ->
-  (result1 = false)))
-
-axiom H16 : (result1 = true)
-
-axiom H17 : ((o2 = ((to__ - from) + 1)) and in_range1(((to__ - from) + 1)))
-
-axiom H18 : ((o3 = make_mask(o2)) and
-  (o3 = shift_right(of_int(18446744073709551615), (64 - o2))))
-
-axiom H19 :
+  from) = bw_and(value, shift_left(make_mask(((to__ - from) + 1)),
+  from)))))) and (({ t__content = result } = { t__content =
+  bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result
+  }) and
+  (bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result1 = o)))) and
+  (({ t__content =
+  bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result4
+  } = { t__content =
+  bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result2
+  }) and
+  (bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result5 = bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result3))) ->
+  ((((((o3 = ((to__ - from) + 1)) and in_range1(((to__ - from) + 1))) and
+  ((o4 = make_mask(o3)) and (o4 = shift_right(rliteral5, (64 - o3))))) and
+  (((o5 = shift_right(value, from)) and ((((1 <= 64) and (64 <= 8)) and
+  (((from <  8) and (o5 = toBig2(lsr_bv1(toSmall2(value),
+  of_int1(from))))) or ((not (from <  8)) and (o5 = toBig2(rliteral3))))) or
+  ((not ((1 <= 64) and (64 <= 8))) and ((((9 <= 64) and (64 <= 16)) and
+  (((from <  16) and (o5 = toBig1(lsr_bv2(toSmall1(value),
+  of_int2(from))))) or ((not (from <  16)) and (o5 = toBig1(rliteral4))))) or
+  ((not ((9 <= 64) and (64 <= 16))) and ((((17 <= 64) and (64 <= 32)) and
+  (o5 = toBig(lsr_bv3(toSmall(value), of_int3(from))))) or
+  ((not ((17 <= 64) and (64 <= 32))) and (o5 = lsr_bv(value,
+  of_int(from)))))))))) and (o6 = bw_and(o5, o4)))) and
+  (((bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result4 = o6) and
+  (result1 = true)) or
+  ((not (bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result4 = o6)) and
+  (result1 = false)))) -> ((result1 = true) ->
+  (((((o1 = ((to__ - from) + 1)) and in_range1(((to__ - from) + 1))) and
+  ((o2 = make_mask(o1)) and (o2 = shift_right(rliteral5, (64 - o1))))) and
   ((ule(bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result4,
-  o3) -> (result2 = true)) and
+  o2) and (result2 = true)) or
   ((not ule(bits_manipulation_unsigned__unsigned_64__functions__extract_bits_not_inline__result4,
-  o3)) -> (result2 = false)))
-
-axiom H20 : (result2 = true)
-
- (* File "bits_manipulation.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : in_range1(((to__ - from) + 1))
+  o2)) and (result2 = false)))) -> ((result2 = true) ->
+  in_range1(((to__ - from) + 1)))))))))))

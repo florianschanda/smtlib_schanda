@@ -596,12 +596,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -613,6 +607,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -687,10 +687,18 @@ logic pow2__function_guard : t, t -> prop
 
 axiom pow2__post_axiom : true
 
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 1)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 0)
+
 axiom pow2__def_axiom :
   (forall x1:t [pow21(x1)]. (((tqtint(x1) <  16) ->
-  (pow21(x1) = lsl_bv(of_int(1), of_int(tqtint(x1))))) and
-  ((not (tqtint(x1) <  16)) -> (pow21(x1) = of_int(0)))))
+  (pow21(x1) = lsl_bv(rliteral, of_int(tqtint(x1))))) and
+  ((not (tqtint(x1) <  16)) -> (pow21(x1) = rliteral1))))
 
 logic sqr : t -> t
 
@@ -716,299 +724,13 @@ logic attr__ATTRIBUTE_ADDRESS7 : int
 
 logic attr__ATTRIBUTE_ADDRESS8 : int
 
-logic num : t
+logic rliteral2 : t
 
-logic bits : t
-
-logic res : t
-
-logic b : t
-
-logic i : t
-
-logic m : t
-
-logic bits_g : t
-
-logic res_g : t
-
-logic p__sqrt_von_neumann_aux16__result : t
-
-logic temp___234 : t
-
-logic temp___235 : t
-
-logic temp___233 : t
-
-logic temp___232 : t
-
-logic temp___230 : t
-
-logic temp___231 : t
-
-logic temp___228 : t
-
-logic temp___229 : t
-
-logic temp___236 : t
-
-logic o : t
-
-logic o1 : t
-
-logic b1 : t
-
-logic result : t
-
-logic i1 : t
-
-logic result1 : t
-
-logic num1 : t
-
-logic result2 : t
-
-logic bits1 : t
-
-logic result3 : t
-
-logic res1 : t
-
-logic result4 : t
-
-logic m1 : t
-
-logic result5 : t
-
-logic bits_g1 : t
-
-logic result6 : t
-
-logic res_g1 : t
-
-logic num2 : t
-
-logic bits2 : t
-
-logic res2 : t
-
-logic b2 : t
-
-logic i2 : t
-
-logic m2 : t
-
-logic bits_g2 : t
-
-logic res_g2 : t
-
-logic temp___2361 : t
-
-logic result7 : t
-
-logic temp___2362 : t
-
-logic result8 : t
-
-logic i3 : t
-
-logic result9 : t
-
-logic m3 : t
-
-logic result10 : t
-
-logic b3 : t
-
-logic result11 : t
-
-logic res3 : t
-
-logic result12 : t
-
-logic num3 : t
-
-logic result13 : t
-
-logic res4 : t
-
-logic result14 : t
-
-logic res_g3 : t
-
-logic result15 : t
-
-logic bits3 : t
-
-logic result16 : t
-
-logic bits_g3 : t
-
-logic num4 : t
-
-logic bits4 : t
-
-logic res5 : t
-
-logic b4 : t
-
-logic i4 : t
-
-logic m4 : t
-
-logic bits_g4 : t
-
-logic res_g4 : t
-
-logic num5 : t
-
-logic bits5 : t
-
-logic res6 : t
-
-logic b5 : t
-
-logic i5 : t
-
-logic m5 : t
-
-logic bits_g5 : t
-
-logic res_g5 : t
-
-logic num6 : t
-
-logic bits6 : t
-
-logic res7 : t
-
-logic b6 : t
-
-logic i6 : t
-
-logic m6 : t
-
-logic bits_g6 : t
-
-logic res_g6 : t
-
-logic num7 : t
-
-logic bits7 : t
-
-logic res8 : t
-
-logic b7 : t
-
-logic i7 : t
-
-logic m7 : t
-
-logic bits_g7 : t
-
-logic res_g7 : t
-
-logic num8 : t
-
-logic bits8 : t
-
-logic res9 : t
-
-logic b8 : t
-
-logic i8 : t
-
-logic m8 : t
-
-logic bits_g8 : t
-
-logic res_g8 : t
-
-logic num9 : t
-
-logic bits9 : t
-
-logic res10 : t
-
-logic b9 : t
-
-logic i9 : t
-
-logic m9 : t
-
-logic bits_g9 : t
-
-logic res_g9 : t
-
-logic result17 : t
-
-logic p__sqrt_von_neumann_aux16__result1 : t
-
-logic p__sqrt_von_neumann_aux16__result2 : t
-
-logic p__sqrt_von_neumann_aux16__result3 : t
-
-logic num10 : t
-
-logic bits10 : t
-
-logic res11 : t
-
-logic b10 : t
-
-logic i10 : t
-
-logic m10 : t
-
-logic bits_g10 : t
-
-logic res_g10 : t
-
-logic p__sqrt_von_neumann_aux16__result4 : t
-
-logic num11 : t
-
-logic bits11 : t
-
-logic res12 : t
-
-logic b11 : t
-
-logic i11 : t
-
-logic m11 : t
-
-logic bits_g11 : t
-
-logic res_g11 : t
-
-logic p__sqrt_von_neumann_aux16__result5 : t
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : true
-
-axiom H3 : true
-
-axiom H4 : true
-
-axiom H5 : (result = i)
-
-axiom H6 : (i1 = of_int(0))
-
-axiom H7 : true
-
-axiom H8 : true
-
-axiom H9 : true
-
-axiom H10 : true
-
-axiom H11 : (result1 = num)
-
-axiom H12 : (num1 = x)
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 65535)
 
  (* File "p.ads", line 16, characters 0-0 *)
-goal WP_parameter_def : ule(num1, of_int(65535))
+goal WP_parameter_def :
+  (forall num:t. forall i:t. forall result:t. forall i1:t. forall result1:t.
+  forall num1:t. ((({ t__content = result } = { t__content = i }) and
+  (i1 = rliteral1)) -> ((({ t__content = result1 } = { t__content = num
+  }) and (num1 = x)) -> ule(num1, rliteral2))))

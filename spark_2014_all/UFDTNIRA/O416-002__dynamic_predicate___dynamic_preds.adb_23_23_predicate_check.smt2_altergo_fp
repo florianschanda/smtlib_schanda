@@ -242,34 +242,12 @@ function even__ref___projection(a: even__ref) : even = (a).even__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : int
-
-logic o : int
-
-logic dynamic_preds__call_init_even__x : int
-
-logic dynamic_preds__call_init_even__x1 : int
-
-logic result : int
-
-logic x1 : int
-
-axiom H : in_range(x)
-
-axiom H1 : (mod(x, 2) = 0)
-
-axiom H2 : (mod(x, 2) = 0)
-
-axiom H3 : (o = x)
-
-axiom H4 : (o = dynamic_preds__call_init_even__x)
-
-axiom H5 : (in_range1(dynamic_preds__call_init_even__x1) and
-  (mod(dynamic_preds__call_init_even__x1, 2) = 0))
-
-axiom H6 : (result = x)
-
-axiom H7 : (x1 = dynamic_preds__call_init_even__x1)
-
  (* File "dynamic_preds.adb", line 14, characters 0-0 *)
-goal WP_parameter_def : (mod(x1, 2) = 0)
+goal WP_parameter_def :
+  (forall x:int. forall o:int. forall dynamic_preds__call_init_even__x:int.
+  forall dynamic_preds__call_init_even__x1:int. forall result:int.
+  forall x1:int. (in_range(x) -> ((mod(x, 2) = 0) -> (((((mod(x, 2) = 0) and
+  (o = x)) and (o = dynamic_preds__call_init_even__x)) and
+  ((in_range1(dynamic_preds__call_init_even__x1) and
+  (mod(dynamic_preds__call_init_even__x1, 2) = 0)) and ((result = x) and
+  (x1 = dynamic_preds__call_init_even__x1)))) -> (mod(x1, 2) = 0)))))

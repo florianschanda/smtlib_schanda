@@ -1099,12 +1099,6 @@ function extended_index__ref___projection(a: extended_index__ref) : extended_ind
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq10 : bool, bool -> bool
-
-axiom bool_eq_def7 :
-  (forall x:bool. forall y:bool [bool_eq10(x, y)]. (((x = y) -> (bool_eq10(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq10(x, y) = false))))
-
 logic to_int2 : bool -> int
 
 axiom to_int_def1 :
@@ -1116,6 +1110,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq10 : bool, bool -> bool
+
+axiom bool_eq_def7 :
+  (forall x:bool. forall y:bool [bool_eq10(x, y)]. (((x = y) -> (bool_eq10(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq10(x, y) = false))))
 
 predicate in_range4(x: int) = ((x = 0) or (x = 1))
 
@@ -1176,35 +1176,11 @@ type element_type__ref1 = { element_type__content1 : element_type1
 function element_type__ref___3__projection(a: element_type__ref1) : element_type1 =
   (a).element_type__content1
 
-logic target__split_fields : us_main_type
-
-logic o : count_type
-
-logic o1 : hash_type
-
-logic o2 : us_main_type
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-axiom H : ((o6 = length({ us_split_discrs1 = {
-  rec__term__tset__set__capacity = target__split_discrs;
-  rec__term__tset__set__modulus = target__split_discrs1 }; us_split_fields1 =
-  { rec__term__tset__set = target__split_fields } })) and (in_range1(o6) and
-  (o6 <= to_rep(target__split_discrs))))
-
-axiom H1 : (o7 = (to_rep(target__split_discrs) - o6))
-
  (* File "a-cfhase.ads", line 870, characters 0-0 *)
-goal WP_parameter_def : in_range(o7)
+goal WP_parameter_def :
+  (forall target__split_fields:us_main_type. forall o:int. forall o1:int.
+  ((((o = length({ us_split_discrs1 = { rec__term__tset__set__capacity =
+  target__split_discrs; rec__term__tset__set__modulus = target__split_discrs1
+  }; us_split_fields1 = { rec__term__tset__set = target__split_fields }
+  })) and (in_range1(o) and (o <= to_rep(target__split_discrs)))) and
+  (o1 = (to_rep(target__split_discrs) - o))) -> in_range(o1)))

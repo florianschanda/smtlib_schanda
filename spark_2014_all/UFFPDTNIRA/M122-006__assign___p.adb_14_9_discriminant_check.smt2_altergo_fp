@@ -1469,91 +1469,23 @@ type t4b__ref = { t4b__content : us_rep
 
 function t4b__ref___projection(a: t4b__ref) : us_rep = (a).t4b__content
 
-logic x__split_fields : integer
-
-logic x__split_fields1 : float1
-
-logic o : enum
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic o3 : float1
-
-logic o4 : enum
-
-logic p__good__x__assume : enum
-
-logic p__good__x__assume1 : integer
-
-logic p__good__x__assume2 : float1
-
-logic o5 : enum
-
-logic o6 : integer
-
-logic o7 : integer
-
-logic o8 : float1
-
-logic o9 : enum
-
-logic temp___146 : enum
-
-logic temp___1461 : integer
-
-logic temp___1462 : float1
-
-logic result : integer
-
-logic result1 : float1
-
-logic x__split_fields2 : integer
-
-logic x__split_fields3 : float1
-
-axiom H : (to_rep(o1) = 1)
-
-axiom H1 : (o1 = o2)
-
-axiom H2 : (dummy1 = o3)
-
-axiom H3 : (to_rep1(o) = 0)
-
-axiom H4 : (o = o4)
-
-axiom H5 : (p__good__x__assume = o4)
-
-axiom H6 : (p__good__x__assume1 = o2)
-
-axiom H7 : (p__good__x__assume2 = o3)
-
-axiom H8 : (result = x__split_fields)
-
-axiom H9 : (result1 = x__split_fields1)
-
-axiom H10 : (p__good__x__assume1 = x__split_fields2)
-
-axiom H11 : (p__good__x__assume2 = x__split_fields3)
-
-axiom H12 : (x__split_discrs = p__good__x__assume)
-
-axiom H13 : (to_rep(o6) = 2)
-
-axiom H14 : (o6 = o7)
-
-axiom H15 : (dummy1 = o8)
-
-axiom H16 : (to_rep1(o5) = 0)
-
-axiom H17 : (o5 = o9)
-
-axiom H18 : (temp___146 = o9)
-
-axiom H19 : (temp___1461 = o7)
-
-axiom H20 : (temp___1462 = o8)
-
  (* File "p.adb", line 5, characters 0-0 *)
-goal WP_parameter_def : (temp___146 = x__split_discrs)
+goal WP_parameter_def :
+  (forall x__split_fields:integer. forall x__split_fields1:float1.
+  forall o:enum. forall o1:integer. forall o2:integer. forall o3:float1.
+  forall o4:enum. forall p__good__x__assume:enum.
+  forall p__good__x__assume1:integer. forall p__good__x__assume2:float1.
+  forall o5:enum. forall o6:integer. forall o7:integer. forall o8:float1.
+  forall o9:enum. forall temp___170:enum. forall temp___1701:integer.
+  forall temp___1702:float1. forall result:integer. forall result1:float1.
+  forall x__split_fields2:integer. forall x__split_fields3:float1.
+  (((((to_rep(o1) = 1) and ((o1 = o2) and (dummy1 = o3))) and
+  (((to_rep1(o) = 0) and (o = o4)) and ((p__good__x__assume = o4) and
+  ((p__good__x__assume1 = o2) and (p__good__x__assume2 = o3))))) and
+  ((((result = x__split_fields) and (result1 = x__split_fields1)) and
+  ((p__good__x__assume1 = x__split_fields2) and
+  (p__good__x__assume2 = x__split_fields3))) and
+  (x__split_discrs = p__good__x__assume))) -> ((((to_rep(o6) = 2) and
+  ((o6 = o7) and (dummy1 = o8))) and (((to_rep1(o5) = 0) and (o5 = o9)) and
+  ((temp___170 = o9) and ((temp___1701 = o7) and (temp___1702 = o8))))) ->
+  (temp___170 = x__split_discrs))))

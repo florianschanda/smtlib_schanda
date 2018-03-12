@@ -105,11 +105,7 @@ type positive__ref = { positive__content : positive
 function positive__ref___projection(a: positive__ref) : positive =
   (a).positive__content
 
-logic temp___max_size_252 : int
-
-axiom H : in_range(temp___max_size_252)
-
-axiom H1 : (1 <= temp___max_size_252)
-
  (* File "bounded_queue_v2.ads", line 36, characters 0-0 *)
-goal WP_parameter_def : (1 <= 1)
+goal WP_parameter_def :
+  (forall temp___max_size_282:int. (in_range(temp___max_size_282) ->
+  ((1 <= temp___max_size_282) -> (1 <= 1))))

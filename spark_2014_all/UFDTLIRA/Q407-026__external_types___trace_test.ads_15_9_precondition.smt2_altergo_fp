@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -270,162 +270,6 @@ axiom is_first__post_axiom : true
 logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
-
-logic trace : us_rep1
-
-logic i : int
-
-logic o : us_rep1
-
-logic temp___153 : us_rep1
-
-logic o1 : us_rep1
-
-logic c : us_rep
-
-logic o2 : bool
-
-logic o3 : bool
-
-logic o4 : bool
-
-logic o5 : us_rep
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic result : us_rep1
-
-logic trace1 : us_rep1
-
-logic state : us_private
-
-logic result1 : int
-
-logic i1 : int
-
-logic trace2 : us_rep1
-
-logic i2 : int
-
-logic result2 : us_rep1
-
-logic trace3 : us_rep1
-
-logic state1 : us_private
-
-logic trace4 : us_rep1
-
-logic i3 : int
-
-logic state2 : us_private
-
-logic trace5 : us_rep1
-
-logic i4 : int
-
-logic state3 : us_private
-
-logic trace6 : us_rep1
-
-logic i5 : int
-
-logic state4 : us_private
-
-logic trace7 : us_rep1
-
-logic i6 : int
-
-logic state5 : us_private
-
-logic trace8 : us_rep1
-
-logic i7 : int
-
-logic state6 : us_private
-
-logic trace9 : us_rep1
-
-logic i8 : int
-
-logic state7 : us_private
-
-logic result3 : bool
-
-logic result4 : bool
-
-axiom H : (o = empty(void))
-
-axiom H1 : (result = trace)
-
-axiom H2 : (trace1 = o)
-
-axiom H3 : (result1 = i)
-
-axiom H4 : (i1 = 1)
-
-axiom H5 : (((1 <= i1) and (i1 <= 100)) -> (temp___153 = trace1))
-
-axiom H6 : (((1 <= i1) and (i1 <= 100)) -> ((1 <= i2) and (i2 <= 100)))
-
-axiom H7 : (((1 <= i1) and (i1 <= 100)) -> (o1 = append(trace2, i2)))
-
-axiom H8 : (((1 <= i1) and (i1 <= 100)) -> (trace2 = result2))
-
-axiom H9 : (((1 <= i1) and (i1 <= 100)) -> (trace3 = o1))
-
-axiom H10 : (((1 <= i1) and (i1 <= 100)) -> (i2 = 100))
-
-axiom H11 : (((1 <= i1) and (i1 <= 100)) -> (state1 = state2))
-
-axiom H12 : (((1 <= i1) and (i1 <= 100)) -> (i2 = i3))
-
-axiom H13 : (((1 <= i1) and (i1 <= 100)) -> (trace3 = trace4))
-
-axiom H14 : (((1 <= i1) and (i1 <= 100)) -> (state3 = state1))
-
-axiom H15 : (((1 <= i1) and (i1 <= 100)) -> (i4 = i2))
-
-axiom H16 : (((1 <= i1) and (i1 <= 100)) -> (trace5 = trace3))
-
-axiom H17 : (((1 <= i1) and (i1 <= 100)) -> (state4 = state2))
-
-axiom H18 : (((1 <= i1) and (i1 <= 100)) -> (i5 = i3))
-
-axiom H19 : (((1 <= i1) and (i1 <= 100)) -> (trace6 = trace4))
-
-axiom H20 : (((1 <= i1) and (i1 <= 100)) -> (state5 = state3))
-
-axiom H21 : (((1 <= i1) and (i1 <= 100)) -> (i6 = i4))
-
-axiom H22 : (((1 <= i1) and (i1 <= 100)) -> (trace7 = trace5))
-
-axiom H23 : ((not ((1 <= i1) and (i1 <= 100))) -> (state = state4))
-
-axiom H24 : ((not ((1 <= i1) and (i1 <= 100))) -> (i1 = i5))
-
-axiom H25 : ((not ((1 <= i1) and (i1 <= 100))) -> (trace1 = trace6))
-
-axiom H26 : ((not ((1 <= i1) and (i1 <= 100))) -> (state5 = state))
-
-axiom H27 : ((not ((1 <= i1) and (i1 <= 100))) -> (i6 = i1))
-
-axiom H28 : ((not ((1 <= i1) and (i1 <= 100))) -> (trace7 = trace1))
-
-axiom H29 : (state6 = state4)
-
-axiom H30 : (i7 = i5)
-
-axiom H31 : (trace8 = trace6)
-
-axiom H32 : (state7 = state5)
-
-axiom H33 : (i8 = i6)
-
-axiom H34 : (trace9 = trace7)
 
  (* File "traces.ads", line 37, characters 0-0 *)
 goal WP_parameter_def : true

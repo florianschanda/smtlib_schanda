@@ -938,12 +938,6 @@ axiom toBig_to_uint : (forall x:t. (tqtint(x) = tqtint1(toBig(x))))
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int2 : bool -> int
 
 axiom to_int_def2 :
@@ -955,6 +949,12 @@ logic of_int2 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int2(i)]. (((i = 0) -> (of_int2(i) = false)) and
   ((not (i = 0)) -> (of_int2(i) = true))))
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1487,24 +1487,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq10 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -1515,17 +1497,17 @@ axiom bool_eq_def9 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq10(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq10(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1535,37 +1517,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq10(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq10(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq10(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 type byte
 
@@ -1665,24 +1619,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,byte) farray, int, int, (int,byte) farray, int,
-  int -> (int,byte) farray
-
-axiom concat_def1 :
-  (forall a:(int,byte) farray. forall b:(int,byte) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : byte, int -> (int,byte) farray
-
-axiom singleton_def1 :
-  (forall v:byte.
-  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq13 : (int,byte) farray, int, int, (int,byte) farray, int,
   int -> bool
 
@@ -1693,17 +1629,17 @@ axiom bool_eq_def12 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_150:int. ((((a__first <= temp___idx_150) and
-  (temp___idx_150 <= a__last)) and
-  (to_rep1((a[temp___idx_150])) = to_rep1((b[((b__first - a__first) + temp___idx_150)])))) or
-  (not ((a__first <= temp___idx_150) and (temp___idx_150 <= a__last)))))) ->
+  (forall temp___idx_172:int. ((((a__first <= temp___idx_172) and
+  (temp___idx_172 <= a__last)) and
+  (to_rep1((a[temp___idx_172])) = to_rep1((b[((b__first - a__first) + temp___idx_172)])))) or
+  (not ((a__first <= temp___idx_172) and (temp___idx_172 <= a__last)))))) ->
   (bool_eq13(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_150:int. (((a__first <= temp___idx_150) and
-  (temp___idx_150 <= a__last)) ->
-  (to_rep1((a[temp___idx_150])) = to_rep1((b[((b__first - a__first) + temp___idx_150)]))))))) ->
+  (forall temp___idx_172:int. (((a__first <= temp___idx_172) and
+  (temp___idx_172 <= a__last)) ->
+  (to_rep1((a[temp___idx_172])) = to_rep1((b[((b__first - a__first) + temp___idx_172)]))))))) ->
   (bool_eq13(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -1713,37 +1649,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_150:int. (((a__first <= temp___idx_150) and
-  (temp___idx_150 <= a__last)) ->
-  (to_rep1((a[temp___idx_150])) = to_rep1((b[((b__first - a__first) + temp___idx_150)])))))))))
-
-logic compare1 : (int,byte) farray, int, int, (int,byte) farray, int,
-  int -> int
-
-axiom compare_def_eq1 :
-  (forall a:(int,byte) farray. forall b:(int,byte) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq13(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt1 :
-  (forall a:(int,byte) farray. forall b:(int,byte) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq13(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and ult(to_rep1((a[(i + 1)])), to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt1 :
-  (forall a:(int,byte) farray. forall b:(int,byte) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare1(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq13(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and ugt(to_rep1((a[(j + 1)])), to_rep1((b[(i + 1)]))))))))))))
+  (forall temp___idx_172:int. (((a__first <= temp___idx_172) and
+  (temp___idx_172 <= a__last)) ->
+  (to_rep1((a[temp___idx_172])) = to_rep1((b[((b__first - a__first) + temp___idx_172)])))))))))
 
 logic getrecordtype : (int,character) farray, int, int -> int
 
@@ -1826,24 +1734,6 @@ axiom slide_def2 :
   (forall i:int [(slide2(a, old_first, new_first)[i])]. ((slide2(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat2 : (int,query_type) farray, int, int, (int,query_type) farray,
-  int, int -> (int,query_type) farray
-
-axiom concat_def2 :
-  (forall a:(int,query_type) farray. forall b:(int,query_type) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat2(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat2(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat2(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton2 : query_type, int -> (int,query_type) farray
-
-axiom singleton_def2 :
-  (forall v:query_type.
-  (forall i:int [(singleton2(v, i)[i])]. ((singleton2(v, i)[i]) = v)))
-
 logic bool_eq16 : (int,query_type) farray, int, int, (int,query_type) farray,
   int, int -> bool
 
@@ -1854,17 +1744,17 @@ axiom bool_eq_def15 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_181:int. ((((a__first <= temp___idx_181) and
-  (temp___idx_181 <= a__last)) and
-  (to_rep2((a[temp___idx_181])) = to_rep2((b[((b__first - a__first) + temp___idx_181)])))) or
-  (not ((a__first <= temp___idx_181) and (temp___idx_181 <= a__last)))))) ->
+  (forall temp___idx_203:int. ((((a__first <= temp___idx_203) and
+  (temp___idx_203 <= a__last)) and
+  (to_rep2((a[temp___idx_203])) = to_rep2((b[((b__first - a__first) + temp___idx_203)])))) or
+  (not ((a__first <= temp___idx_203) and (temp___idx_203 <= a__last)))))) ->
   (bool_eq16(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_181:int. (((a__first <= temp___idx_181) and
-  (temp___idx_181 <= a__last)) ->
-  (to_rep2((a[temp___idx_181])) = to_rep2((b[((b__first - a__first) + temp___idx_181)]))))))) ->
+  (forall temp___idx_203:int. (((a__first <= temp___idx_203) and
+  (temp___idx_203 <= a__last)) ->
+  (to_rep2((a[temp___idx_203])) = to_rep2((b[((b__first - a__first) + temp___idx_203)]))))))) ->
   (bool_eq16(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev2 :
@@ -1874,37 +1764,9 @@ axiom bool_eq_rev2 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_181:int. (((a__first <= temp___idx_181) and
-  (temp___idx_181 <= a__last)) ->
-  (to_rep2((a[temp___idx_181])) = to_rep2((b[((b__first - a__first) + temp___idx_181)])))))))))
-
-logic compare2 : (int,query_type) farray, int, int, (int,query_type) farray,
-  int, int -> int
-
-axiom compare_def_eq2 :
-  (forall a:(int,query_type) farray. forall b:(int,query_type) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare2(a, a_first, a_last, b, b_first, b_last)].
-  ((compare2(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq16(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt2 :
-  (forall a:(int,query_type) farray. forall b:(int,query_type) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare2(a, a_first, a_last, b, b_first, b_last)].
-  ((compare2(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq16(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep2((a[(i + 1)])) <  to_rep2((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt2 :
-  (forall a:(int,query_type) farray. forall b:(int,query_type) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare2(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare2(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq16(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep2((b[(i + 1)])) <  to_rep2((a[(j + 1)]))))))))))))
+  (forall temp___idx_203:int. (((a__first <= temp___idx_203) and
+  (temp___idx_203 <= a__last)) ->
+  (to_rep2((a[temp___idx_203])) = to_rep2((b[((b__first - a__first) + temp___idx_203)])))))))))
 
 type blocknumbervalue
 
@@ -2016,25 +1878,6 @@ axiom slide_def3 :
   (forall i:int [(slide3(a, old_first, new_first)[i])]. ((slide3(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat3 : (int,blocklengthvalue) farray, int, int,
-  (int,blocklengthvalue) farray, int, int -> (int,blocklengthvalue) farray
-
-axiom concat_def3 :
-  (forall a:(int,blocklengthvalue) farray.
-  forall b:(int,blocklengthvalue) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat3(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat3(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat3(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton3 : blocklengthvalue, int -> (int,blocklengthvalue) farray
-
-axiom singleton_def3 :
-  (forall v:blocklengthvalue.
-  (forall i:int [(singleton3(v, i)[i])]. ((singleton3(v, i)[i]) = v)))
-
 logic bool_eq20 : (int,blocklengthvalue) farray, int, int,
   (int,blocklengthvalue) farray, int, int -> bool
 
@@ -2046,17 +1889,17 @@ axiom bool_eq_def19 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_182:int. ((((a__first <= temp___idx_182) and
-  (temp___idx_182 <= a__last)) and
-  (to_rep3((a[temp___idx_182])) = to_rep3((b[((b__first - a__first) + temp___idx_182)])))) or
-  (not ((a__first <= temp___idx_182) and (temp___idx_182 <= a__last)))))) ->
+  (forall temp___idx_204:int. ((((a__first <= temp___idx_204) and
+  (temp___idx_204 <= a__last)) and
+  (to_rep3((a[temp___idx_204])) = to_rep3((b[((b__first - a__first) + temp___idx_204)])))) or
+  (not ((a__first <= temp___idx_204) and (temp___idx_204 <= a__last)))))) ->
   (bool_eq20(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_182:int. (((a__first <= temp___idx_182) and
-  (temp___idx_182 <= a__last)) ->
-  (to_rep3((a[temp___idx_182])) = to_rep3((b[((b__first - a__first) + temp___idx_182)]))))))) ->
+  (forall temp___idx_204:int. (((a__first <= temp___idx_204) and
+  (temp___idx_204 <= a__last)) ->
+  (to_rep3((a[temp___idx_204])) = to_rep3((b[((b__first - a__first) + temp___idx_204)]))))))) ->
   (bool_eq20(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev3 :
@@ -2067,40 +1910,9 @@ axiom bool_eq_rev3 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_182:int. (((a__first <= temp___idx_182) and
-  (temp___idx_182 <= a__last)) ->
-  (to_rep3((a[temp___idx_182])) = to_rep3((b[((b__first - a__first) + temp___idx_182)])))))))))
-
-logic compare3 : (int,blocklengthvalue) farray, int, int,
-  (int,blocklengthvalue) farray, int, int -> int
-
-axiom compare_def_eq3 :
-  (forall a:(int,blocklengthvalue) farray.
-  forall b:(int,blocklengthvalue) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare3(a, a_first, a_last, b, b_first, b_last)].
-  ((compare3(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq20(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt3 :
-  (forall a:(int,blocklengthvalue) farray.
-  forall b:(int,blocklengthvalue) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare3(a, a_first, a_last, b, b_first, b_last)].
-  ((compare3(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq20(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep3((a[(i + 1)])) <  to_rep3((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt3 :
-  (forall a:(int,blocklengthvalue) farray.
-  forall b:(int,blocklengthvalue) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare3(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare3(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq20(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep3((b[(i + 1)])) <  to_rep3((a[(j + 1)]))))))))))))
+  (forall temp___idx_204:int. (((a__first <= temp___idx_204) and
+  (temp___idx_204 <= a__last)) ->
+  (to_rep3((a[temp___idx_204])) = to_rep3((b[((b__first - a__first) + temp___idx_204)])))))))))
 
 logic dummy12 : (int,byte) farray
 
@@ -2150,25 +1962,6 @@ axiom slide_def4 :
   (forall i:int [(slide4(a, old_first, new_first)[i])]. ((slide4(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat4 : (int,(int,byte) farray) farray, int, int,
-  (int,(int,byte) farray) farray, int, int -> (int,(int,byte) farray) farray
-
-axiom concat_def4 :
-  (forall a:(int,(int,byte) farray) farray.
-  forall b:(int,(int,byte) farray) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat4(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat4(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat4(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton4 : (int,byte) farray, int -> (int,(int,byte) farray) farray
-
-axiom singleton_def4 :
-  (forall v:(int,byte) farray.
-  (forall i:int [(singleton4(v, i)[i])]. ((singleton4(v, i)[i]) = v)))
-
 logic bool_eq21 : (int,(int,byte) farray) farray, int, int,
   (int,(int,byte) farray) farray, int, int -> bool
 
@@ -2180,17 +1973,17 @@ axiom bool_eq_def20 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_183:int. ((((a__first <= temp___idx_183) and
-  (temp___idx_183 <= a__last)) and (bool_eq13((a[temp___idx_183]), 1, 32,
-  (b[((b__first - a__first) + temp___idx_183)]), 1, 32) = true)) or
-  (not ((a__first <= temp___idx_183) and (temp___idx_183 <= a__last)))))) ->
+  (forall temp___idx_205:int. ((((a__first <= temp___idx_205) and
+  (temp___idx_205 <= a__last)) and (bool_eq13((a[temp___idx_205]), 1, 32,
+  (b[((b__first - a__first) + temp___idx_205)]), 1, 32) = true)) or
+  (not ((a__first <= temp___idx_205) and (temp___idx_205 <= a__last)))))) ->
   (bool_eq21(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_183:int. (((a__first <= temp___idx_183) and
-  (temp___idx_183 <= a__last)) -> (bool_eq13((a[temp___idx_183]), 1, 32,
-  (b[((b__first - a__first) + temp___idx_183)]), 1, 32) = true))))) ->
+  (forall temp___idx_205:int. (((a__first <= temp___idx_205) and
+  (temp___idx_205 <= a__last)) -> (bool_eq13((a[temp___idx_205]), 1, 32,
+  (b[((b__first - a__first) + temp___idx_205)]), 1, 32) = true))))) ->
   (bool_eq21(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev4 :
@@ -2201,9 +1994,9 @@ axiom bool_eq_rev4 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_183:int. (((a__first <= temp___idx_183) and
-  (temp___idx_183 <= a__last)) -> (bool_eq13((a[temp___idx_183]), 1, 32,
-  (b[((b__first - a__first) + temp___idx_183)]), 1, 32) = true)))))))
+  (forall temp___idx_205:int. (((a__first <= temp___idx_205) and
+  (temp___idx_205 <= a__last)) -> (bool_eq13((a[temp___idx_205]), 1, 32,
+  (b[((b__first - a__first) + temp___idx_205)]), 1, 32) = true)))))))
 
 logic rrstring : (int,character) farray
 
@@ -2269,24 +2062,6 @@ axiom slide_def5 :
   (forall i:t [(slide5(a, old_first, new_first)[i])]. ((slide5(a, old_first,
   new_first)[i]) = (a[sub(i, sub(new_first, old_first))]))))))
 
-logic concat5 : (t,bool) farray, t, t, (t,bool) farray, t,
-  t -> (t,bool) farray
-
-axiom concat_def5 :
-  (forall a:(t,bool) farray. forall b:(t,bool) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t.
-  (forall i:t [(concat5(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((ule(a_first, i) and ule(i, a_last)) -> ((concat5(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and (ugt(i, a_last) -> ((concat5(a,
-  a_first, a_last, b, b_first, b_last)[i]) = (b[add(sub(i, a_last),
-  sub(b_first, one))])))))))
-
-logic singleton5 : bool, t -> (t,bool) farray
-
-axiom singleton_def5 :
-  (forall v:bool.
-  (forall i:t [(singleton5(v, i)[i])]. ((singleton5(v, i)[i]) = v)))
-
 logic bool_eq23 : (t,bool) farray, t, t, (t,bool) farray, t, t -> bool
 
 axiom bool_eq_def22 :
@@ -2296,18 +2071,18 @@ axiom bool_eq_def22 :
   (ule(b__first, b__last) and (sub(a__last, a__first) = sub(b__last,
   b__first)))) or ((not ule(a__first, a__last)) and ugt(b__first,
   b__last))) and
-  (forall temp___idx_207:t. (((ule(a__first, temp___idx_207) and
-  ule(temp___idx_207, a__last)) and
-  ((a[temp___idx_207]) = (b[add(sub(b__first, a__first),
-  temp___idx_207)]))) or (not (ule(a__first, temp___idx_207) and
-  ule(temp___idx_207, a__last)))))) -> (bool_eq23(a, a__first, a__last, b,
+  (forall temp___idx_229:t. (((ule(a__first, temp___idx_229) and
+  ule(temp___idx_229, a__last)) and
+  ((a[temp___idx_229]) = (b[add(sub(b__first, a__first),
+  temp___idx_229)]))) or (not (ule(a__first, temp___idx_229) and
+  ule(temp___idx_229, a__last)))))) -> (bool_eq23(a, a__first, a__last, b,
   b__first, b__last) = true)) and ((not (((ule(a__first, a__last) ->
   (ule(b__first, b__last) and (sub(a__last, a__first) = sub(b__last,
   b__first)))) and ((not ule(a__first, a__last)) -> ugt(b__first,
   b__last))) and
-  (forall temp___idx_207:t. ((ule(a__first, temp___idx_207) and
-  ule(temp___idx_207, a__last)) ->
-  ((a[temp___idx_207]) = (b[add(sub(b__first, a__first), temp___idx_207)])))))) ->
+  (forall temp___idx_229:t. ((ule(a__first, temp___idx_229) and
+  ule(temp___idx_229, a__last)) ->
+  ((a[temp___idx_229]) = (b[add(sub(b__first, a__first), temp___idx_229)])))))) ->
   (bool_eq23(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev5 :
@@ -2317,76 +2092,9 @@ axiom bool_eq_rev5 :
   (((ule(a__first, a__last) -> (ule(b__first, b__last) and (sub(a__last,
   a__first) = sub(b__last, b__first)))) and ((not ule(a__first, a__last)) ->
   ugt(b__first, b__last))) and
-  (forall temp___idx_207:t. ((ule(a__first, temp___idx_207) and
-  ule(temp___idx_207, a__last)) ->
-  ((a[temp___idx_207]) = (b[add(sub(b__first, a__first), temp___idx_207)]))))))))
-
-logic compare4 : (t,bool) farray, t, t, (t,bool) farray, t, t -> int
-
-axiom compare_def_eq4 :
-  (forall a:(t,bool) farray. forall b:(t,bool) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare4(a, a_first, a_last, b, b_first, b_last)]. ((compare4(a, a_first,
-  a_last, b, b_first, b_last) = 0) <-> (bool_eq23(a, a_first, a_last, b,
-  b_first, b_last) = true))))
-
-axiom compare_def_lt4 :
-  (forall a:(t,bool) farray. forall b:(t,bool) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare4(a, a_first, a_last, b, b_first, b_last)]. ((compare4(a, a_first,
-  a_last, b, b_first, b_last) <  0) <->
-  (exists i:t. exists j:t. (ule(i, a_last) and (ult(j, b_last) and
-  ((bool_eq23(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  (ult(i, a_last) and (to_int2((a[add(i, one)])) <  to_int2((b[add(j,
-  one)]))))))))))))
-
-axiom compare_def_gt4 :
-  (forall a:(t,bool) farray. forall b:(t,bool) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare4(a, a_first, a_last, b, b_first, b_last)]. ((0 <  compare4(a,
-  a_first, a_last, b, b_first, b_last)) <->
-  (exists i:t. exists j:t. (ule(i, b_last) and (ult(j, a_last) and
-  ((bool_eq23(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  (ult(i, b_last) and (to_int2((b[add(i, one)])) <  to_int2((a[add(j,
-  one)]))))))))))))
-
-logic xorb1 : (t,bool) farray, t, t, (t,bool) farray, t, t -> (t,bool) farray
-
-logic andb1 : (t,bool) farray, t, t, (t,bool) farray, t, t -> (t,bool) farray
-
-logic orb1 : (t,bool) farray, t, t, (t,bool) farray, t, t -> (t,bool) farray
-
-logic notb1 : (t,bool) farray, t, t -> (t,bool) farray
-
-axiom op_def :
-  (forall a:(t,bool) farray. forall b:(t,bool) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t.
-  (forall i:t [(orb1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((ule(a_first, i) and ule(i, a_last)) -> ((orb1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = match_bool((a[i]), true, (b[add(sub(i, a_first),
-  b_first)])))))))
-
-axiom op_def1 :
-  (forall a:(t,bool) farray. forall b:(t,bool) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t.
-  (forall i:t [(andb1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((ule(a_first, i) and ule(i, a_last)) -> ((andb1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = match_bool((a[i]), (b[add(sub(i, a_first),
-  b_first)]), false))))))
-
-axiom op_def2 :
-  (forall a:(t,bool) farray. forall b:(t,bool) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t.
-  (forall i:t [(xorb1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((ule(a_first, i) and ule(i, a_last)) -> ((xorb1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = xorb((a[i]), (b[add(sub(i, a_first), b_first)])))))))
-
-axiom notb_def :
-  (forall a:(t,bool) farray.
-  (forall a_first:t. forall a_last:t.
-  (forall i:t [(notb1(a, a_first, a_last)[i])]. ((ule(a_first, i) and ule(i,
-  a_last)) -> ((notb1(a, a_first, a_last)[i]) = match_bool((a[i]), false,
-  true))))))
+  (forall temp___idx_229:t. ((ule(a__first, temp___idx_229) and
+  ule(temp___idx_229, a__last)) ->
+  ((a[temp___idx_229]) = (b[add(sub(b__first, a__first), temp___idx_229)]))))))))
 
 type map__ref6 = { map__content6 : (t,blocklengthvalue) farray
 }
@@ -2405,25 +2113,6 @@ axiom slide_def6 :
   (forall i:t [(slide6(a, old_first, new_first)[i])]. ((slide6(a, old_first,
   new_first)[i]) = (a[sub(i, sub(new_first, old_first))]))))))
 
-logic concat6 : (t,blocklengthvalue) farray, t, t,
-  (t,blocklengthvalue) farray, t, t -> (t,blocklengthvalue) farray
-
-axiom concat_def6 :
-  (forall a:(t,blocklengthvalue) farray.
-  forall b:(t,blocklengthvalue) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t.
-  (forall i:t [(concat6(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((ule(a_first, i) and ule(i, a_last)) -> ((concat6(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and (ugt(i, a_last) -> ((concat6(a,
-  a_first, a_last, b, b_first, b_last)[i]) = (b[add(sub(i, a_last),
-  sub(b_first, one))])))))))
-
-logic singleton6 : blocklengthvalue, t -> (t,blocklengthvalue) farray
-
-axiom singleton_def6 :
-  (forall v:blocklengthvalue.
-  (forall i:t [(singleton6(v, i)[i])]. ((singleton6(v, i)[i]) = v)))
-
 logic bool_eq24 : (t,blocklengthvalue) farray, t, t,
   (t,blocklengthvalue) farray, t, t -> bool
 
@@ -2434,19 +2123,19 @@ axiom bool_eq_def23 :
   a__last) and (ule(b__first, b__last) and (sub(a__last,
   a__first) = sub(b__last, b__first)))) or ((not ule(a__first, a__last)) and
   ugt(b__first, b__last))) and
-  (forall temp___idx_208:t. (((ule(a__first, temp___idx_208) and
-  ule(temp___idx_208, a__last)) and
-  (to_rep3((a[temp___idx_208])) = to_rep3((b[add(sub(b__first, a__first),
-  temp___idx_208)])))) or (not (ule(a__first, temp___idx_208) and
-  ule(temp___idx_208, a__last)))))) -> (bool_eq24(a, a__first, a__last, b,
+  (forall temp___idx_230:t. (((ule(a__first, temp___idx_230) and
+  ule(temp___idx_230, a__last)) and
+  (to_rep3((a[temp___idx_230])) = to_rep3((b[add(sub(b__first, a__first),
+  temp___idx_230)])))) or (not (ule(a__first, temp___idx_230) and
+  ule(temp___idx_230, a__last)))))) -> (bool_eq24(a, a__first, a__last, b,
   b__first, b__last) = true)) and ((not (((ule(a__first, a__last) ->
   (ule(b__first, b__last) and (sub(a__last, a__first) = sub(b__last,
   b__first)))) and ((not ule(a__first, a__last)) -> ugt(b__first,
   b__last))) and
-  (forall temp___idx_208:t. ((ule(a__first, temp___idx_208) and
-  ule(temp___idx_208, a__last)) ->
-  (to_rep3((a[temp___idx_208])) = to_rep3((b[add(sub(b__first, a__first),
-  temp___idx_208)]))))))) -> (bool_eq24(a, a__first, a__last, b, b__first,
+  (forall temp___idx_230:t. ((ule(a__first, temp___idx_230) and
+  ule(temp___idx_230, a__last)) ->
+  (to_rep3((a[temp___idx_230])) = to_rep3((b[add(sub(b__first, a__first),
+  temp___idx_230)]))))))) -> (bool_eq24(a, a__first, a__last, b, b__first,
   b__last) = false))))
 
 axiom bool_eq_rev6 :
@@ -2457,43 +2146,10 @@ axiom bool_eq_rev6 :
   (((ule(a__first, a__last) -> (ule(b__first, b__last) and (sub(a__last,
   a__first) = sub(b__last, b__first)))) and ((not ule(a__first, a__last)) ->
   ugt(b__first, b__last))) and
-  (forall temp___idx_208:t. ((ule(a__first, temp___idx_208) and
-  ule(temp___idx_208, a__last)) ->
-  (to_rep3((a[temp___idx_208])) = to_rep3((b[add(sub(b__first, a__first),
-  temp___idx_208)])))))))))
-
-logic compare5 : (t,blocklengthvalue) farray, t, t,
-  (t,blocklengthvalue) farray, t, t -> int
-
-axiom compare_def_eq5 :
-  (forall a:(t,blocklengthvalue) farray.
-  forall b:(t,blocklengthvalue) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare5(a, a_first, a_last, b, b_first, b_last)]. ((compare5(a, a_first,
-  a_last, b, b_first, b_last) = 0) <-> (bool_eq24(a, a_first, a_last, b,
-  b_first, b_last) = true))))
-
-axiom compare_def_lt5 :
-  (forall a:(t,blocklengthvalue) farray.
-  forall b:(t,blocklengthvalue) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare5(a, a_first, a_last, b, b_first, b_last)]. ((compare5(a, a_first,
-  a_last, b, b_first, b_last) <  0) <->
-  (exists i:t. exists j:t. (ule(i, a_last) and (ult(j, b_last) and
-  ((bool_eq24(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  (ult(i, a_last) and (to_rep3((a[add(i, one)])) <  to_rep3((b[add(j,
-  one)]))))))))))))
-
-axiom compare_def_gt5 :
-  (forall a:(t,blocklengthvalue) farray.
-  forall b:(t,blocklengthvalue) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare5(a, a_first, a_last, b, b_first, b_last)]. ((0 <  compare5(a,
-  a_first, a_last, b, b_first, b_last)) <->
-  (exists i:t. exists j:t. (ule(i, b_last) and (ult(j, a_last) and
-  ((bool_eq24(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  (ult(i, b_last) and (to_rep3((b[add(i, one)])) <  to_rep3((a[add(j,
-  one)]))))))))))))
+  (forall temp___idx_230:t. ((ule(a__first, temp___idx_230) and
+  ule(temp___idx_230, a__last)) ->
+  (to_rep3((a[temp___idx_230])) = to_rep3((b[add(sub(b__first, a__first),
+  temp___idx_230)])))))))))
 
 logic attr__ATTRIBUTE_ADDRESS9 : int
 
@@ -2678,1121 +2334,117 @@ logic attr__ATTRIBUTE_ADDRESS24 : int
 
 logic zone_file_parser__fillblockinfo__blockmap__aggregate_def : bool -> (t,bool) farray
 
-axiom def_axiom :
-  (forall temp___1587:bool.
-  (forall temp___1588:t.
-  ((zone_file_parser__fillblockinfo__blockmap__aggregate_def(temp___1587)[temp___1588]) = temp___1587)))
-
 logic zone_file_parser__fillblockinfo__blocklengthmap__aggregate_def : int -> (t,blocklengthvalue) farray
 
-axiom def_axiom1 :
-  (forall temp___1590:int.
-  (forall temp___1591:t.
-  ((zone_file_parser__fillblockinfo__blocklengthmap__aggregate_def(temp___1590)[temp___1591]) = of_rep3(temp___1590))))
+logic temp___1651 : int -> (int,query_type) farray
 
-logic temp___1592 : int -> (int,query_type) farray
+logic temp___1655 : t -> (int,byte) farray
+
+logic temp___1659 : int -> (int,blocklengthvalue) farray
+
+logic temp___1663 : (int,byte) farray -> (int,(int,byte) farray) farray
+
+logic temp___1667 : t -> (int,byte) farray
+
+logic temp___1692 : (int,byte) farray -> (int,(int,byte) farray) farray
+
+logic temp___1696 : t -> (int,byte) farray
+
+axiom def_axiom :
+  (forall temp___1646:bool.
+  (forall temp___1647:t.
+  ((zone_file_parser__fillblockinfo__blockmap__aggregate_def(temp___1646)[temp___1647]) = temp___1646)))
+
+axiom def_axiom1 :
+  (forall temp___1649:int. (in_range10(temp___1649) ->
+  (forall temp___1650:t.
+  (to_rep3((zone_file_parser__fillblockinfo__blocklengthmap__aggregate_def(temp___1649)[temp___1650])) = temp___1649))))
 
 axiom def_axiom2 :
-  (forall temp___1594:int.
-  (forall temp___1595:int.
-  ((temp___1592(temp___1594)[temp___1595]) = of_rep2(temp___1594))))
-
-logic temp___1596 : t -> (int,byte) farray
+  (forall temp___1653:int. (in_range5(temp___1653) ->
+  (forall temp___1654:int.
+  (to_rep2((temp___1651(temp___1653)[temp___1654])) = temp___1653))))
 
 axiom def_axiom3 :
-  (forall temp___1598:t.
-  (forall temp___1599:int.
-  ((temp___1596(temp___1598)[temp___1599]) = of_rep1(temp___1598))))
-
-logic temp___1600 : int -> (int,blocklengthvalue) farray
+  (forall temp___1657:t.
+  (forall temp___1658:int.
+  (to_rep1((temp___1655(temp___1657)[temp___1658])) = temp___1657)))
 
 axiom def_axiom4 :
-  (forall temp___1602:int.
-  (forall temp___1603:int.
-  ((temp___1600(temp___1602)[temp___1603]) = of_rep3(temp___1602))))
-
-logic temp___1604 : (int,byte) farray -> (int,(int,byte) farray) farray
+  (forall temp___1661:int. (in_range10(temp___1661) ->
+  (forall temp___1662:int.
+  (to_rep3((temp___1659(temp___1661)[temp___1662])) = temp___1661))))
 
 axiom def_axiom5 :
-  (forall temp___1606:(int,byte) farray.
-  (forall temp___1607:int.
-  ((temp___1604(temp___1606)[temp___1607]) = temp___1606)))
-
-logic temp___1608 : t -> (int,byte) farray
+  (forall temp___1665:(int,byte) farray.
+  (forall temp___1666:int.
+  ((temp___1663(temp___1665)[temp___1666]) = temp___1665)))
 
 axiom def_axiom6 :
-  (forall temp___1610:t.
-  (forall temp___1611:int.
-  ((temp___1608(temp___1610)[temp___1611]) = of_rep1(temp___1610))))
-
-logic temp___1633 : (int,byte) farray -> (int,(int,byte) farray) farray
+  (forall temp___1669:t.
+  (forall temp___1670:int.
+  (to_rep1((temp___1667(temp___1669)[temp___1670])) = temp___1669)))
 
 axiom def_axiom7 :
-  (forall temp___1635:(int,byte) farray.
-  (forall temp___1636:int.
-  ((temp___1633(temp___1635)[temp___1636]) = temp___1635)))
-
-logic temp___1637 : t -> (int,byte) farray
+  (forall temp___1694:(int,byte) farray.
+  (forall temp___1695:int.
+  ((temp___1692(temp___1694)[temp___1695]) = temp___1694)))
 
 axiom def_axiom8 :
-  (forall temp___1639:t.
-  (forall temp___1640:int.
-  ((temp___1637(temp___1639)[temp___1640]) = of_rep1(temp___1639))))
-
-logic numberofrecordtypes : int
-
-logic recordtypes : (int,query_type) farray
-
-logic numberofblocks : int
-
-logic blocknumbers : (int,byte) farray
-
-logic blocklengths : (int,blocklengthvalue) farray
-
-logic bitmaps : (int,(int,byte) farray) farray
-
-logic success : bool
-
-logic blockmap : (t,bool) farray
-
-logic blocklengthmap : (t,blocklengthvalue) farray
-
-logic begidx : int
-
-logic endidx : int
-
-logic foundtype : int
-
-logic recordtype : int
-
-logic blocknumber : t
-
-logic blocknumberoffirstrecordtype : t
-
-logic blockindex : int
-
-logic bytenumber : int
-
-logic bitnumber : int
-
-logic i : t
-
-logic i1 : int
-
-logic j : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : query_type
-
-logic o3 : int
-
-logic o4 : (int,query_type) farray
-
-logic o5 : t1
-
-logic o6 : t1
-
-logic o7 : t1
-
-logic o8 : t1
-
-logic o9 : t
-
-logic o10 : int
-
-logic o11 : t1
-
-logic o12 : t1
-
-logic o13 : t1
-
-logic o14 : t1
-
-logic o15 : t1
-
-logic o16 : t1
-
-logic o17 : t1
-
-logic o18 : t1
-
-logic o19 : int
-
-logic o20 : blocklengthvalue
-
-logic o21 : (t,blocklengthvalue) farray
-
-logic temp___1623 : int
-
-logic temp___1624 : int
-
-logic temp___1621 : (t,bool) farray
-
-logic temp___1620 : int
-
-logic temp___1619 : int
-
-logic temp___1618 : t
-
-logic temp___1616 : (int,query_type) farray
-
-logic temp___1615 : int
-
-logic temp___1613 : (t,blocklengthvalue) farray
-
-logic temp___1612 : int
-
-logic o22 : int
-
-logic o23 : int
-
-logic o24 : query_type
-
-logic o25 : int
-
-logic o26 : (int,query_type) farray
-
-logic o27 : t1
-
-logic o28 : t1
-
-logic o29 : t1
-
-logic o30 : t1
-
-logic o31 : t
-
-logic o32 : t1
-
-logic o33 : t1
-
-logic o34 : t1
-
-logic o35 : t1
-
-logic o36 : t1
-
-logic o37 : t1
-
-logic o38 : t1
-
-logic o39 : t1
-
-logic o40 : int
-
-logic o41 : blocklengthvalue
-
-logic o42 : (t,blocklengthvalue) farray
-
-logic temp___1629 : (int,blocklengthvalue) farray
-
-logic temp___1627 : (int,byte) farray
-
-logic temp___1626 : int
-
-logic temp___1625 : t
-
-logic o43 : int
-
-logic o44 : byte
-
-logic o45 : int
-
-logic o46 : (int,byte) farray
-
-logic o47 : blocklengthvalue
-
-logic o48 : int
-
-logic o49 : (int,blocklengthvalue) farray
-
-logic temp___1654 : int
-
-logic temp___1653 : int
-
-logic temp___1652 : int
-
-logic temp___1649 : (int,(int,byte) farray) farray
-
-logic temp___1648 : int
-
-logic temp___1642 : int
-
-logic temp___1641 : int
-
-logic o50 : t1
-
-logic o51 : t1
-
-logic o52 : t1
-
-logic o53 : t1
-
-logic o54 : t
-
-logic o55 : t1
-
-logic o56 : t1
-
-logic o57 : t1
-
-logic o58 : t1
-
-logic o59 : t1
-
-logic o60 : t1
-
-logic o61 : t1
-
-logic o62 : t1
-
-logic o63 : int
-
-logic o64 : t1
-
-logic o65 : t1
-
-logic o66 : int
-
-logic o67 : int
-
-logic temp___1645 : (int,byte) farray
-
-logic o68 : byte
-
-logic temp___1646 : int
-
-logic o69 : t
-
-logic o70 : t
-
-logic o71 : t
-
-logic o72 : byte
-
-logic o73 : (int,byte) farray
-
-logic o74 : int
-
-logic o75 : (int,(int,byte) farray) farray
-
-logic success1 : bool
-
-logic recordtype1 : int
-
-logic blocknumber1 : t
-
-logic blocknumberoffirstrecordtype1 : t
-
-logic blockindex1 : int
-
-logic bytenumber1 : int
-
-logic bitnumber1 : int
-
-logic i2 : t
-
-logic i3 : int
-
-logic j1 : int
-
-logic result : (t,bool) farray
-
-logic blockmap1 : (t,bool) farray
-
-logic result1 : (t,blocklengthvalue) farray
-
-logic blocklengthmap1 : (t,blocklengthvalue) farray
-
-logic result2 : int
-
-logic numberofrecordtypes1 : int
-
-logic result3 : (int,query_type) farray
-
-logic recordtypes1 : (int,query_type) farray
-
-logic result4 : int
-
-logic numberofblocks1 : int
-
-logic result5 : (int,byte) farray
-
-logic blocknumbers1 : (int,byte) farray
-
-logic result6 : (int,blocklengthvalue) farray
-
-logic blocklengths1 : (int,blocklengthvalue) farray
-
-logic result7 : (int,(int,byte) farray) farray
-
-logic bitmaps1 : (int,(int,byte) farray) farray
-
-logic result8 : int
-
-logic begidx1 : int
-
-logic begidx2 : int
-
-logic endidx1 : int
-
-logic foundtype1 : int
-
-logic result9 : bool
-
-logic success2 : bool
-
-logic result10 : int
-
-logic recordtype2 : int
-
-logic result11 : int
-
-logic numberofrecordtypes2 : int
-
-logic result12 : (int,query_type) farray
-
-logic recordtypes2 : (int,query_type) farray
-
-logic result13 : t
-
-logic blocknumberoffirstrecordtype2 : t
-
-logic result14 : (t,bool) farray
-
-logic blockmap2 : (t,bool) farray
-
-logic result15 : int
-
-logic numberofblocks2 : int
-
-logic result16 : int
-
-logic bytenumber2 : int
-
-logic result17 : (t,blocklengthvalue) farray
-
-logic blocklengthmap2 : (t,blocklengthvalue) farray
-
-logic numberofrecordtypes3 : int
-
-logic recordtypes3 : (int,query_type) farray
-
-logic blockmap3 : (t,bool) farray
-
-logic blocklengthmap3 : (t,blocklengthvalue) farray
-
-logic begidx3 : int
-
-logic endidx2 : int
-
-logic foundtype2 : int
-
-logic recordtype3 : int
-
-logic blocknumber2 : t
-
-logic bytenumber3 : int
-
-logic begidx4 : int
-
-logic endidx3 : int
-
-logic foundtype3 : int
-
-logic result18 : int
-
-logic recordtype4 : int
-
-logic result19 : int
-
-logic numberofrecordtypes4 : int
-
-logic result20 : (int,query_type) farray
-
-logic recordtypes4 : (int,query_type) farray
-
-logic result21 : t
-
-logic blocknumber3 : t
-
-logic result22 : (t,bool) farray
-
-logic blockmap4 : (t,bool) farray
-
-logic result23 : int
-
-logic bytenumber4 : int
-
-logic result24 : (t,blocklengthvalue) farray
-
-logic blocklengthmap4 : (t,blocklengthvalue) farray
-
-logic numberofrecordtypes5 : int
-
-logic recordtypes5 : (int,query_type) farray
-
-logic blockmap5 : (t,bool) farray
-
-logic blocklengthmap5 : (t,blocklengthvalue) farray
-
-logic begidx5 : int
-
-logic endidx4 : int
-
-logic foundtype4 : int
-
-logic recordtype5 : int
-
-logic blocknumber4 : t
-
-logic bytenumber5 : int
-
-logic numberofrecordtypes6 : int
-
-logic recordtypes6 : (int,query_type) farray
-
-logic blockmap6 : (t,bool) farray
-
-logic blocklengthmap6 : (t,blocklengthvalue) farray
-
-logic begidx6 : int
-
-logic endidx5 : int
-
-logic foundtype5 : int
-
-logic recordtype6 : int
-
-logic blocknumber5 : t
-
-logic bytenumber6 : int
-
-logic numberofrecordtypes7 : int
-
-logic recordtypes7 : (int,query_type) farray
-
-logic blockmap7 : (t,bool) farray
-
-logic blocklengthmap7 : (t,blocklengthvalue) farray
-
-logic begidx7 : int
-
-logic endidx6 : int
-
-logic foundtype6 : int
-
-logic recordtype7 : int
-
-logic blocknumber6 : t
-
-logic bytenumber7 : int
-
-logic numberofrecordtypes8 : int
-
-logic recordtypes8 : (int,query_type) farray
-
-logic blockmap8 : (t,bool) farray
-
-logic blocklengthmap8 : (t,blocklengthvalue) farray
-
-logic begidx8 : int
-
-logic endidx7 : int
-
-logic foundtype7 : int
-
-logic recordtype8 : int
-
-logic blocknumber7 : t
-
-logic bytenumber8 : int
-
-logic numberofrecordtypes9 : int
-
-logic recordtypes9 : (int,query_type) farray
-
-logic blockmap9 : (t,bool) farray
-
-logic blocklengthmap9 : (t,blocklengthvalue) farray
-
-logic begidx9 : int
-
-logic endidx8 : int
-
-logic foundtype8 : int
-
-logic recordtype9 : int
-
-logic blocknumber8 : t
-
-logic bytenumber9 : int
-
-logic numberofrecordtypes10 : int
-
-logic recordtypes10 : (int,query_type) farray
-
-logic blockmap10 : (t,bool) farray
-
-logic blocklengthmap10 : (t,blocklengthvalue) farray
-
-logic begidx10 : int
-
-logic endidx9 : int
-
-logic foundtype9 : int
-
-logic recordtype10 : int
-
-logic blocknumber9 : t
-
-logic bytenumber10 : int
-
-logic result25 : t
-
-logic i4 : t
-
-logic numberofblocks3 : int
-
-logic blocknumbers2 : (int,byte) farray
-
-logic blocklengths2 : (int,blocklengthvalue) farray
-
-logic i5 : t
-
-logic result26 : int
-
-logic numberofblocks4 : int
-
-logic result27 : (int,byte) farray
-
-logic blocknumbers3 : (int,byte) farray
-
-logic result28 : (int,blocklengthvalue) farray
-
-logic blocklengths3 : (int,blocklengthvalue) farray
-
-logic numberofblocks5 : int
-
-logic blocknumbers4 : (int,byte) farray
-
-logic blocklengths4 : (int,blocklengthvalue) farray
-
-logic numberofblocks6 : int
-
-logic blocknumbers5 : (int,byte) farray
-
-logic blocklengths5 : (int,blocklengthvalue) farray
-
-logic result29 : t
-
-logic i6 : t
-
-logic numberofblocks7 : int
-
-logic blocknumbers6 : (int,byte) farray
-
-logic blocklengths6 : (int,blocklengthvalue) farray
-
-logic i7 : t
-
-logic numberofblocks8 : int
-
-logic blocknumbers7 : (int,byte) farray
-
-logic blocklengths7 : (int,blocklengthvalue) farray
-
-logic i8 : t
-
-logic numberofblocks9 : int
-
-logic blocknumbers8 : (int,byte) farray
-
-logic blocklengths8 : (int,blocklengthvalue) farray
-
-logic i9 : t
-
-logic numberofblocks10 : int
-
-logic blocknumbers9 : (int,byte) farray
-
-logic blocklengths9 : (int,blocklengthvalue) farray
-
-logic i10 : t
-
-logic numberofblocks11 : int
-
-logic blocknumbers10 : (int,byte) farray
-
-logic blocklengths10 : (int,blocklengthvalue) farray
-
-logic i11 : t
-
-logic numberofblocks12 : int
-
-logic blocknumbers11 : (int,byte) farray
-
-logic blocklengths11 : (int,blocklengthvalue) farray
-
-logic i12 : t
-
-logic numberofblocks13 : int
-
-logic blocknumbers12 : (int,byte) farray
-
-logic blocklengths12 : (int,blocklengthvalue) farray
-
-logic i13 : t
-
-logic numberofblocks14 : int
-
-logic blocknumbers13 : (int,byte) farray
-
-logic blocklengths13 : (int,blocklengthvalue) farray
-
-logic i14 : t
-
-logic result30 : (int,(int,byte) farray) farray
-
-logic bitmaps2 : (int,(int,byte) farray) farray
-
-logic result31 : int
-
-logic i15 : int
-
-logic bitmaps3 : (int,(int,byte) farray) farray
-
-logic blockindex2 : int
-
-logic bytenumber11 : int
-
-logic bitnumber2 : int
-
-logic i16 : int
-
-logic j2 : int
-
-logic result32 : int
-
-logic blockindex3 : int
-
-logic result33 : int
-
-logic j3 : int
-
-logic blockindex4 : int
-
-logic j4 : int
-
-logic result34 : bool
-
-logic result35 : int
-
-logic blockindex5 : int
-
-logic blockindex6 : int
-
-logic blockindex7 : int
-
-logic result36 : int
-
-logic j5 : int
-
-logic blockindex8 : int
-
-logic blockindex9 : int
-
-logic blockindex10 : int
-
-logic j6 : int
-
-logic blockindex11 : int
-
-logic j7 : int
-
-logic blockindex12 : int
-
-logic j8 : int
-
-logic blockindex13 : int
-
-logic j9 : int
-
-logic blockindex14 : int
-
-logic j10 : int
-
-logic blockindex15 : int
-
-logic j11 : int
-
-logic blockindex16 : int
-
-logic j12 : int
-
-logic blockindex17 : int
-
-logic j13 : int
-
-logic result37 : int
-
-logic bytenumber12 : int
-
-logic result38 : int
-
-logic bitnumber3 : int
-
-logic result39 : (int,(int,byte) farray) farray
-
-logic bitmaps4 : (int,(int,byte) farray) farray
-
-logic result40 : int
-
-logic i17 : int
-
-logic bitmaps5 : (int,(int,byte) farray) farray
-
-logic blockindex18 : int
-
-logic bytenumber13 : int
-
-logic bitnumber4 : int
-
-logic i18 : int
-
-logic j14 : int
-
-logic bitmaps6 : (int,(int,byte) farray) farray
-
-logic blockindex19 : int
-
-logic bytenumber14 : int
-
-logic bitnumber5 : int
-
-logic i19 : int
-
-logic j15 : int
-
-logic bitmaps7 : (int,(int,byte) farray) farray
-
-logic blockindex20 : int
-
-logic bytenumber15 : int
-
-logic bitnumber6 : int
-
-logic i20 : int
-
-logic j16 : int
-
-logic bitmaps8 : (int,(int,byte) farray) farray
-
-logic blockindex21 : int
-
-logic bytenumber16 : int
-
-logic bitnumber7 : int
-
-logic i21 : int
-
-logic j17 : int
-
-logic bitmaps9 : (int,(int,byte) farray) farray
-
-logic blockindex22 : int
-
-logic bytenumber17 : int
-
-logic bitnumber8 : int
-
-logic i22 : int
-
-logic j18 : int
-
-logic bitmaps10 : (int,(int,byte) farray) farray
-
-logic blockindex23 : int
-
-logic bytenumber18 : int
-
-logic bitnumber9 : int
-
-logic i23 : int
-
-logic j19 : int
-
-logic bitmaps11 : (int,(int,byte) farray) farray
-
-logic blockindex24 : int
-
-logic bytenumber19 : int
-
-logic bitnumber10 : int
-
-logic i24 : int
-
-logic j20 : int
-
-logic bitmaps12 : (int,(int,byte) farray) farray
-
-logic blockindex25 : int
-
-logic bytenumber20 : int
-
-logic bitnumber11 : int
-
-logic i25 : int
-
-logic j21 : int
-
-logic numberofrecordtypes11 : int
-
-logic recordtypes11 : (int,query_type) farray
-
-logic numberofblocks15 : int
-
-logic blocknumbers14 : (int,byte) farray
-
-logic blocklengths14 : (int,blocklengthvalue) farray
-
-logic bitmaps13 : (int,(int,byte) farray) farray
-
-logic success3 : bool
-
-logic blockmap11 : (t,bool) farray
-
-logic blocklengthmap11 : (t,blocklengthvalue) farray
-
-logic begidx11 : int
-
-logic endidx10 : int
-
-logic foundtype10 : int
-
-logic recordtype11 : int
-
-logic blocknumber10 : t
-
-logic blocknumberoffirstrecordtype3 : t
-
-logic blockindex26 : int
-
-logic bytenumber21 : int
-
-logic bitnumber12 : int
-
-logic i26 : t
-
-logic i27 : int
-
-logic j22 : int
-
-logic numberofrecordtypes12 : int
-
-logic recordtypes12 : (int,query_type) farray
-
-logic numberofblocks16 : int
-
-logic blocknumbers15 : (int,byte) farray
-
-logic blocklengths15 : (int,blocklengthvalue) farray
-
-logic bitmaps14 : (int,(int,byte) farray) farray
-
-logic success4 : bool
-
-logic blockmap12 : (t,bool) farray
-
-logic blocklengthmap12 : (t,blocklengthvalue) farray
-
-logic begidx12 : int
-
-logic endidx11 : int
-
-logic foundtype11 : int
-
-logic recordtype12 : int
-
-logic blocknumber11 : t
-
-logic blocknumberoffirstrecordtype4 : t
-
-logic blockindex27 : int
-
-logic bytenumber22 : int
-
-logic bitnumber13 : int
-
-logic i28 : t
-
-logic i29 : int
-
-logic j23 : int
-
-logic numberofrecordtypes13 : int
-
-logic recordtypes13 : (int,query_type) farray
-
-logic numberofblocks17 : int
-
-logic blocknumbers16 : (int,byte) farray
-
-logic blocklengths16 : (int,blocklengthvalue) farray
-
-logic bitmaps15 : (int,(int,byte) farray) farray
-
-logic success5 : bool
-
-logic blockmap13 : (t,bool) farray
-
-logic blocklengthmap13 : (t,blocklengthvalue) farray
-
-logic begidx13 : int
-
-logic endidx12 : int
-
-logic foundtype12 : int
-
-logic recordtype13 : int
-
-logic blocknumber12 : t
-
-logic blocknumberoffirstrecordtype5 : t
-
-logic blockindex28 : int
-
-logic bytenumber23 : int
-
-logic bitnumber14 : int
-
-logic i30 : t
-
-logic i31 : int
-
-logic j24 : int
-
-logic numberofrecordtypes14 : int
-
-logic recordtypes14 : (int,query_type) farray
-
-logic numberofblocks18 : int
-
-logic blocknumbers17 : (int,byte) farray
-
-logic blocklengths17 : (int,blocklengthvalue) farray
-
-logic bitmaps16 : (int,(int,byte) farray) farray
-
-logic success6 : bool
-
-logic blockmap14 : (t,bool) farray
-
-logic blocklengthmap14 : (t,blocklengthvalue) farray
-
-logic begidx14 : int
-
-logic endidx13 : int
-
-logic foundtype13 : int
-
-logic recordtype14 : int
-
-logic blocknumber13 : t
-
-logic blocknumberoffirstrecordtype6 : t
-
-logic blockindex29 : int
-
-logic bytenumber24 : int
-
-logic bitnumber15 : int
-
-logic i32 : t
-
-logic i33 : int
-
-logic j25 : int
-
-axiom H : ((0 <= 32) -> in_range6(numberofrecordtypes))
-
-axiom H1 : ((0 <= 32) -> in_range8(numberofblocks))
-
-axiom H2 : true
-
-axiom H3 : (result = blockmap)
-
-axiom H4 :
-  (blockmap1 = zone_file_parser__fillblockinfo__blockmap__aggregate_def(of_int2(0)))
-
-axiom H5 : (result1 = blocklengthmap)
-
-axiom H6 :
-  (blocklengthmap1 = zone_file_parser__fillblockinfo__blocklengthmap__aggregate_def(1))
-
-axiom H7 : ((1 <= 256) -> in_range3(begidx))
-
-axiom H8 : ((1 <= 256) -> in_range3(endidx))
-
-axiom H9 : ((0 <= 10) -> in_range2(foundtype))
-
-axiom H10 : ((0 <= 18) -> in_range5(recordtype))
-
-axiom H11 : true
-
-axiom H12 : true
-
-axiom H13 : ((0 <= 32) -> in_range8(blockindex))
-
-axiom H14 : ((1 <= 32) -> in_range10(bytenumber))
-
-axiom H15 : ((0 <= 2147483647) -> in_range1(bitnumber))
-
-axiom H16 : (result2 = numberofrecordtypes)
-
-axiom H17 : (numberofrecordtypes1 = 0)
-
-axiom H18 : (result3 = recordtypes)
-
-axiom H19 : (recordtypes1 = temp___1592(18))
-
-axiom H20 : (result4 = numberofblocks)
-
-axiom H21 : (numberofblocks1 = 0)
-
-axiom H22 : (result5 = blocknumbers)
-
-axiom H23 : (blocknumbers1 = temp___1596(of_int(0)))
-
-axiom H24 : (result6 = blocklengths)
-
-axiom H25 : (blocklengths1 = temp___1600(1))
-
-axiom H26 : (result7 = bitmaps)
-
-axiom H27 : (bitmaps1 = temp___1604(temp___1608(of_int(0))))
-
-axiom H28 : (result8 = begidx)
-
-axiom H29 : (begidx1 = 1)
-
-axiom H30 : (((((begidx2 <= endidx1) and (begidx2 <= 256)) and
-  (endidx1 <= 256)) and ((foundtype1 = 1) ->
-  (forall i34:int. (((begidx2 <= i34) and (i34 <= endidx1)) ->
-  ((48 <= to_rep((rrstring[i34]))) and (to_rep((rrstring[i34])) <= 57)))))) and
-  ((in_range3(begidx2) and in_range3(endidx1)) and in_range2(foundtype1)))
-
-axiom H31 : (foundtype1 = 3)
-
-axiom H32 : ((o = getrecordtype(rrstring, begidx2, endidx1)) and
-  in_range5(o))
-
-axiom H33 : (result10 = recordtype)
-
-axiom H34 : (recordtype2 = o)
-
- (* File "zone_file_parser.adb", line 556, characters 0-0 *)
-goal WP_parameter_def : in_range6((numberofrecordtypes1 + 1))
+  (forall temp___1698:t.
+  (forall temp___1699:int.
+  (to_rep1((temp___1696(temp___1698)[temp___1699])) = temp___1698)))
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 0)
+
+ (* File "zone_file_parser.adb", line 848, characters 0-0 *)
+goal WP_parameter_def :
+  (forall numberofrecordtypes:int.
+  forall recordtypes:(int,query_type) farray. forall numberofblocks:int.
+  forall blocknumbers:(int,byte) farray.
+  forall blocklengths:(int,blocklengthvalue) farray.
+  forall bitmaps:(int,(int,byte) farray) farray.
+  forall blockmap:(t,bool) farray.
+  forall blocklengthmap:(t,blocklengthvalue) farray. forall begidx:int.
+  forall endidx:int. forall foundtype:int. forall recordtype:int.
+  forall blockindex:int. forall bytenumber:int. forall bitnumber:int.
+  forall o:int. forall result:(t,bool) farray.
+  forall blockmap1:(t,bool) farray.
+  forall result1:(t,blocklengthvalue) farray.
+  forall blocklengthmap1:(t,blocklengthvalue) farray. forall result2:int.
+  forall numberofrecordtypes1:int. forall result3:(int,query_type) farray.
+  forall recordtypes1:(int,query_type) farray. forall result4:int.
+  forall numberofblocks1:int. forall result5:(int,byte) farray.
+  forall blocknumbers1:(int,byte) farray.
+  forall result6:(int,blocklengthvalue) farray.
+  forall blocklengths1:(int,blocklengthvalue) farray.
+  forall result7:(int,(int,byte) farray) farray.
+  forall bitmaps1:(int,(int,byte) farray) farray. forall result8:int.
+  forall begidx1:int. forall begidx2:int. forall endidx1:int.
+  forall foundtype1:int. forall result9:int. forall recordtype1:int.
+  (((0 <= 32) -> in_range6(numberofrecordtypes)) -> (((0 <= 32) ->
+  in_range8(numberofblocks)) -> (((result = blockmap) and
+  (blockmap1 = zone_file_parser__fillblockinfo__blockmap__aggregate_def(of_int2(0)))) ->
+  (((result1 = blocklengthmap) and
+  (blocklengthmap1 = zone_file_parser__fillblockinfo__blocklengthmap__aggregate_def(1))) ->
+  (((1 <= 256) -> in_range3(begidx)) -> (((1 <= 256) -> in_range3(endidx)) ->
+  (((0 <= 10) -> in_range2(foundtype)) -> (((0 <= 18) ->
+  in_range5(recordtype)) -> (((0 <= 32) -> in_range8(blockindex)) ->
+  (((1 <= 32) -> in_range10(bytenumber)) -> (((0 <= 2147483647) ->
+  in_range1(bitnumber)) -> (((result2 = numberofrecordtypes) and
+  (numberofrecordtypes1 = 0)) -> (((result3 = recordtypes) and
+  (recordtypes1 = temp___1651(18))) -> (((result4 = numberofblocks) and
+  (numberofblocks1 = 0)) -> (((result5 = blocknumbers) and
+  (blocknumbers1 = temp___1655(rliteral1))) -> (((result6 = blocklengths) and
+  (blocklengths1 = temp___1659(1))) -> (((result7 = bitmaps) and
+  (bitmaps1 = temp___1663(temp___1667(rliteral1)))) ->
+  (((result8 = begidx) and (begidx1 = 1)) -> ((((((begidx2 <= endidx1) and
+  (begidx2 <= 256)) and (endidx1 <= 256)) and ((foundtype1 = 1) ->
+  (forall i:int. (((begidx2 <= i) and (i <= endidx1)) ->
+  ((48 <= to_rep((rrstring[i]))) and (to_rep((rrstring[i])) <= 57)))))) and
+  ((in_range3(begidx2) and in_range3(endidx1)) and in_range2(foundtype1))) ->
+  ((foundtype1 = 3) -> ((((o = getrecordtype(rrstring, begidx2, endidx1)) and
+  in_range5(o)) and ((result9 = recordtype) and (recordtype1 = o))) ->
+  in_range6((numberofrecordtypes1 + 1))))))))))))))))))))))))

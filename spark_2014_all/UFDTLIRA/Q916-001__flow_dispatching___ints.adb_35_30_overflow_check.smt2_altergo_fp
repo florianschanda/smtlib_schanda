@@ -470,83 +470,8 @@ logic arg__attr__tag : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic arg__split_fields : natural
-
-logic arg__split_fields1 : integer
-
-logic arg__split_fields2 : integer
-
-logic arg__split_fields3 : integer
-
-logic arg__split_fields4 : us_private
-
-logic o : int
-
-logic o1 : integer
-
-logic o2 : natural
-
-logic o3 : integer
-
-logic o4 : integer
-
-logic o5 : integer
-
-logic o6 : us_private
-
-logic temp___588 : natural
-
-logic temp___5881 : integer
-
-logic temp___5882 : integer
-
-logic temp___5883 : integer
-
-logic temp___5884 : us_private
-
-logic temp___5885 : int
-
-logic result : natural
-
-logic result1 : integer
-
-logic result2 : integer
-
-logic result3 : integer
-
-logic result4 : us_private
-
-logic arg__split_fields5 : natural
-
-logic arg__split_fields6 : integer
-
-logic arg__split_fields7 : integer
-
-logic arg__split_fields8 : integer
-
-logic arg__split_fields9 : us_private
-
-logic arg__split_fields10 : natural
-
-logic arg__split_fields11 : integer
-
-logic arg__split_fields12 : integer
-
-logic arg__split_fields13 : integer
-
-logic arg__split_fields14 : us_private
-
-logic arg__split_fields15 : natural
-
-logic arg__split_fields16 : integer
-
-logic arg__split_fields17 : integer
-
-logic arg__split_fields18 : integer
-
-logic arg__split_fields19 : us_private
-
-axiom H : (to_rep(arg__split_fields3) <  (to_rep(arg__split_fields2) - 10))
-
  (* File "ints.ads", line 25, characters 0-0 *)
-goal WP_parameter_def : in_range((to_rep(arg__split_fields3) + 10))
+goal WP_parameter_def :
+  (forall arg__split_fields:integer. forall arg__split_fields1:integer.
+  ((to_rep(arg__split_fields1) <  (to_rep(arg__split_fields) - 10)) ->
+  in_range((to_rep(arg__split_fields1) + 10))))

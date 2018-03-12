@@ -330,12 +330,6 @@ function t2__ref___projection(a: t2__ref) : us_rep1 = (a).t2__content
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq4 : bool, bool -> bool
-
-axiom bool_eq_def3 :
-  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -347,6 +341,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq4 : bool, bool -> bool
+
+axiom bool_eq_def3 :
+  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -751,106 +751,21 @@ axiom is_max__def_axiom2 :
   x2 })]. ((is_max4({ us_split_fields1 = { rec__unit1__t1__c1 = x;
   rec__ext__ = x1 }; attr__tag = x2 }) = true) <-> (to_rep(x) = 2147483647)))
 
-logic x__split_fields : integer
-
-logic x__split_fields1 : integer
-
-logic x__split_fields2 : integer
-
-logic x__split_fields3 : us_private
-
-logic o : int
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic o3 : integer
-
-logic o4 : integer
-
-logic o5 : us_private
-
-logic temp___203 : integer
-
-logic temp___2031 : integer
-
-logic temp___2032 : integer
-
-logic temp___2033 : us_private
-
-logic temp___2034 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic unit2__bump__x__fields : integer
-
-logic unit2__bump__x__fields1 : integer
-
-logic unit2__bump__x__fields2 : us_private
-
-logic result : integer
-
-logic result1 : integer
-
-logic result2 : integer
-
-logic result3 : us_private
-
-logic x__split_fields4 : integer
-
-logic x__split_fields5 : integer
-
-logic x__split_fields6 : integer
-
-logic x__split_fields7 : us_private
-
-logic result4 : integer
-
-logic result5 : integer
-
-logic result6 : integer
-
-logic result7 : us_private
-
-logic x__split_fields8 : integer
-
-logic x__split_fields9 : integer
-
-logic x__split_fields10 : integer
-
-logic x__split_fields11 : us_private
-
-logic x__split_fields12 : integer
-
-logic x__split_fields13 : integer
-
-logic x__split_fields14 : integer
-
-logic x__split_fields15 : us_private
-
-logic x__split_fields16 : integer
-
-logic x__split_fields17 : integer
-
-logic x__split_fields18 : integer
-
-logic x__split_fields19 : us_private
-
-logic result8 : bool
-
-logic result9 : bool
-
-axiom H : (not (is_max2({ us_split_fields5 = { rec__unit3__t3__c3 =
-  x__split_fields; rec__unit1__t1__c12 = x__split_fields1;
-  rec__unit2__t2__c21 = x__split_fields2; rec__ext__2 = x__split_fields3 };
-  attr__tag2 = x__attr__tag }) = true))
-
-axiom H1 : ((to_rep(unit2__bump__x__fields1) = (to_rep(((of_base({
+ (* File "unit3.ads", line 21, characters 0-0 *)
+goal WP_parameter_def :
+  (forall x__split_fields:integer. forall x__split_fields1:integer.
+  forall x__split_fields2:integer. forall x__split_fields3:us_private.
+  forall unit2__bump__x__fields:integer.
+  forall unit2__bump__x__fields1:integer.
+  forall unit2__bump__x__fields2:us_private. forall result:integer.
+  forall result1:integer. forall result2:integer. forall result3:us_private.
+  forall x__split_fields4:integer. forall x__split_fields5:integer.
+  forall x__split_fields6:integer. forall x__split_fields7:us_private.
+  ((not (is_max2({ us_split_fields5 = { rec__unit3__t3__c3 = x__split_fields;
+  rec__unit1__t1__c12 = x__split_fields1; rec__unit2__t2__c21 =
+  x__split_fields2; rec__ext__2 = x__split_fields3 }; attr__tag2 =
+  x__attr__tag }) = true)) ->
+  ((((to_rep(unit2__bump__x__fields1) = (to_rep(((of_base({
   us_split_fields1 = { rec__unit1__t1__c1 = x__split_fields1; rec__ext__ =
   hide_ext__1(x__split_fields, x__split_fields2, x__split_fields3) };
   attr__tag = x__attr__tag
@@ -858,19 +773,19 @@ axiom H1 : ((to_rep(unit2__bump__x__fields1) = (to_rep(((of_base({
   (to_rep(unit2__bump__x__fields) = (to_rep(((of_base({ us_split_fields1 = {
   rec__unit1__t1__c1 = x__split_fields1; rec__ext__ =
   hide_ext__1(x__split_fields, x__split_fields2, x__split_fields3) };
-  attr__tag = x__attr__tag })).us_split_fields3).rec__unit2__t2__c2) + 1)))
-
-axiom H2 : ((result = x__split_fields) and ((result1 = x__split_fields1) and
-  ((result2 = x__split_fields2) and (result3 = x__split_fields3))))
-
-axiom H3 : ({ rec__unit3__t3__c3 = x__split_fields4; rec__unit1__t1__c12 =
+  attr__tag = x__attr__tag
+  })).us_split_fields3).rec__unit2__t2__c2) + 1))) and (({
+  us_split_fields__content2 = { rec__unit3__t3__c3 = result;
+  rec__unit1__t1__c12 = result1; rec__unit2__t2__c21 = result2; rec__ext__2 =
+  result3 } } = { us_split_fields__content2 = { rec__unit3__t3__c3 =
+  x__split_fields; rec__unit1__t1__c12 = x__split_fields1;
+  rec__unit2__t2__c21 = x__split_fields2; rec__ext__2 = x__split_fields3 }
+  }) and ({ rec__unit3__t3__c3 = x__split_fields4; rec__unit1__t1__c12 =
   x__split_fields5; rec__unit2__t2__c21 = x__split_fields6; rec__ext__2 =
   x__split_fields7 } = (of_base1({ us_split_fields1 = { rec__unit1__t1__c1 =
   unit2__bump__x__fields1; rec__ext__ = hide_ext__(unit2__bump__x__fields,
   unit2__bump__x__fields2) }; attr__tag = (of_base({ us_split_fields1 = {
   rec__unit1__t1__c1 = x__split_fields1; rec__ext__ =
   hide_ext__1(x__split_fields, x__split_fields2, x__split_fields3) };
-  attr__tag = x__attr__tag })).attr__tag1 })).us_split_fields5)
-
- (* File "unit3.ads", line 21, characters 0-0 *)
-goal WP_parameter_def : in_range((to_rep(x__split_fields4) + 1))
+  attr__tag = x__attr__tag })).attr__tag1 })).us_split_fields5))) ->
+  in_range((to_rep(x__split_fields4) + 1)))))

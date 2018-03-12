@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -372,176 +372,20 @@ function trS__ref___projection(a: trS__ref) : trS = (a).trS__content
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic a : int
-
-logic b : int
-
-logic r : int
-
-logic test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic temp___249 : int
-
-logic temp___248 : int
-
-logic temp___247 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic a1 : int
-
-logic b1 : int
-
-logic r1 : int
-
-logic test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result1 : int
-
-logic result : int
-
-logic test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result2 : int
-
-logic result1 : int
-
-logic test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result3 : int
-
-logic test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result4 : int
-
-logic test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result5 : int
-
-logic result2 : int
-
-logic a2 : int
-
-logic result3 : int
-
-logic b2 : int
-
-logic a3 : int
-
-logic b3 : int
-
-logic r2 : int
-
-logic result4 : int
-
-logic r3 : int
-
-logic result5 : int
-
-logic a4 : int
-
-logic result6 : int
-
-logic b4 : int
-
-logic a5 : int
-
-logic b5 : int
-
-logic a6 : int
-
-logic b6 : int
-
-logic a7 : int
-
-logic b7 : int
-
-logic r4 : int
-
-logic a8 : int
-
-logic b8 : int
-
-logic r5 : int
-
-logic a9 : int
-
-logic b9 : int
-
-logic r6 : int
-
-logic a10 : int
-
-logic b10 : int
-
-logic r7 : int
-
-logic result7 : int
-
-logic test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result6 : int
-
-logic test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result7 : int
-
-logic test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result8 : int
-
-logic a11 : int
-
-logic b11 : int
-
-logic r8 : int
-
-logic test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result9 : int
-
-logic a12 : int
-
-logic b12 : int
-
-logic r9 : int
-
-logic test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result10 : int
-
-logic a13 : int
-
-logic b13 : int
-
-logic r10 : int
-
-logic test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result11 : int
-
-logic a14 : int
-
-logic b14 : int
-
-logic r11 : int
-
-logic test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result12 : int
-
-axiom H : in_range1(left)
-
-axiom H1 : in_range1(right)
-
-axiom H2 : ((2 <= left) and (0 <= right))
-
-axiom H3 : ((1 <= 2147483647) -> in_range2(a))
-
-axiom H4 : ((1 <= 2147483647) -> in_range3(b))
-
-axiom H5 : ((0 <= 2147483647) -> in_range4(r))
-
-axiom H6 : (not (left = 0))
-
-axiom H7 : (not (right = 0))
-
-axiom H8 :
-  (test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result3 = test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result)
-
-axiom H9 :
-  (test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result3 = test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result1)
-
-axiom H10 :
-  (test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result2 = test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result3)
-
-axiom H11 : ((o = left) and in_range2(left))
-
-axiom H12 : (result2 = a)
-
-axiom H13 : (a2 = o)
-
  (* File "prime_and_coprime_numbers.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : in_range3(right)
+goal WP_parameter_def :
+  (forall a:int. forall b:int. forall r:int.
+  forall test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result:int.
+  forall o:int.
+  forall test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result1:int.
+  forall test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result2:int.
+  forall test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result3:int.
+  forall result:int. forall a1:int. (in_range1(left) -> (in_range1(right) ->
+  (((2 <= left) and (0 <= right)) -> (((1 <= 2147483647) -> in_range2(a)) ->
+  (((1 <= 2147483647) -> in_range3(b)) -> (((0 <= 2147483647) ->
+  in_range4(r)) -> (((not (left = 0)) and (((not (right = 0)) and
+  ((test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result3 = test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result) and
+  (test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result3 = test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result1))) and
+  (test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result2 = test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result3))) ->
+  ((((o = left) and in_range2(left)) and (({ int__content = result } = {
+  int__content = a }) and (a1 = o))) -> in_range3(right))))))))))

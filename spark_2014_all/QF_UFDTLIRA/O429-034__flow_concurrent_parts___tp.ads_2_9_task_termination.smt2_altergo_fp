@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -135,51 +135,13 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic b4 : int
-
-logic temp___184 : int
-
-logic o : int
-
-logic b41 : int
-
-logic b42 : int
-
-logic result : int
-
-logic b43 : int
-
-logic b44 : int
-
-logic b45 : int
-
-logic b46 : int
-
-logic b47 : int
-
-axiom H : ((b4 <= 10000) -> (temp___184 = b4))
-
-axiom H1 : ((b4 <= 10000) -> (in_range1(b42) and (b42 <= 10000)))
-
-axiom H2 : ((b4 <= 10000) -> ((o = (b42 + 1)) and in_range1((b42 + 1))))
-
-axiom H3 : ((b4 <= 10000) -> (result = b42))
-
-axiom H4 : ((b4 <= 10000) -> (b43 = o))
-
-axiom H5 : ((b4 <= 10000) -> (not (b43 <= 10000)))
-
-axiom H6 : ((b4 <= 10000) -> (b43 = b44))
-
-axiom H7 : ((b4 <= 10000) -> (b45 = b43))
-
-axiom H8 : ((b4 <= 10000) -> (b46 = b44))
-
-axiom H9 : ((b4 <= 10000) -> (b47 = b45))
-
-axiom H10 : ((not (b4 <= 10000)) -> (b46 = b4))
-
-axiom H11 : ((not (b4 <= 10000)) -> (b47 = b41))
-
  (* File "tp.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def :
+  (forall b4:int. forall temp___214:int. forall o:int. forall b41:int.
+  forall b42:int. forall result:int. forall b43:int. forall b44:int.
+  forall b45:int. forall b46:int. forall b47:int. (not (((b4 <= 10000) and
+  ((((temp___214 = b4) and ((in_range1(b42) and (b42 <= 10000)) and
+  ((((o = (b42 + 1)) and in_range1((b42 + 1))) and ((result = b42) and
+  (b43 = o))) and (not (b43 <= 10000))))) and ((b43 = b44) and
+  (b45 = b43))) and ((b44 = b46) and (b47 = b45)))) or
+  ((not (b4 <= 10000)) and ((b4 = b46) and (b47 = b41))))))

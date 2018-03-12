@@ -121,23 +121,8 @@ axiom g3__post_axiom : in_range(g3(void))
 
 axiom g3__def_axiom : (g3(void) = 1)
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-axiom H : ((o = g3(void)) and (in_range(o) and (o = 1)))
-
-axiom H1 : ((o1 = g1(void)) and (in_range(o1) and (o1 = 1)))
-
-axiom H2 : (o2 = (o1 + o))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(o2)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. forall o2:int. ((((o = g3(void)) and
+  (in_range(o) and (o = 1))) and (((o1 = g1(void)) and (in_range(o1) and
+  (o1 = 1))) and (o2 = (o1 + o)))) -> in_range(o2)))

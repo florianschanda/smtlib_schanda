@@ -1093,27 +1093,6 @@ logic b : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic float_example__minus_i__result : t
-
-logic o : t
-
-logic o1 : t
-
-logic result : t
-
-logic float_example__minus_i__result1 : t
-
-logic float_example__minus_i__result2 : t
-
-logic float_example__minus_i__result3 : t
-
-logic float_example__minus_i__result4 : t
-
-logic float_example__minus_i__result5 : t
-
-axiom H : tqtisFinite(a)
-
-axiom H1 : tqtisFinite(b)
-
  (* File "float_example.adb", line 5, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(sub(NearestTiesToEven, a, b))
+goal WP_parameter_def : (tqtisFinite(a) -> (tqtisFinite(b) ->
+  tqtisFinite(sub(NearestTiesToEven, a, b))))

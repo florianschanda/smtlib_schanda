@@ -1037,12 +1037,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1054,6 +1048,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1176,25 +1176,8 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 axiom c__def_axiom : (c = d)
 
-logic x : t
-
-logic o : t
-
-logic temp___156 : t
-
-logic us : t
-
-logic us1 : t
-
-logic result : bool
-
-axiom H : tqtisFinite(d)
-
-axiom H1 : in_range2(c)
-
-axiom H2 : (d = c)
-
-axiom H3 : dynamic_property(fliteral, last, x)
-
  (* File "test_dynamic_property.adb", line 5, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(add(NearestTiesToEven, x, fliteral))
+goal WP_parameter_def :
+  (forall x:t. (tqtisFinite(d) -> (in_range2(c) -> ((d = c) ->
+  (dynamic_property(fliteral, last, x) -> tqtisFinite(add(NearestTiesToEven,
+  x, fliteral)))))))

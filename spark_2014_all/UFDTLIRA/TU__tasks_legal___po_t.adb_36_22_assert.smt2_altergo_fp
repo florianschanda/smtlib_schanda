@@ -174,12 +174,6 @@ function p_intT__ref___projection(a: p_intT__ref) : us_rep =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -191,6 +185,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -348,140 +348,54 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic p_int__split_fields : bool
-
-logic p_int__split_fields1 : integer
-
-logic hidden_po__split_fields : integer
-
-logic hidden_po__split_fields1 : bool
-
-logic o : bool
-
-logic o1 : integer
-
-logic us_self__compl : bool
-
-logic us_self__compl1 : integer
-
-logic o2 : integer
-
-logic o3 : bool
-
-logic us_self__compl2 : integer
-
-logic us_self__compl3 : bool
-
-logic o4 : bool
-
-logic o5 : integer
-
-logic po_t__B_1__x__assume : int
-
-logic o6 : integer
-
-logic o7 : bool
-
-logic po_t__B_1__y__assume : int
-
-logic p_int__split_fields2 : bool
-
-logic p_int__split_fields3 : integer
-
-logic us_self__compl4 : bool
-
-logic us_self__compl5 : integer
-
-logic result : bool
-
-logic result1 : integer
-
-logic p_int__split_fields4 : bool
-
-logic p_int__split_fields5 : integer
-
-logic hidden_po__split_fields2 : integer
-
-logic hidden_po__split_fields3 : bool
-
-logic us_self__compl6 : integer
-
-logic us_self__compl7 : bool
-
-logic result2 : integer
-
-logic result3 : bool
-
-logic hidden_po__split_fields4 : integer
-
-logic hidden_po__split_fields5 : bool
-
-logic p_int__split_fields6 : bool
-
-logic p_int__split_fields7 : integer
-
-logic hidden_po__split_fields6 : integer
-
-logic hidden_po__split_fields7 : bool
-
-axiom H : ((p_int__split_fields = of_int(1)) and
-  (to_rep(p_int__split_fields1) = 0))
-
-axiom H1 : ((to_rep(hidden_po__split_fields) = 0) and
-  (hidden_po__split_fields1 = of_int(1)))
-
-axiom H2 : (o = p_int__split_fields2)
-
-axiom H3 : (o1 = p_int__split_fields3)
-
-axiom H4 : (us_self__compl = o)
-
-axiom H5 : (us_self__compl1 = o1)
-
-axiom H6 : ((result = p_int__split_fields2) and
-  (result1 = p_int__split_fields3))
-
-axiom H7 : ((p_int__split_fields4 = us_self__compl4) and
-  (p_int__split_fields5 = us_self__compl5))
-
-axiom H8 : ((hidden_po__split_fields2 = o2) and
-  (hidden_po__split_fields3 = o3))
-
-axiom H9 : (us_self__compl2 = o2)
-
-axiom H10 : (us_self__compl3 = o3)
-
-axiom H11 : ((result2 = hidden_po__split_fields2) and
-  (result3 = hidden_po__split_fields3))
-
-axiom H12 : ((hidden_po__split_fields4 = us_self__compl6) and
-  (hidden_po__split_fields5 = us_self__compl7))
-
-axiom H13 : ((p_int__split_fields6 = o4) and (p_int__split_fields7 = o5))
-
-axiom H14 : ((po_t__B_1__x__assume = get({ us_split_fields1 = {
-  rec__po_t__p_intT__condition = o4; rec__po_t__the_protected_int = o5 }
-  })) and (in_range(po_t__B_1__x__assume) and (((0 <= to_rep(o5)) ->
-  (po_t__B_1__x__assume = to_rep(o5))) and ((not (0 <= to_rep(o5))) ->
-  (po_t__B_1__x__assume = (to_rep(o5) + 10))))))
-
-axiom H15 : (po_t__B_1__x__assume = x)
-
-axiom H16 : in_range(x)
-
-axiom H17 : ((hidden_po__split_fields6 = o6) and
-  (hidden_po__split_fields7 = o7))
-
-axiom H18 : ((po_t__B_1__y__assume = get1({ us_split_fields3 = {
-  rec__po_t__hidden_poT__the_protected_int = o6;
-  rec__po_t__hidden_poT__switch = o7 } })) and
-  (in_range(po_t__B_1__y__assume) and (((0 <= to_rep(o6)) ->
-  (po_t__B_1__y__assume = to_rep(o6))) and ((not (0 <= to_rep(o6))) ->
-  (po_t__B_1__y__assume = (to_rep(o6) + 10))))))
-
-axiom H19 : (po_t__B_1__y__assume = y)
-
-axiom H20 : in_range(y)
-
  (* File "po_t.ads", line 56, characters 0-0 *)
-goal WP_parameter_def : (x = y)
+goal WP_parameter_def :
+  (forall p_int__split_fields:bool. forall p_int__split_fields1:integer.
+  forall hidden_po__split_fields:integer.
+  forall hidden_po__split_fields1:bool. forall o:bool. forall o1:integer.
+  forall us_self__compl:bool. forall us_self__compl1:integer.
+  forall o2:integer. forall o3:bool. forall us_self__compl2:integer.
+  forall us_self__compl3:bool. forall o4:bool. forall o5:integer.
+  forall po_t__B_1__x__assume:int. forall o6:integer. forall o7:bool.
+  forall po_t__B_1__y__assume:int. forall p_int__split_fields2:bool.
+  forall p_int__split_fields3:integer. forall us_self__compl4:bool.
+  forall us_self__compl5:integer. forall result:bool. forall result1:integer.
+  forall p_int__split_fields4:bool. forall p_int__split_fields5:integer.
+  forall hidden_po__split_fields2:integer.
+  forall hidden_po__split_fields3:bool. forall us_self__compl6:integer.
+  forall us_self__compl7:bool. forall result2:integer. forall result3:bool.
+  forall hidden_po__split_fields4:integer.
+  forall hidden_po__split_fields5:bool. forall p_int__split_fields6:bool.
+  forall p_int__split_fields7:integer.
+  forall hidden_po__split_fields6:integer.
+  forall hidden_po__split_fields7:bool.
+  (((p_int__split_fields = of_int(1)) and
+  (to_rep(p_int__split_fields1) = 0)) ->
+  (((to_rep(hidden_po__split_fields) = 0) and
+  (hidden_po__split_fields1 = of_int(1))) ->
+  (((((o = p_int__split_fields2) and (o1 = p_int__split_fields3)) and
+  ((us_self__compl = o) and (us_self__compl1 = o1))) and
+  (((result = p_int__split_fields2) and (result1 = p_int__split_fields3)) and
+  ((p_int__split_fields4 = us_self__compl4) and
+  (p_int__split_fields5 = us_self__compl5)))) ->
+  (((((o2 = hidden_po__split_fields2) and
+  (o3 = hidden_po__split_fields3)) and ((us_self__compl2 = o2) and
+  (us_self__compl3 = o3))) and (((result2 = hidden_po__split_fields2) and
+  (result3 = hidden_po__split_fields3)) and
+  ((hidden_po__split_fields4 = us_self__compl6) and
+  (hidden_po__split_fields5 = us_self__compl7)))) ->
+  (((((p_int__split_fields6 = o4) and (p_int__split_fields7 = o5)) and
+  ((po_t__B_1__x__assume = get({ us_split_fields1 = {
+  rec__po_t__p_intT__condition = o4; rec__po_t__the_protected_int = o5 }
+  })) and (in_range(po_t__B_1__x__assume) and (((0 <= to_rep(o5)) and
+  (po_t__B_1__x__assume = to_rep(o5))) or ((not (0 <= to_rep(o5))) and
+  (po_t__B_1__x__assume = (to_rep(o5) + 10))))))) and
+  (po_t__B_1__x__assume = x)) -> (in_range(x) ->
+  (((((hidden_po__split_fields6 = o6) and
+  (hidden_po__split_fields7 = o7)) and ((po_t__B_1__y__assume = get1({
+  us_split_fields3 = { rec__po_t__hidden_poT__the_protected_int = o6;
+  rec__po_t__hidden_poT__switch = o7 } })) and
+  (in_range(po_t__B_1__y__assume) and (((0 <= to_rep(o6)) and
+  (po_t__B_1__y__assume = to_rep(o6))) or ((not (0 <= to_rep(o6))) and
+  (po_t__B_1__y__assume = (to_rep(o6) + 10))))))) and
+  (po_t__B_1__y__assume = y)) -> (in_range(y) -> (x = y))))))))))

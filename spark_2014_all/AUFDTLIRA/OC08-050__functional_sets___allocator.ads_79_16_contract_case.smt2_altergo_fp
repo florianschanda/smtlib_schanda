@@ -186,24 +186,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,status) farray, int, int, (int,status) farray, int,
-  int -> (int,status) farray
-
-axiom concat_def :
-  (forall a:(int,status) farray. forall b:(int,status) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : status, int -> (int,status) farray
-
-axiom singleton_def :
-  (forall v:status.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,status) farray, int, int, (int,status) farray, int,
   int -> bool
 
@@ -214,17 +196,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) and
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)])))) or
-  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (forall temp___idx_155:int. ((((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) and
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)])))) or
+  (not ((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) ->
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)]))))))) ->
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) ->
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -234,37 +216,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) ->
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)])))))))))
-
-logic compare : (int,status) farray, int, int, (int,status) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,status) farray. forall b:(int,status) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,status) farray. forall b:(int,status) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,status) farray. forall b:(int,status) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) ->
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)])))))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -570,80 +524,31 @@ axiom is_empty__post_axiom :
 
 axiom is_empty__post__dispatch_axiom : true
 
-logic data : (int,status) farray
-
-logic o : int
-
-logic o1 : status
-
-logic o2 : int
-
-logic o3 : status
-
-logic o4 : int
-
-logic o5 : (int,status) farray
-
-logic data1 : (int,status) farray
-
-logic result : bool
-
-logic result1 : (int,status) farray
-
-logic data2 : (int,status) farray
-
-logic data3 : (int,status) farray
-
-logic data4 : (int,status) farray
-
-axiom H : in_range(res)
-
-axiom H1 : ((not (res = 0)) -> ((1 <= res) and (res <= 3)))
-
-axiom H2 : ((not (res = 0)) -> (o = res))
-
-axiom H3 : ((not (res = 0)) -> (o1 = (data[o])))
-
-axiom H4 : ((not (res = 0)) -> (o2 = to_rep(o1)))
-
-axiom H5 : ((not (res = 0)) -> (((o2 = 1) -> (result = true)) and
-  ((not (o2 = 1)) -> (result = false))))
-
-axiom H6 : ((res = 0) -> (result = false))
-
-axiom H7 : ((result = true) -> (to_rep(o3) = 0))
-
-axiom H8 : ((result = true) -> ((1 <= res) and (res <= 3)))
-
-axiom H9 : ((result = true) -> (o4 = res))
-
-axiom H10 : ((result = true) -> (o5 = (data[o4 <- o3])))
-
-axiom H11 : ((result = true) -> (result1 = data))
-
-axiom H12 : ((result = true) -> (data2 = o5))
-
-axiom H13 : ((not (result = true)) -> (data2 = data))
-
-axiom H14 : ((not (result = true)) -> (data2 = data1))
-
-axiom H15 : (data2 = data3)
-
-axiom H16 : (data4 = data2)
-
-axiom H17 :
-  ((mem(((model__(data)).us_split_fields1).rec__allocator__m__t__allocated,
-  res) = true) ->
+ (* File "allocator.adb", line 7, characters 0-0 *)
+goal WP_parameter_def :
+  (forall data:(int,status) farray. forall o:int. forall o1:status.
+  forall o2:int. forall o3:status. forall o4:int.
+  forall o5:(int,status) farray. forall data1:(int,status) farray.
+  forall result:bool. forall result1:(int,status) farray.
+  forall data2:(int,status) farray. forall data3:(int,status) farray.
+  forall data4:(int,status) farray. (in_range(res) ->
+  ((((((not (res = 0)) and ((((((1 <= res) and (res <= 3)) and (o = res)) and
+  (o1 = (data[o]))) and (o2 = to_rep(o1))) and (((o2 = 1) and
+  (result = true)) or ((not (o2 = 1)) and (result = false))))) or
+  ((res = 0) and (result = false))) and (((result = true) and
+  (((to_rep(o3) = 0) and ((((1 <= res) and (res <= 3)) and (o4 = res)) and
+  (o5 = (data[o4 <- o3])))) and ((result1 = data) and (data2 = o5)))) or
+  ((not (result = true)) and ((data2 = data) and (data2 = data1))))) and
+  ((data2 = data3) and (data4 = data2))) ->
+  ((((mem(((model__(data)).us_split_fields1).rec__allocator__m__t__allocated,
+  res) = true) and
   ((is_add(((model__(data)).us_split_fields1).rec__allocator__m__t__available,
   res,
   ((model__(data3)).us_split_fields1).rec__allocator__m__t__available) = true) and
   (is_add(((model__(data3)).us_split_fields1).rec__allocator__m__t__allocated,
   res,
-  ((model__(data)).us_split_fields1).rec__allocator__m__t__allocated) = true)))
-
-axiom H18 :
+  ((model__(data)).us_split_fields1).rec__allocator__m__t__allocated) = true))) or
   (not (mem(((model__(data)).us_split_fields1).rec__allocator__m__t__allocated,
-  res) = true))
-
- (* File "allocator.adb", line 7, characters 0-0 *)
-goal WP_parameter_def : (oeq2(model__(data3), model__(data)) = true)
+  res) = true))) ->
+  ((not (mem(((model__(data)).us_split_fields1).rec__allocator__m__t__allocated,
+  res) = true)) -> (oeq2(model__(data3), model__(data)) = true))))))

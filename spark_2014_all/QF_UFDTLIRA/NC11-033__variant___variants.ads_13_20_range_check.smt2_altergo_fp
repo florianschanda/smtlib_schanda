@@ -104,9 +104,5 @@ type e__ref = { e__content : e
 
 function e__ref___projection(a: e__ref) : e = (a).e__content
 
-logic us : int
-
-logic us1 : int
-
  (* File "variants.ads", line 16, characters 0-0 *)
 goal WP_parameter_def : in_range(0)

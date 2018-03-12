@@ -109,39 +109,17 @@ logic val__ : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic subprograms__f1__result : int
-
-logic o : int
-
-logic result : int
-
-logic subprograms__f1__result1 : int
-
-logic subprograms__f1__result2 : int
-
-logic subprograms__f1__result3 : int
-
-logic subprograms__f1__result4 : int
-
-logic subprograms__f1__result5 : int
-
-axiom H : in_range(val__)
-
-axiom H1 : (subprograms__f1__result1 = subprograms__f1__result2)
-
-axiom H2 : (subprograms__f1__result3 = subprograms__f1__result1)
-
-axiom H3 : ((o = (val__ * 0)) and in_range((val__ * 0)))
-
-axiom H4 : (result = subprograms__f1__result)
-
-axiom H5 : (subprograms__f1__result1 = o)
-
-axiom H6 : (subprograms__f1__result4 = subprograms__f1__result2)
-
-axiom H7 : (subprograms__f1__result5 = subprograms__f1__result3)
-
-axiom H8 : (bool_eq(val__, 0) = true)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (subprograms__f1__result4 = 0)
+goal WP_parameter_def :
+  (forall subprograms__f1__result:int. forall o:int. forall result:int.
+  forall subprograms__f1__result1:int. forall subprograms__f1__result2:int.
+  forall subprograms__f1__result3:int. forall subprograms__f1__result4:int.
+  forall subprograms__f1__result5:int. (in_range(val__) ->
+  (((((subprograms__f1__result1 = subprograms__f1__result2) and
+  (subprograms__f1__result3 = subprograms__f1__result1)) and
+  (((o = (val__ * 0)) and in_range((val__ * 0))) and
+  ((result = subprograms__f1__result) and
+  (subprograms__f1__result1 = o)))) and
+  ((subprograms__f1__result4 = subprograms__f1__result2) and
+  (subprograms__f1__result5 = subprograms__f1__result3))) -> ((bool_eq(val__,
+  0) = true) -> (subprograms__f1__result4 = 0)))))

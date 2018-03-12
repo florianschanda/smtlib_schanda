@@ -480,39 +480,16 @@ logic z__attr__constrained : bool
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic y__split_fields : integer
-
-logic y__split_fields1 : integer
-
-logic z__split_fields : integer
-
-logic z__split_fields1 : integer
-
-logic us : int
-
-logic result : integer
-
-logic result1 : integer
-
-logic z__split_fields2 : integer
-
-logic z__split_fields3 : integer
-
-axiom H : ((0 = to_rep(y__split_discrs)) and (y__attr__constrained = true))
-
-axiom H1 : ((1 = to_rep(z__split_discrs)) and (z__attr__constrained = true))
-
-axiom H2 : ((us = to_rep(x)) and in_range(to_rep(x)))
-
-axiom H3 : (result = z__split_fields)
-
-axiom H4 : (result1 = z__split_fields1)
-
-axiom H5 : (z__split_fields2 = y__split_fields)
-
-axiom H6 : (z__split_fields3 = y__split_fields1)
-
-axiom H7 : (z__split_discrs = y__split_discrs)
-
  (* File "variants.ads", line 14, characters 0-0 *)
-goal WP_parameter_def : (0 = to_rep(x))
+goal WP_parameter_def :
+  (forall y__split_fields:integer. forall y__split_fields1:integer.
+  forall z__split_fields:integer. forall z__split_fields1:integer.
+  forall us:int. forall result:integer. forall result1:integer.
+  forall z__split_fields2:integer. forall z__split_fields3:integer.
+  (((0 = to_rep(y__split_discrs)) and (y__attr__constrained = true)) ->
+  (((1 = to_rep(z__split_discrs)) and (z__attr__constrained = true)) ->
+  (((us = to_rep(x)) and in_range(to_rep(x))) ->
+  (((((result = z__split_fields) and (result1 = z__split_fields1)) and
+  ((z__split_fields2 = y__split_fields) and
+  (z__split_fields3 = y__split_fields1))) and
+  (z__split_discrs = y__split_discrs)) -> (0 = to_rep(x)))))))

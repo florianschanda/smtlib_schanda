@@ -157,13 +157,5 @@ function s__ref___projection(a: s__ref) : s = (a).s__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic g : int
-
-logic o : int
-
-logic o1 : int
-
-axiom H : in_range(g)
-
  (* File "func_return.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : in_range1(g)
+goal WP_parameter_def : (forall g:int. (in_range(g) -> in_range1(g)))

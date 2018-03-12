@@ -383,12 +383,9 @@ logic i7s1 : very_small
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-axiom H : (in_range(i3s) and ((2 * i3s) <  100000))
-
-axiom H1 : (in_range1(i5s) and ((i5s * i5s) <  100000))
-
-axiom H2 : (((2 * to_rep(i7s)) <  100000) and
-  ((to_rep1(i7s1) * to_rep1(i7s1)) <  100000))
-
  (* File "dynamic_preds_rte.ads", line 14, characters 0-0 *)
-goal WP_parameter_def : (not (to_rep1(i7s1) = 0))
+goal WP_parameter_def : ((in_range(i3s) and ((2 * i3s) <  100000)) ->
+  ((in_range1(i5s) and ((i5s * i5s) <  100000)) ->
+  ((((2 * to_rep(i7s)) <  100000) and
+  ((to_rep1(i7s1) * to_rep1(i7s1)) <  100000)) ->
+  (not (to_rep1(i7s1) = 0)))))

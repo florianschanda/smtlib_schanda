@@ -1037,12 +1037,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1054,6 +1048,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1719,224 +1719,25 @@ type t8b__ref = { t8b__content : us_rep
 
 function t8b__ref___projection(a: t8b__ref) : us_rep = (a).t8b__content
 
-logic rec1__split_discrs : bool
-
-logic par1__split_fields : integer
-
-logic par1__split_fields1 : integer
-
-logic par1__split_fields2 : float1
-
-logic par1__split_fields3 : float1
-
-logic par1__split_fields4 : float1
-
-logic par1__split_discrs : bool
-
-logic o : integer
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic o3 : integer
-
-logic o4 : float1
-
-logic o5 : float1
-
-logic o6 : float1
-
-logic temp___164 : bool
-
-logic temp___1641 : integer
-
-logic temp___1642 : integer
-
-logic temp___1643 : float1
-
-logic temp___1644 : float1
-
-logic temp___1645 : float1
-
-logic temp___1646 : bool
-
-logic usq_ : bool
-
-logic usq_1 : integer
-
-logic usq_2 : integer
-
-logic usq_3 : float1
-
-logic usq_4 : float1
-
-logic usq_5 : float1
-
-logic usq_6 : bool
-
-logic temp___166 : bool
-
-logic temp___1661 : integer
-
-logic temp___1662 : integer
-
-logic temp___1663 : float1
-
-logic temp___1664 : float1
-
-logic temp___1665 : float1
-
-logic temp___1666 : bool
-
-logic o7 : float1
-
-logic o8 : float1
-
-logic o9 : float1
-
-logic o10 : integer
-
-logic o11 : integer
-
-logic o12 : float1
-
-logic o13 : float1
-
-logic o14 : float1
-
-logic temp___161 : bool
-
-logic temp___1611 : integer
-
-logic temp___1612 : integer
-
-logic temp___1613 : float1
-
-logic temp___1614 : float1
-
-logic temp___1615 : float1
-
-logic temp___1616 : bool
-
-logic usq_7 : bool
-
-logic usq_8 : integer
-
-logic usq_9 : integer
-
-logic usq_10 : float1
-
-logic usq_11 : float1
-
-logic usq_12 : float1
-
-logic usq_13 : bool
-
-logic temp___163 : bool
-
-logic temp___1631 : integer
-
-logic temp___1632 : integer
-
-logic temp___1633 : float1
-
-logic temp___1634 : float1
-
-logic temp___1635 : float1
-
-logic temp___1636 : bool
-
-logic result : integer
-
-logic result1 : integer
-
-logic result2 : float1
-
-logic result3 : float1
-
-logic result4 : float1
-
-logic par1__split_fields5 : integer
-
-logic par1__split_fields6 : integer
-
-logic par1__split_fields7 : float1
-
-logic par1__split_fields8 : float1
-
-logic par1__split_fields9 : float1
-
-logic result5 : bool
-
-logic par1__split_discrs1 : bool
-
-logic result6 : integer
-
-logic result7 : integer
-
-logic result8 : float1
-
-logic result9 : float1
-
-logic result10 : float1
-
-logic par1__split_fields10 : integer
-
-logic par1__split_fields11 : integer
-
-logic par1__split_fields12 : float1
-
-logic par1__split_fields13 : float1
-
-logic par1__split_fields14 : float1
-
-logic result11 : bool
-
-logic par1__split_discrs2 : bool
-
-axiom H : (rec1__attr__constrained = false)
-
-axiom H1 : (not (par1__split_discrs = true))
-
-axiom H2 : (par1__split_discrs = r7b)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
-axiom H3 : (to_rep1(o7) = fliteral1)
-
-axiom H4 : (to_rep1(o8) = fliteral1)
-
-axiom H5 : (to_rep1(o9) = fliteral1)
-
-axiom H6 : (dummy = o10)
-
-axiom H7 : (dummy = o11)
-
-axiom H8 : (o9 = o12)
-
-axiom H9 : (o8 = o13)
-
-axiom H10 : (o7 = o14)
-
-axiom H11 : (of_int1(0) = temp___161)
-
-axiom H12 : (temp___1611 = o10)
-
-axiom H13 : (temp___1612 = o11)
-
-axiom H14 : (temp___1613 = o12)
-
-axiom H15 : (temp___1614 = o13)
-
-axiom H16 : (temp___1615 = o14)
-
-axiom H17 : (true = temp___1616)
-
-axiom H18 : (par1__attr__constrained = true)
-
  (* File "depends_legal_2.adb", line 14, characters 0-0 *)
-goal WP_parameter_def : (temp___161 = par1__split_discrs)
+goal WP_parameter_def :
+  (forall par1__split_discrs:bool. forall o:float1. forall o1:float1.
+  forall o2:float1. forall o3:integer. forall o4:integer. forall o5:float1.
+  forall o6:float1. forall o7:float1. forall temp___185:bool.
+  forall temp___1851:integer. forall temp___1852:integer.
+  forall temp___1853:float1. forall temp___1854:float1.
+  forall temp___1855:float1. forall temp___1856:bool.
+  ((rec1__attr__constrained = false) -> ((not (par1__split_discrs = true)) ->
+  ((par1__split_discrs = r7b) -> ((((to_rep1(o) = fliteral1) and
+  ((to_rep1(o1) = fliteral1) and ((to_rep1(o2) = fliteral1) and
+  ((dummy = o3) and ((dummy = o4) and ((o2 = o5) and ((o1 = o6) and
+  (o = o7)))))))) and ((of_int1(0) = temp___185) and (((temp___1851 = o3) and
+  ((temp___1852 = o4) and ((temp___1853 = o5) and ((temp___1854 = o6) and
+  (temp___1855 = o7))))) and (true = temp___1856)))) ->
+  ((par1__attr__constrained = true) ->
+  (temp___185 = par1__split_discrs)))))))

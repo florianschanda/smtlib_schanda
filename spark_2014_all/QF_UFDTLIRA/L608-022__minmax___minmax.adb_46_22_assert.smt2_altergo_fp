@@ -170,55 +170,14 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic min1 : int
-
-logic max1 : int
-
-logic result : int
-
-logic min2 : int
-
-logic result1 : int
-
-logic max2 : int
-
-logic result2 : int
-
-logic min3 : int
-
-logic result3 : int
-
-logic max3 : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range(min1))
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(max1))
-
-axiom H2 : in_range1(x)
-
-axiom H3 : in_range1(y)
-
-axiom H4 : (x <  y)
-
-axiom H5 : (result = min1)
-
-axiom H6 : (min2 = min(x, y))
-
-axiom H7 : (result1 = max1)
-
-axiom H8 : (max2 = max(x, y))
-
-axiom H9 : (min2 = x)
-
-axiom H10 : (max2 = y)
-
-axiom H11 : (result2 = min2)
-
-axiom H12 : (min3 = min(x, (x + y)))
-
-axiom H13 : (result3 = max2)
-
-axiom H14 : (max3 = max((x + y), y))
-
  (* File "minmax.adb", line 25, characters 0-0 *)
-goal WP_parameter_def : (min3 = x)
+goal WP_parameter_def :
+  (forall min1:int. forall max1:int. forall result:int. forall min2:int.
+  forall result1:int. forall max2:int. forall result2:int. forall min3:int.
+  forall result3:int. forall max3:int. ((((- 2147483648) <= 2147483647) ->
+  in_range(min1)) -> ((((- 2147483648) <= 2147483647) -> in_range(max1)) ->
+  (in_range1(x) -> (in_range1(y) -> ((x <  y) -> (((result = min1) and
+  (min2 = min(x, y))) -> (((result1 = max1) and (max2 = max(x, y))) ->
+  ((min2 = x) -> ((max2 = y) -> (((result2 = min2) and (min3 = min(x,
+  (x + y)))) -> (((result3 = max2) and (max3 = max((x + y), y))) ->
+  (min3 = x)))))))))))))

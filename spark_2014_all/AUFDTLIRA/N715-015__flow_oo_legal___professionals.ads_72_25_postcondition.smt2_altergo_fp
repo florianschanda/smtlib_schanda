@@ -331,12 +331,6 @@ function person__ref___projection(a: person__ref) : us_rep1 =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq5 : bool, bool -> bool
-
-axiom bool_eq_def3 :
-  (forall x:bool. forall y:bool [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -348,6 +342,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq5 : bool, bool -> bool
+
+axiom bool_eq_def3 :
+  (forall x:bool. forall y:bool [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
 
 predicate in_range2(x: int) = ((x = 0) or (x = 1))
 
@@ -438,24 +438,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq8 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -466,17 +448,17 @@ axiom bool_eq_def6 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep2((a[temp___idx_78])) = to_rep2((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep2((a[temp___idx_91])) = to_rep2((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq8(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep2((a[temp___idx_78])) = to_rep2((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep2((a[temp___idx_91])) = to_rep2((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq8(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -486,37 +468,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep2((a[temp___idx_78])) = to_rep2((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq8(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq8(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep2((a[(i + 1)])) <  to_rep2((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq8(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep2((b[(i + 1)])) <  to_rep2((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep2((a[temp___idx_91])) = to_rep2((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 type t
 
@@ -608,17 +562,17 @@ logic to_unbounded_string1 : int, us_t -> us_rep
 
 logic to_unbounded_string__function_guard1 : us_rep, int, us_t -> prop
 
-logic temp___String_Literal_922 : unit -> (int,character) farray
+logic temp___String_Literal_1012 : unit -> (int,character) farray
 
-axiom temp___String_Literal_922__def_axiom :
-  ((((((((to_rep2((temp___String_Literal_922(void)[1])) = 78) and
-  (to_rep2((temp___String_Literal_922(void)[2])) = 97)) and
-  (to_rep2((temp___String_Literal_922(void)[3])) = 109)) and
-  (to_rep2((temp___String_Literal_922(void)[4])) = 101)) and
-  (to_rep2((temp___String_Literal_922(void)[5])) = 108)) and
-  (to_rep2((temp___String_Literal_922(void)[6])) = 101)) and
-  (to_rep2((temp___String_Literal_922(void)[7])) = 115)) and
-  (to_rep2((temp___String_Literal_922(void)[8])) = 115))
+axiom temp___String_Literal_1012__def_axiom :
+  ((((((((to_rep2((temp___String_Literal_1012(void)[1])) = 78) and
+  (to_rep2((temp___String_Literal_1012(void)[2])) = 97)) and
+  (to_rep2((temp___String_Literal_1012(void)[3])) = 109)) and
+  (to_rep2((temp___String_Literal_1012(void)[4])) = 101)) and
+  (to_rep2((temp___String_Literal_1012(void)[5])) = 108)) and
+  (to_rep2((temp___String_Literal_1012(void)[6])) = 101)) and
+  (to_rep2((temp___String_Literal_1012(void)[7])) = 115)) and
+  (to_rep2((temp___String_Literal_1012(void)[8])) = 115))
 
 logic is_alive : us_rep1 -> bool
 
@@ -724,24 +678,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,skills) farray, int, int, (int,skills) farray, int,
-  int -> (int,skills) farray
-
-axiom concat_def1 :
-  (forall a:(int,skills) farray. forall b:(int,skills) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : skills, int -> (int,skills) farray
-
-axiom singleton_def1 :
-  (forall v:skills.
-  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq12 : (int,skills) farray, int, int, (int,skills) farray, int,
   int -> bool
 
@@ -752,17 +688,17 @@ axiom bool_eq_def9 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_159:int. ((((a__first <= temp___idx_159) and
-  (temp___idx_159 <= a__last)) and
-  (to_rep4((a[temp___idx_159])) = to_rep4((b[((b__first - a__first) + temp___idx_159)])))) or
-  (not ((a__first <= temp___idx_159) and (temp___idx_159 <= a__last)))))) ->
+  (forall temp___idx_181:int. ((((a__first <= temp___idx_181) and
+  (temp___idx_181 <= a__last)) and
+  (to_rep4((a[temp___idx_181])) = to_rep4((b[((b__first - a__first) + temp___idx_181)])))) or
+  (not ((a__first <= temp___idx_181) and (temp___idx_181 <= a__last)))))) ->
   (bool_eq12(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_159:int. (((a__first <= temp___idx_159) and
-  (temp___idx_159 <= a__last)) ->
-  (to_rep4((a[temp___idx_159])) = to_rep4((b[((b__first - a__first) + temp___idx_159)]))))))) ->
+  (forall temp___idx_181:int. (((a__first <= temp___idx_181) and
+  (temp___idx_181 <= a__last)) ->
+  (to_rep4((a[temp___idx_181])) = to_rep4((b[((b__first - a__first) + temp___idx_181)]))))))) ->
   (bool_eq12(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -772,37 +708,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_159:int. (((a__first <= temp___idx_159) and
-  (temp___idx_159 <= a__last)) ->
-  (to_rep4((a[temp___idx_159])) = to_rep4((b[((b__first - a__first) + temp___idx_159)])))))))))
-
-logic compare1 : (int,skills) farray, int, int, (int,skills) farray, int,
-  int -> int
-
-axiom compare_def_eq1 :
-  (forall a:(int,skills) farray. forall b:(int,skills) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq12(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt1 :
-  (forall a:(int,skills) farray. forall b:(int,skills) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq12(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep4((a[(i + 1)])) <  to_rep4((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt1 :
-  (forall a:(int,skills) farray. forall b:(int,skills) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare1(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq12(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep4((b[(i + 1)])) <  to_rep4((a[(j + 1)]))))))))))))
+  (forall temp___idx_181:int. (((a__first <= temp___idx_181) and
+  (temp___idx_181 <= a__last)) ->
+  (to_rep4((a[temp___idx_181])) = to_rep4((b[((b__first - a__first) + temp___idx_181)])))))))))
 
 logic dummy14 : (int,skills) farray
 
@@ -1209,144 +1117,52 @@ axiom people__person__compat_axiom1 :
   rec__people__person__dob = p1; rec__people__person__alive = p2;
   rec__ext__ = p3 }; attr__tag = p4 }))))
 
-logic killer__split_fields : professions
-
-logic killer__split_fields1 : (int,skills) farray
-
-logic killer__split_fields2 : natural
-
-logic killer__split_fields3 : us_rep
-
-logic killer__split_fields4 : integer
-
-logic killer__split_fields5 : bool
-
-logic killer__split_fields6 : us_private
-
-logic victim__split_fields : us_rep
-
-logic victim__split_fields1 : integer
-
-logic victim__split_fields2 : bool
-
-logic victim__split_fields3 : us_private
-
-logic o : int
-
-logic o1 : natural
-
-logic o2 : professions
-
-logic o3 : (int,skills) farray
-
-logic o4 : natural
-
-logic o5 : us_rep
-
-logic o6 : integer
-
-logic o7 : bool
-
-logic o8 : us_private
-
-logic temp___1125 : professions
-
-logic temp___11251 : (int,skills) farray
-
-logic temp___11252 : natural
-
-logic temp___11253 : us_rep
-
-logic temp___11254 : integer
-
-logic temp___11255 : bool
-
-logic temp___11256 : us_private
-
-logic temp___11257 : int
-
-logic result : professions
-
-logic result1 : (int,skills) farray
-
-logic result2 : natural
-
-logic result3 : us_rep
-
-logic result4 : integer
-
-logic result5 : bool
-
-logic result6 : us_private
-
-logic killer__split_fields7 : professions
-
-logic killer__split_fields8 : (int,skills) farray
-
-logic killer__split_fields9 : natural
-
-logic killer__split_fields10 : us_rep
-
-logic killer__split_fields11 : integer
-
-logic killer__split_fields12 : bool
-
-logic killer__split_fields13 : us_private
-
-logic victim__split_fields4 : us_rep
-
-logic victim__split_fields5 : integer
-
-logic victim__split_fields6 : bool
-
-logic victim__split_fields7 : us_private
-
-logic killer__split_fields14 : professions
-
-logic killer__split_fields15 : (int,skills) farray
-
-logic killer__split_fields16 : natural
-
-logic killer__split_fields17 : us_rep
-
-logic killer__split_fields18 : integer
-
-logic killer__split_fields19 : bool
-
-logic killer__split_fields20 : us_private
-
-logic victim__split_fields8 : us_rep
-
-logic victim__split_fields9 : integer
-
-logic victim__split_fields10 : bool
-
-logic victim__split_fields11 : us_private
-
-logic killer__split_fields21 : professions
-
-logic killer__split_fields22 : (int,skills) farray
-
-logic killer__split_fields23 : natural
-
-logic killer__split_fields24 : us_rep
-
-logic killer__split_fields25 : integer
-
-logic killer__split_fields26 : bool
-
-logic killer__split_fields27 : us_private
-
-logic victim__split_fields12 : us_rep
-
-logic victim__split_fields13 : integer
-
-logic victim__split_fields14 : bool
-
-logic victim__split_fields15 : us_private
-
-axiom H : (((is_alive({ us_split_fields1 = { rec__people__person__name =
-  killer__split_fields3; rec__people__person__dob = killer__split_fields4;
+ (* File "professionals.ads", line 65, characters 0-0 *)
+goal WP_parameter_def :
+  (forall killer__split_fields:professions.
+  forall killer__split_fields1:(int,skills) farray.
+  forall killer__split_fields2:natural. forall killer__split_fields3:us_rep.
+  forall killer__split_fields4:integer. forall killer__split_fields5:bool.
+  forall killer__split_fields6:us_private.
+  forall victim__split_fields:us_rep. forall victim__split_fields1:integer.
+  forall victim__split_fields2:bool. forall victim__split_fields3:us_private.
+  forall o:int. forall o1:natural. forall o2:professions.
+  forall o3:(int,skills) farray. forall o4:natural. forall o5:us_rep.
+  forall o6:integer. forall o7:bool. forall o8:us_private.
+  forall temp___1223:professions. forall temp___12231:(int,skills) farray.
+  forall temp___12232:natural. forall temp___12233:us_rep.
+  forall temp___12234:integer. forall temp___12235:bool.
+  forall temp___12236:us_private. forall temp___12237:int.
+  forall result:professions. forall result1:(int,skills) farray.
+  forall result2:natural. forall result3:us_rep. forall result4:integer.
+  forall result5:bool. forall result6:us_private.
+  forall killer__split_fields7:professions.
+  forall killer__split_fields8:(int,skills) farray.
+  forall killer__split_fields9:natural. forall killer__split_fields10:us_rep.
+  forall killer__split_fields11:integer. forall killer__split_fields12:bool.
+  forall killer__split_fields13:us_private.
+  forall victim__split_fields4:us_rep. forall victim__split_fields5:integer.
+  forall victim__split_fields6:bool. forall victim__split_fields7:us_private.
+  forall killer__split_fields14:professions.
+  forall killer__split_fields15:(int,skills) farray.
+  forall killer__split_fields16:natural.
+  forall killer__split_fields17:us_rep.
+  forall killer__split_fields18:integer. forall killer__split_fields19:bool.
+  forall killer__split_fields20:us_private.
+  forall victim__split_fields8:us_rep. forall victim__split_fields9:integer.
+  forall victim__split_fields10:bool.
+  forall victim__split_fields11:us_private.
+  forall killer__split_fields21:professions.
+  forall killer__split_fields22:(int,skills) farray.
+  forall killer__split_fields23:natural.
+  forall killer__split_fields24:us_rep.
+  forall killer__split_fields25:integer. forall killer__split_fields26:bool.
+  forall killer__split_fields27:us_private.
+  forall victim__split_fields12:us_rep.
+  forall victim__split_fields13:integer. forall victim__split_fields14:bool.
+  forall victim__split_fields15:us_private. (((((is_alive({
+  us_split_fields1 = { rec__people__person__name = killer__split_fields3;
+  rec__people__person__dob = killer__split_fields4;
   rec__people__person__alive = killer__split_fields5; rec__ext__ =
   hide_ext__(killer__split_fields, killer__split_fields1,
   killer__split_fields2, killer__split_fields6) }; attr__tag =
@@ -1362,129 +1178,62 @@ axiom H : (((is_alive({ us_split_fields1 = { rec__people__person__name =
   killer__split_fields2; rec__people__person__name1 = killer__split_fields3;
   rec__people__person__dob1 = killer__split_fields4;
   rec__people__person__alive1 = killer__split_fields5; rec__ext__1 =
-  killer__split_fields6 }; attr__tag1 = killer__attr__tag }) = true))
-
-axiom H1 : ((o = (to_rep(killer__split_fields2) + 1)) and
-  in_range((to_rep(killer__split_fields2) + 1)))
-
-axiom H2 : (to_rep(o1) = o)
-
-axiom H3 : (killer__split_fields = o2)
-
-axiom H4 : (killer__split_fields1 = o3)
-
-axiom H5 : (o1 = o4)
-
-axiom H6 : (killer__split_fields3 = o5)
-
-axiom H7 : (killer__split_fields4 = o6)
-
-axiom H8 : (killer__split_fields5 = o7)
-
-axiom H9 : (killer__split_fields6 = o8)
-
-axiom H10 : (temp___1125 = o2)
-
-axiom H11 : (temp___11251 = o3)
-
-axiom H12 : (temp___11252 = o4)
-
-axiom H13 : (temp___11253 = o5)
-
-axiom H14 : (temp___11254 = o6)
-
-axiom H15 : (temp___11255 = o7)
-
-axiom H16 : (temp___11256 = o8)
-
-axiom H17 : (killer__attr__tag = temp___11257)
-
-axiom H18 : (result = killer__split_fields)
-
-axiom H19 : (result1 = killer__split_fields1)
-
-axiom H20 : (result2 = killer__split_fields2)
-
-axiom H21 : (result3 = killer__split_fields3)
-
-axiom H22 : (result4 = killer__split_fields4)
-
-axiom H23 : (result5 = killer__split_fields5)
-
-axiom H24 : (result6 = killer__split_fields6)
-
-axiom H25 : (temp___1125 = killer__split_fields7)
-
-axiom H26 : (temp___11251 = killer__split_fields8)
-
-axiom H27 : (temp___11252 = killer__split_fields9)
-
-axiom H28 : (temp___11253 = killer__split_fields10)
-
-axiom H29 : (temp___11254 = killer__split_fields11)
-
-axiom H30 : (temp___11255 = killer__split_fields12)
-
-axiom H31 : (temp___11256 = killer__split_fields13)
-
-axiom H32 : rip__specific_post(victim__attr__tag, {
-  rec__people__person__name = victim__split_fields4;
-  rec__people__person__dob = victim__split_fields5;
+  killer__split_fields6 }; attr__tag1 = killer__attr__tag }) = true)) and
+  ((((((((o = (to_rep(killer__split_fields2) + 1)) and
+  in_range((to_rep(killer__split_fields2) + 1))) and (to_rep(o1) = o)) and
+  ((killer__split_fields = o2) and ((killer__split_fields1 = o3) and
+  ((o1 = o4) and ((killer__split_fields3 = o5) and
+  ((killer__split_fields4 = o6) and ((killer__split_fields5 = o7) and
+  (killer__split_fields6 = o8)))))))) and (((temp___1223 = o2) and
+  ((temp___12231 = o3) and ((temp___12232 = o4) and ((temp___12233 = o5) and
+  ((temp___12234 = o6) and ((temp___12235 = o7) and
+  (temp___12236 = o8))))))) and (killer__attr__tag = temp___12237))) and
+  (((result = killer__split_fields) and
+  ((result1 = killer__split_fields1) and
+  ((result2 = killer__split_fields2) and
+  ((result3 = killer__split_fields3) and
+  ((result4 = killer__split_fields4) and
+  ((result5 = killer__split_fields5) and
+  (result6 = killer__split_fields6))))))) and
+  ((temp___1223 = killer__split_fields7) and
+  ((temp___12231 = killer__split_fields8) and
+  ((temp___12232 = killer__split_fields9) and
+  ((temp___12233 = killer__split_fields10) and
+  ((temp___12234 = killer__split_fields11) and
+  ((temp___12235 = killer__split_fields12) and
+  (temp___12236 = killer__split_fields13))))))))) and
+  rip__specific_post(victim__attr__tag, { rec__people__person__name =
+  victim__split_fields4; rec__people__person__dob = victim__split_fields5;
   rec__people__person__alive = victim__split_fields6; rec__ext__ =
   victim__split_fields7 }, victim__attr__tag, { rec__people__person__name =
   victim__split_fields; rec__people__person__dob = victim__split_fields1;
   rec__people__person__alive = victim__split_fields2; rec__ext__ =
-  victim__split_fields3 })
-
-axiom H33 : (victim__split_fields8 = victim__split_fields4)
-
-axiom H34 : (victim__split_fields9 = victim__split_fields5)
-
-axiom H35 : (victim__split_fields10 = victim__split_fields6)
-
-axiom H36 : (victim__split_fields11 = victim__split_fields7)
-
-axiom H37 : (killer__split_fields14 = killer__split_fields7)
-
-axiom H38 : (killer__split_fields15 = killer__split_fields8)
-
-axiom H39 : (killer__split_fields16 = killer__split_fields9)
-
-axiom H40 : (killer__split_fields17 = killer__split_fields10)
-
-axiom H41 : (killer__split_fields18 = killer__split_fields11)
-
-axiom H42 : (killer__split_fields19 = killer__split_fields12)
-
-axiom H43 : (killer__split_fields20 = killer__split_fields13)
-
-axiom H44 : (victim__split_fields12 = victim__split_fields4)
-
-axiom H45 : (victim__split_fields13 = victim__split_fields5)
-
-axiom H46 : (victim__split_fields14 = victim__split_fields6)
-
-axiom H47 : (victim__split_fields15 = victim__split_fields7)
-
-axiom H48 : (killer__split_fields21 = killer__split_fields7)
-
-axiom H49 : (killer__split_fields22 = killer__split_fields8)
-
-axiom H50 : (killer__split_fields23 = killer__split_fields9)
-
-axiom H51 : (killer__split_fields24 = killer__split_fields10)
-
-axiom H52 : (killer__split_fields25 = killer__split_fields11)
-
-axiom H53 : (killer__split_fields26 = killer__split_fields12)
-
-axiom H54 : (killer__split_fields27 = killer__split_fields13)
-
- (* File "professionals.ads", line 65, characters 0-0 *)
-goal WP_parameter_def : (is_alive({ us_split_fields1 = {
-  rec__people__person__name = killer__split_fields17;
+  victim__split_fields3 })) and
+  ((((victim__split_fields8 = victim__split_fields4) and
+  ((victim__split_fields9 = victim__split_fields5) and
+  ((victim__split_fields10 = victim__split_fields6) and
+  (victim__split_fields11 = victim__split_fields7)))) and
+  ((killer__split_fields14 = killer__split_fields7) and
+  ((killer__split_fields15 = killer__split_fields8) and
+  ((killer__split_fields16 = killer__split_fields9) and
+  ((killer__split_fields17 = killer__split_fields10) and
+  ((killer__split_fields18 = killer__split_fields11) and
+  ((killer__split_fields19 = killer__split_fields12) and
+  (killer__split_fields20 = killer__split_fields13)))))))) and
+  (((victim__split_fields12 = victim__split_fields4) and
+  ((victim__split_fields13 = victim__split_fields5) and
+  ((victim__split_fields14 = victim__split_fields6) and
+  (victim__split_fields15 = victim__split_fields7)))) and
+  ((killer__split_fields21 = killer__split_fields7) and
+  ((killer__split_fields22 = killer__split_fields8) and
+  ((killer__split_fields23 = killer__split_fields9) and
+  ((killer__split_fields24 = killer__split_fields10) and
+  ((killer__split_fields25 = killer__split_fields11) and
+  ((killer__split_fields26 = killer__split_fields12) and
+  (killer__split_fields27 = killer__split_fields13))))))))))) -> (is_alive({
+  us_split_fields1 = { rec__people__person__name = killer__split_fields17;
   rec__people__person__dob = killer__split_fields18;
   rec__people__person__alive = killer__split_fields19; rec__ext__ =
   hide_ext__(killer__split_fields14, killer__split_fields15,
   killer__split_fields16, killer__split_fields20) }; attr__tag =
-  killer__attr__tag }) = true)
+  killer__attr__tag }) = true)))

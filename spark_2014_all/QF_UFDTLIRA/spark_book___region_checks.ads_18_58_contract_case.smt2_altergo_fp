@@ -81,12 +81,6 @@ axiom bool_ge_axiom :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -98,6 +92,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -141,108 +141,73 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic region_checks__in_unit_square__result : int
-
-logic result : int
-
-logic region_checks__in_unit_square__result1 : int
-
-logic result1 : int
-
-logic region_checks__in_unit_square__result2 : int
-
-logic result2 : int
-
-logic region_checks__in_unit_square__result3 : int
-
-logic result3 : int
-
-logic region_checks__in_unit_square__result4 : int
-
-logic result4 : int
-
-logic region_checks__in_unit_square__result5 : int
-
-logic region_checks__in_unit_square__result6 : int
-
-logic region_checks__in_unit_square__result7 : int
-
-logic region_checks__in_unit_square__result8 : int
-
-logic region_checks__in_unit_square__result9 : int
-
-logic region_checks__in_unit_square__result10 : int
-
-logic region_checks__in_unit_square__result11 : int
-
-logic region_checks__in_unit_square__result12 : int
-
-logic region_checks__in_unit_square__result13 : int
-
-logic region_checks__in_unit_square__result14 : int
-
-logic region_checks__in_unit_square__result15 : int
-
-logic region_checks__in_unit_square__result16 : int
-
-logic region_checks__in_unit_square__result17 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : in_range1(y)
-
-axiom H2 :
-  (((region_checks__in_unit_square__result14 = region_checks__in_unit_square__result12) and
+ (* File "region_checks.ads", line 4, characters 0-0 *)
+goal WP_parameter_def :
+  (forall region_checks__in_unit_square__result:int. forall result:int.
+  forall region_checks__in_unit_square__result1:int. forall result1:int.
+  forall region_checks__in_unit_square__result2:int. forall result2:int.
+  forall region_checks__in_unit_square__result3:int. forall result3:int.
+  forall region_checks__in_unit_square__result4:int. forall result4:int.
+  forall region_checks__in_unit_square__result5:int.
+  forall region_checks__in_unit_square__result6:int.
+  forall region_checks__in_unit_square__result7:int.
+  forall region_checks__in_unit_square__result8:int.
+  forall region_checks__in_unit_square__result9:int.
+  forall region_checks__in_unit_square__result10:int.
+  forall region_checks__in_unit_square__result11:int.
+  forall region_checks__in_unit_square__result12:int.
+  forall region_checks__in_unit_square__result13:int.
+  forall region_checks__in_unit_square__result14:int.
+  forall region_checks__in_unit_square__result15:int.
+  forall region_checks__in_unit_square__result16:int.
+  forall region_checks__in_unit_square__result17:int. (in_range1(x) ->
+  (in_range1(y) -> ((((({ int__content =
+  region_checks__in_unit_square__result14 } = { int__content =
+  region_checks__in_unit_square__result12 }) and
   (region_checks__in_unit_square__result15 = region_checks__in_unit_square__result13)) and
-  (((((- 1) <= x) and ((x <= 1) and (((- 1) <= y) and (y <= 1)))) ->
+  (((((- 1) <= x) and ((x <= 1) and (((- 1) <= y) and (y <= 1)))) and
   (((region_checks__in_unit_square__result1 = region_checks__in_unit_square__result12) and
   (region_checks__in_unit_square__result13 = region_checks__in_unit_square__result1)) and
   ((result = region_checks__in_unit_square__result) and
-  (region_checks__in_unit_square__result1 = 1)))) and ((not (((- 1) <= x) and
-  ((x <= 1) and (((- 1) <= y) and (y <= 1))))) ->
-  (((region_checks__in_unit_square__result12 = region_checks__in_unit_square__result10) and
+  (region_checks__in_unit_square__result1 = 1)))) or ((not (((- 1) <= x) and
+  ((x <= 1) and (((- 1) <= y) and (y <= 1))))) and ((({ int__content =
+  region_checks__in_unit_square__result12 } = { int__content =
+  region_checks__in_unit_square__result10 }) and
   (region_checks__in_unit_square__result13 = region_checks__in_unit_square__result11)) and
-  ((((0 <= x) and (0 <= y)) ->
+  ((((0 <= x) and (0 <= y)) and
   (((region_checks__in_unit_square__result2 = region_checks__in_unit_square__result10) and
   (region_checks__in_unit_square__result11 = region_checks__in_unit_square__result2)) and
   ((result1 = region_checks__in_unit_square__result) and
-  (region_checks__in_unit_square__result2 = 0)))) and ((not ((0 <= x) and
-  (0 <= y))) ->
-  (((region_checks__in_unit_square__result10 = region_checks__in_unit_square__result8) and
+  (region_checks__in_unit_square__result2 = 0)))) or ((not ((0 <= x) and
+  (0 <= y))) and ((({ int__content = region_checks__in_unit_square__result10
+  } = { int__content = region_checks__in_unit_square__result8 }) and
   (region_checks__in_unit_square__result11 = region_checks__in_unit_square__result9)) and
-  ((((x <  0) and (0 <= y)) ->
+  ((((x <  0) and (0 <= y)) and
   (((region_checks__in_unit_square__result3 = region_checks__in_unit_square__result8) and
   (region_checks__in_unit_square__result9 = region_checks__in_unit_square__result3)) and
   ((result2 = region_checks__in_unit_square__result) and
-  (region_checks__in_unit_square__result3 = (- 1))))) and ((not ((x <  0) and
-  (0 <= y))) ->
-  (((region_checks__in_unit_square__result8 = region_checks__in_unit_square__result6) and
+  (region_checks__in_unit_square__result3 = (- 1))))) or ((not ((x <  0) and
+  (0 <= y))) and
+  (((region_checks__in_unit_square__result6 = region_checks__in_unit_square__result8) and
   (region_checks__in_unit_square__result9 = region_checks__in_unit_square__result7)) and
-  ((((x <  0) and (y <  0)) ->
+  ((((x <  0) and (y <  0)) and
   (((region_checks__in_unit_square__result4 = region_checks__in_unit_square__result6) and
   (region_checks__in_unit_square__result7 = region_checks__in_unit_square__result4)) and
   ((result3 = region_checks__in_unit_square__result) and
-  (region_checks__in_unit_square__result4 = 0)))) and ((not ((x <  0) and
-  (y <  0))) ->
+  (region_checks__in_unit_square__result4 = 0)))) or ((not ((x <  0) and
+  (y <  0))) and
   (((region_checks__in_unit_square__result5 = region_checks__in_unit_square__result6) and
   (region_checks__in_unit_square__result7 = region_checks__in_unit_square__result5)) and
   ((result4 = region_checks__in_unit_square__result) and
-  (region_checks__in_unit_square__result5 = (- 1))))))))))))))))
-
-axiom H3 :
-  (region_checks__in_unit_square__result16 = region_checks__in_unit_square__result14)
-
-axiom H4 :
-  (region_checks__in_unit_square__result17 = region_checks__in_unit_square__result15)
-
-axiom H5 : (((match_bool(bool_ge(x, 0), bool_ge(y, 0), false) = true) and
-  (match_bool(bool_le(x, 1), bool_le(y, 1), false) = false)) ->
-  (region_checks__in_unit_square__result16 = 0))
-
-axiom H6 : ((match_bool(bool_lt(x, 0), bool_ge(y, 0), false) = true) ->
-  (not (match_bool(bool_ge(x, (- 1)), bool_le(y, 1), false) = true)))
-
-axiom H7 : (not (match_bool(bool_lt(x, 0), bool_ge(y, 0), false) = false))
-
- (* File "region_checks.ads", line 4, characters 0-0 *)
-goal WP_parameter_def : (region_checks__in_unit_square__result16 = (- 1))
+  (region_checks__in_unit_square__result5 = (- 1)))))))))))))))) and
+  ((region_checks__in_unit_square__result16 = region_checks__in_unit_square__result14) and
+  (region_checks__in_unit_square__result17 = region_checks__in_unit_square__result15))) ->
+  (((((match_bool(bool_ge(x, 0), bool_ge(y, 0), false) = true) and
+  (match_bool(bool_le(x, 1), bool_le(y, 1), false) = false)) and
+  (region_checks__in_unit_square__result16 = 0)) or
+  (not (((match_bool(bool_ge(x, 0), bool_ge(y, 0), false) = true) ->
+  (not (match_bool(bool_le(x, 1), bool_le(y, 1), false) = true))) and
+  (not (match_bool(bool_ge(x, 0), bool_ge(y, 0), false) = false))))) ->
+  (((match_bool(bool_lt(x, 0), bool_ge(y, 0), false) = true) and
+  (match_bool(bool_ge(x, (- 1)), bool_le(y, 1), false) = false)) ->
+  (region_checks__in_unit_square__result16 = (- 1))))))))

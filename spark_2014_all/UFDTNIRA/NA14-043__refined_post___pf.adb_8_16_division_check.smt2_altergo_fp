@@ -219,21 +219,5 @@ logic i : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic pf__prf_public__result : int
-
-logic result : int
-
-logic pf__prf_public__result1 : int
-
-logic pf__prf_public__result2 : int
-
-logic pf__prf_public__result3 : int
-
-logic pf__prf_public__result4 : int
-
-logic pf__prf_public__result5 : int
-
-axiom H : in_range(i)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (not (2 = 0))
+goal WP_parameter_def : (in_range(i) -> (not (2 = 0)))

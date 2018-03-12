@@ -152,49 +152,13 @@ logic c1b : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic x : int
-
-logic y : int
-
-logic conv__C1b__assume : int
-
-logic o : int
-
-logic o1 : integer
-
-logic o2 : int
-
-logic result : int
-
-logic x1 : int
-
-logic result1 : int
-
-logic y1 : int
-
-axiom H : (result = x)
-
-axiom H1 : (x1 = 10)
-
-axiom H2 : in_range(x1)
-
-axiom H3 : (((- 2147483648) <= 2147483647) -> in_range(y))
-
-axiom H4 : ((conv__C1b__assume = x1) and in_range1(x1))
-
-axiom H5 : (conv__C1b__assume = c1b)
-
-axiom H6 : in_range1(c1b)
-
-axiom H7 : ((o = (c1b + 1)) and in_range((c1b + 1)))
-
-axiom H8 : (to_rep(o1) = o)
-
-axiom H9 : (o2 = to_rep(o1))
-
-axiom H10 : (result1 = y)
-
-axiom H11 : (y1 = o2)
-
  (* File "conv.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : (y1 = 11)
+goal WP_parameter_def :
+  (forall x:int. forall y:int. forall conv__C1b__assume:int. forall o:int.
+  forall o1:integer. forall o2:int. forall result:int. forall x1:int.
+  forall result1:int. forall y1:int. (((result = x) and (x1 = 10)) ->
+  (in_range(x1) -> ((((- 2147483648) <= 2147483647) -> in_range(y)) ->
+  (((((conv__C1b__assume = x1) and in_range1(x1)) and
+  (conv__C1b__assume = c1b)) and in_range1(c1b)) -> ((((((o = (c1b + 1)) and
+  in_range((c1b + 1))) and (to_rep(o1) = o)) and (o2 = to_rep(o1))) and
+  ((result1 = y) and (y1 = o2))) -> (y1 = 11)))))))

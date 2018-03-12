@@ -134,58 +134,16 @@ axiom sum_all__post_axiom :
   ((in_range(init__b) and in_range(init__a)) -> in_range(sum_all(init__b,
   init__state, init__a)))))
 
-logic a : int
-
-logic b : int
-
-logic x : int
-
-logic y : int
-
-logic z : int
-
-logic state : us_private
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic x1 : int
-
-logic result1 : int
-
-logic y1 : int
-
-logic result2 : bool
-
-axiom H : in_range(a)
-
-axiom H1 : in_range(b)
-
-axiom H2 : (sum_all(b, state, a) = 0)
-
-axiom H3 : (result = x)
-
-axiom H4 : (x1 = a)
-
-axiom H5 : in_range(x1)
-
-axiom H6 : ((o = sum_state(b, state)) and in_range(o))
-
-axiom H7 : (result1 = y)
-
-axiom H8 : (y1 = o)
-
-axiom H9 : in_range(y1)
-
-axiom H10 : (((- 2147483648) <= 2147483647) -> in_range(z))
-
-axiom H11 : ((o1 = (x1 + y1)) and in_range((x1 + y1)))
-
-axiom H12 : (((o1 = 0) -> (result2 = true)) and ((not (o1 = 0)) ->
-  (result2 = false)))
-
  (* File "init.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : ((x1 + y1) = 0)
+goal WP_parameter_def :
+  (forall a:int. forall b:int. forall x:int. forall y:int. forall z:int.
+  forall state:us_private. forall o:int. forall o1:int. forall result:int.
+  forall x1:int. forall result1:int. forall y1:int.
+  (forall result2:bool. ((in_range(a) and (in_range(b) and ((sum_all(b,
+  state, a) = 0) and ((({ int__content = result } = { int__content = x }) and
+  (x1 = a)) and (in_range(x1) and ((((o = sum_state(b, state)) and
+  in_range(o)) and (({ int__content = result1 } = { int__content = y }) and
+  (y1 = o))) and (in_range(y1) and ((((- 2147483648) <= 2147483647) ->
+  in_range(z)) and (((o1 = (x1 + y1)) and in_range((x1 + y1))) and
+  (((o1 = 0) and (result2 = true)) or ((not (o1 = 0)) and
+  (result2 = false)))))))))))) -> ((x1 + y1) = 0))))

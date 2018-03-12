@@ -247,49 +247,11 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic value : int
-
-logic count : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic result : int
-
-logic count1 : int
-
-axiom H : in_range1(count)
-
-axiom H1 : in_range1(value)
-
-axiom H2 : (result = count)
-
-axiom H3 : (count1 = (comp_mod(count,128) + 1))
-
-axiom H4 : (not (count1 <= value))
-
-axiom H5 : ((o5 = (count1 - value)) and in_range((count1 - value)))
-
-axiom H6 : (o6 = comp_div(o5,2))
-
-axiom H7 : (o7 = (value + o6))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(o7)
+goal WP_parameter_def :
+  (forall value:int. forall count:int. forall o:int. forall o1:int.
+  forall o2:int. forall result:int. forall count1:int. (in_range1(count) ->
+  (in_range1(value) -> (((result = count) and
+  (count1 = (comp_mod(count,128) + 1))) -> ((not (count1 <= value)) ->
+  (((((o = (count1 - value)) and in_range((count1 - value))) and
+  (o1 = comp_div(o,2))) and (o2 = (value + o1))) -> in_range(o2)))))))

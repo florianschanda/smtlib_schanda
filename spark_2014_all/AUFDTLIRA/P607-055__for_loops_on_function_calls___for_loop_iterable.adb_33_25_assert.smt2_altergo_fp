@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -162,24 +162,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> (int,natural) farray
-
-axiom concat_def :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : natural, int -> (int,natural) farray
-
-axiom singleton_def :
-  (forall v:natural.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq3 : (int,natural) farray, int, int, (int,natural) farray, int,
   int -> bool
 
@@ -190,17 +172,17 @@ axiom bool_eq_def2 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq3(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq3(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -210,37 +192,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq3(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq3(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq3(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic dummy1 : (int,natural) farray
 
@@ -352,9 +306,9 @@ logic has_element : us_rep, int -> bool
 
 logic has_element__function_guard : bool, us_rep, int -> prop
 
-type valid_cursor
+type cursor
 
-predicate in_range2(x: int) = ((1 <= x) and (x <= 100))
+predicate in_range2(x: int) = ((0 <= x) and (x <= 100))
 
 logic bool_eq5 : int, int -> bool
 
@@ -368,19 +322,19 @@ logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE2 : us_image -> int
 
-logic user_eq3 : valid_cursor, valid_cursor -> bool
+logic user_eq3 : cursor, cursor -> bool
 
-logic dummy3 : valid_cursor
+logic dummy3 : cursor
 
-type valid_cursor__ref = { valid_cursor__content : valid_cursor
+type cursor__ref = { cursor__content : cursor
 }
 
-function valid_cursor__ref___projection(a: valid_cursor__ref) : valid_cursor =
-  (a).valid_cursor__content
+function cursor__ref___projection(a: cursor__ref) : cursor =
+  (a).cursor__content
 
-type cursor
+type valid_cursor
 
-predicate in_range3(x: int) = ((0 <= x) and (x <= 100))
+predicate in_range3(x: int) = ((1 <= x) and (x <= 100))
 
 logic bool_eq6 : int, int -> bool
 
@@ -394,15 +348,15 @@ logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE3 : us_image -> int
 
-logic user_eq4 : cursor, cursor -> bool
+logic user_eq4 : valid_cursor, valid_cursor -> bool
 
-logic dummy4 : cursor
+logic dummy4 : valid_cursor
 
-type cursor__ref = { cursor__content : cursor
+type valid_cursor__ref = { valid_cursor__content : valid_cursor
 }
 
-function cursor__ref___projection(a: cursor__ref) : cursor =
-  (a).cursor__content
+function valid_cursor__ref___projection(a: valid_cursor__ref) : valid_cursor =
+  (a).valid_cursor__content
 
 axiom has_element__post_axiom : true
 
@@ -411,7 +365,7 @@ axiom has_element__def_axiom :
   (forall c:int [has_element({ us_split_fields1 = {
   rec__declare_iterable__container__content = x } }, c)]. ((has_element({
   us_split_fields1 = { rec__declare_iterable__container__content = x } },
-  c) = true) <-> in_range2(c))))
+  c) = true) <-> in_range3(c))))
 
 logic next : us_rep, int -> int
 
@@ -420,16 +374,16 @@ logic next__function_guard : int, us_rep, int -> prop
 axiom next__post_axiom :
   (forall x:(int,natural) farray.
   (forall c:int [next({ us_split_fields1 = {
-  rec__declare_iterable__container__content = x } }, c)]. ((in_range3(c) and
+  rec__declare_iterable__container__content = x } }, c)]. ((in_range2(c) and
   (has_element({ us_split_fields1 = {
   rec__declare_iterable__container__content = x } }, c) = true)) ->
-  in_range3(next({ us_split_fields1 = {
+  in_range2(next({ us_split_fields1 = {
   rec__declare_iterable__container__content = x } }, c)))))
 
 axiom next__def_axiom :
   (forall x:(int,natural) farray.
   (forall c:int [next({ us_split_fields1 = {
-  rec__declare_iterable__container__content = x } }, c)]. (in_range3(c) ->
+  rec__declare_iterable__container__content = x } }, c)]. (in_range2(c) ->
   (((c = 100) -> (next({ us_split_fields1 = {
   rec__declare_iterable__container__content = x } }, c) = 0)) and
   ((not (c = 100)) -> (next({ us_split_fields1 = {
@@ -441,7 +395,7 @@ logic first__function_guard : int, us_rep -> prop
 
 axiom first__post_axiom :
   (forall x:(int,natural) farray [first({ us_split_fields1 = {
-  rec__declare_iterable__container__content = x } })]. in_range3(first({
+  rec__declare_iterable__container__content = x } })]. in_range2(first({
   us_split_fields1 = { rec__declare_iterable__container__content = x } })))
 
 axiom first__def_axiom :
@@ -457,7 +411,7 @@ logic element__function_guard : int, us_rep, int -> prop
 axiom element__post_axiom :
   (forall x:(int,natural) farray.
   (forall c:int [element({ us_split_fields1 = {
-  rec__declare_iterable__container__content = x } }, c)]. ((in_range3(c) and
+  rec__declare_iterable__container__content = x } }, c)]. ((in_range2(c) and
   (has_element({ us_split_fields1 = {
   rec__declare_iterable__container__content = x } }, c) = true)) ->
   in_range1(element({ us_split_fields1 = {
@@ -466,7 +420,7 @@ axiom element__post_axiom :
 axiom element__def_axiom :
   (forall x:(int,natural) farray.
   (forall c:int [element({ us_split_fields1 = {
-  rec__declare_iterable__container__content = x } }, c)]. (in_range3(c) ->
+  rec__declare_iterable__container__content = x } }, c)]. (in_range2(c) ->
   (element({ us_split_fields1 = { rec__declare_iterable__container__content =
   x } }, c) = to_rep((x[c]))))))
 
@@ -489,115 +443,43 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 logic for_loop_iterable__p3__a__aggregate_def : int -> (int,natural) farray
 
 axiom def_axiom :
-  (forall temp___248:int.
-  (forall temp___249:int.
-  ((for_loop_iterable__p3__a__aggregate_def(temp___248)[temp___249]) = of_rep(temp___248))))
+  (forall temp___281:int. (in_range1(temp___281) ->
+  (forall temp___282:int.
+  (to_rep((for_loop_iterable__p3__a__aggregate_def(temp___281)[temp___282])) = temp___281))))
 
-logic a : (int,natural) farray
-
-logic g__split_fields : (int,natural) farray
-
-logic e : int
-
-logic for_loop_iterable__p3__g__assume : (int,natural) farray
-
-logic o : int
-
-logic temp___253 : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : bool
-
-logic o4 : int
-
-logic o5 : int
-
-logic e1 : int
-
-logic result : (int,natural) farray
-
-logic a1 : (int,natural) farray
-
-logic result1 : (int,natural) farray
-
-logic g__split_fields1 : (int,natural) farray
-
-logic result2 : bool
-
-logic result3 : int
-
-logic e2 : int
-
-logic result4 : bool
-
-logic g__split_fields2 : (int,natural) farray
-
-logic e3 : int
-
-logic temp___2531 : int
-
-logic g__split_fields3 : (int,natural) farray
-
-logic result5 : bool
-
-logic result6 : int
-
-logic temp___2532 : int
-
-logic result7 : bool
-
-axiom H : (result = a)
-
-axiom H1 : (a1 = for_loop_iterable__p3__a__aggregate_def(0))
-
-axiom H2 : (({ us_split_fields1 = {
-  rec__declare_iterable__container__content =
+ (* File "for_loop_iterable.adb", line 28, characters 0-0 *)
+goal WP_parameter_def :
+  (forall a:(int,natural) farray.
+  forall g__split_fields:(int,natural) farray. forall e:int.
+  forall for_loop_iterable__p3__g__assume:(int,natural) farray. forall o:int.
+  forall temp___286:int. forall o1:int. forall e1:int.
+  forall result:(int,natural) farray. forall a1:(int,natural) farray.
+  forall result1:(int,natural) farray.
+  forall g__split_fields1:(int,natural) farray. forall result2:bool.
+  forall result3:int. forall e2:int. forall result4:bool.
+  forall g__split_fields2:(int,natural) farray. forall e3:int.
+  forall temp___2861:int. (((result = a) and
+  (a1 = for_loop_iterable__p3__a__aggregate_def(0))) -> (((({
+  us_split_fields1 = { rec__declare_iterable__container__content =
   for_loop_iterable__p3__g__assume } } = from_nat_array(a1)) and
-  (a1 = for_loop_iterable__p3__g__assume))
-
-axiom H3 : (result1 = g__split_fields)
-
-axiom H4 : (for_loop_iterable__p3__g__assume = g__split_fields1)
-
-axiom H5 : ((o = first({ us_split_fields1 = {
-  rec__declare_iterable__container__content = g__split_fields1 } })) and
-  (in_range3(o) and (o = 1)))
-
-axiom H6 : (o = temp___253)
-
-axiom H7 : ((result2 = has_element({ us_split_fields1 = {
+  (a1 = for_loop_iterable__p3__g__assume)) and
+  ((result1 = g__split_fields) and
+  (for_loop_iterable__p3__g__assume = g__split_fields1))) -> ((((o = first({
+  us_split_fields1 = { rec__declare_iterable__container__content =
+  g__split_fields1 } })) and (in_range2(o) and (o = 1))) and
+  (o = temp___286)) -> ((((result2 = has_element({ us_split_fields1 = {
   rec__declare_iterable__container__content = g__split_fields1 } },
-  temp___253)) and ((result2 = true) <-> in_range2(temp___253)))
-
-axiom H8 : ((result2 = true) -> ((o1 = element({ us_split_fields1 = {
+  temp___286)) and ((result2 = true) <-> in_range3(temp___286))) and
+  (((result2 = true) and (((o1 = element({ us_split_fields1 = {
   rec__declare_iterable__container__content = g__split_fields1 } },
-  temp___253)) and (in_range1(o1) and
-  (o1 = to_rep((g__split_fields1[temp___253]))))))
-
-axiom H9 : ((result2 = true) -> (result3 = e))
-
-axiom H10 : ((result2 = true) -> (e2 = o1))
-
-axiom H11 : ((not (result2 = true)) -> (e2 = e))
-
-axiom H12 : ((not (result2 = true)) -> (e2 = e1))
-
-axiom H13 : ((result4 = has_element({ us_split_fields1 = {
+  temp___286)) and (in_range1(o1) and
+  (o1 = to_rep((g__split_fields1[temp___286]))))) and ((result3 = e) and
+  (e2 = o1)))) or ((not (result2 = true)) and ((e2 = e) and (e2 = e1))))) ->
+  (((result4 = has_element({ us_split_fields1 = {
   rec__declare_iterable__container__content = g__split_fields1 } },
-  temp___253)) and ((result4 = true) <-> in_range2(temp___253)))
-
-axiom H14 : (result4 = true)
-
-axiom H15 : ((has_element({ us_split_fields1 = {
+  temp___286)) and ((result4 = true) <-> in_range3(temp___286))) ->
+  ((result4 = true) -> (((has_element({ us_split_fields1 = {
   rec__declare_iterable__container__content = g__split_fields2 } },
-  temp___2531) = true) and (e3 = element({ us_split_fields1 = {
+  temp___2861) = true) and (e3 = element({ us_split_fields1 = {
   rec__declare_iterable__container__content = g__split_fields2 } },
-  temp___2531)))
-
-axiom H16 : true
-
- (* File "for_loop_iterable.adb", line 18, characters 0-0 *)
-goal WP_parameter_def : (e3 = 0)
+  temp___2861))) -> (e3 = 0)))))))))

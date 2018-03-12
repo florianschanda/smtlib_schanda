@@ -291,47 +291,12 @@ type t1s__ref = { t1s__content : us_rep
 
 function t1s__ref___projection(a: t1s__ref) : us_rep = (a).t1s__content
 
-logic max : int
-
-logic us : int
-
-logic o : integer
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic o3 : integer
-
-logic o4 : integer
-
-logic result : int
-
-logic max1 : int
-
-axiom H : (result = max)
-
-axiom H1 : (max1 = 30)
-
-axiom H2 : in_range(max1)
-
-axiom H3 : (max1 = tmp)
-
-axiom H4 : in_range(tmp)
-
-axiom H5 : ((us = tmp) and in_range(tmp))
-
-axiom H6 : (max1 = r2s)
-
-axiom H7 : in_range(r2s)
-
-axiom H8 : (to_rep(o) = max1)
-
-axiom H9 : (o = o1)
-
-axiom H10 : (o2 = o1)
-
-axiom H11 : (o3 = o2)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (tmp = to_rep(o3))
+goal WP_parameter_def :
+  (forall max:int. forall us:int. forall o:integer. forall o1:integer.
+  forall o2:integer. forall o3:integer. forall result:int. forall max1:int.
+  (((result = max) and (max1 = 30)) -> (in_range(max1) -> ((max1 = tmp) ->
+  (in_range(tmp) -> (((us = tmp) and in_range(tmp)) -> ((max1 = r2s) ->
+  (in_range(r2s) -> (((((to_rep(o) = max1) and (o = o1)) and (o2 = o1)) and
+  ({ us_split_discrs1 = { rec__p__typ__int = o3 } } = { us_split_discrs1 = {
+  rec__p__typ__int = o2 } })) -> (tmp = to_rep(o3)))))))))))

@@ -152,33 +152,8 @@ logic c1b : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic x : int
-
-logic y : int
-
-logic conv__C1b__assume : int
-
-logic o : int
-
-logic o1 : integer
-
-logic o2 : int
-
-logic result : int
-
-logic x1 : int
-
-logic result1 : int
-
-logic y1 : int
-
-axiom H : (result = x)
-
-axiom H1 : (x1 = 10)
-
-axiom H2 : in_range(x1)
-
-axiom H3 : (((- 2147483648) <= 2147483647) -> in_range(y))
-
  (* File "conv.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range1(x1)
+goal WP_parameter_def :
+  (forall x:int. forall y:int. forall result:int. forall x1:int.
+  (((result = x) and (x1 = 10)) -> (in_range(x1) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(y)) -> in_range1(x1)))))

@@ -76,7 +76,5 @@ function po3T__ref___projection(a: po3T__ref) : po3T = (a).po3T__content
 
 logic self__ : po3T
 
-logic temp___1540 : bool
-
  (* File "q.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (temp___1540 = false)
+goal WP_parameter_def : (forall temp___1727:bool. (temp___1727 = false))

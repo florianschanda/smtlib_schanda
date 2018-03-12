@@ -251,9 +251,7 @@ logic arg__attr__tag : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic arg__split_fields : integer
-
-logic o : int
-
  (* File "ints.adb", line 10, characters 0-0 *)
-goal WP_parameter_def : in_range((to_rep(arg__split_fields) - 10))
+goal WP_parameter_def :
+  (forall arg__split_fields:integer.
+  in_range((to_rep(arg__split_fields) - 10)))

@@ -1176,24 +1176,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -1204,17 +1186,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1224,37 +1206,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 logic to_rep1 : integer -> int
 
@@ -1373,6 +1327,58 @@ type float__ref = { float__content : float1
 }
 
 function float__ref___projection(a: float__ref) : float1 = (a).float__content
+
+logic concat : (int,character) farray, int, int, (int,character) farray, int,
+  int -> (int,character) farray
+
+axiom concat_def :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic concat_singleton_left : character, int, (int,character) farray, int,
+  int -> (int,character) farray
+
+axiom concat_singleton_left_def :
+  (forall a:character.
+  (forall b:(int,character) farray.
+  (forall a_first:int. forall b_first:int. forall b_last:int
+  [concat_singleton_left(a, a_first, b, b_first, b_last)].
+  (((concat_singleton_left(a, a_first, b, b_first, b_last)[a_first]) = a) and
+  (forall i:int [(concat_singleton_left(a, a_first, b, b_first, b_last)[i])].
+  ((a_first <  i) -> ((concat_singleton_left(a, a_first, b, b_first,
+  b_last)[i]) = (b[((i - a_first) + (b_first - 1))]))))))))
+
+logic concat_singleton_right : (int,character) farray, int, int,
+  character -> (int,character) farray
+
+axiom concat_singleton_right_def :
+  (forall a:(int,character) farray.
+  (forall b:character.
+  (forall a_first:int. forall a_last:int [concat_singleton_right(a, a_first,
+  a_last, b)]. (((concat_singleton_right(a, a_first, a_last,
+  b)[(a_last + 1)]) = b) and
+  (forall i:int [(concat_singleton_right(a, a_first, a_last, b)[i])| (a[i])].
+  (((a_first <= i) and (i <= a_last)) -> ((concat_singleton_right(a, a_first,
+  a_last, b)[i]) = (a[i]))))))))
+
+logic concat_singletons : character, int, character -> (int,character) farray
+
+axiom concat_singletons_def :
+  (forall a:character. forall b:character.
+  (forall a_first:int [concat_singletons(a, a_first, b)].
+  (((concat_singletons(a, a_first, b)[a_first]) = a) and
+  ((concat_singletons(a, a_first, b)[(a_first + 1)]) = b))))
+
+logic singleton : character, int -> (int,character) farray
+
+axiom singleton_def :
+  (forall v:character.
+  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
 
 type fixed
 
@@ -1623,320 +1629,181 @@ axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
 axiom shanks_float__post_axiom : (eq(shanks_float(void), fliteral2) and
   tqtisFinite(shanks_float(void)))
 
-logic temp___String_Literal_511 : unit -> (int,character) farray
-
-axiom temp___String_Literal_511__def_axiom :
-  (((((((((((((((((((((((((((((to_rep((temp___String_Literal_511(void)[1])) = 76) and
-  (to_rep((temp___String_Literal_511(void)[2])) = 101)) and
-  (to_rep((temp___String_Literal_511(void)[3])) = 105)) and
-  (to_rep((temp___String_Literal_511(void)[4])) = 98)) and
-  (to_rep((temp___String_Literal_511(void)[5])) = 110)) and
-  (to_rep((temp___String_Literal_511(void)[6])) = 105)) and
-  (to_rep((temp___String_Literal_511(void)[7])) = 122)) and
-  (to_rep((temp___String_Literal_511(void)[8])) = 32)) and
-  (to_rep((temp___String_Literal_511(void)[9])) = 102)) and
-  (to_rep((temp___String_Literal_511(void)[10])) = 105)) and
-  (to_rep((temp___String_Literal_511(void)[11])) = 120)) and
-  (to_rep((temp___String_Literal_511(void)[12])) = 101)) and
-  (to_rep((temp___String_Literal_511(void)[13])) = 100)) and
-  (to_rep((temp___String_Literal_511(void)[14])) = 32)) and
-  (to_rep((temp___String_Literal_511(void)[15])) = 118)) and
-  (to_rep((temp___String_Literal_511(void)[16])) = 97)) and
-  (to_rep((temp___String_Literal_511(void)[17])) = 108)) and
-  (to_rep((temp___String_Literal_511(void)[18])) = 117)) and
-  (to_rep((temp___String_Literal_511(void)[19])) = 101)) and
-  (to_rep((temp___String_Literal_511(void)[20])) = 32)) and
-  (to_rep((temp___String_Literal_511(void)[21])) = 102)) and
-  (to_rep((temp___String_Literal_511(void)[22])) = 111)) and
-  (to_rep((temp___String_Literal_511(void)[23])) = 114)) and
-  (to_rep((temp___String_Literal_511(void)[24])) = 32)) and
-  (to_rep((temp___String_Literal_511(void)[25])) = 80)) and
-  (to_rep((temp___String_Literal_511(void)[26])) = 105)) and
-  (to_rep((temp___String_Literal_511(void)[27])) = 32)) and
-  (to_rep((temp___String_Literal_511(void)[28])) = 105)) and
-  (to_rep((temp___String_Literal_511(void)[29])) = 115))
-
-logic temp___String_Literal_514 : unit -> (int,character) farray
-
-axiom temp___String_Literal_514__def_axiom :
-  ((((((((((((((((((((((((((((((to_rep((temp___String_Literal_514(void)[1])) = 76) and
-  (to_rep((temp___String_Literal_514(void)[2])) = 101)) and
-  (to_rep((temp___String_Literal_514(void)[3])) = 105)) and
-  (to_rep((temp___String_Literal_514(void)[4])) = 98)) and
-  (to_rep((temp___String_Literal_514(void)[5])) = 110)) and
-  (to_rep((temp___String_Literal_514(void)[6])) = 105)) and
-  (to_rep((temp___String_Literal_514(void)[7])) = 116)) and
-  (to_rep((temp___String_Literal_514(void)[8])) = 122)) and
-  (to_rep((temp___String_Literal_514(void)[9])) = 32)) and
-  (to_rep((temp___String_Literal_514(void)[10])) = 102)) and
-  (to_rep((temp___String_Literal_514(void)[11])) = 108)) and
-  (to_rep((temp___String_Literal_514(void)[12])) = 111)) and
-  (to_rep((temp___String_Literal_514(void)[13])) = 97)) and
-  (to_rep((temp___String_Literal_514(void)[14])) = 116)) and
-  (to_rep((temp___String_Literal_514(void)[15])) = 32)) and
-  (to_rep((temp___String_Literal_514(void)[16])) = 118)) and
-  (to_rep((temp___String_Literal_514(void)[17])) = 97)) and
-  (to_rep((temp___String_Literal_514(void)[18])) = 108)) and
-  (to_rep((temp___String_Literal_514(void)[19])) = 117)) and
-  (to_rep((temp___String_Literal_514(void)[20])) = 101)) and
-  (to_rep((temp___String_Literal_514(void)[21])) = 32)) and
-  (to_rep((temp___String_Literal_514(void)[22])) = 102)) and
-  (to_rep((temp___String_Literal_514(void)[23])) = 111)) and
-  (to_rep((temp___String_Literal_514(void)[24])) = 114)) and
-  (to_rep((temp___String_Literal_514(void)[25])) = 32)) and
-  (to_rep((temp___String_Literal_514(void)[26])) = 80)) and
-  (to_rep((temp___String_Literal_514(void)[27])) = 105)) and
-  (to_rep((temp___String_Literal_514(void)[28])) = 32)) and
-  (to_rep((temp___String_Literal_514(void)[29])) = 105)) and
-  (to_rep((temp___String_Literal_514(void)[30])) = 115))
-
-logic temp___String_Literal_517 : unit -> (int,character) farray
-
-axiom temp___String_Literal_517__def_axiom :
-  ((((((((((((((((((((((((((((to_rep((temp___String_Literal_517(void)[1])) = 83) and
-  (to_rep((temp___String_Literal_517(void)[2])) = 104)) and
-  (to_rep((temp___String_Literal_517(void)[3])) = 97)) and
-  (to_rep((temp___String_Literal_517(void)[4])) = 110)) and
-  (to_rep((temp___String_Literal_517(void)[5])) = 107)) and
-  (to_rep((temp___String_Literal_517(void)[6])) = 115)) and
-  (to_rep((temp___String_Literal_517(void)[7])) = 32)) and
-  (to_rep((temp___String_Literal_517(void)[8])) = 102)) and
-  (to_rep((temp___String_Literal_517(void)[9])) = 105)) and
-  (to_rep((temp___String_Literal_517(void)[10])) = 120)) and
-  (to_rep((temp___String_Literal_517(void)[11])) = 101)) and
-  (to_rep((temp___String_Literal_517(void)[12])) = 100)) and
-  (to_rep((temp___String_Literal_517(void)[13])) = 32)) and
-  (to_rep((temp___String_Literal_517(void)[14])) = 118)) and
-  (to_rep((temp___String_Literal_517(void)[15])) = 97)) and
-  (to_rep((temp___String_Literal_517(void)[16])) = 108)) and
-  (to_rep((temp___String_Literal_517(void)[17])) = 117)) and
-  (to_rep((temp___String_Literal_517(void)[18])) = 101)) and
-  (to_rep((temp___String_Literal_517(void)[19])) = 32)) and
-  (to_rep((temp___String_Literal_517(void)[20])) = 102)) and
-  (to_rep((temp___String_Literal_517(void)[21])) = 111)) and
-  (to_rep((temp___String_Literal_517(void)[22])) = 114)) and
-  (to_rep((temp___String_Literal_517(void)[23])) = 32)) and
-  (to_rep((temp___String_Literal_517(void)[24])) = 80)) and
-  (to_rep((temp___String_Literal_517(void)[25])) = 105)) and
-  (to_rep((temp___String_Literal_517(void)[26])) = 32)) and
-  (to_rep((temp___String_Literal_517(void)[27])) = 105)) and
-  (to_rep((temp___String_Literal_517(void)[28])) = 115))
-
-logic temp___String_Literal_520 : unit -> (int,character) farray
-
-axiom temp___String_Literal_520__def_axiom :
-  ((((((((((((((((((((((((((((to_rep((temp___String_Literal_520(void)[1])) = 83) and
-  (to_rep((temp___String_Literal_520(void)[2])) = 104)) and
-  (to_rep((temp___String_Literal_520(void)[3])) = 97)) and
-  (to_rep((temp___String_Literal_520(void)[4])) = 110)) and
-  (to_rep((temp___String_Literal_520(void)[5])) = 107)) and
-  (to_rep((temp___String_Literal_520(void)[6])) = 115)) and
-  (to_rep((temp___String_Literal_520(void)[7])) = 32)) and
-  (to_rep((temp___String_Literal_520(void)[8])) = 102)) and
-  (to_rep((temp___String_Literal_520(void)[9])) = 108)) and
-  (to_rep((temp___String_Literal_520(void)[10])) = 111)) and
-  (to_rep((temp___String_Literal_520(void)[11])) = 97)) and
-  (to_rep((temp___String_Literal_520(void)[12])) = 116)) and
-  (to_rep((temp___String_Literal_520(void)[13])) = 32)) and
-  (to_rep((temp___String_Literal_520(void)[14])) = 118)) and
-  (to_rep((temp___String_Literal_520(void)[15])) = 97)) and
-  (to_rep((temp___String_Literal_520(void)[16])) = 108)) and
-  (to_rep((temp___String_Literal_520(void)[17])) = 117)) and
-  (to_rep((temp___String_Literal_520(void)[18])) = 101)) and
-  (to_rep((temp___String_Literal_520(void)[19])) = 32)) and
-  (to_rep((temp___String_Literal_520(void)[20])) = 102)) and
-  (to_rep((temp___String_Literal_520(void)[21])) = 111)) and
-  (to_rep((temp___String_Literal_520(void)[22])) = 114)) and
-  (to_rep((temp___String_Literal_520(void)[23])) = 32)) and
-  (to_rep((temp___String_Literal_520(void)[24])) = 80)) and
-  (to_rep((temp___String_Literal_520(void)[25])) = 105)) and
-  (to_rep((temp___String_Literal_520(void)[26])) = 32)) and
-  (to_rep((temp___String_Literal_520(void)[27])) = 105)) and
-  (to_rep((temp___String_Literal_520(void)[28])) = 115))
-
-logic o : fixed
-
-logic o1 : int
-
-logic o2 : us_image
-
-logic temp___513 : (int,character) farray
-
-logic temp___5131 : t1
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : (int,character) farray
-
-logic o10 : t1
-
-logic o11 : t
-
-logic o12 : us_image
-
-logic temp___516 : (int,character) farray
-
-logic temp___5161 : t1
-
-logic o13 : int
-
-logic o14 : int
-
-logic o15 : int
-
-logic o16 : int
-
-logic o17 : int
-
-logic o18 : int
-
-logic o19 : (int,character) farray
-
-logic o20 : t1
-
-logic o21 : fixed
-
-logic o22 : int
-
-logic o23 : us_image
-
-logic temp___519 : (int,character) farray
-
-logic temp___5191 : t1
-
-logic o24 : int
-
-logic o25 : int
-
-logic o26 : int
-
-logic o27 : int
-
-logic o28 : int
-
-logic o29 : int
-
-logic o30 : (int,character) farray
-
-logic o31 : t1
-
-logic o32 : t
-
-logic o33 : us_image
-
-logic temp___522 : (int,character) farray
-
-logic temp___5221 : t1
-
-logic o34 : int
-
-logic o35 : int
-
-logic o36 : int
-
-logic o37 : int
-
-logic o38 : int
-
-logic o39 : int
-
-axiom H : ((o = leibniz_fixed(void)) and (to_fixed(o) = 3189596))
-
-axiom H1 : (o1 = to_fixed(o))
-
-axiom H2 : (o2 = attr__ATTRIBUTE_IMAGE4(o1))
-
-axiom H3 : ({ elts = temp___513; rt = temp___5131 } = to_string(o2))
-
-axiom H4 : ((to_rep1(first(temp___5131)) <= to_rep1(last(temp___5131))) ->
-  (o3 = ((to_rep1(last(temp___5131)) - to_rep1(first(temp___5131))) + 1)))
-
-axiom H5 :
-  ((not (to_rep1(first(temp___5131)) <= to_rep1(last(temp___5131)))) ->
-  (o3 = 0))
-
-axiom H6 : ((1 <= 29) -> (o4 = ((29 - 1) + 1)))
-
-axiom H7 : ((not (1 <= 29)) -> (o4 = 0))
-
-axiom H8 : (o5 = (o4 + o3))
-
-axiom H9 : (o6 = (1 + o5))
-
-axiom H10 : (o7 = (o6 - 1))
-
-axiom H11 : ((o8 = o7) and in_range2(o7))
-
-axiom H12 : (o9 = concat(temp___String_Literal_511(void), 1, 29, temp___513,
-  to_rep1(first(temp___5131)), to_rep1(last(temp___5131))))
-
-axiom H13 : (o10 = mk(1, o8))
-
-axiom H14 : ((o11 = leibniz_float(void)) and (tqtisFinite(o11) and eq(o11,
-  fliteral1)))
-
-axiom H15 : (o12 = attr__ATTRIBUTE_IMAGE3(o11))
-
-axiom H16 : ({ elts = temp___516; rt = temp___5161 } = to_string(o12))
-
-axiom H17 : ((to_rep1(first(temp___5161)) <= to_rep1(last(temp___5161))) ->
-  (o13 = ((to_rep1(last(temp___5161)) - to_rep1(first(temp___5161))) + 1)))
-
-axiom H18 :
-  ((not (to_rep1(first(temp___5161)) <= to_rep1(last(temp___5161)))) ->
-  (o13 = 0))
-
-axiom H19 : ((1 <= 30) -> (o14 = ((30 - 1) + 1)))
-
-axiom H20 : ((not (1 <= 30)) -> (o14 = 0))
-
-axiom H21 : (o15 = (o14 + o13))
-
-axiom H22 : (o16 = (1 + o15))
-
-axiom H23 : (o17 = (o16 - 1))
-
-axiom H24 : ((o18 = o17) and in_range2(o17))
-
-axiom H25 : (o19 = concat(temp___String_Literal_514(void), 1, 30, temp___516,
-  to_rep1(first(temp___5161)), to_rep1(last(temp___5161))))
-
-axiom H26 : (o20 = mk(1, o18))
-
-axiom H27 : ((o21 = shanks_fixed(void)) and (to_fixed(o21) = 3293842))
-
-axiom H28 : (o22 = to_fixed(o21))
-
-axiom H29 : (o23 = attr__ATTRIBUTE_IMAGE4(o22))
-
-axiom H30 : ({ elts = temp___519; rt = temp___5191 } = to_string(o23))
-
-axiom H31 : ((to_rep1(first(temp___5191)) <= to_rep1(last(temp___5191))) ->
-  (o24 = ((to_rep1(last(temp___5191)) - to_rep1(first(temp___5191))) + 1)))
-
-axiom H32 :
-  ((not (to_rep1(first(temp___5191)) <= to_rep1(last(temp___5191)))) ->
-  (o24 = 0))
-
-axiom H33 : ((1 <= 28) -> (o25 = ((28 - 1) + 1)))
-
-axiom H34 : ((not (1 <= 28)) -> (o25 = 0))
-
-axiom H35 : (o26 = (o25 + o24))
-
-axiom H36 : (o27 = (1 + o26))
-
-axiom H37 : (o28 = (o27 - 1))
+logic temp___String_Literal_582 : unit -> (int,character) farray
+
+axiom temp___String_Literal_582__def_axiom :
+  (((((((((((((((((((((((((((((to_rep((temp___String_Literal_582(void)[1])) = 76) and
+  (to_rep((temp___String_Literal_582(void)[2])) = 101)) and
+  (to_rep((temp___String_Literal_582(void)[3])) = 105)) and
+  (to_rep((temp___String_Literal_582(void)[4])) = 98)) and
+  (to_rep((temp___String_Literal_582(void)[5])) = 110)) and
+  (to_rep((temp___String_Literal_582(void)[6])) = 105)) and
+  (to_rep((temp___String_Literal_582(void)[7])) = 122)) and
+  (to_rep((temp___String_Literal_582(void)[8])) = 32)) and
+  (to_rep((temp___String_Literal_582(void)[9])) = 102)) and
+  (to_rep((temp___String_Literal_582(void)[10])) = 105)) and
+  (to_rep((temp___String_Literal_582(void)[11])) = 120)) and
+  (to_rep((temp___String_Literal_582(void)[12])) = 101)) and
+  (to_rep((temp___String_Literal_582(void)[13])) = 100)) and
+  (to_rep((temp___String_Literal_582(void)[14])) = 32)) and
+  (to_rep((temp___String_Literal_582(void)[15])) = 118)) and
+  (to_rep((temp___String_Literal_582(void)[16])) = 97)) and
+  (to_rep((temp___String_Literal_582(void)[17])) = 108)) and
+  (to_rep((temp___String_Literal_582(void)[18])) = 117)) and
+  (to_rep((temp___String_Literal_582(void)[19])) = 101)) and
+  (to_rep((temp___String_Literal_582(void)[20])) = 32)) and
+  (to_rep((temp___String_Literal_582(void)[21])) = 102)) and
+  (to_rep((temp___String_Literal_582(void)[22])) = 111)) and
+  (to_rep((temp___String_Literal_582(void)[23])) = 114)) and
+  (to_rep((temp___String_Literal_582(void)[24])) = 32)) and
+  (to_rep((temp___String_Literal_582(void)[25])) = 80)) and
+  (to_rep((temp___String_Literal_582(void)[26])) = 105)) and
+  (to_rep((temp___String_Literal_582(void)[27])) = 32)) and
+  (to_rep((temp___String_Literal_582(void)[28])) = 105)) and
+  (to_rep((temp___String_Literal_582(void)[29])) = 115))
+
+logic temp___String_Literal_585 : unit -> (int,character) farray
+
+axiom temp___String_Literal_585__def_axiom :
+  ((((((((((((((((((((((((((((((to_rep((temp___String_Literal_585(void)[1])) = 76) and
+  (to_rep((temp___String_Literal_585(void)[2])) = 101)) and
+  (to_rep((temp___String_Literal_585(void)[3])) = 105)) and
+  (to_rep((temp___String_Literal_585(void)[4])) = 98)) and
+  (to_rep((temp___String_Literal_585(void)[5])) = 110)) and
+  (to_rep((temp___String_Literal_585(void)[6])) = 105)) and
+  (to_rep((temp___String_Literal_585(void)[7])) = 116)) and
+  (to_rep((temp___String_Literal_585(void)[8])) = 122)) and
+  (to_rep((temp___String_Literal_585(void)[9])) = 32)) and
+  (to_rep((temp___String_Literal_585(void)[10])) = 102)) and
+  (to_rep((temp___String_Literal_585(void)[11])) = 108)) and
+  (to_rep((temp___String_Literal_585(void)[12])) = 111)) and
+  (to_rep((temp___String_Literal_585(void)[13])) = 97)) and
+  (to_rep((temp___String_Literal_585(void)[14])) = 116)) and
+  (to_rep((temp___String_Literal_585(void)[15])) = 32)) and
+  (to_rep((temp___String_Literal_585(void)[16])) = 118)) and
+  (to_rep((temp___String_Literal_585(void)[17])) = 97)) and
+  (to_rep((temp___String_Literal_585(void)[18])) = 108)) and
+  (to_rep((temp___String_Literal_585(void)[19])) = 117)) and
+  (to_rep((temp___String_Literal_585(void)[20])) = 101)) and
+  (to_rep((temp___String_Literal_585(void)[21])) = 32)) and
+  (to_rep((temp___String_Literal_585(void)[22])) = 102)) and
+  (to_rep((temp___String_Literal_585(void)[23])) = 111)) and
+  (to_rep((temp___String_Literal_585(void)[24])) = 114)) and
+  (to_rep((temp___String_Literal_585(void)[25])) = 32)) and
+  (to_rep((temp___String_Literal_585(void)[26])) = 80)) and
+  (to_rep((temp___String_Literal_585(void)[27])) = 105)) and
+  (to_rep((temp___String_Literal_585(void)[28])) = 32)) and
+  (to_rep((temp___String_Literal_585(void)[29])) = 105)) and
+  (to_rep((temp___String_Literal_585(void)[30])) = 115))
+
+logic temp___String_Literal_588 : unit -> (int,character) farray
+
+axiom temp___String_Literal_588__def_axiom :
+  ((((((((((((((((((((((((((((to_rep((temp___String_Literal_588(void)[1])) = 83) and
+  (to_rep((temp___String_Literal_588(void)[2])) = 104)) and
+  (to_rep((temp___String_Literal_588(void)[3])) = 97)) and
+  (to_rep((temp___String_Literal_588(void)[4])) = 110)) and
+  (to_rep((temp___String_Literal_588(void)[5])) = 107)) and
+  (to_rep((temp___String_Literal_588(void)[6])) = 115)) and
+  (to_rep((temp___String_Literal_588(void)[7])) = 32)) and
+  (to_rep((temp___String_Literal_588(void)[8])) = 102)) and
+  (to_rep((temp___String_Literal_588(void)[9])) = 105)) and
+  (to_rep((temp___String_Literal_588(void)[10])) = 120)) and
+  (to_rep((temp___String_Literal_588(void)[11])) = 101)) and
+  (to_rep((temp___String_Literal_588(void)[12])) = 100)) and
+  (to_rep((temp___String_Literal_588(void)[13])) = 32)) and
+  (to_rep((temp___String_Literal_588(void)[14])) = 118)) and
+  (to_rep((temp___String_Literal_588(void)[15])) = 97)) and
+  (to_rep((temp___String_Literal_588(void)[16])) = 108)) and
+  (to_rep((temp___String_Literal_588(void)[17])) = 117)) and
+  (to_rep((temp___String_Literal_588(void)[18])) = 101)) and
+  (to_rep((temp___String_Literal_588(void)[19])) = 32)) and
+  (to_rep((temp___String_Literal_588(void)[20])) = 102)) and
+  (to_rep((temp___String_Literal_588(void)[21])) = 111)) and
+  (to_rep((temp___String_Literal_588(void)[22])) = 114)) and
+  (to_rep((temp___String_Literal_588(void)[23])) = 32)) and
+  (to_rep((temp___String_Literal_588(void)[24])) = 80)) and
+  (to_rep((temp___String_Literal_588(void)[25])) = 105)) and
+  (to_rep((temp___String_Literal_588(void)[26])) = 32)) and
+  (to_rep((temp___String_Literal_588(void)[27])) = 105)) and
+  (to_rep((temp___String_Literal_588(void)[28])) = 115))
+
+logic temp___String_Literal_591 : unit -> (int,character) farray
+
+axiom temp___String_Literal_591__def_axiom :
+  ((((((((((((((((((((((((((((to_rep((temp___String_Literal_591(void)[1])) = 83) and
+  (to_rep((temp___String_Literal_591(void)[2])) = 104)) and
+  (to_rep((temp___String_Literal_591(void)[3])) = 97)) and
+  (to_rep((temp___String_Literal_591(void)[4])) = 110)) and
+  (to_rep((temp___String_Literal_591(void)[5])) = 107)) and
+  (to_rep((temp___String_Literal_591(void)[6])) = 115)) and
+  (to_rep((temp___String_Literal_591(void)[7])) = 32)) and
+  (to_rep((temp___String_Literal_591(void)[8])) = 102)) and
+  (to_rep((temp___String_Literal_591(void)[9])) = 108)) and
+  (to_rep((temp___String_Literal_591(void)[10])) = 111)) and
+  (to_rep((temp___String_Literal_591(void)[11])) = 97)) and
+  (to_rep((temp___String_Literal_591(void)[12])) = 116)) and
+  (to_rep((temp___String_Literal_591(void)[13])) = 32)) and
+  (to_rep((temp___String_Literal_591(void)[14])) = 118)) and
+  (to_rep((temp___String_Literal_591(void)[15])) = 97)) and
+  (to_rep((temp___String_Literal_591(void)[16])) = 108)) and
+  (to_rep((temp___String_Literal_591(void)[17])) = 117)) and
+  (to_rep((temp___String_Literal_591(void)[18])) = 101)) and
+  (to_rep((temp___String_Literal_591(void)[19])) = 32)) and
+  (to_rep((temp___String_Literal_591(void)[20])) = 102)) and
+  (to_rep((temp___String_Literal_591(void)[21])) = 111)) and
+  (to_rep((temp___String_Literal_591(void)[22])) = 114)) and
+  (to_rep((temp___String_Literal_591(void)[23])) = 32)) and
+  (to_rep((temp___String_Literal_591(void)[24])) = 80)) and
+  (to_rep((temp___String_Literal_591(void)[25])) = 105)) and
+  (to_rep((temp___String_Literal_591(void)[26])) = 32)) and
+  (to_rep((temp___String_Literal_591(void)[27])) = 105)) and
+  (to_rep((temp___String_Literal_591(void)[28])) = 115))
 
  (* File "pi_compute.adb", line 85, characters 0-0 *)
-goal WP_parameter_def : in_range2(o28)
+goal WP_parameter_def :
+  (forall o:fixed. forall o1:int. forall o2:us_image.
+  forall temp___584:(int,character) farray. forall temp___5841:t1.
+  forall o3:int. forall o4:int. forall o5:int. forall o6:int. forall o7:int.
+  forall o8:int. forall o9:(int,character) farray. forall o10:t1.
+  forall o11:t. forall o12:us_image.
+  forall temp___587:(int,character) farray. forall temp___5871:t1.
+  forall o13:int. forall o14:int. forall o15:int. forall o16:int.
+  forall o17:int. forall o18:int. forall o19:(int,character) farray.
+  forall o20:t1. forall o21:fixed. forall o22:int. forall o23:us_image.
+  forall temp___590:(int,character) farray. forall temp___5901:t1.
+  forall o24:int. forall o25:int. forall o26:int. forall o27:int.
+  forall o28:int. (((((((o = leibniz_fixed(void)) and
+  (to_fixed(o) = 3189596)) and (o1 = to_fixed(o))) and
+  (o2 = attr__ATTRIBUTE_IMAGE4(o1))) and ({ elts = temp___584; rt =
+  temp___5841 } = to_string(o2))) and
+  ((((((((to_rep1(first(temp___5841)) <= to_rep1(last(temp___5841))) and
+  (o3 = ((to_rep1(last(temp___5841)) - to_rep1(first(temp___5841))) + 1))) or
+  ((not (to_rep1(first(temp___5841)) <= to_rep1(last(temp___5841)))) and
+  (o3 = 0))) and ((((1 <= 29) and (o4 = ((29 - 1) + 1))) or
+  ((not (1 <= 29)) and (o4 = 0))) and (o5 = (o4 + o3)))) and
+  (o6 = (1 + o5))) and (o7 = (o6 - 1))) and ((o8 = o7) and
+  in_range2(o7))) and ((o9 = concat(temp___String_Literal_582(void), 1, 29,
+  temp___584, to_rep1(first(temp___5841)), to_rep1(last(temp___5841)))) and
+  (o10 = mk(1, o8))))) -> ((((((o11 = leibniz_float(void)) and
+  (tqtisFinite(o11) and eq(o11, fliteral1))) and
+  (o12 = attr__ATTRIBUTE_IMAGE3(o11))) and ({ elts = temp___587; rt =
+  temp___5871 } = to_string(o12))) and
+  ((((((((to_rep1(first(temp___5871)) <= to_rep1(last(temp___5871))) and
+  (o13 = ((to_rep1(last(temp___5871)) - to_rep1(first(temp___5871))) + 1))) or
+  ((not (to_rep1(first(temp___5871)) <= to_rep1(last(temp___5871)))) and
+  (o13 = 0))) and ((((1 <= 30) and (o14 = ((30 - 1) + 1))) or
+  ((not (1 <= 30)) and (o14 = 0))) and (o15 = (o14 + o13)))) and
+  (o16 = (1 + o15))) and (o17 = (o16 - 1))) and ((o18 = o17) and
+  in_range2(o17))) and ((o19 = concat(temp___String_Literal_585(void), 1, 30,
+  temp___587, to_rep1(first(temp___5871)), to_rep1(last(temp___5871)))) and
+  (o20 = mk(1, o18))))) -> ((((((o21 = shanks_fixed(void)) and
+  (to_fixed(o21) = 3293842)) and (o22 = to_fixed(o21))) and
+  (o23 = attr__ATTRIBUTE_IMAGE4(o22))) and ({ elts = temp___590; rt =
+  temp___5901 } = to_string(o23))) ->
+  (((((((to_rep1(first(temp___5901)) <= to_rep1(last(temp___5901))) and
+  (o24 = ((to_rep1(last(temp___5901)) - to_rep1(first(temp___5901))) + 1))) or
+  ((not (to_rep1(first(temp___5901)) <= to_rep1(last(temp___5901)))) and
+  (o24 = 0))) and ((((1 <= 28) and (o25 = ((28 - 1) + 1))) or
+  ((not (1 <= 28)) and (o25 = 0))) and (o26 = (o25 + o24)))) and
+  (o27 = (1 + o26))) and (o28 = (o27 - 1))) -> in_range2(o28))))))

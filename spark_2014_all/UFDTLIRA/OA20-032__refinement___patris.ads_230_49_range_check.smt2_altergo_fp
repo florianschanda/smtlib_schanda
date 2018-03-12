@@ -254,13 +254,13 @@ function us_split_fields_Y__projection(a: us_split_fields) : py_coord =
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
 
-function us_split_fields__ref___4__projection(a: us_split_fields__ref) : us_split_fields =
+function us_split_fields__ref___5__projection(a: us_split_fields__ref) : us_split_fields =
   (a).us_split_fields__content
 
 type us_rep = { us_split_fields1 : us_split_fields
 }
 
-function us_rep___4__projection(a: us_rep) : us_split_fields =
+function us_rep___5__projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
 logic bool_eq5 : us_rep, us_rep -> bool
@@ -478,23 +478,8 @@ logic a : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-axiom H : in_range4(a)
-
-axiom H1 : (move_is_possible({ us_split_fields1 = { rec__patris__piece__s =
-  p; rec__patris__piece__d = p1; rec__patris__piece__x = p2;
-  rec__patris__piece__y = p3 } }, a) = true)
-
-axiom H2 : (not (a = 0))
-
-axiom H3 : (a = 1)
-
  (* File "patris.ads", line 72, characters 0-0 *)
-goal WP_parameter_def : in_range((to_rep(p2) + 1))
+goal WP_parameter_def : (in_range4(a) -> ((move_is_possible({
+  us_split_fields1 = { rec__patris__piece__s = p; rec__patris__piece__d = p1;
+  rec__patris__piece__x = p2; rec__patris__piece__y = p3 } }, a) = true) ->
+  ((not (a = 0)) -> ((a = 1) -> in_range((to_rep(p2) + 1))))))

@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -421,83 +421,19 @@ axiom full__def_axiom :
   (forall stack__last:int [full(stack__last)].
   ((full(stack__last) = true) <-> (200 <= stack__last)))
 
-logic last : int
-
-logic result__ : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : integer
-
-logic o5 : integer
-
-logic o6 : integer
-
-logic last1 : int
-
-logic v2__split_fields : integer
-
-logic last2 : int
-
-logic v1__split_fields : integer
-
-logic result : int
-
-logic result__1 : int
-
-logic result1 : int
-
-logic result__2 : int
-
-logic result2 : int
-
-logic result__3 : int
-
-logic result3 : int
-
-logic result__4 : int
-
-logic last3 : int
-
-axiom H : in_range3(op)
-
-axiom H1 : in_range2(last)
-
-axiom H2 : (2 <= size(last))
-
-axiom H3 : (((- 2147483648) <= 2147483647) -> in_range1(result__))
-
-axiom H4 : ((size(last1) = (size(last) - 1)) and in_range2(last1))
-
-axiom H5 : ((size(last2) = (size(last1) - 1)) and in_range2(last2))
-
-axiom H6 : (((op = 0) or (op = 3)) ->
-  ((- 1073741823) <= to_rep(v1__split_fields)))
-
-axiom H7 : (((op = 0) or (op = 3)) ->
-  (to_rep(v1__split_fields) <= 1073741822))
-
-axiom H8 : (((op = 0) or (op = 3)) ->
-  ((- 1073741823) <= to_rep(v2__split_fields)))
-
-axiom H9 : (((op = 0) or (op = 3)) ->
-  (to_rep(v2__split_fields) <= 1073741822))
-
-axiom H10 : ((not ((op = 0) or (op = 3))) -> ((op = 1) ->
-  (not (to_rep(v2__split_fields) = 0))))
-
-axiom H11 : (not (op = 0))
-
-axiom H12 : (not (op = 1))
-
-axiom H13 : (op = 2)
-
  (* File "values-operations.ads", line 22, characters 0-0 *)
 goal WP_parameter_def :
-  in_range1((to_rep(v1__split_fields) * to_rep(v2__split_fields)))
+  (forall last:int. forall result__:int. forall last1:int.
+  forall v2__split_fields:integer. forall last2:int.
+  forall v1__split_fields:integer. (in_range3(op) -> (in_range2(last) ->
+  ((2 <= size(last)) -> ((((- 2147483648) <= 2147483647) ->
+  in_range1(result__)) -> (((size(last1) = (size(last) - 1)) and
+  in_range2(last1)) -> (((size(last2) = (size(last1) - 1)) and
+  in_range2(last2)) -> (((((op = 0) or (op = 3)) and
+  ((((- 1073741823) <= to_rep(v1__split_fields)) and
+  (to_rep(v1__split_fields) <= 1073741822)) and
+  (((- 1073741823) <= to_rep(v2__split_fields)) and
+  (to_rep(v2__split_fields) <= 1073741822)))) or ((not ((op = 0) or
+  (op = 3))) and ((op = 1) -> (not (to_rep(v2__split_fields) = 0))))) ->
+  ((not (op = 0)) -> ((not (op = 1)) -> ((op = 2) ->
+  in_range1((to_rep(v1__split_fields) * to_rep(v2__split_fields))))))))))))))

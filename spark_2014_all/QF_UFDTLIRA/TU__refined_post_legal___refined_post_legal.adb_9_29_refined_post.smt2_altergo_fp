@@ -139,37 +139,11 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic par2 : int
-
-logic x : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic par21 : int
-
-logic par22 : int
-
-logic par23 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : in_range(par)
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range(par2))
-
-axiom H3 : ((o = (par + x)) and in_range((par + x)))
-
-axiom H4 : (result = par2)
-
-axiom H5 : (par21 = o)
-
-axiom H6 : (par21 = par22)
-
-axiom H7 : (par23 = par21)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (par22 = (par + x))
+goal WP_parameter_def :
+  (forall par2:int. forall x:int. forall o:int. forall result:int.
+  forall par21:int. forall par22:int. forall par23:int. (in_range1(x) ->
+  (in_range(par) -> ((((- 2147483648) <= 2147483647) -> in_range(par2)) ->
+  (((((o = (par + x)) and in_range((par + x))) and (({ int__content = result
+  } = { int__content = par2 }) and (par21 = o))) and ((par21 = par22) and
+  (par23 = par21))) -> (par22 = (par + x)))))))

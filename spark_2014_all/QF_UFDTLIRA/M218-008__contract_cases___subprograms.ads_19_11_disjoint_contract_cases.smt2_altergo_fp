@@ -109,25 +109,9 @@ logic val__ : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic subprograms__f3__result : int
-
-logic result : int
-
-logic subprograms__f3__result1 : int
-
-logic subprograms__f3__result2 : int
-
-logic subprograms__f3__result3 : int
-
-logic subprograms__f3__result4 : int
-
-logic subprograms__f3__result5 : int
-
-axiom H : in_range(val__)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (((bool_ge(val__, 0) = true) -> (((bool_eq(val__,
-  0) = true) -> (((bool_le(val__, 0) = true) ->
+goal WP_parameter_def : (in_range(val__) -> (((bool_ge(val__, 0) = true) ->
+  (((bool_eq(val__, 0) = true) -> (((bool_le(val__, 0) = true) ->
   ((((0 + 1) + 1) + 1) <= 1)) and ((not (bool_le(val__, 0) = true)) ->
   ((((0 + 1) + 1) + 0) <= 1)))) and ((not (bool_eq(val__, 0) = true)) ->
   (((bool_le(val__, 0) = true) -> ((((0 + 1) + 0) + 1) <= 1)) and
@@ -137,4 +121,4 @@ goal WP_parameter_def : (((bool_ge(val__, 0) = true) -> (((bool_eq(val__,
   ((not (bool_le(val__, 0) = true)) -> ((((0 + 0) + 1) + 0) <= 1)))) and
   ((not (bool_eq(val__, 0) = true)) -> (((bool_le(val__, 0) = true) ->
   ((((0 + 0) + 0) + 1) <= 1)) and ((not (bool_le(val__, 0) = true)) ->
-  ((((0 + 0) + 0) + 0) <= 1)))))))
+  ((((0 + 0) + 0) + 0) <= 1))))))))

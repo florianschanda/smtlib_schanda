@@ -50,17 +50,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic g : bool
-
-logic alias__p__x : bool
-
-logic result : bool
-
-logic g1 : bool
-
-axiom H : (result = g)
-
-axiom H1 : (g1 = alias__p__x)
-
  (* File "alias.adb", line 10, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def :
+  (forall g:bool. forall alias__p__x:bool. forall result:bool.
+  forall g1:bool. (not ((result = g) and (g1 = alias__p__x))))

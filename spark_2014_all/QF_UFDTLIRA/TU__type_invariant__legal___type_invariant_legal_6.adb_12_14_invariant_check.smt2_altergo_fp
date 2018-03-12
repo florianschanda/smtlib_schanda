@@ -139,9 +139,5 @@ logic read : int -> int
 
 logic read__function_guard : int, int -> prop
 
-axiom H : in_range(x)
-
-axiom H1 : (not (x = 0))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (not (x = 0))
+goal WP_parameter_def : (in_range(x) -> ((not (x = 0)) -> (not (x = 0))))

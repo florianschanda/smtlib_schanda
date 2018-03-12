@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -244,186 +244,20 @@ function t6b__ref___projection(a: t6b__ref) : integer = (a).t6b__content
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
-logic p1 : int
-
-logic p2 : int
-
-logic i : int
-
-logic i1 : int
-
-logic temp___176 : int
-
-logic temp___175 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic temp___180 : int
-
-logic temp___179 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic result : int
-
-logic p11 : int
-
-logic result1 : int
-
-logic i2 : int
-
-logic p12 : int
-
-logic i3 : int
-
-logic result2 : int
-
-logic p13 : int
-
-logic result3 : int
-
-logic i4 : int
-
-logic p14 : int
-
-logic i5 : int
-
-logic p15 : int
-
-logic i6 : int
-
-logic p16 : int
-
-logic i7 : int
-
-logic p17 : int
-
-logic i8 : int
-
-logic p18 : int
-
-logic i9 : int
-
-logic p19 : int
-
-logic i10 : int
-
-logic result4 : int
-
-logic p21 : int
-
-logic result5 : int
-
-logic i11 : int
-
-logic p22 : int
-
-logic i12 : int
-
-logic result6 : int
-
-logic p23 : int
-
-logic result7 : int
-
-logic i13 : int
-
-logic p24 : int
-
-logic i14 : int
-
-logic p25 : int
-
-logic i15 : int
-
-logic p26 : int
-
-logic i16 : int
-
-logic p27 : int
-
-logic i17 : int
-
-logic p28 : int
-
-logic i18 : int
-
-logic p29 : int
-
-logic i19 : int
-
-logic p210 : int
-
-logic i20 : int
-
-logic p211 : int
-
-logic i21 : int
-
-logic p110 : int
-
-logic p212 : int
-
-logic i22 : int
-
-logic i23 : int
-
-logic p111 : int
-
-logic p213 : int
-
-logic i24 : int
-
-logic i25 : int
-
-axiom H : in_range2(n1)
-
-axiom H1 : in_range2(n2)
-
-axiom H2 : ((0 <= 2147483647) -> in_range2(p1))
-
-axiom H3 : ((0 <= 2147483647) -> in_range2(p2))
-
-axiom H4 : ((n1 = n2) and (n1 <= 7))
-
-axiom H5 : (result = p1)
-
-axiom H6 : (p11 = 1)
-
-axiom H7 : (result1 = i)
-
-axiom H8 : (i2 = 2)
-
-axiom H9 : (2 <= i2)
-
-axiom H10 : (i2 <= n1)
-
-axiom H11 : (p12 = factorial((i3 - 1)))
-
-axiom H12 : ((((0 <= 2147483647) -> in_range2(p12)) and ((2 <= n1) ->
-  dynamic_property(2, n1, i3))) and ((2 <= i3) and (i3 <= n1)))
-
-axiom H13 : ((o1 = (i3 * p12)) and in_range1((i3 * p12)))
-
-axiom H14 : ((o2 = o1) and in_range2(o1))
-
-axiom H15 : (p12 = result2)
-
-axiom H16 : (p13 = o2)
-
-axiom H17 : (not (i3 = n1))
-
-axiom H18 : (result3 = i3)
-
-axiom H19 : (i4 = (i3 + 1))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (p13 = factorial((i4 - 1)))
+goal WP_parameter_def :
+  (forall p1:int. forall p2:int. forall i:int. forall o:int. forall o1:int.
+  forall result:int. forall p11:int. forall result1:int. forall i1:int.
+  forall p12:int. forall i2:int. forall result2:int. forall p13:int.
+  forall result3:int. forall i3:int. (in_range2(n1) -> (in_range2(n2) ->
+  (((0 <= 2147483647) -> in_range2(p1)) -> (((0 <= 2147483647) ->
+  in_range2(p2)) -> (((n1 = n2) and (n1 <= 7)) -> ((({ int__content = result
+  } = { int__content = p1 }) and (p11 = 1)) -> ((({ int__content = result1
+  } = { int__content = i }) and (i1 = 2)) -> (((2 <= i1) and (i1 <= n1)) ->
+  ((p12 = factorial((i2 - 1))) -> ((((((0 <= 2147483647) ->
+  in_range2(p12)) and ((2 <= n1) -> dynamic_property(2, n1, i2))) and
+  ((2 <= i2) and (i2 <= n1))) and (((((o = (i2 * p12)) and
+  in_range1((i2 * p12))) and ((o1 = o) and in_range2(o))) and
+  ((p12 = result2) and (p13 = o1))) and ((not (i2 = n1)) and
+  ((result3 = i2) and (i3 = (i2 + 1)))))) ->
+  (p13 = factorial((i3 - 1))))))))))))))

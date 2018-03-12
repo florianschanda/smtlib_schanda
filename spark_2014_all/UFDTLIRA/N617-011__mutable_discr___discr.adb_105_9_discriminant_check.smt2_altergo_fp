@@ -301,150 +301,50 @@ logic d2__attr__constrained : bool
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic d__split_fields : us_main_type
-
-logic d__split_discrs : natural
-
-logic d2__split_discrs : natural
-
-logic discr__p2__d__assume : natural
-
-logic discr__p2__d__assume1 : us_main_type
-
-logic discr__p2__d__assume2 : bool
-
-logic us : int
-
-logic temp___320 : natural
-
-logic temp___3201 : us_main_type
-
-logic temp___3202 : bool
-
-logic usq_ : natural
-
-logic usq_1 : us_main_type
-
-logic usq_2 : bool
-
-logic temp___322 : natural
-
-logic temp___3221 : us_main_type
-
-logic temp___3222 : bool
-
-logic temp___323 : natural
-
-logic temp___3231 : us_main_type
-
-logic temp___3232 : bool
-
-logic usq_3 : natural
-
-logic usq_4 : us_main_type
-
-logic usq_5 : bool
-
-logic temp___325 : natural
-
-logic temp___3251 : us_main_type
-
-logic temp___3252 : bool
-
-logic temp___326 : natural
-
-logic temp___3261 : us_main_type
-
-logic temp___3262 : bool
-
-logic result : us_main_type
-
-logic d__split_fields1 : us_main_type
-
-logic result1 : natural
-
-logic d__split_discrs1 : natural
-
-logic result2 : us_main_type
-
-logic d__split_fields2 : us_main_type
-
-logic result3 : natural
-
-logic d__split_discrs2 : natural
-
-logic result4 : us_main_type
-
-logic d__split_fields3 : us_main_type
-
-logic result5 : natural
-
-logic d__split_discrs3 : natural
-
-axiom H : in_range(c)
-
-axiom H1 : (({ us_split_discrs1 = { rec__private_discr__p_with_default__c =
+ (* File "discr.adb", line 89, characters 0-0 *)
+goal WP_parameter_def :
+  (forall d__split_fields:us_main_type. forall d__split_discrs:natural.
+  forall d2__split_discrs:natural. forall discr__p2__d__assume:natural.
+  forall discr__p2__d__assume1:us_main_type.
+  forall discr__p2__d__assume2:bool. forall us:int.
+  forall temp___358:natural. forall temp___3581:us_main_type.
+  forall temp___3582:bool. forall usq_:natural. forall usq_1:us_main_type.
+  forall usq_2:bool. forall temp___360:natural.
+  forall temp___3601:us_main_type. forall temp___3602:bool.
+  forall temp___361:natural. forall temp___3611:us_main_type.
+  forall temp___3612:bool. forall result:us_main_type.
+  forall d__split_fields1:us_main_type. forall result1:natural.
+  forall d__split_discrs1:natural. forall result2:us_main_type.
+  forall d__split_fields2:us_main_type. forall result3:us_split_discrs__ref.
+  forall d__split_discrs2:us_split_discrs. (in_range(c) -> (((({
+  us_split_discrs1 = { rec__private_discr__p_with_default__c =
   discr__p2__d__assume }; us_split_fields1 = {
   rec__private_discr__p_with_default = discr__p2__d__assume1 };
   attr__constrained = discr__p2__d__assume2 } = new_with_default(c)) and
-  (to_rep(discr__p2__d__assume) = c))
-
-axiom H2 : (result = d__split_fields)
-
-axiom H3 : (d__split_fields1 = discr__p2__d__assume1)
-
-axiom H4 : (result1 = d__split_discrs)
-
-axiom H5 : (d__split_discrs1 = discr__p2__d__assume)
-
-axiom H6 : (d__attr__constrained = false)
-
-axiom H7 : ((us = c) and in_range(c))
-
-axiom H8 : ((d1__attr__constrained = true) and
-  (to_rep(d1__split_discrs) = c))
-
-axiom H9 : ((c = to_rep(d1__split_discrs)) and
-  (d1__attr__constrained = true))
-
-axiom H10 : ((d2__attr__constrained = false) and
-  (to_rep(d2__split_discrs) = 0))
-
-axiom H11 : (not (d__attr__constrained = true))
-
-axiom H12 : (d1__attr__constrained = true)
-
-axiom H13 : (({ us_split_discrs1 = { rec__private_discr__p_with_default__c =
-  temp___320 }; us_split_fields1 = { rec__private_discr__p_with_default =
-  temp___3201 }; attr__constrained = temp___3202 } = new_with_default(c)) and
-  (to_rep(temp___320) = c))
-
-axiom H14 : ((d__attr__constrained = true) ->
-  (temp___320 = d__split_discrs1))
-
-axiom H15 : ((usq_ = temp___320) and ((usq_1 = temp___3201) and
-  (usq_2 = temp___3202)))
-
-axiom H16 : (usq_ = temp___322)
-
-axiom H17 : (usq_1 = temp___3221)
-
-axiom H18 : (d__attr__constrained = temp___3222)
-
-axiom H19 : (result2 = d__split_fields1)
-
-axiom H20 : (d__split_fields2 = temp___3221)
-
-axiom H21 : (result3 = d__split_discrs1)
-
-axiom H22 : (d__split_discrs2 = temp___322)
-
-axiom H23 : (({ us_split_discrs1 = { rec__private_discr__p_with_default__c =
-  temp___323 }; us_split_fields1 = { rec__private_discr__p_with_default =
-  temp___3231 }; attr__constrained = temp___3232 } = new_with_default(0)) and
-  (to_rep(temp___323) = 0))
-
-axiom H24 : (d__attr__constrained = true)
-
- (* File "discr.adb", line 89, characters 0-0 *)
-goal WP_parameter_def : (temp___323 = d__split_discrs2)
+  (to_rep(discr__p2__d__assume) = c)) and (((result = d__split_fields) and
+  (discr__p2__d__assume1 = d__split_fields1)) and
+  (((result1 = d__split_discrs) and
+  (discr__p2__d__assume = d__split_discrs1)) and
+  (d__attr__constrained = false)))) -> (((us = c) and in_range(c)) ->
+  (((d1__attr__constrained = true) and (to_rep(d1__split_discrs) = c)) ->
+  (((c = to_rep(d1__split_discrs)) and (d1__attr__constrained = true)) ->
+  (((d2__attr__constrained = false) and (to_rep(d2__split_discrs) = 0)) ->
+  ((not (d__attr__constrained = true)) -> ((d1__attr__constrained = true) ->
+  (((((({ us_split_discrs1 = { rec__private_discr__p_with_default__c =
+  temp___358 }; us_split_fields1 = { rec__private_discr__p_with_default =
+  temp___3581 }; attr__constrained = temp___3582 } = new_with_default(c)) and
+  (to_rep(temp___358) = c)) and ((((d__attr__constrained = true) and
+  (temp___358 = d__split_discrs1)) or
+  (not (d__attr__constrained = true))) and ((usq_ = temp___358) and
+  ((usq_1 = temp___3581) and (usq_2 = temp___3582))))) and
+  ((usq_ = temp___360) and ((usq_1 = temp___3601) and
+  (d__attr__constrained = temp___3602)))) and
+  (((result2 = d__split_fields1) and (d__split_fields2 = temp___3601)) and
+  ((result3 = { us_split_discrs__content = {
+  rec__private_discr__p_with_default__c = d__split_discrs1 } }) and
+  (d__split_discrs2 = { rec__private_discr__p_with_default__c = temp___360
+  })))) -> ((({ us_split_discrs1 = { rec__private_discr__p_with_default__c =
+  temp___361 }; us_split_fields1 = { rec__private_discr__p_with_default =
+  temp___3611 }; attr__constrained = temp___3612 } = new_with_default(0)) and
+  (to_rep(temp___361) = 0)) -> ((d__attr__constrained = true) ->
+  (temp___361 = (d__split_discrs2).rec__private_discr__p_with_default__c)))))))))))))

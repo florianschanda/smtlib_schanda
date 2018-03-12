@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -532,103 +532,21 @@ logic r40b : bool
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic x__split_discrs : bool
-
-logic r__split_fields : integer
-
-logic r__split_fields1 : failure_reason
-
-logic o : integer
-
-logic o1 : integer
-
-logic o2 : failure_reason
-
-logic temp___282 : bool
-
-logic temp___2821 : integer
-
-logic temp___2822 : failure_reason
-
-logic temp___2823 : bool
-
-logic o3 : failure_reason
-
-logic o4 : integer
-
-logic o5 : failure_reason
-
-logic o6 : bool
-
-logic o7 : integer
-
-logic o8 : failure_reason
-
-logic o9 : bool
-
-logic o10 : bool
-
-logic o11 : integer
-
-logic o12 : failure_reason
-
-logic o13 : bool
-
-logic o14 : bool
-
-logic o15 : integer
-
-logic o16 : failure_reason
-
-logic o17 : bool
-
-logic temp___283 : bool
-
-logic temp___2831 : integer
-
-logic temp___2832 : failure_reason
-
-logic temp___2833 : bool
-
-logic result : integer
-
-logic result1 : failure_reason
-
-logic r__split_fields2 : integer
-
-logic r__split_fields3 : failure_reason
-
-logic result2 : integer
-
-logic result3 : failure_reason
-
-logic r__split_fields4 : integer
-
-logic r__split_fields5 : failure_reason
-
-axiom H : (x__split_discrs = tmp)
-
-axiom H1 : ((r__attr__constrained = true) and (r__split_discrs = tmp))
-
-axiom H2 : ((tmp = r__split_discrs) and (r__attr__constrained = true))
-
-axiom H3 : (not (to_int(r__split_discrs) = 1))
-
-axiom H4 : (to_rep1(o3) = 0)
-
-axiom H5 : (dummy = o4)
-
-axiom H6 : (o3 = o5)
-
-axiom H7 : (of_int(0) = o6)
-
-axiom H8 : (o7 = o4)
-
-axiom H9 : (o8 = o5)
-
-axiom H10 : (true = o9)
-
-axiom H11 : ((o10 = o6) and (((o11 = o7) and (o12 = o8)) and (o13 = o9)))
-
  (* File "test.adb", line 108, characters 0-0 *)
-goal WP_parameter_def : (tmp = o10)
+goal WP_parameter_def :
+  (forall x__split_discrs:bool. forall o:failure_reason. forall o1:integer.
+  forall o2:failure_reason. forall o3:bool. forall o4:integer.
+  forall o5:failure_reason. forall o6:bool. forall o7:bool.
+  forall o8:integer. forall o9:failure_reason. forall o10:bool.
+  ((x__split_discrs = tmp) -> (((r__attr__constrained = true) and
+  (r__split_discrs = tmp)) -> (((tmp = r__split_discrs) and
+  (r__attr__constrained = true)) -> ((not (to_int(r__split_discrs) = 1)) ->
+  (((((to_rep1(o) = 0) and ((dummy = o1) and (o = o2))) and
+  ((of_int(0) = o3) and (((o4 = o1) and (o5 = o2)) and (true = o6)))) and ({
+  us_split_discrs1 = { rec__test__search_result__found = o7 };
+  us_split_fields1 = { rec__test__search_result__index = o8;
+  rec__test__search_result__reason = o9 }; attr__constrained = o10 } = {
+  us_split_discrs1 = { rec__test__search_result__found = o3 };
+  us_split_fields1 = { rec__test__search_result__index = o4;
+  rec__test__search_result__reason = o5 }; attr__constrained = o6 })) ->
+  (tmp = o7)))))))

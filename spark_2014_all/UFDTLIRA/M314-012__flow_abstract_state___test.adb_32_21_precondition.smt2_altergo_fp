@@ -122,15 +122,8 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 axiom is_empty__post_axiom : true
 
-logic i : int
-
-logic o : int
-
-logic state : us_private
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range(i))
-
-axiom H1 : (is_empty(state) = true)
-
  (* File "test.adb", line 20, characters 0-0 *)
-goal WP_parameter_def : (not (is_empty(state) = true))
+goal WP_parameter_def :
+  (forall i:int. forall state:us_private. ((((- 2147483648) <= 2147483647) ->
+  in_range(i)) -> ((is_empty(state) = true) ->
+  (not (is_empty(state) = true)))))

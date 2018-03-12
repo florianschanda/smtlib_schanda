@@ -213,12 +213,6 @@ logic is_max__function_guard1 : bool, int, us_rep -> prop
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq3 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -230,6 +224,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq3 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -276,28 +276,14 @@ logic x__attr__tag : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x__split_fields : integer
-
-logic x__split_fields1 : us_private
-
-logic o : integer
-
-logic o1 : us_private
-
-logic o2 : int
-
-logic x__split_fields2 : integer
-
-logic x__split_fields3 : us_private
-
-axiom H : (not (is_max({ us_split_fields1 = { rec__unit1__t1__c1 =
-  x__split_fields; rec__ext__ = x__split_fields1 }; attr__tag = x__attr__tag
-  }) = true))
-
-axiom H1 : (to_rep(x__split_fields2) = (to_rep(x__split_fields) + 1))
-
  (* File "unit1.ads", line 32, characters 0-0 *)
-goal WP_parameter_def : (bool_eq2({ us_split_fields1 = { rec__unit1__t1__c1 =
-  x__split_fields2; rec__ext__ = x__split_fields3 }; attr__tag = x__attr__tag
-  }, next({ us_split_fields1 = { rec__unit1__t1__c1 = x__split_fields;
-  rec__ext__ = x__split_fields1 }; attr__tag = x__attr__tag })) = true)
+goal WP_parameter_def :
+  (forall x__split_fields:integer. forall x__split_fields1:us_private.
+  forall x__split_fields2:integer. forall x__split_fields3:us_private.
+  ((not (is_max({ us_split_fields1 = { rec__unit1__t1__c1 = x__split_fields;
+  rec__ext__ = x__split_fields1 }; attr__tag = x__attr__tag }) = true)) ->
+  ((to_rep(x__split_fields2) = (to_rep(x__split_fields) + 1)) -> (bool_eq2({
+  us_split_fields1 = { rec__unit1__t1__c1 = x__split_fields2; rec__ext__ =
+  x__split_fields3 }; attr__tag = x__attr__tag }, next({ us_split_fields1 = {
+  rec__unit1__t1__c1 = x__split_fields; rec__ext__ = x__split_fields1 };
+  attr__tag = x__attr__tag })) = true))))

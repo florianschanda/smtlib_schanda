@@ -107,17 +107,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic visible : int
-
-logic result : int
-
-logic visible1 : int
-
-axiom H : in_range(visible)
-
-axiom H1 : (result = visible)
-
-axiom H2 : (visible1 = 0)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def :
+  (forall visible:int. forall result:int. forall visible1:int.
+  (not (in_range(visible) and ((result = visible) and (visible1 = 0)))))

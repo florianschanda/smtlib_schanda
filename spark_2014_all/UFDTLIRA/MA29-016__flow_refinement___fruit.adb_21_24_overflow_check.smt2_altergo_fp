@@ -150,17 +150,8 @@ logic apples_to_consume : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic apples : int
-
-logic o : int
-
-logic o1 : int
-
-axiom H : in_range1(apples_to_consume)
-
-axiom H1 : in_range1(apples)
-
-axiom H2 : (apples_to_consume <= number_of_apples(apples))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((apples - apples_to_consume))
+goal WP_parameter_def :
+  (forall apples:int. (in_range1(apples_to_consume) -> (in_range1(apples) ->
+  ((apples_to_consume <= number_of_apples(apples)) ->
+  in_range((apples - apples_to_consume))))))

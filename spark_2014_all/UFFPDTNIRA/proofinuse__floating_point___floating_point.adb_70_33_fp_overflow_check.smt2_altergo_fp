@@ -1065,12 +1065,6 @@ axiom Power_neg3 :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1082,6 +1076,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1209,46 +1209,10 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic res : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : t
-
-logic o6 : t
-
-logic o7 : t
-
-logic o8 : t
-
-logic o9 : t
-
-logic result : t
-
-logic res1 : t
-
-axiom H : in_range2(n)
-
-axiom H1 : tqtisFinite(x)
-
-axiom H2 : tqtisFinite(y)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
-
-axiom H3 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(res))
-
-axiom H4 : ((2 <= n) and (n <= 46))
 
 logic fliteral2 : t
 
@@ -1260,12 +1224,11 @@ logic fliteral3 : t
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 2.2360000610351562500000))
 
-axiom H5 : lt(x, add(NearestTiesToEven, div(NearestTiesToEven,
-  power(fliteral2, (n - 2)), fliteral3), fliteral))
-
-axiom H6 : (((n - 1) <  0) -> neq(fliteral2, zeroF))
-
-axiom H7 : (o3 = power(fliteral2, (n - 1)))
-
  (* File "floating_point.adb", line 55, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(o3)
+goal WP_parameter_def :
+  (forall res:t. forall o:t. (in_range2(n) -> (tqtisFinite(x) ->
+  (tqtisFinite(y) -> ((le(neg(fliteral1), fliteral1) -> tqtisFinite(res)) ->
+  (((2 <= n) and (n <= 46)) -> (lt(x, add(NearestTiesToEven,
+  div(NearestTiesToEven, power(fliteral2, (n - 2)), fliteral3), fliteral)) ->
+  ((((((n - 1) <  0) and neq(fliteral2, zeroF)) or (not ((n - 1) <  0))) and
+  (o = power(fliteral2, (n - 1)))) -> tqtisFinite(o)))))))))

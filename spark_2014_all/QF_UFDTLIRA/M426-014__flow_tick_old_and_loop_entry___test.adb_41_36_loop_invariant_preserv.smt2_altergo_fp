@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -163,95 +163,6 @@ function t8b__ref___projection(a: t8b__ref) : t8b = (a).t8b__content
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
-
-logic x : int
-
-logic i : int
-
-logic temp___150 : int
-
-logic temp___149 : int
-
-logic result : int
-
-logic i1 : int
-
-logic result1 : int
-
-logic x1 : int
-
-logic x2 : int
-
-logic i2 : int
-
-logic j : int
-
-logic result2 : int
-
-logic j1 : int
-
-logic j2 : int
-
-logic j3 : int
-
-logic j4 : int
-
-logic j5 : int
-
-logic j6 : int
-
-logic j7 : int
-
-logic j8 : int
-
-logic result3 : int
-
-logic i3 : int
-
-logic result4 : int
-
-logic x3 : int
-
-logic x4 : int
-
-logic i4 : int
-
-logic j9 : int
-
-logic x5 : int
-
-logic i5 : int
-
-logic j10 : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range1(x))
-
-axiom H1 : (result = i)
-
-axiom H2 : (i1 = 1)
-
-axiom H3 : (1 <= i1)
-
-axiom H4 : (i1 <= 10)
-
-axiom H5 : (result1 = x)
-
-axiom H6 : (x1 = 0)
-
-axiom H7 : (x2 = x)
-
-axiom H8 : (((((- 2147483648) <= 2147483647) -> in_range1(x2)) and
-  ((1 <= 10) -> in_range2(i2))) and ((1 <= i2) and (i2 <= 10)))
-
-axiom H9 : (j = result2)
-
-axiom H10 : (j1 = (- 2147483648))
-
-axiom H11 : ((- 2147483648) <= j1)
-
-axiom H12 : (j1 <= 2147483647)
-
-axiom H13 : true
 
  (* File "test.adb", line 22, characters 0-0 *)
 goal WP_parameter_def : true

@@ -119,81 +119,15 @@ logic priv_f__function_guard : bool, us_private -> prop
 
 axiom priv_f__post_axiom : true
 
-logic var : int
-
-logic var2 : int
-
-logic var3 : int
-
-logic var4 : int
-
-logic pr_state : us_private
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic result : bool
-
-logic result1 : int
-
-logic var1 : int
-
-logic result2 : int
-
-logic var21 : int
-
-logic result3 : int
-
-logic var31 : int
-
-logic result4 : int
-
-logic var5 : int
-
-logic result5 : int
-
-logic var22 : int
-
-logic result6 : int
-
-logic var32 : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range(var))
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(var2))
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range(var3))
-
-axiom H3 : in_range(var4)
-
-axiom H4 : (result = priv_f(pr_state))
-
-axiom H5 : (result = true)
-
-axiom H6 : ((o = (1 + var4)) and in_range((1 + var4)))
-
-axiom H7 : (result1 = var)
-
-axiom H8 : (var1 = o)
-
-axiom H9 : ((o1 = (2 + var4)) and in_range((2 + var4)))
-
-axiom H10 : (result2 = var2)
-
-axiom H11 : (var21 = o1)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((3 + var4))
+goal WP_parameter_def :
+  (forall var:int. forall var2:int. forall var3:int. forall var4:int.
+  forall pr_state:us_private. forall o:int. forall o1:int.
+  forall result:bool. forall result1:int. forall var1:int.
+  forall result2:int. forall var21:int. ((((- 2147483648) <= 2147483647) ->
+  in_range(var)) -> ((((- 2147483648) <= 2147483647) -> in_range(var2)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(var3)) -> (in_range(var4) ->
+  ((result = priv_f(pr_state)) -> ((result = true) -> ((((o = (1 + var4)) and
+  in_range((1 + var4))) and ((result1 = var) and (var1 = o))) ->
+  ((((o1 = (2 + var4)) and in_range((2 + var4))) and ((result2 = var2) and
+  (var21 = o1))) -> in_range((3 + var4)))))))))))

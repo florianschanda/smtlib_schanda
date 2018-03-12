@@ -509,80 +509,25 @@ logic s : tmoneyB
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic stash : money
-
-logic pocket : money
-
-logic o : money
-
-logic o1 : int
-
-logic o2 : money
-
-logic o3 : money
-
-logic stash1 : money
-
-logic pocket1 : money
-
-logic result : bool
-
-logic result1 : money
-
-logic stash2 : money
-
-logic result2 : money
-
-logic pocket2 : money
-
-logic stash3 : money
-
-logic pocket3 : money
-
-logic stash4 : money
-
-logic pocket4 : money
-
-axiom H : dynamic_property(first, 9999999999, to_fixed(s))
-
-axiom H1 : (0 <  to_fixed(s))
-
-axiom H2 : (to_fixed1(o) = to_fixed(s))
-
-axiom H3 : (o1 = to_fixed1(o))
-
-axiom H4 : (((o1 <  to_fixed1(stash)) -> (result = true)) and
-  ((not (o1 <  to_fixed1(stash))) -> (result = false)))
-
-axiom H5 : ((result = true) ->
-  (to_fixed1(o2) = (to_fixed1(stash) - to_fixed(s))))
-
-axiom H6 : ((result = true) -> (result1 = stash))
-
-axiom H7 : ((result = true) -> (stash2 = o2))
-
-axiom H8 : ((result = true) ->
-  (to_fixed1(o3) = (to_fixed1(pocket) + to_fixed(s))))
-
-axiom H9 : ((result = true) -> (result2 = pocket))
-
-axiom H10 : ((result = true) -> (pocket2 = o3))
-
-axiom H11 : ((not (result = true)) -> (pocket2 = pocket))
-
-axiom H12 : ((not (result = true)) -> (stash2 = stash))
-
-axiom H13 : ((not (result = true)) -> (pocket2 = pocket1))
-
-axiom H14 : ((not (result = true)) -> (stash2 = stash1))
-
-axiom H15 : (pocket2 = pocket3)
-
-axiom H16 : (stash2 = stash3)
-
-axiom H17 : (pocket4 = pocket2)
-
-axiom H18 : (stash4 = stash2)
-
  (* File "pack.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : in_range((to_fixed1(stash) + to_fixed1(pocket)))
+goal WP_parameter_def :
+  (forall stash:money. forall pocket:money. forall o:money. forall o1:int.
+  forall o2:money. forall o3:money. forall stash1:money.
+  forall pocket1:money. forall result:bool. forall result1:money.
+  forall stash2:money. forall result2:money. forall pocket2:money.
+  forall stash3:money. forall pocket3:money. forall stash4:money.
+  forall pocket4:money. (dynamic_property(first, 9999999999, to_fixed(s)) ->
+  ((0 <  to_fixed(s)) -> ((((((to_fixed1(o) = to_fixed(s)) and
+  (o1 = to_fixed1(o))) and (((o1 <  to_fixed1(stash)) and (result = true)) or
+  ((not (o1 <  to_fixed1(stash))) and (result = false)))) and
+  (((result = true) and
+  (((to_fixed1(o2) = (to_fixed1(stash) - to_fixed(s))) and (({
+  money__content = result1 } = { money__content = stash }) and
+  (stash2 = o2))) and
+  ((to_fixed1(o3) = (to_fixed1(pocket) + to_fixed(s))) and (({
+  money__content = result2 } = { money__content = pocket }) and
+  (pocket2 = o3))))) or ((not (result = true)) and (((pocket2 = pocket) and
+  (stash2 = stash)) and ((pocket2 = pocket1) and (stash2 = stash1)))))) and
+  (((pocket2 = pocket3) and (stash2 = stash3)) and ((pocket4 = pocket2) and
+  (stash4 = stash2)))) ->
+  in_range((to_fixed1(stash) + to_fixed1(pocket)))))))

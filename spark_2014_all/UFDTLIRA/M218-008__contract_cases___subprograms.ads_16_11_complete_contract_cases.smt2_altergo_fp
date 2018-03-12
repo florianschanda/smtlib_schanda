@@ -117,26 +117,7 @@ logic val__ : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic subprograms__f2bis__result : int
-
-logic o : int
-
-logic result : int
-
-logic subprograms__f2bis__result1 : int
-
-logic subprograms__f2bis__result2 : int
-
-logic subprograms__f2bis__result3 : int
-
-logic subprograms__f2bis__result4 : int
-
-logic subprograms__f2bis__result5 : int
-
-axiom H : in_range(val__)
-
-axiom H1 : (val__ = 0)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (((bool_eq(val__, 0) = true) -> (1 <= (0 + 1))) and
-  ((not (bool_eq(val__, 0) = true)) -> (1 <= (0 + 0))))
+goal WP_parameter_def : (in_range(val__) -> ((val__ = 0) -> (((bool_eq(val__,
+  0) = true) -> (1 <= (0 + 1))) and ((not (bool_eq(val__, 0) = true)) ->
+  (1 <= (0 + 0))))))

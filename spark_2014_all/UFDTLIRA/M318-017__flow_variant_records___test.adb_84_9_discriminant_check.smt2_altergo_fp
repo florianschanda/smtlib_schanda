@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -433,39 +433,13 @@ type t25b__ref = { t25b__content : us_rep
 
 function t25b__ref___projection(a: t25b__ref) : us_rep = (a).t25b__content
 
-logic x__split_discrs : bool
-
-logic o : integer
-
-logic o1 : integer
-
-logic o2 : failure_reason
-
-logic temp___263 : bool
-
-logic temp___2631 : integer
-
-logic temp___2632 : failure_reason
-
-logic temp___2633 : bool
-
-axiom H : (x__split_discrs = r24b)
-
-axiom H1 : (to_rep(o) = 12)
-
-axiom H2 : (o = o1)
-
-axiom H3 : (dummy1 = o2)
-
-axiom H4 : (of_int(1) = temp___263)
-
-axiom H5 : (temp___2631 = o1)
-
-axiom H6 : (temp___2632 = o2)
-
-axiom H7 : (true = temp___2633)
-
-axiom H8 : (x__attr__constrained = true)
-
  (* File "test.adb", line 43, characters 0-0 *)
-goal WP_parameter_def : (temp___263 = x__split_discrs)
+goal WP_parameter_def :
+  (forall x__split_discrs:bool. forall o:integer. forall o1:integer.
+  forall o2:failure_reason. forall temp___296:bool.
+  forall temp___2961:integer. forall temp___2962:failure_reason.
+  forall temp___2963:bool. ((x__split_discrs = r24b) ->
+  ((((to_rep(o) = 12) and ((o = o1) and (dummy1 = o2))) and
+  ((of_int(1) = temp___296) and (((temp___2961 = o1) and
+  (temp___2962 = o2)) and (true = temp___2963)))) ->
+  ((x__attr__constrained = true) -> (temp___296 = x__split_discrs)))))

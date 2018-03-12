@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -189,186 +189,34 @@ function t9b__ref___projection(a: t9b__ref) : t9b = (a).t9b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic t : int
-
-logic index : int
-
-logic index1 : int
-
-logic temp___163 : int
-
-logic temp___162 : int
-
-logic temp___167 : int
-
-logic temp___166 : int
-
-logic result : int
-
-logic t1 : int
-
-logic result1 : int
-
-logic index2 : int
-
-logic t2 : int
-
-logic index3 : int
-
-logic result2 : int
-
-logic t3 : int
-
-logic result3 : int
-
-logic index4 : int
-
-logic t4 : int
-
-logic index5 : int
-
-logic t5 : int
-
-logic index6 : int
-
-logic t6 : int
-
-logic index7 : int
-
-logic t7 : int
-
-logic index8 : int
-
-logic t8 : int
-
-logic index9 : int
-
-logic t9 : int
-
-logic index10 : int
-
-logic result4 : int
-
-logic t10 : int
-
-logic result5 : int
-
-logic index11 : int
-
-logic t11 : int
-
-logic index12 : int
-
-logic result6 : int
-
-logic t12 : int
-
-logic result7 : int
-
-logic index13 : int
-
-logic t13 : int
-
-logic index14 : int
-
-logic t14 : int
-
-logic index15 : int
-
-logic t15 : int
-
-logic index16 : int
-
-logic t16 : int
-
-logic index17 : int
-
-logic t17 : int
-
-logic index18 : int
-
-logic t18 : int
-
-logic index19 : int
-
-logic t19 : int
-
-logic index20 : int
-
-logic t20 : int
-
-logic index21 : int
-
-axiom H : (result = t)
-
-axiom H1 : (t1 = 0)
-
-axiom H2 : in_range1(t1)
-
-axiom H3 : (result1 = index)
-
-axiom H4 : (index2 = 1)
-
-axiom H5 : (((1 <= index2) and (index2 <= 10)) -> (((temp___163 = index2) and
-  ((temp___162 = t1) and ((t2 = (index3 - 1)) and
+ (* File "s.adb", line 3, characters 0-0 *)
+goal WP_parameter_def :
+  (forall t:int. forall index:int. forall index1:int. forall temp___187:int.
+  forall temp___186:int. forall result:int. forall t1:int.
+  forall result1:int. forall index2:int. forall t2:int. forall index3:int.
+  forall result2:int. forall t3:int. forall t4:int. forall index4:int.
+  forall t5:int. forall index5:int. forall t6:int. forall index6:int.
+  forall t7:int. forall index7:int. forall result3:int. forall t8:int.
+  forall result4:int. forall index8:int. forall t9:int. forall index9:int.
+  forall result5:int. forall t10:int. forall result6:int. forall index10:int.
+  forall t11:int. forall index11:int. forall t12:int. forall index12:int.
+  (((result = t) and (t1 = 0)) -> (in_range1(t1) -> (((({ int__content =
+  result1 } = { int__content = index }) and (index2 = 1)) and
+  ((((1 <= index2) and (index2 <= 10)) and ((((temp___187 = index2) and
+  ((temp___186 = t1) and ((t2 = (index3 - 1)) and
   ((((((- 2147483648) <= 2147483647) -> in_range1(t2)) and ((1 <= 10) ->
   in_range2(index3))) and ((1 <= index3) and (index3 <= 10))) and
   (((t2 = result2) and (t3 = index3)) and (index3 = 10)))))) and
-  (((index3 = index7) and (t3 = t6)) and ((index8 = index3) and (t7 = t3)))))
-
-axiom H6 : (((1 <= index2) and (index2 <= 10)) -> (index9 = index7))
-
-axiom H7 : (((1 <= index2) and (index2 <= 10)) -> (t8 = t6))
-
-axiom H8 : (((1 <= index2) and (index2 <= 10)) -> (index10 = index8))
-
-axiom H9 : (((1 <= index2) and (index2 <= 10)) -> (t9 = t7))
-
-axiom H10 : ((not ((1 <= index2) and (index2 <= 10))) -> (index2 = index9))
-
-axiom H11 : ((not ((1 <= index2) and (index2 <= 10))) -> (t1 = t8))
-
-axiom H12 : ((not ((1 <= index2) and (index2 <= 10))) -> (index10 = index2))
-
-axiom H13 : ((not ((1 <= index2) and (index2 <= 10))) -> (t9 = t1))
-
-axiom H14 : (t8 = 10)
-
-axiom H15 : (result4 = t8)
-
-axiom H16 : (t10 = 11)
-
-axiom H17 : (result5 = index1)
-
-axiom H18 : (index11 = 10)
-
-axiom H19 : (1 <= index11)
-
-axiom H20 : (index11 <= 10)
-
-axiom H21 : (t11 = (index12 + 1))
-
-axiom H22 : ((((1 <= 10) -> in_range3(index12)) and
-  (((- 2147483648) <= 2147483647) -> in_range1(t11))) and ((1 <= index12) and
-  (index12 <= 10)))
-
-axiom H23 : (t11 = result6)
-
-axiom H24 : (t12 = index12)
-
-axiom H25 : (not (index12 = 1))
-
-axiom H26 : (result7 = index12)
-
-axiom H27 : (index13 = (index12 - 1))
-
-axiom H28 : (index13 = index14)
-
-axiom H29 : (t12 = t13)
-
-axiom H30 : (index15 = index13)
-
-axiom H31 : (t14 = t12)
-
- (* File "s.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (t13 = (index14 + 1))
+  (((index3 = index4) and (t3 = t4)) and ((index5 = index3) and
+  (t5 = t3)))) and (((index6 = index4) and (t6 = t4)) and
+  ((index7 = index5) and (t7 = t5))))) or ((not ((1 <= index2) and
+  (index2 <= 10))) and (((index2 = index6) and (t1 = t6)) and
+  ((index7 = index2) and (t7 = t1)))))) -> ((t6 = 10) -> (((result3 = t6) and
+  (t8 = 11)) -> ((({ int__content = result4 } = { int__content = index1
+  }) and (index8 = 10)) -> (((1 <= index8) and (index8 <= 10)) ->
+  ((t9 = (index9 + 1)) -> (((((((1 <= 10) -> in_range3(index9)) and
+  (((- 2147483648) <= 2147483647) -> in_range1(t9))) and ((1 <= index9) and
+  (index9 <= 10))) and (((t9 = result5) and (t10 = index9)) and
+  ((not (index9 = 1)) and ((result6 = index9) and
+  (index10 = (index9 - 1)))))) and (((index10 = index11) and (t10 = t11)) and
+  ((index12 = index10) and (t12 = t10)))) -> (t11 = (index11 + 1))))))))))))

@@ -463,100 +463,18 @@ type t7b__ref = { t7b__content : us_rep
 
 function t7b__ref___projection(a: t7b__ref) : us_rep = (a).t7b__content
 
-logic d__split_discrs : natural
-
-logic d2__split_discrs : natural
-
-logic o : natural
-
-logic o1 : natural
-
-logic discr__r2__d__assume : natural
-
-logic discr__r2__d__assume1 : bool
-
-logic us : int
-
-logic o2 : natural
-
-logic o3 : natural
-
-logic temp___272 : natural
-
-logic temp___2721 : bool
-
-logic usq_ : natural
-
-logic usq_1 : bool
-
-logic temp___274 : natural
-
-logic temp___2741 : bool
-
-logic o4 : natural
-
-logic o5 : natural
-
-logic temp___275 : natural
-
-logic temp___2751 : bool
-
-logic usq_2 : natural
-
-logic usq_3 : bool
-
-logic temp___277 : natural
-
-logic temp___2771 : bool
-
-logic o6 : natural
-
-logic o7 : natural
-
-logic temp___278 : natural
-
-logic temp___2781 : bool
-
-logic result : natural
-
-logic d__split_discrs1 : natural
-
-logic result1 : natural
-
-logic d__split_discrs2 : natural
-
-logic result2 : natural
-
-logic d__split_discrs3 : natural
-
-axiom H : in_range(c)
-
-axiom H1 : (to_rep(o) = c)
-
-axiom H2 : (o = o1)
-
-axiom H3 : (discr__r2__d__assume = o1)
-
-axiom H4 : (true = discr__r2__d__assume1)
-
-axiom H5 : (result = d__split_discrs)
-
-axiom H6 : (d__split_discrs1 = discr__r2__d__assume)
-
-axiom H7 : (d__attr__constrained = false)
-
-axiom H8 : ((us = c) and in_range(c))
-
-axiom H9 : ((d1__attr__constrained = true) and
-  (to_rep(d1__split_discrs) = c))
-
-axiom H10 : ((c = to_rep(d1__split_discrs)) and
-  (d1__attr__constrained = true))
-
-axiom H11 : ((d2__attr__constrained = false) and
-  (to_rep(d2__split_discrs) = 0))
-
-axiom H12 : (not (d__attr__constrained = true))
-
  (* File "discr.adb", line 4, characters 0-0 *)
-goal WP_parameter_def : (d1__attr__constrained = true)
+goal WP_parameter_def :
+  (forall d__split_discrs:natural. forall d2__split_discrs:natural.
+  forall o:natural. forall o1:natural. forall discr__r2__d__assume:natural.
+  forall discr__r2__d__assume1:bool. forall us:int. forall result:natural.
+  forall d__split_discrs1:natural. (in_range(c) -> (((((to_rep(o) = c) and
+  (o = o1)) and ((discr__r2__d__assume = o1) and
+  (true = discr__r2__d__assume1))) and (((result = d__split_discrs) and
+  (d__split_discrs1 = discr__r2__d__assume)) and
+  (d__attr__constrained = false))) -> (((us = c) and in_range(c)) ->
+  (((d1__attr__constrained = true) and (to_rep(d1__split_discrs) = c)) ->
+  (((c = to_rep(d1__split_discrs)) and (d1__attr__constrained = true)) ->
+  (((d2__attr__constrained = false) and (to_rep(d2__split_discrs) = 0)) ->
+  ((not (d__attr__constrained = true)) ->
+  (d1__attr__constrained = true)))))))))

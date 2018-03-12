@@ -1027,26 +1027,24 @@ type unsigned8__ref = { unsigned8__content : unsigned8
 function unsigned8__ref___projection(a: unsigned8__ref) : unsigned8 =
   (a).unsigned8__content
 
+logic rliteral1 : t1
+
+axiom rliteral_axiom1 : (tqtint1(rliteral1) = 255)
+
 axiom al__post_axiom :
   (forall x86__rax:t1 [al(x86__rax)].
-  (al(x86__rax) = toSmall(bw_and1(x86__rax, of_int1(255)))))
+  (al(x86__rax) = toSmall(bw_and1(x86__rax, rliteral1))))
 
-logic rax : t1
+logic rliteral2 : t1
 
-logic rax1 : t1
+axiom rliteral_axiom2 : (tqtint1(rliteral2) = 18446744073709551360)
 
-logic rax2 : t1
+logic rliteral3 : t
 
-logic rax3 : t1
-
-axiom H : true
-
-axiom H1 : (rax1 = bw_or1(bw_and1(rax, of_int1(18446744073709551360)),
-  toBig(of_int(1))))
-
-axiom H2 : (rax1 = rax2)
-
-axiom H3 : (rax3 = rax1)
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 1)
 
  (* File "x86.ads", line 47, characters 0-0 *)
-goal WP_parameter_def : (al(rax2) = of_int(1))
+goal WP_parameter_def :
+  (forall rax:t1. forall rax1:t1. forall rax2:t1. forall rax3:t1.
+  (((rax1 = bw_or1(bw_and1(rax, rliteral2), toBig(rliteral3))) and
+  ((rax1 = rax2) and (rax3 = rax1))) -> (al(rax2) = rliteral3)))

@@ -111,69 +111,20 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic b : int
-
-logic test__test_4__result : int
-
-logic o : int
-
-logic result : int
-
-logic b1 : int
-
-logic result1 : int
-
-logic b2 : int
-
-logic result2 : int
-
-logic test__test_4__result1 : int
-
-logic test__test_4__result2 : int
-
-logic test__test_4__result3 : int
-
-logic b3 : int
-
-logic test__test_4__result4 : int
-
-logic b4 : int
-
-logic test__test_4__result5 : int
-
-logic result3 : int
-
-axiom H : in_range(a)
-
-axiom H1 : (result = b)
-
-axiom H2 : (b1 = a)
-
-axiom H3 : in_range(b1)
-
-axiom H4 : ((o = (b1 + 1)) and in_range((b1 + 1)))
-
-axiom H5 : (result1 = b1)
-
-axiom H6 : (b2 = o)
-
-axiom H7 : (test__test_4__result1 = test__test_4__result2)
-
-axiom H8 : (test__test_4__result3 = test__test_4__result1)
-
-axiom H9 : (result2 = test__test_4__result)
-
-axiom H10 : (test__test_4__result1 = b2)
-
-axiom H11 : (test__test_4__result4 = test__test_4__result2)
-
-axiom H12 : (b3 = b2)
-
-axiom H13 : (test__test_4__result5 = test__test_4__result3)
-
-axiom H14 : (b4 = b2)
-
-axiom H15 : (result3 = test__test_4__result4)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (test__test_4__result4 = 5)
+goal WP_parameter_def :
+  (forall b:int. forall test__test_4__result:int. forall o:int.
+  forall result:int. forall b1:int. forall result1:int. forall b2:int.
+  forall result2:int. forall test__test_4__result1:int.
+  forall test__test_4__result2:int. forall test__test_4__result3:int.
+  forall b3:int. forall test__test_4__result4:int. forall b4:int.
+  forall test__test_4__result5:int.
+  (forall result3:int. ((in_range(a) and ((((({ int__content = result } = {
+  int__content = b }) and (b1 = a)) and (in_range(b1) and
+  ((((o = (b1 + 1)) and in_range((b1 + 1))) and ((result1 = b1) and
+  (b2 = o))) and (((test__test_4__result1 = test__test_4__result2) and
+  (test__test_4__result3 = test__test_4__result1)) and
+  ((result2 = test__test_4__result) and (test__test_4__result1 = b2)))))) and
+  (((test__test_4__result4 = test__test_4__result2) and (b3 = b2)) and
+  ((test__test_4__result5 = test__test_4__result3) and (b4 = b2)))) and
+  (result3 = test__test_4__result4))) -> (test__test_4__result4 = 5))))

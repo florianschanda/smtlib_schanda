@@ -115,29 +115,9 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic g1 : int
-
-logic g2 : int
-
-logic ghost_g1 : int
-
-logic par : int
-
-logic tmp : int
-
-logic o : int
-
-logic result : int
-
-logic tmp1 : int
-
-axiom H : in_range(g1)
-
-axiom H1 : in_range(g2)
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range(ghost_g1))
-
-axiom H3 : (((- 2147483648) <= 2147483647) -> in_range(par))
-
  (* File "casper.adb", line 2, characters 0-0 *)
-goal WP_parameter_def : in_range((g2 + 1))
+goal WP_parameter_def :
+  (forall g1:int. forall g2:int. forall ghost_g1:int. forall par:int.
+  (in_range(g1) -> (in_range(g2) -> ((((- 2147483648) <= 2147483647) ->
+  in_range(ghost_g1)) -> ((((- 2147483648) <= 2147483647) ->
+  in_range(par)) -> in_range((g2 + 1)))))))

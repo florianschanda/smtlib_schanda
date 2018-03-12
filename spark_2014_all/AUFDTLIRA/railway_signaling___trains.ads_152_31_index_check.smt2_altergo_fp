@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -353,33 +353,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def :
-  (forall v:track_id. forall v1:natural. forall v2:track_id.
-  (forall i:int [(singleton({ us_split_fields1 = {
-  rec__trains__train_position__track_begin = v;
-  rec__trains__train_position__pos_begin = v1;
-  rec__trains__train_position__track_end = v2 } }, i)[i])]. ((singleton({
-  us_split_fields1 = { rec__trains__train_position__track_begin = v;
-  rec__trains__train_position__pos_begin = v1;
-  rec__trains__train_position__track_end = v2 } }, i)[i]) = {
-  us_split_fields1 = { rec__trains__train_position__track_begin = v;
-  rec__trains__train_position__pos_begin = v1;
-  rec__trains__train_position__track_end = v2 } })))
-
 logic bool_eq6 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -390,17 +363,17 @@ axiom bool_eq_def5 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_182:int. ((((a__first <= temp___idx_182) and
-  (temp___idx_182 <= a__last)) and (bool_eq5((a[temp___idx_182]),
-  (b[((b__first - a__first) + temp___idx_182)])) = true)) or
-  (not ((a__first <= temp___idx_182) and (temp___idx_182 <= a__last)))))) ->
+  (forall temp___idx_204:int. ((((a__first <= temp___idx_204) and
+  (temp___idx_204 <= a__last)) and (bool_eq5((a[temp___idx_204]),
+  (b[((b__first - a__first) + temp___idx_204)])) = true)) or
+  (not ((a__first <= temp___idx_204) and (temp___idx_204 <= a__last)))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_182:int. (((a__first <= temp___idx_182) and
-  (temp___idx_182 <= a__last)) -> (bool_eq5((a[temp___idx_182]),
-  (b[((b__first - a__first) + temp___idx_182)])) = true))))) -> (bool_eq6(a,
+  (forall temp___idx_204:int. (((a__first <= temp___idx_204) and
+  (temp___idx_204 <= a__last)) -> (bool_eq5((a[temp___idx_204]),
+  (b[((b__first - a__first) + temp___idx_204)])) = true))))) -> (bool_eq6(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -410,9 +383,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_182:int. (((a__first <= temp___idx_182) and
-  (temp___idx_182 <= a__last)) -> (bool_eq5((a[temp___idx_182]),
-  (b[((b__first - a__first) + temp___idx_182)])) = true)))))))
+  (forall temp___idx_204:int. (((a__first <= temp___idx_204) and
+  (temp___idx_204 <= a__last)) -> (bool_eq5((a[temp___idx_204]),
+  (b[((b__first - a__first) + temp___idx_204)])) = true)))))))
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
@@ -471,24 +444,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,signal) farray, int, int, (int,signal) farray, int,
-  int -> (int,signal) farray
-
-axiom concat_def1 :
-  (forall a:(int,signal) farray. forall b:(int,signal) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : signal, int -> (int,signal) farray
-
-axiom singleton_def1 :
-  (forall v:signal.
-  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq8 : (int,signal) farray, int, int, (int,signal) farray, int,
   int -> bool
 
@@ -499,17 +454,17 @@ axiom bool_eq_def7 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_183:int. ((((a__first <= temp___idx_183) and
-  (temp___idx_183 <= a__last)) and
-  (to_rep2((a[temp___idx_183])) = to_rep2((b[((b__first - a__first) + temp___idx_183)])))) or
-  (not ((a__first <= temp___idx_183) and (temp___idx_183 <= a__last)))))) ->
+  (forall temp___idx_205:int. ((((a__first <= temp___idx_205) and
+  (temp___idx_205 <= a__last)) and
+  (to_rep2((a[temp___idx_205])) = to_rep2((b[((b__first - a__first) + temp___idx_205)])))) or
+  (not ((a__first <= temp___idx_205) and (temp___idx_205 <= a__last)))))) ->
   (bool_eq8(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_183:int. (((a__first <= temp___idx_183) and
-  (temp___idx_183 <= a__last)) ->
-  (to_rep2((a[temp___idx_183])) = to_rep2((b[((b__first - a__first) + temp___idx_183)]))))))) ->
+  (forall temp___idx_205:int. (((a__first <= temp___idx_205) and
+  (temp___idx_205 <= a__last)) ->
+  (to_rep2((a[temp___idx_205])) = to_rep2((b[((b__first - a__first) + temp___idx_205)]))))))) ->
   (bool_eq8(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -519,37 +474,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_183:int. (((a__first <= temp___idx_183) and
-  (temp___idx_183 <= a__last)) ->
-  (to_rep2((a[temp___idx_183])) = to_rep2((b[((b__first - a__first) + temp___idx_183)])))))))))
-
-logic compare : (int,signal) farray, int, int, (int,signal) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,signal) farray. forall b:(int,signal) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq8(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,signal) farray. forall b:(int,signal) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq8(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep2((a[(i + 1)])) <  to_rep2((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,signal) farray. forall b:(int,signal) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq8(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep2((b[(i + 1)])) <  to_rep2((a[(j + 1)]))))))))))))
+  (forall temp___idx_205:int. (((a__first <= temp___idx_205) and
+  (temp___idx_205 <= a__last)) ->
+  (to_rep2((a[temp___idx_205])) = to_rep2((b[((b__first - a__first) + temp___idx_205)])))))))))
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
@@ -809,30 +736,6 @@ axiom slide_def2 :
   (forall i:int [(slide2(a, old_first, new_first)[i])]. ((slide2(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat2 : (int,us_rep1) farray, int, int, (int,us_rep1) farray, int,
-  int -> (int,us_rep1) farray
-
-axiom concat_def2 :
-  (forall a:(int,us_rep1) farray. forall b:(int,us_rep1) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat2(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat2(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat2(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton2 : us_rep1, int -> (int,us_rep1) farray
-
-axiom singleton_def2 :
-  (forall v:location. forall v1:location. forall v2:positive.
-  (forall i:int [(singleton2({ us_split_fields3 = {
-  rec__trains__track__from = v; rec__trains__track__to = v1;
-  rec__trains__track__length = v2 } }, i)[i])]. ((singleton2({
-  us_split_fields3 = { rec__trains__track__from = v; rec__trains__track__to =
-  v1; rec__trains__track__length = v2 } }, i)[i]) = { us_split_fields3 = {
-  rec__trains__track__from = v; rec__trains__track__to = v1;
-  rec__trains__track__length = v2 } })))
-
 logic bool_eq13 : (int,us_rep1) farray, int, int, (int,us_rep1) farray, int,
   int -> bool
 
@@ -843,17 +746,17 @@ axiom bool_eq_def12 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and (bool_eq11((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and (bool_eq11((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq13(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq11((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq13(a,
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq11((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq13(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev2 :
@@ -863,9 +766,9 @@ axiom bool_eq_rev2 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq11((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq11((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)))))))
 
 logic tracks : (int,us_rep1) farray
 
@@ -914,24 +817,6 @@ axiom slide_def3 :
   (forall i:int [(slide3(a, old_first, new_first)[i])]. ((slide3(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat3 : (int,track_opt_id) farray, int, int,
-  (int,track_opt_id) farray, int, int -> (int,track_opt_id) farray
-
-axiom concat_def3 :
-  (forall a:(int,track_opt_id) farray. forall b:(int,track_opt_id) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat3(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat3(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat3(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton3 : track_opt_id, int -> (int,track_opt_id) farray
-
-axiom singleton_def3 :
-  (forall v:track_opt_id.
-  (forall i:int [(singleton3(v, i)[i])]. ((singleton3(v, i)[i]) = v)))
-
 logic bool_eq15 : (int,track_opt_id) farray, int, int,
   (int,track_opt_id) farray, int, int -> bool
 
@@ -943,17 +828,17 @@ axiom bool_eq_def14 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_143:int. ((((a__first <= temp___idx_143) and
-  (temp___idx_143 <= a__last)) and
-  (to_rep5((a[temp___idx_143])) = to_rep5((b[((b__first - a__first) + temp___idx_143)])))) or
-  (not ((a__first <= temp___idx_143) and (temp___idx_143 <= a__last)))))) ->
+  (forall temp___idx_165:int. ((((a__first <= temp___idx_165) and
+  (temp___idx_165 <= a__last)) and
+  (to_rep5((a[temp___idx_165])) = to_rep5((b[((b__first - a__first) + temp___idx_165)])))) or
+  (not ((a__first <= temp___idx_165) and (temp___idx_165 <= a__last)))))) ->
   (bool_eq15(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_143:int. (((a__first <= temp___idx_143) and
-  (temp___idx_143 <= a__last)) ->
-  (to_rep5((a[temp___idx_143])) = to_rep5((b[((b__first - a__first) + temp___idx_143)]))))))) ->
+  (forall temp___idx_165:int. (((a__first <= temp___idx_165) and
+  (temp___idx_165 <= a__last)) ->
+  (to_rep5((a[temp___idx_165])) = to_rep5((b[((b__first - a__first) + temp___idx_165)]))))))) ->
   (bool_eq15(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev3 :
@@ -963,37 +848,9 @@ axiom bool_eq_rev3 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_143:int. (((a__first <= temp___idx_143) and
-  (temp___idx_143 <= a__last)) ->
-  (to_rep5((a[temp___idx_143])) = to_rep5((b[((b__first - a__first) + temp___idx_143)])))))))))
-
-logic compare1 : (int,track_opt_id) farray, int, int,
-  (int,track_opt_id) farray, int, int -> int
-
-axiom compare_def_eq1 :
-  (forall a:(int,track_opt_id) farray. forall b:(int,track_opt_id) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq15(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt1 :
-  (forall a:(int,track_opt_id) farray. forall b:(int,track_opt_id) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq15(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep5((a[(i + 1)])) <  to_rep5((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt1 :
-  (forall a:(int,track_opt_id) farray. forall b:(int,track_opt_id) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare1(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq15(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep5((b[(i + 1)])) <  to_rep5((a[(j + 1)]))))))))))))
+  (forall temp___idx_165:int. (((a__first <= temp___idx_165) and
+  (temp___idx_165 <= a__last)) ->
+  (to_rep5((a[temp___idx_165])) = to_rep5((b[((b__first - a__first) + temp___idx_165)])))))))))
 
 logic dummy14 : (int,track_opt_id) farray
 
@@ -1044,27 +901,6 @@ axiom slide_def4 :
   (forall i:int [(slide4(a, old_first, new_first)[i])]. ((slide4(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat4 : (int,(int,track_opt_id) farray) farray, int, int,
-  (int,(int,track_opt_id) farray) farray, int,
-  int -> (int,(int,track_opt_id) farray) farray
-
-axiom concat_def4 :
-  (forall a:(int,(int,track_opt_id) farray) farray.
-  forall b:(int,(int,track_opt_id) farray) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat4(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat4(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat4(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton4 : (int,track_opt_id) farray,
-  int -> (int,(int,track_opt_id) farray) farray
-
-axiom singleton_def4 :
-  (forall v:(int,track_opt_id) farray.
-  (forall i:int [(singleton4(v, i)[i])]. ((singleton4(v, i)[i]) = v)))
-
 logic bool_eq16 : (int,(int,track_opt_id) farray) farray, int, int,
   (int,(int,track_opt_id) farray) farray, int, int -> bool
 
@@ -1076,17 +912,17 @@ axiom bool_eq_def15 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_144:int. ((((a__first <= temp___idx_144) and
-  (temp___idx_144 <= a__last)) and (bool_eq15((a[temp___idx_144]), 1, 3,
-  (b[((b__first - a__first) + temp___idx_144)]), 1, 3) = true)) or
-  (not ((a__first <= temp___idx_144) and (temp___idx_144 <= a__last)))))) ->
+  (forall temp___idx_166:int. ((((a__first <= temp___idx_166) and
+  (temp___idx_166 <= a__last)) and (bool_eq15((a[temp___idx_166]), 1, 3,
+  (b[((b__first - a__first) + temp___idx_166)]), 1, 3) = true)) or
+  (not ((a__first <= temp___idx_166) and (temp___idx_166 <= a__last)))))) ->
   (bool_eq16(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_144:int. (((a__first <= temp___idx_144) and
-  (temp___idx_144 <= a__last)) -> (bool_eq15((a[temp___idx_144]), 1, 3,
-  (b[((b__first - a__first) + temp___idx_144)]), 1, 3) = true))))) ->
+  (forall temp___idx_166:int. (((a__first <= temp___idx_166) and
+  (temp___idx_166 <= a__last)) -> (bool_eq15((a[temp___idx_166]), 1, 3,
+  (b[((b__first - a__first) + temp___idx_166)]), 1, 3) = true))))) ->
   (bool_eq16(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev4 :
@@ -1097,9 +933,9 @@ axiom bool_eq_rev4 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_144:int. (((a__first <= temp___idx_144) and
-  (temp___idx_144 <= a__last)) -> (bool_eq15((a[temp___idx_144]), 1, 3,
-  (b[((b__first - a__first) + temp___idx_144)]), 1, 3) = true)))))))
+  (forall temp___idx_166:int. (((a__first <= temp___idx_166) and
+  (temp___idx_166 <= a__last)) -> (bool_eq15((a[temp___idx_166]), 1, 3,
+  (b[((b__first - a__first) + temp___idx_166)]), 1, 3) = true)))))))
 
 logic previous_tracks : (int,(int,track_opt_id) farray) farray
 
@@ -1169,196 +1005,6 @@ axiom get_other_previous_track__def_axiom :
 logic trains__tracks__aggregate_def : us_rep1, us_rep1, us_rep1, us_rep1,
   us_rep1, us_rep1, us_rep1, us_rep1 -> (int,us_rep1) farray
 
-axiom def_axiom :
-  (forall temp___134:location. forall temp___1341:location.
-  forall temp___1342:positive. forall temp___135:location.
-  forall temp___1351:location. forall temp___1352:positive.
-  forall temp___136:location. forall temp___1361:location.
-  forall temp___1362:positive. forall temp___137:location.
-  forall temp___1371:location. forall temp___1372:positive.
-  forall temp___138:location. forall temp___1381:location.
-  forall temp___1382:positive. forall temp___139:location.
-  forall temp___1391:location. forall temp___1392:positive.
-  forall temp___140:location. forall temp___1401:location.
-  forall temp___1402:positive. forall temp___141:location.
-  forall temp___1411:location. forall temp___1412:positive.
-  (((((((((trains__tracks__aggregate_def({ us_split_fields3 = {
-  rec__trains__track__from = temp___134; rec__trains__track__to =
-  temp___1341; rec__trains__track__length = temp___1342 } }, {
-  us_split_fields3 = { rec__trains__track__from = temp___135;
-  rec__trains__track__to = temp___1351; rec__trains__track__length =
-  temp___1352 } }, { us_split_fields3 = { rec__trains__track__from =
-  temp___136; rec__trains__track__to = temp___1361;
-  rec__trains__track__length = temp___1362 } }, { us_split_fields3 = {
-  rec__trains__track__from = temp___137; rec__trains__track__to =
-  temp___1371; rec__trains__track__length = temp___1372 } }, {
-  us_split_fields3 = { rec__trains__track__from = temp___138;
-  rec__trains__track__to = temp___1381; rec__trains__track__length =
-  temp___1382 } }, { us_split_fields3 = { rec__trains__track__from =
-  temp___139; rec__trains__track__to = temp___1391;
-  rec__trains__track__length = temp___1392 } }, { us_split_fields3 = {
-  rec__trains__track__from = temp___140; rec__trains__track__to =
-  temp___1401; rec__trains__track__length = temp___1402 } }, {
-  us_split_fields3 = { rec__trains__track__from = temp___141;
-  rec__trains__track__to = temp___1411; rec__trains__track__length =
-  temp___1412 } })[1]) = { us_split_fields3 = { rec__trains__track__from =
-  temp___134; rec__trains__track__to = temp___1341;
-  rec__trains__track__length = temp___1342 } }) and
-  ((trains__tracks__aggregate_def({ us_split_fields3 = {
-  rec__trains__track__from = temp___134; rec__trains__track__to =
-  temp___1341; rec__trains__track__length = temp___1342 } }, {
-  us_split_fields3 = { rec__trains__track__from = temp___135;
-  rec__trains__track__to = temp___1351; rec__trains__track__length =
-  temp___1352 } }, { us_split_fields3 = { rec__trains__track__from =
-  temp___136; rec__trains__track__to = temp___1361;
-  rec__trains__track__length = temp___1362 } }, { us_split_fields3 = {
-  rec__trains__track__from = temp___137; rec__trains__track__to =
-  temp___1371; rec__trains__track__length = temp___1372 } }, {
-  us_split_fields3 = { rec__trains__track__from = temp___138;
-  rec__trains__track__to = temp___1381; rec__trains__track__length =
-  temp___1382 } }, { us_split_fields3 = { rec__trains__track__from =
-  temp___139; rec__trains__track__to = temp___1391;
-  rec__trains__track__length = temp___1392 } }, { us_split_fields3 = {
-  rec__trains__track__from = temp___140; rec__trains__track__to =
-  temp___1401; rec__trains__track__length = temp___1402 } }, {
-  us_split_fields3 = { rec__trains__track__from = temp___141;
-  rec__trains__track__to = temp___1411; rec__trains__track__length =
-  temp___1412 } })[2]) = { us_split_fields3 = { rec__trains__track__from =
-  temp___135; rec__trains__track__to = temp___1351;
-  rec__trains__track__length = temp___1352 } })) and
-  ((trains__tracks__aggregate_def({ us_split_fields3 = {
-  rec__trains__track__from = temp___134; rec__trains__track__to =
-  temp___1341; rec__trains__track__length = temp___1342 } }, {
-  us_split_fields3 = { rec__trains__track__from = temp___135;
-  rec__trains__track__to = temp___1351; rec__trains__track__length =
-  temp___1352 } }, { us_split_fields3 = { rec__trains__track__from =
-  temp___136; rec__trains__track__to = temp___1361;
-  rec__trains__track__length = temp___1362 } }, { us_split_fields3 = {
-  rec__trains__track__from = temp___137; rec__trains__track__to =
-  temp___1371; rec__trains__track__length = temp___1372 } }, {
-  us_split_fields3 = { rec__trains__track__from = temp___138;
-  rec__trains__track__to = temp___1381; rec__trains__track__length =
-  temp___1382 } }, { us_split_fields3 = { rec__trains__track__from =
-  temp___139; rec__trains__track__to = temp___1391;
-  rec__trains__track__length = temp___1392 } }, { us_split_fields3 = {
-  rec__trains__track__from = temp___140; rec__trains__track__to =
-  temp___1401; rec__trains__track__length = temp___1402 } }, {
-  us_split_fields3 = { rec__trains__track__from = temp___141;
-  rec__trains__track__to = temp___1411; rec__trains__track__length =
-  temp___1412 } })[3]) = { us_split_fields3 = { rec__trains__track__from =
-  temp___136; rec__trains__track__to = temp___1361;
-  rec__trains__track__length = temp___1362 } })) and
-  ((trains__tracks__aggregate_def({ us_split_fields3 = {
-  rec__trains__track__from = temp___134; rec__trains__track__to =
-  temp___1341; rec__trains__track__length = temp___1342 } }, {
-  us_split_fields3 = { rec__trains__track__from = temp___135;
-  rec__trains__track__to = temp___1351; rec__trains__track__length =
-  temp___1352 } }, { us_split_fields3 = { rec__trains__track__from =
-  temp___136; rec__trains__track__to = temp___1361;
-  rec__trains__track__length = temp___1362 } }, { us_split_fields3 = {
-  rec__trains__track__from = temp___137; rec__trains__track__to =
-  temp___1371; rec__trains__track__length = temp___1372 } }, {
-  us_split_fields3 = { rec__trains__track__from = temp___138;
-  rec__trains__track__to = temp___1381; rec__trains__track__length =
-  temp___1382 } }, { us_split_fields3 = { rec__trains__track__from =
-  temp___139; rec__trains__track__to = temp___1391;
-  rec__trains__track__length = temp___1392 } }, { us_split_fields3 = {
-  rec__trains__track__from = temp___140; rec__trains__track__to =
-  temp___1401; rec__trains__track__length = temp___1402 } }, {
-  us_split_fields3 = { rec__trains__track__from = temp___141;
-  rec__trains__track__to = temp___1411; rec__trains__track__length =
-  temp___1412 } })[4]) = { us_split_fields3 = { rec__trains__track__from =
-  temp___137; rec__trains__track__to = temp___1371;
-  rec__trains__track__length = temp___1372 } })) and
-  ((trains__tracks__aggregate_def({ us_split_fields3 = {
-  rec__trains__track__from = temp___134; rec__trains__track__to =
-  temp___1341; rec__trains__track__length = temp___1342 } }, {
-  us_split_fields3 = { rec__trains__track__from = temp___135;
-  rec__trains__track__to = temp___1351; rec__trains__track__length =
-  temp___1352 } }, { us_split_fields3 = { rec__trains__track__from =
-  temp___136; rec__trains__track__to = temp___1361;
-  rec__trains__track__length = temp___1362 } }, { us_split_fields3 = {
-  rec__trains__track__from = temp___137; rec__trains__track__to =
-  temp___1371; rec__trains__track__length = temp___1372 } }, {
-  us_split_fields3 = { rec__trains__track__from = temp___138;
-  rec__trains__track__to = temp___1381; rec__trains__track__length =
-  temp___1382 } }, { us_split_fields3 = { rec__trains__track__from =
-  temp___139; rec__trains__track__to = temp___1391;
-  rec__trains__track__length = temp___1392 } }, { us_split_fields3 = {
-  rec__trains__track__from = temp___140; rec__trains__track__to =
-  temp___1401; rec__trains__track__length = temp___1402 } }, {
-  us_split_fields3 = { rec__trains__track__from = temp___141;
-  rec__trains__track__to = temp___1411; rec__trains__track__length =
-  temp___1412 } })[5]) = { us_split_fields3 = { rec__trains__track__from =
-  temp___138; rec__trains__track__to = temp___1381;
-  rec__trains__track__length = temp___1382 } })) and
-  ((trains__tracks__aggregate_def({ us_split_fields3 = {
-  rec__trains__track__from = temp___134; rec__trains__track__to =
-  temp___1341; rec__trains__track__length = temp___1342 } }, {
-  us_split_fields3 = { rec__trains__track__from = temp___135;
-  rec__trains__track__to = temp___1351; rec__trains__track__length =
-  temp___1352 } }, { us_split_fields3 = { rec__trains__track__from =
-  temp___136; rec__trains__track__to = temp___1361;
-  rec__trains__track__length = temp___1362 } }, { us_split_fields3 = {
-  rec__trains__track__from = temp___137; rec__trains__track__to =
-  temp___1371; rec__trains__track__length = temp___1372 } }, {
-  us_split_fields3 = { rec__trains__track__from = temp___138;
-  rec__trains__track__to = temp___1381; rec__trains__track__length =
-  temp___1382 } }, { us_split_fields3 = { rec__trains__track__from =
-  temp___139; rec__trains__track__to = temp___1391;
-  rec__trains__track__length = temp___1392 } }, { us_split_fields3 = {
-  rec__trains__track__from = temp___140; rec__trains__track__to =
-  temp___1401; rec__trains__track__length = temp___1402 } }, {
-  us_split_fields3 = { rec__trains__track__from = temp___141;
-  rec__trains__track__to = temp___1411; rec__trains__track__length =
-  temp___1412 } })[6]) = { us_split_fields3 = { rec__trains__track__from =
-  temp___139; rec__trains__track__to = temp___1391;
-  rec__trains__track__length = temp___1392 } })) and
-  ((trains__tracks__aggregate_def({ us_split_fields3 = {
-  rec__trains__track__from = temp___134; rec__trains__track__to =
-  temp___1341; rec__trains__track__length = temp___1342 } }, {
-  us_split_fields3 = { rec__trains__track__from = temp___135;
-  rec__trains__track__to = temp___1351; rec__trains__track__length =
-  temp___1352 } }, { us_split_fields3 = { rec__trains__track__from =
-  temp___136; rec__trains__track__to = temp___1361;
-  rec__trains__track__length = temp___1362 } }, { us_split_fields3 = {
-  rec__trains__track__from = temp___137; rec__trains__track__to =
-  temp___1371; rec__trains__track__length = temp___1372 } }, {
-  us_split_fields3 = { rec__trains__track__from = temp___138;
-  rec__trains__track__to = temp___1381; rec__trains__track__length =
-  temp___1382 } }, { us_split_fields3 = { rec__trains__track__from =
-  temp___139; rec__trains__track__to = temp___1391;
-  rec__trains__track__length = temp___1392 } }, { us_split_fields3 = {
-  rec__trains__track__from = temp___140; rec__trains__track__to =
-  temp___1401; rec__trains__track__length = temp___1402 } }, {
-  us_split_fields3 = { rec__trains__track__from = temp___141;
-  rec__trains__track__to = temp___1411; rec__trains__track__length =
-  temp___1412 } })[7]) = { us_split_fields3 = { rec__trains__track__from =
-  temp___140; rec__trains__track__to = temp___1401;
-  rec__trains__track__length = temp___1402 } })) and
-  ((trains__tracks__aggregate_def({ us_split_fields3 = {
-  rec__trains__track__from = temp___134; rec__trains__track__to =
-  temp___1341; rec__trains__track__length = temp___1342 } }, {
-  us_split_fields3 = { rec__trains__track__from = temp___135;
-  rec__trains__track__to = temp___1351; rec__trains__track__length =
-  temp___1352 } }, { us_split_fields3 = { rec__trains__track__from =
-  temp___136; rec__trains__track__to = temp___1361;
-  rec__trains__track__length = temp___1362 } }, { us_split_fields3 = {
-  rec__trains__track__from = temp___137; rec__trains__track__to =
-  temp___1371; rec__trains__track__length = temp___1372 } }, {
-  us_split_fields3 = { rec__trains__track__from = temp___138;
-  rec__trains__track__to = temp___1381; rec__trains__track__length =
-  temp___1382 } }, { us_split_fields3 = { rec__trains__track__from =
-  temp___139; rec__trains__track__to = temp___1391;
-  rec__trains__track__length = temp___1392 } }, { us_split_fields3 = {
-  rec__trains__track__from = temp___140; rec__trains__track__to =
-  temp___1401; rec__trains__track__length = temp___1402 } }, {
-  us_split_fields3 = { rec__trains__track__from = temp___141;
-  rec__trains__track__to = temp___1411; rec__trains__track__length =
-  temp___1412 } })[8]) = { us_split_fields3 = { rec__trains__track__from =
-  temp___141; rec__trains__track__to = temp___1411;
-  rec__trains__track__length = temp___1412 } })))
-
 axiom tracks__def_axiom : (tracks = trains__tracks__aggregate_def({
   us_split_fields3 = { rec__trains__track__from = of_rep3(1);
   rec__trains__track__to = of_rep3(2); rec__trains__track__length =
@@ -1378,256 +1024,347 @@ axiom tracks__def_axiom : (tracks = trains__tracks__aggregate_def({
   rec__trains__track__from = of_rep3(5); rec__trains__track__to = of_rep3(1);
   rec__trains__track__length = of_rep4(10) } }))
 
+axiom def_axiom :
+  (forall temp___156:location. forall temp___1561:location.
+  forall temp___1562:positive. forall temp___157:location.
+  forall temp___1571:location. forall temp___1572:positive.
+  forall temp___158:location. forall temp___1581:location.
+  forall temp___1582:positive. forall temp___159:location.
+  forall temp___1591:location. forall temp___1592:positive.
+  forall temp___160:location. forall temp___1601:location.
+  forall temp___1602:positive. forall temp___161:location.
+  forall temp___1611:location. forall temp___1612:positive.
+  forall temp___162:location. forall temp___1621:location.
+  forall temp___1622:positive. forall temp___163:location.
+  forall temp___1631:location. forall temp___1632:positive.
+  (((((((((trains__tracks__aggregate_def({ us_split_fields3 = {
+  rec__trains__track__from = temp___156; rec__trains__track__to =
+  temp___1561; rec__trains__track__length = temp___1562 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___157;
+  rec__trains__track__to = temp___1571; rec__trains__track__length =
+  temp___1572 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___158; rec__trains__track__to = temp___1581;
+  rec__trains__track__length = temp___1582 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___159; rec__trains__track__to =
+  temp___1591; rec__trains__track__length = temp___1592 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___160;
+  rec__trains__track__to = temp___1601; rec__trains__track__length =
+  temp___1602 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___161; rec__trains__track__to = temp___1611;
+  rec__trains__track__length = temp___1612 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___162; rec__trains__track__to =
+  temp___1621; rec__trains__track__length = temp___1622 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___163;
+  rec__trains__track__to = temp___1631; rec__trains__track__length =
+  temp___1632 } })[1]) = { us_split_fields3 = { rec__trains__track__from =
+  temp___156; rec__trains__track__to = temp___1561;
+  rec__trains__track__length = temp___1562 } }) and
+  ((trains__tracks__aggregate_def({ us_split_fields3 = {
+  rec__trains__track__from = temp___156; rec__trains__track__to =
+  temp___1561; rec__trains__track__length = temp___1562 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___157;
+  rec__trains__track__to = temp___1571; rec__trains__track__length =
+  temp___1572 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___158; rec__trains__track__to = temp___1581;
+  rec__trains__track__length = temp___1582 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___159; rec__trains__track__to =
+  temp___1591; rec__trains__track__length = temp___1592 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___160;
+  rec__trains__track__to = temp___1601; rec__trains__track__length =
+  temp___1602 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___161; rec__trains__track__to = temp___1611;
+  rec__trains__track__length = temp___1612 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___162; rec__trains__track__to =
+  temp___1621; rec__trains__track__length = temp___1622 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___163;
+  rec__trains__track__to = temp___1631; rec__trains__track__length =
+  temp___1632 } })[2]) = { us_split_fields3 = { rec__trains__track__from =
+  temp___157; rec__trains__track__to = temp___1571;
+  rec__trains__track__length = temp___1572 } })) and
+  ((trains__tracks__aggregate_def({ us_split_fields3 = {
+  rec__trains__track__from = temp___156; rec__trains__track__to =
+  temp___1561; rec__trains__track__length = temp___1562 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___157;
+  rec__trains__track__to = temp___1571; rec__trains__track__length =
+  temp___1572 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___158; rec__trains__track__to = temp___1581;
+  rec__trains__track__length = temp___1582 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___159; rec__trains__track__to =
+  temp___1591; rec__trains__track__length = temp___1592 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___160;
+  rec__trains__track__to = temp___1601; rec__trains__track__length =
+  temp___1602 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___161; rec__trains__track__to = temp___1611;
+  rec__trains__track__length = temp___1612 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___162; rec__trains__track__to =
+  temp___1621; rec__trains__track__length = temp___1622 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___163;
+  rec__trains__track__to = temp___1631; rec__trains__track__length =
+  temp___1632 } })[3]) = { us_split_fields3 = { rec__trains__track__from =
+  temp___158; rec__trains__track__to = temp___1581;
+  rec__trains__track__length = temp___1582 } })) and
+  ((trains__tracks__aggregate_def({ us_split_fields3 = {
+  rec__trains__track__from = temp___156; rec__trains__track__to =
+  temp___1561; rec__trains__track__length = temp___1562 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___157;
+  rec__trains__track__to = temp___1571; rec__trains__track__length =
+  temp___1572 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___158; rec__trains__track__to = temp___1581;
+  rec__trains__track__length = temp___1582 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___159; rec__trains__track__to =
+  temp___1591; rec__trains__track__length = temp___1592 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___160;
+  rec__trains__track__to = temp___1601; rec__trains__track__length =
+  temp___1602 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___161; rec__trains__track__to = temp___1611;
+  rec__trains__track__length = temp___1612 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___162; rec__trains__track__to =
+  temp___1621; rec__trains__track__length = temp___1622 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___163;
+  rec__trains__track__to = temp___1631; rec__trains__track__length =
+  temp___1632 } })[4]) = { us_split_fields3 = { rec__trains__track__from =
+  temp___159; rec__trains__track__to = temp___1591;
+  rec__trains__track__length = temp___1592 } })) and
+  ((trains__tracks__aggregate_def({ us_split_fields3 = {
+  rec__trains__track__from = temp___156; rec__trains__track__to =
+  temp___1561; rec__trains__track__length = temp___1562 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___157;
+  rec__trains__track__to = temp___1571; rec__trains__track__length =
+  temp___1572 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___158; rec__trains__track__to = temp___1581;
+  rec__trains__track__length = temp___1582 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___159; rec__trains__track__to =
+  temp___1591; rec__trains__track__length = temp___1592 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___160;
+  rec__trains__track__to = temp___1601; rec__trains__track__length =
+  temp___1602 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___161; rec__trains__track__to = temp___1611;
+  rec__trains__track__length = temp___1612 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___162; rec__trains__track__to =
+  temp___1621; rec__trains__track__length = temp___1622 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___163;
+  rec__trains__track__to = temp___1631; rec__trains__track__length =
+  temp___1632 } })[5]) = { us_split_fields3 = { rec__trains__track__from =
+  temp___160; rec__trains__track__to = temp___1601;
+  rec__trains__track__length = temp___1602 } })) and
+  ((trains__tracks__aggregate_def({ us_split_fields3 = {
+  rec__trains__track__from = temp___156; rec__trains__track__to =
+  temp___1561; rec__trains__track__length = temp___1562 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___157;
+  rec__trains__track__to = temp___1571; rec__trains__track__length =
+  temp___1572 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___158; rec__trains__track__to = temp___1581;
+  rec__trains__track__length = temp___1582 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___159; rec__trains__track__to =
+  temp___1591; rec__trains__track__length = temp___1592 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___160;
+  rec__trains__track__to = temp___1601; rec__trains__track__length =
+  temp___1602 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___161; rec__trains__track__to = temp___1611;
+  rec__trains__track__length = temp___1612 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___162; rec__trains__track__to =
+  temp___1621; rec__trains__track__length = temp___1622 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___163;
+  rec__trains__track__to = temp___1631; rec__trains__track__length =
+  temp___1632 } })[6]) = { us_split_fields3 = { rec__trains__track__from =
+  temp___161; rec__trains__track__to = temp___1611;
+  rec__trains__track__length = temp___1612 } })) and
+  ((trains__tracks__aggregate_def({ us_split_fields3 = {
+  rec__trains__track__from = temp___156; rec__trains__track__to =
+  temp___1561; rec__trains__track__length = temp___1562 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___157;
+  rec__trains__track__to = temp___1571; rec__trains__track__length =
+  temp___1572 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___158; rec__trains__track__to = temp___1581;
+  rec__trains__track__length = temp___1582 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___159; rec__trains__track__to =
+  temp___1591; rec__trains__track__length = temp___1592 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___160;
+  rec__trains__track__to = temp___1601; rec__trains__track__length =
+  temp___1602 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___161; rec__trains__track__to = temp___1611;
+  rec__trains__track__length = temp___1612 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___162; rec__trains__track__to =
+  temp___1621; rec__trains__track__length = temp___1622 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___163;
+  rec__trains__track__to = temp___1631; rec__trains__track__length =
+  temp___1632 } })[7]) = { us_split_fields3 = { rec__trains__track__from =
+  temp___162; rec__trains__track__to = temp___1621;
+  rec__trains__track__length = temp___1622 } })) and
+  ((trains__tracks__aggregate_def({ us_split_fields3 = {
+  rec__trains__track__from = temp___156; rec__trains__track__to =
+  temp___1561; rec__trains__track__length = temp___1562 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___157;
+  rec__trains__track__to = temp___1571; rec__trains__track__length =
+  temp___1572 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___158; rec__trains__track__to = temp___1581;
+  rec__trains__track__length = temp___1582 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___159; rec__trains__track__to =
+  temp___1591; rec__trains__track__length = temp___1592 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___160;
+  rec__trains__track__to = temp___1601; rec__trains__track__length =
+  temp___1602 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___161; rec__trains__track__to = temp___1611;
+  rec__trains__track__length = temp___1612 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___162; rec__trains__track__to =
+  temp___1621; rec__trains__track__length = temp___1622 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___163;
+  rec__trains__track__to = temp___1631; rec__trains__track__length =
+  temp___1632 } })[8]) = { us_split_fields3 = { rec__trains__track__from =
+  temp___163; rec__trains__track__to = temp___1631;
+  rec__trains__track__length = temp___1632 } })))
+
 logic trains__previous_tracks__aggregate_def : (int,track_opt_id) farray,
   (int,track_opt_id) farray, (int,track_opt_id) farray,
   (int,track_opt_id) farray,
   (int,track_opt_id) farray -> (int,(int,track_opt_id) farray) farray
 
-axiom def_axiom1 :
-  (forall temp___146:(int,track_opt_id) farray.
-  forall temp___147:(int,track_opt_id) farray.
-  forall temp___148:(int,track_opt_id) farray.
-  forall temp___149:(int,track_opt_id) farray.
-  forall temp___150:(int,track_opt_id) farray.
-  ((((((trains__previous_tracks__aggregate_def(temp___146, temp___147,
-  temp___148, temp___149, temp___150)[1]) = temp___146) and
-  ((trains__previous_tracks__aggregate_def(temp___146, temp___147,
-  temp___148, temp___149, temp___150)[2]) = temp___147)) and
-  ((trains__previous_tracks__aggregate_def(temp___146, temp___147,
-  temp___148, temp___149, temp___150)[3]) = temp___148)) and
-  ((trains__previous_tracks__aggregate_def(temp___146, temp___147,
-  temp___148, temp___149, temp___150)[4]) = temp___149)) and
-  ((trains__previous_tracks__aggregate_def(temp___146, temp___147,
-  temp___148, temp___149, temp___150)[5]) = temp___150)))
+logic temp___174 : int, int, int -> (int,track_opt_id) farray
 
-logic temp___152 : int, int, int -> (int,track_opt_id) farray
+logic temp___180 : int, int, int -> (int,track_opt_id) farray
 
-axiom def_axiom2 :
-  (forall temp___154:int. forall temp___155:int. forall temp___156:int.
-  ((((temp___152(temp___154, temp___155,
-  temp___156)[1]) = of_rep5(temp___154)) and ((temp___152(temp___154,
-  temp___155, temp___156)[2]) = of_rep5(temp___155))) and
-  ((temp___152(temp___154, temp___155,
-  temp___156)[3]) = of_rep5(temp___156))))
+logic temp___186 : int, int, int -> (int,track_opt_id) farray
 
-logic temp___158 : int, int, int -> (int,track_opt_id) farray
+logic temp___192 : int, int, int -> (int,track_opt_id) farray
 
-axiom def_axiom3 :
-  (forall temp___160:int. forall temp___161:int. forall temp___162:int.
-  ((((temp___158(temp___160, temp___161,
-  temp___162)[1]) = of_rep5(temp___160)) and ((temp___158(temp___160,
-  temp___161, temp___162)[2]) = of_rep5(temp___161))) and
-  ((temp___158(temp___160, temp___161,
-  temp___162)[3]) = of_rep5(temp___162))))
-
-logic temp___164 : int, int, int -> (int,track_opt_id) farray
-
-axiom def_axiom4 :
-  (forall temp___166:int. forall temp___167:int. forall temp___168:int.
-  ((((temp___164(temp___166, temp___167,
-  temp___168)[1]) = of_rep5(temp___166)) and ((temp___164(temp___166,
-  temp___167, temp___168)[2]) = of_rep5(temp___167))) and
-  ((temp___164(temp___166, temp___167,
-  temp___168)[3]) = of_rep5(temp___168))))
-
-logic temp___170 : int, int, int -> (int,track_opt_id) farray
-
-axiom def_axiom5 :
-  (forall temp___172:int. forall temp___173:int. forall temp___174:int.
-  ((((temp___170(temp___172, temp___173,
-  temp___174)[1]) = of_rep5(temp___172)) and ((temp___170(temp___172,
-  temp___173, temp___174)[2]) = of_rep5(temp___173))) and
-  ((temp___170(temp___172, temp___173,
-  temp___174)[3]) = of_rep5(temp___174))))
-
-logic temp___176 : int, int, int -> (int,track_opt_id) farray
-
-axiom def_axiom6 :
-  (forall temp___178:int. forall temp___179:int. forall temp___180:int.
-  ((((temp___176(temp___178, temp___179,
-  temp___180)[1]) = of_rep5(temp___178)) and ((temp___176(temp___178,
-  temp___179, temp___180)[2]) = of_rep5(temp___179))) and
-  ((temp___176(temp___178, temp___179,
-  temp___180)[3]) = of_rep5(temp___180))))
+logic temp___198 : int, int, int -> (int,track_opt_id) farray
 
 axiom previous_tracks__def_axiom :
-  (previous_tracks = trains__previous_tracks__aggregate_def(temp___152(8, 0,
-  0), temp___158(1, 0, 0), temp___164(2, 3, 0), temp___170(5, 0, 0),
-  temp___176(4, 6, 7)))
+  (previous_tracks = trains__previous_tracks__aggregate_def(temp___174(8, 0,
+  0), temp___180(1, 0, 0), temp___186(2, 3, 0), temp___192(5, 0, 0),
+  temp___198(4, 6, 7)))
 
-logic cur_num_trains : int
+axiom def_axiom1 :
+  (forall temp___168:(int,track_opt_id) farray.
+  forall temp___169:(int,track_opt_id) farray.
+  forall temp___170:(int,track_opt_id) farray.
+  forall temp___171:(int,track_opt_id) farray.
+  forall temp___172:(int,track_opt_id) farray.
+  ((((((trains__previous_tracks__aggregate_def(temp___168, temp___169,
+  temp___170, temp___171, temp___172)[1]) = temp___168) and
+  ((trains__previous_tracks__aggregate_def(temp___168, temp___169,
+  temp___170, temp___171, temp___172)[2]) = temp___169)) and
+  ((trains__previous_tracks__aggregate_def(temp___168, temp___169,
+  temp___170, temp___171, temp___172)[3]) = temp___170)) and
+  ((trains__previous_tracks__aggregate_def(temp___168, temp___169,
+  temp___170, temp___171, temp___172)[4]) = temp___171)) and
+  ((trains__previous_tracks__aggregate_def(temp___168, temp___169,
+  temp___170, temp___171, temp___172)[5]) = temp___172)))
 
-logic trains : (int,us_rep) farray
+axiom def_axiom2 :
+  (forall temp___176:int. forall temp___177:int. forall temp___178:int.
+  (((in_range7(temp___176) and in_range7(temp___177)) and
+  in_range7(temp___178)) -> (((to_rep5((temp___174(temp___176, temp___177,
+  temp___178)[1])) = temp___176) and (to_rep5((temp___174(temp___176,
+  temp___177, temp___178)[2])) = temp___177)) and
+  (to_rep5((temp___174(temp___176, temp___177,
+  temp___178)[3])) = temp___178))))
 
-logic track_signals : (int,signal) farray
+axiom def_axiom3 :
+  (forall temp___182:int. forall temp___183:int. forall temp___184:int.
+  (((in_range7(temp___182) and in_range7(temp___183)) and
+  in_range7(temp___184)) -> (((to_rep5((temp___180(temp___182, temp___183,
+  temp___184)[1])) = temp___182) and (to_rep5((temp___180(temp___182,
+  temp___183, temp___184)[2])) = temp___183)) and
+  (to_rep5((temp___180(temp___182, temp___183,
+  temp___184)[3])) = temp___184))))
 
-logic train : int
+axiom def_axiom4 :
+  (forall temp___188:int. forall temp___189:int. forall temp___190:int.
+  (((in_range7(temp___188) and in_range7(temp___189)) and
+  in_range7(temp___190)) -> (((to_rep5((temp___186(temp___188, temp___189,
+  temp___190)[1])) = temp___188) and (to_rep5((temp___186(temp___188,
+  temp___189, temp___190)[2])) = temp___189)) and
+  (to_rep5((temp___186(temp___188, temp___189,
+  temp___190)[3])) = temp___190))))
 
-logic id : int
+axiom def_axiom5 :
+  (forall temp___194:int. forall temp___195:int. forall temp___196:int.
+  (((in_range7(temp___194) and in_range7(temp___195)) and
+  in_range7(temp___196)) -> (((to_rep5((temp___192(temp___194, temp___195,
+  temp___196)[1])) = temp___194) and (to_rep5((temp___192(temp___194,
+  temp___195, temp___196)[2])) = temp___195)) and
+  (to_rep5((temp___192(temp___194, temp___195,
+  temp___196)[3])) = temp___196))))
 
-logic o : int
+axiom def_axiom6 :
+  (forall temp___200:int. forall temp___201:int. forall temp___202:int.
+  (((in_range7(temp___200) and in_range7(temp___201)) and
+  in_range7(temp___202)) -> (((to_rep5((temp___198(temp___200, temp___201,
+  temp___202)[1])) = temp___200) and (to_rep5((temp___198(temp___200,
+  temp___201, temp___202)[2])) = temp___201)) and
+  (to_rep5((temp___198(temp___200, temp___201,
+  temp___202)[3])) = temp___202))))
 
-logic o1 : track_id
-
-logic o2 : natural
-
-logic o3 : track_id
-
-logic o4 : int
-
-logic o5 : bool
-
-logic o6 : int
-
-logic o7 : track_id
-
-logic o8 : natural
-
-logic o9 : track_id
-
-logic temp___340 : int
-
-logic o10 : int
-
-logic o11 : track_id
-
-logic o12 : natural
-
-logic o13 : track_id
-
-logic o14 : int
-
-logic o15 : bool
-
-logic o16 : int
-
-logic o17 : track_id
-
-logic o18 : natural
-
-logic o19 : track_id
-
-logic temp___338 : int
-
-logic o20 : int
-
-logic o21 : signal
-
-logic temp___339 : int
-
-logic result : bool
-
-logic result1 : bool
-
-logic result2 : bool
-
-axiom H : in_range2(cur_num_trains)
-
-axiom H1 : (1 <= train)
-
-axiom H2 : (train <= cur_num_trains)
-
-axiom H3 : (1 <= id)
-
-axiom H4 : (id <= 3)
-
-axiom H5 : ((1 <= train) and (train <= 10))
-
-axiom H6 : (o10 = train)
-
-axiom H7 : ({ us_split_fields1 = { rec__trains__train_position__track_begin =
-  o11; rec__trains__train_position__pos_begin = o12;
-  rec__trains__train_position__track_end = o13 } } = (trains[o10]))
-
-axiom H8 : ((o14 = get_previous_track({ us_split_fields1 = {
+ (* File "trains.ads", line 144, characters 0-0 *)
+goal WP_parameter_def :
+  (forall cur_num_trains:int. forall trains:(int,us_rep) farray.
+  forall track_signals:(int,signal) farray. forall train:int. forall id:int.
+  forall o:int. forall o1:track_id. forall o2:natural. forall o3:track_id.
+  forall o4:int. forall o5:bool. forall o6:int. forall o7:track_id.
+  forall o8:natural. forall o9:track_id. forall temp___372:int.
+  forall o10:int. forall o11:track_id. forall o12:natural.
+  forall o13:track_id. forall o14:int. forall o15:bool. forall o16:int.
+  forall o17:track_id. forall o18:natural. forall o19:track_id.
+  forall temp___370:int. forall o20:int. forall o21:signal.
+  forall temp___371:int. forall result:bool. forall result1:bool.
+  forall result2:bool. (in_range2(cur_num_trains) -> (((1 <= train) and
+  (train <= cur_num_trains)) -> (((1 <= id) and (id <= 3)) ->
+  (((((((((1 <= train) and (train <= 10)) and (o10 = train)) and ({
+  us_split_fields1 = { rec__trains__train_position__track_begin = o11;
+  rec__trains__train_position__pos_begin = o12;
+  rec__trains__train_position__track_end = o13 } } = (trains[o10]))) and
+  ((o14 = get_previous_track({ us_split_fields1 = {
   rec__trains__train_position__track_begin = o11;
   rec__trains__train_position__pos_begin = o12;
   rec__trains__train_position__track_end = o13 } }, id)) and
   (in_range7(o14) and
-  (o14 = to_rep5(((previous_tracks[to_rep3((((tracks[to_rep1(o13)])).us_split_fields3).rec__trains__track__from)])[id])))))
-
-axiom H9 : (((o14 = 0) -> (o15 = true)) and ((not (o14 = 0)) ->
-  (o15 = false)))
-
-axiom H10 : (((not (o15 = true)) -> (result1 = true)) and ((o15 = true) ->
-  (result1 = false)))
-
-axiom H11 : ((result1 = true) -> ((1 <= train) and (train <= 10)))
-
-axiom H12 : ((result1 = true) -> (o16 = train))
-
-axiom H13 : ((result1 = true) -> ({ us_split_fields1 = {
+  (o14 = to_rep5(((previous_tracks[to_rep3((((tracks[to_rep1(o13)])).us_split_fields3).rec__trains__track__from)])[id])))))) and
+  (((o14 = 0) and (o15 = true)) or ((not (o14 = 0)) and (o15 = false)))) and
+  (((not (o15 = true)) and (result1 = true)) or ((o15 = true) and
+  (result1 = false)))) and (((result1 = true) and (((((((((1 <= train) and
+  (train <= 10)) and (o16 = train)) and ({ us_split_fields1 = {
   rec__trains__train_position__track_begin = o17;
   rec__trains__train_position__pos_begin = o18;
-  rec__trains__train_position__track_end = o19 } } = (trains[o16])))
-
-axiom H14 : ((result1 = true) -> ((temp___338 = get_previous_track({
-  us_split_fields1 = { rec__trains__train_position__track_begin = o17;
+  rec__trains__train_position__track_end = o19 } } = (trains[o16]))) and
+  ((temp___370 = get_previous_track({ us_split_fields1 = {
+  rec__trains__train_position__track_begin = o17;
   rec__trains__train_position__pos_begin = o18;
   rec__trains__train_position__track_end = o19 } }, id)) and
-  (in_range7(temp___338) and
-  (temp___338 = to_rep5(((previous_tracks[to_rep3((((tracks[to_rep1(o19)])).us_split_fields3).rec__trains__track__from)])[id]))))))
-
-axiom H15 : ((result1 = true) -> ((1 <= temp___338) and (temp___338 <= 8)))
-
-axiom H16 : ((result1 = true) -> (o20 = temp___338))
-
-axiom H17 : ((result1 = true) -> (o21 = (track_signals[o20])))
-
-axiom H18 : ((result1 = true) -> (temp___339 = to_rep2(o21)))
-
-axiom H19 : ((result1 = true) -> ((((temp___339 = 1) or (temp___339 = 2)) ->
-  (result = true)) and ((not ((temp___339 = 1) or (temp___339 = 2))) ->
-  (result = false))))
-
-axiom H20 : ((not (result1 = true)) -> (result = of_int(1)))
-
-axiom H21 : (result = true)
-
-axiom H22 : ((1 <= train) and (train <= 10))
-
-axiom H23 : (o = train)
-
-axiom H24 : ({ us_split_fields1 = {
-  rec__trains__train_position__track_begin = o1;
+  (in_range7(temp___370) and
+  (temp___370 = to_rep5(((previous_tracks[to_rep3((((tracks[to_rep1(o19)])).us_split_fields3).rec__trains__track__from)])[id])))))) and
+  (((1 <= temp___370) and (temp___370 <= 8)) and (o20 = temp___370))) and
+  (o21 = (track_signals[o20]))) and (temp___371 = to_rep2(o21))) and
+  ((((temp___371 = 1) or (temp___371 = 2)) and (result = true)) or
+  ((not ((temp___371 = 1) or (temp___371 = 2))) and (result = false))))) or
+  ((not (result1 = true)) and (result = of_int(1))))) -> ((result = true) ->
+  ((((((((1 <= train) and (train <= 10)) and (o = train)) and ({
+  us_split_fields1 = { rec__trains__train_position__track_begin = o1;
   rec__trains__train_position__pos_begin = o2;
-  rec__trains__train_position__track_end = o3 } } = (trains[o]))
-
-axiom H25 : ((o4 = get_other_previous_track({ us_split_fields1 = {
+  rec__trains__train_position__track_end = o3 } } = (trains[o]))) and
+  ((o4 = get_other_previous_track({ us_split_fields1 = {
   rec__trains__train_position__track_begin = o1;
   rec__trains__train_position__pos_begin = o2;
   rec__trains__train_position__track_end = o3 } }, id)) and
   (in_range7(o4) and
-  (((to_rep5(((previous_tracks[to_rep3((((tracks[to_rep1(o1)])).us_split_fields3).rec__trains__track__from)])[id])) = to_rep1(o3)) ->
-  (o4 = 0)) and
-  ((not (to_rep5(((previous_tracks[to_rep3((((tracks[to_rep1(o1)])).us_split_fields3).rec__trains__track__from)])[id])) = to_rep1(o3))) ->
-  (o4 = to_rep5(((previous_tracks[to_rep3((((tracks[to_rep1(o1)])).us_split_fields3).rec__trains__track__from)])[id])))))))
-
-axiom H26 : (((o4 = 0) -> (o5 = true)) and ((not (o4 = 0)) -> (o5 = false)))
-
-axiom H27 : (((not (o5 = true)) -> (result2 = true)) and ((o5 = true) ->
-  (result2 = false)))
-
-axiom H28 : (result2 = true)
-
-axiom H29 : ((1 <= train) and (train <= 10))
-
-axiom H30 : (o6 = train)
-
-axiom H31 : ({ us_split_fields1 = {
+  (((to_rep5(((previous_tracks[to_rep3((((tracks[to_rep1(o1)])).us_split_fields3).rec__trains__track__from)])[id])) = to_rep1(o3)) and
+  (o4 = 0)) or
+  ((not (to_rep5(((previous_tracks[to_rep3((((tracks[to_rep1(o1)])).us_split_fields3).rec__trains__track__from)])[id])) = to_rep1(o3))) and
+  (o4 = to_rep5(((previous_tracks[to_rep3((((tracks[to_rep1(o1)])).us_split_fields3).rec__trains__track__from)])[id])))))))) and
+  (((o4 = 0) and (o5 = true)) or ((not (o4 = 0)) and (o5 = false)))) and
+  (((not (o5 = true)) and (result2 = true)) or ((o5 = true) and
+  (result2 = false)))) -> ((result2 = true) -> ((((((1 <= train) and
+  (train <= 10)) and (o6 = train)) and ({ us_split_fields1 = {
   rec__trains__train_position__track_begin = o7;
   rec__trains__train_position__pos_begin = o8;
-  rec__trains__train_position__track_end = o9 } } = (trains[o6]))
-
-axiom H32 : ((temp___340 = get_other_previous_track({ us_split_fields1 = {
+  rec__trains__train_position__track_end = o9 } } = (trains[o6]))) and
+  ((temp___372 = get_other_previous_track({ us_split_fields1 = {
   rec__trains__train_position__track_begin = o7;
   rec__trains__train_position__pos_begin = o8;
   rec__trains__train_position__track_end = o9 } }, id)) and
-  (in_range7(temp___340) and
-  (((to_rep5(((previous_tracks[to_rep3((((tracks[to_rep1(o7)])).us_split_fields3).rec__trains__track__from)])[id])) = to_rep1(o9)) ->
-  (temp___340 = 0)) and
-  ((not (to_rep5(((previous_tracks[to_rep3((((tracks[to_rep1(o7)])).us_split_fields3).rec__trains__track__from)])[id])) = to_rep1(o9))) ->
-  (temp___340 = to_rep5(((previous_tracks[to_rep3((((tracks[to_rep1(o7)])).us_split_fields3).rec__trains__track__from)])[id])))))))
-
- (* File "trains.ads", line 144, characters 0-0 *)
-goal WP_parameter_def : (1 <= temp___340)
+  (in_range7(temp___372) and
+  (((to_rep5(((previous_tracks[to_rep3((((tracks[to_rep1(o7)])).us_split_fields3).rec__trains__track__from)])[id])) = to_rep1(o9)) and
+  (temp___372 = 0)) or
+  ((not (to_rep5(((previous_tracks[to_rep3((((tracks[to_rep1(o7)])).us_split_fields3).rec__trains__track__from)])[id])) = to_rep1(o9))) and
+  (temp___372 = to_rep5(((previous_tracks[to_rep3((((tracks[to_rep1(o7)])).us_split_fields3).rec__trains__track__from)])[id])))))))) ->
+  (1 <= temp___372))))))))))

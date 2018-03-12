@@ -140,21 +140,7 @@ logic op : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic x : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range(x))
-
-axiom H1 : in_range(y)
-
-axiom H2 : in_range1(op)
-
-axiom H3 : (op = 0)
-
  (* File "case_assign.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : in_range((y + 1))
+goal WP_parameter_def :
+  (forall x:int. ((((- 2147483648) <= 2147483647) -> in_range(x)) ->
+  (in_range(y) -> (in_range1(op) -> ((op = 0) -> in_range((y + 1)))))))

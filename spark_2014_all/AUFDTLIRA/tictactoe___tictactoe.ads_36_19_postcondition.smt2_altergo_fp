@@ -132,24 +132,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,slot) farray, int, int, (int,slot) farray, int,
-  int -> (int,slot) farray
-
-axiom concat_def :
-  (forall a:(int,slot) farray. forall b:(int,slot) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : slot, int -> (int,slot) farray
-
-axiom singleton_def :
-  (forall v:slot.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq2 : (int,slot) farray, int, int, (int,slot) farray, int,
   int -> bool
 
@@ -160,17 +142,17 @@ axiom bool_eq_def1 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_151:int. ((((a__first <= temp___idx_151) and
-  (temp___idx_151 <= a__last)) and
-  (to_rep((a[temp___idx_151])) = to_rep((b[((b__first - a__first) + temp___idx_151)])))) or
-  (not ((a__first <= temp___idx_151) and (temp___idx_151 <= a__last)))))) ->
+  (forall temp___idx_173:int. ((((a__first <= temp___idx_173) and
+  (temp___idx_173 <= a__last)) and
+  (to_rep((a[temp___idx_173])) = to_rep((b[((b__first - a__first) + temp___idx_173)])))) or
+  (not ((a__first <= temp___idx_173) and (temp___idx_173 <= a__last)))))) ->
   (bool_eq2(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_151:int. (((a__first <= temp___idx_151) and
-  (temp___idx_151 <= a__last)) ->
-  (to_rep((a[temp___idx_151])) = to_rep((b[((b__first - a__first) + temp___idx_151)]))))))) ->
+  (forall temp___idx_173:int. (((a__first <= temp___idx_173) and
+  (temp___idx_173 <= a__last)) ->
+  (to_rep((a[temp___idx_173])) = to_rep((b[((b__first - a__first) + temp___idx_173)]))))))) ->
   (bool_eq2(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -180,37 +162,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_151:int. (((a__first <= temp___idx_151) and
-  (temp___idx_151 <= a__last)) ->
-  (to_rep((a[temp___idx_151])) = to_rep((b[((b__first - a__first) + temp___idx_151)])))))))))
-
-logic compare : (int,slot) farray, int, int, (int,slot) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,slot) farray. forall b:(int,slot) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq2(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,slot) farray. forall b:(int,slot) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq2(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,slot) farray. forall b:(int,slot) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq2(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_173:int. (((a__first <= temp___idx_173) and
+  (temp___idx_173 <= a__last)) ->
+  (to_rep((a[temp___idx_173])) = to_rep((b[((b__first - a__first) + temp___idx_173)])))))))))
 
 logic dummy1 : (int,slot) farray
 
@@ -260,25 +214,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,(int,slot) farray) farray, int, int,
-  (int,(int,slot) farray) farray, int, int -> (int,(int,slot) farray) farray
-
-axiom concat_def1 :
-  (forall a:(int,(int,slot) farray) farray.
-  forall b:(int,(int,slot) farray) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : (int,slot) farray, int -> (int,(int,slot) farray) farray
-
-axiom singleton_def1 :
-  (forall v:(int,slot) farray.
-  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq3 : (int,(int,slot) farray) farray, int, int,
   (int,(int,slot) farray) farray, int, int -> bool
 
@@ -290,17 +225,17 @@ axiom bool_eq_def2 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_152:int. ((((a__first <= temp___idx_152) and
-  (temp___idx_152 <= a__last)) and (bool_eq2((a[temp___idx_152]), 1, 3,
-  (b[((b__first - a__first) + temp___idx_152)]), 1, 3) = true)) or
-  (not ((a__first <= temp___idx_152) and (temp___idx_152 <= a__last)))))) ->
+  (forall temp___idx_174:int. ((((a__first <= temp___idx_174) and
+  (temp___idx_174 <= a__last)) and (bool_eq2((a[temp___idx_174]), 1, 3,
+  (b[((b__first - a__first) + temp___idx_174)]), 1, 3) = true)) or
+  (not ((a__first <= temp___idx_174) and (temp___idx_174 <= a__last)))))) ->
   (bool_eq3(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_152:int. (((a__first <= temp___idx_152) and
-  (temp___idx_152 <= a__last)) -> (bool_eq2((a[temp___idx_152]), 1, 3,
-  (b[((b__first - a__first) + temp___idx_152)]), 1, 3) = true))))) ->
+  (forall temp___idx_174:int. (((a__first <= temp___idx_174) and
+  (temp___idx_174 <= a__last)) -> (bool_eq2((a[temp___idx_174]), 1, 3,
+  (b[((b__first - a__first) + temp___idx_174)]), 1, 3) = true))))) ->
   (bool_eq3(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -311,9 +246,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_152:int. (((a__first <= temp___idx_152) and
-  (temp___idx_152 <= a__last)) -> (bool_eq2((a[temp___idx_152]), 1, 3,
-  (b[((b__first - a__first) + temp___idx_152)]), 1, 3) = true)))))))
+  (forall temp___idx_174:int. (((a__first <= temp___idx_174) and
+  (temp___idx_174 <= a__last)) -> (bool_eq2((a[temp___idx_174]), 1, 3,
+  (b[((b__first - a__first) + temp___idx_174)]), 1, 3) = true)))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -364,19 +299,9 @@ axiom num_free_slots__def_axiom :
   (num_free_slots(tictactoe__my_board) = count_free_slots(3, 3,
   tictactoe__my_board)))
 
-logic temp___732 : (int,slot) farray -> (int,(int,slot) farray) farray
+logic temp___811 : (int,slot) farray -> (int,(int,slot) farray) farray
 
-axiom def_axiom :
-  (forall temp___734:(int,slot) farray.
-  (forall temp___735:int.
-  ((temp___732(temp___734)[temp___735]) = temp___734)))
-
-logic temp___736 : int -> (int,slot) farray
-
-axiom def_axiom1 :
-  (forall temp___738:int.
-  (forall temp___739:int.
-  ((temp___736(temp___738)[temp___739]) = of_rep(temp___738))))
+logic temp___815 : int -> (int,slot) farray
 
 type integer
 
@@ -403,6 +328,16 @@ type integer__ref = { integer__content : integer
 
 function integer__ref___projection(a: integer__ref) : integer =
   (a).integer__content
+
+axiom def_axiom :
+  (forall temp___813:(int,slot) farray.
+  (forall temp___814:int.
+  ((temp___811(temp___813)[temp___814]) = temp___813)))
+
+axiom def_axiom1 :
+  (forall temp___817:int. (in_range(temp___817) ->
+  (forall temp___818:int.
+  (to_rep((temp___815(temp___817)[temp___818])) = temp___817))))
 
 type pos
 
@@ -1102,23 +1037,12 @@ axiom count_free_slots__def_axiom :
   (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
   tictactoe__my_board) + 0) + 0) + 0) + 0)))))))))))))
 
-logic my_board : (int,(int,slot) farray) farray
-
-logic result : (int,(int,slot) farray) farray
-
-logic my_board1 : (int,(int,slot) farray) farray
-
-logic my_board2 : (int,(int,slot) farray) farray
-
-logic my_board3 : (int,(int,slot) farray) farray
-
-axiom H : (result = my_board)
-
-axiom H1 : (my_board1 = temp___732(temp___736(0)))
-
-axiom H2 : (my_board1 = my_board2)
-
-axiom H3 : (my_board3 = my_board1)
-
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (num_free_slots(my_board2) = 9)
+ (* File "tictactoe.adb", line 17, characters 0-0 *)
+goal WP_parameter_def :
+  (forall my_board:(int,(int,slot) farray) farray.
+  forall result:(int,(int,slot) farray) farray.
+  forall my_board1:(int,(int,slot) farray) farray.
+  forall my_board2:(int,(int,slot) farray) farray.
+  forall my_board3:(int,(int,slot) farray) farray. ((((result = my_board) and
+  (my_board1 = temp___811(temp___815(0)))) and ((my_board1 = my_board2) and
+  (my_board3 = my_board1))) -> (num_free_slots(my_board2) = 9)))

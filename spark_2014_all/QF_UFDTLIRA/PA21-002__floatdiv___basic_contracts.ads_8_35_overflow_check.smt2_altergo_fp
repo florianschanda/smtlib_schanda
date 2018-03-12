@@ -109,45 +109,21 @@ logic item : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic basic_contracts__increment__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic basic_contracts__increment__result1 : int
-
-logic basic_contracts__increment__result2 : int
-
-logic basic_contracts__increment__result3 : int
-
-logic basic_contracts__increment__result4 : int
-
-logic basic_contracts__increment__result5 : int
-
-axiom H : in_range(item)
-
-axiom H1 : (item <  2147483647)
-
-axiom H2 :
-  (basic_contracts__increment__result1 = basic_contracts__increment__result2)
-
-axiom H3 :
-  (basic_contracts__increment__result3 = basic_contracts__increment__result1)
-
-axiom H4 : ((o = (item + 1)) and in_range((item + 1)))
-
-axiom H5 : (result = basic_contracts__increment__result)
-
-axiom H6 : (basic_contracts__increment__result1 = o)
-
-axiom H7 :
-  (basic_contracts__increment__result4 = basic_contracts__increment__result2)
-
-axiom H8 :
-  (basic_contracts__increment__result5 = basic_contracts__increment__result3)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((item + 1))
+goal WP_parameter_def :
+  (forall basic_contracts__increment__result:int. forall o:int.
+  forall result:int. forall basic_contracts__increment__result1:int.
+  forall basic_contracts__increment__result2:int.
+  forall basic_contracts__increment__result3:int.
+  forall basic_contracts__increment__result4:int.
+  forall basic_contracts__increment__result5:int. (in_range(item) ->
+  ((item <  2147483647) ->
+  (((((basic_contracts__increment__result1 = basic_contracts__increment__result2) and
+  (basic_contracts__increment__result3 = basic_contracts__increment__result1)) and
+  (((o = (item + 1)) and in_range((item + 1))) and (({ int__content = result
+  } = { int__content = basic_contracts__increment__result }) and
+  (basic_contracts__increment__result1 = o)))) and (({ int__content =
+  basic_contracts__increment__result4 } = { int__content =
+  basic_contracts__increment__result2 }) and
+  (basic_contracts__increment__result5 = basic_contracts__increment__result3))) ->
+  in_range((item + 1))))))

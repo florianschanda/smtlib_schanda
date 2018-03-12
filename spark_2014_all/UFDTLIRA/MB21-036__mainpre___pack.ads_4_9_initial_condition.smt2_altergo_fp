@@ -117,29 +117,10 @@ axiom is_valid__def_axiom :
   (forall pack__x:int [is_valid(pack__x)]. ((is_valid(pack__x) = true) <->
   (pack__x = 3)))
 
-logic x : int
-
-logic result : int
-
-logic x1 : int
-
-logic result1 : int
-
-logic x2 : int
-
-logic result2 : bool
-
-axiom H : (result = x)
-
-axiom H1 : (x1 = 3)
-
-axiom H2 : in_range(x1)
-
-axiom H3 : (result1 = x1)
-
-axiom H4 : (x2 = 3)
-
-axiom H5 : ((result2 = is_valid(x2)) and ((result2 = true) <-> (x2 = 3)))
-
  (* File "pack.adb", line 4, characters 0-0 *)
-goal WP_parameter_def : (is_valid(x2) = true)
+goal WP_parameter_def :
+  (forall x:int. forall result:int. forall x1:int. forall result1:int.
+  forall x2:int.
+  (forall result2:bool. ((((result = x) and (x1 = 3)) and (in_range(x1) and
+  (((result1 = x1) and (x2 = 3)) and ((result2 = is_valid(x2)) and
+  ((result2 = true) <-> (x2 = 3)))))) -> (is_valid(x2) = true))))

@@ -105,9 +105,6 @@ type capacity_range__ref = { capacity_range__content : capacity_range
 function capacity_range__ref___projection(a: capacity_range__ref) : capacity_range =
   (a).capacity_range__content
 
-logic us : int
-
-axiom H : ((us = 32) and in_range(32))
-
  (* File "a-cofove.ads", line 806, characters 0-0 *)
-goal WP_parameter_def : in_range(32)
+goal WP_parameter_def :
+  (forall us:int. (((us = 32) and in_range(32)) -> in_range(32)))

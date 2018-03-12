@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -220,24 +220,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> (int,natural) farray
-
-axiom concat_def :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : natural, int -> (int,natural) farray
-
-axiom singleton_def :
-  (forall v:natural.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,natural) farray, int, int, (int,natural) farray, int,
   int -> bool
 
@@ -248,17 +230,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -268,37 +250,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic primes : (int,natural) farray
 
@@ -306,42 +260,6 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic prime_search__primes__aggregate_def : int, int, int, int, int, int,
   int, int, int, int -> (int,natural) farray
-
-axiom def_axiom :
-  (forall temp___134:int. forall temp___135:int. forall temp___136:int.
-  forall temp___137:int. forall temp___138:int. forall temp___139:int.
-  forall temp___140:int. forall temp___141:int. forall temp___142:int.
-  forall temp___143:int.
-  (((((((((((prime_search__primes__aggregate_def(temp___134, temp___135,
-  temp___136, temp___137, temp___138, temp___139, temp___140, temp___141,
-  temp___142, temp___143)[1]) = of_rep(temp___134)) and
-  ((prime_search__primes__aggregate_def(temp___134, temp___135, temp___136,
-  temp___137, temp___138, temp___139, temp___140, temp___141, temp___142,
-  temp___143)[2]) = of_rep(temp___135))) and
-  ((prime_search__primes__aggregate_def(temp___134, temp___135, temp___136,
-  temp___137, temp___138, temp___139, temp___140, temp___141, temp___142,
-  temp___143)[3]) = of_rep(temp___136))) and
-  ((prime_search__primes__aggregate_def(temp___134, temp___135, temp___136,
-  temp___137, temp___138, temp___139, temp___140, temp___141, temp___142,
-  temp___143)[4]) = of_rep(temp___137))) and
-  ((prime_search__primes__aggregate_def(temp___134, temp___135, temp___136,
-  temp___137, temp___138, temp___139, temp___140, temp___141, temp___142,
-  temp___143)[5]) = of_rep(temp___138))) and
-  ((prime_search__primes__aggregate_def(temp___134, temp___135, temp___136,
-  temp___137, temp___138, temp___139, temp___140, temp___141, temp___142,
-  temp___143)[6]) = of_rep(temp___139))) and
-  ((prime_search__primes__aggregate_def(temp___134, temp___135, temp___136,
-  temp___137, temp___138, temp___139, temp___140, temp___141, temp___142,
-  temp___143)[7]) = of_rep(temp___140))) and
-  ((prime_search__primes__aggregate_def(temp___134, temp___135, temp___136,
-  temp___137, temp___138, temp___139, temp___140, temp___141, temp___142,
-  temp___143)[8]) = of_rep(temp___141))) and
-  ((prime_search__primes__aggregate_def(temp___134, temp___135, temp___136,
-  temp___137, temp___138, temp___139, temp___140, temp___141, temp___142,
-  temp___143)[9]) = of_rep(temp___142))) and
-  ((prime_search__primes__aggregate_def(temp___134, temp___135, temp___136,
-  temp___137, temp___138, temp___139, temp___140, temp___141, temp___142,
-  temp___143)[10]) = of_rep(temp___143))))
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
@@ -376,34 +294,52 @@ function index_type__ref___2__projection(a: index_type__ref1) : index_type1 =
 axiom primes__def_axiom : (primes = prime_search__primes__aggregate_def(2, 3,
   5, 7, 11, 13, 17, 19, 23, 29))
 
-logic prime_index : int
-
-logic position : int
-
-logic i : int
-
-logic j : int
-
-logic found : bool
-
-logic prime_search__natural_search__result : int
-
-axiom H : in_range1(search_item)
-
-axiom H1 : ((0 <= 2147483647) -> in_range1(prime_index))
-
-axiom H2 : (prime_search__primes__aggregate_def(2, 3, 5, 7, 11, 13, 17, 19,
-  23, 29) = primes)
-
-axiom H3 : ((1 <= 2147483647) -> in_range2(position))
-
-axiom H4 : (1 <= i)
-
-axiom H5 : (i <= 10)
-
-axiom H6 : ((i + 1) <= j)
-
-axiom H7 : (j <= 10)
+axiom def_axiom :
+  (forall temp___156:int. forall temp___157:int. forall temp___158:int.
+  forall temp___159:int. forall temp___160:int. forall temp___161:int.
+  forall temp___162:int. forall temp___163:int. forall temp___164:int.
+  forall temp___165:int. ((((((((((in_range1(temp___156) and
+  in_range1(temp___157)) and in_range1(temp___158)) and
+  in_range1(temp___159)) and in_range1(temp___160)) and
+  in_range1(temp___161)) and in_range1(temp___162)) and
+  in_range1(temp___163)) and in_range1(temp___164)) and
+  in_range1(temp___165)) ->
+  ((((((((((to_rep((prime_search__primes__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165)[1])) = temp___156) and
+  (to_rep((prime_search__primes__aggregate_def(temp___156, temp___157,
+  temp___158, temp___159, temp___160, temp___161, temp___162, temp___163,
+  temp___164, temp___165)[2])) = temp___157)) and
+  (to_rep((prime_search__primes__aggregate_def(temp___156, temp___157,
+  temp___158, temp___159, temp___160, temp___161, temp___162, temp___163,
+  temp___164, temp___165)[3])) = temp___158)) and
+  (to_rep((prime_search__primes__aggregate_def(temp___156, temp___157,
+  temp___158, temp___159, temp___160, temp___161, temp___162, temp___163,
+  temp___164, temp___165)[4])) = temp___159)) and
+  (to_rep((prime_search__primes__aggregate_def(temp___156, temp___157,
+  temp___158, temp___159, temp___160, temp___161, temp___162, temp___163,
+  temp___164, temp___165)[5])) = temp___160)) and
+  (to_rep((prime_search__primes__aggregate_def(temp___156, temp___157,
+  temp___158, temp___159, temp___160, temp___161, temp___162, temp___163,
+  temp___164, temp___165)[6])) = temp___161)) and
+  (to_rep((prime_search__primes__aggregate_def(temp___156, temp___157,
+  temp___158, temp___159, temp___160, temp___161, temp___162, temp___163,
+  temp___164, temp___165)[7])) = temp___162)) and
+  (to_rep((prime_search__primes__aggregate_def(temp___156, temp___157,
+  temp___158, temp___159, temp___160, temp___161, temp___162, temp___163,
+  temp___164, temp___165)[8])) = temp___163)) and
+  (to_rep((prime_search__primes__aggregate_def(temp___156, temp___157,
+  temp___158, temp___159, temp___160, temp___161, temp___162, temp___163,
+  temp___164, temp___165)[9])) = temp___164)) and
+  (to_rep((prime_search__primes__aggregate_def(temp___156, temp___157,
+  temp___158, temp___159, temp___160, temp___161, temp___162, temp___163,
+  temp___164, temp___165)[10])) = temp___165))))
 
  (* File "generic_searchers.ads", line 12, characters 0-0 *)
-goal WP_parameter_def : (1 <= j)
+goal WP_parameter_def :
+  (forall prime_index:int. forall position:int. forall i:int. forall j:int.
+  (in_range1(search_item) -> (((0 <= 2147483647) ->
+  in_range1(prime_index)) -> ((prime_search__primes__aggregate_def(2, 3, 5,
+  7, 11, 13, 17, 19, 23, 29) = primes) -> (((1 <= 2147483647) ->
+  in_range2(position)) -> (((1 <= i) and (i <= 10)) -> ((((i + 1) <= j) and
+  (j <= 10)) -> (1 <= j))))))))

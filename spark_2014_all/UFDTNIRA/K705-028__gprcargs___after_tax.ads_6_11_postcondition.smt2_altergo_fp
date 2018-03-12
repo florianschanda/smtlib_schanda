@@ -249,61 +249,20 @@ logic rate : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic after_tax__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic result : int
-
-logic after_tax__result1 : int
-
-logic after_tax__result2 : int
-
-logic after_tax__result3 : int
-
-logic after_tax__result4 : int
-
-logic after_tax__result5 : int
-
-logic result1 : int
-
-axiom H : in_range1(before_tax)
-
-axiom H1 : in_range1(rate)
-
-axiom H2 : (rate <= 100)
-
-axiom H3 : (after_tax__result1 = after_tax__result2)
-
-axiom H4 : (after_tax__result3 = after_tax__result1)
-
-axiom H5 : ((o = (before_tax * rate)) and in_range((before_tax * rate)))
-
-axiom H6 : (o1 = comp_div(o,100))
-
-axiom H7 : (o2 = (before_tax - o1))
-
-axiom H8 : ((o3 = o2) and in_range(o2))
-
-axiom H9 : ((o4 = o3) and in_range1(o3))
-
-axiom H10 : (result = after_tax__result)
-
-axiom H11 : (after_tax__result1 = o4)
-
-axiom H12 : (after_tax__result4 = after_tax__result2)
-
-axiom H13 : (after_tax__result5 = after_tax__result3)
-
-axiom H14 : (result1 = after_tax__result4)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (after_tax__result4 <= before_tax)
+goal WP_parameter_def :
+  (forall after_tax__result:int. forall o:int. forall o1:int. forall o2:int.
+  forall o3:int. forall o4:int. forall result:int.
+  forall after_tax__result1:int. forall after_tax__result2:int.
+  forall after_tax__result3:int. forall after_tax__result4:int.
+  forall after_tax__result5:int.
+  (forall result1:int. ((in_range1(before_tax) and (in_range1(rate) and
+  ((rate <= 100) and (((((after_tax__result1 = after_tax__result2) and
+  (after_tax__result3 = after_tax__result1)) and
+  (((((((o = (before_tax * rate)) and in_range((before_tax * rate))) and
+  (o1 = comp_div(o,100))) and (o2 = (before_tax - o1))) and ((o3 = o2) and
+  in_range(o2))) and ((o4 = o3) and in_range1(o3))) and
+  ((result = after_tax__result) and (after_tax__result1 = o4)))) and
+  ((after_tax__result4 = after_tax__result2) and
+  (after_tax__result5 = after_tax__result3))) and
+  (result1 = after_tax__result4))))) -> (after_tax__result4 <= before_tax))))

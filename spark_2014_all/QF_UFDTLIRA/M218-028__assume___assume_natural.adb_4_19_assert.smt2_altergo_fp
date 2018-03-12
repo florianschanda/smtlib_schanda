@@ -135,9 +135,5 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-axiom H : in_range(x)
-
-axiom H1 : in_range1(x)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (0 <= x)
+goal WP_parameter_def : (in_range(x) -> (in_range1(x) -> (0 <= x)))

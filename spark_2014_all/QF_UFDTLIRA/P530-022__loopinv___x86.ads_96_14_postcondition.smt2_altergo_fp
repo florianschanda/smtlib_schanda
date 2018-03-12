@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -69,6 +63,12 @@ axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
 
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
 logic attr__ATTRIBUTE_IMAGE : bool -> us_image
@@ -79,23 +79,10 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic exit_called : bool
-
-logic result : bool
-
-logic exit_called1 : bool
-
-logic exit_called2 : bool
-
-logic exit_called3 : bool
-
-axiom H : (result = exit_called)
-
-axiom H1 : (exit_called1 = of_int(1))
-
-axiom H2 : (exit_called1 = exit_called2)
-
-axiom H3 : (exit_called3 = exit_called1)
-
  (* File "x86.adb", line 29, characters 0-0 *)
-goal WP_parameter_def : (exit_called2 = true)
+goal WP_parameter_def :
+  (forall exit_called:bool. forall result:bool. forall exit_called1:bool.
+  forall exit_called2:bool. forall exit_called3:bool.
+  ((((result = exit_called) and (exit_called1 = of_int(1))) and
+  ((exit_called1 = exit_called2) and (exit_called3 = exit_called1))) ->
+  (exit_called2 = true)))

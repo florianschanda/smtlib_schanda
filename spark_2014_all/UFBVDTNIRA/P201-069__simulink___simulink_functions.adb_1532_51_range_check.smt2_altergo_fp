@@ -1140,13 +1140,5 @@ logic u32tou16__function_guard : t, t1 -> prop
 
 axiom u32tou16__post_axiom : true
 
-logic o : int
-
-logic o1 : int
-
-axiom H : true
-
-axiom H1 : true
-
  (* File "interfac.ads", line 66, characters 0-0 *)
 goal WP_parameter_def : in_range(tqtint1(right))

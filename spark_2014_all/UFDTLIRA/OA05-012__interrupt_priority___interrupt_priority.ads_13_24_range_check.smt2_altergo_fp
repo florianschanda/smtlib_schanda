@@ -273,7 +273,5 @@ logic self__ : any_priority
 
 logic self__1 : integer
 
-logic temp___1538 : bool
-
  (* File "interrupt_priority.ads", line 12, characters 0-0 *)
 goal WP_parameter_def : (0 <= to_rep(self__))

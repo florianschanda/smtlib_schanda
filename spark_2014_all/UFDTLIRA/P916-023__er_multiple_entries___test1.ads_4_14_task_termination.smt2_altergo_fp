@@ -165,12 +165,6 @@ function pt__ref___projection(a: pt__ref) : us_rep = (a).pt__content
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -183,6 +177,12 @@ axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
 
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
 logic attr__ATTRIBUTE_IMAGE1 : bool -> us_image
@@ -193,7 +193,5 @@ logic attr__ATTRIBUTE_VALUE1 : us_image -> bool
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-axiom H : false
-
  (* File "test1.adb", line 7, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def : true

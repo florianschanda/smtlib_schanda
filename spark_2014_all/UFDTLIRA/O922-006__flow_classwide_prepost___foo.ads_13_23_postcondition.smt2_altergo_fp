@@ -229,97 +229,31 @@ logic p__attr__tag : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic limit : int
-
-logic p__split_fields : integer
-
-logic p__split_fields1 : integer
-
-logic p__split_fields2 : us_private
-
-logic o : integer
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic o3 : us_private
-
-logic temp___161 : integer
-
-logic temp___1611 : integer
-
-logic temp___1612 : us_private
-
-logic temp___1613 : int
-
-logic result : integer
-
-logic result1 : integer
-
-logic result2 : us_private
-
-logic p__split_fields3 : integer
-
-logic p__split_fields4 : integer
-
-logic p__split_fields5 : us_private
-
-logic p__split_fields6 : integer
-
-logic p__split_fields7 : integer
-
-logic p__split_fields8 : us_private
-
-logic p__split_fields9 : integer
-
-logic p__split_fields10 : integer
-
-logic p__split_fields11 : us_private
-
-axiom H : in_range(limit)
-
-axiom H1 : (to_rep(p__split_fields) <= limit)
-
-axiom H2 : (to_rep(o) = to_rep(p__split_fields1))
-
-axiom H3 : (o = o1)
-
-axiom H4 : (p__split_fields1 = o2)
-
-axiom H5 : (p__split_fields2 = o3)
-
-axiom H6 : (temp___161 = o1)
-
-axiom H7 : (temp___1611 = o2)
-
-axiom H8 : (temp___1612 = o3)
-
-axiom H9 : (p__attr__tag = temp___1613)
-
-axiom H10 : (result = p__split_fields)
-
-axiom H11 : (result1 = p__split_fields1)
-
-axiom H12 : (result2 = p__split_fields2)
-
-axiom H13 : (temp___161 = p__split_fields3)
-
-axiom H14 : (temp___1611 = p__split_fields4)
-
-axiom H15 : (temp___1612 = p__split_fields5)
-
-axiom H16 : (p__split_fields6 = p__split_fields3)
-
-axiom H17 : (p__split_fields7 = p__split_fields4)
-
-axiom H18 : (p__split_fields8 = p__split_fields5)
-
-axiom H19 : (p__split_fields9 = p__split_fields3)
-
-axiom H20 : (p__split_fields10 = p__split_fields4)
-
-axiom H21 : (p__split_fields11 = p__split_fields5)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (to_rep(p__split_fields6) = to_rep(p__split_fields7))
+goal WP_parameter_def :
+  (forall limit:int. forall p__split_fields:integer.
+  forall p__split_fields1:integer. forall p__split_fields2:us_private.
+  forall o:integer. forall o1:integer. forall o2:integer.
+  forall o3:us_private. forall temp___187:integer.
+  forall temp___1871:integer. forall temp___1872:us_private.
+  forall temp___1873:int. forall result:integer. forall result1:integer.
+  forall result2:us_private. forall p__split_fields3:integer.
+  forall p__split_fields4:integer. forall p__split_fields5:us_private.
+  forall p__split_fields6:integer. forall p__split_fields7:integer.
+  forall p__split_fields8:us_private. forall p__split_fields9:integer.
+  forall p__split_fields10:integer. forall p__split_fields11:us_private.
+  ((in_range(limit) and ((to_rep(p__split_fields) <= limit) and
+  (((((to_rep(o) = to_rep(p__split_fields1)) and ((o = o1) and
+  ((p__split_fields1 = o2) and (p__split_fields2 = o3)))) and
+  (((temp___187 = o1) and ((temp___1871 = o2) and (temp___1872 = o3))) and
+  (p__attr__tag = temp___1873))) and (((result = p__split_fields) and
+  ((result1 = p__split_fields1) and (result2 = p__split_fields2))) and
+  ((temp___187 = p__split_fields3) and ((temp___1871 = p__split_fields4) and
+  (temp___1872 = p__split_fields5))))) and
+  (((p__split_fields6 = p__split_fields3) and
+  ((p__split_fields7 = p__split_fields4) and
+  (p__split_fields8 = p__split_fields5))) and
+  ((p__split_fields9 = p__split_fields3) and
+  ((p__split_fields10 = p__split_fields4) and
+  (p__split_fields11 = p__split_fields5))))))) ->
+  (to_rep(p__split_fields6) = to_rep(p__split_fields7))))

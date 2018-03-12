@@ -212,11 +212,7 @@ logic x2 : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic dispatch__incr5__result : integer
-
-logic o : int
-
-axiom H : (to_rep(x) <  2147483647)
-
  (* File "dispatch.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : (to_rep(dispatch__incr5__result) = (to_rep(x) + 1))
+goal WP_parameter_def :
+  (forall dispatch__incr5__result:integer. ((to_rep(x) <  2147483647) ->
+  (to_rep(dispatch__incr5__result) = (to_rep(x) + 1))))

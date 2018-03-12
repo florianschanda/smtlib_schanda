@@ -682,29 +682,23 @@ logic shift_right : t, int -> t
 
 logic shift_right__function_guard : t, t, int -> prop
 
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 1)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 0)
+
 axiom shift_right__post_axiom :
   (forall value:t.
   (forall amount:int [shift_right(value, amount)]. ((in_range(amount) and
   (amount <= 16)) -> (((amount <  4294967296) -> (shift_right(value,
-  amount) = udiv(value, lsl_bv(of_int(1), of_int(amount))))) and
+  amount) = udiv(value, lsl_bv(rliteral, of_int(amount))))) and
   ((not (amount <  4294967296)) -> (shift_right(value, amount) = udiv(value,
-  of_int(0))))))))
+  rliteral1)))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
-
-logic a : t
-
-logic o : t
-
-logic result : t
-
-logic a1 : t
-
-logic a2 : t
-
-logic a3 : t
-
-axiom H : true
 
  (* File "p.ads", line 9, characters 0-0 *)
 goal WP_parameter_def : (17 <= 16)

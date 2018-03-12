@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -87,39 +87,10 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : bool
-
-logic y : bool
-
-logic s : us_private
-
-logic o : bool
-
-logic o1 : bool
-
-logic result : bool
-
-logic x1 : bool
-
-logic s1 : us_private
-
-logic result1 : bool
-
-logic y1 : bool
-
-axiom H : (o = get(s))
-
-axiom H1 : (result = x)
-
-axiom H2 : (x1 = o)
-
-axiom H3 : (o1 = get(s1))
-
-axiom H4 : (result1 = y)
-
-axiom H5 : (y1 = o1)
-
-axiom H6 : (x1 = true)
-
  (* File "user.adb", line 2, characters 0-0 *)
-goal WP_parameter_def : (y1 = true)
+goal WP_parameter_def :
+  (forall x:bool. forall y:bool. forall s:us_private. forall o:bool.
+  forall o1:bool. forall result:bool. forall x1:bool. forall s1:us_private.
+  forall result1:bool. forall y1:bool. (((o = get(s)) and ((result = x) and
+  (x1 = o))) -> (((o1 = get(s1)) and ((result1 = y) and (y1 = o1))) ->
+  ((x1 = true) -> (y1 = true)))))

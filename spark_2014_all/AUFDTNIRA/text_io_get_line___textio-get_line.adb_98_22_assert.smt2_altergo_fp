@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -324,24 +324,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -352,17 +334,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -372,37 +354,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 logic to_rep1 : integer -> int
 
@@ -1040,12 +994,7 @@ logic attr__ATTRIBUTE_ADDRESS15 : int
 
 logic attr__ATTRIBUTE_ADDRESS16 : int
 
-logic temp___588 : int -> (int,character) farray
-
-axiom def_axiom :
-  (forall temp___590:int.
-  (forall temp___591:int.
-  ((temp___588(temp___590)[temp___591]) = of_rep(temp___590))))
+logic temp___660 : int -> (int,character) farray
 
 axiom fpeek__post_axiom :
   (forall file:file_descr. forall file1:bool. forall file2:bool.
@@ -1151,390 +1100,30 @@ axiom find_char_in_string__post_axiom :
   ch, n1)])) = ch))) and in_range2(find_char_in_string({ elts = s; rt = s1 },
   ch, n1))))))
 
-logic the_file : (int,character) farray
-
-logic cur_position : int
-
-logic file__split_fields : file_descr
-
-logic file__split_fields1 : bool
-
-logic file__split_fields2 : bool
-
-logic file__split_fields3 : count
-
-logic file__split_fields4 : count
-
-logic file__split_fields5 : count
-
-logic file__split_fields6 : bool
-
-logic item : (int,character) farray
-
-logic last2 : int
-
-logic rest : int
-
-logic buf : (int,character) farray
-
-logic p : int
-
-logic success : bool
-
-logic k : int
-
-logic textio__get_line__get_chunk__eof_at_start__assume : bool
-
-logic o : integer
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic o3 : integer
-
-logic o4 : int
-
-logic o5 : bool
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : int
-
-logic temp___594 : int
-
-logic o13 : int
-
-logic o14 : character
-
-logic o15 : int
-
-logic o16 : bool
-
-logic o17 : int
-
-logic o18 : int
-
-logic o19 : int
-
-logic o20 : int
-
-logic o21 : int
-
-logic o22 : int
-
-logic idx : int
-
-logic o23 : int
-
-logic idx1 : int
-
-logic o24 : int
-
-logic o25 : int
-
-logic o26 : int
-
-logic o27 : bool
-
-logic o28 : int
-
-logic o29 : character
-
-logic o30 : int
-
-logic o31 : int
-
-logic o32 : int
-
-logic o33 : int
-
-logic o34 : int
-
-logic idx2 : int
-
-logic o35 : int
-
-logic o36 : int
-
-logic o37 : int
-
-logic o38 : bool
-
-logic o39 : int
-
-logic o40 : character
-
-logic o41 : int
-
-logic o42 : int
-
-logic o43 : int
-
-logic o44 : int
-
-logic o45 : int
-
-logic idx3 : int
-
-logic o46 : int
-
-logic o47 : character
-
-logic o48 : int
-
-logic idx4 : int
-
-logic o49 : int
-
-logic o50 : character
-
-logic o51 : int
-
-logic cur_position1 : int
-
-logic item1 : (int,character) farray
-
-logic last3 : int
-
-logic rest1 : int
-
-logic p1 : int
-
-logic success1 : bool
-
-logic k1 : int
-
-logic result : (int,character) farray
-
-logic buf1 : (int,character) farray
-
-logic result1 : int
-
-logic rest2 : int
-
-logic textio__memset__b : (int,character) farray
-
-logic result2 : (int,character) farray
-
-logic buf2 : (int,character) farray
-
-logic cur_position2 : int
-
-logic success2 : bool
-
-logic helpers__fgets__strng : (int,character) farray
-
-logic result3 : (int,character) farray
-
-logic buf3 : (int,character) farray
-
-logic result4 : bool
-
-logic result5 : int
-
-logic rest3 : int
-
-logic result6 : int
-
-logic p2 : int
-
-logic item2 : (int,character) farray
-
-logic result7 : int
-
-logic last4 : int
-
-logic result8 : int
-
-logic rest4 : int
-
-logic result9 : int
-
-logic k2 : int
-
-logic result10 : bool
-
-logic result11 : bool
-
-logic result12 : bool
-
-logic result13 : int
-
-logic k3 : int
-
-logic item3 : (int,character) farray
-
-logic result14 : int
-
-logic last5 : int
-
-logic result15 : int
-
-logic rest5 : int
-
-logic item4 : (int,character) farray
-
-logic last6 : int
-
-logic rest6 : int
-
-logic k4 : int
-
-logic item5 : (int,character) farray
-
-logic last7 : int
-
-logic rest7 : int
-
-logic k5 : int
-
-logic item6 : (int,character) farray
-
-logic last8 : int
-
-logic rest8 : int
-
-logic k6 : int
-
-logic item7 : (int,character) farray
-
-logic last9 : int
-
-logic rest9 : int
-
-logic k7 : int
-
-logic item8 : (int,character) farray
-
-logic last10 : int
-
-logic rest10 : int
-
-logic p3 : int
-
-logic k8 : int
-
-logic item9 : (int,character) farray
-
-logic last11 : int
-
-logic rest11 : int
-
-logic p4 : int
-
-logic k9 : int
-
-logic cur_position3 : int
-
-logic item10 : (int,character) farray
-
-logic last12 : int
-
-logic rest12 : int
-
-logic buf4 : (int,character) farray
-
-logic p5 : int
-
-logic success3 : bool
-
-logic k10 : int
-
-logic cur_position4 : int
-
-logic item11 : (int,character) farray
-
-logic last13 : int
-
-logic rest13 : int
-
-logic buf5 : (int,character) farray
-
-logic p6 : int
-
-logic success4 : bool
-
-logic k11 : int
-
-logic cur_position5 : int
-
-logic item12 : (int,character) farray
-
-logic last14 : int
-
-logic rest14 : int
-
-logic buf6 : (int,character) farray
-
-logic p7 : int
-
-logic success5 : bool
-
-logic k12 : int
-
-logic cur_position6 : int
-
-logic item13 : (int,character) farray
-
-logic last15 : int
-
-logic rest15 : int
-
-logic buf7 : (int,character) farray
-
-logic p8 : int
-
-logic success6 : bool
-
-logic k13 : int
-
-logic result16 : bool
-
-logic result17 : bool
-
-logic result18 : bool
-
-logic result19 : bool
-
-logic result20 : bool
-
-logic result21 : bool
-
-logic result22 : bool
-
-logic result23 : bool
-
-logic result24 : bool
-
-axiom H : dynamic_property(1, 2147483647, to_rep1(item__first),
-  to_rep1(item__last))
-
-axiom H1 : in_range4(last2)
-
-axiom H2 : in_range2(cur_position)
-
-axiom H3 : in_range3(eof_ch)
-
-axiom H4 : (mod(eof, 256) = eof_ch)
-
-axiom H5 : in_range5(eof)
-
-axiom H6 : in_range2(n)
-
-axiom H7 : ((0 <= 2147483647) -> in_range4(rest))
-
-axiom H8 : ((n <= 80) and ((((to_rep1(item__first) - 1) <= last2) and
+axiom def_axiom :
+  (forall temp___662:int. (in_range3(temp___662) ->
+  (forall temp___663:int.
+  (to_rep((temp___660(temp___662)[temp___663])) = temp___662))))
+
+ (* File "textio-get_line.adb", line 89, characters 0-0 *)
+goal WP_parameter_def :
+  (forall the_file:(int,character) farray. forall cur_position:int.
+  forall file__split_fields:file_descr. forall file__split_fields1:bool.
+  forall file__split_fields2:bool. forall file__split_fields3:count.
+  forall file__split_fields4:count. forall file__split_fields5:count.
+  forall file__split_fields6:bool. forall item:(int,character) farray.
+  forall last2:int. forall rest:int. forall buf:(int,character) farray.
+  forall p:int.
+  forall textio__get_line__get_chunk__eof_at_start__assume:bool.
+  forall o:integer. forall o1:integer. forall rest1:int.
+  forall result:(int,character) farray. forall buf1:(int,character) farray.
+  forall rest2:int. forall textio__memset__b:(int,character) farray.
+  forall result1:(int,character) farray. forall buf2:(int,character) farray.
+  (dynamic_property(1, 2147483647, to_rep1(item__first),
+  to_rep1(item__last)) -> (in_range4(last2) -> (in_range2(cur_position) ->
+  (in_range3(eof_ch) -> ((mod(eof, 256) = eof_ch) -> (in_range5(eof) ->
+  (in_range2(n) -> (((0 <= 2147483647) -> in_range4(rest)) -> (((n <= 80) and
+  ((((to_rep1(item__first) - 1) <= last2) and
   (last2 <= to_rep1(item__last))) and (((1 <  n) ->
   ((to_rep1(item__first) <= (last2 + 1)) and
   (((last2 + n) - 1) <= to_rep1(item__last)))) and (((end_of_file({
@@ -1546,12 +1135,8 @@ axiom H8 : ((n <= 80) and ((((to_rep1(item__first) - 1) <= last2) and
   rec__textio__file_type__page = file__split_fields5;
   rec__textio__file_type__is_regular_file = file__split_fields6 } },
   cur_position, the_file) = true) -> (to_rep1(item__first) <= last2)) and
-  (cur_position <= 10000)))))
-
-axiom H9 : ((0 <= 2147483647) -> in_range4(p))
-
-axiom H10 :
-  ((textio__get_line__get_chunk__eof_at_start__assume = end_of_file({
+  (cur_position <= 10000))))) -> (((0 <= 2147483647) -> in_range4(p)) ->
+  ((((textio__get_line__get_chunk__eof_at_start__assume = end_of_file({
   us_split_fields1 = { rec__textio__file_type__descr = file__split_fields;
   rec__textio__file_type__before_lm = file__split_fields1;
   rec__textio__file_type__before_lm_pm = file__split_fields2;
@@ -1568,49 +1153,20 @@ axiom H10 :
   rec__textio__file_type__line = file__split_fields4;
   rec__textio__file_type__page = file__split_fields5;
   rec__textio__file_type__is_regular_file = file__split_fields6 } },
-  cur_position, the_file) = eof)))
-
-axiom H11 :
-  (textio__get_line__get_chunk__eof_at_start__assume = eof_at_start)
-
-axiom H12 : (last2 = last_at_start)
-
-axiom H13 : in_range4(last_at_start)
-
-axiom H14 : (cur_position = cur_position_at_start)
-
-axiom H15 : in_range2(cur_position_at_start)
-
-axiom H16 : ((item = item_at_start) and (mk(to_rep1(item__first),
-  to_rep1(item__last)) = item_at_start1))
-
-axiom H17 : dynamic_property(1, 2147483647, to_rep1(first(item_at_start1)),
-  to_rep1(last(item_at_start1)))
-
-axiom H18 : (result = buf)
-
-axiom H19 : (buf1 = temp___588(32))
-
-axiom H20 : (not (n = 1))
-
-axiom H21 : (rest2 = rest)
-
-axiom H22 : (rest2 = rest1)
-
-axiom H23 : (to_rep1(o1) = 80)
-
-axiom H24 : (to_rep1(o) = 1)
-
-axiom H25 :
-  (forall idx5:int. (((to_rep1(o) <= idx5) and (idx5 <= to_rep1(o1))) ->
-  (((idx5 <  (to_rep1(o) + n)) ->
-  (to_rep((textio__memset__b[idx5])) = 10)) and
-  ((not (idx5 <  (to_rep1(o) + n))) ->
-  (to_rep((textio__memset__b[idx5])) = to_rep((buf1[idx5])))))))
-
-axiom H26 : (buf1 = result2)
-
-axiom H27 : (buf2 = slide(textio__memset__b, to_rep1(first(mk(1, 80))), 1))
-
- (* File "textio.adb", line 102, characters 0-0 *)
-goal WP_parameter_def : (to_rep((buf2[n])) = 10)
+  cur_position, the_file) = eof))) and
+  (textio__get_line__get_chunk__eof_at_start__assume = eof_at_start)) ->
+  ((last2 = last_at_start) -> (in_range4(last_at_start) ->
+  ((cur_position = cur_position_at_start) ->
+  (in_range2(cur_position_at_start) -> (((item = item_at_start) and
+  (mk(to_rep1(item__first), to_rep1(item__last)) = item_at_start1)) ->
+  (dynamic_property(1, 2147483647, to_rep1(first(item_at_start1)),
+  to_rep1(last(item_at_start1))) -> ((({ map__content = result } = {
+  map__content = buf }) and (buf1 = temp___660(32))) -> (((not (n = 1)) and
+  ((rest2 = rest) and (rest2 = rest1))) -> ((((to_rep1(o1) = 80) and
+  ((to_rep1(o) = 1) and
+  (forall idx:int. (((to_rep1(o) <= idx) and (idx <= to_rep1(o1))) ->
+  (((idx <  (to_rep1(o) + n)) and (to_rep((textio__memset__b[idx])) = 10)) or
+  ((not (idx <  (to_rep1(o) + n))) and
+  (to_rep((textio__memset__b[idx])) = to_rep((buf1[idx]))))))))) and
+  ((buf1 = result1) and (buf2 = slide(textio__memset__b, to_rep1(first(mk(1,
+  80))), 1)))) -> (to_rep((buf2[n])) = 10))))))))))))))))))))))

@@ -1203,49 +1203,24 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic z : t
-
-logic t1 : t
-
-logic o : bool
-
-logic o1 : t
-
-logic result : bool
-
-logic result1 : t
-
-logic t2 : t
-
-axiom H : in_range1(x)
-
-axiom H1 : in_range2(y)
-
-axiom H2 : in_range3(z)
-
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 340282346638528859811704183484516925440.0))
-
-axiom H3 : (le(neg(fliteral5), fliteral5) -> tqtisFinite(t1))
 
 logic fliteral6 : t
 
 axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
   (tqtreal(fliteral6) = 0.0e-1))
 
-axiom H4 : ((o = equal(x, fliteral6)) and ((o = true) <->
-  lt(abs(sub(NearestTiesToEven, x, fliteral6)), fliteral1)))
-
-axiom H5 : (((not (o = true)) -> (result = true)) and ((o = true) ->
-  (result = false)))
-
-axiom H6 : (result = true)
-
-axiom H7 : (result1 = t1)
-
-axiom H8 : (t2 = add(NearestTiesToEven, z, x))
-
  (* File "proof.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(mul(NearestTiesToEven, y, t2))
+goal WP_parameter_def :
+  (forall z:t. forall t1:t. forall o:bool. forall result:bool.
+  forall result1:t. forall t2:t. (in_range1(x) -> (in_range2(y) ->
+  (in_range3(z) -> ((le(neg(fliteral5), fliteral5) -> tqtisFinite(t1)) ->
+  ((((o = equal(x, fliteral6)) and ((o = true) <->
+  lt(abs(sub(NearestTiesToEven, x, fliteral6)), fliteral1))) and
+  (((not (o = true)) and (result = true)) or ((o = true) and
+  (result = false)))) -> ((result = true) -> (((result1 = t1) and
+  (t2 = add(NearestTiesToEven, z, x))) -> tqtisFinite(mul(NearestTiesToEven,
+  y, t2))))))))))

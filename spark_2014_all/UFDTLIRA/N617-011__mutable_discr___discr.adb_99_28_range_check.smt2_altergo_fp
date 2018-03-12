@@ -301,103 +301,20 @@ logic d2__attr__constrained : bool
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic d__split_fields : us_main_type
-
-logic d__split_discrs : natural
-
-logic d2__split_discrs : natural
-
-logic discr__p2__d__assume : natural
-
-logic discr__p2__d__assume1 : us_main_type
-
-logic discr__p2__d__assume2 : bool
-
-logic us : int
-
-logic temp___320 : natural
-
-logic temp___3201 : us_main_type
-
-logic temp___3202 : bool
-
-logic usq_ : natural
-
-logic usq_1 : us_main_type
-
-logic usq_2 : bool
-
-logic temp___322 : natural
-
-logic temp___3221 : us_main_type
-
-logic temp___3222 : bool
-
-logic temp___323 : natural
-
-logic temp___3231 : us_main_type
-
-logic temp___3232 : bool
-
-logic usq_3 : natural
-
-logic usq_4 : us_main_type
-
-logic usq_5 : bool
-
-logic temp___325 : natural
-
-logic temp___3251 : us_main_type
-
-logic temp___3252 : bool
-
-logic temp___326 : natural
-
-logic temp___3261 : us_main_type
-
-logic temp___3262 : bool
-
-logic result : us_main_type
-
-logic d__split_fields1 : us_main_type
-
-logic result1 : natural
-
-logic d__split_discrs1 : natural
-
-logic result2 : us_main_type
-
-logic d__split_fields2 : us_main_type
-
-logic result3 : natural
-
-logic d__split_discrs2 : natural
-
-logic result4 : us_main_type
-
-logic d__split_fields3 : us_main_type
-
-logic result5 : natural
-
-logic d__split_discrs3 : natural
-
-axiom H : in_range(c)
-
-axiom H1 : (({ us_split_discrs1 = { rec__private_discr__p_with_default__c =
-  discr__p2__d__assume }; us_split_fields1 = {
-  rec__private_discr__p_with_default = discr__p2__d__assume1 };
-  attr__constrained = discr__p2__d__assume2 } = new_with_default(c)) and
-  (to_rep(discr__p2__d__assume) = c))
-
-axiom H2 : (result = d__split_fields)
-
-axiom H3 : (d__split_fields1 = discr__p2__d__assume1)
-
-axiom H4 : (result1 = d__split_discrs)
-
-axiom H5 : (d__split_discrs1 = discr__p2__d__assume)
-
-axiom H6 : (d__attr__constrained = false)
-
  (* File "discr.adb", line 89, characters 0-0 *)
-goal WP_parameter_def : in_range(c)
+goal WP_parameter_def :
+  (forall d__split_fields:us_main_type. forall d__split_discrs:natural.
+  forall discr__p2__d__assume:natural.
+  forall discr__p2__d__assume1:us_main_type.
+  forall discr__p2__d__assume2:bool. forall result:us_main_type.
+  forall d__split_fields1:us_main_type. forall result1:natural.
+  forall d__split_discrs1:natural. (in_range(c) -> (((({ us_split_discrs1 = {
+  rec__private_discr__p_with_default__c = discr__p2__d__assume };
+  us_split_fields1 = { rec__private_discr__p_with_default =
+  discr__p2__d__assume1 }; attr__constrained = discr__p2__d__assume2
+  } = new_with_default(c)) and (to_rep(discr__p2__d__assume) = c)) and
+  (((result = d__split_fields) and
+  (d__split_fields1 = discr__p2__d__assume1)) and
+  (((result1 = d__split_discrs) and
+  (d__split_discrs1 = discr__p2__d__assume)) and
+  (d__attr__constrained = false)))) -> in_range(c))))

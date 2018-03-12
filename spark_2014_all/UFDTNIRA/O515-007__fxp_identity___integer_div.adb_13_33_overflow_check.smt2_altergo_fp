@@ -229,20 +229,8 @@ logic right : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-axiom H : in_range(right)
-
-axiom H1 : (0 <  right)
-
-axiom H2 : ((o = id((- 2147483648))) and (in_range(o) and
-  (o = (- 2147483648))))
-
-axiom H3 : (o1 = comp_div(o,right))
-
  (* File "integer_div.adb", line 9, characters 0-0 *)
-goal WP_parameter_def : in_range(o1)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. (in_range(right) -> ((0 <  right) ->
+  ((((o = id((- 2147483648))) and (in_range(o) and (o = (- 2147483648)))) and
+  (o1 = comp_div(o,right))) -> in_range(o1)))))

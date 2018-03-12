@@ -247,21 +247,9 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : in_range1(y)
-
-axiom H2 : (not (y = 0))
-
-axiom H3 : ((o = (y * comp_div(x,y))) and in_range((y * comp_div(x,y))))
-
-axiom H4 : (o1 = (o + comp_mod(x,y)))
-
  (* File "victor_divmod_rules.adb", line 138, characters 0-0 *)
-goal WP_parameter_def : in_range(o1)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. (in_range1(x) -> (in_range1(y) ->
+  ((not (y = 0)) -> ((((o = (y * comp_div(x,y))) and
+  in_range((y * comp_div(x,y)))) and (o1 = (o + comp_mod(x,y)))) ->
+  in_range(o1))))))

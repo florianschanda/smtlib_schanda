@@ -107,17 +107,7 @@ function my_integer__ref___projection(a: my_integer__ref) : my_integer =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic mi : int
-
-logic result : int
-
-logic mi1 : int
-
-axiom H : (result = mi)
-
-axiom H1 : (mi1 = 0)
-
-axiom H2 : in_range(mi1)
-
  (* File "integer_false_check.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (mi1 <  0)
+goal WP_parameter_def :
+  (forall mi:int. forall result:int. forall mi1:int. (((result = mi) and
+  (mi1 = 0)) -> (in_range(mi1) -> (mi1 <  0))))

@@ -151,19 +151,8 @@ axiom first_index__def_axiom : (first_index = one)
 
 axiom last_index__def_axiom : (last_index = lst)
 
-axiom H : in_range1(one)
-
-axiom H1 : in_range(lst)
-
-axiom H2 : (one = first_index)
-
-axiom H3 : in_range1(first_index)
-
-axiom H4 : (lst = last_index)
-
-axiom H5 : in_range(last_index)
-
-axiom H6 : (first_index <= last_index)
-
  (* File "use_quantif.ads", line 20, characters 0-0 *)
-goal WP_parameter_def : ((- 2147483648) <= first_index)
+goal WP_parameter_def : (in_range1(one) -> (in_range(lst) ->
+  ((one = first_index) -> (in_range1(first_index) -> ((lst = last_index) ->
+  (in_range(last_index) -> ((first_index <= last_index) ->
+  ((- 2147483648) <= first_index))))))))

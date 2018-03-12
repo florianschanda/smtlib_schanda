@@ -1072,39 +1072,20 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic res : bool
-
-logic o : t
-
-logic o1 : t
-
-logic result : bool
-
-logic res1 : bool
-
-axiom H : tqtisFinite(a)
-
-axiom H1 : tqtisFinite(b)
-
-axiom H2 : tqtisFinite(c)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 5800.0))
-
-axiom H3 : lt(mul(NearestTiesToEven, abs(a), abs(c)), mul(NearestTiesToEven,
-  fliteral1, abs(b)))
-
-axiom H4 : (result = res)
 
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.0e-1))
 
-axiom H5 : (((not eq(b, fliteral2)) -> (res1 = true)) and (eq(b,
-  fliteral2) -> (res1 = false)))
-
  (* File "floating_point.adb", line 232, characters 0-0 *)
-goal WP_parameter_def : (res1 = true)
+goal WP_parameter_def :
+  (forall res:bool. forall result:bool. forall res1:bool. (tqtisFinite(a) ->
+  (tqtisFinite(b) -> (tqtisFinite(c) -> (lt(mul(NearestTiesToEven, abs(a),
+  abs(c)), mul(NearestTiesToEven, fliteral1, abs(b))) -> (((result = res) and
+  (((not eq(b, fliteral2)) and (res1 = true)) or (eq(b, fliteral2) and
+  (res1 = false)))) -> (res1 = true)))))))

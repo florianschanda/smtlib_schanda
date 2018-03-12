@@ -160,37 +160,11 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : int
-
-logic o : poT
-
-logic us_self__compl : poT
-
-logic po : poT
-
-logic us_self__compl1 : poT
-
-logic result : poT
-
-logic po1 : poT
-
-logic result1 : int
-
-logic x1 : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range(x))
-
-axiom H1 : (o = po)
-
-axiom H2 : (o = us_self__compl)
-
-axiom H3 : (result = po)
-
-axiom H4 : (po1 = us_self__compl1)
-
-axiom H5 : (result1 = x)
-
-axiom H6 : (x1 = 1)
-
  (* File "p.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : (0 <  x1)
+goal WP_parameter_def :
+  (forall x:int. forall o:poT. forall us_self__compl:poT. forall po:poT.
+  forall us_self__compl1:poT. forall result:poT. forall po1:poT.
+  forall result1:int. forall x1:int. ((((- 2147483648) <= 2147483647) ->
+  in_range(x)) -> ((((o = po) and (o = us_self__compl)) and
+  ((result = po) and (po1 = us_self__compl1))) -> (((result1 = x) and
+  (x1 = 1)) -> (0 <  x1)))))

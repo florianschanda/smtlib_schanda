@@ -317,11 +317,6 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 axiom first__def_axiom : (first = c)
 
-logic us : int
-
-logic us1 : int
-
-axiom H : in_range(c)
-
  (* File "with_default.adb", line 126, characters 0-0 *)
-goal WP_parameter_def : dynamic_property(first, 2147483647, 0)
+goal WP_parameter_def : (in_range(c) -> dynamic_property(first, 2147483647,
+  0))

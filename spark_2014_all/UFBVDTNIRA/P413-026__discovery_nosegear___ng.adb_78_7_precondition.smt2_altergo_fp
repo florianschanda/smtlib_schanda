@@ -600,12 +600,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -617,6 +611,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -808,71 +808,30 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
-logic estimatedgroundvelocityisavailable : bool
+logic rliteral : t
 
-logic estimatedgroundvelocity : int
+axiom rliteral_axiom : (tqtint(rliteral) = 100)
 
-logic prevtime : t
+logic rliteral1 : t
 
-logic prevcount : t
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 5)
 
-logic currtime : t
+logic rliteral2 : t
 
-logic thistime : t
-
-logic thiscount : t
-
-logic estimatedgroundvelocityisavailable1 : bool
-
-logic result : t
-
-logic currtime1 : t
-
-logic result1 : t
-
-logic thistime1 : t
-
-logic result2 : t
-
-logic thiscount1 : t
-
-logic estimatedgroundvelocityisavailable2 : bool
-
-logic estimatedgroundvelocityisavailable3 : bool
-
-logic estimatedgroundvelocity1 : int
-
-axiom H : in_range1(estimatedgroundvelocity)
-
-axiom H1 : true
-
-axiom H2 : true
-
-axiom H3 : (result = currtime)
-
-axiom H4 : (currtime1 = of_int(100))
-
-axiom H5 : true
-
-axiom H6 : (result1 = thistime)
-
-axiom H7 : (thistime1 = of_int(5))
-
-axiom H8 : true
-
-axiom H9 : (result2 = thiscount)
-
-axiom H10 : (thiscount1 = of_int(20))
-
-axiom H11 : true
-
-axiom H12 : (not (thistime1 = prevtime))
-
-axiom H13 :
-  (estimatedgroundvelocityisavailable2 = estimatedgroundvelocityisavailable)
-
-axiom H14 :
-  (estimatedgroundvelocityisavailable2 = estimatedgroundvelocityisavailable1)
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 20)
 
  (* File "ng.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : (not (thistime1 = prevtime))
+goal WP_parameter_def :
+  (forall estimatedgroundvelocityisavailable:bool.
+  forall estimatedgroundvelocity:int. forall prevtime:t. forall currtime:t.
+  forall thistime:t. forall thiscount:t.
+  forall estimatedgroundvelocityisavailable1:bool. forall result:t.
+  forall currtime1:t. forall result1:t. forall thistime1:t. forall result2:t.
+  forall thiscount1:t. forall estimatedgroundvelocityisavailable2:bool.
+  (in_range1(estimatedgroundvelocity) -> (((result = currtime) and
+  (currtime1 = rliteral)) -> (((result1 = thistime) and
+  (thistime1 = rliteral1)) -> (((result2 = thiscount) and
+  (thiscount1 = rliteral2)) -> (((not (thistime1 = prevtime)) and
+  ((estimatedgroundvelocityisavailable2 = estimatedgroundvelocityisavailable) and
+  (estimatedgroundvelocityisavailable2 = estimatedgroundvelocityisavailable1))) ->
+  (not (thistime1 = prevtime))))))))

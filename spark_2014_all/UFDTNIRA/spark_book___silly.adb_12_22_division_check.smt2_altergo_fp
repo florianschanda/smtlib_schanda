@@ -251,21 +251,8 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic result__ : int
-
-logic o : int
-
-logic o1 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : in_range1(y)
-
-axiom H2 : ((1 <= 2147483647) -> in_range1(result__))
-
-axiom H3 : in_range1(comp_div((x + y),2))
-
-axiom H4 : (not (10 <  x))
-
  (* File "silly.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (not (2 = 0))
+goal WP_parameter_def :
+  (forall result__:int. (in_range1(x) -> (in_range1(y) ->
+  (((1 <= 2147483647) -> in_range1(result__)) ->
+  (in_range1(comp_div((x + y),2)) -> ((not (10 <  x)) -> (not (2 = 0))))))))

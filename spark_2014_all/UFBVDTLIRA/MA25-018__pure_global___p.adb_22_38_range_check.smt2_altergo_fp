@@ -691,31 +691,8 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic z : int
-
-logic l : t
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : t
-
-logic o3 : int
-
-logic result : t
-
-logic l1 : t
-
-axiom H : in_range(x)
-
-axiom H1 : in_range(y)
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range(z))
-
-axiom H3 : true
-
-axiom H4 : ((o = (x + y)) and in_range((x + y)))
-
  (* File "p.adb", line 12, characters 0-0 *)
-goal WP_parameter_def : uint_in_range(o)
+goal WP_parameter_def :
+  (forall z:int. forall o:int. (in_range(x) -> (in_range(y) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(z)) -> (((o = (x + y)) and
+  in_range((x + y))) -> uint_in_range(o))))))

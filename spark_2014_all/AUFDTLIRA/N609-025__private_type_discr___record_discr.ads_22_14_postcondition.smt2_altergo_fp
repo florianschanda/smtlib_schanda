@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -292,24 +292,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> (int,natural) farray
-
-axiom concat_def :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : natural, int -> (int,natural) farray
-
-axiom singleton_def :
-  (forall v:natural.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,natural) farray, int, int, (int,natural) farray, int,
   int -> bool
 
@@ -320,17 +302,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -340,37 +322,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type integer
 
@@ -1196,122 +1150,64 @@ axiom init__def_axiom : ({ us_split_discrs4 = {
   elts3 = slide(a, to_rep1(first(a1)), 1); rt3 = mk3(1, to_rep1(last(a1))) }
   } })))
 
-logic record_discr__search__result : bool
-
-logic record_discr__search__result1 : us_main_type
-
-logic us : int
-
-logic o : int
-
-logic o1 : natural
-
-logic o2 : (int,natural) farray
-
-logic o3 : t3
-
-logic o4 : (int,natural) farray
-
-logic o5 : t3
-
-logic o6 : natural
-
-logic o7 : natural
-
-logic o8 : (int,natural) farray
-
-logic o9 : t3
-
-logic o10 : natural
-
-logic o11 : (int,natural) farray
-
-logic o12 : t1
-
-logic o13 : natural
-
-logic o14 : (int,natural) farray
-
-logic o15 : t1
-
-logic record_discr__search__init__assume : natural
-
-logic record_discr__search__init__assume1 : (int,natural) farray
-
-logic record_discr__search__init__assume2 : t2
-
-logic o16 : bool
-
-logic o17 : us_main_type
-
-logic temp___260 : int
-
-logic i : int
-
-logic result : bool
-
-logic result1 : us_main_type
-
-logic record_discr__search__result2 : bool
-
-logic record_discr__search__result3 : us_main_type
-
-logic record_discr__search__result4 : bool
-
-logic record_discr__search__result5 : us_main_type
-
-logic record_discr__search__result6 : bool
-
-logic record_discr__search__result7 : us_main_type
-
-logic record_discr__search__result8 : bool
-
-logic record_discr__search__result9 : us_main_type
-
-logic record_discr__search__result10 : bool
-
-logic record_discr__search__result11 : us_main_type
-
-logic result2 : bool
-
-logic result3 : us_main_type
-
-axiom H : dynamic_property(1, 2147483647, to_rep1(first(a1)),
-  to_rep1(last(a1)))
-
-axiom H1 : in_range1(e)
-
-axiom H2 : ((to_rep1(first(a1)) = 1) and (0 <= to_rep1(last(a1))))
-
-axiom H3 : ((((us = to_rep1(last(a1))) and in_range1(to_rep1(last(a1)))) and
-  (((((((((((to_rep1(first(a1)) <= to_rep1(last(a1))) ->
-  (((1 <= to_rep1(last(a1))) ->
-  (((to_rep1(last(a1)) - to_rep1(first(a1))) + 1) = ((to_rep1(last(a1)) - 1) + 1))) and
-  ((not (1 <= to_rep1(last(a1)))) ->
-  (((to_rep1(last(a1)) - to_rep1(first(a1))) + 1) = 0)))) and
-  ((not (to_rep1(first(a1)) <= to_rep1(last(a1)))) ->
-  ((1 <= to_rep1(last(a1))) -> (0 = ((to_rep1(last(a1)) - 1) + 1))))) and
-  ((slide(a, to_rep1(first(a1)), 1) = o2) and (mk3(1,
-  to_rep1(last(a1))) = o3))) and ((o4 = o2) and (o5 = o3))) and
-  (((((o = to_rep1(last(a1))) and in_range1(to_rep1(last(a1)))) and
-  (to_rep(o1) = o)) and (o1 = o6)) and ((o7 = o6) and ((o8 = o4) and
-  (o9 = o5))))) and ({ us_split_discrs3 = {
+ (* File "private_record.ads", line 2, characters 0-0 *)
+goal WP_parameter_def :
+  (forall record_discr__search__result:bool.
+  forall record_discr__search__result1:us_main_type. forall us:int.
+  forall o:int. forall o1:natural. forall o2:(int,natural) farray.
+  forall o3:t3. forall o4:(int,natural) farray. forall o5:t3.
+  forall o6:natural. forall o7:natural. forall o8:(int,natural) farray.
+  forall o9:t3. forall o10:natural. forall o11:(int,natural) farray.
+  forall o12:t1. forall o13:natural. forall o14:(int,natural) farray.
+  forall o15:t1. forall record_discr__search__init__assume:natural.
+  forall record_discr__search__init__assume1:(int,natural) farray.
+  forall record_discr__search__init__assume2:t2. forall o16:bool.
+  forall o17:us_main_type. forall result:bool. forall result1:us_main_type.
+  forall record_discr__search__result2:bool.
+  forall record_discr__search__result3:us_main_type.
+  forall record_discr__search__result4:bool.
+  forall record_discr__search__result5:us_main_type.
+  forall record_discr__search__result6:bool.
+  forall record_discr__search__result7:us_main_type.
+  forall record_discr__search__result8:bool.
+  forall record_discr__search__result9:us_main_type.
+  forall record_discr__search__result10:us_rep.
+  (forall result2:bool. forall result3:us_main_type. ((dynamic_property(1,
+  2147483647, to_rep1(first(a1)), to_rep1(last(a1))) and (in_range1(e) and
+  (((to_rep1(first(a1)) = 1) and (0 <= to_rep1(last(a1)))) and
+  (((((us = to_rep1(last(a1))) and in_range1(to_rep1(last(a1)))) and
+  (((((((((((to_rep1(first(a1)) <= to_rep1(last(a1))) and
+  (((1 <= to_rep1(last(a1))) and
+  (((to_rep1(last(a1)) - to_rep1(first(a1))) + 1) = ((to_rep1(last(a1)) - 1) + 1))) or
+  ((not (1 <= to_rep1(last(a1)))) and
+  (((to_rep1(last(a1)) - to_rep1(first(a1))) + 1) = 0)))) or
+  ((not (to_rep1(first(a1)) <= to_rep1(last(a1)))) and
+  (((1 <= to_rep1(last(a1))) and (0 = ((to_rep1(last(a1)) - 1) + 1))) or
+  (not (1 <= to_rep1(last(a1))))))) and ((slide(a, to_rep1(first(a1)),
+  1) = o2) and (mk3(1, to_rep1(last(a1))) = o3))) and ((o4 = o2) and
+  (o5 = o3))) and (((((o = to_rep1(last(a1))) and
+  in_range1(to_rep1(last(a1)))) and (to_rep(o1) = o)) and (o1 = o6)) and
+  ((o7 = o6) and ((o8 = o4) and (o9 = o5))))) and ({ us_split_discrs3 = {
   rec__record_discr__interm_result__upto = o10 }; us_split_fields3 = {
   rec__record_discr__interm_result__to_search = { elts1 = o11; rt1 = o12 } }
   } = to_base1({ us_split_discrs5 = {
   rec__record_discr__interm_result__upto = o7 }; us_split_fields7 = {
   rec__record_discr__interm_result__to_search2 = { elts3 = o8; rt3 = o9 } }
-  }))) and ((o13 = o10) and ((o14 = o11) and (o15 = o12)))) and ({
-  us_split_discrs4 = { rec__record_discr__interm_result__upto =
+  }))) and ({ us_split_discrs3 = { rec__record_discr__interm_result__upto =
+  o13 }; us_split_fields3 = { rec__record_discr__interm_result__to_search = {
+  elts1 = o14; rt1 = o15 } } } = { us_split_discrs3 = {
+  rec__record_discr__interm_result__upto = o10 }; us_split_fields3 = {
+  rec__record_discr__interm_result__to_search = { elts1 = o11; rt1 = o12 } }
+  })) and ({ us_split_discrs4 = { rec__record_discr__interm_result__upto =
   record_discr__search__init__assume }; us_split_fields5 = {
   rec__record_discr__interm_result__to_search1 = { elts2 =
   record_discr__search__init__assume1; rt2 =
   record_discr__search__init__assume2 } } } = of_base({ us_split_discrs3 = {
   rec__record_discr__interm_result__upto = o13 }; us_split_fields3 = {
   rec__record_discr__interm_result__to_search = { elts1 = o14; rt1 = o15 } }
-  }))) and ((record_discr__search__init__assume = init) and
-  ((record_discr__search__init__assume1 = init1) and
-  (record_discr__search__init__assume2 = init2)))) and
+  }))) and ((init = record_discr__search__init__assume) and
+  ((init1 = record_discr__search__init__assume1) and
+  (init2 = record_discr__search__init__assume2)))) and
   (((to_rep1(last(a1)) = to_rep(((to_base({ us_split_discrs4 = {
   rec__record_discr__interm_result__upto = init }; us_split_fields5 = {
   rec__record_discr__interm_result__to_search1 = { elts2 = init1; rt2 = init2
@@ -1320,15 +1216,19 @@ axiom H3 : ((((us = to_rep1(last(a1))) and in_range1(to_rep1(last(a1)))) and
   to_rep1(last4(init2))) and ((to_rep1(first4(init2)) = 1) and
   (to_rep1(last4(init2)) = to_rep1(last(a1)))))) and
   ((((record_discr__search__result4 = record_discr__search__result2) and
-  (record_discr__search__result5 = record_discr__search__result3)) and
-  ((record_discr__search__result6 = record_discr__search__result2) and
-  (record_discr__search__result7 = record_discr__search__result3))) and ((({
-  us_split_discrs1 = { rec__private_record__result_ty__found = o16 };
+  (record_discr__search__result5 = record_discr__search__result3)) and ({
+  us_split_discrs1 = { rec__private_record__result_ty__found =
+  record_discr__search__result6 }; us_split_fields1 = {
+  rec__private_record__result_ty = record_discr__search__result7 } } = {
+  us_split_discrs1 = { rec__private_record__result_ty__found =
+  record_discr__search__result2 }; us_split_fields1 = {
+  rec__private_record__result_ty = record_discr__search__result3 } })) and
+  ((({ us_split_discrs1 = { rec__private_record__result_ty__found = o16 };
   us_split_fields1 = { rec__private_record__result_ty = o17 }
   } = search_upto(to_base({ us_split_discrs4 = {
   rec__record_discr__interm_result__upto = init }; us_split_fields5 = {
   rec__record_discr__interm_result__to_search1 = { elts2 = init1; rt2 = init2
-  } } }), e)) and (((o16 = true) -> ((get_content({ us_split_discrs1 = {
+  } } }), e)) and (((o16 = true) and ((get_content({ us_split_discrs1 = {
   rec__private_record__result_ty__found = o16 }; us_split_fields1 = {
   rec__private_record__result_ty = o17 } }) <= to_rep(((to_base({
   us_split_discrs4 = { rec__record_discr__interm_result__upto = init };
@@ -1341,34 +1241,39 @@ axiom H3 : ((((us = to_rep1(last(a1))) and in_range1(to_rep1(last(a1)))) and
   } }
   })).us_split_fields3).rec__record_discr__interm_result__to_search).elts1[get_content({
   us_split_discrs1 = { rec__private_record__result_ty__found = o16 };
-  us_split_fields1 = { rec__private_record__result_ty = o17 }
-  })])) = e))) and ((not (o16 = true)) ->
-  (forall i1:int. (((1 <= i1) and (i1 <= to_rep(((to_base({
-  us_split_discrs4 = { rec__record_discr__interm_result__upto = init };
-  us_split_fields5 = { rec__record_discr__interm_result__to_search1 = {
-  elts2 = init1; rt2 = init2 } }
-  })).us_split_discrs3).rec__record_discr__interm_result__upto))) ->
+  us_split_fields1 = { rec__private_record__result_ty = o17 } })])) = e))) or
+  ((not (o16 = true)) and
+  (forall i:int. (((1 <= i) and (i <= to_rep(((to_base({ us_split_discrs4 = {
+  rec__record_discr__interm_result__upto = init }; us_split_fields5 = {
+  rec__record_discr__interm_result__to_search1 = { elts2 = init1; rt2 = init2
+  } } })).us_split_discrs3).rec__record_discr__interm_result__upto))) ->
   (not (to_rep(((((to_base({ us_split_discrs4 = {
   rec__record_discr__interm_result__upto = init }; us_split_fields5 = {
   rec__record_discr__interm_result__to_search1 = { elts2 = init1; rt2 = init2
   } }
-  })).us_split_fields3).rec__record_discr__interm_result__to_search).elts1[i1])) = e))))))) and
+  })).us_split_fields3).rec__record_discr__interm_result__to_search).elts1[i])) = e))))))) and
   (((result = record_discr__search__result) and
-  (result1 = record_discr__search__result1)) and
-  ((record_discr__search__result2 = o16) and
-  (record_discr__search__result3 = o17)))))))) and
-  (((record_discr__search__result8 = record_discr__search__result4) and
-  (record_discr__search__result9 = record_discr__search__result5)) and
-  ((record_discr__search__result10 = record_discr__search__result6) and
-  (record_discr__search__result11 = record_discr__search__result7))))
-
-axiom H4 : ((result2 = record_discr__search__result8) and
-  (result3 = record_discr__search__result9))
-
-axiom H5 : (record_discr__search__result8 = true)
-
- (* File "private_record.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : (to_rep((a[get_content({ us_split_discrs1 = {
+  (result1 = record_discr__search__result1)) and ({ us_split_discrs1 = {
+  rec__private_record__result_ty__found = record_discr__search__result2 };
+  us_split_fields1 = { rec__private_record__result_ty =
+  record_discr__search__result3 } } = { us_split_discrs1 = {
+  rec__private_record__result_ty__found = o16 }; us_split_fields1 = {
+  rec__private_record__result_ty = o17 } }))))))) and (({
+  result_ty__content = { us_split_discrs1 = {
   rec__private_record__result_ty__found = record_discr__search__result8 };
   us_split_fields1 = { rec__private_record__result_ty =
-  record_discr__search__result9 } })])) = e)
+  record_discr__search__result9 } } } = { result_ty__content = {
+  us_split_discrs1 = { rec__private_record__result_ty__found =
+  record_discr__search__result4 }; us_split_fields1 = {
+  rec__private_record__result_ty = record_discr__search__result5 } } }) and
+  (record_discr__search__result10 = { us_split_discrs1 = {
+  rec__private_record__result_ty__found = record_discr__search__result6 };
+  us_split_fields1 = { rec__private_record__result_ty =
+  record_discr__search__result7 } }))) and
+  ((result2 = record_discr__search__result8) and
+  (result3 = record_discr__search__result9)))))) ->
+  ((record_discr__search__result8 = true) -> (to_rep((a[get_content({
+  us_split_discrs1 = { rec__private_record__result_ty__found =
+  record_discr__search__result8 }; us_split_fields1 = {
+  rec__private_record__result_ty = record_discr__search__result9 }
+  })])) = e)))))

@@ -528,12 +528,7 @@ axiom foo__def_axiom :
   rec__dic__pr_record_t2__y = par1 } }, dic__g) = true) <->
   ((to_rep(par) + to_rep(par1)) = dic__g))))
 
-logic a__split_fields : integer
-
-logic a__split_fields1 : integer
-
-logic o : int
-
  (* File "dic.adb", line 13, characters 0-0 *)
 goal WP_parameter_def :
-  in_range((to_rep(a__split_fields) + to_rep(a__split_fields1)))
+  (forall a__split_fields:integer. forall a__split_fields1:integer.
+  in_range((to_rep(a__split_fields) + to_rep(a__split_fields1))))

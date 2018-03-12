@@ -113,7 +113,7 @@
 (declare-fun of_real2 (Real) Int)
 (declare-datatypes () ((salary__ref (mk_salary__ref (salary__content tmoneyB)))))
 (define-fun salary__ref___projection ((a salary__ref)) tmoneyB (salary__content a))
-(define-fun dynamic_invariant ((temp___expr_147 tmoneyB) (temp___is_init_144 Bool) (temp___skip_constant_145 Bool) (temp___do_toplevel_146 Bool)) Bool (=> (or (= temp___is_init_144 true) (<= first 9999999999)) (dynamic_property first 9999999999 (to_fixed temp___expr_147))))
+(define-fun dynamic_invariant ((temp___expr_172 tmoneyB) (temp___is_init_168 Bool) (temp___skip_constant_169 Bool) (temp___do_toplevel_170 Bool) (temp___do_typ_inv_171 Bool)) Bool (=> (or (= temp___is_init_168 true) (<= first 9999999999)) (dynamic_property first 9999999999 (to_fixed temp___expr_172))))
 (assert (= first (to_fixed1 (of_fixed1 (of_real1 (- (/ 9999999999.0 100.0)))))))
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)

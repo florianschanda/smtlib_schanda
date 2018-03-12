@@ -928,12 +928,6 @@ axiom bv_max_to_uint1 :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int2 : bool -> int
 
 axiom to_int_def2 :
@@ -945,6 +939,12 @@ logic of_int2 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int2(i)]. (((i = 0) -> (of_int2(i) = false)) and
   ((not (i = 0)) -> (of_int2(i) = true))))
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1053,9 +1053,13 @@ axiom toSmall_to_uint :
 
 axiom toBig_to_uint : (forall x:t. (tqtint(x) = tqtint1(toBig(x))))
 
+logic rliteral1 : t1
+
+axiom rliteral_axiom1 : (tqtint1(rliteral1) = 255)
+
 axiom readreglow8__post_axiom :
   (forall reg:t1 [readreglow8(reg)]. (readreglow8(reg) = toSmall(bw_and1(reg,
-  of_int1(255)))))
+  rliteral1))))
 
 logic regold : t1
 
@@ -1069,61 +1073,32 @@ logic val__ : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic x86__writereglow8post__result : bool
+logic rliteral2 : t1
 
-logic o : t
-
-logic o1 : bool
-
-logic o2 : bool
-
-logic result : bool
-
-logic x86__writereglow8post__result1 : bool
-
-logic x86__writereglow8post__result2 : bool
-
-logic x86__writereglow8post__result3 : bool
-
-logic x86__writereglow8post__result4 : bool
-
-logic x86__writereglow8post__result5 : bool
-
-logic result1 : bool
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : true
-
-axiom H3 : (x86__writereglow8post__result1 = x86__writereglow8post__result2)
-
-axiom H4 : (x86__writereglow8post__result3 = x86__writereglow8post__result1)
-
-axiom H5 : ((o = readreglow8(regnew)) and (o = toSmall(bw_and1(regnew,
-  of_int1(255)))))
-
-axiom H6 : (((o = val__) -> (o1 = true)) and ((not (o = val__)) ->
-  (o1 = false)))
-
-axiom H7 : (((bw_and1(regnew,
-  of_int1(18446744073709551360)) = bw_and1(regold,
-  of_int1(18446744073709551360))) -> (o2 = match_bool(o1, true, false))) and
-  ((not (bw_and1(regnew, of_int1(18446744073709551360)) = bw_and1(regold,
-  of_int1(18446744073709551360)))) -> (o2 = match_bool(o1, false, false))))
-
-axiom H8 : (result = x86__writereglow8post__result)
-
-axiom H9 : (x86__writereglow8post__result1 = o2)
-
-axiom H10 : (x86__writereglow8post__result4 = x86__writereglow8post__result2)
-
-axiom H11 : (x86__writereglow8post__result5 = x86__writereglow8post__result3)
-
-axiom H12 : (result1 = x86__writereglow8post__result4)
-
-axiom H13 : (x86__writereglow8post__result4 = true)
+axiom rliteral_axiom2 : (tqtint1(rliteral2) = 18446744073709551360)
 
  (* File "x86.ads", line 115, characters 0-0 *)
-goal WP_parameter_def : (readreglow8(regnew) = val__)
+goal WP_parameter_def :
+  (forall x86__writereglow8post__result:bool. forall o:t. forall o1:bool.
+  forall o2:bool. forall result:bool.
+  forall x86__writereglow8post__result1:bool.
+  forall x86__writereglow8post__result2:bool.
+  forall x86__writereglow8post__result3:bool.
+  forall x86__writereglow8post__result4:bool.
+  forall x86__writereglow8post__result5:bool.
+  (forall result1:bool.
+  ((((((x86__writereglow8post__result1 = x86__writereglow8post__result2) and
+  (x86__writereglow8post__result3 = x86__writereglow8post__result1)) and
+  (((((o = readreglow8(regnew)) and (o = toSmall(bw_and1(regnew,
+  rliteral1)))) and (((o = val__) and (o1 = true)) or ((not (o = val__)) and
+  (o1 = false)))) and (((bw_and1(regnew, rliteral2) = bw_and1(regold,
+  rliteral2)) and (o2 = match_bool(o1, true, false))) or
+  ((not (bw_and1(regnew, rliteral2) = bw_and1(regold, rliteral2))) and
+  (o2 = match_bool(o1, false, false))))) and
+  ((result = x86__writereglow8post__result) and
+  (x86__writereglow8post__result1 = o2)))) and
+  ((x86__writereglow8post__result4 = x86__writereglow8post__result2) and
+  (x86__writereglow8post__result5 = x86__writereglow8post__result3))) and
+  (result1 = x86__writereglow8post__result4)) ->
+  ((x86__writereglow8post__result4 = true) ->
+  (readreglow8(regnew) = val__)))))

@@ -113,11 +113,5 @@ logic f_rec : int -> int
 
 logic f_rec__function_guard : int, int -> prop
 
-logic o : int
-
-axiom H : in_range(x)
-
-axiom H1 : (not (x = 0))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((x - 1))
+goal WP_parameter_def : (in_range(x) -> ((not (x = 0)) -> in_range((x - 1))))

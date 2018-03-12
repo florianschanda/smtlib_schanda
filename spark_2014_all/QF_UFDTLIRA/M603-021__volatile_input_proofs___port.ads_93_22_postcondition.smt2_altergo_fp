@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -69,6 +63,12 @@ axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
 
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
 logic attr__ATTRIBUTE_IMAGE : bool -> us_image
@@ -80,34 +80,6 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
-
-logic x : bool
-
-logic vb : bool
-
-logic result : bool
-
-logic x1 : bool
-
-logic vb1 : bool
-
-logic x2 : bool
-
-logic vb2 : bool
-
-logic x3 : bool
-
-axiom H : (result = x)
-
-axiom H1 : (x1 = vb)
-
-axiom H2 : (x1 = x2)
-
-axiom H3 : (vb1 = vb)
-
-axiom H4 : (x3 = x1)
-
-axiom H5 : (vb2 = vb)
 
  (* File "port.ads", line 21, characters 0-0 *)
 goal WP_parameter_def : true

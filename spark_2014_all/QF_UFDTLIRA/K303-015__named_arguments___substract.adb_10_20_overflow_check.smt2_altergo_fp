@@ -117,17 +117,6 @@ logic third : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-axiom H : in_range(first)
-
-axiom H1 : in_range(second)
-
-axiom H2 : in_range(third)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((first + second))
+goal WP_parameter_def : (in_range(first) -> (in_range(second) ->
+  (in_range(third) -> in_range((first + second)))))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -436,33 +436,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep1) farray, int, int, (int,us_rep1) farray, int,
-  int -> (int,us_rep1) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep1) farray. forall b:(int,us_rep1) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep1, int -> (int,us_rep1) farray
-
-axiom singleton_def :
-  (forall v:extended_index_type. forall v1:extended_index_type.
-  forall v2:extended_index_type. forall v3:position_type.
-  (forall i:int [(singleton({ us_split_fields1 = {
-  rec__binary_trees__cell__left = v; rec__binary_trees__cell__right = v1;
-  rec__binary_trees__cell__parent = v2; rec__binary_trees__cell__position =
-  v3 } }, i)[i])]. ((singleton({ us_split_fields1 = {
-  rec__binary_trees__cell__left = v; rec__binary_trees__cell__right = v1;
-  rec__binary_trees__cell__parent = v2; rec__binary_trees__cell__position =
-  v3 } }, i)[i]) = { us_split_fields1 = { rec__binary_trees__cell__left = v;
-  rec__binary_trees__cell__right = v1; rec__binary_trees__cell__parent = v2;
-  rec__binary_trees__cell__position = v3 } })))
-
 logic bool_eq7 : (int,us_rep1) farray, int, int, (int,us_rep1) farray, int,
   int -> bool
 
@@ -473,17 +446,17 @@ axiom bool_eq_def5 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) and (bool_eq6((a[temp___idx_133]),
-  (b[((b__first - a__first) + temp___idx_133)])) = true)) or
-  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (forall temp___idx_155:int. ((((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) and (bool_eq6((a[temp___idx_155]),
+  (b[((b__first - a__first) + temp___idx_155)])) = true)) or
+  (not ((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) -> (bool_eq6((a[temp___idx_133]),
-  (b[((b__first - a__first) + temp___idx_133)])) = true))))) -> (bool_eq7(a,
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) -> (bool_eq6((a[temp___idx_155]),
+  (b[((b__first - a__first) + temp___idx_155)])) = true))))) -> (bool_eq7(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -493,9 +466,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) -> (bool_eq6((a[temp___idx_133]),
-  (b[((b__first - a__first) + temp___idx_133)])) = true)))))))
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) -> (bool_eq6((a[temp___idx_155]),
+  (b[((b__first - a__first) + temp___idx_155)])) = true)))))))
 
 logic dummy8 : (int,us_rep1) farray
 
@@ -682,24 +655,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> (int,natural) farray
-
-axiom concat_def1 :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : natural, int -> (int,natural) farray
-
-axiom singleton_def1 :
-  (forall v:natural.
-  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq10 : (int,natural) farray, int, int, (int,natural) farray, int,
   int -> bool
 
@@ -710,17 +665,17 @@ axiom bool_eq_def8 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_134:int. ((((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) and
-  (to_rep2((a[temp___idx_134])) = to_rep2((b[((b__first - a__first) + temp___idx_134)])))) or
-  (not ((a__first <= temp___idx_134) and (temp___idx_134 <= a__last)))))) ->
+  (forall temp___idx_156:int. ((((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) and
+  (to_rep2((a[temp___idx_156])) = to_rep2((b[((b__first - a__first) + temp___idx_156)])))) or
+  (not ((a__first <= temp___idx_156) and (temp___idx_156 <= a__last)))))) ->
   (bool_eq10(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_134:int. (((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) ->
-  (to_rep2((a[temp___idx_134])) = to_rep2((b[((b__first - a__first) + temp___idx_134)]))))))) ->
+  (forall temp___idx_156:int. (((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) ->
+  (to_rep2((a[temp___idx_156])) = to_rep2((b[((b__first - a__first) + temp___idx_156)]))))))) ->
   (bool_eq10(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -730,37 +685,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_134:int. (((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) ->
-  (to_rep2((a[temp___idx_134])) = to_rep2((b[((b__first - a__first) + temp___idx_134)])))))))))
-
-logic compare : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq10(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq10(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep2((a[(i + 1)])) <  to_rep2((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq10(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep2((b[(i + 1)])) <  to_rep2((a[(j + 1)]))))))))))))
+  (forall temp___idx_156:int. (((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) ->
+  (to_rep2((a[temp___idx_156])) = to_rep2((b[((b__first - a__first) + temp___idx_156)])))))))))
 
 logic dummy12 : (int,natural) farray
 
@@ -974,12 +901,7 @@ logic ordered_leafs : us_rep2, int, (int,natural) farray -> bool
 logic ordered_leafs__function_guard : bool, us_rep2, int,
   (int,natural) farray -> prop
 
-logic temp___390 : int -> (int,natural) farray
-
-axiom def_axiom :
-  (forall temp___392:int.
-  (forall temp___393:int.
-  ((temp___390(temp___392)[temp___393]) = of_rep2(temp___392))))
+logic temp___434 : int -> (int,natural) farray
 
 logic values : us_rep3 -> us_rep
 
@@ -1068,24 +990,6 @@ axiom slide_def2 :
   (forall i:int [(slide2(a, old_first, new_first)[i])]. ((slide2(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat2 : (int,color_type) farray, int, int, (int,color_type) farray,
-  int, int -> (int,color_type) farray
-
-axiom concat_def2 :
-  (forall a:(int,color_type) farray. forall b:(int,color_type) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat2(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat2(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat2(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton2 : color_type, int -> (int,color_type) farray
-
-axiom singleton_def2 :
-  (forall v:color_type.
-  (forall i:int [(singleton2(v, i)[i])]. ((singleton2(v, i)[i]) = v)))
-
 logic bool_eq14 : (int,color_type) farray, int, int, (int,color_type) farray,
   int, int -> bool
 
@@ -1096,17 +1000,17 @@ axiom bool_eq_def12 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_135:int. ((((a__first <= temp___idx_135) and
-  (temp___idx_135 <= a__last)) and
-  (to_rep3((a[temp___idx_135])) = to_rep3((b[((b__first - a__first) + temp___idx_135)])))) or
-  (not ((a__first <= temp___idx_135) and (temp___idx_135 <= a__last)))))) ->
+  (forall temp___idx_157:int. ((((a__first <= temp___idx_157) and
+  (temp___idx_157 <= a__last)) and
+  (to_rep3((a[temp___idx_157])) = to_rep3((b[((b__first - a__first) + temp___idx_157)])))) or
+  (not ((a__first <= temp___idx_157) and (temp___idx_157 <= a__last)))))) ->
   (bool_eq14(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_135:int. (((a__first <= temp___idx_135) and
-  (temp___idx_135 <= a__last)) ->
-  (to_rep3((a[temp___idx_135])) = to_rep3((b[((b__first - a__first) + temp___idx_135)]))))))) ->
+  (forall temp___idx_157:int. (((a__first <= temp___idx_157) and
+  (temp___idx_157 <= a__last)) ->
+  (to_rep3((a[temp___idx_157])) = to_rep3((b[((b__first - a__first) + temp___idx_157)]))))))) ->
   (bool_eq14(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev2 :
@@ -1116,37 +1020,9 @@ axiom bool_eq_rev2 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_135:int. (((a__first <= temp___idx_135) and
-  (temp___idx_135 <= a__last)) ->
-  (to_rep3((a[temp___idx_135])) = to_rep3((b[((b__first - a__first) + temp___idx_135)])))))))))
-
-logic compare1 : (int,color_type) farray, int, int, (int,color_type) farray,
-  int, int -> int
-
-axiom compare_def_eq1 :
-  (forall a:(int,color_type) farray. forall b:(int,color_type) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq14(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt1 :
-  (forall a:(int,color_type) farray. forall b:(int,color_type) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq14(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep3((a[(i + 1)])) <  to_rep3((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt1 :
-  (forall a:(int,color_type) farray. forall b:(int,color_type) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare1(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq14(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep3((b[(i + 1)])) <  to_rep3((a[(j + 1)]))))))))))))
+  (forall temp___idx_157:int. (((a__first <= temp___idx_157) and
+  (temp___idx_157 <= a__last)) ->
+  (to_rep3((a[temp___idx_157])) = to_rep3((b[((b__first - a__first) + temp___idx_157)])))))))))
 
 logic dummy19 : (int,color_type) farray
 
@@ -1301,12 +1177,7 @@ logic invariant__ : us_rep4 -> bool
 
 logic invariant____function_guard : bool, us_rep4 -> prop
 
-logic temp___502 : int -> (int,color_type) farray
-
-axiom def_axiom1 :
-  (forall temp___504:int.
-  (forall temp___505:int.
-  ((temp___502(temp___504)[temp___505]) = of_rep3(temp___504))))
+logic temp___549 : int -> (int,color_type) farray
 
 logic size2 : us_rep4 -> int
 
@@ -1529,34 +1400,6 @@ axiom slide_def3 :
   (forall i:int [(slide3(a, old_first, new_first)[i])]. ((slide3(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat3 : (int,us_rep5) farray, int, int, (int,us_rep5) farray, int,
-  int -> (int,us_rep5) farray
-
-axiom concat_def3 :
-  (forall a:(int,us_rep5) farray. forall b:(int,us_rep5) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat3(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat3(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat3(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton3 : us_rep5, int -> (int,us_rep5) farray
-
-axiom singleton_def3 :
-  (forall v:bool. forall v1:extended_index_type.
-  forall v2:extended_index_type.
-  (forall i:int [(singleton3({ us_split_fields9 = {
-  rec__red_black_trees__black_count__status = v;
-  rec__red_black_trees__black_count__depth = v1;
-  rec__red_black_trees__black_count__count = v2 } }, i)[i])]. ((singleton3({
-  us_split_fields9 = { rec__red_black_trees__black_count__status = v;
-  rec__red_black_trees__black_count__depth = v1;
-  rec__red_black_trees__black_count__count = v2 } }, i)[i]) = {
-  us_split_fields9 = { rec__red_black_trees__black_count__status = v;
-  rec__red_black_trees__black_count__depth = v1;
-  rec__red_black_trees__black_count__count = v2 } })))
-
 logic bool_eq17 : (int,us_rep5) farray, int, int, (int,us_rep5) farray, int,
   int -> bool
 
@@ -1567,17 +1410,17 @@ axiom bool_eq_def15 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_136:int. ((((a__first <= temp___idx_136) and
-  (temp___idx_136 <= a__last)) and (bool_eq16((a[temp___idx_136]),
-  (b[((b__first - a__first) + temp___idx_136)])) = true)) or
-  (not ((a__first <= temp___idx_136) and (temp___idx_136 <= a__last)))))) ->
+  (forall temp___idx_158:int. ((((a__first <= temp___idx_158) and
+  (temp___idx_158 <= a__last)) and (bool_eq16((a[temp___idx_158]),
+  (b[((b__first - a__first) + temp___idx_158)])) = true)) or
+  (not ((a__first <= temp___idx_158) and (temp___idx_158 <= a__last)))))) ->
   (bool_eq17(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_136:int. (((a__first <= temp___idx_136) and
-  (temp___idx_136 <= a__last)) -> (bool_eq16((a[temp___idx_136]),
-  (b[((b__first - a__first) + temp___idx_136)])) = true))))) -> (bool_eq17(a,
+  (forall temp___idx_158:int. (((a__first <= temp___idx_158) and
+  (temp___idx_158 <= a__last)) -> (bool_eq16((a[temp___idx_158]),
+  (b[((b__first - a__first) + temp___idx_158)])) = true))))) -> (bool_eq17(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev3 :
@@ -1587,9 +1430,9 @@ axiom bool_eq_rev3 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_136:int. (((a__first <= temp___idx_136) and
-  (temp___idx_136 <= a__last)) -> (bool_eq16((a[temp___idx_136]),
-  (b[((b__first - a__first) + temp___idx_136)])) = true)))))))
+  (forall temp___idx_158:int. (((a__first <= temp___idx_158) and
+  (temp___idx_158 <= a__last)) -> (bool_eq16((a[temp___idx_158]),
+  (b[((b__first - a__first) + temp___idx_158)])) = true)))))))
 
 logic min : int, int -> int
 
@@ -1769,29 +1612,6 @@ axiom slide_def4 :
   (forall i:int [(slide4(a, old_first, new_first)[i])]. ((slide4(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat4 : (int,us_rep7) farray, int, int, (int,us_rep7) farray, int,
-  int -> (int,us_rep7) farray
-
-axiom concat_def4 :
-  (forall a:(int,us_rep7) farray. forall b:(int,us_rep7) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat4(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat4(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat4(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton4 : us_rep7, int -> (int,us_rep7) farray
-
-axiom singleton_def4 :
-  (forall v:us_rep6. forall v1:bool.
-  (forall i:int [(singleton4({ us_split_fields11 = {
-  rec__tree_model__path_type__a = v; rec__tree_model__path_type__k = v1 } },
-  i)[i])]. ((singleton4({ us_split_fields11 = {
-  rec__tree_model__path_type__a = v; rec__tree_model__path_type__k = v1 } },
-  i)[i]) = { us_split_fields11 = { rec__tree_model__path_type__a = v;
-  rec__tree_model__path_type__k = v1 } })))
-
 logic bool_eq20 : (int,us_rep7) farray, int, int, (int,us_rep7) farray, int,
   int -> bool
 
@@ -1802,17 +1622,17 @@ axiom bool_eq_def17 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and (bool_eq19((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and (bool_eq19((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq20(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq19((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq20(a,
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq19((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq20(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev4 :
@@ -1822,9 +1642,9 @@ axiom bool_eq_rev4 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq19((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq19((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)))))))
 
 logic model__ : us_rep3 -> (int,us_rep7) farray
 
@@ -1978,6 +1798,11 @@ axiom nb_blacks__post_axiom :
   rec__binary_trees__forest__s = t6; rec__binary_trees__forest__c = t7 } };
   rec__search_trees__search_tree__values = t8 } }, i,
   0)])).us_split_fields9).rec__red_black_trees__black_count__count))))))))))))
+
+axiom def_axiom :
+  (forall temp___551:int. (in_range6(temp___551) ->
+  (forall temp___552:int.
+  (to_rep3((temp___549(temp___551)[temp___552])) = temp___551))))
 
 logic same_nb_blacks : us_rep4 -> bool
 
@@ -2293,13 +2118,13 @@ axiom model____post_axiom :
   rec__search_trees__search_tree__struct = { us_split_fields3 = {
   rec__binary_trees__forest__s = t6; rec__binary_trees__forest__c = t7 } };
   rec__search_trees__search_tree__values = t8 } }) = 0))) ->
-  (forall temp___219:int. (((1 <= temp___219) and (temp___219 <= 100)) ->
+  (forall temp___254:int. (((1 <= temp___254) and (temp___254 <= 100)) ->
   (length1((((model__({ us_split_fields5 = {
   rec__search_trees__search_tree__root = t5;
   rec__search_trees__search_tree__struct = { us_split_fields3 = {
   rec__binary_trees__forest__s = t6; rec__binary_trees__forest__c = t7 } };
   rec__search_trees__search_tree__values = t8 }
-  })[temp___219])).us_split_fields11).rec__tree_model__path_type__a) <  100)))))
+  })[temp___254])).us_split_fields11).rec__tree_model__path_type__a) <  100)))))
 
 axiom model____def_axiom :
   (forall t5:extended_index_type. forall t6:extended_index_type.
@@ -2389,6 +2214,11 @@ axiom peek__def_axiom :
   rec__search_trees__search_tree__values = t8 } }, i, d) = peek1({
   us_split_fields3 = { rec__binary_trees__forest__s = t6;
   rec__binary_trees__forest__c = t7 } }, i, d)))))
+
+axiom def_axiom1 :
+  (forall temp___436:int. (in_range4(temp___436) ->
+  (forall temp___437:int.
+  (to_rep2((temp___434(temp___436)[temp___437])) = temp___436))))
 
 axiom ordered_leafs__post_axiom : true
 
@@ -2557,10 +2387,10 @@ axiom model____post_axiom1 :
   f; rec__binary_trees__forest__c = f1 } },
   root)[j])).us_split_fields11).rec__tree_model__path_type__a, n)))))) ->
   (j = i))))))))))) and
-  (forall temp___219:int. (((1 <= temp___219) and (temp___219 <= 100)) ->
+  (forall temp___254:int. (((1 <= temp___254) and (temp___254 <= 100)) ->
   (length1((((model__1({ us_split_fields3 = { rec__binary_trees__forest__s =
   f; rec__binary_trees__forest__c = f1 } },
-  root)[temp___219])).us_split_fields11).rec__tree_model__path_type__a) <  100)))))))
+  root)[temp___254])).us_split_fields11).rec__tree_model__path_type__a) <  100)))))))
 
 axiom tree_structure__post_axiom : true
 
@@ -2639,73 +2469,50 @@ axiom contains__post_axiom :
 axiom length__post_axiom1 :
   (forall container:us_rep [length(container)]. in_range8(length(container)))
 
-logic red_black_trees__values__result : us_rep
-
-logic o : us_rep
-
-logic result : us_rep
-
-logic red_black_trees__values__result1 : us_rep
-
-logic red_black_trees__values__result2 : us_rep
-
-logic red_black_trees__values__result3 : us_rep
-
-logic red_black_trees__values__result4 : us_rep
-
-logic red_black_trees__values__result5 : us_rep
-
-axiom H : ((((size({ us_split_fields3 = { rec__binary_trees__forest__s = t1;
-  rec__binary_trees__forest__c = t2 } }) = 0) -> (to_rep(t) = 0)) and
+ (* File "tree_model.ads", line 79, characters 0-0 *)
+goal WP_parameter_def :
+  (forall red_black_trees__values__result:us_rep. forall o:us_rep.
+  forall result:us_rep. forall red_black_trees__values__result1:us_rep.
+  forall red_black_trees__values__result2:us_rep.
+  forall red_black_trees__values__result3:us_rep.
+  forall red_black_trees__values__result4:us_rep.
+  forall red_black_trees__values__result5:us_rep. (((((size({
+  us_split_fields3 = { rec__binary_trees__forest__s = t1;
+  rec__binary_trees__forest__c = t2 } }) = 0) and (to_rep(t) = 0)) or
   ((not (size({ us_split_fields3 = { rec__binary_trees__forest__s = t1;
-  rec__binary_trees__forest__c = t2 } }) = 0)) -> (((not (to_rep(t) = 0)) and
-  (valid_root({ us_split_fields3 = { rec__binary_trees__forest__s = t1;
-  rec__binary_trees__forest__c = t2 } }, to_rep(t)) = true)) and
-  (ordered_leafs({ us_split_fields3 = { rec__binary_trees__forest__s = t1;
-  rec__binary_trees__forest__c = t2 } }, to_rep(t), t3) = true)))) and
-  (tree_structure({ us_split_fields3 = { rec__binary_trees__forest__s = t1;
-  rec__binary_trees__forest__c = t2 } }) = true))
-
-axiom H1 : (invariant__({ us_split_fields7 = {
+  rec__binary_trees__forest__c = t2 } }) = 0)) and
+  (((not (to_rep(t) = 0)) and (valid_root({ us_split_fields3 = {
+  rec__binary_trees__forest__s = t1; rec__binary_trees__forest__c = t2 } },
+  to_rep(t)) = true)) and (ordered_leafs({ us_split_fields3 = {
+  rec__binary_trees__forest__s = t1; rec__binary_trees__forest__c = t2 } },
+  to_rep(t), t3) = true)))) and (tree_structure({ us_split_fields3 = {
+  rec__binary_trees__forest__s = t1; rec__binary_trees__forest__c = t2 }
+  }) = true)) -> ((invariant__({ us_split_fields7 = {
   rec__red_black_trees__rbt__struct = { us_split_fields5 = {
   rec__search_trees__search_tree__root = t;
   rec__search_trees__search_tree__struct = { us_split_fields3 = {
   rec__binary_trees__forest__s = t1; rec__binary_trees__forest__c = t2 } };
   rec__search_trees__search_tree__values = t3 } };
-  rec__red_black_trees__rbt__color = t4 } }) = true)
-
-axiom H2 :
-  (red_black_trees__values__result1 = red_black_trees__values__result2)
-
-axiom H3 :
-  (red_black_trees__values__result3 = red_black_trees__values__result1)
-
-axiom H4 : ((o = values({ us_split_fields5 = {
-  rec__search_trees__search_tree__root = t;
-  rec__search_trees__search_tree__struct = { us_split_fields3 = {
+  rec__red_black_trees__rbt__color = t4 } }) = true) ->
+  (((((red_black_trees__values__result1 = red_black_trees__values__result2) and
+  (red_black_trees__values__result3 = red_black_trees__values__result1)) and
+  (((o = values({ us_split_fields5 = { rec__search_trees__search_tree__root =
+  t; rec__search_trees__search_tree__struct = { us_split_fields3 = {
   rec__binary_trees__forest__s = t1; rec__binary_trees__forest__c = t2 } };
   rec__search_trees__search_tree__values = t3 } })) and ((size1({
   us_split_fields5 = { rec__search_trees__search_tree__root = t;
   rec__search_trees__search_tree__struct = { us_split_fields3 = {
   rec__binary_trees__forest__s = t1; rec__binary_trees__forest__c = t2 } };
   rec__search_trees__search_tree__values = t3 } }) = 0) ->
-  (is_empty(o) = true)))
-
-axiom H5 : (result = red_black_trees__values__result)
-
-axiom H6 : (red_black_trees__values__result1 = o)
-
-axiom H7 :
-  (red_black_trees__values__result4 = red_black_trees__values__result2)
-
-axiom H8 :
-  (red_black_trees__values__result5 = red_black_trees__values__result3)
-
- (* File "tree_model.ads", line 79, characters 0-0 *)
-goal WP_parameter_def : (invariant__({ us_split_fields7 = {
-  rec__red_black_trees__rbt__struct = { us_split_fields5 = {
-  rec__search_trees__search_tree__root = t;
+  (is_empty(o) = true))) and (({ value_set__content = result } = {
+  value_set__content = red_black_trees__values__result }) and
+  (red_black_trees__values__result1 = o)))) and (({ value_set__content =
+  red_black_trees__values__result4 } = { value_set__content =
+  red_black_trees__values__result2 }) and
+  (red_black_trees__values__result5 = red_black_trees__values__result3))) ->
+  (invariant__({ us_split_fields7 = { rec__red_black_trees__rbt__struct = {
+  us_split_fields5 = { rec__search_trees__search_tree__root = t;
   rec__search_trees__search_tree__struct = { us_split_fields3 = {
   rec__binary_trees__forest__s = t1; rec__binary_trees__forest__c = t2 } };
   rec__search_trees__search_tree__values = t3 } };
-  rec__red_black_trees__rbt__color = t4 } }) = true)
+  rec__red_black_trees__rbt__color = t4 } }) = true)))))

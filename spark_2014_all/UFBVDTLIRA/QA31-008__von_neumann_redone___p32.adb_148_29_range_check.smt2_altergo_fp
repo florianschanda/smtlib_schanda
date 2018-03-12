@@ -599,12 +599,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -616,6 +610,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -762,51 +762,33 @@ logic sqrt_von_neumann_aux32 : t -> t
 
 logic sqrt_von_neumann_aux32__function_guard : t, t -> prop
 
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 1)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 2147483647)
+
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 46340)
+
 axiom sqrt_von_neumann_aux32__post_axiom :
   (forall x:t [sqrt_von_neumann_aux32(x)].
   ((ule(mul(sqrt_von_neumann_aux32(x), sqrt_von_neumann_aux32(x)), x) and
-  uge(sub(mul(add(sqrt_von_neumann_aux32(x), of_int(1)),
-  add(sqrt_von_neumann_aux32(x), of_int(1))), of_int(1)), x)) and (ule(x,
-  of_int(2147483647)) -> ule(sqrt_von_neumann_aux32(x), of_int(46340)))))
+  uge(sub(mul(add(sqrt_von_neumann_aux32(x), rliteral),
+  add(sqrt_von_neumann_aux32(x), rliteral)), rliteral), x)) and (ule(x,
+  rliteral1) -> ule(sqrt_von_neumann_aux32(x), rliteral2))))
 
 logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic p32__sqrt_von_neumann32__result : int
-
-logic o : t
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : bool
-
-logic result : int
-
-logic p32__sqrt_von_neumann32__result1 : int
-
-logic p32__sqrt_von_neumann32__result2 : int
-
-logic p32__sqrt_von_neumann32__result3 : int
-
-logic p32__sqrt_von_neumann32__result4 : int
-
-logic p32__sqrt_von_neumann32__result5 : int
-
-axiom H : in_range2(x)
-
-axiom H1 : ((o = sqrt_von_neumann_aux32(of_int(x))) and ((ule(mul(o, o),
-  of_int(x)) and uge(sub(mul(add(o, of_int(1)), add(o, of_int(1))),
-  of_int(1)), of_int(x))) and (ule(of_int(x), of_int(2147483647)) -> ule(o,
-  of_int(46340)))))
-
-axiom H2 : (o1 = tqtint(o))
-
  (* File "p32.ads", line 10, characters 0-0 *)
-goal WP_parameter_def : in_range3(o1)
+goal WP_parameter_def :
+  (forall o:t. forall o1:int. (in_range2(x) ->
+  ((((o = sqrt_von_neumann_aux32(of_int(x))) and ((ule(mul(o, o),
+  of_int(x)) and uge(sub(mul(add(o, rliteral), add(o, rliteral)), rliteral),
+  of_int(x))) and (ule(of_int(x), rliteral1) -> ule(o, rliteral2)))) and
+  (o1 = tqtint(o))) -> in_range3(o1))))

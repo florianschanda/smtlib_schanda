@@ -123,29 +123,10 @@ axiom cur_state__def_axiom :
   (in_range(ghost_example__state) ->
   (cur_state(ghost_example__state) = ghost_example__state)))
 
-logic state : int
-
-logic state1 : int
-
-logic state2 : int
-
-logic item_done : bool
-
-logic state3 : int
-
-logic item_done1 : bool
-
-logic state4 : int
-
-axiom H : in_range(state)
-
-axiom H1 : ((cur_state(state1) = 0) and in_range(state1))
-
-axiom H2 : ((((item_done = true) -> (cur_state(state2) = 1)) and
-  ((not (item_done = true)) -> (cur_state(state2) = 0))) and
-  in_range(state2))
-
-axiom H3 : (item_done = true)
-
  (* File "client_unit.adb", line 42, characters 0-0 *)
-goal WP_parameter_def : (cur_state(state2) = 1)
+goal WP_parameter_def :
+  (forall state:int. forall state1:int. forall state2:int.
+  forall item_done:bool. (in_range(state) -> (((cur_state(state1) = 0) and
+  in_range(state1)) -> (((((item_done = true) and (cur_state(state2) = 1)) or
+  ((not (item_done = true)) and (cur_state(state2) = 0))) and
+  in_range(state2)) -> ((item_done = true) -> (cur_state(state2) = 1))))))

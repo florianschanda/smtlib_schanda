@@ -783,117 +783,43 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
-logic apply_brakes : int
+logic rliteral : t
 
-logic sum_out1 : int
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
 
-logic sum_1_out1 : int
+logic rliteral1 : t
 
-logic at_rest_switch_out1 : int
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 8)
 
-logic sum_1_out1_sat : int
+logic rliteral2 : t
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic sum_out11 : int
-
-logic sum_1_out11 : int
-
-logic sum_1_out1_sat1 : int
-
-logic result : int
-
-logic sum_out12 : int
-
-logic result1 : int
-
-logic sum_1_out1_sat2 : int
-
-logic result2 : int
-
-logic sum_1_out12 : int
-
-logic result3 : int
-
-logic sum_1_out13 : int
-
-logic result4 : int
-
-logic sum_1_out14 : int
-
-logic result5 : int
-
-logic at_rest_switch_out11 : int
-
-logic result6 : int
-
-logic at_rest_switch_out12 : int
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range3(apply_brakes))
-
-axiom H3 : (((- 2147483648) <= 2147483647) -> in_range3(sum_out1))
-
-axiom H4 : (((- 128) <= 127) -> in_range1(sum_1_out1))
-
-axiom H5 : (((- 2147483648) <= 2147483647) -> in_range3(at_rest_switch_out1))
-
-axiom H6 : (((- 2147483648) <= 2147483647) -> in_range3(sum_1_out1_sat))
-
-axiom H7 : ugt(vehicle_speed, of_int(0))
-
-axiom H8 : ((o = tqtint(mul(of_int(8), vehicle_speed))) and
-  in_range3(tqtint(mul(of_int(8), vehicle_speed))))
-
-axiom H9 : ((o1 = tqtint(mul(of_int(10), wheel_speed))) and
-  in_range3(tqtint(mul(of_int(10), wheel_speed))))
-
-axiom H10 : (o2 = (o1 - o))
-
-axiom H11 : ((o3 = o2) and in_range2(o2))
-
-axiom H12 : (result = sum_out1)
-
-axiom H13 : (sum_out12 = o3)
-
-axiom H14 : ((((sum_out12 <  0) -> (o4 = boolean_to_integer_8(true))) and
-  ((not (sum_out12 <  0)) -> (o4 = boolean_to_integer_8(false)))) and
-  in_range1(o4))
-
-axiom H15 : ((((0 <  sum_out12) -> (o5 = boolean_to_integer_8(true))) and
-  ((not (0 <  sum_out12)) -> (o5 = boolean_to_integer_8(false)))) and
-  in_range1(o5))
-
-axiom H16 : (o6 = (o5 - o4))
-
-axiom H17 : ((o7 = o6) and in_range(o6))
-
-axiom H18 : (result1 = sum_1_out1_sat)
-
-axiom H19 : (sum_1_out1_sat2 = o7)
-
-axiom H20 : (not (127 <  sum_1_out1_sat2))
-
-axiom H21 : (not (sum_1_out1_sat2 <  (- 128)))
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 10)
 
  (* File "abs_controller_supplier_with_property.ads", line 22, characters 0-0 *)
-goal WP_parameter_def : in_range1(sum_1_out1_sat2)
+goal WP_parameter_def :
+  (forall apply_brakes:int. forall sum_out1:int. forall sum_1_out1:int.
+  forall at_rest_switch_out1:int. forall sum_1_out1_sat:int. forall o:int.
+  forall o1:int. forall o2:int. forall o3:int. forall o4:int. forall o5:int.
+  forall o6:int. forall o7:int. forall result:int. forall sum_out11:int.
+  forall result1:int. forall sum_1_out1_sat1:int.
+  ((((- 2147483648) <= 2147483647) -> in_range3(apply_brakes)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range3(sum_out1)) ->
+  ((((- 128) <= 127) -> in_range1(sum_1_out1)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range3(at_rest_switch_out1)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range3(sum_1_out1_sat)) ->
+  (ugt(vehicle_speed, rliteral) -> ((((((o = tqtint(mul(rliteral1,
+  vehicle_speed))) and in_range3(tqtint(mul(rliteral1, vehicle_speed)))) and
+  (((o1 = tqtint(mul(rliteral2, wheel_speed))) and
+  in_range3(tqtint(mul(rliteral2, wheel_speed)))) and (o2 = (o1 - o)))) and
+  ((o3 = o2) and in_range2(o2))) and (({ int__content = result } = {
+  int__content = sum_out1 }) and (sum_out11 = o3))) ->
+  ((((((((sum_out11 <  0) and (o4 = boolean_to_integer_8(true))) or
+  ((not (sum_out11 <  0)) and (o4 = boolean_to_integer_8(false)))) and
+  in_range1(o4)) and (((((0 <  sum_out11) and
+  (o5 = boolean_to_integer_8(true))) or ((not (0 <  sum_out11)) and
+  (o5 = boolean_to_integer_8(false)))) and in_range1(o5)) and
+  (o6 = (o5 - o4)))) and ((o7 = o6) and in_range(o6))) and (({ int__content =
+  result1 } = { int__content = sum_1_out1_sat }) and
+  (sum_1_out1_sat1 = o7))) -> ((not (127 <  sum_1_out1_sat1)) ->
+  ((not (sum_1_out1_sat1 <  (- 128))) ->
+  in_range1(sum_1_out1_sat1))))))))))))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -139,64 +139,16 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic sum : int
-
-logic i : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic sum1 : int
-
-logic result1 : int
-
-logic i1 : int
-
-logic sum2 : int
-
-logic i2 : int
-
-logic tmp : int
-
-logic result2 : int
-
-logic sum3 : int
-
-logic result3 : int
-
-logic tmp1 : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range1(sum))
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(i))
-
-axiom H2 : (result = sum)
-
-axiom H3 : (sum1 = 0)
-
-axiom H4 : (result1 = i)
-
-axiom H5 : (i1 = 1)
-
-axiom H6 : (i1 <  11)
-
-axiom H7 : (((((- 2147483648) <= 2147483647) -> in_range1(sum2)) and
-  (((- 2147483648) <= 2147483647) -> in_range1(i2))) and (i2 <  11))
-
-axiom H8 : ((o = (sum2 + i2)) and in_range1((sum2 + i2)))
-
-axiom H9 : (result2 = sum2)
-
-axiom H10 : (sum3 = o)
-
-axiom H11 : (result3 = tmp)
-
-axiom H12 : (tmp1 = 1)
-
-axiom H13 : in_range1(tmp1)
-
  (* File "test.adb", line 262, characters 0-0 *)
-goal WP_parameter_def : in_range1((i2 + tmp1))
+goal WP_parameter_def :
+  (forall sum:int. forall i:int. forall o:int. forall result:int.
+  forall sum1:int. forall result1:int. forall i1:int. forall sum2:int.
+  forall i2:int. forall tmp:int. forall result2:int. forall sum3:int.
+  forall result3:int. forall tmp1:int. ((((- 2147483648) <= 2147483647) ->
+  in_range1(sum)) -> ((((- 2147483648) <= 2147483647) -> in_range1(i)) ->
+  (((result = sum) and (sum1 = 0)) -> (((result1 = i) and (i1 = 1)) ->
+  ((i1 <  11) -> ((((((- 2147483648) <= 2147483647) -> in_range1(sum2)) and
+  (((- 2147483648) <= 2147483647) -> in_range1(i2))) and (i2 <  11)) ->
+  ((((o = (sum2 + i2)) and in_range1((sum2 + i2))) and ((result2 = sum2) and
+  (sum3 = o))) -> ((((result3 = tmp) and (tmp1 = 1)) and in_range1(tmp1)) ->
+  in_range1((i2 + tmp1)))))))))))

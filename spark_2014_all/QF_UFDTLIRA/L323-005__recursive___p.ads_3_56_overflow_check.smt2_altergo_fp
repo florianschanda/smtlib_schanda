@@ -139,48 +139,18 @@ logic id : int -> int
 
 logic id__function_guard : int, int -> prop
 
-logic p__id__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic result : int
-
-logic p__id__result1 : int
-
-logic p__id__result2 : int
-
-logic p__id__result3 : int
-
-logic p__id__result4 : int
-
-logic p__id__result5 : int
-
-axiom H : in_range1(n)
-
-axiom H1 : (p__id__result1 = p__id__result2)
-
-axiom H2 : (p__id__result3 = p__id__result1)
-
-axiom H3 : (result = p__id__result)
-
-axiom H4 : (p__id__result1 = n)
-
-axiom H5 : (p__id__result4 = p__id__result2)
-
-axiom H6 : (p__id__result5 = p__id__result3)
-
-axiom H7 : (not (n = 0))
-
-axiom H8 : ((o = (n - 1)) and in_range1((n - 1)))
-
-axiom H9 : ((o1 = id(o)) and (in_range1(o1) and ((o1 = o) and (((o = 0) ->
-  (o1 = 0)) and ((not (o = 0)) -> (o1 = (id((o - 1)) + 1)))))))
-
-axiom H10 : (o2 = (o1 + 1))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(o2)
+goal WP_parameter_def :
+  (forall p__id__result:int. forall o:int. forall o1:int. forall o2:int.
+  forall result:int. forall p__id__result1:int. forall p__id__result2:int.
+  forall p__id__result3:int. forall p__id__result4:int.
+  forall p__id__result5:int. (in_range1(n) ->
+  (((((p__id__result1 = p__id__result2) and
+  (p__id__result3 = p__id__result1)) and (({ int__content = result } = {
+  int__content = p__id__result }) and (p__id__result1 = n))) and (({
+  int__content = p__id__result4 } = { int__content = p__id__result2 }) and
+  (p__id__result5 = p__id__result3))) -> ((not (n = 0)) ->
+  (((((o = (n - 1)) and in_range1((n - 1))) and ((o1 = id(o)) and
+  (in_range1(o1) and ((o1 = o) and (((o = 0) and (o1 = 0)) or
+  ((not (o = 0)) and (o1 = (id((o - 1)) + 1)))))))) and (o2 = (o1 + 1))) ->
+  in_range(o2))))))

@@ -218,7 +218,5 @@ logic i1s : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-axiom H : in_range(i1s)
-
  (* File "subtype_predicates_illegal.ads", line 4, characters 0-0 *)
-goal WP_parameter_def : (not (2 = 0))
+goal WP_parameter_def : (in_range(i1s) -> (not (2 = 0)))

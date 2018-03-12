@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -319,19 +319,8 @@ logic task_2__split_discrs : bool
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic g : bool
-
-logic result : bool
-
-logic g1 : bool
-
-axiom H : (result = g)
-
-axiom H1 : (g1 = of_int(0))
-
-axiom H2 : (task_1__split_discrs = of_int(0))
-
-axiom H3 : (of_int(0) = task_1__split_discrs)
-
  (* File "system.ads", line 81, characters 0-0 *)
-goal WP_parameter_def : in_range(1)
+goal WP_parameter_def :
+  (forall g:bool. forall result:bool. forall g1:bool. (((result = g) and
+  (g1 = of_int(0))) -> ((task_1__split_discrs = of_int(0)) ->
+  ((of_int(0) = task_1__split_discrs) -> in_range(1)))))

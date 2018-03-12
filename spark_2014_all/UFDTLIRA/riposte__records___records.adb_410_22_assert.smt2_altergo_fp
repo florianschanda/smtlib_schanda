@@ -323,35 +323,15 @@ function optional_pair__ref___projection(a: optional_pair__ref) : us_rep1 =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x__split_fields : bool
-
-logic x__split_fields1 : unsigned_byte
-
-logic x__split_fields2 : unsigned_byte
-
-logic result : bool
-
-logic result1 : unsigned_byte
-
-logic result2 : unsigned_byte
-
-logic x__split_fields3 : bool
-
-logic x__split_fields4 : unsigned_byte
-
-logic x__split_fields5 : unsigned_byte
-
-axiom H : (result = x__split_fields)
-
-axiom H1 : (result1 = x__split_fields1)
-
-axiom H2 : (result2 = x__split_fields2)
-
-axiom H3 : (x__split_fields = x__split_fields3)
-
-axiom H4 : (x__split_fields1 = x__split_fields4)
-
-axiom H5 : (x__split_fields2 = x__split_fields5)
-
  (* File "records_prooffuncs.ads", line 19, characters 0-0 *)
-goal WP_parameter_def : (to_rep(x__split_fields4) = 0)
+goal WP_parameter_def :
+  (forall x__split_fields:bool. forall x__split_fields1:unsigned_byte.
+  forall x__split_fields2:unsigned_byte. forall result:bool.
+  forall result1:unsigned_byte. forall result2:unsigned_byte.
+  forall x__split_fields3:bool. forall x__split_fields4:unsigned_byte.
+  forall x__split_fields5:unsigned_byte. ((((result = x__split_fields) and
+  ((result1 = x__split_fields1) and (result2 = x__split_fields2))) and
+  ((x__split_fields = x__split_fields3) and
+  ((x__split_fields1 = x__split_fields4) and
+  (x__split_fields2 = x__split_fields5)))) ->
+  (to_rep(x__split_fields4) = 0)))

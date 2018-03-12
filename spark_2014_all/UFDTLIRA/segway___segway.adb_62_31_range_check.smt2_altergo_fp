@@ -217,59 +217,9 @@ axiom current_speed__def_axiom :
   (in_range2(segway__speed) ->
   (current_speed(segway__speed) = segway__speed)))
 
-logic speed : int
-
-logic status : int
-
-logic o : int
-
-logic o1 : int
-
-logic speed1 : int
-
-logic status1 : int
-
-logic result : int
-
-logic speed2 : int
-
-logic result1 : int
-
-logic speed3 : int
-
-logic result2 : int
-
-logic status2 : int
-
-logic result3 : int
-
-logic status3 : int
-
-logic result4 : int
-
-logic status4 : int
-
-logic speed4 : int
-
-logic status5 : int
-
-logic speed5 : int
-
-logic status6 : int
-
-axiom H : in_range2(speed)
-
-axiom H1 : in_range(status)
-
-axiom H2 : in_range1(i)
-
-axiom H3 : (speed_is_valid(speed, status) = true)
-
-axiom H4 : (not (i = 1))
-
-axiom H5 : (i = 2)
-
-axiom H6 : (speed <  100)
-
  (* File "segway.ads", line 16, characters 0-0 *)
-goal WP_parameter_def : in_range2((speed + 1))
+goal WP_parameter_def :
+  (forall speed:int. forall status:int. (in_range2(speed) ->
+  (in_range(status) -> (in_range1(i) -> ((speed_is_valid(speed,
+  status) = true) -> ((not (i = 1)) -> ((i = 2) -> ((speed <  100) ->
+  in_range2((speed + 1))))))))))

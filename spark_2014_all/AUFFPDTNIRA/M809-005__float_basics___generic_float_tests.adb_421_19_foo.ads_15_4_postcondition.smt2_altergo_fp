@@ -1094,24 +1094,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,ft) farray, int, int, (int,ft) farray, int,
-  int -> (int,ft) farray
-
-axiom concat_def :
-  (forall a:(int,ft) farray. forall b:(int,ft) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : ft, int -> (int,ft) farray
-
-axiom singleton_def :
-  (forall v:ft.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq2 : (int,ft) farray, int, int, (int,ft) farray, int, int -> bool
 
 axiom bool_eq_def2 :
@@ -1121,17 +1103,17 @@ axiom bool_eq_def2 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) and
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)])))) or
-  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (forall temp___idx_155:int. ((((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) and
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)])))) or
+  (not ((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)))))) ->
   (bool_eq2(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) ->
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)]))))))) ->
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) ->
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)]))))))) ->
   (bool_eq2(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1141,106 +1123,47 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) ->
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)])))))))))
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) ->
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)])))))))))
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic foo__double_tests__test_array_1__a__aggregate_def : t -> (int,ft) farray
 
 axiom def_axiom :
-  (forall temp___237:t.
-  (forall temp___238:int.
-  ((foo__double_tests__test_array_1__a__aggregate_def(temp___237)[temp___238]) = of_rep(temp___237))))
-
-logic y : t
-
-logic a : (int,ft) farray
-
-logic o : ft
-
-logic o1 : (int,ft) farray
-
-logic o2 : ft
-
-logic o3 : (int,ft) farray
-
-logic result : (int,ft) farray
-
-logic a1 : (int,ft) farray
-
-logic result1 : (int,ft) farray
-
-logic a2 : (int,ft) farray
-
-logic result2 : (int,ft) farray
-
-logic a3 : (int,ft) farray
-
-logic result3 : t
-
-logic y1 : t
-
-logic y2 : t
-
-logic a4 : (int,ft) farray
-
-logic y3 : t
-
-logic a5 : (int,ft) farray
-
-axiom H : tqtisFinite(x)
+  (forall temp___267:t. (tqtisFinite(temp___267) ->
+  (forall temp___268:int.
+  (to_rep((foo__double_tests__test_array_1__a__aggregate_def(temp___267)[temp___268])) = temp___267))))
 
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0))
 
-axiom H1 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(y))
-
-axiom H2 : (result = a)
-
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.0e-1))
-
-axiom H3 :
-  (a1 = foo__double_tests__test_array_1__a__aggregate_def(fliteral2))
-
-axiom H4 : (to_rep(o) = x)
-
-axiom H5 : (o1 = (a1[8 <- o]))
-
-axiom H6 : (result1 = a1)
-
-axiom H7 : (a2 = o1)
 
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 3.0))
 
-axiom H8 : (to_rep(o2) = fliteral3)
-
-axiom H9 : (o3 = (a2[5 <- o2]))
-
-axiom H10 : (result2 = a2)
-
-axiom H11 : (a3 = o3)
-
-axiom H12 : (result3 = y)
-
-axiom H13 : (y1 = to_rep((a3[8])))
-
-axiom H14 : (a4 = a3)
-
-axiom H15 : (y1 = y2)
-
-axiom H16 : (a5 = a3)
-
-axiom H17 : (y3 = y1)
-
- (* File "generic_float_tests.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : eq(x, y2)
+ (* File "generic_float_tests.adb", line 426, characters 0-0 *)
+goal WP_parameter_def :
+  (forall y:t. forall a:(int,ft) farray. forall o:ft.
+  forall o1:(int,ft) farray. forall o2:ft. forall o3:(int,ft) farray.
+  forall result:(int,ft) farray. forall a1:(int,ft) farray.
+  forall result1:(int,ft) farray. forall a2:(int,ft) farray.
+  forall result2:(int,ft) farray. forall a3:(int,ft) farray.
+  forall result3:t. forall y1:t. forall y2:t. forall a4:(int,ft) farray.
+  forall y3:t. forall a5:(int,ft) farray. ((tqtisFinite(x) and
+  ((le(neg(fliteral1), fliteral1) -> tqtisFinite(y)) and ((((result = a) and
+  (a1 = foo__double_tests__test_array_1__a__aggregate_def(fliteral2))) and
+  ((((to_rep(o) = x) and (o1 = (a1[8 <- o]))) and ((result1 = a1) and
+  (a2 = o1))) and ((((to_rep(o2) = fliteral3) and (o3 = (a2[5 <- o2]))) and
+  ((result2 = a2) and (a3 = o3))) and ((result3 = y) and
+  (y1 = to_rep((a3[8]))))))) and (((a4 = a3) and (y1 = y2)) and
+  ((a5 = a3) and (y3 = y1)))))) -> eq(x, y2)))

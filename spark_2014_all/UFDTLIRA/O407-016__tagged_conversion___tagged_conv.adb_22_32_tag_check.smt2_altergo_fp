@@ -56,12 +56,6 @@ axiom us_compatible_tags_refl :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -73,6 +67,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -196,53 +196,20 @@ logic cc2__attr__tag : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic c__split_fields : us_private
-
-logic cc__split_fields : us_private
-
-logic r2__split_fields : us_private
-
-logic rc2__split_fields : us_private
-
-logic result : us_private
-
-logic c__split_fields1 : us_private
-
-logic result1 : us_private
-
-logic cc__split_fields1 : us_private
-
-logic result2 : us_private
-
-logic r2__split_fields1 : us_private
-
-logic result3 : us_private
-
-logic rc2__split_fields1 : us_private
-
-axiom H : (result = c__split_fields)
-
-axiom H1 : (us_null_ext__ = c__split_fields1)
-
-axiom H2 : (c__attr__tag = us_tag1)
-
-axiom H3 : (result1 = cc__split_fields)
-
-axiom H4 : (cc__split_fields1 = c__split_fields1)
-
-axiom H5 : (cc__attr__tag = c__attr__tag)
-
-axiom H6 : (result2 = r2__split_fields)
-
-axiom H7 : (r2__split_fields1 = c__split_fields1)
-
-axiom H8 : (r2__attr__tag = us_tag)
-
-axiom H9 : (result3 = rc2__split_fields)
-
-axiom H10 : (rc2__split_fields1 = r2__split_fields1)
-
-axiom H11 : (rc2__attr__tag = r2__attr__tag)
-
  (* File "tagged_conv.adb", line 9, characters 0-0 *)
-goal WP_parameter_def : us_compatible_tags(cc__attr__tag, us_tag1)
+goal WP_parameter_def :
+  (forall c__split_fields:us_private. forall cc__split_fields:us_private.
+  forall r2__split_fields:us_private. forall rc2__split_fields:us_private.
+  forall result:us_private. forall c__split_fields1:us_private.
+  forall result1:us_private. forall cc__split_fields1:us_private.
+  forall result2:us_private. forall r2__split_fields1:us_private.
+  forall result3:us_private. forall rc2__split_fields1:us_private.
+  ((((result = c__split_fields) and (us_null_ext__ = c__split_fields1)) and
+  (c__attr__tag = us_tag1)) -> ((((result1 = cc__split_fields) and
+  (cc__split_fields1 = c__split_fields1)) and
+  (cc__attr__tag = c__attr__tag)) -> ((((result2 = r2__split_fields) and ({
+  rec__ext__ = r2__split_fields1 } = { rec__ext__ = c__split_fields1 })) and
+  (r2__attr__tag = us_tag)) -> ((((result3 = rc2__split_fields) and
+  (rc2__split_fields1 = r2__split_fields1)) and
+  (rc2__attr__tag = r2__attr__tag)) -> us_compatible_tags(cc__attr__tag,
+  us_tag1))))))

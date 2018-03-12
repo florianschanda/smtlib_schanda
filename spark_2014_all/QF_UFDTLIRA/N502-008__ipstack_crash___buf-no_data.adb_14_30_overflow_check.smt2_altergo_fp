@@ -107,15 +107,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic free_list : int
-
-logic o : int
-
-logic free_list1 : int
-
-axiom H : in_range(free_list)
-
-axiom H1 : in_range(free_list1)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((free_list1 + 1))
+goal WP_parameter_def :
+  (forall free_list:int. forall free_list1:int. (in_range(free_list) ->
+  (in_range(free_list1) -> in_range((free_list1 + 1)))))

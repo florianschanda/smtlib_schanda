@@ -686,24 +686,6 @@ axiom slide_def :
   (forall i:t [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[sub(i, sub(new_first, old_first))]))))))
 
-logic concat : (t,name_id) farray, t, t, (t,name_id) farray, t,
-  t -> (t,name_id) farray
-
-axiom concat_def :
-  (forall a:(t,name_id) farray. forall b:(t,name_id) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t.
-  (forall i:t [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((ule(a_first, i) and ule(i, a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and (ugt(i, a_last) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[add(sub(i, a_last), sub(b_first,
-  one))])))))))
-
-logic singleton : name_id, t -> (t,name_id) farray
-
-axiom singleton_def :
-  (forall v:name_id.
-  (forall i:t [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq3 : (t,name_id) farray, t, t, (t,name_id) farray, t, t -> bool
 
 axiom bool_eq_def2 :
@@ -713,19 +695,19 @@ axiom bool_eq_def2 :
   a__last) and (ule(b__first, b__last) and (sub(a__last,
   a__first) = sub(b__last, b__first)))) or ((not ule(a__first, a__last)) and
   ugt(b__first, b__last))) and
-  (forall temp___idx_132:t. (((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[add(sub(b__first, a__first),
-  temp___idx_132)])))) or (not (ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)))))) -> (bool_eq3(a, a__first, a__last, b,
+  (forall temp___idx_154:t. (((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[add(sub(b__first, a__first),
+  temp___idx_154)])))) or (not (ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)))))) -> (bool_eq3(a, a__first, a__last, b,
   b__first, b__last) = true)) and ((not (((ule(a__first, a__last) ->
   (ule(b__first, b__last) and (sub(a__last, a__first) = sub(b__last,
   b__first)))) and ((not ule(a__first, a__last)) -> ugt(b__first,
   b__last))) and
-  (forall temp___idx_132:t. ((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[add(sub(b__first, a__first),
-  temp___idx_132)]))))))) -> (bool_eq3(a, a__first, a__last, b, b__first,
+  (forall temp___idx_154:t. ((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[add(sub(b__first, a__first),
+  temp___idx_154)]))))))) -> (bool_eq3(a, a__first, a__last, b, b__first,
   b__last) = false))))
 
 axiom bool_eq_rev :
@@ -735,39 +717,10 @@ axiom bool_eq_rev :
   (((ule(a__first, a__last) -> (ule(b__first, b__last) and (sub(a__last,
   a__first) = sub(b__last, b__first)))) and ((not ule(a__first, a__last)) ->
   ugt(b__first, b__last))) and
-  (forall temp___idx_132:t. ((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[add(sub(b__first, a__first),
-  temp___idx_132)])))))))))
-
-logic compare : (t,name_id) farray, t, t, (t,name_id) farray, t, t -> int
-
-axiom compare_def_eq :
-  (forall a:(t,name_id) farray. forall b:(t,name_id) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) = 0) <-> (bool_eq3(a, a_first, a_last, b,
-  b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(t,name_id) farray. forall b:(t,name_id) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) <  0) <->
-  (exists i:t. exists j:t. (ule(i, a_last) and (ult(j, b_last) and
-  ((bool_eq3(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  (ult(i, a_last) and (to_rep((a[add(i, one)])) <  to_rep((b[add(j,
-  one)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(t,name_id) farray. forall b:(t,name_id) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((0 <  compare(a,
-  a_first, a_last, b, b_first, b_last)) <->
-  (exists i:t. exists j:t. (ule(i, b_last) and (ult(j, a_last) and
-  ((bool_eq3(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  (ult(i, b_last) and (to_rep((b[add(i, one)])) <  to_rep((a[add(j,
-  one)]))))))))))))
+  (forall temp___idx_154:t. ((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[add(sub(b__first, a__first),
+  temp___idx_154)])))))))))
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
@@ -1196,11 +1149,6 @@ axiom invariant____def_axiom :
 
 logic names__hash_table__aggregate_def : int -> (t,name_id) farray
 
-axiom def_axiom :
-  (forall temp___639:int.
-  (forall temp___640:t.
-  ((names__hash_table__aggregate_def(temp___639)[temp___640]) = of_rep(temp___639))))
-
 type positive
 
 predicate in_range5(x: int) = ((1 <= x) and (x <= 2147483647))
@@ -1226,6 +1174,11 @@ type positive__ref = { positive__content : positive
 
 function positive__ref___projection(a: positive__ref) : positive =
   (a).positive__content
+
+axiom def_axiom :
+  (forall temp___703:int. (in_range(temp___703) ->
+  (forall temp___704:t.
+  (to_rep((names__hash_table__aggregate_def(temp___703)[temp___704])) = temp___703))))
 
 type us_main_type2
 
@@ -1341,6 +1294,14 @@ axiom valid_tables__def_axiom :
 
 axiom valid_hashes__post_axiom : true
 
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 255)
+
 axiom valid_hashes__def_axiom :
   (forall names__hash_table:(t,name_id) farray.
   (forall names__entry_table__fields:us_main_type1
@@ -1348,7 +1309,7 @@ axiom valid_hashes__def_axiom :
   names__entry_table__fields })]. ((valid_hashes(names__hash_table, {
   rec__names__data__entry_tables__vector = names__entry_table__fields
   }) = true) <->
-  (forall h:t. ((ule(of_int(0), h) and ule(h, of_int(255))) ->
+  (forall h:t. ((ule(rliteral, h) and ule(h, rliteral1)) ->
   (to_rep((names__hash_table[h])) <= (0 + length1(model__1({
   us_split_discrs3 = { rec__names__data__entry_tables__vector__capacity =
   entry_table__split_discrs }; us_split_fields3 = {
@@ -1662,12 +1623,6 @@ function extended_index__ref___projection(a: extended_index__ref) : extended_ind
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq13 : bool, bool -> bool
-
-axiom bool_eq_def10 :
-  (forall x:bool. forall y:bool [bool_eq13(x, y)]. (((x = y) -> (bool_eq13(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq13(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -1679,6 +1634,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq13 : bool, bool -> bool
+
+axiom bool_eq_def10 :
+  (forall x:bool. forall y:bool [bool_eq13(x, y)]. (((x = y) -> (bool_eq13(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq13(x, y) = false))))
 
 predicate in_range9(x: int) = ((x = 0) or (x = 1))
 
@@ -1961,49 +1922,29 @@ axiom length__post_axiom3 :
 
 axiom get__post_axiom1 : true
 
-logic hash_table : (t,name_id) farray
-
-logic char_table__split_fields : us_main_type
-
-logic entry_table__split_fields : us_main_type1
-
-logic us : int
-
-logic us1 : int
-
-logic result : (t,name_id) farray
-
-logic hash_table1 : (t,name_id) farray
-
-logic result1 : bool
-
-axiom H : in_range(no_name)
-
-axiom H1 : (result = hash_table)
-
-axiom H2 : (hash_table1 = names__hash_table__aggregate_def(0))
-
-axiom H3 : ((us = 1024) and in_range1(1024))
-
-axiom H4 : ((to_rep1(char_table__split_discrs) = 1024) and (is_empty({
-  us_split_discrs1 = { rec__names__data__char_tables__vector__capacity =
-  char_table__split_discrs }; us_split_fields1 = {
-  rec__names__data__char_tables__vector = char_table__split_fields }
-  }) = true))
-
-axiom H5 : (1024 = to_rep1(char_table__split_discrs))
-
-axiom H6 : ((us1 = 256) and in_range3(256))
-
-axiom H7 : ((to_rep2(entry_table__split_discrs) = 256) and (is_empty1({
-  us_split_discrs3 = { rec__names__data__entry_tables__vector__capacity =
+ (* File "names.adb", line 39, characters 0-0 *)
+goal WP_parameter_def :
+  (forall hash_table:(t,name_id) farray.
+  forall char_table__split_fields:us_main_type.
+  forall entry_table__split_fields:us_main_type1. forall us:int.
+  forall us1:int. forall result:(t,name_id) farray.
+  forall hash_table1:(t,name_id) farray.
+  (forall result1:bool. ((in_range(no_name) and ((({ map__content = result
+  } = { map__content = hash_table }) and
+  (hash_table1 = names__hash_table__aggregate_def(0))) and (((us = 1024) and
+  in_range1(1024)) and (((to_rep1(char_table__split_discrs) = 1024) and
+  (is_empty({ us_split_discrs1 = {
+  rec__names__data__char_tables__vector__capacity = char_table__split_discrs
+  }; us_split_fields1 = { rec__names__data__char_tables__vector =
+  char_table__split_fields } }) = true)) and
+  ((1024 = to_rep1(char_table__split_discrs)) and (((us1 = 256) and
+  in_range3(256)) and (((to_rep2(entry_table__split_discrs) = 256) and
+  (is_empty1({ us_split_discrs3 = {
+  rec__names__data__entry_tables__vector__capacity =
   entry_table__split_discrs }; us_split_fields3 = {
   rec__names__data__entry_tables__vector = entry_table__split_fields }
-  }) = true))
-
-axiom H8 : (256 = to_rep2(entry_table__split_discrs))
-
-axiom H9 : ((result1 = invariant__(hash_table1, {
+  }) = true)) and ((256 = to_rep2(entry_table__split_discrs)) and
+  ((result1 = invariant__(hash_table1, {
   rec__names__data__char_tables__vector = char_table__split_fields }, {
   rec__names__data__entry_tables__vector = entry_table__split_fields })) and
   ((result1 = true) <-> (((valid_tables({
@@ -2013,10 +1954,7 @@ axiom H9 : ((result1 = invariant__(hash_table1, {
   char_table__split_fields }, { rec__names__data__entry_tables__vector =
   entry_table__split_fields }) = true)) and (valid_hashes(hash_table1, {
   rec__names__data__entry_tables__vector = entry_table__split_fields
-  }) = true))))
-
- (* File "names.adb", line 72, characters 0-0 *)
-goal WP_parameter_def : (invariant__(hash_table1, {
+  }) = true)))))))))))) -> (invariant__(hash_table1, {
   rec__names__data__char_tables__vector = char_table__split_fields }, {
   rec__names__data__entry_tables__vector = entry_table__split_fields
-  }) = true)
+  }) = true))))

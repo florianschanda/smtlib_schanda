@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -188,24 +188,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> (int,integer) farray
-
-axiom concat_def :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : integer, int -> (int,integer) farray
-
-axiom singleton_def :
-  (forall v:integer.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,integer) farray, int, int, (int,integer) farray, int,
   int -> bool
 
@@ -216,17 +198,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -236,37 +218,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic starting_at : int
 
@@ -308,176 +262,55 @@ function t9b__ref___projection(a: t9b__ref) : integer = (a).t9b__content
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic min : int
-
-logic index : int
-
-logic sorters_not_global__index_of_minimum__result : int
-
-logic temp___175 : int
-
-logic temp___174 : int
-
-logic temp___176 : int
-
-logic j : int
-
-logic us : int
-
-logic o : int
-
-logic o1 : bool
-
-logic j1 : int
-
-logic result : int
-
-logic min1 : int
-
-logic result1 : int
-
-logic index1 : int
-
-logic min2 : int
-
-logic index2 : int
-
-logic result2 : bool
-
-logic result3 : int
-
-logic min3 : int
-
-logic result4 : int
-
-logic index3 : int
-
-logic min4 : int
-
-logic index4 : int
-
-logic min5 : int
-
-logic index5 : int
-
-logic min6 : int
-
-logic index6 : int
-
-logic min7 : int
-
-logic index7 : int
-
-logic min8 : int
-
-logic index8 : int
-
-logic min9 : int
-
-logic index9 : int
-
-logic result5 : int
-
-logic sorters_not_global__index_of_minimum__result1 : int
-
-logic sorters_not_global__index_of_minimum__result2 : int
-
-logic sorters_not_global__index_of_minimum__result3 : int
-
-logic min10 : int
-
-logic index10 : int
-
-logic sorters_not_global__index_of_minimum__result4 : int
-
-logic min11 : int
-
-logic index11 : int
-
-logic sorters_not_global__index_of_minimum__result5 : int
-
-axiom H : in_range2(starting_at)
-
-axiom H1 : in_range2(limit)
-
-axiom H2 : (starting_at <= limit)
-
-axiom H3 : ((1 <= 64) -> in_range2(min))
-
-axiom H4 : (result = min)
-
-axiom H5 : (min1 = starting_at)
-
-axiom H6 : (result1 = index)
-
-axiom H7 : (index1 = (starting_at + 1))
-
-axiom H8 : ((((starting_at + 1) <= index1) and (index1 <= limit)) ->
-  (((temp___175 = index1) and ((temp___174 = min1) and
-  ((temp___176 = limit) and (((((limit = temp___176) and
+ (* File "sorters_not_global.ads", line 8, characters 0-0 *)
+goal WP_parameter_def :
+  (forall min:int. forall index:int.
+  forall sorters_not_global__index_of_minimum__result:int.
+  forall temp___200:int. forall temp___199:int. forall temp___201:int.
+  forall j:int. forall result:int. forall min1:int. forall result1:int.
+  forall index1:int. forall min2:int. forall index2:int. forall result2:int.
+  forall min3:int. forall min4:int. forall index3:int. forall min5:int.
+  forall index4:int. forall min6:int. forall index5:int. forall min7:int.
+  forall index6:int. forall result3:int.
+  forall sorters_not_global__index_of_minimum__result1:int.
+  forall sorters_not_global__index_of_minimum__result2:int.
+  forall sorters_not_global__index_of_minimum__result3:int. forall min8:int.
+  forall index7:int.
+  forall sorters_not_global__index_of_minimum__result4:int. forall min9:int.
+  forall index8:int.
+  forall sorters_not_global__index_of_minimum__result5:int.
+  (in_range2(starting_at) -> (in_range2(limit) -> ((starting_at <= limit) ->
+  (((((1 <= 64) -> in_range2(min)) and ((({ int__content = result } = {
+  int__content = min }) and (min1 = starting_at)) and (((({ int__content =
+  result1 } = { int__content = index }) and (index1 = (starting_at + 1))) and
+  (((((starting_at + 1) <= index1) and (index1 <= limit)) and
+  ((((temp___200 = index1) and ((temp___199 = min1) and
+  ((temp___201 = limit) and (((((limit = temp___201) and
   (starting_at <= min2)) and (min2 <= limit)) and
-  (forall j2:int. (((starting_at <= j2) and (j2 <= (index2 - 1))) ->
-  (to_rep((values[min2])) <= to_rep((values[j2])))))) and (((((1 <= 64) ->
+  (forall j1:int. (((starting_at <= j1) and (j1 <= (index2 - 1))) ->
+  (to_rep((values[min2])) <= to_rep((values[j1])))))) and (((((1 <= 64) ->
   in_range2(min2)) and (((starting_at + 1) <= limit) ->
   dynamic_property((starting_at + 1), limit, index2))) and
   (((starting_at + 1) <= index2) and (index2 <= limit))) and
-  ((((to_rep((values[index2])) <  to_rep((values[min2]))) ->
-  ((min2 = result3) and (min3 = index2))) and
-  ((not (to_rep((values[index2])) <  to_rep((values[min2])))) ->
-  (min3 = min2))) and (index2 = limit))))))) and (((index2 = index6) and
-  (min3 = min6)) and ((index7 = index2) and (min7 = min3)))))
-
-axiom H9 : ((((starting_at + 1) <= index1) and (index1 <= limit)) ->
-  (index8 = index6))
-
-axiom H10 : ((((starting_at + 1) <= index1) and (index1 <= limit)) ->
-  (min8 = min6))
-
-axiom H11 : ((((starting_at + 1) <= index1) and (index1 <= limit)) ->
-  (index9 = index7))
-
-axiom H12 : ((((starting_at + 1) <= index1) and (index1 <= limit)) ->
-  (min9 = min7))
-
-axiom H13 : ((not (((starting_at + 1) <= index1) and (index1 <= limit))) ->
-  (index1 = index8))
-
-axiom H14 : ((not (((starting_at + 1) <= index1) and (index1 <= limit))) ->
-  (min1 = min8))
-
-axiom H15 : ((not (((starting_at + 1) <= index1) and (index1 <= limit))) ->
-  (index9 = index1))
-
-axiom H16 : ((not (((starting_at + 1) <= index1) and (index1 <= limit))) ->
-  (min9 = min1))
-
-axiom H17 :
-  (sorters_not_global__index_of_minimum__result1 = sorters_not_global__index_of_minimum__result2)
-
-axiom H18 :
-  (sorters_not_global__index_of_minimum__result3 = sorters_not_global__index_of_minimum__result1)
-
-axiom H19 : (result5 = sorters_not_global__index_of_minimum__result)
-
-axiom H20 : (sorters_not_global__index_of_minimum__result1 = min8)
-
-axiom H21 :
-  (sorters_not_global__index_of_minimum__result4 = sorters_not_global__index_of_minimum__result2)
-
-axiom H22 : (index10 = index8)
-
-axiom H23 : (min10 = min8)
-
-axiom H24 :
-  (sorters_not_global__index_of_minimum__result5 = sorters_not_global__index_of_minimum__result3)
-
-axiom H25 : (index11 = index9)
-
-axiom H26 : (min11 = min9)
-
-axiom H27 : (starting_at <= j1)
-
-axiom H28 : (j1 <= limit)
-
- (* File "sorters_not_global.ads", line 8, characters 0-0 *)
-goal WP_parameter_def : (1 <= j1)
+  ((((to_rep((values[index2])) <  to_rep((values[min2]))) and
+  ((min2 = result2) and (min3 = index2))) or
+  ((not (to_rep((values[index2])) <  to_rep((values[min2])))) and
+  (min3 = min2))) and (index2 = limit))))))) and (((index2 = index3) and
+  (min3 = min4)) and ((index4 = index2) and (min5 = min3)))) and ((({
+  int__content = index5 } = { int__content = index3 }) and ({ int__content =
+  min6 } = { int__content = min4 })) and ((index6 = index4) and
+  (min7 = min5))))) or ((not (((starting_at + 1) <= index1) and
+  (index1 <= limit))) and (((index1 = index5) and (min1 = min6)) and
+  ((index6 = index1) and (min7 = min1)))))) and
+  (((sorters_not_global__index_of_minimum__result1 = sorters_not_global__index_of_minimum__result2) and
+  (sorters_not_global__index_of_minimum__result3 = sorters_not_global__index_of_minimum__result1)) and
+  (({ int__content = result3 } = { int__content =
+  sorters_not_global__index_of_minimum__result }) and
+  (sorters_not_global__index_of_minimum__result1 = min6)))))) and ((({
+  int__content = sorters_not_global__index_of_minimum__result4 } = {
+  int__content = sorters_not_global__index_of_minimum__result2 }) and (({
+  int__content = index7 } = { int__content = index5 }) and ({ int__content =
+  min8 } = { int__content = min6 }))) and
+  ((sorters_not_global__index_of_minimum__result5 = sorters_not_global__index_of_minimum__result3) and
+  ((index8 = index6) and (min9 = min7))))) -> (((starting_at <= j) and
+  (j <= limit)) -> (1 <= j)))))))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1336,8 +1336,8 @@ axiom elements__post_axiom :
   us_split_discrs1 = { rec__use_sets__my_sets__set__capacity = container;
   rec__use_sets__my_sets__set__modulus = container1 }; us_split_fields1 = {
   rec__use_sets__my_sets__set = container2 } })) and
-  (forall temp___429:int. ((in_range4(temp___429) and ((1 <= temp___429) and
-  (temp___429 <= (0 + length1(elements({ us_split_discrs1 = {
+  (forall temp___471:int. ((in_range4(temp___471) and ((1 <= temp___471) and
+  (temp___471 <= (0 + length1(elements({ us_split_discrs1 = {
   rec__use_sets__my_sets__set__capacity = container;
   rec__use_sets__my_sets__set__modulus = container1 }; us_split_fields1 = {
   rec__use_sets__my_sets__set = container2 } })))))) -> (contains(model__({
@@ -1346,7 +1346,7 @@ axiom elements__post_axiom :
   rec__use_sets__my_sets__set = container2 } }), get(elements({
   us_split_discrs1 = { rec__use_sets__my_sets__set__capacity = container;
   rec__use_sets__my_sets__set__modulus = container1 }; us_split_fields1 = {
-  rec__use_sets__my_sets__set = container2 } }), temp___429)) = true)))) and
+  rec__use_sets__my_sets__set = container2 } }), temp___471)) = true)))) and
   (forall item:int. ((in_range2(item) and (contains(model__({
   us_split_discrs1 = { rec__use_sets__my_sets__set__capacity = container;
   rec__use_sets__my_sets__set__modulus = container1 }; us_split_fields1 = {
@@ -1841,123 +1841,28 @@ axiom w_get__post_axiom :
   ((in_range1(witness1) and (has_witness(container, witness1) = true)) ->
   in_range5(w_get(container, witness1)))))
 
-logic cu__split_fields : count_type
-
-logic use_sets__are_disjoint__result : bool
-
-logic use_sets__are_disjoint__cu__assume : count_type
-
-logic temp___899 : count_type
-
-logic i : int
-
-logic o : us_rep4
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : bool
-
-logic o4 : us_rep3
-
-logic o5 : int
-
-logic o6 : int
-
-logic temp___898 : count_type
-
-logic o7 : bool
-
-logic use_sets__are_disjoint__result1 : bool
-
-logic result : count_type
-
-logic cu__split_fields1 : count_type
-
-logic result1 : bool
-
-logic cu__split_fields2 : count_type
-
-logic use_sets__are_disjoint__result2 : bool
-
-logic result2 : bool
-
-logic result3 : bool
-
-logic result4 : bool
-
-logic use_sets__are_disjoint__result3 : bool
-
-logic result5 : count_type
-
-logic cu__split_fields3 : count_type
-
-logic result6 : bool
-
-logic cu__split_fields4 : count_type
-
-logic use_sets__are_disjoint__result4 : bool
-
-logic cu__split_fields5 : count_type
-
-logic use_sets__are_disjoint__result5 : bool
-
-logic cu__split_fields6 : count_type
-
-logic use_sets__are_disjoint__result6 : bool
-
-logic cu__split_fields7 : count_type
-
-logic use_sets__are_disjoint__result7 : bool
-
-logic cu__split_fields8 : count_type
-
-logic use_sets__are_disjoint__result8 : bool
-
-logic cu__split_fields9 : count_type
-
-logic use_sets__are_disjoint__result9 : bool
-
-logic result7 : bool
-
-logic use_sets__are_disjoint__result10 : bool
-
-logic use_sets__are_disjoint__result11 : bool
-
-logic use_sets__are_disjoint__result12 : bool
-
-logic cu__split_fields10 : count_type
-
-logic use_sets__are_disjoint__result13 : bool
-
-logic cu__split_fields11 : count_type
-
-logic use_sets__are_disjoint__result14 : bool
-
-logic cu__split_fields12 : count_type
-
-logic use_sets__are_disjoint__result15 : bool
-
-logic cu__split_fields13 : count_type
-
-logic use_sets__are_disjoint__result16 : bool
-
-axiom H : (({ us_split_fields3 = { rec__use_sets__my_sets__cursor__node =
-  use_sets__are_disjoint__cu__assume } } = first({ us_split_discrs1 = {
-  rec__use_sets__my_sets__set__capacity = s1;
-  rec__use_sets__my_sets__set__modulus = s11 }; us_split_fields1 = {
+ (* File "use_sets.ads", line 33, characters 0-0 *)
+goal WP_parameter_def :
+  (forall cu__split_fields:count_type.
+  forall use_sets__are_disjoint__cu__assume:count_type. forall o:int.
+  forall result:count_type. forall cu__split_fields1:count_type.
+  forall result1:bool. forall cu__split_fields2:count_type.
+  forall use_sets__are_disjoint__result:bool. forall result2:bool.
+  forall use_sets__are_disjoint__result1:bool. (((({ us_split_fields3 = {
+  rec__use_sets__my_sets__cursor__node = use_sets__are_disjoint__cu__assume }
+  } = first({ us_split_discrs1 = { rec__use_sets__my_sets__set__capacity =
+  s1; rec__use_sets__my_sets__set__modulus = s11 }; us_split_fields1 = {
   rec__use_sets__my_sets__set = s12 } })) and (((bool_eq2(length3({
   us_split_discrs1 = { rec__use_sets__my_sets__set__capacity = s1;
   rec__use_sets__my_sets__set__modulus = s11 }; us_split_fields1 = {
-  rec__use_sets__my_sets__set = s12 } }), 0) = true) -> (bool_eq6({
+  rec__use_sets__my_sets__set = s12 } }), 0) = true) and (bool_eq6({
   us_split_fields3 = { rec__use_sets__my_sets__cursor__node =
   use_sets__are_disjoint__cu__assume } }, { us_split_fields3 = {
-  rec__use_sets__my_sets__cursor__node = no_element } }) = true)) and
+  rec__use_sets__my_sets__cursor__node = no_element } }) = true)) or
   ((not (bool_eq2(length3({ us_split_discrs1 = {
   rec__use_sets__my_sets__set__capacity = s1;
   rec__use_sets__my_sets__set__modulus = s11 }; us_split_fields1 = {
-  rec__use_sets__my_sets__set = s12 } }), 0) = true)) ->
+  rec__use_sets__my_sets__set = s12 } }), 0) = true)) and
   ((has_key(positions({ us_split_discrs1 = {
   rec__use_sets__my_sets__set__capacity = s1;
   rec__use_sets__my_sets__set__modulus = s11 }; us_split_fields1 = {
@@ -1968,13 +1873,12 @@ axiom H : (({ us_split_fields3 = { rec__use_sets__my_sets__cursor__node =
   rec__use_sets__my_sets__set__modulus = s11 }; us_split_fields1 = {
   rec__use_sets__my_sets__set = s12 } }), { us_split_fields3 = {
   rec__use_sets__my_sets__cursor__node = use_sets__are_disjoint__cu__assume }
-  }) = 1)))))
-
-axiom H1 : (result = cu__split_fields)
-
-axiom H2 : (use_sets__are_disjoint__cu__assume = cu__split_fields1)
-
-axiom H3 : ((result1 = has_key(positions({ us_split_discrs1 = {
+  }) = 1))))) and (({ us_split_fields__content1 = {
+  rec__use_sets__my_sets__cursor__node = result } } = {
+  us_split_fields__content1 = { rec__use_sets__my_sets__cursor__node =
+  cu__split_fields } }) and
+  (use_sets__are_disjoint__cu__assume = cu__split_fields1))) ->
+  (((result1 = has_key(positions({ us_split_discrs1 = {
   rec__use_sets__my_sets__set__capacity = s1;
   rec__use_sets__my_sets__set__modulus = s11 }; us_split_fields1 = {
   rec__use_sets__my_sets__set = s12 } }), { us_split_fields3 = {
@@ -1983,31 +1887,26 @@ axiom H3 : ((result1 = has_key(positions({ us_split_discrs1 = {
   rec__use_sets__my_sets__set__capacity = s1;
   rec__use_sets__my_sets__set__modulus = s11 }; us_split_fields1 = {
   rec__use_sets__my_sets__set = s12 } }), { us_split_fields3 = {
-  rec__use_sets__my_sets__cursor__node = cu__split_fields1 } }) = true)))
-
-axiom H4 : (result1 = true)
-
-axiom H5 :
-  (forall i1:int. (((1 <= i1) and (i1 <= (get1(positions({ us_split_discrs1 =
-  { rec__use_sets__my_sets__set__capacity = s1;
-  rec__use_sets__my_sets__set__modulus = s11 }; us_split_fields1 = {
-  rec__use_sets__my_sets__set = s12 } }), { us_split_fields3 = {
-  rec__use_sets__my_sets__cursor__node = cu__split_fields2 } }) - 1))) ->
-  (not (contains(model__({ us_split_discrs1 = {
-  rec__use_sets__my_sets__set__capacity = s2;
-  rec__use_sets__my_sets__set__modulus = s21 }; us_split_fields1 = {
-  rec__use_sets__my_sets__set = s22 } }), get(elements({ us_split_discrs1 = {
-  rec__use_sets__my_sets__set__capacity = s1;
-  rec__use_sets__my_sets__set__modulus = s11 }; us_split_fields1 = {
-  rec__use_sets__my_sets__set = s12 } }), i1)) = true))))
-
-axiom H6 : (has_key(positions({ us_split_discrs1 = {
+  rec__use_sets__my_sets__cursor__node = cu__split_fields1 } }) = true))) ->
+  ((result1 = true) ->
+  ((forall i:int. (((1 <= i) and (i <= (get1(positions({ us_split_discrs1 = {
+   rec__use_sets__my_sets__set__capacity = s1;
+   rec__use_sets__my_sets__set__modulus = s11 }; us_split_fields1 = {
+   rec__use_sets__my_sets__set = s12 } }), { us_split_fields3 = {
+   rec__use_sets__my_sets__cursor__node = cu__split_fields2 } }) - 1))) ->
+   (not (contains(model__({ us_split_discrs1 = {
+   rec__use_sets__my_sets__set__capacity = s2;
+   rec__use_sets__my_sets__set__modulus = s21 }; us_split_fields1 = {
+   rec__use_sets__my_sets__set = s22 } }), get(elements({ us_split_discrs1 =
+   { rec__use_sets__my_sets__set__capacity = s1;
+   rec__use_sets__my_sets__set__modulus = s11 }; us_split_fields1 = {
+   rec__use_sets__my_sets__set = s12 } }), i)) = true)))) ->
+  ((has_key(positions({ us_split_discrs1 = {
   rec__use_sets__my_sets__set__capacity = s1;
   rec__use_sets__my_sets__set__modulus = s11 }; us_split_fields1 = {
   rec__use_sets__my_sets__set = s12 } }), { us_split_fields3 = {
-  rec__use_sets__my_sets__cursor__node = cu__split_fields2 } }) = true)
-
-axiom H7 : ((o6 = get(elements({ us_split_discrs1 = {
+  rec__use_sets__my_sets__cursor__node = cu__split_fields2 } }) = true) ->
+  (((((o = get(elements({ us_split_discrs1 = {
   rec__use_sets__my_sets__set__capacity = s1;
   rec__use_sets__my_sets__set__modulus = s11 }; us_split_fields1 = {
   rec__use_sets__my_sets__set = s12 } }), get1(positions({ us_split_discrs1 =
@@ -2015,35 +1914,29 @@ axiom H7 : ((o6 = get(elements({ us_split_discrs1 = {
   rec__use_sets__my_sets__set__modulus = s11 }; us_split_fields1 = {
   rec__use_sets__my_sets__set = s12 } }), { us_split_fields3 = {
   rec__use_sets__my_sets__cursor__node = cu__split_fields2 } }))) and
-  (in_range6(o6) and (o6 = get(elements({ us_split_discrs1 = {
+  (in_range6(o) and (o = get(elements({ us_split_discrs1 = {
   rec__use_sets__my_sets__set__capacity = s1;
   rec__use_sets__my_sets__set__modulus = s11 }; us_split_fields1 = {
   rec__use_sets__my_sets__set = s12 } }), get1(positions({ us_split_discrs1 =
   { rec__use_sets__my_sets__set__capacity = s1;
   rec__use_sets__my_sets__set__modulus = s11 }; us_split_fields1 = {
   rec__use_sets__my_sets__set = s12 } }), { us_split_fields3 = {
-  rec__use_sets__my_sets__cursor__node = cu__split_fields2 } })))))
-
-axiom H8 : ((result3 = contains(model__({ us_split_discrs1 = {
+  rec__use_sets__my_sets__cursor__node = cu__split_fields2 } }))))) and
+  ((result2 = contains(model__({ us_split_discrs1 = {
   rec__use_sets__my_sets__set__capacity = s2;
   rec__use_sets__my_sets__set__modulus = s21 }; us_split_fields1 = {
-  rec__use_sets__my_sets__set = s22 } }), o6)) and ((result3 = true) <->
+  rec__use_sets__my_sets__set = s22 } }), o)) and ((result2 = true) <->
   (contains(model__({ us_split_discrs1 = {
   rec__use_sets__my_sets__set__capacity = s2;
   rec__use_sets__my_sets__set__modulus = s21 }; us_split_fields1 = {
-  rec__use_sets__my_sets__set = s22 } }), o6) = true)))
-
-axiom H9 : (not (result3 = true))
-
-axiom H10 :
-  (use_sets__are_disjoint__result3 = use_sets__are_disjoint__result2)
-
- (* File "use_sets.ads", line 33, characters 0-0 *)
-goal WP_parameter_def : ((has_key(positions({ us_split_discrs1 = {
+  rec__use_sets__my_sets__set = s22 } }), o) = true)))) and
+  ((not (result2 = true)) and
+  (use_sets__are_disjoint__result1 = use_sets__are_disjoint__result))) ->
+  ((has_key(positions({ us_split_discrs1 = {
   rec__use_sets__my_sets__set__capacity = s1;
   rec__use_sets__my_sets__set__modulus = s11 }; us_split_fields1 = {
   rec__use_sets__my_sets__set = s12 } }), { us_split_fields3 = {
   rec__use_sets__my_sets__cursor__node = cu__split_fields2 } }) = true) or
   (bool_eq6({ us_split_fields3 = { rec__use_sets__my_sets__cursor__node =
   cu__split_fields2 } }, { us_split_fields3 = {
-  rec__use_sets__my_sets__cursor__node = no_element } }) = true))
+  rec__use_sets__my_sets__cursor__node = no_element } }) = true)))))))))

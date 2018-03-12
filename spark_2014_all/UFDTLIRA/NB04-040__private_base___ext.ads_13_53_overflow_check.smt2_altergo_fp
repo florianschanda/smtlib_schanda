@@ -418,17 +418,9 @@ axiom sum__2__def_axiom :
   attr__tag1 = x7 }) = (sum({ us_split_fields1 = { rec__base__t__c = x5;
   rec__ext__ = hide_ext__(x4, x6) }; attr__tag = x7 }) + to_rep(x4))))
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-axiom H : ((o = sum({ us_split_fields1 = { rec__base__t__c = x1; rec__ext__ =
-  hide_ext__(x, x2) }; attr__tag = x3 })) and (in_range(o) and
-  (o = to_rep(x1))))
-
-axiom H1 : (o1 = (o + to_rep(x)))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(o1)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. ((((o = sum({ us_split_fields1 = {
+  rec__base__t__c = x1; rec__ext__ = hide_ext__(x, x2) }; attr__tag = x3
+  })) and (in_range(o) and (o = to_rep(x1)))) and (o1 = (o + to_rep(x)))) ->
+  in_range(o1)))

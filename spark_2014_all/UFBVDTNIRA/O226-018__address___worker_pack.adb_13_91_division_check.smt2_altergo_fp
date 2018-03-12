@@ -1083,8 +1083,15 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 type pvoid
 
-predicate in_range1(x: t1) = (ule1(of_int1(0), x) and ule1(x,
-  of_int1(18446744073709551615)))
+logic rliteral : t1
+
+axiom rliteral_axiom : (tqtint1(rliteral) = 0)
+
+logic rliteral1 : t1
+
+axiom rliteral_axiom1 : (tqtint1(rliteral1) = 18446744073709551615)
+
+predicate in_range1(x: t1) = (ule1(rliteral, x) and ule1(x, rliteral1))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 18446744073709551615))
 
@@ -1118,8 +1125,8 @@ axiom inversion_axiom : (forall x:pvoid [to_rep(x)]. (of_rep(to_rep(x)) = x))
 axiom range_axiom : (forall x:pvoid [to_rep(x)]. in_range1(to_rep(x)))
 
 axiom coerce_axiom :
-  (forall x:t1 [to_rep(of_rep(x))]. (in_range1(urem1(x, of_int1(0))) ->
-  (to_rep(of_rep(x)) = urem1(x, of_int1(0)))))
+  (forall x:t1 [to_rep(of_rep(x))]. (in_range1(urem1(x, rliteral)) ->
+  (to_rep(of_rep(x)) = urem1(x, rliteral))))
 
 function to_int2(x: pvoid) : int = tqtint1(to_rep(x))
 
@@ -1301,21 +1308,8 @@ axiom xqueue_create__post_axiom :
 
 axiom null_address__def_axiom : (null_address = of_int1(0))
 
-logic worker_queue : t1
-
-logic o : int
-
-logic o1 : int
-
-axiom H : true
-
-axiom H1 : (of_int1(0) = null_address)
-
-axiom H2 : in_range1(worker_queue)
-
-axiom H3 : (worker_queue = null_address)
-
-axiom H4 : ((o = value__size) and in_range(value__size))
-
  (* File "worker_pack.ads", line 8, characters 0-0 *)
-goal WP_parameter_def : (not (8 = 0))
+goal WP_parameter_def :
+  (forall worker_queue:t1. forall o:int. ((of_int1(0) = null_address) ->
+  (in_range1(worker_queue) -> ((worker_queue = null_address) ->
+  (((o = value__size) and in_range(value__size)) -> (not (8 = 0)))))))

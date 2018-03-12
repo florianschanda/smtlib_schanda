@@ -599,12 +599,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -616,6 +610,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -779,24 +779,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,unsigned_32) farray, int, int, (int,unsigned_32) farray,
-  int, int -> (int,unsigned_32) farray
-
-axiom concat_def :
-  (forall a:(int,unsigned_32) farray. forall b:(int,unsigned_32) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : unsigned_32, int -> (int,unsigned_32) farray
-
-axiom singleton_def :
-  (forall v:unsigned_32.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq6 : (int,unsigned_32) farray, int, int,
   (int,unsigned_32) farray, int, int -> bool
 
@@ -807,17 +789,17 @@ axiom bool_eq_def5 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -827,37 +809,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,unsigned_32) farray, int, int, (int,unsigned_32) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,unsigned_32) farray. forall b:(int,unsigned_32) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq6(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,unsigned_32) farray. forall b:(int,unsigned_32) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq6(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and ult(to_rep1((a[(i + 1)])), to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,unsigned_32) farray. forall b:(int,unsigned_32) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq6(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and ugt(to_rep1((a[(j + 1)])), to_rep1((b[(i + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic dummy3 : (int,unsigned_32) farray
 
@@ -1015,207 +969,81 @@ logic attr__ATTRIBUTE_ADDRESS6 : int
 
 axiom n__def_axiom : (n = of_int(((max1 - min1) + 1)))
 
-axiom slop__def_axiom : (slop = add(urem(of_int(4294967295), n), of_int(1)))
+logic rliteral : t
 
-logic g__split_fields : (int,unsigned_32) farray
+axiom rliteral_axiom : (tqtint(rliteral) = 4294967295)
 
-logic g__split_fields1 : state_range
+logic rliteral1 : t
 
-logic value : int
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 1)
 
-logic x : t
+axiom slop__def_axiom : (slop = add(urem(rliteral, n), rliteral1))
 
-logic o : int
+logic rliteral2 : t
 
-logic random__random_integer__B_4__n__assume : t
-
-logic temp___329 : (int,unsigned_32) farray
-
-logic temp___3291 : state_range
-
-logic temp___328 : t
-
-logic o1 : int
-
-logic g__split_fields2 : (int,unsigned_32) farray
-
-logic g__split_fields3 : state_range
-
-logic x1 : t
-
-logic x2 : t
-
-logic g__split_fields4 : (int,unsigned_32) farray
-
-logic g__split_fields5 : state_range
-
-logic x3 : t
-
-logic g__split_fields6 : (int,unsigned_32) farray
-
-logic g__split_fields7 : state_range
-
-logic x4 : t
-
-logic g__split_fields8 : (int,unsigned_32) farray
-
-logic g__split_fields9 : state_range
-
-logic x5 : t
-
-logic g__split_fields10 : (int,unsigned_32) farray
-
-logic g__split_fields11 : state_range
-
-logic x6 : t
-
-logic g__split_fields12 : (int,unsigned_32) farray
-
-logic g__split_fields13 : state_range
-
-logic x7 : t
-
-logic result : t
-
-logic x8 : t
-
-logic g__split_fields14 : (int,unsigned_32) farray
-
-logic g__split_fields15 : state_range
-
-logic x9 : t
-
-logic g__split_fields16 : (int,unsigned_32) farray
-
-logic g__split_fields17 : state_range
-
-logic x10 : t
-
-logic result1 : int
-
-logic value1 : int
-
-logic g__split_fields18 : (int,unsigned_32) farray
-
-logic g__split_fields19 : state_range
-
-logic value2 : int
-
-logic x11 : t
-
-logic g__split_fields20 : (int,unsigned_32) farray
-
-logic g__split_fields21 : state_range
-
-logic value3 : int
-
-logic x12 : t
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range1(value))
-
-axiom H1 : in_range1(min1)
-
-axiom H2 : in_range1(max1)
-
-axiom H3 : (min1 <= max1)
-
-axiom H4 : true
-
-axiom H5 : true
-
-axiom H6 : (((min1 = (- 2147483648)) and (max1 = 2147483647)) -> (x9 = x1))
-
-axiom H7 : (((min1 = (- 2147483648)) and (max1 = 2147483647)) ->
-  ((g__split_fields14 = g__split_fields2) and
-  (g__split_fields15 = g__split_fields3)))
-
-axiom H8 : (((min1 = (- 2147483648)) and (max1 = 2147483647)) -> (x10 = x1))
-
-axiom H9 : (((min1 = (- 2147483648)) and (max1 = 2147483647)) ->
-  ((g__split_fields16 = g__split_fields2) and
-  (g__split_fields17 = g__split_fields3)))
-
-axiom H10 : ((not ((min1 = (- 2147483648)) and (max1 = 2147483647))) ->
-  ((o = ((max1 - min1) + 1)) and uint_in_range(((max1 - min1) + 1))))
-
-axiom H11 : ((not ((min1 = (- 2147483648)) and (max1 = 2147483647))) ->
-  (random__random_integer__B_4__n__assume = of_int(o)))
-
-axiom H12 : ((not ((min1 = (- 2147483648)) and (max1 = 2147483647))) ->
-  (random__random_integer__B_4__n__assume = n))
-
-axiom H13 : true
-
-axiom H14 : ((not ((min1 = (- 2147483648)) and (max1 = 2147483647))) ->
-  (add(urem(of_int(4294967295), n), of_int(1)) = slop))
-
-axiom H15 : true
-
-axiom H16 : ((not ((min1 = (- 2147483648)) and (max1 = 2147483647))) ->
-  ((g__split_fields = temp___329) and (g__split_fields1 = temp___3291)))
-
-axiom H17 : ((not ((min1 = (- 2147483648)) and (max1 = 2147483647))) ->
-  (temp___328 = x))
-
-axiom H18 : true
-
-axiom H19 : true
-
-axiom H20 : ((not ((min1 = (- 2147483648)) and (max1 = 2147483647))) ->
-  ((slop = n) or ule(x3, sub(of_int(4294967295), slop))))
-
-axiom H21 : ((not ((min1 = (- 2147483648)) and (max1 = 2147483647))) ->
-  (x3 = x4))
-
-axiom H22 : ((not ((min1 = (- 2147483648)) and (max1 = 2147483647))) ->
-  (g__split_fields6 = g__split_fields4))
-
-axiom H23 : ((not ((min1 = (- 2147483648)) and (max1 = 2147483647))) ->
-  (g__split_fields7 = g__split_fields5))
-
-axiom H24 : ((not ((min1 = (- 2147483648)) and (max1 = 2147483647))) ->
-  (x5 = x3))
-
-axiom H25 : ((not ((min1 = (- 2147483648)) and (max1 = 2147483647))) ->
-  ((g__split_fields8 = g__split_fields4) and
-  (g__split_fields9 = g__split_fields5)))
-
-axiom H26 : ((not ((min1 = (- 2147483648)) and (max1 = 2147483647))) ->
-  (x6 = x4))
-
-axiom H27 : ((not ((min1 = (- 2147483648)) and (max1 = 2147483647))) ->
-  ((g__split_fields10 = g__split_fields6) and
-  (g__split_fields11 = g__split_fields7)))
-
-axiom H28 : ((not ((min1 = (- 2147483648)) and (max1 = 2147483647))) ->
-  (x7 = x5))
-
-axiom H29 : ((not ((min1 = (- 2147483648)) and (max1 = 2147483647))) ->
-  ((g__split_fields12 = g__split_fields8) and
-  (g__split_fields13 = g__split_fields9)))
-
-axiom H30 : ((not ((min1 = (- 2147483648)) and (max1 = 2147483647))) ->
-  (result = x6))
-
-axiom H31 : ((not ((min1 = (- 2147483648)) and (max1 = 2147483647))) ->
-  (x8 = urem(x6, n)))
-
-axiom H32 : ((not ((min1 = (- 2147483648)) and (max1 = 2147483647))) ->
-  (ule(of_int(0), x8) and ule(x8, sub(n, of_int(1)))))
-
-axiom H33 : ((not ((min1 = (- 2147483648)) and (max1 = 2147483647))) ->
-  (x9 = x8))
-
-axiom H34 : ((not ((min1 = (- 2147483648)) and (max1 = 2147483647))) ->
-  ((g__split_fields14 = g__split_fields10) and
-  (g__split_fields15 = g__split_fields11)))
-
-axiom H35 : ((not ((min1 = (- 2147483648)) and (max1 = 2147483647))) ->
-  (x10 = x8))
-
-axiom H36 : ((not ((min1 = (- 2147483648)) and (max1 = 2147483647))) ->
-  ((g__split_fields16 = g__split_fields12) and
-  (g__split_fields17 = g__split_fields13)))
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 0)
 
  (* File "random.adb", line 106, characters 0-0 *)
-goal WP_parameter_def : in_range1((min1 + tqtint(x9)))
+goal WP_parameter_def :
+  (forall g__split_fields:(int,unsigned_32) farray.
+  forall g__split_fields1:state_range. forall value:int. forall x:t.
+  forall o:int. forall random__random_integer__B_4__n__assume:t.
+  forall temp___367:(int,unsigned_32) farray. forall temp___3671:state_range.
+  forall temp___366:t. forall g__split_fields2:(int,unsigned_32) farray.
+  forall g__split_fields3:state_range. forall x1:t.
+  forall g__split_fields4:(int,unsigned_32) farray.
+  forall g__split_fields5:state_range. forall x2:t.
+  forall g__split_fields6:(int,unsigned_32) farray.
+  forall g__split_fields7:state_range. forall x3:t.
+  forall g__split_fields8:(int,unsigned_32) farray.
+  forall g__split_fields9:state_range. forall x4:t.
+  forall g__split_fields10:(int,unsigned_32) farray.
+  forall g__split_fields11:state_range. forall x5:t.
+  forall g__split_fields12:(int,unsigned_32) farray.
+  forall g__split_fields13:state_range. forall x6:t. forall result:t.
+  forall x7:t. forall g__split_fields14:(int,unsigned_32) farray.
+  forall g__split_fields15:state_range. forall x8:t.
+  forall g__split_fields16:(int,unsigned_32) farray.
+  forall g__split_fields17:state_range. forall x9:t.
+  ((((- 2147483648) <= 2147483647) -> in_range1(value)) ->
+  (in_range1(min1) -> (in_range1(max1) -> ((min1 <= max1) ->
+  (((((min1 = (- 2147483648)) and (max1 = 2147483647)) and (((x1 = x8) and
+  ((g__split_fields14 = g__split_fields2) and
+  (g__split_fields15 = g__split_fields3))) and ((x9 = x1) and ({
+  rec__random__generator__state = g__split_fields16;
+  rec__random__generator__index = g__split_fields17 } = {
+  rec__random__generator__state = g__split_fields2;
+  rec__random__generator__index = g__split_fields3 })))) or
+  ((not ((min1 = (- 2147483648)) and (max1 = 2147483647))) and
+  ((((((o = ((max1 - min1) + 1)) and uint_in_range(((max1 - min1) + 1))) and
+  (random__random_integer__B_4__n__assume = of_int(o))) and
+  (random__random_integer__B_4__n__assume = n)) and ((add(urem(rliteral, n),
+  rliteral1) = slop) and ((((((g__split_fields = temp___367) and
+  (g__split_fields1 = temp___3671)) and ((temp___366 = x) and ((slop = n) or
+  ule(x2, sub(rliteral, slop))))) and (((x2 = x3) and
+  ((g__split_fields6 = g__split_fields4) and
+  (g__split_fields7 = g__split_fields5))) and ((x4 = x2) and ({
+  rec__random__generator__state = g__split_fields8;
+  rec__random__generator__index = g__split_fields9 } = {
+  rec__random__generator__state = g__split_fields4;
+  rec__random__generator__index = g__split_fields5 })))) and ((({
+  t__content = x5 } = { t__content = x3 }) and ({ us_split_fields__content =
+  { rec__random__generator__state = g__split_fields10;
+  rec__random__generator__index = g__split_fields11 } } = {
+  us_split_fields__content = { rec__random__generator__state =
+  g__split_fields6; rec__random__generator__index = g__split_fields7 }
+  })) and ((x6 = x4) and ({ rec__random__generator__state =
+  g__split_fields12; rec__random__generator__index = g__split_fields13 } = {
+  rec__random__generator__state = g__split_fields8;
+  rec__random__generator__index = g__split_fields9 })))) and
+  (((result = x5) and (x7 = urem(x5, n))) and (ule(rliteral2, x7) and ule(x7,
+  sub(n, rliteral1))))))) and (((x7 = x8) and ({ us_split_fields__content = {
+  rec__random__generator__state = g__split_fields14;
+  rec__random__generator__index = g__split_fields15 } } = {
+  us_split_fields__content = { rec__random__generator__state =
+  g__split_fields10; rec__random__generator__index = g__split_fields11 }
+  })) and ((x9 = x7) and ({ rec__random__generator__state =
+  g__split_fields16; rec__random__generator__index = g__split_fields17 } = {
+  rec__random__generator__state = g__split_fields12;
+  rec__random__generator__index = g__split_fields13 })))))) ->
+  in_range1((min1 + tqtint(x8)))))))))

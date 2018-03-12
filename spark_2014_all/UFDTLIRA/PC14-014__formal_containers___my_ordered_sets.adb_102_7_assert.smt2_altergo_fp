@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1524,15 +1524,15 @@ axiom elements__post_axiom :
   rec__my_ordered_sets__n__set = container1 } })) = length({
   us_split_discrs1 = { rec__my_ordered_sets__n__set__capacity = container };
   us_split_fields3 = { rec__my_ordered_sets__n__set = container1 } })) and
-  (forall temp___626:int. ((in_range4(temp___626) and ((1 <= temp___626) and
-  (temp___626 <= (0 + length2(elements({ us_split_discrs1 = {
+  (forall temp___683:int. ((in_range4(temp___683) and ((1 <= temp___683) and
+  (temp___683 <= (0 + length2(elements({ us_split_discrs1 = {
   rec__my_ordered_sets__n__set__capacity = container }; us_split_fields3 = {
   rec__my_ordered_sets__n__set = container1 } })))))) -> (contains(model__({
   us_split_discrs1 = { rec__my_ordered_sets__n__set__capacity = container };
   us_split_fields3 = { rec__my_ordered_sets__n__set = container1 } }),
   get(elements({ us_split_discrs1 = {
   rec__my_ordered_sets__n__set__capacity = container }; us_split_fields3 = {
-  rec__my_ordered_sets__n__set = container1 } }), temp___626)) = true)))) and
+  rec__my_ordered_sets__n__set = container1 } }), temp___683)) = true)))) and
   (forall item:natural. forall item1:integer. ((contains(model__({
   us_split_discrs1 = { rec__my_ordered_sets__n__set__capacity = container };
   us_split_fields3 = { rec__my_ordered_sets__n__set = container1 } }), {
@@ -2078,356 +2078,18 @@ axiom m_included_except__post_axiom :
    key) = false) and (bool_lt(key, to_rep1(e)) = false))))) ->
   (m_included_except(left, right, key) = true))))))
 
-logic l__split_fields : us_main_type
-
-logic k__split_fields : us_main_type
-
-logic c__split_fields : count_type
-
-logic us : int
-
-logic us1 : int
-
-logic temp___1090 : count_type
-
-logic temp___1091 : count_type
-
-logic o : integer
-
-logic o1 : natural
-
-logic o2 : natural
-
-logic o3 : integer
-
-logic o4 : natural
-
-logic o5 : integer
-
-logic o6 : integer
-
-logic o7 : natural
-
-logic o8 : natural
-
-logic o9 : integer
-
-logic o10 : natural
-
-logic o11 : integer
-
-logic o12 : integer
-
-logic o13 : natural
-
-logic o14 : natural
-
-logic o15 : integer
-
-logic o16 : natural
-
-logic o17 : integer
-
-logic o18 : integer
-
-logic o19 : natural
-
-logic o20 : natural
-
-logic o21 : integer
-
-logic o22 : natural
-
-logic o23 : integer
-
-logic o24 : integer
-
-logic o25 : natural
-
-logic o26 : natural
-
-logic o27 : integer
-
-logic o28 : natural
-
-logic o29 : integer
-
-logic o30 : integer
-
-logic o31 : natural
-
-logic o32 : natural
-
-logic o33 : integer
-
-logic o34 : natural
-
-logic o35 : integer
-
-logic o36 : integer
-
-logic o37 : natural
-
-logic o38 : natural
-
-logic o39 : integer
-
-logic o40 : natural
-
-logic o41 : integer
-
-logic o42 : integer
-
-logic o43 : natural
-
-logic o44 : natural
-
-logic o45 : integer
-
-logic o46 : natural
-
-logic o47 : integer
-
-logic o48 : integer
-
-logic o49 : natural
-
-logic o50 : natural
-
-logic o51 : integer
-
-logic o52 : natural
-
-logic o53 : integer
-
-logic temp___1104 : count_type
-
-logic o54 : integer
-
-logic o55 : natural
-
-logic o56 : natural
-
-logic o57 : integer
-
-logic o58 : natural
-
-logic o59 : integer
-
-logic temp___1106 : count_type
-
-logic o60 : integer
-
-logic o61 : natural
-
-logic o62 : natural
-
-logic o63 : integer
-
-logic o64 : natural
-
-logic o65 : integer
-
-logic o66 : integer
-
-logic o67 : natural
-
-logic o68 : natural
-
-logic o69 : integer
-
-logic o70 : natural
-
-logic o71 : integer
-
-logic o72 : integer
-
-logic o73 : natural
-
-logic o74 : natural
-
-logic o75 : integer
-
-logic o76 : natural
-
-logic o77 : integer
-
-logic temp___1111 : count_type
-
-logic temp___1113 : count_type
-
-logic result : count_type
-
-logic c__split_fields1 : count_type
-
-logic result1 : count_type
-
-logic c__split_fields2 : count_type
-
-logic my_ordered_sets__n__insert__2__container__fields : us_main_type
-
-logic result2 : us_main_type
-
-logic l__split_fields1 : us_main_type
-
-logic my_ordered_sets__n__insert__2__container__fields1 : us_main_type
-
-logic result3 : us_main_type
-
-logic l__split_fields2 : us_main_type
-
-logic c__split_fields3 : count_type
-
-logic b : bool
-
-logic my_ordered_sets__n__insert__container__fields : us_main_type
-
-logic result4 : us_main_type
-
-logic l__split_fields3 : us_main_type
-
-logic my_ordered_sets__n__replace_element__container__fields : us_main_type
-
-logic result5 : us_main_type
-
-logic l__split_fields4 : us_main_type
-
-logic my_ordered_sets__n__replace__container__fields : us_main_type
-
-logic result6 : us_main_type
-
-logic l__split_fields5 : us_main_type
-
-logic my_ordered_sets__n__assign__target__fields : us_main_type
-
-logic result7 : us_main_type
-
-logic k__split_fields1 : us_main_type
-
-logic my_ordered_sets__n__move__source__fields : us_main_type
-
-logic my_ordered_sets__n__move__target__fields : us_main_type
-
-logic result8 : us_main_type
-
-logic l__split_fields6 : us_main_type
-
-logic result9 : us_main_type
-
-logic k__split_fields2 : us_main_type
-
-logic my_ordered_sets__n__include__container__fields : us_main_type
-
-logic result10 : us_main_type
-
-logic l__split_fields7 : us_main_type
-
-logic my_ordered_sets__n__include__container__fields1 : us_main_type
-
-logic result11 : us_main_type
-
-logic l__split_fields8 : us_main_type
-
-logic my_ordered_sets__n__assign__target__fields1 : us_main_type
-
-logic result12 : us_main_type
-
-logic k__split_fields3 : us_main_type
-
-logic my_ordered_sets__n__delete__container__fields : us_main_type
-
-logic result13 : us_main_type
-
-logic l__split_fields9 : us_main_type
-
-logic result14 : count_type
-
-logic c__split_fields4 : count_type
-
-logic c__split_fields5 : count_type
-
-logic my_ordered_sets__n__delete__2__container__fields : us_main_type
-
-logic result15 : us_main_type
-
-logic l__split_fields10 : us_main_type
-
-logic result16 : count_type
-
-logic c__split_fields6 : count_type
-
-logic my_ordered_sets__n__exclude__container__fields : us_main_type
-
-logic result17 : us_main_type
-
-logic l__split_fields11 : us_main_type
-
-logic my_ordered_sets__n__exclude__container__fields1 : us_main_type
-
-logic result18 : us_main_type
-
-logic l__split_fields12 : us_main_type
-
-logic my_ordered_sets__g__replace__container__fields : us_main_type
-
-logic result19 : us_main_type
-
-logic k__split_fields4 : us_main_type
-
-logic my_ordered_sets__g__delete__container__fields : us_main_type
-
-logic result20 : us_main_type
-
-logic k__split_fields5 : us_main_type
-
-logic result21 : count_type
-
-logic c__split_fields7 : count_type
-
-logic c__split_fields8 : count_type
-
-logic my_ordered_sets__n__delete__2__container__fields1 : us_main_type
-
-logic result22 : us_main_type
-
-logic k__split_fields6 : us_main_type
-
-logic result23 : count_type
-
-logic c__split_fields9 : count_type
-
-logic my_ordered_sets__g__exclude__container__fields : us_main_type
-
-logic result24 : us_main_type
-
-logic k__split_fields7 : us_main_type
-
-logic my_ordered_sets__g__exclude__container__fields1 : us_main_type
-
-logic result25 : us_main_type
-
-logic k__split_fields8 : us_main_type
-
-axiom H : ((us = 10) and in_range3(10))
-
-axiom H1 : ((to_rep2(l__split_discrs) = 10) and (is_empty({
-  us_split_discrs1 = { rec__my_ordered_sets__n__set__capacity =
-  l__split_discrs }; us_split_fields3 = { rec__my_ordered_sets__n__set =
-  l__split_fields } }) = true))
-
-axiom H2 : (10 = to_rep2(l__split_discrs))
-
-axiom H3 : ((us1 = 10) and in_range3(10))
-
-axiom H4 : ((to_rep2(k__split_discrs) = 10) and (is_empty({
-  us_split_discrs1 = { rec__my_ordered_sets__n__set__capacity =
-  k__split_discrs }; us_split_fields3 = { rec__my_ordered_sets__n__set =
-  k__split_fields } }) = true))
-
-axiom H5 : (10 = to_rep2(k__split_discrs))
-
  (* File "my_ordered_sets.adb", line 4, characters 0-0 *)
-goal WP_parameter_def : (is_empty({ us_split_discrs1 = {
+goal WP_parameter_def :
+  (forall l__split_fields:us_main_type. forall k__split_fields:us_main_type.
+  forall us:int. forall us1:int. (((us = 10) and in_range3(10)) ->
+  (((to_rep2(l__split_discrs) = 10) and (is_empty({ us_split_discrs1 = {
   rec__my_ordered_sets__n__set__capacity = l__split_discrs };
   us_split_fields3 = { rec__my_ordered_sets__n__set = l__split_fields }
-  }) = true)
+  }) = true)) -> ((10 = to_rep2(l__split_discrs)) -> (((us1 = 10) and
+  in_range3(10)) -> (((to_rep2(k__split_discrs) = 10) and (is_empty({
+  us_split_discrs1 = { rec__my_ordered_sets__n__set__capacity =
+  k__split_discrs }; us_split_fields3 = { rec__my_ordered_sets__n__set =
+  k__split_fields } }) = true)) -> ((10 = to_rep2(k__split_discrs)) ->
+  (is_empty({ us_split_discrs1 = { rec__my_ordered_sets__n__set__capacity =
+  l__split_discrs }; us_split_fields3 = { rec__my_ordered_sets__n__set =
+  l__split_fields } }) = true))))))))

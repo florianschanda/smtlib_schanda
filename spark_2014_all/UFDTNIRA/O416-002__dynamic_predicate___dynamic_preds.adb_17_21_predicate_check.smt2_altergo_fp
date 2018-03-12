@@ -246,35 +246,16 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : int
-
-logic o : int
-
-logic dynamic_preds__init_even__x : int
-
-logic result : int
-
-logic x1 : int
-
-logic dynamic_preds__init_ok_even__x : int
-
-axiom H : (in_range(i7s) and (mod(i7s, 2) = 0))
-
-axiom H1 : (in_range(x) and (mod(x, 2) = 0))
-
-axiom H2 : in_range1(dynamic_preds__init_even__x)
-
-axiom H3 : (mod(dynamic_preds__init_even__x, 2) = 0)
-
-axiom H4 : (o = dynamic_preds__init_even__x)
-
-axiom H5 : (result = x)
-
-axiom H6 : (x1 = o)
-
-axiom H7 : ((in_range(dynamic_preds__init_ok_even__x) and
-  (mod(dynamic_preds__init_ok_even__x, 2) = 0)) and
-  in_range1(dynamic_preds__init_ok_even__x))
-
  (* File "dynamic_preds.ads", line 4, characters 0-0 *)
-goal WP_parameter_def : (mod(dynamic_preds__init_ok_even__x, 2) = 0)
+goal WP_parameter_def :
+  (forall x:int. forall o:int. forall dynamic_preds__init_even__x:int.
+  forall result:int. forall x1:int.
+  forall dynamic_preds__init_ok_even__x:int. ((in_range(i7s) and (mod(i7s,
+  2) = 0)) -> ((in_range(x) and (mod(x, 2) = 0)) ->
+  ((in_range1(dynamic_preds__init_even__x) and
+  (((mod(dynamic_preds__init_even__x, 2) = 0) and
+  (o = dynamic_preds__init_even__x)) and ((result = x) and (x1 = o)))) ->
+  (((in_range(dynamic_preds__init_ok_even__x) and
+  (mod(dynamic_preds__init_ok_even__x, 2) = 0)) and
+  in_range1(dynamic_preds__init_ok_even__x)) ->
+  (mod(dynamic_preds__init_ok_even__x, 2) = 0))))))

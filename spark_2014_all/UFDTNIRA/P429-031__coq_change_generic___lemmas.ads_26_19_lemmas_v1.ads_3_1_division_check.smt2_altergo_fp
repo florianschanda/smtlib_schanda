@@ -251,13 +251,6 @@ logic denom : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-axiom H : in_range(val1)
-
-axiom H1 : in_range(val2)
-
-axiom H2 : in_range1(denom)
-
-axiom H3 : (val1 <= val2)
-
  (* File "lemmas.ads", line 13, characters 0-0 *)
-goal WP_parameter_def : (not (denom = 0))
+goal WP_parameter_def : (in_range(val1) -> (in_range(val2) ->
+  (in_range1(denom) -> ((val1 <= val2) -> (not (denom = 0))))))

@@ -215,29 +215,5 @@ logic y2 : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x__split_fields : integer
-
-logic x__split_fields1 : us_private
-
-logic usq_ : integer
-
-logic usq_1 : us_private
-
-logic usq_2 : int
-
-logic temp___149 : integer
-
-logic temp___1491 : us_private
-
-logic temp___1492 : int
-
-logic result : integer
-
-logic result1 : us_private
-
-logic x__split_fields2 : integer
-
-logic x__split_fields3 : us_private
-
  (* File "tag_check.ads", line 10, characters 0-0 *)
 goal WP_parameter_def : (x__attr__tag = y2)

@@ -365,11 +365,7 @@ logic i11s1 : even
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : int
-
-axiom H : (in_range1(i7s) and (mod(i7s, 2) = 0))
-
-axiom H1 : ((mod(to_rep(i11s), 2) = 0) and (mod(to_rep(i11s1), 2) = 0))
-
  (* File "dynamic_preds.ads", line 25, characters 0-0 *)
-goal WP_parameter_def : in_range((to_rep(i11s) + 2))
+goal WP_parameter_def : ((in_range1(i7s) and (mod(i7s, 2) = 0)) ->
+  (((mod(to_rep(i11s), 2) = 0) and (mod(to_rep(i11s1), 2) = 0)) ->
+  in_range((to_rep(i11s) + 2))))

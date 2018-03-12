@@ -107,23 +107,8 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic z : int
-
-logic result : int
-
-logic z1 : int
-
-logic z2 : int
-
-logic z3 : int
-
-axiom H : (result = z)
-
-axiom H1 : (z1 = 2)
-
-axiom H2 : in_range(z1)
-
-axiom H3 : in_range(z2)
-
  (* File "gene2.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : (1 <  z2)
+goal WP_parameter_def :
+  (forall z:int. forall result:int. forall z1:int. forall z2:int.
+  (((result = z) and (z1 = 2)) -> (in_range(z1) -> (in_range(z2) ->
+  (1 <  z2)))))

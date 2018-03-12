@@ -191,12 +191,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -208,6 +202,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -311,24 +311,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,content) farray, int, int, (int,content) farray, int,
-  int -> (int,content) farray
-
-axiom concat_def :
-  (forall a:(int,content) farray. forall b:(int,content) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : content, int -> (int,content) farray
-
-axiom singleton_def :
-  (forall v:content.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,content) farray, int, int, (int,content) farray, int,
   int -> bool
 
@@ -339,17 +321,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_134:int. ((((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) and
-  (to_rep1((a[temp___idx_134])) = to_rep1((b[((b__first - a__first) + temp___idx_134)])))) or
-  (not ((a__first <= temp___idx_134) and (temp___idx_134 <= a__last)))))) ->
+  (forall temp___idx_156:int. ((((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) and
+  (to_rep1((a[temp___idx_156])) = to_rep1((b[((b__first - a__first) + temp___idx_156)])))) or
+  (not ((a__first <= temp___idx_156) and (temp___idx_156 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_134:int. (((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) ->
-  (to_rep1((a[temp___idx_134])) = to_rep1((b[((b__first - a__first) + temp___idx_134)]))))))) ->
+  (forall temp___idx_156:int. (((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) ->
+  (to_rep1((a[temp___idx_156])) = to_rep1((b[((b__first - a__first) + temp___idx_156)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -359,37 +341,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_134:int. (((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) ->
-  (to_rep1((a[temp___idx_134])) = to_rep1((b[((b__first - a__first) + temp___idx_134)])))))))))
-
-logic compare : (int,content) farray, int, int, (int,content) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,content) farray. forall b:(int,content) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,content) farray. forall b:(int,content) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep1((a[(i + 1)])) <  to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,content) farray. forall b:(int,content) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep1((b[(i + 1)])) <  to_rep1((a[(j + 1)]))))))))))))
+  (forall temp___idx_156:int. (((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) ->
+  (to_rep1((a[temp___idx_156])) = to_rep1((b[((b__first - a__first) + temp___idx_156)])))))))))
 
 type t
 
@@ -553,395 +507,39 @@ function t18b__ref___projection(a: t18b__ref) : integer = (a).t18b__content
 
 logic attr__ATTRIBUTE_ADDRESS10 : int
 
-logic h_v1 : (int,content) farray
-
-logic h_v2 : (int,content) farray
-
-logic t_v1 : int
-
-logic m_v1 : int
-
-logic q_v1 : int
-
-logic t_v2 : int
-
-logic m_v2 : int
-
-logic q_v2 : int
-
-logic o : int
-
-logic o1 : content
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : content
-
-logic o5 : int
-
-logic k : int
-
-logic o6 : int
-
-logic o7 : content
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : content
-
-logic o11 : int
-
-logic o12 : int
-
-logic o13 : content
-
-logic o14 : int
-
-logic o15 : int
-
-logic o16 : content
-
-logic o17 : int
-
-logic temp___378 : int
-
-logic o18 : int
-
-logic o19 : content
-
-logic o20 : int
-
-logic o21 : content
-
-logic o22 : int
-
-logic o23 : (int,content) farray
-
-logic temp___379 : int
-
-logic o24 : content
-
-logic o25 : int
-
-logic o26 : (int,content) farray
-
-logic temp___399 : (int,content) farray
-
-logic temp___398 : int
-
-logic temp___403 : (int,content) farray
-
-logic temp___396 : (int,content) farray
-
-logic temp___394 : int
-
-logic temp___401 : (int,content) farray
-
-logic k1 : int
-
-logic o27 : int
-
-logic o28 : content
-
-logic o29 : int
-
-logic o30 : int
-
-logic o31 : content
-
-logic o32 : int
-
-logic o33 : int
-
-logic o34 : content
-
-logic o35 : int
-
-logic o36 : int
-
-logic o37 : content
-
-logic o38 : int
-
-logic temp___392 : int
-
-logic o39 : int
-
-logic o40 : content
-
-logic o41 : int
-
-logic o42 : content
-
-logic o43 : int
-
-logic o44 : (int,content) farray
-
-logic temp___393 : int
-
-logic o45 : content
-
-logic o46 : int
-
-logic o47 : (int,content) farray
-
-logic o48 : int
-
-logic o49 : content
-
-logic o50 : int
-
-logic o51 : int
-
-logic o52 : content
-
-logic o53 : int
-
-logic h_v21 : (int,content) farray
-
-logic t_v21 : int
-
-logic result : bool
-
-logic result1 : bool
-
-logic result2 : bool
-
-logic result3 : bool
-
-logic result4 : bool
-
-logic result5 : bool
-
-logic result6 : bool
-
-logic result7 : bool
-
-logic result8 : int
-
-logic m_v11 : int
-
-logic result9 : int
-
-logic q_v11 : int
-
-logic h_v11 : (int,content) farray
-
-logic t_v11 : int
-
-logic q_v12 : int
-
-logic result10 : int
-
-logic t_v12 : int
-
-logic result11 : (int,content) farray
-
-logic h_v12 : (int,content) farray
-
-logic result12 : (int,content) farray
-
-logic h_v13 : (int,content) farray
-
-logic result13 : int
-
-logic q_v13 : int
-
-logic h_v14 : (int,content) farray
-
-logic t_v13 : int
-
-logic q_v14 : int
-
-logic h_v15 : (int,content) farray
-
-logic t_v14 : int
-
-logic q_v15 : int
-
-logic result14 : int
-
-logic m_v21 : int
-
-logic result15 : int
-
-logic q_v21 : int
-
-logic h_v22 : (int,content) farray
-
-logic t_v22 : int
-
-logic q_v22 : int
-
-logic result16 : int
-
-logic t_v23 : int
-
-logic result17 : (int,content) farray
-
-logic h_v23 : (int,content) farray
-
-logic result18 : (int,content) farray
-
-logic h_v24 : (int,content) farray
-
-logic result19 : int
-
-logic q_v23 : int
-
-logic h_v25 : (int,content) farray
-
-logic t_v24 : int
-
-logic q_v24 : int
-
-logic h_v26 : (int,content) farray
-
-logic t_v25 : int
-
-logic q_v25 : int
-
-logic h_v27 : (int,content) farray
-
-logic t_v26 : int
-
-logic q_v26 : int
-
-logic h_v28 : (int,content) farray
-
-logic t_v27 : int
-
-logic q_v27 : int
-
-logic h_v29 : (int,content) farray
-
-logic t_v28 : int
-
-logic q_v28 : int
-
-logic h_v210 : (int,content) farray
-
-logic t_v29 : int
-
-logic q_v29 : int
-
-logic h_v211 : (int,content) farray
-
-logic t_v210 : int
-
-logic q_v210 : int
-
-logic h_v212 : (int,content) farray
-
-logic t_v211 : int
-
-logic q_v211 : int
-
-logic h_v16 : (int,content) farray
-
-logic h_v213 : (int,content) farray
-
-logic t_v15 : int
-
-logic m_v12 : int
-
-logic q_v16 : int
-
-logic t_v212 : int
-
-logic m_v22 : int
-
-logic q_v212 : int
-
-logic h_v17 : (int,content) farray
-
-logic h_v214 : (int,content) farray
-
-logic t_v16 : int
-
-logic m_v13 : int
-
-logic q_v17 : int
-
-logic t_v213 : int
-
-logic m_v23 : int
-
-logic q_v213 : int
-
-axiom H : dynamic_property((- 2147483648), 2147483647, to_rep(h_v1__first),
-  to_rep(h_v1__last))
-
-axiom H1 : dynamic_property((- 2147483648), 2147483647, to_rep(h_v2__first),
-  to_rep(h_v2__last))
-
-axiom H2 : in_range1(i)
-
-axiom H3 : true
-
-axiom H4 : (((- 2147483648) <= 2147483647) -> in_range2(t_v2))
-
-axiom H5 : (((- 2147483648) <= 2147483647) -> in_range1(m_v2))
-
-axiom H6 : (result14 = m_v2)
-
-axiom H7 : (m_v21 = comp_div(to_rep(h_v2__last),2))
-
-axiom H8 : (m_v21 = r17b)
-
-axiom H9 : in_range1(r17b)
-
-axiom H10 : (result15 = q_v2)
-
-axiom H11 : (q_v21 = to_rep(h_v2__first))
-
-axiom H12 : (to_rep(h_v2__first) <= q_v21)
-
-axiom H13 : (q_v21 <= r17b)
-
-axiom H14 :
-  (forall k2:int. (((to_rep(h_v2__first) <= k2) and
-  (k2 <= to_rep(h_v2__last))) -> (((k2 <  q_v22) ->
-  (to_rep1((h_v22[k2])) = to_rep1((h_v2[(k2 + m_v21)])))) and
-  ((not (k2 <  q_v22)) -> ((((q_v22 + m_v21) <  k2) ->
-  (to_rep1((h_v22[k2])) = to_rep1((h_v2[(k2 - m_v21)])))) and
-  ((not ((q_v22 + m_v21) <  k2)) ->
-  (to_rep1((h_v22[k2])) = to_rep1((h_v2[k2])))))))))
-
-axiom H15 : ((((to_rep(h_v2__first) <= r17b) ->
-  dynamic_property2(to_rep(h_v2__first), r17b, q_v22)) and
-  (((- 2147483648) <= 2147483647) -> in_range2(t_v22))) and
-  ((to_rep(h_v2__first) <= q_v22) and (q_v22 <= r17b)))
-
-axiom H16 : ((to_rep(h_v2__first) <= q_v22) and
-  (q_v22 <= to_rep(h_v2__last)))
-
-axiom H17 : (o36 = q_v22)
-
-axiom H18 : (o37 = (h_v22[o36]))
-
-axiom H19 : (o38 = to_rep1(o37))
-
-axiom H20 : (t_v22 = result16)
-
-axiom H21 : (t_v23 = o38)
-
-axiom H22 : ((temp___392 = (q_v22 + m_v21)) and in_range1((q_v22 + m_v21)))
-
-axiom H23 : ((to_rep(h_v2__first) <= temp___392) and
-  (temp___392 <= to_rep(h_v2__last)))
-
-axiom H24 : (o39 = temp___392)
-
-axiom H25 : (o40 = (h_v22[o39]))
-
-axiom H26 : (o41 = to_rep1(o40))
-
-axiom H27 : (to_rep1(o42) = o41)
-
  (* File "infoflow.ads", line 61, characters 0-0 *)
-goal WP_parameter_def : (to_rep(h_v2__first) <= q_v22)
+goal WP_parameter_def :
+  (forall h_v2:(int,content) farray. forall t_v2:int. forall m_v2:int.
+  forall q_v2:int. forall o:int. forall o1:content. forall o2:int.
+  forall temp___435:int. forall o3:int. forall o4:content. forall o5:int.
+  forall o6:content. forall result:int. forall m_v21:int. forall result1:int.
+  forall q_v21:int. forall h_v21:(int,content) farray. forall t_v21:int.
+  forall q_v22:int. forall result2:int. forall t_v22:int.
+  (dynamic_property((- 2147483648), 2147483647, to_rep(h_v1__first),
+  to_rep(h_v1__last)) -> (dynamic_property((- 2147483648), 2147483647,
+  to_rep(h_v2__first), to_rep(h_v2__last)) -> (in_range1(i) ->
+  ((((- 2147483648) <= 2147483647) -> in_range2(t_v2)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range1(m_v2)) -> ((({ int__content =
+  result } = { int__content = m_v2 }) and
+  (m_v21 = comp_div(to_rep(h_v2__last),2))) -> (((m_v21 = r17b) and
+  in_range1(r17b)) -> ((({ int__content = result1 } = { int__content = q_v2
+  }) and (q_v21 = to_rep(h_v2__first))) ->
+  (((to_rep(h_v2__first) <= q_v21) and (q_v21 <= r17b)) ->
+  ((forall k:int. (((to_rep(h_v2__first) <= k) and
+   (k <= to_rep(h_v2__last))) -> (((k <  q_v22) and
+   (to_rep1((h_v21[k])) = to_rep1((h_v2[(k + m_v21)])))) or
+   ((not (k <  q_v22)) and ((((q_v22 + m_v21) <  k) and
+   (to_rep1((h_v21[k])) = to_rep1((h_v2[(k - m_v21)])))) or
+   ((not ((q_v22 + m_v21) <  k)) and
+   (to_rep1((h_v21[k])) = to_rep1((h_v2[k]))))))))) ->
+  (((((to_rep(h_v2__first) <= r17b) -> dynamic_property2(to_rep(h_v2__first),
+  r17b, q_v22)) and (((- 2147483648) <= 2147483647) -> in_range2(t_v21))) and
+  ((to_rep(h_v2__first) <= q_v22) and (q_v22 <= r17b))) ->
+  (((((((to_rep(h_v2__first) <= q_v22) and (q_v22 <= to_rep(h_v2__last))) and
+  (o = q_v22)) and (o1 = (h_v21[o]))) and (o2 = to_rep1(o1))) and
+  ((t_v21 = result2) and (t_v22 = o2))) ->
+  (((((((temp___435 = (q_v22 + m_v21)) and in_range1((q_v22 + m_v21))) and
+  (((to_rep(h_v2__first) <= temp___435) and
+  (temp___435 <= to_rep(h_v2__last))) and (o3 = temp___435))) and
+  (o4 = (h_v21[o3]))) and (o5 = to_rep1(o4))) and (to_rep1(o6) = o5)) ->
+  (to_rep(h_v2__first) <= q_v22)))))))))))))))

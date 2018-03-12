@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -137,49 +137,19 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic minus__minus2__result : int
-
-logic o : int
-
-logic result : int
-
-logic minus__minus2__result1 : int
-
-logic minus__minus2__result2 : int
-
-logic minus__minus2__result3 : int
-
-logic minus__minus2__result4 : int
-
-logic minus__minus2__result5 : int
-
-logic result1 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : ((1 <= x) and (x <= 3))
-
-axiom H2 : (minus__minus2__result1 = minus__minus2__result2)
-
-axiom H3 : (minus__minus2__result3 = minus__minus2__result1)
-
-axiom H4 : ((x = 1) -> (o = 0))
-
-axiom H5 : ((not (x = 1)) -> ((x = 2) -> (o = 1)))
-
-axiom H6 : ((not (x = 1)) -> ((not (x = 2)) -> ((x = 3) -> (o = 2))))
-
-axiom H7 : ((not (x = 1)) -> ((not (x = 2)) -> ((not (x = 3)) -> (o = x))))
-
-axiom H8 : (result = minus__minus2__result)
-
-axiom H9 : (minus__minus2__result1 = o)
-
-axiom H10 : (minus__minus2__result4 = minus__minus2__result2)
-
-axiom H11 : (minus__minus2__result5 = minus__minus2__result3)
-
-axiom H12 : (result1 = minus__minus2__result4)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (minus__minus2__result4 = (x - 1))
+goal WP_parameter_def :
+  (forall minus__minus2__result:int. forall o:int. forall result:int.
+  forall minus__minus2__result1:int. forall minus__minus2__result2:int.
+  forall minus__minus2__result3:int. forall minus__minus2__result4:int.
+  forall minus__minus2__result5:int.
+  (forall result1:int. ((in_range1(x) and (((1 <= x) and (x <= 3)) and
+  (((((minus__minus2__result1 = minus__minus2__result2) and
+  (minus__minus2__result3 = minus__minus2__result1)) and ((((x = 1) and
+  (o = 0)) or ((not (x = 1)) and (((x = 2) and (o = 1)) or ((not (x = 2)) and
+  (((x = 3) and (o = 2)) or ((not (x = 3)) and (o = x))))))) and
+  ((result = minus__minus2__result) and (minus__minus2__result1 = o)))) and
+  ((minus__minus2__result4 = minus__minus2__result2) and
+  (minus__minus2__result5 = minus__minus2__result3))) and
+  (result1 = minus__minus2__result4)))) ->
+  (minus__minus2__result4 = (x - 1)))))

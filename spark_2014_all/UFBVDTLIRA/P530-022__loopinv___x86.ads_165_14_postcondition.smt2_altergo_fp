@@ -1032,21 +1032,23 @@ logic readreglow8 : t -> t1
 
 logic readreglow8__function_guard : t1, t -> prop
 
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 18446744073709551360)
+
 axiom writereglow8post__post_axiom :
   (forall regold:t. forall regnew:t.
   (forall val__:t1 [writereglow8post(regold, regnew, val__)].
   ((writereglow8post(regold, regnew, val__) = true) <->
   ((readreglow8(regnew) = val__) and (bw_and(regnew,
-  of_int(18446744073709551360)) = bw_and(regold,
-  of_int(18446744073709551360)))))))
+  rliteral1) = bw_and(regold, rliteral1))))))
 
 axiom writereglow8post__def_axiom :
   (forall regold:t. forall regnew:t.
   (forall val__:t1 [writereglow8post(regold, regnew, val__)].
   ((writereglow8post(regold, regnew, val__) = true) <->
   ((readreglow8(regnew) = val__) and (bw_and(regnew,
-  of_int(18446744073709551360)) = bw_and(regold,
-  of_int(18446744073709551360)))))))
+  rliteral1) = bw_and(regold, rliteral1))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -1054,32 +1056,17 @@ logic val__ : t1
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 255)
+
 axiom readreglow8__post_axiom :
   (forall reg:t [readreglow8(reg)]. (readreglow8(reg) = toSmall(bw_and(reg,
-  of_int(255)))))
-
-logic rax : t
-
-logic result : t
-
-logic rax1 : t
-
-logic rax2 : t
-
-logic rax3 : t
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : (result = rax)
-
-axiom H3 : (rax1 = bw_or(bw_and(rax, of_int(18446744073709551360)),
-  toBig(val__)))
-
-axiom H4 : (rax1 = rax2)
-
-axiom H5 : (rax3 = rax1)
+  rliteral2))))
 
  (* File "x86.ads", line 10, characters 0-0 *)
-goal WP_parameter_def : (writereglow8post(rax, rax2, val__) = true)
+goal WP_parameter_def :
+  (forall rax:t. forall result:t. forall rax1:t. forall rax2:t.
+  forall rax3:t. ((((result = rax) and (rax1 = bw_or(bw_and(rax, rliteral1),
+  toBig(val__)))) and ((rax1 = rax2) and (rax3 = rax1))) ->
+  (writereglow8post(rax, rax2, val__) = true)))

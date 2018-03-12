@@ -115,19 +115,8 @@ axiom read_partial_0__post_axiom :
   (forall levels__x0:int [read_partial_0(levels__x0)].
   (in_range(levels__x0) -> in_range(read_partial_0(levels__x0))))
 
-logic x0 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-axiom H : in_range(x0)
-
-axiom H1 : ((o = read_partial_0(x0)) and in_range(o))
-
-axiom H2 : (o1 = (o + 1))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(o1)
+goal WP_parameter_def :
+  (forall x0:int. forall o:int. forall o1:int. (in_range(x0) ->
+  ((((o = read_partial_0(x0)) and in_range(o)) and (o1 = (o + 1))) ->
+  in_range(o1))))

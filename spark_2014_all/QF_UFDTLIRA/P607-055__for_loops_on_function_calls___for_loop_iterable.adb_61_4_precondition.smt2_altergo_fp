@@ -48,11 +48,5 @@ function real__ref___projection(a: real__ref) : real = (a).real__content
 function us_private__ref___projection(a: us_private__ref) : us_private =
   (a).us_private__content
 
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : true
-
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def : true

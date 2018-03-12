@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -135,57 +135,15 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic v : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic v1 : int
-
-logic result1 : int
-
-logic v2 : int
-
-logic result2 : int
-
-logic v3 : int
-
-logic v4 : int
-
-logic v5 : int
-
-axiom H : in_range1(v)
-
-axiom H1 : (((1 <= v) and (v <= 100)) -> (result = v))
-
-axiom H2 : (((1 <= v) and (v <= 100)) -> (v1 = 300))
-
-axiom H3 : ((not ((1 <= v) and (v <= 100))) -> ((((- 300) <= v) and
-  (v <= (- 30))) -> (result1 = v)))
-
-axiom H4 : ((not ((1 <= v) and (v <= 100))) -> ((((- 300) <= v) and
-  (v <= (- 30))) -> (v2 = 20)))
-
-axiom H5 : ((not ((1 <= v) and (v <= 100))) -> ((not (((- 300) <= v) and
-  (v <= (- 30)))) -> ((o = (v + 10)) and in_range1((v + 10)))))
-
-axiom H6 : ((not ((1 <= v) and (v <= 100))) -> ((not (((- 300) <= v) and
-  (v <= (- 30)))) -> (result2 = v)))
-
-axiom H7 : ((not ((1 <= v) and (v <= 100))) -> ((not (((- 300) <= v) and
-  (v <= (- 30)))) -> (v3 = o)))
-
-axiom H8 : ((not ((1 <= v) and (v <= 100))) -> ((not (((- 300) <= v) and
-  (v <= (- 30)))) -> (v2 = v3)))
-
-axiom H9 : ((not ((1 <= v) and (v <= 100))) -> (v1 = v2))
-
-axiom H10 : (v1 = v4)
-
-axiom H11 : (v5 = v1)
-
  (* File "counterex.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range1((v4 + 10))
+goal WP_parameter_def :
+  (forall v:int. forall o:int. forall result:int. forall v1:int.
+  forall result1:int. forall v2:int. forall result2:int. forall v3:int.
+  forall v4:int. forall v5:int. (in_range1(v) -> ((((((1 <= v) and
+  (v <= 100)) and (({ int__content = result } = { int__content = v }) and
+  (v1 = 300))) or ((not ((1 <= v) and (v <= 100))) and ((((((- 300) <= v) and
+  (v <= (- 30))) and (({ int__content = result1 } = { int__content = v }) and
+  (v2 = 20))) or ((not (((- 300) <= v) and (v <= (- 30)))) and
+  ((((o = (v + 10)) and in_range1((v + 10))) and (({ int__content = result2
+  } = { int__content = v }) and (v3 = o))) and (v2 = v3)))) and
+  (v1 = v2)))) and ((v1 = v4) and (v5 = v1))) -> in_range1((v4 + 10)))))

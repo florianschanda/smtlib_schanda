@@ -1025,31 +1025,26 @@ logic readreghigh8 : t1 -> t
 
 logic readreghigh8__function_guard : t, t1 -> prop
 
+logic rliteral1 : t1
+
+axiom rliteral_axiom1 : (tqtint1(rliteral1) = 65280)
+
+logic rliteral2 : t1
+
+axiom rliteral_axiom2 : (tqtint1(rliteral2) = 256)
+
 axiom readreghigh8__post_axiom :
   (forall reg:t1 [readreghigh8(reg)].
-  (readreghigh8(reg) = toSmall(urem1(udiv1(bw_and1(reg, of_int1(65280)),
-  of_int1(256)), of_int1(256)))))
+  (readreghigh8(reg) = toSmall(urem1(udiv1(bw_and1(reg, rliteral1),
+  rliteral2), of_int1(256)))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic rcx : t1
+logic rliteral3 : t
 
-logic x86__ch__result : t
-
-logic result : t
-
-logic x86__ch__result1 : t
-
-logic x86__ch__result2 : t
-
-logic x86__ch__result3 : t
-
-logic x86__ch__result4 : t
-
-logic x86__ch__result5 : t
-
-axiom H : true
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 0)
 
  (* File "x86.ads", line 10, characters 0-0 *)
-goal WP_parameter_def : ule1(toBig(of_int(0)), udiv1(bw_and1(rcx,
-  of_int1(65280)), of_int1(256)))
+goal WP_parameter_def :
+  (forall rcx:t1. ule1(toBig(rliteral3), udiv1(bw_and1(rcx, rliteral1),
+  rliteral2)))

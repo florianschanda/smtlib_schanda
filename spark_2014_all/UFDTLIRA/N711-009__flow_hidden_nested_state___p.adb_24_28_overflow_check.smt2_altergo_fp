@@ -133,33 +133,10 @@ axiom foo__def_axiom :
   p__nest__gn)]. ((in_range(p__nest__pr_var) and in_range(p__nest__gn)) ->
   (foo(p__nest__pr_var, p__nest__gn) = (p__nest__gn + p__nest__pr_var))))
 
-logic g : int
-
-logic pr_var : int
-
-logic gn : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-axiom H : in_range(g)
-
-axiom H1 : in_range(pr_var)
-
-axiom H2 : in_range(gn)
-
-axiom H3 : in_range(x)
-
-axiom H4 : in_range(y)
-
-axiom H5 : ((o = foo(pr_var, gn)) and (in_range(o) and (o = (gn + pr_var))))
-
-axiom H6 : (o1 = (0 + o))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(o1)
+goal WP_parameter_def :
+  (forall g:int. forall pr_var:int. forall gn:int. forall o:int.
+  forall o1:int. (in_range(g) -> (in_range(pr_var) -> (in_range(gn) ->
+  (in_range(x) -> (in_range(y) -> ((((o = foo(pr_var, gn)) and
+  (in_range(o) and (o = (gn + pr_var)))) and (o1 = (0 + o))) ->
+  in_range(o1))))))))

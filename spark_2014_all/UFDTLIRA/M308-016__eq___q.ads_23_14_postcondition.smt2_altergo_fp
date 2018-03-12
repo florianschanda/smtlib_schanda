@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -299,134 +299,62 @@ logic r6b : bool
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic x__split_fields : integer
-
-logic x__split_fields1 : bool
-
-logic y__split_fields : integer
-
-logic y__split_fields1 : bool
-
-logic temp___162 : bool
-
-logic temp___1621 : integer
-
-logic temp___1622 : bool
-
-logic temp___164 : bool
-
-logic temp___1641 : integer
-
-logic temp___1642 : bool
-
-logic temp___165 : bool
-
-logic temp___1651 : integer
-
-logic temp___1652 : bool
-
-logic temp___167 : bool
-
-logic temp___1671 : integer
-
-logic temp___1672 : bool
-
-logic result : integer
-
-logic result1 : bool
-
-logic x__split_fields2 : integer
-
-logic x__split_fields3 : bool
-
-logic result2 : integer
-
-logic result3 : bool
-
-logic y__split_fields2 : integer
-
-logic y__split_fields3 : bool
-
-logic x__split_fields4 : integer
-
-logic x__split_fields5 : bool
-
-logic y__split_fields4 : integer
-
-logic y__split_fields5 : bool
-
-logic x__split_fields6 : integer
-
-logic x__split_fields7 : bool
-
-logic y__split_fields6 : integer
-
-logic y__split_fields7 : bool
-
-axiom H : (bool_eq3({ us_split_discrs1 = { rec__q__t__b = x__split_discrs };
+ (* File "q.ads", line 2, characters 0-0 *)
+goal WP_parameter_def :
+  (forall x__split_fields:integer. forall x__split_fields1:bool.
+  forall y__split_fields:integer. forall y__split_fields1:bool.
+  forall temp___186:bool. forall temp___1861:integer.
+  forall temp___1862:bool. forall temp___188:bool.
+  forall temp___1881:integer. forall temp___1882:bool.
+  forall temp___189:bool. forall temp___1891:integer.
+  forall temp___1892:bool. forall temp___191:bool.
+  forall temp___1911:integer. forall temp___1912:bool. forall result:integer.
+  forall result1:bool. forall x__split_fields2:integer.
+  forall x__split_fields3:bool. forall result2:integer. forall result3:bool.
+  forall y__split_fields2:integer. forall y__split_fields3:bool.
+  forall x__split_fields4:integer. forall x__split_fields5:bool.
+  forall y__split_fields4:integer. forall y__split_fields5:bool.
+  forall x__split_fields6:integer. forall x__split_fields7:bool.
+  forall y__split_fields6:integer. forall y__split_fields7:bool.
+  (((bool_eq3({ us_split_discrs1 = { rec__q__t__b = x__split_discrs };
   us_split_fields1 = { rec__q__t__a = x__split_fields; rec__q__t__c =
   x__split_fields1 } }, { us_split_discrs1 = { rec__q__t__b = y__split_discrs
   }; us_split_fields1 = { rec__q__t__a = y__split_fields; rec__q__t__c =
-  y__split_fields1 } }) = true)
-
-axiom H1 : (x__split_discrs = r4b)
-
-axiom H2 : ({ us_split_discrs1 = { rec__q__t__b = temp___162 };
-  us_split_fields1 = { rec__q__t__a = temp___1621; rec__q__t__c = temp___1622
-  } } = change({ us_split_discrs1 = { rec__q__t__b = x__split_discrs };
-  us_split_fields1 = { rec__q__t__a = x__split_fields; rec__q__t__c =
-  x__split_fields1 } }))
-
-axiom H3 : (temp___162 = x__split_discrs)
-
-axiom H4 : ((temp___164 = temp___162) and ((temp___1641 = temp___1621) and
-  (temp___1642 = temp___1622)))
-
-axiom H5 : ((result = x__split_fields) and (result1 = x__split_fields1))
-
-axiom H6 : (temp___1641 = x__split_fields2)
-
-axiom H7 : (temp___1642 = x__split_fields3)
-
-axiom H8 : (x__split_discrs = temp___164)
-
-axiom H9 : (y__split_discrs = r6b)
-
-axiom H10 : ({ us_split_discrs1 = { rec__q__t__b = temp___165 };
-  us_split_fields1 = { rec__q__t__a = temp___1651; rec__q__t__c = temp___1652
-  } } = change({ us_split_discrs1 = { rec__q__t__b = y__split_discrs };
-  us_split_fields1 = { rec__q__t__a = y__split_fields; rec__q__t__c =
-  y__split_fields1 } }))
-
-axiom H11 : (temp___165 = y__split_discrs)
-
-axiom H12 : ((temp___167 = temp___165) and ((temp___1671 = temp___1651) and
-  (temp___1672 = temp___1652)))
-
-axiom H13 : (result2 = y__split_fields)
-
-axiom H14 : (result3 = y__split_fields1)
-
-axiom H15 : ((y__split_fields2 = temp___1671) and
-  (y__split_fields3 = temp___1672))
-
-axiom H16 : (y__split_discrs = temp___167)
-
-axiom H17 : ((y__split_fields4 = y__split_fields2) and
-  (y__split_fields5 = y__split_fields3))
-
-axiom H18 : ((x__split_fields4 = x__split_fields2) and
-  (x__split_fields5 = x__split_fields3))
-
-axiom H19 : ((y__split_fields6 = y__split_fields2) and
-  (y__split_fields7 = y__split_fields3))
-
-axiom H20 : ((x__split_fields6 = x__split_fields2) and
-  (x__split_fields7 = x__split_fields3))
-
- (* File "q.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : (bool_eq3({ us_split_discrs1 = { rec__q__t__b =
-  x__split_discrs }; us_split_fields1 = { rec__q__t__a = x__split_fields4;
-  rec__q__t__c = x__split_fields5 } }, { us_split_discrs1 = { rec__q__t__b =
-  y__split_discrs }; us_split_fields1 = { rec__q__t__a = y__split_fields4;
-  rec__q__t__c = y__split_fields5 } }) = true)
+  y__split_fields1 } }) = true) and (((x__split_discrs = r4b) and (((({
+  us_split_discrs1 = { rec__q__t__b = temp___186 }; us_split_fields1 = {
+  rec__q__t__a = temp___1861; rec__q__t__c = temp___1862 } } = change({
+  us_split_discrs1 = { rec__q__t__b = x__split_discrs }; us_split_fields1 = {
+  rec__q__t__a = x__split_fields; rec__q__t__c = x__split_fields1 } })) and
+  ((temp___186 = x__split_discrs) and ({ us_split_discrs1 = { rec__q__t__b =
+  temp___188 }; us_split_fields1 = { rec__q__t__a = temp___1881;
+  rec__q__t__c = temp___1882 } } = { us_split_discrs1 = { rec__q__t__b =
+  temp___186 }; us_split_fields1 = { rec__q__t__a = temp___1861;
+  rec__q__t__c = temp___1862 } }))) and ((({ us_split_fields__content = {
+  rec__q__t__a = result; rec__q__t__c = result1 } } = {
+  us_split_fields__content = { rec__q__t__a = x__split_fields; rec__q__t__c =
+  x__split_fields1 } }) and ((temp___1881 = x__split_fields2) and
+  (temp___1882 = x__split_fields3))) and (x__split_discrs = temp___188))) and
+  ((y__split_discrs = r6b) and ((({ us_split_discrs1 = { rec__q__t__b =
+  temp___189 }; us_split_fields1 = { rec__q__t__a = temp___1891;
+  rec__q__t__c = temp___1892 } } = change({ us_split_discrs1 = {
+  rec__q__t__b = y__split_discrs }; us_split_fields1 = { rec__q__t__a =
+  y__split_fields; rec__q__t__c = y__split_fields1 } })) and
+  ((temp___189 = y__split_discrs) and ((temp___191 = temp___189) and
+  ((temp___1911 = temp___1891) and (temp___1912 = temp___1892))))) and
+  ((((result2 = y__split_fields) and (result3 = y__split_fields1)) and
+  ((temp___1911 = y__split_fields2) and
+  (temp___1912 = y__split_fields3))) and
+  (y__split_discrs = temp___191)))))) and
+  ((((y__split_fields4 = y__split_fields2) and
+  (y__split_fields5 = y__split_fields3)) and
+  ((x__split_fields4 = x__split_fields2) and
+  (x__split_fields5 = x__split_fields3))) and
+  (((y__split_fields6 = y__split_fields2) and
+  (y__split_fields7 = y__split_fields3)) and
+  ((x__split_fields6 = x__split_fields2) and
+  (x__split_fields7 = x__split_fields3)))))) -> (bool_eq3({
+  us_split_discrs1 = { rec__q__t__b = x__split_discrs }; us_split_fields1 = {
+  rec__q__t__a = x__split_fields4; rec__q__t__c = x__split_fields5 } }, {
+  us_split_discrs1 = { rec__q__t__b = y__split_discrs }; us_split_fields1 = {
+  rec__q__t__a = y__split_fields4; rec__q__t__c = y__split_fields5 }
+  }) = true)))

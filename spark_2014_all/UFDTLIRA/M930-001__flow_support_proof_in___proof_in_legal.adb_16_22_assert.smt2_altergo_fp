@@ -123,21 +123,8 @@ axiom is_ok_to_increase__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic var : int
-
-logic x : int
-
-logic body_var : int
-
-logic o : int
-
-axiom H : in_range(body_var)
-
-axiom H1 : in_range(var)
-
-axiom H2 : in_range(x)
-
-axiom H3 : (is_ok_to_increase(body_var) = true)
-
  (* File "proof_in_legal.adb", line 7, characters 0-0 *)
-goal WP_parameter_def : (var = 0)
+goal WP_parameter_def :
+  (forall var:int. forall x:int. forall body_var:int. (in_range(body_var) ->
+  (in_range(var) -> (in_range(x) -> ((is_ok_to_increase(body_var) = true) ->
+  (var = 0))))))

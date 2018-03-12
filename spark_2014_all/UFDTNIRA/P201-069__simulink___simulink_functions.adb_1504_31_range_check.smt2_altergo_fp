@@ -204,15 +204,6 @@ logic right : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-axiom H : in_range2(left)
-
-axiom H1 : in_range2(right)
-
  (* File "interfac.ads", line 49, characters 0-0 *)
-goal WP_parameter_def : in_range(right)
+goal WP_parameter_def : (in_range2(left) -> (in_range2(right) ->
+  in_range(right)))

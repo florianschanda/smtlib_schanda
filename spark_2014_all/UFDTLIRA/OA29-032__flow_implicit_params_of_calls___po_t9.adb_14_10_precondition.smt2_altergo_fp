@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -227,68 +227,6 @@ type p_intT__ref = { p_intT__content : us_rep
 
 function p_intT__ref___projection(a: p_intT__ref) : us_rep =
   (a).p_intT__content
-
-logic self__ : bool
-
-logic self__1 : integer
-
-logic o : int
-
-logic o1 : integer
-
-logic o2 : bool
-
-logic o3 : integer
-
-logic o4 : bool
-
-logic o5 : integer
-
-logic result : bool
-
-logic result1 : integer
-
-logic self__2 : bool
-
-logic self__3 : integer
-
-logic result2 : bool
-
-logic result3 : integer
-
-logic self__4 : bool
-
-logic self__5 : integer
-
-axiom H : (self__ = true)
-
-axiom H1 : (result = self__)
-
-axiom H2 : (result1 = self__1)
-
-axiom H3 : (of_int(0) = self__2)
-
-axiom H4 : (self__1 = self__3)
-
-axiom H5 : ((o = (to_rep(self__3) + 1)) and in_range1((to_rep(self__3) + 1)))
-
-axiom H6 : (to_rep(o1) = o)
-
-axiom H7 : (self__2 = o2)
-
-axiom H8 : (o1 = o3)
-
-axiom H9 : (o4 = o2)
-
-axiom H10 : (o5 = o3)
-
-axiom H11 : (result2 = self__2)
-
-axiom H12 : (result3 = self__3)
-
-axiom H13 : (self__4 = o4)
-
-axiom H14 : (self__5 = o5)
 
  (* File "po_t9.ads", line 2, characters 0-0 *)
 goal WP_parameter_def : true

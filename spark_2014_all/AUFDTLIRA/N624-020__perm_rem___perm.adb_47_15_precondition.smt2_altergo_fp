@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -200,24 +200,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> (int,natural) farray
-
-axiom concat_def :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : natural, int -> (int,natural) farray
-
-axiom singleton_def :
-  (forall v:natural.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,natural) farray, int, int, (int,natural) farray, int,
   int -> bool
 
@@ -228,17 +210,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -248,37 +230,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type integer
 
@@ -605,431 +559,147 @@ function t35b__ref___projection(a2: t35b__ref) : integer = (a2).t35b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic ia : int
-
-logic perm__get_witnesses__result : index
-
-logic perm__get_witnesses__result1 : index
-
-logic temp___587 : int
-
-logic temp___588 : int
-
-logic temp___586 : int
-
-logic ib : int
-
-logic o : int
-
-logic o1 : (int,natural) farray
-
-logic o2 : t
-
-logic o3 : int
-
-logic o4 : (int,natural) farray
-
-logic o5 : t
-
-logic o6 : int
-
-logic o7 : natural
-
-logic o8 : int
-
-logic o9 : natural
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : int
-
-logic o13 : int
-
-logic o14 : int
-
-logic o15 : index
-
-logic o16 : index
-
-logic o17 : index
-
-logic o18 : index
-
-logic o19 : index
-
-logic o20 : index
-
-logic ka : int
-
-logic kb : int
-
-logic o21 : int
-
-logic o22 : (int,natural) farray
-
-logic o23 : t
-
-logic o24 : int
-
-logic o25 : (int,natural) farray
-
-logic o26 : t
-
-logic o27 : int
-
-logic o28 : natural
-
-logic o29 : int
-
-logic o30 : natural
-
-logic o31 : int
-
-logic o32 : int
-
-logic ib1 : int
-
-logic o33 : int
-
-logic o34 : (int,natural) farray
-
-logic o35 : t
-
-logic o36 : int
-
-logic o37 : (int,natural) farray
-
-logic o38 : t
-
-logic o39 : int
-
-logic o40 : natural
-
-logic o41 : int
-
-logic o42 : natural
-
-logic o43 : int
-
-logic o44 : int
-
-logic o45 : int
-
-logic o46 : int
-
-logic o47 : int
-
-logic o48 : index
-
-logic o49 : index
-
-logic o50 : index
-
-logic o51 : index
-
-logic o52 : index
-
-logic o53 : index
-
-logic o54 : (int,natural) farray
-
-logic o55 : t
-
-logic o56 : (int,natural) farray
-
-logic o57 : t
-
-logic o58 : int
-
-logic o59 : natural
-
-logic o60 : int
-
-logic o61 : natural
-
-logic o62 : int
-
-logic o63 : int
-
-logic perm__get_witnesses__result2 : index
-
-logic perm__get_witnesses__result3 : index
-
-logic result : bool
-
-logic result1 : bool
-
-logic result2 : bool
-
-logic result3 : int
-
-logic ia1 : int
-
-logic result4 : bool
-
-logic result5 : bool
-
-logic result6 : index
-
-logic result7 : index
-
-logic perm__get_witnesses__result4 : index
-
-logic perm__get_witnesses__result5 : index
-
-logic ia2 : int
-
-logic perm__get_witnesses__result6 : index
-
-logic perm__get_witnesses__result7 : index
-
-logic result8 : bool
-
-logic result9 : int
-
-logic ia3 : int
-
-logic result10 : bool
-
-logic result11 : bool
-
-logic result12 : index
-
-logic result13 : index
-
-logic perm__get_witnesses__result8 : index
-
-logic perm__get_witnesses__result9 : index
-
-logic ia4 : int
-
-logic perm__get_witnesses__result10 : index
-
-logic perm__get_witnesses__result11 : index
-
-logic ia5 : int
-
-logic perm__get_witnesses__result12 : index
-
-logic perm__get_witnesses__result13 : index
-
-logic ia6 : int
-
-logic perm__get_witnesses__result14 : index
-
-logic perm__get_witnesses__result15 : index
-
-logic ia7 : int
-
-logic perm__get_witnesses__result16 : index
-
-logic perm__get_witnesses__result17 : index
-
-logic ia8 : int
-
-logic perm__get_witnesses__result18 : index
-
-logic perm__get_witnesses__result19 : index
-
-logic ia9 : int
-
-logic perm__get_witnesses__result20 : index
-
-logic perm__get_witnesses__result21 : index
-
-logic ia10 : int
-
-logic perm__get_witnesses__result22 : index
-
-logic perm__get_witnesses__result23 : index
-
-logic ia11 : int
-
-logic perm__get_witnesses__result24 : index
-
-logic perm__get_witnesses__result25 : index
-
-logic ia12 : int
-
-logic perm__get_witnesses__result26 : index
-
-logic perm__get_witnesses__result27 : index
-
-logic ia13 : int
-
-logic perm__get_witnesses__result28 : index
-
-logic perm__get_witnesses__result29 : index
-
-logic ia14 : int
-
-logic perm__get_witnesses__result30 : index
-
-logic perm__get_witnesses__result31 : index
-
-logic ia15 : int
-
-logic perm__get_witnesses__result32 : index
-
-logic perm__get_witnesses__result33 : index
-
-logic result14 : bool
-
-axiom H : dynamic_property(1, 100, to_rep2(first(a1)), to_rep2(last(a1)))
-
-axiom H1 : dynamic_property(1, 100, to_rep2(first(b1)), to_rep2(last(b1)))
-
-axiom H2 : ((invariant__({ elts = a; rt = a1 }) = true) and ((invariant__({
-  elts = b; rt = b1 }) = true) and ((is_perm({ elts = a; rt = a1 }, { elts =
-  b; rt = b1 }) = true) and (0 <  length({ elts = a; rt = a1 })))))
-
-axiom H3 :
-  ((perm__get_witnesses__result26 = perm__get_witnesses__result14) and
-  (perm__get_witnesses__result27 = perm__get_witnesses__result15))
-
-axiom H4 : (ia12 = ia6)
-
-axiom H5 :
-  ((perm__get_witnesses__result28 = perm__get_witnesses__result16) and
-  (perm__get_witnesses__result29 = perm__get_witnesses__result17))
-
-axiom H6 : (ia13 = ia7)
-
-axiom H7 : (temp___587 = to_rep2(first(a1)))
-
-axiom H8 : (temp___588 = to_rep2(last(a1)))
-
-axiom H9 : (result3 = ia)
-
-axiom H10 : (ia1 = temp___587)
-
-axiom H11 : (temp___587 <= ia1)
-
-axiom H12 : (ia1 <= temp___588)
-
-axiom H13 : (temp___586 = ia1)
-
-axiom H14 :
-  ((((((perm__get_witnesses__result14 = perm__get_witnesses__result4) and
-  (perm__get_witnesses__result15 = perm__get_witnesses__result5)) and
-  (ia6 = ia1)) and
-  (((perm__get_witnesses__result16 = perm__get_witnesses__result4) and
-  (perm__get_witnesses__result17 = perm__get_witnesses__result5)) and
-  (ia7 = ia1))) and (((result4 = true) <->
-  (exists ib2:int. (((to_rep2(first(b1)) <= ib2) and
-  (ib2 <= to_rep2(last(b1)))) and ((to_rep((a[ia1])) = to_rep((b[ib2]))) and
+ (* File "perm.adb", line 37, characters 0-0 *)
+goal WP_parameter_def :
+  (forall ia:int. forall perm__get_witnesses__result:index.
+  forall perm__get_witnesses__result1:index. forall temp___651:int.
+  forall temp___652:int. forall temp___650:int. forall o:int. forall o1:int.
+  forall o2:int. forall o3:index. forall o4:index. forall o5:index.
+  forall o6:index. forall o7:index. forall o8:index. forall o9:int.
+  forall o10:int. forall o11:int. forall o12:index. forall o13:index.
+  forall o14:index. forall o15:index. forall o16:index. forall o17:index.
+  forall o18:(int,natural) farray. forall o19:t. forall o20:int.
+  forall o21:natural. forall o22:int. forall o23:natural. forall o24:int.
+  forall o25:int. forall perm__get_witnesses__result2:index.
+  forall perm__get_witnesses__result3:index. forall result:int.
+  forall ia1:int. forall result1:bool. forall result2:index.
+  forall result3:index. forall perm__get_witnesses__result4:index.
+  forall perm__get_witnesses__result5:index. forall ia2:int.
+  forall perm__get_witnesses__result6:index.
+  forall perm__get_witnesses__result7:index. forall result4:int.
+  forall ia3:int. forall result5:bool. forall result6:index.
+  forall result7:index. forall perm__get_witnesses__result8:index.
+  forall perm__get_witnesses__result9:index. forall ia4:int.
+  forall perm__get_witnesses__result10:index.
+  forall perm__get_witnesses__result11:index. forall ia5:int.
+  forall perm__get_witnesses__result12:us_rep. forall ia6:int__ref.
+  forall perm__get_witnesses__result13:witnesses__ref. forall ia7:int.
+  forall perm__get_witnesses__result14:us_rep. forall ia8:int__ref.
+  forall perm__get_witnesses__result15:witnesses__ref. forall ia9:int.
+  forall perm__get_witnesses__result16:us_rep. forall result8:bool.
+  (dynamic_property(1, 100, to_rep2(first(a1)), to_rep2(last(a1))) ->
+  (dynamic_property(1, 100, to_rep2(first(b1)), to_rep2(last(b1))) ->
+  (((invariant__({ elts = a; rt = a1 }) = true) and ((invariant__({ elts = b;
+  rt = b1 }) = true) and ((is_perm({ elts = a; rt = a1 }, { elts = b; rt = b1
+  }) = true) and (0 <  length({ elts = a; rt = a1 }))))) ->
+  ((((((perm__get_witnesses__result13 = { witnesses__content = {
+  us_split_fields1 = { rec__perm__witnesses__ia =
+  perm__get_witnesses__result10; rec__perm__witnesses__ib =
+  perm__get_witnesses__result11 } } }) and (ia6 = { int__content = ia4
+  })) and
+  ((perm__get_witnesses__result14 = perm__get_witnesses__result12) and
+  (ia7 = ia5))) and ((temp___651 = to_rep2(first(a1))) and
+  ((temp___652 = to_rep2(last(a1))) and ((({ int__content = result } = {
+  int__content = ia }) and (ia1 = temp___651)) and (((temp___651 <= ia1) and
+  (ia1 <= temp___652)) and ((temp___650 = ia1) and
+  ((((((perm__get_witnesses__result10 = perm__get_witnesses__result4) and
+  (perm__get_witnesses__result11 = perm__get_witnesses__result5)) and
+  (ia1 = ia4)) and ((perm__get_witnesses__result12 = { us_split_fields1 = {
+  rec__perm__witnesses__ia = perm__get_witnesses__result4;
+  rec__perm__witnesses__ib = perm__get_witnesses__result5 } }) and
+  (ia5 = ia1))) and (((result1 = true) <->
+  (exists ib:int. (((to_rep2(first(b1)) <= ib) and
+  (ib <= to_rep2(last(b1)))) and ((to_rep((a[ia1])) = to_rep((b[ib]))) and
   (is_perm(remove({ elts = a; rt = a1 }, ia1), remove({ elts = b; rt = b1 },
-  ib2)) = true))))) and ((result4 = true) and (((((((o13 = ia1) and
-  in_range2(ia1)) and ((o14 = get_witness({ elts = a; rt = a1 }, { elts = b;
-  rt = b1 }, o13)) and (in_range2(o14) and (((to_rep2(first(b1)) <= o14) and
-  (o14 <= to_rep2(last(b1)))) and ((to_rep((a[o13])) = to_rep((b[o14]))) and
-  (is_perm(remove({ elts = a; rt = a1 }, o13), remove({ elts = b; rt = b1 },
-  o14)) = true)))))) and (to_rep1(o15) = o14)) and ((((o12 = ia1) and
-  in_range2(ia1)) and (to_rep1(o16) = o12)) and ((o16 = o17) and
-  (o15 = o18)))) and ((o19 = o17) and (o20 = o18))) and
-  (((result6 = perm__get_witnesses__result) and
-  (result7 = perm__get_witnesses__result1)) and
-  ((perm__get_witnesses__result4 = o19) and
-  (perm__get_witnesses__result5 = o20))))))) or ((((result4 = true) <->
-  (exists ib2:int. (((to_rep2(first(b1)) <= ib2) and
-  (ib2 <= to_rep2(last(b1)))) and ((to_rep((a[ia1])) = to_rep((b[ib2]))) and
+  ib)) = true))))) and ((result1 = true) and (((((((o1 = ia1) and
+  in_range2(ia1)) and ((o2 = get_witness({ elts = a; rt = a1 }, { elts = b;
+  rt = b1 }, o1)) and (in_range2(o2) and (((to_rep2(first(b1)) <= o2) and
+  (o2 <= to_rep2(last(b1)))) and ((to_rep((a[o1])) = to_rep((b[o2]))) and
+  (is_perm(remove({ elts = a; rt = a1 }, o1), remove({ elts = b; rt = b1 },
+  o2)) = true)))))) and (to_rep1(o3) = o2)) and ((((o = ia1) and
+  in_range2(ia1)) and (to_rep1(o4) = o)) and ((o4 = o5) and (o3 = o6)))) and
+  ((o7 = o5) and (o8 = o6))) and
+  (((result2 = perm__get_witnesses__result) and
+  (result3 = perm__get_witnesses__result1)) and ({ us_split_fields1 = {
+  rec__perm__witnesses__ia = perm__get_witnesses__result4;
+  rec__perm__witnesses__ib = perm__get_witnesses__result5 } } = {
+  us_split_fields1 = { rec__perm__witnesses__ia = o7;
+  rec__perm__witnesses__ib = o8 } })))))) or ((((result1 = true) <->
+  (exists ib:int. (((to_rep2(first(b1)) <= ib) and
+  (ib <= to_rep2(last(b1)))) and ((to_rep((a[ia1])) = to_rep((b[ib]))) and
   (is_perm(remove({ elts = a; rt = a1 }, ia1), remove({ elts = b; rt = b1 },
-  ib2)) = true))))) and ((not (result4 = true)) and
-  (((perm__get_witnesses__result4 = perm__get_witnesses__result) and
-  (perm__get_witnesses__result5 = perm__get_witnesses__result1)) and
-  ((perm__get_witnesses__result4 = perm__get_witnesses__result2) and
-  (perm__get_witnesses__result5 = perm__get_witnesses__result3))))) and
-  (((((perm__get_witnesses__result14 = perm__get_witnesses__result8) and
-  (perm__get_witnesses__result15 = perm__get_witnesses__result9)) and
-  (ia6 = ia3)) and
-  (((perm__get_witnesses__result16 = perm__get_witnesses__result8) and
-  (perm__get_witnesses__result17 = perm__get_witnesses__result9)) and
-  (ia7 = ia3))) and
-  ((forall ka1:int. (((1 <= ka1) and (ka1 <= ia2)) ->
-   (forall kb1:int. (((to_rep2(first(b1)) <= kb1) and
-   (kb1 <= to_rep2(last(b1)))) ->
-   (not ((to_rep((a[ka1])) = to_rep((b[kb1]))) and (is_perm(remove({ elts =
-   a; rt = a1 }, ka1), remove({ elts = b; rt = b1 }, kb1)) = true))))))) and
+  ib)) = true))))) and ((not (result1 = true)) and
+  (((perm__get_witnesses__result = perm__get_witnesses__result4) and
+  (perm__get_witnesses__result1 = perm__get_witnesses__result5)) and ({
+  us_split_fields1 = { rec__perm__witnesses__ia =
+  perm__get_witnesses__result4; rec__perm__witnesses__ib =
+  perm__get_witnesses__result5 } } = { us_split_fields1 = {
+  rec__perm__witnesses__ia = perm__get_witnesses__result2;
+  rec__perm__witnesses__ib = perm__get_witnesses__result3 } })))) and
+  (((((perm__get_witnesses__result10 = perm__get_witnesses__result8) and
+  (perm__get_witnesses__result11 = perm__get_witnesses__result9)) and
+  (ia3 = ia4)) and ((perm__get_witnesses__result12 = { us_split_fields1 = {
+  rec__perm__witnesses__ia = perm__get_witnesses__result8;
+  rec__perm__witnesses__ib = perm__get_witnesses__result9 } }) and
+  (ia5 = ia3))) and
+  ((forall ka:int. (((1 <= ka) and (ka <= ia2)) ->
+   (forall kb:int. (((to_rep2(first(b1)) <= kb) and
+   (kb <= to_rep2(last(b1)))) ->
+   (not ((to_rep((a[ka])) = to_rep((b[kb]))) and (is_perm(remove({ elts = a;
+   rt = a1 }, ka), remove({ elts = b; rt = b1 }, kb)) = true))))))) and
   ((((to_rep2(first(a1)) <= to_rep2(last(a1))) ->
   dynamic_property1(to_rep2(first(a1)), to_rep2(last(a1)), ia2)) and
   ((to_rep2(first(a1)) <= ia2) and (ia2 <= to_rep2(last(a1))))) and
-  ((not (ia2 = temp___588)) and (((result9 = ia2) and (ia3 = (ia2 + 1))) and
-  (((result10 = true) <->
-  (exists ib2:int. (((to_rep2(first(b1)) <= ib2) and
-  (ib2 <= to_rep2(last(b1)))) and ((to_rep((a[ia3])) = to_rep((b[ib2]))) and
+  ((not (ia2 = temp___652)) and (((result4 = ia2) and (ia3 = (ia2 + 1))) and
+  (((result5 = true) <->
+  (exists ib:int. (((to_rep2(first(b1)) <= ib) and
+  (ib <= to_rep2(last(b1)))) and ((to_rep((a[ia3])) = to_rep((b[ib]))) and
   (is_perm(remove({ elts = a; rt = a1 }, ia3), remove({ elts = b; rt = b1 },
-  ib2)) = true))))) and ((result10 = true) and (((((((o46 = ia3) and
-  in_range2(ia3)) and ((o47 = get_witness({ elts = a; rt = a1 }, { elts = b;
-  rt = b1 }, o46)) and (in_range2(o47) and (((to_rep2(first(b1)) <= o47) and
-  (o47 <= to_rep2(last(b1)))) and ((to_rep((a[o46])) = to_rep((b[o47]))) and
-  (is_perm(remove({ elts = a; rt = a1 }, o46), remove({ elts = b; rt = b1 },
-  o47)) = true)))))) and (to_rep1(o48) = o47)) and ((((o45 = ia3) and
-  in_range2(ia3)) and (to_rep1(o49) = o45)) and ((o49 = o50) and
-  (o48 = o51)))) and ((o52 = o50) and (o53 = o51))) and
-  (((result12 = perm__get_witnesses__result6) and
-  (result13 = perm__get_witnesses__result7)) and
-  ((perm__get_witnesses__result8 = o52) and
-  (perm__get_witnesses__result9 = o53)))))))))))))
-
-axiom H15 :
-  ((perm__get_witnesses__result30 = perm__get_witnesses__result26) and
-  (perm__get_witnesses__result31 = perm__get_witnesses__result27))
-
-axiom H16 : (ia14 = ia12)
-
-axiom H17 :
-  ((perm__get_witnesses__result32 = perm__get_witnesses__result28) and
-  (perm__get_witnesses__result33 = perm__get_witnesses__result29))
-
-axiom H18 : (ia15 = ia13)
-
-axiom H19 : (to_rep2(first(a1)) <= to_rep1(perm__get_witnesses__result30))
-
-axiom H20 : (to_rep1(perm__get_witnesses__result30) <= to_rep2(last(a1)))
-
-axiom H21 : (to_rep2(first(b1)) <= to_rep1(perm__get_witnesses__result31))
-
-axiom H22 : (to_rep1(perm__get_witnesses__result31) <= to_rep2(last(b1)))
-
-axiom H23 :
-  ((to_rep2(first(b1)) <= to_rep1(perm__get_witnesses__result31)) and
-  (to_rep1(perm__get_witnesses__result31) <= to_rep2(last(b1))))
-
-axiom H24 : (o60 = to_rep1(perm__get_witnesses__result31))
-
-axiom H25 : (o61 = (b[o60]))
-
-axiom H26 : (o62 = to_rep(o61))
-
-axiom H27 :
-  ((to_rep2(first(a1)) <= to_rep1(perm__get_witnesses__result30)) and
-  (to_rep1(perm__get_witnesses__result30) <= to_rep2(last(a1))))
-
-axiom H28 : (o58 = to_rep1(perm__get_witnesses__result30))
-
-axiom H29 : (o59 = (a[o58]))
-
-axiom H30 : (o63 = to_rep(o59))
-
-axiom H31 : (((o63 = o62) -> (result14 = true)) and ((not (o63 = o62)) ->
-  (result14 = false)))
-
-axiom H32 : (result14 = true)
-
-axiom H33 : (({ elts = o56; rt = o57 } = remove({ elts = b; rt = b1 },
-  to_rep1(perm__get_witnesses__result31))) and (dynamic_property(1, 100,
-  to_rep2(first(o57)), to_rep2(last(o57))) and ((invariant__({ elts = o56;
-  rt = o57 }) = true) and ((to_rep2(last(o57)) = (to_rep2(last(b1)) - 1)) and
+  ib)) = true))))) and ((result5 = true) and (((((((o10 = ia3) and
+  in_range2(ia3)) and ((o11 = get_witness({ elts = a; rt = a1 }, { elts = b;
+  rt = b1 }, o10)) and (in_range2(o11) and (((to_rep2(first(b1)) <= o11) and
+  (o11 <= to_rep2(last(b1)))) and ((to_rep((a[o10])) = to_rep((b[o11]))) and
+  (is_perm(remove({ elts = a; rt = a1 }, o10), remove({ elts = b; rt = b1 },
+  o11)) = true)))))) and (to_rep1(o12) = o11)) and ((((o9 = ia3) and
+  in_range2(ia3)) and (to_rep1(o13) = o9)) and ((o13 = o14) and
+  (o12 = o15)))) and ((o16 = o14) and (o17 = o15))) and
+  (((result6 = perm__get_witnesses__result6) and
+  (result7 = perm__get_witnesses__result7)) and ({ us_split_fields1 = {
+  rec__perm__witnesses__ia = perm__get_witnesses__result8;
+  rec__perm__witnesses__ib = perm__get_witnesses__result9 } } = {
+  us_split_fields1 = { rec__perm__witnesses__ia = o16;
+  rec__perm__witnesses__ib = o17 } })))))))))))))))))) and
+  (((perm__get_witnesses__result15 = perm__get_witnesses__result13) and
+  (ia8 = ia6)) and
+  ((perm__get_witnesses__result16 = perm__get_witnesses__result14) and
+  (ia9 = ia7)))) ->
+  (((to_rep2(first(a1)) <= to_rep1((((perm__get_witnesses__result15).witnesses__content).us_split_fields1).rec__perm__witnesses__ia)) and
+  (to_rep1((((perm__get_witnesses__result15).witnesses__content).us_split_fields1).rec__perm__witnesses__ia) <= to_rep2(last(a1)))) ->
+  (((to_rep2(first(b1)) <= to_rep1((((perm__get_witnesses__result15).witnesses__content).us_split_fields1).rec__perm__witnesses__ib)) and
+  (to_rep1((((perm__get_witnesses__result15).witnesses__content).us_split_fields1).rec__perm__witnesses__ib) <= to_rep2(last(b1)))) ->
+  (((((((to_rep2(first(b1)) <= to_rep1((((perm__get_witnesses__result15).witnesses__content).us_split_fields1).rec__perm__witnesses__ib)) and
+  (to_rep1((((perm__get_witnesses__result15).witnesses__content).us_split_fields1).rec__perm__witnesses__ib) <= to_rep2(last(b1)))) and
+  (o22 = to_rep1((((perm__get_witnesses__result15).witnesses__content).us_split_fields1).rec__perm__witnesses__ib))) and
+  (o23 = (b[o22]))) and (o24 = to_rep(o23))) and
+  ((((((to_rep2(first(a1)) <= to_rep1((((perm__get_witnesses__result15).witnesses__content).us_split_fields1).rec__perm__witnesses__ia)) and
+  (to_rep1((((perm__get_witnesses__result15).witnesses__content).us_split_fields1).rec__perm__witnesses__ia) <= to_rep2(last(a1)))) and
+  (o20 = to_rep1((((perm__get_witnesses__result15).witnesses__content).us_split_fields1).rec__perm__witnesses__ia))) and
+  (o21 = (a[o20]))) and (o25 = to_rep(o21))) and (((o25 = o24) and
+  (result8 = true)) or ((not (o25 = o24)) and (result8 = false))))) ->
+  ((result8 = true) -> ((({ elts = o18; rt = o19 } = remove({ elts = b; rt =
+  b1 },
+  to_rep1((((perm__get_witnesses__result15).witnesses__content).us_split_fields1).rec__perm__witnesses__ib))) and
+  (dynamic_property(1, 100, to_rep2(first(o19)), to_rep2(last(o19))) and
+  ((invariant__({ elts = o18; rt = o19 }) = true) and
+  ((to_rep2(last(o19)) = (to_rep2(last(b1)) - 1)) and
   ((forall k:int. (((1 <= k) and
-   (k <= (to_rep1(perm__get_witnesses__result31) - 1))) ->
-   (to_rep((b[k])) = to_rep((o56[k]))))) and
-  ((forall k:int. ((((to_rep1(perm__get_witnesses__result31) + 1) <= k) and
-   (k <= to_rep2(last(b1)))) -> (to_rep((b[k])) = to_rep((o56[(k - 1)]))))) and
-  (forall k:int. (((to_rep1(perm__get_witnesses__result31) <= k) and
+   (k <= (to_rep1((((perm__get_witnesses__result15).witnesses__content).us_split_fields1).rec__perm__witnesses__ib) - 1))) ->
+   (to_rep((b[k])) = to_rep((o18[k]))))) and
+  ((forall k:int.
+   ((((to_rep1((((perm__get_witnesses__result15).witnesses__content).us_split_fields1).rec__perm__witnesses__ib) + 1) <= k) and
+   (k <= to_rep2(last(b1)))) -> (to_rep((b[k])) = to_rep((o18[(k - 1)]))))) and
+  (forall k:int.
+  (((to_rep1((((perm__get_witnesses__result15).witnesses__content).us_split_fields1).rec__perm__witnesses__ib) <= k) and
   (k <= (to_rep2(last(b1)) - 1))) ->
-  (to_rep((b[(k + 1)])) = to_rep((o56[k])))))))))))
-
- (* File "perm.adb", line 37, characters 0-0 *)
-goal WP_parameter_def : (invariant__({ elts = a; rt = a1 }) = true)
+  (to_rep((b[(k + 1)])) = to_rep((o18[k]))))))))))) -> (invariant__({ elts =
+  a; rt = a1 }) = true)))))))))))

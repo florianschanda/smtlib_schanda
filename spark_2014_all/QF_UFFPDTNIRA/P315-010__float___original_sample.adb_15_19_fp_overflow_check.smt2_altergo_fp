@@ -1037,12 +1037,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1054,6 +1048,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1226,62 +1226,6 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
-logic time : t
-
-logic d : t
-
-logic t_fp : t
-
-logic t_pp : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic result : t
-
-logic d1 : t
-
-logic result1 : t
-
-logic t_fp1 : t
-
-logic result2 : t
-
-logic t_pp1 : t
-
-logic result3 : t
-
-logic time1 : t
-
-logic time2 : t
-
-logic d2 : t
-
-logic t_fp2 : t
-
-logic t_pp2 : t
-
-logic time3 : t
-
-logic d3 : t
-
-logic t_fp3 : t
-
-logic t_pp3 : t
-
-axiom H : in_range2(nb_of_fp)
-
-axiom H1 : in_range2(nb_of_pp)
-
-axiom H2 : in_range4(delta_time)
-
-axiom H3 : tqtisFinite(time)
-
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
@@ -1292,28 +1236,24 @@ logic fliteral4 : t
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 340282346638528859811704183484516925440.0))
 
-axiom H4 : ((((0 <  nb_of_pp) and lt(fliteral1, delta_time)) and
-  le(mul(NearestTiesToEven, mul(NearestTiesToEven, fliteral3,
-  of_int(NearestTiesToEven, (nb_of_fp + nb_of_pp))), delta_time), time)) and
-  lt(time, sub(NearestTiesToEven, fliteral4, mul(NearestTiesToEven,
-  of_int(NearestTiesToEven, (nb_of_fp + nb_of_pp)), delta_time))))
-
-axiom H5 : (le(fliteral1, fliteral2) -> in_range3(d))
-
-axiom H6 : (le(neg(fliteral4), fliteral4) -> tqtisFinite(t_fp))
-
-axiom H7 : (le(neg(fliteral4), fliteral4) -> tqtisFinite(t_pp))
-
-axiom H8 : (result = d)
-
-axiom H9 : (d1 = mul(NearestTiesToEven, of_int(NearestTiesToEven,
-  (nb_of_fp + nb_of_pp)), delta_time))
-
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 2.0))
 
  (* File "original_sample.ads", line 15, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(sub(NearestTiesToEven, time,
-  div(NearestTiesToEven, d1, fliteral5)))
+goal WP_parameter_def :
+  (forall time:t. forall d:t. forall t_fp:t. forall t_pp:t. forall result:t.
+  forall d1:t. (in_range2(nb_of_fp) -> (in_range2(nb_of_pp) ->
+  (in_range4(delta_time) -> (tqtisFinite(time) -> (((((0 <  nb_of_pp) and
+  lt(fliteral1, delta_time)) and le(mul(NearestTiesToEven,
+  mul(NearestTiesToEven, fliteral3, of_int(NearestTiesToEven,
+  (nb_of_fp + nb_of_pp))), delta_time), time)) and lt(time,
+  sub(NearestTiesToEven, fliteral4, mul(NearestTiesToEven,
+  of_int(NearestTiesToEven, (nb_of_fp + nb_of_pp)), delta_time)))) ->
+  ((le(fliteral1, fliteral2) -> in_range3(d)) -> ((le(neg(fliteral4),
+  fliteral4) -> tqtisFinite(t_fp)) -> ((le(neg(fliteral4), fliteral4) ->
+  tqtisFinite(t_pp)) -> ((({ t__content = result } = { t__content = d }) and
+  (d1 = mul(NearestTiesToEven, of_int(NearestTiesToEven,
+  (nb_of_fp + nb_of_pp)), delta_time))) -> tqtisFinite(sub(NearestTiesToEven,
+  time, div(NearestTiesToEven, d1, fliteral5)))))))))))))

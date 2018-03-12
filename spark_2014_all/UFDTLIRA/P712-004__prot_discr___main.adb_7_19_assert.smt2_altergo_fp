@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -261,37 +261,12 @@ logic d2 : bool
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic o : bool
-
-logic o1 : bool
-
-logic main__d1__assume : bool
-
-logic o2 : bool
-
-logic o3 : bool
-
-logic main__d2__assume : bool
-
-axiom H : (of_int(1) = p1__split_discrs)
-
-axiom H1 : (of_int(0) = p2__split_discrs)
-
-axiom H2 : (p1__split_discrs = o)
-
-axiom H3 : (o = o1)
-
-axiom H4 : (main__d1__assume = o1)
-
-axiom H5 : (main__d1__assume = d1)
-
-axiom H6 : (p2__split_discrs = o2)
-
-axiom H7 : (o2 = o3)
-
-axiom H8 : (main__d2__assume = o3)
-
-axiom H9 : (main__d2__assume = d2)
-
  (* File "main.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (not (d1 = d2))
+goal WP_parameter_def :
+  (forall o:bool. forall o1:bool. forall main__d1__assume:bool.
+  forall o2:bool. forall o3:bool. forall main__d2__assume:bool.
+  ((of_int(1) = p1__split_discrs) -> ((of_int(0) = p2__split_discrs) ->
+  (((((p1__split_discrs = o) and (o = o1)) and (main__d1__assume = o1)) and
+  (main__d1__assume = d1)) -> (((((p2__split_discrs = o2) and (o2 = o3)) and
+  (main__d2__assume = o3)) and (main__d2__assume = d2)) ->
+  (not (d1 = d2)))))))

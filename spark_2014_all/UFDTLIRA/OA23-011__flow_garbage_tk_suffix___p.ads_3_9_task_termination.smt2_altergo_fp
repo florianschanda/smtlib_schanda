@@ -165,12 +165,6 @@ function poT__ref___projection(a: poT__ref) : us_rep = (a).poT__content
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -183,6 +177,12 @@ axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
 
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
 logic attr__ATTRIBUTE_IMAGE1 : bool -> us_image
@@ -193,33 +193,5 @@ logic attr__ATTRIBUTE_VALUE1 : us_image -> bool
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic temp___184 : bool
-
-logic po__split_fields : bool
-
-logic po__split_fields1 : bool
-
-logic po__split_fields2 : bool
-
-logic po__split_fields3 : bool
-
-logic po__split_fields4 : bool
-
-logic po__split_fields5 : bool
-
-axiom H : (temp___184 = po__split_fields)
-
-axiom H1 : true
-
-axiom H2 : false
-
-axiom H3 : (po__split_fields2 = po__split_fields1)
-
-axiom H4 : (po__split_fields3 = po__split_fields1)
-
-axiom H5 : (po__split_fields4 = po__split_fields2)
-
-axiom H6 : (po__split_fields5 = po__split_fields3)
-
  (* File "p.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def : true

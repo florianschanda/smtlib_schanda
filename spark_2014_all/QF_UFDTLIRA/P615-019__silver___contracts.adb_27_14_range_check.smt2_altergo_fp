@@ -135,23 +135,8 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic y : int
-
-logic z : int
-
-logic o : int
-
-logic o1 : int
-
-logic z1 : int
-
-axiom H : in_range1(y)
-
-axiom H1 : ((0 <= 2147483647) -> in_range1(z))
-
-axiom H2 : in_range1(z1)
-
-axiom H3 : ((o = (y - z1)) and in_range((y - z1)))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range1(o)
+goal WP_parameter_def :
+  (forall y:int. forall z:int. forall o:int. forall z1:int. (in_range1(y) ->
+  (((0 <= 2147483647) -> in_range1(z)) -> (in_range1(z1) ->
+  (((o = (y - z1)) and in_range((y - z1))) -> in_range1(o))))))

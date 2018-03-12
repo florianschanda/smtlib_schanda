@@ -173,24 +173,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq3 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -201,17 +183,17 @@ axiom bool_eq_def2 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep1((a[temp___idx_78])) = to_rep1((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep1((a[temp___idx_91])) = to_rep1((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq3(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep1((a[temp___idx_78])) = to_rep1((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep1((a[temp___idx_91])) = to_rep1((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq3(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -221,37 +203,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep1((a[temp___idx_78])) = to_rep1((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq3(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq3(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep1((a[(i + 1)])) <  to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq3(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep1((b[(i + 1)])) <  to_rep1((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep1((a[temp___idx_91])) = to_rep1((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 logic dummy2 : (int,character) farray
 
@@ -387,6 +341,34 @@ type message__ref = { message__content : us_rep
 function message__ref___projection(a: message__ref) : us_rep =
   (a).message__content
 
+logic compare : (int,character) farray, int, int, (int,character) farray,
+  int, int -> int
+
+axiom compare_def_eq :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq3(a,
+  a_first, a_last, b, b_first, b_last) = true))))
+
+axiom compare_def_lt :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
+  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
+  ((bool_eq3(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
+  ((i <  a_last) and (to_rep1((a[(i + 1)])) <  to_rep1((b[(j + 1)]))))))))))))
+
+axiom compare_def_gt :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
+  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
+  ((bool_eq3(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
+  ((i <  b_last) and (to_rep1((b[(i + 1)])) <  to_rep1((a[(j + 1)]))))))))))))
+
 type tdayP1
 
 predicate in_range2(x: int) = ((1 <= x) and (x <= 10))
@@ -474,29 +456,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def1 :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def1 :
-  (forall v:(int,character) farray. forall v1:(int,character) farray.
-  (forall i:int [(singleton1({ us_split_fields1 = {
-  rec__messages__message__sent = v; rec__messages__message__received = v1 }
-  }, i)[i])]. ((singleton1({ us_split_fields1 = {
-  rec__messages__message__sent = v; rec__messages__message__received = v1 }
-  }, i)[i]) = { us_split_fields1 = { rec__messages__message__sent = v;
-  rec__messages__message__received = v1 } })))
-
 logic bool_eq7 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -507,17 +466,17 @@ axiom bool_eq_def6 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and (bool_eq4((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and (bool_eq4((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq4((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq7(a,
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq4((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq7(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -527,9 +486,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq4((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq4((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)))))))
 
 predicate dynamic_property(first_int: int, last_int: int, x: int) =
   ((first_int <= x) and (x <= last_int))
@@ -758,33 +717,33 @@ logic null_msg1 : (int,character) farray
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic temp___String_Literal_133 : unit -> (int,character) farray
+logic temp___String_Literal_155 : unit -> (int,character) farray
 
-axiom temp___String_Literal_133__def_axiom :
-  ((((((((((to_rep1((temp___String_Literal_133(void)[1])) = 50) and
-  (to_rep1((temp___String_Literal_133(void)[2])) = 48)) and
-  (to_rep1((temp___String_Literal_133(void)[3])) = 49)) and
-  (to_rep1((temp___String_Literal_133(void)[4])) = 50)) and
-  (to_rep1((temp___String_Literal_133(void)[5])) = 45)) and
-  (to_rep1((temp___String_Literal_133(void)[6])) = 48)) and
-  (to_rep1((temp___String_Literal_133(void)[7])) = 49)) and
-  (to_rep1((temp___String_Literal_133(void)[8])) = 45)) and
-  (to_rep1((temp___String_Literal_133(void)[9])) = 48)) and
-  (to_rep1((temp___String_Literal_133(void)[10])) = 49))
+axiom temp___String_Literal_155__def_axiom :
+  ((((((((((to_rep1((temp___String_Literal_155(void)[1])) = 50) and
+  (to_rep1((temp___String_Literal_155(void)[2])) = 48)) and
+  (to_rep1((temp___String_Literal_155(void)[3])) = 49)) and
+  (to_rep1((temp___String_Literal_155(void)[4])) = 50)) and
+  (to_rep1((temp___String_Literal_155(void)[5])) = 45)) and
+  (to_rep1((temp___String_Literal_155(void)[6])) = 48)) and
+  (to_rep1((temp___String_Literal_155(void)[7])) = 49)) and
+  (to_rep1((temp___String_Literal_155(void)[8])) = 45)) and
+  (to_rep1((temp___String_Literal_155(void)[9])) = 48)) and
+  (to_rep1((temp___String_Literal_155(void)[10])) = 49))
 
-logic temp___String_Literal_134 : unit -> (int,character) farray
+logic temp___String_Literal_156 : unit -> (int,character) farray
 
-axiom temp___String_Literal_134__def_axiom :
-  ((((((((((to_rep1((temp___String_Literal_134(void)[1])) = 50) and
-  (to_rep1((temp___String_Literal_134(void)[2])) = 48)) and
-  (to_rep1((temp___String_Literal_134(void)[3])) = 49)) and
-  (to_rep1((temp___String_Literal_134(void)[4])) = 50)) and
-  (to_rep1((temp___String_Literal_134(void)[5])) = 45)) and
-  (to_rep1((temp___String_Literal_134(void)[6])) = 48)) and
-  (to_rep1((temp___String_Literal_134(void)[7])) = 49)) and
-  (to_rep1((temp___String_Literal_134(void)[8])) = 45)) and
-  (to_rep1((temp___String_Literal_134(void)[9])) = 48)) and
-  (to_rep1((temp___String_Literal_134(void)[10])) = 49))
+axiom temp___String_Literal_156__def_axiom :
+  ((((((((((to_rep1((temp___String_Literal_156(void)[1])) = 50) and
+  (to_rep1((temp___String_Literal_156(void)[2])) = 48)) and
+  (to_rep1((temp___String_Literal_156(void)[3])) = 49)) and
+  (to_rep1((temp___String_Literal_156(void)[4])) = 50)) and
+  (to_rep1((temp___String_Literal_156(void)[5])) = 45)) and
+  (to_rep1((temp___String_Literal_156(void)[6])) = 48)) and
+  (to_rep1((temp___String_Literal_156(void)[7])) = 49)) and
+  (to_rep1((temp___String_Literal_156(void)[8])) = 45)) and
+  (to_rep1((temp___String_Literal_156(void)[9])) = 48)) and
+  (to_rep1((temp___String_Literal_156(void)[10])) = 49))
 
 logic r4b : int
 
@@ -995,6 +954,11 @@ type t6b__ref = { t6b__content : us_t2
 
 function t6b__ref___projection(a: t6b__ref) : us_t2 = (a).t6b__content
 
+logic temp___354 : us_rep, int, int -> us_t2
+
+axiom null_msg__def_axiom : ((null_msg = temp___String_Literal_155(void)) and
+  (null_msg1 = temp___String_Literal_156(void)))
+
 type t3
 
 logic first6 : t3 -> integer
@@ -1073,196 +1037,107 @@ type message_arr__ref = { message_arr__content : us_t3
 function message_arr__ref___projection(a: message_arr__ref) : us_t3 =
   (a).message_arr__content
 
-logic temp___325 : us_rep, int, int -> us_t2
-
 axiom def_axiom :
-  (forall temp___327:(int,character) farray.
-  forall temp___3271:(int,character) farray.
-  (forall temp___328:int. forall temp___329:int.
-  ((dynamic_property6((- 2147483648), 2147483647, temp___328, temp___329) ->
-  ((to_rep2(first4((temp___325({ us_split_fields1 = {
-  rec__messages__message__sent = temp___327;
-  rec__messages__message__received = temp___3271 } }, temp___328,
-  temp___329)).rt2)) = temp___328) and (to_rep2(last4((temp___325({
-  us_split_fields1 = { rec__messages__message__sent = temp___327;
-  rec__messages__message__received = temp___3271 } }, temp___328,
-  temp___329)).rt2)) = temp___329))) and
-  (forall temp___330:int. (((temp___325({ us_split_fields1 = {
-  rec__messages__message__sent = temp___327;
-  rec__messages__message__received = temp___3271 } }, temp___328,
-  temp___329)).elts2[temp___330]) = { us_split_fields1 = {
-  rec__messages__message__sent = temp___327;
-  rec__messages__message__received = temp___3271 } })))))
+  (forall temp___356:(int,character) farray.
+  forall temp___3561:(int,character) farray.
+  (forall temp___357:int. forall temp___358:int. ((compare(temp___356, 1, 10,
+  temp___3561, 1, 10) <= 0) -> ((dynamic_property6((- 2147483648),
+  2147483647, temp___357, temp___358) -> ((to_rep2(first4((temp___354({
+  us_split_fields1 = { rec__messages__message__sent = temp___356;
+  rec__messages__message__received = temp___3561 } }, temp___357,
+  temp___358)).rt2)) = temp___357) and (to_rep2(last4((temp___354({
+  us_split_fields1 = { rec__messages__message__sent = temp___356;
+  rec__messages__message__received = temp___3561 } }, temp___357,
+  temp___358)).rt2)) = temp___358))) and
+  (forall temp___359:int. (((temp___354({ us_split_fields1 = {
+  rec__messages__message__sent = temp___356;
+  rec__messages__message__received = temp___3561 } }, temp___357,
+  temp___358)).elts2[temp___359]) = { us_split_fields1 = {
+  rec__messages__message__sent = temp___356;
+  rec__messages__message__received = temp___3561 } }))))))
 
-axiom null_msg__def_axiom : ((null_msg = temp___String_Literal_133(void)) and
-  (null_msg1 = temp___String_Literal_134(void)))
-
-logic com__split_fields : (int,us_rep) farray
-
-logic com__split_fields1 : t
-
-logic communications__mark_duplicates__null_msg__assume : (int,character) farray
-
-logic communications__mark_duplicates__null_msg__assume1 : (int,character) farray
-
-logic temp___332 : (int,us_rep) farray
-
-logic temp___3321 : t2
-
-logic temp___333 : (int,us_rep) farray
-
-logic temp___3331 : t1
-
-logic temp___335 : (int,us_rep) farray
-
-logic temp___3351 : t1
-
-logic o : (int,us_rep) farray
-
-logic o1 : t
-
-logic o2 : (int,us_rep) farray
-
-logic o3 : t
-
-logic temp___337 : positive
-
-logic temp___3371 : (int,us_rep) farray
-
-logic temp___3372 : t
-
-logic result : (int,us_rep) farray
-
-logic result1 : t
-
-logic com__split_fields2 : (int,us_rep) farray
-
-logic com__split_fields3 : t
-
-logic com__split_fields4 : (int,us_rep) farray
-
-logic com__split_fields5 : t
-
-logic com__split_fields6 : (int,us_rep) farray
-
-logic com__split_fields7 : t
-
-axiom H : (compare(i1s, 1, 10, i1s1, 1, 10) <= 0)
-
-axiom H1 : ((dynamic_property1(1, to_rep(com__split_discrs),
-  to_rep2(first(com__split_fields1)), to_rep2(last(com__split_fields1))) and
+ (* File "communications.adb", line 7, characters 0-0 *)
+goal WP_parameter_def :
+  (forall com__split_fields:(int,us_rep) farray. forall com__split_fields1:t.
+  forall communications__mark_duplicates__null_msg__assume:(int,character) farray.
+  forall communications__mark_duplicates__null_msg__assume1:(int,character) farray.
+  forall temp___361:(int,us_rep) farray. forall temp___3611:t2.
+  forall temp___362:(int,us_rep) farray. forall temp___3621:t1.
+  forall temp___364:(int,us_rep) farray. forall temp___3641:t1.
+  forall o:(int,us_rep) farray. forall o1:t. forall o2:(int,us_rep) farray.
+  forall o3:t. forall temp___366:positive.
+  forall temp___3661:(int,us_rep) farray. forall temp___3662:t.
+  forall result:(int,us_rep) farray. forall result1:t.
+  forall com__split_fields2:(int,us_rep) farray. forall com__split_fields3:t.
+  forall com__split_fields4:(int,us_rep) farray. forall com__split_fields5:t.
+  forall com__split_fields6:(int,us_rep) farray. forall com__split_fields7:t.
+  ((compare(i1s, 1, 10, i1s1, 1, 10) <= 0) -> (((dynamic_property1(1,
+  to_rep(com__split_discrs), to_rep2(first(com__split_fields1)),
+  to_rep2(last(com__split_fields1))) and
   ((to_rep2(first(com__split_fields1)) = 1) and
   (to_rep2(last(com__split_fields1)) = to_rep(com__split_discrs)))) and
-  (forall temp___190:int.
-  (((to_rep2(first(com__split_fields1)) <= temp___190) and
-  (temp___190 <= to_rep2(last(com__split_fields1)))) ->
-  (compare((((com__split_fields[temp___190])).us_split_fields1).rec__messages__message__sent,
+  (forall temp___216:int.
+  (((to_rep2(first(com__split_fields1)) <= temp___216) and
+  (temp___216 <= to_rep2(last(com__split_fields1)))) ->
+  (compare((((com__split_fields[temp___216])).us_split_fields1).rec__messages__message__sent,
   1, 10,
-  (((com__split_fields[temp___190])).us_split_fields1).rec__messages__message__received,
-  1, 10) <= 0))))
-
-axiom H2 :
-  (forall idx:int. (((1 <= idx) and
-  (idx <= (to_rep(com__split_discrs) - 1))) ->
-  (compare((((com__split_fields[idx])).us_split_fields1).rec__messages__message__received,
-  1, 10,
-  (((com__split_fields[(idx + 1)])).us_split_fields1).rec__messages__message__received,
-  1, 10) <= 0)))
-
-axiom H3 : (compare(temp___String_Literal_133(void), 1, 10,
-  temp___String_Literal_134(void), 1, 10) <= 0)
-
-axiom H4 :
-  (temp___String_Literal_133(void) = communications__mark_duplicates__null_msg__assume)
-
-axiom H5 :
-  (temp___String_Literal_134(void) = communications__mark_duplicates__null_msg__assume1)
-
-axiom H6 :
-  ((communications__mark_duplicates__null_msg__assume = null_msg) and
-  (communications__mark_duplicates__null_msg__assume1 = null_msg1))
-
-axiom H7 : (compare(null_msg, 1, 10, null_msg1, 1, 10) <= 0)
-
-axiom H8 : (to_rep(com__split_discrs) = r4b)
-
-axiom H9 : in_range(r4b)
-
-axiom H10 : (to_rep2(first4((temp___325({ us_split_fields1 = {
+  (((com__split_fields[temp___216])).us_split_fields1).rec__messages__message__received,
+  1, 10) <= 0)))) ->
+  ((forall idx:int. (((1 <= idx) and
+   (idx <= (to_rep(com__split_discrs) - 1))) ->
+   (compare((((com__split_fields[idx])).us_split_fields1).rec__messages__message__received,
+   1, 10,
+   (((com__split_fields[(idx + 1)])).us_split_fields1).rec__messages__message__received,
+   1, 10) <= 0))) ->
+  ((((((compare(temp___String_Literal_155(void), 1, 10,
+  temp___String_Literal_156(void), 1, 10) <= 0) and
+  ((temp___String_Literal_155(void) = communications__mark_duplicates__null_msg__assume) and
+  (temp___String_Literal_156(void) = communications__mark_duplicates__null_msg__assume1))) and
+  ((null_msg = communications__mark_duplicates__null_msg__assume) and
+  (null_msg1 = communications__mark_duplicates__null_msg__assume1))) and
+  ((compare(null_msg, 1, 10, null_msg1, 1, 10) <= 0) and
+  (((to_rep(com__split_discrs) = r4b) and in_range(r4b)) and
+  ((((((((to_rep2(first4((temp___354({ us_split_fields1 = {
   rec__messages__message__sent = null_msg; rec__messages__message__received =
-  null_msg1 } }, 1, r4b)).rt2)) = 1)
-
-axiom H11 : (to_rep2(last4((temp___325({ us_split_fields1 = {
-  rec__messages__message__sent = null_msg; rec__messages__message__received =
-  null_msg1 } }, 1, r4b)).rt2)) = r4b)
-
-axiom H12 : ({ elts2 = temp___332; rt2 = temp___3321 } = temp___325({
+  null_msg1 } }, 1, r4b)).rt2)) = 1) and ((to_rep2(last4((temp___354({
   us_split_fields1 = { rec__messages__message__sent = null_msg;
-  rec__messages__message__received = null_msg1 } }, 1, r4b))
-
-axiom H13 :
-  (((to_rep2(first4(temp___3321)) <= to_rep2(last4(temp___3321))) ->
-  (((1 <= r4b) ->
-  (((to_rep2(last4(temp___3321)) - to_rep2(first4(temp___3321))) + 1) = ((r4b - 1) + 1))) and
-  ((not (1 <= r4b)) ->
-  (((to_rep2(last4(temp___3321)) - to_rep2(first4(temp___3321))) + 1) = 0)))) and
-  ((not (to_rep2(first4(temp___3321)) <= to_rep2(last4(temp___3321)))) ->
-  ((1 <= r4b) -> (0 = ((r4b - 1) + 1)))))
-
-axiom H14 : (temp___332 = temp___333)
-
-axiom H15 : (mk1(to_rep2(first4(temp___3321)),
-  to_rep2(last4(temp___3321))) = temp___3331)
-
-axiom H16 :
-  (((to_rep2(first2(temp___3331)) <= to_rep2(last2(temp___3331))) ->
-  (((to_rep2(first(com__split_fields1)) <= to_rep2(last(com__split_fields1))) ->
-  (((to_rep2(last2(temp___3331)) - to_rep2(first2(temp___3331))) + 1) = ((to_rep2(last(com__split_fields1)) - to_rep2(first(com__split_fields1))) + 1))) and
-  ((not (to_rep2(first(com__split_fields1)) <= to_rep2(last(com__split_fields1)))) ->
-  (((to_rep2(last2(temp___3331)) - to_rep2(first2(temp___3331))) + 1) = 0)))) and
-  ((not (to_rep2(first2(temp___3331)) <= to_rep2(last2(temp___3331)))) ->
-  ((to_rep2(first(com__split_fields1)) <= to_rep2(last(com__split_fields1))) ->
-  (0 = ((to_rep2(last(com__split_fields1)) - to_rep2(first(com__split_fields1))) + 1)))))
-
-axiom H17 : ((temp___335 = temp___333) and (temp___3351 = temp___3331))
-
-axiom H18 : (temp___335 = o)
-
-axiom H19 : (mk(to_rep2(first2(temp___3351)),
-  to_rep2(last2(temp___3351))) = o1)
-
-axiom H20 : (o2 = o)
-
-axiom H21 : (o3 = o1)
-
-axiom H22 : (com__split_discrs = temp___337)
-
-axiom H23 : (temp___3371 = o2)
-
-axiom H24 : (temp___3372 = o3)
-
-axiom H25 : (result = com__split_fields)
-
-axiom H26 : (result1 = com__split_fields1)
-
-axiom H27 : (temp___3371 = com__split_fields2)
-
-axiom H28 : (temp___3372 = com__split_fields3)
-
-axiom H29 : (com__split_discrs = temp___337)
-
-axiom H30 : (com__split_fields4 = com__split_fields2)
-
-axiom H31 : (com__split_fields5 = com__split_fields3)
-
-axiom H32 : ((com__split_fields6 = com__split_fields2) and
-  (com__split_fields7 = com__split_fields3))
-
- (* File "communications.ads", line 16, characters 0-0 *)
-goal WP_parameter_def :
+  rec__messages__message__received = null_msg1 } }, 1, r4b)).rt2)) = r4b) and
+  ({ elts2 = temp___361; rt2 = temp___3611 } = temp___354({
+  us_split_fields1 = { rec__messages__message__sent = null_msg;
+  rec__messages__message__received = null_msg1 } }, 1, r4b)))) and
+  ((((to_rep2(first4(temp___3611)) <= to_rep2(last4(temp___3611))) and
+  (((1 <= r4b) and
+  (((to_rep2(last4(temp___3611)) - to_rep2(first4(temp___3611))) + 1) = ((r4b - 1) + 1))) or
+  ((not (1 <= r4b)) and
+  (((to_rep2(last4(temp___3611)) - to_rep2(first4(temp___3611))) + 1) = 0)))) or
+  ((not (to_rep2(first4(temp___3611)) <= to_rep2(last4(temp___3611)))) and
+  (((1 <= r4b) and (0 = ((r4b - 1) + 1))) or (not (1 <= r4b))))) and
+  ((temp___361 = temp___362) and (mk1(to_rep2(first4(temp___3611)),
+  to_rep2(last4(temp___3611))) = temp___3621)))) and
+  ((((to_rep2(first2(temp___3621)) <= to_rep2(last2(temp___3621))) and
+  (((to_rep2(first(com__split_fields1)) <= to_rep2(last(com__split_fields1))) and
+  (((to_rep2(last2(temp___3621)) - to_rep2(first2(temp___3621))) + 1) = ((to_rep2(last(com__split_fields1)) - to_rep2(first(com__split_fields1))) + 1))) or
+  ((not (to_rep2(first(com__split_fields1)) <= to_rep2(last(com__split_fields1)))) and
+  (((to_rep2(last2(temp___3621)) - to_rep2(first2(temp___3621))) + 1) = 0)))) or
+  ((not (to_rep2(first2(temp___3621)) <= to_rep2(last2(temp___3621)))) and
+  (((to_rep2(first(com__split_fields1)) <= to_rep2(last(com__split_fields1))) and
+  (0 = ((to_rep2(last(com__split_fields1)) - to_rep2(first(com__split_fields1))) + 1))) or
+  (not (to_rep2(first(com__split_fields1)) <= to_rep2(last(com__split_fields1))))))) and
+  ((temp___364 = temp___362) and (temp___3641 = temp___3621)))) and
+  ((temp___364 = o) and (mk(to_rep2(first2(temp___3641)),
+  to_rep2(last2(temp___3641))) = o1))) and ((o2 = o) and (o3 = o1))) and
+  ((com__split_discrs = temp___366) and ((temp___3661 = o2) and
+  (temp___3662 = o3)))) and ((((result = com__split_fields) and
+  (result1 = com__split_fields1)) and ((temp___3661 = com__split_fields2) and
+  (temp___3662 = com__split_fields3))) and
+  (com__split_discrs = temp___366)))))) and
+  (((com__split_fields4 = com__split_fields2) and
+  (com__split_fields5 = com__split_fields3)) and
+  ((com__split_fields6 = com__split_fields2) and
+  (com__split_fields7 = com__split_fields3)))) ->
   (forall idx:int. (((1 <= idx) and
   (idx <= (to_rep(com__split_discrs) - 1))) ->
   (compare((((com__split_fields4[idx])).us_split_fields1).rec__messages__message__received,
   1, 10,
   (((com__split_fields4[(idx + 1)])).us_split_fields1).rec__messages__message__received,
-  1, 10) <= 0)))
+  1, 10) <= 0))))))))

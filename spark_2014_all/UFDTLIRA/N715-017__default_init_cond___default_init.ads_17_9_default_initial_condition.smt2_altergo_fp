@@ -120,12 +120,6 @@ axiom coerce_axiom :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -137,6 +131,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -273,19 +273,11 @@ axiom discr_ok__def_axiom :
   rec__default_init__discr__f = x1 } }) = true) <-> ((x = true) ->
   (to_rep(x1) = 0))))
 
-logic temp___291 : bool
-
-logic temp___290 : bool
-
-logic temp___292 : bool
-
-logic temp___2921 : natural
-
-axiom H : (temp___291 = temp___290)
-
-axiom H1 : ((to_int(temp___292) = 1) -> (to_rep(temp___2921) = 0))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (discr_ok({ us_split_discrs1 = {
-  rec__default_init__discr__b = temp___292 }; us_split_fields1 = {
-  rec__default_init__discr__f = temp___2921 } }) = true)
+goal WP_parameter_def :
+  (forall temp___329:bool. forall temp___328:bool. forall temp___330:bool.
+  forall temp___3301:natural. ((temp___329 = temp___328) ->
+  (((to_int(temp___330) = 1) -> (to_rep(temp___3301) = 0)) -> (discr_ok({
+  us_split_discrs1 = { rec__default_init__discr__b = temp___330 };
+  us_split_fields1 = { rec__default_init__discr__f = temp___3301 }
+  }) = true))))

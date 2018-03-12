@@ -113,39 +113,10 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic a : int
-
-logic b : int
-
-logic c : int
-
-logic d : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-axiom H : in_range(c)
-
-axiom H1 : in_range(d)
-
-axiom H2 : in_range(a)
-
-axiom H3 : in_range(b)
-
-axiom H4 : ((o = (a + b)) and in_range((a + b)))
-
-axiom H5 : (o1 = (o + c))
-
-axiom H6 : ((o2 = o1) and in_range(o1))
-
-axiom H7 : (o3 = (o2 + d))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(o3)
+goal WP_parameter_def :
+  (forall a:int. forall b:int. forall c:int. forall d:int. forall o:int.
+  forall o1:int. forall o2:int. forall o3:int. (in_range(c) ->
+  (in_range(d) -> (in_range(a) -> (in_range(b) -> ((((((o = (a + b)) and
+  in_range((a + b))) and (o1 = (o + c))) and ((o2 = o1) and
+  in_range(o1))) and (o3 = (o2 + d))) -> in_range(o3)))))))

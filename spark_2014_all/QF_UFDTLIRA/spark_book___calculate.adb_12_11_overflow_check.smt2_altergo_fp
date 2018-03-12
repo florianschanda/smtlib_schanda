@@ -113,25 +113,8 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic a : int
-
-logic c : int
-
-logic o : int
-
-logic result : int
-
-logic a1 : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range(a))
-
-axiom H1 : in_range(b)
-
-axiom H2 : in_range(c)
-
-axiom H3 : (result = a)
-
-axiom H4 : (a1 = b)
-
  (* File "calculate.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : in_range((c + 1))
+goal WP_parameter_def :
+  (forall a:int. forall c:int. forall result:int. forall a1:int.
+  ((((- 2147483648) <= 2147483647) -> in_range(a)) -> (in_range(b) ->
+  (in_range(c) -> (((result = a) and (a1 = b)) -> in_range((c + 1)))))))

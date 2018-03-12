@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -498,32 +498,6 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 logic r13b : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
-
-logic v__split_fields : bool
-
-logic v__split_fields1 : integer
-
-logic v__split_fields2 : bool
-
-logic v__split_fields3 : dt
-
-logic us : int
-
-logic result : bool
-
-logic result1 : integer
-
-logic result2 : bool
-
-logic result3 : dt
-
-logic v__split_fields4 : bool
-
-logic v__split_fields5 : integer
-
-logic v__split_fields6 : bool
-
-logic v__split_fields7 : dt
 
  (* File "test.adb", line 18, characters 0-0 *)
 goal WP_parameter_def : in_range1(2)

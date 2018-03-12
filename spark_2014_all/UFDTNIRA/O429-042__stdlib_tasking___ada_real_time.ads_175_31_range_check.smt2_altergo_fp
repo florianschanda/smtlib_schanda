@@ -162,12 +162,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -179,6 +173,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -516,141 +516,15 @@ logic right : us_rep
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic o : duration
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : duration
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : duration
-
-logic o13 : int
-
-logic o14 : int
-
-logic o15 : int
-
-logic o16 : duration
-
-logic o17 : int
-
-logic o18 : int
-
-logic o19 : int
-
-logic o20 : int
-
-logic o21 : int
-
-logic o22 : int
-
-logic o23 : int
-
-logic o24 : us_rep
-
-logic o25 : duration
-
-logic o26 : int
-
-logic o27 : int
-
-logic o28 : duration
-
-logic o29 : int
-
-logic o30 : int
-
-logic o31 : int
-
-logic o32 : int
-
-logic o33 : int
-
-logic o34 : int
-
-logic o35 : int
-
-logic o36 : duration
-
-logic o37 : int
-
-logic o38 : int
-
-logic o39 : int
-
-logic o40 : duration
-
-logic o41 : int
-
-logic o42 : int
-
-logic o43 : int
-
-logic o44 : int
-
-logic o45 : int
-
-logic o46 : int
-
-logic o47 : int
-
-logic result : bool
-
-logic result1 : bool
-
-logic result2 : bool
-
-logic result3 : bool
-
-axiom H : in_range1(left)
-
-axiom H1 : (not (0 <  left))
-
-axiom H2 : (left <  0)
-
-axiom H3 : (result2 = ogt__2(right, time_span_zero))
-
-axiom H4 : (result2 = true)
-
-axiom H5 : (not (left = (- 1)))
-
-axiom H6 : (o28 = to_duration__2(time_span_first))
-
-axiom H7 : (o29 = to_fixed(o28))
-
-axiom H8 : (o30 = fxp_div_result_int(o29, 1))
-
-axiom H9 : ((o31 = o30) and in_range3(o30))
-
-axiom H10 : ((o32 = o31) and in_range4(o31))
-
-axiom H11 : (o33 = comp_div(o32,left))
-
-axiom H12 : ((o34 = o33) and in_range3(o33))
-
-axiom H13 : (o25 = to_duration__2(right))
-
-axiom H14 : (o26 = to_fixed(o25))
-
-axiom H15 : (o27 = to_int1(o26))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range4(o27)
+goal WP_parameter_def :
+  (forall o:duration. forall o1:int. forall o2:int. forall o3:duration.
+  forall o4:int. forall o5:int. forall o6:int. forall o7:int. forall o8:int.
+  forall o9:int. forall result:bool. (in_range1(left) ->
+  ((not (0 <  left)) -> ((left <  0) -> ((result = ogt__2(right,
+  time_span_zero)) -> ((result = true) -> ((not (left = (- 1))) ->
+  ((((((((o3 = to_duration__2(time_span_first)) and (o4 = to_fixed(o3))) and
+  (o5 = fxp_div_result_int(o4, 1))) and ((o6 = o5) and in_range3(o5))) and
+  ((o7 = o6) and in_range4(o6))) and (o8 = comp_div(o7,left))) and
+  ((o9 = o8) and in_range3(o8))) -> ((((o = to_duration__2(right)) and
+  (o1 = to_fixed(o))) and (o2 = to_int1(o1))) -> in_range4(o2))))))))))

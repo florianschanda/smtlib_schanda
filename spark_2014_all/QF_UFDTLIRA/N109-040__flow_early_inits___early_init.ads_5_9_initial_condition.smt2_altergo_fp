@@ -107,22 +107,9 @@ function positive__ref___projection(a: positive__ref) : positive =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic v1 : int
-
-logic result : int
-
-logic v11 : int
-
-logic result1 : bool
-
-axiom H : ((1 <= 2147483647) -> in_range(v1))
-
-axiom H1 : (result = v1)
-
-axiom H2 : (v11 = 88)
-
-axiom H3 : (((v11 <= 100) -> (result1 = true)) and ((not (v11 <= 100)) ->
-  (result1 = false)))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (v11 <= 100)
+goal WP_parameter_def :
+  (forall v1:int. forall result:int. forall v11:int.
+  (forall result1:bool. ((((1 <= 2147483647) -> in_range(v1)) and
+  (((result = v1) and (v11 = 88)) and (((v11 <= 100) and (result1 = true)) or
+  ((not (v11 <= 100)) and (result1 = false))))) -> (v11 <= 100))))

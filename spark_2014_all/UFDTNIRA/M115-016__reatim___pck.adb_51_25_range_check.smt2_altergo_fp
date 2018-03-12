@@ -290,172 +290,34 @@ logic attr__ATTRIBUTE_ADDRESS6 : int
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
-logic v_hi : int
-
-logic v_lo : int
-
-logic result_hi : int
-
-logic result_lo : int
-
-logic remainder : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : int
-
-logic o13 : int
-
-logic o14 : int
-
-logic o15 : int
-
-logic o16 : int
-
-logic o17 : int
-
-logic o18 : int
-
-logic o19 : int
-
-logic o20 : int
-
-logic o21 : int
-
-logic result : int
-
-logic v_hi1 : int
-
-logic result1 : int
-
-logic v_lo1 : int
-
-logic result2 : int
-
-logic v_hi2 : int
-
-logic result3 : int
-
-logic v_lo2 : int
-
-logic result4 : int
-
-logic v_hi3 : int
-
-logic result5 : int
-
-logic v_lo3 : int
-
-logic result6 : int
-
-logic result_hi1 : int
-
-logic result7 : int
-
-logic remainder1 : int
-
-logic result8 : int
-
-logic result_hi2 : int
-
-logic result9 : int
-
-logic result_lo1 : int
-
-axiom H : in_range2(v)
-
-axiom H1 : in_range(m)
-
-axiom H2 : in_range(d)
-
-axiom H3 : (not (d = 0))
-
-axiom H4 : ((o = comp_div(v,4294967296)) and
-  in_range2(comp_div(v,4294967296)))
-
-axiom H5 : (result = v_hi)
-
-axiom H6 : (v_hi1 = o)
-
-axiom H7 : in_range2(v_hi1)
-
-axiom H8 : ((o1 = comp_mod(v,4294967296)) and
-  in_range2(comp_mod(v,4294967296)))
-
-axiom H9 : (result1 = v_lo)
-
-axiom H10 : (v_lo1 = o1)
-
-axiom H11 : in_range2(v_lo1)
-
-axiom H12 : ((0 <= 9223372036854775807) -> in_range2(result_hi))
-
-axiom H13 : ((0 <= 9223372036854775807) -> in_range2(result_lo))
-
-axiom H14 : ((0 <= 9223372036854775807) -> in_range2(remainder))
-
-axiom H15 : ((o2 = (v_hi1 * m)) and in_range1((v_hi1 * m)))
-
-axiom H16 : ((o3 = o2) and in_range2(o2))
-
-axiom H17 : (result2 = v_hi1)
-
-axiom H18 : (v_hi2 = o3)
-
-axiom H19 : ((o4 = (v_lo1 * m)) and in_range1((v_lo1 * m)))
-
-axiom H20 : ((o5 = o4) and in_range2(o4))
-
-axiom H21 : (result3 = v_lo1)
-
-axiom H22 : (v_lo2 = o5)
-
-axiom H23 : ((o6 = (v_hi2 + comp_div(v_lo2,4294967296))) and
-  in_range1((v_hi2 + comp_div(v_lo2,4294967296))))
-
-axiom H24 : (result4 = v_hi2)
-
-axiom H25 : (v_hi3 = o6)
-
-axiom H26 : (result5 = v_lo2)
-
-axiom H27 : (v_lo3 = comp_mod(v_lo2,4294967296))
-
-axiom H28 : ((o7 = comp_div(v_hi3,d)) and in_range2(comp_div(v_hi3,d)))
-
-axiom H29 : (result6 = result_hi)
-
-axiom H30 : (result_hi1 = o7)
-
-axiom H31 : (result_hi1 <  2147483647)
-
-axiom H32 : ((o8 = (result_hi1 * d)) and in_range1((result_hi1 * d)))
-
-axiom H33 : (o9 = (v_hi3 - o8))
-
-axiom H34 : ((o10 = o9) and in_range1(o9))
-
  (* File "pck.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : in_range2(o10)
+goal WP_parameter_def :
+  (forall v_hi:int. forall v_lo:int. forall result_hi:int.
+  forall result_lo:int. forall remainder:int. forall o:int. forall o1:int.
+  forall o2:int. forall o3:int. forall o4:int. forall o5:int. forall o6:int.
+  forall o7:int. forall o8:int. forall o9:int. forall o10:int.
+  forall result:int. forall v_hi1:int. forall result1:int. forall v_lo1:int.
+  forall result2:int. forall v_hi2:int. forall result3:int. forall v_lo2:int.
+  forall result4:int. forall v_hi3:int. forall result5:int. forall v_lo3:int.
+  forall result6:int. forall result_hi1:int. (in_range2(v) -> (in_range(m) ->
+  (in_range(d) -> ((not (d = 0)) -> ((((o = comp_div(v,4294967296)) and
+  in_range2(comp_div(v,4294967296))) and ((result = v_hi) and
+  (v_hi1 = o))) -> (in_range2(v_hi1) -> ((((o1 = comp_mod(v,4294967296)) and
+  in_range2(comp_mod(v,4294967296))) and ((result1 = v_lo) and
+  (v_lo1 = o1))) -> (in_range2(v_lo1) -> (((0 <= 9223372036854775807) ->
+  in_range2(result_hi)) -> (((0 <= 9223372036854775807) ->
+  in_range2(result_lo)) -> (((0 <= 9223372036854775807) ->
+  in_range2(remainder)) -> (((((o2 = (v_hi1 * m)) and
+  in_range1((v_hi1 * m))) and ((o3 = o2) and in_range2(o2))) and
+  ((result2 = v_hi1) and (v_hi2 = o3))) -> (((((o4 = (v_lo1 * m)) and
+  in_range1((v_lo1 * m))) and ((o5 = o4) and in_range2(o4))) and
+  ((result3 = v_lo1) and (v_lo2 = o5))) ->
+  ((((o6 = (v_hi2 + comp_div(v_lo2,4294967296))) and
+  in_range1((v_hi2 + comp_div(v_lo2,4294967296)))) and ((result4 = v_hi2) and
+  (v_hi3 = o6))) -> (((result5 = v_lo2) and
+  (v_lo3 = comp_mod(v_lo2,4294967296))) -> ((((o7 = comp_div(v_hi3,d)) and
+  in_range2(comp_div(v_hi3,d))) and ((result6 = result_hi) and
+  (result_hi1 = o7))) -> ((result_hi1 <  2147483647) ->
+  (((((o8 = (result_hi1 * d)) and in_range1((result_hi1 * d))) and
+  (o9 = (v_hi3 - o8))) and ((o10 = o9) and in_range1(o9))) ->
+  in_range2(o10))))))))))))))))))))

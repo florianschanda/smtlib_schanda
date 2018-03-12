@@ -105,7 +105,5 @@ type index_type__ref = { index_type__content : index_type
 function index_type__ref___projection(a: index_type__ref) : index_type =
   (a).index_type__content
 
-logic us : int
-
  (* File "test.ads", line 12, characters 0-0 *)
 goal WP_parameter_def : in_range(60)

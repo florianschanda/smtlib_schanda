@@ -81,12 +81,6 @@ axiom bool_ge_axiom :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -98,6 +92,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -672,41 +672,21 @@ axiom first__def_axiom3 : (first2 = fst)
 
 axiom last__def_axiom4 : (last3 = lst)
 
-logic container__split_fields : us_main_type
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-axiom H : dynamic_property2(0, last2, to_rep1(container__split_discrs))
-
-axiom H1 : dynamic_property1(first1, last1, index)
-
-axiom H2 : in_range3(count)
-
-axiom H3 : ((first <= index) and (index <= ((first2 - 1) + length1(model__({
-  us_split_discrs1 = { rec__use_vectors__my_vectors__vector__capacity =
-  container__split_discrs }; us_split_fields1 = {
-  rec__use_vectors__my_vectors__vector = container__split_fields } })))))
-
-axiom H4 : ((o2 = (index - first)) and in_range1((index - first)))
-
-axiom H5 : ((o3 = o2) and in_range3(o2))
-
-axiom H6 : ((o = length({ us_split_discrs1 = {
+ (* File "a-cofove.ads", line 549, characters 0-0 *)
+goal WP_parameter_def :
+  (forall container__split_fields:us_main_type. forall o:int. forall o1:int.
+  forall o2:int. forall o3:int. (dynamic_property2(0, last2,
+  to_rep1(container__split_discrs)) -> (dynamic_property1(first1, last1,
+  index) -> (in_range3(count) -> (((first <= index) and
+  (index <= ((first2 - 1) + length1(model__({ us_split_discrs1 = {
+  rec__use_vectors__my_vectors__vector__capacity = container__split_discrs };
+  us_split_fields1 = { rec__use_vectors__my_vectors__vector =
+  container__split_fields } }))))) -> ((((o2 = (index - first)) and
+  in_range1((index - first))) and ((o3 = o2) and in_range3(o2))) ->
+  ((((o = length({ us_split_discrs1 = {
   rec__use_vectors__my_vectors__vector__capacity = container__split_discrs };
   us_split_fields1 = { rec__use_vectors__my_vectors__vector =
   container__split_fields } })) and (dynamic_property2(0, last2, o) and
-  (((of_int(0) = true) -> (o <= to_rep1(container__split_discrs))) and
-  ((not (of_int(0) = true)) -> (o <= last2)))))
-
-axiom H7 : (o1 = (o - count))
-
- (* File "a-cofove.ads", line 549, characters 0-0 *)
-goal WP_parameter_def : in_range2(o1)
+  (((of_int(0) = true) and (o <= to_rep1(container__split_discrs))) or
+  ((not (of_int(0) = true)) and (o <= last2))))) and (o1 = (o - count))) ->
+  in_range2(o1))))))))

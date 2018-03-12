@@ -173,24 +173,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> (int,natural) farray
-
-axiom concat_def :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : natural, int -> (int,natural) farray
-
-axiom singleton_def :
-  (forall v:natural.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq3 : (int,natural) farray, int, int, (int,natural) farray, int,
   int -> bool
 
@@ -201,17 +183,17 @@ axiom bool_eq_def2 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq3(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq3(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -221,37 +203,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq3(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq3(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq3(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 predicate dynamic_property(first_int: int, last_int: int, x: int) =
   ((first_int <= x) and (x <= last_int))
@@ -775,35 +729,21 @@ function r__ref___projection(a: r__ref) : us_rep2 = (a).r__content
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic v__split_fields : natural
-
-logic v__split_fields1 : (int,natural) farray
-
-logic v__split_fields2 : t1
-
-logic us : int
-
-logic priv__init__p__fields : (int,natural) farray
-
-logic priv__init__p__fields1 : t
-
-axiom H : in_range(max)
-
-axiom H1 : ((us = max) and in_range(max))
-
-axiom H2 : (to_rep(v__split_fields) = max)
-
-axiom H3 : ((max = to_rep(((to_base({ us_split_discrs2 = {
-  rec__priv__priv_rec__c = v__split_fields }; us_split_fields3 = {
-  rec__priv__priv_rec__content1 = { elts1 = v__split_fields1; rt1 =
-  v__split_fields2 } } })).us_split_discrs1).rec__priv__priv_rec__c)) and
-  (dynamic_property3(1, max, to_rep1(first2(v__split_fields2)),
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (forall v__split_fields:natural.
+  forall v__split_fields1:(int,natural) farray. forall v__split_fields2:t1.
+  forall us:int. (in_range(max) -> (((us = max) and in_range(max)) ->
+  ((to_rep(v__split_fields) = max) -> (((max = to_rep(((to_base({
+  us_split_discrs2 = { rec__priv__priv_rec__c = v__split_fields };
+  us_split_fields3 = { rec__priv__priv_rec__content1 = { elts1 =
+  v__split_fields1; rt1 = v__split_fields2 } }
+  })).us_split_discrs1).rec__priv__priv_rec__c)) and (dynamic_property3(1,
+  max, to_rep1(first2(v__split_fields2)),
   to_rep1(last2(v__split_fields2))) and
   ((to_rep1(first2(v__split_fields2)) = 1) and
-  (to_rep1(last2(v__split_fields2)) = max))))
-
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (0 <  to_rep(((to_base({ us_split_discrs2 = {
-  rec__priv__priv_rec__c = v__split_fields }; us_split_fields3 = {
-  rec__priv__priv_rec__content1 = { elts1 = v__split_fields1; rt1 =
-  v__split_fields2 } } })).us_split_discrs1).rec__priv__priv_rec__c))
+  (to_rep1(last2(v__split_fields2)) = max)))) -> (0 <  to_rep(((to_base({
+  us_split_discrs2 = { rec__priv__priv_rec__c = v__split_fields };
+  us_split_fields3 = { rec__priv__priv_rec__content1 = { elts1 =
+  v__split_fields1; rt1 = v__split_fields2 } }
+  })).us_split_discrs1).rec__priv__priv_rec__c)))))))

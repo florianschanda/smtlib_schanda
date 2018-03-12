@@ -189,12 +189,6 @@ axiom Max_assoc :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -206,6 +200,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -352,24 +352,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -380,17 +362,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -400,37 +382,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 logic to_rep1 : integer -> int
 
@@ -552,6 +506,58 @@ type natural__ref = { natural__content : natural
 
 function natural__ref___projection(a: natural__ref) : natural =
   (a).natural__content
+
+logic concat : (int,character) farray, int, int, (int,character) farray, int,
+  int -> (int,character) farray
+
+axiom concat_def :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic concat_singleton_left : character, int, (int,character) farray, int,
+  int -> (int,character) farray
+
+axiom concat_singleton_left_def :
+  (forall a:character.
+  (forall b:(int,character) farray.
+  (forall a_first:int. forall b_first:int. forall b_last:int
+  [concat_singleton_left(a, a_first, b, b_first, b_last)].
+  (((concat_singleton_left(a, a_first, b, b_first, b_last)[a_first]) = a) and
+  (forall i:int [(concat_singleton_left(a, a_first, b, b_first, b_last)[i])].
+  ((a_first <  i) -> ((concat_singleton_left(a, a_first, b, b_first,
+  b_last)[i]) = (b[((i - a_first) + (b_first - 1))]))))))))
+
+logic concat_singleton_right : (int,character) farray, int, int,
+  character -> (int,character) farray
+
+axiom concat_singleton_right_def :
+  (forall a:(int,character) farray.
+  (forall b:character.
+  (forall a_first:int. forall a_last:int [concat_singleton_right(a, a_first,
+  a_last, b)]. (((concat_singleton_right(a, a_first, a_last,
+  b)[(a_last + 1)]) = b) and
+  (forall i:int [(concat_singleton_right(a, a_first, a_last, b)[i])| (a[i])].
+  (((a_first <= i) and (i <= a_last)) -> ((concat_singleton_right(a, a_first,
+  a_last, b)[i]) = (a[i]))))))))
+
+logic concat_singletons : character, int, character -> (int,character) farray
+
+axiom concat_singletons_def :
+  (forall a:character. forall b:character.
+  (forall a_first:int [concat_singletons(a, a_first, b)].
+  (((concat_singletons(a, a_first, b)[a_first]) = a) and
+  ((concat_singletons(a, a_first, b)[(a_first + 1)]) = b))))
+
+logic singleton : character, int -> (int,character) farray
+
+axiom singleton_def :
+  (forall v:character.
+  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
 
 type int__
 
@@ -1444,256 +1450,29 @@ axiom fpeek__def_axiom1 :
   (fpeek1(stream, helpers__cur_position,
   helpers__the_file) = to_rep((helpers__the_file[helpers__cur_position]))))))))
 
-logic the_file : (int,character) farray
-
-logic cur_position : int
-
-logic file__split_fields : file_descr
-
-logic file__split_fields1 : bool
-
-logic file__split_fields2 : bool
-
-logic file__split_fields3 : count
-
-logic file__split_fields4 : count
-
-logic file__split_fields5 : count
-
-logic file__split_fields6 : bool
-
-logic result__ : (int,character) farray
-
-logic num : int
-
-logic last10 : int
-
-logic idx : int
-
-logic o : int
-
-logic o1 : character
-
-logic o2 : int
-
-logic o3 : bool
-
-logic o4 : int
-
-logic o5 : (int,character) farray
-
-logic temp___655 : (int,character) farray
-
-logic temp___6551 : t2
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic textio__get_line_function__get_rest__B_1__r__assume : (int,character) farray
-
-logic textio__get_line_function__get_rest__B_1__r__assume1 : t
-
-logic o12 : int
-
-logic o13 : int
-
-logic o14 : int
-
-logic o15 : int
-
-logic o16 : int
-
-logic o17 : int
-
-logic temp___649 : (int,character) farray
-
-logic temp___6491 : t3
-
-logic o18 : (int,character) farray
-
-logic temp___651 : (int,character) farray
-
-logic temp___6511 : t3
-
-logic temp___652 : (int,character) farray
-
-logic temp___6521 : t3
-
-logic o19 : (int,character) farray
-
-logic temp___644 : (int,character) farray
-
-logic temp___6441 : t4
-
-logic o20 : (int,character) farray
-
-logic temp___646 : (int,character) farray
-
-logic temp___6461 : t4
-
-logic temp___647 : (int,character) farray
-
-logic temp___6471 : t4
-
-logic o21 : (int,character) farray
-
-logic idx1 : int
-
-logic the_file1 : (int,character) farray
-
-logic result : bool
-
-logic cur_position1 : int
-
-logic file__split_fields7 : file_descr
-
-logic file__split_fields8 : bool
-
-logic file__split_fields9 : bool
-
-logic file__split_fields10 : count
-
-logic file__split_fields11 : count
-
-logic file__split_fields12 : count
-
-logic file__split_fields13 : bool
-
-logic buffer : (int,character) farray
-
-logic last11 : int
-
-logic result1 : int
-
-logic num1 : int
-
-logic result2 : (int,character) farray
-
-logic result__1 : (int,character) farray
-
-logic result3 : bool
-
-logic result4 : (int,character) farray
-
-logic result__2 : (int,character) farray
-
-logic the_file2 : (int,character) farray
-
-logic cur_position2 : int
-
-logic file__split_fields14 : file_descr
-
-logic file__split_fields15 : bool
-
-logic file__split_fields16 : bool
-
-logic file__split_fields17 : count
-
-logic file__split_fields18 : count
-
-logic file__split_fields19 : count
-
-logic file__split_fields20 : bool
-
-logic result__3 : (int,character) farray
-
-logic num2 : int
-
-logic the_file3 : (int,character) farray
-
-logic cur_position3 : int
-
-logic file__split_fields21 : file_descr
-
-logic file__split_fields22 : bool
-
-logic file__split_fields23 : bool
-
-logic file__split_fields24 : count
-
-logic file__split_fields25 : count
-
-logic file__split_fields26 : count
-
-logic file__split_fields27 : bool
-
-logic result__4 : (int,character) farray
-
-logic num3 : int
-
-logic buffer1 : (int,character) farray
-
-logic last12 : int
-
-logic the_file4 : (int,character) farray
-
-logic cur_position4 : int
-
-logic file__split_fields28 : file_descr
-
-logic file__split_fields29 : bool
-
-logic file__split_fields30 : bool
-
-logic file__split_fields31 : count
-
-logic file__split_fields32 : count
-
-logic file__split_fields33 : count
-
-logic file__split_fields34 : bool
-
-logic result__5 : (int,character) farray
-
-logic num4 : int
-
-logic buffer2 : (int,character) farray
-
-logic last13 : int
-
-axiom H : in_range2(cur_position_at_start)
-
-axiom H1 : dynamic_property(1, 2147483647, to_rep1(first(s1)),
-  to_rep1(last(s1)))
-
-axiom H2 : dynamic_property(1, 2147483647, to_rep1(result____first),
-  to_rep1(result____last))
-
-axiom H3 : ((0 <= 2147483647) -> in_range4(num))
-
-axiom H4 : in_range2(cur_position)
-
-axiom H5 : in_range3(eof_ch)
-
-axiom H6 : (mod(eof, 256) = eof_ch)
-
-axiom H7 : in_range5(eof)
-
-axiom H8 : ((not (end_of_file({ us_split_fields1 = {
-  rec__textio__file_type__descr = file__split_fields;
-  rec__textio__file_type__before_lm = file__split_fields1;
-  rec__textio__file_type__before_lm_pm = file__split_fields2;
-  rec__textio__file_type__col = file__split_fields3;
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (forall the_file:(int,character) farray. forall cur_position:int.
+  forall file__split_fields:file_descr. forall file__split_fields1:bool.
+  forall file__split_fields2:bool. forall file__split_fields3:count.
+  forall file__split_fields4:count. forall file__split_fields5:count.
+  forall file__split_fields6:bool. forall num:int.
+  (in_range2(cur_position_at_start) -> (dynamic_property(1, 2147483647,
+  to_rep1(first(s1)), to_rep1(last(s1))) -> (dynamic_property(1, 2147483647,
+  to_rep1(result____first), to_rep1(result____last)) ->
+  (((0 <= 2147483647) -> in_range4(num)) -> (in_range2(cur_position) ->
+  (in_range3(eof_ch) -> ((mod(eof, 256) = eof_ch) -> (in_range5(eof) ->
+  (((not (end_of_file({ us_split_fields1 = { rec__textio__file_type__descr =
+  file__split_fields; rec__textio__file_type__before_lm =
+  file__split_fields1; rec__textio__file_type__before_lm_pm =
+  file__split_fields2; rec__textio__file_type__col = file__split_fields3;
   rec__textio__file_type__line = file__split_fields4;
   rec__textio__file_type__page = file__split_fields5;
   rec__textio__file_type__is_regular_file = file__split_fields6 } },
   cur_position, the_file) = true)) and ((to_rep1(result____first) = 1) and
   ((to_rep1(result____last) = 2147483647) and
   ((cur_position = (((cur_position_at_start + to_rep1(last(s1))) - to_rep1(first(s1))) + 1)) and
-  (forall idx2:int. (((to_rep1(first(s1)) <= idx2) and
-  (idx2 <= to_rep1(last(s1)))) ->
-  (to_rep((s[idx2])) = to_rep((the_file[((idx2 - to_rep1(first(s1))) + cur_position_at_start)])))))))))
-
-axiom H9 : (1 <= max(500, length({ elts = s; rt = s1 })))
-
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (1 <= 1)
+  (forall idx:int. (((to_rep1(first(s1)) <= idx) and
+  (idx <= to_rep1(last(s1)))) ->
+  (to_rep((s[idx])) = to_rep((the_file[((idx - to_rep1(first(s1))) + cur_position_at_start)]))))))))) ->
+  ((1 <= max(500, length({ elts = s; rt = s1 }))) -> (1 <= 1))))))))))))

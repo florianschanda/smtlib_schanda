@@ -123,27 +123,8 @@ axiom get__def_axiom :
   (forall state__s2:int [get(state__s2)]. (in_range(state__s2) ->
   (get(state__s2) = state__s2)))
 
-logic s2 : int
-
-logic result : int
-
-logic s21 : int
-
-logic s22 : int
-
-logic s23 : int
-
-axiom H : in_range(s2)
-
-axiom H1 : in_range(x)
-
-axiom H2 : (result = s2)
-
-axiom H3 : (s21 = x)
-
-axiom H4 : (s21 = s22)
-
-axiom H5 : (s23 = s21)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (get(s22) = x)
+goal WP_parameter_def :
+  (forall s2:int. forall result:int. forall s21:int. forall s22:int.
+  forall s23:int. ((in_range(s2) and (in_range(x) and (((result = s2) and
+  (s21 = x)) and ((s21 = s22) and (s23 = s21))))) -> (get(s22) = x)))

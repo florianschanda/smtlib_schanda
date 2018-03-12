@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -139,49 +139,12 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic g : int
-
-logic x : int
-
-logic y : int
-
-logic o : int
-
-logic o1 : int
-
-logic g1 : int
-
-logic result : int
-
-logic x1 : int
-
-logic g2 : int
-
-logic result1 : int
-
-logic y1 : int
-
-axiom H : in_range1(g)
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(x))
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range1(y))
-
-axiom H3 : in_range1(g1)
-
-axiom H4 : (o = g1)
-
-axiom H5 : (result = x)
-
-axiom H6 : (x1 = o)
-
-axiom H7 : in_range1(g2)
-
-axiom H8 : (o1 = g2)
-
-axiom H9 : (result1 = y)
-
-axiom H10 : (y1 = o1)
-
  (* File "async_globals.adb", line 10, characters 0-0 *)
-goal WP_parameter_def : (x1 = y1)
+goal WP_parameter_def :
+  (forall g:int. forall x:int. forall y:int. forall o:int. forall o1:int.
+  forall g1:int. forall result:int. forall x1:int. forall g2:int.
+  forall result1:int. forall y1:int. (in_range1(g) ->
+  ((((- 2147483648) <= 2147483647) -> in_range1(x)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range1(y)) -> (((in_range1(g1) and
+  (o = g1)) and ((result = x) and (x1 = o))) -> (((in_range1(g2) and
+  (o1 = g2)) and ((result1 = y) and (y1 = o1))) -> (x1 = y1)))))))

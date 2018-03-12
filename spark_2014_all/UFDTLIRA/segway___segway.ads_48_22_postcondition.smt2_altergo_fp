@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -215,101 +215,29 @@ axiom current_speed__def_axiom :
   (in_range2(segway__speed) ->
   (current_speed(segway__speed) = segway__speed)))
 
-logic speed : int
-
-logic status : int
-
-logic temp___157 : int
-
-logic temp___156 : int
-
-logic speed1 : int
-
-logic status1 : int
-
-logic speed2 : int
-
-logic status2 : int
-
-logic speed3 : int
-
-logic status3 : int
-
-logic speed4 : int
-
-logic status4 : int
-
-logic speed5 : int
-
-logic status5 : int
-
-logic speed6 : int
-
-logic status6 : int
-
-logic speed7 : int
-
-logic status7 : int
-
-logic speed8 : int
-
-logic status8 : int
-
-logic speed9 : int
-
-logic status9 : int
-
-logic speed10 : int
-
-logic status10 : int
-
-logic speed11 : int
-
-logic status11 : int
-
-logic speed12 : int
-
-logic status12 : int
-
-axiom H : in_range2(speed)
-
-axiom H1 : in_range1(status)
-
-axiom H2 : (speed_is_valid(speed, status) = true)
-
-axiom H3 : ((not (status = 0)) -> (((temp___157 = status) and
-  ((temp___156 = speed) and ((speed_is_valid(speed2, status2) = true) and
+ (* File "segway.ads", line 22, characters 0-0 *)
+goal WP_parameter_def :
+  (forall speed:int. forall status:int. forall temp___183:int.
+  forall temp___182:int. forall speed1:int. forall status1:int.
+  forall speed2:int. forall status2:int. forall speed3:int.
+  forall status3:int. forall speed4:int. forall status4:int.
+  forall speed5:int. forall status5:int. forall speed6:int.
+  forall status6:int. forall speed7:int. forall status7:int.
+  forall speed8:int. forall status8:int. forall speed9:int.
+  forall status9:int. forall speed10:int. forall status10:int.
+  ((in_range2(speed) and (in_range1(status) and ((speed_is_valid(speed,
+  status) = true) and ((((not (status = 0)) and ((((temp___183 = status) and
+  ((temp___182 = speed) and ((speed_is_valid(speed2, status2) = true) and
   (((in_range2(speed2) and in_range1(status2)) and (not (status2 = 0))) and
-  ((((0 <  speed2) -> ((speed_is_valid(speed3, status3) = true) and
-  (in_range2(speed3) and in_range1(status3)))) and ((not (0 <  speed2)) ->
+  ((((0 <  speed2) and ((speed_is_valid(speed3, status3) = true) and
+  (in_range2(speed3) and in_range1(status3)))) or ((not (0 <  speed2)) and
   (((speed_is_valid(speed4, status4) = true) and (in_range2(speed4) and
   in_range1(status4))) and ((status3 = status4) and (speed3 = speed4))))) and
-  (status3 = 0)))))) and (((status3 = status7) and (speed3 = speed7)) and
-  ((status8 = status3) and (speed8 = speed3)))))
-
-axiom H4 : ((not (status = 0)) -> (status9 = status7))
-
-axiom H5 : ((not (status = 0)) -> (speed9 = speed7))
-
-axiom H6 : ((not (status = 0)) -> (status10 = status8))
-
-axiom H7 : ((not (status = 0)) -> (speed10 = speed8))
-
-axiom H8 : ((status = 0) -> (status9 = status))
-
-axiom H9 : ((status = 0) -> (speed9 = speed))
-
-axiom H10 : ((status = 0) -> (status10 = status1))
-
-axiom H11 : ((status = 0) -> (speed10 = speed1))
-
-axiom H12 : (status11 = status9)
-
-axiom H13 : (speed11 = speed9)
-
-axiom H14 : (status12 = status10)
-
-axiom H15 : (speed12 = speed10)
-
- (* File "segway.ads", line 22, characters 0-0 *)
-goal WP_parameter_def : (speed_is_valid(speed11, status11) = true)
+  (status3 = 0)))))) and (((status3 = status5) and (speed3 = speed5)) and
+  ((status6 = status3) and (speed6 = speed3)))) and ((({ int__content =
+  status7 } = { int__content = status5 }) and ({ int__content = speed7 } = {
+  int__content = speed5 })) and ((status8 = status6) and
+  (speed8 = speed6))))) or ((status = 0) and (((status = status7) and
+  (speed = speed7)) and ((status8 = status1) and (speed8 = speed1))))) and
+  (((status9 = status7) and (speed9 = speed7)) and ((status10 = status8) and
+  (speed10 = speed8))))))) -> (speed_is_valid(speed9, status9) = true)))

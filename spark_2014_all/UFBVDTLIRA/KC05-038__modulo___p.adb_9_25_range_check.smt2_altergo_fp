@@ -658,7 +658,15 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 type m
 
-predicate in_range1(x1: t) = (ule(of_int(0), x1) and ule(x1, of_int(15)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 15)
+
+predicate in_range1(x1: t) = (ule(rliteral, x1) and ule(x1, rliteral1))
 
 predicate in_range_int(x1: int) = ((0 <= x1) and (x1 <= 15))
 
@@ -711,7 +719,7 @@ function n__ref___projection(a: n__ref) : n = (a).n__content
 
 type s
 
-predicate in_range3(x1: t) = (ule(of_int(0), x1) and ule(x1, of_int(15)))
+predicate in_range3(x1: t) = (ule(rliteral, x1) and ule(x1, rliteral1))
 
 predicate in_range_int1(x1: int) = ((0 <= x1) and (x1 <= 15))
 
@@ -768,53 +776,26 @@ axiom u__def_axiom : (u = of_int(x))
 
 axiom v__def_axiom : (v = of_int(y))
 
-axiom w__def_axiom : (w = tqtint(urem(sub(u, v), of_int(16))))
+logic rliteral2 : t
 
-axiom xs__def_axiom : (xs = urem(sub(u, v), of_int(16)))
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 16)
+
+axiom w__def_axiom : (w = tqtint(urem(sub(u, v), rliteral2)))
+
+axiom xs__def_axiom : (xs = urem(sub(u, v), rliteral2))
 
 axiom a__def_axiom : (a = u)
 
 axiom b__def_axiom : (b = v)
 
-axiom zs__def_axiom : (zs = tqtint(urem(sub(a, b), of_int(16))))
-
-logic o : int
-
-logic p__u__assume : t
-
-logic o1 : int
-
-logic p__v__assume : t
-
-logic p__xs__assume : t
-
-logic p__a__assume : t
-
-logic p__b__assume : t
-
-axiom H : in_range(x)
-
-axiom H1 : in_range(y)
-
-axiom H2 : ((o = x) and in_range_int(x))
-
-axiom H3 : (p__u__assume = of_int(o))
-
-axiom H4 : (p__u__assume = u)
-
-axiom H5 : in_range1(u)
-
-axiom H6 : ((o1 = y) and in_range_int(y))
-
-axiom H7 : (p__v__assume = of_int(o1))
-
-axiom H8 : (p__v__assume = v)
-
-axiom H9 : in_range1(v)
-
-axiom H10 : (tqtint(urem(sub(u, v), of_int(16))) = w)
-
-axiom H11 : in_range2(w)
+axiom zs__def_axiom : (zs = tqtint(urem(sub(a, b), rliteral2)))
 
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range3(urem(sub(u, v), of_int(16)))
+goal WP_parameter_def :
+  (forall o:int. forall p__u__assume:t. forall o1:int. forall p__v__assume:t.
+  (in_range(x) -> (in_range(y) -> (((((o = x) and in_range_int(x)) and
+  (p__u__assume = of_int(o))) and (p__u__assume = u)) -> (in_range1(u) ->
+  (((((o1 = y) and in_range_int(y)) and (p__v__assume = of_int(o1))) and
+  (p__v__assume = v)) -> (in_range1(v) -> ((tqtint(urem(sub(u, v),
+  rliteral2)) = w) -> (in_range2(w) -> in_range3(urem(sub(u, v),
+  rliteral2)))))))))))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -137,52 +137,31 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic sub__remove_absent__result : int
-
-logic result : int
-
-logic sub__remove_absent__result1 : int
-
-logic result1 : int
-
-logic sub__remove_absent__result2 : int
-
-logic sub__remove_absent__result3 : int
-
-logic sub__remove_absent__result4 : int
-
-logic sub__remove_absent__result5 : int
-
-logic sub__remove_absent__result6 : int
-
-logic sub__remove_absent__result7 : int
-
-logic sub__remove_absent__result8 : int
-
-logic result2 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : (((sub__remove_absent__result5 = sub__remove_absent__result3) and
+ (* File "sub.ads", line 3, characters 0-0 *)
+goal WP_parameter_def :
+  (forall sub__remove_absent__result:int. forall result:int.
+  forall sub__remove_absent__result1:int. forall result1:int.
+  forall sub__remove_absent__result2:int.
+  forall sub__remove_absent__result3:int.
+  forall sub__remove_absent__result4:int.
+  forall sub__remove_absent__result5:int.
+  forall sub__remove_absent__result6:int.
+  forall sub__remove_absent__result7:int.
+  forall sub__remove_absent__result8:int.
+  (forall result2:int. ((in_range1(x) and
+  (((((sub__remove_absent__result3 = sub__remove_absent__result5) and
   (sub__remove_absent__result6 = sub__remove_absent__result4)) and
-  ((((not (x = 0)) -> (x = 1)) ->
+  ((((not (x = 0)) -> (x = 1)) and
   (((sub__remove_absent__result1 = sub__remove_absent__result3) and
   (sub__remove_absent__result4 = sub__remove_absent__result1)) and
   ((result = sub__remove_absent__result) and
-  (sub__remove_absent__result1 = 1)))) and ((not ((not (x = 0)) ->
-  (x = 1))) ->
+  (sub__remove_absent__result1 = 1)))) or ((not ((not (x = 0)) ->
+  (x = 1))) and
   (((sub__remove_absent__result2 = sub__remove_absent__result3) and
   (sub__remove_absent__result4 = sub__remove_absent__result2)) and
   ((result1 = sub__remove_absent__result) and
-  (sub__remove_absent__result2 = 2))))))
-
-axiom H2 : (sub__remove_absent__result7 = sub__remove_absent__result5)
-
-axiom H3 : (sub__remove_absent__result8 = sub__remove_absent__result6)
-
-axiom H4 : (result2 = sub__remove_absent__result7)
-
-axiom H5 : (x = 2)
-
- (* File "sub.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (sub__remove_absent__result7 = 2)
+  (sub__remove_absent__result2 = 2)))))) and
+  ((sub__remove_absent__result7 = sub__remove_absent__result5) and
+  (sub__remove_absent__result8 = sub__remove_absent__result6))) and
+  (result2 = sub__remove_absent__result7))) -> ((x = 2) ->
+  (sub__remove_absent__result7 = 2)))))

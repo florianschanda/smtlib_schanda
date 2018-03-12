@@ -142,21 +142,8 @@ axiom id__def_axiom : (forall e:int [id(e)]. (in_range1(e) -> (id(e) = e)))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : int
-
-logic o : int
-
-logic result : int
-
-logic x1 : int
-
-axiom H : ((o = id(0)) and (in_range1(o) and (o = 0)))
-
-axiom H1 : (result = x)
-
-axiom H2 : (x1 = o)
-
-axiom H3 : in_range(x1)
-
  (* File "s.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : (x1 = 0)
+goal WP_parameter_def :
+  (forall x:int. forall o:int. forall result:int. forall x1:int.
+  ((((o = id(0)) and (in_range1(o) and (o = 0))) and ((result = x) and
+  (x1 = o))) -> (in_range(x1) -> (x1 = 0))))

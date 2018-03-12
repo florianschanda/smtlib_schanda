@@ -184,9 +184,6 @@ logic g__attr__tag : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-axiom H : (c__attr__tag = us_tag1)
-
-axiom H1 : (g__attr__tag = us_tag2)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (c__attr__tag = us_tag1)
+goal WP_parameter_def : ((c__attr__tag = us_tag1) ->
+  ((g__attr__tag = us_tag2) -> (c__attr__tag = us_tag1)))

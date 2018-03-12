@@ -105,9 +105,5 @@ type natural__ref = { natural__content : natural
 function natural__ref___projection(a: natural__ref) : natural =
   (a).natural__content
 
-logic us : int
-
-logic us1 : int
-
  (* File "record_equality.ads", line 19, characters 0-0 *)
 goal WP_parameter_def : in_range(0)

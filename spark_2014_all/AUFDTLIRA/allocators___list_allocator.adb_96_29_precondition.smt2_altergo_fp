@@ -295,29 +295,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def :
-  (forall v:status. forall v1:resource.
-  (forall i:int [(singleton({ us_split_fields1 = {
-  rec__list_allocator__cell__stat = v; rec__list_allocator__cell__next = v1 }
-  }, i)[i])]. ((singleton({ us_split_fields1 = {
-  rec__list_allocator__cell__stat = v; rec__list_allocator__cell__next = v1 }
-  }, i)[i]) = { us_split_fields1 = { rec__list_allocator__cell__stat = v;
-  rec__list_allocator__cell__next = v1 } })))
-
 logic bool_eq5 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -328,17 +305,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and (bool_eq4((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and (bool_eq4((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq4((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq5(a,
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq4((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq5(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -348,9 +325,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq4((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq4((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -447,12 +424,6 @@ logic length__function_guard : int, us_rep1 -> prop
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq9 : bool, bool -> bool
-
-axiom bool_eq_def7 :
-  (forall x:bool. forall y:bool [bool_eq9(x, y)]. (((x = y) -> (bool_eq9(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq9(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -464,6 +435,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq9 : bool, bool -> bool
+
+axiom bool_eq_def7 :
+  (forall x:bool. forall y:bool [bool_eq9(x, y)]. (((x = y) -> (bool_eq9(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq9(x, y) = false))))
 
 predicate in_range5(x: int) = ((x = 0) or (x = 1))
 
@@ -989,192 +966,49 @@ axiom included_except__post_axiom :
   (forall e:int. ((in_range6(e) and (contains(left, e) = true)) ->
   ((contains(right, e) = true) or (e = item))))))))
 
-logic model____split_fields : us_rep1
-
-logic model____split_fields1 : us_rep2
-
-logic data : (int,us_rep) farray
-
-logic first_available : int
-
-logic o : int
-
-logic o1 : status
-
-logic o2 : resource
-
-logic o3 : status
-
-logic o4 : resource
-
-logic o5 : status
-
-logic o6 : int
-
-logic o7 : resource
-
-logic o8 : status
-
-logic o9 : status
-
-logic o10 : resource
-
-logic o11 : status
-
-logic o12 : resource
-
-logic o13 : int
-
-logic o14 : (int,us_rep) farray
-
-logic o15 : us_rep2
-
-logic o16 : us_rep1
-
-logic o17 : us_rep2
-
-logic temp___294 : us_rep1
-
-logic temp___2941 : us_rep2
-
-logic o18 : us_rep1
-
-logic o19 : us_rep1
-
-logic o20 : us_rep2
-
-logic temp___296 : us_rep1
-
-logic temp___2961 : us_rep2
-
-logic model____split_fields2 : us_rep1
-
-logic model____split_fields3 : us_rep2
-
-logic data1 : (int,us_rep) farray
-
-logic first_available1 : int
-
-logic result : bool
-
-logic result1 : (int,us_rep) farray
-
-logic data2 : (int,us_rep) farray
-
-logic result2 : int
-
-logic first_available2 : int
-
-logic result3 : us_rep1
-
-logic result4 : us_rep2
-
-logic model____split_fields4 : us_rep1
-
-logic model____split_fields5 : us_rep2
-
-logic result5 : us_rep1
-
-logic result6 : us_rep2
-
-logic model____split_fields6 : us_rep1
-
-logic model____split_fields7 : us_rep2
-
-logic model____split_fields8 : us_rep1
-
-logic model____split_fields9 : us_rep2
-
-logic data3 : (int,us_rep) farray
-
-logic first_available3 : int
-
-logic model____split_fields10 : us_rep1
-
-logic model____split_fields11 : us_rep2
-
-logic data4 : (int,us_rep) farray
-
-logic first_available4 : int
-
-axiom H : in_range(first_available)
-
-axiom H1 : in_range(res)
-
-axiom H2 : (is_valid(data, first_available, {
+ (* File "list_allocator.ads", line 47, characters 0-0 *)
+goal WP_parameter_def :
+  (forall model____split_fields:us_rep1.
+  forall model____split_fields1:us_rep2. forall data:(int,us_rep) farray.
+  forall first_available:int. forall o:int. forall o1:status.
+  forall o2:resource. forall o3:status. forall o4:resource. forall o5:status.
+  forall o6:int. forall o7:resource. forall o8:status. forall o9:status.
+  forall o10:resource. forall o11:status. forall o12:resource.
+  forall o13:int. forall o14:(int,us_rep) farray. forall o15:us_rep2.
+  forall o16:us_rep1. forall o17:us_rep2. forall temp___331:us_rep1.
+  forall temp___3311:us_rep2. forall result:bool.
+  forall result1:(int,us_rep) farray. forall data1:(int,us_rep) farray.
+  forall result2:int. forall first_available1:int. forall result3:us_rep1.
+  forall result4:us_rep2. forall model____split_fields2:us_rep1.
+  forall model____split_fields3:us_rep2. (in_range(first_available) ->
+  (in_range(res) -> ((is_valid(data, first_available, {
   rec__list_allocator__m__t__available = model____split_fields;
-  rec__list_allocator__m__t__allocated = model____split_fields1 }) = true)
-
-axiom H3 : ((not (res = 0)) -> ((1 <= res) and (res <= 10000)))
-
-axiom H4 : ((not (res = 0)) -> (o = res))
-
-axiom H5 : ((not (res = 0)) -> ({ us_split_fields1 = {
-  rec__list_allocator__cell__stat = o1; rec__list_allocator__cell__next = o2
-  } } = (data[o])))
-
-axiom H6 : ((not (res = 0)) -> (o1 = o3))
-
-axiom H7 : ((not (res = 0)) -> (o2 = o4))
-
-axiom H8 : ((not (res = 0)) -> (o5 = o3))
-
-axiom H9 : ((not (res = 0)) -> (o6 = to_rep1(o5)))
-
-axiom H10 : ((not (res = 0)) -> (((o6 = 1) -> (result = true)) and
-  ((not (o6 = 1)) -> (result = false))))
-
-axiom H11 : ((res = 0) -> (result = false))
-
-axiom H12 : (result = true)
-
-axiom H13 : (to_rep(o7) = first_available)
-
-axiom H14 : (to_rep1(o8) = 0)
-
-axiom H15 : (o8 = o9)
-
-axiom H16 : (o7 = o10)
-
-axiom H17 : (o11 = o9)
-
-axiom H18 : (o12 = o10)
-
-axiom H19 : ((1 <= res) and (res <= 10000))
-
-axiom H20 : (o13 = res)
-
-axiom H21 : (o14 = (data[o13 <- { us_split_fields1 = {
+  rec__list_allocator__m__t__allocated = model____split_fields1 }) = true) ->
+  ((((not (res = 0)) and ((((((((1 <= res) and (res <= 10000)) and
+  (o = res)) and ({ us_split_fields1 = { rec__list_allocator__cell__stat =
+  o1; rec__list_allocator__cell__next = o2 } } = (data[o]))) and
+  ((o1 = o3) and (o2 = o4))) and (o5 = o3)) and (o6 = to_rep1(o5))) and
+  (((o6 = 1) and (result = true)) or ((not (o6 = 1)) and
+  (result = false))))) or ((res = 0) and (result = false))) ->
+  ((result = true) -> ((((((to_rep(o7) = first_available) and
+  ((to_rep1(o8) = 0) and ((o8 = o9) and (o7 = o10)))) and ((o11 = o9) and
+  (o12 = o10))) and ((((1 <= res) and (res <= 10000)) and (o13 = res)) and
+  (o14 = (data[o13 <- { us_split_fields1 = {
   rec__list_allocator__cell__stat = o11; rec__list_allocator__cell__next =
-  o12 } }]))
-
-axiom H22 : (result1 = data)
-
-axiom H23 : (data2 = o14)
-
-axiom H24 : (result2 = first_available)
-
-axiom H25 : (first_available2 = res)
-
-axiom H26 : ((o15 = remove(model____split_fields1, res)) and
+  o12 } }])))) and (({ map__content = result1 } = { map__content = data
+  }) and (data1 = o14))) -> ((({ int__content = result2 } = { int__content =
+  first_available }) and (first_available1 = res)) ->
+  ((((((o15 = remove(model____split_fields1, res)) and
   ((((length1(o15) = (length1(model____split_fields1) - 1)) and
   (not (contains(o15, res) = true))) and (ole(o15,
   model____split_fields1) = true)) and
-  (included_except(model____split_fields1, o15, res) = true)))
-
-axiom H27 : (model____split_fields = o16)
-
-axiom H28 : (o15 = o17)
-
-axiom H29 : (temp___294 = o16)
-
-axiom H30 : (temp___2941 = o17)
-
-axiom H31 : ((result3 = model____split_fields) and
-  (result4 = model____split_fields1))
-
-axiom H32 : ((model____split_fields4 = temp___294) and
-  (model____split_fields5 = temp___2941))
-
- (* File "list_allocator.ads", line 47, characters 0-0 *)
-goal WP_parameter_def : (length(model____split_fields4) <  2147483647)
+  (included_except(model____split_fields1, o15, res) = true))) and
+  ((model____split_fields = o16) and (o15 = o17))) and
+  ((temp___331 = o16) and (temp___3311 = o17))) and (({
+  us_split_fields__content1 = { rec__list_allocator__m__t__available =
+  result3; rec__list_allocator__m__t__allocated = result4 } } = {
+  us_split_fields__content1 = { rec__list_allocator__m__t__available =
+  model____split_fields; rec__list_allocator__m__t__allocated =
+  model____split_fields1 } }) and ((temp___331 = model____split_fields2) and
+  (temp___3311 = model____split_fields3)))) ->
+  (length(model____split_fields2) <  2147483647))))))))))

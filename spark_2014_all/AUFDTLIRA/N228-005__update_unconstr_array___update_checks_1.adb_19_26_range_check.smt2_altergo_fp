@@ -198,24 +198,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> (int,integer) farray
-
-axiom concat_def :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : integer, int -> (int,integer) farray
-
-axiom singleton_def :
-  (forall v:integer.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,integer) farray, int, int, (int,integer) farray, int,
   int -> bool
 
@@ -226,17 +208,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -246,37 +228,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep1((a[(i + 1)])) <  to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep1((b[(i + 1)])) <  to_rep1((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type t
 
@@ -395,72 +349,45 @@ type tS3bP1__ref = { tS3bP1__content : tindexB
 function tS3bP1__ref___projection(a: tS3bP1__ref) : tindexB =
   (a).tS3bP1__content
 
-logic temp___234 : us_t, int, int, int -> us_t
+logic temp___268 : us_t, int, int, int -> us_t
+
+logic temp___448 : us_t, int, int, int -> us_t
 
 axiom def_axiom :
-  (forall temp___236:(int,integer) farray. forall temp___2361:t.
-  (forall temp___237:int. forall temp___238:int. forall temp___239:int.
-  (((to_rep(first((temp___234({ elts = temp___236; rt = temp___2361 },
-  temp___237, temp___238, temp___239)).rt)) = to_rep(first(temp___2361))) and
-  (to_rep(last((temp___234({ elts = temp___236; rt = temp___2361 },
-  temp___237, temp___238, temp___239)).rt)) = to_rep(last(temp___2361)))) and
-  (forall temp___240:int. ((((temp___237 <= temp___240) and
-  (temp___240 <= temp___238)) -> (((temp___234({ elts = temp___236; rt =
-  temp___2361 }, temp___237, temp___238,
-  temp___239)).elts[temp___240]) = of_rep1(temp___239))) and
-  ((not ((temp___237 <= temp___240) and (temp___240 <= temp___238))) ->
-  (((temp___234({ elts = temp___236; rt = temp___2361 }, temp___237,
-  temp___238, temp___239)).elts[temp___240]) = (temp___236[temp___240]))))))))
-
-logic temp___406 : us_t, int, int, int -> us_t
+  (forall temp___450:(int,integer) farray. forall temp___4501:t.
+  (forall temp___451:int. forall temp___452:int. forall temp___453:int.
+  (((in_range2(temp___451) and in_range2(temp___452)) and
+  in_range(temp___453)) -> (((to_rep(first((temp___448({ elts = temp___450;
+  rt = temp___4501 }, temp___451, temp___452,
+  temp___453)).rt)) = to_rep(first(temp___4501))) and
+  (to_rep(last((temp___448({ elts = temp___450; rt = temp___4501 },
+  temp___451, temp___452, temp___453)).rt)) = to_rep(last(temp___4501)))) and
+  (forall temp___454:int. ((((temp___451 <= temp___454) and
+  (temp___454 <= temp___452)) -> (to_rep1(((temp___448({ elts = temp___450;
+  rt = temp___4501 }, temp___451, temp___452,
+  temp___453)).elts[temp___454])) = temp___453)) and
+  ((not ((temp___451 <= temp___454) and (temp___454 <= temp___452))) ->
+  (((temp___448({ elts = temp___450; rt = temp___4501 }, temp___451,
+  temp___452, temp___453)).elts[temp___454]) = (temp___450[temp___454])))))))))
 
 axiom def_axiom1 :
-  (forall temp___408:(int,integer) farray. forall temp___4081:t.
-  (forall temp___409:int. forall temp___410:int. forall temp___411:int.
-  (((to_rep(first((temp___406({ elts = temp___408; rt = temp___4081 },
-  temp___409, temp___410, temp___411)).rt)) = to_rep(first(temp___4081))) and
-  (to_rep(last((temp___406({ elts = temp___408; rt = temp___4081 },
-  temp___409, temp___410, temp___411)).rt)) = to_rep(last(temp___4081)))) and
-  (forall temp___412:int. ((((temp___409 <= temp___412) and
-  (temp___412 <= temp___410)) -> (((temp___406({ elts = temp___408; rt =
-  temp___4081 }, temp___409, temp___410,
-  temp___411)).elts[temp___412]) = of_rep1(temp___411))) and
-  ((not ((temp___409 <= temp___412) and (temp___412 <= temp___410))) ->
-  (((temp___406({ elts = temp___408; rt = temp___4081 }, temp___409,
-  temp___410, temp___411)).elts[temp___412]) = (temp___408[temp___412]))))))))
+  (forall temp___270:(int,integer) farray. forall temp___2701:t.
+  (forall temp___271:int. forall temp___272:int. forall temp___273:int.
+  (((in_range2(temp___271) and in_range2(temp___272)) and
+  in_range(temp___273)) -> (((to_rep(first((temp___268({ elts = temp___270;
+  rt = temp___2701 }, temp___271, temp___272,
+  temp___273)).rt)) = to_rep(first(temp___2701))) and
+  (to_rep(last((temp___268({ elts = temp___270; rt = temp___2701 },
+  temp___271, temp___272, temp___273)).rt)) = to_rep(last(temp___2701)))) and
+  (forall temp___274:int. ((((temp___271 <= temp___274) and
+  (temp___274 <= temp___272)) -> (to_rep1(((temp___268({ elts = temp___270;
+  rt = temp___2701 }, temp___271, temp___272,
+  temp___273)).elts[temp___274])) = temp___273)) and
+  ((not ((temp___271 <= temp___274) and (temp___274 <= temp___272))) ->
+  (((temp___268({ elts = temp___270; rt = temp___2701 }, temp___271,
+  temp___272, temp___273)).elts[temp___274]) = (temp___270[temp___274])))))))))
 
-logic a : (int,integer) farray
-
-logic us : int
-
-logic o : int
-
-logic temp___413 : (int,integer) farray
-
-logic temp___4131 : t
-
-logic temp___414 : (int,integer) farray
-
-logic temp___4141 : t
-
-logic o1 : (int,integer) farray
-
-logic o2 : int
-
-logic result : (int,integer) farray
-
-logic a1 : (int,integer) farray
-
-logic a2 : (int,integer) farray
-
-logic a3 : (int,integer) farray
-
-axiom H : dynamic_property(1, 8, to_rep(a__first), to_rep(a__last))
-
-axiom H1 : in_range2(i)
-
-axiom H2 : in_range(new_val)
-
- (* File "update_checks_1.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : dynamic_property1(to_rep(a__first), to_rep(a__last),
-  i)
+ (* File "update_checks_1.adb", line 19, characters 0-0 *)
+goal WP_parameter_def : (dynamic_property(1, 8, to_rep(a__first),
+  to_rep(a__last)) -> (in_range2(i) -> (in_range(new_val) ->
+  dynamic_property1(to_rep(a__first), to_rep(a__last), i))))

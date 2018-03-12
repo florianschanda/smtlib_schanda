@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -92,41 +92,13 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic sortie1 : bool
-
-logic sortie2 : bool
-
-logic result : bool
-
-logic sortie11 : bool
-
-logic result1 : bool
-
-logic sortie21 : bool
-
-logic sortie12 : bool
-
-logic sortie22 : bool
-
-logic sortie13 : bool
-
-logic sortie23 : bool
-
-axiom H : (result = sortie1)
-
-axiom H1 : (sortie11 = of_int(1))
-
-axiom H2 : (result1 = sortie2)
-
-axiom H3 : (sortie21 = of_int(1))
-
-axiom H4 : (sortie21 = sortie22)
-
-axiom H5 : (sortie11 = sortie12)
-
-axiom H6 : (sortie23 = sortie21)
-
-axiom H7 : (sortie13 = sortie11)
-
  (* File "repro.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : (contrainte1(sortie12, sortie22) = true)
+goal WP_parameter_def :
+  (forall sortie1:bool. forall sortie2:bool. forall result:bool.
+  forall sortie11:bool. forall result1:bool. forall sortie21:bool.
+  forall sortie12:bool. forall sortie22:bool. forall sortie13:bool.
+  forall sortie23:bool. (((((result = sortie1) and
+  (sortie11 = of_int(1))) and ((result1 = sortie2) and
+  (sortie21 = of_int(1)))) and (((sortie21 = sortie22) and
+  (sortie11 = sortie12)) and ((sortie23 = sortie21) and
+  (sortie13 = sortie11)))) -> (contrainte1(sortie12, sortie22) = true)))

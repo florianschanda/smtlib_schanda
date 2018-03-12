@@ -172,12 +172,6 @@ logic length__function_guard : int, us_rep -> prop
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq4 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -189,6 +183,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq4 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
 
 predicate in_range2(x: int) = ((x = 0) or (x = 1))
 
@@ -320,60 +320,20 @@ logic result__ : us_rep
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic result : bool
-
-logic result1 : bool
-
-logic result2 : bool
-
-axiom H : in_range1(e)
-
-axiom H1 : ((o6 = length(s)) and (in_range3(o6) and
-  ((0 + o6) <= 2147483647)))
-
-axiom H2 : (((o6 <  2147483647) -> (result2 = true)) and
-  ((not (o6 <  2147483647)) -> (result2 = false)))
-
-axiom H3 : ((result2 = true) -> ((o2 = length(s)) and (in_range3(o2) and
-  ((0 + o2) <= 2147483647))))
-
-axiom H4 : ((result2 = true) -> (o3 = (o2 + 1)))
-
-axiom H5 : ((result2 = true) -> ((o4 = o3) and in_range(o3)))
-
-axiom H6 : ((result2 = true) -> ((o5 = length(result__)) and
-  (in_range3(o5) and ((0 + o5) <= 2147483647))))
-
-axiom H7 : ((result2 = true) -> (((o5 = o4) -> (result1 = true)) and
-  ((not (o5 = o4)) -> (result1 = false))))
-
-axiom H8 : ((not (result2 = true)) -> (result1 = false))
-
-axiom H9 : ((result1 = true) -> ((o1 = get(result__, 1)) and in_range5(o1)))
-
-axiom H10 : ((result1 = true) -> (((o1 = e) -> (result = true)) and
-  ((not (o1 = e)) -> (result = false))))
-
-axiom H11 : ((not (result1 = true)) -> (result = false))
-
-axiom H12 : (result = true)
-
-axiom H13 : ((o = (0 + length(s))) and (in_range4(o) and
-  (o = (0 + length(s)))))
-
  (* File "list_mod_allocator.ads", line 44, characters 0-0 *)
-goal WP_parameter_def : (o <= (0 + length(s)))
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
+  forall o5:int. forall o6:int. forall result:bool. forall result1:bool.
+  forall result2:bool. (in_range1(e) -> ((((((o6 = length(s)) and
+  (in_range3(o6) and ((0 + o6) <= 2147483647))) and (((o6 <  2147483647) and
+  (result2 = true)) or ((not (o6 <  2147483647)) and (result2 = false)))) and
+  (((result2 = true) and (((((o2 = length(s)) and (in_range3(o2) and
+  ((0 + o2) <= 2147483647))) and (o3 = (o2 + 1))) and ((o4 = o3) and
+  in_range(o3))) and (((o5 = length(result__)) and (in_range3(o5) and
+  ((0 + o5) <= 2147483647))) and (((o5 = o4) and (result1 = true)) or
+  ((not (o5 = o4)) and (result1 = false)))))) or ((not (result2 = true)) and
+  (result1 = false)))) and (((result1 = true) and (((o1 = get(result__,
+  1)) and in_range5(o1)) and (((o1 = e) and (result = true)) or
+  ((not (o1 = e)) and (result = false))))) or ((not (result1 = true)) and
+  (result = false)))) -> ((result = true) -> (((o = (0 + length(s))) and
+  (in_range4(o) and (o = (0 + length(s))))) -> (o <= (0 + length(s))))))))

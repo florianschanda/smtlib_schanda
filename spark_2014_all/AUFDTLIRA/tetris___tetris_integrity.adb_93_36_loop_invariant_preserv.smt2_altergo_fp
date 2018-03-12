@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -238,24 +238,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,cell) farray, int, int, (int,cell) farray, int,
-  int -> (int,cell) farray
-
-axiom concat_def :
-  (forall a:(int,cell) farray. forall b:(int,cell) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : cell, int -> (int,cell) farray
-
-axiom singleton_def :
-  (forall v:cell.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq6 : (int,cell) farray, int, int, (int,cell) farray, int,
   int -> bool
 
@@ -266,17 +248,17 @@ axiom bool_eq_def5 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -286,37 +268,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,cell) farray, int, int, (int,cell) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,cell) farray. forall b:(int,cell) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq6(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,cell) farray. forall b:(int,cell) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq6(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,cell) farray. forall b:(int,cell) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq6(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic dummy4 : (int,cell) farray
 
@@ -366,25 +320,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,(int,cell) farray) farray, int, int,
-  (int,(int,cell) farray) farray, int, int -> (int,(int,cell) farray) farray
-
-axiom concat_def1 :
-  (forall a:(int,(int,cell) farray) farray.
-  forall b:(int,(int,cell) farray) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : (int,cell) farray, int -> (int,(int,cell) farray) farray
-
-axiom singleton_def1 :
-  (forall v:(int,cell) farray.
-  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq7 : (int,(int,cell) farray) farray, int, int,
   (int,(int,cell) farray) farray, int, int -> bool
 
@@ -396,17 +331,17 @@ axiom bool_eq_def6 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) and (bool_eq6((a[temp___idx_133]), 1, 10,
-  (b[((b__first - a__first) + temp___idx_133)]), 1, 10) = true)) or
-  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (forall temp___idx_155:int. ((((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) and (bool_eq6((a[temp___idx_155]), 1, 10,
+  (b[((b__first - a__first) + temp___idx_155)]), 1, 10) = true)) or
+  (not ((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) -> (bool_eq6((a[temp___idx_133]), 1, 10,
-  (b[((b__first - a__first) + temp___idx_133)]), 1, 10) = true))))) ->
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) -> (bool_eq6((a[temp___idx_155]), 1, 10,
+  (b[((b__first - a__first) + temp___idx_155)]), 1, 10) = true))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -417,9 +352,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) -> (bool_eq6((a[temp___idx_133]), 1, 10,
-  (b[((b__first - a__first) + temp___idx_133)]), 1, 10) = true)))))))
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) -> (bool_eq6((a[temp___idx_155]), 1, 10,
+  (b[((b__first - a__first) + temp___idx_155)]), 1, 10) = true)))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -452,11 +387,6 @@ logic empty_line : (int,cell) farray
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic tetris_integrity__delete_complete_lines__empty_line__aggregate_def : int -> (int,cell) farray
-
-axiom def_axiom :
-  (forall temp___509:int.
-  (forall temp___510:int.
-  ((tetris_integrity__delete_complete_lines__empty_line__aggregate_def(temp___509)[temp___510]) = of_rep(temp___509))))
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
@@ -510,413 +440,117 @@ logic attr__ATTRIBUTE_ADDRESS7 : int
 axiom empty_line__def_axiom :
   (empty_line = tetris_integrity__delete_complete_lines__empty_line__aggregate_def(0))
 
-logic cur_board : (int,(int,cell) farray) farray
-
-logic num_deleted : int
-
-logic to_line : int
-
-logic has_complete_lines : bool
-
-logic del_line : int
-
-logic from_line : int
-
-logic temp___768 : (int,(int,cell) farray) farray
-
-logic temp___767 : int
-
-logic temp___766 : bool
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : bool
-
-logic o3 : int
-
-logic o4 : int
-
-logic cur_board1 : (int,(int,cell) farray) farray
-
-logic result : int
-
-logic to_line1 : int
-
-logic result1 : bool
-
-logic has_complete_lines1 : bool
-
-logic result2 : int
-
-logic del_line1 : int
-
-logic cur_board2 : (int,(int,cell) farray) farray
-
-logic to_line2 : int
-
-logic has_complete_lines2 : bool
-
-logic del_line2 : int
-
-logic result3 : bool
-
-logic result4 : (int,(int,cell) farray) farray
-
-logic cur_board3 : (int,(int,cell) farray) farray
-
-logic result5 : bool
-
-logic has_complete_lines3 : bool
-
-logic result6 : int
-
-logic to_line3 : int
-
-logic cur_board4 : (int,(int,cell) farray) farray
-
-logic to_line4 : int
-
-logic has_complete_lines4 : bool
-
-logic del_line3 : int
-
-logic cur_board5 : (int,(int,cell) farray) farray
-
-logic to_line5 : int
-
-logic has_complete_lines5 : bool
-
-logic del_line4 : int
-
-logic cur_board6 : (int,(int,cell) farray) farray
-
-logic to_line6 : int
-
-logic has_complete_lines6 : bool
-
-logic del_line5 : int
-
-logic cur_board7 : (int,(int,cell) farray) farray
-
-logic to_line7 : int
-
-logic has_complete_lines7 : bool
-
-logic del_line6 : int
-
-logic result7 : int
-
-logic num_deleted1 : int
-
-logic result8 : int
-
-logic from_line1 : int
-
-logic cur_board8 : (int,(int,cell) farray) farray
-
-logic num_deleted2 : int
-
-logic to_line8 : int
-
-logic from_line2 : int
-
-logic result9 : bool
-
-logic result10 : (int,(int,cell) farray) farray
-
-logic cur_board9 : (int,(int,cell) farray) farray
-
-logic result11 : (int,(int,cell) farray) farray
-
-logic cur_board10 : (int,(int,cell) farray) farray
-
-logic result12 : int
-
-logic to_line9 : int
-
-logic result13 : int
-
-logic num_deleted3 : int
-
-logic cur_board11 : (int,(int,cell) farray) farray
-
-logic num_deleted4 : int
-
-logic to_line10 : int
-
-logic cur_board12 : (int,(int,cell) farray) farray
-
-logic num_deleted5 : int
-
-logic to_line11 : int
-
-logic result14 : int
-
-logic from_line3 : int
-
-logic cur_board13 : (int,(int,cell) farray) farray
-
-logic num_deleted6 : int
-
-logic to_line12 : int
-
-logic from_line4 : int
-
-logic cur_board14 : (int,(int,cell) farray) farray
-
-logic num_deleted7 : int
-
-logic to_line13 : int
-
-logic from_line5 : int
-
-axiom H : ((0 <= 2147483647) -> in_range2(num_deleted))
-
-axiom H1 :
-  (tetris_integrity__delete_complete_lines__empty_line__aggregate_def(0) = empty_line)
-
-axiom H2 : (result = to_line)
-
-axiom H3 : (to_line1 = 50)
-
-axiom H4 : in_range3(to_line1)
-
-axiom H5 : (result1 = has_complete_lines)
-
-axiom H6 : (has_complete_lines1 = of_int(0))
-
-axiom H7 : (result2 = del_line)
-
-axiom H8 : (del_line1 = 1)
-
-axiom H9 : (((1 <= del_line1) and (del_line1 <= 50)) ->
-  (temp___768 = cur_board))
-
-axiom H10 : (((1 <= del_line1) and (del_line1 <= 50)) ->
-  (temp___767 = to_line1))
-
-axiom H11 : (((1 <= del_line1) and (del_line1 <= 50)) ->
-  (temp___766 = has_complete_lines1))
-
-axiom H12 : (((1 <= del_line1) and (del_line1 <= 50)) -> ((((1 <= 50) ->
-  in_range3(to_line2)) and
-  (forall temp___769:int. (((1 <= temp___769) and (temp___769 <= 50)) ->
-  ((del_line2 <= temp___769) ->
-  ((cur_board2[temp___769]) = (temp___768[temp___769])))))) and
-  ((1 <= del_line2) and (del_line2 <= 50))))
-
-axiom H13 : (((1 <= del_line1) and (del_line1 <= 50)) ->
-  ((result3 = is_complete_line((cur_board2[del_line2]))) and
-  ((result3 = true) <->
-  (forall x:int. (((1 <= x) and (x <= 10)) ->
-  (not (to_rep(((cur_board2[del_line2])[x])) = 0)))))))
-
-axiom H14 : (((1 <= del_line1) and (del_line1 <= 50)) -> ((result3 = true) ->
-  (result4 = cur_board2)))
-
-axiom H15 : (((1 <= del_line1) and (del_line1 <= 50)) -> ((result3 = true) ->
-  (cur_board3 = (cur_board2[del_line2 <- empty_line]))))
-
-axiom H16 : (((1 <= del_line1) and (del_line1 <= 50)) -> ((result3 = true) ->
-  (result5 = has_complete_lines2)))
-
-axiom H17 : (((1 <= del_line1) and (del_line1 <= 50)) -> ((result3 = true) ->
-  (has_complete_lines3 = of_int(1))))
-
-axiom H18 : (((1 <= del_line1) and (del_line1 <= 50)) -> ((result3 = true) ->
-  (result6 = to_line2)))
-
-axiom H19 : (((1 <= del_line1) and (del_line1 <= 50)) -> ((result3 = true) ->
-  (to_line3 = del_line2)))
-
-axiom H20 : (((1 <= del_line1) and (del_line1 <= 50)) ->
-  ((not (result3 = true)) -> (has_complete_lines3 = has_complete_lines2)))
-
-axiom H21 : (((1 <= del_line1) and (del_line1 <= 50)) ->
-  ((not (result3 = true)) -> (to_line3 = to_line2)))
-
-axiom H22 : (((1 <= del_line1) and (del_line1 <= 50)) ->
-  ((not (result3 = true)) -> (cur_board3 = cur_board2)))
-
-axiom H23 : (((1 <= del_line1) and (del_line1 <= 50)) -> (del_line2 = 50))
-
-axiom H24 : (((1 <= del_line1) and (del_line1 <= 50)) ->
-  (del_line2 = del_line3))
-
-axiom H25 : (((1 <= del_line1) and (del_line1 <= 50)) ->
-  (has_complete_lines3 = has_complete_lines4))
-
-axiom H26 : (((1 <= del_line1) and (del_line1 <= 50)) ->
-  (to_line3 = to_line4))
-
-axiom H27 : (((1 <= del_line1) and (del_line1 <= 50)) ->
-  (cur_board3 = cur_board4))
-
-axiom H28 : (((1 <= del_line1) and (del_line1 <= 50)) ->
-  (del_line4 = del_line2))
-
-axiom H29 : (((1 <= del_line1) and (del_line1 <= 50)) ->
-  (has_complete_lines5 = has_complete_lines3))
-
-axiom H30 : (((1 <= del_line1) and (del_line1 <= 50)) ->
-  (to_line5 = to_line3))
-
-axiom H31 : (((1 <= del_line1) and (del_line1 <= 50)) ->
-  (cur_board5 = cur_board3))
-
-axiom H32 : (((1 <= del_line1) and (del_line1 <= 50)) ->
-  (del_line5 = del_line3))
-
-axiom H33 : (((1 <= del_line1) and (del_line1 <= 50)) ->
-  (has_complete_lines6 = has_complete_lines4))
-
-axiom H34 : (((1 <= del_line1) and (del_line1 <= 50)) ->
-  (to_line6 = to_line4))
-
-axiom H35 : (((1 <= del_line1) and (del_line1 <= 50)) ->
-  (cur_board6 = cur_board4))
-
-axiom H36 : (((1 <= del_line1) and (del_line1 <= 50)) ->
-  (del_line6 = del_line4))
-
-axiom H37 : (((1 <= del_line1) and (del_line1 <= 50)) ->
-  (has_complete_lines7 = has_complete_lines5))
-
-axiom H38 : (((1 <= del_line1) and (del_line1 <= 50)) ->
-  (to_line7 = to_line5))
-
-axiom H39 : (((1 <= del_line1) and (del_line1 <= 50)) ->
-  (cur_board7 = cur_board5))
-
-axiom H40 : ((not ((1 <= del_line1) and (del_line1 <= 50))) ->
-  (del_line5 = del_line1))
-
-axiom H41 : ((not ((1 <= del_line1) and (del_line1 <= 50))) ->
-  (has_complete_lines6 = has_complete_lines1))
-
-axiom H42 : ((not ((1 <= del_line1) and (del_line1 <= 50))) ->
-  (to_line6 = to_line1))
-
-axiom H43 : ((not ((1 <= del_line1) and (del_line1 <= 50))) ->
-  (cur_board6 = cur_board))
-
-axiom H44 : ((not ((1 <= del_line1) and (del_line1 <= 50))) ->
-  (del_line6 = del_line1))
-
-axiom H45 : ((not ((1 <= del_line1) and (del_line1 <= 50))) ->
-  (has_complete_lines7 = has_complete_lines1))
-
-axiom H46 : ((not ((1 <= del_line1) and (del_line1 <= 50))) ->
-  (to_line7 = to_line1))
-
-axiom H47 : ((not ((1 <= del_line1) and (del_line1 <= 50))) ->
-  (cur_board7 = cur_board1))
-
-axiom H48 : (result7 = num_deleted)
-
-axiom H49 : (num_deleted1 = 0)
-
-axiom H50 : (has_complete_lines6 = true)
-
-axiom H51 : ((to_line6 - 1) = r3b)
-
-axiom H52 : in_range1(r3b)
-
-axiom H53 : (result8 = from_line)
-
-axiom H54 : (from_line1 = r3b)
-
-axiom H55 : (1 <= from_line1)
-
-axiom H56 : (from_line1 <= r3b)
-
-axiom H57 : (from_line2 <  to_line8)
-
-axiom H58 : ((num_deleted2 + to_line8) = (num_deleted1 + to_line6))
-
-axiom H59 : (((((1 <= r3b) -> dynamic_property(1, r3b, from_line2)) and
-  ((1 <= 50) -> in_range3(to_line8))) and ((0 <= 2147483647) ->
-  in_range2(num_deleted2))) and ((1 <= from_line2) and (from_line2 <= r3b)))
-
-axiom H60 : ((o2 = is_empty_line((cur_board8[from_line2]))) and
-  ((o2 = true) <->
-  (forall x:int. (((1 <= x) and (x <= 10)) ->
-  (to_rep(((cur_board8[from_line2])[x])) = 0)))))
-
-axiom H61 : (((not (o2 = true)) -> (result9 = true)) and ((o2 = true) ->
-  (result9 = false)))
-
-axiom H62 : ((result9 = true) -> (result10 = cur_board8))
-
-axiom H63 : ((result9 = true) ->
-  (cur_board9 = (cur_board8[to_line8 <- (cur_board8[from_line2])])))
-
-axiom H64 : ((result9 = true) -> (result11 = cur_board9))
-
-axiom H65 : ((result9 = true) ->
-  (cur_board10 = (cur_board9[from_line2 <- empty_line])))
-
-axiom H66 : ((result9 = true) -> ((o3 = (to_line8 - 1)) and
-  in_range3((to_line8 - 1))))
-
-axiom H67 : ((result9 = true) -> (result12 = to_line8))
-
-axiom H68 : ((result9 = true) -> (to_line9 = o3))
-
-axiom H69 : ((result9 = true) -> ((o4 = (num_deleted2 + 1)) and
-  in_range1((num_deleted2 + 1))))
-
-axiom H70 : ((result9 = true) -> (result13 = num_deleted2))
-
-axiom H71 : ((result9 = true) -> (num_deleted3 = o4))
-
-axiom H72 : ((result9 = true) -> (to_line10 = to_line9))
-
-axiom H73 : ((result9 = true) -> (num_deleted4 = num_deleted3))
-
-axiom H74 : ((result9 = true) -> (cur_board11 = cur_board10))
-
-axiom H75 : ((result9 = true) -> (to_line11 = to_line9))
-
-axiom H76 : ((result9 = true) -> (num_deleted5 = num_deleted3))
-
-axiom H77 : ((result9 = true) -> (cur_board12 = cur_board10))
-
-axiom H78 : ((not (result9 = true)) -> (to_line10 = to_line8))
-
-axiom H79 : ((not (result9 = true)) -> (num_deleted4 = num_deleted2))
-
-axiom H80 : ((not (result9 = true)) -> (cur_board11 = cur_board8))
-
-axiom H81 : ((not (result9 = true)) -> (to_line11 = to_line8))
-
-axiom H82 : ((not (result9 = true)) -> (num_deleted5 = num_deleted2))
-
-axiom H83 : ((not (result9 = true)) -> (cur_board12 = cur_board8))
-
-axiom H84 : (not (from_line2 = 1))
-
-axiom H85 : (result14 = from_line2)
-
-axiom H86 : (from_line3 = (from_line2 - 1))
-
-axiom H87 : (from_line4 = from_line3)
-
-axiom H88 : (to_line12 = to_line10)
-
-axiom H89 : (num_deleted6 = num_deleted4)
-
-axiom H90 : (cur_board13 = cur_board11)
-
-axiom H91 : (from_line5 = from_line3)
-
-axiom H92 : (to_line13 = to_line11)
-
-axiom H93 : (num_deleted7 = num_deleted5)
-
-axiom H94 : (cur_board14 = cur_board12)
+axiom def_axiom :
+  (forall temp___531:int. (in_range4(temp___531) ->
+  (forall temp___532:int.
+  (to_rep((tetris_integrity__delete_complete_lines__empty_line__aggregate_def(temp___531)[temp___532])) = temp___531))))
 
  (* File "tetris_integrity.adb", line 37, characters 0-0 *)
-goal WP_parameter_def : (from_line4 <  to_line12)
+goal WP_parameter_def :
+  (forall cur_board:(int,(int,cell) farray) farray. forall num_deleted:int.
+  forall to_line:int. forall has_complete_lines:bool. forall del_line:int.
+  forall from_line:int. forall temp___808:(int,(int,cell) farray) farray.
+  forall temp___807:int. forall temp___806:bool. forall o:bool.
+  forall o1:int. forall o2:int.
+  forall cur_board1:(int,(int,cell) farray) farray. forall result:int.
+  forall to_line1:int. forall result1:bool. forall has_complete_lines1:bool.
+  forall result2:int. forall del_line1:int.
+  forall cur_board2:(int,(int,cell) farray) farray. forall to_line2:int.
+  forall has_complete_lines2:bool. forall del_line2:int. forall result3:bool.
+  forall result4:(int,(int,cell) farray) farray.
+  forall cur_board3:(int,(int,cell) farray) farray. forall result5:bool.
+  forall has_complete_lines3:bool. forall result6:int. forall to_line3:int.
+  forall cur_board4:(int,(int,cell) farray) farray. forall to_line4:int.
+  forall has_complete_lines4:bool. forall del_line3:int.
+  forall cur_board5:(int,(int,cell) farray) farray. forall to_line5:int.
+  forall has_complete_lines5:bool. forall del_line4:int.
+  forall cur_board6:(int,(int,cell) farray) farray. forall to_line6:int.
+  forall has_complete_lines6:bool. forall del_line5:int.
+  forall cur_board7:(int,(int,cell) farray) farray. forall to_line7:int.
+  forall has_complete_lines7:bool. forall del_line6:int. forall result7:int.
+  forall num_deleted1:int. forall result8:int. forall from_line1:int.
+  forall cur_board8:(int,(int,cell) farray) farray. forall num_deleted2:int.
+  forall to_line8:int. forall from_line2:int. forall result9:bool.
+  forall result10:(int,(int,cell) farray) farray.
+  forall cur_board9:(int,(int,cell) farray) farray.
+  forall result11:(int,(int,cell) farray) farray.
+  forall cur_board10:(int,(int,cell) farray) farray. forall result12:int.
+  forall to_line9:int. forall result13:int. forall num_deleted3:int.
+  forall cur_board11:(int,(int,cell) farray) farray. forall num_deleted4:int.
+  forall to_line10:int. forall cur_board12:(int,(int,cell) farray) farray.
+  forall num_deleted5:int. forall to_line11:int. forall result14:int.
+  forall from_line3:int. forall cur_board13:(int,(int,cell) farray) farray.
+  forall num_deleted6:int. forall to_line12:int. forall from_line4:int.
+  forall cur_board14:(int,(int,cell) farray) farray. forall num_deleted7:int.
+  forall to_line13:int. forall from_line5:int. (((0 <= 2147483647) ->
+  in_range2(num_deleted)) ->
+  ((tetris_integrity__delete_complete_lines__empty_line__aggregate_def(0) = empty_line) ->
+  (((result = to_line) and (to_line1 = 50)) -> (in_range3(to_line1) ->
+  (((result1 = has_complete_lines) and (has_complete_lines1 = of_int(0))) ->
+  ((((result2 = del_line) and (del_line1 = 1)) and ((((1 <= del_line1) and
+  (del_line1 <= 50)) and ((((temp___808 = cur_board) and
+  ((temp___807 = to_line1) and ((temp___806 = has_complete_lines1) and
+  (((((1 <= 50) -> in_range3(to_line2)) and
+  (forall temp___809:int. (((1 <= temp___809) and (temp___809 <= 50)) ->
+  ((del_line2 <= temp___809) ->
+  ((cur_board2[temp___809]) = (temp___808[temp___809])))))) and
+  ((1 <= del_line2) and (del_line2 <= 50))) and
+  ((((result3 = is_complete_line((cur_board2[del_line2]))) and
+  ((result3 = true) <->
+  (forall x:int. (((1 <= x) and (x <= 10)) ->
+  (not (to_rep(((cur_board2[del_line2])[x])) = 0)))))) and
+  (((result3 = true) and (((result4 = cur_board2) and
+  (cur_board3 = (cur_board2[del_line2 <- empty_line]))) and
+  (((result5 = has_complete_lines2) and
+  (has_complete_lines3 = of_int(1))) and ((result6 = to_line2) and
+  (to_line3 = del_line2))))) or ((not (result3 = true)) and
+  ((has_complete_lines3 = has_complete_lines2) and ((to_line3 = to_line2) and
+  (cur_board3 = cur_board2)))))) and (del_line2 = 50)))))) and
+  (((del_line2 = del_line3) and
+  ((has_complete_lines3 = has_complete_lines4) and ((to_line3 = to_line4) and
+  (cur_board3 = cur_board4)))) and ((del_line4 = del_line2) and
+  ((has_complete_lines5 = has_complete_lines3) and ((to_line5 = to_line3) and
+  (cur_board5 = cur_board3)))))) and (((del_line3 = del_line5) and
+  ((has_complete_lines4 = has_complete_lines6) and ((to_line4 = to_line6) and
+  (cur_board4 = cur_board6)))) and ((del_line6 = del_line4) and
+  ((has_complete_lines7 = has_complete_lines5) and ((to_line7 = to_line5) and
+  (cur_board7 = cur_board5))))))) or ((not ((1 <= del_line1) and
+  (del_line1 <= 50))) and (((del_line1 = del_line5) and
+  ((has_complete_lines1 = has_complete_lines6) and ((to_line1 = to_line6) and
+  (cur_board = cur_board6)))) and ((del_line6 = del_line1) and
+  ((has_complete_lines7 = has_complete_lines1) and ((to_line7 = to_line1) and
+  (cur_board7 = cur_board1)))))))) -> (((result7 = num_deleted) and
+  (num_deleted1 = 0)) -> ((has_complete_lines6 = true) ->
+  ((((to_line6 - 1) = r3b) and in_range1(r3b)) -> (((result8 = from_line) and
+  (from_line1 = r3b)) -> (((1 <= from_line1) and (from_line1 <= r3b)) ->
+  (((from_line2 <  to_line8) and
+  ((num_deleted2 + to_line8) = (num_deleted1 + to_line6))) ->
+  ((((((((1 <= r3b) -> dynamic_property(1, r3b, from_line2)) and
+  ((1 <= 50) -> in_range3(to_line8))) and ((0 <= 2147483647) ->
+  in_range2(num_deleted2))) and ((1 <= from_line2) and
+  (from_line2 <= r3b))) and
+  (((((o = is_empty_line((cur_board8[from_line2]))) and ((o = true) <->
+  (forall x:int. (((1 <= x) and (x <= 10)) ->
+  (to_rep(((cur_board8[from_line2])[x])) = 0))))) and (((not (o = true)) and
+  (result9 = true)) or ((o = true) and (result9 = false)))) and
+  (((result9 = true) and ((((result10 = cur_board8) and
+  (cur_board9 = (cur_board8[to_line8 <- (cur_board8[from_line2])]))) and
+  (((result11 = cur_board9) and
+  (cur_board10 = (cur_board9[from_line2 <- empty_line]))) and
+  ((((o1 = (to_line8 - 1)) and in_range3((to_line8 - 1))) and
+  ((result12 = to_line8) and (to_line9 = o1))) and
+  (((o2 = (num_deleted2 + 1)) and in_range1((num_deleted2 + 1))) and
+  ((result13 = num_deleted2) and (num_deleted3 = o2)))))) and
+  (((to_line9 = to_line10) and ((num_deleted3 = num_deleted4) and
+  (cur_board10 = cur_board11))) and ((to_line11 = to_line9) and
+  ((num_deleted5 = num_deleted3) and (cur_board12 = cur_board10)))))) or
+  ((not (result9 = true)) and (((to_line8 = to_line10) and
+  ((num_deleted2 = num_deleted4) and (cur_board8 = cur_board11))) and
+  ((to_line11 = to_line8) and ((num_deleted5 = num_deleted2) and
+  (cur_board12 = cur_board8))))))) and ((not (from_line2 = 1)) and
+  ((result14 = from_line2) and (from_line3 = (from_line2 - 1)))))) and
+  (((from_line3 = from_line4) and (({ int__content = to_line12 } = {
+  int__content = to_line10 }) and ((num_deleted6 = num_deleted4) and
+  (cur_board13 = cur_board11)))) and ((from_line5 = from_line3) and
+  ((to_line13 = to_line11) and ((num_deleted7 = num_deleted5) and
+  (cur_board14 = cur_board12)))))) -> (from_line4 <  to_line12)))))))))))))))

@@ -113,85 +113,31 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic b : int
-
-logic c : int
-
-logic simple_test__test__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic result : int
-
-logic c1 : int
-
-logic result1 : int
-
-logic b1 : int
-
-logic result2 : int
-
-logic b2 : int
-
-logic result3 : int
-
-logic c2 : int
-
-logic result4 : int
-
-logic simple_test__test__result1 : int
-
-logic simple_test__test__result2 : int
-
-logic simple_test__test__result3 : int
-
-logic b3 : int
-
-logic c3 : int
-
-logic simple_test__test__result4 : int
-
-logic b4 : int
-
-logic c4 : int
-
-logic simple_test__test__result5 : int
-
-axiom H : in_range(a)
-
-axiom H1 : ((a = 0) or (a = 1))
-
-axiom H2 : (((((- 2147483648) <= 2147483647) -> in_range(b)) and
-  (((result = c) and (c1 = 3)) and (in_range(c1) and ((((a = 0) ->
-  ((result1 = b) and (b1 = 500))) and ((not (a = 0)) -> (((result2 = b) and
-  (b2 = 1000)) and (b1 = b2)))) and ((((o = (c1 + b1)) and
-  in_range((c1 + b1))) and ((c1 = result3) and (c2 = o))) and ((0 <  c2) and
-  (((simple_test__test__result1 = simple_test__test__result2) and
-  (simple_test__test__result3 = simple_test__test__result1)) and
-  ((result4 = simple_test__test__result) and
-  (simple_test__test__result1 = c2))))))))) and
-  (((simple_test__test__result4 = simple_test__test__result2) and
-  ((c2 = c3) and (b1 = b3))) and
-  ((simple_test__test__result5 = simple_test__test__result3) and
-  ((c4 = c2) and (b4 = b1)))))
-
-axiom H3 : ((o1 = (a * 500)) and in_range((a * 500)))
-
-axiom H4 : (o2 = (o1 + 500))
-
-axiom H5 : ((o3 = o2) and in_range(o2))
-
-axiom H6 : (o4 = (o3 + 3))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(o4)
+goal WP_parameter_def :
+  (forall b:int. forall c:int. forall simple_test__test__result:int.
+  forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
+  forall result:int. forall c1:int. forall result1:int. forall b1:int.
+  forall result2:int. forall b2:int. forall result3:int. forall c2:int.
+  forall result4:int. forall simple_test__test__result1:int.
+  forall simple_test__test__result2:int.
+  forall simple_test__test__result3:int. forall b3:int. forall c3:int.
+  forall simple_test__test__result4:int. forall b4:int. forall c4:int.
+  forall simple_test__test__result5:int. (in_range(a) -> (((a = 0) or
+  (a = 1)) -> ((((((- 2147483648) <= 2147483647) -> in_range(b)) and ((({
+  int__content = result } = { int__content = c }) and (c1 = 3)) and
+  (in_range(c1) and ((((a = 0) and (({ int__content = result1 } = {
+  int__content = b }) and (b1 = 500))) or ((not (a = 0)) and ((({
+  int__content = result2 } = { int__content = b }) and (b2 = 1000)) and
+  (b1 = b2)))) and ((((o = (c1 + b1)) and in_range((c1 + b1))) and
+  ((c1 = result3) and (c2 = o))) and ((0 <  c2) and
+  (((simple_test__test__result1 = simple_test__test__result2) and
+  (simple_test__test__result3 = simple_test__test__result1)) and (({
+  int__content = result4 } = { int__content = simple_test__test__result
+  }) and (simple_test__test__result1 = c2))))))))) and ((({ int__content =
+  simple_test__test__result4 } = { int__content = simple_test__test__result2
+  }) and ((c2 = c3) and (b1 = b3))) and
+  ((simple_test__test__result5 = simple_test__test__result3) and
+  ((c4 = c2) and (b4 = b1))))) -> ((((((o1 = (a * 500)) and
+  in_range((a * 500))) and (o2 = (o1 + 500))) and ((o3 = o2) and
+  in_range(o2))) and (o4 = (o3 + 3))) -> in_range(o4))))))

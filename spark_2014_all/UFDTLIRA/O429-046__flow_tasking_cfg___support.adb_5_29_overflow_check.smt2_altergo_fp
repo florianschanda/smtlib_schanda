@@ -208,11 +208,6 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic self__ : natural
-
-logic o : int
-
-axiom H : in_range1(x)
-
  (* File "support.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : in_range((to_rep(self__) + x))
+goal WP_parameter_def :
+  (forall self__:natural. (in_range1(x) -> in_range((to_rep(self__) + x))))

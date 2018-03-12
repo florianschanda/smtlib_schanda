@@ -261,21 +261,5 @@ logic po__split_discrs : integer
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : integer
-
-logic o1 : integer
-
-logic us_self__compl : integer
-
-logic o2 : integer
-
-logic o3 : integer
-
-logic o4 : integer
-
-logic o5 : int
-
-axiom H : (0 = to_rep(po__split_discrs))
-
  (* File "p.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : (48 <= 97)
+goal WP_parameter_def : ((0 = to_rep(po__split_discrs)) -> (48 <= 97))

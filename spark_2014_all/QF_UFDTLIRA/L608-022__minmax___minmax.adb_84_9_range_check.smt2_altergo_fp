@@ -204,125 +204,22 @@ logic attr__ATTRIBUTE_ADDRESS10 : int
 
 logic attr__ATTRIBUTE_ADDRESS11 : int
 
-logic x : int
-
-logic y : int
-
-logic min : int
-
-logic max : int
-
-logic v : int
-
-logic w : int
-
-logic mint : int
-
-logic maxt : int
-
-logic aa : int
-
-logic cc : int
-
-logic mine : int
-
-logic maxe : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic x1 : int
-
-logic result1 : int
-
-logic y1 : int
-
-logic result2 : int
-
-logic v1 : int
-
-logic result3 : int
-
-logic w1 : int
-
-logic result4 : int
-
-logic aa1 : int
-
-logic result5 : int
-
-logic cc1 : int
-
-logic min1 : int
-
-logic max1 : int
-
-logic min2 : int
-
-logic max2 : int
-
-logic mint1 : int
-
-logic maxt1 : int
-
-logic mine1 : int
-
-logic maxe1 : int
-
-axiom H : (result = x)
-
-axiom H1 : (x1 = 1)
-
-axiom H2 : in_range(x1)
-
-axiom H3 : (result1 = y)
-
-axiom H4 : (y1 = 127)
-
-axiom H5 : in_range(y1)
-
-axiom H6 : (((- 2147483648) <= 2147483647) -> in_range(min))
-
-axiom H7 : (((- 2147483648) <= 2147483647) -> in_range(max))
-
-axiom H8 : (result2 = v)
-
-axiom H9 : (v1 = 1)
-
-axiom H10 : in_range2(v1)
-
-axiom H11 : (result3 = w)
-
-axiom H12 : (w1 = 127)
-
-axiom H13 : in_range2(w1)
-
-axiom H14 : ((1 <= 127) -> in_range2(mint))
-
-axiom H15 : ((1 <= 127) -> in_range2(maxt))
-
-axiom H16 : (result4 = aa)
-
-axiom H17 : (aa1 = 0)
-
-axiom H18 : in_range3(aa1)
-
-axiom H19 : (result5 = cc)
-
-axiom H20 : (cc1 = 2)
-
-axiom H21 : in_range3(cc1)
-
-axiom H22 : ((0 <= 3) -> in_range3(mine))
-
-axiom H23 : ((0 <= 3) -> in_range3(maxe))
-
-axiom H24 : (in_range(min1) and in_range(max1))
-
-axiom H25 : ((o1 = y1) and in_range1(y1))
-
  (* File "minmax.adb", line 19, characters 0-0 *)
-goal WP_parameter_def : in_range1(x1)
+goal WP_parameter_def :
+  (forall x:int. forall y:int. forall min:int. forall max:int. forall v:int.
+  forall w:int. forall mint:int. forall maxt:int. forall aa:int.
+  forall cc:int. forall mine:int. forall maxe:int. forall o:int.
+  forall result:int. forall x1:int. forall result1:int. forall y1:int.
+  forall result2:int. forall v1:int. forall result3:int. forall w1:int.
+  forall result4:int. forall aa1:int. forall result5:int. forall cc1:int.
+  forall min1:int. forall max1:int. (((result = x) and (x1 = 1)) ->
+  (in_range(x1) -> (((result1 = y) and (y1 = 127)) -> (in_range(y1) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(min)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(max)) -> (((result2 = v) and
+  (v1 = 1)) -> (in_range2(v1) -> (((result3 = w) and (w1 = 127)) ->
+  (in_range2(w1) -> (((1 <= 127) -> in_range2(mint)) -> (((1 <= 127) ->
+  in_range2(maxt)) -> (((result4 = aa) and (aa1 = 0)) -> (in_range3(aa1) ->
+  (((result5 = cc) and (cc1 = 2)) -> (in_range3(cc1) -> (((0 <= 3) ->
+  in_range3(mine)) -> (((0 <= 3) -> in_range3(maxe)) -> ((in_range(min1) and
+  in_range(max1)) -> (((o = y1) and in_range1(y1)) ->
+  in_range1(x1))))))))))))))))))))))

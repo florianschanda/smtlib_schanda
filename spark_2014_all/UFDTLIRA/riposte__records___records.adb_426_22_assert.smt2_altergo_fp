@@ -323,80 +323,24 @@ function optional_pair__ref___projection(a: optional_pair__ref) : us_rep1 =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x__split_fields : bool
-
-logic x__split_fields1 : unsigned_byte
-
-logic x__split_fields2 : unsigned_byte
-
-logic o : unsigned_byte
-
-logic o1 : unsigned_byte
-
-logic o2 : unsigned_byte
-
-logic o3 : unsigned_byte
-
-logic o4 : unsigned_byte
-
-logic o5 : bool
-
-logic o6 : unsigned_byte
-
-logic o7 : unsigned_byte
-
-logic temp___424 : bool
-
-logic temp___4241 : unsigned_byte
-
-logic temp___4242 : unsigned_byte
-
-logic result : bool
-
-logic result1 : unsigned_byte
-
-logic result2 : unsigned_byte
-
-logic x__split_fields3 : bool
-
-logic x__split_fields4 : unsigned_byte
-
-logic x__split_fields5 : unsigned_byte
-
-axiom H : (to_rep(o) = to_rep(x__split_fields2))
-
-axiom H1 : (o = o1)
-
-axiom H2 : (x__split_fields2 = o2)
-
-axiom H3 : (o3 = o1)
-
-axiom H4 : (o4 = o2)
-
-axiom H5 : (x__split_fields = o5)
-
-axiom H6 : (o6 = o3)
-
-axiom H7 : (o7 = o4)
-
-axiom H8 : (temp___424 = o5)
-
-axiom H9 : (temp___4241 = o6)
-
-axiom H10 : (temp___4242 = o7)
-
-axiom H11 : (result = x__split_fields)
-
-axiom H12 : (result1 = x__split_fields1)
-
-axiom H13 : (result2 = x__split_fields2)
-
-axiom H14 : (temp___424 = x__split_fields3)
-
-axiom H15 : (temp___4241 = x__split_fields4)
-
-axiom H16 : (temp___4242 = x__split_fields5)
-
  (* File "records.adb", line 413, characters 0-0 *)
 goal WP_parameter_def :
-  (not (to_rep(x__split_fields4) = to_rep(x__split_fields5)))
+  (forall x__split_fields:bool. forall x__split_fields1:unsigned_byte.
+  forall x__split_fields2:unsigned_byte. forall o:unsigned_byte.
+  forall o1:unsigned_byte. forall o2:unsigned_byte. forall o3:unsigned_byte.
+  forall o4:unsigned_byte. forall o5:bool. forall o6:unsigned_byte.
+  forall o7:unsigned_byte. forall temp___457:bool.
+  forall temp___4571:unsigned_byte. forall temp___4572:unsigned_byte.
+  forall result:bool. forall result1:unsigned_byte.
+  forall result2:unsigned_byte. forall x__split_fields3:bool.
+  forall x__split_fields4:unsigned_byte.
+  forall x__split_fields5:unsigned_byte.
+  (((((((to_rep(o) = to_rep(x__split_fields2)) and ((o = o1) and
+  (x__split_fields2 = o2))) and ((o3 = o1) and (o4 = o2))) and
+  ((x__split_fields = o5) and ((o6 = o3) and (o7 = o4)))) and
+  ((temp___457 = o5) and ((temp___4571 = o6) and (temp___4572 = o7)))) and
+  (((result = x__split_fields) and ((result1 = x__split_fields1) and
+  (result2 = x__split_fields2))) and ((temp___457 = x__split_fields3) and
+  ((temp___4571 = x__split_fields4) and
+  (temp___4572 = x__split_fields5))))) ->
+  (not (to_rep(x__split_fields4) = to_rep(x__split_fields5)))))

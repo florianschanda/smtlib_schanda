@@ -108,7 +108,5 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-axiom H : in_range(x)
-
  (* File "main.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (2147483647 = x)
+goal WP_parameter_def : (in_range(x) -> (2147483647 = x))

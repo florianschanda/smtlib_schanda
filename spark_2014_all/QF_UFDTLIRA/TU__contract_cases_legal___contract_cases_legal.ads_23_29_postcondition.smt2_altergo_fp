@@ -109,47 +109,15 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic threshold : int
-
-logic x : int
-
-logic o : int
-
-logic o1 : int
-
-logic x1 : int
-
-logic result : int
-
-logic x2 : int
-
-logic x3 : int
-
-logic x4 : int
-
-axiom H : in_range(threshold)
-
-axiom H1 : in_range(x)
-
-axiom H2 : (0 <= x)
-
-axiom H3 : ((x <  threshold) -> ((o = (x + 1)) and in_range((x + 1))))
-
-axiom H4 : ((x <  threshold) -> (result = x))
-
-axiom H5 : ((x <  threshold) -> (x2 = o))
-
-axiom H6 : ((not (x <  threshold)) -> (x2 = x))
-
-axiom H7 : ((not (x <  threshold)) -> (x2 = x1))
-
-axiom H8 : (x2 = x3)
-
-axiom H9 : (x4 = x2)
-
-axiom H10 : ((bool_lt(x, threshold) = true) -> (x3 = (x + 1)))
-
-axiom H11 : ((bool_ge(x, threshold) = true) -> (x3 = x))
-
  (* File "contract_cases_legal.ads", line 17, characters 0-0 *)
-goal WP_parameter_def : (x <= x3)
+goal WP_parameter_def :
+  (forall threshold:int. forall x:int. forall o:int. forall x1:int.
+  forall result:int. forall x2:int. forall x3:int. forall x4:int.
+  ((in_range(threshold) and (in_range(x) and ((0 <= x) and
+  (((((x <  threshold) and (((o = (x + 1)) and in_range((x + 1))) and (({
+  int__content = result } = { int__content = x }) and (x2 = o)))) or
+  ((not (x <  threshold)) and ((x2 = x) and (x2 = x1)))) and ((x2 = x3) and
+  (x4 = x2))) and ((((bool_lt(x, threshold) = true) and (x3 = (x + 1))) or
+  (not (bool_lt(x, threshold) = true))) and (((bool_ge(x,
+  threshold) = true) and (x3 = x)) or (not (bool_ge(x,
+  threshold) = true)))))))) -> (x <= x3)))

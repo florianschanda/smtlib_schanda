@@ -365,35 +365,10 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic x__split_fields : even
-
-logic x__split_fields1 : even
-
-logic temp___214 : int
-
-logic temp___216 : int
-
-logic o : int
-
-logic o1 : even
-
-axiom H : (in_range1(i7s) and (mod(i7s, 2) = 0))
-
-axiom H1 : true
-
-axiom H2 : in_range(a)
-
-axiom H3 : in_range(b)
-
-axiom H4 : ((temp___216 = b) and in_range1(b))
-
-axiom H5 : (mod(temp___216, 2) = 0)
-
-axiom H6 : (o = temp___216)
-
-axiom H7 : (to_rep(o1) = o)
-
-axiom H8 : ((temp___214 = a) and in_range1(a))
-
  (* File "dynamic_preds.ads", line 25, characters 0-0 *)
-goal WP_parameter_def : (mod(temp___214, 2) = 0)
+goal WP_parameter_def :
+  (forall temp___240:int. forall temp___242:int. forall o:int.
+  forall o1:even. ((in_range1(i7s) and (mod(i7s, 2) = 0)) -> (in_range(a) ->
+  (in_range(b) -> (((((temp___242 = b) and in_range1(b)) and
+  ((mod(temp___242, 2) = 0) and (o = temp___242))) and (to_rep(o1) = o)) ->
+  (((temp___240 = a) and in_range1(a)) -> (mod(temp___240, 2) = 0)))))))

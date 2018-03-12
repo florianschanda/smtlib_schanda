@@ -109,15 +109,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic visible : int
-
-logic hidden : int
-
-logic o : int
-
-axiom H : in_range(visible)
-
-axiom H1 : in_range(hidden)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((visible + hidden))
+goal WP_parameter_def :
+  (forall visible:int. forall hidden:int. (in_range(visible) ->
+  (in_range(hidden) -> in_range((visible + hidden)))))

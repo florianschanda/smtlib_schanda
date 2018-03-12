@@ -121,34 +121,10 @@ axiom invariant____def_axiom :
   ((invariant__(package_1__state_var_1, package_1__state_var_2) = true) <->
   (package_1__state_var_1 <= package_1__state_var_2)))
 
-logic state_var_1 : int
-
-logic state_var_2 : int
-
-logic o : int
-
-logic state_var_11 : int
-
-logic result : int
-
-logic state_var_21 : int
-
-logic state_var_12 : int
-
-logic state_var_22 : int
-
-logic state_var_13 : int
-
-logic state_var_23 : int
-
-axiom H : in_range(state_var_1)
-
-axiom H1 : in_range(state_var_2)
-
-axiom H2 : (invariant__(state_var_1, state_var_2) = true)
-
-axiom H3 : ((invariant__(state_var_11, state_var_2) = true) and
-  in_range(state_var_11))
-
  (* File "package_1.adb", line 13, characters 0-0 *)
-goal WP_parameter_def : in_range((state_var_2 + 1))
+goal WP_parameter_def :
+  (forall state_var_1:int. forall state_var_2:int. forall state_var_11:int.
+  (in_range(state_var_1) -> (in_range(state_var_2) ->
+  ((invariant__(state_var_1, state_var_2) = true) ->
+  (((invariant__(state_var_11, state_var_2) = true) and
+  in_range(state_var_11)) -> in_range((state_var_2 + 1)))))))

@@ -665,47 +665,10 @@ logic yy : t
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic x : t
-
-logic y : t
-
-logic result : t
-
-logic x1 : t
-
-logic result1 : t
-
-logic y1 : t
-
-logic result2 : t
-
-logic x2 : t
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : (x = xx)
-
-axiom H3 : true
-
-axiom H4 : (y = yy)
-
-axiom H5 : true
-
-axiom H6 : (result = x)
-
-axiom H7 : (x1 = bw_xor(x, y))
-
-axiom H8 : (result1 = y)
-
-axiom H9 : (y1 = bw_xor(x1, y))
-
-axiom H10 : (result2 = x1)
-
-axiom H11 : (x2 = bw_xor(x1, y1))
-
-axiom H12 : (x2 = yy)
-
  (* File "bitwise.adb", line 17, characters 0-0 *)
-goal WP_parameter_def : (y1 = xx)
+goal WP_parameter_def :
+  (forall x:t. forall y:t. forall result:t. forall x1:t. forall result1:t.
+  forall y1:t. forall result2:t. forall x2:t. ((x = xx) -> ((y = yy) ->
+  (((result = x) and (x1 = bw_xor(x, y))) -> (((result1 = y) and
+  (y1 = bw_xor(x1, y))) -> (((result2 = x1) and (x2 = bw_xor(x1, y1))) ->
+  ((x2 = yy) -> (y1 = xx))))))))

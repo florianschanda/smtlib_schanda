@@ -109,65 +109,16 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic par : int
-
-logic x : int
-
-logic o : int
-
-logic result : int
-
-logic x1 : int
-
-logic par1 : int
-
-logic x2 : int
-
-logic temp___150 : int
-
-logic result1 : int
-
-logic temp___1501 : int
-
-logic result2 : int
-
-logic par2 : int
-
-logic result3 : int
-
-logic x3 : int
-
-axiom H : in_range(par)
-
-axiom H1 : (0 <  par)
-
-axiom H2 : ((0 <= 2147483647) -> in_range(x))
-
-axiom H3 : (result = x)
-
-axiom H4 : (x1 = 0)
-
-axiom H5 : (x2 <  par1)
-
-axiom H6 : (((0 <= 2147483647) -> in_range(x2)) and in_range(par1))
-
-axiom H7 : (temp___150 = result1)
-
-axiom H8 : (temp___1501 = par1)
-
-axiom H9 : ((o = (par1 - 1)) and in_range((par1 - 1)))
-
-axiom H10 : (par1 = result2)
-
-axiom H11 : (par2 = o)
-
-axiom H12 : (not (par2 <= 0))
-
-axiom H13 : ((0 <= 2147483647) -> in_range(x2))
-
-axiom H14 : (x2 = result3)
-
-axiom H15 : (x3 = 0)
-
  (* File "loop_related_legal.adb", line 5, characters 0-0 *)
-goal WP_parameter_def : (par2 <  temp___1501)
+goal WP_parameter_def :
+  (forall par:int. forall x:int. forall o:int. forall result:int.
+  forall x1:int. forall par1:int. forall x2:int. forall temp___173:int.
+  forall result1:int. forall temp___1731:int. forall result2:int.
+  forall par2:int. forall result3:int. forall x3:int. (in_range(par) ->
+  ((0 <  par) -> (((0 <= 2147483647) -> in_range(x)) -> (((result = x) and
+  (x1 = 0)) -> ((x2 <  par1) -> ((((0 <= 2147483647) -> in_range(x2)) and
+  in_range(par1)) -> (((temp___173 = result1) and (temp___1731 = par1)) ->
+  ((((o = (par1 - 1)) and in_range((par1 - 1))) and ((par1 = result2) and
+  (par2 = o))) -> ((not (par2 <= 0)) -> (((0 <= 2147483647) ->
+  in_range(x2)) -> (((x2 = result3) and (x3 = 0)) ->
+  (par2 <  temp___1731)))))))))))))

@@ -1089,34 +1089,17 @@ logic cur_speed : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic speed : t
-
-logic motor : t
-
-logic copy_values__adjust__cur_speed__assume : t
-
-logic o : t
-
-logic speed1 : t
-
-axiom H : tqtisFinite(speed)
-
-axiom H1 : tqtisFinite(motor)
-
-axiom H2 : tqtisFinite(speed1)
-
-axiom H3 : (copy_values__adjust__cur_speed__assume = speed1)
-
-axiom H4 : (copy_values__adjust__cur_speed__assume = cur_speed)
-
-axiom H5 : tqtisFinite(cur_speed)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 100.0))
 
-axiom H6 : lt(fliteral1, abs(cur_speed))
-
  (* File "copy_values.ads", line 4, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(sub(NearestTiesToEven, motor, fliteral))
+goal WP_parameter_def :
+  (forall speed:t. forall motor:t.
+  forall copy_values__adjust__cur_speed__assume:t. forall speed1:t.
+  (tqtisFinite(speed) -> (tqtisFinite(motor) -> (((tqtisFinite(speed1) and
+  (copy_values__adjust__cur_speed__assume = speed1)) and
+  (copy_values__adjust__cur_speed__assume = cur_speed)) ->
+  (tqtisFinite(cur_speed) -> (lt(fliteral1, abs(cur_speed)) ->
+  tqtisFinite(sub(NearestTiesToEven, motor, fliteral))))))))

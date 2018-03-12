@@ -226,29 +226,10 @@ axiom divide__post_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : int
-
-logic o : int
-
-logic result : int
-
-logic x1 : int
-
-logic x2 : int
-
-logic x3 : int
-
-axiom H : in_range(x)
-
-axiom H1 : ((o = divide(x, 2)) and (in_range(o) and (o = comp_div(x,2))))
-
-axiom H2 : (result = x)
-
-axiom H3 : (x1 = o)
-
-axiom H4 : (x1 = x2)
-
-axiom H5 : (x3 = x1)
-
  (* File "somebody.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : (not (2 = 0))
+goal WP_parameter_def :
+  (forall x:int. forall o:int. forall result:int. forall x1:int.
+  forall x2:int. forall x3:int. (in_range(x) -> (((((o = divide(x, 2)) and
+  (in_range(o) and (o = comp_div(x,2)))) and (({ int__content = result } = {
+  int__content = x }) and (x1 = o))) and ((x1 = x2) and (x3 = x1))) ->
+  (not (2 = 0)))))

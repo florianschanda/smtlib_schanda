@@ -45,7 +45,7 @@
 (declare-datatypes () ((poT__ref (mk_poT__ref (poT__content poT)))))
 (define-fun poT__ref___projection ((a poT__ref)) poT (poT__content a))
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
-(define-fun dynamic_invariant ((temp___expr_208 Int) (temp___is_init_205 Bool) (temp___skip_constant_206 Bool) (temp___do_toplevel_207 Bool)) Bool (=> (or (= temp___is_init_205 true) (<= 0 97)) (in_range temp___expr_208)))
+(define-fun dynamic_invariant ((temp___expr_235 Int) (temp___is_init_231 Bool) (temp___skip_constant_232 Bool) (temp___do_toplevel_233 Bool) (temp___do_typ_inv_234 Bool)) Bool (=> (or (= temp___is_init_231 true) (<= 0 97)) (in_range temp___expr_235)))
 (assert (not (<= 48 97)))
 (check-sat)
 (exit)

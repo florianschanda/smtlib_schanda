@@ -113,17 +113,8 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic y : int
-
-logic s : int
-
-logic o : int
-
-axiom H : in_range(x)
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(y))
-
-axiom H2 : in_range(s)
-
  (* File "p1.ads", line 29, characters 0-0 *)
-goal WP_parameter_def : in_range((x + s))
+goal WP_parameter_def :
+  (forall y:int. forall s:int. (in_range(x) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(y)) -> (in_range(s) ->
+  in_range((x + s))))))

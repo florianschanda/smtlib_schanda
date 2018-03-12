@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -139,133 +139,34 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic r : bool
-
-logic enums__enum_lt_5__result : bool
-
-logic result : bool
-
-logic r1 : bool
-
-logic result1 : bool
-
-logic r2 : bool
-
-logic result2 : bool
-
-logic r3 : bool
-
-logic result3 : bool
-
-logic r4 : bool
-
-logic result4 : bool
-
-logic r5 : bool
-
-logic result5 : bool
-
-logic r6 : bool
-
-logic result6 : bool
-
-logic r7 : bool
-
-logic result7 : bool
-
-logic enums__enum_lt_5__result1 : bool
-
-logic enums__enum_lt_5__result2 : bool
-
-logic enums__enum_lt_5__result3 : bool
-
-logic r8 : bool
-
-logic enums__enum_lt_5__result4 : bool
-
-logic r9 : bool
-
-logic enums__enum_lt_5__result5 : bool
-
-logic result8 : bool
-
-axiom H : in_range1(a)
-
-axiom H1 : ((a = 0) -> (result = r))
-
-axiom H2 : ((a = 0) -> (r1 = of_int(1)))
-
-axiom H3 : ((not (a = 0)) -> ((a = 1) -> (result1 = r)))
-
-axiom H4 : ((not (a = 0)) -> ((a = 1) -> (r2 = of_int(1))))
-
-axiom H5 : ((not (a = 0)) -> ((not (a = 1)) -> ((a = 2) -> (result2 = r))))
-
-axiom H6 : ((not (a = 0)) -> ((not (a = 1)) -> ((a = 2) -> (((a = 2) ->
-  (r3 = true)) and ((not (a = 2)) -> (r3 = false))))))
-
-axiom H7 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) -> ((a = 3) ->
-  (result3 = r)))))
-
-axiom H8 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) -> ((a = 3) ->
-  (((not (a = 8)) -> (r4 = true)) and ((a = 8) -> (r4 = false)))))))
-
-axiom H9 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
-  ((not (a = 3)) -> ((a = 4) -> (result4 = r))))))
-
-axiom H10 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
-  ((not (a = 3)) -> ((a = 4) -> (((a <  6) -> (r5 = true)) and
-  ((not (a <  6)) -> (r5 = false))))))))
-
-axiom H11 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
-  ((not (a = 3)) -> ((not (a = 4)) -> ((a = 7) -> (result5 = r)))))))
-
-axiom H12 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
-  ((not (a = 3)) -> ((not (a = 4)) -> ((a = 7) -> (((a <  5) ->
-  (r6 = true)) and ((not (a <  5)) -> (r6 = false)))))))))
-
-axiom H13 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
-  ((not (a = 3)) -> ((not (a = 4)) -> ((not (a = 7)) -> (result6 = r)))))))
-
-axiom H14 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
-  ((not (a = 3)) -> ((not (a = 4)) -> ((not (a = 7)) ->
-  (r7 = of_int(0))))))))
-
-axiom H15 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
-  ((not (a = 3)) -> ((not (a = 4)) -> ((not (a = 7)) -> (r6 = r7)))))))
-
-axiom H16 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
-  ((not (a = 3)) -> ((not (a = 4)) -> (r5 = r6))))))
-
-axiom H17 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
-  ((not (a = 3)) -> (r4 = r5)))))
-
-axiom H18 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
-  (r3 = r4))))
-
-axiom H19 : ((not (a = 0)) -> ((not (a = 1)) -> (r2 = r3)))
-
-axiom H20 : ((not (a = 0)) -> (r1 = r2))
-
-axiom H21 : (enums__enum_lt_5__result1 = enums__enum_lt_5__result2)
-
-axiom H22 : (enums__enum_lt_5__result3 = enums__enum_lt_5__result1)
-
-axiom H23 : (result7 = enums__enum_lt_5__result)
-
-axiom H24 : (enums__enum_lt_5__result1 = r1)
-
-axiom H25 : (enums__enum_lt_5__result4 = enums__enum_lt_5__result2)
-
-axiom H26 : (r8 = r1)
-
-axiom H27 : (enums__enum_lt_5__result5 = enums__enum_lt_5__result3)
-
-axiom H28 : (r9 = r1)
-
-axiom H29 : (result8 = enums__enum_lt_5__result4)
-
-axiom H30 : (enums__enum_lt_5__result4 = true)
-
  (* File "enums.adb", line 42, characters 0-0 *)
-goal WP_parameter_def : (a <  5)
+goal WP_parameter_def :
+  (forall r:bool. forall enums__enum_lt_5__result:bool. forall result:bool.
+  forall r1:bool. forall result1:bool. forall r2:bool. forall result2:bool.
+  forall r3:bool. forall result3:bool. forall r4:bool. forall result4:bool.
+  forall r5:bool. forall result5:bool. forall r6:bool. forall result6:bool.
+  forall r7:bool. forall result7:bool. forall enums__enum_lt_5__result1:bool.
+  forall enums__enum_lt_5__result2:bool.
+  forall enums__enum_lt_5__result3:bool. forall r8:bool.
+  forall enums__enum_lt_5__result4:bool. forall r9:bool.
+  forall enums__enum_lt_5__result5:bool.
+  (forall result8:bool. ((in_range1(a) and ((((((a = 0) and ((result = r) and
+  (r1 = of_int(1)))) or ((not (a = 0)) and ((((a = 1) and ((result1 = r) and
+  (r2 = of_int(1)))) or ((not (a = 1)) and ((((a = 2) and ((result2 = r) and
+  (((a = 2) and (r3 = true)) or ((not (a = 2)) and (r3 = false))))) or
+  ((not (a = 2)) and ((((a = 3) and ((result3 = r) and (((not (a = 8)) and
+  (r4 = true)) or ((a = 8) and (r4 = false))))) or ((not (a = 3)) and
+  ((((a = 4) and ((result4 = r) and (((a <  6) and (r5 = true)) or
+  ((not (a <  6)) and (r5 = false))))) or ((not (a = 4)) and ((((a = 7) and
+  ((result5 = r) and (((a <  5) and (r6 = true)) or ((not (a <  5)) and
+  (r6 = false))))) or ((not (a = 7)) and (((result6 = r) and
+  (r7 = of_int(0))) and (r6 = r7)))) and (r5 = r6)))) and (r4 = r5)))) and
+  (r3 = r4)))) and (r2 = r3)))) and (r1 = r2)))) and
+  (((enums__enum_lt_5__result1 = enums__enum_lt_5__result2) and
+  (enums__enum_lt_5__result3 = enums__enum_lt_5__result1)) and
+  ((result7 = enums__enum_lt_5__result) and
+  (enums__enum_lt_5__result1 = r1)))) and
+  (((enums__enum_lt_5__result4 = enums__enum_lt_5__result2) and
+  (r8 = r1)) and ((enums__enum_lt_5__result5 = enums__enum_lt_5__result3) and
+  (r9 = r1)))) and (result8 = enums__enum_lt_5__result4))) ->
+  ((enums__enum_lt_5__result4 = true) -> (a <  5)))))

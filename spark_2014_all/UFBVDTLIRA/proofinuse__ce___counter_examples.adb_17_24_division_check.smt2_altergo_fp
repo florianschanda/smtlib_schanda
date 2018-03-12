@@ -663,15 +663,9 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic res : t
+logic rliteral : t
 
-logic result : t
-
-logic res1 : t
-
-axiom H : true
-
-axiom H1 : true
+axiom rliteral_axiom : (tqtint(rliteral) = 64)
 
  (* File "counter_examples.adb", line 5, characters 0-0 *)
-goal WP_parameter_def : (not (of_int(64) = zeros))
+goal WP_parameter_def : (not (rliteral = zeros))

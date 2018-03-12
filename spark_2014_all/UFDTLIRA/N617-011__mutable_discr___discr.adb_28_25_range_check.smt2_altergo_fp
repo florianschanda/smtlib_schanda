@@ -355,45 +355,5 @@ type t9b__ref = { t9b__content : us_rep
 
 function t9b__ref___projection(a: t9b__ref) : us_rep = (a).t9b__content
 
-logic us : int
-
-logic o : natural
-
-logic o1 : natural
-
-logic o2 : natural
-
-logic o3 : bool
-
-logic o4 : natural
-
-logic o5 : bool
-
-logic o6 : natural
-
-logic o7 : bool
-
-logic temp___284 : natural
-
-logic temp___2841 : bool
-
-logic o8 : natural
-
-logic o9 : natural
-
-logic o10 : natural
-
-logic o11 : bool
-
-logic o12 : natural
-
-logic o13 : bool
-
-logic o14 : natural
-
-logic o15 : bool
-
-axiom H : in_range(c)
-
  (* File "discr.adb", line 11, characters 0-0 *)
-goal WP_parameter_def : in_range(c)
+goal WP_parameter_def : (in_range(c) -> in_range(c))

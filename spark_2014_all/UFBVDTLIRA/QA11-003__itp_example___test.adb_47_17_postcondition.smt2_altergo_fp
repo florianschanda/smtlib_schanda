@@ -653,65 +653,27 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic b : t
+logic rliteral : t
 
-logic test__test_5__result : t
+axiom rliteral_axiom : (tqtint(rliteral) = 1)
 
-logic result : t
+logic rliteral1 : t
 
-logic b1 : t
-
-logic result1 : t
-
-logic b2 : t
-
-logic result2 : t
-
-logic test__test_5__result1 : t
-
-logic test__test_5__result2 : t
-
-logic test__test_5__result3 : t
-
-logic b3 : t
-
-logic test__test_5__result4 : t
-
-logic b4 : t
-
-logic test__test_5__result5 : t
-
-logic result3 : t
-
-axiom H : true
-
-axiom H1 : (result = b)
-
-axiom H2 : (b1 = a)
-
-axiom H3 : true
-
-axiom H4 : (result1 = b1)
-
-axiom H5 : (b2 = add(b1, of_int(1)))
-
-axiom H6 : (test__test_5__result1 = test__test_5__result2)
-
-axiom H7 : (test__test_5__result3 = test__test_5__result1)
-
-axiom H8 : (result2 = test__test_5__result)
-
-axiom H9 : (test__test_5__result1 = b2)
-
-axiom H10 : (test__test_5__result4 = test__test_5__result2)
-
-axiom H11 : (b3 = b2)
-
-axiom H12 : (test__test_5__result5 = test__test_5__result3)
-
-axiom H13 : (b4 = b2)
-
-axiom H14 : (result3 = test__test_5__result4)
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 5)
 
  (* File "test.adb", line 44, characters 0-0 *)
-goal WP_parameter_def : (test__test_5__result4 = of_int(5))
+goal WP_parameter_def :
+  (forall b:t. forall test__test_5__result:t. forall result:t. forall b1:t.
+  forall result1:t. forall b2:t. forall result2:t.
+  forall test__test_5__result1:t. forall test__test_5__result2:t.
+  forall test__test_5__result3:t. forall b3:t.
+  forall test__test_5__result4:t. forall b4:t.
+  forall test__test_5__result5:t.
+  (forall result3:t. ((((((result = b) and (b1 = a)) and (((result1 = b1) and
+  (b2 = add(b1, rliteral))) and
+  (((test__test_5__result1 = test__test_5__result2) and
+  (test__test_5__result3 = test__test_5__result1)) and
+  ((result2 = test__test_5__result) and (test__test_5__result1 = b2))))) and
+  (((test__test_5__result4 = test__test_5__result2) and (b3 = b2)) and
+  ((test__test_5__result5 = test__test_5__result3) and (b4 = b2)))) and
+  (result3 = test__test_5__result4)) -> (test__test_5__result4 = rliteral1))))

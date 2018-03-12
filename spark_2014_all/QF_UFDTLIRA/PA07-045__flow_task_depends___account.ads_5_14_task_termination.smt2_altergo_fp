@@ -133,13 +133,5 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic num_accounts : int
-
-logic o : int
-
-logic num_accounts1 : int
-
-axiom H : false
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def : true

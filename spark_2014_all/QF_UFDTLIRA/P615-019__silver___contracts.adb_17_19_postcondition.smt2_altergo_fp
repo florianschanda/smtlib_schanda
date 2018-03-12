@@ -137,33 +137,10 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic u : int
-
-logic o : int
-
-logic result : int
-
-logic u1 : int
-
-logic u2 : int
-
-logic u3 : int
-
-axiom H : in_range(x)
-
-axiom H1 : ((0 <= 2147483647) -> in_range1(u))
-
-axiom H2 : (0 <= x)
-
-axiom H3 : ((o = x) and in_range1(x))
-
-axiom H4 : (result = u)
-
-axiom H5 : (u1 = o)
-
-axiom H6 : (u1 = u2)
-
-axiom H7 : (u3 = u1)
-
  (* File "contracts.adb", line 8, characters 0-0 *)
-goal WP_parameter_def : (x = u2)
+goal WP_parameter_def :
+  (forall u:int. forall o:int. forall result:int. forall u1:int.
+  forall u2:int. forall u3:int. ((in_range(x) and (((0 <= 2147483647) ->
+  in_range1(u)) and ((0 <= x) and ((((o = x) and in_range1(x)) and
+  ((result = u) and (u1 = o))) and ((u1 = u2) and (u3 = u1)))))) ->
+  (x = u2)))

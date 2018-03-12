@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -188,24 +188,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -216,17 +198,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -236,37 +218,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 type rritemtype
 
@@ -352,11 +306,6 @@ logic blankdomainname : (int,character) farray
 logic attr__ATTRIBUTE_ADDRESS : int
 
 logic rr_type__blankdomainname__aggregate_def : int -> (int,character) farray
-
-axiom def_axiom :
-  (forall temp___136:int.
-  (forall temp___137:int.
-  ((rr_type__blankdomainname__aggregate_def(temp___136)[temp___137]) = of_rep(temp___136))))
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
@@ -527,968 +476,259 @@ logic attr__ATTRIBUTE_ADDRESS19 : int
 axiom blankdomainname__def_axiom :
   (blankdomainname = rr_type__blankdomainname__aggregate_def(32))
 
-logic newnameserver : (int,character) farray
-
-logic newemail : (int,character) farray
-
-logic success : bool
-
-logic begidx : int
-
-logic endidx : int
-
-logic foundtype : int
-
-logic lengthoftoken : int
-
-logic i : int
-
-logic i1 : int
-
-logic i2 : int
-
-logic i3 : int
-
-logic temp___1731 : int
-
-logic temp___1730 : int
-
-logic temp___1729 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic temp___1736 : int
-
-logic temp___1734 : (int,character) farray
-
-logic temp___1733 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic temp___1732 : int
-
-logic o5 : character
-
-logic o6 : int
-
-logic o7 : (int,character) farray
-
-logic temp___1740 : (int,character) farray
-
-logic temp___1739 : int
-
-logic o8 : character
-
-logic o9 : (int,character) farray
-
-logic o10 : int
-
-logic o11 : int
-
-logic temp___1747 : int
-
-logic temp___1748 : int
-
-logic temp___1745 : (int,character) farray
-
-logic o12 : int
-
-logic o13 : int
-
-logic temp___1744 : int
-
-logic o14 : character
-
-logic o15 : int
-
-logic o16 : (int,character) farray
-
-logic o17 : character
-
-logic o18 : (int,character) farray
-
-logic success1 : bool
-
-logic lengthoftoken1 : int
-
-logic i4 : int
-
-logic i5 : int
-
-logic result : int
-
-logic begidx1 : int
-
-logic result1 : (int,character) farray
-
-logic newnameserver1 : (int,character) farray
-
-logic result2 : (int,character) farray
-
-logic newemail1 : (int,character) farray
-
-logic begidx2 : int
-
-logic endidx1 : int
-
-logic foundtype1 : int
-
-logic begidx3 : int
-
-logic endidx2 : int
-
-logic foundtype2 : int
-
-logic result3 : int
-
-logic begidx4 : int
-
-logic begidx5 : int
-
-logic endidx3 : int
-
-logic foundtype3 : int
-
-logic begidx6 : int
-
-logic endidx4 : int
-
-logic foundtype4 : int
-
-logic begidx7 : int
-
-logic endidx5 : int
-
-logic foundtype5 : int
-
-logic begidx8 : int
-
-logic endidx6 : int
-
-logic foundtype6 : int
-
-logic begidx9 : int
-
-logic endidx7 : int
-
-logic foundtype7 : int
-
-logic begidx10 : int
-
-logic endidx8 : int
-
-logic foundtype8 : int
-
-logic begidx11 : int
-
-logic endidx9 : int
-
-logic foundtype9 : int
-
-logic result4 : bool
-
-logic success2 : bool
-
-logic result5 : int
-
-logic begidx12 : int
-
-logic begidx13 : int
-
-logic endidx10 : int
-
-logic foundtype10 : int
-
-logic result6 : int
-
-logic lengthoftoken2 : int
-
-logic result7 : bool
-
-logic success3 : bool
-
-logic result8 : bool
-
-logic success4 : bool
-
-logic result9 : int
-
-logic i6 : int
-
-logic newnameserver2 : (int,character) farray
-
-logic i7 : int
-
-logic result10 : (int,character) farray
-
-logic newnameserver3 : (int,character) farray
-
-logic result11 : int
-
-logic i8 : int
-
-logic newnameserver4 : (int,character) farray
-
-logic i9 : int
-
-logic newnameserver5 : (int,character) farray
-
-logic i10 : int
-
-logic newnameserver6 : (int,character) farray
-
-logic i11 : int
-
-logic newnameserver7 : (int,character) farray
-
-logic i12 : int
-
-logic newnameserver8 : (int,character) farray
-
-logic i13 : int
-
-logic newnameserver9 : (int,character) farray
-
-logic i14 : int
-
-logic newnameserver10 : (int,character) farray
-
-logic i15 : int
-
-logic newnameserver11 : (int,character) farray
-
-logic i16 : int
-
-logic result12 : int
-
-logic i17 : int
-
-logic newnameserver12 : (int,character) farray
-
-logic i18 : int
-
-logic result13 : (int,character) farray
-
-logic newnameserver13 : (int,character) farray
-
-logic result14 : int
-
-logic i19 : int
-
-logic newnameserver14 : (int,character) farray
-
-logic i20 : int
-
-logic newnameserver15 : (int,character) farray
-
-logic i21 : int
-
-logic newnameserver16 : (int,character) farray
-
-logic i22 : int
-
-logic newnameserver17 : (int,character) farray
-
-logic i23 : int
-
-logic newnameserver18 : (int,character) farray
-
-logic i24 : int
-
-logic newnameserver19 : (int,character) farray
-
-logic i25 : int
-
-logic newnameserver20 : (int,character) farray
-
-logic i26 : int
-
-logic newnameserver21 : (int,character) farray
-
-logic i27 : int
-
-logic newnameserver22 : (int,character) farray
-
-logic success5 : bool
-
-logic i28 : int
-
-logic i29 : int
-
-logic newnameserver23 : (int,character) farray
-
-logic success6 : bool
-
-logic i30 : int
-
-logic i31 : int
-
-logic newnameserver24 : (int,character) farray
-
-logic success7 : bool
-
-logic i32 : int
-
-logic i33 : int
-
-logic newnameserver25 : (int,character) farray
-
-logic success8 : bool
-
-logic i34 : int
-
-logic i35 : int
-
-logic newnameserver26 : (int,character) farray
-
-logic success9 : bool
-
-logic begidx14 : int
-
-logic endidx11 : int
-
-logic foundtype11 : int
-
-logic lengthoftoken3 : int
-
-logic i36 : int
-
-logic i37 : int
-
-logic newnameserver27 : (int,character) farray
-
-logic success10 : bool
-
-logic begidx15 : int
-
-logic endidx12 : int
-
-logic foundtype12 : int
-
-logic lengthoftoken4 : int
-
-logic i38 : int
-
-logic i39 : int
-
-logic result15 : int
-
-logic begidx16 : int
-
-logic begidx17 : int
-
-logic endidx13 : int
-
-logic foundtype13 : int
-
-logic result16 : int
-
-logic lengthoftoken5 : int
-
-logic result17 : int
-
-logic i40 : int
-
-logic newemail2 : (int,character) farray
-
-logic i41 : int
-
-logic result18 : (int,character) farray
-
-logic newemail3 : (int,character) farray
-
-logic result19 : int
-
-logic i42 : int
-
-logic newemail4 : (int,character) farray
-
-logic i43 : int
-
-logic newemail5 : (int,character) farray
-
-logic i44 : int
-
-logic newemail6 : (int,character) farray
-
-logic i45 : int
-
-logic newemail7 : (int,character) farray
-
-logic i46 : int
-
-logic newemail8 : (int,character) farray
-
-logic i47 : int
-
-logic newemail9 : (int,character) farray
-
-logic i48 : int
-
-logic newemail10 : (int,character) farray
-
-logic i49 : int
-
-logic newemail11 : (int,character) farray
-
-logic i50 : int
-
-logic result20 : int
-
-logic i51 : int
-
-logic newemail12 : (int,character) farray
-
-logic i52 : int
-
-logic result21 : (int,character) farray
-
-logic newemail13 : (int,character) farray
-
-logic result22 : int
-
-logic i53 : int
-
-logic newemail14 : (int,character) farray
-
-logic i54 : int
-
-logic newemail15 : (int,character) farray
-
-logic i55 : int
-
-axiom H : (rr_type__blankdomainname__aggregate_def(32) = blankdomainname)
-
-axiom H1 : in_range4(zlength)
-
-axiom H2 : (result = begidx)
-
-axiom H3 : (begidx1 = 1)
-
-axiom H4 : in_range4(begidx1)
-
-axiom H5 : ((1 <= 256) -> in_range4(endidx))
-
-axiom H6 : ((0 <= 10) -> in_range3(foundtype))
-
-axiom H7 : ((1 <= 256) -> in_range4(lengthoftoken))
-
-axiom H8 : (result1 = newnameserver)
-
-axiom H9 : (newnameserver1 = blankdomainname)
-
-axiom H10 : (result2 = newemail)
-
-axiom H11 : (newemail1 = blankdomainname)
-
-axiom H12 : (((((begidx2 <= endidx1) and (begidx2 <= zlength)) and
+axiom def_axiom :
+  (forall temp___158:int. (in_range2(temp___158) ->
+  (forall temp___159:int.
+  (to_rep((rr_type__blankdomainname__aggregate_def(temp___158)[temp___159])) = temp___158))))
+
+ (* File "zone_file_parser.adb", line 1186, characters 0-0 *)
+goal WP_parameter_def :
+  (forall newnameserver:(int,character) farray.
+  forall newemail:(int,character) farray. forall success:bool.
+  forall begidx:int. forall endidx:int. forall foundtype:int.
+  forall lengthoftoken:int. forall i:int. forall i1:int. forall i2:int.
+  forall i3:int. forall temp___1790:int. forall temp___1789:int.
+  forall temp___1788:int. forall o:int. forall o1:int. forall o2:int.
+  forall temp___1795:int. forall temp___1793:(int,character) farray.
+  forall temp___1792:int. forall o3:int. forall o4:int.
+  forall temp___1791:int. forall o5:character. forall o6:int.
+  forall o7:(int,character) farray.
+  forall temp___1799:(int,character) farray. forall temp___1798:int.
+  forall o8:character. forall o9:(int,character) farray. forall o10:int.
+  forall o11:int. forall temp___1806:int. forall temp___1807:int.
+  forall temp___1804:(int,character) farray. forall o12:int. forall o13:int.
+  forall temp___1803:int. forall o14:character. forall o15:int.
+  forall o16:(int,character) farray. forall o17:character.
+  forall o18:(int,character) farray. forall success1:bool.
+  forall lengthoftoken1:int. forall i4:int. forall i5:int. forall result:int.
+  forall begidx1:int. forall result1:(int,character) farray.
+  forall newnameserver1:(int,character) farray.
+  forall result2:(int,character) farray.
+  forall newemail1:(int,character) farray. forall begidx2:int.
+  forall endidx1:int. forall foundtype1:int. forall begidx3:int.
+  forall endidx2:int. forall foundtype2:int. forall result3:int.
+  forall begidx4:int. forall begidx5:int. forall endidx3:int.
+  forall foundtype3:int. forall begidx6:int. forall endidx4:int.
+  forall foundtype4:int. forall begidx7:int. forall endidx5:int.
+  forall foundtype5:int. forall begidx8:int. forall endidx6:int.
+  forall foundtype6:int. forall begidx9:int. forall endidx7:int.
+  forall foundtype7:int. forall result4:bool. forall success2:bool.
+  forall result5:int. forall begidx10:int. forall begidx11:int.
+  forall endidx8:int. forall foundtype8:int. forall result6:int.
+  forall lengthoftoken2:int. forall result7:bool. forall success3:bool.
+  forall result8:bool. forall success4:bool. forall result9:int.
+  forall i6:int. forall newnameserver2:(int,character) farray. forall i7:int.
+  forall result10:(int,character) farray.
+  forall newnameserver3:(int,character) farray.
+  forall newnameserver4:(int,character) farray. forall i8:int.
+  forall newnameserver5:(int,character) farray. forall i9:int.
+  forall newnameserver6:(int,character) farray. forall i10:int.
+  forall newnameserver7:(int,character) farray. forall i11:int.
+  forall result11:int. forall i12:int.
+  forall newnameserver8:(int,character) farray. forall i13:int.
+  forall result12:(int,character) farray.
+  forall newnameserver9:(int,character) farray.
+  forall newnameserver10:map__ref. forall i14:int__ref.
+  forall newnameserver11:(int,character) farray. forall i15:int.
+  forall newnameserver12:map__ref. forall i16:int__ref.
+  forall newnameserver13:(int,character) farray. forall i17:int.
+  forall newnameserver14:map__ref. forall success5:bool__ref.
+  forall i18:int__ref. forall i19:int__ref.
+  forall newnameserver15:(int,character) farray. forall success6:bool.
+  forall i20:int. forall i21:int. forall newnameserver16:map__ref.
+  forall success7:bool__ref. forall i22:int__ref. forall i23:int__ref.
+  forall newnameserver17:(int,character) farray. forall success8:bool.
+  forall i24:int. forall i25:int. forall newnameserver18:map__ref.
+  forall success9:bool__ref. forall begidx12:int__ref.
+  forall endidx9:int__ref. forall foundtype9:int__ref.
+  forall lengthoftoken3:int__ref. forall i26:int__ref. forall i27:int__ref.
+  forall newnameserver19:(int,character) farray. forall success10:bool.
+  forall begidx13:int. forall endidx10:int. forall foundtype10:int.
+  forall lengthoftoken4:int. forall i28:int. forall i29:int.
+  forall result13:int__ref. forall begidx14:int. forall begidx15:int.
+  forall endidx11:int. forall foundtype11:int. forall result14:int__ref.
+  forall lengthoftoken5:int. forall result15:int__ref. forall i30:int.
+  forall newemail2:(int,character) farray. forall i31:int.
+  forall result16:map__ref. forall newemail3:(int,character) farray.
+  forall newemail4:map__ref. forall i32:int__ref.
+  forall newemail5:(int,character) farray. forall i33:int.
+  forall newemail6:map__ref. forall i34:int__ref.
+  forall newemail7:(int,character) farray. forall i35:int.
+  forall result17:int__ref. forall i36:int.
+  forall newemail8:(int,character) farray. forall i37:int.
+  forall result18:map__ref. forall newemail9:(int,character) farray.
+  forall result19:int__ref. forall i38:int. forall newemail10:map__ref.
+  forall i39:int__ref. forall newemail11:(int,character) farray.
+  forall i40:int.
+  ((rr_type__blankdomainname__aggregate_def(32) = blankdomainname) ->
+  (in_range4(zlength) -> (((result = begidx) and (begidx1 = 1)) ->
+  (in_range4(begidx1) -> (((1 <= 256) -> in_range4(endidx)) -> (((0 <= 10) ->
+  in_range3(foundtype)) -> (((1 <= 256) -> in_range4(lengthoftoken)) ->
+  (((result1 = newnameserver) and (newnameserver1 = blankdomainname)) ->
+  (((result2 = newemail) and (newemail1 = blankdomainname)) ->
+  ((((((begidx2 <= endidx1) and (begidx2 <= zlength)) and
   (endidx1 <= zlength)) and ((foundtype1 = 1) ->
-  (forall i56:int. (((begidx2 <= i56) and (i56 <= endidx1)) ->
-  ((48 <= to_rep((zonefileline[i56]))) and
-  (to_rep((zonefileline[i56])) <= 57)))))) and ((in_range4(begidx2) and
-  in_range4(endidx1)) and in_range3(foundtype1)))
-
-axiom H13 : (((not (foundtype1 = 3)) and (endidx1 <  zlength)) ->
-  (((temp___1731 = foundtype1) and ((temp___1730 = endidx1) and
-  ((temp___1729 = begidx2) and ((endidx2 <  zlength) and ((((((1 <= 256) ->
+  (forall i41:int. (((begidx2 <= i41) and (i41 <= endidx1)) ->
+  ((48 <= to_rep((zonefileline[i41]))) and
+  (to_rep((zonefileline[i41])) <= 57)))))) and ((in_range4(begidx2) and
+  in_range4(endidx1)) and in_range3(foundtype1))) ->
+  (((((not (foundtype1 = 3)) and (endidx1 <  zlength)) and
+  ((((temp___1790 = foundtype1) and ((temp___1789 = endidx1) and
+  ((temp___1788 = begidx2) and ((endidx2 <  zlength) and ((((((1 <= 256) ->
   in_range4(begidx3)) and ((1 <= 256) -> in_range4(endidx2))) and
   ((0 <= 10) -> in_range3(foundtype2))) and ((not (foundtype2 = 3)) and
   (endidx2 <  zlength))) and ((((o = (endidx2 + 1)) and
   in_range4((endidx2 + 1))) and ((begidx3 = result3) and (begidx4 = o))) and
   ((((((begidx5 <= endidx3) and (begidx5 <= zlength)) and
   (endidx3 <= zlength)) and ((foundtype3 = 1) ->
-  (forall i56:int. (((begidx5 <= i56) and (i56 <= endidx3)) ->
-  ((48 <= to_rep((zonefileline[i56]))) and
-  (to_rep((zonefileline[i56])) <= 57)))))) and ((in_range4(begidx5) and
+  (forall i41:int. (((begidx5 <= i41) and (i41 <= endidx3)) ->
+  ((48 <= to_rep((zonefileline[i41]))) and
+  (to_rep((zonefileline[i41])) <= 57)))))) and ((in_range4(begidx5) and
   in_range4(endidx3)) and in_range3(foundtype3))) and
   (not ((not (foundtype3 = 3)) and (endidx3 <  zlength)))))))))) and
-  (((foundtype3 = foundtype6) and ((endidx3 = endidx6) and
-  (begidx5 = begidx8))) and ((foundtype7 = foundtype3) and
-  ((endidx7 = endidx3) and (begidx9 = begidx5))))))
-
-axiom H14 : (((not (foundtype1 = 3)) and (endidx1 <  zlength)) ->
-  (foundtype8 = foundtype6))
-
-axiom H15 : (((not (foundtype1 = 3)) and (endidx1 <  zlength)) ->
-  (endidx8 = endidx6))
-
-axiom H16 : (((not (foundtype1 = 3)) and (endidx1 <  zlength)) ->
-  (begidx10 = begidx8))
-
-axiom H17 : (((not (foundtype1 = 3)) and (endidx1 <  zlength)) ->
-  (foundtype9 = foundtype7))
-
-axiom H18 : (((not (foundtype1 = 3)) and (endidx1 <  zlength)) ->
-  (endidx9 = endidx7))
-
-axiom H19 : (((not (foundtype1 = 3)) and (endidx1 <  zlength)) ->
-  (begidx11 = begidx9))
-
-axiom H20 : ((not ((not (foundtype1 = 3)) and (endidx1 <  zlength))) ->
-  (foundtype8 = foundtype1))
-
-axiom H21 : ((not ((not (foundtype1 = 3)) and (endidx1 <  zlength))) ->
-  (endidx8 = endidx1))
-
-axiom H22 : ((not ((not (foundtype1 = 3)) and (endidx1 <  zlength))) ->
-  (begidx10 = begidx2))
-
-axiom H23 : ((not ((not (foundtype1 = 3)) and (endidx1 <  zlength))) ->
-  (foundtype9 = foundtype1))
-
-axiom H24 : ((not ((not (foundtype1 = 3)) and (endidx1 <  zlength))) ->
-  (endidx9 = endidx1))
-
-axiom H25 : ((not ((not (foundtype1 = 3)) and (endidx1 <  zlength))) ->
-  (begidx11 = begidx2))
-
-axiom H26 : ((zlength <= endidx8) -> (result4 = success))
-
-axiom H27 : ((zlength <= endidx8) -> (success2 = of_int(0)))
-
-axiom H28 : ((zlength <= endidx8) -> (i37 = i1))
-
-axiom H29 : ((zlength <= endidx8) -> (i36 = i))
-
-axiom H30 : ((zlength <= endidx8) -> (lengthoftoken3 = lengthoftoken))
-
-axiom H31 : ((zlength <= endidx8) -> (foundtype11 = foundtype8))
-
-axiom H32 : ((zlength <= endidx8) -> (endidx11 = endidx8))
-
-axiom H33 : ((zlength <= endidx8) -> (begidx14 = begidx10))
-
-axiom H34 : ((zlength <= endidx8) -> (success9 = success2))
-
-axiom H35 : ((zlength <= endidx8) -> (newnameserver26 = newnameserver1))
-
-axiom H36 : ((zlength <= endidx8) -> (i39 = i5))
-
-axiom H37 : ((zlength <= endidx8) -> (i38 = i4))
-
-axiom H38 : ((zlength <= endidx8) -> (lengthoftoken4 = lengthoftoken1))
-
-axiom H39 : ((zlength <= endidx8) -> (foundtype12 = foundtype9))
-
-axiom H40 : ((zlength <= endidx8) -> (endidx12 = endidx9))
-
-axiom H41 : ((zlength <= endidx8) -> (begidx15 = begidx11))
-
-axiom H42 : ((zlength <= endidx8) -> (success10 = success2))
-
-axiom H43 : ((zlength <= endidx8) -> (newnameserver27 = newnameserver1))
-
-axiom H44 : ((not (zlength <= endidx8)) -> ((o1 = (endidx8 + 1)) and
-  in_range4((endidx8 + 1))))
-
-axiom H45 : ((not (zlength <= endidx8)) -> (result5 = begidx10))
-
-axiom H46 : ((not (zlength <= endidx8)) -> (begidx12 = o1))
-
-axiom H47 : ((not (zlength <= endidx8)) -> (((((begidx13 <= endidx10) and
-  (begidx13 <= zlength)) and (endidx10 <= zlength)) and ((foundtype10 = 1) ->
-  (forall i56:int. (((begidx13 <= i56) and (i56 <= endidx10)) ->
-  ((48 <= to_rep((zonefileline[i56]))) and
-  (to_rep((zonefileline[i56])) <= 57)))))) and ((in_range4(begidx13) and
-  in_range4(endidx10)) and in_range3(foundtype10))))
-
-axiom H48 : ((not (zlength <= endidx8)) ->
-  ((o2 = ((endidx10 - begidx13) + 1)) and
-  in_range4(((endidx10 - begidx13) + 1))))
-
-axiom H49 : ((not (zlength <= endidx8)) -> (result6 = lengthoftoken))
-
-axiom H50 : ((not (zlength <= endidx8)) -> (lengthoftoken2 = o2))
-
-axiom H51 : ((not (zlength <= endidx8)) -> ((not (foundtype10 = 0)) ->
-  (result7 = success)))
-
-axiom H52 : ((not (zlength <= endidx8)) -> ((not (foundtype10 = 0)) ->
-  (success3 = of_int(0))))
-
-axiom H53 : ((not (zlength <= endidx8)) -> ((not (foundtype10 = 0)) ->
-  (i33 = i1)))
-
-axiom H54 : ((not (zlength <= endidx8)) -> ((not (foundtype10 = 0)) ->
-  (i32 = i)))
-
-axiom H55 : ((not (zlength <= endidx8)) -> ((not (foundtype10 = 0)) ->
-  (success7 = success3)))
-
-axiom H56 : ((not (zlength <= endidx8)) -> ((not (foundtype10 = 0)) ->
-  (newnameserver24 = newnameserver1)))
-
-axiom H57 : ((not (zlength <= endidx8)) -> ((not (foundtype10 = 0)) ->
-  (i35 = i5)))
-
-axiom H58 : ((not (zlength <= endidx8)) -> ((not (foundtype10 = 0)) ->
-  (i34 = i4)))
-
-axiom H59 : ((not (zlength <= endidx8)) -> ((not (foundtype10 = 0)) ->
-  (success8 = success3)))
-
-axiom H60 : ((not (zlength <= endidx8)) -> ((not (foundtype10 = 0)) ->
-  (newnameserver25 = newnameserver1)))
-
-axiom H61 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((128 <  lengthoftoken2) -> (result8 = success))))
-
-axiom H62 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((128 <  lengthoftoken2) -> (success4 = of_int(0)))))
-
-axiom H63 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((128 <  lengthoftoken2) -> (i29 = i1))))
-
-axiom H64 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((128 <  lengthoftoken2) -> (i28 = i))))
-
-axiom H65 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((128 <  lengthoftoken2) -> (success5 = success4))))
-
-axiom H66 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((128 <  lengthoftoken2) -> (newnameserver22 = newnameserver1))))
-
-axiom H67 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((128 <  lengthoftoken2) -> (i31 = i5))))
-
-axiom H68 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((128 <  lengthoftoken2) -> (i30 = i4))))
-
-axiom H69 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((128 <  lengthoftoken2) -> (success6 = success4))))
-
-axiom H70 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((128 <  lengthoftoken2) -> (newnameserver23 = newnameserver1))))
-
-axiom H71 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> (begidx13 = r97b))))
-
-axiom H72 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> in_range4(r97b))))
-
-axiom H73 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> (endidx10 = r98b))))
-
-axiom H74 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> in_range4(r98b))))
-
-axiom H75 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> (result9 = i))))
-
-axiom H76 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> (i6 = r97b))))
-
-axiom H77 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> (((r97b <= i6) and (i6 <= r98b)) ->
-  (((temp___1736 = endidx10) and ((temp___1734 = newnameserver1) and
-  ((temp___1733 = i6) and ((((1 <= begidx13) and
-  (((endidx10 - begidx13) + 1) <= 128)) and (endidx10 = temp___1736)) and
+  (((foundtype3 = foundtype4) and ((endidx3 = endidx4) and
+  (begidx5 = begidx6))) and ((foundtype5 = foundtype3) and
+  ((endidx5 = endidx3) and (begidx7 = begidx5))))) and ((({ int__content =
+  foundtype6 } = { int__content = foundtype4 }) and (({ int__content =
+  endidx6 } = { int__content = endidx4 }) and ({ int__content = begidx8 } = {
+  int__content = begidx6 }))) and ((foundtype7 = foundtype5) and
+  ((endidx7 = endidx5) and (begidx9 = begidx7)))))) or
+  ((not ((not (foundtype1 = 3)) and (endidx1 <  zlength))) and
+  (((foundtype1 = foundtype6) and ((endidx1 = endidx6) and
+  (begidx2 = begidx8))) and ((foundtype7 = foundtype1) and
+  ((endidx7 = endidx1) and (begidx9 = begidx2)))))) ->
+  ((((zlength <= endidx6) and (((result4 = success) and
+  (success2 = of_int(0))) and (((i27 = { int__content = i1 }) and ((i26 = {
+  int__content = i }) and ((lengthoftoken3 = { int__content = lengthoftoken
+  }) and ((foundtype9 = { int__content = foundtype6 }) and ((endidx9 = {
+  int__content = endidx6 }) and ((begidx12 = { int__content = begidx8 }) and
+  ((success9 = { bool__content = success2 }) and (newnameserver18 = {
+  map__content = newnameserver1 })))))))) and ((i29 = i5) and ((i28 = i4) and
+  ((lengthoftoken4 = lengthoftoken1) and ((foundtype10 = foundtype7) and
+  ((endidx10 = endidx7) and ((begidx13 = begidx9) and
+  ((success10 = success2) and (newnameserver19 = newnameserver1))))))))))) or
+  ((not (zlength <= endidx6)) and (((((o1 = (endidx6 + 1)) and
+  in_range4((endidx6 + 1))) and ((result5 = begidx8) and
+  (begidx10 = o1))) and ((((((begidx11 <= endidx8) and
+  (begidx11 <= zlength)) and (endidx8 <= zlength)) and ((foundtype8 = 1) ->
+  (forall i41:int. (((begidx11 <= i41) and (i41 <= endidx8)) ->
+  ((48 <= to_rep((zonefileline[i41]))) and
+  (to_rep((zonefileline[i41])) <= 57)))))) and ((in_range4(begidx11) and
+  in_range4(endidx8)) and in_range3(foundtype8))) and
+  ((((o2 = ((endidx8 - begidx11) + 1)) and
+  in_range4(((endidx8 - begidx11) + 1))) and ((result6 = lengthoftoken) and
+  (lengthoftoken2 = o2))) and (((not (foundtype8 = 0)) and
+  (((result7 = success) and (success3 = of_int(0))) and (((i23 = {
+  int__content = i1 }) and ((i22 = { int__content = i }) and ((success7 = {
+  bool__content = success3 }) and (newnameserver16 = { map__content =
+  newnameserver1 })))) and ((i25 = i5) and ((i24 = i4) and
+  ((success8 = success3) and (newnameserver17 = newnameserver1))))))) or
+  ((foundtype8 = 0) and ((((128 <  lengthoftoken2) and
+  (((result8 = success) and (success4 = of_int(0))) and (((i19 = {
+  int__content = i1 }) and ((i18 = { int__content = i }) and ((success5 = {
+  bool__content = success4 }) and (newnameserver14 = { map__content =
+  newnameserver1 })))) and ((i21 = i5) and ((i20 = i4) and
+  ((success6 = success4) and (newnameserver15 = newnameserver1))))))) or
+  ((not (128 <  lengthoftoken2)) and ((((begidx11 = r97b) and
+  in_range4(r97b)) and (((endidx8 = r98b) and in_range4(r98b)) and
+  ((((result9 = i) and (i6 = r97b)) and ((((r97b <= i6) and (i6 <= r98b)) and
+  ((((temp___1795 = endidx8) and ((temp___1793 = newnameserver1) and
+  ((temp___1792 = i6) and ((((1 <= begidx11) and
+  (((endidx8 - begidx11) + 1) <= 128)) and (endidx8 = temp___1795)) and
   ((((r97b <= r98b) -> dynamic_property(r97b, r98b, i7)) and
   ((r97b <= i7) and (i7 <= r98b))) and
   ((((to_rep(o5) = to_rep((zonefileline[i7]))) and ((((((o3 = (i7 + 1)) and
-  in_range1((i7 + 1))) and (o4 = (o3 - begidx13))) and
-  ((temp___1732 = o4) and in_range1(o4))) and (((1 <= temp___1732) and
-  (temp___1732 <= 128)) and (o6 = temp___1732))) and
+  in_range1((i7 + 1))) and (o4 = (o3 - begidx11))) and
+  ((temp___1791 = o4) and in_range1(o4))) and (((1 <= temp___1791) and
+  (temp___1791 <= 128)) and (o6 = temp___1791))) and
   (o7 = (newnameserver2[o6 <- o5])))) and ((result10 = newnameserver2) and
-  (newnameserver3 = o7))) and (i7 = r98b))))))) and (((i13 = i7) and
-  (newnameserver8 = newnameserver3)) and ((i14 = i7) and
-  (newnameserver9 = newnameserver3))))))))
-
-axiom H78 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> (((r97b <= i6) and (i6 <= r98b)) ->
-  (i15 = i13)))))
-
-axiom H79 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> (((r97b <= i6) and (i6 <= r98b)) ->
-  (newnameserver10 = newnameserver8)))))
-
-axiom H80 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> (((r97b <= i6) and (i6 <= r98b)) ->
-  (i16 = i14)))))
-
-axiom H81 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> (((r97b <= i6) and (i6 <= r98b)) ->
-  (newnameserver11 = newnameserver9)))))
-
-axiom H82 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> ((not ((r97b <= i6) and (i6 <= r98b))) ->
-  (i15 = i6)))))
-
-axiom H83 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> ((not ((r97b <= i6) and (i6 <= r98b))) ->
-  (newnameserver10 = newnameserver1)))))
-
-axiom H84 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> ((not ((r97b <= i6) and (i6 <= r98b))) ->
-  (i16 = i6)))))
-
-axiom H85 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> ((not ((r97b <= i6) and (i6 <= r98b))) ->
-  (newnameserver11 = newnameserver1)))))
-
-axiom H86 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> ((endidx10 + 1) = r100b))))
-
-axiom H87 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> in_range1(r100b))))
-
-axiom H88 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> (result12 = i1))))
-
-axiom H89 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> (i17 = r100b))))
-
-axiom H90 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> (((r100b <= i17) and (i17 <= 128)) ->
-  (((temp___1740 = newnameserver10) and ((temp___1739 = i17) and
-  ((1 <= endidx10) and (((((r100b <= 128) -> dynamic_property1(r100b, 128,
-  i18)) and
-  (forall temp___1741:int. (((1 <= temp___1741) and (temp___1741 <= 128)) ->
-  ((i18 <= temp___1741) ->
-  ((newnameserver12[temp___1741]) = (temp___1740[temp___1741])))))) and
-  ((r100b <= i18) and (i18 <= 128))) and ((((to_rep(o8) = 32) and
-  (o9 = (newnameserver12[i18 <- o8]))) and ((result13 = newnameserver12) and
-  (newnameserver13 = o9))) and (i18 = 128)))))) and (((i24 = i18) and
-  (newnameserver18 = newnameserver13)) and ((i25 = i18) and
-  (newnameserver19 = newnameserver13))))))))
-
-axiom H91 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> (((r100b <= i17) and (i17 <= 128)) ->
-  (i26 = i24)))))
-
-axiom H92 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> (((r100b <= i17) and (i17 <= 128)) ->
-  (newnameserver20 = newnameserver18)))))
-
-axiom H93 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> (((r100b <= i17) and (i17 <= 128)) ->
-  (i27 = i25)))))
-
-axiom H94 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> (((r100b <= i17) and (i17 <= 128)) ->
-  (newnameserver21 = newnameserver19)))))
-
-axiom H95 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> ((not ((r100b <= i17) and
-  (i17 <= 128))) -> (i26 = i17)))))
-
-axiom H96 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> ((not ((r100b <= i17) and
-  (i17 <= 128))) -> (newnameserver20 = newnameserver10)))))
-
-axiom H97 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> ((not ((r100b <= i17) and
-  (i17 <= 128))) -> (i27 = i17)))))
-
-axiom H98 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> ((not ((r100b <= i17) and
-  (i17 <= 128))) -> (newnameserver21 = newnameserver11)))))
-
-axiom H99 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> (i29 = i26))))
-
-axiom H100 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> (i28 = i15))))
-
-axiom H101 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> (success5 = success))))
-
-axiom H102 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> (newnameserver22 = newnameserver20))))
-
-axiom H103 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> (i31 = i27))))
-
-axiom H104 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> (i30 = i16))))
-
-axiom H105 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> (success6 = success1))))
-
-axiom H106 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  ((not (128 <  lengthoftoken2)) -> (newnameserver23 = newnameserver21))))
-
-axiom H107 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  (i33 = i29)))
-
-axiom H108 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  (i32 = i28)))
-
-axiom H109 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  (success7 = success5)))
-
-axiom H110 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  (newnameserver24 = newnameserver22)))
-
-axiom H111 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  (i35 = i31)))
-
-axiom H112 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  (i34 = i30)))
-
-axiom H113 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  (success8 = success6)))
-
-axiom H114 : ((not (zlength <= endidx8)) -> ((foundtype10 = 0) ->
-  (newnameserver25 = newnameserver23)))
-
-axiom H115 : ((not (zlength <= endidx8)) -> (i37 = i33))
-
-axiom H116 : ((not (zlength <= endidx8)) -> (i36 = i32))
-
-axiom H117 : ((not (zlength <= endidx8)) ->
-  (lengthoftoken3 = lengthoftoken2))
-
-axiom H118 : ((not (zlength <= endidx8)) -> (foundtype11 = foundtype10))
-
-axiom H119 : ((not (zlength <= endidx8)) -> (endidx11 = endidx10))
-
-axiom H120 : ((not (zlength <= endidx8)) -> (begidx14 = begidx13))
-
-axiom H121 : ((not (zlength <= endidx8)) -> (success9 = success7))
-
-axiom H122 : ((not (zlength <= endidx8)) ->
-  (newnameserver26 = newnameserver24))
-
-axiom H123 : ((not (zlength <= endidx8)) -> (i39 = i35))
-
-axiom H124 : ((not (zlength <= endidx8)) -> (i38 = i34))
-
-axiom H125 : ((not (zlength <= endidx8)) ->
-  (lengthoftoken4 = lengthoftoken2))
-
-axiom H126 : ((not (zlength <= endidx8)) -> (foundtype12 = foundtype10))
-
-axiom H127 : ((not (zlength <= endidx8)) -> (endidx12 = endidx10))
-
-axiom H128 : ((not (zlength <= endidx8)) -> (begidx15 = begidx13))
-
-axiom H129 : ((not (zlength <= endidx8)) -> (success10 = success8))
-
-axiom H130 : ((not (zlength <= endidx8)) ->
-  (newnameserver27 = newnameserver25))
-
-axiom H131 : (not (zlength <= endidx11))
-
-axiom H132 : ((o10 = (endidx11 + 1)) and in_range4((endidx11 + 1)))
-
-axiom H133 : (result15 = begidx14)
-
-axiom H134 : (begidx16 = o10)
-
-axiom H135 : (((((begidx17 <= endidx13) and (begidx17 <= zlength)) and
-  (endidx13 <= zlength)) and ((foundtype13 = 1) ->
-  (forall i56:int. (((begidx17 <= i56) and (i56 <= endidx13)) ->
-  ((48 <= to_rep((zonefileline[i56]))) and
-  (to_rep((zonefileline[i56])) <= 57)))))) and ((in_range4(begidx17) and
-  in_range4(endidx13)) and in_range3(foundtype13)))
-
-axiom H136 : ((o11 = ((endidx13 - begidx17) + 1)) and
-  in_range4(((endidx13 - begidx17) + 1)))
-
-axiom H137 : (result16 = lengthoftoken3)
-
-axiom H138 : (lengthoftoken5 = o11)
-
-axiom H139 : (foundtype13 = 0)
-
-axiom H140 : (not (128 <  lengthoftoken5))
-
-axiom H141 : (begidx17 = r102b)
-
-axiom H142 : in_range4(r102b)
-
-axiom H143 : (endidx13 = r103b)
-
-axiom H144 : in_range4(r103b)
-
-axiom H145 : (result17 = i2)
-
-axiom H146 : (i40 = r102b)
-
-axiom H147 : (((r102b <= i40) and (i40 <= r103b)) ->
-  (((temp___1747 = i40) and ((temp___1748 = endidx13) and
-  ((temp___1745 = newemail1) and ((((1 <= begidx17) and
-  (((endidx13 - begidx17) + 1) <= 128)) and (endidx13 = temp___1748)) and
-  ((((r102b <= r103b) -> dynamic_property2(r102b, r103b, i41)) and
-  ((r102b <= i41) and (i41 <= r103b))) and
-  ((((to_rep(o14) = to_rep((zonefileline[i41]))) and
-  ((((((o12 = (i41 + 1)) and in_range1((i41 + 1))) and
-  (o13 = (o12 - begidx17))) and ((temp___1744 = o13) and in_range1(o13))) and
-  (((1 <= temp___1744) and (temp___1744 <= 128)) and
-  (o15 = temp___1744))) and (o16 = (newemail2[o15 <- o14])))) and
-  ((result18 = newemail2) and (newemail3 = o16))) and (i41 = r103b))))))) and
-  (((i47 = i41) and (newemail8 = newemail3)) and ((i48 = i41) and
-  (newemail9 = newemail3)))))
-
-axiom H148 : (((r102b <= i40) and (i40 <= r103b)) -> (i49 = i47))
-
-axiom H149 : (((r102b <= i40) and (i40 <= r103b)) ->
-  (newemail10 = newemail8))
-
-axiom H150 : (((r102b <= i40) and (i40 <= r103b)) -> (i50 = i48))
-
-axiom H151 : (((r102b <= i40) and (i40 <= r103b)) ->
-  (newemail11 = newemail9))
-
-axiom H152 : ((not ((r102b <= i40) and (i40 <= r103b))) -> (i49 = i40))
-
-axiom H153 : ((not ((r102b <= i40) and (i40 <= r103b))) ->
-  (newemail10 = newemail1))
-
-axiom H154 : ((not ((r102b <= i40) and (i40 <= r103b))) -> (i50 = i40))
-
-axiom H155 : ((not ((r102b <= i40) and (i40 <= r103b))) ->
-  (newemail11 = newemail1))
-
-axiom H156 : ((endidx13 + 1) = r105b)
-
-axiom H157 : in_range1(r105b)
-
-axiom H158 : (result20 = i3)
-
-axiom H159 : (i51 = r105b)
-
-axiom H160 : (r105b <= i51)
-
-axiom H161 : (i51 <= 128)
-
-axiom H162 : (1 <= endidx13)
-
-axiom H163 :
-  (((forall temp___1752:int. (((1 <= temp___1752) and
-    (temp___1752 <= 128)) -> ((i52 <= temp___1752) ->
-    ((newemail12[temp___1752]) = (newemail10[temp___1752]))))) and
-  ((r105b <= 128) -> dynamic_property3(r105b, 128, i52))) and
-  ((r105b <= i52) and (i52 <= 128)))
-
-axiom H164 : (to_rep(o17) = 32)
-
-axiom H165 : (o18 = (newemail12[i52 <- o17]))
-
-axiom H166 : (result21 = newemail12)
-
-axiom H167 : (newemail13 = o18)
-
-axiom H168 : (not (i52 = 128))
-
-axiom H169 : (result22 = i52)
-
-axiom H170 : (i53 = (i52 + 1))
-
-axiom H171 : (i54 = i53)
-
-axiom H172 : (newemail14 = newemail13)
-
-axiom H173 : (i55 = i53)
-
-axiom H174 : (newemail15 = newemail13)
-
- (* File "zone_file_parser.adb", line 1186, characters 0-0 *)
-goal WP_parameter_def : (1 <= endidx13)
+  (newnameserver3 = o7))) and (i7 = r98b))))))) and (((i7 = i8) and
+  (newnameserver3 = newnameserver4)) and ((i9 = i7) and
+  (newnameserver5 = newnameserver3)))) and ((({ int__content = i10 } = {
+  int__content = i8 }) and ({ map__content = newnameserver6 } = {
+  map__content = newnameserver4 })) and ((i11 = i9) and
+  (newnameserver7 = newnameserver5))))) or ((not ((r97b <= i6) and
+  (i6 <= r98b))) and (((i6 = i10) and (newnameserver1 = newnameserver6)) and
+  ((i11 = i6) and (newnameserver7 = newnameserver1)))))) and
+  ((((endidx8 + 1) = r100b) and in_range1(r100b)) and (((result11 = i1) and
+  (i12 = r100b)) and ((((r100b <= i12) and (i12 <= 128)) and
+  ((((temp___1799 = newnameserver6) and ((temp___1798 = i12) and
+  ((1 <= endidx8) and (((((r100b <= 128) -> dynamic_property1(r100b, 128,
+  i13)) and
+  (forall temp___1800:int. (((1 <= temp___1800) and (temp___1800 <= 128)) ->
+  ((i13 <= temp___1800) ->
+  ((newnameserver8[temp___1800]) = (temp___1799[temp___1800])))))) and
+  ((r100b <= i13) and (i13 <= 128))) and ((((to_rep(o8) = 32) and
+  (o9 = (newnameserver8[i13 <- o8]))) and ((result12 = newnameserver8) and
+  (newnameserver9 = o9))) and (i13 = 128)))))) and (((i14 = { int__content =
+  i13 }) and (newnameserver10 = { map__content = newnameserver9 })) and
+  ((i15 = i13) and (newnameserver11 = newnameserver9)))) and
+  (((i16 = i14) and (newnameserver12 = newnameserver10)) and ((i17 = i15) and
+  (newnameserver13 = newnameserver11))))) or ((not ((r100b <= i12) and
+  (i12 <= 128))) and (((i16 = { int__content = i12 }) and
+  (newnameserver12 = { map__content = newnameserver6 })) and ((i17 = i12) and
+  (newnameserver13 = newnameserver7)))))))))) and (((i19 = i16) and ((i18 = {
+  int__content = i10 }) and ((success5 = { bool__content = success }) and
+  (newnameserver14 = newnameserver12)))) and ((i21 = i17) and
+  ((i20 = i11) and ((success6 = success1) and
+  (newnameserver15 = newnameserver13)))))))) and (((i23 = i19) and
+  ((i22 = i18) and ((success7 = success5) and
+  (newnameserver16 = newnameserver14)))) and ((i25 = i21) and
+  ((i24 = i20) and ((success8 = success6) and
+  (newnameserver17 = newnameserver15))))))))))) and (((i27 = i23) and
+  ((i26 = i22) and ((lengthoftoken3 = { int__content = lengthoftoken2 }) and
+  ((foundtype9 = { int__content = foundtype8 }) and ((endidx9 = {
+  int__content = endidx8 }) and ((begidx12 = { int__content = begidx11 }) and
+  ((success9 = success7) and (newnameserver18 = newnameserver16)))))))) and
+  ((i29 = i25) and ((i28 = i24) and ((lengthoftoken4 = lengthoftoken2) and
+  ((foundtype10 = foundtype8) and ((endidx10 = endidx8) and
+  ((begidx13 = begidx11) and ((success10 = success8) and
+  (newnameserver19 = newnameserver17)))))))))))) ->
+  ((not (zlength <= (endidx9).int__content)) ->
+  ((((o10 = ((endidx9).int__content + 1)) and
+  in_range4(((endidx9).int__content + 1))) and ((result13 = begidx12) and
+  (begidx14 = o10))) -> ((((((begidx15 <= endidx11) and
+  (begidx15 <= zlength)) and (endidx11 <= zlength)) and ((foundtype11 = 1) ->
+  (forall i41:int. (((begidx15 <= i41) and (i41 <= endidx11)) ->
+  ((48 <= to_rep((zonefileline[i41]))) and
+  (to_rep((zonefileline[i41])) <= 57)))))) and ((in_range4(begidx15) and
+  in_range4(endidx11)) and in_range3(foundtype11))) ->
+  ((((o11 = ((endidx11 - begidx15) + 1)) and
+  in_range4(((endidx11 - begidx15) + 1))) and
+  ((result14 = lengthoftoken3) and (lengthoftoken5 = o11))) ->
+  ((foundtype11 = 0) -> ((not (128 <  lengthoftoken5)) ->
+  (((begidx15 = r102b) and in_range4(r102b)) -> (((endidx11 = r103b) and
+  in_range4(r103b)) -> ((((result15 = { int__content = i2 }) and
+  (i30 = r102b)) and ((((r102b <= i30) and (i30 <= r103b)) and
+  ((((temp___1806 = i30) and ((temp___1807 = endidx11) and
+  ((temp___1804 = newemail1) and ((((1 <= begidx15) and
+  (((endidx11 - begidx15) + 1) <= 128)) and (endidx11 = temp___1807)) and
+  ((((r102b <= r103b) -> dynamic_property2(r102b, r103b, i31)) and
+  ((r102b <= i31) and (i31 <= r103b))) and
+  ((((to_rep(o14) = to_rep((zonefileline[i31]))) and
+  ((((((o12 = (i31 + 1)) and in_range1((i31 + 1))) and
+  (o13 = (o12 - begidx15))) and ((temp___1803 = o13) and in_range1(o13))) and
+  (((1 <= temp___1803) and (temp___1803 <= 128)) and
+  (o15 = temp___1803))) and (o16 = (newemail2[o15 <- o14])))) and
+  ((result16 = { map__content = newemail2 }) and (newemail3 = o16))) and
+  (i31 = r103b))))))) and (((i32 = { int__content = i31 }) and (newemail4 = {
+  map__content = newemail3 })) and ((i33 = i31) and
+  (newemail5 = newemail3)))) and (((i34 = i32) and
+  (newemail6 = newemail4)) and ((i35 = i33) and
+  (newemail7 = newemail5))))) or ((not ((r102b <= i30) and
+  (i30 <= r103b))) and (((i34 = { int__content = i30 }) and (newemail6 = {
+  map__content = newemail1 })) and ((i35 = i30) and
+  (newemail7 = newemail1)))))) -> ((((endidx11 + 1) = r105b) and
+  in_range1(r105b)) -> (((result17 = { int__content = i3 }) and
+  (i36 = r105b)) -> (((r105b <= i36) and (i36 <= 128)) -> ((1 <= endidx11) ->
+  ((((((forall temp___1811:int. (((1 <= temp___1811) and
+       (temp___1811 <= 128)) -> ((i37 <= temp___1811) ->
+       ((newemail8[temp___1811]) = ((newemail6).map__content[temp___1811]))))) and
+  ((r105b <= 128) -> dynamic_property3(r105b, 128, i37))) and
+  ((r105b <= i37) and (i37 <= 128))) and ((((to_rep(o17) = 32) and
+  (o18 = (newemail8[i37 <- o17]))) and ((result18 = { map__content =
+  newemail8 }) and (newemail9 = o18))) and ((not (i37 = 128)) and
+  ((result19 = { int__content = i37 }) and (i38 = (i37 + 1)))))) and
+  (((i39 = { int__content = i38 }) and (newemail10 = { map__content =
+  newemail9 })) and ((i40 = i38) and (newemail11 = newemail9)))) ->
+  (1 <= endidx11))))))))))))))))))))))))))))

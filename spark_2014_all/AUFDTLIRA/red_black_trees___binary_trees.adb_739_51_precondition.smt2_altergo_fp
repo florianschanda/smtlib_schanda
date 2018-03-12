@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -462,28 +462,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep1) farray, int, int, (int,us_rep1) farray, int,
-  int -> (int,us_rep1) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep1) farray. forall b:(int,us_rep1) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep1, int -> (int,us_rep1) farray
-
-axiom singleton_def :
-  (forall v:us_rep. forall v1:bool.
-  (forall i:int [(singleton({ us_split_fields1 = {
-  rec__tree_model__path_type__a = v; rec__tree_model__path_type__k = v1 } },
-  i)[i])]. ((singleton({ us_split_fields1 = { rec__tree_model__path_type__a =
-  v; rec__tree_model__path_type__k = v1 } }, i)[i]) = { us_split_fields1 = {
-  rec__tree_model__path_type__a = v; rec__tree_model__path_type__k = v1 } })))
-
 logic bool_eq9 : (int,us_rep1) farray, int, int, (int,us_rep1) farray, int,
   int -> bool
 
@@ -494,17 +472,17 @@ axiom bool_eq_def7 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and (bool_eq8((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and (bool_eq8((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq9(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq8((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq9(a,
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq8((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq9(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -514,9 +492,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq8((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq8((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)))))))
 
 logic oeq : (int,us_rep1) farray, (int,us_rep1) farray -> bool
 
@@ -717,33 +695,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,us_rep2) farray, int, int, (int,us_rep2) farray, int,
-  int -> (int,us_rep2) farray
-
-axiom concat_def1 :
-  (forall a:(int,us_rep2) farray. forall b:(int,us_rep2) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : us_rep2, int -> (int,us_rep2) farray
-
-axiom singleton_def1 :
-  (forall v:extended_index_type. forall v1:extended_index_type.
-  forall v2:extended_index_type. forall v3:position_type.
-  (forall i:int [(singleton1({ us_split_fields3 = {
-  rec__binary_trees__cell__left = v; rec__binary_trees__cell__right = v1;
-  rec__binary_trees__cell__parent = v2; rec__binary_trees__cell__position =
-  v3 } }, i)[i])]. ((singleton1({ us_split_fields3 = {
-  rec__binary_trees__cell__left = v; rec__binary_trees__cell__right = v1;
-  rec__binary_trees__cell__parent = v2; rec__binary_trees__cell__position =
-  v3 } }, i)[i]) = { us_split_fields3 = { rec__binary_trees__cell__left = v;
-  rec__binary_trees__cell__right = v1; rec__binary_trees__cell__parent = v2;
-  rec__binary_trees__cell__position = v3 } })))
-
 logic bool_eq11 : (int,us_rep2) farray, int, int, (int,us_rep2) farray, int,
   int -> bool
 
@@ -754,17 +705,17 @@ axiom bool_eq_def9 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) and (bool_eq10((a[temp___idx_133]),
-  (b[((b__first - a__first) + temp___idx_133)])) = true)) or
-  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (forall temp___idx_155:int. ((((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) and (bool_eq10((a[temp___idx_155]),
+  (b[((b__first - a__first) + temp___idx_155)])) = true)) or
+  (not ((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)))))) ->
   (bool_eq11(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) -> (bool_eq10((a[temp___idx_133]),
-  (b[((b__first - a__first) + temp___idx_133)])) = true))))) -> (bool_eq11(a,
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) -> (bool_eq10((a[temp___idx_155]),
+  (b[((b__first - a__first) + temp___idx_155)])) = true))))) -> (bool_eq11(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -774,9 +725,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) -> (bool_eq10((a[temp___idx_133]),
-  (b[((b__first - a__first) + temp___idx_133)])) = true)))))))
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) -> (bool_eq10((a[temp___idx_155]),
+  (b[((b__first - a__first) + temp___idx_155)])) = true)))))))
 
 logic dummy12 : (int,us_rep2) farray
 
@@ -1009,10 +960,10 @@ axiom model____post_axiom :
   f; rec__binary_trees__forest__c = f1 } },
   root)[j])).us_split_fields1).rec__tree_model__path_type__a, n)))))) ->
   (j = i))))))))))) and
-  (forall temp___217:int. (((1 <= temp___217) and (temp___217 <= 100)) ->
+  (forall temp___252:int. (((1 <= temp___252) and (temp___252 <= 100)) ->
   (length((((model__({ us_split_fields5 = { rec__binary_trees__forest__s = f;
   rec__binary_trees__forest__c = f1 } },
-  root)[temp___217])).us_split_fields1).rec__tree_model__path_type__a) <  100)))))))
+  root)[temp___252])).us_split_fields1).rec__tree_model__path_type__a) <  100)))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -1301,1544 +1252,21 @@ axiom get__post_axiom :
   (position1 <= (0 + length(container))))) -> in_range8(get(container,
   position1)))))
 
-logic f__split_fields : extended_index_type
-
-logic f__split_fields1 : (int,us_rep2) farray
-
-logic f_old__split_fields : extended_index_type
-
-logic f_old__split_fields1 : (int,us_rep2) farray
-
-logic n : int
-
-logic ki : int
-
-logic r : int
-
-logic j : int
-
-logic j1 : int
-
-logic temp___1690 : (int,us_rep1) farray
-
-logic o : int
-
-logic o1 : extended_index_type
-
-logic o2 : extended_index_type
-
-logic o3 : extended_index_type
-
-logic o4 : position_type
-
-logic o5 : extended_index_type
-
-logic o6 : extended_index_type
-
-logic o7 : extended_index_type
-
-logic o8 : position_type
-
-logic o9 : extended_index_type
-
-logic temp___1692 : int
-
-logic o10 : int
-
-logic o11 : us_rep
-
-logic o12 : bool
-
-logic o13 : us_rep
-
-logic o14 : bool
-
-logic o15 : int
-
-logic o16 : extended_index_type
-
-logic o17 : extended_index_type
-
-logic o18 : extended_index_type
-
-logic o19 : position_type
-
-logic o20 : extended_index_type
-
-logic o21 : extended_index_type
-
-logic o22 : extended_index_type
-
-logic o23 : position_type
-
-logic o24 : extended_index_type
-
-logic o25 : int
-
-logic o26 : bool
-
-logic o27 : int
-
-logic o28 : extended_index_type
-
-logic o29 : extended_index_type
-
-logic o30 : extended_index_type
-
-logic o31 : position_type
-
-logic o32 : extended_index_type
-
-logic o33 : extended_index_type
-
-logic o34 : extended_index_type
-
-logic o35 : position_type
-
-logic o36 : position_type
-
-logic o37 : int
-
-logic i : int
-
-logic temp___1445 : (int,us_rep1) farray
-
-logic o38 : int
-
-logic o39 : us_rep
-
-logic o40 : bool
-
-logic o41 : us_rep
-
-logic o42 : bool
-
-logic o43 : us_rep
-
-logic temp___1446 : (int,us_rep1) farray
-
-logic o44 : us_rep
-
-logic o45 : bool
-
-logic o46 : us_rep
-
-logic o47 : bool
-
-logic o48 : us_rep
-
-logic temp___1444 : (int,us_rep1) farray
-
-logic o49 : us_rep
-
-logic o50 : bool
-
-logic o51 : us_rep
-
-logic o52 : bool
-
-logic o53 : bool
-
-logic temp___1440 : (int,us_rep1) farray
-
-logic temp___1441 : (int,us_rep1) farray
-
-logic o54 : int
-
-logic o55 : us_rep
-
-logic o56 : bool
-
-logic o57 : us_rep
-
-logic o58 : bool
-
-logic o59 : us_rep
-
-logic temp___1523 : int
-
-logic i1 : int
-
-logic temp___1530 : (int,us_rep1) farray
-
-logic o60 : us_rep
-
-logic o61 : bool
-
-logic o62 : us_rep
-
-logic o63 : bool
-
-logic o64 : us_rep
-
-logic o65 : int
-
-logic temp___1529 : (int,us_rep1) farray
-
-logic o66 : us_rep
-
-logic o67 : bool
-
-logic o68 : us_rep
-
-logic o69 : bool
-
-logic temp___1528 : (int,us_rep1) farray
-
-logic o70 : int
-
-logic o71 : us_rep
-
-logic o72 : bool
-
-logic o73 : us_rep
-
-logic o74 : bool
-
-logic o75 : us_rep
-
-logic o76 : int
-
-logic temp___1526 : (int,us_rep1) farray
-
-logic o77 : int
-
-logic o78 : us_rep
-
-logic o79 : bool
-
-logic o80 : us_rep
-
-logic o81 : bool
-
-logic o82 : us_rep
-
-logic temp___1527 : (int,us_rep1) farray
-
-logic o83 : us_rep
-
-logic o84 : bool
-
-logic o85 : us_rep
-
-logic o86 : bool
-
-logic o87 : us_rep
-
-logic o88 : int
-
-logic o89 : int
-
-logic i2 : int
-
-logic temp___1547 : (int,us_rep1) farray
-
-logic o90 : us_rep
-
-logic o91 : bool
-
-logic o92 : us_rep
-
-logic o93 : bool
-
-logic o94 : us_rep
-
-logic o95 : int
-
-logic temp___1546 : (int,us_rep1) farray
-
-logic o96 : us_rep
-
-logic o97 : bool
-
-logic o98 : us_rep
-
-logic o99 : bool
-
-logic i3 : int
-
-logic temp___1557 : (int,us_rep1) farray
-
-logic o100 : int
-
-logic o101 : extended_index_type
-
-logic o102 : extended_index_type
-
-logic o103 : extended_index_type
-
-logic o104 : position_type
-
-logic o105 : extended_index_type
-
-logic o106 : extended_index_type
-
-logic o107 : extended_index_type
-
-logic o108 : position_type
-
-logic o109 : extended_index_type
-
-logic temp___1559 : int
-
-logic o110 : int
-
-logic o111 : us_rep
-
-logic o112 : bool
-
-logic o113 : us_rep
-
-logic o114 : bool
-
-logic o115 : int
-
-logic o116 : int
-
-logic temp___1556 : (int,us_rep1) farray
-
-logic o117 : us_rep
-
-logic o118 : bool
-
-logic o119 : us_rep
-
-logic o120 : bool
-
-logic o121 : us_rep
-
-logic o122 : int
-
-logic o123 : int
-
-logic o124 : int
-
-logic temp___1555 : (int,us_rep1) farray
-
-logic o125 : us_rep
-
-logic o126 : bool
-
-logic o127 : us_rep
-
-logic o128 : bool
-
-logic i4 : int
-
-logic temp___1574 : (int,us_rep1) farray
-
-logic o129 : us_rep
-
-logic o130 : bool
-
-logic o131 : us_rep
-
-logic o132 : bool
-
-logic o133 : us_rep
-
-logic o134 : int
-
-logic temp___1573 : (int,us_rep1) farray
-
-logic o135 : us_rep
-
-logic o136 : bool
-
-logic o137 : us_rep
-
-logic o138 : bool
-
-logic temp___1572 : (int,us_rep1) farray
-
-logic o139 : us_rep
-
-logic o140 : bool
-
-logic o141 : us_rep
-
-logic o142 : bool
-
-logic temp___1571 : (int,us_rep1) farray
-
-logic o143 : us_rep
-
-logic o144 : bool
-
-logic o145 : us_rep
-
-logic o146 : bool
-
-logic o147 : us_rep
-
-logic i5 : int
-
-logic temp___1590 : (int,us_rep1) farray
-
-logic o148 : us_rep
-
-logic o149 : bool
-
-logic o150 : us_rep
-
-logic o151 : bool
-
-logic o152 : us_rep
-
-logic o153 : int
-
-logic temp___1589 : (int,us_rep1) farray
-
-logic o154 : us_rep
-
-logic o155 : bool
-
-logic o156 : us_rep
-
-logic o157 : bool
-
-logic o158 : int
-
-logic o159 : int
-
-logic temp___1588 : (int,us_rep1) farray
-
-logic o160 : us_rep
-
-logic o161 : bool
-
-logic o162 : us_rep
-
-logic o163 : bool
-
-logic temp___1585 : (int,us_rep1) farray
-
-logic o164 : int
-
-logic o165 : us_rep
-
-logic o166 : bool
-
-logic o167 : us_rep
-
-logic o168 : bool
-
-logic o169 : us_rep
-
-logic o170 : int
-
-logic o171 : int
-
-logic temp___1586 : (int,us_rep1) farray
-
-logic o172 : us_rep
-
-logic o173 : bool
-
-logic o174 : us_rep
-
-logic o175 : bool
-
-logic o176 : us_rep
-
-logic temp___1587 : (int,us_rep1) farray
-
-logic o177 : us_rep
-
-logic o178 : bool
-
-logic o179 : us_rep
-
-logic o180 : bool
-
-logic o181 : us_rep
-
-logic temp___1487 : int
-
-logic temp___1464 : (int,us_rep1) farray
-
-logic o182 : us_rep
-
-logic o183 : bool
-
-logic o184 : us_rep
-
-logic o185 : bool
-
-logic temp___1463 : (int,us_rep1) farray
-
-logic o186 : us_rep
-
-logic o187 : bool
-
-logic o188 : us_rep
-
-logic o189 : bool
-
-logic o190 : us_rep
-
-logic o191 : int
-
-logic temp___1462 : (int,us_rep1) farray
-
-logic o192 : us_rep
-
-logic o193 : bool
-
-logic o194 : us_rep
-
-logic o195 : bool
-
-logic temp___1465 : (int,us_rep1) farray
-
-logic o196 : int
-
-logic o197 : us_rep
-
-logic o198 : bool
-
-logic o199 : us_rep
-
-logic o200 : bool
-
-logic o201 : us_rep
-
-logic temp___1468 : (int,us_rep1) farray
-
-logic o202 : int
-
-logic o203 : us_rep
-
-logic o204 : bool
-
-logic o205 : us_rep
-
-logic o206 : bool
-
-logic o207 : us_rep
-
-logic temp___1471 : (int,us_rep1) farray
-
-logic o208 : us_rep
-
-logic o209 : bool
-
-logic o210 : us_rep
-
-logic o211 : bool
-
-logic o212 : us_rep
-
-logic temp___1472 : (int,us_rep1) farray
-
-logic o213 : us_rep
-
-logic o214 : bool
-
-logic o215 : us_rep
-
-logic o216 : bool
-
-logic o217 : us_rep
-
-logic o218 : int
-
-logic o219 : int
-
-logic o220 : int
-
-logic temp___1476 : (int,us_rep1) farray
-
-logic o221 : us_rep
-
-logic o222 : bool
-
-logic o223 : us_rep
-
-logic o224 : bool
-
-logic temp___1475 : (int,us_rep1) farray
-
-logic o225 : us_rep
-
-logic o226 : bool
-
-logic o227 : us_rep
-
-logic o228 : bool
-
-logic o229 : us_rep
-
-logic o230 : int
-
-logic temp___1474 : (int,us_rep1) farray
-
-logic o231 : us_rep
-
-logic o232 : bool
-
-logic o233 : us_rep
-
-logic o234 : bool
-
-logic o235 : bool
-
-logic o236 : int
-
-logic o237 : int
-
-logic temp___1477 : (int,us_rep1) farray
-
-logic o238 : int
-
-logic o239 : us_rep
-
-logic o240 : bool
-
-logic o241 : us_rep
-
-logic o242 : bool
-
-logic o243 : us_rep
-
-logic temp___1480 : (int,us_rep1) farray
-
-logic o244 : int
-
-logic o245 : us_rep
-
-logic o246 : bool
-
-logic o247 : us_rep
-
-logic o248 : bool
-
-logic o249 : us_rep
-
-logic o250 : int
-
-logic o251 : int
-
-logic temp___1483 : (int,us_rep1) farray
-
-logic o252 : us_rep
-
-logic o253 : bool
-
-logic o254 : us_rep
-
-logic o255 : bool
-
-logic o256 : us_rep
-
-logic temp___1484 : (int,us_rep1) farray
-
-logic o257 : us_rep
-
-logic o258 : bool
-
-logic o259 : us_rep
-
-logic o260 : bool
-
-logic o261 : us_rep
-
-logic temp___1485 : (int,us_rep1) farray
-
-logic o262 : int
-
-logic o263 : us_rep
-
-logic o264 : bool
-
-logic o265 : us_rep
-
-logic o266 : bool
-
-logic o267 : us_rep
-
-logic o268 : int
-
-logic i6 : int
-
-logic temp___1492 : (int,us_rep1) farray
-
-logic o269 : int
-
-logic o270 : us_rep
-
-logic o271 : bool
-
-logic o272 : us_rep
-
-logic o273 : bool
-
-logic o274 : us_rep
-
-logic o275 : int
-
-logic temp___1491 : (int,us_rep1) farray
-
-logic o276 : int
-
-logic o277 : us_rep
-
-logic o278 : bool
-
-logic o279 : us_rep
-
-logic o280 : bool
-
-logic temp___1490 : (int,us_rep1) farray
-
-logic o281 : int
-
-logic o282 : us_rep
-
-logic o283 : bool
-
-logic o284 : us_rep
-
-logic o285 : bool
-
-logic temp___1488 : (int,us_rep1) farray
-
-logic temp___1489 : (int,us_rep1) farray
-
-logic o286 : int
-
-logic o287 : us_rep
-
-logic o288 : bool
-
-logic o289 : us_rep
-
-logic o290 : bool
-
-logic o291 : us_rep
-
-logic i7 : int
-
-logic temp___1508 : (int,us_rep1) farray
-
-logic o292 : int
-
-logic o293 : us_rep
-
-logic o294 : bool
-
-logic o295 : us_rep
-
-logic o296 : bool
-
-logic o297 : us_rep
-
-logic o298 : int
-
-logic temp___1507 : (int,us_rep1) farray
-
-logic o299 : int
-
-logic o300 : us_rep
-
-logic o301 : bool
-
-logic o302 : us_rep
-
-logic o303 : bool
-
-logic o304 : int
-
-logic o305 : int
-
-logic temp___1506 : (int,us_rep1) farray
-
-logic o306 : int
-
-logic o307 : us_rep
-
-logic o308 : bool
-
-logic o309 : us_rep
-
-logic o310 : bool
-
-logic temp___1503 : (int,us_rep1) farray
-
-logic o311 : int
-
-logic o312 : us_rep
-
-logic o313 : bool
-
-logic o314 : us_rep
-
-logic o315 : bool
-
-logic o316 : us_rep
-
-logic o317 : int
-
-logic o318 : int
-
-logic temp___1504 : (int,us_rep1) farray
-
-logic o319 : int
-
-logic o320 : us_rep
-
-logic o321 : bool
-
-logic o322 : us_rep
-
-logic o323 : bool
-
-logic o324 : us_rep
-
-logic temp___1505 : (int,us_rep1) farray
-
-logic o325 : int
-
-logic o326 : us_rep
-
-logic o327 : bool
-
-logic o328 : us_rep
-
-logic o329 : bool
-
-logic o330 : us_rep
-
-logic temp___14641 : (int,us_rep1) farray
-
-logic o331 : us_rep
-
-logic o332 : bool
-
-logic o333 : us_rep
-
-logic o334 : bool
-
-logic temp___14631 : (int,us_rep1) farray
-
-logic o335 : us_rep
-
-logic o336 : bool
-
-logic o337 : us_rep
-
-logic o338 : bool
-
-logic o339 : us_rep
-
-logic o340 : int
-
-logic temp___14621 : (int,us_rep1) farray
-
-logic o341 : us_rep
-
-logic o342 : bool
-
-logic o343 : us_rep
-
-logic o344 : bool
-
-logic temp___14651 : (int,us_rep1) farray
-
-logic o345 : int
-
-logic o346 : us_rep
-
-logic o347 : bool
-
-logic o348 : us_rep
-
-logic o349 : bool
-
-logic o350 : us_rep
-
-logic temp___14681 : (int,us_rep1) farray
-
-logic o351 : int
-
-logic o352 : us_rep
-
-logic o353 : bool
-
-logic o354 : us_rep
-
-logic o355 : bool
-
-logic o356 : us_rep
-
-logic temp___14711 : (int,us_rep1) farray
-
-logic o357 : us_rep
-
-logic o358 : bool
-
-logic o359 : us_rep
-
-logic o360 : bool
-
-logic o361 : us_rep
-
-logic temp___14721 : (int,us_rep1) farray
-
-logic o362 : us_rep
-
-logic o363 : bool
-
-logic o364 : us_rep
-
-logic o365 : bool
-
-logic o366 : us_rep
-
-logic o367 : int
-
-logic o368 : int
-
-logic o369 : int
-
-logic temp___14761 : (int,us_rep1) farray
-
-logic o370 : us_rep
-
-logic o371 : bool
-
-logic o372 : us_rep
-
-logic o373 : bool
-
-logic temp___14751 : (int,us_rep1) farray
-
-logic o374 : us_rep
-
-logic o375 : bool
-
-logic o376 : us_rep
-
-logic o377 : bool
-
-logic o378 : us_rep
-
-logic o379 : int
-
-logic temp___14741 : (int,us_rep1) farray
-
-logic o380 : us_rep
-
-logic o381 : bool
-
-logic o382 : us_rep
-
-logic o383 : bool
-
-logic o384 : bool
-
-logic o385 : int
-
-logic o386 : int
-
-logic temp___14771 : (int,us_rep1) farray
-
-logic o387 : int
-
-logic o388 : us_rep
-
-logic o389 : bool
-
-logic o390 : us_rep
-
-logic o391 : bool
-
-logic o392 : us_rep
-
-logic temp___14801 : (int,us_rep1) farray
-
-logic o393 : int
-
-logic o394 : us_rep
-
-logic o395 : bool
-
-logic o396 : us_rep
-
-logic o397 : bool
-
-logic o398 : us_rep
-
-logic o399 : int
-
-logic o400 : int
-
-logic temp___14831 : (int,us_rep1) farray
-
-logic o401 : us_rep
-
-logic o402 : bool
-
-logic o403 : us_rep
-
-logic o404 : bool
-
-logic o405 : us_rep
-
-logic temp___14841 : (int,us_rep1) farray
-
-logic o406 : us_rep
-
-logic o407 : bool
-
-logic o408 : us_rep
-
-logic o409 : bool
-
-logic o410 : us_rep
-
-logic temp___14851 : (int,us_rep1) farray
-
-logic o411 : int
-
-logic o412 : us_rep
-
-logic o413 : bool
-
-logic o414 : us_rep
-
-logic o415 : bool
-
-logic o416 : us_rep
-
-logic o417 : int
-
-logic i8 : int
-
-logic o418 : int
-
-logic o419 : int
-
-logic temp___1606 : (int,us_rep1) farray
-
-logic o420 : us_rep
-
-logic o421 : bool
-
-logic o422 : us_rep
-
-logic o423 : bool
-
-logic i9 : int
-
-logic temp___1615 : (int,us_rep1) farray
-
-logic o424 : us_rep
-
-logic o425 : bool
-
-logic o426 : us_rep
-
-logic o427 : bool
-
-logic temp___1613 : (int,us_rep1) farray
-
-logic o428 : int
-
-logic o429 : us_rep
-
-logic o430 : bool
-
-logic o431 : us_rep
-
-logic o432 : bool
-
-logic o433 : us_rep
-
-logic temp___1614 : (int,us_rep1) farray
-
-logic o434 : us_rep
-
-logic o435 : bool
-
-logic o436 : us_rep
-
-logic o437 : bool
-
-logic o438 : us_rep
-
-logic o439 : int
-
-logic o440 : int
-
-logic temp___1627 : int
-
-logic o441 : int
-
-logic o442 : int
-
-logic p : int
-
-logic o443 : int
-
-logic o444 : extended_index_type
-
-logic o445 : extended_index_type
-
-logic o446 : extended_index_type
-
-logic o447 : position_type
-
-logic o448 : extended_index_type
-
-logic o449 : extended_index_type
-
-logic o450 : extended_index_type
-
-logic o451 : position_type
-
-logic o452 : position_type
-
-logic o453 : int
-
-logic o454 : bool
-
-logic o455 : int
-
-logic o456 : int
-
-logic o457 : int
-
-logic o458 : int
-
-logic o459 : (int,us_rep1) farray
-
-logic o460 : int
-
-logic o461 : int
-
-logic r1 : int
-
-logic o462 : int
-
-logic o463 : extended_index_type
-
-logic o464 : extended_index_type
-
-logic o465 : extended_index_type
-
-logic o466 : position_type
-
-logic o467 : extended_index_type
-
-logic o468 : extended_index_type
-
-logic o469 : extended_index_type
-
-logic o470 : position_type
-
-logic o471 : position_type
-
-logic o472 : int
-
-logic o473 : bool
-
-logic o474 : int
-
-logic o475 : int
-
-logic o476 : int
-
-logic o477 : int
-
-logic o478 : (int,us_rep1) farray
-
-logic i10 : int
-
-logic o479 : int
-
-logic o480 : int
-
-logic temp___1638 : (int,us_rep1) farray
-
-logic o481 : us_rep
-
-logic o482 : bool
-
-logic o483 : us_rep
-
-logic o484 : bool
-
-logic temp___1635 : (int,us_rep1) farray
-
-logic o485 : int
-
-logic o486 : us_rep
-
-logic o487 : bool
-
-logic o488 : us_rep
-
-logic o489 : bool
-
-logic o490 : us_rep
-
-logic o491 : int
-
-logic o492 : int
-
-logic temp___1636 : (int,us_rep1) farray
-
-logic o493 : us_rep
-
-logic o494 : bool
-
-logic o495 : us_rep
-
-logic o496 : bool
-
-logic o497 : us_rep
-
-logic temp___1637 : (int,us_rep1) farray
-
-logic o498 : us_rep
-
-logic o499 : bool
-
-logic o500 : us_rep
-
-logic o501 : bool
-
-logic o502 : us_rep
-
-logic i11 : int
-
-logic temp___1645 : (int,us_rep1) farray
-
-logic o503 : us_rep
-
-logic o504 : bool
-
-logic o505 : us_rep
-
-logic o506 : bool
-
-logic temp___1644 : (int,us_rep1) farray
-
-logic o507 : us_rep
-
-logic o508 : bool
-
-logic o509 : us_rep
-
-logic o510 : bool
-
-logic o511 : us_rep
-
-logic i12 : int
-
-logic o512 : int
-
-logic o513 : int
-
-logic temp___1650 : (int,us_rep1) farray
-
-logic o514 : us_rep
-
-logic o515 : bool
-
-logic o516 : us_rep
-
-logic o517 : bool
-
-logic i13 : int
-
-logic temp___1654 : (int,us_rep1) farray
-
-logic o518 : us_rep
-
-logic o519 : bool
-
-logic o520 : us_rep
-
-logic o521 : bool
-
-logic i14 : int
-
-logic temp___1661 : (int,us_rep1) farray
-
-logic o522 : us_rep
-
-logic o523 : bool
-
-logic o524 : us_rep
-
-logic o525 : bool
-
-logic temp___1659 : (int,us_rep1) farray
-
-logic o526 : int
-
-logic o527 : us_rep
-
-logic o528 : bool
-
-logic o529 : us_rep
-
-logic o530 : bool
-
-logic o531 : us_rep
-
-logic temp___1660 : (int,us_rep1) farray
-
-logic o532 : us_rep
-
-logic o533 : bool
-
-logic o534 : us_rep
-
-logic o535 : bool
-
-logic o536 : us_rep
-
-logic o537 : int
-
-logic o538 : int
-
-logic temp___1667 : (int,us_rep1) farray
-
-logic o539 : int
-
-logic o540 : us_rep
-
-logic o541 : bool
-
-logic o542 : us_rep
-
-logic o543 : bool
-
-logic ki1 : int
-
-logic result : bool
-
-logic result1 : bool
-
-logic result2 : bool
-
-logic result3 : bool
-
-logic result4 : bool
-
-logic result5 : bool
-
-logic result6 : bool
-
-logic result7 : bool
-
-logic result8 : int
-
-logic n1 : int
-
-logic n2 : int
-
-logic ki2 : int
-
-logic result9 : bool
-
-logic result10 : bool
-
-logic result11 : bool
-
-logic result12 : bool
-
-logic result13 : bool
-
-logic result14 : bool
-
-logic result15 : bool
-
-logic result16 : bool
-
-logic result17 : bool
-
-logic result18 : bool
-
-logic result19 : bool
-
-logic result20 : bool
-
-logic result21 : bool
-
-logic result22 : bool
-
-logic result23 : bool
-
-logic result24 : int
-
-logic ki3 : int
-
-logic result25 : bool
-
-logic result26 : bool
-
-logic result27 : bool
-
-logic result28 : bool
-
-logic result29 : bool
-
-logic result30 : bool
-
-logic ki4 : int
-
-logic result31 : bool
-
-logic result32 : bool
-
-logic result33 : bool
-
-logic result34 : bool
-
-logic result35 : bool
-
-logic result36 : bool
-
-logic result37 : int
-
-logic ki5 : int
-
-logic result38 : bool
-
-logic result39 : bool
-
-logic result40 : bool
-
-logic result41 : bool
-
-logic result42 : bool
-
-logic result43 : bool
-
-logic ki6 : int
-
-logic ki7 : int
-
-logic ki8 : int
-
-logic ki9 : int
-
-logic result44 : int
-
-logic n3 : int
-
-logic n4 : int
-
-logic ki10 : int
-
-logic n5 : int
-
-logic ki11 : int
-
-logic n6 : int
-
-logic ki12 : int
-
-logic n7 : int
-
-logic ki13 : int
-
-logic n8 : int
-
-logic ki14 : int
-
-logic n9 : int
-
-logic ki15 : int
-
-logic result45 : bool
-
-logic result46 : bool
-
-logic result47 : bool
-
-logic result48 : int
-
-logic r2 : int
-
-logic r3 : int
-
-logic result49 : bool
-
-logic result50 : int
-
-logic r4 : int
-
-logic r5 : int
-
-logic r6 : int
-
-logic r7 : int
-
-logic r8 : int
-
-logic r9 : int
-
-logic r10 : int
-
-logic r11 : int
-
-logic r12 : int
-
-logic n10 : int
-
-logic ki16 : int
-
-logic r13 : int
-
-logic n11 : int
-
-logic ki17 : int
-
-logic r14 : int
-
-logic result51 : bool
-
-logic result52 : bool
-
-logic result53 : bool
-
-logic result54 : bool
-
-logic result55 : bool
-
-logic result56 : bool
-
-logic result57 : bool
-
-logic result58 : bool
-
-logic result59 : bool
-
-logic result60 : bool
-
-logic result61 : bool
-
-logic result62 : bool
-
-logic result63 : bool
-
-axiom H : in_range1(root)
-
-axiom H1 : in_range2(v)
-
-axiom H2 : ((tree_structure({ us_split_fields5 = {
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (forall f__split_fields:extended_index_type.
+  forall f__split_fields1:(int,us_rep2) farray.
+  forall f_old__split_fields:extended_index_type.
+  forall f_old__split_fields1:(int,us_rep2) farray. forall i:int.
+  forall temp___1490:(int,us_rep1) farray. forall o:us_rep. forall o1:bool.
+  forall o2:us_rep. forall o3:bool. forall result:bool. (in_range1(root) ->
+  (in_range2(v) -> (((tree_structure({ us_split_fields5 = {
   rec__binary_trees__forest__s = f_old__split_fields;
   rec__binary_trees__forest__c = f_old__split_fields1 } }) = true) and
   (tree_structure({ us_split_fields5 = { rec__binary_trees__forest__s =
   f__split_fields; rec__binary_trees__forest__c = f__split_fields1 }
-  }) = true))
-
-axiom H3 : ((to_rep(f__split_fields) = to_rep(f_old__split_fields)) and
+  }) = true)) ->
+  (((to_rep(f__split_fields) = to_rep(f_old__split_fields)) and
   ((root <= to_rep(f__split_fields)) and
   ((to_rep1((((f_old__split_fields1[root])).us_split_fields3).rec__binary_trees__cell__position) = 2) and
   ((to_rep1((((f__split_fields1[root])).us_split_fields3).rec__binary_trees__cell__position) = 2) and
@@ -2849,89 +1277,76 @@ axiom H3 : ((to_rep(f__split_fields) = to_rep(f_old__split_fields)) and
   f_old__split_fields; rec__binary_trees__forest__c = f_old__split_fields1 }
   },
   root)[to_rep((((f__split_fields1[v])).us_split_fields3).rec__binary_trees__cell__parent)])).us_split_fields1).rec__tree_model__path_type__k = true) and
-  ((forall i15:int. (((1 <= i15) and (i15 <= 100)) -> ((not (i15 = v)) ->
-   (to_rep((((f__split_fields1[i15])).us_split_fields3).rec__binary_trees__cell__parent) = to_rep((((f_old__split_fields1[i15])).us_split_fields3).rec__binary_trees__cell__parent))))) and
-  ((forall i15:int. (((1 <= i15) and (i15 <= 100)) -> ((not (i15 = v)) ->
-   (to_rep1((((f__split_fields1[i15])).us_split_fields3).rec__binary_trees__cell__position) = to_rep1((((f_old__split_fields1[i15])).us_split_fields3).rec__binary_trees__cell__position))))) and
-  ((forall j2:int. (((1 <= j2) and (j2 <= 100)) -> ((not ((((model__({
+  ((forall i1:int. (((1 <= i1) and (i1 <= 100)) -> ((not (i1 = v)) ->
+   (to_rep((((f__split_fields1[i1])).us_split_fields3).rec__binary_trees__cell__parent) = to_rep((((f_old__split_fields1[i1])).us_split_fields3).rec__binary_trees__cell__parent))))) and
+  ((forall i1:int. (((1 <= i1) and (i1 <= 100)) -> ((not (i1 = v)) ->
+   (to_rep1((((f__split_fields1[i1])).us_split_fields3).rec__binary_trees__cell__position) = to_rep1((((f_old__split_fields1[i1])).us_split_fields3).rec__binary_trees__cell__position))))) and
+  ((forall j:int. (((1 <= j) and (j <= 100)) -> ((not ((((model__({
    us_split_fields5 = { rec__binary_trees__forest__s = f_old__split_fields;
    rec__binary_trees__forest__c = f_old__split_fields1 } },
-   root)[j2])).us_split_fields1).rec__tree_model__path_type__k = true)) ->
-   (to_rep((((f__split_fields1[j2])).us_split_fields3).rec__binary_trees__cell__left) = to_rep((((f_old__split_fields1[j2])).us_split_fields3).rec__binary_trees__cell__left))))) and
-  (forall j2:int. (((1 <= j2) and (j2 <= 100)) -> ((not ((((model__({
+   root)[j])).us_split_fields1).rec__tree_model__path_type__k = true)) ->
+   (to_rep((((f__split_fields1[j])).us_split_fields3).rec__binary_trees__cell__left) = to_rep((((f_old__split_fields1[j])).us_split_fields3).rec__binary_trees__cell__left))))) and
+  (forall j:int. (((1 <= j) and (j <= 100)) -> ((not ((((model__({
   us_split_fields5 = { rec__binary_trees__forest__s = f_old__split_fields;
   rec__binary_trees__forest__c = f_old__split_fields1 } },
-  root)[j2])).us_split_fields1).rec__tree_model__path_type__k = true)) ->
-  (to_rep((((f__split_fields1[j2])).us_split_fields3).rec__binary_trees__cell__right) = to_rep((((f_old__split_fields1[j2])).us_split_fields3).rec__binary_trees__cell__right)))))))))))))))))
-
-axiom H4 : (1 <= i)
-
-axiom H5 : (i <= 100)
-
-axiom H6 : (tree_structure({ us_split_fields5 = {
+  root)[j])).us_split_fields1).rec__tree_model__path_type__k = true)) ->
+  (to_rep((((f__split_fields1[j])).us_split_fields3).rec__binary_trees__cell__right) = to_rep((((f_old__split_fields1[j])).us_split_fields3).rec__binary_trees__cell__right))))))))))))))))) ->
+  (((1 <= i) and (i <= 100)) -> ((((((tree_structure({ us_split_fields5 = {
   rec__binary_trees__forest__s = f__split_fields;
-  rec__binary_trees__forest__c = f__split_fields1 } }) = true)
-
-axiom H7 : ((temp___1444 = model__({ us_split_fields5 = {
+  rec__binary_trees__forest__c = f__split_fields1 } }) = true) and
+  ((temp___1490 = model__({ us_split_fields5 = {
   rec__binary_trees__forest__s = f__split_fields;
   rec__binary_trees__forest__c = f__split_fields1 } }, root)) and
-  ((forall temp___217:int. (((1 <= temp___217) and (temp___217 <= 100)) ->
-   (length((((temp___1444[temp___217])).us_split_fields1).rec__tree_model__path_type__a) <  100))) and
-  (((((temp___1444[root])).us_split_fields1).rec__tree_model__path_type__k = true) and
-  ((length((((temp___1444[root])).us_split_fields1).rec__tree_model__path_type__a) = 0) and
-  ((forall i15:int. (((1 <= i15) and (i15 <= 100)) -> ((not (i15 = root)) ->
+  ((forall temp___252:int. (((1 <= temp___252) and (temp___252 <= 100)) ->
+   (length((((temp___1490[temp___252])).us_split_fields1).rec__tree_model__path_type__a) <  100))) and
+  (((((temp___1490[root])).us_split_fields1).rec__tree_model__path_type__k = true) and
+  ((length((((temp___1490[root])).us_split_fields1).rec__tree_model__path_type__a) = 0) and
+  ((forall i1:int. (((1 <= i1) and (i1 <= 100)) -> ((not (i1 = root)) ->
    ((((not (parent({ us_split_fields5 = { rec__binary_trees__forest__s =
    f__split_fields; rec__binary_trees__forest__c = f__split_fields1 } },
-   i15) = 0)) and ((((temp___1444[parent({ us_split_fields5 = {
+   i1) = 0)) and ((((temp___1490[parent({ us_split_fields5 = {
    rec__binary_trees__forest__s = f__split_fields;
    rec__binary_trees__forest__c = f__split_fields1 } },
-   i15)])).us_split_fields1).rec__tree_model__path_type__k = true)) ->
-   ((((temp___1444[i15])).us_split_fields1).rec__tree_model__path_type__k = true)) and
+   i1)])).us_split_fields1).rec__tree_model__path_type__k = true)) and
+   ((((temp___1490[i1])).us_split_fields1).rec__tree_model__path_type__k = true)) or
    ((not ((not (parent({ us_split_fields5 = { rec__binary_trees__forest__s =
    f__split_fields; rec__binary_trees__forest__c = f__split_fields1 } },
-   i15) = 0)) and ((((temp___1444[parent({ us_split_fields5 = {
+   i1) = 0)) and ((((temp___1490[parent({ us_split_fields5 = {
    rec__binary_trees__forest__s = f__split_fields;
    rec__binary_trees__forest__c = f__split_fields1 } },
-   i15)])).us_split_fields1).rec__tree_model__path_type__k = true))) ->
-   (not ((((temp___1444[i15])).us_split_fields1).rec__tree_model__path_type__k = true))))))) and
-  ((forall i15:int. (((1 <= i15) and (i15 <= 100)) ->
-   (((((((temp___1444[i15])).us_split_fields1).rec__tree_model__path_type__k = true) and
-   (not (i15 = root))) -> (is_add((((temp___1444[parent({ us_split_fields5 =
+   i1)])).us_split_fields1).rec__tree_model__path_type__k = true))) and
+   (not ((((temp___1490[i1])).us_split_fields1).rec__tree_model__path_type__k = true))))))) and
+  ((forall i1:int. (((1 <= i1) and (i1 <= 100)) ->
+   (((((((temp___1490[i1])).us_split_fields1).rec__tree_model__path_type__k = true) and
+   (not (i1 = root))) and (is_add((((temp___1490[parent({ us_split_fields5 =
    { rec__binary_trees__forest__s = f__split_fields;
    rec__binary_trees__forest__c = f__split_fields1 } },
-   i15)])).us_split_fields1).rec__tree_model__path_type__a, position({
+   i1)])).us_split_fields1).rec__tree_model__path_type__a, position({
    us_split_fields5 = { rec__binary_trees__forest__s = f__split_fields;
-   rec__binary_trees__forest__c = f__split_fields1 } }, i15),
-   (((temp___1444[i15])).us_split_fields1).rec__tree_model__path_type__a) = true)) and
-   ((not (((((temp___1444[i15])).us_split_fields1).rec__tree_model__path_type__k = true) and
-   (not (i15 = root)))) ->
-   (length((((temp___1444[i15])).us_split_fields1).rec__tree_model__path_type__a) = 0))))) and
-  (forall i15:int. (((1 <= i15) and (i15 <= 100)) ->
-  (((((temp___1444[i15])).us_split_fields1).rec__tree_model__path_type__k = true) ->
-  (forall j2:int. (((1 <= j2) and (j2 <= 100)) ->
-  ((((((temp___1444[j2])).us_split_fields1).rec__tree_model__path_type__k = true) and
-  ((bool_eq1(length((((temp___1444[i15])).us_split_fields1).rec__tree_model__path_type__a),
-  length((((temp___1444[j2])).us_split_fields1).rec__tree_model__path_type__a)) = true) and
-  (forall n12:int. (((1 <= n12) and
-  (n12 <= (0 + length((((temp___1444[i15])).us_split_fields1).rec__tree_model__path_type__a)))) ->
-  (get((((temp___1444[i15])).us_split_fields1).rec__tree_model__path_type__a,
-  n12) = get((((temp___1444[j2])).us_split_fields1).rec__tree_model__path_type__a,
-  n12)))))) -> (j2 = i15)))))))))))))
-
-axiom H8 : ({ us_split_fields1 = { rec__tree_model__path_type__a = o49;
-  rec__tree_model__path_type__k = o50 } } = (temp___1444[i]))
-
-axiom H9 : ((o51 = o49) and (o52 = o50))
-
-axiom H10 : (result7 = o52)
-
-axiom H11 : (result7 = true)
-
-axiom H12 : (tree_structure({ us_split_fields5 = {
+   rec__binary_trees__forest__c = f__split_fields1 } }, i1),
+   (((temp___1490[i1])).us_split_fields1).rec__tree_model__path_type__a) = true)) or
+   ((not (((((temp___1490[i1])).us_split_fields1).rec__tree_model__path_type__k = true) and
+   (not (i1 = root)))) and
+   (length((((temp___1490[i1])).us_split_fields1).rec__tree_model__path_type__a) = 0))))) and
+  (forall i1:int. (((1 <= i1) and (i1 <= 100)) ->
+  (((((temp___1490[i1])).us_split_fields1).rec__tree_model__path_type__k = true) ->
+  (forall j:int. (((1 <= j) and (j <= 100)) ->
+  ((((((temp___1490[j])).us_split_fields1).rec__tree_model__path_type__k = true) and
+  (((bool_eq1(length((((temp___1490[i1])).us_split_fields1).rec__tree_model__path_type__a),
+  length((((temp___1490[j])).us_split_fields1).rec__tree_model__path_type__a)) = true) ->
+  (forall n:int. (((1 <= n) and
+  (n <= (0 + length((((temp___1490[i1])).us_split_fields1).rec__tree_model__path_type__a)))) ->
+  (get((((temp___1490[i1])).us_split_fields1).rec__tree_model__path_type__a,
+  n) = get((((temp___1490[j])).us_split_fields1).rec__tree_model__path_type__a,
+  n))))) and
+  (not (bool_eq1(length((((temp___1490[i1])).us_split_fields1).rec__tree_model__path_type__a),
+  length((((temp___1490[j])).us_split_fields1).rec__tree_model__path_type__a)) = false)))) ->
+  (j = i1)))))))))))))) and ({ us_split_fields1 = {
+  rec__tree_model__path_type__a = o; rec__tree_model__path_type__k = o1 }
+  } = (temp___1490[i]))) and ((o = o2) and (o1 = o3))) and (result = o3)) ->
+  ((result = true) -> ((tree_structure({ us_split_fields5 = {
   rec__binary_trees__forest__s = f__split_fields;
-  rec__binary_trees__forest__c = f__split_fields1 } }) = true)
-
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (valid_root({ us_split_fields5 = {
-  rec__binary_trees__forest__s = f__split_fields;
-  rec__binary_trees__forest__c = f__split_fields1 } }, root) = true)
+  rec__binary_trees__forest__c = f__split_fields1 } }) = true) ->
+  (valid_root({ us_split_fields5 = { rec__binary_trees__forest__s =
+  f__split_fields; rec__binary_trees__forest__c = f__split_fields1 } },
+  root) = true))))))))))

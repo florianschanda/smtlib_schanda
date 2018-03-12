@@ -113,53 +113,19 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic add__addtwo__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic result : bool
-
-logic result1 : int
-
-logic add__addtwo__result1 : int
-
-logic add__addtwo__result2 : int
-
-logic add__addtwo__result3 : int
-
-logic add__addtwo__result4 : int
-
-logic add__addtwo__result5 : int
-
-logic result2 : int
-
-axiom H : in_range(x)
-
-axiom H1 : in_range(y)
-
-axiom H2 : (((- 2147483648) <= (x + y)) and ((x + y) <= 2147483647))
-
-axiom H3 : (add__addtwo__result1 = add__addtwo__result2)
-
-axiom H4 : (add__addtwo__result3 = add__addtwo__result1)
-
-axiom H5 : ((o2 = (x + y)) and in_range((x + y)))
-
-axiom H6 : (result1 = add__addtwo__result)
-
-axiom H7 : (add__addtwo__result1 = o2)
-
-axiom H8 : (add__addtwo__result4 = add__addtwo__result2)
-
-axiom H9 : (add__addtwo__result5 = add__addtwo__result3)
-
-axiom H10 : (result2 = add__addtwo__result4)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (add__addtwo__result4 = (x + y))
+goal WP_parameter_def :
+  (forall add__addtwo__result:int. forall o:int. forall result:int.
+  forall add__addtwo__result1:int. forall add__addtwo__result2:int.
+  forall add__addtwo__result3:int. forall add__addtwo__result4:int.
+  forall add__addtwo__result5:int.
+  (forall result1:int. ((in_range(x) and (in_range(y) and
+  ((((- 2147483648) <= (x + y)) and ((x + y) <= 2147483647)) and
+  (((((add__addtwo__result1 = add__addtwo__result2) and
+  (add__addtwo__result3 = add__addtwo__result1)) and (((o = (x + y)) and
+  in_range((x + y))) and (({ int__content = result } = { int__content =
+  add__addtwo__result }) and (add__addtwo__result1 = o)))) and (({
+  int__content = add__addtwo__result4 } = { int__content =
+  add__addtwo__result2 }) and
+  (add__addtwo__result5 = add__addtwo__result3))) and
+  (result1 = add__addtwo__result4))))) -> (add__addtwo__result4 = (x + y)))))

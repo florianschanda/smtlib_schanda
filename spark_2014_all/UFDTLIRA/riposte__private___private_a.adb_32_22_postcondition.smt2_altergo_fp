@@ -222,41 +222,18 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic dst__split_fields : integer
-
-logic dst__split_fields1 : integer
-
-logic result : integer
-
-logic result1 : integer
-
-logic dst__split_fields2 : integer
-
-logic dst__split_fields3 : integer
-
-logic dst__split_fields4 : integer
-
-logic dst__split_fields5 : integer
-
-logic dst__split_fields6 : integer
-
-logic dst__split_fields7 : integer
-
-axiom H : (result = dst__split_fields)
-
-axiom H1 : (result1 = dst__split_fields1)
-
-axiom H2 : ((dst__split_fields2 = foo) and (dst__split_fields3 = foo1))
-
-axiom H3 : (dst__split_fields4 = dst__split_fields2)
-
-axiom H4 : (dst__split_fields5 = dst__split_fields3)
-
-axiom H5 : (dst__split_fields6 = dst__split_fields2)
-
-axiom H6 : (dst__split_fields7 = dst__split_fields3)
-
  (* File "private_a.adb", line 20, characters 0-0 *)
-goal WP_parameter_def : (bool_eq2({ us_split_fields1 = { rec__complex__t__r =
-  dst__split_fields4; rec__complex__t__i = dst__split_fields5 } }, create(0,
-  0)) = true)
+goal WP_parameter_def :
+  (forall dst__split_fields:integer. forall dst__split_fields1:integer.
+  forall result:integer. forall result1:integer.
+  forall dst__split_fields2:integer. forall dst__split_fields3:integer.
+  forall dst__split_fields4:integer. forall dst__split_fields5:integer.
+  forall dst__split_fields6:integer. forall dst__split_fields7:integer.
+  (((((result = dst__split_fields) and (result1 = dst__split_fields1)) and
+  ((dst__split_fields2 = foo) and (dst__split_fields3 = foo1))) and
+  (((dst__split_fields4 = dst__split_fields2) and
+  (dst__split_fields5 = dst__split_fields3)) and
+  ((dst__split_fields6 = dst__split_fields2) and
+  (dst__split_fields7 = dst__split_fields3)))) -> (bool_eq2({
+  us_split_fields1 = { rec__complex__t__r = dst__split_fields4;
+  rec__complex__t__i = dst__split_fields5 } }, create(0, 0)) = true)))

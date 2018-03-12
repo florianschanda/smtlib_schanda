@@ -1372,29 +1372,18 @@ logic val__ : t2
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic rax : t1
+logic rliteral2 : t1
 
-logic result : t1
+axiom rliteral_axiom2 : (tqtint1(rliteral2) = 65280)
 
-logic rax1 : t1
+logic rliteral3 : t
 
-logic rax2 : t1
-
-logic rax3 : t1
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : (result = rax)
-
-axiom H3 : (rax1 = bw_or1(bw_and1(rax, of_int1(65280)),
-  toBig(mul(toBig1(val__), of_int(256)))))
-
-axiom H4 : (rax1 = rax2)
-
-axiom H5 : (rax3 = rax1)
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 256)
 
  (* File "x86.ads", line 10, characters 0-0 *)
-goal WP_parameter_def : (rax2 = bw_or1(bw_and1(rax, of_int1(65280)),
-  toBig(mul(toBig1(val__), of_int(256)))))
+goal WP_parameter_def :
+  (forall rax:t1. forall result:t1. forall rax1:t1. forall rax2:t1.
+  forall rax3:t1. ((((result = rax) and (rax1 = bw_or1(bw_and1(rax,
+  rliteral2), toBig(mul(toBig1(val__), rliteral3))))) and ((rax1 = rax2) and
+  (rax3 = rax1))) -> (rax2 = bw_or1(bw_and1(rax, rliteral2),
+  toBig(mul(toBig1(val__), rliteral3))))))

@@ -113,51 +113,12 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic z : int
-
-logic y : int
-
-logic o : int
-
-logic z1 : int
-
-logic y1 : int
-
-logic result : int
-
-logic y2 : int
-
-logic result1 : int
-
-logic z2 : int
-
-logic result2 : int
-
-logic y3 : int
-
-axiom H : in_range(z)
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(y))
-
-axiom H2 : ((b = true) -> (result = y))
-
-axiom H3 : ((b = true) -> (y2 = 0))
-
-axiom H4 : ((b = true) -> (result1 = z))
-
-axiom H5 : ((b = true) -> (z2 = 0))
-
-axiom H6 : ((not (b = true)) -> (y2 = y))
-
-axiom H7 : ((not (b = true)) -> (z2 = z))
-
-axiom H8 : ((not (b = true)) -> (y2 = y1))
-
-axiom H9 : ((not (b = true)) -> (z2 = z1))
-
-axiom H10 : (result2 = y2)
-
-axiom H11 : (y3 = 0)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((z2 + y3))
+goal WP_parameter_def :
+  (forall z:int. forall y:int. forall z1:int. forall y1:int.
+  forall result:int. forall y2:int. forall result1:int. forall z2:int.
+  forall result2:int. forall y3:int. (in_range(z) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(y)) -> ((((b = true) and
+  (((result = y) and (y2 = 0)) and ((result1 = z) and (z2 = 0)))) or
+  ((not (b = true)) and (((y2 = y) and (z2 = z)) and ((y2 = y1) and
+  (z2 = z1))))) -> (((result2 = y2) and (y3 = 0)) -> in_range((z2 + y3)))))))

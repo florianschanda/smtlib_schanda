@@ -111,49 +111,14 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic room : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic result : int
-
-logic room1 : int
-
-logic result1 : int
-
-logic room2 : int
-
-logic result2 : int
-
-logic room3 : int
-
-axiom H : in_range(l)
-
-axiom H1 : (result = room)
-
-axiom H2 : (room1 = 0)
-
-axiom H3 : in_range(room1)
-
-axiom H4 : ((3 <= l) -> ((o = (room1 + 20)) and in_range((room1 + 20))))
-
-axiom H5 : ((3 <= l) -> (result1 = room1))
-
-axiom H6 : ((3 <= l) -> (room2 = o))
-
-axiom H7 : ((not (3 <= l)) -> (room2 = room1))
-
-axiom H8 : ((5 <= l) -> ((o1 = (room2 + 20)) and in_range((room2 + 20))))
-
-axiom H9 : ((5 <= l) -> (result2 = room2))
-
-axiom H10 : ((5 <= l) -> (room3 = o1))
-
-axiom H11 : ((not (5 <= l)) -> (room3 = room2))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((room3 + 14))
+goal WP_parameter_def :
+  (forall room:int. forall o:int. forall o1:int. forall result:int.
+  forall room1:int. forall result1:int. forall room2:int. forall result2:int.
+  forall room3:int. (in_range(l) -> (((result = room) and (room1 = 0)) ->
+  (in_range(room1) -> ((((3 <= l) and (((o = (room1 + 20)) and
+  in_range((room1 + 20))) and ((result1 = room1) and (room2 = o)))) or
+  ((not (3 <= l)) and (room2 = room1))) -> ((((5 <= l) and
+  (((o1 = (room2 + 20)) and in_range((room2 + 20))) and
+  ((result2 = room2) and (room3 = o1)))) or ((not (5 <= l)) and
+  (room3 = room2))) -> in_range((room3 + 14))))))))

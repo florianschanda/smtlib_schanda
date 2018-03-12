@@ -601,12 +601,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -618,6 +612,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -687,10 +687,14 @@ logic inrange64 : t, t, t -> bool
 
 logic inrange64__function_guard : bool, t, t, t -> prop
 
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
 axiom inrange64__post_axiom :
   (forall var:t. forall bottom:t. forall range_size:t [inrange64(var, bottom,
   range_size)]. ((inrange64(var, bottom, range_size) = true) <->
-  (exists n:t. ((ule(of_int(0), n) and ule(n, range_size)) and
+  (exists n:t. ((ule(rliteral, n) and ule(n, range_size)) and
   (var = add(bottom, n))))))
 
 logic var1 : t
@@ -858,417 +862,75 @@ logic attr__ATTRIBUTE_ADDRESS9 : int
 
 logic attr__ATTRIBUTE_ADDRESS10 : int
 
-logic n : t
+logic rliteral1 : t
 
-logic n1 : t
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 18446744073709551615)
 
-logic n2 : t
+logic rliteral2 : t
 
-logic n11 : t
-
-logic n21 : t
-
-logic n3 : t
-
-logic x86__rangesintersect__result : bool
-
-logic x86__rangesintersect__B100b__res__assume : bool
-
-logic temp___211 : t
-
-logic temp___208 : t
-
-logic temp___205 : t
-
-logic temp___204 : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : bool
-
-logic n4 : t
-
-logic n12 : t
-
-logic n22 : t
-
-logic n13 : t
-
-logic n23 : t
-
-logic n5 : t
-
-logic result : t
-
-logic n6 : t
-
-logic result1 : t
-
-logic n14 : t
-
-logic result2 : t
-
-logic n24 : t
-
-logic result3 : t
-
-logic n15 : t
-
-logic result4 : t
-
-logic n25 : t
-
-logic result5 : t
-
-logic n16 : t
-
-logic result6 : t
-
-logic n26 : t
-
-logic n7 : t
-
-logic n17 : t
-
-logic n27 : t
-
-logic result7 : t
-
-logic n8 : t
-
-logic result8 : t
-
-logic n18 : t
-
-logic result9 : t
-
-logic n28 : t
-
-logic result10 : t
-
-logic n19 : t
-
-logic result11 : t
-
-logic n29 : t
-
-logic result12 : t
-
-logic n110 : t
-
-logic result13 : t
-
-logic n210 : t
-
-logic n9 : t
-
-logic n111 : t
-
-logic n211 : t
-
-logic n10 : t
-
-logic n112 : t
-
-logic n212 : t
-
-logic n20 : t
-
-logic n113 : t
-
-logic n213 : t
-
-logic n30 : t
-
-logic n114 : t
-
-logic n214 : t
-
-logic n31 : t
-
-logic n115 : t
-
-logic n215 : t
-
-logic n32 : t
-
-logic n116 : t
-
-logic n216 : t
-
-logic result14 : t
-
-logic n117 : t
-
-logic n118 : t
-
-logic n217 : t
-
-logic n33 : t
-
-logic result15 : t
-
-logic n218 : t
-
-logic result16 : t
-
-logic n34 : t
-
-logic n219 : t
-
-logic n35 : t
-
-logic result17 : t
-
-logic n220 : t
-
-logic result18 : t
-
-logic n36 : t
-
-logic n221 : t
-
-logic n37 : t
-
-logic n222 : t
-
-logic n38 : t
-
-logic n223 : t
-
-logic n39 : t
-
-logic n224 : t
-
-logic n40 : t
-
-logic n225 : t
-
-logic n41 : t
-
-logic n226 : t
-
-logic n42 : t
-
-logic result19 : t
-
-logic n119 : t
-
-logic n120 : t
-
-logic n227 : t
-
-logic n43 : t
-
-logic n121 : t
-
-logic n228 : t
-
-logic n44 : t
-
-logic n122 : t
-
-logic n229 : t
-
-logic n45 : t
-
-logic n123 : t
-
-logic n230 : t
-
-logic n46 : t
-
-logic n124 : t
-
-logic n231 : t
-
-logic n47 : t
-
-logic n125 : t
-
-logic n232 : t
-
-logic n48 : t
-
-logic n126 : t
-
-logic n233 : t
-
-logic n49 : t
-
-logic n127 : t
-
-logic n234 : t
-
-logic n50 : t
-
-logic n51 : t
-
-logic n128 : t
-
-logic n235 : t
-
-logic n129 : t
-
-logic n236 : t
-
-logic n52 : t
-
-logic n53 : t
-
-logic n130 : t
-
-logic n237 : t
-
-logic n131 : t
-
-logic n238 : t
-
-logic n54 : t
-
-logic result20 : bool
-
-logic x86__rangesintersect__result1 : bool
-
-logic x86__rangesintersect__result2 : bool
-
-logic x86__rangesintersect__result3 : bool
-
-logic n55 : t
-
-logic n132 : t
-
-logic n239 : t
-
-logic n133 : t
-
-logic n240 : t
-
-logic n56 : t
-
-logic x86__rangesintersect__result4 : bool
-
-logic n57 : t
-
-logic n134 : t
-
-logic n241 : t
-
-logic n135 : t
-
-logic n242 : t
-
-logic n58 : t
-
-logic x86__rangesintersect__result5 : bool
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : true
-
-axiom H3 : true
-
-axiom H4 : ule(var1_range_size, sub(of_int(18446744073709551615),
-  var2_range_size))
-
-axiom H5 : ((x86__rangesintersect__B100b__res__assume = inrange64(var1,
-  sub(var2, var1_range_size), add(var1_range_size, var2_range_size))) and
-  ((x86__rangesintersect__B100b__res__assume = true) <->
-  (exists n59:t. ((ule(of_int(0), n59) and ule(n59, add(var1_range_size,
-  var2_range_size))) and (var1 = add(sub(var2, var1_range_size), n59))))))
-
-axiom H6 : (x86__rangesintersect__B100b__res__assume = res)
-
-axiom H7 : (not (res = true))
-
-axiom H8 : (result14 = n11)
-
-axiom H9 : (n117 = of_int(0))
-
-axiom H10 : ((ule(of_int(0), n117) and ule(n117, var1_range_size)) ->
-  (((temp___208 = n117) and (((not (n118 = of_int(0))) ->
-  (forall i:t. ((ule(of_int(0), i) and ule(i, sub(n118, of_int(1)))) ->
-  (forall j:t. ((ule(of_int(0), j) and ule(j, var2_range_size)) ->
-  (not (add(var1, i) = add(var2, j)))))))) and (((ule(of_int(0),
-  var1_range_size) -> dynamic_property1(of_int(0), var1_range_size,
-  n118)) and (ule(of_int(0), n118) and ule(n118, var1_range_size))) and
-  ((((result15 = n217) and (n218 = of_int(0))) and (((ule(of_int(0),
-  n218) and ule(n218, var2_range_size)) -> ((((temp___205 = n33) and
-  ((temp___204 = n218) and (((o = add(n218, sub(var1_range_size, n118))) and
-  ((result16 = n33) and (n34 = o))) and ((ule(of_int(0), n34) and ule(n34,
-  add(var1_range_size, var2_range_size))) and ((not (var1 = add(sub(var2,
-  var1_range_size), n34))) and ((not (add(var1, n118) = add(var2, n218))) and
-  ((forall j:t. ((ule(of_int(0), j) and ule(j, n219)) -> (not (add(var1,
-   n118) = add(var2, j))))) and (((ule(of_int(0), var2_range_size) ->
-  dynamic_property2(of_int(0), var2_range_size, n219)) and (ule(of_int(0),
-  n219) and ule(n219, var2_range_size))) and
-  (n219 = var2_range_size))))))))) and (((n39 = n35) and (n223 = n219)) and
-  ((n40 = n35) and (n224 = n219)))) and (((n41 = n39) and (n225 = n223)) and
-  ((n42 = n40) and (n226 = n224))))) and ((not (ule(of_int(0), n218) and
-  ule(n218, var2_range_size))) -> (((n41 = n33) and (n225 = n218)) and
-  ((n42 = n33) and (n226 = n218)))))) and
-  ((forall j:t. ((ule(of_int(0), j) and ule(j, var2_range_size)) ->
-   (not (add(var1, n118) = add(var2, j))))) and (((not (n118 = of_int(0))) ->
-  (forall i:t. ((ule(of_int(0), i) and ule(i, n118)) ->
-  (forall j:t. ((ule(of_int(0), j) and ule(j, var2_range_size)) ->
-  (not (add(var1, i) = add(var2, j)))))))) and
-  ((forall i:t. ((ule(of_int(0), i) and ule(i, n118)) ->
-   (forall j:t. ((ule(of_int(0), j) and ule(j, var2_range_size)) ->
-   (not (add(var1, i) = add(var2, j))))))) and
-  (n118 = var1_range_size)))))))) and (((n47 = n41) and ((n231 = n225) and
-  (n124 = n118))) and ((n48 = n42) and ((n232 = n226) and (n125 = n118))))))
-
-axiom H11 : ((ule(of_int(0), n117) and ule(n117, var1_range_size)) ->
-  (n49 = n47))
-
-axiom H12 : ((ule(of_int(0), n117) and ule(n117, var1_range_size)) ->
-  (n233 = n231))
-
-axiom H13 : ((ule(of_int(0), n117) and ule(n117, var1_range_size)) ->
-  (n126 = n124))
-
-axiom H14 : ((ule(of_int(0), n117) and ule(n117, var1_range_size)) ->
-  (n50 = n48))
-
-axiom H15 : ((ule(of_int(0), n117) and ule(n117, var1_range_size)) ->
-  (n234 = n232))
-
-axiom H16 : ((ule(of_int(0), n117) and ule(n117, var1_range_size)) ->
-  (n127 = n125))
-
-axiom H17 : ((not (ule(of_int(0), n117) and ule(n117, var1_range_size))) ->
-  (n49 = n3))
-
-axiom H18 : ((not (ule(of_int(0), n117) and ule(n117, var1_range_size))) ->
-  (n233 = n21))
-
-axiom H19 : ((not (ule(of_int(0), n117) and ule(n117, var1_range_size))) ->
-  (n126 = n117))
-
-axiom H20 : ((not (ule(of_int(0), n117) and ule(n117, var1_range_size))) ->
-  (n50 = n5))
-
-axiom H21 : ((not (ule(of_int(0), n117) and ule(n117, var1_range_size))) ->
-  (n234 = n23))
-
-axiom H22 : ((not (ule(of_int(0), n117) and ule(n117, var1_range_size))) ->
-  (n127 = n117))
-
-logic i : t
-
-axiom H23 : ule(of_int(0), i)
-
-axiom H24 : ule(i, var1_range_size)
-
-logic j : t
-
-axiom H25 : ule(of_int(0), j)
-
-axiom H26 : ule(j, var2_range_size)
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 1)
 
  (* File "x86.ads", line 19, characters 0-0 *)
-goal WP_parameter_def : (not (add(var1, i) = add(var2, j)))
+goal WP_parameter_def :
+  (forall n1:t. forall n2:t. forall n:t.
+  forall x86__rangesintersect__B100b__res__assume:bool. forall temp___242:t.
+  forall temp___239:t. forall temp___238:t. forall o:t. forall n21:t.
+  forall n3:t. forall result:t. forall n11:t. forall n12:t. forall n22:t.
+  forall n4:t. forall result1:t. forall n23:t. forall result2:t. forall n5:t.
+  forall n24:t. forall n6:t. forall n25:t. forall n7:t. forall n26:t.
+  forall n8:t. forall n27:t. forall n9:t. forall n28:t. forall n10:t.
+  forall n13:t__ref. forall n29:t__ref. forall n14:t__ref. forall n15:t.
+  forall n210:t. forall n16:t. forall n17:t__ref. forall n211:t__ref.
+  forall n18:t__ref. forall n19:t. forall n212:t. forall n20:t.
+  (ule(var1_range_size, sub(rliteral1, var2_range_size)) ->
+  ((((x86__rangesintersect__B100b__res__assume = inrange64(var1, sub(var2,
+  var1_range_size), add(var1_range_size, var2_range_size))) and
+  ((x86__rangesintersect__B100b__res__assume = true) <->
+  (exists n30:t. ((ule(rliteral, n30) and ule(n30, add(var1_range_size,
+  var2_range_size))) and (var1 = add(sub(var2, var1_range_size), n30)))))) and
+  (x86__rangesintersect__B100b__res__assume = res)) -> ((not (res = true)) ->
+  ((((result = n1) and (n11 = rliteral)) and (((ule(rliteral, n11) and
+  ule(n11, var1_range_size)) and ((((temp___242 = n11) and
+  ((((not (n12 = rliteral)) and
+  (forall i:t. ((ule(rliteral, i) and ule(i, sub(n12, rliteral2))) ->
+  (forall j:t. ((ule(rliteral, j) and ule(j, var2_range_size)) ->
+  (not (add(var1, i) = add(var2, j)))))))) or (n12 = rliteral)) and
+  (((ule(rliteral, var1_range_size) -> dynamic_property1(rliteral,
+  var1_range_size, n12)) and (ule(rliteral, n12) and ule(n12,
+  var1_range_size))) and ((((result1 = n22) and (n23 = rliteral)) and
+  (((ule(rliteral, n23) and ule(n23, var2_range_size)) and
+  ((((temp___239 = n4) and ((temp___238 = n23) and (((o = add(n23,
+  sub(var1_range_size, n12))) and ((n4 = result2) and (n5 = o))) and
+  ((ule(rliteral, n5) and ule(n5, add(var1_range_size, var2_range_size))) and
+  ((not (var1 = add(sub(var2, var1_range_size), n5))) and ((not (add(var1,
+  n12) = add(var2, n23))) and
+  ((forall j:t. ((ule(rliteral, j) and ule(j, n24)) -> (not (add(var1,
+   n12) = add(var2, j))))) and
+  (((ule(rliteral, var2_range_size) -> dynamic_property2(rliteral,
+  var2_range_size, n24)) and (ule(rliteral, n24) and ule(n24,
+  var2_range_size))) and (n24 = var2_range_size))))))))) and (((n6 = n7) and
+  (n24 = n25)) and ((n8 = n6) and (n26 = n24)))) and ((({ t__content = n9
+  } = { t__content = n7 }) and ({ t__content = n27 } = { t__content = n25
+  })) and ((n10 = n8) and (n28 = n26))))) or ((not (ule(rliteral, n23) and
+  ule(n23, var2_range_size))) and (((n4 = n9) and (n23 = n27)) and
+  ((n10 = n4) and (n28 = n23)))))) and
+  ((forall j:t. ((ule(rliteral, j) and ule(j, var2_range_size)) ->
+   (not (add(var1, n12) = add(var2, j))))) and
+  ((((not (n12 = rliteral)) and
+  (forall i:t. ((ule(rliteral, i) and ule(i, n12)) ->
+  (forall j:t. ((ule(rliteral, j) and ule(j, var2_range_size)) ->
+  (not (add(var1, i) = add(var2, j)))))))) or (n12 = rliteral)) and
+  ((forall i:t. ((ule(rliteral, i) and ule(i, n12)) ->
+   (forall j:t. ((ule(rliteral, j) and ule(j, var2_range_size)) ->
+   (not (add(var1, i) = add(var2, j))))))) and
+  (n12 = var1_range_size)))))))) and (((n14 = { t__content = n9 }) and
+  ((n29 = { t__content = n27 }) and (n13 = { t__content = n12 }))) and
+  ((n16 = n10) and ((n210 = n28) and (n15 = n12))))) and (((n18 = n14) and
+  ((n211 = n29) and (n17 = n13))) and ((n20 = n16) and ((n212 = n210) and
+  (n19 = n15)))))) or ((not (ule(rliteral, n11) and ule(n11,
+  var1_range_size))) and (((n18 = { t__content = n }) and ((n211 = {
+  t__content = n2 }) and (n17 = { t__content = n11 }))) and ((n20 = n3) and
+  ((n212 = n21) and (n19 = n11))))))) ->
+  (forall i:t. ((ule(rliteral, i) and ule(i, var1_range_size)) ->
+  (forall j:t. ((ule(rliteral, j) and ule(j, var2_range_size)) ->
+  (not (add(var1, i) = add(var2, j))))))))))))

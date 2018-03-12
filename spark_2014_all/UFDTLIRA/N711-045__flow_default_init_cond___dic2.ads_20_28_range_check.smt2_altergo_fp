@@ -113,9 +113,5 @@ axiom foo__post_axiom : true
 axiom foo__def_axiom :
   (forall par:int [foo(par)]. ((foo(par) = true) <-> (par = 0)))
 
-logic us : int
-
-logic temp___156 : int
-
  (* File "dic2.ads", line 17, characters 0-0 *)
 goal WP_parameter_def : in_range(0)

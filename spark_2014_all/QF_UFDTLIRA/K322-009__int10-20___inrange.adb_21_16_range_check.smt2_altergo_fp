@@ -133,63 +133,10 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : int
-
-logic y : int
-
-logic inrange__do_it__result : int
-
-logic o : int
-
-logic inrange__add_out__i : int
-
-logic o1 : int
-
-logic result : int
-
-logic x1 : int
-
-logic result1 : int
-
-logic y1 : int
-
-logic inrange__add_out__i1 : int
-
-logic result2 : int
-
-logic x2 : int
-
-logic result3 : int
-
-logic inrange__do_it__result1 : int
-
-logic inrange__do_it__result2 : int
-
-logic inrange__do_it__result3 : int
-
-logic x3 : int
-
-logic y2 : int
-
-logic inrange__do_it__result4 : int
-
-logic x4 : int
-
-logic y3 : int
-
-logic inrange__do_it__result5 : int
-
-axiom H : (result = x)
-
-axiom H1 : (x1 = 10)
-
-axiom H2 : in_range1(x1)
-
-axiom H3 : (result1 = y)
-
-axiom H4 : (y1 = 10)
-
-axiom H5 : in_range1(y1)
-
  (* File "inrange.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : in_range(x1)
+goal WP_parameter_def :
+  (forall x:int. forall y:int. forall result:int. forall x1:int.
+  forall result1:int. forall y1:int. ((({ int__content = result } = {
+  int__content = x }) and (x1 = 10)) -> (in_range1(x1) -> ((({ int__content =
+  result1 } = { int__content = y }) and (y1 = 10)) -> (in_range1(y1) ->
+  in_range(x1))))))

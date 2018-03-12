@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -960,15 +960,15 @@ axiom elements__post_axiom :
   rec__p__my_sets__set = container1 } })) = length({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = container }; us_split_fields1 = {
   rec__p__my_sets__set = container1 } })) and
-  (forall temp___393:int. ((in_range6(temp___393) and ((1 <= temp___393) and
-  (temp___393 <= (0 + length3(elements({ us_split_discrs1 = {
+  (forall temp___435:int. ((in_range6(temp___435) and ((1 <= temp___435) and
+  (temp___435 <= (0 + length3(elements({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = container }; us_split_fields1 = {
   rec__p__my_sets__set = container1 } })))))) -> (contains(model__({
   us_split_discrs1 = { rec__p__my_sets__set__capacity = container };
   us_split_fields1 = { rec__p__my_sets__set = container1 } }),
   get1(elements({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
   container }; us_split_fields1 = { rec__p__my_sets__set = container1 } }),
-  temp___393)) = true)))) and
+  temp___435)) = true)))) and
   (forall item:int. ((in_range5(item) and (contains(model__({
   us_split_discrs1 = { rec__p__my_sets__set__capacity = container };
   us_split_fields1 = { rec__p__my_sets__set = container1 } }),
@@ -1288,204 +1288,178 @@ axiom w_get__post_axiom :
   ((in_range1(witness1) and (has_witness(container, witness1) = true)) ->
   in_range8(w_get(container, witness1)))))
 
-logic l__split_fields : us_main_type
-
-logic l__split_fields1 : us_main_type
-
-logic cu__split_fields : count_type
-
-logic i : bool
-
-logic l__split_fields2 : us_main_type
-
-logic cu__split_fields1 : count_type
-
-logic l__split_fields3 : us_main_type
-
-logic cu__split_fields2 : count_type
-
-logic i1 : bool
-
-logic l__split_fields4 : us_main_type
-
-logic cu__split_fields3 : count_type
-
-logic i2 : bool
-
-axiom H : in_range2(e)
-
-axiom H1 : ((length({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
+ (* File "p.ads", line 14, characters 0-0 *)
+goal WP_parameter_def :
+  (forall l__split_fields:us_main_type. forall l__split_fields1:us_main_type.
+  forall cu__split_fields:count_type. forall i:bool. (in_range2(e) ->
+  (((length({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
   l__split_discrs }; us_split_fields1 = { rec__p__my_sets__set =
   l__split_fields } }) <  to_rep(l__split_discrs)) and
   (not (contains(model__({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
-  rec__p__my_sets__set = l__split_fields } }), e) = true)))
-
-axiom H2 : (((((contains(model__({ us_split_discrs1 = {
+  rec__p__my_sets__set = l__split_fields } }), e) = true))) ->
+  ((((((contains(model__({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
   rec__p__my_sets__set = l__split_fields1 } }), e) = true) and
   (has_key(positions({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
   l__split_discrs }; us_split_fields1 = { rec__p__my_sets__set =
   l__split_fields1 } }), { us_split_fields3 = {
   rec__p__my_sets__cursor__node = cu__split_fields } }) = true)) and
-  ((not (my_lt(get1(elements({ us_split_discrs1 = {
+  ((my_lt(get1(elements({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
   rec__p__my_sets__set = l__split_fields1 } }), get(positions({
   us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
   us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }), {
   us_split_fields3 = { rec__p__my_sets__cursor__node = cu__split_fields }
-  })), e) = true)) and ((my_lt(get1(elements({ us_split_discrs1 = {
+  })), e) = false) and (my_lt(e, get1(elements({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
   rec__p__my_sets__set = l__split_fields1 } }), get(positions({
   us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
   us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }), {
   us_split_fields3 = { rec__p__my_sets__cursor__node = cu__split_fields }
-  })), e) = false) -> (not (my_lt(e, get1(elements({ us_split_discrs1 = {
-  rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
-  rec__p__my_sets__set = l__split_fields1 } }), get(positions({
-  us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
-  us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }), {
-  us_split_fields3 = { rec__p__my_sets__cursor__node = cu__split_fields }
-  }))) = true))))) and (((0 <  get(positions({ us_split_discrs1 = {
+  }))) = false))) and (((0 <  get(positions({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
   rec__p__my_sets__set = l__split_fields1 } }), { us_split_fields3 = {
-  rec__p__my_sets__cursor__node = cu__split_fields } })) ->
-  (((forall i3:int. (((1 <= i3) and (i3 <= (get(positions({
+  rec__p__my_sets__cursor__node = cu__split_fields } })) and
+  (((forall i1:int. (((1 <= i1) and (i1 <= (get(positions({
     us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
     us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }), {
     us_split_fields3 = { rec__p__my_sets__cursor__node = cu__split_fields }
     }) - 1))) -> (my_lt(get1(elements({ us_split_discrs1 = {
     rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
-    rec__p__my_sets__set = l__split_fields1 } }), i3), e) = true))) ->
+    rec__p__my_sets__set = l__split_fields1 } }), i1), e) = true))) and
   (((get(positions({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
   l__split_discrs }; us_split_fields1 = { rec__p__my_sets__set =
   l__split_fields1 } }), { us_split_fields3 = {
   rec__p__my_sets__cursor__node = cu__split_fields } }) <  length3(elements({
   us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
-  us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }))) ->
-  (((forall i3:int. ((((get(positions({ us_split_discrs1 = {
+  us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }))) and
+  (((forall i1:int. ((((get(positions({ us_split_discrs1 = {
     rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
     rec__p__my_sets__set = l__split_fields1 } }), { us_split_fields3 = {
-    rec__p__my_sets__cursor__node = cu__split_fields } }) + 1) <= i3) and
-    (i3 <= length3(elements({ us_split_discrs1 = {
+    rec__p__my_sets__cursor__node = cu__split_fields } }) + 1) <= i1) and
+    (i1 <= length3(elements({ us_split_discrs1 = {
     rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
     rec__p__my_sets__set = l__split_fields1 } })))) -> (my_lt(e,
     get1(elements({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
     l__split_discrs }; us_split_fields1 = { rec__p__my_sets__set =
-    l__split_fields1 } }), i3)) = true))) -> (match_bool(true, true,
-  false) = true)) and
-  ((not (forall i3:int. ((((get(positions({ us_split_discrs1 = {
+    l__split_fields1 } }), i1)) = true))) and
+  (match_bool(true, true, false) = true)) or
+  ((not (forall i1:int. ((((get(positions({ us_split_discrs1 = {
         rec__p__my_sets__set__capacity = l__split_discrs };
         us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }), {
         us_split_fields3 = { rec__p__my_sets__cursor__node = cu__split_fields
-        } }) + 1) <= i3) and (i3 <= length3(elements({ us_split_discrs1 = {
+        } }) + 1) <= i1) and (i1 <= length3(elements({ us_split_discrs1 = {
         rec__p__my_sets__set__capacity = l__split_discrs };
         us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 }
         })))) -> (my_lt(e, get1(elements({ us_split_discrs1 = {
         rec__p__my_sets__set__capacity = l__split_discrs };
         us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }),
-        i3)) = true)))) -> (match_bool(true, false, false) = true)))) and
-  ((not (get(positions({ us_split_discrs1 = {
-  rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
-  rec__p__my_sets__set = l__split_fields1 } }), { us_split_fields3 = {
-  rec__p__my_sets__cursor__node = cu__split_fields } }) <  length3(elements({
+        i1)) = true)))) and
+  (match_bool(true, false, false) = true)))) or ((not (get(positions({
   us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
-  us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } })))) ->
-  (match_bool(true, of_int(1), false) = true)))) and
-  ((not (forall i3:int. (((1 <= i3) and (i3 <= (get(positions({
+  us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }), {
+  us_split_fields3 = { rec__p__my_sets__cursor__node = cu__split_fields }
+  }) <  length3(elements({ us_split_discrs1 = {
+  rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
+  rec__p__my_sets__set = l__split_fields1 } })))) and (match_bool(true,
+  of_int(1), false) = true)))) or
+  ((not (forall i1:int. (((1 <= i1) and (i1 <= (get(positions({
         us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs
         }; us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }),
         { us_split_fields3 = { rec__p__my_sets__cursor__node =
         cu__split_fields } }) - 1))) -> (my_lt(get1(elements({
         us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs
         }; us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }),
-        i3), e) = true)))) -> (((get(positions({ us_split_discrs1 = {
-  rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
-  rec__p__my_sets__set = l__split_fields1 } }), { us_split_fields3 = {
-  rec__p__my_sets__cursor__node = cu__split_fields } }) <  length3(elements({
-  us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
-  us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }))) ->
-  (((forall i3:int. ((((get(positions({ us_split_discrs1 = {
-    rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
-    rec__p__my_sets__set = l__split_fields1 } }), { us_split_fields3 = {
-    rec__p__my_sets__cursor__node = cu__split_fields } }) + 1) <= i3) and
-    (i3 <= length3(elements({ us_split_discrs1 = {
-    rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
-    rec__p__my_sets__set = l__split_fields1 } })))) -> (my_lt(e,
-    get1(elements({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
-    l__split_discrs }; us_split_fields1 = { rec__p__my_sets__set =
-    l__split_fields1 } }), i3)) = true))) -> (match_bool(false, true,
-  false) = true)) and
-  ((not (forall i3:int. ((((get(positions({ us_split_discrs1 = {
-        rec__p__my_sets__set__capacity = l__split_discrs };
-        us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }), {
-        us_split_fields3 = { rec__p__my_sets__cursor__node = cu__split_fields
-        } }) + 1) <= i3) and (i3 <= length3(elements({ us_split_discrs1 = {
-        rec__p__my_sets__set__capacity = l__split_discrs };
-        us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 }
-        })))) -> (my_lt(e, get1(elements({ us_split_discrs1 = {
-        rec__p__my_sets__set__capacity = l__split_discrs };
-        us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }),
-        i3)) = true)))) -> (match_bool(false, false, false) = true)))) and
-  ((not (get(positions({ us_split_discrs1 = {
-  rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
-  rec__p__my_sets__set = l__split_fields1 } }), { us_split_fields3 = {
-  rec__p__my_sets__cursor__node = cu__split_fields } }) <  length3(elements({
-  us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
-  us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } })))) ->
-  (match_bool(false, of_int(1), false) = true)))))) and
-  ((not (0 <  get(positions({ us_split_discrs1 = {
-  rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
-  rec__p__my_sets__set = l__split_fields1 } }), { us_split_fields3 = {
-  rec__p__my_sets__cursor__node = cu__split_fields } }))) ->
+        i1), e) = true)))) and
   (((get(positions({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
   l__split_discrs }; us_split_fields1 = { rec__p__my_sets__set =
   l__split_fields1 } }), { us_split_fields3 = {
   rec__p__my_sets__cursor__node = cu__split_fields } }) <  length3(elements({
   us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
-  us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }))) ->
-  (((forall i3:int. ((((get(positions({ us_split_discrs1 = {
+  us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }))) and
+  (((forall i1:int. ((((get(positions({ us_split_discrs1 = {
     rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
     rec__p__my_sets__set = l__split_fields1 } }), { us_split_fields3 = {
-    rec__p__my_sets__cursor__node = cu__split_fields } }) + 1) <= i3) and
-    (i3 <= length3(elements({ us_split_discrs1 = {
+    rec__p__my_sets__cursor__node = cu__split_fields } }) + 1) <= i1) and
+    (i1 <= length3(elements({ us_split_discrs1 = {
     rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
     rec__p__my_sets__set = l__split_fields1 } })))) -> (my_lt(e,
     get1(elements({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
     l__split_discrs }; us_split_fields1 = { rec__p__my_sets__set =
-    l__split_fields1 } }), i3)) = true))) -> (match_bool(of_int(1), true,
-  false) = true)) and
-  ((not (forall i3:int. ((((get(positions({ us_split_discrs1 = {
+    l__split_fields1 } }), i1)) = true))) and
+  (match_bool(false, true, false) = true)) or
+  ((not (forall i1:int. ((((get(positions({ us_split_discrs1 = {
         rec__p__my_sets__set__capacity = l__split_discrs };
         us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }), {
         us_split_fields3 = { rec__p__my_sets__cursor__node = cu__split_fields
-        } }) + 1) <= i3) and (i3 <= length3(elements({ us_split_discrs1 = {
+        } }) + 1) <= i1) and (i1 <= length3(elements({ us_split_discrs1 = {
         rec__p__my_sets__set__capacity = l__split_discrs };
         us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 }
         })))) -> (my_lt(e, get1(elements({ us_split_discrs1 = {
         rec__p__my_sets__set__capacity = l__split_discrs };
         us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }),
-        i3)) = true)))) -> (match_bool(of_int(1), false,
-  false) = true)))) and ((not (get(positions({ us_split_discrs1 = {
+        i1)) = true)))) and
+  (match_bool(false, false, false) = true)))) or ((not (get(positions({
+  us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
+  us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }), {
+  us_split_fields3 = { rec__p__my_sets__cursor__node = cu__split_fields }
+  }) <  length3(elements({ us_split_discrs1 = {
+  rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
+  rec__p__my_sets__set = l__split_fields1 } })))) and (match_bool(false,
+  of_int(1), false) = true)))))) or ((not (0 <  get(positions({
+  us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
+  us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }), {
+  us_split_fields3 = { rec__p__my_sets__cursor__node = cu__split_fields }
+  }))) and (((get(positions({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
   rec__p__my_sets__set = l__split_fields1 } }), { us_split_fields3 = {
   rec__p__my_sets__cursor__node = cu__split_fields } }) <  length3(elements({
   us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
-  us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } })))) ->
-  (match_bool(of_int(1), of_int(1), false) = true)))))) and
-  (((contains(model__({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
-  l__split_discrs }; us_split_fields1 = { rec__p__my_sets__set =
-  l__split_fields } }), e) = true) -> ((((not (i = true)) and (oeq3(model__({
+  us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }))) and
+  (((forall i1:int. ((((get(positions({ us_split_discrs1 = {
+    rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
+    rec__p__my_sets__set = l__split_fields1 } }), { us_split_fields3 = {
+    rec__p__my_sets__cursor__node = cu__split_fields } }) + 1) <= i1) and
+    (i1 <= length3(elements({ us_split_discrs1 = {
+    rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
+    rec__p__my_sets__set = l__split_fields1 } })))) -> (my_lt(e,
+    get1(elements({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
+    l__split_discrs }; us_split_fields1 = { rec__p__my_sets__set =
+    l__split_fields1 } }), i1)) = true))) and
+  (match_bool(of_int(1), true, false) = true)) or
+  ((not (forall i1:int. ((((get(positions({ us_split_discrs1 = {
+        rec__p__my_sets__set__capacity = l__split_discrs };
+        us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }), {
+        us_split_fields3 = { rec__p__my_sets__cursor__node = cu__split_fields
+        } }) + 1) <= i1) and (i1 <= length3(elements({ us_split_discrs1 = {
+        rec__p__my_sets__set__capacity = l__split_discrs };
+        us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 }
+        })))) -> (my_lt(e, get1(elements({ us_split_discrs1 = {
+        rec__p__my_sets__set__capacity = l__split_discrs };
+        us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }),
+        i1)) = true)))) and
+  (match_bool(of_int(1), false, false) = true)))) or ((not (get(positions({
   us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
-  us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }),
-  model__({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
-  l__split_discrs }; us_split_fields1 = { rec__p__my_sets__set =
-  l__split_fields } })) = true)) and (((bool_eq1(length3(elements({
+  us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }), {
+  us_split_fields3 = { rec__p__my_sets__cursor__node = cu__split_fields }
+  }) <  length3(elements({ us_split_discrs1 = {
+  rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
+  rec__p__my_sets__set = l__split_fields1 } })))) and (match_bool(of_int(1),
+  of_int(1), false) = true)))))) and (((contains(model__({ us_split_discrs1 =
+  { rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
+  rec__p__my_sets__set = l__split_fields } }), e) = true) and
+  ((((not (i = true)) and (oeq3(model__({ us_split_discrs1 = {
+  rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
+  rec__p__my_sets__set = l__split_fields1 } }), model__({ us_split_discrs1 =
+  { rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
+  rec__p__my_sets__set = l__split_fields } })) = true)) and
+  ((bool_eq1(length3(elements({ us_split_discrs1 = {
+  rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
+  rec__p__my_sets__set = l__split_fields1 } })), length3(elements({
   us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
-  us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } })),
-  length3(elements({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
-  l__split_discrs }; us_split_fields1 = { rec__p__my_sets__set =
-  l__split_fields } }))) = true) ->
+  us_split_fields1 = { rec__p__my_sets__set = l__split_fields }
+  }))) = true) and
   (forall n:int. (((1 <= n) and (n <= (0 + length3(elements({
   us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
   us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }))))) ->
@@ -1493,21 +1467,15 @@ axiom H2 : (((((contains(model__({ us_split_discrs1 = {
   l__split_discrs }; us_split_fields1 = { rec__p__my_sets__set =
   l__split_fields1 } }), n) = get1(elements({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
-  rec__p__my_sets__set = l__split_fields } }), n))))) and
-  (not (bool_eq1(length3(elements({ us_split_discrs1 = {
-  rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
-  rec__p__my_sets__set = l__split_fields1 } })), length3(elements({
+  rec__p__my_sets__set = l__split_fields } }), n)))))) and (oeq2(positions({
   us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
-  us_split_fields1 = { rec__p__my_sets__set = l__split_fields }
-  }))) = false)))) and (oeq2(positions({ us_split_discrs1 = {
-  rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
-  rec__p__my_sets__set = l__split_fields1 } }), positions({
+  us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }),
+  positions({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
+  l__split_discrs }; us_split_fields1 = { rec__p__my_sets__set =
+  l__split_fields } })) = true))) or ((not (contains(model__({
   us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
-  us_split_fields1 = { rec__p__my_sets__set = l__split_fields }
-  })) = true))) and ((not (contains(model__({ us_split_discrs1 = {
-  rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
-  rec__p__my_sets__set = l__split_fields } }), e) = true)) ->
-  ((((((((i = true) and (length({ us_split_discrs1 = {
+  us_split_fields1 = { rec__p__my_sets__set = l__split_fields } }),
+  e) = true)) and ((((((((i = true) and (length({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
   rec__p__my_sets__set = l__split_fields1 } }) = (length({ us_split_discrs1 =
   { rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
@@ -1528,38 +1496,38 @@ axiom H2 : (((((contains(model__({ us_split_discrs1 = {
   rec__p__my_sets__set = l__split_fields1 } }), model__({ us_split_discrs1 =
   { rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
   rec__p__my_sets__set = l__split_fields } }), e) = true)) and
-  (forall i3:int. (((1 <= i3) and (i3 <= (get(positions({ us_split_discrs1 =
+  (forall i1:int. (((1 <= i1) and (i1 <= (get(positions({ us_split_discrs1 =
   { rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
   rec__p__my_sets__set = l__split_fields1 } }), { us_split_fields3 = {
   rec__p__my_sets__cursor__node = cu__split_fields } }) - 1))) ->
   (get1(elements({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
   l__split_discrs }; us_split_fields1 = { rec__p__my_sets__set =
-  l__split_fields } }), i3) = get1(elements({ us_split_discrs1 = {
+  l__split_fields } }), i1) = get1(elements({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
-  rec__p__my_sets__set = l__split_fields1 } }), i3))))) and
-  ((forall i3:int. (((get(positions({ us_split_discrs1 = {
+  rec__p__my_sets__set = l__split_fields1 } }), i1))))) and
+  ((forall i1:int. (((get(positions({ us_split_discrs1 = {
    rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
    rec__p__my_sets__set = l__split_fields1 } }), { us_split_fields3 = {
-   rec__p__my_sets__cursor__node = cu__split_fields } }) <= i3) and
-   (i3 <= length({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
+   rec__p__my_sets__cursor__node = cu__split_fields } }) <= i1) and
+   (i1 <= length({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
    l__split_discrs }; us_split_fields1 = { rec__p__my_sets__set =
    l__split_fields } }))) -> (get1(elements({ us_split_discrs1 = {
    rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
-   rec__p__my_sets__set = l__split_fields } }), i3) = get1(elements({
+   rec__p__my_sets__set = l__split_fields } }), i1) = get1(elements({
    us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
    us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }),
-   (i3 + 1))))) and
-  (forall i3:int. ((((get(positions({ us_split_discrs1 = {
+   (i1 + 1))))) and
+  (forall i1:int. ((((get(positions({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
   rec__p__my_sets__set = l__split_fields1 } }), { us_split_fields3 = {
-  rec__p__my_sets__cursor__node = cu__split_fields } }) + 1) <= i3) and
-  (i3 <= (length({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
+  rec__p__my_sets__cursor__node = cu__split_fields } }) + 1) <= i1) and
+  (i1 <= (length({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
   l__split_discrs }; us_split_fields1 = { rec__p__my_sets__set =
   l__split_fields } }) + 1))) -> (get1(elements({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
-  rec__p__my_sets__set = l__split_fields } }), (i3 - 1)) = get1(elements({
+  rec__p__my_sets__set = l__split_fields } }), (i1 - 1)) = get1(elements({
   us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
-  us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }), i3)))))) and
+  us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }), i1)))))) and
   (p_positions_shifted(positions({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
   rec__p__my_sets__set = l__split_fields } }), positions({ us_split_discrs1 =
@@ -1568,7 +1536,4 @@ axiom H2 : (((((contains(model__({ us_split_discrs1 = {
   us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
   us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }), {
   us_split_fields3 = { rec__p__my_sets__cursor__node = cu__split_fields } }),
-  1) = true)))))
-
- (* File "p.ads", line 14, characters 0-0 *)
-goal WP_parameter_def : (i = true)
+  1) = true))))) -> (i = true)))))

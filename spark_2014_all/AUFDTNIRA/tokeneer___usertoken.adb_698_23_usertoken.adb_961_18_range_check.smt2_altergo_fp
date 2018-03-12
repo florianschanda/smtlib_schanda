@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -162,24 +162,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq3 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -190,17 +172,17 @@ axiom bool_eq_def2 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq3(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq3(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -210,37 +192,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq3(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq3(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq3(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 type namecountt
 
@@ -686,11 +640,6 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic audittypes__nodescription__aggregate_def : int -> (int,character) farray
 
-axiom def_axiom :
-  (forall temp___140:int.
-  (forall temp___141:int.
-  ((audittypes__nodescription__aggregate_def(temp___140)[temp___141]) = of_rep(temp___140))))
-
 type yearst
 
 predicate in_range7(x: int) = ((1901 <= x) and (x <= 2099))
@@ -1072,6 +1021,46 @@ axiom coerce_axiom9 :
   (forall x:int [to_rep9(of_rep9(x))]. (in_range12(x) ->
   (to_rep9(of_rep9(x)) = x)))
 
+type logfilecountt
+
+predicate in_range13(x: int) = ((0 <= x) and (x <= 17))
+
+logic bool_eq18 : int, int -> bool
+
+axiom bool_eq_def17 :
+  (forall x:int. forall y:int [bool_eq18(x, y)]. (((x = y) -> (bool_eq18(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq18(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE13 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check13 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE13 : us_image -> int
+
+logic user_eq16 : logfilecountt, logfilecountt -> bool
+
+logic dummy24 : logfilecountt
+
+type logfilecountt__ref = { logfilecountt__content : logfilecountt
+}
+
+function logfilecountt__ref___projection(a: logfilecountt__ref) : logfilecountt =
+  (a).logfilecountt__content
+
+logic to_rep10 : logfilecountt -> int
+
+logic of_rep10 : int -> logfilecountt
+
+axiom inversion_axiom10 :
+  (forall x:logfilecountt [to_rep10(x)]. (of_rep10(to_rep10(x)) = x))
+
+axiom range_axiom10 :
+  (forall x:logfilecountt [to_rep10(x)]. in_range13(to_rep10(x)))
+
+axiom coerce_axiom10 :
+  (forall x:int [to_rep10(of_rep10(x))]. (in_range13(x) ->
+  (to_rep10(of_rep10(x)) = x)))
+
 type map__ref1 = { map__content1 : (int,logfileindext) farray
 }
 
@@ -1089,88 +1078,42 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,logfileindext) farray, int, int,
-  (int,logfileindext) farray, int, int -> (int,logfileindext) farray
-
-axiom concat_def1 :
-  (forall a:(int,logfileindext) farray. forall b:(int,logfileindext) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : logfileindext, int -> (int,logfileindext) farray
-
-axiom singleton_def1 :
-  (forall v:logfileindext.
-  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
-logic bool_eq18 : (int,logfileindext) farray, int, int,
+logic bool_eq19 : (int,logfileindext) farray, int, int,
   (int,logfileindext) farray, int, int -> bool
 
-axiom bool_eq_def17 :
+axiom bool_eq_def18 :
   (forall a:(int,logfileindext) farray. forall a__first:int.
   forall a__last:int. forall b:(int,logfileindext) farray.
-  forall b__first:int. forall b__last:int [bool_eq18(a, a__first, a__last, b,
+  forall b__first:int. forall b__last:int [bool_eq19(a, a__first, a__last, b,
   b__first, b__last)]. ((((((a__first <= a__last) and
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_153:int. ((((a__first <= temp___idx_153) and
-  (temp___idx_153 <= a__last)) and
-  (to_rep8((a[temp___idx_153])) = to_rep8((b[((b__first - a__first) + temp___idx_153)])))) or
-  (not ((a__first <= temp___idx_153) and (temp___idx_153 <= a__last)))))) ->
-  (bool_eq18(a, a__first, a__last, b, b__first, b__last) = true)) and
+  (forall temp___idx_175:int. ((((a__first <= temp___idx_175) and
+  (temp___idx_175 <= a__last)) and
+  (to_rep8((a[temp___idx_175])) = to_rep8((b[((b__first - a__first) + temp___idx_175)])))) or
+  (not ((a__first <= temp___idx_175) and (temp___idx_175 <= a__last)))))) ->
+  (bool_eq19(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_153:int. (((a__first <= temp___idx_153) and
-  (temp___idx_153 <= a__last)) ->
-  (to_rep8((a[temp___idx_153])) = to_rep8((b[((b__first - a__first) + temp___idx_153)]))))))) ->
-  (bool_eq18(a, a__first, a__last, b, b__first, b__last) = false))))
+  (forall temp___idx_175:int. (((a__first <= temp___idx_175) and
+  (temp___idx_175 <= a__last)) ->
+  (to_rep8((a[temp___idx_175])) = to_rep8((b[((b__first - a__first) + temp___idx_175)]))))))) ->
+  (bool_eq19(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
   (forall a:(int,logfileindext) farray. forall b:(int,logfileindext) farray.
   (forall a__first:int. forall a__last:int. forall b__first:int.
-  forall b__last:int. ((bool_eq18(b, b__first, b__last, a, a__first,
+  forall b__last:int. ((bool_eq19(b, b__first, b__last, a, a__first,
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_153:int. (((a__first <= temp___idx_153) and
-  (temp___idx_153 <= a__last)) ->
-  (to_rep8((a[temp___idx_153])) = to_rep8((b[((b__first - a__first) + temp___idx_153)])))))))))
+  (forall temp___idx_175:int. (((a__first <= temp___idx_175) and
+  (temp___idx_175 <= a__last)) ->
+  (to_rep8((a[temp___idx_175])) = to_rep8((b[((b__first - a__first) + temp___idx_175)])))))))))
 
-logic compare1 : (int,logfileindext) farray, int, int,
-  (int,logfileindext) farray, int, int -> int
-
-axiom compare_def_eq1 :
-  (forall a:(int,logfileindext) farray. forall b:(int,logfileindext) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq18(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt1 :
-  (forall a:(int,logfileindext) farray. forall b:(int,logfileindext) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq18(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep8((a[(i + 1)])) <  to_rep8((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt1 :
-  (forall a:(int,logfileindext) farray. forall b:(int,logfileindext) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare1(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq18(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep8((b[(i + 1)])) <  to_rep8((a[(j + 1)]))))))))))))
-
-logic dummy24 : (int,logfileindext) farray
+logic dummy25 : (int,logfileindext) farray
 
 logic value__size4 : int
 
@@ -1199,48 +1142,8 @@ axiom value__alignment_axiom4 : (0 <= value__alignment4)
 axiom object__alignment_axiom4 :
   (forall a:(int,logfileindext) farray. (0 <= object__alignment4(a)))
 
-logic user_eq16 : (int,logfileindext) farray,
+logic user_eq17 : (int,logfileindext) farray,
   (int,logfileindext) farray -> bool
-
-type logfilecountt
-
-predicate in_range13(x: int) = ((0 <= x) and (x <= 17))
-
-logic bool_eq19 : int, int -> bool
-
-axiom bool_eq_def18 :
-  (forall x:int. forall y:int [bool_eq19(x, y)]. (((x = y) -> (bool_eq19(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq19(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE13 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check13 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE13 : us_image -> int
-
-logic user_eq17 : logfilecountt, logfilecountt -> bool
-
-logic dummy25 : logfilecountt
-
-type logfilecountt__ref = { logfilecountt__content : logfilecountt
-}
-
-function logfilecountt__ref___projection(a: logfilecountt__ref) : logfilecountt =
-  (a).logfilecountt__content
-
-logic to_rep10 : logfilecountt -> int
-
-logic of_rep10 : int -> logfilecountt
-
-axiom inversion_axiom10 :
-  (forall x:logfilecountt [to_rep10(x)]. (of_rep10(to_rep10(x)) = x))
-
-axiom range_axiom10 :
-  (forall x:logfilecountt [to_rep10(x)]. in_range13(to_rep10(x)))
-
-axiom coerce_axiom10 :
-  (forall x:int [to_rep10(of_rep10(x))]. (in_range13(x) ->
-  (to_rep10(of_rep10(x)) = x)))
 
 type us_split_fields6 = { rec__auditlog__logfilelistt__list :
 (int,logfileindext) farray; rec__auditlog__logfilelistt__head :
@@ -1276,14 +1179,14 @@ logic bool_eq20 : us_rep3, us_rep3 -> bool
 
 axiom bool_eq_def19 :
   (forall a:us_rep3. forall b:us_rep3 [bool_eq20(a, b)].
-  ((((((bool_eq18(((a).us_split_fields7).rec__auditlog__logfilelistt__list,
+  ((((((bool_eq19(((a).us_split_fields7).rec__auditlog__logfilelistt__list,
   1, 17, ((b).us_split_fields7).rec__auditlog__logfilelistt__list, 1,
   17) = true) and
   (to_rep8(((a).us_split_fields7).rec__auditlog__logfilelistt__head) = to_rep8(((b).us_split_fields7).rec__auditlog__logfilelistt__head))) and
   (to_rep8(((a).us_split_fields7).rec__auditlog__logfilelistt__lasti) = to_rep8(((b).us_split_fields7).rec__auditlog__logfilelistt__lasti))) and
   (to_rep10(((a).us_split_fields7).rec__auditlog__logfilelistt__length) = to_rep10(((b).us_split_fields7).rec__auditlog__logfilelistt__length))) ->
   (bool_eq20(a, b) = true)) and
-  ((not ((((bool_eq18(((a).us_split_fields7).rec__auditlog__logfilelistt__list,
+  ((not ((((bool_eq19(((a).us_split_fields7).rec__auditlog__logfilelistt__list,
   1, 17, ((b).us_split_fields7).rec__auditlog__logfilelistt__list, 1,
   17) = true) and
   (to_rep8(((a).us_split_fields7).rec__auditlog__logfilelistt__head) = to_rep8(((b).us_split_fields7).rec__auditlog__logfilelistt__head))) and
@@ -1452,25 +1355,6 @@ axiom slide_def2 :
   (forall i:int [(slide2(a, old_first, new_first)[i])]. ((slide2(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat2 : (int,fileentrycountt) farray, int, int,
-  (int,fileentrycountt) farray, int, int -> (int,fileentrycountt) farray
-
-axiom concat_def2 :
-  (forall a:(int,fileentrycountt) farray.
-  forall b:(int,fileentrycountt) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat2(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat2(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat2(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton2 : fileentrycountt, int -> (int,fileentrycountt) farray
-
-axiom singleton_def2 :
-  (forall v:fileentrycountt.
-  (forall i:int [(singleton2(v, i)[i])]. ((singleton2(v, i)[i]) = v)))
-
 logic bool_eq22 : (int,fileentrycountt) farray, int, int,
   (int,fileentrycountt) farray, int, int -> bool
 
@@ -1482,17 +1366,17 @@ axiom bool_eq_def21 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
-  (temp___idx_154 <= a__last)) and
-  (to_rep11((a[temp___idx_154])) = to_rep11((b[((b__first - a__first) + temp___idx_154)])))) or
-  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
+  (forall temp___idx_176:int. ((((a__first <= temp___idx_176) and
+  (temp___idx_176 <= a__last)) and
+  (to_rep11((a[temp___idx_176])) = to_rep11((b[((b__first - a__first) + temp___idx_176)])))) or
+  (not ((a__first <= temp___idx_176) and (temp___idx_176 <= a__last)))))) ->
   (bool_eq22(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
-  (temp___idx_154 <= a__last)) ->
-  (to_rep11((a[temp___idx_154])) = to_rep11((b[((b__first - a__first) + temp___idx_154)]))))))) ->
+  (forall temp___idx_176:int. (((a__first <= temp___idx_176) and
+  (temp___idx_176 <= a__last)) ->
+  (to_rep11((a[temp___idx_176])) = to_rep11((b[((b__first - a__first) + temp___idx_176)]))))))) ->
   (bool_eq22(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev2 :
@@ -1503,40 +1387,9 @@ axiom bool_eq_rev2 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
-  (temp___idx_154 <= a__last)) ->
-  (to_rep11((a[temp___idx_154])) = to_rep11((b[((b__first - a__first) + temp___idx_154)])))))))))
-
-logic compare2 : (int,fileentrycountt) farray, int, int,
-  (int,fileentrycountt) farray, int, int -> int
-
-axiom compare_def_eq2 :
-  (forall a:(int,fileentrycountt) farray.
-  forall b:(int,fileentrycountt) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare2(a, a_first, a_last, b, b_first, b_last)].
-  ((compare2(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq22(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt2 :
-  (forall a:(int,fileentrycountt) farray.
-  forall b:(int,fileentrycountt) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare2(a, a_first, a_last, b, b_first, b_last)].
-  ((compare2(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq22(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep11((a[(i + 1)])) <  to_rep11((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt2 :
-  (forall a:(int,fileentrycountt) farray.
-  forall b:(int,fileentrycountt) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare2(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare2(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq22(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep11((b[(i + 1)])) <  to_rep11((a[(j + 1)]))))))))))))
+  (forall temp___idx_176:int. (((a__first <= temp___idx_176) and
+  (temp___idx_176 <= a__last)) ->
+  (to_rep11((a[temp___idx_176])) = to_rep11((b[((b__first - a__first) + temp___idx_176)])))))))))
 
 logic dummy31 : (int,fileentrycountt) farray
 
@@ -1745,19 +1598,9 @@ logic valid_numberlogentries : int, int, us_rep3,
 logic valid_numberlogentries__function_guard : bool, int, int, us_rep3,
   (int,fileentrycountt) farray -> prop
 
-logic temp___1193 : int -> (int,logfileindext) farray
+logic temp___1343 : int -> (int,logfileindext) farray
 
-axiom def_axiom1 :
-  (forall temp___1195:int.
-  (forall temp___1196:int.
-  ((temp___1193(temp___1195)[temp___1196]) = of_rep8(temp___1195))))
-
-logic temp___1197 : int -> (int,fileentrycountt) farray
-
-axiom def_axiom2 :
-  (forall temp___1199:int.
-  (forall temp___1200:int.
-  ((temp___1197(temp___1199)[temp___1200]) = of_rep11(temp___1199))))
+logic temp___1347 : int -> (int,fileentrycountt) farray
 
 type us_main_type
 
@@ -1809,24 +1652,6 @@ axiom slide_def3 :
   (forall i:int [(slide3(a, old_first, new_first)[i])]. ((slide3(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat3 : (int,us_rep5) farray, int, int, (int,us_rep5) farray, int,
-  int -> (int,us_rep5) farray
-
-axiom concat_def3 :
-  (forall a:(int,us_rep5) farray. forall b:(int,us_rep5) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat3(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat3(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat3(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton3 : us_rep5, int -> (int,us_rep5) farray
-
-axiom singleton_def3 :
-  (forall v:us_rep5.
-  (forall i:int [(singleton3(v, i)[i])]. ((singleton3(v, i)[i]) = v)))
-
 logic bool_eq25 : (int,us_rep5) farray, int, int, (int,us_rep5) farray, int,
   int -> bool
 
@@ -1837,17 +1662,17 @@ axiom bool_eq_def23 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_155:int. ((((a__first <= temp___idx_155) and
-  (temp___idx_155 <= a__last)) and (bool_eq24((a[temp___idx_155]),
-  (b[((b__first - a__first) + temp___idx_155)])) = true)) or
-  (not ((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)))))) ->
+  (forall temp___idx_177:int. ((((a__first <= temp___idx_177) and
+  (temp___idx_177 <= a__last)) and (bool_eq24((a[temp___idx_177]),
+  (b[((b__first - a__first) + temp___idx_177)])) = true)) or
+  (not ((a__first <= temp___idx_177) and (temp___idx_177 <= a__last)))))) ->
   (bool_eq25(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
-  (temp___idx_155 <= a__last)) -> (bool_eq24((a[temp___idx_155]),
-  (b[((b__first - a__first) + temp___idx_155)])) = true))))) -> (bool_eq25(a,
+  (forall temp___idx_177:int. (((a__first <= temp___idx_177) and
+  (temp___idx_177 <= a__last)) -> (bool_eq24((a[temp___idx_177]),
+  (b[((b__first - a__first) + temp___idx_177)])) = true))))) -> (bool_eq25(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev3 :
@@ -1857,9 +1682,9 @@ axiom bool_eq_rev3 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
-  (temp___idx_155 <= a__last)) -> (bool_eq24((a[temp___idx_155]),
-  (b[((b__first - a__first) + temp___idx_155)])) = true)))))))
+  (forall temp___idx_177:int. (((a__first <= temp___idx_177) and
+  (temp___idx_177 <= a__last)) -> (bool_eq24((a[temp___idx_177]),
+  (b[((b__first - a__first) + temp___idx_177)])) = true)))))))
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
@@ -1919,24 +1744,6 @@ axiom slide_def4 :
   (forall i:int [(slide4(a, old_first, new_first)[i])]. ((slide4(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat4 : (int,filestatust) farray, int, int, (int,filestatust) farray,
-  int, int -> (int,filestatust) farray
-
-axiom concat_def4 :
-  (forall a:(int,filestatust) farray. forall b:(int,filestatust) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat4(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat4(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat4(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton4 : filestatust, int -> (int,filestatust) farray
-
-axiom singleton_def4 :
-  (forall v:filestatust.
-  (forall i:int [(singleton4(v, i)[i])]. ((singleton4(v, i)[i]) = v)))
-
 logic bool_eq27 : (int,filestatust) farray, int, int,
   (int,filestatust) farray, int, int -> bool
 
@@ -1947,17 +1754,17 @@ axiom bool_eq_def25 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_156:int. ((((a__first <= temp___idx_156) and
-  (temp___idx_156 <= a__last)) and
-  (to_rep12((a[temp___idx_156])) = to_rep12((b[((b__first - a__first) + temp___idx_156)])))) or
-  (not ((a__first <= temp___idx_156) and (temp___idx_156 <= a__last)))))) ->
+  (forall temp___idx_178:int. ((((a__first <= temp___idx_178) and
+  (temp___idx_178 <= a__last)) and
+  (to_rep12((a[temp___idx_178])) = to_rep12((b[((b__first - a__first) + temp___idx_178)])))) or
+  (not ((a__first <= temp___idx_178) and (temp___idx_178 <= a__last)))))) ->
   (bool_eq27(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_156:int. (((a__first <= temp___idx_156) and
-  (temp___idx_156 <= a__last)) ->
-  (to_rep12((a[temp___idx_156])) = to_rep12((b[((b__first - a__first) + temp___idx_156)]))))))) ->
+  (forall temp___idx_178:int. (((a__first <= temp___idx_178) and
+  (temp___idx_178 <= a__last)) ->
+  (to_rep12((a[temp___idx_178])) = to_rep12((b[((b__first - a__first) + temp___idx_178)]))))))) ->
   (bool_eq27(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev4 :
@@ -1967,37 +1774,9 @@ axiom bool_eq_rev4 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_156:int. (((a__first <= temp___idx_156) and
-  (temp___idx_156 <= a__last)) ->
-  (to_rep12((a[temp___idx_156])) = to_rep12((b[((b__first - a__first) + temp___idx_156)])))))))))
-
-logic compare3 : (int,filestatust) farray, int, int,
-  (int,filestatust) farray, int, int -> int
-
-axiom compare_def_eq3 :
-  (forall a:(int,filestatust) farray. forall b:(int,filestatust) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare3(a, a_first, a_last, b, b_first, b_last)].
-  ((compare3(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq27(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt3 :
-  (forall a:(int,filestatust) farray. forall b:(int,filestatust) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare3(a, a_first, a_last, b, b_first, b_last)].
-  ((compare3(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq27(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep12((a[(i + 1)])) <  to_rep12((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt3 :
-  (forall a:(int,filestatust) farray. forall b:(int,filestatust) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare3(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare3(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq27(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep12((b[(i + 1)])) <  to_rep12((a[(j + 1)]))))))))))))
+  (forall temp___idx_178:int. (((a__first <= temp___idx_178) and
+  (temp___idx_178 <= a__last)) ->
+  (to_rep12((a[temp___idx_178])) = to_rep12((b[((b__first - a__first) + temp___idx_178)])))))))))
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
@@ -2942,24 +2721,6 @@ axiom slide_def5 :
   (forall i:int [(slide5(a, old_first, new_first)[i])]. ((slide5(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat5 : (int,bytet) farray, int, int, (int,bytet) farray, int,
-  int -> (int,bytet) farray
-
-axiom concat_def5 :
-  (forall a:(int,bytet) farray. forall b:(int,bytet) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat5(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat5(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat5(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton5 : bytet, int -> (int,bytet) farray
-
-axiom singleton_def5 :
-  (forall v:bytet.
-  (forall i:int [(singleton5(v, i)[i])]. ((singleton5(v, i)[i]) = v)))
-
 logic bool_eq37 : (int,bytet) farray, int, int, (int,bytet) farray, int,
   int -> bool
 
@@ -2970,17 +2731,17 @@ axiom bool_eq_def35 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_145:int. ((((a__first <= temp___idx_145) and
-  (temp___idx_145 <= a__last)) and
-  (to_rep17((a[temp___idx_145])) = to_rep17((b[((b__first - a__first) + temp___idx_145)])))) or
-  (not ((a__first <= temp___idx_145) and (temp___idx_145 <= a__last)))))) ->
+  (forall temp___idx_167:int. ((((a__first <= temp___idx_167) and
+  (temp___idx_167 <= a__last)) and
+  (to_rep17((a[temp___idx_167])) = to_rep17((b[((b__first - a__first) + temp___idx_167)])))) or
+  (not ((a__first <= temp___idx_167) and (temp___idx_167 <= a__last)))))) ->
   (bool_eq37(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_145:int. (((a__first <= temp___idx_145) and
-  (temp___idx_145 <= a__last)) ->
-  (to_rep17((a[temp___idx_145])) = to_rep17((b[((b__first - a__first) + temp___idx_145)]))))))) ->
+  (forall temp___idx_167:int. (((a__first <= temp___idx_167) and
+  (temp___idx_167 <= a__last)) ->
+  (to_rep17((a[temp___idx_167])) = to_rep17((b[((b__first - a__first) + temp___idx_167)]))))))) ->
   (bool_eq37(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev5 :
@@ -2990,37 +2751,9 @@ axiom bool_eq_rev5 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_145:int. (((a__first <= temp___idx_145) and
-  (temp___idx_145 <= a__last)) ->
-  (to_rep17((a[temp___idx_145])) = to_rep17((b[((b__first - a__first) + temp___idx_145)])))))))))
-
-logic compare4 : (int,bytet) farray, int, int, (int,bytet) farray, int,
-  int -> int
-
-axiom compare_def_eq4 :
-  (forall a:(int,bytet) farray. forall b:(int,bytet) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare4(a, a_first, a_last, b, b_first, b_last)].
-  ((compare4(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq37(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt4 :
-  (forall a:(int,bytet) farray. forall b:(int,bytet) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare4(a, a_first, a_last, b, b_first, b_last)].
-  ((compare4(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq37(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep17((a[(i + 1)])) <  to_rep17((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt4 :
-  (forall a:(int,bytet) farray. forall b:(int,bytet) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare4(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare4(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq37(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep17((b[(i + 1)])) <  to_rep17((a[(j + 1)]))))))))))))
+  (forall temp___idx_167:int. (((a__first <= temp___idx_167) and
+  (temp___idx_167 <= a__last)) ->
+  (to_rep17((a[temp___idx_167])) = to_rep17((b[((b__first - a__first) + temp___idx_167)])))))))))
 
 logic dummy98 : (int,bytet) farray
 
@@ -3752,93 +3485,93 @@ logic attr__ATTRIBUTE_ADDRESS22 : int
 
 logic attr__ATTRIBUTE_ADDRESS23 : int
 
-logic temp___String_Literal_2766 : unit -> (int,character) farray
+logic temp___String_Literal_2949 : unit -> (int,character) farray
 
-axiom temp___String_Literal_2766__def_axiom :
-  (((((((((((((((((((((((((((to_rep((temp___String_Literal_2766(void)[1])) = 73) and
-  (to_rep((temp___String_Literal_2766(void)[2])) = 38)) and
-  (to_rep((temp___String_Literal_2766(void)[3])) = 65)) and
-  (to_rep((temp___String_Literal_2766(void)[4])) = 32)) and
-  (to_rep((temp___String_Literal_2766(void)[5])) = 67)) and
-  (to_rep((temp___String_Literal_2766(void)[6])) = 101)) and
-  (to_rep((temp___String_Literal_2766(void)[7])) = 114)) and
-  (to_rep((temp___String_Literal_2766(void)[8])) = 116)) and
-  (to_rep((temp___String_Literal_2766(void)[9])) = 105)) and
-  (to_rep((temp___String_Literal_2766(void)[10])) = 102)) and
-  (to_rep((temp___String_Literal_2766(void)[11])) = 105)) and
-  (to_rep((temp___String_Literal_2766(void)[12])) = 99)) and
-  (to_rep((temp___String_Literal_2766(void)[13])) = 97)) and
-  (to_rep((temp___String_Literal_2766(void)[14])) = 116)) and
-  (to_rep((temp___String_Literal_2766(void)[15])) = 101)) and
-  (to_rep((temp___String_Literal_2766(void)[16])) = 32)) and
-  (to_rep((temp___String_Literal_2766(void)[17])) = 78)) and
-  (to_rep((temp___String_Literal_2766(void)[18])) = 111)) and
-  (to_rep((temp___String_Literal_2766(void)[19])) = 116)) and
-  (to_rep((temp___String_Literal_2766(void)[20])) = 32)) and
-  (to_rep((temp___String_Literal_2766(void)[21])) = 67)) and
-  (to_rep((temp___String_Literal_2766(void)[22])) = 117)) and
-  (to_rep((temp___String_Literal_2766(void)[23])) = 114)) and
-  (to_rep((temp___String_Literal_2766(void)[24])) = 114)) and
-  (to_rep((temp___String_Literal_2766(void)[25])) = 101)) and
-  (to_rep((temp___String_Literal_2766(void)[26])) = 110)) and
-  (to_rep((temp___String_Literal_2766(void)[27])) = 116))
+axiom temp___String_Literal_2949__def_axiom :
+  (((((((((((((((((((((((((((to_rep((temp___String_Literal_2949(void)[1])) = 73) and
+  (to_rep((temp___String_Literal_2949(void)[2])) = 38)) and
+  (to_rep((temp___String_Literal_2949(void)[3])) = 65)) and
+  (to_rep((temp___String_Literal_2949(void)[4])) = 32)) and
+  (to_rep((temp___String_Literal_2949(void)[5])) = 67)) and
+  (to_rep((temp___String_Literal_2949(void)[6])) = 101)) and
+  (to_rep((temp___String_Literal_2949(void)[7])) = 114)) and
+  (to_rep((temp___String_Literal_2949(void)[8])) = 116)) and
+  (to_rep((temp___String_Literal_2949(void)[9])) = 105)) and
+  (to_rep((temp___String_Literal_2949(void)[10])) = 102)) and
+  (to_rep((temp___String_Literal_2949(void)[11])) = 105)) and
+  (to_rep((temp___String_Literal_2949(void)[12])) = 99)) and
+  (to_rep((temp___String_Literal_2949(void)[13])) = 97)) and
+  (to_rep((temp___String_Literal_2949(void)[14])) = 116)) and
+  (to_rep((temp___String_Literal_2949(void)[15])) = 101)) and
+  (to_rep((temp___String_Literal_2949(void)[16])) = 32)) and
+  (to_rep((temp___String_Literal_2949(void)[17])) = 78)) and
+  (to_rep((temp___String_Literal_2949(void)[18])) = 111)) and
+  (to_rep((temp___String_Literal_2949(void)[19])) = 116)) and
+  (to_rep((temp___String_Literal_2949(void)[20])) = 32)) and
+  (to_rep((temp___String_Literal_2949(void)[21])) = 67)) and
+  (to_rep((temp___String_Literal_2949(void)[22])) = 117)) and
+  (to_rep((temp___String_Literal_2949(void)[23])) = 114)) and
+  (to_rep((temp___String_Literal_2949(void)[24])) = 114)) and
+  (to_rep((temp___String_Literal_2949(void)[25])) = 101)) and
+  (to_rep((temp___String_Literal_2949(void)[26])) = 110)) and
+  (to_rep((temp___String_Literal_2949(void)[27])) = 116))
 
-logic temp___String_Literal_2771 : unit -> (int,character) farray
+logic temp___String_Literal_2954 : unit -> (int,character) farray
 
-axiom temp___String_Literal_2771__def_axiom :
-  ((((((((((((((((((((((((((((((to_rep((temp___String_Literal_2771(void)[1])) = 73) and
-  (to_rep((temp___String_Literal_2771(void)[2])) = 38)) and
-  (to_rep((temp___String_Literal_2771(void)[3])) = 65)) and
-  (to_rep((temp___String_Literal_2771(void)[4])) = 32)) and
-  (to_rep((temp___String_Literal_2771(void)[5])) = 67)) and
-  (to_rep((temp___String_Literal_2771(void)[6])) = 101)) and
-  (to_rep((temp___String_Literal_2771(void)[7])) = 114)) and
-  (to_rep((temp___String_Literal_2771(void)[8])) = 116)) and
-  (to_rep((temp___String_Literal_2771(void)[9])) = 105)) and
-  (to_rep((temp___String_Literal_2771(void)[10])) = 102)) and
-  (to_rep((temp___String_Literal_2771(void)[11])) = 105)) and
-  (to_rep((temp___String_Literal_2771(void)[12])) = 99)) and
-  (to_rep((temp___String_Literal_2771(void)[13])) = 97)) and
-  (to_rep((temp___String_Literal_2771(void)[14])) = 116)) and
-  (to_rep((temp___String_Literal_2771(void)[15])) = 101)) and
-  (to_rep((temp___String_Literal_2771(void)[16])) = 32)) and
-  (to_rep((temp___String_Literal_2771(void)[17])) = 78)) and
-  (to_rep((temp___String_Literal_2771(void)[18])) = 111)) and
-  (to_rep((temp___String_Literal_2771(void)[19])) = 116)) and
-  (to_rep((temp___String_Literal_2771(void)[20])) = 32)) and
-  (to_rep((temp___String_Literal_2771(void)[21])) = 86)) and
-  (to_rep((temp___String_Literal_2771(void)[22])) = 101)) and
-  (to_rep((temp___String_Literal_2771(void)[23])) = 114)) and
-  (to_rep((temp___String_Literal_2771(void)[24])) = 105)) and
-  (to_rep((temp___String_Literal_2771(void)[25])) = 102)) and
-  (to_rep((temp___String_Literal_2771(void)[26])) = 105)) and
-  (to_rep((temp___String_Literal_2771(void)[27])) = 97)) and
-  (to_rep((temp___String_Literal_2771(void)[28])) = 98)) and
-  (to_rep((temp___String_Literal_2771(void)[29])) = 108)) and
-  (to_rep((temp___String_Literal_2771(void)[30])) = 101))
+axiom temp___String_Literal_2954__def_axiom :
+  ((((((((((((((((((((((((((((((to_rep((temp___String_Literal_2954(void)[1])) = 73) and
+  (to_rep((temp___String_Literal_2954(void)[2])) = 38)) and
+  (to_rep((temp___String_Literal_2954(void)[3])) = 65)) and
+  (to_rep((temp___String_Literal_2954(void)[4])) = 32)) and
+  (to_rep((temp___String_Literal_2954(void)[5])) = 67)) and
+  (to_rep((temp___String_Literal_2954(void)[6])) = 101)) and
+  (to_rep((temp___String_Literal_2954(void)[7])) = 114)) and
+  (to_rep((temp___String_Literal_2954(void)[8])) = 116)) and
+  (to_rep((temp___String_Literal_2954(void)[9])) = 105)) and
+  (to_rep((temp___String_Literal_2954(void)[10])) = 102)) and
+  (to_rep((temp___String_Literal_2954(void)[11])) = 105)) and
+  (to_rep((temp___String_Literal_2954(void)[12])) = 99)) and
+  (to_rep((temp___String_Literal_2954(void)[13])) = 97)) and
+  (to_rep((temp___String_Literal_2954(void)[14])) = 116)) and
+  (to_rep((temp___String_Literal_2954(void)[15])) = 101)) and
+  (to_rep((temp___String_Literal_2954(void)[16])) = 32)) and
+  (to_rep((temp___String_Literal_2954(void)[17])) = 78)) and
+  (to_rep((temp___String_Literal_2954(void)[18])) = 111)) and
+  (to_rep((temp___String_Literal_2954(void)[19])) = 116)) and
+  (to_rep((temp___String_Literal_2954(void)[20])) = 32)) and
+  (to_rep((temp___String_Literal_2954(void)[21])) = 86)) and
+  (to_rep((temp___String_Literal_2954(void)[22])) = 101)) and
+  (to_rep((temp___String_Literal_2954(void)[23])) = 114)) and
+  (to_rep((temp___String_Literal_2954(void)[24])) = 105)) and
+  (to_rep((temp___String_Literal_2954(void)[25])) = 102)) and
+  (to_rep((temp___String_Literal_2954(void)[26])) = 105)) and
+  (to_rep((temp___String_Literal_2954(void)[27])) = 97)) and
+  (to_rep((temp___String_Literal_2954(void)[28])) = 98)) and
+  (to_rep((temp___String_Literal_2954(void)[29])) = 108)) and
+  (to_rep((temp___String_Literal_2954(void)[30])) = 101))
 
-logic temp___String_Literal_2776 : unit -> (int,character) farray
+logic temp___String_Literal_2959 : unit -> (int,character) farray
 
-axiom temp___String_Literal_2776__def_axiom :
-  (((((((((((((((((((to_rep((temp___String_Literal_2776(void)[1])) = 73) and
-  (to_rep((temp___String_Literal_2776(void)[2])) = 38)) and
-  (to_rep((temp___String_Literal_2776(void)[3])) = 65)) and
-  (to_rep((temp___String_Literal_2776(void)[4])) = 32)) and
-  (to_rep((temp___String_Literal_2776(void)[5])) = 67)) and
-  (to_rep((temp___String_Literal_2776(void)[6])) = 101)) and
-  (to_rep((temp___String_Literal_2776(void)[7])) = 114)) and
-  (to_rep((temp___String_Literal_2776(void)[8])) = 116)) and
-  (to_rep((temp___String_Literal_2776(void)[9])) = 105)) and
-  (to_rep((temp___String_Literal_2776(void)[10])) = 102)) and
-  (to_rep((temp___String_Literal_2776(void)[11])) = 105)) and
-  (to_rep((temp___String_Literal_2776(void)[12])) = 99)) and
-  (to_rep((temp___String_Literal_2776(void)[13])) = 97)) and
-  (to_rep((temp___String_Literal_2776(void)[14])) = 116)) and
-  (to_rep((temp___String_Literal_2776(void)[15])) = 101)) and
-  (to_rep((temp___String_Literal_2776(void)[16])) = 32)) and
-  (to_rep((temp___String_Literal_2776(void)[17])) = 66)) and
-  (to_rep((temp___String_Literal_2776(void)[18])) = 97)) and
-  (to_rep((temp___String_Literal_2776(void)[19])) = 100))
+axiom temp___String_Literal_2959__def_axiom :
+  (((((((((((((((((((to_rep((temp___String_Literal_2959(void)[1])) = 73) and
+  (to_rep((temp___String_Literal_2959(void)[2])) = 38)) and
+  (to_rep((temp___String_Literal_2959(void)[3])) = 65)) and
+  (to_rep((temp___String_Literal_2959(void)[4])) = 32)) and
+  (to_rep((temp___String_Literal_2959(void)[5])) = 67)) and
+  (to_rep((temp___String_Literal_2959(void)[6])) = 101)) and
+  (to_rep((temp___String_Literal_2959(void)[7])) = 114)) and
+  (to_rep((temp___String_Literal_2959(void)[8])) = 116)) and
+  (to_rep((temp___String_Literal_2959(void)[9])) = 105)) and
+  (to_rep((temp___String_Literal_2959(void)[10])) = 102)) and
+  (to_rep((temp___String_Literal_2959(void)[11])) = 105)) and
+  (to_rep((temp___String_Literal_2959(void)[12])) = 99)) and
+  (to_rep((temp___String_Literal_2959(void)[13])) = 97)) and
+  (to_rep((temp___String_Literal_2959(void)[14])) = 116)) and
+  (to_rep((temp___String_Literal_2959(void)[15])) = 101)) and
+  (to_rep((temp___String_Literal_2959(void)[16])) = 32)) and
+  (to_rep((temp___String_Literal_2959(void)[17])) = 66)) and
+  (to_rep((temp___String_Literal_2959(void)[18])) = 97)) and
+  (to_rep((temp___String_Literal_2959(void)[19])) = 100))
 
 axiom valid_numberlogentries__post_axiom : true
 
@@ -3861,1247 +3594,234 @@ axiom valid_numberlogentries__def_axiom :
   logfileentries) = true) <-> ((1 <= to_rep10(usedlogfiles3)) and
   (numberlogentries = (((to_rep10(usedlogfiles3) - 1) * 1024) + to_rep11((logfileentries[currentlogfile])))))))))
 
+axiom def_axiom :
+  (forall temp___1349:int. (in_range14(temp___1349) ->
+  (forall temp___1350:int.
+  (to_rep11((temp___1347(temp___1349)[temp___1350])) = temp___1349))))
+
 axiom nodescription__def_axiom :
   (nodescription = audittypes__nodescription__aggregate_def(32))
 
-logic currenttimevar__split_fields : yearst
-
-logic currenttimevar__split_fields1 : monthst
-
-logic currenttimevar__split_fields2 : dayst
-
-logic currenttimevar__split_fields3 : millisecst
-
-logic logfiles : (int,us_rep5) farray
-
-logic logfilesstatus : (int,filestatust) farray
-
-logic logfilestate__split_fields : logfileindext
-
-logic logfilestate__split_fields1 : logentrycountt
-
-logic logfilestate__split_fields2 : (int,logfileindext) farray
-
-logic logfilestate__split_fields3 : logfileindext
-
-logic logfilestate__split_fields4 : logfileindext
-
-logic logfilestate__split_fields5 : logfilecountt
-
-logic logfilestate__split_fields6 : (int,fileentrycountt) farray
-
-logic auditalarm : int
-
-logic auditsystemfault : bool
-
-logic description : (int,character) farray
-
-logic idcert__split_fields : bool
-
-logic idcert__split_fields1 : certificatestatus
-
-logic idcert__split_fields2 : issueridt
-
-logic idcert__split_fields3 : namecountt
-
-logic idcert__split_fields4 : (int,character) farray
-
-logic idcert__split_fields5 : serialnumbert
-
-logic idcert__split_fields6 : yearst
-
-logic idcert__split_fields7 : monthst
-
-logic idcert__split_fields8 : dayst
-
-logic idcert__split_fields9 : millisecst
-
-logic idcert__split_fields10 : yearst
-
-logic idcert__split_fields11 : monthst
-
-logic idcert__split_fields12 : dayst
-
-logic idcert__split_fields13 : millisecst
-
-logic idcert__split_fields14 : algorithmt
-
-logic idcert__split_fields15 : issueridt
-
-logic idcert__split_fields16 : namecountt
-
-logic idcert__split_fields17 : (int,character) farray
-
-logic idcert__split_fields18 : algorithmt
-
-logic idcert__split_fields19 : keyidt
-
-logic idcert__split_fields20 : keylengtht
-
-logic iandacertcontents__split_fields : issueridt
-
-logic iandacertcontents__split_fields1 : namecountt
-
-logic iandacertcontents__split_fields2 : (int,character) farray
-
-logic iandacertcontents__split_fields3 : serialnumbert
-
-logic iandacertcontents__split_fields4 : yearst
-
-logic iandacertcontents__split_fields5 : monthst
-
-logic iandacertcontents__split_fields6 : dayst
-
-logic iandacertcontents__split_fields7 : millisecst
-
-logic iandacertcontents__split_fields8 : yearst
-
-logic iandacertcontents__split_fields9 : monthst
-
-logic iandacertcontents__split_fields10 : dayst
-
-logic iandacertcontents__split_fields11 : millisecst
-
-logic iandacertcontents__split_fields12 : algorithmt
-
-logic iandacertcontents__split_fields13 : issueridt
-
-logic iandacertcontents__split_fields14 : namecountt
-
-logic iandacertcontents__split_fields15 : (int,character) farray
-
-logic iandacertcontents__split_fields16 : serialnumbert
-
-logic iandacertcontents__split_fields17 : templatelengtht
-
-logic iandacertcontents__split_fields18 : fart
-
-logic iandacertcontents__split_fields19 : (int,character) farray
-
-logic iandacertcontents__split_fields20 : (int,bytet) farray
-
-logic iandavalid : bool
-
-logic idcertcontents__split_fields : issueridt
-
-logic idcertcontents__split_fields1 : namecountt
-
-logic idcertcontents__split_fields2 : (int,character) farray
-
-logic idcertcontents__split_fields3 : serialnumbert
-
-logic idcertcontents__split_fields4 : yearst
-
-logic idcertcontents__split_fields5 : monthst
-
-logic idcertcontents__split_fields6 : dayst
-
-logic idcertcontents__split_fields7 : millisecst
-
-logic idcertcontents__split_fields8 : yearst
-
-logic idcertcontents__split_fields9 : monthst
-
-logic idcertcontents__split_fields10 : dayst
-
-logic idcertcontents__split_fields11 : millisecst
-
-logic idcertcontents__split_fields12 : algorithmt
-
-logic idcertcontents__split_fields13 : issueridt
-
-logic idcertcontents__split_fields14 : namecountt
-
-logic idcertcontents__split_fields15 : (int,character) farray
-
-logic idcertcontents__split_fields16 : algorithmt
-
-logic idcertcontents__split_fields17 : keyidt
-
-logic idcertcontents__split_fields18 : keylengtht
-
-logic extractok : bool
-
-logic verified : bool
-
-logic current : bool
-
-logic baseidmatches : bool
-
-logic result__ : (int,character) farray
-
-logic result__1 : (int,character) farray
-
-logic result__2 : (int,character) farray
-
-logic currenttime : us_private
-
-logic filestate : us_private
-
-logic state : us_private
-
-logic o : issueridt
-
-logic o1 : namecountt
-
-logic o2 : (int,character) farray
-
-logic o3 : serialnumbert
-
-logic o4 : yearst
-
-logic o5 : monthst
-
-logic o6 : dayst
-
-logic o7 : millisecst
-
-logic o8 : yearst
-
-logic o9 : monthst
-
-logic o10 : dayst
-
-logic o11 : millisecst
-
-logic o12 : algorithmt
-
-logic o13 : issueridt
-
-logic o14 : namecountt
-
-logic o15 : (int,character) farray
-
-logic o16 : serialnumbert
-
-logic o17 : yearst
-
-logic o18 : monthst
-
-logic o19 : dayst
-
-logic o20 : millisecst
-
-logic o21 : yearst
-
-logic o22 : monthst
-
-logic o23 : dayst
-
-logic o24 : millisecst
-
-logic o25 : algorithmt
-
-logic o26 : issueridt
-
-logic o27 : namecountt
-
-logic o28 : (int,character) farray
-
-logic o29 : serialnumbert
-
-logic o30 : issueridt
-
-logic o31 : namecountt
-
-logic o32 : (int,character) farray
-
-logic o33 : serialnumbert
-
-logic o34 : issueridt
-
-logic o35 : namecountt
-
-logic o36 : (int,character) farray
-
-logic o37 : serialnumbert
-
-logic o38 : bool
-
-logic o39 : issueridt
-
-logic o40 : namecountt
-
-logic o41 : (int,character) farray
-
-logic o42 : serialnumbert
-
-logic o43 : yearst
-
-logic o44 : monthst
-
-logic o45 : dayst
-
-logic o46 : millisecst
-
-logic o47 : yearst
-
-logic o48 : monthst
-
-logic o49 : dayst
-
-logic o50 : millisecst
-
-logic o51 : algorithmt
-
-logic o52 : issueridt
-
-logic o53 : namecountt
-
-logic o54 : (int,character) farray
-
-logic o55 : serialnumbert
-
-logic o56 : yearst
-
-logic o57 : monthst
-
-logic o58 : dayst
-
-logic o59 : millisecst
-
-logic o60 : yearst
-
-logic o61 : monthst
-
-logic o62 : dayst
-
-logic o63 : millisecst
-
-logic o64 : algorithmt
-
-logic o65 : bool
-
-logic logfiles1 : (int,us_rep5) farray
-
-logic logfilesstatus1 : (int,filestatust) farray
-
-logic logfilestate__split_fields7 : logfileindext
-
-logic logfilestate__split_fields8 : logentrycountt
-
-logic logfilestate__split_fields9 : (int,logfileindext) farray
-
-logic logfilestate__split_fields10 : logfileindext
-
-logic logfilestate__split_fields11 : logfileindext
-
-logic logfilestate__split_fields12 : logfilecountt
-
-logic logfilestate__split_fields13 : (int,fileentrycountt) farray
-
-logic auditalarm1 : int
-
-logic auditsystemfault1 : bool
-
-logic iandacertcontents__split_fields21 : issueridt
-
-logic iandacertcontents__split_fields22 : namecountt
-
-logic iandacertcontents__split_fields23 : (int,character) farray
-
-logic iandacertcontents__split_fields24 : serialnumbert
-
-logic iandacertcontents__split_fields25 : yearst
-
-logic iandacertcontents__split_fields26 : monthst
-
-logic iandacertcontents__split_fields27 : dayst
-
-logic iandacertcontents__split_fields28 : millisecst
-
-logic iandacertcontents__split_fields29 : yearst
-
-logic iandacertcontents__split_fields30 : monthst
-
-logic iandacertcontents__split_fields31 : dayst
-
-logic iandacertcontents__split_fields32 : millisecst
-
-logic iandacertcontents__split_fields33 : algorithmt
-
-logic iandacertcontents__split_fields34 : issueridt
-
-logic iandacertcontents__split_fields35 : namecountt
-
-logic iandacertcontents__split_fields36 : (int,character) farray
-
-logic iandacertcontents__split_fields37 : serialnumbert
-
-logic iandacertcontents__split_fields38 : templatelengtht
-
-logic iandacertcontents__split_fields39 : fart
-
-logic iandacertcontents__split_fields40 : (int,character) farray
-
-logic iandacertcontents__split_fields41 : (int,bytet) farray
-
-logic idcertcontents__split_fields19 : issueridt
-
-logic idcertcontents__split_fields20 : namecountt
-
-logic idcertcontents__split_fields21 : (int,character) farray
-
-logic idcertcontents__split_fields22 : serialnumbert
-
-logic idcertcontents__split_fields23 : yearst
-
-logic idcertcontents__split_fields24 : monthst
-
-logic idcertcontents__split_fields25 : dayst
-
-logic idcertcontents__split_fields26 : millisecst
-
-logic idcertcontents__split_fields27 : yearst
-
-logic idcertcontents__split_fields28 : monthst
-
-logic idcertcontents__split_fields29 : dayst
-
-logic idcertcontents__split_fields30 : millisecst
-
-logic idcertcontents__split_fields31 : algorithmt
-
-logic idcertcontents__split_fields32 : issueridt
-
-logic idcertcontents__split_fields33 : namecountt
-
-logic idcertcontents__split_fields34 : (int,character) farray
-
-logic idcertcontents__split_fields35 : algorithmt
-
-logic idcertcontents__split_fields36 : keyidt
-
-logic idcertcontents__split_fields37 : keylengtht
-
-logic filestate1 : us_private
-
-logic state1 : us_private
-
-logic result : bool
-
-logic extractok1 : bool
-
-logic result1 : bool
-
-logic verified1 : bool
-
-logic result2 : bool
-
-logic current1 : bool
-
-logic result3 : bool
-
-logic baseidmatches1 : bool
-
-logic certfound : bool
-
-logic iandacertcontents__split_fields42 : issueridt
-
-logic iandacertcontents__split_fields43 : namecountt
-
-logic iandacertcontents__split_fields44 : (int,character) farray
-
-logic iandacertcontents__split_fields45 : serialnumbert
-
-logic iandacertcontents__split_fields46 : yearst
-
-logic iandacertcontents__split_fields47 : monthst
-
-logic iandacertcontents__split_fields48 : dayst
-
-logic iandacertcontents__split_fields49 : millisecst
-
-logic iandacertcontents__split_fields50 : yearst
-
-logic iandacertcontents__split_fields51 : monthst
-
-logic iandacertcontents__split_fields52 : dayst
-
-logic iandacertcontents__split_fields53 : millisecst
-
-logic iandacertcontents__split_fields54 : algorithmt
-
-logic iandacertcontents__split_fields55 : issueridt
-
-logic iandacertcontents__split_fields56 : namecountt
-
-logic iandacertcontents__split_fields57 : (int,character) farray
-
-logic iandacertcontents__split_fields58 : serialnumbert
-
-logic iandacertcontents__split_fields59 : templatelengtht
-
-logic iandacertcontents__split_fields60 : fart
-
-logic iandacertcontents__split_fields61 : (int,character) farray
-
-logic iandacertcontents__split_fields62 : (int,bytet) farray
-
-logic extractok2 : bool
-
-logic result4 : issueridt
-
-logic result5 : namecountt
-
-logic result6 : (int,character) farray
-
-logic result7 : serialnumbert
-
-logic result8 : yearst
-
-logic result9 : monthst
-
-logic result10 : dayst
-
-logic result11 : millisecst
-
-logic result12 : yearst
-
-logic result13 : monthst
-
-logic result14 : dayst
-
-logic result15 : millisecst
-
-logic result16 : algorithmt
-
-logic result17 : issueridt
-
-logic result18 : namecountt
-
-logic result19 : (int,character) farray
-
-logic result20 : algorithmt
-
-logic result21 : keyidt
-
-logic result22 : keylengtht
-
-logic idcertcontents__split_fields38 : issueridt
-
-logic idcertcontents__split_fields39 : namecountt
-
-logic idcertcontents__split_fields40 : (int,character) farray
-
-logic idcertcontents__split_fields41 : serialnumbert
-
-logic idcertcontents__split_fields42 : yearst
-
-logic idcertcontents__split_fields43 : monthst
-
-logic idcertcontents__split_fields44 : dayst
-
-logic idcertcontents__split_fields45 : millisecst
-
-logic idcertcontents__split_fields46 : yearst
-
-logic idcertcontents__split_fields47 : monthst
-
-logic idcertcontents__split_fields48 : dayst
-
-logic idcertcontents__split_fields49 : millisecst
-
-logic idcertcontents__split_fields50 : algorithmt
-
-logic idcertcontents__split_fields51 : issueridt
-
-logic idcertcontents__split_fields52 : namecountt
-
-logic idcertcontents__split_fields53 : (int,character) farray
-
-logic idcertcontents__split_fields54 : algorithmt
-
-logic idcertcontents__split_fields55 : keyidt
-
-logic idcertcontents__split_fields56 : keylengtht
-
-logic result23 : bool
-
-logic baseidmatches2 : bool
-
-logic logfiles2 : (int,us_rep5) farray
-
-logic logfilesstatus2 : (int,filestatust) farray
-
-logic logfilestate__split_fields14 : logfileindext
-
-logic logfilestate__split_fields15 : logentrycountt
-
-logic logfilestate__split_fields16 : (int,logfileindext) farray
-
-logic logfilestate__split_fields17 : logfileindext
-
-logic logfilestate__split_fields18 : logfileindext
-
-logic logfilestate__split_fields19 : logfilecountt
-
-logic logfilestate__split_fields20 : (int,fileentrycountt) farray
-
-logic auditalarm2 : int
-
-logic auditsystemfault2 : bool
-
-logic verified2 : bool
-
-logic filestate2 : us_private
-
-logic state2 : us_private
-
-logic result24 : bool
-
-logic current2 : bool
-
-logic result25 : bool
-
-logic iandavalid1 : bool
-
-logic result26 : (int,character) farray
-
-logic result__3 : (int,character) farray
-
-logic result27 : (int,character) farray
-
-logic result__4 : (int,character) farray
-
-logic result28 : (int,character) farray
-
-logic result__5 : (int,character) farray
-
-axiom H : (audittypes__nodescription__aggregate_def(32) = nodescription)
-
-axiom H1 : (valid_numberlogentries(to_rep8(logfilestate__split_fields),
+axiom def_axiom1 :
+  (forall temp___162:int. (in_range1(temp___162) ->
+  (forall temp___163:int.
+  (to_rep((audittypes__nodescription__aggregate_def(temp___162)[temp___163])) = temp___162))))
+
+axiom def_axiom2 :
+  (forall temp___1345:int. (in_range11(temp___1345) ->
+  (forall temp___1346:int.
+  (to_rep8((temp___1343(temp___1345)[temp___1346])) = temp___1345))))
+
+ (* File "usertoken.adb", line 762, characters 0-0 *)
+goal WP_parameter_def :
+  (forall currenttimevar__split_fields:yearst.
+  forall currenttimevar__split_fields1:monthst.
+  forall currenttimevar__split_fields2:dayst.
+  forall currenttimevar__split_fields3:millisecst.
+  forall logfiles:(int,us_rep5) farray.
+  forall logfilesstatus:(int,filestatust) farray.
+  forall logfilestate__split_fields:logfileindext.
+  forall logfilestate__split_fields1:logentrycountt.
+  forall logfilestate__split_fields2:(int,logfileindext) farray.
+  forall logfilestate__split_fields3:logfileindext.
+  forall logfilestate__split_fields4:logfileindext.
+  forall logfilestate__split_fields5:logfilecountt.
+  forall logfilestate__split_fields6:(int,fileentrycountt) farray.
+  forall auditalarm:int. forall auditsystemfault:bool.
+  forall description:(int,character) farray.
+  forall idcert__split_fields:us_split_fields__ref11.
+  forall iandacertcontents__split_fields:us_split_fields__ref10.
+  forall iandavalid:bool.
+  forall idcertcontents__split_fields:us_split_fields__ref7.
+  forall extractok:bool. forall verified:bool. forall current:bool.
+  forall baseidmatches:bool. forall result__:(int,character) farray.
+  forall currenttime:us_private. forall filestate:us_private.
+  forall state:us_private. forall o:us_rep6. forall o1:us_rep9.
+  forall o2:issueridt. forall o3:namecountt.
+  forall o4:(int,character) farray. forall o5:serialnumbert.
+  forall o6:issueridt. forall o7:namecountt.
+  forall o8:(int,character) farray. forall o9:serialnumbert. forall o10:bool.
+  forall o11:us_rep6. forall o12:us_rep6. forall o13:bool.
+  forall logfiles1:(int,us_rep5) farray.
+  forall logfilesstatus1:(int,filestatust) farray.
+  forall logfilestate__split_fields7:logfileindext.
+  forall logfilestate__split_fields8:logentrycountt.
+  forall logfilestate__split_fields9:(int,logfileindext) farray.
+  forall logfilestate__split_fields10:logfileindext.
+  forall logfilestate__split_fields11:logfileindext.
+  forall logfilestate__split_fields12:logfilecountt.
+  forall logfilestate__split_fields13:(int,fileentrycountt) farray.
+  forall auditalarm1:int. forall auditsystemfault1:bool.
+  forall iandacertcontents__split_fields1:us_split_fields20.
+  forall idcertcontents__split_fields1:us_split_fields14.
+  forall filestate1:us_private. forall state1:us_private. forall result:bool.
+  forall extractok1:bool. forall result1:bool. forall verified1:bool.
+  forall result2:bool. forall current1:bool. forall result3:bool.
+  forall baseidmatches1:bool. forall certfound:bool.
+  forall iandacertcontents__split_fields2:us_split_fields20.
+  forall extractok2:bool. forall result4:us_split_fields__ref7.
+  forall idcertcontents__split_fields2:us_split_fields14.
+  forall result5:bool. forall baseidmatches2:bool.
+  forall logfiles2:(int,us_rep5) farray.
+  forall logfilesstatus2:(int,filestatust) farray.
+  forall logfilestate__split_fields14:logfileindext.
+  forall logfilestate__split_fields15:logentrycountt.
+  forall logfilestate__split_fields16:(int,logfileindext) farray.
+  forall logfilestate__split_fields17:logfileindext.
+  forall logfilestate__split_fields18:logfileindext.
+  forall logfilestate__split_fields19:logfilecountt.
+  forall logfilestate__split_fields20:(int,fileentrycountt) farray.
+  forall auditalarm2:int. forall auditsystemfault2:bool.
+  forall verified2:bool. forall filestate2:us_private.
+  forall state2:us_private. forall result6:bool__ref. forall current2:bool.
+  forall result7:bool__ref. forall iandavalid1:bool. forall result8:map__ref.
+  forall result__1:(int,character) farray.
+  ((audittypes__nodescription__aggregate_def(32) = nodescription) ->
+  ((valid_numberlogentries(to_rep8(logfilestate__split_fields),
   to_rep9(logfilestate__split_fields1), { us_split_fields7 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields2;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields3;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields4;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields5 } },
-  logfilestate__split_fields6) = true)
-
-axiom H2 : in_range5(auditalarm)
-
-axiom H3 : (result = extractok)
-
-axiom H4 : (extractok1 = of_int(0))
-
-axiom H5 : (result1 = verified)
-
-axiom H6 : (verified1 = of_int(0))
-
-axiom H7 : (result2 = current)
-
-axiom H8 : (current1 = of_int(0))
-
-axiom H9 : (result3 = baseidmatches)
-
-axiom H10 : (baseidmatches1 = of_int(0))
-
-axiom H11 : ((certfound = true) -> ((extractok2 = true) ->
-  ((((result4 = idcertcontents__split_fields) and
-  ((result5 = idcertcontents__split_fields1) and
-  (result6 = idcertcontents__split_fields2))) and
-  (result7 = idcertcontents__split_fields3)) and
-  (((result8 = idcertcontents__split_fields4) and
-  ((result9 = idcertcontents__split_fields5) and
-  ((result10 = idcertcontents__split_fields6) and
-  (result11 = idcertcontents__split_fields7)))) and
-  (((result12 = idcertcontents__split_fields8) and
-  ((result13 = idcertcontents__split_fields9) and
-  ((result14 = idcertcontents__split_fields10) and
-  (result15 = idcertcontents__split_fields11)))) and
-  ((result16 = idcertcontents__split_fields12) and
-  (((result17 = idcertcontents__split_fields13) and
-  ((result18 = idcertcontents__split_fields14) and
-  (result19 = idcertcontents__split_fields15))) and
-  ((result20 = idcertcontents__split_fields16) and
-  ((result21 = idcertcontents__split_fields17) and
-  (result22 = idcertcontents__split_fields18))))))))))
-
-axiom H12 : ((certfound = true) -> ((extractok2 = true) ->
-  ((((idcertcontents__split_fields38 = idcert__split_fields2) and
-  ((idcertcontents__split_fields39 = idcert__split_fields3) and
-  (idcertcontents__split_fields40 = idcert__split_fields4))) and
-  (idcertcontents__split_fields41 = idcert__split_fields5)) and
-  (((idcertcontents__split_fields42 = idcert__split_fields6) and
-  ((idcertcontents__split_fields43 = idcert__split_fields7) and
-  ((idcertcontents__split_fields44 = idcert__split_fields8) and
-  (idcertcontents__split_fields45 = idcert__split_fields9)))) and
-  (((idcertcontents__split_fields46 = idcert__split_fields10) and
-  ((idcertcontents__split_fields47 = idcert__split_fields11) and
-  ((idcertcontents__split_fields48 = idcert__split_fields12) and
-  (idcertcontents__split_fields49 = idcert__split_fields13)))) and
-  ((idcertcontents__split_fields50 = idcert__split_fields14) and
-  (((idcertcontents__split_fields51 = idcert__split_fields15) and
-  ((idcertcontents__split_fields52 = idcert__split_fields16) and
-  (idcertcontents__split_fields53 = idcert__split_fields17))) and
-  ((idcertcontents__split_fields54 = idcert__split_fields18) and
-  ((idcertcontents__split_fields55 = idcert__split_fields19) and
-  (idcertcontents__split_fields56 = idcert__split_fields20))))))))))
-
-axiom H13 : ((certfound = true) -> ((extractok2 = true) -> ({
-  us_split_fields17 = { rec__cert__attr__contentst__id = { us_split_fields3 =
-  { rec__certtypes__idt__issuer = { us_split_fields1 = {
-  rec__cryptotypes__issuert__id = o13;
-  rec__cryptotypes__issuert__namelength = o14;
-  rec__cryptotypes__issuert__name = o15 } };
-  rec__certtypes__idt__serialnumber = o16 } };
-  rec__cert__attr__contentst__notbefore = { us_split_fields5 = {
-  rec__clock__timet__year = o17; rec__clock__timet__month = o18;
-  rec__clock__timet__day = o19; rec__clock__timet__millisec = o20 } };
-  rec__cert__attr__contentst__notafter = { us_split_fields5 = {
-  rec__clock__timet__year = o21; rec__clock__timet__month = o22;
-  rec__clock__timet__day = o23; rec__clock__timet__millisec = o24 } };
-  rec__cert__attr__contentst__mechanism = o25;
-  rec__cert__attr__contentst__basecertid = { us_split_fields3 = {
+  logfilestate__split_fields6) = true) -> (in_range5(auditalarm) ->
+  (((result = extractok) and (extractok1 = of_int(0))) ->
+  (((result1 = verified) and (verified1 = of_int(0))) ->
+  (((result2 = current) and (current1 = of_int(0))) ->
+  (((result3 = baseidmatches) and (baseidmatches1 = of_int(0))) ->
+  ((((certfound = true) and (((extractok2 = true) and
+  (((result4 = idcertcontents__split_fields) and
+  (idcertcontents__split_fields2 = (((idcert__split_fields).us_split_fields__content11).rec__usertoken__valididcertt__contents).us_split_fields15)) and
+  (((((o1 = cert_attr_ianda_to_cert_attr({ us_split_fields21 =
+  iandacertcontents__split_fields2 })) and ({ us_split_fields3 = {
   rec__certtypes__idt__issuer = { us_split_fields1 = {
-  rec__cryptotypes__issuert__id = o26;
-  rec__cryptotypes__issuert__namelength = o27;
-  rec__cryptotypes__issuert__name = o28 } };
-  rec__certtypes__idt__serialnumber = o29 } } }
-  } = cert_attr_ianda_to_cert_attr({ us_split_fields21 = {
-  rec__cert__attr__ianda__contentst__id = { us_split_fields3 = {
+  rec__cryptotypes__issuert__id = o2; rec__cryptotypes__issuert__namelength =
+  o3; rec__cryptotypes__issuert__name = o4 } };
+  rec__certtypes__idt__serialnumber = o5 } } = thebasecert(o1))) and
+  (((o = cert_id_to_cert({ us_split_fields15 = idcertcontents__split_fields2
+  })) and ({ us_split_fields3 = { rec__certtypes__idt__issuer = {
+  us_split_fields1 = { rec__cryptotypes__issuert__id = o6;
+  rec__cryptotypes__issuert__namelength = o7;
+  rec__cryptotypes__issuert__name = o8 } };
+  rec__certtypes__idt__serialnumber = o9 } } = theid(o))) and
+  (o10 = bool_eq8({ us_split_fields3 = { rec__certtypes__idt__issuer = {
+  us_split_fields1 = { rec__cryptotypes__issuert__id = o6;
+  rec__cryptotypes__issuert__namelength = o7;
+  rec__cryptotypes__issuert__name = o8 } };
+  rec__certtypes__idt__serialnumber = o9 } }, { us_split_fields3 = {
   rec__certtypes__idt__issuer = { us_split_fields1 = {
-  rec__cryptotypes__issuert__id = iandacertcontents__split_fields42;
-  rec__cryptotypes__issuert__namelength = iandacertcontents__split_fields43;
-  rec__cryptotypes__issuert__name = iandacertcontents__split_fields44 } };
-  rec__certtypes__idt__serialnumber = iandacertcontents__split_fields45 } };
-  rec__cert__attr__ianda__contentst__notbefore = { us_split_fields5 = {
-  rec__clock__timet__year = iandacertcontents__split_fields46;
-  rec__clock__timet__month = iandacertcontents__split_fields47;
-  rec__clock__timet__day = iandacertcontents__split_fields48;
-  rec__clock__timet__millisec = iandacertcontents__split_fields49 } };
-  rec__cert__attr__ianda__contentst__notafter = { us_split_fields5 = {
-  rec__clock__timet__year = iandacertcontents__split_fields50;
-  rec__clock__timet__month = iandacertcontents__split_fields51;
-  rec__clock__timet__day = iandacertcontents__split_fields52;
-  rec__clock__timet__millisec = iandacertcontents__split_fields53 } };
-  rec__cert__attr__ianda__contentst__mechanism =
-  iandacertcontents__split_fields54;
-  rec__cert__attr__ianda__contentst__basecertid = { us_split_fields3 = {
-  rec__certtypes__idt__issuer = { us_split_fields1 = {
-  rec__cryptotypes__issuert__id = iandacertcontents__split_fields55;
-  rec__cryptotypes__issuert__namelength = iandacertcontents__split_fields56;
-  rec__cryptotypes__issuert__name = iandacertcontents__split_fields57 } };
-  rec__certtypes__idt__serialnumber = iandacertcontents__split_fields58 } };
-  rec__cert__attr__ianda__contentst__template = { us_split_fields19 = {
-  rec__iandatypes__templatet__length = iandacertcontents__split_fields59;
-  rec__iandatypes__templatet__requiredmaxfar =
-  iandacertcontents__split_fields60; rec__iandatypes__templatet__id =
-  iandacertcontents__split_fields61; rec__iandatypes__templatet__pad =
-  iandacertcontents__split_fields62 } } } }))))
-
-axiom H14 : ((certfound = true) -> ((extractok2 = true) -> ({
-  us_split_fields3 = { rec__certtypes__idt__issuer = { us_split_fields1 = {
-  rec__cryptotypes__issuert__id = o30;
-  rec__cryptotypes__issuert__namelength = o31;
-  rec__cryptotypes__issuert__name = o32 } };
-  rec__certtypes__idt__serialnumber = o33 } } = thebasecert({
-  us_split_fields17 = { rec__cert__attr__contentst__id = { us_split_fields3 =
-  { rec__certtypes__idt__issuer = { us_split_fields1 = {
-  rec__cryptotypes__issuert__id = o13;
-  rec__cryptotypes__issuert__namelength = o14;
-  rec__cryptotypes__issuert__name = o15 } };
-  rec__certtypes__idt__serialnumber = o16 } };
-  rec__cert__attr__contentst__notbefore = { us_split_fields5 = {
-  rec__clock__timet__year = o17; rec__clock__timet__month = o18;
-  rec__clock__timet__day = o19; rec__clock__timet__millisec = o20 } };
-  rec__cert__attr__contentst__notafter = { us_split_fields5 = {
-  rec__clock__timet__year = o21; rec__clock__timet__month = o22;
-  rec__clock__timet__day = o23; rec__clock__timet__millisec = o24 } };
-  rec__cert__attr__contentst__mechanism = o25;
-  rec__cert__attr__contentst__basecertid = { us_split_fields3 = {
-  rec__certtypes__idt__issuer = { us_split_fields1 = {
-  rec__cryptotypes__issuert__id = o26;
-  rec__cryptotypes__issuert__namelength = o27;
-  rec__cryptotypes__issuert__name = o28 } };
-  rec__certtypes__idt__serialnumber = o29 } } } }))))
-
-axiom H15 : ((certfound = true) -> ((extractok2 = true) -> ({
-  us_split_fields11 = { rec__cert__contentst__id = { us_split_fields3 = {
-  rec__certtypes__idt__issuer = { us_split_fields1 = {
-  rec__cryptotypes__issuert__id = o; rec__cryptotypes__issuert__namelength =
-  o1; rec__cryptotypes__issuert__name = o2 } };
-  rec__certtypes__idt__serialnumber = o3 } };
-  rec__cert__contentst__notbefore = { us_split_fields5 = {
-  rec__clock__timet__year = o4; rec__clock__timet__month = o5;
-  rec__clock__timet__day = o6; rec__clock__timet__millisec = o7 } };
-  rec__cert__contentst__notafter = { us_split_fields5 = {
-  rec__clock__timet__year = o8; rec__clock__timet__month = o9;
-  rec__clock__timet__day = o10; rec__clock__timet__millisec = o11 } };
-  rec__cert__contentst__mechanism = o12 } } = cert_id_to_cert({
-  us_split_fields15 = { rec__cert__id__contentst__id = { us_split_fields3 = {
-  rec__certtypes__idt__issuer = { us_split_fields1 = {
-  rec__cryptotypes__issuert__id = idcertcontents__split_fields38;
-  rec__cryptotypes__issuert__namelength = idcertcontents__split_fields39;
-  rec__cryptotypes__issuert__name = idcertcontents__split_fields40 } };
-  rec__certtypes__idt__serialnumber = idcertcontents__split_fields41 } };
-  rec__cert__id__contentst__notbefore = { us_split_fields5 = {
-  rec__clock__timet__year = idcertcontents__split_fields42;
-  rec__clock__timet__month = idcertcontents__split_fields43;
-  rec__clock__timet__day = idcertcontents__split_fields44;
-  rec__clock__timet__millisec = idcertcontents__split_fields45 } };
-  rec__cert__id__contentst__notafter = { us_split_fields5 = {
-  rec__clock__timet__year = idcertcontents__split_fields46;
-  rec__clock__timet__month = idcertcontents__split_fields47;
-  rec__clock__timet__day = idcertcontents__split_fields48;
-  rec__clock__timet__millisec = idcertcontents__split_fields49 } };
-  rec__cert__id__contentst__mechanism = idcertcontents__split_fields50;
-  rec__cert__id__contentst__subject = { us_split_fields1 = {
-  rec__cryptotypes__issuert__id = idcertcontents__split_fields51;
-  rec__cryptotypes__issuert__namelength = idcertcontents__split_fields52;
-  rec__cryptotypes__issuert__name = idcertcontents__split_fields53 } };
-  rec__cert__id__contentst__subjectpublickey = { us_split_fields13 = {
-  rec__cryptotypes__keypartt__algorithmid = idcertcontents__split_fields54;
-  rec__cryptotypes__keypartt__keyid = idcertcontents__split_fields55;
-  rec__cryptotypes__keypartt__keylength = idcertcontents__split_fields56 } }
-  } }))))
-
-axiom H16 : ((certfound = true) -> ((extractok2 = true) -> ({
-  us_split_fields3 = { rec__certtypes__idt__issuer = { us_split_fields1 = {
-  rec__cryptotypes__issuert__id = o34;
-  rec__cryptotypes__issuert__namelength = o35;
-  rec__cryptotypes__issuert__name = o36 } };
-  rec__certtypes__idt__serialnumber = o37 } } = theid({ us_split_fields11 = {
-  rec__cert__contentst__id = { us_split_fields3 = {
-  rec__certtypes__idt__issuer = { us_split_fields1 = {
-  rec__cryptotypes__issuert__id = o; rec__cryptotypes__issuert__namelength =
-  o1; rec__cryptotypes__issuert__name = o2 } };
-  rec__certtypes__idt__serialnumber = o3 } };
-  rec__cert__contentst__notbefore = { us_split_fields5 = {
-  rec__clock__timet__year = o4; rec__clock__timet__month = o5;
-  rec__clock__timet__day = o6; rec__clock__timet__millisec = o7 } };
-  rec__cert__contentst__notafter = { us_split_fields5 = {
-  rec__clock__timet__year = o8; rec__clock__timet__month = o9;
-  rec__clock__timet__day = o10; rec__clock__timet__millisec = o11 } };
-  rec__cert__contentst__mechanism = o12 } }))))
-
-axiom H17 : ((certfound = true) -> ((extractok2 = true) -> (o38 = bool_eq8({
-  us_split_fields3 = { rec__certtypes__idt__issuer = { us_split_fields1 = {
-  rec__cryptotypes__issuert__id = o34;
-  rec__cryptotypes__issuert__namelength = o35;
-  rec__cryptotypes__issuert__name = o36 } };
-  rec__certtypes__idt__serialnumber = o37 } }, { us_split_fields3 = {
-  rec__certtypes__idt__issuer = { us_split_fields1 = {
-  rec__cryptotypes__issuert__id = o30;
-  rec__cryptotypes__issuert__namelength = o31;
-  rec__cryptotypes__issuert__name = o32 } };
-  rec__certtypes__idt__serialnumber = o33 } }))))
-
-axiom H18 : ((certfound = true) -> ((extractok2 = true) ->
-  (result23 = baseidmatches1)))
-
-axiom H19 : ((certfound = true) -> ((extractok2 = true) ->
-  (baseidmatches2 = o38)))
-
-axiom H20 : ((certfound = true) -> ((extractok2 = true) -> ({
-  us_split_fields11 = { rec__cert__contentst__id = { us_split_fields3 = {
-  rec__certtypes__idt__issuer = { us_split_fields1 = {
-  rec__cryptotypes__issuert__id = o39;
-  rec__cryptotypes__issuert__namelength = o40;
-  rec__cryptotypes__issuert__name = o41 } };
-  rec__certtypes__idt__serialnumber = o42 } };
-  rec__cert__contentst__notbefore = { us_split_fields5 = {
-  rec__clock__timet__year = o43; rec__clock__timet__month = o44;
-  rec__clock__timet__day = o45; rec__clock__timet__millisec = o46 } };
-  rec__cert__contentst__notafter = { us_split_fields5 = {
-  rec__clock__timet__year = o47; rec__clock__timet__month = o48;
-  rec__clock__timet__day = o49; rec__clock__timet__millisec = o50 } };
-  rec__cert__contentst__mechanism = o51 } } = cert_attr_ianda_to_cert({
-  us_split_fields21 = { rec__cert__attr__ianda__contentst__id = {
-  us_split_fields3 = { rec__certtypes__idt__issuer = { us_split_fields1 = {
-  rec__cryptotypes__issuert__id = iandacertcontents__split_fields42;
-  rec__cryptotypes__issuert__namelength = iandacertcontents__split_fields43;
-  rec__cryptotypes__issuert__name = iandacertcontents__split_fields44 } };
-  rec__certtypes__idt__serialnumber = iandacertcontents__split_fields45 } };
-  rec__cert__attr__ianda__contentst__notbefore = { us_split_fields5 = {
-  rec__clock__timet__year = iandacertcontents__split_fields46;
-  rec__clock__timet__month = iandacertcontents__split_fields47;
-  rec__clock__timet__day = iandacertcontents__split_fields48;
-  rec__clock__timet__millisec = iandacertcontents__split_fields49 } };
-  rec__cert__attr__ianda__contentst__notafter = { us_split_fields5 = {
-  rec__clock__timet__year = iandacertcontents__split_fields50;
-  rec__clock__timet__month = iandacertcontents__split_fields51;
-  rec__clock__timet__day = iandacertcontents__split_fields52;
-  rec__clock__timet__millisec = iandacertcontents__split_fields53 } };
-  rec__cert__attr__ianda__contentst__mechanism =
-  iandacertcontents__split_fields54;
-  rec__cert__attr__ianda__contentst__basecertid = { us_split_fields3 = {
-  rec__certtypes__idt__issuer = { us_split_fields1 = {
-  rec__cryptotypes__issuert__id = iandacertcontents__split_fields55;
-  rec__cryptotypes__issuert__namelength = iandacertcontents__split_fields56;
-  rec__cryptotypes__issuert__name = iandacertcontents__split_fields57 } };
-  rec__certtypes__idt__serialnumber = iandacertcontents__split_fields58 } };
-  rec__cert__attr__ianda__contentst__template = { us_split_fields19 = {
-  rec__iandatypes__templatet__length = iandacertcontents__split_fields59;
-  rec__iandatypes__templatet__requiredmaxfar =
-  iandacertcontents__split_fields60; rec__iandatypes__templatet__id =
-  iandacertcontents__split_fields61; rec__iandatypes__templatet__pad =
-  iandacertcontents__split_fields62 } } } }))))
-
-axiom H21 : ((certfound = true) -> ((extractok2 = true) ->
+  rec__cryptotypes__issuert__id = o2; rec__cryptotypes__issuert__namelength =
+  o3; rec__cryptotypes__issuert__name = o4 } };
+  rec__certtypes__idt__serialnumber = o5 } })))) and
+  ((result5 = baseidmatches1) and (baseidmatches2 = o10))) and
+  (((o11 = cert_attr_ianda_to_cert({ us_split_fields21 =
+  iandacertcontents__split_fields2 })) and
   ((valid_numberlogentries(to_rep8(logfilestate__split_fields14),
   to_rep9(logfilestate__split_fields15), { us_split_fields7 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields16;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields17;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields18;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields19 } },
-  logfilestate__split_fields20) = true) and in_range5(auditalarm2))))
-
-axiom H22 : ((certfound = true) -> ((extractok2 = true) -> ({
-  us_split_fields11 = { rec__cert__contentst__id = { us_split_fields3 = {
-  rec__certtypes__idt__issuer = { us_split_fields1 = {
-  rec__cryptotypes__issuert__id = o52;
-  rec__cryptotypes__issuert__namelength = o53;
-  rec__cryptotypes__issuert__name = o54 } };
-  rec__certtypes__idt__serialnumber = o55 } };
-  rec__cert__contentst__notbefore = { us_split_fields5 = {
-  rec__clock__timet__year = o56; rec__clock__timet__month = o57;
-  rec__clock__timet__day = o58; rec__clock__timet__millisec = o59 } };
-  rec__cert__contentst__notafter = { us_split_fields5 = {
-  rec__clock__timet__year = o60; rec__clock__timet__month = o61;
-  rec__clock__timet__day = o62; rec__clock__timet__millisec = o63 } };
-  rec__cert__contentst__mechanism = o64 } } = cert_attr_ianda_to_cert({
-  us_split_fields21 = { rec__cert__attr__ianda__contentst__id = {
-  us_split_fields3 = { rec__certtypes__idt__issuer = { us_split_fields1 = {
-  rec__cryptotypes__issuert__id = iandacertcontents__split_fields42;
-  rec__cryptotypes__issuert__namelength = iandacertcontents__split_fields43;
-  rec__cryptotypes__issuert__name = iandacertcontents__split_fields44 } };
-  rec__certtypes__idt__serialnumber = iandacertcontents__split_fields45 } };
-  rec__cert__attr__ianda__contentst__notbefore = { us_split_fields5 = {
-  rec__clock__timet__year = iandacertcontents__split_fields46;
-  rec__clock__timet__month = iandacertcontents__split_fields47;
-  rec__clock__timet__day = iandacertcontents__split_fields48;
-  rec__clock__timet__millisec = iandacertcontents__split_fields49 } };
-  rec__cert__attr__ianda__contentst__notafter = { us_split_fields5 = {
-  rec__clock__timet__year = iandacertcontents__split_fields50;
-  rec__clock__timet__month = iandacertcontents__split_fields51;
-  rec__clock__timet__day = iandacertcontents__split_fields52;
-  rec__clock__timet__millisec = iandacertcontents__split_fields53 } };
-  rec__cert__attr__ianda__contentst__mechanism =
-  iandacertcontents__split_fields54;
-  rec__cert__attr__ianda__contentst__basecertid = { us_split_fields3 = {
-  rec__certtypes__idt__issuer = { us_split_fields1 = {
-  rec__cryptotypes__issuert__id = iandacertcontents__split_fields55;
-  rec__cryptotypes__issuert__namelength = iandacertcontents__split_fields56;
-  rec__cryptotypes__issuert__name = iandacertcontents__split_fields57 } };
-  rec__certtypes__idt__serialnumber = iandacertcontents__split_fields58 } };
-  rec__cert__attr__ianda__contentst__template = { us_split_fields19 = {
-  rec__iandatypes__templatet__length = iandacertcontents__split_fields59;
-  rec__iandatypes__templatet__requiredmaxfar =
-  iandacertcontents__split_fields60; rec__iandatypes__templatet__id =
-  iandacertcontents__split_fields61; rec__iandatypes__templatet__pad =
-  iandacertcontents__split_fields62 } } } }))))
-
-axiom H23 : ((certfound = true) -> ((extractok2 = true) -> (o65 = iscurrent({
-  us_split_fields11 = { rec__cert__contentst__id = { us_split_fields3 = {
-  rec__certtypes__idt__issuer = { us_split_fields1 = {
-  rec__cryptotypes__issuert__id = o52;
-  rec__cryptotypes__issuert__namelength = o53;
-  rec__cryptotypes__issuert__name = o54 } };
-  rec__certtypes__idt__serialnumber = o55 } };
-  rec__cert__contentst__notbefore = { us_split_fields5 = {
-  rec__clock__timet__year = o56; rec__clock__timet__month = o57;
-  rec__clock__timet__day = o58; rec__clock__timet__millisec = o59 } };
-  rec__cert__contentst__notafter = { us_split_fields5 = {
-  rec__clock__timet__year = o60; rec__clock__timet__month = o61;
-  rec__clock__timet__day = o62; rec__clock__timet__millisec = o63 } };
-  rec__cert__contentst__mechanism = o64 } }, { rec__clock__timet__year =
-  currenttimevar__split_fields; rec__clock__timet__month =
-  currenttimevar__split_fields1; rec__clock__timet__day =
-  currenttimevar__split_fields2; rec__clock__timet__millisec =
-  currenttimevar__split_fields3 }, currenttime))))
-
-axiom H24 : ((certfound = true) -> ((extractok2 = true) ->
-  (result24 = current1)))
-
-axiom H25 : ((certfound = true) -> ((extractok2 = true) -> (current2 = o65)))
-
-axiom H26 : ((certfound = true) -> ((not (extractok2 = true)) ->
-  (state2 = state)))
-
-axiom H27 : ((certfound = true) -> ((not (extractok2 = true)) ->
-  (filestate2 = filestate)))
-
-axiom H28 : ((certfound = true) -> ((not (extractok2 = true)) ->
-  (baseidmatches2 = baseidmatches1)))
-
-axiom H29 : ((certfound = true) -> ((not (extractok2 = true)) ->
-  (current2 = current1)))
-
-axiom H30 : ((certfound = true) -> ((not (extractok2 = true)) ->
-  (verified2 = verified1)))
-
-axiom H31 : ((certfound = true) -> ((not (extractok2 = true)) ->
-  ((((idcertcontents__split_fields38 = idcertcontents__split_fields) and
-  ((idcertcontents__split_fields39 = idcertcontents__split_fields1) and
-  (idcertcontents__split_fields40 = idcertcontents__split_fields2))) and
-  (idcertcontents__split_fields41 = idcertcontents__split_fields3)) and
-  (((idcertcontents__split_fields42 = idcertcontents__split_fields4) and
-  ((idcertcontents__split_fields43 = idcertcontents__split_fields5) and
-  ((idcertcontents__split_fields44 = idcertcontents__split_fields6) and
-  (idcertcontents__split_fields45 = idcertcontents__split_fields7)))) and
-  (((idcertcontents__split_fields46 = idcertcontents__split_fields8) and
-  ((idcertcontents__split_fields47 = idcertcontents__split_fields9) and
-  ((idcertcontents__split_fields48 = idcertcontents__split_fields10) and
-  (idcertcontents__split_fields49 = idcertcontents__split_fields11)))) and
-  ((idcertcontents__split_fields50 = idcertcontents__split_fields12) and
-  (((idcertcontents__split_fields51 = idcertcontents__split_fields13) and
-  ((idcertcontents__split_fields52 = idcertcontents__split_fields14) and
-  (idcertcontents__split_fields53 = idcertcontents__split_fields15))) and
-  ((idcertcontents__split_fields54 = idcertcontents__split_fields16) and
-  ((idcertcontents__split_fields55 = idcertcontents__split_fields17) and
-  (idcertcontents__split_fields56 = idcertcontents__split_fields18))))))))))
-
-axiom H32 : ((certfound = true) -> ((not (extractok2 = true)) ->
-  (auditsystemfault2 = auditsystemfault)))
-
-axiom H33 : ((certfound = true) -> ((not (extractok2 = true)) ->
-  (auditalarm2 = auditalarm)))
-
-axiom H34 : ((certfound = true) -> ((not (extractok2 = true)) ->
-  ((logfilestate__split_fields14 = logfilestate__split_fields) and
-  ((logfilestate__split_fields15 = logfilestate__split_fields1) and
-  (((logfilestate__split_fields16 = logfilestate__split_fields2) and
-  ((logfilestate__split_fields17 = logfilestate__split_fields3) and
-  ((logfilestate__split_fields18 = logfilestate__split_fields4) and
-  (logfilestate__split_fields19 = logfilestate__split_fields5)))) and
-  (logfilestate__split_fields20 = logfilestate__split_fields6))))))
-
-axiom H35 : ((certfound = true) -> ((not (extractok2 = true)) ->
-  (logfilesstatus2 = logfilesstatus)))
-
-axiom H36 : ((certfound = true) -> ((not (extractok2 = true)) ->
-  (logfiles2 = logfiles)))
-
-axiom H37 : ((certfound = true) -> ((not (extractok2 = true)) ->
-  (state2 = state1)))
-
-axiom H38 : ((certfound = true) -> ((not (extractok2 = true)) ->
-  (filestate2 = filestate1)))
-
-axiom H39 : ((certfound = true) -> ((not (extractok2 = true)) ->
-  (baseidmatches2 = baseidmatches1)))
-
-axiom H40 : ((certfound = true) -> ((not (extractok2 = true)) ->
-  (current2 = current1)))
-
-axiom H41 : ((certfound = true) -> ((not (extractok2 = true)) ->
-  (verified2 = verified1)))
-
-axiom H42 : ((certfound = true) -> ((not (extractok2 = true)) ->
-  ((((idcertcontents__split_fields38 = idcertcontents__split_fields19) and
-  ((idcertcontents__split_fields39 = idcertcontents__split_fields20) and
-  (idcertcontents__split_fields40 = idcertcontents__split_fields21))) and
-  (idcertcontents__split_fields41 = idcertcontents__split_fields22)) and
-  (((idcertcontents__split_fields42 = idcertcontents__split_fields23) and
-  ((idcertcontents__split_fields43 = idcertcontents__split_fields24) and
-  ((idcertcontents__split_fields44 = idcertcontents__split_fields25) and
-  (idcertcontents__split_fields45 = idcertcontents__split_fields26)))) and
-  (((idcertcontents__split_fields46 = idcertcontents__split_fields27) and
-  ((idcertcontents__split_fields47 = idcertcontents__split_fields28) and
-  ((idcertcontents__split_fields48 = idcertcontents__split_fields29) and
-  (idcertcontents__split_fields49 = idcertcontents__split_fields30)))) and
-  ((idcertcontents__split_fields50 = idcertcontents__split_fields31) and
-  (((idcertcontents__split_fields51 = idcertcontents__split_fields32) and
-  ((idcertcontents__split_fields52 = idcertcontents__split_fields33) and
-  (idcertcontents__split_fields53 = idcertcontents__split_fields34))) and
-  ((idcertcontents__split_fields54 = idcertcontents__split_fields35) and
-  ((idcertcontents__split_fields55 = idcertcontents__split_fields36) and
-  (idcertcontents__split_fields56 = idcertcontents__split_fields37))))))))))
-
-axiom H43 : ((certfound = true) -> ((not (extractok2 = true)) ->
-  (auditsystemfault2 = auditsystemfault1)))
-
-axiom H44 : ((certfound = true) -> ((not (extractok2 = true)) ->
-  (auditalarm2 = auditalarm1)))
-
-axiom H45 : ((certfound = true) -> ((not (extractok2 = true)) ->
-  ((logfilestate__split_fields14 = logfilestate__split_fields7) and
-  ((logfilestate__split_fields15 = logfilestate__split_fields8) and
-  (((logfilestate__split_fields16 = logfilestate__split_fields9) and
-  ((logfilestate__split_fields17 = logfilestate__split_fields10) and
-  ((logfilestate__split_fields18 = logfilestate__split_fields11) and
-  (logfilestate__split_fields19 = logfilestate__split_fields12)))) and
-  (logfilestate__split_fields20 = logfilestate__split_fields13))))))
-
-axiom H46 : ((certfound = true) -> ((not (extractok2 = true)) ->
-  (logfilesstatus2 = logfilesstatus1)))
-
-axiom H47 : ((certfound = true) -> ((not (extractok2 = true)) ->
-  (logfiles2 = logfiles1)))
-
-axiom H48 : ((not (certfound = true)) -> (state2 = state))
-
-axiom H49 : ((not (certfound = true)) -> (filestate2 = filestate))
-
-axiom H50 : ((not (certfound = true)) -> (baseidmatches2 = baseidmatches1))
-
-axiom H51 : ((not (certfound = true)) -> (current2 = current1))
-
-axiom H52 : ((not (certfound = true)) -> (verified2 = verified1))
-
-axiom H53 : ((not (certfound = true)) -> (extractok2 = extractok1))
-
-axiom H54 : ((not (certfound = true)) ->
-  ((((idcertcontents__split_fields38 = idcertcontents__split_fields) and
-  ((idcertcontents__split_fields39 = idcertcontents__split_fields1) and
-  (idcertcontents__split_fields40 = idcertcontents__split_fields2))) and
-  (idcertcontents__split_fields41 = idcertcontents__split_fields3)) and
-  (((idcertcontents__split_fields42 = idcertcontents__split_fields4) and
-  ((idcertcontents__split_fields43 = idcertcontents__split_fields5) and
-  ((idcertcontents__split_fields44 = idcertcontents__split_fields6) and
-  (idcertcontents__split_fields45 = idcertcontents__split_fields7)))) and
-  (((idcertcontents__split_fields46 = idcertcontents__split_fields8) and
-  ((idcertcontents__split_fields47 = idcertcontents__split_fields9) and
-  ((idcertcontents__split_fields48 = idcertcontents__split_fields10) and
-  (idcertcontents__split_fields49 = idcertcontents__split_fields11)))) and
-  ((idcertcontents__split_fields50 = idcertcontents__split_fields12) and
-  (((idcertcontents__split_fields51 = idcertcontents__split_fields13) and
-  ((idcertcontents__split_fields52 = idcertcontents__split_fields14) and
-  (idcertcontents__split_fields53 = idcertcontents__split_fields15))) and
-  ((idcertcontents__split_fields54 = idcertcontents__split_fields16) and
-  ((idcertcontents__split_fields55 = idcertcontents__split_fields17) and
-  (idcertcontents__split_fields56 = idcertcontents__split_fields18)))))))))
-
-axiom H55 : ((not (certfound = true)) ->
-  ((((iandacertcontents__split_fields42 = iandacertcontents__split_fields) and
-  ((iandacertcontents__split_fields43 = iandacertcontents__split_fields1) and
-  (iandacertcontents__split_fields44 = iandacertcontents__split_fields2))) and
-  (iandacertcontents__split_fields45 = iandacertcontents__split_fields3)) and
-  (((iandacertcontents__split_fields46 = iandacertcontents__split_fields4) and
-  ((iandacertcontents__split_fields47 = iandacertcontents__split_fields5) and
-  ((iandacertcontents__split_fields48 = iandacertcontents__split_fields6) and
-  (iandacertcontents__split_fields49 = iandacertcontents__split_fields7)))) and
-  (((iandacertcontents__split_fields50 = iandacertcontents__split_fields8) and
-  ((iandacertcontents__split_fields51 = iandacertcontents__split_fields9) and
-  ((iandacertcontents__split_fields52 = iandacertcontents__split_fields10) and
-  (iandacertcontents__split_fields53 = iandacertcontents__split_fields11)))) and
-  ((iandacertcontents__split_fields54 = iandacertcontents__split_fields12) and
-  ((((iandacertcontents__split_fields55 = iandacertcontents__split_fields13) and
-  ((iandacertcontents__split_fields56 = iandacertcontents__split_fields14) and
-  (iandacertcontents__split_fields57 = iandacertcontents__split_fields15))) and
-  (iandacertcontents__split_fields58 = iandacertcontents__split_fields16)) and
-  ((iandacertcontents__split_fields59 = iandacertcontents__split_fields17) and
-  ((iandacertcontents__split_fields60 = iandacertcontents__split_fields18) and
-  ((iandacertcontents__split_fields61 = iandacertcontents__split_fields19) and
-  (iandacertcontents__split_fields62 = iandacertcontents__split_fields20))))))))))
-
-axiom H56 : ((not (certfound = true)) ->
-  (auditsystemfault2 = auditsystemfault))
-
-axiom H57 : ((not (certfound = true)) -> (auditalarm2 = auditalarm))
-
-axiom H58 : ((not (certfound = true)) ->
-  ((logfilestate__split_fields14 = logfilestate__split_fields) and
-  ((logfilestate__split_fields15 = logfilestate__split_fields1) and
-  (((logfilestate__split_fields16 = logfilestate__split_fields2) and
-  ((logfilestate__split_fields17 = logfilestate__split_fields3) and
-  ((logfilestate__split_fields18 = logfilestate__split_fields4) and
-  (logfilestate__split_fields19 = logfilestate__split_fields5)))) and
-  (logfilestate__split_fields20 = logfilestate__split_fields6)))))
-
-axiom H59 : ((not (certfound = true)) -> (logfilesstatus2 = logfilesstatus))
-
-axiom H60 : ((not (certfound = true)) -> (logfiles2 = logfiles))
-
-axiom H61 : ((not (certfound = true)) -> (state2 = state1))
-
-axiom H62 : ((not (certfound = true)) -> (filestate2 = filestate1))
-
-axiom H63 : ((not (certfound = true)) -> (baseidmatches2 = baseidmatches1))
-
-axiom H64 : ((not (certfound = true)) -> (current2 = current1))
-
-axiom H65 : ((not (certfound = true)) -> (verified2 = verified1))
-
-axiom H66 : ((not (certfound = true)) -> (extractok2 = extractok1))
-
-axiom H67 : ((not (certfound = true)) ->
-  ((((idcertcontents__split_fields38 = idcertcontents__split_fields19) and
-  ((idcertcontents__split_fields39 = idcertcontents__split_fields20) and
-  (idcertcontents__split_fields40 = idcertcontents__split_fields21))) and
-  (idcertcontents__split_fields41 = idcertcontents__split_fields22)) and
-  (((idcertcontents__split_fields42 = idcertcontents__split_fields23) and
-  ((idcertcontents__split_fields43 = idcertcontents__split_fields24) and
-  ((idcertcontents__split_fields44 = idcertcontents__split_fields25) and
-  (idcertcontents__split_fields45 = idcertcontents__split_fields26)))) and
-  (((idcertcontents__split_fields46 = idcertcontents__split_fields27) and
-  ((idcertcontents__split_fields47 = idcertcontents__split_fields28) and
-  ((idcertcontents__split_fields48 = idcertcontents__split_fields29) and
-  (idcertcontents__split_fields49 = idcertcontents__split_fields30)))) and
-  ((idcertcontents__split_fields50 = idcertcontents__split_fields31) and
-  (((idcertcontents__split_fields51 = idcertcontents__split_fields32) and
-  ((idcertcontents__split_fields52 = idcertcontents__split_fields33) and
-  (idcertcontents__split_fields53 = idcertcontents__split_fields34))) and
-  ((idcertcontents__split_fields54 = idcertcontents__split_fields35) and
-  ((idcertcontents__split_fields55 = idcertcontents__split_fields36) and
-  (idcertcontents__split_fields56 = idcertcontents__split_fields37)))))))))
-
-axiom H68 : ((not (certfound = true)) ->
-  ((((iandacertcontents__split_fields42 = iandacertcontents__split_fields21) and
-  ((iandacertcontents__split_fields43 = iandacertcontents__split_fields22) and
-  (iandacertcontents__split_fields44 = iandacertcontents__split_fields23))) and
-  (iandacertcontents__split_fields45 = iandacertcontents__split_fields24)) and
-  (((iandacertcontents__split_fields46 = iandacertcontents__split_fields25) and
-  ((iandacertcontents__split_fields47 = iandacertcontents__split_fields26) and
-  ((iandacertcontents__split_fields48 = iandacertcontents__split_fields27) and
-  (iandacertcontents__split_fields49 = iandacertcontents__split_fields28)))) and
-  (((iandacertcontents__split_fields50 = iandacertcontents__split_fields29) and
-  ((iandacertcontents__split_fields51 = iandacertcontents__split_fields30) and
-  ((iandacertcontents__split_fields52 = iandacertcontents__split_fields31) and
-  (iandacertcontents__split_fields53 = iandacertcontents__split_fields32)))) and
-  ((iandacertcontents__split_fields54 = iandacertcontents__split_fields33) and
-  ((((iandacertcontents__split_fields55 = iandacertcontents__split_fields34) and
-  ((iandacertcontents__split_fields56 = iandacertcontents__split_fields35) and
-  (iandacertcontents__split_fields57 = iandacertcontents__split_fields36))) and
-  (iandacertcontents__split_fields58 = iandacertcontents__split_fields37)) and
-  ((iandacertcontents__split_fields59 = iandacertcontents__split_fields38) and
-  ((iandacertcontents__split_fields60 = iandacertcontents__split_fields39) and
-  ((iandacertcontents__split_fields61 = iandacertcontents__split_fields40) and
-  (iandacertcontents__split_fields62 = iandacertcontents__split_fields41))))))))))
-
-axiom H69 : ((not (certfound = true)) ->
-  (auditsystemfault2 = auditsystemfault1))
-
-axiom H70 : ((not (certfound = true)) -> (auditalarm2 = auditalarm1))
-
-axiom H71 : ((not (certfound = true)) ->
-  ((logfilestate__split_fields14 = logfilestate__split_fields7) and
-  ((logfilestate__split_fields15 = logfilestate__split_fields8) and
-  (((logfilestate__split_fields16 = logfilestate__split_fields9) and
-  ((logfilestate__split_fields17 = logfilestate__split_fields10) and
-  ((logfilestate__split_fields18 = logfilestate__split_fields11) and
-  (logfilestate__split_fields19 = logfilestate__split_fields12)))) and
-  (logfilestate__split_fields20 = logfilestate__split_fields13)))))
-
-axiom H72 : ((not (certfound = true)) -> (logfilesstatus2 = logfilesstatus1))
-
-axiom H73 : ((not (certfound = true)) -> (logfiles2 = logfiles1))
-
-axiom H74 : (result25 = iandavalid)
-
-axiom H75 :
+  logfilestate__split_fields20) = true) and in_range5(auditalarm2))) and
+  (((o12 = cert_attr_ianda_to_cert({ us_split_fields21 =
+  iandacertcontents__split_fields2 })) and (o13 = iscurrent(o12, {
+  rec__clock__timet__year = currenttimevar__split_fields;
+  rec__clock__timet__month = currenttimevar__split_fields1;
+  rec__clock__timet__day = currenttimevar__split_fields2;
+  rec__clock__timet__millisec = currenttimevar__split_fields3 },
+  currenttime))) and ((result6 = { bool__content = current1 }) and
+  (current2 = o13))))))) or ((not (extractok2 = true)) and
+  (((state2 = state) and ((filestate2 = filestate) and
+  ((baseidmatches2 = baseidmatches1) and ((current2 = current1) and
+  ((verified2 = verified1) and (({ us_split_fields__content7 =
+  idcertcontents__split_fields2 } = idcertcontents__split_fields) and
+  ((auditsystemfault2 = auditsystemfault) and ((auditalarm2 = auditalarm) and
+  (((logfilestate__split_fields = logfilestate__split_fields14) and
+  ((logfilestate__split_fields1 = logfilestate__split_fields15) and
+  (((logfilestate__split_fields2 = logfilestate__split_fields16) and
+  ((logfilestate__split_fields3 = logfilestate__split_fields17) and
+  ((logfilestate__split_fields4 = logfilestate__split_fields18) and
+  (logfilestate__split_fields5 = logfilestate__split_fields19)))) and
+  (logfilestate__split_fields6 = logfilestate__split_fields20)))) and
+  ((logfilesstatus2 = logfilesstatus) and
+  (logfiles2 = logfiles))))))))))) and ((state2 = state1) and
+  ((filestate2 = filestate1) and ((baseidmatches2 = baseidmatches1) and
+  ((current2 = current1) and ((verified2 = verified1) and
+  ((idcertcontents__split_fields2 = idcertcontents__split_fields1) and
+  ((auditsystemfault2 = auditsystemfault1) and
+  ((auditalarm2 = auditalarm1) and (({
+  rec__auditlog__logfilestatet__currentlogfile =
+  logfilestate__split_fields14;
+  rec__auditlog__logfilestatet__numberlogentries =
+  logfilestate__split_fields15; rec__auditlog__logfilestatet__usedlogfiles =
+  { us_split_fields7 = { rec__auditlog__logfilelistt__list =
+  logfilestate__split_fields16; rec__auditlog__logfilelistt__head =
+  logfilestate__split_fields17; rec__auditlog__logfilelistt__lasti =
+  logfilestate__split_fields18; rec__auditlog__logfilelistt__length =
+  logfilestate__split_fields19 } };
+  rec__auditlog__logfilestatet__logfileentries = logfilestate__split_fields20
+  } = { rec__auditlog__logfilestatet__currentlogfile =
+  logfilestate__split_fields7;
+  rec__auditlog__logfilestatet__numberlogentries =
+  logfilestate__split_fields8; rec__auditlog__logfilestatet__usedlogfiles = {
+  us_split_fields7 = { rec__auditlog__logfilelistt__list =
+  logfilestate__split_fields9; rec__auditlog__logfilelistt__head =
+  logfilestate__split_fields10; rec__auditlog__logfilelistt__lasti =
+  logfilestate__split_fields11; rec__auditlog__logfilelistt__length =
+  logfilestate__split_fields12 } };
+  rec__auditlog__logfilestatet__logfileentries = logfilestate__split_fields13
+  }) and ((logfilesstatus2 = logfilesstatus1) and
+  (logfiles2 = logfiles1))))))))))))))) or ((not (certfound = true)) and
+  (((state2 = state) and ((filestate2 = filestate) and
+  ((baseidmatches2 = baseidmatches1) and ((current2 = current1) and
+  ((verified2 = verified1) and ((extractok2 = extractok1) and (({
+  us_split_fields__content7 = idcertcontents__split_fields2
+  } = idcertcontents__split_fields) and (({ us_split_fields__content10 =
+  iandacertcontents__split_fields2 } = iandacertcontents__split_fields) and
+  ((auditsystemfault2 = auditsystemfault) and ((auditalarm2 = auditalarm) and
+  (((logfilestate__split_fields = logfilestate__split_fields14) and
+  ((logfilestate__split_fields1 = logfilestate__split_fields15) and
+  (((logfilestate__split_fields2 = logfilestate__split_fields16) and
+  ((logfilestate__split_fields3 = logfilestate__split_fields17) and
+  ((logfilestate__split_fields4 = logfilestate__split_fields18) and
+  (logfilestate__split_fields5 = logfilestate__split_fields19)))) and
+  (logfilestate__split_fields6 = logfilestate__split_fields20)))) and
+  ((logfilesstatus2 = logfilesstatus) and
+  (logfiles2 = logfiles))))))))))))) and ((state2 = state1) and
+  ((filestate2 = filestate1) and ((baseidmatches2 = baseidmatches1) and
+  ((current2 = current1) and ((verified2 = verified1) and
+  ((extractok2 = extractok1) and
+  ((idcertcontents__split_fields2 = idcertcontents__split_fields1) and
+  ((iandacertcontents__split_fields2 = iandacertcontents__split_fields1) and
+  ((auditsystemfault2 = auditsystemfault1) and
+  ((auditalarm2 = auditalarm1) and (({
+  rec__auditlog__logfilestatet__currentlogfile =
+  logfilestate__split_fields14;
+  rec__auditlog__logfilestatet__numberlogentries =
+  logfilestate__split_fields15; rec__auditlog__logfilestatet__usedlogfiles =
+  { us_split_fields7 = { rec__auditlog__logfilelistt__list =
+  logfilestate__split_fields16; rec__auditlog__logfilelistt__head =
+  logfilestate__split_fields17; rec__auditlog__logfilelistt__lasti =
+  logfilestate__split_fields18; rec__auditlog__logfilelistt__length =
+  logfilestate__split_fields19 } };
+  rec__auditlog__logfilestatet__logfileentries = logfilestate__split_fields20
+  } = { rec__auditlog__logfilestatet__currentlogfile =
+  logfilestate__split_fields7;
+  rec__auditlog__logfilestatet__numberlogentries =
+  logfilestate__split_fields8; rec__auditlog__logfilestatet__usedlogfiles = {
+  us_split_fields7 = { rec__auditlog__logfilelistt__list =
+  logfilestate__split_fields9; rec__auditlog__logfilelistt__head =
+  logfilestate__split_fields10; rec__auditlog__logfilelistt__lasti =
+  logfilestate__split_fields11; rec__auditlog__logfilelistt__length =
+  logfilestate__split_fields12 } };
+  rec__auditlog__logfilestatet__logfileentries = logfilestate__split_fields13
+  }) and ((logfilesstatus2 = logfilesstatus1) and
+  (logfiles2 = logfiles1)))))))))))))))) -> (((result7 = { bool__content =
+  iandavalid }) and
   (iandavalid1 = match_bool(match_bool(match_bool(match_bool(certfound,
   extractok2, false), baseidmatches2, false), verified2, false), current2,
-  false))
-
-axiom H76 : (bool_eq3(description, 1, 150, nodescription, 1, 150) = true)
-
-axiom H77 : (certfound = true)
-
-axiom H78 : (extractok2 = true)
-
-axiom H79 : (baseidmatches2 = true)
-
-axiom H80 : (not (verified2 = true))
-
-axiom H81 : (result27 = result__1)
-
-axiom H82 : (result__4 = nodescription)
-
-axiom H83 : (not (of_int(1) = true))
-
-axiom H84 : (1 <= 150)
-
- (* File "usertoken.adb", line 762, characters 0-0 *)
-goal WP_parameter_def : (1 <= 1)
+  false))) -> ((bool_eq3(description, 1, 150, nodescription, 1,
+  150) = true) -> ((not ((certfound = true) -> ((extractok2 = true) ->
+  (not (baseidmatches2 = true))))) -> ((not (verified2 = true)) ->
+  (((result8 = { map__content = result__ }) and
+  (result__1 = nodescription)) -> ((not (of_int(1) = true)) -> ((1 <= 150) ->
+  (1 <= 1)))))))))))))))))

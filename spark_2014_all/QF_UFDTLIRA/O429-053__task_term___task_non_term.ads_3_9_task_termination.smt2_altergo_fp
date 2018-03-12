@@ -111,33 +111,5 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic a : int
-
-logic f : int
-
-logic tmp : int
-
-logic o : int
-
-logic result : int
-
-logic a1 : int
-
-logic result1 : int
-
-logic f1 : int
-
-logic a2 : int
-
-logic f2 : int
-
-logic tmp1 : int
-
-logic result2 : int
-
-logic tmp2 : int
-
-axiom H : false
-
  (* File "task_non_term.adb", line 8, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def : true

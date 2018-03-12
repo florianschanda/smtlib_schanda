@@ -1512,51 +1512,8 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic n : int
-
-logic c : int
-
-logic v : volt
-
-logic m : money
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : volt
-
-logic o3 : volt
-
-logic o4 : money
-
-logic o5 : money
-
-logic o6 : t
-
-logic result : int
-
-logic n1 : int
-
-logic result1 : int
-
-logic c1 : int
-
-logic result2 : volt
-
-logic v1 : volt
-
-logic result3 : money
-
-logic m1 : money
-
-axiom H : ((o = ident(5)) and in_range1(o))
-
-axiom H1 : (result = n)
-
-axiom H2 : (n1 = o)
-
-axiom H3 : in_range1(n1)
-
  (* File "p.adb", line 40, characters 0-0 *)
-goal WP_parameter_def : (0 <= 0)
+goal WP_parameter_def :
+  (forall n:int. forall o:int. forall result:int. forall n1:int.
+  ((((o = ident(5)) and in_range1(o)) and ((result = n) and (n1 = o))) ->
+  (in_range1(n1) -> (0 <= 0))))

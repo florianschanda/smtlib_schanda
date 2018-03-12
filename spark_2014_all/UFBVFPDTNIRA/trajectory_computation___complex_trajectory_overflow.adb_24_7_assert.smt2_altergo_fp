@@ -2249,12 +2249,6 @@ type t__ref1 = { t__content1 : t1
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int5 : bool -> int
 
 axiom to_int_def4 :
@@ -2266,6 +2260,12 @@ logic of_int5 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int5(i)]. (((i = 0) -> (of_int5(i) = false)) and
   ((not (i = 0)) -> (of_int5(i) = true))))
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -2602,94 +2602,25 @@ axiom delta_speed__def_axiom : (delta_speed = add1(NearestTiesToEven, drag,
 
 axiom n_bv__def_axiom : (n_bv = of_int(n))
 
-logic speed : t1
-
-logic distance : t1
-
-logic average : t1
-
-logic o : t1
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : t1
-
-logic o5 : t1
-
-logic o6 : t1
-
-logic o7 : int
-
-logic result : t1
-
-logic speed1 : t1
-
-logic result1 : t1
-
-logic average1 : t1
-
-logic result2 : t1
-
-logic distance1 : t1
-
-logic speed2 : t1
-
-logic distance2 : t1
-
-logic average2 : t1
-
-logic speed3 : t1
-
-logic distance3 : t1
-
-logic average3 : t1
-
-axiom H : in_range2(n)
-
-axiom H1 : in_range3(factor)
-
-axiom H2 : in_range4(drag)
-
-axiom H3 : tqtisFinite(speed)
-
-axiom H4 : tqtisFinite(distance)
-
 logic fliteral6 : t1
 
 axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
   (tqtreal(fliteral6) = 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0))
 
-axiom H5 : (le(neg1(fliteral6), fliteral6) -> tqtisFinite(average))
-
-axiom H6 : ((n <  25000) and (invariant__(n, speed) = true))
-
-axiom H7 : (speed = old_speed)
-
-axiom H8 : tqtisFinite(old_speed)
-
-axiom H9 : (add1(NearestTiesToEven, drag, mul1(NearestTiesToEven,
-  mul1(NearestTiesToEven, factor, fliteral4), fliteral5)) = delta_speed)
-
-axiom H10 : tqtisFinite(delta_speed)
-
-axiom H11 : (of_int(n) = n_bv)
-
-axiom H12 : true
-
-axiom H13 : ((o = add1(NearestTiesToEven, speed, delta_speed)) and
-  tqtisFinite(add1(NearestTiesToEven, speed, delta_speed)))
-
-axiom H14 : (result = speed)
-
-axiom H15 : (speed1 = o)
-
-axiom H16 : (le(neg1(fliteral2), delta_speed) and le(delta_speed, fliteral2))
-
-axiom H17 : (in_bounds(high_bound(n)) = true)
-
  (* File "complex_trajectory_overflow.ads", line 29, characters 0-0 *)
-goal WP_parameter_def : (in_bounds(low_bound(n)) = true)
+goal WP_parameter_def :
+  (forall speed:t1. forall distance:t1. forall average:t1. forall o:t1.
+  forall result:t1. forall speed1:t1. (in_range2(n) -> (in_range3(factor) ->
+  (in_range4(drag) -> (tqtisFinite(speed) -> (tqtisFinite(distance) ->
+  ((le(neg1(fliteral6), fliteral6) -> tqtisFinite(average)) ->
+  (((n <  25000) and (invariant__(n, speed) = true)) ->
+  ((speed = old_speed) -> (tqtisFinite(old_speed) ->
+  ((add1(NearestTiesToEven, drag, mul1(NearestTiesToEven,
+  mul1(NearestTiesToEven, factor, fliteral4), fliteral5)) = delta_speed) ->
+  (tqtisFinite(delta_speed) -> ((of_int(n) = n_bv) ->
+  ((((o = add1(NearestTiesToEven, speed, delta_speed)) and
+  tqtisFinite(add1(NearestTiesToEven, speed, delta_speed))) and (({
+  t__content1 = result } = { t__content1 = speed }) and (speed1 = o))) ->
+  ((le(neg1(fliteral2), delta_speed) and le(delta_speed, fliteral2)) ->
+  ((in_bounds(high_bound(n)) = true) ->
+  (in_bounds(low_bound(n)) = true)))))))))))))))))

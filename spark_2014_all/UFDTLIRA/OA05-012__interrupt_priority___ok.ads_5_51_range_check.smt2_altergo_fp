@@ -969,23 +969,5 @@ logic p5__split_discrs : any_priority
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic p1__split_fields : integer
-
-logic p2__split_fields : integer
-
-logic p3__split_fields : integer
-
-logic p4__split_fields : integer
-
-logic us : int
-
-logic us1 : int
-
-logic us2 : int
-
-logic us3 : int
-
-logic us4 : int
-
  (* File "interrupt_priority.ads", line 18, characters 0-0 *)
 goal WP_parameter_def : in_range(0)

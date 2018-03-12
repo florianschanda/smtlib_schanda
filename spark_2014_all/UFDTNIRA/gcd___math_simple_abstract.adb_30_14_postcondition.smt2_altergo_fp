@@ -233,11 +233,6 @@ logic arg2 : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-axiom H : in_range(arg1)
-
-axiom H1 : in_range(arg2)
-
-axiom H2 : (mod(arg1, arg2) = 0)
-
  (* File "math_simple_abstract.adb", line 12, characters 0-0 *)
-goal WP_parameter_def : (divides(arg2, arg1) = true)
+goal WP_parameter_def : ((in_range(arg1) and (in_range(arg2) and (mod(arg1,
+  arg2) = 0))) -> (divides(arg2, arg1) = true))

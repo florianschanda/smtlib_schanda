@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -267,29 +267,6 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic to1 : int
-
-logic to2 : int
-
-logic to3__split_fields : bool
-
-logic temp___166 : int
-
-logic o : int
-
-logic usobject : bool
-
-logic result : int
-
-logic to11 : int
-
-logic result1 : int
-
-logic to21 : int
-
-logic to22 : int
-
-axiom H : in_range1(temp___166)
-
  (* File "types.ads", line 24, characters 0-0 *)
-goal WP_parameter_def : (r(void) = true)
+goal WP_parameter_def :
+  (forall temp___192:int. (in_range1(temp___192) -> (r(void) = true)))

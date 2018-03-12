@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -253,24 +253,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq6 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -281,17 +263,17 @@ axiom bool_eq_def5 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep1((a[temp___idx_78])) = to_rep1((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep1((a[temp___idx_91])) = to_rep1((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep1((a[temp___idx_78])) = to_rep1((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep1((a[temp___idx_91])) = to_rep1((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -301,37 +283,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep1((a[temp___idx_78])) = to_rep1((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq6(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq6(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep1((a[(i + 1)])) <  to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq6(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep1((b[(i + 1)])) <  to_rep1((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep1((a[temp___idx_91])) = to_rep1((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 logic to_rep2 : integer -> int
 
@@ -1532,585 +1486,35 @@ type t44b__ref = { t44b__content : us_rep
 
 function t44b__ref___projection(a: t44b__ref) : us_rep = (a).t44b__content
 
-logic t__split_fields : natural
-
-logic t__split_fields1 : natural
-
-logic t__split_fields2 : natural
-
-logic t__split_fields3 : name_id
-
-logic t__split_discrs : token_kind
-
-logic current_pos : int
-
-logic first_line : int
-
-logic first_col : int
-
-logic first_pos : int
-
-logic n : int
-
-logic name_table : us_private
-
-logic o : int
-
-logic lexer__read_token__new_token__2__t_length__assume : int
-
-logic o1 : token_kind
-
-logic o2 : name_id
-
-logic o3 : natural
-
-logic o4 : natural
-
-logic o5 : natural
-
-logic o6 : natural
-
-logic o7 : natural
-
-logic o8 : natural
-
-logic o9 : name_id
-
-logic o10 : token_kind
-
-logic temp___941 : token_kind
-
-logic temp___9411 : natural
-
-logic temp___9412 : natural
-
-logic temp___9413 : natural
-
-logic temp___9414 : name_id
-
-logic temp___9415 : bool
-
-logic usq_ : token_kind
-
-logic usq_1 : natural
-
-logic usq_2 : natural
-
-logic usq_3 : natural
-
-logic usq_4 : name_id
-
-logic usq_5 : bool
-
-logic temp___943 : token_kind
-
-logic temp___9431 : natural
-
-logic temp___9432 : natural
-
-logic temp___9433 : natural
-
-logic temp___9434 : name_id
-
-logic temp___9435 : bool
-
-logic o11 : token_kind
-
-logic o12 : name_id
-
-logic o13 : natural
-
-logic o14 : natural
-
-logic o15 : natural
-
-logic o16 : natural
-
-logic o17 : natural
-
-logic o18 : natural
-
-logic o19 : name_id
-
-logic o20 : token_kind
-
-logic temp___944 : token_kind
-
-logic temp___9441 : natural
-
-logic temp___9442 : natural
-
-logic temp___9443 : natural
-
-logic temp___9444 : name_id
-
-logic temp___9445 : bool
-
-logic usq_6 : token_kind
-
-logic usq_7 : natural
-
-logic usq_8 : natural
-
-logic usq_9 : natural
-
-logic usq_10 : name_id
-
-logic usq_11 : bool
-
-logic temp___946 : token_kind
-
-logic temp___9461 : natural
-
-logic temp___9462 : natural
-
-logic temp___9463 : natural
-
-logic temp___9464 : name_id
-
-logic temp___9465 : bool
-
-logic o21 : token_kind
-
-logic o22 : name_id
-
-logic o23 : natural
-
-logic o24 : natural
-
-logic o25 : natural
-
-logic o26 : natural
-
-logic o27 : natural
-
-logic o28 : natural
-
-logic o29 : name_id
-
-logic o30 : token_kind
-
-logic temp___947 : token_kind
-
-logic temp___9471 : natural
-
-logic temp___9472 : natural
-
-logic temp___9473 : natural
-
-logic temp___9474 : name_id
-
-logic temp___9475 : bool
-
-logic usq_12 : token_kind
-
-logic usq_13 : natural
-
-logic usq_14 : natural
-
-logic usq_15 : natural
-
-logic usq_16 : name_id
-
-logic usq_17 : bool
-
-logic temp___949 : token_kind
-
-logic temp___9491 : natural
-
-logic temp___9492 : natural
-
-logic temp___9493 : natural
-
-logic temp___9494 : name_id
-
-logic temp___9495 : bool
-
-logic o31 : token_kind
-
-logic o32 : name_id
-
-logic o33 : natural
-
-logic o34 : natural
-
-logic o35 : natural
-
-logic o36 : natural
-
-logic o37 : natural
-
-logic o38 : natural
-
-logic o39 : name_id
-
-logic o40 : token_kind
-
-logic temp___950 : token_kind
-
-logic temp___9501 : natural
-
-logic temp___9502 : natural
-
-logic temp___9503 : natural
-
-logic temp___9504 : name_id
-
-logic temp___9505 : bool
-
-logic usq_18 : token_kind
-
-logic usq_19 : natural
-
-logic usq_20 : natural
-
-logic usq_21 : natural
-
-logic usq_22 : name_id
-
-logic usq_23 : bool
-
-logic temp___952 : token_kind
-
-logic temp___9521 : natural
-
-logic temp___9522 : natural
-
-logic temp___9523 : natural
-
-logic temp___9524 : name_id
-
-logic temp___9525 : bool
-
-logic o41 : token_kind
-
-logic o42 : name_id
-
-logic o43 : natural
-
-logic o44 : natural
-
-logic o45 : natural
-
-logic o46 : natural
-
-logic o47 : natural
-
-logic o48 : natural
-
-logic o49 : name_id
-
-logic o50 : token_kind
-
-logic temp___953 : token_kind
-
-logic temp___9531 : natural
-
-logic temp___9532 : natural
-
-logic temp___9533 : natural
-
-logic temp___9534 : name_id
-
-logic temp___9535 : bool
-
-logic usq_24 : token_kind
-
-logic usq_25 : natural
-
-logic usq_26 : natural
-
-logic usq_27 : natural
-
-logic usq_28 : name_id
-
-logic usq_29 : bool
-
-logic temp___955 : token_kind
-
-logic temp___9551 : natural
-
-logic temp___9552 : natural
-
-logic temp___9553 : natural
-
-logic temp___9554 : name_id
-
-logic temp___9555 : bool
-
-logic o51 : token_kind
-
-logic o52 : name_id
-
-logic o53 : natural
-
-logic o54 : natural
-
-logic o55 : natural
-
-logic o56 : natural
-
-logic o57 : natural
-
-logic o58 : natural
-
-logic o59 : name_id
-
-logic o60 : token_kind
-
-logic temp___956 : token_kind
-
-logic temp___9561 : natural
-
-logic temp___9562 : natural
-
-logic temp___9563 : natural
-
-logic temp___9564 : name_id
-
-logic temp___9565 : bool
-
-logic usq_30 : token_kind
-
-logic usq_31 : natural
-
-logic usq_32 : natural
-
-logic usq_33 : natural
-
-logic usq_34 : name_id
-
-logic usq_35 : bool
-
-logic temp___958 : token_kind
-
-logic temp___9581 : natural
-
-logic temp___9582 : natural
-
-logic temp___9583 : natural
-
-logic temp___9584 : name_id
-
-logic temp___9585 : bool
-
-logic o61 : int
-
-logic n1 : int
-
-logic name_table1 : us_private
-
-logic result : natural
-
-logic result1 : natural
-
-logic result2 : natural
-
-logic result3 : name_id
-
-logic t__split_fields4 : natural
-
-logic t__split_fields5 : natural
-
-logic t__split_fields6 : natural
-
-logic t__split_fields7 : name_id
-
-logic result4 : token_kind
-
-logic t__split_discrs1 : token_kind
-
-logic result5 : natural
-
-logic result6 : natural
-
-logic result7 : natural
-
-logic result8 : name_id
-
-logic t__split_fields8 : natural
-
-logic t__split_fields9 : natural
-
-logic t__split_fields10 : natural
-
-logic t__split_fields11 : name_id
-
-logic result9 : token_kind
-
-logic t__split_discrs2 : token_kind
-
-logic result10 : natural
-
-logic result11 : natural
-
-logic result12 : natural
-
-logic result13 : name_id
-
-logic t__split_fields12 : natural
-
-logic t__split_fields13 : natural
-
-logic t__split_fields14 : natural
-
-logic t__split_fields15 : name_id
-
-logic result14 : token_kind
-
-logic t__split_discrs3 : token_kind
-
-logic result15 : natural
-
-logic result16 : natural
-
-logic result17 : natural
-
-logic result18 : name_id
-
-logic t__split_fields16 : natural
-
-logic t__split_fields17 : natural
-
-logic t__split_fields18 : natural
-
-logic t__split_fields19 : name_id
-
-logic result19 : token_kind
-
-logic t__split_discrs4 : token_kind
-
-logic result20 : natural
-
-logic result21 : natural
-
-logic result22 : natural
-
-logic result23 : name_id
-
-logic t__split_fields20 : natural
-
-logic t__split_fields21 : natural
-
-logic t__split_fields22 : natural
-
-logic t__split_fields23 : name_id
-
-logic result24 : token_kind
-
-logic t__split_discrs5 : token_kind
-
-logic result25 : natural
-
-logic result26 : natural
-
-logic result27 : natural
-
-logic result28 : name_id
-
-logic t__split_fields24 : natural
-
-logic t__split_fields25 : natural
-
-logic t__split_fields26 : natural
-
-logic t__split_fields27 : name_id
-
-logic result29 : token_kind
-
-logic t__split_discrs6 : token_kind
-
-logic t__split_fields28 : natural
-
-logic t__split_fields29 : natural
-
-logic t__split_fields30 : natural
-
-logic t__split_fields31 : name_id
-
-logic t__split_discrs7 : token_kind
-
-logic n2 : int
-
-logic name_table2 : us_private
-
-logic t__split_fields32 : natural
-
-logic t__split_fields33 : natural
-
-logic t__split_fields34 : natural
-
-logic t__split_fields35 : name_id
-
-logic t__split_discrs8 : token_kind
-
-logic n3 : int
-
-logic name_table3 : us_private
-
-axiom H : in_range2(current_pos)
-
-axiom H1 : in_range2(first_line)
-
-axiom H2 : in_range2(first_col)
-
-axiom H3 : in_range2(first_pos)
-
-axiom H4 : in_range7(kind)
-
-axiom H5 : dynamic_property(1, 2147483647, to_rep2(first(value1)),
-  to_rep2(last(value1)))
-
-axiom H6 : (((not (t__attr__constrained = true)) and
-  (invariant__(name_table) = true)) and (first_pos <= current_pos))
-
-axiom H7 : ((o = (current_pos - first_pos)) and
-  in_range1((current_pos - first_pos)))
-
-axiom H8 : ((lexer__read_token__new_token__2__t_length__assume = o) and
-  in_range2(o))
-
-axiom H9 : (lexer__read_token__new_token__2__t_length__assume = t_length)
-
-axiom H10 : in_range2(t_length)
-
-axiom H11 : ((0 <= 2147483647) -> in_range5(n))
-
-axiom H12 : ((invariant__(name_table1) = true) and in_range5(n1))
-
-axiom H13 : (not (kind = 3))
-
-axiom H14 : (not (kind = 4))
-
-axiom H15 : (not (kind = 5))
-
-axiom H16 : (not (kind = 6))
-
-axiom H17 : (kind = 7)
-
-axiom H18 : (to_rep4(t__split_discrs) = r40b)
-
-axiom H19 : in_range6(r40b)
-
-axiom H20 : (to_rep3(o42) = n1)
-
-axiom H21 : (to_rep(o43) = t_length)
-
-axiom H22 : (to_rep(o44) = first_col)
-
-axiom H23 : (to_rep(o45) = first_line)
-
-axiom H24 : ((o46 = o45) and ((o47 = o44) and ((o48 = o43) and (o49 = o42))))
-
-axiom H25 : (to_rep4(o41) = 7)
-
-axiom H26 : (o50 = o41)
-
-axiom H27 : ((temp___953 = o50) and (((temp___9531 = o46) and
-  ((temp___9532 = o47) and ((temp___9533 = o48) and
-  (temp___9534 = o49)))) and (temp___9535 = true)))
-
-axiom H28 : (t__attr__constrained = true)
-
  (* File "lexer.ads", line 79, characters 0-0 *)
-goal WP_parameter_def : (temp___953 = t__split_discrs)
+goal WP_parameter_def :
+  (forall t__split_discrs:token_kind. forall current_pos:int.
+  forall first_line:int. forall first_col:int. forall first_pos:int.
+  forall n:int. forall name_table:us_private. forall o:int.
+  forall lexer__read_token__new_token__2__t_length__assume:int.
+  forall o1:token_kind. forall o2:name_id. forall o3:natural.
+  forall o4:natural. forall o5:natural. forall o6:us_split_fields.
+  forall o7:us_split_discrs. forall temp___1049:us_rep. forall n1:int.
+  forall name_table1:us_private. (in_range2(current_pos) ->
+  (in_range2(first_line) -> (in_range2(first_col) -> (in_range2(first_pos) ->
+  (in_range7(kind) -> (dynamic_property(1, 2147483647,
+  to_rep2(first(value1)), to_rep2(last(value1))) ->
+  ((((not (t__attr__constrained = true)) and
+  (invariant__(name_table) = true)) and (first_pos <= current_pos)) ->
+  (((((o = (current_pos - first_pos)) and
+  in_range1((current_pos - first_pos))) and
+  ((lexer__read_token__new_token__2__t_length__assume = o) and
+  in_range2(o))) and
+  (lexer__read_token__new_token__2__t_length__assume = t_length)) ->
+  (in_range2(t_length) -> (((0 <= 2147483647) -> in_range5(n)) ->
+  (((invariant__(name_table1) = true) and in_range5(n1)) ->
+  ((not (kind = 3)) -> ((not (kind = 4)) -> ((not (kind = 5)) ->
+  ((not (kind = 6)) -> ((kind = 7) -> (((to_rep4(t__split_discrs) = r40b) and
+  in_range6(r40b)) -> ((((to_rep3(o2) = n1) and ((to_rep(o3) = t_length) and
+  ((to_rep(o4) = first_col) and ((to_rep(o5) = first_line) and (o6 = {
+  rec__lexer__token__line = o5; rec__lexer__token__col = o4;
+  rec__lexer__token__length = o3; rec__lexer__token__value = o2 }))))) and
+  (((to_rep4(o1) = 7) and (o7 = { rec__lexer__token__kind = o1 })) and
+  (temp___1049 = { us_split_discrs1 = o7; us_split_fields1 = o6;
+  attr__constrained = true }))) -> ((t__attr__constrained = true) ->
+  (((temp___1049).us_split_discrs1).rec__lexer__token__kind = t__split_discrs)))))))))))))))))))))

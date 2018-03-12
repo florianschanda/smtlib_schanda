@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -575,18 +575,9 @@ logic t4 : bool
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic last : int
-
-logic us : int
-
-axiom H : in_range2(last)
-
-axiom H1 : ((to_rep3(t) = 0) -> ((not (full(last) = true)) and
-  ((to_rep3(t) = 1) -> (2 <= size(last)))))
-
-axiom H2 : ((us = to_rep3(t)) and in_range5(to_rep3(t)))
-
-axiom H3 : (to_rep3(t) = 0)
-
  (* File "tokens.adb", line 13, characters 0-0 *)
-goal WP_parameter_def : (not (full(last) = true))
+goal WP_parameter_def :
+  (forall last:int. forall us:int. (in_range2(last) -> (((to_rep3(t) = 0) ->
+  ((not (full(last) = true)) and ((to_rep3(t) = 1) -> (2 <= size(last))))) ->
+  (((us = to_rep3(t)) and in_range5(to_rep3(t))) -> ((to_rep3(t) = 0) ->
+  (not (full(last) = true)))))))

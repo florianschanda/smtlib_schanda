@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -265,14 +265,14 @@ axiom bool_eq_def4 :
   (((a__first_2 <= a__last_2) and ((b__first_2 <= b__last_2) and
   ((a__last_2 - a__first_2) = (b__last_2 - b__first_2)))) or
   ((not (a__first_2 <= a__last_2)) and (b__last_2 <  b__first_2)))) and
-  (forall temp___idx_132:int. forall temp___idx_133:int.
-  (((((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)) and
-  ((a__first_2 <= temp___idx_133) and (temp___idx_133 <= a__last_2))) and
-  (to_rep1(get(a, temp___idx_132, temp___idx_133)) = to_rep1(get(b,
-  ((b__first - a__first) + temp___idx_132),
-  ((b__first_2 - a__first_2) + temp___idx_133))))) or
-  (not (((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)) and
-  ((a__first_2 <= temp___idx_133) and (temp___idx_133 <= a__last_2))))))) ->
+  (forall temp___idx_154:int. forall temp___idx_155:int.
+  (((((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)) and
+  ((a__first_2 <= temp___idx_155) and (temp___idx_155 <= a__last_2))) and
+  (to_rep1(get(a, temp___idx_154, temp___idx_155)) = to_rep1(get(b,
+  ((b__first - a__first) + temp___idx_154),
+  ((b__first_2 - a__first_2) + temp___idx_155))))) or
+  (not (((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)) and
+  ((a__first_2 <= temp___idx_155) and (temp___idx_155 <= a__last_2))))))) ->
   (bool_eq5(a, a__first, a__last, a__first_2, a__last_2, b, b__first,
   b__last, b__first_2, b__last_2) = true)) and
   ((not (((((a__first <= a__last) -> ((b__first <= b__last) and
@@ -281,12 +281,12 @@ axiom bool_eq_def4 :
   (((a__first_2 <= a__last_2) -> ((b__first_2 <= b__last_2) and
   ((a__last_2 - a__first_2) = (b__last_2 - b__first_2)))) and
   ((not (a__first_2 <= a__last_2)) -> (b__last_2 <  b__first_2)))) and
-  (forall temp___idx_132:int. forall temp___idx_133:int.
-  ((((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)) and
-  ((a__first_2 <= temp___idx_133) and (temp___idx_133 <= a__last_2))) ->
-  (to_rep1(get(a, temp___idx_132, temp___idx_133)) = to_rep1(get(b,
-  ((b__first - a__first) + temp___idx_132),
-  ((b__first_2 - a__first_2) + temp___idx_133)))))))) -> (bool_eq5(a,
+  (forall temp___idx_154:int. forall temp___idx_155:int.
+  ((((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)) and
+  ((a__first_2 <= temp___idx_155) and (temp___idx_155 <= a__last_2))) ->
+  (to_rep1(get(a, temp___idx_154, temp___idx_155)) = to_rep1(get(b,
+  ((b__first - a__first) + temp___idx_154),
+  ((b__first_2 - a__first_2) + temp___idx_155)))))))) -> (bool_eq5(a,
   a__first, a__last, a__first_2, a__last_2, b, b__first, b__last, b__first_2,
   b__last_2) = false))))
 
@@ -303,14 +303,14 @@ axiom bool_eq_rev :
   (((a__first_2 <= a__last_2) -> ((b__first_2 <= b__last_2) and
   ((a__last_2 - a__first_2) = (b__last_2 - b__first_2)))) and
   ((not (a__first_2 <= a__last_2)) -> (b__last_2 <  b__first_2)))) and
-  (forall temp___idx_132:int. forall temp___idx_133:int.
-  ((((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)) and
-  ((a__first_2 <= temp___idx_133) and (temp___idx_133 <= a__last_2))) ->
-  (to_rep1(get(a, temp___idx_132, temp___idx_133)) = to_rep1(get(b,
-  ((b__first - a__first) + temp___idx_132),
-  ((b__first_2 - a__first_2) + temp___idx_133))))))))))
+  (forall temp___idx_154:int. forall temp___idx_155:int.
+  ((((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)) and
+  ((a__first_2 <= temp___idx_155) and (temp___idx_155 <= a__last_2))) ->
+  (to_rep1(get(a, temp___idx_154, temp___idx_155)) = to_rep1(get(b,
+  ((b__first - a__first) + temp___idx_154),
+  ((b__first_2 - a__first_2) + temp___idx_155))))))))))
 
-type tnat_array_12P2
+type tnat_array_12P1
 
 predicate in_range3(x: int) = ((1 <= x) and (x <= 2))
 
@@ -326,17 +326,17 @@ logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE4 : us_image -> int
 
-logic user_eq3 : tnat_array_12P2, tnat_array_12P2 -> bool
+logic user_eq3 : tnat_array_12P1, tnat_array_12P1 -> bool
 
-logic dummy3 : tnat_array_12P2
+logic dummy3 : tnat_array_12P1
 
-type tnat_array_12P2__ref = { tnat_array_12P2__content : tnat_array_12P2
+type tnat_array_12P1__ref = { tnat_array_12P1__content : tnat_array_12P1
 }
 
-function tnat_array_12P2__ref___projection(a: tnat_array_12P2__ref) : tnat_array_12P2 =
-  (a).tnat_array_12P2__content
+function tnat_array_12P1__ref___projection(a: tnat_array_12P1__ref) : tnat_array_12P1 =
+  (a).tnat_array_12P1__content
 
-type tTaSP2
+type tnat_array_12P2
 
 predicate in_range4(x: int) = ((1 <= x) and (x <= 2))
 
@@ -352,19 +352,19 @@ logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE5 : us_image -> int
 
-logic user_eq4 : tTaSP2, tTaSP2 -> bool
+logic user_eq4 : tnat_array_12P2, tnat_array_12P2 -> bool
 
-logic dummy4 : tTaSP2
+logic dummy4 : tnat_array_12P2
 
-type tTaSP2__ref = { tTaSP2__content : tTaSP2
+type tnat_array_12P2__ref = { tnat_array_12P2__content : tnat_array_12P2
 }
 
-function tTaSP2__ref___projection(a: tTaSP2__ref) : tTaSP2 =
-  (a).tTaSP2__content
+function tnat_array_12P2__ref___projection(a: tnat_array_12P2__ref) : tnat_array_12P2 =
+  (a).tnat_array_12P2__content
 
-type t2b
+type tTaSP1
 
-predicate in_range5(x: int) = ((3 <= x) and (x <= 4))
+predicate in_range5(x: int) = ((1 <= x) and (x <= 2))
 
 logic bool_eq8 : int, int -> bool
 
@@ -378,20 +378,19 @@ logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE6 : us_image -> int
 
-logic user_eq5 : t2b, t2b -> bool
+logic user_eq5 : tTaSP1, tTaSP1 -> bool
 
-logic dummy5 : t2b
+logic dummy5 : tTaSP1
 
-type t2b__ref = { t2b__content : t2b
+type tTaSP1__ref = { tTaSP1__content : tTaSP1
 }
 
-function t2b__ref___projection(a: t2b__ref) : t2b = (a).t2b__content
+function tTaSP1__ref___projection(a: tTaSP1__ref) : tTaSP1 =
+  (a).tTaSP1__content
 
-logic attr__ATTRIBUTE_ADDRESS1 : int
+type tTaSP2
 
-type t5b
-
-predicate in_range6(x: int) = ((3 <= x) and (x <= 4))
+predicate in_range6(x: int) = ((1 <= x) and (x <= 2))
 
 logic bool_eq9 : int, int -> bool
 
@@ -405,9 +404,112 @@ logic attr__ATTRIBUTE_VALUE__pre_check7 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE7 : us_image -> int
 
-logic user_eq6 : t5b, t5b -> bool
+logic user_eq6 : tTaSP2, tTaSP2 -> bool
 
-logic dummy6 : t5b
+logic dummy6 : tTaSP2
+
+type tTaSP2__ref = { tTaSP2__content : tTaSP2
+}
+
+function tTaSP2__ref___projection(a: tTaSP2__ref) : tTaSP2 =
+  (a).tTaSP2__content
+
+type t1b
+
+predicate in_range7(x: int) = ((3 <= x) and (x <= 4))
+
+logic bool_eq10 : int, int -> bool
+
+axiom bool_eq_def9 :
+  (forall x:int. forall y:int [bool_eq10(x, y)]. (((x = y) -> (bool_eq10(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq10(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE8 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check8 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE8 : us_image -> int
+
+logic user_eq7 : t1b, t1b -> bool
+
+logic dummy7 : t1b
+
+type t1b__ref = { t1b__content : t1b
+}
+
+function t1b__ref___projection(a: t1b__ref) : t1b = (a).t1b__content
+
+type t2b
+
+predicate in_range8(x: int) = ((3 <= x) and (x <= 4))
+
+logic bool_eq11 : int, int -> bool
+
+axiom bool_eq_def10 :
+  (forall x:int. forall y:int [bool_eq11(x, y)]. (((x = y) -> (bool_eq11(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq11(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE9 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check9 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE9 : us_image -> int
+
+logic user_eq8 : t2b, t2b -> bool
+
+logic dummy8 : t2b
+
+type t2b__ref = { t2b__content : t2b
+}
+
+function t2b__ref___projection(a: t2b__ref) : t2b = (a).t2b__content
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+type t4b
+
+predicate in_range9(x: int) = ((3 <= x) and (x <= 4))
+
+logic bool_eq12 : int, int -> bool
+
+axiom bool_eq_def11 :
+  (forall x:int. forall y:int [bool_eq12(x, y)]. (((x = y) -> (bool_eq12(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq12(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE10 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check10 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE10 : us_image -> int
+
+logic user_eq9 : t4b, t4b -> bool
+
+logic dummy9 : t4b
+
+type t4b__ref = { t4b__content : t4b
+}
+
+function t4b__ref___projection(a: t4b__ref) : t4b = (a).t4b__content
+
+type t5b
+
+predicate in_range10(x: int) = ((3 <= x) and (x <= 4))
+
+logic bool_eq13 : int, int -> bool
+
+axiom bool_eq_def12 :
+  (forall x:int. forall y:int [bool_eq13(x, y)]. (((x = y) -> (bool_eq13(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq13(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE11 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check11 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE11 : us_image -> int
+
+logic user_eq10 : t5b, t5b -> bool
+
+logic dummy10 : t5b
 
 type t5b__ref = { t5b__content : t5b
 }
@@ -418,39 +520,22 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic array_aggr__bi_dim_aggr_ok__a__aggregate_def : int -> map
 
-axiom def_axiom :
-  (forall temp___259:int.
-  (forall temp___260:int. forall temp___261:int.
-  (get(array_aggr__bi_dim_aggr_ok__a__aggregate_def(temp___259), temp___260,
-  temp___261) = of_rep1(temp___259))))
-
 logic array_aggr__bi_dim_aggr_ok__c__aggregate_def : int -> map
-
-axiom def_axiom1 :
-  (forall temp___264:int.
-  (forall temp___265:int. forall temp___266:int.
-  (get(array_aggr__bi_dim_aggr_ok__c__aggregate_def(temp___264), temp___265,
-  temp___266) = of_rep1(temp___264))))
 
 axiom first__def_axiom : (first = one)
 
-logic a : map
+axiom def_axiom :
+  (forall temp___295:int. (in_range1(temp___295) ->
+  (forall temp___296:int. forall temp___297:int.
+  (to_rep1(get(array_aggr__bi_dim_aggr_ok__a__aggregate_def(temp___295),
+  temp___296, temp___297)) = temp___295))))
 
-logic c : map
+axiom def_axiom1 :
+  (forall temp___300:int. (in_range1(temp___300) ->
+  (forall temp___301:int. forall temp___302:int.
+  (to_rep1(get(array_aggr__bi_dim_aggr_ok__c__aggregate_def(temp___300),
+  temp___301, temp___302)) = temp___300))))
 
-logic result : map
-
-logic a1 : map
-
-logic result1 : map
-
-logic c1 : map
-
-axiom H : in_range1(one)
-
-axiom H1 : (one <= 1)
-
-axiom H2 : (one <= 2147483647)
-
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (0 <= one)
+ (* File "array_aggr.adb", line 8, characters 0-0 *)
+goal WP_parameter_def : (in_range1(one) -> ((one <= 1) ->
+  ((one <= 2147483647) -> (0 <= one))))

@@ -107,35 +107,10 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : int
-
-logic o : int
-
-logic x1 : int
-
-logic result : int
-
-logic x2 : int
-
-logic x3 : int
-
-logic x4 : int
-
-axiom H : in_range(x)
-
-axiom H1 : ((x = 0) -> ((o = (x + 1)) and in_range((x + 1))))
-
-axiom H2 : ((x = 0) -> (result = x))
-
-axiom H3 : ((x = 0) -> (x2 = o))
-
-axiom H4 : ((not (x = 0)) -> (x2 = x))
-
-axiom H5 : ((not (x = 0)) -> (x2 = x1))
-
-axiom H6 : (x2 = x3)
-
-axiom H7 : (x4 = x2)
-
  (* File "ite.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : (not (x3 = 0))
+goal WP_parameter_def :
+  (forall x:int. forall o:int. forall x1:int. forall result:int.
+  forall x2:int. forall x3:int. forall x4:int. ((in_range(x) and
+  ((((x = 0) and (((o = (x + 1)) and in_range((x + 1))) and ((result = x) and
+  (x2 = o)))) or ((not (x = 0)) and ((x2 = x) and (x2 = x1)))) and
+  ((x2 = x3) and (x4 = x2)))) -> (not (x3 = 0))))

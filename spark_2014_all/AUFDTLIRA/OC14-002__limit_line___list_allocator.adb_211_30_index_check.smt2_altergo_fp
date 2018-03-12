@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -400,31 +400,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def :
-  (forall v:status. forall v1:resource. forall v2:resource.
-  (forall i:int [(singleton({ us_split_fields1 = {
-  rec__list_allocator__cell__stat = v; rec__list_allocator__cell__prev = v1;
-  rec__list_allocator__cell__next = v2 } }, i)[i])]. ((singleton({
-  us_split_fields1 = { rec__list_allocator__cell__stat = v;
-  rec__list_allocator__cell__prev = v1; rec__list_allocator__cell__next = v2
-  } }, i)[i]) = { us_split_fields1 = { rec__list_allocator__cell__stat = v;
-  rec__list_allocator__cell__prev = v1; rec__list_allocator__cell__next = v2
-  } })))
-
 logic bool_eq8 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -435,17 +410,17 @@ axiom bool_eq_def7 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) and (bool_eq7((a[temp___idx_133]),
-  (b[((b__first - a__first) + temp___idx_133)])) = true)) or
-  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (forall temp___idx_155:int. ((((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) and (bool_eq7((a[temp___idx_155]),
+  (b[((b__first - a__first) + temp___idx_155)])) = true)) or
+  (not ((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)))))) ->
   (bool_eq8(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) -> (bool_eq7((a[temp___idx_133]),
-  (b[((b__first - a__first) + temp___idx_133)])) = true))))) -> (bool_eq8(a,
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) -> (bool_eq7((a[temp___idx_155]),
+  (b[((b__first - a__first) + temp___idx_155)])) = true))))) -> (bool_eq8(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -455,9 +430,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) -> (bool_eq7((a[temp___idx_133]),
-  (b[((b__first - a__first) + temp___idx_133)])) = true)))))))
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) -> (bool_eq7((a[temp___idx_155]),
+  (b[((b__first - a__first) + temp___idx_155)])) = true)))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -983,601 +958,34 @@ axiom is_removed_at__post_axiom :
 
 axiom is_removed_at__post__dispatch_axiom : true
 
-logic model____split_fields : us_rep1
-
-logic model____split_fields1 : us_rep1
-
-logic data : (int,us_rep) farray
-
-logic first_available : int
-
-logic first_allocated : int
-
-logic prev_alloc : int
-
-logic next_alloc : int
-
-logic o : int
-
-logic o1 : status
-
-logic o2 : resource
-
-logic o3 : resource
-
-logic o4 : status
-
-logic o5 : resource
-
-logic o6 : resource
-
-logic o7 : status
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : status
-
-logic o11 : resource
-
-logic o12 : resource
-
-logic o13 : status
-
-logic o14 : resource
-
-logic o15 : resource
-
-logic o16 : resource
-
-logic o17 : int
-
-logic o18 : int
-
-logic o19 : status
-
-logic o20 : resource
-
-logic o21 : resource
-
-logic o22 : status
-
-logic o23 : resource
-
-logic o24 : resource
-
-logic o25 : resource
-
-logic o26 : int
-
-logic o27 : resource
-
-logic o28 : resource
-
-logic o29 : status
-
-logic o30 : status
-
-logic o31 : resource
-
-logic o32 : resource
-
-logic o33 : status
-
-logic o34 : resource
-
-logic o35 : resource
-
-logic o36 : int
-
-logic o37 : (int,us_rep) farray
-
-logic o38 : resource
-
-logic o39 : status
-
-logic o40 : resource
-
-logic o41 : resource
-
-logic o42 : status
-
-logic o43 : resource
-
-logic o44 : resource
-
-logic o45 : int
-
-logic o46 : (int,us_rep) farray
-
-logic o47 : resource
-
-logic o48 : status
-
-logic o49 : resource
-
-logic o50 : resource
-
-logic o51 : status
-
-logic o52 : resource
-
-logic o53 : resource
-
-logic o54 : int
-
-logic o55 : (int,us_rep) farray
-
-logic o56 : int
-
-logic o57 : int
-
-logic o58 : us_rep1
-
-logic o59 : us_rep1
-
-logic o60 : us_rep1
-
-logic temp___422 : us_rep1
-
-logic temp___4221 : us_rep1
-
-logic o61 : us_rep1
-
-logic o62 : us_rep1
-
-logic o63 : us_rep1
-
-logic temp___424 : us_rep1
-
-logic temp___4241 : us_rep1
-
-logic j : int
-
-logic o64 : int
-
-logic o65 : bool
-
-logic temp___425 : int
-
-logic o66 : int
-
-logic o67 : int
-
-logic o68 : int
-
-logic o69 : int
-
-logic j1 : int
-
-logic o70 : int
-
-logic o71 : bool
-
-logic o72 : int
-
-logic j2 : int
-
-logic o73 : int
-
-logic o74 : bool
-
-logic temp___426 : int
-
-logic o75 : int
-
-logic o76 : int
-
-logic o77 : int
-
-logic o78 : int
-
-logic j3 : int
-
-logic o79 : int
-
-logic o80 : bool
-
-logic k : int
-
-logic o81 : int
-
-logic o82 : bool
-
-logic o83 : int
-
-logic o84 : int
-
-logic temp___428 : int
-
-logic o85 : int
-
-logic o86 : status
-
-logic o87 : resource
-
-logic o88 : resource
-
-logic o89 : status
-
-logic o90 : resource
-
-logic o91 : resource
-
-logic o92 : resource
-
-logic o93 : int
-
-logic o94 : int
-
-logic o95 : int
-
-logic temp___427 : int
-
-logic o96 : int
-
-logic o97 : status
-
-logic o98 : resource
-
-logic o99 : resource
-
-logic o100 : status
-
-logic o101 : resource
-
-logic o102 : resource
-
-logic o103 : resource
-
-logic o104 : int
-
-logic o105 : int
-
-logic o106 : int
-
-logic o107 : int
-
-logic o108 : int
-
-logic j4 : int
-
-logic o109 : int
-
-logic o110 : bool
-
-logic k1 : int
-
-logic o111 : int
-
-logic o112 : bool
-
-logic o113 : int
-
-logic o114 : int
-
-logic temp___430 : int
-
-logic o115 : int
-
-logic o116 : status
-
-logic o117 : resource
-
-logic o118 : resource
-
-logic o119 : status
-
-logic o120 : resource
-
-logic o121 : resource
-
-logic o122 : resource
-
-logic o123 : int
-
-logic o124 : int
-
-logic o125 : int
-
-logic temp___429 : int
-
-logic o126 : int
-
-logic o127 : status
-
-logic o128 : resource
-
-logic o129 : resource
-
-logic o130 : status
-
-logic o131 : resource
-
-logic o132 : resource
-
-logic o133 : resource
-
-logic o134 : int
-
-logic o135 : int
-
-logic o136 : int
-
-logic o137 : int
-
-logic o138 : int
-
-logic j5 : int
-
-logic o139 : int
-
-logic o140 : bool
-
-logic temp___432 : int
-
-logic o141 : int
-
-logic o142 : int
-
-logic o143 : int
-
-logic o144 : int
-
-logic j6 : int
-
-logic o145 : int
-
-logic o146 : bool
-
-logic temp___431 : int
-
-logic o147 : int
-
-logic o148 : int
-
-logic o149 : int
-
-logic o150 : int
-
-logic o151 : int
-
-logic o152 : int
-
-logic o153 : int
-
-logic o154 : int
-
-logic o155 : int
-
-logic o156 : int
-
-logic j7 : int
-
-logic o157 : int
-
-logic o158 : bool
-
-logic o159 : int
-
-logic o160 : int
-
-logic model____split_fields2 : us_rep1
-
-logic model____split_fields3 : us_rep1
-
-logic data1 : (int,us_rep) farray
-
-logic first_available1 : int
-
-logic first_allocated1 : int
-
-logic prev_alloc1 : int
-
-logic next_alloc1 : int
-
-logic result : bool
-
-logic result1 : int
-
-logic prev_alloc2 : int
-
-logic result2 : int
-
-logic next_alloc2 : int
-
-logic result3 : (int,us_rep) farray
-
-logic data2 : (int,us_rep) farray
-
-logic result4 : (int,us_rep) farray
-
-logic data3 : (int,us_rep) farray
-
-logic result5 : (int,us_rep) farray
-
-logic data4 : (int,us_rep) farray
-
-logic result6 : int
-
-logic first_available2 : int
-
-logic result7 : int
-
-logic first_allocated2 : int
-
-logic result8 : us_rep1
-
-logic result9 : us_rep1
-
-logic model____split_fields4 : us_rep1
-
-logic model____split_fields5 : us_rep1
-
-logic result10 : us_rep1
-
-logic result11 : us_rep1
-
-logic model____split_fields6 : us_rep1
-
-logic model____split_fields7 : us_rep1
-
-logic result12 : bool
-
-logic result13 : bool
-
-logic result14 : bool
-
-logic result15 : bool
-
-logic result16 : bool
-
-logic result17 : bool
-
-logic result18 : bool
-
-logic result19 : bool
-
-logic result20 : bool
-
-logic result21 : bool
-
-logic result22 : bool
-
-logic result23 : bool
-
-logic result24 : bool
-
-logic result25 : bool
-
-logic result26 : bool
-
-logic result27 : bool
-
-logic result28 : bool
-
-logic result29 : bool
-
-logic result30 : bool
-
-logic result31 : bool
-
-logic result32 : bool
-
-logic result33 : bool
-
-logic result34 : bool
-
-logic result35 : bool
-
-logic result36 : bool
-
-logic result37 : bool
-
-logic result38 : bool
-
-logic result39 : bool
-
-logic result40 : bool
-
-logic result41 : bool
-
-logic model____split_fields8 : us_rep1
-
-logic model____split_fields9 : us_rep1
-
-logic data5 : (int,us_rep) farray
-
-logic first_available3 : int
-
-logic first_allocated3 : int
-
-logic prev_alloc3 : int
-
-logic next_alloc3 : int
-
-logic model____split_fields10 : us_rep1
-
-logic model____split_fields11 : us_rep1
-
-logic data6 : (int,us_rep) farray
-
-logic first_available4 : int
-
-logic first_allocated4 : int
-
-logic prev_alloc4 : int
-
-logic next_alloc4 : int
-
-logic result42 : bool
-
-logic result43 : bool
-
-logic result44 : bool
-
-axiom H : in_range3(first_available)
-
-axiom H1 : in_range3(first_allocated)
-
-axiom H2 : in_range3(res)
-
-axiom H3 : (is_valid(first_available, first_allocated, {
+ (* File "list_allocator.ads", line 30, characters 0-0 *)
+goal WP_parameter_def :
+  (forall model____split_fields:us_rep1.
+  forall model____split_fields1:us_rep1. forall data:(int,us_rep) farray.
+  forall first_available:int. forall first_allocated:int.
+  forall prev_alloc:int. forall next_alloc:int. forall o:int.
+  forall o1:status. forall o2:resource. forall o3:resource. forall o4:status.
+  forall o5:resource. forall o6:resource. forall o7:status. forall o8:int.
+  forall o9:int. forall o10:status. forall o11:resource. forall o12:resource.
+  forall o13:status. forall o14:resource. forall o15:resource.
+  forall o16:resource. forall o17:int. forall result:bool.
+  forall result1:int__ref. forall prev_alloc1:int.
+  (in_range3(first_available) -> (in_range3(first_allocated) ->
+  (in_range3(res) -> ((is_valid(first_available, first_allocated, {
   rec__list_allocator__m__t__available = model____split_fields;
   rec__list_allocator__m__t__allocated = model____split_fields1 },
-  data) = true)
-
-axiom H4 : ((0 <= 3) -> in_range3(prev_alloc))
-
-axiom H5 : ((0 <= 3) -> in_range3(next_alloc))
-
-axiom H6 : ((not (res = 0)) -> ((1 <= res) and (res <= 3)))
-
-axiom H7 : ((not (res = 0)) -> (o = res))
-
-axiom H8 : ((not (res = 0)) -> ({ us_split_fields1 = {
+  data) = true) -> (((0 <= 3) -> in_range3(prev_alloc)) -> (((0 <= 3) ->
+  in_range3(next_alloc)) -> ((((not (res = 0)) and ((((((((1 <= res) and
+  (res <= 3)) and (o = res)) and ({ us_split_fields1 = {
   rec__list_allocator__cell__stat = o1; rec__list_allocator__cell__prev = o2;
-  rec__list_allocator__cell__next = o3 } } = (data[o])))
-
-axiom H9 : ((not (res = 0)) -> (o1 = o4))
-
-axiom H10 : ((not (res = 0)) -> (o2 = o5))
-
-axiom H11 : ((not (res = 0)) -> (o3 = o6))
-
-axiom H12 : ((not (res = 0)) -> (o7 = o4))
-
-axiom H13 : ((not (res = 0)) -> (o8 = to_rep1(o7)))
-
-axiom H14 : ((not (res = 0)) -> (((o8 = 1) -> (result = true)) and
-  ((not (o8 = 1)) -> (result = false))))
-
-axiom H15 : ((res = 0) -> (result = false))
-
-axiom H16 : (result = true)
-
-axiom H17 : ((1 <= res) and (res <= 3))
-
-axiom H18 : (o9 = res)
-
-axiom H19 : ({ us_split_fields1 = { rec__list_allocator__cell__stat = o10;
+  rec__list_allocator__cell__next = o3 } } = (data[o]))) and ((o1 = o4) and
+  ((o2 = o5) and (o3 = o6)))) and (o7 = o4)) and (o8 = to_rep1(o7))) and
+  (((o8 = 1) and (result = true)) or ((not (o8 = 1)) and
+  (result = false))))) or ((res = 0) and (result = false))) ->
+  ((result = true) -> (((((((((1 <= res) and (res <= 3)) and (o9 = res)) and
+  ({ us_split_fields1 = { rec__list_allocator__cell__stat = o10;
   rec__list_allocator__cell__prev = o11; rec__list_allocator__cell__next =
-  o12 } } = (data[o9]))
-
-axiom H20 : (o10 = o13)
-
-axiom H21 : (o11 = o14)
-
-axiom H22 : (o12 = o15)
-
-axiom H23 : (o16 = o14)
-
-axiom H24 : (o17 = to_rep(o16))
-
-axiom H25 : (result1 = prev_alloc)
-
-axiom H26 : (prev_alloc2 = o17)
-
- (* File "list_allocator.ads", line 30, characters 0-0 *)
-goal WP_parameter_def : (1 <= res)
+  o12 } } = (data[o9]))) and ((o10 = o13) and ((o11 = o14) and
+  (o12 = o15)))) and (o16 = o14)) and (o17 = to_rep(o16))) and ((result1 = {
+  int__content = prev_alloc }) and (prev_alloc1 = o17))) ->
+  (1 <= res)))))))))))

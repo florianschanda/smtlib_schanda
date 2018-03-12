@@ -81,12 +81,6 @@ axiom bool_ge_axiom :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -98,6 +92,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -165,25 +165,8 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic num_out : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic num_out1 : int
-
-logic num_out2 : int
-
-logic num_out3 : int
-
-axiom H : in_range2(num_in)
-
-axiom H1 : ((0 <= 2147483647) -> in_range2(num_out))
-
-axiom H2 : ((o = (num_in * num_in)) and in_range1((num_in * num_in)))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range2(o)
+goal WP_parameter_def :
+  (forall num_out:int. forall o:int. (in_range2(num_in) ->
+  (((0 <= 2147483647) -> in_range2(num_out)) -> (((o = (num_in * num_in)) and
+  in_range1((num_in * num_in))) -> in_range2(o)))))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -137,41 +137,18 @@ logic a : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic test__parity__result : int
-
-logic result : int
-
-logic test__parity__result1 : int
-
-logic test__parity__result2 : int
-
-logic test__parity__result3 : int
-
-logic test__parity__result4 : int
-
-logic test__parity__result5 : int
-
-logic result1 : int
-
-axiom H : in_range1(a)
-
-axiom H1 : (0 <  a)
-
-axiom H2 : (test__parity__result1 = test__parity__result2)
-
-axiom H3 : (test__parity__result3 = test__parity__result1)
-
-axiom H4 : (result = test__parity__result)
-
-axiom H5 : (test__parity__result1 = a)
-
-axiom H6 : (test__parity__result4 = test__parity__result2)
-
-axiom H7 : (test__parity__result5 = test__parity__result3)
-
-axiom H8 : (result1 = test__parity__result4)
-
  (* File "test.adb", line 3, characters 0-0 *)
 goal WP_parameter_def :
+  (forall test__parity__result:int. forall result:int.
+  forall test__parity__result1:int. forall test__parity__result2:int.
+  forall test__parity__result3:int. forall test__parity__result4:int.
+  forall test__parity__result5:int.
+  (forall result1:int. ((in_range1(a) and ((0 <  a) and
+  (((((test__parity__result1 = test__parity__result2) and
+  (test__parity__result3 = test__parity__result1)) and
+  ((result = test__parity__result) and (test__parity__result1 = a))) and
+  ((test__parity__result4 = test__parity__result2) and
+  (test__parity__result5 = test__parity__result3))) and
+  (result1 = test__parity__result4)))) ->
   (exists x:int. (((0 <= x) and (x <= 255)) and ((a = (x + x)) or
-  (a = ((x + x) + 2)))))
+  (a = ((x + x) + 2))))))))

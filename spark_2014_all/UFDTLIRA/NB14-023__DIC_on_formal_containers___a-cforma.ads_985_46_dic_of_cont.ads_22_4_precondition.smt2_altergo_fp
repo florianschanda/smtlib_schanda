@@ -81,12 +81,6 @@ axiom bool_ge_axiom :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -98,6 +92,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -587,8 +587,8 @@ axiom keys__post_axiom :
   us_split_discrs1 = { rec__dic_of_cont__my_orma__map__capacity = container2
   }; us_split_fields1 = { rec__dic_of_cont__my_orma__map = container3 }
   })) and
-  (forall temp___1175:int. ((in_range4(temp___1175) and
-  ((1 <= temp___1175) and (temp___1175 <= (0 + length2(keys({
+  (forall temp___1263:int. ((in_range4(temp___1263) and
+  ((1 <= temp___1263) and (temp___1263 <= (0 + length2(keys({
   us_split_discrs1 = { rec__dic_of_cont__my_orma__map__capacity = container2
   }; us_split_fields1 = { rec__dic_of_cont__my_orma__map = container3 }
   })))))) -> (has_key(model__({ us_split_discrs1 = {
@@ -596,7 +596,7 @@ axiom keys__post_axiom :
   { rec__dic_of_cont__my_orma__map = container3 } }), get(keys({
   us_split_discrs1 = { rec__dic_of_cont__my_orma__map__capacity = container2
   }; us_split_fields1 = { rec__dic_of_cont__my_orma__map = container3 } }),
-  temp___1175)) = true)))) and
+  temp___1263)) = true)))) and
   (forall key1:int. ((in_range3(key1) and (has_key(model__({
   us_split_discrs1 = { rec__dic_of_cont__my_orma__map__capacity = container2
   }; us_split_fields1 = { rec__dic_of_cont__my_orma__map = container3 } }),
@@ -897,25 +897,13 @@ axiom get__post_axiom1 :
   ((1 <= position) and (position <= (0 + length2(container2))))) ->
   in_range6(get(container2, position)))))
 
-logic o : int
-
-logic o1 : int
-
-logic result : bool
-
-axiom H : in_range1(key)
-
-axiom H1 : ((o1 = length({ us_split_discrs1 = {
-  rec__dic_of_cont__my_orma__map__capacity = container }; us_split_fields1 =
-  { rec__dic_of_cont__my_orma__map = container1 } })) and (in_range2(o1) and
-  (o1 <= to_rep(container))))
-
-axiom H2 : (((o1 = 0) -> (result = true)) and ((not (o1 = 0)) ->
-  (result = false)))
-
-axiom H3 : (not (result = true))
-
  (* File "a-cforma.ads", line 954, characters 0-0 *)
-goal WP_parameter_def : (not (is_empty({ us_split_discrs1 = {
+goal WP_parameter_def :
+  (forall o:int. forall result:bool. (in_range1(key) -> ((((o = length({
+  us_split_discrs1 = { rec__dic_of_cont__my_orma__map__capacity = container
+  }; us_split_fields1 = { rec__dic_of_cont__my_orma__map = container1 }
+  })) and (in_range2(o) and (o <= to_rep(container)))) and (((o = 0) and
+  (result = true)) or ((not (o = 0)) and (result = false)))) ->
+  ((not (result = true)) -> (not (is_empty({ us_split_discrs1 = {
   rec__dic_of_cont__my_orma__map__capacity = container }; us_split_fields1 =
-  { rec__dic_of_cont__my_orma__map = container1 } }) = true))
+  { rec__dic_of_cont__my_orma__map = container1 } }) = true))))))

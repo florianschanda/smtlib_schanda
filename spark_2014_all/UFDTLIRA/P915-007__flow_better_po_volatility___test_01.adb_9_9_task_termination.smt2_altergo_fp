@@ -296,7 +296,5 @@ axiom coerce_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-axiom H : false
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def : true

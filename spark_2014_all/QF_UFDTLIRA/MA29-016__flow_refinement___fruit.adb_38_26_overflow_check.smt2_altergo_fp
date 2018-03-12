@@ -133,13 +133,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic apples : int
-
-logic o : int
-
-axiom H : in_range1(apples)
-
-axiom H1 : (apples <  2147483642)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((apples + 5))
+goal WP_parameter_def :
+  (forall apples:int. (in_range1(apples) -> ((apples <  2147483642) ->
+  in_range((apples + 5)))))

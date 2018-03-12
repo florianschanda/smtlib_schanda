@@ -1109,33 +1109,15 @@ logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : t
-
-logic o6 : t
-
-logic o7 : t
-
-axiom H : tqtisFinite(x)
-
-axiom H1 : ((o6 = pow8(x)) and (tqtisFinite(o6) and
-  (o6 = mul(NearestTiesToEven, mul(NearestTiesToEven, mul(NearestTiesToEven,
-  mul(NearestTiesToEven, mul(NearestTiesToEven, mul(NearestTiesToEven,
-  mul(NearestTiesToEven, x, x), x), x), x), x), x), x))))
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 40320.0))
 
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (not is_zero(fliteral1))
+goal WP_parameter_def :
+  (forall o:t. (tqtisFinite(x) -> (((o = pow8(x)) and (tqtisFinite(o) and
+  (o = mul(NearestTiesToEven, mul(NearestTiesToEven, mul(NearestTiesToEven,
+  mul(NearestTiesToEven, mul(NearestTiesToEven, mul(NearestTiesToEven,
+  mul(NearestTiesToEven, x, x), x), x), x), x), x), x)))) ->
+  (not is_zero(fliteral1)))))

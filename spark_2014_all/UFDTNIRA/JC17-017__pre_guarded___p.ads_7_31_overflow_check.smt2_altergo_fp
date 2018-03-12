@@ -223,13 +223,6 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : int
-
-axiom H : in_range(x)
-
-axiom H1 : in_range(y)
-
-axiom H2 : (not (y = 0))
-
  (* File "p.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : in_range(comp_div(x,y))
+goal WP_parameter_def : (in_range(x) -> (in_range(y) -> ((not (y = 0)) ->
+  in_range(comp_div(x,y)))))

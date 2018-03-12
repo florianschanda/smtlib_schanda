@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -137,32 +137,9 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic threshold : int
-
-logic x : int
-
-logic o : int
-
-logic o1 : int
-
-logic x1 : int
-
-logic result : int
-
-logic x2 : int
-
-logic x3 : int
-
-logic x4 : int
-
-axiom H : in_range1(threshold)
-
-axiom H1 : in_range1(x)
-
-axiom H2 : (((x <  threshold) and (not (threshold <= x))) or
-  ((not (x <  threshold)) and (threshold <= x)))
-
-axiom H3 : (x <  threshold)
-
  (* File "p.ads", line 18, characters 0-0 *)
-goal WP_parameter_def : in_range1((x + 1))
+goal WP_parameter_def :
+  (forall threshold:int. forall x:int. (in_range1(threshold) ->
+  (in_range1(x) -> ((((x <  threshold) and (not (threshold <= x))) or
+  ((not (x <  threshold)) and (threshold <= x))) -> ((x <  threshold) ->
+  in_range1((x + 1)))))))

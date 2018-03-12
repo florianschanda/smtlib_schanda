@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -357,203 +357,50 @@ axiom v_hi__def_axiom : (v_hi = comp_div(v,4294967296))
 
 axiom v_lo__def_axiom : (v_lo = comp_mod(v,4294967296))
 
-logic v_m_hi : int
-
-logic v_m_lo : int
-
-logic result_hi : int
-
-logic result_lo : int
-
-logic remainder : int
-
-logic mul_div_2__mul_div__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : int
-
-logic o13 : int
-
-logic o14 : int
-
-logic result : int
-
-logic v_m_lo1 : int
-
-logic result1 : int
-
-logic v_m_hi1 : int
-
-logic result2 : int
-
-logic v_m_lo2 : int
-
-logic result3 : int
-
-logic result_hi1 : int
-
-logic result4 : int
-
-logic remainder1 : int
-
-logic result5 : int
-
-logic result_hi2 : int
-
-logic result6 : int
-
-logic result_lo1 : int
-
-logic result7 : int
-
-logic mul_div_2__mul_div__result1 : int
-
-logic mul_div_2__mul_div__result2 : int
-
-logic mul_div_2__mul_div__result3 : int
-
-logic v_m_hi2 : int
-
-logic v_m_lo3 : int
-
-logic result_hi3 : int
-
-logic result_lo2 : int
-
-logic remainder2 : int
-
-logic mul_div_2__mul_div__result4 : int
-
-logic v_m_hi3 : int
-
-logic v_m_lo4 : int
-
-logic result_hi4 : int
-
-logic result_lo3 : int
-
-logic remainder3 : int
-
-logic mul_div_2__mul_div__result5 : int
-
-axiom H : in_range4(v)
-
-axiom H1 : in_range2(m)
-
-axiom H2 : in_range3(d)
-
-axiom H3 : (((0 <= v) ->
-  (comp_div(((v * m) + comp_div(d,2)),d) <= 9223372036854775807)) and
-  ((not (0 <= v)) ->
-  ((- 9223372036854775808) <= (-comp_div((((-v) * m) + comp_div(d,2)),d)))))
-
-axiom H4 : (comp_div(v,4294967296) = v_hi)
-
-axiom H5 : in_range4(v_hi)
-
-axiom H6 : (comp_mod(v,4294967296) = v_lo)
-
-axiom H7 : in_range4(v_lo)
-
-axiom H8 : (((- 9223372036854775808) <= 9223372036854775807) ->
-  in_range4(v_m_hi))
-
-axiom H9 : (((- 9223372036854775808) <= 9223372036854775807) ->
-  in_range4(v_m_lo))
-
-axiom H10 : (((- 9223372036854775808) <= 9223372036854775807) ->
-  in_range4(result_hi))
-
-axiom H11 : (((- 9223372036854775808) <= 9223372036854775807) ->
-  in_range4(result_lo))
-
-axiom H12 : (((- 9223372036854775808) <= 9223372036854775807) ->
-  in_range4(remainder))
-
-axiom H13 : ((0 <= v) -> (o = 1))
-
-axiom H14 : ((not (0 <= v)) -> (o = (- 1)))
-
-axiom H15 : (o1 = (o * comp_div(d,2)))
-
-axiom H16 : ((o2 = o1) and in_range1(o1))
-
-axiom H17 : ((o3 = (v_lo * m)) and in_range1((v_lo * m)))
-
-axiom H18 : (o4 = (o3 + o2))
-
-axiom H19 : ((o5 = o4) and in_range1(o4))
-
-axiom H20 : (result = v_m_lo)
-
-axiom H21 : (v_m_lo1 = o5)
-
-axiom H22 : ((o6 = (v_hi * m)) and in_range1((v_hi * m)))
-
-axiom H23 : (o7 = (o6 + comp_div(v_m_lo1,4294967296)))
-
-axiom H24 : ((o8 = o7) and in_range1(o7))
-
-axiom H25 : (result1 = v_m_hi)
-
-axiom H26 : (v_m_hi1 = o8)
-
-axiom H27 : (v_m_lo1 = result2)
-
-axiom H28 : (v_m_lo2 = comp_mod(v_m_lo1,4294967296))
-
-axiom H29 : (result3 = result_hi)
-
-axiom H30 : (result_hi1 = comp_div(v_m_hi1,d))
-
-axiom H31 : (((- 2147483648) <= result_hi1) and (result_hi1 <= 2147483647))
-
-axiom H32 : (result4 = remainder)
-
-axiom H33 : (remainder1 = comp_mod(v_m_hi1,d))
-
-axiom H34 : ((o9 = (result_hi1 * 4294967296)) and
-  in_range1((result_hi1 * 4294967296)))
-
-axiom H35 : (result_hi1 = result5)
-
-axiom H36 : (result_hi2 = o9)
-
-axiom H37 : ((o10 = (remainder1 * 4294967296)) and
-  in_range1((remainder1 * 4294967296)))
-
-axiom H38 : (o11 = (v_m_lo2 + o10))
-
-axiom H39 : ((o12 = o11) and in_range1(o11))
-
-axiom H40 : (o13 = comp_div(o12,d))
-
-axiom H41 : (result6 = result_lo)
-
-axiom H42 : (result_lo1 = o13)
-
  (* File "mul_div_2.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : in_range1((result_hi2 + result_lo1))
+goal WP_parameter_def :
+  (forall v_m_hi:int. forall v_m_lo:int. forall result_hi:int.
+  forall result_lo:int. forall remainder:int. forall o:int. forall o1:int.
+  forall o2:int. forall o3:int. forall o4:int. forall o5:int. forall o6:int.
+  forall o7:int. forall o8:int. forall o9:int. forall o10:int.
+  forall o11:int. forall o12:int. forall o13:int. forall result:int.
+  forall v_m_lo1:int. forall result1:int. forall v_m_hi1:int.
+  forall result2:int. forall v_m_lo2:int. forall result3:int.
+  forall result_hi1:int. forall result4:int. forall remainder1:int.
+  forall result5:int. forall result_hi2:int. forall result6:int.
+  forall result_lo1:int. (in_range4(v) -> (in_range2(m) -> (in_range3(d) ->
+  ((((0 <= v) and
+  (comp_div(((v * m) + comp_div(d,2)),d) <= 9223372036854775807)) or
+  ((not (0 <= v)) and
+  ((- 9223372036854775808) <= (-comp_div((((-v) * m) + comp_div(d,2)),d))))) ->
+  ((comp_div(v,4294967296) = v_hi) -> (in_range4(v_hi) ->
+  ((comp_mod(v,4294967296) = v_lo) -> (in_range4(v_lo) ->
+  ((((- 9223372036854775808) <= 9223372036854775807) -> in_range4(v_m_hi)) ->
+  ((((- 9223372036854775808) <= 9223372036854775807) -> in_range4(v_m_lo)) ->
+  ((((- 9223372036854775808) <= 9223372036854775807) ->
+  in_range4(result_hi)) ->
+  ((((- 9223372036854775808) <= 9223372036854775807) ->
+  in_range4(result_lo)) ->
+  ((((- 9223372036854775808) <= 9223372036854775807) ->
+  in_range4(remainder)) -> (((((((((0 <= v) and (o = 1)) or
+  ((not (0 <= v)) and (o = (- 1)))) and (o1 = (o * comp_div(d,2)))) and
+  ((o2 = o1) and in_range1(o1))) and (((o3 = (v_lo * m)) and
+  in_range1((v_lo * m))) and (o4 = (o3 + o2)))) and ((o5 = o4) and
+  in_range1(o4))) and (({ int__content = result } = { int__content = v_m_lo
+  }) and (v_m_lo1 = o5))) -> ((((((o6 = (v_hi * m)) and
+  in_range1((v_hi * m))) and (o7 = (o6 + comp_div(v_m_lo1,4294967296)))) and
+  ((o8 = o7) and in_range1(o7))) and (({ int__content = result1 } = {
+  int__content = v_m_hi }) and (v_m_hi1 = o8))) -> (((v_m_lo1 = result2) and
+  (v_m_lo2 = comp_mod(v_m_lo1,4294967296))) -> ((({ int__content = result3
+  } = { int__content = result_hi }) and
+  (result_hi1 = comp_div(v_m_hi1,d))) -> ((((- 2147483648) <= result_hi1) and
+  (result_hi1 <= 2147483647)) -> ((({ int__content = result4 } = {
+  int__content = remainder }) and (remainder1 = comp_mod(v_m_hi1,d))) ->
+  ((((o9 = (result_hi1 * 4294967296)) and
+  in_range1((result_hi1 * 4294967296))) and ((result_hi1 = result5) and
+  (result_hi2 = o9))) -> (((((((o10 = (remainder1 * 4294967296)) and
+  in_range1((remainder1 * 4294967296))) and (o11 = (v_m_lo2 + o10))) and
+  ((o12 = o11) and in_range1(o11))) and (o13 = comp_div(o12,d))) and (({
+  int__content = result6 } = { int__content = result_lo }) and
+  (result_lo1 = o13))) ->
+  in_range1((result_hi2 + result_lo1))))))))))))))))))))))))

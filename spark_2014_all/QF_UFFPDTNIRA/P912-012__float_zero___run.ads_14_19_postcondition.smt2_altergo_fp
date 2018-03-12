@@ -1101,36 +1101,10 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic y : t
-
-logic result : t
-
-logic y1 : t
-
-logic y2 : t
-
-logic y3 : t
-
-axiom H : in_range1(x1)
-
-axiom H1 : in_range1(x2)
-
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 340282346638528859811704183484516925440.0))
-
-axiom H2 : (le(neg(fliteral2), fliteral2) -> tqtisFinite(y))
-
-axiom H3 : lt(x1, x2)
-
-axiom H4 : (result = y)
-
-axiom H5 : (y1 = sub(NearestTiesToEven, x2, x1))
-
-axiom H6 : (y1 = y2)
-
-axiom H7 : (y3 = y1)
 
 logic fliteral3 : t
 
@@ -1138,4 +1112,9 @@ axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 0.0e-1))
 
  (* File "run.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : neq(y2, fliteral3)
+goal WP_parameter_def :
+  (forall y:t. forall result:t. forall y1:t. forall y2:t. forall y3:t.
+  ((in_range1(x1) and (in_range1(x2) and ((le(neg(fliteral2), fliteral2) ->
+  tqtisFinite(y)) and (lt(x1, x2) and (((result = y) and
+  (y1 = sub(NearestTiesToEven, x2, x1))) and ((y1 = y2) and
+  (y3 = y1))))))) -> neq(y2, fliteral3)))

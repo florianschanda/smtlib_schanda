@@ -227,11 +227,6 @@ logic gcd : int, int -> int
 
 logic gcd__function_guard : int, int, int -> prop
 
-axiom H : in_range(m)
-
-axiom H1 : in_range(n)
-
-axiom H2 : (not (n = 0))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (not (n = 0))
+goal WP_parameter_def : (in_range(m) -> (in_range(n) -> ((not (n = 0)) ->
+  (not (n = 0)))))

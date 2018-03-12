@@ -751,13 +751,5 @@ logic right : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : int
-
-logic o1 : int
-
-axiom H : true
-
-axiom H1 : true
-
  (* File "interfac.ads", line 74, characters 0-0 *)
 goal WP_parameter_def : in_range(tqtint(right))

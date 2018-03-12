@@ -306,13 +306,9 @@ axiom is_valid__def_axiom1 :
   rec__dic_and_predicate_checks__r__g = x1 } }) = true) <->
   (0 <  to_rep(x))))
 
-logic temp___230 : integer
-
-logic temp___2301 : integer
-
-axiom H : (to_rep(temp___2301) = 0)
-
  (* File "dic_and_predicate_checks.ads", line 28, characters 0-0 *)
-goal WP_parameter_def : (is_valid({ us_split_fields1 = {
-  rec__dic_and_predicate_checks__r__f = temp___230;
-  rec__dic_and_predicate_checks__r__g = temp___2301 } }) = true)
+goal WP_parameter_def :
+  (forall temp___260:integer. forall temp___2601:integer.
+  ((to_rep(temp___2601) = 0) -> (is_valid({ us_split_fields1 = {
+  rec__dic_and_predicate_checks__r__f = temp___260;
+  rec__dic_and_predicate_checks__r__g = temp___2601 } }) = true)))

@@ -111,37 +111,10 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic x : int
-
-logic y : int
-
-logic z : int
-
-logic o : int
-
-logic result : int
-
-logic y1 : int
-
-logic result1 : int
-
-logic y2 : int
-
-axiom H : in_range(x)
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(y))
-
-axiom H2 : in_range(z)
-
-axiom H3 : ((z <  x) -> (result = y))
-
-axiom H4 : ((z <  x) -> (y1 = 10))
-
-axiom H5 : ((not (z <  x)) -> (result1 = y))
-
-axiom H6 : ((not (z <  x)) -> (y2 = 20))
-
-axiom H7 : ((not (z <  x)) -> (y1 = y2))
-
  (* File "test.adb", line 47, characters 0-0 *)
-goal WP_parameter_def : in_range((x + z))
+goal WP_parameter_def :
+  (forall x:int. forall y:int. forall z:int. forall result:int.
+  forall y1:int. forall result1:int. forall y2:int. (in_range(x) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(y)) -> (in_range(z) ->
+  ((((z <  x) and ((result = y) and (y1 = 10))) or ((not (z <  x)) and
+  (((result1 = y) and (y2 = 20)) and (y1 = y2)))) -> in_range((x + z)))))))

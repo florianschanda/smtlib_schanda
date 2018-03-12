@@ -189,12 +189,6 @@ axiom Max_assoc :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -206,6 +200,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -321,206 +321,65 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic an : int
-
-logic bn : int
-
-logic c : int
-
-logic math_euclid__gcd__result : int
-
-logic o : int
-
-logic temp___134 : int
-
-logic temp___133 : int
-
-logic temp___132 : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic x : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic x1 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : bool
-
-logic x2 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : bool
-
-logic c1 : int
-
-logic result : int
-
-logic an1 : int
-
-logic result1 : int
-
-logic bn1 : int
-
-logic result2 : int
-
-logic c2 : int
-
-logic result3 : int
-
-logic an2 : int
-
-logic result4 : int
-
-logic bn2 : int
-
-logic an3 : int
-
-logic bn3 : int
-
-logic c3 : int
-
-logic result5 : int
-
-logic c4 : int
-
-logic result6 : int
-
-logic an4 : int
-
-logic result7 : int
-
-logic bn4 : int
-
-logic an5 : int
-
-logic bn5 : int
-
-logic c5 : int
-
-logic an6 : int
-
-logic bn6 : int
-
-logic c6 : int
-
-logic an7 : int
-
-logic bn7 : int
-
-logic c7 : int
-
-logic an8 : int
-
-logic bn8 : int
-
-logic c8 : int
-
-logic an9 : int
-
-logic bn9 : int
-
-logic c9 : int
-
-logic an10 : int
-
-logic bn10 : int
-
-logic c10 : int
-
-logic result8 : int
-
-logic math_euclid__gcd__result1 : int
-
-logic math_euclid__gcd__result2 : int
-
-logic math_euclid__gcd__result3 : int
-
-logic an11 : int
-
-logic bn11 : int
-
-logic c11 : int
-
-logic math_euclid__gcd__result4 : int
-
-logic an12 : int
-
-logic bn12 : int
-
-logic c12 : int
-
-logic math_euclid__gcd__result5 : int
-
-logic result9 : bool
-
-logic result10 : bool
-
-axiom H : in_range2(a)
-
-axiom H1 : in_range2(b)
-
-axiom H2 : ((((result = an) and (an1 = a)) and (in_range2(an1) and
-  ((((o = b) and in_range1(b)) and ((result1 = bn) and (bn1 = o))) and
-  (in_range1(bn1) and (((1 <= 2147483647) -> in_range2(c)) and
-  ((((not (bn1 = 0)) -> ((((temp___134 = c) and ((temp___133 = bn1) and
-  ((temp___132 = an1) and (((result2 = c) and (c2 = an1)) and
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (forall an:int. forall bn:int. forall c:int.
+  forall math_euclid__gcd__result:int. forall o:int. forall temp___156:int.
+  forall temp___155:int. forall temp___154:int. forall o1:int. forall o2:int.
+  forall x:int. forall c1:int. forall result:int. forall an1:int.
+  forall result1:int. forall bn1:int. forall result2:int. forall c2:int.
+  forall result3:int. forall an2:int. forall result4:int. forall bn2:int.
+  forall an3:int. forall bn3:int. forall c3:int. forall an4:int.
+  forall bn4:int. forall c4:int. forall an5:int. forall bn5:int.
+  forall c5:int. forall an6:int. forall bn6:int. forall c6:int.
+  forall an7:int. forall bn7:int. forall c7:int. forall result5:int.
+  forall math_euclid__gcd__result1:int. forall math_euclid__gcd__result2:int.
+  forall math_euclid__gcd__result3:int. forall an8:int. forall bn8:int.
+  forall c8:int. forall math_euclid__gcd__result4:int. forall an9:int.
+  forall bn9:int. forall c9:int. forall math_euclid__gcd__result5:int.
+  forall result6:bool. forall result7:bool. (in_range2(a) -> (in_range2(b) ->
+  ((((({ int__content = result } = { int__content = an }) and (an1 = a)) and
+  (in_range2(an1) and ((((o = b) and in_range1(b)) and (({ int__content =
+  result1 } = { int__content = bn }) and (bn1 = o))) and (in_range1(bn1) and
+  (((1 <= 2147483647) -> in_range2(c)) and ((((not (bn1 = 0)) and
+  ((((temp___156 = c) and ((temp___155 = bn1) and ((temp___154 = an1) and
+  ((({ int__content = result2 } = { int__content = c }) and (c2 = an1)) and
   ((((o1 = bn1) and in_range2(bn1)) and ((an1 = result3) and (an2 = o1))) and
   ((((o2 = mod(c2, bn1)) and in_range1(mod(c2, bn1))) and
   ((bn1 = result4) and (bn2 = o2))) and
-  ((forall x3:int. (((1 <= x3) and (x3 <= 2147483647)) -> (((divides(x3,
-   c2) = true) and (divides(x3, an2) = true)) <-> ((divides(x3,
-   an2) = true) and ((divides(an2, c2) = true) or (divides(x3, mod(c2,
+  ((forall x1:int. (((1 <= x1) and (x1 <= 2147483647)) -> (((divides(x1,
+   c2) = true) and (divides(x1, an2) = true)) <-> ((divides(x1,
+   an2) = true) and ((divides(an2, c2) = true) or (divides(x1, mod(c2,
    an2)) = true)))))) and
-  ((forall x3:int. (((1 <= x3) and (x3 <= 2147483647)) -> (((divides(x3,
-   a) = true) and (divides(x3, b) = true)) <-> ((divides(x3, an3) = true) and
-   ((bn3 = 0) or (divides(x3, bn3) = true)))))) and (((((1 <= 2147483647) ->
-  in_range2(an3)) and ((0 <= 2147483647) -> in_range1(bn3))) and
-  ((1 <= 2147483647) -> in_range2(c3))) and (bn3 = 0)))))))))) and
-  (((c3 = c7) and ((bn3 = bn7) and (an3 = an7))) and ((c8 = c3) and
-  ((bn8 = bn3) and (an8 = an3))))) and (((c9 = c7) and ((bn9 = bn7) and
-  (an9 = an7))) and ((c10 = c8) and ((bn10 = bn8) and (an10 = an8)))))) and
-  ((bn1 = 0) -> (((c9 = c) and ((bn1 = bn9) and (an1 = an9))) and
-  ((c10 = c1) and ((bn10 = bn1) and (an10 = an1)))))) and ((divides(an9,
-  an9) = true) and ((divides(an9, a) = true) and ((divides(an9,
-  b) = true) and
-  ((forall x3:int. ((((an9 + 1) <= x3) and (x3 <= min(a, b))) ->
-   (not ((divides(x3, a) = true) and (divides(x3, b) = true))))) and
-  (((math_euclid__gcd__result2 = math_euclid__gcd__result1) and
+  ((forall x1:int. (((1 <= x1) and (x1 <= 2147483647)) -> (((divides(x1,
+   a) = true) and (divides(x1, b) = true)) <-> ((divides(x1, an3) = true) and
+   ((bn3 = 0) or (divides(x1, bn3) = true)))))) and
+  (((((1 <= 2147483647) -> in_range2(an3)) and ((0 <= 2147483647) ->
+  in_range1(bn3))) and ((1 <= 2147483647) -> in_range2(c3))) and
+  (bn3 = 0)))))))))) and (((c3 = c4) and ((bn3 = bn4) and (an3 = an4))) and
+  ((c5 = c3) and ((bn5 = bn3) and (an5 = an3))))) and ((({ int__content = c6
+  } = { int__content = c4 }) and (({ int__content = bn6 } = { int__content =
+  bn4 }) and ({ int__content = an6 } = { int__content = an4 }))) and
+  ((c7 = c5) and ((bn7 = bn5) and (an7 = an5)))))) or ((bn1 = 0) and ((({
+  int__content = c6 } = { int__content = c }) and ((bn1 = bn6) and
+  (an1 = an6))) and ((c7 = c1) and ((bn7 = bn1) and (an7 = an1)))))) and
+  ((divides(an6, an6) = true) and ((divides(an6, a) = true) and
+  ((divides(an6, b) = true) and
+  ((forall x1:int. ((((an6 + 1) <= x1) and (x1 <= min(a, b))) ->
+   (not ((divides(x1, a) = true) and (divides(x1, b) = true))))) and
+  (((math_euclid__gcd__result1 = math_euclid__gcd__result2) and
   (math_euclid__gcd__result3 = math_euclid__gcd__result1)) and
-  ((result8 = math_euclid__gcd__result) and
-  (math_euclid__gcd__result1 = an9))))))))))))) and
-  (((math_euclid__gcd__result4 = math_euclid__gcd__result2) and
-  ((c11 = c9) and ((bn11 = bn9) and (an11 = an9)))) and
-  ((math_euclid__gcd__result5 = math_euclid__gcd__result3) and
-  ((c12 = c10) and ((bn12 = bn10) and (an12 = an10))))))
-
-axiom H3 : ((result9 = divides(math_euclid__gcd__result4, a)) and
-  ((result9 = true) <-> (mod(a, math_euclid__gcd__result4) = 0)))
-
-axiom H4 : (result9 = true)
-
-axiom H5 : ((result10 = divides(math_euclid__gcd__result4, b)) and
-  ((result10 = true) <-> (mod(b, math_euclid__gcd__result4) = 0)))
-
-axiom H6 : (result10 = true)
-
-axiom H7 : ((math_euclid__gcd__result4 + 1) <= x2)
-
-axiom H8 : (x2 <= min(a, b))
-
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range2(x2)
+  ((result5 = math_euclid__gcd__result) and
+  (math_euclid__gcd__result1 = an6))))))))))))) and ((({ int__content =
+  math_euclid__gcd__result4 } = { int__content = math_euclid__gcd__result2
+  }) and (({ int__content = c8 } = { int__content = c6 }) and (({
+  int__content = bn8 } = { int__content = bn6 }) and ({ int__content = an8
+  } = { int__content = an6 })))) and
+  ((math_euclid__gcd__result5 = math_euclid__gcd__result3) and ((c9 = c7) and
+  ((bn9 = bn7) and (an9 = an7)))))) ->
+  (((result6 = divides(math_euclid__gcd__result4, a)) and
+  ((result6 = true) <-> (mod(a, math_euclid__gcd__result4) = 0))) ->
+  ((result6 = true) -> (((result7 = divides(math_euclid__gcd__result4,
+  b)) and ((result7 = true) <-> (mod(b, math_euclid__gcd__result4) = 0))) ->
+  ((result7 = true) -> ((((math_euclid__gcd__result4 + 1) <= x) and
+  (x <= min(a, b))) -> in_range2(x))))))))))

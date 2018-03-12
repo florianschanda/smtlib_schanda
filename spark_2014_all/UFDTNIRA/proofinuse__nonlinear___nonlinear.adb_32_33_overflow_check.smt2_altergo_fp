@@ -90,12 +90,6 @@ axiom Power_monotonic :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -107,6 +101,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -230,37 +230,10 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-axiom H : in_range2(x)
-
-axiom H1 : ((2 <= x) and (x <= 29))
-
-axiom H2 : ((o5 = (x + 1)) and in_range1((x + 1)))
-
-axiom H3 : (o6 = power(2, o5))
-
-axiom H4 : ((o7 = o6) and in_range3(o6))
-
-axiom H5 : ((o = (x - 1)) and in_range2((x - 1)))
-
-axiom H6 : (o1 = power(2, o))
-
  (* File "nonlinear.adb", line 22, characters 0-0 *)
-goal WP_parameter_def : in_range3(o1)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
+  (in_range2(x) -> (((2 <= x) and (x <= 29)) -> (((((o2 = (x + 1)) and
+  in_range1((x + 1))) and (o3 = power(2, o2))) and ((o4 = o3) and
+  in_range3(o3))) -> ((((o = (x - 1)) and in_range2((x - 1))) and
+  (o1 = power(2, o))) -> in_range3(o1))))))

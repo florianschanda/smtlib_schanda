@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -91,19 +91,9 @@ axiom f1__def_axiom :
   ((f1(initial_condition_legal__flag) = true) <->
   (initial_condition_legal__flag = true)))
 
-logic flag : bool
-
-logic result : bool
-
-logic flag1 : bool
-
-logic result1 : bool
-
-axiom H : (result = flag)
-
-axiom H1 : (flag1 = of_int(1))
-
-axiom H2 : ((result1 = f1(flag1)) and ((result1 = true) <-> (flag1 = true)))
-
  (* File "initial_condition_legal.adb", line 5, characters 0-0 *)
-goal WP_parameter_def : (f1(flag1) = true)
+goal WP_parameter_def :
+  (forall flag:bool. forall result:bool. forall flag1:bool.
+  (forall result1:bool. ((((result = flag) and (flag1 = of_int(1))) and
+  ((result1 = f1(flag1)) and ((result1 = true) <-> (flag1 = true)))) ->
+  (f1(flag1) = true))))

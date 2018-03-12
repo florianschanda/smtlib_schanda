@@ -1037,12 +1037,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1054,6 +1048,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1133,65 +1133,11 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic res : t
-
-logic safety_pack__dead_band__result : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic result : t
-
-logic res1 : t
-
-logic result1 : t
-
-logic res2 : t
-
-logic result2 : t
-
-logic res3 : t
-
-logic result3 : t
-
-logic res4 : t
-
-logic result4 : t
-
-logic safety_pack__dead_band__result1 : t
-
-logic safety_pack__dead_band__result2 : t
-
-logic safety_pack__dead_band__result3 : t
-
-logic res5 : t
-
-logic safety_pack__dead_band__result4 : t
-
-logic res6 : t
-
-logic safety_pack__dead_band__result5 : t
-
-axiom H : tqtisFinite(value)
-
-axiom H1 : in_range2(threshold)
-
-axiom H2 : (result = res)
-
-axiom H3 : (res1 = value)
-
-axiom H4 : tqtisFinite(res1)
-
-axiom H5 : (not (le(neg(threshold), value) and le(value, threshold)))
-
-axiom H6 : (not lt(fliteral1, value))
-
-axiom H7 : lt(value, fliteral1)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(add(NearestTiesToEven, res1, threshold))
+goal WP_parameter_def :
+  (forall res:t. forall result:t. forall res1:t. (tqtisFinite(value) ->
+  (in_range2(threshold) -> ((({ t__content = result } = { t__content = res
+  }) and (res1 = value)) -> (tqtisFinite(res1) -> ((not (le(neg(threshold),
+  value) and le(value, threshold))) -> ((not lt(fliteral1, value)) ->
+  (lt(value, fliteral1) -> tqtisFinite(add(NearestTiesToEven, res1,
+  threshold))))))))))

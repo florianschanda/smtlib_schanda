@@ -121,7 +121,7 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
-type integer
+type tt2B
 
 predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
@@ -137,24 +137,22 @@ logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE1 : us_image -> int
 
-logic user_eq1 : integer, integer -> bool
+logic user_eq1 : tt2B, tt2B -> bool
 
-logic dummy1 : integer
+logic dummy1 : tt2B
 
-type integer__ref = { integer__content : integer
+type tt2B__ref = { tt2B__content : tt2B
 }
 
-function integer__ref___projection(a1: integer__ref) : integer =
-  (a1).integer__content
+function tt2B__ref___4__projection(a1: tt2B__ref) : tt2B = (a1).tt2B__content
 
-logic to_rep : integer -> int
+logic to_rep : tt2B -> int
 
-logic of_rep : int -> integer
+logic of_rep : int -> tt2B
 
-axiom inversion_axiom :
-  (forall x:integer [to_rep(x)]. (of_rep(to_rep(x)) = x))
+axiom inversion_axiom : (forall x:tt2B [to_rep(x)]. (of_rep(to_rep(x)) = x))
 
-axiom range_axiom : (forall x:integer [to_rep(x)]. in_range1(to_rep(x)))
+axiom range_axiom : (forall x:tt2B [to_rep(x)]. in_range1(to_rep(x)))
 
 axiom coerce_axiom :
   (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
@@ -179,18 +177,19 @@ logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE2 : us_image -> int
 
-logic user_eq2 : integer, integer -> bool
+logic user_eq2 : tt2B, tt2B -> bool
 
-logic dummy2 : integer
+logic dummy2 : tt2B
 
-type t1__ref = { t1__content : integer
+type t2__ref = { t2__content : tt2B
 }
 
-function t1__ref___4__projection(a1: t1__ref) : integer = (a1).t1__content
+function t2__ref___4__projection(a1: t2__ref) : tt2B = (a1).t2__content
 
-type tt2B
+logic last1 : int
 
-predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+predicate dynamic_property1(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
 
 logic bool_eq4 : int, int -> bool
 
@@ -208,30 +207,14 @@ logic user_eq3 : tt2B, tt2B -> bool
 
 logic dummy3 : tt2B
 
-type tt2B__ref = { tt2B__content : tt2B
+type t3__ref = { t3__content : tt2B
 }
 
-function tt2B__ref___4__projection(a1: tt2B__ref) : tt2B = (a1).tt2B__content
+function t3__ref___projection(a1: t3__ref) : tt2B = (a1).t3__content
 
-logic to_rep1 : tt2B -> int
+type tt4B
 
-logic of_rep1 : int -> tt2B
-
-axiom inversion_axiom1 :
-  (forall x:tt2B [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
-
-axiom range_axiom1 : (forall x:tt2B [to_rep1(x)]. in_range2(to_rep1(x)))
-
-axiom coerce_axiom1 :
-  (forall x:int [to_rep1(of_rep1(x))]. (in_range2(x) ->
-  (to_rep1(of_rep1(x)) = x)))
-
-logic first1 : int
-
-logic last1 : int
-
-predicate dynamic_property1(first_int: int, last_int: int, x: int) =
-  ((first_int <= x) and (x <= last_int))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -245,14 +228,29 @@ logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE4 : us_image -> int
 
-logic user_eq4 : tt2B, tt2B -> bool
+logic user_eq4 : tt4B, tt4B -> bool
 
-logic dummy4 : tt2B
+logic dummy4 : tt4B
 
-type t2__ref = { t2__content : tt2B
+type tt4B__ref = { tt4B__content : tt4B
 }
 
-function t2__ref___4__projection(a1: t2__ref) : tt2B = (a1).t2__content
+function tt4B__ref___projection(a1: tt4B__ref) : tt4B = (a1).tt4B__content
+
+logic to_rep1 : tt4B -> int
+
+logic of_rep1 : int -> tt4B
+
+axiom inversion_axiom1 :
+  (forall x:tt4B [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:tt4B [to_rep1(x)]. in_range2(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range2(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+logic first1 : int
 
 logic last2 : int
 
@@ -271,75 +269,9 @@ logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE5 : us_image -> int
 
-logic user_eq5 : tt2B, tt2B -> bool
+logic user_eq5 : tt4B, tt4B -> bool
 
-logic dummy5 : tt2B
-
-type t3__ref = { t3__content : tt2B
-}
-
-function t3__ref___projection(a1: t3__ref) : tt2B = (a1).t3__content
-
-type tt4B
-
-predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
-
-logic bool_eq7 : int, int -> bool
-
-axiom bool_eq_def6 :
-  (forall x:int. forall y:int [bool_eq7(x, y)]. (((x = y) -> (bool_eq7(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq7(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE6 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE6 : us_image -> int
-
-logic user_eq6 : tt4B, tt4B -> bool
-
-logic dummy6 : tt4B
-
-type tt4B__ref = { tt4B__content : tt4B
-}
-
-function tt4B__ref___projection(a1: tt4B__ref) : tt4B = (a1).tt4B__content
-
-logic to_rep2 : tt4B -> int
-
-logic of_rep2 : int -> tt4B
-
-axiom inversion_axiom2 :
-  (forall x:tt4B [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
-
-axiom range_axiom2 : (forall x:tt4B [to_rep2(x)]. in_range3(to_rep2(x)))
-
-axiom coerce_axiom2 :
-  (forall x:int [to_rep2(of_rep2(x))]. (in_range3(x) ->
-  (to_rep2(of_rep2(x)) = x)))
-
-logic first2 : int
-
-logic last3 : int
-
-predicate dynamic_property3(first_int: int, last_int: int, x: int) =
-  ((first_int <= x) and (x <= last_int))
-
-logic bool_eq8 : int, int -> bool
-
-axiom bool_eq_def7 :
-  (forall x:int. forall y:int [bool_eq8(x, y)]. (((x = y) -> (bool_eq8(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq8(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE7 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check7 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE7 : us_image -> int
-
-logic user_eq7 : tt4B, tt4B -> bool
-
-logic dummy7 : tt4B
+logic dummy5 : tt4B
 
 type t4__ref = { t4__content : tt4B
 }
@@ -350,41 +282,15 @@ axiom first__def_axiom : (first = a)
 
 axiom last__def_axiom : (last = b)
 
-axiom first__def_axiom1 : (first1 = a)
+axiom last__def_axiom1 : (last1 = last)
 
-axiom last__def_axiom1 : (last1 = b)
+axiom first__def_axiom1 : (first1 = 0)
 
 axiom last__def_axiom2 : (last2 = last1)
 
-axiom first__def_axiom2 : (first2 = 0)
-
-axiom last__def_axiom3 : (last3 = last2)
-
-logic c : int
-
-logic d : int
-
-logic e : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic c1 : int
-
-axiom H : in_range(a)
-
-axiom H1 : in_range(b)
-
-axiom H2 : ((0 <= 2147483647) -> in_range(c))
-
-axiom H3 : ((0 <= 2147483647) -> in_range(d))
-
-axiom H4 : ((0 <= 2147483647) -> in_range(e))
-
-axiom H5 : (a <= b)
-
  (* File "info_flow_tests.adb", line 200, characters 0-0 *)
-goal WP_parameter_def : (0 <= a)
+goal WP_parameter_def :
+  (forall c:int. forall d:int. forall e:int. (in_range(a) -> (in_range(b) ->
+  (((0 <= 2147483647) -> in_range(c)) -> (((0 <= 2147483647) ->
+  in_range(d)) -> (((0 <= 2147483647) -> in_range(e)) -> ((a <= b) ->
+  (0 <= a))))))))

@@ -53,7 +53,5 @@ logic rec__ : int -> bool
 
 logic rec____function_guard : bool, int -> prop
 
-logic us : bool
-
  (* File "main.adb", line 3, characters 0-0 *)
 goal WP_parameter_def : (0 <  3)

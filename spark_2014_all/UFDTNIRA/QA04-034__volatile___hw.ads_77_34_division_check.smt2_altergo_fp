@@ -249,11 +249,5 @@ logic m : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : int
-
-axiom H : in_range1(n)
-
-axiom H1 : in_range1(m)
-
  (* File "hw.ads", line 69, characters 0-0 *)
-goal WP_parameter_def : (not (2 = 0))
+goal WP_parameter_def : (in_range1(n) -> (in_range1(m) -> (not (2 = 0))))

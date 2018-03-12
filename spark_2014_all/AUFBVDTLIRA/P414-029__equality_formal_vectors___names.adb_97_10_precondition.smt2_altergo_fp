@@ -599,12 +599,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -616,6 +610,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -762,24 +762,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq6 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -790,17 +772,17 @@ axiom bool_eq_def5 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -810,37 +792,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq6(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq6(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq6(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 logic to_rep1 : integer -> int
 
@@ -1245,24 +1199,6 @@ axiom slide_def1 :
   (forall i:t [(slide1(a, old_first, new_first)[i])]. ((slide1(a, old_first,
   new_first)[i]) = (a[sub(i, sub(new_first, old_first))]))))))
 
-logic concat1 : (t,name_id) farray, t, t, (t,name_id) farray, t,
-  t -> (t,name_id) farray
-
-axiom concat_def1 :
-  (forall a:(t,name_id) farray. forall b:(t,name_id) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t.
-  (forall i:t [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((ule(a_first, i) and ule(i, a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and (ugt(i, a_last) -> ((concat1(a,
-  a_first, a_last, b, b_first, b_last)[i]) = (b[add(sub(i, a_last),
-  sub(b_first, one))])))))))
-
-logic singleton1 : name_id, t -> (t,name_id) farray
-
-axiom singleton_def1 :
-  (forall v:name_id.
-  (forall i:t [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq11 : (t,name_id) farray, t, t, (t,name_id) farray, t, t -> bool
 
 axiom bool_eq_def9 :
@@ -1272,19 +1208,19 @@ axiom bool_eq_def9 :
   a__last) and (ule(b__first, b__last) and (sub(a__last,
   a__first) = sub(b__last, b__first)))) or ((not ule(a__first, a__last)) and
   ugt(b__first, b__last))) and
-  (forall temp___idx_132:t. (((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) and
-  (to_rep3((a[temp___idx_132])) = to_rep3((b[add(sub(b__first, a__first),
-  temp___idx_132)])))) or (not (ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)))))) -> (bool_eq11(a, a__first, a__last, b,
+  (forall temp___idx_154:t. (((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) and
+  (to_rep3((a[temp___idx_154])) = to_rep3((b[add(sub(b__first, a__first),
+  temp___idx_154)])))) or (not (ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)))))) -> (bool_eq11(a, a__first, a__last, b,
   b__first, b__last) = true)) and ((not (((ule(a__first, a__last) ->
   (ule(b__first, b__last) and (sub(a__last, a__first) = sub(b__last,
   b__first)))) and ((not ule(a__first, a__last)) -> ugt(b__first,
   b__last))) and
-  (forall temp___idx_132:t. ((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) ->
-  (to_rep3((a[temp___idx_132])) = to_rep3((b[add(sub(b__first, a__first),
-  temp___idx_132)]))))))) -> (bool_eq11(a, a__first, a__last, b, b__first,
+  (forall temp___idx_154:t. ((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) ->
+  (to_rep3((a[temp___idx_154])) = to_rep3((b[add(sub(b__first, a__first),
+  temp___idx_154)]))))))) -> (bool_eq11(a, a__first, a__last, b, b__first,
   b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -1294,39 +1230,10 @@ axiom bool_eq_rev1 :
   (((ule(a__first, a__last) -> (ule(b__first, b__last) and (sub(a__last,
   a__first) = sub(b__last, b__first)))) and ((not ule(a__first, a__last)) ->
   ugt(b__first, b__last))) and
-  (forall temp___idx_132:t. ((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) ->
-  (to_rep3((a[temp___idx_132])) = to_rep3((b[add(sub(b__first, a__first),
-  temp___idx_132)])))))))))
-
-logic compare1 : (t,name_id) farray, t, t, (t,name_id) farray, t, t -> int
-
-axiom compare_def_eq1 :
-  (forall a:(t,name_id) farray. forall b:(t,name_id) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare1(a, a_first, a_last, b, b_first, b_last)]. ((compare1(a, a_first,
-  a_last, b, b_first, b_last) = 0) <-> (bool_eq11(a, a_first, a_last, b,
-  b_first, b_last) = true))))
-
-axiom compare_def_lt1 :
-  (forall a:(t,name_id) farray. forall b:(t,name_id) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare1(a, a_first, a_last, b, b_first, b_last)]. ((compare1(a, a_first,
-  a_last, b, b_first, b_last) <  0) <->
-  (exists i:t. exists j:t. (ule(i, a_last) and (ult(j, b_last) and
-  ((bool_eq11(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  (ult(i, a_last) and (to_rep3((a[add(i, one)])) <  to_rep3((b[add(j,
-  one)]))))))))))))
-
-axiom compare_def_gt1 :
-  (forall a:(t,name_id) farray. forall b:(t,name_id) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare1(a, a_first, a_last, b, b_first, b_last)]. ((0 <  compare1(a,
-  a_first, a_last, b, b_first, b_last)) <->
-  (exists i:t. exists j:t. (ule(i, b_last) and (ult(j, a_last) and
-  ((bool_eq11(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  (ult(i, b_last) and (to_rep3((b[add(i, one)])) <  to_rep3((a[add(j,
-  one)]))))))))))))
+  (forall temp___idx_154:t. ((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) ->
+  (to_rep3((a[temp___idx_154])) = to_rep3((b[add(sub(b__first, a__first),
+  temp___idx_154)])))))))))
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
@@ -1570,7 +1477,15 @@ type hash_table_index_t
 
 logic attr__ATTRIBUTE_MODULUS1 : t
 
-predicate in_range10(x: t) = (ule(of_int(0), x) and ule(x, of_int(255)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 255)
+
+predicate in_range10(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 255))
 
@@ -2022,7 +1937,11 @@ logic attr__ATTRIBUTE_ADDRESS6 : int
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
-axiom h__def_axiom : (h = urem(hash({ elts = s; rt = s1 }), of_int(256)))
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 256)
+
+axiom h__def_axiom : (h = urem(hash({ elts = s; rt = s1 }), rliteral2))
 
 type count_type
 
@@ -2232,389 +2151,70 @@ axiom length__post_axiom3 :
 
 axiom get__post_axiom1 : true
 
-logic n : int
-
-logic hash_table : (t,name_id) farray
-
-logic char_table__split_fields : us_main_type1
-
-logic entry_table__split_fields : us_main_type
-
-logic ptr : int
-
-logic c344b : int
-
-logic o : t
-
-logic o1 : t
-
-logic names__lookup__h__assume : t
-
-logic temp___606 : int
-
-logic temp___605 : int
-
-logic temp___604 : (int,character) farray
-
-logic temp___6041 : t1
-
-logic o2 : int
-
-logic o3 : char_table_index
-
-logic o4 : positive
-
-logic o5 : name_id
-
-logic o6 : char_table_index
-
-logic o7 : positive
-
-logic o8 : name_id
-
-logic o9 : name_id
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : char_table_index
-
-logic o13 : positive
-
-logic o14 : name_id
-
-logic temp___608 : capacity_range1
-
-logic temp___6081 : us_main_type1
-
-logic o15 : int
-
-logic o16 : int
-
-logic o17 : int
-
-logic o18 : int
-
-logic o19 : int
-
-logic o20 : int
-
-logic o21 : int
-
-logic o22 : name_id
-
-logic o23 : positive
-
-logic o24 : char_table_index
-
-logic o25 : char_table_index
-
-logic o26 : positive
-
-logic o27 : name_id
-
-logic o28 : char_table_index
-
-logic o29 : positive
-
-logic o30 : name_id
-
-logic o31 : int
-
-logic o32 : int
-
-logic o33 : int
-
-logic temp___612 : char_table_index
-
-logic temp___6121 : positive
-
-logic temp___6122 : name_id
-
-logic o34 : name_id
-
-logic o35 : char_table_index
-
-logic o36 : positive
-
-logic o37 : name_id
-
-logic o38 : char_table_index
-
-logic o39 : positive
-
-logic o40 : name_id
-
-logic o41 : name_id
-
-logic o42 : (t,name_id) farray
-
-logic n1 : int
-
-logic hash_table1 : (t,name_id) farray
-
-logic char_table__split_fields1 : us_main_type1
-
-logic entry_table__split_fields1 : us_main_type
-
-logic c344b1 : int
-
-logic result : int
-
-logic ptr1 : int
-
-logic result1 : int
-
-logic n2 : int
-
-logic result2 : int
-
-logic n3 : int
-
-logic result3 : int
-
-logic ptr2 : int
-
-logic n4 : int
-
-logic ptr3 : int
-
-logic result4 : bool
-
-logic result5 : int
-
-logic n5 : int
-
-logic result6 : bool
-
-logic ptr4 : int
-
-logic ptr5 : int
-
-logic n6 : int
-
-logic ptr6 : int
-
-logic n7 : int
-
-logic ptr7 : int
-
-logic n8 : int
-
-logic ptr8 : int
-
-logic n9 : int
-
-logic ptr9 : int
-
-logic n10 : int
-
-logic ptr10 : int
-
-logic n11 : int
-
-logic ptr11 : int
-
-logic result7 : int
-
-logic c344b2 : int
-
-logic char_table__split_fields2 : us_main_type1
-
-logic c344b3 : int
-
-logic names__char_tables__append__2__container__fields : us_main_type1
-
-logic result8 : us_main_type1
-
-logic char_table__split_fields3 : us_main_type1
-
-logic char_table__split_fields4 : us_main_type1
-
-logic c344b4 : int
-
-logic char_table__split_fields5 : us_main_type1
-
-logic c344b5 : int
-
-logic char_table__split_fields6 : us_main_type1
-
-logic c344b6 : int
-
-logic char_table__split_fields7 : us_main_type1
-
-logic c344b7 : int
-
-logic names__entry_tables__append__2__container__fields : us_main_type
-
-logic result9 : us_main_type
-
-logic entry_table__split_fields2 : us_main_type
-
-logic result10 : int
-
-logic n12 : int
-
-logic names__entry_tables__replace_element__container__fields : us_main_type
-
-logic result11 : us_main_type
-
-logic entry_table__split_fields3 : us_main_type
-
-logic result12 : (t,name_id) farray
-
-logic hash_table2 : (t,name_id) farray
-
-logic hash_table3 : (t,name_id) farray
-
-logic entry_table__split_fields4 : us_main_type
-
-logic hash_table4 : (t,name_id) farray
-
-logic entry_table__split_fields5 : us_main_type
-
-logic n13 : int
-
-logic hash_table5 : (t,name_id) farray
-
-logic char_table__split_fields8 : us_main_type1
-
-logic entry_table__split_fields6 : us_main_type
-
-logic ptr12 : int
-
-logic c344b8 : int
-
-logic n14 : int
-
-logic hash_table6 : (t,name_id) farray
-
-logic char_table__split_fields9 : us_main_type1
-
-logic entry_table__split_fields7 : us_main_type
-
-logic ptr13 : int
-
-logic c344b9 : int
-
-logic n15 : int
-
-logic hash_table7 : (t,name_id) farray
-
-logic char_table__split_fields10 : us_main_type1
-
-logic entry_table__split_fields8 : us_main_type
-
-logic ptr14 : int
-
-logic c344b10 : int
-
-logic n16 : int
-
-logic hash_table8 : (t,name_id) farray
-
-logic char_table__split_fields11 : us_main_type1
-
-logic entry_table__split_fields9 : us_main_type
-
-logic ptr15 : int
-
-logic c344b11 : int
-
-logic n17 : int
-
-logic hash_table9 : (t,name_id) farray
-
-logic char_table__split_fields12 : us_main_type1
-
-logic entry_table__split_fields10 : us_main_type
-
-logic ptr16 : int
-
-logic c344b12 : int
-
-logic n18 : int
-
-logic hash_table10 : (t,name_id) farray
-
-logic char_table__split_fields13 : us_main_type1
-
-logic entry_table__split_fields11 : us_main_type
-
-logic ptr17 : int
-
-logic c344b13 : int
-
-axiom H : (1024 = to_rep5(char_table__split_discrs))
-
-axiom H1 : (128 = to_rep4(entry_table__split_discrs))
-
-axiom H2 : dynamic_property(1, 2147483647, to_rep1(first(s1)),
-  to_rep1(last(s1)))
-
-axiom H3 : ((0 <= 2147483647) -> in_range4(n))
-
-axiom H4 : (invariant__(void) = true)
-
-axiom H5 : (result = ptr)
-
-axiom H6 : (ptr1 = 0)
-
-axiom H7 : in_range4(ptr1)
-
-axiom H8 : (o = hash({ elts = s; rt = s1 }))
-
-axiom H9 : (o1 = urem(o, of_int(256)))
-
-axiom H10 : ((names__lookup__h__assume = o1) and in_range10(o1))
-
-axiom H11 : (names__lookup__h__assume = h)
-
-axiom H12 : in_range10(h)
-
-axiom H13 : (not (length({ elts = s; rt = s1 }) = 0))
-
-axiom H14 : (n2 = n)
-
-axiom H15 : (n2 = n1)
-
-axiom H16 : (result2 = n2)
-
-axiom H17 : (n3 = to_rep3((hash_table[h])))
-
-axiom H18 : (in_range9(n3) -> (result3 = ptr1))
-
-axiom H19 : (in_range9(n3) -> (ptr2 = n3))
-
-axiom H20 : (in_range9(n3) -> (temp___606 = n3))
-
-axiom H21 : (in_range9(n3) -> (temp___605 = ptr2))
-
-axiom H22 : (in_range9(n3) -> (((0 <= 2147483647) -> in_range4(ptr3)) and
-  ((0 <= 2147483647) -> in_range4(n4))))
-
-axiom H23 : (in_range9(n3) -> (({ elts = temp___604; rt = temp___6041
-  } = to_string1(ptr3, { rec__names__entry_tables__vector =
-  entry_table__split_fields }, { rec__names__char_tables__vector =
-  char_table__split_fields })) and dynamic_property(1, 2147483647,
-  to_rep1(first(temp___6041)), to_rep1(last(temp___6041)))))
-
-axiom H24 : (in_range9(n3) -> (result4 = bool_eq6(temp___604,
-  to_rep1(first(temp___6041)), to_rep1(last(temp___6041)), s,
-  to_rep1(first(s1)), to_rep1(last(s1)))))
-
-axiom H25 : (in_range9(n3) -> (not (result4 = true)))
-
-axiom H26 : (in_range9(n3) -> (n5 = n4))
-
-axiom H27 : (in_range9(n3) -> (ptr4 = ptr3))
-
-axiom H28 : (in_range9(n3) -> (ptr5 = ptr3))
-
-axiom H29 : (in_range9(n3) -> ((o2 = ptr3) and in_range14(ptr3)))
-
-axiom H30 : (in_range9(n3) -> (({ us_split_fields5 = {
+ (* File "names.adb", line 134, characters 0-0 *)
+goal WP_parameter_def :
+  (forall n:int. forall hash_table:(t,name_id) farray.
+  forall char_table__split_fields:us_main_type1.
+  forall entry_table__split_fields:us_main_type. forall ptr:int.
+  forall c344b:int. forall o:t. forall o1:t.
+  forall names__lookup__h__assume:t. forall temp___669:int.
+  forall temp___668:int. forall temp___667:(int,character) farray.
+  forall temp___6671:t1. forall o2:int. forall o3:char_table_index.
+  forall o4:positive. forall o5:name_id. forall o6:char_table_index.
+  forall o7:positive. forall o8:name_id. forall o9:name_id. forall o10:int.
+  forall temp___671:capacity_range1. forall temp___6711:us_main_type1.
+  forall o11:int. forall o12:int. forall o13:int. forall o14:int.
+  forall o15:int. forall o16:int. forall o17:int. forall o18:name_id.
+  forall o19:positive. forall o20:char_table_index.
+  forall o21:char_table_index. forall o22:positive. forall o23:name_id.
+  forall o24:char_table_index. forall o25:positive. forall o26:name_id.
+  forall o27:int. forall o28:int. forall o29:int.
+  forall temp___675:char_table_index. forall temp___6751:positive.
+  forall temp___6752:name_id. forall o30:name_id.
+  forall o31:char_table_index. forall o32:positive. forall o33:name_id.
+  forall o34:char_table_index. forall o35:positive. forall o36:name_id.
+  forall n1:int. forall char_table__split_fields1:us_main_type1.
+  forall result:int. forall ptr1:int. forall n2:int. forall result1:int.
+  forall n3:int. forall result2:int. forall ptr2:int. forall n4:int.
+  forall ptr3:int. forall result3:bool. forall n5:int. forall result4:bool.
+  forall ptr4:int. forall ptr5:int. forall n6:int. forall ptr6:int.
+  forall n7:int. forall ptr7:int. forall n8:int. forall ptr8:int.
+  forall n9:int. forall ptr9:int. forall n10:int. forall ptr10:int.
+  forall n11:int. forall ptr11:int. forall result5:int. forall c344b1:int.
+  forall char_table__split_fields2:us_main_type1. forall c344b2:int.
+  forall names__char_tables__append__2__container__fields:us_split_fields2.
+  forall result6:us_split_fields__ref1.
+  forall char_table__split_fields3:us_split_fields2.
+  forall char_table__split_fields4:us_split_fields__ref1.
+  forall c344b3:int__ref. forall char_table__split_fields5:us_split_fields2.
+  forall c344b4:int. forall char_table__split_fields6:us_split_fields__ref1.
+  forall c344b5:int__ref. forall char_table__split_fields7:us_split_fields2.
+  forall c344b6:int.
+  forall names__entry_tables__append__2__container__fields:us_split_fields.
+  forall result7:us_split_fields__ref.
+  forall entry_table__split_fields1:us_split_fields. forall result8:int__ref.
+  forall n12:int. ((1024 = to_rep5(char_table__split_discrs)) ->
+  ((128 = to_rep4(entry_table__split_discrs)) -> (dynamic_property(1,
+  2147483647, to_rep1(first(s1)), to_rep1(last(s1))) ->
+  (((0 <= 2147483647) -> in_range4(n)) -> ((invariant__(void) = true) ->
+  (((result = ptr) and (ptr1 = 0)) -> (in_range4(ptr1) -> (((((o = hash({
+  elts = s; rt = s1 })) and (o1 = urem(o, rliteral2))) and
+  ((names__lookup__h__assume = o1) and in_range10(o1))) and
+  (names__lookup__h__assume = h)) -> (in_range10(h) -> (((not (length({
+  elts = s; rt = s1 }) = 0)) and ((n2 = n) and (n2 = n1))) ->
+  (((result1 = n2) and (n3 = to_rep3((hash_table[h])))) ->
+  (((in_range9(n3) and ((((result2 = ptr1) and (ptr2 = n3)) and
+  ((((temp___669 = n3) and ((temp___668 = ptr2) and ((((0 <= 2147483647) ->
+  in_range4(ptr3)) and ((0 <= 2147483647) -> in_range4(n4))) and ((((({
+  elts = temp___667; rt = temp___6671 } = to_string1(ptr3, {
+  rec__names__entry_tables__vector = entry_table__split_fields }, {
+  rec__names__char_tables__vector = char_table__split_fields })) and
+  dynamic_property(1, 2147483647, to_rep1(first(temp___6671)),
+  to_rep1(last(temp___6671)))) and (result3 = bool_eq6(temp___667,
+  to_rep1(first(temp___6671)), to_rep1(last(temp___6671)), s,
+  to_rep1(first(s1)), to_rep1(last(s1))))) and ((not (result3 = true)) and
+  (n5 = n4))) and (((ptr3 = ptr4) and (ptr5 = ptr3)) and
+  ((((((((o2 = ptr3) and in_range14(ptr3)) and (({ us_split_fields5 = {
   rec__names__name_entry__table_index = o3; rec__names__name_entry__length =
   o4; rec__names__name_entry__next_hash = o5 } } = get1(model__1({
   us_split_discrs1 = { rec__names__entry_tables__vector__capacity =
@@ -2625,308 +2225,152 @@ axiom H30 : (in_range9(n3) -> (({ us_split_fields5 = {
   } }, get1(model__1({ us_split_discrs1 = {
   rec__names__entry_tables__vector__capacity = entry_table__split_discrs };
   us_split_fields1 = { rec__names__entry_tables__vector =
-  entry_table__split_fields } }), o2)) = true)))
-
-axiom H31 : (in_range9(n3) -> (o3 = o6))
-
-axiom H32 : (in_range9(n3) -> (o4 = o7))
-
-axiom H33 : (in_range9(n3) -> (o5 = o8))
-
-axiom H34 : (in_range9(n3) -> (o9 = o8))
-
-axiom H35 : (in_range9(n3) -> (o10 = to_rep3(o9)))
-
-axiom H36 : (in_range9(n3) -> (((o10 = 0) -> (result6 = true)) and
-  ((not (o10 = 0)) -> (result6 = false))))
-
-axiom H37 : (in_range9(n3) -> (result6 = true))
-
-axiom H38 : (in_range9(n3) -> (ptr6 = ptr4))
-
-axiom H39 : (in_range9(n3) -> (n6 = n5))
-
-axiom H40 : (in_range9(n3) -> (ptr7 = ptr5))
-
-axiom H41 : (in_range9(n3) -> (n7 = n5))
-
-axiom H42 : (in_range9(n3) -> (ptr8 = ptr6))
-
-axiom H43 : (in_range9(n3) -> (n8 = n6))
-
-axiom H44 : (in_range9(n3) -> (ptr9 = ptr7))
-
-axiom H45 : (in_range9(n3) -> (n9 = n7))
-
-axiom H46 : (in_range9(n3) -> (ptr10 = ptr8))
-
-axiom H47 : (in_range9(n3) -> (n10 = n8))
-
-axiom H48 : (in_range9(n3) -> (ptr11 = ptr9))
-
-axiom H49 : (in_range9(n3) -> (n11 = n9))
-
-axiom H50 : ((not in_range9(n3)) -> (ptr10 = ptr1))
-
-axiom H51 : ((not in_range9(n3)) -> (n10 = n3))
-
-axiom H52 : ((not in_range9(n3)) -> (ptr11 = ptr1))
-
-axiom H53 : ((not in_range9(n3)) -> (n11 = n3))
-
-axiom H54 : (result7 = c344b)
-
-axiom H55 : (c344b2 = to_rep1(first(s1)))
-
-axiom H56 : (((to_rep1(first(s1)) <= c344b2) and
-  (c344b2 <= to_rep1(last(s1)))) ->
-  ((char_table__split_discrs = temp___608) and
-  (char_table__split_fields = temp___6081)))
-
-axiom H57 : (((to_rep1(first(s1)) <= c344b2) and
-  (c344b2 <= to_rep1(last(s1)))) -> ((to_rep1(first(s1)) <= c344b3) and
-  (c344b3 <= to_rep1(last(s1)))))
-
-axiom H58 : (((to_rep1(first(s1)) <= c344b2) and
-  (c344b2 <= to_rep1(last(s1)))) -> (((length1({ us_split_discrs3 = {
+  entry_table__split_fields } }), o2)) = true))) and ((o3 = o6) and
+  ((o4 = o7) and (o5 = o8)))) and (o9 = o8)) and (o10 = to_rep3(o9))) and
+  (((o10 = 0) and (result4 = true)) or ((not (o10 = 0)) and
+  (result4 = false)))) and (result4 = true))))))) and ((({ int__content =
+  ptr6 } = { int__content = ptr4 }) and (n5 = n6)) and ((ptr7 = ptr5) and
+  (n7 = n5)))) and ((({ int__content = ptr8 } = { int__content = ptr6 }) and
+  ({ int__content = n8 } = { int__content = n6 })) and ((ptr9 = ptr7) and
+  (n9 = n7))))) and ((({ int__content = ptr10 } = { int__content = ptr8
+  }) and ({ int__content = n10 } = { int__content = n8 })) and
+  ((ptr11 = ptr9) and (n11 = n9))))) or ((not in_range9(n3)) and
+  (((ptr1 = ptr10) and (n3 = n10)) and ((ptr11 = ptr1) and (n11 = n3))))) ->
+  ((((result5 = c344b) and (c344b1 = to_rep1(first(s1)))) and
+  ((((to_rep1(first(s1)) <= c344b1) and (c344b1 <= to_rep1(last(s1)))) and
+  (((((char_table__split_discrs = temp___671) and
+  (char_table__split_fields = temp___6711)) and
+  (((to_rep1(first(s1)) <= c344b2) and (c344b2 <= to_rep1(last(s1)))) and
+  (((((length1({ us_split_discrs3 = {
+  rec__names__char_tables__vector__capacity = char_table__split_discrs };
+  us_split_fields3 = names__char_tables__append__2__container__fields
+  }) = (length1({ us_split_discrs3 = {
   rec__names__char_tables__vector__capacity = char_table__split_discrs };
   us_split_fields3 = { rec__names__char_tables__vector =
-  names__char_tables__append__2__container__fields } }) = (length1({
+  char_table__split_fields2 } }) + 1)) and ((bool_lt1(length2(model__({
   us_split_discrs3 = { rec__names__char_tables__vector__capacity =
   char_table__split_discrs }; us_split_fields3 = {
-  rec__names__char_tables__vector = char_table__split_fields2 } }) + 1)) and
-  (((bool_lt1(length2(model__({ us_split_discrs3 = {
+  rec__names__char_tables__vector = char_table__split_fields2 } })),
+  length2(model__({ us_split_discrs3 = {
   rec__names__char_tables__vector__capacity = char_table__split_discrs };
-  us_split_fields3 = { rec__names__char_tables__vector =
-  char_table__split_fields2 } })), length2(model__({ us_split_discrs3 = {
-  rec__names__char_tables__vector__capacity = char_table__split_discrs };
-  us_split_fields3 = { rec__names__char_tables__vector =
-  names__char_tables__append__2__container__fields } }))) = true) ->
-  (forall n19:int. (((0 <= n19) and (n19 <= ((- 1) + length2(model__({
+  us_split_fields3 = names__char_tables__append__2__container__fields
+  }))) = true) and
+  (forall n13:int. (((0 <= n13) and (n13 <= ((- 1) + length2(model__({
   us_split_discrs3 = { rec__names__char_tables__vector__capacity =
   char_table__split_discrs }; us_split_fields3 = {
   rec__names__char_tables__vector = char_table__split_fields2 } }))))) ->
   (get(model__({ us_split_discrs3 = {
   rec__names__char_tables__vector__capacity = char_table__split_discrs };
   us_split_fields3 = { rec__names__char_tables__vector =
-  char_table__split_fields2 } }), n19) = get(model__({ us_split_discrs3 = {
+  char_table__split_fields2 } }), n13) = get(model__({ us_split_discrs3 = {
   rec__names__char_tables__vector__capacity = char_table__split_discrs };
-  us_split_fields3 = { rec__names__char_tables__vector =
-  names__char_tables__append__2__container__fields } }), n19))))) and
-  (not (bool_lt1(length2(model__({ us_split_discrs3 = {
+  us_split_fields3 = names__char_tables__append__2__container__fields }),
+  n13)))))) and (get(model__({ us_split_discrs3 = {
   rec__names__char_tables__vector__capacity = char_table__split_discrs };
-  us_split_fields3 = { rec__names__char_tables__vector =
-  char_table__split_fields2 } })), length2(model__({ us_split_discrs3 = {
-  rec__names__char_tables__vector__capacity = char_table__split_discrs };
-  us_split_fields3 = { rec__names__char_tables__vector =
-  names__char_tables__append__2__container__fields } }))) = false)))) and
-  (get(model__({ us_split_discrs3 = {
-  rec__names__char_tables__vector__capacity = char_table__split_discrs };
-  us_split_fields3 = { rec__names__char_tables__vector =
-  names__char_tables__append__2__container__fields } }),
+  us_split_fields3 = names__char_tables__append__2__container__fields }),
   (((- 1) + length2(model__({ us_split_discrs3 = {
   rec__names__char_tables__vector__capacity = char_table__split_discrs };
   us_split_fields3 = { rec__names__char_tables__vector =
-  char_table__split_fields2 } }))) + 1)) = to_rep((s[c344b3])))))
-
-axiom H59 : (((to_rep1(first(s1)) <= c344b2) and
-  (c344b2 <= to_rep1(last(s1)))) -> (result8 = char_table__split_fields2))
-
-axiom H60 : (((to_rep1(first(s1)) <= c344b2) and
-  (c344b2 <= to_rep1(last(s1)))) ->
-  (char_table__split_fields3 = names__char_tables__append__2__container__fields))
-
-axiom H61 : (((to_rep1(first(s1)) <= c344b2) and
-  (c344b2 <= to_rep1(last(s1)))) -> (c344b3 = to_rep1(last(s1))))
-
-axiom H62 : (((to_rep1(first(s1)) <= c344b2) and
-  (c344b2 <= to_rep1(last(s1)))) -> (c344b4 = c344b3))
-
-axiom H63 : (((to_rep1(first(s1)) <= c344b2) and
-  (c344b2 <= to_rep1(last(s1)))) ->
-  (char_table__split_fields4 = char_table__split_fields3))
-
-axiom H64 : (((to_rep1(first(s1)) <= c344b2) and
-  (c344b2 <= to_rep1(last(s1)))) -> (c344b5 = c344b3))
-
-axiom H65 : (((to_rep1(first(s1)) <= c344b2) and
-  (c344b2 <= to_rep1(last(s1)))) ->
-  (char_table__split_fields5 = char_table__split_fields3))
-
-axiom H66 : (((to_rep1(first(s1)) <= c344b2) and
-  (c344b2 <= to_rep1(last(s1)))) -> (c344b6 = c344b4))
-
-axiom H67 : (((to_rep1(first(s1)) <= c344b2) and
-  (c344b2 <= to_rep1(last(s1)))) ->
-  (char_table__split_fields6 = char_table__split_fields4))
-
-axiom H68 : (((to_rep1(first(s1)) <= c344b2) and
-  (c344b2 <= to_rep1(last(s1)))) -> (c344b7 = c344b5))
-
-axiom H69 : (((to_rep1(first(s1)) <= c344b2) and
-  (c344b2 <= to_rep1(last(s1)))) ->
-  (char_table__split_fields7 = char_table__split_fields5))
-
-axiom H70 : ((not ((to_rep1(first(s1)) <= c344b2) and
-  (c344b2 <= to_rep1(last(s1))))) -> (c344b6 = c344b2))
-
-axiom H71 : ((not ((to_rep1(first(s1)) <= c344b2) and
-  (c344b2 <= to_rep1(last(s1))))) ->
-  (char_table__split_fields6 = char_table__split_fields))
-
-axiom H72 : ((not ((to_rep1(first(s1)) <= c344b2) and
-  (c344b2 <= to_rep1(last(s1))))) -> (c344b7 = c344b2))
-
-axiom H73 : ((not ((to_rep1(first(s1)) <= c344b2) and
-  (c344b2 <= to_rep1(last(s1))))) ->
-  (char_table__split_fields7 = char_table__split_fields1))
-
-axiom H74 : (((- 1) + length2(model__({ us_split_discrs3 = {
+  char_table__split_fields2 } }))) + 1)) = to_rep((s[c344b2])))) and
+  ((result6 = { us_split_fields__content1 = {
+  rec__names__char_tables__vector = char_table__split_fields2 } }) and
+  (char_table__split_fields3 = names__char_tables__append__2__container__fields))) and
+  (c344b2 = to_rep1(last(s1)))))) and (((c344b3 = { int__content = c344b2
+  }) and (char_table__split_fields4 = { us_split_fields__content1 =
+  char_table__split_fields3 })) and ((c344b4 = c344b2) and
+  (char_table__split_fields5 = char_table__split_fields3)))) and
+  (((c344b5 = c344b3) and
+  (char_table__split_fields6 = char_table__split_fields4)) and
+  ((c344b6 = c344b4) and
+  (char_table__split_fields7 = char_table__split_fields5))))) or
+  ((not ((to_rep1(first(s1)) <= c344b1) and
+  (c344b1 <= to_rep1(last(s1))))) and (((c344b5 = { int__content = c344b1
+  }) and (char_table__split_fields6 = { us_split_fields__content1 = {
+  rec__names__char_tables__vector = char_table__split_fields } })) and
+  ((c344b6 = c344b1) and (char_table__split_fields7 = {
+  rec__names__char_tables__vector = char_table__split_fields1 })))))) ->
+  ((((- 1) + length2(model__({ us_split_discrs3 = {
   rec__names__char_tables__vector__capacity = char_table__split_discrs };
-  us_split_fields3 = { rec__names__char_tables__vector =
-  char_table__split_fields6 } }))) = (length1({ us_split_discrs3 = {
+  us_split_fields3 = (char_table__split_fields6).us_split_fields__content1
+  }))) = (length1({ us_split_discrs3 = {
   rec__names__char_tables__vector__capacity = char_table__split_discrs };
-  us_split_fields3 = { rec__names__char_tables__vector =
-  char_table__split_fields6 } }) - 1))
-
-axiom H75 : (length1({ us_split_discrs3 = {
+  us_split_fields3 = (char_table__split_fields6).us_split_fields__content1
+  }) - 1)) -> ((length1({ us_split_discrs3 = {
   rec__names__char_tables__vector__capacity = char_table__split_discrs };
-  us_split_fields3 = { rec__names__char_tables__vector =
-  char_table__split_fields6 } }) <= 2147483647)
-
-axiom H76 : (((- 1) + length2(model__({ us_split_discrs3 = {
+  us_split_fields3 = (char_table__split_fields6).us_split_fields__content1
+  }) <= 2147483647) -> ((((- 1) + length2(model__({ us_split_discrs3 = {
   rec__names__char_tables__vector__capacity = char_table__split_discrs };
-  us_split_fields3 = { rec__names__char_tables__vector =
-  char_table__split_fields6 } }))) <= 2147483646)
-
-axiom H77 : (to_rep3(o22) = 0)
-
-axiom H78 : ((o21 = length({ elts = s; rt = s1 })) and in_range2(length({
-  elts = s; rt = s1 })))
-
-axiom H79 : (to_rep2(o23) = o21)
-
-axiom H80 : ((o15 = length({ elts = s; rt = s1 })) and in_range11(length({
-  elts = s; rt = s1 })))
-
-axiom H81 : (o16 = (o15 - 1))
-
-axiom H82 : ((o17 = ((- 1) + length2(model__({ us_split_discrs3 = {
+  us_split_fields3 = (char_table__split_fields6).us_split_fields__content1
+  }))) <= 2147483646) -> ((((((to_rep3(o18) = 0) and ((((o17 = length({
+  elts = s; rt = s1 })) and in_range2(length({ elts = s; rt = s1 }))) and
+  (to_rep2(o19) = o17)) and ((((((((o11 = length({ elts = s; rt = s1 })) and
+  in_range11(length({ elts = s; rt = s1 }))) and (o12 = (o11 - 1))) and
+  (((o13 = ((- 1) + length2(model__({ us_split_discrs3 = {
   rec__names__char_tables__vector__capacity = char_table__split_discrs };
-  us_split_fields3 = { rec__names__char_tables__vector =
-  char_table__split_fields6 } })))) and (in_range13(o17) and
-  (o17 = ((- 1) + length2(model__({ us_split_discrs3 = {
-  rec__names__char_tables__vector__capacity = char_table__split_discrs };
-  us_split_fields3 = { rec__names__char_tables__vector =
-  char_table__split_fields6 } }))))))
-
-axiom H83 : (o18 = (o17 - o16))
-
-axiom H84 : ((o19 = o18) and in_range11(o18))
-
-axiom H85 : ((o20 = o19) and in_range12(o19))
-
-axiom H86 : (to_rep6(o24) = o20)
-
-axiom H87 : (o24 = o25)
-
-axiom H88 : (o23 = o26)
-
-axiom H89 : (o22 = o27)
-
-axiom H90 : (o28 = o25)
-
-axiom H91 : (o29 = o26)
-
-axiom H92 : (o30 = o27)
-
-axiom H93 : (((length4({ us_split_discrs1 = {
+  us_split_fields3 = (char_table__split_fields6).us_split_fields__content1
+  })))) and (in_range13(o13) and (o13 = ((- 1) + length2(model__({
+  us_split_discrs3 = { rec__names__char_tables__vector__capacity =
+  char_table__split_discrs }; us_split_fields3 =
+  (char_table__split_fields6).us_split_fields__content1 })))))) and
+  (o14 = (o13 - o12)))) and ((o15 = o14) and in_range11(o14))) and
+  ((o16 = o15) and in_range12(o15))) and (to_rep6(o20) = o16)) and
+  ((o20 = o21) and ((o19 = o22) and (o18 = o23)))))) and ((o24 = o21) and
+  ((o25 = o22) and (o26 = o23)))) and (((length4({ us_split_discrs1 = {
+  rec__names__entry_tables__vector__capacity = entry_table__split_discrs };
+  us_split_fields1 = names__entry_tables__append__2__container__fields
+  }) = (length4({ us_split_discrs1 = {
   rec__names__entry_tables__vector__capacity = entry_table__split_discrs };
   us_split_fields1 = { rec__names__entry_tables__vector =
-  names__entry_tables__append__2__container__fields } }) = (length4({
+  entry_table__split_fields } }) + 1)) and ((bool_lt1(length3(model__1({
   us_split_discrs1 = { rec__names__entry_tables__vector__capacity =
   entry_table__split_discrs }; us_split_fields1 = {
-  rec__names__entry_tables__vector = entry_table__split_fields } }) + 1)) and
-  (((bool_lt1(length3(model__1({ us_split_discrs1 = {
+  rec__names__entry_tables__vector = entry_table__split_fields } })),
+  length3(model__1({ us_split_discrs1 = {
   rec__names__entry_tables__vector__capacity = entry_table__split_discrs };
-  us_split_fields1 = { rec__names__entry_tables__vector =
-  entry_table__split_fields } })), length3(model__1({ us_split_discrs1 = {
-  rec__names__entry_tables__vector__capacity = entry_table__split_discrs };
-  us_split_fields1 = { rec__names__entry_tables__vector =
-  names__entry_tables__append__2__container__fields } }))) = true) ->
-  (forall n19:int. (((1 <= n19) and (n19 <= (0 + length3(model__1({
+  us_split_fields1 = names__entry_tables__append__2__container__fields
+  }))) = true) and
+  (forall n13:int. (((1 <= n13) and (n13 <= (0 + length3(model__1({
   us_split_discrs1 = { rec__names__entry_tables__vector__capacity =
   entry_table__split_discrs }; us_split_fields1 = {
   rec__names__entry_tables__vector = entry_table__split_fields } }))))) ->
   (bool_eq20(get1(model__1({ us_split_discrs1 = {
   rec__names__entry_tables__vector__capacity = entry_table__split_discrs };
   us_split_fields1 = { rec__names__entry_tables__vector =
-  entry_table__split_fields } }), n19), get1(model__1({ us_split_discrs1 = {
+  entry_table__split_fields } }), n13), get1(model__1({ us_split_discrs1 = {
   rec__names__entry_tables__vector__capacity = entry_table__split_discrs };
-  us_split_fields1 = { rec__names__entry_tables__vector =
-  names__entry_tables__append__2__container__fields } }), n19)) = true)))) and
-  (not (bool_lt1(length3(model__1({ us_split_discrs1 = {
+  us_split_fields1 = names__entry_tables__append__2__container__fields }),
+  n13)) = true))))) and (bool_eq20(get1(model__1({ us_split_discrs1 = {
   rec__names__entry_tables__vector__capacity = entry_table__split_discrs };
-  us_split_fields1 = { rec__names__entry_tables__vector =
-  entry_table__split_fields } })), length3(model__1({ us_split_discrs1 = {
-  rec__names__entry_tables__vector__capacity = entry_table__split_discrs };
-  us_split_fields1 = { rec__names__entry_tables__vector =
-  names__entry_tables__append__2__container__fields } }))) = false)))) and
-  (bool_eq20(get1(model__1({ us_split_discrs1 = {
-  rec__names__entry_tables__vector__capacity = entry_table__split_discrs };
-  us_split_fields1 = { rec__names__entry_tables__vector =
-  names__entry_tables__append__2__container__fields } }),
+  us_split_fields1 = names__entry_tables__append__2__container__fields }),
   ((0 + length3(model__1({ us_split_discrs1 = {
   rec__names__entry_tables__vector__capacity = entry_table__split_discrs };
   us_split_fields1 = { rec__names__entry_tables__vector =
   entry_table__split_fields } }))) + 1)), { us_split_fields5 = {
-  rec__names__name_entry__table_index = o28; rec__names__name_entry__length =
-  o29; rec__names__name_entry__next_hash = o30 } }) = true))
-
-axiom H94 : (result9 = entry_table__split_fields)
-
-axiom H95 :
-  (entry_table__split_fields2 = names__entry_tables__append__2__container__fields)
-
-axiom H96 : ((o31 = (0 + length3(model__1({ us_split_discrs1 = {
+  rec__names__name_entry__table_index = o24; rec__names__name_entry__length =
+  o25; rec__names__name_entry__next_hash = o26 } }) = true))) and
+  ((result7 = { us_split_fields__content = {
+  rec__names__entry_tables__vector = entry_table__split_fields } }) and
+  (entry_table__split_fields1 = names__entry_tables__append__2__container__fields))) ->
+  ((((o27 = (0 + length3(model__1({ us_split_discrs1 = {
   rec__names__entry_tables__vector__capacity = entry_table__split_discrs };
-  us_split_fields1 = { rec__names__entry_tables__vector =
-  entry_table__split_fields2 } })))) and (in_range15(o31) and
-  (o31 = (0 + length3(model__1({ us_split_discrs1 = {
+  us_split_fields1 = entry_table__split_fields1 })))) and
+  (in_range15(o27) and (o27 = (0 + length3(model__1({ us_split_discrs1 = {
   rec__names__entry_tables__vector__capacity = entry_table__split_discrs };
-  us_split_fields1 = { rec__names__entry_tables__vector =
-  entry_table__split_fields2 } }))))))
-
-axiom H97 : (result10 = n10)
-
-axiom H98 : (n12 = o31)
-
-axiom H99 : in_range9(ptr10)
-
-axiom H100 : ((o33 = ptr10) and in_range14(ptr10))
-
-axiom H101 : (({ us_split_fields5 = { rec__names__name_entry__table_index =
-  temp___612; rec__names__name_entry__length = temp___6121;
-  rec__names__name_entry__next_hash = temp___6122 } } = get1(model__1({
+  us_split_fields1 = entry_table__split_fields1 })))))) and ((result8 = {
+  int__content = n10 }) and (n12 = o27))) -> (in_range9(ptr10) ->
+  (((((o29 = ptr10) and in_range14(ptr10)) and (({ us_split_fields5 = {
+  rec__names__name_entry__table_index = temp___675;
+  rec__names__name_entry__length = temp___6751;
+  rec__names__name_entry__next_hash = temp___6752 } } = get1(model__1({
   us_split_discrs1 = { rec__names__entry_tables__vector__capacity =
-  entry_table__split_discrs }; us_split_fields1 = {
-  rec__names__entry_tables__vector = entry_table__split_fields2 } }),
-  o33)) and (bool_eq20({ us_split_fields5 = {
-  rec__names__name_entry__table_index = temp___612;
-  rec__names__name_entry__length = temp___6121;
-  rec__names__name_entry__next_hash = temp___6122 } }, get1(model__1({
+  entry_table__split_discrs }; us_split_fields1 = entry_table__split_fields1
+  }), o29)) and (bool_eq20({ us_split_fields5 = {
+  rec__names__name_entry__table_index = temp___675;
+  rec__names__name_entry__length = temp___6751;
+  rec__names__name_entry__next_hash = temp___6752 } }, get1(model__1({
   us_split_discrs1 = { rec__names__entry_tables__vector__capacity =
-  entry_table__split_discrs }; us_split_fields1 = {
-  rec__names__entry_tables__vector = entry_table__split_fields2 } }),
-  o33)) = true))
-
-axiom H102 : (to_rep3(o34) = n12)
-
-axiom H103 : ((o35 = temp___612) and ((o36 = temp___6121) and (o37 = o34)))
-
-axiom H104 : ((o38 = o35) and ((o39 = o36) and (o40 = o37)))
-
-axiom H105 : ((o32 = ptr10) and in_range14(ptr10))
-
- (* File "names.adb", line 134, characters 0-0 *)
-goal WP_parameter_def : (1 <= o32)
+  entry_table__split_discrs }; us_split_fields1 = entry_table__split_fields1
+  }), o29)) = true))) and (((to_rep3(o30) = n12) and ((temp___675 = o31) and
+  ((temp___6751 = o32) and (o30 = o33)))) and ((o34 = o31) and
+  ((o35 = o32) and (o36 = o33))))) -> (((o28 = ptr10) and
+  in_range14(ptr10)) -> (1 <= o28)))))))))))))))))))))))

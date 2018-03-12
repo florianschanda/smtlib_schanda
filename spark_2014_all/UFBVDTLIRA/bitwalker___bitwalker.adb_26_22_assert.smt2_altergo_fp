@@ -601,12 +601,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -618,6 +612,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -735,56 +735,19 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 axiom left_bv__def_axiom : (left_bv = of_int(left))
 
-axiom mask__def_axiom : (mask = lsl_bv(of_int(1), of_int((63 - left))))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 1)
+
+axiom mask__def_axiom : (mask = lsl_bv(rliteral, of_int((63 - left))))
 
 axiom r__def_axiom : (((flag = true) -> (r = bw_or(value, mask))) and
   ((not (flag = true)) -> (r = bw_and(value, bw_not(mask)))))
 
-logic bitwalker__pokebit64__result : t
+logic rliteral1 : t
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : t
-
-logic bitwalker__pokebit64__B_1__mask__assume : t
-
-logic bitwalker__pokebit64__B_1__r__assume : t
-
-logic i : t
-
-logic i1 : int
-
-logic o3 : int
-
-logic o4 : bool
-
-logic o5 : int
-
-logic o6 : bool
-
-logic result : t
-
-logic bitwalker__pokebit64__result1 : t
-
-logic bitwalker__pokebit64__result2 : t
-
-logic bitwalker__pokebit64__result3 : t
-
-logic bitwalker__pokebit64__result4 : t
-
-logic bitwalker__pokebit64__result5 : t
-
-axiom H : true
-
-axiom H1 : in_range1(left)
-
-axiom H2 : (left <  64)
-
-axiom H3 : (of_int(left) = left_bv)
-
-axiom H4 : true
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 64)
 
  (* File "interfac.ads", line 77, characters 0-0 *)
-goal WP_parameter_def : ult(left_bv, of_int(64))
+goal WP_parameter_def : (in_range1(left) -> ((left <  64) ->
+  ((of_int(left) = left_bv) -> ult(left_bv, rliteral1))))

@@ -114,27 +114,8 @@ axiom get_x__post_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic z : int
-
-logic x : us_private
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range(z))
-
-axiom H1 : ((o = get_x(x)) and in_range(o))
-
-axiom H2 : (o1 = (o * 2))
-
  (* File "test.adb", line 61, characters 0-0 *)
-goal WP_parameter_def : in_range(o1)
+goal WP_parameter_def :
+  (forall z:int. forall x:us_private. forall o:int. forall o1:int.
+  ((((- 2147483648) <= 2147483647) -> in_range(z)) -> ((((o = get_x(x)) and
+  in_range(o)) and (o1 = (o * 2))) -> in_range(o1))))

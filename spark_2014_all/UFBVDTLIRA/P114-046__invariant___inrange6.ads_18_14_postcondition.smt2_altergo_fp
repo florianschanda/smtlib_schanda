@@ -601,12 +601,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -618,6 +612,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -699,112 +699,66 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic i : t
+logic rliteral : t
 
-logic matched : bool
+axiom rliteral_axiom : (tqtint(rliteral) = 2)
 
-logic inrange6__inrange64__result : bool
+logic rliteral1 : t
 
-logic result : t
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 65535)
 
-logic i1 : t
+logic rliteral2 : t
 
-logic result1 : bool
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 0)
 
-logic matched1 : bool
+logic rliteral3 : t
 
-logic result2 : bool
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 18446744073709551615)
 
-logic matched2 : bool
+logic rliteral4 : t
 
-logic result3 : bool
-
-logic inrange6__inrange64__result1 : bool
-
-logic inrange6__inrange64__result2 : bool
-
-logic inrange6__inrange64__result3 : bool
-
-logic i2 : t
-
-logic matched3 : bool
-
-logic inrange6__inrange64__result4 : bool
-
-logic i3 : t
-
-logic matched4 : bool
-
-logic inrange6__inrange64__result5 : bool
-
-logic result4 : bool
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : true
-
-axiom H3 : (uge(range_size, of_int(2)) and ule(range_size, of_int(65535)))
-
-axiom H4 : (result = i)
-
-axiom H5 : (i1 = of_int(0))
-
-axiom H6 : true
-
-axiom H7 : (ule(bottom, add(sub(of_int(18446744073709551615), range_size),
-  of_int(1))) -> (result1 = matched))
-
-axiom H8 : (ule(bottom, add(sub(of_int(18446744073709551615), range_size),
-  of_int(1))) -> ((ule(bottom, var) -> ((ule(var, sub(add(bottom,
-  range_size), of_int(1))) -> (matched1 = true)) and ((not ule(var,
-  sub(add(bottom, range_size), of_int(1)))) -> (matched1 = false)))) and
-  ((not ule(bottom, var)) -> (matched1 = false))))
-
-axiom H9 : ((not ule(bottom, add(sub(of_int(18446744073709551615),
-  range_size), of_int(1)))) -> (result2 = matched))
-
-axiom H10 : ((not ule(bottom, add(sub(of_int(18446744073709551615),
-  range_size), of_int(1)))) -> ((ule(bottom, var) -> ((ult(var,
-  sub(sub(range_size, sub(of_int(18446744073709551615), bottom)),
-  of_int(1))) -> (matched2 = match_bool(of_int1(1), true, true))) and
-  ((not ult(var, sub(sub(range_size, sub(of_int(18446744073709551615),
-  bottom)), of_int(1)))) -> (matched2 = match_bool(of_int1(1), true,
-  false))))) and ((not ule(bottom, var)) -> ((ult(var, sub(sub(range_size,
-  sub(of_int(18446744073709551615), bottom)), of_int(1))) ->
-  (matched2 = match_bool(false, true, true))) and ((not ult(var,
-  sub(sub(range_size, sub(of_int(18446744073709551615), bottom)),
-  of_int(1)))) -> (matched2 = match_bool(false, true, false)))))))
-
-axiom H11 : ((not ule(bottom, add(sub(of_int(18446744073709551615),
-  range_size), of_int(1)))) -> (matched1 = matched2))
-
-axiom H12 : (inrange6__inrange64__result1 = inrange6__inrange64__result2)
-
-axiom H13 : (inrange6__inrange64__result3 = inrange6__inrange64__result1)
-
-axiom H14 : (result3 = inrange6__inrange64__result)
-
-axiom H15 : (inrange6__inrange64__result1 = matched1)
-
-axiom H16 : (inrange6__inrange64__result4 = inrange6__inrange64__result2)
-
-axiom H17 : (matched1 = matched3)
-
-axiom H18 : (i1 = i2)
-
-axiom H19 : (inrange6__inrange64__result5 = inrange6__inrange64__result3)
-
-axiom H20 : (matched4 = matched1)
-
-axiom H21 : (i3 = i1)
-
-axiom H22 : (result4 = inrange6__inrange64__result4)
-
-axiom H23 : (inrange6__inrange64__result4 = true)
+axiom rliteral_axiom4 : (tqtint(rliteral4) = 1)
 
  (* File "inrange6.ads", line 15, characters 0-0 *)
 goal WP_parameter_def :
-  (exists n:t. ((ule(of_int(0), n) and ule(n, sub(range_size,
-  of_int(1)))) and (var = add(bottom, n))))
+  (forall i:t. forall matched:bool. forall inrange6__inrange64__result:bool.
+  forall result:t. forall i1:t. forall result1:bool. forall matched1:bool.
+  forall result2:bool. forall matched2:bool. forall result3:bool.
+  forall inrange6__inrange64__result1:bool.
+  forall inrange6__inrange64__result2:bool.
+  forall inrange6__inrange64__result3:bool. forall i2:t.
+  forall matched3:bool. forall inrange6__inrange64__result4:bool.
+  forall i3:t. forall matched4:bool.
+  forall inrange6__inrange64__result5:bool.
+  (forall result4:bool. (((uge(range_size, rliteral) and ule(range_size,
+  rliteral1)) and ((((({ t__content = result } = { t__content = i }) and
+  (i1 = rliteral2)) and (((ule(bottom, add(sub(rliteral3, range_size),
+  rliteral4)) and (({ bool__content = result1 } = { bool__content = matched
+  }) and ((ule(bottom, var) and ((ule(var, sub(add(bottom, range_size),
+  rliteral4)) and (matched1 = true)) or ((not ule(var, sub(add(bottom,
+  range_size), rliteral4))) and (matched1 = false)))) or ((not ule(bottom,
+  var)) and (matched1 = false))))) or ((not ule(bottom, add(sub(rliteral3,
+  range_size), rliteral4))) and ((({ bool__content = result2 } = {
+  bool__content = matched }) and ((ule(bottom, var) and ((ult(var,
+  sub(sub(range_size, sub(rliteral3, bottom)), rliteral4)) and
+  (matched2 = match_bool(of_int1(1), true, true))) or ((not ult(var,
+  sub(sub(range_size, sub(rliteral3, bottom)), rliteral4))) and
+  (matched2 = match_bool(of_int1(1), true, false))))) or ((not ule(bottom,
+  var)) and ((ult(var, sub(sub(range_size, sub(rliteral3, bottom)),
+  rliteral4)) and (matched2 = match_bool(false, true, true))) or
+  ((not ult(var, sub(sub(range_size, sub(rliteral3, bottom)),
+  rliteral4))) and (matched2 = match_bool(false, true, false))))))) and
+  (matched1 = matched2)))) and
+  (((inrange6__inrange64__result1 = inrange6__inrange64__result2) and
+  (inrange6__inrange64__result3 = inrange6__inrange64__result1)) and (({
+  bool__content = result3 } = { bool__content = inrange6__inrange64__result
+  }) and (inrange6__inrange64__result1 = matched1))))) and ((({
+  bool__content = inrange6__inrange64__result4 } = { bool__content =
+  inrange6__inrange64__result2 }) and ((matched1 = matched3) and
+  (i1 = i2))) and
+  ((inrange6__inrange64__result5 = inrange6__inrange64__result3) and
+  ((matched4 = matched1) and (i3 = i1))))) and
+  (result4 = inrange6__inrange64__result4))) ->
+  ((inrange6__inrange64__result4 = true) ->
+  (exists n:t. ((ule(rliteral2, n) and ule(n, sub(range_size,
+  rliteral4))) and (var = add(bottom, n))))))))

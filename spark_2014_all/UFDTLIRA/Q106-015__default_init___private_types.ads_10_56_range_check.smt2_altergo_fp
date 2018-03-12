@@ -185,15 +185,8 @@ axiom one__def_axiom : (one = id(1))
 
 axiom first__def_axiom : (first = one)
 
-logic us : int
-
-logic temp___147 : int
-
-logic us1 : int
-
-axiom H : ((us = 0) and dynamic_property(first, 2147483647, 0))
-
-axiom H1 : (temp___147 = 0)
-
  (* File "private_types.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : dynamic_property(first, 2147483647, temp___147)
+goal WP_parameter_def :
+  (forall us:int. forall temp___171:int. ((((us = 0) and
+  dynamic_property(first, 2147483647, 0)) and (temp___171 = 0)) ->
+  dynamic_property(first, 2147483647, temp___171)))

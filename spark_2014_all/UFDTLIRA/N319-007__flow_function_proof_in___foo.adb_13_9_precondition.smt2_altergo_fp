@@ -123,15 +123,7 @@ axiom f__post_axiom : ((0 <  b) -> in_range(f(void)))
 
 axiom f__def_axiom : (f(void) = a)
 
-logic c : int
-
-logic o : int
-
-axiom H : in_range(a)
-
-axiom H1 : in_range(b)
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range(c))
-
  (* File "foo.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : (0 <  b)
+goal WP_parameter_def :
+  (forall c:int. (in_range(a) -> (in_range(b) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(c)) -> (0 <  b)))))

@@ -599,12 +599,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -616,6 +610,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -770,94 +770,6 @@ axiom c__post_axiom : (forall s:t [c(s)]. in_range2(c(s)))
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
-
-logic v1raw : t
-
-logic x : int
-
-logic t1 : int
-
-logic tmp : t
-
-logic o : t
-
-logic o1 : int
-
-logic o2 : int
-
-logic v1raw1 : t
-
-logic result : t
-
-logic tmp1 : t
-
-logic result1 : int
-
-logic t2 : int
-
-logic result2 : int
-
-logic x1 : int
-
-logic v1raw2 : t
-
-logic x2 : int
-
-logic t3 : int
-
-logic tmp2 : t
-
-logic v1raw3 : t
-
-logic x3 : int
-
-logic t4 : int
-
-logic tmp3 : t
-
-axiom H : true
-
-axiom H1 : ((0 <= 17) -> in_range1(x))
-
-axiom H2 : ((0 <= 17) -> in_range1(t1))
-
-axiom H3 : true
-
-axiom H4 : true
-
-axiom H5 : (o = v1raw1)
-
-axiom H6 : (result = tmp)
-
-axiom H7 : (tmp1 = o)
-
-axiom H8 : ((o1 = c(tmp1)) and in_range2(o1))
-
-axiom H9 : ((o2 = o1) and in_range1(o1))
-
-axiom H10 : (result1 = t1)
-
-axiom H11 : (t2 = o2)
-
-axiom H12 : (result2 = x)
-
-axiom H13 : (x1 = t2)
-
-axiom H14 : (tmp2 = tmp1)
-
-axiom H15 : (t3 = t2)
-
-axiom H16 : (x1 = x2)
-
-axiom H17 : (v1raw2 = v1raw1)
-
-axiom H18 : (tmp3 = tmp1)
-
-axiom H19 : (t4 = t2)
-
-axiom H20 : (x3 = x1)
-
-axiom H21 : (v1raw3 = v1raw1)
 
  (* File "port.ads", line 21, characters 0-0 *)
 goal WP_parameter_def : true

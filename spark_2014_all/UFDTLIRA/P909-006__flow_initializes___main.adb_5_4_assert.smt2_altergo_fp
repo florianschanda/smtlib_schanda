@@ -112,7 +112,5 @@ function integer__ref___projection(a: integer__ref) : integer =
 axiom proxy__post_axiom :
   (forall state__v:us_private [proxy(state__v)]. in_range(proxy(state__v)))
 
-logic v : us_private
-
  (* File "main.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (proxy(v) = 0)
+goal WP_parameter_def : (forall v:us_private. (proxy(v) = 0))

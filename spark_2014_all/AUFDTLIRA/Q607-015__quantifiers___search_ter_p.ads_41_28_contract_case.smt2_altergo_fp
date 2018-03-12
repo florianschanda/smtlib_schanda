@@ -81,12 +81,6 @@ axiom bool_ge_axiom :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -98,6 +92,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -188,24 +188,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> (int,integer) farray
-
-axiom concat_def :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : integer, int -> (int,integer) farray
-
-axiom singleton_def :
-  (forall v:integer.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,integer) farray, int, int, (int,integer) farray, int,
   int -> bool
 
@@ -216,17 +198,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -236,37 +218,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type t
 
@@ -627,415 +581,167 @@ function t4b__ref___projection(a2: t4b__ref) : integer = (a2).t4b__content
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic result____split_fields : bool
-
-logic result____split_fields1 : integer
-
-logic i : int
-
-logic search_ter_p__search__result : bool
-
-logic search_ter_p__search__result1 : integer
-
-logic o : integer
-
-logic o1 : bool
-
-logic o2 : integer
-
-logic search_ter_p__search__result__assume : bool
-
-logic search_ter_p__search__result__assume1 : integer
-
-logic temp___203 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic temp___204 : int
-
-logic temp___201 : bool
-
-logic temp___2011 : integer
-
-logic temp___200 : int
-
-logic temp___202 : int
-
-logic o6 : integer
-
-logic o7 : bool
-
-logic o8 : integer
-
-logic temp___199 : bool
-
-logic temp___1991 : integer
-
-logic o9 : bool
-
-logic o10 : integer
-
-logic o11 : bool
-
-logic o12 : integer
-
-logic temp___1992 : bool
-
-logic temp___1993 : integer
-
-logic o13 : int
-
-logic o14 : bool
-
-logic i1 : int
-
-logic search_ter_p__search__result2 : bool
-
-logic search_ter_p__search__result3 : integer
-
-logic result : bool
-
-logic result1 : integer
-
-logic result____split_fields2 : bool
-
-logic result____split_fields3 : integer
-
-logic result2 : bool
-
-logic result3 : bool
-
-logic result4 : integer
-
-logic search_ter_p__search__result4 : bool
-
-logic search_ter_p__search__result5 : integer
-
-logic result5 : int
-
-logic i2 : int
-
-logic temp___2021 : int
-
-logic result6 : bool
-
-logic result7 : bool
-
-logic result8 : integer
-
-logic result____split_fields4 : bool
-
-logic result____split_fields5 : integer
-
-logic result9 : bool
-
-logic result10 : integer
-
-logic result____split_fields6 : bool
-
-logic result____split_fields7 : integer
-
-logic result11 : bool
-
-logic result12 : integer
-
-logic search_ter_p__search__result6 : bool
-
-logic search_ter_p__search__result7 : integer
-
-logic result____split_fields8 : bool
-
-logic result____split_fields9 : integer
-
-logic i3 : int
-
-logic search_ter_p__search__result8 : bool
-
-logic search_ter_p__search__result9 : integer
-
-logic temp___2022 : int
-
-logic result13 : int
-
-logic temp___2023 : int
-
-logic result14 : int
-
-logic i4 : int
-
-logic result15 : bool
-
-logic result16 : bool
-
-logic result17 : integer
-
-logic result____split_fields10 : bool
-
-logic result____split_fields11 : integer
-
-logic result18 : bool
-
-logic result19 : integer
-
-logic result____split_fields12 : bool
-
-logic result____split_fields13 : integer
-
-logic result20 : bool
-
-logic result21 : integer
-
-logic search_ter_p__search__result10 : bool
-
-logic search_ter_p__search__result11 : integer
-
-logic result____split_fields14 : bool
-
-logic result____split_fields15 : integer
-
-logic i5 : int
-
-logic search_ter_p__search__result12 : bool
-
-logic search_ter_p__search__result13 : integer
-
-logic temp___2024 : int
-
-logic result____split_fields16 : bool
-
-logic result____split_fields17 : integer
-
-logic i6 : int
-
-logic search_ter_p__search__result14 : bool
-
-logic search_ter_p__search__result15 : integer
-
-logic temp___2025 : int
-
-logic result____split_fields18 : bool
-
-logic result____split_fields19 : integer
-
-logic i7 : int
-
-logic search_ter_p__search__result16 : bool
-
-logic search_ter_p__search__result17 : integer
-
-logic result____split_fields20 : bool
-
-logic result____split_fields21 : integer
-
-logic i8 : int
-
-logic search_ter_p__search__result18 : bool
-
-logic search_ter_p__search__result19 : integer
-
-logic result____split_fields22 : bool
-
-logic result____split_fields23 : integer
-
-logic i9 : int
-
-logic search_ter_p__search__result20 : bool
-
-logic search_ter_p__search__result21 : integer
-
-logic result____split_fields24 : bool
-
-logic result____split_fields25 : integer
-
-logic i10 : int
-
-logic search_ter_p__search__result22 : bool
-
-logic search_ter_p__search__result23 : integer
-
-logic result22 : bool
-
-logic result23 : integer
-
-logic search_ter_p__search__result24 : bool
-
-logic search_ter_p__search__result25 : integer
-
-logic search_ter_p__search__result26 : bool
-
-logic search_ter_p__search__result27 : integer
-
-logic search_ter_p__search__result28 : bool
-
-logic search_ter_p__search__result29 : integer
-
-logic result____split_fields26 : bool
-
-logic result____split_fields27 : integer
-
-logic i11 : int
-
-logic search_ter_p__search__result30 : bool
-
-logic search_ter_p__search__result31 : integer
-
-logic result____split_fields28 : bool
-
-logic result____split_fields29 : integer
-
-logic i12 : int
-
-logic search_ter_p__search__result32 : bool
-
-logic search_ter_p__search__result33 : integer
-
-logic result____split_fields30 : bool
-
-logic result____split_fields31 : integer
-
-logic i13 : int
-
-logic search_ter_p__search__result34 : bool
-
-logic search_ter_p__search__result35 : integer
-
-logic result____split_fields32 : bool
-
-logic result____split_fields33 : integer
-
-logic i14 : int
-
-logic search_ter_p__search__result36 : bool
-
-logic search_ter_p__search__result37 : integer
-
-logic result____split_fields34 : bool
-
-logic result____split_fields35 : integer
-
-logic i15 : int
-
-logic search_ter_p__search__result38 : bool
-
-logic search_ter_p__search__result39 : integer
-
-logic result____split_fields36 : bool
-
-logic result____split_fields37 : integer
-
-logic i16 : int
-
-logic search_ter_p__search__result40 : bool
-
-logic search_ter_p__search__result41 : integer
-
-logic result24 : bool
-
-axiom H : dynamic_property(1, 2147483647, to_rep(first(a1)),
-  to_rep(last(a1)))
-
-axiom H1 : dynamic_property(1, 2147483647, to_rep(first(b1)),
-  to_rep(last(b1)))
-
-axiom H2 : ((to_rep(last(a1)) <  2147483647) and
-  (to_rep(first(b1)) <= to_rep(last(b1))))
-
-axiom H3 : (to_rep(o) = 1)
-
-axiom H4 : (of_int(0) = o1)
-
-axiom H5 : (o = o2)
-
-axiom H6 : (search_ter_p__search__result__assume = o1)
-
-axiom H7 : (search_ter_p__search__result__assume1 = o2)
-
-axiom H8 : ((result = result____split_fields) and
-  (result1 = result____split_fields1))
-
-axiom H9 :
-  ((result____split_fields2 = search_ter_p__search__result__assume) and
-  (result____split_fields3 = search_ter_p__search__result__assume1))
-
-axiom H10 :
-  ((((((search_ter_p__search__result34 = search_ter_p__search__result4) and
-  (search_ter_p__search__result35 = search_ter_p__search__result5)) and
-  ((i13 = i) and ((result____split_fields30 = result____split_fields2) and
-  (result____split_fields31 = result____split_fields3)))) and
-  (((search_ter_p__search__result36 = search_ter_p__search__result4) and
-  (search_ter_p__search__result37 = search_ter_p__search__result5)) and
-  ((i14 = i1) and ((result____split_fields32 = result____split_fields2) and
-  (result____split_fields33 = result____split_fields3))))) and ((((length({
-  elts = a; rt = a1 }) <  length({ elts = b; rt = b1 })) ->
-  (result2 = true)) and ((not (length({ elts = a; rt = a1 }) <  length({
-  elts = b; rt = b1 }))) -> (((length({ elts = b; rt = b1 }) = 0) ->
-  (result2 = true)) and ((not (length({ elts = b; rt = b1 }) = 0)) ->
-  (result2 = false))))) and ((result2 = true) and
-  (((result3 = search_ter_p__search__result) and
+ (* File "types.ads", line 11, characters 0-0 *)
+goal WP_parameter_def :
+  (forall result____split_fields:bool.
+  forall result____split_fields1:integer. forall i:int.
+  forall search_ter_p__search__result:bool.
+  forall search_ter_p__search__result1:integer. forall o:integer.
+  forall o1:bool. forall o2:integer.
+  forall search_ter_p__search__result__assume:bool.
+  forall search_ter_p__search__result__assume1:integer.
+  forall temp___229:int. forall o3:int. forall o4:int. forall o5:int.
+  forall temp___230:int. forall temp___227:bool. forall temp___2271:integer.
+  forall temp___226:int. forall temp___228:int. forall o6:integer.
+  forall o7:bool. forall o8:integer. forall temp___225:bool.
+  forall temp___2251:integer. forall o9:integer. forall o10:bool.
+  forall o11:integer. forall temp___2252:bool. forall temp___2253:integer.
+  forall i1:int. forall search_ter_p__search__result2:bool.
+  forall search_ter_p__search__result3:integer. forall result:bool.
+  forall result1:integer. forall result____split_fields2:bool.
+  forall result____split_fields3:integer. forall result2:bool.
+  forall result3:bool. forall result4:integer.
+  forall search_ter_p__search__result4:bool.
+  forall search_ter_p__search__result5:integer. forall result5:int.
+  forall i2:int. forall temp___2281:int. forall result6:bool.
+  forall result7:bool. forall result8:integer.
+  forall result____split_fields4:bool.
+  forall result____split_fields5:integer. forall result9:bool.
+  forall result10:integer. forall result____split_fields6:bool.
+  forall result____split_fields7:integer. forall result11:bool.
+  forall result12:integer. forall search_ter_p__search__result6:bool.
+  forall search_ter_p__search__result7:integer.
+  forall result____split_fields8:bool.
+  forall result____split_fields9:integer. forall i3:int.
+  forall search_ter_p__search__result8:bool.
+  forall search_ter_p__search__result9:integer. forall temp___2282:int.
+  forall result13:int__ref. forall temp___2283:int. forall result14:int__ref.
+  forall i4:int. forall result15:bool. forall result16:us_split_fields__ref.
+  forall result____split_fields10:us_split_fields.
+  forall result17:us_split_fields__ref.
+  forall result____split_fields11:us_split_fields.
+  forall result18:option__ref. forall search_ter_p__search__result10:us_rep.
+  forall result____split_fields12:us_split_fields__ref. forall i5:int__ref.
+  forall search_ter_p__search__result11:option__ref.
+  forall temp___2284:int__ref.
+  forall result____split_fields13:us_split_fields. forall i6:int.
+  forall search_ter_p__search__result12:us_rep. forall temp___2285:int.
+  forall result____split_fields14:us_split_fields__ref. forall i7:int__ref.
+  forall search_ter_p__search__result13:option__ref.
+  forall result____split_fields15:us_split_fields. forall i8:int.
+  forall search_ter_p__search__result14:us_rep.
+  forall result____split_fields16:us_split_fields__ref. forall i9:int__ref.
+  forall search_ter_p__search__result15:option__ref.
+  forall result____split_fields17:us_split_fields. forall i10:int.
+  forall search_ter_p__search__result16:us_rep. forall result19:option__ref.
+  forall search_ter_p__search__result17:us_rep.
+  forall search_ter_p__search__result18:option__ref.
+  forall search_ter_p__search__result19:us_rep.
+  forall result____split_fields18:us_split_fields__ref. forall i11:int__ref.
+  forall search_ter_p__search__result20:option__ref.
+  forall result____split_fields19:us_split_fields. forall i12:int.
+  forall search_ter_p__search__result21:us_rep.
+  forall result____split_fields20:us_split_fields__ref. forall i13:int__ref.
+  forall search_ter_p__search__result22:option__ref.
+  forall result____split_fields21:us_split_fields. forall i14:int.
+  forall search_ter_p__search__result23:us_rep.
+  forall result____split_fields22:us_split_fields__ref. forall i15:int__ref.
+  forall search_ter_p__search__result24:option__ref.
+  forall result____split_fields23:us_split_fields. forall i16:int.
+  forall search_ter_p__search__result25:us_rep. (dynamic_property(1,
+  2147483647, to_rep(first(a1)), to_rep(last(a1))) -> (dynamic_property(1,
+  2147483647, to_rep(first(b1)), to_rep(last(b1))) ->
+  (((to_rep(last(a1)) <  2147483647) and
+  (to_rep(first(b1)) <= to_rep(last(b1)))) -> (((((((to_rep(o) = 1) and
+  ((of_int(0) = o1) and (o = o2))) and
+  ((search_ter_p__search__result__assume = o1) and
+  (search_ter_p__search__result__assume1 = o2))) and (({
+  us_split_fields__content = { rec__types__option__exists = result;
+  rec__types__option__value = result1 } } = { us_split_fields__content = {
+  rec__types__option__exists = result____split_fields;
+  rec__types__option__value = result____split_fields1 } }) and
+  ((search_ter_p__search__result__assume = result____split_fields2) and
+  (search_ter_p__search__result__assume1 = result____split_fields3)))) and
+  (((((search_ter_p__search__result22 = { option__content = {
+  us_split_fields1 = { rec__types__option__exists =
+  search_ter_p__search__result4; rec__types__option__value =
+  search_ter_p__search__result5 } } }) and ((i13 = { int__content = i }) and
+  (result____split_fields20 = { us_split_fields__content = {
+  rec__types__option__exists = result____split_fields2;
+  rec__types__option__value = result____split_fields3 } }))) and
+  ((search_ter_p__search__result23 = { us_split_fields1 = {
+  rec__types__option__exists = search_ter_p__search__result4;
+  rec__types__option__value = search_ter_p__search__result5 } }) and
+  ((i14 = i1) and (result____split_fields21 = { rec__types__option__exists =
+  result____split_fields2; rec__types__option__value =
+  result____split_fields3 })))) and ((((length({ elts = a; rt = a1
+  }) <  length({ elts = b; rt = b1 })) and (result2 = true)) or
+  ((not (length({ elts = a; rt = a1 }) <  length({ elts = b; rt = b1 }))) and
+  (((length({ elts = b; rt = b1 }) = 0) and (result2 = true)) or
+  ((not (length({ elts = b; rt = b1 }) = 0)) and (result2 = false))))) and
+  ((result2 = true) and (((result3 = search_ter_p__search__result) and
   (result4 = search_ter_p__search__result1)) and
   ((search_ter_p__search__result4 = result____split_fields2) and
   (search_ter_p__search__result5 = result____split_fields3)))))) or
-  (((((length({ elts = a; rt = a1 }) <  length({ elts = b; rt = b1 })) ->
-  (result2 = true)) and ((not (length({ elts = a; rt = a1 }) <  length({
-  elts = b; rt = b1 }))) -> (((length({ elts = b; rt = b1 }) = 0) ->
-  (result2 = true)) and ((not (length({ elts = b; rt = b1 }) = 0)) ->
+  (((((length({ elts = a; rt = a1 }) <  length({ elts = b; rt = b1 })) and
+  (result2 = true)) or ((not (length({ elts = a; rt = a1 }) <  length({
+  elts = b; rt = b1 }))) and (((length({ elts = b; rt = b1 }) = 0) and
+  (result2 = true)) or ((not (length({ elts = b; rt = b1 }) = 0)) and
   (result2 = false))))) and ((not (result2 = true)) and
-  (((search_ter_p__search__result4 = search_ter_p__search__result) and
-  (search_ter_p__search__result5 = search_ter_p__search__result1)) and
-  ((search_ter_p__search__result4 = search_ter_p__search__result2) and
-  (search_ter_p__search__result5 = search_ter_p__search__result3))))) and
-  (((((search_ter_p__search__result34 = search_ter_p__search__result30) and
-  (search_ter_p__search__result35 = search_ter_p__search__result31)) and
-  ((i13 = i11) and ((result____split_fields30 = result____split_fields26) and
-  (result____split_fields31 = result____split_fields27)))) and
-  (((search_ter_p__search__result36 = search_ter_p__search__result32) and
-  (search_ter_p__search__result37 = search_ter_p__search__result33)) and
-  ((i14 = i12) and ((result____split_fields32 = result____split_fields28) and
-  (result____split_fields33 = result____split_fields29))))) and
-  ((((((search_ter_p__search__result30 = search_ter_p__search__result12) and
-  (search_ter_p__search__result31 = search_ter_p__search__result13)) and
-  ((i11 = i5) and ((result____split_fields26 = result____split_fields14) and
-  (result____split_fields27 = result____split_fields15)))) and
-  (((search_ter_p__search__result32 = search_ter_p__search__result14) and
-  (search_ter_p__search__result33 = search_ter_p__search__result15)) and
-  ((i12 = i6) and ((result____split_fields28 = result____split_fields16) and
-  (result____split_fields29 = result____split_fields17))))) and
-  ((temp___203 = to_rep(first(a1))) and (((((o3 = length({ elts = b; rt = b1
+  (((search_ter_p__search__result = search_ter_p__search__result4) and
+  (search_ter_p__search__result1 = search_ter_p__search__result5)) and ({
+  us_split_fields1 = { rec__types__option__exists =
+  search_ter_p__search__result4; rec__types__option__value =
+  search_ter_p__search__result5 } } = { us_split_fields1 = {
+  rec__types__option__exists = search_ter_p__search__result2;
+  rec__types__option__value = search_ter_p__search__result3 } })))) and
+  ((((search_ter_p__search__result22 = search_ter_p__search__result20) and
+  ((i13 = i11) and
+  (result____split_fields20 = result____split_fields18))) and
+  ((search_ter_p__search__result23 = search_ter_p__search__result21) and
+  ((i14 = i12) and
+  (result____split_fields21 = result____split_fields19)))) and
+  (((((search_ter_p__search__result20 = search_ter_p__search__result11) and
+  ((i11 = i5) and (result____split_fields18 = result____split_fields12))) and
+  ((search_ter_p__search__result21 = search_ter_p__search__result12) and
+  ((i12 = i6) and
+  (result____split_fields19 = result____split_fields13)))) and
+  ((temp___229 = to_rep(first(a1))) and (((((o3 = length({ elts = b; rt = b1
   })) and in_range1(length({ elts = b; rt = b1 }))) and
   (((o4 = (to_rep(last(a1)) + 1)) and in_range1((to_rep(last(a1)) + 1))) and
-  (o5 = (o4 - o3)))) and ((temp___204 = o5) and in_range1(o5))) and
-  (((result5 = i) and (i2 = temp___203)) and (((temp___203 <= i2) and
-  (i2 <= temp___204)) and (((result____split_fields2 = temp___201) and
-  (result____split_fields3 = temp___2011)) and ((temp___200 = i2) and
-  ((0 = temp___202) and (((((temp___2024 = temp___202) and
-  (((search_ter_p__search__result12 = search_ter_p__search__result6) and
-  (search_ter_p__search__result13 = search_ter_p__search__result7)) and
-  ((i5 = i2) and ((result____split_fields14 = result____split_fields6) and
-  (result____split_fields15 = result____split_fields7))))) and
-  ((temp___2025 = temp___2021) and
-  (((search_ter_p__search__result14 = search_ter_p__search__result6) and
-  (search_ter_p__search__result15 = search_ter_p__search__result7)) and
-  ((i6 = i2) and ((result____split_fields16 = result____split_fields6) and
-  (result____split_fields17 = result____split_fields7)))))) and
-  (((result6 = equal_subrange({ elts = a; rt = a1 }, i2, { elts = b; rt = b1
-  })) and ((result6 = true) <-> (bool_eq4(a, to_rep(first2(mk1(i2,
-  ((i2 - 1) + length({ elts = b; rt = b1 }))))), to_rep(last2(mk1(i2,
-  ((i2 - 1) + length({ elts = b; rt = b1 }))))), b, to_rep(first(b1)),
-  to_rep(last(b1))) = true))) and ((result6 = true) and
+  (o5 = (o4 - o3)))) and ((temp___230 = o5) and in_range1(o5))) and ((({
+  int__content = result5 } = { int__content = i }) and (i2 = temp___229)) and
+  (((temp___229 <= i2) and (i2 <= temp___230)) and
+  (((temp___227 = result____split_fields2) and
+  (temp___2271 = result____split_fields3)) and ((temp___226 = i2) and
+  ((0 = temp___228) and (((((temp___2284 = { int__content = temp___228 }) and
+  ((search_ter_p__search__result11 = { option__content = { us_split_fields1 =
+  { rec__types__option__exists = search_ter_p__search__result6;
+  rec__types__option__value = search_ter_p__search__result7 } } }) and
+  ((i5 = { int__content = i2 }) and (result____split_fields12 = {
+  us_split_fields__content = { rec__types__option__exists =
+  result____split_fields6; rec__types__option__value =
+  result____split_fields7 } })))) and ((temp___2285 = temp___2281) and
+  ((search_ter_p__search__result12 = { us_split_fields1 = {
+  rec__types__option__exists = search_ter_p__search__result6;
+  rec__types__option__value = search_ter_p__search__result7 } }) and
+  ((i6 = i2) and (result____split_fields13 = { rec__types__option__exists =
+  result____split_fields6; rec__types__option__value =
+  result____split_fields7 }))))) and (((result6 = equal_subrange({ elts = a;
+  rt = a1 }, i2, { elts = b; rt = b1 })) and ((result6 = true) <->
+  (bool_eq4(a, to_rep(first2(mk1(i2, ((i2 - 1) + length({ elts = b; rt = b1
+  }))))), to_rep(last2(mk1(i2, ((i2 - 1) + length({ elts = b; rt = b1 }))))),
+  b, to_rep(first(b1)), to_rep(last(b1))) = true))) and ((result6 = true) and
   ((((result7 = result____split_fields2) and
   (result8 = result____split_fields3)) and
-  ((result____split_fields4 = of_int(1)) and
-  (result____split_fields5 = result____split_fields3))) and
+  ((of_int(1) = result____split_fields4) and
+  (result____split_fields3 = result____split_fields5))) and
   (((((to_rep(o6) = i2) and ((result____split_fields4 = o7) and
-  (o6 = o8))) and ((temp___199 = o7) and (temp___1991 = o8))) and
+  (o6 = o8))) and ((temp___225 = o7) and (temp___2251 = o8))) and
   (((result9 = result____split_fields4) and
   (result10 = result____split_fields5)) and
-  ((result____split_fields6 = temp___199) and
-  (result____split_fields7 = temp___1991)))) and
+  ((temp___225 = result____split_fields6) and
+  (temp___2251 = result____split_fields7)))) and
   (((result11 = search_ter_p__search__result4) and
   (result12 = search_ter_p__search__result5)) and
   ((search_ter_p__search__result6 = result____split_fields6) and
@@ -1044,142 +750,140 @@ axiom H10 :
   })) and ((result6 = true) <-> (bool_eq4(a, to_rep(first2(mk1(i2,
   ((i2 - 1) + length({ elts = b; rt = b1 }))))), to_rep(last2(mk1(i2,
   ((i2 - 1) + length({ elts = b; rt = b1 }))))), b, to_rep(first(b1)),
-  to_rep(last(b1))) = true))) and ((not (result6 = true)) and
-  (((search_ter_p__search__result6 = search_ter_p__search__result4) and
-  (search_ter_p__search__result7 = search_ter_p__search__result5)) and
-  ((result____split_fields6 = result____split_fields2) and
-  (result____split_fields7 = result____split_fields3))))) and
-  ((((temp___2024 = temp___2023) and
-  (((search_ter_p__search__result12 = search_ter_p__search__result10) and
-  (search_ter_p__search__result13 = search_ter_p__search__result11)) and
-  ((i5 = i4) and ((result____split_fields14 = result____split_fields12) and
-  (result____split_fields15 = result____split_fields13))))) and
-  ((temp___2025 = temp___2023) and
-  (((search_ter_p__search__result14 = search_ter_p__search__result10) and
-  (search_ter_p__search__result15 = search_ter_p__search__result11)) and
-  ((i6 = i4) and ((result____split_fields16 = result____split_fields12) and
-  (result____split_fields17 = result____split_fields13)))))) and
+  to_rep(last(b1))) = true))) and ((not (result6 = true)) and (({
+  us_split_fields1 = { rec__types__option__exists =
+  search_ter_p__search__result6; rec__types__option__value =
+  search_ter_p__search__result7 } } = { us_split_fields1 = {
+  rec__types__option__exists = search_ter_p__search__result4;
+  rec__types__option__value = search_ter_p__search__result5 } }) and ({
+  rec__types__option__exists = result____split_fields6;
+  rec__types__option__value = result____split_fields7 } = {
+  rec__types__option__exists = result____split_fields2;
+  rec__types__option__value = result____split_fields3 })))) and
+  ((((temp___2284 = { int__content = temp___2283 }) and
+  ((search_ter_p__search__result11 = { option__content =
+  search_ter_p__search__result10 }) and ((i5 = { int__content = i4 }) and
+  (result____split_fields12 = { us_split_fields__content =
+  result____split_fields11 })))) and ((temp___2285 = temp___2283) and
+  ((search_ter_p__search__result12 = search_ter_p__search__result10) and
+  ((i6 = i4) and
+  (result____split_fields13 = result____split_fields11))))) and
   (((not (has_sub_range_in_prefix({ elts = a; rt = a1 }, i3, { elts = b; rt =
   b1 }) = true)) and (not (result____split_fields8 = true))) and
   ((((to_rep(first(a1)) <= ((to_rep(last(a1)) + 1) - length({ elts = b; rt =
   b1 }))) -> dynamic_property3(to_rep(first(a1)),
   ((to_rep(last(a1)) + 1) - length({ elts = b; rt = b1 })), i3)) and
   ((to_rep(first(a1)) <= i3) and (i3 <= ((to_rep(last(a1)) + 1) - length({
-  elts = b; rt = b1 }))))) and (((result13 = temp___2022) and
-  (temp___2023 = i3)) and ((not (i3 = temp___204)) and (((result14 = i3) and
-  (i4 = (i3 + 1))) and (((result15 = equal_subrange({ elts = a; rt = a1 },
-  i4, { elts = b; rt = b1 })) and ((result15 = true) <-> (bool_eq4(a,
-  to_rep(first2(mk1(i4, ((i4 - 1) + length({ elts = b; rt = b1 }))))),
-  to_rep(last2(mk1(i4, ((i4 - 1) + length({ elts = b; rt = b1 }))))), b,
-  to_rep(first(b1)), to_rep(last(b1))) = true))) and ((result15 = true) and
-  ((((result16 = result____split_fields8) and
-  (result17 = result____split_fields9)) and
-  ((result____split_fields10 = of_int(1)) and
-  (result____split_fields11 = result____split_fields9))) and
-  (((((to_rep(o10) = i4) and ((result____split_fields10 = o11) and
-  (o10 = o12))) and ((temp___1992 = o11) and (temp___1993 = o12))) and
-  (((result18 = result____split_fields10) and
-  (result19 = result____split_fields11)) and
-  ((result____split_fields12 = temp___1992) and
-  (result____split_fields13 = temp___1993)))) and
-  (((result20 = search_ter_p__search__result8) and
-  (result21 = search_ter_p__search__result9)) and
-  ((search_ter_p__search__result10 = result____split_fields12) and
-  (search_ter_p__search__result11 = result____split_fields13))))))))))))))))))))))) or
-  ((((((o3 = length({ elts = b; rt = b1 })) and in_range1(length({ elts = b;
-  rt = b1 }))) and (((o4 = (to_rep(last(a1)) + 1)) and
-  in_range1((to_rep(last(a1)) + 1))) and (o5 = (o4 - o3)))) and
-  ((temp___204 = o5) and in_range1(o5))) and (((result5 = i) and
+  elts = b; rt = b1 }))))) and (((result13 = { int__content = temp___2282
+  }) and (temp___2283 = i3)) and ((not (i3 = temp___230)) and (((result14 = {
+  int__content = i3 }) and (i4 = (i3 + 1))) and
+  (((result15 = equal_subrange({ elts = a; rt = a1 }, i4, { elts = b; rt = b1
+  })) and ((result15 = true) <-> (bool_eq4(a, to_rep(first2(mk1(i4,
+  ((i4 - 1) + length({ elts = b; rt = b1 }))))), to_rep(last2(mk1(i4,
+  ((i4 - 1) + length({ elts = b; rt = b1 }))))), b, to_rep(first(b1)),
+  to_rep(last(b1))) = true))) and ((result15 = true) and (((result16 = {
+  us_split_fields__content = { rec__types__option__exists =
+  result____split_fields8; rec__types__option__value =
+  result____split_fields9 } }) and (result____split_fields10 = {
+  rec__types__option__exists = of_int(1); rec__types__option__value =
+  result____split_fields9 })) and (((((to_rep(o9) = i4) and
+  (((result____split_fields10).rec__types__option__exists = o10) and
+  (o9 = o11))) and ((temp___2252 = o10) and (temp___2253 = o11))) and
+  ((result17 = { us_split_fields__content = result____split_fields10 }) and
+  (result____split_fields11 = { rec__types__option__exists = temp___2252;
+  rec__types__option__value = temp___2253 }))) and ((result18 = {
+  option__content = { us_split_fields1 = { rec__types__option__exists =
+  search_ter_p__search__result8; rec__types__option__value =
+  search_ter_p__search__result9 } } }) and
+  (search_ter_p__search__result10 = { us_split_fields1 =
+  result____split_fields11 })))))))))))))))))))))) or ((((((o3 = length({
+  elts = b; rt = b1 })) and in_range1(length({ elts = b; rt = b1 }))) and
+  (((o4 = (to_rep(last(a1)) + 1)) and in_range1((to_rep(last(a1)) + 1))) and
+  (o5 = (o4 - o3)))) and ((temp___230 = o5) and in_range1(o5))) and ((({
+  int__content = result5 } = { int__content = i }) and
   (i2 = to_rep(first(a1)))) and ((((to_rep(first(a1)) <= i2) and
-  (i2 <= temp___204)) -> (((((result____split_fields2 = temp___201) and
-  (result____split_fields3 = temp___2011)) and ((temp___200 = i2) and
-  ((0 = temp___202) and ((((result6 = equal_subrange({ elts = a; rt = a1 },
+  (i2 <= temp___230)) and (((((temp___227 = result____split_fields2) and
+  (temp___2271 = result____split_fields3)) and ((temp___226 = i2) and
+  ((0 = temp___228) and ((((result6 = equal_subrange({ elts = a; rt = a1 },
   i2, { elts = b; rt = b1 })) and ((result6 = true) <-> (bool_eq4(a,
   to_rep(first2(mk1(i2, ((i2 - 1) + length({ elts = b; rt = b1 }))))),
   to_rep(last2(mk1(i2, ((i2 - 1) + length({ elts = b; rt = b1 }))))), b,
   to_rep(first(b1)), to_rep(last(b1))) = true))) and
-  ((not (result6 = true)) and
-  (((search_ter_p__search__result6 = search_ter_p__search__result4) and
-  (search_ter_p__search__result7 = search_ter_p__search__result5)) and
-  ((result____split_fields6 = result____split_fields2) and
-  (result____split_fields7 = result____split_fields3))))) and
-  (((not (has_sub_range_in_prefix({ elts = a; rt = a1 }, i3, { elts = b; rt =
-  b1 }) = true)) and (not (result____split_fields8 = true))) and
+  ((not (result6 = true)) and (({ us_split_fields1 = {
+  rec__types__option__exists = search_ter_p__search__result6;
+  rec__types__option__value = search_ter_p__search__result7 } } = {
+  us_split_fields1 = { rec__types__option__exists =
+  search_ter_p__search__result4; rec__types__option__value =
+  search_ter_p__search__result5 } }) and ({ rec__types__option__exists =
+  result____split_fields6; rec__types__option__value =
+  result____split_fields7 } = { rec__types__option__exists =
+  result____split_fields2; rec__types__option__value =
+  result____split_fields3 })))) and (((not (has_sub_range_in_prefix({ elts =
+  a; rt = a1 }, i3, { elts = b; rt = b1 }) = true)) and
+  (not (result____split_fields8 = true))) and
   ((((to_rep(first(a1)) <= ((to_rep(last(a1)) + 1) - length({ elts = b; rt =
   b1 }))) -> dynamic_property3(to_rep(first(a1)),
   ((to_rep(last(a1)) + 1) - length({ elts = b; rt = b1 })), i3)) and
   ((to_rep(first(a1)) <= i3) and (i3 <= ((to_rep(last(a1)) + 1) - length({
-  elts = b; rt = b1 }))))) and (((result13 = temp___2022) and
-  (temp___2023 = i3)) and (i3 = temp___204)))))))) and
-  ((((search_ter_p__search__result16 = search_ter_p__search__result8) and
-  (search_ter_p__search__result17 = search_ter_p__search__result9)) and
-  ((i7 = i3) and ((result____split_fields18 = result____split_fields8) and
-  (result____split_fields19 = result____split_fields9)))) and
-  (((search_ter_p__search__result18 = search_ter_p__search__result8) and
-  (search_ter_p__search__result19 = search_ter_p__search__result9)) and
-  ((i8 = i3) and ((result____split_fields20 = result____split_fields8) and
-  (result____split_fields21 = result____split_fields9)))))) and
-  ((((search_ter_p__search__result20 = search_ter_p__search__result16) and
-  (search_ter_p__search__result21 = search_ter_p__search__result17)) and
-  ((i9 = i7) and ((result____split_fields22 = result____split_fields18) and
-  (result____split_fields23 = result____split_fields19)))) and
-  (((search_ter_p__search__result22 = search_ter_p__search__result18) and
-  (search_ter_p__search__result23 = search_ter_p__search__result19)) and
-  ((i10 = i8) and ((result____split_fields24 = result____split_fields20) and
-  (result____split_fields25 = result____split_fields21))))))) and
-  ((not ((to_rep(first(a1)) <= i2) and (i2 <= temp___204))) ->
-  ((((search_ter_p__search__result20 = search_ter_p__search__result4) and
-  (search_ter_p__search__result21 = search_ter_p__search__result5)) and
-  ((i9 = i2) and ((result____split_fields22 = result____split_fields2) and
-  (result____split_fields23 = result____split_fields3)))) and
-  (((search_ter_p__search__result22 = search_ter_p__search__result4) and
-  (search_ter_p__search__result23 = search_ter_p__search__result5)) and
-  ((i10 = i2) and ((result____split_fields24 = result____split_fields2) and
-  (result____split_fields25 = result____split_fields3))))))))) and
-  (((((search_ter_p__search__result30 = search_ter_p__search__result26) and
-  (search_ter_p__search__result31 = search_ter_p__search__result27)) and
-  ((i11 = i9) and ((result____split_fields26 = result____split_fields22) and
-  (result____split_fields27 = result____split_fields23)))) and
-  (((search_ter_p__search__result32 = search_ter_p__search__result28) and
-  (search_ter_p__search__result33 = search_ter_p__search__result29)) and
-  ((i12 = i10) and ((result____split_fields28 = result____split_fields24) and
-  (result____split_fields29 = result____split_fields25))))) and
-  ((((search_ter_p__search__result26 = search_ter_p__search__result24) and
-  (search_ter_p__search__result27 = search_ter_p__search__result25)) and
-  ((search_ter_p__search__result28 = search_ter_p__search__result24) and
-  (search_ter_p__search__result29 = search_ter_p__search__result25))) and
-  (((result22 = search_ter_p__search__result20) and
-  (result23 = search_ter_p__search__result21)) and
-  ((search_ter_p__search__result24 = result____split_fields22) and
-  (search_ter_p__search__result25 = result____split_fields23))))))))))
-
-axiom H11 :
-  ((search_ter_p__search__result38 = search_ter_p__search__result34) and
-  (search_ter_p__search__result39 = search_ter_p__search__result35))
-
-axiom H12 : (i15 = i13)
-
-axiom H13 : ((result____split_fields34 = result____split_fields30) and
-  (result____split_fields35 = result____split_fields31))
-
-axiom H14 :
-  ((search_ter_p__search__result40 = search_ter_p__search__result36) and
-  (search_ter_p__search__result41 = search_ter_p__search__result37))
-
-axiom H15 : (i16 = i14)
-
-axiom H16 : ((result____split_fields36 = result____split_fields32) and
-  (result____split_fields37 = result____split_fields33))
-
-axiom H17 : ((bool_eq(length({ elts = b; rt = b1 }), 0) = true) ->
-  (not (search_ter_p__search__result38 = true)))
-
-axiom H18 : ((bool_lt(length({ elts = a; rt = a1 }), length({ elts = b; rt =
-  b1 })) = true) -> (not (search_ter_p__search__result38 = true)))
-
-axiom H19 : (match_bool(bool_ge(length({ elts = a; rt = a1 }), length({
-  elts = b; rt = b1 })), has_sub_range({ elts = a; rt = a1 }, { elts = b;
-  rt = b1 }), false) = true)
-
- (* File "types.ads", line 11, characters 0-0 *)
-goal WP_parameter_def : (search_ter_p__search__result38 = true)
+  elts = b; rt = b1 }))))) and (((result13 = { int__content = temp___2282
+  }) and (temp___2283 = i3)) and (i3 = temp___230)))))))) and
+  (((search_ter_p__search__result13 = { option__content = {
+  us_split_fields1 = { rec__types__option__exists =
+  search_ter_p__search__result8; rec__types__option__value =
+  search_ter_p__search__result9 } } }) and ((i7 = { int__content = i3 }) and
+  (result____split_fields14 = { us_split_fields__content = {
+  rec__types__option__exists = result____split_fields8;
+  rec__types__option__value = result____split_fields9 } }))) and
+  ((search_ter_p__search__result14 = { us_split_fields1 = {
+  rec__types__option__exists = search_ter_p__search__result8;
+  rec__types__option__value = search_ter_p__search__result9 } }) and
+  ((i8 = i3) and (result____split_fields15 = { rec__types__option__exists =
+  result____split_fields8; rec__types__option__value =
+  result____split_fields9 }))))) and
+  (((search_ter_p__search__result15 = search_ter_p__search__result13) and
+  ((i9 = i7) and (result____split_fields16 = result____split_fields14))) and
+  ((search_ter_p__search__result16 = search_ter_p__search__result14) and
+  ((i10 = i8) and
+  (result____split_fields17 = result____split_fields15)))))) or
+  ((not ((to_rep(first(a1)) <= i2) and (i2 <= temp___230))) and
+  (((search_ter_p__search__result15 = { option__content = {
+  us_split_fields1 = { rec__types__option__exists =
+  search_ter_p__search__result4; rec__types__option__value =
+  search_ter_p__search__result5 } } }) and ((i9 = { int__content = i2 }) and
+  (result____split_fields16 = { us_split_fields__content = {
+  rec__types__option__exists = result____split_fields2;
+  rec__types__option__value = result____split_fields3 } }))) and
+  ((search_ter_p__search__result16 = { us_split_fields1 = {
+  rec__types__option__exists = search_ter_p__search__result4;
+  rec__types__option__value = search_ter_p__search__result5 } }) and
+  ((i10 = i2) and (result____split_fields17 = { rec__types__option__exists =
+  result____split_fields2; rec__types__option__value =
+  result____split_fields3 })))))))) and
+  ((((search_ter_p__search__result20 = search_ter_p__search__result18) and
+  ((i11 = i9) and (result____split_fields18 = result____split_fields16))) and
+  ((search_ter_p__search__result21 = search_ter_p__search__result19) and
+  ((i12 = i10) and
+  (result____split_fields19 = result____split_fields17)))) and
+  (((search_ter_p__search__result18 = { option__content =
+  search_ter_p__search__result17 }) and
+  (search_ter_p__search__result19 = search_ter_p__search__result17)) and
+  ((result19 = search_ter_p__search__result15) and
+  (search_ter_p__search__result17 = { us_split_fields1 =
+  (result____split_fields16).us_split_fields__content })))))))))) and
+  (((search_ter_p__search__result24 = search_ter_p__search__result22) and
+  ((i15 = i13) and
+  (result____split_fields22 = result____split_fields20))) and
+  ((search_ter_p__search__result25 = search_ter_p__search__result23) and
+  ((i16 = i14) and
+  (result____split_fields23 = result____split_fields21))))) ->
+  ((((bool_eq(length({ elts = b; rt = b1 }), 0) = true) and
+  (not ((((search_ter_p__search__result24).option__content).us_split_fields1).rec__types__option__exists = true))) or
+  (not (bool_eq(length({ elts = b; rt = b1 }), 0) = true))) ->
+  ((((bool_lt(length({ elts = a; rt = a1 }), length({ elts = b; rt = b1
+  })) = true) and
+  (not ((((search_ter_p__search__result24).option__content).us_split_fields1).rec__types__option__exists = true))) or
+  (not (bool_lt(length({ elts = a; rt = a1 }), length({ elts = b; rt = b1
+  })) = true))) -> ((match_bool(bool_ge(length({ elts = a; rt = a1 }),
+  length({ elts = b; rt = b1 })), has_sub_range({ elts = a; rt = a1 }, {
+  elts = b; rt = b1 }), false) = true) ->
+  ((((search_ter_p__search__result24).option__content).us_split_fields1).rec__types__option__exists = true)))))))))

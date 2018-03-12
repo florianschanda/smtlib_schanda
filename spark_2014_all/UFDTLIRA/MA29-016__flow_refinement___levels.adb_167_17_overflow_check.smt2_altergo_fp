@@ -124,35 +124,10 @@ axiom read_partial_1__post_axiom :
   (in_range(levels__nested_1__x1) ->
   in_range(read_partial_1(levels__nested_1__x1))))
 
-logic x0 : int
-
-logic x1 : int
-
-logic y1 : int
-
-logic x2 : int
-
-logic y2 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-axiom H : in_range(x0)
-
-axiom H1 : in_range(x1)
-
-axiom H2 : in_range(y1)
-
-axiom H3 : in_range(x2)
-
-axiom H4 : in_range(y2)
-
-axiom H5 : ((o = read_partial_1(x1)) and in_range(o))
-
-axiom H6 : (o1 = (x0 + o))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(o1)
+goal WP_parameter_def :
+  (forall x0:int. forall x1:int. forall y1:int. forall x2:int. forall y2:int.
+  forall o:int. forall o1:int. (in_range(x0) -> (in_range(x1) ->
+  (in_range(y1) -> (in_range(x2) -> (in_range(y2) ->
+  ((((o = read_partial_1(x1)) and in_range(o)) and (o1 = (x0 + o))) ->
+  in_range(o1))))))))

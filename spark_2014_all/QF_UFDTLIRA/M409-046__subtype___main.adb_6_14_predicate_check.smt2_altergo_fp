@@ -134,18 +134,8 @@ function positive_with_hole__ref___projection(a: positive_with_hole__ref) : posi
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic v : int
-
-logic result : int
-
-logic v1 : int
-
-axiom H : (result = v)
-
-axiom H1 : (v1 = 12)
-
-axiom H2 : in_range(v1)
-
  (* File "main.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (((1 <= v1) and (v1 <= 9)) or ((21 <= v1) and
-  (v1 <= 2147483647)))
+goal WP_parameter_def :
+  (forall v:int. forall result:int. forall v1:int. (((result = v) and
+  (v1 = 12)) -> (in_range(v1) -> (((1 <= v1) and (v1 <= 9)) or
+  ((21 <= v1) and (v1 <= 2147483647))))))

@@ -1203,32 +1203,10 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic z : t
-
-logic t1 : t
-
-logic o : bool
-
-logic o1 : t
-
-logic result : bool
-
-logic result1 : t
-
-logic t2 : t
-
-axiom H : in_range1(x)
-
-axiom H1 : in_range2(y)
-
-axiom H2 : in_range3(z)
-
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 340282346638528859811704183484516925440.0))
-
-axiom H3 : (le(neg(fliteral5), fliteral5) -> tqtisFinite(t1))
 
 logic fliteral6 : t
 
@@ -1236,4 +1214,7 @@ axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
   (tqtreal(fliteral6) = 170141173319264429905852091742258462720.0))
 
  (* File "proof.adb", line 5, characters 0-0 *)
-goal WP_parameter_def : le(x, fliteral6)
+goal WP_parameter_def :
+  (forall z:t. forall t1:t. (in_range1(x) -> (in_range2(y) ->
+  (in_range3(z) -> ((le(neg(fliteral5), fliteral5) -> tqtisFinite(t1)) ->
+  le(x, fliteral6))))))

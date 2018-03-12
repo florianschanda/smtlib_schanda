@@ -220,9 +220,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 axiom foo__post_axiom : true
 
-logic temp___185 : integer
-
-axiom H : (to_rep(temp___185) = 0)
-
  (* File "p.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : (foo(void) = true)
+goal WP_parameter_def :
+  (forall temp___215:integer. ((to_rep(temp___215) = 0) ->
+  (foo(void) = true)))

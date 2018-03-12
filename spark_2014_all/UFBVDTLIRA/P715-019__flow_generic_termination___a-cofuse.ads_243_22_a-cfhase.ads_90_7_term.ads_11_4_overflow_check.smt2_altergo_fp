@@ -1082,12 +1082,6 @@ function extended_index__ref___projection(a: extended_index__ref) : extended_ind
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq10 : bool, bool -> bool
-
-axiom bool_eq_def7 :
-  (forall x:bool. forall y:bool [bool_eq10(x, y)]. (((x = y) -> (bool_eq10(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq10(x, y) = false))))
-
 logic to_int2 : bool -> int
 
 axiom to_int_def1 :
@@ -1099,6 +1093,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq10 : bool, bool -> bool
+
+axiom bool_eq_def7 :
+  (forall x:bool. forall y:bool [bool_eq10(x, y)]. (((x = y) -> (bool_eq10(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq10(x, y) = false))))
 
 predicate in_range4(x: int) = ((x = 0) or (x = 1))
 
@@ -1160,37 +1160,16 @@ type element_type__ref1 = { element_type__content1 : element_type1
 function element_type__ref___3__projection(a: element_type__ref1) : element_type1 =
   (a).element_type__content1
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-axiom H : ((o3 = length(right)) and in_range1(o3))
-
-axiom H1 : (o4 = (2147483647 - o3))
-
-axiom H2 : ((o5 = o4) and in_range(o4))
-
-axiom H3 : ((o = num_overlaps(left, right)) and (in_range1(o) and
-  ((((o = length(intersection(left, right))) and (((ole(left,
-  right) = true) -> (o = length(left))) and ((not (ole(left,
-  right) = true)) -> (o <  length(left))))) and (((ole(right,
-  left) = true) -> (o = length(right))) and ((not (ole(right,
-  left) = true)) -> (o <  length(right))))) and ((o = 0) <->
-  (no_overlap(left, right) = true)))))
-
-axiom H4 : ((o1 = length(left)) and in_range1(o1))
-
-axiom H5 : (o2 = (o1 - o))
-
  (* File "a-cofuse.ads", line 218, characters 0-0 *)
-goal WP_parameter_def : in_range(o2)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
+  forall o5:int. (((((o3 = length(right)) and in_range1(o3)) and
+  (o4 = (2147483647 - o3))) and ((o5 = o4) and in_range(o4))) ->
+  ((((o = num_overlaps(left, right)) and (in_range1(o) and
+  ((((o = length(intersection(left, right))) and (((ole(left,
+  right) = true) and (o = length(left))) or ((not (ole(left,
+  right) = true)) and (o <  length(left))))) and (((ole(right,
+  left) = true) and (o = length(right))) or ((not (ole(right,
+  left) = true)) and (o <  length(right))))) and ((o = 0) <->
+  (no_overlap(left, right) = true))))) and (((o1 = length(left)) and
+  in_range1(o1)) and (o2 = (o1 - o)))) -> in_range(o2))))

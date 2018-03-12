@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -215,25 +215,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,bounded_integer) farray, int, int,
-  (int,bounded_integer) farray, int, int -> (int,bounded_integer) farray
-
-axiom concat_def :
-  (forall a:(int,bounded_integer) farray.
-  forall b:(int,bounded_integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : bounded_integer, int -> (int,bounded_integer) farray
-
-axiom singleton_def :
-  (forall v:bounded_integer.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,bounded_integer) farray, int, int,
   (int,bounded_integer) farray, int, int -> bool
 
@@ -245,17 +226,17 @@ axiom bool_eq_def4 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -266,40 +247,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,bounded_integer) farray, int, int,
-  (int,bounded_integer) farray, int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,bounded_integer) farray.
-  forall b:(int,bounded_integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,bounded_integer) farray.
-  forall b:(int,bounded_integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,bounded_integer) farray.
-  forall b:(int,bounded_integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic sum : (int,bounded_integer) farray, int, int -> int
 
@@ -365,113 +315,16 @@ function t1b__ref___projection(a1: t1b__ref) : integer = (a1).t1b__content
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic s : int
-
-logic k : int
-
-logic sum__simple_sum__result : int
-
-logic temp___159 : int
-
-logic temp___158 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic result : int
-
-logic s1 : int
-
-logic result1 : int
-
-logic k1 : int
-
-logic s2 : int
-
-logic k2 : int
-
-logic result2 : int
-
-logic s3 : int
-
-logic result3 : int
-
-logic k3 : int
-
-logic s4 : int
-
-logic k4 : int
-
-logic s5 : int
-
-logic k5 : int
-
-logic s6 : int
-
-logic k6 : int
-
-logic s7 : int
-
-logic k7 : int
-
-logic result4 : int
-
-logic sum__simple_sum__result1 : int
-
-logic sum__simple_sum__result2 : int
-
-logic sum__simple_sum__result3 : int
-
-logic s8 : int
-
-logic k8 : int
-
-logic sum__simple_sum__result4 : int
-
-logic s9 : int
-
-logic k9 : int
-
-logic sum__simple_sum__result5 : int
-
-axiom H : in_range2(i)
-
-axiom H1 : in_range2(j)
-
-axiom H2 : (i <= j)
-
-axiom H3 : (result = s)
-
-axiom H4 : (s1 = 0)
-
-axiom H5 : in_range1(s1)
-
-axiom H6 : (result1 = k)
-
-axiom H7 : (k1 = i)
-
-axiom H8 : (i <= k1)
-
-axiom H9 : (k1 <= (j - 1))
-
-axiom H10 : (abs_int(s2) <= (k2 * 2000))
-
-axiom H11 : (s2 = sum(a, i, k2))
-
-axiom H12 : (((((- 2147483648) <= 2147483647) -> in_range1(s2)) and
-  ((i <= (j - 1)) -> dynamic_property(i, (j - 1), k2))) and ((i <= k2) and
-  (k2 <= (j - 1))))
-
-axiom H13 : ((o = (k2 * 2000)) and in_range1((k2 * 2000)))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range1(abs_int(s2))
+goal WP_parameter_def :
+  (forall s:int. forall k:int. forall o:int. forall result:int.
+  forall s1:int. forall result1:int. forall k1:int. forall s2:int.
+  forall k2:int. (in_range2(i) -> (in_range2(j) -> ((i <= j) -> ((({
+  int__content = result } = { int__content = s }) and (s1 = 0)) ->
+  (in_range1(s1) -> ((({ int__content = result1 } = { int__content = k }) and
+  (k1 = i)) -> (((i <= k1) and (k1 <= (j - 1))) ->
+  (((abs_int(s2) <= (k2 * 2000)) and (s2 = sum(a, i, k2))) ->
+  ((((((- 2147483648) <= 2147483647) -> in_range1(s2)) and ((i <= (j - 1)) ->
+  dynamic_property(i, (j - 1), k2))) and ((i <= k2) and (k2 <= (j - 1)))) ->
+  (((o = (k2 * 2000)) and in_range1((k2 * 2000))) ->
+  in_range1(abs_int(s2)))))))))))))

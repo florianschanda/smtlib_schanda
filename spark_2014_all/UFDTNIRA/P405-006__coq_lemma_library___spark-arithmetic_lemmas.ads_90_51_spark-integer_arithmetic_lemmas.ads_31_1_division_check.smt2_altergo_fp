@@ -251,13 +251,6 @@ logic upper_bound : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-axiom H : in_range(arg1)
-
-axiom H1 : in_range1(arg2)
-
-axiom H2 : in_range1(upper_bound)
-
-axiom H3 : (not (arg2 = 0))
-
  (* File "spark-arithmetic_lemmas.ads", line 78, characters 0-0 *)
-goal WP_parameter_def : (not (arg2 = 0))
+goal WP_parameter_def : (in_range(arg1) -> (in_range1(arg2) ->
+  (in_range1(upper_bound) -> ((not (arg2 = 0)) -> (not (arg2 = 0))))))

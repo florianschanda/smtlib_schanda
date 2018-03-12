@@ -399,15 +399,8 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic z : int
-
-logic us : int
-
-axiom H : ((us = to_rep2(v)) and in_range2(to_rep2(v)))
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(z))
-
-axiom H2 : (to_rep2(v) = 0)
-
  (* File "basic.ads", line 4, characters 0-0 *)
-goal WP_parameter_def : (to_rep2(v) = 0)
+goal WP_parameter_def :
+  (forall z:int. forall us:int. (((us = to_rep2(v)) and
+  in_range2(to_rep2(v))) -> ((((- 2147483648) <= 2147483647) ->
+  in_range(z)) -> ((to_rep2(v) = 0) -> (to_rep2(v) = 0)))))

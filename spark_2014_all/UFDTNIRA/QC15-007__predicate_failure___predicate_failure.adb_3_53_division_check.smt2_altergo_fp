@@ -218,7 +218,5 @@ logic i1b : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-axiom H : in_range(i1b)
-
  (* File "predicate_failure.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (not (2 = 0))
+goal WP_parameter_def : (in_range(i1b) -> (not (2 = 0)))

@@ -115,15 +115,7 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic global_var : int
-
-logic global_var1 : int
-
-axiom H : ((0 <= 2147483647) -> in_range(global_var))
-
-axiom H1 : in_range(value)
-
-axiom H2 : in_range(id)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (id = 5)
+goal WP_parameter_def :
+  (forall global_var:int. (((0 <= 2147483647) -> in_range(global_var)) ->
+  (in_range(value) -> (in_range(id) -> (id = 5)))))

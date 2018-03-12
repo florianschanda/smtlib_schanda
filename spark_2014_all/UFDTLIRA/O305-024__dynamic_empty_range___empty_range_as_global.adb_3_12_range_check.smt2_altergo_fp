@@ -185,15 +185,6 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 axiom max__def_axiom : (max = 100)
 
-logic e : int
-
-logic e1 : int
-
-axiom H : in_range(c)
-
-axiom H1 : in_range(max)
-
-axiom H2 : (c <= 100)
-
  (* File "empty_range_as_global.adb", line 4, characters 0-0 *)
-goal WP_parameter_def : (0 <= c)
+goal WP_parameter_def : (in_range(c) -> (in_range(max) -> ((c <= 100) ->
+  (0 <= c))))

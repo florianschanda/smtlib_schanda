@@ -111,29 +111,8 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic n : int
-
-logic x : int
-
-logic y : int
-
-logic o : int
-
-logic result : int
-
-logic y1 : int
-
-axiom H : in_range(n)
-
-axiom H1 : in_range(x)
-
-axiom H2 : in_range(y)
-
-axiom H3 : (result = y)
-
-axiom H4 : (y1 = n)
-
-axiom H5 : (not (n <= 0))
-
  (* File "g.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : in_range((n - 1))
+goal WP_parameter_def :
+  (forall n:int. forall x:int. forall y:int. forall result:int.
+  forall y1:int. (in_range(n) -> (in_range(x) -> (in_range(y) ->
+  (((result = y) and (y1 = n)) -> ((not (n <= 0)) -> in_range((n - 1))))))))

@@ -196,19 +196,8 @@ axiom div__post_axiom : true
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic zero : int
-
-logic o : us_rep1
-
-logic result : int
-
-logic zero1 : int
-
-axiom H : (result = zero)
-
-axiom H1 : (zero1 = 0)
-
-axiom H2 : in_range(zero1)
-
  (* File "main2.adb", line 5, characters 0-0 *)
-goal WP_parameter_def : (not (zero1 = 0))
+goal WP_parameter_def :
+  (forall zero:int. forall result:int. forall zero1:int.
+  (((result = zero) and (zero1 = 0)) -> (in_range(zero1) ->
+  (not (zero1 = 0)))))

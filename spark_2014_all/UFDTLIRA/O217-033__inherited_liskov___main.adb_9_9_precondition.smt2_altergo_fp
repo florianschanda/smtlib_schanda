@@ -376,12 +376,6 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq4 : bool, bool -> bool
-
-axiom bool_eq_def3 :
-  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -393,6 +387,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq4 : bool, bool -> bool
+
+axiom bool_eq_def3 :
+  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -430,148 +430,43 @@ axiom less_than_max__2__def_axiom :
   o3 }) = true) <-> ((to_rep(o1) <  2147483647) and
   (to_rep(o) <  2147483647))))
 
-logic c1__split_fields : integer
-
-logic c1__split_fields1 : integer
-
-logic c1__split_fields2 : us_private
-
-logic c2__split_fields : integer
-
-logic c2__split_fields1 : integer
-
-logic c2__split_fields2 : us_private
-
-logic o : integer
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic o3 : integer
-
-logic o4 : us_private
-
-logic main__c1__assume : integer
-
-logic main__c1__assume1 : integer
-
-logic main__c1__assume2 : us_private
-
-logic main__c1__assume3 : int
-
-logic o5 : integer
-
-logic o6 : integer
-
-logic o7 : integer
-
-logic o8 : integer
-
-logic o9 : us_private
-
-logic main__c2__assume : integer
-
-logic main__c2__assume1 : integer
-
-logic main__c2__assume2 : us_private
-
-logic main__c2__assume3 : int
-
-logic result : integer
-
-logic result1 : integer
-
-logic result2 : us_private
-
-logic c1__split_fields3 : integer
-
-logic c1__split_fields4 : integer
-
-logic c1__split_fields5 : us_private
-
-logic result3 : integer
-
-logic result4 : integer
-
-logic result5 : us_private
-
-logic c2__split_fields3 : integer
-
-logic c2__split_fields4 : integer
-
-logic c2__split_fields5 : us_private
-
-axiom H : in_range(dummy8)
-
-axiom H1 : (to_rep(o) = 1)
-
-axiom H2 : (to_rep(o1) = 2147483647)
-
-axiom H3 : (o1 = o2)
-
-axiom H4 : (o = o3)
-
-axiom H5 : (us_null_ext__ = o4)
-
-axiom H6 : (main__c1__assume = o2)
-
-axiom H7 : (main__c1__assume1 = o3)
-
-axiom H8 : (main__c1__assume2 = o4)
-
-axiom H9 : (us_tag1 = main__c1__assume3)
-
-axiom H10 : (result = c1__split_fields)
-
-axiom H11 : (result1 = c1__split_fields1)
-
-axiom H12 : (result2 = c1__split_fields2)
-
-axiom H13 : (main__c1__assume = c1__split_fields3)
-
-axiom H14 : (main__c1__assume1 = c1__split_fields4)
-
-axiom H15 : (main__c1__assume2 = c1__split_fields5)
-
-axiom H16 : (c1__attr__tag = us_tag1)
-
-axiom H17 : (to_rep(o5) = 1)
-
-axiom H18 : (to_rep(o6) = 2147483647)
-
-axiom H19 : (o6 = o7)
-
-axiom H20 : (o5 = o8)
-
-axiom H21 : (us_null_ext__ = o9)
-
-axiom H22 : (main__c2__assume = o7)
-
-axiom H23 : (main__c2__assume1 = o8)
-
-axiom H24 : (main__c2__assume2 = o9)
-
-axiom H25 : (us_tag1 = main__c2__assume3)
-
-axiom H26 : (result3 = c2__split_fields)
-
-axiom H27 : (result4 = c2__split_fields1)
-
-axiom H28 : (result5 = c2__split_fields2)
-
-axiom H29 : (main__c2__assume = c2__split_fields3)
-
-axiom H30 : (main__c2__assume1 = c2__split_fields4)
-
-axiom H31 : (main__c2__assume2 = c2__split_fields5)
-
-axiom H32 : (c2__attr__tag = us_tag1)
-
-axiom H33 : (not (dummy8 = 1))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (less_than_max__2({ us_split_fields3 = {
-  rec__dispatch_in_contract__child__f2 = c2__split_fields3;
-  rec__dispatch_in_contract__root__f11 = c2__split_fields4; rec__ext__1 =
-  c2__split_fields5 }; attr__tag1 = c2__attr__tag }) = true)
+goal WP_parameter_def :
+  (forall c1__split_fields:integer. forall c1__split_fields1:integer.
+  forall c1__split_fields2:us_private. forall c2__split_fields:integer.
+  forall c2__split_fields1:integer. forall c2__split_fields2:us_private.
+  forall o:integer. forall o1:integer. forall o2:integer. forall o3:integer.
+  forall o4:us_private. forall main__c1__assume:integer.
+  forall main__c1__assume1:integer. forall main__c1__assume2:us_private.
+  forall main__c1__assume3:int. forall o5:integer. forall o6:integer.
+  forall o7:integer. forall o8:integer. forall o9:us_private.
+  forall main__c2__assume:integer. forall main__c2__assume1:integer.
+  forall main__c2__assume2:us_private. forall main__c2__assume3:int.
+  forall result:integer. forall result1:integer. forall result2:us_private.
+  forall c1__split_fields3:integer. forall c1__split_fields4:integer.
+  forall c1__split_fields5:us_private. forall result3:integer.
+  forall result4:integer. forall result5:us_private.
+  forall c2__split_fields3:integer. forall c2__split_fields4:integer.
+  forall c2__split_fields5:us_private. (in_range(dummy8) ->
+  (((((to_rep(o) = 1) and ((to_rep(o1) = 2147483647) and ((o1 = o2) and
+  ((o = o3) and (us_null_ext__ = o4))))) and (((main__c1__assume = o2) and
+  ((main__c1__assume1 = o3) and (main__c1__assume2 = o4))) and
+  (us_tag1 = main__c1__assume3))) and ((((result = c1__split_fields) and
+  ((result1 = c1__split_fields1) and (result2 = c1__split_fields2))) and
+  ((main__c1__assume = c1__split_fields3) and
+  ((main__c1__assume1 = c1__split_fields4) and
+  (main__c1__assume2 = c1__split_fields5)))) and
+  (c1__attr__tag = us_tag1))) -> (((((to_rep(o5) = 1) and
+  ((to_rep(o6) = 2147483647) and ((o6 = o7) and ((o5 = o8) and
+  (us_null_ext__ = o9))))) and (((main__c2__assume = o7) and
+  ((main__c2__assume1 = o8) and (main__c2__assume2 = o9))) and
+  (us_tag1 = main__c2__assume3))) and ((((result3 = c2__split_fields) and
+  ((result4 = c2__split_fields1) and (result5 = c2__split_fields2))) and
+  ((main__c2__assume = c2__split_fields3) and
+  ((main__c2__assume1 = c2__split_fields4) and
+  (main__c2__assume2 = c2__split_fields5)))) and
+  (c2__attr__tag = us_tag1))) -> ((not (dummy8 = 1)) -> (less_than_max__2({
+  us_split_fields3 = { rec__dispatch_in_contract__child__f2 =
+  c2__split_fields3; rec__dispatch_in_contract__root__f11 =
+  c2__split_fields4; rec__ext__1 = c2__split_fields5 }; attr__tag1 =
+  c2__attr__tag }) = true))))))

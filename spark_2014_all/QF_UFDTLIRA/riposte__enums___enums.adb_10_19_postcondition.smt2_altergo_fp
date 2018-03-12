@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -141,42 +141,21 @@ logic b : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic enums__enum_equals__result : bool
-
-logic result : bool
-
-logic enums__enum_equals__result1 : bool
-
-logic enums__enum_equals__result2 : bool
-
-logic enums__enum_equals__result3 : bool
-
-logic enums__enum_equals__result4 : bool
-
-logic enums__enum_equals__result5 : bool
-
-logic result1 : bool
-
-axiom H : in_range1(a)
-
-axiom H1 : in_range1(b)
-
-axiom H2 : (enums__enum_equals__result1 = enums__enum_equals__result2)
-
-axiom H3 : (enums__enum_equals__result3 = enums__enum_equals__result1)
-
-axiom H4 : (result = enums__enum_equals__result)
-
-axiom H5 : (((a = b) -> (enums__enum_equals__result1 = true)) and
-  ((not (a = b)) -> (enums__enum_equals__result1 = false)))
-
-axiom H6 : (enums__enum_equals__result4 = enums__enum_equals__result2)
-
-axiom H7 : (enums__enum_equals__result5 = enums__enum_equals__result3)
-
-axiom H8 : (result1 = enums__enum_equals__result4)
-
-axiom H9 : (enums__enum_equals__result4 = true)
-
  (* File "enums.adb", line 9, characters 0-0 *)
-goal WP_parameter_def : (a = b)
+goal WP_parameter_def :
+  (forall enums__enum_equals__result:bool. forall result:bool.
+  forall enums__enum_equals__result1:bool.
+  forall enums__enum_equals__result2:bool.
+  forall enums__enum_equals__result3:bool.
+  forall enums__enum_equals__result4:bool.
+  forall enums__enum_equals__result5:bool.
+  (forall result1:bool. ((in_range1(a) and (in_range1(b) and
+  (((((enums__enum_equals__result1 = enums__enum_equals__result2) and
+  (enums__enum_equals__result3 = enums__enum_equals__result1)) and
+  ((result = enums__enum_equals__result) and (((a = b) and
+  (enums__enum_equals__result1 = true)) or ((not (a = b)) and
+  (enums__enum_equals__result1 = false))))) and
+  ((enums__enum_equals__result4 = enums__enum_equals__result2) and
+  (enums__enum_equals__result5 = enums__enum_equals__result3))) and
+  (result1 = enums__enum_equals__result4)))) ->
+  ((enums__enum_equals__result4 = true) -> (a = b)))))

@@ -657,25 +657,12 @@ function unsigned64__ref___projection(a: unsigned64__ref) : unsigned64 =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic rsp : t
+logic rliteral : t
 
-logic result : t
-
-logic rsp1 : t
-
-logic rsp2 : t
-
-logic rsp3 : t
-
-axiom H : true
-
-axiom H1 : (result = rsp)
-
-axiom H2 : (rsp1 = add(rsp, of_int(8)))
-
-axiom H3 : (rsp1 = rsp2)
-
-axiom H4 : (rsp3 = rsp1)
+axiom rliteral_axiom : (tqtint(rliteral) = 8)
 
  (* File "x86.ads", line 334, characters 0-0 *)
-goal WP_parameter_def : (rsp2 = add(rsp, of_int(8)))
+goal WP_parameter_def :
+  (forall rsp:t. forall result:t. forall rsp1:t. forall rsp2:t.
+  forall rsp3:t. ((((result = rsp) and (rsp1 = add(rsp, rliteral))) and
+  ((rsp1 = rsp2) and (rsp3 = rsp1))) -> (rsp2 = add(rsp, rliteral))))

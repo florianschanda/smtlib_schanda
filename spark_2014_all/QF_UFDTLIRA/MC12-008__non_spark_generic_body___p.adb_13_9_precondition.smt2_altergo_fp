@@ -131,13 +131,6 @@ type t__ref1 = { t__content1 : t1
 
 function t__ref___2__projection(a: t__ref1) : t1 = (a).t__content1
 
-logic x : int
-
-logic g2__op__a : int
-
-axiom H : in_range(x)
-
-axiom H1 : (x <  10)
-
  (* File "g.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : (x <  10)
+goal WP_parameter_def :
+  (forall x:int. (in_range(x) -> ((x <  10) -> (x <  10))))

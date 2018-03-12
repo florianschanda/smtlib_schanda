@@ -55,12 +55,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -72,6 +66,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -263,17 +263,7 @@ logic high : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic v : int
-
-logic o : int
-
-axiom H : in_range1(low)
-
-axiom H1 : in_range1(high)
-
-axiom H2 : (low <= v)
-
-axiom H3 : (v <= high)
-
  (* File "prime_and_coprime_numbers.ads", line 45, characters 0-0 *)
-goal WP_parameter_def : in_range1(v)
+goal WP_parameter_def :
+  (forall v:int. (in_range1(low) -> (in_range1(high) -> (((low <= v) and
+  (v <= high)) -> in_range1(v)))))

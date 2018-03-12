@@ -159,25 +159,9 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic global_var : int
-
-logic r_s : int
-
-logic o : int
-
-logic o1 : int
-
-logic r_s1 : int
-
-logic result : bool
-
-axiom H : in_range(global_var)
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range2(r_s))
-
-axiom H2 : in_range2(r_s1)
-
-axiom H3 : (0 <  global_var)
-
  (* File "r_14.adb", line 10, characters 0-0 *)
-goal WP_parameter_def : in_range1((2147483647 - global_var))
+goal WP_parameter_def :
+  (forall global_var:int. forall r_s:int. forall r_s1:int.
+  (in_range(global_var) -> ((((- 2147483648) <= 2147483647) ->
+  in_range2(r_s)) -> (in_range2(r_s1) -> ((0 <  global_var) ->
+  in_range1((2147483647 - global_var)))))))

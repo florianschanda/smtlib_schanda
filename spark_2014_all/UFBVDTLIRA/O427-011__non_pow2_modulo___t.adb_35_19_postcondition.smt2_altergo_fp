@@ -938,7 +938,15 @@ axiom toBig_to_uint : (forall x:t. (tqtint(x) = tqtint1(toBig(x))))
 
 type m
 
-predicate in_range(x: t) = (ule(of_int(0), x) and ule(x, of_int(229)))
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 0)
+
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 229)
+
+predicate in_range(x: t) = (ule(rliteral1, x) and ule(x, rliteral2))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 229))
 
@@ -1001,41 +1009,21 @@ logic y : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic t__mmul__result : t
+logic rliteral3 : t1
 
-logic result : t
-
-logic t__mmul__result1 : t
-
-logic t__mmul__result2 : t
-
-logic t__mmul__result3 : t
-
-logic t__mmul__result4 : t
-
-logic t__mmul__result5 : t
-
-logic result1 : t
-
-axiom H : in_range(x)
-
-axiom H1 : in_range(y)
-
-axiom H2 : (t__mmul__result1 = t__mmul__result2)
-
-axiom H3 : (t__mmul__result3 = t__mmul__result1)
-
-axiom H4 : (result = t__mmul__result)
-
-axiom H5 : (t__mmul__result1 = toSmall(urem1(mul1(toBig(x), toBig(y)),
-  of_int1(230))))
-
-axiom H6 : (t__mmul__result4 = t__mmul__result2)
-
-axiom H7 : (t__mmul__result5 = t__mmul__result3)
-
-axiom H8 : (result1 = t__mmul__result4)
+axiom rliteral_axiom3 : (tqtint1(rliteral3) = 230)
 
  (* File "t.adb", line 6, characters 0-0 *)
-goal WP_parameter_def : (toBig(t__mmul__result4) = urem1(mul1(toBig(x),
-  toBig(y)), of_int1(230)))
+goal WP_parameter_def :
+  (forall t__mmul__result:t. forall result:t. forall t__mmul__result1:t.
+  forall t__mmul__result2:t. forall t__mmul__result3:t.
+  forall t__mmul__result4:t. forall t__mmul__result5:t.
+  (forall result1:t. ((in_range(x) and (in_range(y) and
+  (((((t__mmul__result1 = t__mmul__result2) and
+  (t__mmul__result3 = t__mmul__result1)) and (({ t__content = result } = {
+  t__content = t__mmul__result }) and
+  (t__mmul__result1 = toSmall(urem1(mul1(toBig(x), toBig(y)),
+  rliteral3))))) and (({ t__content = t__mmul__result4 } = { t__content =
+  t__mmul__result2 }) and (t__mmul__result5 = t__mmul__result3))) and
+  (result1 = t__mmul__result4)))) ->
+  (toBig(t__mmul__result4) = urem1(mul1(toBig(x), toBig(y)), rliteral3)))))

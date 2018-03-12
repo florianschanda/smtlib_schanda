@@ -176,9 +176,6 @@ type pT__ref = { pT__content : us_rep
 
 function pT__ref___projection(a: pT__ref) : us_rep = (a).pT__content
 
-logic self__ : integer
-
-logic o : int
-
  (* File "prot.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : in_range((to_rep(self__) + 1))
+goal WP_parameter_def :
+  (forall self__:integer. in_range((to_rep(self__) + 1)))

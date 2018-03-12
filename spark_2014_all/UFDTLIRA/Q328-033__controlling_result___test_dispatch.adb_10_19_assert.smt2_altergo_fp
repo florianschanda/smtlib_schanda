@@ -401,131 +401,44 @@ axiom init__def_axiom1 : (init2(void) = { us_split_fields3 = {
   rec__dispatch__nested__child__g = of_rep(1); rec__dispatch__root__f1 =
   of_rep(1); rec__ext__1 = us_null_ext__ }; attr__tag1 = us_tag1 })
 
-logic r__split_fields : integer
-
-logic r__split_fields1 : us_private
-
-logic c__split_fields : integer
-
-logic c__split_fields1 : integer
-
-logic c__split_fields2 : us_private
-
-logic rc__split_fields : integer
-
-logic rc__split_fields1 : us_private
-
-logic cc__split_fields : integer
-
-logic cc__split_fields1 : us_private
-
-logic usq_ : integer
-
-logic usq_1 : us_private
-
-logic usq_2 : int
-
-logic temp___195 : integer
-
-logic temp___1951 : us_private
-
-logic temp___1952 : int
-
-logic usq_3 : integer
-
-logic usq_4 : us_private
-
-logic usq_5 : int
-
-logic temp___196 : integer
-
-logic temp___1961 : us_private
-
-logic temp___1962 : int
-
-logic result : integer
-
-logic result1 : us_private
-
-logic rc__split_fields2 : integer
-
-logic rc__split_fields3 : us_private
-
-logic result2 : integer
-
-logic result3 : us_private
-
-logic cc__split_fields2 : integer
-
-logic cc__split_fields3 : us_private
-
-logic result4 : integer
-
-logic result5 : us_private
-
-logic rc__split_fields4 : integer
-
-logic rc__split_fields5 : us_private
-
-logic result6 : integer
-
-logic result7 : us_private
-
-logic cc__split_fields4 : integer
-
-logic cc__split_fields5 : us_private
-
-axiom H : (r__attr__tag = us_tag)
-
-axiom H1 : (c__attr__tag = us_tag1)
-
-axiom H2 : (result = rc__split_fields)
-
-axiom H3 : (result1 = rc__split_fields1)
-
-axiom H4 : (r__split_fields = rc__split_fields2)
-
-axiom H5 : (r__split_fields1 = rc__split_fields3)
-
-axiom H6 : (rc__attr__tag = r__attr__tag)
-
-axiom H7 : (result2 = cc__split_fields)
-
-axiom H8 : (result3 = cc__split_fields1)
-
-axiom H9 : ((cc__split_fields2 = c__split_fields1) and
-  (cc__split_fields3 = hide_ext__(c__split_fields, c__split_fields2)))
-
-axiom H10 : (cc__attr__tag = c__attr__tag)
-
-axiom H11 : ({ us_split_fields1 = { rec__dispatch__root__f = usq_;
-  rec__ext__ = usq_1 }; attr__tag = usq_2 } = init1(rc__attr__tag, void))
-
-axiom H12 : (usq_ = temp___195)
-
-axiom H13 : (usq_1 = temp___1951)
-
-axiom H14 : (rc__attr__tag = temp___1952)
-
-axiom H15 : ((result4 = rc__split_fields2) and (result5 = rc__split_fields3))
-
-axiom H16 : ((rc__split_fields4 = temp___195) and
-  (rc__split_fields5 = temp___1951))
-
-axiom H17 : ({ us_split_fields1 = { rec__dispatch__root__f = usq_3;
-  rec__ext__ = usq_4 }; attr__tag = usq_5 } = init1(cc__attr__tag, void))
-
-axiom H18 : (usq_3 = temp___196)
-
-axiom H19 : (usq_4 = temp___1961)
-
-axiom H20 : (cc__attr__tag = temp___1962)
-
-axiom H21 : ((result6 = cc__split_fields2) and (result7 = cc__split_fields3))
-
-axiom H22 : ((cc__split_fields4 = temp___196) and
-  (cc__split_fields5 = temp___1961))
-
  (* File "test_dispatch.adb", line 2, characters 0-0 *)
 goal WP_parameter_def :
-  (to_rep(rc__split_fields4) = to_rep(cc__split_fields4))
+  (forall r__split_fields:integer. forall r__split_fields1:us_private.
+  forall c__split_fields:integer. forall c__split_fields1:integer.
+  forall c__split_fields2:us_private. forall rc__split_fields:integer.
+  forall rc__split_fields1:us_private. forall cc__split_fields:integer.
+  forall cc__split_fields1:us_private. forall usq_:integer.
+  forall usq_1:us_private. forall usq_2:int. forall temp___222:integer.
+  forall temp___2221:us_private. forall temp___2222:int.
+  forall usq_3:integer. forall usq_4:us_private. forall usq_5:int.
+  forall temp___223:integer. forall temp___2231:us_private.
+  forall temp___2232:int. forall result:integer. forall result1:us_private.
+  forall rc__split_fields2:integer. forall rc__split_fields3:us_private.
+  forall result2:integer. forall result3:us_private.
+  forall cc__split_fields2:integer. forall cc__split_fields3:us_private.
+  forall result4:integer. forall result5:us_private.
+  forall rc__split_fields4:integer. forall rc__split_fields5:us_private.
+  forall result6:integer. forall result7:us_private.
+  forall cc__split_fields4:integer. forall cc__split_fields5:us_private.
+  ((r__attr__tag = us_tag) -> ((c__attr__tag = us_tag1) ->
+  (((((result = rc__split_fields) and (result1 = rc__split_fields1)) and
+  ((r__split_fields = rc__split_fields2) and
+  (r__split_fields1 = rc__split_fields3))) and
+  (rc__attr__tag = r__attr__tag)) -> (((((result2 = cc__split_fields) and
+  (result3 = cc__split_fields1)) and
+  ((c__split_fields1 = cc__split_fields2) and (hide_ext__(c__split_fields,
+  c__split_fields2) = cc__split_fields3))) and
+  (cc__attr__tag = c__attr__tag)) -> (((({ us_split_fields1 = {
+  rec__dispatch__root__f = usq_; rec__ext__ = usq_1 }; attr__tag = usq_2
+  } = init1(rc__attr__tag, void)) and (((usq_ = temp___222) and
+  (usq_1 = temp___2221)) and (rc__attr__tag = temp___2222))) and
+  (((result4 = rc__split_fields2) and (result5 = rc__split_fields3)) and
+  ((temp___222 = rc__split_fields4) and
+  (temp___2221 = rc__split_fields5)))) -> (((({ us_split_fields1 = {
+  rec__dispatch__root__f = usq_3; rec__ext__ = usq_4 }; attr__tag = usq_5
+  } = init1(cc__attr__tag, void)) and (((usq_3 = temp___223) and
+  (usq_4 = temp___2231)) and (cc__attr__tag = temp___2232))) and
+  (((result6 = cc__split_fields2) and (result7 = cc__split_fields3)) and
+  ((temp___223 = cc__split_fields4) and
+  (temp___2231 = cc__split_fields5)))) ->
+  (to_rep(rc__split_fields4) = to_rep(cc__split_fields4)))))))))

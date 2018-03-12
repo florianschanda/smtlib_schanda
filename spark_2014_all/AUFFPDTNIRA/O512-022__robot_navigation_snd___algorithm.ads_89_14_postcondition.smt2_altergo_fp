@@ -1287,25 +1287,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,nonnegative_float) farray, int, int,
-  (int,nonnegative_float) farray, int, int -> (int,nonnegative_float) farray
-
-axiom concat_def :
-  (forall a:(int,nonnegative_float) farray.
-  forall b:(int,nonnegative_float) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : nonnegative_float, int -> (int,nonnegative_float) farray
-
-axiom singleton_def :
-  (forall v:nonnegative_float.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq7 : (int,nonnegative_float) farray, int, int,
   (int,nonnegative_float) farray, int, int -> bool
 
@@ -1317,17 +1298,17 @@ axiom bool_eq_def6 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep3((a[temp___idx_132])) = to_rep3((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep3((a[temp___idx_154])) = to_rep3((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep3((a[temp___idx_132])) = to_rep3((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep3((a[temp___idx_154])) = to_rep3((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1338,9 +1319,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep3((a[temp___idx_132])) = to_rep3((b[((b__first - a__first) + temp___idx_132)])))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep3((a[temp___idx_154])) = to_rep3((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic dummy5 : (int,nonnegative_float) farray
 
@@ -2428,33 +2409,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,us_rep4) farray, int, int, (int,us_rep4) farray, int,
-  int -> (int,us_rep4) farray
-
-axiom concat_def1 :
-  (forall a:(int,us_rep4) farray. forall b:(int,us_rep4) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : us_rep4, int -> (int,us_rep4) farray
-
-axiom singleton_def1 :
-  (forall v:nonnegative_float. forall v1:normalized2pi.
-  (forall i:int [(singleton1({ us_split_fields9 = {
-  rec__algorithm__laser_scan_data__first = v;
-  rec__algorithm__laser_scan_data__second = { us_split_fields5 = {
-  rec__spaces__angles__angle__theta = v1 } } } }, i)[i])]. ((singleton1({
-  us_split_fields9 = { rec__algorithm__laser_scan_data__first = v;
-  rec__algorithm__laser_scan_data__second = { us_split_fields5 = {
-  rec__spaces__angles__angle__theta = v1 } } } }, i)[i]) = {
-  us_split_fields9 = { rec__algorithm__laser_scan_data__first = v;
-  rec__algorithm__laser_scan_data__second = { us_split_fields5 = {
-  rec__spaces__angles__angle__theta = v1 } } } })))
-
 logic bool_eq16 : (int,us_rep4) farray, int, int, (int,us_rep4) farray, int,
   int -> bool
 
@@ -2465,17 +2419,17 @@ axiom bool_eq_def15 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) and (bool_eq15((a[temp___idx_133]),
-  (b[((b__first - a__first) + temp___idx_133)])) = true)) or
-  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (forall temp___idx_155:int. ((((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) and (bool_eq15((a[temp___idx_155]),
+  (b[((b__first - a__first) + temp___idx_155)])) = true)) or
+  (not ((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)))))) ->
   (bool_eq16(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) -> (bool_eq15((a[temp___idx_133]),
-  (b[((b__first - a__first) + temp___idx_133)])) = true))))) -> (bool_eq16(a,
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) -> (bool_eq15((a[temp___idx_155]),
+  (b[((b__first - a__first) + temp___idx_155)])) = true))))) -> (bool_eq16(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -2485,9 +2439,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) -> (bool_eq15((a[temp___idx_133]),
-  (b[((b__first - a__first) + temp___idx_133)])) = true)))))))
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) -> (bool_eq15((a[temp___idx_155]),
+  (b[((b__first - a__first) + temp___idx_155)])) = true)))))))
 
 logic dummy42 : (int,us_rep4) farray
 
@@ -2734,12 +2688,6 @@ function controller__ref___projection(a: controller__ref) : us_rep5 =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq18 : bool, bool -> bool
-
-axiom bool_eq_def17 :
-  (forall x:bool. forall y:bool [bool_eq18(x, y)]. (((x = y) -> (bool_eq18(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq18(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -2751,6 +2699,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq18 : bool, bool -> bool
+
+axiom bool_eq_def17 :
+  (forall x:bool. forall y:bool [bool_eq18(x, y)]. (((x = y) -> (bool_eq18(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq18(x, y) = false))))
 
 predicate in_range8(x: int) = ((x = 0) or (x = 1))
 
@@ -2857,26 +2811,21 @@ type t252s__ref = { t252s__content : us_rep
 
 function t252s__ref___projection(a: t252s__ref) : us_rep = (a).t252s__content
 
-logic temp___614 : t -> (int,nonnegative_float) farray
+logic temp___680 : t -> (int,nonnegative_float) farray
 
-axiom def_axiom :
-  (forall temp___616:t.
-  (forall temp___617:int.
-  ((temp___614(temp___616)[temp___617]) = of_rep3(temp___616))))
-
-logic temp___618 : us_rep4 -> (int,us_rep4) farray
-
-axiom def_axiom1 :
-  (forall temp___620:nonnegative_float. forall temp___6201:normalized2pi.
-  (forall temp___621:int. ((temp___618({ us_split_fields9 = {
-  rec__algorithm__laser_scan_data__first = temp___620;
-  rec__algorithm__laser_scan_data__second = { us_split_fields5 = {
-  rec__spaces__angles__angle__theta = temp___6201 } } } })[temp___621]) = {
-  us_split_fields9 = { rec__algorithm__laser_scan_data__first = temp___620;
-  rec__algorithm__laser_scan_data__second = { us_split_fields5 = {
-  rec__spaces__angles__angle__theta = temp___6201 } } } })))
+logic temp___684 : us_rep4 -> (int,us_rep4) farray
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
+
+axiom def_axiom :
+  (forall temp___686:nonnegative_float. forall temp___6861:normalized2pi.
+  (forall temp___687:int. ((temp___684({ us_split_fields9 = {
+  rec__algorithm__laser_scan_data__first = temp___686;
+  rec__algorithm__laser_scan_data__second = { us_split_fields5 = {
+  rec__spaces__angles__angle__theta = temp___6861 } } } })[temp___687]) = {
+  us_split_fields9 = { rec__algorithm__laser_scan_data__first = temp___686;
+  rec__algorithm__laser_scan_data__second = { us_split_fields5 = {
+  rec__spaces__angles__angle__theta = temp___6861 } } } })))
 
 axiom null_angle__def_axiom : (null_angle = of_rep6(fliteral1))
 
@@ -2907,343 +2856,29 @@ axiom is_empty__post_axiom :
   us_split_fields7 = { rec__algorithm__gap_vectors__list = container1 }
   }) = 0)))
 
-logic this__split_fields : positive_float
-
-logic this__split_fields1 : positive_float
-
-logic this__split_fields2 : positive_float
-
-logic this__split_fields3 : positive_float
-
-logic this__split_fields4 : positive_float
-
-logic this__split_fields5 : nonnegative_float
-
-logic this__split_fields6 : nonnegative_float
-
-logic this__split_fields7 : float1
-
-logic this__split_fields8 : float1
-
-logic this__split_fields9 : float1
-
-logic this__split_fields10 : natural
-
-logic this__split_fields11 : positive_float
-
-logic this__split_fields12 : positive_float
-
-logic this__split_fields13 : (int,nonnegative_float) farray
-
-logic this__split_fields14 : unbounded_float
-
-logic this__split_fields15 : unbounded_float
-
-logic this__split_fields16 : unbounded_float
-
-logic this__split_fields17 : option
-
-logic this__split_fields18 : float1
-
-logic this__split_fields19 : float1
-
-logic this__split_fields20 : bool
-
-logic this__split_fields21 : bool
-
-logic this__split_fields22 : (int,us_rep4) farray
-
-logic this__split_fields23 : count_type
-
-logic this__split_fields24 : us_main_type
-
-logic this__split_fields25 : float1
-
-logic this__split_fields26 : normalized2pi
-
-logic this__split_fields27 : positive_float
-
-logic this__split_fields28 : positive_float
-
-logic this__split_fields29 : positive_float
-
-logic this__split_fields30 : positive_float
-
-logic this__split_fields31 : positive_float
-
-logic this__split_fields32 : nonnegative_float
-
-logic this__split_fields33 : nonnegative_float
-
-logic this__split_fields34 : float1
-
-logic this__split_fields35 : float1
-
-logic this__split_fields36 : float1
-
-logic this__split_fields37 : natural
-
-logic this__split_fields38 : positive_float
-
-logic this__split_fields39 : positive_float
-
-logic this__split_fields40 : (int,nonnegative_float) farray
-
-logic this__split_fields41 : unbounded_float
-
-logic this__split_fields42 : unbounded_float
-
-logic this__split_fields43 : unbounded_float
-
-logic this__split_fields44 : option
-
-logic this__split_fields45 : float1
-
-logic this__split_fields46 : float1
-
-logic this__split_fields47 : bool
-
-logic this__split_fields48 : bool
-
-logic this__split_fields49 : (int,us_rep4) farray
-
-logic this__split_fields50 : count_type
-
-logic this__split_fields51 : us_main_type
-
-logic this__split_fields52 : float1
-
-logic this__split_fields53 : normalized2pi
-
-logic this__split_fields54 : positive_float
-
-logic this__split_fields55 : positive_float
-
-logic this__split_fields56 : positive_float
-
-logic this__split_fields57 : positive_float
-
-logic this__split_fields58 : positive_float
-
-logic this__split_fields59 : nonnegative_float
-
-logic this__split_fields60 : nonnegative_float
-
-logic this__split_fields61 : float1
-
-logic this__split_fields62 : float1
-
-logic this__split_fields63 : float1
-
-logic this__split_fields64 : natural
-
-logic this__split_fields65 : positive_float
-
-logic this__split_fields66 : positive_float
-
-logic this__split_fields67 : (int,nonnegative_float) farray
-
-logic this__split_fields68 : unbounded_float
-
-logic this__split_fields69 : unbounded_float
-
-logic this__split_fields70 : unbounded_float
-
-logic this__split_fields71 : option
-
-logic this__split_fields72 : float1
-
-logic this__split_fields73 : float1
-
-logic this__split_fields74 : bool
-
-logic this__split_fields75 : bool
-
-logic this__split_fields76 : (int,us_rep4) farray
-
-logic this__split_fields77 : count_type
-
-logic this__split_fields78 : us_main_type
-
-logic this__split_fields79 : float1
-
-logic this__split_fields80 : normalized2pi
-
-logic this__split_fields81 : positive_float
-
-logic this__split_fields82 : positive_float
-
-logic this__split_fields83 : positive_float
-
-logic this__split_fields84 : positive_float
-
-logic this__split_fields85 : positive_float
-
-logic this__split_fields86 : nonnegative_float
-
-logic this__split_fields87 : nonnegative_float
-
-logic this__split_fields88 : float1
-
-logic this__split_fields89 : float1
-
-logic this__split_fields90 : float1
-
-logic this__split_fields91 : natural
-
-logic this__split_fields92 : positive_float
-
-logic this__split_fields93 : positive_float
-
-logic this__split_fields94 : (int,nonnegative_float) farray
-
-logic this__split_fields95 : unbounded_float
-
-logic this__split_fields96 : unbounded_float
-
-logic this__split_fields97 : unbounded_float
-
-logic this__split_fields98 : option
-
-logic this__split_fields99 : float1
-
-logic this__split_fields100 : float1
-
-logic this__split_fields101 : bool
-
-logic this__split_fields102 : bool
-
-logic this__split_fields103 : (int,us_rep4) farray
-
-logic this__split_fields104 : count_type
-
-logic this__split_fields105 : us_main_type
-
-logic this__split_fields106 : float1
-
-logic this__split_fields107 : normalized2pi
-
-logic this__split_fields108 : positive_float
-
-logic this__split_fields109 : positive_float
-
-logic this__split_fields110 : positive_float
-
-logic this__split_fields111 : positive_float
-
-logic this__split_fields112 : positive_float
-
-logic this__split_fields113 : nonnegative_float
-
-logic this__split_fields114 : nonnegative_float
-
-logic this__split_fields115 : float1
-
-logic this__split_fields116 : float1
-
-logic this__split_fields117 : float1
-
-logic this__split_fields118 : natural
-
-logic this__split_fields119 : positive_float
-
-logic this__split_fields120 : positive_float
-
-logic this__split_fields121 : (int,nonnegative_float) farray
-
-logic this__split_fields122 : unbounded_float
-
-logic this__split_fields123 : unbounded_float
-
-logic this__split_fields124 : unbounded_float
-
-logic this__split_fields125 : option
-
-logic this__split_fields126 : float1
-
-logic this__split_fields127 : float1
-
-logic this__split_fields128 : bool
-
-logic this__split_fields129 : bool
-
-logic this__split_fields130 : (int,us_rep4) farray
-
-logic this__split_fields131 : count_type
-
-logic this__split_fields132 : us_main_type
-
-logic this__split_fields133 : float1
-
-logic this__split_fields134 : normalized2pi
-
-axiom H : ((this__split_fields20 = false) and
-  (1000 = to_rep7(this__split_fields23)))
-
-axiom H1 : (eq(to_rep(this__split_fields27), to_rep(this__split_fields)) and
-  ((this__split_fields47 = false) and
-  (1000 = to_rep7(this__split_fields50))))
-
-axiom H2 : (eq(to_rep(this__split_fields54),
-  to_rep(this__split_fields27)) and ((this__split_fields74 = false) and
-  (1000 = to_rep7(this__split_fields77))))
-
-axiom H3 : (((this__split_fields81 = this__split_fields54) and
-  ((this__split_fields82 = this__split_fields55) and
-  ((this__split_fields83 = this__split_fields56) and
-  ((this__split_fields84 = this__split_fields57) and
-  ((this__split_fields85 = this__split_fields58) and
-  ((this__split_fields86 = this__split_fields59) and
-  ((this__split_fields87 = this__split_fields60) and
-  ((this__split_fields88 = this__split_fields61) and
-  ((this__split_fields89 = this__split_fields62) and
-  ((this__split_fields90 = this__split_fields63) and
-  ((this__split_fields91 = this__split_fields64) and
-  ((this__split_fields92 = this__split_fields65) and
-  ((this__split_fields93 = this__split_fields66) and
-  ((this__split_fields94 = this__split_fields67) and
-  ((this__split_fields95 = this__split_fields68) and
-  ((this__split_fields96 = this__split_fields69) and
-  ((this__split_fields97 = this__split_fields70) and
-  (((this__split_fields98 = this__split_fields71) and
-  (((this__split_fields99 = this__split_fields72) and
-  (this__split_fields100 = this__split_fields73)) and
-  (this__split_fields101 = this__split_fields74))) and
-  (this__split_fields102 = this__split_fields75))))))))))))))))))) and
-  ((this__split_fields103 = this__split_fields76) and
-  (((this__split_fields104 = this__split_fields77) and
-  (this__split_fields105 = this__split_fields78)) and
-  ((this__split_fields106 = this__split_fields79) and
-  (this__split_fields107 = this__split_fields80)))))
-
-axiom H4 : (((this__split_fields108 = this__split_fields54) and
-  ((this__split_fields109 = this__split_fields55) and
-  ((this__split_fields110 = this__split_fields56) and
-  ((this__split_fields111 = this__split_fields57) and
-  ((this__split_fields112 = this__split_fields58) and
-  ((this__split_fields113 = this__split_fields59) and
-  ((this__split_fields114 = this__split_fields60) and
-  ((this__split_fields115 = this__split_fields61) and
-  ((this__split_fields116 = this__split_fields62) and
-  ((this__split_fields117 = this__split_fields63) and
-  ((this__split_fields118 = this__split_fields64) and
-  ((this__split_fields119 = this__split_fields65) and
-  ((this__split_fields120 = this__split_fields66) and
-  ((this__split_fields121 = this__split_fields67) and
-  ((this__split_fields122 = this__split_fields68) and
-  ((this__split_fields123 = this__split_fields69) and
-  ((this__split_fields124 = this__split_fields70) and
-  (((this__split_fields125 = this__split_fields71) and
-  (((this__split_fields126 = this__split_fields72) and
-  (this__split_fields127 = this__split_fields73)) and
-  (this__split_fields128 = this__split_fields74))) and
-  (this__split_fields129 = this__split_fields75))))))))))))))))))) and
-  ((this__split_fields130 = this__split_fields76) and
-  (((this__split_fields131 = this__split_fields77) and
-  (this__split_fields132 = this__split_fields78)) and
-  ((this__split_fields133 = this__split_fields79) and
-  (this__split_fields134 = this__split_fields80)))))
+axiom def_axiom1 :
+  (forall temp___682:t. (in_range3(temp___682) ->
+  (forall temp___683:int.
+  (to_rep3((temp___680(temp___682)[temp___683])) = temp___682))))
 
  (* File "algorithm.adb", line 175, characters 0-0 *)
-goal WP_parameter_def : eq(to_rep(this__split_fields81),
-  to_rep(this__split_fields))
+goal WP_parameter_def :
+  (forall this__split_fields:us_split_fields__ref5.
+  forall this__split_fields1:us_split_fields10.
+  forall this__split_fields2:us_split_fields10.
+  forall this__split_fields3:us_split_fields__ref5.
+  forall this__split_fields4:us_split_fields10.
+  (((((((((this__split_fields).us_split_fields__content5).rec__algorithm__controller__robot).us_split_fields3).rec__robot_iface__proxy__speed).attr__constrained = false) and
+  (1000 = to_rep7(((((this__split_fields).us_split_fields__content5).rec__algorithm__controller__gapvec).us_split_discrs3).rec__algorithm__gap_vectors__list__capacity))) and
+  (((eq(to_rep((((this__split_fields1).rec__algorithm__controller__robot).us_split_fields3).rec__robot_iface__proxy__robot_radius),
+  to_rep(((((this__split_fields).us_split_fields__content5).rec__algorithm__controller__robot).us_split_fields3).rec__robot_iface__proxy__robot_radius)) and
+  ((((((this__split_fields1).rec__algorithm__controller__robot).us_split_fields3).rec__robot_iface__proxy__speed).attr__constrained = false) and
+  (1000 = to_rep7((((this__split_fields1).rec__algorithm__controller__gapvec).us_split_discrs3).rec__algorithm__gap_vectors__list__capacity)))) and
+  (eq(to_rep((((this__split_fields2).rec__algorithm__controller__robot).us_split_fields3).rec__robot_iface__proxy__robot_radius),
+  to_rep((((this__split_fields1).rec__algorithm__controller__robot).us_split_fields3).rec__robot_iface__proxy__robot_radius)) and
+  ((((((this__split_fields2).rec__algorithm__controller__robot).us_split_fields3).rec__robot_iface__proxy__speed).attr__constrained = false) and
+  (1000 = to_rep7((((this__split_fields2).rec__algorithm__controller__gapvec).us_split_discrs3).rec__algorithm__gap_vectors__list__capacity))))) and
+  ((this__split_fields3 = { us_split_fields__content5 = this__split_fields2
+  }) and (this__split_fields4 = this__split_fields2)))) ->
+  eq(to_rep(((((this__split_fields3).us_split_fields__content5).rec__algorithm__controller__robot).us_split_fields3).rec__robot_iface__proxy__robot_radius),
+  to_rep(((((this__split_fields).us_split_fields__content5).rec__algorithm__controller__robot).us_split_fields3).rec__robot_iface__proxy__robot_radius))))

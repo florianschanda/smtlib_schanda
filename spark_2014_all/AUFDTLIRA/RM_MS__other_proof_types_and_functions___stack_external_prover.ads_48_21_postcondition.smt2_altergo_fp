@@ -174,24 +174,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> (int,integer) farray
-
-axiom concat_def :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : integer, int -> (int,integer) farray
-
-axiom singleton_def :
-  (forall v:integer.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq3 : (int,integer) farray, int, int, (int,integer) farray, int,
   int -> bool
 
@@ -202,17 +184,17 @@ axiom bool_eq_def2 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq3(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq3(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -222,37 +204,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq3(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq3(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq3(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic dummy2 : (int,integer) farray
 
@@ -467,110 +421,44 @@ type index_range__ref = { index_range__content : index_range
 function index_range__ref___projection(a: index_range__ref) : index_range =
   (a).index_range__content
 
-logic x : int
-
-logic my_stack__split_fields : (int,integer) farray
-
-logic my_stack__split_fields1 : pointer_range
-
-logic o : int
-
-logic o1 : integer
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : pointer_range
-
-logic o5 : (int,integer) farray
-
-logic o6 : pointer_range
-
-logic temp___202 : (int,integer) farray
-
-logic temp___2021 : pointer_range
-
-logic result : int
-
-logic x1 : int
-
-logic result1 : (int,integer) farray
-
-logic result2 : pointer_range
-
-logic my_stack__split_fields2 : (int,integer) farray
-
-logic my_stack__split_fields3 : pointer_range
-
-logic x2 : int
-
-logic my_stack__split_fields4 : (int,integer) farray
-
-logic my_stack__split_fields5 : pointer_range
-
-logic x3 : int
-
-logic my_stack__split_fields6 : (int,integer) farray
-
-logic my_stack__split_fields7 : pointer_range
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range(x))
-
-axiom H1 : (not (is_empty({ rec__stack_external_prover__stack_type__s =
-  my_stack__split_fields; rec__stack_external_prover__stack_type__pointer =
-  my_stack__split_fields1 }) = true))
-
-axiom H2 : ((1 <= to_rep1(my_stack__split_fields1)) and
-  (to_rep1(my_stack__split_fields1) <= 100))
-
-axiom H3 : (o = to_rep1(my_stack__split_fields1))
-
-axiom H4 : (o1 = (my_stack__split_fields[o]))
-
-axiom H5 : (o2 = to_rep(o1))
-
-axiom H6 : (result = x)
-
-axiom H7 : (x1 = o2)
-
-axiom H8 : ((o3 = (to_rep1(my_stack__split_fields1) - 1)) and
-  in_range1((to_rep1(my_stack__split_fields1) - 1)))
-
-axiom H9 : (to_rep1(o4) = o3)
-
-axiom H10 : (my_stack__split_fields = o5)
-
-axiom H11 : (o4 = o6)
-
-axiom H12 : (temp___202 = o5)
-
-axiom H13 : (temp___2021 = o6)
-
-axiom H14 : (result1 = my_stack__split_fields)
-
-axiom H15 : (result2 = my_stack__split_fields1)
-
-axiom H16 : (temp___202 = my_stack__split_fields2)
-
-axiom H17 : (temp___2021 = my_stack__split_fields3)
-
-axiom H18 : (my_stack__split_fields4 = my_stack__split_fields2)
-
-axiom H19 : (my_stack__split_fields5 = my_stack__split_fields3)
-
-axiom H20 : (x2 = x1)
-
-axiom H21 : (my_stack__split_fields6 = my_stack__split_fields2)
-
-axiom H22 : (my_stack__split_fields7 = my_stack__split_fields3)
-
-axiom H23 : (x3 = x1)
-
  (* File "stack_external_prover.ads", line 39, characters 0-0 *)
-goal WP_parameter_def : (count({ rec__stack_external_prover__stack_type__s =
+goal WP_parameter_def :
+  (forall x:int. forall my_stack__split_fields:(int,integer) farray.
+  forall my_stack__split_fields1:pointer_range. forall o:int.
+  forall o1:integer. forall o2:int. forall o3:int. forall o4:pointer_range.
+  forall o5:(int,integer) farray. forall o6:pointer_range.
+  forall temp___228:(int,integer) farray. forall temp___2281:pointer_range.
+  forall result:int. forall x1:int. forall result1:(int,integer) farray.
+  forall result2:pointer_range.
+  forall my_stack__split_fields2:(int,integer) farray.
+  forall my_stack__split_fields3:pointer_range. forall x2:int.
+  forall my_stack__split_fields4:(int,integer) farray.
+  forall my_stack__split_fields5:pointer_range. forall x3:int.
+  forall my_stack__split_fields6:(int,integer) farray.
+  forall my_stack__split_fields7:pointer_range.
+  (((((- 2147483648) <= 2147483647) -> in_range(x)) and ((not (is_empty({
+  rec__stack_external_prover__stack_type__s = my_stack__split_fields;
+  rec__stack_external_prover__stack_type__pointer = my_stack__split_fields1
+  }) = true)) and ((((((((1 <= to_rep1(my_stack__split_fields1)) and
+  (to_rep1(my_stack__split_fields1) <= 100)) and
+  (o = to_rep1(my_stack__split_fields1))) and
+  (o1 = (my_stack__split_fields[o]))) and (o2 = to_rep(o1))) and (({
+  int__content = result } = { int__content = x }) and (x1 = o2))) and
+  ((((((o3 = (to_rep1(my_stack__split_fields1) - 1)) and
+  in_range1((to_rep1(my_stack__split_fields1) - 1))) and
+  (to_rep1(o4) = o3)) and ((my_stack__split_fields = o5) and (o4 = o6))) and
+  ((temp___228 = o5) and (temp___2281 = o6))) and
+  (((result1 = my_stack__split_fields) and
+  (result2 = my_stack__split_fields1)) and
+  ((temp___228 = my_stack__split_fields2) and
+  (temp___2281 = my_stack__split_fields3))))) and
+  ((((my_stack__split_fields4 = my_stack__split_fields2) and
+  (my_stack__split_fields5 = my_stack__split_fields3)) and (x2 = x1)) and
+  (((my_stack__split_fields6 = my_stack__split_fields2) and
+  (my_stack__split_fields7 = my_stack__split_fields3)) and (x3 = x1)))))) ->
+  (count({ rec__stack_external_prover__stack_type__s =
   my_stack__split_fields4; rec__stack_external_prover__stack_type__pointer =
   my_stack__split_fields5 }) = (count({
   rec__stack_external_prover__stack_type__s = my_stack__split_fields;
   rec__stack_external_prover__stack_type__pointer = my_stack__split_fields1
-  }) - 1))
+  }) - 1))))

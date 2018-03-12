@@ -214,24 +214,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -242,17 +224,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -262,37 +244,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 logic to_rep1 : integer -> int
 
@@ -574,12 +528,7 @@ type object__ref = { object__content : us_rep
 function object__ref___projection(a: object__ref) : us_rep =
   (a).object__content
 
-logic temp___139 : int -> (int,character) farray
-
-axiom def_axiom :
-  (forall temp___141:int.
-  (forall temp___142:int.
-  ((temp___139(temp___141)[temp___142]) = of_rep(temp___141))))
+logic temp___162 : int -> (int,character) farray
 
 logic elements : us_rep -> int
 
@@ -916,115 +865,29 @@ type t24b__ref = { t24b__content : us_t2
 
 function t24b__ref___projection(a: t24b__ref) : us_t2 = (a).t24b__content
 
-logic len : int
+axiom def_axiom :
+  (forall temp___164:int. (in_range2(temp___164) ->
+  (forall temp___165:int.
+  (to_rep((temp___162(temp___164)[temp___165])) = temp___164))))
 
-logic out_string : (int,character) farray
-
-logic fixed_string__convert__result : (int,character) farray
-
-logic fixed_string__convert__result1 : t
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic fixed_string__convert__out_string__assume : (int,character) farray
-
-logic fixed_string__convert__out_string__assume1 : t
-
-logic fixed_string__convert__R19b__assume : int
-
-logic fixed_string__convert__R22b__assume : int
-
-logic o3 : (int,character) farray
-
-logic temp___233 : (int,character) farray
-
-logic temp___2331 : t2
-
-logic temp___234 : (int,character) farray
-
-logic temp___2341 : t1
-
-logic o4 : (int,character) farray
-
-logic temp___236 : (int,character) farray
-
-logic temp___2361 : t1
-
-logic temp___237 : (int,character) farray
-
-logic temp___2371 : t1
-
-logic o5 : (int,character) farray
-
-logic o6 : int
-
-logic o7 : int
-
-logic result : int
-
-logic len1 : int
-
-logic result1 : (int,character) farray
-
-logic out_string1 : (int,character) farray
-
-logic result2 : (int,character) farray
-
-logic out_string2 : (int,character) farray
-
-logic result3 : (int,character) farray
-
-logic result4 : t
-
-logic fixed_string__convert__result2 : (int,character) farray
-
-logic fixed_string__convert__result3 : t
-
-logic fixed_string__convert__result4 : (int,character) farray
-
-logic fixed_string__convert__result5 : t
-
-logic fixed_string__convert__result6 : (int,character) farray
-
-logic fixed_string__convert__result7 : t
-
-logic len2 : int
-
-logic out_string3 : (int,character) farray
-
-logic fixed_string__convert__result8 : (int,character) farray
-
-logic fixed_string__convert__result9 : t
-
-logic len3 : int
-
-logic out_string4 : (int,character) farray
-
-logic fixed_string__convert__result10 : (int,character) farray
-
-logic fixed_string__convert__result11 : t
-
-axiom H : dynamic_property(1, 2147483647, to_rep1(first(in_string1)),
-  to_rep1(last(in_string1)))
-
-axiom H1 : ((o = length({ elts = in_string; rt = in_string1 })) and
-  in_range(length({ elts = in_string; rt = in_string1 })))
-
-axiom H2 : (o1 = min(o, to_rep2(this)))
-
-axiom H3 : ((o2 = o1) and in_range3(o1))
-
-axiom H4 : (result = len)
-
-axiom H5 : (len1 = o2)
-
-axiom H6 : in_range3(len1)
-
-axiom H7 : (({ elts = fixed_string__convert__out_string__assume; rt =
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (forall len:int. forall out_string:(int,character) farray. forall o:int.
+  forall o1:int. forall o2:int.
+  forall fixed_string__convert__out_string__assume:(int,character) farray.
+  forall fixed_string__convert__out_string__assume1:t.
+  forall fixed_string__convert__R19b__assume:int.
+  forall fixed_string__convert__R22b__assume:int.
+  forall o3:(int,character) farray. forall temp___256:(int,character) farray.
+  forall temp___2561:t2. forall result:int. forall len1:int.
+  forall result1:(int,character) farray.
+  forall out_string1:(int,character) farray. (dynamic_property(1, 2147483647,
+  to_rep1(first(in_string1)), to_rep1(last(in_string1))) ->
+  ((((((o = length({ elts = in_string; rt = in_string1 })) and
+  in_range(length({ elts = in_string; rt = in_string1 }))) and (o1 = min(o,
+  to_rep2(this)))) and ((o2 = o1) and in_range3(o1))) and (({ int__content =
+  result } = { int__content = len }) and (len1 = o2))) -> (in_range3(len1) ->
+  (((({ elts = fixed_string__convert__out_string__assume; rt =
   fixed_string__convert__out_string__assume1 } = null_string({
   us_split_fields1 = { rec__fixed_string__object__width = this;
   rec__fixed_string__object__name = this1; rec__ext__ = this2 }; attr__tag =
@@ -1035,56 +898,30 @@ axiom H7 : (({ elts = fixed_string__convert__out_string__assume; rt =
   fixed_string__convert__out_string__assume1 }) = elements({
   us_split_fields1 = { rec__fixed_string__object__width = this;
   rec__fixed_string__object__name = this1; rec__ext__ = this2 }; attr__tag =
-  this3 }))))
-
-axiom H8 : (result1 = out_string)
-
-axiom H9 : (out_string1 = fixed_string__convert__out_string__assume)
-
-axiom H10 :
-  (to_rep1(out_string__first) = to_rep1(first(fixed_string__convert__out_string__assume1)))
-
-axiom H11 :
-  (to_rep1(out_string__last) = to_rep1(last(fixed_string__convert__out_string__assume1)))
-
-axiom H12 : dynamic_property(1, 2147483647, to_rep1(out_string__first),
-  to_rep1(out_string__last))
-
-axiom H13 :
-  ((fixed_string__convert__R19b__assume = (to_rep1(out_string__first) + (len1 - 1))) and
-  in_range((to_rep1(out_string__first) + (len1 - 1))))
-
-axiom H14 : (fixed_string__convert__R19b__assume = r19b)
-
-axiom H15 : in_range(r19b)
-
-axiom H16 :
-  ((fixed_string__convert__R22b__assume = (to_rep1(first(in_string1)) + (len1 - 1))) and
-  in_range((to_rep1(first(in_string1)) + (len1 - 1))))
-
-axiom H17 : (fixed_string__convert__R22b__assume = r22b)
-
-axiom H18 : in_range(r22b)
-
-axiom H19 : ((to_rep1(first(in_string1)) <= r22b) ->
+  this3 })))) and ((({ map__content = result1 } = { map__content = out_string
+  }) and (out_string1 = fixed_string__convert__out_string__assume)) and
+  ((to_rep1(out_string__first) = to_rep1(first(fixed_string__convert__out_string__assume1))) and
+  (to_rep1(out_string__last) = to_rep1(last(fixed_string__convert__out_string__assume1)))))) ->
+  (dynamic_property(1, 2147483647, to_rep1(out_string__first),
+  to_rep1(out_string__last)) ->
+  (((((fixed_string__convert__R19b__assume = (to_rep1(out_string__first) + (len1 - 1))) and
+  in_range((to_rep1(out_string__first) + (len1 - 1)))) and
+  (fixed_string__convert__R19b__assume = r19b)) and in_range(r19b)) ->
+  (((((fixed_string__convert__R22b__assume = (to_rep1(first(in_string1)) + (len1 - 1))) and
+  in_range((to_rep1(first(in_string1)) + (len1 - 1)))) and
+  (fixed_string__convert__R22b__assume = r22b)) and in_range(r22b)) ->
+  (((((to_rep1(first(in_string1)) <= r22b) ->
   (((to_rep1(first(in_string1)) <= to_rep1(first(in_string1))) and
   (to_rep1(first(in_string1)) <= to_rep1(last(in_string1)))) and
   ((to_rep1(first(in_string1)) <= r22b) and
-  (r22b <= to_rep1(last(in_string1))))))
-
-axiom H20 : (o3 = in_string)
-
-axiom H21 : (o3 = temp___233)
-
-axiom H22 : (mk2(to_rep1(first(in_string1)), r22b) = temp___2331)
-
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (((to_rep1(first4(temp___2331)) <= to_rep1(last4(temp___2331))) ->
+  (r22b <= to_rep1(last(in_string1)))))) and (o3 = in_string)) and
+  ((o3 = temp___256) and (mk2(to_rep1(first(in_string1)),
+  r22b) = temp___2561))) ->
+  (((to_rep1(first4(temp___2561)) <= to_rep1(last4(temp___2561))) ->
   (((to_rep1(out_string__first) <= r19b) ->
-  (((to_rep1(last4(temp___2331)) - to_rep1(first4(temp___2331))) + 1) = ((r19b - to_rep1(out_string__first)) + 1))) and
+  (((to_rep1(last4(temp___2561)) - to_rep1(first4(temp___2561))) + 1) = ((r19b - to_rep1(out_string__first)) + 1))) and
   ((not (to_rep1(out_string__first) <= r19b)) ->
-  (((to_rep1(last4(temp___2331)) - to_rep1(first4(temp___2331))) + 1) = 0)))) and
-  ((not (to_rep1(first4(temp___2331)) <= to_rep1(last4(temp___2331)))) ->
+  (((to_rep1(last4(temp___2561)) - to_rep1(first4(temp___2561))) + 1) = 0)))) and
+  ((not (to_rep1(first4(temp___2561)) <= to_rep1(last4(temp___2561)))) ->
   ((to_rep1(out_string__first) <= r19b) ->
-  (0 = ((r19b - to_rep1(out_string__first)) + 1)))))
+  (0 = ((r19b - to_rep1(out_string__first)) + 1))))))))))))))

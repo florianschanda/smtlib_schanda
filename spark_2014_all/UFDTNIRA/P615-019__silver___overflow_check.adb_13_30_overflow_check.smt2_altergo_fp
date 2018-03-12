@@ -323,35 +323,8 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic u : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-axiom H : in_range2(op)
-
-axiom H1 : in_range(x)
-
-axiom H2 : in_range(y)
-
-axiom H3 : in_range1(e)
-
-axiom H4 : (((- 2147483648) <= 2147483647) -> in_range(u))
-
-axiom H5 : (not (op = 0))
-
-axiom H6 : (op = 1)
-
  (* File "overflow_check.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(abs_int(x))
+goal WP_parameter_def :
+  (forall u:int. (in_range2(op) -> (in_range(x) -> (in_range(y) ->
+  (in_range1(e) -> ((((- 2147483648) <= 2147483647) -> in_range(u)) ->
+  ((not (op = 0)) -> ((op = 1) -> in_range(abs_int(x))))))))))

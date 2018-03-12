@@ -406,23 +406,6 @@ logic m : money
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic p__ident__4__result : money
-
-logic o : money
-
-logic result : money
-
-logic p__ident__4__result1 : money
-
-logic p__ident__4__result2 : money
-
-logic p__ident__4__result3 : money
-
-logic p__ident__4__result4 : money
-
-logic p__ident__4__result5 : money
-
-axiom H : (not (to_fixed1(m) = 999999999999999))
-
  (* File "p.adb", line 6, characters 0-0 *)
-goal WP_parameter_def : (not ((to_fixed1(m) + 1) = (- 9223372036854775808)))
+goal WP_parameter_def : ((not (to_fixed1(m) = 999999999999999)) ->
+  (not ((to_fixed1(m) + 1) = (- 9223372036854775808))))

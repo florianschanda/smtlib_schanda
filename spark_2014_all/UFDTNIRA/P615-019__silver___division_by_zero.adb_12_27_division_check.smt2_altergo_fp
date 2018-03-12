@@ -254,19 +254,8 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic u : int
-
-logic o : int
-
-axiom H : in_range1(op)
-
-axiom H1 : in_range(x)
-
-axiom H2 : in_range(y)
-
-axiom H3 : (((- 2147483648) <= 2147483647) -> in_range(u))
-
-axiom H4 : (op = 0)
-
  (* File "division_by_zero.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : (not (y = 0))
+goal WP_parameter_def :
+  (forall u:int. (in_range1(op) -> (in_range(x) -> (in_range(y) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(u)) -> ((op = 0) ->
+  (not (y = 0))))))))

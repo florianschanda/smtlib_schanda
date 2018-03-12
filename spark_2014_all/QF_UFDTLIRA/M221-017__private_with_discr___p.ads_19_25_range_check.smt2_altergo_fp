@@ -105,7 +105,5 @@ type integer__ref = { integer__content : integer
 function integer__ref___projection(a: integer__ref) : integer =
   (a).integer__content
 
-logic us : int
-
  (* File "p.ads", line 27, characters 0-0 *)
 goal WP_parameter_def : in_range(10)

@@ -656,41 +656,21 @@ logic b : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic pack__minus__result : t
+logic rliteral : t
 
-logic result : t
-
-logic pack__minus__result1 : t
-
-logic pack__minus__result2 : t
-
-logic pack__minus__result3 : t
-
-logic pack__minus__result4 : t
-
-logic pack__minus__result5 : t
-
-logic result1 : t
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : (not (a = b))
-
-axiom H3 : (pack__minus__result1 = pack__minus__result2)
-
-axiom H4 : (pack__minus__result3 = pack__minus__result1)
-
-axiom H5 : (result = pack__minus__result)
-
-axiom H6 : (pack__minus__result1 = sub(a, b))
-
-axiom H7 : (pack__minus__result4 = pack__minus__result2)
-
-axiom H8 : (pack__minus__result5 = pack__minus__result3)
-
-axiom H9 : (result1 = pack__minus__result4)
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
 
  (* File "pack.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (not (pack__minus__result4 = of_int(0)))
+goal WP_parameter_def :
+  (forall pack__minus__result:t. forall result:t.
+  forall pack__minus__result1:t. forall pack__minus__result2:t.
+  forall pack__minus__result3:t. forall pack__minus__result4:t.
+  forall pack__minus__result5:t.
+  (forall result1:t. (((not (a = b)) and
+  (((((pack__minus__result1 = pack__minus__result2) and
+  (pack__minus__result3 = pack__minus__result1)) and
+  ((result = pack__minus__result) and (pack__minus__result1 = sub(a,
+  b)))) and ((pack__minus__result4 = pack__minus__result2) and
+  (pack__minus__result5 = pack__minus__result3))) and
+  (result1 = pack__minus__result4))) ->
+  (not (pack__minus__result4 = rliteral)))))

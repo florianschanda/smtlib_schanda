@@ -246,23 +246,9 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : int
-
-logic o : int
-
-logic dynamic_preds_array__init_even__x : int
-
-logic result : int
-
-logic x1 : int
-
-logic dynamic_preds_array__init_ok_even__x : int
-
-axiom H : (in_range(i11s) and (mod(i11s, 2) = 0))
-
-axiom H1 : (in_range(x) and (mod(x, 2) = 0))
-
-axiom H2 : in_range1(dynamic_preds_array__init_even__x)
-
  (* File "dynamic_preds_array.ads", line 4, characters 0-0 *)
-goal WP_parameter_def : (mod(dynamic_preds_array__init_even__x, 2) = 0)
+goal WP_parameter_def :
+  (forall x:int. forall dynamic_preds_array__init_even__x:int.
+  ((in_range(i11s) and (mod(i11s, 2) = 0)) -> ((in_range(x) and (mod(x,
+  2) = 0)) -> (in_range1(dynamic_preds_array__init_even__x) ->
+  (mod(dynamic_preds_array__init_even__x, 2) = 0)))))

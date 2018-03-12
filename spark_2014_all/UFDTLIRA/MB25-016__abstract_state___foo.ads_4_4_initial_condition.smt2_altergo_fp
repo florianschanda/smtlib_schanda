@@ -120,45 +120,14 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic c : int
-
-logic a : int
-
-logic b : int
-
-logic result : int
-
-logic a1 : int
-
-logic result1 : int
-
-logic b1 : int
-
-logic result2 : int
-
-logic c1 : int
-
-logic result3 : bool
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range(c))
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(a))
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range(b))
-
-axiom H3 : (result = a)
-
-axiom H4 : (a1 = 1)
-
-axiom H5 : (result1 = b)
-
-axiom H6 : (b1 = 2)
-
-axiom H7 : (result2 = c)
-
-axiom H8 : (c1 = 3)
-
-axiom H9 : ((result3 = f2(c1)) and ((result3 = true) <-> (0 <  c1)))
-
  (* File "foo.ads", line 12, characters 0-0 *)
-goal WP_parameter_def : (f2(c1) = true)
+goal WP_parameter_def :
+  (forall c:int. forall a:int. forall b:int. forall result:int.
+  forall a1:int. forall result1:int. forall b1:int. forall result2:int.
+  forall c1:int.
+  (forall result3:bool. (((((- 2147483648) <= 2147483647) -> in_range(c)) and
+  ((((- 2147483648) <= 2147483647) -> in_range(a)) and
+  ((((- 2147483648) <= 2147483647) -> in_range(b)) and (((result = a) and
+  (a1 = 1)) and (((result1 = b) and (b1 = 2)) and (((result2 = c) and
+  (c1 = 3)) and ((result3 = f2(c1)) and ((result3 = true) <->
+  (0 <  c1))))))))) -> (f2(c1) = true))))

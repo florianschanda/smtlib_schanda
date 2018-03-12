@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -331,203 +331,52 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic lower : int
-
-logic upper : int
-
-logic middle : int
-
-logic p__sqrt_binary__result : int
-
-logic temp___224 : int
-
-logic temp___223 : int
-
-logic temp___222 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : bool
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : bool
-
-logic result : int
-
-logic lower1 : int
-
-logic result1 : int
-
-logic upper1 : int
-
-logic lower2 : int
-
-logic upper2 : int
-
-logic middle1 : int
-
-logic result2 : int
-
-logic middle2 : int
-
-logic result3 : bool
-
-logic result4 : int
-
-logic upper3 : int
-
-logic result5 : int
-
-logic lower3 : int
-
-logic lower4 : int
-
-logic upper4 : int
-
-logic middle3 : int
-
-logic lower5 : int
-
-logic upper5 : int
-
-logic middle4 : int
-
-logic lower6 : int
-
-logic upper6 : int
-
-logic middle5 : int
-
-logic lower7 : int
-
-logic upper7 : int
-
-logic middle6 : int
-
-logic lower8 : int
-
-logic upper8 : int
-
-logic middle7 : int
-
-logic lower9 : int
-
-logic upper9 : int
-
-logic middle8 : int
-
-logic lower10 : int
-
-logic upper10 : int
-
-logic middle9 : int
-
-logic lower11 : int
-
-logic upper11 : int
-
-logic middle10 : int
-
-logic result6 : int
-
-logic p__sqrt_binary__result1 : int
-
-logic p__sqrt_binary__result2 : int
-
-logic p__sqrt_binary__result3 : int
-
-logic lower12 : int
-
-logic upper12 : int
-
-logic middle11 : int
-
-logic p__sqrt_binary__result4 : int
-
-logic lower13 : int
-
-logic upper13 : int
-
-logic middle12 : int
-
-logic p__sqrt_binary__result5 : int
-
-axiom H : in_range2(x)
-
-axiom H1 : ((0 <= 46340) -> in_range3(lower))
-
-axiom H2 : ((0 <= 46341) -> in_range4(upper))
-
-axiom H3 : ((0 <= 46340) -> in_range3(middle))
-
-axiom H4 : (result = lower)
-
-axiom H5 : (lower1 = 0)
-
-axiom H6 : (result1 = upper)
-
-axiom H7 : (upper1 = 46341)
-
-axiom H8 : (((temp___224 = upper1) and ((temp___223 = lower1) and
-  ((temp___222 = middle) and ((((lower2 * lower2) <= x) and
-  (x <  (upper2 * upper2))) and (((((0 <= 46340) -> in_range3(middle1)) and
-  ((0 <= 46340) -> in_range3(lower2))) and ((0 <= 46341) ->
-  in_range4(upper2))) and ((((middle1 = middle3) and ((upper2 = upper4) and
-  (lower2 = lower4))) and ((middle4 = middle1) and ((upper5 = upper2) and
-  (lower5 = lower2)))) and ((lower2 + 1) = upper2))))))) and
-  (((middle7 = middle3) and ((upper8 = upper4) and (lower8 = lower4))) and
-  ((middle8 = middle4) and ((upper9 = upper5) and (lower9 = lower5)))))
-
-axiom H9 : (middle9 = middle7)
-
-axiom H10 : (upper10 = upper8)
-
-axiom H11 : (lower10 = lower8)
-
-axiom H12 : (middle10 = middle8)
-
-axiom H13 : (upper11 = upper9)
-
-axiom H14 : (lower11 = lower9)
-
-axiom H15 : (p__sqrt_binary__result2 = p__sqrt_binary__result1)
-
-axiom H16 : (p__sqrt_binary__result3 = p__sqrt_binary__result1)
-
-axiom H17 : (result6 = p__sqrt_binary__result)
-
-axiom H18 : (p__sqrt_binary__result1 = lower10)
-
-axiom H19 : (p__sqrt_binary__result4 = p__sqrt_binary__result2)
-
-axiom H20 : (middle11 = middle9)
-
-axiom H21 : (upper12 = upper10)
-
-axiom H22 : (lower12 = lower10)
-
-axiom H23 : (p__sqrt_binary__result5 = p__sqrt_binary__result3)
-
-axiom H24 : (middle12 = middle10)
-
-axiom H25 : (upper13 = upper11)
-
-axiom H26 : (lower13 = lower11)
-
-axiom H27 :
-  ((o5 = ((p__sqrt_binary__result4 + 1) * (p__sqrt_binary__result4 + 1))) and
-  in_range1(((p__sqrt_binary__result4 + 1) * (p__sqrt_binary__result4 + 1))))
-
-axiom H28 : (((x <  o5) -> (o6 = true)) and ((not (x <  o5)) ->
-  (o6 = false)))
-
  (* File "p.ads", line 5, characters 0-0 *)
 goal WP_parameter_def :
-  in_range1((p__sqrt_binary__result4 * p__sqrt_binary__result4))
+  (forall lower:int. forall upper:int. forall middle:int.
+  forall p__sqrt_binary__result:int. forall temp___261:int.
+  forall temp___260:int. forall temp___259:int. forall o:int. forall o1:bool.
+  forall result:int. forall lower1:int. forall result1:int.
+  forall upper1:int. forall lower2:int. forall upper2:int.
+  forall middle1:int. forall lower3:int. forall upper3:int.
+  forall middle2:int. forall lower4:int. forall upper4:int.
+  forall middle3:int. forall lower5:int. forall upper5:int.
+  forall middle4:int. forall lower6:int. forall upper6:int.
+  forall middle5:int. forall lower7:int. forall upper7:int.
+  forall middle6:int. forall lower8:int. forall upper8:int.
+  forall middle7:int. forall result2:int. forall p__sqrt_binary__result1:int.
+  forall p__sqrt_binary__result2:int. forall p__sqrt_binary__result3:int.
+  forall lower9:int. forall upper9:int. forall middle8:int.
+  forall p__sqrt_binary__result4:int. forall lower10:int. forall upper10:int.
+  forall middle9:int. forall p__sqrt_binary__result5:int. (in_range2(x) ->
+  (((((0 <= 46340) -> in_range3(lower)) and (((0 <= 46341) ->
+  in_range4(upper)) and (((0 <= 46340) -> in_range3(middle)) and ((({
+  int__content = result } = { int__content = lower }) and (lower1 = 0)) and
+  ((({ int__content = result1 } = { int__content = upper }) and
+  (upper1 = 46341)) and (((((temp___261 = upper1) and
+  ((temp___260 = lower1) and ((temp___259 = middle) and
+  ((((lower2 * lower2) <= x) and (x <  (upper2 * upper2))) and
+  (((((0 <= 46340) -> in_range3(middle1)) and ((0 <= 46340) ->
+  in_range3(lower2))) and ((0 <= 46341) -> in_range4(upper2))) and
+  ((((middle1 = middle2) and ((upper2 = upper3) and (lower2 = lower3))) and
+  ((middle3 = middle1) and ((upper4 = upper2) and (lower4 = lower2)))) and
+  ((lower2 + 1) = upper2))))))) and ((({ int__content = middle4 } = {
+  int__content = middle2 }) and (({ int__content = upper5 } = {
+  int__content = upper3 }) and ({ int__content = lower5 } = { int__content =
+  lower3 }))) and ((middle5 = middle3) and ((upper6 = upper4) and
+  (lower6 = lower4))))) and ((({ int__content = middle6 } = { int__content =
+  middle4 }) and (({ int__content = upper7 } = { int__content = upper5 }) and
+  ({ int__content = lower7 } = { int__content = lower5 }))) and
+  ((middle7 = middle5) and ((upper8 = upper6) and (lower8 = lower6))))) and
+  (((p__sqrt_binary__result1 = p__sqrt_binary__result2) and
+  (p__sqrt_binary__result3 = p__sqrt_binary__result1)) and
+  ((result2 = p__sqrt_binary__result) and
+  (p__sqrt_binary__result1 = lower7))))))))) and ((({ int__content =
+  p__sqrt_binary__result4 } = { int__content = p__sqrt_binary__result2 }) and
+  ((middle8 = middle6) and ((upper9 = upper7) and (lower9 = lower7)))) and
+  ((p__sqrt_binary__result5 = p__sqrt_binary__result3) and
+  ((middle9 = middle7) and ((upper10 = upper8) and (lower10 = lower8)))))) ->
+  ((((o = ((p__sqrt_binary__result4 + 1) * (p__sqrt_binary__result4 + 1))) and
+  in_range1(((p__sqrt_binary__result4 + 1) * (p__sqrt_binary__result4 + 1)))) and
+  (((x <  o) and (o1 = true)) or ((not (x <  o)) and (o1 = false)))) ->
+  in_range1((p__sqrt_binary__result4 * p__sqrt_binary__result4))))))

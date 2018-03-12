@@ -1088,13 +1088,6 @@ logic right : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : t
-
-axiom H : tqtisFinite(left)
-
-axiom H1 : tqtisFinite(right)
-
-axiom H2 : eq(left, fliteral1)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : lt(fliteral1, right)
+goal WP_parameter_def : (tqtisFinite(left) -> (tqtisFinite(right) ->
+  (eq(left, fliteral1) -> lt(fliteral1, right))))

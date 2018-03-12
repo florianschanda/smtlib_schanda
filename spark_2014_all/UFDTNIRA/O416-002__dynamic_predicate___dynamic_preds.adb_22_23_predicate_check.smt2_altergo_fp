@@ -242,21 +242,6 @@ function even__ref___projection(a: even__ref) : even = (a).even__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : int
-
-logic o : int
-
-logic dynamic_preds__call_init_even__x : int
-
-logic dynamic_preds__call_init_even__x1 : int
-
-logic result : int
-
-logic x1 : int
-
-axiom H : in_range(x)
-
-axiom H1 : (mod(x, 2) = 0)
-
  (* File "dynamic_preds.adb", line 14, characters 0-0 *)
-goal WP_parameter_def : (mod(x, 2) = 0)
+goal WP_parameter_def :
+  (forall x:int. (in_range(x) -> ((mod(x, 2) = 0) -> (mod(x, 2) = 0))))

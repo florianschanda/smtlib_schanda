@@ -222,259 +222,72 @@ logic b : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic one : int
-
-logic r__split_fields : integer
-
-logic r__split_fields1 : integer
-
-logic o : integer
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic o3 : integer
-
-logic temp___172 : integer
-
-logic temp___1721 : integer
-
-logic o4 : integer
-
-logic o5 : integer
-
-logic o6 : integer
-
-logic o7 : integer
-
-logic temp___173 : integer
-
-logic temp___1731 : integer
-
-logic o8 : integer
-
-logic o9 : integer
-
-logic o10 : integer
-
-logic o11 : integer
-
-logic temp___174 : integer
-
-logic temp___1741 : integer
-
-logic o12 : integer
-
-logic o13 : integer
-
-logic o14 : integer
-
-logic o15 : integer
-
-logic temp___175 : integer
-
-logic temp___1751 : integer
-
-logic o16 : integer
-
-logic o17 : integer
-
-logic o18 : integer
-
-logic o19 : integer
-
-logic temp___176 : integer
-
-logic temp___1761 : integer
-
-logic o20 : int
-
-logic result : integer
-
-logic result1 : integer
-
-logic r__split_fields2 : integer
-
-logic r__split_fields3 : integer
-
-logic result2 : integer
-
-logic result3 : integer
-
-logic r__split_fields4 : integer
-
-logic r__split_fields5 : integer
-
-logic result4 : integer
-
-logic result5 : integer
-
-logic r__split_fields6 : integer
-
-logic r__split_fields7 : integer
-
-logic result6 : integer
-
-logic result7 : integer
-
-logic r__split_fields8 : integer
-
-logic r__split_fields9 : integer
-
-logic result8 : integer
-
-logic result9 : integer
-
-logic r__split_fields10 : integer
-
-logic r__split_fields11 : integer
-
-logic r__split_fields12 : integer
-
-logic r__split_fields13 : integer
-
-logic r__split_fields14 : integer
-
-logic r__split_fields15 : integer
-
-axiom H : in_range(one)
-
-axiom H1 : in_range(b)
-
-axiom H2 : (one = 1)
-
-axiom H3 : ((b = 1) -> (to_rep(o) = 2))
-
-axiom H4 : ((b = 1) -> (to_rep(o1) = one))
-
-axiom H5 : ((b = 1) -> (o1 = o2))
-
-axiom H6 : ((b = 1) -> (o = o3))
-
-axiom H7 : ((b = 1) -> (temp___172 = o2))
-
-axiom H8 : ((b = 1) -> (temp___1721 = o3))
-
-axiom H9 : ((b = 1) -> ((result = r__split_fields) and
-  (result1 = r__split_fields1)))
-
-axiom H10 : ((b = 1) -> (temp___172 = r__split_fields2))
-
-axiom H11 : ((b = 1) -> (temp___1721 = r__split_fields3))
-
-axiom H12 : ((not (b = 1)) -> ((b = 2) -> (to_rep(o4) = one)))
-
-axiom H13 : ((not (b = 1)) -> ((b = 2) -> (to_rep(o5) = one)))
-
-axiom H14 : ((not (b = 1)) -> ((b = 2) -> (o5 = o6)))
-
-axiom H15 : ((not (b = 1)) -> ((b = 2) -> (o4 = o7)))
-
-axiom H16 : ((not (b = 1)) -> ((b = 2) -> (temp___173 = o6)))
-
-axiom H17 : ((not (b = 1)) -> ((b = 2) -> (temp___1731 = o7)))
-
-axiom H18 : ((not (b = 1)) -> ((b = 2) -> ((result2 = r__split_fields) and
-  (result3 = r__split_fields1))))
-
-axiom H19 : ((not (b = 1)) -> ((b = 2) ->
-  ((r__split_fields4 = temp___173) and (r__split_fields5 = temp___1731))))
-
-axiom H20 : ((not (b = 1)) -> ((not (b = 2)) -> ((b = 3) ->
-  (to_rep(o8) = one))))
-
-axiom H21 : ((not (b = 1)) -> ((not (b = 2)) -> ((b = 3) ->
-  (to_rep(o9) = one))))
-
-axiom H22 : ((not (b = 1)) -> ((not (b = 2)) -> ((b = 3) -> (o9 = o10))))
-
-axiom H23 : ((not (b = 1)) -> ((not (b = 2)) -> ((b = 3) -> (o8 = o11))))
-
-axiom H24 : ((not (b = 1)) -> ((not (b = 2)) -> ((b = 3) ->
-  (temp___174 = o10))))
-
-axiom H25 : ((not (b = 1)) -> ((not (b = 2)) -> ((b = 3) ->
-  (temp___1741 = o11))))
-
-axiom H26 : ((not (b = 1)) -> ((not (b = 2)) -> ((b = 3) ->
-  ((result4 = r__split_fields) and (result5 = r__split_fields1)))))
-
-axiom H27 : ((not (b = 1)) -> ((not (b = 2)) -> ((b = 3) ->
-  ((r__split_fields6 = temp___174) and (r__split_fields7 = temp___1741)))))
-
-axiom H28 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) -> ((b = 4) ->
-  (to_rep(o12) = one)))))
-
-axiom H29 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) -> ((b = 4) ->
-  (to_rep(o13) = 2)))))
-
-axiom H30 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) -> ((b = 4) ->
-  (o13 = o14)))))
-
-axiom H31 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) -> ((b = 4) ->
-  (o12 = o15)))))
-
-axiom H32 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) -> ((b = 4) ->
-  (temp___175 = o14)))))
-
-axiom H33 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) -> ((b = 4) ->
-  (temp___1751 = o15)))))
-
-axiom H34 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) -> ((b = 4) ->
-  ((result6 = r__split_fields) and (result7 = r__split_fields1))))))
-
-axiom H35 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) -> ((b = 4) ->
-  ((r__split_fields8 = temp___175) and (r__split_fields9 = temp___1751))))))
-
-axiom H36 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) ->
-  ((not (b = 4)) -> (to_rep(o16) = 2)))))
-
-axiom H37 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) ->
-  ((not (b = 4)) -> (to_rep(o17) = one)))))
-
-axiom H38 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) ->
-  ((not (b = 4)) -> (o17 = o18)))))
-
-axiom H39 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) ->
-  ((not (b = 4)) -> (o16 = o19)))))
-
-axiom H40 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) ->
-  ((not (b = 4)) -> (temp___176 = o18)))))
-
-axiom H41 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) ->
-  ((not (b = 4)) -> (temp___1761 = o19)))))
-
-axiom H42 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) ->
-  ((not (b = 4)) -> ((result8 = r__split_fields) and
-  (result9 = r__split_fields1))))))
-
-axiom H43 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) ->
-  ((not (b = 4)) -> ((r__split_fields10 = temp___176) and
-  (r__split_fields11 = temp___1761))))))
-
-axiom H44 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) ->
-  ((not (b = 4)) -> ((r__split_fields8 = r__split_fields10) and
-  (r__split_fields9 = r__split_fields11))))))
-
-axiom H45 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) ->
-  ((r__split_fields6 = r__split_fields8) and
-  (r__split_fields7 = r__split_fields9)))))
-
-axiom H46 : ((not (b = 1)) -> ((not (b = 2)) ->
-  ((r__split_fields4 = r__split_fields6) and
-  (r__split_fields5 = r__split_fields7))))
-
-axiom H47 : ((not (b = 1)) -> ((r__split_fields2 = r__split_fields4) and
-  (r__split_fields3 = r__split_fields5)))
-
-axiom H48 : ((r__split_fields12 = r__split_fields2) and
-  (r__split_fields13 = r__split_fields3))
-
-axiom H49 : ((r__split_fields14 = r__split_fields2) and
-  (r__split_fields15 = r__split_fields3))
-
-axiom H50 : (b = 1)
-
  (* File "rec_aggregate.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : in_range((2 * one))
+goal WP_parameter_def :
+  (forall one:int. forall r__split_fields:integer.
+  forall r__split_fields1:integer. forall o:integer. forall o1:integer.
+  forall o2:integer. forall o3:integer. forall temp___198:integer.
+  forall temp___1981:integer. forall o4:integer. forall o5:integer.
+  forall o6:integer. forall o7:integer. forall temp___199:integer.
+  forall temp___1991:integer. forall o8:integer. forall o9:integer.
+  forall o10:integer. forall o11:integer. forall temp___200:integer.
+  forall temp___2001:integer. forall o12:integer. forall o13:integer.
+  forall o14:integer. forall o15:integer. forall temp___201:integer.
+  forall temp___2011:integer. forall o16:integer. forall o17:integer.
+  forall o18:integer. forall o19:integer. forall temp___202:integer.
+  forall temp___2021:integer. forall result:integer. forall result1:integer.
+  forall r__split_fields2:integer. forall r__split_fields3:integer.
+  forall result2:integer. forall result3:integer.
+  forall r__split_fields4:integer. forall r__split_fields5:integer.
+  forall result4:integer. forall result5:integer.
+  forall r__split_fields6:integer. forall r__split_fields7:integer.
+  forall result6:integer. forall result7:integer.
+  forall r__split_fields8:integer. forall r__split_fields9:integer.
+  forall result8:integer. forall result9:integer.
+  forall r__split_fields10:integer. forall r__split_fields11:integer.
+  forall r__split_fields12:integer. forall r__split_fields13:integer.
+  forall r__split_fields14:integer. forall r__split_fields15:integer.
+  (in_range(one) -> (in_range(b) -> ((one = 1) -> (((((b = 1) and
+  ((((to_rep(o) = 2) and ((to_rep(o1) = one) and ((o1 = o2) and
+  (o = o3)))) and ((temp___198 = o2) and (temp___1981 = o3))) and (({
+  us_split_fields__content = { rec__rec_aggregate__r2__x = result;
+  rec__rec_aggregate__r2__y = result1 } } = { us_split_fields__content = {
+  rec__rec_aggregate__r2__x = r__split_fields; rec__rec_aggregate__r2__y =
+  r__split_fields1 } }) and ((temp___198 = r__split_fields2) and
+  (temp___1981 = r__split_fields3))))) or ((not (b = 1)) and ((((b = 2) and
+  ((((to_rep(o4) = one) and ((to_rep(o5) = one) and ((o5 = o6) and
+  (o4 = o7)))) and ((temp___199 = o6) and (temp___1991 = o7))) and
+  (((result2 = r__split_fields) and (result3 = r__split_fields1)) and
+  ((temp___199 = r__split_fields4) and
+  (temp___1991 = r__split_fields5))))) or ((not (b = 2)) and ((((b = 3) and
+  ((((to_rep(o8) = one) and ((to_rep(o9) = one) and ((o9 = o10) and
+  (o8 = o11)))) and ((temp___200 = o10) and (temp___2001 = o11))) and
+  (((result4 = r__split_fields) and (result5 = r__split_fields1)) and
+  ((temp___200 = r__split_fields6) and
+  (temp___2001 = r__split_fields7))))) or ((not (b = 3)) and ((((b = 4) and
+  ((((to_rep(o12) = one) and ((to_rep(o13) = 2) and ((o13 = o14) and
+  (o12 = o15)))) and ((temp___201 = o14) and (temp___2011 = o15))) and
+  (((result6 = r__split_fields) and (result7 = r__split_fields1)) and
+  ((temp___201 = r__split_fields8) and
+  (temp___2011 = r__split_fields9))))) or ((not (b = 4)) and
+  (((((to_rep(o16) = 2) and ((to_rep(o17) = one) and ((o17 = o18) and
+  (o16 = o19)))) and ((temp___202 = o18) and (temp___2021 = o19))) and
+  (((result8 = r__split_fields) and (result9 = r__split_fields1)) and
+  ((temp___202 = r__split_fields10) and
+  (temp___2021 = r__split_fields11)))) and ({ rec__rec_aggregate__r2__x =
+  r__split_fields8; rec__rec_aggregate__r2__y = r__split_fields9 } = {
+  rec__rec_aggregate__r2__x = r__split_fields10; rec__rec_aggregate__r2__y =
+  r__split_fields11 })))) and ({ rec__rec_aggregate__r2__x =
+  r__split_fields6; rec__rec_aggregate__r2__y = r__split_fields7 } = {
+  rec__rec_aggregate__r2__x = r__split_fields8; rec__rec_aggregate__r2__y =
+  r__split_fields9 })))) and ({ rec__rec_aggregate__r2__x = r__split_fields4;
+  rec__rec_aggregate__r2__y = r__split_fields5 } = {
+  rec__rec_aggregate__r2__x = r__split_fields6; rec__rec_aggregate__r2__y =
+  r__split_fields7 })))) and ({ rec__rec_aggregate__r2__x = r__split_fields2;
+  rec__rec_aggregate__r2__y = r__split_fields3 } = {
+  rec__rec_aggregate__r2__x = r__split_fields4; rec__rec_aggregate__r2__y =
+  r__split_fields5 })))) and (((r__split_fields12 = r__split_fields2) and
+  (r__split_fields13 = r__split_fields3)) and
+  ((r__split_fields14 = r__split_fields2) and
+  (r__split_fields15 = r__split_fields3)))) -> ((b = 1) ->
+  in_range((2 * one))))))))

@@ -118,11 +118,5 @@ axiom mul__post_axiom :
   in_range(y)) and ((0 <= x1) and ((x1 <= 10) and ((0 <= y) and
   (y <= 10))))) -> in_range(mul(x1, y))))
 
-logic o : int
-
-axiom H : in_range(x)
-
-axiom H1 : (x = 3)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (0 <= 2)
+goal WP_parameter_def : (in_range(x) -> ((x = 3) -> (0 <= 2)))

@@ -237,13 +237,7 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-axiom H : in_range(a)
-
-axiom H1 : in_range(b)
-
-axiom H2 : in_range(x)
-
-axiom H3 : ((divides(b, a) = true) and (divides(x, b) = true))
-
  (* File "math_euclid.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (divides(x, a) = true)
+goal WP_parameter_def : ((in_range(a) and (in_range(b) and (in_range(x) and
+  ((divides(b, a) = true) and (divides(x, b) = true))))) -> (divides(x,
+  a) = true))

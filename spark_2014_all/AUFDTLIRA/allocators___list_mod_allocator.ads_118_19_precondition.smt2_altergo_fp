@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -349,30 +349,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def :
-  (forall v:status. forall v1:resource.
-  (forall i:int [(singleton({ us_split_fields1 = {
-  rec__list_mod_allocator__cell__stat = v;
-  rec__list_mod_allocator__cell__next = v1 } }, i)[i])]. ((singleton({
-  us_split_fields1 = { rec__list_mod_allocator__cell__stat = v;
-  rec__list_mod_allocator__cell__next = v1 } }, i)[i]) = { us_split_fields1 =
-  { rec__list_mod_allocator__cell__stat = v;
-  rec__list_mod_allocator__cell__next = v1 } })))
-
 logic bool_eq7 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -383,17 +359,17 @@ axiom bool_eq_def6 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and (bool_eq6((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and (bool_eq6((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq6((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq7(a,
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq6((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq7(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -403,9 +379,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq6((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq6((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -1061,217 +1037,10 @@ axiom included_except__post_axiom :
   (forall e:int. ((in_range8(e) and (contains(left, e) = true)) ->
   ((contains(right, e) = true) or (e = item))))))))
 
-logic data : (int,us_rep) farray
-
-logic first_available : int
-
-logic i : int
-
-logic o : us_rep1
-
-logic o1 : us_rep2
-
-logic o2 : us_rep1
-
-logic o3 : us_rep2
-
-logic us : us_rep1
-
-logic us1 : us_rep2
-
-logic o4 : us_rep1
-
-logic o5 : us_rep2
-
-logic o6 : us_rep1
-
-logic o7 : us_rep2
-
-logic o8 : us_rep1
-
-logic o9 : us_rep2
-
-logic list_mod_allocator__free__ma__assume : us_rep1
-
-logic o10 : int
-
-logic o11 : status
-
-logic o12 : resource
-
-logic o13 : status
-
-logic o14 : resource
-
-logic o15 : status
-
-logic o16 : int
-
-logic o17 : resource
-
-logic o18 : status
-
-logic o19 : status
-
-logic o20 : resource
-
-logic o21 : status
-
-logic o22 : resource
-
-logic o23 : int
-
-logic o24 : (int,us_rep) farray
-
-logic o25 : us_rep1
-
-logic o26 : us_rep2
-
-logic o27 : us_rep1
-
-logic o28 : us_rep2
-
-logic list_mod_allocator__free__C112b__assume : us_rep1
-
-logic list_mod_allocator__free__B113b__L_4__R114b__assume : int
-
-logic temp___318 : int
-
-logic o29 : int
-
-logic j : int
-
-logic o30 : int
-
-logic o31 : int
-
-logic o32 : int
-
-logic j1 : int
-
-logic o33 : int
-
-logic o34 : bool
-
-logic o35 : int
-
-logic o36 : int
-
-logic j2 : int
-
-logic o37 : int
-
-logic o38 : bool
-
-logic temp___317 : int
-
-logic o39 : int
-
-logic o40 : status
-
-logic o41 : resource
-
-logic o42 : status
-
-logic o43 : resource
-
-logic o44 : resource
-
-logic o45 : int
-
-logic o46 : int
-
-logic o47 : us_rep1
-
-logic o48 : us_rep2
-
-logic o49 : us_rep1
-
-logic o50 : us_rep2
-
-logic o51 : us_rep1
-
-logic o52 : us_rep2
-
-logic o53 : us_rep1
-
-logic o54 : us_rep1
-
-logic o55 : us_rep2
-
-logic data1 : (int,us_rep) farray
-
-logic first_available1 : int
-
-logic i1 : int
-
-logic result : bool
-
-logic result1 : (int,us_rep) farray
-
-logic data2 : (int,us_rep) farray
-
-logic result2 : int
-
-logic first_available2 : int
-
-logic result3 : int
-
-logic i2 : int
-
-logic i3 : int
-
-logic result4 : bool
-
-logic result5 : bool
-
-logic result6 : int
-
-logic i4 : int
-
-logic i5 : int
-
-logic i6 : int
-
-logic i7 : int
-
-logic i8 : int
-
-logic data3 : (int,us_rep) farray
-
-logic first_available3 : int
-
-logic i9 : int
-
-logic data4 : (int,us_rep) farray
-
-logic first_available4 : int
-
-logic i10 : int
-
-logic data5 : (int,us_rep) farray
-
-logic first_available5 : int
-
-logic i11 : int
-
-logic data6 : (int,us_rep) farray
-
-logic first_available6 : int
-
-logic i12 : int
-
-logic result7 : bool
-
-axiom H : in_range2(first_available)
-
-axiom H1 : in_range2(res)
-
-axiom H2 : (is_valid(data, first_available) = true)
-
-axiom H3 : (not (contains(((model__(data,
-  first_available)).us_split_fields3).rec__list_mod_allocator__m__t__allocated,
-  res) = true))
-
  (* File "list_mod_allocator.ads", line 17, characters 0-0 *)
-goal WP_parameter_def : (is_well_formed(data, first_available) = true)
+goal WP_parameter_def :
+  (forall data:(int,us_rep) farray. forall first_available:int.
+  (in_range2(first_available) -> (in_range2(res) -> ((is_valid(data,
+  first_available) = true) -> ((not (contains(((model__(data,
+  first_available)).us_split_fields3).rec__list_mod_allocator__m__t__allocated,
+  res) = true)) -> (is_well_formed(data, first_available) = true))))))

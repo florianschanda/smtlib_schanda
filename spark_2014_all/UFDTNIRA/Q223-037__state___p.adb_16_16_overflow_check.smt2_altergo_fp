@@ -233,15 +233,7 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic p_state : int
-
-logic o : int
-
-axiom H : in_range(x)
-
-axiom H1 : in_range(p_state)
-
-axiom H2 : (0 <  get_p_state(p_state))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(comp_div(x,p_state))
+goal WP_parameter_def :
+  (forall p_state:int. (in_range(x) -> (in_range(p_state) ->
+  ((0 <  get_p_state(p_state)) -> in_range(comp_div(x,p_state))))))

@@ -248,7 +248,5 @@ logic sb__split_discrs : barrier_limit
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic us : int
-
  (* File "system.ads", line 81, characters 0-0 *)
 goal WP_parameter_def : in_range(1)

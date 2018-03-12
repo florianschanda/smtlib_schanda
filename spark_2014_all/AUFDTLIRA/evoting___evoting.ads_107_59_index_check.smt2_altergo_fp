@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -244,25 +244,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,counter_range_t) farray, int, int,
-  (int,counter_range_t) farray, int, int -> (int,counter_range_t) farray
-
-axiom concat_def :
-  (forall a:(int,counter_range_t) farray.
-  forall b:(int,counter_range_t) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : counter_range_t, int -> (int,counter_range_t) farray
-
-axiom singleton_def :
-  (forall v:counter_range_t.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq6 : (int,counter_range_t) farray, int, int,
   (int,counter_range_t) farray, int, int -> bool
 
@@ -274,17 +255,17 @@ axiom bool_eq_def5 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_153:int. ((((a__first <= temp___idx_153) and
-  (temp___idx_153 <= a__last)) and
-  (to_rep((a[temp___idx_153])) = to_rep((b[((b__first - a__first) + temp___idx_153)])))) or
-  (not ((a__first <= temp___idx_153) and (temp___idx_153 <= a__last)))))) ->
+  (forall temp___idx_175:int. ((((a__first <= temp___idx_175) and
+  (temp___idx_175 <= a__last)) and
+  (to_rep((a[temp___idx_175])) = to_rep((b[((b__first - a__first) + temp___idx_175)])))) or
+  (not ((a__first <= temp___idx_175) and (temp___idx_175 <= a__last)))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_153:int. (((a__first <= temp___idx_153) and
-  (temp___idx_153 <= a__last)) ->
-  (to_rep((a[temp___idx_153])) = to_rep((b[((b__first - a__first) + temp___idx_153)]))))))) ->
+  (forall temp___idx_175:int. (((a__first <= temp___idx_175) and
+  (temp___idx_175 <= a__last)) ->
+  (to_rep((a[temp___idx_175])) = to_rep((b[((b__first - a__first) + temp___idx_175)]))))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -295,40 +276,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_153:int. (((a__first <= temp___idx_153) and
-  (temp___idx_153 <= a__last)) ->
-  (to_rep((a[temp___idx_153])) = to_rep((b[((b__first - a__first) + temp___idx_153)])))))))))
-
-logic compare : (int,counter_range_t) farray, int, int,
-  (int,counter_range_t) farray, int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,counter_range_t) farray.
-  forall b:(int,counter_range_t) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq6(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,counter_range_t) farray.
-  forall b:(int,counter_range_t) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq6(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,counter_range_t) farray.
-  forall b:(int,counter_range_t) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq6(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_175:int. (((a__first <= temp___idx_175) and
+  (temp___idx_175 <= a__last)) ->
+  (to_rep((a[temp___idx_175])) = to_rep((b[((b__first - a__first) + temp___idx_175)])))))))))
 
 type map__ref1 = { map__content1 : (int,bool) farray
 }
@@ -346,24 +296,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,bool) farray, int, int, (int,bool) farray, int,
-  int -> (int,bool) farray
-
-axiom concat_def1 :
-  (forall a:(int,bool) farray. forall b:(int,bool) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : bool, int -> (int,bool) farray
-
-axiom singleton_def1 :
-  (forall v:bool.
-  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq7 : (int,bool) farray, int, int, (int,bool) farray, int,
   int -> bool
 
@@ -374,17 +306,17 @@ axiom bool_eq_def6 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
-  (temp___idx_154 <= a__last)) and
-  ((a[temp___idx_154]) = (b[((b__first - a__first) + temp___idx_154)]))) or
-  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
+  (forall temp___idx_176:int. ((((a__first <= temp___idx_176) and
+  (temp___idx_176 <= a__last)) and
+  ((a[temp___idx_176]) = (b[((b__first - a__first) + temp___idx_176)]))) or
+  (not ((a__first <= temp___idx_176) and (temp___idx_176 <= a__last)))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
-  (temp___idx_154 <= a__last)) ->
-  ((a[temp___idx_154]) = (b[((b__first - a__first) + temp___idx_154)])))))) ->
+  (forall temp___idx_176:int. (((a__first <= temp___idx_176) and
+  (temp___idx_176 <= a__last)) ->
+  ((a[temp___idx_176]) = (b[((b__first - a__first) + temp___idx_176)])))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -394,81 +326,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
-  (temp___idx_154 <= a__last)) ->
-  ((a[temp___idx_154]) = (b[((b__first - a__first) + temp___idx_154)]))))))))
-
-logic compare1 : (int,bool) farray, int, int, (int,bool) farray, int,
-  int -> int
-
-axiom compare_def_eq1 :
-  (forall a:(int,bool) farray. forall b:(int,bool) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq7(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt1 :
-  (forall a:(int,bool) farray. forall b:(int,bool) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq7(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_int((a[(i + 1)])) <  to_int((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt1 :
-  (forall a:(int,bool) farray. forall b:(int,bool) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare1(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq7(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_int((b[(i + 1)])) <  to_int((a[(j + 1)]))))))))))))
-
-logic xorb1 : (int,bool) farray, int, int, (int,bool) farray, int,
-  int -> (int,bool) farray
-
-logic andb1 : (int,bool) farray, int, int, (int,bool) farray, int,
-  int -> (int,bool) farray
-
-logic orb1 : (int,bool) farray, int, int, (int,bool) farray, int,
-  int -> (int,bool) farray
-
-logic notb1 : (int,bool) farray, int, int -> (int,bool) farray
-
-axiom op_def :
-  (forall a:(int,bool) farray. forall b:(int,bool) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(orb1(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((a_first <= i) and (i <= a_last)) -> ((orb1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = match_bool((a[i]), true,
-  (b[((i - a_first) + b_first)])))))))
-
-axiom op_def1 :
-  (forall a:(int,bool) farray. forall b:(int,bool) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(andb1(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((a_first <= i) and (i <= a_last)) -> ((andb1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = match_bool((a[i]), (b[((i - a_first) + b_first)]),
-  false))))))
-
-axiom op_def2 :
-  (forall a:(int,bool) farray. forall b:(int,bool) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(xorb1(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((a_first <= i) and (i <= a_last)) -> ((xorb1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = xorb((a[i]), (b[((i - a_first) + b_first)])))))))
-
-axiom notb_def :
-  (forall a:(int,bool) farray.
-  (forall a_first:int. forall a_last:int.
-  (forall i:int [(notb1(a, a_first, a_last)[i])]. (((a_first <= i) and
-  (i <= a_last)) -> ((notb1(a, a_first, a_last)[i]) = match_bool((a[i]),
-  false, true))))))
+  (forall temp___idx_176:int. (((a__first <= temp___idx_176) and
+  (temp___idx_176 <= a__last)) ->
+  ((a[temp___idx_176]) = (b[((b__first - a__first) + temp___idx_176)]))))))))
 
 logic program_phase : int
 
@@ -581,440 +441,154 @@ function t73b__ref___projection(a: t73b__ref) : tcandidate_number_tB =
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
-logic winners : (int,bool) farray
-
-logic latest_highest_score : int
-
-logic i : int
-
-logic j : int
-
-logic i1 : int
-
-logic temp___706 : (int,bool) farray
-
-logic temp___705 : int
-
-logic temp___704 : int
-
-logic j1 : int
-
-logic o : int
-
-logic j2 : int
-
-logic temp___700 : (int,bool) farray
-
-logic temp___699 : int
-
-logic k : int
-
-logic o1 : int
-
-logic o2 : (int,bool) farray
-
-logic temp___711 : (int,bool) farray
-
-logic temp___713 : (int,bool) farray
-
-logic temp___710 : int
-
-logic j3 : int
-
-logic o3 : int
-
-logic o4 : bool
-
-logic o5 : int
-
-logic j4 : int
-
-logic o6 : int
-
-logic o7 : bool
-
-logic i2 : int
-
-logic winner : int
-
-logic i3 : int
-
-logic o8 : int
-
-logic o9 : bool
-
-logic o10 : int
-
-logic o11 : bool
-
-logic o12 : bool
-
-logic o13 : int
-
-logic o14 : counter_range_t
-
-logic o15 : int
-
-logic j5 : int
-
-logic result : (int,bool) farray
-
-logic winners1 : (int,bool) farray
-
-logic result1 : int
-
-logic latest_highest_score1 : int
-
-logic result2 : (int,bool) farray
-
-logic winners2 : (int,bool) farray
-
-logic result3 : int
-
-logic i4 : int
-
-logic winners3 : (int,bool) farray
-
-logic latest_highest_score2 : int
-
-logic i5 : int
-
-logic j6 : int
-
-logic result4 : bool
-
-logic result5 : bool
-
-logic result6 : int
-
-logic j7 : int
-
-logic winners4 : (int,bool) farray
-
-logic j8 : int
-
-logic result7 : (int,bool) farray
-
-logic winners5 : (int,bool) farray
-
-logic result8 : int
-
-logic j9 : int
-
-logic winners6 : (int,bool) farray
-
-logic j10 : int
-
-logic winners7 : (int,bool) farray
-
-logic j11 : int
-
-logic winners8 : (int,bool) farray
-
-logic j12 : int
-
-logic winners9 : (int,bool) farray
-
-logic j13 : int
-
-logic winners10 : (int,bool) farray
-
-logic j14 : int
-
-logic winners11 : (int,bool) farray
-
-logic j15 : int
-
-logic result9 : (int,bool) farray
-
-logic winners12 : (int,bool) farray
-
-logic result10 : int
-
-logic latest_highest_score3 : int
-
-logic result11 : (int,bool) farray
-
-logic winners13 : (int,bool) farray
-
-logic result12 : int
-
-logic latest_highest_score4 : int
-
-logic result13 : (int,bool) farray
-
-logic winners14 : (int,bool) farray
-
-logic winners15 : (int,bool) farray
-
-logic latest_highest_score5 : int
-
-logic j16 : int
-
-logic winners16 : (int,bool) farray
-
-logic latest_highest_score6 : int
-
-logic j17 : int
-
-logic result14 : int
-
-logic i6 : int
-
-logic winners17 : (int,bool) farray
-
-logic latest_highest_score7 : int
-
-logic i7 : int
-
-logic j18 : int
-
-logic winners18 : (int,bool) farray
-
-logic latest_highest_score8 : int
-
-logic i8 : int
-
-logic j19 : int
-
-logic winners19 : (int,bool) farray
-
-logic latest_highest_score9 : int
-
-logic i9 : int
-
-logic j20 : int
-
-logic winners20 : (int,bool) farray
-
-logic latest_highest_score10 : int
-
-logic i10 : int
-
-logic j21 : int
-
-logic winners21 : (int,bool) farray
-
-logic latest_highest_score11 : int
-
-logic i11 : int
-
-logic j22 : int
-
-logic winners22 : (int,bool) farray
-
-logic latest_highest_score12 : int
-
-logic i12 : int
-
-logic j23 : int
-
-logic winners23 : (int,bool) farray
-
-logic latest_highest_score13 : int
-
-logic i13 : int
-
-logic j24 : int
-
-logic winners24 : (int,bool) farray
-
-logic latest_highest_score14 : int
-
-logic i14 : int
-
-logic j25 : int
-
-logic result15 : int
-
-logic i15 : int
-
-logic winners25 : (int,bool) farray
-
-logic i16 : int
-
-logic result16 : bool
-
-logic result17 : bool
-
-logic result18 : (int,bool) farray
-
-logic winners26 : (int,bool) farray
-
-logic result19 : int
-
-logic i17 : int
-
-logic winners27 : (int,bool) farray
-
-logic i18 : int
-
-logic winners28 : (int,bool) farray
-
-logic i19 : int
-
-logic winners29 : (int,bool) farray
-
-logic i20 : int
-
-logic winners30 : (int,bool) farray
-
-logic i21 : int
-
-logic winners31 : (int,bool) farray
-
-logic i22 : int
-
-logic winners32 : (int,bool) farray
-
-logic i23 : int
-
-logic winners33 : (int,bool) farray
-
-logic i24 : int
-
-logic winners34 : (int,bool) farray
-
-logic i25 : int
-
-logic winners35 : (int,bool) farray
-
-logic latest_highest_score15 : int
-
-logic i26 : int
-
-logic j26 : int
-
-logic i27 : int
-
-logic winners36 : (int,bool) farray
-
-logic latest_highest_score16 : int
-
-logic i28 : int
-
-logic j27 : int
-
-logic i29 : int
-
-logic result20 : bool
-
-logic result21 : bool
-
-logic result22 : bool
-
-logic result23 : bool
-
-axiom H : in_range1(program_phase)
-
-axiom H1 : in_range4(last_candidate)
-
-axiom H2 : (program_phase = 2)
-
-axiom H3 : ((((0 <= 20) -> in_range4(latest_highest_score)) and
-  (((result = winners) and (winners1 = (winners[0 <- of_int(0)]))) and
-  (((result1 = latest_highest_score) and (latest_highest_score1 = 1)) and
-  (((winners1 = result2) and
-  (winners2 = (winners1[latest_highest_score1 <- of_int(1)]))) and
-  ((((result3 = i) and (i4 = 2)) and ((((2 <= i4) and
-  (i4 <= last_candidate)) -> ((((temp___706 = winners2) and
-  ((temp___705 = latest_highest_score1) and ((temp___704 = i4) and
-  ((((((not ((winners3[0]) = true)) and (latest_highest_score2 <  i5)) and
-  ((winners3[latest_highest_score2]) = true)) and
-  (forall j28:int. (((1 <= j28) and (j28 <= (i5 - 1))) ->
-  ((latest_highest_score2 <  j28) ->
-  (to_rep((counters[j28])) <  to_rep((counters[latest_highest_score2]))))))) and
-  (forall j28:int. (((1 <= j28) and (j28 <= (i5 - 1))) ->
-  ((((winners3[j28]) = true) ->
-  (to_rep((counters[latest_highest_score2])) = to_rep((counters[j28])))) and
-  ((not ((winners3[j28]) = true)) ->
-  (to_rep((counters[j28])) <  to_rep((counters[latest_highest_score2])))))))) and
-  (((((2 <= last_candidate) -> dynamic_property(2, last_candidate, i5)) and
-  ((0 <= 20) -> in_range4(latest_highest_score2))) and ((2 <= i5) and
-  (i5 <= last_candidate))) and
-  ((((to_rep((counters[latest_highest_score2])) <  to_rep((counters[i5]))) ->
-  (((((j6 = result6) and (j7 = 0)) and ((((0 <= j7) and (j7 <= (i5 - 1))) ->
-  ((((temp___700 = winners3) and ((temp___699 = j7) and
-  ((forall k1:int. (((0 <= k1) and (k1 <= (j8 - 1))) ->
-   (not ((winners4[k1]) = true)))) and (((((0 <= (i5 - 1)) ->
-  dynamic_property1(0, (i5 - 1), j8)) and
-  (forall temp___701:int. (((0 <= temp___701) and (temp___701 <= 20)) ->
-  ((j8 <= temp___701) ->
-  ((winners4[temp___701]) = (temp___700[temp___701])))))) and ((0 <= j8) and
-  (j8 <= (i5 - 1)))) and ((((((0 <= j8) and (j8 <= 20)) and (o1 = j8)) and
-  (o2 = (winners4[o1 <- of_int(0)]))) and ((winners4 = result7) and
-  (winners5 = o2))) and (j8 = (i5 - 1))))))) and (((j8 = j12) and
-  (winners5 = winners8)) and ((j13 = j8) and (winners9 = winners5)))) and
-  (((j14 = j12) and (winners10 = winners8)) and ((j15 = j13) and
-  (winners11 = winners9))))) and ((not ((0 <= j7) and (j7 <= (i5 - 1)))) ->
-  (((j7 = j14) and (winners3 = winners10)) and ((j15 = j7) and
-  (winners11 = winners3)))))) and (((result9 = winners10) and
-  (winners12 = (winners10[i5 <- of_int(1)]))) and
-  ((latest_highest_score2 = result10) and (latest_highest_score3 = i5)))) and
-  (((j16 = j14) and ((latest_highest_score5 = latest_highest_score3) and
-  (winners15 = winners12))) and ((j17 = j15) and
-  ((latest_highest_score6 = latest_highest_score3) and
-  (winners16 = winners12)))))) and
-  ((not (to_rep((counters[latest_highest_score2])) <  to_rep((counters[i5])))) ->
-  ((((to_rep((counters[i5])) = to_rep((counters[latest_highest_score2]))) ->
-  (((winners3 = result11) and (winners13 = (winners3[i5 <- of_int(1)]))) and
-  ((result12 = latest_highest_score2) and (latest_highest_score4 = i5)))) and
-  ((not (to_rep((counters[i5])) = to_rep((counters[latest_highest_score2])))) ->
-  (((result13 = winners3) and (winners14 = (winners3[i5 <- of_int(0)]))) and
-  ((latest_highest_score4 = latest_highest_score2) and
-  (winners13 = winners14))))) and (((j16 = j6) and
-  ((latest_highest_score5 = latest_highest_score4) and
-  (winners15 = winners13))) and ((j17 = j6) and
-  ((latest_highest_score6 = latest_highest_score4) and
-  (winners16 = winners13))))))) and (i5 = last_candidate))))))) and
-  (((j22 = j16) and ((i11 = i5) and
-  ((latest_highest_score11 = latest_highest_score5) and
-  (winners21 = winners15)))) and ((j23 = j17) and ((i12 = i5) and
-  ((latest_highest_score12 = latest_highest_score6) and
-  (winners22 = winners16)))))) and (((j24 = j22) and ((i13 = i11) and
-  ((latest_highest_score13 = latest_highest_score11) and
-  (winners23 = winners21)))) and ((j25 = j23) and ((i14 = i12) and
-  ((latest_highest_score14 = latest_highest_score12) and
-  (winners24 = winners22))))))) and ((not ((2 <= i4) and
-  (i4 <= last_candidate))) -> (((j24 = j) and ((i13 = i4) and
-  ((latest_highest_score13 = latest_highest_score1) and
-  (winners23 = winners2)))) and ((j25 = j5) and ((i14 = i4) and
-  ((latest_highest_score14 = latest_highest_score1) and
-  (winners24 = winners2)))))))) and (((result15 = i1) and
-  (i15 = (last_candidate + 1))) and (((((last_candidate + 1) <= i15) and
-  (i15 <= 20)) -> ((((temp___711 = winners23) and
-  ((temp___713 = winners23) and ((temp___710 = i15) and
-  (((forall j28:int. ((((last_candidate + 1) <= j28) and
-    (j28 <= (i16 - 1))) -> (not ((winners25[j28]) = true)))) and
-  (forall j28:int. (((0 <= j28) and (j28 <= last_candidate)) ->
-  (((winners25[j28]) = true) <-> ((temp___713[j28]) = true))))) and
-  ((((((last_candidate + 1) <= 20) -> dynamic_property2((last_candidate + 1),
-  20, i16)) and
-  (forall temp___712:int. (((0 <= temp___712) and (temp___712 <= 20)) ->
-  ((i16 <= temp___712) ->
-  ((winners25[temp___712]) = (temp___711[temp___712])))))) and
-  (((last_candidate + 1) <= i16) and (i16 <= 20))) and
-  (((result18 = winners25) and
-  (winners26 = (winners25[i16 <- of_int(0)]))) and (i16 = 20))))))) and
-  (((i22 = i16) and (winners31 = winners26)) and ((i23 = i16) and
-  (winners32 = winners26)))) and (((i24 = i22) and
-  (winners33 = winners31)) and ((i25 = i23) and
-  (winners34 = winners32))))) and ((not (((last_candidate + 1) <= i15) and
-  (i15 <= 20))) -> (((i24 = i15) and (winners33 = winners23)) and
-  ((i25 = i15) and (winners34 = winners24))))))))))) and (((i27 = i24) and
-  ((j26 = j24) and ((i26 = i13) and
-  ((latest_highest_score15 = latest_highest_score13) and
-  (winners35 = winners33))))) and ((i29 = i25) and ((j27 = j25) and
-  ((i28 = i14) and ((latest_highest_score16 = latest_highest_score14) and
-  (winners36 = winners34)))))))
-
-axiom H4 : (0 <= winner)
-
-axiom H5 : (winner <= 20)
-
-axiom H6 : (1 <= i3)
-
-axiom H7 : (i3 <= last_candidate)
-
  (* File "evoting.ads", line 48, characters 0-0 *)
-goal WP_parameter_def : (0 <= i3)
+goal WP_parameter_def :
+  (forall winners:(int,bool) farray. forall latest_highest_score:int.
+  forall i:int. forall j:int. forall i1:int.
+  forall temp___786:(int,bool) farray. forall temp___785:int.
+  forall temp___784:int. forall temp___780:(int,bool) farray.
+  forall temp___779:int. forall o:int. forall o1:(int,bool) farray.
+  forall temp___791:(int,bool) farray. forall temp___793:(int,bool) farray.
+  forall temp___790:int. forall winner:int. forall i2:int. forall j1:int.
+  forall result:(int,bool) farray. forall winners1:(int,bool) farray.
+  forall result1:int. forall latest_highest_score1:int.
+  forall result2:(int,bool) farray. forall winners2:(int,bool) farray.
+  forall result3:int. forall i3:int. forall winners3:(int,bool) farray.
+  forall latest_highest_score2:int. forall i4:int. forall j2:int.
+  forall result4:int. forall j3:int. forall winners4:(int,bool) farray.
+  forall j4:int. forall result5:(int,bool) farray.
+  forall winners5:(int,bool) farray. forall winners6:(int,bool) farray.
+  forall j5:int. forall winners7:(int,bool) farray. forall j6:int.
+  forall winners8:(int,bool) farray. forall j7:int.
+  forall winners9:(int,bool) farray. forall j8:int.
+  forall result6:(int,bool) farray. forall winners10:(int,bool) farray.
+  forall result7:int. forall latest_highest_score3:int.
+  forall result8:(int,bool) farray. forall winners11:(int,bool) farray.
+  forall result9:int. forall latest_highest_score4:int.
+  forall result10:(int,bool) farray. forall winners12:(int,bool) farray.
+  forall winners13:(int,bool) farray. forall latest_highest_score5:int.
+  forall j9:int. forall winners14:(int,bool) farray.
+  forall latest_highest_score6:int. forall j10:int.
+  forall winners15:(int,bool) farray. forall latest_highest_score7:int.
+  forall i5:int. forall j11:int. forall winners16:(int,bool) farray.
+  forall latest_highest_score8:int. forall i6:int. forall j12:int.
+  forall winners17:(int,bool) farray. forall latest_highest_score9:int.
+  forall i7:int. forall j13:int__ref. forall winners18:(int,bool) farray.
+  forall latest_highest_score10:int. forall i8:int. forall j14:int.
+  forall result11:int__ref. forall i9:int.
+  forall winners19:(int,bool) farray. forall i10:int.
+  forall result12:map__ref1. forall winners20:(int,bool) farray.
+  forall winners21:map__ref1. forall i11:int__ref.
+  forall winners22:(int,bool) farray. forall i12:int.
+  forall winners23:map__ref1. forall i13:int__ref.
+  forall winners24:(int,bool) farray. forall i14:int.
+  forall winners25:map__ref1. forall latest_highest_score11:int__ref.
+  forall i15:int__ref. forall j15:int__ref. forall i16:int__ref.
+  forall winners26:(int,bool) farray. forall latest_highest_score12:int.
+  forall i17:int. forall j16:int. forall i18:int.
+  (in_range1(program_phase) -> (in_range4(last_candidate) ->
+  ((program_phase = 2) -> (((((0 <= 20) ->
+  in_range4(latest_highest_score)) and ((({ map__content1 = result } = {
+  map__content1 = winners }) and (winners1 = (winners[0 <- of_int(0)]))) and
+  ((({ int__content = result1 } = { int__content = latest_highest_score
+  }) and (latest_highest_score1 = 1)) and (((winners1 = result2) and
+  (winners2 = (winners1[latest_highest_score1 <- of_int(1)]))) and (((({
+  int__content = result3 } = { int__content = i }) and (i3 = 2)) and
+  ((((2 <= i3) and (i3 <= last_candidate)) and ((((temp___786 = winners2) and
+  ((temp___785 = latest_highest_score1) and ((temp___784 = i3) and
+  ((((((not ((winners3[0]) = true)) and (latest_highest_score2 <  i4)) and
+  ((winners3[latest_highest_score2]) = true)) and
+  (forall j17:int. (((1 <= j17) and (j17 <= (i4 - 1))) ->
+  ((latest_highest_score2 <  j17) ->
+  (to_rep((counters[j17])) <  to_rep((counters[latest_highest_score2]))))))) and
+  (forall j17:int. (((1 <= j17) and (j17 <= (i4 - 1))) ->
+  ((((winners3[j17]) = true) and
+  (to_rep((counters[latest_highest_score2])) = to_rep((counters[j17])))) or
+  ((not ((winners3[j17]) = true)) and
+  (to_rep((counters[j17])) <  to_rep((counters[latest_highest_score2])))))))) and
+  (((((2 <= last_candidate) -> dynamic_property(2, last_candidate, i4)) and
+  ((0 <= 20) -> in_range4(latest_highest_score2))) and ((2 <= i4) and
+  (i4 <= last_candidate))) and
+  ((((to_rep((counters[latest_highest_score2])) <  to_rep((counters[i4]))) and
+  (((((j2 = result4) and (j3 = 0)) and ((((0 <= j3) and (j3 <= (i4 - 1))) and
+  ((((temp___780 = winners3) and ((temp___779 = j3) and
+  ((forall k:int. (((0 <= k) and (k <= (j4 - 1))) ->
+   (not ((winners4[k]) = true)))) and
+  (((((0 <= (i4 - 1)) -> dynamic_property1(0, (i4 - 1), j4)) and
+  (forall temp___781:int. (((0 <= temp___781) and (temp___781 <= 20)) ->
+  ((j4 <= temp___781) ->
+  ((winners4[temp___781]) = (temp___780[temp___781])))))) and ((0 <= j4) and
+  (j4 <= (i4 - 1)))) and ((((((0 <= j4) and (j4 <= 20)) and (o = j4)) and
+  (o1 = (winners4[o <- of_int(0)]))) and ((winners4 = result5) and
+  (winners5 = o1))) and (j4 = (i4 - 1))))))) and (((j4 = j5) and
+  (winners5 = winners6)) and ((j6 = j4) and (winners7 = winners5)))) and ((({
+  int__content = j7 } = { int__content = j5 }) and ({ map__content1 =
+  winners8 } = { map__content1 = winners6 })) and ((j8 = j6) and
+  (winners9 = winners7))))) or ((not ((0 <= j3) and (j3 <= (i4 - 1)))) and
+  (((j3 = j7) and (winners3 = winners8)) and ((j8 = j3) and
+  (winners9 = winners3)))))) and ((({ map__content1 = result6 } = {
+  map__content1 = winners8 }) and
+  (winners10 = (winners8[i4 <- of_int(1)]))) and
+  ((latest_highest_score2 = result7) and (latest_highest_score3 = i4)))) and
+  ((({ int__content = j9 } = { int__content = j7 }) and
+  ((latest_highest_score3 = latest_highest_score5) and
+  (winners10 = winners13))) and ((j10 = j8) and
+  ((latest_highest_score6 = latest_highest_score3) and
+  (winners14 = winners10)))))) or
+  ((not (to_rep((counters[latest_highest_score2])) <  to_rep((counters[i4])))) and
+  ((((to_rep((counters[i4])) = to_rep((counters[latest_highest_score2]))) and
+  (((winners3 = result8) and (winners11 = (winners3[i4 <- of_int(1)]))) and
+  ((result9 = latest_highest_score2) and (latest_highest_score4 = i4)))) or
+  ((not (to_rep((counters[i4])) = to_rep((counters[latest_highest_score2])))) and
+  (((result10 = winners3) and (winners12 = (winners3[i4 <- of_int(0)]))) and
+  ((latest_highest_score4 = latest_highest_score2) and
+  (winners11 = winners12))))) and (((j2 = j9) and
+  ((latest_highest_score4 = latest_highest_score5) and
+  (winners11 = winners13))) and ((j10 = j2) and
+  ((latest_highest_score6 = latest_highest_score4) and
+  (winners14 = winners11))))))) and (i4 = last_candidate))))))) and ((({
+  int__content = j11 } = { int__content = j9 }) and ((i4 = i5) and (({
+  int__content = latest_highest_score7 } = { int__content =
+  latest_highest_score5 }) and ({ map__content1 = winners15 } = {
+  map__content1 = winners13 })))) and ((j12 = j10) and ((i6 = i4) and
+  ((latest_highest_score8 = latest_highest_score6) and
+  (winners16 = winners14)))))) and (((j13 = { int__content = j11 }) and (({
+  int__content = i7 } = { int__content = i5 }) and (({ int__content =
+  latest_highest_score9 } = { int__content = latest_highest_score7 }) and ({
+  map__content1 = winners17 } = { map__content1 = winners15 })))) and
+  ((j14 = j12) and ((i8 = i6) and
+  ((latest_highest_score10 = latest_highest_score8) and
+  (winners18 = winners16))))))) or ((not ((2 <= i3) and
+  (i3 <= last_candidate))) and (((j13 = { int__content = j }) and
+  ((i3 = i7) and ((latest_highest_score1 = latest_highest_score9) and
+  (winners2 = winners17)))) and ((j14 = j1) and ((i8 = i3) and
+  ((latest_highest_score10 = latest_highest_score1) and
+  (winners18 = winners2)))))))) and (((result11 = { int__content = i1 }) and
+  (i9 = (last_candidate + 1))) and (((((last_candidate + 1) <= i9) and
+  (i9 <= 20)) and ((((temp___791 = winners17) and
+  ((temp___793 = winners17) and ((temp___790 = i9) and
+  (((forall j17:int. ((((last_candidate + 1) <= j17) and
+    (j17 <= (i10 - 1))) -> (not ((winners19[j17]) = true)))) and
+  (forall j17:int. (((0 <= j17) and (j17 <= last_candidate)) ->
+  (((winners19[j17]) = true) <-> ((temp___793[j17]) = true))))) and
+  ((((((last_candidate + 1) <= 20) -> dynamic_property2((last_candidate + 1),
+  20, i10)) and
+  (forall temp___792:int. (((0 <= temp___792) and (temp___792 <= 20)) ->
+  ((i10 <= temp___792) ->
+  ((winners19[temp___792]) = (temp___791[temp___792])))))) and
+  (((last_candidate + 1) <= i10) and (i10 <= 20))) and (((result12 = {
+  map__content1 = winners19 }) and
+  (winners20 = (winners19[i10 <- of_int(0)]))) and (i10 = 20))))))) and
+  (((i11 = { int__content = i10 }) and (winners21 = { map__content1 =
+  winners20 })) and ((i12 = i10) and (winners22 = winners20)))) and
+  (((i13 = i11) and (winners23 = winners21)) and ((i14 = i12) and
+  (winners24 = winners22))))) or ((not (((last_candidate + 1) <= i9) and
+  (i9 <= 20))) and (((i13 = { int__content = i9 }) and (winners23 = {
+  map__content1 = winners17 })) and ((i14 = i9) and
+  (winners24 = winners18))))))))))) and (((i16 = i13) and ((j15 = j13) and
+  ((i15 = { int__content = i7 }) and ((latest_highest_score11 = {
+  int__content = latest_highest_score9 }) and (winners25 = winners23))))) and
+  ((i18 = i14) and ((j16 = j14) and ((i17 = i8) and
+  ((latest_highest_score12 = latest_highest_score10) and
+  (winners26 = winners24))))))) -> (((0 <= winner) and (winner <= 20)) ->
+  (((1 <= i2) and (i2 <= last_candidate)) -> (0 <= i2))))))))

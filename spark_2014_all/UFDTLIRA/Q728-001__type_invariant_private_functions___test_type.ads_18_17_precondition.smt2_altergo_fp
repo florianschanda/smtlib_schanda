@@ -243,25 +243,6 @@ axiom saturate__def_axiom :
   (saturate({ us_split_fields1 = { rec__test_type__t__f = x1 } }) = {
   us_split_fields1 = { rec__test_type__t__f = x1 } }))))
 
-logic test_type__decr__result : integer
-
-logic o : integer
-
-logic o1 : integer
-
-logic result : integer
-
-logic test_type__decr__result1 : integer
-
-logic test_type__decr__result2 : integer
-
-logic test_type__decr__result3 : integer
-
-logic test_type__decr__result4 : integer
-
-logic test_type__decr__result5 : integer
-
-axiom H : in_range1(to_rep(x))
-
  (* File "test_type.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : ((- 2147483648) <  to_rep(x))
+goal WP_parameter_def : (in_range1(to_rep(x)) ->
+  ((- 2147483648) <  to_rep(x)))

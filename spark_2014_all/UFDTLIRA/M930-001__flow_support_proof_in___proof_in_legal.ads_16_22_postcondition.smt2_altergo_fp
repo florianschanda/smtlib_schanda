@@ -123,13 +123,5 @@ axiom is_ok_to_increase__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic var : int
-
-logic x : int
-
-logic body_var : int
-
-logic o : int
-
  (* File "proof_in_legal.adb", line 7, characters 0-0 *)
 goal WP_parameter_def : true

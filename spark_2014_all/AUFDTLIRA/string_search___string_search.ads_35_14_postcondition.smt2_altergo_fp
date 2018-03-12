@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -214,24 +214,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -242,17 +224,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -262,37 +244,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 logic to_rep1 : integer -> int
 
@@ -583,291 +537,164 @@ axiom partial_match_at__def_axiom :
   (forall i:int. (((1 <= i) and (i <= len)) ->
   (to_rep((needle2[i])) = to_rep((haystack2[(loc + (i - 1))]))))))))
 
-logic i : int
-
-logic string_search__brute_force_slice__result : int
-
-logic temp___279 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic temp___280 : int
-
-logic temp___278 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic temp___276 : int
-
-logic o7 : (int,character) farray
-
-logic temp___277 : (int,character) farray
-
-logic temp___2771 : t1
-
-logic o8 : int
-
-logic o9 : int
-
-logic temp___2761 : int
-
-logic o10 : (int,character) farray
-
-logic temp___2772 : (int,character) farray
-
-logic temp___2773 : t1
-
-logic o11 : int
-
-logic k : int
-
-logic o12 : int
-
-logic o13 : int
-
-logic o14 : int
-
-logic o15 : int
-
-logic o16 : int
-
-logic o17 : int
-
-logic o18 : int
-
-logic o19 : bool
-
-logic string_search__brute_force_slice__result1 : int
-
-logic result : int
-
-logic i1 : int
-
-logic result1 : bool
-
-logic result2 : int
-
-logic string_search__brute_force_slice__result2 : int
-
-logic i2 : int
-
-logic string_search__brute_force_slice__result3 : int
-
-logic result3 : int
-
-logic i3 : int
-
-logic result4 : bool
-
-logic result5 : int
-
-logic string_search__brute_force_slice__result4 : int
-
-logic i4 : int
-
-logic string_search__brute_force_slice__result5 : int
-
-logic i5 : int
-
-logic string_search__brute_force_slice__result6 : int
-
-logic i6 : int
-
-logic string_search__brute_force_slice__result7 : int
-
-logic i7 : int
-
-logic string_search__brute_force_slice__result8 : int
-
-logic i8 : int
-
-logic string_search__brute_force_slice__result9 : int
-
-logic i9 : int
-
-logic string_search__brute_force_slice__result10 : int
-
-logic i10 : int
-
-logic string_search__brute_force_slice__result11 : int
-
-logic i11 : int
-
-logic string_search__brute_force_slice__result12 : int
-
-logic result6 : int
-
-logic string_search__brute_force_slice__result13 : int
-
-logic string_search__brute_force_slice__result14 : int
-
-logic string_search__brute_force_slice__result15 : int
-
-logic i12 : int
-
-logic string_search__brute_force_slice__result16 : int
-
-logic i13 : int
-
-logic string_search__brute_force_slice__result17 : int
-
-logic i14 : int
-
-logic string_search__brute_force_slice__result18 : int
-
-logic i15 : int
-
-logic string_search__brute_force_slice__result19 : int
-
-logic result7 : bool
-
-logic result8 : int
-
-axiom H : (dynamic_property(1, 2147483647, to_rep1(first(needle1)),
-  to_rep1(last(needle1))) and (to_rep1(first(needle1)) = 1))
-
-axiom H1 : (dynamic_property(1, 2147483647, to_rep1(first(haystack1)),
-  to_rep1(last(haystack1))) and (to_rep1(first(haystack1)) = 1))
-
-axiom H2 : ((1 <= length({ elts = needle; rt = needle1 })) and (length({
-  elts = needle; rt = needle1 }) <= length({ elts = haystack; rt = haystack1
-  })))
-
-axiom H3 :
-  (((((string_search__brute_force_slice__result16 = string_search__brute_force_slice__result7) and
-  (i12 = i6)) and
-  ((string_search__brute_force_slice__result17 = string_search__brute_force_slice__result8) and
-  (i13 = i7))) and ((temp___279 = 1) and (((((((o = length({ elts = needle;
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (forall i:int. forall string_search__brute_force_slice__result:int.
+  forall temp___310:int. forall o:int. forall o1:int. forall o2:int.
+  forall o3:int. forall o4:int. forall temp___311:int. forall temp___309:int.
+  forall o5:int. forall o6:int. forall temp___307:int.
+  forall o7:(int,character) farray. forall temp___308:(int,character) farray.
+  forall temp___3081:t1. forall o8:int. forall o9:int.
+  forall temp___3071:int. forall o10:(int,character) farray.
+  forall temp___3082:(int,character) farray. forall temp___3083:t1.
+  forall string_search__brute_force_slice__result1:int. forall result:int.
+  forall i1:int. forall result1:bool. forall result2:int.
+  forall string_search__brute_force_slice__result2:int. forall i2:int.
+  forall string_search__brute_force_slice__result3:int. forall result3:int.
+  forall i3:int. forall result4:bool. forall result5:int.
+  forall string_search__brute_force_slice__result4:int. forall i4:int.
+  forall string_search__brute_force_slice__result5:int. forall i5:int.
+  forall string_search__brute_force_slice__result6:int. forall i6:int.
+  forall string_search__brute_force_slice__result7:int. forall i7:int.
+  forall string_search__brute_force_slice__result8:int. forall i8:int.
+  forall string_search__brute_force_slice__result9:int. forall i9:int.
+  forall string_search__brute_force_slice__result10:int. forall result6:int.
+  forall string_search__brute_force_slice__result11:int.
+  forall string_search__brute_force_slice__result12:int.
+  forall string_search__brute_force_slice__result13:int. forall i10:int.
+  forall string_search__brute_force_slice__result14:int. forall i11:int.
+  forall string_search__brute_force_slice__result15:int. forall i12:int.
+  forall string_search__brute_force_slice__result16:int. forall i13:int.
+  forall string_search__brute_force_slice__result17:int.
+  (forall result7:int. (((dynamic_property(1, 2147483647,
+  to_rep1(first(needle1)), to_rep1(last(needle1))) and
+  (to_rep1(first(needle1)) = 1)) and ((dynamic_property(1, 2147483647,
+  to_rep1(first(haystack1)), to_rep1(last(haystack1))) and
+  (to_rep1(first(haystack1)) = 1)) and (((1 <= length({ elts = needle; rt =
+  needle1 })) and (length({ elts = needle; rt = needle1 }) <= length({ elts =
+  haystack; rt = haystack1 }))) and ((((((({ int__content =
+  string_search__brute_force_slice__result14 } = { int__content =
+  string_search__brute_force_slice__result5 }) and ({ int__content = i10
+  } = { int__content = i4 })) and
+  ((string_search__brute_force_slice__result15 = string_search__brute_force_slice__result6) and
+  (i11 = i5))) and ((temp___310 = 1) and (((((((o = length({ elts = needle;
   rt = needle1 })) and in_range1(length({ elts = needle; rt = needle1
   }))) and (((o1 = length({ elts = haystack; rt = haystack1 })) and
   in_range1(length({ elts = haystack; rt = haystack1 }))) and
   (o2 = (o1 - o)))) and ((o3 = o2) and in_range1(o2))) and
-  (o4 = (o3 + 1))) and ((temp___280 = o4) and in_range1(o4))) and
-  (((result = i) and (i1 = temp___279)) and (((temp___279 <= i1) and
-  (i1 <= temp___280)) and ((temp___278 = i1) and
-  (((((string_search__brute_force_slice__result2 = string_search__brute_force_slice__result7) and
-  (i1 = i6)) and
-  ((string_search__brute_force_slice__result8 = string_search__brute_force_slice__result2) and
-  (i7 = i1))) and (((((((o5 = (to_rep1(last(needle1)) - 1)) and
+  (o4 = (o3 + 1))) and ((temp___311 = o4) and in_range1(o4))) and ((({
+  int__content = result } = { int__content = i }) and (i1 = temp___310)) and
+  (((temp___310 <= i1) and (i1 <= temp___311)) and ((temp___309 = i1) and
+  (((((string_search__brute_force_slice__result2 = string_search__brute_force_slice__result5) and
+  (i1 = i4)) and
+  ((string_search__brute_force_slice__result6 = string_search__brute_force_slice__result2) and
+  (i5 = i1))) and (((((((o5 = (to_rep1(last(needle1)) - 1)) and
   in_range1((to_rep1(last(needle1)) - 1))) and (o6 = (i1 + o5))) and
-  ((temp___276 = o6) and in_range1(o6))) and ((((i1 <= temp___276) ->
+  ((temp___307 = o6) and in_range1(o6))) and ((((i1 <= temp___307) ->
   (((to_rep1(first(haystack1)) <= i1) and
   (i1 <= to_rep1(last(haystack1)))) and
-  ((to_rep1(first(haystack1)) <= temp___276) and
-  (temp___276 <= to_rep1(last(haystack1)))))) and (o7 = haystack)) and
-  ((o7 = temp___277) and (mk1(i1, temp___276) = temp___2771)))) and
+  ((to_rep1(first(haystack1)) <= temp___307) and
+  (temp___307 <= to_rep1(last(haystack1)))))) and (o7 = haystack)) and
+  ((o7 = temp___308) and (mk1(i1, temp___307) = temp___3081)))) and
   (result1 = bool_eq5(needle, to_rep1(first(needle1)),
-  to_rep1(last(needle1)), temp___277, to_rep1(first2(temp___2771)),
-  to_rep1(last2(temp___2771))))) and ((result1 = true) and
-  ((result2 = string_search__brute_force_slice__result) and
-  (string_search__brute_force_slice__result2 = i1))))) or
+  to_rep1(last(needle1)), temp___308, to_rep1(first2(temp___3081)),
+  to_rep1(last2(temp___3081))))) and ((result1 = true) and (({ int__content =
+  result2 } = { int__content = string_search__brute_force_slice__result
+  }) and (string_search__brute_force_slice__result2 = i1))))) or
   ((((((((o5 = (to_rep1(last(needle1)) - 1)) and
   in_range1((to_rep1(last(needle1)) - 1))) and (o6 = (i1 + o5))) and
-  ((temp___276 = o6) and in_range1(o6))) and ((((i1 <= temp___276) ->
+  ((temp___307 = o6) and in_range1(o6))) and ((((i1 <= temp___307) ->
   (((to_rep1(first(haystack1)) <= i1) and
   (i1 <= to_rep1(last(haystack1)))) and
-  ((to_rep1(first(haystack1)) <= temp___276) and
-  (temp___276 <= to_rep1(last(haystack1)))))) and (o7 = haystack)) and
-  ((o7 = temp___277) and (mk1(i1, temp___276) = temp___2771)))) and
+  ((to_rep1(first(haystack1)) <= temp___307) and
+  (temp___307 <= to_rep1(last(haystack1)))))) and (o7 = haystack)) and
+  ((o7 = temp___308) and (mk1(i1, temp___307) = temp___3081)))) and
   (result1 = bool_eq5(needle, to_rep1(first(needle1)),
-  to_rep1(last(needle1)), temp___277, to_rep1(first2(temp___2771)),
-  to_rep1(last2(temp___2771))))) and ((not (result1 = true)) and
+  to_rep1(last(needle1)), temp___308, to_rep1(first2(temp___3081)),
+  to_rep1(last2(temp___3081))))) and ((not (result1 = true)) and
   ((string_search__brute_force_slice__result2 = string_search__brute_force_slice__result) and
   (string_search__brute_force_slice__result2 = string_search__brute_force_slice__result1)))) and
-  ((((string_search__brute_force_slice__result4 = string_search__brute_force_slice__result7) and
-  (i3 = i6)) and
-  ((string_search__brute_force_slice__result8 = string_search__brute_force_slice__result4) and
-  (i7 = i3))) and
-  ((forall k1:int. (((1 <= k1) and (k1 <= i2)) -> (not (match_at({ elts =
-   needle; rt = needle1 }, { elts = haystack; rt = haystack1 },
-   k1) = true)))) and ((((1 <= ((length({ elts = haystack; rt = haystack1
-  }) - length({ elts = needle; rt = needle1 })) + 1)) -> dynamic_property1(1,
-  ((length({ elts = haystack; rt = haystack1 }) - length({ elts = needle;
-  rt = needle1 })) + 1), i2)) and ((1 <= i2) and (i2 <= ((length({ elts =
+  ((((string_search__brute_force_slice__result4 = string_search__brute_force_slice__result5) and
+  (i3 = i4)) and
+  ((string_search__brute_force_slice__result6 = string_search__brute_force_slice__result4) and
+  (i5 = i3))) and
+  ((forall k:int. (((1 <= k) and (k <= i2)) -> (not (match_at({ elts =
+   needle; rt = needle1 }, { elts = haystack; rt = haystack1 }, k) = true)))) and
+  ((((1 <= ((length({ elts = haystack; rt = haystack1 }) - length({ elts =
+  needle; rt = needle1 })) + 1)) -> dynamic_property1(1, ((length({ elts =
   haystack; rt = haystack1 }) - length({ elts = needle; rt = needle1
-  })) + 1)))) and ((not (i2 = temp___280)) and (((i2 = result3) and
-  (i3 = (i2 + 1))) and (((((((o8 = (to_rep1(last(needle1)) - 1)) and
+  })) + 1), i2)) and ((1 <= i2) and (i2 <= ((length({ elts = haystack; rt =
+  haystack1 }) - length({ elts = needle; rt = needle1 })) + 1)))) and
+  ((not (i2 = temp___311)) and (((i2 = result3) and (i3 = (i2 + 1))) and
+  (((((((o8 = (to_rep1(last(needle1)) - 1)) and
   in_range1((to_rep1(last(needle1)) - 1))) and (o9 = (i3 + o8))) and
-  ((temp___2761 = o9) and in_range1(o9))) and ((((i3 <= temp___2761) ->
+  ((temp___3071 = o9) and in_range1(o9))) and ((((i3 <= temp___3071) ->
   (((to_rep1(first(haystack1)) <= i3) and
   (i3 <= to_rep1(last(haystack1)))) and
-  ((to_rep1(first(haystack1)) <= temp___2761) and
-  (temp___2761 <= to_rep1(last(haystack1)))))) and (o10 = haystack)) and
-  ((o10 = temp___2772) and (mk1(i3, temp___2761) = temp___2773)))) and
+  ((to_rep1(first(haystack1)) <= temp___3071) and
+  (temp___3071 <= to_rep1(last(haystack1)))))) and (o10 = haystack)) and
+  ((o10 = temp___3082) and (mk1(i3, temp___3071) = temp___3083)))) and
   (result4 = bool_eq5(needle, to_rep1(first(needle1)),
-  to_rep1(last(needle1)), temp___2772, to_rep1(first2(temp___2773)),
-  to_rep1(last2(temp___2773))))) and ((result4 = true) and
+  to_rep1(last(needle1)), temp___3082, to_rep1(first2(temp___3083)),
+  to_rep1(last2(temp___3083))))) and ((result4 = true) and
   ((string_search__brute_force_slice__result3 = result5) and
   (string_search__brute_force_slice__result4 = i3))))))))))))))))) or
   ((((((((o = length({ elts = needle; rt = needle1 })) and in_range1(length({
   elts = needle; rt = needle1 }))) and (((o1 = length({ elts = haystack; rt =
   haystack1 })) and in_range1(length({ elts = haystack; rt = haystack1
   }))) and (o2 = (o1 - o)))) and ((o3 = o2) and in_range1(o2))) and
-  (o4 = (o3 + 1))) and ((temp___280 = o4) and in_range1(o4))) and
-  (((result = i) and (i1 = 1)) and ((((1 <= i1) and (i1 <= temp___280)) ->
-  ((((temp___278 = i1) and ((((((((o5 = (to_rep1(last(needle1)) - 1)) and
+  (o4 = (o3 + 1))) and ((temp___311 = o4) and in_range1(o4))) and ((({
+  int__content = result } = { int__content = i }) and (i1 = 1)) and
+  ((((1 <= i1) and (i1 <= temp___311)) and ((((temp___309 = i1) and
+  ((((((((o5 = (to_rep1(last(needle1)) - 1)) and
   in_range1((to_rep1(last(needle1)) - 1))) and (o6 = (i1 + o5))) and
-  ((temp___276 = o6) and in_range1(o6))) and ((((i1 <= temp___276) ->
+  ((temp___307 = o6) and in_range1(o6))) and ((((i1 <= temp___307) ->
   (((to_rep1(first(haystack1)) <= i1) and
   (i1 <= to_rep1(last(haystack1)))) and
-  ((to_rep1(first(haystack1)) <= temp___276) and
-  (temp___276 <= to_rep1(last(haystack1)))))) and (o7 = haystack)) and
-  ((o7 = temp___277) and (mk1(i1, temp___276) = temp___2771)))) and
+  ((to_rep1(first(haystack1)) <= temp___307) and
+  (temp___307 <= to_rep1(last(haystack1)))))) and (o7 = haystack)) and
+  ((o7 = temp___308) and (mk1(i1, temp___307) = temp___3081)))) and
   (result1 = bool_eq5(needle, to_rep1(first(needle1)),
-  to_rep1(last(needle1)), temp___277, to_rep1(first2(temp___2771)),
-  to_rep1(last2(temp___2771))))) and ((not (result1 = true)) and
+  to_rep1(last(needle1)), temp___308, to_rep1(first2(temp___3081)),
+  to_rep1(last2(temp___3081))))) and ((not (result1 = true)) and
   ((string_search__brute_force_slice__result2 = string_search__brute_force_slice__result) and
   (string_search__brute_force_slice__result2 = string_search__brute_force_slice__result1)))) and
-  ((forall k1:int. (((1 <= k1) and (k1 <= i2)) -> (not (match_at({ elts =
-   needle; rt = needle1 }, { elts = haystack; rt = haystack1 },
-   k1) = true)))) and ((((1 <= ((length({ elts = haystack; rt = haystack1
-  }) - length({ elts = needle; rt = needle1 })) + 1)) -> dynamic_property1(1,
-  ((length({ elts = haystack; rt = haystack1 }) - length({ elts = needle;
-  rt = needle1 })) + 1), i2)) and ((1 <= i2) and (i2 <= ((length({ elts =
+  ((forall k:int. (((1 <= k) and (k <= i2)) -> (not (match_at({ elts =
+   needle; rt = needle1 }, { elts = haystack; rt = haystack1 }, k) = true)))) and
+  ((((1 <= ((length({ elts = haystack; rt = haystack1 }) - length({ elts =
+  needle; rt = needle1 })) + 1)) -> dynamic_property1(1, ((length({ elts =
   haystack; rt = haystack1 }) - length({ elts = needle; rt = needle1
-  })) + 1)))) and (i2 = temp___280))))) and
-  (((string_search__brute_force_slice__result3 = string_search__brute_force_slice__result9) and
-  (i2 = i8)) and
-  ((string_search__brute_force_slice__result10 = string_search__brute_force_slice__result3) and
-  (i9 = i2)))) and
-  (((string_search__brute_force_slice__result11 = string_search__brute_force_slice__result9) and
-  (i10 = i8)) and
-  ((string_search__brute_force_slice__result12 = string_search__brute_force_slice__result10) and
-  (i11 = i9))))) and ((not ((1 <= i1) and (i1 <= temp___280))) ->
-  (((string_search__brute_force_slice__result11 = string_search__brute_force_slice__result) and
-  (i1 = i10)) and
-  ((string_search__brute_force_slice__result12 = string_search__brute_force_slice__result1) and
-  (i11 = i1))))))) and
-  ((((string_search__brute_force_slice__result16 = string_search__brute_force_slice__result14) and
-  (i12 = i10)) and
+  })) + 1), i2)) and ((1 <= i2) and (i2 <= ((length({ elts = haystack; rt =
+  haystack1 }) - length({ elts = needle; rt = needle1 })) + 1)))) and
+  (i2 = temp___311))))) and
+  (((string_search__brute_force_slice__result3 = string_search__brute_force_slice__result7) and
+  (i2 = i6)) and
+  ((string_search__brute_force_slice__result8 = string_search__brute_force_slice__result3) and
+  (i7 = i2)))) and ((({ int__content =
+  string_search__brute_force_slice__result9 } = { int__content =
+  string_search__brute_force_slice__result7 }) and ({ int__content = i8 } = {
+  int__content = i6 })) and
+  ((string_search__brute_force_slice__result10 = string_search__brute_force_slice__result8) and
+  (i9 = i7))))) or ((not ((1 <= i1) and (i1 <= temp___311))) and ((({
+  int__content = string_search__brute_force_slice__result9 } = {
+  int__content = string_search__brute_force_slice__result }) and
+  (i1 = i8)) and
+  ((string_search__brute_force_slice__result10 = string_search__brute_force_slice__result1) and
+  (i9 = i1))))))) and (((({ int__content =
+  string_search__brute_force_slice__result14 } = { int__content =
+  string_search__brute_force_slice__result12 }) and ({ int__content = i10
+  } = { int__content = i8 })) and
+  ((string_search__brute_force_slice__result15 = string_search__brute_force_slice__result13) and
+  (i11 = i9))) and
+  (((string_search__brute_force_slice__result11 = string_search__brute_force_slice__result12) and
+  (string_search__brute_force_slice__result13 = string_search__brute_force_slice__result11)) and
+  (({ int__content = result6 } = { int__content =
+  string_search__brute_force_slice__result9 }) and
+  (string_search__brute_force_slice__result11 = 0)))))) and ((({
+  int__content = string_search__brute_force_slice__result16 } = {
+  int__content = string_search__brute_force_slice__result14 }) and ({
+  int__content = i12 } = { int__content = i10 })) and
   ((string_search__brute_force_slice__result17 = string_search__brute_force_slice__result15) and
-  (i13 = i11))) and
-  (((string_search__brute_force_slice__result13 = string_search__brute_force_slice__result14) and
-  (string_search__brute_force_slice__result15 = string_search__brute_force_slice__result13)) and
-  ((result6 = string_search__brute_force_slice__result11) and
-  (string_search__brute_force_slice__result13 = 0))))))
-
-axiom H4 :
-  (string_search__brute_force_slice__result18 = string_search__brute_force_slice__result16)
-
-axiom H5 : (i14 = i12)
-
-axiom H6 :
-  (string_search__brute_force_slice__result19 = string_search__brute_force_slice__result17)
-
-axiom H7 : (i15 = i13)
-
-axiom H8 : (result8 = string_search__brute_force_slice__result18)
-
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (0 <= string_search__brute_force_slice__result18)
+  (i13 = i11)))) and
+  (result7 = string_search__brute_force_slice__result16))))) ->
+  (0 <= string_search__brute_force_slice__result16))))

@@ -115,41 +115,10 @@ axiom cond__def_axiom : (forall i:int [cond(i)]. (cond(i) = true))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic j : int
-
-logic o : int
-
-logic us : bool
-
-logic o1 : int
-
-logic result : int
-
-logic j1 : int
-
-logic result1 : int
-
-logic j2 : int
-
-logic j3 : int
-
-logic result2 : int
-
-logic j4 : int
-
-axiom H : (result = j)
-
-axiom H1 : (j1 = 1)
-
-axiom H2 : in_range(j1)
-
-axiom H3 : (j1 <  10)
-
-axiom H4 : ((o = (j1 + 1)) and in_range((j1 + 1)))
-
-axiom H5 : (result1 = j1)
-
-axiom H6 : (j2 = o)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (cond(j2) = true)
+goal WP_parameter_def :
+  (forall j:int. forall o:int. forall result:int. forall j1:int.
+  forall result1:int. forall j2:int. (((result = j) and (j1 = 1)) ->
+  (in_range(j1) -> ((j1 <  10) -> ((((o = (j1 + 1)) and
+  in_range((j1 + 1))) and ((result1 = j1) and (j2 = o))) ->
+  (cond(j2) = true))))))

@@ -222,25 +222,6 @@ logic b : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic arithmetic__test_rem_a__result : int
-
-logic result : int
-
-logic arithmetic__test_rem_a__result1 : int
-
-logic arithmetic__test_rem_a__result2 : int
-
-logic arithmetic__test_rem_a__result3 : int
-
-logic arithmetic__test_rem_a__result4 : int
-
-logic arithmetic__test_rem_a__result5 : int
-
-axiom H : in_range(a)
-
-axiom H1 : in_range(b)
-
-axiom H2 : (not (b = 0))
-
  (* File "arithmetic.adb", line 4, characters 0-0 *)
-goal WP_parameter_def : (not (b = 0))
+goal WP_parameter_def : (in_range(a) -> (in_range(b) -> ((not (b = 0)) ->
+  (not (b = 0)))))

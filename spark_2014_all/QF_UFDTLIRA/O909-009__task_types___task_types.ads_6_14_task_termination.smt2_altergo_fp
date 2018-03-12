@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -165,61 +165,15 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : int
-
-logic temp___541 : int
-
-logic o : int
-
-logic result : int
-
-logic x1 : int
-
-logic x2 : int
-
-logic result1 : int
-
-logic x3 : int
-
-logic x4 : int
-
-logic x5 : int
-
-logic x6 : int
-
-logic x7 : int
-
-axiom H : in_range2(c)
-
-axiom H1 : (result = x)
-
-axiom H2 : (x1 = c)
-
-axiom H3 : in_range2(x1)
-
-axiom H4 : ((of_int(1) = true) -> (temp___541 = x1))
-
-axiom H5 : ((of_int(1) = true) -> ((0 <= 2147483647) -> in_range2(x2)))
-
-axiom H6 : ((of_int(1) = true) -> ((o = (x2 + 1)) and in_range1((x2 + 1))))
-
-axiom H7 : ((of_int(1) = true) -> (result1 = x2))
-
-axiom H8 : ((of_int(1) = true) -> (x3 = o))
-
-axiom H9 : ((of_int(1) = true) -> (not (of_int(1) = true)))
-
-axiom H10 : ((of_int(1) = true) -> (x3 = x4))
-
-axiom H11 : ((of_int(1) = true) -> (x5 = x3))
-
-axiom H12 : ((of_int(1) = true) -> (x6 = x4))
-
-axiom H13 : ((of_int(1) = true) -> (x7 = x5))
-
-axiom H14 : ((not (of_int(1) = true)) -> (x1 = x6))
-
-axiom H15 : ((not (of_int(1) = true)) -> (x7 = x1))
-
  (* File "task_types.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def :
+  (forall x:int. forall temp___614:int. forall o:int. forall result:int.
+  forall x1:int. forall x2:int. forall result1:int. forall x3:int.
+  forall x4:int. forall x5:int. forall x6:int. forall x7:int.
+  (not (in_range2(c) and ((({ int__content = result } = { int__content = x
+  }) and (x1 = c)) and (in_range2(x1) and (((of_int(1) = true) and
+  ((((temp___614 = x1) and (((0 <= 2147483647) -> in_range2(x2)) and
+  ((((o = (x2 + 1)) and in_range1((x2 + 1))) and ((result1 = x2) and
+  (x3 = o))) and (not (of_int(1) = true))))) and ((x3 = x4) and
+  (x5 = x3))) and ((x6 = x4) and (x7 = x5)))) or
+  ((not (of_int(1) = true)) and ((x1 = x6) and (x7 = x1)))))))))

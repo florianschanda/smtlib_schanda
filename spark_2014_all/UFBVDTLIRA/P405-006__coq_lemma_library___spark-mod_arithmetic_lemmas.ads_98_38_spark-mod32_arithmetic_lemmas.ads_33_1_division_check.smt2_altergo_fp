@@ -656,7 +656,15 @@ type pos
 
 logic attr__ATTRIBUTE_MODULUS1 : t
 
-predicate in_range(x: t) = (ule(of_int(1), x) and ule(x, of_int(4294967295)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 1)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 4294967295)
+
+predicate in_range(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((1 <= x) and (x <= 4294967295))
 
@@ -697,26 +705,15 @@ logic res : t
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic result : bool
+logic rliteral2 : t
 
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : in_range(scale_denom)
-
-axiom H3 : true
-
-axiom H4 : ule(scale_num, scale_denom)
-
-axiom H5 : ((scale_num = of_int(0)) -> (result = true))
-
-axiom H6 : ((not (scale_num = of_int(0))) -> ((ule(val__,
-  udiv(of_int(4294967295), scale_num)) -> (result = true)) and
-  ((not ule(val__, udiv(of_int(4294967295), scale_num))) ->
-  (result = false))))
-
-axiom H7 : (result = true)
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 0)
 
  (* File "spark-mod_arithmetic_lemmas.ads", line 83, characters 0-0 *)
-goal WP_parameter_def : (not (scale_denom = zeros))
+goal WP_parameter_def :
+  (forall result:bool. (in_range(scale_denom) -> (ule(scale_num,
+  scale_denom) -> ((((scale_num = rliteral2) and (result = true)) or
+  ((not (scale_num = rliteral2)) and ((ule(val__, udiv(rliteral1,
+  scale_num)) and (result = true)) or ((not ule(val__, udiv(rliteral1,
+  scale_num))) and (result = false))))) -> ((result = true) ->
+  (not (scale_denom = zeros)))))))

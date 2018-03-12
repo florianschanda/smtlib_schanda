@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -340,200 +340,72 @@ axiom in_bounds__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic r : int
-
-logic shapes3__make_circle__result : coordinate_type
-
-logic shapes3__make_circle__result1 : coordinate_type
-
-logic shapes3__make_circle__result2 : radius_type
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : radius_type
-
-logic o5 : coordinate_type
-
-logic o6 : coordinate_type
-
-logic o7 : coordinate_type
-
-logic o8 : coordinate_type
-
-logic o9 : radius_type
-
-logic o10 : coordinate_type
-
-logic o11 : coordinate_type
-
-logic o12 : radius_type
-
-logic result : int
-
-logic r1 : int
-
-logic result1 : int
-
-logic r2 : int
-
-logic result2 : int
-
-logic r3 : int
-
-logic result3 : int
-
-logic r4 : int
-
-logic result4 : int
-
-logic r5 : int
-
-logic result5 : coordinate_type
-
-logic result6 : coordinate_type
-
-logic result7 : radius_type
-
-logic shapes3__make_circle__result3 : coordinate_type
-
-logic shapes3__make_circle__result4 : coordinate_type
-
-logic shapes3__make_circle__result5 : radius_type
-
-logic shapes3__make_circle__result6 : coordinate_type
-
-logic shapes3__make_circle__result7 : coordinate_type
-
-logic shapes3__make_circle__result8 : radius_type
-
-logic shapes3__make_circle__result9 : coordinate_type
-
-logic shapes3__make_circle__result10 : coordinate_type
-
-logic shapes3__make_circle__result11 : radius_type
-
-logic r6 : int
-
-logic shapes3__make_circle__result12 : coordinate_type
-
-logic shapes3__make_circle__result13 : coordinate_type
-
-logic shapes3__make_circle__result14 : radius_type
-
-logic r7 : int
-
-logic shapes3__make_circle__result15 : coordinate_type
-
-logic shapes3__make_circle__result16 : coordinate_type
-
-logic shapes3__make_circle__result17 : radius_type
-
-axiom H : in_range1(x)
-
-axiom H1 : in_range1(y)
-
-axiom H2 : in_range2(radius)
-
-axiom H3 : (result = r)
-
-axiom H4 : (r1 = radius)
-
-axiom H5 : in_range2(r1)
-
-axiom H6 : (((100 - x) <= r1) -> ((o = (100 - x)) and in_range2((100 - x))))
-
-axiom H7 : (((100 - x) <= r1) -> (r1 = result1))
-
-axiom H8 : (((100 - x) <= r1) -> (r2 = o))
-
-axiom H9 : ((not ((100 - x) <= r1)) -> (r2 = r1))
-
-axiom H10 : (((x - (- 100)) <= r2) -> ((o1 = (x - (- 100))) and
-  in_range2((x - (- 100)))))
-
-axiom H11 : (((x - (- 100)) <= r2) -> (r2 = result2))
-
-axiom H12 : (((x - (- 100)) <= r2) -> (r3 = o1))
-
-axiom H13 : ((not ((x - (- 100)) <= r2)) -> (r3 = r2))
-
-axiom H14 : (((100 - y) <= r3) -> ((o2 = (100 - y)) and
-  in_range2((100 - y))))
-
-axiom H15 : (((100 - y) <= r3) -> (r3 = result3))
-
-axiom H16 : (((100 - y) <= r3) -> (r4 = o2))
-
-axiom H17 : ((not ((100 - y) <= r3)) -> (r4 = r3))
-
-axiom H18 : (((y - (- 100)) <= r4) -> ((o3 = (y - (- 100))) and
-  in_range2((y - (- 100)))))
-
-axiom H19 : (((y - (- 100)) <= r4) -> (result4 = r4))
-
-axiom H20 : (((y - (- 100)) <= r4) -> (r5 = o3))
-
-axiom H21 : ((not ((y - (- 100)) <= r4)) -> (r5 = r4))
-
-axiom H22 : (shapes3__make_circle__result6 = shapes3__make_circle__result3)
-
-axiom H23 : (shapes3__make_circle__result7 = shapes3__make_circle__result4)
-
-axiom H24 : (shapes3__make_circle__result8 = shapes3__make_circle__result5)
-
-axiom H25 :
-  ((shapes3__make_circle__result9 = shapes3__make_circle__result3) and
-  ((shapes3__make_circle__result10 = shapes3__make_circle__result4) and
-  (shapes3__make_circle__result11 = shapes3__make_circle__result5)))
-
-axiom H26 : (to_rep1(o4) = r5)
-
-axiom H27 : (to_rep(o5) = y)
-
-axiom H28 : (to_rep(o6) = x)
-
-axiom H29 : (o6 = o7)
-
-axiom H30 : (o5 = o8)
-
-axiom H31 : (o4 = o9)
-
-axiom H32 : (o10 = o7)
-
-axiom H33 : (o11 = o8)
-
-axiom H34 : (o12 = o9)
-
-axiom H35 : (result5 = shapes3__make_circle__result)
-
-axiom H36 : (result6 = shapes3__make_circle__result1)
-
-axiom H37 : (result7 = shapes3__make_circle__result2)
-
-axiom H38 : ((shapes3__make_circle__result3 = o10) and
-  ((shapes3__make_circle__result4 = o11) and
-  (shapes3__make_circle__result5 = o12)))
-
-axiom H39 :
-  ((shapes3__make_circle__result12 = shapes3__make_circle__result6) and
-  ((shapes3__make_circle__result13 = shapes3__make_circle__result7) and
-  (shapes3__make_circle__result14 = shapes3__make_circle__result8)))
-
-axiom H40 : (r6 = r5)
-
-axiom H41 :
-  ((shapes3__make_circle__result15 = shapes3__make_circle__result9) and
-  ((shapes3__make_circle__result16 = shapes3__make_circle__result10) and
-  (shapes3__make_circle__result17 = shapes3__make_circle__result11)))
-
-axiom H42 : (r7 = r5)
-
  (* File "shapes3.ads", line 23, characters 0-0 *)
 goal WP_parameter_def :
-  in_range1((to_rep(shapes3__make_circle__result12) + to_rep1(shapes3__make_circle__result14)))
+  (forall r:int. forall shapes3__make_circle__result:coordinate_type.
+  forall shapes3__make_circle__result1:coordinate_type.
+  forall shapes3__make_circle__result2:radius_type. forall o:int.
+  forall o1:int. forall o2:int. forall o3:int. forall o4:radius_type.
+  forall o5:coordinate_type. forall o6:coordinate_type.
+  forall o7:coordinate_type. forall o8:coordinate_type.
+  forall o9:radius_type. forall o10:coordinate_type.
+  forall o11:coordinate_type. forall o12:radius_type. forall result:int.
+  forall r1:int. forall result1:int. forall r2:int. forall result2:int.
+  forall r3:int. forall result3:int. forall r4:int. forall result4:int.
+  forall r5:int. forall result5:coordinate_type.
+  forall result6:coordinate_type. forall result7:radius_type.
+  forall shapes3__make_circle__result3:coordinate_type.
+  forall shapes3__make_circle__result4:coordinate_type.
+  forall shapes3__make_circle__result5:radius_type.
+  forall shapes3__make_circle__result6:coordinate_type.
+  forall shapes3__make_circle__result7:coordinate_type.
+  forall shapes3__make_circle__result8:radius_type.
+  forall shapes3__make_circle__result9:coordinate_type.
+  forall shapes3__make_circle__result10:coordinate_type.
+  forall shapes3__make_circle__result11:radius_type. forall r6:int.
+  forall shapes3__make_circle__result12:coordinate_type.
+  forall shapes3__make_circle__result13:coordinate_type.
+  forall shapes3__make_circle__result14:radius_type. forall r7:int.
+  forall shapes3__make_circle__result15:coordinate_type.
+  forall shapes3__make_circle__result16:coordinate_type.
+  forall shapes3__make_circle__result17:radius_type. (in_range1(x) ->
+  (in_range1(y) -> (in_range2(radius) -> ((((({ int__content = result } = {
+  int__content = r }) and (r1 = radius)) and (in_range2(r1) and
+  (((((100 - x) <= r1) and (((o = (100 - x)) and in_range2((100 - x))) and
+  ((r1 = result1) and (r2 = o)))) or ((not ((100 - x) <= r1)) and
+  (r2 = r1))) and (((((x - (- 100)) <= r2) and (((o1 = (x - (- 100))) and
+  in_range2((x - (- 100)))) and ((r2 = result2) and (r3 = o1)))) or
+  ((not ((x - (- 100)) <= r2)) and (r3 = r2))) and (((((100 - y) <= r3) and
+  (((o2 = (100 - y)) and in_range2((100 - y))) and ((r3 = result3) and
+  (r4 = o2)))) or ((not ((100 - y) <= r3)) and (r4 = r3))) and
+  (((((y - (- 100)) <= r4) and (((o3 = (y - (- 100))) and
+  in_range2((y - (- 100)))) and ((result4 = r4) and (r5 = o3)))) or
+  ((not ((y - (- 100)) <= r4)) and (r5 = r4))) and
+  ((((shapes3__make_circle__result6 = shapes3__make_circle__result3) and
+  ((shapes3__make_circle__result7 = shapes3__make_circle__result4) and
+  (shapes3__make_circle__result8 = shapes3__make_circle__result5))) and ({
+  us_split_fields1 = { rec__shapes3__circle__center_x =
+  shapes3__make_circle__result9; rec__shapes3__circle__center_y =
+  shapes3__make_circle__result10; rec__shapes3__circle__radius =
+  shapes3__make_circle__result11 } } = { us_split_fields1 = {
+  rec__shapes3__circle__center_x = shapes3__make_circle__result3;
+  rec__shapes3__circle__center_y = shapes3__make_circle__result4;
+  rec__shapes3__circle__radius = shapes3__make_circle__result5 } })) and
+  ((((to_rep1(o4) = r5) and ((to_rep(o5) = y) and ((to_rep(o6) = x) and
+  ((o6 = o7) and ((o5 = o8) and (o4 = o9)))))) and ((o10 = o7) and
+  ((o11 = o8) and (o12 = o9)))) and
+  (((result5 = shapes3__make_circle__result) and
+  ((result6 = shapes3__make_circle__result1) and
+  (result7 = shapes3__make_circle__result2))) and
+  ((o10 = shapes3__make_circle__result3) and
+  ((o11 = shapes3__make_circle__result4) and
+  (o12 = shapes3__make_circle__result5)))))))))))) and
+  ((((shapes3__make_circle__result6 = shapes3__make_circle__result12) and
+  ((shapes3__make_circle__result7 = shapes3__make_circle__result13) and
+  (shapes3__make_circle__result8 = shapes3__make_circle__result14))) and
+  (r6 = r5)) and
+  (((shapes3__make_circle__result15 = shapes3__make_circle__result9) and
+  ((shapes3__make_circle__result16 = shapes3__make_circle__result10) and
+  (shapes3__make_circle__result17 = shapes3__make_circle__result11))) and
+  (r7 = r5)))) ->
+  in_range1((to_rep(shapes3__make_circle__result12) + to_rep1(shapes3__make_circle__result14))))))))

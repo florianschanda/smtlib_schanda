@@ -29,7 +29,7 @@
 (declare-const dummy capacity_range)
 (declare-datatypes () ((capacity_range__ref (mk_capacity_range__ref (capacity_range__content capacity_range)))))
 (define-fun capacity_range__ref___projection ((a capacity_range__ref)) capacity_range (capacity_range__content a))
-(define-fun dynamic_invariant ((temp___expr_207 Int) (temp___is_init_204 Bool) (temp___skip_constant_205 Bool) (temp___do_toplevel_206 Bool)) Bool (=> (or (= temp___is_init_204 true) (<= 0 100)) (in_range temp___expr_207)))
+(define-fun dynamic_invariant ((temp___expr_242 Int) (temp___is_init_238 Bool) (temp___skip_constant_239 Bool) (temp___do_toplevel_240 Bool) (temp___do_typ_inv_241 Bool)) Bool (=> (or (= temp___is_init_238 true) (<= 0 100)) (in_range temp___expr_242)))
 (declare-const us Int)
 (declare-const us1 Int)
 (declare-const us2 Int)

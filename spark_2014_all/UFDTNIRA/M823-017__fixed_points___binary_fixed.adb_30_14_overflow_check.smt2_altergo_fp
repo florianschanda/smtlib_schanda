@@ -56,12 +56,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -73,6 +67,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -501,29 +501,7 @@ axiom y__def_axiom : (y = of_fixed1(1280))
 
 axiom yy__def_axiom : (yy = 5)
 
-logic z : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic result : t
-
-logic z1 : t
-
-logic result1 : t
-
-logic z2 : t
-
-logic result2 : t
-
-logic z3 : t
-
-axiom H : (((- 1280) <= to_fixed1(x)) and (to_fixed1(x) <= 1280))
-
-axiom H1 : in_range1(yy)
-
  (* File "binary_fixed.adb", line 13, characters 0-0 *)
-goal WP_parameter_def : in_range2((to_fixed1(x) - to_fixed1(x)))
+goal WP_parameter_def : ((((- 1280) <= to_fixed1(x)) and
+  (to_fixed1(x) <= 1280)) -> (in_range1(yy) ->
+  in_range2((to_fixed1(x) - to_fixed1(x)))))

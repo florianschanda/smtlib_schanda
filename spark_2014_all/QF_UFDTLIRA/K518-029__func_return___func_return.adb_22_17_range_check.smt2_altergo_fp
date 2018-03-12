@@ -132,11 +132,5 @@ function nt__ref___projection(a: nt__ref) : nt = (a).nt__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic g : int
-
-logic o : int
-
-axiom H : in_range(g)
-
  (* File "func_return.ads", line 4, characters 0-0 *)
-goal WP_parameter_def : in_range1(g)
+goal WP_parameter_def : (forall g:int. (in_range(g) -> in_range1(g)))

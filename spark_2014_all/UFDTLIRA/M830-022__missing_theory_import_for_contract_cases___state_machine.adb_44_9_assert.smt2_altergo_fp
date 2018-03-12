@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -189,73 +189,15 @@ axiom state_d__def_axiom :
   state_machine__num) = true) <-> ((not (state_machine__flag = true)) and
   (state_machine__num <  0)))))
 
-logic flag : bool
-
-logic num : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic flag1 : bool
-
-logic num1 : int
-
-logic result : bool
-
-logic result1 : bool
-
-logic result2 : int
-
-logic num2 : int
-
-logic result3 : bool
-
-logic result4 : bool
-
-logic flag2 : bool
-
-logic result5 : int
-
-logic num3 : int
-
-logic result6 : bool
-
-logic result7 : int
-
-logic num4 : int
-
-logic flag3 : bool
-
-logic num5 : int
-
-logic flag4 : bool
-
-logic num6 : int
-
-axiom H : in_range1(num)
-
-axiom H1 : ((result = state_a(flag, num)) and ((result = true) <->
-  ((flag = true) and (0 <  num))))
-
-axiom H2 : (not (result = true))
-
-axiom H3 : ((result1 = state_b(flag, num)) and ((result1 = true) <->
-  ((flag = true) and (num <= 0))))
-
-axiom H4 : (not (result1 = true))
-
-axiom H5 : ((result3 = state_c(flag, num)) and ((result3 = true) <->
-  ((not (flag = true)) and (0 <  num))))
-
-axiom H6 : (not (result3 = true))
-
-axiom H7 : ((result6 = state_d(flag, num)) and ((result6 = true) <->
-  ((not (flag = true)) and (num <  0))))
-
-axiom H8 : (not (result6 = true))
-
  (* File "state_machine.adb", line 22, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def :
+  (forall flag:bool. forall num:int. forall result:bool. forall result1:bool.
+  forall result2:bool. forall result3:bool. (in_range1(num) ->
+  (((result = state_a(flag, num)) and ((result = true) <-> ((flag = true) and
+  (0 <  num)))) -> ((not (result = true)) -> (((result1 = state_b(flag,
+  num)) and ((result1 = true) <-> ((flag = true) and (num <= 0)))) ->
+  ((not (result1 = true)) -> (((result2 = state_c(flag, num)) and
+  ((result2 = true) <-> ((not (flag = true)) and (0 <  num)))) ->
+  ((not (result2 = true)) -> (((result3 = state_d(flag, num)) and
+  ((result3 = true) <-> ((not (flag = true)) and (num <  0)))) ->
+  (result3 = true))))))))))

@@ -427,181 +427,65 @@ logic attr__ATTRIBUTE_ADDRESS9 : int
 
 logic attr__ATTRIBUTE_ADDRESS10 : int
 
-logic t1 : fixed
-
-logic t2 : fixed
-
-logic t3 : fixed
-
-logic t4 : fixed
-
-logic t5 : fixed
-
-logic t6 : fixed
-
-logic t7 : fixed
-
-logic t8 : fixed
-
-logic t9 : fixed
-
-logic t10 : fixed
-
-logic res : fixed
-
-logic pi_compute__leibniz_fixed__result : fixed
-
-logic o : fixed
-
-logic o1 : fixed
-
-logic o2 : fixed
-
-logic o3 : fixed
-
-logic o4 : fixed
-
-logic o5 : fixed
-
-logic o6 : fixed
-
-logic o7 : fixed
-
-logic o8 : fixed
-
-logic o9 : fixed
-
-logic o10 : fixed
-
-logic result : fixed
-
-logic t11 : fixed
-
-logic result1 : fixed
-
-logic t21 : fixed
-
-logic result2 : fixed
-
-logic t31 : fixed
-
-logic result3 : fixed
-
-logic t41 : fixed
-
-logic result4 : fixed
-
-logic t51 : fixed
-
-logic result5 : fixed
-
-logic t61 : fixed
-
-logic result6 : fixed
-
-logic t71 : fixed
-
-logic result7 : fixed
-
-logic t81 : fixed
-
-logic result8 : fixed
-
-logic t91 : fixed
-
-logic result9 : fixed
-
-logic t101 : fixed
-
-logic result10 : fixed
-
-logic res1 : fixed
-
-logic result11 : fixed
-
-logic pi_compute__leibniz_fixed__result1 : fixed
-
-logic pi_compute__leibniz_fixed__result2 : fixed
-
-logic pi_compute__leibniz_fixed__result3 : fixed
-
-logic t12 : fixed
-
-logic t22 : fixed
-
-logic t32 : fixed
-
-logic t42 : fixed
-
-logic t52 : fixed
-
-logic t62 : fixed
-
-logic t72 : fixed
-
-logic t82 : fixed
-
-logic t92 : fixed
-
-logic t102 : fixed
-
-logic res2 : fixed
-
-logic pi_compute__leibniz_fixed__result4 : fixed
-
-logic t13 : fixed
-
-logic t23 : fixed
-
-logic t33 : fixed
-
-logic t43 : fixed
-
-logic t53 : fixed
-
-logic t63 : fixed
-
-logic t73 : fixed
-
-logic t83 : fixed
-
-logic t93 : fixed
-
-logic t103 : fixed
-
-logic res3 : fixed
-
-logic pi_compute__leibniz_fixed__result5 : fixed
-
-logic result12 : fixed
-
-axiom H : ((((to_fixed1(o) = 1048576) and ((result = t1) and (t11 = o))) and
-  (((to_fixed1(o1) = 349525) and ((result1 = t2) and (t21 = o1))) and
-  (((to_fixed1(o2) = 209715) and ((result2 = t3) and (t31 = o2))) and
-  (((to_fixed1(o3) = 149796) and ((result3 = t4) and (t41 = o3))) and
-  (((to_fixed1(o4) = 116508) and ((result4 = t5) and (t51 = o4))) and
-  (((to_fixed1(o5) = 95325) and ((result5 = t6) and (t61 = o5))) and
-  (((to_fixed1(o6) = 80659) and ((result6 = t7) and (t71 = o6))) and
-  (((to_fixed1(o7) = 69905) and ((result7 = t8) and (t81 = o7))) and
-  (((to_fixed1(o8) = 61680) and ((result8 = t9) and (t91 = o8))) and
-  (((to_fixed1(o9) = 55188) and ((result9 = t10) and (t101 = o9))) and
+ (* File "pi_compute.adb", line 7, characters 0-0 *)
+goal WP_parameter_def :
+  (forall t1:fixed. forall t2:fixed. forall t3:fixed. forall t4:fixed.
+  forall t5:fixed. forall t6:fixed. forall t7:fixed. forall t8:fixed.
+  forall t9:fixed. forall t10:fixed. forall res:fixed.
+  forall pi_compute__leibniz_fixed__result:fixed. forall o:fixed.
+  forall o1:fixed. forall o2:fixed. forall o3:fixed. forall o4:fixed.
+  forall o5:fixed. forall o6:fixed. forall o7:fixed. forall o8:fixed.
+  forall o9:fixed. forall o10:fixed. forall result:fixed. forall t11:fixed.
+  forall result1:fixed. forall t21:fixed. forall result2:fixed.
+  forall t31:fixed. forall result3:fixed. forall t41:fixed.
+  forall result4:fixed. forall t51:fixed. forall result5:fixed.
+  forall t61:fixed. forall result6:fixed. forall t71:fixed.
+  forall result7:fixed. forall t81:fixed. forall result8:fixed.
+  forall t91:fixed. forall result9:fixed. forall t101:fixed.
+  forall result10:fixed. forall res1:fixed. forall result11:fixed.
+  forall pi_compute__leibniz_fixed__result1:fixed.
+  forall pi_compute__leibniz_fixed__result2:fixed.
+  forall pi_compute__leibniz_fixed__result3:fixed. forall t12:fixed.
+  forall t22:fixed. forall t32:fixed. forall t42:fixed. forall t52:fixed.
+  forall t62:fixed. forall t72:fixed. forall t82:fixed. forall t92:fixed.
+  forall t102:fixed. forall res2:fixed.
+  forall pi_compute__leibniz_fixed__result4:fixed. forall t13:fixed.
+  forall t23:fixed. forall t33:fixed. forall t43:fixed. forall t53:fixed.
+  forall t63:fixed. forall t73:fixed. forall t83:fixed. forall t93:fixed.
+  forall t103:fixed. forall res3:fixed.
+  forall pi_compute__leibniz_fixed__result5:fixed.
+  (forall result12:fixed. ((((((to_fixed1(o) = 1048576) and (({
+  fixed__content = result } = { fixed__content = t1 }) and (t11 = o))) and
+  (((to_fixed1(o1) = 349525) and (({ fixed__content = result1 } = {
+  fixed__content = t2 }) and (t21 = o1))) and (((to_fixed1(o2) = 209715) and
+  (({ fixed__content = result2 } = { fixed__content = t3 }) and
+  (t31 = o2))) and (((to_fixed1(o3) = 149796) and (({ fixed__content =
+  result3 } = { fixed__content = t4 }) and (t41 = o3))) and
+  (((to_fixed1(o4) = 116508) and (({ fixed__content = result4 } = {
+  fixed__content = t5 }) and (t51 = o4))) and (((to_fixed1(o5) = 95325) and
+  (({ fixed__content = result5 } = { fixed__content = t6 }) and
+  (t61 = o5))) and (((to_fixed1(o6) = 80659) and (({ fixed__content = result6
+  } = { fixed__content = t7 }) and (t71 = o6))) and
+  (((to_fixed1(o7) = 69905) and (({ fixed__content = result7 } = {
+  fixed__content = t8 }) and (t81 = o7))) and (((to_fixed1(o8) = 61680) and
+  (({ fixed__content = result8 } = { fixed__content = t9 }) and
+  (t91 = o8))) and (((to_fixed1(o9) = 55188) and (({ fixed__content = result9
+  } = { fixed__content = t10 }) and (t101 = o9))) and
   (((to_fixed1(o10) = ((((((((((to_fixed1(t11) - to_fixed1(t21)) + to_fixed1(t31)) - to_fixed1(t41)) + to_fixed1(t51)) - to_fixed1(t61)) + to_fixed1(t71)) - to_fixed1(t81)) + to_fixed1(t91)) - to_fixed1(t101)) * 4)) and
-  ((result10 = res) and (res1 = o10))) and ((to_fixed1(res1) = 3189596) and
-  (((pi_compute__leibniz_fixed__result2 = pi_compute__leibniz_fixed__result1) and
+  (({ fixed__content = result10 } = { fixed__content = res }) and
+  (res1 = o10))) and ((to_fixed1(res1) = 3189596) and
+  (((pi_compute__leibniz_fixed__result1 = pi_compute__leibniz_fixed__result2) and
   (pi_compute__leibniz_fixed__result3 = pi_compute__leibniz_fixed__result1)) and
   ((result11 = pi_compute__leibniz_fixed__result) and
-  (pi_compute__leibniz_fixed__result1 = res1))))))))))))))) and
-  (((pi_compute__leibniz_fixed__result4 = pi_compute__leibniz_fixed__result2) and
-  ((res2 = res1) and ((t102 = t101) and ((t92 = t91) and ((t82 = t81) and
-  ((t72 = t71) and ((t62 = t61) and ((t52 = t51) and ((t42 = t41) and
-  ((t32 = t31) and ((t22 = t21) and (t12 = t11)))))))))))) and
+  (pi_compute__leibniz_fixed__result1 = res1))))))))))))))) and ((({
+  fixed__content = pi_compute__leibniz_fixed__result4 } = { fixed__content =
+  pi_compute__leibniz_fixed__result2 }) and ((res1 = res2) and
+  ((t101 = t102) and ((t91 = t92) and ((t81 = t82) and ((t71 = t72) and
+  ((t61 = t62) and ((t51 = t52) and ((t41 = t42) and ((t31 = t32) and
+  ((t21 = t22) and (t11 = t12)))))))))))) and
   ((pi_compute__leibniz_fixed__result5 = pi_compute__leibniz_fixed__result3) and
   ((res3 = res1) and ((t103 = t101) and ((t93 = t91) and ((t83 = t81) and
   ((t73 = t71) and ((t63 = t61) and ((t53 = t51) and ((t43 = t41) and
-  ((t33 = t31) and ((t23 = t21) and (t13 = t11))))))))))))))
-
-axiom H1 : (result12 = pi_compute__leibniz_fixed__result4)
-
- (* File "pi_compute.adb", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (to_fixed1(pi_compute__leibniz_fixed__result4) = 3189596)
+  ((t33 = t31) and ((t23 = t21) and (t13 = t11)))))))))))))) and
+  (result12 = pi_compute__leibniz_fixed__result4)) ->
+  (to_fixed1(pi_compute__leibniz_fixed__result4) = 3189596))))

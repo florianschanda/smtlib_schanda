@@ -424,67 +424,17 @@ type t5b__ref = { t5b__content : us_rep
 
 function t5b__ref___projection(a: t5b__ref) : us_rep = (a).t5b__content
 
-logic g__split_discrs : status
-
-logic y : int
-
-logic o : status
-
-logic o1 : natural
-
-logic o2 : natural
-
-logic o3 : natural
-
-logic o4 : bool
-
-logic o5 : status
-
-logic temp___167 : status
-
-logic temp___1671 : natural
-
-logic temp___1672 : natural
-
-logic temp___1673 : bool
-
-logic temp___1674 : bool
-
-logic result : int
-
-logic y1 : int
-
-axiom H : (g__attr__constrained = false)
-
-axiom H1 : ((0 <= 2) -> in_range1(y))
-
-axiom H2 : (result = y)
-
-axiom H3 : (y1 = to_rep1(g__split_discrs))
-
-axiom H4 : (to_rep(o1) = 0)
-
-axiom H5 : (o1 = o2)
-
-axiom H6 : (dummy = o3)
-
-axiom H7 : (true = o4)
-
-axiom H8 : (to_rep1(o) = 2)
-
-axiom H9 : (o = o5)
-
-axiom H10 : (temp___167 = o5)
-
-axiom H11 : (temp___1671 = o2)
-
-axiom H12 : (temp___1672 = o3)
-
-axiom H13 : (temp___1673 = o4)
-
-axiom H14 : (true = temp___1674)
-
-axiom H15 : (g__attr__constrained = true)
-
  (* File "definite.adb", line 37, characters 0-0 *)
-goal WP_parameter_def : (temp___167 = g__split_discrs)
+goal WP_parameter_def :
+  (forall g__split_discrs:status. forall y:int. forall o:status.
+  forall o1:natural. forall o2:natural. forall o3:natural. forall o4:bool.
+  forall o5:status. forall temp___191:status. forall temp___1911:natural.
+  forall temp___1912:natural. forall temp___1913:bool.
+  forall temp___1914:bool. forall result:int. forall y1:int.
+  ((g__attr__constrained = false) -> (((0 <= 2) -> in_range1(y)) ->
+  (((result = y) and (y1 = to_rep1(g__split_discrs))) ->
+  ((((to_rep(o1) = 0) and ((o1 = o2) and ((dummy = o3) and (true = o4)))) and
+  (((to_rep1(o) = 2) and (o = o5)) and ((temp___191 = o5) and
+  (((temp___1911 = o2) and ((temp___1912 = o3) and (temp___1913 = o4))) and
+  (true = temp___1914))))) -> ((g__attr__constrained = true) ->
+  (temp___191 = g__split_discrs)))))))

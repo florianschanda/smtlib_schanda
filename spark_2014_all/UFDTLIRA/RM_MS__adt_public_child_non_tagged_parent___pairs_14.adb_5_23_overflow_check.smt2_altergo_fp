@@ -220,7 +220,5 @@ logic value1 : integer
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : int
-
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def : in_range((to_rep(value) + to_rep(value1)))

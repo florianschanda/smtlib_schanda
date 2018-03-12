@@ -109,11 +109,5 @@ logic e : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-axiom H : in_range(e)
-
-axiom H1 : (not (e = 0))
-
-axiom H2 : (e = 0)
-
  (* File "c.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def : (in_range(e) -> ((not (e = 0)) -> (not (e = 0))))

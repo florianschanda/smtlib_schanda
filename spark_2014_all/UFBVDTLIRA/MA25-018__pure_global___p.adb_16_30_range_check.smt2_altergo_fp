@@ -691,43 +691,11 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic z : int
-
-logic l : t
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : int
-
-logic result : t
-
-logic l1 : t
-
-axiom H : in_range(x)
-
-axiom H1 : in_range(y)
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range(z))
-
-axiom H3 : true
-
-axiom H4 : ((o = (x + y)) and in_range((x + y)))
-
-axiom H5 : ((o1 = o) and uint_in_range(o))
-
-axiom H6 : (o2 = of_int(o1))
-
-axiom H7 : (o3 = lsr_bv(o2, of_int(5)))
-
-axiom H8 : (result = l)
-
-axiom H9 : (l1 = o3)
-
  (* File "p.adb", line 6, characters 0-0 *)
-goal WP_parameter_def : in_range(tqtint(l1))
+goal WP_parameter_def :
+  (forall z:int. forall l:t. forall o:int. forall o1:int. forall o2:t.
+  forall o3:t. forall result:t. forall l1:t. (in_range(x) -> (in_range(y) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(z)) -> (((((((o = (x + y)) and
+  in_range((x + y))) and ((o1 = o) and uint_in_range(o))) and
+  (o2 = of_int(o1))) and (o3 = lsr_bv(o2, of_int(5)))) and ((result = l) and
+  (l1 = o3))) -> in_range(tqtint(l1)))))))

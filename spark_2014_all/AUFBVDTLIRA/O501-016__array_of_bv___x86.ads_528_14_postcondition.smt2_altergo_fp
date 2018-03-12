@@ -1041,24 +1041,6 @@ axiom slide_def :
   (forall i:t1 [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[sub1(i, sub1(new_first, old_first))]))))))
 
-logic concat : (t1,unsigned8) farray, t1, t1, (t1,unsigned8) farray, t1,
-  t1 -> (t1,unsigned8) farray
-
-axiom concat_def :
-  (forall a:(t1,unsigned8) farray. forall b:(t1,unsigned8) farray.
-  (forall a_first:t1. forall a_last:t1. forall b_first:t1. forall b_last:t1.
-  (forall i:t1 [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((ule1(a_first, i) and ule1(i, a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and (ugt1(i, a_last) -> ((concat(a,
-  a_first, a_last, b, b_first, b_last)[i]) = (b[add1(sub1(i, a_last),
-  sub1(b_first, one1))])))))))
-
-logic singleton : unsigned8, t1 -> (t1,unsigned8) farray
-
-axiom singleton_def :
-  (forall v:unsigned8.
-  (forall i:t1 [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (t1,unsigned8) farray, t1, t1, (t1,unsigned8) farray, t1,
   t1 -> bool
 
@@ -1069,19 +1051,19 @@ axiom bool_eq_def4 :
   a__last) and (ule1(b__first, b__last) and (sub1(a__last,
   a__first) = sub1(b__last, b__first)))) or ((not ule1(a__first,
   a__last)) and ugt1(b__first, b__last))) and
-  (forall temp___idx_132:t1. (((ule1(a__first, temp___idx_132) and
-  ule1(temp___idx_132, a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[add1(sub1(b__first, a__first),
-  temp___idx_132)])))) or (not (ule1(a__first, temp___idx_132) and
-  ule1(temp___idx_132, a__last)))))) -> (bool_eq5(a, a__first, a__last, b,
+  (forall temp___idx_154:t1. (((ule1(a__first, temp___idx_154) and
+  ule1(temp___idx_154, a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[add1(sub1(b__first, a__first),
+  temp___idx_154)])))) or (not (ule1(a__first, temp___idx_154) and
+  ule1(temp___idx_154, a__last)))))) -> (bool_eq5(a, a__first, a__last, b,
   b__first, b__last) = true)) and ((not (((ule1(a__first, a__last) ->
   (ule1(b__first, b__last) and (sub1(a__last, a__first) = sub1(b__last,
   b__first)))) and ((not ule1(a__first, a__last)) -> ugt1(b__first,
   b__last))) and
-  (forall temp___idx_132:t1. ((ule1(a__first, temp___idx_132) and
-  ule1(temp___idx_132, a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[add1(sub1(b__first, a__first),
-  temp___idx_132)]))))))) -> (bool_eq5(a, a__first, a__last, b, b__first,
+  (forall temp___idx_154:t1. ((ule1(a__first, temp___idx_154) and
+  ule1(temp___idx_154, a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[add1(sub1(b__first, a__first),
+  temp___idx_154)]))))))) -> (bool_eq5(a, a__first, a__last, b, b__first,
   b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1091,40 +1073,10 @@ axiom bool_eq_rev :
   a__last) = true) -> (((ule1(a__first, a__last) -> (ule1(b__first,
   b__last) and (sub1(a__last, a__first) = sub1(b__last, b__first)))) and
   ((not ule1(a__first, a__last)) -> ugt1(b__first, b__last))) and
-  (forall temp___idx_132:t1. ((ule1(a__first, temp___idx_132) and
-  ule1(temp___idx_132, a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[add1(sub1(b__first, a__first),
-  temp___idx_132)])))))))))
-
-logic compare : (t1,unsigned8) farray, t1, t1, (t1,unsigned8) farray, t1,
-  t1 -> int
-
-axiom compare_def_eq :
-  (forall a:(t1,unsigned8) farray. forall b:(t1,unsigned8) farray.
-  (forall a_first:t1. forall a_last:t1. forall b_first:t1. forall b_last:t1
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a, a_first, a_last, b,
-  b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(t1,unsigned8) farray. forall b:(t1,unsigned8) farray.
-  (forall a_first:t1. forall a_last:t1. forall b_first:t1. forall b_last:t1
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) <  0) <->
-  (exists i:t1. exists j:t1. (ule1(i, a_last) and (ult1(j, b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  (ult1(i, a_last) and ult(to_rep((a[add1(i, one1)])), to_rep((b[add1(j,
-  one1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(t1,unsigned8) farray. forall b:(t1,unsigned8) farray.
-  (forall a_first:t1. forall a_last:t1. forall b_first:t1. forall b_last:t1
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((0 <  compare(a,
-  a_first, a_last, b, b_first, b_last)) <->
-  (exists i:t1. exists j:t1. (ule1(i, b_last) and (ult1(j, a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  (ult1(i, b_last) and ugt(to_rep((a[add1(j, one1)])), to_rep((b[add1(i,
-  one1)]))))))))))))
+  (forall temp___idx_154:t1. ((ule1(a__first, temp___idx_154) and
+  ule1(temp___idx_154, a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[add1(sub1(b__first, a__first),
+  temp___idx_154)])))))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -1136,37 +1088,18 @@ logic addr : t1
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic x86__readmem8ghost__result : t
-
-logic result : t
-
-logic x86__readmem8ghost__result1 : t
-
-logic x86__readmem8ghost__result2 : t
-
-logic x86__readmem8ghost__result3 : t
-
-logic x86__readmem8ghost__result4 : t
-
-logic x86__readmem8ghost__result5 : t
-
-logic result1 : t
-
-axiom H : true
-
-axiom H1 : (x86__readmem8ghost__result1 = x86__readmem8ghost__result2)
-
-axiom H2 : (x86__readmem8ghost__result3 = x86__readmem8ghost__result1)
-
-axiom H3 : (result = x86__readmem8ghost__result)
-
-axiom H4 : (x86__readmem8ghost__result1 = to_rep((mem[addr])))
-
-axiom H5 : (x86__readmem8ghost__result4 = x86__readmem8ghost__result2)
-
-axiom H6 : (x86__readmem8ghost__result5 = x86__readmem8ghost__result3)
-
-axiom H7 : (result1 = x86__readmem8ghost__result4)
-
  (* File "x86.ads", line 10, characters 0-0 *)
-goal WP_parameter_def : (x86__readmem8ghost__result4 = to_rep((mem[addr])))
+goal WP_parameter_def :
+  (forall x86__readmem8ghost__result:t. forall result:t.
+  forall x86__readmem8ghost__result1:t. forall x86__readmem8ghost__result2:t.
+  forall x86__readmem8ghost__result3:t. forall x86__readmem8ghost__result4:t.
+  forall x86__readmem8ghost__result5:t.
+  (forall result1:t.
+  ((((((x86__readmem8ghost__result1 = x86__readmem8ghost__result2) and
+  (x86__readmem8ghost__result3 = x86__readmem8ghost__result1)) and
+  ((result = x86__readmem8ghost__result) and
+  (x86__readmem8ghost__result1 = to_rep((mem[addr]))))) and
+  ((x86__readmem8ghost__result4 = x86__readmem8ghost__result2) and
+  (x86__readmem8ghost__result5 = x86__readmem8ghost__result3))) and
+  (result1 = x86__readmem8ghost__result4)) ->
+  (x86__readmem8ghost__result4 = to_rep((mem[addr]))))))

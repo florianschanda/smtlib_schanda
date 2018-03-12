@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -85,41 +85,11 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic us_HEAP : us_type_of_heap
-
-logic a : bool
-
-logic b : bool
-
-logic x : us_private
-
-logic o : bool
-
-logic o1 : bool
-
-logic result : bool
-
-logic a1 : bool
-
-logic us_HEAP1 : us_type_of_heap
-
-logic result1 : bool
-
-logic b1 : bool
-
-axiom H : (o = get(x, us_HEAP))
-
-axiom H1 : (result = a)
-
-axiom H2 : (a1 = o)
-
-axiom H3 : (o1 = get(x, us_HEAP1))
-
-axiom H4 : (result1 = b)
-
-axiom H5 : (b1 = o1)
-
-axiom H6 : (a1 = true)
-
  (* File "pack.adb", line 5, characters 0-0 *)
-goal WP_parameter_def : (b1 = true)
+goal WP_parameter_def :
+  (forall us_HEAP:us_type_of_heap. forall a:bool. forall b:bool.
+  forall x:us_private. forall o:bool. forall o1:bool. forall result:bool.
+  forall a1:bool. forall us_HEAP1:us_type_of_heap. forall result1:bool.
+  forall b1:bool. (((o = get(x, us_HEAP)) and ((result = a) and (a1 = o))) ->
+  (((o1 = get(x, us_HEAP1)) and ((result1 = b) and (b1 = o1))) ->
+  ((a1 = true) -> (b1 = true)))))

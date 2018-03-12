@@ -106,13 +106,6 @@ function day__ref___projection(a: day__ref) : day = (a).day__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic d : int
-
-logic o : int
-
-axiom H : in_range(d)
-
-axiom H1 : (not (d = 6))
-
  (* File "days.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : (not (d = 6))
+goal WP_parameter_def :
+  (forall d:int. (in_range(d) -> ((not (d = 6)) -> (not (d = 6)))))

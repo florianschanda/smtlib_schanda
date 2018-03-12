@@ -1076,53 +1076,16 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic res : bool
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : t
-
-logic o6 : t
-
-logic o7 : t
-
-logic o8 : bool
-
-logic result : bool
-
-logic res1 : bool
-
-axiom H : tqtisFinite(a)
-
-axiom H1 : tqtisFinite(b)
-
-axiom H2 : tqtisFinite(c)
-
-axiom H3 : tqtisFinite(d)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
-axiom H4 : le(fliteral1, a)
-
-axiom H5 : le(fliteral1, b)
-
-axiom H6 : ((o2 = mul(NearestTiesToEven, d, d)) and
-  tqtisFinite(mul(NearestTiesToEven, d, d)))
-
-axiom H7 : (o3 = mul(NearestTiesToEven, o2, b))
-
-axiom H8 : ((o4 = o3) and tqtisFinite(o3))
-
  (* File "floating_point.adb", line 263, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(mul(NearestTiesToEven, c, c))
+goal WP_parameter_def :
+  (forall o:t. forall o1:t. forall o2:t. (tqtisFinite(a) ->
+  (tqtisFinite(b) -> (tqtisFinite(c) -> (tqtisFinite(d) -> (le(fliteral1,
+  a) -> (le(fliteral1, b) -> (((((o = mul(NearestTiesToEven, d, d)) and
+  tqtisFinite(mul(NearestTiesToEven, d, d))) and (o1 = mul(NearestTiesToEven,
+  o, b))) and ((o2 = o1) and tqtisFinite(o1))) ->
+  tqtisFinite(mul(NearestTiesToEven, c, c))))))))))

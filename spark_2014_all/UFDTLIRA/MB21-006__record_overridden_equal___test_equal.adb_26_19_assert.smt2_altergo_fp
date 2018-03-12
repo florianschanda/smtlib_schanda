@@ -320,45 +320,21 @@ axiom x__def_axiom : (x = content_x)
 
 axiom y__def_axiom : (y = content_y)
 
-logic o : my_int
-
-logic o1 : my_int
-
-logic test_equal__content_x__assume : my_int
-
-logic o2 : my_int
-
-logic o3 : my_int
-
-logic test_equal__content_y__assume : my_int
-
-axiom H : (to_rep(o) = 1)
-
-axiom H1 : (o = o1)
-
-axiom H2 : (test_equal__content_x__assume = o1)
-
-axiom H3 : (test_equal__content_x__assume = content_x)
-
-axiom H4 : (to_rep(o2) = 5)
-
-axiom H5 : (o2 = o3)
-
-axiom H6 : (test_equal__content_y__assume = o3)
-
-axiom H7 : (test_equal__content_y__assume = content_y)
-
-axiom H8 : (content_x = x)
-
-axiom H9 : (content_y = y)
-
-axiom H10 : (oeq({ us_split_fields1 = {
-  rec__test_equal__my_int_mod__content = content_x } }, { us_split_fields1 =
-  { rec__test_equal__my_int_mod__content = content_y } }) = true)
-
  (* File "test_equal.adb", line 14, characters 0-0 *)
-goal WP_parameter_def : (not (bool_eq3({ us_split_fields3 = {
-  rec__test_equal__my_rec__content = { us_split_fields1 = {
-  rec__test_equal__my_int_mod__content = x } } } }, { us_split_fields3 = {
-  rec__test_equal__my_rec__content = { us_split_fields1 = {
-  rec__test_equal__my_int_mod__content = y } } } }) = true))
+goal WP_parameter_def :
+  (forall o:my_int. forall o1:my_int.
+  forall test_equal__content_x__assume:my_int. forall o2:my_int.
+  forall o3:my_int. forall test_equal__content_y__assume:my_int.
+  (((((to_rep(o) = 1) and (o = o1)) and
+  (test_equal__content_x__assume = o1)) and
+  (test_equal__content_x__assume = content_x)) -> (((((to_rep(o2) = 5) and
+  (o2 = o3)) and (test_equal__content_y__assume = o3)) and
+  (test_equal__content_y__assume = content_y)) -> ((content_x = x) ->
+  ((content_y = y) -> ((oeq({ us_split_fields1 = {
+  rec__test_equal__my_int_mod__content = content_x } }, { us_split_fields1 =
+  { rec__test_equal__my_int_mod__content = content_y } }) = true) ->
+  (not (bool_eq3({ us_split_fields3 = { rec__test_equal__my_rec__content = {
+  us_split_fields1 = { rec__test_equal__my_int_mod__content = x } } } }, {
+  us_split_fields3 = { rec__test_equal__my_rec__content = {
+  us_split_fields1 = { rec__test_equal__my_int_mod__content = y } } }
+  }) = true))))))))

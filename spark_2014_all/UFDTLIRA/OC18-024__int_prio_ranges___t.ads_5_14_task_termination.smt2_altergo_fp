@@ -222,7 +222,5 @@ axiom bad_priority__post_axiom : in_range1(bad_priority(void))
 
 axiom bad_priority__def_axiom : (bad_priority(void) = 98)
 
-axiom H : false
-
  (* File "t.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def : true

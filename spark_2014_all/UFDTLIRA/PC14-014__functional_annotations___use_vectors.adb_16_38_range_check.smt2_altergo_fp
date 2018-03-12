@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -830,207 +830,51 @@ axiom first__def_axiom4 : (first2 = fst)
 
 axiom last__def_axiom5 : (last3 = lst)
 
-logic lst1 : int
-
-logic i : int
-
-logic o : int
-
-logic temp___431 : int
-
-logic temp___430 : tcount_typeB
-
-logic temp___4301 : us_main_type
-
-logic o1 : int
-
-logic n : int
-
-logic o2 : int
-
-logic o3 : bool
-
-logic us : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic us1 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic us2 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic us3 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : int
-
-logic o13 : int
-
-logic us4 : int
-
-logic o14 : int
-
-logic o15 : int
-
-logic n1 : int
-
-logic o16 : int
-
-logic o17 : bool
-
-logic us5 : int
-
-logic o18 : int
-
-logic o19 : int
-
-logic us6 : int
-
-logic o20 : int
-
-logic o21 : int
-
-logic result : int
-
-logic lst2 : int
-
-logic v2__split_fields : us_main_type
-
-logic result1 : int
-
-logic i1 : int
-
-logic v2__split_fields1 : us_main_type
-
-logic i2 : int
-
-logic result2 : bool
-
-logic result3 : bool
-
-logic v2__split_fields2 : us_main_type
-
-logic v2__split_fields3 : us_main_type
-
-logic result4 : int
-
-logic i3 : int
-
-logic v2__split_fields4 : us_main_type
-
-logic i4 : int
-
-logic v2__split_fields5 : us_main_type
-
-logic i5 : int
-
-logic v2__split_fields6 : us_main_type
-
-logic i6 : int
-
-logic v2__split_fields7 : us_main_type
-
-logic i7 : int
-
-logic v2__split_fields8 : us_main_type
-
-logic lst3 : int
-
-logic i8 : int
-
-logic v2__split_fields9 : us_main_type
-
-logic lst4 : int
-
-logic i9 : int
-
-logic result5 : bool
-
-axiom H : dynamic_property2(0, last2, to_rep1(v1))
-
-axiom H1 : dynamic_property2(0, last2, to_rep1(v2__split_discrs))
-
-axiom H2 : ((o = ((first2 - 1) + length1(model__({ us_split_discrs1 = {
-  rec__use_vectors__my_vectors__vector__capacity = v1 }; us_split_fields1 = {
-  rec__use_vectors__my_vectors__vector = v11 } })))) and
+ (* File "use_vectors.ads", line 33, characters 0-0 *)
+goal WP_parameter_def :
+  (forall lst1:int. forall i:int. forall o:int. forall us:int. forall o1:int.
+  forall o2:int. forall result:int. forall lst2:int.
+  forall v2__split_fields:us_main_type. forall result1:int. forall i1:int.
+  forall v2__split_fields1:us_main_type. forall i2:int. forall result2:bool.
+  (dynamic_property2(0, last2, to_rep1(v1)) -> (dynamic_property2(0, last2,
+  to_rep1(v2__split_discrs)) -> ((((o = ((first2 - 1) + length1(model__({
+  us_split_discrs1 = { rec__use_vectors__my_vectors__vector__capacity = v1 };
+  us_split_fields1 = { rec__use_vectors__my_vectors__vector = v11 } })))) and
   (dynamic_property4(first3, last4, o) and
   (o = ((first2 - 1) + length1(model__({ us_split_discrs1 = {
   rec__use_vectors__my_vectors__vector__capacity = v1 }; us_split_fields1 = {
-  rec__use_vectors__my_vectors__vector = v11 } }))))))
-
-axiom H3 : (result = lst1)
-
-axiom H4 : (lst2 = o)
-
-axiom H5 : in_range1(lst2)
-
-axiom H6 : ((length({ us_split_discrs1 = {
+  rec__use_vectors__my_vectors__vector = v11 } })))))) and (({ int__content =
+  result } = { int__content = lst1 }) and (lst2 = o))) -> (in_range1(lst2) ->
+  (((length({ us_split_discrs1 = {
   rec__use_vectors__my_vectors__vector__capacity = v2__split_discrs };
   us_split_fields1 = { rec__use_vectors__my_vectors__vector =
   v2__split_fields } }) = 0) and dynamic_property2(0, last2,
-  to_rep1(v2__split_discrs)))
-
-axiom H7 : (lst2 = r1b)
-
-axiom H8 : in_range1(r1b)
-
-axiom H9 : (result1 = i)
-
-axiom H10 : (i1 = first)
-
-axiom H11 : (first <= i1)
-
-axiom H12 : (i1 <= r1b)
-
-axiom H13 : (length({ us_split_discrs1 = {
+  to_rep1(v2__split_discrs))) -> (((lst2 = r1b) and in_range1(r1b)) -> ((({
+  int__content = result1 } = { int__content = i }) and (i1 = first)) ->
+  (((first <= i1) and (i1 <= r1b)) -> (((length({ us_split_discrs1 = {
   rec__use_vectors__my_vectors__vector__capacity = v2__split_discrs };
   us_split_fields1 = { rec__use_vectors__my_vectors__vector =
-  v2__split_fields1 } }) = (i2 - first))
-
-axiom H14 :
-  (forall n2:int. (((first <= n2) and
-  (n2 <= ((first2 - 1) + length1(model__({ us_split_discrs1 = {
-  rec__use_vectors__my_vectors__vector__capacity = v2__split_discrs };
-  us_split_fields1 = { rec__use_vectors__my_vectors__vector =
-  v2__split_fields1 } }))))) -> (is_incr(get(model__({ us_split_discrs1 = {
+  v2__split_fields1 } }) = (i2 - first)) and
+  (forall n:int. (((first <= n) and (n <= ((first2 - 1) + length1(model__({
+  us_split_discrs1 = { rec__use_vectors__my_vectors__vector__capacity =
+  v2__split_discrs }; us_split_fields1 = {
+  rec__use_vectors__my_vectors__vector = v2__split_fields1 } }))))) ->
+  (is_incr(get(model__({ us_split_discrs1 = {
   rec__use_vectors__my_vectors__vector__capacity = v1 }; us_split_fields1 = {
-  rec__use_vectors__my_vectors__vector = v11 } }), n2), get(model__({
+  rec__use_vectors__my_vectors__vector = v11 } }), n), get(model__({
   us_split_discrs1 = { rec__use_vectors__my_vectors__vector__capacity =
   v2__split_discrs }; us_split_fields1 = {
   rec__use_vectors__my_vectors__vector = v2__split_fields1 } }),
-  n2)) = true)))
-
-axiom H15 : ((dynamic_property2(0, last2, to_rep1(v2__split_discrs)) and
-  ((first <= r1b) -> dynamic_property5(first, r1b, i2))) and
-  ((first <= i2) and (i2 <= r1b)))
-
-axiom H16 : ((us2 = i2) and dynamic_property1(first1, last1, i2))
-
-axiom H17 : (o8 = i2)
-
-axiom H18 : ((o9 = get(model__({ us_split_discrs1 = {
+  n)) = true)))) -> (((dynamic_property2(0, last2,
+  to_rep1(v2__split_discrs)) and ((first <= r1b) -> dynamic_property5(first,
+  r1b, i2))) and ((first <= i2) and (i2 <= r1b))) -> ((((((us = i2) and
+  dynamic_property1(first1, last1, i2)) and (o1 = i2)) and
+  ((o2 = get(model__({ us_split_discrs1 = {
   rec__use_vectors__my_vectors__vector__capacity = v1 }; us_split_fields1 = {
-  rec__use_vectors__my_vectors__vector = v11 } }), o8)) and
-  (in_range4(o9) and (o9 = get(model__({ us_split_discrs1 = {
+  rec__use_vectors__my_vectors__vector = v11 } }), o1)) and
+  (in_range4(o2) and (o2 = get(model__({ us_split_discrs1 = {
   rec__use_vectors__my_vectors__vector__capacity = v1 }; us_split_fields1 = {
-  rec__use_vectors__my_vectors__vector = v11 } }), o8))))
-
-axiom H19 : (((o9 <  2147483647) -> (result3 = true)) and
-  ((not (o9 <  2147483647)) -> (result3 = false)))
-
-axiom H20 : (result3 = true)
-
- (* File "use_vectors.ads", line 33, characters 0-0 *)
-goal WP_parameter_def : dynamic_property1(first1, last1, i2)
+  rec__use_vectors__my_vectors__vector = v11 } }), o1))))) and
+  (((o2 <  2147483647) and (result2 = true)) or ((not (o2 <  2147483647)) and
+  (result2 = false)))) -> ((result2 = true) -> dynamic_property1(first1,
+  last1, i2))))))))))))))

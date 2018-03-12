@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -268,233 +268,36 @@ axiom q4__def_axiom : (forall x:int [q4(x)]. ((q4(x) = true) <-> (0 <  x)))
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic g : int
-
-logic y : bool
-
-logic o : bool
-
-logic o1 : bool
-
-logic o2 : bool
-
-logic o3 : bool
-
-logic o4 : bool
-
-logic o5 : bool
-
-logic o6 : bool
-
-logic o7 : bool
-
-logic o8 : bool
-
-logic o9 : bool
-
-logic us : bool
-
-logic o10 : bool
-
-logic o11 : bool
-
-logic us1 : bool
-
-logic o12 : bool
-
-logic o13 : bool
-
-logic o14 : bool
-
-logic o15 : bool
-
-logic o16 : int
-
-logic o17 : bool
-
-logic o18 : bool
-
-logic o19 : bool
-
-logic o20 : bool
-
-logic o21 : bool
-
-logic result : bool
-
-logic y1 : bool
-
-logic result1 : bool
-
-logic y2 : bool
-
-logic result2 : bool
-
-logic y3 : bool
-
-logic result3 : bool
-
-logic y4 : bool
-
-logic result4 : bool
-
-logic y5 : bool
-
-logic result5 : int
-
-logic g6 : int
-
-logic result6 : bool
-
-logic y6 : bool
-
-logic result7 : bool
-
-logic y7 : bool
-
-logic result8 : bool
-
-logic y8 : bool
-
-logic result9 : bool
-
-logic y9 : bool
-
-logic result10 : bool
-
-logic y10 : bool
-
-logic result11 : bool
-
-logic y11 : bool
-
-logic result12 : bool
-
-logic y12 : bool
-
-logic result13 : bool
-
-logic y13 : bool
-
-logic result14 : bool
-
-logic y14 : bool
-
-logic result15 : bool
-
-logic y15 : bool
-
-logic result16 : bool
-
-logic y16 : bool
-
-axiom H : in_range1(g)
-
-axiom H1 : (f1(3) = true)
-
-axiom H2 : ((o = f1(3)) and ((o = true) <-> (0 <  3)))
-
-axiom H3 : (result = y)
-
-axiom H4 : (y1 = o)
-
-axiom H5 : ((y1 = true) <-> (f1(3) = true))
-
-axiom H6 : (f2(3) = true)
-
-axiom H7 : ((o1 = f2(3)) and ((o1 = true) <-> (0 <  3)))
-
-axiom H8 : (result1 = y1)
-
-axiom H9 : (y2 = o1)
-
-axiom H10 : ((y2 = true) <-> (f2(3) = true))
-
-axiom H11 : (f3(3) = true)
-
-axiom H12 : ((o2 = f3(3)) and ((o2 = true) <-> (0 <  3)))
-
-axiom H13 : (result2 = y2)
-
-axiom H14 : (y3 = o2)
-
-axiom H15 : ((y3 = true) <-> (f3(3) = true))
-
-axiom H16 : (f4(3) = true)
-
-axiom H17 : ((o3 = f4(3)) and ((o3 = true) <-> (0 <  3)))
-
-axiom H18 : (result3 = y3)
-
-axiom H19 : (y4 = o3)
-
-axiom H20 : ((y4 = true) <-> (f4(3) = true))
-
-axiom H21 : true
-
-axiom H22 : (o4 = f5(3))
-
-axiom H23 : (result4 = y4)
-
-axiom H24 : (y5 = o4)
-
-axiom H25 : ((y5 = true) <-> (f5(3) = true))
-
-axiom H26 : (result5 = g)
-
-axiom H27 : (g6 = 3)
-
-axiom H28 : (g1(3, g6) = true)
-
-axiom H29 : ((o5 = g1(3, g6)) and ((o5 = true) <-> (0 <  g6)))
-
-axiom H30 : (result6 = y5)
-
-axiom H31 : (y6 = o5)
-
-axiom H32 : ((y6 = true) <-> (g1(3, g6) = true))
-
-axiom H33 : (g2(3, g6) = true)
-
-axiom H34 : ((o6 = g2(3, g6)) and ((o6 = true) <-> (0 <  g6)))
-
-axiom H35 : (result7 = y6)
-
-axiom H36 : (y7 = o6)
-
-axiom H37 : ((y7 = true) <-> (g2(3, g6) = true))
-
-axiom H38 : (g3(3, g6) = true)
-
-axiom H39 : ((o7 = g3(3, g6)) and ((o7 = true) <-> (0 <  g6)))
-
-axiom H40 : (result8 = y7)
-
-axiom H41 : (y8 = o7)
-
-axiom H42 : ((y8 = true) <-> (g3(3, g6) = true))
-
-axiom H43 : (g4(3, g6) = true)
-
-axiom H44 : ((o8 = g4(3, g6)) and ((o8 = true) <-> (0 <  g6)))
-
-axiom H45 : (result9 = y8)
-
-axiom H46 : (y9 = o8)
-
-axiom H47 : ((y9 = true) <-> (g4(3, g6) = true))
-
-axiom H48 : true
-
-axiom H49 : (o9 = g5(3, g6))
-
-axiom H50 : (result10 = y9)
-
-axiom H51 : (y10 = o9)
-
-axiom H52 : ((y10 = true) <-> (g5(3, g6) = true))
-
-axiom H53 : (p2(3) = true)
-
  (* File "funcs.adb", line 54, characters 0-0 *)
-goal WP_parameter_def : (3 <  10)
+goal WP_parameter_def :
+  (forall g:int. forall y:bool. forall o:bool. forall o1:bool.
+  forall o2:bool. forall o3:bool. forall o4:bool. forall o5:bool.
+  forall o6:bool. forall o7:bool. forall o8:bool. forall o9:bool.
+  forall result:bool. forall y1:bool. forall result1:bool. forall y2:bool.
+  forall result2:bool. forall y3:bool. forall result3:bool. forall y4:bool.
+  forall result4:bool. forall y5:bool. forall result5:int. forall g6:int.
+  forall result6:bool. forall y6:bool. forall result7:bool. forall y7:bool.
+  forall result8:bool. forall y8:bool. forall result9:bool. forall y9:bool.
+  forall result10:bool. forall y10:bool. (in_range1(g) -> ((f1(3) = true) ->
+  ((((o = f1(3)) and ((o = true) <-> (0 <  3))) and ((result = y) and
+  (y1 = o))) -> (((y1 = true) <-> (f1(3) = true)) -> ((f2(3) = true) ->
+  ((((o1 = f2(3)) and ((o1 = true) <-> (0 <  3))) and ((result1 = y1) and
+  (y2 = o1))) -> (((y2 = true) <-> (f2(3) = true)) -> ((f3(3) = true) ->
+  ((((o2 = f3(3)) and ((o2 = true) <-> (0 <  3))) and ((result2 = y2) and
+  (y3 = o2))) -> (((y3 = true) <-> (f3(3) = true)) -> ((f4(3) = true) ->
+  ((((o3 = f4(3)) and ((o3 = true) <-> (0 <  3))) and ((result3 = y3) and
+  (y4 = o3))) -> (((y4 = true) <-> (f4(3) = true)) -> (((o4 = f5(3)) and
+  ((result4 = y4) and (y5 = o4))) -> (((y5 = true) <-> (f5(3) = true)) ->
+  (((result5 = g) and (g6 = 3)) -> ((g1(3, g6) = true) -> ((((o5 = g1(3,
+  g6)) and ((o5 = true) <-> (0 <  g6))) and ((result6 = y5) and
+  (y6 = o5))) -> (((y6 = true) <-> (g1(3, g6) = true)) -> ((g2(3,
+  g6) = true) -> ((((o6 = g2(3, g6)) and ((o6 = true) <-> (0 <  g6))) and
+  ((result7 = y6) and (y7 = o6))) -> (((y7 = true) <-> (g2(3, g6) = true)) ->
+  ((g3(3, g6) = true) -> ((((o7 = g3(3, g6)) and ((o7 = true) <->
+  (0 <  g6))) and ((result8 = y7) and (y8 = o7))) -> (((y8 = true) <-> (g3(3,
+  g6) = true)) -> ((g4(3, g6) = true) -> ((((o8 = g4(3, g6)) and
+  ((o8 = true) <-> (0 <  g6))) and ((result9 = y8) and (y9 = o8))) ->
+  (((y9 = true) <-> (g4(3, g6) = true)) -> (((o9 = g5(3, g6)) and
+  ((result10 = y9) and (y10 = o9))) -> (((y10 = true) <-> (g5(3,
+  g6) = true)) -> ((p2(3) = true) ->
+  (3 <  10)))))))))))))))))))))))))))))))))

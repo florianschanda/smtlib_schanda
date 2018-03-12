@@ -279,30 +279,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def :
-  (forall v:integer. forall v1:integer. forall v2:integer.
-  (forall i:int [(singleton({ us_split_fields1 = {
-  rec__foo__coordinate_t__x = v; rec__foo__coordinate_t__y = v1;
-  rec__foo__coordinate_t__z = v2 } }, i)[i])]. ((singleton({
-  us_split_fields1 = { rec__foo__coordinate_t__x = v;
-  rec__foo__coordinate_t__y = v1; rec__foo__coordinate_t__z = v2 } },
-  i)[i]) = { us_split_fields1 = { rec__foo__coordinate_t__x = v;
-  rec__foo__coordinate_t__y = v1; rec__foo__coordinate_t__z = v2 } })))
-
 logic bool_eq4 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -313,17 +289,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) and (bool_eq2((a[temp___idx_133]),
-  (b[((b__first - a__first) + temp___idx_133)])) = true)) or
-  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (forall temp___idx_155:int. ((((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) and (bool_eq2((a[temp___idx_155]),
+  (b[((b__first - a__first) + temp___idx_155)])) = true)) or
+  (not ((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) -> (bool_eq2((a[temp___idx_133]),
-  (b[((b__first - a__first) + temp___idx_133)])) = true))))) -> (bool_eq4(a,
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) -> (bool_eq2((a[temp___idx_155]),
+  (b[((b__first - a__first) + temp___idx_155)])) = true))))) -> (bool_eq4(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -333,9 +309,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) -> (bool_eq2((a[temp___idx_133]),
-  (b[((b__first - a__first) + temp___idx_133)])) = true)))))))
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) -> (bool_eq2((a[temp___idx_155]),
+  (b[((b__first - a__first) + temp___idx_155)])) = true)))))))
 
 logic dummy5 : (int,us_rep) farray
 
@@ -477,48 +453,30 @@ logic m : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic temp___195 : (int,us_rep) farray, int, us_rep -> (int,us_rep) farray
+logic temp___221 : (int,us_rep) farray, int, us_rep -> (int,us_rep) farray
 
 axiom def_axiom :
-  (forall temp___197:(int,us_rep) farray.
-  (forall temp___198:int.
-  (forall temp___199:integer. forall temp___1991:integer.
-  forall temp___1992:integer.
-  (forall temp___200:int. (((temp___200 = temp___198) ->
-  ((temp___195(temp___197, temp___198, { us_split_fields1 = {
-  rec__foo__coordinate_t__x = temp___199; rec__foo__coordinate_t__y =
-  temp___1991; rec__foo__coordinate_t__z = temp___1992 } })[temp___200]) = {
-  us_split_fields1 = { rec__foo__coordinate_t__x = temp___199;
-  rec__foo__coordinate_t__y = temp___1991; rec__foo__coordinate_t__z =
-  temp___1992 } })) and ((not (temp___200 = temp___198)) ->
-  ((temp___195(temp___197, temp___198, { us_split_fields1 = {
-  rec__foo__coordinate_t__x = temp___199; rec__foo__coordinate_t__y =
-  temp___1991; rec__foo__coordinate_t__z = temp___1992 }
-  })[temp___200]) = (temp___197[temp___200]))))))))
+  (forall temp___223:(int,us_rep) farray.
+  (forall temp___224:int.
+  (forall temp___225:integer. forall temp___2251:integer.
+  forall temp___2252:integer. (in_range1(temp___224) ->
+  (forall temp___226:int. (((temp___226 = temp___224) ->
+  ((temp___221(temp___223, temp___224, { us_split_fields1 = {
+  rec__foo__coordinate_t__x = temp___225; rec__foo__coordinate_t__y =
+  temp___2251; rec__foo__coordinate_t__z = temp___2252 } })[temp___226]) = {
+  us_split_fields1 = { rec__foo__coordinate_t__x = temp___225;
+  rec__foo__coordinate_t__y = temp___2251; rec__foo__coordinate_t__z =
+  temp___2252 } })) and ((not (temp___226 = temp___224)) ->
+  ((temp___221(temp___223, temp___224, { us_split_fields1 = {
+  rec__foo__coordinate_t__x = temp___225; rec__foo__coordinate_t__y =
+  temp___2251; rec__foo__coordinate_t__z = temp___2252 }
+  })[temp___226]) = (temp___223[temp___226])))))))))
 
-logic a__split_fields : (int,us_rep) farray
-
-logic o : int
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic o3 : integer
-
-logic o4 : int
-
-axiom H : in_range(n)
-
-axiom H1 : in_range(m)
-
-axiom H2 : ((1 <= m) and (m <= 5))
-
-axiom H3 : (o = m)
-
-axiom H4 : ({ us_split_fields1 = { rec__foo__coordinate_t__x = o1;
+ (* File "foo.adb", line 55, characters 0-0 *)
+goal WP_parameter_def :
+  (forall a__split_fields:(int,us_rep) farray. forall o:int.
+  forall o1:integer. forall o2:integer. forall o3:integer. (in_range(n) ->
+  (in_range(m) -> (((((1 <= m) and (m <= 5)) and (o = m)) and ({
+  us_split_fields1 = { rec__foo__coordinate_t__x = o1;
   rec__foo__coordinate_t__y = o2; rec__foo__coordinate_t__z = o3 }
-  } = (a__split_fields[o]))
-
- (* File "foo.adb", line 35, characters 0-0 *)
-goal WP_parameter_def : in_range1(n)
+  } = (a__split_fields[o]))) -> in_range1(n)))))

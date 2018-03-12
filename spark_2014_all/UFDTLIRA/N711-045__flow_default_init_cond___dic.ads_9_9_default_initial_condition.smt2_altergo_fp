@@ -231,15 +231,9 @@ axiom foo__def_axiom :
   rec__dic__pr_record_t2__y = par1 } }, dic__g) = true) <->
   ((to_rep(par) + to_rep(par1)) = dic__g))))
 
-logic g : int
-
-logic temp___177 : integer
-
-logic temp___1771 : integer
-
-axiom H : ((to_rep(temp___177) = 0) and (to_rep(temp___1771) = 0))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (foo({ us_split_fields1 = {
-  rec__dic__pr_record_t2__x = temp___177; rec__dic__pr_record_t2__y =
-  temp___1771 } }, g) = true)
+goal WP_parameter_def :
+  (forall g:int. forall temp___204:integer. forall temp___2041:integer.
+  (((to_rep(temp___204) = 0) and (to_rep(temp___2041) = 0)) -> (foo({
+  us_split_fields1 = { rec__dic__pr_record_t2__x = temp___204;
+  rec__dic__pr_record_t2__y = temp___2041 } }, g) = true)))

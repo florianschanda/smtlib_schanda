@@ -144,63 +144,12 @@ logic one : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic to_rep : integer -> int
-
-logic of_rep : int -> integer
-
-axiom inversion_axiom :
-  (forall x:integer [to_rep(x)]. (of_rep(to_rep(x)) = x))
-
-axiom range_axiom : (forall x:integer [to_rep(x)]. in_range1(to_rep(x)))
-
-axiom coerce_axiom :
-  (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
-  (to_rep(of_rep(x)) = x)))
-
-logic first : int
-
-predicate dynamic_property(first_int: int, last_int: int, x: int) =
-  ((first_int <= x) and (x <= last_int))
-
-logic bool_eq3 : int, int -> bool
-
-axiom bool_eq_def2 :
-  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE2 : us_image -> int
-
-logic user_eq2 : integer, integer -> bool
-
-logic dummy2 : integer
-
-type my_positive__ref = { my_positive__content : integer
-}
-
-function my_positive__ref___projection(a: my_positive__ref) : integer =
-  (a).my_positive__content
-
 axiom one__def_axiom : (one = id(1))
 
-axiom first__def_axiom : (first = one)
-
-logic o : int
-
-logic check_default_value__p__one__assume : int
-
-axiom H : ((o = id(1)) and (in_range1(o) and (o = 1)))
-
-axiom H1 : ((check_default_value__p__one__assume = o) and in_range(o))
-
-axiom H2 : (check_default_value__p__one__assume = one)
-
-axiom H3 : in_range(one)
-
-axiom H4 : (one <= 2147483647)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (0 <= one)
+goal WP_parameter_def :
+  (forall o:int. forall check_default_value__p__one__assume:int.
+  (((((o = id(1)) and (in_range1(o) and (o = 1))) and
+  ((check_default_value__p__one__assume = o) and in_range(o))) and
+  (check_default_value__p__one__assume = one)) -> (in_range(one) ->
+  ((one <= 2147483647) -> (0 <= one)))))

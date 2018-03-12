@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -139,95 +139,15 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic a : int
-
-logic f : int
-
-logic tmp : int
-
-logic temp___186 : int
-
-logic temp___185 : int
-
-logic temp___184 : int
-
-logic o : int
-
-logic tmp1 : int
-
-logic result : int
-
-logic a1 : int
-
-logic result1 : int
-
-logic f1 : int
-
-logic a2 : int
-
-logic f2 : int
-
-logic tmp2 : int
-
-logic result2 : int
-
-logic tmp3 : int
-
-logic result3 : int
-
-logic f3 : int
-
-logic result4 : int
-
-logic a3 : int
-
-logic a4 : int
-
-logic f4 : int
-
-logic tmp4 : int
-
-logic a5 : int
-
-logic f5 : int
-
-logic tmp5 : int
-
-logic a6 : int
-
-logic f6 : int
-
-logic tmp6 : int
-
-logic a7 : int
-
-logic f7 : int
-
-logic tmp7 : int
-
-axiom H : (result = a)
-
-axiom H1 : (a1 = 1)
-
-axiom H2 : in_range1(a1)
-
-axiom H3 : (result1 = f)
-
-axiom H4 : (f1 = 1)
-
-axiom H5 : in_range1(f1)
-
-axiom H6 : (((- 2147483648) <= 2147483647) -> in_range1(tmp))
-
-axiom H7 : (f1 <  1000)
-
-axiom H8 : ((((((- 2147483648) <= 2147483647) -> in_range1(a2)) and
-  (((- 2147483648) <= 2147483647) -> in_range1(f2))) and
-  (((- 2147483648) <= 2147483647) -> in_range1(tmp2))) and (f2 <  1000))
-
-axiom H9 : (tmp2 = result2)
-
-axiom H10 : (tmp3 = f2)
-
  (* File "task_non_term.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : in_range1((a2 + f2))
+goal WP_parameter_def :
+  (forall a:int. forall f:int. forall tmp:int. forall result:int.
+  forall a1:int. forall result1:int. forall f1:int. forall a2:int.
+  forall f2:int. forall tmp1:int. forall result2:int. forall tmp2:int. ((({
+  int__content = result } = { int__content = a }) and (a1 = 1)) ->
+  (in_range1(a1) -> ((({ int__content = result1 } = { int__content = f }) and
+  (f1 = 1)) -> (in_range1(f1) -> ((((- 2147483648) <= 2147483647) ->
+  in_range1(tmp)) -> ((f1 <  1000) -> (((((((- 2147483648) <= 2147483647) ->
+  in_range1(a2)) and (((- 2147483648) <= 2147483647) -> in_range1(f2))) and
+  (((- 2147483648) <= 2147483647) -> in_range1(tmp1))) and (f2 <  1000)) ->
+  (((tmp1 = result2) and (tmp2 = f2)) -> in_range1((a2 + f2)))))))))))

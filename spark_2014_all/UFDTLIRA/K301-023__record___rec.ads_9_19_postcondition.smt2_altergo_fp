@@ -220,43 +220,18 @@ logic x : positive
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic rec__next__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic rec__next__result1 : int
-
-logic rec__next__result2 : int
-
-logic rec__next__result3 : int
-
-logic rec__next__result4 : int
-
-logic rec__next__result5 : int
-
-logic result1 : int
-
-axiom H : (to_rep(x) <= 10000)
-
-axiom H1 : (rec__next__result1 = rec__next__result2)
-
-axiom H2 : (rec__next__result3 = rec__next__result1)
-
-axiom H3 : ((o = (to_rep(x) + 1)) and in_range((to_rep(x) + 1)))
-
-axiom H4 : (result = rec__next__result)
-
-axiom H5 : (rec__next__result1 = o)
-
-axiom H6 : (rec__next__result4 = rec__next__result2)
-
-axiom H7 : (rec__next__result5 = rec__next__result3)
-
-axiom H8 : (result1 = rec__next__result4)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (rec__next__result4 = (to_rep(x) + 1))
+goal WP_parameter_def :
+  (forall rec__next__result:int. forall o:int. forall result:int.
+  forall rec__next__result1:int. forall rec__next__result2:int.
+  forall rec__next__result3:int. forall rec__next__result4:int.
+  forall rec__next__result5:int.
+  (forall result1:int. (((to_rep(x) <= 10000) and
+  (((((rec__next__result1 = rec__next__result2) and
+  (rec__next__result3 = rec__next__result1)) and (((o = (to_rep(x) + 1)) and
+  in_range((to_rep(x) + 1))) and (({ int__content = result } = {
+  int__content = rec__next__result }) and (rec__next__result1 = o)))) and (({
+  int__content = rec__next__result4 } = { int__content = rec__next__result2
+  }) and (rec__next__result5 = rec__next__result3))) and
+  (result1 = rec__next__result4))) ->
+  (rec__next__result4 = (to_rep(x) + 1)))))

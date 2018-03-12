@@ -223,9 +223,6 @@ logic arg2 : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-axiom H : in_range(arg1)
-
-axiom H1 : in_range(arg2)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (not (arg2 = 0))
+goal WP_parameter_def : (in_range(arg1) -> (in_range(arg2) ->
+  (not (arg2 = 0))))

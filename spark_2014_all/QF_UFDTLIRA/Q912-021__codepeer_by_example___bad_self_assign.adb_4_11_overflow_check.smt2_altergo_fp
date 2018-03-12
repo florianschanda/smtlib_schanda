@@ -109,27 +109,8 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : int
-
-logic y : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic y1 : int
-
-axiom H : in_range(x)
-
-axiom H1 : ((o = (x - 1)) and in_range((x - 1)))
-
-axiom H2 : (result = y)
-
-axiom H3 : (y1 = o)
-
-axiom H4 : in_range(y1)
-
  (* File "bad_self_assign.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((y1 + 1))
+goal WP_parameter_def :
+  (forall x:int. forall y:int. forall o:int. forall result:int.
+  forall y1:int. (in_range(x) -> ((((o = (x - 1)) and in_range((x - 1))) and
+  ((result = y) and (y1 = o))) -> (in_range(y1) -> in_range((y1 + 1))))))

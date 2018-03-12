@@ -165,11 +165,5 @@ logic b : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : int
-
-axiom H : in_range(a)
-
-axiom H1 : in_range2(b)
-
  (* File "p.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : in_range1(a)
+goal WP_parameter_def : (in_range(a) -> (in_range2(b) -> in_range1(a)))

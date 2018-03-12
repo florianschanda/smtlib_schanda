@@ -109,15 +109,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic g1 : int
-
-logic a : int
-
-logic o : int
-
-axiom H : in_range(a)
-
-axiom H1 : in_range(g1)
-
  (* File "lots_of_tests.adb", line 179, characters 0-0 *)
-goal WP_parameter_def : in_range((a + g1))
+goal WP_parameter_def :
+  (forall g1:int. forall a:int. (in_range(a) -> (in_range(g1) ->
+  in_range((a + g1)))))

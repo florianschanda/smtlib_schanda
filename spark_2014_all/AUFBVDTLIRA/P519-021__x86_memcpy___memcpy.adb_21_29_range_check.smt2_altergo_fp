@@ -1593,12 +1593,6 @@ axiom bv_max_to_uint3 :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq4 : bool, bool -> bool
-
-axiom bool_eq_def4 :
-  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
-
 logic to_int4 : bool -> int
 
 axiom to_int_def4 :
@@ -1610,6 +1604,12 @@ logic of_int4 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int4(i)]. (((i = 0) -> (of_int4(i) = false)) and
   ((not (i = 0)) -> (of_int4(i) = true))))
+
+logic bool_eq4 : bool, bool -> bool
+
+axiom bool_eq_def4 :
+  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1760,24 +1760,6 @@ axiom slide_def :
   (forall i:t3 [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[sub3(i, sub3(new_first, old_first))]))))))
 
-logic concat : (t3,unsigned8) farray, t3, t3, (t3,unsigned8) farray, t3,
-  t3 -> (t3,unsigned8) farray
-
-axiom concat_def :
-  (forall a:(t3,unsigned8) farray. forall b:(t3,unsigned8) farray.
-  (forall a_first:t3. forall a_last:t3. forall b_first:t3. forall b_last:t3.
-  (forall i:t3 [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((ule3(a_first, i) and ule3(i, a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and (ugt3(i, a_last) -> ((concat(a,
-  a_first, a_last, b, b_first, b_last)[i]) = (b[add3(sub3(i, a_last),
-  sub3(b_first, one3))])))))))
-
-logic singleton : unsigned8, t3 -> (t3,unsigned8) farray
-
-axiom singleton_def :
-  (forall v:unsigned8.
-  (forall i:t3 [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq9 : (t3,unsigned8) farray, t3, t3, (t3,unsigned8) farray, t3,
   t3 -> bool
 
@@ -1788,19 +1770,19 @@ axiom bool_eq_def8 :
   a__last) and (ule3(b__first, b__last) and (sub3(a__last,
   a__first) = sub3(b__last, b__first)))) or ((not ule3(a__first,
   a__last)) and ugt3(b__first, b__last))) and
-  (forall temp___idx_132:t3. (((ule3(a__first, temp___idx_132) and
-  ule3(temp___idx_132, a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[add3(sub3(b__first, a__first),
-  temp___idx_132)])))) or (not (ule3(a__first, temp___idx_132) and
-  ule3(temp___idx_132, a__last)))))) -> (bool_eq9(a, a__first, a__last, b,
+  (forall temp___idx_154:t3. (((ule3(a__first, temp___idx_154) and
+  ule3(temp___idx_154, a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[add3(sub3(b__first, a__first),
+  temp___idx_154)])))) or (not (ule3(a__first, temp___idx_154) and
+  ule3(temp___idx_154, a__last)))))) -> (bool_eq9(a, a__first, a__last, b,
   b__first, b__last) = true)) and ((not (((ule3(a__first, a__last) ->
   (ule3(b__first, b__last) and (sub3(a__last, a__first) = sub3(b__last,
   b__first)))) and ((not ule3(a__first, a__last)) -> ugt3(b__first,
   b__last))) and
-  (forall temp___idx_132:t3. ((ule3(a__first, temp___idx_132) and
-  ule3(temp___idx_132, a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[add3(sub3(b__first, a__first),
-  temp___idx_132)]))))))) -> (bool_eq9(a, a__first, a__last, b, b__first,
+  (forall temp___idx_154:t3. ((ule3(a__first, temp___idx_154) and
+  ule3(temp___idx_154, a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[add3(sub3(b__first, a__first),
+  temp___idx_154)]))))))) -> (bool_eq9(a, a__first, a__last, b, b__first,
   b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1810,40 +1792,10 @@ axiom bool_eq_rev :
   a__last) = true) -> (((ule3(a__first, a__last) -> (ule3(b__first,
   b__last) and (sub3(a__last, a__first) = sub3(b__last, b__first)))) and
   ((not ule3(a__first, a__last)) -> ugt3(b__first, b__last))) and
-  (forall temp___idx_132:t3. ((ule3(a__first, temp___idx_132) and
-  ule3(temp___idx_132, a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[add3(sub3(b__first, a__first),
-  temp___idx_132)])))))))))
-
-logic compare : (t3,unsigned8) farray, t3, t3, (t3,unsigned8) farray, t3,
-  t3 -> int
-
-axiom compare_def_eq :
-  (forall a:(t3,unsigned8) farray. forall b:(t3,unsigned8) farray.
-  (forall a_first:t3. forall a_last:t3. forall b_first:t3. forall b_last:t3
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) = 0) <-> (bool_eq9(a, a_first, a_last, b,
-  b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(t3,unsigned8) farray. forall b:(t3,unsigned8) farray.
-  (forall a_first:t3. forall a_last:t3. forall b_first:t3. forall b_last:t3
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) <  0) <->
-  (exists i:t3. exists j:t3. (ule3(i, a_last) and (ult3(j, b_last) and
-  ((bool_eq9(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  (ult3(i, a_last) and ult(to_rep((a[add3(i, one3)])), to_rep((b[add3(j,
-  one3)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(t3,unsigned8) farray. forall b:(t3,unsigned8) farray.
-  (forall a_first:t3. forall a_last:t3. forall b_first:t3. forall b_last:t3
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((0 <  compare(a,
-  a_first, a_last, b, b_first, b_last)) <->
-  (exists i:t3. exists j:t3. (ule3(i, b_last) and (ult3(j, a_last) and
-  ((bool_eq9(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  (ult3(i, b_last) and ugt(to_rep((a[add3(j, one3)])), to_rep((b[add3(i,
-  one3)]))))))))))))
+  (forall temp___idx_154:t3. ((ule3(a__first, temp___idx_154) and
+  ule3(temp___idx_154, a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[add3(sub3(b__first, a__first),
+  temp___idx_154)])))))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -1863,33 +1815,58 @@ logic inrange64 : t3, t3, t3 -> bool
 
 logic inrange64__function_guard : bool, t3, t3, t3 -> prop
 
+logic rliteral : t3
+
+axiom rliteral_axiom : (tqtint3(rliteral) = 18446744073709551615)
+
+logic rliteral1 : t3
+
+axiom rliteral_axiom1 : (tqtint3(rliteral1) = 1)
+
+logic rliteral2 : t3
+
+axiom rliteral_axiom2 : (tqtint3(rliteral2) = 2)
+
 axiom inrange64__post_axiom :
   (forall var:t3. forall bottom:t3. forall range_size:t3 [inrange64(var,
   bottom, range_size)]. (((inrange64(var, bottom, range_size) = true) ->
-  ((ule3(bottom, add3(sub3(of_int3(18446744073709551615), range_size),
-  of_int3(1))) -> (ule3(bottom, var) and ule3(var, add3(bottom,
-  sub3(range_size, of_int3(1)))))) and ((not ule3(bottom,
-  add3(sub3(of_int3(18446744073709551615), range_size), of_int3(1)))) ->
-  ((ule3(bottom, var) and ule3(var, of_int3(18446744073709551615))) or
-  ule3(var, sub3(sub3(range_size, sub3(of_int3(18446744073709551615),
-  bottom)), of_int3(2))))))) and (((ule3(bottom,
-  add3(sub3(of_int3(18446744073709551615), range_size), of_int3(1))) and
+  ((ule3(bottom, add3(sub3(rliteral, range_size), rliteral1)) ->
   (ule3(bottom, var) and ule3(var, add3(bottom, sub3(range_size,
-  of_int3(1)))))) or ((not ule3(bottom,
-  add3(sub3(of_int3(18446744073709551615), range_size), of_int3(1)))) and
-  ((ule3(bottom, var) and ule3(var, of_int3(18446744073709551615))) or
-  ule3(var, sub3(sub3(range_size, sub3(of_int3(18446744073709551615),
-  bottom)), of_int3(2)))))) -> (inrange64(var, bottom, range_size) = true))))
+  rliteral1))))) and ((not ule3(bottom, add3(sub3(rliteral, range_size),
+  rliteral1))) -> ((ule3(bottom, var) and ule3(var, rliteral)) or ule3(var,
+  sub3(sub3(range_size, sub3(rliteral, bottom)), rliteral2)))))) and
+  (((ule3(bottom, add3(sub3(rliteral, range_size), rliteral1)) and
+  (ule3(bottom, var) and ule3(var, add3(bottom, sub3(range_size,
+  rliteral1))))) or ((not ule3(bottom, add3(sub3(rliteral, range_size),
+  rliteral1))) and ((ule3(bottom, var) and ule3(var, rliteral)) or ule3(var,
+  sub3(sub3(range_size, sub3(rliteral, bottom)), rliteral2))))) ->
+  (inrange64(var, bottom, range_size) = true))))
 
 logic insaferegion64 : t3, t3 -> bool
 
 logic insaferegion64__function_guard : bool, t3, t3 -> prop
 
+logic rliteral3 : t3
+
+axiom rliteral_axiom3 : (tqtint3(rliteral3) = 14987979559889010687)
+
+logic rliteral4 : t3
+
+axiom rliteral_axiom4 : (tqtint3(rliteral4) = 8)
+
+logic rliteral5 : t3
+
+axiom rliteral_axiom5 : (tqtint3(rliteral5) = 4611686018427387903)
+
+logic rliteral6 : t3
+
+axiom rliteral_axiom6 : (tqtint3(rliteral6) = 0)
+
 axiom insaferegion64__post_axiom :
   (forall var:t3. forall rsp:t3 [insaferegion64(var, rsp)].
-  ((insaferegion64(var, rsp) = true) <-> ((ule3(var,
-  of_int3(14987979559889010687)) and uge3(var, add3(rsp, of_int3(8)))) or
-  (ule3(var, of_int3(4611686018427387903)) and uge3(var, of_int3(0))))))
+  ((insaferegion64(var, rsp) = true) <-> ((ule3(var, rliteral3) and uge3(var,
+  add3(rsp, rliteral4))) or (ule3(var, rliteral5) and uge3(var,
+  rliteral6)))))
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
@@ -1897,12 +1874,12 @@ logic toBig : t2 -> t3
 
 logic toSmall : t3 -> t2
 
-logic rliteral : t3
+logic rliteral7 : t3
 
-axiom rliteral_axiom : (tqtint3(rliteral) = 4294967295)
+axiom rliteral_axiom7 : (tqtint3(rliteral7) = 4294967295)
 
 axiom toSmall_to_uint :
-  (forall x:t3. (ule3(x, rliteral) -> (tqtint3(x) = tqtint2(toSmall(x)))))
+  (forall x:t3. (ule3(x, rliteral7) -> (tqtint3(x) = tqtint2(toSmall(x)))))
 
 axiom toBig_to_uint : (forall x:t2. (tqtint2(x) = tqtint3(toBig(x))))
 
@@ -1936,9 +1913,13 @@ logic eax : t3 -> t2
 
 logic eax__function_guard : t2, t3 -> prop
 
+logic rliteral8 : t3
+
+axiom rliteral_axiom8 : (tqtint3(rliteral8) = 4294967295)
+
 axiom eax__post_axiom :
   (forall x86__rax:t3 [eax(x86__rax)].
-  (eax(x86__rax) = toSmall(bw_and3(x86__rax, of_int3(4294967295)))))
+  (eax(x86__rax) = toSmall(bw_and3(x86__rax, rliteral8))))
 
 logic writereg32post : t3, t2 -> bool
 
@@ -1989,12 +1970,12 @@ logic toBig1 : t -> t3
 
 logic toSmall1 : t3 -> t
 
-logic rliteral1 : t3
+logic rliteral9 : t3
 
-axiom rliteral_axiom1 : (tqtint3(rliteral1) = 255)
+axiom rliteral_axiom9 : (tqtint3(rliteral9) = 255)
 
 axiom toSmall_to_uint1 :
-  (forall x:t3. (ule3(x, rliteral1) -> (tqtint3(x) = tqtint(toSmall1(x)))))
+  (forall x:t3. (ule3(x, rliteral9) -> (tqtint3(x) = tqtint(toSmall1(x)))))
 
 axiom toBig_to_uint1 : (forall x:t. (tqtint(x) = tqtint3(toBig1(x))))
 
@@ -2002,31 +1983,106 @@ logic readmem64 : t3, (t3,unsigned8) farray -> t3
 
 logic readmem64__function_guard : t3, t3, (t3,unsigned8) farray -> prop
 
+logic rliteral10 : t3
+
+axiom rliteral_axiom10 : (tqtint3(rliteral10) = 255)
+
+logic rliteral11 : t3
+
+axiom rliteral_axiom11 : (tqtint3(rliteral11) = 65280)
+
+logic rliteral12 : t3
+
+axiom rliteral_axiom12 : (tqtint3(rliteral12) = 256)
+
+logic rliteral13 : t3
+
+axiom rliteral_axiom13 : (tqtint3(rliteral13) = 16711680)
+
+logic rliteral14 : t3
+
+axiom rliteral_axiom14 : (tqtint3(rliteral14) = 65536)
+
+logic rliteral15 : t3
+
+axiom rliteral_axiom15 : (tqtint3(rliteral15) = 4278190080)
+
+logic rliteral16 : t3
+
+axiom rliteral_axiom16 : (tqtint3(rliteral16) = 3)
+
+logic rliteral17 : t3
+
+axiom rliteral_axiom17 : (tqtint3(rliteral17) = 16777216)
+
+logic rliteral18 : t3
+
+axiom rliteral_axiom18 : (tqtint3(rliteral18) = 1095216660480)
+
+logic rliteral19 : t3
+
+axiom rliteral_axiom19 : (tqtint3(rliteral19) = 4)
+
+logic rliteral20 : t3
+
+axiom rliteral_axiom20 : (tqtint3(rliteral20) = 4294967296)
+
+logic rliteral21 : t3
+
+axiom rliteral_axiom21 : (tqtint3(rliteral21) = 280375465082880)
+
+logic rliteral22 : t3
+
+axiom rliteral_axiom22 : (tqtint3(rliteral22) = 5)
+
+logic rliteral23 : t3
+
+axiom rliteral_axiom23 : (tqtint3(rliteral23) = 1099511627776)
+
+logic rliteral24 : t3
+
+axiom rliteral_axiom24 : (tqtint3(rliteral24) = 71776119061217280)
+
+logic rliteral25 : t3
+
+axiom rliteral_axiom25 : (tqtint3(rliteral25) = 6)
+
+logic rliteral26 : t3
+
+axiom rliteral_axiom26 : (tqtint3(rliteral26) = 281474976710656)
+
+logic rliteral27 : t3
+
+axiom rliteral_axiom27 : (tqtint3(rliteral27) = 18374686479671623680)
+
+logic rliteral28 : t3
+
+axiom rliteral_axiom28 : (tqtint3(rliteral28) = 7)
+
+logic rliteral29 : t3
+
+axiom rliteral_axiom29 : (tqtint3(rliteral29) = 72057594037927936)
+
 axiom readmem64__post_axiom :
   (forall addr:t3.
   (forall x86__memory:(t3,unsigned8) farray [readmem64(addr, x86__memory)].
   ((((((((bw_and3(readmem64(addr, x86__memory),
-  of_int3(255)) = toBig1(to_rep((x86__memory[addr])))) and
+  rliteral10) = toBig1(to_rep((x86__memory[addr])))) and
   (bw_and3(readmem64(addr, x86__memory),
-  of_int3(65280)) = mul3(toBig1(to_rep((x86__memory[add3(addr,
-  of_int3(1))]))), of_int3(256)))) and (bw_and3(readmem64(addr, x86__memory),
-  of_int3(16711680)) = mul3(toBig1(to_rep((x86__memory[add3(addr,
-  of_int3(2))]))), of_int3(65536)))) and (bw_and3(readmem64(addr,
-  x86__memory),
-  of_int3(4278190080)) = mul3(toBig1(to_rep((x86__memory[add3(addr,
-  of_int3(3))]))), of_int3(16777216)))) and (bw_and3(readmem64(addr,
-  x86__memory),
-  of_int3(1095216660480)) = mul3(toBig1(to_rep((x86__memory[add3(addr,
-  of_int3(4))]))), of_int3(4294967296)))) and (bw_and3(readmem64(addr,
-  x86__memory),
-  of_int3(280375465082880)) = mul3(toBig1(to_rep((x86__memory[add3(addr,
-  of_int3(5))]))), of_int3(1099511627776)))) and (bw_and3(readmem64(addr,
-  x86__memory),
-  of_int3(71776119061217280)) = mul3(toBig1(to_rep((x86__memory[add3(addr,
-  of_int3(6))]))), of_int3(281474976710656)))) and (bw_and3(readmem64(addr,
-  x86__memory),
-  of_int3(18374686479671623680)) = mul3(toBig1(to_rep((x86__memory[add3(addr,
-  of_int3(7))]))), of_int3(72057594037927936))))))
+  rliteral11) = mul3(toBig1(to_rep((x86__memory[add3(addr, rliteral1)]))),
+  rliteral12))) and (bw_and3(readmem64(addr, x86__memory),
+  rliteral13) = mul3(toBig1(to_rep((x86__memory[add3(addr, rliteral2)]))),
+  rliteral14))) and (bw_and3(readmem64(addr, x86__memory),
+  rliteral15) = mul3(toBig1(to_rep((x86__memory[add3(addr, rliteral16)]))),
+  rliteral17))) and (bw_and3(readmem64(addr, x86__memory),
+  rliteral18) = mul3(toBig1(to_rep((x86__memory[add3(addr, rliteral19)]))),
+  rliteral20))) and (bw_and3(readmem64(addr, x86__memory),
+  rliteral21) = mul3(toBig1(to_rep((x86__memory[add3(addr, rliteral22)]))),
+  rliteral23))) and (bw_and3(readmem64(addr, x86__memory),
+  rliteral24) = mul3(toBig1(to_rep((x86__memory[add3(addr, rliteral25)]))),
+  rliteral26))) and (bw_and3(readmem64(addr, x86__memory),
+  rliteral27) = mul3(toBig1(to_rep((x86__memory[add3(addr, rliteral28)]))),
+  rliteral29)))))
 
 type unsigned641
 
@@ -2121,13 +2177,17 @@ logic readreg32__function_guard : t2, t3 -> prop
 
 axiom readreg32__post_axiom :
   (forall reg:t3 [readreg32(reg)]. (readreg32(reg) = toSmall(bw_and3(reg,
-  of_int3(4294967295)))))
+  rliteral8))))
+
+logic rliteral30 : t3
+
+axiom rliteral_axiom30 : (tqtint3(rliteral30) = 18446744069414584320)
 
 axiom writereg32post__post_axiom :
   (forall regnew:t3.
   (forall val__:t2 [writereg32post(regnew, val__)]. ((writereg32post(regnew,
   val__) = true) <-> ((readreg32(regnew) = val__) and (bw_and3(regnew,
-  of_int3(18446744069414584320)) = of_int3(0))))))
+  rliteral30) = rliteral6)))))
 
 axiom readmem64ghost__post_axiom :
   (forall mem:(t3,unsigned8) farray.
@@ -2135,574 +2195,13 @@ axiom readmem64ghost__post_axiom :
   (forall addr:t3 [readmem64ghost(mem, addr, x86__memory)].
   (readmem64ghost(mem, addr,
   x86__memory) = bw_or3(bw_or3(bw_or3(bw_or3(bw_or3(bw_or3(bw_or3(toBig1(to_rep((mem[addr]))),
-  lsl_bv3(toBig1(to_rep((mem[add3(addr, of_int3(1))]))), of_int3(8))),
-  lsl_bv3(toBig1(to_rep((mem[add3(addr, of_int3(2))]))), of_int3(16))),
-  lsl_bv3(toBig1(to_rep((mem[add3(addr, of_int3(3))]))), of_int3(24))),
-  lsl_bv3(toBig1(to_rep((mem[add3(addr, of_int3(4))]))), of_int3(32))),
-  lsl_bv3(toBig1(to_rep((mem[add3(addr, of_int3(5))]))), of_int3(40))),
-  lsl_bv3(toBig1(to_rep((mem[add3(addr, of_int3(6))]))), of_int3(48))),
-  lsl_bv3(toBig1(to_rep((mem[add3(addr, of_int3(7))]))), of_int3(56))))))
-
-logic fs : t3
-
-logic gs : t3
-
-logic stackaddresssize : t1
-
-logic zeroflag : bool
-
-logic carryflag : bool
-
-logic signflag : bool
-
-logic overflowflag : bool
-
-logic rax : t3
-
-logic rcx : t3
-
-logic rdx : t3
-
-logic rbx : t3
-
-logic rsp : t3
-
-logic rbp : t3
-
-logic rsi : t3
-
-logic rdi : t3
-
-logic r8 : t3
-
-logic r9 : t3
-
-logic r10 : t3
-
-logic r11 : t3
-
-logic r12 : t3
-
-logic r13 : t3
-
-logic r14 : t3
-
-logic r15 : t3
-
-logic memory : (t3,unsigned8) farray
-
-logic dummy_var : t3
-
-logic savestackptr : t3
-
-logic savemem : (t3,unsigned8) farray
-
-logic saved_ra : t3
-
-logic ra0 : t
-
-logic ra1 : t
-
-logic ra2 : t
-
-logic ra3 : t
-
-logic ra4 : t
-
-logic ra5 : t
-
-logic ra6 : t
-
-logic ra7 : t
-
-logic saved_rbp : t3
-
-logic saved_rdi : t3
-
-logic saved_rdx : t3
-
-logic o : t3
-
-logic o1 : t3
-
-logic o2 : t3
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : t
-
-logic o6 : t
-
-logic o7 : t
-
-logic o8 : t
-
-logic o9 : t
-
-logic o10 : t
-
-logic o11 : t
-
-logic o12 : t
-
-logic o13 : t
-
-logic o14 : t
-
-logic o15 : t
-
-logic o16 : t
-
-logic o17 : t
-
-logic o18 : t
-
-logic o19 : t3
-
-logic o20 : t3
-
-logic o21 : t3
-
-logic o22 : t3
-
-logic o23 : t2
-
-logic o24 : t2
-
-logic o25 : t3
-
-logic o26 : t2
-
-logic o27 : t2
-
-logic o28 : t3
-
-logic o29 : t2
-
-logic o30 : t2
-
-logic o31 : t3
-
-logic o32 : t3
-
-logic o33 : t3
-
-logic o34 : t3
-
-logic o35 : t3
-
-logic o36 : t3
-
-logic rcx1 : t3
-
-logic rdx1 : t3
-
-logic result : t3
-
-logic savestackptr1 : t3
-
-logic result1 : (t3,unsigned8) farray
-
-logic savemem1 : (t3,unsigned8) farray
-
-logic result2 : t3
-
-logic saved_ra1 : t3
-
-logic result3 : t
-
-logic ra01 : t
-
-logic result4 : t
-
-logic ra11 : t
-
-logic result5 : t
-
-logic ra21 : t
-
-logic result6 : t
-
-logic ra31 : t
-
-logic result7 : t
-
-logic ra41 : t
-
-logic result8 : t
-
-logic ra51 : t
-
-logic result9 : t
-
-logic ra61 : t
-
-logic result10 : t
-
-logic ra71 : t
-
-logic result11 : t3
-
-logic saved_rbp1 : t3
-
-logic result12 : t3
-
-logic saved_rdi1 : t3
-
-logic result13 : t3
-
-logic saved_rdx1 : t3
-
-logic memory1 : (t3,unsigned8) farray
-
-logic result14 : t3
-
-logic rsp1 : t3
-
-logic result15 : t3
-
-logic rbp1 : t3
-
-logic memory2 : (t3,unsigned8) farray
-
-logic memory3 : (t3,unsigned8) farray
-
-logic memory4 : (t3,unsigned8) farray
-
-logic result16 : t3
-
-logic rax1 : t3
-
-logic rax2 : t3
-
-logic result17 : bool
-
-logic zeroflag1 : bool
-
-logic result18 : bool
-
-logic signflag1 : bool
-
-logic result19 : bool
-
-logic carryflag1 : bool
-
-logic result20 : bool
-
-logic overflowflag1 : bool
-
-logic result21 : t3
-
-logic rax3 : t3
-
-logic rax4 : t3
-
-logic result22 : bool
-
-logic zeroflag2 : bool
-
-logic result23 : bool
-
-logic signflag2 : bool
-
-logic result24 : bool
-
-logic carryflag2 : bool
-
-logic result25 : bool
-
-logic overflowflag2 : bool
-
-logic result26 : t3
-
-logic rax5 : t3
-
-logic rax6 : t3
-
-logic result27 : bool
-
-logic zeroflag3 : bool
-
-logic result28 : bool
-
-logic signflag3 : bool
-
-logic result29 : bool
-
-logic carryflag3 : bool
-
-logic result30 : bool
-
-logic overflowflag3 : bool
-
-logic result31 : t3
-
-logic rax7 : t3
-
-logic memory5 : (t3,unsigned8) farray
-
-logic result32 : t3
-
-logic rax8 : t3
-
-logic memory6 : (t3,unsigned8) farray
-
-logic memory7 : (t3,unsigned8) farray
-
-logic zeroflag4 : bool
-
-logic carryflag4 : bool
-
-logic signflag4 : bool
-
-logic overflowflag4 : bool
-
-logic rax9 : t3
-
-logic rcx2 : t3
-
-logic rdx2 : t3
-
-logic memory8 : (t3,unsigned8) farray
-
-logic result33 : t3
-
-logic rax10 : t3
-
-logic memory9 : (t3,unsigned8) farray
-
-logic result34 : t3
-
-logic rax11 : t3
-
-logic memory10 : (t3,unsigned8) farray
-
-logic memory11 : (t3,unsigned8) farray
-
-logic zeroflag5 : bool
-
-logic carryflag5 : bool
-
-logic signflag5 : bool
-
-logic overflowflag5 : bool
-
-logic rax12 : t3
-
-logic rcx3 : t3
-
-logic rdx3 : t3
-
-logic memory12 : (t3,unsigned8) farray
-
-logic result35 : t3
-
-logic rax13 : t3
-
-logic result36 : t3
-
-logic rbp2 : t3
-
-logic result37 : t3
-
-logic rsp2 : t3
-
-logic result38 : t3
-
-logic rsp3 : t3
-
-logic zeroflag6 : bool
-
-logic carryflag6 : bool
-
-logic signflag6 : bool
-
-logic overflowflag6 : bool
-
-logic rax14 : t3
-
-logic rcx4 : t3
-
-logic rdx4 : t3
-
-logic rsp4 : t3
-
-logic rbp3 : t3
-
-logic memory13 : (t3,unsigned8) farray
-
-logic savestackptr2 : t3
-
-logic savemem2 : (t3,unsigned8) farray
-
-logic saved_ra2 : t3
-
-logic ra02 : t
-
-logic ra12 : t
-
-logic ra22 : t
-
-logic ra32 : t
-
-logic ra42 : t
-
-logic ra52 : t
-
-logic ra62 : t
-
-logic ra72 : t
-
-logic saved_rbp2 : t3
-
-logic saved_rdi2 : t3
-
-logic saved_rdx2 : t3
-
-logic zeroflag7 : bool
-
-logic carryflag7 : bool
-
-logic signflag7 : bool
-
-logic overflowflag7 : bool
-
-logic rax15 : t3
-
-logic rcx5 : t3
-
-logic rdx5 : t3
-
-logic rsp5 : t3
-
-logic rbp4 : t3
-
-logic memory14 : (t3,unsigned8) farray
-
-logic savestackptr3 : t3
-
-logic savemem3 : (t3,unsigned8) farray
-
-logic saved_ra3 : t3
-
-logic ra03 : t
-
-logic ra13 : t
-
-logic ra23 : t
-
-logic ra33 : t
-
-logic ra43 : t
-
-logic ra53 : t
-
-logic ra63 : t
-
-logic ra73 : t
-
-logic saved_rbp3 : t3
-
-logic saved_rdi3 : t3
-
-logic saved_rdx3 : t3
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : true
-
-axiom H3 : true
-
-axiom H4 : true
-
-axiom H5 : true
-
-axiom H6 : true
-
-axiom H7 : true
-
-axiom H8 : true
-
-axiom H9 : true
-
-axiom H10 : true
-
-axiom H11 : true
-
-axiom H12 : true
-
-axiom H13 : true
-
-axiom H14 : true
-
-axiom H15 : true
-
-axiom H16 : true
-
-axiom H17 : true
-
-axiom H18 : true
-
-axiom H19 : true
-
-axiom H20 :
-  (forall i:t3. ((ule3(of_int3(0), i) and ule3(i,
-  of_int3(18446744073709551615))) -> ((inrange64(i, rdi, rdx) = true) ->
-  (insaferegion64(i, rsp) = true))))
-
-axiom H21 : (o = rsp)
-
-axiom H22 : (result = savestackptr)
-
-axiom H23 : (savestackptr1 = o)
-
-axiom H24 : true
-
-axiom H25 : (result1 = savemem)
-
-axiom H26 : (savemem1 = memory)
-
-axiom H27 : ((o1 = readmem64(rsp, memory)) and ((((((((bw_and3(o1,
-  of_int3(255)) = toBig1(to_rep((memory[rsp])))) and (bw_and3(o1,
-  of_int3(65280)) = mul3(toBig1(to_rep((memory[add3(rsp, of_int3(1))]))),
-  of_int3(256)))) and (bw_and3(o1,
-  of_int3(16711680)) = mul3(toBig1(to_rep((memory[add3(rsp, of_int3(2))]))),
-  of_int3(65536)))) and (bw_and3(o1,
-  of_int3(4278190080)) = mul3(toBig1(to_rep((memory[add3(rsp,
-  of_int3(3))]))), of_int3(16777216)))) and (bw_and3(o1,
-  of_int3(1095216660480)) = mul3(toBig1(to_rep((memory[add3(rsp,
-  of_int3(4))]))), of_int3(4294967296)))) and (bw_and3(o1,
-  of_int3(280375465082880)) = mul3(toBig1(to_rep((memory[add3(rsp,
-  of_int3(5))]))), of_int3(1099511627776)))) and (bw_and3(o1,
-  of_int3(71776119061217280)) = mul3(toBig1(to_rep((memory[add3(rsp,
-  of_int3(6))]))), of_int3(281474976710656)))) and (bw_and3(o1,
-  of_int3(18374686479671623680)) = mul3(toBig1(to_rep((memory[add3(rsp,
-  of_int3(7))]))), of_int3(72057594037927936)))))
-
-axiom H28 : (o2 = o1)
-
-axiom H29 : (result2 = saved_ra)
-
-axiom H30 : (saved_ra1 = o2)
-
-axiom H31 : true
-
-axiom H32 : ((o3 = readmem8(rsp, memory)) and (o3 = to_rep((memory[rsp]))))
-
-axiom H33 : (o4 = o3)
-
-axiom H34 : (result3 = ra0)
-
-axiom H35 : (ra01 = o4)
-
-axiom H36 : true
-
-axiom H37 : ((o5 = readmem8(add3(rsp, of_int3(1)), memory)) and
-  (o5 = to_rep((memory[add3(rsp, of_int3(1))]))))
+  lsl_bv3(toBig1(to_rep((mem[add3(addr, rliteral1)]))), of_int3(8))),
+  lsl_bv3(toBig1(to_rep((mem[add3(addr, rliteral2)]))), of_int3(16))),
+  lsl_bv3(toBig1(to_rep((mem[add3(addr, rliteral16)]))), of_int3(24))),
+  lsl_bv3(toBig1(to_rep((mem[add3(addr, rliteral19)]))), of_int3(32))),
+  lsl_bv3(toBig1(to_rep((mem[add3(addr, rliteral22)]))), of_int3(40))),
+  lsl_bv3(toBig1(to_rep((mem[add3(addr, rliteral25)]))), of_int3(48))),
+  lsl_bv3(toBig1(to_rep((mem[add3(addr, rliteral28)]))), of_int3(56))))))
 
  (* File "x86.ads", line 334, characters 0-0 *)
 goal WP_parameter_def : true

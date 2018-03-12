@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -711,68 +711,38 @@ axiom mut_discr_ok__def_axiom :
   rec__default_init__mut_discr__f = x1 }; attr__constrained = x2
   }) = true) <-> (not (x = true))))
 
-logic d1__split_fields : natural
-
-logic d2__split_fields : natural
-
-logic d3__split_fields : natural
-
-logic d3__split_discrs : bool
-
-logic d4__split_fields : natural
-
-logic d5__split_fields : natural
-
-logic temp___319 : bool
-
-logic us : int
-
-logic temp___325 : bool
-
-logic us1 : int
-
-axiom H : (((d1__split_discrs = of_int(1)) and
-  ((to_int(d1__split_discrs) = 1) -> (to_rep(d1__split_fields) = 0))) and
-  (discr_ok({ us_split_discrs1 = { rec__default_init__discr__b =
-  d1__split_discrs }; us_split_fields1 = { rec__default_init__discr__f =
-  d1__split_fields } }) = true))
-
-axiom H1 : (of_int(1) = d1__split_discrs)
-
-axiom H2 : (((d2__split_discrs = of_int(0)) and
+ (* File "default_init.adb", line 54, characters 0-0 *)
+goal WP_parameter_def :
+  (forall d1__split_fields:natural. forall d2__split_fields:natural.
+  forall d3__split_fields:natural. forall d3__split_discrs:bool.
+  forall d4__split_fields:natural. forall d5__split_fields:natural.
+  ((((d1__split_discrs = of_int(1)) and ((to_int(d1__split_discrs) = 1) ->
+  (to_rep(d1__split_fields) = 0))) and (discr_ok({ us_split_discrs1 = {
+  rec__default_init__discr__b = d1__split_discrs }; us_split_fields1 = {
+  rec__default_init__discr__f = d1__split_fields } }) = true)) ->
+  ((of_int(1) = d1__split_discrs) -> ((((d2__split_discrs = of_int(0)) and
   ((to_int(d2__split_discrs) = 1) -> (to_rep(d2__split_fields) = 0))) and
   (discr_ok({ us_split_discrs1 = { rec__default_init__discr__b =
   d2__split_discrs }; us_split_fields1 = { rec__default_init__discr__f =
-  d2__split_fields } }) = true))
-
-axiom H3 : (of_int(0) = d2__split_discrs)
-
-axiom H4 : (((d3__attr__constrained = false) and
-  ((d3__split_discrs = of_int(0)) and ((to_int(d3__split_discrs) = 1) ->
+  d2__split_fields } }) = true)) -> ((of_int(0) = d2__split_discrs) ->
+  ((((d3__attr__constrained = false) and ((d3__split_discrs = of_int(0)) and
+  ((to_int(d3__split_discrs) = 1) ->
   (to_rep(d3__split_fields) = init(0))))) and (mut_discr_ok({
   us_split_discrs3 = { rec__default_init__mut_discr__b = d3__split_discrs };
   us_split_fields3 = { rec__default_init__mut_discr__f = d3__split_fields };
-  attr__constrained = d3__attr__constrained }) = true))
-
-axiom H5 : (((d4__attr__constrained = true) and
-  ((d4__split_discrs = of_int(0)) and ((to_int(d4__split_discrs) = 1) ->
+  attr__constrained = d3__attr__constrained }) = true)) ->
+  ((((d4__attr__constrained = true) and ((d4__split_discrs = of_int(0)) and
+  ((to_int(d4__split_discrs) = 1) ->
   (to_rep(d4__split_fields) = init(0))))) and (mut_discr_ok({
   us_split_discrs3 = { rec__default_init__mut_discr__b = d4__split_discrs };
   us_split_fields3 = { rec__default_init__mut_discr__f = d4__split_fields };
-  attr__constrained = d4__attr__constrained }) = true))
-
-axiom H6 : ((of_int(0) = d4__split_discrs) and
-  (d4__attr__constrained = true))
-
-axiom H7 : (((d5__attr__constrained = true) and
-  ((d5__split_discrs = of_int(1)) and ((to_int(d5__split_discrs) = 1) ->
+  attr__constrained = d4__attr__constrained }) = true)) ->
+  (((of_int(0) = d4__split_discrs) and (d4__attr__constrained = true)) ->
+  ((((d5__attr__constrained = true) and ((d5__split_discrs = of_int(1)) and
+  ((to_int(d5__split_discrs) = 1) ->
   (to_rep(d5__split_fields) = init(0))))) and (mut_discr_ok({
   us_split_discrs3 = { rec__default_init__mut_discr__b = d5__split_discrs };
   us_split_fields3 = { rec__default_init__mut_discr__f = d5__split_fields };
-  attr__constrained = d5__attr__constrained }) = true))
-
-axiom H8 : ((of_int(1) = d5__split_discrs) and
-  (d5__attr__constrained = true))
-
- (* File "default_init.adb", line 54, characters 0-0 *)
-goal WP_parameter_def : (to_rep(d1__split_fields) = 0)
+  attr__constrained = d5__attr__constrained }) = true)) ->
+  (((of_int(1) = d5__split_discrs) and (d5__attr__constrained = true)) ->
+  (to_rep(d1__split_fields) = 0)))))))))))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -186,24 +186,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,card) farray, int, int, (int,card) farray, int,
-  int -> (int,card) farray
-
-axiom concat_def :
-  (forall a:(int,card) farray. forall b:(int,card) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : card, int -> (int,card) farray
-
-axiom singleton_def :
-  (forall v:card.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,card) farray, int, int, (int,card) farray, int,
   int -> bool
 
@@ -214,17 +196,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -234,37 +216,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,card) farray, int, int, (int,card) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,card) farray. forall b:(int,card) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,card) farray. forall b:(int,card) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,card) farray. forall b:(int,card) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type cardindex
 
@@ -373,24 +327,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,cardindex) farray, int, int, (int,cardindex) farray,
-  int, int -> (int,cardindex) farray
-
-axiom concat_def1 :
-  (forall a:(int,cardindex) farray. forall b:(int,cardindex) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : cardindex, int -> (int,cardindex) farray
-
-axiom singleton_def1 :
-  (forall v:cardindex.
-  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq8 : (int,cardindex) farray, int, int, (int,cardindex) farray,
   int, int -> bool
 
@@ -401,17 +337,17 @@ axiom bool_eq_def7 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) and
-  (to_rep1((a[temp___idx_133])) = to_rep1((b[((b__first - a__first) + temp___idx_133)])))) or
-  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (forall temp___idx_155:int. ((((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) and
+  (to_rep1((a[temp___idx_155])) = to_rep1((b[((b__first - a__first) + temp___idx_155)])))) or
+  (not ((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)))))) ->
   (bool_eq8(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) ->
-  (to_rep1((a[temp___idx_133])) = to_rep1((b[((b__first - a__first) + temp___idx_133)]))))))) ->
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) ->
+  (to_rep1((a[temp___idx_155])) = to_rep1((b[((b__first - a__first) + temp___idx_155)]))))))) ->
   (bool_eq8(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -421,37 +357,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) ->
-  (to_rep1((a[temp___idx_133])) = to_rep1((b[((b__first - a__first) + temp___idx_133)])))))))))
-
-logic compare1 : (int,cardindex) farray, int, int, (int,cardindex) farray,
-  int, int -> int
-
-axiom compare_def_eq1 :
-  (forall a:(int,cardindex) farray. forall b:(int,cardindex) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq8(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt1 :
-  (forall a:(int,cardindex) farray. forall b:(int,cardindex) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq8(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep1((a[(i + 1)])) <  to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt1 :
-  (forall a:(int,cardindex) farray. forall b:(int,cardindex) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare1(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq8(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep1((b[(i + 1)])) <  to_rep1((a[(j + 1)]))))))))))))
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) ->
+  (to_rep1((a[temp___idx_155])) = to_rep1((b[((b__first - a__first) + temp___idx_155)])))))))))
 
 type tindexmatrixD1
 
@@ -527,27 +435,6 @@ axiom slide_def2 :
   (forall i:int [(slide2(a, old_first, new_first)[i])]. ((slide2(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat2 : (int,(int,cardindex) farray) farray, int, int,
-  (int,(int,cardindex) farray) farray, int,
-  int -> (int,(int,cardindex) farray) farray
-
-axiom concat_def2 :
-  (forall a:(int,(int,cardindex) farray) farray.
-  forall b:(int,(int,cardindex) farray) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat2(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat2(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat2(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton2 : (int,cardindex) farray,
-  int -> (int,(int,cardindex) farray) farray
-
-axiom singleton_def2 :
-  (forall v:(int,cardindex) farray.
-  (forall i:int [(singleton2(v, i)[i])]. ((singleton2(v, i)[i]) = v)))
-
 logic bool_eq10 : (int,(int,cardindex) farray) farray, int, int,
   (int,(int,cardindex) farray) farray, int, int -> bool
 
@@ -559,17 +446,17 @@ axiom bool_eq_def9 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_134:int. ((((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) and (bool_eq8((a[temp___idx_134]), 0, 99,
-  (b[((b__first - a__first) + temp___idx_134)]), 0, 99) = true)) or
-  (not ((a__first <= temp___idx_134) and (temp___idx_134 <= a__last)))))) ->
+  (forall temp___idx_156:int. ((((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) and (bool_eq8((a[temp___idx_156]), 0, 99,
+  (b[((b__first - a__first) + temp___idx_156)]), 0, 99) = true)) or
+  (not ((a__first <= temp___idx_156) and (temp___idx_156 <= a__last)))))) ->
   (bool_eq10(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_134:int. (((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) -> (bool_eq8((a[temp___idx_134]), 0, 99,
-  (b[((b__first - a__first) + temp___idx_134)]), 0, 99) = true))))) ->
+  (forall temp___idx_156:int. (((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) -> (bool_eq8((a[temp___idx_156]), 0, 99,
+  (b[((b__first - a__first) + temp___idx_156)]), 0, 99) = true))))) ->
   (bool_eq10(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev2 :
@@ -580,9 +467,9 @@ axiom bool_eq_rev2 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_134:int. (((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) -> (bool_eq8((a[temp___idx_134]), 0, 99,
-  (b[((b__first - a__first) + temp___idx_134)]), 0, 99) = true)))))))
+  (forall temp___idx_156:int. (((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) -> (bool_eq8((a[temp___idx_156]), 0, 99,
+  (b[((b__first - a__first) + temp___idx_156)]), 0, 99) = true)))))))
 
 logic dummy7 : (int,card) farray
 
@@ -928,409 +815,36 @@ logic s7 : (int,cardindex) farray
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic i : int
-
-logic o : int
-
-logic o1 : cardindex
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : cardindex
-
-logic temp___512 : int
-
-logic o5 : int
-
-logic o6 : cardindex
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : cardindex
-
-logic o11 : int
-
-logic o12 : int
-
-logic o13 : cardindex
-
-logic temp___507 : int
-
-logic o14 : int
-
-logic o15 : card
-
-logic o16 : int
-
-logic o17 : card
-
-logic o18 : int
-
-logic o19 : int
-
-logic o20 : int
-
-logic o21 : cardindex
-
-logic o22 : int
-
-logic o23 : int
-
-logic o24 : cardindex
-
-logic o25 : int
-
-logic o26 : int
-
-logic o27 : cardindex
-
-logic o28 : int
-
-logic o29 : bool
-
-logic o30 : bool
-
-logic i1 : int
-
-logic j : int
-
-logic o31 : int
-
-logic o32 : cardindex
-
-logic o33 : int
-
-logic o34 : int
-
-logic o35 : bool
-
-logic k : int
-
-logic o36 : int
-
-logic o37 : int
-
-logic o38 : cardindex
-
-logic o39 : int
-
-logic o40 : int
-
-logic o41 : bool
-
-logic o42 : bool
-
-logic o43 : int
-
-logic temp___473 : (int,cardindex) farray
-
-logic o44 : int
-
-logic o45 : cardindex
-
-logic temp___474 : int
-
-logic o46 : int
-
-logic temp___477 : (int,cardindex) farray
-
-logic o47 : int
-
-logic o48 : cardindex
-
-logic temp___478 : int
-
-logic o49 : int
-
-logic o50 : card
-
-logic o51 : int
-
-logic i2 : int
-
-logic j1 : int
-
-logic o52 : int
-
-logic o53 : cardindex
-
-logic o54 : int
-
-logic o55 : int
-
-logic o56 : bool
-
-logic k1 : int
-
-logic o57 : int
-
-logic o58 : int
-
-logic o59 : cardindex
-
-logic o60 : int
-
-logic o61 : int
-
-logic o62 : bool
-
-logic o63 : bool
-
-logic o64 : int
-
-logic temp___449 : (int,cardindex) farray
-
-logic o65 : int
-
-logic temp___451 : (int,cardindex) farray
-
-logic o66 : int
-
-logic o67 : cardindex
-
-logic o68 : int
-
-logic ist : int
-
-logic ip : int
-
-logic o69 : int
-
-logic o70 : cardindex
-
-logic o71 : int
-
-logic o72 : int
-
-logic o73 : bool
-
-logic o74 : int
-
-logic temp___426 : (int,cardindex) farray
-
-logic o75 : int
-
-logic o76 : cardindex
-
-logic temp___427 : int
-
-logic o77 : int
-
-logic temp___430 : (int,cardindex) farray
-
-logic o78 : int
-
-logic o79 : cardindex
-
-logic temp___431 : int
-
-logic o80 : int
-
-logic o81 : cardindex
-
-logic o82 : int
-
-logic o83 : bool
-
-logic i3 : int
-
-logic o84 : int
-
-logic o85 : cardindex
-
-logic temp___411 : int
-
-logic o86 : int
-
-logic temp___412 : (int,cardindex) farray
-
-logic o87 : int
-
-logic o88 : cardindex
-
-logic temp___414 : int
-
-logic o89 : int
-
-logic o90 : cardindex
-
-logic o91 : int
-
-logic o92 : int
-
-logic o93 : cardindex
-
-logic o94 : int
-
-logic o95 : cardindex
-
-logic temp___408 : int
-
-logic o96 : int
-
-logic o97 : cardindex
-
-logic o98 : int
-
-logic o99 : int
-
-logic o100 : int
-
-logic o101 : bool
-
-logic o102 : bool
-
-logic o103 : int
-
-logic o104 : cardindex
-
-logic o105 : int
-
-logic o106 : int
-
-logic o107 : cardindex
-
-logic o108 : int
-
-logic o109 : bool
-
-logic o110 : bool
-
-logic i4 : int
-
-logic o111 : int
-
-logic o112 : cardindex
-
-logic o113 : int
-
-logic o114 : bool
-
-logic j2 : int
-
-logic o115 : int
-
-logic o116 : cardindex
-
-logic o117 : int
-
-logic o118 : int
-
-logic o119 : bool
-
-logic o120 : int
-
-logic temp___389 : (int,cardindex) farray
-
-logic o121 : int
-
-logic temp___391 : (int,cardindex) farray
-
-logic o122 : int
-
-logic o123 : cardindex
-
-logic o124 : int
-
-logic o125 : bool
-
-logic o126 : bool
-
-logic result : bool
-
-logic result1 : bool
-
-logic result2 : bool
-
-logic result3 : bool
-
-logic result4 : bool
-
-logic result5 : bool
-
-logic result6 : bool
-
-logic result7 : bool
-
-logic result8 : bool
-
-logic result9 : bool
-
-logic result10 : bool
-
-logic result11 : bool
-
-logic result12 : bool
-
-logic result13 : bool
-
-logic result14 : bool
-
-logic result15 : bool
-
-logic result16 : bool
-
-logic result17 : bool
-
-axiom H : (((((0 <= to_rep1(s2)) and (to_rep1(s2) <= to_rep1(s))) and
-  (to_rep1(s) <= 100)) and ((to_rep1(s) = 0) or (0 <  to_rep1(s2)))) ->
-  ((result4 = true) <->
-  (forall i5:int. (((0 <= i5) and (i5 <= (to_rep1(s2) - 1))) ->
-  (((1 <= to_rep1((s3[i5]))) and (to_rep1((s3[i5])) <= to_rep1(s))) and
-  (forall j3:int. (((0 <= j3) and (j3 <= (to_rep1((s3[i5])) - 1))) ->
-  ((0 <= to_rep1(((s4[i5])[j3]))) and
-  (to_rep1(((s4[i5])[j3])) <  to_rep1(s))))))))))
-
-axiom H1 : ((not ((((0 <= to_rep1(s2)) and (to_rep1(s2) <= to_rep1(s))) and
-  (to_rep1(s) <= 100)) and ((to_rep1(s) = 0) or (0 <  to_rep1(s2))))) ->
-  (result4 = false))
-
-axiom H2 : ((result4 = true) -> ((result3 = true) <->
-  (forall i5:int. (((0 <= i5) and (i5 <= (to_rep1(s) - 1))) ->
-  ((((0 <= to_rep1((s5[i5]))) and
-  (to_rep1((s5[i5])) <= (to_rep1(s2) - 1))) and ((0 <= to_rep1((s6[i5]))) and
-  (to_rep1((s6[i5])) <= (to_rep1((s3[to_rep1((s5[i5]))])) - 1)))) and
-  (to_rep1(((s4[to_rep1((s5[i5]))])[to_rep1((s6[i5]))])) = i5))))))
-
-axiom H3 : ((not (result4 = true)) -> (result3 = false))
-
-axiom H4 : ((result3 = true) -> ((result2 = true) <->
-  (forall ist1:int. (((0 <= ist1) and (ist1 <= (to_rep1(s2) - 1))) ->
-  (forall ip1:int. (((0 <= ip1) and (ip1 <= (to_rep1((s3[ist1])) - 1))) ->
-  ((ist1 = to_rep1((s5[to_rep1(((s4[ist1])[ip1]))]))) and
-  (ip1 = to_rep1((s6[to_rep1(((s4[ist1])[ip1]))]))))))))))
-
-axiom H5 : ((not (result3 = true)) -> (result2 = false))
-
-axiom H6 : (result2 = true)
-
-axiom H7 : (0 <= i2)
-
-axiom H8 : (i2 <= (to_rep1(s2) - 1))
-
-axiom H9 : ((0 <= i2) and (i2 <= 99))
-
-axiom H10 : (o52 = i2)
-
-axiom H11 : (o53 = (s3[o52]))
-
-axiom H12 : (o54 = to_rep1(o53))
-
-axiom H13 : (o55 = (o54 - 2))
-
-axiom H14 : (((j1 <= o55) -> (o56 = true)) and ((not (j1 <= o55)) ->
-  (o56 = false)))
-
-axiom H15 : (((0 <= j1) -> (result9 = o56)) and ((not (0 <= j1)) ->
-  (result9 = false)))
-
-axiom H16 : (result9 = true)
-
  (* File "patience.ads", line 53, characters 0-0 *)
-goal WP_parameter_def : (0 <= i2)
+goal WP_parameter_def :
+  (forall i:int. forall j:int. forall o:int. forall o1:cardindex.
+  forall o2:int. forall o3:int. forall o4:bool. forall result:bool.
+  forall result1:bool. forall result2:bool. forall result3:bool.
+  (((((((((0 <= to_rep1(s2)) and (to_rep1(s2) <= to_rep1(s))) and
+  (to_rep1(s) <= 100)) and ((to_rep1(s) = 0) or (0 <  to_rep1(s2)))) and
+  ((result2 = true) <->
+  (forall i1:int. (((0 <= i1) and (i1 <= (to_rep1(s2) - 1))) ->
+  (((1 <= to_rep1((s3[i1]))) and (to_rep1((s3[i1])) <= to_rep1(s))) and
+  (forall j1:int. (((0 <= j1) and (j1 <= (to_rep1((s3[i1])) - 1))) ->
+  ((0 <= to_rep1(((s4[i1])[j1]))) and
+  (to_rep1(((s4[i1])[j1])) <  to_rep1(s)))))))))) or
+  ((not ((((0 <= to_rep1(s2)) and (to_rep1(s2) <= to_rep1(s))) and
+  (to_rep1(s) <= 100)) and ((to_rep1(s) = 0) or (0 <  to_rep1(s2))))) and
+  (result2 = false))) and (((result2 = true) and ((result1 = true) <->
+  (forall i1:int. (((0 <= i1) and (i1 <= (to_rep1(s) - 1))) ->
+  ((((0 <= to_rep1((s5[i1]))) and
+  (to_rep1((s5[i1])) <= (to_rep1(s2) - 1))) and ((0 <= to_rep1((s6[i1]))) and
+  (to_rep1((s6[i1])) <= (to_rep1((s3[to_rep1((s5[i1]))])) - 1)))) and
+  (to_rep1(((s4[to_rep1((s5[i1]))])[to_rep1((s6[i1]))])) = i1)))))) or
+  ((not (result2 = true)) and (result1 = false)))) and (((result1 = true) and
+  ((result = true) <->
+  (forall ist:int. (((0 <= ist) and (ist <= (to_rep1(s2) - 1))) ->
+  (forall ip:int. (((0 <= ip) and (ip <= (to_rep1((s3[ist])) - 1))) ->
+  ((ist = to_rep1((s5[to_rep1(((s4[ist])[ip]))]))) and
+  (ip = to_rep1((s6[to_rep1(((s4[ist])[ip]))])))))))))) or
+  ((not (result1 = true)) and (result = false)))) -> ((result = true) ->
+  (((0 <= i) and (i <= (to_rep1(s2) - 1))) -> (((((((((0 <= i) and
+  (i <= 99)) and (o = i)) and (o1 = (s3[o]))) and (o2 = to_rep1(o1))) and
+  (o3 = (o2 - 2))) and (((j <= o3) and (o4 = true)) or ((not (j <= o3)) and
+  (o4 = false)))) and (((0 <= j) and (result3 = o4)) or ((not (0 <= j)) and
+  (result3 = false)))) -> ((result3 = true) -> (0 <= i)))))))

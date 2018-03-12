@@ -525,12 +525,6 @@ axiom intersection__2__post__dispatch_axiom : true
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq6 : bool, bool -> bool
-
-axiom bool_eq_def3 :
-  (forall x:bool. forall y:bool [bool_eq6(x, y)]. (((x = y) -> (bool_eq6(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq6(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -542,6 +536,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq6 : bool, bool -> bool
+
+axiom bool_eq_def3 :
+  (forall x:bool. forall y:bool [bool_eq6(x, y)]. (((x = y) -> (bool_eq6(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq6(x, y) = false))))
 
 predicate in_range2(x: int) = ((x = 0) or (x = 1))
 
@@ -693,15 +693,15 @@ axiom elements__post_axiom :
   rec__my_ordered_sets__m__set = container1 } })) = length({
   us_split_discrs1 = { rec__my_ordered_sets__m__set__capacity = container };
   us_split_fields1 = { rec__my_ordered_sets__m__set = container1 } })) and
-  (forall temp___387:int. ((in_range5(temp___387) and ((1 <= temp___387) and
-  (temp___387 <= (0 + length2(elements({ us_split_discrs1 = {
+  (forall temp___428:int. ((in_range5(temp___428) and ((1 <= temp___428) and
+  (temp___428 <= (0 + length2(elements({ us_split_discrs1 = {
   rec__my_ordered_sets__m__set__capacity = container }; us_split_fields1 = {
   rec__my_ordered_sets__m__set = container1 } })))))) -> (contains(model__({
   us_split_discrs1 = { rec__my_ordered_sets__m__set__capacity = container };
   us_split_fields1 = { rec__my_ordered_sets__m__set = container1 } }),
   get(elements({ us_split_discrs1 = {
   rec__my_ordered_sets__m__set__capacity = container }; us_split_fields1 = {
-  rec__my_ordered_sets__m__set = container1 } }), temp___387)) = true)))) and
+  rec__my_ordered_sets__m__set = container1 } }), temp___428)) = true)))) and
   (forall item:int. ((in_range4(item) and (contains(model__({
   us_split_discrs1 = { rec__my_ordered_sets__m__set__capacity = container };
   us_split_fields1 = { rec__my_ordered_sets__m__set = container1 } }),
@@ -1007,55 +1007,37 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length2(container))))) ->
   in_range6(get(container, position)))))
 
-logic target__split_fields : us_main_type
-
-logic o : count_type
-
-logic o1 : us_main_type
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-axiom H : ((o5 = length({ us_split_discrs1 = {
-  rec__my_ordered_sets__m__set__capacity = target__split_discrs };
-  us_split_fields1 = { rec__my_ordered_sets__m__set = target__split_fields }
-  })) and (in_range1(o5) and (o5 <= to_rep(target__split_discrs))))
-
-axiom H1 : (o6 = (to_rep(target__split_discrs) - o5))
-
-axiom H2 : ((o7 = o6) and in_range(o6))
-
-axiom H3 : (({ us_split_discrs1 = { rec__my_ordered_sets__m__set__capacity =
-  o }; us_split_fields1 = { rec__my_ordered_sets__m__set = o1 }
-  } = intersection__2({ us_split_discrs1 = {
-  rec__my_ordered_sets__m__set__capacity = target__split_discrs };
-  us_split_fields1 = { rec__my_ordered_sets__m__set = target__split_fields }
-  }, { us_split_discrs1 = { rec__my_ordered_sets__m__set__capacity = source
-  }; us_split_fields1 = { rec__my_ordered_sets__m__set = source1 } })) and
-  ((((((length({ us_split_discrs1 = {
+ (* File "a-cforse.ads", line 1094, characters 0-0 *)
+goal WP_parameter_def :
+  (forall target__split_fields:us_main_type. forall o:count_type.
+  forall o1:us_main_type. forall o2:int. forall o3:int. forall o4:int.
+  forall o5:int. forall o6:int. forall o7:int. (((((o5 = length({
+  us_split_discrs1 = { rec__my_ordered_sets__m__set__capacity =
+  target__split_discrs }; us_split_fields1 = { rec__my_ordered_sets__m__set =
+  target__split_fields } })) and (in_range1(o5) and
+  (o5 <= to_rep(target__split_discrs)))) and
+  (o6 = (to_rep(target__split_discrs) - o5))) and ((o7 = o6) and
+  in_range(o6))) -> ((((({ us_split_discrs1 = {
   rec__my_ordered_sets__m__set__capacity = o }; us_split_fields1 = {
-  rec__my_ordered_sets__m__set = o1 } }) = num_overlaps(model__({
+  rec__my_ordered_sets__m__set = o1 } } = intersection__2({
   us_split_discrs1 = { rec__my_ordered_sets__m__set__capacity =
   target__split_discrs }; us_split_fields1 = { rec__my_ordered_sets__m__set =
-  target__split_fields } }), model__({ us_split_discrs1 = {
+  target__split_fields } }, { us_split_discrs1 = {
   rec__my_ordered_sets__m__set__capacity = source }; us_split_fields1 = {
-  rec__my_ordered_sets__m__set = source1 } }))) and (ole(model__({
+  rec__my_ordered_sets__m__set = source1 } })) and ((((((length({
   us_split_discrs1 = { rec__my_ordered_sets__m__set__capacity = o };
-  us_split_fields1 = { rec__my_ordered_sets__m__set = o1 } }), model__({
-  us_split_discrs1 = { rec__my_ordered_sets__m__set__capacity =
-  target__split_discrs }; us_split_fields1 = { rec__my_ordered_sets__m__set =
-  target__split_fields } })) = true)) and (ole(model__({ us_split_discrs1 = {
+  us_split_fields1 = { rec__my_ordered_sets__m__set = o1 }
+  }) = num_overlaps(model__({ us_split_discrs1 = {
+  rec__my_ordered_sets__m__set__capacity = target__split_discrs };
+  us_split_fields1 = { rec__my_ordered_sets__m__set = target__split_fields }
+  }), model__({ us_split_discrs1 = { rec__my_ordered_sets__m__set__capacity =
+  source }; us_split_fields1 = { rec__my_ordered_sets__m__set = source1 }
+  }))) and (ole(model__({ us_split_discrs1 = {
+  rec__my_ordered_sets__m__set__capacity = o }; us_split_fields1 = {
+  rec__my_ordered_sets__m__set = o1 } }), model__({ us_split_discrs1 = {
+  rec__my_ordered_sets__m__set__capacity = target__split_discrs };
+  us_split_fields1 = { rec__my_ordered_sets__m__set = target__split_fields }
+  })) = true)) and (ole(model__({ us_split_discrs1 = {
   rec__my_ordered_sets__m__set__capacity = o }; us_split_fields1 = {
   rec__my_ordered_sets__m__set = o1 } }), model__({ us_split_discrs1 = {
   rec__my_ordered_sets__m__set__capacity = source }; us_split_fields1 = {
@@ -1109,19 +1091,10 @@ axiom H3 : (({ us_split_discrs1 = { rec__my_ordered_sets__m__set__capacity =
   }), i))) = get(elements({ us_split_discrs1 = {
   rec__my_ordered_sets__m__set__capacity = target__split_discrs };
   us_split_fields1 = { rec__my_ordered_sets__m__set = target__split_fields }
-  }), i))))))))
-
-axiom H4 : ((o2 = length({ us_split_discrs1 = {
+  }), i)))))))) and ((o2 = length({ us_split_discrs1 = {
   rec__my_ordered_sets__m__set__capacity = o }; us_split_fields1 = {
   rec__my_ordered_sets__m__set = o1 } })) and (in_range1(o2) and
-  (o2 <= to_rep(o))))
-
-axiom H5 : ((o3 = length({ us_split_discrs1 = {
+  (o2 <= to_rep(o))))) and (((o3 = length({ us_split_discrs1 = {
   rec__my_ordered_sets__m__set__capacity = source }; us_split_fields1 = {
   rec__my_ordered_sets__m__set = source1 } })) and (in_range1(o3) and
-  (o3 <= to_rep(source))))
-
-axiom H6 : (o4 = (o3 - o2))
-
- (* File "a-cforse.ads", line 1094, characters 0-0 *)
-goal WP_parameter_def : in_range(o4)
+  (o3 <= to_rep(source)))) and (o4 = (o3 - o2)))) -> in_range(o4))))

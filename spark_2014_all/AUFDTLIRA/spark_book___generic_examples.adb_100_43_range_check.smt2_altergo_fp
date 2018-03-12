@@ -186,24 +186,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -214,17 +196,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -234,37 +216,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 logic to_rep1 : integer -> int
 
@@ -622,24 +576,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,percent) farray, int, int, (int,percent) farray, int,
-  int -> (int,percent) farray
-
-axiom concat_def1 :
-  (forall a:(int,percent) farray. forall b:(int,percent) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : percent, int -> (int,percent) farray
-
-axiom singleton_def1 :
-  (forall v:percent.
-  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq12 : (int,percent) farray, int, int, (int,percent) farray, int,
   int -> bool
 
@@ -650,17 +586,17 @@ axiom bool_eq_def9 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_151:int. ((((a__first <= temp___idx_151) and
-  (temp___idx_151 <= a__last)) and
-  (to_rep2((a[temp___idx_151])) = to_rep2((b[((b__first - a__first) + temp___idx_151)])))) or
-  (not ((a__first <= temp___idx_151) and (temp___idx_151 <= a__last)))))) ->
+  (forall temp___idx_173:int. ((((a__first <= temp___idx_173) and
+  (temp___idx_173 <= a__last)) and
+  (to_rep2((a[temp___idx_173])) = to_rep2((b[((b__first - a__first) + temp___idx_173)])))) or
+  (not ((a__first <= temp___idx_173) and (temp___idx_173 <= a__last)))))) ->
   (bool_eq12(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_151:int. (((a__first <= temp___idx_151) and
-  (temp___idx_151 <= a__last)) ->
-  (to_rep2((a[temp___idx_151])) = to_rep2((b[((b__first - a__first) + temp___idx_151)]))))))) ->
+  (forall temp___idx_173:int. (((a__first <= temp___idx_173) and
+  (temp___idx_173 <= a__last)) ->
+  (to_rep2((a[temp___idx_173])) = to_rep2((b[((b__first - a__first) + temp___idx_173)]))))))) ->
   (bool_eq12(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -670,37 +606,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_151:int. (((a__first <= temp___idx_151) and
-  (temp___idx_151 <= a__last)) ->
-  (to_rep2((a[temp___idx_151])) = to_rep2((b[((b__first - a__first) + temp___idx_151)])))))))))
-
-logic compare1 : (int,percent) farray, int, int, (int,percent) farray, int,
-  int -> int
-
-axiom compare_def_eq1 :
-  (forall a:(int,percent) farray. forall b:(int,percent) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq12(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt1 :
-  (forall a:(int,percent) farray. forall b:(int,percent) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq12(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep2((a[(i + 1)])) <  to_rep2((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt1 :
-  (forall a:(int,percent) farray. forall b:(int,percent) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare1(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq12(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep2((b[(i + 1)])) <  to_rep2((a[(j + 1)]))))))))))))
+  (forall temp___idx_173:int. (((a__first <= temp___idx_173) and
+  (temp___idx_173 <= a__last)) ->
+  (to_rep2((a[temp___idx_173])) = to_rep2((b[((b__first - a__first) + temp___idx_173)])))))))))
 
 type t2
 
@@ -1008,183 +916,134 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 logic generic_examples__my_percents__aggregate_def : int, int, int, int, int,
   int, int, int, int, int, int, int, int -> (int,percent) farray
 
+logic temp___String_Literal_720 : unit -> (int,character) farray
+
+axiom temp___String_Literal_720__def_axiom :
+  (((((((((((((((((to_rep((temp___String_Literal_720(void)[1])) = 72) and
+  (to_rep((temp___String_Literal_720(void)[2])) = 111)) and
+  (to_rep((temp___String_Literal_720(void)[3])) = 119)) and
+  (to_rep((temp___String_Literal_720(void)[4])) = 32)) and
+  (to_rep((temp___String_Literal_720(void)[5])) = 110)) and
+  (to_rep((temp___String_Literal_720(void)[6])) = 111)) and
+  (to_rep((temp___String_Literal_720(void)[7])) = 119)) and
+  (to_rep((temp___String_Literal_720(void)[8])) = 32)) and
+  (to_rep((temp___String_Literal_720(void)[9])) = 98)) and
+  (to_rep((temp___String_Literal_720(void)[10])) = 114)) and
+  (to_rep((temp___String_Literal_720(void)[11])) = 111)) and
+  (to_rep((temp___String_Literal_720(void)[12])) = 119)) and
+  (to_rep((temp___String_Literal_720(void)[13])) = 110)) and
+  (to_rep((temp___String_Literal_720(void)[14])) = 32)) and
+  (to_rep((temp___String_Literal_720(void)[15])) = 99)) and
+  (to_rep((temp___String_Literal_720(void)[16])) = 111)) and
+  (to_rep((temp___String_Literal_720(void)[17])) = 119))
+
+logic temp___String_Literal_721 : unit -> (int,character) farray
+
+axiom temp___String_Literal_721__def_axiom :
+  (((((((((((((((((to_rep((temp___String_Literal_721(void)[1])) = 72) and
+  (to_rep((temp___String_Literal_721(void)[2])) = 111)) and
+  (to_rep((temp___String_Literal_721(void)[3])) = 119)) and
+  (to_rep((temp___String_Literal_721(void)[4])) = 32)) and
+  (to_rep((temp___String_Literal_721(void)[5])) = 110)) and
+  (to_rep((temp___String_Literal_721(void)[6])) = 111)) and
+  (to_rep((temp___String_Literal_721(void)[7])) = 119)) and
+  (to_rep((temp___String_Literal_721(void)[8])) = 32)) and
+  (to_rep((temp___String_Literal_721(void)[9])) = 98)) and
+  (to_rep((temp___String_Literal_721(void)[10])) = 114)) and
+  (to_rep((temp___String_Literal_721(void)[11])) = 111)) and
+  (to_rep((temp___String_Literal_721(void)[12])) = 119)) and
+  (to_rep((temp___String_Literal_721(void)[13])) = 110)) and
+  (to_rep((temp___String_Literal_721(void)[14])) = 32)) and
+  (to_rep((temp___String_Literal_721(void)[15])) = 99)) and
+  (to_rep((temp___String_Literal_721(void)[16])) = 111)) and
+  (to_rep((temp___String_Literal_721(void)[17])) = 119))
+
 axiom def_axiom :
-  (forall temp___619:int. forall temp___620:int. forall temp___621:int.
-  forall temp___622:int. forall temp___623:int. forall temp___624:int.
-  forall temp___625:int. forall temp___626:int. forall temp___627:int.
-  forall temp___628:int. forall temp___629:int. forall temp___630:int.
-  forall temp___631:int.
-  ((((((((((((((generic_examples__my_percents__aggregate_def(temp___619,
-  temp___620, temp___621, temp___622, temp___623, temp___624, temp___625,
-  temp___626, temp___627, temp___628, temp___629, temp___630,
-  temp___631)[0]) = of_rep2(temp___619)) and
-  ((generic_examples__my_percents__aggregate_def(temp___619, temp___620,
-  temp___621, temp___622, temp___623, temp___624, temp___625, temp___626,
-  temp___627, temp___628, temp___629, temp___630,
-  temp___631)[1]) = of_rep2(temp___620))) and
-  ((generic_examples__my_percents__aggregate_def(temp___619, temp___620,
-  temp___621, temp___622, temp___623, temp___624, temp___625, temp___626,
-  temp___627, temp___628, temp___629, temp___630,
-  temp___631)[2]) = of_rep2(temp___621))) and
-  ((generic_examples__my_percents__aggregate_def(temp___619, temp___620,
-  temp___621, temp___622, temp___623, temp___624, temp___625, temp___626,
-  temp___627, temp___628, temp___629, temp___630,
-  temp___631)[3]) = of_rep2(temp___622))) and
-  ((generic_examples__my_percents__aggregate_def(temp___619, temp___620,
-  temp___621, temp___622, temp___623, temp___624, temp___625, temp___626,
-  temp___627, temp___628, temp___629, temp___630,
-  temp___631)[4]) = of_rep2(temp___623))) and
-  ((generic_examples__my_percents__aggregate_def(temp___619, temp___620,
-  temp___621, temp___622, temp___623, temp___624, temp___625, temp___626,
-  temp___627, temp___628, temp___629, temp___630,
-  temp___631)[5]) = of_rep2(temp___624))) and
-  ((generic_examples__my_percents__aggregate_def(temp___619, temp___620,
-  temp___621, temp___622, temp___623, temp___624, temp___625, temp___626,
-  temp___627, temp___628, temp___629, temp___630,
-  temp___631)[6]) = of_rep2(temp___625))) and
-  ((generic_examples__my_percents__aggregate_def(temp___619, temp___620,
-  temp___621, temp___622, temp___623, temp___624, temp___625, temp___626,
-  temp___627, temp___628, temp___629, temp___630,
-  temp___631)[7]) = of_rep2(temp___626))) and
-  ((generic_examples__my_percents__aggregate_def(temp___619, temp___620,
-  temp___621, temp___622, temp___623, temp___624, temp___625, temp___626,
-  temp___627, temp___628, temp___629, temp___630,
-  temp___631)[8]) = of_rep2(temp___627))) and
-  ((generic_examples__my_percents__aggregate_def(temp___619, temp___620,
-  temp___621, temp___622, temp___623, temp___624, temp___625, temp___626,
-  temp___627, temp___628, temp___629, temp___630,
-  temp___631)[9]) = of_rep2(temp___628))) and
-  ((generic_examples__my_percents__aggregate_def(temp___619, temp___620,
-  temp___621, temp___622, temp___623, temp___624, temp___625, temp___626,
-  temp___627, temp___628, temp___629, temp___630,
-  temp___631)[10]) = of_rep2(temp___629))) and
-  ((generic_examples__my_percents__aggregate_def(temp___619, temp___620,
-  temp___621, temp___622, temp___623, temp___624, temp___625, temp___626,
-  temp___627, temp___628, temp___629, temp___630,
-  temp___631)[11]) = of_rep2(temp___630))) and
-  ((generic_examples__my_percents__aggregate_def(temp___619, temp___620,
-  temp___621, temp___622, temp___623, temp___624, temp___625, temp___626,
-  temp___627, temp___628, temp___629, temp___630,
-  temp___631)[12]) = of_rep2(temp___631))))
+  (forall temp___705:int. forall temp___706:int. forall temp___707:int.
+  forall temp___708:int. forall temp___709:int. forall temp___710:int.
+  forall temp___711:int. forall temp___712:int. forall temp___713:int.
+  forall temp___714:int. forall temp___715:int. forall temp___716:int.
+  forall temp___717:int. (((((((((((((in_range7(temp___705) and
+  in_range7(temp___706)) and in_range7(temp___707)) and
+  in_range7(temp___708)) and in_range7(temp___709)) and
+  in_range7(temp___710)) and in_range7(temp___711)) and
+  in_range7(temp___712)) and in_range7(temp___713)) and
+  in_range7(temp___714)) and in_range7(temp___715)) and
+  in_range7(temp___716)) and in_range7(temp___717)) ->
+  (((((((((((((to_rep2((generic_examples__my_percents__aggregate_def(temp___705,
+  temp___706, temp___707, temp___708, temp___709, temp___710, temp___711,
+  temp___712, temp___713, temp___714, temp___715, temp___716,
+  temp___717)[0])) = temp___705) and
+  (to_rep2((generic_examples__my_percents__aggregate_def(temp___705,
+  temp___706, temp___707, temp___708, temp___709, temp___710, temp___711,
+  temp___712, temp___713, temp___714, temp___715, temp___716,
+  temp___717)[1])) = temp___706)) and
+  (to_rep2((generic_examples__my_percents__aggregate_def(temp___705,
+  temp___706, temp___707, temp___708, temp___709, temp___710, temp___711,
+  temp___712, temp___713, temp___714, temp___715, temp___716,
+  temp___717)[2])) = temp___707)) and
+  (to_rep2((generic_examples__my_percents__aggregate_def(temp___705,
+  temp___706, temp___707, temp___708, temp___709, temp___710, temp___711,
+  temp___712, temp___713, temp___714, temp___715, temp___716,
+  temp___717)[3])) = temp___708)) and
+  (to_rep2((generic_examples__my_percents__aggregate_def(temp___705,
+  temp___706, temp___707, temp___708, temp___709, temp___710, temp___711,
+  temp___712, temp___713, temp___714, temp___715, temp___716,
+  temp___717)[4])) = temp___709)) and
+  (to_rep2((generic_examples__my_percents__aggregate_def(temp___705,
+  temp___706, temp___707, temp___708, temp___709, temp___710, temp___711,
+  temp___712, temp___713, temp___714, temp___715, temp___716,
+  temp___717)[5])) = temp___710)) and
+  (to_rep2((generic_examples__my_percents__aggregate_def(temp___705,
+  temp___706, temp___707, temp___708, temp___709, temp___710, temp___711,
+  temp___712, temp___713, temp___714, temp___715, temp___716,
+  temp___717)[6])) = temp___711)) and
+  (to_rep2((generic_examples__my_percents__aggregate_def(temp___705,
+  temp___706, temp___707, temp___708, temp___709, temp___710, temp___711,
+  temp___712, temp___713, temp___714, temp___715, temp___716,
+  temp___717)[7])) = temp___712)) and
+  (to_rep2((generic_examples__my_percents__aggregate_def(temp___705,
+  temp___706, temp___707, temp___708, temp___709, temp___710, temp___711,
+  temp___712, temp___713, temp___714, temp___715, temp___716,
+  temp___717)[8])) = temp___713)) and
+  (to_rep2((generic_examples__my_percents__aggregate_def(temp___705,
+  temp___706, temp___707, temp___708, temp___709, temp___710, temp___711,
+  temp___712, temp___713, temp___714, temp___715, temp___716,
+  temp___717)[9])) = temp___714)) and
+  (to_rep2((generic_examples__my_percents__aggregate_def(temp___705,
+  temp___706, temp___707, temp___708, temp___709, temp___710, temp___711,
+  temp___712, temp___713, temp___714, temp___715, temp___716,
+  temp___717)[10])) = temp___715)) and
+  (to_rep2((generic_examples__my_percents__aggregate_def(temp___705,
+  temp___706, temp___707, temp___708, temp___709, temp___710, temp___711,
+  temp___712, temp___713, temp___714, temp___715, temp___716,
+  temp___717)[11])) = temp___716)) and
+  (to_rep2((generic_examples__my_percents__aggregate_def(temp___705,
+  temp___706, temp___707, temp___708, temp___709, temp___710, temp___711,
+  temp___712, temp___713, temp___714, temp___715, temp___716,
+  temp___717)[12])) = temp___717))))
 
-logic temp___String_Literal_634 : unit -> (int,character) farray
-
-axiom temp___String_Literal_634__def_axiom :
-  (((((((((((((((((to_rep((temp___String_Literal_634(void)[1])) = 72) and
-  (to_rep((temp___String_Literal_634(void)[2])) = 111)) and
-  (to_rep((temp___String_Literal_634(void)[3])) = 119)) and
-  (to_rep((temp___String_Literal_634(void)[4])) = 32)) and
-  (to_rep((temp___String_Literal_634(void)[5])) = 110)) and
-  (to_rep((temp___String_Literal_634(void)[6])) = 111)) and
-  (to_rep((temp___String_Literal_634(void)[7])) = 119)) and
-  (to_rep((temp___String_Literal_634(void)[8])) = 32)) and
-  (to_rep((temp___String_Literal_634(void)[9])) = 98)) and
-  (to_rep((temp___String_Literal_634(void)[10])) = 114)) and
-  (to_rep((temp___String_Literal_634(void)[11])) = 111)) and
-  (to_rep((temp___String_Literal_634(void)[12])) = 119)) and
-  (to_rep((temp___String_Literal_634(void)[13])) = 110)) and
-  (to_rep((temp___String_Literal_634(void)[14])) = 32)) and
-  (to_rep((temp___String_Literal_634(void)[15])) = 99)) and
-  (to_rep((temp___String_Literal_634(void)[16])) = 111)) and
-  (to_rep((temp___String_Literal_634(void)[17])) = 119))
-
-logic temp___String_Literal_635 : unit -> (int,character) farray
-
-axiom temp___String_Literal_635__def_axiom :
-  (((((((((((((((((to_rep((temp___String_Literal_635(void)[1])) = 72) and
-  (to_rep((temp___String_Literal_635(void)[2])) = 111)) and
-  (to_rep((temp___String_Literal_635(void)[3])) = 119)) and
-  (to_rep((temp___String_Literal_635(void)[4])) = 32)) and
-  (to_rep((temp___String_Literal_635(void)[5])) = 110)) and
-  (to_rep((temp___String_Literal_635(void)[6])) = 111)) and
-  (to_rep((temp___String_Literal_635(void)[7])) = 119)) and
-  (to_rep((temp___String_Literal_635(void)[8])) = 32)) and
-  (to_rep((temp___String_Literal_635(void)[9])) = 98)) and
-  (to_rep((temp___String_Literal_635(void)[10])) = 114)) and
-  (to_rep((temp___String_Literal_635(void)[11])) = 111)) and
-  (to_rep((temp___String_Literal_635(void)[12])) = 119)) and
-  (to_rep((temp___String_Literal_635(void)[13])) = 110)) and
-  (to_rep((temp___String_Literal_635(void)[14])) = 32)) and
-  (to_rep((temp___String_Literal_635(void)[15])) = 99)) and
-  (to_rep((temp___String_Literal_635(void)[16])) = 111)) and
-  (to_rep((temp___String_Literal_635(void)[17])) = 119))
-
-logic default_width : int
-
-logic default_base : int
-
-logic the_count : int
-
-logic my_percents : (int,percent) farray
-
-logic o : int
-
-logic o1 : (int,character) farray
-
-logic o2 : t1
-
-logic o3 : int
-
-logic o4 : (int,percent) farray
-
-logic o5 : t3
-
-logic o6 : int
-
-logic result : (int,percent) farray
-
-logic my_percents1 : (int,percent) farray
-
-logic result1 : int
-
-logic the_count1 : int
-
-logic result2 : int
-
-logic the_count2 : int
-
-logic result3 : int
-
-logic the_count3 : int
-
-axiom H : in_range4(default_width)
-
-axiom H1 : in_range5(default_base)
-
-axiom H2 : ((0 <= 2147483647) -> in_range3(the_count))
-
-axiom H3 : (result = my_percents)
-
-axiom H4 : (my_percents1 = generic_examples__my_percents__aggregate_def(5, 6,
-  7, 5, 3, 4, 19, 16, 5, 23, 45, 4, 3))
-
-axiom H5 : (to_rep(my_percents__first) = to_rep(first4(mk2(0, 12))))
-
-axiom H6 : (to_rep(my_percents__last) = to_rep(last4(mk2(0, 12))))
-
-axiom H7 : dynamic_property2(0, 255, to_rep(my_percents__first),
-  to_rep(my_percents__last))
-
-axiom H8 : ((o = count({ elts = temp___String_Literal_634(void); rt = mk(1,
-  17) }, 119)) and in_range3(o))
-
-axiom H9 : (result1 = the_count)
-
-axiom H10 : (the_count1 = o)
-
-axiom H11 : dynamic_property1(1, 2147483647, 1, 17)
-
-axiom H12 : (temp___String_Literal_635(void) = o1)
-
-axiom H13 : (mk1(1, 17) = o2)
-
-axiom H14 : ((o3 = char_count({ elts1 = o1; rt1 = o2 }, 119)) and
-  in_range3(o3))
-
-axiom H15 : (result2 = the_count1)
-
-axiom H16 : (the_count2 = o3)
-
- (* File "generic_examples.adb", line 59, characters 0-0 *)
-goal WP_parameter_def : dynamic_property3(0, 255, to_rep(my_percents__first),
-  to_rep(my_percents__last))
+ (* File "generic_examples.adb", line 85, characters 0-0 *)
+goal WP_parameter_def :
+  (forall default_width:int. forall default_base:int. forall the_count:int.
+  forall my_percents:(int,percent) farray. forall o:int.
+  forall o1:(int,character) farray. forall o2:t1. forall o3:int.
+  forall result:(int,percent) farray.
+  forall my_percents1:(int,percent) farray. forall result1:int.
+  forall the_count1:int. forall result2:int. forall the_count2:int.
+  (in_range4(default_width) -> (in_range5(default_base) ->
+  (((0 <= 2147483647) -> in_range3(the_count)) ->
+  ((((result = my_percents) and
+  (my_percents1 = generic_examples__my_percents__aggregate_def(5, 6, 7, 5, 3,
+  4, 19, 16, 5, 23, 45, 4, 3))) and
+  ((to_rep(my_percents__first) = to_rep(first4(mk2(0, 12)))) and
+  (to_rep(my_percents__last) = to_rep(last4(mk2(0, 12)))))) ->
+  (dynamic_property2(0, 255, to_rep(my_percents__first),
+  to_rep(my_percents__last)) -> ((((o = count({ elts =
+  temp___String_Literal_720(void); rt = mk(1, 17) }, 119)) and
+  in_range3(o)) and ((result1 = the_count) and (the_count1 = o))) ->
+  ((((dynamic_property1(1, 2147483647, 1, 17) and
+  ((temp___String_Literal_721(void) = o1) and (mk1(1, 17) = o2))) and
+  ((o3 = char_count({ elts1 = o1; rt1 = o2 }, 119)) and in_range3(o3))) and
+  ((result2 = the_count1) and (the_count2 = o3))) -> dynamic_property3(0,
+  255, to_rep(my_percents__first), to_rep(my_percents__last))))))))))

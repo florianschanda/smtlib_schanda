@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -273,14 +273,10 @@ axiom is_ok__2__def_axiom :
   rec__dic__parent__b = obj; rec__ext__ = obj1 }; attr__tag = obj2
   }) = true) <-> (not (obj = true))))
 
-logic temp___159 : bool
-
-logic temp___1591 : us_private
-
-logic temp___1592 : int
-
-axiom H : ((temp___1592 = us_tag) and (temp___159 = of_int(1)))
-
  (* File "dic.ads", line 27, characters 0-0 *)
-goal WP_parameter_def : (is_ok({ us_split_fields1 = { rec__dic__parent__b =
-  temp___159; rec__ext__ = temp___1591 }; attr__tag = temp___1592 }) = true)
+goal WP_parameter_def :
+  (forall temp___175:bool. forall temp___1751:us_private.
+  forall temp___1752:int. (((temp___1752 = us_tag) and
+  (temp___175 = of_int(1))) -> (is_ok({ us_split_fields1 = {
+  rec__dic__parent__b = temp___175; rec__ext__ = temp___1751 }; attr__tag =
+  temp___1752 }) = true)))

@@ -56,12 +56,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -73,6 +67,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1242,129 +1242,19 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
-logic tuition : money_type
-
-logic fees : money_type
-
-logic grants : money_type
-
-logic insurance : money_type
-
-logic o : money_type
-
-logic o1 : money_type
-
-logic o2 : money_type
-
-logic o3 : money_type
-
-logic o4 : money_type
-
-logic o5 : money_type
-
-logic o6 : money_type
-
-logic o7 : money_type
-
-logic o8 : money_type
-
-logic o9 : money_type
-
-logic o10 : money_type
-
-logic o11 : money_type
-
-logic o12 : money_type
-
-logic o13 : money_type
-
-logic o14 : money_type
-
-logic result : money_type
-
-logic grants1 : money_type
-
-logic result1 : money_type
-
-logic insurance1 : money_type
-
-logic result2 : money_type
-
-logic tuition1 : money_type
-
-logic result3 : money_type
-
-logic tuition2 : money_type
-
-logic result4 : money_type
-
-logic insurance2 : money_type
-
-logic result5 : money_type
-
-logic fees1 : money_type
-
-logic result6 : money_type
-
-logic fees2 : money_type
-
-logic result7 : money_type
-
-logic fees3 : money_type
-
-logic result8 : money_type
-
-logic fees4 : money_type
-
-logic result9 : money_type
-
-logic fees5 : money_type
-
-logic result10 : money_type
-
-logic fees6 : money_type
-
-logic result11 : money_type
-
-logic fees7 : money_type
-
-logic result12 : money_type
-
-logic fees8 : money_type
-
-logic result13 : money_type
-
-logic fees9 : money_type
-
-logic result14 : money_type
-
-logic grants2 : money_type
-
-logic result15 : money_type
-
-logic grants3 : money_type
-
-axiom H : ((0 <= to_fixed2(base_tuition)) and
-  (to_fixed2(base_tuition) <= 2000000))
-
-axiom H1 : (to_fixed2(o) = 0)
-
-axiom H2 : (result = grants)
-
-axiom H3 : (grants1 = o)
-
-axiom H4 : (to_fixed2(o1) = 0)
-
-axiom H5 : (result1 = insurance)
-
-axiom H6 : (insurance1 = o1)
-
-axiom H7 : ((((0 <= to_fixed2(tuition2)) and
-  (to_fixed2(tuition2) <= 3000000)) and ((0 <= to_fixed2(insurance2)) and
-  (to_fixed2(insurance2) <= 100000))) and ((10000 <= to_fixed2(fees4)) and
-  (to_fixed2(fees4) <= 750000)))
-
-axiom H8 : (384 <= to_fixed(student5))
-
  (* File "students3.ads", line 11, characters 0-0 *)
-goal WP_parameter_def : in_range5((to_fixed2(grants1) + 25000))
+goal WP_parameter_def :
+  (forall grants:money_type. forall insurance:money_type.
+  forall o:money_type. forall o1:money_type. forall result:money_type.
+  forall grants1:money_type. forall result1:money_type.
+  forall insurance1:money_type. forall tuition:money_type.
+  forall insurance2:money_type. forall fees:money_type.
+  (((0 <= to_fixed2(base_tuition)) and
+  (to_fixed2(base_tuition) <= 2000000)) -> (((to_fixed2(o) = 0) and
+  ((result = grants) and (grants1 = o))) -> (((to_fixed2(o1) = 0) and
+  ((result1 = insurance) and (insurance1 = o1))) ->
+  (((((0 <= to_fixed2(tuition)) and (to_fixed2(tuition) <= 3000000)) and
+  ((0 <= to_fixed2(insurance2)) and (to_fixed2(insurance2) <= 100000))) and
+  ((10000 <= to_fixed2(fees)) and (to_fixed2(fees) <= 750000))) ->
+  ((384 <= to_fixed(student5)) ->
+  in_range5((to_fixed2(grants1) + 25000))))))))

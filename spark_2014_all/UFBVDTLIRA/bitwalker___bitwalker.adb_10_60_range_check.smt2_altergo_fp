@@ -594,12 +594,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -611,6 +605,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -714,50 +714,19 @@ logic ret : bool
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 1)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 0)
+
 axiom ret__def_axiom : ((((7 - left) <  8) -> (ret = bool_ne(bw_and(byte,
-  lsl_bv(of_int(1), of_int((7 - left)))), of_int(0)))) and
-  ((not ((7 - left) <  8)) -> (ret = bool_ne(bw_and(byte, of_int(0)),
-  of_int(0)))))
-
-logic bitwalker__peekbit8__result : bool
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : bool
-
-logic bitwalker__peekbit8__ret__assume : bool
-
-logic o6 : int
-
-logic o7 : bool
-
-logic result : bool
-
-logic result1 : bool
-
-logic bitwalker__peekbit8__result1 : bool
-
-logic bitwalker__peekbit8__result2 : bool
-
-logic bitwalker__peekbit8__result3 : bool
-
-logic bitwalker__peekbit8__result4 : bool
-
-logic bitwalker__peekbit8__result5 : bool
-
-axiom H : true
-
-axiom H1 : in_range1(left)
-
-axiom H2 : (left <  8)
+  lsl_bv(rliteral, of_int((7 - left)))), rliteral1))) and
+  ((not ((7 - left) <  8)) -> (ret = bool_ne(bw_and(byte, rliteral1),
+  rliteral1))))
 
  (* File "bitwalker.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : in_range1((7 - left))
+goal WP_parameter_def : (in_range1(left) -> ((left <  8) ->
+  in_range1((7 - left))))

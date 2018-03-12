@@ -217,12 +217,6 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq3 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -234,6 +228,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq3 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -261,45 +261,9 @@ axiom is_max__def_axiom :
   x2 })]. ((is_max({ us_split_fields1 = { rec__unit1__t1__c1 = x;
   rec__ext__ = x1 }; attr__tag = x2 }) = true) <-> (to_rep(x) = 2147483647)))
 
-logic x__split_fields : integer
-
-logic x__split_fields1 : us_private
-
-logic o : int
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic o3 : us_private
-
-logic temp___151 : integer
-
-logic temp___1511 : us_private
-
-logic temp___1512 : int
-
-logic o4 : int
-
-logic result : integer
-
-logic result1 : us_private
-
-logic x__split_fields2 : integer
-
-logic x__split_fields3 : us_private
-
-logic x__split_fields4 : integer
-
-logic x__split_fields5 : us_private
-
-logic x__split_fields6 : integer
-
-logic x__split_fields7 : us_private
-
-axiom H : (not (is_max({ us_split_fields1 = { rec__unit1__t1__c1 =
-  x__split_fields; rec__ext__ = x__split_fields1 }; attr__tag = x__attr__tag
-  }) = true))
-
  (* File "unit1.ads", line 22, characters 0-0 *)
-goal WP_parameter_def : in_range((to_rep(x__split_fields) + 1))
+goal WP_parameter_def :
+  (forall x__split_fields:integer. forall x__split_fields1:us_private.
+  ((not (is_max({ us_split_fields1 = { rec__unit1__t1__c1 = x__split_fields;
+  rec__ext__ = x__split_fields1 }; attr__tag = x__attr__tag }) = true)) ->
+  in_range((to_rep(x__split_fields) + 1))))

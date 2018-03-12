@@ -348,503 +348,121 @@ logic b : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic one : int
-
-logic r__split_fields : integer
-
-logic r__split_fields1 : integer
-
-logic r__split_fields2 : integer
-
-logic r__split_fields3 : integer
-
-logic o : integer
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic o3 : integer
-
-logic o4 : integer
-
-logic o5 : integer
-
-logic o6 : integer
-
-logic o7 : integer
-
-logic o8 : integer
-
-logic o9 : integer
-
-logic o10 : integer
-
-logic o11 : integer
-
-logic temp___178 : integer
-
-logic temp___1781 : integer
-
-logic temp___1782 : integer
-
-logic temp___1783 : integer
-
-logic o12 : integer
-
-logic o13 : integer
-
-logic o14 : integer
-
-logic o15 : integer
-
-logic o16 : integer
-
-logic o17 : integer
-
-logic o18 : integer
-
-logic o19 : integer
-
-logic o20 : integer
-
-logic o21 : integer
-
-logic o22 : integer
-
-logic o23 : integer
-
-logic temp___179 : integer
-
-logic temp___1791 : integer
-
-logic temp___1792 : integer
-
-logic temp___1793 : integer
-
-logic o24 : integer
-
-logic o25 : integer
-
-logic o26 : integer
-
-logic o27 : integer
-
-logic o28 : integer
-
-logic o29 : integer
-
-logic o30 : integer
-
-logic o31 : integer
-
-logic o32 : integer
-
-logic o33 : integer
-
-logic o34 : integer
-
-logic o35 : integer
-
-logic temp___180 : integer
-
-logic temp___1801 : integer
-
-logic temp___1802 : integer
-
-logic temp___1803 : integer
-
-logic o36 : integer
-
-logic o37 : integer
-
-logic o38 : integer
-
-logic o39 : integer
-
-logic o40 : integer
-
-logic o41 : integer
-
-logic o42 : integer
-
-logic o43 : integer
-
-logic o44 : integer
-
-logic o45 : integer
-
-logic o46 : integer
-
-logic o47 : integer
-
-logic temp___181 : integer
-
-logic temp___1811 : integer
-
-logic temp___1812 : integer
-
-logic temp___1813 : integer
-
-logic o48 : integer
-
-logic o49 : integer
-
-logic o50 : integer
-
-logic o51 : integer
-
-logic o52 : integer
-
-logic o53 : integer
-
-logic o54 : integer
-
-logic o55 : integer
-
-logic o56 : integer
-
-logic o57 : integer
-
-logic o58 : integer
-
-logic o59 : integer
-
-logic temp___182 : integer
-
-logic temp___1821 : integer
-
-logic temp___1822 : integer
-
-logic temp___1823 : integer
-
-logic result : integer
-
-logic result1 : integer
-
-logic result2 : integer
-
-logic result3 : integer
-
-logic r__split_fields4 : integer
-
-logic r__split_fields5 : integer
-
-logic r__split_fields6 : integer
-
-logic r__split_fields7 : integer
-
-logic result4 : integer
-
-logic result5 : integer
-
-logic result6 : integer
-
-logic result7 : integer
-
-logic r__split_fields8 : integer
-
-logic r__split_fields9 : integer
-
-logic r__split_fields10 : integer
-
-logic r__split_fields11 : integer
-
-logic result8 : integer
-
-logic result9 : integer
-
-logic result10 : integer
-
-logic result11 : integer
-
-logic r__split_fields12 : integer
-
-logic r__split_fields13 : integer
-
-logic r__split_fields14 : integer
-
-logic r__split_fields15 : integer
-
-logic result12 : integer
-
-logic result13 : integer
-
-logic result14 : integer
-
-logic result15 : integer
-
-logic r__split_fields16 : integer
-
-logic r__split_fields17 : integer
-
-logic r__split_fields18 : integer
-
-logic r__split_fields19 : integer
-
-logic result16 : integer
-
-logic result17 : integer
-
-logic result18 : integer
-
-logic result19 : integer
-
-logic r__split_fields20 : integer
-
-logic r__split_fields21 : integer
-
-logic r__split_fields22 : integer
-
-logic r__split_fields23 : integer
-
-logic r__split_fields24 : integer
-
-logic r__split_fields25 : integer
-
-logic r__split_fields26 : integer
-
-logic r__split_fields27 : integer
-
-logic r__split_fields28 : integer
-
-logic r__split_fields29 : integer
-
-logic r__split_fields30 : integer
-
-logic r__split_fields31 : integer
-
-axiom H : in_range(one)
-
-axiom H1 : in_range(b)
-
-axiom H2 : (one = 1)
-
-axiom H3 : ((b = 1) -> (to_rep(o) = 2))
-
-axiom H4 : ((b = 1) -> (to_rep(o1) = one))
-
-axiom H5 : ((b = 1) -> (o1 = o2))
-
-axiom H6 : ((b = 1) -> (o = o3))
-
-axiom H7 : ((b = 1) -> (o4 = o2))
-
-axiom H8 : ((b = 1) -> (o5 = o3))
-
-axiom H9 : ((b = 1) -> (to_rep(o6) = 2))
-
-axiom H10 : ((b = 1) -> (to_rep(o7) = one))
-
-axiom H11 : ((b = 1) -> (o7 = o8))
-
-axiom H12 : ((b = 1) -> (o6 = o9))
-
-axiom H13 : ((b = 1) -> (o10 = o4))
-
-axiom H14 : ((b = 1) -> (o11 = o5))
-
-axiom H15 : ((b = 1) -> (temp___178 = o8))
-
-axiom H16 : ((b = 1) -> (temp___1781 = o9))
-
-axiom H17 : ((b = 1) -> (temp___1782 = o10))
-
-axiom H18 : ((b = 1) -> (temp___1783 = o11))
-
-axiom H19 : ((b = 1) -> ((result = r__split_fields) and
-  ((result1 = r__split_fields1) and ((result2 = r__split_fields2) and
-  (result3 = r__split_fields3)))))
-
-axiom H20 : ((b = 1) -> ((r__split_fields4 = temp___178) and
-  ((r__split_fields5 = temp___1781) and ((r__split_fields6 = temp___1782) and
-  (r__split_fields7 = temp___1783)))))
-
-axiom H21 : ((not (b = 1)) -> ((b = 2) -> (to_rep(o12) = one)))
-
-axiom H22 : ((not (b = 1)) -> ((b = 2) -> (to_rep(o13) = one)))
-
-axiom H23 : ((not (b = 1)) -> ((b = 2) -> (o13 = o14)))
-
-axiom H24 : ((not (b = 1)) -> ((b = 2) -> (o12 = o15)))
-
-axiom H25 : ((not (b = 1)) -> ((b = 2) -> (o16 = o14)))
-
-axiom H26 : ((not (b = 1)) -> ((b = 2) -> (o17 = o15)))
-
-axiom H27 : ((not (b = 1)) -> ((b = 2) -> (to_rep(o18) = one)))
-
-axiom H28 : ((not (b = 1)) -> ((b = 2) -> (to_rep(o19) = one)))
-
-axiom H29 : ((not (b = 1)) -> ((b = 2) -> (o19 = o20)))
-
-axiom H30 : ((not (b = 1)) -> ((b = 2) -> (o18 = o21)))
-
-axiom H31 : ((not (b = 1)) -> ((b = 2) -> (o22 = o16)))
-
-axiom H32 : ((not (b = 1)) -> ((b = 2) -> (o23 = o17)))
-
-axiom H33 : ((not (b = 1)) -> ((b = 2) -> ((temp___179 = o20) and
-  ((temp___1791 = o21) and ((temp___1792 = o22) and (temp___1793 = o23))))))
-
-axiom H34 : ((not (b = 1)) -> ((b = 2) -> ((result4 = r__split_fields) and
-  ((result5 = r__split_fields1) and ((result6 = r__split_fields2) and
-  (result7 = r__split_fields3))))))
-
-axiom H35 : ((not (b = 1)) -> ((b = 2) ->
-  ((r__split_fields8 = temp___179) and ((r__split_fields9 = temp___1791) and
-  ((r__split_fields10 = temp___1792) and
-  (r__split_fields11 = temp___1793))))))
-
-axiom H36 : ((not (b = 1)) -> ((not (b = 2)) -> ((b = 3) ->
-  (to_rep(o24) = one))))
-
-axiom H37 : ((not (b = 1)) -> ((not (b = 2)) -> ((b = 3) ->
-  (to_rep(o25) = 1))))
-
-axiom H38 : ((not (b = 1)) -> ((not (b = 2)) -> ((b = 3) -> ((o26 = o25) and
-  (o27 = o24)))))
-
-axiom H39 : ((not (b = 1)) -> ((not (b = 2)) -> ((b = 3) -> ((o28 = o26) and
-  (o29 = o27)))))
-
-axiom H40 : ((not (b = 1)) -> ((not (b = 2)) -> ((b = 3) ->
-  (to_rep(o30) = one))))
-
-axiom H41 : ((not (b = 1)) -> ((not (b = 2)) -> ((b = 3) ->
-  (to_rep(o31) = one))))
-
-axiom H42 : ((not (b = 1)) -> ((not (b = 2)) -> ((b = 3) -> ((o32 = o31) and
-  ((o33 = o30) and ((o34 = o28) and (o35 = o29)))))))
-
-axiom H43 : ((not (b = 1)) -> ((not (b = 2)) -> ((b = 3) ->
-  ((temp___180 = o32) and ((temp___1801 = o33) and ((temp___1802 = o34) and
-  (temp___1803 = o35)))))))
-
-axiom H44 : ((not (b = 1)) -> ((not (b = 2)) -> ((b = 3) ->
-  ((result8 = r__split_fields) and ((result9 = r__split_fields1) and
-  ((result10 = r__split_fields2) and (result11 = r__split_fields3)))))))
-
-axiom H45 : ((not (b = 1)) -> ((not (b = 2)) -> ((b = 3) ->
-  ((r__split_fields12 = temp___180) and
-  ((r__split_fields13 = temp___1801) and
-  ((r__split_fields14 = temp___1802) and
-  (r__split_fields15 = temp___1803)))))))
-
-axiom H46 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) -> ((b = 4) ->
-  (to_rep(o36) = one)))))
-
-axiom H47 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) -> ((b = 4) ->
-  (to_rep(o37) = 2)))))
-
-axiom H48 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) -> ((b = 4) ->
-  ((o38 = o37) and (o39 = o36))))))
-
-axiom H49 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) -> ((b = 4) ->
-  ((o40 = o38) and (o41 = o39))))))
-
-axiom H50 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) -> ((b = 4) ->
-  (to_rep(o42) = one)))))
-
-axiom H51 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) -> ((b = 4) ->
-  (to_rep(o43) = 2)))))
-
-axiom H52 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) -> ((b = 4) ->
-  ((o44 = o43) and ((o45 = o42) and ((o46 = o40) and (o47 = o41))))))))
-
-axiom H53 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) -> ((b = 4) ->
-  ((temp___181 = o44) and ((temp___1811 = o45) and ((temp___1812 = o46) and
-  (temp___1813 = o47))))))))
-
-axiom H54 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) -> ((b = 4) ->
-  ((result12 = r__split_fields) and ((result13 = r__split_fields1) and
-  ((result14 = r__split_fields2) and (result15 = r__split_fields3))))))))
-
-axiom H55 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) -> ((b = 4) ->
-  ((r__split_fields16 = temp___181) and
-  ((r__split_fields17 = temp___1811) and
-  ((r__split_fields18 = temp___1812) and
-  (r__split_fields19 = temp___1813))))))))
-
-axiom H56 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) ->
-  ((not (b = 4)) -> (to_rep(o48) = 2)))))
-
-axiom H57 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) ->
-  ((not (b = 4)) -> (to_rep(o49) = one)))))
-
-axiom H58 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) ->
-  ((not (b = 4)) -> ((o50 = o49) and (o51 = o48))))))
-
-axiom H59 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) ->
-  ((not (b = 4)) -> ((o52 = o50) and (o53 = o51))))))
-
-axiom H60 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) ->
-  ((not (b = 4)) -> (to_rep(o54) = 2)))))
-
-axiom H61 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) ->
-  ((not (b = 4)) -> (to_rep(o55) = one)))))
-
-axiom H62 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) ->
-  ((not (b = 4)) -> ((o56 = o55) and ((o57 = o54) and ((o58 = o52) and
-  (o59 = o53))))))))
-
-axiom H63 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) ->
-  ((not (b = 4)) -> ((temp___182 = o56) and ((temp___1821 = o57) and
-  ((temp___1822 = o58) and (temp___1823 = o59))))))))
-
-axiom H64 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) ->
-  ((not (b = 4)) -> ((result16 = r__split_fields) and
-  ((result17 = r__split_fields1) and ((result18 = r__split_fields2) and
-  (result19 = r__split_fields3))))))))
-
-axiom H65 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) ->
-  ((not (b = 4)) -> ((r__split_fields20 = temp___182) and
-  ((r__split_fields21 = temp___1821) and
-  ((r__split_fields22 = temp___1822) and
-  (r__split_fields23 = temp___1823))))))))
-
-axiom H66 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) ->
-  ((not (b = 4)) -> ((r__split_fields16 = r__split_fields20) and
-  ((r__split_fields17 = r__split_fields21) and
-  ((r__split_fields18 = r__split_fields22) and
-  (r__split_fields19 = r__split_fields23))))))))
-
-axiom H67 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) ->
-  ((r__split_fields12 = r__split_fields16) and
-  ((r__split_fields13 = r__split_fields17) and
-  ((r__split_fields14 = r__split_fields18) and
-  (r__split_fields15 = r__split_fields19)))))))
-
-axiom H68 : ((not (b = 1)) -> ((not (b = 2)) ->
-  ((r__split_fields8 = r__split_fields12) and
-  ((r__split_fields9 = r__split_fields13) and
-  ((r__split_fields10 = r__split_fields14) and
-  (r__split_fields11 = r__split_fields15))))))
-
-axiom H69 : ((not (b = 1)) -> ((r__split_fields4 = r__split_fields8) and
-  ((r__split_fields5 = r__split_fields9) and
-  ((r__split_fields6 = r__split_fields10) and
-  (r__split_fields7 = r__split_fields11)))))
-
-axiom H70 : ((r__split_fields24 = r__split_fields4) and
-  ((r__split_fields25 = r__split_fields5) and
-  ((r__split_fields26 = r__split_fields6) and
-  (r__split_fields27 = r__split_fields7))))
-
-axiom H71 : ((r__split_fields28 = r__split_fields4) and
-  ((r__split_fields29 = r__split_fields5) and
-  ((r__split_fields30 = r__split_fields6) and
-  (r__split_fields31 = r__split_fields7))))
-
-axiom H72 : (b = 1)
-
  (* File "rec_aggregate.ads", line 43, characters 0-0 *)
-goal WP_parameter_def : (bool_eq3({ us_split_fields3 = {
-  rec__rec_aggregate__r3__x = r__split_fields24; rec__rec_aggregate__r3__y =
-  r__split_fields25; rec__rec_aggregate__r3__z = { us_split_fields1 = {
-  rec__rec_aggregate__r2__x = r__split_fields26; rec__rec_aggregate__r2__y =
-  r__split_fields27 } } } }, { us_split_fields3 = {
-  rec__rec_aggregate__r3__x = of_rep(one); rec__rec_aggregate__r3__y =
-  of_rep(2); rec__rec_aggregate__r3__z = { us_split_fields1 = {
-  rec__rec_aggregate__r2__x = of_rep(one); rec__rec_aggregate__r2__y =
-  of_rep(2) } } } }) = true)
+goal WP_parameter_def :
+  (forall one:int. forall r__split_fields:integer.
+  forall r__split_fields1:integer. forall r__split_fields2:integer.
+  forall r__split_fields3:integer. forall o:integer. forall o1:integer.
+  forall o2:integer. forall o3:integer. forall o4:integer. forall o5:integer.
+  forall o6:integer. forall o7:integer. forall o8:integer. forall o9:integer.
+  forall o10:integer. forall o11:integer. forall temp___204:integer.
+  forall temp___2041:integer. forall temp___2042:integer.
+  forall temp___2043:integer. forall o12:integer. forall o13:integer.
+  forall o14:integer. forall o15:integer. forall o16:integer.
+  forall o17:integer. forall o18:integer. forall o19:integer.
+  forall o20:integer. forall o21:integer. forall o22:integer.
+  forall o23:integer. forall temp___205:integer. forall temp___2051:integer.
+  forall temp___2052:integer. forall temp___2053:integer. forall o24:integer.
+  forall o25:integer. forall o26:integer. forall o27:integer.
+  forall o28:integer. forall o29:integer. forall o30:integer.
+  forall o31:integer. forall o32:integer. forall o33:integer.
+  forall o34:integer. forall o35:integer. forall temp___206:integer.
+  forall temp___2061:integer. forall temp___2062:integer.
+  forall temp___2063:integer. forall o36:integer. forall o37:integer.
+  forall o38:integer. forall o39:integer. forall o40:integer.
+  forall o41:integer. forall o42:integer. forall o43:integer.
+  forall o44:integer. forall o45:integer. forall o46:integer.
+  forall o47:integer. forall temp___207:integer. forall temp___2071:integer.
+  forall temp___2072:integer. forall temp___2073:integer. forall o48:integer.
+  forall o49:integer. forall o50:us_split_fields. forall o51:us_rep.
+  forall o52:integer. forall o53:integer. forall o54:us_split_fields2.
+  forall temp___208:us_rep1. forall result:us_split_fields__ref1.
+  forall r__split_fields4:us_split_fields2.
+  forall result1:us_split_fields__ref1.
+  forall r__split_fields5:us_split_fields2.
+  forall result2:us_split_fields__ref1.
+  forall r__split_fields6:us_split_fields2.
+  forall result3:us_split_fields__ref1.
+  forall r__split_fields7:us_split_fields2.
+  forall result4:us_split_fields__ref1.
+  forall r__split_fields8:us_split_fields2.
+  forall r__split_fields9:us_split_fields__ref1.
+  forall r__split_fields10:us_split_fields2. ((in_range(one) and
+  (in_range(b) and ((one = 1) and ((((b = 1) and ((((((to_rep(o) = 2) and
+  ((to_rep(o1) = one) and ((o1 = o2) and (o = o3)))) and ((o4 = o2) and
+  (o5 = o3))) and ((to_rep(o6) = 2) and ((to_rep(o7) = one) and
+  ((o7 = o8) and ((o6 = o9) and ((o10 = o4) and (o11 = o5))))))) and
+  ((temp___204 = o8) and ((temp___2041 = o9) and ((temp___2042 = o10) and
+  (temp___2043 = o11))))) and ((result = { us_split_fields__content1 = {
+  rec__rec_aggregate__r3__x = r__split_fields; rec__rec_aggregate__r3__y =
+  r__split_fields1; rec__rec_aggregate__r3__z = { us_split_fields1 = {
+  rec__rec_aggregate__r2__x = r__split_fields2; rec__rec_aggregate__r2__y =
+  r__split_fields3 } } } }) and (r__split_fields4 = {
+  rec__rec_aggregate__r3__x = temp___204; rec__rec_aggregate__r3__y =
+  temp___2041; rec__rec_aggregate__r3__z = { us_split_fields1 = {
+  rec__rec_aggregate__r2__x = temp___2042; rec__rec_aggregate__r2__y =
+  temp___2043 } } })))) or ((not (b = 1)) and ((((b = 2) and
+  ((((((to_rep(o12) = one) and ((to_rep(o13) = one) and ((o13 = o14) and
+  (o12 = o15)))) and ((o16 = o14) and (o17 = o15))) and
+  ((to_rep(o18) = one) and ((to_rep(o19) = one) and ((o19 = o20) and
+  ((o18 = o21) and ((o22 = o16) and (o23 = o17))))))) and
+  ((o20 = temp___205) and ((o21 = temp___2051) and ((o22 = temp___2052) and
+  (o23 = temp___2053))))) and ((result1 = { us_split_fields__content1 = {
+  rec__rec_aggregate__r3__x = r__split_fields; rec__rec_aggregate__r3__y =
+  r__split_fields1; rec__rec_aggregate__r3__z = { us_split_fields1 = {
+  rec__rec_aggregate__r2__x = r__split_fields2; rec__rec_aggregate__r2__y =
+  r__split_fields3 } } } }) and (r__split_fields5 = {
+  rec__rec_aggregate__r3__x = temp___205; rec__rec_aggregate__r3__y =
+  temp___2051; rec__rec_aggregate__r3__z = { us_split_fields1 = {
+  rec__rec_aggregate__r2__x = temp___2052; rec__rec_aggregate__r2__y =
+  temp___2053 } } })))) or ((not (b = 2)) and ((((b = 3) and
+  ((((((to_rep(o24) = one) and ((to_rep(o25) = 1) and ((o25 = o26) and
+  (o24 = o27)))) and ((o28 = o26) and (o29 = o27))) and
+  ((to_rep(o30) = one) and ((to_rep(o31) = one) and ((o31 = o32) and
+  ((o30 = o33) and ((o34 = o28) and (o35 = o29))))))) and
+  ((temp___206 = o32) and ((temp___2061 = o33) and ((temp___2062 = o34) and
+  (temp___2063 = o35))))) and ((result2 = { us_split_fields__content1 = {
+  rec__rec_aggregate__r3__x = r__split_fields; rec__rec_aggregate__r3__y =
+  r__split_fields1; rec__rec_aggregate__r3__z = { us_split_fields1 = {
+  rec__rec_aggregate__r2__x = r__split_fields2; rec__rec_aggregate__r2__y =
+  r__split_fields3 } } } }) and (r__split_fields6 = {
+  rec__rec_aggregate__r3__x = temp___206; rec__rec_aggregate__r3__y =
+  temp___2061; rec__rec_aggregate__r3__z = { us_split_fields1 = {
+  rec__rec_aggregate__r2__x = temp___2062; rec__rec_aggregate__r2__y =
+  temp___2063 } } })))) or ((not (b = 3)) and ((((b = 4) and
+  ((((((to_rep(o36) = one) and ((to_rep(o37) = 2) and ((o37 = o38) and
+  (o36 = o39)))) and ((o40 = o38) and (o41 = o39))) and
+  ((to_rep(o42) = one) and ((to_rep(o43) = 2) and ((o43 = o44) and
+  ((o42 = o45) and ((o46 = o40) and (o47 = o41))))))) and
+  ((temp___207 = o44) and ((temp___2071 = o45) and ((temp___2072 = o46) and
+  (temp___2073 = o47))))) and ((result3 = { us_split_fields__content1 = {
+  rec__rec_aggregate__r3__x = r__split_fields; rec__rec_aggregate__r3__y =
+  r__split_fields1; rec__rec_aggregate__r3__z = { us_split_fields1 = {
+  rec__rec_aggregate__r2__x = r__split_fields2; rec__rec_aggregate__r2__y =
+  r__split_fields3 } } } }) and (r__split_fields7 = {
+  rec__rec_aggregate__r3__x = temp___207; rec__rec_aggregate__r3__y =
+  temp___2071; rec__rec_aggregate__r3__z = { us_split_fields1 = {
+  rec__rec_aggregate__r2__x = temp___2072; rec__rec_aggregate__r2__y =
+  temp___2073 } } })))) or ((not (b = 4)) and (((((((to_rep(o48) = 2) and
+  ((to_rep(o49) = one) and (o50 = { rec__rec_aggregate__r2__x = o49;
+  rec__rec_aggregate__r2__y = o48 }))) and (o51 = { us_split_fields1 = o50
+  })) and ((to_rep(o52) = 2) and ((to_rep(o53) = one) and (o54 = {
+  rec__rec_aggregate__r3__x = o53; rec__rec_aggregate__r3__y = o52;
+  rec__rec_aggregate__r3__z = o51 })))) and (temp___208 = {
+  us_split_fields3 = o54 })) and ((result4 = { us_split_fields__content1 = {
+  rec__rec_aggregate__r3__x = r__split_fields; rec__rec_aggregate__r3__y =
+  r__split_fields1; rec__rec_aggregate__r3__z = { us_split_fields1 = {
+  rec__rec_aggregate__r2__x = r__split_fields2; rec__rec_aggregate__r2__y =
+  r__split_fields3 } } } }) and
+  (r__split_fields8 = (temp___208).us_split_fields3))) and
+  (r__split_fields7 = r__split_fields8)))) and
+  (r__split_fields6 = r__split_fields7)))) and
+  (r__split_fields5 = r__split_fields6)))) and
+  (r__split_fields4 = r__split_fields5)))) and ((r__split_fields9 = {
+  us_split_fields__content1 = r__split_fields4 }) and
+  (r__split_fields10 = r__split_fields4)))))) -> ((b = 1) -> (bool_eq3({
+  us_split_fields3 = (r__split_fields9).us_split_fields__content1 }, {
+  us_split_fields3 = { rec__rec_aggregate__r3__x = of_rep(one);
+  rec__rec_aggregate__r3__y = of_rep(2); rec__rec_aggregate__r3__z = {
+  us_split_fields1 = { rec__rec_aggregate__r2__x = of_rep(one);
+  rec__rec_aggregate__r2__y = of_rep(2) } } } }) = true))))

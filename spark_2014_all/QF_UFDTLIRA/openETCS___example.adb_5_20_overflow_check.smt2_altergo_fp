@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -171,48 +171,10 @@ logic maximum : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic example__saturated_sum__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : bool
-
-logic result1 : int
-
-logic example__saturated_sum__result1 : int
-
-logic result2 : int
-
-logic example__saturated_sum__result2 : int
-
-logic example__saturated_sum__result3 : int
-
-logic example__saturated_sum__result4 : int
-
-logic example__saturated_sum__result5 : int
-
-logic example__saturated_sum__result6 : int
-
-logic example__saturated_sum__result7 : int
-
-logic example__saturated_sum__result8 : int
-
-axiom H : in_range2(x1)
-
-axiom H1 : in_range2(x2)
-
-axiom H2 : in_range2(maximum)
-
-axiom H3 : ((x1 <= 1073741823) and (x2 <= 1073741823))
-
-axiom H4 : ((o = (x1 + x2)) and in_range1((x1 + x2)))
-
-axiom H5 : (((o <= maximum) -> (result = true)) and ((not (o <= maximum)) ->
-  (result = false)))
-
-axiom H6 : (result = true)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range1((x1 + x2))
+goal WP_parameter_def :
+  (forall o:int. forall result:bool. (in_range2(x1) -> (in_range2(x2) ->
+  (in_range2(maximum) -> (((x1 <= 1073741823) and (x2 <= 1073741823)) ->
+  ((((o = (x1 + x2)) and in_range1((x1 + x2))) and (((o <= maximum) and
+  (result = true)) or ((not (o <= maximum)) and (result = false)))) ->
+  ((result = true) -> in_range1((x1 + x2)))))))))

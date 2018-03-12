@@ -1152,26 +1152,14 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic u : t
-
-logic o : t
-
-logic o1 : t
-
-axiom H : tqtisFinite(x)
-
-axiom H1 : in_range1(y)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
 
-axiom H2 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(u))
-
-axiom H3 : ((y <  0) -> (not (x = zeroF)))
-
-axiom H4 : (o = power(x, y))
-
  (* File "division_by_zero.adb", line 32, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(o)
+goal WP_parameter_def :
+  (forall u:t. forall o:t. (tqtisFinite(x) -> (in_range1(y) ->
+  ((le(neg(fliteral1), fliteral1) -> tqtisFinite(u)) -> (((((y <  0) and
+  (not (x = zeroF))) or (not (y <  0))) and (o = power(x, y))) ->
+  tqtisFinite(o))))))

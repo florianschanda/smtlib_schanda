@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -352,83 +352,22 @@ function optional_pair__ref___projection(a: optional_pair__ref) : us_rep1 =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x__split_fields : bool
-
-logic x__split_fields1 : unsigned_byte
-
-logic x__split_fields2 : unsigned_byte
-
-logic o : unsigned_byte
-
-logic o1 : unsigned_byte
-
-logic o2 : unsigned_byte
-
-logic o3 : unsigned_byte
-
-logic o4 : unsigned_byte
-
-logic o5 : unsigned_byte
-
-logic o6 : bool
-
-logic o7 : unsigned_byte
-
-logic o8 : unsigned_byte
-
-logic temp___425 : bool
-
-logic temp___4251 : unsigned_byte
-
-logic temp___4252 : unsigned_byte
-
-logic result : bool
-
-logic result1 : unsigned_byte
-
-logic result2 : unsigned_byte
-
-logic x__split_fields3 : bool
-
-logic x__split_fields4 : unsigned_byte
-
-logic x__split_fields5 : unsigned_byte
-
-axiom H : (to_rep(o) = 10)
-
-axiom H1 : (to_rep(o1) = 5)
-
-axiom H2 : (o1 = o2)
-
-axiom H3 : (o = o3)
-
-axiom H4 : (o4 = o2)
-
-axiom H5 : (o5 = o3)
-
-axiom H6 : (of_int(1) = o6)
-
-axiom H7 : (o7 = o4)
-
-axiom H8 : (o8 = o5)
-
-axiom H9 : (temp___425 = o6)
-
-axiom H10 : (temp___4251 = o7)
-
-axiom H11 : (temp___4252 = o8)
-
-axiom H12 : (result = x__split_fields)
-
-axiom H13 : (result1 = x__split_fields1)
-
-axiom H14 : (result2 = x__split_fields2)
-
-axiom H15 : (temp___425 = x__split_fields3)
-
-axiom H16 : (temp___4251 = x__split_fields4)
-
-axiom H17 : (temp___4252 = x__split_fields5)
-
  (* File "records.adb", line 421, characters 0-0 *)
-goal WP_parameter_def : (not (x__split_fields3 = true))
+goal WP_parameter_def :
+  (forall x__split_fields:bool. forall x__split_fields1:unsigned_byte.
+  forall x__split_fields2:unsigned_byte. forall o:unsigned_byte.
+  forall o1:unsigned_byte. forall o2:unsigned_byte. forall o3:unsigned_byte.
+  forall o4:unsigned_byte. forall o5:unsigned_byte. forall o6:bool.
+  forall o7:unsigned_byte. forall o8:unsigned_byte. forall temp___458:bool.
+  forall temp___4581:unsigned_byte. forall temp___4582:unsigned_byte.
+  forall result:bool. forall result1:unsigned_byte.
+  forall result2:unsigned_byte. forall x__split_fields3:bool.
+  forall x__split_fields4:unsigned_byte.
+  forall x__split_fields5:unsigned_byte. (((((((to_rep(o) = 10) and
+  ((to_rep(o1) = 5) and ((o1 = o2) and (o = o3)))) and ((o4 = o2) and
+  (o5 = o3))) and ((of_int(1) = o6) and ((o7 = o4) and (o8 = o5)))) and
+  ((temp___458 = o6) and ((temp___4581 = o7) and (temp___4582 = o8)))) and
+  (((result = x__split_fields) and ((result1 = x__split_fields1) and
+  (result2 = x__split_fields2))) and ((temp___458 = x__split_fields3) and
+  ((temp___4581 = x__split_fields4) and
+  (temp___4582 = x__split_fields5))))) -> (not (x__split_fields3 = true))))

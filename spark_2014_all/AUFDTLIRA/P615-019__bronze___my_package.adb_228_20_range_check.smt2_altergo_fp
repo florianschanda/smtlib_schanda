@@ -173,24 +173,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> (int,natural) farray
-
-axiom concat_def :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : natural, int -> (int,natural) farray
-
-axiom singleton_def :
-  (forall v:natural.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq3 : (int,natural) farray, int, int, (int,natural) farray, int,
   int -> bool
 
@@ -201,17 +183,17 @@ axiom bool_eq_def2 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq3(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq3(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -221,37 +203,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq3(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq3(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep1((a[(i + 1)])) <  to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq3(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep1((b[(i + 1)])) <  to_rep1((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -390,241 +344,63 @@ logic attr__ATTRIBUTE_ADDRESS6 : int
 logic my_package__bad_aliasing__a__aggregate_def : int -> (int,natural) farray
 
 axiom def_axiom :
-  (forall temp___193:int.
-  (forall temp___194:int.
-  ((my_package__bad_aliasing__a__aggregate_def(temp___193)[temp___194]) = of_rep1(temp___193))))
-
-logic x : int
-
-logic y : int
-
-logic xx__split_fields : integer
-
-logic xx__split_fields1 : integer
-
-logic z__split_fields : integer
-
-logic z__split_fields1 : integer
-
-logic a : (int,natural) farray
-
-logic i : int
-
-logic o : integer
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic o3 : integer
-
-logic my_package__bad_aliasing__z__assume : integer
-
-logic my_package__bad_aliasing__z__assume1 : integer
-
-logic o4 : integer
-
-logic o5 : integer
-
-logic o6 : integer
-
-logic temp___198 : integer
-
-logic temp___1981 : integer
-
-logic o7 : int
-
-logic o8 : natural
-
-logic o9 : int
-
-logic o10 : int
-
-logic my_package__swap__y : int
-
-logic o11 : int
-
-logic my_package__swap__x : int
-
-logic o12 : int
-
-logic o13 : natural
-
-logic o14 : (int,natural) farray
-
-logic o15 : int
-
-logic o16 : natural
-
-logic result : integer
-
-logic result1 : integer
-
-logic z__split_fields2 : integer
-
-logic z__split_fields3 : integer
-
-logic result2 : (int,natural) farray
-
-logic a1 : (int,natural) farray
-
-logic result3 : int
-
-logic i1 : int
-
-logic y1 : int
-
-logic my_package__swap_with_y__x : int
-
-logic result4 : int
-
-logic y2 : int
-
-logic my_package__move_x_to_y__y__fields : integer
-
-logic my_package__move_x_to_y__y__fields1 : integer
-
-logic result5 : integer
-
-logic result6 : integer
-
-logic z__split_fields4 : integer
-
-logic z__split_fields5 : integer
-
-logic y3 : int
-
-logic y4 : int
-
-logic my_package__move_x_to_y2__y__fields : integer
-
-logic my_package__move_x_to_y2__y__fields1 : integer
-
-logic result7 : integer
-
-logic result8 : integer
-
-logic xx__split_fields2 : integer
-
-logic xx__split_fields3 : integer
-
-logic my_package__move_x_to_y2__2__y : int
-
-logic result9 : int
-
-logic x1 : int
-
-logic my_package__only_read_f2_of_x__y : int
-
-logic result10 : integer
-
-logic result11 : integer
-
-logic xx__split_fields4 : integer
-
-logic xx__split_fields5 : integer
-
-logic my_package__swap__y1 : int
-
-logic my_package__swap__x1 : int
-
-logic result12 : (int,natural) farray
-
-logic a2 : (int,natural) farray
-
-axiom H : in_range(x)
-
-axiom H1 : in_range(y)
-
-axiom H2 : (to_rep(o) = 0)
-
-axiom H3 : (to_rep(o1) = 0)
-
-axiom H4 : (o1 = o2)
-
-axiom H5 : (o = o3)
-
-axiom H6 : (my_package__bad_aliasing__z__assume = o2)
-
-axiom H7 : (my_package__bad_aliasing__z__assume1 = o3)
-
-axiom H8 : (result = z__split_fields)
-
-axiom H9 : (result1 = z__split_fields1)
-
-axiom H10 : (my_package__bad_aliasing__z__assume = z__split_fields2)
-
-axiom H11 : (my_package__bad_aliasing__z__assume1 = z__split_fields3)
-
-axiom H12 : (result2 = a)
-
-axiom H13 : (a1 = my_package__bad_aliasing__a__aggregate_def(0))
-
-axiom H14 : (result3 = i)
-
-axiom H15 : (i1 = 2)
-
-axiom H16 : in_range(i1)
-
-axiom H17 : (in_range(my_package__swap_with_y__x) and in_range(y1))
-
-axiom H18 : (result4 = y1)
-
-axiom H19 : (y2 = my_package__swap_with_y__x)
-
-axiom H20 : true
-
-axiom H21 : ((result5 = z__split_fields2) and (result6 = z__split_fields3))
-
-axiom H22 : ((z__split_fields4 = my_package__move_x_to_y__y__fields) and
-  (z__split_fields5 = my_package__move_x_to_y__y__fields1))
-
-axiom H23 : in_range(y3)
-
-axiom H24 : in_range(y4)
-
-axiom H25 : true
-
-axiom H26 : ((result7 = xx__split_fields) and (result8 = xx__split_fields1))
-
-axiom H27 : ((xx__split_fields2 = my_package__move_x_to_y2__y__fields) and
-  (xx__split_fields3 = my_package__move_x_to_y2__y__fields1))
-
-axiom H28 : in_range(my_package__move_x_to_y2__2__y)
-
-axiom H29 : (result9 = x)
-
-axiom H30 : (x1 = my_package__move_x_to_y2__2__y)
-
-axiom H31 : true
-
-axiom H32 : in_range(my_package__only_read_f2_of_x__y)
-
-axiom H33 : (to_rep(o4) = my_package__only_read_f2_of_x__y)
-
-axiom H34 : (o4 = o5)
-
-axiom H35 : (xx__split_fields3 = o6)
-
-axiom H36 : (temp___198 = o5)
-
-axiom H37 : (temp___1981 = o6)
-
-axiom H38 : ((result10 = xx__split_fields2) and
-  (result11 = xx__split_fields3))
-
-axiom H39 : ((xx__split_fields4 = temp___198) and
-  (xx__split_fields5 = temp___1981))
-
-axiom H40 : (i1 = 2)
-
-axiom H41 : ((1 <= i1) and (i1 <= 2))
-
-axiom H42 : (o7 = i1)
-
-axiom H43 : (o8 = (a1[o7]))
-
-axiom H44 : (o9 = to_rep1(o8))
-
- (* File "my_package.adb", line 195, characters 0-0 *)
-goal WP_parameter_def : in_range(o9)
+  (forall temp___221:int. (in_range1(temp___221) ->
+  (forall temp___222:int.
+  (to_rep1((my_package__bad_aliasing__a__aggregate_def(temp___221)[temp___222])) = temp___221))))
+
+ (* File "my_package.adb", line 202, characters 0-0 *)
+goal WP_parameter_def :
+  (forall x:int. forall y:int. forall xx__split_fields:integer.
+  forall xx__split_fields1:integer. forall z__split_fields:integer.
+  forall z__split_fields1:integer. forall a:(int,natural) farray.
+  forall i:int. forall o:integer. forall o1:integer. forall o2:integer.
+  forall o3:integer. forall my_package__bad_aliasing__z__assume:integer.
+  forall my_package__bad_aliasing__z__assume1:integer. forall o4:integer.
+  forall o5:integer. forall o6:integer. forall temp___226:integer.
+  forall temp___2261:integer. forall o7:int. forall o8:natural.
+  forall o9:int. forall result:integer. forall result1:integer.
+  forall z__split_fields2:integer. forall z__split_fields3:integer.
+  forall result2:(int,natural) farray. forall a1:(int,natural) farray.
+  forall result3:int. forall i1:int. forall y1:int.
+  forall my_package__swap_with_y__x:int. forall result4:int. forall y2:int.
+  forall my_package__move_x_to_y__y__fields:integer.
+  forall my_package__move_x_to_y__y__fields1:integer. forall result5:integer.
+  forall result6:integer. forall z__split_fields4:integer.
+  forall z__split_fields5:integer. forall y3:int. forall y4:int.
+  forall my_package__move_x_to_y2__y__fields:integer.
+  forall my_package__move_x_to_y2__y__fields1:integer.
+  forall result7:integer. forall result8:integer.
+  forall xx__split_fields2:integer. forall xx__split_fields3:integer.
+  forall my_package__move_x_to_y2__2__y:int. forall result9:int.
+  forall x1:int. forall my_package__only_read_f2_of_x__y:int.
+  forall result10:integer. forall result11:integer.
+  forall xx__split_fields4:integer. forall xx__split_fields5:integer.
+  (in_range(x) -> (in_range(y) -> (((((to_rep(o) = 0) and
+  ((to_rep(o1) = 0) and ((o1 = o2) and (o = o3)))) and
+  ((my_package__bad_aliasing__z__assume = o2) and
+  (my_package__bad_aliasing__z__assume1 = o3))) and
+  (((result = z__split_fields) and (result1 = z__split_fields1)) and
+  ((my_package__bad_aliasing__z__assume = z__split_fields2) and
+  (my_package__bad_aliasing__z__assume1 = z__split_fields3)))) ->
+  (((result2 = a) and
+  (a1 = my_package__bad_aliasing__a__aggregate_def(0))) ->
+  (((result3 = i) and (i1 = 2)) -> (in_range(i1) ->
+  (((in_range(my_package__swap_with_y__x) and in_range(y1)) and
+  ((result4 = y1) and (y2 = my_package__swap_with_y__x))) ->
+  ((((result5 = z__split_fields2) and (result6 = z__split_fields3)) and
+  ((z__split_fields4 = my_package__move_x_to_y__y__fields) and
+  (z__split_fields5 = my_package__move_x_to_y__y__fields1))) ->
+  (in_range(y3) -> (in_range(y4) -> ((((result7 = xx__split_fields) and
+  (result8 = xx__split_fields1)) and
+  ((my_package__move_x_to_y2__y__fields = xx__split_fields2) and
+  (my_package__move_x_to_y2__y__fields1 = xx__split_fields3))) ->
+  ((in_range(my_package__move_x_to_y2__2__y) and ((result9 = x) and
+  (x1 = my_package__move_x_to_y2__2__y))) ->
+  ((in_range(my_package__only_read_f2_of_x__y) and
+  ((((to_rep(o4) = my_package__only_read_f2_of_x__y) and ((o4 = o5) and
+  (xx__split_fields3 = o6))) and ((temp___226 = o5) and
+  (temp___2261 = o6))) and (((result10 = xx__split_fields2) and
+  (result11 = xx__split_fields3)) and ((xx__split_fields4 = temp___226) and
+  (xx__split_fields5 = temp___2261))))) -> ((i1 = 2) -> ((((((1 <= i1) and
+  (i1 <= 2)) and (o7 = i1)) and (o8 = (a1[o7]))) and (o9 = to_rep1(o8))) ->
+  in_range(o9)))))))))))))))))

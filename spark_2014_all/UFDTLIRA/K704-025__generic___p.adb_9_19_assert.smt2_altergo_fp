@@ -142,21 +142,8 @@ axiom echo__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : int
-
-logic o : int
-
-logic result : int
-
-logic x1 : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range(x))
-
-axiom H1 : ((o = echo(3)) and (in_range1(o) and (o = 3)))
-
-axiom H2 : (result = x)
-
-axiom H3 : (x1 = o)
-
  (* File "gen.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : (x1 = 3)
+goal WP_parameter_def :
+  (forall x:int. forall o:int. forall result:int. forall x1:int.
+  ((((- 2147483648) <= 2147483647) -> in_range(x)) -> ((((o = echo(3)) and
+  (in_range1(o) and (o = 3))) and ((result = x) and (x1 = o))) -> (x1 = 3))))

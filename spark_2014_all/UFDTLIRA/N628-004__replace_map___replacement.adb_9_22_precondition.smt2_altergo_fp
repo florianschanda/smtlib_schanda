@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -825,8 +825,8 @@ axiom keys__post_axiom :
   rec__replacement__inverse_sets__map__capacity = container };
   us_split_fields1 = { rec__replacement__inverse_sets__map = container1 }
   })) and
-  (forall temp___399:int. ((in_range5(temp___399) and ((1 <= temp___399) and
-  (temp___399 <= (0 + length(keys({ us_split_discrs1 = {
+  (forall temp___442:int. ((in_range5(temp___442) and ((1 <= temp___442) and
+  (temp___442 <= (0 + length(keys({ us_split_discrs1 = {
   rec__replacement__inverse_sets__map__capacity = container };
   us_split_fields1 = { rec__replacement__inverse_sets__map = container1 }
   })))))) -> (has_key1(model__({ us_split_discrs1 = {
@@ -835,7 +835,7 @@ axiom keys__post_axiom :
   get(keys({ us_split_discrs1 = {
   rec__replacement__inverse_sets__map__capacity = container };
   us_split_fields1 = { rec__replacement__inverse_sets__map = container1 } }),
-  temp___399)) = true)))) and
+  temp___442)) = true)))) and
   (forall key1:int. ((in_range4(key1) and (has_key1(model__({
   us_split_discrs1 = { rec__replacement__inverse_sets__map__capacity =
   container }; us_split_fields1 = { rec__replacement__inverse_sets__map =
@@ -1320,122 +1320,6 @@ axiom w_get__post_axiom1 :
   (forall witness2:int [w_get1(container, witness2)].
   ((in_range2(witness2) and (has_witness1(container, witness2) = true)) ->
   in_range8(w_get1(container, witness2)))))
-
-logic d__split_fields : us_main_type
-
-logic c : count_type
-
-logic o : bool
-
-logic c1 : count_type
-
-logic o1 : bool
-
-logic o2 : bool
-
-logic o3 : int
-
-logic o4 : int
-
-logic replacement__inverse_sets__replace__container__fields : us_main_type
-
-logic result : us_main_type
-
-logic d__split_fields1 : us_main_type
-
-logic result1 : bool
-
-axiom H : in_range1(k)
-
-axiom H1 : (has_key1(model__({ us_split_discrs1 = {
-  rec__replacement__inverse_sets__map__capacity = d__split_discrs };
-  us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields
-  } }), k) = true)
-
-axiom H2 : ((d__split_discrs = d_old) and (d__split_fields = d_old1))
-
-axiom H3 : ((((((oeq2(positions({ us_split_discrs1 = {
-  rec__replacement__inverse_sets__map__capacity = d__split_discrs };
-  us_split_fields1 = { rec__replacement__inverse_sets__map =
-  replacement__inverse_sets__replace__container__fields } }), positions({
-  us_split_discrs1 = { rec__replacement__inverse_sets__map__capacity =
-  d__split_discrs }; us_split_fields1 = {
-  rec__replacement__inverse_sets__map = d__split_fields } })) = true) and
-  (get(keys({ us_split_discrs1 = {
-  rec__replacement__inverse_sets__map__capacity = d__split_discrs };
-  us_split_fields1 = { rec__replacement__inverse_sets__map =
-  replacement__inverse_sets__replace__container__fields } }), find(keys({
-  us_split_discrs1 = { rec__replacement__inverse_sets__map__capacity =
-  d__split_discrs }; us_split_fields1 = {
-  rec__replacement__inverse_sets__map =
-  replacement__inverse_sets__replace__container__fields } }), k)) = k)) and
-  (((bool_eq1(length(keys({ us_split_discrs1 = {
-  rec__replacement__inverse_sets__map__capacity = d__split_discrs };
-  us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields
-  } })), length(keys({ us_split_discrs1 = {
-  rec__replacement__inverse_sets__map__capacity = d__split_discrs };
-  us_split_fields1 = { rec__replacement__inverse_sets__map =
-  replacement__inverse_sets__replace__container__fields } }))) = true) ->
-  (forall i:int. (((1 <= i) and (i <= (0 + length(keys({ us_split_discrs1 = {
-  rec__replacement__inverse_sets__map__capacity = d__split_discrs };
-  us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields
-  } }))))) -> ((not (i = find(keys({ us_split_discrs1 = {
-  rec__replacement__inverse_sets__map__capacity = d__split_discrs };
-  us_split_fields1 = { rec__replacement__inverse_sets__map =
-  replacement__inverse_sets__replace__container__fields } }), k))) ->
-  (get(keys({ us_split_discrs1 = {
-  rec__replacement__inverse_sets__map__capacity = d__split_discrs };
-  us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields
-  } }), i) = get(keys({ us_split_discrs1 = {
-  rec__replacement__inverse_sets__map__capacity = d__split_discrs };
-  us_split_fields1 = { rec__replacement__inverse_sets__map =
-  replacement__inverse_sets__replace__container__fields } }), i)))))) and
-  (not (bool_eq1(length(keys({ us_split_discrs1 = {
-  rec__replacement__inverse_sets__map__capacity = d__split_discrs };
-  us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields
-  } })), length(keys({ us_split_discrs1 = {
-  rec__replacement__inverse_sets__map__capacity = d__split_discrs };
-  us_split_fields1 = { rec__replacement__inverse_sets__map =
-  replacement__inverse_sets__replace__container__fields }
-  }))) = false)))) and (get2(model__({ us_split_discrs1 = {
-  rec__replacement__inverse_sets__map__capacity = d__split_discrs };
-  us_split_fields1 = { rec__replacement__inverse_sets__map =
-  replacement__inverse_sets__replace__container__fields } }), k) = 0)) and
-  (match_bool(keys_included(model__({ us_split_discrs1 = {
-  rec__replacement__inverse_sets__map__capacity = d__split_discrs };
-  us_split_fields1 = { rec__replacement__inverse_sets__map =
-  replacement__inverse_sets__replace__container__fields } }), model__({
-  us_split_discrs1 = { rec__replacement__inverse_sets__map__capacity =
-  d__split_discrs }; us_split_fields1 = {
-  rec__replacement__inverse_sets__map = d__split_fields } })),
-  keys_included(model__({ us_split_discrs1 = {
-  rec__replacement__inverse_sets__map__capacity = d__split_discrs };
-  us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields
-  } }), model__({ us_split_discrs1 = {
-  rec__replacement__inverse_sets__map__capacity = d__split_discrs };
-  us_split_fields1 = { rec__replacement__inverse_sets__map =
-  replacement__inverse_sets__replace__container__fields } })),
-  false) = true)) and (elements_equal_except(model__({ us_split_discrs1 = {
-  rec__replacement__inverse_sets__map__capacity = d__split_discrs };
-  us_split_fields1 = { rec__replacement__inverse_sets__map =
-  replacement__inverse_sets__replace__container__fields } }), model__({
-  us_split_discrs1 = { rec__replacement__inverse_sets__map__capacity =
-  d__split_discrs }; us_split_fields1 = {
-  rec__replacement__inverse_sets__map = d__split_fields } }), k) = true))
-
-axiom H4 : (result = d__split_fields)
-
-axiom H5 :
-  (d__split_fields1 = replacement__inverse_sets__replace__container__fields)
-
-axiom H6 :
-  (forall c2:us_rep1. ((has_key(positions({ us_split_discrs1 = {
-  rec__replacement__inverse_sets__map__capacity = d_old }; us_split_fields1 =
-  { rec__replacement__inverse_sets__map = d_old1 } }), c2) = true) ->
-  (has_key(positions({ us_split_discrs1 = {
-  rec__replacement__inverse_sets__map__capacity = d__split_discrs };
-  us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields1
-  } }), c2) = true)))
 
  (* File "a-cforma.ads", line 997, characters 0-0 *)
 goal WP_parameter_def : true

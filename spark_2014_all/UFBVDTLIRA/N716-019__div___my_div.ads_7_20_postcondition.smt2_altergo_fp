@@ -655,41 +655,19 @@ function my_int__ref___projection(a: my_int__ref) : my_int =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : t
+logic rliteral : t
 
-logic result : t
+axiom rliteral_axiom : (tqtint(rliteral) = 4)
 
-logic x1 : t
+logic rliteral1 : t
 
-logic result1 : t
-
-logic x2 : t
-
-logic result2 : t
-
-logic x3 : t
-
-logic x4 : t
-
-logic x5 : t
-
-axiom H : true
-
-axiom H1 : (result = x)
-
-axiom H2 : (x1 = udiv(x, of_int(4)))
-
-axiom H3 : (x1 = result1)
-
-axiom H4 : (x2 = udiv(x1, of_int(4)))
-
-axiom H5 : (x2 = result2)
-
-axiom H6 : (x3 = udiv(x2, of_int(4)))
-
-axiom H7 : (x3 = x4)
-
-axiom H8 : (x5 = x3)
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 64)
 
  (* File "my_div.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : (x4 = udiv(x, of_int(64)))
+goal WP_parameter_def :
+  (forall x:t. forall result:t. forall x1:t. forall result1:t. forall x2:t.
+  forall result2:t. forall x3:t. forall x4:t. forall x5:t. ((((({
+  t__content = result } = { t__content = x }) and (x1 = udiv(x,
+  rliteral))) and (((x1 = result1) and (x2 = udiv(x1, rliteral))) and
+  ((x2 = result2) and (x3 = udiv(x2, rliteral))))) and ((x3 = x4) and
+  (x5 = x3))) -> (x4 = udiv(x, rliteral1))))

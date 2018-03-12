@@ -599,12 +599,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -616,6 +610,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1955,8 +1955,8 @@ axiom elements__post_axiom :
   })) = length({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
   container; rec__my_sets__n__set__modulus = container1 }; us_split_fields3 =
   { rec__my_sets__n__set = container2 } })) and
-  (forall temp___761:int. ((in_range4(temp___761) and ((1 <= temp___761) and
-  (temp___761 <= (0 + length2(elements({ us_split_discrs1 = {
+  (forall temp___818:int. ((in_range4(temp___818) and ((1 <= temp___818) and
+  (temp___818 <= (0 + length2(elements({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = container; rec__my_sets__n__set__modulus =
   container1 }; us_split_fields3 = { rec__my_sets__n__set = container2 }
   })))))) -> (contains(model__({ us_split_discrs1 = {
@@ -1964,7 +1964,7 @@ axiom elements__post_axiom :
   container1 }; us_split_fields3 = { rec__my_sets__n__set = container2 } }),
   get(elements({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
   container; rec__my_sets__n__set__modulus = container1 }; us_split_fields3 =
-  { rec__my_sets__n__set = container2 } }), temp___761)) = true)))) and
+  { rec__my_sets__n__set = container2 } }), temp___818)) = true)))) and
   (forall item:positive. forall item1:integer. ((contains(model__({
   us_split_discrs1 = { rec__my_sets__n__set__capacity = container;
   rec__my_sets__n__set__modulus = container1 }; us_split_fields3 = {
@@ -2325,910 +2325,516 @@ axiom w_get__post_axiom :
   ((in_range3(witness1) and (has_witness(container, witness1) = true)) ->
   in_range7(w_get(container, witness1)))))
 
-logic l__split_fields : us_main_type
-
-logic k__split_fields : us_main_type
-
-logic c__split_fields : count_type
-
-logic my_sets__test_set_rec_2__R16b__assume : t
-
-logic us : t
-
-logic us1 : int
-
-logic my_sets__test_set_rec_2__R19b__assume : t
-
-logic us2 : t
-
-logic us3 : int
-
-logic temp___1438 : count_type
-
-logic temp___1439 : count_type
-
-logic o : integer
-
-logic o1 : positive
-
-logic o2 : positive
-
-logic o3 : integer
-
-logic o4 : positive
-
-logic o5 : integer
-
-logic o6 : integer
-
-logic o7 : positive
-
-logic o8 : positive
-
-logic o9 : integer
-
-logic o10 : positive
-
-logic o11 : integer
-
-logic o12 : integer
-
-logic o13 : positive
-
-logic o14 : positive
-
-logic o15 : integer
-
-logic o16 : positive
-
-logic o17 : integer
-
-logic o18 : integer
-
-logic o19 : positive
-
-logic o20 : positive
-
-logic o21 : integer
-
-logic o22 : positive
-
-logic o23 : integer
-
-logic o24 : integer
-
-logic o25 : positive
-
-logic o26 : positive
-
-logic o27 : integer
-
-logic o28 : positive
-
-logic o29 : integer
-
-logic o30 : integer
-
-logic o31 : positive
-
-logic o32 : positive
-
-logic o33 : integer
-
-logic o34 : positive
-
-logic o35 : integer
-
-logic o36 : integer
-
-logic o37 : positive
-
-logic o38 : positive
-
-logic o39 : integer
-
-logic o40 : positive
-
-logic o41 : integer
-
-logic o42 : integer
-
-logic o43 : positive
-
-logic o44 : positive
-
-logic o45 : integer
-
-logic o46 : positive
-
-logic o47 : integer
-
-logic o48 : integer
-
-logic o49 : positive
-
-logic o50 : positive
-
-logic o51 : integer
-
-logic o52 : positive
-
-logic o53 : integer
-
-logic temp___1451 : count_type
-
-logic o54 : integer
-
-logic o55 : positive
-
-logic o56 : positive
-
-logic o57 : integer
-
-logic o58 : positive
-
-logic o59 : integer
-
-logic temp___1453 : count_type
-
-logic o60 : integer
-
-logic o61 : positive
-
-logic o62 : positive
-
-logic o63 : integer
-
-logic o64 : positive
-
-logic o65 : integer
-
-logic o66 : integer
-
-logic o67 : positive
-
-logic o68 : positive
-
-logic o69 : integer
-
-logic o70 : positive
-
-logic o71 : integer
-
-logic result : count_type
-
-logic c__split_fields1 : count_type
-
-logic result1 : count_type
-
-logic c__split_fields2 : count_type
-
-logic my_sets__n__insert__2__container__fields : us_main_type
-
-logic result2 : us_main_type
-
-logic l__split_fields1 : us_main_type
-
-logic my_sets__n__insert__2__container__fields1 : us_main_type
-
-logic result3 : us_main_type
-
-logic l__split_fields2 : us_main_type
-
-logic c__split_fields3 : count_type
-
-logic b : bool
-
-logic my_sets__n__insert__container__fields : us_main_type
-
-logic result4 : us_main_type
-
-logic l__split_fields3 : us_main_type
-
-logic my_sets__n__replace_element__container__fields : us_main_type
-
-logic result5 : us_main_type
-
-logic l__split_fields4 : us_main_type
-
-logic my_sets__n__replace__container__fields : us_main_type
-
-logic result6 : us_main_type
-
-logic l__split_fields5 : us_main_type
-
-logic my_sets__n__assign__target__fields : us_main_type
-
-logic result7 : us_main_type
-
-logic k__split_fields1 : us_main_type
-
-logic my_sets__n__move__source__fields : us_main_type
-
-logic my_sets__n__move__target__fields : us_main_type
-
-logic result8 : us_main_type
-
-logic l__split_fields6 : us_main_type
-
-logic result9 : us_main_type
-
-logic k__split_fields2 : us_main_type
-
-logic my_sets__n__include__container__fields : us_main_type
-
-logic result10 : us_main_type
-
-logic l__split_fields7 : us_main_type
-
-logic my_sets__n__include__container__fields1 : us_main_type
-
-logic result11 : us_main_type
-
-logic l__split_fields8 : us_main_type
-
-logic my_sets__n__delete__container__fields : us_main_type
-
-logic result12 : us_main_type
-
-logic l__split_fields9 : us_main_type
-
-logic result13 : count_type
-
-logic c__split_fields4 : count_type
-
-logic c__split_fields5 : count_type
-
-logic my_sets__n__delete__2__container__fields : us_main_type
-
-logic result14 : us_main_type
-
-logic l__split_fields10 : us_main_type
-
-logic result15 : count_type
-
-logic c__split_fields6 : count_type
-
-logic my_sets__n__exclude__container__fields : us_main_type
-
-logic result16 : us_main_type
-
-logic l__split_fields11 : us_main_type
-
-logic my_sets__n__exclude__container__fields1 : us_main_type
-
-logic result17 : us_main_type
-
-logic l__split_fields12 : us_main_type
-
-axiom H : (my_sets__test_set_rec_2__R16b__assume = default_modulus(10))
-
-axiom H1 : (my_sets__test_set_rec_2__R16b__assume = r16b)
-
-axiom H2 : true
-
-axiom H3 : (us = r16b)
-
-axiom H4 : ((us1 = 10) and in_range3(10))
-
-axiom H5 : (((to_rep3(l__split_discrs) = 10) and
+ (* File "my_sets.adb", line 82, characters 0-0 *)
+goal WP_parameter_def :
+  (forall l__split_fields:us_main_type. forall k__split_fields:us_main_type.
+  forall c__split_fields:count_type.
+  forall my_sets__test_set_rec_2__R16b__assume:t. forall us:t.
+  forall us1:int. forall my_sets__test_set_rec_2__R19b__assume:t.
+  forall us2:t. forall us3:int. forall temp___1502:count_type.
+  forall temp___1503:count_type. forall o:integer. forall o1:positive.
+  forall o2:positive. forall o3:integer. forall o4:positive.
+  forall o5:integer. forall o6:integer. forall o7:positive.
+  forall o8:positive. forall o9:integer. forall o10:positive.
+  forall o11:integer. forall o12:integer. forall o13:positive.
+  forall o14:positive. forall o15:integer. forall o16:positive.
+  forall o17:integer. forall o18:integer. forall o19:positive.
+  forall o20:positive. forall o21:integer. forall o22:positive.
+  forall o23:integer. forall o24:integer. forall o25:positive.
+  forall o26:positive. forall o27:integer. forall o28:positive.
+  forall o29:integer. forall result:us_split_fields__ref2.
+  forall c__split_fields1:us_split_fields4.
+  forall result1:us_split_fields__ref2.
+  forall c__split_fields2:us_split_fields4.
+  forall my_sets__n__insert__2__container__fields:us_split_fields2.
+  forall result2:us_split_fields__ref1.
+  forall l__split_fields1:us_split_fields2.
+  forall my_sets__n__insert__2__container__fields1:us_split_fields2.
+  forall result3:us_split_fields__ref1.
+  forall l__split_fields2:us_split_fields2.
+  forall c__split_fields3:us_split_fields4. forall b:bool.
+  forall my_sets__n__insert__container__fields:us_split_fields2.
+  forall result4:us_split_fields__ref1.
+  forall l__split_fields3:us_split_fields2.
+  forall my_sets__n__replace_element__container__fields:us_split_fields2.
+  forall result5:us_split_fields__ref1.
+  forall l__split_fields4:us_split_fields2.
+  forall my_sets__n__replace__container__fields:us_split_fields2.
+  forall result6:us_split_fields__ref1.
+  forall l__split_fields5:us_split_fields2.
+  (((my_sets__test_set_rec_2__R16b__assume = default_modulus(10)) and
+  (my_sets__test_set_rec_2__R16b__assume = r16b)) -> ((us = r16b) ->
+  (((us1 = 10) and in_range3(10)) -> ((((to_rep3(l__split_discrs) = 10) and
   (to_rep2(l__split_discrs1) = r16b)) and (is_empty({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
   rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = l__split_fields } }) = true))
-
-axiom H6 : ((10 = to_rep3(l__split_discrs)) and
-  (r16b = to_rep2(l__split_discrs1)))
-
-axiom H7 : (my_sets__test_set_rec_2__R19b__assume = default_modulus(10))
-
-axiom H8 : (my_sets__test_set_rec_2__R19b__assume = r19b)
-
-axiom H9 : true
-
-axiom H10 : (us2 = r19b)
-
-axiom H11 : ((us3 = 10) and in_range3(10))
-
-axiom H12 : (((to_rep3(k__split_discrs) = 10) and
+  rec__my_sets__n__set = l__split_fields } }) = true)) ->
+  (((10 = to_rep3(l__split_discrs)) and
+  (r16b = to_rep2(l__split_discrs1))) ->
+  (((my_sets__test_set_rec_2__R19b__assume = default_modulus(10)) and
+  (my_sets__test_set_rec_2__R19b__assume = r19b)) -> ((us2 = r19b) ->
+  (((us3 = 10) and in_range3(10)) -> ((((to_rep3(k__split_discrs) = 10) and
   (to_rep2(k__split_discrs1) = r19b)) and (is_empty({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = k__split_discrs;
   rec__my_sets__n__set__modulus = k__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = k__split_fields } }) = true))
-
-axiom H13 : ((10 = to_rep3(k__split_discrs)) and
-  (r19b = to_rep2(k__split_discrs1)))
-
-axiom H14 : (is_empty({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
+  rec__my_sets__n__set = k__split_fields } }) = true)) ->
+  (((10 = to_rep3(k__split_discrs)) and
+  (r19b = to_rep2(k__split_discrs1))) -> ((is_empty({ us_split_discrs1 = {
+  rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
+  rec__my_sets__n__set = l__split_fields } }) = true) -> (((({
+  us_split_fields5 = { rec__my_sets__n__cursor__node = temp___1502 }
+  } = first({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
   l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set = l__split_fields } }) = true)
-
-axiom H15 : (({ us_split_fields5 = { rec__my_sets__n__cursor__node =
-  temp___1438 } } = first({ us_split_discrs1 = {
+  us_split_fields3 = { rec__my_sets__n__set = l__split_fields } })) and
+  (((bool_eq2(length({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
+  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
+  us_split_fields3 = { rec__my_sets__n__set = l__split_fields } }),
+  0) = true) and (bool_eq9({ us_split_fields5 = {
+  rec__my_sets__n__cursor__node = temp___1502 } }, { us_split_fields5 = {
+  rec__my_sets__n__cursor__node = no_element } }) = true)) or
+  ((not (bool_eq2(length({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
   rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = l__split_fields } })) and (((bool_eq2(length({
-  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = l__split_fields } }), 0) = true) -> (bool_eq9({
-  us_split_fields5 = { rec__my_sets__n__cursor__node = temp___1438 } }, {
-  us_split_fields5 = { rec__my_sets__n__cursor__node = no_element }
-  }) = true)) and ((not (bool_eq2(length({ us_split_discrs1 = {
-  rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = l__split_fields } }), 0) = true)) ->
+  rec__my_sets__n__set = l__split_fields } }), 0) = true)) and
   ((has_key(positions({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
   l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
   us_split_fields3 = { rec__my_sets__n__set = l__split_fields } }), {
-  us_split_fields5 = { rec__my_sets__n__cursor__node = temp___1438 }
+  us_split_fields5 = { rec__my_sets__n__cursor__node = temp___1502 }
   }) = true) and (get1(positions({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
   rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
   rec__my_sets__n__set = l__split_fields } }), { us_split_fields5 = {
-  rec__my_sets__n__cursor__node = temp___1438 } }) = 1)))))
-
-axiom H16 : (result = c__split_fields)
-
-axiom H17 : (c__split_fields1 = temp___1438)
-
-axiom H18 : (({ us_split_fields5 = { rec__my_sets__n__cursor__node =
-  temp___1439 } } = next({ us_split_discrs1 = {
-  rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = l__split_fields } }, { us_split_fields5 = {
-  rec__my_sets__n__cursor__node = c__split_fields1 } })) and
-  (((match_bool(bool_eq9({ us_split_fields5 = {
-  rec__my_sets__n__cursor__node = c__split_fields1 } }, { us_split_fields5 =
-  { rec__my_sets__n__cursor__node = no_element } }), true,
+  rec__my_sets__n__cursor__node = temp___1502 } }) = 1))))) and ((result = {
+  us_split_fields__content2 = { rec__my_sets__n__cursor__node =
+  c__split_fields } }) and (c__split_fields1 = {
+  rec__my_sets__n__cursor__node = temp___1502 }))) -> (((({
+  us_split_fields5 = { rec__my_sets__n__cursor__node = temp___1503 }
+  } = next({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
+  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
+  us_split_fields3 = { rec__my_sets__n__set = l__split_fields } }, {
+  us_split_fields5 = c__split_fields1 })) and (((match_bool(bool_eq9({
+  us_split_fields5 = c__split_fields1 }, { us_split_fields5 = {
+  rec__my_sets__n__cursor__node = no_element } }), true,
   bool_eq2(get1(positions({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
   rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = l__split_fields } }), { us_split_fields5 = {
-  rec__my_sets__n__cursor__node = c__split_fields1 } }), length({
-  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set = l__split_fields } }), { us_split_fields5 =
+  c__split_fields1 }), length({ us_split_discrs1 = {
+  rec__my_sets__n__set__capacity = l__split_discrs;
   rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = l__split_fields } }))) = true) -> (bool_eq9({
-  us_split_fields5 = { rec__my_sets__n__cursor__node = temp___1439 } }, {
+  rec__my_sets__n__set = l__split_fields } }))) = true) and (bool_eq9({
+  us_split_fields5 = { rec__my_sets__n__cursor__node = temp___1503 } }, {
   us_split_fields5 = { rec__my_sets__n__cursor__node = no_element }
-  }) = true)) and ((not (match_bool(bool_eq9({ us_split_fields5 = {
-  rec__my_sets__n__cursor__node = c__split_fields1 } }, { us_split_fields5 =
-  { rec__my_sets__n__cursor__node = no_element } }), true,
-  bool_eq2(get1(positions({ us_split_discrs1 = {
+  }) = true)) or ((not (match_bool(bool_eq9({ us_split_fields5 =
+  c__split_fields1 }, { us_split_fields5 = { rec__my_sets__n__cursor__node =
+  no_element } }), true, bool_eq2(get1(positions({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
   rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = l__split_fields } }), { us_split_fields5 = {
-  rec__my_sets__n__cursor__node = c__split_fields1 } }), length({
-  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set = l__split_fields } }), { us_split_fields5 =
+  c__split_fields1 }), length({ us_split_discrs1 = {
+  rec__my_sets__n__set__capacity = l__split_discrs;
   rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = l__split_fields } }))) = true)) ->
+  rec__my_sets__n__set = l__split_fields } }))) = true)) and
   ((has_key(positions({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
   l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
   us_split_fields3 = { rec__my_sets__n__set = l__split_fields } }), {
-  us_split_fields5 = { rec__my_sets__n__cursor__node = temp___1439 }
+  us_split_fields5 = { rec__my_sets__n__cursor__node = temp___1503 }
   }) = true) and (get1(positions({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
   rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
   rec__my_sets__n__set = l__split_fields } }), { us_split_fields5 = {
-  rec__my_sets__n__cursor__node = temp___1439 } }) = (get1(positions({
+  rec__my_sets__n__cursor__node = temp___1503 } }) = (get1(positions({
   us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
   rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = l__split_fields } }), { us_split_fields5 = {
-  rec__my_sets__n__cursor__node = c__split_fields1 } }) + 1))))))
-
-axiom H19 : (result1 = c__split_fields1)
-
-axiom H20 : (c__split_fields2 = temp___1439)
-
-axiom H21 : (to_rep(o) = 1)
-
-axiom H22 : (to_rep1(o1) = 1)
-
-axiom H23 : (o1 = o2)
-
-axiom H24 : (o = o3)
-
-axiom H25 : (o4 = o2)
-
-axiom H26 : (o5 = o3)
-
-axiom H27 : (((((((length({ us_split_discrs1 = {
-  rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set = l__split_fields } }), { us_split_fields5 =
+  c__split_fields1 }) + 1)))))) and ((result1 = { us_split_fields__content2 =
+  c__split_fields1 }) and (c__split_fields2 = {
+  rec__my_sets__n__cursor__node = temp___1503 }))) ->
+  ((((((to_rep(o) = 1) and ((to_rep1(o1) = 1) and ((o1 = o2) and
+  (o = o3)))) and ((o4 = o2) and (o5 = o3))) and (((((((length({
+  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__2__container__fields }) = (length({ us_split_discrs1 =
+  { rec__my_sets__n__set__capacity = l__split_discrs;
   rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__insert__2__container__fields }
-  }) = (length({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set = l__split_fields } }) + 1)) and
-  (contains(model__({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set =
-  my_sets__n__insert__2__container__fields } }), { us_split_fields1 = {
+  rec__my_sets__n__set = l__split_fields } }) + 1)) and (contains(model__({
+  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__2__container__fields }), { us_split_fields1 = {
   rec__my_sets__my_rec__f = o4; rec__my_sets__my_rec__g = o5 }
   }) = true)) and (bool_eq7(get(elements({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__insert__2__container__fields } }),
-  get1(positions({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set =
-  my_sets__n__insert__2__container__fields } }), find1({ us_split_discrs1 = {
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__2__container__fields }), get1(positions({
+  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__2__container__fields }), find1({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__insert__2__container__fields } }, {
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__2__container__fields }, { us_split_fields1 = {
+  rec__my_sets__my_rec__f = o4; rec__my_sets__my_rec__g = o5 } }))), {
   us_split_fields1 = { rec__my_sets__my_rec__f = o4;
-  rec__my_sets__my_rec__g = o5 } }))), { us_split_fields1 = {
-  rec__my_sets__my_rec__f = o4; rec__my_sets__my_rec__g = o5 }
-  }) = true)) and (ole(model__({ us_split_discrs1 = {
-  rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__my_rec__g = o5 } }) = true)) and (ole(model__({
+  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
   rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
   rec__my_sets__n__set = l__split_fields } }), model__({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__insert__2__container__fields }
-  })) = true)) and (included_except(model__({ us_split_discrs1 = {
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__2__container__fields })) = true)) and
+  (included_except(model__({ us_split_discrs1 = {
+  rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__2__container__fields }), model__({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
   rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__insert__2__container__fields } }),
-  model__({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set = l__split_fields } }), {
-  us_split_fields1 = { rec__my_sets__my_rec__f = o4;
-  rec__my_sets__my_rec__g = o5 } }) = true)) and
-  (mapping_preserved(elements({ us_split_discrs1 = {
+  rec__my_sets__n__set = l__split_fields } }), { us_split_fields1 = {
+  rec__my_sets__my_rec__f = o4; rec__my_sets__my_rec__g = o5 }
+  }) = true)) and (mapping_preserved(elements({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
   rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
   rec__my_sets__n__set = l__split_fields } }), elements({ us_split_discrs1 =
   { rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__2__container__fields }), positions({ us_split_discrs1 =
+  { rec__my_sets__n__set__capacity = l__split_discrs;
   rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__insert__2__container__fields } }),
-  positions({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set = l__split_fields } }),
-  positions({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set =
-  my_sets__n__insert__2__container__fields } })) = true)) and
+  rec__my_sets__n__set = l__split_fields } }), positions({ us_split_discrs1 =
+  { rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__2__container__fields })) = true)) and
   (keys_included_except(positions({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__2__container__fields }), positions({ us_split_discrs1 =
+  { rec__my_sets__n__set__capacity = l__split_discrs;
   rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__insert__2__container__fields } }),
-  positions({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set = l__split_fields } }), find1({
-  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__insert__2__container__fields } }, {
-  us_split_fields1 = { rec__my_sets__my_rec__f = o4;
-  rec__my_sets__my_rec__g = o5 } })) = true))
-
-axiom H28 : (result2 = l__split_fields)
-
-axiom H29 : (l__split_fields1 = my_sets__n__insert__2__container__fields)
-
-axiom H30 : (to_rep(o6) = 2)
-
-axiom H31 : (to_rep1(o7) = 2)
-
-axiom H32 : (o7 = o8)
-
-axiom H33 : (o6 = o9)
-
-axiom H34 : (o10 = o8)
-
-axiom H35 : (o11 = o9)
-
-axiom H36 : (((((((length({ us_split_discrs1 = {
+  rec__my_sets__n__set = l__split_fields } }), find1({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__insert__2__container__fields1 }
-  }) = (length({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set = l__split_fields1 } }) + 1)) and
-  (contains(model__({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set =
-  my_sets__n__insert__2__container__fields1 } }), { us_split_fields1 = {
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__2__container__fields }, { us_split_fields1 = {
+  rec__my_sets__my_rec__f = o4; rec__my_sets__my_rec__g = o5 }
+  })) = true))) and ((result2 = { us_split_fields__content1 = {
+  rec__my_sets__n__set = l__split_fields } }) and
+  (l__split_fields1 = my_sets__n__insert__2__container__fields))) ->
+  ((((((to_rep(o6) = 2) and ((to_rep1(o7) = 2) and ((o7 = o8) and
+  (o6 = o9)))) and ((o10 = o8) and (o11 = o9))) and (((((((length({
+  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__2__container__fields1 }) = (length({ us_split_discrs1 =
+  { rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields1 }) + 1)) and (contains(model__({ us_split_discrs1 = {
+  rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__2__container__fields1 }), { us_split_fields1 = {
   rec__my_sets__my_rec__f = o10; rec__my_sets__my_rec__g = o11 }
   }) = true)) and (bool_eq7(get(elements({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__insert__2__container__fields1 } }),
-  get1(positions({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set =
-  my_sets__n__insert__2__container__fields1 } }), find1({ us_split_discrs1 =
-  { rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__insert__2__container__fields1 } }, {
-  us_split_fields1 = { rec__my_sets__my_rec__f = o10;
-  rec__my_sets__my_rec__g = o11 } }))), { us_split_fields1 = {
-  rec__my_sets__my_rec__f = o10; rec__my_sets__my_rec__g = o11 }
-  }) = true)) and (ole(model__({ us_split_discrs1 = {
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__2__container__fields1 }), get1(positions({
+  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__2__container__fields1 }), find1({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = l__split_fields1 } }), model__({ us_split_discrs1 =
-  { rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__insert__2__container__fields1 }
-  })) = true)) and (included_except(model__({ us_split_discrs1 = {
-  rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__insert__2__container__fields1 } }),
-  model__({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set = l__split_fields1 } }), {
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__2__container__fields1 }, { us_split_fields1 = {
+  rec__my_sets__my_rec__f = o10; rec__my_sets__my_rec__g = o11 } }))), {
   us_split_fields1 = { rec__my_sets__my_rec__f = o10;
+  rec__my_sets__my_rec__g = o11 } }) = true)) and (ole(model__({
+  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields1 }), model__({ us_split_discrs1 = {
+  rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__2__container__fields1 })) = true)) and
+  (included_except(model__({ us_split_discrs1 = {
+  rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__2__container__fields1 }), model__({ us_split_discrs1 =
+  { rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields1 }), { us_split_fields1 = { rec__my_sets__my_rec__f = o10;
   rec__my_sets__my_rec__g = o11 } }) = true)) and
   (mapping_preserved(elements({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = l__split_fields1 } }), elements({ us_split_discrs1 =
-  { rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__insert__2__container__fields1 } }),
-  positions({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set = l__split_fields1 } }),
-  positions({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set =
-  my_sets__n__insert__2__container__fields1 } })) = true)) and
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields1 }), elements({ us_split_discrs1 = {
+  rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__2__container__fields1 }), positions({
+  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields1 }), positions({ us_split_discrs1 = {
+  rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__2__container__fields1 })) = true)) and
   (keys_included_except(positions({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__insert__2__container__fields1 } }),
-  positions({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set = l__split_fields1 } }), find1({
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__2__container__fields1 }), positions({
   us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__insert__2__container__fields1 } }, {
-  us_split_fields1 = { rec__my_sets__my_rec__f = o10;
-  rec__my_sets__my_rec__g = o11 } })) = true))
-
-axiom H37 : (result3 = l__split_fields1)
-
-axiom H38 : (l__split_fields2 = my_sets__n__insert__2__container__fields1)
-
-axiom H39 : (to_rep(o12) = 2)
-
-axiom H40 : (to_rep1(o13) = 1)
-
-axiom H41 : (o13 = o14)
-
-axiom H42 : (o12 = o15)
-
-axiom H43 : (o16 = o14)
-
-axiom H44 : (o17 = o15)
-
-axiom H45 : ((((contains(model__({ us_split_discrs1 = {
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields1 }), find1({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__insert__container__fields } }), {
-  us_split_fields1 = { rec__my_sets__my_rec__f = o16;
-  rec__my_sets__my_rec__g = o17 } }) = true) and (has_key(positions({
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__2__container__fields1 }, { us_split_fields1 = {
+  rec__my_sets__my_rec__f = o10; rec__my_sets__my_rec__g = o11 }
+  })) = true))) and ((result3 = { us_split_fields__content1 =
+  l__split_fields1 }) and
+  (l__split_fields2 = my_sets__n__insert__2__container__fields1))) ->
+  ((((((to_rep(o12) = 2) and ((to_rep1(o13) = 1) and ((o13 = o14) and
+  (o12 = o15)))) and ((o16 = o14) and (o17 = o15))) and
+  ((((contains(model__({ us_split_discrs1 = {
+  rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__container__fields }), { us_split_fields1 = {
+  rec__my_sets__my_rec__f = o16; rec__my_sets__my_rec__g = o17 }
+  }) = true) and (has_key(positions({ us_split_discrs1 = {
+  rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__container__fields }), { us_split_fields5 =
+  c__split_fields3 }) = true)) and (bool_eq2(to_rep1(((get(elements({
   us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__insert__container__fields } }), {
-  us_split_fields5 = { rec__my_sets__n__cursor__node = c__split_fields3 }
-  }) = true)) and (bool_eq2(to_rep1(((get(elements({ us_split_discrs1 = {
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__container__fields }), get1(positions({
+  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__container__fields }), { us_split_fields5 =
+  c__split_fields3 }))).us_split_fields1).rec__my_sets__my_rec__f),
+  to_rep1(o16)) = true)) and (((contains(model__({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__insert__container__fields } }),
-  get1(positions({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set =
-  my_sets__n__insert__container__fields } }), { us_split_fields5 = {
-  rec__my_sets__n__cursor__node = c__split_fields3 }
-  }))).us_split_fields1).rec__my_sets__my_rec__f), to_rep1(o16)) = true)) and
-  (((contains(model__({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set = l__split_fields2 } }), {
-  us_split_fields1 = { rec__my_sets__my_rec__f = o16;
-  rec__my_sets__my_rec__g = o17 } }) = true) -> ((((not (b = true)) and
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields2 }), { us_split_fields1 = { rec__my_sets__my_rec__f = o16;
+  rec__my_sets__my_rec__g = o17 } }) = true) and ((((not (b = true)) and
   (oeq2(model__({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
   l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set =
-  my_sets__n__insert__container__fields } }), model__({ us_split_discrs1 = {
-  rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = l__split_fields2 } })) = true)) and
-  (((bool_eq2(length2(elements({ us_split_discrs1 = {
-  rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__insert__container__fields } })),
-  length2(elements({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set = l__split_fields2 }
-  }))) = true) ->
+  us_split_fields3 = my_sets__n__insert__container__fields }), model__({
+  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields2 })) = true)) and ((bool_eq2(length2(elements({
+  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__container__fields })), length2(elements({
+  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields2 }))) = true) and
   (forall n:int. (((1 <= n) and (n <= (0 + length2(elements({
   us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__insert__container__fields } }))))) ->
-  (bool_eq7(get(elements({ us_split_discrs1 = {
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__container__fields }))))) -> (bool_eq7(get(elements({
+  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__container__fields }), n), get(elements({
+  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields2 }), n)) = true))))) and (oeq3(positions({
+  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__container__fields }), positions({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__insert__container__fields } }), n),
-  get(elements({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields2 })) = true))) or ((not (contains(model__({
+  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields2 }), { us_split_fields1 = { rec__my_sets__my_rec__f = o16;
+  rec__my_sets__my_rec__g = o17 } }) = true)) and (((((((b = true) and
+  (length({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
   l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set = l__split_fields2 } }),
-  n)) = true)))) and (not (bool_eq2(length2(elements({ us_split_discrs1 = {
-  rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__insert__container__fields } })),
-  length2(elements({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set = l__split_fields2 }
-  }))) = false)))) and (oeq3(positions({ us_split_discrs1 = {
-  rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__insert__container__fields } }),
-  positions({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set = l__split_fields2 }
-  })) = true))) and ((not (contains(model__({ us_split_discrs1 = {
-  rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = l__split_fields2 } }), { us_split_fields1 = {
-  rec__my_sets__my_rec__f = o16; rec__my_sets__my_rec__g = o17 }
-  }) = true)) -> (((((((b = true) and (length({ us_split_discrs1 = {
-  rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__insert__container__fields }
-  }) = (length({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set = l__split_fields2 }
-  }) + 1))) and (bool_eq7(get(elements({ us_split_discrs1 = {
-  rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__insert__container__fields } }),
-  get1(positions({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set =
-  my_sets__n__insert__container__fields } }), { us_split_fields5 = {
-  rec__my_sets__n__cursor__node = c__split_fields3 } })), {
-  us_split_fields1 = { rec__my_sets__my_rec__f = o16;
+  us_split_fields3 = my_sets__n__insert__container__fields }) = (length({
+  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields2 }) + 1))) and (bool_eq7(get(elements({ us_split_discrs1 =
+  { rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__container__fields }), get1(positions({
+  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__container__fields }), { us_split_fields5 =
+  c__split_fields3 })), { us_split_fields1 = { rec__my_sets__my_rec__f = o16;
   rec__my_sets__my_rec__g = o17 } }) = true)) and (ole(model__({
   us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = l__split_fields2 } }), model__({ us_split_discrs1 =
-  { rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__insert__container__fields }
-  })) = true)) and (included_except(model__({ us_split_discrs1 = {
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields2 }), model__({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__insert__container__fields } }),
-  model__({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set = l__split_fields2 } }), {
-  us_split_fields1 = { rec__my_sets__my_rec__f = o16;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__container__fields })) = true)) and
+  (included_except(model__({ us_split_discrs1 = {
+  rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__container__fields }), model__({ us_split_discrs1 = {
+  rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields2 }), { us_split_fields1 = { rec__my_sets__my_rec__f = o16;
   rec__my_sets__my_rec__g = o17 } }) = true)) and
   (mapping_preserved(elements({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = l__split_fields2 } }), elements({ us_split_discrs1 =
-  { rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__insert__container__fields } }),
-  positions({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set = l__split_fields2 } }),
-  positions({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set =
-  my_sets__n__insert__container__fields } })) = true)) and
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields2 }), elements({ us_split_discrs1 = {
+  rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__container__fields }), positions({ us_split_discrs1 = {
+  rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields2 }), positions({ us_split_discrs1 = {
+  rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__container__fields })) = true)) and
   (keys_included_except(positions({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__insert__container__fields } }),
-  positions({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__insert__container__fields }), positions({ us_split_discrs1 = {
+  rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields2 }), { us_split_fields5 = c__split_fields3
+  }) = true)))))) and ((result4 = { us_split_fields__content1 =
+  l__split_fields2 }) and
+  (l__split_fields3 = my_sets__n__insert__container__fields))) ->
+  ((not (contains(model__({ us_split_discrs1 = {
+  rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields3 }), { us_split_fields1 = { rec__my_sets__my_rec__f =
+  of_rep1(3); rec__my_sets__my_rec__g = of_rep(4) } }) = true)) ->
+  ((not (b = true)) -> ((((((to_rep(o18) = 2) and ((to_rep1(o19) = 1) and
+  ((o19 = o20) and (o18 = o21)))) and ((o22 = o20) and (o23 = o21))) and
+  (((((((length({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
   l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set = l__split_fields2 } }), {
-  us_split_fields5 = { rec__my_sets__n__cursor__node = c__split_fields3 }
-  }) = true)))))
-
-axiom H46 : (result4 = l__split_fields2)
-
-axiom H47 : (l__split_fields3 = my_sets__n__insert__container__fields)
-
-axiom H48 : (not (contains(model__({ us_split_discrs1 = {
-  rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = l__split_fields3 } }), { us_split_fields1 = {
-  rec__my_sets__my_rec__f = of_rep1(3); rec__my_sets__my_rec__g = of_rep(4) }
-  }) = true))
-
-axiom H49 : (not (b = true))
-
-axiom H50 : (to_rep(o18) = 2)
-
-axiom H51 : (to_rep1(o19) = 1)
-
-axiom H52 : (o19 = o20)
-
-axiom H53 : (o18 = o21)
-
-axiom H54 : ((o22 = o20) and (o23 = o21))
-
-axiom H55 : (((((((length({ us_split_discrs1 = {
-  rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__replace_element__container__fields }
+  us_split_fields3 = my_sets__n__replace_element__container__fields
   }) = length({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
   l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set = l__split_fields3 } })) and
-  (bool_eq7(get(elements({ us_split_discrs1 = {
-  rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__replace_element__container__fields } }),
-  get1(positions({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set =
-  my_sets__n__replace_element__container__fields } }), { us_split_fields5 = {
-  rec__my_sets__n__cursor__node = c__split_fields3 } })), {
-  us_split_fields1 = { rec__my_sets__my_rec__f = o22;
+  us_split_fields3 = l__split_fields3 })) and (bool_eq7(get(elements({
+  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__replace_element__container__fields }), get1(positions({
+  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__replace_element__container__fields }), { us_split_fields5 =
+  c__split_fields3 })), { us_split_fields1 = { rec__my_sets__my_rec__f = o22;
   rec__my_sets__my_rec__g = o23 } }) = true)) and (contains(model__({
   us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__replace_element__container__fields } }),
-  { us_split_fields1 = { rec__my_sets__my_rec__f = o22;
-  rec__my_sets__my_rec__g = o23 } }) = true)) and (included_except(model__({
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__replace_element__container__fields }), { us_split_fields1 = {
+  rec__my_sets__my_rec__f = o22; rec__my_sets__my_rec__g = o23 }
+  }) = true)) and (included_except(model__({ us_split_discrs1 = {
+  rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields3 }), model__({ us_split_discrs1 = {
+  rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__replace_element__container__fields }), get(elements({
   us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = l__split_fields3 } }), model__({ us_split_discrs1 =
-  { rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__replace_element__container__fields } }),
-  get(elements({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set = l__split_fields3 } }),
-  get1(positions({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set = l__split_fields3 } }), {
-  us_split_fields5 = { rec__my_sets__n__cursor__node = c__split_fields3 }
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields3 }), get1(positions({ us_split_discrs1 = {
+  rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields3 }), { us_split_fields5 = c__split_fields3
   }))) = true)) and (included_except(model__({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__replace_element__container__fields } }),
-  model__({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set = l__split_fields3 } }), {
-  us_split_fields1 = { rec__my_sets__my_rec__f = o22;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__replace_element__container__fields }), model__({
+  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields3 }), { us_split_fields1 = { rec__my_sets__my_rec__f = o22;
   rec__my_sets__my_rec__g = o23 } }) = true)) and
   (mapping_preserved_except(elements({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = l__split_fields3 } }), elements({ us_split_discrs1 =
-  { rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__replace_element__container__fields } }),
-  positions({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set = l__split_fields3 } }),
-  positions({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set =
-  my_sets__n__replace_element__container__fields } }), { us_split_fields5 = {
-  rec__my_sets__n__cursor__node = c__split_fields3 } }) = true)) and
-  (oeq3(positions({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set =
-  my_sets__n__replace_element__container__fields } }), positions({
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields3 }), elements({ us_split_discrs1 = {
+  rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__replace_element__container__fields }), positions({
   us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = l__split_fields3 } })) = true))
-
-axiom H56 : (result5 = l__split_fields3)
-
-axiom H57 :
-  (l__split_fields4 = my_sets__n__replace_element__container__fields)
-
-axiom H58 : (to_rep(o24) = 3)
-
-axiom H59 : (to_rep1(o25) = 1)
-
-axiom H60 : ((o26 = o25) and (o27 = o24))
-
-axiom H61 : ((o28 = o26) and (o29 = o27))
-
-axiom H62 : (((((oeq2(model__({ us_split_discrs1 = {
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields3 }), positions({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__replace__container__fields } }),
-  model__({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set = l__split_fields4 }
-  })) = true) and (contains(model__({ us_split_discrs1 = {
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__replace_element__container__fields }), { us_split_fields5 =
+  c__split_fields3 }) = true)) and (oeq3(positions({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__replace__container__fields } }), {
-  us_split_fields1 = { rec__my_sets__my_rec__f = o28;
-  rec__my_sets__my_rec__g = o29 } }) = true)) and (oeq3(positions({
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__replace_element__container__fields }), positions({
   us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__replace__container__fields } }),
-  positions({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set = l__split_fields4 }
-  })) = true)) and (bool_eq7(get(elements({ us_split_discrs1 = {
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields3 })) = true))) and ((result5 = {
+  us_split_fields__content1 = l__split_fields3 }) and
+  (l__split_fields4 = my_sets__n__replace_element__container__fields))) ->
+  ((((((to_rep(o24) = 3) and ((to_rep1(o25) = 1) and ((o25 = o26) and
+  (o24 = o27)))) and ((o28 = o26) and (o29 = o27))) and (((((oeq2(model__({
+  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__replace__container__fields }), model__({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__replace__container__fields } }),
-  get1(positions({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
-  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
-  us_split_fields3 = { rec__my_sets__n__set =
-  my_sets__n__replace__container__fields } }), find1({ us_split_discrs1 = {
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields4 })) = true) and (contains(model__({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__replace__container__fields } }, {
-  us_split_fields1 = { rec__my_sets__my_rec__f = o28;
-  rec__my_sets__my_rec__g = o29 } }))), { us_split_fields1 = {
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__replace__container__fields }), { us_split_fields1 = {
   rec__my_sets__my_rec__f = o28; rec__my_sets__my_rec__g = o29 }
-  }) = true)) and (((bool_eq2(length2(elements({ us_split_discrs1 = {
+  }) = true)) and (oeq3(positions({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = l__split_fields4 } })), length2(elements({
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__replace__container__fields }), positions({ us_split_discrs1 = {
+  rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields4 })) = true)) and (bool_eq7(get(elements({
   us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__replace__container__fields }
-  }))) = true) ->
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__replace__container__fields }), get1(positions({
+  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__replace__container__fields }), find1({ us_split_discrs1 = {
+  rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__replace__container__fields }, { us_split_fields1 = {
+  rec__my_sets__my_rec__f = o28; rec__my_sets__my_rec__g = o29 } }))), {
+  us_split_fields1 = { rec__my_sets__my_rec__f = o28;
+  rec__my_sets__my_rec__g = o29 } }) = true)) and
+  ((bool_eq2(length2(elements({ us_split_discrs1 = {
+  rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields4 })), length2(elements({ us_split_discrs1 = {
+  rec__my_sets__n__set__capacity = l__split_discrs;
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__replace__container__fields }))) = true) and
   (forall i:int. (((1 <= i) and (i <= (0 + length2(elements({
   us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = l__split_fields4 } }))))) ->
-  ((not (i = get1(positions({ us_split_discrs1 = {
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields4 }))))) -> ((not (i = get1(positions({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__replace__container__fields } }), find1({
-  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__replace__container__fields } }, {
-  us_split_fields1 = { rec__my_sets__my_rec__f = o28;
-  rec__my_sets__my_rec__g = o29 } })))) -> (bool_eq7(get(elements({
-  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = l__split_fields4 } }), i), get(elements({
-  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__replace__container__fields } }),
-  i)) = true))))) and (not (bool_eq2(length2(elements({ us_split_discrs1 = {
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__replace__container__fields }), find1({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = l__split_fields4 } })), length2(elements({
-  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = my_sets__n__replace__container__fields }
-  }))) = false))))
-
-axiom H63 : (result6 = l__split_fields4)
-
-axiom H64 : (l__split_fields5 = my_sets__n__replace__container__fields)
-
-axiom H65 :
-  (forall temp___769:int. ((in_range4(temp___769) and ((1 <= temp___769) and
-  (temp___769 <= (0 + length2(elements({ us_split_discrs1 = {
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__replace__container__fields }, { us_split_fields1 = {
+  rec__my_sets__my_rec__f = o28; rec__my_sets__my_rec__g = o29 } })))) ->
+  (bool_eq7(get(elements({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = l__split_fields5 } })))))) ->
-  (exists i:count_type. ((has_key(positions({ us_split_discrs1 = {
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  l__split_fields4 }), i), get(elements({ us_split_discrs1 = {
   rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = l__split_fields5 } }), { us_split_fields5 = {
-  rec__my_sets__n__cursor__node = i } }) = true) and (bool_eq7(get(elements({
-  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = l__split_fields5 } }), get1(positions({
-  us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = l__split_fields5 } }), { us_split_fields5 = {
-  rec__my_sets__n__cursor__node = i } })), get(elements({ us_split_discrs1 =
-  { rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = l__split_fields5 } }), temp___769)) = true)))))
-
- (* File "my_sets.adb", line 82, characters 0-0 *)
-goal WP_parameter_def : (length({ us_split_discrs1 = {
-  rec__my_sets__n__set__capacity = l__split_discrs;
-  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_sets__n__set = l__split_fields5 } }) <= to_rep3(k__split_discrs))
+  rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+  my_sets__n__replace__container__fields }), i)) = true))))))) and
+  ((result6 = { us_split_fields__content1 = l__split_fields4 }) and
+  (l__split_fields5 = my_sets__n__replace__container__fields))) ->
+  ((forall temp___826:int. ((in_range4(temp___826) and ((1 <= temp___826) and
+   (temp___826 <= (0 + length2(elements({ us_split_discrs1 = {
+   rec__my_sets__n__set__capacity = l__split_discrs;
+   rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+   l__split_fields5 })))))) ->
+   (exists i:us_rep2. ((has_key(positions({ us_split_discrs1 = {
+   rec__my_sets__n__set__capacity = l__split_discrs;
+   rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+   l__split_fields5 }), i) = true) and (bool_eq7(get(elements({
+   us_split_discrs1 = { rec__my_sets__n__set__capacity = l__split_discrs;
+   rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+   l__split_fields5 }), get1(positions({ us_split_discrs1 = {
+   rec__my_sets__n__set__capacity = l__split_discrs;
+   rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+   l__split_fields5 }), i)), get(elements({ us_split_discrs1 = {
+   rec__my_sets__n__set__capacity = l__split_discrs;
+   rec__my_sets__n__set__modulus = l__split_discrs1 }; us_split_fields3 =
+   l__split_fields5 }), temp___826)) = true))))) ->
+  (length({ us_split_discrs1 = { rec__my_sets__n__set__capacity =
+  l__split_discrs; rec__my_sets__n__set__modulus = l__split_discrs1 };
+  us_split_fields3 = l__split_fields5
+  }) <= to_rep3(k__split_discrs))))))))))))))))))))))))

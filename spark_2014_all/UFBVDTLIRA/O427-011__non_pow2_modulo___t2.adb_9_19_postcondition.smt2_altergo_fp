@@ -594,7 +594,15 @@ axiom bv_max_to_uint :
 
 type m
 
-predicate in_range(x: t) = (ule(of_int(0), x) and ule(x, of_int(229)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 229)
+
+predicate in_range(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 229))
 
@@ -653,55 +661,39 @@ logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic t2__mmin__result : t
+logic rliteral2 : t
 
-logic result : t
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 230)
 
-logic t2__mmin__result1 : t
+logic rliteral3 : t
 
-logic t2__mmin__result2 : t
-
-logic t2__mmin__result3 : t
-
-logic t2__mmin__result4 : t
-
-logic t2__mmin__result5 : t
-
-logic result1 : t
-
-axiom H : in_range(x)
-
-axiom H1 : (t2__mmin__result1 = t2__mmin__result2)
-
-axiom H2 : (t2__mmin__result3 = t2__mmin__result1)
-
-axiom H3 : (result = t2__mmin__result)
-
-axiom H4 : (t2__mmin__result1 = urem(sub(of_int(230), x), of_int(230)))
-
-axiom H5 : (t2__mmin__result4 = t2__mmin__result2)
-
-axiom H6 : (t2__mmin__result5 = t2__mmin__result3)
-
-axiom H7 : (result1 = t2__mmin__result4)
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 1)
 
  (* File "t2.adb", line 6, characters 0-0 *)
-goal WP_parameter_def : ((ult(of_int(229), x) -> ((((ult(of_int(229), x) and
-  ule(sub(of_int(230), add(sub(of_int(229), x), of_int(230))), of_int(1))) or
-  ((not ult(of_int(229), x)) and ule(sub(of_int(230), sub(of_int(229), x)),
-  of_int(1)))) -> (t2__mmin__result4 = sub(add(add(sub(of_int(229), x),
-  of_int(230)), of_int(1)), of_int(230)))) and ((not ((ult(of_int(229), x) ->
-  ule(sub(of_int(230), add(sub(of_int(229), x), of_int(230))),
-  of_int(1))) and ((not ult(of_int(229), x)) -> ule(sub(of_int(230),
-  sub(of_int(229), x)), of_int(1))))) ->
-  (t2__mmin__result4 = add(add(sub(of_int(229), x), of_int(230)),
-  of_int(1)))))) and ((not ult(of_int(229), x)) -> ((((ult(of_int(229),
-  x) and ule(sub(of_int(230), add(sub(of_int(229), x), of_int(230))),
-  of_int(1))) or ((not ult(of_int(229), x)) and ule(sub(of_int(230),
-  sub(of_int(229), x)), of_int(1)))) ->
-  (t2__mmin__result4 = sub(add(sub(of_int(229), x), of_int(1)),
-  of_int(230)))) and ((not ((ult(of_int(229), x) -> ule(sub(of_int(230),
-  add(sub(of_int(229), x), of_int(230))), of_int(1))) and
-  ((not ult(of_int(229), x)) -> ule(sub(of_int(230), sub(of_int(229), x)),
-  of_int(1))))) -> (t2__mmin__result4 = add(sub(of_int(229), x),
-  of_int(1)))))))
+goal WP_parameter_def :
+  (forall t2__mmin__result:t. forall result:t. forall t2__mmin__result1:t.
+  forall t2__mmin__result2:t. forall t2__mmin__result3:t.
+  forall t2__mmin__result4:t. forall t2__mmin__result5:t.
+  (forall result1:t. ((in_range(x) and
+  (((((t2__mmin__result1 = t2__mmin__result2) and
+  (t2__mmin__result3 = t2__mmin__result1)) and
+  ((result = t2__mmin__result) and (t2__mmin__result1 = urem(sub(rliteral2,
+  x), rliteral2)))) and ((t2__mmin__result4 = t2__mmin__result2) and
+  (t2__mmin__result5 = t2__mmin__result3))) and
+  (result1 = t2__mmin__result4))) -> ((ult(rliteral1, x) ->
+  ((((ult(rliteral1, x) and ule(sub(rliteral2, add(sub(rliteral1, x),
+  rliteral2)), rliteral3)) or ((not ult(rliteral1, x)) and ule(sub(rliteral2,
+  sub(rliteral1, x)), rliteral3))) ->
+  (t2__mmin__result4 = sub(add(add(sub(rliteral1, x), rliteral2), rliteral3),
+  rliteral2))) and ((not ((ult(rliteral1, x) -> ule(sub(rliteral2,
+  add(sub(rliteral1, x), rliteral2)), rliteral3)) and ((not ult(rliteral1,
+  x)) -> ule(sub(rliteral2, sub(rliteral1, x)), rliteral3)))) ->
+  (t2__mmin__result4 = add(add(sub(rliteral1, x), rliteral2),
+  rliteral3))))) and ((not ult(rliteral1, x)) -> ((((ult(rliteral1, x) and
+  ule(sub(rliteral2, add(sub(rliteral1, x), rliteral2)), rliteral3)) or
+  ((not ult(rliteral1, x)) and ule(sub(rliteral2, sub(rliteral1, x)),
+  rliteral3))) -> (t2__mmin__result4 = sub(add(sub(rliteral1, x), rliteral3),
+  rliteral2))) and ((not ((ult(rliteral1, x) -> ule(sub(rliteral2,
+  add(sub(rliteral1, x), rliteral2)), rliteral3)) and ((not ult(rliteral1,
+  x)) -> ule(sub(rliteral2, sub(rliteral1, x)), rliteral3)))) ->
+  (t2__mmin__result4 = add(sub(rliteral1, x), rliteral3)))))))))

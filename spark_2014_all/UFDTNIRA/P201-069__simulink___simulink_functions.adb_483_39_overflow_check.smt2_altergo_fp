@@ -249,25 +249,9 @@ logic right : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-axiom H : in_range1(left)
-
-axiom H1 : in_range1(right)
-
-axiom H2 : (not (right = 0))
-
-axiom H3 : ((o = comp_div(left,right)) and in_range(comp_div(left,right)))
-
-axiom H4 : (o1 = (o * right))
-
  (* File "interfac.ads", line 46, characters 0-0 *)
-goal WP_parameter_def : in_range(o1)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. (in_range1(left) -> (in_range1(right) ->
+  ((not (right = 0)) -> ((((o = comp_div(left,right)) and
+  in_range(comp_div(left,right))) and (o1 = (o * right))) ->
+  in_range(o1))))))

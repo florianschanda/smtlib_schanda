@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -214,24 +214,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -242,17 +224,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -262,37 +244,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 logic to_rep1 : integer -> int
 
@@ -517,436 +471,31 @@ function t3b__ref___projection(a: t3b__ref) : integer = (a).t3b__content
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic state : int
-
-logic label_length : int
-
-logic ch : int
-
-logic i : int
-
-logic names__is_domain_name__result : bool
-
-logic temp___204 : int
-
-logic temp___205 : int
-
-logic temp___203 : int
-
-logic temp___202 : int
-
-logic temp___201 : int
-
-logic temp___200 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : bool
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : bool
-
-logic o7 : bool
-
-logic o8 : bool
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : bool
-
-logic o12 : bool
-
-logic o13 : bool
-
-logic o14 : int
-
-logic i1 : int
-
-logic o15 : int
-
-logic o16 : character
-
-logic o17 : int
-
-logic o18 : bool
-
-logic o19 : int
-
-logic o20 : character
-
-logic o21 : int
-
-logic o22 : bool
-
-logic ch1 : int
-
-logic i2 : int
-
-logic names__is_domain_name__result1 : bool
-
-logic result : int
-
-logic state1 : int
-
-logic result1 : int
-
-logic label_length1 : int
-
-logic result2 : bool
-
-logic names__is_domain_name__result2 : bool
-
-logic result3 : int
-
-logic i3 : int
-
-logic state2 : int
-
-logic label_length2 : int
-
-logic ch2 : int
-
-logic i4 : int
-
-logic names__is_domain_name__result3 : bool
-
-logic result4 : int
-
-logic ch3 : int
-
-logic result5 : bool
-
-logic names__is_domain_name__result4 : bool
-
-logic result6 : bool
-
-logic result7 : bool
-
-logic names__is_domain_name__result5 : bool
-
-logic result8 : int
-
-logic state3 : int
-
-logic result9 : int
-
-logic label_length3 : int
-
-logic result10 : bool
-
-logic names__is_domain_name__result6 : bool
-
-logic result11 : int
-
-logic state4 : int
-
-logic result12 : int
-
-logic label_length4 : int
-
-logic result13 : int
-
-logic state5 : int
-
-logic result14 : int
-
-logic label_length5 : int
-
-logic result15 : bool
-
-logic result16 : bool
-
-logic names__is_domain_name__result7 : bool
-
-logic result17 : int
-
-logic label_length6 : int
-
-logic names__is_domain_name__result8 : bool
-
-logic names__is_domain_name__result9 : bool
-
-logic result18 : int
-
-logic label_length7 : int
-
-logic result19 : bool
-
-logic result20 : bool
-
-logic names__is_domain_name__result10 : bool
-
-logic result21 : int
-
-logic state6 : int
-
-logic result22 : int
-
-logic label_length8 : int
-
-logic names__is_domain_name__result11 : bool
-
-logic names__is_domain_name__result12 : bool
-
-logic names__is_domain_name__result13 : bool
-
-logic names__is_domain_name__result14 : bool
-
-logic result23 : int
-
-logic i5 : int
-
-logic names__is_domain_name__result15 : bool
-
-logic names__is_domain_name__result16 : bool
-
-logic state7 : int
-
-logic label_length9 : int
-
-logic ch4 : int
-
-logic i6 : int
-
-logic names__is_domain_name__result17 : bool
-
-logic state8 : int
-
-logic label_length10 : int
-
-logic ch5 : int
-
-logic i7 : int
-
-logic names__is_domain_name__result18 : bool
-
-logic state9 : int
-
-logic label_length11 : int
-
-logic ch6 : int
-
-logic i8 : int
-
-logic names__is_domain_name__result19 : bool
-
-logic state10 : int
-
-logic label_length12 : int
-
-logic ch7 : int
-
-logic i9 : int
-
-logic names__is_domain_name__result20 : bool
-
-logic state11 : int
-
-logic label_length13 : int
-
-logic ch8 : int
-
-logic i10 : int
-
-logic names__is_domain_name__result21 : bool
-
-logic state12 : int
-
-logic label_length14 : int
-
-logic ch9 : int
-
-logic i11 : int
-
-logic names__is_domain_name__result22 : bool
-
-logic result24 : bool
-
-logic names__is_domain_name__result23 : bool
-
-logic result25 : bool
-
-logic names__is_domain_name__result24 : bool
-
-logic names__is_domain_name__result25 : bool
-
-logic names__is_domain_name__result26 : bool
-
-logic names__is_domain_name__result27 : bool
-
-logic names__is_domain_name__result28 : bool
-
-logic names__is_domain_name__result29 : bool
-
-logic names__is_domain_name__result30 : bool
-
-logic result26 : bool
-
-logic names__is_domain_name__result31 : bool
-
-logic names__is_domain_name__result32 : bool
-
-logic names__is_domain_name__result33 : bool
-
-logic state13 : int
-
-logic label_length15 : int
-
-logic ch10 : int
-
-logic i12 : int
-
-logic names__is_domain_name__result34 : bool
-
-logic state14 : int
-
-logic label_length16 : int
-
-logic ch11 : int
-
-logic i13 : int
-
-logic names__is_domain_name__result35 : bool
-
-logic state15 : int
-
-logic label_length17 : int
-
-logic ch12 : int
-
-logic i14 : int
-
-logic names__is_domain_name__result36 : bool
-
-logic state16 : int
-
-logic label_length18 : int
-
-logic ch13 : int
-
-logic i15 : int
-
-logic names__is_domain_name__result37 : bool
-
-logic state17 : int
-
-logic label_length19 : int
-
-logic ch14 : int
-
-logic i16 : int
-
-logic names__is_domain_name__result38 : bool
-
-logic state18 : int
-
-logic label_length20 : int
-
-logic ch15 : int
-
-logic i17 : int
-
-logic names__is_domain_name__result39 : bool
-
-logic state19 : int
-
-logic label_length21 : int
-
-logic ch16 : int
-
-logic i18 : int
-
-logic names__is_domain_name__result40 : bool
-
-logic state20 : int
-
-logic label_length22 : int
-
-logic ch17 : int
-
-logic i19 : int
-
-logic names__is_domain_name__result41 : bool
-
-logic state21 : int
-
-logic label_length23 : int
-
-logic ch18 : int
-
-logic i20 : int
-
-logic names__is_domain_name__result42 : bool
-
-logic state22 : int
-
-logic label_length24 : int
-
-logic ch19 : int
-
-logic i21 : int
-
-logic names__is_domain_name__result43 : bool
-
-axiom H : dynamic_property(1, 2147483647, to_rep1(first(name1)),
-  to_rep1(last(name1)))
-
-axiom H1 : ((0 <= 2) -> in_range5(state))
-
-axiom H2 : ((0 <= 255) -> in_range6(label_length))
-
-axiom H3 : ((0 <= 255) -> in_range3(ch))
-
-axiom H4 : (result = state)
-
-axiom H5 : (state1 = 0)
-
-axiom H6 : (result1 = label_length)
-
-axiom H7 : (label_length1 = 0)
-
-axiom H8 : (not (length({ elts = name; rt = name1 }) <  1))
-
-axiom H9 : (not (255 <  length({ elts = name; rt = name1 })))
-
-axiom H10 : (result3 = i)
-
-axiom H11 : (i3 = to_rep1(first(name1)))
-
-axiom H12 : (to_rep1(first(name1)) <= i3)
-
-axiom H13 : (i3 <= to_rep1(last(name1)))
-
-axiom H14 : (label_length2 <  ((i4 - to_rep1(first(name1))) + 1))
-
-axiom H15 : ((((((to_rep1(first(name1)) <= to_rep1(last(name1))) ->
-  dynamic_property1(to_rep1(first(name1)), to_rep1(last(name1)), i4)) and
-  ((0 <= 2) -> in_range5(state2))) and ((0 <= 255) ->
-  in_range6(label_length2))) and ((0 <= 255) -> in_range3(ch2))) and
-  ((to_rep1(first(name1)) <= i4) and (i4 <= to_rep1(last(name1)))))
-
-axiom H16 : (ch2 = result4)
-
-axiom H17 : (ch3 = to_rep((name[i4])))
-
-axiom H18 : in_range4(ch3)
-
-axiom H19 : (names__is_domain_name__result4 = names__is_domain_name__result3)
-
-axiom H20 : (not (state2 = 0))
-
-axiom H21 : (not (state2 = 1))
-
-axiom H22 : (ch3 = 45)
-
  (* File "names.ads", line 12, characters 0-0 *)
-goal WP_parameter_def : in_range6((label_length2 + 1))
+goal WP_parameter_def :
+  (forall state:int. forall label_length:int. forall ch:int. forall i:int.
+  forall result:int. forall state1:int. forall result1:int.
+  forall label_length1:int. forall result2:int. forall i1:int.
+  forall state2:int. forall label_length2:int. forall ch1:int. forall i2:int.
+  forall names__is_domain_name__result:bool. forall result3:int.
+  forall ch2:int. forall names__is_domain_name__result1:bool.
+  (dynamic_property(1, 2147483647, to_rep1(first(name1)),
+  to_rep1(last(name1))) -> (((0 <= 2) -> in_range5(state)) -> (((0 <= 255) ->
+  in_range6(label_length)) -> (((0 <= 255) -> in_range3(ch)) -> ((({
+  int__content = result } = { int__content = state }) and (state1 = 0)) ->
+  ((({ int__content = result1 } = { int__content = label_length }) and
+  (label_length1 = 0)) -> ((not ((not (length({ elts = name; rt = name1
+  }) <  1)) -> (255 <  length({ elts = name; rt = name1 })))) -> ((({
+  int__content = result2 } = { int__content = i }) and
+  (i1 = to_rep1(first(name1)))) -> (((to_rep1(first(name1)) <= i1) and
+  (i1 <= to_rep1(last(name1)))) ->
+  ((label_length2 <  ((i2 - to_rep1(first(name1))) + 1)) ->
+  (((((((to_rep1(first(name1)) <= to_rep1(last(name1))) ->
+  dynamic_property1(to_rep1(first(name1)), to_rep1(last(name1)), i2)) and
+  ((0 <= 2) -> in_range5(state2))) and ((0 <= 255) ->
+  in_range6(label_length2))) and ((0 <= 255) -> in_range3(ch1))) and
+  ((to_rep1(first(name1)) <= i2) and (i2 <= to_rep1(last(name1))))) ->
+  (((ch1 = result3) and (ch2 = to_rep((name[i2])))) -> ((in_range4(ch2) and
+  (names__is_domain_name__result1 = names__is_domain_name__result)) ->
+  ((not (state2 = 0)) -> ((not (state2 = 1)) -> ((ch2 = 45) ->
+  in_range6((label_length2 + 1)))))))))))))))))))

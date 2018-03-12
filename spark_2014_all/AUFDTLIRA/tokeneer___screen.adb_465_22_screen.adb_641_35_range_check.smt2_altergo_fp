@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -214,24 +214,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -242,17 +224,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -262,37 +244,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 logic to_rep1 : integer -> int
 
@@ -1625,498 +1579,116 @@ axiom row6__def_axiom : (row6 = 16)
 
 axiom row7__def_axiom : (row7 = 18)
 
-logic currentconfig__split_fields : bool
-
-logic currentconfig__split_fields1 : durationt
-
-logic currentconfig__split_fields2 : durationt
-
-logic currentconfig__split_fields3 : durationt
-
-logic currentconfig__split_fields4 : durationt
-
-logic currentconfig__split_fields5 : durationt
-
-logic currentconfig__split_fields6 : durationt
-
-logic currentconfig__split_fields7 : durationt
-
-logic currentconfig__split_fields8 : accesspolicyt
-
-logic currentconfig__split_fields9 : filesizet
-
-logic currentconfig__split_fields10 : filesizet
-
-logic currentconfig__split_fields11 : classt
-
-logic currentconfig__split_fields12 : classt
-
-logic currentconfig__split_fields13 : fart
-
-logic latchunlock : int
-
-logic alarmsilent : int
-
-logic fingerwait : int
-
-logic tokenremove : int
-
-logic workstart : int
-
-logic workend : int
-
-logic authduration : int
-
-logic policy : int
-
-logic minpreservedlog : int
-
-logic alarmthreshold : int
-
-logic minentry : int
-
-logic clearance : int
-
-logic maxfar : int
-
-logic newconfig__split_fields : durationt
-
-logic newconfig__split_fields1 : durationt
-
-logic newconfig__split_fields2 : durationt
-
-logic newconfig__split_fields3 : durationt
-
-logic newconfig__split_fields4 : durationt
-
-logic newconfig__split_fields5 : durationt
-
-logic newconfig__split_fields6 : durationt
-
-logic newconfig__split_fields7 : accesspolicyt
-
-logic newconfig__split_fields8 : filesizet
-
-logic newconfig__split_fields9 : filesizet
-
-logic newconfig__split_fields10 : classt
-
-logic newconfig__split_fields11 : classt
-
-logic newconfig__split_fields12 : fart
-
-logic c112b : (int,character) farray
-
-logic c118b : (int,character) farray
-
-logic o : fart
-
-logic o1 : classt
-
-logic o2 : classt
-
-logic o3 : filesizet
-
-logic o4 : filesizet
-
-logic o5 : accesspolicyt
-
-logic o6 : durationt
-
-logic o7 : durationt
-
-logic o8 : durationt
-
-logic o9 : durationt
-
-logic o10 : durationt
-
-logic o11 : durationt
-
-logic o12 : durationt
-
-logic o13 : durationt
-
-logic o14 : durationt
-
-logic o15 : durationt
-
-logic o16 : durationt
-
-logic o17 : durationt
-
-logic o18 : durationt
-
-logic o19 : durationt
-
-logic o20 : accesspolicyt
-
-logic o21 : filesizet
-
-logic o22 : filesizet
-
-logic o23 : classt
-
-logic o24 : classt
-
-logic o25 : fart
-
-logic temp___1777 : durationt
-
-logic temp___17771 : durationt
-
-logic temp___17772 : durationt
-
-logic temp___17773 : durationt
-
-logic temp___17774 : durationt
-
-logic temp___17775 : durationt
-
-logic temp___17776 : durationt
-
-logic temp___17777 : accesspolicyt
-
-logic temp___17778 : filesizet
-
-logic temp___17779 : filesizet
-
-logic temp___177710 : classt
-
-logic temp___177711 : classt
-
-logic temp___177712 : fart
-
-logic o26 : int
-
-logic o27 : (int,character) farray
-
-logic o28 : (int,character) farray
-
-logic o29 : t
-
-logic o30 : screenycoordt
-
-logic o31 : screenxcoordt
-
-logic o32 : screenxcoordt
-
-logic o33 : screenycoordt
-
-logic o34 : screenxcoordt
-
-logic o35 : screenycoordt
-
-logic o36 : int
-
-logic o37 : (int,character) farray
-
-logic o38 : (int,character) farray
-
-logic o39 : t
-
-logic o40 : screenycoordt
-
-logic o41 : screenxcoordt
-
-logic o42 : screenxcoordt
-
-logic o43 : screenycoordt
-
-logic o44 : screenxcoordt
-
-logic o45 : screenycoordt
-
-logic o46 : int
-
-logic o47 : (int,character) farray
-
-logic o48 : (int,character) farray
-
-logic o49 : t
-
-logic o50 : screenycoordt
-
-logic o51 : screenxcoordt
-
-logic o52 : screenxcoordt
-
-logic o53 : screenycoordt
-
-logic o54 : screenxcoordt
-
-logic o55 : screenycoordt
-
-logic o56 : int
-
-logic o57 : (int,character) farray
-
-logic o58 : (int,character) farray
-
-logic o59 : t
-
-logic o60 : screenycoordt
-
-logic o61 : screenxcoordt
-
-logic o62 : screenxcoordt
-
-logic o63 : screenycoordt
-
-logic o64 : screenxcoordt
-
-logic o65 : screenycoordt
-
-logic o66 : (int,character) farray
-
-logic o67 : (int,character) farray
-
-logic o68 : t
-
-logic o69 : screenycoordt
-
-logic o70 : screenxcoordt
-
-logic o71 : screenxcoordt
-
-logic o72 : screenycoordt
-
-logic o73 : screenxcoordt
-
-logic o74 : screenycoordt
-
-logic temp___1780 : (int,character) farray
-
-logic o75 : (int,character) farray
-
-logic o76 : screenycoordt
-
-logic o77 : screenxcoordt
-
-logic o78 : screenxcoordt
-
-logic o79 : screenycoordt
-
-logic o80 : screenxcoordt
-
-logic o81 : screenycoordt
-
-logic temp___1783 : (int,character) farray
-
-logic o82 : (int,character) farray
-
-logic o83 : screenycoordt
-
-logic o84 : screenxcoordt
-
-logic o85 : screenxcoordt
-
-logic o86 : screenycoordt
-
-logic o87 : screenxcoordt
-
-logic o88 : screenycoordt
-
-logic temp___1786 : (int,character) farray
-
-logic workstart1 : int
-
-logic workend1 : int
-
-logic authduration1 : int
-
-logic policy1 : int
-
-logic minpreservedlog1 : int
-
-logic alarmthreshold1 : int
-
-logic minentry1 : int
-
-logic clearance1 : int
-
-logic maxfar1 : int
-
-logic configdata__thedisplayfields__thetokenremovalduration : int
-
-logic configdata__thedisplayfields__thefingerwaitduration : int
-
-logic configdata__thedisplayfields__thealarmsilentduration : int
-
-logic configdata__thedisplayfields__thelatchunlockduration : int
-
-logic result : int
-
-logic latchunlock1 : int
-
-logic result1 : int
-
-logic alarmsilent1 : int
-
-logic result2 : int
-
-logic fingerwait1 : int
-
-logic result3 : int
-
-logic tokenremove1 : int
-
-logic result4 : durationt
-
-logic result5 : durationt
-
-logic result6 : durationt
-
-logic result7 : durationt
-
-logic result8 : durationt
-
-logic result9 : durationt
-
-logic result10 : durationt
-
-logic result11 : accesspolicyt
-
-logic result12 : filesizet
-
-logic result13 : filesizet
-
-logic result14 : classt
-
-logic result15 : classt
-
-logic result16 : fart
-
-logic newconfig__split_fields13 : durationt
-
-logic newconfig__split_fields14 : durationt
-
-logic newconfig__split_fields15 : durationt
-
-logic newconfig__split_fields16 : durationt
-
-logic newconfig__split_fields17 : durationt
-
-logic newconfig__split_fields18 : durationt
-
-logic newconfig__split_fields19 : durationt
-
-logic newconfig__split_fields20 : accesspolicyt
-
-logic newconfig__split_fields21 : filesizet
-
-logic newconfig__split_fields22 : filesizet
-
-logic newconfig__split_fields23 : classt
-
-logic newconfig__split_fields24 : classt
-
-logic newconfig__split_fields25 : fart
-
-logic ok : bool
-
-logic consoleok : bool
-
-logic result17 : bool
-
-logic ok1 : bool
-
-logic consoleok1 : bool
-
-logic result18 : bool
-
-logic ok2 : bool
-
-logic consoleok2 : bool
-
-logic result19 : bool
-
-logic ok3 : bool
-
-logic consoleok3 : bool
-
-logic result20 : bool
-
-logic ok4 : bool
-
-logic consoleok4 : bool
-
-logic result21 : bool
-
-logic ok5 : bool
-
-logic consoleok5 : bool
-
-logic result22 : bool
-
-logic ok6 : bool
-
-logic result23 : (int,character) farray
-
-logic c112b1 : (int,character) farray
-
-logic consoleok6 : bool
-
-logic result24 : bool
-
-logic ok7 : bool
-
-logic result25 : (int,character) farray
-
-logic c118b1 : (int,character) farray
-
-logic consoleok7 : bool
-
-logic result26 : bool
-
-logic ok8 : bool
-
-axiom H : ((0 <= 864000) -> in_range5(latchunlock))
-
-axiom H1 : ((0 <= 864000) -> in_range5(alarmsilent))
-
-axiom H2 : ((0 <= 864000) -> in_range5(fingerwait))
-
-axiom H3 : ((0 <= 864000) -> in_range5(tokenremove))
-
-axiom H4 : ((0 <= 864000) -> in_range5(workstart))
-
-axiom H5 : ((0 <= 864000) -> in_range5(workend))
-
-axiom H6 : ((0 <= 864000) -> in_range5(authduration))
-
-axiom H7 : ((0 <= 1) -> in_range10(policy))
-
-axiom H8 : ((0 <= 4194304) -> in_range4(minpreservedlog))
-
-axiom H9 : ((0 <= 4194304) -> in_range4(alarmthreshold))
-
-axiom H10 : ((0 <= 5) -> in_range8(minentry))
-
-axiom H11 : ((0 <= 5) -> in_range8(clearance))
-
-axiom H12 : ((0 <= 2147483647) -> in_range7(maxfar))
-
-axiom H13 : in_range11(column1)
-
-axiom H14 : in_range11(column2)
-
-axiom H15 : in_range12(row1)
-
-axiom H16 : in_range12(row2)
-
-axiom H17 : in_range12(row3)
-
-axiom H18 : in_range12(row4)
-
-axiom H19 : in_range12(row5)
-
-axiom H20 : in_range12(row6)
-
-axiom H21 : in_range12(row7)
-
-axiom H22 :
-  ((((((((((((in_range9(configdata__thedisplayfields__thelatchunlockduration) and
+ (* File "screen.adb", line 280, characters 0-0 *)
+goal WP_parameter_def :
+  (forall currentconfig__split_fields:bool.
+  forall currentconfig__split_fields1:durationt.
+  forall currentconfig__split_fields2:durationt.
+  forall currentconfig__split_fields3:durationt.
+  forall currentconfig__split_fields4:durationt.
+  forall currentconfig__split_fields5:durationt.
+  forall currentconfig__split_fields6:durationt.
+  forall currentconfig__split_fields7:durationt.
+  forall currentconfig__split_fields8:accesspolicyt.
+  forall currentconfig__split_fields9:filesizet.
+  forall currentconfig__split_fields10:filesizet.
+  forall currentconfig__split_fields11:classt.
+  forall currentconfig__split_fields12:classt.
+  forall currentconfig__split_fields13:fart. forall latchunlock:int.
+  forall alarmsilent:int. forall fingerwait:int. forall tokenremove:int.
+  forall workstart:int. forall workend:int. forall authduration:int.
+  forall policy:int. forall minpreservedlog:int. forall alarmthreshold:int.
+  forall minentry:int. forall clearance:int. forall maxfar:int.
+  forall newconfig__split_fields:durationt.
+  forall newconfig__split_fields1:durationt.
+  forall newconfig__split_fields2:durationt.
+  forall newconfig__split_fields3:durationt.
+  forall newconfig__split_fields4:durationt.
+  forall newconfig__split_fields5:durationt.
+  forall newconfig__split_fields6:durationt.
+  forall newconfig__split_fields7:accesspolicyt.
+  forall newconfig__split_fields8:filesizet.
+  forall newconfig__split_fields9:filesizet.
+  forall newconfig__split_fields10:classt.
+  forall newconfig__split_fields11:classt.
+  forall newconfig__split_fields12:fart. forall c112b:(int,character) farray.
+  forall c118b:(int,character) farray. forall o:fart. forall o1:classt.
+  forall o2:classt. forall o3:filesizet. forall o4:filesizet.
+  forall o5:accesspolicyt. forall o6:durationt. forall o7:durationt.
+  forall o8:durationt. forall o9:durationt. forall o10:durationt.
+  forall o11:durationt. forall o12:durationt. forall o13:durationt.
+  forall o14:durationt. forall o15:durationt. forall o16:durationt.
+  forall o17:durationt. forall o18:durationt. forall o19:durationt.
+  forall o20:accesspolicyt. forall o21:filesizet. forall o22:filesizet.
+  forall o23:classt. forall o24:classt. forall o25:fart.
+  forall temp___1968:durationt. forall temp___19681:durationt.
+  forall temp___19682:durationt. forall temp___19683:durationt.
+  forall temp___19684:durationt. forall temp___19685:durationt.
+  forall temp___19686:durationt. forall temp___19687:accesspolicyt.
+  forall temp___19688:filesizet. forall temp___19689:filesizet.
+  forall temp___196810:classt. forall temp___196811:classt.
+  forall temp___196812:fart. forall o26:int.
+  forall o27:(int,character) farray. forall o28:(int,character) farray.
+  forall o29:t. forall o30:screenycoordt. forall o31:screenxcoordt.
+  forall o32:screenxcoordt. forall o33:screenycoordt.
+  forall o34:screenxcoordt. forall o35:screenycoordt. forall o36:int.
+  forall o37:(int,character) farray. forall o38:(int,character) farray.
+  forall o39:t. forall o40:screenycoordt. forall o41:screenxcoordt.
+  forall o42:screenxcoordt. forall o43:screenycoordt.
+  forall o44:screenxcoordt. forall o45:screenycoordt. forall o46:int.
+  forall o47:(int,character) farray. forall o48:(int,character) farray.
+  forall o49:t. forall o50:screenycoordt. forall o51:screenxcoordt.
+  forall o52:screenxcoordt. forall o53:screenycoordt.
+  forall o54:screenxcoordt. forall o55:screenycoordt. forall o56:int.
+  forall o57:(int,character) farray. forall o58:(int,character) farray.
+  forall o59:t. forall o60:screenycoordt. forall o61:screenxcoordt.
+  forall o62:screenxcoordt. forall o63:screenycoordt.
+  forall o64:screenxcoordt. forall o65:screenycoordt.
+  forall o66:(int,character) farray. forall o67:us_t.
+  forall o68:screenycoordt. forall o69:screenxcoordt.
+  forall o70:us_split_fields4. forall o71:us_rep2.
+  forall temp___1971:(int,character) farray.
+  forall o72:(int,character) farray. forall o73:screenycoordt.
+  forall o74:screenxcoordt. forall o75:us_split_fields4. forall o76:us_rep2.
+  forall temp___1974:(int,character) farray.
+  forall o77:(int,character) farray. forall o78:screenycoordt.
+  forall o79:screenxcoordt. forall o80:us_split_fields4. forall o81:us_rep2.
+  forall temp___1977:(int,character) farray. forall workstart1:int.
+  forall workend1:int. forall authduration1:int. forall policy1:int.
+  forall minpreservedlog1:int. forall alarmthreshold1:int.
+  forall minentry1:int. forall clearance1:int. forall maxfar1:int.
+  forall configdata__thedisplayfields__thetokenremovalduration:int.
+  forall configdata__thedisplayfields__thefingerwaitduration:int.
+  forall configdata__thedisplayfields__thealarmsilentduration:int.
+  forall configdata__thedisplayfields__thelatchunlockduration:int.
+  forall result:int__ref. forall latchunlock1:int. forall result1:int__ref.
+  forall alarmsilent1:int. forall result2:int__ref. forall fingerwait1:int.
+  forall result3:int__ref. forall tokenremove1:int.
+  forall result4:us_split_fields__ref.
+  forall newconfig__split_fields13:us_split_fields. forall ok:bool.
+  forall consoleok:bool. forall result5:bool__ref. forall ok1:bool.
+  forall consoleok1:bool. forall result6:bool__ref. forall ok2:bool.
+  forall consoleok2:bool. forall result7:bool__ref. forall ok3:bool.
+  forall consoleok3:bool. forall result8:bool__ref. forall ok4:bool.
+  forall consoleok4:bool. forall result9:bool__ref. forall ok5:bool.
+  forall consoleok5:bool. forall result10:bool__ref. forall ok6:bool.
+  forall result11:map__ref. forall c112b1:(int,character) farray.
+  forall consoleok6:bool. forall result12:bool__ref. forall ok7:bool.
+  forall result13:map__ref. forall c118b1:(int,character) farray.
+  forall consoleok7:bool. forall result14:bool__ref. forall ok8:bool.
+  (((0 <= 864000) -> in_range5(latchunlock)) -> (((0 <= 864000) ->
+  in_range5(alarmsilent)) -> (((0 <= 864000) -> in_range5(fingerwait)) ->
+  (((0 <= 864000) -> in_range5(tokenremove)) -> (((0 <= 864000) ->
+  in_range5(workstart)) -> (((0 <= 864000) -> in_range5(workend)) ->
+  (((0 <= 864000) -> in_range5(authduration)) -> (((0 <= 1) ->
+  in_range10(policy)) -> (((0 <= 4194304) -> in_range4(minpreservedlog)) ->
+  (((0 <= 4194304) -> in_range4(alarmthreshold)) -> (((0 <= 5) ->
+  in_range8(minentry)) -> (((0 <= 5) -> in_range8(clearance)) ->
+  (((0 <= 2147483647) -> in_range7(maxfar)) -> (in_range11(column1) ->
+  (in_range11(column2) -> (in_range12(row1) -> (in_range12(row2) ->
+  (in_range12(row3) -> (in_range12(row4) -> (in_range12(row5) ->
+  (in_range12(row6) -> (in_range12(row7) ->
+  ((((((((((((((in_range9(configdata__thedisplayfields__thelatchunlockduration) and
   in_range9(configdata__thedisplayfields__thealarmsilentduration)) and
   in_range9(configdata__thedisplayfields__thefingerwaitduration)) and
   in_range9(configdata__thedisplayfields__thetokenremovalduration)) and
@@ -2124,96 +1696,59 @@ axiom H22 :
   in_range5(workend1)) and in_range5(authduration1)) and
   in_range10(policy1)) and in_range8(minentry1)) and
   in_range4(minpreservedlog1)) and in_range4(alarmthreshold1)) and
-  in_range7(maxfar1))
-
-axiom H23 : (result = latchunlock)
-
-axiom H24 :
-  (latchunlock1 = configdata__thedisplayfields__thelatchunlockduration)
-
-axiom H25 : (result1 = alarmsilent)
-
-axiom H26 :
-  (alarmsilent1 = configdata__thedisplayfields__thealarmsilentduration)
-
-axiom H27 : (result2 = fingerwait)
-
-axiom H28 :
-  (fingerwait1 = configdata__thedisplayfields__thefingerwaitduration)
-
-axiom H29 : (result3 = tokenremove)
-
-axiom H30 :
-  (tokenremove1 = configdata__thedisplayfields__thetokenremovalduration)
-
-axiom H31 : (to_rep4(o) = maxfar1)
-
-axiom H32 : (to_rep5(o1) = clearance1)
-
-axiom H33 : (to_rep5(o2) = minentry1)
-
-axiom H34 : (to_rep2(o3) = alarmthreshold1)
-
-axiom H35 : (to_rep2(o4) = minpreservedlog1)
-
-axiom H36 : (to_rep6(o5) = policy1)
-
-axiom H37 : (to_rep3(o6) = authduration1)
-
-axiom H38 : (to_rep3(o7) = workend1)
-
-axiom H39 : (to_rep3(o8) = workstart1)
-
-axiom H40 : (to_rep3(o9) = tokenremove1)
-
-axiom H41 : (to_rep3(o10) = fingerwait1)
-
-axiom H42 : (to_rep3(o11) = alarmsilent1)
-
-axiom H43 : (to_rep3(o12) = latchunlock1)
-
-axiom H44 : ((o13 = o12) and ((o14 = o11) and ((o15 = o10) and
-  ((o16 = o9) and ((o17 = o8) and ((o18 = o7) and ((o19 = o6) and
-  ((o20 = o5) and ((o21 = o4) and ((o22 = o3) and ((o23 = o2) and
-  ((o24 = o1) and (o25 = o)))))))))))))
-
-axiom H45 : ((temp___1777 = o13) and ((temp___17771 = o14) and
-  ((temp___17772 = o15) and ((temp___17773 = o16) and
-  ((temp___17774 = o17) and ((temp___17775 = o18) and
-  ((temp___17776 = o19) and ((temp___17777 = o20) and
-  ((temp___17778 = o21) and ((temp___17779 = o22) and
-  ((temp___177710 = o23) and ((temp___177711 = o24) and
-  (temp___177712 = o25)))))))))))))
-
-axiom H46 : ((result4 = newconfig__split_fields) and
-  ((result5 = newconfig__split_fields1) and
-  ((result6 = newconfig__split_fields2) and
-  ((result7 = newconfig__split_fields3) and
-  ((result8 = newconfig__split_fields4) and
-  ((result9 = newconfig__split_fields5) and
-  ((result10 = newconfig__split_fields6) and
-  ((result11 = newconfig__split_fields7) and
-  ((result12 = newconfig__split_fields8) and
-  ((result13 = newconfig__split_fields9) and
-  ((result14 = newconfig__split_fields10) and
-  ((result15 = newconfig__split_fields11) and
-  (result16 = newconfig__split_fields12)))))))))))))
-
-axiom H47 : ((newconfig__split_fields13 = temp___1777) and
-  ((newconfig__split_fields14 = temp___17771) and
-  ((newconfig__split_fields15 = temp___17772) and
-  ((newconfig__split_fields16 = temp___17773) and
-  ((newconfig__split_fields17 = temp___17774) and
-  ((newconfig__split_fields18 = temp___17775) and
-  ((newconfig__split_fields19 = temp___17776) and
-  ((newconfig__split_fields20 = temp___17777) and
-  ((newconfig__split_fields21 = temp___17778) and
-  ((newconfig__split_fields22 = temp___17779) and
-  ((newconfig__split_fields23 = temp___177710) and
-  ((newconfig__split_fields24 = temp___177711) and
-  (newconfig__split_fields25 = temp___177712)))))))))))))
-
-axiom H48 : ((currentconfig__split_fields = true) -> (not (bool_eq14({
+  in_range7(maxfar1)) and (((result = { int__content = latchunlock }) and
+  (latchunlock1 = configdata__thedisplayfields__thelatchunlockduration)) and
+  (((result1 = { int__content = alarmsilent }) and
+  (alarmsilent1 = configdata__thedisplayfields__thealarmsilentduration)) and
+  (((result2 = { int__content = fingerwait }) and
+  (fingerwait1 = configdata__thedisplayfields__thefingerwaitduration)) and
+  ((result3 = { int__content = tokenremove }) and
+  (tokenremove1 = configdata__thedisplayfields__thetokenremovalduration)))))) ->
+  (((((to_rep4(o) = maxfar1) and ((to_rep5(o1) = clearance1) and
+  ((to_rep5(o2) = minentry1) and ((to_rep2(o3) = alarmthreshold1) and
+  ((to_rep2(o4) = minpreservedlog1) and ((to_rep6(o5) = policy1) and
+  ((to_rep3(o6) = authduration1) and ((to_rep3(o7) = workend1) and
+  ((to_rep3(o8) = workstart1) and ((to_rep3(o9) = tokenremove1) and
+  ((to_rep3(o10) = fingerwait1) and ((to_rep3(o11) = alarmsilent1) and
+  ((to_rep3(o12) = latchunlock1) and ((o12 = o13) and ((o11 = o14) and
+  ((o10 = o15) and ((o9 = o16) and ((o8 = o17) and ((o7 = o18) and
+  ((o6 = o19) and ((o5 = o20) and ((o4 = o21) and ((o3 = o22) and
+  ((o2 = o23) and ((o1 = o24) and (o = o25)))))))))))))))))))))))))) and
+  ((temp___1968 = o13) and ((temp___19681 = o14) and
+  ((temp___19682 = o15) and ((temp___19683 = o16) and
+  ((temp___19684 = o17) and ((temp___19685 = o18) and
+  ((temp___19686 = o19) and ((temp___19687 = o20) and
+  ((temp___19688 = o21) and ((temp___19689 = o22) and
+  ((temp___196810 = o23) and ((temp___196811 = o24) and
+  (temp___196812 = o25)))))))))))))) and ((result4 = {
+  us_split_fields__content = { rec__screen__displayedconfigt__latchunlock =
+  newconfig__split_fields; rec__screen__displayedconfigt__alarmsilent =
+  newconfig__split_fields1; rec__screen__displayedconfigt__fingerwait =
+  newconfig__split_fields2; rec__screen__displayedconfigt__tokenremove =
+  newconfig__split_fields3; rec__screen__displayedconfigt__workstart =
+  newconfig__split_fields4; rec__screen__displayedconfigt__workend =
+  newconfig__split_fields5; rec__screen__displayedconfigt__authduration =
+  newconfig__split_fields6; rec__screen__displayedconfigt__policy =
+  newconfig__split_fields7; rec__screen__displayedconfigt__minpreservedlog =
+  newconfig__split_fields8; rec__screen__displayedconfigt__alarmthreshold =
+  newconfig__split_fields9; rec__screen__displayedconfigt__minentry =
+  newconfig__split_fields10; rec__screen__displayedconfigt__clearance =
+  newconfig__split_fields11; rec__screen__displayedconfigt__maxfar =
+  newconfig__split_fields12 } }) and (newconfig__split_fields13 = {
+  rec__screen__displayedconfigt__latchunlock = temp___1968;
+  rec__screen__displayedconfigt__alarmsilent = temp___19681;
+  rec__screen__displayedconfigt__fingerwait = temp___19682;
+  rec__screen__displayedconfigt__tokenremove = temp___19683;
+  rec__screen__displayedconfigt__workstart = temp___19684;
+  rec__screen__displayedconfigt__workend = temp___19685;
+  rec__screen__displayedconfigt__authduration = temp___19686;
+  rec__screen__displayedconfigt__policy = temp___19687;
+  rec__screen__displayedconfigt__minpreservedlog = temp___19688;
+  rec__screen__displayedconfigt__alarmthreshold = temp___19689;
+  rec__screen__displayedconfigt__minentry = temp___196810;
+  rec__screen__displayedconfigt__clearance = temp___196811;
+  rec__screen__displayedconfigt__maxfar = temp___196812 }))) ->
+  (((currentconfig__split_fields = true) -> (not (bool_eq14({
   us_split_fields1 = { rec__screen__displayedconfigt__latchunlock =
   currentconfig__split_fields1; rec__screen__displayedconfigt__alarmsilent =
   currentconfig__split_fields2; rec__screen__displayedconfigt__fingerwait =
@@ -2229,175 +1764,54 @@ axiom H48 : ((currentconfig__split_fields = true) -> (not (bool_eq14({
   currentconfig__split_fields10; rec__screen__displayedconfigt__minentry =
   currentconfig__split_fields11; rec__screen__displayedconfigt__clearance =
   currentconfig__split_fields12; rec__screen__displayedconfigt__maxfar =
-  currentconfig__split_fields13 } }, { us_split_fields1 = {
-  rec__screen__displayedconfigt__latchunlock = newconfig__split_fields13;
-  rec__screen__displayedconfigt__alarmsilent = newconfig__split_fields14;
-  rec__screen__displayedconfigt__fingerwait = newconfig__split_fields15;
-  rec__screen__displayedconfigt__tokenremove = newconfig__split_fields16;
-  rec__screen__displayedconfigt__workstart = newconfig__split_fields17;
-  rec__screen__displayedconfigt__workend = newconfig__split_fields18;
-  rec__screen__displayedconfigt__authduration = newconfig__split_fields19;
-  rec__screen__displayedconfigt__policy = newconfig__split_fields20;
-  rec__screen__displayedconfigt__minpreservedlog = newconfig__split_fields21;
-  rec__screen__displayedconfigt__alarmthreshold = newconfig__split_fields22;
-  rec__screen__displayedconfigt__minentry = newconfig__split_fields23;
-  rec__screen__displayedconfigt__clearance = newconfig__split_fields24;
-  rec__screen__displayedconfigt__maxfar = newconfig__split_fields25 }
-  }) = true)))
-
-axiom H49 : (result17 = ok)
-
-axiom H50 : (ok1 = match_bool(ok, consoleok, false))
-
-axiom H51 : (to_rep8(o30) = 9)
-
-axiom H52 : (to_rep7(o31) = 25)
-
-axiom H53 : ((o32 = o31) and (o33 = o30))
-
-axiom H54 : ((o34 = o32) and (o35 = o33))
-
-axiom H55 : ((o26 = latchunlock1) and in_range9(latchunlock1))
-
-axiom H56 : (o27 = secondsstring(o26))
-
-axiom H57 : ((o28 = o27) and (o29 = mk(1, 7)))
-
-axiom H58 : (result18 = ok1)
-
-axiom H59 : (ok2 = match_bool(ok1, consoleok1, false))
-
-axiom H60 : (to_rep8(o40) = 10)
-
-axiom H61 : (to_rep7(o41) = 25)
-
-axiom H62 : ((o42 = o41) and (o43 = o40))
-
-axiom H63 : ((o44 = o42) and (o45 = o43))
-
-axiom H64 : ((o36 = alarmsilent1) and in_range9(alarmsilent1))
-
-axiom H65 : (o37 = secondsstring(o36))
-
-axiom H66 : ((o38 = o37) and (o39 = mk(1, 7)))
-
-axiom H67 : (result19 = ok2)
-
-axiom H68 : (ok3 = match_bool(ok2, consoleok2, false))
-
-axiom H69 : (to_rep8(o50) = 9)
-
-axiom H70 : (to_rep7(o51) = 63)
-
-axiom H71 : ((o52 = o51) and (o53 = o50))
-
-axiom H72 : ((o54 = o52) and (o55 = o53))
-
-axiom H73 : ((o46 = fingerwait1) and in_range9(fingerwait1))
-
-axiom H74 : (o47 = secondsstring(o46))
-
-axiom H75 : ((o48 = o47) and (o49 = mk(1, 7)))
-
-axiom H76 : (result20 = ok3)
-
-axiom H77 : (ok4 = match_bool(ok3, consoleok3, false))
-
-axiom H78 : (to_rep8(o60) = 10)
-
-axiom H79 : (to_rep7(o61) = 63)
-
-axiom H80 : ((o62 = o61) and (o63 = o60))
-
-axiom H81 : ((o64 = o62) and (o65 = o63))
-
-axiom H82 : ((o56 = tokenremove1) and in_range9(tokenremove1))
-
-axiom H83 : (o57 = secondsstring(o56))
-
-axiom H84 : ((o58 = o57) and (o59 = mk(1, 7)))
-
-axiom H85 : (result21 = ok4)
-
-axiom H86 : (ok5 = match_bool(ok4, consoleok4, false))
-
-axiom H87 : (to_rep8(o69) = 12)
-
-axiom H88 : (to_rep7(o70) = 25)
-
-axiom H89 : ((o71 = o70) and (o72 = o69))
-
-axiom H90 : ((o73 = o71) and (o74 = o72))
-
-axiom H91 : (o66 = accesspolicystring(policy1))
-
-axiom H92 : ((o67 = o66) and (o68 = mk(1, 12)))
-
-axiom H93 : (result22 = ok5)
-
-axiom H94 : (ok6 = match_bool(ok5, consoleok5, false))
-
-axiom H95 : (workstart1 = c111b)
-
-axiom H96 : in_range5(c111b)
-
-axiom H97 : (temp___1780 = printduration(c111b))
-
-axiom H98 : ((1 <= 5) -> (((1 <= 1) and (1 <= 10)) and ((1 <= 5) and
-  (5 <= 10))))
-
-axiom H99 : (o75 = temp___1780)
-
-axiom H100 : (result23 = c112b)
-
-axiom H101 : (c112b1 = o75)
-
-axiom H102 : (to_rep8(o76) = 12)
-
-axiom H103 : (to_rep7(o77) = 63)
-
-axiom H104 : ((o78 = o77) and (o79 = o76))
-
-axiom H105 : ((o80 = o78) and (o81 = o79))
-
-axiom H106 : (result24 = ok6)
-
-axiom H107 : (ok7 = match_bool(ok6, consoleok6, false))
-
-axiom H108 : (workend1 = c117b)
-
-axiom H109 : in_range5(c117b)
-
-axiom H110 : (temp___1783 = printduration(c117b))
-
-axiom H111 : ((1 <= 5) -> (((1 <= 1) and (1 <= 10)) and ((1 <= 5) and
-  (5 <= 10))))
-
-axiom H112 : (o82 = temp___1783)
-
-axiom H113 : (result25 = c118b)
-
-axiom H114 : (c118b1 = o82)
-
-axiom H115 : (to_rep8(o83) = 13)
-
-axiom H116 : (to_rep7(o84) = 63)
-
-axiom H117 : ((o85 = o84) and (o86 = o83))
-
-axiom H118 : ((o87 = o85) and (o88 = o86))
-
-axiom H119 : (result26 = ok7)
-
-axiom H120 : (ok8 = match_bool(ok7, consoleok7, false))
-
-axiom H121 : (authduration1 = c123b)
-
-axiom H122 : in_range5(c123b)
-
-axiom H123 : (temp___1786 = printduration(c123b))
-
-axiom H124 : (1 <= 5)
-
- (* File "screen.adb", line 280, characters 0-0 *)
-goal WP_parameter_def : (1 <= 1)
+  currentconfig__split_fields13 } }, { us_split_fields1 =
+  newconfig__split_fields13 }) = true))) -> (((result5 = { bool__content = ok
+  }) and (ok1 = match_bool(ok, consoleok, false))) ->
+  (((((to_rep8(o30) = 9) and ((to_rep7(o31) = 25) and ((o31 = o32) and
+  (o30 = o33)))) and ((o34 = o32) and (o35 = o33))) and
+  ((((o26 = latchunlock1) and in_range9(latchunlock1)) and
+  (o27 = secondsstring(o26))) and ((o28 = o27) and (o29 = mk(1, 7))))) ->
+  (((result6 = { bool__content = ok1 }) and (ok2 = match_bool(ok1,
+  consoleok1, false))) -> (((((to_rep8(o40) = 10) and
+  ((to_rep7(o41) = 25) and ((o41 = o42) and (o40 = o43)))) and
+  ((o44 = o42) and (o45 = o43))) and ((((o36 = alarmsilent1) and
+  in_range9(alarmsilent1)) and (o37 = secondsstring(o36))) and
+  ((o38 = o37) and (o39 = mk(1, 7))))) -> (((result7 = { bool__content = ok2
+  }) and (ok3 = match_bool(ok2, consoleok2, false))) ->
+  (((((to_rep8(o50) = 9) and ((to_rep7(o51) = 63) and ((o51 = o52) and
+  (o50 = o53)))) and ((o54 = o52) and (o55 = o53))) and
+  ((((o46 = fingerwait1) and in_range9(fingerwait1)) and
+  (o47 = secondsstring(o46))) and ((o48 = o47) and (o49 = mk(1, 7))))) ->
+  (((result8 = { bool__content = ok3 }) and (ok4 = match_bool(ok3,
+  consoleok3, false))) -> (((((to_rep8(o60) = 10) and
+  ((to_rep7(o61) = 63) and ((o61 = o62) and (o60 = o63)))) and
+  ((o64 = o62) and (o65 = o63))) and ((((o56 = tokenremove1) and
+  in_range9(tokenremove1)) and (o57 = secondsstring(o56))) and
+  ((o58 = o57) and (o59 = mk(1, 7))))) -> (((result9 = { bool__content = ok4
+  }) and (ok5 = match_bool(ok4, consoleok4, false))) ->
+  (((((to_rep8(o68) = 12) and ((to_rep7(o69) = 25) and (o70 = {
+  rec__screen__interfac__xycoordt__x = o69;
+  rec__screen__interfac__xycoordt__y = o68 }))) and (o71 = {
+  us_split_fields5 = o70 })) and ((o66 = accesspolicystring(policy1)) and
+  (o67 = { elts = o66; rt = mk(1, 12) }))) -> (((result10 = { bool__content =
+  ok5 }) and (ok6 = match_bool(ok5, consoleok5, false))) ->
+  (((workstart1 = c111b) and in_range5(c111b)) ->
+  ((((temp___1971 = printduration(c111b)) and (((1 <= 5) -> (((1 <= 1) and
+  (1 <= 10)) and ((1 <= 5) and (5 <= 10)))) and (o72 = temp___1971))) and
+  ((result11 = { map__content = c112b }) and (c112b1 = o72))) ->
+  ((((to_rep8(o73) = 12) and ((to_rep7(o74) = 63) and (o75 = {
+  rec__screen__interfac__xycoordt__x = o74;
+  rec__screen__interfac__xycoordt__y = o73 }))) and (o76 = {
+  us_split_fields5 = o75 })) -> (((result12 = { bool__content = ok6 }) and
+  (ok7 = match_bool(ok6, consoleok6, false))) -> (((workend1 = c117b) and
+  in_range5(c117b)) -> ((((temp___1974 = printduration(c117b)) and
+  (((1 <= 5) -> (((1 <= 1) and (1 <= 10)) and ((1 <= 5) and (5 <= 10)))) and
+  (o77 = temp___1974))) and ((result13 = { map__content = c118b }) and
+  (c118b1 = o77))) -> ((((to_rep8(o78) = 13) and ((to_rep7(o79) = 63) and
+  (o80 = { rec__screen__interfac__xycoordt__x = o79;
+  rec__screen__interfac__xycoordt__y = o78 }))) and (o81 = {
+  us_split_fields5 = o80 })) -> (((result14 = { bool__content = ok7 }) and
+  (ok8 = match_bool(ok7, consoleok7, false))) ->
+  (((authduration1 = c123b) and in_range5(c123b)) ->
+  ((temp___1977 = printduration(c123b)) -> ((1 <= 5) ->
+  (1 <= 1)))))))))))))))))))))))))))))))))))))))))))))))))

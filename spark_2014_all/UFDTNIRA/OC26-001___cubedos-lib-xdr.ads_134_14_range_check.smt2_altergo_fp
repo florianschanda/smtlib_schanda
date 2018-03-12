@@ -246,23 +246,9 @@ logic length : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-axiom H : in_range1(length)
-
-axiom H1 : ((comp_mod(length,4) = 0) -> (o = 0))
-
-axiom H2 : ((not (comp_mod(length,4) = 0)) -> (o = (4 - comp_mod(length,4))))
-
-axiom H3 : (o1 = (length + o))
-
-axiom H4 : ((o2 = o1) and in_range(o1))
-
  (* File "cubedos-lib-xdr.ads", line 45, characters 0-0 *)
-goal WP_parameter_def : in_range1(o2)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. forall o2:int. (in_range1(length) ->
+  ((((((comp_mod(length,4) = 0) and (o = 0)) or
+  ((not (comp_mod(length,4) = 0)) and (o = (4 - comp_mod(length,4))))) and
+  (o1 = (length + o))) and ((o2 = o1) and in_range(o1))) -> in_range1(o2))))

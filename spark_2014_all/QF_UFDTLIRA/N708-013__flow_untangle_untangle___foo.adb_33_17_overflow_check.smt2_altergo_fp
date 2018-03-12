@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -162,51 +162,9 @@ function t4b__ref___projection(a: t4b__ref) : t4b = (a).t4b__content
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic n : int
-
-logic i : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic n1 : int
-
-logic result1 : int
-
-logic i1 : int
-
-logic result2 : int
-
-logic n2 : int
-
-logic n3 : int
-
-logic i2 : int
-
-logic result3 : int
-
-logic i3 : int
-
-logic result4 : int
-
-logic n4 : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range1(n))
-
-axiom H1 : (result = n)
-
-axiom H2 : (n1 = 12)
-
-axiom H3 : (result1 = i)
-
-axiom H4 : (i1 = 1)
-
-axiom H5 : (1 <= i1)
-
-axiom H6 : (i1 <= 3)
-
  (* File "foo.adb", line 88, characters 0-0 *)
-goal WP_parameter_def : in_range1((n1 + 1))
+goal WP_parameter_def :
+  (forall n:int. forall i:int. forall result:int. forall n1:int.
+  forall result1:int. forall i1:int. ((((- 2147483648) <= 2147483647) ->
+  in_range1(n)) -> (((result = n) and (n1 = 12)) -> (((result1 = i) and
+  (i1 = 1)) -> (((1 <= i1) and (i1 <= 3)) -> in_range1((n1 + 1)))))))

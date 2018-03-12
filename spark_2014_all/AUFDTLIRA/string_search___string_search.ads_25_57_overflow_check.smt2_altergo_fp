@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -240,24 +240,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq6 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -268,17 +250,17 @@ axiom bool_eq_def5 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -288,37 +270,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq6(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq6(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq6(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 logic to_rep1 : integer -> int
 
@@ -509,452 +463,104 @@ function t4b__ref___projection(a: t4b__ref) : integer = (a).t4b__content
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic diff : bool
-
-logic i : int
-
-logic j : int
-
-logic string_search__brute_force__result : int
-
-logic temp___272 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic temp___273 : int
-
-logic temp___271 : int
-
-logic temp___270 : bool
-
-logic temp___266 : int
-
-logic temp___265 : bool
-
-logic temp___264 : int
-
-logic o5 : int
-
-logic o6 : character
-
-logic o7 : int
-
-logic o8 : bool
-
-logic o9 : bool
-
-logic o10 : int
-
-logic us : bool
-
-logic temp___267 : int
-
-logic o11 : int
-
-logic o12 : character
-
-logic o13 : int
-
-logic temp___2641 : int
-
-logic o14 : int
-
-logic o15 : character
-
-logic o16 : int
-
-logic o17 : bool
-
-logic o18 : bool
-
-logic temp___2661 : int
-
-logic temp___2651 : bool
-
-logic temp___2642 : int
-
-logic o19 : int
-
-logic o20 : character
-
-logic o21 : int
-
-logic o22 : bool
-
-logic o23 : bool
-
-logic o24 : int
-
-logic us1 : bool
-
-logic temp___2671 : int
-
-logic o25 : int
-
-logic o26 : character
-
-logic o27 : int
-
-logic temp___2643 : int
-
-logic o28 : int
-
-logic o29 : character
-
-logic o30 : int
-
-logic o31 : bool
-
-logic o32 : bool
-
-logic o33 : int
-
-logic k : int
-
-logic o34 : int
-
-logic o35 : int
-
-logic o36 : int
-
-logic o37 : int
-
-logic o38 : int
-
-logic o39 : int
-
-logic o40 : int
-
-logic o41 : bool
-
-logic diff1 : bool
-
-logic j1 : int
-
-logic string_search__brute_force__result1 : int
-
-logic result : int
-
-logic i1 : int
-
-logic result1 : bool
-
-logic diff2 : bool
-
-logic result2 : int
-
-logic j2 : int
-
-logic result3 : bool
-
-logic diff3 : bool
-
-logic diff4 : bool
-
-logic j3 : int
-
-logic result4 : int
-
-logic j4 : int
-
-logic result5 : bool
-
-logic diff5 : bool
-
-logic diff6 : bool
-
-logic j5 : int
-
-logic diff7 : bool
-
-logic j6 : int
-
-logic diff8 : bool
-
-logic j7 : int
-
-logic diff9 : bool
-
-logic j8 : int
-
-logic diff10 : bool
-
-logic j9 : int
-
-logic diff11 : bool
-
-logic j10 : int
-
-logic diff12 : bool
-
-logic j11 : int
-
-logic diff13 : bool
-
-logic j12 : int
-
-logic result6 : int
-
-logic string_search__brute_force__result2 : int
-
-logic string_search__brute_force__result3 : int
-
-logic string_search__brute_force__result4 : int
-
-logic diff14 : bool
-
-logic i2 : int
-
-logic j13 : int
-
-logic string_search__brute_force__result5 : int
-
-logic result7 : int
-
-logic i3 : int
-
-logic result8 : bool
-
-logic diff15 : bool
-
-logic result9 : int
-
-logic j14 : int
-
-logic result10 : bool
-
-logic diff16 : bool
-
-logic diff17 : bool
-
-logic j15 : int
-
-logic result11 : int
-
-logic j16 : int
-
-logic result12 : bool
-
-logic diff18 : bool
-
-logic diff19 : bool
-
-logic j17 : int
-
-logic diff20 : bool
-
-logic j18 : int
-
-logic diff21 : bool
-
-logic j19 : int
-
-logic diff22 : bool
-
-logic j20 : int
-
-logic diff23 : bool
-
-logic j21 : int
-
-logic diff24 : bool
-
-logic j22 : int
-
-logic diff25 : bool
-
-logic j23 : int
-
-logic diff26 : bool
-
-logic j24 : int
-
-logic diff27 : bool
-
-logic j25 : int
-
-logic diff28 : bool
-
-logic j26 : int
-
-logic result13 : int
-
-logic string_search__brute_force__result6 : int
-
-logic string_search__brute_force__result7 : int
-
-logic string_search__brute_force__result8 : int
-
-logic diff29 : bool
-
-logic i4 : int
-
-logic j27 : int
-
-logic string_search__brute_force__result9 : int
-
-logic diff30 : bool
-
-logic i5 : int
-
-logic j28 : int
-
-logic string_search__brute_force__result10 : int
-
-logic diff31 : bool
-
-logic i6 : int
-
-logic j29 : int
-
-logic string_search__brute_force__result11 : int
-
-logic diff32 : bool
-
-logic i7 : int
-
-logic j30 : int
-
-logic string_search__brute_force__result12 : int
-
-logic diff33 : bool
-
-logic i8 : int
-
-logic j31 : int
-
-logic string_search__brute_force__result13 : int
-
-logic diff34 : bool
-
-logic i9 : int
-
-logic j32 : int
-
-logic string_search__brute_force__result14 : int
-
-logic diff35 : bool
-
-logic i10 : int
-
-logic j33 : int
-
-logic string_search__brute_force__result15 : int
-
-logic diff36 : bool
-
-logic i11 : int
-
-logic j34 : int
-
-logic string_search__brute_force__result16 : int
-
-logic diff37 : bool
-
-logic i12 : int
-
-logic j35 : int
-
-logic string_search__brute_force__result17 : int
-
-logic diff38 : bool
-
-logic i13 : int
-
-logic j36 : int
-
-logic string_search__brute_force__result18 : int
-
-logic result14 : int
-
-logic string_search__brute_force__result19 : int
-
-logic string_search__brute_force__result20 : int
-
-logic string_search__brute_force__result21 : int
-
-logic diff39 : bool
-
-logic i14 : int
-
-logic j37 : int
-
-logic string_search__brute_force__result22 : int
-
-logic diff40 : bool
-
-logic i15 : int
-
-logic j38 : int
-
-logic string_search__brute_force__result23 : int
-
-logic diff41 : bool
-
-logic i16 : int
-
-logic j39 : int
-
-logic string_search__brute_force__result24 : int
-
-logic diff42 : bool
-
-logic i17 : int
-
-logic j40 : int
-
-logic string_search__brute_force__result25 : int
-
-logic result15 : bool
-
-axiom H : (dynamic_property(1, 2147483647, to_rep1(first(needle1)),
-  to_rep1(last(needle1))) and (to_rep1(first(needle1)) = 1))
-
-axiom H1 : (dynamic_property(1, 2147483647, to_rep1(first(haystack1)),
-  to_rep1(last(haystack1))) and (to_rep1(first(haystack1)) = 1))
-
-axiom H2 : ((1 <= length({ elts = needle; rt = needle1 })) and (length({
-  elts = needle; rt = needle1 }) <= length({ elts = haystack; rt = haystack1
-  })))
-
-axiom H3 :
-  (((((string_search__brute_force__result22 = string_search__brute_force__result13) and
-  ((j37 = j31) and ((i14 = i8) and (diff39 = diff33)))) and
-  ((string_search__brute_force__result23 = string_search__brute_force__result14) and
-  ((j38 = j32) and ((i15 = i9) and (diff40 = diff34))))) and
-  ((temp___272 = 1) and (((((((o = length({ elts = needle; rt = needle1
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (forall diff:bool. forall i:int. forall j:int.
+  forall string_search__brute_force__result:int. forall temp___303:int.
+  forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
+  forall temp___304:int. forall temp___302:int. forall temp___301:bool.
+  forall temp___297:int. forall temp___296:bool. forall temp___295:int.
+  forall o5:int. forall o6:character. forall o7:int. forall o8:bool.
+  forall o9:bool. forall temp___2951:int. forall o10:int.
+  forall o11:character. forall o12:int. forall o13:bool. forall o14:bool.
+  forall temp___2971:int. forall temp___2961:bool. forall temp___2952:int.
+  forall o15:int. forall o16:character. forall o17:int. forall o18:bool.
+  forall o19:bool. forall temp___2953:int. forall o20:int.
+  forall o21:character. forall o22:int. forall o23:bool. forall o24:bool.
+  forall o25:int. forall o26:int. forall o27:int. forall diff1:bool.
+  forall j1:int. forall string_search__brute_force__result1:int.
+  forall result:int. forall i1:int. forall result1:bool. forall diff2:bool.
+  forall result2:int. forall j2:int. forall result3:bool. forall diff3:bool.
+  forall diff4:bool. forall j3:int. forall result4:int. forall j4:int.
+  forall result5:bool. forall diff5:bool. forall diff6:bool. forall j5:int.
+  forall diff7:bool. forall j6:int. forall diff8:bool. forall j7:int.
+  forall diff9:bool. forall j8:int. forall diff10:bool. forall j9:int.
+  forall diff11:bool. forall j10:int. forall diff12:bool. forall j11:int.
+  forall diff13:bool. forall j12:int. forall result6:int.
+  forall string_search__brute_force__result2:int.
+  forall string_search__brute_force__result3:int.
+  forall string_search__brute_force__result4:int. forall diff14:bool.
+  forall i2:int. forall j13:int.
+  forall string_search__brute_force__result5:int. forall result7:int.
+  forall i3:int. forall result8:bool. forall diff15:bool. forall result9:int.
+  forall j14:int. forall result10:bool. forall diff16:bool.
+  forall diff17:bool. forall j15:int. forall result11:int. forall j16:int.
+  forall result12:bool. forall diff18:bool. forall diff19:bool.
+  forall j17:int. forall diff20:bool. forall j18:int. forall diff21:bool.
+  forall j19:int. forall diff22:bool. forall j20:int. forall diff23:bool.
+  forall j21:int. forall diff24:bool. forall j22:int. forall diff25:bool.
+  forall j23:int. forall diff26:bool. forall j24:int. forall result13:int.
+  forall string_search__brute_force__result6:int. forall diff27:bool__ref.
+  forall i4:int__ref. forall j25:int__ref.
+  forall string_search__brute_force__result7:int__ref. forall diff28:bool.
+  forall i5:int. forall j26:int.
+  forall string_search__brute_force__result8:int. forall diff29:bool__ref.
+  forall i6:int__ref. forall j27:int__ref.
+  forall string_search__brute_force__result9:int__ref. forall diff30:bool.
+  forall i7:int. forall j28:int.
+  forall string_search__brute_force__result10:int. forall diff31:bool__ref.
+  forall i8:int__ref. forall j29:int__ref.
+  forall string_search__brute_force__result11:int__ref. forall diff32:bool.
+  forall i9:int. forall j30:int.
+  forall string_search__brute_force__result12:int. forall result14:int__ref.
+  forall string_search__brute_force__result13:int.
+  forall string_search__brute_force__result14:int__ref.
+  forall string_search__brute_force__result15:int. forall diff33:bool__ref.
+  forall i10:int__ref. forall j31:int__ref.
+  forall string_search__brute_force__result16:int__ref. forall diff34:bool.
+  forall i11:int. forall j32:int.
+  forall string_search__brute_force__result17:int. forall diff35:bool__ref.
+  forall i12:int__ref. forall j33:int__ref.
+  forall string_search__brute_force__result18:int__ref. forall diff36:bool.
+  forall i13:int. forall j34:int.
+  forall string_search__brute_force__result19:int. ((dynamic_property(1,
+  2147483647, to_rep1(first(needle1)), to_rep1(last(needle1))) and
+  (to_rep1(first(needle1)) = 1)) -> ((dynamic_property(1, 2147483647,
+  to_rep1(first(haystack1)), to_rep1(last(haystack1))) and
+  (to_rep1(first(haystack1)) = 1)) -> (((1 <= length({ elts = needle; rt =
+  needle1 })) and (length({ elts = needle; rt = needle1 }) <= length({ elts =
+  haystack; rt = haystack1 }))) ->
+  (((((((string_search__brute_force__result16 = string_search__brute_force__result7) and
+  ((j31 = j25) and ((i10 = i4) and (diff33 = diff27)))) and
+  ((string_search__brute_force__result17 = string_search__brute_force__result8) and
+  ((j32 = j26) and ((i11 = i5) and (diff34 = diff28))))) and
+  ((temp___303 = 1) and (((((((o = length({ elts = needle; rt = needle1
   })) and in_range1(length({ elts = needle; rt = needle1 }))) and
   (((o1 = length({ elts = haystack; rt = haystack1 })) and in_range1(length({
   elts = haystack; rt = haystack1 }))) and (o2 = (o1 - o)))) and
   ((o3 = o2) and in_range1(o2))) and (o4 = (o3 + 1))) and
-  ((temp___273 = o4) and in_range1(o4))) and (((result = i) and
-  (i1 = temp___272)) and (((temp___272 <= i1) and (i1 <= temp___273)) and
-  ((temp___271 = i1) and ((temp___270 = diff) and (((result1 = diff) and
-  (diff2 = of_int(0))) and ((((result2 = j) and
-  (j2 = to_rep1(first(needle1)))) and ((((to_rep1(first(needle1)) <= j2) and
-  (j2 <= to_rep1(last(needle1)))) -> ((((temp___266 = j2) and
-  ((temp___265 = diff2) and (((((((((temp___264 = (j2 + (i1 - 1))) and
-  in_range1((j2 + (i1 - 1)))) and
-  (((to_rep1(first(haystack1)) <= temp___264) and
-  (temp___264 <= to_rep1(last(haystack1)))) and (o5 = temp___264))) and
+  ((temp___304 = o4) and in_range1(o4))) and ((({ int__content = result } = {
+  int__content = i }) and (i1 = temp___303)) and (((temp___303 <= i1) and
+  (i1 <= temp___304)) and ((temp___302 = i1) and ((temp___301 = diff) and
+  ((({ bool__content = result1 } = { bool__content = diff }) and
+  (diff2 = of_int(0))) and (((({ int__content = result2 } = { int__content =
+  j }) and (j2 = to_rep1(first(needle1)))) and
+  ((((to_rep1(first(needle1)) <= j2) and (j2 <= to_rep1(last(needle1)))) and
+  ((((temp___297 = j2) and ((temp___296 = diff2) and
+  (((((((((temp___295 = (j2 + (i1 - 1))) and in_range1((j2 + (i1 - 1)))) and
+  (((to_rep1(first(haystack1)) <= temp___295) and
+  (temp___295 <= to_rep1(last(haystack1)))) and (o5 = temp___295))) and
   (o6 = (haystack[o5]))) and (o7 = to_rep(o6))) and
-  (((to_rep((needle[j2])) = o7) -> (o8 = true)) and
-  ((not (to_rep((needle[j2])) = o7)) -> (o8 = false)))) and
-  (((not (o8 = true)) -> (o9 = true)) and ((o8 = true) -> (o9 = false)))) and
-  ((diff2 = result3) and (diff3 = o9))) and (((((j2 = j7) and
-  (diff3 = diff8)) and ((j8 = j2) and (diff9 = diff3))) and
-  (diff3 = true)) or ((not (diff3 = true)) and ((((j7 = j5) and
-  (diff8 = diff6)) and ((j8 = j6) and (diff9 = diff7))) and
-  (((partial_match_at({ elts = needle; rt = needle1 }, { elts = haystack;
-  rt = haystack1 }, i1, j3) = true) and ((diff4 = true) <->
+  (((to_rep((needle[j2])) = o7) and (o8 = true)) or
+  ((not (to_rep((needle[j2])) = o7)) and (o8 = false)))) and
+  (((not (o8 = true)) and (o9 = true)) or ((o8 = true) and
+  (o9 = false)))) and ((diff2 = result3) and (diff3 = o9))) and
+  (((((j2 = j7) and (diff3 = diff8)) and ((j8 = j2) and (diff9 = diff3))) and
+  (diff3 = true)) or ((not (diff3 = true)) and (((({ int__content = j7 } = {
+  int__content = j5 }) and ({ bool__content = diff8 } = { bool__content =
+  diff6 })) and ((j8 = j6) and (diff9 = diff7))) and (((partial_match_at({
+  elts = needle; rt = needle1 }, { elts = haystack; rt = haystack1 }, i1,
+  j3) = true) and ((diff4 = true) <->
   (not (to_rep((needle[j3])) = to_rep((haystack[(j3 + (i1 - 1))])))))) and
   ((((to_rep1(first(needle1)) <= to_rep1(last(needle1))) ->
   dynamic_property2(to_rep1(first(needle1)), to_rep1(last(needle1)), j3)) and
@@ -963,112 +569,124 @@ axiom H3 :
   (j3 = to_rep1(last(needle1)))) or ((not (j3 = to_rep1(last(needle1)))) and
   ((((j4 = j5) and (diff5 = diff6)) and ((j6 = j4) and (diff7 = diff5))) and
   (((j3 = result4) and (j4 = (j3 + 1))) and
-  (((((((((temp___2641 = (j4 + (i1 - 1))) and in_range1((j4 + (i1 - 1)))) and
-  (((to_rep1(first(haystack1)) <= temp___2641) and
-  (temp___2641 <= to_rep1(last(haystack1)))) and (o14 = temp___2641))) and
-  (o15 = (haystack[o14]))) and (o16 = to_rep(o15))) and
-  (((to_rep((needle[j4])) = o16) -> (o17 = true)) and
-  ((not (to_rep((needle[j4])) = o16)) -> (o17 = false)))) and
-  (((not (o17 = true)) -> (o18 = true)) and ((o17 = true) ->
-  (o18 = false)))) and ((diff4 = result5) and (diff5 = o18))) and
-  (diff5 = true)))))))))))))) and (((j9 = j7) and (diff10 = diff8)) and
-  ((j10 = j8) and (diff11 = diff9)))) and (((j11 = j9) and
-  (diff12 = diff10)) and ((j12 = j10) and (diff13 = diff11))))) and
+  (((((((((temp___2951 = (j4 + (i1 - 1))) and in_range1((j4 + (i1 - 1)))) and
+  (((to_rep1(first(haystack1)) <= temp___2951) and
+  (temp___2951 <= to_rep1(last(haystack1)))) and (o10 = temp___2951))) and
+  (o11 = (haystack[o10]))) and (o12 = to_rep(o11))) and
+  (((to_rep((needle[j4])) = o12) and (o13 = true)) or
+  ((not (to_rep((needle[j4])) = o12)) and (o13 = false)))) and
+  (((not (o13 = true)) and (o14 = true)) or ((o13 = true) and
+  (o14 = false)))) and ((diff4 = result5) and (diff5 = o14))) and
+  (diff5 = true)))))))))))))) and ((({ int__content = j9 } = { int__content =
+  j7 }) and ({ bool__content = diff10 } = { bool__content = diff8 })) and
+  ((j10 = j8) and (diff11 = diff9)))) and ((({ int__content = j11 } = {
+  int__content = j9 }) and ({ bool__content = diff12 } = { bool__content =
+  diff10 })) and ((j12 = j10) and (diff13 = diff11))))) or
   ((not ((to_rep1(first(needle1)) <= j2) and
-  (j2 <= to_rep1(last(needle1))))) -> (((j2 = j11) and (diff2 = diff12)) and
+  (j2 <= to_rep1(last(needle1))))) and (((j2 = j11) and (diff2 = diff12)) and
   ((j12 = j2) and (diff13 = diff2)))))) and
-  (((((string_search__brute_force__result13 = string_search__brute_force__result2) and
-  ((j31 = j11) and ((i8 = i1) and (diff33 = diff12)))) and
-  ((string_search__brute_force__result14 = string_search__brute_force__result2) and
-  ((j32 = j12) and ((i9 = i1) and (diff34 = diff13))))) and
-  ((not (diff12 = true)) and
-  ((result6 = string_search__brute_force__result) and
-  (string_search__brute_force__result2 = i1)))) or (((diff12 = true) and
-  ((string_search__brute_force__result3 = string_search__brute_force__result) and
+  (((((string_search__brute_force__result7 = { int__content =
+  string_search__brute_force__result2 }) and ((j25 = { int__content = j11
+  }) and ((i4 = { int__content = i1 }) and (diff27 = { bool__content = diff12
+  })))) and
+  ((string_search__brute_force__result8 = string_search__brute_force__result2) and
+  ((j26 = j12) and ((i5 = i1) and (diff28 = diff13))))) and
+  ((not (diff12 = true)) and (({ int__content = result6 } = { int__content =
+  string_search__brute_force__result }) and
+  (string_search__brute_force__result2 = i1)))) or (((diff12 = true) and (({
+  int__content = string_search__brute_force__result3 } = { int__content =
+  string_search__brute_force__result }) and
   (string_search__brute_force__result4 = string_search__brute_force__result1))) and
-  ((((string_search__brute_force__result13 = string_search__brute_force__result6) and
-  ((j31 = j25) and ((i8 = i3) and (diff33 = diff27)))) and
-  ((string_search__brute_force__result14 = string_search__brute_force__result6) and
-  ((j32 = j26) and ((i9 = i3) and (diff34 = diff28))))) and
-  ((forall k1:int. (((1 <= k1) and (k1 <= i2)) -> (not (match_at({ elts =
-   needle; rt = needle1 }, { elts = haystack; rt = haystack1 },
-   k1) = true)))) and ((((1 <= ((length({ elts = haystack; rt = haystack1
-  }) - length({ elts = needle; rt = needle1 })) + 1)) -> dynamic_property1(1,
-  ((length({ elts = haystack; rt = haystack1 }) - length({ elts = needle;
-  rt = needle1 })) + 1), i2)) and ((1 <= i2) and (i2 <= ((length({ elts =
+  ((((string_search__brute_force__result7 = { int__content =
+  string_search__brute_force__result6 }) and ((j25 = { int__content = j23
+  }) and ((i4 = { int__content = i3 }) and (diff27 = { bool__content = diff25
+  })))) and
+  ((string_search__brute_force__result8 = string_search__brute_force__result6) and
+  ((j26 = j24) and ((i5 = i3) and (diff28 = diff26))))) and
+  ((forall k:int. (((1 <= k) and (k <= i2)) -> (not (match_at({ elts =
+   needle; rt = needle1 }, { elts = haystack; rt = haystack1 }, k) = true)))) and
+  ((((1 <= ((length({ elts = haystack; rt = haystack1 }) - length({ elts =
+  needle; rt = needle1 })) + 1)) -> dynamic_property1(1, ((length({ elts =
   haystack; rt = haystack1 }) - length({ elts = needle; rt = needle1
-  })) + 1)))) and ((not (i2 = temp___273)) and (((result7 = i2) and
-  (i3 = (i2 + 1))) and (((result8 = diff14) and (diff15 = of_int(0))) and
-  ((((result9 = j13) and (j14 = to_rep1(first(needle1)))) and
-  ((((to_rep1(first(needle1)) <= j14) and (j14 <= to_rep1(last(needle1)))) ->
-  ((((temp___2661 = j14) and ((temp___2651 = diff15) and
-  (((((((((temp___2642 = (j14 + (i3 - 1))) and
+  })) + 1), i2)) and ((1 <= i2) and (i2 <= ((length({ elts = haystack; rt =
+  haystack1 }) - length({ elts = needle; rt = needle1 })) + 1)))) and
+  ((not (i2 = temp___304)) and (((result7 = i2) and (i3 = (i2 + 1))) and
+  (((result8 = diff14) and (diff15 = of_int(0))) and ((((result9 = j13) and
+  (j14 = to_rep1(first(needle1)))) and
+  ((((to_rep1(first(needle1)) <= j14) and
+  (j14 <= to_rep1(last(needle1)))) and ((((temp___2971 = j14) and
+  ((temp___2961 = diff15) and (((((((((temp___2952 = (j14 + (i3 - 1))) and
   in_range1((j14 + (i3 - 1)))) and
-  (((to_rep1(first(haystack1)) <= temp___2642) and
-  (temp___2642 <= to_rep1(last(haystack1)))) and (o19 = temp___2642))) and
-  (o20 = (haystack[o19]))) and (o21 = to_rep(o20))) and
-  (((to_rep((needle[j14])) = o21) -> (o22 = true)) and
-  ((not (to_rep((needle[j14])) = o21)) -> (o22 = false)))) and
-  (((not (o22 = true)) -> (o23 = true)) and ((o22 = true) ->
-  (o23 = false)))) and ((result10 = diff15) and (diff16 = o23))) and
-  (((((j21 = j14) and (diff23 = diff16)) and ((j22 = j14) and
-  (diff24 = diff16))) and (diff16 = true)) or ((not (diff16 = true)) and
-  ((((j21 = j17) and (diff23 = diff19)) and ((j22 = j18) and
-  (diff24 = diff20))) and (((partial_match_at({ elts = needle; rt = needle1
+  (((to_rep1(first(haystack1)) <= temp___2952) and
+  (temp___2952 <= to_rep1(last(haystack1)))) and (o15 = temp___2952))) and
+  (o16 = (haystack[o15]))) and (o17 = to_rep(o16))) and
+  (((to_rep((needle[j14])) = o17) and (o18 = true)) or
+  ((not (to_rep((needle[j14])) = o17)) and (o18 = false)))) and
+  (((not (o18 = true)) and (o19 = true)) or ((o18 = true) and
+  (o19 = false)))) and ((result10 = diff15) and (diff16 = o19))) and
+  (((((j14 = j19) and (diff16 = diff21)) and ((j20 = j14) and
+  (diff22 = diff16))) and (diff16 = true)) or ((not (diff16 = true)) and
+  (((({ int__content = j19 } = { int__content = j17 }) and ({ bool__content =
+  diff21 } = { bool__content = diff19 })) and ((j20 = j18) and
+  (diff22 = diff20))) and (((partial_match_at({ elts = needle; rt = needle1
   }, { elts = haystack; rt = haystack1 }, i3, j15) = true) and
   ((diff17 = true) <->
   (not (to_rep((needle[j15])) = to_rep((haystack[(j15 + (i3 - 1))])))))) and
   ((((to_rep1(first(needle1)) <= to_rep1(last(needle1))) ->
   dynamic_property2(to_rep1(first(needle1)), to_rep1(last(needle1)),
   j15)) and ((to_rep1(first(needle1)) <= j15) and
-  (j15 <= to_rep1(last(needle1))))) and (((((j17 = j15) and
-  (diff19 = diff17)) and ((j18 = j15) and (diff20 = diff17))) and
+  (j15 <= to_rep1(last(needle1))))) and (((((j15 = j17) and
+  (diff17 = diff19)) and ((j18 = j15) and (diff20 = diff17))) and
   (j15 = to_rep1(last(needle1)))) or
-  ((not (j15 = to_rep1(last(needle1)))) and ((((j17 = j16) and
-  (diff19 = diff18)) and ((j18 = j16) and (diff20 = diff18))) and
+  ((not (j15 = to_rep1(last(needle1)))) and ((((j16 = j17) and
+  (diff18 = diff19)) and ((j18 = j16) and (diff20 = diff18))) and
   (((result11 = j15) and (j16 = (j15 + 1))) and
-  (((((((((temp___2643 = (j16 + (i3 - 1))) and
+  (((((((((temp___2953 = (j16 + (i3 - 1))) and
   in_range1((j16 + (i3 - 1)))) and
-  (((to_rep1(first(haystack1)) <= temp___2643) and
-  (temp___2643 <= to_rep1(last(haystack1)))) and (o28 = temp___2643))) and
-  (o29 = (haystack[o28]))) and (o30 = to_rep(o29))) and
-  (((to_rep((needle[j16])) = o30) -> (o31 = true)) and
-  ((not (to_rep((needle[j16])) = o30)) -> (o31 = false)))) and
-  (((not (o31 = true)) -> (o32 = true)) and ((o31 = true) ->
-  (o32 = false)))) and ((result12 = diff17) and (diff18 = o32))) and
-  (diff18 = true)))))))))))))) and (((j23 = j21) and (diff25 = diff23)) and
-  ((j24 = j22) and (diff26 = diff24)))) and (((j25 = j23) and
-  (diff27 = diff25)) and ((j26 = j24) and (diff28 = diff26))))) and
-  ((not ((to_rep1(first(needle1)) <= j14) and
-  (j14 <= to_rep1(last(needle1))))) -> (((j25 = j14) and
-  (diff27 = diff15)) and ((j26 = j14) and (diff28 = diff15)))))) and
-  ((not (diff27 = true)) and
+  (((to_rep1(first(haystack1)) <= temp___2953) and
+  (temp___2953 <= to_rep1(last(haystack1)))) and (o20 = temp___2953))) and
+  (o21 = (haystack[o20]))) and (o22 = to_rep(o21))) and
+  (((to_rep((needle[j16])) = o22) and (o23 = true)) or
+  ((not (to_rep((needle[j16])) = o22)) and (o23 = false)))) and
+  (((not (o23 = true)) and (o24 = true)) or ((o23 = true) and
+  (o24 = false)))) and ((result12 = diff17) and (diff18 = o24))) and
+  (diff18 = true)))))))))))))) and ((({ int__content = j21 } = {
+  int__content = j19 }) and ({ bool__content = diff23 } = { bool__content =
+  diff21 })) and ((j22 = j20) and (diff24 = diff22)))) and ((({
+  int__content = j23 } = { int__content = j21 }) and ({ bool__content =
+  diff25 } = { bool__content = diff23 })) and ((j24 = j22) and
+  (diff26 = diff24))))) or ((not ((to_rep1(first(needle1)) <= j14) and
+  (j14 <= to_rep1(last(needle1))))) and (((j14 = j23) and
+  (diff15 = diff25)) and ((j24 = j14) and (diff26 = diff15)))))) and
+  ((not (diff25 = true)) and
   ((result13 = string_search__brute_force__result5) and
   (string_search__brute_force__result6 = i3))))))))))))))))))))) or
   ((((((((o = length({ elts = needle; rt = needle1 })) and in_range1(length({
   elts = needle; rt = needle1 }))) and (((o1 = length({ elts = haystack; rt =
   haystack1 })) and in_range1(length({ elts = haystack; rt = haystack1
   }))) and (o2 = (o1 - o)))) and ((o3 = o2) and in_range1(o2))) and
-  (o4 = (o3 + 1))) and ((temp___273 = o4) and in_range1(o4))) and
-  (((result = i) and (i1 = 1)) and ((((1 <= i1) and (i1 <= temp___273)) ->
-  ((((temp___271 = i1) and ((temp___270 = diff) and (((result1 = diff) and
-  (diff2 = of_int(0))) and ((((result2 = j) and
-  (j2 = to_rep1(first(needle1)))) and ((((to_rep1(first(needle1)) <= j2) and
-  (j2 <= to_rep1(last(needle1)))) -> ((((temp___266 = j2) and
-  ((temp___265 = diff2) and (((((((((temp___264 = (j2 + (i1 - 1))) and
-  in_range1((j2 + (i1 - 1)))) and
-  (((to_rep1(first(haystack1)) <= temp___264) and
-  (temp___264 <= to_rep1(last(haystack1)))) and (o5 = temp___264))) and
+  (o4 = (o3 + 1))) and ((temp___304 = o4) and in_range1(o4))) and ((({
+  int__content = result } = { int__content = i }) and (i1 = 1)) and
+  ((((1 <= i1) and (i1 <= temp___304)) and ((((temp___302 = i1) and
+  ((temp___301 = diff) and ((({ bool__content = result1 } = { bool__content =
+  diff }) and (diff2 = of_int(0))) and (((({ int__content = result2 } = {
+  int__content = j }) and (j2 = to_rep1(first(needle1)))) and
+  ((((to_rep1(first(needle1)) <= j2) and (j2 <= to_rep1(last(needle1)))) and
+  ((((temp___297 = j2) and ((temp___296 = diff2) and
+  (((((((((temp___295 = (j2 + (i1 - 1))) and in_range1((j2 + (i1 - 1)))) and
+  (((to_rep1(first(haystack1)) <= temp___295) and
+  (temp___295 <= to_rep1(last(haystack1)))) and (o5 = temp___295))) and
   (o6 = (haystack[o5]))) and (o7 = to_rep(o6))) and
-  (((to_rep((needle[j2])) = o7) -> (o8 = true)) and
-  ((not (to_rep((needle[j2])) = o7)) -> (o8 = false)))) and
-  (((not (o8 = true)) -> (o9 = true)) and ((o8 = true) -> (o9 = false)))) and
-  ((diff2 = result3) and (diff3 = o9))) and (((((j2 = j7) and
-  (diff3 = diff8)) and ((j8 = j2) and (diff9 = diff3))) and
-  (diff3 = true)) or ((not (diff3 = true)) and ((((j7 = j5) and
-  (diff8 = diff6)) and ((j8 = j6) and (diff9 = diff7))) and
-  (((partial_match_at({ elts = needle; rt = needle1 }, { elts = haystack;
-  rt = haystack1 }, i1, j3) = true) and ((diff4 = true) <->
+  (((to_rep((needle[j2])) = o7) and (o8 = true)) or
+  ((not (to_rep((needle[j2])) = o7)) and (o8 = false)))) and
+  (((not (o8 = true)) and (o9 = true)) or ((o8 = true) and
+  (o9 = false)))) and ((diff2 = result3) and (diff3 = o9))) and
+  (((((j2 = j7) and (diff3 = diff8)) and ((j8 = j2) and (diff9 = diff3))) and
+  (diff3 = true)) or ((not (diff3 = true)) and (((({ int__content = j7 } = {
+  int__content = j5 }) and ({ bool__content = diff8 } = { bool__content =
+  diff6 })) and ((j8 = j6) and (diff9 = diff7))) and (((partial_match_at({
+  elts = needle; rt = needle1 }, { elts = haystack; rt = haystack1 }, i1,
+  j3) = true) and ((diff4 = true) <->
   (not (to_rep((needle[j3])) = to_rep((haystack[(j3 + (i1 - 1))])))))) and
   ((((to_rep1(first(needle1)) <= to_rep1(last(needle1))) ->
   dynamic_property2(to_rep1(first(needle1)), to_rep1(last(needle1)), j3)) and
@@ -1077,77 +695,63 @@ axiom H3 :
   (j3 = to_rep1(last(needle1)))) or ((not (j3 = to_rep1(last(needle1)))) and
   ((((j4 = j5) and (diff5 = diff6)) and ((j6 = j4) and (diff7 = diff5))) and
   (((j3 = result4) and (j4 = (j3 + 1))) and
-  (((((((((temp___2641 = (j4 + (i1 - 1))) and in_range1((j4 + (i1 - 1)))) and
-  (((to_rep1(first(haystack1)) <= temp___2641) and
-  (temp___2641 <= to_rep1(last(haystack1)))) and (o14 = temp___2641))) and
-  (o15 = (haystack[o14]))) and (o16 = to_rep(o15))) and
-  (((to_rep((needle[j4])) = o16) -> (o17 = true)) and
-  ((not (to_rep((needle[j4])) = o16)) -> (o17 = false)))) and
-  (((not (o17 = true)) -> (o18 = true)) and ((o17 = true) ->
-  (o18 = false)))) and ((diff4 = result5) and (diff5 = o18))) and
-  (diff5 = true)))))))))))))) and (((j9 = j7) and (diff10 = diff8)) and
-  ((j10 = j8) and (diff11 = diff9)))) and (((j11 = j9) and
-  (diff12 = diff10)) and ((j12 = j10) and (diff13 = diff11))))) and
+  (((((((((temp___2951 = (j4 + (i1 - 1))) and in_range1((j4 + (i1 - 1)))) and
+  (((to_rep1(first(haystack1)) <= temp___2951) and
+  (temp___2951 <= to_rep1(last(haystack1)))) and (o10 = temp___2951))) and
+  (o11 = (haystack[o10]))) and (o12 = to_rep(o11))) and
+  (((to_rep((needle[j4])) = o12) and (o13 = true)) or
+  ((not (to_rep((needle[j4])) = o12)) and (o13 = false)))) and
+  (((not (o13 = true)) and (o14 = true)) or ((o13 = true) and
+  (o14 = false)))) and ((diff4 = result5) and (diff5 = o14))) and
+  (diff5 = true)))))))))))))) and ((({ int__content = j9 } = { int__content =
+  j7 }) and ({ bool__content = diff10 } = { bool__content = diff8 })) and
+  ((j10 = j8) and (diff11 = diff9)))) and ((({ int__content = j11 } = {
+  int__content = j9 }) and ({ bool__content = diff12 } = { bool__content =
+  diff10 })) and ((j12 = j10) and (diff13 = diff11))))) or
   ((not ((to_rep1(first(needle1)) <= j2) and
-  (j2 <= to_rep1(last(needle1))))) -> (((j2 = j11) and (diff2 = diff12)) and
-  ((j12 = j2) and (diff13 = diff2)))))) and (((diff12 = true) and
-  ((string_search__brute_force__result3 = string_search__brute_force__result) and
+  (j2 <= to_rep1(last(needle1))))) and (((j2 = j11) and (diff2 = diff12)) and
+  ((j12 = j2) and (diff13 = diff2)))))) and (((diff12 = true) and (({
+  int__content = string_search__brute_force__result3 } = { int__content =
+  string_search__brute_force__result }) and
   (string_search__brute_force__result4 = string_search__brute_force__result1))) and
-  ((forall k1:int. (((1 <= k1) and (k1 <= i2)) -> (not (match_at({ elts =
-   needle; rt = needle1 }, { elts = haystack; rt = haystack1 },
-   k1) = true)))) and ((((1 <= ((length({ elts = haystack; rt = haystack1
-  }) - length({ elts = needle; rt = needle1 })) + 1)) -> dynamic_property1(1,
-  ((length({ elts = haystack; rt = haystack1 }) - length({ elts = needle;
-  rt = needle1 })) + 1), i2)) and ((1 <= i2) and (i2 <= ((length({ elts =
+  ((forall k:int. (((1 <= k) and (k <= i2)) -> (not (match_at({ elts =
+   needle; rt = needle1 }, { elts = haystack; rt = haystack1 }, k) = true)))) and
+  ((((1 <= ((length({ elts = haystack; rt = haystack1 }) - length({ elts =
+  needle; rt = needle1 })) + 1)) -> dynamic_property1(1, ((length({ elts =
   haystack; rt = haystack1 }) - length({ elts = needle; rt = needle1
-  })) + 1)))) and (i2 = temp___273)))))))) and
-  (((string_search__brute_force__result15 = string_search__brute_force__result5) and
-  ((j33 = j13) and ((i10 = i2) and (diff35 = diff14)))) and
-  ((string_search__brute_force__result16 = string_search__brute_force__result5) and
-  ((j34 = j13) and ((i11 = i2) and (diff36 = diff14)))))) and
-  (((string_search__brute_force__result17 = string_search__brute_force__result15) and
-  ((j35 = j33) and ((i12 = i10) and (diff37 = diff35)))) and
-  ((string_search__brute_force__result18 = string_search__brute_force__result16) and
-  ((j36 = j34) and ((i13 = i11) and (diff38 = diff36))))))) and
-  ((not ((1 <= i1) and (i1 <= temp___273))) ->
-  (((string_search__brute_force__result17 = string_search__brute_force__result) and
-  ((j35 = j) and ((i12 = i1) and (diff37 = diff)))) and
-  ((string_search__brute_force__result18 = string_search__brute_force__result1) and
-  ((j36 = j1) and ((i13 = i1) and (diff38 = diff1))))))))) and
-  ((((string_search__brute_force__result22 = string_search__brute_force__result20) and
-  ((j37 = j35) and ((i14 = i12) and (diff39 = diff37)))) and
-  ((string_search__brute_force__result23 = string_search__brute_force__result21) and
-  ((j38 = j36) and ((i15 = i13) and (diff40 = diff38))))) and
-  (((string_search__brute_force__result20 = string_search__brute_force__result19) and
-  (string_search__brute_force__result21 = string_search__brute_force__result19)) and
-  ((result14 = string_search__brute_force__result17) and
-  (string_search__brute_force__result19 = 0))))))
-
-axiom H4 :
-  (string_search__brute_force__result24 = string_search__brute_force__result22)
-
-axiom H5 : (j39 = j37)
-
-axiom H6 : (i16 = i14)
-
-axiom H7 : (diff41 = diff39)
-
-axiom H8 :
-  (string_search__brute_force__result25 = string_search__brute_force__result23)
-
-axiom H9 : (j40 = j38)
-
-axiom H10 : (i17 = i15)
-
-axiom H11 : (diff42 = diff40)
-
-axiom H12 : ((o35 = length({ elts = needle; rt = needle1 })) and
-  in_range1(length({ elts = needle; rt = needle1 })))
-
-axiom H13 : ((o36 = length({ elts = haystack; rt = haystack1 })) and
-  in_range1(length({ elts = haystack; rt = haystack1 })))
-
-axiom H14 : (o37 = (o36 - o35))
-
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range1(o37)
+  })) + 1), i2)) and ((1 <= i2) and (i2 <= ((length({ elts = haystack; rt =
+  haystack1 }) - length({ elts = needle; rt = needle1 })) + 1)))) and
+  (i2 = temp___304)))))))) and (((string_search__brute_force__result9 = {
+  int__content = string_search__brute_force__result5 }) and ((j27 = {
+  int__content = j13 }) and ((i6 = { int__content = i2 }) and (diff29 = {
+  bool__content = diff14 })))) and
+  ((string_search__brute_force__result10 = string_search__brute_force__result5) and
+  ((j28 = j13) and ((i7 = i2) and (diff30 = diff14)))))) and
+  (((string_search__brute_force__result11 = string_search__brute_force__result9) and
+  ((j29 = j27) and ((i8 = i6) and (diff31 = diff29)))) and
+  ((string_search__brute_force__result12 = string_search__brute_force__result10) and
+  ((j30 = j28) and ((i9 = i7) and (diff32 = diff30))))))) or
+  ((not ((1 <= i1) and (i1 <= temp___304))) and
+  (((string_search__brute_force__result11 = { int__content =
+  string_search__brute_force__result }) and ((j29 = { int__content = j }) and
+  ((i8 = { int__content = i1 }) and (diff31 = { bool__content = diff
+  })))) and
+  ((string_search__brute_force__result12 = string_search__brute_force__result1) and
+  ((j30 = j1) and ((i9 = i1) and (diff32 = diff1))))))))) and
+  ((((string_search__brute_force__result16 = string_search__brute_force__result14) and
+  ((j31 = j29) and ((i10 = i8) and (diff33 = diff31)))) and
+  ((string_search__brute_force__result17 = string_search__brute_force__result15) and
+  ((j32 = j30) and ((i11 = i9) and (diff34 = diff32))))) and
+  (((string_search__brute_force__result14 = { int__content =
+  string_search__brute_force__result13 }) and
+  (string_search__brute_force__result15 = string_search__brute_force__result13)) and
+  ((result14 = string_search__brute_force__result11) and
+  (string_search__brute_force__result13 = 0)))))) and
+  (((string_search__brute_force__result18 = string_search__brute_force__result16) and
+  ((j33 = j31) and ((i12 = i10) and (diff35 = diff33)))) and
+  ((string_search__brute_force__result19 = string_search__brute_force__result17) and
+  ((j34 = j32) and ((i13 = i11) and (diff36 = diff34)))))) ->
+  ((((o25 = length({ elts = needle; rt = needle1 })) and in_range1(length({
+  elts = needle; rt = needle1 }))) and (((o26 = length({ elts = haystack;
+  rt = haystack1 })) and in_range1(length({ elts = haystack; rt = haystack1
+  }))) and (o27 = (o26 - o25)))) -> in_range1(o27)))))))

@@ -594,12 +594,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -611,6 +605,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -800,24 +800,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,t_uint8) farray, int, int, (int,t_uint8) farray, int,
-  int -> (int,t_uint8) farray
-
-axiom concat_def :
-  (forall a:(int,t_uint8) farray. forall b:(int,t_uint8) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : t_uint8, int -> (int,t_uint8) farray
-
-axiom singleton_def :
-  (forall v:t_uint8.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq7 : (int,t_uint8) farray, int, int, (int,t_uint8) farray, int,
   int -> bool
 
@@ -828,17 +810,17 @@ axiom bool_eq_def6 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_181:int. ((((a__first <= temp___idx_181) and
-  (temp___idx_181 <= a__last)) and
-  (to_rep1((a[temp___idx_181])) = to_rep1((b[((b__first - a__first) + temp___idx_181)])))) or
-  (not ((a__first <= temp___idx_181) and (temp___idx_181 <= a__last)))))) ->
+  (forall temp___idx_203:int. ((((a__first <= temp___idx_203) and
+  (temp___idx_203 <= a__last)) and
+  (to_rep1((a[temp___idx_203])) = to_rep1((b[((b__first - a__first) + temp___idx_203)])))) or
+  (not ((a__first <= temp___idx_203) and (temp___idx_203 <= a__last)))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_181:int. (((a__first <= temp___idx_181) and
-  (temp___idx_181 <= a__last)) ->
-  (to_rep1((a[temp___idx_181])) = to_rep1((b[((b__first - a__first) + temp___idx_181)]))))))) ->
+  (forall temp___idx_203:int. (((a__first <= temp___idx_203) and
+  (temp___idx_203 <= a__last)) ->
+  (to_rep1((a[temp___idx_203])) = to_rep1((b[((b__first - a__first) + temp___idx_203)]))))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -848,37 +830,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_181:int. (((a__first <= temp___idx_181) and
-  (temp___idx_181 <= a__last)) ->
-  (to_rep1((a[temp___idx_181])) = to_rep1((b[((b__first - a__first) + temp___idx_181)])))))))))
-
-logic compare : (int,t_uint8) farray, int, int, (int,t_uint8) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,t_uint8) farray. forall b:(int,t_uint8) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq7(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,t_uint8) farray. forall b:(int,t_uint8) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq7(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and ult(to_rep1((a[(i + 1)])), to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,t_uint8) farray. forall b:(int,t_uint8) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq7(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and ugt(to_rep1((a[(j + 1)])), to_rep1((b[(i + 1)]))))))))))))
+  (forall temp___idx_203:int. (((a__first <= temp___idx_203) and
+  (temp___idx_203 <= a__last)) ->
+  (to_rep1((a[temp___idx_203])) = to_rep1((b[((b__first - a__first) + temp___idx_203)])))))))))
 
 type tcrtp_dataP1
 
@@ -910,7 +864,15 @@ type crtp_channel
 
 logic attr__ATTRIBUTE_MODULUS1 : t
 
-predicate in_range5(x: t) = (ule(of_int(0), x) and ule(x, of_int(3)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 3)
+
+predicate in_range5(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 3))
 
@@ -998,7 +960,7 @@ type crtp_reserved
 
 logic attr__ATTRIBUTE_MODULUS2 : t
 
-predicate in_range7(x: t) = (ule(of_int(0), x) and ule(x, of_int(3)))
+predicate in_range7(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int1(x: int) = ((0 <= x) and (x <= 3))
 
@@ -1851,459 +1813,138 @@ function t9b__ref___projection(a: t9b__ref) : us_t = (a).t9b__content
 
 axiom data_size__def_axiom : (data_size = 1)
 
-logic handler__split_fields : crpt_packet_representation
-
-logic handler__split_fields1 : t_uint8
-
-logic handler__split_fields2 : crtp_channel
-
-logic handler__split_fields3 : crtp_reserved
-
-logic handler__split_fields4 : crtp_port
-
-logic handler__split_fields5 : (int,t_uint8) farray
-
-logic handler__split_fields6 : t_uint8
-
-logic handler__split_fields7 : (int,t_uint8) farray
-
-logic handler__split_fields8 : (int,t_uint8) farray
-
-logic handler__split_fields9 : bool
-
-logic handler__split_fields10 : positive
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic console_pack__console_put_line__crtp_append_character_data__R7b__assume : int
-
-logic temp___3839 : (int,t_uint8) farray
-
-logic temp___3840 : (int,t_uint8) farray
-
-logic temp___38401 : t1
-
-logic o3 : (int,t_uint8) farray
-
-logic temp___3842 : (int,t_uint8) farray
-
-logic temp___38421 : t1
-
-logic temp___3844 : (int,t_uint8) farray
-
-logic temp___38441 : t1
-
-logic o4 : (int,t_uint8) farray
-
-logic o5 : t_uint8
-
-logic o6 : crtp_channel
-
-logic o7 : crtp_reserved
-
-logic o8 : crtp_port
-
-logic o9 : (int,t_uint8) farray
-
-logic o10 : t_uint8
-
-logic o11 : (int,t_uint8) farray
-
-logic o12 : (int,t_uint8) farray
-
-logic o13 : crpt_packet_representation
-
-logic o14 : t_uint8
-
-logic o15 : crtp_channel
-
-logic o16 : crtp_reserved
-
-logic o17 : crtp_port
-
-logic o18 : (int,t_uint8) farray
-
-logic o19 : t_uint8
-
-logic o20 : (int,t_uint8) farray
-
-logic o21 : (int,t_uint8) farray
-
-logic o22 : bool
-
-logic o23 : crpt_packet_representation
-
-logic o24 : t_uint8
-
-logic o25 : crtp_channel
-
-logic o26 : crtp_reserved
-
-logic o27 : crtp_port
-
-logic o28 : (int,t_uint8) farray
-
-logic o29 : t_uint8
-
-logic o30 : (int,t_uint8) farray
-
-logic o31 : (int,t_uint8) farray
-
-logic o32 : bool
-
-logic o33 : positive
-
-logic temp___3848 : crpt_packet_representation
-
-logic temp___38481 : t_uint8
-
-logic temp___38482 : crtp_channel
-
-logic temp___38483 : crtp_reserved
-
-logic temp___38484 : crtp_port
-
-logic temp___38485 : (int,t_uint8) farray
-
-logic temp___38486 : t_uint8
-
-logic temp___38487 : (int,t_uint8) farray
-
-logic temp___38488 : (int,t_uint8) farray
-
-logic temp___38489 : bool
-
-logic temp___384810 : positive
-
-logic o34 : t_uint8
-
-logic o35 : t_uint8
-
-logic o36 : crtp_channel
-
-logic o37 : crtp_reserved
-
-logic o38 : crtp_port
-
-logic o39 : (int,t_uint8) farray
-
-logic o40 : t_uint8
-
-logic o41 : (int,t_uint8) farray
-
-logic o42 : (int,t_uint8) farray
-
-logic o43 : crpt_packet_representation
-
-logic o44 : t_uint8
-
-logic o45 : crtp_channel
-
-logic o46 : crtp_reserved
-
-logic o47 : crtp_port
-
-logic o48 : (int,t_uint8) farray
-
-logic o49 : t_uint8
-
-logic o50 : (int,t_uint8) farray
-
-logic o51 : (int,t_uint8) farray
-
-logic o52 : bool
-
-logic o53 : crpt_packet_representation
-
-logic o54 : t_uint8
-
-logic o55 : crtp_channel
-
-logic o56 : crtp_reserved
-
-logic o57 : crtp_port
-
-logic o58 : (int,t_uint8) farray
-
-logic o59 : t_uint8
-
-logic o60 : (int,t_uint8) farray
-
-logic o61 : (int,t_uint8) farray
-
-logic o62 : bool
-
-logic o63 : positive
-
-logic temp___3851 : crpt_packet_representation
-
-logic temp___38511 : t_uint8
-
-logic temp___38512 : crtp_channel
-
-logic temp___38513 : crtp_reserved
-
-logic temp___38514 : crtp_port
-
-logic temp___38515 : (int,t_uint8) farray
-
-logic temp___38516 : t_uint8
-
-logic temp___38517 : (int,t_uint8) farray
-
-logic temp___38518 : (int,t_uint8) farray
-
-logic temp___38519 : bool
-
-logic temp___385110 : positive
-
-logic o64 : int
-
-logic result : bool
-
-logic result1 : crpt_packet_representation
-
-logic result2 : t_uint8
-
-logic result3 : crtp_channel
-
-logic result4 : crtp_reserved
-
-logic result5 : crtp_port
-
-logic result6 : (int,t_uint8) farray
-
-logic result7 : t_uint8
-
-logic result8 : (int,t_uint8) farray
-
-logic result9 : (int,t_uint8) farray
-
-logic result10 : bool
-
-logic result11 : positive
-
-logic handler__split_fields11 : crpt_packet_representation
-
-logic handler__split_fields12 : t_uint8
-
-logic handler__split_fields13 : crtp_channel
-
-logic handler__split_fields14 : crtp_reserved
-
-logic handler__split_fields15 : crtp_port
-
-logic handler__split_fields16 : (int,t_uint8) farray
-
-logic handler__split_fields17 : t_uint8
-
-logic handler__split_fields18 : (int,t_uint8) farray
-
-logic handler__split_fields19 : (int,t_uint8) farray
-
-logic handler__split_fields20 : bool
-
-logic handler__split_fields21 : positive
-
-logic result12 : crpt_packet_representation
-
-logic result13 : t_uint8
-
-logic result14 : crtp_channel
-
-logic result15 : crtp_reserved
-
-logic result16 : crtp_port
-
-logic result17 : (int,t_uint8) farray
-
-logic result18 : t_uint8
-
-logic result19 : (int,t_uint8) farray
-
-logic result20 : (int,t_uint8) farray
-
-logic result21 : bool
-
-logic result22 : positive
-
-logic handler__split_fields22 : crpt_packet_representation
-
-logic handler__split_fields23 : t_uint8
-
-logic handler__split_fields24 : crtp_channel
-
-logic handler__split_fields25 : crtp_reserved
-
-logic handler__split_fields26 : crtp_port
-
-logic handler__split_fields27 : (int,t_uint8) farray
-
-logic handler__split_fields28 : t_uint8
-
-logic handler__split_fields29 : (int,t_uint8) farray
-
-logic handler__split_fields30 : (int,t_uint8) farray
-
-logic handler__split_fields31 : bool
-
-logic handler__split_fields32 : positive
-
-axiom H : (handler__split_fields9 = false)
-
-axiom H1 : in_range9(data)
-
-axiom H2 : in_range2(data_size)
-
-axiom H3 : ((o = (to_rep(handler__split_fields10) + 1)) and
-  in_range1((to_rep(handler__split_fields10) + 1)))
-
-axiom H4 : (o1 = (o - 1))
-
-axiom H5 : (((o1 <= 30) -> (result = true)) and ((not (o1 <= 30)) ->
-  (result = false)))
-
-axiom H6 : (result = true)
-
-axiom H7 : (to_rep(handler__split_fields10) = r6b)
-
-axiom H8 : in_range3(r6b)
-
-axiom H9 : ((o2 = (to_rep(handler__split_fields10) + 1)) and
-  in_range1((to_rep(handler__split_fields10) + 1)))
-
-axiom H10 :
-  (console_pack__console_put_line__crtp_append_character_data__R7b__assume = (o2 - 1))
-
-axiom H11 :
-  (console_pack__console_put_line__crtp_append_character_data__R7b__assume = r7b)
-
-axiom H12 : in_range1(r7b)
-
-axiom H13 : (temp___3839 = data_to_byte_array(data))
-
-axiom H14 : (((1 <= 1) -> (((r6b <= r7b) ->
-  (((1 - 1) + 1) = ((r7b - r6b) + 1))) and ((not (r6b <= r7b)) ->
-  (((1 - 1) + 1) = 0)))) and ((not (1 <= 1)) -> ((r6b <= r7b) ->
-  (0 = ((r7b - r6b) + 1)))))
-
-axiom H15 : (slide(temp___3839, 1, r6b) = temp___3840)
-
-axiom H16 : (mk(r6b, r7b) = temp___38401)
-
-axiom H17 : ((r6b <= r7b) -> (((1 <= r6b) and (r6b <= 30)) and
-  ((1 <= r7b) and (r7b <= 30))))
-
-axiom H18 : (o3 = handler__split_fields5)
-
-axiom H19 : (o3 = temp___3842)
-
-axiom H20 : (mk(r6b, r7b) = temp___38421)
-
-axiom H21 :
-  (((to_rep6(first(temp___38401)) <= to_rep6(last(temp___38401))) ->
-  (((to_rep6(first(temp___38421)) <= to_rep6(last(temp___38421))) ->
-  (((to_rep6(last(temp___38401)) - to_rep6(first(temp___38401))) + 1) = ((to_rep6(last(temp___38421)) - to_rep6(first(temp___38421))) + 1))) and
-  ((not (to_rep6(first(temp___38421)) <= to_rep6(last(temp___38421)))) ->
-  (((to_rep6(last(temp___38401)) - to_rep6(first(temp___38401))) + 1) = 0)))) and
-  ((not (to_rep6(first(temp___38401)) <= to_rep6(last(temp___38401)))) ->
-  ((to_rep6(first(temp___38421)) <= to_rep6(last(temp___38421))) ->
-  (0 = ((to_rep6(last(temp___38421)) - to_rep6(first(temp___38421))) + 1)))))
-
-axiom H22 : ((temp___3844 = temp___3840) and (temp___38441 = temp___38401))
-
-axiom H23 :
-  (forall temp___3845:int. ((((r6b <= temp___3845) and
-  (temp___3845 <= r7b)) ->
-  ((o4[temp___3845]) = (temp___3844[temp___3845]))) and
-  ((not ((r6b <= temp___3845) and (temp___3845 <= r7b))) ->
-  ((o4[temp___3845]) = (handler__split_fields5[temp___3845])))))
-
-axiom H24 : (handler__split_fields1 = o5)
-
-axiom H25 : (handler__split_fields2 = o6)
-
-axiom H26 : (handler__split_fields3 = o7)
-
-axiom H27 : (handler__split_fields4 = o8)
-
-axiom H28 : (o4 = o9)
-
-axiom H29 : (handler__split_fields6 = o10)
-
-axiom H30 : (handler__split_fields7 = o11)
-
-axiom H31 : (handler__split_fields8 = o12)
-
-axiom H32 : (handler__split_fields = o13)
-
-axiom H33 : (o14 = o5)
-
-axiom H34 : (o15 = o6)
-
-axiom H35 : (o16 = o7)
-
-axiom H36 : (o17 = o8)
-
-axiom H37 : (o18 = o9)
-
-axiom H38 : (o19 = o10)
-
-axiom H39 : (o20 = o11)
-
-axiom H40 : (o21 = o12)
-
-axiom H41 : (handler__split_fields9 = o22)
-
-axiom H42 : (o23 = o13)
-
-axiom H43 : (o24 = o14)
-
-axiom H44 : (o25 = o15)
-
-axiom H45 : (o26 = o16)
-
-axiom H46 : (o27 = o17)
-
-axiom H47 : (o28 = o18)
-
-axiom H48 : (o29 = o19)
-
-axiom H49 : (o30 = o20)
-
-axiom H50 : (o31 = o21)
-
-axiom H51 : (o32 = o22)
-
-axiom H52 : (handler__split_fields10 = o33)
-
-axiom H53 : (temp___3848 = o23)
-
-axiom H54 : (temp___38481 = o24)
-
-axiom H55 : (temp___38482 = o25)
-
-axiom H56 : (temp___38483 = o26)
-
-axiom H57 : (temp___38484 = o27)
-
-axiom H58 : (temp___38485 = o28)
-
-axiom H59 : (temp___38486 = o29)
-
-axiom H60 : (temp___38487 = o30)
-
-axiom H61 : (temp___38488 = o31)
-
-axiom H62 : (temp___38489 = o32)
-
-axiom H63 : (temp___384810 = o33)
-
-axiom H64 : (((result1 = handler__split_fields) and
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 1)
+
+ (* File "console_pack.adb", line 20, characters 0-0 *)
+goal WP_parameter_def :
+  (forall handler__split_fields:crpt_packet_representation.
+  forall handler__split_fields1:t_uint8.
+  forall handler__split_fields2:crtp_channel.
+  forall handler__split_fields3:crtp_reserved.
+  forall handler__split_fields4:crtp_port.
+  forall handler__split_fields5:(int,t_uint8) farray.
+  forall handler__split_fields6:t_uint8.
+  forall handler__split_fields7:(int,t_uint8) farray.
+  forall handler__split_fields8:(int,t_uint8) farray.
+  forall handler__split_fields9:bool.
+  forall handler__split_fields10:positive. forall o:int. forall o1:int.
+  forall o2:int.
+  forall console_pack__console_put_line__crtp_append_character_data__R7b__assume:int.
+  forall temp___4187:(int,t_uint8) farray.
+  forall temp___4188:(int,t_uint8) farray. forall temp___41881:t1.
+  forall o3:(int,t_uint8) farray. forall temp___4190:(int,t_uint8) farray.
+  forall temp___41901:t1. forall temp___4192:(int,t_uint8) farray.
+  forall temp___41921:t1. forall o4:(int,t_uint8) farray. forall o5:t_uint8.
+  forall o6:crtp_channel. forall o7:crtp_reserved. forall o8:crtp_port.
+  forall o9:(int,t_uint8) farray. forall o10:t_uint8.
+  forall o11:(int,t_uint8) farray. forall o12:(int,t_uint8) farray.
+  forall o13:crpt_packet_representation. forall o14:t_uint8.
+  forall o15:crtp_channel. forall o16:crtp_reserved. forall o17:crtp_port.
+  forall o18:(int,t_uint8) farray. forall o19:t_uint8.
+  forall o20:(int,t_uint8) farray. forall o21:(int,t_uint8) farray.
+  forall o22:bool. forall o23:crpt_packet_representation. forall o24:t_uint8.
+  forall o25:crtp_channel. forall o26:crtp_reserved. forall o27:crtp_port.
+  forall o28:(int,t_uint8) farray. forall o29:t_uint8.
+  forall o30:(int,t_uint8) farray. forall o31:(int,t_uint8) farray.
+  forall o32:bool. forall o33:positive.
+  forall temp___4196:crpt_packet_representation. forall temp___41961:t_uint8.
+  forall temp___41962:crtp_channel. forall temp___41963:crtp_reserved.
+  forall temp___41964:crtp_port. forall temp___41965:(int,t_uint8) farray.
+  forall temp___41966:t_uint8. forall temp___41967:(int,t_uint8) farray.
+  forall temp___41968:(int,t_uint8) farray. forall temp___41969:bool.
+  forall temp___419610:positive. forall o34:t_uint8. forall o35:t_uint8.
+  forall o36:crtp_channel. forall o37:crtp_reserved. forall o38:crtp_port.
+  forall o39:(int,t_uint8) farray. forall o40:t_uint8.
+  forall o41:(int,t_uint8) farray. forall o42:(int,t_uint8) farray.
+  forall o43:crpt_packet_representation. forall o44:t_uint8.
+  forall o45:crtp_channel. forall o46:crtp_reserved. forall o47:crtp_port.
+  forall o48:(int,t_uint8) farray. forall o49:t_uint8.
+  forall o50:(int,t_uint8) farray. forall o51:(int,t_uint8) farray.
+  forall o52:bool. forall o53:crpt_packet_representation. forall o54:t_uint8.
+  forall o55:crtp_channel. forall o56:crtp_reserved. forall o57:crtp_port.
+  forall o58:(int,t_uint8) farray. forall o59:t_uint8.
+  forall o60:(int,t_uint8) farray. forall o61:(int,t_uint8) farray.
+  forall o62:bool. forall o63:positive.
+  forall temp___4199:crpt_packet_representation. forall temp___41991:t_uint8.
+  forall temp___41992:crtp_channel. forall temp___41993:crtp_reserved.
+  forall temp___41994:crtp_port. forall temp___41995:(int,t_uint8) farray.
+  forall temp___41996:t_uint8. forall temp___41997:(int,t_uint8) farray.
+  forall temp___41998:(int,t_uint8) farray. forall temp___41999:bool.
+  forall temp___419910:positive. forall result:bool.
+  forall result1:crpt_packet_representation. forall result2:t_uint8.
+  forall result3:crtp_channel. forall result4:crtp_reserved.
+  forall result5:crtp_port. forall result6:(int,t_uint8) farray.
+  forall result7:t_uint8. forall result8:(int,t_uint8) farray.
+  forall result9:(int,t_uint8) farray. forall result10:bool.
+  forall result11:positive.
+  forall handler__split_fields11:crpt_packet_representation.
+  forall handler__split_fields12:t_uint8.
+  forall handler__split_fields13:crtp_channel.
+  forall handler__split_fields14:crtp_reserved.
+  forall handler__split_fields15:crtp_port.
+  forall handler__split_fields16:(int,t_uint8) farray.
+  forall handler__split_fields17:t_uint8.
+  forall handler__split_fields18:(int,t_uint8) farray.
+  forall handler__split_fields19:(int,t_uint8) farray.
+  forall handler__split_fields20:bool.
+  forall handler__split_fields21:positive.
+  forall result12:us_split_fields__ref1.
+  forall handler__split_fields22:us_split_fields2.
+  ((handler__split_fields9 = false) -> (in_range9(data) ->
+  (in_range2(data_size) ->
+  (((((o = (to_rep(handler__split_fields10) + 1)) and
+  in_range1((to_rep(handler__split_fields10) + 1))) and (o1 = (o - 1))) and
+  (((o1 <= 30) and (result = true)) or ((not (o1 <= 30)) and
+  (result = false)))) -> ((result = true) ->
+  (((to_rep(handler__split_fields10) = r6b) and in_range3(r6b)) ->
+  ((((((o2 = (to_rep(handler__split_fields10) + 1)) and
+  in_range1((to_rep(handler__split_fields10) + 1))) and
+  (console_pack__console_put_line__crtp_append_character_data__R7b__assume = (o2 - 1))) and
+  (console_pack__console_put_line__crtp_append_character_data__R7b__assume = r7b)) and
+  in_range1(r7b)) -> ((((((((((temp___4187 = data_to_byte_array(data)) and
+  ((((1 <= 1) and (((r6b <= r7b) and (((1 - 1) + 1) = ((r7b - r6b) + 1))) or
+  ((not (r6b <= r7b)) and (((1 - 1) + 1) = 0)))) or ((not (1 <= 1)) and
+  (((r6b <= r7b) and (0 = ((r7b - r6b) + 1))) or (not (r6b <= r7b))))) and
+  ((slide(temp___4187, 1, r6b) = temp___4188) and (mk(r6b,
+  r7b) = temp___41881)))) and (((((r6b <= r7b) -> (((1 <= r6b) and
+  (r6b <= 30)) and ((1 <= r7b) and (r7b <= 30)))) and
+  (o3 = handler__split_fields5)) and ((o3 = temp___4190) and (mk(r6b,
+  r7b) = temp___41901))) and
+  ((((to_rep6(first(temp___41881)) <= to_rep6(last(temp___41881))) and
+  (((to_rep6(first(temp___41901)) <= to_rep6(last(temp___41901))) and
+  (((to_rep6(last(temp___41881)) - to_rep6(first(temp___41881))) + 1) = ((to_rep6(last(temp___41901)) - to_rep6(first(temp___41901))) + 1))) or
+  ((not (to_rep6(first(temp___41901)) <= to_rep6(last(temp___41901)))) and
+  (((to_rep6(last(temp___41881)) - to_rep6(first(temp___41881))) + 1) = 0)))) or
+  ((not (to_rep6(first(temp___41881)) <= to_rep6(last(temp___41881)))) and
+  (((to_rep6(first(temp___41901)) <= to_rep6(last(temp___41901))) and
+  (0 = ((to_rep6(last(temp___41901)) - to_rep6(first(temp___41901))) + 1))) or
+  (not (to_rep6(first(temp___41901)) <= to_rep6(last(temp___41901))))))) and
+  ((temp___4192 = temp___4188) and (temp___41921 = temp___41881))))) and
+  (forall temp___4193:int. ((((r6b <= temp___4193) and
+  (temp___4193 <= r7b)) and
+  ((o4[temp___4193]) = (temp___4192[temp___4193]))) or
+  ((not ((r6b <= temp___4193) and (temp___4193 <= r7b))) and
+  ((o4[temp___4193]) = (handler__split_fields5[temp___4193])))))) and
+  ((handler__split_fields1 = o5) and ((handler__split_fields2 = o6) and
+  ((handler__split_fields3 = o7) and ((handler__split_fields4 = o8) and
+  ((o4 = o9) and ((handler__split_fields6 = o10) and
+  ((handler__split_fields7 = o11) and
+  (handler__split_fields8 = o12))))))))) and
+  ((handler__split_fields = o13) and (((o14 = o5) and ((o15 = o6) and
+  ((o16 = o7) and ((o17 = o8) and ((o18 = o9) and ((o19 = o10) and
+  ((o20 = o11) and (o21 = o12)))))))) and
+  (handler__split_fields9 = o22)))) and (((o23 = o13) and (((o24 = o14) and
+  ((o25 = o15) and ((o26 = o16) and ((o27 = o17) and ((o28 = o18) and
+  ((o29 = o19) and ((o30 = o20) and (o31 = o21)))))))) and (o32 = o22))) and
+  (handler__split_fields10 = o33))) and (((temp___4196 = o23) and
+  (((temp___41961 = o24) and ((temp___41962 = o25) and
+  ((temp___41963 = o26) and ((temp___41964 = o27) and
+  ((temp___41965 = o28) and ((temp___41966 = o29) and
+  ((temp___41967 = o30) and (temp___41968 = o31)))))))) and
+  (temp___41969 = o32))) and (temp___419610 = o33))) and
+  ((((result1 = handler__split_fields) and
   (((result2 = handler__split_fields1) and
   ((result3 = handler__split_fields2) and
   ((result4 = handler__split_fields3) and
@@ -2313,67 +1954,60 @@ axiom H64 : (((result1 = handler__split_fields) and
   ((result8 = handler__split_fields7) and
   (result9 = handler__split_fields8)))))))) and
   (result10 = handler__split_fields9))) and
-  (result11 = handler__split_fields10))
-
-axiom H65 : (((handler__split_fields11 = temp___3848) and
-  (((handler__split_fields12 = temp___38481) and
-  ((handler__split_fields13 = temp___38482) and
-  ((handler__split_fields14 = temp___38483) and
-  ((handler__split_fields15 = temp___38484) and
-  ((handler__split_fields16 = temp___38485) and
-  ((handler__split_fields17 = temp___38486) and
-  ((handler__split_fields18 = temp___38487) and
-  (handler__split_fields19 = temp___38488)))))))) and
-  (handler__split_fields20 = temp___38489))) and
-  (handler__split_fields21 = temp___384810))
-
-axiom H66 : (to_rep1(o34) = add(to_rep1(handler__split_fields12), of_int(1)))
-
-axiom H67 : ((o35 = o34) and ((o36 = handler__split_fields13) and
-  ((o37 = handler__split_fields14) and ((o38 = handler__split_fields15) and
-  ((o39 = handler__split_fields16) and ((o40 = handler__split_fields17) and
-  ((o41 = handler__split_fields18) and (o42 = handler__split_fields19))))))))
-
-axiom H68 : ((o43 = handler__split_fields11) and (((o44 = o35) and
-  ((o45 = o36) and ((o46 = o37) and ((o47 = o38) and ((o48 = o39) and
-  ((o49 = o40) and ((o50 = o41) and (o51 = o42)))))))) and
-  (o52 = handler__split_fields20)))
-
-axiom H69 : (((o53 = o43) and (((o54 = o44) and ((o55 = o45) and
-  ((o56 = o46) and ((o57 = o47) and ((o58 = o48) and ((o59 = o49) and
-  ((o60 = o50) and (o61 = o51)))))))) and (o62 = o52))) and
-  (o63 = handler__split_fields21))
-
-axiom H70 : (((temp___3851 = o53) and (((temp___38511 = o54) and
-  ((temp___38512 = o55) and ((temp___38513 = o56) and
-  ((temp___38514 = o57) and ((temp___38515 = o58) and
-  ((temp___38516 = o59) and ((temp___38517 = o60) and
-  (temp___38518 = o61)))))))) and (temp___38519 = o62))) and
-  (temp___385110 = o63))
-
-axiom H71 : (((result12 = handler__split_fields11) and
-  (((result13 = handler__split_fields12) and
-  ((result14 = handler__split_fields13) and
-  ((result15 = handler__split_fields14) and
-  ((result16 = handler__split_fields15) and
-  ((result17 = handler__split_fields16) and
-  ((result18 = handler__split_fields17) and
-  ((result19 = handler__split_fields18) and
-  (result20 = handler__split_fields19)))))))) and
-  (result21 = handler__split_fields20))) and
-  (result22 = handler__split_fields21))
-
-axiom H72 : (((handler__split_fields22 = temp___3851) and
-  (((handler__split_fields23 = temp___38511) and
-  ((handler__split_fields24 = temp___38512) and
-  ((handler__split_fields25 = temp___38513) and
-  ((handler__split_fields26 = temp___38514) and
-  ((handler__split_fields27 = temp___38515) and
-  ((handler__split_fields28 = temp___38516) and
-  ((handler__split_fields29 = temp___38517) and
-  (handler__split_fields30 = temp___38518)))))))) and
-  (handler__split_fields31 = temp___38519))) and
-  (handler__split_fields32 = temp___385110))
-
- (* File "console_pack.adb", line 20, characters 0-0 *)
-goal WP_parameter_def : in_range1((to_rep(handler__split_fields32) + 1))
+  (result11 = handler__split_fields10)) and
+  (((temp___4196 = handler__split_fields11) and
+  (((temp___41961 = handler__split_fields12) and
+  ((temp___41962 = handler__split_fields13) and
+  ((temp___41963 = handler__split_fields14) and
+  ((temp___41964 = handler__split_fields15) and
+  ((temp___41965 = handler__split_fields16) and
+  ((temp___41966 = handler__split_fields17) and
+  ((temp___41967 = handler__split_fields18) and
+  (temp___41968 = handler__split_fields19)))))))) and
+  (temp___41969 = handler__split_fields20))) and
+  (temp___419610 = handler__split_fields21)))) ->
+  (((((((to_rep1(o34) = add(to_rep1(handler__split_fields12), rliteral2)) and
+  ((o34 = o35) and ((handler__split_fields13 = o36) and
+  ((handler__split_fields14 = o37) and ((handler__split_fields15 = o38) and
+  ((handler__split_fields16 = o39) and ((handler__split_fields17 = o40) and
+  ((handler__split_fields18 = o41) and
+  (handler__split_fields19 = o42))))))))) and
+  ((handler__split_fields11 = o43) and (((o44 = o35) and ((o45 = o36) and
+  ((o46 = o37) and ((o47 = o38) and ((o48 = o39) and ((o49 = o40) and
+  ((o50 = o41) and (o51 = o42)))))))) and
+  (handler__split_fields20 = o52)))) and (((o53 = o43) and (((o54 = o44) and
+  ((o55 = o45) and ((o56 = o46) and ((o57 = o47) and ((o58 = o48) and
+  ((o59 = o49) and ((o60 = o50) and (o61 = o51)))))))) and (o62 = o52))) and
+  (handler__split_fields21 = o63))) and (((temp___4199 = o53) and
+  (((temp___41991 = o54) and ((temp___41992 = o55) and
+  ((temp___41993 = o56) and ((temp___41994 = o57) and
+  ((temp___41995 = o58) and ((temp___41996 = o59) and
+  ((temp___41997 = o60) and (temp___41998 = o61)))))))) and
+  (temp___41999 = o62))) and (temp___419910 = o63))) and ((result12 = {
+  us_split_fields__content1 = { rec__crtp_pack__crtp_packet_handler__packet =
+  { us_split_discrs1 = { rec__crtp_pack__crtp_packet__repr =
+  handler__split_fields11 }; us_split_fields1 = {
+  rec__crtp_pack__crtp_packet__size = handler__split_fields12;
+  rec__crtp_pack__crtp_packet__channel = handler__split_fields13;
+  rec__crtp_pack__crtp_packet__reserved = handler__split_fields14;
+  rec__crtp_pack__crtp_packet__port = handler__split_fields15;
+  rec__crtp_pack__crtp_packet__data_1 = handler__split_fields16;
+  rec__crtp_pack__crtp_packet__header = handler__split_fields17;
+  rec__crtp_pack__crtp_packet__data_2 = handler__split_fields18;
+  rec__crtp_pack__crtp_packet__raw = handler__split_fields19 };
+  attr__constrained = handler__split_fields20 };
+  rec__crtp_pack__crtp_packet_handler__index = handler__split_fields21 }
+  }) and (handler__split_fields22 = {
+  rec__crtp_pack__crtp_packet_handler__packet = { us_split_discrs1 = {
+  rec__crtp_pack__crtp_packet__repr = temp___4199 }; us_split_fields1 = {
+  rec__crtp_pack__crtp_packet__size = temp___41991;
+  rec__crtp_pack__crtp_packet__channel = temp___41992;
+  rec__crtp_pack__crtp_packet__reserved = temp___41993;
+  rec__crtp_pack__crtp_packet__port = temp___41994;
+  rec__crtp_pack__crtp_packet__data_1 = temp___41995;
+  rec__crtp_pack__crtp_packet__header = temp___41996;
+  rec__crtp_pack__crtp_packet__data_2 = temp___41997;
+  rec__crtp_pack__crtp_packet__raw = temp___41998 }; attr__constrained =
+  temp___41999 }; rec__crtp_pack__crtp_packet_handler__index = temp___419910
+  }))) ->
+  in_range1((to_rep((handler__split_fields22).rec__crtp_pack__crtp_packet_handler__index) + 1))))))))))))

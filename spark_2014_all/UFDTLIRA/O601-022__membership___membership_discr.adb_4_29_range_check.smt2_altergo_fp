@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -726,27 +726,8 @@ logic c03__attr__tag : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic us : int
-
-logic us1 : int
-
-logic us2 : int
-
-logic us3 : int
-
-logic us4 : int
-
-logic us5 : int
-
-logic us6 : int
-
-logic us7 : int
-
-axiom H : ((us = 0) and in_range1(0))
-
-axiom H1 : ((us1 = 0) and in_range1(0))
-
-axiom H2 : ((us2 = 0) and in_range1(0))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range1(0)
+goal WP_parameter_def :
+  (forall us:int. forall us1:int. forall us2:int. (((us = 0) and
+  in_range1(0)) -> (((us1 = 0) and in_range1(0)) -> (((us2 = 0) and
+  in_range1(0)) -> in_range1(0)))))

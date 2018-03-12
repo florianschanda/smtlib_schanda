@@ -361,12 +361,6 @@ logic d2 : duration
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : int
-
-logic o1 : int
-
-axiom H : (not (to_fixed(d2) = 0))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(fxp_div_result_int(to_fixed(d1),
-  to_fixed(d2)))
+goal WP_parameter_def : ((not (to_fixed(d2) = 0)) ->
+  in_range(fxp_div_result_int(to_fixed(d1), to_fixed(d2))))

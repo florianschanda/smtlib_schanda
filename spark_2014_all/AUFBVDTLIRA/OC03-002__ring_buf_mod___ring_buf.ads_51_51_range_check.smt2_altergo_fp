@@ -722,24 +722,6 @@ axiom slide_def :
   (forall i:t [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[sub(i, sub(new_first, old_first))]))))))
 
-logic concat : (t,integer) farray, t, t, (t,integer) farray, t,
-  t -> (t,integer) farray
-
-axiom concat_def :
-  (forall a:(t,integer) farray. forall b:(t,integer) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t.
-  (forall i:t [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((ule(a_first, i) and ule(i, a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and (ugt(i, a_last) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[add(sub(i, a_last), sub(b_first,
-  one))])))))))
-
-logic singleton : integer, t -> (t,integer) farray
-
-axiom singleton_def :
-  (forall v:integer.
-  (forall i:t [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (t,integer) farray, t, t, (t,integer) farray, t, t -> bool
 
 axiom bool_eq_def3 :
@@ -749,19 +731,19 @@ axiom bool_eq_def3 :
   a__last) and (ule(b__first, b__last) and (sub(a__last,
   a__first) = sub(b__last, b__first)))) or ((not ule(a__first, a__last)) and
   ugt(b__first, b__last))) and
-  (forall temp___idx_132:t. (((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) and
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[add(sub(b__first, a__first),
-  temp___idx_132)])))) or (not (ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)))))) -> (bool_eq4(a, a__first, a__last, b,
+  (forall temp___idx_154:t. (((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) and
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[add(sub(b__first, a__first),
+  temp___idx_154)])))) or (not (ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)))))) -> (bool_eq4(a, a__first, a__last, b,
   b__first, b__last) = true)) and ((not (((ule(a__first, a__last) ->
   (ule(b__first, b__last) and (sub(a__last, a__first) = sub(b__last,
   b__first)))) and ((not ule(a__first, a__last)) -> ugt(b__first,
   b__last))) and
-  (forall temp___idx_132:t. ((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[add(sub(b__first, a__first),
-  temp___idx_132)]))))))) -> (bool_eq4(a, a__first, a__last, b, b__first,
+  (forall temp___idx_154:t. ((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[add(sub(b__first, a__first),
+  temp___idx_154)]))))))) -> (bool_eq4(a, a__first, a__last, b, b__first,
   b__last) = false))))
 
 axiom bool_eq_rev :
@@ -771,39 +753,10 @@ axiom bool_eq_rev :
   (((ule(a__first, a__last) -> (ule(b__first, b__last) and (sub(a__last,
   a__first) = sub(b__last, b__first)))) and ((not ule(a__first, a__last)) ->
   ugt(b__first, b__last))) and
-  (forall temp___idx_132:t. ((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[add(sub(b__first, a__first),
-  temp___idx_132)])))))))))
-
-logic compare : (t,integer) farray, t, t, (t,integer) farray, t, t -> int
-
-axiom compare_def_eq :
-  (forall a:(t,integer) farray. forall b:(t,integer) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a, a_first, a_last, b,
-  b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(t,integer) farray. forall b:(t,integer) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) <  0) <->
-  (exists i:t. exists j:t. (ule(i, a_last) and (ult(j, b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  (ult(i, a_last) and (to_rep1((a[add(i, one)])) <  to_rep1((b[add(j,
-  one)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(t,integer) farray. forall b:(t,integer) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((0 <  compare(a,
-  a_first, a_last, b, b_first, b_last)) <->
-  (exists i:t. exists j:t. (ule(i, b_last) and (ult(j, a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  (ult(i, b_last) and (to_rep1((b[add(i, one)])) <  to_rep1((a[add(j,
-  one)]))))))))))))
+  (forall temp___idx_154:t. ((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[add(sub(b__first, a__first),
+  temp___idx_154)])))))))))
 
 type t1
 
@@ -994,12 +947,20 @@ type t32s__ref = { t32s__content : us_t1
 
 function t32s__ref___projection(a: t32s__ref) : us_t1 = (a).t32s__content
 
-axiom H : dynamic_property(of_int(0), of_int(65535), to_rep(first(m1)),
-  to_rep(last(m1)))
+logic rliteral : t
 
-axiom H1 : (0 <  length({ elts = m; rt = m1 }))
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
 
-axiom H2 : ule(to_rep(first(m1)), sub(to_rep(last(m1)), of_int(1)))
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 65535)
+
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 1)
 
  (* File "ring_buf.ads", line 25, characters 0-0 *)
-goal WP_parameter_def : ule(to_rep(first(m1)), to_rep(first(m1)))
+goal WP_parameter_def : (dynamic_property(rliteral, rliteral1,
+  to_rep(first(m1)), to_rep(last(m1))) -> ((0 <  length({ elts = m; rt = m1
+  })) -> (ule(to_rep(first(m1)), sub(to_rep(last(m1)), rliteral2)) ->
+  ule(to_rep(first(m1)), to_rep(first(m1))))))

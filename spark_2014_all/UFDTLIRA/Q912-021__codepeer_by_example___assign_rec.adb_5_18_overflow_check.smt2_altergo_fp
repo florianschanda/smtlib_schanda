@@ -323,71 +323,20 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x__split_fields : integer
-
-logic x__split_fields1 : integer
-
-logic x__split_fields2 : integer
-
-logic o : int
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic o3 : integer
-
-logic o4 : integer
-
-logic temp___151 : integer
-
-logic temp___1511 : integer
-
-logic temp___1512 : integer
-
-logic o5 : int
-
-logic result : integer
-
-logic result1 : integer
-
-logic result2 : integer
-
-logic x__split_fields3 : integer
-
-logic x__split_fields4 : integer
-
-logic x__split_fields5 : integer
-
-axiom H : in_range(y)
-
-axiom H1 : ((o = (y + 1)) and in_range((y + 1)))
-
-axiom H2 : (to_rep(o1) = o)
-
-axiom H3 : (o1 = o2)
-
-axiom H4 : (x__split_fields1 = o3)
-
-axiom H5 : (x__split_fields2 = o4)
-
-axiom H6 : (temp___151 = o2)
-
-axiom H7 : (temp___1511 = o3)
-
-axiom H8 : (temp___1512 = o4)
-
-axiom H9 : (result = x__split_fields)
-
-axiom H10 : (result1 = x__split_fields1)
-
-axiom H11 : (result2 = x__split_fields2)
-
-axiom H12 : (x__split_fields3 = temp___151)
-
-axiom H13 : (x__split_fields4 = temp___1511)
-
-axiom H14 : (x__split_fields5 = temp___1512)
-
  (* File "assign_rec.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : in_range((y - 1))
+goal WP_parameter_def :
+  (forall x__split_fields:integer. forall x__split_fields1:integer.
+  forall x__split_fields2:integer. forall o:int. forall o1:integer.
+  forall o2:integer. forall o3:integer. forall o4:integer.
+  forall temp___175:integer. forall temp___1751:integer.
+  forall temp___1752:integer. forall result:integer. forall result1:integer.
+  forall result2:integer. forall x__split_fields3:integer.
+  forall x__split_fields4:integer. forall x__split_fields5:integer.
+  (in_range(y) -> (((((((o = (y + 1)) and in_range((y + 1))) and
+  (to_rep(o1) = o)) and ((o1 = o2) and ((x__split_fields1 = o3) and
+  (x__split_fields2 = o4)))) and ((temp___175 = o2) and
+  ((temp___1751 = o3) and (temp___1752 = o4)))) and
+  (((result = x__split_fields) and ((result1 = x__split_fields1) and
+  (result2 = x__split_fields2))) and ((x__split_fields3 = temp___175) and
+  ((x__split_fields4 = temp___1751) and
+  (x__split_fields5 = temp___1752))))) -> in_range((y - 1)))))

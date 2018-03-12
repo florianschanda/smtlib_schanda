@@ -115,21 +115,8 @@ axiom f1__post_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic z : int
-
-logic o : int
-
-logic result : int
-
-logic z1 : int
-
-axiom H : ((o = f1(2147483647)) and (in_range(o) and (o = (2147483647 + 1))))
-
-axiom H1 : (result = z)
-
-axiom H2 : (z1 = o)
-
-axiom H3 : in_range(z1)
-
  (* File "assume_call.adb", line 9, characters 0-0 *)
-goal WP_parameter_def : (z1 <  0)
+goal WP_parameter_def :
+  (forall z:int. forall o:int. forall result:int. forall z1:int.
+  ((((o = f1(2147483647)) and (in_range(o) and (o = (2147483647 + 1)))) and
+  ((result = z) and (z1 = o))) -> (in_range(z1) -> (z1 <  0))))

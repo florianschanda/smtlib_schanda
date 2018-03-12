@@ -137,35 +137,10 @@ logic par : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : int
-
-logic refined_post_legal__func__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic refined_post_legal__func__result1 : int
-
-logic refined_post_legal__func__result2 : int
-
-logic refined_post_legal__func__result3 : int
-
-logic refined_post_legal__func__result4 : int
-
-logic refined_post_legal__func__result5 : int
-
-logic result1 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : in_range(par)
-
-axiom H2 : (refined_post_legal__func__result4 = (par + x))
-
-axiom H3 : (result1 = refined_post_legal__func__result4)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (par <= refined_post_legal__func__result4)
+goal WP_parameter_def :
+  (forall x:int. forall refined_post_legal__func__result:int.
+  (forall result:int. ((in_range1(x) and (in_range(par) and
+  ((refined_post_legal__func__result = (par + x)) and
+  (result = refined_post_legal__func__result)))) ->
+  (par <= refined_post_legal__func__result))))

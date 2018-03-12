@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -245,65 +245,16 @@ logic n : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic b : bool
-
-logic self__ : natural
-
-logic self__1 : bool
-
-logic self__2 : bool
-
-logic result : natural
-
-logic result1 : bool
-
-logic result2 : bool
-
-logic self__3 : natural
-
-logic self__4 : bool
-
-logic self__5 : bool
-
-logic self__6 : natural
-
-logic self__7 : bool
-
-logic self__8 : bool
-
-logic self__9 : natural
-
-logic self__10 : bool
-
-logic self__11 : bool
-
-axiom H : in_range1(n)
-
-axiom H1 : (((10 <  n) and (b = true)) and (self__1 = true))
-
-axiom H2 : (result = self__)
-
-axiom H3 : (result1 = self__1)
-
-axiom H4 : (result2 = self__2)
-
-axiom H5 : (self__ = self__3)
-
-axiom H6 : (self__1 = self__4)
-
-axiom H7 : (of_int(0) = self__5)
-
-axiom H8 : (self__6 = self__3)
-
-axiom H9 : (self__7 = self__4)
-
-axiom H10 : (self__8 = self__5)
-
-axiom H11 : (self__9 = self__3)
-
-axiom H12 : (self__10 = self__4)
-
-axiom H13 : (self__11 = self__5)
-
  (* File "foo.adb", line 7, characters 0-0 *)
-goal WP_parameter_def : (b = true)
+goal WP_parameter_def :
+  (forall b:bool. forall self__:natural. forall self__1:bool.
+  forall self__2:bool. forall result:natural. forall result1:bool.
+  forall result2:bool. forall self__3:natural. forall self__4:bool.
+  forall self__5:bool. forall self__6:natural. forall self__7:bool.
+  forall self__8:bool. forall self__9:natural. forall self__10:bool.
+  forall self__11:bool. ((in_range1(n) and ((((10 <  n) and (b = true)) and
+  (self__1 = true)) and ((((result = self__) and ((result1 = self__1) and
+  (result2 = self__2))) and ((self__ = self__3) and ((self__1 = self__4) and
+  (of_int(0) = self__5)))) and (((self__6 = self__3) and
+  ((self__7 = self__4) and (self__8 = self__5))) and ((self__9 = self__3) and
+  ((self__10 = self__4) and (self__11 = self__5))))))) -> (b = true)))

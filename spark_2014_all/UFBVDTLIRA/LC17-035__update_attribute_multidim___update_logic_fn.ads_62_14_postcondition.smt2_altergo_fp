@@ -688,7 +688,15 @@ function i__ref___projection(a: i__ref) : i = (a).i__content
 
 type m
 
-predicate in_range2(x: t) = (ule(of_int(0), x) and ule(x, of_int(7)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 7)
+
+predicate in_range2(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 7))
 
@@ -799,17 +807,17 @@ axiom bool_eq_def5 :
   (((a__first_3 <= a__last_3) and ((b__first_3 <= b__last_3) and
   ((a__last_3 - a__first_3) = (b__last_3 - b__first_3)))) or
   ((not (a__first_3 <= a__last_3)) and (b__last_3 <  b__first_3)))) and
-  (forall temp___idx_134:int. forall temp___idx_136:int.
-  (forall temp___idx_135:t. ((((((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) and (ule(a__first_2, temp___idx_135) and
-  ule(temp___idx_135, a__last_2))) and ((a__first_3 <= temp___idx_136) and
-  (temp___idx_136 <= a__last_3))) and (to_rep(get(a, temp___idx_134,
-  temp___idx_135, temp___idx_136)) = to_rep(get(b,
-  ((b__first - a__first) + temp___idx_134), add(sub(b__first_2, a__first_2),
-  temp___idx_135), ((b__first_3 - a__first_3) + temp___idx_136))))) or
-  (not ((((a__first <= temp___idx_134) and (temp___idx_134 <= a__last)) and
-  (ule(a__first_2, temp___idx_135) and ule(temp___idx_135, a__last_2))) and
-  ((a__first_3 <= temp___idx_136) and (temp___idx_136 <= a__last_3)))))))) ->
+  (forall temp___idx_156:int. forall temp___idx_158:int.
+  (forall temp___idx_157:t. ((((((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) and (ule(a__first_2, temp___idx_157) and
+  ule(temp___idx_157, a__last_2))) and ((a__first_3 <= temp___idx_158) and
+  (temp___idx_158 <= a__last_3))) and (to_rep(get(a, temp___idx_156,
+  temp___idx_157, temp___idx_158)) = to_rep(get(b,
+  ((b__first - a__first) + temp___idx_156), add(sub(b__first_2, a__first_2),
+  temp___idx_157), ((b__first_3 - a__first_3) + temp___idx_158))))) or
+  (not ((((a__first <= temp___idx_156) and (temp___idx_156 <= a__last)) and
+  (ule(a__first_2, temp___idx_157) and ule(temp___idx_157, a__last_2))) and
+  ((a__first_3 <= temp___idx_158) and (temp___idx_158 <= a__last_3)))))))) ->
   (bool_eq6(a, a__first, a__last, a__first_2, a__last_2, a__first_3,
   a__last_3, b, b__first, b__last, b__first_2, b__last_2, b__first_3,
   b__last_3) = true)) and ((not ((((((a__first <= a__last) ->
@@ -822,14 +830,14 @@ axiom bool_eq_def5 :
   (((a__first_3 <= a__last_3) -> ((b__first_3 <= b__last_3) and
   ((a__last_3 - a__first_3) = (b__last_3 - b__first_3)))) and
   ((not (a__first_3 <= a__last_3)) -> (b__last_3 <  b__first_3)))) and
-  (forall temp___idx_134:int. forall temp___idx_136:int.
-  (forall temp___idx_135:t. (((((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) and (ule(a__first_2, temp___idx_135) and
-  ule(temp___idx_135, a__last_2))) and ((a__first_3 <= temp___idx_136) and
-  (temp___idx_136 <= a__last_3))) -> (to_rep(get(a, temp___idx_134,
-  temp___idx_135, temp___idx_136)) = to_rep(get(b,
-  ((b__first - a__first) + temp___idx_134), add(sub(b__first_2, a__first_2),
-  temp___idx_135), ((b__first_3 - a__first_3) + temp___idx_136))))))))) ->
+  (forall temp___idx_156:int. forall temp___idx_158:int.
+  (forall temp___idx_157:t. (((((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) and (ule(a__first_2, temp___idx_157) and
+  ule(temp___idx_157, a__last_2))) and ((a__first_3 <= temp___idx_158) and
+  (temp___idx_158 <= a__last_3))) -> (to_rep(get(a, temp___idx_156,
+  temp___idx_157, temp___idx_158)) = to_rep(get(b,
+  ((b__first - a__first) + temp___idx_156), add(sub(b__first_2, a__first_2),
+  temp___idx_157), ((b__first_3 - a__first_3) + temp___idx_158))))))))) ->
   (bool_eq6(a, a__first, a__last, a__first_2, a__last_2, a__first_3,
   a__last_3, b, b__first, b__last, b__first_2, b__last_2, b__first_3,
   b__last_3) = false))))
@@ -852,27 +860,20 @@ axiom bool_eq_rev :
   (((a__first_3 <= a__last_3) -> ((b__first_3 <= b__last_3) and
   ((a__last_3 - a__first_3) = (b__last_3 - b__first_3)))) and
   ((not (a__first_3 <= a__last_3)) -> (b__last_3 <  b__first_3)))) and
-  (forall temp___idx_134:int. forall temp___idx_136:int.
-  (forall temp___idx_135:t. (((((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) and (ule(a__first_2, temp___idx_135) and
-  ule(temp___idx_135, a__last_2))) and ((a__first_3 <= temp___idx_136) and
-  (temp___idx_136 <= a__last_3))) -> (to_rep(get(a, temp___idx_134,
-  temp___idx_135, temp___idx_136)) = to_rep(get(b,
-  ((b__first - a__first) + temp___idx_134), add(sub(b__first_2, a__first_2),
-  temp___idx_135), ((b__first_3 - a__first_3) + temp___idx_136))))))))))))
+  (forall temp___idx_156:int. forall temp___idx_158:int.
+  (forall temp___idx_157:t. (((((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) and (ule(a__first_2, temp___idx_157) and
+  ule(temp___idx_157, a__last_2))) and ((a__first_3 <= temp___idx_158) and
+  (temp___idx_158 <= a__last_3))) -> (to_rep(get(a, temp___idx_156,
+  temp___idx_157, temp___idx_158)) = to_rep(get(b,
+  ((b__first - a__first) + temp___idx_156), add(sub(b__first_2, a__first_2),
+  temp___idx_157), ((b__first_3 - a__first_3) + temp___idx_158))))))))))))
 
 logic a_3d_arr : map
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
 logic update_logic_fn__a_3d_arr__aggregate_def : int -> map
-
-axiom def_axiom :
-  (forall temp___142:int.
-  (forall temp___143:int. forall temp___145:int.
-  (forall temp___144:t.
-  (get(update_logic_fn__a_3d_arr__aggregate_def(temp___142), temp___143,
-  temp___144, temp___145) = of_rep(temp___142)))))
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
@@ -896,105 +897,65 @@ logic v2 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
-logic temp___230 : map, int, t, int, int, int, t, int, int -> map
+logic temp___257 : map, int, t, int, int, int, t, int, int -> map
 
-axiom def_axiom1 :
-  (forall temp___232:map.
-  (forall temp___233:int. forall temp___235:int. forall temp___236:int.
-  forall temp___237:int. forall temp___239:int. forall temp___240:int.
-  (forall temp___234:t. forall temp___238:t.
-  (forall temp___241:int. forall temp___243:int.
-  (forall temp___242:t. (((((temp___241 = temp___237) and
-  (temp___242 = temp___238)) and (temp___243 = temp___239)) ->
-  (get(temp___230(temp___232, temp___233, temp___234, temp___235, temp___236,
-  temp___237, temp___238, temp___239, temp___240), temp___241, temp___242,
-  temp___243) = of_rep(temp___240))) and
-  ((not (((temp___241 = temp___237) and (temp___242 = temp___238)) and
-  (temp___243 = temp___239))) -> (((((temp___241 = temp___233) and
-  (temp___242 = temp___234)) and (temp___243 = temp___235)) ->
-  (get(temp___230(temp___232, temp___233, temp___234, temp___235, temp___236,
-  temp___237, temp___238, temp___239, temp___240), temp___241, temp___242,
-  temp___243) = of_rep(temp___236))) and
-  ((not (((temp___241 = temp___233) and (temp___242 = temp___234)) and
-  (temp___243 = temp___235))) -> (get(temp___230(temp___232, temp___233,
-  temp___234, temp___235, temp___236, temp___237, temp___238, temp___239,
-  temp___240), temp___241, temp___242, temp___243) = get(temp___232,
-  temp___241, temp___242, temp___243)))))))))))
-
-logic temp___244 : int -> map
-
-axiom def_axiom2 :
-  (forall temp___246:int.
-  (forall temp___247:int. forall temp___249:int.
-  (forall temp___248:t. (get(temp___244(temp___246), temp___247, temp___248,
-  temp___249) = of_rep(temp___246)))))
+logic temp___271 : int -> map
 
 axiom a_3d_arr__def_axiom :
   (a_3d_arr = update_logic_fn__a_3d_arr__aggregate_def(1000))
 
-logic a : map
+axiom def_axiom :
+  (forall temp___164:int. (in_range(temp___164) ->
+  (forall temp___165:int. forall temp___167:int.
+  (forall temp___166:t.
+  (to_rep(get(update_logic_fn__a_3d_arr__aggregate_def(temp___164),
+  temp___165, temp___166, temp___167)) = temp___164)))))
 
-logic o : integer
+axiom def_axiom1 :
+  (forall temp___273:int. (in_range(temp___273) ->
+  (forall temp___274:int. forall temp___276:int.
+  (forall temp___275:t. (to_rep(get(temp___271(temp___273), temp___274,
+  temp___275, temp___276)) = temp___273)))))
 
-logic o1 : map
-
-logic o2 : integer
-
-logic o3 : map
-
-logic result : map
-
-logic a1 : map
-
-logic result1 : map
-
-logic a2 : map
-
-logic result2 : map
-
-logic a3 : map
-
-logic a4 : map
-
-logic a5 : map
-
-axiom H : (update_logic_fn__a_3d_arr__aggregate_def(1000) = a_3d_arr)
-
-axiom H1 : in_range1(x)
-
-axiom H2 : in_range2(y)
-
-axiom H3 : in_range3(z)
-
-axiom H4 : in_range(v1)
-
-axiom H5 : in_range(v2)
-
-axiom H6 : (result = a)
-
-axiom H7 : (a1 = a_3d_arr)
-
-axiom H8 : (to_rep(o) = v1)
-
-axiom H9 : (o1 = set(a1, 5, of_int(7), 1, o))
-
-axiom H10 : (result1 = a1)
-
-axiom H11 : (a2 = o1)
-
-axiom H12 : (to_rep(o2) = v2)
-
-axiom H13 : (o3 = set(a2, x, y, z, o2))
-
-axiom H14 : (result2 = a2)
-
-axiom H15 : (a3 = o3)
-
-axiom H16 : (a3 = a4)
-
-axiom H17 : (a5 = a3)
+axiom def_axiom2 :
+  (forall temp___259:map.
+  (forall temp___260:int. forall temp___262:int. forall temp___263:int.
+  forall temp___264:int. forall temp___266:int. forall temp___267:int.
+  (forall temp___261:t. forall temp___265:t.
+  ((((((((in_range1(temp___260) and in_range2(temp___261)) and
+  in_range3(temp___262)) and in_range(temp___263)) and
+  in_range1(temp___264)) and in_range2(temp___265)) and
+  in_range3(temp___266)) and in_range(temp___267)) ->
+  (forall temp___268:int. forall temp___270:int.
+  (forall temp___269:t. (((((temp___268 = temp___264) and
+  (temp___269 = temp___265)) and (temp___270 = temp___266)) ->
+  (to_rep(get(temp___257(temp___259, temp___260, temp___261, temp___262,
+  temp___263, temp___264, temp___265, temp___266, temp___267), temp___268,
+  temp___269, temp___270)) = temp___267)) and
+  ((not (((temp___268 = temp___264) and (temp___269 = temp___265)) and
+  (temp___270 = temp___266))) -> (((((temp___268 = temp___260) and
+  (temp___269 = temp___261)) and (temp___270 = temp___262)) ->
+  (to_rep(get(temp___257(temp___259, temp___260, temp___261, temp___262,
+  temp___263, temp___264, temp___265, temp___266, temp___267), temp___268,
+  temp___269, temp___270)) = temp___263)) and
+  ((not (((temp___268 = temp___260) and (temp___269 = temp___261)) and
+  (temp___270 = temp___262))) -> (get(temp___257(temp___259, temp___260,
+  temp___261, temp___262, temp___263, temp___264, temp___265, temp___266,
+  temp___267), temp___268, temp___269, temp___270) = get(temp___259,
+  temp___268, temp___269, temp___270))))))))))))
 
  (* File "update_logic_fn.ads", line 49, characters 0-0 *)
-goal WP_parameter_def : (bool_eq6(a4, 1, 10, of_int(0), of_int(7), 0, 2,
-  temp___230(temp___244(1000), 5, of_int(7), 1, v1, x, y, z, v2), 1, 10,
-  of_int(0), of_int(7), 0, 2) = true)
+goal WP_parameter_def :
+  (forall a:map. forall o:integer. forall o1:map. forall o2:integer.
+  forall o3:map. forall result:map. forall a1:map. forall result1:map.
+  forall a2:map. forall result2:map. forall a3:map. forall a4:map.
+  forall a5:map.
+  (((update_logic_fn__a_3d_arr__aggregate_def(1000) = a_3d_arr) and
+  (in_range1(x) and (in_range2(y) and (in_range3(z) and (in_range(v1) and
+  (in_range(v2) and ((((result = a) and (a1 = a_3d_arr)) and
+  ((((to_rep(o) = v1) and (o1 = set(a1, 5, rliteral1, 1, o))) and
+  ((result1 = a1) and (a2 = o1))) and (((to_rep(o2) = v2) and (o3 = set(a2,
+  x, y, z, o2))) and ((result2 = a2) and (a3 = o3))))) and ((a3 = a4) and
+  (a5 = a3))))))))) -> (bool_eq6(a4, 1, 10, rliteral, rliteral1, 0, 2,
+  temp___257(temp___271(1000), 5, rliteral1, 1, v1, x, y, z, v2), 1, 10,
+  rliteral, rliteral1, 0, 2) = true)))

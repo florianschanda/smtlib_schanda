@@ -115,11 +115,6 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 axiom v__def_axiom : (v = x)
 
-axiom H : in_range(x)
-
-axiom H1 : in_range(v)
-
-axiom H2 : (x = v)
-
  (* File "context.adb", line 5, characters 0-0 *)
-goal WP_parameter_def : (0 <  v)
+goal WP_parameter_def : (in_range(x) -> (in_range(v) -> ((x = v) ->
+  (0 <  v))))

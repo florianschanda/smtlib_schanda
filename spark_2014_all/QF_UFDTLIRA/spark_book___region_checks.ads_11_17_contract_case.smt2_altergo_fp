@@ -81,12 +81,6 @@ axiom bool_ge_axiom :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -98,6 +92,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -137,69 +137,43 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic region_checks__sign__result : int
-
-logic result : int
-
-logic region_checks__sign__result1 : int
-
-logic result1 : int
-
-logic region_checks__sign__result2 : int
-
-logic result2 : int
-
-logic region_checks__sign__result3 : int
-
-logic region_checks__sign__result4 : int
-
-logic region_checks__sign__result5 : int
-
-logic region_checks__sign__result6 : int
-
-logic region_checks__sign__result7 : int
-
-logic region_checks__sign__result8 : int
-
-logic region_checks__sign__result9 : int
-
-logic region_checks__sign__result10 : int
-
-logic region_checks__sign__result11 : int
-
-axiom H : in_range1(x)
-
-axiom H1 :
-  (((region_checks__sign__result8 = region_checks__sign__result6) and
+ (* File "region_checks.ads", line 4, characters 0-0 *)
+goal WP_parameter_def :
+  (forall region_checks__sign__result:int. forall result:int.
+  forall region_checks__sign__result1:int. forall result1:int.
+  forall region_checks__sign__result2:int. forall result2:int.
+  forall region_checks__sign__result3:int.
+  forall region_checks__sign__result4:int.
+  forall region_checks__sign__result5:int.
+  forall region_checks__sign__result6:int.
+  forall region_checks__sign__result7:int.
+  forall region_checks__sign__result8:int.
+  forall region_checks__sign__result9:int.
+  forall region_checks__sign__result10:int.
+  forall region_checks__sign__result11:int. (in_range1(x) -> ((((({
+  int__content = region_checks__sign__result8 } = { int__content =
+  region_checks__sign__result6 }) and
   (region_checks__sign__result9 = region_checks__sign__result7)) and
-  (((((- 2147483648) <= x) and (x <= (- 1))) ->
+  (((((- 2147483648) <= x) and (x <= (- 1))) and
   (((region_checks__sign__result1 = region_checks__sign__result6) and
   (region_checks__sign__result7 = region_checks__sign__result1)) and
   ((result = region_checks__sign__result) and
-  (region_checks__sign__result1 = (- 1))))) and
-  ((not (((- 2147483648) <= x) and (x <= (- 1)))) ->
-  (((region_checks__sign__result6 = region_checks__sign__result4) and
+  (region_checks__sign__result1 = (- 1))))) or
+  ((not (((- 2147483648) <= x) and (x <= (- 1)))) and
+  (((region_checks__sign__result4 = region_checks__sign__result6) and
   (region_checks__sign__result7 = region_checks__sign__result5)) and
-  (((x = 0) ->
+  (((x = 0) and
   (((region_checks__sign__result2 = region_checks__sign__result4) and
   (region_checks__sign__result5 = region_checks__sign__result2)) and
   ((result1 = region_checks__sign__result) and
-  (region_checks__sign__result2 = 0)))) and ((not (x = 0)) ->
+  (region_checks__sign__result2 = 0)))) or ((not (x = 0)) and
   (((region_checks__sign__result3 = region_checks__sign__result4) and
   (region_checks__sign__result5 = region_checks__sign__result3)) and
   ((result2 = region_checks__sign__result) and
-  (region_checks__sign__result3 = 1)))))))))
-
-axiom H2 : (region_checks__sign__result10 = region_checks__sign__result8)
-
-axiom H3 : (region_checks__sign__result11 = region_checks__sign__result9)
-
-axiom H4 : ((bool_lt(x, 0) = true) ->
-  (region_checks__sign__result10 = (- 1)))
-
-axiom H5 : ((bool_eq(x, 0) = true) -> (region_checks__sign__result10 = 0))
-
-axiom H6 : (bool_gt(x, 0) = true)
-
- (* File "region_checks.ads", line 4, characters 0-0 *)
-goal WP_parameter_def : (region_checks__sign__result10 = 1)
+  (region_checks__sign__result3 = 1))))))))) and
+  ((region_checks__sign__result10 = region_checks__sign__result8) and
+  (region_checks__sign__result11 = region_checks__sign__result9))) ->
+  ((((bool_lt(x, 0) = true) and (region_checks__sign__result10 = (- 1))) or
+  (not (bool_lt(x, 0) = true))) -> ((((bool_eq(x, 0) = true) and
+  (region_checks__sign__result10 = 0)) or (not (bool_eq(x, 0) = true))) ->
+  ((bool_gt(x, 0) = true) -> (region_checks__sign__result10 = 1)))))))

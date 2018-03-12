@@ -99,7 +99,7 @@
 (declare-datatypes () ((optional_pair__ref (mk_optional_pair__ref (optional_pair__content us_rep1)))))
 (define-fun optional_pair__ref___projection ((a optional_pair__ref)) us_rep1 (optional_pair__content a))
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
-(define-fun dynamic_invariant ((temp___expr_180 Int) (temp___is_init_177 Bool) (temp___skip_constant_178 Bool) (temp___do_toplevel_179 Bool)) Bool (=> (or (= temp___is_init_177 true) (<= 0 255)) (in_range temp___expr_180)))
+(define-fun dynamic_invariant ((temp___expr_207 Int) (temp___is_init_203 Bool) (temp___skip_constant_204 Bool) (temp___do_toplevel_205 Bool) (temp___do_typ_inv_206 Bool)) Bool (=> (or (= temp___is_init_203 true) (<= 0 255)) (in_range temp___expr_207)))
 (declare-const x__split_fields Bool)
 (declare-const x__split_fields1 unsigned_byte)
 (declare-const x__split_fields2 unsigned_byte)

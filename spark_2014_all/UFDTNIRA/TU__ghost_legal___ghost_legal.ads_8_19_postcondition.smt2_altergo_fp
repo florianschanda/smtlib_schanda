@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -284,161 +284,81 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic temp : int
-
-logic ghost_legal__is_prime__result : bool
-
-logic temp___132 : int
-
-logic o : int
-
-logic temp1 : int
-
-logic ghost_legal__is_prime__result1 : bool
-
-logic result : bool
-
-logic ghost_legal__is_prime__result2 : bool
-
-logic result1 : int
-
-logic temp2 : int
-
-logic temp3 : int
-
-logic ghost_legal__is_prime__result3 : bool
-
-logic result2 : bool
-
-logic ghost_legal__is_prime__result4 : bool
-
-logic result3 : int
-
-logic temp4 : int
-
-logic temp5 : int
-
-logic ghost_legal__is_prime__result5 : bool
-
-logic temp6 : int
-
-logic ghost_legal__is_prime__result6 : bool
-
-logic temp7 : int
-
-logic ghost_legal__is_prime__result7 : bool
-
-logic temp8 : int
-
-logic ghost_legal__is_prime__result8 : bool
-
-logic temp9 : int
-
-logic ghost_legal__is_prime__result9 : bool
-
-logic temp10 : int
-
-logic ghost_legal__is_prime__result10 : bool
-
-logic result4 : bool
-
-logic ghost_legal__is_prime__result11 : bool
-
-logic ghost_legal__is_prime__result12 : bool
-
-logic ghost_legal__is_prime__result13 : bool
-
-logic temp11 : int
-
-logic ghost_legal__is_prime__result14 : bool
-
-logic temp12 : int
-
-logic ghost_legal__is_prime__result15 : bool
-
-logic temp13 : int
-
-logic ghost_legal__is_prime__result16 : bool
-
-logic temp14 : int
-
-logic ghost_legal__is_prime__result17 : bool
-
-logic temp15 : int
-
-logic ghost_legal__is_prime__result18 : bool
-
-logic temp16 : int
-
-logic ghost_legal__is_prime__result19 : bool
-
-logic result5 : bool
-
-axiom H : in_range2(x)
-
-axiom H1 : ((0 <= 2147483647) -> in_range2(temp))
-
-axiom H2 :
-  (((((ghost_legal__is_prime__result2 = ghost_legal__is_prime__result16) and
-  (temp13 = temp)) and
-  ((ghost_legal__is_prime__result17 = ghost_legal__is_prime__result2) and
-  (temp14 = temp1))) and ((mod(x, 2) = 0) and ((is_even(x) = true) and
+ (* File "ghost_legal.ads", line 7, characters 0-0 *)
+goal WP_parameter_def :
+  (forall temp:int. forall ghost_legal__is_prime__result:bool.
+  forall temp___154:int. forall o:int. forall temp1:int.
+  forall ghost_legal__is_prime__result1:bool. forall result:bool.
+  forall ghost_legal__is_prime__result2:bool. forall result1:int.
+  forall temp2:int. forall temp3:int.
+  forall ghost_legal__is_prime__result3:bool. forall result2:bool.
+  forall ghost_legal__is_prime__result4:bool. forall result3:int.
+  forall temp4:int. forall temp5:int.
+  forall ghost_legal__is_prime__result5:bool. forall temp6:int.
+  forall ghost_legal__is_prime__result6:bool. forall temp7:int.
+  forall ghost_legal__is_prime__result7:bool. forall temp8:int.
+  forall ghost_legal__is_prime__result8:bool. forall result4:bool.
+  forall ghost_legal__is_prime__result9:bool.
+  forall ghost_legal__is_prime__result10:bool.
+  forall ghost_legal__is_prime__result11:bool. forall temp9:int.
+  forall ghost_legal__is_prime__result12:bool. forall temp10:int.
+  forall ghost_legal__is_prime__result13:bool. forall temp11:int.
+  forall ghost_legal__is_prime__result14:bool. forall temp12:int.
+  forall ghost_legal__is_prime__result15:bool. forall temp13:int.
+  forall ghost_legal__is_prime__result16:bool. forall temp14:int.
+  forall ghost_legal__is_prime__result17:bool.
+  (forall result5:bool. ((in_range2(x) and (((((0 <= 2147483647) ->
+  in_range2(temp)) and
+  (((((ghost_legal__is_prime__result2 = ghost_legal__is_prime__result14) and
+  ({ int__content = temp11 } = { int__content = temp })) and
+  ((ghost_legal__is_prime__result15 = ghost_legal__is_prime__result2) and
+  (temp12 = temp1))) and ((mod(x, 2) = 0) and ((is_even(x) = true) and
   ((result = ghost_legal__is_prime__result) and
   (ghost_legal__is_prime__result2 = of_int(0)))))) or (((not (mod(x,
-  2) = 0)) and ((not (mod(x, 2) = 0)) ->
+  2) = 0)) and
   ((ghost_legal__is_prime__result2 = ghost_legal__is_prime__result) and
-  (ghost_legal__is_prime__result2 = ghost_legal__is_prime__result1)))) and
-  ((((ghost_legal__is_prime__result16 = ghost_legal__is_prime__result14) and
-  (temp13 = temp11)) and
-  ((ghost_legal__is_prime__result17 = ghost_legal__is_prime__result15) and
-  (temp14 = temp12))) and (((result1 = temp) and (temp2 = 2)) and
-  (((((ghost_legal__is_prime__result4 = ghost_legal__is_prime__result14) and
-  (temp3 = temp11)) and
-  ((ghost_legal__is_prime__result15 = ghost_legal__is_prime__result4) and
-  (temp12 = temp3))) and ((temp2 <  x) and ((temp___132 = temp2) and
+  (ghost_legal__is_prime__result2 = ghost_legal__is_prime__result1))) and
+  (((({ bool__content = ghost_legal__is_prime__result14 } = { bool__content =
+  ghost_legal__is_prime__result12 }) and ({ int__content = temp11 } = {
+  int__content = temp9 })) and
+  ((ghost_legal__is_prime__result15 = ghost_legal__is_prime__result13) and
+  (temp12 = temp10))) and ((({ int__content = result1 } = { int__content =
+  temp }) and (temp2 = 2)) and
+  (((((ghost_legal__is_prime__result4 = ghost_legal__is_prime__result12) and
+  (temp3 = temp9)) and
+  ((ghost_legal__is_prime__result13 = ghost_legal__is_prime__result4) and
+  (temp10 = temp3))) and ((temp2 <  x) and ((temp___154 = temp2) and
   ((2 <= temp3) and ((((0 <= 2147483647) -> in_range2(temp3)) and
   (temp3 <  x)) and ((mod(x, temp3) = 0) and
   ((result2 = ghost_legal__is_prime__result3) and
-  (ghost_legal__is_prime__result4 = of_int(0))))))))) or ((((temp2 <  x) ->
-  ((((temp___132 = temp2) and ((2 <= temp3) and ((((0 <= 2147483647) ->
+  (ghost_legal__is_prime__result4 = of_int(0))))))))) or ((((temp2 <  x) and
+  ((((temp___154 = temp2) and ((2 <= temp3) and ((((0 <= 2147483647) ->
   in_range2(temp3)) and (temp3 <  x)) and (((not (mod(x, temp3) = 0)) and
   (ghost_legal__is_prime__result4 = ghost_legal__is_prime__result3)) and
   ((((o = (temp3 + 1)) and in_range1((temp3 + 1))) and ((temp3 = result3) and
   (temp4 = o))) and (not (temp4 <  x))))))) and
-  (((ghost_legal__is_prime__result4 = ghost_legal__is_prime__result7) and
-  (temp4 = temp7)) and
-  ((ghost_legal__is_prime__result8 = ghost_legal__is_prime__result4) and
-  (temp8 = temp4)))) and
-  (((ghost_legal__is_prime__result9 = ghost_legal__is_prime__result7) and
-  (temp9 = temp7)) and
-  ((ghost_legal__is_prime__result10 = ghost_legal__is_prime__result8) and
-  (temp10 = temp8))))) and ((not (temp2 <  x)) ->
-  (((ghost_legal__is_prime__result2 = ghost_legal__is_prime__result9) and
-  (temp2 = temp9)) and
-  ((ghost_legal__is_prime__result10 = ghost_legal__is_prime__result2) and
-  (temp10 = temp2))))) and
-  ((((ghost_legal__is_prime__result14 = ghost_legal__is_prime__result12) and
-  (temp11 = temp9)) and
-  ((ghost_legal__is_prime__result15 = ghost_legal__is_prime__result13) and
-  (temp12 = temp10))) and
-  (((ghost_legal__is_prime__result11 = ghost_legal__is_prime__result12) and
-  (ghost_legal__is_prime__result13 = ghost_legal__is_prime__result11)) and
-  ((result4 = ghost_legal__is_prime__result9) and
-  (ghost_legal__is_prime__result11 = of_int(1)))))))))))
-
-axiom H3 :
-  (ghost_legal__is_prime__result18 = ghost_legal__is_prime__result16)
-
-axiom H4 : (temp15 = temp13)
-
-axiom H5 :
-  (ghost_legal__is_prime__result19 = ghost_legal__is_prime__result17)
-
-axiom H6 : (temp16 = temp14)
-
-axiom H7 : (result5 = ghost_legal__is_prime__result18)
-
-axiom H8 : (is_even(x) = true)
-
- (* File "ghost_legal.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : (not (ghost_legal__is_prime__result18 = true))
+  (((ghost_legal__is_prime__result4 = ghost_legal__is_prime__result5) and
+  (temp4 = temp5)) and
+  ((ghost_legal__is_prime__result6 = ghost_legal__is_prime__result4) and
+  (temp6 = temp4)))) and
+  (((ghost_legal__is_prime__result7 = ghost_legal__is_prime__result5) and ({
+  int__content = temp7 } = { int__content = temp5 })) and
+  ((ghost_legal__is_prime__result8 = ghost_legal__is_prime__result6) and
+  (temp8 = temp6))))) or ((not (temp2 <  x)) and
+  (((ghost_legal__is_prime__result2 = ghost_legal__is_prime__result7) and
+  (temp2 = temp7)) and
+  ((ghost_legal__is_prime__result8 = ghost_legal__is_prime__result2) and
+  (temp8 = temp2))))) and
+  ((((ghost_legal__is_prime__result10 = ghost_legal__is_prime__result12) and
+  ({ int__content = temp9 } = { int__content = temp7 })) and
+  ((ghost_legal__is_prime__result13 = ghost_legal__is_prime__result11) and
+  (temp10 = temp8))) and
+  (((ghost_legal__is_prime__result9 = ghost_legal__is_prime__result10) and
+  (ghost_legal__is_prime__result11 = ghost_legal__is_prime__result9)) and
+  ((result4 = ghost_legal__is_prime__result7) and
+  (ghost_legal__is_prime__result9 = of_int(1)))))))))))) and
+  (((ghost_legal__is_prime__result16 = ghost_legal__is_prime__result14) and
+  (temp13 = temp11)) and
+  ((ghost_legal__is_prime__result17 = ghost_legal__is_prime__result15) and
+  (temp14 = temp12)))) and (result5 = ghost_legal__is_prime__result16))) ->
+  ((is_even(x) = true) -> (not (ghost_legal__is_prime__result16 = true))))))

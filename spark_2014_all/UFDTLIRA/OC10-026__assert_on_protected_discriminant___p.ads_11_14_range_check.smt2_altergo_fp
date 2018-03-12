@@ -346,7 +346,5 @@ axiom zero__post_axiom : in_range(zero(void))
 
 axiom zero__def_axiom : (zero(void) = 0)
 
-logic us : int
-
  (* File "p.ads", line 3, characters 0-0 *)
 goal WP_parameter_def : in_range((- 1))

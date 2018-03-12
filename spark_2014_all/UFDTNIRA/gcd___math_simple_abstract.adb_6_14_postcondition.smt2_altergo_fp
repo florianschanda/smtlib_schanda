@@ -223,9 +223,6 @@ logic arg2 : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-axiom H : in_range(arg1)
-
-axiom H1 : in_range(arg2)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (comp_div((arg1 * arg2),arg2) = arg1)
+goal WP_parameter_def : ((in_range(arg1) and in_range(arg2)) ->
+  (comp_div((arg1 * arg2),arg2) = arg1))

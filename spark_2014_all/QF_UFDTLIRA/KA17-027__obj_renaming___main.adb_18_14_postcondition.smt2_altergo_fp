@@ -51,54 +51,29 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic cheat : bool
-
-logic main__get_index__result : int
-
-logic main__get_index__result1 : int
-
-logic result : int
-
-logic main__get_index__result2 : int
-
-logic result1 : int
-
-logic main__get_index__result3 : int
-
-logic main__get_index__result4 : int
-
-logic main__get_index__result5 : int
-
-logic main__get_index__result6 : int
-
-logic main__get_index__result7 : int
-
-logic main__get_index__result8 : int
-
-logic main__get_index__result9 : int
-
-logic result2 : int
-
-axiom H : ((((main__get_index__result2 = main__get_index__result6) and
+ (* File "main.adb", line 6, characters 0-0 *)
+goal WP_parameter_def :
+  (forall cheat:bool. forall main__get_index__result:int.
+  forall main__get_index__result1:int. forall result:int.
+  forall main__get_index__result2:int. forall result1:int.
+  forall main__get_index__result3:int. forall main__get_index__result4:int.
+  forall main__get_index__result5:int. forall main__get_index__result6:int.
+  forall main__get_index__result7:int. forall main__get_index__result8:int.
+  forall main__get_index__result9:int.
+  (forall result2:int.
+  (((((((main__get_index__result2 = main__get_index__result6) and
   (main__get_index__result7 = main__get_index__result2)) and
   ((cheat = true) and ((result = main__get_index__result) and
   (main__get_index__result2 = 3)))) or (((not (cheat = true)) and
   ((main__get_index__result2 = main__get_index__result) and
   (main__get_index__result2 = main__get_index__result1))) and
-  (((main__get_index__result6 = main__get_index__result4) and
+  (((main__get_index__result4 = main__get_index__result6) and
   (main__get_index__result7 = main__get_index__result5)) and
   (((main__get_index__result3 = main__get_index__result4) and
   (main__get_index__result5 = main__get_index__result3)) and
   ((result1 = main__get_index__result2) and
-  (main__get_index__result3 = 5))))))
-
-axiom H1 : (main__get_index__result8 = main__get_index__result6)
-
-axiom H2 : (main__get_index__result9 = main__get_index__result7)
-
-axiom H3 : (result2 = main__get_index__result8)
-
-axiom H4 : (cheat = true)
-
- (* File "main.adb", line 6, characters 0-0 *)
-goal WP_parameter_def : (main__get_index__result8 = 3)
+  (main__get_index__result3 = 5)))))) and
+  ((main__get_index__result8 = main__get_index__result6) and
+  (main__get_index__result9 = main__get_index__result7))) and
+  (result2 = main__get_index__result8)) -> ((cheat = true) ->
+  (main__get_index__result8 = 3)))))

@@ -605,12 +605,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -622,6 +616,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1167,24 +1167,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,unsigned_8) farray, int, int, (int,unsigned_8) farray,
-  int, int -> (int,unsigned_8) farray
-
-axiom concat_def :
-  (forall a:(int,unsigned_8) farray. forall b:(int,unsigned_8) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : unsigned_8, int -> (int,unsigned_8) farray
-
-axiom singleton_def :
-  (forall v:unsigned_8.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq9 : (int,unsigned_8) farray, int, int, (int,unsigned_8) farray,
   int, int -> bool
 
@@ -1195,17 +1177,17 @@ axiom bool_eq_def8 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq9(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq9(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1215,37 +1197,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,unsigned_8) farray, int, int, (int,unsigned_8) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,unsigned_8) farray. forall b:(int,unsigned_8) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq9(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,unsigned_8) farray. forall b:(int,unsigned_8) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq9(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and ult1(to_rep1((a[(i + 1)])), to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,unsigned_8) farray. forall b:(int,unsigned_8) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq9(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and ugt1(to_rep1((a[(j + 1)])), to_rep1((b[(i + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type t2
 
@@ -1403,9 +1357,13 @@ logic maxvalue__function_guard : t, int -> prop
 
 axiom maxvalue__post_axiom : true
 
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 1)
+
 axiom maxvalue__def_axiom :
   (forall len:int [maxvalue(len)]. (in_range2(len) ->
-  (maxvalue(len) = lsl_bv(of_int(1), of_int(len)))))
+  (maxvalue(len) = lsl_bv(rliteral, of_int(len)))))
 
 logic peekbit64 : t, int -> bool
 
@@ -1417,11 +1375,15 @@ axiom peekbit64__post_axiom :
   (left <  64)) -> ((peekbit64(value, left) = true) <-> (nth(value,
   (63 - left)) = true)))))
 
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 0)
+
 axiom peekbit64__def_axiom :
   (forall value:t.
   (forall left:int [peekbit64(value, left)]. ((peekbit64(value,
-  left) = true) <-> (not (bw_and(value, lsl_bv(of_int(1),
-  of_int((63 - left)))) = of_int(0))))))
+  left) = true) <-> (not (bw_and(value, lsl_bv(rliteral,
+  of_int((63 - left)))) = rliteral1)))))
 
 logic start : int
 
@@ -1471,559 +1433,200 @@ function t26b__ref___projection(a: t26b__ref) : integer = (a).t26b__content
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
-logic addr : (int,unsigned_8) farray
-
-logic result__ : int
-
-logic flag : bool
-
-logic i : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : t
-
-logic temp___299 : int
-
-logic temp___300 : (int,unsigned_8) farray
-
-logic temp___298 : (int,unsigned_8) farray
-
-logic temp___296 : bool
-
-logic temp___301 : (int,unsigned_8) farray
-
-logic j : int
-
-logic o8 : bool
-
-logic o9 : bool
-
-logic o10 : int
-
-logic j1 : int
-
-logic o11 : int
-
-logic o12 : bool
-
-logic o13 : int
-
-logic o14 : bool
-
-logic o15 : int
-
-logic j2 : int
-
-logic o16 : int
-
-logic o17 : int
-
-logic o18 : int
-
-logic o19 : int
-
-logic o20 : bool
-
-logic o21 : int
-
-logic o22 : bool
-
-logic o23 : int
-
-logic o24 : bool
-
-logic o25 : int
-
-logic o26 : int
-
-logic o27 : int
-
-logic o28 : bool
-
-logic o29 : int
-
-logic o30 : bool
-
-logic o31 : int
-
-logic o32 : bool
-
-logic o33 : int
-
-logic k : int
-
-logic o34 : int
-
-logic o35 : bool
-
-logic o36 : int
-
-logic o37 : bool
-
-logic o38 : int
-
-logic o39 : int
-
-logic o40 : int
-
-logic o41 : int
-
-logic o42 : int
-
-logic o43 : bool
-
-logic i1 : int
-
-logic o44 : int
-
-logic o45 : int
-
-logic o46 : int
-
-logic o47 : int
-
-logic o48 : bool
-
-logic o49 : int
-
-logic o50 : bool
-
-logic o51 : int
-
-logic o52 : bool
-
-logic o53 : int
-
-logic i2 : int
-
-logic o54 : int
-
-logic o55 : bool
-
-logic o56 : int
-
-logic o57 : bool
-
-logic o58 : int
-
-logic i3 : int
-
-logic o59 : bool
-
-logic o60 : bool
-
-logic o61 : int
-
-logic o62 : t
-
-logic o63 : int
-
-logic o64 : int
-
-logic o65 : int
-
-logic o66 : bool
-
-logic o67 : bool
-
-logic o68 : bool
-
-logic o69 : int
-
-logic o70 : t
-
-logic o71 : int
-
-logic o72 : int
-
-logic o73 : int
-
-logic o74 : bool
-
-logic o75 : bool
-
-logic o76 : bool
-
-logic o77 : int
-
-logic o78 : int
-
-logic o79 : int
-
-logic o80 : int
-
-logic o81 : bool
-
-logic o82 : int
-
-logic addr1 : (int,unsigned_8) farray
-
-logic result__1 : int
-
-logic flag1 : bool
-
-logic i4 : int
-
-logic result : bool
-
-logic result1 : int
-
-logic result__2 : int
-
-logic result2 : bool
-
-logic result3 : int
-
-logic result__3 : int
-
-logic result__4 : int
-
-logic result__5 : int
-
-logic result4 : int
-
-logic i5 : int
-
-logic addr2 : (int,unsigned_8) farray
-
-logic flag2 : bool
-
-logic i6 : int
-
-logic result5 : bool
-
-logic result6 : bool
-
-logic flag3 : bool
-
-logic addr3 : (int,unsigned_8) farray
-
-logic result7 : bool
-
-logic result8 : int
-
-logic i7 : int
-
-logic addr4 : (int,unsigned_8) farray
-
-logic flag4 : bool
-
-logic i8 : int
-
-logic addr5 : (int,unsigned_8) farray
-
-logic flag5 : bool
-
-logic i9 : int
-
-logic addr6 : (int,unsigned_8) farray
-
-logic flag6 : bool
-
-logic i10 : int
-
-logic addr7 : (int,unsigned_8) farray
-
-logic flag7 : bool
-
-logic i11 : int
-
-logic result9 : int
-
-logic result__6 : int
-
-logic addr8 : (int,unsigned_8) farray
-
-logic result__7 : int
-
-logic flag8 : bool
-
-logic i12 : int
-
-logic addr9 : (int,unsigned_8) farray
-
-logic result__8 : int
-
-logic flag9 : bool
-
-logic i13 : int
-
-logic addr10 : (int,unsigned_8) farray
-
-logic result__9 : int
-
-logic flag10 : bool
-
-logic i14 : int
-
-logic addr11 : (int,unsigned_8) farray
-
-logic result__10 : int
-
-logic flag11 : bool
-
-logic i15 : int
-
-logic result10 : bool
-
-logic result11 : bool
-
-logic result12 : bool
-
-logic result13 : bool
-
-logic result14 : bool
-
-logic result15 : bool
-
-axiom H : in_range2(start)
-
-axiom H1 : in_range2(len)
-
-axiom H2 : dynamic_property(0, 2147483646, to_rep(addr__first),
-  to_rep(addr__last))
-
-axiom H3 : true
-
-axiom H4 : (((- 2147483648) <= 2147483647) -> in_range1(result__))
-
-axiom H5 : ((to_rep(addr__first) = 0) and
-  ((((to_rep(addr__first) <= to_rep(addr__last)) ->
-  ((8 * ((to_rep(addr__last) - to_rep(addr__first)) + 1)) <= 2147483647)) and
-  ((not (to_rep(addr__first) <= to_rep(addr__last))) ->
+ (* File "bitwalker.ads", line 77, characters 0-0 *)
+goal WP_parameter_def :
+  (forall addr:(int,unsigned_8) farray. forall result__:int.
+  forall flag:bool. forall i:int. forall o:int. forall o1:int. forall o2:int.
+  forall o3:int. forall o4:int. forall o5:t. forall temp___340:int.
+  forall temp___341:(int,unsigned_8) farray.
+  forall temp___339:(int,unsigned_8) farray. forall temp___337:bool.
+  forall temp___342:(int,unsigned_8) farray. forall o6:int. forall o7:int.
+  forall o8:bool. forall o9:int. forall o10:int. forall o11:t.
+  forall o12:int. forall o13:int. forall o14:int. forall o15:bool.
+  forall o16:bool. forall o17:bool. forall o18:int. forall o19:t.
+  forall o20:int. forall o21:int. forall o22:int. forall o23:bool.
+  forall o24:bool. forall o25:bool. forall o26:int. forall o27:int.
+  forall o28:int. forall o29:int. forall o30:bool. forall o31:int.
+  forall addr1:(int,unsigned_8) farray. forall result__1:int.
+  forall flag1:bool. forall i1:int. forall result:bool. forall result1:int.
+  forall result__2:int. forall result2:bool. forall result3:int.
+  forall result__3:int. forall result__4:int. forall result__5:int.
+  forall result4:int. forall i2:int. forall addr2:(int,unsigned_8) farray.
+  forall flag2:bool. forall i3:int. forall result5:bool. forall flag3:bool.
+  forall addr3:(int,unsigned_8) farray. forall addr4:(int,unsigned_8) farray.
+  forall flag4:bool. forall i4:int. forall addr5:(int,unsigned_8) farray.
+  forall flag5:bool. forall i5:int. forall addr6:(int,unsigned_8) farray.
+  forall flag6:bool. forall i6:int. forall addr7:(int,unsigned_8) farray.
+  forall flag7:bool. forall i7:int. forall result6:int. forall result__6:int.
+  forall addr8:(int,unsigned_8) farray. forall result__7:int.
+  forall flag8:bool. forall i8:int. forall addr9:(int,unsigned_8) farray.
+  forall result__8:int. forall flag9:bool. forall i9:int.
+  forall addr10:(int,unsigned_8) farray. forall result__9:int.
+  forall flag10:bool. forall i10:int. forall addr11:(int,unsigned_8) farray.
+  forall result__10:int. forall flag11:bool. forall i11:int.
+  forall result7:bool. forall result8:bool. forall result9:bool.
+  forall result10:bool. forall result11:bool. (in_range2(start) ->
+  (in_range2(len) -> (dynamic_property(0, 2147483646, to_rep(addr__first),
+  to_rep(addr__last)) -> ((((- 2147483648) <= 2147483647) ->
+  in_range1(result__)) -> (((to_rep(addr__first) = 0) and
+  ((((to_rep(addr__first) <= to_rep(addr__last)) and
+  ((8 * ((to_rep(addr__last) - to_rep(addr__first)) + 1)) <= 2147483647)) or
+  ((not (to_rep(addr__first) <= to_rep(addr__last))) and
   ((8 * 0) <= 2147483647))) and (((start + len) <  2147483647) and
-  ((0 <= len) and (len <= 63)))))
-
-axiom H6 : (((((i12 = i) and ((flag8 = flag) and ((result__7 = result__4) and
-  (addr8 = addr)))) and ((i13 = i4) and ((flag9 = flag1) and
-  ((result__8 = result__5) and (addr9 = addr1))))) and
-  ((((((((to_rep(addr__first) <= to_rep(addr__last)) ->
-  (o2 = ((to_rep(addr__last) - to_rep(addr__first)) + 1))) and
-  ((not (to_rep(addr__first) <= to_rep(addr__last))) -> (o2 = 0))) and
-  ((o3 = o2) and in_range1(o2))) and (o4 = (o3 * 8))) and ((o5 = o4) and
-  in_range1(o4))) and (((o6 = (start + len)) and
-  in_range1((start + len))) and (((o5 <  o6) -> (result = true)) and
-  ((not (o5 <  o6)) -> (result = false))))) and (((result = true) ->
-  (((result__2 = result__4) and (result__5 = result__2)) and
-  ((result1 = result__) and (result__2 = (- 1))))) and
-  ((not (result = true)) -> (((result__3 = result__4) and
-  (result__5 = result__3)) and ((((o7 = maxvalue(len)) and
-  (o7 = lsl_bv(of_int(1), of_int(len)))) and ((uge(value, o7) ->
-  (result2 = true)) and ((not uge(value, o7)) -> (result2 = false)))) and
-  ((result2 = true) and ((result3 = result__) and
-  (result__3 = (- 2)))))))))) or
-  (((((((((to_rep(addr__first) <= to_rep(addr__last)) ->
-  (o2 = ((to_rep(addr__last) - to_rep(addr__first)) + 1))) and
-  ((not (to_rep(addr__first) <= to_rep(addr__last))) -> (o2 = 0))) and
-  ((o3 = o2) and in_range1(o2))) and (o4 = (o3 * 8))) and ((o5 = o4) and
-  in_range1(o4))) and (((o6 = (start + len)) and
-  in_range1((start + len))) and (((o5 <  o6) -> (result = true)) and
-  ((not (o5 <  o6)) -> (result = false))))) and ((not (result = true)) and
-  (((((o7 = maxvalue(len)) and (o7 = lsl_bv(of_int(1), of_int(len)))) and
-  ((uge(value, o7) -> (result2 = true)) and ((not uge(value, o7)) ->
+  ((0 <= len) and (len <= 63))))) -> ((((((({ int__content = i8 } = {
+  int__content = i }) and (({ bool__content = flag8 } = { bool__content =
+  flag }) and (({ int__content = result__7 } = { int__content = result__4
+  }) and ({ map__content = addr8 } = { map__content = addr })))) and
+  ((i9 = i1) and ((flag9 = flag1) and ((result__8 = result__5) and
+  (addr9 = addr1))))) and
+  ((((((((to_rep(addr__first) <= to_rep(addr__last)) and
+  (o = ((to_rep(addr__last) - to_rep(addr__first)) + 1))) or
+  ((not (to_rep(addr__first) <= to_rep(addr__last))) and (o = 0))) and
+  ((o1 = o) and in_range1(o))) and (o2 = (o1 * 8))) and ((o3 = o2) and
+  in_range1(o2))) and (((o4 = (start + len)) and
+  in_range1((start + len))) and (((o3 <  o4) and (result = true)) or
+  ((not (o3 <  o4)) and (result = false))))) and (((result = true) and
+  (((result__2 = result__4) and (result__5 = result__2)) and (({
+  int__content = result1 } = { int__content = result__ }) and
+  (result__2 = (- 1))))) or ((not (result = true)) and
+  (((result__3 = result__4) and (result__5 = result__3)) and
+  ((((o5 = maxvalue(len)) and (o5 = lsl_bv(rliteral, of_int(len)))) and
+  ((uge(value, o5) and (result2 = true)) or ((not uge(value, o5)) and
+  (result2 = false)))) and ((result2 = true) and (({ int__content = result3
+  } = { int__content = result__ }) and (result__3 = (- 2)))))))))) or
+  (((((((((to_rep(addr__first) <= to_rep(addr__last)) and
+  (o = ((to_rep(addr__last) - to_rep(addr__first)) + 1))) or
+  ((not (to_rep(addr__first) <= to_rep(addr__last))) and (o = 0))) and
+  ((o1 = o) and in_range1(o))) and (o2 = (o1 * 8))) and ((o3 = o2) and
+  in_range1(o2))) and (((o4 = (start + len)) and
+  in_range1((start + len))) and (((o3 <  o4) and (result = true)) or
+  ((not (o3 <  o4)) and (result = false))))) and ((not (result = true)) and
+  (((((o5 = maxvalue(len)) and (o5 = lsl_bv(rliteral, of_int(len)))) and
+  ((uge(value, o5) and (result2 = true)) or ((not uge(value, o5)) and
   (result2 = false)))) and ((not (result2 = true)) and
   ((result__3 = result__) and (result__3 = result__1)))) and
-  (result__2 = result__3)))) and ((((i12 = i10) and ((flag8 = flag6) and
-  ((result__7 = result__6) and (addr8 = addr6)))) and ((i13 = i11) and
-  ((flag9 = flag7) and ((result__8 = result__6) and (addr9 = addr7))))) and
-  ((((result4 = i) and (i5 = 0)) and ((((0 <= i5) and (i5 <= (len - 1))) ->
-  ((((temp___299 = i5) and ((temp___300 = addr) and ((temp___298 = addr) and
-  ((temp___296 = flag) and ((temp___301 = addr) and ((((0 <= i6) and
-  (i6 <= len)) and
-  ((forall j3:int. (((0 <= j3) and (j3 <= (start - 1))) -> ((nth8_stream({
-   elts = temp___300; rt = mk(to_rep(addr__first), to_rep(addr__last)) },
-   j3) = true) <-> (nth8_stream({ elts = addr2; rt = mk(to_rep(addr__first),
-   to_rep(addr__last)) }, j3) = true)))) and
-  ((forall j3:int. (((start <= j3) and (j3 <= ((start + i6) - 1))) ->
+  (result__2 = result__3)))) and (((({ int__content = i8 } = { int__content =
+  i6 }) and (({ bool__content = flag8 } = { bool__content = flag6 }) and
+  ((result__6 = result__7) and ({ map__content = addr8 } = { map__content =
+  addr6 })))) and ((i9 = i7) and ((flag9 = flag7) and
+  ((result__8 = result__6) and (addr9 = addr7))))) and (((({ int__content =
+  result4 } = { int__content = i }) and (i2 = 0)) and ((((0 <= i2) and
+  (i2 <= (len - 1))) and ((((temp___340 = i2) and ((temp___341 = addr) and
+  ((temp___339 = addr) and ((temp___337 = flag) and ((temp___342 = addr) and
+  ((((0 <= i3) and (i3 <= len)) and
+  ((forall j:int. (((0 <= j) and (j <= (start - 1))) -> ((nth8_stream({
+   elts = temp___341; rt = mk(to_rep(addr__first), to_rep(addr__last)) },
+   j) = true) <-> (nth8_stream({ elts = addr2; rt = mk(to_rep(addr__first),
+   to_rep(addr__last)) }, j) = true)))) and
+  ((forall j:int. (((start <= j) and (j <= ((start + i3) - 1))) ->
    ((nth8_stream({ elts = addr2; rt = mk(to_rep(addr__first),
-   to_rep(addr__last)) }, j3) = true) <-> (nth(value,
-   (((len - j3) - 1) + start)) = true)))) and
-  (forall j3:int. ((((start + i6) <= j3) and
-  (((to_rep(addr__first) <= to_rep(addr__last)) and
-  (j3 <= ((8 * ((to_rep(addr__last) - to_rep(addr__first)) + 1)) - 1))) or
-  ((not (to_rep(addr__first) <= to_rep(addr__last))) and
-  (j3 <= ((8 * 0) - 1))))) -> ((nth8_stream({ elts = addr2; rt =
-  mk(to_rep(addr__first), to_rep(addr__last)) }, j3) = true) <->
-  (nth8_stream({ elts = temp___301; rt = mk(to_rep(addr__first),
-  to_rep(addr__last)) }, j3) = true))))))) and ((((0 <= (len - 1)) ->
-  dynamic_property1(0, (len - 1), i6)) and ((0 <= i6) and
-  (i6 <= (len - 1)))) and ((((((o26 = ((64 - len) + i6)) and
-  in_range1(((64 - len) + i6))) and ((o27 = o26) and in_range2(o26))) and
-  ((o28 = peekbit64(value, o27)) and (((o28 = true) <-> (not (bw_and(value,
-  lsl_bv(of_int(1), of_int((63 - o27)))) = of_int(0)))) and ((o28 = true) <->
-  (nth(value, (63 - o27)) = true))))) and ((flag2 = result6) and
-  (flag3 = o28))) and ((((o29 = (start + i6)) and
-  in_range1((start + i6))) and
-  ((forall i16:int. (((0 <= i16) and
-   (((to_rep(addr__first) <= to_rep(addr__last)) and
-   (i16 <= ((8 * ((to_rep(addr__last) - to_rep(addr__first)) + 1)) - 1))) or
-   ((not (to_rep(addr__first) <= to_rep(addr__last))) and
-   (i16 <= ((8 * 0) - 1))))) -> ((not (i16 = o29)) -> ((nth8_stream({ elts =
-   addr3; rt = mk(to_rep(addr__first), to_rep(addr__last)) },
-   i16) = true) <-> (nth8_stream({ elts = addr2; rt = mk(to_rep(addr__first),
-   to_rep(addr__last)) }, i16) = true))))) and ((nth8_stream({ elts = addr3;
-  rt = mk(to_rep(addr__first), to_rep(addr__last)) }, o29) = true) <->
-  (flag3 = true)))) and (((nth8_stream({ elts = addr3; rt =
-  mk(to_rep(addr__first), to_rep(addr__last)) }, (start + i6)) = true) <->
-  (nth(value, ((len - i6) - 1)) = true)) and
-  ((forall k1:int. (((start <= k1) and (k1 <= ((start + i6) - 1))) ->
-   (((not (k1 = (start + i6))) and ((0 <= k1) and
+   to_rep(addr__last)) }, j) = true) <-> (nth(value,
+   (((len - j) - 1) + start)) = true)))) and
+  (forall j:int. ((((start + i3) <= j) and
+  (((to_rep(addr__first) <= to_rep(addr__last)) ->
+  (j <= ((8 * ((to_rep(addr__last) - to_rep(addr__first)) + 1)) - 1))) and
+  ((not (to_rep(addr__first) <= to_rep(addr__last))) ->
+  (j <= ((8 * 0) - 1))))) -> ((nth8_stream({ elts = addr2; rt =
+  mk(to_rep(addr__first), to_rep(addr__last)) }, j) = true) <->
+  (nth8_stream({ elts = temp___342; rt = mk(to_rep(addr__first),
+  to_rep(addr__last)) }, j) = true))))))) and ((((0 <= (len - 1)) ->
+  dynamic_property1(0, (len - 1), i3)) and ((0 <= i3) and
+  (i3 <= (len - 1)))) and ((((((o6 = ((64 - len) + i3)) and
+  in_range1(((64 - len) + i3))) and ((o7 = o6) and in_range2(o6))) and
+  ((o8 = peekbit64(value, o7)) and (((o8 = true) <-> (not (bw_and(value,
+  lsl_bv(rliteral, of_int((63 - o7)))) = rliteral1))) and ((o8 = true) <->
+  (nth(value, (63 - o7)) = true))))) and ((flag2 = result5) and
+  (flag3 = o8))) and ((((o9 = (start + i3)) and in_range1((start + i3))) and
+  ((forall i12:int. (((0 <= i12) and
    (((to_rep(addr__first) <= to_rep(addr__last)) ->
-   (k1 <= ((8 * ((to_rep(addr__last) - to_rep(addr__first)) + 1)) - 1))) and
+   (i12 <= ((8 * ((to_rep(addr__last) - to_rep(addr__first)) + 1)) - 1))) and
    ((not (to_rep(addr__first) <= to_rep(addr__last))) ->
-   (k1 <= ((8 * 0) - 1)))))) and ((nth8_stream({ elts = addr3; rt =
-   mk(to_rep(addr__first), to_rep(addr__last)) }, k1) = true) <-> (nth(value,
-   (((start + len) - k1) - 1)) = true))))) and
-  (i6 = (len - 1))))))))))))) and (((i6 = i8) and ((flag3 = flag4) and
-  (addr3 = addr4))) and ((i9 = i6) and ((flag5 = flag3) and
-  (addr5 = addr3))))) and (((i10 = i8) and ((flag6 = flag4) and
-  (addr6 = addr4))) and ((i11 = i9) and ((flag7 = flag5) and
-  (addr7 = addr5)))))) and ((not ((0 <= i5) and (i5 <= (len - 1)))) ->
-  (((i5 = i10) and ((flag6 = flag) and (addr6 = addr))) and ((i11 = i5) and
-  ((flag7 = flag1) and (addr7 = addr1))))))) and ((result__2 = result9) and
-  (result__6 = 0))))))
-
-axiom H7 : (i14 = i12)
-
-axiom H8 : (flag10 = flag8)
-
-axiom H9 : (result__9 = result__7)
-
-axiom H10 : (addr10 = addr8)
-
-axiom H11 : (i15 = i13)
-
-axiom H12 : (flag11 = flag9)
-
-axiom H13 : (result__10 = result__8)
-
-axiom H14 : (addr11 = addr9)
-
-axiom H15 : ((- 2) <= result__9)
-
-axiom H16 : (result__9 <= 0)
-
-axiom H17 : ((to_rep(addr__first) <= to_rep(addr__last)) ->
-  (o78 = ((to_rep(addr__last) - to_rep(addr__first)) + 1)))
-
-axiom H18 : ((not (to_rep(addr__first) <= to_rep(addr__last))) -> (o78 = 0))
-
-axiom H19 : ((o79 = o78) and in_range1(o78))
-
-axiom H20 : (o80 = (8 * o79))
-
-axiom H21 : (((o80 <  (start + len)) -> (o81 = true)) and
-  ((not (o80 <  (start + len))) -> (o81 = false)))
-
-axiom H22 : (o82 = to_int1(o81))
-
-axiom H23 : (((((result__9 = (- 1)) and (to_int1(true) = o82)) or
-  ((not (result__9 = (- 1))) and (to_int1(false) = o82))) ->
-  (result10 = true)) and ((not (((result__9 = (- 1)) ->
-  (to_int1(true) = o82)) and ((not (result__9 = (- 1))) ->
-  (to_int1(false) = o82)))) -> (result10 = false)))
-
-axiom H24 : (result10 = true)
-
-axiom H25 : ((to_rep(addr__first) <= to_rep(addr__last)) ->
-  (o71 = ((to_rep(addr__last) - to_rep(addr__first)) + 1)))
-
-axiom H26 : ((not (to_rep(addr__first) <= to_rep(addr__last))) -> (o71 = 0))
-
-axiom H27 : ((o72 = o71) and in_range1(o71))
-
-axiom H28 : (o73 = (8 * o72))
-
-axiom H29 : ((((start + len) <= o73) -> (o74 = true)) and
-  ((not ((start + len) <= o73)) -> (o74 = false)))
-
-axiom H30 : ((o70 = maxvalue(len)) and (o70 = lsl_bv(of_int(1),
-  of_int(len))))
-
-axiom H31 : ((ule(o70, value) -> (o75 = true)) and ((not ule(o70, value)) ->
-  (o75 = false)))
-
-axiom H32 : (o76 = match_bool(o75, o74, false))
-
-axiom H33 : (o77 = to_int1(o76))
-
-axiom H34 : (((((result__9 = (- 2)) and (to_int1(true) = o77)) or
-  ((not (result__9 = (- 2))) and (to_int1(false) = o77))) ->
-  (result11 = true)) and ((not (((result__9 = (- 2)) ->
-  (to_int1(true) = o77)) and ((not (result__9 = (- 2))) ->
-  (to_int1(false) = o77)))) -> (result11 = false)))
-
-axiom H35 : (result11 = true)
-
-axiom H36 : ((to_rep(addr__first) <= to_rep(addr__last)) ->
-  (o63 = ((to_rep(addr__last) - to_rep(addr__first)) + 1)))
-
-axiom H37 : ((not (to_rep(addr__first) <= to_rep(addr__last))) -> (o63 = 0))
-
-axiom H38 : ((o64 = o63) and in_range1(o63))
-
-axiom H39 : (o65 = (8 * o64))
-
-axiom H40 : ((((start + len) <= o65) -> (o66 = true)) and
-  ((not ((start + len) <= o65)) -> (o66 = false)))
-
-axiom H41 : ((o62 = maxvalue(len)) and (o62 = lsl_bv(of_int(1),
-  of_int(len))))
-
-axiom H42 : ((ugt(o62, value) -> (o67 = true)) and ((not ugt(o62, value)) ->
-  (o67 = false)))
-
-axiom H43 : (o68 = match_bool(o67, o66, false))
-
-axiom H44 : (o69 = to_int1(o68))
-
-axiom H45 : (((((result__9 = 0) and (to_int1(true) = o69)) or
-  ((not (result__9 = 0)) and (to_int1(false) = o69))) ->
-  (result12 = true)) and ((not (((result__9 = 0) ->
-  (to_int1(true) = o69)) and ((not (result__9 = 0)) ->
-  (to_int1(false) = o69)))) -> (result12 = false)))
-
-axiom H46 : (result12 = true)
-
-axiom H47 : ((result__9 = 0) -> ((result13 = true) <->
-  (forall i16:int. (((0 <= i16) and (i16 <= (start - 1))) -> ((nth8_stream({
+   (i12 <= ((8 * 0) - 1))))) -> ((not (i12 = o9)) -> ((nth8_stream({ elts =
+   addr3; rt = mk(to_rep(addr__first), to_rep(addr__last)) },
+   i12) = true) <-> (nth8_stream({ elts = addr2; rt = mk(to_rep(addr__first),
+   to_rep(addr__last)) }, i12) = true))))) and
+  ((nth8_stream({ elts = addr3; rt = mk(to_rep(addr__first),
+  to_rep(addr__last)) }, o9) = true) <-> (flag3 = true)))) and
+  (((nth8_stream({ elts = addr3; rt = mk(to_rep(addr__first),
+  to_rep(addr__last)) }, (start + i3)) = true) <-> (nth(value,
+  ((len - i3) - 1)) = true)) and
+  ((forall k:int. (((start <= k) and (k <= ((start + i3) - 1))) ->
+   (((not (k = (start + i3))) and ((0 <= k) and
+   (((to_rep(addr__first) <= to_rep(addr__last)) and
+   (k <= ((8 * ((to_rep(addr__last) - to_rep(addr__first)) + 1)) - 1))) or
+   ((not (to_rep(addr__first) <= to_rep(addr__last))) and
+   (k <= ((8 * 0) - 1)))))) and ((nth8_stream({ elts = addr3; rt =
+   mk(to_rep(addr__first), to_rep(addr__last)) }, k) = true) <-> (nth(value,
+   (((start + len) - k) - 1)) = true))))) and
+  (i3 = (len - 1))))))))))))) and (((i3 = i4) and ((flag3 = flag4) and
+  (addr3 = addr4))) and ((i5 = i3) and ((flag5 = flag3) and
+  (addr5 = addr3))))) and ((({ int__content = i6 } = { int__content = i4
+  }) and (({ bool__content = flag6 } = { bool__content = flag4 }) and ({
+  map__content = addr6 } = { map__content = addr4 }))) and ((i7 = i5) and
+  ((flag7 = flag5) and (addr7 = addr5)))))) or ((not ((0 <= i2) and
+  (i2 <= (len - 1)))) and (((i2 = i6) and (({ bool__content = flag6 } = {
+  bool__content = flag }) and ({ map__content = addr6 } = { map__content =
+  addr }))) and ((i7 = i2) and ((flag7 = flag1) and (addr7 = addr1))))))) and
+  ((result__2 = result6) and (result__6 = 0)))))) and (((i10 = i8) and
+  ((flag10 = flag8) and (({ int__content = result__9 } = { int__content =
+  result__7 }) and ({ map__content = addr10 } = { map__content = addr8
+  })))) and ((i11 = i9) and ((flag11 = flag9) and
+  ((result__10 = result__8) and (addr11 = addr9)))))) ->
+  ((((- 2) <= result__9) and (result__9 <= 0)) ->
+  (((((((((to_rep(addr__first) <= to_rep(addr__last)) and
+  (o27 = ((to_rep(addr__last) - to_rep(addr__first)) + 1))) or
+  ((not (to_rep(addr__first) <= to_rep(addr__last))) and (o27 = 0))) and
+  ((o28 = o27) and in_range1(o27))) and (o29 = (8 * o28))) and
+  (((o29 <  (start + len)) and (o30 = true)) or
+  ((not (o29 <  (start + len))) and (o30 = false)))) and
+  (o31 = to_int1(o30))) and (((((result__9 = (- 1)) and
+  (to_int1(true) = o31)) or ((not (result__9 = (- 1))) and
+  (to_int1(false) = o31))) and (result7 = true)) or
+  ((not (((result__9 = (- 1)) -> (to_int1(true) = o31)) and
+  ((not (result__9 = (- 1))) -> (to_int1(false) = o31)))) and
+  (result7 = false)))) -> ((result7 = true) ->
+  ((((((((((to_rep(addr__first) <= to_rep(addr__last)) and
+  (o20 = ((to_rep(addr__last) - to_rep(addr__first)) + 1))) or
+  ((not (to_rep(addr__first) <= to_rep(addr__last))) and (o20 = 0))) and
+  ((o21 = o20) and in_range1(o20))) and (o22 = (8 * o21))) and
+  ((((start + len) <= o22) and (o23 = true)) or
+  ((not ((start + len) <= o22)) and (o23 = false)))) and
+  ((((o19 = maxvalue(len)) and (o19 = lsl_bv(rliteral, of_int(len)))) and
+  ((ule(o19, value) and (o24 = true)) or ((not ule(o19, value)) and
+  (o24 = false)))) and (o25 = match_bool(o24, o23, false)))) and
+  (o26 = to_int1(o25))) and (((((result__9 = (- 2)) and
+  (to_int1(true) = o26)) or ((not (result__9 = (- 2))) and
+  (to_int1(false) = o26))) and (result8 = true)) or
+  ((not (((result__9 = (- 2)) -> (to_int1(true) = o26)) and
+  ((not (result__9 = (- 2))) -> (to_int1(false) = o26)))) and
+  (result8 = false)))) -> ((result8 = true) ->
+  ((((((((((to_rep(addr__first) <= to_rep(addr__last)) and
+  (o12 = ((to_rep(addr__last) - to_rep(addr__first)) + 1))) or
+  ((not (to_rep(addr__first) <= to_rep(addr__last))) and (o12 = 0))) and
+  ((o13 = o12) and in_range1(o12))) and (o14 = (8 * o13))) and
+  ((((start + len) <= o14) and (o15 = true)) or
+  ((not ((start + len) <= o14)) and (o15 = false)))) and
+  ((((o11 = maxvalue(len)) and (o11 = lsl_bv(rliteral, of_int(len)))) and
+  ((ugt(o11, value) and (o16 = true)) or ((not ugt(o11, value)) and
+  (o16 = false)))) and (o17 = match_bool(o16, o15, false)))) and
+  (o18 = to_int1(o17))) and (((((result__9 = 0) and (to_int1(true) = o18)) or
+  ((not (result__9 = 0)) and (to_int1(false) = o18))) and
+  (result9 = true)) or ((not (((result__9 = 0) -> (to_int1(true) = o18)) and
+  ((not (result__9 = 0)) -> (to_int1(false) = o18)))) and
+  (result9 = false)))) -> ((result9 = true) -> ((((result__9 = 0) and
+  ((result10 = true) <->
+  (forall i12:int. (((0 <= i12) and (i12 <= (start - 1))) -> ((nth8_stream({
   elts = addr; rt = mk(to_rep(addr__first), to_rep(addr__last)) },
-  i16) = true) <-> (nth8_stream({ elts = addr10; rt = mk(to_rep(addr__first),
-  to_rep(addr__last)) }, i16) = true))))))
-
-axiom H48 : ((not (result__9 = 0)) -> (result13 = of_int1(1)))
-
-axiom H49 : (result13 = true)
-
-axiom H50 : ((result__9 = 0) -> ((result14 = true) <->
-  (forall i16:int. (((start <= i16) and (i16 <= ((start + len) - 1))) ->
+  i12) = true) <-> (nth8_stream({ elts = addr10; rt = mk(to_rep(addr__first),
+  to_rep(addr__last)) }, i12) = true)))))) or ((not (result__9 = 0)) and
+  (result10 = of_int1(1)))) -> ((result10 = true) -> ((((result__9 = 0) and
+  ((result11 = true) <->
+  (forall i12:int. (((start <= i12) and (i12 <= ((start + len) - 1))) ->
   ((nth8_stream({ elts = addr10; rt = mk(to_rep(addr__first),
-  to_rep(addr__last)) }, i16) = true) <-> (nth(value,
-  (((len - i16) - 1) + start)) = true))))))
-
-axiom H51 : ((not (result__9 = 0)) -> (result14 = of_int1(1)))
-
-axiom H52 : (result14 = true)
-
-axiom H53 : (result__9 = 0)
-
-axiom H54 : ((to_rep(addr__first) <= to_rep(addr__last)) ->
-  (o44 = ((to_rep(addr__last) - to_rep(addr__first)) + 1)))
-
-axiom H55 : ((not (to_rep(addr__first) <= to_rep(addr__last))) -> (o44 = 0))
-
- (* File "bitwalker.ads", line 77, characters 0-0 *)
-goal WP_parameter_def : in_range1(o44)
+  to_rep(addr__last)) }, i12) = true) <-> (nth(value,
+  (((len - i12) - 1) + start)) = true)))))) or ((not (result__9 = 0)) and
+  (result11 = of_int1(1)))) -> ((result11 = true) -> ((result__9 = 0) ->
+  ((((to_rep(addr__first) <= to_rep(addr__last)) and
+  (o10 = ((to_rep(addr__last) - to_rep(addr__first)) + 1))) or
+  ((not (to_rep(addr__first) <= to_rep(addr__last))) and (o10 = 0))) ->
+  in_range1(o10)))))))))))))))))))))

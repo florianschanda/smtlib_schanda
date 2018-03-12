@@ -146,12 +146,6 @@ logic length__function_guard : int, us_rep -> prop
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq3 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -163,6 +157,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq3 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -342,18 +342,7 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length(container))))) ->
   in_range4(get(container, position)))))
 
-logic o : int
-
-logic us : bool
-
-logic result : bool
-
-logic result1 : bool
-
-axiom H : in_range(d)
-
-axiom H1 : ((length(t) <= 100) and ((is_concat(t, s1, s2) = true) and
-  ((is_add(s1, d, s3) = true) and (is_add(s2, d, s4) = true))))
-
  (* File "tree_model.ads", line 61, characters 0-0 *)
-goal WP_parameter_def : (is_concat(t, s3, s4) = true)
+goal WP_parameter_def : ((in_range(d) and ((length(t) <= 100) and
+  ((is_concat(t, s1, s2) = true) and ((is_add(s1, d, s3) = true) and
+  (is_add(s2, d, s4) = true))))) -> (is_concat(t, s3, s4) = true))

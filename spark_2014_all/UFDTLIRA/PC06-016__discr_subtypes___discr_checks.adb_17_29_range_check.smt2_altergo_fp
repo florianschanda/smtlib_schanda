@@ -143,17 +143,11 @@ logic r3b : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic discr_checks__check_subtype_priv__R3b__assume : int
-
-logic us : int
-
-axiom H : ((discr_checks__check_subtype_priv__R3b__assume = bad(void)) and
-  (in_range(discr_checks__check_subtype_priv__R3b__assume) and
-  (discr_checks__check_subtype_priv__R3b__assume = 6)))
-
-axiom H1 : (discr_checks__check_subtype_priv__R3b__assume = r3b)
-
-axiom H2 : in_range(r3b)
-
  (* File "discr_checks.adb", line 10, characters 0-0 *)
-goal WP_parameter_def : in_range1(r3b)
+goal WP_parameter_def :
+  (forall discr_checks__check_subtype_priv__R3b__assume:int.
+  ((((discr_checks__check_subtype_priv__R3b__assume = bad(void)) and
+  (in_range(discr_checks__check_subtype_priv__R3b__assume) and
+  (discr_checks__check_subtype_priv__R3b__assume = 6))) and
+  (discr_checks__check_subtype_priv__R3b__assume = r3b)) -> (in_range(r3b) ->
+  in_range1(r3b))))

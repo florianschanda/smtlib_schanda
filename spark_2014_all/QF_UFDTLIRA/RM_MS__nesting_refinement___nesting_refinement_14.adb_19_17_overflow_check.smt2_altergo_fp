@@ -109,15 +109,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : int
-
-logic z : int
-
-logic o : int
-
-axiom H : in_range(x)
-
-axiom H1 : in_range(z)
-
  (* File "nesting_refinement_14.adb", line 8, characters 0-0 *)
-goal WP_parameter_def : in_range((x + z))
+goal WP_parameter_def :
+  (forall x:int. forall z:int. (in_range(x) -> (in_range(z) ->
+  in_range((x + z)))))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -146,37 +146,12 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
-logic advpressed : bool
-
-logic advtimer : int
-
-logic timenow : int
-
-logic o : int
-
-logic timenow1 : int
-
-logic stillpressed : bool
-
-logic result : bool
-
-logic advpressed1 : bool
-
-axiom H : in_range1(advtimer)
-
-axiom H1 : in_range1(period)
-
-axiom H2 : ((0 <= 86399) -> in_range1(timenow))
-
-axiom H3 : in_range1(timenow1)
-
-axiom H4 : (result = advpressed)
-
-axiom H5 : (advpressed1 = stillpressed)
-
-axiom H6 : (stillpressed = true)
-
-axiom H7 : (period <= (timenow1 - advtimer))
-
  (* File "advancebutton.adb", line 33, characters 0-0 *)
-goal WP_parameter_def : in_range1((advtimer + period))
+goal WP_parameter_def :
+  (forall advpressed:bool. forall advtimer:int. forall timenow:int.
+  forall timenow1:int. forall stillpressed:bool. forall result:bool.
+  forall advpressed1:bool. (in_range1(advtimer) -> (in_range1(period) ->
+  (((0 <= 86399) -> in_range1(timenow)) -> (in_range1(timenow1) ->
+  (((result = advpressed) and (advpressed1 = stillpressed)) ->
+  ((stillpressed = true) -> ((period <= (timenow1 - advtimer)) ->
+  in_range1((advtimer + period))))))))))

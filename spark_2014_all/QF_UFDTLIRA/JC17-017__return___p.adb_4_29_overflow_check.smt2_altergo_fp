@@ -109,35 +109,13 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic p__id__result : int
-
-logic o : int
-
-logic result : int
-
-logic p__id__result1 : int
-
-logic p__id__result2 : int
-
-logic p__id__result3 : int
-
-logic p__id__result4 : int
-
-logic p__id__result5 : int
-
-axiom H : in_range(x)
-
-axiom H1 : (p__id__result1 = p__id__result2)
-
-axiom H2 : (p__id__result3 = p__id__result1)
-
-axiom H3 : (result = p__id__result)
-
-axiom H4 : (p__id__result1 = x)
-
-axiom H5 : (p__id__result4 = p__id__result2)
-
-axiom H6 : (p__id__result5 = p__id__result3)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((p__id__result4 - x))
+goal WP_parameter_def :
+  (forall p__id__result:int. forall result:int. forall p__id__result1:int.
+  forall p__id__result2:int. forall p__id__result3:int.
+  forall p__id__result4:int. forall p__id__result5:int. (in_range(x) ->
+  (((((p__id__result1 = p__id__result2) and
+  (p__id__result3 = p__id__result1)) and (({ int__content = result } = {
+  int__content = p__id__result }) and (p__id__result1 = x))) and (({
+  int__content = p__id__result4 } = { int__content = p__id__result2 }) and
+  (p__id__result5 = p__id__result3))) -> in_range((p__id__result4 - x)))))

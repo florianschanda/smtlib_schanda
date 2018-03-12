@@ -229,11 +229,7 @@ logic n : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-axiom H : in_range(n)
-
-axiom H1 : ((n = 15486209) or ((n = 15487001) or (n = 15487469)))
-
-axiom H2 : (is_prime(n) = true)
-
  (* File "user_lemma.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (is_prime(n) = true)
+goal WP_parameter_def : ((in_range(n) and (((n = 15486209) or
+  ((n = 15487001) or (n = 15487469))) and (is_prime(n) = true))) ->
+  (is_prime(n) = true))

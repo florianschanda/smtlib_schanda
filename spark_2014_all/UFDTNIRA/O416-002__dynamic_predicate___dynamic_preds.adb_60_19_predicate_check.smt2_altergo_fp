@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -387,59 +387,17 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic result____split_fields : even
-
-logic result____split_fields1 : even
-
-logic o : int
-
-logic o1 : even
-
-logic o2 : even
-
-logic o3 : even
-
-logic temp___231 : even
-
-logic temp___2311 : even
-
-logic result : even
-
-logic result1 : even
-
-logic result____split_fields2 : even
-
-logic result____split_fields3 : even
-
-axiom H : in_range1(a)
-
-axiom H1 : in_range1(b)
-
-axiom H2 : (in_range2(a) and (mod(a, 2) = 0))
-
-axiom H3 : true
-
-axiom H4 : (mod(a, 2) = 0)
-
-axiom H5 : (o = a)
-
-axiom H6 : (to_rep(o1) = o)
-
-axiom H7 : (o1 = o2)
-
-axiom H8 : (result____split_fields1 = o3)
-
-axiom H9 : (temp___231 = o2)
-
-axiom H10 : (temp___2311 = o3)
-
-axiom H11 : (result = result____split_fields)
-
-axiom H12 : (result1 = result____split_fields1)
-
-axiom H13 : (result____split_fields2 = temp___231)
-
-axiom H14 : (result____split_fields3 = temp___2311)
-
  (* File "dynamic_preds.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : (mod(b, 2) = 0)
+goal WP_parameter_def :
+  (forall result____split_fields:even. forall result____split_fields1:even.
+  forall o:int. forall o1:even. forall o2:even. forall o3:even.
+  forall temp___257:even. forall temp___2571:even. forall result:even.
+  forall result1:even. forall result____split_fields2:even.
+  forall result____split_fields3:even. (in_range1(a) -> (in_range1(b) ->
+  ((in_range2(a) and (mod(a, 2) = 0)) -> (((((((mod(a, 2) = 0) and
+  (o = a)) and (to_rep(o1) = o)) and ((o1 = o2) and
+  (result____split_fields1 = o3))) and ((temp___257 = o2) and
+  (temp___2571 = o3))) and (((result = result____split_fields) and
+  (result1 = result____split_fields1)) and
+  ((result____split_fields2 = temp___257) and
+  (result____split_fields3 = temp___2571)))) -> (mod(b, 2) = 0))))))

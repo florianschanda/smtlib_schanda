@@ -324,12 +324,6 @@ logic t_increment__function_guard : us_rep, us_rep -> prop
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq5 : bool, bool -> bool
-
-axiom bool_eq_def4 :
-  (forall x:bool. forall y:bool [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -341,6 +335,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq5 : bool, bool -> bool
+
+axiom bool_eq_def4 :
+  (forall x:bool. forall y:bool [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
 
 predicate in_range3(x: int) = ((x = 0) or (x = 1))
 
@@ -415,141 +415,77 @@ axiom get_current_time__def_axiom :
 axiom max__def_axiom : ((max = of_rep(2147483647)) and
   ((max1 = of_rep1(59)) and (max2 = of_rep2(59))))
 
-logic current_time__split_fields : natural
-
-logic current_time__split_fields1 : minutes_t
-
-logic current_time__split_fields2 : seconds_t
-
-logic o : seconds_t
-
-logic o1 : minutes_t
-
-logic o2 : natural
-
-logic o3 : natural
-
-logic o4 : minutes_t
-
-logic o5 : seconds_t
-
-logic temp___158 : natural
-
-logic temp___1581 : minutes_t
-
-logic temp___1582 : seconds_t
-
-logic temp___156 : natural
-
-logic temp___1561 : minutes_t
-
-logic temp___1562 : seconds_t
-
-logic o6 : natural
-
-logic o7 : minutes_t
-
-logic o8 : seconds_t
-
-logic result : natural
-
-logic result1 : minutes_t
-
-logic result2 : seconds_t
-
-logic current_time__split_fields3 : natural
-
-logic current_time__split_fields4 : minutes_t
-
-logic current_time__split_fields5 : seconds_t
-
-logic current_time__split_fields6 : natural
-
-logic current_time__split_fields7 : minutes_t
-
-logic current_time__split_fields8 : seconds_t
-
-logic current_time__split_fields9 : natural
-
-logic current_time__split_fields10 : minutes_t
-
-logic current_time__split_fields11 : seconds_t
-
-axiom H : (to_rep2(o) = 59)
-
-axiom H1 : (to_rep1(o1) = 59)
-
-axiom H2 : (to_rep(o2) = 2147483647)
-
-axiom H3 : (o2 = o3)
-
-axiom H4 : (o1 = o4)
-
-axiom H5 : (o = o5)
-
-axiom H6 : (temp___158 = o3)
-
-axiom H7 : (temp___1581 = o4)
-
-axiom H8 : (temp___1582 = o5)
-
-axiom H9 : ((temp___158 = max) and ((temp___1581 = max1) and
-  (temp___1582 = max2)))
-
-axiom H10 : (not (bool_eq4(get_current_time({ rec__time__t__hours =
+ (* File "time.ads", line 12, characters 0-0 *)
+goal WP_parameter_def :
+  (forall current_time__split_fields:natural.
+  forall current_time__split_fields1:minutes_t.
+  forall current_time__split_fields2:seconds_t. forall o:seconds_t.
+  forall o1:minutes_t. forall o2:natural. forall o3:natural.
+  forall o4:minutes_t. forall o5:seconds_t. forall temp___183:natural.
+  forall temp___1831:minutes_t. forall temp___1832:seconds_t.
+  forall temp___181:natural. forall temp___1811:minutes_t.
+  forall temp___1812:seconds_t. forall result:natural.
+  forall result1:minutes_t. forall result2:seconds_t.
+  forall current_time__split_fields3:natural.
+  forall current_time__split_fields4:minutes_t.
+  forall current_time__split_fields5:seconds_t.
+  forall current_time__split_fields6:natural.
+  forall current_time__split_fields7:minutes_t.
+  forall current_time__split_fields8:seconds_t.
+  forall current_time__split_fields9:natural.
+  forall current_time__split_fields10:minutes_t.
+  forall current_time__split_fields11:seconds_t. (((((to_rep2(o) = 59) and
+  ((to_rep1(o1) = 59) and ((to_rep(o2) = 2147483647) and ((o2 = o3) and
+  ((o1 = o4) and (o = o5)))))) and ((temp___183 = o3) and
+  ((temp___1831 = o4) and (temp___1832 = o5)))) and ((max = temp___183) and
+  ((max1 = temp___1831) and (max2 = temp___1832)))) ->
+  ((not (bool_eq4(get_current_time({ rec__time__t__hours =
   current_time__split_fields; rec__time__t__minutes =
   current_time__split_fields1; rec__time__t__seconds =
   current_time__split_fields2 }), { us_split_fields1 = {
   rec__time__t__hours = max; rec__time__t__minutes = max1;
-  rec__time__t__seconds = max2 } }) = true))
-
-axiom H11 : (({ us_split_fields1 = { rec__time__t__hours = temp___156;
-  rec__time__t__minutes = temp___1561; rec__time__t__seconds = temp___1562 }
-  } = t_increment({ us_split_fields1 = { rec__time__t__hours =
-  current_time__split_fields; rec__time__t__minutes =
+  rec__time__t__seconds = max2 } }) = true)) -> ((((({ us_split_fields1 = {
+  rec__time__t__hours = temp___181; rec__time__t__minutes = temp___1811;
+  rec__time__t__seconds = temp___1812 } } = t_increment({ us_split_fields1 =
+  { rec__time__t__hours = current_time__split_fields; rec__time__t__minutes =
   current_time__split_fields1; rec__time__t__seconds =
   current_time__split_fields2 } })) and
-  (((bool_lt(to_rep2(current_time__split_fields2), 59) = true) ->
-  (((to_rep2(temp___1562) = (to_rep2(current_time__split_fields2) + 1)) and
-  (to_rep1(temp___1561) = to_rep1(current_time__split_fields1))) and
-  (to_rep(temp___156) = to_rep(current_time__split_fields)))) and
-  ((not (bool_lt(to_rep2(current_time__split_fields2), 59) = true)) ->
+  (((bool_lt(to_rep2(current_time__split_fields2), 59) = true) and
+  (((to_rep2(temp___1812) = (to_rep2(current_time__split_fields2) + 1)) and
+  (to_rep1(temp___1811) = to_rep1(current_time__split_fields1))) and
+  (to_rep(temp___181) = to_rep(current_time__split_fields)))) or
+  ((not (bool_lt(to_rep2(current_time__split_fields2), 59) = true)) and
   (((match_bool(bool_eq(to_rep2(current_time__split_fields2), 59),
-  bool_lt(to_rep1(current_time__split_fields1), 59), false) = true) ->
-  (((to_rep2(temp___1562) = 0) and
-  (to_rep1(temp___1561) = (to_rep1(current_time__split_fields1) + 1))) and
-  (to_rep(temp___156) = to_rep(current_time__split_fields)))) and
+  bool_lt(to_rep1(current_time__split_fields1), 59), false) = true) and
+  (((to_rep2(temp___1812) = 0) and
+  (to_rep1(temp___1811) = (to_rep1(current_time__split_fields1) + 1))) and
+  (to_rep(temp___181) = to_rep(current_time__split_fields)))) or
   ((not (match_bool(bool_eq(to_rep2(current_time__split_fields2), 59),
-  bool_lt(to_rep1(current_time__split_fields1), 59), false) = true)) ->
+  bool_lt(to_rep1(current_time__split_fields1), 59), false) = true)) and
   ((match_bool(bool_eq(to_rep2(current_time__split_fields2), 59),
   bool_eq(to_rep1(current_time__split_fields1), 59), false) = true) ->
-  (((to_rep2(temp___1562) = 0) and (to_rep1(temp___1561) = 0)) and
-  (to_rep(temp___156) = (to_rep(current_time__split_fields) + 1)))))))))
-
-axiom H12 : ((result = current_time__split_fields) and
-  ((result1 = current_time__split_fields1) and
-  (result2 = current_time__split_fields2)))
-
-axiom H13 : (temp___156 = current_time__split_fields3)
-
-axiom H14 : (temp___1561 = current_time__split_fields4)
-
-axiom H15 : (temp___1562 = current_time__split_fields5)
-
-axiom H16 : (current_time__split_fields6 = current_time__split_fields3)
-
-axiom H17 : (current_time__split_fields7 = current_time__split_fields4)
-
-axiom H18 : (current_time__split_fields8 = current_time__split_fields5)
-
-axiom H19 : ((current_time__split_fields9 = current_time__split_fields3) and
-  ((current_time__split_fields10 = current_time__split_fields4) and
-  (current_time__split_fields11 = current_time__split_fields5)))
-
- (* File "time.ads", line 12, characters 0-0 *)
-goal WP_parameter_def : (not (bool_eq4(get_current_time({
+  (((to_rep2(temp___1812) = 0) and (to_rep1(temp___1811) = 0)) and
+  (to_rep(temp___181) = (to_rep(current_time__split_fields) + 1))))))))) and
+  (({ us_split_fields__content = { rec__time__t__hours = result;
+  rec__time__t__minutes = result1; rec__time__t__seconds = result2 } } = {
+  us_split_fields__content = { rec__time__t__hours =
+  current_time__split_fields; rec__time__t__minutes =
+  current_time__split_fields1; rec__time__t__seconds =
+  current_time__split_fields2 } }) and
+  ((temp___181 = current_time__split_fields3) and
+  ((temp___1811 = current_time__split_fields4) and
+  (temp___1812 = current_time__split_fields5))))) and
+  (((current_time__split_fields6 = current_time__split_fields3) and
+  ((current_time__split_fields7 = current_time__split_fields4) and
+  (current_time__split_fields8 = current_time__split_fields5))) and ({
+  rec__time__t__hours = current_time__split_fields9; rec__time__t__minutes =
+  current_time__split_fields10; rec__time__t__seconds =
+  current_time__split_fields11 } = { rec__time__t__hours =
+  current_time__split_fields3; rec__time__t__minutes =
+  current_time__split_fields4; rec__time__t__seconds =
+  current_time__split_fields5 }))) -> (not (bool_eq4(get_current_time({
   rec__time__t__hours = current_time__split_fields; rec__time__t__minutes =
   current_time__split_fields1; rec__time__t__seconds =
   current_time__split_fields2 }), { us_split_fields1 = {
   rec__time__t__hours = max; rec__time__t__minutes = max1;
-  rec__time__t__seconds = max2 } }) = true))
+  rec__time__t__seconds = max2 } }) = true))))))

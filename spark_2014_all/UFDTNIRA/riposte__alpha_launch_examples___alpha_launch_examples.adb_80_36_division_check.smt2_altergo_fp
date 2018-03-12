@@ -244,11 +244,6 @@ logic a : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : int
-
-axiom H : in_range(a)
-
-axiom H1 : (comp_div(1000,a) <  1000)
-
  (* File "alpha_launch_examples.adb", line 14, characters 0-0 *)
-goal WP_parameter_def : (not (a = 0))
+goal WP_parameter_def : (in_range(a) -> ((comp_div(1000,a) <  1000) ->
+  (not (a = 0))))

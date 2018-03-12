@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -578,6 +578,46 @@ axiom coerce_axiom5 :
   (forall x:int [to_rep5(of_rep5(x))]. (in_range7(x) ->
   (to_rep5(of_rep5(x)) = x)))
 
+type logfilecountt
+
+predicate in_range8(x: int) = ((0 <= x) and (x <= 17))
+
+logic bool_eq10 : int, int -> bool
+
+axiom bool_eq_def9 :
+  (forall x:int. forall y:int [bool_eq10(x, y)]. (((x = y) -> (bool_eq10(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq10(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE8 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check8 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE8 : us_image -> int
+
+logic user_eq8 : logfilecountt, logfilecountt -> bool
+
+logic dummy11 : logfilecountt
+
+type logfilecountt__ref = { logfilecountt__content : logfilecountt
+}
+
+function logfilecountt__ref___projection(a: logfilecountt__ref) : logfilecountt =
+  (a).logfilecountt__content
+
+logic to_rep6 : logfilecountt -> int
+
+logic of_rep6 : int -> logfilecountt
+
+axiom inversion_axiom6 :
+  (forall x:logfilecountt [to_rep6(x)]. (of_rep6(to_rep6(x)) = x))
+
+axiom range_axiom6 :
+  (forall x:logfilecountt [to_rep6(x)]. in_range8(to_rep6(x)))
+
+axiom coerce_axiom6 :
+  (forall x:int [to_rep6(of_rep6(x))]. (in_range8(x) ->
+  (to_rep6(of_rep6(x)) = x)))
+
 type map__ref = { map__content : (int,logfileindext) farray
 }
 
@@ -595,88 +635,42 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,logfileindext) farray, int, int,
-  (int,logfileindext) farray, int, int -> (int,logfileindext) farray
-
-axiom concat_def :
-  (forall a:(int,logfileindext) farray. forall b:(int,logfileindext) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : logfileindext, int -> (int,logfileindext) farray
-
-axiom singleton_def :
-  (forall v:logfileindext.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
-logic bool_eq10 : (int,logfileindext) farray, int, int,
+logic bool_eq11 : (int,logfileindext) farray, int, int,
   (int,logfileindext) farray, int, int -> bool
 
-axiom bool_eq_def9 :
+axiom bool_eq_def10 :
   (forall a:(int,logfileindext) farray. forall a__first:int.
   forall a__last:int. forall b:(int,logfileindext) farray.
-  forall b__first:int. forall b__last:int [bool_eq10(a, a__first, a__last, b,
+  forall b__first:int. forall b__last:int [bool_eq11(a, a__first, a__last, b,
   b__first, b__last)]. ((((((a__first <= a__last) and
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_150:int. ((((a__first <= temp___idx_150) and
-  (temp___idx_150 <= a__last)) and
-  (to_rep4((a[temp___idx_150])) = to_rep4((b[((b__first - a__first) + temp___idx_150)])))) or
-  (not ((a__first <= temp___idx_150) and (temp___idx_150 <= a__last)))))) ->
-  (bool_eq10(a, a__first, a__last, b, b__first, b__last) = true)) and
+  (forall temp___idx_172:int. ((((a__first <= temp___idx_172) and
+  (temp___idx_172 <= a__last)) and
+  (to_rep4((a[temp___idx_172])) = to_rep4((b[((b__first - a__first) + temp___idx_172)])))) or
+  (not ((a__first <= temp___idx_172) and (temp___idx_172 <= a__last)))))) ->
+  (bool_eq11(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_150:int. (((a__first <= temp___idx_150) and
-  (temp___idx_150 <= a__last)) ->
-  (to_rep4((a[temp___idx_150])) = to_rep4((b[((b__first - a__first) + temp___idx_150)]))))))) ->
-  (bool_eq10(a, a__first, a__last, b, b__first, b__last) = false))))
+  (forall temp___idx_172:int. (((a__first <= temp___idx_172) and
+  (temp___idx_172 <= a__last)) ->
+  (to_rep4((a[temp___idx_172])) = to_rep4((b[((b__first - a__first) + temp___idx_172)]))))))) ->
+  (bool_eq11(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
   (forall a:(int,logfileindext) farray. forall b:(int,logfileindext) farray.
   (forall a__first:int. forall a__last:int. forall b__first:int.
-  forall b__last:int. ((bool_eq10(b, b__first, b__last, a, a__first,
+  forall b__last:int. ((bool_eq11(b, b__first, b__last, a, a__first,
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_150:int. (((a__first <= temp___idx_150) and
-  (temp___idx_150 <= a__last)) ->
-  (to_rep4((a[temp___idx_150])) = to_rep4((b[((b__first - a__first) + temp___idx_150)])))))))))
+  (forall temp___idx_172:int. (((a__first <= temp___idx_172) and
+  (temp___idx_172 <= a__last)) ->
+  (to_rep4((a[temp___idx_172])) = to_rep4((b[((b__first - a__first) + temp___idx_172)])))))))))
 
-logic compare : (int,logfileindext) farray, int, int,
-  (int,logfileindext) farray, int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,logfileindext) farray. forall b:(int,logfileindext) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq10(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,logfileindext) farray. forall b:(int,logfileindext) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq10(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep4((a[(i + 1)])) <  to_rep4((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,logfileindext) farray. forall b:(int,logfileindext) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq10(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep4((b[(i + 1)])) <  to_rep4((a[(j + 1)]))))))))))))
-
-logic dummy11 : (int,logfileindext) farray
+logic dummy12 : (int,logfileindext) farray
 
 logic value__size1 : int
 
@@ -705,48 +699,8 @@ axiom value__alignment_axiom1 : (0 <= value__alignment1)
 axiom object__alignment_axiom1 :
   (forall a:(int,logfileindext) farray. (0 <= object__alignment1(a)))
 
-logic user_eq8 : (int,logfileindext) farray,
+logic user_eq9 : (int,logfileindext) farray,
   (int,logfileindext) farray -> bool
-
-type logfilecountt
-
-predicate in_range8(x: int) = ((0 <= x) and (x <= 17))
-
-logic bool_eq11 : int, int -> bool
-
-axiom bool_eq_def10 :
-  (forall x:int. forall y:int [bool_eq11(x, y)]. (((x = y) -> (bool_eq11(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq11(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE8 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check8 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE8 : us_image -> int
-
-logic user_eq9 : logfilecountt, logfilecountt -> bool
-
-logic dummy12 : logfilecountt
-
-type logfilecountt__ref = { logfilecountt__content : logfilecountt
-}
-
-function logfilecountt__ref___projection(a: logfilecountt__ref) : logfilecountt =
-  (a).logfilecountt__content
-
-logic to_rep6 : logfilecountt -> int
-
-logic of_rep6 : int -> logfilecountt
-
-axiom inversion_axiom6 :
-  (forall x:logfilecountt [to_rep6(x)]. (of_rep6(to_rep6(x)) = x))
-
-axiom range_axiom6 :
-  (forall x:logfilecountt [to_rep6(x)]. in_range8(to_rep6(x)))
-
-axiom coerce_axiom6 :
-  (forall x:int [to_rep6(of_rep6(x))]. (in_range8(x) ->
-  (to_rep6(of_rep6(x)) = x)))
 
 type us_split_fields2 = { rec__auditlog__logfilelistt__list :
 (int,logfileindext) farray; rec__auditlog__logfilelistt__head :
@@ -782,14 +736,14 @@ logic bool_eq12 : us_rep1, us_rep1 -> bool
 
 axiom bool_eq_def11 :
   (forall a:us_rep1. forall b:us_rep1 [bool_eq12(a, b)].
-  ((((((bool_eq10(((a).us_split_fields3).rec__auditlog__logfilelistt__list,
+  ((((((bool_eq11(((a).us_split_fields3).rec__auditlog__logfilelistt__list,
   1, 17, ((b).us_split_fields3).rec__auditlog__logfilelistt__list, 1,
   17) = true) and
   (to_rep4(((a).us_split_fields3).rec__auditlog__logfilelistt__head) = to_rep4(((b).us_split_fields3).rec__auditlog__logfilelistt__head))) and
   (to_rep4(((a).us_split_fields3).rec__auditlog__logfilelistt__lasti) = to_rep4(((b).us_split_fields3).rec__auditlog__logfilelistt__lasti))) and
   (to_rep6(((a).us_split_fields3).rec__auditlog__logfilelistt__length) = to_rep6(((b).us_split_fields3).rec__auditlog__logfilelistt__length))) ->
   (bool_eq12(a, b) = true)) and
-  ((not ((((bool_eq10(((a).us_split_fields3).rec__auditlog__logfilelistt__list,
+  ((not ((((bool_eq11(((a).us_split_fields3).rec__auditlog__logfilelistt__list,
   1, 17, ((b).us_split_fields3).rec__auditlog__logfilelistt__list, 1,
   17) = true) and
   (to_rep4(((a).us_split_fields3).rec__auditlog__logfilelistt__head) = to_rep4(((b).us_split_fields3).rec__auditlog__logfilelistt__head))) and
@@ -958,25 +912,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,fileentrycountt) farray, int, int,
-  (int,fileentrycountt) farray, int, int -> (int,fileentrycountt) farray
-
-axiom concat_def1 :
-  (forall a:(int,fileentrycountt) farray.
-  forall b:(int,fileentrycountt) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : fileentrycountt, int -> (int,fileentrycountt) farray
-
-axiom singleton_def1 :
-  (forall v:fileentrycountt.
-  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq14 : (int,fileentrycountt) farray, int, int,
   (int,fileentrycountt) farray, int, int -> bool
 
@@ -988,17 +923,17 @@ axiom bool_eq_def13 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_151:int. ((((a__first <= temp___idx_151) and
-  (temp___idx_151 <= a__last)) and
-  (to_rep7((a[temp___idx_151])) = to_rep7((b[((b__first - a__first) + temp___idx_151)])))) or
-  (not ((a__first <= temp___idx_151) and (temp___idx_151 <= a__last)))))) ->
+  (forall temp___idx_173:int. ((((a__first <= temp___idx_173) and
+  (temp___idx_173 <= a__last)) and
+  (to_rep7((a[temp___idx_173])) = to_rep7((b[((b__first - a__first) + temp___idx_173)])))) or
+  (not ((a__first <= temp___idx_173) and (temp___idx_173 <= a__last)))))) ->
   (bool_eq14(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_151:int. (((a__first <= temp___idx_151) and
-  (temp___idx_151 <= a__last)) ->
-  (to_rep7((a[temp___idx_151])) = to_rep7((b[((b__first - a__first) + temp___idx_151)]))))))) ->
+  (forall temp___idx_173:int. (((a__first <= temp___idx_173) and
+  (temp___idx_173 <= a__last)) ->
+  (to_rep7((a[temp___idx_173])) = to_rep7((b[((b__first - a__first) + temp___idx_173)]))))))) ->
   (bool_eq14(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -1009,40 +944,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_151:int. (((a__first <= temp___idx_151) and
-  (temp___idx_151 <= a__last)) ->
-  (to_rep7((a[temp___idx_151])) = to_rep7((b[((b__first - a__first) + temp___idx_151)])))))))))
-
-logic compare1 : (int,fileentrycountt) farray, int, int,
-  (int,fileentrycountt) farray, int, int -> int
-
-axiom compare_def_eq1 :
-  (forall a:(int,fileentrycountt) farray.
-  forall b:(int,fileentrycountt) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq14(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt1 :
-  (forall a:(int,fileentrycountt) farray.
-  forall b:(int,fileentrycountt) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq14(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep7((a[(i + 1)])) <  to_rep7((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt1 :
-  (forall a:(int,fileentrycountt) farray.
-  forall b:(int,fileentrycountt) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare1(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq14(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep7((b[(i + 1)])) <  to_rep7((a[(j + 1)]))))))))))))
+  (forall temp___idx_173:int. (((a__first <= temp___idx_173) and
+  (temp___idx_173 <= a__last)) ->
+  (to_rep7((a[temp___idx_173])) = to_rep7((b[((b__first - a__first) + temp___idx_173)])))))))))
 
 logic dummy18 : (int,fileentrycountt) farray
 
@@ -1251,19 +1155,9 @@ logic valid_numberlogentries : int, int, us_rep1,
 logic valid_numberlogentries__function_guard : bool, int, int, us_rep1,
   (int,fileentrycountt) farray -> prop
 
-logic temp___1100 : int -> (int,logfileindext) farray
+logic temp___1239 : int -> (int,logfileindext) farray
 
-axiom def_axiom :
-  (forall temp___1102:int.
-  (forall temp___1103:int.
-  ((temp___1100(temp___1102)[temp___1103]) = of_rep4(temp___1102))))
-
-logic temp___1104 : int -> (int,fileentrycountt) farray
-
-axiom def_axiom1 :
-  (forall temp___1106:int.
-  (forall temp___1107:int.
-  ((temp___1104(temp___1106)[temp___1107]) = of_rep7(temp___1106))))
+logic temp___1243 : int -> (int,fileentrycountt) farray
 
 type us_main_type
 
@@ -1315,24 +1209,6 @@ axiom slide_def2 :
   (forall i:int [(slide2(a, old_first, new_first)[i])]. ((slide2(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat2 : (int,us_rep3) farray, int, int, (int,us_rep3) farray, int,
-  int -> (int,us_rep3) farray
-
-axiom concat_def2 :
-  (forall a:(int,us_rep3) farray. forall b:(int,us_rep3) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat2(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat2(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat2(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton2 : us_rep3, int -> (int,us_rep3) farray
-
-axiom singleton_def2 :
-  (forall v:us_rep3.
-  (forall i:int [(singleton2(v, i)[i])]. ((singleton2(v, i)[i]) = v)))
-
 logic bool_eq17 : (int,us_rep3) farray, int, int, (int,us_rep3) farray, int,
   int -> bool
 
@@ -1343,17 +1219,17 @@ axiom bool_eq_def15 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_152:int. ((((a__first <= temp___idx_152) and
-  (temp___idx_152 <= a__last)) and (bool_eq16((a[temp___idx_152]),
-  (b[((b__first - a__first) + temp___idx_152)])) = true)) or
-  (not ((a__first <= temp___idx_152) and (temp___idx_152 <= a__last)))))) ->
+  (forall temp___idx_174:int. ((((a__first <= temp___idx_174) and
+  (temp___idx_174 <= a__last)) and (bool_eq16((a[temp___idx_174]),
+  (b[((b__first - a__first) + temp___idx_174)])) = true)) or
+  (not ((a__first <= temp___idx_174) and (temp___idx_174 <= a__last)))))) ->
   (bool_eq17(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_152:int. (((a__first <= temp___idx_152) and
-  (temp___idx_152 <= a__last)) -> (bool_eq16((a[temp___idx_152]),
-  (b[((b__first - a__first) + temp___idx_152)])) = true))))) -> (bool_eq17(a,
+  (forall temp___idx_174:int. (((a__first <= temp___idx_174) and
+  (temp___idx_174 <= a__last)) -> (bool_eq16((a[temp___idx_174]),
+  (b[((b__first - a__first) + temp___idx_174)])) = true))))) -> (bool_eq17(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev2 :
@@ -1363,9 +1239,9 @@ axiom bool_eq_rev2 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_152:int. (((a__first <= temp___idx_152) and
-  (temp___idx_152 <= a__last)) -> (bool_eq16((a[temp___idx_152]),
-  (b[((b__first - a__first) + temp___idx_152)])) = true)))))))
+  (forall temp___idx_174:int. (((a__first <= temp___idx_174) and
+  (temp___idx_174 <= a__last)) -> (bool_eq16((a[temp___idx_174]),
+  (b[((b__first - a__first) + temp___idx_174)])) = true)))))))
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
@@ -1425,24 +1301,6 @@ axiom slide_def3 :
   (forall i:int [(slide3(a, old_first, new_first)[i])]. ((slide3(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat3 : (int,filestatust) farray, int, int, (int,filestatust) farray,
-  int, int -> (int,filestatust) farray
-
-axiom concat_def3 :
-  (forall a:(int,filestatust) farray. forall b:(int,filestatust) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat3(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat3(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat3(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton3 : filestatust, int -> (int,filestatust) farray
-
-axiom singleton_def3 :
-  (forall v:filestatust.
-  (forall i:int [(singleton3(v, i)[i])]. ((singleton3(v, i)[i]) = v)))
-
 logic bool_eq19 : (int,filestatust) farray, int, int,
   (int,filestatust) farray, int, int -> bool
 
@@ -1453,17 +1311,17 @@ axiom bool_eq_def17 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_153:int. ((((a__first <= temp___idx_153) and
-  (temp___idx_153 <= a__last)) and
-  (to_rep8((a[temp___idx_153])) = to_rep8((b[((b__first - a__first) + temp___idx_153)])))) or
-  (not ((a__first <= temp___idx_153) and (temp___idx_153 <= a__last)))))) ->
+  (forall temp___idx_175:int. ((((a__first <= temp___idx_175) and
+  (temp___idx_175 <= a__last)) and
+  (to_rep8((a[temp___idx_175])) = to_rep8((b[((b__first - a__first) + temp___idx_175)])))) or
+  (not ((a__first <= temp___idx_175) and (temp___idx_175 <= a__last)))))) ->
   (bool_eq19(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_153:int. (((a__first <= temp___idx_153) and
-  (temp___idx_153 <= a__last)) ->
-  (to_rep8((a[temp___idx_153])) = to_rep8((b[((b__first - a__first) + temp___idx_153)]))))))) ->
+  (forall temp___idx_175:int. (((a__first <= temp___idx_175) and
+  (temp___idx_175 <= a__last)) ->
+  (to_rep8((a[temp___idx_175])) = to_rep8((b[((b__first - a__first) + temp___idx_175)]))))))) ->
   (bool_eq19(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev3 :
@@ -1473,37 +1331,9 @@ axiom bool_eq_rev3 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_153:int. (((a__first <= temp___idx_153) and
-  (temp___idx_153 <= a__last)) ->
-  (to_rep8((a[temp___idx_153])) = to_rep8((b[((b__first - a__first) + temp___idx_153)])))))))))
-
-logic compare2 : (int,filestatust) farray, int, int,
-  (int,filestatust) farray, int, int -> int
-
-axiom compare_def_eq2 :
-  (forall a:(int,filestatust) farray. forall b:(int,filestatust) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare2(a, a_first, a_last, b, b_first, b_last)].
-  ((compare2(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq19(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt2 :
-  (forall a:(int,filestatust) farray. forall b:(int,filestatust) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare2(a, a_first, a_last, b, b_first, b_last)].
-  ((compare2(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq19(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep8((a[(i + 1)])) <  to_rep8((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt2 :
-  (forall a:(int,filestatust) farray. forall b:(int,filestatust) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare2(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare2(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq19(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep8((b[(i + 1)])) <  to_rep8((a[(j + 1)]))))))))))))
+  (forall temp___idx_175:int. (((a__first <= temp___idx_175) and
+  (temp___idx_175 <= a__last)) ->
+  (to_rep8((a[temp___idx_175])) = to_rep8((b[((b__first - a__first) + temp___idx_175)])))))))))
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
@@ -1708,24 +1538,6 @@ axiom slide_def4 :
   (forall i:int [(slide4(a, old_first, new_first)[i])]. ((slide4(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat4 : (int,character) farray, int, int, (int,character) farray,
-  int, int -> (int,character) farray
-
-axiom concat_def4 :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat4(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat4(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat4(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton4 : character, int -> (int,character) farray
-
-axiom singleton_def4 :
-  (forall v:character.
-  (forall i:int [(singleton4(v, i)[i])]. ((singleton4(v, i)[i]) = v)))
-
 logic bool_eq24 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -1736,17 +1548,17 @@ axiom bool_eq_def22 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep10((a[temp___idx_78])) = to_rep10((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep10((a[temp___idx_91])) = to_rep10((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq24(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep10((a[temp___idx_78])) = to_rep10((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep10((a[temp___idx_91])) = to_rep10((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq24(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev4 :
@@ -1756,37 +1568,9 @@ axiom bool_eq_rev4 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep10((a[temp___idx_78])) = to_rep10((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare3 : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq3 :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare3(a, a_first, a_last, b, b_first, b_last)].
-  ((compare3(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq24(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt3 :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare3(a, a_first, a_last, b, b_first, b_last)].
-  ((compare3(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq24(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep10((a[(i + 1)])) <  to_rep10((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt3 :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare3(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare3(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq24(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep10((b[(i + 1)])) <  to_rep10((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep10((a[temp___idx_91])) = to_rep10((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 logic dummy32 : (int,character) farray
 
@@ -2432,6 +2216,11 @@ axiom valid_numberlogentries__def_axiom :
   logfileentries) = true) <-> ((1 <= to_rep6(usedlogfiles3)) and
   (numberlogentries = (((to_rep6(usedlogfiles3) - 1) * 1024) + to_rep7((logfileentries[currentlogfile])))))))))
 
+axiom def_axiom :
+  (forall temp___1245:int. (in_range9(temp___1245) ->
+  (forall temp___1246:int.
+  (to_rep7((temp___1243(temp___1245)[temp___1246])) = temp___1245))))
+
 axiom greaterthan__post_axiom : true
 
 axiom greaterthan__def_axiom :
@@ -2461,1860 +2250,538 @@ axiom greaterthan__def_axiom :
 
 axiom ispresent__post_axiom : true
 
-logic currenttimevar__split_fields : yearst
-
-logic currenttimevar__split_fields1 : monthst
-
-logic currenttimevar__split_fields2 : dayst
-
-logic currenttimevar__split_fields3 : millisecst
-
-logic logfilestate__split_fields : logfileindext
-
-logic logfilestate__split_fields1 : logentrycountt
-
-logic logfilestate__split_fields2 : (int,logfileindext) farray
-
-logic logfilestate__split_fields3 : logfileindext
-
-logic logfilestate__split_fields4 : logfileindext
-
-logic logfilestate__split_fields5 : logfilecountt
-
-logic logfilestate__split_fields6 : (int,fileentrycountt) farray
-
-logic auditalarm : int
-
-logic currentlatch : int
-
-logic latchtimeout__split_fields : yearst
-
-logic latchtimeout__split_fields1 : monthst
-
-logic latchtimeout__split_fields2 : dayst
-
-logic latchtimeout__split_fields3 : millisecst
-
-logic thistisinfo__split_fields : bool
-
-logic thistisinfo__split_fields1 : issueridt
-
-logic thistisinfo__split_fields2 : namecountt
-
-logic thistisinfo__split_fields3 : (int,character) farray
-
-logic status : int
-
-logic fingertimeout__split_fields : yearst
-
-logic fingertimeout__split_fields1 : monthst
-
-logic fingertimeout__split_fields2 : dayst
-
-logic fingertimeout__split_fields3 : millisecst
-
-logic tokenremovaltimeout__split_fields : yearst
-
-logic tokenremovaltimeout__split_fields1 : monthst
-
-logic tokenremovaltimeout__split_fields2 : dayst
-
-logic tokenremovaltimeout__split_fields3 : millisecst
-
-logic localstatus : int
-
-logic currenttime : us_private
-
-logic state : us_private
-
-logic filestate : us_private
-
-logic state1 : us_private
-
-logic state2 : us_private
-
-logic filestate1 : us_private
-
-logic state3 : us_private
-
-logic state4 : us_private
-
-logic state5 : us_private
-
-logic state6 : us_private
-
-logic status1 : us_private
-
-logic output : us_private
-
-logic o : int
-
-logic currentlatch1 : int
-
-logic latchtimeout__split_fields4 : yearst
-
-logic latchtimeout__split_fields5 : monthst
-
-logic latchtimeout__split_fields6 : dayst
-
-logic latchtimeout__split_fields7 : millisecst
-
-logic fingertimeout__split_fields4 : yearst
-
-logic fingertimeout__split_fields5 : monthst
-
-logic fingertimeout__split_fields6 : dayst
-
-logic fingertimeout__split_fields7 : millisecst
-
-logic tokenremovaltimeout__split_fields4 : yearst
-
-logic tokenremovaltimeout__split_fields5 : monthst
-
-logic tokenremovaltimeout__split_fields6 : dayst
-
-logic tokenremovaltimeout__split_fields7 : millisecst
-
-logic state7 : us_private
-
-logic state8 : us_private
-
-logic filestate2 : us_private
-
-logic state9 : us_private
-
-logic status2 : us_private
-
-logic output1 : us_private
-
-logic result : int
-
-logic localstatus1 : int
-
-logic logfiles : (int,us_rep3) farray
-
-logic logfilesstatus : (int,filestatust) farray
-
-logic logfilestate__split_fields7 : logfileindext
-
-logic logfilestate__split_fields8 : logentrycountt
-
-logic logfilestate__split_fields9 : (int,logfileindext) farray
-
-logic logfilestate__split_fields10 : logfileindext
-
-logic logfilestate__split_fields11 : logfileindext
-
-logic logfilestate__split_fields12 : logfilecountt
-
-logic logfilestate__split_fields13 : (int,fileentrycountt) farray
-
-logic auditalarm1 : int
-
-logic auditsystemfault : bool
-
-logic thestats__split_fields : statscount
-
-logic thestats__split_fields1 : statscount
-
-logic thestats__split_fields2 : statscount
-
-logic thestats__split_fields3 : statscount
-
-logic status3 : int
-
-logic fingertimeout__split_fields8 : yearst
-
-logic fingertimeout__split_fields9 : monthst
-
-logic fingertimeout__split_fields10 : dayst
-
-logic fingertimeout__split_fields11 : millisecst
-
-logic state10 : us_private
-
-logic filestate3 : us_private
-
-logic state11 : us_private
-
-logic state12 : us_private
-
-logic status4 : us_private
-
-logic logfiles1 : (int,us_rep3) farray
-
-logic logfilesstatus1 : (int,filestatust) farray
-
-logic logfilestate__split_fields14 : logfileindext
-
-logic logfilestate__split_fields15 : logentrycountt
-
-logic logfilestate__split_fields16 : (int,logfileindext) farray
-
-logic logfilestate__split_fields17 : logfileindext
-
-logic logfilestate__split_fields18 : logfileindext
-
-logic logfilestate__split_fields19 : logfilecountt
-
-logic logfilestate__split_fields20 : (int,fileentrycountt) farray
-
-logic auditalarm2 : int
-
-logic auditsystemfault1 : bool
-
-logic thestats__split_fields4 : statscount
-
-logic thestats__split_fields5 : statscount
-
-logic thestats__split_fields6 : statscount
-
-logic thestats__split_fields7 : statscount
-
-logic status5 : int
-
-logic state13 : us_private
-
-logic filestate4 : us_private
-
-logic state14 : us_private
-
-logic state15 : us_private
-
-logic logfiles2 : (int,us_rep3) farray
-
-logic logfilesstatus2 : (int,filestatust) farray
-
-logic logfilestate__split_fields21 : logfileindext
-
-logic logfilestate__split_fields22 : logentrycountt
-
-logic logfilestate__split_fields23 : (int,logfileindext) farray
-
-logic logfilestate__split_fields24 : logfileindext
-
-logic logfilestate__split_fields25 : logfileindext
-
-logic logfilestate__split_fields26 : logfilecountt
-
-logic logfilestate__split_fields27 : (int,fileentrycountt) farray
-
-logic auditalarm3 : int
-
-logic auditsystemfault2 : bool
-
-logic thestats__split_fields8 : statscount
-
-logic thestats__split_fields9 : statscount
-
-logic thestats__split_fields10 : statscount
-
-logic thestats__split_fields11 : statscount
-
-logic status6 : int
-
-logic state16 : us_private
-
-logic filestate5 : us_private
-
-logic state17 : us_private
-
-logic state18 : us_private
-
-logic logfiles3 : (int,us_rep3) farray
-
-logic logfilesstatus3 : (int,filestatust) farray
-
-logic logfilestate__split_fields28 : logfileindext
-
-logic logfilestate__split_fields29 : logentrycountt
-
-logic logfilestate__split_fields30 : (int,logfileindext) farray
-
-logic logfilestate__split_fields31 : logfileindext
-
-logic logfilestate__split_fields32 : logfileindext
-
-logic logfilestate__split_fields33 : logfilecountt
-
-logic logfilestate__split_fields34 : (int,fileentrycountt) farray
-
-logic auditalarm4 : int
-
-logic auditsystemfault3 : bool
-
-logic thestats__split_fields12 : statscount
-
-logic thestats__split_fields13 : statscount
-
-logic thestats__split_fields14 : statscount
-
-logic thestats__split_fields15 : statscount
-
-logic status7 : int
-
-logic state19 : us_private
-
-logic filestate6 : us_private
-
-logic filestate7 : us_private
-
-logic state20 : us_private
-
-logic state21 : us_private
-
-logic state22 : us_private
-
-logic status8 : us_private
-
-logic output2 : us_private
-
-logic logfiles4 : (int,us_rep3) farray
-
-logic logfilesstatus4 : (int,filestatust) farray
-
-logic logfilestate__split_fields35 : logfileindext
-
-logic logfilestate__split_fields36 : logentrycountt
-
-logic logfilestate__split_fields37 : (int,logfileindext) farray
-
-logic logfilestate__split_fields38 : logfileindext
-
-logic logfilestate__split_fields39 : logfileindext
-
-logic logfilestate__split_fields40 : logfilecountt
-
-logic logfilestate__split_fields41 : (int,fileentrycountt) farray
-
-logic auditalarm5 : int
-
-logic auditsystemfault4 : bool
-
-logic thestats__split_fields16 : statscount
-
-logic thestats__split_fields17 : statscount
-
-logic thestats__split_fields18 : statscount
-
-logic thestats__split_fields19 : statscount
-
-logic status9 : int
-
-logic tokenremovaltimeout__split_fields8 : yearst
-
-logic tokenremovaltimeout__split_fields9 : monthst
-
-logic tokenremovaltimeout__split_fields10 : dayst
-
-logic tokenremovaltimeout__split_fields11 : millisecst
-
-logic state23 : us_private
-
-logic filestate8 : us_private
-
-logic state24 : us_private
-
-logic state25 : us_private
-
-logic logfiles5 : (int,us_rep3) farray
-
-logic logfilesstatus5 : (int,filestatust) farray
-
-logic logfilestate__split_fields42 : logfileindext
-
-logic logfilestate__split_fields43 : logentrycountt
-
-logic logfilestate__split_fields44 : (int,logfileindext) farray
-
-logic logfilestate__split_fields45 : logfileindext
-
-logic logfilestate__split_fields46 : logfileindext
-
-logic logfilestate__split_fields47 : logfilecountt
-
-logic logfilestate__split_fields48 : (int,fileentrycountt) farray
-
-logic auditalarm6 : int
-
-logic auditsystemfault5 : bool
-
-logic currentlatch2 : int
-
-logic latchtimeout__split_fields8 : yearst
-
-logic latchtimeout__split_fields9 : monthst
-
-logic latchtimeout__split_fields10 : dayst
-
-logic latchtimeout__split_fields11 : millisecst
-
-logic thestats__split_fields20 : statscount
-
-logic thestats__split_fields21 : statscount
-
-logic thestats__split_fields22 : statscount
-
-logic thestats__split_fields23 : statscount
-
-logic status10 : int
-
-logic state26 : us_private
-
-logic filestate9 : us_private
-
-logic state27 : us_private
-
-logic state28 : us_private
-
-logic state29 : us_private
-
-logic state30 : us_private
-
-logic logfiles6 : (int,us_rep3) farray
-
-logic logfilesstatus6 : (int,filestatust) farray
-
-logic logfilestate__split_fields49 : logfileindext
-
-logic logfilestate__split_fields50 : logentrycountt
-
-logic logfilestate__split_fields51 : (int,logfileindext) farray
-
-logic logfilestate__split_fields52 : logfileindext
-
-logic logfilestate__split_fields53 : logfileindext
-
-logic logfilestate__split_fields54 : logfilecountt
-
-logic logfilestate__split_fields55 : (int,fileentrycountt) farray
-
-logic auditalarm7 : int
-
-logic auditsystemfault6 : bool
-
-logic thestats__split_fields24 : statscount
-
-logic thestats__split_fields25 : statscount
-
-logic thestats__split_fields26 : statscount
-
-logic thestats__split_fields27 : statscount
-
-logic status11 : int
-
-logic state31 : us_private
-
-logic filestate10 : us_private
-
-logic state32 : us_private
-
-logic state33 : us_private
-
-logic logfiles7 : (int,us_rep3) farray
-
-logic logfilesstatus7 : (int,filestatust) farray
-
-logic logfilestate__split_fields56 : logfileindext
-
-logic logfilestate__split_fields57 : logentrycountt
-
-logic logfilestate__split_fields58 : (int,logfileindext) farray
-
-logic logfilestate__split_fields59 : logfileindext
-
-logic logfilestate__split_fields60 : logfileindext
-
-logic logfilestate__split_fields61 : logfilecountt
-
-logic logfilestate__split_fields62 : (int,fileentrycountt) farray
-
-logic auditalarm8 : int
-
-logic auditsystemfault7 : bool
-
-logic currentlatch3 : int
-
-logic latchtimeout__split_fields12 : yearst
-
-logic latchtimeout__split_fields13 : monthst
-
-logic latchtimeout__split_fields14 : dayst
-
-logic latchtimeout__split_fields15 : millisecst
-
-logic thestats__split_fields28 : statscount
-
-logic thestats__split_fields29 : statscount
-
-logic thestats__split_fields30 : statscount
-
-logic thestats__split_fields31 : statscount
-
-logic status12 : int
-
-logic fingertimeout__split_fields12 : yearst
-
-logic fingertimeout__split_fields13 : monthst
-
-logic fingertimeout__split_fields14 : dayst
-
-logic fingertimeout__split_fields15 : millisecst
-
-logic tokenremovaltimeout__split_fields12 : yearst
-
-logic tokenremovaltimeout__split_fields13 : monthst
-
-logic tokenremovaltimeout__split_fields14 : dayst
-
-logic tokenremovaltimeout__split_fields15 : millisecst
-
-logic localstatus2 : int
-
-logic state34 : us_private
-
-logic filestate11 : us_private
-
-logic state35 : us_private
-
-logic state36 : us_private
-
-logic filestate12 : us_private
-
-logic state37 : us_private
-
-logic state38 : us_private
-
-logic state39 : us_private
-
-logic status13 : us_private
-
-logic output3 : us_private
-
-logic logfiles8 : (int,us_rep3) farray
-
-logic logfilesstatus8 : (int,filestatust) farray
-
-logic logfilestate__split_fields63 : logfileindext
-
-logic logfilestate__split_fields64 : logentrycountt
-
-logic logfilestate__split_fields65 : (int,logfileindext) farray
-
-logic logfilestate__split_fields66 : logfileindext
-
-logic logfilestate__split_fields67 : logfileindext
-
-logic logfilestate__split_fields68 : logfilecountt
-
-logic logfilestate__split_fields69 : (int,fileentrycountt) farray
-
-logic auditalarm9 : int
-
-logic auditsystemfault8 : bool
-
-logic currentlatch4 : int
-
-logic latchtimeout__split_fields16 : yearst
-
-logic latchtimeout__split_fields17 : monthst
-
-logic latchtimeout__split_fields18 : dayst
-
-logic latchtimeout__split_fields19 : millisecst
-
-logic thestats__split_fields32 : statscount
-
-logic thestats__split_fields33 : statscount
-
-logic thestats__split_fields34 : statscount
-
-logic thestats__split_fields35 : statscount
-
-logic status14 : int
-
-logic fingertimeout__split_fields16 : yearst
-
-logic fingertimeout__split_fields17 : monthst
-
-logic fingertimeout__split_fields18 : dayst
-
-logic fingertimeout__split_fields19 : millisecst
-
-logic tokenremovaltimeout__split_fields16 : yearst
-
-logic tokenremovaltimeout__split_fields17 : monthst
-
-logic tokenremovaltimeout__split_fields18 : dayst
-
-logic tokenremovaltimeout__split_fields19 : millisecst
-
-logic localstatus3 : int
-
-logic state40 : us_private
-
-logic filestate13 : us_private
-
-logic state41 : us_private
-
-logic state42 : us_private
-
-logic filestate14 : us_private
-
-logic state43 : us_private
-
-logic state44 : us_private
-
-logic state45 : us_private
-
-logic status15 : us_private
-
-logic output4 : us_private
-
-axiom H : in_range17(status)
-
-axiom H1 : (valid_numberlogentries(to_rep4(logfilestate__split_fields),
+axiom def_axiom1 :
+  (forall temp___1241:int. (in_range6(temp___1241) ->
+  (forall temp___1242:int.
+  (to_rep4((temp___1239(temp___1241)[temp___1242])) = temp___1241))))
+
+ (* File "userentry.adb", line 1000, characters 0-0 *)
+goal WP_parameter_def :
+  (forall currenttimevar__split_fields:yearst.
+  forall currenttimevar__split_fields1:monthst.
+  forall currenttimevar__split_fields2:dayst.
+  forall currenttimevar__split_fields3:millisecst.
+  forall logfilestate__split_fields:logfileindext.
+  forall logfilestate__split_fields1:logentrycountt.
+  forall logfilestate__split_fields2:(int,logfileindext) farray.
+  forall logfilestate__split_fields3:logfileindext.
+  forall logfilestate__split_fields4:logfileindext.
+  forall logfilestate__split_fields5:logfilecountt.
+  forall logfilestate__split_fields6:(int,fileentrycountt) farray.
+  forall auditalarm:int. forall currentlatch:int.
+  forall latchtimeout__split_fields:yearst.
+  forall latchtimeout__split_fields1:monthst.
+  forall latchtimeout__split_fields2:dayst.
+  forall latchtimeout__split_fields3:millisecst.
+  forall thistisinfo__split_fields:bool.
+  forall thistisinfo__split_fields1:issueridt.
+  forall thistisinfo__split_fields2:namecountt.
+  forall thistisinfo__split_fields3:(int,character) farray.
+  forall status:int. forall fingertimeout__split_fields:yearst.
+  forall fingertimeout__split_fields1:monthst.
+  forall fingertimeout__split_fields2:dayst.
+  forall fingertimeout__split_fields3:millisecst.
+  forall tokenremovaltimeout__split_fields:yearst.
+  forall tokenremovaltimeout__split_fields1:monthst.
+  forall tokenremovaltimeout__split_fields2:dayst.
+  forall tokenremovaltimeout__split_fields3:millisecst.
+  forall localstatus:int. forall currenttime:us_private.
+  forall state:us_private. forall state1:us_private.
+  forall filestate:us_private. forall state2:us_private.
+  forall state3:us_private. forall state4:us_private.
+  forall status1:us_private. forall output:us_private. forall o:int.
+  forall currentlatch1:int. forall latchtimeout__split_fields4:yearst.
+  forall latchtimeout__split_fields5:monthst.
+  forall latchtimeout__split_fields6:dayst.
+  forall latchtimeout__split_fields7:millisecst.
+  forall fingertimeout__split_fields4:yearst.
+  forall fingertimeout__split_fields5:monthst.
+  forall fingertimeout__split_fields6:dayst.
+  forall fingertimeout__split_fields7:millisecst.
+  forall tokenremovaltimeout__split_fields4:yearst.
+  forall tokenremovaltimeout__split_fields5:monthst.
+  forall tokenremovaltimeout__split_fields6:dayst.
+  forall tokenremovaltimeout__split_fields7:millisecst.
+  forall state5:us_private. forall state6:us_private.
+  forall filestate1:us_private. forall state7:us_private.
+  forall status2:us_private. forall output1:us_private. forall result:int.
+  forall localstatus1:int. forall logfiles:(int,us_rep3) farray.
+  forall logfilesstatus:(int,filestatust) farray.
+  forall logfilestate__split_fields7:logfileindext.
+  forall logfilestate__split_fields8:logentrycountt.
+  forall logfilestate__split_fields9:(int,logfileindext) farray.
+  forall logfilestate__split_fields10:logfileindext.
+  forall logfilestate__split_fields11:logfileindext.
+  forall logfilestate__split_fields12:logfilecountt.
+  forall logfilestate__split_fields13:(int,fileentrycountt) farray.
+  forall auditalarm1:int. forall auditsystemfault:bool.
+  forall thestats__split_fields:us_split_fields10. forall status3:int.
+  forall fingertimeout__split_fields8:us_split_fields.
+  forall state8:us_private. forall filestate2:us_private.
+  forall state9:us_private. forall state10:us_private.
+  forall status4:us_private. forall logfiles1:(int,us_rep3) farray.
+  forall logfilesstatus1:(int,filestatust) farray.
+  forall logfilestate__split_fields14:us_split_fields4.
+  forall auditalarm2:int. forall auditsystemfault1:bool.
+  forall thestats__split_fields1:us_split_fields10. forall status5:int.
+  forall state11:us_private. forall filestate3:us_private.
+  forall state12:us_private. forall state13:us_private.
+  forall logfiles2:(int,us_rep3) farray.
+  forall logfilesstatus2:(int,filestatust) farray.
+  forall logfilestate__split_fields15:us_split_fields4.
+  forall auditalarm3:int. forall auditsystemfault2:bool.
+  forall thestats__split_fields2:us_split_fields10. forall status6:int.
+  forall state14:us_private. forall filestate4:us_private.
+  forall state15:us_private. forall state16:us_private.
+  forall logfiles3:(int,us_rep3) farray.
+  forall logfilesstatus3:(int,filestatust) farray.
+  forall logfilestate__split_fields16:us_split_fields4.
+  forall auditalarm4:int. forall auditsystemfault3:bool.
+  forall thestats__split_fields3:us_split_fields10. forall status7:int.
+  forall state17:us_private. forall filestate5:us_private.
+  forall filestate6:us_private. forall state18:us_private.
+  forall state19:us_private. forall state20:us_private.
+  forall status8:us_private. forall output2:us_private.
+  forall logfiles4:(int,us_rep3) farray.
+  forall logfilesstatus4:(int,filestatust) farray.
+  forall logfilestate__split_fields17:us_split_fields4.
+  forall auditalarm5:int. forall auditsystemfault4:bool.
+  forall thestats__split_fields4:us_split_fields10. forall status9:int.
+  forall tokenremovaltimeout__split_fields8:us_split_fields.
+  forall state21:us_private. forall filestate7:us_private.
+  forall state22:us_private. forall state23:us_private.
+  forall logfiles5:(int,us_rep3) farray.
+  forall logfilesstatus5:(int,filestatust) farray.
+  forall logfilestate__split_fields18:us_split_fields4.
+  forall auditalarm6:int. forall auditsystemfault5:bool.
+  forall currentlatch2:int.
+  forall latchtimeout__split_fields8:us_split_fields.
+  forall thestats__split_fields5:us_split_fields10. forall status10:int.
+  forall state24:us_private. forall filestate8:us_private.
+  forall state25:us_private. forall state26:us_private.
+  forall state27:us_private. forall state28:us_private.
+  forall logfiles6:(int,us_rep3) farray.
+  forall logfilesstatus6:(int,filestatust) farray.
+  forall logfilestate__split_fields19:us_split_fields4.
+  forall auditalarm7:int. forall auditsystemfault6:bool.
+  forall thestats__split_fields6:us_split_fields10. forall status11:int.
+  forall state29:us_private. forall filestate9:us_private.
+  forall state30:us_private. forall state31:us_private.
+  forall logfiles7:map__ref2. forall logfilesstatus7:map__ref3.
+  forall logfilestate__split_fields20:us_split_fields__ref2.
+  forall auditalarm8:int__ref. forall auditsystemfault7:bool__ref.
+  forall currentlatch3:int__ref.
+  forall latchtimeout__split_fields9:us_split_fields__ref.
+  forall thestats__split_fields7:us_split_fields__ref5.
+  forall status12:int__ref.
+  forall fingertimeout__split_fields9:us_split_fields__ref.
+  forall tokenremovaltimeout__split_fields9:us_split_fields__ref.
+  forall localstatus2:int__ref. forall state32:us_private__ref.
+  forall filestate10:us_private__ref. forall state33:us_private__ref.
+  forall state34:us_private__ref. forall filestate11:us_private__ref.
+  forall state35:us_private__ref. forall state36:us_private__ref.
+  forall state37:us_private__ref. forall status13:us_private__ref.
+  forall output3:us_private__ref. forall logfiles8:(int,us_rep3) farray.
+  forall logfilesstatus8:(int,filestatust) farray.
+  forall logfilestate__split_fields21:us_split_fields4.
+  forall auditalarm9:int. forall auditsystemfault8:bool.
+  forall currentlatch4:int.
+  forall latchtimeout__split_fields10:us_split_fields.
+  forall thestats__split_fields8:us_split_fields10. forall status14:int.
+  forall fingertimeout__split_fields10:us_split_fields.
+  forall tokenremovaltimeout__split_fields10:us_split_fields.
+  forall localstatus3:int. forall state38:us_private.
+  forall filestate12:us_private. forall state39:us_private.
+  forall state40:us_private. forall filestate13:us_private.
+  forall state41:us_private. forall state42:us_private.
+  forall state43:us_private. forall status15:us_private.
+  forall output4:us_private. (in_range17(status) ->
+  ((valid_numberlogentries(to_rep4(logfilestate__split_fields),
   to_rep5(logfilestate__split_fields1), { us_split_fields3 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields2;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields3;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields4;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields5 } },
-  logfilestate__split_fields6) = true)
-
-axiom H2 : in_range1(auditalarm)
-
-axiom H3 : in_range11(currentlatch)
-
-axiom H4 : (((currentactivitypossible(status, state6) = true) and
-  (privatekeypresent({ rec__keystore__optionalprivatekeyt__ispresent =
-  thistisinfo__split_fields; rec__keystore__optionalprivatekeyt__owner = {
-  us_split_fields7 = { rec__cryptotypes__issuert__id =
-  thistisinfo__split_fields1; rec__cryptotypes__issuert__namelength =
-  thistisinfo__split_fields2; rec__cryptotypes__issuert__name =
-  thistisinfo__split_fields3 } } }, state5) = true)) and
-  ((((islocked(currentlatch, state1, { rec__clock__timet__year =
-  latchtimeout__split_fields; rec__clock__timet__month =
-  latchtimeout__split_fields1; rec__clock__timet__day =
-  latchtimeout__split_fields2; rec__clock__timet__millisec =
-  latchtimeout__split_fields3 }) = true) and
-  (thecurrentdoor(state2) = 0)) and (greaterthanorequal(thecurrenttime({
+  logfilestate__split_fields6) = true) -> (in_range1(auditalarm) ->
+  (in_range11(currentlatch) -> ((((currentactivitypossible(status,
+  state4) = true) and (privatekeypresent({
+  rec__keystore__optionalprivatekeyt__ispresent = thistisinfo__split_fields;
+  rec__keystore__optionalprivatekeyt__owner = { us_split_fields7 = {
+  rec__cryptotypes__issuert__id = thistisinfo__split_fields1;
+  rec__cryptotypes__issuert__namelength = thistisinfo__split_fields2;
+  rec__cryptotypes__issuert__name = thistisinfo__split_fields3 } } },
+  state3) = true)) and ((((islocked(currentlatch, state, {
+  rec__clock__timet__year = latchtimeout__split_fields;
+  rec__clock__timet__month = latchtimeout__split_fields1;
+  rec__clock__timet__day = latchtimeout__split_fields2;
+  rec__clock__timet__millisec = latchtimeout__split_fields3 }) = true) and
+  (thecurrentdoor(state1) = 0)) and (greaterthanorequal(thecurrenttime({
   rec__clock__timet__year = currenttimevar__split_fields;
   rec__clock__timet__month = currenttimevar__split_fields1;
   rec__clock__timet__day = currenttimevar__split_fields2;
   rec__clock__timet__millisec = currenttimevar__split_fields3 },
-  currenttime), alarm_timeout(state2)) = true)) <->
-  (thedooralarm(state2) = 0)))
-
-axiom H5 : ((1 <= 7) -> in_range18(localstatus))
-
-axiom H6 : ((o = status) and in_range18(status))
-
-axiom H7 : (result = localstatus)
-
-axiom H8 : (localstatus1 = o)
-
-axiom H9 : ((localstatus1 = 1) ->
-  (((valid_numberlogentries(to_rep4(logfilestate__split_fields7),
+  currenttime), alarm_timeout(state1)) = true)) <->
+  (thedooralarm(state1) = 0))) -> (((((1 <= 7) ->
+  in_range18(localstatus)) and ((((o = status) and in_range18(status)) and
+  ((result = localstatus) and (localstatus1 = o))) and
+  (((localstatus1 = 1) and
+  ((((valid_numberlogentries(to_rep4(logfilestate__split_fields7),
   to_rep5(logfilestate__split_fields8), { us_split_fields3 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields9;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields10;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields11;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields12 } },
   logfilestate__split_fields13) = true) and in_range1(auditalarm1)) and
-  in_range17(status3)))
-
-axiom H10 : ((localstatus1 = 1) -> (output2 = output))
-
-axiom H11 : ((localstatus1 = 1) -> (state20 = state3))
-
-axiom H12 : ((localstatus1 = 1) -> (filestate7 = filestate1))
-
-axiom H13 : ((localstatus1 = 1) -> (state28 = state2))
-
-axiom H14 : ((localstatus1 = 1) -> (state27 = state1))
-
-axiom H15 : ((localstatus1 = 1) ->
-  ((tokenremovaltimeout__split_fields8 = tokenremovaltimeout__split_fields) and
-  ((tokenremovaltimeout__split_fields9 = tokenremovaltimeout__split_fields1) and
-  ((tokenremovaltimeout__split_fields10 = tokenremovaltimeout__split_fields2) and
-  (tokenremovaltimeout__split_fields11 = tokenremovaltimeout__split_fields3)))))
-
-axiom H16 : ((localstatus1 = 1) ->
-  ((latchtimeout__split_fields8 = latchtimeout__split_fields) and
-  ((latchtimeout__split_fields9 = latchtimeout__split_fields1) and
-  ((latchtimeout__split_fields10 = latchtimeout__split_fields2) and
-  (latchtimeout__split_fields11 = latchtimeout__split_fields3)))))
-
-axiom H17 : ((localstatus1 = 1) -> (currentlatch2 = currentlatch))
-
-axiom H18 : ((localstatus1 = 1) -> (output2 = output1))
-
-axiom H19 : ((localstatus1 = 1) -> (state20 = state9))
-
-axiom H20 : ((localstatus1 = 1) -> (filestate7 = filestate2))
-
-axiom H21 : ((localstatus1 = 1) -> (state28 = state8))
-
-axiom H22 : ((localstatus1 = 1) -> (state27 = state7))
-
-axiom H23 : ((localstatus1 = 1) ->
-  ((tokenremovaltimeout__split_fields8 = tokenremovaltimeout__split_fields4) and
-  ((tokenremovaltimeout__split_fields9 = tokenremovaltimeout__split_fields5) and
-  ((tokenremovaltimeout__split_fields10 = tokenremovaltimeout__split_fields6) and
-  (tokenremovaltimeout__split_fields11 = tokenremovaltimeout__split_fields7)))))
-
-axiom H24 : ((localstatus1 = 1) ->
-  ((latchtimeout__split_fields8 = latchtimeout__split_fields4) and
-  ((latchtimeout__split_fields9 = latchtimeout__split_fields5) and
-  ((latchtimeout__split_fields10 = latchtimeout__split_fields6) and
-  (latchtimeout__split_fields11 = latchtimeout__split_fields7)))))
-
-axiom H25 : ((localstatus1 = 1) -> (currentlatch2 = currentlatch1))
-
-axiom H26 : ((not (localstatus1 = 1)) -> ((localstatus1 = 2) ->
-  (((valid_numberlogentries(to_rep4(logfilestate__split_fields14),
-  to_rep5(logfilestate__split_fields15), { us_split_fields3 = {
-  rec__auditlog__logfilelistt__list = logfilestate__split_fields16;
-  rec__auditlog__logfilelistt__head = logfilestate__split_fields17;
-  rec__auditlog__logfilelistt__lasti = logfilestate__split_fields18;
-  rec__auditlog__logfilelistt__length = logfilestate__split_fields19 } },
-  logfilestate__split_fields20) = true) and in_range1(auditalarm2)) and
-  in_range17(status5))))
-
-axiom H27 : ((not (localstatus1 = 1)) -> ((localstatus1 = 2) ->
-  (output2 = output)))
-
-axiom H28 : ((not (localstatus1 = 1)) -> ((localstatus1 = 2) ->
-  (status8 = status1)))
-
-axiom H29 : ((not (localstatus1 = 1)) -> ((localstatus1 = 2) ->
-  (state20 = state3)))
-
-axiom H30 : ((not (localstatus1 = 1)) -> ((localstatus1 = 2) ->
-  (filestate7 = filestate1)))
-
-axiom H31 : ((not (localstatus1 = 1)) -> ((localstatus1 = 2) ->
-  (state28 = state2)))
-
-axiom H32 : ((not (localstatus1 = 1)) -> ((localstatus1 = 2) ->
-  (state27 = state1)))
-
-axiom H33 : ((not (localstatus1 = 1)) -> ((localstatus1 = 2) ->
-  ((tokenremovaltimeout__split_fields8 = tokenremovaltimeout__split_fields) and
-  ((tokenremovaltimeout__split_fields9 = tokenremovaltimeout__split_fields1) and
-  ((tokenremovaltimeout__split_fields10 = tokenremovaltimeout__split_fields2) and
-  (tokenremovaltimeout__split_fields11 = tokenremovaltimeout__split_fields3))))))
-
-axiom H34 : ((not (localstatus1 = 1)) -> ((localstatus1 = 2) ->
-  ((latchtimeout__split_fields8 = latchtimeout__split_fields) and
-  ((latchtimeout__split_fields9 = latchtimeout__split_fields1) and
-  ((latchtimeout__split_fields10 = latchtimeout__split_fields2) and
-  (latchtimeout__split_fields11 = latchtimeout__split_fields3))))))
-
-axiom H35 : ((not (localstatus1 = 1)) -> ((localstatus1 = 2) ->
-  (currentlatch2 = currentlatch)))
-
-axiom H36 : ((not (localstatus1 = 1)) -> ((localstatus1 = 2) ->
-  (output2 = output1)))
-
-axiom H37 : ((not (localstatus1 = 1)) -> ((localstatus1 = 2) ->
-  (status8 = status2)))
-
-axiom H38 : ((not (localstatus1 = 1)) -> ((localstatus1 = 2) ->
-  (state20 = state9)))
-
-axiom H39 : ((not (localstatus1 = 1)) -> ((localstatus1 = 2) ->
-  (filestate7 = filestate2)))
-
-axiom H40 : ((not (localstatus1 = 1)) -> ((localstatus1 = 2) ->
-  (state28 = state8)))
-
-axiom H41 : ((not (localstatus1 = 1)) -> ((localstatus1 = 2) ->
-  (state27 = state7)))
-
-axiom H42 : ((not (localstatus1 = 1)) -> ((localstatus1 = 2) ->
-  ((tokenremovaltimeout__split_fields8 = tokenremovaltimeout__split_fields4) and
-  ((tokenremovaltimeout__split_fields9 = tokenremovaltimeout__split_fields5) and
-  ((tokenremovaltimeout__split_fields10 = tokenremovaltimeout__split_fields6) and
-  (tokenremovaltimeout__split_fields11 = tokenremovaltimeout__split_fields7))))))
-
-axiom H43 : ((not (localstatus1 = 1)) -> ((localstatus1 = 2) ->
-  ((latchtimeout__split_fields8 = latchtimeout__split_fields4) and
-  ((latchtimeout__split_fields9 = latchtimeout__split_fields5) and
-  ((latchtimeout__split_fields10 = latchtimeout__split_fields6) and
-  (latchtimeout__split_fields11 = latchtimeout__split_fields7))))))
-
-axiom H44 : ((not (localstatus1 = 1)) -> ((localstatus1 = 2) ->
-  (currentlatch2 = currentlatch1)))
-
-axiom H45 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((localstatus1 = 3) ->
-  (((valid_numberlogentries(to_rep4(logfilestate__split_fields21),
-  to_rep5(logfilestate__split_fields22), { us_split_fields3 = {
-  rec__auditlog__logfilelistt__list = logfilestate__split_fields23;
-  rec__auditlog__logfilelistt__head = logfilestate__split_fields24;
-  rec__auditlog__logfilelistt__lasti = logfilestate__split_fields25;
-  rec__auditlog__logfilelistt__length = logfilestate__split_fields26 } },
-  logfilestate__split_fields27) = true) and in_range1(auditalarm3)) and
-  in_range17(status6)))))
-
-axiom H46 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((localstatus1 = 3) -> (output2 = output))))
-
-axiom H47 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((localstatus1 = 3) -> (status8 = status1))))
-
-axiom H48 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((localstatus1 = 3) -> (state20 = state3))))
-
-axiom H49 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((localstatus1 = 3) -> (filestate7 = filestate1))))
-
-axiom H50 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((localstatus1 = 3) -> (state28 = state2))))
-
-axiom H51 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((localstatus1 = 3) -> (state27 = state1))))
-
-axiom H52 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((localstatus1 = 3) ->
-  ((tokenremovaltimeout__split_fields8 = tokenremovaltimeout__split_fields) and
-  ((tokenremovaltimeout__split_fields9 = tokenremovaltimeout__split_fields1) and
-  ((tokenremovaltimeout__split_fields10 = tokenremovaltimeout__split_fields2) and
-  (tokenremovaltimeout__split_fields11 = tokenremovaltimeout__split_fields3)))))))
-
-axiom H53 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((localstatus1 = 3) ->
-  ((latchtimeout__split_fields8 = latchtimeout__split_fields) and
-  ((latchtimeout__split_fields9 = latchtimeout__split_fields1) and
-  ((latchtimeout__split_fields10 = latchtimeout__split_fields2) and
-  (latchtimeout__split_fields11 = latchtimeout__split_fields3)))))))
-
-axiom H54 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((localstatus1 = 3) -> (currentlatch2 = currentlatch))))
-
-axiom H55 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((localstatus1 = 3) -> (output2 = output1))))
-
-axiom H56 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((localstatus1 = 3) -> (status8 = status2))))
-
-axiom H57 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((localstatus1 = 3) -> (state20 = state9))))
-
-axiom H58 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((localstatus1 = 3) -> (filestate7 = filestate2))))
-
-axiom H59 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((localstatus1 = 3) -> (state28 = state8))))
-
-axiom H60 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((localstatus1 = 3) -> (state27 = state7))))
-
-axiom H61 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((localstatus1 = 3) ->
-  ((tokenremovaltimeout__split_fields8 = tokenremovaltimeout__split_fields4) and
-  ((tokenremovaltimeout__split_fields9 = tokenremovaltimeout__split_fields5) and
-  ((tokenremovaltimeout__split_fields10 = tokenremovaltimeout__split_fields6) and
-  (tokenremovaltimeout__split_fields11 = tokenremovaltimeout__split_fields7)))))))
-
-axiom H62 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((localstatus1 = 3) ->
-  ((latchtimeout__split_fields8 = latchtimeout__split_fields4) and
-  ((latchtimeout__split_fields9 = latchtimeout__split_fields5) and
-  ((latchtimeout__split_fields10 = latchtimeout__split_fields6) and
-  (latchtimeout__split_fields11 = latchtimeout__split_fields7)))))))
-
-axiom H63 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((localstatus1 = 3) -> (currentlatch2 = currentlatch1))))
-
-axiom H64 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((localstatus1 = 4) ->
-  (((valid_numberlogentries(to_rep4(logfilestate__split_fields28),
-  to_rep5(logfilestate__split_fields29), { us_split_fields3 = {
-  rec__auditlog__logfilelistt__list = logfilestate__split_fields30;
-  rec__auditlog__logfilelistt__head = logfilestate__split_fields31;
-  rec__auditlog__logfilelistt__lasti = logfilestate__split_fields32;
-  rec__auditlog__logfilelistt__length = logfilestate__split_fields33 } },
-  logfilestate__split_fields34) = true) and in_range1(auditalarm4)) and
-  in_range17(status7))))))
-
-axiom H65 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((localstatus1 = 4) -> (state28 = state2)))))
-
-axiom H66 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((localstatus1 = 4) -> (state27 = state1)))))
-
-axiom H67 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((localstatus1 = 4) ->
-  ((tokenremovaltimeout__split_fields8 = tokenremovaltimeout__split_fields) and
-  ((tokenremovaltimeout__split_fields9 = tokenremovaltimeout__split_fields1) and
-  ((tokenremovaltimeout__split_fields10 = tokenremovaltimeout__split_fields2) and
-  (tokenremovaltimeout__split_fields11 = tokenremovaltimeout__split_fields3))))))))
-
-axiom H68 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((localstatus1 = 4) ->
-  ((latchtimeout__split_fields8 = latchtimeout__split_fields) and
-  ((latchtimeout__split_fields9 = latchtimeout__split_fields1) and
-  ((latchtimeout__split_fields10 = latchtimeout__split_fields2) and
-  (latchtimeout__split_fields11 = latchtimeout__split_fields3))))))))
-
-axiom H69 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((localstatus1 = 4) ->
-  (currentlatch2 = currentlatch)))))
-
-axiom H70 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((localstatus1 = 4) -> (state28 = state8)))))
-
-axiom H71 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((localstatus1 = 4) -> (state27 = state7)))))
-
-axiom H72 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((localstatus1 = 4) ->
-  ((tokenremovaltimeout__split_fields8 = tokenremovaltimeout__split_fields4) and
-  ((tokenremovaltimeout__split_fields9 = tokenremovaltimeout__split_fields5) and
-  ((tokenremovaltimeout__split_fields10 = tokenremovaltimeout__split_fields6) and
-  (tokenremovaltimeout__split_fields11 = tokenremovaltimeout__split_fields7))))))))
-
-axiom H73 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((localstatus1 = 4) ->
-  ((latchtimeout__split_fields8 = latchtimeout__split_fields4) and
-  ((latchtimeout__split_fields9 = latchtimeout__split_fields5) and
-  ((latchtimeout__split_fields10 = latchtimeout__split_fields6) and
-  (latchtimeout__split_fields11 = latchtimeout__split_fields7))))))))
-
-axiom H74 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((localstatus1 = 4) ->
-  (currentlatch2 = currentlatch1)))))
-
-axiom H75 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((localstatus1 = 5) ->
-  (((valid_numberlogentries(to_rep4(logfilestate__split_fields35),
-  to_rep5(logfilestate__split_fields36), { us_split_fields3 = {
-  rec__auditlog__logfilelistt__list = logfilestate__split_fields37;
-  rec__auditlog__logfilelistt__head = logfilestate__split_fields38;
-  rec__auditlog__logfilelistt__lasti = logfilestate__split_fields39;
-  rec__auditlog__logfilelistt__length = logfilestate__split_fields40 } },
-  logfilestate__split_fields41) = true) and in_range1(auditalarm5)) and
-  in_range17(status9)))))))
-
-axiom H76 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((localstatus1 = 5) -> (state28 = state2))))))
-
-axiom H77 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((localstatus1 = 5) -> (state27 = state1))))))
-
-axiom H78 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((localstatus1 = 5) ->
-  ((latchtimeout__split_fields8 = latchtimeout__split_fields) and
-  ((latchtimeout__split_fields9 = latchtimeout__split_fields1) and
-  ((latchtimeout__split_fields10 = latchtimeout__split_fields2) and
-  (latchtimeout__split_fields11 = latchtimeout__split_fields3)))))))))
-
-axiom H79 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((localstatus1 = 5) -> (currentlatch2 = currentlatch))))))
-
-axiom H80 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((localstatus1 = 5) -> (state28 = state8))))))
-
-axiom H81 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((localstatus1 = 5) -> (state27 = state7))))))
-
-axiom H82 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((localstatus1 = 5) ->
-  ((latchtimeout__split_fields8 = latchtimeout__split_fields4) and
-  ((latchtimeout__split_fields9 = latchtimeout__split_fields5) and
-  ((latchtimeout__split_fields10 = latchtimeout__split_fields6) and
-  (latchtimeout__split_fields11 = latchtimeout__split_fields7)))))))))
-
-axiom H83 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((localstatus1 = 5) -> (currentlatch2 = currentlatch1))))))
-
-axiom H84 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((localstatus1 = 6) ->
-  (((((islocked(currentlatch2, state27, { rec__clock__timet__year =
-  latchtimeout__split_fields8; rec__clock__timet__month =
-  latchtimeout__split_fields9; rec__clock__timet__day =
-  latchtimeout__split_fields10; rec__clock__timet__millisec =
-  latchtimeout__split_fields11 }) = true) and
-  (thecurrentdoor(state28) = 0)) and (greaterthanorequal(thecurrenttime({
-  rec__clock__timet__year = currenttimevar__split_fields;
-  rec__clock__timet__month = currenttimevar__split_fields1;
-  rec__clock__timet__day = currenttimevar__split_fields2;
-  rec__clock__timet__millisec = currenttimevar__split_fields3 },
-  currenttime), alarm_timeout(state28)) = true)) <->
-  (thedooralarm(state28) = 0)) and
-  ((((valid_numberlogentries(to_rep4(logfilestate__split_fields42),
-  to_rep5(logfilestate__split_fields43), { us_split_fields3 = {
-  rec__auditlog__logfilelistt__list = logfilestate__split_fields44;
-  rec__auditlog__logfilelistt__head = logfilestate__split_fields45;
-  rec__auditlog__logfilelistt__lasti = logfilestate__split_fields46;
-  rec__auditlog__logfilelistt__length = logfilestate__split_fields47 } },
-  logfilestate__split_fields48) = true) and in_range1(auditalarm6)) and
-  in_range17(status10)) and in_range11(currentlatch2)))))))))
-
-axiom H85 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  (((valid_numberlogentries(to_rep4(logfilestate__split_fields49),
-  to_rep5(logfilestate__split_fields50), { us_split_fields3 = {
-  rec__auditlog__logfilelistt__list = logfilestate__split_fields51;
-  rec__auditlog__logfilelistt__head = logfilestate__split_fields52;
-  rec__auditlog__logfilelistt__lasti = logfilestate__split_fields53;
-  rec__auditlog__logfilelistt__length = logfilestate__split_fields54 } },
-  logfilestate__split_fields55) = true) and in_range1(auditalarm7)) and
-  in_range17(status11))))))))
-
-axiom H86 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  (state30 = state33)))))))
-
-axiom H87 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  (state29 = state32)))))))
-
-axiom H88 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  (state28 = state2)))))))
-
-axiom H89 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  (state27 = state1)))))))
-
-axiom H90 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  (filestate9 = filestate10)))))))
-
-axiom H91 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  (state26 = state31)))))))
-
-axiom H92 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  (status10 = status11)))))))
-
-axiom H93 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  ((thestats__split_fields20 = thestats__split_fields24) and
-  ((thestats__split_fields21 = thestats__split_fields25) and
-  ((thestats__split_fields22 = thestats__split_fields26) and
-  (thestats__split_fields23 = thestats__split_fields27))))))))))
-
-axiom H94 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  ((latchtimeout__split_fields8 = latchtimeout__split_fields) and
-  ((latchtimeout__split_fields9 = latchtimeout__split_fields1) and
-  ((latchtimeout__split_fields10 = latchtimeout__split_fields2) and
-  (latchtimeout__split_fields11 = latchtimeout__split_fields3))))))))))
-
-axiom H95 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  (currentlatch2 = currentlatch)))))))
-
-axiom H96 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  (auditsystemfault5 = auditsystemfault6)))))))
-
-axiom H97 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  (auditalarm6 = auditalarm7)))))))
-
-axiom H98 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  ((logfilestate__split_fields42 = logfilestate__split_fields49) and
-  ((logfilestate__split_fields43 = logfilestate__split_fields50) and
-  (((logfilestate__split_fields44 = logfilestate__split_fields51) and
-  ((logfilestate__split_fields45 = logfilestate__split_fields52) and
-  ((logfilestate__split_fields46 = logfilestate__split_fields53) and
-  (logfilestate__split_fields47 = logfilestate__split_fields54)))) and
-  (logfilestate__split_fields48 = logfilestate__split_fields55))))))))))
-
-axiom H99 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  (logfilesstatus5 = logfilesstatus6)))))))
-
-axiom H100 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  (logfiles5 = logfiles6)))))))
-
-axiom H101 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  (state30 = state33)))))))
-
-axiom H102 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  (state29 = state32)))))))
-
-axiom H103 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  (state28 = state8)))))))
-
-axiom H104 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  (state27 = state7)))))))
-
-axiom H105 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  (filestate9 = filestate10)))))))
-
-axiom H106 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  (state26 = state31)))))))
-
-axiom H107 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  (status10 = status11)))))))
-
-axiom H108 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  ((thestats__split_fields20 = thestats__split_fields24) and
-  ((thestats__split_fields21 = thestats__split_fields25) and
-  ((thestats__split_fields22 = thestats__split_fields26) and
-  (thestats__split_fields23 = thestats__split_fields27))))))))))
-
-axiom H109 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  ((latchtimeout__split_fields8 = latchtimeout__split_fields4) and
-  ((latchtimeout__split_fields9 = latchtimeout__split_fields5) and
-  ((latchtimeout__split_fields10 = latchtimeout__split_fields6) and
-  (latchtimeout__split_fields11 = latchtimeout__split_fields7))))))))))
-
-axiom H110 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  (currentlatch2 = currentlatch1)))))))
-
-axiom H111 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  (auditsystemfault5 = auditsystemfault6)))))))
-
-axiom H112 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  (auditalarm6 = auditalarm7)))))))
-
-axiom H113 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  ((logfilestate__split_fields42 = logfilestate__split_fields49) and
-  ((logfilestate__split_fields43 = logfilestate__split_fields50) and
-  (((logfilestate__split_fields44 = logfilestate__split_fields51) and
-  ((logfilestate__split_fields45 = logfilestate__split_fields52) and
-  ((logfilestate__split_fields46 = logfilestate__split_fields53) and
-  (logfilestate__split_fields47 = logfilestate__split_fields54)))) and
-  (logfilestate__split_fields48 = logfilestate__split_fields55))))))))))
-
-axiom H114 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  (logfilesstatus5 = logfilesstatus6)))))))
-
-axiom H115 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> ((not (localstatus1 = 6)) ->
-  (logfiles5 = logfiles6)))))))
-
-axiom H116 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> (state25 = state30))))))
-
-axiom H117 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> (state24 = state29))))))
-
-axiom H118 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> (filestate8 = filestate9))))))
-
-axiom H119 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> (state23 = state26))))))
-
-axiom H120 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) ->
-  ((tokenremovaltimeout__split_fields8 = tokenremovaltimeout__split_fields) and
-  ((tokenremovaltimeout__split_fields9 = tokenremovaltimeout__split_fields1) and
-  ((tokenremovaltimeout__split_fields10 = tokenremovaltimeout__split_fields2) and
-  (tokenremovaltimeout__split_fields11 = tokenremovaltimeout__split_fields3)))))))))
-
-axiom H121 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> (status9 = status10))))))
-
-axiom H122 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) ->
-  ((thestats__split_fields16 = thestats__split_fields20) and
-  ((thestats__split_fields17 = thestats__split_fields21) and
-  ((thestats__split_fields18 = thestats__split_fields22) and
-  (thestats__split_fields19 = thestats__split_fields23)))))))))
-
-axiom H123 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> (auditsystemfault4 = auditsystemfault5))))))
-
-axiom H124 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> (auditalarm5 = auditalarm6))))))
-
-axiom H125 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) ->
-  ((logfilestate__split_fields35 = logfilestate__split_fields42) and
-  ((logfilestate__split_fields36 = logfilestate__split_fields43) and
-  (((logfilestate__split_fields37 = logfilestate__split_fields44) and
-  ((logfilestate__split_fields38 = logfilestate__split_fields45) and
-  ((logfilestate__split_fields39 = logfilestate__split_fields46) and
-  (logfilestate__split_fields40 = logfilestate__split_fields47)))) and
-  (logfilestate__split_fields41 = logfilestate__split_fields48)))))))))
-
-axiom H126 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> (logfilesstatus4 = logfilesstatus5))))))
-
-axiom H127 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> (logfiles4 = logfiles5))))))
-
-axiom H128 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> (state25 = state30))))))
-
-axiom H129 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> (state24 = state29))))))
-
-axiom H130 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> (filestate8 = filestate9))))))
-
-axiom H131 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> (state23 = state26))))))
-
-axiom H132 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) ->
-  ((tokenremovaltimeout__split_fields8 = tokenremovaltimeout__split_fields4) and
-  ((tokenremovaltimeout__split_fields9 = tokenremovaltimeout__split_fields5) and
-  ((tokenremovaltimeout__split_fields10 = tokenremovaltimeout__split_fields6) and
-  (tokenremovaltimeout__split_fields11 = tokenremovaltimeout__split_fields7)))))))))
-
-axiom H133 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> (status9 = status10))))))
-
-axiom H134 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) ->
-  ((thestats__split_fields16 = thestats__split_fields20) and
-  ((thestats__split_fields17 = thestats__split_fields21) and
-  ((thestats__split_fields18 = thestats__split_fields22) and
-  (thestats__split_fields19 = thestats__split_fields23)))))))))
-
-axiom H135 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> (auditsystemfault4 = auditsystemfault5))))))
-
-axiom H136 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> (auditalarm5 = auditalarm6))))))
-
-axiom H137 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) ->
-  ((logfilestate__split_fields35 = logfilestate__split_fields42) and
-  ((logfilestate__split_fields36 = logfilestate__split_fields43) and
-  (((logfilestate__split_fields37 = logfilestate__split_fields44) and
-  ((logfilestate__split_fields38 = logfilestate__split_fields45) and
-  ((logfilestate__split_fields39 = logfilestate__split_fields46) and
-  (logfilestate__split_fields40 = logfilestate__split_fields47)))) and
-  (logfilestate__split_fields41 = logfilestate__split_fields48)))))))))
-
-axiom H138 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> (logfilesstatus4 = logfilesstatus5))))))
-
-axiom H139 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((not (localstatus1 = 5)) -> (logfiles4 = logfiles5))))))
-
-axiom H140 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  (output2 = output)))))
-
-axiom H141 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  (status8 = status1)))))
-
-axiom H142 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  (state22 = state25)))))
-
-axiom H143 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  (state21 = state24)))))
-
-axiom H144 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  (state20 = state3)))))
-
-axiom H145 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  (filestate7 = filestate1)))))
-
-axiom H146 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  (filestate6 = filestate8)))))
-
-axiom H147 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  (state19 = state23)))))
-
-axiom H148 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  (status7 = status9)))))
-
-axiom H149 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((thestats__split_fields12 = thestats__split_fields16) and
-  ((thestats__split_fields13 = thestats__split_fields17) and
-  ((thestats__split_fields14 = thestats__split_fields18) and
-  (thestats__split_fields15 = thestats__split_fields19))))))))
-
-axiom H150 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  (auditsystemfault3 = auditsystemfault4)))))
-
-axiom H151 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  (auditalarm4 = auditalarm5)))))
-
-axiom H152 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((logfilestate__split_fields28 = logfilestate__split_fields35) and
-  ((logfilestate__split_fields29 = logfilestate__split_fields36) and
-  (((logfilestate__split_fields30 = logfilestate__split_fields37) and
-  ((logfilestate__split_fields31 = logfilestate__split_fields38) and
-  ((logfilestate__split_fields32 = logfilestate__split_fields39) and
-  (logfilestate__split_fields33 = logfilestate__split_fields40)))) and
-  (logfilestate__split_fields34 = logfilestate__split_fields41))))))))
-
-axiom H153 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  (logfilesstatus3 = logfilesstatus4)))))
-
-axiom H154 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  (logfiles3 = logfiles4)))))
-
-axiom H155 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  (output2 = output1)))))
-
-axiom H156 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  (status8 = status2)))))
-
-axiom H157 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  (state22 = state25)))))
-
-axiom H158 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  (state21 = state24)))))
-
-axiom H159 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  (state20 = state9)))))
-
-axiom H160 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  (filestate7 = filestate2)))))
-
-axiom H161 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  (filestate6 = filestate8)))))
-
-axiom H162 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  (state19 = state23)))))
-
-axiom H163 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  (status7 = status9)))))
-
-axiom H164 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((thestats__split_fields12 = thestats__split_fields16) and
-  ((thestats__split_fields13 = thestats__split_fields17) and
-  ((thestats__split_fields14 = thestats__split_fields18) and
-  (thestats__split_fields15 = thestats__split_fields19))))))))
-
-axiom H165 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  (auditsystemfault3 = auditsystemfault4)))))
-
-axiom H166 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  (auditalarm4 = auditalarm5)))))
-
-axiom H167 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  ((logfilestate__split_fields28 = logfilestate__split_fields35) and
-  ((logfilestate__split_fields29 = logfilestate__split_fields36) and
-  (((logfilestate__split_fields30 = logfilestate__split_fields37) and
-  ((logfilestate__split_fields31 = logfilestate__split_fields38) and
-  ((logfilestate__split_fields32 = logfilestate__split_fields39) and
-  (logfilestate__split_fields33 = logfilestate__split_fields40)))) and
-  (logfilestate__split_fields34 = logfilestate__split_fields41))))))))
-
-axiom H168 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  (logfilesstatus3 = logfilesstatus4)))))
-
-axiom H169 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> ((not (localstatus1 = 4)) ->
-  (logfiles3 = logfiles4)))))
-
-axiom H170 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> (state18 = state22))))
-
-axiom H171 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> (state17 = state21))))
-
-axiom H172 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> (filestate5 = filestate6))))
-
-axiom H173 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> (state16 = state19))))
-
-axiom H174 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> (status6 = status7))))
-
-axiom H175 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) ->
-  ((thestats__split_fields8 = thestats__split_fields12) and
-  ((thestats__split_fields9 = thestats__split_fields13) and
-  ((thestats__split_fields10 = thestats__split_fields14) and
-  (thestats__split_fields11 = thestats__split_fields15)))))))
-
-axiom H176 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> (auditsystemfault2 = auditsystemfault3))))
-
-axiom H177 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> (auditalarm3 = auditalarm4))))
-
-axiom H178 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) ->
-  ((logfilestate__split_fields21 = logfilestate__split_fields28) and
-  ((logfilestate__split_fields22 = logfilestate__split_fields29) and
-  (((logfilestate__split_fields23 = logfilestate__split_fields30) and
-  ((logfilestate__split_fields24 = logfilestate__split_fields31) and
-  ((logfilestate__split_fields25 = logfilestate__split_fields32) and
-  (logfilestate__split_fields26 = logfilestate__split_fields33)))) and
-  (logfilestate__split_fields27 = logfilestate__split_fields34)))))))
-
-axiom H179 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> (logfilesstatus2 = logfilesstatus3))))
-
-axiom H180 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> (logfiles2 = logfiles3))))
-
-axiom H181 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> (state18 = state22))))
-
-axiom H182 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> (state17 = state21))))
-
-axiom H183 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> (filestate5 = filestate6))))
-
-axiom H184 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> (state16 = state19))))
-
-axiom H185 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> (status6 = status7))))
-
-axiom H186 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) ->
-  ((thestats__split_fields8 = thestats__split_fields12) and
-  ((thestats__split_fields9 = thestats__split_fields13) and
-  ((thestats__split_fields10 = thestats__split_fields14) and
-  (thestats__split_fields11 = thestats__split_fields15)))))))
-
-axiom H187 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> (auditsystemfault2 = auditsystemfault3))))
-
-axiom H188 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> (auditalarm3 = auditalarm4))))
-
-axiom H189 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) ->
-  ((logfilestate__split_fields21 = logfilestate__split_fields28) and
-  ((logfilestate__split_fields22 = logfilestate__split_fields29) and
-  (((logfilestate__split_fields23 = logfilestate__split_fields30) and
-  ((logfilestate__split_fields24 = logfilestate__split_fields31) and
-  ((logfilestate__split_fields25 = logfilestate__split_fields32) and
-  (logfilestate__split_fields26 = logfilestate__split_fields33)))) and
-  (logfilestate__split_fields27 = logfilestate__split_fields34)))))))
-
-axiom H190 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> (logfilesstatus2 = logfilesstatus3))))
-
-axiom H191 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((not (localstatus1 = 3)) -> (logfiles2 = logfiles3))))
-
-axiom H192 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  (state15 = state18)))
-
-axiom H193 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  (state14 = state17)))
-
-axiom H194 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  (filestate4 = filestate5)))
-
-axiom H195 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  (state13 = state16)))
-
-axiom H196 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  (status5 = status6)))
-
-axiom H197 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((thestats__split_fields4 = thestats__split_fields8) and
-  ((thestats__split_fields5 = thestats__split_fields9) and
-  ((thestats__split_fields6 = thestats__split_fields10) and
-  (thestats__split_fields7 = thestats__split_fields11))))))
-
-axiom H198 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  (auditsystemfault1 = auditsystemfault2)))
-
-axiom H199 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  (auditalarm2 = auditalarm3)))
-
-axiom H200 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((logfilestate__split_fields14 = logfilestate__split_fields21) and
-  ((logfilestate__split_fields15 = logfilestate__split_fields22) and
-  (((logfilestate__split_fields16 = logfilestate__split_fields23) and
-  ((logfilestate__split_fields17 = logfilestate__split_fields24) and
-  ((logfilestate__split_fields18 = logfilestate__split_fields25) and
-  (logfilestate__split_fields19 = logfilestate__split_fields26)))) and
-  (logfilestate__split_fields20 = logfilestate__split_fields27))))))
-
-axiom H201 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  (logfilesstatus1 = logfilesstatus2)))
-
-axiom H202 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  (logfiles1 = logfiles2)))
-
-axiom H203 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  (state15 = state18)))
-
-axiom H204 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  (state14 = state17)))
-
-axiom H205 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  (filestate4 = filestate5)))
-
-axiom H206 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  (state13 = state16)))
-
-axiom H207 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  (status5 = status6)))
-
-axiom H208 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((thestats__split_fields4 = thestats__split_fields8) and
-  ((thestats__split_fields5 = thestats__split_fields9) and
-  ((thestats__split_fields6 = thestats__split_fields10) and
-  (thestats__split_fields7 = thestats__split_fields11))))))
-
-axiom H209 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  (auditsystemfault1 = auditsystemfault2)))
-
-axiom H210 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  (auditalarm2 = auditalarm3)))
-
-axiom H211 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  ((logfilestate__split_fields14 = logfilestate__split_fields21) and
-  ((logfilestate__split_fields15 = logfilestate__split_fields22) and
-  (((logfilestate__split_fields16 = logfilestate__split_fields23) and
-  ((logfilestate__split_fields17 = logfilestate__split_fields24) and
-  ((logfilestate__split_fields18 = logfilestate__split_fields25) and
-  (logfilestate__split_fields19 = logfilestate__split_fields26)))) and
-  (logfilestate__split_fields20 = logfilestate__split_fields27))))))
-
-axiom H212 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  (logfilesstatus1 = logfilesstatus2)))
-
-axiom H213 : ((not (localstatus1 = 1)) -> ((not (localstatus1 = 2)) ->
-  (logfiles1 = logfiles2)))
-
-axiom H214 : ((not (localstatus1 = 1)) -> (status4 = status8))
-
-axiom H215 : ((not (localstatus1 = 1)) -> (state12 = state15))
-
-axiom H216 : ((not (localstatus1 = 1)) -> (state11 = state14))
-
-axiom H217 : ((not (localstatus1 = 1)) -> (filestate3 = filestate4))
-
-axiom H218 : ((not (localstatus1 = 1)) -> (state10 = state13))
-
-axiom H219 : ((not (localstatus1 = 1)) ->
-  ((fingertimeout__split_fields8 = fingertimeout__split_fields) and
-  ((fingertimeout__split_fields9 = fingertimeout__split_fields1) and
-  ((fingertimeout__split_fields10 = fingertimeout__split_fields2) and
-  (fingertimeout__split_fields11 = fingertimeout__split_fields3)))))
-
-axiom H220 : ((not (localstatus1 = 1)) -> (status3 = status5))
-
-axiom H221 : ((not (localstatus1 = 1)) ->
-  ((thestats__split_fields = thestats__split_fields4) and
-  ((thestats__split_fields1 = thestats__split_fields5) and
-  ((thestats__split_fields2 = thestats__split_fields6) and
-  (thestats__split_fields3 = thestats__split_fields7)))))
-
-axiom H222 : ((not (localstatus1 = 1)) ->
-  (auditsystemfault = auditsystemfault1))
-
-axiom H223 : ((not (localstatus1 = 1)) -> (auditalarm1 = auditalarm2))
-
-axiom H224 : ((not (localstatus1 = 1)) ->
-  ((logfilestate__split_fields7 = logfilestate__split_fields14) and
-  ((logfilestate__split_fields8 = logfilestate__split_fields15) and
-  (((logfilestate__split_fields9 = logfilestate__split_fields16) and
-  ((logfilestate__split_fields10 = logfilestate__split_fields17) and
-  ((logfilestate__split_fields11 = logfilestate__split_fields18) and
-  (logfilestate__split_fields12 = logfilestate__split_fields19)))) and
-  (logfilestate__split_fields13 = logfilestate__split_fields20)))))
-
-axiom H225 : ((not (localstatus1 = 1)) -> (logfilesstatus = logfilesstatus1))
-
-axiom H226 : ((not (localstatus1 = 1)) -> (logfiles = logfiles1))
-
-axiom H227 : ((not (localstatus1 = 1)) -> (status4 = status8))
-
-axiom H228 : ((not (localstatus1 = 1)) -> (state12 = state15))
-
-axiom H229 : ((not (localstatus1 = 1)) -> (state11 = state14))
-
-axiom H230 : ((not (localstatus1 = 1)) -> (filestate3 = filestate4))
-
-axiom H231 : ((not (localstatus1 = 1)) -> (state10 = state13))
-
-axiom H232 : ((not (localstatus1 = 1)) ->
-  ((fingertimeout__split_fields8 = fingertimeout__split_fields4) and
-  ((fingertimeout__split_fields9 = fingertimeout__split_fields5) and
-  ((fingertimeout__split_fields10 = fingertimeout__split_fields6) and
-  (fingertimeout__split_fields11 = fingertimeout__split_fields7)))))
-
-axiom H233 : ((not (localstatus1 = 1)) -> (status3 = status5))
-
-axiom H234 : ((not (localstatus1 = 1)) ->
-  ((thestats__split_fields = thestats__split_fields4) and
-  ((thestats__split_fields1 = thestats__split_fields5) and
-  ((thestats__split_fields2 = thestats__split_fields6) and
-  (thestats__split_fields3 = thestats__split_fields7)))))
-
-axiom H235 : ((not (localstatus1 = 1)) ->
-  (auditsystemfault = auditsystemfault1))
-
-axiom H236 : ((not (localstatus1 = 1)) -> (auditalarm1 = auditalarm2))
-
-axiom H237 : ((not (localstatus1 = 1)) ->
-  ((logfilestate__split_fields7 = logfilestate__split_fields14) and
-  ((logfilestate__split_fields8 = logfilestate__split_fields15) and
-  (((logfilestate__split_fields9 = logfilestate__split_fields16) and
-  ((logfilestate__split_fields10 = logfilestate__split_fields17) and
-  ((logfilestate__split_fields11 = logfilestate__split_fields18) and
-  (logfilestate__split_fields12 = logfilestate__split_fields19)))) and
-  (logfilestate__split_fields13 = logfilestate__split_fields20)))))
-
-axiom H238 : ((not (localstatus1 = 1)) -> (logfilesstatus = logfilesstatus1))
-
-axiom H239 : ((not (localstatus1 = 1)) -> (logfiles = logfiles1))
-
-axiom H240 : (output3 = output2)
-
-axiom H241 : (status13 = status4)
-
-axiom H242 : (state39 = state12)
-
-axiom H243 : (state38 = state11)
-
-axiom H244 : (state37 = state20)
-
-axiom H245 : (filestate12 = filestate7)
-
-axiom H246 : (state36 = state28)
-
-axiom H247 : (state35 = state27)
-
-axiom H248 : (filestate11 = filestate3)
-
-axiom H249 : (state34 = state10)
-
-axiom H250 : (localstatus2 = localstatus1)
-
-axiom H251 :
-  ((tokenremovaltimeout__split_fields12 = tokenremovaltimeout__split_fields8) and
-  ((tokenremovaltimeout__split_fields13 = tokenremovaltimeout__split_fields9) and
-  ((tokenremovaltimeout__split_fields14 = tokenremovaltimeout__split_fields10) and
-  (tokenremovaltimeout__split_fields15 = tokenremovaltimeout__split_fields11))))
-
-axiom H252 :
-  ((fingertimeout__split_fields12 = fingertimeout__split_fields8) and
-  ((fingertimeout__split_fields13 = fingertimeout__split_fields9) and
-  ((fingertimeout__split_fields14 = fingertimeout__split_fields10) and
-  (fingertimeout__split_fields15 = fingertimeout__split_fields11))))
-
-axiom H253 : (status12 = status3)
-
-axiom H254 : ((thestats__split_fields28 = thestats__split_fields) and
-  ((thestats__split_fields29 = thestats__split_fields1) and
-  ((thestats__split_fields30 = thestats__split_fields2) and
-  (thestats__split_fields31 = thestats__split_fields3))))
-
-axiom H255 :
-  ((latchtimeout__split_fields12 = latchtimeout__split_fields8) and
-  ((latchtimeout__split_fields13 = latchtimeout__split_fields9) and
-  ((latchtimeout__split_fields14 = latchtimeout__split_fields10) and
-  (latchtimeout__split_fields15 = latchtimeout__split_fields11))))
-
-axiom H256 : (currentlatch3 = currentlatch2)
-
-axiom H257 : (auditsystemfault7 = auditsystemfault)
-
-axiom H258 : (auditalarm8 = auditalarm1)
-
-axiom H259 :
-  ((logfilestate__split_fields56 = logfilestate__split_fields7) and
-  ((logfilestate__split_fields57 = logfilestate__split_fields8) and
-  (((logfilestate__split_fields58 = logfilestate__split_fields9) and
-  ((logfilestate__split_fields59 = logfilestate__split_fields10) and
-  ((logfilestate__split_fields60 = logfilestate__split_fields11) and
-  (logfilestate__split_fields61 = logfilestate__split_fields12)))) and
-  (logfilestate__split_fields62 = logfilestate__split_fields13))))
-
-axiom H260 : (logfilesstatus7 = logfilesstatus)
-
-axiom H261 : (logfiles7 = logfiles)
-
-axiom H262 : (output4 = output2)
-
-axiom H263 : (status15 = status4)
-
-axiom H264 : (state45 = state12)
-
-axiom H265 : (state44 = state11)
-
-axiom H266 : (state43 = state20)
-
-axiom H267 : (filestate14 = filestate7)
-
-axiom H268 : (state42 = state28)
-
-axiom H269 : (state41 = state27)
-
-axiom H270 : (filestate13 = filestate3)
-
-axiom H271 : (state40 = state10)
-
-axiom H272 : (localstatus3 = localstatus1)
-
-axiom H273 :
-  ((tokenremovaltimeout__split_fields16 = tokenremovaltimeout__split_fields8) and
-  ((tokenremovaltimeout__split_fields17 = tokenremovaltimeout__split_fields9) and
-  ((tokenremovaltimeout__split_fields18 = tokenremovaltimeout__split_fields10) and
-  (tokenremovaltimeout__split_fields19 = tokenremovaltimeout__split_fields11))))
-
-axiom H274 :
-  ((fingertimeout__split_fields16 = fingertimeout__split_fields8) and
-  ((fingertimeout__split_fields17 = fingertimeout__split_fields9) and
-  ((fingertimeout__split_fields18 = fingertimeout__split_fields10) and
-  (fingertimeout__split_fields19 = fingertimeout__split_fields11))))
-
-axiom H275 : (status14 = status3)
-
-axiom H276 : ((thestats__split_fields32 = thestats__split_fields) and
-  ((thestats__split_fields33 = thestats__split_fields1) and
-  ((thestats__split_fields34 = thestats__split_fields2) and
-  (thestats__split_fields35 = thestats__split_fields3))))
-
-axiom H277 :
-  ((latchtimeout__split_fields16 = latchtimeout__split_fields8) and
-  ((latchtimeout__split_fields17 = latchtimeout__split_fields9) and
-  ((latchtimeout__split_fields18 = latchtimeout__split_fields10) and
-  (latchtimeout__split_fields19 = latchtimeout__split_fields11))))
-
-axiom H278 : (currentlatch4 = currentlatch2)
-
-axiom H279 : (auditsystemfault8 = auditsystemfault)
-
-axiom H280 : (auditalarm9 = auditalarm1)
-
-axiom H281 :
-  ((logfilestate__split_fields63 = logfilestate__split_fields7) and
-  ((logfilestate__split_fields64 = logfilestate__split_fields8) and
-  (((logfilestate__split_fields65 = logfilestate__split_fields9) and
-  ((logfilestate__split_fields66 = logfilestate__split_fields10) and
-  ((logfilestate__split_fields67 = logfilestate__split_fields11) and
-  (logfilestate__split_fields68 = logfilestate__split_fields12)))) and
-  (logfilestate__split_fields69 = logfilestate__split_fields13))))
-
-axiom H282 : (logfilesstatus8 = logfilesstatus)
-
-axiom H283 : (logfiles8 = logfiles)
-
-axiom H284 : (islocked(currentlatch3, state35, { rec__clock__timet__year =
-  latchtimeout__split_fields12; rec__clock__timet__month =
-  latchtimeout__split_fields13; rec__clock__timet__day =
-  latchtimeout__split_fields14; rec__clock__timet__millisec =
-  latchtimeout__split_fields15 }) = true)
-
-axiom H285 : (thecurrentdoor(state36) = 0)
-
-axiom H286 : (greaterthanorequal(thecurrenttime({ rec__clock__timet__year =
+  in_range17(status3)) and (((output2 = output) and ((state18 = state2) and
+  ((filestate6 = filestate) and ((state26 = state1) and
+  ((state25 = state) and ((tokenremovaltimeout__split_fields8 = {
+  rec__clock__timet__year = tokenremovaltimeout__split_fields;
+  rec__clock__timet__month = tokenremovaltimeout__split_fields1;
+  rec__clock__timet__day = tokenremovaltimeout__split_fields2;
+  rec__clock__timet__millisec = tokenremovaltimeout__split_fields3 }) and
+  ((latchtimeout__split_fields8 = { rec__clock__timet__year =
+  latchtimeout__split_fields; rec__clock__timet__month =
+  latchtimeout__split_fields1; rec__clock__timet__day =
+  latchtimeout__split_fields2; rec__clock__timet__millisec =
+  latchtimeout__split_fields3 }) and
+  (currentlatch2 = currentlatch)))))))) and ((output2 = output1) and
+  ((state18 = state7) and ((filestate6 = filestate1) and
+  ((state26 = state6) and ((state25 = state5) and
+  ((tokenremovaltimeout__split_fields8 = { rec__clock__timet__year =
+  tokenremovaltimeout__split_fields4; rec__clock__timet__month =
+  tokenremovaltimeout__split_fields5; rec__clock__timet__day =
+  tokenremovaltimeout__split_fields6; rec__clock__timet__millisec =
+  tokenremovaltimeout__split_fields7 }) and ((latchtimeout__split_fields8 = {
+  rec__clock__timet__year = latchtimeout__split_fields4;
+  rec__clock__timet__month = latchtimeout__split_fields5;
+  rec__clock__timet__day = latchtimeout__split_fields6;
+  rec__clock__timet__millisec = latchtimeout__split_fields7 }) and
+  (currentlatch2 = currentlatch1))))))))))) or ((not (localstatus1 = 1)) and
+  ((((localstatus1 = 2) and
+  ((((valid_numberlogentries(to_rep4((logfilestate__split_fields14).rec__auditlog__logfilestatet__currentlogfile),
+  to_rep5((logfilestate__split_fields14).rec__auditlog__logfilestatet__numberlogentries),
+  (logfilestate__split_fields14).rec__auditlog__logfilestatet__usedlogfiles,
+  (logfilestate__split_fields14).rec__auditlog__logfilestatet__logfileentries) = true) and
+  in_range1(auditalarm2)) and in_range17(status5)) and
+  (((output2 = output) and ((status8 = status1) and ((state18 = state2) and
+  ((filestate6 = filestate) and ((state26 = state1) and
+  ((state25 = state) and ((tokenremovaltimeout__split_fields8 = {
+  rec__clock__timet__year = tokenremovaltimeout__split_fields;
+  rec__clock__timet__month = tokenremovaltimeout__split_fields1;
+  rec__clock__timet__day = tokenremovaltimeout__split_fields2;
+  rec__clock__timet__millisec = tokenremovaltimeout__split_fields3 }) and
+  ((latchtimeout__split_fields8 = { rec__clock__timet__year =
+  latchtimeout__split_fields; rec__clock__timet__month =
+  latchtimeout__split_fields1; rec__clock__timet__day =
+  latchtimeout__split_fields2; rec__clock__timet__millisec =
+  latchtimeout__split_fields3 }) and
+  (currentlatch2 = currentlatch))))))))) and ((output2 = output1) and
+  ((status8 = status2) and ((state18 = state7) and
+  ((filestate6 = filestate1) and ((state26 = state6) and
+  ((state25 = state5) and ((tokenremovaltimeout__split_fields8 = {
+  rec__clock__timet__year = tokenremovaltimeout__split_fields4;
+  rec__clock__timet__month = tokenremovaltimeout__split_fields5;
+  rec__clock__timet__day = tokenremovaltimeout__split_fields6;
+  rec__clock__timet__millisec = tokenremovaltimeout__split_fields7 }) and
+  ((latchtimeout__split_fields8 = { rec__clock__timet__year =
+  latchtimeout__split_fields4; rec__clock__timet__month =
+  latchtimeout__split_fields5; rec__clock__timet__day =
+  latchtimeout__split_fields6; rec__clock__timet__millisec =
+  latchtimeout__split_fields7 }) and
+  (currentlatch2 = currentlatch1)))))))))))) or ((not (localstatus1 = 2)) and
+  ((((localstatus1 = 3) and
+  ((((valid_numberlogentries(to_rep4((logfilestate__split_fields15).rec__auditlog__logfilestatet__currentlogfile),
+  to_rep5((logfilestate__split_fields15).rec__auditlog__logfilestatet__numberlogentries),
+  (logfilestate__split_fields15).rec__auditlog__logfilestatet__usedlogfiles,
+  (logfilestate__split_fields15).rec__auditlog__logfilestatet__logfileentries) = true) and
+  in_range1(auditalarm3)) and in_range17(status6)) and
+  (((output2 = output) and ((status8 = status1) and ((state18 = state2) and
+  ((filestate6 = filestate) and ((state26 = state1) and
+  ((state25 = state) and ((tokenremovaltimeout__split_fields8 = {
+  rec__clock__timet__year = tokenremovaltimeout__split_fields;
+  rec__clock__timet__month = tokenremovaltimeout__split_fields1;
+  rec__clock__timet__day = tokenremovaltimeout__split_fields2;
+  rec__clock__timet__millisec = tokenremovaltimeout__split_fields3 }) and
+  ((latchtimeout__split_fields8 = { rec__clock__timet__year =
+  latchtimeout__split_fields; rec__clock__timet__month =
+  latchtimeout__split_fields1; rec__clock__timet__day =
+  latchtimeout__split_fields2; rec__clock__timet__millisec =
+  latchtimeout__split_fields3 }) and
+  (currentlatch2 = currentlatch))))))))) and ((output2 = output1) and
+  ((status8 = status2) and ((state18 = state7) and
+  ((filestate6 = filestate1) and ((state26 = state6) and
+  ((state25 = state5) and ((tokenremovaltimeout__split_fields8 = {
+  rec__clock__timet__year = tokenremovaltimeout__split_fields4;
+  rec__clock__timet__month = tokenremovaltimeout__split_fields5;
+  rec__clock__timet__day = tokenremovaltimeout__split_fields6;
+  rec__clock__timet__millisec = tokenremovaltimeout__split_fields7 }) and
+  ((latchtimeout__split_fields8 = { rec__clock__timet__year =
+  latchtimeout__split_fields4; rec__clock__timet__month =
+  latchtimeout__split_fields5; rec__clock__timet__day =
+  latchtimeout__split_fields6; rec__clock__timet__millisec =
+  latchtimeout__split_fields7 }) and
+  (currentlatch2 = currentlatch1)))))))))))) or ((not (localstatus1 = 3)) and
+  ((((localstatus1 = 4) and
+  ((((valid_numberlogentries(to_rep4((logfilestate__split_fields16).rec__auditlog__logfilestatet__currentlogfile),
+  to_rep5((logfilestate__split_fields16).rec__auditlog__logfilestatet__numberlogentries),
+  (logfilestate__split_fields16).rec__auditlog__logfilestatet__usedlogfiles,
+  (logfilestate__split_fields16).rec__auditlog__logfilestatet__logfileentries) = true) and
+  in_range1(auditalarm4)) and in_range17(status7)) and
+  (((state26 = state1) and ((state25 = state) and
+  ((tokenremovaltimeout__split_fields8 = { rec__clock__timet__year =
+  tokenremovaltimeout__split_fields; rec__clock__timet__month =
+  tokenremovaltimeout__split_fields1; rec__clock__timet__day =
+  tokenremovaltimeout__split_fields2; rec__clock__timet__millisec =
+  tokenremovaltimeout__split_fields3 }) and ((latchtimeout__split_fields8 = {
+  rec__clock__timet__year = latchtimeout__split_fields;
+  rec__clock__timet__month = latchtimeout__split_fields1;
+  rec__clock__timet__day = latchtimeout__split_fields2;
+  rec__clock__timet__millisec = latchtimeout__split_fields3 }) and
+  (currentlatch2 = currentlatch))))) and ((state26 = state6) and
+  ((state25 = state5) and ((tokenremovaltimeout__split_fields8 = {
+  rec__clock__timet__year = tokenremovaltimeout__split_fields4;
+  rec__clock__timet__month = tokenremovaltimeout__split_fields5;
+  rec__clock__timet__day = tokenremovaltimeout__split_fields6;
+  rec__clock__timet__millisec = tokenremovaltimeout__split_fields7 }) and
+  ((latchtimeout__split_fields8 = { rec__clock__timet__year =
+  latchtimeout__split_fields4; rec__clock__timet__month =
+  latchtimeout__split_fields5; rec__clock__timet__day =
+  latchtimeout__split_fields6; rec__clock__timet__millisec =
+  latchtimeout__split_fields7 }) and
+  (currentlatch2 = currentlatch1)))))))) or ((not (localstatus1 = 4)) and
+  ((((localstatus1 = 5) and
+  ((((valid_numberlogentries(to_rep4((logfilestate__split_fields17).rec__auditlog__logfilestatet__currentlogfile),
+  to_rep5((logfilestate__split_fields17).rec__auditlog__logfilestatet__numberlogentries),
+  (logfilestate__split_fields17).rec__auditlog__logfilestatet__usedlogfiles,
+  (logfilestate__split_fields17).rec__auditlog__logfilestatet__logfileentries) = true) and
+  in_range1(auditalarm5)) and in_range17(status9)) and
+  (((state26 = state1) and ((state25 = state) and
+  ((latchtimeout__split_fields8 = { rec__clock__timet__year =
+  latchtimeout__split_fields; rec__clock__timet__month =
+  latchtimeout__split_fields1; rec__clock__timet__day =
+  latchtimeout__split_fields2; rec__clock__timet__millisec =
+  latchtimeout__split_fields3 }) and (currentlatch2 = currentlatch)))) and
+  ((state26 = state6) and ((state25 = state5) and
+  ((latchtimeout__split_fields8 = { rec__clock__timet__year =
+  latchtimeout__split_fields4; rec__clock__timet__month =
+  latchtimeout__split_fields5; rec__clock__timet__day =
+  latchtimeout__split_fields6; rec__clock__timet__millisec =
+  latchtimeout__split_fields7 }) and (currentlatch2 = currentlatch1))))))) or
+  ((not (localstatus1 = 5)) and ((((localstatus1 = 6) and
+  (((((islocked(currentlatch2, state25,
+  latchtimeout__split_fields8) = true) and (thecurrentdoor(state26) = 0)) and
+  (greaterthanorequal(thecurrenttime({ rec__clock__timet__year =
   currenttimevar__split_fields; rec__clock__timet__month =
   currenttimevar__split_fields1; rec__clock__timet__day =
   currenttimevar__split_fields2; rec__clock__timet__millisec =
   currenttimevar__split_fields3 }, currenttime),
-  alarm_timeout(state36)) = true)
-
- (* File "userentry.adb", line 1000, characters 0-0 *)
-goal WP_parameter_def : (thedooralarm(state36) = 0)
+  alarm_timeout(state26)) = true)) <-> (thedooralarm(state26) = 0)) and
+  ((((valid_numberlogentries(to_rep4((logfilestate__split_fields18).rec__auditlog__logfilestatet__currentlogfile),
+  to_rep5((logfilestate__split_fields18).rec__auditlog__logfilestatet__numberlogentries),
+  (logfilestate__split_fields18).rec__auditlog__logfilestatet__usedlogfiles,
+  (logfilestate__split_fields18).rec__auditlog__logfilestatet__logfileentries) = true) and
+  in_range1(auditalarm6)) and in_range17(status10)) and
+  in_range11(currentlatch2)))) or ((not (localstatus1 = 6)) and
+  ((((valid_numberlogentries(to_rep4((logfilestate__split_fields19).rec__auditlog__logfilestatet__currentlogfile),
+  to_rep5((logfilestate__split_fields19).rec__auditlog__logfilestatet__numberlogentries),
+  (logfilestate__split_fields19).rec__auditlog__logfilestatet__usedlogfiles,
+  (logfilestate__split_fields19).rec__auditlog__logfilestatet__logfileentries) = true) and
+  in_range1(auditalarm7)) and in_range17(status11)) and
+  (((state28 = state31) and ((state27 = state30) and ((state26 = state1) and
+  ((state25 = state) and ((filestate8 = filestate9) and
+  ((state24 = state29) and ((status10 = status11) and
+  ((thestats__split_fields5 = thestats__split_fields6) and
+  ((latchtimeout__split_fields8 = { rec__clock__timet__year =
+  latchtimeout__split_fields; rec__clock__timet__month =
+  latchtimeout__split_fields1; rec__clock__timet__day =
+  latchtimeout__split_fields2; rec__clock__timet__millisec =
+  latchtimeout__split_fields3 }) and ((currentlatch2 = currentlatch) and
+  ((auditsystemfault5 = auditsystemfault6) and
+  ((auditalarm6 = auditalarm7) and
+  ((logfilestate__split_fields18 = logfilestate__split_fields19) and
+  ((logfilesstatus5 = logfilesstatus6) and
+  (logfiles5 = logfiles6))))))))))))))) and ((state28 = state31) and
+  ((state27 = state30) and ((state26 = state6) and ((state25 = state5) and
+  ((filestate8 = filestate9) and ((state24 = state29) and
+  ((status10 = status11) and
+  ((thestats__split_fields5 = thestats__split_fields6) and
+  ((latchtimeout__split_fields8 = { rec__clock__timet__year =
+  latchtimeout__split_fields4; rec__clock__timet__month =
+  latchtimeout__split_fields5; rec__clock__timet__day =
+  latchtimeout__split_fields6; rec__clock__timet__millisec =
+  latchtimeout__split_fields7 }) and ((currentlatch2 = currentlatch1) and
+  ((auditsystemfault5 = auditsystemfault6) and
+  ((auditalarm6 = auditalarm7) and
+  ((logfilestate__split_fields18 = logfilestate__split_fields19) and
+  ((logfilesstatus5 = logfilesstatus6) and
+  (logfiles5 = logfiles6))))))))))))))))))) and (((state23 = state28) and
+  ((state22 = state27) and ((filestate7 = filestate8) and
+  ((state21 = state24) and ((tokenremovaltimeout__split_fields8 = {
+  rec__clock__timet__year = tokenremovaltimeout__split_fields;
+  rec__clock__timet__month = tokenremovaltimeout__split_fields1;
+  rec__clock__timet__day = tokenremovaltimeout__split_fields2;
+  rec__clock__timet__millisec = tokenremovaltimeout__split_fields3 }) and
+  ((status9 = status10) and
+  ((thestats__split_fields4 = thestats__split_fields5) and
+  ((auditsystemfault4 = auditsystemfault5) and
+  ((auditalarm5 = auditalarm6) and
+  ((logfilestate__split_fields17 = logfilestate__split_fields18) and
+  ((logfilesstatus4 = logfilesstatus5) and
+  (logfiles4 = logfiles5)))))))))))) and ((state23 = state28) and
+  ((state22 = state27) and ((filestate7 = filestate8) and
+  ((state21 = state24) and ((tokenremovaltimeout__split_fields8 = {
+  rec__clock__timet__year = tokenremovaltimeout__split_fields4;
+  rec__clock__timet__month = tokenremovaltimeout__split_fields5;
+  rec__clock__timet__day = tokenremovaltimeout__split_fields6;
+  rec__clock__timet__millisec = tokenremovaltimeout__split_fields7 }) and
+  ((status9 = status10) and
+  ((thestats__split_fields4 = thestats__split_fields5) and
+  ((auditsystemfault4 = auditsystemfault5) and
+  ((auditalarm5 = auditalarm6) and
+  ((logfilestate__split_fields17 = logfilestate__split_fields18) and
+  ((logfilesstatus4 = logfilesstatus5) and
+  (logfiles4 = logfiles5)))))))))))))))) and (((output2 = output) and
+  ((status8 = status1) and ((state20 = state23) and ((state19 = state22) and
+  ((state18 = state2) and ((filestate6 = filestate) and
+  ((filestate5 = filestate7) and ((state17 = state21) and
+  ((status7 = status9) and
+  ((thestats__split_fields3 = thestats__split_fields4) and
+  ((auditsystemfault3 = auditsystemfault4) and
+  ((auditalarm4 = auditalarm5) and
+  ((logfilestate__split_fields16 = logfilestate__split_fields17) and
+  ((logfilesstatus3 = logfilesstatus4) and
+  (logfiles3 = logfiles4))))))))))))))) and ((output2 = output1) and
+  ((status8 = status2) and ((state20 = state23) and ((state19 = state22) and
+  ((state18 = state7) and ((filestate6 = filestate1) and
+  ((filestate5 = filestate7) and ((state17 = state21) and
+  ((status7 = status9) and
+  ((thestats__split_fields3 = thestats__split_fields4) and
+  ((auditsystemfault3 = auditsystemfault4) and
+  ((auditalarm4 = auditalarm5) and
+  ((logfilestate__split_fields16 = logfilestate__split_fields17) and
+  ((logfilesstatus3 = logfilesstatus4) and
+  (logfiles3 = logfiles4))))))))))))))))))) and ((state16 = state20) and
+  ((state15 = state19) and ((filestate4 = filestate5) and
+  ((state14 = state17) and ((status6 = status7) and
+  ((thestats__split_fields2 = thestats__split_fields3) and
+  ((auditsystemfault2 = auditsystemfault3) and
+  ((auditalarm3 = auditalarm4) and
+  ((logfilestate__split_fields15 = logfilestate__split_fields16) and
+  ((logfilesstatus2 = logfilesstatus3) and
+  (logfiles2 = logfiles3)))))))))))))) and ((state13 = state16) and
+  ((state12 = state15) and ((filestate3 = filestate4) and
+  ((state11 = state14) and ((status5 = status6) and
+  ((thestats__split_fields1 = thestats__split_fields2) and
+  ((auditsystemfault1 = auditsystemfault2) and
+  ((auditalarm2 = auditalarm3) and
+  ((logfilestate__split_fields14 = logfilestate__split_fields15) and
+  ((logfilesstatus1 = logfilesstatus2) and
+  (logfiles1 = logfiles2)))))))))))))) and (((status4 = status8) and
+  ((state10 = state13) and ((state9 = state12) and
+  ((filestate2 = filestate3) and ((state8 = state11) and
+  ((fingertimeout__split_fields8 = { rec__clock__timet__year =
+  fingertimeout__split_fields; rec__clock__timet__month =
+  fingertimeout__split_fields1; rec__clock__timet__day =
+  fingertimeout__split_fields2; rec__clock__timet__millisec =
+  fingertimeout__split_fields3 }) and ((status3 = status5) and
+  ((thestats__split_fields = thestats__split_fields1) and
+  ((auditsystemfault = auditsystemfault1) and
+  ((auditalarm1 = auditalarm2) and (({
+  rec__auditlog__logfilestatet__currentlogfile = logfilestate__split_fields7;
+  rec__auditlog__logfilestatet__numberlogentries =
+  logfilestate__split_fields8; rec__auditlog__logfilestatet__usedlogfiles = {
+  us_split_fields3 = { rec__auditlog__logfilelistt__list =
+  logfilestate__split_fields9; rec__auditlog__logfilelistt__head =
+  logfilestate__split_fields10; rec__auditlog__logfilelistt__lasti =
+  logfilestate__split_fields11; rec__auditlog__logfilelistt__length =
+  logfilestate__split_fields12 } };
+  rec__auditlog__logfilestatet__logfileentries = logfilestate__split_fields13
+  } = logfilestate__split_fields14) and
+  ((logfilesstatus = logfilesstatus1) and
+  (logfiles = logfiles1))))))))))))) and ((status4 = status8) and
+  ((state10 = state13) and ((state9 = state12) and
+  ((filestate2 = filestate3) and ((state8 = state11) and
+  ((fingertimeout__split_fields8 = { rec__clock__timet__year =
+  fingertimeout__split_fields4; rec__clock__timet__month =
+  fingertimeout__split_fields5; rec__clock__timet__day =
+  fingertimeout__split_fields6; rec__clock__timet__millisec =
+  fingertimeout__split_fields7 }) and ((status3 = status5) and
+  ((thestats__split_fields = thestats__split_fields1) and
+  ((auditsystemfault = auditsystemfault1) and
+  ((auditalarm1 = auditalarm2) and (({
+  rec__auditlog__logfilestatet__currentlogfile = logfilestate__split_fields7;
+  rec__auditlog__logfilestatet__numberlogentries =
+  logfilestate__split_fields8; rec__auditlog__logfilestatet__usedlogfiles = {
+  us_split_fields3 = { rec__auditlog__logfilelistt__list =
+  logfilestate__split_fields9; rec__auditlog__logfilelistt__head =
+  logfilestate__split_fields10; rec__auditlog__logfilelistt__lasti =
+  logfilestate__split_fields11; rec__auditlog__logfilelistt__length =
+  logfilestate__split_fields12 } };
+  rec__auditlog__logfilestatet__logfileentries = logfilestate__split_fields13
+  } = logfilestate__split_fields14) and
+  ((logfilesstatus = logfilesstatus1) and
+  (logfiles = logfiles1))))))))))))))))))) and (((output3 = {
+  us_private__content = output2 }) and ((status13 = { us_private__content =
+  status4 }) and ((state37 = { us_private__content = state10 }) and
+  ((state36 = { us_private__content = state9 }) and ((state35 = {
+  us_private__content = state18 }) and ((filestate11 = {
+  us_private__content = filestate6 }) and ((state34 = { us_private__content =
+  state26 }) and ((state33 = { us_private__content = state25 }) and
+  ((filestate10 = { us_private__content = filestate2 }) and ((state32 = {
+  us_private__content = state8 }) and ((localstatus2 = { int__content =
+  localstatus1 }) and ((tokenremovaltimeout__split_fields9 = {
+  us_split_fields__content = tokenremovaltimeout__split_fields8 }) and
+  ((fingertimeout__split_fields9 = { us_split_fields__content =
+  fingertimeout__split_fields8 }) and ((status12 = { int__content = status3
+  }) and ((thestats__split_fields7 = { us_split_fields__content5 =
+  thestats__split_fields }) and ((latchtimeout__split_fields9 = {
+  us_split_fields__content = latchtimeout__split_fields8 }) and
+  ((currentlatch3 = { int__content = currentlatch2 }) and
+  ((auditsystemfault7 = { bool__content = auditsystemfault }) and
+  ((auditalarm8 = { int__content = auditalarm1 }) and
+  ((logfilestate__split_fields20 = { us_split_fields__content2 = {
+  rec__auditlog__logfilestatet__currentlogfile = logfilestate__split_fields7;
+  rec__auditlog__logfilestatet__numberlogentries =
+  logfilestate__split_fields8; rec__auditlog__logfilestatet__usedlogfiles = {
+  us_split_fields3 = { rec__auditlog__logfilelistt__list =
+  logfilestate__split_fields9; rec__auditlog__logfilelistt__head =
+  logfilestate__split_fields10; rec__auditlog__logfilelistt__lasti =
+  logfilestate__split_fields11; rec__auditlog__logfilelistt__length =
+  logfilestate__split_fields12 } };
+  rec__auditlog__logfilestatet__logfileentries = logfilestate__split_fields13
+  } }) and ((logfilesstatus7 = { map__content3 = logfilesstatus }) and
+  (logfiles7 = { map__content2 = logfiles })))))))))))))))))))))) and
+  ((output4 = output2) and ((status15 = status4) and ((state43 = state10) and
+  ((state42 = state9) and ((state41 = state18) and
+  ((filestate13 = filestate6) and ((state40 = state26) and
+  ((state39 = state25) and ((filestate12 = filestate2) and
+  ((state38 = state8) and ((localstatus3 = localstatus1) and
+  ((tokenremovaltimeout__split_fields10 = tokenremovaltimeout__split_fields8) and
+  ((fingertimeout__split_fields10 = fingertimeout__split_fields8) and
+  ((status14 = status3) and
+  ((thestats__split_fields8 = thestats__split_fields) and
+  ((latchtimeout__split_fields10 = latchtimeout__split_fields8) and
+  ((currentlatch4 = currentlatch2) and
+  ((auditsystemfault8 = auditsystemfault) and
+  ((auditalarm9 = auditalarm1) and ((logfilestate__split_fields21 = {
+  rec__auditlog__logfilestatet__currentlogfile = logfilestate__split_fields7;
+  rec__auditlog__logfilestatet__numberlogentries =
+  logfilestate__split_fields8; rec__auditlog__logfilestatet__usedlogfiles = {
+  us_split_fields3 = { rec__auditlog__logfilelistt__list =
+  logfilestate__split_fields9; rec__auditlog__logfilelistt__head =
+  logfilestate__split_fields10; rec__auditlog__logfilelistt__lasti =
+  logfilestate__split_fields11; rec__auditlog__logfilelistt__length =
+  logfilestate__split_fields12 } };
+  rec__auditlog__logfilestatet__logfileentries = logfilestate__split_fields13
+  }) and ((logfilesstatus8 = logfilesstatus) and
+  (logfiles8 = logfiles)))))))))))))))))))))))) ->
+  ((((islocked((currentlatch3).int__content, (state33).us_private__content,
+  (latchtimeout__split_fields9).us_split_fields__content) = true) and
+  (thecurrentdoor((state34).us_private__content) = 0)) and
+  (greaterthanorequal(thecurrenttime({ rec__clock__timet__year =
+  currenttimevar__split_fields; rec__clock__timet__month =
+  currenttimevar__split_fields1; rec__clock__timet__day =
+  currenttimevar__split_fields2; rec__clock__timet__millisec =
+  currenttimevar__split_fields3 }, currenttime),
+  alarm_timeout((state34).us_private__content)) = true)) ->
+  (thedooralarm((state34).us_private__content) = 0)))))))))

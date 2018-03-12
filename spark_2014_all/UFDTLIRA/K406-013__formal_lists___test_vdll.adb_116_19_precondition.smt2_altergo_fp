@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1609,567 +1609,126 @@ axiom w_get__post_axiom :
   ((in_range2(witness1) and (has_witness(container, witness1) = true)) ->
   in_range12(w_get(container, witness1)))))
 
-logic l1__split_fields : us_main_type
-
-logic l2__split_fields : us_main_type
-
-logic l3__split_fields : us_main_type
-
-logic l4__split_fields : us_main_type
-
-logic c__split_fields : count_type
-
-logic e__split_fields : count_type
-
-logic e__split_fields1 : count_type
-
-logic e__split_fields2 : count_type
-
-logic e__split_fields3 : count_type
-
-logic e : int
-
-logic e1 : int
-
-logic e2 : int
-
-logic o : count_type
-
-logic o1 : count_type
-
-logic temp___443 : count_type
-
-logic us : int
-
-logic us1 : int
-
-logic us2 : int
-
-logic us3 : int
-
-logic o2 : count_type
-
-logic o3 : us_main_type
-
-logic o4 : count_type
-
-logic o5 : us_main_type
-
-logic temp___405 : count_type
-
-logic temp___4051 : us_main_type
-
-logic o6 : count_type
-
-logic o7 : count_type
-
-logic o8 : count_type
-
-logic o9 : count_type
-
-logic us4 : bool
-
-logic o10 : count_type
-
-logic o11 : count_type
-
-logic o12 : count_type
-
-logic o13 : us_main_type
-
-logic o14 : count_type
-
-logic o15 : us_main_type
-
-logic temp___408 : count_type
-
-logic temp___4081 : us_main_type
-
-logic o16 : count_type
-
-logic temp___409 : count_type
-
-logic o17 : count_type
-
-logic o18 : count_type
-
-logic o19 : count_type
-
-logic o20 : us_main_type
-
-logic o21 : count_type
-
-logic o22 : us_main_type
-
-logic temp___411 : count_type
-
-logic temp___4111 : us_main_type
-
-logic o23 : count_type
-
-logic o24 : count_type
-
-logic o25 : count_type
-
-logic o26 : count_type
-
-logic us5 : bool
-
-logic o27 : count_type
-
-logic o28 : count_type
-
-logic o29 : count_type
-
-logic o30 : count_type
-
-logic o31 : count_type
-
-logic o32 : count_type
-
-logic o33 : count_type
-
-logic o34 : count_type
-
-logic o35 : count_type
-
-logic o36 : count_type
-
-logic o37 : count_type
-
-logic o38 : count_type
-
-logic us6 : bool
-
-logic o39 : count_type
-
-logic o40 : count_type
-
-logic o41 : count_type
-
-logic o42 : count_type
-
-logic us7 : bool
-
-logic o43 : count_type
-
-logic o44 : count_type
-
-logic o45 : count_type
-
-logic o46 : count_type
-
-logic o47 : count_type
-
-logic o48 : count_type
-
-logic o49 : count_type
-
-logic o50 : count_type
-
-logic o51 : count_type
-
-logic o52 : count_type
-
-logic o53 : count_type
-
-logic o54 : count_type
-
-logic o55 : count_type
-
-logic o56 : count_type
-
-logic o57 : count_type
-
-logic o58 : count_type
-
-logic o59 : count_type
-
-logic o60 : count_type
-
-logic o61 : count_type
-
-logic temp___415 : count_type
-
-logic o62 : count_type
-
-logic o63 : us_main_type
-
-logic o64 : count_type
-
-logic o65 : us_main_type
-
-logic temp___418 : count_type
-
-logic temp___4181 : us_main_type
-
-logic o66 : count_type
-
-logic us8 : bool
-
-logic o67 : count_type
-
-logic o68 : count_type
-
-logic o69 : count_type
-
-logic o70 : count_type
-
-logic o71 : count_type
-
-logic o72 : count_type
-
-logic temp___420 : count_type
-
-logic o73 : count_type
-
-logic o74 : us_main_type
-
-logic o75 : count_type
-
-logic o76 : us_main_type
-
-logic temp___423 : count_type
-
-logic temp___4231 : us_main_type
-
-logic o77 : count_type
-
-logic us9 : bool
-
-logic o78 : count_type
-
-logic o79 : count_type
-
-logic o80 : count_type
-
-logic o81 : count_type
-
-logic us10 : bool
-
-logic o82 : count_type
-
-logic o83 : count_type
-
-logic o84 : count_type
-
-logic o85 : count_type
-
-logic o86 : count_type
-
-logic o87 : count_type
-
-logic o88 : count_type
-
-logic temp___427 : count_type
-
-logic o89 : count_type
-
-logic o90 : us_main_type
-
-logic o91 : count_type
-
-logic o92 : us_main_type
-
-logic temp___430 : count_type
-
-logic temp___4301 : us_main_type
-
-logic o93 : count_type
-
-logic us11 : bool
-
-logic o94 : count_type
-
-logic o95 : count_type
-
-logic o96 : count_type
-
-logic o97 : count_type
-
-logic o98 : count_type
-
-logic o99 : count_type
-
-logic temp___432 : count_type
-
-logic temp___438 : int
-
-logic temp___437 : count_type
-
-logic temp___4371 : us_main_type
-
-logic o100 : int
-
-logic o101 : int
-
-logic formal_container__vdll__insert__container__fields : us_main_type
-
-logic result : us_main_type
-
-logic l1__split_fields1 : us_main_type
-
-logic result1 : us_main_type
-
-logic l2__split_fields1 : us_main_type
-
-logic formal_container__vdll__append__container__fields : us_main_type
-
-logic result2 : us_main_type
-
-logic l2__split_fields2 : us_main_type
-
-logic formal_container__vdll__append__container__fields1 : us_main_type
-
-logic result3 : us_main_type
-
-logic l2__split_fields3 : us_main_type
-
-logic result4 : us_main_type
-
-logic l1__split_fields2 : us_main_type
-
-logic result5 : count_type
-
-logic c__split_fields1 : count_type
-
-logic c__split_fields2 : count_type
-
-logic formal_container__vdll__delete__container__fields : us_main_type
-
-logic result6 : us_main_type
-
-logic l2__split_fields4 : us_main_type
-
-logic result7 : us_main_type
-
-logic l1__split_fields3 : us_main_type
-
-logic formal_container__vdll__append__container__fields2 : us_main_type
-
-logic result8 : us_main_type
-
-logic l1__split_fields4 : us_main_type
-
-logic result9 : us_main_type
-
-logic l3__split_fields1 : us_main_type
-
-logic formal_container__vdll__delete_last__container__fields : us_main_type
-
-logic result10 : us_main_type
-
-logic l3__split_fields2 : us_main_type
-
-logic result11 : us_main_type
-
-logic l4__split_fields1 : us_main_type
-
-logic formal_container__vdll__delete_last__2__container__fields : us_main_type
-
-logic result12 : us_main_type
-
-logic l4__split_fields2 : us_main_type
-
-logic result13 : us_main_type
-
-logic l2__split_fields5 : us_main_type
-
-logic formal_container__vdll__delete_last__container__fields1 : us_main_type
-
-logic result14 : us_main_type
-
-logic l2__split_fields6 : us_main_type
-
-logic result15 : us_main_type
-
-logic l3__split_fields3 : us_main_type
-
-logic formal_container__vdll__delete_first__container__fields : us_main_type
-
-logic result16 : us_main_type
-
-logic l3__split_fields4 : us_main_type
-
-logic result17 : us_main_type
-
-logic l4__split_fields3 : us_main_type
-
-logic formal_container__vdll__delete_first__2__container__fields : us_main_type
-
-logic result18 : us_main_type
-
-logic l4__split_fields4 : us_main_type
-
-logic formal_container__vdll__clear__container__fields : us_main_type
-
-logic result19 : us_main_type
-
-logic l1__split_fields5 : us_main_type
-
-logic result20 : int
-
-logic e3 : int
-
-logic l1__split_fields6 : us_main_type
-
-logic e4 : int
-
-logic formal_container__vdll__append__container__fields3 : us_main_type
-
-logic result21 : us_main_type
-
-logic l1__split_fields7 : us_main_type
-
-logic result22 : int
-
-logic e5 : int
-
-logic l1__split_fields8 : us_main_type
-
-logic e6 : int
-
-logic l1__split_fields9 : us_main_type
-
-logic e7 : int
-
-logic l1__split_fields10 : us_main_type
-
-logic e8 : int
-
-logic l1__split_fields11 : us_main_type
-
-logic e9 : int
-
-logic l1__split_fields12 : us_main_type
-
-logic e10 : int
-
-logic l1__split_fields13 : us_main_type
-
-logic e11 : int
-
-logic formal_container__vdll__move__source__fields : us_main_type
-
-logic formal_container__vdll__move__target__fields : us_main_type
-
-logic result23 : us_main_type
-
-logic l2__split_fields7 : us_main_type
-
-logic result24 : us_main_type
-
-logic l1__split_fields14 : us_main_type
-
-axiom H : (to_rep(o) = 0)
-
-axiom H1 : (o1 = o)
-
-axiom H2 : (temp___443 = o1)
-
-axiom H3 : (temp___443 = no_element)
-
-axiom H4 : ((us = 3) and in_range2(3))
-
-axiom H5 : ((to_rep(l1__split_discrs) = 3) and (is_empty({ us_split_discrs1 =
-  { rec__formal_container__vdll__list__capacity = l1__split_discrs };
+ (* File "test_vdll.adb", line 18, characters 0-0 *)
+goal WP_parameter_def :
+  (forall l1__split_fields:us_main_type.
+  forall l2__split_fields:us_main_type. forall l3__split_fields:us_main_type.
+  forall l4__split_fields:us_main_type. forall c__split_fields:count_type.
+  forall e__split_fields:count_type. forall o:count_type.
+  forall o1:count_type. forall temp___489:count_type. forall us:int.
+  forall us1:int. forall us2:int. forall us3:int. forall o2:count_type.
+  forall o3:us_main_type. forall o4:count_type. forall o5:us_main_type.
+  forall temp___451:count_type. forall temp___4511:us_main_type.
+  forall o6:us_rep. forall o7:us_rep. forall temp___454:us_rep.
+  forall o8:us_rep1. forall temp___455:us_rep1. forall o9:us_rep.
+  forall o10:us_rep. forall temp___457:us_rep. forall o11:us_rep.
+  forall o12:us_rep. forall temp___464:us_rep. forall o13:us_rep1.
+  forall formal_container__vdll__insert__container__fields:us_split_fields.
+  forall result:us_split_fields__ref.
+  forall l1__split_fields1:us_split_fields.
+  forall result1:us_split_fields__ref.
+  forall l2__split_fields1:us_split_fields.
+  forall formal_container__vdll__append__container__fields:us_split_fields.
+  forall result2:us_split_fields__ref.
+  forall l2__split_fields2:us_split_fields.
+  forall formal_container__vdll__append__container__fields1:us_split_fields.
+  forall result3:us_split_fields__ref.
+  forall l2__split_fields3:us_split_fields.
+  forall result4:us_split_fields__ref.
+  forall l1__split_fields2:us_split_fields.
+  forall result5:us_split_fields__ref1.
+  forall c__split_fields1:us_split_fields2.
+  forall c__split_fields2:us_split_fields2.
+  forall formal_container__vdll__delete__container__fields:us_split_fields.
+  forall result6:us_split_fields__ref.
+  forall l2__split_fields4:us_split_fields.
+  forall result7:us_split_fields__ref.
+  forall l1__split_fields3:us_split_fields.
+  forall formal_container__vdll__append__container__fields2:us_split_fields.
+  forall result8:us_split_fields__ref.
+  forall l1__split_fields4:us_split_fields.
+  forall result9:us_split_fields__ref.
+  forall l3__split_fields1:us_split_fields.
+  forall formal_container__vdll__delete_last__container__fields:us_split_fields.
+  forall result10:us_split_fields__ref.
+  forall l3__split_fields2:us_split_fields.
+  forall result11:us_split_fields__ref.
+  forall l4__split_fields1:us_split_fields.
+  forall formal_container__vdll__delete_last__2__container__fields:us_split_fields.
+  forall result12:us_split_fields__ref.
+  forall l4__split_fields2:us_split_fields. (((((to_rep(o) = 0) and
+  (o = o1)) and (temp___489 = o1)) and (no_element = temp___489)) ->
+  (((us = 3) and in_range2(3)) -> (((to_rep(l1__split_discrs) = 3) and
+  (is_empty({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l1__split_discrs };
   us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields }
-  }) = true))
-
-axiom H6 : (3 = to_rep(l1__split_discrs))
-
-axiom H7 : ((us1 = 3) and in_range2(3))
-
-axiom H8 : ((to_rep(l2__split_discrs) = 3) and (is_empty({ us_split_discrs1 =
-  { rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields }
-  }) = true))
-
-axiom H9 : (3 = to_rep(l2__split_discrs))
-
-axiom H10 : ((us2 = 3) and in_range2(3))
-
-axiom H11 : ((to_rep(l3__split_discrs) = 3) and (is_empty({
+  }) = true)) -> ((3 = to_rep(l1__split_discrs)) -> (((us1 = 3) and
+  in_range2(3)) -> (((to_rep(l2__split_discrs) = 3) and (is_empty({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l3__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l3__split_fields } }) = true))
-
-axiom H12 : (3 = to_rep(l3__split_discrs))
-
-axiom H13 : ((us3 = 5) and in_range2(5))
-
-axiom H14 : ((to_rep(l4__split_discrs) = 5) and (is_empty({
+  l2__split_discrs }; us_split_fields1 = {
+  rec__formal_container__vdll__list = l2__split_fields } }) = true)) ->
+  ((3 = to_rep(l2__split_discrs)) -> (((us2 = 3) and in_range2(3)) ->
+  (((to_rep(l3__split_discrs) = 3) and (is_empty({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l3__split_discrs };
+  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields }
+  }) = true)) -> ((3 = to_rep(l3__split_discrs)) -> (((us3 = 5) and
+  in_range2(5)) -> (((to_rep(l4__split_discrs) = 5) and (is_empty({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
   l4__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l4__split_fields } }) = true))
-
-axiom H15 : (5 = to_rep(l4__split_discrs))
-
-axiom H16 : (to_rep(c__split_fields) = 0)
-
-axiom H17 : (not (has_key(positions({ us_split_discrs1 = {
+  rec__formal_container__vdll__list = l4__split_fields } }) = true)) ->
+  ((5 = to_rep(l4__split_discrs)) -> ((to_rep(c__split_fields) = 0) ->
+  ((not (has_key(positions({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l1__split_discrs };
   us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields }
   }), first({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l1__split_discrs };
   us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields }
-  })) = true))
-
-axiom H18 : ((length({ us_split_discrs1 = {
+  })) = true)) -> ((((length({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__insert__container__fields } }) = (length({
-  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l1__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l1__split_fields } }) + 1)) and
-  (((bool_eq5({ us_split_fields3 = {
+  us_split_fields1 = formal_container__vdll__insert__container__fields
+  }) = (length({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l1__split_discrs };
+  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields }
+  }) + 1)) and (((bool_eq5({ us_split_fields3 = {
   rec__formal_container__vdll__cursor__node = no_element } }, {
   us_split_fields3 = { rec__formal_container__vdll__cursor__node = no_element
-  } }) = true) -> (((((get1(positions({ us_split_discrs1 = {
+  } }) = true) and (((((get1(positions({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__insert__container__fields } }), last({
+  us_split_fields1 = formal_container__vdll__insert__container__fields }),
+  last({ us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l1__split_discrs }; us_split_fields1 =
+  formal_container__vdll__insert__container__fields })) = length({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l1__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list =
-  formal_container__vdll__insert__container__fields } })) = length({
-  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l1__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list =
-  formal_container__vdll__insert__container__fields } })) and
+  l1__split_discrs }; us_split_fields1 =
+  formal_container__vdll__insert__container__fields })) and
   (keys_included_except(positions({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__insert__container__fields } }), positions({
-  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l1__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l1__split_fields } }), last({
-  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l1__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list =
-  formal_container__vdll__insert__container__fields } })) = true)) and
-  (ole(positions({ us_split_discrs1 = {
+  us_split_fields1 = formal_container__vdll__insert__container__fields }),
+  positions({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l1__split_discrs };
+  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields }
+  }), last({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l1__split_discrs };
+  us_split_fields1 = formal_container__vdll__insert__container__fields
+  })) = true)) and (ole(positions({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l1__split_discrs };
   us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields }
   }), positions({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__insert__container__fields } })) = true)) and
-  (get(model__({ us_split_discrs1 = {
+  us_split_fields1 = formal_container__vdll__insert__container__fields
+  })) = true)) and (get(model__({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__insert__container__fields } }), length({
-  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l1__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list =
-  formal_container__vdll__insert__container__fields } })) = 1)) and
-  (((bool_le(length1(model__({ us_split_discrs1 = {
+  us_split_fields1 = formal_container__vdll__insert__container__fields }),
+  length({ us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l1__split_discrs }; us_split_fields1 =
+  formal_container__vdll__insert__container__fields })) = 1)) and
+  ((bool_le(length1(model__({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l1__split_discrs };
   us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields }
   })), length1(model__({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__insert__container__fields } }))) = true) ->
+  us_split_fields1 = formal_container__vdll__insert__container__fields
+  }))) = true) and
   (forall n:int. (((1 <= n) and (n <= (0 + length1(model__({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
   l1__split_discrs }; us_split_fields1 = {
@@ -2179,19 +1738,11 @@ axiom H18 : ((length({ us_split_discrs1 = {
   us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields }
   }), n) = get(model__({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__insert__container__fields } }), n))))) and
-  (not (bool_le(length1(model__({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields }
-  })), length1(model__({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__insert__container__fields } }))) = false))))) and
-  ((not (bool_eq5({ us_split_fields3 = {
+  us_split_fields1 = formal_container__vdll__insert__container__fields }),
+  n))))))) or ((not (bool_eq5({ us_split_fields3 = {
   rec__formal_container__vdll__cursor__node = no_element } }, {
   us_split_fields3 = { rec__formal_container__vdll__cursor__node = no_element
-  } }) = true)) ->
+  } }) = true)) and
   ((((forall i:int. (((1 <= i) and (i <= (get1(positions({ us_split_discrs1 =
      { rec__formal_container__vdll__list__capacity = l1__split_discrs };
      us_split_fields1 = { rec__formal_container__vdll__list =
@@ -2202,8 +1753,8 @@ axiom H18 : ((length({ us_split_discrs1 = {
      us_split_fields1 = { rec__formal_container__vdll__list =
      l1__split_fields } }), i) = get(model__({ us_split_discrs1 = {
      rec__formal_container__vdll__list__capacity = l1__split_discrs };
-     us_split_fields1 = { rec__formal_container__vdll__list =
-     formal_container__vdll__insert__container__fields } }), i)))) and
+     us_split_fields1 = formal_container__vdll__insert__container__fields }),
+     i)))) and
   ((forall i:int. (((get1(positions({ us_split_discrs1 = {
    rec__formal_container__vdll__list__capacity = l1__split_discrs };
    us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields
@@ -2216,8 +1767,8 @@ axiom H18 : ((length({ us_split_discrs1 = {
    us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields
    } }), i) = get(model__({ us_split_discrs1 = {
    rec__formal_container__vdll__list__capacity = l1__split_discrs };
-   us_split_fields1 = { rec__formal_container__vdll__list =
-   formal_container__vdll__insert__container__fields } }), (i + 1))))) and
+   us_split_fields1 = formal_container__vdll__insert__container__fields }),
+   (i + 1))))) and
   (forall i:int. ((((get1(positions({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l1__split_discrs };
   us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields }
@@ -2230,53 +1781,42 @@ axiom H18 : ((length({ us_split_discrs1 = {
   us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields }
   }), (i - 1)) = get(model__({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__insert__container__fields } }), i)))))) and
-  (get(model__({ us_split_discrs1 = {
+  us_split_fields1 = formal_container__vdll__insert__container__fields }),
+  i)))))) and (get(model__({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__insert__container__fields } }), get1(positions({
-  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l1__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l1__split_fields } }), {
-  us_split_fields3 = { rec__formal_container__vdll__cursor__node = no_element
-  } })) = 1)) and (p_positions_shifted(positions({ us_split_discrs1 = {
+  us_split_fields1 = formal_container__vdll__insert__container__fields }),
+  get1(positions({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l1__split_discrs };
   us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields }
-  }), positions({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__insert__container__fields } }), get1(positions({
+  }), { us_split_fields3 = { rec__formal_container__vdll__cursor__node =
+  no_element } })) = 1)) and (p_positions_shifted(positions({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l1__split_discrs }; us_split_fields1 = {
+  rec__formal_container__vdll__list = l1__split_fields } }), positions({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l1__split_discrs }; us_split_fields1 =
+  formal_container__vdll__insert__container__fields }), get1(positions({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
   l1__split_discrs }; us_split_fields1 = {
   rec__formal_container__vdll__list = l1__split_fields } }), {
   us_split_fields3 = { rec__formal_container__vdll__cursor__node = no_element
-  } }), 1) = true)))))
-
-axiom H19 : (result = l1__split_fields)
-
-axiom H20 :
-  (l1__split_fields1 = formal_container__vdll__insert__container__fields)
-
-axiom H21 : (has_key(positions({ us_split_discrs1 = {
+  } }), 1) = true))))) and ((result = { us_split_fields__content = {
+  rec__formal_container__vdll__list = l1__split_fields } }) and
+  (l1__split_fields1 = formal_container__vdll__insert__container__fields))) ->
+  ((has_key(positions({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields1
-  } }), first({ us_split_discrs1 = {
+  us_split_fields1 = l1__split_fields1 }), first({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields1
-  } })) = true)
-
-axiom H22 : (({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = o2 }; us_split_fields1 = {
-  rec__formal_container__vdll__list = o3 } } = copy({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields1
-  } }, 3)) and (((((bool_eq1(length1(model__({ us_split_discrs1 = {
+  us_split_fields1 = l1__split_fields1 })) = true) -> (((((({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity = o2 };
+  us_split_fields1 = { rec__formal_container__vdll__list = o3 } } = copy({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l1__split_discrs }; us_split_fields1 = l1__split_fields1 }, 3)) and
+  ((((bool_eq1(length1(model__({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = o2 }; us_split_fields1 = {
   rec__formal_container__vdll__list = o3 } })), length1(model__({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l1__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l1__split_fields1 } }))) = true) ->
+  l1__split_discrs }; us_split_fields1 = l1__split_fields1 }))) = true) and
   (forall n:int. (((1 <= n) and (n <= (0 + length1(model__({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity = o2 };
   us_split_fields1 = { rec__formal_container__vdll__list = o3 } }))))) ->
@@ -2284,963 +1824,602 @@ axiom H22 : (({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = o2 }; us_split_fields1 = {
   rec__formal_container__vdll__list = o3 } }), n) = get(model__({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l1__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l1__split_fields1 } }), n))))) and
-  (not (bool_eq1(length1(model__({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = o2 }; us_split_fields1 = {
-  rec__formal_container__vdll__list = o3 } })), length1(model__({
-  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l1__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l1__split_fields1 } }))) = false))) and
+  l1__split_discrs }; us_split_fields1 = l1__split_fields1 }), n))))) and
   (oeq(positions({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = o2 }; us_split_fields1 = {
   rec__formal_container__vdll__list = o3 } }), positions({ us_split_discrs1 =
   { rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields1
-  } })) = true)) and (((3 = 0) ->
-  (to_rep(o2) = to_rep(l1__split_discrs))) and ((not (3 = 0)) ->
-  (to_rep(o2) = 3)))))
-
-axiom H23 : ((o4 = o2) and (o5 = o3))
-
-axiom H24 : ((temp___405 = o4) and (temp___4051 = o5))
-
-axiom H25 : (result1 = l2__split_fields)
-
-axiom H26 : (l2__split_fields1 = temp___4051)
-
-axiom H27 : (l2__split_discrs = temp___405)
-
-axiom H28 : (has_key(positions({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields1
-  } }), first({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields1
-  } })) = true)
-
-axiom H29 : ((((((length({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields } }) = (length({
+  us_split_fields1 = l1__split_fields1 })) = true)) and (((3 = 0) and
+  (to_rep(o2) = to_rep(l1__split_discrs))) or ((not (3 = 0)) and
+  (to_rep(o2) = 3))))) and ({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = o4 }; us_split_fields1 = {
+  rec__formal_container__vdll__list = o5 } } = { us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = o2 }; us_split_fields1 = {
+  rec__formal_container__vdll__list = o3 } })) and ({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = temp___451 };
+  us_split_fields1 = { rec__formal_container__vdll__list = temp___4511 }
+  } = { us_split_discrs1 = { rec__formal_container__vdll__list__capacity = o4
+  }; us_split_fields1 = { rec__formal_container__vdll__list = o5 } })) and
+  (((result1 = { us_split_fields__content = {
+  rec__formal_container__vdll__list = l2__split_fields } }) and
+  (l2__split_fields1 = { rec__formal_container__vdll__list = temp___4511
+  })) and (l2__split_discrs = temp___451))) -> ((has_key(positions({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l2__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l2__split_fields1 } }) + 1)) and
-  (get1(positions({ us_split_discrs1 = {
+  l2__split_discrs }; us_split_fields1 = l2__split_fields1 }), first({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l1__split_discrs }; us_split_fields1 = l1__split_fields1 })) = true) ->
+  ((((((((length({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields } }), last({
+  us_split_fields1 = formal_container__vdll__append__container__fields
+  }) = (length({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l2__split_discrs };
+  us_split_fields1 = l2__split_fields1 }) + 1)) and (get1(positions({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l2__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields } })) = length({
+  l2__split_discrs }; us_split_fields1 =
+  formal_container__vdll__append__container__fields }), last({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l2__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields } }))) and
+  l2__split_discrs }; us_split_fields1 =
+  formal_container__vdll__append__container__fields })) = length({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l2__split_discrs }; us_split_fields1 =
+  formal_container__vdll__append__container__fields }))) and
   (keys_included_except(positions({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields } }), positions({
+  us_split_fields1 = formal_container__vdll__append__container__fields }),
+  positions({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l2__split_discrs };
+  us_split_fields1 = l2__split_fields1 }), last({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l2__split_discrs };
+  us_split_fields1 = formal_container__vdll__append__container__fields
+  })) = true)) and (ole(positions({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l2__split_discrs };
+  us_split_fields1 = l2__split_fields1 }), positions({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l2__split_discrs };
+  us_split_fields1 = formal_container__vdll__append__container__fields
+  })) = true)) and (get(model__({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l2__split_discrs };
+  us_split_fields1 = formal_container__vdll__append__container__fields }),
+  length({ us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l2__split_discrs }; us_split_fields1 =
+  formal_container__vdll__append__container__fields })) = 2)) and
+  ((bool_le(length1(model__({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l2__split_discrs };
+  us_split_fields1 = l2__split_fields1 })), length1(model__({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l2__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l2__split_fields1 } }), last({
-  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l2__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields } })) = true)) and
-  (ole(positions({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields1
-  } }), positions({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields } })) = true)) and
-  (get(model__({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields } }), length({
-  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l2__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields } })) = 2)) and
-  (((bool_le(length1(model__({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields1
-  } })), length1(model__({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields } }))) = true) ->
+  l2__split_discrs }; us_split_fields1 =
+  formal_container__vdll__append__container__fields }))) = true) and
   (forall n:int. (((1 <= n) and (n <= (0 + length1(model__({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l2__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l2__split_fields1 } }))))) ->
+  l2__split_discrs }; us_split_fields1 = l2__split_fields1 }))))) ->
   (get(model__({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields1
-  } }), n) = get(model__({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields } }), n))))) and
-  (not (bool_le(length1(model__({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields1
-  } })), length1(model__({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields } }))) = false))))
-
-axiom H30 : (result2 = l2__split_fields1)
-
-axiom H31 :
-  (l2__split_fields2 = formal_container__vdll__append__container__fields)
-
-axiom H32 : (has_key(positions({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields2
-  } }), next({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields2
-  } }, first({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields1
-  } }))) = true)
-
-axiom H33 : (test_element({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields2
-  } }, next({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields2
-  } }, first({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields1
-  } })), 2) = true)
-
-axiom H34 : (not (has_key(positions({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields1
-  } }), next({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields2
-  } }, first({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields1
-  } }))) = true))
-
-axiom H35 : ((((((length({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields1 } }) = (length({
+  us_split_fields1 = l2__split_fields1 }), n) = get(model__({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l2__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l2__split_fields2 } }) + 1)) and
+  l2__split_discrs }; us_split_fields1 =
+  formal_container__vdll__append__container__fields }), n)))))) and
+  ((result2 = { us_split_fields__content = l2__split_fields1 }) and
+  (l2__split_fields2 = formal_container__vdll__append__container__fields))) ->
+  ((has_key(positions({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l2__split_discrs };
+  us_split_fields1 = l2__split_fields2 }), next({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l2__split_discrs };
+  us_split_fields1 = l2__split_fields2 }, first({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l1__split_discrs };
+  us_split_fields1 = l1__split_fields1 }))) = true) -> ((test_element({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l2__split_discrs }; us_split_fields1 = l2__split_fields2 }, next({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l2__split_discrs }; us_split_fields1 = l2__split_fields2 }, first({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l1__split_discrs }; us_split_fields1 = l1__split_fields1 })), 2) = true) ->
+  ((not (has_key(positions({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l1__split_discrs };
+  us_split_fields1 = l1__split_fields1 }), next({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l2__split_discrs };
+  us_split_fields1 = l2__split_fields2 }, first({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l1__split_discrs };
+  us_split_fields1 = l1__split_fields1 }))) = true)) -> ((((((((length({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l2__split_discrs }; us_split_fields1 =
+  formal_container__vdll__append__container__fields1 }) = (length({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l2__split_discrs }; us_split_fields1 = l2__split_fields2 }) + 1)) and
   (get1(positions({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields1 } }), last({
+  us_split_fields1 = formal_container__vdll__append__container__fields1 }),
+  last({ us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l2__split_discrs }; us_split_fields1 =
+  formal_container__vdll__append__container__fields1 })) = length({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l2__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields1 } })) = length({
-  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l2__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields1 } }))) and
+  l2__split_discrs }; us_split_fields1 =
+  formal_container__vdll__append__container__fields1 }))) and
   (keys_included_except(positions({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields1 } }), positions({
+  us_split_fields1 = formal_container__vdll__append__container__fields1 }),
+  positions({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l2__split_discrs };
+  us_split_fields1 = l2__split_fields2 }), last({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l2__split_discrs };
+  us_split_fields1 = formal_container__vdll__append__container__fields1
+  })) = true)) and (ole(positions({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l2__split_discrs };
+  us_split_fields1 = l2__split_fields2 }), positions({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l2__split_discrs };
+  us_split_fields1 = formal_container__vdll__append__container__fields1
+  })) = true)) and (get(model__({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l2__split_discrs };
+  us_split_fields1 = formal_container__vdll__append__container__fields1 }),
+  length({ us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l2__split_discrs }; us_split_fields1 =
+  formal_container__vdll__append__container__fields1 })) = 3)) and
+  ((bool_le(length1(model__({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l2__split_discrs };
+  us_split_fields1 = l2__split_fields2 })), length1(model__({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l2__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l2__split_fields2 } }), last({
-  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l2__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields1 } })) = true)) and
-  (ole(positions({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields2
-  } }), positions({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields1 } })) = true)) and
-  (get(model__({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields1 } }), length({
-  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l2__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields1 } })) = 3)) and
-  (((bool_le(length1(model__({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields2
-  } })), length1(model__({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields1 } }))) = true) ->
+  l2__split_discrs }; us_split_fields1 =
+  formal_container__vdll__append__container__fields1 }))) = true) and
   (forall n:int. (((1 <= n) and (n <= (0 + length1(model__({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l2__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l2__split_fields2 } }))))) ->
+  l2__split_discrs }; us_split_fields1 = l2__split_fields2 }))))) ->
   (get(model__({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields2
-  } }), n) = get(model__({ us_split_discrs1 = {
+  us_split_fields1 = l2__split_fields2 }), n) = get(model__({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l2__split_discrs }; us_split_fields1 =
+  formal_container__vdll__append__container__fields1 }), n)))))) and
+  ((result3 = { us_split_fields__content = l2__split_fields2 }) and
+  (l2__split_fields3 = formal_container__vdll__append__container__fields1))) ->
+  ((((((o6 = copy({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields1 } }), n))))) and
-  (not (bool_le(length1(model__({ us_split_discrs1 = {
+  us_split_fields1 = l2__split_fields3 }, 3)) and
+  ((((bool_eq1(length1(model__(o6)), length1(model__({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields2
-  } })), length1(model__({ us_split_discrs1 = {
+  us_split_fields1 = l2__split_fields3 }))) = true) and
+  (forall n:int. (((1 <= n) and (n <= (0 + length1(model__(o6))))) ->
+  (get(model__(o6), n) = get(model__({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields1 } }))) = false))))
-
-axiom H36 : (result3 = l2__split_fields2)
-
-axiom H37 :
-  (l2__split_fields3 = formal_container__vdll__append__container__fields1)
-
-axiom H38 : (({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = o12 }; us_split_fields1 = {
-  rec__formal_container__vdll__list = o13 } } = copy({ us_split_discrs1 = {
+  us_split_fields1 = l2__split_fields3 }), n))))) and (oeq(positions(o6),
+  positions({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields3
-  } }, 3)) and (((((bool_eq1(length1(model__({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = o12 }; us_split_fields1 = {
-  rec__formal_container__vdll__list = o13 } })), length1(model__({
+  us_split_fields1 = l2__split_fields3 })) = true)) and (((3 = 0) and
+  (to_rep(((o6).us_split_discrs1).rec__formal_container__vdll__list__capacity) = to_rep(l2__split_discrs))) or
+  ((not (3 = 0)) and
+  (to_rep(((o6).us_split_discrs1).rec__formal_container__vdll__list__capacity) = 3))))) and
+  (o7 = o6)) and (temp___454 = o7)) and (((result4 = {
+  us_split_fields__content = l1__split_fields1 }) and
+  (l1__split_fields2 = (temp___454).us_split_fields1)) and ({
+  rec__formal_container__vdll__list__capacity = l1__split_discrs
+  } = (temp___454).us_split_discrs1))) -> (((((o8 = first({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l2__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l2__split_fields3 } }))) = true) ->
-  (forall n:int. (((1 <= n) and (n <= (0 + length1(model__({
-  us_split_discrs1 = { rec__formal_container__vdll__list__capacity = o12 };
-  us_split_fields1 = { rec__formal_container__vdll__list = o13 } }))))) ->
-  (get(model__({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = o12 }; us_split_fields1 = {
-  rec__formal_container__vdll__list = o13 } }), n) = get(model__({
-  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l2__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l2__split_fields3 } }), n))))) and
-  (not (bool_eq1(length1(model__({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = o12 }; us_split_fields1 = {
-  rec__formal_container__vdll__list = o13 } })), length1(model__({
-  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l2__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l2__split_fields3 } }))) = false))) and
-  (oeq(positions({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = o12 }; us_split_fields1 = {
-  rec__formal_container__vdll__list = o13 } }), positions({
-  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l2__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l2__split_fields3 } })) = true)) and
-  (((3 = 0) -> (to_rep(o12) = to_rep(l2__split_discrs))) and
-  ((not (3 = 0)) -> (to_rep(o12) = 3)))))
-
-axiom H39 : ((o14 = o12) and (o15 = o13))
-
-axiom H40 : ((temp___408 = o14) and (temp___4081 = o15))
-
-axiom H41 : (result4 = l1__split_fields1)
-
-axiom H42 : (l1__split_fields2 = temp___4081)
-
-axiom H43 : (l1__split_discrs = temp___408)
-
-axiom H44 : (({ us_split_fields3 = {
-  rec__formal_container__vdll__cursor__node = o16 } } = first({
-  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l2__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l2__split_fields3 } })) and
+  l2__split_discrs }; us_split_fields1 = l2__split_fields3 })) and
   (((bool_eq1(length({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields3
-  } }), 0) = true) -> (bool_eq5({ us_split_fields3 = {
-  rec__formal_container__vdll__cursor__node = o16 } }, { us_split_fields3 = {
+  us_split_fields1 = l2__split_fields3 }), 0) = true) and (bool_eq5(o8, {
+  us_split_fields3 = { rec__formal_container__vdll__cursor__node = no_element
+  } }) = true)) or ((not (bool_eq1(length({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l2__split_discrs };
+  us_split_fields1 = l2__split_fields3 }), 0) = true)) and
+  ((has_key(positions({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l2__split_discrs };
+  us_split_fields1 = l2__split_fields3 }), o8) = true) and (get1(positions({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l2__split_discrs }; us_split_fields1 = l2__split_fields3 }),
+  o8) = 1))))) and ((temp___455 = next({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l2__split_discrs };
+  us_split_fields1 = l2__split_fields3 }, o8)) and (((match_bool(bool_eq5(o8,
+  { us_split_fields3 = { rec__formal_container__vdll__cursor__node =
+  no_element } }), true, bool_eq1(get1(positions({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l2__split_discrs };
+  us_split_fields1 = l2__split_fields3 }), o8), length({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l2__split_discrs };
+  us_split_fields1 = l2__split_fields3 }))) = true) and (bool_eq5(temp___455,
+  { us_split_fields3 = { rec__formal_container__vdll__cursor__node =
+  no_element } }) = true)) or ((not (match_bool(bool_eq5(o8, {
+  us_split_fields3 = { rec__formal_container__vdll__cursor__node = no_element
+  } }), true, bool_eq1(get1(positions({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l2__split_discrs };
+  us_split_fields1 = l2__split_fields3 }), o8), length({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l2__split_discrs };
+  us_split_fields1 = l2__split_fields3 }))) = true)) and
+  ((has_key(positions({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l2__split_discrs };
+  us_split_fields1 = l2__split_fields3 }), temp___455) = true) and
+  (get1(positions({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l2__split_discrs };
+  us_split_fields1 = l2__split_fields3 }), temp___455) = (get1(positions({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l2__split_discrs }; us_split_fields1 = l2__split_fields3 }),
+  o8) + 1))))))) and ((result5 = { us_split_fields__content1 = {
+  rec__formal_container__vdll__cursor__node = c__split_fields } }) and
+  (c__split_fields1 = (temp___455).us_split_fields3))) -> (((((((length({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l2__split_discrs }; us_split_fields1 =
+  formal_container__vdll__delete__container__fields }) = (length({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l2__split_discrs }; us_split_fields1 = l2__split_fields3 }) - 1)) and
+  (bool_eq5({ us_split_fields3 = c__split_fields2 }, { us_split_fields3 = {
   rec__formal_container__vdll__cursor__node = no_element } }) = true)) and
-  ((not (bool_eq1(length({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields3
-  } }), 0) = true)) -> ((has_key(positions({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields3
-  } }), { us_split_fields3 = { rec__formal_container__vdll__cursor__node =
-  o16 } }) = true) and (get1(positions({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields3
-  } }), { us_split_fields3 = { rec__formal_container__vdll__cursor__node =
-  o16 } }) = 1)))))
-
-axiom H45 : (({ us_split_fields3 = {
-  rec__formal_container__vdll__cursor__node = temp___409 } } = next({
-  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l2__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l2__split_fields3 } }, {
-  us_split_fields3 = { rec__formal_container__vdll__cursor__node = o16 }
-  })) and (((match_bool(bool_eq5({ us_split_fields3 = {
-  rec__formal_container__vdll__cursor__node = o16 } }, { us_split_fields3 = {
-  rec__formal_container__vdll__cursor__node = no_element } }), true,
-  bool_eq1(get1(positions({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields3
-  } }), { us_split_fields3 = { rec__formal_container__vdll__cursor__node =
-  o16 } }), length({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields3
-  } }))) = true) -> (bool_eq5({ us_split_fields3 = {
-  rec__formal_container__vdll__cursor__node = temp___409 } }, {
-  us_split_fields3 = { rec__formal_container__vdll__cursor__node = no_element
-  } }) = true)) and ((not (match_bool(bool_eq5({ us_split_fields3 = {
-  rec__formal_container__vdll__cursor__node = o16 } }, { us_split_fields3 = {
-  rec__formal_container__vdll__cursor__node = no_element } }), true,
-  bool_eq1(get1(positions({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields3
-  } }), { us_split_fields3 = { rec__formal_container__vdll__cursor__node =
-  o16 } }), length({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields3
-  } }))) = true)) -> ((has_key(positions({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields3
-  } }), { us_split_fields3 = { rec__formal_container__vdll__cursor__node =
-  temp___409 } }) = true) and (get1(positions({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields3
-  } }), { us_split_fields3 = { rec__formal_container__vdll__cursor__node =
-  temp___409 } }) = (get1(positions({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields3
-  } }), { us_split_fields3 = { rec__formal_container__vdll__cursor__node =
-  o16 } }) + 1))))))
-
-axiom H46 : (result5 = c__split_fields)
-
-axiom H47 : (c__split_fields1 = temp___409)
-
-axiom H48 : (((((length({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__delete__container__fields } }) = (length({
-  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l2__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l2__split_fields3 } }) - 1)) and
-  (bool_eq5({ us_split_fields3 = {
-  rec__formal_container__vdll__cursor__node = c__split_fields2 } }, {
-  us_split_fields3 = { rec__formal_container__vdll__cursor__node = no_element
-  } }) = true)) and
   (forall i:int. (((1 <= i) and (i <= (get1(positions({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields3
-  } }), { us_split_fields3 = { rec__formal_container__vdll__cursor__node =
-  c__split_fields1 } }) - 1))) -> (get(model__({ us_split_discrs1 = {
+  us_split_fields1 = l2__split_fields3 }), { us_split_fields3 =
+  c__split_fields1 }) - 1))) -> (get(model__({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields3
-  } }), i) = get(model__({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__delete__container__fields } }), i))))) and
+  us_split_fields1 = l2__split_fields3 }), i) = get(model__({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l2__split_discrs }; us_split_fields1 =
+  formal_container__vdll__delete__container__fields }), i))))) and
   ((forall i:int. (((get1(positions({ us_split_discrs1 = {
    rec__formal_container__vdll__list__capacity = l2__split_discrs };
-   us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields3
-   } }), { us_split_fields3 = { rec__formal_container__vdll__cursor__node =
-   c__split_fields1 } }) <= i) and (i <= length({ us_split_discrs1 = {
+   us_split_fields1 = l2__split_fields3 }), { us_split_fields3 =
+   c__split_fields1 }) <= i) and (i <= length({ us_split_discrs1 = {
    rec__formal_container__vdll__list__capacity = l2__split_discrs };
-   us_split_fields1 = { rec__formal_container__vdll__list =
-   formal_container__vdll__delete__container__fields } }))) -> (get(model__({
-   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-   l2__split_discrs }; us_split_fields1 = {
-   rec__formal_container__vdll__list =
-   formal_container__vdll__delete__container__fields } }), i) = get(model__({
-   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-   l2__split_discrs }; us_split_fields1 = {
-   rec__formal_container__vdll__list = l2__split_fields3 } }), (i + 1))))) and
+   us_split_fields1 = formal_container__vdll__delete__container__fields
+   }))) -> (get(model__({ us_split_discrs1 = {
+   rec__formal_container__vdll__list__capacity = l2__split_discrs };
+   us_split_fields1 = formal_container__vdll__delete__container__fields }),
+   i) = get(model__({ us_split_discrs1 = {
+   rec__formal_container__vdll__list__capacity = l2__split_discrs };
+   us_split_fields1 = l2__split_fields3 }), (i + 1))))) and
   (forall i:int. ((((get1(positions({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields3
-  } }), { us_split_fields3 = { rec__formal_container__vdll__cursor__node =
-  c__split_fields1 } }) + 1) <= i) and (i <= (length({ us_split_discrs1 = {
+  us_split_fields1 = l2__split_fields3 }), { us_split_fields3 =
+  c__split_fields1 }) + 1) <= i) and (i <= (length({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__delete__container__fields } }) + 1))) ->
-  (get(model__({ us_split_discrs1 = {
+  us_split_fields1 = formal_container__vdll__delete__container__fields
+  }) + 1))) -> (get(model__({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__delete__container__fields } }),
+  us_split_fields1 = formal_container__vdll__delete__container__fields }),
   (i - 1)) = get(model__({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields3
-  } }), i)))))) and (p_positions_shifted(positions({ us_split_discrs1 = {
+  us_split_fields1 = l2__split_fields3 }), i)))))) and
+  (p_positions_shifted(positions({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__delete__container__fields } }), positions({
+  us_split_fields1 = formal_container__vdll__delete__container__fields }),
+  positions({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l2__split_discrs };
+  us_split_fields1 = l2__split_fields3 }), get1(positions({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l2__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l2__split_fields3 } }),
-  get1(positions({ us_split_discrs1 = {
+  l2__split_discrs }; us_split_fields1 = l2__split_fields3 }), {
+  us_split_fields3 = c__split_fields1 }), 1) = true)) and ((result6 = {
+  us_split_fields__content = l2__split_fields3 }) and
+  (l2__split_fields4 = formal_container__vdll__delete__container__fields))) ->
+  ((not (has_key(positions({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields3
-  } }), { us_split_fields3 = { rec__formal_container__vdll__cursor__node =
-  c__split_fields1 } }), 1) = true))
-
-axiom H49 : (result6 = l2__split_fields3)
-
-axiom H50 :
-  (l2__split_fields4 = formal_container__vdll__delete__container__fields)
-
-axiom H51 : (not (has_key(positions({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields4
-  } }), next({ us_split_discrs1 = {
+  us_split_fields1 = l2__split_fields4 }), next({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields2
-  } }, first({ us_split_discrs1 = {
+  us_split_fields1 = l1__split_fields2 }, first({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields2
-  } }))) = true))
-
-axiom H52 : (({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = o19 }; us_split_fields1 = {
-  rec__formal_container__vdll__list = o20 } } = copy({ us_split_discrs1 = {
+  us_split_fields1 = l1__split_fields2 }))) = true)) -> ((((((o9 = copy({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l2__split_discrs }; us_split_fields1 = l2__split_fields4 }, 3)) and
+  ((((bool_eq1(length1(model__(o9)), length1(model__({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields4
-  } }, 3)) and (((((bool_eq1(length1(model__({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = o19 }; us_split_fields1 = {
-  rec__formal_container__vdll__list = o20 } })), length1(model__({
+  us_split_fields1 = l2__split_fields4 }))) = true) and
+  (forall n:int. (((1 <= n) and (n <= (0 + length1(model__(o9))))) ->
+  (get(model__(o9), n) = get(model__({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l2__split_discrs };
+  us_split_fields1 = l2__split_fields4 }), n))))) and (oeq(positions(o9),
+  positions({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l2__split_discrs };
+  us_split_fields1 = l2__split_fields4 })) = true)) and (((3 = 0) and
+  (to_rep(((o9).us_split_discrs1).rec__formal_container__vdll__list__capacity) = to_rep(l2__split_discrs))) or
+  ((not (3 = 0)) and
+  (to_rep(((o9).us_split_discrs1).rec__formal_container__vdll__list__capacity) = 3))))) and
+  (o10 = o9)) and (temp___457 = o10)) and (((result7 = {
+  us_split_fields__content = l1__split_fields2 }) and
+  (l1__split_fields3 = (temp___457).us_split_fields1)) and ({
+  rec__formal_container__vdll__list__capacity = l1__split_discrs
+  } = (temp___457).us_split_discrs1))) -> ((has_key(positions({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l2__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l2__split_fields4 } }))) = true) ->
-  (forall n:int. (((1 <= n) and (n <= (0 + length1(model__({
-  us_split_discrs1 = { rec__formal_container__vdll__list__capacity = o19 };
-  us_split_fields1 = { rec__formal_container__vdll__list = o20 } }))))) ->
-  (get(model__({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = o19 }; us_split_fields1 = {
-  rec__formal_container__vdll__list = o20 } }), n) = get(model__({
+  l1__split_discrs }; us_split_fields1 = l1__split_fields3 }), next({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l2__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l2__split_fields4 } }), n))))) and
-  (not (bool_eq1(length1(model__({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = o19 }; us_split_fields1 = {
-  rec__formal_container__vdll__list = o20 } })), length1(model__({
+  l2__split_discrs }; us_split_fields1 = l2__split_fields4 }, first({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l2__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l2__split_fields4 } }))) = false))) and
-  (oeq(positions({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = o19 }; us_split_fields1 = {
-  rec__formal_container__vdll__list = o20 } }), positions({
-  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l2__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l2__split_fields4 } })) = true)) and
-  (((3 = 0) -> (to_rep(o19) = to_rep(l2__split_discrs))) and
-  ((not (3 = 0)) -> (to_rep(o19) = 3)))))
-
-axiom H53 : ((o21 = o19) and (o22 = o20))
-
-axiom H54 : ((temp___411 = o21) and (temp___4111 = o22))
-
-axiom H55 : (result7 = l1__split_fields2)
-
-axiom H56 : (l1__split_fields3 = temp___4111)
-
-axiom H57 : (l1__split_discrs = temp___411)
-
-axiom H58 : (has_key(positions({ us_split_discrs1 = {
+  l2__split_discrs }; us_split_fields1 = l2__split_fields4 }))) = true) ->
+  ((test_element({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields3
-  } }), next({ us_split_discrs1 = {
+  us_split_fields1 = l1__split_fields3 }, next({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields4
-  } }, first({ us_split_discrs1 = {
+  us_split_fields1 = l2__split_fields4 }, first({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields4
-  } }))) = true)
-
-axiom H59 : (test_element({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields3
-  } }, next({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields4
-  } }, first({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l2__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l2__split_fields4
-  } })), 3) = true)
-
-axiom H60 : ((((((length({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields2 } }) = (length({
+  us_split_fields1 = l2__split_fields4 })), 3) = true) -> ((((((((length({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l1__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l1__split_fields3 } }) + 1)) and
+  l1__split_discrs }; us_split_fields1 =
+  formal_container__vdll__append__container__fields2 }) = (length({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l1__split_discrs }; us_split_fields1 = l1__split_fields3 }) + 1)) and
   (get1(positions({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields2 } }), last({
+  us_split_fields1 = formal_container__vdll__append__container__fields2 }),
+  last({ us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l1__split_discrs }; us_split_fields1 =
+  formal_container__vdll__append__container__fields2 })) = length({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l1__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields2 } })) = length({
-  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l1__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields2 } }))) and
+  l1__split_discrs }; us_split_fields1 =
+  formal_container__vdll__append__container__fields2 }))) and
   (keys_included_except(positions({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields2 } }), positions({
+  us_split_fields1 = formal_container__vdll__append__container__fields2 }),
+  positions({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l1__split_discrs };
+  us_split_fields1 = l1__split_fields3 }), last({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l1__split_discrs };
+  us_split_fields1 = formal_container__vdll__append__container__fields2
+  })) = true)) and (ole(positions({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l1__split_discrs };
+  us_split_fields1 = l1__split_fields3 }), positions({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l1__split_discrs };
+  us_split_fields1 = formal_container__vdll__append__container__fields2
+  })) = true)) and (get(model__({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l1__split_discrs };
+  us_split_fields1 = formal_container__vdll__append__container__fields2 }),
+  length({ us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l1__split_discrs }; us_split_fields1 =
+  formal_container__vdll__append__container__fields2 })) = 4)) and
+  ((bool_le(length1(model__({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l1__split_discrs };
+  us_split_fields1 = l1__split_fields3 })), length1(model__({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l1__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l1__split_fields3 } }), last({
-  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l1__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields2 } })) = true)) and
-  (ole(positions({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields3
-  } }), positions({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields2 } })) = true)) and
-  (get(model__({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields2 } }), length({
-  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l1__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields2 } })) = 4)) and
-  (((bool_le(length1(model__({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields3
-  } })), length1(model__({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields2 } }))) = true) ->
+  l1__split_discrs }; us_split_fields1 =
+  formal_container__vdll__append__container__fields2 }))) = true) and
   (forall n:int. (((1 <= n) and (n <= (0 + length1(model__({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l1__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l1__split_fields3 } }))))) ->
+  l1__split_discrs }; us_split_fields1 = l1__split_fields3 }))))) ->
   (get(model__({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields3
-  } }), n) = get(model__({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields2 } }), n))))) and
-  (not (bool_le(length1(model__({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields3
-  } })), length1(model__({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__append__container__fields2 } }))) = false))))
-
-axiom H61 : (result8 = l1__split_fields3)
-
-axiom H62 :
-  (l1__split_fields4 = formal_container__vdll__append__container__fields2)
-
-axiom H63 : (bool_eq5(find({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields4
-  } }, 3, { us_split_fields3 = { rec__formal_container__vdll__cursor__node =
-  no_element } }), next({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields4
-  } }, first({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields4
-  } }))) = true)
-
-axiom H64 : (bool_eq5(find({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields4
-  } }, 4, { us_split_fields3 = { rec__formal_container__vdll__cursor__node =
-  no_element } }), last({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields4
-  } })) = true)
-
-axiom H65 : (bool_eq5(find({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields4
-  } }, 3, { us_split_fields3 = { rec__formal_container__vdll__cursor__node =
-  no_element } }), previous({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields4
-  } }, last({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields4
-  } }))) = true)
-
-axiom H66 : (bool_eq5(find({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields4
-  } }, 1, next({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields4
-  } }, first({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields4
-  } }))), { us_split_fields3 = { rec__formal_container__vdll__cursor__node =
-  no_element } }) = true)
-
-axiom H67 : (result9 = l3__split_fields)
-
-axiom H68 : (l3__split_fields1 = l1__split_fields4)
-
-axiom H69 : (l3__split_discrs = l1__split_discrs)
-
-axiom H70 : (((((length({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__delete_last__container__fields } }) = (length({
+  us_split_fields1 = l1__split_fields3 }), n) = get(model__({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l3__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l3__split_fields1 } }) - 1)) and
-  (((bool_le(length1(model__({ us_split_discrs1 = {
+  l1__split_discrs }; us_split_fields1 =
+  formal_container__vdll__append__container__fields2 }), n)))))) and
+  ((result8 = { us_split_fields__content = l1__split_fields3 }) and
+  (l1__split_fields4 = formal_container__vdll__append__container__fields2))) ->
+  ((bool_eq5(find({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l1__split_discrs };
+  us_split_fields1 = l1__split_fields4 }, 3, { us_split_fields3 = {
+  rec__formal_container__vdll__cursor__node = no_element } }), next({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l1__split_discrs }; us_split_fields1 = l1__split_fields4 }, first({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l1__split_discrs }; us_split_fields1 = l1__split_fields4 }))) = true) ->
+  ((bool_eq5(find({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l1__split_discrs };
+  us_split_fields1 = l1__split_fields4 }, 4, { us_split_fields3 = {
+  rec__formal_container__vdll__cursor__node = no_element } }), last({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l1__split_discrs }; us_split_fields1 = l1__split_fields4 })) = true) ->
+  ((bool_eq5(find({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l1__split_discrs };
+  us_split_fields1 = l1__split_fields4 }, 3, { us_split_fields3 = {
+  rec__formal_container__vdll__cursor__node = no_element } }), previous({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l1__split_discrs }; us_split_fields1 = l1__split_fields4 }, last({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l1__split_discrs }; us_split_fields1 = l1__split_fields4 }))) = true) ->
+  ((bool_eq5(find({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l1__split_discrs };
+  us_split_fields1 = l1__split_fields4 }, 1, next({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l1__split_discrs };
+  us_split_fields1 = l1__split_fields4 }, first({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l1__split_discrs };
+  us_split_fields1 = l1__split_fields4 }))), { us_split_fields3 = {
+  rec__formal_container__vdll__cursor__node = no_element } }) = true) ->
+  ((((result9 = { us_split_fields__content = {
+  rec__formal_container__vdll__list = l3__split_fields } }) and
+  (l3__split_fields1 = l1__split_fields4)) and
+  (l3__split_discrs = l1__split_discrs)) -> (((((((length({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l3__split_discrs }; us_split_fields1 =
+  formal_container__vdll__delete_last__container__fields }) = (length({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l3__split_discrs }; us_split_fields1 = l3__split_fields1 }) - 1)) and
+  ((bool_le(length1(model__({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__delete_last__container__fields } })),
-  length1(model__({ us_split_discrs1 = {
+  us_split_fields1 = formal_container__vdll__delete_last__container__fields
+  })), length1(model__({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields1
-  } }))) = true) ->
+  us_split_fields1 = l3__split_fields1 }))) = true) and
   (forall n:int. (((1 <= n) and (n <= (0 + length1(model__({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l3__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list =
-  formal_container__vdll__delete_last__container__fields } }))))) ->
+  l3__split_discrs }; us_split_fields1 =
+  formal_container__vdll__delete_last__container__fields }))))) ->
   (get(model__({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__delete_last__container__fields } }),
-  n) = get(model__({ us_split_discrs1 = {
+  us_split_fields1 = formal_container__vdll__delete_last__container__fields
+  }), n) = get(model__({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields1
-  } }), n))))) and (not (bool_le(length1(model__({ us_split_discrs1 = {
+  us_split_fields1 = l3__split_fields1 }), n)))))) and
+  (not (has_key(positions({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__delete_last__container__fields } })),
-  length1(model__({ us_split_discrs1 = {
+  us_split_fields1 = formal_container__vdll__delete_last__container__fields
+  }), last({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields1
-  } }))) = false)))) and (not (has_key(positions({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__delete_last__container__fields } }), last({
-  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l3__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l3__split_fields1 } })) = true))) and
+  us_split_fields1 = l3__split_fields1 })) = true))) and
   (keys_included_except(positions({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields1
-  } }), positions({ us_split_discrs1 = {
+  us_split_fields1 = l3__split_fields1 }), positions({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields1
+  us_split_fields1 = l3__split_fields1 }), last({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l3__split_discrs };
+  us_split_fields1 = l3__split_fields1 })) = true)) and (ole(positions({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l3__split_discrs }; us_split_fields1 =
+  formal_container__vdll__delete_last__container__fields }), positions({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l3__split_discrs }; us_split_fields1 = l3__split_fields1 })) = true)) and
+  ((result10 = { us_split_fields__content = l3__split_fields1 }) and
+  (l3__split_fields2 = formal_container__vdll__delete_last__container__fields))) ->
+  ((length({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l3__split_discrs };
+  us_split_fields1 = l3__split_fields2 }) = 2) -> ((has_key(positions({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l3__split_discrs }; us_split_fields1 = l3__split_fields2 }), first({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l3__split_discrs }; us_split_fields1 = l3__split_fields2 })) = true) ->
+  ((test_element({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l3__split_discrs };
+  us_split_fields1 = l3__split_fields2 }, first({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l3__split_discrs };
+  us_split_fields1 = l3__split_fields2 }), 1) = true) ->
+  ((has_key(positions({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l3__split_discrs };
+  us_split_fields1 = l3__split_fields2 }), next({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l3__split_discrs };
+  us_split_fields1 = l3__split_fields2 }, first({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l3__split_discrs };
+  us_split_fields1 = l3__split_fields2 }))) = true) -> ((test_element({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l3__split_discrs }; us_split_fields1 = l3__split_fields2 }, next({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l3__split_discrs }; us_split_fields1 = l3__split_fields2 }, first({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l3__split_discrs }; us_split_fields1 = l3__split_fields2 })), 3) = true) ->
+  ((not (has_key(positions({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l3__split_discrs };
+  us_split_fields1 = l3__split_fields2 }), next({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l1__split_discrs };
+  us_split_fields1 = l1__split_fields4 }, next({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l3__split_discrs };
+  us_split_fields1 = l3__split_fields2 }, first({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l3__split_discrs };
+  us_split_fields1 = l3__split_fields2 })))) = true)) -> ((bool_eq5(find({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l3__split_discrs }; us_split_fields1 = l3__split_fields2 }, 3, {
+  us_split_fields3 = { rec__formal_container__vdll__cursor__node = no_element
+  } }), next({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l3__split_discrs };
+  us_split_fields1 = l3__split_fields2 }, first({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l3__split_discrs };
+  us_split_fields1 = l3__split_fields2 }))) = true) -> ((bool_eq5(find({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l3__split_discrs }; us_split_fields1 = l3__split_fields2 }, 3, {
+  us_split_fields3 = { rec__formal_container__vdll__cursor__node = no_element
   } }), last({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields1
-  } })) = true)) and (ole(positions({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__delete_last__container__fields } }), positions({
+  us_split_fields1 = l3__split_fields2 })) = true) -> ((bool_eq5(find({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l3__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l3__split_fields1 } })) = true))
-
-axiom H71 : (result10 = l3__split_fields1)
-
-axiom H72 :
-  (l3__split_fields2 = formal_container__vdll__delete_last__container__fields)
-
-axiom H73 : (length({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields2
-  } }) = 2)
-
-axiom H74 : (has_key(positions({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields2
+  l3__split_discrs }; us_split_fields1 = l3__split_fields2 }, 1, {
+  us_split_fields3 = { rec__formal_container__vdll__cursor__node = no_element
   } }), first({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields2
-  } })) = true)
-
-axiom H75 : (test_element({ us_split_discrs1 = {
+  us_split_fields1 = l3__split_fields2 })) = true) -> ((bool_eq5(find({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l3__split_discrs }; us_split_fields1 = l3__split_fields2 }, 1, {
+  us_split_fields3 = { rec__formal_container__vdll__cursor__node = no_element
+  } }), previous({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields2
-  } }, first({ us_split_discrs1 = {
+  us_split_fields1 = l3__split_fields2 }, last({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields2
-  } }), 1) = true)
-
-axiom H76 : (has_key(positions({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields2
-  } }), next({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields2
-  } }, first({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields2
-  } }))) = true)
-
-axiom H77 : (test_element({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields2
-  } }, next({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields2
-  } }, first({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields2
-  } })), 3) = true)
-
-axiom H78 : (not (has_key(positions({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields2
-  } }), next({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields4
-  } }, next({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields2
-  } }, first({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields2
-  } })))) = true))
-
-axiom H79 : (bool_eq5(find({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields2
-  } }, 3, { us_split_fields3 = { rec__formal_container__vdll__cursor__node =
-  no_element } }), next({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields2
-  } }, first({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields2
-  } }))) = true)
-
-axiom H80 : (bool_eq5(find({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields2
-  } }, 3, { us_split_fields3 = { rec__formal_container__vdll__cursor__node =
-  no_element } }), last({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields2
-  } })) = true)
-
-axiom H81 : (bool_eq5(find({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields2
-  } }, 1, { us_split_fields3 = { rec__formal_container__vdll__cursor__node =
-  no_element } }), first({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields2
-  } })) = true)
-
-axiom H82 : (bool_eq5(find({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields2
-  } }, 1, { us_split_fields3 = { rec__formal_container__vdll__cursor__node =
-  no_element } }), previous({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields2
-  } }, last({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields2
-  } }))) = true)
-
-axiom H83 : (bool_eq5(find({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields2
-  } }, 1, next({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields2
-  } }, first({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l3__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l3__split_fields2
-  } }))), { us_split_fields3 = { rec__formal_container__vdll__cursor__node =
-  no_element } }) = true)
-
-axiom H84 : (to_rep(e__split_fields) = 0)
-
-axiom H85 : true
-
-axiom H86 : (({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = o62 }; us_split_fields1 = {
-  rec__formal_container__vdll__list = o63 } } = copy({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields4
-  } }, to_rep(l4__split_discrs))) and (((((bool_eq1(length1(model__({
-  us_split_discrs1 = { rec__formal_container__vdll__list__capacity = o62 };
-  us_split_fields1 = { rec__formal_container__vdll__list = o63 } })),
+  us_split_fields1 = l3__split_fields2 }))) = true) -> ((bool_eq5(find({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l3__split_discrs }; us_split_fields1 = l3__split_fields2 }, 1, next({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l3__split_discrs }; us_split_fields1 = l3__split_fields2 }, first({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l3__split_discrs }; us_split_fields1 = l3__split_fields2 }))), {
+  us_split_fields3 = { rec__formal_container__vdll__cursor__node = no_element
+  } }) = true) -> ((to_rep(e__split_fields) = 0) -> ((((((o11 = copy({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l1__split_discrs }; us_split_fields1 = l1__split_fields4 },
+  to_rep(l4__split_discrs))) and ((((bool_eq1(length1(model__(o11)),
   length1(model__({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields4
-  } }))) = true) ->
-  (forall n:int. (((1 <= n) and (n <= (0 + length1(model__({
-  us_split_discrs1 = { rec__formal_container__vdll__list__capacity = o62 };
-  us_split_fields1 = { rec__formal_container__vdll__list = o63 } }))))) ->
-  (get(model__({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = o62 }; us_split_fields1 = {
-  rec__formal_container__vdll__list = o63 } }), n) = get(model__({
+  us_split_fields1 = l1__split_fields4 }))) = true) and
+  (forall n:int. (((1 <= n) and (n <= (0 + length1(model__(o11))))) ->
+  (get(model__(o11), n) = get(model__({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l1__split_discrs };
+  us_split_fields1 = l1__split_fields4 }), n))))) and (oeq(positions(o11),
+  positions({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l1__split_discrs };
+  us_split_fields1 = l1__split_fields4 })) = true)) and
+  (((to_rep(l4__split_discrs) = 0) and
+  (to_rep(((o11).us_split_discrs1).rec__formal_container__vdll__list__capacity) = to_rep(l1__split_discrs))) or
+  ((not (to_rep(l4__split_discrs) = 0)) and
+  (to_rep(((o11).us_split_discrs1).rec__formal_container__vdll__list__capacity) = to_rep(l4__split_discrs)))))) and
+  (o12 = o11)) and (temp___464 = o12)) and (((result11 = {
+  us_split_fields__content = { rec__formal_container__vdll__list =
+  l4__split_fields } }) and
+  (l4__split_fields1 = (temp___464).us_split_fields1)) and ({
+  rec__formal_container__vdll__list__capacity = l4__split_discrs
+  } = (temp___464).us_split_discrs1))) -> (((((bool_le(length({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l1__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l1__split_fields4 } }), n))))) and
-  (not (bool_eq1(length1(model__({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = o62 }; us_split_fields1 = {
-  rec__formal_container__vdll__list = o63 } })), length1(model__({
-  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l1__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l1__split_fields4 } }))) = false))) and
-  (oeq(positions({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = o62 }; us_split_fields1 = {
-  rec__formal_container__vdll__list = o63 } }), positions({
-  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l1__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l1__split_fields4 } })) = true)) and
-  (((to_rep(l4__split_discrs) = 0) ->
-  (to_rep(o62) = to_rep(l1__split_discrs))) and
-  ((not (to_rep(l4__split_discrs) = 0)) ->
-  (to_rep(o62) = to_rep(l4__split_discrs))))))
-
-axiom H87 : ((o64 = o62) and (o65 = o63))
-
-axiom H88 : ((temp___418 = o64) and (temp___4181 = o65))
-
-axiom H89 : (result11 = l4__split_fields)
-
-axiom H90 : (l4__split_fields1 = temp___4181)
-
-axiom H91 : (l4__split_discrs = temp___418)
-
-axiom H92 : (((bool_le(length({ us_split_discrs1 = {
+  l4__split_discrs }; us_split_fields1 = l4__split_fields1 }), 2) = true) and
+  (length({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l4__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l4__split_fields1
-  } }), 2) = true) -> (length({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l4__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__delete_last__2__container__fields } }) = 0)) and
+  us_split_fields1 =
+  formal_container__vdll__delete_last__2__container__fields }) = 0)) or
   ((not (bool_le(length({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l4__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l4__split_fields1
-  } }), 2) = true)) -> (((length({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l4__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__delete_last__2__container__fields } }) = (length({
+  us_split_fields1 = l4__split_fields1 }), 2) = true)) and (((length({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l4__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l4__split_fields1 } }) - 2)) and
-  (((bool_le(length1(model__({ us_split_discrs1 = {
+  l4__split_discrs }; us_split_fields1 =
+  formal_container__vdll__delete_last__2__container__fields }) = (length({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l4__split_discrs }; us_split_fields1 = l4__split_fields1 }) - 2)) and
+  ((bool_le(length1(model__({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l4__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__delete_last__2__container__fields } })),
+  us_split_fields1 =
+  formal_container__vdll__delete_last__2__container__fields })),
   length1(model__({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l4__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l4__split_fields1
-  } }))) = true) ->
+  us_split_fields1 = l4__split_fields1 }))) = true) and
   (forall n:int. (((1 <= n) and (n <= (0 + length1(model__({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l4__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list =
-  formal_container__vdll__delete_last__2__container__fields } }))))) ->
+  l4__split_discrs }; us_split_fields1 =
+  formal_container__vdll__delete_last__2__container__fields }))))) ->
   (get(model__({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l4__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__delete_last__2__container__fields } }),
+  us_split_fields1 =
+  formal_container__vdll__delete_last__2__container__fields }),
   n) = get(model__({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l4__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l4__split_fields1
-  } }), n))))) and (not (bool_le(length1(model__({ us_split_discrs1 = {
+  us_split_fields1 = l4__split_fields1 }), n)))))) and
+  (p_positions_truncated(positions({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l4__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list =
-  formal_container__vdll__delete_last__2__container__fields } })),
-  length1(model__({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l4__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l4__split_fields1
-  } }))) = false)))) and (p_positions_truncated(positions({
+  us_split_fields1 =
+  formal_container__vdll__delete_last__2__container__fields }), positions({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l4__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list =
-  formal_container__vdll__delete_last__2__container__fields } }), positions({
+  l4__split_discrs }; us_split_fields1 = l4__split_fields1 }), (length({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l4__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l4__split_fields1 } }), (length({
+  l4__split_discrs }; us_split_fields1 =
+  formal_container__vdll__delete_last__2__container__fields }) + 1),
+  2) = true)))) and ((result12 = { us_split_fields__content =
+  l4__split_fields1 }) and
+  (l4__split_fields2 = formal_container__vdll__delete_last__2__container__fields))) ->
+  ((has_key(positions({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l4__split_discrs };
+  us_split_fields1 = l4__split_fields2 }), first({ us_split_discrs1 = {
+  rec__formal_container__vdll__list__capacity = l4__split_discrs };
+  us_split_fields1 = l4__split_fields2 })) = true) -> ((test_element({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l4__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list =
-  formal_container__vdll__delete_last__2__container__fields } }) + 1),
-  2) = true))))
-
-axiom H93 : (result12 = l4__split_fields1)
-
-axiom H94 :
-  (l4__split_fields2 = formal_container__vdll__delete_last__2__container__fields)
-
-axiom H95 : (has_key(positions({ us_split_discrs1 = {
+  l4__split_discrs }; us_split_fields1 = l4__split_fields2 }, first({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l4__split_discrs }; us_split_fields1 = l4__split_fields2 }), 1) = true) ->
+  ((not (has_key(positions({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l4__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l4__split_fields2
-  } }), first({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l4__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l4__split_fields2
-  } })) = true)
-
-axiom H96 : (test_element({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l4__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l4__split_fields2
-  } }, first({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l4__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l4__split_fields2
-  } }), 1) = true)
-
-axiom H97 : (not (has_key(positions({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l4__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l4__split_fields2
-  } }), next({ us_split_discrs1 = {
+  us_split_fields1 = l4__split_fields2 }), next({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l1__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l1__split_fields4
-  } }, first({ us_split_discrs1 = {
+  us_split_fields1 = l1__split_fields4 }, first({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l4__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l4__split_fields2
-  } }))) = true))
-
-axiom H98 : (({ us_split_fields3 = {
-  rec__formal_container__vdll__cursor__node = o69 } } = first({
+  us_split_fields1 = l4__split_fields2 }))) = true)) -> (((o13 = first({
   us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
-  l4__split_discrs }; us_split_fields1 = {
-  rec__formal_container__vdll__list = l4__split_fields2 } })) and
+  l4__split_discrs }; us_split_fields1 = l4__split_fields2 })) and
   (((bool_eq1(length({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l4__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l4__split_fields2
-  } }), 0) = true) -> (bool_eq5({ us_split_fields3 = {
-  rec__formal_container__vdll__cursor__node = o69 } }, { us_split_fields3 = {
-  rec__formal_container__vdll__cursor__node = no_element } }) = true)) and
-  ((not (bool_eq1(length({ us_split_discrs1 = {
+  us_split_fields1 = l4__split_fields2 }), 0) = true) and (bool_eq5(o13, {
+  us_split_fields3 = { rec__formal_container__vdll__cursor__node = no_element
+  } }) = true)) or ((not (bool_eq1(length({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l4__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l4__split_fields2
-  } }), 0) = true)) -> ((has_key(positions({ us_split_discrs1 = {
+  us_split_fields1 = l4__split_fields2 }), 0) = true)) and
+  ((has_key(positions({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l4__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l4__split_fields2
-  } }), { us_split_fields3 = { rec__formal_container__vdll__cursor__node =
-  o69 } }) = true) and (get1(positions({ us_split_discrs1 = {
+  us_split_fields1 = l4__split_fields2 }), o13) = true) and (get1(positions({
+  us_split_discrs1 = { rec__formal_container__vdll__list__capacity =
+  l4__split_discrs }; us_split_fields1 = l4__split_fields2 }),
+  o13) = 1))))) -> ((has_key(positions({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = l4__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l4__split_fields2
-  } }), { us_split_fields3 = { rec__formal_container__vdll__cursor__node =
-  o69 } }) = 1)))))
-
- (* File "test_vdll.adb", line 18, characters 0-0 *)
-goal WP_parameter_def : ((has_key(positions({ us_split_discrs1 = {
-  rec__formal_container__vdll__list__capacity = l4__split_discrs };
-  us_split_fields1 = { rec__formal_container__vdll__list = l4__split_fields2
-  } }), { us_split_fields3 = { rec__formal_container__vdll__cursor__node =
-  no_element } }) = true) or (bool_eq5({ us_split_fields3 = {
+  us_split_fields1 = l4__split_fields2 }), { us_split_fields3 = {
+  rec__formal_container__vdll__cursor__node = no_element } }) = true) or
+  (bool_eq5({ us_split_fields3 = {
   rec__formal_container__vdll__cursor__node = no_element } }, {
   us_split_fields3 = { rec__formal_container__vdll__cursor__node = no_element
-  } }) = true))
+  } }) = true)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))

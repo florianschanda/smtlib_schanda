@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -188,24 +188,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> (int,natural) farray
-
-axiom concat_def :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : natural, int -> (int,natural) farray
-
-axiom singleton_def :
-  (forall v:natural.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,natural) farray, int, int, (int,natural) farray, int,
   int -> bool
 
@@ -216,17 +198,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -236,37 +218,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic to_rep1 : integer -> int
 
@@ -1339,214 +1293,78 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic current__split_fields : natural
-
-logic current__split_fields1 : natural
-
-logic current__split_fields2 : (int,natural) farray
-
-logic current__split_fields3 : natural
-
-logic result__ : int
-
-logic static_discr__search_max__result : int
-
-logic temp___320 : natural
-
-logic temp___3201 : natural
-
-logic temp___3202 : natural
-
-logic temp___3203 : natural
-
-logic temp___3204 : (int,natural) farray
-
-logic temp___3205 : natural
-
-logic temp___319 : int
-
-logic i : int
-
-logic o : int
-
-logic o1 : bool
-
-logic i1 : int
-
-logic result : natural
-
-logic result1 : natural
-
-logic result2 : (int,natural) farray
-
-logic result3 : natural
-
-logic current__split_fields4 : natural
-
-logic current__split_fields5 : natural
-
-logic current__split_fields6 : (int,natural) farray
-
-logic current__split_fields7 : natural
-
-logic result4 : int
-
-logic result__1 : int
-
-logic current__split_fields8 : natural
-
-logic current__split_fields9 : natural
-
-logic current__split_fields10 : (int,natural) farray
-
-logic current__split_fields11 : natural
-
-logic result__2 : int
-
-logic result5 : bool
-
-logic current__split_fields12 : natural
-
-logic current__split_fields13 : natural
-
-logic current__split_fields14 : (int,natural) farray
-
-logic current__split_fields15 : natural
-
-logic result__3 : int
-
-logic current__split_fields16 : natural
-
-logic current__split_fields17 : natural
-
-logic current__split_fields18 : (int,natural) farray
-
-logic current__split_fields19 : natural
-
-logic result__4 : int
-
-logic current__split_fields20 : natural
-
-logic current__split_fields21 : natural
-
-logic current__split_fields22 : (int,natural) farray
-
-logic current__split_fields23 : natural
-
-logic result__5 : int
-
-logic current__split_fields24 : natural
-
-logic current__split_fields25 : natural
-
-logic current__split_fields26 : (int,natural) farray
-
-logic current__split_fields27 : natural
-
-logic result__6 : int
-
-logic current__split_fields28 : natural
-
-logic current__split_fields29 : natural
-
-logic current__split_fields30 : (int,natural) farray
-
-logic current__split_fields31 : natural
-
-logic result__7 : int
-
-logic current__split_fields32 : natural
-
-logic current__split_fields33 : natural
-
-logic current__split_fields34 : (int,natural) farray
-
-logic current__split_fields35 : natural
-
-logic result__8 : int
-
-logic current__split_fields36 : natural
-
-logic current__split_fields37 : natural
-
-logic current__split_fields38 : (int,natural) farray
-
-logic current__split_fields39 : natural
-
-logic result__9 : int
-
-logic result6 : int
-
-logic static_discr__search_max__result1 : int
-
-logic static_discr__search_max__result2 : int
-
-logic static_discr__search_max__result3 : int
-
-logic current__split_fields40 : natural
-
-logic current__split_fields41 : natural
-
-logic current__split_fields42 : (int,natural) farray
-
-logic current__split_fields43 : natural
-
-logic result__10 : int
-
-logic static_discr__search_max__result4 : int
-
-logic current__split_fields44 : natural
-
-logic current__split_fields45 : natural
-
-logic current__split_fields46 : (int,natural) farray
-
-logic current__split_fields47 : natural
-
-logic result__11 : int
-
-logic static_discr__search_max__result5 : int
-
-axiom H : (((100 = to_rep(a)) and (100 = to_rep(a1))) and
-  ((100 = to_rep(a2)) and (100 = to_rep(a3))))
-
-axiom H1 : in_range2(e)
-
-axiom H2 : (to_rep(a5) <= to_rep(a1))
-
-axiom H3 : ((((result = current__split_fields) and
-  (result1 = current__split_fields1)) and
-  (result2 = current__split_fields2)) and (result3 = current__split_fields3))
-
-axiom H4 : ((((current__split_fields4 = a2) and
-  (current__split_fields5 = a3)) and (current__split_fields6 = a4)) and
-  (current__split_fields7 = a5))
-
-axiom H5 : ((current__split_discrs = a) and (current__split_discrs1 = a1))
-
-axiom H6 : (((100 = to_rep(current__split_discrs)) and
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (forall current__split_fields:natural.
+  forall current__split_fields1:natural.
+  forall current__split_fields2:(int,natural) farray.
+  forall current__split_fields3:natural. forall result__:int.
+  forall static_discr__search_max__result:int. forall temp___352:natural.
+  forall temp___3521:natural. forall temp___3522:natural.
+  forall temp___3523:natural. forall temp___3524:(int,natural) farray.
+  forall temp___3525:natural. forall temp___351:int. forall result:natural.
+  forall result1:natural. forall result2:(int,natural) farray.
+  forall result3:natural. forall current__split_fields4:natural.
+  forall current__split_fields5:natural.
+  forall current__split_fields6:(int,natural) farray.
+  forall current__split_fields7:natural. forall result4:int.
+  forall result__1:int. forall current__split_fields8:natural.
+  forall current__split_fields9:natural.
+  forall current__split_fields10:(int,natural) farray.
+  forall current__split_fields11:natural. forall result__2:int.
+  forall current__split_fields12:natural.
+  forall current__split_fields13:natural.
+  forall current__split_fields14:(int,natural) farray.
+  forall current__split_fields15:natural. forall result__3:int.
+  forall current__split_fields16:natural.
+  forall current__split_fields17:natural.
+  forall current__split_fields18:(int,natural) farray.
+  forall current__split_fields19:natural. forall result__4:int__ref.
+  forall current__split_fields20:us_split_fields8. forall result__5:int.
+  forall current__split_fields21:us_split_fields__ref4.
+  forall result__6:int__ref. forall current__split_fields22:us_split_fields8.
+  forall result__7:int. forall result5:int__ref.
+  forall static_discr__search_max__result1:int.
+  forall static_discr__search_max__result2:int__ref.
+  forall static_discr__search_max__result3:int.
+  forall current__split_fields23:us_split_fields__ref4.
+  forall result__8:int__ref.
+  forall static_discr__search_max__result4:int__ref.
+  forall current__split_fields24:us_split_fields8. forall result__9:int.
+  forall static_discr__search_max__result5:int. ((((100 = to_rep(a)) and
+  (100 = to_rep(a1))) and ((100 = to_rep(a2)) and (100 = to_rep(a3)))) ->
+  (in_range2(e) -> ((to_rep(a5) <= to_rep(a1)) -> (((((({
+  us_split_fields__content4 = { rec__static_discr__holder__content1 = {
+  us_split_discrs5 = { rec__static_discr__i_holder__unused = result;
+  rec__static_discr__i_holder__c = result1 }; us_split_fields7 = {
+  rec__static_discr__i_holder__content2 = result2 } };
+  rec__static_discr__holder__length1 = result3 } } = {
+  us_split_fields__content4 = { rec__static_discr__holder__content1 = {
+  us_split_discrs5 = { rec__static_discr__i_holder__unused =
+  current__split_fields; rec__static_discr__i_holder__c =
+  current__split_fields1 }; us_split_fields7 = {
+  rec__static_discr__i_holder__content2 = current__split_fields2 } };
+  rec__static_discr__holder__length1 = current__split_fields3 } }) and
+  ((((a2 = current__split_fields4) and (a3 = current__split_fields5)) and
+  (a4 = current__split_fields6)) and (a5 = current__split_fields7))) and
+  ((current__split_discrs = a) and (current__split_discrs1 = a1))) and
+  ((((100 = to_rep(current__split_discrs)) and
   (100 = to_rep(current__split_discrs1))) and
   ((100 = to_rep(current__split_fields4)) and
-  (100 = to_rep(current__split_fields5))))
-
-axiom H7 : (result4 = result__)
-
-axiom H8 : (result__1 = 0)
-
-axiom H9 : in_range2(result__1)
-
-axiom H10 : (((result__1 = 0) and (0 <  to_rep(current__split_fields7))) ->
-  (((((current__split_discrs = temp___320) and
-  (current__split_discrs1 = temp___3201)) and
-  ((((temp___3202 = current__split_fields4) and
-  (temp___3203 = current__split_fields5)) and
-  (temp___3204 = current__split_fields6)) and
-  (temp___3205 = current__split_fields7))) and ((temp___319 = result__1) and
+  (100 = to_rep(current__split_fields5)))) and (((result4 = result__) and
+  (result__1 = 0)) and (in_range2(result__1) and (((((result__1 = 0) and
+  (0 <  to_rep(current__split_fields7))) and
+  ((((((current__split_discrs = temp___352) and
+  (current__split_discrs1 = temp___3521)) and
+  ((((temp___3522 = current__split_fields4) and
+  (temp___3523 = current__split_fields5)) and
+  (temp___3524 = current__split_fields6)) and
+  (temp___3525 = current__split_fields7))) and ((temp___351 = result__1) and
   (((((1 <= to_rep(current__split_fields11)) and
   (to_rep(current__split_fields11) <= to_rep(a5))) and (bool_eq4(a4, 1, 100,
   current__split_fields10, 1, 100) = true)) and
-  (forall i2:int. ((((to_rep(current__split_fields11) + 1) <= i2) and
-  (i2 <= to_rep(a5))) -> (not (to_rep((a4[i2])) = e))))) and
+  (forall i:int. ((((to_rep(current__split_fields11) + 1) <= i) and
+  (i <= to_rep(a5))) -> (not (to_rep((a4[i])) = e))))) and
   (((((0 <= 2147483647) -> in_range2(result__2)) and
   ((100 = to_rep(current__split_fields8)) and
   (100 = to_rep(current__split_fields9)))) and ((result__2 = 0) and
@@ -1555,11 +1373,11 @@ axiom H10 : (((result__1 = 0) and (0 <  to_rep(current__split_fields7))) ->
   ((((bool_eq4(current__split_fields14, 1, 100, current__split_fields10, 1,
   100) = true) and
   ((to_rep(current__split_fields15) <  to_rep(current__split_fields11)) and
-  (((result__3 = 0) ->
-  (forall i2:int. ((((to_rep(current__split_fields15) + 1) <= i2) and
-  (i2 <= to_rep(current__split_fields11))) ->
-  (not (to_rep((current__split_fields14[i2])) = e))))) and
-  ((not (result__3 = 0)) ->
+  (((result__3 = 0) and
+  (forall i:int. ((((to_rep(current__split_fields15) + 1) <= i) and
+  (i <= to_rep(current__split_fields11))) ->
+  (not (to_rep((current__split_fields14[i])) = e))))) or
+  ((not (result__3 = 0)) and
   (((to_rep(current__split_fields15) <= result__3) and
   (result__3 <= to_rep(current__split_fields11))) and
   (to_rep((current__split_fields14[result__3])) = e)))))) and
@@ -1567,89 +1385,53 @@ axiom H10 : (((result__1 = 0) and (0 <  to_rep(current__split_fields7))) ->
   (100 = to_rep(current__split_fields13))) and in_range2(result__3))) and
   ((to_rep(current__split_discrs) = 100) and ((bool_eq4(a4, 1, 100,
   current__split_fields14, 1, 100) = true) and (not ((result__3 = 0) and
-  (0 <  to_rep(current__split_fields15)))))))))))) and
-  (((result__6 = result__3) and
-  ((((current__split_fields24 = current__split_fields12) and
-  (current__split_fields25 = current__split_fields13)) and
-  (current__split_fields26 = current__split_fields14)) and
-  (current__split_fields27 = current__split_fields15))) and
-  ((result__7 = result__3) and
-  ((((current__split_fields28 = current__split_fields12) and
-  (current__split_fields29 = current__split_fields13)) and
-  (current__split_fields30 = current__split_fields14)) and
-  (current__split_fields31 = current__split_fields15))))))
-
-axiom H11 : (((result__1 = 0) and (0 <  to_rep(current__split_fields7))) ->
-  (result__8 = result__6))
-
-axiom H12 : (((result__1 = 0) and (0 <  to_rep(current__split_fields7))) ->
-  ((((current__split_fields32 = current__split_fields24) and
-  (current__split_fields33 = current__split_fields25)) and
-  (current__split_fields34 = current__split_fields26)) and
-  (current__split_fields35 = current__split_fields27)))
-
-axiom H13 : (((result__1 = 0) and (0 <  to_rep(current__split_fields7))) ->
-  (result__9 = result__7))
-
-axiom H14 : (((result__1 = 0) and (0 <  to_rep(current__split_fields7))) ->
-  ((((current__split_fields36 = current__split_fields28) and
-  (current__split_fields37 = current__split_fields29)) and
-  (current__split_fields38 = current__split_fields30)) and
-  (current__split_fields39 = current__split_fields31)))
-
-axiom H15 : ((not ((result__1 = 0) and
-  (0 <  to_rep(current__split_fields7)))) -> (result__8 = result__1))
-
-axiom H16 : ((not ((result__1 = 0) and
-  (0 <  to_rep(current__split_fields7)))) ->
-  ((((current__split_fields32 = current__split_fields4) and
-  (current__split_fields33 = current__split_fields5)) and
-  (current__split_fields34 = current__split_fields6)) and
-  (current__split_fields35 = current__split_fields7)))
-
-axiom H17 : ((not ((result__1 = 0) and
-  (0 <  to_rep(current__split_fields7)))) -> (result__9 = result__1))
-
-axiom H18 : ((not ((result__1 = 0) and
-  (0 <  to_rep(current__split_fields7)))) ->
-  ((((current__split_fields36 = current__split_fields4) and
-  (current__split_fields37 = current__split_fields5)) and
-  (current__split_fields38 = current__split_fields6)) and
-  (current__split_fields39 = current__split_fields7)))
-
-axiom H19 :
-  (static_discr__search_max__result2 = static_discr__search_max__result1)
-
-axiom H20 :
-  (static_discr__search_max__result3 = static_discr__search_max__result1)
-
-axiom H21 : (result6 = static_discr__search_max__result)
-
-axiom H22 : (static_discr__search_max__result1 = result__8)
-
-axiom H23 :
-  (static_discr__search_max__result4 = static_discr__search_max__result2)
-
-axiom H24 : (result__10 = result__8)
-
-axiom H25 : ((((current__split_fields40 = current__split_fields32) and
-  (current__split_fields41 = current__split_fields33)) and
-  (current__split_fields42 = current__split_fields34)) and
-  (current__split_fields43 = current__split_fields35))
-
-axiom H26 :
-  (static_discr__search_max__result5 = static_discr__search_max__result3)
-
-axiom H27 : (result__11 = result__9)
-
-axiom H28 : ((((current__split_fields44 = current__split_fields36) and
-  (current__split_fields45 = current__split_fields37)) and
-  (current__split_fields46 = current__split_fields38)) and
-  (current__split_fields47 = current__split_fields39))
-
-axiom H29 : (static_discr__search_max__result4 <= to_rep(a5))
-
-axiom H30 : (not (static_discr__search_max__result4 = 0))
-
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (1 <= static_discr__search_max__result4)
+  (0 <  to_rep(current__split_fields15)))))))))))) and (((result__4 = {
+  int__content = result__3 }) and
+  ((((current__split_fields16 = current__split_fields12) and
+  (current__split_fields17 = current__split_fields13)) and
+  (current__split_fields18 = current__split_fields14)) and
+  (current__split_fields19 = current__split_fields15))) and
+  ((result__5 = result__3) and (current__split_fields20 = {
+  rec__static_discr__holder__content1 = { us_split_discrs5 = {
+  rec__static_discr__i_holder__unused = current__split_fields12;
+  rec__static_discr__i_holder__c = current__split_fields13 };
+  us_split_fields7 = { rec__static_discr__i_holder__content2 =
+  current__split_fields14 } }; rec__static_discr__holder__length1 =
+  current__split_fields15 })))) and (((result__6 = result__4) and
+  (current__split_fields21 = { us_split_fields__content4 = {
+  rec__static_discr__holder__content1 = { us_split_discrs5 = {
+  rec__static_discr__i_holder__unused = current__split_fields16;
+  rec__static_discr__i_holder__c = current__split_fields17 };
+  us_split_fields7 = { rec__static_discr__i_holder__content2 =
+  current__split_fields18 } }; rec__static_discr__holder__length1 =
+  current__split_fields19 } })) and ((result__7 = result__5) and
+  (current__split_fields22 = current__split_fields20))))) or
+  ((not ((result__1 = 0) and (0 <  to_rep(current__split_fields7)))) and
+  (((result__6 = { int__content = result__1 }) and
+  (current__split_fields21 = { us_split_fields__content4 = {
+  rec__static_discr__holder__content1 = { us_split_discrs5 = {
+  rec__static_discr__i_holder__unused = current__split_fields4;
+  rec__static_discr__i_holder__c = current__split_fields5 };
+  us_split_fields7 = { rec__static_discr__i_holder__content2 =
+  current__split_fields6 } }; rec__static_discr__holder__length1 =
+  current__split_fields7 } })) and ((result__7 = result__1) and
+  (current__split_fields22 = { rec__static_discr__holder__content1 = {
+  us_split_discrs5 = { rec__static_discr__i_holder__unused =
+  current__split_fields4; rec__static_discr__i_holder__c =
+  current__split_fields5 }; us_split_fields7 = {
+  rec__static_discr__i_holder__content2 = current__split_fields6 } };
+  rec__static_discr__holder__length1 = current__split_fields7 }))))) and
+  (((static_discr__search_max__result2 = { int__content =
+  static_discr__search_max__result1 }) and
+  (static_discr__search_max__result3 = static_discr__search_max__result1)) and
+  ((result5 = { int__content = static_discr__search_max__result }) and
+  (static_discr__search_max__result1 = (result__6).int__content)))))))) and
+  (((static_discr__search_max__result4 = static_discr__search_max__result2) and
+  ((result__8 = result__6) and
+  (current__split_fields23 = current__split_fields21))) and
+  ((static_discr__search_max__result5 = static_discr__search_max__result3) and
+  ((result__9 = result__7) and
+  (current__split_fields24 = current__split_fields22))))) ->
+  (((static_discr__search_max__result4).int__content <= to_rep(a5)) ->
+  ((not ((static_discr__search_max__result4).int__content = 0)) ->
+  (1 <= (static_discr__search_max__result4).int__content))))))))

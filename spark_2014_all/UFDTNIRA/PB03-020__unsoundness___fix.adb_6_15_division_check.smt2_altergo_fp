@@ -404,41 +404,9 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic x : f
-
-logic y : f
-
-logic z : f
-
-logic o : f
-
-logic o1 : f
-
-logic o2 : f
-
-logic result : f
-
-logic x1 : f
-
-logic result1 : f
-
-logic y1 : f
-
-logic result2 : f
-
-logic z1 : f
-
-axiom H : (to_fixed1(o) = 5)
-
-axiom H1 : (result = x)
-
-axiom H2 : (x1 = o)
-
-axiom H3 : (to_fixed1(o1) = 3)
-
-axiom H4 : (result1 = y)
-
-axiom H5 : (y1 = o1)
-
  (* File "fix.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : (not (to_fixed1(y1) = 0))
+goal WP_parameter_def :
+  (forall x:f. forall y:f. forall o:f. forall o1:f. forall result:f.
+  forall x1:f. forall result1:f. forall y1:f. (((to_fixed1(o) = 5) and
+  ((result = x) and (x1 = o))) -> (((to_fixed1(o1) = 3) and
+  ((result1 = y) and (y1 = o1))) -> (not (to_fixed1(y1) = 0)))))

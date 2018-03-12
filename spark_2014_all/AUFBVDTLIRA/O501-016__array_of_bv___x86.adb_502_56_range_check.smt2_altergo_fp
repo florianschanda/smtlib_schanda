@@ -941,12 +941,6 @@ axiom toBig_to_uint : (forall x:t. (tqtint(x) = tqtint1(toBig(x))))
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int2 : bool -> int
 
 axiom to_int_def2 :
@@ -958,6 +952,12 @@ logic of_int2 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int2(i)]. (((i = 0) -> (of_int2(i) = false)) and
   ((not (i = 0)) -> (of_int2(i) = true))))
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1082,24 +1082,6 @@ axiom slide_def :
   (forall i:t1 [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[sub1(i, sub1(new_first, old_first))]))))))
 
-logic concat : (t1,unsigned8) farray, t1, t1, (t1,unsigned8) farray, t1,
-  t1 -> (t1,unsigned8) farray
-
-axiom concat_def :
-  (forall a:(t1,unsigned8) farray. forall b:(t1,unsigned8) farray.
-  (forall a_first:t1. forall a_last:t1. forall b_first:t1. forall b_last:t1.
-  (forall i:t1 [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((ule1(a_first, i) and ule1(i, a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and (ugt1(i, a_last) -> ((concat(a,
-  a_first, a_last, b, b_first, b_last)[i]) = (b[add1(sub1(i, a_last),
-  sub1(b_first, one1))])))))))
-
-logic singleton : unsigned8, t1 -> (t1,unsigned8) farray
-
-axiom singleton_def :
-  (forall v:unsigned8.
-  (forall i:t1 [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq6 : (t1,unsigned8) farray, t1, t1, (t1,unsigned8) farray, t1,
   t1 -> bool
 
@@ -1110,19 +1092,19 @@ axiom bool_eq_def5 :
   a__last) and (ule1(b__first, b__last) and (sub1(a__last,
   a__first) = sub1(b__last, b__first)))) or ((not ule1(a__first,
   a__last)) and ugt1(b__first, b__last))) and
-  (forall temp___idx_132:t1. (((ule1(a__first, temp___idx_132) and
-  ule1(temp___idx_132, a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[add1(sub1(b__first, a__first),
-  temp___idx_132)])))) or (not (ule1(a__first, temp___idx_132) and
-  ule1(temp___idx_132, a__last)))))) -> (bool_eq6(a, a__first, a__last, b,
+  (forall temp___idx_154:t1. (((ule1(a__first, temp___idx_154) and
+  ule1(temp___idx_154, a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[add1(sub1(b__first, a__first),
+  temp___idx_154)])))) or (not (ule1(a__first, temp___idx_154) and
+  ule1(temp___idx_154, a__last)))))) -> (bool_eq6(a, a__first, a__last, b,
   b__first, b__last) = true)) and ((not (((ule1(a__first, a__last) ->
   (ule1(b__first, b__last) and (sub1(a__last, a__first) = sub1(b__last,
   b__first)))) and ((not ule1(a__first, a__last)) -> ugt1(b__first,
   b__last))) and
-  (forall temp___idx_132:t1. ((ule1(a__first, temp___idx_132) and
-  ule1(temp___idx_132, a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[add1(sub1(b__first, a__first),
-  temp___idx_132)]))))))) -> (bool_eq6(a, a__first, a__last, b, b__first,
+  (forall temp___idx_154:t1. ((ule1(a__first, temp___idx_154) and
+  ule1(temp___idx_154, a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[add1(sub1(b__first, a__first),
+  temp___idx_154)]))))))) -> (bool_eq6(a, a__first, a__last, b, b__first,
   b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1132,40 +1114,10 @@ axiom bool_eq_rev :
   a__last) = true) -> (((ule1(a__first, a__last) -> (ule1(b__first,
   b__last) and (sub1(a__last, a__first) = sub1(b__last, b__first)))) and
   ((not ule1(a__first, a__last)) -> ugt1(b__first, b__last))) and
-  (forall temp___idx_132:t1. ((ule1(a__first, temp___idx_132) and
-  ule1(temp___idx_132, a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[add1(sub1(b__first, a__first),
-  temp___idx_132)])))))))))
-
-logic compare : (t1,unsigned8) farray, t1, t1, (t1,unsigned8) farray, t1,
-  t1 -> int
-
-axiom compare_def_eq :
-  (forall a:(t1,unsigned8) farray. forall b:(t1,unsigned8) farray.
-  (forall a_first:t1. forall a_last:t1. forall b_first:t1. forall b_last:t1
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) = 0) <-> (bool_eq6(a, a_first, a_last, b,
-  b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(t1,unsigned8) farray. forall b:(t1,unsigned8) farray.
-  (forall a_first:t1. forall a_last:t1. forall b_first:t1. forall b_last:t1
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) <  0) <->
-  (exists i:t1. exists j:t1. (ule1(i, a_last) and (ult1(j, b_last) and
-  ((bool_eq6(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  (ult1(i, a_last) and ult(to_rep((a[add1(i, one1)])), to_rep((b[add1(j,
-  one1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(t1,unsigned8) farray. forall b:(t1,unsigned8) farray.
-  (forall a_first:t1. forall a_last:t1. forall b_first:t1. forall b_last:t1
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((0 <  compare(a,
-  a_first, a_last, b, b_first, b_last)) <->
-  (exists i:t1. exists j:t1. (ule1(i, b_last) and (ult1(j, a_last) and
-  ((bool_eq6(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  (ult1(i, b_last) and ugt(to_rep((a[add1(j, one1)])), to_rep((b[add1(i,
-  one1)]))))))))))))
+  (forall temp___idx_154:t1. ((ule1(a__first, temp___idx_154) and
+  ule1(temp___idx_154, a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[add1(sub1(b__first, a__first),
+  temp___idx_154)])))))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -1528,11 +1480,15 @@ logic readmem32 : t1, (t1,unsigned8) farray -> t2
 
 logic readmem32__function_guard : t2, t1, (t1,unsigned8) farray -> prop
 
+logic rliteral2 : t1
+
+axiom rliteral_axiom2 : (tqtint1(rliteral2) = 4)
+
 axiom readmem64__post_axiom :
   (forall addr:t1.
   (forall x86__memory:(t1,unsigned8) farray [readmem64(addr, x86__memory)].
   (readmem64(addr, x86__memory) = bw_or1(toBig1(readmem32(addr,
-  x86__memory)), lsl_bv1(toBig1(readmem32(add1(addr, of_int1(4)),
+  x86__memory)), lsl_bv1(toBig1(readmem32(add1(addr, rliteral2),
   x86__memory)), of_int1(32))))))
 
 logic addr : t1
@@ -1935,12 +1891,12 @@ logic toBig2 : t -> t3
 
 logic toSmall2 : t3 -> t
 
-logic rliteral2 : t3
+logic rliteral3 : t3
 
-axiom rliteral_axiom2 : (tqtint3(rliteral2) = 255)
+axiom rliteral_axiom3 : (tqtint3(rliteral3) = 255)
 
 axiom toSmall_to_uint2 :
-  (forall x:t3. (ule3(x, rliteral2) -> (tqtint3(x) = tqtint(toSmall2(x)))))
+  (forall x:t3. (ule3(x, rliteral3) -> (tqtint3(x) = tqtint(toSmall2(x)))))
 
 axiom toBig_to_uint2 : (forall x:t. (tqtint(x) = tqtint3(toBig2(x))))
 
@@ -1948,91 +1904,94 @@ logic readmem16 : t1, (t1,unsigned8) farray -> t3
 
 logic readmem16__function_guard : t3, t1, (t1,unsigned8) farray -> prop
 
+logic rliteral4 : t1
+
+axiom rliteral_axiom4 : (tqtint1(rliteral4) = 1)
+
+logic rliteral5 : t3
+
+axiom rliteral_axiom5 : (tqtint3(rliteral5) = 0)
+
 axiom readmem16__post_axiom :
   (forall addr1:t1.
   (forall x86__memory:(t1,unsigned8) farray [readmem16(addr1, x86__memory)].
   (((8 <  16) -> (readmem16(addr1,
   x86__memory) = bw_or3(toBig2(to_rep((x86__memory[addr1]))),
-  lsl_bv3(toBig2(to_rep((x86__memory[add1(addr1, of_int1(1))]))),
+  lsl_bv3(toBig2(to_rep((x86__memory[add1(addr1, rliteral4)]))),
   of_int4(8))))) and ((not (8 <  16)) -> (readmem16(addr1,
-  x86__memory) = bw_or3(toBig2(to_rep((x86__memory[addr1]))), of_int4(0)))))))
+  x86__memory) = bw_or3(toBig2(to_rep((x86__memory[addr1]))), rliteral5))))))
 
 logic toBig3 : t3 -> t2
 
 logic toSmall3 : t2 -> t3
 
-logic rliteral3 : t2
+logic rliteral6 : t2
 
-axiom rliteral_axiom3 : (tqtint2(rliteral3) = 65535)
+axiom rliteral_axiom6 : (tqtint2(rliteral6) = 65535)
 
 axiom toSmall_to_uint3 :
-  (forall x:t2. (ule2(x, rliteral3) -> (tqtint2(x) = tqtint3(toSmall3(x)))))
+  (forall x:t2. (ule2(x, rliteral6) -> (tqtint2(x) = tqtint3(toSmall3(x)))))
 
 axiom toBig_to_uint3 : (forall x:t3. (tqtint3(x) = tqtint2(toBig3(x))))
+
+logic rliteral7 : t1
+
+axiom rliteral_axiom7 : (tqtint1(rliteral7) = 2)
 
 axiom readmem32__post_axiom :
   (forall addr1:t1.
   (forall x86__memory:(t1,unsigned8) farray [readmem32(addr1, x86__memory)].
   (readmem32(addr1, x86__memory) = bw_or2(toBig3(readmem16(addr1,
-  x86__memory)), lsl_bv2(toBig3(readmem16(add1(addr1, of_int1(2)),
+  x86__memory)), lsl_bv2(toBig3(readmem16(add1(addr1, rliteral7),
   x86__memory)), of_int3(16))))))
 
-logic memory : (t1,unsigned8) farray
+logic rliteral8 : t1
 
-logic memory1 : (t1,unsigned8) farray
+axiom rliteral_axiom8 : (tqtint1(rliteral8) = 255)
 
-logic memory2 : (t1,unsigned8) farray
+logic rliteral9 : t1
 
-logic memory3 : (t1,unsigned8) farray
+axiom rliteral_axiom9 : (tqtint1(rliteral9) = 0)
 
-logic memory4 : (t1,unsigned8) farray
+logic rliteral10 : t1
 
-logic memory5 : (t1,unsigned8) farray
+axiom rliteral_axiom10 : (tqtint1(rliteral10) = 18446744073709551615)
 
-logic memory6 : (t1,unsigned8) farray
+logic rliteral11 : t1
 
-logic memory7 : (t1,unsigned8) farray
+axiom rliteral_axiom11 : (tqtint1(rliteral11) = 3)
 
-logic memory8 : (t1,unsigned8) farray
+logic rliteral12 : t
 
-logic memory9 : (t1,unsigned8) farray
-
-logic memory10 : (t1,unsigned8) farray
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : ((readmem8(addr, memory1) = toSmall(bw_and1(val__,
-  of_int1(255)))) and
-  (forall i:t1. ((ule1(of_int1(0), i) and ule1(i,
-  of_int1(18446744073709551615))) -> ((not (i = addr)) ->
-  (to_rep((memory1[i])) = to_rep((memory[i])))))))
-
-axiom H3 : ((readmem8(add1(addr, of_int1(1)),
-  memory2) = toSmall(bw_and1(lsr_bv1(val__, of_int1(8)), of_int1(255)))) and
-  (forall i:t1. ((ule1(of_int1(0), i) and ule1(i,
-  of_int1(18446744073709551615))) -> ((not (i = add1(addr, of_int1(1)))) ->
-  (to_rep((memory2[i])) = to_rep((memory1[i])))))))
-
-axiom H4 : ((readmem8(add1(addr, of_int1(2)),
-  memory3) = toSmall(bw_and1(lsr_bv1(val__, of_int1(16)), of_int1(255)))) and
-  (forall i:t1. ((ule1(of_int1(0), i) and ule1(i,
-  of_int1(18446744073709551615))) -> ((not (i = add1(addr, of_int1(2)))) ->
-  (to_rep((memory3[i])) = to_rep((memory2[i])))))))
-
-axiom H5 : ((readmem8(add1(addr, of_int1(3)),
-  memory4) = toSmall(bw_and1(lsr_bv1(val__, of_int1(24)), of_int1(255)))) and
-  (forall i:t1. ((ule1(of_int1(0), i) and ule1(i,
-  of_int1(18446744073709551615))) -> ((not (i = add1(addr, of_int1(3)))) ->
-  (to_rep((memory4[i])) = to_rep((memory3[i])))))))
-
-axiom H6 : ((readmem8(add1(addr, of_int1(4)),
-  memory5) = toSmall(bw_and1(lsr_bv1(val__, of_int1(32)), of_int1(255)))) and
-  (forall i:t1. ((ule1(of_int1(0), i) and ule1(i,
-  of_int1(18446744073709551615))) -> ((not (i = add1(addr, of_int1(4)))) ->
-  (to_rep((memory5[i])) = to_rep((memory4[i])))))))
+axiom rliteral_axiom12 : (tqtint(rliteral12) = 0)
 
  (* File "x86.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : ule1(toBig(of_int(0)), bw_and1(lsr_bv1(val__,
-  of_int1(40)), of_int1(255)))
+goal WP_parameter_def :
+  (forall memory:(t1,unsigned8) farray. forall memory1:(t1,unsigned8) farray.
+  forall memory2:(t1,unsigned8) farray. forall memory3:(t1,unsigned8) farray.
+  forall memory4:(t1,unsigned8) farray. forall memory5:(t1,unsigned8) farray.
+  (((readmem8(addr, memory1) = toSmall(bw_and1(val__, rliteral8))) and
+  (forall i:t1. ((ule1(rliteral9, i) and ule1(i, rliteral10)) ->
+  ((not (i = addr)) -> (to_rep((memory1[i])) = to_rep((memory[i]))))))) ->
+  (((readmem8(add1(addr, rliteral4),
+  memory2) = toSmall(bw_and1(lsr_bv1(val__, of_int1(8)), rliteral8))) and
+  (forall i:t1. ((ule1(rliteral9, i) and ule1(i, rliteral10)) ->
+  ((not (i = add1(addr, rliteral4))) ->
+  (to_rep((memory2[i])) = to_rep((memory1[i]))))))) -> (((readmem8(add1(addr,
+  rliteral7), memory3) = toSmall(bw_and1(lsr_bv1(val__, of_int1(16)),
+  rliteral8))) and
+  (forall i:t1. ((ule1(rliteral9, i) and ule1(i, rliteral10)) ->
+  ((not (i = add1(addr, rliteral7))) ->
+  (to_rep((memory3[i])) = to_rep((memory2[i]))))))) -> (((readmem8(add1(addr,
+  rliteral11), memory4) = toSmall(bw_and1(lsr_bv1(val__, of_int1(24)),
+  rliteral8))) and
+  (forall i:t1. ((ule1(rliteral9, i) and ule1(i, rliteral10)) ->
+  ((not (i = add1(addr, rliteral11))) ->
+  (to_rep((memory4[i])) = to_rep((memory3[i]))))))) -> (((readmem8(add1(addr,
+  rliteral2), memory5) = toSmall(bw_and1(lsr_bv1(val__, of_int1(32)),
+  rliteral8))) and
+  (forall i:t1. ((ule1(rliteral9, i) and ule1(i, rliteral10)) ->
+  ((not (i = add1(addr, rliteral2))) ->
+  (to_rep((memory5[i])) = to_rep((memory4[i]))))))) ->
+  ule1(toBig(rliteral12), bw_and1(lsr_bv1(val__, of_int1(40)),
+  rliteral8))))))))

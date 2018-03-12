@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -200,24 +200,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> (int,integer) farray
-
-axiom concat_def :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : integer, int -> (int,integer) farray
-
-axiom singleton_def :
-  (forall v:integer.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,integer) farray, int, int, (int,integer) farray, int,
   int -> bool
 
@@ -228,17 +210,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -248,37 +230,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 predicate dynamic_property(first_int: int, last_int: int, x: int) =
   ((first_int <= x) and (x <= last_int))
@@ -1467,414 +1421,80 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length3(container))))) ->
   in_range12(get(container, position)))))
 
-logic s__split_fields : index
-
-logic s__split_fields1 : (int,integer) farray
-
-logic s__split_fields2 : t2
-
-logic res__split_fields : us_main_type
-
-logic i : int
-
-logic i1 : int
-
-logic list__reverse_list__result : capacity_range
-
-logic list__reverse_list__result1 : us_main_type
-
-logic list__reverse_list__R1b__assume : int
-
-logic us : int
-
-logic list__reverse_list__L_1__R4b__assume : int
-
-logic list__reverse_list__L_1__R5b__assume : int
-
-logic temp___476 : index
-
-logic temp___4761 : index
-
-logic temp___4762 : (int,integer) farray
-
-logic temp___4763 : t2
-
-logic o : int
-
-logic o1 : int
-
-logic list__reverse_list__L_2__R7b__assume : int
-
-logic list__reverse_list__L_2__R8b__assume : int
-
-logic temp___485 : capacity_range
-
-logic temp___4851 : us_main_type
-
-logic temp___484 : int
-
-logic temp___483 : index
-
-logic temp___4831 : index
-
-logic temp___4832 : (int,integer) farray
-
-logic temp___4833 : t2
-
-logic o2 : int
-
-logic j : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic i2 : int
-
-logic o11 : int
-
-logic o12 : int
-
-logic o13 : bool
-
-logic o14 : bool
-
-logic o15 : int
-
-logic o16 : int
-
-logic o17 : int
-
-logic o18 : int
-
-logic o19 : int
-
-logic o20 : int
-
-logic o21 : int
-
-logic o22 : int
-
-logic o23 : int
-
-logic s__split_fields3 : index
-
-logic s__split_fields4 : (int,integer) farray
-
-logic s__split_fields5 : t2
-
-logic res__split_fields1 : us_main_type
-
-logic result : int
-
-logic i3 : int
-
-logic s__split_fields6 : index
-
-logic s__split_fields7 : (int,integer) farray
-
-logic s__split_fields8 : t2
-
-logic i4 : int
-
-logic stack__push__s__fields : index
-
-logic stack__push__s__fields1 : (int,integer) farray
-
-logic stack__push__s__fields2 : t
-
-logic result1 : index
-
-logic result2 : (int,integer) farray
-
-logic result3 : t2
-
-logic s__split_fields9 : index
-
-logic s__split_fields10 : (int,integer) farray
-
-logic s__split_fields11 : t2
-
-logic s__split_fields12 : index
-
-logic s__split_fields13 : (int,integer) farray
-
-logic s__split_fields14 : t2
-
-logic i5 : int
-
-logic s__split_fields15 : index
-
-logic s__split_fields16 : (int,integer) farray
-
-logic s__split_fields17 : t2
-
-logic i6 : int
-
-logic s__split_fields18 : index
-
-logic s__split_fields19 : (int,integer) farray
-
-logic s__split_fields20 : t2
-
-logic i7 : int
-
-logic s__split_fields21 : index
-
-logic s__split_fields22 : (int,integer) farray
-
-logic s__split_fields23 : t2
-
-logic i8 : int
-
-logic result4 : int
-
-logic i9 : int
-
-logic list__my_lists__append__2__container__fields : us_main_type
-
-logic result5 : us_main_type
-
-logic res__split_fields2 : us_main_type
-
-logic stack__pop__s__fields : index
-
-logic stack__pop__s__fields1 : (int,integer) farray
-
-logic stack__pop__s__fields2 : t
-
-logic result6 : index
-
-logic result7 : (int,integer) farray
-
-logic result8 : t2
-
-logic s__split_fields24 : index
-
-logic s__split_fields25 : (int,integer) farray
-
-logic s__split_fields26 : t2
-
-logic s__split_fields27 : index
-
-logic s__split_fields28 : (int,integer) farray
-
-logic s__split_fields29 : t2
-
-logic res__split_fields3 : us_main_type
-
-logic i10 : int
-
-logic result9 : int
-
-logic i11 : int
-
-logic list__my_lists__append__2__container__fields1 : us_main_type
-
-logic result10 : us_main_type
-
-logic res__split_fields4 : us_main_type
-
-logic stack__pop__s__fields3 : index
-
-logic stack__pop__s__fields4 : (int,integer) farray
-
-logic stack__pop__s__fields5 : t
-
-logic result11 : index
-
-logic result12 : (int,integer) farray
-
-logic result13 : t2
-
-logic s__split_fields30 : index
-
-logic s__split_fields31 : (int,integer) farray
-
-logic s__split_fields32 : t2
-
-logic s__split_fields33 : index
-
-logic s__split_fields34 : (int,integer) farray
-
-logic s__split_fields35 : t2
-
-logic res__split_fields5 : us_main_type
-
-logic i12 : int
-
-logic s__split_fields36 : index
-
-logic s__split_fields37 : (int,integer) farray
-
-logic s__split_fields38 : t2
-
-logic res__split_fields6 : us_main_type
-
-logic i13 : int
-
-logic rho : us_main_type
-
-logic rho1 : index
-
-logic rho2 : (int,integer) farray
-
-logic rho3 : t
-
-logic s__split_fields39 : index
-
-logic s__split_fields40 : (int,integer) farray
-
-logic s__split_fields41 : t2
-
-logic res__split_fields7 : us_main_type
-
-logic i14 : int
-
-logic s__split_fields42 : index
-
-logic s__split_fields43 : (int,integer) farray
-
-logic s__split_fields44 : t2
-
-logic res__split_fields8 : us_main_type
-
-logic i15 : int
-
-logic s__split_fields45 : index
-
-logic s__split_fields46 : (int,integer) farray
-
-logic s__split_fields47 : t2
-
-logic res__split_fields9 : us_main_type
-
-logic i16 : int
-
-logic s__split_fields48 : index
-
-logic s__split_fields49 : (int,integer) farray
-
-logic s__split_fields50 : t2
-
-logic res__split_fields10 : us_main_type
-
-logic i17 : int
-
-logic s__split_fields51 : index
-
-logic s__split_fields52 : (int,integer) farray
-
-logic s__split_fields53 : t2
-
-logic res__split_fields11 : us_main_type
-
-logic i18 : int
-
-logic s__split_fields54 : index
-
-logic s__split_fields55 : (int,integer) farray
-
-logic s__split_fields56 : t2
-
-logic res__split_fields12 : us_main_type
-
-logic i19 : int
-
-logic result14 : capacity_range
-
-logic result15 : us_main_type
-
-logic list__reverse_list__result2 : capacity_range
-
-logic list__reverse_list__result3 : us_main_type
-
-logic s__split_fields57 : index
-
-logic s__split_fields58 : (int,integer) farray
-
-logic s__split_fields59 : t2
-
-logic res__split_fields13 : us_main_type
-
-logic i20 : int
-
-logic i21 : int
-
-logic list__reverse_list__result4 : capacity_range
-
-logic list__reverse_list__result5 : us_main_type
-
-logic s__split_fields60 : index
-
-logic s__split_fields61 : (int,integer) farray
-
-logic s__split_fields62 : t2
-
-logic res__split_fields14 : us_main_type
-
-logic i22 : int
-
-logic i23 : int
-
-logic list__reverse_list__result6 : capacity_range
-
-logic list__reverse_list__result7 : us_main_type
-
-logic s__split_fields63 : index
-
-logic s__split_fields64 : (int,integer) farray
-
-logic s__split_fields65 : t2
-
-logic res__split_fields15 : us_main_type
-
-logic i24 : int
-
-logic i25 : int
-
-logic list__reverse_list__result8 : capacity_range
-
-logic list__reverse_list__result9 : us_main_type
-
-logic s__split_fields66 : index
-
-logic s__split_fields67 : (int,integer) farray
-
-logic s__split_fields68 : t2
-
-logic res__split_fields16 : us_main_type
-
-logic i26 : int
-
-logic i27 : int
-
-logic list__reverse_list__result10 : capacity_range
-
-logic list__reverse_list__result11 : us_main_type
-
-logic result16 : bool
-
-axiom H : (100 = to_rep2(l))
-
-axiom H1 : (((((list__reverse_list__R1b__assume = length2({
-  us_split_discrs3 = { rec__list__my_lists__vector__capacity = l };
-  us_split_fields3 = { rec__list__my_lists__vector = l1 } })) and
-  (in_range6(list__reverse_list__R1b__assume) and (((of_int(1) = true) ->
-  (list__reverse_list__R1b__assume <= to_rep2(l))) and
-  ((not (of_int(1) = true)) ->
+ (* File "list.ads", line 9, characters 0-0 *)
+goal WP_parameter_def :
+  (forall s__split_fields:index.
+  forall s__split_fields1:(int,integer) farray. forall s__split_fields2:t2.
+  forall res__split_fields:us_main_type. forall i:int. forall i1:int.
+  forall list__reverse_list__result:capacity_range.
+  forall list__reverse_list__result1:us_main_type.
+  forall list__reverse_list__R1b__assume:int. forall us:int.
+  forall list__reverse_list__L_1__R4b__assume:int.
+  forall list__reverse_list__L_1__R5b__assume:int. forall temp___521:index.
+  forall temp___5211:index. forall temp___5212:(int,integer) farray.
+  forall temp___5213:t2. forall o:int. forall o1:int.
+  forall list__reverse_list__L_2__R7b__assume:int.
+  forall list__reverse_list__L_2__R8b__assume:int.
+  forall temp___530:capacity_range. forall temp___5301:us_main_type.
+  forall temp___529:int. forall temp___528:index. forall temp___5281:index.
+  forall temp___5282:(int,integer) farray. forall temp___5283:t2.
+  forall o2:int. forall i2:int. forall o3:int. forall o4:int. forall o5:bool.
+  forall o6:bool. forall o7:int. forall o8:int. forall o9:int.
+  forall o10:int. forall s__split_fields3:index.
+  forall s__split_fields4:(int,integer) farray. forall s__split_fields5:t2.
+  forall res__split_fields1:us_main_type. forall result:int. forall i3:int.
+  forall s__split_fields6:index.
+  forall s__split_fields7:(int,integer) farray. forall s__split_fields8:t2.
+  forall i4:int. forall stack__push__s__fields:index.
+  forall stack__push__s__fields1:(int,integer) farray.
+  forall stack__push__s__fields2:t. forall result1:index.
+  forall result2:(int,integer) farray. forall result3:t2.
+  forall s__split_fields9:index.
+  forall s__split_fields10:(int,integer) farray. forall s__split_fields11:t2.
+  forall s__split_fields12:index.
+  forall s__split_fields13:(int,integer) farray. forall s__split_fields14:t2.
+  forall i5:int. forall s__split_fields15:index.
+  forall s__split_fields16:(int,integer) farray. forall s__split_fields17:t2.
+  forall i6:int. forall s__split_fields18:index.
+  forall s__split_fields19:(int,integer) farray. forall s__split_fields20:t2.
+  forall i7:int__ref. forall s__split_fields21:us_split_fields4.
+  forall i8:int. forall result4:int__ref. forall i9:int.
+  forall list__my_lists__append__2__container__fields:us_split_fields2.
+  forall result5:us_split_fields__ref1.
+  forall res__split_fields2:us_split_fields2.
+  forall stack__pop__s__fields:us_split_fields.
+  forall result6:us_split_fields__ref2.
+  forall s__split_fields22:us_split_fields4.
+  forall s__split_fields23:us_split_fields4.
+  forall res__split_fields3:us_split_fields2. forall i10:int.
+  forall s__split_fields24:us_split_fields__ref2.
+  forall res__split_fields4:us_split_fields__ref1. forall i11:int__ref.
+  forall s__split_fields25:us_split_fields4.
+  forall res__split_fields5:us_split_fields2. forall i12:int.
+  forall s__split_fields26:us_split_fields__ref2.
+  forall res__split_fields6:us_split_fields__ref1. forall i13:int__ref.
+  forall s__split_fields27:us_split_fields4.
+  forall res__split_fields7:us_split_fields2. forall i14:int.
+  forall result7:list__ref. forall list__reverse_list__result2:us_rep1.
+  forall s__split_fields28:us_split_fields__ref2.
+  forall res__split_fields8:us_split_fields__ref1. forall i15:int__ref.
+  forall i16:int__ref. forall list__reverse_list__result3:list__ref.
+  forall s__split_fields29:us_split_fields4.
+  forall res__split_fields9:us_split_fields2. forall i17:int. forall i18:int.
+  forall list__reverse_list__result4:us_rep1.
+  forall s__split_fields30:us_split_fields__ref2.
+  forall res__split_fields10:us_split_fields__ref1. forall i19:int__ref.
+  forall i20:int__ref. forall list__reverse_list__result5:list__ref.
+  forall s__split_fields31:us_split_fields4.
+  forall res__split_fields11:us_split_fields2. forall i21:int.
+  forall i22:int. forall list__reverse_list__result6:us_rep1.
+  forall result8:bool. ((100 = to_rep2(l)) ->
+  ((((((list__reverse_list__R1b__assume = length2({ us_split_discrs3 = {
+  rec__list__my_lists__vector__capacity = l }; us_split_fields3 = {
+  rec__list__my_lists__vector = l1 } })) and
+  (in_range6(list__reverse_list__R1b__assume) and (((of_int(1) = true) and
+  (list__reverse_list__R1b__assume <= to_rep2(l))) or
+  ((not (of_int(1) = true)) and
   (list__reverse_list__R1b__assume <= 100))))) and
   (list__reverse_list__R1b__assume = r1b)) and (in_range6(r1b) and
   (((us = r1b) and in_range2(r1b)) and ((to_rep1(s__split_discrs) = r1b) and
@@ -1886,20 +1506,14 @@ axiom H1 : (((((list__reverse_list__R1b__assume = length2({
   to_rep(last4(s__split_fields2))) and
   ((to_rep(first4(s__split_fields2)) = 1) and
   (to_rep(last4(s__split_fields2)) = r1b)))) and
-  (((((list__reverse_list__result4 = list__reverse_list__result2) and
-  (list__reverse_list__result5 = list__reverse_list__result3)) and
-  ((i21 = i18) and ((i20 = i7) and
-  ((res__split_fields13 = res__split_fields11) and
-  ((s__split_fields57 = s__split_fields51) and
-  ((s__split_fields58 = s__split_fields52) and
-  (s__split_fields59 = s__split_fields53))))))) and
-  (((list__reverse_list__result6 = list__reverse_list__result2) and
-  (list__reverse_list__result7 = list__reverse_list__result3)) and
-  ((i23 = i19) and ((i22 = i8) and
-  ((res__split_fields14 = res__split_fields12) and
-  ((s__split_fields60 = s__split_fields54) and
-  ((s__split_fields61 = s__split_fields55) and
-  (s__split_fields62 = s__split_fields56)))))))) and
+  ((((list__reverse_list__result3 = { list__content =
+  list__reverse_list__result2 }) and ((i16 = i13) and ((i15 = i7) and
+  ((res__split_fields8 = res__split_fields6) and
+  (s__split_fields28 = s__split_fields26))))) and
+  ((list__reverse_list__result4 = list__reverse_list__result2) and
+  ((i18 = i14) and ((i17 = i8) and
+  ((res__split_fields9 = res__split_fields7) and
+  (s__split_fields29 = s__split_fields27)))))) and
   ((((to_rep2(res__split_discrs) = 100) and (is_empty1({ us_split_discrs3 = {
   rec__list__my_lists__vector__capacity = res__split_discrs };
   us_split_fields3 = { rec__list__my_lists__vector = res__split_fields }
@@ -1916,10 +1530,10 @@ axiom H1 : (((((list__reverse_list__R1b__assume = length2({
   us_split_discrs3 = { rec__list__my_lists__vector__capacity = l };
   us_split_fields3 = { rec__list__my_lists__vector = l1 } })))))) and
   (list__reverse_list__L_1__R5b__assume = r5b)) and in_range5(r5b)) and
-  ((((result = i) and (i3 = r4b)) and ((((r4b <= i3) and (i3 <= r5b)) ->
-  (((((s__split_discrs = temp___476) and ((s__split_fields = temp___4761) and
-  ((s__split_fields1 = temp___4762) and
-  (s__split_fields2 = temp___4763)))) and (((dynamic_property4(1, r1b,
+  ((((result = i) and (i3 = r4b)) and ((((r4b <= i3) and (i3 <= r5b)) and
+  (((((s__split_discrs = temp___521) and ((s__split_fields = temp___5211) and
+  ((s__split_fields1 = temp___5212) and
+  (s__split_fields2 = temp___5213)))) and (((dynamic_property4(1, r1b,
   to_rep(first4(s__split_fields8)), to_rep(last4(s__split_fields8))) and
   ((to_rep(first4(s__split_fields8)) = 1) and
   (to_rep(last4(s__split_fields8)) = r1b))) and ((r4b <= i4) and
@@ -1978,24 +1592,30 @@ axiom H1 : (((((list__reverse_list__R1b__assume = length2({
   rec__stack__stack__top = stack__push__s__fields;
   rec__stack__stack__content = { elts = stack__push__s__fields1; rt =
   stack__push__s__fields2 } } })).us_split_discrs4))) and (i4 = r5b)))) and
-  (((i5 = i4) and ((s__split_fields12 = s__split_fields9) and
+  (((i4 = i5) and ((s__split_fields12 = s__split_fields9) and
   ((s__split_fields13 = s__split_fields10) and
-  (s__split_fields14 = s__split_fields11)))) and ((i6 = i4) and
-  ((s__split_fields15 = s__split_fields9) and
-  ((s__split_fields16 = s__split_fields10) and
-  (s__split_fields17 = s__split_fields11)))))) and (((i7 = i5) and
-  ((s__split_fields18 = s__split_fields12) and
-  ((s__split_fields19 = s__split_fields13) and
-  (s__split_fields20 = s__split_fields14)))) and ((i8 = i6) and
-  ((s__split_fields21 = s__split_fields15) and
-  ((s__split_fields22 = s__split_fields16) and
-  (s__split_fields23 = s__split_fields17))))))) and ((not ((r4b <= i3) and
-  (i3 <= r5b))) -> (((i7 = i3) and ((s__split_fields18 = s__split_fields) and
-  ((s__split_fields19 = s__split_fields1) and
-  (s__split_fields20 = s__split_fields2)))) and ((i8 = i3) and
-  ((s__split_fields21 = s__split_fields3) and
-  ((s__split_fields22 = s__split_fields4) and
-  (s__split_fields23 = s__split_fields5)))))))) and
+  (s__split_fields14 = s__split_fields11)))) and ((i6 = i4) and ({
+  rec__stack__stack__top1 = s__split_fields15; rec__stack__stack__content1 =
+  { elts2 = s__split_fields16; rt2 = s__split_fields17 } } = {
+  rec__stack__stack__top1 = s__split_fields9; rec__stack__stack__content1 = {
+  elts2 = s__split_fields10; rt2 = s__split_fields11 } })))) and (((i7 = {
+  int__content = i5 }) and ({ us_split_fields__content2 = {
+  rec__stack__stack__top1 = s__split_fields18; rec__stack__stack__content1 =
+  { elts2 = s__split_fields19; rt2 = s__split_fields20 } } } = {
+  us_split_fields__content2 = { rec__stack__stack__top1 = s__split_fields12;
+  rec__stack__stack__content1 = { elts2 = s__split_fields13; rt2 =
+  s__split_fields14 } } })) and ((i8 = i6) and (s__split_fields21 = {
+  rec__stack__stack__top1 = s__split_fields15; rec__stack__stack__content1 =
+  { elts2 = s__split_fields16; rt2 = s__split_fields17 } }))))) or
+  ((not ((r4b <= i3) and (i3 <= r5b))) and (((i7 = { int__content = i3 }) and
+  ({ us_split_fields__content2 = { rec__stack__stack__top1 =
+  s__split_fields18; rec__stack__stack__content1 = { elts2 =
+  s__split_fields19; rt2 = s__split_fields20 } } } = {
+  us_split_fields__content2 = { rec__stack__stack__top1 = s__split_fields;
+  rec__stack__stack__content1 = { elts2 = s__split_fields1; rt2 =
+  s__split_fields2 } } })) and ((i8 = i3) and (s__split_fields21 = {
+  rec__stack__stack__top1 = s__split_fields3; rec__stack__stack__content1 = {
+  elts2 = s__split_fields4; rt2 = s__split_fields5 } })))))) and
   (((((list__reverse_list__L_2__R7b__assume = 1) and
   (in_range4(list__reverse_list__L_2__R7b__assume) and
   (list__reverse_list__L_2__R7b__assume = 1))) and
@@ -2008,12 +1628,12 @@ axiom H1 : (((((list__reverse_list__R1b__assume = length2({
   us_split_discrs3 = { rec__list__my_lists__vector__capacity = l };
   us_split_fields3 = { rec__list__my_lists__vector = l1 } })))))) and
   (list__reverse_list__L_2__R8b__assume = r8b)) and in_range5(r8b)) and
-  ((((result4 = i1) and (i9 = r7b)) and ((((r7b <= i9) and (i9 <= r8b)) ->
-  (((((res__split_discrs = temp___485) and
-  (res__split_fields = temp___4851)) and ((temp___484 = i9) and
-  (((s__split_discrs = temp___483) and ((s__split_fields18 = temp___4831) and
-  ((s__split_fields19 = temp___4832) and
-  (s__split_fields20 = temp___4833)))) and (((((o2 = top(to_base({
+  ((((result4 = { int__content = i1 }) and (i9 = r7b)) and ((((r7b <= i9) and
+  (i9 <= r8b)) and (((((res__split_discrs = temp___530) and
+  (res__split_fields = temp___5301)) and ((temp___529 = i9) and
+  (((s__split_discrs = temp___528) and ((s__split_fields18 = temp___5281) and
+  ((s__split_fields19 = temp___5282) and
+  (s__split_fields20 = temp___5283)))) and (((((o2 = top(to_base({
   us_split_discrs4 = { rec__stack__stack__n = s__split_discrs };
   us_split_fields5 = { rec__stack__stack__top1 = s__split_fields18;
   rec__stack__stack__content1 = { elts2 = s__split_fields19; rt2 =
@@ -2023,17 +1643,17 @@ axiom H1 : (((((list__reverse_list__R1b__assume = length2({
   rec__stack__stack__content1 = { elts2 = s__split_fields19; rt2 =
   s__split_fields20 } } })).us_split_fields1).rec__stack__stack__top)))) and
   (((length2({ us_split_discrs3 = { rec__list__my_lists__vector__capacity =
-  res__split_discrs }; us_split_fields3 = { rec__list__my_lists__vector =
-  list__my_lists__append__2__container__fields } }) = (length2({
+  res__split_discrs }; us_split_fields3 =
+  list__my_lists__append__2__container__fields }) = (length2({
   us_split_discrs3 = { rec__list__my_lists__vector__capacity =
   res__split_discrs }; us_split_fields3 = { rec__list__my_lists__vector =
-  res__split_fields } }) + 1)) and (((bool_lt(length3(model__({
+  res__split_fields } }) + 1)) and ((bool_lt(length3(model__({
   us_split_discrs3 = { rec__list__my_lists__vector__capacity =
   res__split_discrs }; us_split_fields3 = { rec__list__my_lists__vector =
   res__split_fields } })), length3(model__({ us_split_discrs3 = {
   rec__list__my_lists__vector__capacity = res__split_discrs };
-  us_split_fields3 = { rec__list__my_lists__vector =
-  list__my_lists__append__2__container__fields } }))) = true) ->
+  us_split_fields3 = list__my_lists__append__2__container__fields
+  }))) = true) and
   (forall n:int. (((1 <= n) and (n <= (0 + length3(model__({
   us_split_discrs3 = { rec__list__my_lists__vector__capacity =
   res__split_discrs }; us_split_fields3 = { rec__list__my_lists__vector =
@@ -2042,22 +1662,15 @@ axiom H1 : (((((list__reverse_list__R1b__assume = length2({
   us_split_fields3 = { rec__list__my_lists__vector = res__split_fields } }),
   n) = get(model__({ us_split_discrs3 = {
   rec__list__my_lists__vector__capacity = res__split_discrs };
-  us_split_fields3 = { rec__list__my_lists__vector =
-  list__my_lists__append__2__container__fields } }), n))))) and
-  (not (bool_lt(length3(model__({ us_split_discrs3 = {
-  rec__list__my_lists__vector__capacity = res__split_discrs };
-  us_split_fields3 = { rec__list__my_lists__vector = res__split_fields } })),
-  length3(model__({ us_split_discrs3 = {
-  rec__list__my_lists__vector__capacity = res__split_discrs };
-  us_split_fields3 = { rec__list__my_lists__vector =
-  list__my_lists__append__2__container__fields } }))) = false)))) and
+  us_split_fields3 = list__my_lists__append__2__container__fields }), n)))))) and
   (get(model__({ us_split_discrs3 = { rec__list__my_lists__vector__capacity =
-  res__split_discrs }; us_split_fields3 = { rec__list__my_lists__vector =
-  list__my_lists__append__2__container__fields } }), ((0 + length3(model__({
+  res__split_discrs }; us_split_fields3 =
+  list__my_lists__append__2__container__fields }), ((0 + length3(model__({
   us_split_discrs3 = { rec__list__my_lists__vector__capacity =
   res__split_discrs }; us_split_fields3 = { rec__list__my_lists__vector =
-  res__split_fields } }))) + 1)) = o2))) and
-  ((result5 = res__split_fields) and
+  res__split_fields } }))) + 1)) = o2))) and ((result5 = {
+  us_split_fields__content1 = { rec__list__my_lists__vector =
+  res__split_fields } }) and
   (res__split_fields2 = list__my_lists__append__2__container__fields))) and
   ((((bool_eq4((to_but_top({ us_split_discrs1 = { rec__stack__stack__n =
   s__split_discrs }; us_split_fields1 = (to_base({ us_split_discrs4 = {
@@ -2077,123 +1690,85 @@ axiom H1 : (((((list__reverse_list__R1b__assume = length2({
   rec__stack__stack__content1 = { elts2 = s__split_fields19; rt2 =
   s__split_fields20 } } })).us_split_fields1 })).rt1)), (to__({
   us_split_discrs1 = { rec__stack__stack__n = s__split_discrs };
-  us_split_fields1 = { rec__stack__stack__top = stack__pop__s__fields;
-  rec__stack__stack__content = { elts = stack__pop__s__fields1; rt =
-  stack__pop__s__fields2 } } })).elts1, to_rep(first2((to__({
+  us_split_fields1 = stack__pop__s__fields })).elts1, to_rep(first2((to__({
   us_split_discrs1 = { rec__stack__stack__n = s__split_discrs };
-  us_split_fields1 = { rec__stack__stack__top = stack__pop__s__fields;
-  rec__stack__stack__content = { elts = stack__pop__s__fields1; rt =
-  stack__pop__s__fields2 } } })).rt1)), to_rep(last2((to__({
+  us_split_fields1 = stack__pop__s__fields })).rt1)), to_rep(last2((to__({
   us_split_discrs1 = { rec__stack__stack__n = s__split_discrs };
-  us_split_fields1 = { rec__stack__stack__top = stack__pop__s__fields;
-  rec__stack__stack__content = { elts = stack__pop__s__fields1; rt =
-  stack__pop__s__fields2 } } })).rt1))) = true) and (dynamic_property1(1,
-  to_rep1(s__split_discrs), to_rep(first(stack__pop__s__fields2)),
-  to_rep(last(stack__pop__s__fields2))) and
-  ((to_rep(first(stack__pop__s__fields2)) = 1) and
-  (to_rep(last(stack__pop__s__fields2)) = to_rep1(s__split_discrs))))) and
-  ((((result6 = s__split_fields18) and ((result7 = s__split_fields19) and
-  (result8 = s__split_fields20))) and ({ rec__stack__stack__top1 =
-  s__split_fields24; rec__stack__stack__content1 = { elts2 =
-  s__split_fields25; rt2 = s__split_fields26 } } = (of_base({
-  us_split_discrs1 = { rec__stack__stack__n = s__split_discrs };
-  us_split_fields1 = { rec__stack__stack__top = stack__pop__s__fields;
-  rec__stack__stack__content = { elts = stack__pop__s__fields1; rt =
-  stack__pop__s__fields2 } } })).us_split_fields5)) and ({
-  rec__stack__stack__n = s__split_discrs } = (of_base({ us_split_discrs1 = {
-  rec__stack__stack__n = s__split_discrs }; us_split_fields1 = {
-  rec__stack__stack__top = stack__pop__s__fields;
-  rec__stack__stack__content = { elts = stack__pop__s__fields1; rt =
-  stack__pop__s__fields2 } } })).us_split_discrs4))) and
-  ((forall j1:int. (((1 <= j1) and (j1 <= i10)) -> (get(model__({
+  us_split_fields1 = stack__pop__s__fields })).rt1))) = true) and
+  (dynamic_property1(1, to_rep1(s__split_discrs),
+  to_rep(first(((stack__pop__s__fields).rec__stack__stack__content).rt)),
+  to_rep(last(((stack__pop__s__fields).rec__stack__stack__content).rt))) and
+  ((to_rep(first(((stack__pop__s__fields).rec__stack__stack__content).rt)) = 1) and
+  (to_rep(last(((stack__pop__s__fields).rec__stack__stack__content).rt)) = to_rep1(s__split_discrs))))) and
+  (((result6 = { us_split_fields__content2 = { rec__stack__stack__top1 =
+  s__split_fields18; rec__stack__stack__content1 = { elts2 =
+  s__split_fields19; rt2 = s__split_fields20 } } }) and
+  (s__split_fields22 = (of_base({ us_split_discrs1 = { rec__stack__stack__n =
+  s__split_discrs }; us_split_fields1 = stack__pop__s__fields
+  })).us_split_fields5)) and ({ rec__stack__stack__n = s__split_discrs
+  } = (of_base({ us_split_discrs1 = { rec__stack__stack__n = s__split_discrs
+  }; us_split_fields1 = stack__pop__s__fields })).us_split_discrs4))) and
+  ((forall j:int. (((1 <= j) and (j <= i10)) -> (get(model__({
    us_split_discrs3 = { rec__list__my_lists__vector__capacity =
-   res__split_discrs }; us_split_fields3 = { rec__list__my_lists__vector =
-   res__split_fields3 } }), j1) = get(model__({ us_split_discrs3 = {
+   res__split_discrs }; us_split_fields3 = res__split_fields3 }),
+   j) = get(model__({ us_split_discrs3 = {
    rec__list__my_lists__vector__capacity = l }; us_split_fields3 = {
    rec__list__my_lists__vector = l1 } }), (((0 + length3(model__({
    us_split_discrs3 = { rec__list__my_lists__vector__capacity = l };
-   us_split_fields3 = { rec__list__my_lists__vector = l1 }
-   }))) - j1) + 1))))) and ((((dynamic_property4(1, r1b,
-  to_rep(first4(s__split_fields29)), to_rep(last4(s__split_fields29))) and
-  ((to_rep(first4(s__split_fields29)) = 1) and
-  (to_rep(last4(s__split_fields29)) = r1b))) and ((r7b <= r8b) ->
-  dynamic_property5(r7b, r8b, i10))) and ((r7b <= i10) and (i10 <= r8b))) and
-  (i10 = r8b)))))))) and (((i16 = i10) and
-  ((res__split_fields9 = res__split_fields3) and
-  ((s__split_fields45 = s__split_fields27) and
-  ((s__split_fields46 = s__split_fields28) and
-  (s__split_fields47 = s__split_fields29))))) and ((i17 = i10) and
-  ((res__split_fields10 = res__split_fields3) and
-  ((s__split_fields48 = s__split_fields27) and
-  ((s__split_fields49 = s__split_fields28) and
-  (s__split_fields50 = s__split_fields29))))))) and (((i18 = i16) and
+   us_split_fields3 = { rec__list__my_lists__vector = l1 } }))) - j) + 1))))) and
+  ((((dynamic_property4(1, r1b,
+  to_rep(first4(((s__split_fields23).rec__stack__stack__content1).rt2)),
+  to_rep(last4(((s__split_fields23).rec__stack__stack__content1).rt2))) and
+  ((to_rep(first4(((s__split_fields23).rec__stack__stack__content1).rt2)) = 1) and
+  (to_rep(last4(((s__split_fields23).rec__stack__stack__content1).rt2)) = r1b))) and
+  ((r7b <= r8b) -> dynamic_property5(r7b, r8b, i10))) and ((r7b <= i10) and
+  (i10 <= r8b))) and (i10 = r8b)))))))) and (((i11 = { int__content = i10
+  }) and ((res__split_fields4 = { us_split_fields__content1 =
+  res__split_fields3 }) and (s__split_fields24 = {
+  us_split_fields__content2 = s__split_fields23 }))) and ((i12 = i10) and
+  ((res__split_fields5 = res__split_fields3) and
+  (s__split_fields25 = s__split_fields23))))) and (((i13 = i11) and
+  ((res__split_fields6 = res__split_fields4) and
+  (s__split_fields26 = s__split_fields24))) and ((i14 = i12) and
+  ((res__split_fields7 = res__split_fields5) and
+  (s__split_fields27 = s__split_fields25)))))) or ((not ((r7b <= i9) and
+  (i9 <= r8b))) and (((i13 = { int__content = i9 }) and
+  ((res__split_fields6 = { us_split_fields__content1 = {
+  rec__list__my_lists__vector = res__split_fields } }) and
+  (s__split_fields26 = { us_split_fields__content2 = {
+  rec__stack__stack__top1 = s__split_fields18; rec__stack__stack__content1 =
+  { elts2 = s__split_fields19; rt2 = s__split_fields20 } } }))) and
+  ((i14 = i9) and ((res__split_fields7 = { rec__list__my_lists__vector =
+  res__split_fields1 }) and (s__split_fields27 = s__split_fields21))))))) and
+  ((result7 = { list__content = { us_split_discrs3 = {
+  rec__list__my_lists__vector__capacity = list__reverse_list__result };
+  us_split_fields3 = { rec__list__my_lists__vector =
+  list__reverse_list__result1 } } }) and (list__reverse_list__result2 = {
+  us_split_discrs3 = { rec__list__my_lists__vector__capacity =
+  res__split_discrs }; us_split_fields3 =
+  (res__split_fields6).us_split_fields__content1 }))))))))))))))) and
+  (((list__reverse_list__result5 = list__reverse_list__result3) and
+  ((i20 = i16) and ((i19 = i15) and
+  ((res__split_fields10 = res__split_fields8) and
+  (s__split_fields30 = s__split_fields28))))) and
+  ((list__reverse_list__result6 = list__reverse_list__result4) and
+  ((i22 = i18) and ((i21 = i17) and
   ((res__split_fields11 = res__split_fields9) and
-  ((s__split_fields51 = s__split_fields45) and
-  ((s__split_fields52 = s__split_fields46) and
-  (s__split_fields53 = s__split_fields47))))) and ((i19 = i17) and
-  ((res__split_fields12 = res__split_fields10) and
-  ((s__split_fields54 = s__split_fields48) and
-  ((s__split_fields55 = s__split_fields49) and
-  (s__split_fields56 = s__split_fields50)))))))) and ((not ((r7b <= i9) and
-  (i9 <= r8b))) -> (((i18 = i9) and
-  ((res__split_fields11 = res__split_fields) and
-  ((s__split_fields51 = s__split_fields18) and
-  ((s__split_fields52 = s__split_fields19) and
-  (s__split_fields53 = s__split_fields20))))) and ((i19 = i9) and
-  ((res__split_fields12 = res__split_fields1) and
-  ((s__split_fields54 = s__split_fields21) and
-  ((s__split_fields55 = s__split_fields22) and
-  (s__split_fields56 = s__split_fields23))))))))) and
-  (((result14 = list__reverse_list__result) and
-  (result15 = list__reverse_list__result1)) and
-  ((list__reverse_list__result2 = res__split_discrs) and
-  (list__reverse_list__result3 = res__split_fields11)))))))))))))))) and
-  ((((list__reverse_list__result8 = list__reverse_list__result4) and
-  (list__reverse_list__result9 = list__reverse_list__result5)) and
-  ((i25 = i21) and ((i24 = i20) and
-  ((res__split_fields15 = res__split_fields13) and
-  ((s__split_fields63 = s__split_fields57) and
-  ((s__split_fields64 = s__split_fields58) and
-  (s__split_fields65 = s__split_fields59))))))) and
-  (((list__reverse_list__result10 = list__reverse_list__result6) and
-  (list__reverse_list__result11 = list__reverse_list__result7)) and
-  ((i27 = i23) and ((i26 = i22) and
-  ((res__split_fields16 = res__split_fields14) and
-  ((s__split_fields66 = s__split_fields60) and
-  ((s__split_fields67 = s__split_fields61) and
-  (s__split_fields68 = s__split_fields62)))))))))
-
-axiom H2 : ((o12 = (0 + length3(model__({ us_split_discrs3 = {
+  (s__split_fields31 = s__split_fields29))))))) ->
+  (((((o4 = (0 + length3(model__({ us_split_discrs3 = {
   rec__list__my_lists__vector__capacity = l }; us_split_fields3 = {
-  rec__list__my_lists__vector = l1 } })))) and (in_range5(o12) and
-  (o12 = (0 + length3(model__({ us_split_discrs3 = {
+  rec__list__my_lists__vector = l1 } })))) and (in_range5(o4) and
+  (o4 = (0 + length3(model__({ us_split_discrs3 = {
   rec__list__my_lists__vector__capacity = l }; us_split_fields3 = {
-  rec__list__my_lists__vector = l1 } }))))))
-
-axiom H3 : (((i2 <= o12) -> (o13 = true)) and ((not (i2 <= o12)) ->
-  (o13 = false)))
-
-axiom H4 : ((o11 = 1) and (in_range4(o11) and (o11 = 1)))
-
-axiom H5 : (((o11 <= i2) -> (o14 = true)) and ((not (o11 <= i2)) ->
-  (o14 = false)))
-
-axiom H6 : (result16 = match_bool(o14, o13, false))
-
-axiom H7 : (result16 = true)
-
-axiom H8 : ((o16 = (0 + length3(model__({ us_split_discrs3 = {
+  rec__list__my_lists__vector = l1 } })))))) and (((i2 <= o4) and
+  (o5 = true)) or ((not (i2 <= o4)) and (o5 = false)))) and ((((o3 = 1) and
+  (in_range4(o3) and (o3 = 1))) and (((o3 <= i2) and (o6 = true)) or
+  ((not (o3 <= i2)) and (o6 = false)))) and (result8 = match_bool(o6, o5,
+  false)))) -> ((result8 = true) -> ((((((o7 = (0 + length3(model__({
+  us_split_discrs3 = { rec__list__my_lists__vector__capacity = l };
+  us_split_fields3 = { rec__list__my_lists__vector = l1 } })))) and
+  (in_range5(o7) and (o7 = (0 + length3(model__({ us_split_discrs3 = {
   rec__list__my_lists__vector__capacity = l }; us_split_fields3 = {
-  rec__list__my_lists__vector = l1 } })))) and (in_range5(o16) and
-  (o16 = (0 + length3(model__({ us_split_discrs3 = {
-  rec__list__my_lists__vector__capacity = l }; us_split_fields3 = {
-  rec__list__my_lists__vector = l1 } }))))))
-
-axiom H9 : (o17 = (o16 - i2))
-
-axiom H10 : ((o18 = o17) and in_range1(o17))
-
-axiom H11 : (o19 = (o18 + 1))
-
- (* File "list.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : in_range1(o19)
+  rec__list__my_lists__vector = l1 } })))))) and (o8 = (o7 - i2))) and
+  ((o9 = o8) and in_range1(o8))) and (o10 = (o9 + 1))) ->
+  in_range1(o10)))))))

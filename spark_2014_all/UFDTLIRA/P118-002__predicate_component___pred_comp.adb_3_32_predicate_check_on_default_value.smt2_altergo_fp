@@ -147,7 +147,5 @@ logic c3b : ct
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic temp___187 : ct
-
  (* File "pred_comp.adb", line 3, characters 0-0 *)
 goal WP_parameter_def : false

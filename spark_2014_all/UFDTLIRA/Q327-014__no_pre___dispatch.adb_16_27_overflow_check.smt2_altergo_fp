@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -240,103 +240,6 @@ logic x2 : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic dispatch__incr3__result : integer
-
-logic dispatch__incr3__result1 : us_private
-
-logic dispatch__incr3__result2 : int
-
-logic o : int
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic o3 : us_private
-
-logic o4 : integer
-
-logic o5 : us_private
-
-logic o6 : int
-
-logic o7 : integer
-
-logic o8 : integer
-
-logic o9 : us_private
-
-logic o10 : integer
-
-logic o11 : us_private
-
-logic o12 : int
-
-logic o13 : int
-
-logic result : integer
-
-logic result1 : us_private
-
-logic result2 : int
-
-logic dispatch__incr3__result3 : integer
-
-logic dispatch__incr3__result4 : us_private
-
-logic dispatch__incr3__result5 : int
-
-logic result3 : integer
-
-logic result4 : us_private
-
-logic result5 : int
-
-logic dispatch__incr3__result6 : integer
-
-logic dispatch__incr3__result7 : us_private
-
-logic dispatch__incr3__result8 : int
-
-logic dispatch__incr3__result9 : integer
-
-logic dispatch__incr3__result10 : us_private
-
-logic dispatch__incr3__result11 : int
-
-logic dispatch__incr3__result12 : integer
-
-logic dispatch__incr3__result13 : us_private
-
-logic dispatch__incr3__result14 : int
-
-logic dispatch__incr3__result15 : integer
-
-logic dispatch__incr3__result16 : us_private
-
-logic dispatch__incr3__result17 : int
-
-logic dispatch__incr3__result18 : integer
-
-logic dispatch__incr3__result19 : us_private
-
-logic dispatch__incr3__result20 : int
-
-logic dispatch__incr3__result21 : integer
-
-logic dispatch__incr3__result22 : us_private
-
-logic dispatch__incr3__result23 : int
-
-logic dispatch__incr3__result24 : integer
-
-logic dispatch__incr3__result25 : us_private
-
-logic dispatch__incr3__result26 : int
-
-axiom H : (to_rep(x) <  2147483647)
-
-axiom H1 : (to_rep(x) <  2147483647)
-
  (* File "dispatch.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : in_range1((to_rep(x) + 1))
+goal WP_parameter_def : ((to_rep(x) <  2147483647) ->
+  ((to_rep(x) <  2147483647) -> in_range1((to_rep(x) + 1))))

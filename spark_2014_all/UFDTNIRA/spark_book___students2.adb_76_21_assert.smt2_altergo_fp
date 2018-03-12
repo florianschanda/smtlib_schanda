@@ -56,12 +56,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -73,6 +67,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1242,277 +1242,72 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
-logic tuition : money_type
-
-logic fees : money_type
-
-logic grants : money_type
-
-logic insurance : money_type
-
-logic o : money_type
-
-logic o1 : money_type
-
-logic o2 : money_type
-
-logic o3 : money_type
-
-logic o4 : money_type
-
-logic o5 : money_type
-
-logic o6 : money_type
-
-logic o7 : money_type
-
-logic o8 : money_type
-
-logic o9 : money_type
-
-logic o10 : money_type
-
-logic o11 : money_type
-
-logic o12 : money_type
-
-logic o13 : money_type
-
-logic o14 : money_type
-
-logic result : money_type
-
-logic grants1 : money_type
-
-logic result1 : money_type
-
-logic insurance1 : money_type
-
-logic result2 : money_type
-
-logic tuition1 : money_type
-
-logic result3 : money_type
-
-logic tuition2 : money_type
-
-logic result4 : money_type
-
-logic insurance2 : money_type
-
-logic result5 : money_type
-
-logic fees1 : money_type
-
-logic result6 : money_type
-
-logic fees2 : money_type
-
-logic result7 : money_type
-
-logic fees3 : money_type
-
-logic result8 : money_type
-
-logic fees4 : money_type
-
-logic result9 : money_type
-
-logic fees5 : money_type
-
-logic result10 : money_type
-
-logic fees6 : money_type
-
-logic result11 : money_type
-
-logic fees7 : money_type
-
-logic result12 : money_type
-
-logic fees8 : money_type
-
-logic result13 : money_type
-
-logic fees9 : money_type
-
-logic result14 : money_type
-
-logic grants2 : money_type
-
-logic result15 : money_type
-
-logic grants3 : money_type
-
-axiom H : ((0 <= to_fixed2(base_tuition)) and
-  (to_fixed2(base_tuition) <= 2000000))
-
-axiom H1 : (to_fixed2(o) = 0)
-
-axiom H2 : (result = grants)
-
-axiom H3 : (grants1 = o)
-
-axiom H4 : (to_fixed2(o1) = 0)
-
-axiom H5 : (result1 = insurance)
-
-axiom H6 : (insurance1 = o1)
-
-axiom H7 : (result2 = tuition)
-
-axiom H8 : (tuition1 = base_tuition)
-
-axiom H9 : ((not (student7 = true)) ->
-  (to_fixed2(o2) = (to_fixed2(tuition1) + fxp_div_int1(to_fixed2(tuition1),
-  2))))
-
-axiom H10 : ((not (student7 = true)) -> (result3 = tuition1))
-
-axiom H11 : ((not (student7 = true)) -> (tuition2 = o2))
-
-axiom H12 : ((student7 = true) -> (tuition2 = tuition1))
-
-axiom H13 : ((not (student10 = true)) -> (to_fixed2(o3) = 100000))
-
-axiom H14 : ((not (student10 = true)) -> (result4 = insurance1))
-
-axiom H15 : ((not (student10 = true)) -> (insurance2 = o3))
-
-axiom H16 : ((student10 = true) -> (insurance2 = insurance1))
-
-axiom H17 : ((student6 = true) -> (to_fixed2(o4) = 10000))
-
-axiom H18 : ((student6 = true) -> (result5 = fees))
-
-axiom H19 : ((student6 = true) -> (fees1 = o4))
-
-axiom H20 : ((not (student6 = true)) -> (to_fixed2(o5) = 50000))
-
-axiom H21 : ((not (student6 = true)) -> (result6 = fees))
-
-axiom H22 : ((not (student6 = true)) -> (fees2 = o5))
-
-axiom H23 : ((not (student6 = true)) -> (fees1 = fees2))
-
-axiom H24 : ((student8 = true) ->
-  (to_fixed2(o6) = (to_fixed2(fees1) + 400000)))
-
-axiom H25 : ((student8 = true) -> (fees1 = result7))
-
-axiom H26 : ((student8 = true) -> (fees3 = o6))
-
-axiom H27 : ((student8 = true) -> ((to_rep1(student9) = 0) ->
-  (fees4 = fees3)))
-
-axiom H28 : ((student8 = true) -> ((not (to_rep1(student9) = 0)) ->
-  ((to_rep1(student9) = 1) -> (to_fixed2(o7) = (to_fixed2(fees3) + 10000)))))
-
-axiom H29 : ((student8 = true) -> ((not (to_rep1(student9) = 0)) ->
-  ((to_rep1(student9) = 1) -> (result8 = fees3))))
-
-axiom H30 : ((student8 = true) -> ((not (to_rep1(student9) = 0)) ->
-  ((to_rep1(student9) = 1) -> (fees4 = o7))))
-
-axiom H31 : ((student8 = true) -> ((not (to_rep1(student9) = 0)) ->
-  ((not (to_rep1(student9) = 1)) -> ((to_rep1(student9) = 2) ->
-  (to_fixed2(o8) = (to_fixed2(fees3) + 100000))))))
-
-axiom H32 : ((student8 = true) -> ((not (to_rep1(student9) = 0)) ->
-  ((not (to_rep1(student9) = 1)) -> ((to_rep1(student9) = 2) ->
-  (result9 = fees3)))))
-
-axiom H33 : ((student8 = true) -> ((not (to_rep1(student9) = 0)) ->
-  ((not (to_rep1(student9) = 1)) -> ((to_rep1(student9) = 2) ->
-  (fees5 = o8)))))
-
-axiom H34 : ((student8 = true) -> ((not (to_rep1(student9) = 0)) ->
-  ((not (to_rep1(student9) = 1)) -> ((not (to_rep1(student9) = 2)) ->
-  (to_fixed2(o9) = (to_fixed2(fees3) + 300000))))))
-
-axiom H35 : ((student8 = true) -> ((not (to_rep1(student9) = 0)) ->
-  ((not (to_rep1(student9) = 1)) -> ((not (to_rep1(student9) = 2)) ->
-  (result10 = fees3)))))
-
-axiom H36 : ((student8 = true) -> ((not (to_rep1(student9) = 0)) ->
-  ((not (to_rep1(student9) = 1)) -> ((not (to_rep1(student9) = 2)) ->
-  (fees6 = o9)))))
-
-axiom H37 : ((student8 = true) -> ((not (to_rep1(student9) = 0)) ->
-  ((not (to_rep1(student9) = 1)) -> ((not (to_rep1(student9) = 2)) ->
-  (fees5 = fees6)))))
-
-axiom H38 : ((student8 = true) -> ((not (to_rep1(student9) = 0)) ->
-  ((not (to_rep1(student9) = 1)) -> (fees4 = fees5))))
-
-axiom H39 : ((not (student8 = true)) -> ((to_rep1(student9) = 0) ->
-  (fees7 = fees1)))
-
-axiom H40 : ((not (student8 = true)) -> ((not (to_rep1(student9) = 0)) ->
-  ((to_rep1(student9) = 1) ->
-  (to_fixed2(o10) = (to_fixed2(fees1) + 20000)))))
-
-axiom H41 : ((not (student8 = true)) -> ((not (to_rep1(student9) = 0)) ->
-  ((to_rep1(student9) = 1) -> (result11 = fees1))))
-
-axiom H42 : ((not (student8 = true)) -> ((not (to_rep1(student9) = 0)) ->
-  ((to_rep1(student9) = 1) -> (fees7 = o10))))
-
-axiom H43 : ((not (student8 = true)) -> ((not (to_rep1(student9) = 0)) ->
-  ((not (to_rep1(student9) = 1)) -> ((to_rep1(student9) = 2) ->
-  (to_fixed2(o11) = (to_fixed2(fees1) + 150000))))))
-
-axiom H44 : ((not (student8 = true)) -> ((not (to_rep1(student9) = 0)) ->
-  ((not (to_rep1(student9) = 1)) -> ((to_rep1(student9) = 2) ->
-  (result12 = fees1)))))
-
-axiom H45 : ((not (student8 = true)) -> ((not (to_rep1(student9) = 0)) ->
-  ((not (to_rep1(student9) = 1)) -> ((to_rep1(student9) = 2) ->
-  (fees8 = o11)))))
-
-axiom H46 : ((not (student8 = true)) -> ((not (to_rep1(student9) = 0)) ->
-  ((not (to_rep1(student9) = 1)) -> ((not (to_rep1(student9) = 2)) ->
-  (to_fixed2(o12) = (to_fixed2(fees1) + 450000))))))
-
-axiom H47 : ((not (student8 = true)) -> ((not (to_rep1(student9) = 0)) ->
-  ((not (to_rep1(student9) = 1)) -> ((not (to_rep1(student9) = 2)) ->
-  (result13 = fees1)))))
-
-axiom H48 : ((not (student8 = true)) -> ((not (to_rep1(student9) = 0)) ->
-  ((not (to_rep1(student9) = 1)) -> ((not (to_rep1(student9) = 2)) ->
-  (fees9 = o12)))))
-
-axiom H49 : ((not (student8 = true)) -> ((not (to_rep1(student9) = 0)) ->
-  ((not (to_rep1(student9) = 1)) -> ((not (to_rep1(student9) = 2)) ->
-  (fees8 = fees9)))))
-
-axiom H50 : ((not (student8 = true)) -> ((not (to_rep1(student9) = 0)) ->
-  ((not (to_rep1(student9) = 1)) -> (fees7 = fees8))))
-
-axiom H51 : ((not (student8 = true)) -> (fees4 = fees7))
-
-axiom H52 : ((384 <= to_fixed(student5)) ->
-  (to_fixed2(o13) = (to_fixed2(grants1) + 25000)))
-
-axiom H53 : ((384 <= to_fixed(student5)) -> (grants1 = result14))
-
-axiom H54 : ((384 <= to_fixed(student5)) -> (grants2 = o13))
-
-axiom H55 : ((384 <= to_fixed(student5)) -> (((480 <= to_fixed(student5)) and
-  (to_rep(student4) = 1)) ->
-  (to_fixed2(o14) = (to_fixed2(grants2) + 25000))))
-
-axiom H56 : ((384 <= to_fixed(student5)) -> (((480 <= to_fixed(student5)) and
-  (to_rep(student4) = 1)) -> (result15 = grants2)))
-
-axiom H57 : ((384 <= to_fixed(student5)) -> (((480 <= to_fixed(student5)) and
-  (to_rep(student4) = 1)) -> (grants3 = o14)))
-
-axiom H58 : ((384 <= to_fixed(student5)) ->
-  ((not ((480 <= to_fixed(student5)) and (to_rep(student4) = 1))) ->
-  (grants3 = grants2)))
-
-axiom H59 : ((not (384 <= to_fixed(student5))) -> (grants3 = grants1))
-
  (* File "students2.ads", line 11, characters 0-0 *)
-goal WP_parameter_def : (0 <= to_fixed2(tuition2))
+goal WP_parameter_def :
+  (forall tuition:money_type. forall fees:money_type.
+  forall grants:money_type. forall insurance:money_type. forall o:money_type.
+  forall o1:money_type. forall o2:money_type. forall o3:money_type.
+  forall o4:money_type. forall o5:money_type. forall o6:money_type.
+  forall o7:money_type. forall o8:money_type. forall o9:money_type.
+  forall o10:money_type. forall o11:money_type. forall o12:money_type.
+  forall o13:money_type. forall o14:money_type. forall result:money_type.
+  forall grants1:money_type. forall result1:money_type.
+  forall insurance1:money_type. forall result2:money_type.
+  forall tuition1:money_type. forall result3:money_type.
+  forall tuition2:money_type. forall result4:money_type.
+  forall insurance2:money_type. forall result5:money_type.
+  forall fees1:money_type. forall result6:money_type.
+  forall fees2:money_type. forall result7:money_type.
+  forall fees3:money_type. forall result8:money_type.
+  forall fees4:money_type. forall result9:money_type.
+  forall fees5:money_type. forall result10:money_type.
+  forall fees6:money_type. forall result11:money_type.
+  forall fees7:money_type. forall result12:money_type.
+  forall fees8:money_type. forall result13:money_type.
+  forall fees9:money_type. forall result14:money_type.
+  forall grants2:money_type. forall result15:money_type.
+  forall grants3:money_type. (((0 <= to_fixed2(base_tuition)) and
+  (to_fixed2(base_tuition) <= 2000000)) -> (((to_fixed2(o) = 0) and
+  ((result = grants) and (grants1 = o))) -> (((to_fixed2(o1) = 0) and
+  ((result1 = insurance) and (insurance1 = o1))) -> (((result2 = tuition) and
+  (tuition1 = base_tuition)) -> ((((not (student7 = true)) and
+  ((to_fixed2(o2) = (to_fixed2(tuition1) + fxp_div_int1(to_fixed2(tuition1),
+  2))) and ((result3 = tuition1) and (tuition2 = o2)))) or
+  ((student7 = true) and (tuition2 = tuition1))) ->
+  ((((not (student10 = true)) and ((to_fixed2(o3) = 100000) and
+  ((result4 = insurance1) and (insurance2 = o3)))) or ((student10 = true) and
+  (insurance2 = insurance1))) -> ((((student6 = true) and
+  ((to_fixed2(o4) = 10000) and ((result5 = fees) and (fees1 = o4)))) or
+  ((not (student6 = true)) and (((to_fixed2(o5) = 50000) and
+  ((result6 = fees) and (fees2 = o5))) and (fees1 = fees2)))) ->
+  ((((student8 = true) and
+  (((to_fixed2(o6) = (to_fixed2(fees1) + 400000)) and ((fees1 = result7) and
+  (fees3 = o6))) and (((to_rep1(student9) = 0) and (fees4 = fees3)) or
+  ((not (to_rep1(student9) = 0)) and (((to_rep1(student9) = 1) and
+  ((to_fixed2(o7) = (to_fixed2(fees3) + 10000)) and ((result8 = fees3) and
+  (fees4 = o7)))) or ((not (to_rep1(student9) = 1)) and
+  ((((to_rep1(student9) = 2) and
+  ((to_fixed2(o8) = (to_fixed2(fees3) + 100000)) and ((result9 = fees3) and
+  (fees5 = o8)))) or ((not (to_rep1(student9) = 2)) and
+  (((to_fixed2(o9) = (to_fixed2(fees3) + 300000)) and ((result10 = fees3) and
+  (fees6 = o9))) and (fees5 = fees6)))) and (fees4 = fees5)))))))) or
+  ((not (student8 = true)) and ((((to_rep1(student9) = 0) and
+  (fees7 = fees1)) or ((not (to_rep1(student9) = 0)) and
+  (((to_rep1(student9) = 1) and
+  ((to_fixed2(o10) = (to_fixed2(fees1) + 20000)) and ((result11 = fees1) and
+  (fees7 = o10)))) or ((not (to_rep1(student9) = 1)) and
+  ((((to_rep1(student9) = 2) and
+  ((to_fixed2(o11) = (to_fixed2(fees1) + 150000)) and ((result12 = fees1) and
+  (fees8 = o11)))) or ((not (to_rep1(student9) = 2)) and
+  (((to_fixed2(o12) = (to_fixed2(fees1) + 450000)) and
+  ((result13 = fees1) and (fees9 = o12))) and (fees8 = fees9)))) and
+  (fees7 = fees8)))))) and (fees4 = fees7)))) ->
+  ((((384 <= to_fixed(student5)) and
+  (((to_fixed2(o13) = (to_fixed2(grants1) + 25000)) and
+  ((grants1 = result14) and (grants2 = o13))) and
+  ((((480 <= to_fixed(student5)) and (to_rep(student4) = 1)) and
+  ((to_fixed2(o14) = (to_fixed2(grants2) + 25000)) and
+  ((result15 = grants2) and (grants3 = o14)))) or
+  ((not ((480 <= to_fixed(student5)) and (to_rep(student4) = 1))) and
+  (grants3 = grants2))))) or ((not (384 <= to_fixed(student5))) and
+  (grants3 = grants1))) -> (0 <= to_fixed2(tuition2))))))))))))

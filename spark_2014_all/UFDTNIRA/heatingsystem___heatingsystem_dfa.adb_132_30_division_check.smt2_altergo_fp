@@ -218,21 +218,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic clockoffset : int
-
-logic t : int
-
-logic result : int
-
-logic t1 : int
-
-logic t2 : int
-
-logic t3 : int
-
-axiom H : in_range(clockoffset)
-
-axiom H1 : in_range(t)
-
  (* File "heatingsystem_dfa.adb", line 77, characters 0-0 *)
-goal WP_parameter_def : (not (86400 = 0))
+goal WP_parameter_def :
+  (forall clockoffset:int. forall t:int. (in_range(clockoffset) ->
+  (in_range(t) -> (not (86400 = 0)))))

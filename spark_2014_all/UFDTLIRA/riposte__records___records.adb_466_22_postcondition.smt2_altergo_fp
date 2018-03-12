@@ -335,95 +335,24 @@ logic r_old2 : unsigned_byte
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic r__split_fields : bool
-
-logic r__split_fields1 : unsigned_byte
-
-logic r__split_fields2 : unsigned_byte
-
-logic o : unsigned_byte
-
-logic o1 : unsigned_byte
-
-logic o2 : unsigned_byte
-
-logic o3 : unsigned_byte
-
-logic o4 : unsigned_byte
-
-logic o5 : bool
-
-logic o6 : unsigned_byte
-
-logic o7 : unsigned_byte
-
-logic temp___435 : bool
-
-logic temp___4351 : unsigned_byte
-
-logic temp___4352 : unsigned_byte
-
-logic o8 : unsigned_byte
-
-logic o9 : unsigned_byte
-
-logic o10 : unsigned_byte
-
-logic o11 : unsigned_byte
-
-logic o12 : unsigned_byte
-
-logic o13 : bool
-
-logic o14 : unsigned_byte
-
-logic o15 : unsigned_byte
-
-logic temp___442 : bool
-
-logic temp___4421 : unsigned_byte
-
-logic temp___4422 : unsigned_byte
-
-logic result : bool
-
-logic result1 : unsigned_byte
-
-logic result2 : unsigned_byte
-
-logic r__split_fields3 : bool
-
-logic r__split_fields4 : unsigned_byte
-
-logic r__split_fields5 : unsigned_byte
-
-logic result3 : bool
-
-logic result4 : unsigned_byte
-
-logic result5 : unsigned_byte
-
-logic r__split_fields6 : bool
-
-logic r__split_fields7 : unsigned_byte
-
-logic r__split_fields8 : unsigned_byte
-
-logic r__split_fields9 : bool
-
-logic r__split_fields10 : unsigned_byte
-
-logic r__split_fields11 : unsigned_byte
-
-logic r__split_fields12 : bool
-
-logic r__split_fields13 : unsigned_byte
-
-logic r__split_fields14 : unsigned_byte
-
-axiom H : in_range(x)
-
-axiom H1 : ((((r__split_fields = r_old) and ((r__split_fields1 = r_old1) and
+ (* File "records_prooffuncs.ads", line 11, characters 0-0 *)
+goal WP_parameter_def :
+  (forall r__split_fields:bool. forall r__split_fields1:unsigned_byte.
+  forall r__split_fields2:unsigned_byte. forall o:unsigned_byte.
+  forall o1:unsigned_byte. forall o2:unsigned_byte. forall o3:unsigned_byte.
+  forall o4:unsigned_byte. forall o5:bool. forall o6:unsigned_byte.
+  forall o7:unsigned_byte. forall temp___475:bool.
+  forall temp___4751:unsigned_byte. forall temp___4752:unsigned_byte.
+  forall r__split_fields3:bool. forall r__split_fields4:unsigned_byte.
+  forall r__split_fields5:unsigned_byte. forall result:bool.
+  forall result1:unsigned_byte. forall result2:unsigned_byte.
+  forall r__split_fields6:bool. forall r__split_fields7:unsigned_byte.
+  forall r__split_fields8:unsigned_byte. forall r__split_fields9:bool.
+  forall r__split_fields10:unsigned_byte.
+  forall r__split_fields11:unsigned_byte. forall r__split_fields12:bool.
+  forall r__split_fields13:unsigned_byte.
+  forall r__split_fields14:unsigned_byte. ((in_range(x) and
+  ((((r__split_fields = r_old) and ((r__split_fields1 = r_old1) and
   (r__split_fields2 = r_old2))) and ((bool_eq3({ us_split_fields3 = {
   rec__records_prooffuncs__optional_pair__exists = r__split_fields3;
   rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
@@ -433,23 +362,25 @@ axiom H1 : ((((r__split_fields = r_old) and ((r__split_fields1 = r_old1) and
   r_old; rec__records_prooffuncs__optional_pair__the_pair = {
   us_split_fields1 = { rec__records_prooffuncs__pair__a = of_rep(x);
   rec__records_prooffuncs__pair__b = r_old2 } } } }) = true) and
-  ((((((to_rep(o8) = x) and ((r__split_fields4 = o9) and (o8 = o10))) and
-  ((o11 = o9) and (o12 = o10))) and ((r__split_fields3 = o13) and
-  ((o14 = o11) and (o15 = o12)))) and ((temp___442 = o13) and
-  ((temp___4421 = o14) and (temp___4422 = o15)))) and
-  (((result3 = r__split_fields3) and ((result4 = r__split_fields4) and
-  (result5 = r__split_fields5))) and ((r__split_fields6 = temp___442) and
-  ((r__split_fields7 = temp___4421) and
-  (r__split_fields8 = temp___4422))))))) and
+  ((((((to_rep(o) = x) and ((r__split_fields4 = o1) and (o = o2))) and
+  ((o3 = o1) and (o4 = o2))) and ((r__split_fields3 = o5) and ((o6 = o3) and
+  (o7 = o4)))) and ((temp___475 = o5) and ((temp___4751 = o6) and
+  (temp___4752 = o7)))) and (((result = r__split_fields3) and
+  ((result1 = r__split_fields4) and (result2 = r__split_fields5))) and
+  ((temp___475 = r__split_fields6) and ((temp___4751 = r__split_fields7) and
+  (temp___4752 = r__split_fields8))))))) and
   (((r__split_fields9 = r__split_fields6) and
   ((r__split_fields10 = r__split_fields7) and
-  (r__split_fields11 = r__split_fields8))) and
-  ((r__split_fields12 = r__split_fields6) and
-  ((r__split_fields13 = r__split_fields7) and
-  (r__split_fields14 = r__split_fields8)))))
-
- (* File "records_prooffuncs.ads", line 11, characters 0-0 *)
-goal WP_parameter_def : (bool_eq3({ us_split_fields3 = {
+  (r__split_fields11 = r__split_fields8))) and ({
+  rec__records_prooffuncs__optional_pair__exists = r__split_fields12;
+  rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
+  rec__records_prooffuncs__pair__a = r__split_fields13;
+  rec__records_prooffuncs__pair__b = r__split_fields14 } } } = {
+  rec__records_prooffuncs__optional_pair__exists = r__split_fields6;
+  rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
+  rec__records_prooffuncs__pair__a = r__split_fields7;
+  rec__records_prooffuncs__pair__b = r__split_fields8 } } })))) ->
+  (bool_eq3({ us_split_fields3 = {
   rec__records_prooffuncs__optional_pair__exists = r__split_fields9;
   rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
   rec__records_prooffuncs__pair__a = r__split_fields10;
@@ -457,4 +388,4 @@ goal WP_parameter_def : (bool_eq3({ us_split_fields3 = {
   us_split_fields3 = { rec__records_prooffuncs__optional_pair__exists =
   r__split_fields; rec__records_prooffuncs__optional_pair__the_pair = {
   us_split_fields1 = { rec__records_prooffuncs__pair__a = of_rep(x);
-  rec__records_prooffuncs__pair__b = of_rep(x) } } } }) = true)
+  rec__records_prooffuncs__pair__b = of_rep(x) } } } }) = true)))

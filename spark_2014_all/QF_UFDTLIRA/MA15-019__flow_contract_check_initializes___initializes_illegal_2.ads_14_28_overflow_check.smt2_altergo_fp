@@ -119,51 +119,8 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
-logic x : int
-
-logic y : int
-
-logic x1 : int
-
-logic y1 : int
-
-logic a : int
-
-logic b : int
-
-logic c : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic x2 : int
-
-logic result1 : int
-
-logic y2 : int
-
-logic result2 : int
-
-logic a1 : int
-
-logic result3 : int
-
-logic b1 : int
-
-axiom H : in_range(x)
-
-axiom H1 : in_range(y)
-
-axiom H2 : ((x + y) = 0)
-
-axiom H3 : (result = x1)
-
-axiom H4 : (x2 = x)
-
-axiom H5 : in_range(x2)
-
  (* File "init.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : in_range((y + x2))
+goal WP_parameter_def :
+  (forall x:int. forall y:int. forall x1:int. forall result:int.
+  forall x2:int. (in_range(x) -> (in_range(y) -> (((x + y) = 0) ->
+  (((result = x1) and (x2 = x)) -> (in_range(x2) -> in_range((y + x2))))))))

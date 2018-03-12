@@ -123,27 +123,10 @@ logic value : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic p_state : int
-
-logic result : int
-
-logic p_state1 : int
-
-logic p_state2 : int
-
-logic p_state3 : int
-
-axiom H : in_range(value)
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(p_state))
-
-axiom H2 : (result = p_state)
-
-axiom H3 : (p_state1 = value)
-
-axiom H4 : (p_state1 = p_state2)
-
-axiom H5 : (p_state3 = p_state1)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (get_p_state(p_state2) = value)
+goal WP_parameter_def :
+  (forall p_state:int. forall result:int. forall p_state1:int.
+  forall p_state2:int. forall p_state3:int. ((in_range(value) and
+  ((((- 2147483648) <= 2147483647) -> in_range(p_state)) and
+  (((result = p_state) and (p_state1 = value)) and ((p_state1 = p_state2) and
+  (p_state3 = p_state1))))) -> (get_p_state(p_state2) = value)))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -409,58 +409,37 @@ logic r22 : command_t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic records__test_record_subtype__result : bool
-
-logic result : bool
-
-logic records__test_record_subtype__result1 : bool
-
-logic records__test_record_subtype__result2 : bool
-
-logic records__test_record_subtype__result3 : bool
-
-logic records__test_record_subtype__result4 : bool
-
-logic records__test_record_subtype__result5 : bool
-
-logic result1 : bool
-
-axiom H :
-  (records__test_record_subtype__result1 = records__test_record_subtype__result2)
-
-axiom H1 :
-  (records__test_record_subtype__result3 = records__test_record_subtype__result1)
-
-axiom H2 : (result = records__test_record_subtype__result)
-
-axiom H3 : (((to_rep(r12) = to_rep(r22)) ->
-  (records__test_record_subtype__result1 = match_bool(bool_eq4({
-  us_split_fields1 = { rec__records_prooffuncs__pair__a = r1;
-  rec__records_prooffuncs__pair__b = r11 } }, { us_split_fields1 = {
-  rec__records_prooffuncs__pair__a = r2; rec__records_prooffuncs__pair__b =
-  r21 } }), true, false))) and ((not (to_rep(r12) = to_rep(r22))) ->
-  (records__test_record_subtype__result1 = match_bool(bool_eq4({
-  us_split_fields1 = { rec__records_prooffuncs__pair__a = r1;
-  rec__records_prooffuncs__pair__b = r11 } }, { us_split_fields1 = {
-  rec__records_prooffuncs__pair__a = r2; rec__records_prooffuncs__pair__b =
-  r21 } }), false, false))))
-
-axiom H4 :
-  (records__test_record_subtype__result4 = records__test_record_subtype__result2)
-
-axiom H5 :
-  (records__test_record_subtype__result5 = records__test_record_subtype__result3)
-
-axiom H6 : (result1 = records__test_record_subtype__result4)
-
-axiom H7 : (records__test_record_subtype__result4 = true)
-
  (* File "records.adb", line 520, characters 0-0 *)
-goal WP_parameter_def : (bool_eq5({ us_split_fields3 = {
-  rec__records_prooffuncs__packet__data = { us_split_fields1 = {
-  rec__records_prooffuncs__pair__a = r1; rec__records_prooffuncs__pair__b =
-  r11 } }; rec__records_prooffuncs__packet__command = r12 } }, {
+goal WP_parameter_def :
+  (forall records__test_record_subtype__result:bool. forall result:bool.
+  forall records__test_record_subtype__result1:bool.
+  forall records__test_record_subtype__result2:bool.
+  forall records__test_record_subtype__result3:bool.
+  forall records__test_record_subtype__result4:bool.
+  forall records__test_record_subtype__result5:bool.
+  (forall result1:bool.
+  ((((((records__test_record_subtype__result1 = records__test_record_subtype__result2) and
+  (records__test_record_subtype__result3 = records__test_record_subtype__result1)) and
+  ((result = records__test_record_subtype__result) and
+  (((to_rep(r12) = to_rep(r22)) and
+  (records__test_record_subtype__result1 = match_bool(bool_eq4({
+  us_split_fields1 = { rec__records_prooffuncs__pair__a = r1;
+  rec__records_prooffuncs__pair__b = r11 } }, { us_split_fields1 = {
+  rec__records_prooffuncs__pair__a = r2; rec__records_prooffuncs__pair__b =
+  r21 } }), true, false))) or ((not (to_rep(r12) = to_rep(r22))) and
+  (records__test_record_subtype__result1 = match_bool(bool_eq4({
+  us_split_fields1 = { rec__records_prooffuncs__pair__a = r1;
+  rec__records_prooffuncs__pair__b = r11 } }, { us_split_fields1 = {
+  rec__records_prooffuncs__pair__a = r2; rec__records_prooffuncs__pair__b =
+  r21 } }), false, false)))))) and
+  ((records__test_record_subtype__result4 = records__test_record_subtype__result2) and
+  (records__test_record_subtype__result5 = records__test_record_subtype__result3))) and
+  (result1 = records__test_record_subtype__result4)) ->
+  ((records__test_record_subtype__result4 = true) -> (bool_eq5({
   us_split_fields3 = { rec__records_prooffuncs__packet__data = {
-  us_split_fields1 = { rec__records_prooffuncs__pair__a = r2;
-  rec__records_prooffuncs__pair__b = r21 } };
-  rec__records_prooffuncs__packet__command = r22 } }) = true)
+  us_split_fields1 = { rec__records_prooffuncs__pair__a = r1;
+  rec__records_prooffuncs__pair__b = r11 } };
+  rec__records_prooffuncs__packet__command = r12 } }, { us_split_fields3 = {
+  rec__records_prooffuncs__packet__data = { us_split_fields1 = {
+  rec__records_prooffuncs__pair__a = r2; rec__records_prooffuncs__pair__b =
+  r21 } }; rec__records_prooffuncs__packet__command = r22 } }) = true)))))

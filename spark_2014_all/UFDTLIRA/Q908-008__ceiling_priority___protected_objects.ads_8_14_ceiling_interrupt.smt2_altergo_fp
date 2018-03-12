@@ -159,7 +159,5 @@ function pT__ref___projection(a: pT__ref) : pT = (a).pT__content
 
 logic self__ : pT
 
-logic temp___1528 : bool
-
  (* File "protected_objects.ads", line 8, characters 0-0 *)
 goal WP_parameter_def : (98 <= 1)

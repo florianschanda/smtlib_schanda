@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -258,38 +258,14 @@ type file_mode__ref = { file_mode__content : file_mode
 function file_mode__ref___3__projection(a: file_mode__ref) : file_mode =
   (a).file_mode__content
 
-logic file : us_rep
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : bool
-
-logic result : bool
-
-logic result1 : bool
-
-logic result2 : bool
-
-axiom H : in_range1(to__)
-
-axiom H1 : ((result = is_writable(file)) and ((result = true) <->
-  ((is_open(file) = true) and ((mode__2(file) = 1) or (mode__2(file) = 2)))))
-
-axiom H2 : (result = true)
-
-axiom H3 : ((o = page_length__2(file)) and in_range2(o))
-
-axiom H4 : (((0 <  o) -> (result1 = true)) and ((not (0 <  o)) ->
-  (result1 = false)))
-
-axiom H5 : (not (result1 = true))
-
-axiom H6 : ((result2 = is_readable(file)) and ((result2 = true) <->
-  ((is_open(file) = true) and (mode__2(file) = 0))))
-
-axiom H7 : (result2 = true)
-
  (* File "spark-text_io.ads", line 498, characters 0-0 *)
-goal WP_parameter_def : (is_readable(file) = true)
+goal WP_parameter_def :
+  (forall file:us_rep. forall o:int. forall result:bool. forall result1:bool.
+  forall result2:bool. (in_range1(to__) -> (((result = is_writable(file)) and
+  ((result = true) <-> ((is_open(file) = true) and ((mode__2(file) = 1) or
+  (mode__2(file) = 2))))) -> ((result = true) ->
+  ((((o = page_length__2(file)) and in_range2(o)) and (((0 <  o) and
+  (result1 = true)) or ((not (0 <  o)) and (result1 = false)))) ->
+  ((not (result1 = true)) -> (((result2 = is_readable(file)) and
+  ((result2 = true) <-> ((is_open(file) = true) and (mode__2(file) = 0)))) ->
+  ((result2 = true) -> (is_readable(file) = true)))))))))

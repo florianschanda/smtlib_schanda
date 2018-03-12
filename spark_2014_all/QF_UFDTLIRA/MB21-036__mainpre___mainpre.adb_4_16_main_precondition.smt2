@@ -24,7 +24,6 @@
 (declare-fun is_valid__function_guard (Bool us_private) Bool)
 (assert true)
 (declare-const state us_private)
-(assert (= (is_valid state) true))
 (assert (not (= (is_valid state) true)))
 (check-sat)
 (exit)

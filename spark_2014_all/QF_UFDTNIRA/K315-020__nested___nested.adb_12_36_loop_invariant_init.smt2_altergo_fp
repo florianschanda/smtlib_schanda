@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -189,206 +189,16 @@ function t2b__ref___projection(a: t2b__ref) : t2b = (a).t2b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic x : int
-
-logic i : int
-
-logic j : int
-
-logic nested__search__result : int
-
-logic temp___137 : int
-
-logic temp___136 : int
-
-logic o : int
-
-logic temp___134 : int
-
-logic temp___135 : int
-
-logic temp___133 : int
-
-logic temp___132 : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic j1 : int
-
-logic result : int
-
-logic x1 : int
-
-logic result1 : int
-
-logic i1 : int
-
-logic x2 : int
-
-logic i2 : int
-
-logic j2 : int
-
-logic result2 : int
-
-logic x3 : int
-
-logic result3 : int
-
-logic j3 : int
-
-logic x4 : int
-
-logic j4 : int
-
-logic result4 : int
-
-logic x5 : int
-
-logic result5 : int
-
-logic j5 : int
-
-logic x6 : int
-
-logic j6 : int
-
-logic x7 : int
-
-logic j7 : int
-
-logic x8 : int
-
-logic j8 : int
-
-logic x9 : int
-
-logic j9 : int
-
-logic x10 : int
-
-logic j10 : int
-
-logic x11 : int
-
-logic j11 : int
-
-logic result6 : int
-
-logic i3 : int
-
-logic x12 : int
-
-logic j12 : int
-
-logic x13 : int
-
-logic j13 : int
-
-logic x14 : int
-
-logic i4 : int
-
-logic j14 : int
-
-logic x15 : int
-
-logic i5 : int
-
-logic j15 : int
-
-logic x16 : int
-
-logic i6 : int
-
-logic j16 : int
-
-logic x17 : int
-
-logic i7 : int
-
-logic j17 : int
-
-logic x18 : int
-
-logic i8 : int
-
-logic j18 : int
-
-logic x19 : int
-
-logic i9 : int
-
-logic j19 : int
-
-logic x20 : int
-
-logic i10 : int
-
-logic j20 : int
-
-logic x21 : int
-
-logic i11 : int
-
-logic j21 : int
-
-logic result7 : int
-
-logic nested__search__result1 : int
-
-logic nested__search__result2 : int
-
-logic nested__search__result3 : int
-
-logic x22 : int
-
-logic i12 : int
-
-logic j22 : int
-
-logic nested__search__result4 : int
-
-logic x23 : int
-
-logic i13 : int
-
-logic j23 : int
-
-logic nested__search__result5 : int
-
-axiom H : (result = x)
-
-axiom H1 : (x1 = 0)
-
-axiom H2 : in_range1(x1)
-
-axiom H3 : (result1 = i)
-
-axiom H4 : (i1 = 1)
-
-axiom H5 : (1 <= i1)
-
-axiom H6 : (i1 <= 10)
-
-axiom H7 : (x2 = ((i2 - 1) * 10))
-
-axiom H8 : (((((- 2147483648) <= 2147483647) -> in_range1(x2)) and
-  ((1 <= 10) -> in_range2(i2))) and ((1 <= i2) and (i2 <= 10)))
-
-axiom H9 : (x2 = result2)
-
-axiom H10 : (x3 = 0)
-
-axiom H11 : (j2 = result3)
-
-axiom H12 : (j3 = 1)
-
-axiom H13 : (1 <= j3)
-
-axiom H14 : (j3 <= 10)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (x3 = (i2 * (j3 - 1)))
+goal WP_parameter_def :
+  (forall x:int. forall i:int. forall result:int. forall x1:int.
+  forall result1:int. forall i1:int. forall x2:int. forall i2:int.
+  forall j:int. forall result2:int. forall x3:int. forall result3:int.
+  forall j1:int. ((({ int__content = result } = { int__content = x }) and
+  (x1 = 0)) -> (in_range1(x1) -> ((({ int__content = result1 } = {
+  int__content = i }) and (i1 = 1)) -> (((1 <= i1) and (i1 <= 10)) ->
+  ((x2 = ((i2 - 1) * 10)) -> ((((((- 2147483648) <= 2147483647) ->
+  in_range1(x2)) and ((1 <= 10) -> in_range2(i2))) and ((1 <= i2) and
+  (i2 <= 10))) -> (((x2 = result2) and (x3 = 0)) -> (((j = result3) and
+  (j1 = 1)) -> (((1 <= j1) and (j1 <= 10)) ->
+  (x3 = (i2 * (j1 - 1)))))))))))))

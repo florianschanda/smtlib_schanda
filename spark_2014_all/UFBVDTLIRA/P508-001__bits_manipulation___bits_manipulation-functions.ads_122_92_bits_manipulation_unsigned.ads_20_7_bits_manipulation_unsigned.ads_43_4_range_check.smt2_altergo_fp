@@ -596,12 +596,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -613,6 +607,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1773,17 +1773,25 @@ function modular__ref___4__projection(a: modular__ref) : modular =
 
 axiom shift_right__post_axiom : true
 
+logic rliteral3 : t1
+
+axiom rliteral_axiom3 : (tqtint1(rliteral3) = 0)
+
+logic rliteral4 : t
+
+axiom rliteral_axiom4 : (tqtint(rliteral4) = 0)
+
 axiom shift_right__def_axiom :
   (forall v:t.
   (forall amount:int [shift_right(v, amount)]. (in_range2(amount) ->
   ((((1 <= 16) and (16 <= 8)) -> (((amount <  8) -> (shift_right(v,
   amount) = toBig2(lsr_bv1(toSmall2(v), of_int2(amount))))) and
-  ((not (amount <  8)) -> (shift_right(v,
-  amount) = toBig2(of_int2(0)))))) and ((not ((1 <= 16) and (16 <= 8))) ->
-  ((((9 <= 16) and (16 <= 16)) -> (((amount <  16) -> (shift_right(v,
-  amount) = lsr_bv(v, of_int(amount)))) and ((not (amount <  16)) ->
-  (shift_right(v, amount) = of_int(0))))) and ((not ((9 <= 16) and
-  (16 <= 16))) -> ((((17 <= 16) and (16 <= 32)) -> (shift_right(v,
+  ((not (amount <  8)) -> (shift_right(v, amount) = toBig2(rliteral3))))) and
+  ((not ((1 <= 16) and (16 <= 8))) -> ((((9 <= 16) and (16 <= 16)) ->
+  (((amount <  16) -> (shift_right(v, amount) = lsr_bv(v,
+  of_int(amount)))) and ((not (amount <  16)) -> (shift_right(v,
+  amount) = rliteral4)))) and ((not ((9 <= 16) and (16 <= 16))) ->
+  ((((17 <= 16) and (16 <= 32)) -> (shift_right(v,
   amount) = toSmall1(lsr_bv2(toBig1(v), of_int3(amount))))) and
   ((not ((17 <= 16) and (16 <= 32))) -> (shift_right(v,
   amount) = toSmall(lsr_bv3(toBig(v), of_int4(amount)))))))))))))
@@ -1799,11 +1807,11 @@ axiom shift_left__def_axiom :
   (forall amount:int [shift_left(v, amount)]. (in_range2(amount) ->
   ((((1 <= 16) and (16 <= 8)) -> (((amount <  8) -> (shift_left(v,
   amount) = toBig2(lsl_bv1(toSmall2(v), of_int2(amount))))) and
-  ((not (amount <  8)) -> (shift_left(v, amount) = toBig2(of_int2(0)))))) and
+  ((not (amount <  8)) -> (shift_left(v, amount) = toBig2(rliteral3))))) and
   ((not ((1 <= 16) and (16 <= 8))) -> ((((9 <= 16) and (16 <= 16)) ->
   (((amount <  16) -> (shift_left(v, amount) = lsl_bv(v,
   of_int(amount)))) and ((not (amount <  16)) -> (shift_left(v,
-  amount) = of_int(0))))) and ((not ((9 <= 16) and (16 <= 16))) ->
+  amount) = rliteral4)))) and ((not ((9 <= 16) and (16 <= 16))) ->
   ((((17 <= 16) and (16 <= 32)) -> (shift_left(v,
   amount) = toSmall1(urem2(lsl_bv2(toBig1(v), of_int3(amount)),
   of_int3(65536))))) and ((not ((17 <= 16) and (16 <= 32))) -> (shift_left(v,
@@ -1816,23 +1824,15 @@ logic make_mask__function_guard : t, int -> prop
 
 axiom make_mask__post_axiom : true
 
+logic rliteral5 : t
+
+axiom rliteral_axiom5 : (tqtint(rliteral5) = 65535)
+
 axiom make_mask__def_axiom :
   (forall num_bits:int [make_mask(num_bits)]. (in_range1(num_bits) ->
-  (make_mask(num_bits) = shift_right(of_int(65535), (16 - num_bits)))))
-
-logic value : t
-
-logic n : int
-
-logic o : int
-
-axiom H : ule(of_int(0), value)
-
-axiom H1 : ule(value, of_int(65535))
-
-axiom H2 : (0 <= n)
-
-axiom H3 : (n <= 15)
+  (make_mask(num_bits) = shift_right(rliteral5, (16 - num_bits)))))
 
  (* File "bits_manipulation-functions.ads", line 115, characters 0-0 *)
-goal WP_parameter_def : in_range1((15 - n))
+goal WP_parameter_def :
+  (forall value:t. forall n:int. ((ule(rliteral4, value) and ule(value,
+  rliteral5)) -> (((0 <= n) and (n <= 15)) -> in_range1((15 - n)))))

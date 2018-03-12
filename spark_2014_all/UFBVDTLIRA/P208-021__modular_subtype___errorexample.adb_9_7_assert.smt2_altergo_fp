@@ -601,7 +601,15 @@ type unsigned_32_m1_0_m100_0
 
 logic attr__ATTRIBUTE_MODULUS : t
 
-predicate in_range(x: t) = (ule(of_int(1), x) and ule(x, of_int(100)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 1)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 100)
+
+predicate in_range(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((1 <= x) and (x <= 100))
 
@@ -662,7 +670,5 @@ logic calculated_force : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-axiom H : in_range(calculated_force)
-
  (* File "errorexample.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def : (not in_range(calculated_force))

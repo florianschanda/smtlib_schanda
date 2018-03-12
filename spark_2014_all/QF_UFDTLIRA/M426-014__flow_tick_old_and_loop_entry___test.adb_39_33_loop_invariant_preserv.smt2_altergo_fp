@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -164,126 +164,26 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic x : int
-
-logic i : int
-
-logic temp___150 : int
-
-logic temp___149 : int
-
-logic result : int
-
-logic i1 : int
-
-logic result1 : int
-
-logic x1 : int
-
-logic x2 : int
-
-logic i2 : int
-
-logic j : int
-
-logic result2 : int
-
-logic j1 : int
-
-logic j2 : int
-
-logic j3 : int
-
-logic j4 : int
-
-logic j5 : int
-
-logic j6 : int
-
-logic j7 : int
-
-logic j8 : int
-
-logic result3 : int
-
-logic i3 : int
-
-logic result4 : int
-
-logic x3 : int
-
-logic x4 : int
-
-logic i4 : int
-
-logic j9 : int
-
-logic x5 : int
-
-logic i5 : int
-
-logic j10 : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range1(x))
-
-axiom H1 : (result = i)
-
-axiom H2 : (i1 = 1)
-
-axiom H3 : (1 <= i1)
-
-axiom H4 : (i1 <= 10)
-
-axiom H5 : (result1 = x)
-
-axiom H6 : (x1 = 0)
-
-axiom H7 : (x2 = x)
-
-axiom H8 : (((((- 2147483648) <= 2147483647) -> in_range1(x2)) and
-  ((1 <= 10) -> in_range2(i2))) and ((1 <= i2) and (i2 <= 10)))
-
-axiom H9 : (j = result2)
-
-axiom H10 : (j1 = (- 2147483648))
-
-axiom H11 : ((((- 2147483648) <= j1) and (j1 <= 2147483647)) ->
-  (((temp___150 = x2) and ((temp___149 = j1) and ((x2 = temp___150) and
-  (((((- 2147483648) <= 2147483647) -> in_range1(j2)) and
-  (((- 2147483648) <= j2) and (j2 <= 2147483647))) and
-  (j2 = 2147483647))))) and ((j2 = j5) and (j6 = j2))))
-
-axiom H12 : ((((- 2147483648) <= j1) and (j1 <= 2147483647)) -> (j7 = j5))
-
-axiom H13 : ((((- 2147483648) <= j1) and (j1 <= 2147483647)) -> (j8 = j6))
-
-axiom H14 : ((not (((- 2147483648) <= j1) and (j1 <= 2147483647))) ->
-  (j1 = j7))
-
-axiom H15 : ((not (((- 2147483648) <= j1) and (j1 <= 2147483647))) ->
-  (j8 = j1))
-
-axiom H16 : (not (i2 = 10))
-
-axiom H17 : (result3 = i2)
-
-axiom H18 : (i3 = (i2 + 1))
-
-axiom H19 : (result4 = x2)
-
-axiom H20 : (x3 = 0)
-
-axiom H21 : (j9 = j7)
-
-axiom H22 : (i4 = i3)
-
-axiom H23 : (x3 = x4)
-
-axiom H24 : (j10 = j8)
-
-axiom H25 : (i5 = i3)
-
-axiom H26 : (x5 = x3)
-
  (* File "test.adb", line 22, characters 0-0 *)
-goal WP_parameter_def : (x4 = x)
+goal WP_parameter_def :
+  (forall x:int. forall i:int. forall temp___172:int. forall temp___171:int.
+  forall result:int. forall i1:int. forall result1:int. forall x1:int.
+  forall x2:int. forall i2:int. forall j:int. forall result2:int.
+  forall j1:int. forall j2:int. forall j3:int. forall j4:int. forall j5:int.
+  forall j6:int. forall result3:int. forall i3:int. forall result4:int.
+  forall x3:int. forall x4:int. forall i4:int. forall j7:int. forall x5:int.
+  forall i5:int. forall j8:int. ((((- 2147483648) <= 2147483647) ->
+  in_range1(x)) -> (((result = i) and (i1 = 1)) -> (((1 <= i1) and
+  (i1 <= 10)) -> (((result1 = x) and (x1 = 0)) -> ((x2 = x) ->
+  ((((((((- 2147483648) <= 2147483647) -> in_range1(x2)) and ((1 <= 10) ->
+  in_range2(i2))) and ((1 <= i2) and (i2 <= 10))) and ((((j = result2) and
+  (j1 = (- 2147483648))) and (((((- 2147483648) <= j1) and
+  (j1 <= 2147483647)) and ((((temp___172 = x2) and ((temp___171 = j1) and
+  ((x2 = temp___172) and (((((- 2147483648) <= 2147483647) ->
+  in_range1(j2)) and (((- 2147483648) <= j2) and (j2 <= 2147483647))) and
+  (j2 = 2147483647))))) and ((j2 = j3) and (j4 = j2))) and ((j5 = j3) and
+  (j6 = j4)))) or ((not (((- 2147483648) <= j1) and (j1 <= 2147483647))) and
+  ((j1 = j5) and (j6 = j1))))) and ((not (i2 = 10)) and (((result3 = i2) and
+  (i3 = (i2 + 1))) and ((result4 = x2) and (x3 = 0)))))) and (((j7 = j5) and
+  ((i4 = i3) and (x3 = x4))) and ((j8 = j6) and ((i5 = i3) and
+  (x5 = x3))))) -> (x4 = x))))))))

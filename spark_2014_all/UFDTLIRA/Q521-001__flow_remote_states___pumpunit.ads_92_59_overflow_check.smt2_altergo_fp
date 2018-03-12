@@ -211,77 +211,12 @@ axiom is_base__def_axiom :
   (forall pumpunit__cur_state:int [is_base(pumpunit__cur_state)].
   ((is_base(pumpunit__cur_state) = true) <-> (pumpunit__cur_state = 3)))
 
-logic cur_state : int
-
-logic total_pay : int
-
-logic outstanding : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic cur_state1 : int
-
-logic total_pay1 : int
-
-logic outstanding1 : int
-
-logic result : bool
-
-logic result1 : bool
-
-logic result2 : int
-
-logic total_pay2 : int
-
-logic result3 : int
-
-logic cur_state2 : int
-
-logic result4 : int
-
-logic outstanding2 : int
-
-logic cur_state3 : int
-
-logic total_pay3 : int
-
-logic outstanding3 : int
-
-logic cur_state4 : int
-
-logic total_pay4 : int
-
-logic outstanding4 : int
-
-logic result5 : bool
-
-axiom H : in_range2(cur_state)
-
-axiom H1 : in_range1(total_pay)
-
-axiom H2 : in_range1(outstanding)
-
-axiom H3 : ((result = is_waiting(cur_state)) and ((result = true) <->
-  (cur_state = 2)))
-
-axiom H4 : (result = true)
-
-axiom H5 : ((o = get_outstanding(outstanding)) and (in_range1(o) and
-  (o = outstanding)))
-
-axiom H6 : (o1 = (2147483647 - o))
-
  (* File "pumpunit.ads", line 36, characters 0-0 *)
-goal WP_parameter_def : in_range(o1)
+goal WP_parameter_def :
+  (forall cur_state:int. forall total_pay:int. forall outstanding:int.
+  forall o:int. forall o1:int. forall result:bool. (in_range2(cur_state) ->
+  (in_range1(total_pay) -> (in_range1(outstanding) ->
+  (((result = is_waiting(cur_state)) and ((result = true) <->
+  (cur_state = 2))) -> ((result = true) ->
+  ((((o = get_outstanding(outstanding)) and (in_range1(o) and
+  (o = outstanding))) and (o1 = (2147483647 - o))) -> in_range(o1))))))))

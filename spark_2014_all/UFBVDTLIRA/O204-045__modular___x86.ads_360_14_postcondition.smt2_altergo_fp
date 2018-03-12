@@ -1030,29 +1030,13 @@ logic val__ : t1
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic r12 : t
+logic rliteral1 : t
 
-logic result : t
-
-logic r121 : t
-
-logic r122 : t
-
-logic r123 : t
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : (result = r12)
-
-axiom H3 : (r121 = bw_or(bw_and(r12, of_int(18446744073709551360)),
-  toBig(val__)))
-
-axiom H4 : (r121 = r122)
-
-axiom H5 : (r123 = r121)
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 18446744073709551360)
 
  (* File "x86.ads", line 10, characters 0-0 *)
-goal WP_parameter_def : (r122 = bw_or(bw_and(r12,
-  of_int(18446744073709551360)), toBig(val__)))
+goal WP_parameter_def :
+  (forall r12:t. forall result:t. forall r121:t. forall r122:t.
+  forall r123:t. ((((result = r12) and (r121 = bw_or(bw_and(r12, rliteral1),
+  toBig(val__)))) and ((r121 = r122) and (r123 = r121))) ->
+  (r122 = bw_or(bw_and(r12, rliteral1), toBig(val__)))))

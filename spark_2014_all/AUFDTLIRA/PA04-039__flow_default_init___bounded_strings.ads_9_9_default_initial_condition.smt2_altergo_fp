@@ -239,24 +239,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -267,17 +249,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep2((a[temp___idx_78])) = to_rep2((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep2((a[temp___idx_91])) = to_rep2((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep2((a[temp___idx_78])) = to_rep2((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep2((a[temp___idx_91])) = to_rep2((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -287,37 +269,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep2((a[temp___idx_78])) = to_rep2((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep2((a[(i + 1)])) <  to_rep2((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep2((b[(i + 1)])) <  to_rep2((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep2((a[temp___idx_91])) = to_rep2((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 logic to_rep3 : integer -> int
 
@@ -712,6 +666,8 @@ axiom length__def_axiom :
   rec__bounded_strings__bounded_string__length = source3 }
   }) = to_rep1(source3))))
 
+logic temp___198 : int, int, int -> us_t1
+
 type positive
 
 predicate in_range4(x: int) = ((1 <= x) and (x <= 2147483647))
@@ -820,49 +776,30 @@ type string__ref = { string__content : us_t2
 function string__ref___projection(a: string__ref) : us_t2 =
   (a).string__content
 
-logic temp___172 : int, int, int -> us_t1
-
 axiom def_axiom :
-  (forall temp___174:int. forall temp___175:int. forall temp___176:int.
-  ((dynamic_property4(1, 2147483647, temp___175, temp___176) ->
-  ((to_rep3(first2((temp___172(temp___174, temp___175,
-  temp___176)).rt1)) = temp___175) and (to_rep3(last2((temp___172(temp___174,
-  temp___175, temp___176)).rt1)) = temp___176))) and
-  (forall temp___177:int. (((temp___172(temp___174, temp___175,
-  temp___176)).elts1[temp___177]) = of_rep2(temp___174)))))
-
-logic temp___171 : int
-
-logic temp___170 : index_type
-
-logic temp___179 : (int,character) farray
-
-logic temp___1791 : t1
-
-logic temp___180 : index_type
-
-logic temp___1801 : (int,character) farray
-
-logic temp___1802 : t
-
-logic temp___1803 : length_type
-
-axiom H : in_range(temp___171)
-
-axiom H1 : (temp___171 = to_rep(temp___170))
-
-axiom H2 : ((dynamic_property1(1, to_rep(temp___180),
-  to_rep3(first(temp___1802)), to_rep3(last(temp___1802))) and
-  ((to_rep3(first(temp___1802)) = 1) and
-  (to_rep3(last(temp___1802)) = to_rep(temp___180)))) and
-  (((temp___1801 = (temp___172(32, 1, to_rep(temp___180))).elts1) and
-  (temp___1802 = mk(to_rep3(first2((temp___172(32, 1,
-  to_rep(temp___180))).rt1)), to_rep3(last2((temp___172(32, 1,
-  to_rep(temp___180))).rt1))))) and (to_rep1(temp___1803) = 0)))
+  (forall temp___200:int. forall temp___201:int. forall temp___202:int.
+  (in_range3(temp___200) -> ((dynamic_property4(1, 2147483647, temp___201,
+  temp___202) -> ((to_rep3(first2((temp___198(temp___200, temp___201,
+  temp___202)).rt1)) = temp___201) and (to_rep3(last2((temp___198(temp___200,
+  temp___201, temp___202)).rt1)) = temp___202))) and
+  (forall temp___203:int. (to_rep2(((temp___198(temp___200, temp___201,
+  temp___202)).elts1[temp___203])) = temp___200)))))
 
  (* File "bounded_strings.ads", line 38, characters 0-0 *)
-goal WP_parameter_def : (length2({ us_split_discrs1 = {
-  rec__bounded_strings__bounded_string__bound = temp___180 };
+goal WP_parameter_def :
+  (forall temp___197:int. forall temp___196:index_type.
+  forall temp___206:index_type. forall temp___2061:(int,character) farray.
+  forall temp___2062:t. forall temp___2063:length_type.
+  ((in_range(temp___197) and (temp___197 = to_rep(temp___196))) ->
+  (((dynamic_property1(1, to_rep(temp___206), to_rep3(first(temp___2062)),
+  to_rep3(last(temp___2062))) and ((to_rep3(first(temp___2062)) = 1) and
+  (to_rep3(last(temp___2062)) = to_rep(temp___206)))) and
+  (((temp___2061 = (temp___198(32, 1, to_rep(temp___206))).elts1) and
+  (temp___2062 = mk(to_rep3(first2((temp___198(32, 1,
+  to_rep(temp___206))).rt1)), to_rep3(last2((temp___198(32, 1,
+  to_rep(temp___206))).rt1))))) and (to_rep1(temp___2063) = 0))) ->
+  (length2({ us_split_discrs1 = {
+  rec__bounded_strings__bounded_string__bound = temp___206 };
   us_split_fields1 = { rec__bounded_strings__bounded_string__text = { elts =
-  temp___1801; rt = temp___1802 };
-  rec__bounded_strings__bounded_string__length = temp___1803 } }) = 0)
+  temp___2061; rt = temp___2062 };
+  rec__bounded_strings__bounded_string__length = temp___2063 } }) = 0))))

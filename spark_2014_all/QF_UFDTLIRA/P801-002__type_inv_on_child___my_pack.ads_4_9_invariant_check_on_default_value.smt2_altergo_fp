@@ -104,9 +104,6 @@ type ttB__ref = { ttB__content : ttB
 
 function ttB__ref___projection(a: ttB__ref) : ttB = (a).ttB__content
 
-logic temp___140 : int
-
-axiom H : in_range(temp___140)
-
  (* File "my_pack.ads", line 4, characters 0-0 *)
-goal WP_parameter_def : (not (temp___140 = 0))
+goal WP_parameter_def :
+  (forall temp___163:int. (in_range(temp___163) -> (not (temp___163 = 0))))

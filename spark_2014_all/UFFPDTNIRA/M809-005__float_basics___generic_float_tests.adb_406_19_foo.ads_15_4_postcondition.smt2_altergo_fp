@@ -1192,179 +1192,50 @@ function rec____ref___2__projection(a: rec____ref) : us_rep =
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic y : t
-
-logic r__split_fields : ft
-
-logic r__split_fields1 : ft
-
-logic r__split_fields2 : ft
-
-logic o : ft
-
-logic o1 : ft
-
-logic o2 : ft
-
-logic o3 : ft
-
-logic o4 : ft
-
-logic o5 : ft
-
-logic temp___233 : ft
-
-logic temp___2331 : ft
-
-logic temp___2332 : ft
-
-logic o6 : ft
-
-logic o7 : ft
-
-logic o8 : ft
-
-logic o9 : ft
-
-logic temp___235 : ft
-
-logic temp___2351 : ft
-
-logic temp___2352 : ft
-
-logic result : ft
-
-logic result1 : ft
-
-logic result2 : ft
-
-logic r__split_fields3 : ft
-
-logic r__split_fields4 : ft
-
-logic r__split_fields5 : ft
-
-logic result3 : ft
-
-logic result4 : ft
-
-logic result5 : ft
-
-logic r__split_fields6 : ft
-
-logic r__split_fields7 : ft
-
-logic r__split_fields8 : ft
-
-logic result6 : t
-
-logic y1 : t
-
-logic y2 : t
-
-logic r__split_fields9 : ft
-
-logic r__split_fields10 : ft
-
-logic r__split_fields11 : ft
-
-logic y3 : t
-
-logic r__split_fields12 : ft
-
-logic r__split_fields13 : ft
-
-logic r__split_fields14 : ft
-
-axiom H : tqtisFinite(x)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0))
-
-axiom H1 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(y))
-
-axiom H2 : (to_rep(o) = fliteral)
-
-axiom H3 : (to_rep(o1) = x)
 
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.0e-1))
 
-axiom H4 : (to_rep(o2) = fliteral2)
-
-axiom H5 : (o2 = o3)
-
-axiom H6 : (o1 = o4)
-
-axiom H7 : (o = o5)
-
-axiom H8 : (temp___233 = o3)
-
-axiom H9 : (temp___2331 = o4)
-
-axiom H10 : (temp___2332 = o5)
-
-axiom H11 : (result = r__split_fields)
-
-axiom H12 : (result1 = r__split_fields1)
-
-axiom H13 : (result2 = r__split_fields2)
-
-axiom H14 : (temp___233 = r__split_fields3)
-
-axiom H15 : (temp___2331 = r__split_fields4)
-
-axiom H16 : (temp___2332 = r__split_fields5)
-
-axiom H17 : (to_rep(o6) = to_rep(r__split_fields4))
-
-axiom H18 : (o6 = o7)
-
-axiom H19 : (r__split_fields4 = o8)
-
-axiom H20 : (r__split_fields5 = o9)
-
-axiom H21 : (temp___235 = o7)
-
-axiom H22 : (temp___2351 = o8)
-
-axiom H23 : (temp___2352 = o9)
-
-axiom H24 : (result3 = r__split_fields3)
-
-axiom H25 : (result4 = r__split_fields4)
-
-axiom H26 : (result5 = r__split_fields5)
-
-axiom H27 : (temp___235 = r__split_fields6)
-
-axiom H28 : (temp___2351 = r__split_fields7)
-
-axiom H29 : (temp___2352 = r__split_fields8)
-
-axiom H30 : (result6 = y)
-
-axiom H31 : (y1 = to_rep(r__split_fields6))
-
-axiom H32 : (r__split_fields9 = r__split_fields6)
-
-axiom H33 : (r__split_fields10 = r__split_fields7)
-
-axiom H34 : (r__split_fields11 = r__split_fields8)
-
-axiom H35 : (y1 = y2)
-
-axiom H36 : (r__split_fields12 = r__split_fields6)
-
-axiom H37 : (r__split_fields13 = r__split_fields7)
-
-axiom H38 : (r__split_fields14 = r__split_fields8)
-
-axiom H39 : (y3 = y1)
-
  (* File "generic_float_tests.adb", line 398, characters 0-0 *)
-goal WP_parameter_def : eq(x, y2)
+goal WP_parameter_def :
+  (forall y:t. forall r__split_fields:ft. forall r__split_fields1:ft.
+  forall r__split_fields2:ft. forall o:ft. forall o1:ft. forall o2:ft.
+  forall o3:ft. forall o4:ft. forall o5:ft. forall temp___263:ft.
+  forall temp___2631:ft. forall temp___2632:ft. forall o6:ft. forall o7:ft.
+  forall o8:ft. forall o9:ft. forall temp___265:ft. forall temp___2651:ft.
+  forall temp___2652:ft. forall result:ft. forall result1:ft.
+  forall result2:ft. forall r__split_fields3:ft. forall r__split_fields4:ft.
+  forall r__split_fields5:ft. forall result3:ft. forall result4:ft.
+  forall result5:ft. forall r__split_fields6:ft. forall r__split_fields7:ft.
+  forall r__split_fields8:ft. forall result6:t. forall y1:t. forall y2:t.
+  forall r__split_fields9:ft. forall r__split_fields10:ft.
+  forall r__split_fields11:ft. forall y3:t. forall r__split_fields12:ft.
+  forall r__split_fields13:ft. forall r__split_fields14:ft.
+  ((tqtisFinite(x) and ((le(neg(fliteral1), fliteral1) -> tqtisFinite(y)) and
+  ((((((to_rep(o) = fliteral) and ((to_rep(o1) = x) and
+  ((to_rep(o2) = fliteral2) and ((o2 = o3) and ((o1 = o4) and
+  (o = o5)))))) and ((temp___263 = o3) and ((temp___2631 = o4) and
+  (temp___2632 = o5)))) and (((result = r__split_fields) and
+  ((result1 = r__split_fields1) and (result2 = r__split_fields2))) and
+  ((temp___263 = r__split_fields3) and ((temp___2631 = r__split_fields4) and
+  (temp___2632 = r__split_fields5))))) and
+  (((((to_rep(o6) = to_rep(r__split_fields4)) and ((o6 = o7) and
+  ((r__split_fields4 = o8) and (r__split_fields5 = o9)))) and
+  ((temp___265 = o7) and ((temp___2651 = o8) and (temp___2652 = o9)))) and
+  (((result3 = r__split_fields3) and ((result4 = r__split_fields4) and
+  (result5 = r__split_fields5))) and ((temp___265 = r__split_fields6) and
+  ((temp___2651 = r__split_fields7) and
+  (temp___2652 = r__split_fields8))))) and ((result6 = y) and
+  (y1 = to_rep(r__split_fields6))))) and
+  ((((r__split_fields9 = r__split_fields6) and
+  ((r__split_fields10 = r__split_fields7) and
+  (r__split_fields11 = r__split_fields8))) and (y1 = y2)) and
+  (((r__split_fields12 = r__split_fields6) and
+  ((r__split_fields13 = r__split_fields7) and
+  (r__split_fields14 = r__split_fields8))) and (y3 = y1)))))) -> eq(x, y2)))

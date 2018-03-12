@@ -105,19 +105,8 @@ type natural__ref = { natural__content : natural
 function natural__ref___projection(a: natural__ref) : natural =
   (a).natural__content
 
-logic us : int
-
-logic us1 : int
-
-logic us2 : int
-
-logic us3 : int
-
-axiom H : ((us = 0) and in_range(0))
-
-axiom H1 : ((us1 = 0) and in_range(0))
-
-axiom H2 : ((us2 = 1) and in_range(1))
-
  (* File "use_private_types.ads", line 28, characters 0-0 *)
-goal WP_parameter_def : in_range(1)
+goal WP_parameter_def :
+  (forall us:int. forall us1:int. forall us2:int. (((us = 0) and
+  in_range(0)) -> (((us1 = 0) and in_range(0)) -> (((us2 = 1) and
+  in_range(1)) -> in_range(1)))))

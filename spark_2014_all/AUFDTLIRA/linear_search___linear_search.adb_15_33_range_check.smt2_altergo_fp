@@ -81,12 +81,6 @@ axiom bool_ge_axiom :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -98,6 +92,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -225,24 +225,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,element) farray, int, int, (int,element) farray, int,
-  int -> (int,element) farray
-
-axiom concat_def :
-  (forall a:(int,element) farray. forall b:(int,element) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : element, int -> (int,element) farray
-
-axiom singleton_def :
-  (forall v:element.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,element) farray, int, int, (int,element) farray, int,
   int -> bool
 
@@ -253,17 +235,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -273,37 +255,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,element) farray, int, int, (int,element) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,element) farray. forall b:(int,element) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,element) farray. forall b:(int,element) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep1((a[(i + 1)])) <  to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,element) farray. forall b:(int,element) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep1((b[(i + 1)])) <  to_rep1((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type us_split_discrs = { rec__linear_search__search_result__found : bool
 }
@@ -596,397 +550,14 @@ type t3b__ref = { t3b__content : us_rep
 
 function t3b__ref___projection(a1: t3b__ref) : us_rep = (a1).t3b__content
 
-logic pos : int
-
-logic res__split_fields : index
-
-logic res__split_discrs : bool
-
-logic linear_search__search__result : bool
-
-logic linear_search__search__result1 : index
-
-logic linear_search__search__result2 : bool
-
-logic temp___181 : bool
-
-logic temp___1811 : index
-
-logic temp___1812 : bool
-
-logic temp___180 : int
-
-logic temp___182 : int
-
-logic o : int
-
-logic o1 : element
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : index
-
-logic o5 : index
-
-logic temp___177 : bool
-
-logic temp___1771 : index
-
-logic temp___1772 : bool
-
-logic usq_ : bool
-
-logic usq_1 : index
-
-logic usq_2 : bool
-
-logic temp___179 : bool
-
-logic temp___1791 : index
-
-logic temp___1792 : bool
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : element
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : index
-
-logic o13 : index
-
-logic temp___1773 : bool
-
-logic temp___1774 : index
-
-logic temp___1775 : bool
-
-logic usq_3 : bool
-
-logic usq_4 : index
-
-logic usq_5 : bool
-
-logic temp___1793 : bool
-
-logic temp___1794 : index
-
-logic temp___1795 : bool
-
-logic usq_6 : bool
-
-logic usq_7 : index
-
-logic usq_8 : bool
-
-logic temp___185 : bool
-
-logic temp___1851 : index
-
-logic temp___1852 : bool
-
-logic res__split_fields1 : index
-
-logic res__split_discrs1 : bool
-
-logic linear_search__search__result3 : bool
-
-logic linear_search__search__result4 : index
-
-logic linear_search__search__result5 : bool
-
-logic result : int
-
-logic pos1 : int
-
-logic temp___1821 : int
-
-logic result1 : bool
-
-logic result2 : index
-
-logic res__split_fields2 : index
-
-logic result3 : bool
-
-logic res__split_discrs2 : bool
-
-logic result4 : bool
-
-logic result5 : index
-
-logic result6 : bool
-
-logic linear_search__search__result6 : bool
-
-logic linear_search__search__result7 : index
-
-logic linear_search__search__result8 : bool
-
-logic pos2 : int
-
-logic res__split_fields3 : index
-
-logic res__split_discrs3 : bool
-
-logic linear_search__search__result9 : bool
-
-logic linear_search__search__result10 : index
-
-logic linear_search__search__result11 : bool
-
-logic temp___1822 : int
-
-logic result7 : int
-
-logic temp___1823 : int
-
-logic result8 : int
-
-logic pos3 : int
-
-logic result9 : bool
-
-logic result10 : index
-
-logic res__split_fields4 : index
-
-logic result11 : bool
-
-logic res__split_discrs4 : bool
-
-logic result12 : bool
-
-logic result13 : index
-
-logic result14 : bool
-
-logic linear_search__search__result12 : bool
-
-logic linear_search__search__result13 : index
-
-logic linear_search__search__result14 : bool
-
-logic pos4 : int
-
-logic res__split_fields5 : index
-
-logic res__split_discrs5 : bool
-
-logic linear_search__search__result15 : bool
-
-logic linear_search__search__result16 : index
-
-logic linear_search__search__result17 : bool
-
-logic temp___1824 : int
-
-logic pos5 : int
-
-logic res__split_fields6 : index
-
-logic res__split_discrs6 : bool
-
-logic linear_search__search__result18 : bool
-
-logic linear_search__search__result19 : index
-
-logic linear_search__search__result20 : bool
-
-logic temp___1825 : int
-
-logic pos6 : int
-
-logic res__split_fields7 : index
-
-logic res__split_discrs7 : bool
-
-logic linear_search__search__result21 : bool
-
-logic linear_search__search__result22 : index
-
-logic linear_search__search__result23 : bool
-
-logic temp___1826 : int
-
-logic pos7 : int
-
-logic res__split_fields8 : index
-
-logic res__split_discrs8 : bool
-
-logic linear_search__search__result24 : bool
-
-logic linear_search__search__result25 : index
-
-logic linear_search__search__result26 : bool
-
-logic temp___1827 : int
-
-logic pos8 : int
-
-logic res__split_fields9 : index
-
-logic res__split_discrs9 : bool
-
-logic linear_search__search__result27 : bool
-
-logic linear_search__search__result28 : index
-
-logic linear_search__search__result29 : bool
-
-logic pos9 : int
-
-logic res__split_fields10 : index
-
-logic res__split_discrs10 : bool
-
-logic linear_search__search__result30 : bool
-
-logic linear_search__search__result31 : index
-
-logic linear_search__search__result32 : bool
-
-logic pos10 : int
-
-logic res__split_fields11 : index
-
-logic res__split_discrs11 : bool
-
-logic linear_search__search__result33 : bool
-
-logic linear_search__search__result34 : index
-
-logic linear_search__search__result35 : bool
-
-logic pos11 : int
-
-logic res__split_fields12 : index
-
-logic res__split_discrs12 : bool
-
-logic linear_search__search__result36 : bool
-
-logic linear_search__search__result37 : index
-
-logic linear_search__search__result38 : bool
-
-logic result15 : index
-
-logic res__split_fields13 : index
-
-logic result16 : bool
-
-logic res__split_discrs13 : bool
-
-logic result17 : bool
-
-logic result18 : index
-
-logic result19 : bool
-
-logic linear_search__search__result39 : bool
-
-logic linear_search__search__result40 : index
-
-logic linear_search__search__result41 : bool
-
-logic linear_search__search__result42 : bool
-
-logic linear_search__search__result43 : index
-
-logic linear_search__search__result44 : bool
-
-logic linear_search__search__result45 : bool
-
-logic linear_search__search__result46 : index
-
-logic linear_search__search__result47 : bool
-
-logic pos12 : int
-
-logic res__split_fields14 : index
-
-logic res__split_discrs14 : bool
-
-logic linear_search__search__result48 : bool
-
-logic linear_search__search__result49 : index
-
-logic linear_search__search__result50 : bool
-
-logic pos13 : int
-
-logic res__split_fields15 : index
-
-logic res__split_discrs15 : bool
-
-logic linear_search__search__result51 : bool
-
-logic linear_search__search__result52 : index
-
-logic linear_search__search__result53 : bool
-
-logic pos14 : int
-
-logic res__split_fields16 : index
-
-logic res__split_discrs16 : bool
-
-logic linear_search__search__result54 : bool
-
-logic linear_search__search__result55 : index
-
-logic linear_search__search__result56 : bool
-
-logic pos15 : int
-
-logic res__split_fields17 : index
-
-logic res__split_discrs17 : bool
-
-logic linear_search__search__result57 : bool
-
-logic linear_search__search__result58 : index
-
-logic linear_search__search__result59 : bool
-
-axiom H : in_range3(val__)
-
-axiom H1 : (0 <= val__)
-
-axiom H2 : (result = pos)
-
-axiom H3 : (pos1 = 1)
-
-axiom H4 : in_range1(pos1)
-
-axiom H5 : ((res__attr__constrained = false) and
-  (res__split_discrs = of_int(0)))
-
-axiom H6 : (pos1 <= 10)
-
-axiom H7 : ((1 <= pos1) and (pos1 <= 10))
-
-axiom H8 : (o = pos1)
-
-axiom H9 : (o1 = (a[o]))
-
-axiom H10 : (o2 = to_rep1(o1))
-
-axiom H11 : (((o2 = val__) -> (result1 = true)) and ((not (o2 = val__)) ->
-  (result1 = false)))
-
-axiom H12 : (result1 = true)
-
  (* File "linear_search.ads", line 18, characters 0-0 *)
-goal WP_parameter_def : in_range2(pos1)
+goal WP_parameter_def :
+  (forall pos:int. forall res__split_discrs:bool. forall o:int.
+  forall o1:element. forall o2:int. forall result:int__ref. forall pos1:int.
+  forall result1:bool. (in_range3(val__) -> ((0 <= val__) -> (((result = {
+  int__content = pos }) and (pos1 = 1)) -> (in_range1(pos1) ->
+  (((res__attr__constrained = false) and (res__split_discrs = of_int(0))) ->
+  ((pos1 <= 10) -> (((((((1 <= pos1) and (pos1 <= 10)) and (o = pos1)) and
+  (o1 = (a[o]))) and (o2 = to_rep1(o1))) and (((o2 = val__) and
+  (result1 = true)) or ((not (o2 = val__)) and (result1 = false)))) ->
+  ((result1 = true) -> in_range2(pos1))))))))))

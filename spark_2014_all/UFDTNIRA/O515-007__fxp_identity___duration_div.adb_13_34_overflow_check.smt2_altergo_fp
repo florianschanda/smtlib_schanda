@@ -366,27 +366,10 @@ logic right : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : duration
-
-logic o1 : duration
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-axiom H : in_range(right)
-
-axiom H1 : (0 <  right)
-
-axiom H2 : (to_fixed(o) = (- 9223372036854775808))
-
-axiom H3 : ((o1 = id(o)) and (o1 = o))
-
-axiom H4 : (o2 = to_fixed(o1))
-
-axiom H5 : (o3 = fxp_div_int(o2, right))
-
  (* File "duration_div.adb", line 9, characters 0-0 *)
-goal WP_parameter_def : in_range1(o3)
+goal WP_parameter_def :
+  (forall o:duration. forall o1:duration. forall o2:int. forall o3:int.
+  (in_range(right) -> ((0 <  right) ->
+  (((((to_fixed(o) = (- 9223372036854775808)) and ((o1 = id(o)) and
+  (o1 = o))) and (o2 = to_fixed(o1))) and (o3 = fxp_div_int(o2, right))) ->
+  in_range1(o3)))))

@@ -278,12 +278,6 @@ function t__ref___projection(a: t__ref) : us_rep = (a).t__content
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq4 : bool, bool -> bool
-
-axiom bool_eq_def3 :
-  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -295,6 +289,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq4 : bool, bool -> bool
+
+axiom bool_eq_def3 :
+  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
 
 predicate in_range2(x: int) = ((x = 0) or (x = 1))
 
@@ -405,36 +405,19 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic result__ : int
-
-logic o : int
-
-logic obj__split_fields : integer
-
-logic obj__split_fields1 : integer
-
-logic obj__split_fields2 : integer
-
-logic obj__split_fields3 : us_private
-
-logic result__1 : int
-
-logic result : bool
-
-axiom H : ((0 <= 2147483647) -> in_range(result__))
-
-axiom H1 : in_range(result__1)
-
-axiom H2 : ((result = has_stored_area({ us_split_fields1 = {
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (forall result__:int. forall obj__split_fields:integer.
+  forall obj__split_fields1:integer. forall obj__split_fields2:integer.
+  forall obj__split_fields3:us_private. forall result__1:int.
+  forall result:bool. (((0 <= 2147483647) -> in_range(result__)) ->
+  (in_range(result__1) -> (((result = has_stored_area({ us_split_fields1 = {
   rec__object__t__area = obj__split_fields; rec__object__t__max_width =
   obj__split_fields1; rec__object__t__max_height = obj__split_fields2;
   rec__ext__ = obj__split_fields3 }; attr__tag = obj__attr__tag })) and
-  ((result = true) <-> in_range(to_rep(obj__split_fields))))
-
-axiom H3 : (result = true)
-
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (has_stored_area({ us_split_fields1 = {
+  ((result = true) <-> in_range(to_rep(obj__split_fields)))) ->
+  ((result = true) -> (has_stored_area({ us_split_fields1 = {
   rec__object__t__area = obj__split_fields; rec__object__t__max_width =
   obj__split_fields1; rec__object__t__max_height = obj__split_fields2;
-  rec__ext__ = obj__split_fields3 }; attr__tag = obj__attr__tag }) = true)
+  rec__ext__ = obj__split_fields3 }; attr__tag = obj__attr__tag
+  }) = true))))))

@@ -357,9 +357,6 @@ logic right : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-axiom H : in_range(right)
-
-axiom H1 : (0 <  right)
-
  (* File "duration_div.adb", line 18, characters 0-0 *)
-goal WP_parameter_def : (not (right = 0))
+goal WP_parameter_def : (in_range(right) -> ((0 <  right) ->
+  (not (right = 0))))

@@ -76,7 +76,5 @@ function pt__ref___projection(a: pt__ref) : pt = (a).pt__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-axiom H : false
-
  (* File "q.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def : true

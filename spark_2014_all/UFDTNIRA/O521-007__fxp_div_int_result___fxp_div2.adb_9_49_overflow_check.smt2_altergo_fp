@@ -391,36 +391,13 @@ logic z : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic x : duration
-
-logic o : duration
-
-logic o1 : int
-
-logic fxp_div2__y__assume : int
-
-logic o2 : int
-
-logic fxp_div2__z__assume : int
-
-logic result : duration
-
-logic x1 : duration
-
-axiom H : (to_fixed(o) = 3000000000)
-
-axiom H1 : (result = x)
-
-axiom H2 : (x1 = o)
-
-axiom H3 : ((o1 = fxp_div_result_int(to_fixed(x1), to_fixed(x1))) and
-  in_range1(fxp_div_result_int(to_fixed(x1), to_fixed(x1))))
-
-axiom H4 : ((fxp_div2__y__assume = o1) and in_range2(o1))
-
-axiom H5 : (fxp_div2__y__assume = y)
-
-axiom H6 : in_range2(y)
-
  (* File "fxp_div2.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range1(fxp_div_result_int(to_fixed(x1), 2))
+goal WP_parameter_def :
+  (forall x:duration. forall o:duration. forall o1:int.
+  forall fxp_div2__y__assume:int. forall result:duration. forall x1:duration.
+  (((to_fixed(o) = 3000000000) and ((result = x) and (x1 = o))) ->
+  (((((o1 = fxp_div_result_int(to_fixed(x1), to_fixed(x1))) and
+  in_range1(fxp_div_result_int(to_fixed(x1), to_fixed(x1)))) and
+  ((fxp_div2__y__assume = o1) and in_range2(o1))) and
+  (fxp_div2__y__assume = y)) -> (in_range2(y) ->
+  in_range1(fxp_div_result_int(to_fixed(x1), 2))))))

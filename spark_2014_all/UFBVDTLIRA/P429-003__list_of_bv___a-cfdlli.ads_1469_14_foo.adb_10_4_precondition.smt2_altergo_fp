@@ -594,12 +594,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -611,6 +605,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1243,81 +1243,45 @@ axiom w_get__post_axiom :
   ((in_range1(witness1) and (has_witness(container2, witness1) = true)) ->
   in_range2(w_get(container2, witness1)))))
 
-logic o : count_type
-
-logic o1 : count_type
-
-logic temp___465 : count_type
-
-logic o2 : us_rep2
-
-logic o3 : us_rep3
-
-logic o4 : int
-
-logic o5 : bool
-
-axiom H : (to_rep(o) = 0)
-
-axiom H1 : (o = o1)
-
-axiom H2 : (temp___465 = o1)
-
-axiom H3 : (temp___465 = no_element)
-
-axiom H4 : true
-
-axiom H5 : ((has_key(positions({ us_split_discrs1 = {
+ (* File "a-cfdlli.ads", line 1403, characters 0-0 *)
+goal WP_parameter_def :
+  (forall o:count_type. forall o1:count_type. forall temp___509:count_type.
+  forall o2:us_rep2. forall o3:us_rep3. forall o4:int.
+  (((((to_rep(o) = 0) and (o = o1)) and (temp___509 = o1)) and
+  (temp___509 = no_element)) -> (((has_key(positions({ us_split_discrs1 = {
   rec__foo__lists__list__capacity = container }; us_split_fields1 = {
   rec__foo__lists__list = container1 } }), { us_split_fields3 = {
   rec__foo__lists__cursor__node = position } }) = true) or (bool_eq6({
   us_split_fields3 = { rec__foo__lists__cursor__node = position } }, {
   us_split_fields3 = { rec__foo__lists__cursor__node = no_element }
-  }) = true))
-
-axiom H6 : ((bool_eq6({ us_split_fields3 = { rec__foo__lists__cursor__node =
-  position } }, { us_split_fields3 = { rec__foo__lists__cursor__node =
-  no_element } }) = true) -> ((o4 = length({ us_split_discrs1 = {
-  rec__foo__lists__list__capacity = container }; us_split_fields1 = {
-  rec__foo__lists__list = container1 } })) and (in_range1(o4) and
-  (o4 <= to_rep(container)))))
-
-axiom H7 : ((not (bool_eq6({ us_split_fields3 = {
+  }) = true)) -> ((((bool_eq6({ us_split_fields3 = {
   rec__foo__lists__cursor__node = position } }, { us_split_fields3 = {
-  rec__foo__lists__cursor__node = no_element } }) = true)) ->
-  ((o3 = positions({ us_split_discrs1 = { rec__foo__lists__list__capacity =
-  container }; us_split_fields1 = { rec__foo__lists__list = container1 }
-  })) and ((not (has_key(o3, { us_split_fields3 = {
-  rec__foo__lists__cursor__node = no_element } }) = true)) and
-  (forall i:count_type. ((has_key(o3, { us_split_fields3 = {
-  rec__foo__lists__cursor__node = i } }) = true) -> (((1 <= get1(o3, {
-  us_split_fields3 = { rec__foo__lists__cursor__node = i } })) and (get1(o3,
-  { us_split_fields3 = { rec__foo__lists__cursor__node = i } }) <= length({
+  rec__foo__lists__cursor__node = no_element } }) = true) and ((o4 = length({
   us_split_discrs1 = { rec__foo__lists__list__capacity = container };
-  us_split_fields1 = { rec__foo__lists__list = container1 } }))) and
-  (forall j:count_type. ((has_key(o3, { us_split_fields3 = {
-  rec__foo__lists__cursor__node = j } }) = true) -> ((get1(o3, {
-  us_split_fields3 = { rec__foo__lists__cursor__node = i } }) = get1(o3, {
-  us_split_fields3 = { rec__foo__lists__cursor__node = j } })) -> (bool_eq6({
-  us_split_fields3 = { rec__foo__lists__cursor__node = i } }, {
-  us_split_fields3 = { rec__foo__lists__cursor__node = j } }) = true))))))))))
-
-axiom H8 : ((not (bool_eq6({ us_split_fields3 = {
-  rec__foo__lists__cursor__node = position } }, { us_split_fields3 = {
-  rec__foo__lists__cursor__node = no_element } }) = true)) -> ((o4 = get1(o3,
-  { us_split_fields3 = { rec__foo__lists__cursor__node = position } })) and
+  us_split_fields1 = { rec__foo__lists__list = container1 } })) and
+  (in_range1(o4) and (o4 <= to_rep(container))))) or ((not (bool_eq6({
+  us_split_fields3 = { rec__foo__lists__cursor__node = position } }, {
+  us_split_fields3 = { rec__foo__lists__cursor__node = no_element }
+  }) = true)) and (((o3 = positions({ us_split_discrs1 = {
+  rec__foo__lists__list__capacity = container }; us_split_fields1 = {
+  rec__foo__lists__list = container1 } })) and ((not (has_key(o3, {
+  us_split_fields3 = { rec__foo__lists__cursor__node = no_element }
+  }) = true)) and
+  (forall i:us_rep1. ((has_key(o3, i) = true) -> (((1 <= get1(o3, i)) and
+  (get1(o3, i) <= length({ us_split_discrs1 = {
+  rec__foo__lists__list__capacity = container }; us_split_fields1 = {
+  rec__foo__lists__list = container1 } }))) and
+  (forall j:us_rep1. ((has_key(o3, j) = true) -> ((get1(o3, i) = get1(o3,
+  j)) -> (bool_eq6(i, j) = true))))))))) and ((o4 = get1(o3, {
+  us_split_fields3 = { rec__foo__lists__cursor__node = position } })) and
   (in_range2(o4) and ((of_int1(0) = true) -> ((o4 = w_get(o3, witness(o3, {
   us_split_fields3 = { rec__foo__lists__cursor__node = position } }))) and
   (forall k:us_rep1. ((has_key(o3, k) = true) -> ((bool_eq6(k, {
   us_split_fields3 = { rec__foo__lists__cursor__node = position }
   }) = true) <-> (witness(o3, { us_split_fields3 = {
-  rec__foo__lists__cursor__node = position } }) = witness(o3, k))))))))))
-
-axiom H9 : ((o2 = model__({ us_split_discrs1 = {
+  rec__foo__lists__cursor__node = position } }) = witness(o3, k)))))))))))) ->
+  (((o2 = model__({ us_split_discrs1 = { rec__foo__lists__list__capacity =
+  container }; us_split_fields1 = { rec__foo__lists__list = container1 }
+  })) and (length1(o2) = length({ us_split_discrs1 = {
   rec__foo__lists__list__capacity = container }; us_split_fields1 = {
-  rec__foo__lists__list = container1 } })) and (length1(o2) = length({
-  us_split_discrs1 = { rec__foo__lists__list__capacity = container };
-  us_split_fields1 = { rec__foo__lists__list = container1 } })))
-
- (* File "a-cfdlli.ads", line 1403, characters 0-0 *)
-goal WP_parameter_def : (o4 <= (0 + length1(o2)))
+  rec__foo__lists__list = container1 } }))) -> (o4 <= (0 + length1(o2))))))))

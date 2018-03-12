@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -261,23 +261,5 @@ axiom is_even__def_axiom :
 axiom is_odd__def_axiom :
   (forall i1:int [is_odd(i1)]. ((is_odd(i1) = true) <-> (mod(i1, 2) = 1)))
 
-logic rec_post__is_odd__result : bool
-
-logic o : int
-
-logic result : bool
-
-logic rec_post__is_odd__result1 : bool
-
-logic rec_post__is_odd__result2 : bool
-
-logic rec_post__is_odd__result3 : bool
-
-logic rec_post__is_odd__result4 : bool
-
-logic rec_post__is_odd__result5 : bool
-
-axiom H : in_range1(i)
-
  (* File "rec_post.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : (not (2 = 0))
+goal WP_parameter_def : (in_range1(i) -> (not (2 = 0)))

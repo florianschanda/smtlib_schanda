@@ -212,9 +212,5 @@ logic x2 : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic dispatch__incr5__result : integer
-
-logic o : int
-
  (* File "dispatch.ads", line 2, characters 0-0 *)
 goal WP_parameter_def : in_range((to_rep(x) + 1))

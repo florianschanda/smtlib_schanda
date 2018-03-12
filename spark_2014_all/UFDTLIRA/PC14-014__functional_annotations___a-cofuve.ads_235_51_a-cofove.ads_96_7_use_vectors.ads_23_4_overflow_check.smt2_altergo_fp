@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -402,100 +402,29 @@ axiom get__post_axiom :
   (position <= ((first - 1) + length(container))))) ->
   in_range4(get(container, position)))))
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : int
-
-logic o13 : bool
-
-logic o14 : int
-
-logic o15 : int
-
-logic o16 : int
-
-logic result : bool
-
-logic result1 : bool
-
-axiom H : dynamic_property(first, last, fst1)
-
-axiom H1 : dynamic_property1(first1, last1, lst1)
-
-axiom H2 : in_range1(offset)
-
-axiom H3 : ((o16 = ((first - 1) + length(left))) and
-  (dynamic_property1(first1, last1, o16) and
-  (o16 = ((first - 1) + length(left)))))
-
-axiom H4 : (((lst1 <= o16) -> (result = true)) and ((not (lst1 <= o16)) ->
-  (result = false)))
-
-axiom H5 : (result = true)
-
-axiom H6 : ((offset <  0) -> ((o14 = first) and in_range1(first)))
-
-axiom H7 : ((offset <  0) -> ((o15 = ((- 2147483648) - offset)) and
-  in_range1(((- 2147483648) - offset))))
-
-axiom H8 : ((offset <  0) -> (((o15 <= o14) -> (result1 = true)) and
-  ((not (o15 <= o14)) -> (result1 = false))))
-
-axiom H9 : ((not (offset <  0)) -> (result1 = of_int(1)))
-
-axiom H10 : (result1 = true)
-
-axiom H11 : (fst1 <= lst1)
-
-axiom H12 : ((o9 = lst1) and in_range1(lst1))
-
-axiom H13 : ((o6 = length(right)) and (in_range3(o6) and
-  (((first - 1) + o6) <= last)))
-
-axiom H14 : ((o4 = first) and in_range1(first))
-
-axiom H15 : (o5 = (o4 - 1))
-
-axiom H16 : ((o7 = o5) and in_range1(o5))
-
-axiom H17 : (o8 = (o7 + o6))
-
-axiom H18 : ((o10 = o8) and in_range1(o8))
-
-axiom H19 : (o11 = (o10 - o9))
-
-axiom H20 : ((o12 = o11) and in_range1(o11))
-
-axiom H21 : (((offset <= o12) -> (o13 = true)) and ((not (offset <= o12)) ->
-  (o13 = false)))
-
-axiom H22 : ((o = fst1) and in_range1(fst1))
-
-axiom H23 : ((o1 = first) and in_range1(first))
-
-axiom H24 : (o2 = (o1 - o))
-
  (* File "a-cofuve.ads", line 201, characters 0-0 *)
-goal WP_parameter_def : in_range1(o2)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
+  forall o5:int. forall o6:int. forall o7:int. forall o8:int. forall o9:int.
+  forall o10:int. forall o11:int. forall o12:bool. forall o13:int.
+  forall o14:int. forall o15:int. forall result:bool. forall result1:bool.
+  (dynamic_property(first, last, fst1) -> (dynamic_property1(first1, last1,
+  lst1) -> (in_range1(offset) -> ((((o15 = ((first - 1) + length(left))) and
+  (dynamic_property1(first1, last1, o15) and
+  (o15 = ((first - 1) + length(left))))) and (((lst1 <= o15) and
+  (result = true)) or ((not (lst1 <= o15)) and (result = false)))) ->
+  ((result = true) -> ((((offset <  0) and (((o13 = first) and
+  in_range1(first)) and (((o14 = ((- 2147483648) - offset)) and
+  in_range1(((- 2147483648) - offset))) and (((o14 <= o13) and
+  (result1 = true)) or ((not (o14 <= o13)) and (result1 = false)))))) or
+  ((not (offset <  0)) and (result1 = of_int(1)))) -> ((result1 = true) ->
+  ((fst1 <= lst1) -> ((((((o8 = lst1) and in_range1(lst1)) and
+  (((((o5 = length(right)) and (in_range3(o5) and
+  (((first - 1) + o5) <= last))) and (((((o3 = first) and
+  in_range1(first)) and (o4 = (o3 - 1))) and ((o6 = o4) and
+  in_range1(o4))) and (o7 = (o6 + o5)))) and ((o9 = o7) and
+  in_range1(o7))) and (o10 = (o9 - o8)))) and ((o11 = o10) and
+  in_range1(o10))) and (((offset <= o11) and (o12 = true)) or
+  ((not (offset <= o11)) and (o12 = false)))) -> ((((o = fst1) and
+  in_range1(fst1)) and (((o1 = first) and in_range1(first)) and
+  (o2 = (o1 - o)))) -> in_range1(o2))))))))))))

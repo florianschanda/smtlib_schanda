@@ -1745,17 +1745,25 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 axiom shift_right__post_axiom : true
 
+logic rliteral3 : t1
+
+axiom rliteral_axiom3 : (tqtint1(rliteral3) = 0)
+
+logic rliteral4 : t
+
+axiom rliteral_axiom4 : (tqtint(rliteral4) = 0)
+
 axiom shift_right__def_axiom :
   (forall v:t.
   (forall amount:int [shift_right(v, amount)]. (in_range1(amount) ->
   ((((1 <= 16) and (16 <= 8)) -> (((amount <  8) -> (shift_right(v,
   amount) = toBig2(lsr_bv1(toSmall2(v), of_int1(amount))))) and
-  ((not (amount <  8)) -> (shift_right(v,
-  amount) = toBig2(of_int1(0)))))) and ((not ((1 <= 16) and (16 <= 8))) ->
-  ((((9 <= 16) and (16 <= 16)) -> (((amount <  16) -> (shift_right(v,
-  amount) = lsr_bv(v, of_int(amount)))) and ((not (amount <  16)) ->
-  (shift_right(v, amount) = of_int(0))))) and ((not ((9 <= 16) and
-  (16 <= 16))) -> ((((17 <= 16) and (16 <= 32)) -> (shift_right(v,
+  ((not (amount <  8)) -> (shift_right(v, amount) = toBig2(rliteral3))))) and
+  ((not ((1 <= 16) and (16 <= 8))) -> ((((9 <= 16) and (16 <= 16)) ->
+  (((amount <  16) -> (shift_right(v, amount) = lsr_bv(v,
+  of_int(amount)))) and ((not (amount <  16)) -> (shift_right(v,
+  amount) = rliteral4)))) and ((not ((9 <= 16) and (16 <= 16))) ->
+  ((((17 <= 16) and (16 <= 32)) -> (shift_right(v,
   amount) = toSmall1(lsr_bv2(toBig1(v), of_int2(amount))))) and
   ((not ((17 <= 16) and (16 <= 32))) -> (shift_right(v,
   amount) = toSmall(lsr_bv3(toBig(v), of_int3(amount)))))))))))))
@@ -1788,10 +1796,14 @@ logic msb_index_slow_inline_always : t -> int
 
 logic msb_index_slow_inline_always__function_guard : int, t -> prop
 
+logic rliteral5 : t
+
+axiom rliteral_axiom5 : (tqtint(rliteral5) = 1)
+
 axiom msb_index_slow_inline_always__post_axiom :
   (forall value1:t [msb_index_slow_inline_always(value1)].
-  ((not (value1 = of_int(0))) -> ((shift_right(value1,
-  msb_index_slow_inline_always(value1)) = of_int(1)) and
+  ((not (value1 = rliteral4)) -> ((shift_right(value1,
+  msb_index_slow_inline_always(value1)) = rliteral5) and
   in_range(msb_index_slow_inline_always(value1)))))
 
 logic msb_index_slow_inline : t -> int
@@ -1800,8 +1812,8 @@ logic msb_index_slow_inline__function_guard : int, t -> prop
 
 axiom msb_index_slow_inline__post_axiom :
   (forall value1:t [msb_index_slow_inline(value1)].
-  ((not (value1 = of_int(0))) -> ((shift_right(value1,
-  msb_index_slow_inline(value1)) = of_int(1)) and
+  ((not (value1 = rliteral4)) -> ((shift_right(value1,
+  msb_index_slow_inline(value1)) = rliteral5) and
   in_range(msb_index_slow_inline(value1)))))
 
 axiom msb_index_slow_inline__def_axiom :
@@ -1814,8 +1826,8 @@ logic msb_index_slow_not_inline__function_guard : int, t -> prop
 
 axiom msb_index_slow_not_inline__post_axiom :
   (forall value1:t [msb_index_slow_not_inline(value1)].
-  ((not (value1 = of_int(0))) -> ((shift_right(value1,
-  msb_index_slow_not_inline(value1)) = of_int(1)) and
+  ((not (value1 = rliteral4)) -> ((shift_right(value1,
+  msb_index_slow_not_inline(value1)) = rliteral5) and
   in_range(msb_index_slow_not_inline(value1)))))
 
 axiom msb_index_slow_not_inline__def_axiom :
@@ -1824,95 +1836,38 @@ axiom msb_index_slow_not_inline__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic result__ : int
-
-logic bits_manipulation_unsigned__unsigned_16__functions__msb_index__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic result__1 : int
-
-logic result1 : int
-
-logic result__2 : int
-
-logic result2 : int
-
-logic bits_manipulation_unsigned__unsigned_16__functions__msb_index__result1 : int
-
-logic result__3 : int
-
-logic bits_manipulation_unsigned__unsigned_16__functions__msb_index__result2 : int
-
-logic result__4 : int
-
-logic bits_manipulation_unsigned__unsigned_16__functions__msb_index__result3 : int
-
-logic result__5 : int
-
-logic bits_manipulation_unsigned__unsigned_16__functions__msb_index__result4 : int
-
-logic result__6 : int
-
-logic bits_manipulation_unsigned__unsigned_16__functions__msb_index__result5 : int
-
-logic result3 : int
-
-axiom H : true
-
-axiom H1 : (not (value = of_int(0)))
-
-axiom H2 :
-  (bits_manipulation_unsigned__unsigned_16__functions__msb_index__result1 = bits_manipulation_unsigned__unsigned_16__functions__msb_index__result2)
-
-axiom H3 : (result__1 = result__3)
-
-axiom H4 :
-  (bits_manipulation_unsigned__unsigned_16__functions__msb_index__result3 = bits_manipulation_unsigned__unsigned_16__functions__msb_index__result1)
-
-axiom H5 : (result__4 = result__1)
-
-axiom H6 : ((0 <= 15) -> in_range(result__))
-
-axiom H7 : ((2 = 0) -> ((o = msb_index_slow_inline_always(value)) and
-  (in_range(o) and (shift_right(value, o) = of_int(1)))))
-
-axiom H8 : ((2 = 0) -> (result = result__))
-
-axiom H9 : ((2 = 0) -> (result__1 = o))
-
-axiom H10 : ((not (2 = 0)) -> ((o1 = msb_index_fast_inline_always(value)) and
-  (in_range(o1) and (shift_right(value, o1) = of_int(1)))))
-
-axiom H11 : ((not (2 = 0)) -> (result1 = result__))
-
-axiom H12 : ((not (2 = 0)) -> (result__2 = o1))
-
-axiom H13 : ((not (2 = 0)) -> (result__1 = result__2))
-
-axiom H14 :
-  (result2 = bits_manipulation_unsigned__unsigned_16__functions__msb_index__result)
-
-axiom H15 :
-  (bits_manipulation_unsigned__unsigned_16__functions__msb_index__result1 = result__1)
-
-axiom H16 :
-  (bits_manipulation_unsigned__unsigned_16__functions__msb_index__result4 = bits_manipulation_unsigned__unsigned_16__functions__msb_index__result2)
-
-axiom H17 : (result__5 = result__3)
-
-axiom H18 :
-  (bits_manipulation_unsigned__unsigned_16__functions__msb_index__result5 = bits_manipulation_unsigned__unsigned_16__functions__msb_index__result3)
-
-axiom H19 : (result__6 = result__4)
-
-axiom H20 :
-  (result3 = bits_manipulation_unsigned__unsigned_16__functions__msb_index__result4)
-
  (* File "bits_manipulation.ads", line 10, characters 0-0 *)
-goal WP_parameter_def : (shift_right(value,
-  bits_manipulation_unsigned__unsigned_16__functions__msb_index__result4) = of_int(1))
+goal WP_parameter_def :
+  (forall result__:int.
+  forall bits_manipulation_unsigned__unsigned_16__functions__msb_index__result:int.
+  forall o:int. forall o1:int. forall result:int. forall result__1:int.
+  forall result1:int. forall result__2:int. forall result2:int.
+  forall bits_manipulation_unsigned__unsigned_16__functions__msb_index__result1:int.
+  forall result__3:int.
+  forall bits_manipulation_unsigned__unsigned_16__functions__msb_index__result2:int.
+  forall result__4:int.
+  forall bits_manipulation_unsigned__unsigned_16__functions__msb_index__result3:int.
+  forall result__5:int.
+  forall bits_manipulation_unsigned__unsigned_16__functions__msb_index__result4:int.
+  forall result__6:int.
+  forall bits_manipulation_unsigned__unsigned_16__functions__msb_index__result5:int.
+  (forall result3:int. (((not (value = rliteral4)) and
+  ((((((bits_manipulation_unsigned__unsigned_16__functions__msb_index__result1 = bits_manipulation_unsigned__unsigned_16__functions__msb_index__result2) and
+  (result__1 = result__3)) and
+  ((bits_manipulation_unsigned__unsigned_16__functions__msb_index__result3 = bits_manipulation_unsigned__unsigned_16__functions__msb_index__result1) and
+  (result__4 = result__1))) and (((0 <= 15) -> in_range(result__)) and
+  ((((2 = 0) and (((o = msb_index_slow_inline_always(value)) and
+  (in_range(o) and (shift_right(value, o) = rliteral5))) and
+  ((result = result__) and (result__1 = o)))) or ((not (2 = 0)) and
+  ((((o1 = msb_index_fast_inline_always(value)) and (in_range(o1) and
+  (shift_right(value, o1) = rliteral5))) and ((result1 = result__) and
+  (result__2 = o1))) and (result__1 = result__2)))) and
+  ((result2 = bits_manipulation_unsigned__unsigned_16__functions__msb_index__result) and
+  (bits_manipulation_unsigned__unsigned_16__functions__msb_index__result1 = result__1))))) and
+  (((bits_manipulation_unsigned__unsigned_16__functions__msb_index__result4 = bits_manipulation_unsigned__unsigned_16__functions__msb_index__result2) and
+  (result__5 = result__3)) and
+  ((bits_manipulation_unsigned__unsigned_16__functions__msb_index__result5 = bits_manipulation_unsigned__unsigned_16__functions__msb_index__result3) and
+  (result__6 = result__4)))) and
+  (result3 = bits_manipulation_unsigned__unsigned_16__functions__msb_index__result4))) ->
+  (shift_right(value,
+  bits_manipulation_unsigned__unsigned_16__functions__msb_index__result4) = rliteral5))))

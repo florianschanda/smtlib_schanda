@@ -76,7 +76,5 @@ function po2T__ref___projection(a: po2T__ref) : po2T = (a).po2T__content
 
 logic self__ : po2T
 
-logic temp___1536 : bool
-
  (* File "p.ads", line 10, characters 0-0 *)
-goal WP_parameter_def : (temp___1536 = false)
+goal WP_parameter_def : (forall temp___1722:bool. (temp___1722 = false))

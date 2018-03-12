@@ -664,15 +664,10 @@ logic factor : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-axiom H : true
+logic rliteral : t
 
-axiom H1 : true
-
-axiom H2 : true
-
-axiom H3 : ule(val1, val2)
-
-axiom H4 : (not (factor = of_int(0)))
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
 
  (* File "spark-mod_arithmetic_lemmas.ads", line 52, characters 0-0 *)
-goal WP_parameter_def : (not (factor = zeros))
+goal WP_parameter_def : (ule(val1, val2) -> ((not (factor = rliteral)) ->
+  (not (factor = zeros))))

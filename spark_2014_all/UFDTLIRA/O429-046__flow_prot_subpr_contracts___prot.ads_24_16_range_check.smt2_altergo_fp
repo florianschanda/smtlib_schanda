@@ -417,12 +417,6 @@ function tpoS__ref___projection(a: tpoS__ref) : us_rep2 = (a).tpoS__content
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -434,6 +428,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
 predicate in_range2(x: int) = ((x = 0) or (x = 1))
 
@@ -451,19 +451,8 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic visible : int
-
-logic us : int
-
-logic result : int
-
-logic visible1 : int
-
-axiom H : (result = visible)
-
-axiom H1 : (visible1 = 0)
-
-axiom H2 : in_range(visible1)
-
  (* File "prot.ads", line 4, characters 0-0 *)
-goal WP_parameter_def : in_range(5)
+goal WP_parameter_def :
+  (forall visible:int. forall result:int. forall visible1:int.
+  (((result = visible) and (visible1 = 0)) -> (in_range(visible1) ->
+  in_range(5))))

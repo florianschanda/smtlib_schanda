@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -147,81 +147,19 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic r : int
-
-logic k : int
-
-logic q : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic result : int
-
-logic r1 : int
-
-logic result1 : int
-
-logic k1 : int
-
-logic result2 : int
-
-logic q1 : int
-
-logic r2 : int
-
-logic k2 : int
-
-logic q2 : int
-
-logic r3 : int
-
-logic k3 : int
-
-logic q3 : int
-
-axiom H : in_range1(i)
-
-axiom H1 : in_range1(j)
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range1(r))
-
-axiom H3 : (((- 2147483648) <= 2147483647) -> in_range1(k))
-
-axiom H4 : (((- 2147483648) <= 2147483647) -> in_range1(q))
-
-axiom H5 : (((((- 10) <= i) and (i <= (- 1))) and (1 <= j)) and (j <= 10))
-
-axiom H6 : ((o = (i * j)) and in_range1((i * j)))
-
-axiom H7 : (result = r)
-
-axiom H8 : (r1 = o)
-
-axiom H9 : ((o1 = (r1 + 1)) and in_range1((r1 + 1)))
-
-axiom H10 : (result1 = k)
-
-axiom H11 : (k1 = o1)
-
-axiom H12 : (result2 = q)
-
-axiom H13 : (q1 = k1)
-
-axiom H14 : (q1 = q2)
-
-axiom H15 : (k1 = k2)
-
-axiom H16 : (r1 = r2)
-
-axiom H17 : (q3 = q1)
-
-axiom H18 : (k3 = k1)
-
-axiom H19 : (r3 = r1)
-
  (* File "fait.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : ((- 99) <= q2)
+goal WP_parameter_def :
+  (forall r:int. forall k:int. forall q:int. forall o:int. forall o1:int.
+  forall result:int. forall r1:int. forall result1:int. forall k1:int.
+  forall result2:int. forall q1:int. forall r2:int. forall k2:int.
+  forall q2:int. forall r3:int. forall k3:int. forall q3:int.
+  ((in_range1(i) and (in_range1(j) and ((((- 2147483648) <= 2147483647) ->
+  in_range1(r)) and ((((- 2147483648) <= 2147483647) -> in_range1(k)) and
+  ((((- 2147483648) <= 2147483647) -> in_range1(q)) and ((((((- 10) <= i) and
+  (i <= (- 1))) and (1 <= j)) and (j <= 10)) and (((((o = (i * j)) and
+  in_range1((i * j))) and (({ int__content = result } = { int__content = r
+  }) and (r1 = o))) and ((((o1 = (r1 + 1)) and in_range1((r1 + 1))) and (({
+  int__content = result1 } = { int__content = k }) and (k1 = o1))) and (({
+  int__content = result2 } = { int__content = q }) and (q1 = k1)))) and
+  (((q1 = q2) and ((k1 = k2) and (r1 = r2))) and ((q3 = q1) and
+  ((k3 = k1) and (r3 = r1))))))))))) -> ((- 99) <= q2)))

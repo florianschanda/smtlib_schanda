@@ -242,11 +242,7 @@ type no_interrupt_needed_1__ref = { no_interrupt_needed_1__content : us_rep
 function no_interrupt_needed_1__ref___projection(a: no_interrupt_needed_1__ref) : us_rep =
   (a).no_interrupt_needed_1__content
 
-logic self__ : integer
-
-logic o : int
-
-axiom H : (to_rep(self__) <  2147483647)
-
  (* File "interrupt_priority.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : in_range((to_rep(self__) + 1))
+goal WP_parameter_def :
+  (forall self__:integer. ((to_rep(self__) <  2147483647) ->
+  in_range((to_rep(self__) + 1))))

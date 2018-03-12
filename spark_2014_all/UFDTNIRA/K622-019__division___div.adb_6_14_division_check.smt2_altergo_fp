@@ -225,19 +225,8 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic z : int
-
-logic o : int
-
-axiom H : in_range(x)
-
-axiom H1 : in_range(y)
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range(z))
-
-axiom H3 : (not (y = 0))
-
-axiom H4 : ((not (x = (- 2147483648))) or (not (y = (- 1))))
-
  (* File "div.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : (not (y = 0))
+goal WP_parameter_def :
+  (forall z:int. (in_range(x) -> (in_range(y) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(z)) -> (((not (y = 0)) and
+  ((not (x = (- 2147483648))) or (not (y = (- 1))))) -> (not (y = 0)))))))

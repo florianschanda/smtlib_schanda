@@ -1087,139 +1087,59 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
-logic apply_brakes : t
-
-logic epsifzero_out1 : t
-
-logic diff_out1 : t
-
-logic difference_out1 : t
-
-logic sum_out1 : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : t
-
-logic o6 : t
-
-logic o7 : t
-
-logic result : t
-
-logic epsifzero_out11 : t
-
-logic result1 : t
-
-logic epsifzero_out12 : t
-
-logic result2 : t
-
-logic diff_out11 : t
-
-logic result3 : t
-
-logic difference_out11 : t
-
-logic result4 : t
-
-logic sum_out11 : t
-
-axiom H : tqtisFinite(wheel_speed)
-
-axiom H1 : tqtisFinite(vehicle_speed)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0))
-
-axiom H2 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(apply_brakes))
 
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.000000000000000222040000000000004884367994748360925217823587255253081629291500576073303818702697753906250))
 
-axiom H3 : le(fliteral2, wheel_speed)
-
-axiom H4 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(epsifzero_out1))
-
-axiom H5 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(diff_out1))
-
-axiom H6 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(difference_out1))
-
-axiom H7 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(sum_out1))
-
-axiom H8 : le(fliteral2, wheel_speed)
-
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 0.0e-1))
-
-axiom H9 : (neq(vehicle_speed, fliteral3) -> (result = epsifzero_out1))
-
-axiom H10 : (neq(vehicle_speed, fliteral3) ->
-  (epsifzero_out11 = vehicle_speed))
-
-axiom H11 : ((not neq(vehicle_speed, fliteral3)) ->
-  (result1 = epsifzero_out1))
-
-axiom H12 : ((not neq(vehicle_speed, fliteral3)) ->
-  (epsifzero_out12 = fliteral2))
-
-axiom H13 : ((not neq(vehicle_speed, fliteral3)) ->
-  (epsifzero_out11 = epsifzero_out12))
-
-axiom H14 : ((o = div(NearestTiesToEven, wheel_speed, epsifzero_out11)) and
-  tqtisFinite(div(NearestTiesToEven, wheel_speed, epsifzero_out11)))
-
-axiom H15 : (o1 = sub(NearestTiesToEven, fliteral, o))
-
-axiom H16 : ((o2 = o1) and tqtisFinite(o1))
-
-axiom H17 : (result2 = diff_out1)
-
-axiom H18 : (diff_out11 = o2)
 
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 0.2000000000000000111022302462515654042363166809082031250))
 
-axiom H19 : ((o3 = sub(NearestTiesToEven, fliteral4, diff_out11)) and
-  tqtisFinite(sub(NearestTiesToEven, fliteral4, diff_out11)))
-
-axiom H20 : (result3 = difference_out1)
-
-axiom H21 : (difference_out11 = o3)
-
-axiom H22 : (((lt(difference_out11, fliteral3) ->
-  (o4 = boolean_to_long_float(true))) and ((not lt(difference_out11,
-  fliteral3)) -> (o4 = boolean_to_long_float(false)))) and tqtisFinite(o4))
-
-axiom H23 : (((lt(fliteral3, difference_out11) ->
-  (o5 = boolean_to_long_float(true))) and ((not lt(fliteral3,
-  difference_out11)) -> (o5 = boolean_to_long_float(false)))) and
-  tqtisFinite(o5))
-
-axiom H24 : (o6 = sub(NearestTiesToEven, o5, o4))
-
-axiom H25 : ((o7 = o6) and tqtisFinite(o6))
-
-axiom H26 : (result4 = sum_out1)
-
-axiom H27 : (sum_out11 = o7)
-
  (* File "abs_controller_oem_with_property.ads", line 20, characters 0-0 *)
-goal WP_parameter_def : ((not eq(vehicle_speed, fliteral3)) or eq(sum_out11,
-  fliteral))
+goal WP_parameter_def :
+  (forall apply_brakes:t. forall epsifzero_out1:t. forall diff_out1:t.
+  forall difference_out1:t. forall sum_out1:t. forall o:t. forall o1:t.
+  forall o2:t. forall o3:t. forall o4:t. forall o5:t. forall o6:t.
+  forall o7:t. forall result:t. forall epsifzero_out11:t. forall result1:t.
+  forall epsifzero_out12:t. forall result2:t. forall diff_out11:t.
+  forall result3:t. forall difference_out11:t. forall result4:t.
+  forall sum_out11:t. (tqtisFinite(wheel_speed) ->
+  (tqtisFinite(vehicle_speed) -> ((le(neg(fliteral1), fliteral1) ->
+  tqtisFinite(apply_brakes)) -> (le(fliteral2, wheel_speed) ->
+  ((le(neg(fliteral1), fliteral1) -> tqtisFinite(epsifzero_out1)) ->
+  ((le(neg(fliteral1), fliteral1) -> tqtisFinite(diff_out1)) ->
+  ((le(neg(fliteral1), fliteral1) -> tqtisFinite(difference_out1)) ->
+  ((le(neg(fliteral1), fliteral1) -> tqtisFinite(sum_out1)) -> (le(fliteral2,
+  wheel_speed) -> (((neq(vehicle_speed, fliteral3) and
+  ((result = epsifzero_out1) and (epsifzero_out11 = vehicle_speed))) or
+  ((not neq(vehicle_speed, fliteral3)) and (((result1 = epsifzero_out1) and
+  (epsifzero_out12 = fliteral2)) and
+  (epsifzero_out11 = epsifzero_out12)))) -> ((((((o = div(NearestTiesToEven,
+  wheel_speed, epsifzero_out11)) and tqtisFinite(div(NearestTiesToEven,
+  wheel_speed, epsifzero_out11))) and (o1 = sub(NearestTiesToEven, fliteral,
+  o))) and ((o2 = o1) and tqtisFinite(o1))) and ((result2 = diff_out1) and
+  (diff_out11 = o2))) -> ((((o3 = sub(NearestTiesToEven, fliteral4,
+  diff_out11)) and tqtisFinite(sub(NearestTiesToEven, fliteral4,
+  diff_out11))) and ((result3 = difference_out1) and
+  (difference_out11 = o3))) -> (((((((lt(difference_out11, fliteral3) and
+  (o4 = boolean_to_long_float(true))) or ((not lt(difference_out11,
+  fliteral3)) and (o4 = boolean_to_long_float(false)))) and
+  tqtisFinite(o4)) and ((((lt(fliteral3, difference_out11) and
+  (o5 = boolean_to_long_float(true))) or ((not lt(fliteral3,
+  difference_out11)) and (o5 = boolean_to_long_float(false)))) and
+  tqtisFinite(o5)) and (o6 = sub(NearestTiesToEven, o5, o4)))) and
+  ((o7 = o6) and tqtisFinite(o6))) and ((result4 = sum_out1) and
+  (sum_out11 = o7))) -> ((not eq(vehicle_speed, fliteral3)) or eq(sum_out11,
+  fliteral))))))))))))))))

@@ -1039,48 +1039,35 @@ logic readreg16 : t -> t1
 
 logic readreg16__function_guard : t1, t -> prop
 
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 18446744073709486080)
+
 axiom writereg16post__post_axiom :
   (forall regold:t. forall regnew:t.
   (forall val__1:t1 [writereg16post(regold, regnew, val__1)].
   ((writereg16post(regold, regnew, val__1) = true) <->
   ((readreg16(regnew) = val__1) and (bw_and(regnew,
-  of_int(18446744073709486080)) = bw_and(regold,
-  of_int(18446744073709486080)))))))
+  rliteral1) = bw_and(regold, rliteral1))))))
 
 axiom writereg16post__def_axiom :
   (forall regold:t. forall regnew:t.
   (forall val__1:t1 [writereg16post(regold, regnew, val__1)].
   ((writereg16post(regold, regnew, val__1) = true) <->
   ((readreg16(regnew) = val__1) and (bw_and(regnew,
-  of_int(18446744073709486080)) = bw_and(regold,
-  of_int(18446744073709486080)))))))
+  rliteral1) = bw_and(regold, rliteral1))))))
+
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 65535)
 
 axiom readreg16__post_axiom :
   (forall reg:t [readreg16(reg)]. (readreg16(reg) = toSmall(bw_and(reg,
-  of_int(65535)))))
-
-logic reg : t
-
-logic result : t
-
-logic reg1 : t
-
-logic reg2 : t
-
-logic reg3 : t
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : (result = reg)
-
-axiom H3 : (reg1 = bw_or(bw_and(reg, of_int(18446744073709486080)),
-  toBig(val__)))
-
-axiom H4 : (reg1 = reg2)
-
-axiom H5 : (reg3 = reg1)
+  rliteral2))))
 
  (* File "x86.adb", line 91, characters 0-0 *)
-goal WP_parameter_def : (writereg16post(reg, reg2, val__) = true)
+goal WP_parameter_def :
+  (forall reg:t. forall result:t. forall reg1:t. forall reg2:t.
+  forall reg3:t. ((((result = reg) and (reg1 = bw_or(bw_and(reg, rliteral1),
+  toBig(val__)))) and ((reg1 = reg2) and (reg3 = reg1))) ->
+  (writereg16post(reg, reg2, val__) = true)))

@@ -159,7 +159,5 @@ function pt__ref___projection(a: pt__ref) : pt = (a).pt__content
 
 logic self__ : pt
 
-logic temp___1528 : bool
-
  (* File "p.ads", line 3, characters 0-0 *)
 goal WP_parameter_def : (98 <= (- 1))

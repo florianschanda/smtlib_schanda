@@ -281,27 +281,7 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic ok_def : int
-
-logic no_def : int
-
-logic no_ini : int
-
-logic us : int
-
-logic us1 : int
-
-logic o : int
-
-logic result : int
-
-logic no_def1 : int
-
-axiom H : in_range(c)
-
-axiom H1 : (ok_def = 0)
-
-axiom H2 : ((0 <= 2147483647) -> in_range1(ok_def))
-
  (* File "with_default.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : dynamic_property(first, 2147483647, c)
+goal WP_parameter_def :
+  (forall ok_def:int. (in_range(c) -> ((ok_def = 0) -> (((0 <= 2147483647) ->
+  in_range1(ok_def)) -> dynamic_property(first, 2147483647, c)))))

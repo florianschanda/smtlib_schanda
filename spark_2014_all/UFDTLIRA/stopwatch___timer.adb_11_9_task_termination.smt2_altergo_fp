@@ -265,7 +265,5 @@ axiom timerperiod__def_axiom : (timerperiod = milliseconds(1000))
 
 axiom milliseconds__post_axiom : true
 
-axiom H : false
-
  (* File "timer.adb", line 49, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def : true

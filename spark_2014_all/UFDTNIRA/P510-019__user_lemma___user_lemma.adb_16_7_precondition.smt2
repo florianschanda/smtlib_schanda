@@ -48,7 +48,7 @@
 (declare-const dummy positive)
 (declare-datatypes () ((positive__ref (mk_positive__ref (positive__content positive)))))
 (define-fun positive__ref___projection ((a positive__ref)) positive (positive__content a))
-(define-fun dynamic_invariant ((temp___expr_39 Int) (temp___is_init_36 Bool) (temp___skip_constant_37 Bool) (temp___do_toplevel_38 Bool)) Bool (=> (or (= temp___is_init_36 true) (<= 1 2147483647)) (in_range temp___expr_39)))
+(define-fun dynamic_invariant ((temp___expr_46 Int) (temp___is_init_42 Bool) (temp___skip_constant_43 Bool) (temp___do_toplevel_44 Bool) (temp___do_typ_inv_45 Bool)) Bool (=> (or (= temp___is_init_42 true) (<= 1 2147483647)) (in_range temp___expr_46)))
 (assert true)
 (assert (forall ((n Int)) (! (= (= (is_prime n) true) (forall ((j Int)) (=> (and (<= 2 j) (<= j (- n 1))) (not (= (mod2 n j) 0))))) :pattern ((is_prime n)))))
 (assert (= (is_prime 15486209) true))

@@ -1771,17 +1771,24 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 axiom shift_right__post_axiom : true
 
+logic rliteral3 : t1
+
+axiom rliteral_axiom3 : (tqtint1(rliteral3) = 0)
+
+logic rliteral4 : t2
+
+axiom rliteral_axiom4 : (tqtint2(rliteral4) = 0)
+
 axiom shift_right__def_axiom :
   (forall v:t.
   (forall amount:int [shift_right(v, amount)]. (in_range2(amount) ->
   ((((1 <= 32) and (32 <= 8)) -> (((amount <  8) -> (shift_right(v,
   amount) = toBig2(lsr_bv1(toSmall2(v), of_int1(amount))))) and
-  ((not (amount <  8)) -> (shift_right(v,
-  amount) = toBig2(of_int1(0)))))) and ((not ((1 <= 32) and (32 <= 8))) ->
-  ((((9 <= 32) and (32 <= 16)) -> (((amount <  16) -> (shift_right(v,
-  amount) = toBig1(lsr_bv2(toSmall1(v), of_int2(amount))))) and
-  ((not (amount <  16)) -> (shift_right(v,
-  amount) = toBig1(of_int2(0)))))) and ((not ((9 <= 32) and (32 <= 16))) ->
+  ((not (amount <  8)) -> (shift_right(v, amount) = toBig2(rliteral3))))) and
+  ((not ((1 <= 32) and (32 <= 8))) -> ((((9 <= 32) and (32 <= 16)) ->
+  (((amount <  16) -> (shift_right(v, amount) = toBig1(lsr_bv2(toSmall1(v),
+  of_int2(amount))))) and ((not (amount <  16)) -> (shift_right(v,
+  amount) = toBig1(rliteral4))))) and ((not ((9 <= 32) and (32 <= 16))) ->
   ((((17 <= 32) and (32 <= 32)) -> (shift_right(v, amount) = lsr_bv(v,
   of_int(amount)))) and ((not ((17 <= 32) and (32 <= 32))) -> (shift_right(v,
   amount) = toSmall(lsr_bv3(toBig(v), of_int3(amount)))))))))))))
@@ -1797,11 +1804,11 @@ axiom shift_left__def_axiom :
   (forall amount:int [shift_left(v, amount)]. (in_range2(amount) ->
   ((((1 <= 32) and (32 <= 8)) -> (((amount <  8) -> (shift_left(v,
   amount) = toBig2(lsl_bv1(toSmall2(v), of_int1(amount))))) and
-  ((not (amount <  8)) -> (shift_left(v, amount) = toBig2(of_int1(0)))))) and
+  ((not (amount <  8)) -> (shift_left(v, amount) = toBig2(rliteral3))))) and
   ((not ((1 <= 32) and (32 <= 8))) -> ((((9 <= 32) and (32 <= 16)) ->
   (((amount <  16) -> (shift_left(v, amount) = toBig1(lsl_bv2(toSmall1(v),
   of_int2(amount))))) and ((not (amount <  16)) -> (shift_left(v,
-  amount) = toBig1(of_int2(0)))))) and ((not ((9 <= 32) and (32 <= 16))) ->
+  amount) = toBig1(rliteral4))))) and ((not ((9 <= 32) and (32 <= 16))) ->
   ((((17 <= 32) and (32 <= 32)) -> (shift_left(v, amount) = lsl_bv(v,
   of_int(amount)))) and ((not ((17 <= 32) and (32 <= 32))) -> (shift_left(v,
   amount) = toSmall(urem3(lsl_bv3(toBig(v), of_int3(amount)),
@@ -1813,9 +1820,13 @@ logic make_mask__function_guard : t, int -> prop
 
 axiom make_mask__post_axiom : true
 
+logic rliteral5 : t
+
+axiom rliteral_axiom5 : (tqtint(rliteral5) = 4294967295)
+
 axiom make_mask__def_axiom :
   (forall num_bits:int [make_mask(num_bits)]. (in_range1(num_bits) ->
-  (make_mask(num_bits) = shift_right(of_int(4294967295), (32 - num_bits)))))
+  (make_mask(num_bits) = shift_right(rliteral5, (32 - num_bits)))))
 
 logic extract_bits_inline_always : t, int, int -> t
 
@@ -1845,47 +1856,6 @@ logic to__ : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic bits_manipulation_unsigned__unsigned_32__functions__extract_bits_inline__result : t
-
-logic o : t
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : t
-
-logic o4 : int
-
-logic o5 : t
-
-logic o6 : t
-
-logic o7 : t
-
-logic result : t
-
-logic bits_manipulation_unsigned__unsigned_32__functions__extract_bits_inline__result1 : t
-
-logic bits_manipulation_unsigned__unsigned_32__functions__extract_bits_inline__result2 : t
-
-logic bits_manipulation_unsigned__unsigned_32__functions__extract_bits_inline__result3 : t
-
-logic bits_manipulation_unsigned__unsigned_32__functions__extract_bits_inline__result4 : t
-
-logic bits_manipulation_unsigned__unsigned_32__functions__extract_bits_inline__result5 : t
-
-logic result1 : bool
-
-logic result2 : bool
-
-axiom H : true
-
-axiom H1 : in_range(from)
-
-axiom H2 : in_range(to__)
-
-axiom H3 : (from <= to__)
-
  (* File "bits_manipulation.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (from <= to__)
+goal WP_parameter_def : (in_range(from) -> (in_range(to__) ->
+  ((from <= to__) -> (from <= to__))))

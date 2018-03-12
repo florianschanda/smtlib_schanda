@@ -1120,14 +1120,14 @@ axiom bool_eq_def2 :
   (((a__first_2 <= a__last_2) and ((b__first_2 <= b__last_2) and
   ((a__last_2 - a__first_2) = (b__last_2 - b__first_2)))) or
   ((not (a__first_2 <= a__last_2)) and (b__last_2 <  b__first_2)))) and
-  (forall temp___idx_133:int. forall temp___idx_134:int.
-  (((((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)) and
-  ((a__first_2 <= temp___idx_134) and (temp___idx_134 <= a__last_2))) and
-  (to_rep(get(a, temp___idx_133, temp___idx_134)) = to_rep(get(b,
-  ((b__first - a__first) + temp___idx_133),
-  ((b__first_2 - a__first_2) + temp___idx_134))))) or
-  (not (((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)) and
-  ((a__first_2 <= temp___idx_134) and (temp___idx_134 <= a__last_2))))))) ->
+  (forall temp___idx_155:int. forall temp___idx_156:int.
+  (((((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)) and
+  ((a__first_2 <= temp___idx_156) and (temp___idx_156 <= a__last_2))) and
+  (to_rep(get(a, temp___idx_155, temp___idx_156)) = to_rep(get(b,
+  ((b__first - a__first) + temp___idx_155),
+  ((b__first_2 - a__first_2) + temp___idx_156))))) or
+  (not (((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)) and
+  ((a__first_2 <= temp___idx_156) and (temp___idx_156 <= a__last_2))))))) ->
   (bool_eq2(a, a__first, a__last, a__first_2, a__last_2, b, b__first,
   b__last, b__first_2, b__last_2) = true)) and
   ((not (((((a__first <= a__last) -> ((b__first <= b__last) and
@@ -1136,12 +1136,12 @@ axiom bool_eq_def2 :
   (((a__first_2 <= a__last_2) -> ((b__first_2 <= b__last_2) and
   ((a__last_2 - a__first_2) = (b__last_2 - b__first_2)))) and
   ((not (a__first_2 <= a__last_2)) -> (b__last_2 <  b__first_2)))) and
-  (forall temp___idx_133:int. forall temp___idx_134:int.
-  ((((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)) and
-  ((a__first_2 <= temp___idx_134) and (temp___idx_134 <= a__last_2))) ->
-  (to_rep(get(a, temp___idx_133, temp___idx_134)) = to_rep(get(b,
-  ((b__first - a__first) + temp___idx_133),
-  ((b__first_2 - a__first_2) + temp___idx_134)))))))) -> (bool_eq2(a,
+  (forall temp___idx_155:int. forall temp___idx_156:int.
+  ((((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)) and
+  ((a__first_2 <= temp___idx_156) and (temp___idx_156 <= a__last_2))) ->
+  (to_rep(get(a, temp___idx_155, temp___idx_156)) = to_rep(get(b,
+  ((b__first - a__first) + temp___idx_155),
+  ((b__first_2 - a__first_2) + temp___idx_156)))))))) -> (bool_eq2(a,
   a__first, a__last, a__first_2, a__last_2, b, b__first, b__last, b__first_2,
   b__last_2) = false))))
 
@@ -1158,12 +1158,12 @@ axiom bool_eq_rev :
   (((a__first_2 <= a__last_2) -> ((b__first_2 <= b__last_2) and
   ((a__last_2 - a__first_2) = (b__last_2 - b__first_2)))) and
   ((not (a__first_2 <= a__last_2)) -> (b__last_2 <  b__first_2)))) and
-  (forall temp___idx_133:int. forall temp___idx_134:int.
-  ((((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)) and
-  ((a__first_2 <= temp___idx_134) and (temp___idx_134 <= a__last_2))) ->
-  (to_rep(get(a, temp___idx_133, temp___idx_134)) = to_rep(get(b,
-  ((b__first - a__first) + temp___idx_133),
-  ((b__first_2 - a__first_2) + temp___idx_134))))))))))
+  (forall temp___idx_155:int. forall temp___idx_156:int.
+  ((((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)) and
+  ((a__first_2 <= temp___idx_156) and (temp___idx_156 <= a__last_2))) ->
+  (to_rep(get(a, temp___idx_155, temp___idx_156)) = to_rep(get(b,
+  ((b__first - a__first) + temp___idx_155),
+  ((b__first_2 - a__first_2) + temp___idx_156))))))))))
 
 type integer
 
@@ -1539,48 +1539,29 @@ logic map1 : map
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : map
-
-logic o1 : t1
-
-logic o2 : t2
-
-logic o3 : map
-
-logic o4 : t1
-
-logic o5 : t2
-
-logic temp___1621 : map
-
-logic temp___16211 : t1
-
-logic temp___16212 : t2
-
-axiom H : (({ elts = o; rt = o1; rt_2 = o2 } = transpose({ elts = map1; rt =
-  mk(1, 3); rt_2 = mk1(1, 2) })) and dynamic_property2((- 2147483648),
-  2147483647, to_rep1(first(o1)), to_rep1(last(o1)), (- 2147483648),
-  2147483647, to_rep1(first1(o2)), to_rep1(last1(o2))))
-
-axiom H1 : (({ elts = o3; rt = o4; rt_2 = o5 } = omultiply__4({ elts = o;
-  rt = o1; rt_2 = o2 }, { elts = original; rt = mk(1, 3); rt_2 = mk1(1, 3)
-  })) and dynamic_property2((- 2147483648), 2147483647, to_rep1(first(o4)),
-  to_rep1(last(o4)), (- 2147483648), 2147483647, to_rep1(first1(o5)),
-  to_rep1(last1(o5))))
-
-axiom H2 : (({ elts = temp___1621; rt = temp___16211; rt_2 = temp___16212
-  } = omultiply__4({ elts = o3; rt = o4; rt_2 = o5 }, { elts = map1; rt =
-  mk(1, 3); rt_2 = mk1(1, 2) })) and dynamic_property2((- 2147483648),
-  2147483647, to_rep1(first(temp___16211)), to_rep1(last(temp___16211)),
-  (- 2147483648), 2147483647, to_rep1(first1(temp___16212)),
-  to_rep1(last1(temp___16212))))
-
  (* File "specific_matrix_other.ads", line 17, characters 0-0 *)
 goal WP_parameter_def :
-  (((to_rep1(first(temp___16211)) <= to_rep1(last(temp___16211))) ->
+  (forall o:map. forall o1:t1. forall o2:t2. forall o3:map. forall o4:t1.
+  forall o5:t2. forall temp___1792:map. forall temp___17921:t1.
+  forall temp___17922:t2. ((((({ elts = o; rt = o1; rt_2 = o2 } = transpose({
+  elts = map1; rt = mk(1, 3); rt_2 = mk1(1, 2) })) and
+  dynamic_property2((- 2147483648), 2147483647, to_rep1(first(o1)),
+  to_rep1(last(o1)), (- 2147483648), 2147483647, to_rep1(first1(o2)),
+  to_rep1(last1(o2)))) and (({ elts = o3; rt = o4; rt_2 = o5
+  } = omultiply__4({ elts = o; rt = o1; rt_2 = o2 }, { elts = original; rt =
+  mk(1, 3); rt_2 = mk1(1, 3) })) and dynamic_property2((- 2147483648),
+  2147483647, to_rep1(first(o4)), to_rep1(last(o4)), (- 2147483648),
+  2147483647, to_rep1(first1(o5)), to_rep1(last1(o5))))) and (({ elts =
+  temp___1792; rt = temp___17921; rt_2 = temp___17922 } = omultiply__4({
+  elts = o3; rt = o4; rt_2 = o5 }, { elts = map1; rt = mk(1, 3); rt_2 =
+  mk1(1, 2) })) and dynamic_property2((- 2147483648), 2147483647,
+  to_rep1(first(temp___17921)), to_rep1(last(temp___17921)), (- 2147483648),
+  2147483647, to_rep1(first1(temp___17922)),
+  to_rep1(last1(temp___17922))))) ->
+  (((to_rep1(first(temp___17921)) <= to_rep1(last(temp___17921))) ->
   (((1 <= 2) ->
-  (((to_rep1(last(temp___16211)) - to_rep1(first(temp___16211))) + 1) = ((2 - 1) + 1))) and
+  (((to_rep1(last(temp___17921)) - to_rep1(first(temp___17921))) + 1) = ((2 - 1) + 1))) and
   ((not (1 <= 2)) ->
-  (((to_rep1(last(temp___16211)) - to_rep1(first(temp___16211))) + 1) = 0)))) and
-  ((not (to_rep1(first(temp___16211)) <= to_rep1(last(temp___16211)))) ->
-  ((1 <= 2) -> (0 = ((2 - 1) + 1)))))
+  (((to_rep1(last(temp___17921)) - to_rep1(first(temp___17921))) + 1) = 0)))) and
+  ((not (to_rep1(first(temp___17921)) <= to_rep1(last(temp___17921)))) ->
+  ((1 <= 2) -> (0 = ((2 - 1) + 1)))))))

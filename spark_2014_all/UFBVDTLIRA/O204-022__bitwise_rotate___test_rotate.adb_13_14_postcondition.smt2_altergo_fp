@@ -689,54 +689,32 @@ logic b : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic test_rotate__r__result : t
+logic rliteral : t
 
-logic o : int
+axiom rliteral_axiom : (tqtint(rliteral) = 18446744073709551615)
 
-logic o1 : t
+logic rliteral1 : t
 
-logic o2 : t
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 0)
 
-logic result : t
+logic rliteral2 : t
 
-logic test_rotate__r__result1 : t
-
-logic test_rotate__r__result2 : t
-
-logic test_rotate__r__result3 : t
-
-logic test_rotate__r__result4 : t
-
-logic test_rotate__r__result5 : t
-
-logic result1 : t
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : (ule(a, of_int(18446744073709551615)) and
-  ((not (a = of_int(0))) and ule(b, of_int(2147483647))))
-
-axiom H3 : (test_rotate__r__result1 = test_rotate__r__result2)
-
-axiom H4 : (test_rotate__r__result3 = test_rotate__r__result1)
-
-axiom H5 : ((o = tqtint(b)) and in_range(tqtint(b)))
-
-axiom H6 : (o1 = of_int(o))
-
-axiom H7 : (o2 = rotate_left_bv(a, o1))
-
-axiom H8 : (result = test_rotate__r__result)
-
-axiom H9 : (test_rotate__r__result1 = o2)
-
-axiom H10 : (test_rotate__r__result4 = test_rotate__r__result2)
-
-axiom H11 : (test_rotate__r__result5 = test_rotate__r__result3)
-
-axiom H12 : (result1 = test_rotate__r__result4)
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 2147483647)
 
  (* File "commontypes.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : (not (test_rotate__r__result4 = of_int(0)))
+goal WP_parameter_def :
+  (forall test_rotate__r__result:t. forall o:int. forall o1:t. forall o2:t.
+  forall result:t. forall test_rotate__r__result1:t.
+  forall test_rotate__r__result2:t. forall test_rotate__r__result3:t.
+  forall test_rotate__r__result4:t. forall test_rotate__r__result5:t.
+  (forall result1:t. (((ule(a, rliteral) and ((not (a = rliteral1)) and
+  ule(b, rliteral2))) and
+  (((((test_rotate__r__result1 = test_rotate__r__result2) and
+  (test_rotate__r__result3 = test_rotate__r__result1)) and
+  (((((o = tqtint(b)) and in_range(tqtint(b))) and (o1 = of_int(o))) and
+  (o2 = rotate_left_bv(a, o1))) and ((result = test_rotate__r__result) and
+  (test_rotate__r__result1 = o2)))) and
+  ((test_rotate__r__result4 = test_rotate__r__result2) and
+  (test_rotate__r__result5 = test_rotate__r__result3))) and
+  (result1 = test_rotate__r__result4))) ->
+  (not (test_rotate__r__result4 = rliteral1)))))

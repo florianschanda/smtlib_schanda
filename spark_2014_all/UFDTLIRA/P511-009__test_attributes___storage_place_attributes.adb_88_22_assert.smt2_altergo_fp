@@ -393,12 +393,6 @@ function sr2__ref___projection(a: sr2__ref) : us_rep = (a).sr2__content
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq4 : bool, bool -> bool
-
-axiom bool_eq_def3 :
-  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -410,6 +404,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq4 : bool, bool -> bool
+
+axiom bool_eq_def3 :
+  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
 
 predicate in_range3(x: int) = ((x = 0) or (x = 1))
 
@@ -429,7 +429,6 @@ logic x3 : bool
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-axiom H : ((5 = to_rep1(x)) and (x3 = true))
-
  (* File "storage_place_attributes.adb", line 81, characters 0-0 *)
-goal WP_parameter_def : (0 <= storage_place_attributes__r2__d1__first__bit1)
+goal WP_parameter_def : (((5 = to_rep1(x)) and (x3 = true)) ->
+  (0 <= storage_place_attributes__r2__d1__first__bit1))

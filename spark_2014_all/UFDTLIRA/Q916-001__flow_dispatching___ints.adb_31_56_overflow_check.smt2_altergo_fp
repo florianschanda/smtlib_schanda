@@ -494,13 +494,5 @@ logic arg25 : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
  (* File "ints.ads", line 25, characters 0-0 *)
 goal WP_parameter_def : in_range((to_rep1(arg1) + to_rep1(arg2)))

@@ -1593,12 +1593,6 @@ axiom bv_max_to_uint3 :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq4 : bool, bool -> bool
-
-axiom bool_eq_def4 :
-  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
-
 logic to_int4 : bool -> int
 
 axiom to_int_def4 :
@@ -1610,6 +1604,12 @@ logic of_int4 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int4(i)]. (((i = 0) -> (of_int4(i) = false)) and
   ((not (i = 0)) -> (of_int4(i) = true))))
+
+logic bool_eq4 : bool, bool -> bool
+
+axiom bool_eq_def4 :
+  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1875,24 +1875,6 @@ axiom slide_def :
   (forall i:t3 [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[sub3(i, sub3(new_first, old_first))]))))))
 
-logic concat : (t3,byte) farray, t3, t3, (t3,byte) farray, t3,
-  t3 -> (t3,byte) farray
-
-axiom concat_def :
-  (forall a:(t3,byte) farray. forall b:(t3,byte) farray.
-  (forall a_first:t3. forall a_last:t3. forall b_first:t3. forall b_last:t3.
-  (forall i:t3 [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((ule3(a_first, i) and ule3(i, a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and (ugt3(i, a_last) -> ((concat(a,
-  a_first, a_last, b, b_first, b_last)[i]) = (b[add3(sub3(i, a_last),
-  sub3(b_first, one3))])))))))
-
-logic singleton : byte, t3 -> (t3,byte) farray
-
-axiom singleton_def :
-  (forall v:byte.
-  (forall i:t3 [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq11 : (t3,byte) farray, t3, t3, (t3,byte) farray, t3, t3 -> bool
 
 axiom bool_eq_def10 :
@@ -1902,19 +1884,19 @@ axiom bool_eq_def10 :
   (((((ule3(a__first, a__last) and (ule3(b__first, b__last) and
   (sub3(a__last, a__first) = sub3(b__last, b__first)))) or
   ((not ule3(a__first, a__last)) and ugt3(b__first, b__last))) and
-  (forall temp___idx_132:t3. (((ule3(a__first, temp___idx_132) and
-  ule3(temp___idx_132, a__last)) and
-  (to_rep4((a[temp___idx_132])) = to_rep4((b[add3(sub3(b__first, a__first),
-  temp___idx_132)])))) or (not (ule3(a__first, temp___idx_132) and
-  ule3(temp___idx_132, a__last)))))) -> (bool_eq11(a, a__first, a__last, b,
+  (forall temp___idx_154:t3. (((ule3(a__first, temp___idx_154) and
+  ule3(temp___idx_154, a__last)) and
+  (to_rep4((a[temp___idx_154])) = to_rep4((b[add3(sub3(b__first, a__first),
+  temp___idx_154)])))) or (not (ule3(a__first, temp___idx_154) and
+  ule3(temp___idx_154, a__last)))))) -> (bool_eq11(a, a__first, a__last, b,
   b__first, b__last) = true)) and ((not (((ule3(a__first, a__last) ->
   (ule3(b__first, b__last) and (sub3(a__last, a__first) = sub3(b__last,
   b__first)))) and ((not ule3(a__first, a__last)) -> ugt3(b__first,
   b__last))) and
-  (forall temp___idx_132:t3. ((ule3(a__first, temp___idx_132) and
-  ule3(temp___idx_132, a__last)) ->
-  (to_rep4((a[temp___idx_132])) = to_rep4((b[add3(sub3(b__first, a__first),
-  temp___idx_132)]))))))) -> (bool_eq11(a, a__first, a__last, b, b__first,
+  (forall temp___idx_154:t3. ((ule3(a__first, temp___idx_154) and
+  ule3(temp___idx_154, a__last)) ->
+  (to_rep4((a[temp___idx_154])) = to_rep4((b[add3(sub3(b__first, a__first),
+  temp___idx_154)]))))))) -> (bool_eq11(a, a__first, a__last, b, b__first,
   b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1924,39 +1906,10 @@ axiom bool_eq_rev :
   a__last) = true) -> (((ule3(a__first, a__last) -> (ule3(b__first,
   b__last) and (sub3(a__last, a__first) = sub3(b__last, b__first)))) and
   ((not ule3(a__first, a__last)) -> ugt3(b__first, b__last))) and
-  (forall temp___idx_132:t3. ((ule3(a__first, temp___idx_132) and
-  ule3(temp___idx_132, a__last)) ->
-  (to_rep4((a[temp___idx_132])) = to_rep4((b[add3(sub3(b__first, a__first),
-  temp___idx_132)])))))))))
-
-logic compare : (t3,byte) farray, t3, t3, (t3,byte) farray, t3, t3 -> int
-
-axiom compare_def_eq :
-  (forall a:(t3,byte) farray. forall b:(t3,byte) farray.
-  (forall a_first:t3. forall a_last:t3. forall b_first:t3. forall b_last:t3
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) = 0) <-> (bool_eq11(a, a_first, a_last, b,
-  b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(t3,byte) farray. forall b:(t3,byte) farray.
-  (forall a_first:t3. forall a_last:t3. forall b_first:t3. forall b_last:t3
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) <  0) <->
-  (exists i:t3. exists j:t3. (ule3(i, a_last) and (ult3(j, b_last) and
-  ((bool_eq11(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  (ult3(i, a_last) and ult(to_rep4((a[add3(i, one3)])), to_rep4((b[add3(j,
-  one3)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(t3,byte) farray. forall b:(t3,byte) farray.
-  (forall a_first:t3. forall a_last:t3. forall b_first:t3. forall b_last:t3
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((0 <  compare(a,
-  a_first, a_last, b, b_first, b_last)) <->
-  (exists i:t3. exists j:t3. (ule3(i, b_last) and (ult3(j, a_last) and
-  ((bool_eq11(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  (ult3(i, b_last) and ugt(to_rep4((a[add3(j, one3)])), to_rep4((b[add3(i,
-  one3)]))))))))))))
+  (forall temp___idx_154:t3. ((ule3(a__first, temp___idx_154) and
+  ule3(temp___idx_154, a__last)) ->
+  (to_rep4((a[temp___idx_154])) = to_rep4((b[add3(sub3(b__first, a__first),
+  temp___idx_154)])))))))))
 
 type t4
 
@@ -2039,8 +1992,15 @@ type hash_bit_length
 
 logic attr__ATTRIBUTE_MODULUS5 : t3
 
-predicate in_range1(x: t3) = (ule3(of_int3(0), x) and ule3(x,
-  of_int3(18446744073709551608)))
+logic rliteral : t3
+
+axiom rliteral_axiom : (tqtint3(rliteral) = 0)
+
+logic rliteral1 : t3
+
+axiom rliteral_axiom1 : (tqtint3(rliteral1) = 18446744073709551608)
+
+predicate in_range1(x: t3) = (ule3(rliteral, x) and ule3(x, rliteral1))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 18446744073709551608))
 
@@ -2089,8 +2049,11 @@ type initialized_hash_bit_length
 
 logic attr__ATTRIBUTE_MODULUS6 : t3
 
-predicate in_range2(x: t3) = (ule3(of_int3(1), x) and ule3(x,
-  of_int3(18446744073709551608)))
+logic rliteral2 : t3
+
+axiom rliteral_axiom2 : (tqtint3(rliteral2) = 1)
+
+predicate in_range2(x: t3) = (ule3(rliteral2, x) and ule3(x, rliteral1))
 
 predicate in_range_int1(x: int) = ((1 <= x) and (x <= 18446744073709551608))
 
@@ -2135,24 +2098,6 @@ axiom slide_def1 :
   (forall i:t3 [(slide1(a, old_first, new_first)[i])]. ((slide1(a, old_first,
   new_first)[i]) = (a[sub3(i, sub3(new_first, old_first))]))))))
 
-logic concat1 : (t3,u64) farray, t3, t3, (t3,u64) farray, t3,
-  t3 -> (t3,u64) farray
-
-axiom concat_def1 :
-  (forall a:(t3,u64) farray. forall b:(t3,u64) farray.
-  (forall a_first:t3. forall a_last:t3. forall b_first:t3. forall b_last:t3.
-  (forall i:t3 [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((ule3(a_first, i) and ule3(i, a_last)) -> ((concat1(a, a_first, a_last,
-  b, b_first, b_last)[i]) = (a[i]))) and (ugt3(i, a_last) -> ((concat1(a,
-  a_first, a_last, b, b_first, b_last)[i]) = (b[add3(sub3(i, a_last),
-  sub3(b_first, one3))])))))))
-
-logic singleton1 : u64, t3 -> (t3,u64) farray
-
-axiom singleton_def1 :
-  (forall v:u64.
-  (forall i:t3 [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq15 : (t3,u64) farray, t3, t3, (t3,u64) farray, t3, t3 -> bool
 
 axiom bool_eq_def13 :
@@ -2162,19 +2107,19 @@ axiom bool_eq_def13 :
   (((((ule3(a__first, a__last) and (ule3(b__first, b__last) and
   (sub3(a__last, a__first) = sub3(b__last, b__first)))) or
   ((not ule3(a__first, a__last)) and ugt3(b__first, b__last))) and
-  (forall temp___idx_133:t3. (((ule3(a__first, temp___idx_133) and
-  ule3(temp___idx_133, a__last)) and
-  (to_rep2((a[temp___idx_133])) = to_rep2((b[add3(sub3(b__first, a__first),
-  temp___idx_133)])))) or (not (ule3(a__first, temp___idx_133) and
-  ule3(temp___idx_133, a__last)))))) -> (bool_eq15(a, a__first, a__last, b,
+  (forall temp___idx_155:t3. (((ule3(a__first, temp___idx_155) and
+  ule3(temp___idx_155, a__last)) and
+  (to_rep2((a[temp___idx_155])) = to_rep2((b[add3(sub3(b__first, a__first),
+  temp___idx_155)])))) or (not (ule3(a__first, temp___idx_155) and
+  ule3(temp___idx_155, a__last)))))) -> (bool_eq15(a, a__first, a__last, b,
   b__first, b__last) = true)) and ((not (((ule3(a__first, a__last) ->
   (ule3(b__first, b__last) and (sub3(a__last, a__first) = sub3(b__last,
   b__first)))) and ((not ule3(a__first, a__last)) -> ugt3(b__first,
   b__last))) and
-  (forall temp___idx_133:t3. ((ule3(a__first, temp___idx_133) and
-  ule3(temp___idx_133, a__last)) ->
-  (to_rep2((a[temp___idx_133])) = to_rep2((b[add3(sub3(b__first, a__first),
-  temp___idx_133)]))))))) -> (bool_eq15(a, a__first, a__last, b, b__first,
+  (forall temp___idx_155:t3. ((ule3(a__first, temp___idx_155) and
+  ule3(temp___idx_155, a__last)) ->
+  (to_rep2((a[temp___idx_155])) = to_rep2((b[add3(sub3(b__first, a__first),
+  temp___idx_155)]))))))) -> (bool_eq15(a, a__first, a__last, b, b__first,
   b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -2184,45 +2129,20 @@ axiom bool_eq_rev1 :
   a__last) = true) -> (((ule3(a__first, a__last) -> (ule3(b__first,
   b__last) and (sub3(a__last, a__first) = sub3(b__last, b__first)))) and
   ((not ule3(a__first, a__last)) -> ugt3(b__first, b__last))) and
-  (forall temp___idx_133:t3. ((ule3(a__first, temp___idx_133) and
-  ule3(temp___idx_133, a__last)) ->
-  (to_rep2((a[temp___idx_133])) = to_rep2((b[add3(sub3(b__first, a__first),
-  temp___idx_133)])))))))))
-
-logic compare1 : (t3,u64) farray, t3, t3, (t3,u64) farray, t3, t3 -> int
-
-axiom compare_def_eq1 :
-  (forall a:(t3,u64) farray. forall b:(t3,u64) farray.
-  (forall a_first:t3. forall a_last:t3. forall b_first:t3. forall b_last:t3
-  [compare1(a, a_first, a_last, b, b_first, b_last)]. ((compare1(a, a_first,
-  a_last, b, b_first, b_last) = 0) <-> (bool_eq15(a, a_first, a_last, b,
-  b_first, b_last) = true))))
-
-axiom compare_def_lt1 :
-  (forall a:(t3,u64) farray. forall b:(t3,u64) farray.
-  (forall a_first:t3. forall a_last:t3. forall b_first:t3. forall b_last:t3
-  [compare1(a, a_first, a_last, b, b_first, b_last)]. ((compare1(a, a_first,
-  a_last, b, b_first, b_last) <  0) <->
-  (exists i:t3. exists j:t3. (ule3(i, a_last) and (ult3(j, b_last) and
-  ((bool_eq15(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  (ult3(i, a_last) and ult3(to_rep2((a[add3(i, one3)])), to_rep2((b[add3(j,
-  one3)]))))))))))))
-
-axiom compare_def_gt1 :
-  (forall a:(t3,u64) farray. forall b:(t3,u64) farray.
-  (forall a_first:t3. forall a_last:t3. forall b_first:t3. forall b_last:t3
-  [compare1(a, a_first, a_last, b, b_first, b_last)]. ((0 <  compare1(a,
-  a_first, a_last, b, b_first, b_last)) <->
-  (exists i:t3. exists j:t3. (ule3(i, b_last) and (ult3(j, a_last) and
-  ((bool_eq15(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  (ult3(i, b_last) and ugt3(to_rep2((a[add3(j, one3)])), to_rep2((b[add3(i,
-  one3)]))))))))))))
+  (forall temp___idx_155:t3. ((ule3(a__first, temp___idx_155) and
+  ule3(temp___idx_155, a__last)) ->
+  (to_rep2((a[temp___idx_155])) = to_rep2((b[add3(sub3(b__first, a__first),
+  temp___idx_155)])))))))))
 
 type skein_512_block_bytes_count
 
 logic attr__ATTRIBUTE_MODULUS7 : t3
 
-predicate in_range3(x: t3) = (ule3(of_int3(0), x) and ule3(x, of_int3(64)))
+logic rliteral3 : t3
+
+axiom rliteral_axiom3 : (tqtint3(rliteral3) = 64)
+
+predicate in_range3(x: t3) = (ule3(rliteral, x) and ule3(x, rliteral3))
 
 predicate in_range_int2(x: int) = ((0 <= x) and (x <= 64))
 
@@ -2254,7 +2174,11 @@ type skein_512_block_bytes_index
 
 logic attr__ATTRIBUTE_MODULUS8 : t3
 
-predicate in_range4(x: t3) = (ule3(of_int3(0), x) and ule3(x, of_int3(63)))
+logic rliteral4 : t3
+
+axiom rliteral_axiom4 : (tqtint3(rliteral4) = 63)
+
+predicate in_range4(x: t3) = (ule3(rliteral, x) and ule3(x, rliteral4))
 
 predicate in_range_int3(x: int) = ((0 <= x) and (x <= 63))
 
@@ -2290,7 +2214,7 @@ type skein_512_state_bytes_index
 
 logic attr__ATTRIBUTE_MODULUS9 : t3
 
-predicate in_range5(x: t3) = (ule3(of_int3(0), x) and ule3(x, of_int3(63)))
+predicate in_range5(x: t3) = (ule3(rliteral, x) and ule3(x, rliteral4))
 
 predicate in_range_int4(x: int) = ((0 <= x) and (x <= 63))
 
@@ -2320,7 +2244,15 @@ function skein_512_state_bytes_index__ref___projection(a: skein_512_state_bytes_
 
 type u7
 
-predicate in_range6(x: t) = (ule(of_int(0), x) and ule(x, of_int(127)))
+logic rliteral5 : t
+
+axiom rliteral_axiom5 : (tqtint(rliteral5) = 0)
+
+logic rliteral6 : t
+
+axiom rliteral_axiom6 : (tqtint(rliteral6) = 127)
+
+predicate in_range6(x: t) = (ule(rliteral5, x) and ule(x, rliteral6))
 
 predicate in_range_int5(x: int) = ((0 <= x) and (x <= 127))
 
@@ -2354,9 +2286,13 @@ axiom inversion_axiom6 :
 
 axiom range_axiom6 : (forall x:u7 [to_rep6(x)]. in_range6(to_rep6(x)))
 
+logic rliteral7 : t
+
+axiom rliteral_axiom7 : (tqtint(rliteral7) = 128)
+
 axiom coerce_axiom6 :
-  (forall x:t [to_rep6(of_rep6(x))]. (in_range6(urem(x, of_int(128))) ->
-  (to_rep6(of_rep6(x)) = urem(x, of_int(128)))))
+  (forall x:t [to_rep6(of_rep6(x))]. (in_range6(urem(x, rliteral7)) ->
+  (to_rep6(of_rep6(x)) = urem(x, rliteral7))))
 
 function to_int11(x: u7) : int = tqtint(to_rep6(x))
 
@@ -2365,7 +2301,11 @@ axiom range_int_axiom6 :
 
 type u6
 
-predicate in_range7(x: t) = (ule(of_int(0), x) and ule(x, of_int(63)))
+logic rliteral8 : t
+
+axiom rliteral_axiom8 : (tqtint(rliteral8) = 63)
+
+predicate in_range7(x: t) = (ule(rliteral5, x) and ule(x, rliteral8))
 
 predicate in_range_int6(x: int) = ((0 <= x) and (x <= 63))
 
@@ -2399,9 +2339,13 @@ axiom inversion_axiom7 :
 
 axiom range_axiom7 : (forall x:u6 [to_rep7(x)]. in_range7(to_rep7(x)))
 
+logic rliteral9 : t
+
+axiom rliteral_axiom9 : (tqtint(rliteral9) = 64)
+
 axiom coerce_axiom7 :
-  (forall x:t [to_rep7(of_rep7(x))]. (in_range7(urem(x, of_int(64))) ->
-  (to_rep7(of_rep7(x)) = urem(x, of_int(64)))))
+  (forall x:t [to_rep7(of_rep7(x))]. (in_range7(urem(x, rliteral9)) ->
+  (to_rep7(of_rep7(x)) = urem(x, rliteral9))))
 
 function to_int12(x: u6) : int = tqtint(to_rep7(x))
 
@@ -2902,6 +2846,10 @@ type us_rep2 = { us_split_fields5 : us_split_fields4
 function us_rep___3__projection(a: us_rep2) : us_split_fields4 =
   (a).us_split_fields5
 
+logic rliteral10 : t3
+
+axiom rliteral_axiom10 : (tqtint3(rliteral10) = 7)
+
 logic bool_eq23 : us_rep2, us_rep2 -> bool
 
 axiom bool_eq_def21 :
@@ -2909,23 +2857,23 @@ axiom bool_eq_def21 :
   (((((bool_eq22(((a).us_split_fields5).rec__skein__skein_512_context__h,
   ((b).us_split_fields5).rec__skein__skein_512_context__h) = true) and
   (bool_eq15(((a).us_split_fields5).rec__skein__skein_512_context__x,
-  of_int3(0), of_int3(7),
-  ((b).us_split_fields5).rec__skein__skein_512_context__x, of_int3(0),
-  of_int3(7)) = true)) and
+  rliteral, rliteral10,
+  ((b).us_split_fields5).rec__skein__skein_512_context__x, rliteral,
+  rliteral10) = true)) and
   (bool_eq11(((a).us_split_fields5).rec__skein__skein_512_context__b,
-  of_int3(0), of_int3(63),
-  ((b).us_split_fields5).rec__skein__skein_512_context__b, of_int3(0),
-  of_int3(63)) = true)) -> (bool_eq23(a, b) = true)) and
+  rliteral, rliteral4,
+  ((b).us_split_fields5).rec__skein__skein_512_context__b, rliteral,
+  rliteral4) = true)) -> (bool_eq23(a, b) = true)) and
   ((not (((bool_eq22(((a).us_split_fields5).rec__skein__skein_512_context__h,
   ((b).us_split_fields5).rec__skein__skein_512_context__h) = true) and
   (bool_eq15(((a).us_split_fields5).rec__skein__skein_512_context__x,
-  of_int3(0), of_int3(7),
-  ((b).us_split_fields5).rec__skein__skein_512_context__x, of_int3(0),
-  of_int3(7)) = true)) and
+  rliteral, rliteral10,
+  ((b).us_split_fields5).rec__skein__skein_512_context__x, rliteral,
+  rliteral10) = true)) and
   (bool_eq11(((a).us_split_fields5).rec__skein__skein_512_context__b,
-  of_int3(0), of_int3(63),
-  ((b).us_split_fields5).rec__skein__skein_512_context__b, of_int3(0),
-  of_int3(63)) = true))) -> (bool_eq23(a, b) = false))))
+  rliteral, rliteral4,
+  ((b).us_split_fields5).rec__skein__skein_512_context__b, rliteral,
+  rliteral4) = true))) -> (bool_eq23(a, b) = false))))
 
 logic value__size5 : int
 
@@ -3060,6 +3008,10 @@ logic hash_bit_len_of : us_rep2 -> t3
 
 logic hash_bit_len_of__function_guard : t3, us_rep2 -> prop
 
+logic rliteral11 : t3
+
+axiom rliteral_axiom11 : (tqtint3(rliteral11) = 18446744073709551615)
+
 axiom hash_bit_len_of__post_axiom :
   (forall ctx:u64. forall ctx1:u32. forall ctx2:u16. forall ctx3:u7.
   forall ctx4:bool. forall ctx5:u6. forall ctx6:bool. forall ctx7:bool.
@@ -3079,11 +3031,11 @@ axiom hash_bit_len_of__post_axiom :
   rec__skein__context_header__byte_count = ctx9 } };
   rec__skein__skein_512_context__x = ctx10;
   rec__skein__skein_512_context__b = ctx11 } })].
-  (ult3(to_rep3(last(mk(of_int3(0), of_int3(63)))),
-  of_int3(18446744073709551615)) -> in_range1(hash_bit_len_of({
-  us_split_fields5 = { rec__skein__skein_512_context__h = {
-  us_split_fields3 = { rec__skein__context_header__tweak_words = {
-  us_split_fields1 = { rec__skein__tweak_value__byte_count_lsb = ctx;
+  (ult3(to_rep3(last(mk(rliteral, rliteral4))), rliteral11) ->
+  in_range1(hash_bit_len_of({ us_split_fields5 = {
+  rec__skein__skein_512_context__h = { us_split_fields3 = {
+  rec__skein__context_header__tweak_words = { us_split_fields1 = {
+  rec__skein__tweak_value__byte_count_lsb = ctx;
   rec__skein__tweak_value__byte_count_msb = ctx1;
   rec__skein__tweak_value__reserved = ctx2;
   rec__skein__tweak_value__tree_level = ctx3;
@@ -3115,11 +3067,10 @@ axiom hash_bit_len_of__def_axiom :
   rec__skein__context_header__byte_count = ctx9 } };
   rec__skein__skein_512_context__x = ctx10;
   rec__skein__skein_512_context__b = ctx11 } })].
-  (ult3(to_rep3(last(mk(of_int3(0), of_int3(63)))),
-  of_int3(18446744073709551615)) -> (hash_bit_len_of({ us_split_fields5 = {
-  rec__skein__skein_512_context__h = { us_split_fields3 = {
-  rec__skein__context_header__tweak_words = { us_split_fields1 = {
-  rec__skein__tweak_value__byte_count_lsb = ctx;
+  (ult3(to_rep3(last(mk(rliteral, rliteral4))), rliteral11) ->
+  (hash_bit_len_of({ us_split_fields5 = { rec__skein__skein_512_context__h =
+  { us_split_fields3 = { rec__skein__context_header__tweak_words = {
+  us_split_fields1 = { rec__skein__tweak_value__byte_count_lsb = ctx;
   rec__skein__tweak_value__byte_count_msb = ctx1;
   rec__skein__tweak_value__reserved = ctx2;
   rec__skein__tweak_value__tree_level = ctx3;
@@ -3157,11 +3108,10 @@ axiom byte_count_of__def_axiom :
   rec__skein__context_header__byte_count = ctx9 } };
   rec__skein__skein_512_context__x = ctx10;
   rec__skein__skein_512_context__b = ctx11 } })].
-  (ult3(to_rep3(last(mk(of_int3(0), of_int3(63)))),
-  of_int3(18446744073709551615)) -> (byte_count_of({ us_split_fields5 = {
-  rec__skein__skein_512_context__h = { us_split_fields3 = {
-  rec__skein__context_header__tweak_words = { us_split_fields1 = {
-  rec__skein__tweak_value__byte_count_lsb = ctx;
+  (ult3(to_rep3(last(mk(rliteral, rliteral4))), rliteral11) ->
+  (byte_count_of({ us_split_fields5 = { rec__skein__skein_512_context__h = {
+  us_split_fields3 = { rec__skein__context_header__tweak_words = {
+  us_split_fields1 = { rec__skein__tweak_value__byte_count_lsb = ctx;
   rec__skein__tweak_value__byte_count_msb = ctx1;
   rec__skein__tweak_value__reserved = ctx2;
   rec__skein__tweak_value__tree_level = ctx3;
@@ -3228,19 +3178,9 @@ logic null_skein_512_context11 : (t3,byte) farray
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic temp___151 : t3 -> (t3,u64) farray
+logic temp___173 : t3 -> (t3,u64) farray
 
-axiom def_axiom :
-  (forall temp___153:t3.
-  (forall temp___154:t3.
-  ((temp___151(temp___153)[temp___154]) = of_rep2(temp___153))))
-
-logic temp___155 : t -> (t3,byte) farray
-
-axiom def_axiom1 :
-  (forall temp___157:t.
-  (forall temp___158:t3.
-  ((temp___155(temp___157)[temp___158]) = of_rep4(temp___157))))
+logic temp___177 : t -> (t3,byte) farray
 
 logic skein_512_state_words_to_bytes : (t3,u64) farray -> (t3,byte) farray
 
@@ -3248,8 +3188,7 @@ logic skein_512_state_words_to_bytes__function_guard : (t3,byte) farray,
   (t3,u64) farray -> prop
 
 axiom skein_512_state_words_to_bytes__post_axiom :
-  ult3(to_rep3(last(mk(of_int3(0), of_int3(63)))),
-  of_int3(18446744073709551615))
+  ult3(to_rep3(last(mk(rliteral, rliteral4))), rliteral11)
 
 logic to_littleendian : t3 -> t3
 
@@ -3269,36 +3208,39 @@ logic c231b : t
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
-logic temp___1345 : t3, t3, t3, t3 -> (t3,u64) farray
+logic temp___1504 : t3, t3, t3, t3 -> (t3,u64) farray
 
-axiom def_axiom2 :
-  (forall temp___1347:t3. forall temp___1348:t3. forall temp___1349:t3.
-  forall temp___1350:t3.
-  (forall temp___1351:t3. (((temp___1351 = of_int3(2)) ->
-  ((temp___1345(temp___1347, temp___1348, temp___1349,
-  temp___1350)[temp___1351]) = of_rep2(temp___1349))) and
-  ((not (temp___1351 = of_int3(2))) -> (((temp___1351 = of_int3(1)) ->
-  ((temp___1345(temp___1347, temp___1348, temp___1349,
-  temp___1350)[temp___1351]) = of_rep2(temp___1348))) and
-  ((not (temp___1351 = of_int3(1))) -> (((temp___1351 = of_int3(0)) ->
-  ((temp___1345(temp___1347, temp___1348, temp___1349,
-  temp___1350)[temp___1351]) = of_rep2(temp___1347))) and
-  ((not (temp___1351 = of_int3(0))) -> ((temp___1345(temp___1347,
-  temp___1348, temp___1349,
-  temp___1350)[temp___1351]) = of_rep2(temp___1350))))))))))
+logic temp___1511 : t3 -> (t3,u64) farray
 
-logic temp___1352 : t3 -> (t3,u64) farray
+logic rliteral12 : t3
 
-axiom def_axiom3 :
-  (forall temp___1354:t3.
-  (forall temp___1355:t3.
-  ((temp___1352(temp___1354)[temp___1355]) = of_rep2(temp___1354))))
+axiom rliteral_axiom12 : (tqtint3(rliteral12) = 2)
+
+axiom def_axiom :
+  (forall temp___1506:t3. forall temp___1507:t3. forall temp___1508:t3.
+  forall temp___1509:t3.
+  (forall temp___1510:t3. (((temp___1510 = rliteral12) ->
+  (to_rep2((temp___1504(temp___1506, temp___1507, temp___1508,
+  temp___1509)[temp___1510])) = temp___1508)) and
+  ((not (temp___1510 = rliteral12)) -> (((temp___1510 = rliteral2) ->
+  (to_rep2((temp___1504(temp___1506, temp___1507, temp___1508,
+  temp___1509)[temp___1510])) = temp___1507)) and
+  ((not (temp___1510 = rliteral2)) -> (((temp___1510 = rliteral) ->
+  (to_rep2((temp___1504(temp___1506, temp___1507, temp___1508,
+  temp___1509)[temp___1510])) = temp___1506)) and
+  ((not (temp___1510 = rliteral)) -> (to_rep2((temp___1504(temp___1506,
+  temp___1507, temp___1508, temp___1509)[temp___1510])) = temp___1509)))))))))
+
+axiom def_axiom1 :
+  (forall temp___1513:t3.
+  (forall temp___1514:t3.
+  (to_rep2((temp___1511(temp___1513)[temp___1514])) = temp___1513)))
 
 axiom add_in_range__post_axiom : true
 
 axiom add_in_range__def_axiom :
   (forall x:t3. forall y:t3 [add_in_range(x, y)]. ((add_in_range(x,
-  y) = true) <-> ule3(y, sub3(of_int3(18446744073709551615), x))))
+  y) = true) <-> ule3(y, sub3(rliteral11, x))))
 
 logic null_tweak_value : u64
 
@@ -3318,13 +3260,21 @@ logic null_tweak_value7 : bool
 
 logic attr__ATTRIBUTE_ADDRESS8 : int
 
+logic rliteral13 : t2
+
+axiom rliteral_axiom13 : (tqtint2(rliteral13) = 0)
+
+logic rliteral14 : t1
+
+axiom rliteral_axiom14 : (tqtint1(rliteral14) = 0)
+
 axiom null_tweak_value__def_axiom :
-  ((null_tweak_value = of_rep2(of_int3(0))) and
-  ((null_tweak_value1 = of_rep1(of_int2(0))) and
-  ((null_tweak_value2 = of_rep(of_int1(0))) and
-  ((null_tweak_value3 = of_rep6(of_int(0))) and
+  ((null_tweak_value = of_rep2(rliteral)) and
+  ((null_tweak_value1 = of_rep1(rliteral13)) and
+  ((null_tweak_value2 = of_rep(rliteral14)) and
+  ((null_tweak_value3 = of_rep6(rliteral5)) and
   ((null_tweak_value4 = of_int4(0)) and
-  ((null_tweak_value5 = of_rep7(of_int(0))) and
+  ((null_tweak_value5 = of_rep7(rliteral5)) and
   ((null_tweak_value6 = of_int4(0)) and
   (null_tweak_value7 = of_int4(0)))))))))
 
@@ -3337,8 +3287,8 @@ axiom null_context_header__def_axiom :
   ((null_context_header5 = null_tweak_value5) and
   ((null_context_header6 = null_tweak_value6) and
   (null_context_header7 = null_tweak_value7)))))))) and
-  ((null_context_header8 = of_rep5(of_int3(0))) and
-  (null_context_header9 = of_rep2(of_int3(0)))))
+  ((null_context_header8 = of_rep5(rliteral)) and
+  (null_context_header9 = of_rep2(rliteral))))
 
 axiom null_skein_512_context__def_axiom :
   ((((null_skein_512_context = null_context_header) and
@@ -3351,999 +3301,104 @@ axiom null_skein_512_context__def_axiom :
   (null_skein_512_context7 = null_context_header7)))))))) and
   ((null_skein_512_context8 = null_context_header8) and
   (null_skein_512_context9 = null_context_header9))) and
-  ((null_skein_512_context10 = temp___151(of_int3(0))) and
-  (null_skein_512_context11 = temp___155(of_int(0)))))
-
-logic ctx__split_fields : u64
-
-logic ctx__split_fields1 : u32
-
-logic ctx__split_fields2 : u16
-
-logic ctx__split_fields3 : u7
-
-logic ctx__split_fields4 : bool
-
-logic ctx__split_fields5 : u6
-
-logic ctx__split_fields6 : bool
-
-logic ctx__split_fields7 : bool
-
-logic ctx__split_fields8 : hash_bit_length
-
-logic ctx__split_fields9 : u64
-
-logic ctx__split_fields10 : (t3,u64) farray
-
-logic ctx__split_fields11 : (t3,byte) farray
-
-logic cfg : (t3,u64) farray
-
-logic o : hash_bit_length
-
-logic o1 : u64
-
-logic o2 : u32
-
-logic o3 : u16
-
-logic o4 : u7
-
-logic o5 : bool
-
-logic o6 : u6
-
-logic o7 : bool
-
-logic o8 : bool
-
-logic o9 : hash_bit_length
-
-logic o10 : u64
-
-logic o11 : u64
-
-logic o12 : u32
-
-logic o13 : u16
-
-logic o14 : u7
-
-logic o15 : bool
-
-logic o16 : u6
-
-logic o17 : bool
-
-logic o18 : bool
-
-logic o19 : hash_bit_length
-
-logic o20 : u64
-
-logic o21 : u64
-
-logic o22 : u32
-
-logic o23 : u16
-
-logic o24 : u7
-
-logic o25 : bool
-
-logic o26 : u6
-
-logic o27 : bool
-
-logic o28 : bool
-
-logic o29 : hash_bit_length
-
-logic o30 : u64
-
-logic o31 : (t3,u64) farray
-
-logic o32 : (t3,byte) farray
-
-logic temp___1338 : u64
-
-logic temp___13381 : u32
-
-logic temp___13382 : u16
-
-logic temp___13383 : u7
-
-logic temp___13384 : bool
-
-logic temp___13385 : u6
-
-logic temp___13386 : bool
-
-logic temp___13387 : bool
-
-logic temp___13388 : hash_bit_length
-
-logic temp___13389 : u64
-
-logic temp___133810 : (t3,u64) farray
-
-logic temp___133811 : (t3,byte) farray
-
-logic o33 : u6
-
-logic o34 : u7
-
-logic o35 : u16
-
-logic o36 : u32
-
-logic o37 : u64
-
-logic o38 : u64
-
-logic o39 : u32
-
-logic o40 : u16
-
-logic o41 : u7
-
-logic o42 : bool
-
-logic o43 : u6
-
-logic o44 : bool
-
-logic o45 : bool
-
-logic o46 : u64
-
-logic o47 : u32
-
-logic o48 : u16
-
-logic o49 : u7
-
-logic o50 : bool
-
-logic o51 : u6
-
-logic o52 : bool
-
-logic o53 : bool
-
-logic o54 : u64
-
-logic o55 : u32
-
-logic o56 : u16
-
-logic o57 : u7
-
-logic o58 : bool
-
-logic o59 : u6
-
-logic o60 : bool
-
-logic o61 : bool
-
-logic o62 : hash_bit_length
-
-logic o63 : u64
-
-logic o64 : u64
-
-logic o65 : u32
-
-logic o66 : u16
-
-logic o67 : u7
-
-logic o68 : bool
-
-logic o69 : u6
-
-logic o70 : bool
-
-logic o71 : bool
-
-logic o72 : hash_bit_length
-
-logic o73 : u64
-
-logic o74 : u64
-
-logic o75 : u32
-
-logic o76 : u16
-
-logic o77 : u7
-
-logic o78 : bool
-
-logic o79 : u6
-
-logic o80 : bool
-
-logic o81 : bool
-
-logic o82 : hash_bit_length
-
-logic o83 : u64
-
-logic o84 : (t3,u64) farray
-
-logic o85 : (t3,byte) farray
-
-logic temp___1341 : u64
-
-logic temp___13411 : u32
-
-logic temp___13412 : u16
-
-logic temp___13413 : u7
-
-logic temp___13414 : bool
-
-logic temp___13415 : u6
-
-logic temp___13416 : bool
-
-logic temp___13417 : bool
-
-logic temp___13418 : hash_bit_length
-
-logic temp___13419 : u64
-
-logic temp___134110 : (t3,u64) farray
-
-logic temp___134111 : (t3,byte) farray
-
-logic o86 : u64
-
-logic o87 : u64
-
-logic o88 : u32
-
-logic o89 : u16
-
-logic o90 : u7
-
-logic o91 : bool
-
-logic o92 : u6
-
-logic o93 : bool
-
-logic o94 : bool
-
-logic o95 : hash_bit_length
-
-logic o96 : u64
-
-logic o97 : u64
-
-logic o98 : u32
-
-logic o99 : u16
-
-logic o100 : u7
-
-logic o101 : bool
-
-logic o102 : u6
-
-logic o103 : bool
-
-logic o104 : bool
-
-logic o105 : hash_bit_length
-
-logic o106 : u64
-
-logic o107 : u64
-
-logic o108 : u32
-
-logic o109 : u16
-
-logic o110 : u7
-
-logic o111 : bool
-
-logic o112 : u6
-
-logic o113 : bool
-
-logic o114 : bool
-
-logic o115 : hash_bit_length
-
-logic o116 : u64
-
-logic o117 : (t3,u64) farray
-
-logic o118 : (t3,byte) farray
-
-logic temp___1344 : u64
-
-logic temp___13441 : u32
-
-logic temp___13442 : u16
-
-logic temp___13443 : u7
-
-logic temp___13444 : bool
-
-logic temp___13445 : u6
-
-logic temp___13446 : bool
-
-logic temp___13447 : bool
-
-logic temp___13448 : hash_bit_length
-
-logic temp___13449 : u64
-
-logic temp___134410 : (t3,u64) farray
-
-logic temp___134411 : (t3,byte) farray
-
-logic o119 : t3
-
-logic o120 : t3
-
-logic o121 : t3
-
-logic o122 : (t3,u64) farray
-
-logic o123 : (t3,byte) farray
-
-logic o124 : (t3,byte) farray
-
-logic o125 : t4
-
-logic o126 : u6
-
-logic o127 : u7
-
-logic o128 : u16
-
-logic o129 : u32
-
-logic o130 : u64
-
-logic o131 : u64
-
-logic o132 : u32
-
-logic o133 : u16
-
-logic o134 : u7
-
-logic o135 : bool
-
-logic o136 : u6
-
-logic o137 : bool
-
-logic o138 : bool
-
-logic o139 : u64
-
-logic o140 : u32
-
-logic o141 : u16
-
-logic o142 : u7
-
-logic o143 : bool
-
-logic o144 : u6
-
-logic o145 : bool
-
-logic o146 : bool
-
-logic o147 : u64
-
-logic o148 : u32
-
-logic o149 : u16
-
-logic o150 : u7
-
-logic o151 : bool
-
-logic o152 : u6
-
-logic o153 : bool
-
-logic o154 : bool
-
-logic o155 : hash_bit_length
-
-logic o156 : u64
-
-logic o157 : u64
-
-logic o158 : u32
-
-logic o159 : u16
-
-logic o160 : u7
-
-logic o161 : bool
-
-logic o162 : u6
-
-logic o163 : bool
-
-logic o164 : bool
-
-logic o165 : hash_bit_length
-
-logic o166 : u64
-
-logic o167 : u64
-
-logic o168 : u32
-
-logic o169 : u16
-
-logic o170 : u7
-
-logic o171 : bool
-
-logic o172 : u6
-
-logic o173 : bool
-
-logic o174 : bool
-
-logic o175 : hash_bit_length
-
-logic o176 : u64
-
-logic o177 : (t3,u64) farray
-
-logic o178 : (t3,byte) farray
-
-logic temp___1360 : u64
-
-logic temp___13601 : u32
-
-logic temp___13602 : u16
-
-logic temp___13603 : u7
-
-logic temp___13604 : bool
-
-logic temp___13605 : u6
-
-logic temp___13606 : bool
-
-logic temp___13607 : bool
-
-logic temp___13608 : hash_bit_length
-
-logic temp___13609 : u64
-
-logic temp___136010 : (t3,u64) farray
-
-logic temp___136011 : (t3,byte) farray
-
-logic o179 : u64
-
-logic o180 : u64
-
-logic o181 : u32
-
-logic o182 : u16
-
-logic o183 : u7
-
-logic o184 : bool
-
-logic o185 : u6
-
-logic o186 : bool
-
-logic o187 : bool
-
-logic o188 : hash_bit_length
-
-logic o189 : u64
-
-logic o190 : u64
-
-logic o191 : u32
-
-logic o192 : u16
-
-logic o193 : u7
-
-logic o194 : bool
-
-logic o195 : u6
-
-logic o196 : bool
-
-logic o197 : bool
-
-logic o198 : hash_bit_length
-
-logic o199 : u64
-
-logic o200 : u64
-
-logic o201 : u32
-
-logic o202 : u16
-
-logic o203 : u7
-
-logic o204 : bool
-
-logic o205 : u6
-
-logic o206 : bool
-
-logic o207 : bool
-
-logic o208 : hash_bit_length
-
-logic o209 : u64
-
-logic o210 : (t3,u64) farray
-
-logic o211 : (t3,byte) farray
-
-logic temp___1363 : u64
-
-logic temp___13631 : u32
-
-logic temp___13632 : u16
-
-logic temp___13633 : u7
-
-logic temp___13634 : bool
-
-logic temp___13635 : u6
-
-logic temp___13636 : bool
-
-logic temp___13637 : bool
-
-logic temp___13638 : hash_bit_length
-
-logic temp___13639 : u64
-
-logic temp___136310 : (t3,u64) farray
-
-logic temp___136311 : (t3,byte) farray
-
-logic result : u64
-
-logic result1 : u32
-
-logic result2 : u16
-
-logic result3 : u7
-
-logic result4 : bool
-
-logic result5 : u6
-
-logic result6 : bool
-
-logic result7 : bool
-
-logic result8 : hash_bit_length
-
-logic result9 : u64
-
-logic result10 : (t3,u64) farray
-
-logic result11 : (t3,byte) farray
-
-logic ctx__split_fields12 : u64
-
-logic ctx__split_fields13 : u32
-
-logic ctx__split_fields14 : u16
-
-logic ctx__split_fields15 : u7
-
-logic ctx__split_fields16 : bool
-
-logic ctx__split_fields17 : u6
-
-logic ctx__split_fields18 : bool
-
-logic ctx__split_fields19 : bool
-
-logic ctx__split_fields20 : hash_bit_length
-
-logic ctx__split_fields21 : u64
-
-logic ctx__split_fields22 : (t3,u64) farray
-
-logic ctx__split_fields23 : (t3,byte) farray
-
-logic result12 : u64
-
-logic result13 : u32
-
-logic result14 : u16
-
-logic result15 : u7
-
-logic result16 : bool
-
-logic result17 : u6
-
-logic result18 : bool
-
-logic result19 : bool
-
-logic result20 : hash_bit_length
-
-logic result21 : u64
-
-logic result22 : (t3,u64) farray
-
-logic result23 : (t3,byte) farray
-
-logic ctx__split_fields24 : u64
-
-logic ctx__split_fields25 : u32
-
-logic ctx__split_fields26 : u16
-
-logic ctx__split_fields27 : u7
-
-logic ctx__split_fields28 : bool
-
-logic ctx__split_fields29 : u6
-
-logic ctx__split_fields30 : bool
-
-logic ctx__split_fields31 : bool
-
-logic ctx__split_fields32 : hash_bit_length
-
-logic ctx__split_fields33 : u64
-
-logic ctx__split_fields34 : (t3,u64) farray
-
-logic ctx__split_fields35 : (t3,byte) farray
-
-logic result24 : u64
-
-logic result25 : u32
-
-logic result26 : u16
-
-logic result27 : u7
-
-logic result28 : bool
-
-logic result29 : u6
-
-logic result30 : bool
-
-logic result31 : bool
-
-logic result32 : hash_bit_length
-
-logic result33 : u64
-
-logic result34 : (t3,u64) farray
-
-logic result35 : (t3,byte) farray
-
-logic ctx__split_fields36 : u64
-
-logic ctx__split_fields37 : u32
-
-logic ctx__split_fields38 : u16
-
-logic ctx__split_fields39 : u7
-
-logic ctx__split_fields40 : bool
-
-logic ctx__split_fields41 : u6
-
-logic ctx__split_fields42 : bool
-
-logic ctx__split_fields43 : bool
-
-logic ctx__split_fields44 : hash_bit_length
-
-logic ctx__split_fields45 : u64
-
-logic ctx__split_fields46 : (t3,u64) farray
-
-logic ctx__split_fields47 : (t3,byte) farray
-
-logic result36 : u64
-
-logic result37 : u32
-
-logic result38 : u16
-
-logic result39 : u7
-
-logic result40 : bool
-
-logic result41 : u6
-
-logic result42 : bool
-
-logic result43 : bool
-
-logic result44 : hash_bit_length
-
-logic result45 : u64
-
-logic result46 : (t3,u64) farray
-
-logic result47 : (t3,byte) farray
-
-logic ctx__split_fields48 : u64
-
-logic ctx__split_fields49 : u32
-
-logic ctx__split_fields50 : u16
-
-logic ctx__split_fields51 : u7
-
-logic ctx__split_fields52 : bool
-
-logic ctx__split_fields53 : u6
-
-logic ctx__split_fields54 : bool
-
-logic ctx__split_fields55 : bool
-
-logic ctx__split_fields56 : hash_bit_length
-
-logic ctx__split_fields57 : u64
-
-logic ctx__split_fields58 : (t3,u64) farray
-
-logic ctx__split_fields59 : (t3,byte) farray
-
-logic result48 : (t3,u64) farray
-
-logic cfg1 : (t3,u64) farray
-
-logic result49 : u64
-
-logic result50 : u32
-
-logic result51 : u16
-
-logic result52 : u7
-
-logic result53 : bool
-
-logic result54 : u6
-
-logic result55 : bool
-
-logic result56 : bool
-
-logic result57 : hash_bit_length
-
-logic result58 : u64
-
-logic result59 : (t3,u64) farray
-
-logic result60 : (t3,byte) farray
-
-logic ctx__split_fields60 : u64
-
-logic ctx__split_fields61 : u32
-
-logic ctx__split_fields62 : u16
-
-logic ctx__split_fields63 : u7
-
-logic ctx__split_fields64 : bool
-
-logic ctx__split_fields65 : u6
-
-logic ctx__split_fields66 : bool
-
-logic ctx__split_fields67 : bool
-
-logic ctx__split_fields68 : hash_bit_length
-
-logic ctx__split_fields69 : u64
-
-logic ctx__split_fields70 : (t3,u64) farray
-
-logic ctx__split_fields71 : (t3,byte) farray
-
-logic ctx__split_fields72 : u64
-
-logic ctx__split_fields73 : u32
-
-logic ctx__split_fields74 : u16
-
-logic ctx__split_fields75 : u7
-
-logic ctx__split_fields76 : bool
-
-logic ctx__split_fields77 : u6
-
-logic ctx__split_fields78 : bool
-
-logic ctx__split_fields79 : bool
-
-logic ctx__split_fields80 : hash_bit_length
-
-logic ctx__split_fields81 : u64
-
-logic ctx__split_fields82 : (t3,u64) farray
-
-logic ctx__split_fields83 : (t3,byte) farray
-
-logic result61 : u64
-
-logic result62 : u32
-
-logic result63 : u16
-
-logic result64 : u7
-
-logic result65 : bool
-
-logic result66 : u6
-
-logic result67 : bool
-
-logic result68 : bool
-
-logic result69 : hash_bit_length
-
-logic result70 : u64
-
-logic result71 : (t3,u64) farray
-
-logic result72 : (t3,byte) farray
-
-logic ctx__split_fields84 : u64
-
-logic ctx__split_fields85 : u32
-
-logic ctx__split_fields86 : u16
-
-logic ctx__split_fields87 : u7
-
-logic ctx__split_fields88 : bool
-
-logic ctx__split_fields89 : u6
-
-logic ctx__split_fields90 : bool
-
-logic ctx__split_fields91 : bool
-
-logic ctx__split_fields92 : hash_bit_length
-
-logic ctx__split_fields93 : u64
-
-logic ctx__split_fields94 : (t3,u64) farray
-
-logic ctx__split_fields95 : (t3,byte) farray
-
-logic result73 : u64
-
-logic result74 : u32
-
-logic result75 : u16
-
-logic result76 : u7
-
-logic result77 : bool
-
-logic result78 : u6
-
-logic result79 : bool
-
-logic result80 : bool
-
-logic result81 : hash_bit_length
-
-logic result82 : u64
-
-logic result83 : (t3,u64) farray
-
-logic result84 : (t3,byte) farray
-
-logic ctx__split_fields96 : u64
-
-logic ctx__split_fields97 : u32
-
-logic ctx__split_fields98 : u16
-
-logic ctx__split_fields99 : u7
-
-logic ctx__split_fields100 : bool
-
-logic ctx__split_fields101 : u6
-
-logic ctx__split_fields102 : bool
-
-logic ctx__split_fields103 : bool
-
-logic ctx__split_fields104 : hash_bit_length
-
-logic ctx__split_fields105 : u64
-
-logic ctx__split_fields106 : (t3,u64) farray
-
-logic ctx__split_fields107 : (t3,byte) farray
-
-logic ctx__split_fields108 : u64
-
-logic ctx__split_fields109 : u32
-
-logic ctx__split_fields110 : u16
-
-logic ctx__split_fields111 : u7
-
-logic ctx__split_fields112 : bool
-
-logic ctx__split_fields113 : u6
-
-logic ctx__split_fields114 : bool
-
-logic ctx__split_fields115 : bool
-
-logic ctx__split_fields116 : hash_bit_length
-
-logic ctx__split_fields117 : u64
-
-logic ctx__split_fields118 : (t3,u64) farray
-
-logic ctx__split_fields119 : (t3,byte) farray
-
-logic cfg2 : (t3,u64) farray
-
-logic ctx__split_fields120 : u64
-
-logic ctx__split_fields121 : u32
-
-logic ctx__split_fields122 : u16
-
-logic ctx__split_fields123 : u7
-
-logic ctx__split_fields124 : bool
-
-logic ctx__split_fields125 : u6
-
-logic ctx__split_fields126 : bool
-
-logic ctx__split_fields127 : bool
-
-logic ctx__split_fields128 : hash_bit_length
-
-logic ctx__split_fields129 : u64
-
-logic ctx__split_fields130 : (t3,u64) farray
-
-logic ctx__split_fields131 : (t3,byte) farray
-
-logic cfg3 : (t3,u64) farray
-
-axiom H : ult3(to_rep3(last(mk(of_int3(0), of_int3(63)))),
-  of_int3(18446744073709551615))
-
-axiom H1 : ((((null_context_header = null_skein_512_context) and
+  ((null_skein_512_context10 = temp___173(rliteral)) and
+  (null_skein_512_context11 = temp___177(rliteral5))))
+
+axiom def_axiom2 :
+  (forall temp___175:t3.
+  (forall temp___176:t3.
+  (to_rep2((temp___173(temp___175)[temp___176])) = temp___175)))
+
+axiom def_axiom3 :
+  (forall temp___179:t.
+  (forall temp___180:t3.
+  (to_rep4((temp___177(temp___179)[temp___180])) = temp___179)))
+
+logic rliteral15 : t
+
+axiom rliteral_axiom15 : (tqtint(rliteral15) = 4)
+
+logic rliteral16 : t3
+
+axiom rliteral_axiom16 : (tqtint3(rliteral16) = 5154883667)
+
+logic rliteral17 : t
+
+axiom rliteral_axiom17 : (tqtint(rliteral17) = 48)
+
+ (* File "skein.adb", line 640, characters 0-0 *)
+goal WP_parameter_def :
+  (forall ctx__split_fields:u64. forall ctx__split_fields1:u32.
+  forall ctx__split_fields2:u16. forall ctx__split_fields3:u7.
+  forall ctx__split_fields4:bool. forall ctx__split_fields5:u6.
+  forall ctx__split_fields6:bool. forall ctx__split_fields7:bool.
+  forall ctx__split_fields8:hash_bit_length. forall ctx__split_fields9:u64.
+  forall ctx__split_fields10:(t3,u64) farray.
+  forall ctx__split_fields11:(t3,byte) farray. forall cfg:(t3,u64) farray.
+  forall o:hash_bit_length. forall o1:u64. forall o2:u32. forall o3:u16.
+  forall o4:u7. forall o5:bool. forall o6:u6. forall o7:bool. forall o8:bool.
+  forall o9:hash_bit_length. forall o10:u64. forall o11:u64. forall o12:u32.
+  forall o13:u16. forall o14:u7. forall o15:bool. forall o16:u6.
+  forall o17:bool. forall o18:bool. forall o19:hash_bit_length.
+  forall o20:u64. forall o21:u64. forall o22:u32. forall o23:u16.
+  forall o24:u7. forall o25:bool. forall o26:u6. forall o27:bool.
+  forall o28:bool. forall o29:hash_bit_length. forall o30:u64.
+  forall o31:(t3,u64) farray. forall o32:(t3,byte) farray.
+  forall temp___1497:u64. forall temp___14971:u32. forall temp___14972:u16.
+  forall temp___14973:u7. forall temp___14974:bool. forall temp___14975:u6.
+  forall temp___14976:bool. forall temp___14977:bool.
+  forall temp___14978:hash_bit_length. forall temp___14979:u64.
+  forall temp___149710:(t3,u64) farray.
+  forall temp___149711:(t3,byte) farray. forall o33:u6. forall o34:u7.
+  forall o35:u16. forall o36:u32. forall o37:u64. forall o38:u64.
+  forall o39:u32. forall o40:u16. forall o41:u7. forall o42:bool.
+  forall o43:u6. forall o44:bool. forall o45:bool. forall o46:u64.
+  forall o47:u32. forall o48:u16. forall o49:u7. forall o50:bool.
+  forall o51:u6. forall o52:bool. forall o53:bool. forall o54:u64.
+  forall o55:u32. forall o56:u16. forall o57:u7. forall o58:bool.
+  forall o59:u6. forall o60:bool. forall o61:bool.
+  forall o62:hash_bit_length. forall o63:u64. forall o64:u64. forall o65:u32.
+  forall o66:u16. forall o67:u7. forall o68:bool. forall o69:u6.
+  forall o70:bool. forall o71:bool. forall o72:hash_bit_length.
+  forall o73:u64. forall o74:u64. forall o75:u32. forall o76:u16.
+  forall o77:u7. forall o78:bool. forall o79:u6. forall o80:bool.
+  forall o81:bool. forall o82:hash_bit_length. forall o83:u64.
+  forall o84:(t3,u64) farray. forall o85:(t3,byte) farray.
+  forall temp___1500:u64. forall temp___15001:u32. forall temp___15002:u16.
+  forall temp___15003:u7. forall temp___15004:bool. forall temp___15005:u6.
+  forall temp___15006:bool. forall temp___15007:bool.
+  forall temp___15008:hash_bit_length. forall temp___15009:u64.
+  forall temp___150010:(t3,u64) farray.
+  forall temp___150011:(t3,byte) farray. forall o86:u64.
+  forall o87:us_split_fields2. forall o88:us_rep1.
+  forall o89:us_split_fields4. forall temp___1503:us_rep2. forall o90:t3.
+  forall o91:t3. forall o92:t3. forall o93:(t3,u64) farray.
+  forall o94:(t3,byte) farray. forall o95:us_t. forall o96:u6. forall o97:u7.
+  forall o98:u16. forall o99:u32. forall o100:u64.
+  forall o101:us_split_fields. forall o102:us_rep.
+  forall o103:us_split_fields2. forall o104:us_rep1.
+  forall o105:us_split_fields4. forall temp___1519:us_rep2. forall o106:u64.
+  forall o107:us_split_fields2. forall o108:us_rep1.
+  forall o109:us_split_fields4. forall temp___1522:us_rep2.
+  forall result:us_split_fields__ref2.
+  forall ctx__split_fields12:us_split_fields4.
+  forall result1:us_split_fields__ref2.
+  forall ctx__split_fields13:us_split_fields4.
+  forall result2:us_split_fields__ref2.
+  forall ctx__split_fields14:us_split_fields4.
+  forall result3:us_split_fields__ref2.
+  forall ctx__split_fields15:us_split_fields4. forall result4:map__ref1.
+  forall cfg1:(t3,u64) farray. forall result5:us_split_fields__ref2.
+  forall ctx__split_fields16:us_split_fields4.
+  forall ctx__split_fields17:us_split_fields4.
+  forall result6:us_split_fields__ref2.
+  forall ctx__split_fields18:us_split_fields4.
+  forall result7:us_split_fields__ref2.
+  forall ctx__split_fields19:us_split_fields4.
+  forall ctx__split_fields20:us_split_fields__ref2. forall cfg2:map__ref1.
+  forall ctx__split_fields21:us_split_fields4. forall cfg3:(t3,u64) farray.
+  ((ult3(to_rep3(last(mk(rliteral, rliteral4))), rliteral11) and
+  (((((null_context_header = null_skein_512_context) and
   ((null_context_header1 = null_skein_512_context1) and
   ((null_context_header2 = null_skein_512_context2) and
   ((null_context_header3 = null_skein_512_context3) and
@@ -4353,312 +3408,191 @@ axiom H1 : ((((null_context_header = null_skein_512_context) and
   (null_context_header7 = null_skein_512_context7)))))))) and
   ((null_context_header8 = null_skein_512_context8) and
   (null_context_header9 = null_skein_512_context9))) and
-  ((temp___151(of_int3(0)) = null_skein_512_context10) and
-  (temp___155(of_int(0)) = null_skein_512_context11)))
-
-axiom H2 : ult3(to_rep3(last(mk(of_int3(0), of_int3(63)))),
-  of_int3(18446744073709551615))
-
-axiom H3 : in_range2(hashbitlen)
-
-axiom H4 : (((((((result = ctx__split_fields) and
-  ((result1 = ctx__split_fields1) and ((result2 = ctx__split_fields2) and
-  ((result3 = ctx__split_fields3) and ((result4 = ctx__split_fields4) and
-  ((result5 = ctx__split_fields5) and ((result6 = ctx__split_fields6) and
-  (result7 = ctx__split_fields7)))))))) and
-  ((result8 = ctx__split_fields8) and (result9 = ctx__split_fields9))) and
-  ((result10 = ctx__split_fields10) and
-  (result11 = ctx__split_fields11))) and
-  ((((ctx__split_fields12 = null_skein_512_context) and
-  ((ctx__split_fields13 = null_skein_512_context1) and
-  ((ctx__split_fields14 = null_skein_512_context2) and
-  ((ctx__split_fields15 = null_skein_512_context3) and
-  ((ctx__split_fields16 = null_skein_512_context4) and
-  ((ctx__split_fields17 = null_skein_512_context5) and
-  ((ctx__split_fields18 = null_skein_512_context6) and
-  (ctx__split_fields19 = null_skein_512_context7)))))))) and
-  ((ctx__split_fields20 = null_skein_512_context8) and
-  (ctx__split_fields21 = null_skein_512_context9))) and
-  ((ctx__split_fields22 = null_skein_512_context10) and
-  (ctx__split_fields23 = null_skein_512_context11)))) and
-  (((((((to_rep5(o) = hashbitlen) and (((ctx__split_fields12 = o1) and
-  ((ctx__split_fields13 = o2) and ((ctx__split_fields14 = o3) and
-  ((ctx__split_fields15 = o4) and ((ctx__split_fields16 = o5) and
-  ((ctx__split_fields17 = o6) and ((ctx__split_fields18 = o7) and
-  (ctx__split_fields19 = o8)))))))) and ((o = o9) and
-  (ctx__split_fields21 = o10)))) and (((o11 = o1) and ((o12 = o2) and
-  ((o13 = o3) and ((o14 = o4) and ((o15 = o5) and ((o16 = o6) and
-  ((o17 = o7) and (o18 = o8)))))))) and ((o19 = o9) and (o20 = o10)))) and
-  ((((o21 = o11) and ((o22 = o12) and ((o23 = o13) and ((o24 = o14) and
-  ((o25 = o15) and ((o26 = o16) and ((o27 = o17) and (o28 = o18)))))))) and
-  ((o29 = o19) and (o30 = o20))) and ((ctx__split_fields22 = o31) and
-  (ctx__split_fields23 = o32)))) and ((((temp___1338 = o21) and
-  ((temp___13381 = o22) and ((temp___13382 = o23) and
-  ((temp___13383 = o24) and ((temp___13384 = o25) and
-  ((temp___13385 = o26) and ((temp___13386 = o27) and
-  (temp___13387 = o28)))))))) and ((temp___13388 = o29) and
-  (temp___13389 = o30))) and ((temp___133810 = o31) and
-  (temp___133811 = o32)))) and (((((result12 = ctx__split_fields12) and
-  ((result13 = ctx__split_fields13) and ((result14 = ctx__split_fields14) and
-  ((result15 = ctx__split_fields15) and ((result16 = ctx__split_fields16) and
-  ((result17 = ctx__split_fields17) and ((result18 = ctx__split_fields18) and
-  (result19 = ctx__split_fields19)))))))) and
-  ((result20 = ctx__split_fields20) and
-  (result21 = ctx__split_fields21))) and
-  ((result22 = ctx__split_fields22) and
-  (result23 = ctx__split_fields23))) and
-  ((((ctx__split_fields24 = temp___1338) and
-  ((ctx__split_fields25 = temp___13381) and
-  ((ctx__split_fields26 = temp___13382) and
-  ((ctx__split_fields27 = temp___13383) and
-  ((ctx__split_fields28 = temp___13384) and
-  ((ctx__split_fields29 = temp___13385) and
-  ((ctx__split_fields30 = temp___13386) and
-  (ctx__split_fields31 = temp___13387)))))))) and
-  ((ctx__split_fields32 = temp___13388) and
-  (ctx__split_fields33 = temp___13389))) and
-  ((ctx__split_fields34 = temp___133810) and
-  (ctx__split_fields35 = temp___133811))))) and (in_range7(c222b) and
-  (((((((((to_rep7(o33) = of_int(4)) and ((to_rep6(o34) = of_int(0)) and
-  ((to_rep(o35) = of_int1(0)) and ((to_rep1(o36) = of_int2(0)) and
-  ((to_rep2(o37) = of_int3(0)) and ((o38 = o37) and ((o39 = o36) and
-  ((o40 = o35) and ((o41 = o34) and ((o42 = of_int4(0)) and ((o43 = o33) and
-  ((o44 = of_int4(1)) and (o45 = of_int4(1)))))))))))))) and ((o46 = o38) and
-  ((o47 = o39) and ((o48 = o40) and ((o49 = o41) and ((o50 = o42) and
-  ((o51 = o43) and ((o52 = o44) and (o53 = o45))))))))) and (((o54 = o46) and
-  ((o55 = o47) and ((o56 = o48) and ((o57 = o49) and ((o58 = o50) and
-  ((o59 = o51) and ((o60 = o52) and (o61 = o53)))))))) and
-  ((o62 = ctx__split_fields32) and (o63 = ctx__split_fields33)))) and
+  ((temp___173(rliteral) = null_skein_512_context10) and
+  (temp___177(rliteral5) = null_skein_512_context11))) and
+  (ult3(to_rep3(last(mk(rliteral, rliteral4))), rliteral11) and
+  (in_range2(hashbitlen) and ((((result = { us_split_fields__content2 = {
+  rec__skein__skein_512_context__h = { us_split_fields3 = {
+  rec__skein__context_header__tweak_words = { us_split_fields1 = {
+  rec__skein__tweak_value__byte_count_lsb = ctx__split_fields;
+  rec__skein__tweak_value__byte_count_msb = ctx__split_fields1;
+  rec__skein__tweak_value__reserved = ctx__split_fields2;
+  rec__skein__tweak_value__tree_level = ctx__split_fields3;
+  rec__skein__tweak_value__bit_pad = ctx__split_fields4;
+  rec__skein__tweak_value__field_type = ctx__split_fields5;
+  rec__skein__tweak_value__first_block = ctx__split_fields6;
+  rec__skein__tweak_value__final_block = ctx__split_fields7 } };
+  rec__skein__context_header__hash_bit_len = ctx__split_fields8;
+  rec__skein__context_header__byte_count = ctx__split_fields9 } };
+  rec__skein__skein_512_context__x = ctx__split_fields10;
+  rec__skein__skein_512_context__b = ctx__split_fields11 } }) and
+  (ctx__split_fields12 = { rec__skein__skein_512_context__h = {
+  us_split_fields3 = { rec__skein__context_header__tweak_words = {
+  us_split_fields1 = { rec__skein__tweak_value__byte_count_lsb =
+  null_skein_512_context; rec__skein__tweak_value__byte_count_msb =
+  null_skein_512_context1; rec__skein__tweak_value__reserved =
+  null_skein_512_context2; rec__skein__tweak_value__tree_level =
+  null_skein_512_context3; rec__skein__tweak_value__bit_pad =
+  null_skein_512_context4; rec__skein__tweak_value__field_type =
+  null_skein_512_context5; rec__skein__tweak_value__first_block =
+  null_skein_512_context6; rec__skein__tweak_value__final_block =
+  null_skein_512_context7 } }; rec__skein__context_header__hash_bit_len =
+  null_skein_512_context8; rec__skein__context_header__byte_count =
+  null_skein_512_context9 } }; rec__skein__skein_512_context__x =
+  null_skein_512_context10; rec__skein__skein_512_context__b =
+  null_skein_512_context11 })) and (((((((to_rep5(o) = hashbitlen) and
+  (((((ctx__split_fields12).rec__skein__skein_512_context__h).us_split_fields3).rec__skein__context_header__tweak_words = {
+  us_split_fields1 = { rec__skein__tweak_value__byte_count_lsb = o1;
+  rec__skein__tweak_value__byte_count_msb = o2;
+  rec__skein__tweak_value__reserved = o3;
+  rec__skein__tweak_value__tree_level = o4;
+  rec__skein__tweak_value__bit_pad = o5;
+  rec__skein__tweak_value__field_type = o6;
+  rec__skein__tweak_value__first_block = o7;
+  rec__skein__tweak_value__final_block = o8 } }) and ((o = o9) and
+  ((((ctx__split_fields12).rec__skein__skein_512_context__h).us_split_fields3).rec__skein__context_header__byte_count = o10)))) and
+  (((o11 = o1) and ((o12 = o2) and ((o13 = o3) and ((o14 = o4) and
+  ((o15 = o5) and ((o16 = o6) and ((o17 = o7) and (o18 = o8)))))))) and
+  ((o19 = o9) and (o20 = o10)))) and ((((o21 = o11) and ((o22 = o12) and
+  ((o23 = o13) and ((o24 = o14) and ((o25 = o15) and ((o26 = o16) and
+  ((o27 = o17) and (o28 = o18)))))))) and ((o29 = o19) and (o30 = o20))) and
+  (((ctx__split_fields12).rec__skein__skein_512_context__x = o31) and
+  ((ctx__split_fields12).rec__skein__skein_512_context__b = o32)))) and
+  ((((temp___1497 = o21) and ((temp___14971 = o22) and
+  ((temp___14972 = o23) and ((temp___14973 = o24) and
+  ((temp___14974 = o25) and ((temp___14975 = o26) and
+  ((temp___14976 = o27) and (temp___14977 = o28)))))))) and
+  ((temp___14978 = o29) and (temp___14979 = o30))) and
+  ((temp___149710 = o31) and (temp___149711 = o32)))) and ((result1 = {
+  us_split_fields__content2 = ctx__split_fields12 }) and
+  (ctx__split_fields13 = { rec__skein__skein_512_context__h = {
+  us_split_fields3 = { rec__skein__context_header__tweak_words = {
+  us_split_fields1 = { rec__skein__tweak_value__byte_count_lsb = temp___1497;
+  rec__skein__tweak_value__byte_count_msb = temp___14971;
+  rec__skein__tweak_value__reserved = temp___14972;
+  rec__skein__tweak_value__tree_level = temp___14973;
+  rec__skein__tweak_value__bit_pad = temp___14974;
+  rec__skein__tweak_value__field_type = temp___14975;
+  rec__skein__tweak_value__first_block = temp___14976;
+  rec__skein__tweak_value__final_block = temp___14977 } };
+  rec__skein__context_header__hash_bit_len = temp___14978;
+  rec__skein__context_header__byte_count = temp___14979 } };
+  rec__skein__skein_512_context__x = temp___149710;
+  rec__skein__skein_512_context__b = temp___149711 }))) and
+  (in_range7(c222b) and (((((((((to_rep7(o33) = rliteral15) and
+  ((to_rep6(o34) = rliteral5) and ((to_rep(o35) = rliteral14) and
+  ((to_rep1(o36) = rliteral13) and ((to_rep2(o37) = rliteral) and
+  ((o37 = o38) and ((o36 = o39) and ((o35 = o40) and ((o34 = o41) and
+  ((of_int4(0) = o42) and ((o33 = o43) and ((of_int4(1) = o44) and
+  (of_int4(1) = o45))))))))))))) and ((o46 = o38) and ((o47 = o39) and
+  ((o48 = o40) and ((o49 = o41) and ((o50 = o42) and ((o51 = o43) and
+  ((o52 = o44) and (o53 = o45))))))))) and (((o54 = o46) and ((o55 = o47) and
+  ((o56 = o48) and ((o57 = o49) and ((o58 = o50) and ((o59 = o51) and
+  ((o60 = o52) and (o61 = o53)))))))) and
+  (((((ctx__split_fields13).rec__skein__skein_512_context__h).us_split_fields3).rec__skein__context_header__hash_bit_len = o62) and
+  ((((ctx__split_fields13).rec__skein__skein_512_context__h).us_split_fields3).rec__skein__context_header__byte_count = o63)))) and
   (((o64 = o54) and ((o65 = o55) and ((o66 = o56) and ((o67 = o57) and
   ((o68 = o58) and ((o69 = o59) and ((o70 = o60) and (o71 = o61)))))))) and
   ((o72 = o62) and (o73 = o63)))) and ((((o74 = o64) and ((o75 = o65) and
   ((o76 = o66) and ((o77 = o67) and ((o78 = o68) and ((o79 = o69) and
   ((o80 = o70) and (o81 = o71)))))))) and ((o82 = o72) and (o83 = o73))) and
-  ((o84 = ctx__split_fields34) and (o85 = ctx__split_fields35)))) and
-  ((((temp___1341 = o74) and ((temp___13411 = o75) and
-  ((temp___13412 = o76) and ((temp___13413 = o77) and
-  ((temp___13414 = o78) and ((temp___13415 = o79) and
-  ((temp___13416 = o80) and (temp___13417 = o81)))))))) and
-  ((temp___13418 = o82) and (temp___13419 = o83))) and
-  ((temp___134110 = o84) and (temp___134111 = o85)))) and
-  (((((result24 = ctx__split_fields24) and
-  ((result25 = ctx__split_fields25) and ((result26 = ctx__split_fields26) and
-  ((result27 = ctx__split_fields27) and ((result28 = ctx__split_fields28) and
-  ((result29 = ctx__split_fields29) and ((result30 = ctx__split_fields30) and
-  (result31 = ctx__split_fields31)))))))) and
-  ((result32 = ctx__split_fields32) and
-  (result33 = ctx__split_fields33))) and
-  ((result34 = ctx__split_fields34) and
-  (result35 = ctx__split_fields35))) and
-  ((((ctx__split_fields36 = temp___1341) and
-  ((ctx__split_fields37 = temp___13411) and
-  ((ctx__split_fields38 = temp___13412) and
-  ((ctx__split_fields39 = temp___13413) and
-  ((ctx__split_fields40 = temp___13414) and
-  ((ctx__split_fields41 = temp___13415) and
-  ((ctx__split_fields42 = temp___13416) and
-  (ctx__split_fields43 = temp___13417)))))))) and
-  ((ctx__split_fields44 = temp___13418) and
-  (ctx__split_fields45 = temp___13419))) and
-  ((ctx__split_fields46 = temp___134110) and
-  (ctx__split_fields47 = temp___134111))))) and
-  (((((((to_rep2(o86) = of_int3(0)) and (((o87 = ctx__split_fields36) and
-  ((o88 = ctx__split_fields37) and ((o89 = ctx__split_fields38) and
-  ((o90 = ctx__split_fields39) and ((o91 = ctx__split_fields40) and
-  ((o92 = ctx__split_fields41) and ((o93 = ctx__split_fields42) and
-  (o94 = ctx__split_fields43)))))))) and ((o95 = ctx__split_fields44) and
-  (o96 = o86)))) and (((o97 = o87) and ((o98 = o88) and ((o99 = o89) and
-  ((o100 = o90) and ((o101 = o91) and ((o102 = o92) and ((o103 = o93) and
-  (o104 = o94)))))))) and ((o105 = o95) and (o106 = o96)))) and
-  ((((o107 = o97) and ((o108 = o98) and ((o109 = o99) and ((o110 = o100) and
-  ((o111 = o101) and ((o112 = o102) and ((o113 = o103) and
-  (o114 = o104)))))))) and ((o115 = o105) and (o116 = o106))) and
-  ((o117 = ctx__split_fields46) and (o118 = ctx__split_fields47)))) and
-  ((((temp___1344 = o107) and ((temp___13441 = o108) and
-  ((temp___13442 = o109) and ((temp___13443 = o110) and
-  ((temp___13444 = o111) and ((temp___13445 = o112) and
-  ((temp___13446 = o113) and (temp___13447 = o114)))))))) and
-  ((temp___13448 = o115) and (temp___13449 = o116))) and
-  ((temp___134410 = o117) and (temp___134411 = o118)))) and
-  (((((result36 = ctx__split_fields36) and
-  ((result37 = ctx__split_fields37) and ((result38 = ctx__split_fields38) and
-  ((result39 = ctx__split_fields39) and ((result40 = ctx__split_fields40) and
-  ((result41 = ctx__split_fields41) and ((result42 = ctx__split_fields42) and
-  (result43 = ctx__split_fields43)))))))) and
-  ((result44 = ctx__split_fields44) and
-  (result45 = ctx__split_fields45))) and
-  ((result46 = ctx__split_fields46) and
-  (result47 = ctx__split_fields47))) and
-  ((((ctx__split_fields48 = temp___1344) and
-  ((ctx__split_fields49 = temp___13441) and
-  ((ctx__split_fields50 = temp___13442) and
-  ((ctx__split_fields51 = temp___13443) and
-  ((ctx__split_fields52 = temp___13444) and
-  ((ctx__split_fields53 = temp___13445) and
-  ((ctx__split_fields54 = temp___13446) and
-  (ctx__split_fields55 = temp___13447)))))))) and
-  ((ctx__split_fields56 = temp___13448) and
-  (ctx__split_fields57 = temp___13449))) and
-  ((ctx__split_fields58 = temp___134410) and
-  (ctx__split_fields59 = temp___134411))))) and
-  ((((o119 = to_littleendian(of_int3(0))) and
-  ((o120 = to_littleendian(hashbitlen)) and
-  ((o121 = to_littleendian(of_int3(5154883667))) and
-  (o122 = temp___1345(o121, o120, o119, of_int3(0)))))) and
-  ((result48 = cfg) and (cfg1 = o122))) and
-  ((((((result49 = ctx__split_fields48) and
-  ((result50 = ctx__split_fields49) and ((result51 = ctx__split_fields50) and
-  ((result52 = ctx__split_fields51) and ((result53 = ctx__split_fields52) and
-  ((result54 = ctx__split_fields53) and ((result55 = ctx__split_fields54) and
-  (result56 = ctx__split_fields55)))))))) and
-  ((result57 = ctx__split_fields56) and
-  (result58 = ctx__split_fields57))) and
-  ((result59 = ctx__split_fields58) and
-  (result60 = ctx__split_fields59))) and
-  ((((ctx__split_fields60 = ctx__split_fields48) and
-  ((ctx__split_fields61 = ctx__split_fields49) and
-  ((ctx__split_fields62 = ctx__split_fields50) and
-  ((ctx__split_fields63 = ctx__split_fields51) and
-  ((ctx__split_fields64 = ctx__split_fields52) and
-  ((ctx__split_fields65 = ctx__split_fields53) and
-  ((ctx__split_fields66 = ctx__split_fields54) and
-  (ctx__split_fields67 = ctx__split_fields55)))))))) and
-  ((ctx__split_fields68 = ctx__split_fields56) and
-  (ctx__split_fields69 = ctx__split_fields57))) and
-  ((ctx__split_fields70 = temp___1352(of_int3(0))) and
-  (ctx__split_fields71 = ctx__split_fields59)))) and
-  (((((o123 = skein_512_state_words_to_bytes(cfg1)) and
-  ult3(to_rep3(last(mk(of_int3(0), of_int3(63)))),
-  of_int3(18446744073709551615))) and ((o124 = o123) and
-  (o125 = mk(of_int3(0), of_int3(63))))) and
-  ((((in_range2(to_rep5(ctx__split_fields80)) and
-  (to_rep5(ctx__split_fields80) = to_rep5(ctx__split_fields68))) and
-  in_range3(to_rep2(ctx__split_fields81))) and
-  (to_rep2(ctx__split_fields81) = to_rep2(ctx__split_fields69))) and
-  ult3(to_rep3(last(mk(of_int3(0), of_int3(63)))),
-  of_int3(18446744073709551615)))) and (in_range7(c231b) and
-  (((((((((to_rep7(o126) = of_int(48)) and ((to_rep6(o127) = of_int(0)) and
-  ((to_rep(o128) = of_int1(0)) and ((to_rep1(o129) = of_int2(0)) and
-  ((to_rep2(o130) = of_int3(0)) and ((o131 = o130) and ((o132 = o129) and
-  ((o133 = o128) and ((o134 = o127) and ((o135 = of_int4(0)) and
-  ((o136 = o126) and ((o137 = of_int4(1)) and
-  (o138 = of_int4(0)))))))))))))) and ((o139 = o131) and ((o140 = o132) and
-  ((o141 = o133) and ((o142 = o134) and ((o143 = o135) and ((o144 = o136) and
-  ((o145 = o137) and (o146 = o138))))))))) and (((o147 = o139) and
-  ((o148 = o140) and ((o149 = o141) and ((o150 = o142) and ((o151 = o143) and
-  ((o152 = o144) and ((o153 = o145) and (o154 = o146)))))))) and
-  ((o155 = ctx__split_fields80) and (o156 = ctx__split_fields81)))) and
-  (((o157 = o147) and ((o158 = o148) and ((o159 = o149) and
-  ((o160 = o150) and ((o161 = o151) and ((o162 = o152) and ((o163 = o153) and
-  (o164 = o154)))))))) and ((o165 = o155) and (o166 = o156)))) and
-  ((((o167 = o157) and ((o168 = o158) and ((o169 = o159) and
-  ((o170 = o160) and ((o171 = o161) and ((o172 = o162) and ((o173 = o163) and
-  (o174 = o164)))))))) and ((o175 = o165) and (o176 = o166))) and
-  ((o177 = ctx__split_fields82) and (o178 = ctx__split_fields83)))) and
-  ((((temp___1360 = o167) and ((temp___13601 = o168) and
-  ((temp___13602 = o169) and ((temp___13603 = o170) and
-  ((temp___13604 = o171) and ((temp___13605 = o172) and
-  ((temp___13606 = o173) and (temp___13607 = o174)))))))) and
-  ((temp___13608 = o175) and (temp___13609 = o176))) and
-  ((temp___136010 = o177) and (temp___136011 = o178)))) and
-  (((((result61 = ctx__split_fields72) and
-  ((result62 = ctx__split_fields73) and ((result63 = ctx__split_fields74) and
-  ((result64 = ctx__split_fields75) and ((result65 = ctx__split_fields76) and
-  ((result66 = ctx__split_fields77) and ((result67 = ctx__split_fields78) and
-  (result68 = ctx__split_fields79)))))))) and
-  ((result69 = ctx__split_fields80) and
-  (result70 = ctx__split_fields81))) and
-  ((result71 = ctx__split_fields82) and
-  (result72 = ctx__split_fields83))) and
-  ((((ctx__split_fields84 = temp___1360) and
-  ((ctx__split_fields85 = temp___13601) and
-  ((ctx__split_fields86 = temp___13602) and
-  ((ctx__split_fields87 = temp___13603) and
-  ((ctx__split_fields88 = temp___13604) and
-  ((ctx__split_fields89 = temp___13605) and
-  ((ctx__split_fields90 = temp___13606) and
-  (ctx__split_fields91 = temp___13607)))))))) and
-  ((ctx__split_fields92 = temp___13608) and
-  (ctx__split_fields93 = temp___13609))) and
-  ((ctx__split_fields94 = temp___136010) and
-  (ctx__split_fields95 = temp___136011))))) and
-  ((((((to_rep2(o179) = of_int3(0)) and (((o180 = ctx__split_fields84) and
-  ((o181 = ctx__split_fields85) and ((o182 = ctx__split_fields86) and
-  ((o183 = ctx__split_fields87) and ((o184 = ctx__split_fields88) and
-  ((o185 = ctx__split_fields89) and ((o186 = ctx__split_fields90) and
-  (o187 = ctx__split_fields91)))))))) and ((o188 = ctx__split_fields92) and
-  (o189 = o179)))) and (((o190 = o180) and ((o191 = o181) and
-  ((o192 = o182) and ((o193 = o183) and ((o194 = o184) and ((o195 = o185) and
-  ((o196 = o186) and (o197 = o187)))))))) and ((o198 = o188) and
-  (o199 = o189)))) and ((((o200 = o190) and ((o201 = o191) and
-  ((o202 = o192) and ((o203 = o193) and ((o204 = o194) and ((o205 = o195) and
-  ((o206 = o196) and (o207 = o197)))))))) and ((o208 = o198) and
-  (o209 = o199))) and ((o210 = ctx__split_fields94) and
-  (o211 = ctx__split_fields95)))) and ((((temp___1363 = o200) and
-  ((temp___13631 = o201) and ((temp___13632 = o202) and
-  ((temp___13633 = o203) and ((temp___13634 = o204) and
-  ((temp___13635 = o205) and ((temp___13636 = o206) and
-  (temp___13637 = o207)))))))) and ((temp___13638 = o208) and
-  (temp___13639 = o209))) and ((temp___136310 = o210) and
-  (temp___136311 = o211)))) and (((((result73 = ctx__split_fields84) and
-  ((result74 = ctx__split_fields85) and ((result75 = ctx__split_fields86) and
-  ((result76 = ctx__split_fields87) and ((result77 = ctx__split_fields88) and
-  ((result78 = ctx__split_fields89) and ((result79 = ctx__split_fields90) and
-  (result80 = ctx__split_fields91)))))))) and
-  ((result81 = ctx__split_fields92) and
-  (result82 = ctx__split_fields93))) and
-  ((result83 = ctx__split_fields94) and
-  (result84 = ctx__split_fields95))) and
-  ((((ctx__split_fields96 = temp___1363) and
-  ((ctx__split_fields97 = temp___13631) and
-  ((ctx__split_fields98 = temp___13632) and
-  ((ctx__split_fields99 = temp___13633) and
-  ((ctx__split_fields100 = temp___13634) and
-  ((ctx__split_fields101 = temp___13635) and
-  ((ctx__split_fields102 = temp___13636) and
-  (ctx__split_fields103 = temp___13637)))))))) and
-  ((ctx__split_fields104 = temp___13638) and
-  (ctx__split_fields105 = temp___13639))) and
-  ((ctx__split_fields106 = temp___136310) and
-  (ctx__split_fields107 = temp___136311))))))))))))))) and
-  (((cfg2 = cfg1) and ((((ctx__split_fields108 = ctx__split_fields96) and
-  ((ctx__split_fields109 = ctx__split_fields97) and
-  ((ctx__split_fields110 = ctx__split_fields98) and
-  ((ctx__split_fields111 = ctx__split_fields99) and
-  ((ctx__split_fields112 = ctx__split_fields100) and
-  ((ctx__split_fields113 = ctx__split_fields101) and
-  ((ctx__split_fields114 = ctx__split_fields102) and
-  (ctx__split_fields115 = ctx__split_fields103)))))))) and
-  ((ctx__split_fields116 = ctx__split_fields104) and
-  (ctx__split_fields117 = ctx__split_fields105))) and
-  ((ctx__split_fields118 = ctx__split_fields106) and
-  (ctx__split_fields119 = ctx__split_fields107)))) and ((cfg3 = cfg1) and
-  ((((ctx__split_fields120 = ctx__split_fields96) and
-  ((ctx__split_fields121 = ctx__split_fields97) and
-  ((ctx__split_fields122 = ctx__split_fields98) and
-  ((ctx__split_fields123 = ctx__split_fields99) and
-  ((ctx__split_fields124 = ctx__split_fields100) and
-  ((ctx__split_fields125 = ctx__split_fields101) and
-  ((ctx__split_fields126 = ctx__split_fields102) and
-  (ctx__split_fields127 = ctx__split_fields103)))))))) and
-  ((ctx__split_fields128 = ctx__split_fields104) and
-  (ctx__split_fields129 = ctx__split_fields105))) and
-  ((ctx__split_fields130 = ctx__split_fields106) and
-  (ctx__split_fields131 = ctx__split_fields107))))))
-
- (* File "skein.ads", line 39, characters 0-0 *)
-goal WP_parameter_def : in_range2(hash_bit_len_of({ us_split_fields5 = {
-  rec__skein__skein_512_context__h = { us_split_fields3 = {
-  rec__skein__context_header__tweak_words = { us_split_fields1 = {
-  rec__skein__tweak_value__byte_count_lsb = ctx__split_fields108;
-  rec__skein__tweak_value__byte_count_msb = ctx__split_fields109;
-  rec__skein__tweak_value__reserved = ctx__split_fields110;
-  rec__skein__tweak_value__tree_level = ctx__split_fields111;
-  rec__skein__tweak_value__bit_pad = ctx__split_fields112;
-  rec__skein__tweak_value__field_type = ctx__split_fields113;
-  rec__skein__tweak_value__first_block = ctx__split_fields114;
-  rec__skein__tweak_value__final_block = ctx__split_fields115 } };
-  rec__skein__context_header__hash_bit_len = ctx__split_fields116;
-  rec__skein__context_header__byte_count = ctx__split_fields117 } };
-  rec__skein__skein_512_context__x = ctx__split_fields118;
-  rec__skein__skein_512_context__b = ctx__split_fields119 } }))
+  (((ctx__split_fields13).rec__skein__skein_512_context__x = o84) and
+  ((ctx__split_fields13).rec__skein__skein_512_context__b = o85)))) and
+  ((((temp___1500 = o74) and ((temp___15001 = o75) and
+  ((temp___15002 = o76) and ((temp___15003 = o77) and
+  ((temp___15004 = o78) and ((temp___15005 = o79) and
+  ((temp___15006 = o80) and (temp___15007 = o81)))))))) and
+  ((temp___15008 = o82) and (temp___15009 = o83))) and
+  ((temp___150010 = o84) and (temp___150011 = o85)))) and ((result2 = {
+  us_split_fields__content2 = ctx__split_fields13 }) and
+  (ctx__split_fields14 = { rec__skein__skein_512_context__h = {
+  us_split_fields3 = { rec__skein__context_header__tweak_words = {
+  us_split_fields1 = { rec__skein__tweak_value__byte_count_lsb = temp___1500;
+  rec__skein__tweak_value__byte_count_msb = temp___15001;
+  rec__skein__tweak_value__reserved = temp___15002;
+  rec__skein__tweak_value__tree_level = temp___15003;
+  rec__skein__tweak_value__bit_pad = temp___15004;
+  rec__skein__tweak_value__field_type = temp___15005;
+  rec__skein__tweak_value__first_block = temp___15006;
+  rec__skein__tweak_value__final_block = temp___15007 } };
+  rec__skein__context_header__hash_bit_len = temp___15008;
+  rec__skein__context_header__byte_count = temp___15009 } };
+  rec__skein__skein_512_context__x = temp___150010;
+  rec__skein__skein_512_context__b = temp___150011 }))) and
+  (((((((to_rep2(o86) = rliteral) and (o87 = {
+  rec__skein__context_header__tweak_words =
+  (((ctx__split_fields14).rec__skein__skein_512_context__h).us_split_fields3).rec__skein__context_header__tweak_words;
+  rec__skein__context_header__hash_bit_len =
+  (((ctx__split_fields14).rec__skein__skein_512_context__h).us_split_fields3).rec__skein__context_header__hash_bit_len;
+  rec__skein__context_header__byte_count = o86 })) and (o88 = {
+  us_split_fields3 = o87 })) and (o89 = { rec__skein__skein_512_context__h =
+  o88; rec__skein__skein_512_context__x =
+  (ctx__split_fields14).rec__skein__skein_512_context__x;
+  rec__skein__skein_512_context__b =
+  (ctx__split_fields14).rec__skein__skein_512_context__b })) and
+  (temp___1503 = { us_split_fields5 = o89 })) and ((result3 = {
+  us_split_fields__content2 = ctx__split_fields14 }) and
+  (ctx__split_fields15 = (temp___1503).us_split_fields5))) and
+  ((((o90 = to_littleendian(rliteral)) and
+  ((o91 = to_littleendian(hashbitlen)) and
+  ((o92 = to_littleendian(rliteral16)) and (o93 = temp___1504(o92, o91, o90,
+  rliteral))))) and ((result4 = { map__content1 = cfg }) and
+  (cfg1 = o93))) and (((result5 = { us_split_fields__content2 =
+  ctx__split_fields15 }) and (ctx__split_fields16 = {
+  rec__skein__skein_512_context__h =
+  (ctx__split_fields15).rec__skein__skein_512_context__h;
+  rec__skein__skein_512_context__x = temp___1511(rliteral);
+  rec__skein__skein_512_context__b =
+  (ctx__split_fields15).rec__skein__skein_512_context__b })) and
+  (((((o94 = skein_512_state_words_to_bytes(cfg1)) and
+  ult3(to_rep3(last(mk(rliteral, rliteral4))), rliteral11)) and (o95 = {
+  elts = o94; rt = mk(rliteral, rliteral4) })) and
+  ((((in_range2(to_rep5((((ctx__split_fields17).rec__skein__skein_512_context__h).us_split_fields3).rec__skein__context_header__hash_bit_len)) and
+  (to_rep5((((ctx__split_fields17).rec__skein__skein_512_context__h).us_split_fields3).rec__skein__context_header__hash_bit_len) = to_rep5((((ctx__split_fields16).rec__skein__skein_512_context__h).us_split_fields3).rec__skein__context_header__hash_bit_len))) and
+  in_range3(to_rep2((((ctx__split_fields17).rec__skein__skein_512_context__h).us_split_fields3).rec__skein__context_header__byte_count))) and
+  (to_rep2((((ctx__split_fields17).rec__skein__skein_512_context__h).us_split_fields3).rec__skein__context_header__byte_count) = to_rep2((((ctx__split_fields16).rec__skein__skein_512_context__h).us_split_fields3).rec__skein__context_header__byte_count))) and
+  ult3(to_rep3(last(mk(rliteral, rliteral4))), rliteral11))) and
+  (in_range7(c231b) and (((((((((to_rep7(o96) = rliteral17) and
+  ((to_rep6(o97) = rliteral5) and ((to_rep(o98) = rliteral14) and
+  ((to_rep1(o99) = rliteral13) and ((to_rep2(o100) = rliteral) and (o101 = {
+  rec__skein__tweak_value__byte_count_lsb = o100;
+  rec__skein__tweak_value__byte_count_msb = o99;
+  rec__skein__tweak_value__reserved = o98;
+  rec__skein__tweak_value__tree_level = o97;
+  rec__skein__tweak_value__bit_pad = of_int4(0);
+  rec__skein__tweak_value__field_type = o96;
+  rec__skein__tweak_value__first_block = of_int4(1);
+  rec__skein__tweak_value__final_block = of_int4(0) })))))) and (o102 = {
+  us_split_fields1 = o101 })) and (o103 = {
+  rec__skein__context_header__tweak_words = o102;
+  rec__skein__context_header__hash_bit_len =
+  (((ctx__split_fields17).rec__skein__skein_512_context__h).us_split_fields3).rec__skein__context_header__hash_bit_len;
+  rec__skein__context_header__byte_count =
+  (((ctx__split_fields17).rec__skein__skein_512_context__h).us_split_fields3).rec__skein__context_header__byte_count
+  })) and (o104 = { us_split_fields3 = o103 })) and (o105 = {
+  rec__skein__skein_512_context__h = o104; rec__skein__skein_512_context__x =
+  (ctx__split_fields17).rec__skein__skein_512_context__x;
+  rec__skein__skein_512_context__b =
+  (ctx__split_fields17).rec__skein__skein_512_context__b })) and
+  (temp___1519 = { us_split_fields5 = o105 })) and ((result6 = {
+  us_split_fields__content2 = ctx__split_fields17 }) and
+  (ctx__split_fields18 = (temp___1519).us_split_fields5))) and
+  ((((((to_rep2(o106) = rliteral) and (o107 = {
+  rec__skein__context_header__tweak_words =
+  (((ctx__split_fields18).rec__skein__skein_512_context__h).us_split_fields3).rec__skein__context_header__tweak_words;
+  rec__skein__context_header__hash_bit_len =
+  (((ctx__split_fields18).rec__skein__skein_512_context__h).us_split_fields3).rec__skein__context_header__hash_bit_len;
+  rec__skein__context_header__byte_count = o106 })) and (o108 = {
+  us_split_fields3 = o107 })) and (o109 = {
+  rec__skein__skein_512_context__h = o108; rec__skein__skein_512_context__x =
+  (ctx__split_fields18).rec__skein__skein_512_context__x;
+  rec__skein__skein_512_context__b =
+  (ctx__split_fields18).rec__skein__skein_512_context__b })) and
+  (temp___1522 = { us_split_fields5 = o109 })) and ((result7 = {
+  us_split_fields__content2 = ctx__split_fields18 }) and
+  (ctx__split_fields19 = (temp___1522).us_split_fields5))))))))))))) and
+  (((cfg2 = { map__content1 = cfg1 }) and (ctx__split_fields20 = {
+  us_split_fields__content2 = ctx__split_fields19 })) and ((cfg3 = cfg1) and
+  (ctx__split_fields21 = ctx__split_fields19)))))))) ->
+  in_range2(hash_bit_len_of({ us_split_fields5 =
+  (ctx__split_fields20).us_split_fields__content2 }))))

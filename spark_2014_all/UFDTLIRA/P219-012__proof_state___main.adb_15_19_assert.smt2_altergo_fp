@@ -142,15 +142,8 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 axiom x__def_axiom : (x = f(void))
 
-logic main__x__assume : int
-
-axiom H : ((main__x__assume = f(void)) and in_range1(main__x__assume))
-
-axiom H1 : (main__x__assume = x)
-
-axiom H2 : in_range(x)
-
-axiom H3 : (x <  9)
-
  (* File "main.adb", line 5, characters 0-0 *)
-goal WP_parameter_def : (x <  10)
+goal WP_parameter_def :
+  (forall main__x__assume:int. ((((main__x__assume = f(void)) and
+  in_range1(main__x__assume)) and (main__x__assume = x)) -> (in_range(x) ->
+  ((x <  9) -> (x <  10)))))

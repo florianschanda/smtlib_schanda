@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -646,105 +646,16 @@ type t17b__ref = { t17b__content : us_rep
 
 function t17b__ref___projection(a: t17b__ref) : us_rep = (a).t17b__content
 
-logic g__split_discrs : status
-
-logic o : status
-
-logic o1 : natural
-
-logic o2 : natural
-
-logic o3 : natural
-
-logic o4 : natural
-
-logic o5 : bool
-
-logic o6 : status
-
-logic temp___180 : status
-
-logic temp___1801 : natural
-
-logic temp___1802 : natural
-
-logic temp___1803 : bool
-
-logic temp___1804 : bool
-
-logic o7 : status
-
-logic o8 : natural
-
-logic o9 : natural
-
-logic o10 : natural
-
-logic o11 : bool
-
-logic o12 : status
-
-logic temp___183 : status
-
-logic temp___1831 : natural
-
-logic temp___1832 : natural
-
-logic temp___1833 : bool
-
-logic temp___1834 : bool
-
-logic o13 : status
-
-logic o14 : natural
-
-logic o15 : natural
-
-logic o16 : natural
-
-logic o17 : bool
-
-logic o18 : status
-
-logic temp___186 : status
-
-logic temp___1861 : natural
-
-logic temp___1862 : natural
-
-logic temp___1863 : bool
-
-logic temp___1864 : bool
-
-axiom H : (g__attr__constrained = false)
-
-axiom H1 : (to_rep1(g__split_discrs) = 0)
-
-axiom H2 : (to_rep(o1) = 0)
-
-axiom H3 : (to_rep(o2) = 0)
-
-axiom H4 : (o2 = o3)
-
-axiom H5 : (o1 = o4)
-
-axiom H6 : (true = o5)
-
-axiom H7 : (to_rep1(o) = 0)
-
-axiom H8 : (o = o6)
-
-axiom H9 : (temp___180 = o6)
-
-axiom H10 : (temp___1801 = o3)
-
-axiom H11 : (temp___1802 = o4)
-
-axiom H12 : (temp___1803 = o5)
-
-axiom H13 : (true = temp___1804)
-
-axiom H14 : (g__attr__constrained = true)
-
  (* File "definite.adb", line 58, characters 0-0 *)
-goal WP_parameter_def : (temp___180 = g__split_discrs)
+goal WP_parameter_def :
+  (forall g__split_discrs:status. forall o:status. forall o1:natural.
+  forall o2:natural. forall o3:natural. forall o4:natural. forall o5:bool.
+  forall o6:status. forall temp___204:status. forall temp___2041:natural.
+  forall temp___2042:natural. forall temp___2043:bool.
+  forall temp___2044:bool. ((g__attr__constrained = false) ->
+  ((to_rep1(g__split_discrs) = 0) -> ((((to_rep(o1) = 0) and
+  ((to_rep(o2) = 0) and ((o2 = o3) and ((o1 = o4) and (true = o5))))) and
+  (((to_rep1(o) = 0) and (o = o6)) and ((temp___204 = o6) and
+  (((temp___2041 = o3) and ((temp___2042 = o4) and (temp___2043 = o5))) and
+  (true = temp___2044))))) -> ((g__attr__constrained = true) ->
+  (temp___204 = g__split_discrs))))))

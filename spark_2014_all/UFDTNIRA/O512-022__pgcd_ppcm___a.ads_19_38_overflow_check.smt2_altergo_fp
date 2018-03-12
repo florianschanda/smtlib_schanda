@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -292,148 +292,38 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic r : int
-
-logic a__ppcm__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : bool
-
-logic o13 : int
-
-logic o14 : int
-
-logic o15 : int
-
-logic o16 : int
-
-logic o17 : bool
-
-logic o18 : bool
-
-logic result : int
-
-logic r1 : int
-
-logic result1 : int
-
-logic r2 : int
-
-logic result2 : int
-
-logic a__ppcm__result1 : int
-
-logic a__ppcm__result2 : int
-
-logic a__ppcm__result3 : int
-
-logic r3 : int
-
-logic a__ppcm__result4 : int
-
-logic r4 : int
-
-logic a__ppcm__result5 : int
-
-logic result3 : bool
-
-axiom H : in_range1(a)
-
-axiom H1 : in_range1(b)
-
-axiom H2 : ((not (a = (- 2147483648))) and ((not (b = (- 2147483648))) and
-  (abs_int((a * b)) <= 2147483647)))
-
-axiom H3 : ((o3 = pgcd(a, b)) and (in_range1(o3) and (((o3 = 0) or
-  ((1 <= o3) and (o3 <= abs_int(a)))) or ((1 <= o3) and
-  (o3 <= abs_int(b))))))
-
-axiom H4 : (result = r)
-
-axiom H5 : (r1 = o3)
-
-axiom H6 : in_range1(r1)
-
-axiom H7 : ((not (r1 = 0)) -> ((o4 = (a * b)) and in_range1((a * b))))
-
-axiom H8 : ((not (r1 = 0)) -> (o5 = comp_div(o4,r1)))
-
-axiom H9 : ((not (r1 = 0)) -> ((o6 = o5) and in_range1(o5)))
-
-axiom H10 : ((not (r1 = 0)) -> (r1 = result1))
-
-axiom H11 : ((not (r1 = 0)) -> (r2 = o6))
-
-axiom H12 : ((r1 = 0) -> (r2 = r1))
-
-axiom H13 : (a__ppcm__result1 = a__ppcm__result2)
-
-axiom H14 : (a__ppcm__result3 = a__ppcm__result1)
-
-axiom H15 : ((o7 = abs_int(r2)) and in_range1(abs_int(r2)))
-
-axiom H16 : (result2 = a__ppcm__result)
-
-axiom H17 : (a__ppcm__result1 = o7)
-
-axiom H18 : (a__ppcm__result4 = a__ppcm__result2)
-
-axiom H19 : (r2 = r3)
-
-axiom H20 : (a__ppcm__result5 = a__ppcm__result3)
-
-axiom H21 : (r4 = r2)
-
-axiom H22 : ((a__ppcm__result4 = 0) -> (result3 = true))
-
-axiom H23 : ((not (a__ppcm__result4 = 0)) -> ((o14 = (a * b)) and
-  in_range1((a * b))))
-
-axiom H24 : ((not (a__ppcm__result4 = 0)) -> (o15 = abs_int(o14)))
-
-axiom H25 : ((not (a__ppcm__result4 = 0)) -> ((o16 = o15) and
-  in_range1(o15)))
-
-axiom H26 : ((not (a__ppcm__result4 = 0)) -> (((a__ppcm__result4 <= o16) ->
-  (o17 = true)) and ((not (a__ppcm__result4 <= o16)) -> (o17 = false))))
-
-axiom H27 : ((not (a__ppcm__result4 = 0)) -> ((o13 = abs_int(a)) and
-  in_range1(abs_int(a))))
-
-axiom H28 : ((not (a__ppcm__result4 = 0)) -> (((o13 <= a__ppcm__result4) ->
-  (o18 = true)) and ((not (o13 <= a__ppcm__result4)) -> (o18 = false))))
-
-axiom H29 : ((not (a__ppcm__result4 = 0)) -> (result3 = match_bool(o18, o17,
-  false)))
-
-axiom H30 : (not (result3 = true))
-
-axiom H31 : ((o9 = (a * b)) and in_range1((a * b)))
-
-axiom H32 : (o10 = abs_int(o9))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range1(o10)
+goal WP_parameter_def :
+  (forall r:int. forall a__ppcm__result:int. forall o:int. forall o1:int.
+  forall o2:int. forall o3:int. forall o4:int. forall o5:int. forall o6:int.
+  forall o7:int. forall o8:int. forall o9:int. forall o10:int.
+  forall o11:bool. forall o12:bool. forall result:int. forall r1:int.
+  forall result1:int. forall r2:int. forall result2:int.
+  forall a__ppcm__result1:int. forall a__ppcm__result2:int.
+  forall a__ppcm__result3:int. forall r3:int. forall a__ppcm__result4:int.
+  forall r4:int. forall a__ppcm__result5:int. forall result3:bool.
+  (in_range1(a) -> (in_range1(b) -> (((not (a = (- 2147483648))) and
+  ((not (b = (- 2147483648))) and (abs_int((a * b)) <= 2147483647))) ->
+  ((((((o = pgcd(a, b)) and (in_range1(o) and (((o = 0) or ((1 <= o) and
+  (o <= abs_int(a)))) or ((1 <= o) and (o <= abs_int(b)))))) and (({
+  int__content = result } = { int__content = r }) and (r1 = o))) and
+  (in_range1(r1) and ((((not (r1 = 0)) and (((((o1 = (a * b)) and
+  in_range1((a * b))) and (o2 = comp_div(o1,r1))) and ((o3 = o2) and
+  in_range1(o2))) and ((r1 = result1) and (r2 = o3)))) or ((r1 = 0) and
+  (r2 = r1))) and (((a__ppcm__result1 = a__ppcm__result2) and
+  (a__ppcm__result3 = a__ppcm__result1)) and (((o4 = abs_int(r2)) and
+  in_range1(abs_int(r2))) and (({ int__content = result2 } = { int__content =
+  a__ppcm__result }) and (a__ppcm__result1 = o4))))))) and ((({
+  int__content = a__ppcm__result4 } = { int__content = a__ppcm__result2
+  }) and (r2 = r3)) and ((a__ppcm__result5 = a__ppcm__result3) and
+  (r4 = r2)))) -> ((((a__ppcm__result4 = 0) and (result3 = true)) or
+  ((not (a__ppcm__result4 = 0)) and ((((((o8 = (a * b)) and
+  in_range1((a * b))) and (o9 = abs_int(o8))) and ((o10 = o9) and
+  in_range1(o9))) and (((a__ppcm__result4 <= o10) and (o11 = true)) or
+  ((not (a__ppcm__result4 <= o10)) and (o11 = false)))) and
+  ((((o7 = abs_int(a)) and in_range1(abs_int(a))) and
+  (((o7 <= a__ppcm__result4) and (o12 = true)) or
+  ((not (o7 <= a__ppcm__result4)) and (o12 = false)))) and
+  (result3 = match_bool(o12, o11, false)))))) -> ((not (result3 = true)) ->
+  ((((o5 = (a * b)) and in_range1((a * b))) and (o6 = abs_int(o5))) ->
+  in_range1(o6)))))))))

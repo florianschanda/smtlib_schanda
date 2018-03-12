@@ -325,203 +325,67 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x__split_fields : bool
-
-logic x__split_fields1 : unsigned_byte
-
-logic x__split_fields2 : unsigned_byte
-
-logic tmp : int
-
-logic o : unsigned_byte
-
-logic o1 : unsigned_byte
-
-logic o2 : unsigned_byte
-
-logic o3 : unsigned_byte
-
-logic o4 : unsigned_byte
-
-logic o5 : bool
-
-logic o6 : unsigned_byte
-
-logic o7 : unsigned_byte
-
-logic temp___355 : bool
-
-logic temp___3551 : unsigned_byte
-
-logic temp___3552 : unsigned_byte
-
-logic o8 : unsigned_byte
-
-logic o9 : unsigned_byte
-
-logic o10 : unsigned_byte
-
-logic o11 : unsigned_byte
-
-logic o12 : unsigned_byte
-
-logic o13 : bool
-
-logic o14 : unsigned_byte
-
-logic o15 : unsigned_byte
-
-logic temp___358 : bool
-
-logic temp___3581 : unsigned_byte
-
-logic temp___3582 : unsigned_byte
-
-logic x__split_fields3 : bool
-
-logic x__split_fields4 : unsigned_byte
-
-logic x__split_fields5 : unsigned_byte
-
-logic tmp1 : int
-
-logic result : int
-
-logic tmp2 : int
-
-logic result1 : bool
-
-logic result2 : unsigned_byte
-
-logic result3 : unsigned_byte
-
-logic x__split_fields6 : bool
-
-logic x__split_fields7 : unsigned_byte
-
-logic x__split_fields8 : unsigned_byte
-
-logic result4 : bool
-
-logic result5 : unsigned_byte
-
-logic result6 : unsigned_byte
-
-logic x__split_fields9 : bool
-
-logic x__split_fields10 : unsigned_byte
-
-logic x__split_fields11 : unsigned_byte
-
-logic x__split_fields12 : bool
-
-logic x__split_fields13 : unsigned_byte
-
-logic x__split_fields14 : unsigned_byte
-
-logic tmp3 : int
-
-logic x__split_fields15 : bool
-
-logic x__split_fields16 : unsigned_byte
-
-logic x__split_fields17 : unsigned_byte
-
-logic tmp4 : int
-
-axiom H : ((0 <= 255) -> in_range(tmp))
-
-axiom H1 : ((x__split_fields = true) -> (result = tmp))
-
-axiom H2 : ((x__split_fields = true) -> (tmp2 = to_rep(x__split_fields1)))
-
-axiom H3 : ((x__split_fields = true) ->
-  (to_rep(o) = to_rep(x__split_fields2)))
-
-axiom H4 : ((x__split_fields = true) -> (o = o1))
-
-axiom H5 : ((x__split_fields = true) -> (x__split_fields2 = o2))
-
-axiom H6 : ((x__split_fields = true) -> (o3 = o1))
-
-axiom H7 : ((x__split_fields = true) -> (o4 = o2))
-
-axiom H8 : ((x__split_fields = true) -> (x__split_fields = o5))
-
-axiom H9 : ((x__split_fields = true) -> (o6 = o3))
-
-axiom H10 : ((x__split_fields = true) -> (o7 = o4))
-
-axiom H11 : ((x__split_fields = true) -> (temp___355 = o5))
-
-axiom H12 : ((x__split_fields = true) -> (temp___3551 = o6))
-
-axiom H13 : ((x__split_fields = true) -> (temp___3552 = o7))
-
-axiom H14 : ((x__split_fields = true) -> ((result1 = x__split_fields) and
-  ((result2 = x__split_fields1) and (result3 = x__split_fields2))))
-
-axiom H15 : ((x__split_fields = true) -> ((x__split_fields6 = temp___355) and
-  ((x__split_fields7 = temp___3551) and (x__split_fields8 = temp___3552))))
-
-axiom H16 : ((x__split_fields = true) -> (to_rep(o8) = tmp2))
-
-axiom H17 : ((x__split_fields = true) -> (x__split_fields7 = o9))
-
-axiom H18 : ((x__split_fields = true) -> (o8 = o10))
-
-axiom H19 : ((x__split_fields = true) -> (o11 = o9))
-
-axiom H20 : ((x__split_fields = true) -> (o12 = o10))
-
-axiom H21 : ((x__split_fields = true) -> (x__split_fields6 = o13))
-
-axiom H22 : ((x__split_fields = true) -> (o14 = o11))
-
-axiom H23 : ((x__split_fields = true) -> (o15 = o12))
-
-axiom H24 : ((x__split_fields = true) -> ((temp___358 = o13) and
-  ((temp___3581 = o14) and (temp___3582 = o15))))
-
-axiom H25 : ((x__split_fields = true) -> ((result4 = x__split_fields6) and
-  ((result5 = x__split_fields7) and (result6 = x__split_fields8))))
-
-axiom H26 : ((x__split_fields = true) -> ((x__split_fields9 = temp___358) and
-  ((x__split_fields10 = temp___3581) and (x__split_fields11 = temp___3582))))
-
-axiom H27 : ((not (x__split_fields = true)) -> (tmp2 = tmp))
-
-axiom H28 : ((not (x__split_fields = true)) ->
-  ((x__split_fields9 = x__split_fields) and
-  ((x__split_fields10 = x__split_fields1) and
-  (x__split_fields11 = x__split_fields2))))
-
-axiom H29 : ((not (x__split_fields = true)) -> (tmp2 = tmp1))
-
-axiom H30 : ((not (x__split_fields = true)) ->
-  ((x__split_fields9 = x__split_fields3) and
-  ((x__split_fields10 = x__split_fields4) and
-  (x__split_fields11 = x__split_fields5))))
-
-axiom H31 : (tmp3 = tmp2)
-
-axiom H32 : ((x__split_fields12 = x__split_fields9) and
-  ((x__split_fields13 = x__split_fields10) and
-  (x__split_fields14 = x__split_fields11)))
-
-axiom H33 : (tmp4 = tmp2)
-
-axiom H34 : ((x__split_fields15 = x__split_fields9) and
-  ((x__split_fields16 = x__split_fields10) and
-  (x__split_fields17 = x__split_fields11)))
-
  (* File "records.adb", line 254, characters 0-0 *)
-goal WP_parameter_def : (bool_eq3({ us_split_fields3 = {
-  rec__records_prooffuncs__optional_pair__exists = x__split_fields12;
+goal WP_parameter_def :
+  (forall x__split_fields:bool. forall x__split_fields1:unsigned_byte.
+  forall x__split_fields2:unsigned_byte. forall tmp:int.
+  forall o:unsigned_byte. forall o1:unsigned_byte. forall o2:unsigned_byte.
+  forall o3:unsigned_byte. forall o4:unsigned_byte. forall o5:bool.
+  forall o6:unsigned_byte. forall o7:unsigned_byte. forall temp___388:bool.
+  forall temp___3881:unsigned_byte. forall temp___3882:unsigned_byte.
+  forall o8:unsigned_byte. forall o9:unsigned_byte. forall o10:unsigned_byte.
+  forall o11:unsigned_byte. forall o12:unsigned_byte. forall o13:bool.
+  forall o14:unsigned_byte. forall o15:unsigned_byte. forall temp___391:bool.
+  forall temp___3911:unsigned_byte. forall temp___3912:unsigned_byte.
+  forall x__split_fields3:bool. forall x__split_fields4:unsigned_byte.
+  forall x__split_fields5:unsigned_byte. forall tmp1:int. forall result:int.
+  forall tmp2:int. forall result1:bool. forall result2:unsigned_byte.
+  forall result3:unsigned_byte. forall x__split_fields6:bool.
+  forall x__split_fields7:unsigned_byte.
+  forall x__split_fields8:unsigned_byte. forall result4:bool.
+  forall result5:unsigned_byte. forall result6:unsigned_byte.
+  forall x__split_fields9:bool. forall x__split_fields10:unsigned_byte.
+  forall x__split_fields11:unsigned_byte.
+  forall x__split_fields12:us_split_fields__ref1. forall tmp3:int__ref.
+  forall x__split_fields13:us_split_fields2. forall tmp4:int.
+  (((((0 <= 255) -> in_range(tmp)) and (((x__split_fields = true) and
+  (((result = tmp) and (tmp2 = to_rep(x__split_fields1))) and
+  (((((((to_rep(o) = to_rep(x__split_fields2)) and ((o = o1) and
+  (x__split_fields2 = o2))) and ((o3 = o1) and (o4 = o2))) and
+  ((x__split_fields = o5) and ((o6 = o3) and (o7 = o4)))) and
+  ((temp___388 = o5) and ((temp___3881 = o6) and (temp___3882 = o7)))) and
+  (((result1 = x__split_fields) and ((result2 = x__split_fields1) and
+  (result3 = x__split_fields2))) and ((temp___388 = x__split_fields6) and
+  ((temp___3881 = x__split_fields7) and
+  (temp___3882 = x__split_fields8))))) and ((((((to_rep(o8) = tmp2) and
+  ((x__split_fields7 = o9) and (o8 = o10))) and ((o11 = o9) and
+  (o12 = o10))) and ((x__split_fields6 = o13) and ((o14 = o11) and
+  (o15 = o12)))) and ((o13 = temp___391) and ((o14 = temp___3911) and
+  (o15 = temp___3912)))) and (((result4 = x__split_fields6) and
+  ((result5 = x__split_fields7) and (result6 = x__split_fields8))) and
+  ((temp___391 = x__split_fields9) and ((temp___3911 = x__split_fields10) and
+  (temp___3912 = x__split_fields11)))))))) or
+  ((not (x__split_fields = true)) and (((tmp2 = tmp) and
+  ((x__split_fields = x__split_fields9) and
+  ((x__split_fields1 = x__split_fields10) and
+  (x__split_fields2 = x__split_fields11)))) and ((tmp2 = tmp1) and
+  ((x__split_fields3 = x__split_fields9) and
+  ((x__split_fields4 = x__split_fields10) and
+  (x__split_fields5 = x__split_fields11)))))))) and (((tmp3 = {
+  int__content = tmp2 }) and (x__split_fields12 = {
+  us_split_fields__content1 = {
+  rec__records_prooffuncs__optional_pair__exists = x__split_fields9;
   rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
-  rec__records_prooffuncs__pair__a = x__split_fields13;
-  rec__records_prooffuncs__pair__b = x__split_fields14 } } } }, {
-  us_split_fields3 = { rec__records_prooffuncs__optional_pair__exists =
-  x__split_fields; rec__records_prooffuncs__optional_pair__the_pair = {
-  us_split_fields1 = { rec__records_prooffuncs__pair__a = x__split_fields2;
-  rec__records_prooffuncs__pair__b = x__split_fields1 } } } }) = true)
+  rec__records_prooffuncs__pair__a = x__split_fields10;
+  rec__records_prooffuncs__pair__b = x__split_fields11 } } } })) and
+  ((tmp4 = tmp2) and (x__split_fields13 = {
+  rec__records_prooffuncs__optional_pair__exists = x__split_fields9;
+  rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
+  rec__records_prooffuncs__pair__a = x__split_fields10;
+  rec__records_prooffuncs__pair__b = x__split_fields11 } } })))) ->
+  (bool_eq3({ us_split_fields3 =
+  (x__split_fields12).us_split_fields__content1 }, { us_split_fields3 = {
+  rec__records_prooffuncs__optional_pair__exists = x__split_fields;
+  rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
+  rec__records_prooffuncs__pair__a = x__split_fields2;
+  rec__records_prooffuncs__pair__b = x__split_fields1 } } } }) = true)))

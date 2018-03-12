@@ -663,37 +663,23 @@ logic divisor : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x86__safedivision64__result : t
+logic rliteral : t
 
-logic result : t
-
-logic x86__safedivision64__result1 : t
-
-logic x86__safedivision64__result2 : t
-
-logic x86__safedivision64__result3 : t
-
-logic x86__safedivision64__result4 : t
-
-logic x86__safedivision64__result5 : t
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : (not (divisor = of_int(0)))
-
-axiom H3 : (x86__safedivision64__result1 = x86__safedivision64__result2)
-
-axiom H4 : (x86__safedivision64__result3 = x86__safedivision64__result1)
-
-axiom H5 : (result = x86__safedivision64__result)
-
-axiom H6 : (x86__safedivision64__result1 = udiv(dividend, divisor))
-
-axiom H7 : (x86__safedivision64__result4 = x86__safedivision64__result2)
-
-axiom H8 : (x86__safedivision64__result5 = x86__safedivision64__result3)
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
 
  (* File "x86.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : (not (divisor = zeros))
+goal WP_parameter_def :
+  (forall x86__safedivision64__result:t. forall result:t.
+  forall x86__safedivision64__result1:t.
+  forall x86__safedivision64__result2:t.
+  forall x86__safedivision64__result3:t.
+  forall x86__safedivision64__result4:t.
+  forall x86__safedivision64__result5:t. ((((not (divisor = rliteral)) and
+  (((x86__safedivision64__result1 = x86__safedivision64__result2) and
+  (x86__safedivision64__result3 = x86__safedivision64__result1)) and (({
+  t__content = result } = { t__content = x86__safedivision64__result }) and
+  (x86__safedivision64__result1 = udiv(dividend, divisor))))) and (({
+  t__content = x86__safedivision64__result4 } = { t__content =
+  x86__safedivision64__result2 }) and
+  (x86__safedivision64__result5 = x86__safedivision64__result3))) ->
+  (not (divisor = zeros))))

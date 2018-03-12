@@ -119,71 +119,18 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
-logic x : int
-
-logic t1 : int
-
-logic t2 : int
-
-logic t3 : int
-
-logic t4 : int
-
-logic t5 : int
-
-logic err : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic result : int
-
-logic t11 : int
-
-logic result1 : int
-
-logic t21 : int
-
-logic result2 : int
-
-logic t22 : int
-
-logic result3 : int
-
-logic t31 : int
-
-axiom H : in_range(x)
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(t1))
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range(t2))
-
-axiom H3 : (((- 2147483648) <= 2147483647) -> in_range(t3))
-
-axiom H4 : (((- 2147483648) <= 2147483647) -> in_range(t4))
-
-axiom H5 : (((- 2147483648) <= 2147483647) -> in_range(t5))
-
-axiom H6 : (((- 2147483648) <= 2147483647) -> in_range(err))
-
-axiom H7 : ((o = (x + x)) and in_range((x + x)))
-
-axiom H8 : (result = t1)
-
-axiom H9 : (t11 = o)
-
-axiom H10 : ((x <  t11) -> (result1 = t2))
-
-axiom H11 : ((x <  t11) -> (t21 = t11))
-
-axiom H12 : ((not (x <  t11)) -> (result2 = t2))
-
-axiom H13 : ((not (x <  t11)) -> (t22 = x))
-
-axiom H14 : ((not (x <  t11)) -> (t21 = t22))
-
  (* File "cascade.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : in_range((t21 - t11))
+goal WP_parameter_def :
+  (forall x:int. forall t1:int. forall t2:int. forall t3:int. forall t4:int.
+  forall t5:int. forall err:int. forall o:int. forall result:int.
+  forall t11:int. forall result1:int. forall t21:int. forall result2:int.
+  forall t22:int. (in_range(x) -> ((((- 2147483648) <= 2147483647) ->
+  in_range(t1)) -> ((((- 2147483648) <= 2147483647) -> in_range(t2)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(t3)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(t4)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(t5)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(err)) -> ((((o = (x + x)) and
+  in_range((x + x))) and ((result = t1) and (t11 = o))) -> ((((x <  t11) and
+  ((result1 = t2) and (t21 = t11))) or ((not (x <  t11)) and
+  (((result2 = t2) and (t22 = x)) and (t21 = t22)))) ->
+  in_range((t21 - t11))))))))))))

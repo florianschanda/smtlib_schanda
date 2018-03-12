@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -294,38 +294,19 @@ logic y1 : integer
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic my_sets__my_eq__result : bool
-
-logic result : bool
-
-logic my_sets__my_eq__result1 : bool
-
-logic my_sets__my_eq__result2 : bool
-
-logic my_sets__my_eq__result3 : bool
-
-logic my_sets__my_eq__result4 : bool
-
-logic my_sets__my_eq__result5 : bool
-
-logic result1 : bool
-
-axiom H : (my_sets__my_eq__result1 = my_sets__my_eq__result2)
-
-axiom H1 : (my_sets__my_eq__result3 = my_sets__my_eq__result1)
-
-axiom H2 : (result = my_sets__my_eq__result)
-
-axiom H3 : (((to_rep(x) = to_rep(y)) -> (my_sets__my_eq__result1 = true)) and
-  ((not (to_rep(x) = to_rep(y))) -> (my_sets__my_eq__result1 = false)))
-
-axiom H4 : (my_sets__my_eq__result4 = my_sets__my_eq__result2)
-
-axiom H5 : (my_sets__my_eq__result5 = my_sets__my_eq__result3)
-
-axiom H6 : (result1 = my_sets__my_eq__result4)
-
-axiom H7 : (my_sets__my_eq__result4 = true)
-
  (* File "my_sets.ads", line 18, characters 0-0 *)
-goal WP_parameter_def : (to_rep(x) = to_rep(y))
+goal WP_parameter_def :
+  (forall my_sets__my_eq__result:bool. forall result:bool.
+  forall my_sets__my_eq__result1:bool. forall my_sets__my_eq__result2:bool.
+  forall my_sets__my_eq__result3:bool. forall my_sets__my_eq__result4:bool.
+  forall my_sets__my_eq__result5:bool.
+  (forall result1:bool.
+  ((((((my_sets__my_eq__result1 = my_sets__my_eq__result2) and
+  (my_sets__my_eq__result3 = my_sets__my_eq__result1)) and
+  ((result = my_sets__my_eq__result) and (((to_rep(x) = to_rep(y)) and
+  (my_sets__my_eq__result1 = true)) or ((not (to_rep(x) = to_rep(y))) and
+  (my_sets__my_eq__result1 = false))))) and
+  ((my_sets__my_eq__result4 = my_sets__my_eq__result2) and
+  (my_sets__my_eq__result5 = my_sets__my_eq__result3))) and
+  (result1 = my_sets__my_eq__result4)) ->
+  ((my_sets__my_eq__result4 = true) -> (to_rep(x) = to_rep(y))))))

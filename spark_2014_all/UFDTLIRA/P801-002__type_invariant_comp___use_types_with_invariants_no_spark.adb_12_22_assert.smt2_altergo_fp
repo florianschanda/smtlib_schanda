@@ -182,15 +182,7 @@ logic e : us_rep
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : int
-
-logic o1 : us_rep
-
-logic o2 : us_rep
-
-axiom H : in_range(i)
-
-axiom H1 : (bool_eq2(from_integer(to_integer(e)), e) = true)
-
  (* File "use_types_with_invariants_no_spark.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (to_integer(from_integer(i)) = i)
+goal WP_parameter_def : (in_range(i) ->
+  ((bool_eq2(from_integer(to_integer(e)), e) = true) ->
+  (to_integer(from_integer(i)) = i)))

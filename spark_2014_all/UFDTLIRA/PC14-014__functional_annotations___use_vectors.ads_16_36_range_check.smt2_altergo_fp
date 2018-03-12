@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -359,37 +359,14 @@ axiom first__def_axiom2 : (first1 = fst)
 
 axiom last__def_axiom1 : (last = lst)
 
-logic temp___363 : int
-
-logic o : int
-
-logic use_vectors__fst__assume : int
-
-logic temp___361 : int
-
-logic us : int
-
-logic use_vectors__lst__assume : int
-
-axiom H : dynamic_property2(first2, last1, no_index)
-
-axiom H1 : (first2 = no_index)
-
-axiom H2 : in_range2(last_count)
-
-axiom H3 : ((last <  first1) -> (temp___363 = 0))
-
-axiom H4 : ((not (last <  first1)) -> (((not (last <  (- 1))) ->
-  ((last - 2147483647) <  first1)) -> (temp___363 = ((last - first1) + 1))))
-
-axiom H5 : ((not (last <  first1)) -> ((not ((not (last <  (- 1))) ->
-  ((last - 2147483647) <  first1))) -> (temp___363 = 2147483647)))
-
-axiom H6 : (temp___363 = last_count)
-
-axiom H7 : ((o = id(1, (- 2147483647), 2147483647)) and (in_range1(o) and
-  ((((- 2147483647) <= 1) and (1 <= 2147483647)) ->
-  (((- 2147483647) <= o) and (o <= 2147483647)))))
-
  (* File "use_vectors.ads", line 85, characters 0-0 *)
-goal WP_parameter_def : in_range3(o)
+goal WP_parameter_def :
+  (forall temp___406:int. forall o:int. (dynamic_property2(first2, last1,
+  no_index) -> ((first2 = no_index) -> (in_range2(last_count) ->
+  (((((last <  first1) and (temp___406 = 0)) or ((not (last <  first1)) and
+  ((((not (last <  (- 1))) -> ((last - 2147483647) <  first1)) and
+  (temp___406 = ((last - first1) + 1))) or ((not ((not (last <  (- 1))) ->
+  ((last - 2147483647) <  first1))) and (temp___406 = 2147483647))))) and
+  (temp___406 = last_count)) -> (((o = id(1, (- 2147483647), 2147483647)) and
+  (in_range1(o) and ((((- 2147483647) <= 1) and (1 <= 2147483647)) ->
+  (((- 2147483647) <= o) and (o <= 2147483647))))) -> in_range3(o)))))))

@@ -997,23 +997,9 @@ function unsigned64__ref___projection(a: unsigned64__ref) : unsigned64 =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic rax : t1
+logic rliteral1 : t1
 
-logic x86__ah__result : t
-
-logic result : t
-
-logic x86__ah__result1 : t
-
-logic x86__ah__result2 : t
-
-logic x86__ah__result3 : t
-
-logic x86__ah__result4 : t
-
-logic x86__ah__result5 : t
-
-axiom H : true
+axiom rliteral_axiom1 : (tqtint1(rliteral1) = 256)
 
  (* File "x86.ads", line 10, characters 0-0 *)
-goal WP_parameter_def : (not (of_int1(256) = zeros1))
+goal WP_parameter_def : (not (rliteral1 = zeros1))

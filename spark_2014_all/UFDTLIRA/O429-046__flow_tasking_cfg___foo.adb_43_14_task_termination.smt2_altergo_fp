@@ -369,12 +369,6 @@ function tpo_1S__ref___projection(a: tpo_1S__ref) : us_rep1 =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq3 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -386,6 +380,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq3 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
 
 predicate in_range3(x: int) = ((x = 0) or (x = 1))
 
@@ -403,89 +403,5 @@ logic d : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic o : natural
-
-logic o1 : bool
-
-logic o2 : bool
-
-logic o3 : natural
-
-logic o4 : bool
-
-logic o5 : bool
-
-logic us_self__compl : natural
-
-logic us_self__compl1 : bool
-
-logic us_self__compl2 : bool
-
-logic o6 : natural
-
-logic o7 : bool
-
-logic o8 : bool
-
-logic o9 : natural
-
-logic o10 : bool
-
-logic o11 : bool
-
-logic o12 : bool
-
-logic o13 : natural
-
-logic o14 : bool
-
-logic o15 : bool
-
-logic o16 : natural
-
-logic o17 : bool
-
-logic o18 : bool
-
-logic us_self__compl3 : natural
-
-logic us_self__compl4 : bool
-
-logic us_self__compl5 : bool
-
-logic po_1__split_fields : bool
-
-logic po_1__split_fields1 : bool
-
-logic us_self__compl6 : natural
-
-logic us_self__compl7 : bool
-
-logic us_self__compl8 : bool
-
-logic result : bool
-
-logic result1 : bool
-
-logic po_1__split_fields2 : bool
-
-logic po_1__split_fields3 : bool
-
-logic b : bool
-
-logic po_1__split_fields4 : bool
-
-logic po_1__split_fields5 : bool
-
-logic result2 : bool
-
-logic b1 : bool
-
-logic po_1__split_fields6 : bool
-
-logic po_1__split_fields7 : bool
-
-axiom H : false
-
  (* File "foo.adb", line 5, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def : true

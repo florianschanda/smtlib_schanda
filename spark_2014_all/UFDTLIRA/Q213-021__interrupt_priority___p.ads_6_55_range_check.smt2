@@ -41,7 +41,7 @@
 (assert (forall ((a pt)) (<= 0 (object__alignment a))))
 (declare-datatypes () ((pt__ref (mk_pt__ref (pt__content pt)))))
 (define-fun pt__ref___projection ((a pt__ref)) pt (pt__content a))
-(define-fun dynamic_invariant ((temp___expr_165 Int) (temp___is_init_162 Bool) (temp___skip_constant_163 Bool) (temp___do_toplevel_164 Bool)) Bool (=> (or (= temp___is_init_162 true) (<= 98 98)) (in_range temp___expr_165)))
+(define-fun dynamic_invariant ((temp___expr_193 Int) (temp___is_init_189 Bool) (temp___skip_constant_190 Bool) (temp___do_toplevel_191 Bool) (temp___do_typ_inv_192 Bool)) Bool (=> (or (= temp___is_init_189 true) (<= 98 98)) (in_range temp___expr_193)))
 (declare-const self__ pt)
 (assert (not (<= 98 96)))
 (check-sat)

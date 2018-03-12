@@ -108,37 +108,16 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic p__id_gen__result : int
-
-logic result : int
-
-logic p__id_gen__result1 : int
-
-logic p__id_gen__result2 : int
-
-logic p__id_gen__result3 : int
-
-logic p__id_gen__result4 : int
-
-logic p__id_gen__result5 : int
-
-logic result1 : int
-
-axiom H : in_range(x)
-
-axiom H1 : (p__id_gen__result1 = p__id_gen__result2)
-
-axiom H2 : (p__id_gen__result3 = p__id_gen__result1)
-
-axiom H3 : (result = p__id_gen__result)
-
-axiom H4 : (p__id_gen__result1 = x)
-
-axiom H5 : (p__id_gen__result4 = p__id_gen__result2)
-
-axiom H6 : (p__id_gen__result5 = p__id_gen__result3)
-
-axiom H7 : (result1 = p__id_gen__result4)
-
  (* File "p.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : (p__id_gen__result4 = x)
+goal WP_parameter_def :
+  (forall p__id_gen__result:int. forall result:int.
+  forall p__id_gen__result1:int. forall p__id_gen__result2:int.
+  forall p__id_gen__result3:int. forall p__id_gen__result4:int.
+  forall p__id_gen__result5:int.
+  (forall result1:int. ((in_range(x) and
+  (((((p__id_gen__result1 = p__id_gen__result2) and
+  (p__id_gen__result3 = p__id_gen__result1)) and
+  ((result = p__id_gen__result) and (p__id_gen__result1 = x))) and
+  ((p__id_gen__result4 = p__id_gen__result2) and
+  (p__id_gen__result5 = p__id_gen__result3))) and
+  (result1 = p__id_gen__result4))) -> (p__id_gen__result4 = x))))

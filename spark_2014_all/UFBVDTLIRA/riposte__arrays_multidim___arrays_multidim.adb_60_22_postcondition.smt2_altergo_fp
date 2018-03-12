@@ -734,14 +734,14 @@ axiom bool_eq_def3 :
   (ule(b__first_2, b__last_2) and (sub(a__last_2,
   a__first_2) = sub(b__last_2, b__first_2)))) or ((not ule(a__first_2,
   a__last_2)) and ugt(b__first_2, b__last_2)))) and
-  (forall temp___idx_132:t. forall temp___idx_133:t. ((((ule(a__first,
-  temp___idx_132) and ule(temp___idx_132, a__last)) and (ule(a__first_2,
-  temp___idx_133) and ule(temp___idx_133, a__last_2))) and (to_rep(get(a,
-  temp___idx_132, temp___idx_133)) = to_rep(get(b, add(sub(b__first,
-  a__first), temp___idx_132), add(sub(b__first_2, a__first_2),
-  temp___idx_133))))) or (not ((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) and (ule(a__first_2, temp___idx_133) and
-  ule(temp___idx_133, a__last_2))))))) -> (bool_eq4(a, a__first, a__last,
+  (forall temp___idx_154:t. forall temp___idx_155:t. ((((ule(a__first,
+  temp___idx_154) and ule(temp___idx_154, a__last)) and (ule(a__first_2,
+  temp___idx_155) and ule(temp___idx_155, a__last_2))) and (to_rep(get(a,
+  temp___idx_154, temp___idx_155)) = to_rep(get(b, add(sub(b__first,
+  a__first), temp___idx_154), add(sub(b__first_2, a__first_2),
+  temp___idx_155))))) or (not ((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) and (ule(a__first_2, temp___idx_155) and
+  ule(temp___idx_155, a__last_2))))))) -> (bool_eq4(a, a__first, a__last,
   a__first_2, a__last_2, b, b__first, b__last, b__first_2,
   b__last_2) = true)) and ((not ((((ule(a__first, a__last) -> (ule(b__first,
   b__last) and (sub(a__last, a__first) = sub(b__last, b__first)))) and
@@ -749,12 +749,12 @@ axiom bool_eq_def3 :
   ((ule(a__first_2, a__last_2) -> (ule(b__first_2, b__last_2) and
   (sub(a__last_2, a__first_2) = sub(b__last_2, b__first_2)))) and
   ((not ule(a__first_2, a__last_2)) -> ugt(b__first_2, b__last_2)))) and
-  (forall temp___idx_132:t. forall temp___idx_133:t. (((ule(a__first,
-  temp___idx_132) and ule(temp___idx_132, a__last)) and (ule(a__first_2,
-  temp___idx_133) and ule(temp___idx_133, a__last_2))) -> (to_rep(get(a,
-  temp___idx_132, temp___idx_133)) = to_rep(get(b, add(sub(b__first,
-  a__first), temp___idx_132), add(sub(b__first_2, a__first_2),
-  temp___idx_133)))))))) -> (bool_eq4(a, a__first, a__last, a__first_2,
+  (forall temp___idx_154:t. forall temp___idx_155:t. (((ule(a__first,
+  temp___idx_154) and ule(temp___idx_154, a__last)) and (ule(a__first_2,
+  temp___idx_155) and ule(temp___idx_155, a__last_2))) -> (to_rep(get(a,
+  temp___idx_154, temp___idx_155)) = to_rep(get(b, add(sub(b__first,
+  a__first), temp___idx_154), add(sub(b__first_2, a__first_2),
+  temp___idx_155)))))))) -> (bool_eq4(a, a__first, a__last, a__first_2,
   a__last_2, b, b__first, b__last, b__first_2, b__last_2) = false))))
 
 axiom bool_eq_rev :
@@ -769,41 +769,32 @@ axiom bool_eq_rev :
   ((ule(a__first_2, a__last_2) -> (ule(b__first_2, b__last_2) and
   (sub(a__last_2, a__first_2) = sub(b__last_2, b__first_2)))) and
   ((not ule(a__first_2, a__last_2)) -> ugt(b__first_2, b__last_2)))) and
-  (forall temp___idx_132:t. forall temp___idx_133:t. (((ule(a__first,
-  temp___idx_132) and ule(temp___idx_132, a__last)) and (ule(a__first_2,
-  temp___idx_133) and ule(temp___idx_133, a__last_2))) -> (to_rep(get(a,
-  temp___idx_132, temp___idx_133)) = to_rep(get(b, add(sub(b__first,
-  a__first), temp___idx_132), add(sub(b__first_2, a__first_2),
-  temp___idx_133))))))))))
+  (forall temp___idx_154:t. forall temp___idx_155:t. (((ule(a__first,
+  temp___idx_154) and ule(temp___idx_154, a__last)) and (ule(a__first_2,
+  temp___idx_155) and ule(temp___idx_155, a__last_2))) -> (to_rep(get(a,
+  temp___idx_154, temp___idx_155)) = to_rep(get(b, add(sub(b__first,
+  a__first), temp___idx_154), add(sub(b__first_2, a__first_2),
+  temp___idx_155))))))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : map
+logic rliteral : t
 
-logic o : natural
+axiom rliteral_axiom : (tqtint(rliteral) = 1)
 
-logic o1 : map
+logic rliteral1 : t
 
-logic result : map
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 0)
 
-logic x1 : map
+logic rliteral2 : t
 
-logic x2 : map
-
-logic x3 : map
-
-axiom H : (to_rep(o) = to_rep(get(x, of_int(1), of_int(1))))
-
-axiom H1 : (o1 = set(x, of_int(1), of_int(1), o))
-
-axiom H2 : (result = x)
-
-axiom H3 : (x1 = o1)
-
-axiom H4 : (x1 = x2)
-
-axiom H5 : (x3 = x1)
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 255)
 
  (* File "arrays_multidim.adb", line 50, characters 0-0 *)
-goal WP_parameter_def : (bool_eq4(x2, of_int(0), of_int(255), of_int(0),
-  of_int(255), x, of_int(0), of_int(255), of_int(0), of_int(255)) = true)
+goal WP_parameter_def :
+  (forall x:map. forall o:natural. forall o1:map. forall result:map.
+  forall x1:map. forall x2:map. forall x3:map. (((((to_rep(o) = to_rep(get(x,
+  rliteral, rliteral))) and (o1 = set(x, rliteral, rliteral, o))) and
+  ((result = x) and (x1 = o1))) and ((x1 = x2) and (x3 = x1))) ->
+  (bool_eq4(x2, rliteral1, rliteral2, rliteral1, rliteral2, x, rliteral1,
+  rliteral2, rliteral1, rliteral2) = true)))

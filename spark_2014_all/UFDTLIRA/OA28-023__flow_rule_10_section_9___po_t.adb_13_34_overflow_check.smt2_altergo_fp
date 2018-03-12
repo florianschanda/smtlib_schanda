@@ -181,13 +181,7 @@ type p_intT__ref = { p_intT__content : us_rep
 function p_intT__ref___projection(a: p_intT__ref) : us_rep =
   (a).p_intT__content
 
-logic not_cae : bool
-
-logic self__ : integer
-
-axiom H : (not_cae = true)
-
-axiom H1 : (not (0 <= to_rep(self__)))
-
  (* File "po_t.ads", line 11, characters 0-0 *)
-goal WP_parameter_def : in_range((to_rep(self__) + 10))
+goal WP_parameter_def :
+  (forall not_cae:bool. forall self__:integer. ((not_cae = true) ->
+  ((not (0 <= to_rep(self__))) -> in_range((to_rep(self__) + 10)))))

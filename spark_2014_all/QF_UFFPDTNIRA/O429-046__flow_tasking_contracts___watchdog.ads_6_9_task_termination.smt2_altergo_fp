@@ -1116,7 +1116,5 @@ function priority__ref___projection(a: priority__ref) : priority =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-axiom H : false
-
  (* File "watchdog.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def : true

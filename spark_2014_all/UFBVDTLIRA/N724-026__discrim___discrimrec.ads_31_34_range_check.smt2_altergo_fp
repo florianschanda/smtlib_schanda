@@ -2488,11 +2488,5 @@ logic rax__attr__constrained : bool
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic us : int
-
-logic us1 : int
-
-logic us2 : int
-
  (* File "discrimrec.adb", line 9, characters 0-0 *)
 goal WP_parameter_def : in_range(0)

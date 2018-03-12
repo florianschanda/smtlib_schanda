@@ -363,60 +363,17 @@ logic b : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic x__split_fields : even
-
-logic x__split_fields1 : even
-
-logic o : int
-
-logic o1 : even
-
-logic o2 : even
-
-logic o3 : even
-
-logic temp___302 : even
-
-logic temp___3021 : even
-
-logic result : even
-
-logic result1 : even
-
-logic x__split_fields2 : even
-
-logic x__split_fields3 : even
-
-axiom H : (in_range1(i7s) and (mod(i7s, 2) = 0))
-
-axiom H1 : ((mod(to_rep(x__split_fields), 2) = 0) and
-  (mod(to_rep(x__split_fields1), 2) = 0))
-
-axiom H2 : in_range(a)
-
-axiom H3 : in_range(b)
-
-axiom H4 : (mod(a, 2) = 0)
-
-axiom H5 : (o = a)
-
-axiom H6 : (to_rep(o1) = o)
-
-axiom H7 : (o1 = o2)
-
-axiom H8 : (x__split_fields1 = o3)
-
-axiom H9 : (temp___302 = o2)
-
-axiom H10 : (temp___3021 = o3)
-
-axiom H11 : (result = x__split_fields)
-
-axiom H12 : (result1 = x__split_fields1)
-
-axiom H13 : (x__split_fields2 = temp___302)
-
-axiom H14 : (x__split_fields3 = temp___3021)
-
  (* File "dynamic_preds.ads", line 25, characters 0-0 *)
-goal WP_parameter_def : (mod(b, 2) = 0)
+goal WP_parameter_def :
+  (forall x__split_fields:even. forall x__split_fields1:even. forall o:int.
+  forall o1:even. forall o2:even. forall o3:even. forall temp___328:even.
+  forall temp___3281:even. forall result:even. forall result1:even.
+  forall x__split_fields2:even. forall x__split_fields3:even.
+  ((in_range1(i7s) and (mod(i7s, 2) = 0)) -> (((mod(to_rep(x__split_fields),
+  2) = 0) and (mod(to_rep(x__split_fields1), 2) = 0)) -> (in_range(a) ->
+  (in_range(b) -> (((((((mod(a, 2) = 0) and (o = a)) and
+  (to_rep(o1) = o)) and ((o1 = o2) and (x__split_fields1 = o3))) and
+  ((temp___328 = o2) and (temp___3281 = o3))) and
+  (((result = x__split_fields) and (result1 = x__split_fields1)) and
+  ((x__split_fields2 = temp___328) and (x__split_fields3 = temp___3281)))) ->
+  (mod(b, 2) = 0)))))))

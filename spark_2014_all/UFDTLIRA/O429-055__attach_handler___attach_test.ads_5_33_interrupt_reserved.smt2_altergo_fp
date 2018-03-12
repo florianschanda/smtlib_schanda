@@ -180,9 +180,5 @@ axiom coerce_axiom :
 
 logic self__ : integer
 
-logic temp___1529 : bool
-
-logic temp___1530 : bool
-
  (* File "attach_test.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (temp___1529 = false)
+goal WP_parameter_def : (forall temp___1714:bool. (temp___1714 = false))

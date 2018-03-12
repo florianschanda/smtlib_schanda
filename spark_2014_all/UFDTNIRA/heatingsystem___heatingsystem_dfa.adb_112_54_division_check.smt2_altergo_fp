@@ -254,27 +254,12 @@ logic currentmode : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
-logic time : int
-
-logic heatingsystem_dfa__checkadvancebutton__currentmode__assume : int
-
-logic slowadvance : bool
-
-logic fastadvance : bool
-
-axiom H : in_range(time)
-
-axiom H1 :
-  in_range1(heatingsystem_dfa__checkadvancebutton__currentmode__assume)
-
-axiom H2 :
-  (heatingsystem_dfa__checkadvancebutton__currentmode__assume = currentmode)
-
-axiom H3 : in_range1(currentmode)
-
-axiom H4 : (not (currentmode = 0))
-
-axiom H5 : (fastadvance = true)
-
  (* File "heatingsystem_dfa.adb", line 54, characters 0-0 *)
-goal WP_parameter_def : (not (86400 = 0))
+goal WP_parameter_def :
+  (forall time:int.
+  forall heatingsystem_dfa__checkadvancebutton__currentmode__assume:int.
+  forall fastadvance:bool. (in_range(time) ->
+  ((in_range1(heatingsystem_dfa__checkadvancebutton__currentmode__assume) and
+  (heatingsystem_dfa__checkadvancebutton__currentmode__assume = currentmode)) ->
+  (in_range1(currentmode) -> ((not (currentmode = 0)) ->
+  ((fastadvance = true) -> (not (86400 = 0))))))))

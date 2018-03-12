@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -405,33 +405,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def :
-  (forall v:bool. forall v1:integer. forall v2:integer. forall v3:bool.
-  (forall i:int [(singleton({ us_split_discrs1 = {
-  rec__dynamic_array__rec__b = v }; us_split_fields1 = {
-  rec__dynamic_array__rec__f1 = v1; rec__dynamic_array__rec__f2 = v2 };
-  attr__constrained = v3 }, i)[i])]. ((singleton({ us_split_discrs1 = {
-  rec__dynamic_array__rec__b = v }; us_split_fields1 = {
-  rec__dynamic_array__rec__f1 = v1; rec__dynamic_array__rec__f2 = v2 };
-  attr__constrained = v3 }, i)[i]) = { us_split_discrs1 = {
-  rec__dynamic_array__rec__b = v }; us_split_fields1 = {
-  rec__dynamic_array__rec__f1 = v1; rec__dynamic_array__rec__f2 = v2 };
-  attr__constrained = v3 })))
-
 logic bool_eq7 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -442,17 +415,17 @@ axiom bool_eq_def6 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and (bool_eq6((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and (bool_eq6((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq6((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq7(a,
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq6((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq7(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -462,9 +435,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq6((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq6((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)))))))
 
 predicate dynamic_property1(first_int: int, last_int: int, x: int) =
   ((first_int <= x) and (x <= last_int))
@@ -698,16 +671,16 @@ axiom new_holder__post_axiom :
   to_rep1(last1((((new_holder(d)).us_split_fields3).rec__dynamic_array__holder__content).rt))) and
   ((to_rep1(first((((new_holder(d)).us_split_fields3).rec__dynamic_array__holder__content).rt)) = 1) and
   (to_rep1(last1((((new_holder(d)).us_split_fields3).rec__dynamic_array__holder__content).rt)) = to_rep(((new_holder(d)).us_split_discrs3).rec__dynamic_array__holder__d)))) and
-  (forall temp___168:int.
-  (((to_rep1(first((((new_holder(d)).us_split_fields3).rec__dynamic_array__holder__content).rt)) <= temp___168) and
-  (temp___168 <= to_rep1(last1((((new_holder(d)).us_split_fields3).rec__dynamic_array__holder__content).rt)))) ->
-  ((((to_int(((((((new_holder(d)).us_split_fields3).rec__dynamic_array__holder__content).elts[temp___168])).us_split_discrs1).rec__dynamic_array__rec__b) = 1) ->
+  (forall temp___194:int.
+  (((to_rep1(first((((new_holder(d)).us_split_fields3).rec__dynamic_array__holder__content).rt)) <= temp___194) and
+  (temp___194 <= to_rep1(last1((((new_holder(d)).us_split_fields3).rec__dynamic_array__holder__content).rt)))) ->
+  ((((to_int(((((((new_holder(d)).us_split_fields3).rec__dynamic_array__holder__content).elts[temp___194])).us_split_discrs1).rec__dynamic_array__rec__b) = 1) ->
   dynamic_property(0, last,
-  to_rep1(((((((new_holder(d)).us_split_fields3).rec__dynamic_array__holder__content).elts[temp___168])).us_split_fields1).rec__dynamic_array__rec__f1))) and
-  ((to_int(((((((new_holder(d)).us_split_fields3).rec__dynamic_array__holder__content).elts[temp___168])).us_split_discrs1).rec__dynamic_array__rec__b) = 0) ->
+  to_rep1(((((((new_holder(d)).us_split_fields3).rec__dynamic_array__holder__content).elts[temp___194])).us_split_fields1).rec__dynamic_array__rec__f1))) and
+  ((to_int(((((((new_holder(d)).us_split_fields3).rec__dynamic_array__holder__content).elts[temp___194])).us_split_discrs1).rec__dynamic_array__rec__b) = 0) ->
   dynamic_property(0, last,
-  to_rep1(((((((new_holder(d)).us_split_fields3).rec__dynamic_array__holder__content).elts[temp___168])).us_split_fields1).rec__dynamic_array__rec__f2)))) and
-  ((((((new_holder(d)).us_split_fields3).rec__dynamic_array__holder__content).elts[temp___168])).attr__constrained = false))))))))
+  to_rep1(((((((new_holder(d)).us_split_fields3).rec__dynamic_array__holder__content).elts[temp___194])).us_split_fields1).rec__dynamic_array__rec__f2)))) and
+  ((((((new_holder(d)).us_split_fields3).rec__dynamic_array__holder__content).elts[temp___194])).attr__constrained = false))))))))
 
 logic increment : us_rep -> int
 
@@ -1520,6 +1493,10 @@ type t34b__ref = { t34b__content : us_rep
 
 function t34b__ref___projection(a: t34b__ref) : us_rep = (a).t34b__content
 
+logic temp___223 : us_rep, int, int -> us_t3
+
+axiom last__def_axiom : (last = c)
+
 type t4
 
 logic first8 : t4 -> integer
@@ -1598,498 +1575,186 @@ type rec_array__ref = { rec_array__content : us_t4
 function rec_array__ref___projection(a: rec_array__ref) : us_t4 =
   (a).rec_array__content
 
-logic temp___196 : us_rep, int, int -> us_t3
-
-axiom def_axiom :
-  (forall temp___198:bool. forall temp___1981:integer.
-  forall temp___1982:integer. forall temp___1983:bool.
-  (forall temp___199:int. forall temp___200:int. ((dynamic_property10(1,
-  2147483647, temp___199, temp___200) -> ((to_rep1(first6((temp___196({
-  us_split_discrs1 = { rec__dynamic_array__rec__b = temp___198 };
-  us_split_fields1 = { rec__dynamic_array__rec__f1 = temp___1981;
-  rec__dynamic_array__rec__f2 = temp___1982 }; attr__constrained =
-  temp___1983 }, temp___199, temp___200)).rt3)) = temp___199) and
-  (to_rep1(last7((temp___196({ us_split_discrs1 = {
-  rec__dynamic_array__rec__b = temp___198 }; us_split_fields1 = {
-  rec__dynamic_array__rec__f1 = temp___1981; rec__dynamic_array__rec__f2 =
-  temp___1982 }; attr__constrained = temp___1983 }, temp___199,
-  temp___200)).rt3)) = temp___200))) and
-  (forall temp___201:int. (((temp___196({ us_split_discrs1 = {
-  rec__dynamic_array__rec__b = temp___198 }; us_split_fields1 = {
-  rec__dynamic_array__rec__f1 = temp___1981; rec__dynamic_array__rec__f2 =
-  temp___1982 }; attr__constrained = temp___1983 }, temp___199,
-  temp___200)).elts3[temp___201]) = { us_split_discrs1 = {
-  rec__dynamic_array__rec__b = temp___198 }; us_split_fields1 = {
-  rec__dynamic_array__rec__f1 = temp___1981; rec__dynamic_array__rec__f2 =
-  temp___1982 }; attr__constrained = temp___1983 })))))
-
-axiom last__def_axiom : (last = c)
-
 axiom hh__def_axiom : ({ us_split_discrs3 = { rec__dynamic_array__holder__d =
   hh }; us_split_fields3 = { rec__dynamic_array__holder__content = { elts =
   hh1; rt = hh2 } } } = new_holder(c))
 
-logic h__split_fields : (int,us_rep) farray
-
-logic h__split_fields1 : t1
-
-logic i : int
-
-logic temp___d_195 : int
-
-logic us : int
-
-logic o : natural
-
-logic us1 : int
-
-logic o1 : int
-
-logic o2 : integer
-
-logic o3 : integer
-
-logic o4 : integer
-
-logic usq_ : bool
-
-logic usq_1 : integer
-
-logic usq_2 : integer
-
-logic usq_3 : bool
-
-logic o5 : bool
-
-logic o6 : integer
-
-logic o7 : integer
-
-logic o8 : bool
-
-logic temp___202 : (int,us_rep) farray
-
-logic temp___2021 : t3
-
-logic temp___203 : (int,us_rep) farray
-
-logic temp___2031 : t3
-
-logic o9 : (int,us_rep) farray
-
-logic o10 : t2
-
-logic o11 : (int,us_rep) farray
-
-logic o12 : t2
-
-logic o13 : natural
-
-logic o14 : natural
-
-logic o15 : (int,us_rep) farray
-
-logic o16 : t2
-
-logic o17 : natural
-
-logic o18 : (int,us_rep) farray
-
-logic o19 : t
-
-logic o20 : natural
-
-logic o21 : (int,us_rep) farray
-
-logic o22 : t
-
-logic dynamic_array__h__assume : natural
-
-logic dynamic_array__h__assume1 : (int,us_rep) farray
-
-logic dynamic_array__h__assume2 : t1
-
-logic j : int
-
-logic o23 : int
-
-logic o24 : bool
-
-logic o25 : integer
-
-logic o26 : integer
-
-logic o27 : bool
-
-logic o28 : integer
-
-logic o29 : natural
-
-logic o30 : (int,us_rep) farray
-
-logic o31 : t
-
-logic o32 : (int,us_rep) farray
-
-logic o33 : t
-
-logic temp___218 : (int,us_rep) farray
-
-logic temp___2181 : t
-
-logic o34 : int
-
-logic o35 : bool
-
-logic o36 : integer
-
-logic o37 : integer
-
-logic o38 : bool
-
-logic o39 : int
-
-logic o40 : int
-
-logic o41 : bool
-
-logic o42 : integer
-
-logic o43 : integer
-
-logic o44 : bool
-
-logic o45 : bool
-
-logic j1 : int
-
-logic dynamic_array__B_2__hh__assume : natural
-
-logic dynamic_array__B_2__hh__assume1 : (int,us_rep) farray
-
-logic dynamic_array__B_2__hh__assume2 : t
-
-logic o46 : int
-
-logic dynamic_array__B_2__r__assume : bool
-
-logic dynamic_array__B_2__r__assume1 : integer
-
-logic dynamic_array__B_2__r__assume2 : integer
-
-logic dynamic_array__B_2__r__assume3 : bool
-
-logic o47 : int
-
-logic us2 : int
-
-logic o48 : int
-
-logic o49 : integer
-
-logic o50 : integer
-
-logic o51 : integer
-
-logic temp___205 : bool
-
-logic temp___2051 : integer
-
-logic temp___2052 : integer
-
-logic temp___2053 : bool
-
-logic usq_4 : bool
-
-logic usq_5 : integer
-
-logic usq_6 : integer
-
-logic usq_7 : bool
-
-logic o52 : bool
-
-logic o53 : integer
-
-logic o54 : integer
-
-logic o55 : bool
-
-logic o56 : (int,us_rep) farray
-
-logic o57 : (int,us_rep) farray
-
-logic o58 : t1
-
-logic o59 : (int,us_rep) farray
-
-logic o60 : t1
-
-logic temp___211 : natural
-
-logic temp___2111 : (int,us_rep) farray
-
-logic temp___2112 : t1
-
-logic result : (int,us_rep) farray
-
-logic result1 : t1
-
-logic h__split_fields2 : (int,us_rep) farray
-
-logic h__split_fields3 : t1
-
-logic result2 : int
-
-logic i1 : int
-
-logic h__split_fields4 : (int,us_rep) farray
-
-logic h__split_fields5 : t1
-
-logic i2 : int
-
-logic f : int
-
-logic result3 : bool
-
-logic result4 : int
-
-logic f1 : int
-
-logic result5 : int
-
-logic f2 : int
-
-logic result6 : int
-
-logic f3 : int
-
-logic result7 : (int,us_rep) farray
-
-logic result8 : t1
-
-logic h__split_fields6 : (int,us_rep) farray
-
-logic h__split_fields7 : t1
-
-logic result9 : int
-
-logic i3 : int
-
-axiom H : in_range2(c)
-
-axiom H1 : in_range2(temp___d_195)
-
-axiom H2 : ((us = c) and in_range2(c))
-
-axiom H3 : ((us1 = c) and dynamic_property(0, last, c))
-
-axiom H4 : (o1 = c)
-
-axiom H5 : (o2 = of_rep1(o1))
-
-axiom H6 : (dummy3 = o3)
-
-axiom H7 : (o2 = o4)
-
-axiom H8 : (of_int(0) = usq_)
-
-axiom H9 : (usq_1 = o3)
-
-axiom H10 : (usq_2 = o4)
-
-axiom H11 : (true = usq_3)
-
-axiom H12 : (usq_ = o5)
-
-axiom H13 : (usq_1 = o6)
-
-axiom H14 : (usq_2 = o7)
-
-axiom H15 : (false = o8)
-
-axiom H16 : ({ elts3 = temp___202; rt3 = temp___2021 } = temp___196({
-  us_split_discrs1 = { rec__dynamic_array__rec__b = o5 }; us_split_fields1 =
-  { rec__dynamic_array__rec__f1 = o6; rec__dynamic_array__rec__f2 = o7 };
-  attr__constrained = o8 }, 1, c))
-
-axiom H17 : (to_rep1(first6(temp___2021)) = 1)
-
-axiom H18 : (to_rep1(last7(temp___2021)) = c)
-
-axiom H19 : ((temp___203 = temp___202) and (temp___2031 = temp___2021))
-
-axiom H20 :
-  (((to_rep1(first6(temp___2031)) <= to_rep1(last7(temp___2031))) ->
-  (((1 <= c) ->
-  (((to_rep1(last7(temp___2031)) - to_rep1(first6(temp___2031))) + 1) = ((c - 1) + 1))) and
-  ((not (1 <= c)) ->
-  (((to_rep1(last7(temp___2031)) - to_rep1(first6(temp___2031))) + 1) = 0)))) and
-  ((not (to_rep1(first6(temp___2031)) <= to_rep1(last7(temp___2031)))) ->
-  ((1 <= c) -> (0 = ((c - 1) + 1)))))
-
-axiom H21 : (temp___203 = o9)
-
-axiom H22 : (mk2(to_rep1(first6(temp___2031)),
-  to_rep1(last7(temp___2031))) = o10)
-
-axiom H23 : (o11 = o9)
-
-axiom H24 : (o12 = o10)
-
-axiom H25 : (to_rep(o) = c)
-
-axiom H26 : (o = o13)
-
-axiom H27 : (o14 = o13)
-
-axiom H28 : (o15 = o11)
-
-axiom H29 : (o16 = o12)
-
-axiom H30 : ({ us_split_discrs3 = { rec__dynamic_array__holder__d = o17 };
-  us_split_fields3 = { rec__dynamic_array__holder__content = { elts = o18;
-  rt = o19 } } } = to_base1({ us_split_discrs5 = {
-  rec__dynamic_array__holder__d = o14 }; us_split_fields7 = {
-  rec__dynamic_array__holder__content2 = { elts2 = o15; rt2 = o16 } } }))
-
-axiom H31 : ((o20 = o17) and ((o21 = o18) and (o22 = o19)))
-
-axiom H32 : ({ us_split_discrs4 = { rec__dynamic_array__holder__d =
-  dynamic_array__h__assume }; us_split_fields5 = {
-  rec__dynamic_array__holder__content1 = { elts1 = dynamic_array__h__assume1;
-  rt1 = dynamic_array__h__assume2 } } } = of_base({ us_split_discrs3 = {
+axiom def_axiom :
+  (forall temp___225:bool. forall temp___2251:integer.
+  forall temp___2252:integer. forall temp___2253:bool.
+  (forall temp___226:int. forall temp___227:int.
+  ((((to_int(temp___225) = 1) -> dynamic_property(0, last,
+  to_rep1(temp___2251))) and ((to_int(temp___225) = 0) -> dynamic_property(0,
+  last, to_rep1(temp___2252)))) -> ((dynamic_property10(1, 2147483647,
+  temp___226, temp___227) -> ((to_rep1(first6((temp___223({
+  us_split_discrs1 = { rec__dynamic_array__rec__b = temp___225 };
+  us_split_fields1 = { rec__dynamic_array__rec__f1 = temp___2251;
+  rec__dynamic_array__rec__f2 = temp___2252 }; attr__constrained =
+  temp___2253 }, temp___226, temp___227)).rt3)) = temp___226) and
+  (to_rep1(last7((temp___223({ us_split_discrs1 = {
+  rec__dynamic_array__rec__b = temp___225 }; us_split_fields1 = {
+  rec__dynamic_array__rec__f1 = temp___2251; rec__dynamic_array__rec__f2 =
+  temp___2252 }; attr__constrained = temp___2253 }, temp___226,
+  temp___227)).rt3)) = temp___227))) and
+  (forall temp___228:int. (((temp___223({ us_split_discrs1 = {
+  rec__dynamic_array__rec__b = temp___225 }; us_split_fields1 = {
+  rec__dynamic_array__rec__f1 = temp___2251; rec__dynamic_array__rec__f2 =
+  temp___2252 }; attr__constrained = temp___2253 }, temp___226,
+  temp___227)).elts3[temp___228]) = { us_split_discrs1 = {
+  rec__dynamic_array__rec__b = temp___225 }; us_split_fields1 = {
+  rec__dynamic_array__rec__f1 = temp___2251; rec__dynamic_array__rec__f2 =
+  temp___2252 }; attr__constrained = temp___2253 }))))))
+
+ (* File "dynamic_array.adb", line 35, characters 0-0 *)
+goal WP_parameter_def :
+  (forall h__split_fields:(int,us_rep) farray. forall h__split_fields1:t1.
+  forall i:int. forall temp___d_222:int. forall us:int. forall o:natural.
+  forall us1:int. forall o1:int. forall o2:integer. forall o3:integer.
+  forall o4:integer. forall usq_:bool. forall usq_1:integer.
+  forall usq_2:integer. forall usq_3:bool. forall o5:bool. forall o6:integer.
+  forall o7:integer. forall o8:bool. forall temp___229:(int,us_rep) farray.
+  forall temp___2291:t3. forall temp___230:(int,us_rep) farray.
+  forall temp___2301:t3. forall o9:(int,us_rep) farray. forall o10:t2.
+  forall o11:(int,us_rep) farray. forall o12:t2. forall o13:natural.
+  forall o14:natural. forall o15:(int,us_rep) farray. forall o16:t2.
+  forall o17:natural. forall o18:(int,us_rep) farray. forall o19:t.
+  forall o20:natural. forall o21:(int,us_rep) farray. forall o22:t.
+  forall dynamic_array__h__assume:natural.
+  forall dynamic_array__h__assume1:(int,us_rep) farray.
+  forall dynamic_array__h__assume2:t1. forall j:int. forall o23:natural.
+  forall o24:(int,us_rep) farray. forall o25:t.
+  forall o26:(int,us_rep) farray. forall o27:t. forall temp___245:us_t.
+  forall o28:int. forall o29:us_rep. forall o30:int. forall o31:int.
+  forall o32:us_rep. forall o33:us_split_discrs.
+  forall result:us_split_fields__ref2.
+  forall h__split_fields2:us_split_fields4. forall result1:int__ref.
+  forall i1:int. forall h__split_fields3:us_split_fields4. forall i2:int.
+  forall result2:bool. (in_range2(c) -> (in_range2(temp___d_222) ->
+  (((us = c) and in_range2(c)) -> (((((((((((((((((us1 = c) and
+  dynamic_property(0, last, c)) and (o1 = c)) and (o2 = of_rep1(o1))) and
+  ((dummy3 = o3) and (o2 = o4))) and ((of_int(0) = usq_) and
+  (((usq_1 = o3) and (usq_2 = o4)) and (true = usq_3)))) and ((usq_ = o5) and
+  (((usq_1 = o6) and (usq_2 = o7)) and (false = o8)))) and ({ elts3 =
+  temp___229; rt3 = temp___2291 } = temp___223({ us_split_discrs1 = {
+  rec__dynamic_array__rec__b = o5 }; us_split_fields1 = {
+  rec__dynamic_array__rec__f1 = o6; rec__dynamic_array__rec__f2 = o7 };
+  attr__constrained = o8 }, 1, c))) and
+  ((to_rep1(first6(temp___2291)) = 1) and
+  ((to_rep1(last7(temp___2291)) = c) and ({ elts3 = temp___230; rt3 =
+  temp___2301 } = { elts3 = temp___229; rt3 = temp___2291 })))) and
+  ((((to_rep1(first6(temp___2301)) <= to_rep1(last7(temp___2301))) and
+  (((1 <= c) and
+  (((to_rep1(last7(temp___2301)) - to_rep1(first6(temp___2301))) + 1) = ((c - 1) + 1))) or
+  ((not (1 <= c)) and
+  (((to_rep1(last7(temp___2301)) - to_rep1(first6(temp___2301))) + 1) = 0)))) or
+  ((not (to_rep1(first6(temp___2301)) <= to_rep1(last7(temp___2301)))) and
+  (((1 <= c) and (0 = ((c - 1) + 1))) or (not (1 <= c))))) and
+  ((temp___230 = o9) and (mk2(to_rep1(first6(temp___2301)),
+  to_rep1(last7(temp___2301))) = o10)))) and ((o11 = o9) and
+  (o12 = o10))) and (((to_rep(o) = c) and (o = o13)) and ((o14 = o13) and
+  ((o15 = o11) and (o16 = o12))))) and ({ us_split_discrs3 = {
+  rec__dynamic_array__holder__d = o17 }; us_split_fields3 = {
+  rec__dynamic_array__holder__content = { elts = o18; rt = o19 } }
+  } = to_base1({ us_split_discrs5 = { rec__dynamic_array__holder__d = o14 };
+  us_split_fields7 = { rec__dynamic_array__holder__content2 = { elts2 = o15;
+  rt2 = o16 } } }))) and ({ us_split_discrs3 = {
   rec__dynamic_array__holder__d = o20 }; us_split_fields3 = {
-  rec__dynamic_array__holder__content = { elts = o21; rt = o22 } } }))
-
-axiom H33 : ((result = h__split_fields) and (result1 = h__split_fields1))
-
-axiom H34 : ((h__split_fields2 = dynamic_array__h__assume1) and
-  (h__split_fields3 = dynamic_array__h__assume2))
-
-axiom H35 : (h__split_discrs = dynamic_array__h__assume)
-
-axiom H36 : ((c = to_rep(((to_base({ us_split_discrs4 = {
-  rec__dynamic_array__holder__d = h__split_discrs }; us_split_fields5 = {
-  rec__dynamic_array__holder__content1 = { elts1 = h__split_fields2; rt1 =
-  h__split_fields3 } }
+  rec__dynamic_array__holder__content = { elts = o21; rt = o22 } } } = {
+  us_split_discrs3 = { rec__dynamic_array__holder__d = o17 };
+  us_split_fields3 = { rec__dynamic_array__holder__content = { elts = o18;
+  rt = o19 } } })) and ({ us_split_discrs4 = {
+  rec__dynamic_array__holder__d = dynamic_array__h__assume };
+  us_split_fields5 = { rec__dynamic_array__holder__content1 = { elts1 =
+  dynamic_array__h__assume1; rt1 = dynamic_array__h__assume2 } }
+  } = of_base({ us_split_discrs3 = { rec__dynamic_array__holder__d = o20 };
+  us_split_fields3 = { rec__dynamic_array__holder__content = { elts = o21;
+  rt = o22 } } }))) and (((result = { us_split_fields__content2 = {
+  rec__dynamic_array__holder__content1 = { elts1 = h__split_fields; rt1 =
+  h__split_fields1 } } }) and (h__split_fields2 = {
+  rec__dynamic_array__holder__content1 = { elts1 = dynamic_array__h__assume1;
+  rt1 = dynamic_array__h__assume2 } })) and
+  (h__split_discrs = dynamic_array__h__assume))) -> (((c = to_rep(((to_base({
+  us_split_discrs4 = { rec__dynamic_array__holder__d = h__split_discrs };
+  us_split_fields5 = h__split_fields2
   })).us_split_discrs3).rec__dynamic_array__holder__d)) and
-  ((dynamic_property4(1, c, to_rep1(first2(h__split_fields3)),
-  to_rep1(last3(h__split_fields3))) and
-  ((to_rep1(first2(h__split_fields3)) = 1) and
-  (to_rep1(last3(h__split_fields3)) = c))) and
-  (forall temp___183:int.
-  (((to_rep1(first2(h__split_fields3)) <= temp___183) and
-  (temp___183 <= to_rep1(last3(h__split_fields3)))) ->
-  ((((to_int((((h__split_fields2[temp___183])).us_split_discrs1).rec__dynamic_array__rec__b) = 1) ->
+  ((dynamic_property4(1, c,
+  to_rep1(first2(((h__split_fields2).rec__dynamic_array__holder__content1).rt1)),
+  to_rep1(last3(((h__split_fields2).rec__dynamic_array__holder__content1).rt1))) and
+  ((to_rep1(first2(((h__split_fields2).rec__dynamic_array__holder__content1).rt1)) = 1) and
+  (to_rep1(last3(((h__split_fields2).rec__dynamic_array__holder__content1).rt1)) = c))) and
+  (forall temp___210:int.
+  (((to_rep1(first2(((h__split_fields2).rec__dynamic_array__holder__content1).rt1)) <= temp___210) and
+  (temp___210 <= to_rep1(last3(((h__split_fields2).rec__dynamic_array__holder__content1).rt1)))) ->
+  ((((to_int((((((h__split_fields2).rec__dynamic_array__holder__content1).elts1[temp___210])).us_split_discrs1).rec__dynamic_array__rec__b) = 1) ->
   dynamic_property(0, last,
-  to_rep1((((h__split_fields2[temp___183])).us_split_fields1).rec__dynamic_array__rec__f1))) and
-  ((to_int((((h__split_fields2[temp___183])).us_split_discrs1).rec__dynamic_array__rec__b) = 0) ->
+  to_rep1((((((h__split_fields2).rec__dynamic_array__holder__content1).elts1[temp___210])).us_split_fields1).rec__dynamic_array__rec__f1))) and
+  ((to_int((((((h__split_fields2).rec__dynamic_array__holder__content1).elts1[temp___210])).us_split_discrs1).rec__dynamic_array__rec__b) = 0) ->
   dynamic_property(0, last,
-  to_rep1((((h__split_fields2[temp___183])).us_split_fields1).rec__dynamic_array__rec__f2)))) and
-  (((h__split_fields2[temp___183])).attr__constrained = false))))))
-
-axiom H37 :
-  (to_rep(h__split_discrs) = to_rep(((new_holder(c)).us_split_discrs3).rec__dynamic_array__holder__d))
-
-axiom H38 : (result2 = i)
-
-axiom H39 : (i1 = 1)
-
-axiom H40 : (1 <= i1)
-
-axiom H41 : (i1 <= c)
-
-axiom H42 :
-  (forall j2:int. (((1 <= j2) and (j2 <= (i2 - 1))) ->
-  (((((h__split_fields4[j2])).us_split_discrs1).rec__dynamic_array__rec__b = true) and
-  (to_rep1((((h__split_fields4[j2])).us_split_fields1).rec__dynamic_array__rec__f1) = increment(((((new_holder(c)).us_split_fields3).rec__dynamic_array__holder__content).elts[j2]))))))
-
-axiom H43 :
-  (forall j2:int. (((i2 <= j2) and (j2 <= c)) ->
-  (not ((((h__split_fields4[j2])).us_split_discrs1).rec__dynamic_array__rec__b = true))))
-
-axiom H44 : (((((1 <= c) -> dynamic_property9(1, c, i2)) and
-  ((dynamic_property4(1, c, to_rep1(first2(h__split_fields5)),
-  to_rep1(last3(h__split_fields5))) and
-  ((to_rep1(first2(h__split_fields5)) = 1) and
-  (to_rep1(last3(h__split_fields5)) = c))) and
-  (forall temp___183:int.
-  (((to_rep1(first2(h__split_fields5)) <= temp___183) and
-  (temp___183 <= to_rep1(last3(h__split_fields5)))) ->
-  ((((to_int((((h__split_fields4[temp___183])).us_split_discrs1).rec__dynamic_array__rec__b) = 1) ->
+  to_rep1((((((h__split_fields2).rec__dynamic_array__holder__content1).elts1[temp___210])).us_split_fields1).rec__dynamic_array__rec__f2)))) and
+  (((((h__split_fields2).rec__dynamic_array__holder__content1).elts1[temp___210])).attr__constrained = false)))))) ->
+  ((to_rep(h__split_discrs) = to_rep(((new_holder(c)).us_split_discrs3).rec__dynamic_array__holder__d)) ->
+  (((result1 = { int__content = i }) and (i1 = 1)) -> (((1 <= i1) and
+  (i1 <= c)) ->
+  (((forall j1:int. (((1 <= j1) and (j1 <= (i2 - 1))) ->
+    (((((((h__split_fields3).rec__dynamic_array__holder__content1).elts1[j1])).us_split_discrs1).rec__dynamic_array__rec__b = true) and
+    (to_rep1((((((h__split_fields3).rec__dynamic_array__holder__content1).elts1[j1])).us_split_fields1).rec__dynamic_array__rec__f1) = increment(((((new_holder(c)).us_split_fields3).rec__dynamic_array__holder__content).elts[j1])))))) and
+  (forall j1:int. (((i2 <= j1) and (j1 <= c)) ->
+  (not ((((((h__split_fields3).rec__dynamic_array__holder__content1).elts1[j1])).us_split_discrs1).rec__dynamic_array__rec__b = true))))) ->
+  ((((((1 <= c) -> dynamic_property9(1, c, i2)) and ((dynamic_property4(1, c,
+  to_rep1(first2(((h__split_fields3).rec__dynamic_array__holder__content1).rt1)),
+  to_rep1(last3(((h__split_fields3).rec__dynamic_array__holder__content1).rt1))) and
+  ((to_rep1(first2(((h__split_fields3).rec__dynamic_array__holder__content1).rt1)) = 1) and
+  (to_rep1(last3(((h__split_fields3).rec__dynamic_array__holder__content1).rt1)) = c))) and
+  (forall temp___210:int.
+  (((to_rep1(first2(((h__split_fields3).rec__dynamic_array__holder__content1).rt1)) <= temp___210) and
+  (temp___210 <= to_rep1(last3(((h__split_fields3).rec__dynamic_array__holder__content1).rt1)))) ->
+  ((((to_int((((((h__split_fields3).rec__dynamic_array__holder__content1).elts1[temp___210])).us_split_discrs1).rec__dynamic_array__rec__b) = 1) ->
   ((0 <= last) -> dynamic_property(0, last,
-  to_rep1((((h__split_fields4[temp___183])).us_split_fields1).rec__dynamic_array__rec__f1)))) and
-  ((to_int((((h__split_fields4[temp___183])).us_split_discrs1).rec__dynamic_array__rec__b) = 0) ->
+  to_rep1((((((h__split_fields3).rec__dynamic_array__holder__content1).elts1[temp___210])).us_split_fields1).rec__dynamic_array__rec__f1)))) and
+  ((to_int((((((h__split_fields3).rec__dynamic_array__holder__content1).elts1[temp___210])).us_split_discrs1).rec__dynamic_array__rec__b) = 0) ->
   ((0 <= last) -> dynamic_property(0, last,
-  to_rep1((((h__split_fields4[temp___183])).us_split_fields1).rec__dynamic_array__rec__f2))))) and
-  (((h__split_fields4[temp___183])).attr__constrained = false)))))) and
-  (forall temp___215:int.
-  (((to_rep1(first2(h__split_fields5)) <= temp___215) and
-  (temp___215 <= to_rep1(last3(h__split_fields5)))) -> ((i2 <= temp___215) ->
-  ((h__split_fields4[temp___215]) = (h__split_fields2[temp___215])))))) and
-  ((1 <= i2) and (i2 <= c)))
-
-axiom H45 : (1 <= j)
-
-axiom H46 : (j <= (i2 - 1))
-
-axiom H47 : ((to_rep1(first2(h__split_fields5)) <= j) and
-  (j <= to_rep1(last3(h__split_fields5))))
-
-axiom H48 : (o40 = j)
-
-axiom H49 : ({ us_split_discrs1 = { rec__dynamic_array__rec__b = o41 };
-  us_split_fields1 = { rec__dynamic_array__rec__f1 = o42;
-  rec__dynamic_array__rec__f2 = o43 }; attr__constrained = o44
-  } = (h__split_fields4[o40]))
-
-axiom H50 : (o45 = o41)
-
-axiom H51 : (result3 = o45)
-
-axiom H52 : (result3 = true)
-
-axiom H53 : (({ us_split_discrs3 = { rec__dynamic_array__holder__d = o29 };
-  us_split_fields3 = { rec__dynamic_array__holder__content = { elts = o30;
-  rt = o31 } } } = new_holder(c)) and (((dynamic_property2(1, to_rep(o29),
-  to_rep1(first(o31)), to_rep1(last1(o31))) and
-  ((to_rep1(first(o31)) = 1) and (to_rep1(last1(o31)) = to_rep(o29)))) and
-  (forall temp___168:int. (((to_rep1(first(o31)) <= temp___168) and
-  (temp___168 <= to_rep1(last1(o31)))) ->
-  ((((to_int((((o30[temp___168])).us_split_discrs1).rec__dynamic_array__rec__b) = 1) ->
+  to_rep1((((((h__split_fields3).rec__dynamic_array__holder__content1).elts1[temp___210])).us_split_fields1).rec__dynamic_array__rec__f2))))) and
+  (((((h__split_fields3).rec__dynamic_array__holder__content1).elts1[temp___210])).attr__constrained = false)))))) and
+  (forall temp___242:int.
+  (((to_rep1(first2(((h__split_fields3).rec__dynamic_array__holder__content1).rt1)) <= temp___242) and
+  (temp___242 <= to_rep1(last3(((h__split_fields3).rec__dynamic_array__holder__content1).rt1)))) ->
+  ((i2 <= temp___242) ->
+  ((((h__split_fields3).rec__dynamic_array__holder__content1).elts1[temp___242]) = (((h__split_fields2).rec__dynamic_array__holder__content1).elts1[temp___242])))))) and
+  ((1 <= i2) and (i2 <= c))) -> (((1 <= j) and (j <= (i2 - 1))) ->
+  (((((((to_rep1(first2(((h__split_fields3).rec__dynamic_array__holder__content1).rt1)) <= j) and
+  (j <= to_rep1(last3(((h__split_fields3).rec__dynamic_array__holder__content1).rt1)))) and
+  (o31 = j)) and
+  (o32 = (((h__split_fields3).rec__dynamic_array__holder__content1).elts1[o31]))) and
+  (o33 = (o32).us_split_discrs1)) and
+  (result2 = (o33).rec__dynamic_array__rec__b)) -> ((result2 = true) ->
+  ((((((({ us_split_discrs3 = { rec__dynamic_array__holder__d = o23 };
+  us_split_fields3 = { rec__dynamic_array__holder__content = { elts = o24;
+  rt = o25 } } } = new_holder(c)) and (((dynamic_property2(1, to_rep(o23),
+  to_rep1(first(o25)), to_rep1(last1(o25))) and
+  ((to_rep1(first(o25)) = 1) and (to_rep1(last1(o25)) = to_rep(o23)))) and
+  (forall temp___194:int. (((to_rep1(first(o25)) <= temp___194) and
+  (temp___194 <= to_rep1(last1(o25)))) ->
+  ((((to_int((((o24[temp___194])).us_split_discrs1).rec__dynamic_array__rec__b) = 1) ->
   dynamic_property(0, last,
-  to_rep1((((o30[temp___168])).us_split_fields1).rec__dynamic_array__rec__f1))) and
-  ((to_int((((o30[temp___168])).us_split_discrs1).rec__dynamic_array__rec__b) = 0) ->
+  to_rep1((((o24[temp___194])).us_split_fields1).rec__dynamic_array__rec__f1))) and
+  ((to_int((((o24[temp___194])).us_split_discrs1).rec__dynamic_array__rec__b) = 0) ->
   dynamic_property(0, last,
-  to_rep1((((o30[temp___168])).us_split_fields1).rec__dynamic_array__rec__f2)))) and
-  (((o30[temp___168])).attr__constrained = false))))) and (((c = 0) ->
-  (to_rep(o29) = 0)) and ((not (c = 0)) -> (to_rep(o29) = c)))))
-
-axiom H54 : ((o32 = o30) and (o33 = o31))
-
-axiom H55 : ((temp___218 = o32) and (temp___2181 = o33))
-
-axiom H56 : ((to_rep1(first(temp___2181)) <= j) and
-  (j <= to_rep1(last1(temp___2181))))
-
-axiom H57 : (o34 = j)
-
-axiom H58 : ({ us_split_discrs1 = { rec__dynamic_array__rec__b = o35 };
-  us_split_fields1 = { rec__dynamic_array__rec__f1 = o36;
-  rec__dynamic_array__rec__f2 = o37 }; attr__constrained = o38
-  } = (temp___218[o34]))
-
-axiom H59 : ((o39 = increment({ us_split_discrs1 = {
-  rec__dynamic_array__rec__b = o35 }; us_split_fields1 = {
-  rec__dynamic_array__rec__f1 = o36; rec__dynamic_array__rec__f2 = o37 };
-  attr__constrained = o38 })) and (in_range2(o39) and (((o35 = true) ->
-  (((to_rep1(o36) <  c) -> (o39 = (to_rep1(o36) + 1))) and
-  ((not (to_rep1(o36) <  c)) -> (o39 = to_rep1(o36))))) and
-  ((not (o35 = true)) -> (((to_rep1(o37) <  c) ->
-  (o39 = (to_rep1(o37) + 1))) and ((not (to_rep1(o37) <  c)) ->
-  (o39 = to_rep1(o37))))))))
-
- (* File "dynamic_array.adb", line 31, characters 0-0 *)
-goal WP_parameter_def : (to_rep1(first2(h__split_fields5)) <= j)
+  to_rep1((((o24[temp___194])).us_split_fields1).rec__dynamic_array__rec__f2)))) and
+  (((o24[temp___194])).attr__constrained = false))))) and (((c = 0) and
+  (to_rep(o23) = 0)) or ((not (c = 0)) and (to_rep(o23) = c))))) and
+  ((o24 = o26) and (o25 = o27))) and (temp___245 = { elts = o26; rt = o27
+  })) and ((((to_rep1(first((temp___245).rt)) <= j) and
+  (j <= to_rep1(last1((temp___245).rt)))) and (o28 = j)) and
+  (o29 = ((temp___245).elts[o28])))) and ((o30 = increment(o29)) and
+  (in_range2(o30) and
+  (((((o29).us_split_discrs1).rec__dynamic_array__rec__b = true) and
+  (((to_rep1(((o29).us_split_fields1).rec__dynamic_array__rec__f1) <  c) and
+  (o30 = (to_rep1(((o29).us_split_fields1).rec__dynamic_array__rec__f1) + 1))) or
+  ((not (to_rep1(((o29).us_split_fields1).rec__dynamic_array__rec__f1) <  c)) and
+  (o30 = to_rep1(((o29).us_split_fields1).rec__dynamic_array__rec__f1))))) or
+  ((not (((o29).us_split_discrs1).rec__dynamic_array__rec__b = true)) and
+  (((to_rep1(((o29).us_split_fields1).rec__dynamic_array__rec__f2) <  c) and
+  (o30 = (to_rep1(((o29).us_split_fields1).rec__dynamic_array__rec__f2) + 1))) or
+  ((not (to_rep1(((o29).us_split_fields1).rec__dynamic_array__rec__f2) <  c)) and
+  (o30 = to_rep1(((o29).us_split_fields1).rec__dynamic_array__rec__f2))))))))) ->
+  (to_rep1(first2(((h__split_fields3).rec__dynamic_array__holder__content1).rt1)) <= j))))))))))))))))

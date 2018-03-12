@@ -111,9 +111,5 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 axiom max__def_axiom : (max = 100)
 
-logic us : int
-
-axiom H : in_range(max)
-
  (* File "with_iterable.ads", line 32, characters 0-0 *)
-goal WP_parameter_def : in_range(101)
+goal WP_parameter_def : (in_range(max) -> in_range(101))

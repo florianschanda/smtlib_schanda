@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -165,101 +165,29 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic d : int
-
-logic tmp : int
-
-logic o : bool
-
-logic o1 : bool
-
-logic temp___147 : int
-
-logic o2 : bool
-
-logic o3 : bool
-
-logic o4 : bool
-
-logic result : int
-
-logic tmp1 : int
-
-logic tmp2 : int
-
-logic result1 : bool
-
-logic tmp3 : int
-
-logic tmp4 : int
-
-logic result2 : bool
-
-logic tmp5 : int
-
-logic tmp6 : int
-
-logic tmp7 : int
-
-logic tmp8 : int
-
-axiom H : (in_range2(i1s) and (((1 <= i1s) and (i1s <= 1)) or ((3 <= i1s) and
-  (i1s <= 3))))
-
-axiom H1 : (in_range2(d) and (((1 <= d) and (d <= 1)) or ((3 <= d) and
-  (d <= 3))))
-
-axiom H2 : (result = tmp)
-
-axiom H3 : (tmp1 = d)
-
-axiom H4 : in_range1(tmp1)
-
-axiom H5 : in_range1(tmp2)
-
-axiom H6 : ((o = true) <-> (((1 <= tmp2) and (tmp2 <= 1)) or ((3 <= tmp2) and
-  (tmp2 <= 3))))
-
-axiom H7 : ((in_range2(tmp2) -> (o1 = o)) and ((not in_range2(tmp2)) ->
-  (o1 = false)))
-
-axiom H8 : (((not (o1 = true)) -> (result1 = true)) and ((o1 = true) ->
-  (result1 = false)))
-
-axiom H9 : ((result1 = true) -> (temp___147 = tmp2))
-
-axiom H10 : ((result1 = true) -> (((0 <= 6) -> in_range1(tmp3)) and
-  (in_range2(tmp3) -> (not (((1 <= tmp3) and (tmp3 <= 1)) or ((3 <= tmp3) and
-  (tmp3 <= 3)))))))
-
-axiom H11 : ((result1 = true) -> in_range1(tmp4))
-
-axiom H12 : ((result1 = true) -> ((o2 = true) <-> (((1 <= tmp4) and
-  (tmp4 <= 1)) or ((3 <= tmp4) and (tmp4 <= 3)))))
-
-axiom H13 : ((result1 = true) -> ((in_range2(tmp4) -> (o3 = o2)) and
-  ((not in_range2(tmp4)) -> (o3 = false))))
-
-axiom H14 : ((result1 = true) -> (((not (o3 = true)) -> (o4 = true)) and
-  ((o3 = true) -> (o4 = false))))
-
-axiom H15 : ((result1 = true) -> (((not (o4 = true)) -> (result2 = true)) and
-  ((o4 = true) -> (result2 = false))))
-
-axiom H16 : ((result1 = true) -> (result2 = true))
-
-axiom H17 : ((result1 = true) -> (tmp4 = tmp5))
-
-axiom H18 : ((result1 = true) -> (tmp6 = tmp4))
-
-axiom H19 : ((result1 = true) -> (tmp7 = tmp5))
-
-axiom H20 : ((result1 = true) -> (tmp8 = tmp6))
-
-axiom H21 : ((not (result1 = true)) -> (tmp2 = tmp7))
-
-axiom H22 : ((not (result1 = true)) -> (tmp8 = tmp2))
-
  (* File "days.adb", line 4, characters 0-0 *)
-goal WP_parameter_def : (((1 <= tmp7) and (tmp7 <= 1)) or ((3 <= tmp7) and
-  (tmp7 <= 3)))
+goal WP_parameter_def :
+  (forall d:int. forall tmp:int. forall o:bool. forall o1:bool.
+  forall temp___171:int. forall o2:bool. forall o3:bool. forall o4:bool.
+  forall result:int. forall tmp1:int. forall tmp2:int. forall result1:bool.
+  forall tmp3:int. forall tmp4:int. forall result2:bool. forall tmp5:int.
+  forall tmp6:int. forall tmp7:int. forall tmp8:int. ((in_range2(i1s) and
+  (((1 <= i1s) and (i1s <= 1)) or ((3 <= i1s) and (i1s <= 3)))) ->
+  ((in_range2(d) and (((1 <= d) and (d <= 1)) or ((3 <= d) and (d <= 3)))) ->
+  (((result = tmp) and (tmp1 = d)) -> (in_range1(tmp1) -> (in_range1(tmp2) ->
+  ((((((o = true) <-> (((1 <= tmp2) and (tmp2 <= 1)) or ((3 <= tmp2) and
+  (tmp2 <= 3)))) and ((in_range2(tmp2) and (o1 = o)) or
+  ((not in_range2(tmp2)) and (o1 = false)))) and (((not (o1 = true)) and
+  (result1 = true)) or ((o1 = true) and (result1 = false)))) and
+  (((result1 = true) and ((((temp___171 = tmp2) and ((((0 <= 6) ->
+  in_range1(tmp3)) and (in_range2(tmp3) -> (not (((1 <= tmp3) and
+  (tmp3 <= 1)) or ((3 <= tmp3) and (tmp3 <= 3)))))) and (in_range1(tmp4) and
+  ((((((o2 = true) <-> (((1 <= tmp4) and (tmp4 <= 1)) or ((3 <= tmp4) and
+  (tmp4 <= 3)))) and ((in_range2(tmp4) and (o3 = o2)) or
+  ((not in_range2(tmp4)) and (o3 = false)))) and (((not (o3 = true)) and
+  (o4 = true)) or ((o3 = true) and (o4 = false)))) and
+  (((not (o4 = true)) and (result2 = true)) or ((o4 = true) and
+  (result2 = false)))) and (result2 = true))))) and ((tmp4 = tmp5) and
+  (tmp6 = tmp4))) and ((tmp7 = tmp5) and (tmp8 = tmp6)))) or
+  ((not (result1 = true)) and ((tmp2 = tmp7) and (tmp8 = tmp2))))) ->
+  (((1 <= tmp7) and (tmp7 <= 1)) or ((3 <= tmp7) and (tmp7 <= 3))))))))))

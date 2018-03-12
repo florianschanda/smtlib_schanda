@@ -287,40 +287,8 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic status : int
-
-logic delta_x : int
-
-logic delta_y : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic result : int
-
-logic delta_x1 : int
-
-logic result1 : int
-
-logic delta_y1 : int
-
-axiom H : ((0 <= 2) -> in_range2(status))
-
-axiom H1 : ((o = abs_int((to_rep(a) - to_rep(b)))) and
-  in_range(abs_int((to_rep(a) - to_rep(b)))))
-
  (* File "raster_graphics.adb", line 4, characters 0-0 *)
-goal WP_parameter_def : in_range1(o)
+goal WP_parameter_def :
+  (forall status:int. forall o:int. (((0 <= 2) -> in_range2(status)) ->
+  (((o = abs_int((to_rep(a) - to_rep(b)))) and
+  in_range(abs_int((to_rep(a) - to_rep(b))))) -> in_range1(o))))

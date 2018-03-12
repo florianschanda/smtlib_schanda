@@ -371,58 +371,15 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic d1 : duration
-
-logic d2 : duration
-
-logic r : int
-
-logic o : duration
-
-logic o1 : duration
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic result : duration
-
-logic d11 : duration
-
-logic result1 : duration
-
-logic d21 : duration
-
-logic result2 : int
-
-logic r1 : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range(r))
-
-axiom H1 : (to_fixed(o) = 4)
-
-axiom H2 : (result = d1)
-
-axiom H3 : (d11 = o)
-
-axiom H4 : (to_fixed(o1) = 2)
-
-axiom H5 : (result1 = d2)
-
-axiom H6 : (d21 = o1)
-
-axiom H7 : ((o2 = fxp_div_result_int(to_fixed(d11), 1)) and
-  in_range(fxp_div_result_int(to_fixed(d11), 1)))
-
-axiom H8 : ((o3 = o2) and in_range(o2))
-
-axiom H9 : (result2 = r)
-
-axiom H10 : (r1 = o3)
-
-axiom H11 : (r1 = 4)
-
  (* File "fxp_div_int_res.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (div(d11, d21) = 2)
+goal WP_parameter_def :
+  (forall d1:duration. forall d2:duration. forall r:int. forall o:duration.
+  forall o1:duration. forall o2:int. forall o3:int. forall result:duration.
+  forall d11:duration. forall result1:duration. forall d21:duration.
+  forall result2:int. forall r1:int. ((((- 2147483648) <= 2147483647) ->
+  in_range(r)) -> (((to_fixed(o) = 4) and ((result = d1) and (d11 = o))) ->
+  (((to_fixed(o1) = 2) and ((result1 = d2) and (d21 = o1))) ->
+  (((((o2 = fxp_div_result_int(to_fixed(d11), 1)) and
+  in_range(fxp_div_result_int(to_fixed(d11), 1))) and ((o3 = o2) and
+  in_range(o2))) and ((result2 = r) and (r1 = o3))) -> ((r1 = 4) -> (div(d11,
+  d21) = 2)))))))

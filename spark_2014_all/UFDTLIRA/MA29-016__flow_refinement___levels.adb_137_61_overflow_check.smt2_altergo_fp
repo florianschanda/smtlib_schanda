@@ -156,97 +156,20 @@ axiom read_partial_2__post_axiom :
   (in_range(levels__nested_1__nested_2__x2) ->
   in_range(read_partial_2(levels__nested_1__nested_2__x2))))
 
-logic x0 : int
-
-logic a : int
-
-logic x1 : int
-
-logic x2 : int
-
-logic y2 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : int
-
-logic o13 : int
-
-logic o14 : int
-
-logic o15 : int
-
-logic o16 : int
-
-logic o17 : int
-
-logic result : int
-
-logic a1 : int
-
-logic a2 : int
-
-logic a3 : int
-
-axiom H : in_range(x0)
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(a))
-
-axiom H2 : in_range(x1)
-
-axiom H3 : in_range(x2)
-
-axiom H4 : in_range(y2)
-
-axiom H5 : ((o = read_partial_2(x2)) and in_range(o))
-
-axiom H6 : ((o1 = (x0 + x1)) and in_range((x0 + x1)))
-
-axiom H7 : (o2 = (o1 + o))
-
-axiom H8 : ((o3 = o2) and in_range(o2))
-
-axiom H9 : (result = a)
-
-axiom H10 : (a1 = o3)
-
-axiom H11 : (a1 = a2)
-
-axiom H12 : (a3 = a1)
-
-axiom H13 : ((o7 = read_partial_2(x2)) and in_range(o7))
-
-axiom H14 : ((o4 = read_partial_1(x1)) and in_range(o4))
-
-axiom H15 : ((o5 = read_partial_0(x0)) and in_range(o5))
-
-axiom H16 : (o6 = (o5 + o4))
-
-axiom H17 : ((o8 = o6) and in_range(o6))
-
-axiom H18 : (o9 = (o8 + o7))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(o9)
+goal WP_parameter_def :
+  (forall x0:int. forall a:int. forall x1:int. forall x2:int. forall y2:int.
+  forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
+  forall o5:int. forall o6:int. forall o7:int. forall o8:int. forall o9:int.
+  forall result:int. forall a1:int. forall a2:int. forall a3:int.
+  (in_range(x0) -> ((((- 2147483648) <= 2147483647) -> in_range(a)) ->
+  (in_range(x1) -> (in_range(x2) -> (in_range(y2) ->
+  (((((((o = read_partial_2(x2)) and in_range(o)) and (((o1 = (x0 + x1)) and
+  in_range((x0 + x1))) and (o2 = (o1 + o)))) and ((o3 = o2) and
+  in_range(o2))) and (({ int__content = result } = { int__content = a }) and
+  (a1 = o3))) and ((a1 = a2) and (a3 = a1))) ->
+  ((((o7 = read_partial_2(x2)) and in_range(o7)) and
+  (((((o4 = read_partial_1(x1)) and in_range(o4)) and
+  (((o5 = read_partial_0(x0)) and in_range(o5)) and (o6 = (o5 + o4)))) and
+  ((o8 = o6) and in_range(o6))) and (o9 = (o8 + o7)))) ->
+  in_range(o9)))))))))

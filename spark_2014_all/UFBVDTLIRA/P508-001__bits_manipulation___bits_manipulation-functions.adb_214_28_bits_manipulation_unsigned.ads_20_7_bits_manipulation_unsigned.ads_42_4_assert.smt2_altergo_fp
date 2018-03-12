@@ -594,12 +594,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -611,6 +605,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -712,9 +712,13 @@ logic shift_right__function_guard : t, t, int -> prop
 
 axiom make_mask__post_axiom : true
 
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 255)
+
 axiom make_mask__def_axiom :
   (forall num_bits:int [make_mask(num_bits)]. (in_range1(num_bits) ->
-  (make_mask(num_bits) = shift_right(of_int(255), (8 - num_bits)))))
+  (make_mask(num_bits) = shift_right(rliteral, (8 - num_bits)))))
 
 logic lemma8 : unit -> bool
 
@@ -732,13 +736,21 @@ logic lemma2__function_guard : bool, unit -> prop
 
 axiom lemma2__post_axiom : true
 
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 1)
+
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 0)
+
 axiom lemma2__def_axiom : (((lemma2(void) = true) ->
   (forall size:int. (((1 <= size) and (size <= 7)) -> (((size <  256) ->
-  (make_mask(size) = sub(lsl_bv(of_int(1), of_int(size)), of_int(1)))) and
-  ((not (size <  256)) -> (make_mask(size) = sub(of_int(0), of_int(1)))))))) and
+  (make_mask(size) = sub(lsl_bv(rliteral1, of_int(size)), rliteral1))) and
+  ((not (size <  256)) -> (make_mask(size) = sub(rliteral2, rliteral1))))))) and
   ((forall size:int. (((1 <= size) and (size <= 7)) -> (((size <  256) and
-   (make_mask(size) = sub(lsl_bv(of_int(1), of_int(size)), of_int(1)))) or
-   ((not (size <  256)) and (make_mask(size) = sub(of_int(0), of_int(1))))))) ->
+   (make_mask(size) = sub(lsl_bv(rliteral1, of_int(size)), rliteral1))) or
+   ((not (size <  256)) and (make_mask(size) = sub(rliteral2, rliteral1)))))) ->
   (lemma2(void) = true)))
 
 logic lemma2_goal : unit -> bool
@@ -1803,12 +1815,12 @@ logic toBig : t -> t3
 
 logic toSmall : t3 -> t
 
-logic rliteral : t3
+logic rliteral3 : t3
 
-axiom rliteral_axiom : (tqtint3(rliteral) = 255)
+axiom rliteral_axiom3 : (tqtint3(rliteral3) = 255)
 
 axiom toSmall_to_uint :
-  (forall x:t3. (ule3(x, rliteral) -> (tqtint3(x) = tqtint(toSmall(x)))))
+  (forall x:t3. (ule3(x, rliteral3) -> (tqtint3(x) = tqtint(toSmall(x)))))
 
 axiom toBig_to_uint : (forall x:t. (tqtint(x) = tqtint3(toBig(x))))
 
@@ -1816,12 +1828,12 @@ logic toBig1 : t -> t2
 
 logic toSmall1 : t2 -> t
 
-logic rliteral1 : t2
+logic rliteral4 : t2
 
-axiom rliteral_axiom1 : (tqtint2(rliteral1) = 255)
+axiom rliteral_axiom4 : (tqtint2(rliteral4) = 255)
 
 axiom toSmall_to_uint1 :
-  (forall x:t2. (ule2(x, rliteral1) -> (tqtint2(x) = tqtint(toSmall1(x)))))
+  (forall x:t2. (ule2(x, rliteral4) -> (tqtint2(x) = tqtint(toSmall1(x)))))
 
 axiom toBig_to_uint1 : (forall x:t. (tqtint(x) = tqtint2(toBig1(x))))
 
@@ -1829,27 +1841,31 @@ logic toBig2 : t -> t1
 
 logic toSmall2 : t1 -> t
 
-logic rliteral2 : t1
+logic rliteral5 : t1
 
-axiom rliteral_axiom2 : (tqtint1(rliteral2) = 255)
+axiom rliteral_axiom5 : (tqtint1(rliteral5) = 255)
 
 axiom toSmall_to_uint2 :
-  (forall x:t1. (ule1(x, rliteral2) -> (tqtint1(x) = tqtint(toSmall2(x)))))
+  (forall x:t1. (ule1(x, rliteral5) -> (tqtint1(x) = tqtint(toSmall2(x)))))
 
 axiom toBig_to_uint2 : (forall x:t. (tqtint(x) = tqtint1(toBig2(x))))
 
 axiom shift_right__post_axiom : true
+
+logic rliteral6 : t1
+
+axiom rliteral_axiom6 : (tqtint1(rliteral6) = 0)
 
 axiom shift_right__def_axiom :
   (forall v:t.
   (forall amount:int [shift_right(v, amount)]. (in_range3(amount) ->
   ((((1 <= 8) and (8 <= 8)) -> (((amount <  8) -> (shift_right(v,
   amount) = lsr_bv(v, of_int(amount)))) and ((not (amount <  8)) ->
-  (shift_right(v, amount) = of_int(0))))) and ((not ((1 <= 8) and
+  (shift_right(v, amount) = rliteral2)))) and ((not ((1 <= 8) and
   (8 <= 8))) -> ((((9 <= 8) and (8 <= 16)) -> (((amount <  16) ->
   (shift_right(v, amount) = toSmall2(lsr_bv1(toBig2(v),
   of_int2(amount))))) and ((not (amount <  16)) -> (shift_right(v,
-  amount) = toSmall2(of_int2(0)))))) and ((not ((9 <= 8) and (8 <= 16))) ->
+  amount) = toSmall2(rliteral6))))) and ((not ((9 <= 8) and (8 <= 16))) ->
   ((((17 <= 8) and (8 <= 32)) -> (shift_right(v,
   amount) = toSmall1(lsr_bv2(toBig1(v), of_int3(amount))))) and
   ((not ((17 <= 8) and (8 <= 32))) -> (shift_right(v,
@@ -1858,71 +1874,15 @@ axiom shift_right__def_axiom :
 axiom lemma8__post_axiom1 : true
 
 axiom lemma8__def_axiom : (((lemma81(void) = true) ->
-  (forall val__:t. ((ule(of_int(0), val__) and ule(val__, of_int(255))) ->
+  (forall val__:t. ((ule(rliteral2, val__) and ule(val__, rliteral)) ->
   (forall n:int. (((1 <= n) and (n <= 7)) -> (((n <  256) ->
-  ult(shift_right(val__, (8 - n)), lsl_bv(of_int(1), of_int(n)))) and
-  ((not (n <  256)) -> ult(shift_right(val__, (8 - n)), of_int(0))))))))) and
-  ((forall val__:t. ((ule(of_int(0), val__) and ule(val__, of_int(255))) ->
+  ult(shift_right(val__, (8 - n)), lsl_bv(rliteral1, of_int(n)))) and
+  ((not (n <  256)) -> ult(shift_right(val__, (8 - n)), rliteral2)))))))) and
+  ((forall val__:t. ((ule(rliteral2, val__) and ule(val__, rliteral)) ->
    (forall n:int. (((1 <= n) and (n <= 7)) -> (((n <  256) and
-   ult(shift_right(val__, (8 - n)), lsl_bv(of_int(1), of_int(n)))) or
-   ((not (n <  256)) and ult(shift_right(val__, (8 - n)), of_int(0)))))))) ->
+   ult(shift_right(val__, (8 - n)), lsl_bv(rliteral1, of_int(n)))) or
+   ((not (n <  256)) and ult(shift_right(val__, (8 - n)), rliteral2))))))) ->
   (lemma81(void) = true)))
 
-logic i : int
-
-logic bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__result : bool
-
-logic temp___387 : int
-
-logic j : int
-
-logic o : int
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : bool
-
-logic result : int
-
-logic i1 : int
-
-logic i2 : int
-
-logic result1 : int
-
-logic i3 : int
-
-logic i4 : int
-
-logic i5 : int
-
-logic i6 : int
-
-logic i7 : int
-
-logic i8 : int
-
-logic i9 : int
-
-logic result2 : bool
-
-logic bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__result1 : bool
-
-logic bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__result2 : bool
-
-logic bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__result3 : bool
-
-logic i10 : int
-
-logic bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__result4 : bool
-
-logic i11 : int
-
-logic bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__result5 : bool
-
-axiom H : (lemma8(void) = true)
-
  (* File "bits_manipulation-functions.ads", line 302, characters 0-0 *)
-goal WP_parameter_def : (make_mask(1) = of_int(1))
+goal WP_parameter_def : ((lemma8(void) = true) -> (make_mask(1) = rliteral1))

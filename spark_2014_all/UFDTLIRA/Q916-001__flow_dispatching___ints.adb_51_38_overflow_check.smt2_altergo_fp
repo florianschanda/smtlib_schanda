@@ -470,9 +470,7 @@ logic arg__attr__tag : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic arg__split_fields : natural
-
-logic o : int
-
  (* File "ints.ads", line 28, characters 0-0 *)
-goal WP_parameter_def : in_range((to_rep(arg__split_fields) + 1))
+goal WP_parameter_def :
+  (forall arg__split_fields:natural.
+  in_range((to_rep(arg__split_fields) + 1)))

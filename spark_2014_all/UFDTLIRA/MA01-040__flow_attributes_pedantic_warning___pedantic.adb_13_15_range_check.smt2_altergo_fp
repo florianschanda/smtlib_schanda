@@ -213,7 +213,5 @@ type r__ref = { r__content : us_rep
 
 function r__ref___projection(a: r__ref) : us_rep = (a).r__content
 
-logic o : int
-
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def : in_range(value__alignment)

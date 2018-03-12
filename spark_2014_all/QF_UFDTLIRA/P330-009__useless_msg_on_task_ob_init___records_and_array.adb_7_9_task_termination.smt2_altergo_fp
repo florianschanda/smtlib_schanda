@@ -107,17 +107,5 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic p : int
-
-logic o : int
-
-logic result : int
-
-logic p1 : int
-
-logic p2 : int
-
-axiom H : false
-
  (* File "records_and_array.adb", line 41, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def : true

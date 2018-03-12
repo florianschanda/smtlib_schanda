@@ -357,7 +357,5 @@ logic p__split_discrs : any_priority
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic us : int
-
  (* File "interrupt_priority.ads", line 18, characters 0-0 *)
 goal WP_parameter_def : in_range(0)

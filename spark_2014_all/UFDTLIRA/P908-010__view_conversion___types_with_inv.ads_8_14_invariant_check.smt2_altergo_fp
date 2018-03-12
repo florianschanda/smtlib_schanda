@@ -143,51 +143,16 @@ axiom coerce_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : int
-
-logic o : t2
-
-logic o1 : int
-
-logic types_with_inv__set_to_zero__x : int
-
-logic result : int
-
-logic x1 : int
-
-logic types_with_inv__set_to_zero__x1 : int
-
-logic result1 : int
-
-logic x2 : int
-
-logic x3 : int
-
-logic x4 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : (not (x = 0))
-
-axiom H2 : in_range(types_with_inv__set_to_zero__x)
-
-axiom H3 : (result = x)
-
-axiom H4 : (x1 = types_with_inv__set_to_zero__x)
-
-axiom H5 : in_range(types_with_inv__set_to_zero__x1)
-
-axiom H6 : (to_rep(o) = types_with_inv__set_to_zero__x1)
-
-axiom H7 : (o1 = to_rep(o))
-
-axiom H8 : (result1 = x1)
-
-axiom H9 : (x2 = o1)
-
-axiom H10 : (x2 = x3)
-
-axiom H11 : (x4 = x2)
-
  (* File "types_with_inv.ads", line 21, characters 0-0 *)
-goal WP_parameter_def : (not (x3 = 0))
+goal WP_parameter_def :
+  (forall x:int. forall o:t2. forall o1:int.
+  forall types_with_inv__set_to_zero__x:int. forall result:int.
+  forall x1:int. forall types_with_inv__set_to_zero__x1:int.
+  forall result1:int. forall x2:int. forall x3:int. forall x4:int.
+  (in_range1(x) -> ((not (x = 0)) ->
+  ((((in_range(types_with_inv__set_to_zero__x) and ((result = x) and
+  (x1 = types_with_inv__set_to_zero__x))) and
+  (in_range(types_with_inv__set_to_zero__x1) and
+  (((to_rep(o) = types_with_inv__set_to_zero__x1) and (o1 = to_rep(o))) and
+  ((result1 = x1) and (x2 = o1))))) and ((x2 = x3) and (x4 = x2))) ->
+  (not (x3 = 0))))))

@@ -297,78 +297,21 @@ logic attr__ATTRIBUTE_ADDRESS6 : int
 
 axiom min_distance__def_axiom : (min_distance = min)
 
-logic status : int
-
-logic delta_x : int
-
-logic delta_y : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic result : int
-
-logic delta_x1 : int
-
-logic result1 : int
-
-logic delta_y1 : int
-
-axiom H : in_range1(min)
-
-axiom H1 : in_range1(min_distance)
-
-axiom H2 : (min = min_distance)
-
-axiom H3 : ((0 <= 2) -> in_range2(status))
-
-axiom H4 : ((o = abs_int((to_rep(a) - to_rep(b)))) and
-  in_range(abs_int((to_rep(a) - to_rep(b)))))
-
-axiom H5 : ((o1 = o) and in_range1(o))
-
-axiom H6 : (result = delta_x)
-
-axiom H7 : (delta_x1 = o1)
-
-axiom H8 : in_range1(delta_x1)
-
-axiom H9 : ((o2 = abs_int((to_rep(a1) - to_rep(b1)))) and
-  in_range(abs_int((to_rep(a1) - to_rep(b1)))))
-
-axiom H10 : ((o3 = o2) and in_range1(o2))
-
-axiom H11 : (result1 = delta_y)
-
-axiom H12 : (delta_y1 = o3)
-
-axiom H13 : in_range1(delta_y1)
-
-axiom H14 : ((o7 = (min_distance * min_distance)) and
-  in_range((min_distance * min_distance)))
-
-axiom H15 : ((o4 = (delta_y1 * delta_y1)) and
-  in_range((delta_y1 * delta_y1)))
-
-axiom H16 : ((o5 = (delta_x1 * delta_x1)) and
-  in_range((delta_x1 * delta_x1)))
-
-axiom H17 : (o6 = (o5 + o4))
-
  (* File "raster_graphics.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : in_range(o6)
+goal WP_parameter_def :
+  (forall status:int. forall delta_x:int. forall delta_y:int. forall o:int.
+  forall o1:int. forall o2:int. forall o3:int. forall o4:int. forall o5:int.
+  forall o6:int. forall o7:int. forall result:int. forall delta_x1:int.
+  forall result1:int. forall delta_y1:int. (in_range1(min) ->
+  (in_range1(min_distance) -> ((min = min_distance) -> (((0 <= 2) ->
+  in_range2(status)) -> (((((o = abs_int((to_rep(a) - to_rep(b)))) and
+  in_range(abs_int((to_rep(a) - to_rep(b))))) and ((o1 = o) and
+  in_range1(o))) and ((result = delta_x) and (delta_x1 = o1))) ->
+  (in_range1(delta_x1) -> (((((o2 = abs_int((to_rep(a1) - to_rep(b1)))) and
+  in_range(abs_int((to_rep(a1) - to_rep(b1))))) and ((o3 = o2) and
+  in_range1(o2))) and ((result1 = delta_y) and (delta_y1 = o3))) ->
+  (in_range1(delta_y1) -> (((o7 = (min_distance * min_distance)) and
+  in_range((min_distance * min_distance))) ->
+  ((((o4 = (delta_y1 * delta_y1)) and in_range((delta_y1 * delta_y1))) and
+  (((o5 = (delta_x1 * delta_x1)) and in_range((delta_x1 * delta_x1))) and
+  (o6 = (o5 + o4)))) -> in_range(o6))))))))))))

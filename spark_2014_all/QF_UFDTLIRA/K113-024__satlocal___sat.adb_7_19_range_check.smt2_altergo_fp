@@ -115,43 +115,7 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic res : int
-
-logic sat__add__result : int
-
-logic o : int
-
-logic result : int
-
-logic res1 : int
-
-logic result1 : int
-
-logic res2 : int
-
-logic result2 : int
-
-logic sat__add__result1 : int
-
-logic sat__add__result2 : int
-
-logic sat__add__result3 : int
-
-logic res3 : int
-
-logic sat__add__result4 : int
-
-logic res4 : int
-
-logic sat__add__result5 : int
-
-axiom H : in_range(x)
-
-axiom H1 : in_range(y)
-
-axiom H2 : ((0 <= 10000) -> in_range(res))
-
-axiom H3 : ((x + y) <  10000)
-
  (* File "sat.ads", line 4, characters 0-0 *)
-goal WP_parameter_def : in_range((x + y))
+goal WP_parameter_def :
+  (forall res:int. (in_range(x) -> (in_range(y) -> (((0 <= 10000) ->
+  in_range(res)) -> (((x + y) <  10000) -> in_range((x + y)))))))

@@ -341,71 +341,42 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic x__split_fields : even
-
-logic x__split_fields1 : even
-
-logic dynamic_preds__update_even_pair__x__fields : even
-
-logic dynamic_preds__update_even_pair__x__fields1 : even
-
-logic result : even
-
-logic result1 : even
-
-logic x__split_fields2 : even
-
-logic x__split_fields3 : even
-
-logic dynamic_preds__update_constant_even_pair__x__fields : even
-
-logic dynamic_preds__update_constant_even_pair__x__fields1 : even
-
-logic result2 : even
-
-logic result3 : even
-
-logic x__split_fields4 : even
-
-logic x__split_fields5 : even
-
-axiom H : (in_range(i7s) and (mod(i7s, 2) = 0))
-
-axiom H1 : ((to_rep(i11s1) = (to_rep(i11s) + 2)) and ((mod(to_rep(i11s),
-  2) = 0) and (mod(to_rep(i11s1), 2) = 0)))
-
-axiom H2 : ((to_rep(x__split_fields1) = (to_rep(x__split_fields) + 2)) and
+ (* File "dynamic_preds.ads", line 6, characters 0-0 *)
+goal WP_parameter_def :
+  (forall x__split_fields:even. forall x__split_fields1:even.
+  forall dynamic_preds__update_even_pair__x__fields:even.
+  forall dynamic_preds__update_even_pair__x__fields1:even.
+  forall result:even. forall result1:even. forall x__split_fields2:even.
+  forall x__split_fields3:even.
+  forall dynamic_preds__update_constant_even_pair__x__fields:even.
+  forall dynamic_preds__update_constant_even_pair__x__fields1:even.
+  forall result2:even. forall result3:even. forall x__split_fields4:even.
+  forall x__split_fields5:even. ((in_range(i7s) and (mod(i7s, 2) = 0)) ->
+  (((to_rep(i11s1) = (to_rep(i11s) + 2)) and ((mod(to_rep(i11s), 2) = 0) and
+  (mod(to_rep(i11s1), 2) = 0))) ->
+  (((to_rep(x__split_fields1) = (to_rep(x__split_fields) + 2)) and
   ((mod(to_rep(x__split_fields), 2) = 0) and (mod(to_rep(x__split_fields1),
-  2) = 0)))
-
-axiom H3 : ((mod(to_rep(dynamic_preds__update_even_pair__x__fields),
+  2) = 0))) -> ((((mod(to_rep(dynamic_preds__update_even_pair__x__fields),
   2) = 0) and (mod(to_rep(dynamic_preds__update_even_pair__x__fields1),
-  2) = 0))
-
-axiom H4 : ((result = x__split_fields) and (result1 = x__split_fields1))
-
-axiom H5 :
-  ((x__split_fields2 = dynamic_preds__update_even_pair__x__fields) and
-  (x__split_fields3 = dynamic_preds__update_even_pair__x__fields1))
-
-axiom H6 : (to_rep(x__split_fields3) = (to_rep(x__split_fields2) + 2))
-
-axiom H7 :
-  (((to_rep(dynamic_preds__update_constant_even_pair__x__fields) = 0) and
+  2) = 0)) and ((({ us_split_fields__content = {
+  rec__dynamic_preds__even_pair__a = result;
+  rec__dynamic_preds__even_pair__b = result1 } } = {
+  us_split_fields__content = { rec__dynamic_preds__even_pair__a =
+  x__split_fields; rec__dynamic_preds__even_pair__b = x__split_fields1 }
+  }) and ({ rec__dynamic_preds__even_pair__a = x__split_fields2;
+  rec__dynamic_preds__even_pair__b = x__split_fields3 } = {
+  rec__dynamic_preds__even_pair__a =
+  dynamic_preds__update_even_pair__x__fields;
+  rec__dynamic_preds__even_pair__b =
+  dynamic_preds__update_even_pair__x__fields1 })) and
+  (to_rep(x__split_fields3) = (to_rep(x__split_fields2) + 2)))) ->
+  ((((to_rep(dynamic_preds__update_constant_even_pair__x__fields) = 0) and
   (to_rep(dynamic_preds__update_constant_even_pair__x__fields1) = 2)) and
   ((mod(to_rep(dynamic_preds__update_constant_even_pair__x__fields),
   2) = 0) and
   (mod(to_rep(dynamic_preds__update_constant_even_pair__x__fields1),
-  2) = 0)))
-
-axiom H8 : (result2 = x__split_fields2)
-
-axiom H9 : (result3 = x__split_fields3)
-
-axiom H10 :
+  2) = 0))) -> ((((result2 = x__split_fields2) and
+  (result3 = x__split_fields3)) and
   ((x__split_fields4 = dynamic_preds__update_constant_even_pair__x__fields) and
-  (x__split_fields5 = dynamic_preds__update_constant_even_pair__x__fields1))
-
- (* File "dynamic_preds.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (to_rep(x__split_fields5) = (to_rep(x__split_fields4) + 2))
+  (x__split_fields5 = dynamic_preds__update_constant_even_pair__x__fields1))) ->
+  (to_rep(x__split_fields5) = (to_rep(x__split_fields4) + 2)))))))))

@@ -135,27 +135,11 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic price_of_apple : int
-
-logic extra_cost : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : bool
-
-axiom H : in_range1(extra_cost)
-
-axiom H1 : in_range1(price_of_apple)
-
-axiom H2 : ((o = (2147483647 - extra_cost)) and
-  in_range((2147483647 - extra_cost)))
-
-axiom H3 : (((price_of_apple <= o) -> (result = true)) and
-  ((not (price_of_apple <= o)) -> (result = false)))
-
-axiom H4 : (result = true)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((price_of_apple + extra_cost))
+goal WP_parameter_def :
+  (forall price_of_apple:int. forall extra_cost:int. forall o:int.
+  forall result:bool. (in_range1(extra_cost) -> (in_range1(price_of_apple) ->
+  ((((o = (2147483647 - extra_cost)) and
+  in_range((2147483647 - extra_cost))) and (((price_of_apple <= o) and
+  (result = true)) or ((not (price_of_apple <= o)) and (result = false)))) ->
+  ((result = true) -> in_range((price_of_apple + extra_cost)))))))

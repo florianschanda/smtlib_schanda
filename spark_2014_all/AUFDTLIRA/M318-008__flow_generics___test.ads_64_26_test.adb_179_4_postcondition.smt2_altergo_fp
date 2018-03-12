@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -237,24 +237,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,fruits) farray, int, int, (int,fruits) farray, int,
-  int -> (int,fruits) farray
-
-axiom concat_def :
-  (forall a:(int,fruits) farray. forall b:(int,fruits) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : fruits, int -> (int,fruits) farray
-
-axiom singleton_def :
-  (forall v:fruits.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,fruits) farray, int, int, (int,fruits) farray, int,
   int -> bool
 
@@ -265,17 +247,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_134:int. ((((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) and
-  (to_rep1((a[temp___idx_134])) = to_rep1((b[((b__first - a__first) + temp___idx_134)])))) or
-  (not ((a__first <= temp___idx_134) and (temp___idx_134 <= a__last)))))) ->
+  (forall temp___idx_156:int. ((((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) and
+  (to_rep1((a[temp___idx_156])) = to_rep1((b[((b__first - a__first) + temp___idx_156)])))) or
+  (not ((a__first <= temp___idx_156) and (temp___idx_156 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_134:int. (((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) ->
-  (to_rep1((a[temp___idx_134])) = to_rep1((b[((b__first - a__first) + temp___idx_134)]))))))) ->
+  (forall temp___idx_156:int. (((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) ->
+  (to_rep1((a[temp___idx_156])) = to_rep1((b[((b__first - a__first) + temp___idx_156)]))))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -285,37 +267,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_134:int. (((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) ->
-  (to_rep1((a[temp___idx_134])) = to_rep1((b[((b__first - a__first) + temp___idx_134)])))))))))
-
-logic compare : (int,fruits) farray, int, int, (int,fruits) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,fruits) farray. forall b:(int,fruits) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,fruits) farray. forall b:(int,fruits) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep1((a[(i + 1)])) <  to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,fruits) farray. forall b:(int,fruits) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep1((b[(i + 1)])) <  to_rep1((a[(j + 1)]))))))))))))
+  (forall temp___idx_156:int. (((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) ->
+  (to_rep1((a[temp___idx_156])) = to_rep1((b[((b__first - a__first) + temp___idx_156)])))))))))
 
 type item_t
 
@@ -433,156 +387,47 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic inventory : (int,fruits) farray
-
-logic i : int
-
-logic temp___459 : (int,fruits) farray
-
-logic o : fruits
-
-logic o1 : (int,fruits) farray
-
-logic i1 : int
-
-logic inventory1 : (int,fruits) farray
-
-logic result : int
-
-logic i2 : int
-
-logic inventory2 : (int,fruits) farray
-
-logic i3 : int
-
-logic result1 : bool
-
-logic result2 : (int,fruits) farray
-
-logic inventory3 : (int,fruits) farray
-
-logic inventory4 : (int,fruits) farray
-
-logic i4 : int
-
-logic inventory5 : (int,fruits) farray
-
-logic i5 : int
-
-logic inventory6 : (int,fruits) farray
-
-logic i6 : int
-
-logic inventory7 : (int,fruits) farray
-
-logic i7 : int
-
-logic inventory8 : (int,fruits) farray
-
-logic i8 : int
-
-logic inventory9 : (int,fruits) farray
-
-logic i9 : int
-
-axiom H : dynamic_property(1, 2147483647, to_rep(inventory__first),
-  to_rep(inventory__last))
-
-axiom H1 : in_range4(fill_with)
-
-axiom H2 : (to_rep(inventory__first) <  to_rep(inventory__last))
-
-axiom H3 : (result = i)
-
-axiom H4 : (i2 = to_rep(inventory__first))
-
-axiom H5 : (((to_rep(inventory__first) <= i2) and
-  (i2 <= to_rep(inventory__last))) -> (temp___459 = inventory))
-
-axiom H6 : (((to_rep(inventory__first) <= i2) and
-  (i2 <= to_rep(inventory__last))) ->
-  ((forall temp___460:int. (((to_rep(inventory__first) <= temp___460) and
-   (temp___460 <= to_rep(inventory__last))) -> ((i3 <= temp___460) ->
-   ((inventory2[temp___460]) = (temp___459[temp___460]))))) and
-  ((to_rep(inventory__first) <= i3) and (i3 <= to_rep(inventory__last)))))
-
-axiom H7 : (((to_rep(inventory__first) <= i2) and
-  (i2 <= to_rep(inventory__last))) ->
-  ((result1 = found_none(to_rep1((inventory2[i3])))) and
-  ((result1 = true) <-> (to_rep1((inventory2[i3])) = 0))))
-
-axiom H8 : (((to_rep(inventory__first) <= i2) and
-  (i2 <= to_rep(inventory__last))) -> ((result1 = true) ->
-  (to_rep1(o) = fill_with)))
-
-axiom H9 : (((to_rep(inventory__first) <= i2) and
-  (i2 <= to_rep(inventory__last))) -> ((result1 = true) ->
-  (o1 = (inventory2[i3 <- o]))))
-
-axiom H10 : (((to_rep(inventory__first) <= i2) and
-  (i2 <= to_rep(inventory__last))) -> ((result1 = true) ->
-  (inventory2 = result2)))
-
-axiom H11 : (((to_rep(inventory__first) <= i2) and
-  (i2 <= to_rep(inventory__last))) -> ((result1 = true) ->
-  (inventory3 = o1)))
-
-axiom H12 : (((to_rep(inventory__first) <= i2) and
-  (i2 <= to_rep(inventory__last))) -> ((not (result1 = true)) ->
-  (inventory3 = inventory2)))
-
-axiom H13 : (((to_rep(inventory__first) <= i2) and
-  (i2 <= to_rep(inventory__last))) -> (i3 = to_rep(inventory__last)))
-
-axiom H14 : (((to_rep(inventory__first) <= i2) and
-  (i2 <= to_rep(inventory__last))) -> (i3 = i4))
-
-axiom H15 : (((to_rep(inventory__first) <= i2) and
-  (i2 <= to_rep(inventory__last))) -> (inventory3 = inventory4))
-
-axiom H16 : (((to_rep(inventory__first) <= i2) and
-  (i2 <= to_rep(inventory__last))) -> (i5 = i3))
-
-axiom H17 : (((to_rep(inventory__first) <= i2) and
-  (i2 <= to_rep(inventory__last))) -> (inventory5 = inventory3))
-
-axiom H18 : (((to_rep(inventory__first) <= i2) and
-  (i2 <= to_rep(inventory__last))) -> (i6 = i4))
-
-axiom H19 : (((to_rep(inventory__first) <= i2) and
-  (i2 <= to_rep(inventory__last))) -> (inventory6 = inventory4))
-
-axiom H20 : (((to_rep(inventory__first) <= i2) and
-  (i2 <= to_rep(inventory__last))) -> (i7 = i5))
-
-axiom H21 : (((to_rep(inventory__first) <= i2) and
-  (i2 <= to_rep(inventory__last))) -> (inventory7 = inventory5))
-
-axiom H22 : ((not ((to_rep(inventory__first) <= i2) and
-  (i2 <= to_rep(inventory__last)))) -> (i2 = i6))
-
-axiom H23 : ((not ((to_rep(inventory__first) <= i2) and
-  (i2 <= to_rep(inventory__last)))) -> (inventory6 = inventory))
-
-axiom H24 : ((not ((to_rep(inventory__first) <= i2) and
-  (i2 <= to_rep(inventory__last)))) -> (i7 = i2))
-
-axiom H25 : ((not ((to_rep(inventory__first) <= i2) and
-  (i2 <= to_rep(inventory__last)))) -> (inventory7 = inventory1))
-
-axiom H26 : (i8 = i6)
-
-axiom H27 : (inventory8 = inventory6)
-
-axiom H28 : (i9 = i7)
-
-axiom H29 : (inventory9 = inventory7)
-
-logic i10 : int
-
-axiom H30 : (to_rep(inventory__first) <= i10)
-
-axiom H31 : (i10 <= to_rep(inventory__last))
-
  (* File "test.adb", line 84, characters 0-0 *)
-goal WP_parameter_def : (not (found_none(to_rep1((inventory8[i10]))) = true))
+goal WP_parameter_def :
+  (forall inventory:(int,fruits) farray. forall i:int.
+  forall temp___510:(int,fruits) farray. forall o:fruits.
+  forall o1:(int,fruits) farray. forall inventory1:(int,fruits) farray.
+  forall result:int. forall i1:int. forall inventory2:(int,fruits) farray.
+  forall i2:int. forall result1:bool. forall result2:(int,fruits) farray.
+  forall inventory3:(int,fruits) farray.
+  forall inventory4:(int,fruits) farray. forall i3:int.
+  forall inventory5:(int,fruits) farray. forall i4:int.
+  forall inventory6:(int,fruits) farray. forall i5:int.
+  forall inventory7:(int,fruits) farray. forall i6:int.
+  forall inventory8:(int,fruits) farray. forall i7:int.
+  forall inventory9:(int,fruits) farray. forall i8:int. ((dynamic_property(1,
+  2147483647, to_rep(inventory__first), to_rep(inventory__last)) and
+  (in_range4(fill_with) and
+  ((to_rep(inventory__first) <  to_rep(inventory__last)) and (((({
+  int__content = result } = { int__content = i }) and
+  (i1 = to_rep(inventory__first))) and
+  ((((to_rep(inventory__first) <= i1) and
+  (i1 <= to_rep(inventory__last))) and ((((temp___510 = inventory) and
+  (((forall temp___511:int. (((to_rep(inventory__first) <= temp___511) and
+    (temp___511 <= to_rep(inventory__last))) -> ((i2 <= temp___511) ->
+    ((inventory2[temp___511]) = (temp___510[temp___511]))))) and
+  ((to_rep(inventory__first) <= i2) and (i2 <= to_rep(inventory__last)))) and
+  ((((result1 = found_none(to_rep1((inventory2[i2])))) and
+  ((result1 = true) <-> (to_rep1((inventory2[i2])) = 0))) and
+  (((result1 = true) and (((to_rep1(o) = fill_with) and
+  (o1 = (inventory2[i2 <- o]))) and ((inventory2 = result2) and
+  (inventory3 = o1)))) or ((not (result1 = true)) and
+  (inventory3 = inventory2)))) and (i2 = to_rep(inventory__last))))) and
+  (((i2 = i3) and (inventory3 = inventory4)) and ((i4 = i2) and
+  (inventory5 = inventory3)))) and ((({ int__content = i5 } = {
+  int__content = i3 }) and ({ map__content = inventory6 } = { map__content =
+  inventory4 })) and ((i6 = i4) and (inventory7 = inventory5))))) or
+  ((not ((to_rep(inventory__first) <= i1) and
+  (i1 <= to_rep(inventory__last)))) and (((i1 = i5) and ({ map__content =
+  inventory6 } = { map__content = inventory })) and ((i6 = i1) and
+  (inventory7 = inventory1)))))) and ((({ int__content = i7 } = {
+  int__content = i5 }) and ({ map__content = inventory8 } = { map__content =
+  inventory6 })) and ((i8 = i6) and (inventory9 = inventory7))))))) ->
+  (forall i9:int. (((to_rep(inventory__first) <= i9) and
+  (i9 <= to_rep(inventory__last))) ->
+  (not (found_none(to_rep1((inventory8[i9]))) = true))))))

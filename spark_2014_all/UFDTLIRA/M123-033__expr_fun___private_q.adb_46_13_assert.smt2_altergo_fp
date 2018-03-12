@@ -173,93 +173,30 @@ axiom f4__post_axiom : in_range(f4(void))
 
 axiom f4__def_axiom : (f4(void) = ((f3(void) + g3(void)) - 1))
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic result : bool
-
-logic result1 : bool
-
-logic result2 : bool
-
-logic result3 : bool
-
-logic result4 : bool
-
-logic result5 : bool
-
-logic result6 : bool
-
-logic result7 : bool
-
-axiom H : ((o = value(void)) and in_range(o))
-
-axiom H1 : (((o = 0) -> (result = true)) and ((not (o = 0)) ->
-  (result = false)))
-
-axiom H2 : (not (result = true))
-
-axiom H3 : ((o1 = value(void)) and in_range(o1))
-
-axiom H4 : (((o1 = 1) -> (result1 = true)) and ((not (o1 = 1)) ->
-  (result1 = false)))
-
-axiom H5 : (not (result1 = true))
-
-axiom H6 : ((o2 = value(void)) and in_range(o2))
-
-axiom H7 : (((o2 = 2) -> (result2 = true)) and ((not (o2 = 2)) ->
-  (result2 = false)))
-
-axiom H8 : (not (result2 = true))
-
-axiom H9 : ((o3 = value(void)) and in_range(o3))
-
-axiom H10 : (((o3 = 3) -> (result3 = true)) and ((not (o3 = 3)) ->
-  (result3 = false)))
-
-axiom H11 : (not (result3 = true))
-
-axiom H12 : ((o4 = value(void)) and in_range(o4))
-
-axiom H13 : (((o4 = 4) -> (result4 = true)) and ((not (o4 = 4)) ->
-  (result4 = false)))
-
-axiom H14 : (not (result4 = true))
-
-axiom H15 : ((o5 = value(void)) and in_range(o5))
-
-axiom H16 : (((o5 = 5) -> (result5 = true)) and ((not (o5 = 5)) ->
-  (result5 = false)))
-
-axiom H17 : (not (result5 = true))
-
-axiom H18 : ((o6 = value(void)) and in_range(o6))
-
-axiom H19 : (((o6 = 6) -> (result6 = true)) and ((not (o6 = 6)) ->
-  (result6 = false)))
-
-axiom H20 : (not (result6 = true))
-
-axiom H21 : ((o7 = value(void)) and in_range(o7))
-
-axiom H22 : (((o7 = 7) -> (result7 = true)) and ((not (o7 = 7)) ->
-  (result7 = false)))
-
-axiom H23 : (result7 = true)
-
  (* File "private_q.adb", line 4, characters 0-0 *)
-goal WP_parameter_def : (g4(void) = 1)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
+  forall o5:int. forall o6:int. forall o7:int. forall result:bool.
+  forall result1:bool. forall result2:bool. forall result3:bool.
+  forall result4:bool. forall result5:bool. forall result6:bool.
+  forall result7:bool. ((((o = value(void)) and in_range(o)) and
+  (((o = 0) and (result = true)) or ((not (o = 0)) and (result = false)))) ->
+  ((not (result = true)) -> ((((o1 = value(void)) and in_range(o1)) and
+  (((o1 = 1) and (result1 = true)) or ((not (o1 = 1)) and
+  (result1 = false)))) -> ((not (result1 = true)) ->
+  ((((o2 = value(void)) and in_range(o2)) and (((o2 = 2) and
+  (result2 = true)) or ((not (o2 = 2)) and (result2 = false)))) ->
+  ((not (result2 = true)) -> ((((o3 = value(void)) and in_range(o3)) and
+  (((o3 = 3) and (result3 = true)) or ((not (o3 = 3)) and
+  (result3 = false)))) -> ((not (result3 = true)) ->
+  ((((o4 = value(void)) and in_range(o4)) and (((o4 = 4) and
+  (result4 = true)) or ((not (o4 = 4)) and (result4 = false)))) ->
+  ((not (result4 = true)) -> ((((o5 = value(void)) and in_range(o5)) and
+  (((o5 = 5) and (result5 = true)) or ((not (o5 = 5)) and
+  (result5 = false)))) -> ((not (result5 = true)) ->
+  ((((o6 = value(void)) and in_range(o6)) and (((o6 = 6) and
+  (result6 = true)) or ((not (o6 = 6)) and (result6 = false)))) ->
+  ((not (result6 = true)) -> ((((o7 = value(void)) and in_range(o7)) and
+  (((o7 = 7) and (result7 = true)) or ((not (o7 = 7)) and
+  (result7 = false)))) -> ((result7 = true) ->
+  (g4(void) = 1))))))))))))))))))

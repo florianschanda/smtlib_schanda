@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -137,40 +137,19 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic funcs__q2__result : bool
-
-logic result : bool
-
-logic funcs__q2__result1 : bool
-
-logic funcs__q2__result2 : bool
-
-logic funcs__q2__result3 : bool
-
-logic funcs__q2__result4 : bool
-
-logic funcs__q2__result5 : bool
-
-logic result1 : bool
-
-axiom H : in_range1(x)
-
-axiom H1 : (funcs__q2__result1 = funcs__q2__result2)
-
-axiom H2 : (funcs__q2__result3 = funcs__q2__result1)
-
-axiom H3 : (result = funcs__q2__result)
-
-axiom H4 : (((0 <  x) -> (funcs__q2__result1 = true)) and ((not (0 <  x)) ->
-  (funcs__q2__result1 = false)))
-
-axiom H5 : (funcs__q2__result4 = funcs__q2__result2)
-
-axiom H6 : (funcs__q2__result5 = funcs__q2__result3)
-
-axiom H7 : (result1 = funcs__q2__result4)
-
-axiom H8 : (funcs__q2__result4 = true)
-
  (* File "funcs.ads", line 19, characters 0-0 *)
-goal WP_parameter_def : (0 <  x)
+goal WP_parameter_def :
+  (forall funcs__q2__result:bool. forall result:bool.
+  forall funcs__q2__result1:bool. forall funcs__q2__result2:bool.
+  forall funcs__q2__result3:bool. forall funcs__q2__result4:bool.
+  forall funcs__q2__result5:bool.
+  (forall result1:bool. ((in_range1(x) and
+  (((((funcs__q2__result1 = funcs__q2__result2) and
+  (funcs__q2__result3 = funcs__q2__result1)) and
+  ((result = funcs__q2__result) and (((0 <  x) and
+  (funcs__q2__result1 = true)) or ((not (0 <  x)) and
+  (funcs__q2__result1 = false))))) and
+  ((funcs__q2__result4 = funcs__q2__result2) and
+  (funcs__q2__result5 = funcs__q2__result3))) and
+  (result1 = funcs__q2__result4))) -> ((funcs__q2__result4 = true) ->
+  (0 <  x)))))

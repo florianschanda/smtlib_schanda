@@ -220,7 +220,5 @@ logic value : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-axiom H : in_range(value)
-
  (* File "protected_sequence.ads", line 10, characters 0-0 *)
-goal WP_parameter_def : (97 <= 97)
+goal WP_parameter_def : (in_range(value) -> (97 <= 97))

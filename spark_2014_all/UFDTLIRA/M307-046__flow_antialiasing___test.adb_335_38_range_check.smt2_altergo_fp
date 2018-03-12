@@ -150,13 +150,5 @@ logic c113b : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : int
-
-logic test__test_tc_1__C113b__assume : int
-
-logic o : int
-
-axiom H : in_range(x)
-
  (* File "test.adb", line 312, characters 0-0 *)
-goal WP_parameter_def : in_range1(x)
+goal WP_parameter_def : (forall x:int. (in_range(x) -> in_range1(x)))

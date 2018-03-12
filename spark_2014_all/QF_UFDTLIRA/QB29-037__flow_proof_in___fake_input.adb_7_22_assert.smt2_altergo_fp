@@ -107,11 +107,5 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic s : int
-
-axiom H : in_range(s)
-
-axiom H1 : (s = 0)
-
  (* File "fake_input.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : (s = 0)
+goal WP_parameter_def : (forall s:int. (in_range(s) -> ((s = 0) -> (s = 0))))

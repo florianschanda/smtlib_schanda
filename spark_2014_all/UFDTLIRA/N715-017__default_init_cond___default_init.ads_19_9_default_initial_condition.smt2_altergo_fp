@@ -127,12 +127,6 @@ axiom init__post_axiom :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -144,6 +138,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -288,25 +288,12 @@ axiom mut_discr_ok__def_axiom :
   rec__default_init__mut_discr__f = x1 }; attr__constrained = x2
   }) = true) <-> (not (x = true))))
 
-logic temp___296 : bool
-
-logic temp___295 : bool
-
-logic us : int
-
-logic temp___297 : bool
-
-logic temp___2971 : natural
-
-logic temp___2972 : bool
-
-axiom H : (temp___296 = temp___295)
-
-axiom H1 : ((temp___2972 = false) and ((to_int(temp___297) = 1) ->
-  (to_rep(temp___2971) = init(0))))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (mut_discr_ok({ us_split_discrs1 = {
-  rec__default_init__mut_discr__b = temp___297 }; us_split_fields1 = {
-  rec__default_init__mut_discr__f = temp___2971 }; attr__constrained =
-  temp___2972 }) = true)
+goal WP_parameter_def :
+  (forall temp___334:bool. forall temp___333:bool. forall temp___335:bool.
+  forall temp___3351:natural. forall temp___3352:bool.
+  ((temp___334 = temp___333) -> (((temp___3352 = false) and
+  ((to_int(temp___335) = 1) -> (to_rep(temp___3351) = init(0)))) ->
+  (mut_discr_ok({ us_split_discrs1 = { rec__default_init__mut_discr__b =
+  temp___335 }; us_split_fields1 = { rec__default_init__mut_discr__f =
+  temp___3351 }; attr__constrained = temp___3352 }) = true))))

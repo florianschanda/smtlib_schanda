@@ -1220,12 +1220,6 @@ function element_type__ref___8__projection(a: element_type__ref) : element_type 
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq9 : bool, bool -> bool
-
-axiom bool_eq_def6 :
-  (forall x:bool. forall y:bool [bool_eq9(x, y)]. (((x = y) -> (bool_eq9(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq9(x, y) = false))))
-
 logic to_int2 : bool -> int
 
 axiom to_int_def1 :
@@ -1237,6 +1231,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq9 : bool, bool -> bool
+
+axiom bool_eq_def6 :
+  (forall x:bool. forall y:bool [bool_eq9(x, y)]. (((x = y) -> (bool_eq9(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq9(x, y) = false))))
 
 predicate in_range3(x: int) = ((x = 0) or (x = 1))
 
@@ -1356,8 +1356,8 @@ axiom elements__post_axiom :
   us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity = container;
   rec__dic_of_cont__my_hase__set__modulus = container1 }; us_split_fields1 =
   { rec__dic_of_cont__my_hase__set = container2 } })) and
-  (forall temp___845:int. ((in_range5(temp___845) and ((1 <= temp___845) and
-  (temp___845 <= (0 + length2(elements({ us_split_discrs1 = {
+  (forall temp___916:int. ((in_range5(temp___916) and ((1 <= temp___916) and
+  (temp___916 <= (0 + length2(elements({ us_split_discrs1 = {
   rec__dic_of_cont__my_hase__set__capacity = container;
   rec__dic_of_cont__my_hase__set__modulus = container1 }; us_split_fields1 =
   { rec__dic_of_cont__my_hase__set = container2 } })))))) ->
@@ -1367,7 +1367,7 @@ axiom elements__post_axiom :
   { rec__dic_of_cont__my_hase__set = container2 } }), get(elements({
   us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity = container;
   rec__dic_of_cont__my_hase__set__modulus = container1 }; us_split_fields1 =
-  { rec__dic_of_cont__my_hase__set = container2 } }), temp___845)) = true)))) and
+  { rec__dic_of_cont__my_hase__set = container2 } }), temp___916)) = true)))) and
   (forall item:int. ((in_range4(item) and (contains(model__({
   us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity = container;
   rec__dic_of_cont__my_hase__set__modulus = container1 }; us_split_fields1 =
@@ -1606,39 +1606,18 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length2(container))))) ->
   in_range6(get(container, position)))))
 
-logic target__split_fields : us_main_type
-
-logic o : count_type
-
-logic o1 : hash_type
-
-logic o2 : us_main_type
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-axiom H : ((o6 = length({ us_split_discrs1 = {
+ (* File "a-cfhase.ads", line 870, characters 0-0 *)
+goal WP_parameter_def :
+  (forall target__split_fields:us_main_type. forall o:count_type.
+  forall o1:hash_type. forall o2:us_main_type. forall o3:int. forall o4:int.
+  forall o5:int. forall o6:int. forall o7:int. forall o8:int.
+  (((((o6 = length({ us_split_discrs1 = {
   rec__dic_of_cont__my_hase__set__capacity = target__split_discrs;
   rec__dic_of_cont__my_hase__set__modulus = target__split_discrs1 };
   us_split_fields1 = { rec__dic_of_cont__my_hase__set = target__split_fields
-  } })) and (in_range1(o6) and (o6 <= to_rep(target__split_discrs))))
-
-axiom H1 : (o7 = (to_rep(target__split_discrs) - o6))
-
-axiom H2 : ((o8 = o7) and in_range(o7))
-
-axiom H3 : (({ us_split_discrs1 = {
+  } })) and (in_range1(o6) and (o6 <= to_rep(target__split_discrs)))) and
+  (o7 = (to_rep(target__split_discrs) - o6))) and ((o8 = o7) and
+  in_range(o7))) -> ((((({ us_split_discrs1 = {
   rec__dic_of_cont__my_hase__set__capacity = o;
   rec__dic_of_cont__my_hase__set__modulus = o1 }; us_split_fields1 = {
   rec__dic_of_cont__my_hase__set = o2 } } = intersection__2({
@@ -1741,21 +1720,12 @@ axiom H3 : (({ us_split_discrs1 = {
   rec__dic_of_cont__my_hase__set__capacity = target__split_discrs;
   rec__dic_of_cont__my_hase__set__modulus = target__split_discrs1 };
   us_split_fields1 = { rec__dic_of_cont__my_hase__set = target__split_fields
-  } }), i))))))))
-
-axiom H4 : ((o3 = length({ us_split_discrs1 = {
+  } }), i)))))))) and ((o3 = length({ us_split_discrs1 = {
   rec__dic_of_cont__my_hase__set__capacity = o;
   rec__dic_of_cont__my_hase__set__modulus = o1 }; us_split_fields1 = {
   rec__dic_of_cont__my_hase__set = o2 } })) and (in_range1(o3) and
-  (o3 <= to_rep(o))))
-
-axiom H5 : ((o4 = length({ us_split_discrs1 = {
+  (o3 <= to_rep(o))))) and (((o4 = length({ us_split_discrs1 = {
   rec__dic_of_cont__my_hase__set__capacity = source;
   rec__dic_of_cont__my_hase__set__modulus = source1 }; us_split_fields1 = {
   rec__dic_of_cont__my_hase__set = source2 } })) and (in_range1(o4) and
-  (o4 <= to_rep(source))))
-
-axiom H6 : (o5 = (o4 - o3))
-
- (* File "a-cfhase.ads", line 870, characters 0-0 *)
-goal WP_parameter_def : in_range(o5)
+  (o4 <= to_rep(source)))) and (o5 = (o4 - o3)))) -> in_range(o5))))

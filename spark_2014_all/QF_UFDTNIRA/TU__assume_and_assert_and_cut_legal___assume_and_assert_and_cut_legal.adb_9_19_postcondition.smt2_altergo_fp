@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -139,33 +139,11 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic par2 : int
-
-logic o : int
-
-logic result : int
-
-logic par21 : int
-
-logic par22 : int
-
-logic par23 : int
-
-axiom H : in_range1(par)
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(par2))
-
-axiom H2 : ((5 <= par) and (par <= 1000))
-
-axiom H3 : ((o = (2 * par)) and in_range1((2 * par)))
-
-axiom H4 : (result = par2)
-
-axiom H5 : (par21 = o)
-
-axiom H6 : (par21 = par22)
-
-axiom H7 : (par23 = par21)
-
  (* File "assume_and_assert_and_cut_legal.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (10 <= par22)
+goal WP_parameter_def :
+  (forall par2:int. forall o:int. forall result:int. forall par21:int.
+  forall par22:int. forall par23:int. ((in_range1(par) and
+  ((((- 2147483648) <= 2147483647) -> in_range1(par2)) and ((((5 <= par) and
+  (par <= 1000)) and (((o = (2 * par)) and in_range1((2 * par))) and
+  ((result = par2) and (par21 = o)))) and ((par21 = par22) and
+  (par23 = par21))))) -> (10 <= par22)))

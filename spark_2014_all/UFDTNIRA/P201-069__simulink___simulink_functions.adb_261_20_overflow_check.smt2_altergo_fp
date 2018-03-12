@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -279,66 +279,12 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic quotient : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : int
-
-logic o13 : int
-
-logic o14 : int
-
-logic o15 : int
-
-logic o16 : int
-
-logic result : int
-
-logic quotient1 : int
-
-axiom H : in_range2(left)
-
-axiom H1 : in_range2(right)
-
-axiom H2 : (not (right = 0))
-
-axiom H3 : (not ((left <  0) and (not (left <  0))))
-
-axiom H4 : (not ((left <  0) and (not (right <  0))))
-
-axiom H5 : (not ((not (left <  0)) and ((right <  0) and ((left <  0) ->
-  (not (right <  0))))))
-
-axiom H6 : ((o12 = comp_div(left,right)) and in_range1(comp_div(left,right)))
-
-axiom H7 : (o13 = (o12 * right))
-
-axiom H8 : ((o14 = o13) and in_range1(o13))
-
-axiom H9 : (o15 = (left - o14))
-
  (* File "interfac.ads", line 49, characters 0-0 *)
-goal WP_parameter_def : in_range1(o15)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. forall o2:int. forall o3:int.
+  (in_range2(left) -> (in_range2(right) -> ((not (right = 0)) ->
+  ((not (((left <  0) -> ((left <  0) -> (not (right <  0)))) and
+  ((not (left <  0)) -> ((right <  0) and ((left <  0) ->
+  (not (right <  0))))))) -> ((((((o = comp_div(left,right)) and
+  in_range1(comp_div(left,right))) and (o1 = (o * right))) and ((o2 = o1) and
+  in_range1(o1))) and (o3 = (left - o2))) -> in_range1(o3)))))))

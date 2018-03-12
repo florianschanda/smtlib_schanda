@@ -594,12 +594,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -612,6 +606,12 @@ axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
 
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
+
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
 logic attr__ATTRIBUTE_IMAGE : bool -> us_image
@@ -622,7 +622,15 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type m
 
-predicate in_range1(x: t) = (ule(of_int(0), x) and ule(x, of_int(229)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 229)
+
+predicate in_range1(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 229))
 
@@ -685,57 +693,45 @@ logic y : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic t2__msub__result : t
+logic rliteral2 : t
 
-logic o : t
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 230)
 
-logic result : t
+logic rliteral3 : t
 
-logic t2__msub__result1 : t
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 2)
 
-logic t2__msub__result2 : t
+logic rliteral4 : t
 
-logic t2__msub__result3 : t
+axiom rliteral_axiom4 : (tqtint(rliteral4) = 4)
 
-logic t2__msub__result4 : t
+logic rliteral5 : t
 
-logic t2__msub__result5 : t
-
-axiom H : in_range1(x)
-
-axiom H1 : in_range1(y)
-
-axiom H2 : (t2__msub__result1 = t2__msub__result2)
-
-axiom H3 : (t2__msub__result3 = t2__msub__result1)
-
-axiom H4 : (ult(x, y) -> (o = add(sub(x, y), of_int(230))))
-
-axiom H5 : ((not ult(x, y)) -> (o = sub(x, y)))
-
-axiom H6 : (result = t2__msub__result)
-
-axiom H7 : (t2__msub__result1 = o)
-
-axiom H8 : (t2__msub__result4 = t2__msub__result2)
-
-axiom H9 : (t2__msub__result5 = t2__msub__result3)
-
-axiom H10 : ((match_bool(bool_eq(x, of_int(0)), bool_eq(y, of_int(0)),
-  false) = true) -> (t2__msub__result4 = of_int(0)))
-
-axiom H11 : ((match_bool(bool_ne(x, of_int(0)), bool_eq(y, of_int(0)),
-  false) = true) -> (t2__msub__result4 = x))
-
-axiom H12 : ((match_bool(bool_eq(x, of_int(0)), bool_ne(y, of_int(0)),
-  false) = true) -> (t2__msub__result4 = urem(sub(of_int(230), y),
-  of_int(230))))
-
-axiom H13 : ((match_bool(bool_eq(x, of_int(2)), bool_eq(y, of_int(4)),
-  false) = true) -> (t2__msub__result4 = of_int(228)))
-
-axiom H14 : (match_bool(bool_eq(x, of_int(4)), bool_eq(y, of_int(2)),
-  false) = true)
+axiom rliteral_axiom5 : (tqtint(rliteral5) = 228)
 
  (* File "t2.adb", line 6, characters 0-0 *)
-goal WP_parameter_def : (t2__msub__result4 = of_int(2))
+goal WP_parameter_def :
+  (forall t2__msub__result:t. forall o:t. forall result:t.
+  forall t2__msub__result1:t. forall t2__msub__result2:t.
+  forall t2__msub__result3:t. forall t2__msub__result4:t.
+  forall t2__msub__result5:t. (in_range1(x) -> (in_range1(y) ->
+  (((((t2__msub__result1 = t2__msub__result2) and
+  (t2__msub__result3 = t2__msub__result1)) and (((ult(x, y) and
+  (o = add(sub(x, y), rliteral2))) or ((not ult(x, y)) and (o = sub(x,
+  y)))) and ((result = t2__msub__result) and (t2__msub__result1 = o)))) and
+  ((t2__msub__result4 = t2__msub__result2) and
+  (t2__msub__result5 = t2__msub__result3))) -> ((((match_bool(bool_eq(x,
+  rliteral), bool_eq(y, rliteral), false) = true) and
+  (t2__msub__result4 = rliteral)) or (not (match_bool(bool_eq(x, rliteral),
+  bool_eq(y, rliteral), false) = true))) -> ((((match_bool(bool_ne(x,
+  rliteral), bool_eq(y, rliteral), false) = true) and
+  (t2__msub__result4 = x)) or (not (match_bool(bool_ne(x, rliteral),
+  bool_eq(y, rliteral), false) = true))) -> ((((match_bool(bool_eq(x,
+  rliteral), bool_ne(y, rliteral), false) = true) and
+  (t2__msub__result4 = urem(sub(rliteral2, y), rliteral2))) or
+  (not (match_bool(bool_eq(x, rliteral), bool_ne(y, rliteral),
+  false) = true))) -> ((((match_bool(bool_eq(x, rliteral3), bool_eq(y,
+  rliteral4), false) = true) and (t2__msub__result4 = rliteral5)) or
+  (not (match_bool(bool_eq(x, rliteral3), bool_eq(y, rliteral4),
+  false) = true))) -> ((match_bool(bool_eq(x, rliteral4), bool_eq(y,
+  rliteral3), false) = true) -> (t2__msub__result4 = rliteral3))))))))))

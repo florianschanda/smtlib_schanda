@@ -943,7 +943,15 @@ axiom toBig_to_uint : (forall x:t. (tqtint(x) = tqtint1(toBig(x))))
 
 type m
 
-predicate in_range(x: t1) = (ule1(of_int1(0), x) and ule1(x, of_int1(229)))
+logic rliteral1 : t1
+
+axiom rliteral_axiom1 : (tqtint1(rliteral1) = 0)
+
+logic rliteral2 : t1
+
+axiom rliteral_axiom2 : (tqtint1(rliteral2) = 229)
+
+predicate in_range(x: t1) = (ule1(rliteral1, x) and ule1(x, rliteral2))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 229))
 
@@ -1006,35 +1014,22 @@ logic y : t1
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic t3__mmul__result : t1
+logic rliteral3 : t1
 
-logic result : t1
+axiom rliteral_axiom3 : (tqtint1(rliteral3) = 230)
 
-logic t3__mmul__result1 : t1
+logic rliteral4 : t
 
-logic t3__mmul__result2 : t1
-
-logic t3__mmul__result3 : t1
-
-logic t3__mmul__result4 : t1
-
-logic t3__mmul__result5 : t1
-
-axiom H : in_range(x)
-
-axiom H1 : in_range(y)
-
-axiom H2 : (t3__mmul__result1 = t3__mmul__result2)
-
-axiom H3 : (t3__mmul__result3 = t3__mmul__result1)
-
-axiom H4 : (result = t3__mmul__result)
-
-axiom H5 : (t3__mmul__result1 = urem1(mul1(x, y), of_int1(230)))
-
-axiom H6 : (t3__mmul__result4 = t3__mmul__result2)
-
-axiom H7 : (t3__mmul__result5 = t3__mmul__result3)
+axiom rliteral_axiom4 : (tqtint(rliteral4) = 230)
 
  (* File "t3.adb", line 6, characters 0-0 *)
-goal WP_parameter_def : (not (of_int(230) = zeros))
+goal WP_parameter_def :
+  (forall t3__mmul__result:t1. forall result:t1. forall t3__mmul__result1:t1.
+  forall t3__mmul__result2:t1. forall t3__mmul__result3:t1.
+  forall t3__mmul__result4:t1. forall t3__mmul__result5:t1. (in_range(x) ->
+  (in_range(y) -> (((((t3__mmul__result1 = t3__mmul__result2) and
+  (t3__mmul__result3 = t3__mmul__result1)) and (({ t__content1 = result } = {
+  t__content1 = t3__mmul__result }) and (t3__mmul__result1 = urem1(mul1(x,
+  y), rliteral3)))) and (({ t__content1 = t3__mmul__result4 } = {
+  t__content1 = t3__mmul__result2 }) and
+  (t3__mmul__result5 = t3__mmul__result3))) -> (not (rliteral4 = zeros))))))

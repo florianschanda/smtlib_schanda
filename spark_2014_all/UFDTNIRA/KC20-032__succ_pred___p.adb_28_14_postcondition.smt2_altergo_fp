@@ -403,41 +403,18 @@ logic v : volt
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic p__ident__3__result : volt
-
-logic o : volt
-
-logic result : volt
-
-logic p__ident__3__result1 : volt
-
-logic p__ident__3__result2 : volt
-
-logic p__ident__3__result3 : volt
-
-logic p__ident__3__result4 : volt
-
-logic p__ident__3__result5 : volt
-
-logic result1 : volt
-
-axiom H : (not (to_fixed1(v) = 2040))
-
-axiom H1 : (p__ident__3__result1 = p__ident__3__result2)
-
-axiom H2 : (p__ident__3__result3 = p__ident__3__result1)
-
-axiom H3 : (to_fixed1(o) = ((to_fixed1(v) + 1) - 1))
-
-axiom H4 : (result = p__ident__3__result)
-
-axiom H5 : (p__ident__3__result1 = o)
-
-axiom H6 : (p__ident__3__result4 = p__ident__3__result2)
-
-axiom H7 : (p__ident__3__result5 = p__ident__3__result3)
-
-axiom H8 : (result1 = p__ident__3__result4)
-
  (* File "p.adb", line 4, characters 0-0 *)
-goal WP_parameter_def : (to_fixed1(p__ident__3__result4) = to_fixed1(v))
+goal WP_parameter_def :
+  (forall p__ident__3__result:volt. forall o:volt. forall result:volt.
+  forall p__ident__3__result1:volt. forall p__ident__3__result2:volt.
+  forall p__ident__3__result3:volt. forall p__ident__3__result4:volt.
+  forall p__ident__3__result5:volt.
+  (forall result1:volt. (((not (to_fixed1(v) = 2040)) and
+  (((((p__ident__3__result1 = p__ident__3__result2) and
+  (p__ident__3__result3 = p__ident__3__result1)) and
+  ((to_fixed1(o) = ((to_fixed1(v) + 1) - 1)) and
+  ((result = p__ident__3__result) and (p__ident__3__result1 = o)))) and
+  ((p__ident__3__result4 = p__ident__3__result2) and
+  (p__ident__3__result5 = p__ident__3__result3))) and
+  (result1 = p__ident__3__result4))) ->
+  (to_fixed1(p__ident__3__result4) = to_fixed1(v)))))

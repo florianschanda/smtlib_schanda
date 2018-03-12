@@ -494,16 +494,8 @@ logic arg25 : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-axiom H : ((o2 = (to_rep1(arg1) + to_rep1(arg2))) and
-  in_range((to_rep1(arg1) + to_rep1(arg2))))
-
  (* File "ints.ads", line 25, characters 0-0 *)
-goal WP_parameter_def : in_range((to_rep(arg13) - to_rep(arg23)))
+goal WP_parameter_def :
+  (forall o:int. (((o = (to_rep1(arg1) + to_rep1(arg2))) and
+  in_range((to_rep1(arg1) + to_rep1(arg2)))) ->
+  in_range((to_rep(arg13) - to_rep(arg23)))))

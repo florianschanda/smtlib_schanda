@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -324,24 +324,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,pitchangle) farray, int, int, (int,pitchangle) farray,
-  int, int -> (int,pitchangle) farray
-
-axiom concat_def :
-  (forall a:(int,pitchangle) farray. forall b:(int,pitchangle) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : pitchangle, int -> (int,pitchangle) farray
-
-axiom singleton_def :
-  (forall v:pitchangle.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,pitchangle) farray, int, int, (int,pitchangle) farray,
   int, int -> bool
 
@@ -352,17 +334,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -372,37 +354,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,pitchangle) farray, int, int, (int,pitchangle) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,pitchangle) farray. forall b:(int,pitchangle) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,pitchangle) farray. forall b:(int,pitchangle) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,pitchangle) farray. forall b:(int,pitchangle) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -450,269 +404,67 @@ logic attr__ATTRIBUTE_ADDRESS7 : int
 
 logic attr__ATTRIBUTE_ADDRESS8 : int
 
-logic present_pitchrate : int
-
-logic pitch_history_c : (int,pitchangle) farray
-
-logic average : int
-
-logic early_pitch : int
-
-logic sum : int
-
-logic gap : int
-
-logic average1 : int
-
-logic i : int
-
-logic temp___227 : int
-
-logic temp___226 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : bool
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic result : int
-
-logic sum1 : int
-
-logic result1 : int
-
-logic i1 : int
-
-logic sum2 : int
-
-logic i2 : int
-
-logic result2 : int
-
-logic sum3 : int
-
-logic result3 : int
-
-logic i3 : int
-
-logic sum4 : int
-
-logic i4 : int
-
-logic sum5 : int
-
-logic i5 : int
-
-logic sum6 : int
-
-logic i6 : int
-
-logic sum7 : int
-
-logic i7 : int
-
-logic sum8 : int
-
-logic i8 : int
-
-logic sum9 : int
-
-logic i9 : int
-
-logic result4 : int
-
-logic gap1 : int
-
-logic result5 : int
-
-logic average2 : int
-
-logic result6 : int
-
-logic average3 : int
-
-logic result7 : int
-
-logic early_pitch1 : int
-
-logic result8 : int
-
-logic present_pitchrate1 : int
-
-logic result9 : int
-
-logic present_pitchrate2 : int
-
-logic result10 : int
-
-logic present_pitchrate3 : int
-
-logic present_pitchrate4 : int
-
-logic present_pitchrate5 : int
-
-logic present_pitchrate6 : int
-
-logic present_pitchrate7 : int
-
-axiom H : in_range3(pitch)
-
-axiom H1 : (((- 180) <= 180) -> in_range2(present_pitchrate))
-
-axiom H2 : (((- 10) <= 20) -> in_range3(average))
-
-axiom H3 : (((- 10) <= 20) -> in_range3(early_pitch))
-
-axiom H4 : (result = sum)
-
-axiom H5 : (sum1 = 0)
-
-axiom H6 : in_range1(sum1)
-
-axiom H7 : (((- 2147483648) <= 2147483647) -> in_range1(gap))
-
-axiom H8 : (((- 10) <= 20) -> in_range3(average1))
-
-axiom H9 : (result1 = i)
-
-axiom H10 : (i1 = 1)
-
-axiom H11 : (((1 <= i1) and (i1 <= 10)) -> (((temp___227 = i1) and
-  ((temp___226 = sum1) and (((sum2 <= (i2 * 20)) and
+ (* File "ap-altitude-pitch-rate.adb", line 11, characters 0-0 *)
+goal WP_parameter_def :
+  (forall present_pitchrate:int.
+  forall pitch_history_c:(int,pitchangle) farray. forall average:int.
+  forall early_pitch:int. forall sum:int. forall gap:int.
+  forall average1:int. forall i:int. forall temp___262:int.
+  forall temp___261:int. forall o:int. forall o1:int. forall o2:int.
+  forall o3:int. forall o4:int. forall o5:int. forall o6:int. forall o7:int.
+  forall o8:int. forall result:int. forall sum1:int. forall result1:int.
+  forall i1:int. forall sum2:int. forall i2:int. forall result2:int.
+  forall sum3:int. forall sum4:int. forall i3:int. forall sum5:int.
+  forall i4:int. forall sum6:int. forall i5:int. forall sum7:int.
+  forall i6:int. forall result3:int. forall gap1:int. forall result4:int.
+  forall average2:int. forall result5:int. forall average3:int.
+  forall result6:int. forall early_pitch1:int. forall result7:int.
+  forall present_pitchrate1:int. forall result8:int.
+  forall present_pitchrate2:int. forall result9:int.
+  forall present_pitchrate3:int. forall present_pitchrate4:int.
+  forall present_pitchrate5:int. forall present_pitchrate6:int.
+  forall present_pitchrate7:int. (in_range3(pitch) -> ((((- 180) <= 180) ->
+  in_range2(present_pitchrate)) -> ((((- 10) <= 20) -> in_range3(average)) ->
+  ((((- 10) <= 20) -> in_range3(early_pitch)) -> (((({ int__content = result
+  } = { int__content = sum }) and (sum1 = 0)) and (in_range1(sum1) and
+  ((((- 2147483648) <= 2147483647) -> in_range1(gap)) and ((((- 10) <= 20) ->
+  in_range3(average1)) and (((({ int__content = result1 } = { int__content =
+  i }) and (i1 = 1)) and ((((1 <= i1) and (i1 <= 10)) and
+  ((((temp___262 = i1) and ((temp___261 = sum1) and (((sum2 <= (i2 * 20)) and
   ((i2 * (- 10)) <= sum2)) and ((((((- 2147483648) <= 2147483647) ->
   in_range1(sum2)) and ((1 <= 10) -> in_range4(i2))) and ((1 <= i2) and
-  (i2 <= 10))) and ((((o3 = (sum2 + to_rep((pitch_history_c[i2])))) and
+  (i2 <= 10))) and ((((o = (sum2 + to_rep((pitch_history_c[i2])))) and
   in_range1((sum2 + to_rep((pitch_history_c[i2]))))) and
-  ((sum2 = result2) and (sum3 = o3))) and (i2 = 10)))))) and (((i2 = i6) and
-  (sum3 = sum6)) and ((i7 = i2) and (sum7 = sum3)))))
-
-axiom H12 : (((1 <= i1) and (i1 <= 10)) -> (i8 = i6))
-
-axiom H13 : (((1 <= i1) and (i1 <= 10)) -> (sum8 = sum6))
-
-axiom H14 : (((1 <= i1) and (i1 <= 10)) -> (i9 = i7))
-
-axiom H15 : (((1 <= i1) and (i1 <= 10)) -> (sum9 = sum7))
-
-axiom H16 : ((not ((1 <= i1) and (i1 <= 10))) -> (i1 = i8))
-
-axiom H17 : ((not ((1 <= i1) and (i1 <= 10))) -> (sum1 = sum8))
-
-axiom H18 : ((not ((1 <= i1) and (i1 <= 10))) -> (i9 = i1))
-
-axiom H19 : ((not ((1 <= i1) and (i1 <= 10))) -> (sum9 = sum1))
-
-axiom H20 : (result4 = gap)
-
-axiom H21 : (gap1 = 10)
-
-axiom H22 : ((o4 = comp_div(sum8,gap1)) and in_range1(comp_div(sum8,gap1)))
-
-axiom H23 : ((o5 = o4) and in_range3(o4))
-
-axiom H24 : (result5 = average1)
-
-axiom H25 : (average2 = o5)
-
-axiom H26 : (result6 = average)
-
-axiom H27 : (average3 = average2)
-
-axiom H28 : (result7 = early_pitch)
-
-axiom H29 : (early_pitch1 = to_rep((pitch_history_c[1])))
-
-axiom H30 : (((early_pitch1 <= average3) and (average3 <= pitch)) ->
-  ((o6 = ((pitch - early_pitch1) * 20)) and
-  in_range1(((pitch - early_pitch1) * 20))))
-
-axiom H31 : (((early_pitch1 <= average3) and (average3 <= pitch)) ->
-  (o7 = comp_div(o6,10)))
-
-axiom H32 : (((early_pitch1 <= average3) and (average3 <= pitch)) ->
-  ((o8 = o7) and in_range2(o7)))
-
-axiom H33 : (((early_pitch1 <= average3) and (average3 <= pitch)) ->
-  (result8 = present_pitchrate))
-
-axiom H34 : (((early_pitch1 <= average3) and (average3 <= pitch)) ->
-  (present_pitchrate1 = o8))
-
-axiom H35 : (((early_pitch1 <= average3) and (average3 <= pitch)) ->
-  (present_pitchrate6 = present_pitchrate1))
-
-axiom H36 : (((early_pitch1 <= average3) and (average3 <= pitch)) ->
-  (present_pitchrate7 = present_pitchrate1))
-
-axiom H37 : ((not ((early_pitch1 <= average3) and (average3 <= pitch))) ->
-  (((average3 <= early_pitch1) and (pitch <= average3)) ->
-  ((o9 = ((pitch - early_pitch1) * 10)) and
-  in_range1(((pitch - early_pitch1) * 10)))))
-
-axiom H38 : ((not ((early_pitch1 <= average3) and (average3 <= pitch))) ->
-  (((average3 <= early_pitch1) and (pitch <= average3)) ->
-  (o10 = comp_div(o9,20))))
-
-axiom H39 : ((not ((early_pitch1 <= average3) and (average3 <= pitch))) ->
-  (((average3 <= early_pitch1) and (pitch <= average3)) -> ((o11 = o10) and
-  in_range2(o10))))
-
-axiom H40 : ((not ((early_pitch1 <= average3) and (average3 <= pitch))) ->
-  (((average3 <= early_pitch1) and (pitch <= average3)) ->
-  (result9 = present_pitchrate)))
-
-axiom H41 : ((not ((early_pitch1 <= average3) and (average3 <= pitch))) ->
-  (((average3 <= early_pitch1) and (pitch <= average3)) ->
-  (present_pitchrate2 = o11)))
-
-axiom H42 : ((not ((early_pitch1 <= average3) and (average3 <= pitch))) ->
-  (((average3 <= early_pitch1) and (pitch <= average3)) ->
-  (present_pitchrate4 = present_pitchrate2)))
-
-axiom H43 : ((not ((early_pitch1 <= average3) and (average3 <= pitch))) ->
-  (((average3 <= early_pitch1) and (pitch <= average3)) ->
-  (present_pitchrate5 = present_pitchrate2)))
-
-axiom H44 : ((not ((early_pitch1 <= average3) and (average3 <= pitch))) ->
-  ((not ((average3 <= early_pitch1) and (pitch <= average3))) ->
-  (result10 = present_pitchrate)))
-
-axiom H45 : ((not ((early_pitch1 <= average3) and (average3 <= pitch))) ->
-  ((not ((average3 <= early_pitch1) and (pitch <= average3))) ->
-  (present_pitchrate3 = 0)))
-
-axiom H46 : ((not ((early_pitch1 <= average3) and (average3 <= pitch))) ->
-  ((not ((average3 <= early_pitch1) and (pitch <= average3))) ->
-  (present_pitchrate4 = present_pitchrate3)))
-
-axiom H47 : ((not ((early_pitch1 <= average3) and (average3 <= pitch))) ->
-  ((not ((average3 <= early_pitch1) and (pitch <= average3))) ->
-  (present_pitchrate5 = present_pitchrate3)))
-
-axiom H48 : ((not ((early_pitch1 <= average3) and (average3 <= pitch))) ->
-  (present_pitchrate6 = present_pitchrate4))
-
-axiom H49 : ((not ((early_pitch1 <= average3) and (average3 <= pitch))) ->
-  (present_pitchrate7 = present_pitchrate5))
-
- (* File "ap-altitude-pitch-rate.adb", line 11, characters 0-0 *)
-goal WP_parameter_def : (not (2 = 0))
+  ((sum2 = result2) and (sum3 = o))) and (i2 = 10)))))) and (((i2 = i3) and
+  (sum3 = sum4)) and ((i4 = i2) and (sum5 = sum3)))) and ((({ int__content =
+  i5 } = { int__content = i3 }) and ({ int__content = sum6 } = {
+  int__content = sum4 })) and ((i6 = i4) and (sum7 = sum5))))) or
+  ((not ((1 <= i1) and (i1 <= 10))) and (((i1 = i5) and (sum1 = sum6)) and
+  ((i6 = i1) and (sum7 = sum1)))))) and ((({ int__content = result3 } = {
+  int__content = gap }) and (gap1 = 10)) and
+  (((((o1 = comp_div(sum6,gap1)) and in_range1(comp_div(sum6,gap1))) and
+  ((o2 = o1) and in_range3(o1))) and ((result4 = average1) and
+  (average2 = o2))) and ((result5 = average) and
+  (average3 = average2))))))))) -> (((result6 = early_pitch) and
+  (early_pitch1 = to_rep((pitch_history_c[1])))) ->
+  (((((early_pitch1 <= average3) and (average3 <= pitch)) and
+  ((((((o3 = ((pitch - early_pitch1) * 20)) and
+  in_range1(((pitch - early_pitch1) * 20))) and (o4 = comp_div(o3,10))) and
+  ((o5 = o4) and in_range2(o4))) and ((result7 = present_pitchrate) and
+  (present_pitchrate1 = o5))) and
+  ((present_pitchrate1 = present_pitchrate6) and
+  (present_pitchrate7 = present_pitchrate1)))) or
+  ((not ((early_pitch1 <= average3) and (average3 <= pitch))) and
+  (((((average3 <= early_pitch1) and (pitch <= average3)) and
+  ((((((o6 = ((pitch - early_pitch1) * 10)) and
+  in_range1(((pitch - early_pitch1) * 10))) and (o7 = comp_div(o6,20))) and
+  ((o8 = o7) and in_range2(o7))) and ((result8 = present_pitchrate) and
+  (present_pitchrate2 = o8))) and
+  ((present_pitchrate2 = present_pitchrate4) and
+  (present_pitchrate5 = present_pitchrate2)))) or
+  ((not ((average3 <= early_pitch1) and (pitch <= average3))) and
+  (((result9 = present_pitchrate) and (present_pitchrate3 = 0)) and
+  ((present_pitchrate3 = present_pitchrate4) and
+  (present_pitchrate5 = present_pitchrate3))))) and (({ int__content =
+  present_pitchrate6 } = { int__content = present_pitchrate4 }) and
+  (present_pitchrate7 = present_pitchrate5))))) -> (not (2 = 0))))))))))

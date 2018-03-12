@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -93,21 +93,13 @@ logic b_LAST : bool
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic bbool__b_FIRST__assume : bool
-
-logic bbool__b_LAST__assume : bool
-
-axiom H : ((bbool__b_FIRST__assume = f(of_int(0))) and
-  (not (bbool__b_FIRST__assume = true)))
-
-axiom H1 : (bbool__b_FIRST__assume = b_FIRST)
-
-axiom H2 : ((bbool__b_LAST__assume = f(of_int(1))) and
-  (not (bbool__b_LAST__assume = true)))
-
-axiom H3 : (bbool__b_LAST__assume = b_LAST)
-
-axiom H4 : (to_int(b_FIRST) <= to_int(b_LAST))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (0 <= to_int(b_FIRST))
+goal WP_parameter_def :
+  (forall bbool__b_FIRST__assume:bool. forall bbool__b_LAST__assume:bool.
+  ((((bbool__b_FIRST__assume = f(of_int(0))) and
+  (not (bbool__b_FIRST__assume = true))) and
+  (bbool__b_FIRST__assume = b_FIRST)) ->
+  ((((bbool__b_LAST__assume = f(of_int(1))) and
+  (not (bbool__b_LAST__assume = true))) and
+  (bbool__b_LAST__assume = b_LAST)) ->
+  ((to_int(b_FIRST) <= to_int(b_LAST)) -> (0 <= to_int(b_FIRST))))))

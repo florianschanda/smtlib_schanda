@@ -335,127 +335,27 @@ logic r_old2 : unsigned_byte
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic r__split_fields : bool
-
-logic r__split_fields1 : unsigned_byte
-
-logic r__split_fields2 : unsigned_byte
-
-logic o : unsigned_byte
-
-logic o1 : unsigned_byte
-
-logic o2 : unsigned_byte
-
-logic o3 : unsigned_byte
-
-logic o4 : unsigned_byte
-
-logic o5 : bool
-
-logic o6 : unsigned_byte
-
-logic o7 : unsigned_byte
-
-logic temp___450 : bool
-
-logic temp___4501 : unsigned_byte
-
-logic temp___4502 : unsigned_byte
-
-logic o8 : unsigned_byte
-
-logic o9 : unsigned_byte
-
-logic o10 : unsigned_byte
-
-logic o11 : unsigned_byte
-
-logic o12 : unsigned_byte
-
-logic o13 : bool
-
-logic o14 : unsigned_byte
-
-logic o15 : unsigned_byte
-
-logic temp___457 : bool
-
-logic temp___4571 : unsigned_byte
-
-logic temp___4572 : unsigned_byte
-
-logic result : bool
-
-logic result1 : unsigned_byte
-
-logic result2 : unsigned_byte
-
-logic r__split_fields3 : bool
-
-logic r__split_fields4 : unsigned_byte
-
-logic r__split_fields5 : unsigned_byte
-
-logic result3 : bool
-
-logic result4 : unsigned_byte
-
-logic result5 : unsigned_byte
-
-logic r__split_fields6 : bool
-
-logic r__split_fields7 : unsigned_byte
-
-logic r__split_fields8 : unsigned_byte
-
-logic r__split_fields9 : bool
-
-logic r__split_fields10 : unsigned_byte
-
-logic r__split_fields11 : unsigned_byte
-
-logic r__split_fields12 : bool
-
-logic r__split_fields13 : unsigned_byte
-
-logic r__split_fields14 : unsigned_byte
-
-axiom H : in_range(x)
-
-axiom H1 : ((r__split_fields = r_old) and ((r__split_fields1 = r_old1) and
-  (r__split_fields2 = r_old2)))
-
-axiom H2 : (to_rep(o) = x)
-
-axiom H3 : (o = o1)
-
-axiom H4 : (r__split_fields2 = o2)
-
-axiom H5 : (o3 = o1)
-
-axiom H6 : (o4 = o2)
-
-axiom H7 : (r__split_fields = o5)
-
-axiom H8 : (o6 = o3)
-
-axiom H9 : (o7 = o4)
-
-axiom H10 : (temp___450 = o5)
-
-axiom H11 : (temp___4501 = o6)
-
-axiom H12 : (temp___4502 = o7)
-
-axiom H13 : ((result = r__split_fields) and ((result1 = r__split_fields1) and
-  (result2 = r__split_fields2)))
-
-axiom H14 : ((r__split_fields3 = temp___450) and
-  ((r__split_fields4 = temp___4501) and (r__split_fields5 = temp___4502)))
-
  (* File "records.adb", line 464, characters 0-0 *)
-goal WP_parameter_def : (bool_eq3({ us_split_fields3 = {
+goal WP_parameter_def :
+  (forall r__split_fields:bool. forall r__split_fields1:unsigned_byte.
+  forall r__split_fields2:unsigned_byte. forall o:unsigned_byte.
+  forall o1:unsigned_byte. forall o2:unsigned_byte. forall o3:unsigned_byte.
+  forall o4:unsigned_byte. forall o5:bool. forall o6:unsigned_byte.
+  forall o7:unsigned_byte. forall temp___483:bool.
+  forall temp___4831:unsigned_byte. forall temp___4832:unsigned_byte.
+  forall result:bool. forall result1:unsigned_byte.
+  forall result2:unsigned_byte. forall r__split_fields3:bool.
+  forall r__split_fields4:unsigned_byte.
+  forall r__split_fields5:unsigned_byte. (in_range(x) ->
+  (((r__split_fields = r_old) and ((r__split_fields1 = r_old1) and
+  (r__split_fields2 = r_old2))) -> (((((((to_rep(o) = x) and ((o = o1) and
+  (r__split_fields2 = o2))) and ((o3 = o1) and (o4 = o2))) and
+  ((r__split_fields = o5) and ((o6 = o3) and (o7 = o4)))) and
+  ((temp___483 = o5) and ((temp___4831 = o6) and (temp___4832 = o7)))) and
+  (((result = r__split_fields) and ((result1 = r__split_fields1) and
+  (result2 = r__split_fields2))) and ((temp___483 = r__split_fields3) and
+  ((temp___4831 = r__split_fields4) and
+  (temp___4832 = r__split_fields5))))) -> (bool_eq3({ us_split_fields3 = {
   rec__records_prooffuncs__optional_pair__exists = r__split_fields3;
   rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
   rec__records_prooffuncs__pair__a = r__split_fields4;
@@ -463,4 +363,4 @@ goal WP_parameter_def : (bool_eq3({ us_split_fields3 = {
   us_split_fields3 = { rec__records_prooffuncs__optional_pair__exists =
   r_old; rec__records_prooffuncs__optional_pair__the_pair = {
   us_split_fields1 = { rec__records_prooffuncs__pair__a = of_rep(x);
-  rec__records_prooffuncs__pair__b = r_old2 } } } }) = true)
+  rec__records_prooffuncs__pair__b = r_old2 } } } }) = true)))))

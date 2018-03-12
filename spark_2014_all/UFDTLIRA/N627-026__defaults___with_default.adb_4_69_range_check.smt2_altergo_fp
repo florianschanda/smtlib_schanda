@@ -209,9 +209,6 @@ axiom first__def_axiom : (first = c)
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic us : int
-
-axiom H : in_range(c)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : dynamic_property(first, 2147483647, 0)
+goal WP_parameter_def : (in_range(c) -> dynamic_property(first, 2147483647,
+  0))

@@ -749,31 +749,9 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic x : t
-
-logic o : int
-
-logic o1 : t
-
-logic o2 : int
-
-logic result : t
-
-logic x1 : t
-
-axiom H : in_range(havok_x)
-
-axiom H1 : in_range(havok_y)
-
-axiom H2 : ((o = mod(havok_x, 256)) and uint_in_range(mod(havok_x, 256)))
-
-axiom H3 : (o1 = of_int(o))
-
-axiom H4 : (result = x)
-
-axiom H5 : (x1 = o1)
-
-axiom H6 : true
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : uint_in_range(mod(havok_y, 256))
+goal WP_parameter_def :
+  (forall x:t. forall o:int. forall o1:t. forall result:t. forall x1:t.
+  (in_range(havok_x) -> (in_range(havok_y) -> (((((o = mod(havok_x, 256)) and
+  uint_in_range(mod(havok_x, 256))) and (o1 = of_int(o))) and
+  ((result = x) and (x1 = o1))) -> uint_in_range(mod(havok_y, 256))))))

@@ -117,41 +117,15 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic obj : int
-
-logic semantics__check_within_ghost_function__C2b__assume : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-axiom H :
-  ((semantics__check_within_ghost_function__C2b__assume = ghost_func(void)) and
-  in_range(semantics__check_within_ghost_function__C2b__assume))
-
-axiom H1 : (semantics__check_within_ghost_function__C2b__assume = c2b)
-
-axiom H2 : in_range(c2b)
-
-axiom H3 : (((- 2147483648) <= 2147483647) -> in_range(obj))
-
-axiom H4 : ((o2 = ghost_func(void)) and in_range(o2))
-
-axiom H5 : ((o = ghost_func(void)) and in_range(o))
-
-axiom H6 : (o1 = (c2b + o))
-
-axiom H7 : ((o3 = o1) and in_range(o1))
-
-axiom H8 : (o4 = (o3 + o2))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(o4)
+goal WP_parameter_def :
+  (forall obj:int.
+  forall semantics__check_within_ghost_function__C2b__assume:int.
+  forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
+  (((((semantics__check_within_ghost_function__C2b__assume = ghost_func(void)) and
+  in_range(semantics__check_within_ghost_function__C2b__assume)) and
+  (semantics__check_within_ghost_function__C2b__assume = c2b)) and
+  in_range(c2b)) -> ((((- 2147483648) <= 2147483647) -> in_range(obj)) ->
+  ((((o2 = ghost_func(void)) and in_range(o2)) and
+  (((((o = ghost_func(void)) and in_range(o)) and (o1 = (c2b + o))) and
+  ((o3 = o1) and in_range(o1))) and (o4 = (o3 + o2)))) -> in_range(o4)))))

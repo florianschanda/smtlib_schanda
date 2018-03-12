@@ -109,43 +109,21 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic useless_annot__posit__result : int
-
-logic o : int
-
-logic result : int
-
-logic useless_annot__posit__result1 : int
-
-logic useless_annot__posit__result2 : int
-
-logic useless_annot__posit__result3 : int
-
-logic useless_annot__posit__result4 : int
-
-logic useless_annot__posit__result5 : int
-
-logic result1 : int
-
-axiom H : in_range(x)
-
-axiom H1 : (x <  2147483647)
-
-axiom H2 : (useless_annot__posit__result1 = useless_annot__posit__result2)
-
-axiom H3 : (useless_annot__posit__result3 = useless_annot__posit__result1)
-
-axiom H4 : ((o = (x + 1)) and in_range((x + 1)))
-
-axiom H5 : (result = useless_annot__posit__result)
-
-axiom H6 : (useless_annot__posit__result1 = o)
-
-axiom H7 : (useless_annot__posit__result4 = useless_annot__posit__result2)
-
-axiom H8 : (useless_annot__posit__result5 = useless_annot__posit__result3)
-
-axiom H9 : (result1 = useless_annot__posit__result4)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (x <  useless_annot__posit__result4)
+goal WP_parameter_def :
+  (forall useless_annot__posit__result:int. forall o:int. forall result:int.
+  forall useless_annot__posit__result1:int.
+  forall useless_annot__posit__result2:int.
+  forall useless_annot__posit__result3:int.
+  forall useless_annot__posit__result4:int.
+  forall useless_annot__posit__result5:int.
+  (forall result1:int. ((in_range(x) and ((x <  2147483647) and
+  (((((useless_annot__posit__result1 = useless_annot__posit__result2) and
+  (useless_annot__posit__result3 = useless_annot__posit__result1)) and
+  (((o = (x + 1)) and in_range((x + 1))) and
+  ((result = useless_annot__posit__result) and
+  (useless_annot__posit__result1 = o)))) and
+  ((useless_annot__posit__result4 = useless_annot__posit__result2) and
+  (useless_annot__posit__result5 = useless_annot__posit__result3))) and
+  (result1 = useless_annot__posit__result4)))) ->
+  (x <  useless_annot__posit__result4))))

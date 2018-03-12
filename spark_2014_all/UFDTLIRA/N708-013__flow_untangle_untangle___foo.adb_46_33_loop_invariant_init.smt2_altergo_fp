@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -290,159 +290,6 @@ type t6b__ref = { t6b__content : t6b
 function t6b__ref___projection(a: t6b__ref) : t6b = (a).t6b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
-
-logic tmp__split_fields : integer
-
-logic tmp__split_fields1 : integer
-
-logic tmp__split_fields2 : integer
-
-logic i : int
-
-logic o : integer
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic o3 : integer
-
-logic o4 : integer
-
-logic o5 : integer
-
-logic foo__test_02__tmp__assume : integer
-
-logic foo__test_02__tmp__assume1 : integer
-
-logic foo__test_02__tmp__assume2 : integer
-
-logic o6 : int
-
-logic o7 : integer
-
-logic o8 : integer
-
-logic o9 : integer
-
-logic o10 : integer
-
-logic temp___197 : integer
-
-logic temp___1971 : integer
-
-logic temp___1972 : integer
-
-logic o11 : int
-
-logic result : integer
-
-logic result1 : integer
-
-logic result2 : integer
-
-logic tmp__split_fields3 : integer
-
-logic tmp__split_fields4 : integer
-
-logic tmp__split_fields5 : integer
-
-logic result3 : int
-
-logic i1 : int
-
-logic result4 : integer
-
-logic result5 : integer
-
-logic result6 : integer
-
-logic tmp__split_fields6 : integer
-
-logic tmp__split_fields7 : integer
-
-logic tmp__split_fields8 : integer
-
-logic tmp__split_fields9 : integer
-
-logic tmp__split_fields10 : integer
-
-logic tmp__split_fields11 : integer
-
-logic i2 : int
-
-logic result7 : int
-
-logic i3 : int
-
-axiom H : in_range1(n)
-
-axiom H1 : (to_rep(o) = 0)
-
-axiom H2 : (to_rep(o1) = n)
-
-axiom H3 : (to_rep(o2) = n)
-
-axiom H4 : (o2 = o3)
-
-axiom H5 : (o1 = o4)
-
-axiom H6 : (o = o5)
-
-axiom H7 : (foo__test_02__tmp__assume = o3)
-
-axiom H8 : (foo__test_02__tmp__assume1 = o4)
-
-axiom H9 : (foo__test_02__tmp__assume2 = o5)
-
-axiom H10 : (result = tmp__split_fields)
-
-axiom H11 : (result1 = tmp__split_fields1)
-
-axiom H12 : (result2 = tmp__split_fields2)
-
-axiom H13 : (foo__test_02__tmp__assume = tmp__split_fields3)
-
-axiom H14 : (foo__test_02__tmp__assume1 = tmp__split_fields4)
-
-axiom H15 : (foo__test_02__tmp__assume2 = tmp__split_fields5)
-
-axiom H16 : (result3 = i)
-
-axiom H17 : (i1 = 1)
-
-axiom H18 : (1 <= i1)
-
-axiom H19 : (i1 <= 3)
-
-axiom H20 : ((o6 = (to_rep(tmp__split_fields4) + 1)) and
-  in_range1((to_rep(tmp__split_fields4) + 1)))
-
-axiom H21 : (to_rep(o7) = o6)
-
-axiom H22 : (tmp__split_fields3 = o8)
-
-axiom H23 : (o7 = o9)
-
-axiom H24 : (tmp__split_fields5 = o10)
-
-axiom H25 : (temp___197 = o8)
-
-axiom H26 : (temp___1971 = o9)
-
-axiom H27 : (temp___1972 = o10)
-
-axiom H28 : (result4 = tmp__split_fields3)
-
-axiom H29 : (result5 = tmp__split_fields4)
-
-axiom H30 : (result6 = tmp__split_fields5)
-
-axiom H31 : (tmp__split_fields6 = temp___197)
-
-axiom H32 : (tmp__split_fields7 = temp___1971)
-
-axiom H33 : (tmp__split_fields8 = temp___1972)
 
  (* File "foo.adb", line 28, characters 0-0 *)
 goal WP_parameter_def : true

@@ -65,7 +65,6 @@
 (declare-const x us_rep)
 (declare-const o us_rep)
 (declare-const o1 us_rep)
-(declare-const o2 us_rep)
 (declare-const result Bool)
 (declare-const result1 us_rep)
 (declare-const x1 us_rep)

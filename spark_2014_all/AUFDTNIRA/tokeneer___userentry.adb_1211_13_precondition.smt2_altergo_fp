@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -578,6 +578,46 @@ axiom coerce_axiom5 :
   (forall x:int [to_rep5(of_rep5(x))]. (in_range7(x) ->
   (to_rep5(of_rep5(x)) = x)))
 
+type logfilecountt
+
+predicate in_range8(x: int) = ((0 <= x) and (x <= 17))
+
+logic bool_eq10 : int, int -> bool
+
+axiom bool_eq_def9 :
+  (forall x:int. forall y:int [bool_eq10(x, y)]. (((x = y) -> (bool_eq10(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq10(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE8 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check8 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE8 : us_image -> int
+
+logic user_eq8 : logfilecountt, logfilecountt -> bool
+
+logic dummy11 : logfilecountt
+
+type logfilecountt__ref = { logfilecountt__content : logfilecountt
+}
+
+function logfilecountt__ref___projection(a: logfilecountt__ref) : logfilecountt =
+  (a).logfilecountt__content
+
+logic to_rep6 : logfilecountt -> int
+
+logic of_rep6 : int -> logfilecountt
+
+axiom inversion_axiom6 :
+  (forall x:logfilecountt [to_rep6(x)]. (of_rep6(to_rep6(x)) = x))
+
+axiom range_axiom6 :
+  (forall x:logfilecountt [to_rep6(x)]. in_range8(to_rep6(x)))
+
+axiom coerce_axiom6 :
+  (forall x:int [to_rep6(of_rep6(x))]. (in_range8(x) ->
+  (to_rep6(of_rep6(x)) = x)))
+
 type map__ref = { map__content : (int,logfileindext) farray
 }
 
@@ -595,88 +635,42 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,logfileindext) farray, int, int,
-  (int,logfileindext) farray, int, int -> (int,logfileindext) farray
-
-axiom concat_def :
-  (forall a:(int,logfileindext) farray. forall b:(int,logfileindext) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : logfileindext, int -> (int,logfileindext) farray
-
-axiom singleton_def :
-  (forall v:logfileindext.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
-logic bool_eq10 : (int,logfileindext) farray, int, int,
+logic bool_eq11 : (int,logfileindext) farray, int, int,
   (int,logfileindext) farray, int, int -> bool
 
-axiom bool_eq_def9 :
+axiom bool_eq_def10 :
   (forall a:(int,logfileindext) farray. forall a__first:int.
   forall a__last:int. forall b:(int,logfileindext) farray.
-  forall b__first:int. forall b__last:int [bool_eq10(a, a__first, a__last, b,
+  forall b__first:int. forall b__last:int [bool_eq11(a, a__first, a__last, b,
   b__first, b__last)]. ((((((a__first <= a__last) and
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_150:int. ((((a__first <= temp___idx_150) and
-  (temp___idx_150 <= a__last)) and
-  (to_rep4((a[temp___idx_150])) = to_rep4((b[((b__first - a__first) + temp___idx_150)])))) or
-  (not ((a__first <= temp___idx_150) and (temp___idx_150 <= a__last)))))) ->
-  (bool_eq10(a, a__first, a__last, b, b__first, b__last) = true)) and
+  (forall temp___idx_172:int. ((((a__first <= temp___idx_172) and
+  (temp___idx_172 <= a__last)) and
+  (to_rep4((a[temp___idx_172])) = to_rep4((b[((b__first - a__first) + temp___idx_172)])))) or
+  (not ((a__first <= temp___idx_172) and (temp___idx_172 <= a__last)))))) ->
+  (bool_eq11(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_150:int. (((a__first <= temp___idx_150) and
-  (temp___idx_150 <= a__last)) ->
-  (to_rep4((a[temp___idx_150])) = to_rep4((b[((b__first - a__first) + temp___idx_150)]))))))) ->
-  (bool_eq10(a, a__first, a__last, b, b__first, b__last) = false))))
+  (forall temp___idx_172:int. (((a__first <= temp___idx_172) and
+  (temp___idx_172 <= a__last)) ->
+  (to_rep4((a[temp___idx_172])) = to_rep4((b[((b__first - a__first) + temp___idx_172)]))))))) ->
+  (bool_eq11(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
   (forall a:(int,logfileindext) farray. forall b:(int,logfileindext) farray.
   (forall a__first:int. forall a__last:int. forall b__first:int.
-  forall b__last:int. ((bool_eq10(b, b__first, b__last, a, a__first,
+  forall b__last:int. ((bool_eq11(b, b__first, b__last, a, a__first,
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_150:int. (((a__first <= temp___idx_150) and
-  (temp___idx_150 <= a__last)) ->
-  (to_rep4((a[temp___idx_150])) = to_rep4((b[((b__first - a__first) + temp___idx_150)])))))))))
+  (forall temp___idx_172:int. (((a__first <= temp___idx_172) and
+  (temp___idx_172 <= a__last)) ->
+  (to_rep4((a[temp___idx_172])) = to_rep4((b[((b__first - a__first) + temp___idx_172)])))))))))
 
-logic compare : (int,logfileindext) farray, int, int,
-  (int,logfileindext) farray, int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,logfileindext) farray. forall b:(int,logfileindext) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq10(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,logfileindext) farray. forall b:(int,logfileindext) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq10(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep4((a[(i + 1)])) <  to_rep4((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,logfileindext) farray. forall b:(int,logfileindext) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq10(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep4((b[(i + 1)])) <  to_rep4((a[(j + 1)]))))))))))))
-
-logic dummy11 : (int,logfileindext) farray
+logic dummy12 : (int,logfileindext) farray
 
 logic value__size1 : int
 
@@ -705,48 +699,8 @@ axiom value__alignment_axiom1 : (0 <= value__alignment1)
 axiom object__alignment_axiom1 :
   (forall a:(int,logfileindext) farray. (0 <= object__alignment1(a)))
 
-logic user_eq8 : (int,logfileindext) farray,
+logic user_eq9 : (int,logfileindext) farray,
   (int,logfileindext) farray -> bool
-
-type logfilecountt
-
-predicate in_range8(x: int) = ((0 <= x) and (x <= 17))
-
-logic bool_eq11 : int, int -> bool
-
-axiom bool_eq_def10 :
-  (forall x:int. forall y:int [bool_eq11(x, y)]. (((x = y) -> (bool_eq11(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq11(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE8 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check8 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE8 : us_image -> int
-
-logic user_eq9 : logfilecountt, logfilecountt -> bool
-
-logic dummy12 : logfilecountt
-
-type logfilecountt__ref = { logfilecountt__content : logfilecountt
-}
-
-function logfilecountt__ref___projection(a: logfilecountt__ref) : logfilecountt =
-  (a).logfilecountt__content
-
-logic to_rep6 : logfilecountt -> int
-
-logic of_rep6 : int -> logfilecountt
-
-axiom inversion_axiom6 :
-  (forall x:logfilecountt [to_rep6(x)]. (of_rep6(to_rep6(x)) = x))
-
-axiom range_axiom6 :
-  (forall x:logfilecountt [to_rep6(x)]. in_range8(to_rep6(x)))
-
-axiom coerce_axiom6 :
-  (forall x:int [to_rep6(of_rep6(x))]. (in_range8(x) ->
-  (to_rep6(of_rep6(x)) = x)))
 
 type us_split_fields2 = { rec__auditlog__logfilelistt__list :
 (int,logfileindext) farray; rec__auditlog__logfilelistt__head :
@@ -782,14 +736,14 @@ logic bool_eq12 : us_rep1, us_rep1 -> bool
 
 axiom bool_eq_def11 :
   (forall a:us_rep1. forall b:us_rep1 [bool_eq12(a, b)].
-  ((((((bool_eq10(((a).us_split_fields3).rec__auditlog__logfilelistt__list,
+  ((((((bool_eq11(((a).us_split_fields3).rec__auditlog__logfilelistt__list,
   1, 17, ((b).us_split_fields3).rec__auditlog__logfilelistt__list, 1,
   17) = true) and
   (to_rep4(((a).us_split_fields3).rec__auditlog__logfilelistt__head) = to_rep4(((b).us_split_fields3).rec__auditlog__logfilelistt__head))) and
   (to_rep4(((a).us_split_fields3).rec__auditlog__logfilelistt__lasti) = to_rep4(((b).us_split_fields3).rec__auditlog__logfilelistt__lasti))) and
   (to_rep6(((a).us_split_fields3).rec__auditlog__logfilelistt__length) = to_rep6(((b).us_split_fields3).rec__auditlog__logfilelistt__length))) ->
   (bool_eq12(a, b) = true)) and
-  ((not ((((bool_eq10(((a).us_split_fields3).rec__auditlog__logfilelistt__list,
+  ((not ((((bool_eq11(((a).us_split_fields3).rec__auditlog__logfilelistt__list,
   1, 17, ((b).us_split_fields3).rec__auditlog__logfilelistt__list, 1,
   17) = true) and
   (to_rep4(((a).us_split_fields3).rec__auditlog__logfilelistt__head) = to_rep4(((b).us_split_fields3).rec__auditlog__logfilelistt__head))) and
@@ -958,25 +912,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,fileentrycountt) farray, int, int,
-  (int,fileentrycountt) farray, int, int -> (int,fileentrycountt) farray
-
-axiom concat_def1 :
-  (forall a:(int,fileentrycountt) farray.
-  forall b:(int,fileentrycountt) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : fileentrycountt, int -> (int,fileentrycountt) farray
-
-axiom singleton_def1 :
-  (forall v:fileentrycountt.
-  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq14 : (int,fileentrycountt) farray, int, int,
   (int,fileentrycountt) farray, int, int -> bool
 
@@ -988,17 +923,17 @@ axiom bool_eq_def13 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_151:int. ((((a__first <= temp___idx_151) and
-  (temp___idx_151 <= a__last)) and
-  (to_rep7((a[temp___idx_151])) = to_rep7((b[((b__first - a__first) + temp___idx_151)])))) or
-  (not ((a__first <= temp___idx_151) and (temp___idx_151 <= a__last)))))) ->
+  (forall temp___idx_173:int. ((((a__first <= temp___idx_173) and
+  (temp___idx_173 <= a__last)) and
+  (to_rep7((a[temp___idx_173])) = to_rep7((b[((b__first - a__first) + temp___idx_173)])))) or
+  (not ((a__first <= temp___idx_173) and (temp___idx_173 <= a__last)))))) ->
   (bool_eq14(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_151:int. (((a__first <= temp___idx_151) and
-  (temp___idx_151 <= a__last)) ->
-  (to_rep7((a[temp___idx_151])) = to_rep7((b[((b__first - a__first) + temp___idx_151)]))))))) ->
+  (forall temp___idx_173:int. (((a__first <= temp___idx_173) and
+  (temp___idx_173 <= a__last)) ->
+  (to_rep7((a[temp___idx_173])) = to_rep7((b[((b__first - a__first) + temp___idx_173)]))))))) ->
   (bool_eq14(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -1009,40 +944,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_151:int. (((a__first <= temp___idx_151) and
-  (temp___idx_151 <= a__last)) ->
-  (to_rep7((a[temp___idx_151])) = to_rep7((b[((b__first - a__first) + temp___idx_151)])))))))))
-
-logic compare1 : (int,fileentrycountt) farray, int, int,
-  (int,fileentrycountt) farray, int, int -> int
-
-axiom compare_def_eq1 :
-  (forall a:(int,fileentrycountt) farray.
-  forall b:(int,fileentrycountt) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq14(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt1 :
-  (forall a:(int,fileentrycountt) farray.
-  forall b:(int,fileentrycountt) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq14(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep7((a[(i + 1)])) <  to_rep7((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt1 :
-  (forall a:(int,fileentrycountt) farray.
-  forall b:(int,fileentrycountt) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare1(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq14(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep7((b[(i + 1)])) <  to_rep7((a[(j + 1)]))))))))))))
+  (forall temp___idx_173:int. (((a__first <= temp___idx_173) and
+  (temp___idx_173 <= a__last)) ->
+  (to_rep7((a[temp___idx_173])) = to_rep7((b[((b__first - a__first) + temp___idx_173)])))))))))
 
 logic dummy18 : (int,fileentrycountt) farray
 
@@ -1251,19 +1155,9 @@ logic valid_numberlogentries : int, int, us_rep1,
 logic valid_numberlogentries__function_guard : bool, int, int, us_rep1,
   (int,fileentrycountt) farray -> prop
 
-logic temp___1100 : int -> (int,logfileindext) farray
+logic temp___1239 : int -> (int,logfileindext) farray
 
-axiom def_axiom :
-  (forall temp___1102:int.
-  (forall temp___1103:int.
-  ((temp___1100(temp___1102)[temp___1103]) = of_rep4(temp___1102))))
-
-logic temp___1104 : int -> (int,fileentrycountt) farray
-
-axiom def_axiom1 :
-  (forall temp___1106:int.
-  (forall temp___1107:int.
-  ((temp___1104(temp___1106)[temp___1107]) = of_rep7(temp___1106))))
+logic temp___1243 : int -> (int,fileentrycountt) farray
 
 type us_main_type
 
@@ -1315,24 +1209,6 @@ axiom slide_def2 :
   (forall i:int [(slide2(a, old_first, new_first)[i])]. ((slide2(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat2 : (int,us_rep3) farray, int, int, (int,us_rep3) farray, int,
-  int -> (int,us_rep3) farray
-
-axiom concat_def2 :
-  (forall a:(int,us_rep3) farray. forall b:(int,us_rep3) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat2(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat2(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat2(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton2 : us_rep3, int -> (int,us_rep3) farray
-
-axiom singleton_def2 :
-  (forall v:us_rep3.
-  (forall i:int [(singleton2(v, i)[i])]. ((singleton2(v, i)[i]) = v)))
-
 logic bool_eq17 : (int,us_rep3) farray, int, int, (int,us_rep3) farray, int,
   int -> bool
 
@@ -1343,17 +1219,17 @@ axiom bool_eq_def15 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_152:int. ((((a__first <= temp___idx_152) and
-  (temp___idx_152 <= a__last)) and (bool_eq16((a[temp___idx_152]),
-  (b[((b__first - a__first) + temp___idx_152)])) = true)) or
-  (not ((a__first <= temp___idx_152) and (temp___idx_152 <= a__last)))))) ->
+  (forall temp___idx_174:int. ((((a__first <= temp___idx_174) and
+  (temp___idx_174 <= a__last)) and (bool_eq16((a[temp___idx_174]),
+  (b[((b__first - a__first) + temp___idx_174)])) = true)) or
+  (not ((a__first <= temp___idx_174) and (temp___idx_174 <= a__last)))))) ->
   (bool_eq17(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_152:int. (((a__first <= temp___idx_152) and
-  (temp___idx_152 <= a__last)) -> (bool_eq16((a[temp___idx_152]),
-  (b[((b__first - a__first) + temp___idx_152)])) = true))))) -> (bool_eq17(a,
+  (forall temp___idx_174:int. (((a__first <= temp___idx_174) and
+  (temp___idx_174 <= a__last)) -> (bool_eq16((a[temp___idx_174]),
+  (b[((b__first - a__first) + temp___idx_174)])) = true))))) -> (bool_eq17(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev2 :
@@ -1363,9 +1239,9 @@ axiom bool_eq_rev2 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_152:int. (((a__first <= temp___idx_152) and
-  (temp___idx_152 <= a__last)) -> (bool_eq16((a[temp___idx_152]),
-  (b[((b__first - a__first) + temp___idx_152)])) = true)))))))
+  (forall temp___idx_174:int. (((a__first <= temp___idx_174) and
+  (temp___idx_174 <= a__last)) -> (bool_eq16((a[temp___idx_174]),
+  (b[((b__first - a__first) + temp___idx_174)])) = true)))))))
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
@@ -1425,24 +1301,6 @@ axiom slide_def3 :
   (forall i:int [(slide3(a, old_first, new_first)[i])]. ((slide3(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat3 : (int,filestatust) farray, int, int, (int,filestatust) farray,
-  int, int -> (int,filestatust) farray
-
-axiom concat_def3 :
-  (forall a:(int,filestatust) farray. forall b:(int,filestatust) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat3(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat3(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat3(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton3 : filestatust, int -> (int,filestatust) farray
-
-axiom singleton_def3 :
-  (forall v:filestatust.
-  (forall i:int [(singleton3(v, i)[i])]. ((singleton3(v, i)[i]) = v)))
-
 logic bool_eq19 : (int,filestatust) farray, int, int,
   (int,filestatust) farray, int, int -> bool
 
@@ -1453,17 +1311,17 @@ axiom bool_eq_def17 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_153:int. ((((a__first <= temp___idx_153) and
-  (temp___idx_153 <= a__last)) and
-  (to_rep8((a[temp___idx_153])) = to_rep8((b[((b__first - a__first) + temp___idx_153)])))) or
-  (not ((a__first <= temp___idx_153) and (temp___idx_153 <= a__last)))))) ->
+  (forall temp___idx_175:int. ((((a__first <= temp___idx_175) and
+  (temp___idx_175 <= a__last)) and
+  (to_rep8((a[temp___idx_175])) = to_rep8((b[((b__first - a__first) + temp___idx_175)])))) or
+  (not ((a__first <= temp___idx_175) and (temp___idx_175 <= a__last)))))) ->
   (bool_eq19(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_153:int. (((a__first <= temp___idx_153) and
-  (temp___idx_153 <= a__last)) ->
-  (to_rep8((a[temp___idx_153])) = to_rep8((b[((b__first - a__first) + temp___idx_153)]))))))) ->
+  (forall temp___idx_175:int. (((a__first <= temp___idx_175) and
+  (temp___idx_175 <= a__last)) ->
+  (to_rep8((a[temp___idx_175])) = to_rep8((b[((b__first - a__first) + temp___idx_175)]))))))) ->
   (bool_eq19(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev3 :
@@ -1473,37 +1331,9 @@ axiom bool_eq_rev3 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_153:int. (((a__first <= temp___idx_153) and
-  (temp___idx_153 <= a__last)) ->
-  (to_rep8((a[temp___idx_153])) = to_rep8((b[((b__first - a__first) + temp___idx_153)])))))))))
-
-logic compare2 : (int,filestatust) farray, int, int,
-  (int,filestatust) farray, int, int -> int
-
-axiom compare_def_eq2 :
-  (forall a:(int,filestatust) farray. forall b:(int,filestatust) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare2(a, a_first, a_last, b, b_first, b_last)].
-  ((compare2(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq19(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt2 :
-  (forall a:(int,filestatust) farray. forall b:(int,filestatust) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare2(a, a_first, a_last, b, b_first, b_last)].
-  ((compare2(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq19(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep8((a[(i + 1)])) <  to_rep8((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt2 :
-  (forall a:(int,filestatust) farray. forall b:(int,filestatust) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare2(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare2(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq19(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep8((b[(i + 1)])) <  to_rep8((a[(j + 1)]))))))))))))
+  (forall temp___idx_175:int. (((a__first <= temp___idx_175) and
+  (temp___idx_175 <= a__last)) ->
+  (to_rep8((a[temp___idx_175])) = to_rep8((b[((b__first - a__first) + temp___idx_175)])))))))))
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
@@ -1708,24 +1538,6 @@ axiom slide_def4 :
   (forall i:int [(slide4(a, old_first, new_first)[i])]. ((slide4(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat4 : (int,character) farray, int, int, (int,character) farray,
-  int, int -> (int,character) farray
-
-axiom concat_def4 :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat4(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat4(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat4(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton4 : character, int -> (int,character) farray
-
-axiom singleton_def4 :
-  (forall v:character.
-  (forall i:int [(singleton4(v, i)[i])]. ((singleton4(v, i)[i]) = v)))
-
 logic bool_eq24 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -1736,17 +1548,17 @@ axiom bool_eq_def22 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep10((a[temp___idx_78])) = to_rep10((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep10((a[temp___idx_91])) = to_rep10((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq24(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep10((a[temp___idx_78])) = to_rep10((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep10((a[temp___idx_91])) = to_rep10((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq24(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev4 :
@@ -1756,37 +1568,9 @@ axiom bool_eq_rev4 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep10((a[temp___idx_78])) = to_rep10((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare3 : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq3 :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare3(a, a_first, a_last, b, b_first, b_last)].
-  ((compare3(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq24(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt3 :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare3(a, a_first, a_last, b, b_first, b_last)].
-  ((compare3(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq24(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep10((a[(i + 1)])) <  to_rep10((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt3 :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare3(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare3(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq24(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep10((b[(i + 1)])) <  to_rep10((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep10((a[temp___idx_91])) = to_rep10((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 logic dummy32 : (int,character) farray
 
@@ -2432,6 +2216,11 @@ axiom valid_numberlogentries__def_axiom :
   logfileentries) = true) <-> ((1 <= to_rep6(usedlogfiles3)) and
   (numberlogentries = (((to_rep6(usedlogfiles3) - 1) * 1024) + to_rep7((logfileentries[currentlogfile])))))))))
 
+axiom def_axiom :
+  (forall temp___1245:int. (in_range9(temp___1245) ->
+  (forall temp___1246:int.
+  (to_rep7((temp___1243(temp___1245)[temp___1246])) = temp___1245))))
+
 axiom greaterthan__post_axiom : true
 
 axiom greaterthan__def_axiom :
@@ -2461,669 +2250,65 @@ axiom greaterthan__def_axiom :
 
 axiom ispresent__post_axiom : true
 
-logic currenttimevar__split_fields : yearst
-
-logic currenttimevar__split_fields1 : monthst
-
-logic currenttimevar__split_fields2 : dayst
-
-logic currenttimevar__split_fields3 : millisecst
-
-logic logfilestate__split_fields : logfileindext
-
-logic logfilestate__split_fields1 : logentrycountt
-
-logic logfilestate__split_fields2 : (int,logfileindext) farray
-
-logic logfilestate__split_fields3 : logfileindext
-
-logic logfilestate__split_fields4 : logfileindext
-
-logic logfilestate__split_fields5 : logfilecountt
-
-logic logfilestate__split_fields6 : (int,fileentrycountt) farray
-
-logic auditalarm : int
-
-logic currentlatch : int
-
-logic latchtimeout__split_fields : yearst
-
-logic latchtimeout__split_fields1 : monthst
-
-logic latchtimeout__split_fields2 : dayst
-
-logic latchtimeout__split_fields3 : millisecst
-
-logic thistisinfo__split_fields : bool
-
-logic thistisinfo__split_fields1 : issueridt
-
-logic thistisinfo__split_fields2 : namecountt
-
-logic thistisinfo__split_fields3 : (int,character) farray
-
-logic status : int
-
-logic fingertimeout__split_fields : yearst
-
-logic fingertimeout__split_fields1 : monthst
-
-logic fingertimeout__split_fields2 : dayst
-
-logic fingertimeout__split_fields3 : millisecst
-
-logic tokenremovaltimeout__split_fields : yearst
-
-logic tokenremovaltimeout__split_fields1 : monthst
-
-logic tokenremovaltimeout__split_fields2 : dayst
-
-logic tokenremovaltimeout__split_fields3 : millisecst
-
-logic localstatus : int
-
-logic currenttime : us_private
-
-logic state : us_private
-
-logic filestate : us_private
-
-logic state1 : us_private
-
-logic state2 : us_private
-
-logic filestate1 : us_private
-
-logic state3 : us_private
-
-logic state4 : us_private
-
-logic state5 : us_private
-
-logic state6 : us_private
-
-logic status1 : us_private
-
-logic output : us_private
-
-logic o : int
-
-logic currentlatch1 : int
-
-logic latchtimeout__split_fields4 : yearst
-
-logic latchtimeout__split_fields5 : monthst
-
-logic latchtimeout__split_fields6 : dayst
-
-logic latchtimeout__split_fields7 : millisecst
-
-logic fingertimeout__split_fields4 : yearst
-
-logic fingertimeout__split_fields5 : monthst
-
-logic fingertimeout__split_fields6 : dayst
-
-logic fingertimeout__split_fields7 : millisecst
-
-logic tokenremovaltimeout__split_fields4 : yearst
-
-logic tokenremovaltimeout__split_fields5 : monthst
-
-logic tokenremovaltimeout__split_fields6 : dayst
-
-logic tokenremovaltimeout__split_fields7 : millisecst
-
-logic state7 : us_private
-
-logic state8 : us_private
-
-logic filestate2 : us_private
-
-logic state9 : us_private
-
-logic status2 : us_private
-
-logic output1 : us_private
-
-logic result : int
-
-logic localstatus1 : int
-
-logic logfiles : (int,us_rep3) farray
-
-logic logfilesstatus : (int,filestatust) farray
-
-logic logfilestate__split_fields7 : logfileindext
-
-logic logfilestate__split_fields8 : logentrycountt
-
-logic logfilestate__split_fields9 : (int,logfileindext) farray
-
-logic logfilestate__split_fields10 : logfileindext
-
-logic logfilestate__split_fields11 : logfileindext
-
-logic logfilestate__split_fields12 : logfilecountt
-
-logic logfilestate__split_fields13 : (int,fileentrycountt) farray
-
-logic auditalarm1 : int
-
-logic auditsystemfault : bool
-
-logic thestats__split_fields : statscount
-
-logic thestats__split_fields1 : statscount
-
-logic thestats__split_fields2 : statscount
-
-logic thestats__split_fields3 : statscount
-
-logic status3 : int
-
-logic fingertimeout__split_fields8 : yearst
-
-logic fingertimeout__split_fields9 : monthst
-
-logic fingertimeout__split_fields10 : dayst
-
-logic fingertimeout__split_fields11 : millisecst
-
-logic state10 : us_private
-
-logic filestate3 : us_private
-
-logic state11 : us_private
-
-logic state12 : us_private
-
-logic status4 : us_private
-
-logic logfiles1 : (int,us_rep3) farray
-
-logic logfilesstatus1 : (int,filestatust) farray
-
-logic logfilestate__split_fields14 : logfileindext
-
-logic logfilestate__split_fields15 : logentrycountt
-
-logic logfilestate__split_fields16 : (int,logfileindext) farray
-
-logic logfilestate__split_fields17 : logfileindext
-
-logic logfilestate__split_fields18 : logfileindext
-
-logic logfilestate__split_fields19 : logfilecountt
-
-logic logfilestate__split_fields20 : (int,fileentrycountt) farray
-
-logic auditalarm2 : int
-
-logic auditsystemfault1 : bool
-
-logic thestats__split_fields4 : statscount
-
-logic thestats__split_fields5 : statscount
-
-logic thestats__split_fields6 : statscount
-
-logic thestats__split_fields7 : statscount
-
-logic status5 : int
-
-logic state13 : us_private
-
-logic filestate4 : us_private
-
-logic state14 : us_private
-
-logic state15 : us_private
-
-logic logfiles2 : (int,us_rep3) farray
-
-logic logfilesstatus2 : (int,filestatust) farray
-
-logic logfilestate__split_fields21 : logfileindext
-
-logic logfilestate__split_fields22 : logentrycountt
-
-logic logfilestate__split_fields23 : (int,logfileindext) farray
-
-logic logfilestate__split_fields24 : logfileindext
-
-logic logfilestate__split_fields25 : logfileindext
-
-logic logfilestate__split_fields26 : logfilecountt
-
-logic logfilestate__split_fields27 : (int,fileentrycountt) farray
-
-logic auditalarm3 : int
-
-logic auditsystemfault2 : bool
-
-logic thestats__split_fields8 : statscount
-
-logic thestats__split_fields9 : statscount
-
-logic thestats__split_fields10 : statscount
-
-logic thestats__split_fields11 : statscount
-
-logic status6 : int
-
-logic state16 : us_private
-
-logic filestate5 : us_private
-
-logic state17 : us_private
-
-logic state18 : us_private
-
-logic logfiles3 : (int,us_rep3) farray
-
-logic logfilesstatus3 : (int,filestatust) farray
-
-logic logfilestate__split_fields28 : logfileindext
-
-logic logfilestate__split_fields29 : logentrycountt
-
-logic logfilestate__split_fields30 : (int,logfileindext) farray
-
-logic logfilestate__split_fields31 : logfileindext
-
-logic logfilestate__split_fields32 : logfileindext
-
-logic logfilestate__split_fields33 : logfilecountt
-
-logic logfilestate__split_fields34 : (int,fileentrycountt) farray
-
-logic auditalarm4 : int
-
-logic auditsystemfault3 : bool
-
-logic thestats__split_fields12 : statscount
-
-logic thestats__split_fields13 : statscount
-
-logic thestats__split_fields14 : statscount
-
-logic thestats__split_fields15 : statscount
-
-logic status7 : int
-
-logic state19 : us_private
-
-logic filestate6 : us_private
-
-logic filestate7 : us_private
-
-logic state20 : us_private
-
-logic state21 : us_private
-
-logic state22 : us_private
-
-logic status8 : us_private
-
-logic output2 : us_private
-
-logic logfiles4 : (int,us_rep3) farray
-
-logic logfilesstatus4 : (int,filestatust) farray
-
-logic logfilestate__split_fields35 : logfileindext
-
-logic logfilestate__split_fields36 : logentrycountt
-
-logic logfilestate__split_fields37 : (int,logfileindext) farray
-
-logic logfilestate__split_fields38 : logfileindext
-
-logic logfilestate__split_fields39 : logfileindext
-
-logic logfilestate__split_fields40 : logfilecountt
-
-logic logfilestate__split_fields41 : (int,fileentrycountt) farray
-
-logic auditalarm5 : int
-
-logic auditsystemfault4 : bool
-
-logic thestats__split_fields16 : statscount
-
-logic thestats__split_fields17 : statscount
-
-logic thestats__split_fields18 : statscount
-
-logic thestats__split_fields19 : statscount
-
-logic status9 : int
-
-logic tokenremovaltimeout__split_fields8 : yearst
-
-logic tokenremovaltimeout__split_fields9 : monthst
-
-logic tokenremovaltimeout__split_fields10 : dayst
-
-logic tokenremovaltimeout__split_fields11 : millisecst
-
-logic state23 : us_private
-
-logic filestate8 : us_private
-
-logic state24 : us_private
-
-logic state25 : us_private
-
-logic logfiles5 : (int,us_rep3) farray
-
-logic logfilesstatus5 : (int,filestatust) farray
-
-logic logfilestate__split_fields42 : logfileindext
-
-logic logfilestate__split_fields43 : logentrycountt
-
-logic logfilestate__split_fields44 : (int,logfileindext) farray
-
-logic logfilestate__split_fields45 : logfileindext
-
-logic logfilestate__split_fields46 : logfileindext
-
-logic logfilestate__split_fields47 : logfilecountt
-
-logic logfilestate__split_fields48 : (int,fileentrycountt) farray
-
-logic auditalarm6 : int
-
-logic auditsystemfault5 : bool
-
-logic currentlatch2 : int
-
-logic latchtimeout__split_fields8 : yearst
-
-logic latchtimeout__split_fields9 : monthst
-
-logic latchtimeout__split_fields10 : dayst
-
-logic latchtimeout__split_fields11 : millisecst
-
-logic thestats__split_fields20 : statscount
-
-logic thestats__split_fields21 : statscount
-
-logic thestats__split_fields22 : statscount
-
-logic thestats__split_fields23 : statscount
-
-logic status10 : int
-
-logic state26 : us_private
-
-logic filestate9 : us_private
-
-logic state27 : us_private
-
-logic state28 : us_private
-
-logic state29 : us_private
-
-logic state30 : us_private
-
-logic logfiles6 : (int,us_rep3) farray
-
-logic logfilesstatus6 : (int,filestatust) farray
-
-logic logfilestate__split_fields49 : logfileindext
-
-logic logfilestate__split_fields50 : logentrycountt
-
-logic logfilestate__split_fields51 : (int,logfileindext) farray
-
-logic logfilestate__split_fields52 : logfileindext
-
-logic logfilestate__split_fields53 : logfileindext
-
-logic logfilestate__split_fields54 : logfilecountt
-
-logic logfilestate__split_fields55 : (int,fileentrycountt) farray
-
-logic auditalarm7 : int
-
-logic auditsystemfault6 : bool
-
-logic thestats__split_fields24 : statscount
-
-logic thestats__split_fields25 : statscount
-
-logic thestats__split_fields26 : statscount
-
-logic thestats__split_fields27 : statscount
-
-logic status11 : int
-
-logic state31 : us_private
-
-logic filestate10 : us_private
-
-logic state32 : us_private
-
-logic state33 : us_private
-
-logic logfiles7 : (int,us_rep3) farray
-
-logic logfilesstatus7 : (int,filestatust) farray
-
-logic logfilestate__split_fields56 : logfileindext
-
-logic logfilestate__split_fields57 : logentrycountt
-
-logic logfilestate__split_fields58 : (int,logfileindext) farray
-
-logic logfilestate__split_fields59 : logfileindext
-
-logic logfilestate__split_fields60 : logfileindext
-
-logic logfilestate__split_fields61 : logfilecountt
-
-logic logfilestate__split_fields62 : (int,fileentrycountt) farray
-
-logic auditalarm8 : int
-
-logic auditsystemfault7 : bool
-
-logic currentlatch3 : int
-
-logic latchtimeout__split_fields12 : yearst
-
-logic latchtimeout__split_fields13 : monthst
-
-logic latchtimeout__split_fields14 : dayst
-
-logic latchtimeout__split_fields15 : millisecst
-
-logic thestats__split_fields28 : statscount
-
-logic thestats__split_fields29 : statscount
-
-logic thestats__split_fields30 : statscount
-
-logic thestats__split_fields31 : statscount
-
-logic status12 : int
-
-logic fingertimeout__split_fields12 : yearst
-
-logic fingertimeout__split_fields13 : monthst
-
-logic fingertimeout__split_fields14 : dayst
-
-logic fingertimeout__split_fields15 : millisecst
-
-logic tokenremovaltimeout__split_fields12 : yearst
-
-logic tokenremovaltimeout__split_fields13 : monthst
-
-logic tokenremovaltimeout__split_fields14 : dayst
-
-logic tokenremovaltimeout__split_fields15 : millisecst
-
-logic localstatus2 : int
-
-logic state34 : us_private
-
-logic filestate11 : us_private
-
-logic state35 : us_private
-
-logic state36 : us_private
-
-logic filestate12 : us_private
-
-logic state37 : us_private
-
-logic state38 : us_private
-
-logic state39 : us_private
-
-logic status13 : us_private
-
-logic output3 : us_private
-
-logic logfiles8 : (int,us_rep3) farray
-
-logic logfilesstatus8 : (int,filestatust) farray
-
-logic logfilestate__split_fields63 : logfileindext
-
-logic logfilestate__split_fields64 : logentrycountt
-
-logic logfilestate__split_fields65 : (int,logfileindext) farray
-
-logic logfilestate__split_fields66 : logfileindext
-
-logic logfilestate__split_fields67 : logfileindext
-
-logic logfilestate__split_fields68 : logfilecountt
-
-logic logfilestate__split_fields69 : (int,fileentrycountt) farray
-
-logic auditalarm9 : int
-
-logic auditsystemfault8 : bool
-
-logic currentlatch4 : int
-
-logic latchtimeout__split_fields16 : yearst
-
-logic latchtimeout__split_fields17 : monthst
-
-logic latchtimeout__split_fields18 : dayst
-
-logic latchtimeout__split_fields19 : millisecst
-
-logic thestats__split_fields32 : statscount
-
-logic thestats__split_fields33 : statscount
-
-logic thestats__split_fields34 : statscount
-
-logic thestats__split_fields35 : statscount
-
-logic status14 : int
-
-logic fingertimeout__split_fields16 : yearst
-
-logic fingertimeout__split_fields17 : monthst
-
-logic fingertimeout__split_fields18 : dayst
-
-logic fingertimeout__split_fields19 : millisecst
-
-logic tokenremovaltimeout__split_fields16 : yearst
-
-logic tokenremovaltimeout__split_fields17 : monthst
-
-logic tokenremovaltimeout__split_fields18 : dayst
-
-logic tokenremovaltimeout__split_fields19 : millisecst
-
-logic localstatus3 : int
-
-logic state40 : us_private
-
-logic filestate13 : us_private
-
-logic state41 : us_private
-
-logic state42 : us_private
-
-logic filestate14 : us_private
-
-logic state43 : us_private
-
-logic state44 : us_private
-
-logic state45 : us_private
-
-logic status15 : us_private
-
-logic output4 : us_private
-
-axiom H : in_range17(status)
-
-axiom H1 : (valid_numberlogentries(to_rep4(logfilestate__split_fields),
+axiom def_axiom1 :
+  (forall temp___1241:int. (in_range6(temp___1241) ->
+  (forall temp___1242:int.
+  (to_rep4((temp___1239(temp___1241)[temp___1242])) = temp___1241))))
+
+ (* File "userentry.adb", line 1000, characters 0-0 *)
+goal WP_parameter_def :
+  (forall currenttimevar__split_fields:yearst.
+  forall currenttimevar__split_fields1:monthst.
+  forall currenttimevar__split_fields2:dayst.
+  forall currenttimevar__split_fields3:millisecst.
+  forall logfilestate__split_fields:logfileindext.
+  forall logfilestate__split_fields1:logentrycountt.
+  forall logfilestate__split_fields2:(int,logfileindext) farray.
+  forall logfilestate__split_fields3:logfileindext.
+  forall logfilestate__split_fields4:logfileindext.
+  forall logfilestate__split_fields5:logfilecountt.
+  forall logfilestate__split_fields6:(int,fileentrycountt) farray.
+  forall auditalarm:int. forall currentlatch:int.
+  forall latchtimeout__split_fields:yearst.
+  forall latchtimeout__split_fields1:monthst.
+  forall latchtimeout__split_fields2:dayst.
+  forall latchtimeout__split_fields3:millisecst.
+  forall thistisinfo__split_fields:bool.
+  forall thistisinfo__split_fields1:issueridt.
+  forall thistisinfo__split_fields2:namecountt.
+  forall thistisinfo__split_fields3:(int,character) farray.
+  forall status:int. forall localstatus:int. forall currenttime:us_private.
+  forall state:us_private. forall state1:us_private.
+  forall state2:us_private. forall state3:us_private. forall o:int.
+  forall result:int. forall localstatus1:int. (in_range17(status) ->
+  ((valid_numberlogentries(to_rep4(logfilestate__split_fields),
   to_rep5(logfilestate__split_fields1), { us_split_fields3 = {
   rec__auditlog__logfilelistt__list = logfilestate__split_fields2;
   rec__auditlog__logfilelistt__head = logfilestate__split_fields3;
   rec__auditlog__logfilelistt__lasti = logfilestate__split_fields4;
   rec__auditlog__logfilelistt__length = logfilestate__split_fields5 } },
-  logfilestate__split_fields6) = true)
-
-axiom H2 : in_range1(auditalarm)
-
-axiom H3 : in_range11(currentlatch)
-
-axiom H4 : (((currentactivitypossible(status, state6) = true) and
-  (privatekeypresent({ rec__keystore__optionalprivatekeyt__ispresent =
-  thistisinfo__split_fields; rec__keystore__optionalprivatekeyt__owner = {
-  us_split_fields7 = { rec__cryptotypes__issuert__id =
-  thistisinfo__split_fields1; rec__cryptotypes__issuert__namelength =
-  thistisinfo__split_fields2; rec__cryptotypes__issuert__name =
-  thistisinfo__split_fields3 } } }, state5) = true)) and
-  ((((islocked(currentlatch, state1, { rec__clock__timet__year =
-  latchtimeout__split_fields; rec__clock__timet__month =
-  latchtimeout__split_fields1; rec__clock__timet__day =
-  latchtimeout__split_fields2; rec__clock__timet__millisec =
-  latchtimeout__split_fields3 }) = true) and
-  (thecurrentdoor(state2) = 0)) and (greaterthanorequal(thecurrenttime({
+  logfilestate__split_fields6) = true) -> (in_range1(auditalarm) ->
+  (in_range11(currentlatch) -> ((((currentactivitypossible(status,
+  state3) = true) and (privatekeypresent({
+  rec__keystore__optionalprivatekeyt__ispresent = thistisinfo__split_fields;
+  rec__keystore__optionalprivatekeyt__owner = { us_split_fields7 = {
+  rec__cryptotypes__issuert__id = thistisinfo__split_fields1;
+  rec__cryptotypes__issuert__namelength = thistisinfo__split_fields2;
+  rec__cryptotypes__issuert__name = thistisinfo__split_fields3 } } },
+  state2) = true)) and ((((islocked(currentlatch, state, {
+  rec__clock__timet__year = latchtimeout__split_fields;
+  rec__clock__timet__month = latchtimeout__split_fields1;
+  rec__clock__timet__day = latchtimeout__split_fields2;
+  rec__clock__timet__millisec = latchtimeout__split_fields3 }) = true) and
+  (thecurrentdoor(state1) = 0)) and (greaterthanorequal(thecurrenttime({
   rec__clock__timet__year = currenttimevar__split_fields;
   rec__clock__timet__month = currenttimevar__split_fields1;
   rec__clock__timet__day = currenttimevar__split_fields2;
   rec__clock__timet__millisec = currenttimevar__split_fields3 },
-  currenttime), alarm_timeout(state2)) = true)) <->
-  (thedooralarm(state2) = 0)))
-
-axiom H5 : ((1 <= 7) -> in_range18(localstatus))
-
-axiom H6 : ((o = status) and in_range18(status))
-
-axiom H7 : (result = localstatus)
-
-axiom H8 : (localstatus1 = o)
-
-axiom H9 : (not (localstatus1 = 1))
-
-axiom H10 : (not (localstatus1 = 2))
-
-axiom H11 : (not (localstatus1 = 3))
-
-axiom H12 : (not (localstatus1 = 4))
-
-axiom H13 : (not (localstatus1 = 5))
-
-axiom H14 : (localstatus1 = 6)
-
- (* File "userentry.adb", line 1000, characters 0-0 *)
-goal WP_parameter_def : (status = 6)
+  currenttime), alarm_timeout(state1)) = true)) <->
+  (thedooralarm(state1) = 0))) -> (((1 <= 7) -> in_range18(localstatus)) ->
+  ((((o = status) and in_range18(status)) and ((result = localstatus) and
+  (localstatus1 = o))) -> ((not (localstatus1 = 1)) ->
+  ((not (localstatus1 = 2)) -> ((not (localstatus1 = 3)) ->
+  ((not (localstatus1 = 4)) -> ((not (localstatus1 = 5)) ->
+  ((localstatus1 = 6) -> (status = 6)))))))))))))))

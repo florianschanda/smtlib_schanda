@@ -385,41 +385,11 @@ axiom mod_def :
   (forall x:int. forall y:int [mod(x, y)]. (((0 <  y) -> (mod(x,
   y) = (x % y))) and ((not (0 <  y)) -> (mod(x, y) = ((x % y) + y)))))
 
-logic x__split_fields : small
-
-logic x__split_fields1 : very_small
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : very_small
-
-logic o3 : small
-
-logic o4 : small
-
-logic o5 : very_small
-
-logic temp___222 : small
-
-logic temp___2221 : very_small
-
-axiom H : (in_range(i3s) and ((2 * i3s) <  100000))
-
-axiom H1 : (in_range1(i5s) and ((i5s * i5s) <  100000))
-
-axiom H2 : ((comp_div(to_rep(i7s),to_rep1(i7s1)) = 0) and
-  (((2 * to_rep(i7s)) <  100000) and
-  ((to_rep1(i7s1) * to_rep1(i7s1)) <  100000)))
-
-axiom H3 : true
-
-axiom H4 : ((2 * 2) <  100000)
-
-axiom H5 : (o1 = 2)
-
-axiom H6 : (to_rep1(o2) = o1)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : ((2 * 1) <  100000)
+goal WP_parameter_def :
+  (forall o:int. forall o1:very_small. ((in_range(i3s) and
+  ((2 * i3s) <  100000)) -> ((in_range1(i5s) and ((i5s * i5s) <  100000)) ->
+  (((comp_div(to_rep(i7s),to_rep1(i7s1)) = 0) and
+  (((2 * to_rep(i7s)) <  100000) and
+  ((to_rep1(i7s1) * to_rep1(i7s1)) <  100000))) -> (((((2 * 2) <  100000) and
+  (o = 2)) and (to_rep1(o1) = o)) -> ((2 * 1) <  100000))))))

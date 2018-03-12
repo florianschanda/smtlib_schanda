@@ -50,19 +50,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic g : bool
-
-logic g1 : bool
-
-logic g2 : bool
-
-logic g3 : bool
-
-axiom H : (not (g = true))
-
-axiom H1 : (g1 = g2)
-
-axiom H2 : (g3 = g1)
-
  (* File "glob.adb", line 2, characters 0-0 *)
-goal WP_parameter_def : (not (g2 = true))
+goal WP_parameter_def :
+  (forall g:bool. forall g1:bool. forall g2:bool. forall g3:bool.
+  (((not (g = true)) and ((g1 = g2) and (g3 = g1))) -> (not (g2 = true))))

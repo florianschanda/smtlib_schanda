@@ -344,12 +344,6 @@ axiom my_inf__def_axiom :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq5 : bool, bool -> bool
-
-axiom bool_eq_def4 :
-  (forall x:bool. forall y:bool [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -361,6 +355,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq5 : bool, bool -> bool
+
+axiom bool_eq_def4 :
+  (forall x:bool. forall y:bool [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
 
 predicate in_range3(x: int) = ((x = 0) or (x = 1))
 
@@ -606,15 +606,15 @@ axiom elements__post_axiom :
   rec__p__my_sets__set = container1 } })) = length({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = container }; us_split_fields1 = {
   rec__p__my_sets__set = container1 } })) and
-  (forall temp___393:int. ((in_range6(temp___393) and ((1 <= temp___393) and
-  (temp___393 <= (0 + length2(elements({ us_split_discrs1 = {
+  (forall temp___435:int. ((in_range6(temp___435) and ((1 <= temp___435) and
+  (temp___435 <= (0 + length2(elements({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = container }; us_split_fields1 = {
   rec__p__my_sets__set = container1 } })))))) -> (contains(model__({
   us_split_discrs1 = { rec__p__my_sets__set__capacity = container };
   us_split_fields1 = { rec__p__my_sets__set = container1 } }), get(elements({
   us_split_discrs1 = { rec__p__my_sets__set__capacity = container };
   us_split_fields1 = { rec__p__my_sets__set = container1 } }),
-  temp___393)) = true)))) and
+  temp___435)) = true)))) and
   (forall item:int. ((in_range5(item) and (contains(model__({
   us_split_discrs1 = { rec__p__my_sets__set__capacity = container };
   us_split_fields1 = { rec__p__my_sets__set = container1 } }),
@@ -863,18 +863,9 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length2(container))))) ->
   in_range7(get(container, position)))))
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-axiom H : ((o = length({ us_split_discrs1 = {
+ (* File "a-cforse.ads", line 1189, characters 0-0 *)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. ((((o = length({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = right }; us_split_fields1 = {
   rec__p__my_sets__set = right1 } })) and (in_range1(o) and
-  (o <= to_rep(right))))
-
-axiom H1 : (o1 = (2147483647 - o))
-
- (* File "a-cforse.ads", line 1189, characters 0-0 *)
-goal WP_parameter_def : in_range(o1)
+  (o <= to_rep(right)))) and (o1 = (2147483647 - o))) -> in_range(o1)))

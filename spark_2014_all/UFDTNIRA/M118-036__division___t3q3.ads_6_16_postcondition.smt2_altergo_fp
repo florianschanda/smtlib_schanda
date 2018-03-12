@@ -55,12 +55,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -72,6 +66,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -253,63 +253,20 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic x : int
-
-logic y : int
-
-logic p : int
-
-logic q : int
-
-logic r : int
-
-logic q1 : int
-
-logic r1 : int
-
-logic p1 : int
-
-logic x1 : int
-
-logic y1 : int
-
-logic r2 : int
-
-logic x2 : int
-
-logic y2 : int
-
-logic p2 : int
-
-logic q2 : int
-
-logic r3 : int
-
-logic x3 : int
-
-logic y3 : int
-
-logic p3 : int
-
-logic q3 : int
-
-logic r4 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : in_range1(y)
-
-axiom H2 : ((0 <  y) and (0 <= x))
-
-axiom H3 : ((((0 <= 2147483647) -> in_range1(p)) and (((0 <= 2147483647) ->
-  in_range1(q)) and (((0 <= 2147483647) -> in_range1(r)) and
-  ((((q1 = comp_div(x,y)) and (r1 = (x - (q1 * y)))) and (in_range1(q1) and
-  in_range1(r1))) and (((p1 = (q1 * y)) and in_range1(p1)) and
-  (((x1 = (p1 + r1)) and in_range1(x1)) and (((y1 = comp_div(p1,q1)) and
-  (r2 = (p1 - (y1 * q1)))) and (in_range1(y1) and in_range1(r2))))))))) and
-  (((r2 = r3) and ((q1 = q2) and ((p1 = p2) and ((y1 = y2) and
-  (x1 = x2))))) and ((r4 = r2) and ((q3 = q1) and ((p3 = p1) and
-  ((y3 = y1) and (x3 = x1)))))))
-
  (* File "t3q3.adb", line 27, characters 0-0 *)
-goal WP_parameter_def : (x2 = x)
+goal WP_parameter_def :
+  (forall x:int. forall y:int. forall p:int. forall q:int. forall r:int.
+  forall q1:int. forall r1:int. forall p1:int. forall x1:int. forall y1:int.
+  forall r2:int. forall x2:int. forall y2:int. forall p2:int. forall q2:int.
+  forall r3:int. forall x3:int. forall y3:int. forall p3:int. forall q3:int.
+  forall r4:int. ((in_range1(x) and (in_range1(y) and (((0 <  y) and
+  (0 <= x)) and ((((0 <= 2147483647) -> in_range1(p)) and
+  (((0 <= 2147483647) -> in_range1(q)) and (((0 <= 2147483647) ->
+  in_range1(r)) and ((((q1 = comp_div(x,y)) and (r1 = (x - (q1 * y)))) and
+  (in_range1(q1) and in_range1(r1))) and (((p1 = (q1 * y)) and
+  in_range1(p1)) and (((x1 = (p1 + r1)) and in_range1(x1)) and
+  (((y1 = comp_div(p1,q1)) and (r2 = (p1 - (y1 * q1)))) and
+  (in_range1(y1) and in_range1(r2))))))))) and (((r2 = r3) and ((q1 = q2) and
+  ((p1 = p2) and ((y1 = y2) and (x1 = x2))))) and ((r4 = r2) and
+  ((q3 = q1) and ((p3 = p1) and ((y3 = y1) and (x3 = x1)))))))))) ->
+  (x2 = x)))

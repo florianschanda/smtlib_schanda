@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -357,112 +357,35 @@ function even_pair__ref___projection(a: even_pair__ref) : us_rep =
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x__split_fields : even
-
-logic x__split_fields1 : even
-
-logic o : int
-
-logic o1 : even
-
-logic o2 : even
-
-logic o3 : even
-
-logic temp___310 : even
-
-logic temp___3101 : even
-
-logic o4 : int
-
-logic o5 : even
-
-logic o6 : even
-
-logic o7 : even
-
-logic temp___314 : even
-
-logic temp___3141 : even
-
-logic result : even
-
-logic result1 : even
-
-logic x__split_fields2 : even
-
-logic x__split_fields3 : even
-
-logic result2 : even
-
-logic result3 : even
-
-logic x__split_fields4 : even
-
-logic x__split_fields5 : even
-
-logic x__split_fields6 : even
-
-logic x__split_fields7 : even
-
-logic x__split_fields8 : even
-
-logic x__split_fields9 : even
-
-axiom H : (in_range1(i7s) and (mod(i7s, 2) = 0))
-
-axiom H1 : ((mod(to_rep(x__split_fields), 2) = 0) and
-  (mod(to_rep(x__split_fields1), 2) = 0))
-
-axiom H2 : (mod(0, 2) = 0)
-
-axiom H3 : (o = 0)
-
-axiom H4 : (to_rep(o1) = o)
-
-axiom H5 : (o1 = o2)
-
-axiom H6 : (x__split_fields1 = o3)
-
-axiom H7 : (temp___310 = o2)
-
-axiom H8 : (temp___3101 = o3)
-
-axiom H9 : ((result = x__split_fields) and (result1 = x__split_fields1))
-
-axiom H10 : (temp___310 = x__split_fields2)
-
-axiom H11 : (temp___3101 = x__split_fields3)
-
-axiom H12 : (mod(2, 2) = 0)
-
-axiom H13 : (o4 = 2)
-
-axiom H14 : (to_rep(o5) = o4)
-
-axiom H15 : (x__split_fields2 = o6)
-
-axiom H16 : (o5 = o7)
-
-axiom H17 : (temp___314 = o6)
-
-axiom H18 : (temp___3141 = o7)
-
-axiom H19 : (result2 = x__split_fields2)
-
-axiom H20 : (result3 = x__split_fields3)
-
-axiom H21 : (temp___314 = x__split_fields4)
-
-axiom H22 : (temp___3141 = x__split_fields5)
-
-axiom H23 : (x__split_fields6 = x__split_fields4)
-
-axiom H24 : (x__split_fields7 = x__split_fields5)
-
-axiom H25 : (x__split_fields8 = x__split_fields4)
-
-axiom H26 : (x__split_fields9 = x__split_fields5)
-
  (* File "dynamic_preds.adb", line 125, characters 0-0 *)
-goal WP_parameter_def : (to_rep(x__split_fields6) = 0)
+goal WP_parameter_def :
+  (forall x__split_fields:even. forall x__split_fields1:even. forall o:int.
+  forall o1:even. forall o2:even. forall o3:even. forall temp___336:even.
+  forall temp___3361:even. forall o4:int. forall o5:even. forall o6:even.
+  forall o7:even. forall temp___340:even. forall temp___3401:even.
+  forall result:even. forall result1:even. forall x__split_fields2:even.
+  forall x__split_fields3:even. forall result2:even. forall result3:even.
+  forall x__split_fields4:even. forall x__split_fields5:even.
+  forall x__split_fields6:even. forall x__split_fields7:even.
+  forall x__split_fields8:even. forall x__split_fields9:even.
+  (((in_range1(i7s) and (mod(i7s, 2) = 0)) and
+  (((mod(to_rep(x__split_fields), 2) = 0) and (mod(to_rep(x__split_fields1),
+  2) = 0)) and ((((((((mod(0, 2) = 0) and (o = 0)) and (to_rep(o1) = o)) and
+  ((o1 = o2) and (x__split_fields1 = o3))) and ((temp___336 = o2) and
+  (temp___3361 = o3))) and (({ us_split_fields__content = {
+  rec__dynamic_preds__even_pair__a = result;
+  rec__dynamic_preds__even_pair__b = result1 } } = {
+  us_split_fields__content = { rec__dynamic_preds__even_pair__a =
+  x__split_fields; rec__dynamic_preds__even_pair__b = x__split_fields1 }
+  }) and ((temp___336 = x__split_fields2) and
+  (temp___3361 = x__split_fields3)))) and ((((((mod(2, 2) = 0) and
+  (o4 = 2)) and (to_rep(o5) = o4)) and ((x__split_fields2 = o6) and
+  (o5 = o7))) and ((temp___340 = o6) and (temp___3401 = o7))) and
+  (((result2 = x__split_fields2) and (result3 = x__split_fields3)) and
+  ((temp___340 = x__split_fields4) and
+  (temp___3401 = x__split_fields5))))) and
+  (((x__split_fields6 = x__split_fields4) and
+  (x__split_fields7 = x__split_fields5)) and
+  ((x__split_fields8 = x__split_fields4) and
+  (x__split_fields9 = x__split_fields5)))))) ->
+  (to_rep(x__split_fields6) = 0)))

@@ -118,11 +118,5 @@ axiom a__post_axiom : true
 axiom a__def_axiom :
   (forall x1:int [a(x1)]. ((a(x1) = true) <-> (not (x1 = 0))))
 
-logic o : bool
-
-axiom H : in_range(x)
-
-axiom H1 : (not (x = 0))
-
  (* File "renaming.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (not (x = 0))
+goal WP_parameter_def : (in_range(x) -> ((not (x = 0)) -> (not (x = 0))))

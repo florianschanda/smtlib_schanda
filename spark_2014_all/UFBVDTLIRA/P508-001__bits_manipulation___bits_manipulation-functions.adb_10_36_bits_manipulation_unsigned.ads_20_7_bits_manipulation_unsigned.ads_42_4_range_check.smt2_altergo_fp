@@ -1632,12 +1632,6 @@ axiom toBig_to_uint2 : (forall x:t. (tqtint(x) = tqtint1(toBig2(x))))
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq4 : bool, bool -> bool
-
-axiom bool_eq_def4 :
-  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
-
 logic to_int4 : bool -> int
 
 axiom to_int_def4 :
@@ -1649,6 +1643,12 @@ logic of_int4 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int4(i)]. (((i = 0) -> (of_int4(i) = false)) and
   ((not (i = 0)) -> (of_int4(i) = true))))
+
+logic bool_eq4 : bool, bool -> bool
+
+axiom bool_eq_def4 :
+  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1748,22 +1748,12 @@ logic amount : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : t1
+logic rliteral3 : t
 
-logic o1 : t1
-
-axiom H : true
-
-axiom H1 : in_range1(amount)
-
-axiom H2 : (not ((1 <= 8) and (8 <= 8)))
-
-axiom H3 : (not ((9 <= 8) and (8 <= 16)))
-
-axiom H4 : (17 <= 8)
-
-axiom H5 : (8 <= 32)
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 0)
 
  (* File "bits_manipulation.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : ule2(toBig1(of_int(0)), lsr_bv2(toBig1(v),
-  of_int2(amount)))
+goal WP_parameter_def : (in_range1(amount) -> ((not ((1 <= 8) and
+  (8 <= 8))) -> ((not ((9 <= 8) and (8 <= 16))) -> (((17 <= 8) and
+  (8 <= 32)) -> ule2(toBig1(rliteral3), lsr_bv2(toBig1(v),
+  of_int2(amount)))))))

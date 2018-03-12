@@ -664,13 +664,9 @@ logic upper_bound : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-axiom H : true
+logic rliteral : t
 
-axiom H1 : true
-
-axiom H2 : true
-
-axiom H3 : (not (arg2 = of_int(0)))
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
 
  (* File "spark-mod_arithmetic_lemmas.ads", line 73, characters 0-0 *)
-goal WP_parameter_def : (not (arg2 = zeros))
+goal WP_parameter_def : ((not (arg2 = rliteral)) -> (not (arg2 = zeros)))

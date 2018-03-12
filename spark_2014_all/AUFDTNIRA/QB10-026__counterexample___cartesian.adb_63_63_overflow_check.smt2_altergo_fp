@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -188,24 +188,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> (int,integer) farray
-
-axiom concat_def :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : integer, int -> (int,integer) farray
-
-axiom singleton_def :
-  (forall v:integer.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,integer) farray, int, int, (int,integer) farray, int,
   int -> bool
 
@@ -216,17 +198,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -236,37 +218,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type t
 
@@ -395,27 +349,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,(int,integer) farray) farray, int, int,
-  (int,(int,integer) farray) farray, int,
-  int -> (int,(int,integer) farray) farray
-
-axiom concat_def1 :
-  (forall a:(int,(int,integer) farray) farray.
-  forall b:(int,(int,integer) farray) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : (int,integer) farray,
-  int -> (int,(int,integer) farray) farray
-
-axiom singleton_def1 :
-  (forall v:(int,integer) farray.
-  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq6 : (int,(int,integer) farray) farray, int, int,
   (int,(int,integer) farray) farray, int, int -> bool
 
@@ -427,17 +360,17 @@ axiom bool_eq_def4 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) and (bool_eq4((a[temp___idx_133]), 1, 2,
-  (b[((b__first - a__first) + temp___idx_133)]), 1, 2) = true)) or
-  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (forall temp___idx_155:int. ((((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) and (bool_eq4((a[temp___idx_155]), 1, 2,
+  (b[((b__first - a__first) + temp___idx_155)]), 1, 2) = true)) or
+  (not ((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) -> (bool_eq4((a[temp___idx_133]), 1, 2,
-  (b[((b__first - a__first) + temp___idx_133)]), 1, 2) = true))))) ->
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) -> (bool_eq4((a[temp___idx_155]), 1, 2,
+  (b[((b__first - a__first) + temp___idx_155)]), 1, 2) = true))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -448,9 +381,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) -> (bool_eq4((a[temp___idx_133]), 1, 2,
-  (b[((b__first - a__first) + temp___idx_133)]), 1, 2) = true)))))))
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) -> (bool_eq4((a[temp___idx_155]), 1, 2,
+  (b[((b__first - a__first) + temp___idx_155)]), 1, 2) = true)))))))
 
 type t1
 
@@ -856,884 +789,186 @@ function t8b__ref___projection(a: t8b__ref) : integer = (a).t8b__content
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
-logic temp___173 : int, int -> (int,integer) farray
-
-axiom def_axiom :
-  (forall temp___175:int. forall temp___176:int. (((temp___173(temp___175,
-  temp___176)[1]) = of_rep(temp___175)) and ((temp___173(temp___175,
-  temp___176)[2]) = of_rep(temp___176))))
+logic temp___198 : int, int -> (int,integer) farray
 
 logic cartesian__cartesian_product__result__aggregate_def : (int,integer) farray,
   int, int -> us_t3
 
-axiom def_axiom1 :
-  (forall temp___225:(int,integer) farray.
-  (forall temp___226:int. forall temp___227:int. ((dynamic_property1(0,
-  2147483647, temp___226, temp___227) ->
-  ((to_rep(first6((cartesian__cartesian_product__result__aggregate_def(temp___225,
-  temp___226, temp___227)).rt3)) = temp___226) and
-  (to_rep(last6((cartesian__cartesian_product__result__aggregate_def(temp___225,
-  temp___226, temp___227)).rt3)) = temp___227))) and
-  (forall temp___228:int.
-  (((cartesian__cartesian_product__result__aggregate_def(temp___225,
-  temp___226, temp___227)).elts3[temp___228]) = temp___225)))))
+logic temp___257 : int, int -> (int,integer) farray
 
-logic temp___229 : int, int -> (int,integer) farray
-
-axiom def_axiom2 :
-  (forall temp___231:int. forall temp___232:int. (((temp___229(temp___231,
-  temp___232)[1]) = of_rep(temp___231)) and ((temp___229(temp___231,
-  temp___232)[2]) = of_rep(temp___232))))
-
-logic temp___237 : int, int -> (int,integer) farray
-
-axiom def_axiom3 :
-  (forall temp___239:int. forall temp___240:int. (((temp___237(temp___239,
-  temp___240)[1]) = of_rep(temp___239)) and ((temp___237(temp___239,
-  temp___240)[2]) = of_rep(temp___240))))
+logic temp___265 : int, int -> (int,integer) farray
 
 axiom result_length__def_axiom : (result_length = (length({ elts = array1;
   rt = array11 }) * length({ elts = array2; rt = array21 })))
 
-logic result__ : (int,(int,integer) farray) farray
-
-logic result_index : int
-
-logic index1 : int
-
-logic index2 : int
-
-logic cartesian__cartesian_product__result : (int,(int,integer) farray) farray
-
-logic cartesian__cartesian_product__result1 : t1
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic cartesian__cartesian_product__result_length__assume : int
-
-logic temp___235 : (int,(int,integer) farray) farray
-
-logic temp___2351 : t3
-
-logic cartesian__cartesian_product__result__assume : (int,(int,integer) farray) farray
-
-logic cartesian__cartesian_product__result__assume1 : t2
-
-logic temp___260 : (int,(int,integer) farray) farray
-
-logic temp___258 : int
-
-logic temp___257 : int
-
-logic temp___245 : (int,(int,integer) farray) farray
-
-logic temp___243 : int
-
-logic temp___242 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : (int,(int,integer) farray) farray
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : int
-
-logic o13 : int
-
-logic o14 : int
-
-logic o15 : int
-
-logic j : int
-
-logic o16 : int
-
-logic o17 : int
-
-logic o18 : int
-
-logic o19 : int
-
-logic o20 : int
-
-logic o21 : int
-
-logic o22 : int
-
-logic o23 : int
-
-logic temp___247 : int
-
-logic o24 : int
-
-logic o25 : integer
-
-logic o26 : int
-
-logic j1 : int
-
-logic o27 : int
-
-logic o28 : int
-
-logic o29 : int
-
-logic o30 : int
-
-logic o31 : int
-
-logic o32 : int
-
-logic o33 : int
-
-logic o34 : int
-
-logic temp___251 : int
-
-logic o35 : int
-
-logic o36 : integer
-
-logic o37 : int
-
-logic o38 : int
-
-logic o39 : int
-
-logic o40 : (int,(int,integer) farray) farray
-
-logic o41 : int
-
-logic o42 : int
-
-logic o43 : int
-
-logic o44 : int
-
-logic o45 : int
-
-logic o46 : int
-
-logic i : int
-
-logic j2 : int
-
-logic o47 : int
-
-logic o48 : int
-
-logic o49 : int
-
-logic o50 : int
-
-logic o51 : int
-
-logic o52 : int
-
-logic o53 : int
-
-logic o54 : int
-
-logic temp___262 : int
-
-logic o55 : int
-
-logic o56 : integer
-
-logic o57 : int
-
-logic i1 : int
-
-logic j3 : int
-
-logic o58 : int
-
-logic o59 : int
-
-logic o60 : int
-
-logic o61 : int
-
-logic o62 : int
-
-logic o63 : int
-
-logic o64 : int
-
-logic o65 : int
-
-logic temp___267 : int
-
-logic o66 : int
-
-logic o67 : integer
-
-logic o68 : int
-
-logic temp___2451 : (int,(int,integer) farray) farray
-
-logic temp___2431 : int
-
-logic temp___2421 : int
-
-logic o69 : int
-
-logic o70 : int
-
-logic o71 : (int,(int,integer) farray) farray
-
-logic o72 : int
-
-logic o73 : int
-
-logic o74 : int
-
-logic o75 : int
-
-logic o76 : int
-
-logic o77 : int
-
-logic o78 : int
-
-logic o79 : int
-
-logic o80 : int
-
-logic j4 : int
-
-logic o81 : int
-
-logic o82 : int
-
-logic o83 : int
-
-logic o84 : int
-
-logic o85 : int
-
-logic o86 : int
-
-logic o87 : int
-
-logic o88 : int
-
-logic temp___2471 : int
-
-logic o89 : int
-
-logic o90 : integer
-
-logic o91 : int
-
-logic j5 : int
-
-logic o92 : int
-
-logic o93 : int
-
-logic o94 : int
-
-logic o95 : int
-
-logic o96 : int
-
-logic o97 : int
-
-logic o98 : int
-
-logic o99 : int
-
-logic temp___2511 : int
-
-logic o100 : int
-
-logic o101 : integer
-
-logic o102 : int
-
-logic o103 : int
-
-logic o104 : int
-
-logic o105 : (int,(int,integer) farray) farray
-
-logic i2 : int
-
-logic j6 : int
-
-logic o106 : int
-
-logic o107 : int
-
-logic o108 : int
-
-logic o109 : int
-
-logic o110 : int
-
-logic o111 : int
-
-logic o112 : int
-
-logic o113 : int
-
-logic temp___274 : int
-
-logic o114 : int
-
-logic o115 : integer
-
-logic o116 : int
-
-logic i3 : int
-
-logic j7 : int
-
-logic o117 : int
-
-logic o118 : int
-
-logic o119 : int
-
-logic o120 : int
-
-logic o121 : int
-
-logic o122 : int
-
-logic o123 : int
-
-logic o124 : int
-
-logic temp___279 : int
-
-logic o125 : int
-
-logic o126 : integer
-
-logic o127 : int
-
-logic i4 : int
-
-logic j8 : int
-
-logic o128 : int
-
-logic o129 : integer
-
-logic o130 : int
-
-logic index21 : int
-
-logic result : (int,(int,integer) farray) farray
-
-logic result__1 : (int,(int,integer) farray) farray
-
-logic result1 : int
-
-logic result_index1 : int
-
-logic result2 : int
-
-logic index11 : int
-
-logic result3 : int
-
-logic index22 : int
-
-logic result4 : int
-
-logic result_index2 : int
-
-logic result5 : (int,(int,integer) farray) farray
-
-logic result__2 : (int,(int,integer) farray) farray
-
-logic result__3 : (int,(int,integer) farray) farray
-
-logic result_index3 : int
-
-logic index23 : int
-
-logic result6 : int
-
-logic index24 : int
-
-logic result7 : int
-
-logic result_index4 : int
-
-logic result8 : (int,(int,integer) farray) farray
-
-logic result__4 : (int,(int,integer) farray) farray
-
-logic result__5 : (int,(int,integer) farray) farray
-
-logic result_index5 : int
-
-logic index25 : int
-
-logic result__6 : (int,(int,integer) farray) farray
-
-logic result_index6 : int
-
-logic index26 : int
-
-logic result__7 : (int,(int,integer) farray) farray
-
-logic result_index7 : int
-
-logic index27 : int
-
-logic result__8 : (int,(int,integer) farray) farray
-
-logic result_index8 : int
-
-logic index28 : int
-
-logic result__9 : (int,(int,integer) farray) farray
-
-logic result_index9 : int
-
-logic index12 : int
-
-logic index29 : int
-
-logic result9 : int
-
-logic index13 : int
-
-logic result10 : int
-
-logic index210 : int
-
-logic result11 : int
-
-logic result_index10 : int
-
-logic result12 : (int,(int,integer) farray) farray
-
-logic result__10 : (int,(int,integer) farray) farray
-
-logic result__11 : (int,(int,integer) farray) farray
-
-logic result_index11 : int
-
-logic index211 : int
-
-logic result13 : int
-
-logic index212 : int
-
-logic result14 : int
-
-logic result_index12 : int
-
-logic result15 : (int,(int,integer) farray) farray
-
-logic result__12 : (int,(int,integer) farray) farray
-
-logic result__13 : (int,(int,integer) farray) farray
-
-logic result_index13 : int
-
-logic index213 : int
-
-logic result__14 : (int,(int,integer) farray) farray
-
-logic result_index14 : int
-
-logic index214 : int
-
-logic result__15 : (int,(int,integer) farray) farray
-
-logic result_index15 : int
-
-logic index215 : int
-
-logic result__16 : (int,(int,integer) farray) farray
-
-logic result_index16 : int
-
-logic index216 : int
-
-logic result__17 : (int,(int,integer) farray) farray
-
-logic result_index17 : int
-
-logic index217 : int
-
-logic result__18 : (int,(int,integer) farray) farray
-
-logic result_index18 : int
-
-logic index218 : int
-
-logic result__19 : (int,(int,integer) farray) farray
-
-logic result_index19 : int
-
-logic index14 : int
-
-logic index219 : int
-
-logic result__20 : (int,(int,integer) farray) farray
-
-logic result_index20 : int
-
-logic index15 : int
-
-logic index220 : int
-
-logic result__21 : (int,(int,integer) farray) farray
-
-logic result_index21 : int
-
-logic index16 : int
-
-logic index221 : int
-
-logic result__22 : (int,(int,integer) farray) farray
-
-logic result_index22 : int
-
-logic index17 : int
-
-logic index222 : int
-
-logic result__23 : (int,(int,integer) farray) farray
-
-logic result_index23 : int
-
-logic index18 : int
-
-logic index223 : int
-
-logic result__24 : (int,(int,integer) farray) farray
-
-logic result_index24 : int
-
-logic index19 : int
-
-logic index224 : int
-
-logic result16 : (int,(int,integer) farray) farray
-
-logic result17 : t1
-
-logic cartesian__cartesian_product__result2 : (int,(int,integer) farray) farray
-
-logic cartesian__cartesian_product__result3 : t1
-
-logic cartesian__cartesian_product__result4 : (int,(int,integer) farray) farray
-
-logic cartesian__cartesian_product__result5 : t1
-
-logic cartesian__cartesian_product__result6 : (int,(int,integer) farray) farray
-
-logic cartesian__cartesian_product__result7 : t1
-
-logic result__25 : (int,(int,integer) farray) farray
-
-logic result_index25 : int
-
-logic index110 : int
-
-logic index225 : int
-
-logic cartesian__cartesian_product__result8 : (int,(int,integer) farray) farray
-
-logic cartesian__cartesian_product__result9 : t1
-
-logic result__26 : (int,(int,integer) farray) farray
-
-logic result_index26 : int
-
-logic index111 : int
-
-logic index226 : int
-
-logic cartesian__cartesian_product__result10 : (int,(int,integer) farray) farray
-
-logic cartesian__cartesian_product__result11 : t1
-
-axiom H : dynamic_property(0, 2147483647, to_rep(first(array11)),
-  to_rep(last(array11)))
-
-axiom H1 : dynamic_property(0, 2147483647, to_rep(first(array21)),
-  to_rep(last(array21)))
-
-axiom H2 : ((length({ elts = array1; rt = array11 }) <  255) and (length({
-  elts = array2; rt = array21 }) <  255))
-
-axiom H3 : ((o = length({ elts = array2; rt = array21 })) and
-  in_range1(length({ elts = array2; rt = array21 })))
-
-axiom H4 : ((o1 = length({ elts = array1; rt = array11 })) and
-  in_range1(length({ elts = array1; rt = array11 })))
-
-axiom H5 : (o2 = (o1 * o))
-
-axiom H6 : ((o3 = o2) and in_range1(o2))
-
-axiom H7 : ((cartesian__cartesian_product__result_length__assume = o3) and
-  in_range2(o3))
-
-axiom H8 :
-  (cartesian__cartesian_product__result_length__assume = result_length)
-
-axiom H9 : in_range2(result_length)
-
-axiom H10 :
-  (to_rep(first6((cartesian__cartesian_product__result__aggregate_def(temp___229(0,
-  0), 1, result_length)).rt3)) = 1)
-
-axiom H11 :
-  (to_rep(last6((cartesian__cartesian_product__result__aggregate_def(temp___229(0,
-  0), 1, result_length)).rt3)) = result_length)
-
-axiom H12 : ({ elts3 = temp___235; rt3 = temp___2351
-  } = cartesian__cartesian_product__result__aggregate_def(temp___229(0, 0),
-  1, result_length))
-
-axiom H13 : (((to_rep(first6(temp___2351)) <= to_rep(last6(temp___2351))) ->
-  (((1 <= result_length) ->
-  (((to_rep(last6(temp___2351)) - to_rep(first6(temp___2351))) + 1) = ((result_length - 1) + 1))) and
-  ((not (1 <= result_length)) ->
-  (((to_rep(last6(temp___2351)) - to_rep(first6(temp___2351))) + 1) = 0)))) and
-  ((not (to_rep(first6(temp___2351)) <= to_rep(last6(temp___2351)))) ->
-  ((1 <= result_length) -> (0 = ((result_length - 1) + 1)))))
-
-axiom H14 : (temp___235 = cartesian__cartesian_product__result__assume)
-
-axiom H15 : (mk2(to_rep(first6(temp___2351)),
-  to_rep(last6(temp___2351))) = cartesian__cartesian_product__result__assume1)
-
-axiom H16 : (result = result__)
-
-axiom H17 : (result__1 = cartesian__cartesian_product__result__assume)
-
-axiom H18 :
-  (to_rep(result____first) = to_rep(first4(cartesian__cartesian_product__result__assume1)))
-
-axiom H19 :
-  (to_rep(result____last) = to_rep(last4(cartesian__cartesian_product__result__assume1)))
-
-axiom H20 : (dynamic_property3(1, result_length, to_rep(result____first),
+axiom def_axiom :
+  (forall temp___253:(int,integer) farray.
+  (forall temp___254:int. forall temp___255:int. ((dynamic_property1(0,
+  2147483647, temp___254, temp___255) ->
+  ((to_rep(first6((cartesian__cartesian_product__result__aggregate_def(temp___253,
+  temp___254, temp___255)).rt3)) = temp___254) and
+  (to_rep(last6((cartesian__cartesian_product__result__aggregate_def(temp___253,
+  temp___254, temp___255)).rt3)) = temp___255))) and
+  (forall temp___256:int.
+  (((cartesian__cartesian_product__result__aggregate_def(temp___253,
+  temp___254, temp___255)).elts3[temp___256]) = temp___253)))))
+
+axiom def_axiom1 :
+  (forall temp___259:int. forall temp___260:int. ((in_range1(temp___259) and
+  in_range1(temp___260)) -> ((to_rep((temp___257(temp___259,
+  temp___260)[1])) = temp___259) and (to_rep((temp___257(temp___259,
+  temp___260)[2])) = temp___260))))
+
+axiom def_axiom2 :
+  (forall temp___267:int. forall temp___268:int. ((in_range1(temp___267) and
+  in_range1(temp___268)) -> ((to_rep((temp___265(temp___267,
+  temp___268)[1])) = temp___267) and (to_rep((temp___265(temp___267,
+  temp___268)[2])) = temp___268))))
+
+axiom def_axiom3 :
+  (forall temp___200:int. forall temp___201:int. ((in_range1(temp___200) and
+  in_range1(temp___201)) -> ((to_rep((temp___198(temp___200,
+  temp___201)[1])) = temp___200) and (to_rep((temp___198(temp___200,
+  temp___201)[2])) = temp___201))))
+
+ (* File "cartesian.ads", line 17, characters 0-0 *)
+goal WP_parameter_def :
+  (forall result__:(int,(int,integer) farray) farray.
+  forall result_index:int. forall index1:int. forall index2:int.
+  forall o:int. forall o1:int. forall o2:int. forall o3:int.
+  forall cartesian__cartesian_product__result_length__assume:int.
+  forall temp___263:(int,(int,integer) farray) farray. forall temp___2631:t3.
+  forall cartesian__cartesian_product__result__assume:(int,(int,integer) farray) farray.
+  forall cartesian__cartesian_product__result__assume1:t2.
+  forall temp___273:(int,(int,integer) farray) farray. forall temp___271:int.
+  forall temp___270:int. forall o4:int. forall o5:int.
+  forall o6:(int,(int,integer) farray) farray. forall i:int. forall j:int.
+  forall o7:int. forall o8:int. forall o9:int. forall o10:int.
+  forall o11:int. forall o12:integer. forall o13:int.
+  forall result:(int,(int,integer) farray) farray.
+  forall result__1:(int,(int,integer) farray) farray. forall result1:int.
+  forall result_index1:int. forall result2:int. forall index11:int.
+  forall result3:int. forall index21:int. forall result4:int.
+  forall result_index2:int. forall result5:(int,(int,integer) farray) farray.
+  forall result__2:(int,(int,integer) farray) farray.
+  forall result__3:(int,(int,integer) farray) farray.
+  forall result_index3:int. forall index22:int.
+  forall result__4:(int,(int,integer) farray) farray.
+  forall result_index4:int. forall index23:int.
+  forall result__5:(int,(int,integer) farray) farray.
+  forall result_index5:int. forall index24:int.
+  forall result__6:(int,(int,integer) farray) farray.
+  forall result_index6:int. forall index25:int.
+  forall result__7:(int,(int,integer) farray) farray.
+  forall result_index7:int. forall index26:int.
+  forall result__8:(int,(int,integer) farray) farray.
+  forall result_index8:int. forall index12:int. (dynamic_property(0,
+  2147483647, to_rep(first(array11)), to_rep(last(array11))) ->
+  (dynamic_property(0, 2147483647, to_rep(first(array21)),
+  to_rep(last(array21))) -> (((length({ elts = array1; rt = array11
+  }) <  255) and (length({ elts = array2; rt = array21 }) <  255)) ->
+  (((((((o = length({ elts = array2; rt = array21 })) and in_range1(length({
+  elts = array2; rt = array21 }))) and (((o1 = length({ elts = array1; rt =
+  array11 })) and in_range1(length({ elts = array1; rt = array11 }))) and
+  (o2 = (o1 * o)))) and ((o3 = o2) and in_range1(o2))) and
+  ((cartesian__cartesian_product__result_length__assume = o3) and
+  in_range2(o3))) and
+  (cartesian__cartesian_product__result_length__assume = result_length)) ->
+  (in_range2(result_length) ->
+  (((((to_rep(first6((cartesian__cartesian_product__result__aggregate_def(temp___257(0,
+  0), 1, result_length)).rt3)) = 1) and
+  ((to_rep(last6((cartesian__cartesian_product__result__aggregate_def(temp___257(0,
+  0), 1, result_length)).rt3)) = result_length) and ({ elts3 = temp___263;
+  rt3 = temp___2631
+  } = cartesian__cartesian_product__result__aggregate_def(temp___257(0, 0),
+  1, result_length)))) and
+  ((((to_rep(first6(temp___2631)) <= to_rep(last6(temp___2631))) and
+  (((1 <= result_length) and
+  (((to_rep(last6(temp___2631)) - to_rep(first6(temp___2631))) + 1) = ((result_length - 1) + 1))) or
+  ((not (1 <= result_length)) and
+  (((to_rep(last6(temp___2631)) - to_rep(first6(temp___2631))) + 1) = 0)))) or
+  ((not (to_rep(first6(temp___2631)) <= to_rep(last6(temp___2631)))) and
+  (((1 <= result_length) and (0 = ((result_length - 1) + 1))) or
+  (not (1 <= result_length))))) and
+  ((temp___263 = cartesian__cartesian_product__result__assume) and
+  (mk2(to_rep(first6(temp___2631)),
+  to_rep(last6(temp___2631))) = cartesian__cartesian_product__result__assume1)))) and
+  ((({ map__content1 = result } = { map__content1 = result__ }) and
+  (result__1 = cartesian__cartesian_product__result__assume)) and
+  ((to_rep(result____first) = to_rep(first4(cartesian__cartesian_product__result__assume1))) and
+  (to_rep(result____last) = to_rep(last4(cartesian__cartesian_product__result__assume1)))))) ->
+  ((dynamic_property3(1, result_length, to_rep(result____first),
   to_rep(result____last)) and ((to_rep(result____first) = 1) and
-  (to_rep(result____last) = result_length)))
-
-axiom H21 : (result1 = result_index)
-
-axiom H22 : (result_index1 = 0)
-
-axiom H23 : in_range2(result_index1)
-
-axiom H24 : (result2 = index1)
-
-axiom H25 : (index11 = to_rep(first(array11)))
-
-axiom H26 : (to_rep(first(array11)) <= index11)
-
-axiom H27 : (index11 <= to_rep(last(array11)))
-
-axiom H28 : (result3 = index2)
-
-axiom H29 : (index22 = to_rep(first(array21)))
-
-axiom H30 : (((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21)))) -> (temp___245 = result__1))
-
-axiom H31 : (((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21)))) -> (temp___243 = index22))
-
-axiom H32 : (((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21)))) -> (temp___242 = result_index1))
-
-axiom H33 : (((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21)))) -> ((o4 = (result_index1 + 1)) and
-  in_range1((result_index1 + 1))))
-
-axiom H34 : (((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21)))) -> (result_index1 = result4))
-
-axiom H35 : (((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21)))) -> (result_index2 = o4))
-
-axiom H36 : (((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21)))) ->
-  ((to_rep(result____first) <= result_index2) and
-  (result_index2 <= to_rep(result____last))))
-
-axiom H37 : (((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21)))) -> (o5 = result_index2))
-
-axiom H38 : (((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21)))) ->
-  (o6 = (result__1[o5 <- temp___237(to_rep((array1[index11])),
-  to_rep((array2[index22])))])))
-
-axiom H39 : (((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21)))) -> (result__1 = result5))
-
-axiom H40 : (((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21)))) -> (result__2 = o6))
-
-axiom H41 : (((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21)))) ->
-  (result_index3 = ((((index11 - to_rep(first(array11))) * length({ elts =
-  array2; rt = array21 })) + (index23 - to_rep(first(array21)))) + 1)))
-
-axiom H42 : (((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21)))) ->
-  (forall j9:int. (((to_rep(first(array21)) <= j9) and (j9 <= index23)) ->
+  (to_rep(result____last) = result_length))) -> ((({ int__content = result1
+  } = { int__content = result_index }) and (result_index1 = 0)) ->
+  (in_range2(result_index1) -> ((({ int__content = result2 } = {
+  int__content = index1 }) and (index11 = to_rep(first(array11)))) ->
+  (((to_rep(first(array11)) <= index11) and
+  (index11 <= to_rep(last(array11)))) -> (((({ int__content = result3 } = {
+  int__content = index2 }) and (index21 = to_rep(first(array21)))) and
+  ((((to_rep(first(array21)) <= index21) and
+  (index21 <= to_rep(last(array21)))) and ((((temp___273 = result__1) and
+  ((temp___271 = index21) and ((temp___270 = result_index1) and
+  ((((o4 = (result_index1 + 1)) and in_range1((result_index1 + 1))) and
+  ((result_index1 = result4) and (result_index2 = o4))) and
+  ((((((to_rep(result____first) <= result_index2) and
+  (result_index2 <= to_rep(result____last))) and (o5 = result_index2)) and
+  (o6 = (result__1[o5 <- temp___265(to_rep((array1[index11])),
+  to_rep((array2[index21])))]))) and ((result__1 = result5) and
+  (result__2 = o6))) and
+  (((result_index3 = ((((index11 - to_rep(first(array11))) * length({ elts =
+  array2; rt = array21 })) + (index22 - to_rep(first(array21)))) + 1)) and
+  ((forall j1:int. (((to_rep(first(array21)) <= j1) and (j1 <= index22)) ->
+   (to_rep(((result__3[((((index11 - to_rep(first(array11))) * length({
+   elts = array2; rt = array21
+   })) + (j1 - to_rep(first(array21)))) + 1)])[1])) = to_rep((array1[index11]))))) and
+  (forall j1:int. (((to_rep(first(array21)) <= j1) and (j1 <= index22)) ->
   (to_rep(((result__3[((((index11 - to_rep(first(array11))) * length({ elts =
   array2; rt = array21
-  })) + (j9 - to_rep(first(array21)))) + 1)])[1])) = to_rep((array1[index11]))))))
-
-axiom H43 : (((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21)))) ->
-  (forall j9:int. (((to_rep(first(array21)) <= j9) and (j9 <= index23)) ->
-  (to_rep(((result__3[((((index11 - to_rep(first(array11))) * length({ elts =
-  array2; rt = array21
-  })) + (j9 - to_rep(first(array21)))) + 1)])[2])) = to_rep((array2[j9]))))))
-
-axiom H44 : (((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21)))) -> ((((0 <= 2147483647) ->
-  in_range2(result_index3)) and
+  })) + (j1 - to_rep(first(array21)))) + 1)])[2])) = to_rep((array2[j1]))))))) and
+  (((((0 <= 2147483647) -> in_range2(result_index3)) and
   ((to_rep(first(array21)) <= to_rep(last(array21))) ->
   dynamic_property7(to_rep(first(array21)), to_rep(last(array21)),
-  index23))) and ((to_rep(first(array21)) <= index23) and
-  (index23 <= to_rep(last(array21))))))
-
-axiom H45 : (((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21)))) -> (index23 = to_rep(last(array21))))
-
-axiom H46 : (((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21)))) -> (index25 = index23))
-
-axiom H47 : (((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21)))) -> (result_index5 = result_index3))
-
-axiom H48 : (((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21)))) -> (result__3 = result__5))
-
-axiom H49 : (((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21)))) -> (index26 = index23))
-
-axiom H50 : (((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21)))) -> (result_index6 = result_index3))
-
-axiom H51 : (((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21)))) -> (result__6 = result__3))
-
-axiom H52 : (((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21)))) -> (index27 = index25))
-
-axiom H53 : (((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21)))) -> (result_index7 = result_index5))
-
-axiom H54 : (((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21)))) -> (result__7 = result__5))
-
-axiom H55 : (((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21)))) -> (index28 = index26))
-
-axiom H56 : (((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21)))) -> (result_index8 = result_index6))
-
-axiom H57 : (((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21)))) -> (result__8 = result__6))
-
-axiom H58 : ((not ((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21))))) -> (index27 = index22))
-
-axiom H59 : ((not ((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21))))) -> (result_index7 = result_index1))
-
-axiom H60 : ((not ((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21))))) -> (result__7 = result__1))
-
-axiom H61 : ((not ((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21))))) -> (index28 = index22))
-
-axiom H62 : ((not ((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21))))) -> (result_index8 = result_index1))
-
-axiom H63 : ((not ((to_rep(first(array21)) <= index22) and
-  (index22 <= to_rep(last(array21))))) -> (result__8 = result__1))
-
-axiom H64 :
-  (result_index9 = (((index12 - to_rep(first(array11))) + 1) * length({
-  elts = array2; rt = array21 })))
-
-axiom H65 :
-  (forall i5:int. (((to_rep(first(array11)) <= i5) and (i5 <= index12)) ->
-  (forall j9:int. (((to_rep(first(array21)) <= j9) and
-  (j9 <= to_rep(last(array21)))) ->
-  (to_rep(((result__9[((((i5 - to_rep(first(array11))) * length({ elts =
+  index22))) and ((to_rep(first(array21)) <= index22) and
+  (index22 <= to_rep(last(array21))))) and
+  (index22 = to_rep(last(array21)))))))))) and (((index22 = index23) and
+  ((result_index3 = result_index4) and (result__3 = result__4))) and
+  ((index24 = index22) and ((result_index5 = result_index3) and
+  (result__5 = result__3))))) and ((({ int__content = index25 } = {
+  int__content = index23 }) and (({ int__content = result_index6 } = {
+  int__content = result_index4 }) and ({ map__content1 = result__6 } = {
+  map__content1 = result__4 }))) and ((index26 = index24) and
+  ((result_index7 = result_index5) and (result__7 = result__5)))))) or
+  ((not ((to_rep(first(array21)) <= index21) and
+  (index21 <= to_rep(last(array21))))) and (((index21 = index25) and
+  ((result_index1 = result_index6) and (result__1 = result__6))) and
+  ((index26 = index21) and ((result_index7 = result_index1) and
+  (result__7 = result__1))))))) ->
+  (((result_index8 = (((index12 - to_rep(first(array11))) + 1) * length({
+  elts = array2; rt = array21 }))) and
+  ((forall i1:int. (((to_rep(first(array11)) <= i1) and (i1 <= index12)) ->
+   (forall j1:int. (((to_rep(first(array21)) <= j1) and
+   (j1 <= to_rep(last(array21)))) ->
+   (to_rep(((result__8[((((i1 - to_rep(first(array11))) * length({ elts =
+   array2; rt = array21
+   })) + (j1 - to_rep(first(array21)))) + 1)])[1])) = to_rep((array1[i1]))))))) and
+  (forall i1:int. (((to_rep(first(array11)) <= i1) and (i1 <= index12)) ->
+  (forall j1:int. (((to_rep(first(array21)) <= j1) and
+  (j1 <= to_rep(last(array21)))) ->
+  (to_rep(((result__8[((((i1 - to_rep(first(array11))) * length({ elts =
   array2; rt = array21
-  })) + (j9 - to_rep(first(array21)))) + 1)])[1])) = to_rep((array1[i5])))))))
-
-axiom H66 :
-  (forall i5:int. (((to_rep(first(array11)) <= i5) and (i5 <= index12)) ->
-  (forall j9:int. (((to_rep(first(array21)) <= j9) and
-  (j9 <= to_rep(last(array21)))) ->
-  (to_rep(((result__9[((((i5 - to_rep(first(array11))) * length({ elts =
-  array2; rt = array21
-  })) + (j9 - to_rep(first(array21)))) + 1)])[2])) = to_rep((array2[j9])))))))
-
-axiom H67 : ((((0 <= 2147483647) -> in_range2(result_index9)) and
+  })) + (j1 - to_rep(first(array21)))) + 1)])[2])) = to_rep((array2[j1]))))))))) ->
+  (((((0 <= 2147483647) -> in_range2(result_index8)) and
   ((to_rep(first(array11)) <= to_rep(last(array11))) ->
   dynamic_property6(to_rep(first(array11)), to_rep(last(array11)),
   index12))) and ((to_rep(first(array11)) <= index12) and
-  (index12 <= to_rep(last(array11)))))
-
-axiom H68 : (to_rep(first(array11)) <= i1)
-
-axiom H69 : (i1 <= index12)
-
-axiom H70 : (to_rep(first(array21)) <= j3)
-
-axiom H71 : (j3 <= to_rep(last(array21)))
-
-axiom H72 : ((to_rep(first(array21)) <= j3) and
-  (j3 <= to_rep(last(array21))))
-
-axiom H73 : (o66 = j3)
-
-axiom H74 : (o67 = (array2[o66]))
-
-axiom H75 : (o68 = to_rep(o67))
-
-axiom H76 : ((o61 = (j3 - to_rep(first(array21)))) and
-  in_range1((j3 - to_rep(first(array21)))))
-
-axiom H77 : ((o58 = length({ elts = array2; rt = array21 })) and
-  in_range1(length({ elts = array2; rt = array21 })))
-
-axiom H78 : ((o59 = (i1 - to_rep(first(array11)))) and
-  in_range1((i1 - to_rep(first(array11)))))
-
-axiom H79 : (o60 = (o59 * o58))
-
- (* File "cartesian.ads", line 17, characters 0-0 *)
-goal WP_parameter_def : in_range1(o60)
+  (index12 <= to_rep(last(array11))))) -> (((to_rep(first(array11)) <= i) and
+  (i <= index12)) -> (((to_rep(first(array21)) <= j) and
+  (j <= to_rep(last(array21)))) -> ((((((to_rep(first(array21)) <= j) and
+  (j <= to_rep(last(array21)))) and (o11 = j)) and (o12 = (array2[o11]))) and
+  (o13 = to_rep(o12))) -> (((o10 = (j - to_rep(first(array21)))) and
+  in_range1((j - to_rep(first(array21))))) -> ((((o7 = length({ elts =
+  array2; rt = array21 })) and in_range1(length({ elts = array2; rt = array21
+  }))) and (((o8 = (i - to_rep(first(array11)))) and
+  in_range1((i - to_rep(first(array11))))) and (o9 = (o8 * o7)))) ->
+  in_range1(o9)))))))))))))))))))))

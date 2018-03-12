@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -169,37 +169,11 @@ axiom get__post_axiom :
   (forall state__state:us_private [get(state__s1, state__state)].
   (in_range1(state__s1) -> in_range2(get(state__s1, state__state)))))
 
-logic s1 : int
-
-logic s11 : int
-
-logic state : us_private
-
-logic s12 : int
-
-logic state1 : us_private
-
-logic s13 : int
-
-logic state2 : us_private
-
-logic s14 : int
-
-logic state3 : us_private
-
-axiom H : in_range1(s1)
-
-axiom H1 : ((get(s11, state) = 0) and in_range1(s11))
-
-axiom H2 : ((get(s12, state1) = 1) and in_range1(s12))
-
-axiom H3 : (state2 = state1)
-
-axiom H4 : (s13 = s12)
-
-axiom H5 : (state3 = state1)
-
-axiom H6 : (s14 = s12)
-
  (* File "state.ads", line 16, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def :
+  (forall s1:int. forall s11:int. forall state:us_private. forall s12:int.
+  forall state1:us_private. forall s13:int. forall state2:us_private.
+  forall s14:int. forall state3:us_private. (not (in_range1(s1) and
+  ((((get(s11, state) = 0) and in_range1(s11)) and ((get(s12,
+  state1) = 1) and in_range1(s12))) and (((state2 = state1) and
+  (s13 = s12)) and ((state3 = state1) and (s14 = s12)))))))

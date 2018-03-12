@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -512,69 +512,33 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length1(container))))) ->
   in_range7(get(container, position)))))
 
-logic container__split_fields : us_main_type
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : bool
-
-logic o5 : int
-
-logic o6 : bool
-
-logic o7 : bool
-
-logic o8 : bool
-
-axiom H : in_range4(before)
-
-axiom H1 : in_range3(new_item)
-
-axiom H2 : in_range2(count)
-
-axiom H3 : ((not (before = 0)) -> ((o5 = (0 + length1(model__({
-  us_split_discrs1 = { rec__bounded__vect__vector__capacity =
-  container__split_discrs }; us_split_fields1 = {
-  rec__bounded__vect__vector = container__split_fields } })))) and
-  (in_range4(o5) and (o5 = (0 + length1(model__({ us_split_discrs1 = {
-  rec__bounded__vect__vector__capacity = container__split_discrs };
-  us_split_fields1 = { rec__bounded__vect__vector = container__split_fields }
-  })))))))
-
-axiom H4 : ((not (before = 0)) -> ((((before - 1) = o5) -> (o6 = true)) and
-  ((not ((before - 1) = o5)) -> (o6 = false))))
-
-axiom H5 : ((before = 0) -> (o6 = false))
-
-axiom H6 : ((o3 = (0 + length1(model__({ us_split_discrs1 = {
-  rec__bounded__vect__vector__capacity = container__split_discrs };
-  us_split_fields1 = { rec__bounded__vect__vector = container__split_fields }
-  })))) and (in_range4(o3) and (o3 = (0 + length1(model__({
-  us_split_discrs1 = { rec__bounded__vect__vector__capacity =
-  container__split_discrs }; us_split_fields1 = {
-  rec__bounded__vect__vector = container__split_fields } }))))))
-
-axiom H7 : (((before <= o3) -> (o4 = true)) and ((not (before <= o3)) ->
-  (o4 = false)))
-
-axiom H8 : (((1 <= before) -> (o7 = o4)) and ((not (1 <= before)) ->
-  (o7 = false)))
-
-axiom H9 : (o8 = match_bool(o7, true, o6))
-
-axiom H10 : ((((of_int(1) = true) ->
-  (o = to_rep(container__split_discrs))) and ((not (of_int(1) = true)) ->
-  (o = 2147483647))) and (in_range5(o) and (((of_int(1) = true) ->
-  (o = to_rep(container__split_discrs))) and ((not (of_int(1) = true)) ->
-  (o = 2147483647)))))
-
-axiom H11 : (o1 = (o - count))
-
  (* File "a-cofove.ads", line 345, characters 0-0 *)
-goal WP_parameter_def : in_range1(o1)
+goal WP_parameter_def :
+  (forall container__split_fields:us_main_type. forall o:int. forall o1:int.
+  forall o2:int. forall o3:bool. forall o4:int. forall o5:bool.
+  forall o6:bool. forall o7:bool. (in_range4(before) ->
+  (in_range3(new_item) -> (in_range2(count) -> (((((not (before = 0)) and
+  (((o4 = (0 + length1(model__({ us_split_discrs1 = {
+  rec__bounded__vect__vector__capacity = container__split_discrs };
+  us_split_fields1 = { rec__bounded__vect__vector = container__split_fields }
+  })))) and (in_range4(o4) and (o4 = (0 + length1(model__({
+  us_split_discrs1 = { rec__bounded__vect__vector__capacity =
+  container__split_discrs }; us_split_fields1 = {
+  rec__bounded__vect__vector = container__split_fields } })))))) and
+  ((((before - 1) = o4) and (o5 = true)) or ((not ((before - 1) = o4)) and
+  (o5 = false))))) or ((before = 0) and (o5 = false))) and
+  (((((o2 = (0 + length1(model__({ us_split_discrs1 = {
+  rec__bounded__vect__vector__capacity = container__split_discrs };
+  us_split_fields1 = { rec__bounded__vect__vector = container__split_fields }
+  })))) and (in_range4(o2) and (o2 = (0 + length1(model__({
+  us_split_discrs1 = { rec__bounded__vect__vector__capacity =
+  container__split_discrs }; us_split_fields1 = {
+  rec__bounded__vect__vector = container__split_fields } })))))) and
+  (((before <= o2) and (o3 = true)) or ((not (before <= o2)) and
+  (o3 = false)))) and (((1 <= before) and (o6 = o3)) or
+  ((not (1 <= before)) and (o6 = false)))) and (o7 = match_bool(o6, true,
+  o5)))) -> ((((((of_int(1) = true) and
+  (o = to_rep(container__split_discrs))) or ((not (of_int(1) = true)) and
+  (o = 2147483647))) and (in_range5(o) and (((of_int(1) = true) and
+  (o = to_rep(container__split_discrs))) or ((not (of_int(1) = true)) and
+  (o = 2147483647))))) and (o1 = (o - count))) -> in_range1(o1)))))))

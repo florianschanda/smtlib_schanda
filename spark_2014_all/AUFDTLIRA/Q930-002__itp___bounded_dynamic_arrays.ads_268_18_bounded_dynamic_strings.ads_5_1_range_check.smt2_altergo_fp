@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -188,24 +188,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -216,17 +198,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -236,37 +218,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 type positive
 
@@ -800,86 +754,34 @@ type t77s__ref = { t77s__content : us_t2
 
 function t77s__ref___projection(a: t77s__ref) : us_t2 = (a).t77s__content
 
-logic k : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : bool
-
-logic o4 : int
-
-logic o5 : int
-
-logic temp___1220 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : bool
-
-logic o9 : bool
-
-logic result : bool
-
-logic result1 : bool
-
-axiom H : (((0 <= to_rep2(i52s1)) and (to_rep2(i52s1) <= to_rep2(i52s))) and
-  (dynamic_property2(1, to_rep2(i52s), to_rep1(first2(i52s3)),
-  to_rep1(last2(i52s3))) and ((to_rep1(first2(i52s3)) = 1) and
-  (to_rep1(last2(i52s3)) = to_rep2(i52s)))))
-
-axiom H1 : (((0 <= to_rep2(within1)) and
-  (to_rep2(within1) <= to_rep2(within))) and (dynamic_property2(1,
-  to_rep2(within), to_rep1(first2(within3)), to_rep1(last2(within3))) and
-  ((to_rep1(first2(within3)) = 1) and
-  (to_rep1(last2(within3)) = to_rep2(within)))))
-
-axiom H2 : dynamic_property(1, 2147483647, to_rep1(first(fragment1)),
-  to_rep1(last(fragment1)))
-
-axiom H3 : ((o7 = length({ elts = fragment; rt = fragment1 })) and
-  in_range1(length({ elts = fragment; rt = fragment1 })))
-
-axiom H4 : (((o7 <= to_rep2(within1)) -> (o8 = true)) and
-  ((not (o7 <= to_rep2(within1))) -> (o8 = false)))
-
-axiom H5 : ((o6 = length({ elts = fragment; rt = fragment1 })) and
-  in_range1(length({ elts = fragment; rt = fragment1 })))
-
-axiom H6 : (((1 <= o6) -> (o9 = true)) and ((not (1 <= o6)) -> (o9 = false)))
-
-axiom H7 : (result = match_bool(o9, o8, false))
-
-axiom H8 : (result = true)
-
-axiom H9 : ((o = length({ elts = fragment; rt = fragment1 })) and
-  in_range1(length({ elts = fragment; rt = fragment1 })))
-
-axiom H10 : (o1 = (to_rep2(within1) - o))
-
-axiom H11 : (o2 = (o1 + 1))
-
-axiom H12 : (((k <= o2) -> (o3 = true)) and ((not (k <= o2)) ->
-  (o3 = false)))
-
-axiom H13 : (((1 <= k) -> (result1 = o3)) and ((not (1 <= k)) ->
-  (result1 = false)))
-
-axiom H14 : (result1 = true)
-
-axiom H15 : ((o4 = length({ elts = fragment; rt = fragment1 })) and
-  in_range1(length({ elts = fragment; rt = fragment1 })))
-
-axiom H16 : (o5 = (k + o4))
-
-axiom H17 : (temp___1220 = (o5 - 1))
-
-axiom H18 : (k <= temp___1220)
-
  (* File "bounded_dynamic_arrays.ads", line 202, characters 0-0 *)
-goal WP_parameter_def : (to_rep1(first2(within3)) <= k)
+goal WP_parameter_def :
+  (forall k:int. forall o:int. forall o1:int. forall o2:int. forall o3:bool.
+  forall o4:int. forall o5:int. forall temp___1283:int. forall o6:int.
+  forall o7:int. forall o8:bool. forall o9:bool. forall result:bool.
+  forall result1:bool. ((((0 <= to_rep2(i52s1)) and
+  (to_rep2(i52s1) <= to_rep2(i52s))) and (dynamic_property2(1, to_rep2(i52s),
+  to_rep1(first2(i52s3)), to_rep1(last2(i52s3))) and
+  ((to_rep1(first2(i52s3)) = 1) and
+  (to_rep1(last2(i52s3)) = to_rep2(i52s))))) ->
+  ((((0 <= to_rep2(within1)) and (to_rep2(within1) <= to_rep2(within))) and
+  (dynamic_property2(1, to_rep2(within), to_rep1(first2(within3)),
+  to_rep1(last2(within3))) and ((to_rep1(first2(within3)) = 1) and
+  (to_rep1(last2(within3)) = to_rep2(within))))) -> (dynamic_property(1,
+  2147483647, to_rep1(first(fragment1)), to_rep1(last(fragment1))) ->
+  (((((o7 = length({ elts = fragment; rt = fragment1 })) and
+  in_range1(length({ elts = fragment; rt = fragment1 }))) and
+  (((o7 <= to_rep2(within1)) and (o8 = true)) or
+  ((not (o7 <= to_rep2(within1))) and (o8 = false)))) and ((((o6 = length({
+  elts = fragment; rt = fragment1 })) and in_range1(length({ elts = fragment;
+  rt = fragment1 }))) and (((1 <= o6) and (o9 = true)) or
+  ((not (1 <= o6)) and (o9 = false)))) and (result = match_bool(o9, o8,
+  false)))) -> ((result = true) -> (((((((o = length({ elts = fragment; rt =
+  fragment1 })) and in_range1(length({ elts = fragment; rt = fragment1
+  }))) and (o1 = (to_rep2(within1) - o))) and (o2 = (o1 + 1))) and
+  (((k <= o2) and (o3 = true)) or ((not (k <= o2)) and (o3 = false)))) and
+  (((1 <= k) and (result1 = o3)) or ((not (1 <= k)) and
+  (result1 = false)))) -> ((result1 = true) -> (((((o4 = length({ elts =
+  fragment; rt = fragment1 })) and in_range1(length({ elts = fragment; rt =
+  fragment1 }))) and (o5 = (k + o4))) and (temp___1283 = (o5 - 1))) ->
+  ((k <= temp___1283) -> (to_rep1(first2(within3)) <= k)))))))))))

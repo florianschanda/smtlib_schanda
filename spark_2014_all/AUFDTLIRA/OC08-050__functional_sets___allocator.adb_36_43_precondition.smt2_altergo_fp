@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -188,24 +188,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,status) farray, int, int, (int,status) farray, int,
-  int -> (int,status) farray
-
-axiom concat_def :
-  (forall a:(int,status) farray. forall b:(int,status) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : status, int -> (int,status) farray
-
-axiom singleton_def :
-  (forall v:status.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,status) farray, int, int, (int,status) farray, int,
   int -> bool
 
@@ -216,17 +198,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) and
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)])))) or
-  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (forall temp___idx_155:int. ((((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) and
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)])))) or
+  (not ((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) ->
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)]))))))) ->
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) ->
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -236,37 +218,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) ->
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)])))))))))
-
-logic compare : (int,status) farray, int, int, (int,status) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,status) farray. forall b:(int,status) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,status) farray. forall b:(int,status) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,status) farray. forall b:(int,status) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) ->
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)])))))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -581,195 +535,11 @@ axiom is_add__post_axiom :
 
 axiom is_add__post__dispatch_axiom : true
 
-logic data : (int,status) farray
-
-logic avail : us_rep
-
-logic alloc : us_rep
-
-logic r : int
-
-logic allocator__m__model__result : us_rep
-
-logic allocator__m__model__result1 : us_rep
-
-logic temp___368 : us_rep
-
-logic temp___367 : us_rep
-
-logic temp___366 : int
-
-logic o : us_rep
-
-logic o1 : us_rep
-
-logic rr : int
-
-logic o2 : int
-
-logic o3 : status
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : bool
-
-logic o8 : bool
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : bool
-
-logic e : int
-
-logic o12 : bool
-
-logic o13 : bool
-
-logic e1 : int
-
-logic o14 : bool
-
-logic o15 : bool
-
-logic o16 : us_rep
-
-logic o17 : us_rep
-
-logic avail1 : us_rep
-
-logic alloc1 : us_rep
-
-logic result : int
-
-logic r1 : int
-
-logic result1 : us_rep
-
-logic avail2 : us_rep
-
-logic result2 : us_rep
-
-logic alloc2 : us_rep
-
-logic avail3 : us_rep
-
-logic alloc3 : us_rep
-
-logic r2 : int
-
-logic result3 : bool
-
-logic result4 : bool
-
-logic result5 : bool
-
-logic result6 : bool
-
-logic result7 : bool
-
-logic result8 : int
-
-logic r3 : int
-
-logic result9 : us_rep
-
-logic avail4 : us_rep
-
-logic result10 : us_rep
-
-logic alloc4 : us_rep
-
-logic avail5 : us_rep
-
-logic alloc5 : us_rep
-
-logic r4 : int
-
-logic avail6 : us_rep
-
-logic alloc6 : us_rep
-
-logic r5 : int
-
-logic avail7 : us_rep
-
-logic alloc7 : us_rep
-
-logic r6 : int
-
-logic avail8 : us_rep
-
-logic alloc8 : us_rep
-
-logic r7 : int
-
-logic avail9 : us_rep
-
-logic alloc9 : us_rep
-
-logic r8 : int
-
-logic avail10 : us_rep
-
-logic alloc10 : us_rep
-
-logic r9 : int
-
-logic result11 : us_rep
-
-logic result12 : us_rep
-
-logic allocator__m__model__result2 : us_rep
-
-logic allocator__m__model__result3 : us_rep
-
-logic allocator__m__model__result4 : us_rep
-
-logic allocator__m__model__result5 : us_rep
-
-logic allocator__m__model__result6 : us_rep
-
-logic allocator__m__model__result7 : us_rep
-
-logic avail11 : us_rep
-
-logic alloc11 : us_rep
-
-logic r10 : int
-
-logic allocator__m__model__result8 : us_rep
-
-logic allocator__m__model__result9 : us_rep
-
-logic avail12 : us_rep
-
-logic alloc12 : us_rep
-
-logic r11 : int
-
-logic allocator__m__model__result10 : us_rep
-
-logic allocator__m__model__result11 : us_rep
-
-axiom H : (is_empty(avail) = true)
-
-axiom H1 : (is_empty(alloc) = true)
-
-axiom H2 : (result = r)
-
-axiom H3 : (r1 = 1)
-
-axiom H4 : (1 <= r1)
-
-axiom H5 : (r1 <= 3)
-
-axiom H6 : (to_rep((data[r1])) = 0)
-
  (* File "allocator.ads", line 29, characters 0-0 *)
-goal WP_parameter_def : (not (r1 = 0))
+goal WP_parameter_def :
+  (forall data:(int,status) farray. forall avail:us_rep. forall alloc:us_rep.
+  forall r:int. forall result:int. forall r1:int.
+  ((is_empty(avail) = true) -> ((is_empty(alloc) = true) -> ((({
+  int__content = result } = { int__content = r }) and (r1 = 1)) ->
+  (((1 <= r1) and (r1 <= 3)) -> ((to_rep((data[r1])) = 0) ->
+  (not (r1 = 0))))))))

@@ -1150,20 +1150,13 @@ axiom r2__def_axiom :
   (forall x1:t [r2(x1)]. (in_range3(x1) -> (r2(x1) = roundToIntegral(Down,
   x1))))
 
-logic o : t
-
-logic o1 : t
-
-axiom H : in_range1(x)
-
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 360.0))
 
-axiom H1 : ((o = r2(div(NearestTiesToEven, x, fliteral5))) and
-  (in_range3(o) and (o = roundToIntegral(Down, div(NearestTiesToEven, x,
-  fliteral5)))))
-
  (* File "normalize.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : in_range2(o)
+goal WP_parameter_def :
+  (forall o:t. (in_range1(x) -> (((o = r2(div(NearestTiesToEven, x,
+  fliteral5))) and (in_range3(o) and (o = roundToIntegral(Down,
+  div(NearestTiesToEven, x, fliteral5))))) -> in_range2(o))))

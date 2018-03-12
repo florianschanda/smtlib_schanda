@@ -236,13 +236,7 @@ axiom last__def_axiom1 : (last1 = c)
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic x : int
-
-logic us : int
-
-axiom H : in_range1(c)
-
-axiom H1 : dynamic_property(1, last, x)
-
  (* File "test_dynamic_property.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : dynamic_property1(0, last1, x)
+goal WP_parameter_def :
+  (forall x:int. (in_range1(c) -> (dynamic_property(1, last, x) ->
+  dynamic_property1(0, last1, x))))

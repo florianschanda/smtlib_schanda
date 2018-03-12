@@ -1121,111 +1121,39 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
-logic roll_rate_desired : t
-
-logic pitch_rate_desired : t
-
-logic yaw_rate_desired : t
-
-logic o : t
-
-logic get_out_subtype__controller_get_desired_rate__pitch_rate_desired : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t_rate
-
-logic o4 : t
-
-logic o5 : t
-
-logic result : t
-
-logic roll_rate_desired1 : t
-
-logic result1 : t
-
-logic pitch_rate_desired1 : t
-
-logic result2 : t
-
-logic yaw_rate_desired1 : t
-
-logic get_out_subtype__controller_get_desired_rate__yaw_rate_desired : t
-
-logic get_out_subtype__controller_get_desired_rate__pitch_rate_desired1 : t
-
-logic get_out_subtype__controller_get_desired_rate__roll_rate_desired : t
-
-logic result3 : t
-
-logic roll_rate_desired2 : t
-
-logic result4 : t
-
-logic pitch_rate_desired2 : t
-
-axiom H : tqtisFinite(x)
-
-axiom H1 : tqtisFinite(y)
-
-axiom H2 : tqtisFinite(z)
-
-axiom H3 : (result = roll_rate_desired)
-
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.0e-1))
 
-axiom H4 : (roll_rate_desired1 = fliteral2)
-
-axiom H5 : in_range1(roll_rate_desired1)
-
-axiom H6 : (result1 = pitch_rate_desired)
-
-axiom H7 : (pitch_rate_desired1 = fliteral2)
-
-axiom H8 : in_range1(pitch_rate_desired1)
-
-axiom H9 : (result2 = yaw_rate_desired)
-
-axiom H10 : (yaw_rate_desired1 = fliteral2)
-
-axiom H11 : in_range1(yaw_rate_desired1)
-
-axiom H12 : ((o = pitch_rate_desired1) and tqtisFinite(pitch_rate_desired1))
-
-axiom H13 :
-  (o = get_out_subtype__controller_get_desired_rate__pitch_rate_desired)
-
-axiom H14 :
-  ((tqtisFinite(get_out_subtype__controller_get_desired_rate__roll_rate_desired) and
-  tqtisFinite(get_out_subtype__controller_get_desired_rate__pitch_rate_desired1)) and
-  tqtisFinite(get_out_subtype__controller_get_desired_rate__yaw_rate_desired))
-
-axiom H15 :
-  ((o1 = get_out_subtype__controller_get_desired_rate__roll_rate_desired) and
-  tqtisFinite(get_out_subtype__controller_get_desired_rate__roll_rate_desired))
-
-axiom H16 : (result3 = roll_rate_desired1)
-
-axiom H17 : (roll_rate_desired2 = o1)
-
-axiom H18 :
-  ((o2 = get_out_subtype__controller_get_desired_rate__pitch_rate_desired1) and
-  tqtisFinite(get_out_subtype__controller_get_desired_rate__pitch_rate_desired1))
-
-axiom H19 : (to_rep(o3) = o2)
-
-axiom H20 : (o4 = to_rep(o3))
-
-axiom H21 : (result4 = pitch_rate_desired1)
-
-axiom H22 : (pitch_rate_desired2 = o4)
-
  (* File "get_out_subtype.adb", line 7, characters 0-0 *)
 goal WP_parameter_def :
-  in_range1(get_out_subtype__controller_get_desired_rate__yaw_rate_desired)
+  (forall roll_rate_desired:t. forall pitch_rate_desired:t.
+  forall yaw_rate_desired:t. forall o:t.
+  forall get_out_subtype__controller_get_desired_rate__pitch_rate_desired:t.
+  forall o1:t. forall o2:t. forall o3:t_rate. forall o4:t. forall result:t.
+  forall roll_rate_desired1:t. forall result1:t.
+  forall pitch_rate_desired1:t. forall result2:t. forall yaw_rate_desired1:t.
+  forall get_out_subtype__controller_get_desired_rate__yaw_rate_desired:t.
+  forall get_out_subtype__controller_get_desired_rate__pitch_rate_desired1:t.
+  forall get_out_subtype__controller_get_desired_rate__roll_rate_desired:t.
+  forall result3:t. forall roll_rate_desired2:t. forall result4:t.
+  forall pitch_rate_desired2:t. (tqtisFinite(x) -> (tqtisFinite(y) ->
+  (tqtisFinite(z) -> (((result = roll_rate_desired) and
+  (roll_rate_desired1 = fliteral2)) -> (in_range1(roll_rate_desired1) ->
+  (((result1 = pitch_rate_desired) and (pitch_rate_desired1 = fliteral2)) ->
+  (in_range1(pitch_rate_desired1) -> (((result2 = yaw_rate_desired) and
+  (yaw_rate_desired1 = fliteral2)) -> (in_range1(yaw_rate_desired1) ->
+  ((((o = pitch_rate_desired1) and tqtisFinite(pitch_rate_desired1)) and
+  (o = get_out_subtype__controller_get_desired_rate__pitch_rate_desired)) ->
+  (((tqtisFinite(get_out_subtype__controller_get_desired_rate__roll_rate_desired) and
+  tqtisFinite(get_out_subtype__controller_get_desired_rate__pitch_rate_desired1)) and
+  tqtisFinite(get_out_subtype__controller_get_desired_rate__yaw_rate_desired)) ->
+  ((((o1 = get_out_subtype__controller_get_desired_rate__roll_rate_desired) and
+  tqtisFinite(get_out_subtype__controller_get_desired_rate__roll_rate_desired)) and
+  ((result3 = roll_rate_desired1) and (roll_rate_desired2 = o1))) ->
+  ((((((o2 = get_out_subtype__controller_get_desired_rate__pitch_rate_desired1) and
+  tqtisFinite(get_out_subtype__controller_get_desired_rate__pitch_rate_desired1)) and
+  (to_rep(o3) = o2)) and (o4 = to_rep(o3))) and
+  ((result4 = pitch_rate_desired1) and (pitch_rate_desired2 = o4))) ->
+  in_range1(get_out_subtype__controller_get_desired_rate__yaw_rate_desired)))))))))))))))

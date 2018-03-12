@@ -81,12 +81,6 @@ axiom bool_ge_axiom :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -98,6 +92,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -168,123 +168,7 @@ function t1b__ref___projection(a: t1b__ref) : t1b = (a).t1b__content
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic formal : int
-
-logic i : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic temp___135 : int
-
-logic temp___134 : int
-
-logic temp___136 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : int
-
-logic us : int
-
-logic o13 : int
-
-logic o14 : int
-
-logic o15 : int
-
-logic o16 : int
-
-logic o17 : int
-
-logic o18 : int
-
-logic formal1 : int
-
-logic result : int
-
-logic i1 : int
-
-logic result1 : int
-
-logic formal2 : int
-
-logic formal3 : int
-
-logic i2 : int
-
-logic temp___1361 : int
-
-logic result2 : int
-
-logic temp___1362 : int
-
-logic result3 : int
-
-logic i3 : int
-
-logic result4 : int
-
-logic formal4 : int
-
-logic formal5 : int
-
-logic i4 : int
-
-logic temp___1363 : int
-
-logic formal6 : int
-
-logic i5 : int
-
-logic temp___1364 : int
-
-logic formal7 : int
-
-logic i6 : int
-
-logic formal8 : int
-
-logic i7 : int
-
-logic formal9 : int
-
-logic i8 : int
-
-logic formal10 : int
-
-logic i9 : int
-
-logic formal11 : int
-
-logic i10 : int
-
-logic formal12 : int
-
-logic i11 : int
-
-axiom H : in_range1(formal)
-
-axiom H1 : (formal = ghost_func(void))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (0 <  (formal + ghost_func(void)))
+goal WP_parameter_def :
+  (forall formal:int. (in_range1(formal) -> ((formal = ghost_func(void)) ->
+  (0 <  (formal + ghost_func(void))))))

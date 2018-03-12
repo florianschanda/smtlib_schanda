@@ -109,21 +109,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic buf_list : int
-
-logic free_list : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic buf_list1 : int
-
-axiom H : in_range(free_list)
-
-axiom H1 : in_range(buf_list)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((buf_list + 1))
+goal WP_parameter_def :
+  (forall buf_list:int. forall free_list:int. (in_range(free_list) ->
+  (in_range(buf_list) -> in_range((buf_list + 1)))))

@@ -213,10 +213,8 @@ logic p10__function_guard : bool, us_rep -> prop
 
 axiom p10__post_axiom : true
 
-logic temp___229 : integer
-
-logic temp___2291 : integer
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (p10({ us_split_fields1 = { rec__p__t10__f1 =
-  temp___229; rec__p__t10__f2 = temp___2291 } }) = true)
+goal WP_parameter_def :
+  (forall temp___263:integer. forall temp___2631:integer. (p10({
+  us_split_fields1 = { rec__p__t10__f1 = temp___263; rec__p__t10__f2 =
+  temp___2631 } }) = true))

@@ -293,43 +293,8 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic x__split_fields : small
-
-logic x__split_fields1 : very_small
-
-logic temp___204 : int
-
-logic o : int
-
-logic o1 : small
-
-logic o2 : small
-
-logic o3 : very_small
-
-logic temp___207 : small
-
-logic temp___2071 : very_small
-
-logic temp___208 : int
-
-logic result : small
-
-logic result1 : very_small
-
-logic x__split_fields2 : small
-
-logic x__split_fields3 : very_small
-
-axiom H : (in_range1(i3s) and ((2 * i3s) <  100000))
-
-axiom H1 : (in_range2(i5s) and ((i5s * i5s) <  100000))
-
-axiom H2 : true
-
-axiom H3 : in_range(y)
-
-axiom H4 : ((temp___204 = y) and in_range1(y))
-
  (* File "dynamic_preds_rte.ads", line 17, characters 0-0 *)
-goal WP_parameter_def : ((2 * temp___204) <  100000)
+goal WP_parameter_def :
+  (forall temp___232:int. ((in_range1(i3s) and ((2 * i3s) <  100000)) ->
+  ((in_range2(i5s) and ((i5s * i5s) <  100000)) -> (in_range(y) ->
+  (((temp___232 = y) and in_range1(y)) -> ((2 * temp___232) <  100000))))))

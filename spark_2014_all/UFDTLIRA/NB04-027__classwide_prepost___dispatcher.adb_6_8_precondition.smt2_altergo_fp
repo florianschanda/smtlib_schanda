@@ -152,12 +152,6 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -169,6 +163,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -196,13 +196,9 @@ axiom is_valid__def_axiom :
   x2 })]. ((is_valid({ us_split_fields1 = { rec__object__t__b = x;
   rec__ext__ = x1 }; attr__tag = x2 }) = true) <-> (x = true)))
 
-logic x__split_fields : bool
-
-logic x__split_fields1 : us_private
-
-axiom H : (x__split_fields = true)
-
  (* File "dispatcher.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (is_valid1(x__attr__tag, { us_split_fields1 = {
-  rec__object__t__b = x__split_fields; rec__ext__ = x__split_fields1 };
-  attr__tag = x__attr__tag }) = true)
+goal WP_parameter_def :
+  (forall x__split_fields:bool. forall x__split_fields1:us_private.
+  ((x__split_fields = true) -> (is_valid1(x__attr__tag, { us_split_fields1 =
+  { rec__object__t__b = x__split_fields; rec__ext__ = x__split_fields1 };
+  attr__tag = x__attr__tag }) = true)))

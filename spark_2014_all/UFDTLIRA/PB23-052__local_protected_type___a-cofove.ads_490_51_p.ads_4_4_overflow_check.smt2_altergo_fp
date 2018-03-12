@@ -221,12 +221,6 @@ function vector__ref___projection(a: vector__ref) : us_rep =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq3 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -238,6 +232,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq3 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
 
 predicate in_range2(x: int) = ((x = 0) or (x = 1))
 
@@ -291,29 +291,15 @@ logic new_item1 : us_main_type
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic container__split_fields : us_main_type
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-axiom H : ((o = length({ us_split_discrs1 = {
-  rec__p__my_vectors__vector__capacity = new_item }; us_split_fields1 = {
-  rec__p__my_vectors__vector = new_item1 } })) and (in_range1(o) and
-  (((of_int(1) = true) -> (o <= to_rep(new_item))) and
-  ((not (of_int(1) = true)) -> (o <= 2147483647)))))
-
-axiom H1 : ((((of_int(1) = true) ->
-  (o1 = to_rep(container__split_discrs))) and ((not (of_int(1) = true)) ->
-  (o1 = 2147483647))) and (in_range1(o1) and (((of_int(1) = true) ->
-  (o1 = to_rep(container__split_discrs))) and ((not (of_int(1) = true)) ->
-  (o1 = 2147483647)))))
-
-axiom H2 : (o2 = (o1 - o))
-
  (* File "a-cofove.ads", line 463, characters 0-0 *)
-goal WP_parameter_def : in_range(o2)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. forall o2:int. ((((o = length({
+  us_split_discrs1 = { rec__p__my_vectors__vector__capacity = new_item };
+  us_split_fields1 = { rec__p__my_vectors__vector = new_item1 } })) and
+  (in_range1(o) and (((of_int(1) = true) and (o <= to_rep(new_item))) or
+  ((not (of_int(1) = true)) and (o <= 2147483647))))) and
+  (((((of_int(1) = true) and (o1 = to_rep(container__split_discrs))) or
+  ((not (of_int(1) = true)) and (o1 = 2147483647))) and (in_range1(o1) and
+  (((of_int(1) = true) and (o1 = to_rep(container__split_discrs))) or
+  ((not (of_int(1) = true)) and (o1 = 2147483647))))) and
+  (o2 = (o1 - o)))) -> in_range(o2)))

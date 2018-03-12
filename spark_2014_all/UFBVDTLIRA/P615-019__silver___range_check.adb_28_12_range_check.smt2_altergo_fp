@@ -657,7 +657,15 @@ type small_unsigned
 
 logic attr__ATTRIBUTE_MODULUS1 : t
 
-predicate in_range(x: t) = (ule(of_int(0), x) and ule(x, of_int(10)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 10)
+
+predicate in_range(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 10))
 
@@ -689,13 +697,6 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic u : t
-
-logic o : t
-
-axiom H : true
-
-axiom H1 : (ule(of_int(0), of_int(10)) -> in_range(u))
-
  (* File "range_check.adb", line 21, characters 0-0 *)
-goal WP_parameter_def : in_range(x)
+goal WP_parameter_def :
+  (forall u:t. ((ule(rliteral, rliteral1) -> in_range(u)) -> in_range(x)))

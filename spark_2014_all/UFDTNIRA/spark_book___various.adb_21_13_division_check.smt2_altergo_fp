@@ -245,19 +245,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : int
-
-logic y : int
-
-logic o : int
-
-logic o1 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : in_range1(y)
-
-axiom H2 : in_range1(comp_div((x + y),2))
-
  (* File "various.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : (not (2 = 0))
+goal WP_parameter_def :
+  (forall x:int. forall y:int. (in_range1(x) -> (in_range1(y) ->
+  (in_range1(comp_div((x + y),2)) -> (not (2 = 0))))))

@@ -601,12 +601,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -618,6 +612,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -687,10 +687,14 @@ logic inrange64 : t, t, t -> bool
 
 logic inrange64__function_guard : bool, t, t, t -> prop
 
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
 axiom inrange64__post_axiom :
   (forall var:t. forall bottom:t. forall range_size:t [inrange64(var, bottom,
   range_size)]. ((inrange64(var, bottom, range_size) = true) <->
-  (exists n:t. ((ule(of_int(0), n) and ule(n, range_size)) and
+  (exists n:t. ((ule(rliteral, n) and ule(n, range_size)) and
   (var = add(bottom, n))))))
 
 logic var1 : t
@@ -858,370 +862,36 @@ logic attr__ATTRIBUTE_ADDRESS9 : int
 
 logic attr__ATTRIBUTE_ADDRESS10 : int
 
-logic n : t
+logic rliteral1 : t
 
-logic n1 : t
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 18446744073709551615)
 
-logic n2 : t
+logic rliteral2 : t
 
-logic n11 : t
-
-logic n21 : t
-
-logic n3 : t
-
-logic x86__rangesintersect__result : bool
-
-logic x86__rangesintersect__B100b__res__assume : bool
-
-logic temp___211 : t
-
-logic temp___208 : t
-
-logic temp___205 : t
-
-logic temp___204 : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : bool
-
-logic n4 : t
-
-logic n12 : t
-
-logic n22 : t
-
-logic n13 : t
-
-logic n23 : t
-
-logic n5 : t
-
-logic result : t
-
-logic n6 : t
-
-logic result1 : t
-
-logic n14 : t
-
-logic result2 : t
-
-logic n24 : t
-
-logic result3 : t
-
-logic n15 : t
-
-logic result4 : t
-
-logic n25 : t
-
-logic result5 : t
-
-logic n16 : t
-
-logic result6 : t
-
-logic n26 : t
-
-logic n7 : t
-
-logic n17 : t
-
-logic n27 : t
-
-logic result7 : t
-
-logic n8 : t
-
-logic result8 : t
-
-logic n18 : t
-
-logic result9 : t
-
-logic n28 : t
-
-logic result10 : t
-
-logic n19 : t
-
-logic result11 : t
-
-logic n29 : t
-
-logic result12 : t
-
-logic n110 : t
-
-logic result13 : t
-
-logic n210 : t
-
-logic n9 : t
-
-logic n111 : t
-
-logic n211 : t
-
-logic n10 : t
-
-logic n112 : t
-
-logic n212 : t
-
-logic n20 : t
-
-logic n113 : t
-
-logic n213 : t
-
-logic n30 : t
-
-logic n114 : t
-
-logic n214 : t
-
-logic n31 : t
-
-logic n115 : t
-
-logic n215 : t
-
-logic n32 : t
-
-logic n116 : t
-
-logic n216 : t
-
-logic result14 : t
-
-logic n117 : t
-
-logic n118 : t
-
-logic n217 : t
-
-logic n33 : t
-
-logic result15 : t
-
-logic n218 : t
-
-logic result16 : t
-
-logic n34 : t
-
-logic n219 : t
-
-logic n35 : t
-
-logic result17 : t
-
-logic n220 : t
-
-logic result18 : t
-
-logic n36 : t
-
-logic n221 : t
-
-logic n37 : t
-
-logic n222 : t
-
-logic n38 : t
-
-logic n223 : t
-
-logic n39 : t
-
-logic n224 : t
-
-logic n40 : t
-
-logic n225 : t
-
-logic n41 : t
-
-logic n226 : t
-
-logic n42 : t
-
-logic result19 : t
-
-logic n119 : t
-
-logic n120 : t
-
-logic n227 : t
-
-logic n43 : t
-
-logic n121 : t
-
-logic n228 : t
-
-logic n44 : t
-
-logic n122 : t
-
-logic n229 : t
-
-logic n45 : t
-
-logic n123 : t
-
-logic n230 : t
-
-logic n46 : t
-
-logic n124 : t
-
-logic n231 : t
-
-logic n47 : t
-
-logic n125 : t
-
-logic n232 : t
-
-logic n48 : t
-
-logic n126 : t
-
-logic n233 : t
-
-logic n49 : t
-
-logic n127 : t
-
-logic n234 : t
-
-logic n50 : t
-
-logic n51 : t
-
-logic n128 : t
-
-logic n235 : t
-
-logic n129 : t
-
-logic n236 : t
-
-logic n52 : t
-
-logic n53 : t
-
-logic n130 : t
-
-logic n237 : t
-
-logic n131 : t
-
-logic n238 : t
-
-logic n54 : t
-
-logic result20 : bool
-
-logic x86__rangesintersect__result1 : bool
-
-logic x86__rangesintersect__result2 : bool
-
-logic x86__rangesintersect__result3 : bool
-
-logic n55 : t
-
-logic n132 : t
-
-logic n239 : t
-
-logic n133 : t
-
-logic n240 : t
-
-logic n56 : t
-
-logic x86__rangesintersect__result4 : bool
-
-logic n57 : t
-
-logic n134 : t
-
-logic n241 : t
-
-logic n135 : t
-
-logic n242 : t
-
-logic n58 : t
-
-logic x86__rangesintersect__result5 : bool
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : true
-
-axiom H3 : true
-
-axiom H4 : ule(var1_range_size, sub(of_int(18446744073709551615),
-  var2_range_size))
-
-axiom H5 : ((x86__rangesintersect__B100b__res__assume = inrange64(var1,
-  sub(var2, var1_range_size), add(var1_range_size, var2_range_size))) and
-  ((x86__rangesintersect__B100b__res__assume = true) <->
-  (exists n59:t. ((ule(of_int(0), n59) and ule(n59, add(var1_range_size,
-  var2_range_size))) and (var1 = add(sub(var2, var1_range_size), n59))))))
-
-axiom H6 : (x86__rangesintersect__B100b__res__assume = res)
-
-axiom H7 : (not (res = true))
-
-axiom H8 : (result14 = n11)
-
-axiom H9 : (n117 = of_int(0))
-
-axiom H10 : ule(of_int(0), n117)
-
-axiom H11 : ule(n117, var1_range_size)
-
-axiom H12 : ((not (n118 = of_int(0))) ->
-  (forall i:t. ((ule(of_int(0), i) and ule(i, sub(n118, of_int(1)))) ->
-  (forall j:t. ((ule(of_int(0), j) and ule(j, var2_range_size)) ->
-  (not (add(var1, i) = add(var2, j))))))))
-
-axiom H13 : ((ule(of_int(0), var1_range_size) -> dynamic_property1(of_int(0),
-  var1_range_size, n118)) and (ule(of_int(0), n118) and ule(n118,
-  var1_range_size)))
-
-axiom H14 : (result15 = n217)
-
-axiom H15 : (n218 = of_int(0))
-
-axiom H16 : ule(of_int(0), n218)
-
-axiom H17 : ule(n218, var2_range_size)
-
-axiom H18 : (o = add(n218, sub(var1_range_size, n118)))
-
-axiom H19 : (result16 = n33)
-
-axiom H20 : (n34 = o)
-
-axiom H21 : true
-
-axiom H22 : (ule(of_int(0), n34) and ule(n34, add(var1_range_size,
-  var2_range_size)))
-
-axiom H23 : (not (var1 = add(sub(var2, var1_range_size), n34)))
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 1)
 
  (* File "x86.ads", line 19, characters 0-0 *)
-goal WP_parameter_def : (not (add(var1, n118) = add(var2, n218)))
+goal WP_parameter_def :
+  (forall n1:t. forall x86__rangesintersect__B100b__res__assume:bool.
+  forall o:t. forall result:t. forall n11:t. forall n12:t. forall n2:t.
+  forall n:t. forall result1:t. forall n21:t. forall result2:t. forall n3:t.
+  (ule(var1_range_size, sub(rliteral1, var2_range_size)) ->
+  ((((x86__rangesintersect__B100b__res__assume = inrange64(var1, sub(var2,
+  var1_range_size), add(var1_range_size, var2_range_size))) and
+  ((x86__rangesintersect__B100b__res__assume = true) <->
+  (exists n4:t. ((ule(rliteral, n4) and ule(n4, add(var1_range_size,
+  var2_range_size))) and (var1 = add(sub(var2, var1_range_size), n4)))))) and
+  (x86__rangesintersect__B100b__res__assume = res)) -> ((not (res = true)) ->
+  (((result = n1) and (n11 = rliteral)) -> ((ule(rliteral, n11) and ule(n11,
+  var1_range_size)) -> ((((not (n12 = rliteral)) and
+  (forall i:t. ((ule(rliteral, i) and ule(i, sub(n12, rliteral2))) ->
+  (forall j:t. ((ule(rliteral, j) and ule(j, var2_range_size)) ->
+  (not (add(var1, i) = add(var2, j)))))))) or (n12 = rliteral)) ->
+  (((ule(rliteral, var1_range_size) -> dynamic_property1(rliteral,
+  var1_range_size, n12)) and (ule(rliteral, n12) and ule(n12,
+  var1_range_size))) -> (((result1 = n2) and (n21 = rliteral)) ->
+  ((ule(rliteral, n21) and ule(n21, var2_range_size)) -> (((o = add(n21,
+  sub(var1_range_size, n12))) and ((result2 = n) and (n3 = o))) ->
+  ((ule(rliteral, n3) and ule(n3, add(var1_range_size, var2_range_size))) ->
+  ((not (var1 = add(sub(var2, var1_range_size), n3))) -> (not (add(var1,
+  n12) = add(var2, n21))))))))))))))))

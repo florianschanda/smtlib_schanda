@@ -251,7 +251,6 @@ axiom x1__def_axiom : (x1 = 1)
 
 axiom x2__def_axiom : (x2 = 1)
 
-axiom H : (in_range(x1) and (mod(x1, 2) = 0))
-
  (* File "predicate_failure.adb", line 6, characters 0-0 *)
-goal WP_parameter_def : (mod(1, 2) = 0)
+goal WP_parameter_def : ((in_range(x1) and (mod(x1, 2) = 0)) -> (mod(1,
+  2) = 0))

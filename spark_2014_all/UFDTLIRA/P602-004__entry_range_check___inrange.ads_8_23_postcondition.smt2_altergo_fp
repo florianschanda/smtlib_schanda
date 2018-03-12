@@ -160,33 +160,10 @@ logic j : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic i : int
-
-logic o : int
-
-logic result : int
-
-logic i1 : int
-
-logic i2 : int
-
-logic i3 : int
-
-axiom H : in_range(i)
-
-axiom H1 : in_range1(j)
-
-axiom H2 : (i <= 10)
-
-axiom H3 : ((o = (i + j)) and in_range((i + j)))
-
-axiom H4 : (result = i)
-
-axiom H5 : (i1 = o)
-
-axiom H6 : (i1 = i2)
-
-axiom H7 : (i3 = i1)
-
  (* File "inrange.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : (i2 = (i + j))
+goal WP_parameter_def :
+  (forall i:int. forall o:int. forall result:int. forall i1:int.
+  forall i2:int. forall i3:int. ((in_range(i) and (in_range1(j) and
+  ((i <= 10) and ((((o = (i + j)) and in_range((i + j))) and
+  ((result = i) and (i1 = o))) and ((i1 = i2) and (i3 = i1)))))) ->
+  (i2 = (i + j))))

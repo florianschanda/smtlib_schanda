@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -255,57 +255,15 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic c : int
-
-logic l : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic result : int
-
-logic l1 : int
-
-logic c1 : int
-
-logic l2 : int
-
-logic result1 : bool
-
-logic c2 : int
-
-axiom H : in_range1(a)
-
-axiom H1 : in_range1(b)
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range1(c))
-
-axiom H3 : (result = l)
-
-axiom H4 : (l1 = a)
-
-axiom H5 : (a <= l1)
-
-axiom H6 : (l1 <= b)
-
-axiom H7 : ((((- 2147483648) <= 2147483647) -> in_range1(c1)) and
-  ((a <= l2) and (l2 <= b)))
-
-axiom H8 : ((o = (a + b)) and in_range1((a + b)))
-
-axiom H9 : (o1 = comp_div(o,2))
-
-axiom H10 : (((o1 <  l2) -> (result1 = true)) and ((not (o1 <  l2)) ->
-  (result1 = false)))
-
-axiom H11 : (not (result1 = true))
-
-axiom H12 : (c2 = c1)
-
  (* File "test.adb", line 23, characters 0-0 *)
-goal WP_parameter_def : in_range1((a + b))
+goal WP_parameter_def :
+  (forall c:int. forall l:int. forall o:int. forall o1:int.
+  forall result:int. forall l1:int. forall c1:int. forall l2:int.
+  forall result1:bool. forall c2:int. (in_range1(a) -> (in_range1(b) ->
+  ((((- 2147483648) <= 2147483647) -> in_range1(c)) -> (((result = l) and
+  (l1 = a)) -> (((a <= l1) and (l1 <= b)) ->
+  (((((- 2147483648) <= 2147483647) -> in_range1(c1)) and ((a <= l2) and
+  (l2 <= b))) -> ((((((o = (a + b)) and in_range1((a + b))) and
+  (o1 = comp_div(o,2))) and (((o1 <  l2) and (result1 = true)) or
+  ((not (o1 <  l2)) and (result1 = false)))) and ((not (result1 = true)) and
+  (c2 = c1))) -> in_range1((a + b))))))))))

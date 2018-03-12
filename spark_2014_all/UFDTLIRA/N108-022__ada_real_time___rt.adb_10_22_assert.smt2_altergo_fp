@@ -89,29 +89,9 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic t1 : us_rep
-
-logic t2 : us_rep
-
-logic o : us_rep
-
-logic o1 : us_rep
-
-logic result : us_rep
-
-logic t11 : us_rep
-
-logic result1 : us_rep
-
-logic t21 : us_rep
-
-axiom H : (result = t1)
-
-axiom H1 : (t11 = o)
-
-axiom H2 : (result1 = t2)
-
-axiom H3 : (t21 = o1)
-
  (* File "rt.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : (bool_eq(t11, t21) = true)
+goal WP_parameter_def :
+  (forall t1:us_rep. forall t2:us_rep. forall o:us_rep. forall o1:us_rep.
+  forall result:us_rep. forall t11:us_rep. forall result1:us_rep.
+  forall t21:us_rep. (((result = t1) and (t11 = o)) -> (((result1 = t2) and
+  (t21 = o1)) -> (bool_eq(t11, t21) = true))))

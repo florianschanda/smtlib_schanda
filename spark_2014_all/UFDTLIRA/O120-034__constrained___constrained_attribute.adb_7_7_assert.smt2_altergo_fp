@@ -407,80 +407,34 @@ logic b__attr__constrained : bool
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic a__split_fields : integer
-
-logic a__split_discrs : integer
-
-logic b__split_fields : integer
-
-logic o : integer
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic o3 : integer
-
-logic constrained_attribute__test__a__assume : integer
-
-logic constrained_attribute__test__a__assume1 : integer
-
-logic constrained_attribute__test__a__assume2 : bool
-
-logic us : int
-
-logic result : integer
-
-logic a__split_fields1 : integer
-
-logic result1 : integer
-
-logic a__split_discrs1 : integer
-
-logic result2 : integer
-
-logic b__split_fields1 : integer
-
-axiom H : (to_rep(o1) = 0)
-
-axiom H1 : (o1 = o2)
-
-axiom H2 : (to_rep(o) = 0)
-
-axiom H3 : (o = o3)
-
-axiom H4 : (constrained_attribute__test__a__assume = o3)
-
-axiom H5 : (constrained_attribute__test__a__assume1 = o2)
-
-axiom H6 : (true = constrained_attribute__test__a__assume2)
-
-axiom H7 : (result = a__split_fields)
-
-axiom H8 : (constrained_attribute__test__a__assume1 = a__split_fields1)
-
-axiom H9 : (result1 = a__split_discrs)
-
-axiom H10 : (constrained_attribute__test__a__assume = a__split_discrs1)
-
-axiom H11 : (a__attr__constrained = false)
-
-axiom H12 : ((us = 0) and in_range(0))
-
-axiom H13 : (result2 = b__split_fields)
-
-axiom H14 : (b__split_fields1 = a__split_fields1)
-
-axiom H15 : (b__split_discrs = a__split_discrs1)
-
-axiom H16 : (b__attr__constrained = true)
-
-axiom H17 : ((0 = to_rep(b__split_discrs)) and (b__attr__constrained = true))
-
-axiom H18 : (b__attr__constrained = true)
-
  (* File "constrained_attribute.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : (is_constrained({ us_split_discrs1 = {
+goal WP_parameter_def :
+  (forall a__split_fields:integer. forall a__split_discrs:integer.
+  forall b__split_fields:integer. forall o:integer. forall o1:integer.
+  forall o2:integer. forall o3:integer.
+  forall constrained_attribute__test__a__assume:integer.
+  forall constrained_attribute__test__a__assume1:integer.
+  forall constrained_attribute__test__a__assume2:bool. forall us:int.
+  forall result:integer. forall a__split_fields1:integer.
+  forall result1:integer. forall a__split_discrs1:integer.
+  forall result2:integer. forall b__split_fields1:integer.
+  (((((to_rep(o1) = 0) and (o1 = o2)) and (((to_rep(o) = 0) and (o = o3)) and
+  ((constrained_attribute__test__a__assume = o3) and
+  ((constrained_attribute__test__a__assume1 = o2) and
+  (true = constrained_attribute__test__a__assume2))))) and
+  (((result = a__split_fields) and
+  (constrained_attribute__test__a__assume1 = a__split_fields1)) and
+  (((result1 = a__split_discrs) and
+  (constrained_attribute__test__a__assume = a__split_discrs1)) and
+  (a__attr__constrained = false)))) -> (((us = 0) and in_range(0)) ->
+  ((((result2 = b__split_fields) and ({
+  rec__constrained_attribute__mut_rec__f = b__split_fields1 } = {
+  rec__constrained_attribute__mut_rec__f = a__split_fields1 })) and
+  ((b__split_discrs = a__split_discrs1) and
+  (b__attr__constrained = true))) -> (((0 = to_rep(b__split_discrs)) and
+  (b__attr__constrained = true)) -> ((b__attr__constrained = true) ->
+  (is_constrained({ us_split_discrs1 = {
   rec__constrained_attribute__mut_rec__d = b__split_discrs };
   us_split_fields1 = { rec__constrained_attribute__mut_rec__f =
-  b__split_fields1 }; attr__constrained = b__attr__constrained }) = true)
+  b__split_fields1 }; attr__constrained = b__attr__constrained
+  }) = true)))))))

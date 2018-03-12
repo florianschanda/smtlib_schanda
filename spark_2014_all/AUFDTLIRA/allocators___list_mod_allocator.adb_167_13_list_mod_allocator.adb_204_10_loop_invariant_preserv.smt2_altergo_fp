@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -349,30 +349,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def :
-  (forall v:status. forall v1:resource.
-  (forall i:int [(singleton({ us_split_fields1 = {
-  rec__list_mod_allocator__cell__stat = v;
-  rec__list_mod_allocator__cell__next = v1 } }, i)[i])]. ((singleton({
-  us_split_fields1 = { rec__list_mod_allocator__cell__stat = v;
-  rec__list_mod_allocator__cell__next = v1 } }, i)[i]) = { us_split_fields1 =
-  { rec__list_mod_allocator__cell__stat = v;
-  rec__list_mod_allocator__cell__next = v1 } })))
-
 logic bool_eq7 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -383,17 +359,17 @@ axiom bool_eq_def6 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and (bool_eq6((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and (bool_eq6((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq6((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq7(a,
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq6((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq7(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -403,9 +379,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq6((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq6((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -1061,343 +1037,68 @@ axiom included_except__post_axiom :
   (forall e:int. ((in_range8(e) and (contains(left, e) = true)) ->
   ((contains(right, e) = true) or (e = item))))))))
 
-logic data : (int,us_rep) farray
-
-logic first_available : int
-
-logic i : int
-
-logic o : us_rep1
-
-logic o1 : us_rep2
-
-logic o2 : us_rep1
-
-logic o3 : us_rep2
-
-logic us : us_rep1
-
-logic us1 : us_rep2
-
-logic o4 : us_rep1
-
-logic o5 : us_rep2
-
-logic o6 : us_rep1
-
-logic o7 : us_rep2
-
-logic o8 : us_rep1
-
-logic o9 : us_rep2
-
-logic list_mod_allocator__free__ma__assume : us_rep1
-
-logic o10 : int
-
-logic o11 : status
-
-logic o12 : resource
-
-logic o13 : status
-
-logic o14 : resource
-
-logic o15 : status
-
-logic o16 : int
-
-logic o17 : resource
-
-logic o18 : status
-
-logic o19 : status
-
-logic o20 : resource
-
-logic o21 : status
-
-logic o22 : resource
-
-logic o23 : int
-
-logic o24 : (int,us_rep) farray
-
-logic o25 : us_rep1
-
-logic o26 : us_rep2
-
-logic o27 : us_rep1
-
-logic o28 : us_rep2
-
-logic list_mod_allocator__free__C112b__assume : us_rep1
-
-logic list_mod_allocator__free__B113b__L_4__R114b__assume : int
-
-logic temp___318 : int
-
-logic o29 : int
-
-logic j : int
-
-logic o30 : int
-
-logic o31 : int
-
-logic o32 : int
-
-logic j1 : int
-
-logic o33 : int
-
-logic o34 : bool
-
-logic o35 : int
-
-logic o36 : int
-
-logic j2 : int
-
-logic o37 : int
-
-logic o38 : bool
-
-logic temp___317 : int
-
-logic o39 : int
-
-logic o40 : status
-
-logic o41 : resource
-
-logic o42 : status
-
-logic o43 : resource
-
-logic o44 : resource
-
-logic o45 : int
-
-logic o46 : int
-
-logic o47 : us_rep1
-
-logic o48 : us_rep2
-
-logic o49 : us_rep1
-
-logic o50 : us_rep2
-
-logic o51 : us_rep1
-
-logic o52 : us_rep2
-
-logic o53 : us_rep1
-
-logic o54 : us_rep1
-
-logic o55 : us_rep2
-
-logic data1 : (int,us_rep) farray
-
-logic first_available1 : int
-
-logic i1 : int
-
-logic result : bool
-
-logic result1 : (int,us_rep) farray
-
-logic data2 : (int,us_rep) farray
-
-logic result2 : int
-
-logic first_available2 : int
-
-logic result3 : int
-
-logic i2 : int
-
-logic i3 : int
-
-logic result4 : bool
-
-logic result5 : bool
-
-logic result6 : int
-
-logic i4 : int
-
-logic i5 : int
-
-logic i6 : int
-
-logic i7 : int
-
-logic i8 : int
-
-logic data3 : (int,us_rep) farray
-
-logic first_available3 : int
-
-logic i9 : int
-
-logic data4 : (int,us_rep) farray
-
-logic first_available4 : int
-
-logic i10 : int
-
-logic data5 : (int,us_rep) farray
-
-logic first_available5 : int
-
-logic i11 : int
-
-logic data6 : (int,us_rep) farray
-
-logic first_available6 : int
-
-logic i12 : int
-
-logic result7 : bool
-
-axiom H : in_range2(first_available)
-
-axiom H1 : in_range2(res)
-
-axiom H2 : (is_valid(data, first_available) = true)
-
-axiom H3 : (({ us_split_fields3 = {
-  rec__list_mod_allocator__m__t__available = o6;
-  rec__list_mod_allocator__m__t__allocated = o7 } } = model__(data,
-  first_available)) and (model_is_well_formed({ us_split_fields3 = {
-  rec__list_mod_allocator__m__t__available = o6;
-  rec__list_mod_allocator__m__t__allocated = o7 } }, data,
-  first_available) = true))
-
-axiom H4 : (o6 = o8)
-
-axiom H5 : (o7 = o9)
-
-axiom H6 : (list_mod_allocator__free__ma__assume = o8)
-
-axiom H7 : (list_mod_allocator__free__ma__assume = ma)
-
-axiom H8 : ((not (res = 0)) -> ((1 <= res) and (res <= 10000)))
-
-axiom H9 : ((not (res = 0)) -> (o10 = res))
-
-axiom H10 : ((not (res = 0)) -> ({ us_split_fields1 = {
-  rec__list_mod_allocator__cell__stat = o11;
-  rec__list_mod_allocator__cell__next = o12 } } = (data[o10])))
-
-axiom H11 : ((not (res = 0)) -> (o11 = o13))
-
-axiom H12 : ((not (res = 0)) -> (o12 = o14))
-
-axiom H13 : ((not (res = 0)) -> (o15 = o13))
-
-axiom H14 : ((not (res = 0)) -> (o16 = to_rep1(o15)))
-
-axiom H15 : ((not (res = 0)) -> (((o16 = 1) -> (result = true)) and
-  ((not (o16 = 1)) -> (result = false))))
-
-axiom H16 : ((res = 0) -> (result = false))
-
-axiom H17 : (result = true)
-
-axiom H18 : (to_rep(o17) = first_available)
-
-axiom H19 : (to_rep1(o18) = 0)
-
-axiom H20 : (o18 = o19)
-
-axiom H21 : (o17 = o20)
-
-axiom H22 : (o21 = o19)
-
-axiom H23 : (o22 = o20)
-
-axiom H24 : ((1 <= res) and (res <= 10000))
-
-axiom H25 : (o23 = res)
-
-axiom H26 : (o24 = (data[o23 <- { us_split_fields1 = {
-  rec__list_mod_allocator__cell__stat = o21;
-  rec__list_mod_allocator__cell__next = o22 } }]))
-
-axiom H27 : (result1 = data)
-
-axiom H28 : (data2 = o24)
-
-axiom H29 : (result2 = first_available)
-
-axiom H30 : (first_available2 = res)
-
-axiom H31 : (ma = c111b)
-
-axiom H32 : (({ us_split_fields3 = {
-  rec__list_mod_allocator__m__t__available = o25;
-  rec__list_mod_allocator__m__t__allocated = o26 } } = model__(data2,
-  first_available2)) and (model_is_well_formed({ us_split_fields3 = {
-  rec__list_mod_allocator__m__t__available = o25;
-  rec__list_mod_allocator__m__t__allocated = o26 } }, data2,
-  first_available2) = true))
-
-axiom H33 : ((o27 = o25) and (o28 = o26))
-
-axiom H34 : (list_mod_allocator__free__C112b__assume = o27)
-
-axiom H35 : (list_mod_allocator__free__C112b__assume = c112b)
-
-axiom H36 :
-  ((list_mod_allocator__free__B113b__L_4__R114b__assume = length(c111b)) and
-  (in_range5(list_mod_allocator__free__B113b__L_4__R114b__assume) and
-  ((0 + list_mod_allocator__free__B113b__L_4__R114b__assume) <= 2147483647)))
-
-axiom H37 : (list_mod_allocator__free__B113b__L_4__R114b__assume = r114b)
-
-axiom H38 : in_range1(r114b)
-
-axiom H39 : (result3 = i)
-
-axiom H40 : (i2 = 1)
-
-axiom H41 : (1 <= i2)
-
-axiom H42 : (i2 <= r114b)
-
-axiom H43 : ((i3 + 1) <= length(c112b))
-
-axiom H44 :
-  (forall j3:int. (((1 <= j3) and (j3 <= i3)) -> (get(c111b, j3) = get(c112b,
-  (j3 + 1)))))
-
-axiom H45 :
-  (forall j3:int. (((2 <= j3) and (j3 <= (i3 + 1))) -> (get(c111b,
-  (j3 - 1)) = get(c112b, j3))))
-
-axiom H46 : (((1 <= r114b) -> dynamic_property(1, r114b, i3)) and
-  ((1 <= i3) and (i3 <= r114b)))
-
-axiom H47 :
-  (forall j3:int. (((1 <= j3) and (j3 <= (i3 + 1))) -> (not (get(c112b,
-  j3) = to_rep((((data2[get(c111b,
-  i3)])).us_split_fields1).rec__list_mod_allocator__cell__next)))))
-
-axiom H48 : (not (i3 = r114b))
-
-axiom H49 : (result6 = i3)
-
-axiom H50 : (i4 = (i3 + 1))
-
-logic j3 : int
-
-axiom H51 : (1 <= j3)
-
-axiom H52 : (j3 <= i4)
-
  (* File "list_mod_allocator.ads", line 17, characters 0-0 *)
-goal WP_parameter_def : (get(c111b, j3) = get(c112b, (j3 + 1)))
+goal WP_parameter_def :
+  (forall data:(int,us_rep) farray. forall first_available:int. forall i:int.
+  forall o:us_rep1. forall o1:us_rep2. forall o2:us_rep1. forall o3:us_rep2.
+  forall list_mod_allocator__free__ma__assume:us_rep1. forall o4:int.
+  forall o5:status. forall o6:resource. forall o7:status. forall o8:resource.
+  forall o9:status. forall o10:int. forall o11:resource. forall o12:status.
+  forall o13:status. forall o14:resource. forall o15:status.
+  forall o16:resource. forall o17:int. forall o18:(int,us_rep) farray.
+  forall o19:us_rep1. forall o20:us_rep2. forall o21:us_rep1.
+  forall o22:us_rep2. forall list_mod_allocator__free__C112b__assume:us_rep1.
+  forall list_mod_allocator__free__B113b__L_4__R114b__assume:int.
+  forall result:bool. forall result1:(int,us_rep) farray.
+  forall data1:(int,us_rep) farray. forall result2:int.
+  forall first_available1:int. forall result3:int. forall i1:int.
+  forall i2:int. forall result4:int. forall i3:int.
+  (in_range2(first_available) -> (in_range2(res) -> ((is_valid(data,
+  first_available) = true) -> (((((({ us_split_fields3 = {
+  rec__list_mod_allocator__m__t__available = o;
+  rec__list_mod_allocator__m__t__allocated = o1 } } = model__(data,
+  first_available)) and (model_is_well_formed({ us_split_fields3 = {
+  rec__list_mod_allocator__m__t__available = o;
+  rec__list_mod_allocator__m__t__allocated = o1 } }, data,
+  first_available) = true)) and ((o = o2) and (o1 = o3))) and
+  (list_mod_allocator__free__ma__assume = o2)) and
+  (list_mod_allocator__free__ma__assume = ma)) -> ((((not (res = 0)) and
+  ((((((((1 <= res) and (res <= 10000)) and (o4 = res)) and ({
+  us_split_fields1 = { rec__list_mod_allocator__cell__stat = o5;
+  rec__list_mod_allocator__cell__next = o6 } } = (data[o4]))) and
+  ((o5 = o7) and (o6 = o8))) and (o9 = o7)) and (o10 = to_rep1(o9))) and
+  (((o10 = 1) and (result = true)) or ((not (o10 = 1)) and
+  (result = false))))) or ((res = 0) and (result = false))) ->
+  ((result = true) -> ((((((to_rep(o11) = first_available) and
+  ((to_rep1(o12) = 0) and ((o12 = o13) and (o11 = o14)))) and
+  ((o15 = o13) and (o16 = o14))) and ((((1 <= res) and (res <= 10000)) and
+  (o17 = res)) and (o18 = (data[o17 <- { us_split_fields1 = {
+  rec__list_mod_allocator__cell__stat = o15;
+  rec__list_mod_allocator__cell__next = o16 } }])))) and
+  ((result1 = data) and (data1 = o18))) -> (((result2 = first_available) and
+  (first_available1 = res)) -> ((ma = c111b) -> (((((({ us_split_fields3 = {
+  rec__list_mod_allocator__m__t__available = o19;
+  rec__list_mod_allocator__m__t__allocated = o20 } } = model__(data1,
+  first_available1)) and (model_is_well_formed({ us_split_fields3 = {
+  rec__list_mod_allocator__m__t__available = o19;
+  rec__list_mod_allocator__m__t__allocated = o20 } }, data1,
+  first_available1) = true)) and ((o19 = o21) and (o20 = o22))) and
+  (list_mod_allocator__free__C112b__assume = o21)) and
+  (list_mod_allocator__free__C112b__assume = c112b)) ->
+  (((((list_mod_allocator__free__B113b__L_4__R114b__assume = length(c111b)) and
+  (in_range5(list_mod_allocator__free__B113b__L_4__R114b__assume) and
+  ((0 + list_mod_allocator__free__B113b__L_4__R114b__assume) <= 2147483647))) and
+  (list_mod_allocator__free__B113b__L_4__R114b__assume = r114b)) and
+  in_range1(r114b)) -> (((result3 = i) and (i1 = 1)) -> (((1 <= i1) and
+  (i1 <= r114b)) -> ((((i2 + 1) <= length(c112b)) and
+  ((forall j:int. (((1 <= j) and (j <= i2)) -> (get(c111b, j) = get(c112b,
+   (j + 1))))) and
+  (forall j:int. (((2 <= j) and (j <= (i2 + 1))) -> (get(c111b,
+  (j - 1)) = get(c112b, j)))))) -> (((((1 <= r114b) -> dynamic_property(1,
+  r114b, i2)) and ((1 <= i2) and (i2 <= r114b))) and
+  ((forall j:int. (((1 <= j) and (j <= (i2 + 1))) -> (not (get(c112b,
+   j) = to_rep((((data1[get(c111b,
+   i2)])).us_split_fields1).rec__list_mod_allocator__cell__next))))) and
+  ((not (i2 = r114b)) and ((result4 = i2) and (i3 = (i2 + 1)))))) ->
+  (forall j:int. (((1 <= j) and (j <= i3)) -> (get(c111b, j) = get(c112b,
+  (j + 1)))))))))))))))))))))

@@ -1037,12 +1037,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1054,6 +1048,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1320,30 +1320,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def :
-  (forall v:function_range. forall v1:float1.
-  (forall i:int [(singleton({ us_split_fields1 = {
-  rec__step_function__delimiter_entry__delimiter = v;
-  rec__step_function__delimiter_entry__value = v1 } }, i)[i])]. ((singleton({
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter = v;
-  rec__step_function__delimiter_entry__value = v1 } }, i)[i]) = {
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter = v;
-  rec__step_function__delimiter_entry__value = v1 } })))
-
 logic bool_eq7 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -1354,17 +1330,17 @@ axiom bool_eq_def6 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and (bool_eq6((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and (bool_eq6((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq6((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq7(a,
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq6((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq7(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1374,9 +1350,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq6((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq6((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)))))))
 
 logic dummy5 : (int,us_rep) farray
 
@@ -1591,1731 +1567,521 @@ logic attr__ATTRIBUTE_ADDRESS6 : int
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
-logic merge__split_fields : num_delimiters_range
-
-logic merge__split_fields1 : (int,us_rep) farray
-
-logic i1 : int
-
-logic i2 : int
-
-logic im : int
-
-logic scan_sfun1 : bool
-
-logic scan_sfun2 : bool
-
-logic temp___389 : bool
-
-logic temp___387 : num_delimiters_range
-
-logic temp___3871 : (int,us_rep) farray
-
-logic temp___386 : bool
-
-logic temp___385 : int
-
-logic temp___384 : int
-
-logic temp___383 : int
-
-logic o : float1
-
-logic o1 : function_range
-
-logic o2 : function_range
-
-logic o3 : float1
-
-logic o4 : function_range
-
-logic o5 : float1
-
-logic o6 : (int,us_rep) farray
-
-logic o7 : num_delimiters_range
-
-logic o8 : (int,us_rep) farray
-
-logic temp___313 : num_delimiters_range
-
-logic temp___3131 : (int,us_rep) farray
-
-logic i : int
-
-logic o9 : int
-
-logic o10 : function_range
-
-logic o11 : float1
-
-logic o12 : function_range
-
-logic o13 : float1
-
-logic o14 : function_range
-
-logic o15 : int
-
-logic i3 : int
-
-logic j : int
-
-logic o16 : int
-
-logic o17 : function_range
-
-logic o18 : float1
-
-logic o19 : function_range
-
-logic o20 : float1
-
-logic o21 : function_range
-
-logic o22 : int
-
-logic i4 : int
-
-logic j1 : int
-
-logic o23 : int
-
-logic o24 : function_range
-
-logic o25 : float1
-
-logic o26 : function_range
-
-logic o27 : float1
-
-logic o28 : function_range
-
-logic o29 : int
-
-logic i5 : int
-
-logic j2 : int
-
-logic o30 : int
-
-logic o31 : function_range
-
-logic o32 : float1
-
-logic o33 : function_range
-
-logic o34 : float1
-
-logic o35 : function_range
-
-logic o36 : int
-
-logic i6 : int
-
-logic j3 : int
-
-logic o37 : int
-
-logic o38 : function_range
-
-logic o39 : float1
-
-logic o40 : function_range
-
-logic o41 : float1
-
-logic o42 : function_range
-
-logic o43 : int
-
-logic i7 : int
-
-logic o44 : int
-
-logic o45 : function_range
-
-logic o46 : float1
-
-logic o47 : function_range
-
-logic o48 : float1
-
-logic o49 : function_range
-
-logic o50 : int
-
-logic o51 : t
-
-logic o52 : int
-
-logic o53 : function_range
-
-logic o54 : float1
-
-logic o55 : function_range
-
-logic o56 : float1
-
-logic o57 : function_range
-
-logic o58 : int
-
-logic o59 : t
-
-logic o60 : t
-
-logic o61 : function_range
-
-logic o62 : function_range
-
-logic o63 : float1
-
-logic o64 : function_range
-
-logic o65 : float1
-
-logic o66 : (int,us_rep) farray
-
-logic o67 : num_delimiters_range
-
-logic o68 : (int,us_rep) farray
-
-logic temp___375 : num_delimiters_range
-
-logic temp___3751 : (int,us_rep) farray
-
-logic o69 : t
-
-logic o70 : t
-
-logic o71 : t
-
-logic o72 : float1
-
-logic o73 : function_range
-
-logic o74 : float1
-
-logic o75 : function_range
-
-logic o76 : float1
-
-logic o77 : (int,us_rep) farray
-
-logic o78 : num_delimiters_range
-
-logic o79 : (int,us_rep) farray
-
-logic temp___382 : num_delimiters_range
-
-logic temp___3821 : (int,us_rep) farray
-
-logic o80 : function_range
-
-logic o81 : function_range
-
-logic o82 : float1
-
-logic o83 : function_range
-
-logic o84 : float1
-
-logic o85 : (int,us_rep) farray
-
-logic o86 : num_delimiters_range
-
-logic o87 : (int,us_rep) farray
-
-logic temp___360 : num_delimiters_range
-
-logic temp___3601 : (int,us_rep) farray
-
-logic o88 : t
-
-logic o89 : t
-
-logic o90 : t
-
-logic o91 : float1
-
-logic o92 : function_range
-
-logic o93 : float1
-
-logic o94 : function_range
-
-logic o95 : float1
-
-logic o96 : (int,us_rep) farray
-
-logic o97 : num_delimiters_range
-
-logic o98 : (int,us_rep) farray
-
-logic temp___367 : num_delimiters_range
-
-logic temp___3671 : (int,us_rep) farray
-
-logic o99 : function_range
-
-logic o100 : function_range
-
-logic o101 : float1
-
-logic o102 : function_range
-
-logic o103 : float1
-
-logic o104 : (int,us_rep) farray
-
-logic o105 : num_delimiters_range
-
-logic o106 : (int,us_rep) farray
-
-logic temp___345 : num_delimiters_range
-
-logic temp___3451 : (int,us_rep) farray
-
-logic o107 : t
-
-logic o108 : t
-
-logic o109 : t
-
-logic o110 : float1
-
-logic o111 : function_range
-
-logic o112 : float1
-
-logic o113 : function_range
-
-logic o114 : float1
-
-logic o115 : (int,us_rep) farray
-
-logic o116 : num_delimiters_range
-
-logic o117 : (int,us_rep) farray
-
-logic temp___352 : num_delimiters_range
-
-logic temp___3521 : (int,us_rep) farray
-
-logic o118 : function_range
-
-logic o119 : function_range
-
-logic o120 : float1
-
-logic o121 : function_range
-
-logic o122 : float1
-
-logic o123 : (int,us_rep) farray
-
-logic o124 : num_delimiters_range
-
-logic o125 : (int,us_rep) farray
-
-logic temp___332 : num_delimiters_range
-
-logic temp___3321 : (int,us_rep) farray
-
-logic o126 : t
-
-logic o127 : t
-
-logic o128 : t
-
-logic o129 : float1
-
-logic o130 : function_range
-
-logic o131 : float1
-
-logic o132 : function_range
-
-logic o133 : float1
-
-logic o134 : (int,us_rep) farray
-
-logic o135 : num_delimiters_range
-
-logic o136 : (int,us_rep) farray
-
-logic temp___339 : num_delimiters_range
-
-logic temp___3391 : (int,us_rep) farray
-
-logic o137 : function_range
-
-logic o138 : function_range
-
-logic o139 : float1
-
-logic o140 : function_range
-
-logic o141 : float1
-
-logic o142 : (int,us_rep) farray
-
-logic o143 : num_delimiters_range
-
-logic o144 : (int,us_rep) farray
-
-logic temp___319 : num_delimiters_range
-
-logic temp___3191 : (int,us_rep) farray
-
-logic o145 : t
-
-logic o146 : t
-
-logic o147 : t
-
-logic o148 : float1
-
-logic o149 : function_range
-
-logic o150 : float1
-
-logic o151 : function_range
-
-logic o152 : float1
-
-logic o153 : (int,us_rep) farray
-
-logic o154 : num_delimiters_range
-
-logic o155 : (int,us_rep) farray
-
-logic temp___326 : num_delimiters_range
-
-logic temp___3261 : (int,us_rep) farray
-
-logic o156 : int
-
-logic o157 : float1
-
-logic o158 : function_range
-
-logic o159 : function_range
-
-logic o160 : float1
-
-logic o161 : function_range
-
-logic o162 : float1
-
-logic o163 : (int,us_rep) farray
-
-logic o164 : num_delimiters_range
-
-logic o165 : (int,us_rep) farray
-
-logic temp___3132 : num_delimiters_range
-
-logic temp___3133 : (int,us_rep) farray
-
-logic o166 : num_delimiters_range
-
-logic o167 : num_delimiters_range
-
-logic o168 : (int,us_rep) farray
-
-logic temp___451 : num_delimiters_range
-
-logic temp___4511 : (int,us_rep) farray
-
-logic i8 : int
-
-logic j4 : int
-
-logic o169 : int
-
-logic o170 : function_range
-
-logic o171 : float1
-
-logic o172 : function_range
-
-logic o173 : float1
-
-logic o174 : function_range
-
-logic o175 : int
-
-logic i9 : int
-
-logic j5 : int
-
-logic o176 : int
-
-logic o177 : function_range
-
-logic o178 : float1
-
-logic o179 : function_range
-
-logic o180 : float1
-
-logic o181 : function_range
-
-logic o182 : int
-
-logic o183 : bool
-
-logic i10 : int
-
-logic o184 : int
-
-logic o185 : function_range
-
-logic o186 : float1
-
-logic o187 : function_range
-
-logic o188 : float1
-
-logic o189 : function_range
-
-logic o190 : int
-
-logic o191 : t
-
-logic o192 : int
-
-logic o193 : function_range
-
-logic o194 : float1
-
-logic o195 : function_range
-
-logic o196 : float1
-
-logic o197 : function_range
-
-logic o198 : int
-
-logic o199 : t
-
-logic o200 : t
-
-logic o201 : bool
-
-logic result : int
-
-logic i11 : int
-
-logic result1 : int
-
-logic i21 : int
-
-logic result2 : int
-
-logic im1 : int
-
-logic result3 : bool
-
-logic scan_sfun11 : bool
-
-logic result4 : bool
-
-logic scan_sfun21 : bool
-
-logic result5 : num_delimiters_range
-
-logic result6 : (int,us_rep) farray
-
-logic merge__split_fields2 : num_delimiters_range
-
-logic merge__split_fields3 : (int,us_rep) farray
-
-logic merge__split_fields4 : num_delimiters_range
-
-logic merge__split_fields5 : (int,us_rep) farray
-
-logic i12 : int
-
-logic i22 : int
-
-logic im2 : int
-
-logic scan_sfun12 : bool
-
-logic scan_sfun22 : bool
-
-logic result7 : num_delimiters_range
-
-logic result8 : (int,us_rep) farray
-
-logic merge__split_fields6 : num_delimiters_range
-
-logic merge__split_fields7 : (int,us_rep) farray
-
-logic result9 : num_delimiters_range
-
-logic result10 : (int,us_rep) farray
-
-logic merge__split_fields8 : num_delimiters_range
-
-logic merge__split_fields9 : (int,us_rep) farray
-
-logic i13 : int
-
-logic scan_sfun13 : bool
-
-logic result11 : num_delimiters_range
-
-logic result12 : (int,us_rep) farray
-
-logic merge__split_fields10 : num_delimiters_range
-
-logic merge__split_fields11 : (int,us_rep) farray
-
-logic result13 : num_delimiters_range
-
-logic result14 : (int,us_rep) farray
-
-logic merge__split_fields12 : num_delimiters_range
-
-logic merge__split_fields13 : (int,us_rep) farray
-
-logic i23 : int
-
-logic scan_sfun23 : bool
-
-logic result15 : num_delimiters_range
-
-logic result16 : (int,us_rep) farray
-
-logic merge__split_fields14 : num_delimiters_range
-
-logic merge__split_fields15 : (int,us_rep) farray
-
-logic result17 : num_delimiters_range
-
-logic result18 : (int,us_rep) farray
-
-logic merge__split_fields16 : num_delimiters_range
-
-logic merge__split_fields17 : (int,us_rep) farray
-
-logic i14 : int
-
-logic scan_sfun14 : bool
-
-logic i24 : int
-
-logic scan_sfun24 : bool
-
-logic result19 : num_delimiters_range
-
-logic result20 : (int,us_rep) farray
-
-logic merge__split_fields18 : num_delimiters_range
-
-logic merge__split_fields19 : (int,us_rep) farray
-
-logic result21 : num_delimiters_range
-
-logic result22 : (int,us_rep) farray
-
-logic merge__split_fields20 : num_delimiters_range
-
-logic merge__split_fields21 : (int,us_rep) farray
-
-logic i15 : int
-
-logic scan_sfun15 : bool
-
-logic result23 : num_delimiters_range
-
-logic result24 : (int,us_rep) farray
-
-logic merge__split_fields22 : num_delimiters_range
-
-logic merge__split_fields23 : (int,us_rep) farray
-
-logic result25 : num_delimiters_range
-
-logic result26 : (int,us_rep) farray
-
-logic merge__split_fields24 : num_delimiters_range
-
-logic merge__split_fields25 : (int,us_rep) farray
-
-logic i25 : int
-
-logic scan_sfun25 : bool
-
-logic result27 : int
-
-logic im3 : int
-
-logic result28 : num_delimiters_range
-
-logic result29 : (int,us_rep) farray
-
-logic merge__split_fields26 : num_delimiters_range
-
-logic merge__split_fields27 : (int,us_rep) farray
-
-logic im4 : int
-
-logic im5 : int
-
-logic merge__split_fields28 : num_delimiters_range
-
-logic merge__split_fields29 : (int,us_rep) farray
-
-logic i16 : int
-
-logic i26 : int
-
-logic im6 : int
-
-logic scan_sfun16 : bool
-
-logic scan_sfun26 : bool
-
-logic merge__split_fields30 : num_delimiters_range
-
-logic merge__split_fields31 : (int,us_rep) farray
-
-logic i17 : int
-
-logic i27 : int
-
-logic im7 : int
-
-logic scan_sfun17 : bool
-
-logic scan_sfun27 : bool
-
-logic merge__split_fields32 : num_delimiters_range
-
-logic merge__split_fields33 : (int,us_rep) farray
-
-logic i18 : int
-
-logic i28 : int
-
-logic im8 : int
-
-logic scan_sfun18 : bool
-
-logic scan_sfun28 : bool
-
-logic merge__split_fields34 : num_delimiters_range
-
-logic merge__split_fields35 : (int,us_rep) farray
-
-logic i19 : int
-
-logic i29 : int
-
-logic im9 : int
-
-logic scan_sfun19 : bool
-
-logic scan_sfun29 : bool
-
-logic result30 : num_delimiters_range
-
-logic result31 : (int,us_rep) farray
-
-logic merge__split_fields36 : num_delimiters_range
-
-logic merge__split_fields37 : (int,us_rep) farray
-
-logic merge__split_fields38 : num_delimiters_range
-
-logic merge__split_fields39 : (int,us_rep) farray
-
-logic i110 : int
-
-logic i210 : int
-
-logic im10 : int
-
-logic scan_sfun110 : bool
-
-logic scan_sfun210 : bool
-
-logic merge__split_fields40 : num_delimiters_range
-
-logic merge__split_fields41 : (int,us_rep) farray
-
-logic i111 : int
-
-logic i211 : int
-
-logic im11 : int
-
-logic scan_sfun111 : bool
-
-logic scan_sfun211 : bool
-
-axiom H : (((is_valid({ us_split_fields3 = {
-  rec__step_function__step_function_t__number_of_delimiters = sfun1;
-  rec__step_function__step_function_t__step = sfun11 } }) = true) and
-  (is_valid({ us_split_fields3 = {
-  rec__step_function__step_function_t__number_of_delimiters = sfun2;
-  rec__step_function__step_function_t__step = sfun21 } }) = true)) and
-  ((to_rep1(sfun1) + to_rep1(sfun2)) <= 10))
-
-axiom H1 : (result = i1)
-
-axiom H2 : (i11 = 0)
-
-axiom H3 : in_range2(i11)
-
-axiom H4 : (result1 = i2)
-
-axiom H5 : (i21 = 0)
-
-axiom H6 : in_range2(i21)
-
-axiom H7 : (result2 = im)
-
-axiom H8 : (im1 = 0)
-
-axiom H9 : in_range2(im1)
-
-axiom H10 : (result3 = scan_sfun1)
-
-axiom H11 : (scan_sfun11 = of_int1(1))
-
-axiom H12 : (result4 = scan_sfun2)
-
-axiom H13 : (scan_sfun21 = of_int1(1))
-
-axiom H14 : (temp___389 = scan_sfun21)
-
-axiom H15 : ((merge__split_fields = temp___387) and
-  (merge__split_fields1 = temp___3871))
-
-axiom H16 : (temp___386 = scan_sfun11)
-
-axiom H17 : (temp___385 = im1)
-
-axiom H18 : (temp___384 = i21)
-
-axiom H19 : (temp___383 = i11)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
-axiom H20 : (to_rep(o) = fliteral1)
-
-axiom H21 : (to_rep2(o1) = 0)
-
-axiom H22 : (o1 = o2)
-
-axiom H23 : (o = o3)
-
-axiom H24 : (o4 = o2)
-
-axiom H25 : (o5 = o3)
-
-axiom H26 : (o6 = (merge__split_fields1[im1 <- { us_split_fields1 = {
+ (* File "step_function.ads", line 89, characters 0-0 *)
+goal WP_parameter_def :
+  (forall merge__split_fields:num_delimiters_range.
+  forall merge__split_fields1:(int,us_rep) farray. forall i1:int.
+  forall i2:int. forall im:int. forall scan_sfun1:bool.
+  forall scan_sfun2:bool. forall temp___416:bool.
+  forall temp___414:num_delimiters_range.
+  forall temp___4141:(int,us_rep) farray. forall temp___413:bool.
+  forall temp___412:int. forall temp___411:int. forall temp___410:int.
+  forall o:float1. forall o1:function_range. forall o2:function_range.
+  forall o3:float1. forall o4:function_range. forall o5:float1.
+  forall o6:(int,us_rep) farray. forall o7:num_delimiters_range.
+  forall o8:(int,us_rep) farray. forall temp___340:num_delimiters_range.
+  forall temp___3401:(int,us_rep) farray. forall o9:function_range.
+  forall o10:function_range. forall o11:float1. forall o12:function_range.
+  forall o13:float1. forall o14:(int,us_rep) farray.
+  forall o15:num_delimiters_range. forall o16:(int,us_rep) farray.
+  forall temp___402:num_delimiters_range.
+  forall temp___4021:(int,us_rep) farray. forall o17:t. forall o18:t.
+  forall o19:t. forall o20:float1. forall o21:us_split_fields.
+  forall o22:us_rep. forall o23:(int,us_rep) farray.
+  forall o24:us_split_fields2. forall temp___409:us_rep1.
+  forall o25:function_range. forall o26:us_split_fields. forall o27:us_rep.
+  forall o28:(int,us_rep) farray. forall o29:us_split_fields2.
+  forall temp___387:us_rep1. forall o30:t. forall o31:t. forall o32:t.
+  forall o33:float1. forall o34:us_split_fields. forall o35:us_rep.
+  forall o36:(int,us_rep) farray. forall o37:us_split_fields2.
+  forall temp___394:us_rep1. forall o38:function_range.
+  forall o39:us_split_fields. forall o40:us_rep.
+  forall o41:(int,us_rep) farray. forall o42:us_split_fields2.
+  forall temp___372:us_rep1. forall o43:t. forall o44:t. forall o45:t.
+  forall o46:float1. forall o47:us_split_fields. forall o48:us_rep.
+  forall o49:(int,us_rep) farray. forall o50:us_split_fields2.
+  forall temp___379:us_rep1. forall o51:function_range.
+  forall o52:us_split_fields. forall o53:us_rep.
+  forall o54:(int,us_rep) farray. forall o55:us_split_fields2.
+  forall temp___359:us_rep1. forall o56:t. forall o57:t. forall o58:t.
+  forall o59:float1. forall o60:us_split_fields. forall o61:us_rep.
+  forall o62:(int,us_rep) farray. forall o63:us_split_fields2.
+  forall temp___366:us_rep1. forall o64:function_range.
+  forall o65:us_split_fields. forall o66:us_rep.
+  forall o67:(int,us_rep) farray. forall o68:us_split_fields2.
+  forall temp___346:us_rep1. forall o69:t. forall o70:t. forall o71:t.
+  forall o72:float1. forall o73:us_split_fields. forall o74:us_rep.
+  forall o75:(int,us_rep) farray. forall o76:us_split_fields2.
+  forall temp___353:us_rep1. forall o77:num_delimiters_range.
+  forall o78:us_split_fields2. forall temp___478:us_rep1. forall i:int.
+  forall o79:int. forall o80:us_rep. forall o81:us_split_fields.
+  forall o82:function_range. forall o83:int. forall result:int__ref.
+  forall i11:int. forall result1:int__ref. forall i21:int.
+  forall result2:int__ref. forall im1:int. forall result3:bool__ref.
+  forall scan_sfun11:bool. forall result4:bool__ref. forall scan_sfun21:bool.
+  forall result5:us_split_fields__ref1.
+  forall merge__split_fields2:us_split_fields2.
+  forall merge__split_fields3:us_split_fields2. forall i12:int.
+  forall i22:int. forall im2:int. forall scan_sfun12:bool.
+  forall scan_sfun22:bool. forall result6:us_split_fields__ref1.
+  forall merge__split_fields4:us_split_fields2.
+  forall result7:us_split_fields__ref1.
+  forall merge__split_fields5:us_split_fields2. forall i13:int.
+  forall scan_sfun13:bool. forall result8:us_split_fields__ref1.
+  forall merge__split_fields6:us_split_fields2.
+  forall result9:us_split_fields__ref1.
+  forall merge__split_fields7:us_split_fields2. forall i23:int.
+  forall scan_sfun23:bool. forall result10:us_split_fields__ref1.
+  forall merge__split_fields8:us_split_fields2.
+  forall result11:us_split_fields__ref1.
+  forall merge__split_fields9:us_split_fields2. forall i14:int.
+  forall scan_sfun14:bool. forall i24:int. forall scan_sfun24:bool.
+  forall result12:us_split_fields__ref1.
+  forall merge__split_fields10:us_split_fields2.
+  forall result13:us_split_fields__ref1.
+  forall merge__split_fields11:us_split_fields2. forall i15:int.
+  forall scan_sfun15:bool. forall result14:us_split_fields__ref1.
+  forall merge__split_fields12:us_split_fields2.
+  forall result15:us_split_fields__ref1.
+  forall merge__split_fields13:us_split_fields2. forall i25:int.
+  forall scan_sfun25:bool. forall im3:int__ref. forall im4:int.
+  forall merge__split_fields14:us_split_fields__ref1. forall i16:int__ref.
+  forall i26:int__ref. forall im5:int__ref. forall scan_sfun16:bool__ref.
+  forall scan_sfun26:bool__ref.
+  forall merge__split_fields15:us_split_fields2. forall i17:int.
+  forall i27:int. forall im6:int. forall scan_sfun17:bool.
+  forall scan_sfun27:bool.
+  forall merge__split_fields16:us_split_fields__ref1. forall i18:int__ref.
+  forall i28:int__ref. forall im7:int__ref. forall scan_sfun18:bool__ref.
+  forall scan_sfun28:bool__ref.
+  forall merge__split_fields17:us_split_fields2. forall i19:int.
+  forall i29:int. forall im8:int. forall scan_sfun19:bool.
+  forall scan_sfun29:bool. forall result16:us_split_fields__ref1.
+  forall merge__split_fields18:us_split_fields2.
+  forall merge__split_fields19:us_split_fields__ref1. forall i110:int__ref.
+  forall i210:int__ref. forall im9:int__ref. forall scan_sfun110:bool__ref.
+  forall scan_sfun210:bool__ref.
+  forall merge__split_fields20:us_split_fields2. forall i111:int.
+  forall i211:int. forall im10:int. forall scan_sfun111:bool.
+  forall scan_sfun211:bool. ((((is_valid({ us_split_fields3 = {
+  rec__step_function__step_function_t__number_of_delimiters = sfun1;
+  rec__step_function__step_function_t__step = sfun11 } }) = true) and
+  (is_valid({ us_split_fields3 = {
+  rec__step_function__step_function_t__number_of_delimiters = sfun2;
+  rec__step_function__step_function_t__step = sfun21 } }) = true)) and
+  ((to_rep1(sfun1) + to_rep1(sfun2)) <= 10)) -> (((((result = {
+  int__content = i1 }) and (i11 = 0)) and (in_range2(i11) and (((result1 = {
+  int__content = i2 }) and (i21 = 0)) and (in_range2(i21) and (((result2 = {
+  int__content = im }) and (im1 = 0)) and (in_range2(im1) and (((result3 = {
+  bool__content = scan_sfun1 }) and (scan_sfun11 = of_int1(1))) and
+  (((result4 = { bool__content = scan_sfun2 }) and
+  (scan_sfun21 = of_int1(1))) and (((((temp___416 = scan_sfun21) and
+  (((merge__split_fields = temp___414) and
+  (merge__split_fields1 = temp___4141)) and ((temp___413 = scan_sfun11) and
+  ((temp___412 = im1) and ((temp___411 = i21) and ((temp___410 = i11) and
+  ((((((((to_rep(o) = fliteral1) and ((to_rep2(o1) = 0) and ((o1 = o2) and
+  (o = o3)))) and ((o4 = o2) and (o5 = o3))) and
+  (o6 = (merge__split_fields1[im1 <- { us_split_fields1 = {
   rec__step_function__delimiter_entry__delimiter = o4;
-  rec__step_function__delimiter_entry__value = o5 } }]))
-
-axiom H27 : (merge__split_fields = o7)
-
-axiom H28 : (o6 = o8)
-
-axiom H29 : (temp___313 = o7)
-
-axiom H30 : (temp___3131 = o8)
-
-axiom H31 : ((result5 = merge__split_fields) and
-  (result6 = merge__split_fields1))
-
-axiom H32 : ((merge__split_fields2 = temp___313) and
-  (merge__split_fields3 = temp___3131))
-
-axiom H33 : (0 <= i12)
-
-axiom H34 : (0 <= i22)
-
-axiom H35 : (0 <= im2)
-
-axiom H36 : (i12 <= to_rep1(sfun1))
-
-axiom H37 : (i22 <= to_rep1(sfun2))
-
-axiom H38 : (im2 <= 10)
-
-axiom H39 : ((scan_sfun12 = true) or (scan_sfun22 = true))
-
-axiom H40 : ((((i12 = 0) and (i22 = 0)) and (im2 = 0)) or ((((0 <  i12) or
+  rec__step_function__delimiter_entry__value = o5 } }]))) and
+  ((merge__split_fields = o7) and (o6 = o8))) and ((temp___340 = o7) and
+  (temp___3401 = o8))) and ((result5 = { us_split_fields__content1 = {
+  rec__step_function__step_function_t__number_of_delimiters =
+  merge__split_fields; rec__step_function__step_function_t__step =
+  merge__split_fields1 } }) and (merge__split_fields2 = {
+  rec__step_function__step_function_t__number_of_delimiters = temp___340;
+  rec__step_function__step_function_t__step = temp___3401 }))) and
+  (((0 <= i12) and ((0 <= i22) and ((0 <= im2) and
+  ((i12 <= to_rep1(sfun1)) and ((i22 <= to_rep1(sfun2)) and ((im2 <= 10) and
+  (((scan_sfun12 = true) or (scan_sfun22 = true)) and (((((i12 = 0) and
+  (i22 = 0)) and (im2 = 0)) or ((((0 <  i12) or
   (not (scan_sfun12 = true))) and ((0 <  i22) or
-  (not (scan_sfun22 = true)))) and (0 <  im2)))
-
-axiom H41 : (((((0 <  im2) and (scan_sfun12 = true)) and
-  (scan_sfun22 = true)) -> (im2 <  (i12 + i22))) and ((not (((0 <  im2) and
-  (scan_sfun12 = true)) and (scan_sfun22 = true))) -> (im2 <= (i12 + i22))))
-
-axiom H42 : ((0 <  im2) ->
-  (to_rep2((((merge__split_fields5[0])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) = 0))
-
-axiom H43 : (((0 <  im2) and (scan_sfun12 = true)) ->
-  (to_rep2((((merge__split_fields5[(im2 - 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)))
-
-axiom H44 : (((0 <  im2) and (scan_sfun22 = true)) ->
-  (to_rep2((((merge__split_fields5[(im2 - 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)))
-
-axiom H45 :
-  (forall i20:int. (((1 <= i20) and (i20 <= (im2 - 1))) ->
-  (to_rep2((((merge__split_fields5[(i20 - 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((merge__split_fields5[i20])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))))
-
-axiom H46 :
-  (forall i30:int. (((0 <= i30) and (i30 <= (i12 - 1))) ->
-  (exists j6:int. (((0 <= j6) and (j6 <= (im2 - 1))) and
-  (to_rep2((((sfun11[i30])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) = to_rep2((((merge__split_fields5[j6])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))))))
-
-axiom H47 : ((not (scan_sfun12 = true)) ->
-  (forall i30:int. (((0 <= i30) and (i30 <= to_rep1(sfun1))) ->
-  (exists j6:int. (((0 <= j6) and (j6 <= (im2 - 1))) and
-  (to_rep2((((sfun11[i30])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) = to_rep2((((merge__split_fields5[j6])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)))))))
-
-axiom H48 :
-  (forall i30:int. (((0 <= i30) and (i30 <= (i22 - 1))) ->
-  (exists j6:int. (((0 <= j6) and (j6 <= (im2 - 1))) and
-  (to_rep2((((sfun21[i30])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) = to_rep2((((merge__split_fields5[j6])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))))))
-
-axiom H49 : ((not (scan_sfun22 = true)) ->
-  (forall i30:int. (((0 <= i30) and (i30 <= to_rep1(sfun2))) ->
-  (exists j6:int. (((0 <= j6) and (j6 <= (im2 - 1))) and
-  (to_rep2((((sfun21[i30])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) = to_rep2((((merge__split_fields5[j6])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)))))))
-
-axiom H50 :
-  (forall i30:int. (((0 <= i30) and (i30 <= (im2 - 1))) ->
-  eq(to_rep((((merge__split_fields5[i30])).us_split_fields1).rec__step_function__delimiter_entry__value),
+  (not (scan_sfun22 = true)))) and (0 <  im2))) and ((((((0 <  im2) and
+  (scan_sfun12 = true)) and (scan_sfun22 = true)) and
+  (im2 <  (i12 + i22))) or ((not (((0 <  im2) and (scan_sfun12 = true)) and
+  (scan_sfun22 = true))) and (im2 <= (i12 + i22)))) and ((((0 <  im2) and
+  (to_rep2(((((merge__split_fields3).rec__step_function__step_function_t__step[0])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) = 0)) or
+  (not (0 <  im2))) and (((((0 <  im2) and (scan_sfun12 = true)) and
+  (to_rep2(((((merge__split_fields3).rec__step_function__step_function_t__step[(im2 - 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) or
+  (not ((0 <  im2) and (scan_sfun12 = true)))) and (((((0 <  im2) and
+  (scan_sfun22 = true)) and
+  (to_rep2(((((merge__split_fields3).rec__step_function__step_function_t__step[(im2 - 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) or
+  (not ((0 <  im2) and (scan_sfun22 = true)))) and
+  ((forall i3:int. (((1 <= i3) and (i3 <= (im2 - 1))) ->
+   (to_rep2(((((merge__split_fields3).rec__step_function__step_function_t__step[(i3 - 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2(((((merge__split_fields3).rec__step_function__step_function_t__step[i3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)))) and
+  ((forall i3:int. (((0 <= i3) and (i3 <= (i12 - 1))) ->
+   (exists j:int. (((0 <= j) and (j <= (im2 - 1))) and
+   (to_rep2((((sfun11[i3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) = to_rep2(((((merge__split_fields3).rec__step_function__step_function_t__step[j])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)))))) and
+  ((((not (scan_sfun12 = true)) and
+  (forall i3:int. (((0 <= i3) and (i3 <= to_rep1(sfun1))) ->
+  (exists j:int. (((0 <= j) and (j <= (im2 - 1))) and
+  (to_rep2((((sfun11[i3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) = to_rep2(((((merge__split_fields3).rec__step_function__step_function_t__step[j])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))))))) or
+  (scan_sfun12 = true)) and
+  ((forall i3:int. (((0 <= i3) and (i3 <= (i22 - 1))) ->
+   (exists j:int. (((0 <= j) and (j <= (im2 - 1))) and
+   (to_rep2((((sfun21[i3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) = to_rep2(((((merge__split_fields3).rec__step_function__step_function_t__step[j])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)))))) and
+  ((((not (scan_sfun22 = true)) and
+  (forall i3:int. (((0 <= i3) and (i3 <= to_rep1(sfun2))) ->
+  (exists j:int. (((0 <= j) and (j <= (im2 - 1))) and
+  (to_rep2((((sfun21[i3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) = to_rep2(((((merge__split_fields3).rec__step_function__step_function_t__step[j])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))))))) or
+  (scan_sfun22 = true)) and
+  (forall i3:int. (((0 <= i3) and (i3 <= (im2 - 1))) ->
+  eq(to_rep(((((merge__split_fields3).rec__step_function__step_function_t__step[i3])).us_split_fields1).rec__step_function__delimiter_entry__value),
   min1(get_value({ us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters = sfun1;
   rec__step_function__step_function_t__step = sfun11 } },
-  to_rep2((((merge__split_fields5[i30])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)),
+  to_rep2(((((merge__split_fields3).rec__step_function__step_function_t__step[i3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)),
   get_value({ us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters = sfun2;
   rec__step_function__step_function_t__step = sfun21 } },
-  to_rep2((((merge__split_fields5[i30])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))))))
-
-axiom H51 : (((((0 <= 10) -> in_range2(i12)) and ((0 <= 10) ->
-  in_range2(i22))) and ((0 <= 10) -> in_range2(im2))) and
-  (merge__split_fields4 = temp___387))
-
-axiom H52 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  (to_rep2(o61) = to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))))
-
-axiom H53 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((o62 = o61) and
-  (o63 = (((merge__split_fields5[im2])).us_split_fields1).rec__step_function__delimiter_entry__value))))
-
-axiom H54 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((o64 = o62) and (o65 = o63))))
-
-axiom H55 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  (o66 = (merge__split_fields5[im2 <- { us_split_fields1 = {
-  rec__step_function__delimiter_entry__delimiter = o64;
-  rec__step_function__delimiter_entry__value = o65 } }]))))
-
-axiom H56 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((o67 = merge__split_fields4) and (o68 = o66))))
-
-axiom H57 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((temp___375 = o67) and (temp___3751 = o68))))
-
-axiom H58 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((result7 = merge__split_fields4) and (result8 = merge__split_fields5))))
-
-axiom H59 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((merge__split_fields6 = temp___375) and
-  (merge__split_fields7 = temp___3751))))
-
-axiom H60 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((o70 = get_value({ us_split_fields3 = {
+  to_rep2(((((merge__split_fields3).rec__step_function__step_function_t__step[i3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))))))))))))))))))))))) and
+  ((((((0 <= 10) -> in_range2(i12)) and ((0 <= 10) -> in_range2(i22))) and
+  ((0 <= 10) -> in_range2(im2))) and
+  ((merge__split_fields3).rec__step_function__step_function_t__number_of_delimiters = temp___414)) and
+  (((((scan_sfun12 = true) and (scan_sfun22 = true)) and
+  (((to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
+  (((((((((to_rep2(o9) = to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
+  ((o9 = o10) and
+  (((((merge__split_fields3).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__value = o11))) and
+  ((o12 = o10) and (o13 = o11))) and
+  (o14 = ((merge__split_fields3).rec__step_function__step_function_t__step[im2 <- {
+  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter = o12;
+  rec__step_function__delimiter_entry__value = o13 } }]))) and
+  (((merge__split_fields3).rec__step_function__step_function_t__number_of_delimiters = o15) and
+  (o14 = o16))) and ((temp___402 = o15) and (temp___4021 = o16))) and
+  ((result6 = { us_split_fields__content1 = merge__split_fields3 }) and
+  (merge__split_fields4 = {
+  rec__step_function__step_function_t__number_of_delimiters = temp___402;
+  rec__step_function__step_function_t__step = temp___4021 }))) and
+  (((((((((((o18 = get_value({ us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters = sfun2;
   rec__step_function__step_function_t__step = sfun21 } },
-  to_rep2((((merge__split_fields7[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
+  to_rep2(((((merge__split_fields4).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
+  (tqtisFinite(o18) and
+  ((exists i3:int. (((0 <= i3) and (i3 <= (to_rep1(sfun2) - 1))) and
+   (((to_rep2((((sfun21[i3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2(((((merge__split_fields4).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
+   (to_rep2(((((merge__split_fields4).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[(i3 + 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
+   eq(o18,
+   to_rep((((sfun21[i3])).us_split_fields1).rec__step_function__delimiter_entry__value))))) or
+  ((to_rep2((((sfun21[to_rep1(sfun2)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2(((((merge__split_fields4).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
+  eq(o18,
+  to_rep((((sfun21[to_rep1(sfun2)])).us_split_fields1).rec__step_function__delimiter_entry__value)))))) and
+  (((o17 = get_value({ us_split_fields3 = {
+  rec__step_function__step_function_t__number_of_delimiters = sfun1;
+  rec__step_function__step_function_t__step = sfun11 } },
+  to_rep2(((((merge__split_fields4).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
+  (tqtisFinite(o17) and
+  ((exists i3:int. (((0 <= i3) and (i3 <= (to_rep1(sfun1) - 1))) and
+   (((to_rep2((((sfun11[i3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2(((((merge__split_fields4).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
+   (to_rep2(((((merge__split_fields4).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[(i3 + 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
+   eq(o17,
+   to_rep((((sfun11[i3])).us_split_fields1).rec__step_function__delimiter_entry__value))))) or
+  ((to_rep2((((sfun11[to_rep1(sfun1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2(((((merge__split_fields4).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
+  eq(o17,
+  to_rep((((sfun11[to_rep1(sfun1)])).us_split_fields1).rec__step_function__delimiter_entry__value)))))) and
+  ((o19 = min1(o17, o18)) and (tqtisFinite(o19) and ((le(o17, o18) and
+  eq(o19, o17)) or ((not le(o17, o18)) and eq(o19, o18))))))) and
+  (to_rep(o20) = o19)) and (o21 = {
+  rec__step_function__delimiter_entry__delimiter =
+  ((((merge__split_fields4).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter;
+  rec__step_function__delimiter_entry__value = o20 })) and (o22 = {
+  us_split_fields1 = o21 })) and
+  (o23 = ((merge__split_fields4).rec__step_function__step_function_t__step[im2 <- o22]))) and
+  (o24 = { rec__step_function__step_function_t__number_of_delimiters =
+  (merge__split_fields4).rec__step_function__step_function_t__number_of_delimiters;
+  rec__step_function__step_function_t__step = o23 })) and (temp___409 = {
+  us_split_fields3 = o24 })) and ((result7 = { us_split_fields__content1 =
+  merge__split_fields4 }) and
+  (merge__split_fields5 = (temp___409).us_split_fields3))) and
+  ((((i12 <  to_rep1(sfun1)) and ((i13 = (i12 + 1)) and
+  ((scan_sfun13 = true) <-> (scan_sfun12 = true)))) or
+  ((not (i12 <  to_rep1(sfun1))) and ((i13 = i12) and
+  (not (scan_sfun13 = true))))) and in_range2(i13)))) and
+  ((scan_sfun23 = scan_sfun22) and (i23 = i22)))) or
+  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
+  ((((to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
+  (((((((((to_rep2(o25) = to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
+  (o26 = { rec__step_function__delimiter_entry__delimiter = o25;
+  rec__step_function__delimiter_entry__value =
+  ((((merge__split_fields3).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__value
+  })) and (o27 = { us_split_fields1 = o26 })) and
+  (o28 = ((merge__split_fields3).rec__step_function__step_function_t__step[im2 <- o27]))) and
+  (o29 = { rec__step_function__step_function_t__number_of_delimiters =
+  (merge__split_fields3).rec__step_function__step_function_t__number_of_delimiters;
+  rec__step_function__step_function_t__step = o28 })) and (temp___387 = {
+  us_split_fields3 = o29 })) and ((result8 = { us_split_fields__content1 =
+  merge__split_fields3 }) and
+  (merge__split_fields6 = (temp___387).us_split_fields3))) and
+  (((((((((((o31 = get_value({ us_split_fields3 = {
+  rec__step_function__step_function_t__number_of_delimiters = sfun2;
+  rec__step_function__step_function_t__step = sfun21 } },
+  to_rep2(((((merge__split_fields6).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
+  (tqtisFinite(o31) and
+  ((exists i3:int. (((0 <= i3) and (i3 <= (to_rep1(sfun2) - 1))) and
+   (((to_rep2((((sfun21[i3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2(((((merge__split_fields6).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
+   (to_rep2(((((merge__split_fields6).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[(i3 + 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
+   eq(o31,
+   to_rep((((sfun21[i3])).us_split_fields1).rec__step_function__delimiter_entry__value))))) or
+  ((to_rep2((((sfun21[to_rep1(sfun2)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2(((((merge__split_fields6).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
+  eq(o31,
+  to_rep((((sfun21[to_rep1(sfun2)])).us_split_fields1).rec__step_function__delimiter_entry__value)))))) and
+  (((o30 = get_value({ us_split_fields3 = {
+  rec__step_function__step_function_t__number_of_delimiters = sfun1;
+  rec__step_function__step_function_t__step = sfun11 } },
+  to_rep2(((((merge__split_fields6).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
+  (tqtisFinite(o30) and
+  ((exists i3:int. (((0 <= i3) and (i3 <= (to_rep1(sfun1) - 1))) and
+   (((to_rep2((((sfun11[i3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2(((((merge__split_fields6).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
+   (to_rep2(((((merge__split_fields6).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[(i3 + 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
+   eq(o30,
+   to_rep((((sfun11[i3])).us_split_fields1).rec__step_function__delimiter_entry__value))))) or
+  ((to_rep2((((sfun11[to_rep1(sfun1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2(((((merge__split_fields6).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
+  eq(o30,
+  to_rep((((sfun11[to_rep1(sfun1)])).us_split_fields1).rec__step_function__delimiter_entry__value)))))) and
+  ((o32 = min1(o30, o31)) and (tqtisFinite(o32) and ((le(o30, o31) and
+  eq(o32, o30)) or ((not le(o30, o31)) and eq(o32, o31))))))) and
+  (to_rep(o33) = o32)) and (o34 = {
+  rec__step_function__delimiter_entry__delimiter =
+  ((((merge__split_fields6).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter;
+  rec__step_function__delimiter_entry__value = o33 })) and (o35 = {
+  us_split_fields1 = o34 })) and
+  (o36 = ((merge__split_fields6).rec__step_function__step_function_t__step[im2 <- o35]))) and
+  (o37 = { rec__step_function__step_function_t__number_of_delimiters =
+  (merge__split_fields6).rec__step_function__step_function_t__number_of_delimiters;
+  rec__step_function__step_function_t__step = o36 })) and (temp___394 = {
+  us_split_fields3 = o37 })) and ((result9 = { us_split_fields__content1 =
+  merge__split_fields6 }) and
+  (merge__split_fields7 = (temp___394).us_split_fields3))) and
+  ((((i22 <  to_rep1(sfun2)) and ((i23 = (i22 + 1)) and
+  ((scan_sfun23 = true) <-> (scan_sfun22 = true)))) or
+  ((not (i22 <  to_rep1(sfun2))) and ((i23 = i22) and
+  (not (scan_sfun23 = true))))) and in_range2(i23)))) and
+  ((scan_sfun14 = scan_sfun12) and (i14 = i12)))) or
+  ((not (to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
+  (((((((((to_rep2(o38) = to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
+  (o39 = { rec__step_function__delimiter_entry__delimiter = o38;
+  rec__step_function__delimiter_entry__value =
+  ((((merge__split_fields3).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__value
+  })) and (o40 = { us_split_fields1 = o39 })) and
+  (o41 = ((merge__split_fields3).rec__step_function__step_function_t__step[im2 <- o40]))) and
+  (o42 = { rec__step_function__step_function_t__number_of_delimiters =
+  (merge__split_fields3).rec__step_function__step_function_t__number_of_delimiters;
+  rec__step_function__step_function_t__step = o41 })) and (temp___372 = {
+  us_split_fields3 = o42 })) and ((result10 = { us_split_fields__content1 =
+  merge__split_fields3 }) and
+  (merge__split_fields8 = (temp___372).us_split_fields3))) and
+  (((((((((((o44 = get_value({ us_split_fields3 = {
+  rec__step_function__step_function_t__number_of_delimiters = sfun2;
+  rec__step_function__step_function_t__step = sfun21 } },
+  to_rep2(((((merge__split_fields8).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
+  (tqtisFinite(o44) and
+  ((exists i3:int. (((0 <= i3) and (i3 <= (to_rep1(sfun2) - 1))) and
+   (((to_rep2((((sfun21[i3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2(((((merge__split_fields8).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
+   (to_rep2(((((merge__split_fields8).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[(i3 + 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
+   eq(o44,
+   to_rep((((sfun21[i3])).us_split_fields1).rec__step_function__delimiter_entry__value))))) or
+  ((to_rep2((((sfun21[to_rep1(sfun2)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2(((((merge__split_fields8).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
+  eq(o44,
+  to_rep((((sfun21[to_rep1(sfun2)])).us_split_fields1).rec__step_function__delimiter_entry__value)))))) and
+  (((o43 = get_value({ us_split_fields3 = {
+  rec__step_function__step_function_t__number_of_delimiters = sfun1;
+  rec__step_function__step_function_t__step = sfun11 } },
+  to_rep2(((((merge__split_fields8).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
+  (tqtisFinite(o43) and
+  ((exists i3:int. (((0 <= i3) and (i3 <= (to_rep1(sfun1) - 1))) and
+   (((to_rep2((((sfun11[i3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2(((((merge__split_fields8).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
+   (to_rep2(((((merge__split_fields8).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[(i3 + 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
+   eq(o43,
+   to_rep((((sfun11[i3])).us_split_fields1).rec__step_function__delimiter_entry__value))))) or
+  ((to_rep2((((sfun11[to_rep1(sfun1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2(((((merge__split_fields8).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
+  eq(o43,
+  to_rep((((sfun11[to_rep1(sfun1)])).us_split_fields1).rec__step_function__delimiter_entry__value)))))) and
+  ((o45 = min1(o43, o44)) and (tqtisFinite(o45) and ((le(o43, o44) and
+  eq(o45, o43)) or ((not le(o43, o44)) and eq(o45, o44))))))) and
+  (to_rep(o46) = o45)) and (o47 = {
+  rec__step_function__delimiter_entry__delimiter =
+  ((((merge__split_fields8).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter;
+  rec__step_function__delimiter_entry__value = o46 })) and (o48 = {
+  us_split_fields1 = o47 })) and
+  (o49 = ((merge__split_fields8).rec__step_function__step_function_t__step[im2 <- o48]))) and
+  (o50 = { rec__step_function__step_function_t__number_of_delimiters =
+  (merge__split_fields8).rec__step_function__step_function_t__number_of_delimiters;
+  rec__step_function__step_function_t__step = o49 })) and (temp___379 = {
+  us_split_fields3 = o50 })) and ((result11 = { us_split_fields__content1 =
+  merge__split_fields8 }) and
+  (merge__split_fields9 = (temp___379).us_split_fields3))) and
+  (((((i12 <  to_rep1(sfun1)) and ((i14 = (i12 + 1)) and
+  ((scan_sfun14 = true) <-> (scan_sfun12 = true)))) or
+  ((not (i12 <  to_rep1(sfun1))) and ((i14 = i12) and
+  (not (scan_sfun14 = true))))) and in_range2(i14)) and
+  ((((i22 <  to_rep1(sfun2)) and ((i24 = (i22 + 1)) and
+  ((scan_sfun24 = true) <-> (scan_sfun22 = true)))) or
+  ((not (i22 <  to_rep1(sfun2))) and ((i24 = i22) and
+  (not (scan_sfun24 = true))))) and in_range2(i24))))) and
+  ((scan_sfun23 = scan_sfun24) and ((i23 = i24) and
+  (merge__split_fields7 = merge__split_fields9)))))) and
+  ((scan_sfun13 = scan_sfun14) and ((i13 = i14) and
+  (merge__split_fields5 = merge__split_fields7))))))) or
+  ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) and
+  ((((scan_sfun12 = true) and
+  (((((((((to_rep2(o51) = to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
+  (o52 = { rec__step_function__delimiter_entry__delimiter = o51;
+  rec__step_function__delimiter_entry__value =
+  ((((merge__split_fields3).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__value
+  })) and (o53 = { us_split_fields1 = o52 })) and
+  (o54 = ((merge__split_fields3).rec__step_function__step_function_t__step[im2 <- o53]))) and
+  (o55 = { rec__step_function__step_function_t__number_of_delimiters =
+  (merge__split_fields3).rec__step_function__step_function_t__number_of_delimiters;
+  rec__step_function__step_function_t__step = o54 })) and (temp___359 = {
+  us_split_fields3 = o55 })) and ((result12 = { us_split_fields__content1 =
+  merge__split_fields3 }) and
+  (merge__split_fields10 = (temp___359).us_split_fields3))) and
+  (((((((((((o57 = get_value({ us_split_fields3 = {
+  rec__step_function__step_function_t__number_of_delimiters = sfun2;
+  rec__step_function__step_function_t__step = sfun21 } },
+  to_rep2(((((merge__split_fields10).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
+  (tqtisFinite(o57) and
+  ((exists i3:int. (((0 <= i3) and (i3 <= (to_rep1(sfun2) - 1))) and
+   (((to_rep2((((sfun21[i3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2(((((merge__split_fields10).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
+   (to_rep2(((((merge__split_fields10).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[(i3 + 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
+   eq(o57,
+   to_rep((((sfun21[i3])).us_split_fields1).rec__step_function__delimiter_entry__value))))) or
+  ((to_rep2((((sfun21[to_rep1(sfun2)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2(((((merge__split_fields10).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
+  eq(o57,
+  to_rep((((sfun21[to_rep1(sfun2)])).us_split_fields1).rec__step_function__delimiter_entry__value)))))) and
+  (((o56 = get_value({ us_split_fields3 = {
+  rec__step_function__step_function_t__number_of_delimiters = sfun1;
+  rec__step_function__step_function_t__step = sfun11 } },
+  to_rep2(((((merge__split_fields10).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
+  (tqtisFinite(o56) and
+  ((exists i3:int. (((0 <= i3) and (i3 <= (to_rep1(sfun1) - 1))) and
+   (((to_rep2((((sfun11[i3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2(((((merge__split_fields10).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
+   (to_rep2(((((merge__split_fields10).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[(i3 + 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
+   eq(o56,
+   to_rep((((sfun11[i3])).us_split_fields1).rec__step_function__delimiter_entry__value))))) or
+  ((to_rep2((((sfun11[to_rep1(sfun1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2(((((merge__split_fields10).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
+  eq(o56,
+  to_rep((((sfun11[to_rep1(sfun1)])).us_split_fields1).rec__step_function__delimiter_entry__value)))))) and
+  ((o58 = min1(o56, o57)) and (tqtisFinite(o58) and ((le(o56, o57) and
+  eq(o58, o56)) or ((not le(o56, o57)) and eq(o58, o57))))))) and
+  (to_rep(o59) = o58)) and (o60 = {
+  rec__step_function__delimiter_entry__delimiter =
+  ((((merge__split_fields10).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter;
+  rec__step_function__delimiter_entry__value = o59 })) and (o61 = {
+  us_split_fields1 = o60 })) and
+  (o62 = ((merge__split_fields10).rec__step_function__step_function_t__step[im2 <- o61]))) and
+  (o63 = { rec__step_function__step_function_t__number_of_delimiters =
+  (merge__split_fields10).rec__step_function__step_function_t__number_of_delimiters;
+  rec__step_function__step_function_t__step = o62 })) and (temp___366 = {
+  us_split_fields3 = o63 })) and ((result13 = { us_split_fields__content1 =
+  merge__split_fields10 }) and
+  (merge__split_fields11 = (temp___366).us_split_fields3))) and
+  ((((i12 <  to_rep1(sfun1)) and ((i15 = (i12 + 1)) and
+  ((scan_sfun15 = true) <-> (scan_sfun12 = true)))) or
+  ((not (i12 <  to_rep1(sfun1))) and ((i15 = i12) and
+  (not (scan_sfun15 = true))))) and in_range2(i15)))) and
+  ((scan_sfun25 = scan_sfun22) and (i25 = i22)))) or
+  ((not (scan_sfun12 = true)) and
+  (((((((((to_rep2(o64) = to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
+  (o65 = { rec__step_function__delimiter_entry__delimiter = o64;
+  rec__step_function__delimiter_entry__value =
+  ((((merge__split_fields3).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__value
+  })) and (o66 = { us_split_fields1 = o65 })) and
+  (o67 = ((merge__split_fields3).rec__step_function__step_function_t__step[im2 <- o66]))) and
+  (o68 = { rec__step_function__step_function_t__number_of_delimiters =
+  (merge__split_fields3).rec__step_function__step_function_t__number_of_delimiters;
+  rec__step_function__step_function_t__step = o67 })) and (temp___346 = {
+  us_split_fields3 = o68 })) and ((result14 = { us_split_fields__content1 =
+  merge__split_fields3 }) and
+  (merge__split_fields12 = (temp___346).us_split_fields3))) and
+  (((((((((((o70 = get_value({ us_split_fields3 = {
+  rec__step_function__step_function_t__number_of_delimiters = sfun2;
+  rec__step_function__step_function_t__step = sfun21 } },
+  to_rep2(((((merge__split_fields12).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
   (tqtisFinite(o70) and
-  ((exists i30:int. (((0 <= i30) and (i30 <= (to_rep1(sfun2) - 1))) and
-   (((to_rep2((((sfun21[i30])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2((((merge__split_fields7[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
-   (to_rep2((((merge__split_fields7[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[(i30 + 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
+  ((exists i3:int. (((0 <= i3) and (i3 <= (to_rep1(sfun2) - 1))) and
+   (((to_rep2((((sfun21[i3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2(((((merge__split_fields12).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
+   (to_rep2(((((merge__split_fields12).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[(i3 + 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
    eq(o70,
-   to_rep((((sfun21[i30])).us_split_fields1).rec__step_function__delimiter_entry__value))))) or
-  ((to_rep2((((sfun21[to_rep1(sfun2)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2((((merge__split_fields7[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
+   to_rep((((sfun21[i3])).us_split_fields1).rec__step_function__delimiter_entry__value))))) or
+  ((to_rep2((((sfun21[to_rep1(sfun2)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2(((((merge__split_fields12).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
   eq(o70,
-  to_rep((((sfun21[to_rep1(sfun2)])).us_split_fields1).rec__step_function__delimiter_entry__value))))))))
-
-axiom H61 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((o69 = get_value({ us_split_fields3 = {
+  to_rep((((sfun21[to_rep1(sfun2)])).us_split_fields1).rec__step_function__delimiter_entry__value)))))) and
+  (((o69 = get_value({ us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters = sfun1;
   rec__step_function__step_function_t__step = sfun11 } },
-  to_rep2((((merge__split_fields7[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
+  to_rep2(((((merge__split_fields12).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
   (tqtisFinite(o69) and
-  ((exists i30:int. (((0 <= i30) and (i30 <= (to_rep1(sfun1) - 1))) and
-   (((to_rep2((((sfun11[i30])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2((((merge__split_fields7[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
-   (to_rep2((((merge__split_fields7[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[(i30 + 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
+  ((exists i3:int. (((0 <= i3) and (i3 <= (to_rep1(sfun1) - 1))) and
+   (((to_rep2((((sfun11[i3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2(((((merge__split_fields12).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
+   (to_rep2(((((merge__split_fields12).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[(i3 + 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
    eq(o69,
-   to_rep((((sfun11[i30])).us_split_fields1).rec__step_function__delimiter_entry__value))))) or
-  ((to_rep2((((sfun11[to_rep1(sfun1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2((((merge__split_fields7[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
+   to_rep((((sfun11[i3])).us_split_fields1).rec__step_function__delimiter_entry__value))))) or
+  ((to_rep2((((sfun11[to_rep1(sfun1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2(((((merge__split_fields12).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
   eq(o69,
-  to_rep((((sfun11[to_rep1(sfun1)])).us_split_fields1).rec__step_function__delimiter_entry__value))))))))
-
-axiom H62 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((o71 = min1(o69, o70)) and (tqtisFinite(o71) and ((le(o69, o70) -> eq(o71,
-  o69)) and ((not le(o69, o70)) -> eq(o71, o70)))))))
-
-axiom H63 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  (to_rep(o72) = o71)))
-
-axiom H64 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((o73 = (((merge__split_fields7[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) and
-  (o74 = o72))))
-
-axiom H65 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((o75 = o73) and (o76 = o74))))
-
-axiom H66 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  (o77 = (merge__split_fields7[im2 <- { us_split_fields1 = {
-  rec__step_function__delimiter_entry__delimiter = o75;
-  rec__step_function__delimiter_entry__value = o76 } }]))))
-
-axiom H67 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((o78 = merge__split_fields6) and (o79 = o77))))
-
-axiom H68 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((temp___382 = o78) and (temp___3821 = o79))))
-
-axiom H69 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((result9 = merge__split_fields6) and (result10 = merge__split_fields7))))
-
-axiom H70 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((merge__split_fields8 = temp___382) and
-  (merge__split_fields9 = temp___3821))))
-
-axiom H71 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((((i12 <  to_rep1(sfun1)) -> ((i13 = (i12 + 1)) and
-  ((scan_sfun13 = true) <-> (scan_sfun12 = true)))) and
-  ((not (i12 <  to_rep1(sfun1))) -> ((i13 = i12) and
-  (not (scan_sfun13 = true))))) and in_range2(i13))))
-
-axiom H72 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  (scan_sfun23 = scan_sfun22)))
-
-axiom H73 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  (i23 = i22)))
-
-axiom H74 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  (to_rep2(o80) = to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)))))
-
-axiom H75 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((o81 = o80) and
-  (o82 = (((merge__split_fields5[im2])).us_split_fields1).rec__step_function__delimiter_entry__value)))))
-
-axiom H76 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((o83 = o81) and (o84 = o82)))))
-
-axiom H77 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  (o85 = (merge__split_fields5[im2 <- { us_split_fields1 = {
-  rec__step_function__delimiter_entry__delimiter = o83;
-  rec__step_function__delimiter_entry__value = o84 } }])))))
-
-axiom H78 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((o86 = merge__split_fields4) and (o87 = o85)))))
-
-axiom H79 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((temp___360 = o86) and (temp___3601 = o87)))))
-
-axiom H80 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((result11 = merge__split_fields4) and
-  (result12 = merge__split_fields5)))))
-
-axiom H81 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((merge__split_fields10 = temp___360) and
-  (merge__split_fields11 = temp___3601)))))
-
-axiom H82 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((o89 = get_value({ us_split_fields3 = {
+  to_rep((((sfun11[to_rep1(sfun1)])).us_split_fields1).rec__step_function__delimiter_entry__value)))))) and
+  ((o71 = min1(o69, o70)) and (tqtisFinite(o71) and ((le(o69, o70) and
+  eq(o71, o69)) or ((not le(o69, o70)) and eq(o71, o70))))))) and
+  (to_rep(o72) = o71)) and (o73 = {
+  rec__step_function__delimiter_entry__delimiter =
+  ((((merge__split_fields12).rec__step_function__step_function_t__step[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter;
+  rec__step_function__delimiter_entry__value = o72 })) and (o74 = {
+  us_split_fields1 = o73 })) and
+  (o75 = ((merge__split_fields12).rec__step_function__step_function_t__step[im2 <- o74]))) and
+  (o76 = { rec__step_function__step_function_t__number_of_delimiters =
+  (merge__split_fields12).rec__step_function__step_function_t__number_of_delimiters;
+  rec__step_function__step_function_t__step = o75 })) and (temp___353 = {
+  us_split_fields3 = o76 })) and ((result15 = { us_split_fields__content1 =
+  merge__split_fields12 }) and
+  (merge__split_fields13 = (temp___353).us_split_fields3))) and
+  ((((i22 <  to_rep1(sfun2)) and ((i25 = (i22 + 1)) and
+  ((scan_sfun25 = true) <-> (scan_sfun22 = true)))) or
+  ((not (i22 <  to_rep1(sfun2))) and ((i25 = i22) and
+  (not (scan_sfun25 = true))))) and in_range2(i25)))) and
+  ((scan_sfun15 = scan_sfun12) and ((i15 = i12) and
+  (merge__split_fields11 = merge__split_fields13)))))) and
+  ((scan_sfun23 = scan_sfun25) and ((scan_sfun13 = scan_sfun15) and
+  ((i23 = i25) and ((i13 = i15) and
+  (merge__split_fields5 = merge__split_fields11)))))))) and (((im3 = {
+  int__content = im2 }) and (im4 = im2)) and (not (match_bool(scan_sfun13,
+  true, scan_sfun23) = true))))))))))))) and (((scan_sfun26 = {
+  bool__content = scan_sfun23 }) and ((scan_sfun16 = { bool__content =
+  scan_sfun13 }) and ((im5 = im3) and ((i26 = { int__content = i23 }) and
+  ((i16 = { int__content = i13 }) and (merge__split_fields14 = {
+  us_split_fields__content1 = merge__split_fields5 })))))) and
+  ((scan_sfun27 = scan_sfun23) and ((scan_sfun17 = scan_sfun13) and
+  ((im6 = im4) and ((i27 = i23) and ((i17 = i13) and
+  (merge__split_fields15 = merge__split_fields5)))))))) and
+  (((scan_sfun28 = scan_sfun26) and ((scan_sfun18 = scan_sfun16) and
+  ((im7 = im5) and ((i28 = i26) and ((i18 = i16) and
+  (merge__split_fields16 = merge__split_fields14)))))) and
+  ((scan_sfun29 = scan_sfun27) and ((scan_sfun19 = scan_sfun17) and
+  ((im8 = im6) and ((i29 = i27) and ((i19 = i17) and
+  (merge__split_fields17 = merge__split_fields15)))))))) and
+  ((((to_rep1(o77) = (im7).int__content) and (o78 = {
+  rec__step_function__step_function_t__number_of_delimiters = o77;
+  rec__step_function__step_function_t__step =
+  ((merge__split_fields16).us_split_fields__content1).rec__step_function__step_function_t__step
+  })) and (temp___478 = { us_split_fields3 = o78 })) and
+  ((result16 = merge__split_fields16) and
+  (merge__split_fields18 = (temp___478).us_split_fields3)))))))))))) and
+  (((scan_sfun210 = scan_sfun28) and ((scan_sfun110 = scan_sfun18) and
+  ((im9 = im7) and ((i210 = i28) and ((i110 = i18) and
+  (merge__split_fields19 = { us_split_fields__content1 =
+  merge__split_fields18 })))))) and ((scan_sfun211 = scan_sfun29) and
+  ((scan_sfun111 = scan_sfun19) and ((im10 = im8) and ((i211 = i29) and
+  ((i111 = i19) and (merge__split_fields20 = merge__split_fields18)))))))) ->
+  (((0 <= i) and
+  (i <= to_rep1(((merge__split_fields19).us_split_fields__content1).rec__step_function__step_function_t__number_of_delimiters))) ->
+  ((((((((0 <= i) and (i <= 10)) and (o79 = i)) and
+  (o80 = (((merge__split_fields19).us_split_fields__content1).rec__step_function__step_function_t__step[o79]))) and
+  (o81 = (o80).us_split_fields1)) and
+  (o82 = (o81).rec__step_function__delimiter_entry__delimiter)) and
+  (o83 = to_rep2(o82))) -> (is_valid({ us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters = sfun2;
-  rec__step_function__step_function_t__step = sfun21 } },
-  to_rep2((((merge__split_fields11[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
-  (tqtisFinite(o89) and
-  ((exists i30:int. (((0 <= i30) and (i30 <= (to_rep1(sfun2) - 1))) and
-   (((to_rep2((((sfun21[i30])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2((((merge__split_fields11[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
-   (to_rep2((((merge__split_fields11[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[(i30 + 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
-   eq(o89,
-   to_rep((((sfun21[i30])).us_split_fields1).rec__step_function__delimiter_entry__value))))) or
-  ((to_rep2((((sfun21[to_rep1(sfun2)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2((((merge__split_fields11[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
-  eq(o89,
-  to_rep((((sfun21[to_rep1(sfun2)])).us_split_fields1).rec__step_function__delimiter_entry__value)))))))))
-
-axiom H83 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((o88 = get_value({ us_split_fields3 = {
-  rec__step_function__step_function_t__number_of_delimiters = sfun1;
-  rec__step_function__step_function_t__step = sfun11 } },
-  to_rep2((((merge__split_fields11[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
-  (tqtisFinite(o88) and
-  ((exists i30:int. (((0 <= i30) and (i30 <= (to_rep1(sfun1) - 1))) and
-   (((to_rep2((((sfun11[i30])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2((((merge__split_fields11[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
-   (to_rep2((((merge__split_fields11[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[(i30 + 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
-   eq(o88,
-   to_rep((((sfun11[i30])).us_split_fields1).rec__step_function__delimiter_entry__value))))) or
-  ((to_rep2((((sfun11[to_rep1(sfun1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2((((merge__split_fields11[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
-  eq(o88,
-  to_rep((((sfun11[to_rep1(sfun1)])).us_split_fields1).rec__step_function__delimiter_entry__value)))))))))
-
-axiom H84 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((o90 = min1(o88, o89)) and (tqtisFinite(o90) and ((le(o88, o89) -> eq(o90,
-  o88)) and ((not le(o88, o89)) -> eq(o90, o89))))))))
-
-axiom H85 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  (to_rep(o91) = o90))))
-
-axiom H86 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((o92 = (((merge__split_fields11[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) and
-  (o93 = o91)))))
-
-axiom H87 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((o94 = o92) and (o95 = o93)))))
-
-axiom H88 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  (o96 = (merge__split_fields11[im2 <- { us_split_fields1 = {
-  rec__step_function__delimiter_entry__delimiter = o94;
-  rec__step_function__delimiter_entry__value = o95 } }])))))
-
-axiom H89 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((o97 = merge__split_fields10) and (o98 = o96)))))
-
-axiom H90 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((temp___367 = o97) and (temp___3671 = o98)))))
-
-axiom H91 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((result13 = merge__split_fields10) and
-  (result14 = merge__split_fields11)))))
-
-axiom H92 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((merge__split_fields12 = temp___367) and
-  (merge__split_fields13 = temp___3671)))))
-
-axiom H93 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  ((((i22 <  to_rep1(sfun2)) -> ((i23 = (i22 + 1)) and
-  ((scan_sfun23 = true) <-> (scan_sfun22 = true)))) and
-  ((not (i22 <  to_rep1(sfun2))) -> ((i23 = i22) and
-  (not (scan_sfun23 = true))))) and in_range2(i23)))))
-
-axiom H94 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  (scan_sfun14 = scan_sfun12))))
-
-axiom H95 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) ->
-  (i14 = i12))))
-
-axiom H96 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((not (to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  (to_rep2(o99) = to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)))))
-
-axiom H97 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((not (to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((o100 = o99) and
-  (o101 = (((merge__split_fields5[im2])).us_split_fields1).rec__step_function__delimiter_entry__value)))))
-
-axiom H98 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((not (to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((o102 = o100) and (o103 = o101)))))
-
-axiom H99 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((not (to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  (o104 = (merge__split_fields5[im2 <- { us_split_fields1 = {
-  rec__step_function__delimiter_entry__delimiter = o102;
-  rec__step_function__delimiter_entry__value = o103 } }])))))
-
-axiom H100 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((not (to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((o105 = merge__split_fields4) and (o106 = o104)))))
-
-axiom H101 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((not (to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((temp___345 = o105) and (temp___3451 = o106)))))
-
-axiom H102 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((not (to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((result15 = merge__split_fields4) and
-  (result16 = merge__split_fields5)))))
-
-axiom H103 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((not (to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((merge__split_fields14 = temp___345) and
-  (merge__split_fields15 = temp___3451)))))
-
-axiom H104 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((not (to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((o108 = get_value({ us_split_fields3 = {
-  rec__step_function__step_function_t__number_of_delimiters = sfun2;
-  rec__step_function__step_function_t__step = sfun21 } },
-  to_rep2((((merge__split_fields15[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
-  (tqtisFinite(o108) and
-  ((exists i30:int. (((0 <= i30) and (i30 <= (to_rep1(sfun2) - 1))) and
-   (((to_rep2((((sfun21[i30])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2((((merge__split_fields15[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
-   (to_rep2((((merge__split_fields15[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[(i30 + 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
-   eq(o108,
-   to_rep((((sfun21[i30])).us_split_fields1).rec__step_function__delimiter_entry__value))))) or
-  ((to_rep2((((sfun21[to_rep1(sfun2)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2((((merge__split_fields15[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
-  eq(o108,
-  to_rep((((sfun21[to_rep1(sfun2)])).us_split_fields1).rec__step_function__delimiter_entry__value)))))))))
-
-axiom H105 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((not (to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((o107 = get_value({ us_split_fields3 = {
-  rec__step_function__step_function_t__number_of_delimiters = sfun1;
-  rec__step_function__step_function_t__step = sfun11 } },
-  to_rep2((((merge__split_fields15[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
-  (tqtisFinite(o107) and
-  ((exists i30:int. (((0 <= i30) and (i30 <= (to_rep1(sfun1) - 1))) and
-   (((to_rep2((((sfun11[i30])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2((((merge__split_fields15[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
-   (to_rep2((((merge__split_fields15[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[(i30 + 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
-   eq(o107,
-   to_rep((((sfun11[i30])).us_split_fields1).rec__step_function__delimiter_entry__value))))) or
-  ((to_rep2((((sfun11[to_rep1(sfun1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2((((merge__split_fields15[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
-  eq(o107,
-  to_rep((((sfun11[to_rep1(sfun1)])).us_split_fields1).rec__step_function__delimiter_entry__value)))))))))
-
-axiom H106 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((not (to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((o109 = min1(o107, o108)) and (tqtisFinite(o109) and ((le(o107, o108) ->
-  eq(o109, o107)) and ((not le(o107, o108)) -> eq(o109, o108))))))))
-
-axiom H107 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((not (to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  (to_rep(o110) = o109))))
-
-axiom H108 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((not (to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((o111 = (((merge__split_fields15[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) and
-  (o112 = o110)))))
-
-axiom H109 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((not (to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((o113 = o111) and (o114 = o112)))))
-
-axiom H110 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((not (to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  (o115 = (merge__split_fields15[im2 <- { us_split_fields1 = {
-  rec__step_function__delimiter_entry__delimiter = o113;
-  rec__step_function__delimiter_entry__value = o114 } }])))))
-
-axiom H111 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((not (to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((o116 = merge__split_fields14) and (o117 = o115)))))
-
-axiom H112 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((not (to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((temp___352 = o116) and (temp___3521 = o117)))))
-
-axiom H113 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((not (to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((result17 = merge__split_fields14) and
-  (result18 = merge__split_fields15)))))
-
-axiom H114 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((not (to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((merge__split_fields16 = temp___352) and
-  (merge__split_fields17 = temp___3521)))))
-
-axiom H115 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((not (to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((((i12 <  to_rep1(sfun1)) -> ((i14 = (i12 + 1)) and
-  ((scan_sfun14 = true) <-> (scan_sfun12 = true)))) and
-  ((not (i12 <  to_rep1(sfun1))) -> ((i14 = i12) and
-  (not (scan_sfun14 = true))))) and in_range2(i14)))))
-
-axiom H116 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((not (to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((((i22 <  to_rep1(sfun2)) -> ((i24 = (i22 + 1)) and
-  ((scan_sfun24 = true) <-> (scan_sfun22 = true)))) and
-  ((not (i22 <  to_rep1(sfun2))) -> ((i24 = i22) and
-  (not (scan_sfun24 = true))))) and in_range2(i24)))))
-
-axiom H117 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((not (to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  (scan_sfun23 = scan_sfun24))))
-
-axiom H118 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((not (to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  (i23 = i24))))
-
-axiom H119 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((not (to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((merge__split_fields12 = merge__split_fields16) and
-  (merge__split_fields13 = merge__split_fields17)))))
-
-axiom H120 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  (scan_sfun13 = scan_sfun14)))
-
-axiom H121 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  (i13 = i14)))
-
-axiom H122 : (((scan_sfun12 = true) and (scan_sfun22 = true)) ->
-  ((not (to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) ->
-  ((merge__split_fields8 = merge__split_fields12) and
-  (merge__split_fields9 = merge__split_fields13))))
-
-axiom H123 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((scan_sfun12 = true) ->
-  (to_rep2(o118) = to_rep2((((sfun11[i12])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))))
-
-axiom H124 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((scan_sfun12 = true) -> ((o119 = o118) and
-  (o120 = (((merge__split_fields5[im2])).us_split_fields1).rec__step_function__delimiter_entry__value))))
-
-axiom H125 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((scan_sfun12 = true) -> ((o121 = o119) and (o122 = o120))))
-
-axiom H126 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((scan_sfun12 = true) -> (o123 = (merge__split_fields5[im2 <- {
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter = o121;
-  rec__step_function__delimiter_entry__value = o122 } }]))))
-
-axiom H127 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((scan_sfun12 = true) -> ((o124 = merge__split_fields4) and
-  (o125 = o123))))
-
-axiom H128 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((scan_sfun12 = true) -> ((temp___332 = o124) and (temp___3321 = o125))))
-
-axiom H129 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((scan_sfun12 = true) -> ((result19 = merge__split_fields4) and
-  (result20 = merge__split_fields5))))
-
-axiom H130 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((scan_sfun12 = true) -> ((merge__split_fields18 = temp___332) and
-  (merge__split_fields19 = temp___3321))))
-
-axiom H131 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((scan_sfun12 = true) -> ((o127 = get_value({ us_split_fields3 = {
-  rec__step_function__step_function_t__number_of_delimiters = sfun2;
-  rec__step_function__step_function_t__step = sfun21 } },
-  to_rep2((((merge__split_fields19[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
-  (tqtisFinite(o127) and
-  ((exists i30:int. (((0 <= i30) and (i30 <= (to_rep1(sfun2) - 1))) and
-   (((to_rep2((((sfun21[i30])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2((((merge__split_fields19[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
-   (to_rep2((((merge__split_fields19[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[(i30 + 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
-   eq(o127,
-   to_rep((((sfun21[i30])).us_split_fields1).rec__step_function__delimiter_entry__value))))) or
-  ((to_rep2((((sfun21[to_rep1(sfun2)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2((((merge__split_fields19[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
-  eq(o127,
-  to_rep((((sfun21[to_rep1(sfun2)])).us_split_fields1).rec__step_function__delimiter_entry__value))))))))
-
-axiom H132 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((scan_sfun12 = true) -> ((o126 = get_value({ us_split_fields3 = {
-  rec__step_function__step_function_t__number_of_delimiters = sfun1;
-  rec__step_function__step_function_t__step = sfun11 } },
-  to_rep2((((merge__split_fields19[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
-  (tqtisFinite(o126) and
-  ((exists i30:int. (((0 <= i30) and (i30 <= (to_rep1(sfun1) - 1))) and
-   (((to_rep2((((sfun11[i30])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2((((merge__split_fields19[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
-   (to_rep2((((merge__split_fields19[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[(i30 + 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
-   eq(o126,
-   to_rep((((sfun11[i30])).us_split_fields1).rec__step_function__delimiter_entry__value))))) or
-  ((to_rep2((((sfun11[to_rep1(sfun1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2((((merge__split_fields19[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
-  eq(o126,
-  to_rep((((sfun11[to_rep1(sfun1)])).us_split_fields1).rec__step_function__delimiter_entry__value))))))))
-
-axiom H133 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((scan_sfun12 = true) -> ((o128 = min1(o126, o127)) and
-  (tqtisFinite(o128) and ((le(o126, o127) -> eq(o128, o126)) and
-  ((not le(o126, o127)) -> eq(o128, o127)))))))
-
-axiom H134 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((scan_sfun12 = true) -> (to_rep(o129) = o128)))
-
-axiom H135 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((scan_sfun12 = true) ->
-  ((o130 = (((merge__split_fields19[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) and
-  (o131 = o129))))
-
-axiom H136 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((scan_sfun12 = true) -> ((o132 = o130) and (o133 = o131))))
-
-axiom H137 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((scan_sfun12 = true) -> (o134 = (merge__split_fields19[im2 <- {
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter = o132;
-  rec__step_function__delimiter_entry__value = o133 } }]))))
-
-axiom H138 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((scan_sfun12 = true) -> ((o135 = merge__split_fields18) and
-  (o136 = o134))))
-
-axiom H139 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((scan_sfun12 = true) -> ((temp___339 = o135) and (temp___3391 = o136))))
-
-axiom H140 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((scan_sfun12 = true) -> ((result21 = merge__split_fields18) and
-  (result22 = merge__split_fields19))))
-
-axiom H141 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((scan_sfun12 = true) -> ((merge__split_fields20 = temp___339) and
-  (merge__split_fields21 = temp___3391))))
-
-axiom H142 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((scan_sfun12 = true) -> ((((i12 <  to_rep1(sfun1)) ->
-  ((i15 = (i12 + 1)) and ((scan_sfun15 = true) <->
-  (scan_sfun12 = true)))) and ((not (i12 <  to_rep1(sfun1))) ->
-  ((i15 = i12) and (not (scan_sfun15 = true))))) and in_range2(i15))))
-
-axiom H143 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((scan_sfun12 = true) -> (scan_sfun25 = scan_sfun22)))
-
-axiom H144 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((scan_sfun12 = true) -> (i25 = i22)))
-
-axiom H145 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((not (scan_sfun12 = true)) ->
-  (to_rep2(o137) = to_rep2((((sfun21[i22])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))))
-
-axiom H146 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((not (scan_sfun12 = true)) -> ((o138 = o137) and
-  (o139 = (((merge__split_fields5[im2])).us_split_fields1).rec__step_function__delimiter_entry__value))))
-
-axiom H147 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((not (scan_sfun12 = true)) -> ((o140 = o138) and (o141 = o139))))
-
-axiom H148 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((not (scan_sfun12 = true)) -> (o142 = (merge__split_fields5[im2 <- {
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter = o140;
-  rec__step_function__delimiter_entry__value = o141 } }]))))
-
-axiom H149 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((not (scan_sfun12 = true)) -> ((o143 = merge__split_fields4) and
-  (o144 = o142))))
-
-axiom H150 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((not (scan_sfun12 = true)) -> ((temp___319 = o143) and
-  (temp___3191 = o144))))
-
-axiom H151 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((not (scan_sfun12 = true)) -> ((result23 = merge__split_fields4) and
-  (result24 = merge__split_fields5))))
-
-axiom H152 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((not (scan_sfun12 = true)) -> ((merge__split_fields22 = temp___319) and
-  (merge__split_fields23 = temp___3191))))
-
-axiom H153 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((not (scan_sfun12 = true)) -> ((o146 = get_value({ us_split_fields3 = {
-  rec__step_function__step_function_t__number_of_delimiters = sfun2;
-  rec__step_function__step_function_t__step = sfun21 } },
-  to_rep2((((merge__split_fields23[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
-  (tqtisFinite(o146) and
-  ((exists i30:int. (((0 <= i30) and (i30 <= (to_rep1(sfun2) - 1))) and
-   (((to_rep2((((sfun21[i30])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2((((merge__split_fields23[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
-   (to_rep2((((merge__split_fields23[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun21[(i30 + 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
-   eq(o146,
-   to_rep((((sfun21[i30])).us_split_fields1).rec__step_function__delimiter_entry__value))))) or
-  ((to_rep2((((sfun21[to_rep1(sfun2)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2((((merge__split_fields23[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
-  eq(o146,
-  to_rep((((sfun21[to_rep1(sfun2)])).us_split_fields1).rec__step_function__delimiter_entry__value))))))))
-
-axiom H154 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((not (scan_sfun12 = true)) -> ((o145 = get_value({ us_split_fields3 = {
-  rec__step_function__step_function_t__number_of_delimiters = sfun1;
-  rec__step_function__step_function_t__step = sfun11 } },
-  to_rep2((((merge__split_fields23[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
-  (tqtisFinite(o145) and
-  ((exists i30:int. (((0 <= i30) and (i30 <= (to_rep1(sfun1) - 1))) and
-   (((to_rep2((((sfun11[i30])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2((((merge__split_fields23[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
-   (to_rep2((((merge__split_fields23[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[(i30 + 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))) and
-   eq(o145,
-   to_rep((((sfun11[i30])).us_split_fields1).rec__step_function__delimiter_entry__value))))) or
-  ((to_rep2((((sfun11[to_rep1(sfun1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= to_rep2((((merge__split_fields23[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
-  eq(o145,
-  to_rep((((sfun11[to_rep1(sfun1)])).us_split_fields1).rec__step_function__delimiter_entry__value))))))))
-
-axiom H155 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((not (scan_sfun12 = true)) -> ((o147 = min1(o145, o146)) and
-  (tqtisFinite(o147) and ((le(o145, o146) -> eq(o147, o145)) and
-  ((not le(o145, o146)) -> eq(o147, o146)))))))
-
-axiom H156 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((not (scan_sfun12 = true)) -> (to_rep(o148) = o147)))
-
-axiom H157 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((not (scan_sfun12 = true)) ->
-  ((o149 = (((merge__split_fields23[im2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) and
-  (o150 = o148))))
-
-axiom H158 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((not (scan_sfun12 = true)) -> ((o151 = o149) and (o152 = o150))))
-
-axiom H159 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((not (scan_sfun12 = true)) -> (o153 = (merge__split_fields23[im2 <- {
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter = o151;
-  rec__step_function__delimiter_entry__value = o152 } }]))))
-
-axiom H160 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((not (scan_sfun12 = true)) -> ((o154 = merge__split_fields22) and
-  (o155 = o153))))
-
-axiom H161 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((not (scan_sfun12 = true)) -> ((temp___326 = o154) and
-  (temp___3261 = o155))))
-
-axiom H162 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((not (scan_sfun12 = true)) -> ((result25 = merge__split_fields22) and
-  (result26 = merge__split_fields23))))
-
-axiom H163 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((not (scan_sfun12 = true)) -> ((merge__split_fields24 = temp___326) and
-  (merge__split_fields25 = temp___3261))))
-
-axiom H164 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((not (scan_sfun12 = true)) -> ((((i22 <  to_rep1(sfun2)) ->
-  ((i25 = (i22 + 1)) and ((scan_sfun25 = true) <->
-  (scan_sfun22 = true)))) and ((not (i22 <  to_rep1(sfun2))) ->
-  ((i25 = i22) and (not (scan_sfun25 = true))))) and in_range2(i25))))
-
-axiom H165 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((not (scan_sfun12 = true)) -> (scan_sfun15 = scan_sfun12)))
-
-axiom H166 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((not (scan_sfun12 = true)) -> (i15 = i12)))
-
-axiom H167 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((not (scan_sfun12 = true)) ->
-  ((merge__split_fields20 = merge__split_fields24) and
-  (merge__split_fields21 = merge__split_fields25))))
-
-axiom H168 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  (scan_sfun23 = scan_sfun25))
-
-axiom H169 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  (scan_sfun13 = scan_sfun15))
-
-axiom H170 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  (i23 = i25))
-
-axiom H171 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  (i13 = i15))
-
-axiom H172 : ((not ((scan_sfun12 = true) and (scan_sfun22 = true))) ->
-  ((merge__split_fields8 = merge__split_fields20) and
-  (merge__split_fields9 = merge__split_fields21)))
-
-axiom H173 : (im4 = im2)
-
-axiom H174 : (im5 = im2)
-
-axiom H175 : (not (match_bool(scan_sfun13, true, scan_sfun23) = true))
-
-axiom H176 : (scan_sfun26 = scan_sfun23)
-
-axiom H177 : (scan_sfun16 = scan_sfun13)
-
-axiom H178 : (im6 = im4)
-
-axiom H179 : (i26 = i23)
-
-axiom H180 : (i16 = i13)
-
-axiom H181 : ((merge__split_fields28 = merge__split_fields8) and
-  (merge__split_fields29 = merge__split_fields9))
-
-axiom H182 : (scan_sfun27 = scan_sfun23)
-
-axiom H183 : (scan_sfun17 = scan_sfun13)
-
-axiom H184 : (im7 = im5)
-
-axiom H185 : (i27 = i23)
-
-axiom H186 : (i17 = i13)
-
-axiom H187 : ((merge__split_fields30 = merge__split_fields8) and
-  (merge__split_fields31 = merge__split_fields9))
-
-axiom H188 : (scan_sfun28 = scan_sfun26)
-
-axiom H189 : (scan_sfun18 = scan_sfun16)
-
-axiom H190 : (im8 = im6)
-
-axiom H191 : (i28 = i26)
-
-axiom H192 : (i18 = i16)
-
-axiom H193 : ((merge__split_fields32 = merge__split_fields28) and
-  (merge__split_fields33 = merge__split_fields29))
-
-axiom H194 : (scan_sfun29 = scan_sfun27)
-
-axiom H195 : (scan_sfun19 = scan_sfun17)
-
-axiom H196 : (im9 = im7)
-
-axiom H197 : (i29 = i27)
-
-axiom H198 : (i19 = i17)
-
-axiom H199 : ((merge__split_fields34 = merge__split_fields30) and
-  (merge__split_fields35 = merge__split_fields31))
-
-axiom H200 : (to_rep1(o166) = im8)
-
-axiom H201 : ((o167 = o166) and (o168 = merge__split_fields33))
-
-axiom H202 : ((temp___451 = o167) and (temp___4511 = o168))
-
-axiom H203 : ((result30 = merge__split_fields32) and
-  (result31 = merge__split_fields33))
-
-axiom H204 : ((merge__split_fields36 = temp___451) and
-  (merge__split_fields37 = temp___4511))
-
-axiom H205 : (scan_sfun210 = scan_sfun28)
-
-axiom H206 : (scan_sfun110 = scan_sfun18)
-
-axiom H207 : (im10 = im8)
-
-axiom H208 : (i210 = i28)
-
-axiom H209 : (i110 = i18)
-
-axiom H210 : ((merge__split_fields38 = merge__split_fields36) and
-  (merge__split_fields39 = merge__split_fields37))
-
-axiom H211 : (scan_sfun211 = scan_sfun29)
-
-axiom H212 : (scan_sfun111 = scan_sfun19)
-
-axiom H213 : (im11 = im9)
-
-axiom H214 : (i211 = i29)
-
-axiom H215 : (i111 = i19)
-
-axiom H216 : ((merge__split_fields40 = merge__split_fields36) and
-  (merge__split_fields41 = merge__split_fields37))
-
-axiom H217 : (0 <= i10)
-
-axiom H218 : (i10 <= to_rep1(merge__split_fields38))
-
-axiom H219 : ((0 <= i10) and (i10 <= 10))
-
-axiom H220 : (o192 = i10)
-
-axiom H221 : ({ us_split_fields1 = {
-  rec__step_function__delimiter_entry__delimiter = o193;
-  rec__step_function__delimiter_entry__value = o194 }
-  } = (merge__split_fields39[o192]))
-
-axiom H222 : ((o195 = o193) and (o196 = o194))
-
-axiom H223 : (o197 = o195)
-
-axiom H224 : (o198 = to_rep2(o197))
-
- (* File "step_function.ads", line 89, characters 0-0 *)
-goal WP_parameter_def : (is_valid({ us_split_fields3 = {
-  rec__step_function__step_function_t__number_of_delimiters = sfun2;
-  rec__step_function__step_function_t__step = sfun21 } }) = true)
+  rec__step_function__step_function_t__step = sfun21 } }) = true))))))

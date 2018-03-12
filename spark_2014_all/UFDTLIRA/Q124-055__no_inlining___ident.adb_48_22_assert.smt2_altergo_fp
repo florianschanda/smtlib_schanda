@@ -185,73 +185,15 @@ logic c8b : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic x : int
-
-logic y : int
-
-logic res : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic x1 : int
-
-logic result1 : int
-
-logic res1 : int
-
-logic result2 : int
-
-logic res2 : int
-
-logic result3 : int
-
-logic res3 : int
-
-logic y1 : int
-
-logic y2 : int
-
-logic result4 : int
-
-logic y3 : int
-
-axiom H : (result = x)
-
-axiom H1 : (x1 = 10)
-
-axiom H2 : in_range2(x1)
-
-axiom H3 : ((0 <= 2147483647) -> in_range1(y))
-
-axiom H4 : (((- 2147483648) <= 2147483647) -> in_range(res))
-
-axiom H5 : ((o = id_public(x1)) and in_range(o))
-
-axiom H6 : (result1 = res)
-
-axiom H7 : (res1 = o)
-
-axiom H8 : (res1 = x1)
-
-axiom H9 : ((o1 = id_private(x1)) and in_range(o1))
-
-axiom H10 : (result2 = res1)
-
-axiom H11 : (res2 = o1)
-
-axiom H12 : (res2 = x1)
-
-axiom H13 : (x1 = c5b)
-
-axiom H14 : in_range(c5b)
-
-axiom H15 : (result3 = res2)
-
-axiom H16 : (res3 = c5b)
-
  (* File "ident.adb", line 23, characters 0-0 *)
-goal WP_parameter_def : (res3 = x1)
+goal WP_parameter_def :
+  (forall x:int. forall y:int. forall res:int. forall o:int. forall o1:int.
+  forall result:int. forall x1:int. forall result1:int. forall res1:int.
+  forall result2:int. forall res2:int. forall result3:int. forall res3:int.
+  (((result = x) and (x1 = 10)) -> (in_range2(x1) -> (((0 <= 2147483647) ->
+  in_range1(y)) -> ((((- 2147483648) <= 2147483647) -> in_range(res)) ->
+  ((((o = id_public(x1)) and in_range(o)) and ((result1 = res) and
+  (res1 = o))) -> ((res1 = x1) -> ((((o1 = id_private(x1)) and
+  in_range(o1)) and ((result2 = res1) and (res2 = o1))) -> ((res2 = x1) ->
+  (((x1 = c5b) and in_range(c5b)) -> (((result3 = res2) and (res3 = c5b)) ->
+  (res3 = x1))))))))))))

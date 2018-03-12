@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1556,8 +1556,8 @@ axiom elements__post_axiom :
   us_split_discrs1 = { rec__use_sets__my_sets__set__capacity = container;
   rec__use_sets__my_sets__set__modulus = container1 }; us_split_fields1 = {
   rec__use_sets__my_sets__set = container2 } })) and
-  (forall temp___429:int. ((in_range5(temp___429) and ((1 <= temp___429) and
-  (temp___429 <= (0 + length3(elements({ us_split_discrs1 = {
+  (forall temp___471:int. ((in_range5(temp___471) and ((1 <= temp___471) and
+  (temp___471 <= (0 + length3(elements({ us_split_discrs1 = {
   rec__use_sets__my_sets__set__capacity = container;
   rec__use_sets__my_sets__set__modulus = container1 }; us_split_fields1 = {
   rec__use_sets__my_sets__set = container2 } })))))) -> (contains(model__({
@@ -1566,7 +1566,7 @@ axiom elements__post_axiom :
   rec__use_sets__my_sets__set = container2 } }), get(elements({
   us_split_discrs1 = { rec__use_sets__my_sets__set__capacity = container;
   rec__use_sets__my_sets__set__modulus = container1 }; us_split_fields1 = {
-  rec__use_sets__my_sets__set = container2 } }), temp___429)) = true)))) and
+  rec__use_sets__my_sets__set = container2 } }), temp___471)) = true)))) and
   (forall item:int. ((in_range3(item) and (contains(model__({
   us_split_discrs1 = { rec__use_sets__my_sets__set__capacity = container;
   rec__use_sets__my_sets__set__modulus = container1 }; us_split_fields1 = {
@@ -1995,124 +1995,21 @@ axiom w_get__post_axiom :
   ((in_range2(witness1) and (has_witness(container, witness1) = true)) ->
   in_range7(w_get(container, witness1)))))
 
-logic s1__split_fields : us_main_type
-
-logic s2__split_fields : us_main_type
-
-logic cu__split_fields : count_type
-
-logic use_sets__move__cu__assume : count_type
-
-logic temp___941 : int
-
-logic temp___945 : us_rep2
-
-logic temp___940 : count_type
-
-logic temp___9401 : hash_type
-
-logic temp___9402 : us_main_type
-
-logic temp___944 : us_rep2
-
-logic temp___939 : count_type
-
-logic temp___9391 : hash_type
-
-logic temp___9392 : us_main_type
-
-logic temp___943 : us_rep2
-
-logic temp___938 : count_type
-
-logic temp___942 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic temp___937 : count_type
-
-logic o5 : bool
-
-logic s1__split_fields1 : us_main_type
-
-logic result : count_type
-
-logic cu__split_fields1 : count_type
-
-logic s2__split_fields1 : us_main_type
-
-logic result1 : bool
-
-logic s1__split_fields2 : us_main_type
-
-logic s2__split_fields2 : us_main_type
-
-logic cu__split_fields2 : count_type
-
-logic s2__split_fields3 : us_main_type
-
-logic s1__split_fields3 : us_main_type
-
-logic result2 : count_type
-
-logic cu__split_fields3 : count_type
-
-logic result3 : bool
-
-logic s1__split_fields4 : us_main_type
-
-logic s2__split_fields4 : us_main_type
-
-logic cu__split_fields4 : count_type
-
-logic s1__split_fields5 : us_main_type
-
-logic s2__split_fields5 : us_main_type
-
-logic cu__split_fields5 : count_type
-
-logic s1__split_fields6 : us_main_type
-
-logic s2__split_fields6 : us_main_type
-
-logic cu__split_fields6 : count_type
-
-logic s1__split_fields7 : us_main_type
-
-logic s2__split_fields7 : us_main_type
-
-logic cu__split_fields7 : count_type
-
-logic s1__split_fields8 : us_main_type
-
-logic s2__split_fields8 : us_main_type
-
-logic cu__split_fields8 : count_type
-
-logic s1__split_fields9 : us_main_type
-
-logic s2__split_fields9 : us_main_type
-
-logic cu__split_fields9 : count_type
-
-axiom H : (length({ us_split_discrs1 = {
+ (* File "use_sets.ads", line 44, characters 0-0 *)
+goal WP_parameter_def :
+  (forall s1__split_fields:us_main_type.
+  forall s2__split_fields:us_main_type. forall cu__split_fields:count_type.
+  forall use_sets__move__cu__assume:count_type. forall result:count_type.
+  forall cu__split_fields1:count_type. forall s2__split_fields1:us_main_type.
+  forall result1:bool. ((length({ us_split_discrs1 = {
   rec__use_sets__my_sets__set__capacity = s1__split_discrs;
   rec__use_sets__my_sets__set__modulus = s1__split_discrs1 };
   us_split_fields1 = { rec__use_sets__my_sets__set = s1__split_fields }
   }) <= capacity({ us_split_discrs1 = {
   rec__use_sets__my_sets__set__capacity = s2__split_discrs;
   rec__use_sets__my_sets__set__modulus = s2__split_discrs1 };
-  us_split_fields1 = { rec__use_sets__my_sets__set = s2__split_fields } }))
-
-axiom H1 : (({ us_split_fields3 = { rec__use_sets__my_sets__cursor__node =
+  us_split_fields1 = { rec__use_sets__my_sets__set = s2__split_fields }
+  })) -> (((({ us_split_fields3 = { rec__use_sets__my_sets__cursor__node =
   use_sets__move__cu__assume } } = first({ us_split_discrs1 = {
   rec__use_sets__my_sets__set__capacity = s1__split_discrs;
   rec__use_sets__my_sets__set__modulus = s1__split_discrs1 };
@@ -2121,14 +2018,14 @@ axiom H1 : (({ us_split_fields3 = { rec__use_sets__my_sets__cursor__node =
   rec__use_sets__my_sets__set__capacity = s1__split_discrs;
   rec__use_sets__my_sets__set__modulus = s1__split_discrs1 };
   us_split_fields1 = { rec__use_sets__my_sets__set = s1__split_fields } }),
-  0) = true) -> (bool_eq7({ us_split_fields3 = {
+  0) = true) and (bool_eq7({ us_split_fields3 = {
   rec__use_sets__my_sets__cursor__node = use_sets__move__cu__assume } }, {
   us_split_fields3 = { rec__use_sets__my_sets__cursor__node = no_element }
-  }) = true)) and ((not (bool_eq1(length({ us_split_discrs1 = {
+  }) = true)) or ((not (bool_eq1(length({ us_split_discrs1 = {
   rec__use_sets__my_sets__set__capacity = s1__split_discrs;
   rec__use_sets__my_sets__set__modulus = s1__split_discrs1 };
   us_split_fields1 = { rec__use_sets__my_sets__set = s1__split_fields } }),
-  0) = true)) -> ((has_key(positions({ us_split_discrs1 = {
+  0) = true)) and ((has_key(positions({ us_split_discrs1 = {
   rec__use_sets__my_sets__set__capacity = s1__split_discrs;
   rec__use_sets__my_sets__set__modulus = s1__split_discrs1 };
   us_split_fields1 = { rec__use_sets__my_sets__set = s1__split_fields } }), {
@@ -2138,23 +2035,19 @@ axiom H1 : (({ us_split_fields3 = { rec__use_sets__my_sets__cursor__node =
   s1__split_discrs; rec__use_sets__my_sets__set__modulus = s1__split_discrs1
   }; us_split_fields1 = { rec__use_sets__my_sets__set = s1__split_fields }
   }), { us_split_fields3 = { rec__use_sets__my_sets__cursor__node =
-  use_sets__move__cu__assume } }) = 1)))))
-
-axiom H2 : (result = cu__split_fields)
-
-axiom H3 : (cu__split_fields1 = use_sets__move__cu__assume)
-
-axiom H4 : ((length({ us_split_discrs1 = {
-  rec__use_sets__my_sets__set__capacity = s2__split_discrs;
-  rec__use_sets__my_sets__set__modulus = s2__split_discrs1 };
-  us_split_fields1 = { rec__use_sets__my_sets__set = s2__split_fields1 }
+  use_sets__move__cu__assume } }) = 1))))) and (({
+  us_split_fields__content1 = { rec__use_sets__my_sets__cursor__node = result
+  } } = { us_split_fields__content1 = {
+  rec__use_sets__my_sets__cursor__node = cu__split_fields } }) and
+  (use_sets__move__cu__assume = cu__split_fields1))) -> (((length({
+  us_split_discrs1 = { rec__use_sets__my_sets__set__capacity =
+  s2__split_discrs; rec__use_sets__my_sets__set__modulus = s2__split_discrs1
+  }; us_split_fields1 = { rec__use_sets__my_sets__set = s2__split_fields1 }
   }) = 0) and (is_empty(model__({ us_split_discrs1 = {
   rec__use_sets__my_sets__set__capacity = s2__split_discrs;
   rec__use_sets__my_sets__set__modulus = s2__split_discrs1 };
   us_split_fields1 = { rec__use_sets__my_sets__set = s2__split_fields1 }
-  })) = true))
-
-axiom H5 : ((result1 = has_key(positions({ us_split_discrs1 = {
+  })) = true)) -> (((result1 = has_key(positions({ us_split_discrs1 = {
   rec__use_sets__my_sets__set__capacity = s1__split_discrs;
   rec__use_sets__my_sets__set__modulus = s1__split_discrs1 };
   us_split_fields1 = { rec__use_sets__my_sets__set = s1__split_fields } }), {
@@ -2164,16 +2057,11 @@ axiom H5 : ((result1 = has_key(positions({ us_split_discrs1 = {
   s1__split_discrs; rec__use_sets__my_sets__set__modulus = s1__split_discrs1
   }; us_split_fields1 = { rec__use_sets__my_sets__set = s1__split_fields }
   }), { us_split_fields3 = { rec__use_sets__my_sets__cursor__node =
-  cu__split_fields1 } }) = true)))
-
-axiom H6 : (result1 = true)
-
- (* File "use_sets.ads", line 44, characters 0-0 *)
-goal WP_parameter_def : (ole(model__({ us_split_discrs1 = {
-  rec__use_sets__my_sets__set__capacity = s2__split_discrs;
-  rec__use_sets__my_sets__set__modulus = s2__split_discrs1 };
-  us_split_fields1 = { rec__use_sets__my_sets__set = s2__split_fields1 } }),
-  model__({ us_split_discrs1 = { rec__use_sets__my_sets__set__capacity =
+  cu__split_fields1 } }) = true))) -> ((result1 = true) -> (ole(model__({
+  us_split_discrs1 = { rec__use_sets__my_sets__set__capacity =
+  s2__split_discrs; rec__use_sets__my_sets__set__modulus = s2__split_discrs1
+  }; us_split_fields1 = { rec__use_sets__my_sets__set = s2__split_fields1 }
+  }), model__({ us_split_discrs1 = { rec__use_sets__my_sets__set__capacity =
   s1__split_discrs; rec__use_sets__my_sets__set__modulus = s1__split_discrs1
   }; us_split_fields1 = { rec__use_sets__my_sets__set = s1__split_fields }
-  })) = true)
+  })) = true)))))))

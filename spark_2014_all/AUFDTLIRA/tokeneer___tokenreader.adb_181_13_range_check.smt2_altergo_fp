@@ -186,24 +186,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -214,17 +196,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -234,37 +216,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 logic to_rep1 : integer -> int
 
@@ -360,6 +314,58 @@ type string__ref = { string__content : us_t
 
 function string__ref___projection(a: string__ref) : us_t =
   (a).string__content
+
+logic concat : (int,character) farray, int, int, (int,character) farray, int,
+  int -> (int,character) farray
+
+axiom concat_def :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic concat_singleton_left : character, int, (int,character) farray, int,
+  int -> (int,character) farray
+
+axiom concat_singleton_left_def :
+  (forall a:character.
+  (forall b:(int,character) farray.
+  (forall a_first:int. forall b_first:int. forall b_last:int
+  [concat_singleton_left(a, a_first, b, b_first, b_last)].
+  (((concat_singleton_left(a, a_first, b, b_first, b_last)[a_first]) = a) and
+  (forall i:int [(concat_singleton_left(a, a_first, b, b_first, b_last)[i])].
+  ((a_first <  i) -> ((concat_singleton_left(a, a_first, b, b_first,
+  b_last)[i]) = (b[((i - a_first) + (b_first - 1))]))))))))
+
+logic concat_singleton_right : (int,character) farray, int, int,
+  character -> (int,character) farray
+
+axiom concat_singleton_right_def :
+  (forall a:(int,character) farray.
+  (forall b:character.
+  (forall a_first:int. forall a_last:int [concat_singleton_right(a, a_first,
+  a_last, b)]. (((concat_singleton_right(a, a_first, a_last,
+  b)[(a_last + 1)]) = b) and
+  (forall i:int [(concat_singleton_right(a, a_first, a_last, b)[i])| (a[i])].
+  (((a_first <= i) and (i <= a_last)) -> ((concat_singleton_right(a, a_first,
+  a_last, b)[i]) = (a[i]))))))))
+
+logic concat_singletons : character, int, character -> (int,character) farray
+
+axiom concat_singletons_def :
+  (forall a:character. forall b:character.
+  (forall a_first:int [concat_singletons(a, a_first, b)].
+  (((concat_singletons(a, a_first, b)[a_first]) = a) and
+  ((concat_singletons(a, a_first, b)[(a_first + 1)]) = b))))
+
+logic singleton : character, int -> (int,character) farray
+
+axiom singleton_def :
+  (forall v:character.
+  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
 
 type unsigned32t
 
@@ -665,22 +671,22 @@ logic fullstring1 : t
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
-logic temp___String_Literal_179 : unit -> (int,character) farray
+logic temp___String_Literal_201 : unit -> (int,character) farray
 
-axiom temp___String_Literal_179__def_axiom :
-  ((to_rep((temp___String_Literal_179(void)[1])) = 58) and
-  (to_rep((temp___String_Literal_179(void)[2])) = 32))
+axiom temp___String_Literal_201__def_axiom :
+  ((to_rep((temp___String_Literal_201(void)[1])) = 58) and
+  (to_rep((temp___String_Literal_201(void)[2])) = 32))
 
-logic temp___String_Literal_183 : unit -> (int,character) farray
+logic temp___String_Literal_205 : unit -> (int,character) farray
 
-axiom temp___String_Literal_183__def_axiom :
-  ((to_rep((temp___String_Literal_183(void)[1])) = 32) and
-  (to_rep((temp___String_Literal_183(void)[2])) = 40))
+axiom temp___String_Literal_205__def_axiom :
+  ((to_rep((temp___String_Literal_205(void)[1])) = 32) and
+  (to_rep((temp___String_Literal_205(void)[2])) = 40))
 
-logic temp___String_Literal_188 : unit -> (int,character) farray
+logic temp___String_Literal_210 : unit -> (int,character) farray
 
-axiom temp___String_Literal_188__def_axiom :
-  (to_rep((temp___String_Literal_188(void)[1])) = 41)
+axiom temp___String_Literal_210__def_axiom :
+  (to_rep((temp___String_Literal_210(void)[1])) = 41)
 
 predicate dynamic_property3(first_int: int, last_int: int, x: int) =
   ((first_int <= x) and (x <= last_int))
@@ -784,378 +790,155 @@ type t18b__ref = { t18b__content : us_t3
 
 function t18b__ref___projection(a: t18b__ref) : us_t3 = (a).t18b__content
 
-logic result__ : (int,character) farray
-
-logic thecodename : int
-
-logic temp___1658 : (int,character) farray
-
-logic temp___16581 : t1
-
-logic temp___1654 : (int,character) farray
-
-logic temp___16541 : t1
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic temp___1653 : (int,character) farray
-
-logic temp___16531 : t
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic temp___1655 : (int,character) farray
-
-logic temp___16551 : t
-
-logic o12 : int
-
-logic o13 : int
-
-logic o14 : int
-
-logic o15 : int
-
-logic o16 : int
-
-logic o17 : int
-
-logic temp___1657 : (int,character) farray
-
-logic temp___16571 : t
-
-logic o18 : int
-
-logic o19 : int
-
-logic o20 : int
-
-logic o21 : int
-
-logic o22 : int
-
-logic o23 : int
-
-logic temp___1659 : (int,character) farray
-
-logic temp___16591 : t
-
-logic o24 : int
-
-logic o25 : int
-
-logic o26 : int
-
-logic o27 : int
-
-logic o28 : int
-
-logic o29 : int
-
-logic tokenreader__makedescription__setresultstring__fullstring__assume : (int,character) farray
-
-logic tokenreader__makedescription__setresultstring__fullstring__assume1 : t
-
-logic temp___1664 : (int,character) farray
-
-logic temp___16641 : t3
-
-logic o30 : (int,character) farray
-
-logic temp___1667 : (int,character) farray
-
-logic temp___16671 : t3
-
-axiom H : (dynamic_property1(1, 2147483647, to_rep1(first2(i17s1)),
+ (* File "audittypes.ads", line 103, characters 0-0 *)
+goal WP_parameter_def :
+  (forall thecodename:int. forall temp___1834:(int,character) farray.
+  forall temp___18341:t1. forall temp___1830:(int,character) farray.
+  forall temp___18301:t1. forall o:int. forall o1:int. forall o2:int.
+  forall o3:int. forall o4:int. forall o5:int.
+  forall temp___1829:(int,character) farray. forall temp___18291:t.
+  forall o6:int. forall o7:int. forall o8:int. forall o9:int. forall o10:int.
+  forall o11:int. forall temp___1831:(int,character) farray.
+  forall temp___18311:t. forall o12:int. forall o13:int. forall o14:int.
+  forall o15:int. forall o16:int. forall o17:int.
+  forall temp___1833:(int,character) farray. forall temp___18331:t.
+  forall o18:int. forall o19:int. forall o20:int. forall o21:int.
+  forall o22:int. forall o23:int. forall temp___1835:(int,character) farray.
+  forall temp___18351:t. forall o24:int. forall o25:int. forall o26:int.
+  forall o27:int. forall o28:int. forall o29:int.
+  forall tokenreader__makedescription__setresultstring__fullstring__assume:(int,character) farray.
+  forall tokenreader__makedescription__setresultstring__fullstring__assume1:t.
+  forall temp___1840:(int,character) farray. forall temp___18401:t3.
+  ((dynamic_property1(1, 2147483647, to_rep1(first2(i17s1)),
   to_rep1(last2(i17s1))) and (((to_rep1(first4(mk2(to_rep1(first2(i17s1)),
   to_rep1(last2(i17s1))))) = 1) and
   (0 <= to_rep1(last4(mk2(to_rep1(first2(i17s1)),
-  to_rep1(last2(i17s1))))))) and (to_rep1(last2(i17s1)) <= 1000)))
-
-axiom H1 : (dynamic_property1(1, 2147483647, to_rep1(first2(text1)),
+  to_rep1(last2(i17s1))))))) and (to_rep1(last2(i17s1)) <= 1000))) ->
+  ((dynamic_property1(1, 2147483647, to_rep1(first2(text1)),
   to_rep1(last2(text1))) and (((to_rep1(first4(mk2(to_rep1(first2(text1)),
   to_rep1(last2(text1))))) = 1) and
   (0 <= to_rep1(last4(mk2(to_rep1(first2(text1)),
-  to_rep1(last2(text1))))))) and (to_rep1(last2(text1)) <= 1000)))
-
-axiom H2 : in_range3(responsecode)
-
-axiom H3 : in_range5(thecodename)
-
-axiom H4 : (({ elts1 = temp___1658; rt1 = temp___16581
-  } = unsigned32t_image(responsecode)) and ((dynamic_property1(1, 2147483647,
-  to_rep1(first2(temp___16581)), to_rep1(last2(temp___16581))) and
-  (((to_rep1(first4(mk2(to_rep1(first2(temp___16581)),
-  to_rep1(last2(temp___16581))))) = 1) and
-  (0 <= to_rep1(last4(mk2(to_rep1(first2(temp___16581)),
-  to_rep1(last2(temp___16581))))))) and
-  (to_rep1(last2(temp___16581)) <= 1000))) and
-  ((temp___1658 = (to_string(attr__ATTRIBUTE_IMAGE3(responsecode))).elts) and
-  (temp___16581 = mk1(to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE3(responsecode))).rt)),
-  to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE3(responsecode))).rt)))))))
-
-axiom H5 : (({ elts1 = temp___1654; rt1 = temp___16541
+  to_rep1(last2(text1))))))) and (to_rep1(last2(text1)) <= 1000))) ->
+  (in_range3(responsecode) -> (in_range5(thecodename) -> (((((({ elts1 =
+  temp___1834; rt1 = temp___18341 } = unsigned32t_image(responsecode)) and
+  ((dynamic_property1(1, 2147483647, to_rep1(first2(temp___18341)),
+  to_rep1(last2(temp___18341))) and
+  (((to_rep1(first4(mk2(to_rep1(first2(temp___18341)),
+  to_rep1(last2(temp___18341))))) = 1) and
+  (0 <= to_rep1(last4(mk2(to_rep1(first2(temp___18341)),
+  to_rep1(last2(temp___18341))))))) and
+  (to_rep1(last2(temp___18341)) <= 1000))) and ({ elts1 = temp___1834; rt1 =
+  temp___18341 } = { elts1 =
+  (to_string(attr__ATTRIBUTE_IMAGE3(responsecode))).elts; rt1 =
+  mk1(to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE3(responsecode))).rt)),
+  to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE3(responsecode))).rt)))
+  }))) and ((((({ elts1 = temp___1830; rt1 = temp___18301
   } = responsecodet_image(thecodename)) and ((dynamic_property1(1,
-  2147483647, to_rep1(first2(temp___16541)),
-  to_rep1(last2(temp___16541))) and
-  (((to_rep1(first4(mk2(to_rep1(first2(temp___16541)),
-  to_rep1(last2(temp___16541))))) = 1) and
-  (0 <= to_rep1(last4(mk2(to_rep1(first2(temp___16541)),
-  to_rep1(last2(temp___16541))))))) and
-  (to_rep1(last2(temp___16541)) <= 1000))) and
-  ((temp___1654 = (to_string(attr__ATTRIBUTE_IMAGE5(thecodename))).elts) and
-  (temp___16541 = mk1(to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE5(thecodename))).rt)),
-  to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE5(thecodename))).rt)))))))
-
-axiom H6 : ((length1({ elts1 = text; rt1 = text1 }) = 0) ->
-  (temp___String_Literal_179(void) = temp___1653))
-
-axiom H7 : ((length1({ elts1 = text; rt1 = text1 }) = 0) -> (mk(1,
-  2) = temp___16531))
-
-axiom H8 : ((not (length1({ elts1 = text; rt1 = text1 }) = 0)) ->
-  ((1 <= 2) -> (o = ((2 - 1) + 1))))
-
-axiom H9 : ((not (length1({ elts1 = text; rt1 = text1 }) = 0)) ->
-  ((not (1 <= 2)) -> (o = 0)))
-
-axiom H10 : ((not (length1({ elts1 = text; rt1 = text1 }) = 0)) ->
-  ((to_rep1(first2(text1)) <= to_rep1(last2(text1))) ->
-  (o1 = ((to_rep1(last2(text1)) - to_rep1(first2(text1))) + 1))))
-
-axiom H11 : ((not (length1({ elts1 = text; rt1 = text1 }) = 0)) ->
-  ((not (to_rep1(first2(text1)) <= to_rep1(last2(text1)))) -> (o1 = 0)))
-
-axiom H12 : ((not (length1({ elts1 = text; rt1 = text1 }) = 0)) ->
-  (o2 = (o1 + o)))
-
-axiom H13 : ((not (length1({ elts1 = text; rt1 = text1 }) = 0)) ->
-  (o3 = (to_rep1(first2(text1)) + o2)))
-
-axiom H14 : ((not (length1({ elts1 = text; rt1 = text1 }) = 0)) ->
-  (o4 = (o3 - 1)))
-
-axiom H15 : ((not (length1({ elts1 = text; rt1 = text1 }) = 0)) ->
-  ((o5 = o4) and in_range1(o4)))
-
-axiom H16 : ((not (length1({ elts1 = text; rt1 = text1 }) = 0)) ->
-  (concat(text, to_rep1(first2(text1)), to_rep1(last2(text1)),
-  temp___String_Literal_179(void), 1, 2) = temp___1653))
-
-axiom H17 : ((not (length1({ elts1 = text; rt1 = text1 }) = 0)) ->
-  (mk(to_rep1(first2(text1)), o5) = temp___16531))
-
-axiom H18 : ((length({ elts = temp___1653; rt = temp___16531 }) = 0) ->
-  (temp___1654 = temp___1655))
-
-axiom H19 : ((length({ elts = temp___1653; rt = temp___16531 }) = 0) ->
-  (mk(to_rep1(first2(temp___16541)),
-  to_rep1(last2(temp___16541))) = temp___16551))
-
-axiom H20 : ((not (length({ elts = temp___1653; rt = temp___16531 }) = 0)) ->
-  ((to_rep1(first2(temp___16541)) <= to_rep1(last2(temp___16541))) ->
-  (o6 = ((to_rep1(last2(temp___16541)) - to_rep1(first2(temp___16541))) + 1))))
-
-axiom H21 : ((not (length({ elts = temp___1653; rt = temp___16531 }) = 0)) ->
-  ((not (to_rep1(first2(temp___16541)) <= to_rep1(last2(temp___16541)))) ->
-  (o6 = 0)))
-
-axiom H22 : ((not (length({ elts = temp___1653; rt = temp___16531 }) = 0)) ->
-  ((to_rep1(first(temp___16531)) <= to_rep1(last(temp___16531))) ->
-  (o7 = ((to_rep1(last(temp___16531)) - to_rep1(first(temp___16531))) + 1))))
-
-axiom H23 : ((not (length({ elts = temp___1653; rt = temp___16531 }) = 0)) ->
-  ((not (to_rep1(first(temp___16531)) <= to_rep1(last(temp___16531)))) ->
-  (o7 = 0)))
-
-axiom H24 : ((not (length({ elts = temp___1653; rt = temp___16531 }) = 0)) ->
-  (o8 = (o7 + o6)))
-
-axiom H25 : ((not (length({ elts = temp___1653; rt = temp___16531 }) = 0)) ->
-  (o9 = (to_rep1(first(temp___16531)) + o8)))
-
-axiom H26 : ((not (length({ elts = temp___1653; rt = temp___16531 }) = 0)) ->
-  (o10 = (o9 - 1)))
-
-axiom H27 : ((not (length({ elts = temp___1653; rt = temp___16531 }) = 0)) ->
-  ((o11 = o10) and in_range1(o10)))
-
-axiom H28 : ((not (length({ elts = temp___1653; rt = temp___16531 }) = 0)) ->
-  (concat(temp___1653, to_rep1(first(temp___16531)),
-  to_rep1(last(temp___16531)), temp___1654, to_rep1(first2(temp___16541)),
-  to_rep1(last2(temp___16541))) = temp___1655))
-
-axiom H29 : ((not (length({ elts = temp___1653; rt = temp___16531 }) = 0)) ->
-  (mk(to_rep1(first(temp___16531)), o11) = temp___16551))
-
-axiom H30 : ((length({ elts = temp___1655; rt = temp___16551 }) = 0) ->
-  (temp___String_Literal_183(void) = temp___1657))
-
-axiom H31 : ((length({ elts = temp___1655; rt = temp___16551 }) = 0) ->
-  (mk(1, 2) = temp___16571))
-
-axiom H32 : ((not (length({ elts = temp___1655; rt = temp___16551 }) = 0)) ->
-  ((1 <= 2) -> (o12 = ((2 - 1) + 1))))
-
-axiom H33 : ((not (length({ elts = temp___1655; rt = temp___16551 }) = 0)) ->
-  ((not (1 <= 2)) -> (o12 = 0)))
-
-axiom H34 : ((not (length({ elts = temp___1655; rt = temp___16551 }) = 0)) ->
-  ((to_rep1(first(temp___16551)) <= to_rep1(last(temp___16551))) ->
-  (o13 = ((to_rep1(last(temp___16551)) - to_rep1(first(temp___16551))) + 1))))
-
-axiom H35 : ((not (length({ elts = temp___1655; rt = temp___16551 }) = 0)) ->
-  ((not (to_rep1(first(temp___16551)) <= to_rep1(last(temp___16551)))) ->
-  (o13 = 0)))
-
-axiom H36 : ((not (length({ elts = temp___1655; rt = temp___16551 }) = 0)) ->
-  (o14 = (o13 + o12)))
-
-axiom H37 : ((not (length({ elts = temp___1655; rt = temp___16551 }) = 0)) ->
-  (o15 = (to_rep1(first(temp___16551)) + o14)))
-
-axiom H38 : ((not (length({ elts = temp___1655; rt = temp___16551 }) = 0)) ->
-  (o16 = (o15 - 1)))
-
-axiom H39 : ((not (length({ elts = temp___1655; rt = temp___16551 }) = 0)) ->
-  ((o17 = o16) and in_range1(o16)))
-
-axiom H40 : ((not (length({ elts = temp___1655; rt = temp___16551 }) = 0)) ->
-  (concat(temp___1655, to_rep1(first(temp___16551)),
-  to_rep1(last(temp___16551)), temp___String_Literal_183(void), 1,
-  2) = temp___1657))
-
-axiom H41 : ((not (length({ elts = temp___1655; rt = temp___16551 }) = 0)) ->
-  (mk(to_rep1(first(temp___16551)), o17) = temp___16571))
-
-axiom H42 : ((length({ elts = temp___1657; rt = temp___16571 }) = 0) ->
-  (temp___1658 = temp___1659))
-
-axiom H43 : ((length({ elts = temp___1657; rt = temp___16571 }) = 0) ->
-  (mk(to_rep1(first2(temp___16581)),
-  to_rep1(last2(temp___16581))) = temp___16591))
-
-axiom H44 : ((not (length({ elts = temp___1657; rt = temp___16571 }) = 0)) ->
-  ((to_rep1(first2(temp___16581)) <= to_rep1(last2(temp___16581))) ->
-  (o18 = ((to_rep1(last2(temp___16581)) - to_rep1(first2(temp___16581))) + 1))))
-
-axiom H45 : ((not (length({ elts = temp___1657; rt = temp___16571 }) = 0)) ->
-  ((not (to_rep1(first2(temp___16581)) <= to_rep1(last2(temp___16581)))) ->
-  (o18 = 0)))
-
-axiom H46 : ((not (length({ elts = temp___1657; rt = temp___16571 }) = 0)) ->
-  ((to_rep1(first(temp___16571)) <= to_rep1(last(temp___16571))) ->
-  (o19 = ((to_rep1(last(temp___16571)) - to_rep1(first(temp___16571))) + 1))))
-
-axiom H47 : ((not (length({ elts = temp___1657; rt = temp___16571 }) = 0)) ->
-  ((not (to_rep1(first(temp___16571)) <= to_rep1(last(temp___16571)))) ->
-  (o19 = 0)))
-
-axiom H48 : ((not (length({ elts = temp___1657; rt = temp___16571 }) = 0)) ->
-  (o20 = (o19 + o18)))
-
-axiom H49 : ((not (length({ elts = temp___1657; rt = temp___16571 }) = 0)) ->
-  (o21 = (to_rep1(first(temp___16571)) + o20)))
-
-axiom H50 : ((not (length({ elts = temp___1657; rt = temp___16571 }) = 0)) ->
-  (o22 = (o21 - 1)))
-
-axiom H51 : ((not (length({ elts = temp___1657; rt = temp___16571 }) = 0)) ->
-  ((o23 = o22) and in_range1(o22)))
-
-axiom H52 : ((not (length({ elts = temp___1657; rt = temp___16571 }) = 0)) ->
-  (concat(temp___1657, to_rep1(first(temp___16571)),
-  to_rep1(last(temp___16571)), temp___1658, to_rep1(first2(temp___16581)),
-  to_rep1(last2(temp___16581))) = temp___1659))
-
-axiom H53 : ((not (length({ elts = temp___1657; rt = temp___16571 }) = 0)) ->
-  (mk(to_rep1(first(temp___16571)), o23) = temp___16591))
-
-axiom H54 : ((length({ elts = temp___1659; rt = temp___16591 }) = 0) ->
-  (temp___String_Literal_188(void) = tokenreader__makedescription__setresultstring__fullstring__assume))
-
-axiom H55 : ((length({ elts = temp___1659; rt = temp___16591 }) = 0) ->
+  2147483647, to_rep1(first2(temp___18301)),
+  to_rep1(last2(temp___18301))) and
+  (((to_rep1(first4(mk2(to_rep1(first2(temp___18301)),
+  to_rep1(last2(temp___18301))))) = 1) and
+  (0 <= to_rep1(last4(mk2(to_rep1(first2(temp___18301)),
+  to_rep1(last2(temp___18301))))))) and
+  (to_rep1(last2(temp___18301)) <= 1000))) and ({ elts1 = temp___1830; rt1 =
+  temp___18301 } = { elts1 =
+  (to_string(attr__ATTRIBUTE_IMAGE5(thecodename))).elts; rt1 =
+  mk1(to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE5(thecodename))).rt)),
+  to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE5(thecodename))).rt)))
+  }))) and ((((length1({ elts1 = text; rt1 = text1 }) = 0) and
+  ((temp___String_Literal_201(void) = temp___1829) and (mk(1,
+  2) = temp___18291))) or ((not (length1({ elts1 = text; rt1 = text1
+  }) = 0)) and ((((((((1 <= 2) and (o = ((2 - 1) + 1))) or
+  ((not (1 <= 2)) and (o = 0))) and
+  ((((to_rep1(first2(text1)) <= to_rep1(last2(text1))) and
+  (o1 = ((to_rep1(last2(text1)) - to_rep1(first2(text1))) + 1))) or
+  ((not (to_rep1(first2(text1)) <= to_rep1(last2(text1)))) and (o1 = 0))) and
+  (o2 = (o1 + o)))) and (o3 = (to_rep1(first2(text1)) + o2))) and
+  (o4 = (o3 - 1))) and ((o5 = o4) and in_range1(o4))) and ((concat(text,
+  to_rep1(first2(text1)), to_rep1(last2(text1)),
+  temp___String_Literal_201(void), 1, 2) = temp___1829) and
+  (mk(to_rep1(first2(text1)), o5) = temp___18291))))) and (((length({ elts =
+  temp___1829; rt = temp___18291 }) = 0) and ((temp___1830 = temp___1831) and
+  (mk(to_rep1(first2(temp___18301)),
+  to_rep1(last2(temp___18301))) = temp___18311))) or ((not (length({ elts =
+  temp___1829; rt = temp___18291 }) = 0)) and
+  ((((((((to_rep1(first2(temp___18301)) <= to_rep1(last2(temp___18301))) and
+  (o6 = ((to_rep1(last2(temp___18301)) - to_rep1(first2(temp___18301))) + 1))) or
+  ((not (to_rep1(first2(temp___18301)) <= to_rep1(last2(temp___18301)))) and
+  (o6 = 0))) and
+  ((((to_rep1(first(temp___18291)) <= to_rep1(last(temp___18291))) and
+  (o7 = ((to_rep1(last(temp___18291)) - to_rep1(first(temp___18291))) + 1))) or
+  ((not (to_rep1(first(temp___18291)) <= to_rep1(last(temp___18291)))) and
+  (o7 = 0))) and (o8 = (o7 + o6)))) and
+  (o9 = (to_rep1(first(temp___18291)) + o8))) and (o10 = (o9 - 1))) and
+  ((o11 = o10) and in_range1(o10))) and ((concat(temp___1829,
+  to_rep1(first(temp___18291)), to_rep1(last(temp___18291)), temp___1830,
+  to_rep1(first2(temp___18301)),
+  to_rep1(last2(temp___18301))) = temp___1831) and
+  (mk(to_rep1(first(temp___18291)), o11) = temp___18311))))))) and
+  (((length({ elts = temp___1831; rt = temp___18311 }) = 0) and
+  ((temp___String_Literal_205(void) = temp___1833) and (mk(1,
+  2) = temp___18331))) or ((not (length({ elts = temp___1831; rt =
+  temp___18311 }) = 0)) and ((((((((1 <= 2) and (o12 = ((2 - 1) + 1))) or
+  ((not (1 <= 2)) and (o12 = 0))) and
+  ((((to_rep1(first(temp___18311)) <= to_rep1(last(temp___18311))) and
+  (o13 = ((to_rep1(last(temp___18311)) - to_rep1(first(temp___18311))) + 1))) or
+  ((not (to_rep1(first(temp___18311)) <= to_rep1(last(temp___18311)))) and
+  (o13 = 0))) and (o14 = (o13 + o12)))) and
+  (o15 = (to_rep1(first(temp___18311)) + o14))) and (o16 = (o15 - 1))) and
+  ((o17 = o16) and in_range1(o16))) and ((concat(temp___1831,
+  to_rep1(first(temp___18311)), to_rep1(last(temp___18311)),
+  temp___String_Literal_205(void), 1, 2) = temp___1833) and
+  (mk(to_rep1(first(temp___18311)), o17) = temp___18331)))))) and (((length({
+  elts = temp___1833; rt = temp___18331 }) = 0) and
+  ((temp___1834 = temp___1835) and (mk(to_rep1(first2(temp___18341)),
+  to_rep1(last2(temp___18341))) = temp___18351))) or ((not (length({ elts =
+  temp___1833; rt = temp___18331 }) = 0)) and
+  ((((((((to_rep1(first2(temp___18341)) <= to_rep1(last2(temp___18341))) and
+  (o18 = ((to_rep1(last2(temp___18341)) - to_rep1(first2(temp___18341))) + 1))) or
+  ((not (to_rep1(first2(temp___18341)) <= to_rep1(last2(temp___18341)))) and
+  (o18 = 0))) and
+  ((((to_rep1(first(temp___18331)) <= to_rep1(last(temp___18331))) and
+  (o19 = ((to_rep1(last(temp___18331)) - to_rep1(first(temp___18331))) + 1))) or
+  ((not (to_rep1(first(temp___18331)) <= to_rep1(last(temp___18331)))) and
+  (o19 = 0))) and (o20 = (o19 + o18)))) and
+  (o21 = (to_rep1(first(temp___18331)) + o20))) and (o22 = (o21 - 1))) and
+  ((o23 = o22) and in_range1(o22))) and ((concat(temp___1833,
+  to_rep1(first(temp___18331)), to_rep1(last(temp___18331)), temp___1834,
+  to_rep1(first2(temp___18341)),
+  to_rep1(last2(temp___18341))) = temp___1835) and
+  (mk(to_rep1(first(temp___18331)), o23) = temp___18351))))))) and
+  (((length({ elts = temp___1835; rt = temp___18351 }) = 0) and
+  ((temp___String_Literal_210(void) = tokenreader__makedescription__setresultstring__fullstring__assume) and
   (mk(1,
-  1) = tokenreader__makedescription__setresultstring__fullstring__assume1))
-
-axiom H56 : ((not (length({ elts = temp___1659; rt = temp___16591 }) = 0)) ->
-  ((1 <= 1) -> (o24 = ((1 - 1) + 1))))
-
-axiom H57 : ((not (length({ elts = temp___1659; rt = temp___16591 }) = 0)) ->
-  ((not (1 <= 1)) -> (o24 = 0)))
-
-axiom H58 : ((not (length({ elts = temp___1659; rt = temp___16591 }) = 0)) ->
-  ((to_rep1(first(temp___16591)) <= to_rep1(last(temp___16591))) ->
-  (o25 = ((to_rep1(last(temp___16591)) - to_rep1(first(temp___16591))) + 1))))
-
-axiom H59 : ((not (length({ elts = temp___1659; rt = temp___16591 }) = 0)) ->
-  ((not (to_rep1(first(temp___16591)) <= to_rep1(last(temp___16591)))) ->
-  (o25 = 0)))
-
-axiom H60 : ((not (length({ elts = temp___1659; rt = temp___16591 }) = 0)) ->
-  (o26 = (o25 + o24)))
-
-axiom H61 : ((not (length({ elts = temp___1659; rt = temp___16591 }) = 0)) ->
-  (o27 = (to_rep1(first(temp___16591)) + o26)))
-
-axiom H62 : ((not (length({ elts = temp___1659; rt = temp___16591 }) = 0)) ->
-  (o28 = (o27 - 1)))
-
-axiom H63 : ((not (length({ elts = temp___1659; rt = temp___16591 }) = 0)) ->
-  ((o29 = o28) and in_range1(o28)))
-
-axiom H64 : ((not (length({ elts = temp___1659; rt = temp___16591 }) = 0)) ->
-  (concat(temp___1659, to_rep1(first(temp___16591)),
-  to_rep1(last(temp___16591)), temp___String_Literal_188(void), 1,
-  1) = tokenreader__makedescription__setresultstring__fullstring__assume))
-
-axiom H65 : ((not (length({ elts = temp___1659; rt = temp___16591 }) = 0)) ->
-  (mk(to_rep1(first(temp___16591)),
-  o29) = tokenreader__makedescription__setresultstring__fullstring__assume1))
-
-axiom H66 :
+  1) = tokenreader__makedescription__setresultstring__fullstring__assume1))) or
+  ((not (length({ elts = temp___1835; rt = temp___18351 }) = 0)) and
+  ((((((((1 <= 1) and (o24 = ((1 - 1) + 1))) or ((not (1 <= 1)) and
+  (o24 = 0))) and
+  ((((to_rep1(first(temp___18351)) <= to_rep1(last(temp___18351))) and
+  (o25 = ((to_rep1(last(temp___18351)) - to_rep1(first(temp___18351))) + 1))) or
+  ((not (to_rep1(first(temp___18351)) <= to_rep1(last(temp___18351)))) and
+  (o25 = 0))) and (o26 = (o25 + o24)))) and
+  (o27 = (to_rep1(first(temp___18351)) + o26))) and (o28 = (o27 - 1))) and
+  ((o29 = o28) and in_range1(o28))) and ((concat(temp___1835,
+  to_rep1(first(temp___18351)), to_rep1(last(temp___18351)),
+  temp___String_Literal_210(void), 1,
+  1) = tokenreader__makedescription__setresultstring__fullstring__assume) and
+  (mk(to_rep1(first(temp___18351)),
+  o29) = tokenreader__makedescription__setresultstring__fullstring__assume1)))))) and
   ((tokenreader__makedescription__setresultstring__fullstring__assume = fullstring) and
-  (tokenreader__makedescription__setresultstring__fullstring__assume1 = fullstring1))
-
-axiom H67 : dynamic_property(1, 2147483647, to_rep1(first(fullstring1)),
-  to_rep1(last(fullstring1)))
-
-axiom H68 : (to_rep1(last(fullstring1)) <= 150)
-
-axiom H69 : (((to_rep1(first(fullstring1)) <= to_rep1(last(fullstring1))) ->
-  (((1 <= to_rep1(last(fullstring1))) ->
-  (((to_rep1(last(fullstring1)) - to_rep1(first(fullstring1))) + 1) = ((to_rep1(last(fullstring1)) - 1) + 1))) and
-  ((not (1 <= to_rep1(last(fullstring1)))) ->
-  (((to_rep1(last(fullstring1)) - to_rep1(first(fullstring1))) + 1) = 0)))) and
-  ((not (to_rep1(first(fullstring1)) <= to_rep1(last(fullstring1)))) ->
-  ((1 <= to_rep1(last(fullstring1))) ->
-  (0 = ((to_rep1(last(fullstring1)) - 1) + 1)))))
-
-axiom H70 : (slide(fullstring, to_rep1(first(fullstring1)), 1) = temp___1664)
-
-axiom H71 : (mk3(1, to_rep1(last(fullstring1))) = temp___16641)
-
-axiom H72 : (1 <= to_rep1(last(fullstring1)))
-
- (* File "audittypes.ads", line 103, characters 0-0 *)
-goal WP_parameter_def : (1 <= 1)
+  (tokenreader__makedescription__setresultstring__fullstring__assume1 = fullstring1))) ->
+  (dynamic_property(1, 2147483647, to_rep1(first(fullstring1)),
+  to_rep1(last(fullstring1))) -> ((to_rep1(last(fullstring1)) <= 150) ->
+  (((((to_rep1(first(fullstring1)) <= to_rep1(last(fullstring1))) and
+  (((1 <= to_rep1(last(fullstring1))) and
+  (((to_rep1(last(fullstring1)) - to_rep1(first(fullstring1))) + 1) = ((to_rep1(last(fullstring1)) - 1) + 1))) or
+  ((not (1 <= to_rep1(last(fullstring1)))) and
+  (((to_rep1(last(fullstring1)) - to_rep1(first(fullstring1))) + 1) = 0)))) or
+  ((not (to_rep1(first(fullstring1)) <= to_rep1(last(fullstring1)))) and
+  (((1 <= to_rep1(last(fullstring1))) and
+  (0 = ((to_rep1(last(fullstring1)) - 1) + 1))) or
+  (not (1 <= to_rep1(last(fullstring1))))))) and ((slide(fullstring,
+  to_rep1(first(fullstring1)), 1) = temp___1840) and (mk3(1,
+  to_rep1(last(fullstring1))) = temp___18401))) ->
+  ((1 <= to_rep1(last(fullstring1))) -> (1 <= 1)))))))))))

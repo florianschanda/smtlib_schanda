@@ -111,13 +111,6 @@ logic b : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic a : int
-
-logic o : int
-
-axiom H : in_range(a)
-
-axiom H1 : in_range(b)
-
  (* File "callee.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : in_range((a + b))
+goal WP_parameter_def :
+  (forall a:int. (in_range(a) -> (in_range(b) -> in_range((a + b)))))

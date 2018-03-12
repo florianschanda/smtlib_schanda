@@ -214,11 +214,7 @@ type r2__ref = { r2__content : us_rep
 
 function r2__ref___projection(a: r2__ref) : us_rep = (a).r2__content
 
-logic temp___161 : int
-
-logic temp___160 : integer
-
-axiom H : (to_rep(temp___160) = 1)
-
  (* File "types_with_inv.ads", line 24, characters 0-0 *)
-goal WP_parameter_def : (not (to_rep(temp___160) = 0))
+goal WP_parameter_def :
+  (forall temp___186:integer. ((to_rep(temp___186) = 1) ->
+  (not (to_rep(temp___186) = 0))))

@@ -81,12 +81,6 @@ axiom bool_ge_axiom :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -98,6 +92,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -700,52 +700,25 @@ axiom first__def_axiom3 : (first1 = fst)
 
 axiom last__def_axiom4 : (last2 = lst)
 
-logic o : us_rep1
-
-logic us : int
-
-logic o1 : int
-
-logic temp___421 : int
-
-logic us1 : int
-
-logic o2 : int
-
-logic o3 : bool
-
-logic o4 : int
-
-logic result : bool
-
-axiom H : dynamic_property1(0, last1, to_rep1(container))
-
-axiom H1 : in_range2(item)
-
-axiom H2 : dynamic_property(first, last, index)
-
-axiom H3 : ((o4 = ((first1 - 1) + length(model__({ us_split_discrs1 = {
-  rec__use_vectors__my_vectors__vector__capacity = container };
-  us_split_fields1 = { rec__use_vectors__my_vectors__vector = container1 }
-  })))) and (dynamic_property4(first3, last4, o4) and
-  (o4 = ((first1 - 1) + length(model__({ us_split_discrs1 = {
-  rec__use_vectors__my_vectors__vector__capacity = container };
-  us_split_fields1 = { rec__use_vectors__my_vectors__vector = container1 }
-  }))))))
-
-axiom H4 : (((o4 <  index) -> (result = true)) and ((not (o4 <  index)) ->
-  (result = false)))
-
-axiom H5 : (not (result = true))
-
-axiom H6 : ((temp___421 = ((first1 - 1) + length(model__({ us_split_discrs1 =
-  { rec__use_vectors__my_vectors__vector__capacity = container };
-  us_split_fields1 = { rec__use_vectors__my_vectors__vector = container1 }
-  })))) and (dynamic_property4(first3, last4, temp___421) and
-  (temp___421 = ((first1 - 1) + length(model__({ us_split_discrs1 = {
-  rec__use_vectors__my_vectors__vector__capacity = container };
-  us_split_fields1 = { rec__use_vectors__my_vectors__vector = container1 }
-  }))))))
-
  (* File "a-cofove.ads", line 704, characters 0-0 *)
-goal WP_parameter_def : dynamic_property3(first2, last3, temp___421)
+goal WP_parameter_def :
+  (forall temp___460:int. forall o:int. forall result:bool.
+  (dynamic_property1(0, last1, to_rep1(container)) -> (in_range2(item) ->
+  (dynamic_property(first, last, index) ->
+  ((((o = ((first1 - 1) + length(model__({ us_split_discrs1 = {
+  rec__use_vectors__my_vectors__vector__capacity = container };
+  us_split_fields1 = { rec__use_vectors__my_vectors__vector = container1 }
+  })))) and (dynamic_property4(first3, last4, o) and
+  (o = ((first1 - 1) + length(model__({ us_split_discrs1 = {
+  rec__use_vectors__my_vectors__vector__capacity = container };
+  us_split_fields1 = { rec__use_vectors__my_vectors__vector = container1 }
+  })))))) and (((o <  index) and (result = true)) or ((not (o <  index)) and
+  (result = false)))) -> ((not (result = true)) ->
+  (((temp___460 = ((first1 - 1) + length(model__({ us_split_discrs1 = {
+  rec__use_vectors__my_vectors__vector__capacity = container };
+  us_split_fields1 = { rec__use_vectors__my_vectors__vector = container1 }
+  })))) and (dynamic_property4(first3, last4, temp___460) and
+  (temp___460 = ((first1 - 1) + length(model__({ us_split_discrs1 = {
+  rec__use_vectors__my_vectors__vector__capacity = container };
+  us_split_fields1 = { rec__use_vectors__my_vectors__vector = container1 }
+  })))))) -> dynamic_property3(first2, last3, temp___460))))))))

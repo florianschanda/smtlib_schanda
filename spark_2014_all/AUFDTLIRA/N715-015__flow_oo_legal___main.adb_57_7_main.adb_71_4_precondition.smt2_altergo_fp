@@ -186,24 +186,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -214,17 +196,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -234,37 +216,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 logic to_rep1 : integer -> int
 
@@ -547,12 +501,6 @@ function person__ref___projection(a: person__ref) : us_rep1 =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq8 : bool, bool -> bool
-
-axiom bool_eq_def5 :
-  (forall x:bool. forall y:bool [bool_eq8(x, y)]. (((x = y) -> (bool_eq8(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq8(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -565,6 +513,12 @@ axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
 
+logic bool_eq8 : bool, bool -> bool
+
+axiom bool_eq_def5 :
+  (forall x:bool. forall y:bool [bool_eq8(x, y)]. (((x = y) -> (bool_eq8(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq8(x, y) = false))))
+
 predicate in_range3(x: int) = ((x = 0) or (x = 1))
 
 logic attr__ATTRIBUTE_IMAGE3 : bool -> us_image
@@ -573,17 +527,17 @@ logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE3 : us_image -> bool
 
-logic temp___String_Literal_585 : unit -> (int,character) farray
+logic temp___String_Literal_633 : unit -> (int,character) farray
 
-axiom temp___String_Literal_585__def_axiom :
-  ((((((((to_rep((temp___String_Literal_585(void)[1])) = 78) and
-  (to_rep((temp___String_Literal_585(void)[2])) = 97)) and
-  (to_rep((temp___String_Literal_585(void)[3])) = 109)) and
-  (to_rep((temp___String_Literal_585(void)[4])) = 101)) and
-  (to_rep((temp___String_Literal_585(void)[5])) = 108)) and
-  (to_rep((temp___String_Literal_585(void)[6])) = 101)) and
-  (to_rep((temp___String_Literal_585(void)[7])) = 115)) and
-  (to_rep((temp___String_Literal_585(void)[8])) = 115))
+axiom temp___String_Literal_633__def_axiom :
+  ((((((((to_rep((temp___String_Literal_633(void)[1])) = 78) and
+  (to_rep((temp___String_Literal_633(void)[2])) = 97)) and
+  (to_rep((temp___String_Literal_633(void)[3])) = 109)) and
+  (to_rep((temp___String_Literal_633(void)[4])) = 101)) and
+  (to_rep((temp___String_Literal_633(void)[5])) = 108)) and
+  (to_rep((temp___String_Literal_633(void)[6])) = 101)) and
+  (to_rep((temp___String_Literal_633(void)[7])) = 115)) and
+  (to_rep((temp___String_Literal_633(void)[8])) = 115))
 
 logic new_person__2 : us_rep, us_private -> us_rep1
 
@@ -729,24 +683,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,skills) farray, int, int, (int,skills) farray, int,
-  int -> (int,skills) farray
-
-axiom concat_def1 :
-  (forall a:(int,skills) farray. forall b:(int,skills) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : skills, int -> (int,skills) farray
-
-axiom singleton_def1 :
-  (forall v:skills.
-  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq12 : (int,skills) farray, int, int, (int,skills) farray, int,
   int -> bool
 
@@ -757,17 +693,17 @@ axiom bool_eq_def9 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_140:int. ((((a__first <= temp___idx_140) and
-  (temp___idx_140 <= a__last)) and
-  (to_rep4((a[temp___idx_140])) = to_rep4((b[((b__first - a__first) + temp___idx_140)])))) or
-  (not ((a__first <= temp___idx_140) and (temp___idx_140 <= a__last)))))) ->
+  (forall temp___idx_162:int. ((((a__first <= temp___idx_162) and
+  (temp___idx_162 <= a__last)) and
+  (to_rep4((a[temp___idx_162])) = to_rep4((b[((b__first - a__first) + temp___idx_162)])))) or
+  (not ((a__first <= temp___idx_162) and (temp___idx_162 <= a__last)))))) ->
   (bool_eq12(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_140:int. (((a__first <= temp___idx_140) and
-  (temp___idx_140 <= a__last)) ->
-  (to_rep4((a[temp___idx_140])) = to_rep4((b[((b__first - a__first) + temp___idx_140)]))))))) ->
+  (forall temp___idx_162:int. (((a__first <= temp___idx_162) and
+  (temp___idx_162 <= a__last)) ->
+  (to_rep4((a[temp___idx_162])) = to_rep4((b[((b__first - a__first) + temp___idx_162)]))))))) ->
   (bool_eq12(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -777,37 +713,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_140:int. (((a__first <= temp___idx_140) and
-  (temp___idx_140 <= a__last)) ->
-  (to_rep4((a[temp___idx_140])) = to_rep4((b[((b__first - a__first) + temp___idx_140)])))))))))
-
-logic compare1 : (int,skills) farray, int, int, (int,skills) farray, int,
-  int -> int
-
-axiom compare_def_eq1 :
-  (forall a:(int,skills) farray. forall b:(int,skills) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq12(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt1 :
-  (forall a:(int,skills) farray. forall b:(int,skills) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq12(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep4((a[(i + 1)])) <  to_rep4((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt1 :
-  (forall a:(int,skills) farray. forall b:(int,skills) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare1(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq12(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep4((b[(i + 1)])) <  to_rep4((a[(j + 1)]))))))))))))
+  (forall temp___idx_162:int. (((a__first <= temp___idx_162) and
+  (temp___idx_162 <= a__last)) ->
+  (to_rep4((a[temp___idx_162])) = to_rep4((b[((b__first - a__first) + temp___idx_162)])))))))))
 
 logic dummy14 : (int,skills) farray
 
@@ -1455,72 +1363,72 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
-logic temp___String_Literal_678 : unit -> (int,character) farray
+logic temp___String_Literal_730 : unit -> (int,character) farray
 
-axiom temp___String_Literal_678__def_axiom :
-  (((((((((((((((((to_rep((temp___String_Literal_678(void)[1])) = 75) and
-  (to_rep((temp___String_Literal_678(void)[2])) = 101)) and
-  (to_rep((temp___String_Literal_678(void)[3])) = 110)) and
-  (to_rep((temp___String_Literal_678(void)[4])) = 110)) and
-  (to_rep((temp___String_Literal_678(void)[5])) = 101)) and
-  (to_rep((temp___String_Literal_678(void)[6])) = 116)) and
-  (to_rep((temp___String_Literal_678(void)[7])) = 104)) and
-  (to_rep((temp___String_Literal_678(void)[8])) = 32)) and
-  (to_rep((temp___String_Literal_678(void)[9])) = 77)) and
-  (to_rep((temp___String_Literal_678(void)[10])) = 99)) and
-  (to_rep((temp___String_Literal_678(void)[11])) = 67)) and
-  (to_rep((temp___String_Literal_678(void)[12])) = 111)) and
-  (to_rep((temp___String_Literal_678(void)[13])) = 114)) and
-  (to_rep((temp___String_Literal_678(void)[14])) = 109)) and
-  (to_rep((temp___String_Literal_678(void)[15])) = 105)) and
-  (to_rep((temp___String_Literal_678(void)[16])) = 99)) and
-  (to_rep((temp___String_Literal_678(void)[17])) = 107))
+axiom temp___String_Literal_730__def_axiom :
+  (((((((((((((((((to_rep((temp___String_Literal_730(void)[1])) = 75) and
+  (to_rep((temp___String_Literal_730(void)[2])) = 101)) and
+  (to_rep((temp___String_Literal_730(void)[3])) = 110)) and
+  (to_rep((temp___String_Literal_730(void)[4])) = 110)) and
+  (to_rep((temp___String_Literal_730(void)[5])) = 101)) and
+  (to_rep((temp___String_Literal_730(void)[6])) = 116)) and
+  (to_rep((temp___String_Literal_730(void)[7])) = 104)) and
+  (to_rep((temp___String_Literal_730(void)[8])) = 32)) and
+  (to_rep((temp___String_Literal_730(void)[9])) = 77)) and
+  (to_rep((temp___String_Literal_730(void)[10])) = 99)) and
+  (to_rep((temp___String_Literal_730(void)[11])) = 67)) and
+  (to_rep((temp___String_Literal_730(void)[12])) = 111)) and
+  (to_rep((temp___String_Literal_730(void)[13])) = 114)) and
+  (to_rep((temp___String_Literal_730(void)[14])) = 109)) and
+  (to_rep((temp___String_Literal_730(void)[15])) = 105)) and
+  (to_rep((temp___String_Literal_730(void)[16])) = 99)) and
+  (to_rep((temp___String_Literal_730(void)[17])) = 107))
 
-logic temp___String_Literal_679 : unit -> (int,character) farray
+logic temp___String_Literal_731 : unit -> (int,character) farray
 
-axiom temp___String_Literal_679__def_axiom :
-  (((((((((((to_rep((temp___String_Literal_679(void)[1])) = 68) and
-  (to_rep((temp___String_Literal_679(void)[2])) = 97)) and
-  (to_rep((temp___String_Literal_679(void)[3])) = 100)) and
-  (to_rep((temp___String_Literal_679(void)[4])) = 101)) and
-  (to_rep((temp___String_Literal_679(void)[5])) = 32)) and
-  (to_rep((temp___String_Literal_679(void)[6])) = 77)) and
-  (to_rep((temp___String_Literal_679(void)[7])) = 117)) and
-  (to_rep((temp___String_Literal_679(void)[8])) = 114)) and
-  (to_rep((temp___String_Literal_679(void)[9])) = 112)) and
-  (to_rep((temp___String_Literal_679(void)[10])) = 104)) and
-  (to_rep((temp___String_Literal_679(void)[11])) = 121))
+axiom temp___String_Literal_731__def_axiom :
+  (((((((((((to_rep((temp___String_Literal_731(void)[1])) = 68) and
+  (to_rep((temp___String_Literal_731(void)[2])) = 97)) and
+  (to_rep((temp___String_Literal_731(void)[3])) = 100)) and
+  (to_rep((temp___String_Literal_731(void)[4])) = 101)) and
+  (to_rep((temp___String_Literal_731(void)[5])) = 32)) and
+  (to_rep((temp___String_Literal_731(void)[6])) = 77)) and
+  (to_rep((temp___String_Literal_731(void)[7])) = 117)) and
+  (to_rep((temp___String_Literal_731(void)[8])) = 114)) and
+  (to_rep((temp___String_Literal_731(void)[9])) = 112)) and
+  (to_rep((temp___String_Literal_731(void)[10])) = 104)) and
+  (to_rep((temp___String_Literal_731(void)[11])) = 121))
 
-logic temp___String_Literal_680 : unit -> (int,character) farray
+logic temp___String_Literal_732 : unit -> (int,character) farray
 
-axiom temp___String_Literal_680__def_axiom :
-  ((((((((((to_rep((temp___String_Literal_680(void)[1])) = 74) and
-  (to_rep((temp___String_Literal_680(void)[2])) = 111)) and
-  (to_rep((temp___String_Literal_680(void)[3])) = 104)) and
-  (to_rep((temp___String_Literal_680(void)[4])) = 110)) and
-  (to_rep((temp___String_Literal_680(void)[5])) = 32)) and
-  (to_rep((temp___String_Literal_680(void)[6])) = 82)) and
-  (to_rep((temp___String_Literal_680(void)[7])) = 97)) and
-  (to_rep((temp___String_Literal_680(void)[8])) = 109)) and
-  (to_rep((temp___String_Literal_680(void)[9])) = 98)) and
-  (to_rep((temp___String_Literal_680(void)[10])) = 111))
+axiom temp___String_Literal_732__def_axiom :
+  ((((((((((to_rep((temp___String_Literal_732(void)[1])) = 74) and
+  (to_rep((temp___String_Literal_732(void)[2])) = 111)) and
+  (to_rep((temp___String_Literal_732(void)[3])) = 104)) and
+  (to_rep((temp___String_Literal_732(void)[4])) = 110)) and
+  (to_rep((temp___String_Literal_732(void)[5])) = 32)) and
+  (to_rep((temp___String_Literal_732(void)[6])) = 82)) and
+  (to_rep((temp___String_Literal_732(void)[7])) = 97)) and
+  (to_rep((temp___String_Literal_732(void)[8])) = 109)) and
+  (to_rep((temp___String_Literal_732(void)[9])) = 98)) and
+  (to_rep((temp___String_Literal_732(void)[10])) = 111))
 
-logic temp___String_Literal_681 : unit -> (int,character) farray
+logic temp___String_Literal_733 : unit -> (int,character) farray
 
-axiom temp___String_Literal_681__def_axiom :
-  (((((((((((((to_rep((temp___String_Literal_681(void)[1])) = 71) and
-  (to_rep((temp___String_Literal_681(void)[2])) = 114)) and
-  (to_rep((temp___String_Literal_681(void)[3])) = 101)) and
-  (to_rep((temp___String_Literal_681(void)[4])) = 103)) and
-  (to_rep((temp___String_Literal_681(void)[5])) = 111)) and
-  (to_rep((temp___String_Literal_681(void)[6])) = 114)) and
-  (to_rep((temp___String_Literal_681(void)[7])) = 121)) and
-  (to_rep((temp___String_Literal_681(void)[8])) = 32)) and
-  (to_rep((temp___String_Literal_681(void)[9])) = 72)) and
-  (to_rep((temp___String_Literal_681(void)[10])) = 111)) and
-  (to_rep((temp___String_Literal_681(void)[11])) = 117)) and
-  (to_rep((temp___String_Literal_681(void)[12])) = 115)) and
-  (to_rep((temp___String_Literal_681(void)[13])) = 101))
+axiom temp___String_Literal_733__def_axiom :
+  (((((((((((((to_rep((temp___String_Literal_733(void)[1])) = 71) and
+  (to_rep((temp___String_Literal_733(void)[2])) = 114)) and
+  (to_rep((temp___String_Literal_733(void)[3])) = 101)) and
+  (to_rep((temp___String_Literal_733(void)[4])) = 103)) and
+  (to_rep((temp___String_Literal_733(void)[5])) = 111)) and
+  (to_rep((temp___String_Literal_733(void)[6])) = 114)) and
+  (to_rep((temp___String_Literal_733(void)[7])) = 121)) and
+  (to_rep((temp___String_Literal_733(void)[8])) = 32)) and
+  (to_rep((temp___String_Literal_733(void)[9])) = 72)) and
+  (to_rep((temp___String_Literal_733(void)[10])) = 111)) and
+  (to_rep((temp___String_Literal_733(void)[11])) = 117)) and
+  (to_rep((temp___String_Literal_733(void)[12])) = 115)) and
+  (to_rep((temp___String_Literal_733(void)[13])) = 101))
 
 axiom is_alive__post_axiom : true
 
@@ -1596,1415 +1504,306 @@ axiom professionals__professional__compat_axiom9 :
   rec__professionals__professional__number_of_people_killed = p5;
   rec__ext__1 = p6 }; attr__tag1 = p7 }))))
 
-logic kenny__split_fields : us_rep
-
-logic kenny__split_fields1 : integer
-
-logic kenny__split_fields2 : bool
-
-logic kenny__split_fields3 : us_private
-
-logic uni_student__split_fields : us_rep
-
-logic uni_student__split_fields1 : integer
-
-logic uni_student__split_fields2 : bool
-
-logic uni_student__split_fields3 : professions
-
-logic uni_student__split_fields4 : (int,skills) farray
-
-logic uni_student__split_fields5 : natural
-
-logic uni_student__split_fields6 : us_private
-
-logic zerocool__split_fields : us_rep
-
-logic zerocool__split_fields1 : integer
-
-logic zerocool__split_fields2 : bool
-
-logic zerocool__split_fields3 : professions
-
-logic zerocool__split_fields4 : (int,skills) farray
-
-logic zerocool__split_fields5 : natural
-
-logic zerocool__split_fields6 : us_private
-
-logic rambo__split_fields : us_rep
-
-logic rambo__split_fields1 : integer
-
-logic rambo__split_fields2 : bool
-
-logic rambo__split_fields3 : professions
-
-logic rambo__split_fields4 : (int,skills) farray
-
-logic rambo__split_fields5 : natural
-
-logic rambo__split_fields6 : us_private
-
-logic dr_house__split_fields : us_rep
-
-logic dr_house__split_fields1 : integer
-
-logic dr_house__split_fields2 : bool
-
-logic dr_house__split_fields3 : professions
-
-logic dr_house__split_fields4 : (int,skills) farray
-
-logic dr_house__split_fields5 : natural
-
-logic dr_house__split_fields6 : us_private
-
-logic skill : int
-
-logic date : us_private
-
-logic o : us_rep
-
-logic main__kenny__assume : us_rep
-
-logic main__kenny__assume1 : integer
-
-logic main__kenny__assume2 : bool
-
-logic main__kenny__assume3 : us_private
-
-logic main__kenny__assume4 : int
-
-logic main__uni_student__assume : us_rep
-
-logic main__uni_student__assume1 : integer
-
-logic main__uni_student__assume2 : bool
-
-logic main__uni_student__assume3 : professions
-
-logic main__uni_student__assume4 : (int,skills) farray
-
-logic main__uni_student__assume5 : natural
-
-logic main__uni_student__assume6 : us_private
-
-logic main__uni_student__assume7 : int
-
-logic o1 : us_rep
-
-logic main__zerocool__assume : us_rep
-
-logic main__zerocool__assume1 : integer
-
-logic main__zerocool__assume2 : bool
-
-logic main__zerocool__assume3 : professions
-
-logic main__zerocool__assume4 : (int,skills) farray
-
-logic main__zerocool__assume5 : natural
-
-logic main__zerocool__assume6 : us_private
-
-logic main__zerocool__assume7 : int
-
-logic o2 : us_rep
-
-logic main__rambo__assume : us_rep
-
-logic main__rambo__assume1 : integer
-
-logic main__rambo__assume2 : bool
-
-logic main__rambo__assume3 : professions
-
-logic main__rambo__assume4 : (int,skills) farray
-
-logic main__rambo__assume5 : natural
-
-logic main__rambo__assume6 : us_private
-
-logic main__rambo__assume7 : int
-
-logic o3 : us_rep
-
-logic main__dr_house__assume : us_rep
-
-logic main__dr_house__assume1 : integer
-
-logic main__dr_house__assume2 : bool
-
-logic main__dr_house__assume3 : professions
-
-logic main__dr_house__assume4 : (int,skills) farray
-
-logic main__dr_house__assume5 : natural
-
-logic main__dr_house__assume6 : us_private
-
-logic main__dr_house__assume7 : int
-
-logic result : us_rep
-
-logic result1 : integer
-
-logic result2 : bool
-
-logic result3 : us_private
-
-logic kenny__split_fields4 : us_rep
-
-logic kenny__split_fields5 : integer
-
-logic kenny__split_fields6 : bool
-
-logic kenny__split_fields7 : us_private
-
-logic result4 : us_rep
-
-logic result5 : integer
-
-logic result6 : bool
-
-logic result7 : professions
-
-logic result8 : (int,skills) farray
-
-logic result9 : natural
-
-logic result10 : us_private
-
-logic uni_student__split_fields7 : us_rep
-
-logic uni_student__split_fields8 : integer
-
-logic uni_student__split_fields9 : bool
-
-logic uni_student__split_fields10 : professions
-
-logic uni_student__split_fields11 : (int,skills) farray
-
-logic uni_student__split_fields12 : natural
-
-logic uni_student__split_fields13 : us_private
-
-logic result11 : us_rep
-
-logic result12 : integer
-
-logic result13 : bool
-
-logic result14 : professions
-
-logic result15 : (int,skills) farray
-
-logic result16 : natural
-
-logic result17 : us_private
-
-logic zerocool__split_fields7 : us_rep
-
-logic zerocool__split_fields8 : integer
-
-logic zerocool__split_fields9 : bool
-
-logic zerocool__split_fields10 : professions
-
-logic zerocool__split_fields11 : (int,skills) farray
-
-logic zerocool__split_fields12 : natural
-
-logic zerocool__split_fields13 : us_private
-
-logic result18 : us_rep
-
-logic result19 : integer
-
-logic result20 : bool
-
-logic result21 : professions
-
-logic result22 : (int,skills) farray
-
-logic result23 : natural
-
-logic result24 : us_private
-
-logic rambo__split_fields7 : us_rep
-
-logic rambo__split_fields8 : integer
-
-logic rambo__split_fields9 : bool
-
-logic rambo__split_fields10 : professions
-
-logic rambo__split_fields11 : (int,skills) farray
-
-logic rambo__split_fields12 : natural
-
-logic rambo__split_fields13 : us_private
-
-logic result25 : us_rep
-
-logic result26 : integer
-
-logic result27 : bool
-
-logic result28 : professions
-
-logic result29 : (int,skills) farray
-
-logic result30 : natural
-
-logic result31 : us_private
-
-logic dr_house__split_fields7 : us_rep
-
-logic dr_house__split_fields8 : integer
-
-logic dr_house__split_fields9 : bool
-
-logic dr_house__split_fields10 : professions
-
-logic dr_house__split_fields11 : (int,skills) farray
-
-logic dr_house__split_fields12 : natural
-
-logic dr_house__split_fields13 : us_private
-
-logic result32 : int
-
-logic skill1 : int
-
-logic state : us_private
-
-logic result33 : bool
-
-logic uni_student__split_fields14 : us_rep
-
-logic uni_student__split_fields15 : integer
-
-logic uni_student__split_fields16 : bool
-
-logic uni_student__split_fields17 : professions
-
-logic uni_student__split_fields18 : (int,skills) farray
-
-logic uni_student__split_fields19 : natural
-
-logic uni_student__split_fields20 : us_private
-
-logic result34 : bool
-
-logic zerocool__split_fields14 : us_rep
-
-logic zerocool__split_fields15 : integer
-
-logic zerocool__split_fields16 : bool
-
-logic zerocool__split_fields17 : professions
-
-logic zerocool__split_fields18 : (int,skills) farray
-
-logic zerocool__split_fields19 : natural
-
-logic zerocool__split_fields20 : us_private
-
-logic result35 : bool
-
-logic rambo__split_fields14 : us_rep
-
-logic rambo__split_fields15 : integer
-
-logic rambo__split_fields16 : bool
-
-logic rambo__split_fields17 : professions
-
-logic rambo__split_fields18 : (int,skills) farray
-
-logic rambo__split_fields19 : natural
-
-logic rambo__split_fields20 : us_private
-
-logic result36 : bool
-
-logic dr_house__split_fields14 : us_rep
-
-logic dr_house__split_fields15 : integer
-
-logic dr_house__split_fields16 : bool
-
-logic dr_house__split_fields17 : professions
-
-logic dr_house__split_fields18 : (int,skills) farray
-
-logic dr_house__split_fields19 : natural
-
-logic dr_house__split_fields20 : us_private
-
-logic result37 : int
-
-logic skill2 : int
-
-logic state1 : us_private
-
-logic result38 : bool
-
-logic uni_student__split_fields21 : us_rep
-
-logic uni_student__split_fields22 : integer
-
-logic uni_student__split_fields23 : bool
-
-logic uni_student__split_fields24 : professions
-
-logic uni_student__split_fields25 : (int,skills) farray
-
-logic uni_student__split_fields26 : natural
-
-logic uni_student__split_fields27 : us_private
-
-logic result39 : bool
-
-logic zerocool__split_fields21 : us_rep
-
-logic zerocool__split_fields22 : integer
-
-logic zerocool__split_fields23 : bool
-
-logic zerocool__split_fields24 : professions
-
-logic zerocool__split_fields25 : (int,skills) farray
-
-logic zerocool__split_fields26 : natural
-
-logic zerocool__split_fields27 : us_private
-
-logic result40 : bool
-
-logic rambo__split_fields21 : us_rep
-
-logic rambo__split_fields22 : integer
-
-logic rambo__split_fields23 : bool
-
-logic rambo__split_fields24 : professions
-
-logic rambo__split_fields25 : (int,skills) farray
-
-logic rambo__split_fields26 : natural
-
-logic rambo__split_fields27 : us_private
-
-logic result41 : bool
-
-logic dr_house__split_fields21 : us_rep
-
-logic dr_house__split_fields22 : integer
-
-logic dr_house__split_fields23 : bool
-
-logic dr_house__split_fields24 : professions
-
-logic dr_house__split_fields25 : (int,skills) farray
-
-logic dr_house__split_fields26 : natural
-
-logic dr_house__split_fields27 : us_private
-
-logic result42 : int
-
-logic skill3 : int
-
-logic state2 : us_private
-
-logic result43 : bool
-
-logic uni_student__split_fields28 : us_rep
-
-logic uni_student__split_fields29 : integer
-
-logic uni_student__split_fields30 : bool
-
-logic uni_student__split_fields31 : professions
-
-logic uni_student__split_fields32 : (int,skills) farray
-
-logic uni_student__split_fields33 : natural
-
-logic uni_student__split_fields34 : us_private
-
-logic result44 : bool
-
-logic zerocool__split_fields28 : us_rep
-
-logic zerocool__split_fields29 : integer
-
-logic zerocool__split_fields30 : bool
-
-logic zerocool__split_fields31 : professions
-
-logic zerocool__split_fields32 : (int,skills) farray
-
-logic zerocool__split_fields33 : natural
-
-logic zerocool__split_fields34 : us_private
-
-logic result45 : bool
-
-logic rambo__split_fields28 : us_rep
-
-logic rambo__split_fields29 : integer
-
-logic rambo__split_fields30 : bool
-
-logic rambo__split_fields31 : professions
-
-logic rambo__split_fields32 : (int,skills) farray
-
-logic rambo__split_fields33 : natural
-
-logic rambo__split_fields34 : us_private
-
-logic result46 : bool
-
-logic dr_house__split_fields28 : us_rep
-
-logic dr_house__split_fields29 : integer
-
-logic dr_house__split_fields30 : bool
-
-logic dr_house__split_fields31 : professions
-
-logic dr_house__split_fields32 : (int,skills) farray
-
-logic dr_house__split_fields33 : natural
-
-logic dr_house__split_fields34 : us_private
-
-logic result47 : int
-
-logic skill4 : int
-
-logic state3 : us_private
-
-logic result48 : bool
-
-logic uni_student__split_fields35 : us_rep
-
-logic uni_student__split_fields36 : integer
-
-logic uni_student__split_fields37 : bool
-
-logic uni_student__split_fields38 : professions
-
-logic uni_student__split_fields39 : (int,skills) farray
-
-logic uni_student__split_fields40 : natural
-
-logic uni_student__split_fields41 : us_private
-
-logic result49 : bool
-
-logic zerocool__split_fields35 : us_rep
-
-logic zerocool__split_fields36 : integer
-
-logic zerocool__split_fields37 : bool
-
-logic zerocool__split_fields38 : professions
-
-logic zerocool__split_fields39 : (int,skills) farray
-
-logic zerocool__split_fields40 : natural
-
-logic zerocool__split_fields41 : us_private
-
-logic result50 : bool
-
-logic rambo__split_fields35 : us_rep
-
-logic rambo__split_fields36 : integer
-
-logic rambo__split_fields37 : bool
-
-logic rambo__split_fields38 : professions
-
-logic rambo__split_fields39 : (int,skills) farray
-
-logic rambo__split_fields40 : natural
-
-logic rambo__split_fields41 : us_private
-
-logic result51 : bool
-
-logic dr_house__split_fields35 : us_rep
-
-logic dr_house__split_fields36 : integer
-
-logic dr_house__split_fields37 : bool
-
-logic dr_house__split_fields38 : professions
-
-logic dr_house__split_fields39 : (int,skills) farray
-
-logic dr_house__split_fields40 : natural
-
-logic dr_house__split_fields41 : us_private
-
-logic result52 : int
-
-logic skill5 : int
-
-logic state4 : us_private
-
-logic result53 : bool
-
-logic uni_student__split_fields42 : us_rep
-
-logic uni_student__split_fields43 : integer
-
-logic uni_student__split_fields44 : bool
-
-logic uni_student__split_fields45 : professions
-
-logic uni_student__split_fields46 : (int,skills) farray
-
-logic uni_student__split_fields47 : natural
-
-logic uni_student__split_fields48 : us_private
-
-logic result54 : bool
-
-logic zerocool__split_fields42 : us_rep
-
-logic zerocool__split_fields43 : integer
-
-logic zerocool__split_fields44 : bool
-
-logic zerocool__split_fields45 : professions
-
-logic zerocool__split_fields46 : (int,skills) farray
-
-logic zerocool__split_fields47 : natural
-
-logic zerocool__split_fields48 : us_private
-
-logic result55 : bool
-
-logic rambo__split_fields42 : us_rep
-
-logic rambo__split_fields43 : integer
-
-logic rambo__split_fields44 : bool
-
-logic rambo__split_fields45 : professions
-
-logic rambo__split_fields46 : (int,skills) farray
-
-logic rambo__split_fields47 : natural
-
-logic rambo__split_fields48 : us_private
-
-logic result56 : bool
-
-logic dr_house__split_fields42 : us_rep
-
-logic dr_house__split_fields43 : integer
-
-logic dr_house__split_fields44 : bool
-
-logic dr_house__split_fields45 : professions
-
-logic dr_house__split_fields46 : (int,skills) farray
-
-logic dr_house__split_fields47 : natural
-
-logic dr_house__split_fields48 : us_private
-
-logic result57 : int
-
-logic skill6 : int
-
-logic state5 : us_private
-
-logic result58 : bool
-
-logic uni_student__split_fields49 : us_rep
-
-logic uni_student__split_fields50 : integer
-
-logic uni_student__split_fields51 : bool
-
-logic uni_student__split_fields52 : professions
-
-logic uni_student__split_fields53 : (int,skills) farray
-
-logic uni_student__split_fields54 : natural
-
-logic uni_student__split_fields55 : us_private
-
-logic result59 : bool
-
-logic zerocool__split_fields49 : us_rep
-
-logic zerocool__split_fields50 : integer
-
-logic zerocool__split_fields51 : bool
-
-logic zerocool__split_fields52 : professions
-
-logic zerocool__split_fields53 : (int,skills) farray
-
-logic zerocool__split_fields54 : natural
-
-logic zerocool__split_fields55 : us_private
-
-logic result60 : bool
-
-logic rambo__split_fields49 : us_rep
-
-logic rambo__split_fields50 : integer
-
-logic rambo__split_fields51 : bool
-
-logic rambo__split_fields52 : professions
-
-logic rambo__split_fields53 : (int,skills) farray
-
-logic rambo__split_fields54 : natural
-
-logic rambo__split_fields55 : us_private
-
-logic result61 : bool
-
-logic dr_house__split_fields49 : us_rep
-
-logic dr_house__split_fields50 : integer
-
-logic dr_house__split_fields51 : bool
-
-logic dr_house__split_fields52 : professions
-
-logic dr_house__split_fields53 : (int,skills) farray
-
-logic dr_house__split_fields54 : natural
-
-logic dr_house__split_fields55 : us_private
-
-logic result62 : int
-
-logic skill7 : int
-
-logic state6 : us_private
-
-logic result63 : bool
-
-logic uni_student__split_fields56 : us_rep
-
-logic uni_student__split_fields57 : integer
-
-logic uni_student__split_fields58 : bool
-
-logic uni_student__split_fields59 : professions
-
-logic uni_student__split_fields60 : (int,skills) farray
-
-logic uni_student__split_fields61 : natural
-
-logic uni_student__split_fields62 : us_private
-
-logic result64 : bool
-
-logic zerocool__split_fields56 : us_rep
-
-logic zerocool__split_fields57 : integer
-
-logic zerocool__split_fields58 : bool
-
-logic zerocool__split_fields59 : professions
-
-logic zerocool__split_fields60 : (int,skills) farray
-
-logic zerocool__split_fields61 : natural
-
-logic zerocool__split_fields62 : us_private
-
-logic result65 : bool
-
-logic rambo__split_fields56 : us_rep
-
-logic rambo__split_fields57 : integer
-
-logic rambo__split_fields58 : bool
-
-logic rambo__split_fields59 : professions
-
-logic rambo__split_fields60 : (int,skills) farray
-
-logic rambo__split_fields61 : natural
-
-logic rambo__split_fields62 : us_private
-
-logic result66 : bool
-
-logic dr_house__split_fields56 : us_rep
-
-logic dr_house__split_fields57 : integer
-
-logic dr_house__split_fields58 : bool
-
-logic dr_house__split_fields59 : professions
-
-logic dr_house__split_fields60 : (int,skills) farray
-
-logic dr_house__split_fields61 : natural
-
-logic dr_house__split_fields62 : us_private
-
-logic result67 : int
-
-logic skill8 : int
-
-logic state7 : us_private
-
-logic result68 : bool
-
-logic uni_student__split_fields63 : us_rep
-
-logic uni_student__split_fields64 : integer
-
-logic uni_student__split_fields65 : bool
-
-logic uni_student__split_fields66 : professions
-
-logic uni_student__split_fields67 : (int,skills) farray
-
-logic uni_student__split_fields68 : natural
-
-logic uni_student__split_fields69 : us_private
-
-logic result69 : bool
-
-logic zerocool__split_fields63 : us_rep
-
-logic zerocool__split_fields64 : integer
-
-logic zerocool__split_fields65 : bool
-
-logic zerocool__split_fields66 : professions
-
-logic zerocool__split_fields67 : (int,skills) farray
-
-logic zerocool__split_fields68 : natural
-
-logic zerocool__split_fields69 : us_private
-
-logic result70 : bool
-
-logic rambo__split_fields63 : us_rep
-
-logic rambo__split_fields64 : integer
-
-logic rambo__split_fields65 : bool
-
-logic rambo__split_fields66 : professions
-
-logic rambo__split_fields67 : (int,skills) farray
-
-logic rambo__split_fields68 : natural
-
-logic rambo__split_fields69 : us_private
-
-logic result71 : bool
-
-logic dr_house__split_fields63 : us_rep
-
-logic dr_house__split_fields64 : integer
-
-logic dr_house__split_fields65 : bool
-
-logic dr_house__split_fields66 : professions
-
-logic dr_house__split_fields67 : (int,skills) farray
-
-logic dr_house__split_fields68 : natural
-
-logic dr_house__split_fields69 : us_private
-
-logic result72 : int
-
-logic skill9 : int
-
-logic state8 : us_private
-
-logic result73 : bool
-
-logic uni_student__split_fields70 : us_rep
-
-logic uni_student__split_fields71 : integer
-
-logic uni_student__split_fields72 : bool
-
-logic uni_student__split_fields73 : professions
-
-logic uni_student__split_fields74 : (int,skills) farray
-
-logic uni_student__split_fields75 : natural
-
-logic uni_student__split_fields76 : us_private
-
-logic result74 : bool
-
-logic zerocool__split_fields70 : us_rep
-
-logic zerocool__split_fields71 : integer
-
-logic zerocool__split_fields72 : bool
-
-logic zerocool__split_fields73 : professions
-
-logic zerocool__split_fields74 : (int,skills) farray
-
-logic zerocool__split_fields75 : natural
-
-logic zerocool__split_fields76 : us_private
-
-logic result75 : bool
-
-logic rambo__split_fields70 : us_rep
-
-logic rambo__split_fields71 : integer
-
-logic rambo__split_fields72 : bool
-
-logic rambo__split_fields73 : professions
-
-logic rambo__split_fields74 : (int,skills) farray
-
-logic rambo__split_fields75 : natural
-
-logic rambo__split_fields76 : us_private
-
-logic result76 : bool
-
-logic dr_house__split_fields70 : us_rep
-
-logic dr_house__split_fields71 : integer
-
-logic dr_house__split_fields72 : bool
-
-logic dr_house__split_fields73 : professions
-
-logic dr_house__split_fields74 : (int,skills) farray
-
-logic dr_house__split_fields75 : natural
-
-logic dr_house__split_fields76 : us_private
-
-logic result77 : int
-
-logic skill10 : int
-
-logic state9 : us_private
-
-logic result78 : bool
-
-logic uni_student__split_fields77 : us_rep
-
-logic uni_student__split_fields78 : integer
-
-logic uni_student__split_fields79 : bool
-
-logic uni_student__split_fields80 : professions
-
-logic uni_student__split_fields81 : (int,skills) farray
-
-logic uni_student__split_fields82 : natural
-
-logic uni_student__split_fields83 : us_private
-
-logic result79 : bool
-
-logic zerocool__split_fields77 : us_rep
-
-logic zerocool__split_fields78 : integer
-
-logic zerocool__split_fields79 : bool
-
-logic zerocool__split_fields80 : professions
-
-logic zerocool__split_fields81 : (int,skills) farray
-
-logic zerocool__split_fields82 : natural
-
-logic zerocool__split_fields83 : us_private
-
-logic result80 : bool
-
-logic rambo__split_fields77 : us_rep
-
-logic rambo__split_fields78 : integer
-
-logic rambo__split_fields79 : bool
-
-logic rambo__split_fields80 : professions
-
-logic rambo__split_fields81 : (int,skills) farray
-
-logic rambo__split_fields82 : natural
-
-logic rambo__split_fields83 : us_private
-
-logic result81 : bool
-
-logic dr_house__split_fields77 : us_rep
-
-logic dr_house__split_fields78 : integer
-
-logic dr_house__split_fields79 : bool
-
-logic dr_house__split_fields80 : professions
-
-logic dr_house__split_fields81 : (int,skills) farray
-
-logic dr_house__split_fields82 : natural
-
-logic dr_house__split_fields83 : us_private
-
-logic result82 : int
-
-logic skill11 : int
-
-logic state10 : us_private
-
-logic result83 : bool
-
-logic uni_student__split_fields84 : us_rep
-
-logic uni_student__split_fields85 : integer
-
-logic uni_student__split_fields86 : bool
-
-logic uni_student__split_fields87 : professions
-
-logic uni_student__split_fields88 : (int,skills) farray
-
-logic uni_student__split_fields89 : natural
-
-logic uni_student__split_fields90 : us_private
-
-logic result84 : bool
-
-logic zerocool__split_fields84 : us_rep
-
-logic zerocool__split_fields85 : integer
-
-logic zerocool__split_fields86 : bool
-
-logic zerocool__split_fields87 : professions
-
-logic zerocool__split_fields88 : (int,skills) farray
-
-logic zerocool__split_fields89 : natural
-
-logic zerocool__split_fields90 : us_private
-
-logic result85 : bool
-
-logic rambo__split_fields84 : us_rep
-
-logic rambo__split_fields85 : integer
-
-logic rambo__split_fields86 : bool
-
-logic rambo__split_fields87 : professions
-
-logic rambo__split_fields88 : (int,skills) farray
-
-logic rambo__split_fields89 : natural
-
-logic rambo__split_fields90 : us_private
-
-logic result86 : bool
-
-logic dr_house__split_fields84 : us_rep
-
-logic dr_house__split_fields85 : integer
-
-logic dr_house__split_fields86 : bool
-
-logic dr_house__split_fields87 : professions
-
-logic dr_house__split_fields88 : (int,skills) farray
-
-logic dr_house__split_fields89 : natural
-
-logic dr_house__split_fields90 : us_private
-
-logic result87 : int
-
-logic skill12 : int
-
-logic state11 : us_private
-
-logic result88 : bool
-
-logic uni_student__split_fields91 : us_rep
-
-logic uni_student__split_fields92 : integer
-
-logic uni_student__split_fields93 : bool
-
-logic uni_student__split_fields94 : professions
-
-logic uni_student__split_fields95 : (int,skills) farray
-
-logic uni_student__split_fields96 : natural
-
-logic uni_student__split_fields97 : us_private
-
-logic result89 : bool
-
-logic zerocool__split_fields91 : us_rep
-
-logic zerocool__split_fields92 : integer
-
-logic zerocool__split_fields93 : bool
-
-logic zerocool__split_fields94 : professions
-
-logic zerocool__split_fields95 : (int,skills) farray
-
-logic zerocool__split_fields96 : natural
-
-logic zerocool__split_fields97 : us_private
-
-logic result90 : bool
-
-logic rambo__split_fields91 : us_rep
-
-logic rambo__split_fields92 : integer
-
-logic rambo__split_fields93 : bool
-
-logic rambo__split_fields94 : professions
-
-logic rambo__split_fields95 : (int,skills) farray
-
-logic rambo__split_fields96 : natural
-
-logic rambo__split_fields97 : us_private
-
-logic result91 : bool
-
-logic dr_house__split_fields91 : us_rep
-
-logic dr_house__split_fields92 : integer
-
-logic dr_house__split_fields93 : bool
-
-logic dr_house__split_fields94 : professions
-
-logic dr_house__split_fields95 : (int,skills) farray
-
-logic dr_house__split_fields96 : natural
-
-logic dr_house__split_fields97 : us_private
-
-logic result92 : int
-
-logic skill13 : int
-
-logic state12 : us_private
-
-logic result93 : bool
-
-logic uni_student__split_fields98 : us_rep
-
-logic uni_student__split_fields99 : integer
-
-logic uni_student__split_fields100 : bool
-
-logic uni_student__split_fields101 : professions
-
-logic uni_student__split_fields102 : (int,skills) farray
-
-logic uni_student__split_fields103 : natural
-
-logic uni_student__split_fields104 : us_private
-
-logic result94 : bool
-
-logic zerocool__split_fields98 : us_rep
-
-logic zerocool__split_fields99 : integer
-
-logic zerocool__split_fields100 : bool
-
-logic zerocool__split_fields101 : professions
-
-logic zerocool__split_fields102 : (int,skills) farray
-
-logic zerocool__split_fields103 : natural
-
-logic zerocool__split_fields104 : us_private
-
-logic result95 : bool
-
-logic rambo__split_fields98 : us_rep
-
-logic rambo__split_fields99 : integer
-
-logic rambo__split_fields100 : bool
-
-logic rambo__split_fields101 : professions
-
-logic rambo__split_fields102 : (int,skills) farray
-
-logic rambo__split_fields103 : natural
-
-logic rambo__split_fields104 : us_private
-
-logic result96 : bool
-
-logic dr_house__split_fields98 : us_rep
-
-logic dr_house__split_fields99 : integer
-
-logic dr_house__split_fields100 : bool
-
-logic dr_house__split_fields101 : professions
-
-logic dr_house__split_fields102 : (int,skills) farray
-
-logic dr_house__split_fields103 : natural
-
-logic dr_house__split_fields104 : us_private
-
-logic rambo__split_fields105 : us_rep
-
-logic rambo__split_fields106 : integer
-
-logic rambo__split_fields107 : bool
-
-logic rambo__split_fields108 : professions
-
-logic rambo__split_fields109 : (int,skills) farray
-
-logic rambo__split_fields110 : natural
-
-logic rambo__split_fields111 : us_private
-
-logic professionals__another_one_bites_the_dust__victim__fields : us_rep
-
-logic professionals__another_one_bites_the_dust__victim__fields1 : integer
-
-logic professionals__another_one_bites_the_dust__victim__fields2 : bool
-
-logic professionals__another_one_bites_the_dust__victim__fields3 : us_private
-
-logic result97 : us_rep
-
-logic result98 : integer
-
-logic result99 : bool
-
-logic result100 : professions
-
-logic result101 : (int,skills) farray
-
-logic result102 : natural
-
-logic result103 : us_private
-
-logic uni_student__split_fields105 : us_rep
-
-logic uni_student__split_fields106 : integer
-
-logic uni_student__split_fields107 : bool
-
-logic uni_student__split_fields108 : professions
-
-logic uni_student__split_fields109 : (int,skills) farray
-
-logic uni_student__split_fields110 : natural
-
-logic uni_student__split_fields111 : us_private
-
-logic kenny__split_fields8 : us_rep
-
-logic kenny__split_fields9 : integer
-
-logic kenny__split_fields10 : bool
-
-logic kenny__split_fields11 : us_private
-
-logic dr_house__split_fields105 : us_rep
-
-logic dr_house__split_fields106 : integer
-
-logic dr_house__split_fields107 : bool
-
-logic dr_house__split_fields108 : professions
-
-logic dr_house__split_fields109 : (int,skills) farray
-
-logic dr_house__split_fields110 : natural
-
-logic dr_house__split_fields111 : us_private
-
-axiom H : (o = to_unbounded_string({ elts = temp___String_Literal_678(void);
-  rt = mk(1, 17) }))
-
-axiom H1 : ({ us_split_fields1 = { rec__people__person__name =
+ (* File "main.adb", line 8, characters 0-0 *)
+goal WP_parameter_def :
+  (forall kenny__split_fields:us_rep. forall kenny__split_fields1:integer.
+  forall kenny__split_fields2:bool. forall kenny__split_fields3:us_private.
+  forall uni_student__split_fields:us_rep.
+  forall uni_student__split_fields1:integer.
+  forall uni_student__split_fields2:bool.
+  forall uni_student__split_fields3:professions.
+  forall uni_student__split_fields4:(int,skills) farray.
+  forall uni_student__split_fields5:natural.
+  forall uni_student__split_fields6:us_private.
+  forall zerocool__split_fields:us_rep.
+  forall zerocool__split_fields1:integer.
+  forall zerocool__split_fields2:bool.
+  forall zerocool__split_fields3:professions.
+  forall zerocool__split_fields4:(int,skills) farray.
+  forall zerocool__split_fields5:natural.
+  forall zerocool__split_fields6:us_private.
+  forall rambo__split_fields:us_rep. forall rambo__split_fields1:integer.
+  forall rambo__split_fields2:bool. forall rambo__split_fields3:professions.
+  forall rambo__split_fields4:(int,skills) farray.
+  forall rambo__split_fields5:natural.
+  forall rambo__split_fields6:us_private.
+  forall dr_house__split_fields:us_rep.
+  forall dr_house__split_fields1:integer.
+  forall dr_house__split_fields2:bool.
+  forall dr_house__split_fields3:professions.
+  forall dr_house__split_fields4:(int,skills) farray.
+  forall dr_house__split_fields5:natural.
+  forall dr_house__split_fields6:us_private. forall skill:int.
+  forall date:us_private. forall o:us_rep. forall main__kenny__assume:us_rep.
+  forall main__kenny__assume1:integer. forall main__kenny__assume2:bool.
+  forall main__kenny__assume3:us_private. forall main__kenny__assume4:int.
+  forall main__uni_student__assume:us_rep.
+  forall main__uni_student__assume1:integer.
+  forall main__uni_student__assume2:bool.
+  forall main__uni_student__assume3:professions.
+  forall main__uni_student__assume4:(int,skills) farray.
+  forall main__uni_student__assume5:natural.
+  forall main__uni_student__assume6:us_private.
+  forall main__uni_student__assume7:int. forall o1:us_rep.
+  forall main__zerocool__assume:us_rep.
+  forall main__zerocool__assume1:integer.
+  forall main__zerocool__assume2:bool.
+  forall main__zerocool__assume3:professions.
+  forall main__zerocool__assume4:(int,skills) farray.
+  forall main__zerocool__assume5:natural.
+  forall main__zerocool__assume6:us_private.
+  forall main__zerocool__assume7:int. forall o2:us_rep.
+  forall main__rambo__assume:us_rep. forall main__rambo__assume1:integer.
+  forall main__rambo__assume2:bool. forall main__rambo__assume3:professions.
+  forall main__rambo__assume4:(int,skills) farray.
+  forall main__rambo__assume5:natural.
+  forall main__rambo__assume6:us_private. forall main__rambo__assume7:int.
+  forall o3:us_rep. forall main__dr_house__assume:us_rep.
+  forall main__dr_house__assume1:integer.
+  forall main__dr_house__assume2:bool.
+  forall main__dr_house__assume3:professions.
+  forall main__dr_house__assume4:(int,skills) farray.
+  forall main__dr_house__assume5:natural.
+  forall main__dr_house__assume6:us_private.
+  forall main__dr_house__assume7:int. forall result:us_rep.
+  forall result1:integer. forall result2:bool. forall result3:us_private.
+  forall kenny__split_fields4:us_rep. forall kenny__split_fields5:integer.
+  forall kenny__split_fields6:bool. forall kenny__split_fields7:us_private.
+  forall result4:us_rep. forall result5:integer. forall result6:bool.
+  forall result7:professions. forall result8:(int,skills) farray.
+  forall result9:natural. forall result10:us_private.
+  forall uni_student__split_fields7:us_rep.
+  forall uni_student__split_fields8:integer.
+  forall uni_student__split_fields9:bool.
+  forall uni_student__split_fields10:professions.
+  forall uni_student__split_fields11:(int,skills) farray.
+  forall uni_student__split_fields12:natural.
+  forall uni_student__split_fields13:us_private. forall result11:us_rep.
+  forall result12:integer. forall result13:bool. forall result14:professions.
+  forall result15:(int,skills) farray. forall result16:natural.
+  forall result17:us_private. forall zerocool__split_fields7:us_rep.
+  forall zerocool__split_fields8:integer.
+  forall zerocool__split_fields9:bool.
+  forall zerocool__split_fields10:professions.
+  forall zerocool__split_fields11:(int,skills) farray.
+  forall zerocool__split_fields12:natural.
+  forall zerocool__split_fields13:us_private. forall result18:us_rep.
+  forall result19:integer. forall result20:bool. forall result21:professions.
+  forall result22:(int,skills) farray. forall result23:natural.
+  forall result24:us_private. forall rambo__split_fields7:us_rep.
+  forall rambo__split_fields8:integer. forall rambo__split_fields9:bool.
+  forall rambo__split_fields10:professions.
+  forall rambo__split_fields11:(int,skills) farray.
+  forall rambo__split_fields12:natural.
+  forall rambo__split_fields13:us_private. forall result25:us_rep.
+  forall result26:integer. forall result27:bool. forall result28:professions.
+  forall result29:(int,skills) farray. forall result30:natural.
+  forall result31:us_private. forall dr_house__split_fields7:us_rep.
+  forall dr_house__split_fields8:integer.
+  forall dr_house__split_fields9:bool.
+  forall dr_house__split_fields10:professions.
+  forall dr_house__split_fields11:(int,skills) farray.
+  forall dr_house__split_fields12:natural.
+  forall dr_house__split_fields13:us_private. forall result32:int.
+  forall skill1:int. forall state:us_private. forall result33:bool.
+  forall uni_student__split_fields14:us_rep.
+  forall uni_student__split_fields15:integer.
+  forall uni_student__split_fields16:bool.
+  forall uni_student__split_fields17:professions.
+  forall uni_student__split_fields18:(int,skills) farray.
+  forall uni_student__split_fields19:natural.
+  forall uni_student__split_fields20:us_private. forall result34:bool.
+  forall zerocool__split_fields14:us_rep.
+  forall zerocool__split_fields15:integer.
+  forall zerocool__split_fields16:bool.
+  forall zerocool__split_fields17:professions.
+  forall zerocool__split_fields18:(int,skills) farray.
+  forall zerocool__split_fields19:natural.
+  forall zerocool__split_fields20:us_private. forall result35:bool.
+  forall rambo__split_fields14:us_rep. forall rambo__split_fields15:integer.
+  forall rambo__split_fields16:bool.
+  forall rambo__split_fields17:professions.
+  forall rambo__split_fields18:(int,skills) farray.
+  forall rambo__split_fields19:natural.
+  forall rambo__split_fields20:us_private. forall result36:bool.
+  forall dr_house__split_fields14:us_split_fields2. forall result37:int__ref.
+  forall skill2:int. forall state1:us_private. forall result38:bool.
+  forall uni_student__split_fields21:us_split_fields2. forall result39:bool.
+  forall zerocool__split_fields21:us_split_fields2. forall result40:bool.
+  forall rambo__split_fields21:us_split_fields2. forall result41:bool.
+  forall dr_house__split_fields15:us_split_fields2. forall result42:int__ref.
+  forall skill3:int. forall state2:us_private. forall result43:bool.
+  forall uni_student__split_fields22:us_split_fields2. forall result44:bool.
+  forall zerocool__split_fields22:us_split_fields2. forall result45:bool.
+  forall rambo__split_fields22:us_split_fields2. forall result46:bool.
+  forall dr_house__split_fields16:us_split_fields2. forall result47:int__ref.
+  forall skill4:int. forall state3:us_private. forall result48:bool.
+  forall uni_student__split_fields23:us_split_fields2. forall result49:bool.
+  forall zerocool__split_fields23:us_split_fields2. forall result50:bool.
+  forall rambo__split_fields23:us_split_fields2. forall result51:bool.
+  forall dr_house__split_fields17:us_split_fields2. forall result52:int__ref.
+  forall skill5:int. forall state4:us_private. forall result53:bool.
+  forall uni_student__split_fields24:us_split_fields2. forall result54:bool.
+  forall zerocool__split_fields24:us_split_fields2. forall result55:bool.
+  forall rambo__split_fields24:us_split_fields2. forall result56:bool.
+  forall dr_house__split_fields18:us_split_fields2. forall result57:int__ref.
+  forall skill6:int. forall state5:us_private. forall result58:bool.
+  forall uni_student__split_fields25:us_split_fields2. forall result59:bool.
+  forall zerocool__split_fields25:us_split_fields2. forall result60:bool.
+  forall rambo__split_fields25:us_split_fields2. forall result61:bool.
+  forall dr_house__split_fields19:us_split_fields2. forall result62:int__ref.
+  forall skill7:int. forall state6:us_private. forall result63:bool.
+  forall uni_student__split_fields26:us_split_fields2. forall result64:bool.
+  forall zerocool__split_fields26:us_split_fields2. forall result65:bool.
+  forall rambo__split_fields26:us_split_fields2. forall result66:bool.
+  forall dr_house__split_fields20:us_split_fields2. forall result67:int__ref.
+  forall skill8:int. forall state7:us_private. forall result68:bool.
+  forall uni_student__split_fields27:us_split_fields2. forall result69:bool.
+  forall zerocool__split_fields27:us_split_fields2. forall result70:bool.
+  forall rambo__split_fields27:us_split_fields2. forall result71:bool.
+  forall dr_house__split_fields21:us_split_fields2. forall result72:int__ref.
+  forall skill9:int. forall state8:us_private. forall result73:bool.
+  forall uni_student__split_fields28:us_split_fields2. forall result74:bool.
+  forall zerocool__split_fields28:us_split_fields2. forall result75:bool.
+  forall rambo__split_fields28:us_split_fields2. forall result76:bool.
+  forall dr_house__split_fields22:us_split_fields2. forall result77:int__ref.
+  forall skill10:int. forall state9:us_private. forall result78:bool.
+  forall uni_student__split_fields29:us_split_fields2. forall result79:bool.
+  forall zerocool__split_fields29:us_split_fields2. forall result80:bool.
+  forall rambo__split_fields29:us_split_fields2. forall result81:bool.
+  forall dr_house__split_fields23:us_split_fields2. forall result82:int__ref.
+  forall skill11:int. forall state10:us_private. forall result83:bool.
+  forall uni_student__split_fields30:us_split_fields2. forall result84:bool.
+  forall zerocool__split_fields30:us_split_fields2. forall result85:bool.
+  forall rambo__split_fields30:us_split_fields2. forall result86:bool.
+  forall dr_house__split_fields24:us_split_fields2. forall result87:int__ref.
+  forall skill12:int. forall state11:us_private. forall result88:bool.
+  forall uni_student__split_fields31:us_split_fields2. forall result89:bool.
+  forall zerocool__split_fields31:us_split_fields2. forall result90:bool.
+  forall rambo__split_fields31:us_split_fields2. forall result91:bool.
+  forall dr_house__split_fields25:us_split_fields2. forall result92:int__ref.
+  forall skill13:int. forall state12:us_private. forall result93:bool.
+  forall uni_student__split_fields32:us_split_fields2. forall result94:bool.
+  forall zerocool__split_fields32:us_split_fields2. forall result95:bool.
+  forall rambo__split_fields32:us_split_fields2. forall result96:bool.
+  forall dr_house__split_fields26:us_split_fields2.
+  forall rambo__split_fields33:us_split_fields2.
+  forall professionals__another_one_bites_the_dust__victim__fields:us_split_fields.
+  forall result97:us_split_fields__ref1.
+  forall uni_student__split_fields33:us_split_fields2.
+  ((((o = to_unbounded_string({ elts = temp___String_Literal_730(void); rt =
+  mk(1, 17) })) and ({ us_split_fields1 = { rec__people__person__name =
   main__kenny__assume; rec__people__person__dob = main__kenny__assume1;
   rec__people__person__alive = main__kenny__assume2; rec__ext__ =
   main__kenny__assume3 }; attr__tag = main__kenny__assume4
-  } = new_person__2(o, date))
-
-axiom H2 : ((result = kenny__split_fields) and
+  } = new_person__2(o, date))) and ((((result = kenny__split_fields) and
   ((result1 = kenny__split_fields1) and ((result2 = kenny__split_fields2) and
-  (result3 = kenny__split_fields3))))
-
-axiom H3 : ((kenny__split_fields4 = main__kenny__assume) and
-  ((kenny__split_fields5 = main__kenny__assume1) and
-  ((kenny__split_fields6 = main__kenny__assume2) and
-  (kenny__split_fields7 = main__kenny__assume3))))
-
-axiom H4 : (kenny__attr__tag = us_tag)
-
-axiom H5 : ({ us_split_fields3 = { rec__people__person__name1 =
-  main__uni_student__assume; rec__people__person__dob1 =
-  main__uni_student__assume1; rec__people__person__alive1 =
-  main__uni_student__assume2; rec__professionals__professional__profession =
-  main__uni_student__assume3; rec__professionals__professional__skilled_in =
-  main__uni_student__assume4;
+  (result3 = kenny__split_fields3)))) and
+  ((main__kenny__assume = kenny__split_fields4) and
+  ((main__kenny__assume1 = kenny__split_fields5) and
+  ((main__kenny__assume2 = kenny__split_fields6) and
+  (main__kenny__assume3 = kenny__split_fields7))))) and
+  (kenny__attr__tag = us_tag))) -> ((({ us_split_fields3 = {
+  rec__people__person__name1 = main__uni_student__assume;
+  rec__people__person__dob1 = main__uni_student__assume1;
+  rec__people__person__alive1 = main__uni_student__assume2;
+  rec__professionals__professional__profession = main__uni_student__assume3;
+  rec__professionals__professional__skilled_in = main__uni_student__assume4;
   rec__professionals__professional__number_of_people_killed =
   main__uni_student__assume5; rec__ext__1 = main__uni_student__assume6 };
   attr__tag1 = main__uni_student__assume7 } = new_professional__2({
   us_split_fields1 = { rec__people__person__name = kenny__split_fields4;
   rec__people__person__dob = kenny__split_fields5;
   rec__people__person__alive = kenny__split_fields6; rec__ext__ =
-  kenny__split_fields7 }; attr__tag = kenny__attr__tag }, 0))
-
-axiom H6 : ((result4 = uni_student__split_fields) and
+  kenny__split_fields7 }; attr__tag = kenny__attr__tag }, 0)) and
+  ((((result4 = uni_student__split_fields) and
   ((result5 = uni_student__split_fields1) and
   ((result6 = uni_student__split_fields2) and
   ((result7 = uni_student__split_fields3) and
   ((result8 = uni_student__split_fields4) and
   ((result9 = uni_student__split_fields5) and
-  (result10 = uni_student__split_fields6)))))))
-
-axiom H7 : ((uni_student__split_fields7 = main__uni_student__assume) and
-  ((uni_student__split_fields8 = main__uni_student__assume1) and
-  ((uni_student__split_fields9 = main__uni_student__assume2) and
-  ((uni_student__split_fields10 = main__uni_student__assume3) and
-  ((uni_student__split_fields11 = main__uni_student__assume4) and
-  ((uni_student__split_fields12 = main__uni_student__assume5) and
-  (uni_student__split_fields13 = main__uni_student__assume6)))))))
-
-axiom H8 : (uni_student__attr__tag = us_tag1)
-
-axiom H9 : (o1 = to_unbounded_string({ elts =
-  temp___String_Literal_679(void); rt = mk(1, 11) }))
-
-axiom H10 : ({ us_split_fields3 = { rec__people__person__name1 =
-  main__zerocool__assume; rec__people__person__dob1 =
-  main__zerocool__assume1; rec__people__person__alive1 =
-  main__zerocool__assume2; rec__professionals__professional__profession =
-  main__zerocool__assume3; rec__professionals__professional__skilled_in =
-  main__zerocool__assume4;
+  (result10 = uni_student__split_fields6))))))) and
+  ((main__uni_student__assume = uni_student__split_fields7) and
+  ((main__uni_student__assume1 = uni_student__split_fields8) and
+  ((main__uni_student__assume2 = uni_student__split_fields9) and
+  ((main__uni_student__assume3 = uni_student__split_fields10) and
+  ((main__uni_student__assume4 = uni_student__split_fields11) and
+  ((main__uni_student__assume5 = uni_student__split_fields12) and
+  (main__uni_student__assume6 = uni_student__split_fields13)))))))) and
+  (uni_student__attr__tag = us_tag1))) -> ((((o1 = to_unbounded_string({
+  elts = temp___String_Literal_731(void); rt = mk(1, 11) })) and ({
+  us_split_fields3 = { rec__people__person__name1 = main__zerocool__assume;
+  rec__people__person__dob1 = main__zerocool__assume1;
+  rec__people__person__alive1 = main__zerocool__assume2;
+  rec__professionals__professional__profession = main__zerocool__assume3;
+  rec__professionals__professional__skilled_in = main__zerocool__assume4;
   rec__professionals__professional__number_of_people_killed =
   main__zerocool__assume5; rec__ext__1 = main__zerocool__assume6 };
-  attr__tag1 = main__zerocool__assume7 } = new_professional(o1, 1011977, 1))
-
-axiom H11 : ((result11 = zerocool__split_fields) and
+  attr__tag1 = main__zerocool__assume7 } = new_professional(o1, 1011977,
+  1))) and ((((result11 = zerocool__split_fields) and
   ((result12 = zerocool__split_fields1) and
   ((result13 = zerocool__split_fields2) and
   ((result14 = zerocool__split_fields3) and
   ((result15 = zerocool__split_fields4) and
   ((result16 = zerocool__split_fields5) and
-  (result17 = zerocool__split_fields6)))))))
-
-axiom H12 : ((zerocool__split_fields7 = main__zerocool__assume) and
-  ((zerocool__split_fields8 = main__zerocool__assume1) and
-  ((zerocool__split_fields9 = main__zerocool__assume2) and
-  ((zerocool__split_fields10 = main__zerocool__assume3) and
-  ((zerocool__split_fields11 = main__zerocool__assume4) and
-  ((zerocool__split_fields12 = main__zerocool__assume5) and
-  (zerocool__split_fields13 = main__zerocool__assume6)))))))
-
-axiom H13 : (zerocool__attr__tag = us_tag1)
-
-axiom H14 : (o2 = to_unbounded_string({ elts =
-  temp___String_Literal_680(void); rt = mk(1, 10) }))
-
-axiom H15 : ({ us_split_fields3 = { rec__people__person__name1 =
-  main__rambo__assume; rec__people__person__dob1 = main__rambo__assume1;
+  (result17 = zerocool__split_fields6))))))) and
+  ((main__zerocool__assume = zerocool__split_fields7) and
+  ((main__zerocool__assume1 = zerocool__split_fields8) and
+  ((main__zerocool__assume2 = zerocool__split_fields9) and
+  ((main__zerocool__assume3 = zerocool__split_fields10) and
+  ((main__zerocool__assume4 = zerocool__split_fields11) and
+  ((main__zerocool__assume5 = zerocool__split_fields12) and
+  (main__zerocool__assume6 = zerocool__split_fields13)))))))) and
+  (zerocool__attr__tag = us_tag1))) -> ((((o2 = to_unbounded_string({ elts =
+  temp___String_Literal_732(void); rt = mk(1, 10) })) and ({
+  us_split_fields3 = { rec__people__person__name1 = main__rambo__assume;
+  rec__people__person__dob1 = main__rambo__assume1;
   rec__people__person__alive1 = main__rambo__assume2;
   rec__professionals__professional__profession = main__rambo__assume3;
   rec__professionals__professional__skilled_in = main__rambo__assume4;
   rec__professionals__professional__number_of_people_killed =
   main__rambo__assume5; rec__ext__1 = main__rambo__assume6 }; attr__tag1 =
-  main__rambo__assume7 } = new_professional(o2, 6071946, 2))
-
-axiom H16 : ((result18 = rambo__split_fields) and
+  main__rambo__assume7 } = new_professional(o2, 6071946, 2))) and
+  ((((result18 = rambo__split_fields) and
   ((result19 = rambo__split_fields1) and
   ((result20 = rambo__split_fields2) and
   ((result21 = rambo__split_fields3) and
   ((result22 = rambo__split_fields4) and
   ((result23 = rambo__split_fields5) and
-  (result24 = rambo__split_fields6)))))))
-
-axiom H17 : ((rambo__split_fields7 = main__rambo__assume) and
-  ((rambo__split_fields8 = main__rambo__assume1) and
-  ((rambo__split_fields9 = main__rambo__assume2) and
-  ((rambo__split_fields10 = main__rambo__assume3) and
-  ((rambo__split_fields11 = main__rambo__assume4) and
-  ((rambo__split_fields12 = main__rambo__assume5) and
-  (rambo__split_fields13 = main__rambo__assume6)))))))
-
-axiom H18 : (rambo__attr__tag = us_tag1)
-
-axiom H19 : (o3 = to_unbounded_string({ elts =
-  temp___String_Literal_681(void); rt = mk(1, 13) }))
-
-axiom H20 : ({ us_split_fields3 = { rec__people__person__name1 =
-  main__dr_house__assume; rec__people__person__dob1 =
-  main__dr_house__assume1; rec__people__person__alive1 =
-  main__dr_house__assume2; rec__professionals__professional__profession =
-  main__dr_house__assume3; rec__professionals__professional__skilled_in =
-  main__dr_house__assume4;
+  (result24 = rambo__split_fields6))))))) and
+  ((main__rambo__assume = rambo__split_fields7) and
+  ((main__rambo__assume1 = rambo__split_fields8) and
+  ((main__rambo__assume2 = rambo__split_fields9) and
+  ((main__rambo__assume3 = rambo__split_fields10) and
+  ((main__rambo__assume4 = rambo__split_fields11) and
+  ((main__rambo__assume5 = rambo__split_fields12) and
+  (main__rambo__assume6 = rambo__split_fields13)))))))) and
+  (rambo__attr__tag = us_tag1))) -> ((((o3 = to_unbounded_string({ elts =
+  temp___String_Literal_733(void); rt = mk(1, 13) })) and ({
+  us_split_fields3 = { rec__people__person__name1 = main__dr_house__assume;
+  rec__people__person__dob1 = main__dr_house__assume1;
+  rec__people__person__alive1 = main__dr_house__assume2;
+  rec__professionals__professional__profession = main__dr_house__assume3;
+  rec__professionals__professional__skilled_in = main__dr_house__assume4;
   rec__professionals__professional__number_of_people_killed =
   main__dr_house__assume5; rec__ext__1 = main__dr_house__assume6 };
-  attr__tag1 = main__dr_house__assume7 } = new_professional(o3, 11061959, 3))
-
-axiom H21 : ((result25 = dr_house__split_fields) and
+  attr__tag1 = main__dr_house__assume7 } = new_professional(o3, 11061959,
+  3))) and ((((result25 = dr_house__split_fields) and
   ((result26 = dr_house__split_fields1) and
   ((result27 = dr_house__split_fields2) and
   ((result28 = dr_house__split_fields3) and
   ((result29 = dr_house__split_fields4) and
   ((result30 = dr_house__split_fields5) and
-  (result31 = dr_house__split_fields6)))))))
-
-axiom H22 : ((dr_house__split_fields7 = main__dr_house__assume) and
-  ((dr_house__split_fields8 = main__dr_house__assume1) and
-  ((dr_house__split_fields9 = main__dr_house__assume2) and
-  ((dr_house__split_fields10 = main__dr_house__assume3) and
-  ((dr_house__split_fields11 = main__dr_house__assume4) and
-  ((dr_house__split_fields12 = main__dr_house__assume5) and
-  (dr_house__split_fields13 = main__dr_house__assume6)))))))
-
-axiom H23 : (dr_house__attr__tag = us_tag1)
-
-axiom H24 : (result32 = skill)
-
-axiom H25 : (skill1 = 0)
-
-axiom H26 : (result33 = has_training({ us_split_fields3 = {
+  (result31 = dr_house__split_fields6))))))) and
+  ((main__dr_house__assume = dr_house__split_fields7) and
+  ((main__dr_house__assume1 = dr_house__split_fields8) and
+  ((main__dr_house__assume2 = dr_house__split_fields9) and
+  ((main__dr_house__assume3 = dr_house__split_fields10) and
+  ((main__dr_house__assume4 = dr_house__split_fields11) and
+  ((main__dr_house__assume5 = dr_house__split_fields12) and
+  (main__dr_house__assume6 = dr_house__split_fields13)))))))) and
+  (dr_house__attr__tag = us_tag1))) -> ((((result32 = skill) and
+  (skill1 = 0)) and (((result33 = has_training({ us_split_fields3 = {
   rec__people__person__name1 = uni_student__split_fields7;
   rec__people__person__dob1 = uni_student__split_fields8;
   rec__people__person__alive1 = uni_student__split_fields9;
@@ -3012,20 +1811,23 @@ axiom H26 : (result33 = has_training({ us_split_fields3 = {
   rec__professionals__professional__skilled_in = uni_student__split_fields11;
   rec__professionals__professional__number_of_people_killed =
   uni_student__split_fields12; rec__ext__1 = uni_student__split_fields13 };
-  attr__tag1 = uni_student__attr__tag }, state))
-
-axiom H27 : true
-
-axiom H28 : ((not (result33 = true)) ->
-  ((uni_student__split_fields14 = uni_student__split_fields7) and
-  ((uni_student__split_fields15 = uni_student__split_fields8) and
-  ((uni_student__split_fields16 = uni_student__split_fields9) and
-  ((uni_student__split_fields17 = uni_student__split_fields10) and
-  ((uni_student__split_fields18 = uni_student__split_fields11) and
-  ((uni_student__split_fields19 = uni_student__split_fields12) and
-  (uni_student__split_fields20 = uni_student__split_fields13))))))))
-
-axiom H29 : (result34 = has_training({ us_split_fields3 = {
+  attr__tag1 = uni_student__attr__tag }, state)) and ((result33 = true) or
+  ((not (result33 = true)) and ({ rec__people__person__name1 =
+  uni_student__split_fields14; rec__people__person__dob1 =
+  uni_student__split_fields15; rec__people__person__alive1 =
+  uni_student__split_fields16; rec__professionals__professional__profession =
+  uni_student__split_fields17; rec__professionals__professional__skilled_in =
+  uni_student__split_fields18;
+  rec__professionals__professional__number_of_people_killed =
+  uni_student__split_fields19; rec__ext__1 = uni_student__split_fields20
+  } = { rec__people__person__name1 = uni_student__split_fields7;
+  rec__people__person__dob1 = uni_student__split_fields8;
+  rec__people__person__alive1 = uni_student__split_fields9;
+  rec__professionals__professional__profession = uni_student__split_fields10;
+  rec__professionals__professional__skilled_in = uni_student__split_fields11;
+  rec__professionals__professional__number_of_people_killed =
+  uni_student__split_fields12; rec__ext__1 = uni_student__split_fields13
+  })))) and (((result34 = has_training({ us_split_fields3 = {
   rec__people__person__name1 = zerocool__split_fields7;
   rec__people__person__dob1 = zerocool__split_fields8;
   rec__people__person__alive1 = zerocool__split_fields9;
@@ -3033,20 +1835,23 @@ axiom H29 : (result34 = has_training({ us_split_fields3 = {
   rec__professionals__professional__skilled_in = zerocool__split_fields11;
   rec__professionals__professional__number_of_people_killed =
   zerocool__split_fields12; rec__ext__1 = zerocool__split_fields13 };
-  attr__tag1 = zerocool__attr__tag }, state))
-
-axiom H30 : true
-
-axiom H31 : ((not (result34 = true)) ->
-  ((zerocool__split_fields14 = zerocool__split_fields7) and
-  ((zerocool__split_fields15 = zerocool__split_fields8) and
-  ((zerocool__split_fields16 = zerocool__split_fields9) and
-  ((zerocool__split_fields17 = zerocool__split_fields10) and
-  ((zerocool__split_fields18 = zerocool__split_fields11) and
-  ((zerocool__split_fields19 = zerocool__split_fields12) and
-  (zerocool__split_fields20 = zerocool__split_fields13))))))))
-
-axiom H32 : (result35 = has_training({ us_split_fields3 = {
+  attr__tag1 = zerocool__attr__tag }, state)) and ((result34 = true) or
+  ((not (result34 = true)) and ({ rec__people__person__name1 =
+  zerocool__split_fields14; rec__people__person__dob1 =
+  zerocool__split_fields15; rec__people__person__alive1 =
+  zerocool__split_fields16; rec__professionals__professional__profession =
+  zerocool__split_fields17; rec__professionals__professional__skilled_in =
+  zerocool__split_fields18;
+  rec__professionals__professional__number_of_people_killed =
+  zerocool__split_fields19; rec__ext__1 = zerocool__split_fields20 } = {
+  rec__people__person__name1 = zerocool__split_fields7;
+  rec__people__person__dob1 = zerocool__split_fields8;
+  rec__people__person__alive1 = zerocool__split_fields9;
+  rec__professionals__professional__profession = zerocool__split_fields10;
+  rec__professionals__professional__skilled_in = zerocool__split_fields11;
+  rec__professionals__professional__number_of_people_killed =
+  zerocool__split_fields12; rec__ext__1 = zerocool__split_fields13 })))) and
+  (((result35 = has_training({ us_split_fields3 = {
   rec__people__person__name1 = rambo__split_fields7;
   rec__people__person__dob1 = rambo__split_fields8;
   rec__people__person__alive1 = rambo__split_fields9;
@@ -3054,20 +1859,22 @@ axiom H32 : (result35 = has_training({ us_split_fields3 = {
   rec__professionals__professional__skilled_in = rambo__split_fields11;
   rec__professionals__professional__number_of_people_killed =
   rambo__split_fields12; rec__ext__1 = rambo__split_fields13 }; attr__tag1 =
-  rambo__attr__tag }, state))
-
-axiom H33 : true
-
-axiom H34 : ((not (result35 = true)) ->
-  ((rambo__split_fields14 = rambo__split_fields7) and
-  ((rambo__split_fields15 = rambo__split_fields8) and
-  ((rambo__split_fields16 = rambo__split_fields9) and
-  ((rambo__split_fields17 = rambo__split_fields10) and
-  ((rambo__split_fields18 = rambo__split_fields11) and
-  ((rambo__split_fields19 = rambo__split_fields12) and
-  (rambo__split_fields20 = rambo__split_fields13))))))))
-
-axiom H35 : (result36 = has_training({ us_split_fields3 = {
+  rambo__attr__tag }, state)) and ((result35 = true) or
+  ((not (result35 = true)) and ({ rec__people__person__name1 =
+  rambo__split_fields14; rec__people__person__dob1 = rambo__split_fields15;
+  rec__people__person__alive1 = rambo__split_fields16;
+  rec__professionals__professional__profession = rambo__split_fields17;
+  rec__professionals__professional__skilled_in = rambo__split_fields18;
+  rec__professionals__professional__number_of_people_killed =
+  rambo__split_fields19; rec__ext__1 = rambo__split_fields20 } = {
+  rec__people__person__name1 = rambo__split_fields7;
+  rec__people__person__dob1 = rambo__split_fields8;
+  rec__people__person__alive1 = rambo__split_fields9;
+  rec__professionals__professional__profession = rambo__split_fields10;
+  rec__professionals__professional__skilled_in = rambo__split_fields11;
+  rec__professionals__professional__number_of_people_killed =
+  rambo__split_fields12; rec__ext__1 = rambo__split_fields13 })))) and
+  (((result36 = has_training({ us_split_fields3 = {
   rec__people__person__name1 = dr_house__split_fields7;
   rec__people__person__dob1 = dr_house__split_fields8;
   rec__people__person__alive1 = dr_house__split_fields9;
@@ -3075,24 +1882,17 @@ axiom H35 : (result36 = has_training({ us_split_fields3 = {
   rec__professionals__professional__skilled_in = dr_house__split_fields11;
   rec__professionals__professional__number_of_people_killed =
   dr_house__split_fields12; rec__ext__1 = dr_house__split_fields13 };
-  attr__tag1 = dr_house__attr__tag }, state))
-
-axiom H36 : true
-
-axiom H37 : ((not (result36 = true)) ->
-  ((dr_house__split_fields14 = dr_house__split_fields7) and
-  ((dr_house__split_fields15 = dr_house__split_fields8) and
-  ((dr_house__split_fields16 = dr_house__split_fields9) and
-  ((dr_house__split_fields17 = dr_house__split_fields10) and
-  ((dr_house__split_fields18 = dr_house__split_fields11) and
-  ((dr_house__split_fields19 = dr_house__split_fields12) and
-  (dr_house__split_fields20 = dr_house__split_fields13))))))))
-
-axiom H38 : (result37 = skill1)
-
-axiom H39 : (skill2 = 1)
-
-axiom H40 : (result38 = has_training({ us_split_fields3 = {
+  attr__tag1 = dr_house__attr__tag }, state)) and ((result36 = true) or
+  ((not (result36 = true)) and (dr_house__split_fields14 = {
+  rec__people__person__name1 = dr_house__split_fields7;
+  rec__people__person__dob1 = dr_house__split_fields8;
+  rec__people__person__alive1 = dr_house__split_fields9;
+  rec__professionals__professional__profession = dr_house__split_fields10;
+  rec__professionals__professional__skilled_in = dr_house__split_fields11;
+  rec__professionals__professional__number_of_people_killed =
+  dr_house__split_fields12; rec__ext__1 = dr_house__split_fields13 })))) and
+  (((result37 = { int__content = skill1 }) and (skill2 = 1)) and
+  (((result38 = has_training({ us_split_fields3 = {
   rec__people__person__name1 = uni_student__split_fields14;
   rec__people__person__dob1 = uni_student__split_fields15;
   rec__people__person__alive1 = uni_student__split_fields16;
@@ -3100,20 +1900,16 @@ axiom H40 : (result38 = has_training({ us_split_fields3 = {
   rec__professionals__professional__skilled_in = uni_student__split_fields18;
   rec__professionals__professional__number_of_people_killed =
   uni_student__split_fields19; rec__ext__1 = uni_student__split_fields20 };
-  attr__tag1 = uni_student__attr__tag }, state1))
-
-axiom H41 : true
-
-axiom H42 : ((not (result38 = true)) ->
-  ((uni_student__split_fields21 = uni_student__split_fields14) and
-  ((uni_student__split_fields22 = uni_student__split_fields15) and
-  ((uni_student__split_fields23 = uni_student__split_fields16) and
-  ((uni_student__split_fields24 = uni_student__split_fields17) and
-  ((uni_student__split_fields25 = uni_student__split_fields18) and
-  ((uni_student__split_fields26 = uni_student__split_fields19) and
-  (uni_student__split_fields27 = uni_student__split_fields20))))))))
-
-axiom H43 : (result39 = has_training({ us_split_fields3 = {
+  attr__tag1 = uni_student__attr__tag }, state1)) and ((result38 = true) or
+  ((not (result38 = true)) and (uni_student__split_fields21 = {
+  rec__people__person__name1 = uni_student__split_fields14;
+  rec__people__person__dob1 = uni_student__split_fields15;
+  rec__people__person__alive1 = uni_student__split_fields16;
+  rec__professionals__professional__profession = uni_student__split_fields17;
+  rec__professionals__professional__skilled_in = uni_student__split_fields18;
+  rec__professionals__professional__number_of_people_killed =
+  uni_student__split_fields19; rec__ext__1 = uni_student__split_fields20
+  })))) and (((result39 = has_training({ us_split_fields3 = {
   rec__people__person__name1 = zerocool__split_fields14;
   rec__people__person__dob1 = zerocool__split_fields15;
   rec__people__person__alive1 = zerocool__split_fields16;
@@ -3121,20 +1917,16 @@ axiom H43 : (result39 = has_training({ us_split_fields3 = {
   rec__professionals__professional__skilled_in = zerocool__split_fields18;
   rec__professionals__professional__number_of_people_killed =
   zerocool__split_fields19; rec__ext__1 = zerocool__split_fields20 };
-  attr__tag1 = zerocool__attr__tag }, state1))
-
-axiom H44 : true
-
-axiom H45 : ((not (result39 = true)) ->
-  ((zerocool__split_fields21 = zerocool__split_fields14) and
-  ((zerocool__split_fields22 = zerocool__split_fields15) and
-  ((zerocool__split_fields23 = zerocool__split_fields16) and
-  ((zerocool__split_fields24 = zerocool__split_fields17) and
-  ((zerocool__split_fields25 = zerocool__split_fields18) and
-  ((zerocool__split_fields26 = zerocool__split_fields19) and
-  (zerocool__split_fields27 = zerocool__split_fields20))))))))
-
-axiom H46 : (result40 = has_training({ us_split_fields3 = {
+  attr__tag1 = zerocool__attr__tag }, state1)) and ((result39 = true) or
+  ((not (result39 = true)) and (zerocool__split_fields21 = {
+  rec__people__person__name1 = zerocool__split_fields14;
+  rec__people__person__dob1 = zerocool__split_fields15;
+  rec__people__person__alive1 = zerocool__split_fields16;
+  rec__professionals__professional__profession = zerocool__split_fields17;
+  rec__professionals__professional__skilled_in = zerocool__split_fields18;
+  rec__professionals__professional__number_of_people_killed =
+  zerocool__split_fields19; rec__ext__1 = zerocool__split_fields20 })))) and
+  (((result40 = has_training({ us_split_fields3 = {
   rec__people__person__name1 = rambo__split_fields14;
   rec__people__person__dob1 = rambo__split_fields15;
   rec__people__person__alive1 = rambo__split_fields16;
@@ -3142,1054 +1934,231 @@ axiom H46 : (result40 = has_training({ us_split_fields3 = {
   rec__professionals__professional__skilled_in = rambo__split_fields18;
   rec__professionals__professional__number_of_people_killed =
   rambo__split_fields19; rec__ext__1 = rambo__split_fields20 }; attr__tag1 =
-  rambo__attr__tag }, state1))
-
-axiom H47 : true
-
-axiom H48 : ((not (result40 = true)) ->
-  ((rambo__split_fields21 = rambo__split_fields14) and
-  ((rambo__split_fields22 = rambo__split_fields15) and
-  ((rambo__split_fields23 = rambo__split_fields16) and
-  ((rambo__split_fields24 = rambo__split_fields17) and
-  ((rambo__split_fields25 = rambo__split_fields18) and
-  ((rambo__split_fields26 = rambo__split_fields19) and
-  (rambo__split_fields27 = rambo__split_fields20))))))))
-
-axiom H49 : (result41 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = dr_house__split_fields14;
-  rec__people__person__dob1 = dr_house__split_fields15;
-  rec__people__person__alive1 = dr_house__split_fields16;
-  rec__professionals__professional__profession = dr_house__split_fields17;
-  rec__professionals__professional__skilled_in = dr_house__split_fields18;
+  rambo__attr__tag }, state1)) and ((result40 = true) or
+  ((not (result40 = true)) and (rambo__split_fields21 = {
+  rec__people__person__name1 = rambo__split_fields14;
+  rec__people__person__dob1 = rambo__split_fields15;
+  rec__people__person__alive1 = rambo__split_fields16;
+  rec__professionals__professional__profession = rambo__split_fields17;
+  rec__professionals__professional__skilled_in = rambo__split_fields18;
   rec__professionals__professional__number_of_people_killed =
-  dr_house__split_fields19; rec__ext__1 = dr_house__split_fields20 };
-  attr__tag1 = dr_house__attr__tag }, state1))
-
-axiom H50 : true
-
-axiom H51 : ((not (result41 = true)) ->
-  ((dr_house__split_fields21 = dr_house__split_fields14) and
-  ((dr_house__split_fields22 = dr_house__split_fields15) and
-  ((dr_house__split_fields23 = dr_house__split_fields16) and
-  ((dr_house__split_fields24 = dr_house__split_fields17) and
-  ((dr_house__split_fields25 = dr_house__split_fields18) and
-  ((dr_house__split_fields26 = dr_house__split_fields19) and
-  (dr_house__split_fields27 = dr_house__split_fields20))))))))
-
-axiom H52 : (result42 = skill2)
-
-axiom H53 : (skill3 = 2)
-
-axiom H54 : (result43 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = uni_student__split_fields21;
-  rec__people__person__dob1 = uni_student__split_fields22;
-  rec__people__person__alive1 = uni_student__split_fields23;
-  rec__professionals__professional__profession = uni_student__split_fields24;
-  rec__professionals__professional__skilled_in = uni_student__split_fields25;
-  rec__professionals__professional__number_of_people_killed =
-  uni_student__split_fields26; rec__ext__1 = uni_student__split_fields27 };
-  attr__tag1 = uni_student__attr__tag }, state2))
-
-axiom H55 : true
-
-axiom H56 : ((not (result43 = true)) ->
-  ((uni_student__split_fields28 = uni_student__split_fields21) and
-  ((uni_student__split_fields29 = uni_student__split_fields22) and
-  ((uni_student__split_fields30 = uni_student__split_fields23) and
-  ((uni_student__split_fields31 = uni_student__split_fields24) and
-  ((uni_student__split_fields32 = uni_student__split_fields25) and
-  ((uni_student__split_fields33 = uni_student__split_fields26) and
-  (uni_student__split_fields34 = uni_student__split_fields27))))))))
-
-axiom H57 : (result44 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = zerocool__split_fields21;
-  rec__people__person__dob1 = zerocool__split_fields22;
-  rec__people__person__alive1 = zerocool__split_fields23;
-  rec__professionals__professional__profession = zerocool__split_fields24;
-  rec__professionals__professional__skilled_in = zerocool__split_fields25;
-  rec__professionals__professional__number_of_people_killed =
-  zerocool__split_fields26; rec__ext__1 = zerocool__split_fields27 };
-  attr__tag1 = zerocool__attr__tag }, state2))
-
-axiom H58 : true
-
-axiom H59 : ((not (result44 = true)) ->
-  ((zerocool__split_fields28 = zerocool__split_fields21) and
-  ((zerocool__split_fields29 = zerocool__split_fields22) and
-  ((zerocool__split_fields30 = zerocool__split_fields23) and
-  ((zerocool__split_fields31 = zerocool__split_fields24) and
-  ((zerocool__split_fields32 = zerocool__split_fields25) and
-  ((zerocool__split_fields33 = zerocool__split_fields26) and
-  (zerocool__split_fields34 = zerocool__split_fields27))))))))
-
-axiom H60 : (result45 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = rambo__split_fields21;
-  rec__people__person__dob1 = rambo__split_fields22;
-  rec__people__person__alive1 = rambo__split_fields23;
-  rec__professionals__professional__profession = rambo__split_fields24;
-  rec__professionals__professional__skilled_in = rambo__split_fields25;
-  rec__professionals__professional__number_of_people_killed =
-  rambo__split_fields26; rec__ext__1 = rambo__split_fields27 }; attr__tag1 =
-  rambo__attr__tag }, state2))
-
-axiom H61 : true
-
-axiom H62 : ((not (result45 = true)) ->
-  ((rambo__split_fields28 = rambo__split_fields21) and
-  ((rambo__split_fields29 = rambo__split_fields22) and
-  ((rambo__split_fields30 = rambo__split_fields23) and
-  ((rambo__split_fields31 = rambo__split_fields24) and
-  ((rambo__split_fields32 = rambo__split_fields25) and
-  ((rambo__split_fields33 = rambo__split_fields26) and
-  (rambo__split_fields34 = rambo__split_fields27))))))))
-
-axiom H63 : (result46 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = dr_house__split_fields21;
-  rec__people__person__dob1 = dr_house__split_fields22;
-  rec__people__person__alive1 = dr_house__split_fields23;
-  rec__professionals__professional__profession = dr_house__split_fields24;
-  rec__professionals__professional__skilled_in = dr_house__split_fields25;
-  rec__professionals__professional__number_of_people_killed =
-  dr_house__split_fields26; rec__ext__1 = dr_house__split_fields27 };
-  attr__tag1 = dr_house__attr__tag }, state2))
-
-axiom H64 : true
-
-axiom H65 : ((not (result46 = true)) ->
-  ((dr_house__split_fields28 = dr_house__split_fields21) and
-  ((dr_house__split_fields29 = dr_house__split_fields22) and
-  ((dr_house__split_fields30 = dr_house__split_fields23) and
-  ((dr_house__split_fields31 = dr_house__split_fields24) and
-  ((dr_house__split_fields32 = dr_house__split_fields25) and
-  ((dr_house__split_fields33 = dr_house__split_fields26) and
-  (dr_house__split_fields34 = dr_house__split_fields27))))))))
-
-axiom H66 : (result47 = skill3)
-
-axiom H67 : (skill4 = 3)
-
-axiom H68 : (result48 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = uni_student__split_fields28;
-  rec__people__person__dob1 = uni_student__split_fields29;
-  rec__people__person__alive1 = uni_student__split_fields30;
-  rec__professionals__professional__profession = uni_student__split_fields31;
-  rec__professionals__professional__skilled_in = uni_student__split_fields32;
-  rec__professionals__professional__number_of_people_killed =
-  uni_student__split_fields33; rec__ext__1 = uni_student__split_fields34 };
-  attr__tag1 = uni_student__attr__tag }, state3))
-
-axiom H69 : true
-
-axiom H70 : ((not (result48 = true)) ->
-  ((uni_student__split_fields35 = uni_student__split_fields28) and
-  ((uni_student__split_fields36 = uni_student__split_fields29) and
-  ((uni_student__split_fields37 = uni_student__split_fields30) and
-  ((uni_student__split_fields38 = uni_student__split_fields31) and
-  ((uni_student__split_fields39 = uni_student__split_fields32) and
-  ((uni_student__split_fields40 = uni_student__split_fields33) and
-  (uni_student__split_fields41 = uni_student__split_fields34))))))))
-
-axiom H71 : (result49 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = zerocool__split_fields28;
-  rec__people__person__dob1 = zerocool__split_fields29;
-  rec__people__person__alive1 = zerocool__split_fields30;
-  rec__professionals__professional__profession = zerocool__split_fields31;
-  rec__professionals__professional__skilled_in = zerocool__split_fields32;
-  rec__professionals__professional__number_of_people_killed =
-  zerocool__split_fields33; rec__ext__1 = zerocool__split_fields34 };
-  attr__tag1 = zerocool__attr__tag }, state3))
-
-axiom H72 : true
-
-axiom H73 : ((not (result49 = true)) ->
-  ((zerocool__split_fields35 = zerocool__split_fields28) and
-  ((zerocool__split_fields36 = zerocool__split_fields29) and
-  ((zerocool__split_fields37 = zerocool__split_fields30) and
-  ((zerocool__split_fields38 = zerocool__split_fields31) and
-  ((zerocool__split_fields39 = zerocool__split_fields32) and
-  ((zerocool__split_fields40 = zerocool__split_fields33) and
-  (zerocool__split_fields41 = zerocool__split_fields34))))))))
-
-axiom H74 : (result50 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = rambo__split_fields28;
-  rec__people__person__dob1 = rambo__split_fields29;
-  rec__people__person__alive1 = rambo__split_fields30;
-  rec__professionals__professional__profession = rambo__split_fields31;
-  rec__professionals__professional__skilled_in = rambo__split_fields32;
-  rec__professionals__professional__number_of_people_killed =
-  rambo__split_fields33; rec__ext__1 = rambo__split_fields34 }; attr__tag1 =
-  rambo__attr__tag }, state3))
-
-axiom H75 : true
-
-axiom H76 : ((not (result50 = true)) ->
-  ((rambo__split_fields35 = rambo__split_fields28) and
-  ((rambo__split_fields36 = rambo__split_fields29) and
-  ((rambo__split_fields37 = rambo__split_fields30) and
-  ((rambo__split_fields38 = rambo__split_fields31) and
-  ((rambo__split_fields39 = rambo__split_fields32) and
-  ((rambo__split_fields40 = rambo__split_fields33) and
-  (rambo__split_fields41 = rambo__split_fields34))))))))
-
-axiom H77 : (result51 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = dr_house__split_fields28;
-  rec__people__person__dob1 = dr_house__split_fields29;
-  rec__people__person__alive1 = dr_house__split_fields30;
-  rec__professionals__professional__profession = dr_house__split_fields31;
-  rec__professionals__professional__skilled_in = dr_house__split_fields32;
-  rec__professionals__professional__number_of_people_killed =
-  dr_house__split_fields33; rec__ext__1 = dr_house__split_fields34 };
-  attr__tag1 = dr_house__attr__tag }, state3))
-
-axiom H78 : true
-
-axiom H79 : ((not (result51 = true)) ->
-  ((dr_house__split_fields35 = dr_house__split_fields28) and
-  ((dr_house__split_fields36 = dr_house__split_fields29) and
-  ((dr_house__split_fields37 = dr_house__split_fields30) and
-  ((dr_house__split_fields38 = dr_house__split_fields31) and
-  ((dr_house__split_fields39 = dr_house__split_fields32) and
-  ((dr_house__split_fields40 = dr_house__split_fields33) and
-  (dr_house__split_fields41 = dr_house__split_fields34))))))))
-
-axiom H80 : (result52 = skill4)
-
-axiom H81 : (skill5 = 4)
-
-axiom H82 : (result53 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = uni_student__split_fields35;
-  rec__people__person__dob1 = uni_student__split_fields36;
-  rec__people__person__alive1 = uni_student__split_fields37;
-  rec__professionals__professional__profession = uni_student__split_fields38;
-  rec__professionals__professional__skilled_in = uni_student__split_fields39;
-  rec__professionals__professional__number_of_people_killed =
-  uni_student__split_fields40; rec__ext__1 = uni_student__split_fields41 };
-  attr__tag1 = uni_student__attr__tag }, state4))
-
-axiom H83 : true
-
-axiom H84 : ((not (result53 = true)) ->
-  ((uni_student__split_fields42 = uni_student__split_fields35) and
-  ((uni_student__split_fields43 = uni_student__split_fields36) and
-  ((uni_student__split_fields44 = uni_student__split_fields37) and
-  ((uni_student__split_fields45 = uni_student__split_fields38) and
-  ((uni_student__split_fields46 = uni_student__split_fields39) and
-  ((uni_student__split_fields47 = uni_student__split_fields40) and
-  (uni_student__split_fields48 = uni_student__split_fields41))))))))
-
-axiom H85 : (result54 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = zerocool__split_fields35;
-  rec__people__person__dob1 = zerocool__split_fields36;
-  rec__people__person__alive1 = zerocool__split_fields37;
-  rec__professionals__professional__profession = zerocool__split_fields38;
-  rec__professionals__professional__skilled_in = zerocool__split_fields39;
-  rec__professionals__professional__number_of_people_killed =
-  zerocool__split_fields40; rec__ext__1 = zerocool__split_fields41 };
-  attr__tag1 = zerocool__attr__tag }, state4))
-
-axiom H86 : true
-
-axiom H87 : ((not (result54 = true)) ->
-  ((zerocool__split_fields42 = zerocool__split_fields35) and
-  ((zerocool__split_fields43 = zerocool__split_fields36) and
-  ((zerocool__split_fields44 = zerocool__split_fields37) and
-  ((zerocool__split_fields45 = zerocool__split_fields38) and
-  ((zerocool__split_fields46 = zerocool__split_fields39) and
-  ((zerocool__split_fields47 = zerocool__split_fields40) and
-  (zerocool__split_fields48 = zerocool__split_fields41))))))))
-
-axiom H88 : (result55 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = rambo__split_fields35;
-  rec__people__person__dob1 = rambo__split_fields36;
-  rec__people__person__alive1 = rambo__split_fields37;
-  rec__professionals__professional__profession = rambo__split_fields38;
-  rec__professionals__professional__skilled_in = rambo__split_fields39;
-  rec__professionals__professional__number_of_people_killed =
-  rambo__split_fields40; rec__ext__1 = rambo__split_fields41 }; attr__tag1 =
-  rambo__attr__tag }, state4))
-
-axiom H89 : true
-
-axiom H90 : ((not (result55 = true)) ->
-  ((rambo__split_fields42 = rambo__split_fields35) and
-  ((rambo__split_fields43 = rambo__split_fields36) and
-  ((rambo__split_fields44 = rambo__split_fields37) and
-  ((rambo__split_fields45 = rambo__split_fields38) and
-  ((rambo__split_fields46 = rambo__split_fields39) and
-  ((rambo__split_fields47 = rambo__split_fields40) and
-  (rambo__split_fields48 = rambo__split_fields41))))))))
-
-axiom H91 : (result56 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = dr_house__split_fields35;
-  rec__people__person__dob1 = dr_house__split_fields36;
-  rec__people__person__alive1 = dr_house__split_fields37;
-  rec__professionals__professional__profession = dr_house__split_fields38;
-  rec__professionals__professional__skilled_in = dr_house__split_fields39;
-  rec__professionals__professional__number_of_people_killed =
-  dr_house__split_fields40; rec__ext__1 = dr_house__split_fields41 };
-  attr__tag1 = dr_house__attr__tag }, state4))
-
-axiom H92 : true
-
-axiom H93 : ((not (result56 = true)) ->
-  ((dr_house__split_fields42 = dr_house__split_fields35) and
-  ((dr_house__split_fields43 = dr_house__split_fields36) and
-  ((dr_house__split_fields44 = dr_house__split_fields37) and
-  ((dr_house__split_fields45 = dr_house__split_fields38) and
-  ((dr_house__split_fields46 = dr_house__split_fields39) and
-  ((dr_house__split_fields47 = dr_house__split_fields40) and
-  (dr_house__split_fields48 = dr_house__split_fields41))))))))
-
-axiom H94 : (result57 = skill5)
-
-axiom H95 : (skill6 = 5)
-
-axiom H96 : (result58 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = uni_student__split_fields42;
-  rec__people__person__dob1 = uni_student__split_fields43;
-  rec__people__person__alive1 = uni_student__split_fields44;
-  rec__professionals__professional__profession = uni_student__split_fields45;
-  rec__professionals__professional__skilled_in = uni_student__split_fields46;
-  rec__professionals__professional__number_of_people_killed =
-  uni_student__split_fields47; rec__ext__1 = uni_student__split_fields48 };
-  attr__tag1 = uni_student__attr__tag }, state5))
-
-axiom H97 : true
-
-axiom H98 : ((not (result58 = true)) ->
-  ((uni_student__split_fields49 = uni_student__split_fields42) and
-  ((uni_student__split_fields50 = uni_student__split_fields43) and
-  ((uni_student__split_fields51 = uni_student__split_fields44) and
-  ((uni_student__split_fields52 = uni_student__split_fields45) and
-  ((uni_student__split_fields53 = uni_student__split_fields46) and
-  ((uni_student__split_fields54 = uni_student__split_fields47) and
-  (uni_student__split_fields55 = uni_student__split_fields48))))))))
-
-axiom H99 : (result59 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = zerocool__split_fields42;
-  rec__people__person__dob1 = zerocool__split_fields43;
-  rec__people__person__alive1 = zerocool__split_fields44;
-  rec__professionals__professional__profession = zerocool__split_fields45;
-  rec__professionals__professional__skilled_in = zerocool__split_fields46;
-  rec__professionals__professional__number_of_people_killed =
-  zerocool__split_fields47; rec__ext__1 = zerocool__split_fields48 };
-  attr__tag1 = zerocool__attr__tag }, state5))
-
-axiom H100 : true
-
-axiom H101 : ((not (result59 = true)) ->
-  ((zerocool__split_fields49 = zerocool__split_fields42) and
-  ((zerocool__split_fields50 = zerocool__split_fields43) and
-  ((zerocool__split_fields51 = zerocool__split_fields44) and
-  ((zerocool__split_fields52 = zerocool__split_fields45) and
-  ((zerocool__split_fields53 = zerocool__split_fields46) and
-  ((zerocool__split_fields54 = zerocool__split_fields47) and
-  (zerocool__split_fields55 = zerocool__split_fields48))))))))
-
-axiom H102 : (result60 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = rambo__split_fields42;
-  rec__people__person__dob1 = rambo__split_fields43;
-  rec__people__person__alive1 = rambo__split_fields44;
-  rec__professionals__professional__profession = rambo__split_fields45;
-  rec__professionals__professional__skilled_in = rambo__split_fields46;
-  rec__professionals__professional__number_of_people_killed =
-  rambo__split_fields47; rec__ext__1 = rambo__split_fields48 }; attr__tag1 =
-  rambo__attr__tag }, state5))
-
-axiom H103 : true
-
-axiom H104 : ((not (result60 = true)) ->
-  ((rambo__split_fields49 = rambo__split_fields42) and
-  ((rambo__split_fields50 = rambo__split_fields43) and
-  ((rambo__split_fields51 = rambo__split_fields44) and
-  ((rambo__split_fields52 = rambo__split_fields45) and
-  ((rambo__split_fields53 = rambo__split_fields46) and
-  ((rambo__split_fields54 = rambo__split_fields47) and
-  (rambo__split_fields55 = rambo__split_fields48))))))))
-
-axiom H105 : (result61 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = dr_house__split_fields42;
-  rec__people__person__dob1 = dr_house__split_fields43;
-  rec__people__person__alive1 = dr_house__split_fields44;
-  rec__professionals__professional__profession = dr_house__split_fields45;
-  rec__professionals__professional__skilled_in = dr_house__split_fields46;
-  rec__professionals__professional__number_of_people_killed =
-  dr_house__split_fields47; rec__ext__1 = dr_house__split_fields48 };
-  attr__tag1 = dr_house__attr__tag }, state5))
-
-axiom H106 : true
-
-axiom H107 : ((not (result61 = true)) ->
-  ((dr_house__split_fields49 = dr_house__split_fields42) and
-  ((dr_house__split_fields50 = dr_house__split_fields43) and
-  ((dr_house__split_fields51 = dr_house__split_fields44) and
-  ((dr_house__split_fields52 = dr_house__split_fields45) and
-  ((dr_house__split_fields53 = dr_house__split_fields46) and
-  ((dr_house__split_fields54 = dr_house__split_fields47) and
-  (dr_house__split_fields55 = dr_house__split_fields48))))))))
-
-axiom H108 : (result62 = skill6)
-
-axiom H109 : (skill7 = 6)
-
-axiom H110 : (result63 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = uni_student__split_fields49;
-  rec__people__person__dob1 = uni_student__split_fields50;
-  rec__people__person__alive1 = uni_student__split_fields51;
-  rec__professionals__professional__profession = uni_student__split_fields52;
-  rec__professionals__professional__skilled_in = uni_student__split_fields53;
-  rec__professionals__professional__number_of_people_killed =
-  uni_student__split_fields54; rec__ext__1 = uni_student__split_fields55 };
-  attr__tag1 = uni_student__attr__tag }, state6))
-
-axiom H111 : true
-
-axiom H112 : ((not (result63 = true)) ->
-  ((uni_student__split_fields56 = uni_student__split_fields49) and
-  ((uni_student__split_fields57 = uni_student__split_fields50) and
-  ((uni_student__split_fields58 = uni_student__split_fields51) and
-  ((uni_student__split_fields59 = uni_student__split_fields52) and
-  ((uni_student__split_fields60 = uni_student__split_fields53) and
-  ((uni_student__split_fields61 = uni_student__split_fields54) and
-  (uni_student__split_fields62 = uni_student__split_fields55))))))))
-
-axiom H113 : (result64 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = zerocool__split_fields49;
-  rec__people__person__dob1 = zerocool__split_fields50;
-  rec__people__person__alive1 = zerocool__split_fields51;
-  rec__professionals__professional__profession = zerocool__split_fields52;
-  rec__professionals__professional__skilled_in = zerocool__split_fields53;
-  rec__professionals__professional__number_of_people_killed =
-  zerocool__split_fields54; rec__ext__1 = zerocool__split_fields55 };
-  attr__tag1 = zerocool__attr__tag }, state6))
-
-axiom H114 : true
-
-axiom H115 : ((not (result64 = true)) ->
-  ((zerocool__split_fields56 = zerocool__split_fields49) and
-  ((zerocool__split_fields57 = zerocool__split_fields50) and
-  ((zerocool__split_fields58 = zerocool__split_fields51) and
-  ((zerocool__split_fields59 = zerocool__split_fields52) and
-  ((zerocool__split_fields60 = zerocool__split_fields53) and
-  ((zerocool__split_fields61 = zerocool__split_fields54) and
-  (zerocool__split_fields62 = zerocool__split_fields55))))))))
-
-axiom H116 : (result65 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = rambo__split_fields49;
-  rec__people__person__dob1 = rambo__split_fields50;
-  rec__people__person__alive1 = rambo__split_fields51;
-  rec__professionals__professional__profession = rambo__split_fields52;
-  rec__professionals__professional__skilled_in = rambo__split_fields53;
-  rec__professionals__professional__number_of_people_killed =
-  rambo__split_fields54; rec__ext__1 = rambo__split_fields55 }; attr__tag1 =
-  rambo__attr__tag }, state6))
-
-axiom H117 : true
-
-axiom H118 : ((not (result65 = true)) ->
-  ((rambo__split_fields56 = rambo__split_fields49) and
-  ((rambo__split_fields57 = rambo__split_fields50) and
-  ((rambo__split_fields58 = rambo__split_fields51) and
-  ((rambo__split_fields59 = rambo__split_fields52) and
-  ((rambo__split_fields60 = rambo__split_fields53) and
-  ((rambo__split_fields61 = rambo__split_fields54) and
-  (rambo__split_fields62 = rambo__split_fields55))))))))
-
-axiom H119 : (result66 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = dr_house__split_fields49;
-  rec__people__person__dob1 = dr_house__split_fields50;
-  rec__people__person__alive1 = dr_house__split_fields51;
-  rec__professionals__professional__profession = dr_house__split_fields52;
-  rec__professionals__professional__skilled_in = dr_house__split_fields53;
-  rec__professionals__professional__number_of_people_killed =
-  dr_house__split_fields54; rec__ext__1 = dr_house__split_fields55 };
-  attr__tag1 = dr_house__attr__tag }, state6))
-
-axiom H120 : true
-
-axiom H121 : ((not (result66 = true)) ->
-  ((dr_house__split_fields56 = dr_house__split_fields49) and
-  ((dr_house__split_fields57 = dr_house__split_fields50) and
-  ((dr_house__split_fields58 = dr_house__split_fields51) and
-  ((dr_house__split_fields59 = dr_house__split_fields52) and
-  ((dr_house__split_fields60 = dr_house__split_fields53) and
-  ((dr_house__split_fields61 = dr_house__split_fields54) and
-  (dr_house__split_fields62 = dr_house__split_fields55))))))))
-
-axiom H122 : (result67 = skill7)
-
-axiom H123 : (skill8 = 7)
-
-axiom H124 : (result68 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = uni_student__split_fields56;
-  rec__people__person__dob1 = uni_student__split_fields57;
-  rec__people__person__alive1 = uni_student__split_fields58;
-  rec__professionals__professional__profession = uni_student__split_fields59;
-  rec__professionals__professional__skilled_in = uni_student__split_fields60;
-  rec__professionals__professional__number_of_people_killed =
-  uni_student__split_fields61; rec__ext__1 = uni_student__split_fields62 };
-  attr__tag1 = uni_student__attr__tag }, state7))
-
-axiom H125 : true
-
-axiom H126 : ((not (result68 = true)) ->
-  ((uni_student__split_fields63 = uni_student__split_fields56) and
-  ((uni_student__split_fields64 = uni_student__split_fields57) and
-  ((uni_student__split_fields65 = uni_student__split_fields58) and
-  ((uni_student__split_fields66 = uni_student__split_fields59) and
-  ((uni_student__split_fields67 = uni_student__split_fields60) and
-  ((uni_student__split_fields68 = uni_student__split_fields61) and
-  (uni_student__split_fields69 = uni_student__split_fields62))))))))
-
-axiom H127 : (result69 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = zerocool__split_fields56;
-  rec__people__person__dob1 = zerocool__split_fields57;
-  rec__people__person__alive1 = zerocool__split_fields58;
-  rec__professionals__professional__profession = zerocool__split_fields59;
-  rec__professionals__professional__skilled_in = zerocool__split_fields60;
-  rec__professionals__professional__number_of_people_killed =
-  zerocool__split_fields61; rec__ext__1 = zerocool__split_fields62 };
-  attr__tag1 = zerocool__attr__tag }, state7))
-
-axiom H128 : true
-
-axiom H129 : ((not (result69 = true)) ->
-  ((zerocool__split_fields63 = zerocool__split_fields56) and
-  ((zerocool__split_fields64 = zerocool__split_fields57) and
-  ((zerocool__split_fields65 = zerocool__split_fields58) and
-  ((zerocool__split_fields66 = zerocool__split_fields59) and
-  ((zerocool__split_fields67 = zerocool__split_fields60) and
-  ((zerocool__split_fields68 = zerocool__split_fields61) and
-  (zerocool__split_fields69 = zerocool__split_fields62))))))))
-
-axiom H130 : (result70 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = rambo__split_fields56;
-  rec__people__person__dob1 = rambo__split_fields57;
-  rec__people__person__alive1 = rambo__split_fields58;
-  rec__professionals__professional__profession = rambo__split_fields59;
-  rec__professionals__professional__skilled_in = rambo__split_fields60;
-  rec__professionals__professional__number_of_people_killed =
-  rambo__split_fields61; rec__ext__1 = rambo__split_fields62 }; attr__tag1 =
-  rambo__attr__tag }, state7))
-
-axiom H131 : true
-
-axiom H132 : ((not (result70 = true)) ->
-  ((rambo__split_fields63 = rambo__split_fields56) and
-  ((rambo__split_fields64 = rambo__split_fields57) and
-  ((rambo__split_fields65 = rambo__split_fields58) and
-  ((rambo__split_fields66 = rambo__split_fields59) and
-  ((rambo__split_fields67 = rambo__split_fields60) and
-  ((rambo__split_fields68 = rambo__split_fields61) and
-  (rambo__split_fields69 = rambo__split_fields62))))))))
-
-axiom H133 : (result71 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = dr_house__split_fields56;
-  rec__people__person__dob1 = dr_house__split_fields57;
-  rec__people__person__alive1 = dr_house__split_fields58;
-  rec__professionals__professional__profession = dr_house__split_fields59;
-  rec__professionals__professional__skilled_in = dr_house__split_fields60;
-  rec__professionals__professional__number_of_people_killed =
-  dr_house__split_fields61; rec__ext__1 = dr_house__split_fields62 };
-  attr__tag1 = dr_house__attr__tag }, state7))
-
-axiom H134 : true
-
-axiom H135 : ((not (result71 = true)) ->
-  ((dr_house__split_fields63 = dr_house__split_fields56) and
-  ((dr_house__split_fields64 = dr_house__split_fields57) and
-  ((dr_house__split_fields65 = dr_house__split_fields58) and
-  ((dr_house__split_fields66 = dr_house__split_fields59) and
-  ((dr_house__split_fields67 = dr_house__split_fields60) and
-  ((dr_house__split_fields68 = dr_house__split_fields61) and
-  (dr_house__split_fields69 = dr_house__split_fields62))))))))
-
-axiom H136 : (result72 = skill8)
-
-axiom H137 : (skill9 = 8)
-
-axiom H138 : (result73 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = uni_student__split_fields63;
-  rec__people__person__dob1 = uni_student__split_fields64;
-  rec__people__person__alive1 = uni_student__split_fields65;
-  rec__professionals__professional__profession = uni_student__split_fields66;
-  rec__professionals__professional__skilled_in = uni_student__split_fields67;
-  rec__professionals__professional__number_of_people_killed =
-  uni_student__split_fields68; rec__ext__1 = uni_student__split_fields69 };
-  attr__tag1 = uni_student__attr__tag }, state8))
-
-axiom H139 : true
-
-axiom H140 : ((not (result73 = true)) ->
-  ((uni_student__split_fields70 = uni_student__split_fields63) and
-  ((uni_student__split_fields71 = uni_student__split_fields64) and
-  ((uni_student__split_fields72 = uni_student__split_fields65) and
-  ((uni_student__split_fields73 = uni_student__split_fields66) and
-  ((uni_student__split_fields74 = uni_student__split_fields67) and
-  ((uni_student__split_fields75 = uni_student__split_fields68) and
-  (uni_student__split_fields76 = uni_student__split_fields69))))))))
-
-axiom H141 : (result74 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = zerocool__split_fields63;
-  rec__people__person__dob1 = zerocool__split_fields64;
-  rec__people__person__alive1 = zerocool__split_fields65;
-  rec__professionals__professional__profession = zerocool__split_fields66;
-  rec__professionals__professional__skilled_in = zerocool__split_fields67;
-  rec__professionals__professional__number_of_people_killed =
-  zerocool__split_fields68; rec__ext__1 = zerocool__split_fields69 };
-  attr__tag1 = zerocool__attr__tag }, state8))
-
-axiom H142 : true
-
-axiom H143 : ((not (result74 = true)) ->
-  ((zerocool__split_fields70 = zerocool__split_fields63) and
-  ((zerocool__split_fields71 = zerocool__split_fields64) and
-  ((zerocool__split_fields72 = zerocool__split_fields65) and
-  ((zerocool__split_fields73 = zerocool__split_fields66) and
-  ((zerocool__split_fields74 = zerocool__split_fields67) and
-  ((zerocool__split_fields75 = zerocool__split_fields68) and
-  (zerocool__split_fields76 = zerocool__split_fields69))))))))
-
-axiom H144 : (result75 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = rambo__split_fields63;
-  rec__people__person__dob1 = rambo__split_fields64;
-  rec__people__person__alive1 = rambo__split_fields65;
-  rec__professionals__professional__profession = rambo__split_fields66;
-  rec__professionals__professional__skilled_in = rambo__split_fields67;
-  rec__professionals__professional__number_of_people_killed =
-  rambo__split_fields68; rec__ext__1 = rambo__split_fields69 }; attr__tag1 =
-  rambo__attr__tag }, state8))
-
-axiom H145 : true
-
-axiom H146 : ((not (result75 = true)) ->
-  ((rambo__split_fields70 = rambo__split_fields63) and
-  ((rambo__split_fields71 = rambo__split_fields64) and
-  ((rambo__split_fields72 = rambo__split_fields65) and
-  ((rambo__split_fields73 = rambo__split_fields66) and
-  ((rambo__split_fields74 = rambo__split_fields67) and
-  ((rambo__split_fields75 = rambo__split_fields68) and
-  (rambo__split_fields76 = rambo__split_fields69))))))))
-
-axiom H147 : (result76 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = dr_house__split_fields63;
-  rec__people__person__dob1 = dr_house__split_fields64;
-  rec__people__person__alive1 = dr_house__split_fields65;
-  rec__professionals__professional__profession = dr_house__split_fields66;
-  rec__professionals__professional__skilled_in = dr_house__split_fields67;
-  rec__professionals__professional__number_of_people_killed =
-  dr_house__split_fields68; rec__ext__1 = dr_house__split_fields69 };
-  attr__tag1 = dr_house__attr__tag }, state8))
-
-axiom H148 : true
-
-axiom H149 : ((not (result76 = true)) ->
-  ((dr_house__split_fields70 = dr_house__split_fields63) and
-  ((dr_house__split_fields71 = dr_house__split_fields64) and
-  ((dr_house__split_fields72 = dr_house__split_fields65) and
-  ((dr_house__split_fields73 = dr_house__split_fields66) and
-  ((dr_house__split_fields74 = dr_house__split_fields67) and
-  ((dr_house__split_fields75 = dr_house__split_fields68) and
-  (dr_house__split_fields76 = dr_house__split_fields69))))))))
-
-axiom H150 : (result77 = skill9)
-
-axiom H151 : (skill10 = 9)
-
-axiom H152 : (result78 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = uni_student__split_fields70;
-  rec__people__person__dob1 = uni_student__split_fields71;
-  rec__people__person__alive1 = uni_student__split_fields72;
-  rec__professionals__professional__profession = uni_student__split_fields73;
-  rec__professionals__professional__skilled_in = uni_student__split_fields74;
-  rec__professionals__professional__number_of_people_killed =
-  uni_student__split_fields75; rec__ext__1 = uni_student__split_fields76 };
-  attr__tag1 = uni_student__attr__tag }, state9))
-
-axiom H153 : true
-
-axiom H154 : ((not (result78 = true)) ->
-  ((uni_student__split_fields77 = uni_student__split_fields70) and
-  ((uni_student__split_fields78 = uni_student__split_fields71) and
-  ((uni_student__split_fields79 = uni_student__split_fields72) and
-  ((uni_student__split_fields80 = uni_student__split_fields73) and
-  ((uni_student__split_fields81 = uni_student__split_fields74) and
-  ((uni_student__split_fields82 = uni_student__split_fields75) and
-  (uni_student__split_fields83 = uni_student__split_fields76))))))))
-
-axiom H155 : (result79 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = zerocool__split_fields70;
-  rec__people__person__dob1 = zerocool__split_fields71;
-  rec__people__person__alive1 = zerocool__split_fields72;
-  rec__professionals__professional__profession = zerocool__split_fields73;
-  rec__professionals__professional__skilled_in = zerocool__split_fields74;
-  rec__professionals__professional__number_of_people_killed =
-  zerocool__split_fields75; rec__ext__1 = zerocool__split_fields76 };
-  attr__tag1 = zerocool__attr__tag }, state9))
-
-axiom H156 : true
-
-axiom H157 : ((not (result79 = true)) ->
-  ((zerocool__split_fields77 = zerocool__split_fields70) and
-  ((zerocool__split_fields78 = zerocool__split_fields71) and
-  ((zerocool__split_fields79 = zerocool__split_fields72) and
-  ((zerocool__split_fields80 = zerocool__split_fields73) and
-  ((zerocool__split_fields81 = zerocool__split_fields74) and
-  ((zerocool__split_fields82 = zerocool__split_fields75) and
-  (zerocool__split_fields83 = zerocool__split_fields76))))))))
-
-axiom H158 : (result80 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = rambo__split_fields70;
-  rec__people__person__dob1 = rambo__split_fields71;
-  rec__people__person__alive1 = rambo__split_fields72;
-  rec__professionals__professional__profession = rambo__split_fields73;
-  rec__professionals__professional__skilled_in = rambo__split_fields74;
-  rec__professionals__professional__number_of_people_killed =
-  rambo__split_fields75; rec__ext__1 = rambo__split_fields76 }; attr__tag1 =
-  rambo__attr__tag }, state9))
-
-axiom H159 : true
-
-axiom H160 : ((not (result80 = true)) ->
-  ((rambo__split_fields77 = rambo__split_fields70) and
-  ((rambo__split_fields78 = rambo__split_fields71) and
-  ((rambo__split_fields79 = rambo__split_fields72) and
-  ((rambo__split_fields80 = rambo__split_fields73) and
-  ((rambo__split_fields81 = rambo__split_fields74) and
-  ((rambo__split_fields82 = rambo__split_fields75) and
-  (rambo__split_fields83 = rambo__split_fields76))))))))
-
-axiom H161 : (result81 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = dr_house__split_fields70;
-  rec__people__person__dob1 = dr_house__split_fields71;
-  rec__people__person__alive1 = dr_house__split_fields72;
-  rec__professionals__professional__profession = dr_house__split_fields73;
-  rec__professionals__professional__skilled_in = dr_house__split_fields74;
-  rec__professionals__professional__number_of_people_killed =
-  dr_house__split_fields75; rec__ext__1 = dr_house__split_fields76 };
-  attr__tag1 = dr_house__attr__tag }, state9))
-
-axiom H162 : true
-
-axiom H163 : ((not (result81 = true)) ->
-  ((dr_house__split_fields77 = dr_house__split_fields70) and
-  ((dr_house__split_fields78 = dr_house__split_fields71) and
-  ((dr_house__split_fields79 = dr_house__split_fields72) and
-  ((dr_house__split_fields80 = dr_house__split_fields73) and
-  ((dr_house__split_fields81 = dr_house__split_fields74) and
-  ((dr_house__split_fields82 = dr_house__split_fields75) and
-  (dr_house__split_fields83 = dr_house__split_fields76))))))))
-
-axiom H164 : (result82 = skill10)
-
-axiom H165 : (skill11 = 10)
-
-axiom H166 : (result83 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = uni_student__split_fields77;
-  rec__people__person__dob1 = uni_student__split_fields78;
-  rec__people__person__alive1 = uni_student__split_fields79;
-  rec__professionals__professional__profession = uni_student__split_fields80;
-  rec__professionals__professional__skilled_in = uni_student__split_fields81;
-  rec__professionals__professional__number_of_people_killed =
-  uni_student__split_fields82; rec__ext__1 = uni_student__split_fields83 };
-  attr__tag1 = uni_student__attr__tag }, state10))
-
-axiom H167 : true
-
-axiom H168 : ((not (result83 = true)) ->
-  ((uni_student__split_fields84 = uni_student__split_fields77) and
-  ((uni_student__split_fields85 = uni_student__split_fields78) and
-  ((uni_student__split_fields86 = uni_student__split_fields79) and
-  ((uni_student__split_fields87 = uni_student__split_fields80) and
-  ((uni_student__split_fields88 = uni_student__split_fields81) and
-  ((uni_student__split_fields89 = uni_student__split_fields82) and
-  (uni_student__split_fields90 = uni_student__split_fields83))))))))
-
-axiom H169 : (result84 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = zerocool__split_fields77;
-  rec__people__person__dob1 = zerocool__split_fields78;
-  rec__people__person__alive1 = zerocool__split_fields79;
-  rec__professionals__professional__profession = zerocool__split_fields80;
-  rec__professionals__professional__skilled_in = zerocool__split_fields81;
-  rec__professionals__professional__number_of_people_killed =
-  zerocool__split_fields82; rec__ext__1 = zerocool__split_fields83 };
-  attr__tag1 = zerocool__attr__tag }, state10))
-
-axiom H170 : true
-
-axiom H171 : ((not (result84 = true)) ->
-  ((zerocool__split_fields84 = zerocool__split_fields77) and
-  ((zerocool__split_fields85 = zerocool__split_fields78) and
-  ((zerocool__split_fields86 = zerocool__split_fields79) and
-  ((zerocool__split_fields87 = zerocool__split_fields80) and
-  ((zerocool__split_fields88 = zerocool__split_fields81) and
-  ((zerocool__split_fields89 = zerocool__split_fields82) and
-  (zerocool__split_fields90 = zerocool__split_fields83))))))))
-
-axiom H172 : (result85 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = rambo__split_fields77;
-  rec__people__person__dob1 = rambo__split_fields78;
-  rec__people__person__alive1 = rambo__split_fields79;
-  rec__professionals__professional__profession = rambo__split_fields80;
-  rec__professionals__professional__skilled_in = rambo__split_fields81;
-  rec__professionals__professional__number_of_people_killed =
-  rambo__split_fields82; rec__ext__1 = rambo__split_fields83 }; attr__tag1 =
-  rambo__attr__tag }, state10))
-
-axiom H173 : true
-
-axiom H174 : ((not (result85 = true)) ->
-  ((rambo__split_fields84 = rambo__split_fields77) and
-  ((rambo__split_fields85 = rambo__split_fields78) and
-  ((rambo__split_fields86 = rambo__split_fields79) and
-  ((rambo__split_fields87 = rambo__split_fields80) and
-  ((rambo__split_fields88 = rambo__split_fields81) and
-  ((rambo__split_fields89 = rambo__split_fields82) and
-  (rambo__split_fields90 = rambo__split_fields83))))))))
-
-axiom H175 : (result86 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = dr_house__split_fields77;
-  rec__people__person__dob1 = dr_house__split_fields78;
-  rec__people__person__alive1 = dr_house__split_fields79;
-  rec__professionals__professional__profession = dr_house__split_fields80;
-  rec__professionals__professional__skilled_in = dr_house__split_fields81;
-  rec__professionals__professional__number_of_people_killed =
-  dr_house__split_fields82; rec__ext__1 = dr_house__split_fields83 };
-  attr__tag1 = dr_house__attr__tag }, state10))
-
-axiom H176 : true
-
-axiom H177 : ((not (result86 = true)) ->
-  ((dr_house__split_fields84 = dr_house__split_fields77) and
-  ((dr_house__split_fields85 = dr_house__split_fields78) and
-  ((dr_house__split_fields86 = dr_house__split_fields79) and
-  ((dr_house__split_fields87 = dr_house__split_fields80) and
-  ((dr_house__split_fields88 = dr_house__split_fields81) and
-  ((dr_house__split_fields89 = dr_house__split_fields82) and
-  (dr_house__split_fields90 = dr_house__split_fields83))))))))
-
-axiom H178 : (result87 = skill11)
-
-axiom H179 : (skill12 = 11)
-
-axiom H180 : (result88 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = uni_student__split_fields84;
-  rec__people__person__dob1 = uni_student__split_fields85;
-  rec__people__person__alive1 = uni_student__split_fields86;
-  rec__professionals__professional__profession = uni_student__split_fields87;
-  rec__professionals__professional__skilled_in = uni_student__split_fields88;
-  rec__professionals__professional__number_of_people_killed =
-  uni_student__split_fields89; rec__ext__1 = uni_student__split_fields90 };
-  attr__tag1 = uni_student__attr__tag }, state11))
-
-axiom H181 : true
-
-axiom H182 : ((not (result88 = true)) ->
-  ((uni_student__split_fields91 = uni_student__split_fields84) and
-  ((uni_student__split_fields92 = uni_student__split_fields85) and
-  ((uni_student__split_fields93 = uni_student__split_fields86) and
-  ((uni_student__split_fields94 = uni_student__split_fields87) and
-  ((uni_student__split_fields95 = uni_student__split_fields88) and
-  ((uni_student__split_fields96 = uni_student__split_fields89) and
-  (uni_student__split_fields97 = uni_student__split_fields90))))))))
-
-axiom H183 : (result89 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = zerocool__split_fields84;
-  rec__people__person__dob1 = zerocool__split_fields85;
-  rec__people__person__alive1 = zerocool__split_fields86;
-  rec__professionals__professional__profession = zerocool__split_fields87;
-  rec__professionals__professional__skilled_in = zerocool__split_fields88;
-  rec__professionals__professional__number_of_people_killed =
-  zerocool__split_fields89; rec__ext__1 = zerocool__split_fields90 };
-  attr__tag1 = zerocool__attr__tag }, state11))
-
-axiom H184 : true
-
-axiom H185 : ((not (result89 = true)) ->
-  ((zerocool__split_fields91 = zerocool__split_fields84) and
-  ((zerocool__split_fields92 = zerocool__split_fields85) and
-  ((zerocool__split_fields93 = zerocool__split_fields86) and
-  ((zerocool__split_fields94 = zerocool__split_fields87) and
-  ((zerocool__split_fields95 = zerocool__split_fields88) and
-  ((zerocool__split_fields96 = zerocool__split_fields89) and
-  (zerocool__split_fields97 = zerocool__split_fields90))))))))
-
-axiom H186 : (result90 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = rambo__split_fields84;
-  rec__people__person__dob1 = rambo__split_fields85;
-  rec__people__person__alive1 = rambo__split_fields86;
-  rec__professionals__professional__profession = rambo__split_fields87;
-  rec__professionals__professional__skilled_in = rambo__split_fields88;
-  rec__professionals__professional__number_of_people_killed =
-  rambo__split_fields89; rec__ext__1 = rambo__split_fields90 }; attr__tag1 =
-  rambo__attr__tag }, state11))
-
-axiom H187 : true
-
-axiom H188 : ((not (result90 = true)) ->
-  ((rambo__split_fields91 = rambo__split_fields84) and
-  ((rambo__split_fields92 = rambo__split_fields85) and
-  ((rambo__split_fields93 = rambo__split_fields86) and
-  ((rambo__split_fields94 = rambo__split_fields87) and
-  ((rambo__split_fields95 = rambo__split_fields88) and
-  ((rambo__split_fields96 = rambo__split_fields89) and
-  (rambo__split_fields97 = rambo__split_fields90))))))))
-
-axiom H189 : (result91 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = dr_house__split_fields84;
-  rec__people__person__dob1 = dr_house__split_fields85;
-  rec__people__person__alive1 = dr_house__split_fields86;
-  rec__professionals__professional__profession = dr_house__split_fields87;
-  rec__professionals__professional__skilled_in = dr_house__split_fields88;
-  rec__professionals__professional__number_of_people_killed =
-  dr_house__split_fields89; rec__ext__1 = dr_house__split_fields90 };
-  attr__tag1 = dr_house__attr__tag }, state11))
-
-axiom H190 : true
-
-axiom H191 : ((not (result91 = true)) ->
-  ((dr_house__split_fields91 = dr_house__split_fields84) and
-  ((dr_house__split_fields92 = dr_house__split_fields85) and
-  ((dr_house__split_fields93 = dr_house__split_fields86) and
-  ((dr_house__split_fields94 = dr_house__split_fields87) and
-  ((dr_house__split_fields95 = dr_house__split_fields88) and
-  ((dr_house__split_fields96 = dr_house__split_fields89) and
-  (dr_house__split_fields97 = dr_house__split_fields90))))))))
-
-axiom H192 : (result92 = skill12)
-
-axiom H193 : (skill13 = 12)
-
-axiom H194 : (result93 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = uni_student__split_fields91;
-  rec__people__person__dob1 = uni_student__split_fields92;
-  rec__people__person__alive1 = uni_student__split_fields93;
-  rec__professionals__professional__profession = uni_student__split_fields94;
-  rec__professionals__professional__skilled_in = uni_student__split_fields95;
-  rec__professionals__professional__number_of_people_killed =
-  uni_student__split_fields96; rec__ext__1 = uni_student__split_fields97 };
-  attr__tag1 = uni_student__attr__tag }, state12))
-
-axiom H195 : true
-
-axiom H196 : ((not (result93 = true)) ->
-  ((uni_student__split_fields98 = uni_student__split_fields91) and
-  ((uni_student__split_fields99 = uni_student__split_fields92) and
-  ((uni_student__split_fields100 = uni_student__split_fields93) and
-  ((uni_student__split_fields101 = uni_student__split_fields94) and
-  ((uni_student__split_fields102 = uni_student__split_fields95) and
-  ((uni_student__split_fields103 = uni_student__split_fields96) and
-  (uni_student__split_fields104 = uni_student__split_fields97))))))))
-
-axiom H197 : (result94 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = zerocool__split_fields91;
-  rec__people__person__dob1 = zerocool__split_fields92;
-  rec__people__person__alive1 = zerocool__split_fields93;
-  rec__professionals__professional__profession = zerocool__split_fields94;
-  rec__professionals__professional__skilled_in = zerocool__split_fields95;
-  rec__professionals__professional__number_of_people_killed =
-  zerocool__split_fields96; rec__ext__1 = zerocool__split_fields97 };
-  attr__tag1 = zerocool__attr__tag }, state12))
-
-axiom H198 : true
-
-axiom H199 : ((not (result94 = true)) ->
-  ((zerocool__split_fields98 = zerocool__split_fields91) and
-  ((zerocool__split_fields99 = zerocool__split_fields92) and
-  ((zerocool__split_fields100 = zerocool__split_fields93) and
-  ((zerocool__split_fields101 = zerocool__split_fields94) and
-  ((zerocool__split_fields102 = zerocool__split_fields95) and
-  ((zerocool__split_fields103 = zerocool__split_fields96) and
-  (zerocool__split_fields104 = zerocool__split_fields97))))))))
-
-axiom H200 : (result95 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = rambo__split_fields91;
-  rec__people__person__dob1 = rambo__split_fields92;
-  rec__people__person__alive1 = rambo__split_fields93;
-  rec__professionals__professional__profession = rambo__split_fields94;
-  rec__professionals__professional__skilled_in = rambo__split_fields95;
-  rec__professionals__professional__number_of_people_killed =
-  rambo__split_fields96; rec__ext__1 = rambo__split_fields97 }; attr__tag1 =
-  rambo__attr__tag }, state12))
-
-axiom H201 : true
-
-axiom H202 : ((not (result95 = true)) ->
-  ((rambo__split_fields98 = rambo__split_fields91) and
-  ((rambo__split_fields99 = rambo__split_fields92) and
-  ((rambo__split_fields100 = rambo__split_fields93) and
-  ((rambo__split_fields101 = rambo__split_fields94) and
-  ((rambo__split_fields102 = rambo__split_fields95) and
-  ((rambo__split_fields103 = rambo__split_fields96) and
-  (rambo__split_fields104 = rambo__split_fields97))))))))
-
-axiom H203 : (result96 = has_training({ us_split_fields3 = {
-  rec__people__person__name1 = dr_house__split_fields91;
-  rec__people__person__dob1 = dr_house__split_fields92;
-  rec__people__person__alive1 = dr_house__split_fields93;
-  rec__professionals__professional__profession = dr_house__split_fields94;
-  rec__professionals__professional__skilled_in = dr_house__split_fields95;
-  rec__professionals__professional__number_of_people_killed =
-  dr_house__split_fields96; rec__ext__1 = dr_house__split_fields97 };
-  attr__tag1 = dr_house__attr__tag }, state12))
-
-axiom H204 : true
-
-axiom H205 : ((not (result96 = true)) ->
-  ((dr_house__split_fields98 = dr_house__split_fields91) and
-  ((dr_house__split_fields99 = dr_house__split_fields92) and
-  ((dr_house__split_fields100 = dr_house__split_fields93) and
-  ((dr_house__split_fields101 = dr_house__split_fields94) and
-  ((dr_house__split_fields102 = dr_house__split_fields95) and
-  ((dr_house__split_fields103 = dr_house__split_fields96) and
-  (dr_house__split_fields104 = dr_house__split_fields97))))))))
-
-axiom H206 : ((is_alive({ us_split_fields1 = { rec__people__person__name =
-  rambo__split_fields105; rec__people__person__dob = rambo__split_fields106;
-  rec__people__person__alive = rambo__split_fields107; rec__ext__ =
-  hide_ext__(rambo__split_fields108, rambo__split_fields109,
-  rambo__split_fields110, rambo__split_fields111) }; attr__tag =
-  rambo__attr__tag }) = true) and (not (is_alive1(uni_student__attr__tag, {
+  rambo__split_fields19; rec__ext__1 = rambo__split_fields20 })))) and
+  (((result41 = has_training({ us_split_fields3 = dr_house__split_fields14;
+  attr__tag1 = dr_house__attr__tag }, state1)) and ((result41 = true) or
+  ((not (result41 = true)) and
+  (dr_house__split_fields15 = dr_house__split_fields14)))) and
+  (((result42 = { int__content = skill2 }) and (skill3 = 2)) and
+  (((result43 = has_training({ us_split_fields3 =
+  uni_student__split_fields21; attr__tag1 = uni_student__attr__tag },
+  state2)) and ((result43 = true) or ((not (result43 = true)) and
+  (uni_student__split_fields22 = uni_student__split_fields21)))) and
+  (((result44 = has_training({ us_split_fields3 = zerocool__split_fields21;
+  attr__tag1 = zerocool__attr__tag }, state2)) and ((result44 = true) or
+  ((not (result44 = true)) and
+  (zerocool__split_fields22 = zerocool__split_fields21)))) and
+  (((result45 = has_training({ us_split_fields3 = rambo__split_fields21;
+  attr__tag1 = rambo__attr__tag }, state2)) and ((result45 = true) or
+  ((not (result45 = true)) and
+  (rambo__split_fields22 = rambo__split_fields21)))) and
+  (((result46 = has_training({ us_split_fields3 = dr_house__split_fields15;
+  attr__tag1 = dr_house__attr__tag }, state2)) and ((result46 = true) or
+  ((not (result46 = true)) and
+  (dr_house__split_fields16 = dr_house__split_fields15)))) and
+  (((result47 = { int__content = skill3 }) and (skill4 = 3)) and
+  (((result48 = has_training({ us_split_fields3 =
+  uni_student__split_fields22; attr__tag1 = uni_student__attr__tag },
+  state3)) and ((result48 = true) or ((not (result48 = true)) and
+  (uni_student__split_fields23 = uni_student__split_fields22)))) and
+  (((result49 = has_training({ us_split_fields3 = zerocool__split_fields22;
+  attr__tag1 = zerocool__attr__tag }, state3)) and ((result49 = true) or
+  ((not (result49 = true)) and
+  (zerocool__split_fields23 = zerocool__split_fields22)))) and
+  (((result50 = has_training({ us_split_fields3 = rambo__split_fields22;
+  attr__tag1 = rambo__attr__tag }, state3)) and ((result50 = true) or
+  ((not (result50 = true)) and
+  (rambo__split_fields23 = rambo__split_fields22)))) and
+  (((result51 = has_training({ us_split_fields3 = dr_house__split_fields16;
+  attr__tag1 = dr_house__attr__tag }, state3)) and ((result51 = true) or
+  ((not (result51 = true)) and
+  (dr_house__split_fields17 = dr_house__split_fields16)))) and
+  (((result52 = { int__content = skill4 }) and (skill5 = 4)) and
+  (((result53 = has_training({ us_split_fields3 =
+  uni_student__split_fields23; attr__tag1 = uni_student__attr__tag },
+  state4)) and ((result53 = true) or ((not (result53 = true)) and
+  (uni_student__split_fields24 = uni_student__split_fields23)))) and
+  (((result54 = has_training({ us_split_fields3 = zerocool__split_fields23;
+  attr__tag1 = zerocool__attr__tag }, state4)) and ((result54 = true) or
+  ((not (result54 = true)) and
+  (zerocool__split_fields24 = zerocool__split_fields23)))) and
+  (((result55 = has_training({ us_split_fields3 = rambo__split_fields23;
+  attr__tag1 = rambo__attr__tag }, state4)) and ((result55 = true) or
+  ((not (result55 = true)) and
+  (rambo__split_fields24 = rambo__split_fields23)))) and
+  (((result56 = has_training({ us_split_fields3 = dr_house__split_fields17;
+  attr__tag1 = dr_house__attr__tag }, state4)) and ((result56 = true) or
+  ((not (result56 = true)) and
+  (dr_house__split_fields18 = dr_house__split_fields17)))) and
+  (((result57 = { int__content = skill5 }) and (skill6 = 5)) and
+  (((result58 = has_training({ us_split_fields3 =
+  uni_student__split_fields24; attr__tag1 = uni_student__attr__tag },
+  state5)) and ((result58 = true) or ((not (result58 = true)) and
+  (uni_student__split_fields25 = uni_student__split_fields24)))) and
+  (((result59 = has_training({ us_split_fields3 = zerocool__split_fields24;
+  attr__tag1 = zerocool__attr__tag }, state5)) and ((result59 = true) or
+  ((not (result59 = true)) and
+  (zerocool__split_fields25 = zerocool__split_fields24)))) and
+  (((result60 = has_training({ us_split_fields3 = rambo__split_fields24;
+  attr__tag1 = rambo__attr__tag }, state5)) and ((result60 = true) or
+  ((not (result60 = true)) and
+  (rambo__split_fields25 = rambo__split_fields24)))) and
+  (((result61 = has_training({ us_split_fields3 = dr_house__split_fields18;
+  attr__tag1 = dr_house__attr__tag }, state5)) and ((result61 = true) or
+  ((not (result61 = true)) and
+  (dr_house__split_fields19 = dr_house__split_fields18)))) and
+  (((result62 = { int__content = skill6 }) and (skill7 = 6)) and
+  (((result63 = has_training({ us_split_fields3 =
+  uni_student__split_fields25; attr__tag1 = uni_student__attr__tag },
+  state6)) and ((result63 = true) or ((not (result63 = true)) and
+  (uni_student__split_fields26 = uni_student__split_fields25)))) and
+  (((result64 = has_training({ us_split_fields3 = zerocool__split_fields25;
+  attr__tag1 = zerocool__attr__tag }, state6)) and ((result64 = true) or
+  ((not (result64 = true)) and
+  (zerocool__split_fields26 = zerocool__split_fields25)))) and
+  (((result65 = has_training({ us_split_fields3 = rambo__split_fields25;
+  attr__tag1 = rambo__attr__tag }, state6)) and ((result65 = true) or
+  ((not (result65 = true)) and
+  (rambo__split_fields26 = rambo__split_fields25)))) and
+  (((result66 = has_training({ us_split_fields3 = dr_house__split_fields19;
+  attr__tag1 = dr_house__attr__tag }, state6)) and ((result66 = true) or
+  ((not (result66 = true)) and
+  (dr_house__split_fields20 = dr_house__split_fields19)))) and
+  (((result67 = { int__content = skill7 }) and (skill8 = 7)) and
+  (((result68 = has_training({ us_split_fields3 =
+  uni_student__split_fields26; attr__tag1 = uni_student__attr__tag },
+  state7)) and ((result68 = true) or ((not (result68 = true)) and
+  (uni_student__split_fields27 = uni_student__split_fields26)))) and
+  (((result69 = has_training({ us_split_fields3 = zerocool__split_fields26;
+  attr__tag1 = zerocool__attr__tag }, state7)) and ((result69 = true) or
+  ((not (result69 = true)) and
+  (zerocool__split_fields27 = zerocool__split_fields26)))) and
+  (((result70 = has_training({ us_split_fields3 = rambo__split_fields26;
+  attr__tag1 = rambo__attr__tag }, state7)) and ((result70 = true) or
+  ((not (result70 = true)) and
+  (rambo__split_fields27 = rambo__split_fields26)))) and
+  (((result71 = has_training({ us_split_fields3 = dr_house__split_fields20;
+  attr__tag1 = dr_house__attr__tag }, state7)) and ((result71 = true) or
+  ((not (result71 = true)) and
+  (dr_house__split_fields21 = dr_house__split_fields20)))) and
+  (((result72 = { int__content = skill8 }) and (skill9 = 8)) and
+  (((result73 = has_training({ us_split_fields3 =
+  uni_student__split_fields27; attr__tag1 = uni_student__attr__tag },
+  state8)) and ((result73 = true) or ((not (result73 = true)) and
+  (uni_student__split_fields28 = uni_student__split_fields27)))) and
+  (((result74 = has_training({ us_split_fields3 = zerocool__split_fields27;
+  attr__tag1 = zerocool__attr__tag }, state8)) and ((result74 = true) or
+  ((not (result74 = true)) and
+  (zerocool__split_fields28 = zerocool__split_fields27)))) and
+  (((result75 = has_training({ us_split_fields3 = rambo__split_fields27;
+  attr__tag1 = rambo__attr__tag }, state8)) and ((result75 = true) or
+  ((not (result75 = true)) and
+  (rambo__split_fields28 = rambo__split_fields27)))) and
+  (((result76 = has_training({ us_split_fields3 = dr_house__split_fields21;
+  attr__tag1 = dr_house__attr__tag }, state8)) and ((result76 = true) or
+  ((not (result76 = true)) and
+  (dr_house__split_fields22 = dr_house__split_fields21)))) and
+  (((result77 = { int__content = skill9 }) and (skill10 = 9)) and
+  (((result78 = has_training({ us_split_fields3 =
+  uni_student__split_fields28; attr__tag1 = uni_student__attr__tag },
+  state9)) and ((result78 = true) or ((not (result78 = true)) and
+  (uni_student__split_fields29 = uni_student__split_fields28)))) and
+  (((result79 = has_training({ us_split_fields3 = zerocool__split_fields28;
+  attr__tag1 = zerocool__attr__tag }, state9)) and ((result79 = true) or
+  ((not (result79 = true)) and
+  (zerocool__split_fields29 = zerocool__split_fields28)))) and
+  (((result80 = has_training({ us_split_fields3 = rambo__split_fields28;
+  attr__tag1 = rambo__attr__tag }, state9)) and ((result80 = true) or
+  ((not (result80 = true)) and
+  (rambo__split_fields29 = rambo__split_fields28)))) and
+  (((result81 = has_training({ us_split_fields3 = dr_house__split_fields22;
+  attr__tag1 = dr_house__attr__tag }, state9)) and ((result81 = true) or
+  ((not (result81 = true)) and
+  (dr_house__split_fields23 = dr_house__split_fields22)))) and
+  (((result82 = { int__content = skill10 }) and (skill11 = 10)) and
+  (((result83 = has_training({ us_split_fields3 =
+  uni_student__split_fields29; attr__tag1 = uni_student__attr__tag },
+  state10)) and ((result83 = true) or ((not (result83 = true)) and
+  (uni_student__split_fields30 = uni_student__split_fields29)))) and
+  (((result84 = has_training({ us_split_fields3 = zerocool__split_fields29;
+  attr__tag1 = zerocool__attr__tag }, state10)) and ((result84 = true) or
+  ((not (result84 = true)) and
+  (zerocool__split_fields30 = zerocool__split_fields29)))) and
+  (((result85 = has_training({ us_split_fields3 = rambo__split_fields29;
+  attr__tag1 = rambo__attr__tag }, state10)) and ((result85 = true) or
+  ((not (result85 = true)) and
+  (rambo__split_fields30 = rambo__split_fields29)))) and
+  (((result86 = has_training({ us_split_fields3 = dr_house__split_fields23;
+  attr__tag1 = dr_house__attr__tag }, state10)) and ((result86 = true) or
+  ((not (result86 = true)) and
+  (dr_house__split_fields24 = dr_house__split_fields23)))) and
+  (((result87 = { int__content = skill11 }) and (skill12 = 11)) and
+  (((result88 = has_training({ us_split_fields3 =
+  uni_student__split_fields30; attr__tag1 = uni_student__attr__tag },
+  state11)) and ((result88 = true) or ((not (result88 = true)) and
+  (uni_student__split_fields31 = uni_student__split_fields30)))) and
+  (((result89 = has_training({ us_split_fields3 = zerocool__split_fields30;
+  attr__tag1 = zerocool__attr__tag }, state11)) and ((result89 = true) or
+  ((not (result89 = true)) and
+  (zerocool__split_fields31 = zerocool__split_fields30)))) and
+  (((result90 = has_training({ us_split_fields3 = rambo__split_fields30;
+  attr__tag1 = rambo__attr__tag }, state11)) and ((result90 = true) or
+  ((not (result90 = true)) and
+  (rambo__split_fields31 = rambo__split_fields30)))) and
+  (((result91 = has_training({ us_split_fields3 = dr_house__split_fields24;
+  attr__tag1 = dr_house__attr__tag }, state11)) and ((result91 = true) or
+  ((not (result91 = true)) and
+  (dr_house__split_fields25 = dr_house__split_fields24)))) and
+  (((result92 = { int__content = skill12 }) and (skill13 = 12)) and
+  (((result93 = has_training({ us_split_fields3 =
+  uni_student__split_fields31; attr__tag1 = uni_student__attr__tag },
+  state12)) and ((result93 = true) or ((not (result93 = true)) and
+  (uni_student__split_fields32 = uni_student__split_fields31)))) and
+  (((result94 = has_training({ us_split_fields3 = zerocool__split_fields31;
+  attr__tag1 = zerocool__attr__tag }, state12)) and ((result94 = true) or
+  ((not (result94 = true)) and
+  (zerocool__split_fields32 = zerocool__split_fields31)))) and
+  (((result95 = has_training({ us_split_fields3 = rambo__split_fields31;
+  attr__tag1 = rambo__attr__tag }, state12)) and ((result95 = true) or
+  ((not (result95 = true)) and
+  (rambo__split_fields32 = rambo__split_fields31)))) and
+  ((result96 = has_training({ us_split_fields3 = dr_house__split_fields25;
+  attr__tag1 = dr_house__attr__tag }, state12)) and ((result96 = true) or
+  ((not (result96 = true)) and
+  (dr_house__split_fields26 = dr_house__split_fields25)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))) ->
+  ((((is_alive({ us_split_fields1 = { rec__people__person__name =
+  (rambo__split_fields33).rec__people__person__name1;
+  rec__people__person__dob =
+  (rambo__split_fields33).rec__people__person__dob1;
+  rec__people__person__alive =
+  (rambo__split_fields33).rec__people__person__alive1; rec__ext__ =
+  hide_ext__((rambo__split_fields33).rec__professionals__professional__profession,
+  (rambo__split_fields33).rec__professionals__professional__skilled_in,
+  (rambo__split_fields33).rec__professionals__professional__number_of_people_killed,
+  (rambo__split_fields33).rec__ext__1) }; attr__tag = rambo__attr__tag
+  }) = true) and (not (is_alive1(uni_student__attr__tag, { us_split_fields1 =
+  professionals__another_one_bites_the_dust__victim__fields; attr__tag =
+  uni_student__attr__tag }) = true))) and ((result97 = {
+  us_split_fields__content1 = uni_student__split_fields32 }) and
+  (uni_student__split_fields33 = (of_base({ us_split_fields1 =
+  professionals__another_one_bites_the_dust__victim__fields; attr__tag =
+  uni_student__attr__tag })).us_split_fields3))) -> (is_alive({
   us_split_fields1 = { rec__people__person__name =
-  professionals__another_one_bites_the_dust__victim__fields;
+  (dr_house__split_fields26).rec__people__person__name1;
   rec__people__person__dob =
-  professionals__another_one_bites_the_dust__victim__fields1;
+  (dr_house__split_fields26).rec__people__person__dob1;
   rec__people__person__alive =
-  professionals__another_one_bites_the_dust__victim__fields2; rec__ext__ =
-  professionals__another_one_bites_the_dust__victim__fields3 }; attr__tag =
-  uni_student__attr__tag }) = true)))
-
-axiom H207 : ((result97 = uni_student__split_fields98) and
-  ((result98 = uni_student__split_fields99) and
-  ((result99 = uni_student__split_fields100) and
-  ((result100 = uni_student__split_fields101) and
-  ((result101 = uni_student__split_fields102) and
-  ((result102 = uni_student__split_fields103) and
-  (result103 = uni_student__split_fields104)))))))
-
-axiom H208 : ({ rec__people__person__name1 = uni_student__split_fields105;
-  rec__people__person__dob1 = uni_student__split_fields106;
-  rec__people__person__alive1 = uni_student__split_fields107;
-  rec__professionals__professional__profession =
-  uni_student__split_fields108;
-  rec__professionals__professional__skilled_in =
-  uni_student__split_fields109;
-  rec__professionals__professional__number_of_people_killed =
-  uni_student__split_fields110; rec__ext__1 = uni_student__split_fields111
-  } = (of_base({ us_split_fields1 = { rec__people__person__name =
-  professionals__another_one_bites_the_dust__victim__fields;
-  rec__people__person__dob =
-  professionals__another_one_bites_the_dust__victim__fields1;
-  rec__people__person__alive =
-  professionals__another_one_bites_the_dust__victim__fields2; rec__ext__ =
-  professionals__another_one_bites_the_dust__victim__fields3 }; attr__tag =
-  uni_student__attr__tag })).us_split_fields3)
-
- (* File "main.adb", line 8, characters 0-0 *)
-goal WP_parameter_def : (is_alive({ us_split_fields1 = {
-  rec__people__person__name = dr_house__split_fields98;
-  rec__people__person__dob = dr_house__split_fields99;
-  rec__people__person__alive = dr_house__split_fields100; rec__ext__ =
-  hide_ext__(dr_house__split_fields101, dr_house__split_fields102,
-  dr_house__split_fields103, dr_house__split_fields104) }; attr__tag =
-  dr_house__attr__tag }) = true)
+  (dr_house__split_fields26).rec__people__person__alive1; rec__ext__ =
+  hide_ext__((dr_house__split_fields26).rec__professionals__professional__profession,
+  (dr_house__split_fields26).rec__professionals__professional__skilled_in,
+  (dr_house__split_fields26).rec__professionals__professional__number_of_people_killed,
+  (dr_house__split_fields26).rec__ext__1) }; attr__tag = dr_house__attr__tag
+  }) = true)))))))))

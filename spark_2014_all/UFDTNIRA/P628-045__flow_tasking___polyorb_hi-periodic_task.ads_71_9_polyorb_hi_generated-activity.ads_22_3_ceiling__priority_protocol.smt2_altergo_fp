@@ -517,17 +517,8 @@ axiom dispatch_offset__def_axiom :
 
 axiom task_period__def_axiom : (task_period = milliseconds(1000))
 
-logic o : duration
-
-logic temp___1628 : us_rep1
-
-axiom H : (to_fixed(o) = 0)
-
-axiom H1 : (temp___1628 = to_time_span(o))
-
-axiom H2 : (temp___1628 = dispatch_offset)
-
-axiom H3 : (milliseconds(1000) = task_period)
-
  (* File "polyorb_hi-periodic_task.ads", line 65, characters 0-0 *)
-goal WP_parameter_def : (97 <= 97)
+goal WP_parameter_def :
+  (forall o:duration. forall temp___1833:us_rep1. ((((to_fixed(o) = 0) and
+  (temp___1833 = to_time_span(o))) and (temp___1833 = dispatch_offset)) ->
+  ((milliseconds(1000) = task_period) -> (97 <= 97))))

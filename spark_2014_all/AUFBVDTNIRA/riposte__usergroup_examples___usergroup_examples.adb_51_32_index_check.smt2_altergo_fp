@@ -869,31 +869,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def :
-  (forall v:integer. forall v1:integer. forall v2:integer.
-  (forall i:int [(singleton({ us_split_fields1 = {
-  rec__usergroup_examples__rec_t__a = v; rec__usergroup_examples__rec_t__b =
-  v1; rec__usergroup_examples__rec_t__c = v2 } }, i)[i])]. ((singleton({
-  us_split_fields1 = { rec__usergroup_examples__rec_t__a = v;
-  rec__usergroup_examples__rec_t__b = v1; rec__usergroup_examples__rec_t__c =
-  v2 } }, i)[i]) = { us_split_fields1 = { rec__usergroup_examples__rec_t__a =
-  v; rec__usergroup_examples__rec_t__b = v1;
-  rec__usergroup_examples__rec_t__c = v2 } })))
-
 logic bool_eq4 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -904,17 +879,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and (bool_eq3((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and (bool_eq3((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq3((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq4(a,
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq3((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq4(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -924,9 +899,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq3((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq3((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)))))))
 
 type u64
 
@@ -993,29 +968,18 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic tmp : t
+logic rliteral : t
 
-logic o : int
+axiom rliteral_axiom : (tqtint(rliteral) = 5)
 
-logic temp___221 : int
+logic rliteral1 : t
 
-logic result : t
-
-logic tmp1 : t
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : true
-
-axiom H3 : (result = tmp)
-
-axiom H4 : (tmp1 = bw_xor(mul(of_int(5), salt), mul(of_int(7), hash)))
-
-axiom H5 : ((o = tqtint(tmp1)) and in_range(tqtint(tmp1)))
-
-axiom H6 : (temp___221 = mod(o, 256))
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 7)
 
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (1 <= temp___221)
+goal WP_parameter_def :
+  (forall tmp:t. forall o:int. forall temp___253:int. forall result:t.
+  forall tmp1:t. (((result = tmp) and (tmp1 = bw_xor(mul(rliteral, salt),
+  mul(rliteral1, hash)))) -> ((((o = tqtint(tmp1)) and
+  in_range(tqtint(tmp1))) and (temp___253 = mod(o, 256))) ->
+  (1 <= temp___253))))

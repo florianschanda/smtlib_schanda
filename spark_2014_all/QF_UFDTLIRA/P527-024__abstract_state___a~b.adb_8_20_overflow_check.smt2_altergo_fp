@@ -111,27 +111,9 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic data1 : int
-
-logic data2 : int
-
-logic tmp : int
-
-logic o : int
-
-logic result : int
-
-logic data11 : int
-
-axiom H : in_range(data1)
-
-axiom H1 : in_range(data2)
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range(tmp))
-
-axiom H3 : (result = data1)
-
-axiom H4 : (data11 = 0)
-
  (* File "a.ads", line 8, characters 0-0 *)
-goal WP_parameter_def : in_range((data11 + data2))
+goal WP_parameter_def :
+  (forall data1:int. forall data2:int. forall tmp:int. forall result:int.
+  forall data11:int. (in_range(data1) -> (in_range(data2) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(tmp)) ->
+  (((result = data1) and (data11 = 0)) -> in_range((data11 + data2)))))))

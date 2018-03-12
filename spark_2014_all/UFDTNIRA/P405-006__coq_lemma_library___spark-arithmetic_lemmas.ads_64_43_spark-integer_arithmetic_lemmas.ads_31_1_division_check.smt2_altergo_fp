@@ -222,11 +222,6 @@ logic arg2 : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-axiom H : in_range(arg1)
-
-axiom H1 : in_range(arg2)
-
-axiom H2 : (not (arg2 = 0))
-
  (* File "spark-arithmetic_lemmas.ads", line 53, characters 0-0 *)
-goal WP_parameter_def : (not (arg2 = 0))
+goal WP_parameter_def : (in_range(arg1) -> (in_range(arg2) ->
+  ((not (arg2 = 0)) -> (not (arg2 = 0)))))

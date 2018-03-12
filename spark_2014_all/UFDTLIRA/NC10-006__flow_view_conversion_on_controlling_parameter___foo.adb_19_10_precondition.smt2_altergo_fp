@@ -302,39 +302,21 @@ axiom logging__log_type_public__compat_axiom2 :
   rec__logging__log_type_public__tmp = log; rec__ext__ = log1 }; attr__tag =
   log2 })))
 
-logic log__split_fields : log_count
-
-logic log__split_fields1 : us_private
-
-logic logging__init_log__2__log__fields : log_count
-
-logic logging__init_log__2__log__fields1 : us_private
-
-logic result : log_count
-
-logic result1 : us_private
-
-logic log__split_fields2 : log_count
-
-logic log__split_fields3 : us_private
-
-logic log__split_fields4 : log_count
-
-logic log__split_fields5 : us_private
-
-axiom H : (log_size__2({ us_split_fields1 = {
-  rec__logging__log_type_public__tmp = logging__init_log__2__log__fields;
-  rec__ext__ = logging__init_log__2__log__fields1 }; attr__tag =
-  log__attr__tag }) = 0)
-
-axiom H1 : (result = log__split_fields)
-
-axiom H2 : (result1 = log__split_fields1)
-
-axiom H3 : ((log__split_fields2 = logging__init_log__2__log__fields) and
-  (log__split_fields3 = logging__init_log__2__log__fields1))
-
  (* File "foo.adb", line 8, characters 0-0 *)
-goal WP_parameter_def : (log_size__21(log__attr__tag, { us_split_fields1 = {
+goal WP_parameter_def :
+  (forall log__split_fields:log_count. forall log__split_fields1:us_private.
+  forall logging__init_log__2__log__fields:log_count.
+  forall logging__init_log__2__log__fields1:us_private.
+  forall result:log_count. forall result1:us_private.
+  forall log__split_fields2:log_count. forall log__split_fields3:us_private.
+  (((log_size__2({ us_split_fields1 = { rec__logging__log_type_public__tmp =
+  logging__init_log__2__log__fields; rec__ext__ =
+  logging__init_log__2__log__fields1 }; attr__tag = log__attr__tag
+  }) = 0) and (((result = log__split_fields) and
+  (result1 = log__split_fields1)) and ({ rec__logging__log_type_public__tmp =
+  log__split_fields2; rec__ext__ = log__split_fields3 } = {
+  rec__logging__log_type_public__tmp = logging__init_log__2__log__fields;
+  rec__ext__ = logging__init_log__2__log__fields1 }))) ->
+  (log_size__21(log__attr__tag, { us_split_fields1 = {
   rec__logging__log_type_public__tmp = log__split_fields2; rec__ext__ =
-  log__split_fields3 }; attr__tag = log__attr__tag }) <  10000)
+  log__split_fields3 }; attr__tag = log__attr__tag }) <  10000)))

@@ -107,35 +107,16 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic value : int
-
-logic foo__get_data__result : int
-
-logic result : int
-
-logic foo__get_data__result1 : int
-
-logic foo__get_data__result2 : int
-
-logic foo__get_data__result3 : int
-
-logic foo__get_data__result4 : int
-
-logic foo__get_data__result5 : int
-
-axiom H : in_range(value)
-
-axiom H1 : (foo__get_data__result1 = foo__get_data__result2)
-
-axiom H2 : (foo__get_data__result3 = foo__get_data__result1)
-
-axiom H3 : (result = foo__get_data__result)
-
-axiom H4 : (foo__get_data__result1 = value)
-
-axiom H5 : (foo__get_data__result4 = foo__get_data__result2)
-
-axiom H6 : (foo__get_data__result5 = foo__get_data__result3)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (foo__get_data__result4 = value)
+goal WP_parameter_def :
+  (forall value:int. forall foo__get_data__result:int. forall result:int.
+  forall foo__get_data__result1:int. forall foo__get_data__result2:int.
+  forall foo__get_data__result3:int. forall foo__get_data__result4:int.
+  forall foo__get_data__result5:int. (in_range(value) ->
+  (((((foo__get_data__result1 = foo__get_data__result2) and
+  (foo__get_data__result3 = foo__get_data__result1)) and
+  ((result = foo__get_data__result) and
+  (foo__get_data__result1 = value))) and
+  ((foo__get_data__result4 = foo__get_data__result2) and
+  (foo__get_data__result5 = foo__get_data__result3))) ->
+  (foo__get_data__result4 = value))))

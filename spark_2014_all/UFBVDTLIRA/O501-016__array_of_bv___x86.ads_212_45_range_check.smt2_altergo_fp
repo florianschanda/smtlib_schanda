@@ -1028,36 +1028,23 @@ function unsigned32__ref___projection(a: unsigned32__ref) : unsigned32 =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic rsp : t1
+logic rliteral1 : t1
 
-logic x86__esp__result : t
+axiom rliteral_axiom1 : (tqtint1(rliteral1) = 4294967295)
 
-logic result : t
+logic rliteral2 : t
 
-logic x86__esp__result1 : t
-
-logic x86__esp__result2 : t
-
-logic x86__esp__result3 : t
-
-logic x86__esp__result4 : t
-
-logic x86__esp__result5 : t
-
-axiom H : true
-
-axiom H1 : (x86__esp__result1 = x86__esp__result2)
-
-axiom H2 : (x86__esp__result3 = x86__esp__result1)
-
-axiom H3 : (result = x86__esp__result)
-
-axiom H4 : (x86__esp__result1 = toSmall(bw_and1(rsp, of_int1(4294967295))))
-
-axiom H5 : (x86__esp__result4 = x86__esp__result2)
-
-axiom H6 : (x86__esp__result5 = x86__esp__result3)
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 0)
 
  (* File "x86.ads", line 8, characters 0-0 *)
-goal WP_parameter_def : ule1(toBig(of_int(0)), bw_and1(rsp,
-  of_int1(4294967295)))
+goal WP_parameter_def :
+  (forall rsp:t1. forall x86__esp__result:t. forall result:t.
+  forall x86__esp__result1:t. forall x86__esp__result2:t.
+  forall x86__esp__result3:t. forall x86__esp__result4:t.
+  forall x86__esp__result5:t. (((((x86__esp__result1 = x86__esp__result2) and
+  (x86__esp__result3 = x86__esp__result1)) and (({ t__content = result } = {
+  t__content = x86__esp__result }) and
+  (x86__esp__result1 = toSmall(bw_and1(rsp, rliteral1))))) and (({
+  t__content = x86__esp__result4 } = { t__content = x86__esp__result2 }) and
+  (x86__esp__result5 = x86__esp__result3))) -> ule1(toBig(rliteral2),
+  bw_and1(rsp, rliteral1))))

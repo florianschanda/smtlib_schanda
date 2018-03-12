@@ -144,37 +144,11 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic mine : int
-
-logic maxe : int
-
-logic result : int
-
-logic mine1 : int
-
-logic result1 : int
-
-logic maxe1 : int
-
-axiom H : ((0 <= 3) -> in_range(mine))
-
-axiom H1 : ((0 <= 3) -> in_range(maxe))
-
-axiom H2 : in_range(x)
-
-axiom H3 : in_range(y)
-
-axiom H4 : (x <  y)
-
-axiom H5 : (result = mine)
-
-axiom H6 : (mine1 = min(x, y))
-
-axiom H7 : (result1 = maxe)
-
-axiom H8 : (maxe1 = max(x, y))
-
-axiom H9 : (mine1 = x)
-
  (* File "minmax.adb", line 54, characters 0-0 *)
-goal WP_parameter_def : (maxe1 = y)
+goal WP_parameter_def :
+  (forall mine:int. forall maxe:int. forall result:int. forall mine1:int.
+  forall result1:int. forall maxe1:int. (((0 <= 3) -> in_range(mine)) ->
+  (((0 <= 3) -> in_range(maxe)) -> (in_range(x) -> (in_range(y) ->
+  ((x <  y) -> (((result = mine) and (mine1 = min(x, y))) ->
+  (((result1 = maxe) and (maxe1 = max(x, y))) -> ((mine1 = x) ->
+  (maxe1 = y))))))))))

@@ -361,131 +361,32 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic result____split_fields : even
-
-logic result____split_fields1 : even
-
-logic o : int
-
-logic o1 : even
-
-logic o2 : even
-
-logic o3 : even
-
-logic temp___263 : even
-
-logic temp___2631 : even
-
-logic temp___256 : int
-
-logic o4 : int
-
-logic o5 : even
-
-logic o6 : even
-
-logic o7 : even
-
-logic temp___259 : even
-
-logic temp___2591 : even
-
-logic temp___264 : int
-
-logic o8 : int
-
-logic o9 : even
-
-logic o10 : even
-
-logic o11 : even
-
-logic temp___267 : even
-
-logic temp___2671 : even
-
-logic result : even
-
-logic result1 : even
-
-logic result____split_fields2 : even
-
-logic result____split_fields3 : even
-
-logic result2 : even
-
-logic result3 : even
-
-logic result____split_fields4 : even
-
-logic result____split_fields5 : even
-
-logic result4 : even
-
-logic result5 : even
-
-logic result____split_fields6 : even
-
-logic result____split_fields7 : even
-
-axiom H : in_range(above)
-
-axiom H1 : true
-
-axiom H2 : ((mod(above, 2) = 0) -> (mod(above, 2) = 0))
-
-axiom H3 : ((mod(above, 2) = 0) -> (o = above))
-
-axiom H4 : ((mod(above, 2) = 0) -> (to_rep(o1) = o))
-
-axiom H5 : ((mod(above, 2) = 0) -> (o1 = o2))
-
-axiom H6 : ((mod(above, 2) = 0) -> (result____split_fields1 = o3))
-
-axiom H7 : ((mod(above, 2) = 0) -> (temp___263 = o2))
-
-axiom H8 : ((mod(above, 2) = 0) -> (temp___2631 = o3))
-
-axiom H9 : ((mod(above, 2) = 0) -> (result = result____split_fields))
-
-axiom H10 : ((mod(above, 2) = 0) -> (result1 = result____split_fields1))
-
-axiom H11 : ((mod(above, 2) = 0) -> (temp___263 = result____split_fields2))
-
-axiom H12 : ((mod(above, 2) = 0) -> (temp___2631 = result____split_fields3))
-
-axiom H13 : ((not (mod(above, 2) = 0)) -> ((temp___256 = (above + 1)) and
-  in_range((above + 1))))
-
-axiom H14 : ((not (mod(above, 2) = 0)) -> (mod(temp___256, 2) = 0))
-
-axiom H15 : ((not (mod(above, 2) = 0)) -> (o4 = temp___256))
-
-axiom H16 : ((not (mod(above, 2) = 0)) -> (to_rep(o5) = o4))
-
-axiom H17 : ((not (mod(above, 2) = 0)) -> (o5 = o6))
-
-axiom H18 : ((not (mod(above, 2) = 0)) -> (result____split_fields1 = o7))
-
-axiom H19 : ((not (mod(above, 2) = 0)) -> (temp___259 = o6))
-
-axiom H20 : ((not (mod(above, 2) = 0)) -> (temp___2591 = o7))
-
-axiom H21 : ((not (mod(above, 2) = 0)) -> (result2 = result____split_fields))
-
-axiom H22 : ((not (mod(above, 2) = 0)) ->
-  (result3 = result____split_fields1))
-
-axiom H23 : ((not (mod(above, 2) = 0)) ->
-  (temp___259 = result____split_fields4))
-
-axiom H24 : ((not (mod(above, 2) = 0)) ->
-  (temp___2591 = result____split_fields5))
-
-axiom H25 : ((not (mod(above, 2) = 0)) ->
-  ((result____split_fields2 = result____split_fields4) and
-  (result____split_fields3 = result____split_fields5)))
-
  (* File "dynamic_preds.ads", line 25, characters 0-0 *)
-goal WP_parameter_def : in_range((to_rep(result____split_fields2) + 2))
+goal WP_parameter_def :
+  (forall result____split_fields:even. forall result____split_fields1:even.
+  forall o:int. forall o1:even. forall o2:even. forall o3:even.
+  forall temp___289:even. forall temp___2891:even. forall temp___282:int.
+  forall o4:int. forall o5:even. forall o6:even. forall o7:even.
+  forall temp___285:even. forall temp___2851:even. forall result:even.
+  forall result1:even. forall result____split_fields2:even.
+  forall result____split_fields3:even. forall result2:even.
+  forall result3:even. forall result____split_fields4:even.
+  forall result____split_fields5:even. (in_range(above) -> ((((mod(above,
+  2) = 0) and ((((((mod(above, 2) = 0) and (o = above)) and
+  (to_rep(o1) = o)) and ((o1 = o2) and (result____split_fields1 = o3))) and
+  ((temp___289 = o2) and (temp___2891 = o3))) and
+  (((result = result____split_fields) and
+  (result1 = result____split_fields1)) and
+  ((temp___289 = result____split_fields2) and
+  (temp___2891 = result____split_fields3))))) or ((not (mod(above,
+  2) = 0)) and ((((((((temp___282 = (above + 1)) and
+  in_range((above + 1))) and ((mod(temp___282, 2) = 0) and
+  (o4 = temp___282))) and (to_rep(o5) = o4)) and ((o5 = o6) and
+  (result____split_fields1 = o7))) and ((temp___285 = o6) and
+  (temp___2851 = o7))) and (((result2 = result____split_fields) and
+  (result3 = result____split_fields1)) and
+  ((temp___285 = result____split_fields4) and
+  (temp___2851 = result____split_fields5)))) and
+  ((result____split_fields2 = result____split_fields4) and
+  (result____split_fields3 = result____split_fields5))))) ->
+  in_range((to_rep(result____split_fields2) + 2)))))

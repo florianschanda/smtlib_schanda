@@ -145,33 +145,10 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic a : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic result : int
-
-logic a1 : int
-
-axiom H : in_range(intgr)
-
-axiom H1 : ((o = c86004c0(10)) and in_range(o))
-
-axiom H2 : ((o1 = o) and in_range1(o))
-
-axiom H3 : (result = a)
-
-axiom H4 : (a1 = o1)
-
-axiom H5 : in_range1(a1)
-
-axiom H6 : ((o2 = c86004c0(intgr)) and in_range(o2))
-
  (* File "c86004c01.adb", line 7, characters 0-0 *)
-goal WP_parameter_def : in_range1(o2)
+goal WP_parameter_def :
+  (forall a:int. forall o:int. forall o1:int. forall o2:int.
+  forall result:int. forall a1:int. (in_range(intgr) ->
+  (((((o = c86004c0(10)) and in_range(o)) and ((o1 = o) and
+  in_range1(o))) and ((result = a) and (a1 = o1))) -> (in_range1(a1) ->
+  (((o2 = c86004c0(intgr)) and in_range(o2)) -> in_range1(o2))))))

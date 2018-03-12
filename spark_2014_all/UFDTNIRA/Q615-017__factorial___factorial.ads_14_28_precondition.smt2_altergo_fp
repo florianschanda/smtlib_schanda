@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -187,166 +187,45 @@ function t2b__ref___projection(a: t2b__ref) : integer = (a).t2b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic result__ : int
-
-logic i : int
-
-logic factorial__fact__result : int
-
-logic temp___133 : int
-
-logic temp___132 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic result : int
-
-logic result__1 : int
-
-logic result1 : int
-
-logic i1 : int
-
-logic result2 : int
-
-logic result__2 : int
-
-logic result__3 : int
-
-logic i2 : int
-
-logic result3 : int
-
-logic i3 : int
-
-logic result4 : int
-
-logic result__4 : int
-
-logic result__5 : int
-
-logic i4 : int
-
-logic result__6 : int
-
-logic i5 : int
-
-logic result__7 : int
-
-logic i6 : int
-
-logic result__8 : int
-
-logic i7 : int
-
-logic result__9 : int
-
-logic i8 : int
-
-logic result__10 : int
-
-logic i9 : int
-
-logic result5 : int
-
-logic factorial__fact__result1 : int
-
-logic result__11 : int
-
-logic i10 : int
-
-logic factorial__fact__result2 : int
-
-logic result__12 : int
-
-logic i11 : int
-
-logic factorial__fact__result3 : int
-
-logic result__13 : int
-
-logic i12 : int
-
-logic factorial__fact__result4 : int
-
-logic result__14 : int
-
-logic i13 : int
-
-logic factorial__fact__result5 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : ((1 <= x) and (x <= 12))
-
-axiom H2 : (factorial__fact__result1 = factorial__fact__result2)
-
-axiom H3 : (i10 = i8)
-
-axiom H4 : (result__11 = result__9)
-
-axiom H5 : (factorial__fact__result3 = factorial__fact__result1)
-
-axiom H6 : (i11 = i9)
-
-axiom H7 : (result__12 = result__10)
-
-axiom H8 : (((- 2147483648) <= 2147483647) -> in_range1(result__))
-
-axiom H9 : (result = result__)
-
-axiom H10 : (result__1 = 1)
-
-axiom H11 : (result1 = i)
-
-axiom H12 : (i1 = 2)
-
-axiom H13 : (((2 <= i1) and (i1 <= x)) -> (((temp___133 = i1) and
-  ((temp___132 = result__1) and ((((o = (result__1 * i1)) and
-  in_range1((result__1 * i1))) and ((result__1 = result2) and
-  (result__2 = o))) and ((result__3 = mathematical_factorial(i2)) and
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (forall result__:int. forall i:int. forall factorial__fact__result:int.
+  forall temp___155:int. forall temp___154:int. forall o:int.
+  forall result:int. forall result__1:int. forall result1:int. forall i1:int.
+  forall result2:int. forall result__2:int. forall result__3:int.
+  forall i2:int. forall result__4:int. forall i3:int. forall result__5:int.
+  forall i4:int. forall result__6:int. forall i5:int. forall result__7:int.
+  forall i6:int. forall result3:int. forall factorial__fact__result1:int.
+  forall result__8:int. forall i7:int. forall factorial__fact__result2:int.
+  forall result__9:int. forall i8:int. forall factorial__fact__result3:int.
+  forall result__10:int. forall i9:int. forall factorial__fact__result4:int.
+  forall result__11:int. forall i10:int. forall factorial__fact__result5:int.
+  (in_range1(x) -> (((1 <= x) and (x <= 12)) ->
+  ((((((factorial__fact__result1 = factorial__fact__result2) and (({
+  int__content = i7 } = { int__content = i5 }) and ({ int__content =
+  result__8 } = { int__content = result__6 }))) and
+  ((factorial__fact__result3 = factorial__fact__result1) and ((i8 = i6) and
+  (result__9 = result__7)))) and ((((- 2147483648) <= 2147483647) ->
+  in_range1(result__)) and ((({ int__content = result } = { int__content =
+  result__ }) and (result__1 = 1)) and (((({ int__content = result1 } = {
+  int__content = i }) and (i1 = 2)) and ((((2 <= i1) and (i1 <= x)) and
+  ((((temp___155 = i1) and ((temp___154 = result__1) and
+  ((((o = (result__1 * i1)) and in_range1((result__1 * i1))) and
+  ((result__1 = result2) and (result__2 = o))) and
+  ((result__3 = mathematical_factorial(i2)) and
   ((((((- 2147483648) <= 2147483647) -> in_range1(result__3)) and
   ((2 <= x) -> dynamic_property(2, x, i2))) and ((2 <= i2) and
-  (i2 <= x))) and (i2 = x)))))) and (((i2 = i6) and
-  (result__3 = result__7)) and ((i7 = i2) and (result__8 = result__3)))))
-
-axiom H14 : (((2 <= i1) and (i1 <= x)) -> (i8 = i6))
-
-axiom H15 : (((2 <= i1) and (i1 <= x)) -> (result__9 = result__7))
-
-axiom H16 : (((2 <= i1) and (i1 <= x)) -> (i9 = i7))
-
-axiom H17 : (((2 <= i1) and (i1 <= x)) -> (result__10 = result__8))
-
-axiom H18 : ((not ((2 <= i1) and (i1 <= x))) -> (i1 = i8))
-
-axiom H19 : ((not ((2 <= i1) and (i1 <= x))) -> (result__1 = result__9))
-
-axiom H20 : ((not ((2 <= i1) and (i1 <= x))) -> (i9 = i1))
-
-axiom H21 : ((not ((2 <= i1) and (i1 <= x))) -> (result__10 = result__1))
-
-axiom H22 : (result5 = factorial__fact__result)
-
-axiom H23 : (factorial__fact__result1 = result__9)
-
-axiom H24 : (factorial__fact__result4 = factorial__fact__result2)
-
-axiom H25 : (i12 = i10)
-
-axiom H26 : (result__13 = result__11)
-
-axiom H27 : (factorial__fact__result5 = factorial__fact__result3)
-
-axiom H28 : (i13 = i11)
-
-axiom H29 : (result__14 = result__12)
-
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (1 <= x)
+  (i2 <= x))) and (i2 = x)))))) and (((i2 = i3) and
+  (result__3 = result__4)) and ((i4 = i2) and (result__5 = result__3)))) and
+  ((({ int__content = i5 } = { int__content = i3 }) and ({ int__content =
+  result__6 } = { int__content = result__4 })) and ((i6 = i4) and
+  (result__7 = result__5))))) or ((not ((2 <= i1) and (i1 <= x))) and
+  (((i1 = i5) and (result__1 = result__6)) and ((i6 = i1) and
+  (result__7 = result__1)))))) and (({ int__content = result3 } = {
+  int__content = factorial__fact__result }) and
+  (factorial__fact__result1 = result__6)))))) and ((({ int__content =
+  factorial__fact__result4 } = { int__content = factorial__fact__result2
+  }) and (({ int__content = i9 } = { int__content = i7 }) and ({
+  int__content = result__10 } = { int__content = result__8 }))) and
+  ((factorial__fact__result5 = factorial__fact__result3) and ((i10 = i8) and
+  (result__11 = result__9))))) -> (1 <= x)))))

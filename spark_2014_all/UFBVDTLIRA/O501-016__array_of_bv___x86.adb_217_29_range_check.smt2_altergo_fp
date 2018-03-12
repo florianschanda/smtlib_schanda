@@ -1025,23 +1025,14 @@ function unsigned16__ref___projection(a: unsigned16__ref) : unsigned16 =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic rbp : t1
+logic rliteral1 : t
 
-logic x86__bp__result : t
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 0)
 
-logic result : t
+logic rliteral2 : t1
 
-logic x86__bp__result1 : t
-
-logic x86__bp__result2 : t
-
-logic x86__bp__result3 : t
-
-logic x86__bp__result4 : t
-
-logic x86__bp__result5 : t
-
-axiom H : true
+axiom rliteral_axiom2 : (tqtint1(rliteral2) = 65535)
 
  (* File "x86.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : ule1(toBig(of_int(0)), bw_and1(rbp, of_int1(65535)))
+goal WP_parameter_def :
+  (forall rbp:t1. ule1(toBig(rliteral1), bw_and1(rbp, rliteral2)))

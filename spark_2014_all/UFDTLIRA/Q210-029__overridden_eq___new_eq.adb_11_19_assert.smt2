@@ -73,7 +73,7 @@
 (assert (forall ((x us_rep) (y us_rep)) (! (= (= (oeq x y) true) (= (to_rep (rec__new_eq__my_rec__f (us_split_fields1 x))) (to_rep (rec__new_eq__my_rec__f (us_split_fields1 y))))) :pattern ((oeq x y)))))
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
-(define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool) (temp___skip_constant_13 Bool) (temp___do_toplevel_14 Bool)) Bool (=> (or (= temp___is_init_12 true) (<= (- 2147483648) 2147483647)) (in_range temp___expr_15)))
+(define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool) (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool) (temp___do_typ_inv_17 Bool)) Bool (=> (or (= temp___is_init_14 true) (<= (- 2147483648) 2147483647)) (in_range temp___expr_18)))
 (declare-const x__split_fields integer)
 (declare-const x__split_fields1 integer)
 (declare-const y__split_fields integer)

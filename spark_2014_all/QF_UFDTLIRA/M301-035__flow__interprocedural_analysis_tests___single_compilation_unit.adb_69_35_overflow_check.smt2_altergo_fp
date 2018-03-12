@@ -113,31 +113,10 @@ logic fibonacci : int -> int
 
 logic fibonacci__function_guard : int, int -> prop
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-axiom H : in_range(n)
-
-axiom H1 : (not (n <  3))
-
-axiom H2 : ((o1 = (n - 2)) and in_range((n - 2)))
-
-axiom H3 : ((o2 = fibonacci(o1)) and in_range(o2))
-
-axiom H4 : ((o = (n - 1)) and in_range((n - 1)))
-
-axiom H5 : ((o3 = fibonacci(o)) and in_range(o3))
-
-axiom H6 : (o4 = (o3 + o2))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(o4)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
+  (in_range(n) -> ((not (n <  3)) -> (((((o1 = (n - 2)) and
+  in_range((n - 2))) and ((o2 = fibonacci(o1)) and in_range(o2))) and
+  ((((o = (n - 1)) and in_range((n - 1))) and ((o3 = fibonacci(o)) and
+  in_range(o3))) and (o4 = (o3 + o2)))) -> in_range(o4)))))

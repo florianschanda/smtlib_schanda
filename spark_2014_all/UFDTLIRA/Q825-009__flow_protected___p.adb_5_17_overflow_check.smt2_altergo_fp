@@ -182,15 +182,8 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic y : int
-
-logic self__ : integer
-
-logic o : int
-
-axiom H : in_range(x)
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(y))
-
  (* File "p.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : in_range((to_rep(self__) + x))
+goal WP_parameter_def :
+  (forall y:int. forall self__:integer. (in_range(x) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(y)) ->
+  in_range((to_rep(self__) + x)))))

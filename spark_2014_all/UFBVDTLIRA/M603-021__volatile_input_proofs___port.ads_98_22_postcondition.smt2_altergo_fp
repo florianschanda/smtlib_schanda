@@ -594,12 +594,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -611,6 +605,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -712,68 +712,6 @@ logic c2__function_guard : bool, t -> prop
 axiom c2__post_axiom : true
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
-
-logic vbraw : t
-
-logic x : bool
-
-logic tmp : t
-
-logic o : t
-
-logic o1 : bool
-
-logic vbraw1 : t
-
-logic result : t
-
-logic tmp1 : t
-
-logic result1 : bool
-
-logic x1 : bool
-
-logic vbraw2 : t
-
-logic x2 : bool
-
-logic tmp2 : t
-
-logic vbraw3 : t
-
-logic x3 : bool
-
-logic tmp3 : t
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : true
-
-axiom H3 : (o = vbraw1)
-
-axiom H4 : (result = tmp)
-
-axiom H5 : (tmp1 = o)
-
-axiom H6 : (o1 = c2(tmp1))
-
-axiom H7 : (result1 = x)
-
-axiom H8 : (x1 = o1)
-
-axiom H9 : (tmp2 = tmp1)
-
-axiom H10 : (x1 = x2)
-
-axiom H11 : (vbraw2 = vbraw1)
-
-axiom H12 : (tmp3 = tmp1)
-
-axiom H13 : (x3 = x1)
-
-axiom H14 : (vbraw3 = vbraw1)
 
  (* File "port.ads", line 90, characters 0-0 *)
 goal WP_parameter_def : true

@@ -385,56 +385,17 @@ axiom mod_def :
   (forall x:int. forall y:int [mod(x, y)]. (((0 <  y) -> (mod(x,
   y) = (x % y))) and ((not (0 <  y)) -> (mod(x, y) = ((x % y) + y)))))
 
-logic x__split_fields : small
-
-logic x__split_fields1 : very_small
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : very_small
-
-logic o3 : small
-
-logic o4 : small
-
-logic o5 : very_small
-
-logic temp___222 : small
-
-logic temp___2221 : very_small
-
-axiom H : (in_range(i3s) and ((2 * i3s) <  100000))
-
-axiom H1 : (in_range1(i5s) and ((i5s * i5s) <  100000))
-
-axiom H2 : ((comp_div(to_rep(i7s),to_rep1(i7s1)) = 0) and
-  (((2 * to_rep(i7s)) <  100000) and
-  ((to_rep1(i7s1) * to_rep1(i7s1)) <  100000)))
-
-axiom H3 : true
-
-axiom H4 : ((2 * 2) <  100000)
-
-axiom H5 : (o1 = 2)
-
-axiom H6 : (to_rep1(o2) = o1)
-
-axiom H7 : ((2 * 1) <  100000)
-
-axiom H8 : (o = 1)
-
-axiom H9 : (to_rep(o3) = o)
-
-axiom H10 : (o3 = o4)
-
-axiom H11 : (o2 = o5)
-
-axiom H12 : (temp___222 = o4)
-
-axiom H13 : (temp___2221 = o5)
-
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def :
-  (comp_div(to_rep(temp___222),to_rep1(temp___2221)) = 0)
+  (forall o:int. forall o1:int. forall o2:very_small. forall o3:small.
+  forall o4:small. forall o5:very_small. forall temp___250:small.
+  forall temp___2501:very_small. ((in_range(i3s) and
+  ((2 * i3s) <  100000)) -> ((in_range1(i5s) and ((i5s * i5s) <  100000)) ->
+  (((comp_div(to_rep(i7s),to_rep1(i7s1)) = 0) and
+  (((2 * to_rep(i7s)) <  100000) and
+  ((to_rep1(i7s1) * to_rep1(i7s1)) <  100000))) ->
+  (((((((2 * 2) <  100000) and (o1 = 2)) and (to_rep1(o2) = o1)) and
+  (((((2 * 1) <  100000) and (o = 1)) and (to_rep(o3) = o)) and
+  ((o3 = o4) and (o2 = o5)))) and ((temp___250 = o4) and
+  (temp___2501 = o5))) ->
+  (comp_div(to_rep(temp___250),to_rep1(temp___2501)) = 0))))))

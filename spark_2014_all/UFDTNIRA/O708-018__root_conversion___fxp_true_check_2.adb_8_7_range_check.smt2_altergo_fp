@@ -411,33 +411,11 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic md : my_duration
-
-logic ms : my_subduration
-
-logic o : my_subduration
-
-logic o1 : my_duration
-
-logic result : my_subduration
-
-logic ms1 : my_subduration
-
-logic result1 : my_duration
-
-logic md1 : my_duration
-
-axiom H : (to_fixed1(o) = 0)
-
-axiom H1 : (result = ms)
-
-axiom H2 : (ms1 = o)
-
-axiom H3 : (to_fixed(o1) = 10000000000)
-
-axiom H4 : (result1 = md)
-
-axiom H5 : (md1 = o1)
-
  (* File "fxp_true_check_2.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : in_range1(to_fixed(md1))
+goal WP_parameter_def :
+  (forall md:my_duration. forall ms:my_subduration. forall o:my_subduration.
+  forall o1:my_duration. forall result:my_subduration.
+  forall ms1:my_subduration. forall result1:my_duration.
+  forall md1:my_duration. (((to_fixed1(o) = 0) and ((result = ms) and
+  (ms1 = o))) -> (((to_fixed(o1) = 10000000000) and ((result1 = md) and
+  (md1 = o1))) -> in_range1(to_fixed(md1)))))

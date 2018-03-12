@@ -111,51 +111,8 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic res : int
-
-logic casing__f__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic res1 : int
-
-logic result1 : int
-
-logic res2 : int
-
-logic result2 : int
-
-logic res3 : int
-
-logic result3 : int
-
-logic casing__f__result1 : int
-
-logic casing__f__result2 : int
-
-logic casing__f__result3 : int
-
-logic res4 : int
-
-logic casing__f__result4 : int
-
-logic res5 : int
-
-logic casing__f__result5 : int
-
-axiom H : in_range(x)
-
-axiom H1 : (x <  2147483647)
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range(res))
-
-axiom H3 : (not (x = 0))
-
-axiom H4 : (not (x = 1))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((x + 1))
+goal WP_parameter_def :
+  (forall res:int. (in_range(x) -> ((x <  2147483647) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(res)) -> ((not (x = 0)) ->
+  ((not (x = 1)) -> in_range((x + 1))))))))

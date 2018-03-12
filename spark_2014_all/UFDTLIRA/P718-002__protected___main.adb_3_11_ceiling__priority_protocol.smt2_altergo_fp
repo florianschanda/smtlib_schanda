@@ -168,29 +168,5 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic x : int
-
-logic y : int
-
-logic o : obj
-
-logic o1 : int
-
-logic o2 : obj
-
-logic o3 : int
-
-logic p : obj
-
-logic result : int
-
-logic x1 : int
-
-logic p1 : obj
-
-logic result1 : int
-
-logic y1 : int
-
  (* File "prot.ads", line 8, characters 0-0 *)
 goal WP_parameter_def : (48 <= 97)

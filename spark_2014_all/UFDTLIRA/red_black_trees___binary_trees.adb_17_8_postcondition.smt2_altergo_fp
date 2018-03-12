@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -287,171 +287,44 @@ axiom included_except__post_axiom :
   (forall e:int. ((in_range2(e) and (contains(left, e) = true)) ->
   ((contains(right, e) = true) or (e = item))))))))
 
-logic s : us_rep
-
-logic i : int
-
-logic binary_trees__all_indexes__result : us_rep
-
-logic temp___1047 : int
-
-logic temp___1046 : us_rep
-
-logic j : int
-
-logic o : int
-
-logic j1 : int
-
-logic o1 : bool
-
-logic o2 : us_rep
-
-logic s1 : us_rep
-
-logic result : int
-
-logic i1 : int
-
-logic s2 : us_rep
-
-logic i2 : int
-
-logic result1 : us_rep
-
-logic s3 : us_rep
-
-logic result2 : int
-
-logic i3 : int
-
-logic s4 : us_rep
-
-logic i4 : int
-
-logic s5 : us_rep
-
-logic i5 : int
-
-logic s6 : us_rep
-
-logic i6 : int
-
-logic s7 : us_rep
-
-logic i7 : int
-
-logic result3 : us_rep
-
-logic binary_trees__all_indexes__result1 : us_rep
-
-logic binary_trees__all_indexes__result2 : us_rep
-
-logic binary_trees__all_indexes__result3 : us_rep
-
-logic s8 : us_rep
-
-logic i8 : int
-
-logic binary_trees__all_indexes__result4 : us_rep
-
-logic s9 : us_rep
-
-logic i9 : int
-
-logic binary_trees__all_indexes__result5 : us_rep
-
-logic result4 : us_rep
-
-axiom H : (is_empty(s) = true)
-
-axiom H1 : (result = i)
-
-axiom H2 : (i1 = 1)
-
-axiom H3 : (((1 <= i1) and (i1 <= 100)) -> (temp___1047 = i1))
-
-axiom H4 : (((1 <= i1) and (i1 <= 100)) -> (temp___1046 = s))
-
-axiom H5 : (((1 <= i1) and (i1 <= 100)) -> (length(s2) = (i2 - 1)))
-
-axiom H6 : (((1 <= i1) and (i1 <= 100)) ->
-  (forall j2:int. (((1 <= j2) and (j2 <= (i2 - 1))) -> (contains(s2,
-  j2) = true))))
-
-axiom H7 : (((1 <= i1) and (i1 <= 100)) ->
-  (forall j2:int. ((in_range2(j2) and (contains(s2, j2) = true)) ->
-  (j2 <  i2))))
-
-axiom H8 : (((1 <= i1) and (i1 <= 100)) -> (((1 <= 100) -> in_range1(i2)) and
-  ((1 <= i2) and (i2 <= 100))))
-
-axiom H9 : (((1 <= i1) and (i1 <= 100)) -> ((o2 = add(s2, i2)) and
-  ((((length(o2) = (length(s2) + 1)) and (contains(o2, i2) = true)) and
-  (ole(s2, o2) = true)) and (included_except(o2, s2, i2) = true))))
-
-axiom H10 : (((1 <= i1) and (i1 <= 100)) -> (s2 = result1))
-
-axiom H11 : (((1 <= i1) and (i1 <= 100)) -> (s3 = o2))
-
-axiom H12 : (((1 <= i1) and (i1 <= 100)) -> (i2 = 100))
-
-axiom H13 : (((1 <= i1) and (i1 <= 100)) -> (i2 = i4))
-
-axiom H14 : (((1 <= i1) and (i1 <= 100)) -> (s3 = s4))
-
-axiom H15 : (((1 <= i1) and (i1 <= 100)) -> (i5 = i2))
-
-axiom H16 : (((1 <= i1) and (i1 <= 100)) -> (s5 = s3))
-
-axiom H17 : (((1 <= i1) and (i1 <= 100)) -> (i6 = i4))
-
-axiom H18 : (((1 <= i1) and (i1 <= 100)) -> (s6 = s4))
-
-axiom H19 : (((1 <= i1) and (i1 <= 100)) -> (i7 = i5))
-
-axiom H20 : (((1 <= i1) and (i1 <= 100)) -> (s7 = s5))
-
-axiom H21 : ((not ((1 <= i1) and (i1 <= 100))) -> (i1 = i6))
-
-axiom H22 : ((not ((1 <= i1) and (i1 <= 100))) -> (s6 = s))
-
-axiom H23 : ((not ((1 <= i1) and (i1 <= 100))) -> (i7 = i1))
-
-axiom H24 : ((not ((1 <= i1) and (i1 <= 100))) -> (s7 = s1))
-
-axiom H25 :
-  (binary_trees__all_indexes__result1 = binary_trees__all_indexes__result2)
-
-axiom H26 :
-  (binary_trees__all_indexes__result3 = binary_trees__all_indexes__result1)
-
-axiom H27 : (result3 = binary_trees__all_indexes__result)
-
-axiom H28 : (binary_trees__all_indexes__result1 = s6)
-
-axiom H29 :
-  (binary_trees__all_indexes__result4 = binary_trees__all_indexes__result2)
-
-axiom H30 : (i8 = i6)
-
-axiom H31 : (s8 = s6)
-
-axiom H32 :
-  (binary_trees__all_indexes__result5 = binary_trees__all_indexes__result3)
-
-axiom H33 : (i9 = i7)
-
-axiom H34 : (s9 = s7)
-
-axiom H35 : (result4 = binary_trees__all_indexes__result4)
-
-logic i10 : int
-
-axiom H36 : (1 <= i10)
-
-axiom H37 : (i10 <= 100)
-
  (* File "a-cofuse.ads", line 49, characters 0-0 *)
-goal WP_parameter_def : (contains(binary_trees__all_indexes__result4,
-  i10) = true)
+goal WP_parameter_def :
+  (forall s:us_rep. forall i:int.
+  forall binary_trees__all_indexes__result:us_rep. forall temp___1093:int.
+  forall temp___1092:us_rep. forall o:us_rep. forall s1:us_rep.
+  forall result:int. forall i1:int. forall s2:us_rep. forall i2:int.
+  forall result1:us_rep. forall s3:us_rep. forall s4:us_rep. forall i3:int.
+  forall s5:us_rep. forall i4:int. forall s6:us_rep. forall i5:int.
+  forall s7:us_rep. forall i6:int. forall result2:us_rep.
+  forall binary_trees__all_indexes__result1:us_rep.
+  forall binary_trees__all_indexes__result2:us_rep.
+  forall binary_trees__all_indexes__result3:us_rep. forall s8:us_rep.
+  forall i7:int. forall binary_trees__all_indexes__result4:us_rep.
+  forall s9:us_rep. forall i8:int.
+  forall binary_trees__all_indexes__result5:us_rep.
+  (forall result3:us_rep. (((((is_empty(s) = true) and (((({ int__content =
+  result } = { int__content = i }) and (i1 = 1)) and ((((1 <= i1) and
+  (i1 <= 100)) and ((((temp___1093 = i1) and ((temp___1092 = s) and
+  (((length(s2) = (i2 - 1)) and
+  ((forall j:int. (((1 <= j) and (j <= (i2 - 1))) -> (contains(s2,
+   j) = true))) and
+  (forall j:int. ((in_range2(j) and (contains(s2, j) = true)) -> (j <  i2))))) and
+  ((((1 <= 100) -> in_range1(i2)) and ((1 <= i2) and (i2 <= 100))) and
+  ((((o = add(s2, i2)) and ((((length(o) = (length(s2) + 1)) and (contains(o,
+  i2) = true)) and (ole(s2, o) = true)) and (included_except(o, s2,
+  i2) = true))) and ((s2 = result1) and (s3 = o))) and (i2 = 100)))))) and
+  (((i2 = i3) and (s3 = s4)) and ((i4 = i2) and (s5 = s3)))) and
+  (((i5 = i3) and (s4 = s6)) and ((i6 = i4) and (s7 = s5))))) or
+  ((not ((1 <= i1) and (i1 <= 100))) and (((i1 = i5) and (s = s6)) and
+  ((i6 = i1) and (s7 = s1)))))) and
+  (((binary_trees__all_indexes__result1 = binary_trees__all_indexes__result2) and
+  (binary_trees__all_indexes__result3 = binary_trees__all_indexes__result1)) and
+  ((result2 = binary_trees__all_indexes__result) and
+  (binary_trees__all_indexes__result1 = s6))))) and
+  (((binary_trees__all_indexes__result4 = binary_trees__all_indexes__result2) and
+  ((i7 = i5) and (s8 = s6))) and
+  ((binary_trees__all_indexes__result5 = binary_trees__all_indexes__result3) and
+  ((i8 = i6) and (s9 = s7))))) and
+  (result3 = binary_trees__all_indexes__result4)) ->
+  (forall i9:int. (((1 <= i9) and (i9 <= 100)) ->
+  (contains(binary_trees__all_indexes__result4, i9) = true))))))

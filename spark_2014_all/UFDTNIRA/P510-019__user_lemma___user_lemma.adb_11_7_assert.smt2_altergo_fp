@@ -225,7 +225,6 @@ axiom is_prime__def_axiom :
   (forall n:int [is_prime(n)]. ((is_prime(n) = true) <->
   (forall j:int. (((2 <= j) and (j <= (n - 1))) -> (not (mod(n, j) = 0))))))
 
-axiom H : (is_prime(15486209) = true)
-
  (* File "user_lemma.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : (is_prime(15486209) = true)
+goal WP_parameter_def : ((is_prime(15486209) = true) ->
+  (is_prime(15486209) = true))

@@ -228,12 +228,6 @@ function r__ref___projection(a: r__ref) : us_rep = (a).r__content
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq3 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -245,6 +239,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq3 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -262,14 +262,8 @@ logic x__attr__constrained : bool
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic h__split_fields : integer
-
-logic x__split_fields : integer
-
-logic o : int
-
-axiom H : (h__attr__constrained = false)
-
  (* File "alias.adb", line 8, characters 0-0 *)
 goal WP_parameter_def :
-  in_range((to_rep(h__split_fields) + to_rep(x__split_fields)))
+  (forall h__split_fields:integer. forall x__split_fields:integer.
+  ((h__attr__constrained = false) ->
+  in_range((to_rep(h__split_fields) + to_rep(x__split_fields)))))

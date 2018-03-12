@@ -938,12 +938,6 @@ axiom toBig_to_uint : (forall x:t. (tqtint(x) = tqtint1(toBig(x))))
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int2 : bool -> int
 
 axiom to_int_def2 :
@@ -955,6 +949,12 @@ logic of_int2 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int2(i)]. (((i = 0) -> (of_int2(i) = false)) and
   ((not (i = 0)) -> (of_int2(i) = true))))
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1052,71 +1052,35 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic retval : t1
+logic rliteral1 : t
 
-logic x86__signextend8to16__result : t1
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 127)
 
-logic result : t1
+logic rliteral2 : t1
 
-logic retval1 : t1
-
-logic result1 : t1
-
-logic retval2 : t1
-
-logic result2 : t1
-
-logic x86__signextend8to16__result1 : t1
-
-logic x86__signextend8to16__result2 : t1
-
-logic x86__signextend8to16__result3 : t1
-
-logic retval3 : t1
-
-logic x86__signextend8to16__result4 : t1
-
-logic retval4 : t1
-
-logic x86__signextend8to16__result5 : t1
-
-logic result3 : t1
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : (ugt(val__, of_int(127)) -> (result = retval))
-
-axiom H3 : (ugt(val__, of_int(127)) -> (retval1 = bw_or1(of_int1(65280),
-  toBig(val__))))
-
-axiom H4 : ((not ugt(val__, of_int(127))) -> (result1 = retval))
-
-axiom H5 : ((not ugt(val__, of_int(127))) -> (retval2 = toBig(val__)))
-
-axiom H6 : ((not ugt(val__, of_int(127))) -> (retval1 = retval2))
-
-axiom H7 : (x86__signextend8to16__result1 = x86__signextend8to16__result2)
-
-axiom H8 : (x86__signextend8to16__result3 = x86__signextend8to16__result1)
-
-axiom H9 : (result2 = x86__signextend8to16__result)
-
-axiom H10 : (x86__signextend8to16__result1 = retval1)
-
-axiom H11 : (x86__signextend8to16__result4 = x86__signextend8to16__result2)
-
-axiom H12 : (retval1 = retval3)
-
-axiom H13 : (x86__signextend8to16__result5 = x86__signextend8to16__result3)
-
-axiom H14 : (retval4 = retval1)
-
-axiom H15 : (result3 = x86__signextend8to16__result4)
-
-axiom H16 : ugt(val__, of_int(127))
+axiom rliteral_axiom2 : (tqtint1(rliteral2) = 65280)
 
  (* File "x86.ads", line 9, characters 0-0 *)
 goal WP_parameter_def :
-  (x86__signextend8to16__result4 = bw_or1(of_int1(65280), toBig(val__)))
+  (forall retval:t1. forall x86__signextend8to16__result:t1.
+  forall result:t1. forall retval1:t1. forall result1:t1. forall retval2:t1.
+  forall result2:t1. forall x86__signextend8to16__result1:t1.
+  forall x86__signextend8to16__result2:t1.
+  forall x86__signextend8to16__result3:t1. forall retval3:t1.
+  forall x86__signextend8to16__result4:t1. forall retval4:t1.
+  forall x86__signextend8to16__result5:t1.
+  (forall result3:t1. ((((((ugt(val__, rliteral1) and (({ t__content1 =
+  result } = { t__content1 = retval }) and (retval1 = bw_or1(rliteral2,
+  toBig(val__))))) or ((not ugt(val__, rliteral1)) and ((({ t__content1 =
+  result1 } = { t__content1 = retval }) and (retval2 = toBig(val__))) and
+  (retval1 = retval2)))) and
+  (((x86__signextend8to16__result1 = x86__signextend8to16__result2) and
+  (x86__signextend8to16__result3 = x86__signextend8to16__result1)) and (({
+  t__content1 = result2 } = { t__content1 = x86__signextend8to16__result
+  }) and (x86__signextend8to16__result1 = retval1)))) and ((({ t__content1 =
+  x86__signextend8to16__result4 } = { t__content1 =
+  x86__signextend8to16__result2 }) and (retval1 = retval3)) and
+  ((x86__signextend8to16__result5 = x86__signextend8to16__result3) and
+  (retval4 = retval1)))) and (result3 = x86__signextend8to16__result4)) ->
+  (ugt(val__, rliteral1) ->
+  (x86__signextend8to16__result4 = bw_or1(rliteral2, toBig(val__)))))))

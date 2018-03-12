@@ -653,15 +653,26 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : t
+logic rliteral : t
 
-axiom H : ((ule(of_int(1), i1b) and ule(i1b, of_int(3))) or (ule(of_int(5),
-  i1b) and ule(i1b, of_int(255))))
+axiom rliteral_axiom : (tqtint(rliteral) = 1)
 
-axiom H1 : ((ule(of_int(1), x) and ule(x, of_int(3))) or (ule(of_int(5),
-  x) and ule(x, of_int(255))))
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 3)
+
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 5)
+
+logic rliteral3 : t
+
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 255)
 
  (* File "t.adb", line 4, characters 0-0 *)
-goal WP_parameter_def : ((ule(of_int(1), sub(x, of_int(1))) and ule(sub(x,
-  of_int(1)), of_int(3))) or (ule(of_int(5), sub(x, of_int(1))) and
-  ule(sub(x, of_int(1)), of_int(255))))
+goal WP_parameter_def :
+  (forall x:t. (((ule(rliteral, i1b) and ule(i1b, rliteral1)) or
+  (ule(rliteral2, i1b) and ule(i1b, rliteral3))) -> (((ule(rliteral, x) and
+  ule(x, rliteral1)) or (ule(rliteral2, x) and ule(x, rliteral3))) ->
+  ((ule(rliteral, sub(x, rliteral)) and ule(sub(x, rliteral), rliteral1)) or
+  (ule(rliteral2, sub(x, rliteral)) and ule(sub(x, rliteral), rliteral3))))))

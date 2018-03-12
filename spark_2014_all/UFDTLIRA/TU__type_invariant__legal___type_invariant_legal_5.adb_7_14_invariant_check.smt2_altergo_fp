@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -212,93 +212,21 @@ axiom e_priv__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : int
-
-logic tmp : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic result : int
-
-logic x1 : int
-
-logic result1 : int
-
-logic tmp1 : int
-
-logic result2 : int
-
-logic tmp2 : int
-
-logic result3 : int
-
-logic tmp3 : int
-
-logic result4 : int
-
-logic tmp4 : int
-
-logic x2 : int
-
-logic tmp5 : int
-
-logic x3 : int
-
-logic tmp6 : int
-
-axiom H : ((0 <= 2147483647) -> in_range2(x))
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(tmp))
-
-axiom H2 : (result = x)
-
-axiom H3 : (x1 = 1)
-
-axiom H4 : (not (x1 = 0))
-
-axiom H5 : ((o = pub(x1)) and in_range1(o))
-
-axiom H6 : (result1 = tmp)
-
-axiom H7 : (tmp1 = o)
-
-axiom H8 : (not (x1 = 0))
-
-axiom H9 : ((o1 = priv(x1)) and in_range1(o1))
-
-axiom H10 : (tmp1 = result2)
-
-axiom H11 : (tmp2 = o1)
-
-axiom H12 : (not (x1 = 0))
-
-axiom H13 : ((o2 = e_pub(x1)) and (in_range1(o2) and (o2 = x1)))
-
-axiom H14 : (tmp2 = result3)
-
-axiom H15 : (tmp3 = o2)
-
-axiom H16 : (not (x1 = 0))
-
-axiom H17 : ((o3 = e_priv(x1)) and (in_range1(o3) and (o3 = x1)))
-
-axiom H18 : (result4 = tmp3)
-
-axiom H19 : (tmp4 = o3)
-
-axiom H20 : (tmp5 = tmp4)
-
-axiom H21 : (x1 = x2)
-
-axiom H22 : (tmp6 = tmp4)
-
-axiom H23 : (x3 = x1)
-
  (* File "type_invariant_legal_5.adb", line 30, characters 0-0 *)
-goal WP_parameter_def : (not (x2 = 0))
+goal WP_parameter_def :
+  (forall x:int. forall tmp:int. forall o:int. forall o1:int. forall o2:int.
+  forall o3:int. forall result:int. forall x1:int. forall result1:int.
+  forall tmp1:int. forall result2:int. forall tmp2:int. forall result3:int.
+  forall tmp3:int. forall result4:int. forall tmp4:int. forall x2:int.
+  forall tmp5:int. forall x3:int. forall tmp6:int. (((0 <= 2147483647) ->
+  in_range2(x)) -> ((((((- 2147483648) <= 2147483647) -> in_range1(tmp)) and
+  ((({ int__content = result } = { int__content = x }) and (x1 = 1)) and
+  ((((not (x1 = 0)) and ((o = pub(x1)) and in_range1(o))) and (({
+  int__content = result1 } = { int__content = tmp }) and (tmp1 = o))) and
+  ((((not (x1 = 0)) and ((o1 = priv(x1)) and in_range1(o1))) and
+  ((tmp1 = result2) and (tmp2 = o1))) and ((((not (x1 = 0)) and
+  ((o2 = e_pub(x1)) and (in_range1(o2) and (o2 = x1)))) and
+  ((tmp2 = result3) and (tmp3 = o2))) and (((not (x1 = 0)) and
+  ((o3 = e_priv(x1)) and (in_range1(o3) and (o3 = x1)))) and
+  ((result4 = tmp3) and (tmp4 = o3)))))))) and (((tmp5 = tmp4) and
+  (x1 = x2)) and ((tmp6 = tmp4) and (x3 = x1)))) -> (not (x2 = 0)))))

@@ -156,11 +156,6 @@ axiom one__def_axiom : (one = 1)
 
 axiom last__def_axiom : (last = 2)
 
-axiom H : in_range(one)
-
-axiom H1 : in_range(c6b)
-
-axiom H2 : (3 <= 4)
-
  (* File "p.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : (1 <= 3)
+goal WP_parameter_def : (in_range(one) -> (in_range(c6b) -> ((3 <= 4) ->
+  (1 <= 3))))

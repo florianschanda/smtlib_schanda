@@ -293,55 +293,13 @@ logic d__attr__constrained : bool
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic d__split_fields : us_main_type
-
-logic us : int
-
-logic o : natural
-
-logic o1 : us_main_type
-
-logic o2 : bool
-
-logic o3 : natural
-
-logic o4 : us_main_type
-
-logic o5 : bool
-
-logic temp___332 : natural
-
-logic temp___3321 : us_main_type
-
-logic temp___3322 : bool
-
-logic o6 : natural
-
-logic o7 : us_main_type
-
-logic o8 : bool
-
-logic o9 : natural
-
-logic o10 : us_main_type
-
-logic o11 : bool
-
-logic result : us_main_type
-
-logic d__split_fields1 : us_main_type
-
-axiom H : in_range(c)
-
-axiom H1 : ((us = c) and in_range(c))
-
-axiom H2 : ((d__attr__constrained = true) and (to_rep(d__split_discrs) = c))
-
-axiom H3 : ((c = to_rep(d__split_discrs)) and (d__attr__constrained = true))
-
-axiom H4 : (({ us_split_discrs1 = { rec__private_discr__p_with_default__c = o
-  }; us_split_fields1 = { rec__private_discr__p_with_default = o1 };
-  attr__constrained = o2 } = new_with_default(c)) and (to_rep(o) = c))
-
  (* File "discr.adb", line 96, characters 0-0 *)
-goal WP_parameter_def : (c = to_rep(o))
+goal WP_parameter_def :
+  (forall us:int. forall o:natural. forall o1:us_main_type. forall o2:bool.
+  (in_range(c) -> (((us = c) and in_range(c)) ->
+  (((d__attr__constrained = true) and (to_rep(d__split_discrs) = c)) ->
+  (((c = to_rep(d__split_discrs)) and (d__attr__constrained = true)) -> ((({
+  us_split_discrs1 = { rec__private_discr__p_with_default__c = o };
+  us_split_fields1 = { rec__private_discr__p_with_default = o1 };
+  attr__constrained = o2 } = new_with_default(c)) and (to_rep(o) = c)) ->
+  (c = to_rep(o))))))))

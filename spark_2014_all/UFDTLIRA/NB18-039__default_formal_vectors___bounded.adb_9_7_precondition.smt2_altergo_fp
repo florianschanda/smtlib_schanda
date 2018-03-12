@@ -195,12 +195,6 @@ function vector__ref___projection(a: vector__ref) : us_rep =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -212,6 +206,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -516,46 +516,27 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length1(container))))) ->
   in_range6(get(container, position)))))
 
-logic v__split_fields : us_main_type
-
-logic us : int
-
-logic bounded__vect__append__2__container__fields : us_main_type
-
-logic result : us_main_type
-
-logic v__split_fields1 : us_main_type
-
-logic bounded__vect__append__2__container__fields1 : us_main_type
-
-logic result1 : us_main_type
-
-logic v__split_fields2 : us_main_type
-
-logic bounded__vect__append__2__container__fields2 : us_main_type
-
-axiom H : ((us = 2) and in_range(2))
-
-axiom H1 : ((to_rep(v__split_discrs) = 2) and (is_empty({ us_split_discrs1 =
-  { rec__bounded__vect__vector__capacity = v__split_discrs };
-  us_split_fields1 = { rec__bounded__vect__vector = v__split_fields }
-  }) = true))
-
-axiom H2 : (2 = to_rep(v__split_discrs))
-
-axiom H3 : (((length({ us_split_discrs1 = {
-  rec__bounded__vect__vector__capacity = v__split_discrs };
-  us_split_fields1 = { rec__bounded__vect__vector =
+ (* File "a-cofove.ads", line 807, characters 0-0 *)
+goal WP_parameter_def :
+  (forall v__split_fields:us_main_type. forall us:int.
+  forall bounded__vect__append__2__container__fields:us_main_type.
+  forall result:us_main_type. forall v__split_fields1:us_main_type.
+  (((us = 2) and in_range(2)) -> (((to_rep(v__split_discrs) = 2) and
+  (is_empty({ us_split_discrs1 = { rec__bounded__vect__vector__capacity =
+  v__split_discrs }; us_split_fields1 = { rec__bounded__vect__vector =
+  v__split_fields } }) = true)) -> ((2 = to_rep(v__split_discrs)) ->
+  (((((length({ us_split_discrs1 = { rec__bounded__vect__vector__capacity =
+  v__split_discrs }; us_split_fields1 = { rec__bounded__vect__vector =
   bounded__vect__append__2__container__fields } }) = (length({
   us_split_discrs1 = { rec__bounded__vect__vector__capacity = v__split_discrs
   }; us_split_fields1 = { rec__bounded__vect__vector = v__split_fields }
-  }) + 1)) and (((bool_lt(length1(model__({ us_split_discrs1 = {
+  }) + 1)) and ((bool_lt(length1(model__({ us_split_discrs1 = {
   rec__bounded__vect__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__bounded__vect__vector = v__split_fields } })),
   length1(model__({ us_split_discrs1 = {
   rec__bounded__vect__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__bounded__vect__vector =
-  bounded__vect__append__2__container__fields } }))) = true) ->
+  bounded__vect__append__2__container__fields } }))) = true) and
   (forall n:int. (((1 <= n) and (n <= (0 + length1(model__({
   us_split_discrs1 = { rec__bounded__vect__vector__capacity = v__split_discrs
   }; us_split_fields1 = { rec__bounded__vect__vector = v__split_fields }
@@ -565,30 +546,19 @@ axiom H3 : (((length({ us_split_discrs1 = {
   n) = get(model__({ us_split_discrs1 = {
   rec__bounded__vect__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__bounded__vect__vector =
-  bounded__vect__append__2__container__fields } }), n))))) and
-  (not (bool_lt(length1(model__({ us_split_discrs1 = {
-  rec__bounded__vect__vector__capacity = v__split_discrs };
-  us_split_fields1 = { rec__bounded__vect__vector = v__split_fields } })),
-  length1(model__({ us_split_discrs1 = {
-  rec__bounded__vect__vector__capacity = v__split_discrs };
-  us_split_fields1 = { rec__bounded__vect__vector =
-  bounded__vect__append__2__container__fields } }))) = false)))) and
+  bounded__vect__append__2__container__fields } }), n)))))) and
   (get(model__({ us_split_discrs1 = { rec__bounded__vect__vector__capacity =
   v__split_discrs }; us_split_fields1 = { rec__bounded__vect__vector =
   bounded__vect__append__2__container__fields } }), ((0 + length1(model__({
   us_split_discrs1 = { rec__bounded__vect__vector__capacity = v__split_discrs
   }; us_split_fields1 = { rec__bounded__vect__vector = v__split_fields }
-  }))) + 1)) = 1))
-
-axiom H4 : (result = v__split_fields)
-
-axiom H5 : (v__split_fields1 = bounded__vect__append__2__container__fields)
-
- (* File "a-cofove.ads", line 807, characters 0-0 *)
-goal WP_parameter_def : (((of_int(1) = true) -> (length({ us_split_discrs1 =
-  { rec__bounded__vect__vector__capacity = v__split_discrs };
+  }))) + 1)) = 1)) and ((result = v__split_fields) and ({
+  rec__bounded__vect__vector = v__split_fields1 } = {
+  rec__bounded__vect__vector = bounded__vect__append__2__container__fields
+  }))) -> (((of_int(1) = true) -> (length({ us_split_discrs1 = {
+  rec__bounded__vect__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__bounded__vect__vector = v__split_fields1 }
   }) <  to_rep(v__split_discrs))) and ((not (of_int(1) = true)) -> (length({
   us_split_discrs1 = { rec__bounded__vect__vector__capacity = v__split_discrs
   }; us_split_fields1 = { rec__bounded__vect__vector = v__split_fields1 }
-  }) <  2147483647)))
+  }) <  2147483647))))))))

@@ -251,19 +251,8 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic c : int
-
-logic o : int
-
-logic o1 : int
-
-axiom H : in_range1(a)
-
-axiom H1 : in_range1(b)
-
-axiom H2 : ((0 <= 2147483647) -> in_range1(c))
-
-axiom H3 : ((o = (a + a)) and in_range((a + a)))
-
  (* File "unused_parameter.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : (not (2 = 0))
+goal WP_parameter_def :
+  (forall c:int. forall o:int. (in_range1(a) -> (in_range1(b) ->
+  (((0 <= 2147483647) -> in_range1(c)) -> (((o = (a + a)) and
+  in_range((a + a))) -> (not (2 = 0)))))))

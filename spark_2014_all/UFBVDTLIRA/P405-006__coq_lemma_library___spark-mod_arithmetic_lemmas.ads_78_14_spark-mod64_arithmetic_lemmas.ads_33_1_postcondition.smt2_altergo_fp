@@ -658,8 +658,15 @@ type pos
 
 logic attr__ATTRIBUTE_MODULUS1 : t
 
-predicate in_range(x: t) = (ule(of_int(1), x) and ule(x,
-  of_int(18446744073709551615)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 1)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 18446744073709551615)
+
+predicate in_range(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((1 <= x) and (x <= 18446744073709551615))
 
@@ -696,14 +703,6 @@ logic factor : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : in_range(factor)
-
-axiom H3 : (ult(val1, val2) and ule(val2, udiv(of_int(18446744073709551615),
-  factor)))
-
  (* File "spark-mod_arithmetic_lemmas.ads", line 63, characters 0-0 *)
-goal WP_parameter_def : ult(mul(val1, factor), mul(val2, factor))
+goal WP_parameter_def : ((in_range(factor) and (ult(val1, val2) and ule(val2,
+  udiv(rliteral1, factor)))) -> ult(mul(val1, factor), mul(val2, factor)))

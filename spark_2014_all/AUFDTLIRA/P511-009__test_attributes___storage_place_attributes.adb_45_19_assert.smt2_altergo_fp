@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -549,34 +549,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def :
-  (forall v:my_integer. forall v1:integer. forall v2:bool. forall v3:bool.
-  (forall i:int [(singleton({ us_split_discrs1 = {
-  rec__storage_place_attributes__r2__d1 = v }; us_split_fields1 = {
-  rec__storage_place_attributes__r2__d3 = v1;
-  rec__storage_place_attributes__r2__d2 = v2 }; attr__constrained = v3 },
-  i)[i])]. ((singleton({ us_split_discrs1 = {
-  rec__storage_place_attributes__r2__d1 = v }; us_split_fields1 = {
-  rec__storage_place_attributes__r2__d3 = v1;
-  rec__storage_place_attributes__r2__d2 = v2 }; attr__constrained = v3 },
-  i)[i]) = { us_split_discrs1 = { rec__storage_place_attributes__r2__d1 = v
-  }; us_split_fields1 = { rec__storage_place_attributes__r2__d3 = v1;
-  rec__storage_place_attributes__r2__d2 = v2 }; attr__constrained = v3 })))
-
 logic bool_eq6 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -587,17 +559,17 @@ axiom bool_eq_def5 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and (bool_eq4((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and (bool_eq4((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq4((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq6(a,
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq4((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq6(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -607,9 +579,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq4((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq4((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -635,85 +607,41 @@ logic o2__attr__constrained : bool
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic r2a_arr : (int,us_rep) farray
-
-logic o2a__split_fields : integer
-
-logic o2a__split_fields1 : bool
-
-logic o2aa__split_fields : integer
-
-logic o2aa__split_fields1 : bool
-
-logic o2b__split_fields : integer
-
-logic o2b__split_fields1 : bool
-
-logic o2__split_fields : integer
-
-logic o2__split_fields1 : bool
-
-logic o2__split_discrs : my_integer
-
-logic us : int
-
-logic us1 : int
-
-logic us2 : int
-
-axiom H : ((us = 5) and in_range1(5))
-
-axiom H1 : ((us1 = 5) and in_range1(5))
-
-axiom H2 : ((us2 = 1) and in_range1(1))
-
-axiom H3 :
-  (forall temp___239:int. (((1 <= temp___239) and (temp___239 <= 3)) ->
-  ((((r2a_arr[temp___239])).attr__constrained = true) and
-  (((to_rep((((r2a_arr[temp___239])).us_split_discrs1).rec__storage_place_attributes__r2__d1) = 5) and
-  (to_rep1((((r2a_arr[temp___239])).us_split_fields1).rec__storage_place_attributes__r2__d3) = 0)) and
-  ((to_rep((((r2a_arr[temp___239])).us_split_discrs1).rec__storage_place_attributes__r2__d1) = 5) ->
-  ((((r2a_arr[temp___239])).us_split_fields1).rec__storage_place_attributes__r2__d2 = of_int(0)))))))
-
-axiom H4 :
-  (forall temp___235:int. (((1 <= temp___235) and (temp___235 <= 3)) ->
-  (((5 = to_rep((((r2a_arr[temp___235])).us_split_discrs1).rec__storage_place_attributes__r2__d1)) and
-  (((r2a_arr[temp___235])).attr__constrained = true)) and
-  (((r2a_arr[temp___235])).attr__constrained = true))))
-
-axiom H5 : ((o2a__attr__constrained = true) and
-  (((to_rep(o2a__split_discrs) = 5) and (to_rep1(o2a__split_fields) = 0)) and
-  ((to_rep(o2a__split_discrs) = 5) -> (o2a__split_fields1 = of_int(0)))))
-
-axiom H6 : ((5 = to_rep(o2a__split_discrs)) and
-  (o2a__attr__constrained = true))
-
-axiom H7 : ((o2aa__attr__constrained = true) and
-  (((to_rep(o2aa__split_discrs) = 5) and
-  (to_rep1(o2aa__split_fields) = 0)) and ((to_rep(o2aa__split_discrs) = 5) ->
-  (o2aa__split_fields1 = of_int(0)))))
-
-axiom H8 : ((5 = to_rep(o2aa__split_discrs)) and
-  (o2aa__attr__constrained = true))
-
-axiom H9 : ((o2b__attr__constrained = true) and
-  (((to_rep(o2b__split_discrs) = 1) and ((to_rep(o2b__split_discrs) = 5) ->
-  (o2b__split_fields1 = of_int(0)))) and (to_rep1(o2b__split_fields) = 0)))
-
-axiom H10 : ((1 = to_rep(o2b__split_discrs)) and
-  (o2b__attr__constrained = true))
-
-axiom H11 :
-  (storage_place_attributes__r2__d3__first__bit1 = storage_place_attributes__r2__d3__first__bit2)
-
-axiom H12 : true
-
-axiom H13 : true
-
-axiom H14 : ((o2__attr__constrained = false) and
-  (((to_rep(o2__split_discrs) = 1) and (to_rep1(o2__split_fields) = 0)) and
-  ((to_rep(o2__split_discrs) = 5) -> (o2__split_fields1 = of_int(0)))))
-
  (* File "storage_place_attributes.adb", line 1, characters 0-0 *)
 goal WP_parameter_def :
-  (storage_place_attributes__r2__d3__first__bit = storage_place_attributes__r2__d3__first__bit1)
+  (forall r2a_arr:(int,us_rep) farray. forall o2a__split_fields:integer.
+  forall o2a__split_fields1:bool. forall o2aa__split_fields:integer.
+  forall o2aa__split_fields1:bool. forall o2b__split_fields:integer.
+  forall o2b__split_fields1:bool. forall o2__split_fields:integer.
+  forall o2__split_fields1:bool. forall o2__split_discrs:my_integer.
+  forall us:int. forall us1:int. forall us2:int. (((us = 5) and
+  in_range1(5)) -> (((us1 = 5) and in_range1(5)) -> (((us2 = 1) and
+  in_range1(1)) ->
+  ((forall temp___272:int. (((1 <= temp___272) and (temp___272 <= 3)) ->
+   ((((r2a_arr[temp___272])).attr__constrained = true) and
+   (((to_rep((((r2a_arr[temp___272])).us_split_discrs1).rec__storage_place_attributes__r2__d1) = 5) and
+   (to_rep1((((r2a_arr[temp___272])).us_split_fields1).rec__storage_place_attributes__r2__d3) = 0)) and
+   ((to_rep((((r2a_arr[temp___272])).us_split_discrs1).rec__storage_place_attributes__r2__d1) = 5) ->
+   ((((r2a_arr[temp___272])).us_split_fields1).rec__storage_place_attributes__r2__d2 = of_int(0))))))) ->
+  ((forall temp___268:int. (((1 <= temp___268) and (temp___268 <= 3)) ->
+   (((5 = to_rep((((r2a_arr[temp___268])).us_split_discrs1).rec__storage_place_attributes__r2__d1)) and
+   (((r2a_arr[temp___268])).attr__constrained = true)) and
+   (((r2a_arr[temp___268])).attr__constrained = true)))) ->
+  (((o2a__attr__constrained = true) and (((to_rep(o2a__split_discrs) = 5) and
+  (to_rep1(o2a__split_fields) = 0)) and ((to_rep(o2a__split_discrs) = 5) ->
+  (o2a__split_fields1 = of_int(0))))) ->
+  (((5 = to_rep(o2a__split_discrs)) and (o2a__attr__constrained = true)) ->
+  (((o2aa__attr__constrained = true) and
+  (((to_rep(o2aa__split_discrs) = 5) and
+  (to_rep1(o2aa__split_fields) = 0)) and ((to_rep(o2aa__split_discrs) = 5) ->
+  (o2aa__split_fields1 = of_int(0))))) ->
+  (((5 = to_rep(o2aa__split_discrs)) and (o2aa__attr__constrained = true)) ->
+  (((o2b__attr__constrained = true) and (((to_rep(o2b__split_discrs) = 1) and
+  ((to_rep(o2b__split_discrs) = 5) -> (o2b__split_fields1 = of_int(0)))) and
+  (to_rep1(o2b__split_fields) = 0))) -> (((1 = to_rep(o2b__split_discrs)) and
+  (o2b__attr__constrained = true)) ->
+  ((storage_place_attributes__r2__d3__first__bit1 = storage_place_attributes__r2__d3__first__bit2) ->
+  (((o2__attr__constrained = false) and (((to_rep(o2__split_discrs) = 1) and
+  (to_rep1(o2__split_fields) = 0)) and ((to_rep(o2__split_discrs) = 5) ->
+  (o2__split_fields1 = of_int(0))))) ->
+  (storage_place_attributes__r2__d3__first__bit = storage_place_attributes__r2__d3__first__bit1)))))))))))))))

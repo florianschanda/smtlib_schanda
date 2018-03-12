@@ -337,7 +337,5 @@ logic x3 : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : int
-
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def : in_range((to_rep(x1) + to_rep(x)))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -362,113 +362,14 @@ logic x_old2 : unsigned_byte
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic x__split_fields : bool
-
-logic x__split_fields1 : unsigned_byte
-
-logic x__split_fields2 : unsigned_byte
-
-logic tmp : int
-
-logic o : unsigned_byte
-
-logic o1 : unsigned_byte
-
-logic o2 : unsigned_byte
-
-logic o3 : unsigned_byte
-
-logic o4 : unsigned_byte
-
-logic o5 : bool
-
-logic o6 : unsigned_byte
-
-logic o7 : unsigned_byte
-
-logic temp___310 : bool
-
-logic temp___3101 : unsigned_byte
-
-logic temp___3102 : unsigned_byte
-
-logic o8 : unsigned_byte
-
-logic o9 : unsigned_byte
-
-logic o10 : unsigned_byte
-
-logic o11 : unsigned_byte
-
-logic o12 : unsigned_byte
-
-logic o13 : bool
-
-logic o14 : unsigned_byte
-
-logic o15 : unsigned_byte
-
-logic temp___317 : bool
-
-logic temp___3171 : unsigned_byte
-
-logic temp___3172 : unsigned_byte
-
-logic result : int
-
-logic tmp1 : int
-
-logic result1 : bool
-
-logic result2 : unsigned_byte
-
-logic result3 : unsigned_byte
-
-logic x__split_fields3 : bool
-
-logic x__split_fields4 : unsigned_byte
-
-logic x__split_fields5 : unsigned_byte
-
-logic result4 : bool
-
-logic result5 : unsigned_byte
-
-logic result6 : unsigned_byte
-
-logic x__split_fields6 : bool
-
-logic x__split_fields7 : unsigned_byte
-
-logic x__split_fields8 : unsigned_byte
-
-logic x__split_fields9 : bool
-
-logic x__split_fields10 : unsigned_byte
-
-logic x__split_fields11 : unsigned_byte
-
-logic tmp2 : int
-
-logic x__split_fields12 : bool
-
-logic x__split_fields13 : unsigned_byte
-
-logic x__split_fields14 : unsigned_byte
-
-logic tmp3 : int
-
-axiom H : ((0 <= 255) -> in_range1(tmp))
-
-axiom H1 : ((x__split_fields = x_old) and ((x__split_fields1 = x_old1) and
-  (x__split_fields2 = x_old2)))
-
-axiom H2 : (result = tmp)
-
-axiom H3 : (tmp1 = to_rep(x__split_fields2))
-
  (* File "records.adb", line 193, characters 0-0 *)
-goal WP_parameter_def : (bool_eq4({ us_split_fields3 = {
+goal WP_parameter_def :
+  (forall x__split_fields:bool. forall x__split_fields1:unsigned_byte.
+  forall x__split_fields2:unsigned_byte. forall tmp:int. forall result:int.
+  forall tmp1:int. (((0 <= 255) -> in_range1(tmp)) ->
+  (((x__split_fields = x_old) and ((x__split_fields1 = x_old1) and
+  (x__split_fields2 = x_old2))) -> (((result = tmp) and
+  (tmp1 = to_rep(x__split_fields2))) -> (bool_eq4({ us_split_fields3 = {
   rec__records_prooffuncs__optional_pair__exists = x__split_fields;
   rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
   rec__records_prooffuncs__pair__a = x__split_fields1;
@@ -476,4 +377,4 @@ goal WP_parameter_def : (bool_eq4({ us_split_fields3 = {
   us_split_fields3 = { rec__records_prooffuncs__optional_pair__exists =
   x_old; rec__records_prooffuncs__optional_pair__the_pair = {
   us_split_fields1 = { rec__records_prooffuncs__pair__a = x_old1;
-  rec__records_prooffuncs__pair__b = x_old2 } } } }) = true)
+  rec__records_prooffuncs__pair__b = x_old2 } } } }) = true)))))

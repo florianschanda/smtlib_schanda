@@ -363,29 +363,10 @@ axiom zero__def_axiom : (zero(void) = 0)
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic one : duration
-
-logic o : duration
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic result : duration
-
-logic one1 : duration
-
-axiom H : (to_fixed(o) = 1000000000)
-
-axiom H1 : (result = one)
-
-axiom H2 : (one1 = o)
-
-axiom H3 : ((o1 = zero(void)) and (in_range1(o1) and (o1 = 0)))
-
-axiom H4 : (o2 = fxp_div_int(to_fixed(one1), o1))
-
  (* File "main.adb", line 2, characters 0-0 *)
-goal WP_parameter_def : in_range(o2)
+goal WP_parameter_def :
+  (forall one:duration. forall o:duration. forall o1:int. forall o2:int.
+  forall result:duration. forall one1:duration.
+  (((to_fixed(o) = 1000000000) and ((result = one) and (one1 = o))) ->
+  ((((o1 = zero(void)) and (in_range1(o1) and (o1 = 0))) and
+  (o2 = fxp_div_int(to_fixed(one1), o1))) -> in_range(o2))))

@@ -111,17 +111,7 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic g1 : int
-
-logic a : int
-
-logic c : int
-
-axiom H : in_range(a)
-
-axiom H1 : in_range(c)
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range(g1))
-
  (* File "lots_of_tests.adb", line 102, characters 0-0 *)
-goal WP_parameter_def : (5 <  a)
+goal WP_parameter_def :
+  (forall g1:int. forall a:int. forall c:int. (in_range(a) -> (in_range(c) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(g1)) -> (5 <  a)))))

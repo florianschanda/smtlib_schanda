@@ -599,12 +599,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -616,6 +610,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -736,24 +736,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -764,17 +746,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -784,37 +766,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 type unsigned32
 
@@ -976,208 +930,30 @@ logic attr__ATTRIBUTE_ADDRESS14 : int
 logic zone_file_parser__parsecontrolline__tmpline__aggregate_def : int -> (int,character) farray
 
 axiom def_axiom :
-  (forall temp___1513:int.
-  (forall temp___1514:int.
-  ((zone_file_parser__parsecontrolline__tmpline__aggregate_def(temp___1513)[temp___1514]) = of_rep(temp___1513))))
-
-logic newttl : t
-
-logic begidx : int
-
-logic endidx : int
-
-logic foundtype : int
-
-logic tmpline : (int,character) farray
-
-logic i : int
-
-logic o : int
-
-logic o1 : character
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : character
-
-logic o5 : int
-
-logic o6 : bool
-
-logic o7 : bool
-
-logic o8 : int
-
-logic o9 : character
-
-logic o10 : int
-
-logic o11 : bool
-
-logic o12 : bool
-
-logic o13 : int
-
-logic o14 : character
-
-logic o15 : int
-
-logic o16 : bool
-
-logic o17 : bool
-
-logic o18 : int
-
-logic o19 : character
-
-logic o20 : int
-
-logic o21 : bool
-
-logic o22 : bool
-
-logic o23 : int
-
-logic o24 : character
-
-logic o25 : int
-
-logic o26 : bool
-
-logic o27 : bool
-
-logic o28 : int
-
-logic o29 : character
-
-logic o30 : (int,character) farray
-
-logic o31 : int
-
-logic o32 : character
-
-logic o33 : int
-
-logic o34 : int
-
-logic o35 : character
-
-logic o36 : int
-
-logic o37 : bool
-
-logic o38 : bool
-
-logic o39 : int
-
-logic o40 : character
-
-logic o41 : int
-
-logic o42 : bool
-
-logic o43 : bool
-
-logic o44 : int
-
-logic result : int
-
-logic begidx1 : int
-
-logic result1 : (int,character) farray
-
-logic tmpline1 : (int,character) farray
-
-logic begidx2 : int
-
-logic endidx1 : int
-
-logic foundtype1 : int
-
-logic result2 : bool
-
-logic result3 : int
-
-logic begidx3 : int
-
-logic begidx4 : int
-
-logic endidx2 : int
-
-logic foundtype2 : int
-
-logic result4 : int
-
-logic i1 : int
-
-logic tmpline2 : (int,character) farray
-
-logic i2 : int
-
-logic result5 : (int,character) farray
-
-logic tmpline3 : (int,character) farray
-
-logic result6 : int
-
-logic i3 : int
-
-logic result7 : bool
-
-logic result8 : int
-
-logic begidx5 : int
-
-logic begidx6 : int
-
-logic endidx3 : int
-
-logic foundtype3 : int
-
-axiom H : true
-
-axiom H1 : in_range4(zlength)
-
-axiom H2 : (result = begidx)
-
-axiom H3 : (begidx1 = 1)
-
-axiom H4 : in_range4(begidx1)
-
-axiom H5 : ((1 <= 256) -> in_range4(endidx))
-
-axiom H6 : ((0 <= 10) -> in_range3(foundtype))
-
-axiom H7 : (result1 = tmpline)
-
-axiom H8 :
-  (tmpline1 = zone_file_parser__parsecontrolline__tmpline__aggregate_def(32))
-
-axiom H9 : (((((begidx2 <= endidx1) and (begidx2 <= zlength)) and
+  (forall temp___1572:int. (in_range2(temp___1572) ->
+  (forall temp___1573:int.
+  (to_rep((zone_file_parser__parsecontrolline__tmpline__aggregate_def(temp___1572)[temp___1573])) = temp___1572))))
+
+ (* File "zone_file_parser.adb", line 938, characters 0-0 *)
+goal WP_parameter_def :
+  (forall begidx:int. forall endidx:int. forall foundtype:int.
+  forall tmpline:(int,character) farray. forall o:int. forall o1:character.
+  forall o2:int. forall o3:bool. forall result:int. forall begidx1:int.
+  forall result1:(int,character) farray.
+  forall tmpline1:(int,character) farray. forall begidx2:int.
+  forall endidx1:int. forall foundtype1:int. (in_range4(zlength) ->
+  (((result = begidx) and (begidx1 = 1)) -> (in_range4(begidx1) ->
+  (((1 <= 256) -> in_range4(endidx)) -> (((0 <= 10) ->
+  in_range3(foundtype)) -> (((result1 = tmpline) and
+  (tmpline1 = zone_file_parser__parsecontrolline__tmpline__aggregate_def(32))) ->
+  ((((((begidx2 <= endidx1) and (begidx2 <= zlength)) and
   (endidx1 <= zlength)) and ((foundtype1 = 1) ->
-  (forall i4:int. (((begidx2 <= i4) and (i4 <= endidx1)) ->
-  ((48 <= to_rep((zonefileline[i4]))) and
-  (to_rep((zonefileline[i4])) <= 57)))))) and ((in_range4(begidx2) and
-  in_range4(endidx1)) and in_range3(foundtype1)))
-
-axiom H10 : (foundtype1 = 8)
-
-axiom H11 : (not (begidx2 <= (endidx1 - 6)))
-
-axiom H12 : (begidx2 <= (endidx1 - 3))
-
-axiom H13 : ((1 <= (begidx2 + 3)) and ((begidx2 + 3) <= 256))
-
-axiom H14 : (o39 = (begidx2 + 3))
-
-axiom H15 : (o40 = (zonefileline[o39]))
-
-axiom H16 : (o41 = to_rep(o40))
-
-axiom H17 : (((o41 = 76) -> (o42 = true)) and ((not (o41 = 76)) ->
-  (o42 = false)))
-
- (* File "zone_file_parser.adb", line 357, characters 0-0 *)
-goal WP_parameter_def : (1 <= (begidx2 + 2))
+  (forall i:int. (((begidx2 <= i) and (i <= endidx1)) ->
+  ((48 <= to_rep((zonefileline[i]))) and (to_rep((zonefileline[i])) <= 57)))))) and
+  ((in_range4(begidx2) and in_range4(endidx1)) and in_range3(foundtype1))) ->
+  ((foundtype1 = 8) -> ((not (begidx2 <= (endidx1 - 6))) ->
+  ((begidx2 <= (endidx1 - 3)) -> (((((((1 <= (begidx2 + 3)) and
+  ((begidx2 + 3) <= 256)) and (o = (begidx2 + 3))) and
+  (o1 = (zonefileline[o]))) and (o2 = to_rep(o1))) and (((o2 = 76) and
+  (o3 = true)) or ((not (o2 = 76)) and (o3 = false)))) ->
+  (1 <= (begidx2 + 2))))))))))))))

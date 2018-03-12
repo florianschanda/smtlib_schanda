@@ -463,149 +463,43 @@ type t7b__ref = { t7b__content : us_rep
 
 function t7b__ref___projection(a: t7b__ref) : us_rep = (a).t7b__content
 
-logic d__split_discrs : natural
-
-logic d2__split_discrs : natural
-
-logic o : natural
-
-logic o1 : natural
-
-logic discr__r2__d__assume : natural
-
-logic discr__r2__d__assume1 : bool
-
-logic us : int
-
-logic o2 : natural
-
-logic o3 : natural
-
-logic temp___272 : natural
-
-logic temp___2721 : bool
-
-logic usq_ : natural
-
-logic usq_1 : bool
-
-logic temp___274 : natural
-
-logic temp___2741 : bool
-
-logic o4 : natural
-
-logic o5 : natural
-
-logic temp___275 : natural
-
-logic temp___2751 : bool
-
-logic usq_2 : natural
-
-logic usq_3 : bool
-
-logic temp___277 : natural
-
-logic temp___2771 : bool
-
-logic o6 : natural
-
-logic o7 : natural
-
-logic temp___278 : natural
-
-logic temp___2781 : bool
-
-logic result : natural
-
-logic d__split_discrs1 : natural
-
-logic result1 : natural
-
-logic d__split_discrs2 : natural
-
-logic result2 : natural
-
-logic d__split_discrs3 : natural
-
-axiom H : in_range(c)
-
-axiom H1 : (to_rep(o) = c)
-
-axiom H2 : (o = o1)
-
-axiom H3 : (discr__r2__d__assume = o1)
-
-axiom H4 : (true = discr__r2__d__assume1)
-
-axiom H5 : (result = d__split_discrs)
-
-axiom H6 : (d__split_discrs1 = discr__r2__d__assume)
-
-axiom H7 : (d__attr__constrained = false)
-
-axiom H8 : ((us = c) and in_range(c))
-
-axiom H9 : ((d1__attr__constrained = true) and
-  (to_rep(d1__split_discrs) = c))
-
-axiom H10 : ((c = to_rep(d1__split_discrs)) and
-  (d1__attr__constrained = true))
-
-axiom H11 : ((d2__attr__constrained = false) and
-  (to_rep(d2__split_discrs) = 0))
-
-axiom H12 : (not (d__attr__constrained = true))
-
-axiom H13 : (d1__attr__constrained = true)
-
-axiom H14 : (bool_eq2({ us_split_discrs1 = { rec__discr__with_default__c =
+ (* File "discr.adb", line 4, characters 0-0 *)
+goal WP_parameter_def :
+  (forall d__split_discrs:natural. forall d2__split_discrs:natural.
+  forall o:natural. forall o1:natural. forall discr__r2__d__assume:natural.
+  forall discr__r2__d__assume1:bool. forall us:int. forall o2:natural.
+  forall o3:natural. forall temp___310:natural. forall temp___3101:bool.
+  forall usq_:natural. forall usq_1:bool. forall temp___312:natural.
+  forall temp___3121:bool. forall o4:natural. forall o5:natural.
+  forall temp___313:natural. forall temp___3131:bool. forall usq_2:natural.
+  forall usq_3:bool. forall temp___315:natural. forall temp___3151:bool.
+  forall result:natural. forall d__split_discrs1:natural.
+  forall result1:natural. forall d__split_discrs2:natural.
+  forall result2:natural. forall d__split_discrs3:natural. (in_range(c) ->
+  (((((to_rep(o) = c) and (o = o1)) and ((discr__r2__d__assume = o1) and
+  (true = discr__r2__d__assume1))) and (((result = d__split_discrs) and
+  (discr__r2__d__assume = d__split_discrs1)) and
+  (d__attr__constrained = false))) -> (((us = c) and in_range(c)) ->
+  (((d1__attr__constrained = true) and (to_rep(d1__split_discrs) = c)) ->
+  (((c = to_rep(d1__split_discrs)) and (d1__attr__constrained = true)) ->
+  (((d2__attr__constrained = false) and (to_rep(d2__split_discrs) = 0)) ->
+  ((not (d__attr__constrained = true)) -> ((d1__attr__constrained = true) ->
+  ((bool_eq2({ us_split_discrs1 = { rec__discr__with_default__c =
   d__split_discrs1 }; attr__constrained = d__attr__constrained }, {
   us_split_discrs1 = { rec__discr__with_default__c = d1__split_discrs };
-  attr__constrained = d1__attr__constrained }) = true)
-
-axiom H15 : (to_rep(o2) = c)
-
-axiom H16 : (o2 = o3)
-
-axiom H17 : (temp___272 = o3)
-
-axiom H18 : (true = temp___2721)
-
-axiom H19 : ((d__attr__constrained = true) ->
-  (temp___272 = d__split_discrs1))
-
-axiom H20 : ((usq_ = temp___272) and (usq_1 = temp___2721))
-
-axiom H21 : (usq_ = temp___274)
-
-axiom H22 : (d__attr__constrained = temp___2741)
-
-axiom H23 : (result1 = d__split_discrs1)
-
-axiom H24 : (d__split_discrs2 = temp___274)
-
-axiom H25 : (to_rep(o4) = 0)
-
-axiom H26 : (o4 = o5)
-
-axiom H27 : (temp___275 = o5)
-
-axiom H28 : (true = temp___2751)
-
-axiom H29 : ((d__attr__constrained = true) ->
-  (temp___275 = d__split_discrs2))
-
-axiom H30 : ((usq_2 = temp___275) and (usq_3 = temp___2751))
-
-axiom H31 : (usq_2 = temp___277)
-
-axiom H32 : (d__attr__constrained = temp___2771)
-
-axiom H33 : (result2 = d__split_discrs2)
-
-axiom H34 : (d__split_discrs3 = temp___277)
-
- (* File "discr.adb", line 4, characters 0-0 *)
-goal WP_parameter_def : (not (d2__attr__constrained = true))
+  attr__constrained = d1__attr__constrained }) = true) ->
+  (((((((to_rep(o2) = c) and (o2 = o3)) and ((temp___310 = o3) and
+  (true = temp___3101))) and ((((d__attr__constrained = true) and
+  (temp___310 = d__split_discrs1)) or
+  (not (d__attr__constrained = true))) and ((usq_ = temp___310) and
+  (usq_1 = temp___3101)))) and ((usq_ = temp___312) and
+  (d__attr__constrained = temp___3121))) and
+  ((result1 = d__split_discrs1) and (temp___312 = d__split_discrs2))) ->
+  (((((((to_rep(o4) = 0) and (o4 = o5)) and ((temp___313 = o5) and
+  (true = temp___3131))) and ((((d__attr__constrained = true) and
+  (temp___313 = d__split_discrs2)) or
+  (not (d__attr__constrained = true))) and ((usq_2 = temp___313) and
+  (usq_3 = temp___3131)))) and ((usq_2 = temp___315) and
+  (d__attr__constrained = temp___3151))) and
+  ((result2 = d__split_discrs2) and (d__split_discrs3 = temp___315))) ->
+  (not (d2__attr__constrained = true))))))))))))))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -189,495 +189,71 @@ logic attr__ATTRIBUTE_ADDRESS9 : int
 
 logic attr__ATTRIBUTE_ADDRESS10 : int
 
-logic n1 : int
-
-logic n2 : int
-
-logic l1 : int
-
-logic l2 : int
-
-logic a1 : int
-
-logic a2 : int
-
-logic b1 : int
-
-logic b2 : int
-
-logic i : int
-
-logic copy_n1 : int
-
-logic copy_n2 : int
-
-logic temp___165 : int
-
-logic temp___164 : int
-
-logic temp___163 : int
-
-logic temp___162 : int
-
-logic temp___166 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic temp___170 : int
-
-logic temp___169 : int
-
-logic temp___168 : int
-
-logic temp___167 : int
-
-logic temp___171 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : int
-
-logic o13 : int
-
-logic o14 : int
-
-logic o15 : int
-
-logic n11 : int
-
-logic n21 : int
-
-logic result : int
-
-logic copy_n11 : int
-
-logic result1 : int
-
-logic copy_n21 : int
-
-logic result2 : int
-
-logic a11 : int
-
-logic result3 : int
-
-logic a21 : int
-
-logic result4 : int
-
-logic b11 : int
-
-logic result5 : int
-
-logic b21 : int
-
-logic result6 : int
-
-logic i1 : int
-
-logic n12 : int
-
-logic a12 : int
-
-logic b12 : int
-
-logic i2 : int
-
-logic temp___1661 : int
-
-logic result7 : bool
-
-logic result8 : int
-
-logic temp___1662 : int
-
-logic result9 : int
-
-logic a13 : int
-
-logic result10 : int
-
-logic b13 : int
-
-logic result11 : int
-
-logic n13 : int
-
-logic result12 : int
-
-logic i3 : int
-
-logic n14 : int
-
-logic a14 : int
-
-logic b14 : int
-
-logic i4 : int
-
-logic temp___1663 : int
-
-logic n15 : int
-
-logic a15 : int
-
-logic b15 : int
-
-logic i5 : int
-
-logic temp___1664 : int
-
-logic n16 : int
-
-logic a16 : int
-
-logic b16 : int
-
-logic i6 : int
-
-logic n17 : int
-
-logic a17 : int
-
-logic b17 : int
-
-logic i7 : int
-
-logic n18 : int
-
-logic a18 : int
-
-logic b18 : int
-
-logic i8 : int
-
-logic n19 : int
-
-logic a19 : int
-
-logic b19 : int
-
-logic i9 : int
-
-logic result13 : int
-
-logic i10 : int
-
-logic n22 : int
-
-logic a22 : int
-
-logic b22 : int
-
-logic i11 : int
-
-logic temp___1711 : int
-
-logic result14 : bool
-
-logic result15 : int
-
-logic temp___1712 : int
-
-logic result16 : int
-
-logic a23 : int
-
-logic result17 : int
-
-logic b23 : int
-
-logic result18 : int
-
-logic n23 : int
-
-logic result19 : int
-
-logic i12 : int
-
-logic n24 : int
-
-logic a24 : int
-
-logic b24 : int
-
-logic i13 : int
-
-logic temp___1713 : int
-
-logic n25 : int
-
-logic a25 : int
-
-logic b25 : int
-
-logic i14 : int
-
-logic temp___1714 : int
-
-logic n26 : int
-
-logic a26 : int
-
-logic b26 : int
-
-logic i15 : int
-
-logic temp___1715 : int
-
-logic n27 : int
-
-logic a27 : int
-
-logic b27 : int
-
-logic i16 : int
-
-logic temp___1716 : int
-
-logic n28 : int
-
-logic a28 : int
-
-logic b28 : int
-
-logic i17 : int
-
-logic n29 : int
-
-logic a29 : int
-
-logic b29 : int
-
-logic i18 : int
-
-logic n210 : int
-
-logic a210 : int
-
-logic b210 : int
-
-logic i19 : int
-
-logic n211 : int
-
-logic a211 : int
-
-logic b211 : int
-
-logic i20 : int
-
-logic result20 : int
-
-logic l11 : int
-
-logic result21 : int
-
-logic l12 : int
-
-logic l13 : int
-
-logic l14 : int
-
-logic result22 : int
-
-logic l21 : int
-
-logic result23 : int
-
-logic l22 : int
-
-logic l23 : int
-
-logic l24 : int
-
-logic n110 : int
-
-logic n212 : int
-
-logic l15 : int
-
-logic l25 : int
-
-logic a110 : int
-
-logic a212 : int
-
-logic b110 : int
-
-logic b212 : int
-
-logic i21 : int
-
-logic copy_n12 : int
-
-logic copy_n22 : int
-
-logic n111 : int
-
-logic n213 : int
-
-logic l16 : int
-
-logic l26 : int
-
-logic a111 : int
-
-logic a213 : int
-
-logic b111 : int
-
-logic b213 : int
-
-logic i22 : int
-
-logic copy_n13 : int
-
-logic copy_n23 : int
-
-axiom H : in_range2(n1)
-
-axiom H1 : in_range2(n2)
-
-axiom H2 : in_range2(l1)
-
-axiom H3 : in_range2(l2)
-
-axiom H4 : ((n1 = n2) and ((l1 = l2) and (n1 <= 23)))
-
-axiom H5 : ((0 <= 2147483647) -> in_range2(a1))
-
-axiom H6 : ((0 <= 2147483647) -> in_range2(a2))
-
-axiom H7 : ((0 <= 2147483647) -> in_range2(b1))
-
-axiom H8 : ((0 <= 2147483647) -> in_range2(b2))
-
-axiom H9 : ((0 <= 2147483647) -> in_range2(i))
-
-axiom H10 : ((0 <= 2147483647) -> in_range2(copy_n1))
-
-axiom H11 : ((0 <= 2147483647) -> in_range2(copy_n2))
-
-axiom H12 : (result = copy_n1)
-
-axiom H13 : (copy_n11 = n1)
-
-axiom H14 : (result1 = copy_n2)
-
-axiom H15 : (copy_n21 = n2)
-
-axiom H16 : (result2 = a1)
-
-axiom H17 : (a11 = 1)
-
-axiom H18 : (result3 = a2)
-
-axiom H19 : (a21 = 1)
-
-axiom H20 : (result4 = b1)
-
-axiom H21 : (b11 = 1)
-
-axiom H22 : (result5 = b2)
-
-axiom H23 : (b21 = 1)
-
-axiom H24 : (result6 = i)
-
-axiom H25 : (i1 = 2)
-
-axiom H26 : ((2 <  n1) -> (((temp___165 = i1) and ((temp___164 = b11) and
-  ((temp___163 = n1) and ((temp___162 = a11) and ((0 = temp___166) and
-  (((((a12 = fibonacci(i2)) and (b12 = fibonacci((i2 - 1)))) and
-  (i2 <= 23)) and (((n12 + i2) - 2) = copy_n11)) and
-  (((((((0 <= 2147483647) -> in_range2(a12)) and in_range2(n12)) and
-  ((0 <= 2147483647) -> in_range2(b12))) and ((0 <= 2147483647) ->
-  in_range2(i2))) and (2 <  n12)) and (((temp___1661 = result8) and
-  (temp___1662 = n12)) and ((((o3 = (a12 + b12)) and
-  in_range1((a12 + b12))) and ((result9 = a12) and (a13 = o3))) and
-  (((((o4 = (a13 - b12)) and in_range1((a13 - b12))) and ((o5 = o4) and
-  in_range2(o4))) and ((result10 = b12) and (b13 = o5))) and
-  ((((o6 = (n12 - 1)) and in_range2((n12 - 1))) and ((result11 = n12) and
-  (n13 = o6))) and ((((o7 = (i2 + 1)) and in_range1((i2 + 1))) and
-  ((result12 = i2) and (i3 = o7))) and (not (2 <  n13)))))))))))))) and
-  (((i6 = i3) and ((b16 = b13) and ((a16 = a13) and (n16 = n13)))) and
-  ((i7 = i3) and ((b17 = b13) and ((a17 = a13) and (n17 = n13)))))))
-
-axiom H27 : ((2 <  n1) -> (i8 = i6))
-
-axiom H28 : ((2 <  n1) -> (b18 = b16))
-
-axiom H29 : ((2 <  n1) -> (a18 = a16))
-
-axiom H30 : ((2 <  n1) -> (n18 = n16))
-
-axiom H31 : ((2 <  n1) -> (i9 = i7))
-
-axiom H32 : ((2 <  n1) -> (b19 = b17))
-
-axiom H33 : ((2 <  n1) -> (a19 = a17))
-
-axiom H34 : ((2 <  n1) -> (n19 = n17))
-
-axiom H35 : ((not (2 <  n1)) -> (i8 = i1))
-
-axiom H36 : ((not (2 <  n1)) -> (b18 = b11))
-
-axiom H37 : ((not (2 <  n1)) -> (a18 = a11))
-
-axiom H38 : ((not (2 <  n1)) -> (n18 = n1))
-
-axiom H39 : ((not (2 <  n1)) -> (i9 = i1))
-
-axiom H40 : ((not (2 <  n1)) -> (b19 = b11))
-
-axiom H41 : ((not (2 <  n1)) -> (a19 = a11))
-
-axiom H42 : ((not (2 <  n1)) -> (n19 = n11))
-
-axiom H43 : (result13 = i8)
-
-axiom H44 : (i10 = 2)
-
-axiom H45 : (2 <  n2)
-
-axiom H46 : ((((a22 = fibonacci(i11)) and (b22 = fibonacci((i11 - 1)))) and
-  (i11 <= 23)) and (((n22 + i11) - 2) = copy_n21))
-
-axiom H47 : ((((((0 <= 2147483647) -> in_range2(a22)) and in_range2(n22)) and
-  ((0 <= 2147483647) -> in_range2(b22))) and ((0 <= 2147483647) ->
-  in_range2(i11))) and (2 <  n22))
-
-axiom H48 : (result15 = temp___1711)
-
-axiom H49 : (temp___1712 = n22)
-
-axiom H50 : ((o11 = (a22 + b22)) and in_range1((a22 + b22)))
-
-axiom H51 : (result16 = a22)
-
-axiom H52 : (a23 = o11)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range1((a23 - b22))
+goal WP_parameter_def :
+  (forall n1:int. forall n2:int. forall l1:int. forall l2:int. forall a1:int.
+  forall a2:int. forall b1:int. forall b2:int. forall i:int.
+  forall copy_n1:int. forall copy_n2:int. forall temp___188:int.
+  forall temp___187:int. forall temp___186:int. forall temp___185:int.
+  forall temp___189:int. forall o:int. forall o1:int. forall o2:int.
+  forall o3:int. forall o4:int. forall o5:int. forall n11:int.
+  forall result:int. forall copy_n11:int. forall result1:int.
+  forall copy_n21:int. forall result2:int. forall a11:int.
+  forall result3:int. forall a21:int. forall result4:int. forall b11:int.
+  forall result5:int. forall b21:int. forall result6:int. forall i1:int.
+  forall n12:int. forall a12:int. forall b12:int. forall i2:int.
+  forall temp___1891:int. forall result7:int. forall temp___1892:int.
+  forall result8:int. forall a13:int. forall result9:int. forall b13:int.
+  forall result10:int. forall n13:int. forall result11:int. forall i3:int.
+  forall n14:int. forall a14:int. forall b14:int. forall i4:int.
+  forall n15:int. forall a15:int. forall b15:int. forall i5:int.
+  forall n16:int. forall a16:int. forall b16:int. forall i6:int.
+  forall n17:int. forall a17:int. forall b17:int. forall i7:int.
+  forall result12:int. forall i8:int. forall n21:int. forall a22:int.
+  forall b22:int. forall i9:int. forall temp___194:int. forall result13:int.
+  forall temp___1941:int. forall result14:int. forall a23:int.
+  (in_range2(n1) -> (in_range2(n2) -> (in_range2(l1) -> (in_range2(l2) ->
+  (((n1 = n2) and ((l1 = l2) and (n1 <= 23))) -> (((0 <= 2147483647) ->
+  in_range2(a1)) -> (((0 <= 2147483647) -> in_range2(a2)) ->
+  (((0 <= 2147483647) -> in_range2(b1)) -> (((0 <= 2147483647) ->
+  in_range2(b2)) -> (((0 <= 2147483647) -> in_range2(i)) ->
+  (((0 <= 2147483647) -> in_range2(copy_n1)) -> (((0 <= 2147483647) ->
+  in_range2(copy_n2)) -> ((({ int__content = result } = { int__content =
+  copy_n1 }) and (copy_n11 = n1)) -> ((({ int__content = result1 } = {
+  int__content = copy_n2 }) and (copy_n21 = n2)) -> ((({ int__content =
+  result2 } = { int__content = a1 }) and (a11 = 1)) -> ((({ int__content =
+  result3 } = { int__content = a2 }) and (a21 = 1)) -> ((({ int__content =
+  result4 } = { int__content = b1 }) and (b11 = 1)) -> ((({ int__content =
+  result5 } = { int__content = b2 }) and (b21 = 1)) -> ((({ int__content =
+  result6 } = { int__content = i }) and (i1 = 2)) -> ((((2 <  n1) and
+  ((((temp___188 = i1) and ((temp___187 = b11) and ((temp___186 = n1) and
+  ((temp___185 = a11) and ((0 = temp___189) and (((((a12 = fibonacci(i2)) and
+  (b12 = fibonacci((i2 - 1)))) and (i2 <= 23)) and
+  (((n12 + i2) - 2) = copy_n11)) and (((((((0 <= 2147483647) ->
+  in_range2(a12)) and in_range2(n12)) and ((0 <= 2147483647) ->
+  in_range2(b12))) and ((0 <= 2147483647) -> in_range2(i2))) and
+  (2 <  n12)) and (((temp___1891 = result7) and (temp___1892 = n12)) and
+  ((((o = (a12 + b12)) and in_range1((a12 + b12))) and ((result8 = a12) and
+  (a13 = o))) and (((((o1 = (a13 - b12)) and in_range1((a13 - b12))) and
+  ((o2 = o1) and in_range2(o1))) and ((result9 = b12) and (b13 = o2))) and
+  ((((o3 = (n12 - 1)) and in_range2((n12 - 1))) and ((result10 = n12) and
+  (n13 = o3))) and ((((o4 = (i2 + 1)) and in_range1((i2 + 1))) and
+  ((result11 = i2) and (i3 = o4))) and (not (2 <  n13)))))))))))))) and
+  (((i3 = i4) and ((b13 = b14) and ((a13 = a14) and (n13 = n14)))) and
+  ((i5 = i3) and ((b15 = b13) and ((a15 = a13) and (n15 = n13)))))) and ((({
+  int__content = i6 } = { int__content = i4 }) and (({ int__content = b16
+  } = { int__content = b14 }) and (({ int__content = a16 } = { int__content =
+  a14 }) and ({ int__content = n16 } = { int__content = n14 })))) and
+  ((i7 = i5) and ((b17 = b15) and ((a17 = a15) and (n17 = n15))))))) or
+  ((not (2 <  n1)) and (((i1 = i6) and ((b11 = b16) and ((a11 = a16) and ({
+  int__content = n16 } = { int__content = n1 })))) and ((i7 = i1) and
+  ((b17 = b11) and ((a17 = a11) and (n17 = n11))))))) ->
+  (((result12 = i6) and (i8 = 2)) -> ((2 <  n2) ->
+  (((((a22 = fibonacci(i9)) and (b22 = fibonacci((i9 - 1)))) and
+  (i9 <= 23)) and (((n21 + i9) - 2) = copy_n21)) ->
+  (((((((0 <= 2147483647) -> in_range2(a22)) and in_range2(n21)) and
+  ((0 <= 2147483647) -> in_range2(b22))) and ((0 <= 2147483647) ->
+  in_range2(i9))) and (2 <  n21)) -> (((result13 = temp___194) and
+  (temp___1941 = n21)) -> ((((o5 = (a22 + b22)) and
+  in_range1((a22 + b22))) and ((result14 = a22) and (a23 = o5))) ->
+  in_range1((a23 - b22)))))))))))))))))))))))))))))

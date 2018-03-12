@@ -29,7 +29,7 @@
 (declare-const dummy priority)
 (declare-datatypes () ((priority__ref (mk_priority__ref (priority__content priority)))))
 (define-fun priority__ref___projection ((a priority__ref)) priority (priority__content a))
-(define-fun dynamic_invariant ((temp___expr_208 Int) (temp___is_init_205 Bool) (temp___skip_constant_206 Bool) (temp___do_toplevel_207 Bool)) Bool (=> (or (= temp___is_init_205 true) (<= 0 97)) (in_range temp___expr_208)))
+(define-fun dynamic_invariant ((temp___expr_235 Int) (temp___is_init_231 Bool) (temp___skip_constant_232 Bool) (temp___do_toplevel_233 Bool) (temp___do_typ_inv_234 Bool)) Bool (=> (or (= temp___is_init_231 true) (<= 0 97)) (in_range temp___expr_235)))
 (assert (not (<= 0 2)))
 (check-sat)
 (exit)

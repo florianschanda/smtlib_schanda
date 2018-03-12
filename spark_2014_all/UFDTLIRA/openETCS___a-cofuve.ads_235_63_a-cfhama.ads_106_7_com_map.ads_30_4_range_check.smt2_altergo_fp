@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -325,59 +325,19 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length(container))))) ->
   in_range5(get(container, position)))))
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : bool
-
-logic o6 : int
-
-logic result : bool
-
-logic result1 : bool
-
-axiom H : in_range2(fst)
-
-axiom H1 : in_range3(lst)
-
-axiom H2 : in_range1(offset)
-
-axiom H3 : ((o6 = (0 + length(left))) and (in_range3(o6) and
-  (o6 = (0 + length(left)))))
-
-axiom H4 : (((lst <= o6) -> (result = true)) and ((not (lst <= o6)) ->
-  (result = false)))
-
-axiom H5 : (result = true)
-
-axiom H6 : ((offset <  0) -> (((((- 2147483648) - offset) <= 1) ->
-  (result1 = true)) and ((not (((- 2147483648) - offset) <= 1)) ->
-  (result1 = false))))
-
-axiom H7 : ((not (offset <  0)) -> (result1 = of_int(1)))
-
-axiom H8 : (result1 = true)
-
-axiom H9 : (fst <= lst)
-
-axiom H10 : ((o2 = lst) and in_range1(lst))
-
-axiom H11 : ((o1 = length(right)) and (in_range4(o1) and
-  ((0 + o1) <= 2147483647)))
-
-axiom H12 : (o3 = (0 + o1))
-
-axiom H13 : (o4 = (o3 - o2))
-
-axiom H14 : (((offset <= o4) -> (o5 = true)) and ((not (offset <= o4)) ->
-  (o5 = false)))
-
  (* File "a-cofuve.ads", line 201, characters 0-0 *)
-goal WP_parameter_def : in_range1(fst)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:bool.
+  forall o5:int. forall result:bool. forall result1:bool. (in_range2(fst) ->
+  (in_range3(lst) -> (in_range1(offset) -> ((((o5 = (0 + length(left))) and
+  (in_range3(o5) and (o5 = (0 + length(left))))) and (((lst <= o5) and
+  (result = true)) or ((not (lst <= o5)) and (result = false)))) ->
+  ((result = true) -> ((((offset <  0) and
+  (((((- 2147483648) - offset) <= 1) and (result1 = true)) or
+  ((not (((- 2147483648) - offset) <= 1)) and (result1 = false)))) or
+  ((not (offset <  0)) and (result1 = of_int(1)))) -> ((result1 = true) ->
+  ((fst <= lst) -> (((((o1 = lst) and in_range1(lst)) and
+  ((((o = length(right)) and (in_range4(o) and ((0 + o) <= 2147483647))) and
+  (o2 = (0 + o))) and (o3 = (o2 - o1)))) and (((offset <= o3) and
+  (o4 = true)) or ((not (offset <= o3)) and (o4 = false)))) ->
+  in_range1(fst)))))))))))

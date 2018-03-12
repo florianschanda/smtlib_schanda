@@ -81,12 +81,6 @@ axiom bool_ge_axiom :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -98,6 +92,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -173,494 +173,128 @@ logic attr__ATTRIBUTE_ADDRESS18 : int
 
 logic attr__ATTRIBUTE_ADDRESS19 : int
 
-logic in_0_rdy_v1 : bool
-
-logic in_1_rdy_v1 : bool
-
-logic out_0_rdy_v1 : bool
-
-logic out_1_rdy_v1 : bool
-
-logic in_0_dat_v1 : int
-
-logic in_1_dat_v1 : int
-
-logic out_0_dat_v1 : int
-
-logic out_1_dat_v1 : int
-
-logic in_0_rdy_v2 : bool
-
-logic in_1_rdy_v2 : bool
-
-logic out_0_rdy_v2 : bool
-
-logic out_1_rdy_v2 : bool
-
-logic in_0_dat_v2 : int
-
-logic in_1_dat_v2 : int
-
-logic out_0_dat_v2 : int
-
-logic out_1_dat_v2 : int
-
-logic data_0_v1 : int
-
-logic data_1_v1 : int
-
-logic data_0_v2 : int
-
-logic data_1_v2 : int
-
-logic in_0_rdy_v11 : bool
-
-logic in_1_rdy_v11 : bool
-
-logic out_0_rdy_v11 : bool
-
-logic out_1_rdy_v11 : bool
-
-logic out_0_dat_v11 : int
-
-logic out_1_dat_v11 : int
-
-logic in_0_rdy_v21 : bool
-
-logic in_1_rdy_v21 : bool
-
-logic out_0_rdy_v21 : bool
-
-logic out_1_rdy_v21 : bool
-
-logic out_0_dat_v21 : int
-
-logic out_1_dat_v21 : int
-
-logic data_0_v11 : int
-
-logic data_1_v11 : int
-
-logic data_0_v21 : int
-
-logic data_1_v21 : int
-
-logic result : int
-
-logic data_0_v12 : int
-
-logic result1 : bool
-
-logic in_0_rdy_v12 : bool
-
-logic result2 : int
-
-logic out_1_dat_v12 : int
-
-logic result3 : bool
-
-logic out_1_rdy_v12 : bool
-
-logic result4 : int
-
-logic data_1_v12 : int
-
-logic result5 : bool
-
-logic in_1_rdy_v12 : bool
-
-logic result6 : int
-
-logic out_0_dat_v12 : int
-
-logic result7 : bool
-
-logic out_0_rdy_v12 : bool
-
-logic result8 : int
-
-logic data_0_v22 : int
-
-logic result9 : bool
-
-logic in_0_rdy_v22 : bool
-
-logic result10 : int
-
-logic out_1_dat_v22 : int
-
-logic result11 : bool
-
-logic out_1_rdy_v22 : bool
-
-logic result12 : int
-
-logic data_1_v22 : int
-
-logic result13 : bool
-
-logic in_1_rdy_v22 : bool
-
-logic result14 : int
-
-logic out_0_dat_v22 : int
-
-logic result15 : bool
-
-logic out_0_rdy_v22 : bool
-
-logic in_0_rdy_v13 : bool
-
-logic in_1_rdy_v13 : bool
-
-logic out_0_rdy_v13 : bool
-
-logic out_1_rdy_v13 : bool
-
-logic out_0_dat_v13 : int
-
-logic out_1_dat_v13 : int
-
-logic in_0_rdy_v23 : bool
-
-logic in_1_rdy_v23 : bool
-
-logic out_0_rdy_v23 : bool
-
-logic out_1_rdy_v23 : bool
-
-logic out_0_dat_v23 : int
-
-logic out_1_dat_v23 : int
-
-logic data_0_v13 : int
-
-logic data_1_v13 : int
-
-logic data_0_v23 : int
-
-logic data_1_v23 : int
-
-logic in_0_rdy_v14 : bool
-
-logic in_1_rdy_v14 : bool
-
-logic out_0_rdy_v14 : bool
-
-logic out_1_rdy_v14 : bool
-
-logic out_0_dat_v14 : int
-
-logic out_1_dat_v14 : int
-
-logic in_0_rdy_v24 : bool
-
-logic in_1_rdy_v24 : bool
-
-logic out_0_rdy_v24 : bool
-
-logic out_1_rdy_v24 : bool
-
-logic out_0_dat_v24 : int
-
-logic out_1_dat_v24 : int
-
-logic data_0_v14 : int
-
-logic data_1_v14 : int
-
-logic data_0_v24 : int
-
-logic data_1_v24 : int
-
-axiom H : in_range1(in_0_dat_v1)
-
-axiom H1 : in_range1(in_1_dat_v1)
-
-axiom H2 : in_range1(out_0_dat_v1)
-
-axiom H3 : in_range1(out_1_dat_v1)
-
-axiom H4 : in_range1(in_0_dat_v2)
-
-axiom H5 : in_range1(in_1_dat_v2)
-
-axiom H6 : in_range1(out_0_dat_v2)
-
-axiom H7 : in_range1(out_1_dat_v2)
-
-axiom H8 : ((0 <= 255) -> in_range1(data_0_v1))
-
-axiom H9 : ((0 <= 255) -> in_range1(data_1_v1))
-
-axiom H10 : (((in_0_rdy_v1 = true) and (not (out_1_rdy_v1 = true))) ->
-  (result = data_0_v1))
-
-axiom H11 : (((in_0_rdy_v1 = true) and (not (out_1_rdy_v1 = true))) ->
-  (data_0_v12 = in_0_dat_v1))
-
-axiom H12 : (((in_0_rdy_v1 = true) and (not (out_1_rdy_v1 = true))) ->
-  (result1 = in_0_rdy_v1))
-
-axiom H13 : (((in_0_rdy_v1 = true) and (not (out_1_rdy_v1 = true))) ->
-  (in_0_rdy_v12 = of_int(0)))
-
-axiom H14 : (((in_0_rdy_v1 = true) and (not (out_1_rdy_v1 = true))) ->
-  (result2 = out_1_dat_v1))
-
-axiom H15 : (((in_0_rdy_v1 = true) and (not (out_1_rdy_v1 = true))) ->
-  (out_1_dat_v12 = data_0_v12))
-
-axiom H16 : (((in_0_rdy_v1 = true) and (not (out_1_rdy_v1 = true))) ->
-  (result3 = out_1_rdy_v1))
-
-axiom H17 : (((in_0_rdy_v1 = true) and (not (out_1_rdy_v1 = true))) ->
-  (out_1_rdy_v12 = of_int(1)))
-
-axiom H18 : ((not (((in_0_rdy_v1 = true) -> (not (out_1_rdy_v1 = true))) and
-  (not (in_0_rdy_v1 = false)))) -> (data_0_v12 = data_0_v1))
-
-axiom H19 : ((not (((in_0_rdy_v1 = true) -> (not (out_1_rdy_v1 = true))) and
-  (not (in_0_rdy_v1 = false)))) -> (out_1_dat_v12 = out_1_dat_v1))
-
-axiom H20 : ((not (((in_0_rdy_v1 = true) -> (not (out_1_rdy_v1 = true))) and
-  (not (in_0_rdy_v1 = false)))) -> (out_1_rdy_v12 = out_1_rdy_v1))
-
-axiom H21 : ((not (((in_0_rdy_v1 = true) -> (not (out_1_rdy_v1 = true))) and
-  (not (in_0_rdy_v1 = false)))) -> (in_0_rdy_v12 = in_0_rdy_v1))
-
-axiom H22 : ((not (((in_0_rdy_v1 = true) -> (not (out_1_rdy_v1 = true))) and
-  (not (in_0_rdy_v1 = false)))) -> (data_0_v12 = data_0_v11))
-
-axiom H23 : ((not (((in_0_rdy_v1 = true) -> (not (out_1_rdy_v1 = true))) and
-  (not (in_0_rdy_v1 = false)))) -> (out_1_dat_v12 = out_1_dat_v11))
-
-axiom H24 : ((not (((in_0_rdy_v1 = true) -> (not (out_1_rdy_v1 = true))) and
-  (not (in_0_rdy_v1 = false)))) -> (out_1_rdy_v12 = out_1_rdy_v11))
-
-axiom H25 : ((not (((in_0_rdy_v1 = true) -> (not (out_1_rdy_v1 = true))) and
-  (not (in_0_rdy_v1 = false)))) -> (in_0_rdy_v12 = in_0_rdy_v11))
-
-axiom H26 : (((in_1_rdy_v1 = true) and (not (out_0_rdy_v1 = true))) ->
-  (result4 = data_1_v1))
-
-axiom H27 : (((in_1_rdy_v1 = true) and (not (out_0_rdy_v1 = true))) ->
-  (data_1_v12 = in_1_dat_v1))
-
-axiom H28 : (((in_1_rdy_v1 = true) and (not (out_0_rdy_v1 = true))) ->
-  (result5 = in_1_rdy_v1))
-
-axiom H29 : (((in_1_rdy_v1 = true) and (not (out_0_rdy_v1 = true))) ->
-  (in_1_rdy_v12 = of_int(0)))
-
-axiom H30 : (((in_1_rdy_v1 = true) and (not (out_0_rdy_v1 = true))) ->
-  (result6 = out_0_dat_v1))
-
-axiom H31 : (((in_1_rdy_v1 = true) and (not (out_0_rdy_v1 = true))) ->
-  (out_0_dat_v12 = data_1_v12))
-
-axiom H32 : (((in_1_rdy_v1 = true) and (not (out_0_rdy_v1 = true))) ->
-  (result7 = out_0_rdy_v1))
-
-axiom H33 : (((in_1_rdy_v1 = true) and (not (out_0_rdy_v1 = true))) ->
-  (out_0_rdy_v12 = of_int(1)))
-
-axiom H34 : ((not (((in_1_rdy_v1 = true) -> (not (out_0_rdy_v1 = true))) and
-  (not (in_1_rdy_v1 = false)))) -> (data_1_v12 = data_1_v1))
-
-axiom H35 : ((not (((in_1_rdy_v1 = true) -> (not (out_0_rdy_v1 = true))) and
-  (not (in_1_rdy_v1 = false)))) -> (out_0_dat_v12 = out_0_dat_v1))
-
-axiom H36 : ((not (((in_1_rdy_v1 = true) -> (not (out_0_rdy_v1 = true))) and
-  (not (in_1_rdy_v1 = false)))) -> (out_0_rdy_v12 = out_0_rdy_v1))
-
-axiom H37 : ((not (((in_1_rdy_v1 = true) -> (not (out_0_rdy_v1 = true))) and
-  (not (in_1_rdy_v1 = false)))) -> (in_1_rdy_v12 = in_1_rdy_v1))
-
-axiom H38 : ((not (((in_1_rdy_v1 = true) -> (not (out_0_rdy_v1 = true))) and
-  (not (in_1_rdy_v1 = false)))) -> (data_1_v12 = data_1_v11))
-
-axiom H39 : ((not (((in_1_rdy_v1 = true) -> (not (out_0_rdy_v1 = true))) and
-  (not (in_1_rdy_v1 = false)))) -> (out_0_dat_v12 = out_0_dat_v11))
-
-axiom H40 : ((not (((in_1_rdy_v1 = true) -> (not (out_0_rdy_v1 = true))) and
-  (not (in_1_rdy_v1 = false)))) -> (out_0_rdy_v12 = out_0_rdy_v11))
-
-axiom H41 : ((not (((in_1_rdy_v1 = true) -> (not (out_0_rdy_v1 = true))) and
-  (not (in_1_rdy_v1 = false)))) -> (in_1_rdy_v12 = in_1_rdy_v11))
-
-axiom H42 : ((0 <= 255) -> in_range1(data_0_v2))
-
-axiom H43 : ((0 <= 255) -> in_range1(data_1_v2))
-
-axiom H44 : (((in_0_rdy_v2 = true) and (not (out_1_rdy_v2 = true))) ->
-  (result8 = data_0_v2))
-
-axiom H45 : (((in_0_rdy_v2 = true) and (not (out_1_rdy_v2 = true))) ->
-  (data_0_v22 = in_0_dat_v2))
-
-axiom H46 : (((in_0_rdy_v2 = true) and (not (out_1_rdy_v2 = true))) ->
-  (result9 = in_0_rdy_v2))
-
-axiom H47 : (((in_0_rdy_v2 = true) and (not (out_1_rdy_v2 = true))) ->
-  (in_0_rdy_v22 = of_int(0)))
-
-axiom H48 : (((in_0_rdy_v2 = true) and (not (out_1_rdy_v2 = true))) ->
-  (result10 = out_1_dat_v2))
-
-axiom H49 : (((in_0_rdy_v2 = true) and (not (out_1_rdy_v2 = true))) ->
-  (out_1_dat_v22 = data_0_v22))
-
-axiom H50 : (((in_0_rdy_v2 = true) and (not (out_1_rdy_v2 = true))) ->
-  (result11 = out_1_rdy_v2))
-
-axiom H51 : (((in_0_rdy_v2 = true) and (not (out_1_rdy_v2 = true))) ->
-  (out_1_rdy_v22 = of_int(1)))
-
-axiom H52 : ((not (((in_0_rdy_v2 = true) -> (not (out_1_rdy_v2 = true))) and
-  (not (in_0_rdy_v2 = false)))) -> (data_0_v22 = data_0_v2))
-
-axiom H53 : ((not (((in_0_rdy_v2 = true) -> (not (out_1_rdy_v2 = true))) and
-  (not (in_0_rdy_v2 = false)))) -> (out_1_dat_v22 = out_1_dat_v2))
-
-axiom H54 : ((not (((in_0_rdy_v2 = true) -> (not (out_1_rdy_v2 = true))) and
-  (not (in_0_rdy_v2 = false)))) -> (out_1_rdy_v22 = out_1_rdy_v2))
-
-axiom H55 : ((not (((in_0_rdy_v2 = true) -> (not (out_1_rdy_v2 = true))) and
-  (not (in_0_rdy_v2 = false)))) -> (in_0_rdy_v22 = in_0_rdy_v2))
-
-axiom H56 : ((not (((in_0_rdy_v2 = true) -> (not (out_1_rdy_v2 = true))) and
-  (not (in_0_rdy_v2 = false)))) -> (data_0_v22 = data_0_v21))
-
-axiom H57 : ((not (((in_0_rdy_v2 = true) -> (not (out_1_rdy_v2 = true))) and
-  (not (in_0_rdy_v2 = false)))) -> (out_1_dat_v22 = out_1_dat_v21))
-
-axiom H58 : ((not (((in_0_rdy_v2 = true) -> (not (out_1_rdy_v2 = true))) and
-  (not (in_0_rdy_v2 = false)))) -> (out_1_rdy_v22 = out_1_rdy_v21))
-
-axiom H59 : ((not (((in_0_rdy_v2 = true) -> (not (out_1_rdy_v2 = true))) and
-  (not (in_0_rdy_v2 = false)))) -> (in_0_rdy_v22 = in_0_rdy_v21))
-
-axiom H60 : (((in_1_rdy_v2 = true) and (not (out_0_rdy_v2 = true))) ->
-  (result12 = data_1_v2))
-
-axiom H61 : (((in_1_rdy_v2 = true) and (not (out_0_rdy_v2 = true))) ->
-  (data_1_v22 = in_1_dat_v2))
-
-axiom H62 : (((in_1_rdy_v2 = true) and (not (out_0_rdy_v2 = true))) ->
-  (result13 = in_1_rdy_v2))
-
-axiom H63 : (((in_1_rdy_v2 = true) and (not (out_0_rdy_v2 = true))) ->
-  (in_1_rdy_v22 = of_int(0)))
-
-axiom H64 : (((in_1_rdy_v2 = true) and (not (out_0_rdy_v2 = true))) ->
-  (result14 = out_0_dat_v2))
-
-axiom H65 : (((in_1_rdy_v2 = true) and (not (out_0_rdy_v2 = true))) ->
-  (out_0_dat_v22 = data_1_v22))
-
-axiom H66 : (((in_1_rdy_v2 = true) and (not (out_0_rdy_v2 = true))) ->
-  (result15 = out_0_rdy_v2))
-
-axiom H67 : (((in_1_rdy_v2 = true) and (not (out_0_rdy_v2 = true))) ->
-  (out_0_rdy_v22 = of_int(1)))
-
-axiom H68 : ((not (((in_1_rdy_v2 = true) -> (not (out_0_rdy_v2 = true))) and
-  (not (in_1_rdy_v2 = false)))) -> (data_1_v22 = data_1_v2))
-
-axiom H69 : ((not (((in_1_rdy_v2 = true) -> (not (out_0_rdy_v2 = true))) and
-  (not (in_1_rdy_v2 = false)))) -> (out_0_dat_v22 = out_0_dat_v2))
-
-axiom H70 : ((not (((in_1_rdy_v2 = true) -> (not (out_0_rdy_v2 = true))) and
-  (not (in_1_rdy_v2 = false)))) -> (out_0_rdy_v22 = out_0_rdy_v2))
-
-axiom H71 : ((not (((in_1_rdy_v2 = true) -> (not (out_0_rdy_v2 = true))) and
-  (not (in_1_rdy_v2 = false)))) -> (in_1_rdy_v22 = in_1_rdy_v2))
-
-axiom H72 : ((not (((in_1_rdy_v2 = true) -> (not (out_0_rdy_v2 = true))) and
-  (not (in_1_rdy_v2 = false)))) -> (data_1_v22 = data_1_v21))
-
-axiom H73 : ((not (((in_1_rdy_v2 = true) -> (not (out_0_rdy_v2 = true))) and
-  (not (in_1_rdy_v2 = false)))) -> (out_0_dat_v22 = out_0_dat_v21))
-
-axiom H74 : ((not (((in_1_rdy_v2 = true) -> (not (out_0_rdy_v2 = true))) and
-  (not (in_1_rdy_v2 = false)))) -> (out_0_rdy_v22 = out_0_rdy_v21))
-
-axiom H75 : ((not (((in_1_rdy_v2 = true) -> (not (out_0_rdy_v2 = true))) and
-  (not (in_1_rdy_v2 = false)))) -> (in_1_rdy_v22 = in_1_rdy_v21))
-
-axiom H76 : (data_1_v23 = data_1_v22)
-
-axiom H77 : (data_0_v23 = data_0_v22)
-
-axiom H78 : (data_1_v13 = data_1_v12)
-
-axiom H79 : (data_0_v13 = data_0_v12)
-
-axiom H80 : (out_1_dat_v23 = out_1_dat_v22)
-
-axiom H81 : (out_0_dat_v23 = out_0_dat_v22)
-
-axiom H82 : (out_1_rdy_v23 = out_1_rdy_v22)
-
-axiom H83 : (out_0_rdy_v23 = out_0_rdy_v22)
-
-axiom H84 : (in_1_rdy_v23 = in_1_rdy_v22)
-
-axiom H85 : (in_0_rdy_v23 = in_0_rdy_v22)
-
-axiom H86 : (out_1_dat_v13 = out_1_dat_v12)
-
-axiom H87 : (out_0_dat_v13 = out_0_dat_v12)
-
-axiom H88 : (out_1_rdy_v13 = out_1_rdy_v12)
-
-axiom H89 : (out_0_rdy_v13 = out_0_rdy_v12)
-
-axiom H90 : (in_1_rdy_v13 = in_1_rdy_v12)
-
-axiom H91 : (in_0_rdy_v13 = in_0_rdy_v12)
-
-axiom H92 : (data_1_v24 = data_1_v22)
-
-axiom H93 : (data_0_v24 = data_0_v22)
-
-axiom H94 : (data_1_v14 = data_1_v12)
-
-axiom H95 : (data_0_v14 = data_0_v12)
-
-axiom H96 : (out_1_dat_v24 = out_1_dat_v22)
-
-axiom H97 : (out_0_dat_v24 = out_0_dat_v22)
-
-axiom H98 : (out_1_rdy_v24 = out_1_rdy_v22)
-
-axiom H99 : (out_0_rdy_v24 = out_0_rdy_v22)
-
-axiom H100 : (in_1_rdy_v24 = in_1_rdy_v22)
-
-axiom H101 : (in_0_rdy_v24 = in_0_rdy_v22)
-
-axiom H102 : (out_1_dat_v14 = out_1_dat_v12)
-
-axiom H103 : (out_0_dat_v14 = out_0_dat_v12)
-
-axiom H104 : (out_1_rdy_v14 = out_1_rdy_v12)
-
-axiom H105 : (out_0_rdy_v14 = out_0_rdy_v12)
-
-axiom H106 : (in_1_rdy_v14 = in_1_rdy_v12)
-
-axiom H107 : (in_0_rdy_v14 = in_0_rdy_v12)
-
-axiom H108 : (((bool_eq(in_1_dat_v1, in_1_dat_v2) = true) and
-  ((in_1_rdy_v1 = true) and ((out_0_rdy_v1 = false) and
-  ((in_1_rdy_v2 = true) and (out_0_rdy_v2 = false))))) ->
-  (out_0_dat_v13 = out_0_dat_v23))
-
-axiom H109 : (match_bool(match_bool(bool_eq(out_0_dat_v1, out_0_dat_v2),
-  match_bool(in_1_rdy_v1, out_0_rdy_v1, true), false),
-  match_bool(in_1_rdy_v2, out_0_rdy_v2, true), false) = true)
-
  (* File "infoflow.ads", line 22, characters 0-0 *)
-goal WP_parameter_def : (out_0_dat_v13 = out_0_dat_v23)
+goal WP_parameter_def :
+  (forall in_0_rdy_v1:bool. forall in_1_rdy_v1:bool.
+  forall out_0_rdy_v1:bool. forall out_1_rdy_v1:bool. forall in_0_dat_v1:int.
+  forall in_1_dat_v1:int. forall out_0_dat_v1:int. forall out_1_dat_v1:int.
+  forall in_0_rdy_v2:bool. forall in_1_rdy_v2:bool. forall out_0_rdy_v2:bool.
+  forall out_1_rdy_v2:bool. forall in_0_dat_v2:int. forall in_1_dat_v2:int.
+  forall out_0_dat_v2:int. forall out_1_dat_v2:int. forall data_0_v1:int.
+  forall data_1_v1:int. forall data_0_v2:int. forall data_1_v2:int.
+  forall in_0_rdy_v11:bool. forall in_1_rdy_v11:bool.
+  forall out_0_rdy_v11:bool. forall out_1_rdy_v11:bool.
+  forall out_0_dat_v11:int. forall out_1_dat_v11:int.
+  forall in_0_rdy_v21:bool. forall in_1_rdy_v21:bool.
+  forall out_0_rdy_v21:bool. forall out_1_rdy_v21:bool.
+  forall out_0_dat_v21:int. forall out_1_dat_v21:int. forall data_0_v11:int.
+  forall data_1_v11:int. forall data_0_v21:int. forall data_1_v21:int.
+  forall result:int. forall data_0_v12:int. forall result1:bool.
+  forall in_0_rdy_v12:bool. forall result2:int. forall out_1_dat_v12:int.
+  forall result3:bool. forall out_1_rdy_v12:bool. forall result4:int.
+  forall data_1_v12:int. forall result5:bool. forall in_1_rdy_v12:bool.
+  forall result6:int. forall out_0_dat_v12:int. forall result7:bool.
+  forall out_0_rdy_v12:bool. forall result8:int. forall data_0_v22:int.
+  forall result9:bool. forall in_0_rdy_v22:bool. forall result10:int.
+  forall out_1_dat_v22:int. forall result11:bool. forall out_1_rdy_v22:bool.
+  forall result12:int. forall data_1_v22:int. forall result13:bool.
+  forall in_1_rdy_v22:bool. forall result14:int. forall out_0_dat_v22:int.
+  forall result15:bool. forall out_0_rdy_v22:bool. forall in_0_rdy_v13:bool.
+  forall in_1_rdy_v13:bool. forall out_0_rdy_v13:bool.
+  forall out_1_rdy_v13:bool. forall out_0_dat_v13:int.
+  forall out_1_dat_v13:int. forall in_0_rdy_v23:bool__ref.
+  forall in_1_rdy_v23:bool__ref. forall out_0_rdy_v23:bool__ref.
+  forall out_1_rdy_v23:bool__ref. forall out_0_dat_v23:int__ref.
+  forall out_1_dat_v23:int__ref. forall data_0_v13:int__ref.
+  forall data_1_v13:int__ref. forall data_0_v23:int__ref.
+  forall data_1_v23:int__ref. forall in_0_rdy_v14:bool.
+  forall in_1_rdy_v14:bool. forall out_0_rdy_v14:bool.
+  forall out_1_rdy_v14:bool. forall out_0_dat_v14:int.
+  forall out_1_dat_v14:int. forall in_0_rdy_v24:bool.
+  forall in_1_rdy_v24:bool. forall out_0_rdy_v24:bool.
+  forall out_1_rdy_v24:bool. forall out_0_dat_v24:int.
+  forall out_1_dat_v24:int. forall data_0_v14:int. forall data_1_v14:int.
+  forall data_0_v24:int. forall data_1_v24:int. (in_range1(in_0_dat_v1) ->
+  (in_range1(in_1_dat_v1) -> (in_range1(out_0_dat_v1) ->
+  (in_range1(out_1_dat_v1) -> (in_range1(in_0_dat_v2) ->
+  (in_range1(in_1_dat_v2) -> (in_range1(out_0_dat_v2) ->
+  (in_range1(out_1_dat_v2) -> ((((((0 <= 255) -> in_range1(data_0_v1)) and
+  (((0 <= 255) -> in_range1(data_1_v1)) and (((((in_0_rdy_v1 = true) and
+  (not (out_1_rdy_v1 = true))) and (((result = data_0_v1) and
+  (data_0_v12 = in_0_dat_v1)) and (((result1 = in_0_rdy_v1) and
+  (in_0_rdy_v12 = of_int(0))) and (((result2 = out_1_dat_v1) and
+  (out_1_dat_v12 = data_0_v12)) and ((result3 = out_1_rdy_v1) and
+  (out_1_rdy_v12 = of_int(1))))))) or ((not (((in_0_rdy_v1 = true) ->
+  (not (out_1_rdy_v1 = true))) and (not (in_0_rdy_v1 = false)))) and
+  (((data_0_v12 = data_0_v1) and ((out_1_dat_v12 = out_1_dat_v1) and
+  ((out_1_rdy_v12 = out_1_rdy_v1) and (in_0_rdy_v12 = in_0_rdy_v1)))) and
+  ((data_0_v12 = data_0_v11) and ((out_1_dat_v12 = out_1_dat_v11) and
+  ((out_1_rdy_v12 = out_1_rdy_v11) and
+  (in_0_rdy_v12 = in_0_rdy_v11))))))) and ((((in_1_rdy_v1 = true) and
+  (not (out_0_rdy_v1 = true))) and (((result4 = data_1_v1) and
+  (data_1_v12 = in_1_dat_v1)) and (((result5 = in_1_rdy_v1) and
+  (in_1_rdy_v12 = of_int(0))) and (((result6 = out_0_dat_v1) and
+  (out_0_dat_v12 = data_1_v12)) and ((result7 = out_0_rdy_v1) and
+  (out_0_rdy_v12 = of_int(1))))))) or ((not (((in_1_rdy_v1 = true) ->
+  (not (out_0_rdy_v1 = true))) and (not (in_1_rdy_v1 = false)))) and
+  (((data_1_v12 = data_1_v1) and ((out_0_dat_v12 = out_0_dat_v1) and
+  ((out_0_rdy_v12 = out_0_rdy_v1) and (in_1_rdy_v12 = in_1_rdy_v1)))) and
+  ((data_1_v12 = data_1_v11) and ((out_0_dat_v12 = out_0_dat_v11) and
+  ((out_0_rdy_v12 = out_0_rdy_v11) and
+  (in_1_rdy_v12 = in_1_rdy_v11)))))))))) and (((0 <= 255) ->
+  in_range1(data_0_v2)) and (((0 <= 255) -> in_range1(data_1_v2)) and
+  (((((in_0_rdy_v2 = true) and (not (out_1_rdy_v2 = true))) and
+  (((result8 = data_0_v2) and (data_0_v22 = in_0_dat_v2)) and
+  (((result9 = in_0_rdy_v2) and (in_0_rdy_v22 = of_int(0))) and
+  (((result10 = out_1_dat_v2) and (out_1_dat_v22 = data_0_v22)) and
+  ((result11 = out_1_rdy_v2) and (out_1_rdy_v22 = of_int(1))))))) or
+  ((not (((in_0_rdy_v2 = true) -> (not (out_1_rdy_v2 = true))) and
+  (not (in_0_rdy_v2 = false)))) and (((data_0_v22 = data_0_v2) and
+  ((out_1_dat_v22 = out_1_dat_v2) and ((out_1_rdy_v22 = out_1_rdy_v2) and
+  (in_0_rdy_v22 = in_0_rdy_v2)))) and ((data_0_v22 = data_0_v21) and
+  ((out_1_dat_v22 = out_1_dat_v21) and ((out_1_rdy_v22 = out_1_rdy_v21) and
+  (in_0_rdy_v22 = in_0_rdy_v21))))))) and ((((in_1_rdy_v2 = true) and
+  (not (out_0_rdy_v2 = true))) and (((result12 = data_1_v2) and
+  (data_1_v22 = in_1_dat_v2)) and (((result13 = in_1_rdy_v2) and
+  (in_1_rdy_v22 = of_int(0))) and (((result14 = out_0_dat_v2) and
+  (out_0_dat_v22 = data_1_v22)) and ((result15 = out_0_rdy_v2) and
+  (out_0_rdy_v22 = of_int(1))))))) or ((not (((in_1_rdy_v2 = true) ->
+  (not (out_0_rdy_v2 = true))) and (not (in_1_rdy_v2 = false)))) and
+  (((data_1_v22 = data_1_v2) and ((out_0_dat_v22 = out_0_dat_v2) and
+  ((out_0_rdy_v22 = out_0_rdy_v2) and (in_1_rdy_v22 = in_1_rdy_v2)))) and
+  ((data_1_v22 = data_1_v21) and ((out_0_dat_v22 = out_0_dat_v21) and
+  ((out_0_rdy_v22 = out_0_rdy_v21) and
+  (in_1_rdy_v22 = in_1_rdy_v21))))))))))) and (((data_1_v23 = {
+  int__content = data_1_v22 }) and ((data_0_v23 = { int__content = data_0_v22
+  }) and ((data_1_v13 = { int__content = data_1_v12 }) and ((data_0_v13 = {
+  int__content = data_0_v12 }) and ((out_1_dat_v23 = { int__content =
+  out_1_dat_v22 }) and ((out_0_dat_v23 = { int__content = out_0_dat_v22
+  }) and ((out_1_rdy_v23 = { bool__content = out_1_rdy_v22 }) and
+  ((out_0_rdy_v23 = { bool__content = out_0_rdy_v22 }) and ((in_1_rdy_v23 = {
+  bool__content = in_1_rdy_v22 }) and ((in_0_rdy_v23 = { bool__content =
+  in_0_rdy_v22 }) and ((out_1_dat_v13 = out_1_dat_v12) and
+  ((out_0_dat_v12 = out_0_dat_v13) and ((out_1_rdy_v13 = out_1_rdy_v12) and
+  ((out_0_rdy_v13 = out_0_rdy_v12) and ((in_1_rdy_v13 = in_1_rdy_v12) and
+  (in_0_rdy_v13 = in_0_rdy_v12)))))))))))))))) and
+  ((data_1_v24 = data_1_v22) and ((data_0_v24 = data_0_v22) and
+  ((data_1_v14 = data_1_v12) and ((data_0_v14 = data_0_v12) and
+  ((out_1_dat_v24 = out_1_dat_v22) and ((out_0_dat_v24 = out_0_dat_v22) and
+  ((out_1_rdy_v24 = out_1_rdy_v22) and ((out_0_rdy_v24 = out_0_rdy_v22) and
+  ((in_1_rdy_v24 = in_1_rdy_v22) and ((in_0_rdy_v24 = in_0_rdy_v22) and
+  ((out_1_dat_v14 = out_1_dat_v12) and ((out_0_dat_v14 = out_0_dat_v12) and
+  ((out_1_rdy_v14 = out_1_rdy_v12) and ((out_0_rdy_v14 = out_0_rdy_v12) and
+  ((in_1_rdy_v14 = in_1_rdy_v12) and
+  (in_0_rdy_v14 = in_0_rdy_v12)))))))))))))))))) -> (((((bool_eq(in_1_dat_v1,
+  in_1_dat_v2) = true) and ((in_1_rdy_v1 = true) and
+  ((out_0_rdy_v1 = false) and ((in_1_rdy_v2 = true) and
+  (out_0_rdy_v2 = false))))) and
+  (out_0_dat_v13 = (out_0_dat_v23).int__content)) or
+  (not (((bool_eq(in_1_dat_v1, in_1_dat_v2) = true) ->
+  (((in_1_rdy_v1 = true) -> ((not (out_0_rdy_v1 = true)) and
+  ((out_0_rdy_v1 = false) -> (((in_1_rdy_v2 = true) ->
+  (not (out_0_rdy_v2 = true))) and (not (in_1_rdy_v2 = false)))))) and
+  (not (in_1_rdy_v1 = false)))) and (not (bool_eq(in_1_dat_v1,
+  in_1_dat_v2) = false))))) -> ((match_bool(match_bool(bool_eq(out_0_dat_v1,
+  out_0_dat_v2), match_bool(in_1_rdy_v1, out_0_rdy_v1, true), false),
+  match_bool(in_1_rdy_v2, out_0_rdy_v2, true), false) = true) ->
+  (out_0_dat_v13 = (out_0_dat_v23).int__content)))))))))))))

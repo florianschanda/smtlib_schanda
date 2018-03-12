@@ -186,24 +186,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -214,17 +196,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -234,37 +216,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 logic to_rep1 : integer -> int
 
@@ -547,12 +501,6 @@ function person__ref___projection(a: person__ref) : us_rep1 =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq8 : bool, bool -> bool
-
-axiom bool_eq_def5 :
-  (forall x:bool. forall y:bool [bool_eq8(x, y)]. (((x = y) -> (bool_eq8(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq8(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -565,6 +513,12 @@ axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
 
+logic bool_eq8 : bool, bool -> bool
+
+axiom bool_eq_def5 :
+  (forall x:bool. forall y:bool [bool_eq8(x, y)]. (((x = y) -> (bool_eq8(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq8(x, y) = false))))
+
 predicate in_range3(x: int) = ((x = 0) or (x = 1))
 
 logic attr__ATTRIBUTE_IMAGE3 : bool -> us_image
@@ -573,17 +527,17 @@ logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE3 : us_image -> bool
 
-logic temp___String_Literal_585 : unit -> (int,character) farray
+logic temp___String_Literal_633 : unit -> (int,character) farray
 
-axiom temp___String_Literal_585__def_axiom :
-  ((((((((to_rep((temp___String_Literal_585(void)[1])) = 78) and
-  (to_rep((temp___String_Literal_585(void)[2])) = 97)) and
-  (to_rep((temp___String_Literal_585(void)[3])) = 109)) and
-  (to_rep((temp___String_Literal_585(void)[4])) = 101)) and
-  (to_rep((temp___String_Literal_585(void)[5])) = 108)) and
-  (to_rep((temp___String_Literal_585(void)[6])) = 101)) and
-  (to_rep((temp___String_Literal_585(void)[7])) = 115)) and
-  (to_rep((temp___String_Literal_585(void)[8])) = 115))
+axiom temp___String_Literal_633__def_axiom :
+  ((((((((to_rep((temp___String_Literal_633(void)[1])) = 78) and
+  (to_rep((temp___String_Literal_633(void)[2])) = 97)) and
+  (to_rep((temp___String_Literal_633(void)[3])) = 109)) and
+  (to_rep((temp___String_Literal_633(void)[4])) = 101)) and
+  (to_rep((temp___String_Literal_633(void)[5])) = 108)) and
+  (to_rep((temp___String_Literal_633(void)[6])) = 101)) and
+  (to_rep((temp___String_Literal_633(void)[7])) = 115)) and
+  (to_rep((temp___String_Literal_633(void)[8])) = 115))
 
 logic new_person__2 : us_rep, us_private -> us_rep1
 
@@ -729,24 +683,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,skills) farray, int, int, (int,skills) farray, int,
-  int -> (int,skills) farray
-
-axiom concat_def1 :
-  (forall a:(int,skills) farray. forall b:(int,skills) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : skills, int -> (int,skills) farray
-
-axiom singleton_def1 :
-  (forall v:skills.
-  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq12 : (int,skills) farray, int, int, (int,skills) farray, int,
   int -> bool
 
@@ -757,17 +693,17 @@ axiom bool_eq_def9 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_140:int. ((((a__first <= temp___idx_140) and
-  (temp___idx_140 <= a__last)) and
-  (to_rep4((a[temp___idx_140])) = to_rep4((b[((b__first - a__first) + temp___idx_140)])))) or
-  (not ((a__first <= temp___idx_140) and (temp___idx_140 <= a__last)))))) ->
+  (forall temp___idx_162:int. ((((a__first <= temp___idx_162) and
+  (temp___idx_162 <= a__last)) and
+  (to_rep4((a[temp___idx_162])) = to_rep4((b[((b__first - a__first) + temp___idx_162)])))) or
+  (not ((a__first <= temp___idx_162) and (temp___idx_162 <= a__last)))))) ->
   (bool_eq12(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_140:int. (((a__first <= temp___idx_140) and
-  (temp___idx_140 <= a__last)) ->
-  (to_rep4((a[temp___idx_140])) = to_rep4((b[((b__first - a__first) + temp___idx_140)]))))))) ->
+  (forall temp___idx_162:int. (((a__first <= temp___idx_162) and
+  (temp___idx_162 <= a__last)) ->
+  (to_rep4((a[temp___idx_162])) = to_rep4((b[((b__first - a__first) + temp___idx_162)]))))))) ->
   (bool_eq12(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -777,37 +713,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_140:int. (((a__first <= temp___idx_140) and
-  (temp___idx_140 <= a__last)) ->
-  (to_rep4((a[temp___idx_140])) = to_rep4((b[((b__first - a__first) + temp___idx_140)])))))))))
-
-logic compare1 : (int,skills) farray, int, int, (int,skills) farray, int,
-  int -> int
-
-axiom compare_def_eq1 :
-  (forall a:(int,skills) farray. forall b:(int,skills) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq12(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt1 :
-  (forall a:(int,skills) farray. forall b:(int,skills) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq12(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep4((a[(i + 1)])) <  to_rep4((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt1 :
-  (forall a:(int,skills) farray. forall b:(int,skills) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare1(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq12(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep4((b[(i + 1)])) <  to_rep4((a[(j + 1)]))))))))))))
+  (forall temp___idx_162:int. (((a__first <= temp___idx_162) and
+  (temp___idx_162 <= a__last)) ->
+  (to_rep4((a[temp___idx_162])) = to_rep4((b[((b__first - a__first) + temp___idx_162)])))))))))
 
 logic dummy14 : (int,skills) farray
 
@@ -1455,72 +1363,72 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
-logic temp___String_Literal_678 : unit -> (int,character) farray
+logic temp___String_Literal_730 : unit -> (int,character) farray
 
-axiom temp___String_Literal_678__def_axiom :
-  (((((((((((((((((to_rep((temp___String_Literal_678(void)[1])) = 75) and
-  (to_rep((temp___String_Literal_678(void)[2])) = 101)) and
-  (to_rep((temp___String_Literal_678(void)[3])) = 110)) and
-  (to_rep((temp___String_Literal_678(void)[4])) = 110)) and
-  (to_rep((temp___String_Literal_678(void)[5])) = 101)) and
-  (to_rep((temp___String_Literal_678(void)[6])) = 116)) and
-  (to_rep((temp___String_Literal_678(void)[7])) = 104)) and
-  (to_rep((temp___String_Literal_678(void)[8])) = 32)) and
-  (to_rep((temp___String_Literal_678(void)[9])) = 77)) and
-  (to_rep((temp___String_Literal_678(void)[10])) = 99)) and
-  (to_rep((temp___String_Literal_678(void)[11])) = 67)) and
-  (to_rep((temp___String_Literal_678(void)[12])) = 111)) and
-  (to_rep((temp___String_Literal_678(void)[13])) = 114)) and
-  (to_rep((temp___String_Literal_678(void)[14])) = 109)) and
-  (to_rep((temp___String_Literal_678(void)[15])) = 105)) and
-  (to_rep((temp___String_Literal_678(void)[16])) = 99)) and
-  (to_rep((temp___String_Literal_678(void)[17])) = 107))
+axiom temp___String_Literal_730__def_axiom :
+  (((((((((((((((((to_rep((temp___String_Literal_730(void)[1])) = 75) and
+  (to_rep((temp___String_Literal_730(void)[2])) = 101)) and
+  (to_rep((temp___String_Literal_730(void)[3])) = 110)) and
+  (to_rep((temp___String_Literal_730(void)[4])) = 110)) and
+  (to_rep((temp___String_Literal_730(void)[5])) = 101)) and
+  (to_rep((temp___String_Literal_730(void)[6])) = 116)) and
+  (to_rep((temp___String_Literal_730(void)[7])) = 104)) and
+  (to_rep((temp___String_Literal_730(void)[8])) = 32)) and
+  (to_rep((temp___String_Literal_730(void)[9])) = 77)) and
+  (to_rep((temp___String_Literal_730(void)[10])) = 99)) and
+  (to_rep((temp___String_Literal_730(void)[11])) = 67)) and
+  (to_rep((temp___String_Literal_730(void)[12])) = 111)) and
+  (to_rep((temp___String_Literal_730(void)[13])) = 114)) and
+  (to_rep((temp___String_Literal_730(void)[14])) = 109)) and
+  (to_rep((temp___String_Literal_730(void)[15])) = 105)) and
+  (to_rep((temp___String_Literal_730(void)[16])) = 99)) and
+  (to_rep((temp___String_Literal_730(void)[17])) = 107))
 
-logic temp___String_Literal_679 : unit -> (int,character) farray
+logic temp___String_Literal_731 : unit -> (int,character) farray
 
-axiom temp___String_Literal_679__def_axiom :
-  (((((((((((to_rep((temp___String_Literal_679(void)[1])) = 68) and
-  (to_rep((temp___String_Literal_679(void)[2])) = 97)) and
-  (to_rep((temp___String_Literal_679(void)[3])) = 100)) and
-  (to_rep((temp___String_Literal_679(void)[4])) = 101)) and
-  (to_rep((temp___String_Literal_679(void)[5])) = 32)) and
-  (to_rep((temp___String_Literal_679(void)[6])) = 77)) and
-  (to_rep((temp___String_Literal_679(void)[7])) = 117)) and
-  (to_rep((temp___String_Literal_679(void)[8])) = 114)) and
-  (to_rep((temp___String_Literal_679(void)[9])) = 112)) and
-  (to_rep((temp___String_Literal_679(void)[10])) = 104)) and
-  (to_rep((temp___String_Literal_679(void)[11])) = 121))
+axiom temp___String_Literal_731__def_axiom :
+  (((((((((((to_rep((temp___String_Literal_731(void)[1])) = 68) and
+  (to_rep((temp___String_Literal_731(void)[2])) = 97)) and
+  (to_rep((temp___String_Literal_731(void)[3])) = 100)) and
+  (to_rep((temp___String_Literal_731(void)[4])) = 101)) and
+  (to_rep((temp___String_Literal_731(void)[5])) = 32)) and
+  (to_rep((temp___String_Literal_731(void)[6])) = 77)) and
+  (to_rep((temp___String_Literal_731(void)[7])) = 117)) and
+  (to_rep((temp___String_Literal_731(void)[8])) = 114)) and
+  (to_rep((temp___String_Literal_731(void)[9])) = 112)) and
+  (to_rep((temp___String_Literal_731(void)[10])) = 104)) and
+  (to_rep((temp___String_Literal_731(void)[11])) = 121))
 
-logic temp___String_Literal_680 : unit -> (int,character) farray
+logic temp___String_Literal_732 : unit -> (int,character) farray
 
-axiom temp___String_Literal_680__def_axiom :
-  ((((((((((to_rep((temp___String_Literal_680(void)[1])) = 74) and
-  (to_rep((temp___String_Literal_680(void)[2])) = 111)) and
-  (to_rep((temp___String_Literal_680(void)[3])) = 104)) and
-  (to_rep((temp___String_Literal_680(void)[4])) = 110)) and
-  (to_rep((temp___String_Literal_680(void)[5])) = 32)) and
-  (to_rep((temp___String_Literal_680(void)[6])) = 82)) and
-  (to_rep((temp___String_Literal_680(void)[7])) = 97)) and
-  (to_rep((temp___String_Literal_680(void)[8])) = 109)) and
-  (to_rep((temp___String_Literal_680(void)[9])) = 98)) and
-  (to_rep((temp___String_Literal_680(void)[10])) = 111))
+axiom temp___String_Literal_732__def_axiom :
+  ((((((((((to_rep((temp___String_Literal_732(void)[1])) = 74) and
+  (to_rep((temp___String_Literal_732(void)[2])) = 111)) and
+  (to_rep((temp___String_Literal_732(void)[3])) = 104)) and
+  (to_rep((temp___String_Literal_732(void)[4])) = 110)) and
+  (to_rep((temp___String_Literal_732(void)[5])) = 32)) and
+  (to_rep((temp___String_Literal_732(void)[6])) = 82)) and
+  (to_rep((temp___String_Literal_732(void)[7])) = 97)) and
+  (to_rep((temp___String_Literal_732(void)[8])) = 109)) and
+  (to_rep((temp___String_Literal_732(void)[9])) = 98)) and
+  (to_rep((temp___String_Literal_732(void)[10])) = 111))
 
-logic temp___String_Literal_681 : unit -> (int,character) farray
+logic temp___String_Literal_733 : unit -> (int,character) farray
 
-axiom temp___String_Literal_681__def_axiom :
-  (((((((((((((to_rep((temp___String_Literal_681(void)[1])) = 71) and
-  (to_rep((temp___String_Literal_681(void)[2])) = 114)) and
-  (to_rep((temp___String_Literal_681(void)[3])) = 101)) and
-  (to_rep((temp___String_Literal_681(void)[4])) = 103)) and
-  (to_rep((temp___String_Literal_681(void)[5])) = 111)) and
-  (to_rep((temp___String_Literal_681(void)[6])) = 114)) and
-  (to_rep((temp___String_Literal_681(void)[7])) = 121)) and
-  (to_rep((temp___String_Literal_681(void)[8])) = 32)) and
-  (to_rep((temp___String_Literal_681(void)[9])) = 72)) and
-  (to_rep((temp___String_Literal_681(void)[10])) = 111)) and
-  (to_rep((temp___String_Literal_681(void)[11])) = 117)) and
-  (to_rep((temp___String_Literal_681(void)[12])) = 115)) and
-  (to_rep((temp___String_Literal_681(void)[13])) = 101))
+axiom temp___String_Literal_733__def_axiom :
+  (((((((((((((to_rep((temp___String_Literal_733(void)[1])) = 71) and
+  (to_rep((temp___String_Literal_733(void)[2])) = 114)) and
+  (to_rep((temp___String_Literal_733(void)[3])) = 101)) and
+  (to_rep((temp___String_Literal_733(void)[4])) = 103)) and
+  (to_rep((temp___String_Literal_733(void)[5])) = 111)) and
+  (to_rep((temp___String_Literal_733(void)[6])) = 114)) and
+  (to_rep((temp___String_Literal_733(void)[7])) = 121)) and
+  (to_rep((temp___String_Literal_733(void)[8])) = 32)) and
+  (to_rep((temp___String_Literal_733(void)[9])) = 72)) and
+  (to_rep((temp___String_Literal_733(void)[10])) = 111)) and
+  (to_rep((temp___String_Literal_733(void)[11])) = 117)) and
+  (to_rep((temp___String_Literal_733(void)[12])) = 115)) and
+  (to_rep((temp___String_Literal_733(void)[13])) = 101))
 
 axiom is_alive__post_axiom : true
 
@@ -1596,1415 +1504,235 @@ axiom professionals__professional__compat_axiom9 :
   rec__professionals__professional__number_of_people_killed = p5;
   rec__ext__1 = p6 }; attr__tag1 = p7 }))))
 
-logic kenny__split_fields : us_rep
-
-logic kenny__split_fields1 : integer
-
-logic kenny__split_fields2 : bool
-
-logic kenny__split_fields3 : us_private
-
-logic uni_student__split_fields : us_rep
-
-logic uni_student__split_fields1 : integer
-
-logic uni_student__split_fields2 : bool
-
-logic uni_student__split_fields3 : professions
-
-logic uni_student__split_fields4 : (int,skills) farray
-
-logic uni_student__split_fields5 : natural
-
-logic uni_student__split_fields6 : us_private
-
-logic zerocool__split_fields : us_rep
-
-logic zerocool__split_fields1 : integer
-
-logic zerocool__split_fields2 : bool
-
-logic zerocool__split_fields3 : professions
-
-logic zerocool__split_fields4 : (int,skills) farray
-
-logic zerocool__split_fields5 : natural
-
-logic zerocool__split_fields6 : us_private
-
-logic rambo__split_fields : us_rep
-
-logic rambo__split_fields1 : integer
-
-logic rambo__split_fields2 : bool
-
-logic rambo__split_fields3 : professions
-
-logic rambo__split_fields4 : (int,skills) farray
-
-logic rambo__split_fields5 : natural
-
-logic rambo__split_fields6 : us_private
-
-logic dr_house__split_fields : us_rep
-
-logic dr_house__split_fields1 : integer
-
-logic dr_house__split_fields2 : bool
-
-logic dr_house__split_fields3 : professions
-
-logic dr_house__split_fields4 : (int,skills) farray
-
-logic dr_house__split_fields5 : natural
-
-logic dr_house__split_fields6 : us_private
-
-logic skill : int
-
-logic date : us_private
-
-logic o : us_rep
-
-logic main__kenny__assume : us_rep
-
-logic main__kenny__assume1 : integer
-
-logic main__kenny__assume2 : bool
-
-logic main__kenny__assume3 : us_private
-
-logic main__kenny__assume4 : int
-
-logic main__uni_student__assume : us_rep
-
-logic main__uni_student__assume1 : integer
-
-logic main__uni_student__assume2 : bool
-
-logic main__uni_student__assume3 : professions
-
-logic main__uni_student__assume4 : (int,skills) farray
-
-logic main__uni_student__assume5 : natural
-
-logic main__uni_student__assume6 : us_private
-
-logic main__uni_student__assume7 : int
-
-logic o1 : us_rep
-
-logic main__zerocool__assume : us_rep
-
-logic main__zerocool__assume1 : integer
-
-logic main__zerocool__assume2 : bool
-
-logic main__zerocool__assume3 : professions
-
-logic main__zerocool__assume4 : (int,skills) farray
-
-logic main__zerocool__assume5 : natural
-
-logic main__zerocool__assume6 : us_private
-
-logic main__zerocool__assume7 : int
-
-logic o2 : us_rep
-
-logic main__rambo__assume : us_rep
-
-logic main__rambo__assume1 : integer
-
-logic main__rambo__assume2 : bool
-
-logic main__rambo__assume3 : professions
-
-logic main__rambo__assume4 : (int,skills) farray
-
-logic main__rambo__assume5 : natural
-
-logic main__rambo__assume6 : us_private
-
-logic main__rambo__assume7 : int
-
-logic o3 : us_rep
-
-logic main__dr_house__assume : us_rep
-
-logic main__dr_house__assume1 : integer
-
-logic main__dr_house__assume2 : bool
-
-logic main__dr_house__assume3 : professions
-
-logic main__dr_house__assume4 : (int,skills) farray
-
-logic main__dr_house__assume5 : natural
-
-logic main__dr_house__assume6 : us_private
-
-logic main__dr_house__assume7 : int
-
-logic result : us_rep
-
-logic result1 : integer
-
-logic result2 : bool
-
-logic result3 : us_private
-
-logic kenny__split_fields4 : us_rep
-
-logic kenny__split_fields5 : integer
-
-logic kenny__split_fields6 : bool
-
-logic kenny__split_fields7 : us_private
-
-logic result4 : us_rep
-
-logic result5 : integer
-
-logic result6 : bool
-
-logic result7 : professions
-
-logic result8 : (int,skills) farray
-
-logic result9 : natural
-
-logic result10 : us_private
-
-logic uni_student__split_fields7 : us_rep
-
-logic uni_student__split_fields8 : integer
-
-logic uni_student__split_fields9 : bool
-
-logic uni_student__split_fields10 : professions
-
-logic uni_student__split_fields11 : (int,skills) farray
-
-logic uni_student__split_fields12 : natural
-
-logic uni_student__split_fields13 : us_private
-
-logic result11 : us_rep
-
-logic result12 : integer
-
-logic result13 : bool
-
-logic result14 : professions
-
-logic result15 : (int,skills) farray
-
-logic result16 : natural
-
-logic result17 : us_private
-
-logic zerocool__split_fields7 : us_rep
-
-logic zerocool__split_fields8 : integer
-
-logic zerocool__split_fields9 : bool
-
-logic zerocool__split_fields10 : professions
-
-logic zerocool__split_fields11 : (int,skills) farray
-
-logic zerocool__split_fields12 : natural
-
-logic zerocool__split_fields13 : us_private
-
-logic result18 : us_rep
-
-logic result19 : integer
-
-logic result20 : bool
-
-logic result21 : professions
-
-logic result22 : (int,skills) farray
-
-logic result23 : natural
-
-logic result24 : us_private
-
-logic rambo__split_fields7 : us_rep
-
-logic rambo__split_fields8 : integer
-
-logic rambo__split_fields9 : bool
-
-logic rambo__split_fields10 : professions
-
-logic rambo__split_fields11 : (int,skills) farray
-
-logic rambo__split_fields12 : natural
-
-logic rambo__split_fields13 : us_private
-
-logic result25 : us_rep
-
-logic result26 : integer
-
-logic result27 : bool
-
-logic result28 : professions
-
-logic result29 : (int,skills) farray
-
-logic result30 : natural
-
-logic result31 : us_private
-
-logic dr_house__split_fields7 : us_rep
-
-logic dr_house__split_fields8 : integer
-
-logic dr_house__split_fields9 : bool
-
-logic dr_house__split_fields10 : professions
-
-logic dr_house__split_fields11 : (int,skills) farray
-
-logic dr_house__split_fields12 : natural
-
-logic dr_house__split_fields13 : us_private
-
-logic result32 : int
-
-logic skill1 : int
-
-logic state : us_private
-
-logic result33 : bool
-
-logic uni_student__split_fields14 : us_rep
-
-logic uni_student__split_fields15 : integer
-
-logic uni_student__split_fields16 : bool
-
-logic uni_student__split_fields17 : professions
-
-logic uni_student__split_fields18 : (int,skills) farray
-
-logic uni_student__split_fields19 : natural
-
-logic uni_student__split_fields20 : us_private
-
-logic result34 : bool
-
-logic zerocool__split_fields14 : us_rep
-
-logic zerocool__split_fields15 : integer
-
-logic zerocool__split_fields16 : bool
-
-logic zerocool__split_fields17 : professions
-
-logic zerocool__split_fields18 : (int,skills) farray
-
-logic zerocool__split_fields19 : natural
-
-logic zerocool__split_fields20 : us_private
-
-logic result35 : bool
-
-logic rambo__split_fields14 : us_rep
-
-logic rambo__split_fields15 : integer
-
-logic rambo__split_fields16 : bool
-
-logic rambo__split_fields17 : professions
-
-logic rambo__split_fields18 : (int,skills) farray
-
-logic rambo__split_fields19 : natural
-
-logic rambo__split_fields20 : us_private
-
-logic result36 : bool
-
-logic dr_house__split_fields14 : us_rep
-
-logic dr_house__split_fields15 : integer
-
-logic dr_house__split_fields16 : bool
-
-logic dr_house__split_fields17 : professions
-
-logic dr_house__split_fields18 : (int,skills) farray
-
-logic dr_house__split_fields19 : natural
-
-logic dr_house__split_fields20 : us_private
-
-logic result37 : int
-
-logic skill2 : int
-
-logic state1 : us_private
-
-logic result38 : bool
-
-logic uni_student__split_fields21 : us_rep
-
-logic uni_student__split_fields22 : integer
-
-logic uni_student__split_fields23 : bool
-
-logic uni_student__split_fields24 : professions
-
-logic uni_student__split_fields25 : (int,skills) farray
-
-logic uni_student__split_fields26 : natural
-
-logic uni_student__split_fields27 : us_private
-
-logic result39 : bool
-
-logic zerocool__split_fields21 : us_rep
-
-logic zerocool__split_fields22 : integer
-
-logic zerocool__split_fields23 : bool
-
-logic zerocool__split_fields24 : professions
-
-logic zerocool__split_fields25 : (int,skills) farray
-
-logic zerocool__split_fields26 : natural
-
-logic zerocool__split_fields27 : us_private
-
-logic result40 : bool
-
-logic rambo__split_fields21 : us_rep
-
-logic rambo__split_fields22 : integer
-
-logic rambo__split_fields23 : bool
-
-logic rambo__split_fields24 : professions
-
-logic rambo__split_fields25 : (int,skills) farray
-
-logic rambo__split_fields26 : natural
-
-logic rambo__split_fields27 : us_private
-
-logic result41 : bool
-
-logic dr_house__split_fields21 : us_rep
-
-logic dr_house__split_fields22 : integer
-
-logic dr_house__split_fields23 : bool
-
-logic dr_house__split_fields24 : professions
-
-logic dr_house__split_fields25 : (int,skills) farray
-
-logic dr_house__split_fields26 : natural
-
-logic dr_house__split_fields27 : us_private
-
-logic result42 : int
-
-logic skill3 : int
-
-logic state2 : us_private
-
-logic result43 : bool
-
-logic uni_student__split_fields28 : us_rep
-
-logic uni_student__split_fields29 : integer
-
-logic uni_student__split_fields30 : bool
-
-logic uni_student__split_fields31 : professions
-
-logic uni_student__split_fields32 : (int,skills) farray
-
-logic uni_student__split_fields33 : natural
-
-logic uni_student__split_fields34 : us_private
-
-logic result44 : bool
-
-logic zerocool__split_fields28 : us_rep
-
-logic zerocool__split_fields29 : integer
-
-logic zerocool__split_fields30 : bool
-
-logic zerocool__split_fields31 : professions
-
-logic zerocool__split_fields32 : (int,skills) farray
-
-logic zerocool__split_fields33 : natural
-
-logic zerocool__split_fields34 : us_private
-
-logic result45 : bool
-
-logic rambo__split_fields28 : us_rep
-
-logic rambo__split_fields29 : integer
-
-logic rambo__split_fields30 : bool
-
-logic rambo__split_fields31 : professions
-
-logic rambo__split_fields32 : (int,skills) farray
-
-logic rambo__split_fields33 : natural
-
-logic rambo__split_fields34 : us_private
-
-logic result46 : bool
-
-logic dr_house__split_fields28 : us_rep
-
-logic dr_house__split_fields29 : integer
-
-logic dr_house__split_fields30 : bool
-
-logic dr_house__split_fields31 : professions
-
-logic dr_house__split_fields32 : (int,skills) farray
-
-logic dr_house__split_fields33 : natural
-
-logic dr_house__split_fields34 : us_private
-
-logic result47 : int
-
-logic skill4 : int
-
-logic state3 : us_private
-
-logic result48 : bool
-
-logic uni_student__split_fields35 : us_rep
-
-logic uni_student__split_fields36 : integer
-
-logic uni_student__split_fields37 : bool
-
-logic uni_student__split_fields38 : professions
-
-logic uni_student__split_fields39 : (int,skills) farray
-
-logic uni_student__split_fields40 : natural
-
-logic uni_student__split_fields41 : us_private
-
-logic result49 : bool
-
-logic zerocool__split_fields35 : us_rep
-
-logic zerocool__split_fields36 : integer
-
-logic zerocool__split_fields37 : bool
-
-logic zerocool__split_fields38 : professions
-
-logic zerocool__split_fields39 : (int,skills) farray
-
-logic zerocool__split_fields40 : natural
-
-logic zerocool__split_fields41 : us_private
-
-logic result50 : bool
-
-logic rambo__split_fields35 : us_rep
-
-logic rambo__split_fields36 : integer
-
-logic rambo__split_fields37 : bool
-
-logic rambo__split_fields38 : professions
-
-logic rambo__split_fields39 : (int,skills) farray
-
-logic rambo__split_fields40 : natural
-
-logic rambo__split_fields41 : us_private
-
-logic result51 : bool
-
-logic dr_house__split_fields35 : us_rep
-
-logic dr_house__split_fields36 : integer
-
-logic dr_house__split_fields37 : bool
-
-logic dr_house__split_fields38 : professions
-
-logic dr_house__split_fields39 : (int,skills) farray
-
-logic dr_house__split_fields40 : natural
-
-logic dr_house__split_fields41 : us_private
-
-logic result52 : int
-
-logic skill5 : int
-
-logic state4 : us_private
-
-logic result53 : bool
-
-logic uni_student__split_fields42 : us_rep
-
-logic uni_student__split_fields43 : integer
-
-logic uni_student__split_fields44 : bool
-
-logic uni_student__split_fields45 : professions
-
-logic uni_student__split_fields46 : (int,skills) farray
-
-logic uni_student__split_fields47 : natural
-
-logic uni_student__split_fields48 : us_private
-
-logic result54 : bool
-
-logic zerocool__split_fields42 : us_rep
-
-logic zerocool__split_fields43 : integer
-
-logic zerocool__split_fields44 : bool
-
-logic zerocool__split_fields45 : professions
-
-logic zerocool__split_fields46 : (int,skills) farray
-
-logic zerocool__split_fields47 : natural
-
-logic zerocool__split_fields48 : us_private
-
-logic result55 : bool
-
-logic rambo__split_fields42 : us_rep
-
-logic rambo__split_fields43 : integer
-
-logic rambo__split_fields44 : bool
-
-logic rambo__split_fields45 : professions
-
-logic rambo__split_fields46 : (int,skills) farray
-
-logic rambo__split_fields47 : natural
-
-logic rambo__split_fields48 : us_private
-
-logic result56 : bool
-
-logic dr_house__split_fields42 : us_rep
-
-logic dr_house__split_fields43 : integer
-
-logic dr_house__split_fields44 : bool
-
-logic dr_house__split_fields45 : professions
-
-logic dr_house__split_fields46 : (int,skills) farray
-
-logic dr_house__split_fields47 : natural
-
-logic dr_house__split_fields48 : us_private
-
-logic result57 : int
-
-logic skill6 : int
-
-logic state5 : us_private
-
-logic result58 : bool
-
-logic uni_student__split_fields49 : us_rep
-
-logic uni_student__split_fields50 : integer
-
-logic uni_student__split_fields51 : bool
-
-logic uni_student__split_fields52 : professions
-
-logic uni_student__split_fields53 : (int,skills) farray
-
-logic uni_student__split_fields54 : natural
-
-logic uni_student__split_fields55 : us_private
-
-logic result59 : bool
-
-logic zerocool__split_fields49 : us_rep
-
-logic zerocool__split_fields50 : integer
-
-logic zerocool__split_fields51 : bool
-
-logic zerocool__split_fields52 : professions
-
-logic zerocool__split_fields53 : (int,skills) farray
-
-logic zerocool__split_fields54 : natural
-
-logic zerocool__split_fields55 : us_private
-
-logic result60 : bool
-
-logic rambo__split_fields49 : us_rep
-
-logic rambo__split_fields50 : integer
-
-logic rambo__split_fields51 : bool
-
-logic rambo__split_fields52 : professions
-
-logic rambo__split_fields53 : (int,skills) farray
-
-logic rambo__split_fields54 : natural
-
-logic rambo__split_fields55 : us_private
-
-logic result61 : bool
-
-logic dr_house__split_fields49 : us_rep
-
-logic dr_house__split_fields50 : integer
-
-logic dr_house__split_fields51 : bool
-
-logic dr_house__split_fields52 : professions
-
-logic dr_house__split_fields53 : (int,skills) farray
-
-logic dr_house__split_fields54 : natural
-
-logic dr_house__split_fields55 : us_private
-
-logic result62 : int
-
-logic skill7 : int
-
-logic state6 : us_private
-
-logic result63 : bool
-
-logic uni_student__split_fields56 : us_rep
-
-logic uni_student__split_fields57 : integer
-
-logic uni_student__split_fields58 : bool
-
-logic uni_student__split_fields59 : professions
-
-logic uni_student__split_fields60 : (int,skills) farray
-
-logic uni_student__split_fields61 : natural
-
-logic uni_student__split_fields62 : us_private
-
-logic result64 : bool
-
-logic zerocool__split_fields56 : us_rep
-
-logic zerocool__split_fields57 : integer
-
-logic zerocool__split_fields58 : bool
-
-logic zerocool__split_fields59 : professions
-
-logic zerocool__split_fields60 : (int,skills) farray
-
-logic zerocool__split_fields61 : natural
-
-logic zerocool__split_fields62 : us_private
-
-logic result65 : bool
-
-logic rambo__split_fields56 : us_rep
-
-logic rambo__split_fields57 : integer
-
-logic rambo__split_fields58 : bool
-
-logic rambo__split_fields59 : professions
-
-logic rambo__split_fields60 : (int,skills) farray
-
-logic rambo__split_fields61 : natural
-
-logic rambo__split_fields62 : us_private
-
-logic result66 : bool
-
-logic dr_house__split_fields56 : us_rep
-
-logic dr_house__split_fields57 : integer
-
-logic dr_house__split_fields58 : bool
-
-logic dr_house__split_fields59 : professions
-
-logic dr_house__split_fields60 : (int,skills) farray
-
-logic dr_house__split_fields61 : natural
-
-logic dr_house__split_fields62 : us_private
-
-logic result67 : int
-
-logic skill8 : int
-
-logic state7 : us_private
-
-logic result68 : bool
-
-logic uni_student__split_fields63 : us_rep
-
-logic uni_student__split_fields64 : integer
-
-logic uni_student__split_fields65 : bool
-
-logic uni_student__split_fields66 : professions
-
-logic uni_student__split_fields67 : (int,skills) farray
-
-logic uni_student__split_fields68 : natural
-
-logic uni_student__split_fields69 : us_private
-
-logic result69 : bool
-
-logic zerocool__split_fields63 : us_rep
-
-logic zerocool__split_fields64 : integer
-
-logic zerocool__split_fields65 : bool
-
-logic zerocool__split_fields66 : professions
-
-logic zerocool__split_fields67 : (int,skills) farray
-
-logic zerocool__split_fields68 : natural
-
-logic zerocool__split_fields69 : us_private
-
-logic result70 : bool
-
-logic rambo__split_fields63 : us_rep
-
-logic rambo__split_fields64 : integer
-
-logic rambo__split_fields65 : bool
-
-logic rambo__split_fields66 : professions
-
-logic rambo__split_fields67 : (int,skills) farray
-
-logic rambo__split_fields68 : natural
-
-logic rambo__split_fields69 : us_private
-
-logic result71 : bool
-
-logic dr_house__split_fields63 : us_rep
-
-logic dr_house__split_fields64 : integer
-
-logic dr_house__split_fields65 : bool
-
-logic dr_house__split_fields66 : professions
-
-logic dr_house__split_fields67 : (int,skills) farray
-
-logic dr_house__split_fields68 : natural
-
-logic dr_house__split_fields69 : us_private
-
-logic result72 : int
-
-logic skill9 : int
-
-logic state8 : us_private
-
-logic result73 : bool
-
-logic uni_student__split_fields70 : us_rep
-
-logic uni_student__split_fields71 : integer
-
-logic uni_student__split_fields72 : bool
-
-logic uni_student__split_fields73 : professions
-
-logic uni_student__split_fields74 : (int,skills) farray
-
-logic uni_student__split_fields75 : natural
-
-logic uni_student__split_fields76 : us_private
-
-logic result74 : bool
-
-logic zerocool__split_fields70 : us_rep
-
-logic zerocool__split_fields71 : integer
-
-logic zerocool__split_fields72 : bool
-
-logic zerocool__split_fields73 : professions
-
-logic zerocool__split_fields74 : (int,skills) farray
-
-logic zerocool__split_fields75 : natural
-
-logic zerocool__split_fields76 : us_private
-
-logic result75 : bool
-
-logic rambo__split_fields70 : us_rep
-
-logic rambo__split_fields71 : integer
-
-logic rambo__split_fields72 : bool
-
-logic rambo__split_fields73 : professions
-
-logic rambo__split_fields74 : (int,skills) farray
-
-logic rambo__split_fields75 : natural
-
-logic rambo__split_fields76 : us_private
-
-logic result76 : bool
-
-logic dr_house__split_fields70 : us_rep
-
-logic dr_house__split_fields71 : integer
-
-logic dr_house__split_fields72 : bool
-
-logic dr_house__split_fields73 : professions
-
-logic dr_house__split_fields74 : (int,skills) farray
-
-logic dr_house__split_fields75 : natural
-
-logic dr_house__split_fields76 : us_private
-
-logic result77 : int
-
-logic skill10 : int
-
-logic state9 : us_private
-
-logic result78 : bool
-
-logic uni_student__split_fields77 : us_rep
-
-logic uni_student__split_fields78 : integer
-
-logic uni_student__split_fields79 : bool
-
-logic uni_student__split_fields80 : professions
-
-logic uni_student__split_fields81 : (int,skills) farray
-
-logic uni_student__split_fields82 : natural
-
-logic uni_student__split_fields83 : us_private
-
-logic result79 : bool
-
-logic zerocool__split_fields77 : us_rep
-
-logic zerocool__split_fields78 : integer
-
-logic zerocool__split_fields79 : bool
-
-logic zerocool__split_fields80 : professions
-
-logic zerocool__split_fields81 : (int,skills) farray
-
-logic zerocool__split_fields82 : natural
-
-logic zerocool__split_fields83 : us_private
-
-logic result80 : bool
-
-logic rambo__split_fields77 : us_rep
-
-logic rambo__split_fields78 : integer
-
-logic rambo__split_fields79 : bool
-
-logic rambo__split_fields80 : professions
-
-logic rambo__split_fields81 : (int,skills) farray
-
-logic rambo__split_fields82 : natural
-
-logic rambo__split_fields83 : us_private
-
-logic result81 : bool
-
-logic dr_house__split_fields77 : us_rep
-
-logic dr_house__split_fields78 : integer
-
-logic dr_house__split_fields79 : bool
-
-logic dr_house__split_fields80 : professions
-
-logic dr_house__split_fields81 : (int,skills) farray
-
-logic dr_house__split_fields82 : natural
-
-logic dr_house__split_fields83 : us_private
-
-logic result82 : int
-
-logic skill11 : int
-
-logic state10 : us_private
-
-logic result83 : bool
-
-logic uni_student__split_fields84 : us_rep
-
-logic uni_student__split_fields85 : integer
-
-logic uni_student__split_fields86 : bool
-
-logic uni_student__split_fields87 : professions
-
-logic uni_student__split_fields88 : (int,skills) farray
-
-logic uni_student__split_fields89 : natural
-
-logic uni_student__split_fields90 : us_private
-
-logic result84 : bool
-
-logic zerocool__split_fields84 : us_rep
-
-logic zerocool__split_fields85 : integer
-
-logic zerocool__split_fields86 : bool
-
-logic zerocool__split_fields87 : professions
-
-logic zerocool__split_fields88 : (int,skills) farray
-
-logic zerocool__split_fields89 : natural
-
-logic zerocool__split_fields90 : us_private
-
-logic result85 : bool
-
-logic rambo__split_fields84 : us_rep
-
-logic rambo__split_fields85 : integer
-
-logic rambo__split_fields86 : bool
-
-logic rambo__split_fields87 : professions
-
-logic rambo__split_fields88 : (int,skills) farray
-
-logic rambo__split_fields89 : natural
-
-logic rambo__split_fields90 : us_private
-
-logic result86 : bool
-
-logic dr_house__split_fields84 : us_rep
-
-logic dr_house__split_fields85 : integer
-
-logic dr_house__split_fields86 : bool
-
-logic dr_house__split_fields87 : professions
-
-logic dr_house__split_fields88 : (int,skills) farray
-
-logic dr_house__split_fields89 : natural
-
-logic dr_house__split_fields90 : us_private
-
-logic result87 : int
-
-logic skill12 : int
-
-logic state11 : us_private
-
-logic result88 : bool
-
-logic uni_student__split_fields91 : us_rep
-
-logic uni_student__split_fields92 : integer
-
-logic uni_student__split_fields93 : bool
-
-logic uni_student__split_fields94 : professions
-
-logic uni_student__split_fields95 : (int,skills) farray
-
-logic uni_student__split_fields96 : natural
-
-logic uni_student__split_fields97 : us_private
-
-logic result89 : bool
-
-logic zerocool__split_fields91 : us_rep
-
-logic zerocool__split_fields92 : integer
-
-logic zerocool__split_fields93 : bool
-
-logic zerocool__split_fields94 : professions
-
-logic zerocool__split_fields95 : (int,skills) farray
-
-logic zerocool__split_fields96 : natural
-
-logic zerocool__split_fields97 : us_private
-
-logic result90 : bool
-
-logic rambo__split_fields91 : us_rep
-
-logic rambo__split_fields92 : integer
-
-logic rambo__split_fields93 : bool
-
-logic rambo__split_fields94 : professions
-
-logic rambo__split_fields95 : (int,skills) farray
-
-logic rambo__split_fields96 : natural
-
-logic rambo__split_fields97 : us_private
-
-logic result91 : bool
-
-logic dr_house__split_fields91 : us_rep
-
-logic dr_house__split_fields92 : integer
-
-logic dr_house__split_fields93 : bool
-
-logic dr_house__split_fields94 : professions
-
-logic dr_house__split_fields95 : (int,skills) farray
-
-logic dr_house__split_fields96 : natural
-
-logic dr_house__split_fields97 : us_private
-
-logic result92 : int
-
-logic skill13 : int
-
-logic state12 : us_private
-
-logic result93 : bool
-
-logic uni_student__split_fields98 : us_rep
-
-logic uni_student__split_fields99 : integer
-
-logic uni_student__split_fields100 : bool
-
-logic uni_student__split_fields101 : professions
-
-logic uni_student__split_fields102 : (int,skills) farray
-
-logic uni_student__split_fields103 : natural
-
-logic uni_student__split_fields104 : us_private
-
-logic result94 : bool
-
-logic zerocool__split_fields98 : us_rep
-
-logic zerocool__split_fields99 : integer
-
-logic zerocool__split_fields100 : bool
-
-logic zerocool__split_fields101 : professions
-
-logic zerocool__split_fields102 : (int,skills) farray
-
-logic zerocool__split_fields103 : natural
-
-logic zerocool__split_fields104 : us_private
-
-logic result95 : bool
-
-logic rambo__split_fields98 : us_rep
-
-logic rambo__split_fields99 : integer
-
-logic rambo__split_fields100 : bool
-
-logic rambo__split_fields101 : professions
-
-logic rambo__split_fields102 : (int,skills) farray
-
-logic rambo__split_fields103 : natural
-
-logic rambo__split_fields104 : us_private
-
-logic result96 : bool
-
-logic dr_house__split_fields98 : us_rep
-
-logic dr_house__split_fields99 : integer
-
-logic dr_house__split_fields100 : bool
-
-logic dr_house__split_fields101 : professions
-
-logic dr_house__split_fields102 : (int,skills) farray
-
-logic dr_house__split_fields103 : natural
-
-logic dr_house__split_fields104 : us_private
-
-logic rambo__split_fields105 : us_rep
-
-logic rambo__split_fields106 : integer
-
-logic rambo__split_fields107 : bool
-
-logic rambo__split_fields108 : professions
-
-logic rambo__split_fields109 : (int,skills) farray
-
-logic rambo__split_fields110 : natural
-
-logic rambo__split_fields111 : us_private
-
-logic professionals__another_one_bites_the_dust__victim__fields : us_rep
-
-logic professionals__another_one_bites_the_dust__victim__fields1 : integer
-
-logic professionals__another_one_bites_the_dust__victim__fields2 : bool
-
-logic professionals__another_one_bites_the_dust__victim__fields3 : us_private
-
-logic result97 : us_rep
-
-logic result98 : integer
-
-logic result99 : bool
-
-logic result100 : professions
-
-logic result101 : (int,skills) farray
-
-logic result102 : natural
-
-logic result103 : us_private
-
-logic uni_student__split_fields105 : us_rep
-
-logic uni_student__split_fields106 : integer
-
-logic uni_student__split_fields107 : bool
-
-logic uni_student__split_fields108 : professions
-
-logic uni_student__split_fields109 : (int,skills) farray
-
-logic uni_student__split_fields110 : natural
-
-logic uni_student__split_fields111 : us_private
-
-logic kenny__split_fields8 : us_rep
-
-logic kenny__split_fields9 : integer
-
-logic kenny__split_fields10 : bool
-
-logic kenny__split_fields11 : us_private
-
-logic dr_house__split_fields105 : us_rep
-
-logic dr_house__split_fields106 : integer
-
-logic dr_house__split_fields107 : bool
-
-logic dr_house__split_fields108 : professions
-
-logic dr_house__split_fields109 : (int,skills) farray
-
-logic dr_house__split_fields110 : natural
-
-logic dr_house__split_fields111 : us_private
-
-axiom H : (o = to_unbounded_string({ elts = temp___String_Literal_678(void);
-  rt = mk(1, 17) }))
-
-axiom H1 : ({ us_split_fields1 = { rec__people__person__name =
+ (* File "main.adb", line 8, characters 0-0 *)
+goal WP_parameter_def :
+  (forall kenny__split_fields:us_rep. forall kenny__split_fields1:integer.
+  forall kenny__split_fields2:bool. forall kenny__split_fields3:us_private.
+  forall uni_student__split_fields:us_rep.
+  forall uni_student__split_fields1:integer.
+  forall uni_student__split_fields2:bool.
+  forall uni_student__split_fields3:professions.
+  forall uni_student__split_fields4:(int,skills) farray.
+  forall uni_student__split_fields5:natural.
+  forall uni_student__split_fields6:us_private.
+  forall zerocool__split_fields:us_rep.
+  forall zerocool__split_fields1:integer.
+  forall zerocool__split_fields2:bool.
+  forall zerocool__split_fields3:professions.
+  forall zerocool__split_fields4:(int,skills) farray.
+  forall zerocool__split_fields5:natural.
+  forall zerocool__split_fields6:us_private.
+  forall rambo__split_fields:us_rep. forall rambo__split_fields1:integer.
+  forall rambo__split_fields2:bool. forall rambo__split_fields3:professions.
+  forall rambo__split_fields4:(int,skills) farray.
+  forall rambo__split_fields5:natural.
+  forall rambo__split_fields6:us_private.
+  forall dr_house__split_fields:us_rep.
+  forall dr_house__split_fields1:integer.
+  forall dr_house__split_fields2:bool.
+  forall dr_house__split_fields3:professions.
+  forall dr_house__split_fields4:(int,skills) farray.
+  forall dr_house__split_fields5:natural.
+  forall dr_house__split_fields6:us_private. forall skill:int.
+  forall date:us_private. forall o:us_rep. forall main__kenny__assume:us_rep.
+  forall main__kenny__assume1:integer. forall main__kenny__assume2:bool.
+  forall main__kenny__assume3:us_private. forall main__kenny__assume4:int.
+  forall main__uni_student__assume:us_rep.
+  forall main__uni_student__assume1:integer.
+  forall main__uni_student__assume2:bool.
+  forall main__uni_student__assume3:professions.
+  forall main__uni_student__assume4:(int,skills) farray.
+  forall main__uni_student__assume5:natural.
+  forall main__uni_student__assume6:us_private.
+  forall main__uni_student__assume7:int. forall o1:us_rep.
+  forall main__zerocool__assume:us_rep.
+  forall main__zerocool__assume1:integer.
+  forall main__zerocool__assume2:bool.
+  forall main__zerocool__assume3:professions.
+  forall main__zerocool__assume4:(int,skills) farray.
+  forall main__zerocool__assume5:natural.
+  forall main__zerocool__assume6:us_private.
+  forall main__zerocool__assume7:int. forall o2:us_rep.
+  forall main__rambo__assume:us_rep. forall main__rambo__assume1:integer.
+  forall main__rambo__assume2:bool. forall main__rambo__assume3:professions.
+  forall main__rambo__assume4:(int,skills) farray.
+  forall main__rambo__assume5:natural.
+  forall main__rambo__assume6:us_private. forall main__rambo__assume7:int.
+  forall o3:us_rep. forall main__dr_house__assume:us_rep.
+  forall main__dr_house__assume1:integer.
+  forall main__dr_house__assume2:bool.
+  forall main__dr_house__assume3:professions.
+  forall main__dr_house__assume4:(int,skills) farray.
+  forall main__dr_house__assume5:natural.
+  forall main__dr_house__assume6:us_private.
+  forall main__dr_house__assume7:int. forall result:us_rep.
+  forall result1:integer. forall result2:bool. forall result3:us_private.
+  forall kenny__split_fields4:us_rep. forall kenny__split_fields5:integer.
+  forall kenny__split_fields6:bool. forall kenny__split_fields7:us_private.
+  forall result4:us_rep. forall result5:integer. forall result6:bool.
+  forall result7:professions. forall result8:(int,skills) farray.
+  forall result9:natural. forall result10:us_private.
+  forall uni_student__split_fields7:us_rep.
+  forall uni_student__split_fields8:integer.
+  forall uni_student__split_fields9:bool.
+  forall uni_student__split_fields10:professions.
+  forall uni_student__split_fields11:(int,skills) farray.
+  forall uni_student__split_fields12:natural.
+  forall uni_student__split_fields13:us_private. forall result11:us_rep.
+  forall result12:integer. forall result13:bool. forall result14:professions.
+  forall result15:(int,skills) farray. forall result16:natural.
+  forall result17:us_private. forall zerocool__split_fields7:us_rep.
+  forall zerocool__split_fields8:integer.
+  forall zerocool__split_fields9:bool.
+  forall zerocool__split_fields10:professions.
+  forall zerocool__split_fields11:(int,skills) farray.
+  forall zerocool__split_fields12:natural.
+  forall zerocool__split_fields13:us_private. forall result18:us_rep.
+  forall result19:integer. forall result20:bool. forall result21:professions.
+  forall result22:(int,skills) farray. forall result23:natural.
+  forall result24:us_private. forall rambo__split_fields7:us_rep.
+  forall rambo__split_fields8:integer. forall rambo__split_fields9:bool.
+  forall rambo__split_fields10:professions.
+  forall rambo__split_fields11:(int,skills) farray.
+  forall rambo__split_fields12:natural.
+  forall rambo__split_fields13:us_private. forall result25:us_rep.
+  forall result26:integer. forall result27:bool. forall result28:professions.
+  forall result29:(int,skills) farray. forall result30:natural.
+  forall result31:us_private. forall dr_house__split_fields7:us_rep.
+  forall dr_house__split_fields8:integer.
+  forall dr_house__split_fields9:bool.
+  forall dr_house__split_fields10:professions.
+  forall dr_house__split_fields11:(int,skills) farray.
+  forall dr_house__split_fields12:natural.
+  forall dr_house__split_fields13:us_private. forall result32:int.
+  forall skill1:int. forall state:us_private. forall result33:bool.
+  forall uni_student__split_fields14:us_rep.
+  forall uni_student__split_fields15:integer.
+  forall uni_student__split_fields16:bool.
+  forall uni_student__split_fields17:professions.
+  forall uni_student__split_fields18:(int,skills) farray.
+  forall uni_student__split_fields19:natural.
+  forall uni_student__split_fields20:us_private. forall result34:bool.
+  forall zerocool__split_fields14:us_rep.
+  forall zerocool__split_fields15:integer.
+  forall zerocool__split_fields16:bool.
+  forall zerocool__split_fields17:professions.
+  forall zerocool__split_fields18:(int,skills) farray.
+  forall zerocool__split_fields19:natural.
+  forall zerocool__split_fields20:us_private. forall result35:bool.
+  ((((o = to_unbounded_string({ elts = temp___String_Literal_730(void); rt =
+  mk(1, 17) })) and ({ us_split_fields1 = { rec__people__person__name =
   main__kenny__assume; rec__people__person__dob = main__kenny__assume1;
   rec__people__person__alive = main__kenny__assume2; rec__ext__ =
   main__kenny__assume3 }; attr__tag = main__kenny__assume4
-  } = new_person__2(o, date))
-
-axiom H2 : ((result = kenny__split_fields) and
+  } = new_person__2(o, date))) and ((((result = kenny__split_fields) and
   ((result1 = kenny__split_fields1) and ((result2 = kenny__split_fields2) and
-  (result3 = kenny__split_fields3))))
-
-axiom H3 : ((kenny__split_fields4 = main__kenny__assume) and
-  ((kenny__split_fields5 = main__kenny__assume1) and
-  ((kenny__split_fields6 = main__kenny__assume2) and
-  (kenny__split_fields7 = main__kenny__assume3))))
-
-axiom H4 : (kenny__attr__tag = us_tag)
-
-axiom H5 : ({ us_split_fields3 = { rec__people__person__name1 =
-  main__uni_student__assume; rec__people__person__dob1 =
-  main__uni_student__assume1; rec__people__person__alive1 =
-  main__uni_student__assume2; rec__professionals__professional__profession =
-  main__uni_student__assume3; rec__professionals__professional__skilled_in =
-  main__uni_student__assume4;
+  (result3 = kenny__split_fields3)))) and
+  ((main__kenny__assume = kenny__split_fields4) and
+  ((main__kenny__assume1 = kenny__split_fields5) and
+  ((main__kenny__assume2 = kenny__split_fields6) and
+  (main__kenny__assume3 = kenny__split_fields7))))) and
+  (kenny__attr__tag = us_tag))) -> ((({ us_split_fields3 = {
+  rec__people__person__name1 = main__uni_student__assume;
+  rec__people__person__dob1 = main__uni_student__assume1;
+  rec__people__person__alive1 = main__uni_student__assume2;
+  rec__professionals__professional__profession = main__uni_student__assume3;
+  rec__professionals__professional__skilled_in = main__uni_student__assume4;
   rec__professionals__professional__number_of_people_killed =
   main__uni_student__assume5; rec__ext__1 = main__uni_student__assume6 };
   attr__tag1 = main__uni_student__assume7 } = new_professional__2({
   us_split_fields1 = { rec__people__person__name = kenny__split_fields4;
   rec__people__person__dob = kenny__split_fields5;
   rec__people__person__alive = kenny__split_fields6; rec__ext__ =
-  kenny__split_fields7 }; attr__tag = kenny__attr__tag }, 0))
-
-axiom H6 : ((result4 = uni_student__split_fields) and
+  kenny__split_fields7 }; attr__tag = kenny__attr__tag }, 0)) and
+  ((((result4 = uni_student__split_fields) and
   ((result5 = uni_student__split_fields1) and
   ((result6 = uni_student__split_fields2) and
   ((result7 = uni_student__split_fields3) and
   ((result8 = uni_student__split_fields4) and
   ((result9 = uni_student__split_fields5) and
-  (result10 = uni_student__split_fields6)))))))
-
-axiom H7 : ((uni_student__split_fields7 = main__uni_student__assume) and
-  ((uni_student__split_fields8 = main__uni_student__assume1) and
-  ((uni_student__split_fields9 = main__uni_student__assume2) and
-  ((uni_student__split_fields10 = main__uni_student__assume3) and
-  ((uni_student__split_fields11 = main__uni_student__assume4) and
-  ((uni_student__split_fields12 = main__uni_student__assume5) and
-  (uni_student__split_fields13 = main__uni_student__assume6)))))))
-
-axiom H8 : (uni_student__attr__tag = us_tag1)
-
-axiom H9 : (o1 = to_unbounded_string({ elts =
-  temp___String_Literal_679(void); rt = mk(1, 11) }))
-
-axiom H10 : ({ us_split_fields3 = { rec__people__person__name1 =
-  main__zerocool__assume; rec__people__person__dob1 =
-  main__zerocool__assume1; rec__people__person__alive1 =
-  main__zerocool__assume2; rec__professionals__professional__profession =
-  main__zerocool__assume3; rec__professionals__professional__skilled_in =
-  main__zerocool__assume4;
+  (result10 = uni_student__split_fields6))))))) and
+  ((main__uni_student__assume = uni_student__split_fields7) and
+  ((main__uni_student__assume1 = uni_student__split_fields8) and
+  ((main__uni_student__assume2 = uni_student__split_fields9) and
+  ((main__uni_student__assume3 = uni_student__split_fields10) and
+  ((main__uni_student__assume4 = uni_student__split_fields11) and
+  ((main__uni_student__assume5 = uni_student__split_fields12) and
+  (main__uni_student__assume6 = uni_student__split_fields13)))))))) and
+  (uni_student__attr__tag = us_tag1))) -> ((((o1 = to_unbounded_string({
+  elts = temp___String_Literal_731(void); rt = mk(1, 11) })) and ({
+  us_split_fields3 = { rec__people__person__name1 = main__zerocool__assume;
+  rec__people__person__dob1 = main__zerocool__assume1;
+  rec__people__person__alive1 = main__zerocool__assume2;
+  rec__professionals__professional__profession = main__zerocool__assume3;
+  rec__professionals__professional__skilled_in = main__zerocool__assume4;
   rec__professionals__professional__number_of_people_killed =
   main__zerocool__assume5; rec__ext__1 = main__zerocool__assume6 };
-  attr__tag1 = main__zerocool__assume7 } = new_professional(o1, 1011977, 1))
-
-axiom H11 : ((result11 = zerocool__split_fields) and
+  attr__tag1 = main__zerocool__assume7 } = new_professional(o1, 1011977,
+  1))) and ((((result11 = zerocool__split_fields) and
   ((result12 = zerocool__split_fields1) and
   ((result13 = zerocool__split_fields2) and
   ((result14 = zerocool__split_fields3) and
   ((result15 = zerocool__split_fields4) and
   ((result16 = zerocool__split_fields5) and
-  (result17 = zerocool__split_fields6)))))))
-
-axiom H12 : ((zerocool__split_fields7 = main__zerocool__assume) and
-  ((zerocool__split_fields8 = main__zerocool__assume1) and
-  ((zerocool__split_fields9 = main__zerocool__assume2) and
-  ((zerocool__split_fields10 = main__zerocool__assume3) and
-  ((zerocool__split_fields11 = main__zerocool__assume4) and
-  ((zerocool__split_fields12 = main__zerocool__assume5) and
-  (zerocool__split_fields13 = main__zerocool__assume6)))))))
-
-axiom H13 : (zerocool__attr__tag = us_tag1)
-
-axiom H14 : (o2 = to_unbounded_string({ elts =
-  temp___String_Literal_680(void); rt = mk(1, 10) }))
-
-axiom H15 : ({ us_split_fields3 = { rec__people__person__name1 =
-  main__rambo__assume; rec__people__person__dob1 = main__rambo__assume1;
+  (result17 = zerocool__split_fields6))))))) and
+  ((main__zerocool__assume = zerocool__split_fields7) and
+  ((main__zerocool__assume1 = zerocool__split_fields8) and
+  ((main__zerocool__assume2 = zerocool__split_fields9) and
+  ((main__zerocool__assume3 = zerocool__split_fields10) and
+  ((main__zerocool__assume4 = zerocool__split_fields11) and
+  ((main__zerocool__assume5 = zerocool__split_fields12) and
+  (main__zerocool__assume6 = zerocool__split_fields13)))))))) and
+  (zerocool__attr__tag = us_tag1))) -> ((((o2 = to_unbounded_string({ elts =
+  temp___String_Literal_732(void); rt = mk(1, 10) })) and ({
+  us_split_fields3 = { rec__people__person__name1 = main__rambo__assume;
+  rec__people__person__dob1 = main__rambo__assume1;
   rec__people__person__alive1 = main__rambo__assume2;
   rec__professionals__professional__profession = main__rambo__assume3;
   rec__professionals__professional__skilled_in = main__rambo__assume4;
   rec__professionals__professional__number_of_people_killed =
   main__rambo__assume5; rec__ext__1 = main__rambo__assume6 }; attr__tag1 =
-  main__rambo__assume7 } = new_professional(o2, 6071946, 2))
-
-axiom H16 : ((result18 = rambo__split_fields) and
+  main__rambo__assume7 } = new_professional(o2, 6071946, 2))) and
+  ((((result18 = rambo__split_fields) and
   ((result19 = rambo__split_fields1) and
   ((result20 = rambo__split_fields2) and
   ((result21 = rambo__split_fields3) and
   ((result22 = rambo__split_fields4) and
   ((result23 = rambo__split_fields5) and
-  (result24 = rambo__split_fields6)))))))
-
-axiom H17 : ((rambo__split_fields7 = main__rambo__assume) and
-  ((rambo__split_fields8 = main__rambo__assume1) and
-  ((rambo__split_fields9 = main__rambo__assume2) and
-  ((rambo__split_fields10 = main__rambo__assume3) and
-  ((rambo__split_fields11 = main__rambo__assume4) and
-  ((rambo__split_fields12 = main__rambo__assume5) and
-  (rambo__split_fields13 = main__rambo__assume6)))))))
-
-axiom H18 : (rambo__attr__tag = us_tag1)
-
-axiom H19 : (o3 = to_unbounded_string({ elts =
-  temp___String_Literal_681(void); rt = mk(1, 13) }))
-
-axiom H20 : ({ us_split_fields3 = { rec__people__person__name1 =
-  main__dr_house__assume; rec__people__person__dob1 =
-  main__dr_house__assume1; rec__people__person__alive1 =
-  main__dr_house__assume2; rec__professionals__professional__profession =
-  main__dr_house__assume3; rec__professionals__professional__skilled_in =
-  main__dr_house__assume4;
+  (result24 = rambo__split_fields6))))))) and
+  ((main__rambo__assume = rambo__split_fields7) and
+  ((main__rambo__assume1 = rambo__split_fields8) and
+  ((main__rambo__assume2 = rambo__split_fields9) and
+  ((main__rambo__assume3 = rambo__split_fields10) and
+  ((main__rambo__assume4 = rambo__split_fields11) and
+  ((main__rambo__assume5 = rambo__split_fields12) and
+  (main__rambo__assume6 = rambo__split_fields13)))))))) and
+  (rambo__attr__tag = us_tag1))) -> ((((o3 = to_unbounded_string({ elts =
+  temp___String_Literal_733(void); rt = mk(1, 13) })) and ({
+  us_split_fields3 = { rec__people__person__name1 = main__dr_house__assume;
+  rec__people__person__dob1 = main__dr_house__assume1;
+  rec__people__person__alive1 = main__dr_house__assume2;
+  rec__professionals__professional__profession = main__dr_house__assume3;
+  rec__professionals__professional__skilled_in = main__dr_house__assume4;
   rec__professionals__professional__number_of_people_killed =
   main__dr_house__assume5; rec__ext__1 = main__dr_house__assume6 };
-  attr__tag1 = main__dr_house__assume7 } = new_professional(o3, 11061959, 3))
-
-axiom H21 : ((result25 = dr_house__split_fields) and
+  attr__tag1 = main__dr_house__assume7 } = new_professional(o3, 11061959,
+  3))) and ((((result25 = dr_house__split_fields) and
   ((result26 = dr_house__split_fields1) and
   ((result27 = dr_house__split_fields2) and
   ((result28 = dr_house__split_fields3) and
   ((result29 = dr_house__split_fields4) and
   ((result30 = dr_house__split_fields5) and
-  (result31 = dr_house__split_fields6)))))))
-
-axiom H22 : ((dr_house__split_fields7 = main__dr_house__assume) and
+  (result31 = dr_house__split_fields6))))))) and
+  ((dr_house__split_fields7 = main__dr_house__assume) and
   ((dr_house__split_fields8 = main__dr_house__assume1) and
   ((dr_house__split_fields9 = main__dr_house__assume2) and
   ((dr_house__split_fields10 = main__dr_house__assume3) and
   ((dr_house__split_fields11 = main__dr_house__assume4) and
   ((dr_house__split_fields12 = main__dr_house__assume5) and
-  (dr_house__split_fields13 = main__dr_house__assume6)))))))
-
-axiom H23 : (dr_house__attr__tag = us_tag1)
-
-axiom H24 : (result32 = skill)
-
-axiom H25 : (skill1 = 0)
-
-axiom H26 : (result33 = has_training({ us_split_fields3 = {
+  (dr_house__split_fields13 = main__dr_house__assume6)))))))) and
+  (dr_house__attr__tag = us_tag1))) -> (((result32 = skill) and
+  (skill1 = 0)) -> (((result33 = has_training({ us_split_fields3 = {
   rec__people__person__name1 = uni_student__split_fields7;
   rec__people__person__dob1 = uni_student__split_fields8;
   rec__people__person__alive1 = uni_student__split_fields9;
@@ -3012,20 +1740,16 @@ axiom H26 : (result33 = has_training({ us_split_fields3 = {
   rec__professionals__professional__skilled_in = uni_student__split_fields11;
   rec__professionals__professional__number_of_people_killed =
   uni_student__split_fields12; rec__ext__1 = uni_student__split_fields13 };
-  attr__tag1 = uni_student__attr__tag }, state))
-
-axiom H27 : true
-
-axiom H28 : ((not (result33 = true)) ->
+  attr__tag1 = uni_student__attr__tag }, state)) and ((result33 = true) or
+  ((not (result33 = true)) and
   ((uni_student__split_fields14 = uni_student__split_fields7) and
   ((uni_student__split_fields15 = uni_student__split_fields8) and
   ((uni_student__split_fields16 = uni_student__split_fields9) and
   ((uni_student__split_fields17 = uni_student__split_fields10) and
   ((uni_student__split_fields18 = uni_student__split_fields11) and
   ((uni_student__split_fields19 = uni_student__split_fields12) and
-  (uni_student__split_fields20 = uni_student__split_fields13))))))))
-
-axiom H29 : (result34 = has_training({ us_split_fields3 = {
+  (uni_student__split_fields20 = uni_student__split_fields13)))))))))) ->
+  (((result34 = has_training({ us_split_fields3 = {
   rec__people__person__name1 = zerocool__split_fields7;
   rec__people__person__dob1 = zerocool__split_fields8;
   rec__people__person__alive1 = zerocool__split_fields9;
@@ -3033,20 +1757,16 @@ axiom H29 : (result34 = has_training({ us_split_fields3 = {
   rec__professionals__professional__skilled_in = zerocool__split_fields11;
   rec__professionals__professional__number_of_people_killed =
   zerocool__split_fields12; rec__ext__1 = zerocool__split_fields13 };
-  attr__tag1 = zerocool__attr__tag }, state))
-
-axiom H30 : true
-
-axiom H31 : ((not (result34 = true)) ->
+  attr__tag1 = zerocool__attr__tag }, state)) and ((result34 = true) or
+  ((not (result34 = true)) and
   ((zerocool__split_fields14 = zerocool__split_fields7) and
   ((zerocool__split_fields15 = zerocool__split_fields8) and
   ((zerocool__split_fields16 = zerocool__split_fields9) and
   ((zerocool__split_fields17 = zerocool__split_fields10) and
   ((zerocool__split_fields18 = zerocool__split_fields11) and
   ((zerocool__split_fields19 = zerocool__split_fields12) and
-  (zerocool__split_fields20 = zerocool__split_fields13))))))))
-
-axiom H32 : (result35 = has_training({ us_split_fields3 = {
+  (zerocool__split_fields20 = zerocool__split_fields13)))))))))) ->
+  ((result35 = has_training({ us_split_fields3 = {
   rec__people__person__name1 = rambo__split_fields7;
   rec__people__person__dob1 = rambo__split_fields8;
   rec__people__person__alive1 = rambo__split_fields9;
@@ -3054,17 +1774,12 @@ axiom H32 : (result35 = has_training({ us_split_fields3 = {
   rec__professionals__professional__skilled_in = rambo__split_fields11;
   rec__professionals__professional__number_of_people_killed =
   rambo__split_fields12; rec__ext__1 = rambo__split_fields13 }; attr__tag1 =
-  rambo__attr__tag }, state))
-
-axiom H33 : (result35 = true)
-
- (* File "main.adb", line 8, characters 0-0 *)
-goal WP_parameter_def : (has_training({ us_split_fields3 = {
-  rec__people__person__name1 = rambo__split_fields7;
+  rambo__attr__tag }, state)) -> ((result35 = true) -> (has_training({
+  us_split_fields3 = { rec__people__person__name1 = rambo__split_fields7;
   rec__people__person__dob1 = rambo__split_fields8;
   rec__people__person__alive1 = rambo__split_fields9;
   rec__professionals__professional__profession = rambo__split_fields10;
   rec__professionals__professional__skilled_in = rambo__split_fields11;
   rec__professionals__professional__number_of_people_killed =
   rambo__split_fields12; rec__ext__1 = rambo__split_fields13 }; attr__tag1 =
-  rambo__attr__tag }, state) = true)
+  rambo__attr__tag }, state) = true))))))))))))

@@ -215,37 +215,9 @@ logic c1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic i : int
-
-logic dyn_bounds__B_2__f_with_expr_2__result : int
-
-logic temp___147 : int
-
-logic us : int
-
-logic o : int
-
-logic result : int
-
-logic dyn_bounds__B_2__f_with_expr_2__result1 : int
-
-logic dyn_bounds__B_2__f_with_expr_2__result2 : int
-
-logic dyn_bounds__B_2__f_with_expr_2__result3 : int
-
-logic dyn_bounds__B_2__f_with_expr_2__result4 : int
-
-logic dyn_bounds__B_2__f_with_expr_2__result5 : int
-
-axiom H : in_range1(c)
-
-axiom H1 : dynamic_property(1, c, i)
-
-axiom H2 : dynamic_property1(first(i), last(i), c1)
-
-axiom H3 : (c1 <  last(i))
-
-axiom H4 : ((temp___147 = (c1 + 1)) and in_range((c1 + 1)))
-
  (* File "dyn_bounds.adb", line 6, characters 0-0 *)
-goal WP_parameter_def : dynamic_property1(first(i), last(i), temp___147)
+goal WP_parameter_def :
+  (forall i:int. forall temp___171:int. (in_range1(c) -> (dynamic_property(1,
+  c, i) -> (dynamic_property1(first(i), last(i), c1) -> ((c1 <  last(i)) ->
+  (((temp___171 = (c1 + 1)) and in_range((c1 + 1))) ->
+  dynamic_property1(first(i), last(i), temp___171)))))))

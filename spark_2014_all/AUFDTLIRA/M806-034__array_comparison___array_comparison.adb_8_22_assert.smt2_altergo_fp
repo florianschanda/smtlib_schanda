@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -201,24 +201,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> (int,natural) farray
-
-axiom concat_def :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : natural, int -> (int,natural) farray
-
-axiom singleton_def :
-  (forall v:natural.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,natural) farray, int, int, (int,natural) farray, int,
   int -> bool
 
@@ -229,17 +211,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -249,9 +231,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic compare : (int,natural) farray, int, int, (int,natural) farray, int,
   int -> int
@@ -504,88 +486,55 @@ function t11b__ref___projection(a: t11b__ref) : t11b = (a).t11b__content
 
 logic array_comparison__p__x__aggregate_def : int -> (int,natural) farray
 
-axiom def_axiom :
-  (forall temp___139:int.
-  (forall temp___140:int.
-  ((array_comparison__p__x__aggregate_def(temp___139)[temp___140]) = of_rep1(temp___139))))
-
 logic array_comparison__p__y__aggregate_def : int -> (int,natural) farray
-
-axiom def_axiom1 :
-  (forall temp___143:int.
-  (forall temp___144:int.
-  ((array_comparison__p__y__aggregate_def(temp___143)[temp___144]) = of_rep1(temp___143))))
 
 logic array_comparison__p__z__aggregate_def : int, int,
   int -> (int,natural) farray
 
+axiom def_axiom :
+  (forall temp___162:int. (in_range2(temp___162) ->
+  (forall temp___163:int.
+  (to_rep1((array_comparison__p__x__aggregate_def(temp___162)[temp___163])) = temp___162))))
+
+axiom def_axiom1 :
+  (forall temp___166:int. (in_range2(temp___166) ->
+  (forall temp___167:int.
+  (to_rep1((array_comparison__p__y__aggregate_def(temp___166)[temp___167])) = temp___166))))
+
 axiom def_axiom2 :
-  (forall temp___147:int. forall temp___148:int. forall temp___149:int.
-  (forall temp___150:int. ((((7 <= temp___150) and (temp___150 <= 20)) ->
-  ((array_comparison__p__z__aggregate_def(temp___147, temp___148,
-  temp___149)[temp___150]) = of_rep1(temp___149))) and
-  ((not ((7 <= temp___150) and (temp___150 <= 20))) -> (((temp___150 = 6) ->
-  ((array_comparison__p__z__aggregate_def(temp___147, temp___148,
-  temp___149)[temp___150]) = of_rep1(temp___148))) and
-  ((not (temp___150 = 6)) -> (((1 <= temp___150) and (temp___150 <= 5)) ->
-  ((array_comparison__p__z__aggregate_def(temp___147, temp___148,
-  temp___149)[temp___150]) = of_rep1(temp___147)))))))))
+  (forall temp___170:int. forall temp___171:int. forall temp___172:int.
+  (((in_range2(temp___170) and in_range2(temp___171)) and
+  in_range2(temp___172)) ->
+  (forall temp___173:int. ((((7 <= temp___173) and (temp___173 <= 20)) ->
+  (to_rep1((array_comparison__p__z__aggregate_def(temp___170, temp___171,
+  temp___172)[temp___173])) = temp___172)) and ((not ((7 <= temp___173) and
+  (temp___173 <= 20))) -> (((temp___173 = 6) ->
+  (to_rep1((array_comparison__p__z__aggregate_def(temp___170, temp___171,
+  temp___172)[temp___173])) = temp___171)) and ((not (temp___173 = 6)) ->
+  (((1 <= temp___173) and (temp___173 <= 5)) ->
+  (to_rep1((array_comparison__p__z__aggregate_def(temp___170, temp___171,
+  temp___172)[temp___173])) = temp___170)))))))))
 
-logic x : (int,natural) farray
-
-logic y : (int,natural) farray
-
-logic z : (int,natural) farray
-
-logic temp___157 : (int,natural) farray
-
-logic temp___159 : (int,natural) farray
-
-logic result : (int,natural) farray
-
-logic x1 : (int,natural) farray
-
-logic result1 : (int,natural) farray
-
-logic y1 : (int,natural) farray
-
-logic result2 : (int,natural) farray
-
-logic z1 : (int,natural) farray
-
-axiom H : (result = x)
-
-axiom H1 : (x1 = array_comparison__p__x__aggregate_def(1))
-
-axiom H2 : (to_rep(x__first) = to_rep(first(mk(1, 10))))
-
-axiom H3 : (to_rep(x__last) = to_rep(last(mk(1, 10))))
-
-axiom H4 : dynamic_property((- 2147483648), 2147483647, to_rep(x__first),
-  to_rep(x__last))
-
-axiom H5 : (result1 = y)
-
-axiom H6 : (y1 = array_comparison__p__y__aggregate_def(1))
-
-axiom H7 : (to_rep(y__first) = to_rep(first(mk(1, 9))))
-
-axiom H8 : (to_rep(y__last) = to_rep(last(mk(1, 9))))
-
-axiom H9 : dynamic_property((- 2147483648), 2147483647, to_rep(y__first),
-  to_rep(y__last))
-
-axiom H10 : (result2 = z)
-
-axiom H11 : (z1 = array_comparison__p__z__aggregate_def(1, 0, 9))
-
-axiom H12 : (to_rep(z__first) = to_rep(first(mk(1, 20))))
-
-axiom H13 : (to_rep(z__last) = to_rep(last(mk(1, 20))))
-
-axiom H14 : dynamic_property((- 2147483648), 2147483647, to_rep(z__first),
-  to_rep(z__last))
-
- (* File "array_comparison.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : (0 <  compare(x1, to_rep(x__first), to_rep(x__last),
-  y1, to_rep(y__first), to_rep(y__last)))
+ (* File "array_comparison.adb", line 6, characters 0-0 *)
+goal WP_parameter_def :
+  (forall x:(int,natural) farray. forall y:(int,natural) farray.
+  forall z:(int,natural) farray. forall result:(int,natural) farray.
+  forall x1:(int,natural) farray. forall result1:(int,natural) farray.
+  forall y1:(int,natural) farray. forall result2:(int,natural) farray.
+  forall z1:(int,natural) farray. ((((result = x) and
+  (x1 = array_comparison__p__x__aggregate_def(1))) and
+  ((to_rep(x__first) = to_rep(first(mk(1, 10)))) and
+  (to_rep(x__last) = to_rep(last(mk(1, 10)))))) ->
+  (dynamic_property((- 2147483648), 2147483647, to_rep(x__first),
+  to_rep(x__last)) -> ((((result1 = y) and
+  (y1 = array_comparison__p__y__aggregate_def(1))) and
+  ((to_rep(y__first) = to_rep(first(mk(1, 9)))) and
+  (to_rep(y__last) = to_rep(last(mk(1, 9)))))) ->
+  (dynamic_property((- 2147483648), 2147483647, to_rep(y__first),
+  to_rep(y__last)) -> ((((result2 = z) and
+  (z1 = array_comparison__p__z__aggregate_def(1, 0, 9))) and
+  ((to_rep(z__first) = to_rep(first(mk(1, 20)))) and
+  (to_rep(z__last) = to_rep(last(mk(1, 20)))))) ->
+  (dynamic_property((- 2147483648), 2147483647, to_rep(z__first),
+  to_rep(z__last)) -> (0 <  compare(x1, to_rep(x__first), to_rep(x__last),
+  y1, to_rep(y__first), to_rep(y__last))))))))))

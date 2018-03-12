@@ -211,7 +211,5 @@ logic b2 : bool
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-axiom H : (b1 = true)
-
  (* File "client.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (to_rep(c) = 10000)
+goal WP_parameter_def : ((b1 = true) -> (to_rep(c) = 10000))

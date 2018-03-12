@@ -49,35 +49,16 @@ function real__ref___projection(a: real__ref) : real = (a).real__content
 function us_private__ref___projection(a: us_private__ref) : us_private =
   (a).us_private__content
 
-logic enum__sunday__result : int
-
-logic result : int
-
-logic enum__sunday__result1 : int
-
-logic enum__sunday__result2 : int
-
-logic enum__sunday__result3 : int
-
-logic enum__sunday__result4 : int
-
-logic enum__sunday__result5 : int
-
-logic result1 : int
-
-axiom H : (enum__sunday__result1 = enum__sunday__result2)
-
-axiom H1 : (enum__sunday__result3 = enum__sunday__result1)
-
-axiom H2 : (result = enum__sunday__result)
-
-axiom H3 : (enum__sunday__result1 = 6)
-
-axiom H4 : (enum__sunday__result4 = enum__sunday__result2)
-
-axiom H5 : (enum__sunday__result5 = enum__sunday__result3)
-
-axiom H6 : (result1 = enum__sunday__result4)
-
  (* File "enum.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (enum__sunday__result4 = 6)
+goal WP_parameter_def :
+  (forall enum__sunday__result:int. forall result:int.
+  forall enum__sunday__result1:int. forall enum__sunday__result2:int.
+  forall enum__sunday__result3:int. forall enum__sunday__result4:int.
+  forall enum__sunday__result5:int.
+  (forall result1:int.
+  ((((((enum__sunday__result1 = enum__sunday__result2) and
+  (enum__sunday__result3 = enum__sunday__result1)) and
+  ((result = enum__sunday__result) and (enum__sunday__result1 = 6))) and
+  ((enum__sunday__result4 = enum__sunday__result2) and
+  (enum__sunday__result5 = enum__sunday__result3))) and
+  (result1 = enum__sunday__result4)) -> (enum__sunday__result4 = 6))))

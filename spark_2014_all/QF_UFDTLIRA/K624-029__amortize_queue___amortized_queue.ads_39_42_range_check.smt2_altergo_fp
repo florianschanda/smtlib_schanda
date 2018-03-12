@@ -137,9 +137,5 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 axiom capacity__def_axiom : (capacity = 1000)
 
-logic us : int
-
-axiom H : in_range(capacity)
-
  (* File "amortized_queue.adb", line 57, characters 0-0 *)
-goal WP_parameter_def : in_range1(1000)
+goal WP_parameter_def : (in_range(capacity) -> in_range1(1000))

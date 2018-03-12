@@ -113,35 +113,7 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic add__addtwo__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic result : bool
-
-logic result1 : int
-
-logic add__addtwo__result1 : int
-
-logic add__addtwo__result2 : int
-
-logic add__addtwo__result3 : int
-
-logic add__addtwo__result4 : int
-
-logic add__addtwo__result5 : int
-
-axiom H : in_range(x)
-
-axiom H1 : in_range(y)
-
-axiom H2 : (((- 2147483648) <= (x + y)) and ((x + y) <= 2147483647))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((x + y))
+goal WP_parameter_def : (in_range(x) -> (in_range(y) ->
+  ((((- 2147483648) <= (x + y)) and ((x + y) <= 2147483647)) ->
+  in_range((x + y)))))

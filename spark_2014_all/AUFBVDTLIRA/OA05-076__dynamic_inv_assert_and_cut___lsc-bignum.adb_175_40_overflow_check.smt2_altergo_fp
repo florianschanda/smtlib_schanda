@@ -599,12 +599,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -616,6 +610,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -766,24 +766,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,word32) farray, int, int, (int,word32) farray, int,
-  int -> (int,word32) farray
-
-axiom concat_def :
-  (forall a:(int,word32) farray. forall b:(int,word32) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : word32, int -> (int,word32) farray
-
-axiom singleton_def :
-  (forall v:word32.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq6 : (int,word32) farray, int, int, (int,word32) farray, int,
   int -> bool
 
@@ -794,17 +776,17 @@ axiom bool_eq_def5 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_134:int. ((((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) and
-  (to_rep((a[temp___idx_134])) = to_rep((b[((b__first - a__first) + temp___idx_134)])))) or
-  (not ((a__first <= temp___idx_134) and (temp___idx_134 <= a__last)))))) ->
+  (forall temp___idx_156:int. ((((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) and
+  (to_rep((a[temp___idx_156])) = to_rep((b[((b__first - a__first) + temp___idx_156)])))) or
+  (not ((a__first <= temp___idx_156) and (temp___idx_156 <= a__last)))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_134:int. (((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) ->
-  (to_rep((a[temp___idx_134])) = to_rep((b[((b__first - a__first) + temp___idx_134)]))))))) ->
+  (forall temp___idx_156:int. (((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) ->
+  (to_rep((a[temp___idx_156])) = to_rep((b[((b__first - a__first) + temp___idx_156)]))))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -814,37 +796,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_134:int. (((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) ->
-  (to_rep((a[temp___idx_134])) = to_rep((b[((b__first - a__first) + temp___idx_134)])))))))))
-
-logic compare : (int,word32) farray, int, int, (int,word32) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,word32) farray. forall b:(int,word32) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq6(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,word32) farray. forall b:(int,word32) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq6(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and ult(to_rep((a[(i + 1)])), to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,word32) farray. forall b:(int,word32) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq6(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and ugt(to_rep((a[(j + 1)])), to_rep((b[(i + 1)]))))))))))))
+  (forall temp___idx_156:int. (((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) ->
+  (to_rep((a[temp___idx_156])) = to_rep((b[((b__first - a__first) + temp___idx_156)])))))))))
 
 type us_main_type
 
@@ -1070,256 +1024,31 @@ function t41b__ref___projection(a2: t41b__ref) : integer = (a2).t41b__content
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
-logic j : int
-
-logic result__ : bool
-
-logic i : int
-
-logic lsc__bignum__less__result : bool
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : bool
-
-logic temp___598 : int
-
-logic temp___597 : bool
-
-logic temp___596 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : int
-
-logic o13 : int
-
-logic o14 : int
-
-logic o15 : int
-
-logic o16 : int
-
-logic o17 : int
-
-logic o18 : int
-
-logic o19 : us_rep
-
-logic o20 : int
-
-logic o21 : int
-
-logic o22 : int
-
-logic o23 : int
-
-logic o24 : int
-
-logic o25 : word32
-
-logic o26 : int
-
-logic o27 : word32
-
-logic o28 : t
-
-logic o29 : t
-
-logic o30 : int
-
-logic o31 : word32
-
-logic o32 : int
-
-logic o33 : word32
-
-logic o34 : t
-
-logic o35 : t
-
-logic o36 : int
-
-logic o37 : int
-
-logic o38 : int
-
-logic o39 : int
-
-logic o40 : int
-
-logic o41 : int
-
-logic o42 : int
-
-logic o43 : int
-
-logic o44 : us_rep
-
-logic j1 : int
-
-logic result : bool
-
-logic result__1 : bool
-
-logic result1 : int
-
-logic i1 : int
-
-logic j2 : int
-
-logic result__2 : bool
-
-logic i2 : int
-
-logic result2 : int
-
-logic j3 : int
-
-logic result3 : bool
-
-logic result4 : bool
-
-logic result__3 : bool
-
-logic result5 : bool
-
-logic result6 : int
-
-logic i3 : int
-
-logic result__4 : bool
-
-logic result__5 : bool
-
-logic j4 : int
-
-logic result__6 : bool
-
-logic i4 : int
-
-logic j5 : int
-
-logic result__7 : bool
-
-logic i5 : int
-
-logic j6 : int
-
-logic result__8 : bool
-
-logic i6 : int
-
-logic j7 : int
-
-logic result__9 : bool
-
-logic i7 : int
-
-logic j8 : int
-
-logic result__10 : bool
-
-logic i8 : int
-
-logic j9 : int
-
-logic result__11 : bool
-
-logic i9 : int
-
-logic result7 : bool
-
-logic lsc__bignum__less__result1 : bool
-
-logic lsc__bignum__less__result2 : bool
-
-logic lsc__bignum__less__result3 : bool
-
-logic j10 : int
-
-logic result__12 : bool
-
-logic i10 : int
-
-logic lsc__bignum__less__result4 : bool
-
-logic j11 : int
-
-logic result__13 : bool
-
-logic i11 : int
-
-logic lsc__bignum__less__result5 : bool
-
-axiom H : dynamic_property(0, 2147483646, to_rep1(first(a1)),
-  to_rep1(last(a1)))
-
-axiom H1 : in_range2(a_first)
-
-axiom H2 : in_range2(a_last)
-
-axiom H3 : dynamic_property(0, 2147483646, to_rep1(first(b1)),
-  to_rep1(last(b1)))
-
-axiom H4 : in_range2(b_first)
-
-axiom H5 : ((((((to_rep1(first(a1)) <= a_first) and
+ (* File "lsc-bignum.ads", line 120, characters 0-0 *)
+goal WP_parameter_def :
+  (forall j:int. forall result__:bool. forall i:int. forall o:int.
+  forall o1:int. forall o2:int. forall o3:int. forall result:bool.
+  forall result__1:bool. forall result1:int. forall i1:int. forall j1:int.
+  forall result__2:bool. forall i2:int. (dynamic_property(0, 2147483646,
+  to_rep1(first(a1)), to_rep1(last(a1))) -> (in_range2(a_first) ->
+  (in_range2(a_last) -> (dynamic_property(0, 2147483646, to_rep1(first(b1)),
+  to_rep1(last(b1))) -> (in_range2(b_first) ->
+  (((((((to_rep1(first(a1)) <= a_first) and
   (a_first <= to_rep1(last(a1)))) and ((to_rep1(first(a1)) <= a_last) and
   (a_last <= to_rep1(last(a1))))) and ((to_rep1(first(b1)) <= b_first) and
   (b_first <= to_rep1(last(b1))))) and
   ((to_rep1(first(b1)) <= (b_first + (a_last - a_first))) and
   ((b_first + (a_last - a_first)) <= to_rep1(last(b1))))) and
-  (a_first <= a_last))
-
-axiom H6 : ((0 <= 2147483647) -> in_range2(j))
-
-axiom H7 : (result = result__)
-
-axiom H8 : (result__1 = of_int1(0))
-
-axiom H9 : (result1 = i)
-
-axiom H10 : (i1 = a_last)
-
-axiom H11 : (a_first <= i1)
-
-axiom H12 : (i1 <= a_last)
-
-axiom H13 : ((oeq(num_of_big_int({ elts = a; rt = a1 }, (i2 + 1),
+  (a_first <= a_last)) -> (((0 <= 2147483647) -> in_range2(j)) -> ((({
+  bool__content = result } = { bool__content = result__ }) and
+  (result__1 = of_int1(0))) -> ((({ int__content = result1 } = {
+  int__content = i }) and (i1 = a_last)) -> (((a_first <= i1) and
+  (i1 <= a_last)) -> (((oeq(num_of_big_int({ elts = a; rt = a1 }, (i2 + 1),
   (a_last - i2)), num_of_big_int({ elts = b; rt = b1 },
   ((b_first + (i2 - a_first)) + 1), (a_last - i2))) = true) and
-  (not (result__2 = true)))
-
-axiom H14 : ((((0 <= 2147483647) -> in_range2(j2)) and
+  (not (result__2 = true))) -> (((((0 <= 2147483647) -> in_range2(j1)) and
   ((a_first <= a_last) -> dynamic_property1(a_first, a_last, i2))) and
-  ((a_first <= i2) and (i2 <= a_last)))
-
-axiom H15 : ((o17 = (a_last - i2)) and in_range1((a_last - i2)))
-
-axiom H16 : ((o18 = o17) and in_range2(o17))
-
-axiom H17 : ((o11 = (i2 - a_first)) and in_range1((i2 - a_first)))
-
-axiom H18 : (o12 = (b_first + o11))
-
- (* File "lsc-bignum.ads", line 120, characters 0-0 *)
-goal WP_parameter_def : in_range1(o12)
+  ((a_first <= i2) and (i2 <= a_last))) -> ((((o2 = (a_last - i2)) and
+  in_range1((a_last - i2))) and ((o3 = o2) and in_range2(o2))) ->
+  ((((o = (i2 - a_first)) and in_range1((i2 - a_first))) and
+  (o1 = (b_first + o))) -> in_range1(o1))))))))))))))))

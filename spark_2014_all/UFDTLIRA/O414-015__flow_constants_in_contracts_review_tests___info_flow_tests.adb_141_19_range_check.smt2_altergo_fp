@@ -190,17 +190,7 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 axiom c1__def_axiom : (c1 = a)
 
-logic x : int
-
-logic us : int
-
-axiom H : in_range(a)
-
-axiom H1 : in_range(c1)
-
-axiom H2 : (a = c1)
-
-axiom H3 : ((0 <= 2147483647) -> in_range(x))
-
  (* File "info_flow_tests.adb", line 130, characters 0-0 *)
-goal WP_parameter_def : dynamic_property(0, last, c1)
+goal WP_parameter_def :
+  (forall x:int. (in_range(a) -> (in_range(c1) -> ((a = c1) ->
+  (((0 <= 2147483647) -> in_range(x)) -> dynamic_property(0, last, c1))))))

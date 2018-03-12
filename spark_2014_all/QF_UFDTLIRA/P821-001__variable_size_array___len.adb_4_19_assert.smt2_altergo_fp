@@ -109,9 +109,6 @@ logic last : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-axiom H : in_range(last)
-
-axiom H1 : (last <= 0)
-
  (* File "len.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : ((1 <= last) -> (((last - 1) + 1) = 0))
+goal WP_parameter_def : (in_range(last) -> ((last <= 0) -> ((1 <= last) ->
+  (((last - 1) + 1) = 0))))

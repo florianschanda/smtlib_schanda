@@ -56,12 +56,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -73,6 +67,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -430,13 +430,8 @@ logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-axiom H : (((- 80) <= to_fixed1(x)) and (to_fixed1(x) <= 80))
-
-axiom H1 : (not (0 <= to_fixed1(x)))
-
-axiom H2 : (to_fixed1(x) <  0)
-
-axiom H3 : ((to_fixed1(x) * 2) <  to_fixed1(x))
-
  (* File "decimal_fixed.adb", line 77, characters 0-0 *)
-goal WP_parameter_def : in_range1((to_fixed1(x) + to_fixed1(x)))
+goal WP_parameter_def : ((((- 80) <= to_fixed1(x)) and
+  (to_fixed1(x) <= 80)) -> ((not (0 <= to_fixed1(x))) ->
+  ((to_fixed1(x) <  0) -> (((to_fixed1(x) * 2) <  to_fixed1(x)) ->
+  in_range1((to_fixed1(x) + to_fixed1(x)))))))

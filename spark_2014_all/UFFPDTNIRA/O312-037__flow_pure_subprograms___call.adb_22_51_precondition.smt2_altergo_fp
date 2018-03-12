@@ -1151,58 +1151,21 @@ axiom pure_function__post_axiom1 :
   (forall x:int [pure_function1(x)]. (in_range1(x) ->
   in_range1(pure_function1(x))))
 
-logic pure_function2 : int, us_private -> int
+logic pure_function2 : int -> int
 
-logic pure_function__function_guard2 : int, int, us_private -> prop
+logic pure_function__function_guard2 : int, int -> prop
 
 axiom pure_function__post_axiom2 :
-  (forall x:int.
-  (forall state__y:us_private [pure_function2(x, state__y)]. (in_range1(x) ->
-  in_range1(pure_function2(x, state__y)))))
+  (forall x:int [pure_function2(x)]. (in_range1(x) ->
+  in_range1(pure_function2(x))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : t
-
-logic o3 : int
-
-logic o4 : int
-
-logic result : int
-
-logic x1 : int
-
-logic result1 : int
-
-logic x2 : int
-
-logic result2 : int
-
-logic x3 : int
-
-axiom H : (result = x)
-
-axiom H1 : (x1 = 0)
-
-axiom H2 : in_range1(x1)
-
-axiom H3 : ((o = pure_function(x1)) and in_range1(o))
-
-axiom H4 : (result1 = x1)
-
-axiom H5 : (x2 = o)
-
-axiom H6 : ((o1 = impure_function(x2)) and in_range1(o1))
-
-axiom H7 : (result2 = x2)
-
-axiom H8 : (x3 = o1)
-
  (* File "call.adb", line 9, characters 0-0 *)
-goal WP_parameter_def : lt(fliteral1, fliteral1)
+goal WP_parameter_def :
+  (forall x:int. forall o:int. forall o1:int. forall result:int.
+  forall x1:int. forall result1:int. forall x2:int. forall result2:int.
+  forall x3:int. (((result = x) and (x1 = 0)) -> (in_range1(x1) ->
+  ((((o = pure_function(x1)) and in_range1(o)) and ((result1 = x1) and
+  (x2 = o))) -> ((((o1 = impure_function(x2)) and in_range1(o1)) and
+  ((result2 = x2) and (x3 = o1))) -> lt(fliteral1, fliteral1))))))

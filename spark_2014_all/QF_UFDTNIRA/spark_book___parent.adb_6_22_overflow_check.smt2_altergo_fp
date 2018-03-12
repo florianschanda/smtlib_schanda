@@ -133,11 +133,6 @@ function parent_int__ref___projection(a: parent_int__ref) : parent_int =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic value : int
-
-logic o : int
-
-axiom H : in_range1(value)
-
  (* File "parent.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : in_range((value * value))
+goal WP_parameter_def :
+  (forall value:int. (in_range1(value) -> in_range((value * value))))

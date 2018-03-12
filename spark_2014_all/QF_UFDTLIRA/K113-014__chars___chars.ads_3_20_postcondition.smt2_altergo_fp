@@ -182,274 +182,53 @@ logic attr__ATTRIBUTE_ADDRESS10 : int
 
 logic attr__ATTRIBUTE_ADDRESS11 : int
 
-logic x : int
-
-logic y : int
-
-logic wx : int
-
-logic wy : int
-
-logic wwx : int
-
-logic wwy : int
-
-logic z : bool
-
-logic wz : bool
-
-logic wwz : bool
-
-logic f : int
-
-logic wf : int
-
-logic wwf : int
-
-logic chars__doit__result : bool
-
-logic result : int
-
-logic x1 : int
-
-logic result1 : int
-
-logic y1 : int
-
-logic result2 : int
-
-logic wx1 : int
-
-logic result3 : int
-
-logic wy1 : int
-
-logic result4 : int
-
-logic wwx1 : int
-
-logic result5 : int
-
-logic wwy1 : int
-
-logic result6 : bool
-
-logic z1 : bool
-
-logic result7 : bool
-
-logic wz1 : bool
-
-logic result8 : bool
-
-logic wwz1 : bool
-
-logic result9 : int
-
-logic f1 : int
-
-logic result10 : int
-
-logic wf1 : int
-
-logic result11 : int
-
-logic wwf1 : int
-
-logic result12 : bool
-
-logic chars__doit__result1 : bool
-
-logic chars__doit__result2 : bool
-
-logic chars__doit__result3 : bool
-
-logic x2 : int
-
-logic y2 : int
-
-logic wx2 : int
-
-logic wy2 : int
-
-logic wwx2 : int
-
-logic wwy2 : int
-
-logic z2 : bool
-
-logic wz2 : bool
-
-logic wwz2 : bool
-
-logic f2 : int
-
-logic wf2 : int
-
-logic wwf2 : int
-
-logic chars__doit__result4 : bool
-
-logic x3 : int
-
-logic y3 : int
-
-logic wx3 : int
-
-logic wy3 : int
-
-logic wwx3 : int
-
-logic wwy3 : int
-
-logic z3 : bool
-
-logic wz3 : bool
-
-logic wwz3 : bool
-
-logic f3 : int
-
-logic wf3 : int
-
-logic wwf3 : int
-
-logic chars__doit__result5 : bool
-
-logic result13 : bool
-
-axiom H : (result = x)
-
-axiom H1 : (x1 = 65)
-
-axiom H2 : in_range(x1)
-
-axiom H3 : (result1 = y)
-
-axiom H4 : (y1 = 97)
-
-axiom H5 : in_range(y1)
-
-axiom H6 : (result2 = wx)
-
-axiom H7 : (wx1 = 65)
-
-axiom H8 : in_range1(wx1)
-
-axiom H9 : (result3 = wy)
-
-axiom H10 : (wy1 = 97)
-
-axiom H11 : in_range1(wy1)
-
-axiom H12 : (result4 = wwx)
-
-axiom H13 : (wwx1 = 65)
-
-axiom H14 : in_range2(wwx1)
-
-axiom H15 : (result5 = wwy)
-
-axiom H16 : (wwy1 = 97)
-
-axiom H17 : in_range2(wwy1)
-
-axiom H18 : (result6 = z)
-
-axiom H19 : (((x1 <  y1) -> (z1 = true)) and ((not (x1 <  y1)) ->
-  (z1 = false)))
-
-axiom H20 : (result7 = wz)
-
-axiom H21 : (((wx1 <  wy1) -> (wz1 = true)) and ((not (wx1 <  wy1)) ->
-  (wz1 = false)))
-
-axiom H22 : (result8 = wwz)
-
-axiom H23 : (((wwx1 <  wwy1) -> (wwz1 = true)) and ((not (wwx1 <  wwy1)) ->
-  (wwz1 = false)))
-
-axiom H24 : (result9 = f)
-
-axiom H25 : (f1 = 0)
-
-axiom H26 : in_range(f1)
-
-axiom H27 : (result10 = wf)
-
-axiom H28 : (wf1 = 0)
-
-axiom H29 : in_range1(wf1)
-
-axiom H30 : (result11 = wwf)
-
-axiom H31 : (wwf1 = 0)
-
-axiom H32 : in_range2(wwf1)
-
-axiom H33 : (chars__doit__result2 = chars__doit__result1)
-
-axiom H34 : (chars__doit__result3 = chars__doit__result1)
-
-axiom H35 : (result12 = chars__doit__result)
-
-axiom H36 : (((((z1 = true) and (wz1 = true)) and (wwz1 = true)) ->
-  (chars__doit__result1 = true)) and ((not (((z1 = true) and
-  (wz1 = true)) and (wwz1 = true))) -> (chars__doit__result1 = false)))
-
-axiom H37 : (chars__doit__result4 = chars__doit__result2)
-
-axiom H38 : (wwf2 = wwf1)
-
-axiom H39 : (wf2 = wf1)
-
-axiom H40 : (f2 = f1)
-
-axiom H41 : (wwz2 = wwz1)
-
-axiom H42 : (wz2 = wz1)
-
-axiom H43 : (z2 = z1)
-
-axiom H44 : (wwy2 = wwy1)
-
-axiom H45 : (wwx2 = wwx1)
-
-axiom H46 : (wy2 = wy1)
-
-axiom H47 : (wx2 = wx1)
-
-axiom H48 : (y2 = y1)
-
-axiom H49 : (x2 = x1)
-
-axiom H50 : (chars__doit__result5 = chars__doit__result3)
-
-axiom H51 : (wwf3 = wwf1)
-
-axiom H52 : (wf3 = wf1)
-
-axiom H53 : (f3 = f1)
-
-axiom H54 : (wwz3 = wwz1)
-
-axiom H55 : (wz3 = wz1)
-
-axiom H56 : (z3 = z1)
-
-axiom H57 : (wwy3 = wwy1)
-
-axiom H58 : (wwx3 = wwx1)
-
-axiom H59 : (wy3 = wy1)
-
-axiom H60 : (wx3 = wx1)
-
-axiom H61 : (y3 = y1)
-
-axiom H62 : (x3 = x1)
-
-axiom H63 : (result13 = chars__doit__result4)
-
  (* File "chars.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : (chars__doit__result4 = true)
+goal WP_parameter_def :
+  (forall x:int. forall y:int. forall wx:int. forall wy:int. forall wwx:int.
+  forall wwy:int. forall z:bool. forall wz:bool. forall wwz:bool.
+  forall f:int. forall wf:int. forall wwf:int.
+  forall chars__doit__result:bool. forall result:int. forall x1:int.
+  forall result1:int. forall y1:int. forall result2:int. forall wx1:int.
+  forall result3:int. forall wy1:int. forall result4:int. forall wwx1:int.
+  forall result5:int. forall wwy1:int. forall result6:bool. forall z1:bool.
+  forall result7:bool. forall wz1:bool. forall result8:bool.
+  forall wwz1:bool. forall result9:int. forall f1:int. forall result10:int.
+  forall wf1:int. forall result11:int. forall wwf1:int. forall result12:bool.
+  forall chars__doit__result1:bool. forall chars__doit__result2:bool.
+  forall chars__doit__result3:bool. forall x2:int. forall y2:int.
+  forall wx2:int. forall wy2:int. forall wwx2:int. forall wwy2:int.
+  forall z2:bool. forall wz2:bool. forall wwz2:bool. forall f2:int.
+  forall wf2:int. forall wwf2:int. forall chars__doit__result4:bool.
+  forall x3:int. forall y3:int. forall wx3:int. forall wy3:int.
+  forall wwx3:int. forall wwy3:int. forall z3:bool. forall wz3:bool.
+  forall wwz3:bool. forall f3:int. forall wf3:int. forall wwf3:int.
+  forall chars__doit__result5:bool.
+  (forall result13:bool. ((((((result = x) and (x1 = 65)) and
+  (in_range(x1) and (((result1 = y) and (y1 = 97)) and (in_range(y1) and
+  (((result2 = wx) and (wx1 = 65)) and (in_range1(wx1) and
+  (((result3 = wy) and (wy1 = 97)) and (in_range1(wy1) and
+  (((result4 = wwx) and (wwx1 = 65)) and (in_range2(wwx1) and
+  (((result5 = wwy) and (wwy1 = 97)) and (in_range2(wwy1) and
+  (((result6 = z) and (((x1 <  y1) and (z1 = true)) or ((not (x1 <  y1)) and
+  (z1 = false)))) and (((result7 = wz) and (((wx1 <  wy1) and
+  (wz1 = true)) or ((not (wx1 <  wy1)) and (wz1 = false)))) and
+  (((result8 = wwz) and (((wwx1 <  wwy1) and (wwz1 = true)) or
+  ((not (wwx1 <  wwy1)) and (wwz1 = false)))) and (((result9 = f) and
+  (f1 = 0)) and (in_range(f1) and (((result10 = wf) and (wf1 = 0)) and
+  (in_range1(wf1) and (((result11 = wwf) and (wwf1 = 0)) and
+  (in_range2(wwf1) and (((chars__doit__result1 = chars__doit__result2) and
+  (chars__doit__result3 = chars__doit__result1)) and
+  ((result12 = chars__doit__result) and (((((z1 = true) and (wz1 = true)) and
+  (wwz1 = true)) and (chars__doit__result1 = true)) or
+  ((not (((z1 = true) and (wz1 = true)) and (wwz1 = true))) and
+  (chars__doit__result1 = false)))))))))))))))))))))))))) and ((({
+  bool__content = chars__doit__result4 } = { bool__content =
+  chars__doit__result2 }) and ((wwf2 = wwf1) and ((wf2 = wf1) and
+  ((f2 = f1) and ((wwz2 = wwz1) and ((wz2 = wz1) and ((z2 = z1) and
+  ((wwy2 = wwy1) and ((wwx2 = wwx1) and ((wy2 = wy1) and ((wx2 = wx1) and
+  ((y2 = y1) and (x2 = x1))))))))))))) and
+  ((chars__doit__result5 = chars__doit__result3) and ((wwf3 = wwf1) and
+  ((wf3 = wf1) and ((f3 = f1) and ((wwz3 = wwz1) and ((wz3 = wz1) and
+  ((z3 = z1) and ((wwy3 = wwy1) and ((wwx3 = wwx1) and ((wy3 = wy1) and
+  ((wx3 = wx1) and ((y3 = y1) and (x3 = x1))))))))))))))) and
+  (result13 = chars__doit__result4)) -> (chars__doit__result4 = true))))

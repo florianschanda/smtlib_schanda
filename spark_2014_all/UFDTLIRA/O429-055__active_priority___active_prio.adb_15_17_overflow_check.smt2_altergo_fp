@@ -179,9 +179,6 @@ type p_type__ref = { p_type__content : us_rep
 function p_type__ref___projection(a: p_type__ref) : us_rep =
   (a).p_type__content
 
-logic self__ : integer
-
-logic o : int
-
  (* File "active_prio.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : in_range((to_rep(self__) + 1))
+goal WP_parameter_def :
+  (forall self__:integer. in_range((to_rep(self__) + 1)))

@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -484,137 +484,29 @@ logic attr__ATTRIBUTE_ADDRESS18 : int
 
 logic attr__ATTRIBUTE_ADDRESS19 : int
 
-logic present_rollrate : int
-
-logic target_rollrate : int
-
-logic aileron_movement : int
-
-logic target_bank : int
-
-logic result__ : int
-
-logic result__1 : int
-
-logic offset : int
-
-logic target_angle : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic ap__heading__roll__rate__calc_rollrate__present_rollrate : int
-
-logic result : int
-
-logic present_rollrate1 : int
-
-logic result1 : int
-
-logic offset1 : int
-
-logic result2 : int
-
-logic result__2 : int
-
-logic result3 : int
-
-logic result__3 : int
-
-logic result4 : int
-
-logic result__4 : int
-
-logic result5 : int
-
-logic result__5 : int
-
-logic result6 : int
-
-logic target_bank1 : int
-
-logic result7 : int
-
-logic result__6 : int
-
-logic result8 : int
-
-logic result__7 : int
-
-logic result9 : int
-
-logic result__8 : int
-
-logic result10 : int
-
-logic target_rollrate1 : int
-
-axiom H : in_range3(mach)
-
-axiom H1 : in_range2(present_heading)
-
-axiom H2 : in_range2(target_heading)
-
-axiom H3 : in_range1(bank)
-
-axiom H4 : (((- 180) <= 180) -> in_range7(present_rollrate))
-
-axiom H5 : (((- 180) <= 180) -> in_range7(target_rollrate))
-
-axiom H6 : (((- 45) <= 45) -> in_range4(aileron_movement))
-
-axiom H7 :
-  in_range6(ap__heading__roll__rate__calc_rollrate__present_rollrate)
-
-axiom H8 : (result = present_rollrate)
-
-axiom H9 :
-  (present_rollrate1 = ap__heading__roll__rate__calc_rollrate__present_rollrate)
-
-axiom H10 : (present_heading = c11b)
-
-axiom H11 : in_range2(c11b)
-
-axiom H12 : (target_heading = c12b)
-
-axiom H13 : in_range2(c12b)
-
-axiom H14 : (bank = c13b)
-
-axiom H15 : in_range1(c13b)
-
-axiom H16 : (((- 45) <= 45) -> in_range1(target_bank))
-
-axiom H17 : (((- 180) <= 180) -> in_range7(result__))
-
-axiom H18 : (c11b = c16b)
-
-axiom H19 : in_range2(c16b)
-
-axiom H20 : (c12b = c17b)
-
-axiom H21 : in_range2(c17b)
-
-axiom H22 : (((- 45) <= 45) -> in_range1(result__1))
-
-axiom H23 : ((0 <= 359) -> in_range2(offset))
-
-axiom H24 : ((o = heading_offset(c16b, c17b)) and in_range2(o))
-
-axiom H25 : (result1 = offset)
-
-axiom H26 : (offset1 = o)
-
-axiom H27 : (not ((40 <  offset1) and (offset1 <= 180)))
-
-axiom H28 : (not ((180 <  offset1) and (offset1 <  320)))
-
-axiom H29 : (offset1 <= 40)
-
  (* File "ap-heading-roll-rate.ads", line 8, characters 0-0 *)
-goal WP_parameter_def : in_range1(offset1)
+goal WP_parameter_def :
+  (forall present_rollrate:int. forall target_rollrate:int.
+  forall aileron_movement:int. forall target_bank:int. forall result__:int.
+  forall result__1:int. forall offset:int. forall o:int.
+  forall ap__heading__roll__rate__calc_rollrate__present_rollrate:int.
+  forall result:int. forall present_rollrate1:int. forall result1:int.
+  forall offset1:int. (in_range3(mach) -> (in_range2(present_heading) ->
+  (in_range2(target_heading) -> (in_range1(bank) -> ((((- 180) <= 180) ->
+  in_range7(present_rollrate)) -> ((((- 180) <= 180) ->
+  in_range7(target_rollrate)) -> ((((- 45) <= 45) ->
+  in_range4(aileron_movement)) ->
+  ((in_range6(ap__heading__roll__rate__calc_rollrate__present_rollrate) and
+  ((result = present_rollrate) and
+  (present_rollrate1 = ap__heading__roll__rate__calc_rollrate__present_rollrate))) ->
+  (((present_heading = c11b) and in_range2(c11b)) ->
+  (((target_heading = c12b) and in_range2(c12b)) -> (((bank = c13b) and
+  in_range1(c13b)) -> ((((- 45) <= 45) -> in_range1(target_bank)) ->
+  ((((- 180) <= 180) -> in_range7(result__)) -> (((c11b = c16b) and
+  in_range2(c16b)) -> (((c12b = c17b) and in_range2(c17b)) ->
+  ((((- 45) <= 45) -> in_range1(result__1)) -> (((0 <= 359) ->
+  in_range2(offset)) -> ((((o = heading_offset(c16b, c17b)) and
+  in_range2(o)) and (({ int__content = result1 } = { int__content = offset
+  }) and (offset1 = o))) -> ((not ((40 <  offset1) and (offset1 <= 180))) ->
+  ((not ((180 <  offset1) and (offset1 <  320))) -> ((offset1 <= 40) ->
+  in_range1(offset1)))))))))))))))))))))))

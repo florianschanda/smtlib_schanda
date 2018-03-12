@@ -632,24 +632,10 @@ axiom init_pocket__def_axiom : (init_pocket = of_fixed1(0))
 
 axiom default_salary__def_axiom : (default_salary = of_fixed2(0))
 
-logic default_v : volt
-
-logic o : volt
-
-logic us : int
-
-logic result : volt
-
-logic default_v1 : volt
-
-axiom H : (to_fixed(o) = (- 1))
-
-axiom H1 : (result = default_v)
-
-axiom H2 : (default_v1 = o)
-
-axiom H3 : (to_fixed1(of_fixed1(of_real1((-9999999999.0e-2)))) <= 9999999999)
-
  (* File "pack.ads", line 14, characters 0-0 *)
 goal WP_parameter_def :
-  ((- 999999999999999) <= to_fixed1(of_fixed1(of_real1((-9999999999.0e-2)))))
+  (forall default_v:volt. forall o:volt. forall result:volt.
+  forall default_v1:volt. (((to_fixed(o) = (- 1)) and
+  ((result = default_v) and (default_v1 = o))) ->
+  ((to_fixed1(of_fixed1(of_real1((-9999999999.0e-2)))) <= 9999999999) ->
+  ((- 999999999999999) <= to_fixed1(of_fixed1(of_real1((-9999999999.0e-2))))))))

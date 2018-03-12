@@ -137,7 +137,5 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 axiom gdebug__def_axiom : (gdebug = (- 1))
 
-logic us : int
-
  (* File "algorithm.adb", line 248, characters 0-0 *)
 goal WP_parameter_def : in_range1(1000)

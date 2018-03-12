@@ -131,11 +131,7 @@ type natural__ref = { natural__content : natural
 function natural__ref___projection(a: natural__ref) : natural =
   (a).natural__content
 
-logic temp___c_168 : int
-
-axiom H : in_range1(temp___c_168)
-
-axiom H1 : (1 <= temp___c_168)
-
  (* File "test_iterable.ads", line 20, characters 0-0 *)
-goal WP_parameter_def : ((- 2147483648) <= 1)
+goal WP_parameter_def :
+  (forall temp___c_193:int. (in_range1(temp___c_193) ->
+  ((1 <= temp___c_193) -> ((- 2147483648) <= 1))))

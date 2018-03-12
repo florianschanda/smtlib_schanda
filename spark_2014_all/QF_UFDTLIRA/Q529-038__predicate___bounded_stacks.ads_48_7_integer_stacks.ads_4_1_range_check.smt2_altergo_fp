@@ -137,13 +137,8 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 axiom default_element__def_axiom : (default_element = 0)
 
-logic temp___capacity_247 : int
-
-axiom H : in_range1(default_element)
-
-axiom H1 : in_range(temp___capacity_247)
-
-axiom H2 : (1 <= temp___capacity_247)
-
  (* File "bounded_stacks.ads", line 47, characters 0-0 *)
-goal WP_parameter_def : (1 <= 1)
+goal WP_parameter_def :
+  (forall temp___capacity_275:int. (in_range1(default_element) ->
+  (in_range(temp___capacity_275) -> ((1 <= temp___capacity_275) ->
+  (1 <= 1)))))

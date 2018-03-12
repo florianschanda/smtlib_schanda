@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -381,147 +381,21 @@ logic attr__ATTRIBUTE_ADDRESS6 : int
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
-logic target_angle : int
-
-logic k1 : int
-
-logic k2 : int
-
-logic gap : int
-
-logic scale__scale_movement__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic k11 : int
-
-logic k21 : int
-
-logic gap1 : int
-
-logic result : int
-
-logic target_angle1 : int
-
-logic result1 : int
-
-logic gap2 : int
-
-logic result2 : int
-
-logic gap3 : int
-
-logic result3 : int
-
-logic gap4 : int
-
-logic result4 : int
-
-logic k12 : int
-
-logic result5 : int
-
-logic k22 : int
-
-logic result6 : int
-
-logic k23 : int
-
-logic result7 : int
-
-logic target_angle2 : int
-
-logic result8 : int
-
-logic target_angle3 : int
-
-logic result9 : int
-
-logic scale__scale_movement__result1 : int
-
-logic scale__scale_movement__result2 : int
-
-logic scale__scale_movement__result3 : int
-
-logic target_angle4 : int
-
-logic k13 : int
-
-logic k24 : int
-
-logic gap5 : int
-
-logic scale__scale_movement__result4 : int
-
-logic target_angle5 : int
-
-logic k14 : int
-
-logic k25 : int
-
-logic gap6 : int
-
-logic scale__scale_movement__result5 : int
-
-axiom H : in_range3(mach)
-
-axiom H1 : in_range4(present)
-
-axiom H2 : in_range4(target)
-
-axiom H3 : in_range2(max)
-
-axiom H4 : (0 <  max)
-
-axiom H5 : (((- 45) <= 45) -> in_range2(target_angle))
-
-axiom H6 : (((- 2147483648) <= 2147483647) -> in_range1(k1))
-
-axiom H7 : (((- 2147483648) <= 2147483647) -> in_range1(k2))
-
-axiom H8 : (((- 2147483648) <= 2147483647) -> in_range1(gap))
-
-axiom H9 : (not (present = target))
-
-axiom H10 : ((0 <  gap4) and (gap4 <= 100))
-
-axiom H11 : (((- 2147483648) <= 2147483647) -> in_range1(gap4))
-
-axiom H12 : ((o = inverse(mach, 20)) and in_range5(o))
-
-axiom H13 : (result4 = k1)
-
-axiom H14 : (k12 = o)
-
-axiom H15 : ((o1 = gap4) and in_range4(gap4))
-
-axiom H16 : ((o2 = inverse(o1, 20)) and in_range5(o2))
-
-axiom H17 : (result5 = k2)
-
-axiom H18 : (k22 = o2)
-
-axiom H19 : ((o3 = (1 + k22)) and in_range1((1 + k22)))
-
-axiom H20 : (o4 = (o3 + k12))
-
  (* File "surfaces.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : in_range1(o4)
+goal WP_parameter_def :
+  (forall target_angle:int. forall k1:int. forall k2:int. forall gap:int.
+  forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
+  forall gap1:int. forall result:int. forall k11:int. forall result1:int.
+  forall k21:int. (in_range3(mach) -> (in_range4(present) ->
+  (in_range4(target) -> (in_range2(max) -> ((0 <  max) -> ((((- 45) <= 45) ->
+  in_range2(target_angle)) -> ((((- 2147483648) <= 2147483647) ->
+  in_range1(k1)) -> ((((- 2147483648) <= 2147483647) -> in_range1(k2)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range1(gap)) ->
+  ((not (present = target)) -> (((0 <  gap1) and (gap1 <= 100)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range1(gap1)) ->
+  ((((o = inverse(mach, 20)) and in_range5(o)) and (({ int__content = result
+  } = { int__content = k1 }) and (k11 = o))) -> (((((o1 = gap1) and
+  in_range4(gap1)) and ((o2 = inverse(o1, 20)) and in_range5(o2))) and (({
+  int__content = result1 } = { int__content = k2 }) and (k21 = o2))) ->
+  ((((o3 = (1 + k21)) and in_range1((1 + k21))) and (o4 = (o3 + k11))) ->
+  in_range1(o4)))))))))))))))))

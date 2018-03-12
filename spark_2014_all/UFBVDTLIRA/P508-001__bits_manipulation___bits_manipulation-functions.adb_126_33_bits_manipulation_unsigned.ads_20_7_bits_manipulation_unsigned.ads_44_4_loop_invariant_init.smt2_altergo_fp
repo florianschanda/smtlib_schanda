@@ -599,12 +599,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -616,6 +610,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1773,17 +1773,24 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 axiom shift_right__post_axiom : true
 
+logic rliteral3 : t1
+
+axiom rliteral_axiom3 : (tqtint1(rliteral3) = 0)
+
+logic rliteral4 : t2
+
+axiom rliteral_axiom4 : (tqtint2(rliteral4) = 0)
+
 axiom shift_right__def_axiom :
   (forall v:t.
   (forall amount:int [shift_right(v, amount)]. (in_range2(amount) ->
   ((((1 <= 32) and (32 <= 8)) -> (((amount <  8) -> (shift_right(v,
   amount) = toBig2(lsr_bv1(toSmall2(v), of_int2(amount))))) and
-  ((not (amount <  8)) -> (shift_right(v,
-  amount) = toBig2(of_int2(0)))))) and ((not ((1 <= 32) and (32 <= 8))) ->
-  ((((9 <= 32) and (32 <= 16)) -> (((amount <  16) -> (shift_right(v,
-  amount) = toBig1(lsr_bv2(toSmall1(v), of_int3(amount))))) and
-  ((not (amount <  16)) -> (shift_right(v,
-  amount) = toBig1(of_int3(0)))))) and ((not ((9 <= 32) and (32 <= 16))) ->
+  ((not (amount <  8)) -> (shift_right(v, amount) = toBig2(rliteral3))))) and
+  ((not ((1 <= 32) and (32 <= 8))) -> ((((9 <= 32) and (32 <= 16)) ->
+  (((amount <  16) -> (shift_right(v, amount) = toBig1(lsr_bv2(toSmall1(v),
+  of_int3(amount))))) and ((not (amount <  16)) -> (shift_right(v,
+  amount) = toBig1(rliteral4))))) and ((not ((9 <= 32) and (32 <= 16))) ->
   ((((17 <= 32) and (32 <= 32)) -> (shift_right(v, amount) = lsr_bv(v,
   of_int(amount)))) and ((not ((17 <= 32) and (32 <= 32))) -> (shift_right(v,
   amount) = toSmall(lsr_bv3(toBig(v), of_int4(amount)))))))))))))
@@ -1808,157 +1815,47 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 axiom lemma6__post_axiom1 : true
 
+logic rliteral5 : t
+
+axiom rliteral_axiom5 : (tqtint(rliteral5) = 0)
+
+logic rliteral6 : t
+
+axiom rliteral_axiom6 : (tqtint(rliteral6) = 4294967295)
+
+logic rliteral7 : t
+
+axiom rliteral_axiom7 : (tqtint(rliteral7) = 1)
+
 axiom lemma6__def_axiom : ((lemma61(void) = true) <->
-  (forall val__:t. ((ule(of_int(0), val__) and ule(val__,
-  of_int(4294967295))) -> ((not (val__ = of_int(0))) -> ((shift_right(val__,
-  0) = val__) and
+  (forall val__:t. ((ule(rliteral5, val__) and ule(val__, rliteral6)) ->
+  ((not (val__ = rliteral5)) -> ((shift_right(val__, 0) = val__) and
   (exists n:int. (((0 <= n) and (n <= 31)) and (((shift_right(val__,
-  n) = of_int(1)) and
+  n) = rliteral7) and
   (forall j:int. (((0 <= j) and (j <= n)) -> uge(shift_right(val__, j),
-  of_int(1))))) and
+  rliteral7)))) and
   (forall j:int. (((n <= j) and (j <= 31)) -> ule(shift_right(val__, j),
-  of_int(1))))))))))))
-
-logic result__ : int
-
-logic i : int
-
-logic bits_manipulation_unsigned__unsigned_32__functions__msb_index_slow_inline_always__result : int
-
-logic temp___453 : int
-
-logic temp___452 : int
-
-logic o : t
-
-logic o1 : t
-
-logic result__1 : int
-
-logic result : int
-
-logic i1 : int
-
-logic result1 : int
-
-logic result__2 : int
-
-logic result2 : bool
-
-logic result__3 : int
-
-logic i2 : int
-
-logic result3 : int
-
-logic i3 : int
-
-logic result4 : int
-
-logic result__4 : int
-
-logic result5 : bool
-
-logic result__5 : int
-
-logic i4 : int
-
-logic result__6 : int
-
-logic i5 : int
-
-logic result__7 : int
-
-logic i6 : int
-
-logic result__8 : int
-
-logic i7 : int
-
-logic result__9 : int
-
-logic i8 : int
-
-logic result__10 : int
-
-logic i9 : int
-
-logic result__11 : int
-
-logic i10 : int
-
-logic result__12 : int
-
-logic i11 : int
-
-logic result__13 : int
-
-logic i12 : int
-
-logic result__14 : int
-
-logic i13 : int
-
-logic result6 : int
-
-logic bits_manipulation_unsigned__unsigned_32__functions__msb_index_slow_inline_always__result1 : int
-
-logic bits_manipulation_unsigned__unsigned_32__functions__msb_index_slow_inline_always__result2 : int
-
-logic bits_manipulation_unsigned__unsigned_32__functions__msb_index_slow_inline_always__result3 : int
-
-logic result__15 : int
-
-logic i14 : int
-
-logic bits_manipulation_unsigned__unsigned_32__functions__msb_index_slow_inline_always__result4 : int
-
-logic result__16 : int
-
-logic i15 : int
-
-logic bits_manipulation_unsigned__unsigned_32__functions__msb_index_slow_inline_always__result5 : int
-
-axiom H : true
-
-axiom H1 : (not (value = of_int(0)))
-
-axiom H2 : ((0 <= 31) -> in_range1(result__))
-
-axiom H3 : (lemma6(void) = true)
-
-axiom H4 : (result = i)
-
-axiom H5 : (i1 = 0)
-
-axiom H6 : (0 <= i1)
-
-axiom H7 : (i1 <= 31)
-
-axiom H8 : (result1 = result__)
-
-axiom H9 : (result__2 = i1)
-
-axiom H10 : ((o = shift_right(value, i1)) and ((((1 <= 32) and (32 <= 8)) ->
-  (((i1 <  8) -> (o = toBig2(lsr_bv1(toSmall2(value), of_int2(i1))))) and
-  ((not (i1 <  8)) -> (o = toBig2(of_int2(0)))))) and ((not ((1 <= 32) and
-  (32 <= 8))) -> ((((9 <= 32) and (32 <= 16)) -> (((i1 <  16) ->
-  (o = toBig1(lsr_bv2(toSmall1(value), of_int3(i1))))) and
-  ((not (i1 <  16)) -> (o = toBig1(of_int3(0)))))) and ((not ((9 <= 32) and
-  (32 <= 16))) -> ((((17 <= 32) and (32 <= 32)) -> (o = lsr_bv(value,
-  of_int(i1)))) and ((not ((17 <= 32) and (32 <= 32))) ->
-  (o = toSmall(lsr_bv3(toBig(value), of_int4(i1)))))))))))
-
-axiom H11 : (((o = of_int(1)) -> (result2 = true)) and
-  ((not (o = of_int(1))) -> (result2 = false)))
-
-axiom H12 : (not (result2 = true))
-
-logic j : int
-
-axiom H13 : (0 <= j)
-
-axiom H14 : (j <= i1)
+  rliteral7)))))))))))
 
  (* File "bits_manipulation.ads", line 10, characters 0-0 *)
-goal WP_parameter_def : ugt(shift_right(value, j), of_int(1))
+goal WP_parameter_def :
+  (forall result__:int. forall i:int. forall o:t. forall result:int.
+  forall i1:int. forall result1:int. forall result__1:int.
+  forall result2:bool. ((not (value = rliteral5)) -> (((0 <= 31) ->
+  in_range1(result__)) -> ((lemma6(void) = true) -> ((({ int__content =
+  result } = { int__content = i }) and (i1 = 0)) -> (((0 <= i1) and
+  (i1 <= 31)) -> ((({ int__content = result1 } = { int__content = result__
+  }) and (result__1 = i1)) -> (((((o = shift_right(value, i1)) and
+  ((((1 <= 32) and (32 <= 8)) and (((i1 <  8) and
+  (o = toBig2(lsr_bv1(toSmall2(value), of_int2(i1))))) or
+  ((not (i1 <  8)) and (o = toBig2(rliteral3))))) or ((not ((1 <= 32) and
+  (32 <= 8))) and ((((9 <= 32) and (32 <= 16)) and (((i1 <  16) and
+  (o = toBig1(lsr_bv2(toSmall1(value), of_int3(i1))))) or
+  ((not (i1 <  16)) and (o = toBig1(rliteral4))))) or ((not ((9 <= 32) and
+  (32 <= 16))) and ((((17 <= 32) and (32 <= 32)) and (o = lsr_bv(value,
+  of_int(i1)))) or ((not ((17 <= 32) and (32 <= 32))) and
+  (o = toSmall(lsr_bv3(toBig(value), of_int4(i1))))))))))) and
+  (((o = rliteral7) and (result2 = true)) or ((not (o = rliteral7)) and
+  (result2 = false)))) and (not (result2 = true))) ->
+  (forall j:int. (((0 <= j) and (j <= i1)) -> ugt(shift_right(value, j),
+  rliteral7)))))))))))

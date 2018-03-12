@@ -236,17 +236,8 @@ axiom last__def_axiom : (last = a)
 
 axiom last__def_axiom1 : (last1 = a)
 
-logic z : int
-
-axiom H : in_range1(a)
-
-axiom H1 : in_range1(b)
-
-axiom H2 : ((0 <= 255) -> in_range2(z))
-
-axiom H3 : (not (100 <  a))
-
-axiom H4 : (0 <= a)
-
  (* File "p.ads", line 4, characters 0-0 *)
-goal WP_parameter_def : ((- 2147483648) <= 0)
+goal WP_parameter_def :
+  (forall z:int. (in_range1(a) -> (in_range1(b) -> (((0 <= 255) ->
+  in_range2(z)) -> ((not (100 <  a)) -> ((0 <= a) ->
+  ((- 2147483648) <= 0)))))))

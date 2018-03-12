@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -145,90 +145,25 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic quotient : int
-
-logic remainder : int
-
-logic temp___133 : int
-
-logic temp___132 : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic quotient1 : int
-
-logic result1 : int
-
-logic remainder1 : int
-
-logic quotient2 : int
-
-logic remainder2 : int
-
-logic result2 : int
-
-logic quotient3 : int
-
-logic result3 : int
-
-logic remainder3 : int
-
-logic quotient4 : int
-
-logic remainder4 : int
-
-logic quotient5 : int
-
-logic remainder5 : int
-
-logic quotient6 : int
-
-logic remainder6 : int
-
-logic quotient7 : int
-
-logic remainder7 : int
-
-logic quotient8 : int
-
-logic remainder8 : int
-
-logic quotient9 : int
-
-logic remainder9 : int
-
-logic quotient10 : int
-
-logic remainder10 : int
-
-logic quotient11 : int
-
-logic remainder11 : int
-
-axiom H : in_range1(dividend)
-
-axiom H1 : in_range1(divisor)
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range1(quotient))
-
-axiom H3 : (((- 2147483648) <= 2147483647) -> in_range1(remainder))
-
-axiom H4 : ((0 <  divisor) and (0 <= dividend))
-
-axiom H5 : (result = quotient)
-
-axiom H6 : (quotient1 = 0)
-
-axiom H7 : (result1 = remainder)
-
-axiom H8 : (remainder1 = dividend)
-
-axiom H9 : ((divisor <= remainder1) -> (((temp___133 = remainder1) and
-  ((temp___132 = quotient1) and ((((0 <= remainder2) and
+ (* File "linear_div.adb", line 7, characters 0-0 *)
+goal WP_parameter_def :
+  (forall quotient:int. forall remainder:int. forall temp___155:int.
+  forall temp___154:int. forall o:int. forall o1:int. forall result:int.
+  forall quotient1:int. forall result1:int. forall remainder1:int.
+  forall quotient2:int. forall remainder2:int. forall result2:int.
+  forall quotient3:int. forall result3:int. forall remainder3:int.
+  forall quotient4:int. forall remainder4:int. forall quotient5:int.
+  forall remainder5:int. forall quotient6:int. forall remainder6:int.
+  forall quotient7:int. forall remainder7:int. forall quotient8:int.
+  forall remainder8:int. forall quotient9:int. forall remainder9:int.
+  ((in_range1(dividend) and (in_range1(divisor) and
+  ((((- 2147483648) <= 2147483647) -> in_range1(quotient)) and
+  ((((- 2147483648) <= 2147483647) -> in_range1(remainder)) and
+  (((0 <  divisor) and (0 <= dividend)) and (((({ int__content = result } = {
+  int__content = quotient }) and (quotient1 = 0)) and ((({ int__content =
+  result1 } = { int__content = remainder }) and (remainder1 = dividend)) and
+  (((divisor <= remainder1) and ((((temp___155 = remainder1) and
+  ((temp___154 = quotient1) and ((((0 <= remainder2) and
   (0 <= quotient2)) and
   (((divisor * quotient2) + remainder2) = dividend)) and
   ((((((- 2147483648) <= 2147483647) -> in_range1(quotient2)) and
@@ -238,32 +173,13 @@ axiom H9 : ((divisor <= remainder1) -> (((temp___133 = remainder1) and
   (quotient3 = o))) and ((((o1 = (remainder2 - divisor)) and
   in_range1((remainder2 - divisor))) and ((remainder2 = result3) and
   (remainder3 = o1))) and (not (divisor <= remainder3)))))))) and
-  (((remainder3 = remainder6) and (quotient3 = quotient6)) and
-  ((remainder7 = remainder3) and (quotient7 = quotient3)))))
-
-axiom H10 : ((divisor <= remainder1) -> (remainder8 = remainder6))
-
-axiom H11 : ((divisor <= remainder1) -> (quotient8 = quotient6))
-
-axiom H12 : ((divisor <= remainder1) -> (remainder9 = remainder7))
-
-axiom H13 : ((divisor <= remainder1) -> (quotient9 = quotient7))
-
-axiom H14 : ((not (divisor <= remainder1)) -> (remainder1 = remainder8))
-
-axiom H15 : ((not (divisor <= remainder1)) -> (quotient1 = quotient8))
-
-axiom H16 : ((not (divisor <= remainder1)) -> (remainder9 = remainder1))
-
-axiom H17 : ((not (divisor <= remainder1)) -> (quotient9 = quotient1))
-
-axiom H18 : (remainder10 = remainder8)
-
-axiom H19 : (quotient10 = quotient8)
-
-axiom H20 : (remainder11 = remainder9)
-
-axiom H21 : (quotient11 = quotient9)
-
- (* File "linear_div.adb", line 7, characters 0-0 *)
-goal WP_parameter_def : (0 <= quotient10)
+  (((remainder3 = remainder4) and (quotient3 = quotient4)) and
+  ((remainder5 = remainder3) and (quotient5 = quotient3)))) and ((({
+  int__content = remainder6 } = { int__content = remainder4 }) and ({
+  int__content = quotient6 } = { int__content = quotient4 })) and
+  ((remainder7 = remainder5) and (quotient7 = quotient5))))) or
+  ((not (divisor <= remainder1)) and (((remainder1 = remainder6) and
+  (quotient1 = quotient6)) and ((remainder7 = remainder1) and
+  (quotient7 = quotient1))))))) and (((remainder8 = remainder6) and
+  (quotient8 = quotient6)) and ((remainder9 = remainder7) and
+  (quotient9 = quotient7))))))))) -> (0 <= quotient8)))

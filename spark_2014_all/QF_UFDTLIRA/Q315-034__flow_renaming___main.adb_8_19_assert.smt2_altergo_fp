@@ -50,11 +50,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : bool
-
-logic x1 : bool
-
-axiom H : (x = true)
-
  (* File "state.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : (x1 = true)
+goal WP_parameter_def :
+  (forall x:bool. forall x1:bool. ((x = true) -> (x1 = true)))

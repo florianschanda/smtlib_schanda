@@ -409,29 +409,10 @@ function my_subduration__ref___projection(a: my_subduration__ref) : my_subdurati
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic ms : my_subduration
-
-logic o : my_subduration
-
-logic o1 : duration
-
-logic o2 : int
-
-logic o3 : int
-
-logic result : my_subduration
-
-logic ms1 : my_subduration
-
-axiom H : (to_fixed1(o) = 0)
-
-axiom H1 : (result = ms)
-
-axiom H2 : (ms1 = o)
-
-axiom H3 : (to_fixed(o1) = to_fixed1(ms1))
-
-axiom H4 : (o2 = to_fixed(o1))
-
  (* File "fxp_true_check_3b.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : in_range1(o2)
+goal WP_parameter_def :
+  (forall ms:my_subduration. forall o:my_subduration. forall o1:duration.
+  forall o2:int. forall result:my_subduration. forall ms1:my_subduration.
+  (((to_fixed1(o) = 0) and ((result = ms) and (ms1 = o))) ->
+  (((to_fixed(o1) = to_fixed1(ms1)) and (o2 = to_fixed(o1))) ->
+  in_range1(o2))))

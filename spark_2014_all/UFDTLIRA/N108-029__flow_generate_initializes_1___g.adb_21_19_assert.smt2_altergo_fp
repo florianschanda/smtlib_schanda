@@ -119,9 +119,5 @@ axiom foo__def_axiom :
   (forall g__inst__tmp:int [foo(g__inst__tmp)]. (in_range(g__inst__tmp) ->
   (foo(g__inst__tmp) = g__inst__tmp)))
 
-logic tmp : int
-
-axiom H : in_range(tmp)
-
  (* File "g.adb", line 9, characters 0-0 *)
-goal WP_parameter_def : (foo(tmp) = 10)
+goal WP_parameter_def : (forall tmp:int. (in_range(tmp) -> (foo(tmp) = 10)))

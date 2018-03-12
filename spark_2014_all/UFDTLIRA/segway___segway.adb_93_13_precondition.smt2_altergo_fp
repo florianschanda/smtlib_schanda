@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -215,76 +215,11 @@ axiom current_speed__def_axiom :
   (in_range2(segway__speed) ->
   (current_speed(segway__speed) = segway__speed)))
 
-logic speed : int
-
-logic status : int
-
-logic temp___157 : int
-
-logic temp___156 : int
-
-logic speed1 : int
-
-logic status1 : int
-
-logic speed2 : int
-
-logic status2 : int
-
-logic speed3 : int
-
-logic status3 : int
-
-logic speed4 : int
-
-logic status4 : int
-
-logic speed5 : int
-
-logic status5 : int
-
-logic speed6 : int
-
-logic status6 : int
-
-logic speed7 : int
-
-logic status7 : int
-
-logic speed8 : int
-
-logic status8 : int
-
-logic speed9 : int
-
-logic status9 : int
-
-logic speed10 : int
-
-logic status10 : int
-
-logic speed11 : int
-
-logic status11 : int
-
-logic speed12 : int
-
-logic status12 : int
-
-axiom H : in_range2(speed)
-
-axiom H1 : in_range1(status)
-
-axiom H2 : (speed_is_valid(speed, status) = true)
-
-axiom H3 : (not (status = 0))
-
-axiom H4 : (speed_is_valid(speed2, status2) = true)
-
-axiom H5 : ((in_range2(speed2) and in_range1(status2)) and
-  (not (status2 = 0)))
-
-axiom H6 : (not (0 <  speed2))
-
  (* File "segway.ads", line 22, characters 0-0 *)
-goal WP_parameter_def : (speed_is_valid(speed2, status2) = true)
+goal WP_parameter_def :
+  (forall speed:int. forall status:int. forall speed1:int.
+  forall status1:int. (in_range2(speed) -> (in_range1(status) ->
+  ((speed_is_valid(speed, status) = true) -> ((not (status = 0)) ->
+  ((speed_is_valid(speed1, status1) = true) -> (((in_range2(speed1) and
+  in_range1(status1)) and (not (status1 = 0))) -> ((not (0 <  speed1)) ->
+  (speed_is_valid(speed1, status1) = true)))))))))

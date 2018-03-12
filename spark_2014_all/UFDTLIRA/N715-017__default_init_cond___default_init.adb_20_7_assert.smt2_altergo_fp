@@ -172,29 +172,11 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic p1 : us_rep
-
-logic p2 : us_rep1
-
-logic p3 : us_rep2
-
-logic glob : us_private
-
-logic glob1 : us_private
-
-axiom H : (simple_priv_ok(p1) = true)
-
-axiom H1 : (wrong_priv_ok(p2) = true)
-
-axiom H2 : (priv_with_glob_ok(p3, glob) = true)
-
-axiom H3 : (simple_priv_ok(p1) = true)
-
-axiom H4 : (wrong_priv_ok(p2) = true)
-
-axiom H5 : (priv_with_glob_ok(p3, glob) = true)
-
-axiom H6 : (simple_priv_ok(p1) = true)
-
  (* File "default_init.ads", line 99, characters 0-0 *)
-goal WP_parameter_def : (wrong_priv_ok(p2) = true)
+goal WP_parameter_def :
+  (forall p1:us_rep. forall p2:us_rep1. forall p3:us_rep2.
+  forall glob:us_private. ((simple_priv_ok(p1) = true) ->
+  ((wrong_priv_ok(p2) = true) -> ((priv_with_glob_ok(p3, glob) = true) ->
+  ((simple_priv_ok(p1) = true) -> ((wrong_priv_ok(p2) = true) ->
+  ((priv_with_glob_ok(p3, glob) = true) -> ((simple_priv_ok(p1) = true) ->
+  (wrong_priv_ok(p2) = true)))))))))

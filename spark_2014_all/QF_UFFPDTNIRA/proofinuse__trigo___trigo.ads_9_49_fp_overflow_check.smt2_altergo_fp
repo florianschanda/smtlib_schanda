@@ -1062,29 +1062,6 @@ logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : t
-
-logic o6 : t
-
-logic o7 : t
-
-logic o8 : t
-
-logic o9 : t
-
-logic o10 : t
-
-axiom H : tqtisFinite(x)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(mul(NearestTiesToEven, x, x))
+goal WP_parameter_def : (tqtisFinite(x) -> tqtisFinite(mul(NearestTiesToEven,
+  x, x)))

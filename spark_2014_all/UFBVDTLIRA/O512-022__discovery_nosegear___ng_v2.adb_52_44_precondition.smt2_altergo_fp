@@ -691,11 +691,15 @@ axiom distancesincelastupdate__def_axiom :
 
 axiom distancefromlastclicktolastupdate__post_axiom : true
 
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 207)
+
 axiom distancefromlastclicktolastupdate__def_axiom :
   (forall ng_v2__prevcount:t. forall ng_v2__thiscount:t
   [distancefromlastclicktolastupdate(ng_v2__prevcount, ng_v2__thiscount)].
   (distancefromlastclicktolastupdate(ng_v2__prevcount,
-  ng_v2__thiscount) = mul(of_int(207), sub(ng_v2__thiscount,
+  ng_v2__thiscount) = mul(rliteral, sub(ng_v2__thiscount,
   ng_v2__prevcount))))
 
 axiom timefromlastclicktolastupdate__post_axiom : true
@@ -714,27 +718,6 @@ axiom timesincelastupdate__def_axiom :
   (timesincelastupdate(ng_v2__currtime,
   ng_v2__thistime) = sub(ng_v2__currtime, ng_v2__thistime)))
 
-logic prevtime : t
-
-logic prevcount : t
-
-logic currtime : t
-
-logic thistime : t
-
-logic thiscount : t
-
-logic o : t
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : true
-
-axiom H3 : true
-
-axiom H4 : true
-
  (* File "interfac.ads", line 66, characters 0-0 *)
-goal WP_parameter_def : (not (thistime = prevtime))
+goal WP_parameter_def :
+  (forall prevtime:t. forall thistime:t. (not (thistime = prevtime)))

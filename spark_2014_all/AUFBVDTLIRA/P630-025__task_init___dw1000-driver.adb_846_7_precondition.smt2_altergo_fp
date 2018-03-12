@@ -1007,7 +1007,15 @@ axiom coerce_axiom :
 
 type bits_1
 
-predicate in_range1(x: t) = (ule(of_int(0), x) and ule(x, of_int(1)))
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 0)
+
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 1)
+
+predicate in_range1(x: t) = (ule(rliteral1, x) and ule(x, rliteral2))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 1))
 
@@ -1042,9 +1050,13 @@ axiom inversion_axiom1 :
 
 axiom range_axiom1 : (forall x:bits_1 [to_rep1(x)]. in_range1(to_rep1(x)))
 
+logic rliteral3 : t
+
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 2)
+
 axiom coerce_axiom1 :
-  (forall x:t [to_rep1(of_rep1(x))]. (in_range1(urem(x, of_int(2))) ->
-  (to_rep1(of_rep1(x)) = urem(x, of_int(2)))))
+  (forall x:t [to_rep1(of_rep1(x))]. (in_range1(urem(x, rliteral3)) ->
+  (to_rep1(of_rep1(x)) = urem(x, rliteral3))))
 
 function to_int2(x: bits_1) : int = tqtint(to_rep1(x))
 
@@ -1053,7 +1065,11 @@ axiom range_int_axiom :
 
 type bits_2
 
-predicate in_range2(x: t) = (ule(of_int(0), x) and ule(x, of_int(3)))
+logic rliteral4 : t
+
+axiom rliteral_axiom4 : (tqtint(rliteral4) = 3)
+
+predicate in_range2(x: t) = (ule(rliteral1, x) and ule(x, rliteral4))
 
 predicate in_range_int1(x: int) = ((0 <= x) and (x <= 3))
 
@@ -1088,9 +1104,13 @@ axiom inversion_axiom2 :
 
 axiom range_axiom2 : (forall x:bits_2 [to_rep2(x)]. in_range2(to_rep2(x)))
 
+logic rliteral5 : t
+
+axiom rliteral_axiom5 : (tqtint(rliteral5) = 4)
+
 axiom coerce_axiom2 :
-  (forall x:t [to_rep2(of_rep2(x))]. (in_range2(urem(x, of_int(4))) ->
-  (to_rep2(of_rep2(x)) = urem(x, of_int(4)))))
+  (forall x:t [to_rep2(of_rep2(x))]. (in_range2(urem(x, rliteral5)) ->
+  (to_rep2(of_rep2(x)) = urem(x, rliteral5))))
 
 function to_int3(x: bits_2) : int = tqtint(to_rep2(x))
 
@@ -1142,7 +1162,15 @@ axiom range_int_axiom2 :
 
 type bits_13
 
-predicate in_range3(x: t1) = (ule1(of_int1(0), x) and ule1(x, of_int1(8191)))
+logic rliteral6 : t1
+
+axiom rliteral_axiom6 : (tqtint1(rliteral6) = 0)
+
+logic rliteral7 : t1
+
+axiom rliteral_axiom7 : (tqtint1(rliteral7) = 8191)
+
+predicate in_range3(x: t1) = (ule1(rliteral6, x) and ule1(x, rliteral7))
 
 predicate in_range_int2(x: int) = ((0 <= x) and (x <= 8191))
 
@@ -1177,9 +1205,13 @@ axiom inversion_axiom4 :
 
 axiom range_axiom4 : (forall x:bits_13 [to_rep4(x)]. in_range3(to_rep4(x)))
 
+logic rliteral8 : t1
+
+axiom rliteral_axiom8 : (tqtint1(rliteral8) = 8192)
+
 axiom coerce_axiom4 :
-  (forall x:t1 [to_rep4(of_rep4(x))]. (in_range3(urem1(x, of_int1(8192))) ->
-  (to_rep4(of_rep4(x)) = urem1(x, of_int1(8192)))))
+  (forall x:t1 [to_rep4(of_rep4(x))]. (in_range3(urem1(x, rliteral8)) ->
+  (to_rep4(of_rep4(x)) = urem1(x, rliteral8))))
 
 function to_int5(x: bits_13) : int = tqtint1(to_rep4(x))
 
@@ -1228,24 +1260,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,bits_8) farray, int, int, (int,bits_8) farray, int,
-  int -> (int,bits_8) farray
-
-axiom concat_def :
-  (forall a:(int,bits_8) farray. forall b:(int,bits_8) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : bits_8, int -> (int,bits_8) farray
-
-axiom singleton_def :
-  (forall v:bits_8.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq9 : (int,bits_8) farray, int, int, (int,bits_8) farray, int,
   int -> bool
 
@@ -1256,17 +1270,17 @@ axiom bool_eq_def8 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep3((a[temp___idx_132])) = to_rep3((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep3((a[temp___idx_154])) = to_rep3((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq9(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep3((a[temp___idx_132])) = to_rep3((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep3((a[temp___idx_154])) = to_rep3((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq9(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1276,37 +1290,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep3((a[temp___idx_132])) = to_rep3((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,bits_8) farray, int, int, (int,bits_8) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,bits_8) farray. forall b:(int,bits_8) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq9(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,bits_8) farray. forall b:(int,bits_8) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq9(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and ult(to_rep3((a[(i + 1)])), to_rep3((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,bits_8) farray. forall b:(int,bits_8) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq9(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and ugt(to_rep3((a[(j + 1)])), to_rep3((b[(i + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep3((a[temp___idx_154])) = to_rep3((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type natural
 
@@ -1563,7 +1549,11 @@ function aon_cfg1_type__ref___projection(a: aon_cfg1_type__ref) : us_rep =
 
 type bits_3
 
-predicate in_range5(x: t) = (ule(of_int(0), x) and ule(x, of_int(7)))
+logic rliteral9 : t
+
+axiom rliteral_axiom9 : (tqtint(rliteral9) = 7)
+
+predicate in_range5(x: t) = (ule(rliteral1, x) and ule(x, rliteral9))
 
 predicate in_range_int3(x: int) = ((0 <= x) and (x <= 7))
 
@@ -1598,9 +1588,13 @@ axiom inversion_axiom5 :
 
 axiom range_axiom5 : (forall x:bits_3 [to_rep5(x)]. in_range5(to_rep5(x)))
 
+logic rliteral10 : t
+
+axiom rliteral_axiom10 : (tqtint(rliteral10) = 8)
+
 axiom coerce_axiom5 :
-  (forall x:t [to_rep5(of_rep5(x))]. (in_range5(urem(x, of_int(8))) ->
-  (to_rep5(of_rep5(x)) = urem(x, of_int(8)))))
+  (forall x:t [to_rep5(of_rep5(x))]. (in_range5(urem(x, rliteral10)) ->
+  (to_rep5(of_rep5(x)) = urem(x, rliteral10))))
 
 function to_int6(x: bits_3) : int = tqtint(to_rep5(x))
 
@@ -1609,7 +1603,11 @@ axiom range_int_axiom4 :
 
 type bits_4
 
-predicate in_range6(x: t) = (ule(of_int(0), x) and ule(x, of_int(15)))
+logic rliteral11 : t
+
+axiom rliteral_axiom11 : (tqtint(rliteral11) = 15)
+
+predicate in_range6(x: t) = (ule(rliteral1, x) and ule(x, rliteral11))
 
 predicate in_range_int4(x: int) = ((0 <= x) and (x <= 15))
 
@@ -1644,9 +1642,13 @@ axiom inversion_axiom6 :
 
 axiom range_axiom6 : (forall x:bits_4 [to_rep6(x)]. in_range6(to_rep6(x)))
 
+logic rliteral12 : t
+
+axiom rliteral_axiom12 : (tqtint(rliteral12) = 16)
+
 axiom coerce_axiom6 :
-  (forall x:t [to_rep6(of_rep6(x))]. (in_range6(urem(x, of_int(16))) ->
-  (to_rep6(of_rep6(x)) = urem(x, of_int(16)))))
+  (forall x:t [to_rep6(of_rep6(x))]. (in_range6(urem(x, rliteral12)) ->
+  (to_rep6(of_rep6(x)) = urem(x, rliteral12))))
 
 function to_int7(x: bits_4) : int = tqtint(to_rep6(x))
 
@@ -2153,531 +2155,159 @@ function tTdataSP1__ref___projection(a: tTdataSP1__ref) : tTdataSP1 =
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic half_xtal_cycles_per_lp_osc_cycle : t1
-
-logic pmsc_ctrl0_reg__split_fields : bits_2
-
-logic pmsc_ctrl0_reg__split_fields1 : bits_2
-
-logic pmsc_ctrl0_reg__split_fields2 : bits_2
-
-logic pmsc_ctrl0_reg__split_fields3 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields4 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields5 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields6 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields7 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields8 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields9 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields10 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields11 : bits_4
-
-logic pmsc_ctrl0_reg__split_fields12 : bits_3
-
-logic pmsc_ctrl0_reg__split_fields13 : bits_4
-
-logic pmsc_ctrl0_reg__split_fields14 : bits_3
-
-logic pmsc_ctrl0_reg__split_fields15 : bits_4
-
-logic o : bits_13
-
-logic o1 : bits_1
-
-logic o2 : bits_1
-
-logic o3 : bits_1
-
-logic o4 : bits_1
-
-logic o5 : bits_1
-
-logic o6 : bits_1
-
-logic o7 : bits_13
-
-logic o8 : bits_1
-
-logic o9 : bits_1
-
-logic o10 : bits_1
-
-logic o11 : bits_13
-
-logic o12 : bits_13
-
-logic o13 : bits_1
-
-logic o14 : bits_1
-
-logic o15 : bits_1
-
-logic o16 : bits_1
-
-logic o17 : bits_1
-
-logic o18 : bits_1
-
-logic o19 : bits_13
-
-logic o20 : bits_1
-
-logic o21 : bits_1
-
-logic o22 : bits_1
-
-logic o23 : bits_13
-
-logic o24 : bits_2
-
-logic o25 : bits_2
-
-logic o26 : bits_2
-
-logic o27 : bits_2
-
-logic o28 : bits_1
-
-logic o29 : bits_1
-
-logic o30 : bits_1
-
-logic o31 : bits_1
-
-logic o32 : bits_1
-
-logic o33 : bits_1
-
-logic o34 : bits_1
-
-logic o35 : bits_1
-
-logic o36 : bits_4
-
-logic o37 : bits_3
-
-logic o38 : bits_4
-
-logic o39 : bits_3
-
-logic o40 : bits_4
-
-logic temp___3342 : bits_2
-
-logic temp___33421 : bits_2
-
-logic temp___33422 : bits_2
-
-logic temp___33423 : bits_1
-
-logic temp___33424 : bits_1
-
-logic temp___33425 : bits_1
-
-logic temp___33426 : bits_1
-
-logic temp___33427 : bits_1
-
-logic temp___33428 : bits_1
-
-logic temp___33429 : bits_1
-
-logic temp___334210 : bits_1
-
-logic temp___334211 : bits_4
-
-logic temp___334212 : bits_3
-
-logic temp___334213 : bits_4
-
-logic temp___334214 : bits_3
-
-logic temp___334215 : bits_4
-
-logic o41 : bits_2
-
-logic o42 : bits_2
-
-logic o43 : bits_2
-
-logic o44 : bits_2
-
-logic o45 : bits_1
-
-logic o46 : bits_1
-
-logic o47 : bits_1
-
-logic o48 : bits_1
-
-logic o49 : bits_1
-
-logic o50 : bits_1
-
-logic o51 : bits_1
-
-logic o52 : bits_1
-
-logic o53 : bits_4
-
-logic o54 : bits_3
-
-logic o55 : bits_4
-
-logic o56 : bits_3
-
-logic o57 : bits_4
-
-logic temp___3344 : bits_2
-
-logic temp___33441 : bits_2
-
-logic temp___33442 : bits_2
-
-logic temp___33443 : bits_1
-
-logic temp___33444 : bits_1
-
-logic temp___33445 : bits_1
-
-logic temp___33446 : bits_1
-
-logic temp___33447 : bits_1
-
-logic temp___33448 : bits_1
-
-logic temp___33449 : bits_1
-
-logic temp___334410 : bits_1
-
-logic temp___334411 : bits_4
-
-logic temp___334412 : bits_3
-
-logic temp___334413 : bits_4
-
-logic temp___334414 : bits_3
-
-logic temp___334415 : bits_4
-
-logic o58 : integer
-
-logic o59 : integer
-
-logic dw1000__registers__pmsc_ctrl0__read__reg__fields : bits_2
-
-logic dw1000__registers__pmsc_ctrl0__read__reg__fields1 : bits_2
-
-logic dw1000__registers__pmsc_ctrl0__read__reg__fields2 : bits_2
-
-logic dw1000__registers__pmsc_ctrl0__read__reg__fields3 : bits_1
-
-logic dw1000__registers__pmsc_ctrl0__read__reg__fields4 : bits_1
-
-logic dw1000__registers__pmsc_ctrl0__read__reg__fields5 : bits_1
-
-logic dw1000__registers__pmsc_ctrl0__read__reg__fields6 : bits_1
-
-logic dw1000__registers__pmsc_ctrl0__read__reg__fields7 : bits_1
-
-logic dw1000__registers__pmsc_ctrl0__read__reg__fields8 : bits_1
-
-logic dw1000__registers__pmsc_ctrl0__read__reg__fields9 : bits_1
-
-logic dw1000__registers__pmsc_ctrl0__read__reg__fields10 : bits_1
-
-logic dw1000__registers__pmsc_ctrl0__read__reg__fields11 : bits_4
-
-logic dw1000__registers__pmsc_ctrl0__read__reg__fields12 : bits_3
-
-logic dw1000__registers__pmsc_ctrl0__read__reg__fields13 : bits_4
-
-logic dw1000__registers__pmsc_ctrl0__read__reg__fields14 : bits_3
-
-logic dw1000__registers__pmsc_ctrl0__read__reg__fields15 : bits_4
-
-logic result : bits_2
-
-logic result1 : bits_2
-
-logic result2 : bits_2
-
-logic result3 : bits_1
-
-logic result4 : bits_1
-
-logic result5 : bits_1
-
-logic result6 : bits_1
-
-logic result7 : bits_1
-
-logic result8 : bits_1
-
-logic result9 : bits_1
-
-logic result10 : bits_1
-
-logic result11 : bits_4
-
-logic result12 : bits_3
-
-logic result13 : bits_4
-
-logic result14 : bits_3
-
-logic result15 : bits_4
-
-logic pmsc_ctrl0_reg__split_fields16 : bits_2
-
-logic pmsc_ctrl0_reg__split_fields17 : bits_2
-
-logic pmsc_ctrl0_reg__split_fields18 : bits_2
-
-logic pmsc_ctrl0_reg__split_fields19 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields20 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields21 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields22 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields23 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields24 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields25 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields26 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields27 : bits_4
-
-logic pmsc_ctrl0_reg__split_fields28 : bits_3
-
-logic pmsc_ctrl0_reg__split_fields29 : bits_4
-
-logic pmsc_ctrl0_reg__split_fields30 : bits_3
-
-logic pmsc_ctrl0_reg__split_fields31 : bits_4
-
-logic result16 : bits_2
-
-logic result17 : bits_2
-
-logic result18 : bits_2
-
-logic result19 : bits_1
-
-logic result20 : bits_1
-
-logic result21 : bits_1
-
-logic result22 : bits_1
-
-logic result23 : bits_1
-
-logic result24 : bits_1
-
-logic result25 : bits_1
-
-logic result26 : bits_1
-
-logic result27 : bits_4
-
-logic result28 : bits_3
-
-logic result29 : bits_4
-
-logic result30 : bits_3
-
-logic result31 : bits_4
-
-logic pmsc_ctrl0_reg__split_fields32 : bits_2
-
-logic pmsc_ctrl0_reg__split_fields33 : bits_2
-
-logic pmsc_ctrl0_reg__split_fields34 : bits_2
-
-logic pmsc_ctrl0_reg__split_fields35 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields36 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields37 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields38 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields39 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields40 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields41 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields42 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields43 : bits_4
-
-logic pmsc_ctrl0_reg__split_fields44 : bits_3
-
-logic pmsc_ctrl0_reg__split_fields45 : bits_4
-
-logic pmsc_ctrl0_reg__split_fields46 : bits_3
-
-logic pmsc_ctrl0_reg__split_fields47 : bits_4
-
-logic result32 : bits_2
-
-logic result33 : bits_2
-
-logic result34 : bits_2
-
-logic result35 : bits_1
-
-logic result36 : bits_1
-
-logic result37 : bits_1
-
-logic result38 : bits_1
-
-logic result39 : bits_1
-
-logic result40 : bits_1
-
-logic result41 : bits_1
-
-logic result42 : bits_1
-
-logic result43 : bits_4
-
-logic result44 : bits_3
-
-logic result45 : bits_4
-
-logic result46 : bits_3
-
-logic result47 : bits_4
-
-logic pmsc_ctrl0_reg__split_fields48 : bits_2
-
-logic pmsc_ctrl0_reg__split_fields49 : bits_2
-
-logic pmsc_ctrl0_reg__split_fields50 : bits_2
-
-logic pmsc_ctrl0_reg__split_fields51 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields52 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields53 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields54 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields55 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields56 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields57 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields58 : bits_1
-
-logic pmsc_ctrl0_reg__split_fields59 : bits_4
-
-logic pmsc_ctrl0_reg__split_fields60 : bits_3
-
-logic pmsc_ctrl0_reg__split_fields61 : bits_4
-
-logic pmsc_ctrl0_reg__split_fields62 : bits_3
-
-logic pmsc_ctrl0_reg__split_fields63 : bits_4
-
-axiom H : true
-
-axiom H1 : (to_rep4(o) = of_int1(0))
-
-axiom H2 : (to_rep1(o1) = of_int(1))
-
-axiom H3 : (to_rep1(o2) = of_int(0))
-
-axiom H4 : (to_rep1(o3) = of_int(0))
-
-axiom H5 : (o3 = o4)
-
-axiom H6 : (o2 = o5)
-
-axiom H7 : (o1 = o6)
-
-axiom H8 : (o = o7)
-
-axiom H9 : (o8 = o4)
-
-axiom H10 : (o9 = o5)
-
-axiom H11 : (o10 = o6)
-
-axiom H12 : (o11 = o7)
-
-axiom H13 : (to_rep4(o12) = of_int1(0))
-
-axiom H14 : (to_rep1(o13) = of_int(0))
-
-axiom H15 : (to_rep1(o14) = of_int(0))
-
-axiom H16 : (to_rep1(o15) = of_int(0))
-
-axiom H17 : (o15 = o16)
-
-axiom H18 : (o14 = o17)
-
-axiom H19 : (o13 = o18)
-
-axiom H20 : (o12 = o19)
-
-axiom H21 : (o20 = o16)
-
-axiom H22 : (o21 = o17)
-
-axiom H23 : (o22 = o18)
-
-axiom H24 : (o23 = o19)
-
-axiom H25 : (result = pmsc_ctrl0_reg__split_fields)
-
-axiom H26 : (result1 = pmsc_ctrl0_reg__split_fields1)
-
-axiom H27 : (result2 = pmsc_ctrl0_reg__split_fields2)
-
-axiom H28 : (result3 = pmsc_ctrl0_reg__split_fields3)
-
-axiom H29 : (result4 = pmsc_ctrl0_reg__split_fields4)
-
-axiom H30 : (result5 = pmsc_ctrl0_reg__split_fields5)
-
-axiom H31 : (result6 = pmsc_ctrl0_reg__split_fields6)
-
-axiom H32 : (result7 = pmsc_ctrl0_reg__split_fields7)
-
-axiom H33 : (result8 = pmsc_ctrl0_reg__split_fields8)
-
-axiom H34 : (result9 = pmsc_ctrl0_reg__split_fields9)
-
-axiom H35 : (result10 = pmsc_ctrl0_reg__split_fields10)
-
-axiom H36 : (result11 = pmsc_ctrl0_reg__split_fields11)
-
-axiom H37 : (result12 = pmsc_ctrl0_reg__split_fields12)
-
-axiom H38 : (result13 = pmsc_ctrl0_reg__split_fields13)
-
-axiom H39 : (result14 = pmsc_ctrl0_reg__split_fields14)
-
-axiom H40 : (result15 = pmsc_ctrl0_reg__split_fields15)
-
-axiom H41 :
+ (* File "dw1000-driver.adb", line 812, characters 0-0 *)
+goal WP_parameter_def :
+  (forall pmsc_ctrl0_reg__split_fields:bits_2.
+  forall pmsc_ctrl0_reg__split_fields1:bits_2.
+  forall pmsc_ctrl0_reg__split_fields2:bits_2.
+  forall pmsc_ctrl0_reg__split_fields3:bits_1.
+  forall pmsc_ctrl0_reg__split_fields4:bits_1.
+  forall pmsc_ctrl0_reg__split_fields5:bits_1.
+  forall pmsc_ctrl0_reg__split_fields6:bits_1.
+  forall pmsc_ctrl0_reg__split_fields7:bits_1.
+  forall pmsc_ctrl0_reg__split_fields8:bits_1.
+  forall pmsc_ctrl0_reg__split_fields9:bits_1.
+  forall pmsc_ctrl0_reg__split_fields10:bits_1.
+  forall pmsc_ctrl0_reg__split_fields11:bits_4.
+  forall pmsc_ctrl0_reg__split_fields12:bits_3.
+  forall pmsc_ctrl0_reg__split_fields13:bits_4.
+  forall pmsc_ctrl0_reg__split_fields14:bits_3.
+  forall pmsc_ctrl0_reg__split_fields15:bits_4. forall o:bits_13.
+  forall o1:bits_1. forall o2:bits_1. forall o3:bits_1. forall o4:bits_1.
+  forall o5:bits_1. forall o6:bits_1. forall o7:bits_13. forall o8:bits_1.
+  forall o9:bits_1. forall o10:bits_1. forall o11:bits_13.
+  forall o12:bits_13. forall o13:bits_1. forall o14:bits_1.
+  forall o15:bits_1. forall o16:bits_1. forall o17:bits_1. forall o18:bits_1.
+  forall o19:bits_13. forall o20:bits_1. forall o21:bits_1.
+  forall o22:bits_1. forall o23:bits_13. forall o24:bits_2.
+  forall o25:bits_2. forall o26:bits_2. forall o27:bits_2. forall o28:bits_1.
+  forall o29:bits_1. forall o30:bits_1. forall o31:bits_1. forall o32:bits_1.
+  forall o33:bits_1. forall o34:bits_1. forall o35:bits_1. forall o36:bits_4.
+  forall o37:bits_3. forall o38:bits_4. forall o39:bits_3. forall o40:bits_4.
+  forall temp___3680:bits_2. forall temp___36801:bits_2.
+  forall temp___36802:bits_2. forall temp___36803:bits_1.
+  forall temp___36804:bits_1. forall temp___36805:bits_1.
+  forall temp___36806:bits_1. forall temp___36807:bits_1.
+  forall temp___36808:bits_1. forall temp___36809:bits_1.
+  forall temp___368010:bits_1. forall temp___368011:bits_4.
+  forall temp___368012:bits_3. forall temp___368013:bits_4.
+  forall temp___368014:bits_3. forall temp___368015:bits_4.
+  forall o41:bits_2. forall o42:bits_2. forall o43:bits_2. forall o44:bits_2.
+  forall o45:bits_1. forall o46:bits_1. forall o47:bits_1. forall o48:bits_1.
+  forall o49:bits_1. forall o50:bits_1. forall o51:bits_1. forall o52:bits_1.
+  forall o53:bits_4. forall o54:bits_3. forall o55:bits_4. forall o56:bits_3.
+  forall o57:bits_4. forall temp___3682:bits_2. forall temp___36821:bits_2.
+  forall temp___36822:bits_2. forall temp___36823:bits_1.
+  forall temp___36824:bits_1. forall temp___36825:bits_1.
+  forall temp___36826:bits_1. forall temp___36827:bits_1.
+  forall temp___36828:bits_1. forall temp___36829:bits_1.
+  forall temp___368210:bits_1. forall temp___368211:bits_4.
+  forall temp___368212:bits_3. forall temp___368213:bits_4.
+  forall temp___368214:bits_3. forall temp___368215:bits_4.
+  forall o58:integer. forall o59:integer.
+  forall dw1000__registers__pmsc_ctrl0__read__reg__fields:bits_2.
+  forall dw1000__registers__pmsc_ctrl0__read__reg__fields1:bits_2.
+  forall dw1000__registers__pmsc_ctrl0__read__reg__fields2:bits_2.
+  forall dw1000__registers__pmsc_ctrl0__read__reg__fields3:bits_1.
+  forall dw1000__registers__pmsc_ctrl0__read__reg__fields4:bits_1.
+  forall dw1000__registers__pmsc_ctrl0__read__reg__fields5:bits_1.
+  forall dw1000__registers__pmsc_ctrl0__read__reg__fields6:bits_1.
+  forall dw1000__registers__pmsc_ctrl0__read__reg__fields7:bits_1.
+  forall dw1000__registers__pmsc_ctrl0__read__reg__fields8:bits_1.
+  forall dw1000__registers__pmsc_ctrl0__read__reg__fields9:bits_1.
+  forall dw1000__registers__pmsc_ctrl0__read__reg__fields10:bits_1.
+  forall dw1000__registers__pmsc_ctrl0__read__reg__fields11:bits_4.
+  forall dw1000__registers__pmsc_ctrl0__read__reg__fields12:bits_3.
+  forall dw1000__registers__pmsc_ctrl0__read__reg__fields13:bits_4.
+  forall dw1000__registers__pmsc_ctrl0__read__reg__fields14:bits_3.
+  forall dw1000__registers__pmsc_ctrl0__read__reg__fields15:bits_4.
+  forall result:bits_2. forall result1:bits_2. forall result2:bits_2.
+  forall result3:bits_1. forall result4:bits_1. forall result5:bits_1.
+  forall result6:bits_1. forall result7:bits_1. forall result8:bits_1.
+  forall result9:bits_1. forall result10:bits_1. forall result11:bits_4.
+  forall result12:bits_3. forall result13:bits_4. forall result14:bits_3.
+  forall result15:bits_4. forall pmsc_ctrl0_reg__split_fields16:bits_2.
+  forall pmsc_ctrl0_reg__split_fields17:bits_2.
+  forall pmsc_ctrl0_reg__split_fields18:bits_2.
+  forall pmsc_ctrl0_reg__split_fields19:bits_1.
+  forall pmsc_ctrl0_reg__split_fields20:bits_1.
+  forall pmsc_ctrl0_reg__split_fields21:bits_1.
+  forall pmsc_ctrl0_reg__split_fields22:bits_1.
+  forall pmsc_ctrl0_reg__split_fields23:bits_1.
+  forall pmsc_ctrl0_reg__split_fields24:bits_1.
+  forall pmsc_ctrl0_reg__split_fields25:bits_1.
+  forall pmsc_ctrl0_reg__split_fields26:bits_1.
+  forall pmsc_ctrl0_reg__split_fields27:bits_4.
+  forall pmsc_ctrl0_reg__split_fields28:bits_3.
+  forall pmsc_ctrl0_reg__split_fields29:bits_4.
+  forall pmsc_ctrl0_reg__split_fields30:bits_3.
+  forall pmsc_ctrl0_reg__split_fields31:bits_4. forall result16:bits_2.
+  forall result17:bits_2. forall result18:bits_2. forall result19:bits_1.
+  forall result20:bits_1. forall result21:bits_1. forall result22:bits_1.
+  forall result23:bits_1. forall result24:bits_1. forall result25:bits_1.
+  forall result26:bits_1. forall result27:bits_4. forall result28:bits_3.
+  forall result29:bits_4. forall result30:bits_3. forall result31:bits_4.
+  forall pmsc_ctrl0_reg__split_fields32:bits_2.
+  forall pmsc_ctrl0_reg__split_fields33:bits_2.
+  forall pmsc_ctrl0_reg__split_fields34:bits_2.
+  forall pmsc_ctrl0_reg__split_fields35:bits_1.
+  forall pmsc_ctrl0_reg__split_fields36:bits_1.
+  forall pmsc_ctrl0_reg__split_fields37:bits_1.
+  forall pmsc_ctrl0_reg__split_fields38:bits_1.
+  forall pmsc_ctrl0_reg__split_fields39:bits_1.
+  forall pmsc_ctrl0_reg__split_fields40:bits_1.
+  forall pmsc_ctrl0_reg__split_fields41:bits_1.
+  forall pmsc_ctrl0_reg__split_fields42:bits_1.
+  forall pmsc_ctrl0_reg__split_fields43:bits_4.
+  forall pmsc_ctrl0_reg__split_fields44:bits_3.
+  forall pmsc_ctrl0_reg__split_fields45:bits_4.
+  forall pmsc_ctrl0_reg__split_fields46:bits_3.
+  forall pmsc_ctrl0_reg__split_fields47:bits_4. forall result32:bits_2.
+  forall result33:bits_2. forall result34:bits_2. forall result35:bits_1.
+  forall result36:bits_1. forall result37:bits_1. forall result38:bits_1.
+  forall result39:bits_1. forall result40:bits_1. forall result41:bits_1.
+  forall result42:bits_1. forall result43:bits_4. forall result44:bits_3.
+  forall result45:bits_4. forall result46:bits_3. forall result47:bits_4.
+  forall pmsc_ctrl0_reg__split_fields48:bits_2.
+  forall pmsc_ctrl0_reg__split_fields49:bits_2.
+  forall pmsc_ctrl0_reg__split_fields50:bits_2.
+  forall pmsc_ctrl0_reg__split_fields51:bits_1.
+  forall pmsc_ctrl0_reg__split_fields52:bits_1.
+  forall pmsc_ctrl0_reg__split_fields53:bits_1.
+  forall pmsc_ctrl0_reg__split_fields54:bits_1.
+  forall pmsc_ctrl0_reg__split_fields55:bits_1.
+  forall pmsc_ctrl0_reg__split_fields56:bits_1.
+  forall pmsc_ctrl0_reg__split_fields57:bits_1.
+  forall pmsc_ctrl0_reg__split_fields58:bits_1.
+  forall pmsc_ctrl0_reg__split_fields59:bits_4.
+  forall pmsc_ctrl0_reg__split_fields60:bits_3.
+  forall pmsc_ctrl0_reg__split_fields61:bits_4.
+  forall pmsc_ctrl0_reg__split_fields62:bits_3.
+  forall pmsc_ctrl0_reg__split_fields63:bits_4.
+  ((((to_rep4(o) = rliteral6) and ((to_rep1(o1) = rliteral2) and
+  ((to_rep1(o2) = rliteral1) and ((to_rep1(o3) = rliteral1) and
+  ((o3 = o4) and ((o2 = o5) and ((o1 = o6) and (o = o7)))))))) and
+  ((o8 = o4) and ((o9 = o5) and ((o10 = o6) and (o11 = o7))))) ->
+  ((((to_rep4(o12) = rliteral6) and ((to_rep1(o13) = rliteral1) and
+  ((to_rep1(o14) = rliteral1) and ((to_rep1(o15) = rliteral1) and
+  ((o15 = o16) and ((o14 = o17) and ((o13 = o18) and (o12 = o19)))))))) and
+  ((o20 = o16) and ((o21 = o17) and ((o22 = o18) and (o23 = o19))))) ->
+  ((((result = pmsc_ctrl0_reg__split_fields) and
+  ((result1 = pmsc_ctrl0_reg__split_fields1) and
+  ((result2 = pmsc_ctrl0_reg__split_fields2) and
+  ((result3 = pmsc_ctrl0_reg__split_fields3) and
+  ((result4 = pmsc_ctrl0_reg__split_fields4) and
+  ((result5 = pmsc_ctrl0_reg__split_fields5) and
+  ((result6 = pmsc_ctrl0_reg__split_fields6) and
+  ((result7 = pmsc_ctrl0_reg__split_fields7) and
+  ((result8 = pmsc_ctrl0_reg__split_fields8) and
+  ((result9 = pmsc_ctrl0_reg__split_fields9) and
+  ((result10 = pmsc_ctrl0_reg__split_fields10) and
+  ((result11 = pmsc_ctrl0_reg__split_fields11) and
+  ((result12 = pmsc_ctrl0_reg__split_fields12) and
+  ((result13 = pmsc_ctrl0_reg__split_fields13) and
+  ((result14 = pmsc_ctrl0_reg__split_fields14) and
+  (result15 = pmsc_ctrl0_reg__split_fields15)))))))))))))))) and
   ((pmsc_ctrl0_reg__split_fields16 = dw1000__registers__pmsc_ctrl0__read__reg__fields) and
   ((pmsc_ctrl0_reg__split_fields17 = dw1000__registers__pmsc_ctrl0__read__reg__fields1) and
   ((pmsc_ctrl0_reg__split_fields18 = dw1000__registers__pmsc_ctrl0__read__reg__fields2) and
@@ -2693,190 +2323,88 @@ axiom H41 :
   ((pmsc_ctrl0_reg__split_fields28 = dw1000__registers__pmsc_ctrl0__read__reg__fields12) and
   ((pmsc_ctrl0_reg__split_fields29 = dw1000__registers__pmsc_ctrl0__read__reg__fields13) and
   ((pmsc_ctrl0_reg__split_fields30 = dw1000__registers__pmsc_ctrl0__read__reg__fields14) and
-  (pmsc_ctrl0_reg__split_fields31 = dw1000__registers__pmsc_ctrl0__read__reg__fields15))))))))))))))))
-
-axiom H42 : (to_rep2(o24) = of_int(1))
-
-axiom H43 : (o24 = o25)
-
-axiom H44 : (pmsc_ctrl0_reg__split_fields17 = o26)
-
-axiom H45 : (pmsc_ctrl0_reg__split_fields18 = o27)
-
-axiom H46 : (pmsc_ctrl0_reg__split_fields19 = o28)
-
-axiom H47 : (pmsc_ctrl0_reg__split_fields20 = o29)
-
-axiom H48 : (pmsc_ctrl0_reg__split_fields21 = o30)
-
-axiom H49 : (pmsc_ctrl0_reg__split_fields22 = o31)
-
-axiom H50 : (pmsc_ctrl0_reg__split_fields23 = o32)
-
-axiom H51 : (pmsc_ctrl0_reg__split_fields24 = o33)
-
-axiom H52 : (pmsc_ctrl0_reg__split_fields25 = o34)
-
-axiom H53 : (pmsc_ctrl0_reg__split_fields26 = o35)
-
-axiom H54 : (pmsc_ctrl0_reg__split_fields27 = o36)
-
-axiom H55 : (pmsc_ctrl0_reg__split_fields28 = o37)
-
-axiom H56 : (pmsc_ctrl0_reg__split_fields29 = o38)
-
-axiom H57 : (pmsc_ctrl0_reg__split_fields30 = o39)
-
-axiom H58 : (pmsc_ctrl0_reg__split_fields31 = o40)
-
-axiom H59 : (temp___3342 = o25)
-
-axiom H60 : (temp___33421 = o26)
-
-axiom H61 : (temp___33422 = o27)
-
-axiom H62 : (temp___33423 = o28)
-
-axiom H63 : (temp___33424 = o29)
-
-axiom H64 : (temp___33425 = o30)
-
-axiom H65 : (temp___33426 = o31)
-
-axiom H66 : (temp___33427 = o32)
-
-axiom H67 : (temp___33428 = o33)
-
-axiom H68 : (temp___33429 = o34)
-
-axiom H69 : (temp___334210 = o35)
-
-axiom H70 : (temp___334211 = o36)
-
-axiom H71 : (temp___334212 = o37)
-
-axiom H72 : (temp___334213 = o38)
-
-axiom H73 : (temp___334214 = o39)
-
-axiom H74 : (temp___334215 = o40)
-
-axiom H75 : (result16 = pmsc_ctrl0_reg__split_fields16)
-
-axiom H76 : (result17 = pmsc_ctrl0_reg__split_fields17)
-
-axiom H77 : (result18 = pmsc_ctrl0_reg__split_fields18)
-
-axiom H78 : (result19 = pmsc_ctrl0_reg__split_fields19)
-
-axiom H79 : (result20 = pmsc_ctrl0_reg__split_fields20)
-
-axiom H80 : (result21 = pmsc_ctrl0_reg__split_fields21)
-
-axiom H81 : (result22 = pmsc_ctrl0_reg__split_fields22)
-
-axiom H82 : (result23 = pmsc_ctrl0_reg__split_fields23)
-
-axiom H83 : (result24 = pmsc_ctrl0_reg__split_fields24)
-
-axiom H84 : (result25 = pmsc_ctrl0_reg__split_fields25)
-
-axiom H85 : (result26 = pmsc_ctrl0_reg__split_fields26)
-
-axiom H86 : (result27 = pmsc_ctrl0_reg__split_fields27)
-
-axiom H87 : (result28 = pmsc_ctrl0_reg__split_fields28)
-
-axiom H88 : (result29 = pmsc_ctrl0_reg__split_fields29)
-
-axiom H89 : (result30 = pmsc_ctrl0_reg__split_fields30)
-
-axiom H90 : (result31 = pmsc_ctrl0_reg__split_fields31)
-
-axiom H91 : ((pmsc_ctrl0_reg__split_fields32 = temp___3342) and
-  ((pmsc_ctrl0_reg__split_fields33 = temp___33421) and
-  ((pmsc_ctrl0_reg__split_fields34 = temp___33422) and
-  ((pmsc_ctrl0_reg__split_fields35 = temp___33423) and
-  ((pmsc_ctrl0_reg__split_fields36 = temp___33424) and
-  ((pmsc_ctrl0_reg__split_fields37 = temp___33425) and
-  ((pmsc_ctrl0_reg__split_fields38 = temp___33426) and
-  ((pmsc_ctrl0_reg__split_fields39 = temp___33427) and
-  ((pmsc_ctrl0_reg__split_fields40 = temp___33428) and
-  ((pmsc_ctrl0_reg__split_fields41 = temp___33429) and
-  ((pmsc_ctrl0_reg__split_fields42 = temp___334210) and
-  ((pmsc_ctrl0_reg__split_fields43 = temp___334211) and
-  ((pmsc_ctrl0_reg__split_fields44 = temp___334212) and
-  ((pmsc_ctrl0_reg__split_fields45 = temp___334213) and
-  ((pmsc_ctrl0_reg__split_fields46 = temp___334214) and
-  (pmsc_ctrl0_reg__split_fields47 = temp___334215))))))))))))))))
-
-axiom H92 : (to_rep2(o41) = of_int(0))
-
-axiom H93 : (pmsc_ctrl0_reg__split_fields32 = o42)
-
-axiom H94 : (o41 = o43)
-
-axiom H95 : (pmsc_ctrl0_reg__split_fields34 = o44)
-
-axiom H96 : (pmsc_ctrl0_reg__split_fields35 = o45)
-
-axiom H97 : (pmsc_ctrl0_reg__split_fields36 = o46)
-
-axiom H98 : (pmsc_ctrl0_reg__split_fields37 = o47)
-
-axiom H99 : (pmsc_ctrl0_reg__split_fields38 = o48)
-
-axiom H100 : (pmsc_ctrl0_reg__split_fields39 = o49)
-
-axiom H101 : (pmsc_ctrl0_reg__split_fields40 = o50)
-
-axiom H102 : (pmsc_ctrl0_reg__split_fields41 = o51)
-
-axiom H103 : (pmsc_ctrl0_reg__split_fields42 = o52)
-
-axiom H104 : (pmsc_ctrl0_reg__split_fields43 = o53)
-
-axiom H105 : (pmsc_ctrl0_reg__split_fields44 = o54)
-
-axiom H106 : (pmsc_ctrl0_reg__split_fields45 = o55)
-
-axiom H107 : (pmsc_ctrl0_reg__split_fields46 = o56)
-
-axiom H108 : (pmsc_ctrl0_reg__split_fields47 = o57)
-
-axiom H109 : (temp___3344 = o42)
-
-axiom H110 : (temp___33441 = o43)
-
-axiom H111 : (temp___33442 = o44)
-
-axiom H112 : (temp___33443 = o45)
-
-axiom H113 : (temp___33444 = o46)
-
-axiom H114 : (temp___33445 = o47)
-
-axiom H115 : (temp___33446 = o48)
-
-axiom H116 : (temp___33447 = o49)
-
-axiom H117 : (temp___33448 = o50)
-
-axiom H118 : (temp___33449 = o51)
-
-axiom H119 : (temp___334410 = o52)
-
-axiom H120 : (temp___334411 = o53)
-
-axiom H121 : (temp___334412 = o54)
-
-axiom H122 : (temp___334413 = o55)
-
-axiom H123 : (temp___334414 = o56)
-
-axiom H124 : (temp___334415 = o57)
-
-axiom H125 : ((result32 = pmsc_ctrl0_reg__split_fields32) and
+  (pmsc_ctrl0_reg__split_fields31 = dw1000__registers__pmsc_ctrl0__read__reg__fields15))))))))))))))))) ->
+  (((((to_rep2(o24) = rliteral2) and ((o24 = o25) and
+  ((pmsc_ctrl0_reg__split_fields17 = o26) and
+  ((pmsc_ctrl0_reg__split_fields18 = o27) and
+  ((pmsc_ctrl0_reg__split_fields19 = o28) and
+  ((pmsc_ctrl0_reg__split_fields20 = o29) and
+  ((pmsc_ctrl0_reg__split_fields21 = o30) and
+  ((pmsc_ctrl0_reg__split_fields22 = o31) and
+  ((pmsc_ctrl0_reg__split_fields23 = o32) and
+  ((pmsc_ctrl0_reg__split_fields24 = o33) and
+  ((pmsc_ctrl0_reg__split_fields25 = o34) and
+  ((pmsc_ctrl0_reg__split_fields26 = o35) and
+  ((pmsc_ctrl0_reg__split_fields27 = o36) and
+  ((pmsc_ctrl0_reg__split_fields28 = o37) and
+  ((pmsc_ctrl0_reg__split_fields29 = o38) and
+  ((pmsc_ctrl0_reg__split_fields30 = o39) and
+  (pmsc_ctrl0_reg__split_fields31 = o40))))))))))))))))) and
+  ((temp___3680 = o25) and ((temp___36801 = o26) and
+  ((temp___36802 = o27) and ((temp___36803 = o28) and
+  ((temp___36804 = o29) and ((temp___36805 = o30) and
+  ((temp___36806 = o31) and ((temp___36807 = o32) and
+  ((temp___36808 = o33) and ((temp___36809 = o34) and
+  ((temp___368010 = o35) and ((temp___368011 = o36) and
+  ((temp___368012 = o37) and ((temp___368013 = o38) and
+  ((temp___368014 = o39) and (temp___368015 = o40))))))))))))))))) and
+  (((result16 = pmsc_ctrl0_reg__split_fields16) and
+  ((result17 = pmsc_ctrl0_reg__split_fields17) and
+  ((result18 = pmsc_ctrl0_reg__split_fields18) and
+  ((result19 = pmsc_ctrl0_reg__split_fields19) and
+  ((result20 = pmsc_ctrl0_reg__split_fields20) and
+  ((result21 = pmsc_ctrl0_reg__split_fields21) and
+  ((result22 = pmsc_ctrl0_reg__split_fields22) and
+  ((result23 = pmsc_ctrl0_reg__split_fields23) and
+  ((result24 = pmsc_ctrl0_reg__split_fields24) and
+  ((result25 = pmsc_ctrl0_reg__split_fields25) and
+  ((result26 = pmsc_ctrl0_reg__split_fields26) and
+  ((result27 = pmsc_ctrl0_reg__split_fields27) and
+  ((result28 = pmsc_ctrl0_reg__split_fields28) and
+  ((result29 = pmsc_ctrl0_reg__split_fields29) and
+  ((result30 = pmsc_ctrl0_reg__split_fields30) and
+  (result31 = pmsc_ctrl0_reg__split_fields31)))))))))))))))) and
+  ((temp___3680 = pmsc_ctrl0_reg__split_fields32) and
+  ((temp___36801 = pmsc_ctrl0_reg__split_fields33) and
+  ((temp___36802 = pmsc_ctrl0_reg__split_fields34) and
+  ((temp___36803 = pmsc_ctrl0_reg__split_fields35) and
+  ((temp___36804 = pmsc_ctrl0_reg__split_fields36) and
+  ((temp___36805 = pmsc_ctrl0_reg__split_fields37) and
+  ((temp___36806 = pmsc_ctrl0_reg__split_fields38) and
+  ((temp___36807 = pmsc_ctrl0_reg__split_fields39) and
+  ((temp___36808 = pmsc_ctrl0_reg__split_fields40) and
+  ((temp___36809 = pmsc_ctrl0_reg__split_fields41) and
+  ((temp___368010 = pmsc_ctrl0_reg__split_fields42) and
+  ((temp___368011 = pmsc_ctrl0_reg__split_fields43) and
+  ((temp___368012 = pmsc_ctrl0_reg__split_fields44) and
+  ((temp___368013 = pmsc_ctrl0_reg__split_fields45) and
+  ((temp___368014 = pmsc_ctrl0_reg__split_fields46) and
+  (temp___368015 = pmsc_ctrl0_reg__split_fields47)))))))))))))))))) ->
+  (((((to_rep2(o41) = rliteral1) and
+  ((pmsc_ctrl0_reg__split_fields32 = o42) and ((o41 = o43) and
+  ((pmsc_ctrl0_reg__split_fields34 = o44) and
+  ((pmsc_ctrl0_reg__split_fields35 = o45) and
+  ((pmsc_ctrl0_reg__split_fields36 = o46) and
+  ((pmsc_ctrl0_reg__split_fields37 = o47) and
+  ((pmsc_ctrl0_reg__split_fields38 = o48) and
+  ((pmsc_ctrl0_reg__split_fields39 = o49) and
+  ((pmsc_ctrl0_reg__split_fields40 = o50) and
+  ((pmsc_ctrl0_reg__split_fields41 = o51) and
+  ((pmsc_ctrl0_reg__split_fields42 = o52) and
+  ((pmsc_ctrl0_reg__split_fields43 = o53) and
+  ((pmsc_ctrl0_reg__split_fields44 = o54) and
+  ((pmsc_ctrl0_reg__split_fields45 = o55) and
+  ((pmsc_ctrl0_reg__split_fields46 = o56) and
+  (pmsc_ctrl0_reg__split_fields47 = o57))))))))))))))))) and
+  ((temp___3682 = o42) and ((temp___36821 = o43) and
+  ((temp___36822 = o44) and ((temp___36823 = o45) and
+  ((temp___36824 = o46) and ((temp___36825 = o47) and
+  ((temp___36826 = o48) and ((temp___36827 = o49) and
+  ((temp___36828 = o50) and ((temp___36829 = o51) and
+  ((temp___368210 = o52) and ((temp___368211 = o53) and
+  ((temp___368212 = o54) and ((temp___368213 = o55) and
+  ((temp___368214 = o56) and (temp___368215 = o57))))))))))))))))) and
+  (((result32 = pmsc_ctrl0_reg__split_fields32) and
   ((result33 = pmsc_ctrl0_reg__split_fields33) and
   ((result34 = pmsc_ctrl0_reg__split_fields34) and
   ((result35 = pmsc_ctrl0_reg__split_fields35) and
@@ -2891,30 +2419,24 @@ axiom H125 : ((result32 = pmsc_ctrl0_reg__split_fields32) and
   ((result44 = pmsc_ctrl0_reg__split_fields44) and
   ((result45 = pmsc_ctrl0_reg__split_fields45) and
   ((result46 = pmsc_ctrl0_reg__split_fields46) and
-  (result47 = pmsc_ctrl0_reg__split_fields47))))))))))))))))
-
-axiom H126 : ((pmsc_ctrl0_reg__split_fields48 = temp___3344) and
-  ((pmsc_ctrl0_reg__split_fields49 = temp___33441) and
-  ((pmsc_ctrl0_reg__split_fields50 = temp___33442) and
-  ((pmsc_ctrl0_reg__split_fields51 = temp___33443) and
-  ((pmsc_ctrl0_reg__split_fields52 = temp___33444) and
-  ((pmsc_ctrl0_reg__split_fields53 = temp___33445) and
-  ((pmsc_ctrl0_reg__split_fields54 = temp___33446) and
-  ((pmsc_ctrl0_reg__split_fields55 = temp___33447) and
-  ((pmsc_ctrl0_reg__split_fields56 = temp___33448) and
-  ((pmsc_ctrl0_reg__split_fields57 = temp___33449) and
-  ((pmsc_ctrl0_reg__split_fields58 = temp___334410) and
-  ((pmsc_ctrl0_reg__split_fields59 = temp___334411) and
-  ((pmsc_ctrl0_reg__split_fields60 = temp___334412) and
-  ((pmsc_ctrl0_reg__split_fields61 = temp___334413) and
-  ((pmsc_ctrl0_reg__split_fields62 = temp___334414) and
-  (pmsc_ctrl0_reg__split_fields63 = temp___334415))))))))))))))))
-
-axiom H127 : (to_rep(o59) = 2)
-
-axiom H128 : (to_rep(o58) = 1)
-
- (* File "dw1000-driver.adb", line 812, characters 0-0 *)
-goal WP_parameter_def : (((to_rep(o58) <= to_rep(o59)) ->
+  (result47 = pmsc_ctrl0_reg__split_fields47)))))))))))))))) and
+  ((pmsc_ctrl0_reg__split_fields48 = temp___3682) and
+  ((pmsc_ctrl0_reg__split_fields49 = temp___36821) and
+  ((pmsc_ctrl0_reg__split_fields50 = temp___36822) and
+  ((pmsc_ctrl0_reg__split_fields51 = temp___36823) and
+  ((pmsc_ctrl0_reg__split_fields52 = temp___36824) and
+  ((pmsc_ctrl0_reg__split_fields53 = temp___36825) and
+  ((pmsc_ctrl0_reg__split_fields54 = temp___36826) and
+  ((pmsc_ctrl0_reg__split_fields55 = temp___36827) and
+  ((pmsc_ctrl0_reg__split_fields56 = temp___36828) and
+  ((pmsc_ctrl0_reg__split_fields57 = temp___36829) and
+  ((pmsc_ctrl0_reg__split_fields58 = temp___368210) and
+  ((pmsc_ctrl0_reg__split_fields59 = temp___368211) and
+  ((pmsc_ctrl0_reg__split_fields60 = temp___368212) and
+  ((pmsc_ctrl0_reg__split_fields61 = temp___368213) and
+  ((pmsc_ctrl0_reg__split_fields62 = temp___368214) and
+  (pmsc_ctrl0_reg__split_fields63 = temp___368215)))))))))))))))))) ->
+  ((to_rep(o59) = 2) -> ((to_rep(o58) = 1) ->
+  (((to_rep(o58) <= to_rep(o59)) ->
   (((to_rep(o59) - to_rep(o58)) + 1) <= 256)) and
-  ((not (to_rep(o58) <= to_rep(o59))) -> (0 <= 256)))
+  ((not (to_rep(o58) <= to_rep(o59))) -> (0 <= 256)))))))))))

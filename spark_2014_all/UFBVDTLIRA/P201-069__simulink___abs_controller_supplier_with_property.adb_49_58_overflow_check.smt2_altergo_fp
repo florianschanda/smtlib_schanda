@@ -783,91 +783,29 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
-logic apply_brakes : int
+logic rliteral : t
 
-logic sum_out1 : int
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
 
-logic sum_1_out1 : int
+logic rliteral1 : t
 
-logic at_rest_switch_out1 : int
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 8)
 
-logic sum_1_out1_sat : int
+logic rliteral2 : t
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic sum_out11 : int
-
-logic sum_1_out11 : int
-
-logic sum_1_out1_sat1 : int
-
-logic result : int
-
-logic sum_out12 : int
-
-logic result1 : int
-
-logic sum_1_out1_sat2 : int
-
-logic result2 : int
-
-logic sum_1_out12 : int
-
-logic result3 : int
-
-logic sum_1_out13 : int
-
-logic result4 : int
-
-logic sum_1_out14 : int
-
-logic result5 : int
-
-logic at_rest_switch_out11 : int
-
-logic result6 : int
-
-logic at_rest_switch_out12 : int
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range3(apply_brakes))
-
-axiom H3 : (((- 2147483648) <= 2147483647) -> in_range3(sum_out1))
-
-axiom H4 : (((- 128) <= 127) -> in_range1(sum_1_out1))
-
-axiom H5 : (((- 2147483648) <= 2147483647) -> in_range3(at_rest_switch_out1))
-
-axiom H6 : (((- 2147483648) <= 2147483647) -> in_range3(sum_1_out1_sat))
-
-axiom H7 : ugt(vehicle_speed, of_int(0))
-
-axiom H8 : ((o = tqtint(mul(of_int(8), vehicle_speed))) and
-  in_range3(tqtint(mul(of_int(8), vehicle_speed))))
-
-axiom H9 : ((o1 = tqtint(mul(of_int(10), wheel_speed))) and
-  in_range3(tqtint(mul(of_int(10), wheel_speed))))
-
-axiom H10 : (o2 = (o1 - o))
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 10)
 
  (* File "abs_controller_supplier_with_property.ads", line 22, characters 0-0 *)
-goal WP_parameter_def : in_range2(o2)
+goal WP_parameter_def :
+  (forall apply_brakes:int. forall sum_out1:int. forall sum_1_out1:int.
+  forall at_rest_switch_out1:int. forall sum_1_out1_sat:int. forall o:int.
+  forall o1:int. forall o2:int. ((((- 2147483648) <= 2147483647) ->
+  in_range3(apply_brakes)) -> ((((- 2147483648) <= 2147483647) ->
+  in_range3(sum_out1)) -> ((((- 128) <= 127) -> in_range1(sum_1_out1)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range3(at_rest_switch_out1)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range3(sum_1_out1_sat)) ->
+  (ugt(vehicle_speed, rliteral) -> ((((o = tqtint(mul(rliteral1,
+  vehicle_speed))) and in_range3(tqtint(mul(rliteral1, vehicle_speed)))) and
+  (((o1 = tqtint(mul(rliteral2, wheel_speed))) and
+  in_range3(tqtint(mul(rliteral2, wheel_speed)))) and (o2 = (o1 - o)))) ->
+  in_range2(o2)))))))))

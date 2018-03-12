@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -267,55 +267,14 @@ function t__ref___projection(a: t__ref) : us_rep = (a).t__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic var__split_fields : natural
-
-logic var__split_fields1 : bool
-
-logic temp___178 : natural
-
-logic temp___1781 : bool
-
-logic o : int
-
-logic o1 : natural
-
-logic o2 : natural
-
-logic o3 : bool
-
-logic temp___181 : natural
-
-logic temp___1811 : bool
-
-logic temp___182 : natural
-
-logic temp___1821 : bool
-
-logic result : natural
-
-logic result1 : bool
-
-logic var__split_fields2 : natural
-
-logic var__split_fields3 : bool
-
-axiom H : ((to_rep(var__split_fields) = 0) and
-  (var__split_fields1 = of_int(0)))
-
-axiom H1 : ((o = (to_rep(var__split_fields) + 1)) and
-  in_range1((to_rep(var__split_fields) + 1)))
-
-axiom H2 : (to_rep(o1) = o)
-
-axiom H3 : (o1 = o2)
-
-axiom H4 : (var__split_fields1 = o3)
-
-axiom H5 : (temp___181 = o2)
-
-axiom H6 : (temp___1811 = o3)
-
-axiom H7 : (temp___1811 = true)
-
  (* File "p.adb", line 2, characters 0-0 *)
-goal WP_parameter_def : (3 <  to_rep(temp___181))
+goal WP_parameter_def :
+  (forall var__split_fields:natural. forall var__split_fields1:bool.
+  forall o:int. forall o1:natural. forall o2:natural. forall o3:bool.
+  forall temp___210:natural. forall temp___2101:bool.
+  (((to_rep(var__split_fields) = 0) and (var__split_fields1 = of_int(0))) ->
+  ((((((o = (to_rep(var__split_fields) + 1)) and
+  in_range1((to_rep(var__split_fields) + 1))) and (to_rep(o1) = o)) and
+  ((o1 = o2) and (var__split_fields1 = o3))) and ((temp___210 = o2) and
+  (temp___2101 = o3))) -> ((temp___2101 = true) ->
+  (3 <  to_rep(temp___210))))))

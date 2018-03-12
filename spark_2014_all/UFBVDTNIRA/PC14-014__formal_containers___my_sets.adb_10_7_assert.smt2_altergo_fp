@@ -599,12 +599,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -616,6 +610,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -2734,8 +2734,8 @@ axiom elements__post_axiom :
   })) = length({ us_split_discrs1 = { rec__my_sets__m__set__capacity =
   container; rec__my_sets__m__set__modulus = container1 }; us_split_fields1 =
   { rec__my_sets__m__set = container2 } })) and
-  (forall temp___423:int. ((in_range2(temp___423) and ((1 <= temp___423) and
-  (temp___423 <= (0 + length2(elements({ us_split_discrs1 = {
+  (forall temp___464:int. ((in_range2(temp___464) and ((1 <= temp___464) and
+  (temp___464 <= (0 + length2(elements({ us_split_discrs1 = {
   rec__my_sets__m__set__capacity = container; rec__my_sets__m__set__modulus =
   container1 }; us_split_fields1 = { rec__my_sets__m__set = container2 }
   })))))) -> (contains(model__({ us_split_discrs1 = {
@@ -2743,7 +2743,7 @@ axiom elements__post_axiom :
   container1 }; us_split_fields1 = { rec__my_sets__m__set = container2 } }),
   get(elements({ us_split_discrs1 = { rec__my_sets__m__set__capacity =
   container; rec__my_sets__m__set__modulus = container1 }; us_split_fields1 =
-  { rec__my_sets__m__set = container2 } }), temp___423)) = true)))) and
+  { rec__my_sets__m__set = container2 } }), temp___464)) = true)))) and
   (forall item:int. ((in_range6(item) and (contains(model__({
   us_split_discrs1 = { rec__my_sets__m__set__capacity = container;
   rec__my_sets__m__set__modulus = container1 }; us_split_fields1 = {
@@ -3088,272 +3088,28 @@ axiom w_get__post_axiom :
   ((in_range1(witness1) and (has_witness(container, witness1) = true)) ->
   in_range8(w_get(container, witness1)))))
 
-logic l__split_fields : us_main_type
-
-logic k__split_fields : us_main_type
-
-logic c__split_fields : count_type
-
-logic m__split_fields : us_main_type
-
-logic m__split_fields1 : us_main_type
-
-logic m__split_fields2 : us_main_type
-
-logic m__split_fields3 : us_main_type
-
-logic my_sets__test_set_pos__R2b__assume : t
-
-logic us : t
-
-logic us1 : int
-
-logic my_sets__test_set_pos__R5b__assume : t
-
-logic us2 : t
-
-logic us3 : int
-
-logic temp___1373 : count_type
-
-logic temp___1374 : count_type
-
-logic my_sets__test_set_pos__B_1__m__assume : count_type
-
-logic my_sets__test_set_pos__B_1__m__assume1 : hash_type
-
-logic my_sets__test_set_pos__B_1__m__assume2 : us_main_type
-
-logic my_sets__test_set_pos__B_2__m__assume : count_type
-
-logic my_sets__test_set_pos__B_2__m__assume1 : hash_type
-
-logic my_sets__test_set_pos__B_2__m__assume2 : us_main_type
-
-logic o : count_type
-
-logic o1 : hash_type
-
-logic o2 : us_main_type
-
-logic o3 : count_type
-
-logic o4 : hash_type
-
-logic o5 : us_main_type
-
-logic my_sets__test_set_pos__B_3__m__assume : count_type
-
-logic my_sets__test_set_pos__B_3__m__assume1 : hash_type
-
-logic my_sets__test_set_pos__B_3__m__assume2 : us_main_type
-
-logic my_sets__test_set_pos__B_4__m__assume : count_type
-
-logic my_sets__test_set_pos__B_4__m__assume1 : hash_type
-
-logic my_sets__test_set_pos__B_4__m__assume2 : us_main_type
-
-logic o6 : count_type
-
-logic o7 : hash_type
-
-logic o8 : us_main_type
-
-logic o9 : count_type
-
-logic o10 : hash_type
-
-logic o11 : us_main_type
-
-logic temp___1387 : count_type
-
-logic temp___1389 : count_type
-
-logic result : count_type
-
-logic c__split_fields1 : count_type
-
-logic result1 : count_type
-
-logic c__split_fields2 : count_type
-
-logic my_sets__m__insert__2__container__fields : us_main_type
-
-logic result2 : us_main_type
-
-logic l__split_fields1 : us_main_type
-
-logic my_sets__m__insert__2__container__fields1 : us_main_type
-
-logic result3 : us_main_type
-
-logic l__split_fields2 : us_main_type
-
-logic c__split_fields3 : count_type
-
-logic b : bool
-
-logic my_sets__m__insert__container__fields : us_main_type
-
-logic result4 : us_main_type
-
-logic l__split_fields3 : us_main_type
-
-logic my_sets__m__replace_element__container__fields : us_main_type
-
-logic result5 : us_main_type
-
-logic l__split_fields4 : us_main_type
-
-logic my_sets__m__replace__container__fields : us_main_type
-
-logic result6 : us_main_type
-
-logic l__split_fields5 : us_main_type
-
-logic my_sets__m__assign__target__fields : us_main_type
-
-logic result7 : us_main_type
-
-logic k__split_fields1 : us_main_type
-
-logic my_sets__m__move__source__fields : us_main_type
-
-logic my_sets__m__move__target__fields : us_main_type
-
-logic result8 : us_main_type
-
-logic l__split_fields6 : us_main_type
-
-logic result9 : us_main_type
-
-logic k__split_fields2 : us_main_type
-
-logic my_sets__m__assign__target__fields1 : us_main_type
-
-logic result10 : us_main_type
-
-logic k__split_fields3 : us_main_type
-
-logic my_sets__m__include__container__fields : us_main_type
-
-logic result11 : us_main_type
-
-logic l__split_fields7 : us_main_type
-
-logic my_sets__m__include__container__fields1 : us_main_type
-
-logic result12 : us_main_type
-
-logic l__split_fields8 : us_main_type
-
-logic my_sets__m__delete__container__fields : us_main_type
-
-logic result13 : us_main_type
-
-logic l__split_fields9 : us_main_type
-
-logic result14 : us_main_type
-
-logic m__split_fields4 : us_main_type
-
-logic m__split_fields5 : us_main_type
-
-logic m__split_fields6 : us_main_type
-
-logic result15 : us_main_type
-
-logic m__split_fields7 : us_main_type
-
-logic m__split_fields8 : us_main_type
-
-logic m__split_fields9 : us_main_type
-
-logic result16 : us_main_type
-
-logic m__split_fields10 : us_main_type
-
-logic m__split_fields11 : us_main_type
-
-logic m__split_fields12 : us_main_type
-
-logic result17 : us_main_type
-
-logic m__split_fields13 : us_main_type
-
-logic m__split_fields14 : us_main_type
-
-logic m__split_fields15 : us_main_type
-
-logic result18 : count_type
-
-logic c__split_fields4 : count_type
-
-logic c__split_fields5 : count_type
-
-logic my_sets__m__delete__2__container__fields : us_main_type
-
-logic result19 : us_main_type
-
-logic l__split_fields10 : us_main_type
-
-logic result20 : count_type
-
-logic c__split_fields6 : count_type
-
-logic my_sets__m__exclude__container__fields : us_main_type
-
-logic result21 : us_main_type
-
-logic l__split_fields11 : us_main_type
-
-logic my_sets__m__exclude__container__fields1 : us_main_type
-
-logic result22 : us_main_type
-
-logic l__split_fields12 : us_main_type
-
-axiom H : (my_sets__test_set_pos__R2b__assume = default_modulus(10))
-
-axiom H1 : (my_sets__test_set_pos__R2b__assume = r2b)
-
-axiom H2 : true
-
-axiom H3 : (us = r2b)
-
-axiom H4 : ((us1 = 10) and in_range1(10))
-
-axiom H5 : (((to_rep(l__split_discrs) = 10) and
+ (* File "my_sets.adb", line 177, characters 0-0 *)
+goal WP_parameter_def :
+  (forall l__split_fields:us_main_type. forall k__split_fields:us_main_type.
+  forall my_sets__test_set_pos__R2b__assume:t. forall us:t. forall us1:int.
+  forall my_sets__test_set_pos__R5b__assume:t. forall us2:t. forall us3:int.
+  (((my_sets__test_set_pos__R2b__assume = default_modulus(10)) and
+  (my_sets__test_set_pos__R2b__assume = r2b)) -> ((us = r2b) ->
+  (((us1 = 10) and in_range1(10)) -> ((((to_rep(l__split_discrs) = 10) and
   (to_rep1(l__split_discrs1) = r2b)) and (is_empty({ us_split_discrs1 = {
   rec__my_sets__m__set__capacity = l__split_discrs;
   rec__my_sets__m__set__modulus = l__split_discrs1 }; us_split_fields1 = {
-  rec__my_sets__m__set = l__split_fields } }) = true))
-
-axiom H6 : ((10 = to_rep(l__split_discrs)) and
-  (r2b = to_rep1(l__split_discrs1)))
-
-axiom H7 : (my_sets__test_set_pos__R5b__assume = default_modulus(10))
-
-axiom H8 : (my_sets__test_set_pos__R5b__assume = r5b)
-
-axiom H9 : true
-
-axiom H10 : (us2 = r5b)
-
-axiom H11 : ((us3 = 10) and in_range1(10))
-
-axiom H12 : (((to_rep(k__split_discrs) = 10) and
+  rec__my_sets__m__set = l__split_fields } }) = true)) ->
+  (((10 = to_rep(l__split_discrs)) and (r2b = to_rep1(l__split_discrs1))) ->
+  (((my_sets__test_set_pos__R5b__assume = default_modulus(10)) and
+  (my_sets__test_set_pos__R5b__assume = r5b)) -> ((us2 = r5b) ->
+  (((us3 = 10) and in_range1(10)) -> ((((to_rep(k__split_discrs) = 10) and
   (to_rep1(k__split_discrs1) = r5b)) and (is_empty({ us_split_discrs1 = {
   rec__my_sets__m__set__capacity = k__split_discrs;
   rec__my_sets__m__set__modulus = k__split_discrs1 }; us_split_fields1 = {
-  rec__my_sets__m__set = k__split_fields } }) = true))
-
-axiom H13 : ((10 = to_rep(k__split_discrs)) and
-  (r5b = to_rep1(k__split_discrs1)))
-
- (* File "my_sets.adb", line 177, characters 0-0 *)
-goal WP_parameter_def : (is_empty({ us_split_discrs1 = {
-  rec__my_sets__m__set__capacity = l__split_discrs;
-  rec__my_sets__m__set__modulus = l__split_discrs1 }; us_split_fields1 = {
-  rec__my_sets__m__set = l__split_fields } }) = true)
+  rec__my_sets__m__set = k__split_fields } }) = true)) ->
+  (((10 = to_rep(k__split_discrs)) and (r5b = to_rep1(k__split_discrs1))) ->
+  (is_empty({ us_split_discrs1 = { rec__my_sets__m__set__capacity =
+  l__split_discrs; rec__my_sets__m__set__modulus = l__split_discrs1 };
+  us_split_fields1 = { rec__my_sets__m__set = l__split_fields }
+  }) = true))))))))))))

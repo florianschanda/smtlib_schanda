@@ -509,52 +509,11 @@ logic s : tmoneyB
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic stash : money
-
-logic pocket : money
-
-logic o : money
-
-logic o1 : int
-
-logic o2 : money
-
-logic o3 : money
-
-logic stash1 : money
-
-logic pocket1 : money
-
-logic result : bool
-
-logic result1 : money
-
-logic stash2 : money
-
-logic result2 : money
-
-logic pocket2 : money
-
-logic stash3 : money
-
-logic pocket3 : money
-
-logic stash4 : money
-
-logic pocket4 : money
-
-axiom H : dynamic_property(first, 9999999999, to_fixed(s))
-
-axiom H1 : (0 <  to_fixed(s))
-
-axiom H2 : (to_fixed1(o) = to_fixed(s))
-
-axiom H3 : (o1 = to_fixed1(o))
-
-axiom H4 : (((o1 <  to_fixed1(stash)) -> (result = true)) and
-  ((not (o1 <  to_fixed1(stash))) -> (result = false)))
-
-axiom H5 : (result = true)
-
  (* File "pack.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : in_range((to_fixed1(stash) - to_fixed(s)))
+goal WP_parameter_def :
+  (forall stash:money. forall o:money. forall o1:int. forall result:bool.
+  (dynamic_property(first, 9999999999, to_fixed(s)) -> ((0 <  to_fixed(s)) ->
+  ((((to_fixed1(o) = to_fixed(s)) and (o1 = to_fixed1(o))) and
+  (((o1 <  to_fixed1(stash)) and (result = true)) or
+  ((not (o1 <  to_fixed1(stash))) and (result = false)))) ->
+  ((result = true) -> in_range((to_fixed1(stash) - to_fixed(s))))))))

@@ -111,15 +111,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic y : int
-
-logic y1 : int
-
-axiom H : in_range(x)
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(y))
-
-axiom H2 : in_range(y1)
-
  (* File "p.adb", line 20, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def :
+  (forall y:int. forall y1:int. (not (in_range(x) and
+  ((((- 2147483648) <= 2147483647) -> in_range(y)) and in_range(y1)))))

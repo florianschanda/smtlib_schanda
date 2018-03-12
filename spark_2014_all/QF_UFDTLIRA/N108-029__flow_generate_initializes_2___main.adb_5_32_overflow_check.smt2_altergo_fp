@@ -115,31 +115,10 @@ logic foo__function_guard : int, unit -> prop
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic a : int
-
-logic visible_var : int
-
-logic x : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range(x))
-
-axiom H1 : in_range(a)
-
-axiom H2 : in_range(visible_var)
-
-axiom H3 : ((o = foo(void)) and in_range(o))
-
-axiom H4 : ((o1 = (a + visible_var)) and in_range((a + visible_var)))
-
-axiom H5 : (o2 = (o1 + o))
-
  (* File "main.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : in_range(o2)
+goal WP_parameter_def :
+  (forall a:int. forall visible_var:int. forall x:int. forall o:int.
+  forall o1:int. forall o2:int. ((((- 2147483648) <= 2147483647) ->
+  in_range(x)) -> (in_range(a) -> (in_range(visible_var) ->
+  ((((o = foo(void)) and in_range(o)) and (((o1 = (a + visible_var)) and
+  in_range((a + visible_var))) and (o2 = (o1 + o)))) -> in_range(o2))))))

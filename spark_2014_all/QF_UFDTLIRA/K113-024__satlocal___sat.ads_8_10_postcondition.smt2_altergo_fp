@@ -115,75 +115,23 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic res : int
-
-logic sat__add__result : int
-
-logic o : int
-
-logic result : int
-
-logic res1 : int
-
-logic result1 : int
-
-logic res2 : int
-
-logic result2 : int
-
-logic sat__add__result1 : int
-
-logic sat__add__result2 : int
-
-logic sat__add__result3 : int
-
-logic res3 : int
-
-logic sat__add__result4 : int
-
-logic res4 : int
-
-logic sat__add__result5 : int
-
-logic result3 : int
-
-axiom H : in_range(x)
-
-axiom H1 : in_range(y)
-
-axiom H2 : ((0 <= 10000) -> in_range(res))
-
-axiom H3 : (((x + y) <  10000) -> ((o = (x + y)) and in_range((x + y))))
-
-axiom H4 : (((x + y) <  10000) -> (result = res))
-
-axiom H5 : (((x + y) <  10000) -> (res1 = o))
-
-axiom H6 : ((not ((x + y) <  10000)) -> (result1 = res))
-
-axiom H7 : ((not ((x + y) <  10000)) -> (res2 = 10000))
-
-axiom H8 : ((not ((x + y) <  10000)) -> (res1 = res2))
-
-axiom H9 : (sat__add__result1 = sat__add__result2)
-
-axiom H10 : (sat__add__result3 = sat__add__result1)
-
-axiom H11 : (result2 = sat__add__result)
-
-axiom H12 : (sat__add__result1 = res1)
-
-axiom H13 : (sat__add__result4 = sat__add__result2)
-
-axiom H14 : (res3 = res1)
-
-axiom H15 : (sat__add__result5 = sat__add__result3)
-
-axiom H16 : (res4 = res1)
-
-axiom H17 : (result3 = sat__add__result4)
-
  (* File "sat.ads", line 4, characters 0-0 *)
-goal WP_parameter_def : ((((x + y) <  10000) and
+goal WP_parameter_def :
+  (forall res:int. forall sat__add__result:int. forall o:int.
+  forall result:int. forall res1:int. forall result1:int. forall res2:int.
+  forall result2:int. forall sat__add__result1:int.
+  forall sat__add__result2:int. forall sat__add__result3:int.
+  forall res3:int. forall sat__add__result4:int. forall res4:int.
+  forall sat__add__result5:int.
+  (forall result3:int. ((in_range(x) and (in_range(y) and (((((0 <= 10000) ->
+  in_range(res)) and (((((x + y) <  10000) and (((o = (x + y)) and
+  in_range((x + y))) and ((result = res) and (res1 = o)))) or
+  ((not ((x + y) <  10000)) and (((result1 = res) and (res2 = 10000)) and
+  (res1 = res2)))) and (((sat__add__result1 = sat__add__result2) and
+  (sat__add__result3 = sat__add__result1)) and
+  ((result2 = sat__add__result) and (sat__add__result1 = res1))))) and
+  (((sat__add__result4 = sat__add__result2) and (res3 = res1)) and
+  ((sat__add__result5 = sat__add__result3) and (res4 = res1)))) and
+  (result3 = sat__add__result4)))) -> ((((x + y) <  10000) and
   (sat__add__result4 = (x + y))) or ((10000 <= (x + y)) and
-  (sat__add__result4 = 10000)))
+  (sat__add__result4 = 10000))))))

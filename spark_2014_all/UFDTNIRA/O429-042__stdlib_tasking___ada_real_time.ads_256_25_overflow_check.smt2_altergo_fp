@@ -405,40 +405,12 @@ logic ts : us_rep
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : duration
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : duration
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-axiom H : ((o1 = ts_sc(ts)) and (in_range1(o1) and
-  (o1 = to_int(to_fixed(to_duration__2(ts))))))
-
-axiom H1 : (o2 = (o1 * 1000000000))
-
-axiom H2 : (o3 = o2)
-
-axiom H3 : (to_fixed(o4) = o3)
-
-axiom H4 : (o5 = to_fixed(o4))
-
-axiom H5 : (o = to_duration__2(ts))
-
-axiom H6 : (o6 = to_fixed(o))
-
-axiom H7 : (o7 = (o6 - o5))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(o7)
+goal WP_parameter_def :
+  (forall o:duration. forall o1:int. forall o2:int. forall o3:int.
+  forall o4:duration. forall o5:int. forall o6:int. forall o7:int.
+  ((((((((o1 = ts_sc(ts)) and (in_range1(o1) and
+  (o1 = to_int(to_fixed(to_duration__2(ts)))))) and
+  (o2 = (o1 * 1000000000))) and (o3 = o2)) and (to_fixed(o4) = o3)) and
+  (o5 = to_fixed(o4))) and (((o = to_duration__2(ts)) and
+  (o6 = to_fixed(o))) and (o7 = (o6 - o5)))) -> in_range(o7)))

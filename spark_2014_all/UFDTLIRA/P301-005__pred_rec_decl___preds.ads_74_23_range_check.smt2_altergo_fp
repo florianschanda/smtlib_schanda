@@ -198,16 +198,7 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic x__split_fields : rec_int_bad
-
-logic temp___387 : int
-
-logic temp___389 : rec_int_bad
-
-axiom H : (in_range(i45s) and ((((- 2147483648) <= i45s) and
-  (i45s <= (- 1))) or ((1 <= i45s) and (i45s <= 2147483647))))
-
-axiom H1 : true
-
  (* File "preds.adb", line 63, characters 0-0 *)
-goal WP_parameter_def : in_range(0)
+goal WP_parameter_def : ((in_range(i45s) and ((((- 2147483648) <= i45s) and
+  (i45s <= (- 1))) or ((1 <= i45s) and (i45s <= 2147483647)))) ->
+  in_range(0))

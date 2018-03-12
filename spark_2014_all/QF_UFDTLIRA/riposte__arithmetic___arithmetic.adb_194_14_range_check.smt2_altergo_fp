@@ -135,29 +135,7 @@ logic n : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic arithmetic__abs_test_c__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic result : int
-
-logic arithmetic__abs_test_c__result1 : int
-
-logic arithmetic__abs_test_c__result2 : int
-
-logic arithmetic__abs_test_c__result3 : int
-
-logic arithmetic__abs_test_c__result4 : int
-
-logic arithmetic__abs_test_c__result5 : int
-
-axiom H : in_range(n)
-
-axiom H1 : ((o = abs_int(n)) and in_range(abs_int(n)))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range1(o)
+goal WP_parameter_def :
+  (forall o:int. (in_range(n) -> (((o = abs_int(n)) and
+  in_range(abs_int(n))) -> in_range1(o))))

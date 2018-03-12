@@ -197,69 +197,22 @@ logic b : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic one : int
-
-logic r__split_fields : integer
-
-logic o : integer
-
-logic o1 : integer
-
-logic temp___166 : integer
-
-logic o2 : integer
-
-logic o3 : integer
-
-logic temp___167 : integer
-
-logic result : integer
-
-logic r__split_fields1 : integer
-
-logic result1 : integer
-
-logic r__split_fields2 : integer
-
-logic r__split_fields3 : integer
-
-logic r__split_fields4 : integer
-
-axiom H : in_range(one)
-
-axiom H1 : in_range(b)
-
-axiom H2 : (one = 1)
-
-axiom H3 : ((b = 1) -> (to_rep(o) = one))
-
-axiom H4 : ((b = 1) -> (o = o1))
-
-axiom H5 : ((b = 1) -> (temp___166 = o1))
-
-axiom H6 : ((b = 1) -> (result = r__split_fields))
-
-axiom H7 : ((b = 1) -> (temp___166 = r__split_fields1))
-
-axiom H8 : ((not (b = 1)) -> (to_rep(o2) = one))
-
-axiom H9 : ((not (b = 1)) -> (o2 = o3))
-
-axiom H10 : ((not (b = 1)) -> (temp___167 = o3))
-
-axiom H11 : ((not (b = 1)) -> (result1 = r__split_fields))
-
-axiom H12 : ((not (b = 1)) -> (temp___167 = r__split_fields2))
-
-axiom H13 : ((not (b = 1)) -> (r__split_fields1 = r__split_fields2))
-
-axiom H14 : (r__split_fields3 = r__split_fields1)
-
-axiom H15 : (r__split_fields4 = r__split_fields1)
-
-axiom H16 : (b = 1)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (bool_eq2({ us_split_fields1 = {
-  rec__rec_aggregate__r1__x = r__split_fields3 } }, { us_split_fields1 = {
-  rec__rec_aggregate__r1__x = of_rep(one) } }) = true)
+goal WP_parameter_def :
+  (forall one:int. forall r__split_fields:integer. forall o:integer.
+  forall o1:integer. forall temp___192:integer. forall o2:integer.
+  forall o3:integer. forall temp___193:integer. forall result:integer.
+  forall r__split_fields1:integer. forall result1:integer.
+  forall r__split_fields2:integer. forall r__split_fields3:integer.
+  forall r__split_fields4:integer. ((in_range(one) and (in_range(b) and
+  ((one = 1) and ((((b = 1) and ((((to_rep(o) = one) and (o = o1)) and
+  (temp___192 = o1)) and ((result = r__split_fields) and
+  (temp___192 = r__split_fields1)))) or ((not (b = 1)) and
+  (((((to_rep(o2) = one) and (o2 = o3)) and (temp___193 = o3)) and
+  ((result1 = r__split_fields) and (temp___193 = r__split_fields2))) and
+  (r__split_fields1 = r__split_fields2)))) and
+  ((r__split_fields3 = r__split_fields1) and
+  (r__split_fields4 = r__split_fields1)))))) -> ((b = 1) -> (bool_eq2({
+  us_split_fields1 = { rec__rec_aggregate__r1__x = r__split_fields3 } }, {
+  us_split_fields1 = { rec__rec_aggregate__r1__x = of_rep(one) }
+  }) = true))))

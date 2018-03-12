@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -223,43 +223,21 @@ logic r : integer
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic one : int
-
-logic rec_aggregate__f1__result : integer
-
-logic result : integer
-
-logic rec_aggregate__f1__result1 : integer
-
-logic rec_aggregate__f1__result2 : integer
-
-logic rec_aggregate__f1__result3 : integer
-
-logic rec_aggregate__f1__result4 : integer
-
-logic rec_aggregate__f1__result5 : integer
-
-logic result1 : integer
-
-axiom H : in_range1(one)
-
-axiom H1 : (one = 1)
-
-axiom H2 : (rec_aggregate__f1__result2 = rec_aggregate__f1__result1)
-
-axiom H3 : (rec_aggregate__f1__result3 = rec_aggregate__f1__result1)
-
-axiom H4 : (result = rec_aggregate__f1__result)
-
-axiom H5 : (rec_aggregate__f1__result1 = r)
-
-axiom H6 : (rec_aggregate__f1__result4 = rec_aggregate__f1__result2)
-
-axiom H7 : (rec_aggregate__f1__result5 = rec_aggregate__f1__result3)
-
-axiom H8 : (result1 = rec_aggregate__f1__result4)
-
  (* File "rec_aggregate.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (bool_eq3({ us_split_fields1 = {
-  rec__rec_aggregate__r1__x = rec_aggregate__f1__result4 } }, {
-  us_split_fields1 = { rec__rec_aggregate__r1__x = r } }) = true)
+goal WP_parameter_def :
+  (forall one:int. forall rec_aggregate__f1__result:integer.
+  forall result:integer. forall rec_aggregate__f1__result1:integer.
+  forall rec_aggregate__f1__result2:integer.
+  forall rec_aggregate__f1__result3:integer.
+  forall rec_aggregate__f1__result4:integer.
+  forall rec_aggregate__f1__result5:integer.
+  (forall result1:integer. ((in_range1(one) and ((one = 1) and
+  (((((rec_aggregate__f1__result2 = rec_aggregate__f1__result1) and
+  (rec_aggregate__f1__result3 = rec_aggregate__f1__result1)) and
+  ((result = rec_aggregate__f1__result) and
+  (r = rec_aggregate__f1__result1))) and
+  ((rec_aggregate__f1__result4 = rec_aggregate__f1__result2) and
+  (rec_aggregate__f1__result5 = rec_aggregate__f1__result3))) and
+  (result1 = rec_aggregate__f1__result4)))) -> (bool_eq3({ us_split_fields1 =
+  { rec__rec_aggregate__r1__x = rec_aggregate__f1__result4 } }, {
+  us_split_fields1 = { rec__rec_aggregate__r1__x = r } }) = true))))

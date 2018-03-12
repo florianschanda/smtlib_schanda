@@ -107,11 +107,5 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic dummy1 : int
-
-axiom H : in_range(dummy1)
-
-axiom H1 : in_range(dummy1)
-
  (* File "p.adb", line 13, characters 0-0 *)
 goal WP_parameter_def : true

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -214,24 +214,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -242,17 +224,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -262,37 +244,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 logic to_rep1 : integer -> int
 
@@ -650,60 +604,60 @@ logic c__attr__constrained : bool
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic temp___String_Literal_805 : unit -> (int,character) farray
+logic temp___String_Literal_891 : unit -> (int,character) farray
 
-axiom temp___String_Literal_805__def_axiom :
-  (((((((((((((((((((((((to_rep((temp___String_Literal_805(void)[1])) = 69) and
-  (to_rep((temp___String_Literal_805(void)[2])) = 114)) and
-  (to_rep((temp___String_Literal_805(void)[3])) = 114)) and
-  (to_rep((temp___String_Literal_805(void)[4])) = 111)) and
-  (to_rep((temp___String_Literal_805(void)[5])) = 114)) and
-  (to_rep((temp___String_Literal_805(void)[6])) = 32)) and
-  (to_rep((temp___String_Literal_805(void)[7])) = 111)) and
-  (to_rep((temp___String_Literal_805(void)[8])) = 110)) and
-  (to_rep((temp___String_Literal_805(void)[9])) = 32)) and
-  (to_rep((temp___String_Literal_805(void)[10])) = 83)) and
-  (to_rep((temp___String_Literal_805(void)[11])) = 116)) and
-  (to_rep((temp___String_Literal_805(void)[12])) = 97)) and
-  (to_rep((temp___String_Literal_805(void)[13])) = 110)) and
-  (to_rep((temp___String_Literal_805(void)[14])) = 100)) and
-  (to_rep((temp___String_Literal_805(void)[15])) = 97)) and
-  (to_rep((temp___String_Literal_805(void)[16])) = 114)) and
-  (to_rep((temp___String_Literal_805(void)[17])) = 100)) and
-  (to_rep((temp___String_Literal_805(void)[18])) = 95)) and
-  (to_rep((temp___String_Literal_805(void)[19])) = 73)) and
-  (to_rep((temp___String_Literal_805(void)[20])) = 110)) and
-  (to_rep((temp___String_Literal_805(void)[21])) = 112)) and
-  (to_rep((temp___String_Literal_805(void)[22])) = 117)) and
-  (to_rep((temp___String_Literal_805(void)[23])) = 116))
+axiom temp___String_Literal_891__def_axiom :
+  (((((((((((((((((((((((to_rep((temp___String_Literal_891(void)[1])) = 69) and
+  (to_rep((temp___String_Literal_891(void)[2])) = 114)) and
+  (to_rep((temp___String_Literal_891(void)[3])) = 114)) and
+  (to_rep((temp___String_Literal_891(void)[4])) = 111)) and
+  (to_rep((temp___String_Literal_891(void)[5])) = 114)) and
+  (to_rep((temp___String_Literal_891(void)[6])) = 32)) and
+  (to_rep((temp___String_Literal_891(void)[7])) = 111)) and
+  (to_rep((temp___String_Literal_891(void)[8])) = 110)) and
+  (to_rep((temp___String_Literal_891(void)[9])) = 32)) and
+  (to_rep((temp___String_Literal_891(void)[10])) = 83)) and
+  (to_rep((temp___String_Literal_891(void)[11])) = 116)) and
+  (to_rep((temp___String_Literal_891(void)[12])) = 97)) and
+  (to_rep((temp___String_Literal_891(void)[13])) = 110)) and
+  (to_rep((temp___String_Literal_891(void)[14])) = 100)) and
+  (to_rep((temp___String_Literal_891(void)[15])) = 97)) and
+  (to_rep((temp___String_Literal_891(void)[16])) = 114)) and
+  (to_rep((temp___String_Literal_891(void)[17])) = 100)) and
+  (to_rep((temp___String_Literal_891(void)[18])) = 95)) and
+  (to_rep((temp___String_Literal_891(void)[19])) = 73)) and
+  (to_rep((temp___String_Literal_891(void)[20])) = 110)) and
+  (to_rep((temp___String_Literal_891(void)[21])) = 112)) and
+  (to_rep((temp___String_Literal_891(void)[22])) = 117)) and
+  (to_rep((temp___String_Literal_891(void)[23])) = 116))
 
-logic temp___String_Literal_806 : unit -> (int,character) farray
+logic temp___String_Literal_892 : unit -> (int,character) farray
 
-axiom temp___String_Literal_806__def_axiom :
-  ((((((((((((((((((((((((to_rep((temp___String_Literal_806(void)[1])) = 69) and
-  (to_rep((temp___String_Literal_806(void)[2])) = 114)) and
-  (to_rep((temp___String_Literal_806(void)[3])) = 114)) and
-  (to_rep((temp___String_Literal_806(void)[4])) = 111)) and
-  (to_rep((temp___String_Literal_806(void)[5])) = 114)) and
-  (to_rep((temp___String_Literal_806(void)[6])) = 32)) and
-  (to_rep((temp___String_Literal_806(void)[7])) = 111)) and
-  (to_rep((temp___String_Literal_806(void)[8])) = 110)) and
-  (to_rep((temp___String_Literal_806(void)[9])) = 32)) and
-  (to_rep((temp___String_Literal_806(void)[10])) = 83)) and
-  (to_rep((temp___String_Literal_806(void)[11])) = 116)) and
-  (to_rep((temp___String_Literal_806(void)[12])) = 97)) and
-  (to_rep((temp___String_Literal_806(void)[13])) = 110)) and
-  (to_rep((temp___String_Literal_806(void)[14])) = 100)) and
-  (to_rep((temp___String_Literal_806(void)[15])) = 97)) and
-  (to_rep((temp___String_Literal_806(void)[16])) = 114)) and
-  (to_rep((temp___String_Literal_806(void)[17])) = 100)) and
-  (to_rep((temp___String_Literal_806(void)[18])) = 95)) and
-  (to_rep((temp___String_Literal_806(void)[19])) = 79)) and
-  (to_rep((temp___String_Literal_806(void)[20])) = 117)) and
-  (to_rep((temp___String_Literal_806(void)[21])) = 116)) and
-  (to_rep((temp___String_Literal_806(void)[22])) = 112)) and
-  (to_rep((temp___String_Literal_806(void)[23])) = 117)) and
-  (to_rep((temp___String_Literal_806(void)[24])) = 116))
+axiom temp___String_Literal_892__def_axiom :
+  ((((((((((((((((((((((((to_rep((temp___String_Literal_892(void)[1])) = 69) and
+  (to_rep((temp___String_Literal_892(void)[2])) = 114)) and
+  (to_rep((temp___String_Literal_892(void)[3])) = 114)) and
+  (to_rep((temp___String_Literal_892(void)[4])) = 111)) and
+  (to_rep((temp___String_Literal_892(void)[5])) = 114)) and
+  (to_rep((temp___String_Literal_892(void)[6])) = 32)) and
+  (to_rep((temp___String_Literal_892(void)[7])) = 111)) and
+  (to_rep((temp___String_Literal_892(void)[8])) = 110)) and
+  (to_rep((temp___String_Literal_892(void)[9])) = 32)) and
+  (to_rep((temp___String_Literal_892(void)[10])) = 83)) and
+  (to_rep((temp___String_Literal_892(void)[11])) = 116)) and
+  (to_rep((temp___String_Literal_892(void)[12])) = 97)) and
+  (to_rep((temp___String_Literal_892(void)[13])) = 110)) and
+  (to_rep((temp___String_Literal_892(void)[14])) = 100)) and
+  (to_rep((temp___String_Literal_892(void)[15])) = 97)) and
+  (to_rep((temp___String_Literal_892(void)[16])) = 114)) and
+  (to_rep((temp___String_Literal_892(void)[17])) = 100)) and
+  (to_rep((temp___String_Literal_892(void)[18])) = 95)) and
+  (to_rep((temp___String_Literal_892(void)[19])) = 79)) and
+  (to_rep((temp___String_Literal_892(void)[20])) = 117)) and
+  (to_rep((temp___String_Literal_892(void)[21])) = 116)) and
+  (to_rep((temp___String_Literal_892(void)[22])) = 112)) and
+  (to_rep((temp___String_Literal_892(void)[23])) = 117)) and
+  (to_rep((temp___String_Literal_892(void)[24])) = 116))
 
 type file_mode
 
@@ -774,72 +728,19 @@ axiom is_standard_file__def_axiom :
   ((is_standard_file(file) = true) <-> (((is_standard_input(file) = true) or
   (is_standard_output(file) = true)) or (is_standard_error(file) = true))))
 
-logic standard_input : us_rep
-
-logic standard_output : us_rep
-
-logic standard_error : us_rep
-
-logic c__split_discrs : file_status
-
-logic o : bool
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : bool
-
-logic o5 : bool
-
-logic result : bool
-
-logic standard_input1 : us_rep
-
-logic standard_output1 : us_rep
-
-logic standard_error1 : us_rep
-
-logic standard_input2 : us_rep
-
-logic c__split_discrs1 : file_status
-
-logic result1 : bool
-
-logic standard_output2 : us_rep
-
-logic result2 : bool
-
-logic standard_error2 : us_rep
-
-logic result3 : bool
-
-logic result4 : bool
-
-axiom H : ((((((is_readable(standard_input) = true) and
-  (is_writable(standard_output) = true)) and
-  (is_writable(standard_error) = true)) and (status(standard_input) = 1)) and
-  (status(standard_output) = 1)) and (status(standard_error) = 1))
-
-axiom H1 : (((is_readable(standard_input) = true) and
-  (is_writable(standard_output) = true)) and
-  (is_writable(standard_error) = true))
-
-axiom H2 : ((c__attr__constrained = false) and
-  (to_rep2(c__split_discrs) = 3))
-
-axiom H3 : (o = end_of_file(standard_input))
-
-axiom H4 : (((not (o = true)) -> (result = true)) and ((o = true) ->
-  (result = false)))
-
-axiom H5 : (result = true)
-
-axiom H6 : (((is_writable(standard_error1) = true) and
-  (is_writable(standard_output1) = true)) and
-  (is_readable(standard_input1) = true))
-
  (* File "spark-text_io.ads", line 80, characters 0-0 *)
-goal WP_parameter_def : (is_readable(standard_input1) = true)
+goal WP_parameter_def :
+  (forall standard_input:us_rep. forall standard_output:us_rep.
+  forall standard_error:us_rep. forall c__split_discrs:file_status.
+  forall o:bool. forall result:bool. forall standard_input1:us_rep.
+  forall standard_output1:us_rep. forall standard_error1:us_rep.
+  ((((is_readable(standard_input) = true) and
+  (is_writable(standard_output) = true)) and
+  (is_writable(standard_error) = true)) ->
+  (((c__attr__constrained = false) and (to_rep2(c__split_discrs) = 3)) ->
+  (((o = end_of_file(standard_input)) and (((not (o = true)) and
+  (result = true)) or ((o = true) and (result = false)))) ->
+  ((result = true) -> ((((is_writable(standard_error1) = true) and
+  (is_writable(standard_output1) = true)) and
+  (is_readable(standard_input1) = true)) ->
+  (is_readable(standard_input1) = true)))))))

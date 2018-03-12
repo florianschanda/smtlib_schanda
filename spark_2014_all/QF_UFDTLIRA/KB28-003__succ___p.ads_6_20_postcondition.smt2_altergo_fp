@@ -108,55 +108,19 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic p__id_not_a__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic result : int
-
-logic p__id_not_a__result1 : int
-
-logic p__id_not_a__result2 : int
-
-logic p__id_not_a__result3 : int
-
-logic p__id_not_a__result4 : int
-
-logic p__id_not_a__result5 : int
-
-logic result1 : int
-
-axiom H : in_range(x)
-
-axiom H1 : (not (x = 0))
-
-axiom H2 : (p__id_not_a__result1 = p__id_not_a__result2)
-
-axiom H3 : (p__id_not_a__result3 = p__id_not_a__result1)
-
-axiom H4 : ((o = x) and (not (x = 0)))
-
-axiom H5 : (o1 = (o - 1))
-
-axiom H6 : ((o2 = o1) and (not (o1 = 3)))
-
-axiom H7 : (o3 = (o2 + 1))
-
-axiom H8 : (result = p__id_not_a__result)
-
-axiom H9 : (p__id_not_a__result1 = o3)
-
-axiom H10 : (p__id_not_a__result4 = p__id_not_a__result2)
-
-axiom H11 : (p__id_not_a__result5 = p__id_not_a__result3)
-
-axiom H12 : (result1 = p__id_not_a__result4)
-
  (* File "p.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : (p__id_not_a__result4 = x)
+goal WP_parameter_def :
+  (forall p__id_not_a__result:int. forall o:int. forall o1:int.
+  forall o2:int. forall o3:int. forall result:int.
+  forall p__id_not_a__result1:int. forall p__id_not_a__result2:int.
+  forall p__id_not_a__result3:int. forall p__id_not_a__result4:int.
+  forall p__id_not_a__result5:int.
+  (forall result1:int. ((in_range(x) and ((not (x = 0)) and
+  (((((p__id_not_a__result1 = p__id_not_a__result2) and
+  (p__id_not_a__result3 = p__id_not_a__result1)) and ((((((o = x) and
+  (not (x = 0))) and (o1 = (o - 1))) and ((o2 = o1) and (not (o1 = 3)))) and
+  (o3 = (o2 + 1))) and ((result = p__id_not_a__result) and
+  (p__id_not_a__result1 = o3)))) and
+  ((p__id_not_a__result4 = p__id_not_a__result2) and
+  (p__id_not_a__result5 = p__id_not_a__result3))) and
+  (result1 = p__id_not_a__result4)))) -> (p__id_not_a__result4 = x))))

@@ -213,7 +213,5 @@ logic i1b1 : integer
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : int
-
  (* File "pred.adb", line 4, characters 0-0 *)
 goal WP_parameter_def : in_range((to_rep(i1b) + 2))

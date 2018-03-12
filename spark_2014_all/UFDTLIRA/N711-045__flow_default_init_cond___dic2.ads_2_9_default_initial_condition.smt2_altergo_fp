@@ -113,13 +113,7 @@ axiom foo__post_axiom : true
 axiom foo__def_axiom :
   (forall par:int [foo(par)]. ((foo(par) = true) <-> (par = 0)))
 
-logic us : int
-
-logic temp___156 : int
-
-axiom H : ((us = 0) and in_range(0))
-
-axiom H1 : (in_range(temp___156) and (temp___156 = 0))
-
  (* File "dic2.ads", line 17, characters 0-0 *)
-goal WP_parameter_def : (foo(temp___156) = true)
+goal WP_parameter_def :
+  (forall us:int. forall temp___181:int. (((us = 0) and in_range(0)) ->
+  ((in_range(temp___181) and (temp___181 = 0)) -> (foo(temp___181) = true))))

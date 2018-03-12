@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -201,24 +201,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> (int,natural) farray
-
-axiom concat_def :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : natural, int -> (int,natural) farray
-
-axiom singleton_def :
-  (forall v:natural.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,natural) farray, int, int, (int,natural) farray, int,
   int -> bool
 
@@ -229,17 +211,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -249,37 +231,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type t
 
@@ -371,289 +325,45 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic a : (int,natural) farray
-
-logic bad : bool
-
-logic i : int
-
-logic j : int
-
-logic o : natural
-
-logic o1 : int
-
-logic o2 : (int,natural) farray
-
-logic temp___349 : bool
-
-logic o3 : int
-
-logic o4 : natural
-
-logic o5 : int
-
-logic o6 : bool
-
-logic j1 : int
-
-logic o7 : natural
-
-logic o8 : int
-
-logic o9 : (int,natural) farray
-
-logic temp___3491 : bool
-
-logic o10 : int
-
-logic o11 : natural
-
-logic o12 : int
-
-logic o13 : bool
-
-logic j2 : int
-
-logic j3 : int
-
-logic result : bool
-
-logic bad1 : bool
-
-logic result1 : int
-
-logic i1 : int
-
-logic result2 : (int,natural) farray
-
-logic a1 : (int,natural) farray
-
-logic result3 : bool
-
-logic bad2 : bool
-
-logic result4 : int
-
-logic j4 : int
-
-logic bad3 : bool
-
-logic j5 : int
-
-logic result5 : bool
-
-logic result6 : bool
-
-logic bad4 : bool
-
-logic bad5 : bool
-
-logic j6 : int
-
-logic bad6 : bool
-
-logic j7 : int
-
-logic bad7 : bool
-
-logic j8 : int
-
-logic bad8 : bool
-
-logic j9 : int
-
-logic bad9 : bool
-
-logic j10 : int
-
-logic bad10 : bool
-
-logic j11 : int
-
-logic result7 : int
-
-logic i2 : int
-
-logic result8 : (int,natural) farray
-
-logic a2 : (int,natural) farray
-
-logic result9 : bool
-
-logic bad11 : bool
-
-logic result10 : int
-
-logic j12 : int
-
-logic bad12 : bool
-
-logic j13 : int
-
-logic result11 : bool
-
-logic result12 : bool
-
-logic bad13 : bool
-
-logic bad14 : bool
-
-logic bad15 : bool
-
-logic bad16 : bool
-
-logic j14 : int
-
-logic bad17 : bool
-
-logic j15 : int
-
-logic bad18 : bool
-
-logic j16 : int
-
-logic bad19 : bool
-
-logic j17 : int
-
-logic bad20 : bool
-
-logic j18 : int
-
-logic bad21 : bool
-
-logic j19 : int
-
-axiom H : dynamic_property((- 2147483648), 2147483647, to_rep1(a__first),
-  to_rep1(a__last))
-
-axiom H1 : (result = bad)
-
-axiom H2 : (bad1 = of_int(0))
-
-axiom H3 : (result1 = i)
-
-axiom H4 : (i1 = 1)
-
-axiom H5 : (to_rep(o) = 0)
-
-axiom H6 : ((to_rep1(a__first) <= i1) and (i1 <= to_rep1(a__last)))
-
-axiom H7 : (o1 = i1)
-
-axiom H8 : (o2 = (a[o1 <- o]))
-
-axiom H9 : (result2 = a)
-
-axiom H10 : (a1 = o2)
-
-axiom H11 : ((i1 = to_rep1(a__first)) -> (bad1 = result3))
-
-axiom H12 : ((i1 = to_rep1(a__first)) -> (bad2 = of_int(0)))
-
-axiom H13 : ((i1 = to_rep1(a__first)) -> (j10 = j))
-
-axiom H14 : ((i1 = to_rep1(a__first)) -> (bad2 = bad9))
-
-axiom H15 : ((i1 = to_rep1(a__first)) -> (j11 = j3))
-
-axiom H16 : ((i1 = to_rep1(a__first)) -> (bad10 = bad2))
-
-axiom H17 : ((not (i1 = to_rep1(a__first))) -> (result4 = j))
-
-axiom H18 : ((not (i1 = to_rep1(a__first))) -> (j4 = to_rep1(a__first)))
-
-axiom H19 : ((not (i1 = to_rep1(a__first))) ->
-  (((to_rep1(a__first) <= j4) and (j4 <= i1)) -> (temp___349 = bad1)))
-
-axiom H20 : ((not (i1 = to_rep1(a__first))) ->
-  (((to_rep1(a__first) <= j4) and (j4 <= i1)) ->
-  ((to_rep1(a__first) <= j5) and (j5 <= i1))))
-
-axiom H21 : ((not (i1 = to_rep1(a__first))) ->
-  (((to_rep1(a__first) <= j4) and (j4 <= i1)) ->
-  ((to_rep1(a__first) <= j5) and (j5 <= to_rep1(a__last)))))
-
-axiom H22 : ((not (i1 = to_rep1(a__first))) ->
-  (((to_rep1(a__first) <= j4) and (j4 <= i1)) -> (o3 = j5)))
-
-axiom H23 : ((not (i1 = to_rep1(a__first))) ->
-  (((to_rep1(a__first) <= j4) and (j4 <= i1)) -> (o4 = (a1[o3]))))
-
-axiom H24 : ((not (i1 = to_rep1(a__first))) ->
-  (((to_rep1(a__first) <= j4) and (j4 <= i1)) -> (o5 = to_rep(o4))))
-
-axiom H25 : ((not (i1 = to_rep1(a__first))) ->
-  (((to_rep1(a__first) <= j4) and (j4 <= i1)) -> (((o5 = 0) ->
-  (o6 = true)) and ((not (o5 = 0)) -> (o6 = false)))))
-
-axiom H26 : ((not (i1 = to_rep1(a__first))) ->
-  (((to_rep1(a__first) <= j4) and (j4 <= i1)) -> (((not (o6 = true)) ->
-  (result5 = true)) and ((o6 = true) -> (result5 = false)))))
-
-axiom H27 : ((not (i1 = to_rep1(a__first))) ->
-  (((to_rep1(a__first) <= j4) and (j4 <= i1)) -> ((result5 = true) ->
-  (bad3 = result6))))
-
-axiom H28 : ((not (i1 = to_rep1(a__first))) ->
-  (((to_rep1(a__first) <= j4) and (j4 <= i1)) -> ((result5 = true) ->
-  (bad4 = of_int(1)))))
-
-axiom H29 : ((not (i1 = to_rep1(a__first))) ->
-  (((to_rep1(a__first) <= j4) and (j4 <= i1)) -> ((not (result5 = true)) ->
-  (bad4 = bad3))))
-
-axiom H30 : ((not (i1 = to_rep1(a__first))) ->
-  (((to_rep1(a__first) <= j4) and (j4 <= i1)) -> (j5 = i1)))
-
-axiom H31 : ((not (i1 = to_rep1(a__first))) ->
-  (((to_rep1(a__first) <= j4) and (j4 <= i1)) -> (j5 = j6)))
-
-axiom H32 : ((not (i1 = to_rep1(a__first))) ->
-  (((to_rep1(a__first) <= j4) and (j4 <= i1)) -> (bad4 = bad5)))
-
-axiom H33 : ((not (i1 = to_rep1(a__first))) ->
-  (((to_rep1(a__first) <= j4) and (j4 <= i1)) -> (j7 = j5)))
-
-axiom H34 : ((not (i1 = to_rep1(a__first))) ->
-  (((to_rep1(a__first) <= j4) and (j4 <= i1)) -> (bad6 = bad4)))
-
-axiom H35 : ((not (i1 = to_rep1(a__first))) ->
-  (((to_rep1(a__first) <= j4) and (j4 <= i1)) -> (j8 = j6)))
-
-axiom H36 : ((not (i1 = to_rep1(a__first))) ->
-  (((to_rep1(a__first) <= j4) and (j4 <= i1)) -> (bad7 = bad5)))
-
-axiom H37 : ((not (i1 = to_rep1(a__first))) ->
-  (((to_rep1(a__first) <= j4) and (j4 <= i1)) -> (j9 = j7)))
-
-axiom H38 : ((not (i1 = to_rep1(a__first))) ->
-  (((to_rep1(a__first) <= j4) and (j4 <= i1)) -> (bad8 = bad6)))
-
-axiom H39 : ((not (i1 = to_rep1(a__first))) ->
-  ((not ((to_rep1(a__first) <= j4) and (j4 <= i1))) -> (j4 = j8)))
-
-axiom H40 : ((not (i1 = to_rep1(a__first))) ->
-  ((not ((to_rep1(a__first) <= j4) and (j4 <= i1))) -> (bad1 = bad7)))
-
-axiom H41 : ((not (i1 = to_rep1(a__first))) ->
-  ((not ((to_rep1(a__first) <= j4) and (j4 <= i1))) -> (j9 = j4)))
-
-axiom H42 : ((not (i1 = to_rep1(a__first))) ->
-  ((not ((to_rep1(a__first) <= j4) and (j4 <= i1))) -> (bad8 = bad1)))
-
-axiom H43 : ((not (i1 = to_rep1(a__first))) -> (j10 = j8))
-
-axiom H44 : ((not (i1 = to_rep1(a__first))) -> (bad9 = bad7))
-
-axiom H45 : ((not (i1 = to_rep1(a__first))) -> (j11 = j9))
-
-axiom H46 : ((not (i1 = to_rep1(a__first))) -> (bad10 = bad8))
-
-axiom H47 : (to_rep1(a__first) <= j1)
-
-axiom H48 : (j1 <= i1)
-
  (* File "loops_static.adb", line 100, characters 0-0 *)
-goal WP_parameter_def : (to_rep1(a__first) <= j1)
+goal WP_parameter_def :
+  (forall a:(int,natural) farray. forall bad:bool. forall i:int.
+  forall j:int. forall o:natural. forall o1:int.
+  forall o2:(int,natural) farray. forall temp___384:bool. forall o3:int.
+  forall o4:natural. forall o5:int. forall o6:bool. forall j1:int.
+  forall j2:int. forall result:bool. forall bad1:bool. forall result1:int.
+  forall i1:int. forall result2:(int,natural) farray.
+  forall a1:(int,natural) farray. forall result3:bool. forall bad2:bool.
+  forall result4:int. forall j3:int. forall bad3:bool. forall j4:int.
+  forall result5:bool. forall result6:bool. forall bad4:bool.
+  forall bad5:bool. forall j5:int. forall bad6:bool. forall j6:int.
+  forall bad7:bool. forall j7:int. forall bad8:bool. forall j8:int.
+  forall bad9:bool. forall j9:int. forall bad10:bool. forall j10:int.
+  (dynamic_property((- 2147483648), 2147483647, to_rep1(a__first),
+  to_rep1(a__last)) -> (((result = bad) and (bad1 = of_int(0))) -> ((({
+  int__content = result1 } = { int__content = i }) and (i1 = 1)) ->
+  ((((to_rep(o) = 0) and ((((to_rep1(a__first) <= i1) and
+  (i1 <= to_rep1(a__last))) and (o1 = i1)) and (o2 = (a[o1 <- o])))) and (({
+  map__content = result2 } = { map__content = a }) and (a1 = o2))) ->
+  ((((i1 = to_rep1(a__first)) and (((bad1 = result3) and
+  (bad2 = of_int(0))) and ((({ int__content = j9 } = { int__content = j
+  }) and (bad2 = bad9)) and ((j10 = j2) and (bad10 = bad2))))) or
+  ((not (i1 = to_rep1(a__first))) and (((({ int__content = result4 } = {
+  int__content = j }) and (j3 = to_rep1(a__first))) and
+  ((((to_rep1(a__first) <= j3) and (j3 <= i1)) and ((((temp___384 = bad1) and
+  (((to_rep1(a__first) <= j4) and (j4 <= i1)) and
+  (((((((((to_rep1(a__first) <= j4) and (j4 <= to_rep1(a__last))) and
+  (o3 = j4)) and (o4 = (a1[o3]))) and (o5 = to_rep(o4))) and (((o5 = 0) and
+  (o6 = true)) or ((not (o5 = 0)) and (o6 = false)))) and
+  (((not (o6 = true)) and (result5 = true)) or ((o6 = true) and
+  (result5 = false)))) and (((result5 = true) and ((bad3 = result6) and
+  (bad4 = of_int(1)))) or ((not (result5 = true)) and (bad4 = bad3)))) and
+  (j4 = i1)))) and (((j4 = j5) and (bad4 = bad5)) and ((j6 = j4) and
+  (bad6 = bad4)))) and ((({ int__content = j7 } = { int__content = j5 }) and
+  ({ bool__content = bad7 } = { bool__content = bad5 })) and ((j8 = j6) and
+  (bad8 = bad6))))) or ((not ((to_rep1(a__first) <= j3) and (j3 <= i1))) and
+  (((j3 = j7) and (bad1 = bad7)) and ((j8 = j3) and (bad8 = bad1)))))) and
+  ((({ int__content = j9 } = { int__content = j7 }) and ({ bool__content =
+  bad9 } = { bool__content = bad7 })) and ((j10 = j8) and
+  (bad10 = bad8)))))) -> (((to_rep1(a__first) <= j1) and (j1 <= i1)) ->
+  (to_rep1(a__first) <= j1))))))))

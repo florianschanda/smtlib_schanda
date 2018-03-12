@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -307,34 +307,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def :
-  (forall v:bool. forall v1:value. forall v2:value.
-  (forall i:int [(singleton({ us_split_fields1 = {
-  rec__arrays_of_records__basic_record__flag = v;
-  rec__arrays_of_records__basic_record__first_value = v1;
-  rec__arrays_of_records__basic_record__second_value = v2 } }, i)[i])].
-  ((singleton({ us_split_fields1 = {
-  rec__arrays_of_records__basic_record__flag = v;
-  rec__arrays_of_records__basic_record__first_value = v1;
-  rec__arrays_of_records__basic_record__second_value = v2 } }, i)[i]) = {
-  us_split_fields1 = { rec__arrays_of_records__basic_record__flag = v;
-  rec__arrays_of_records__basic_record__first_value = v1;
-  rec__arrays_of_records__basic_record__second_value = v2 } })))
-
 logic bool_eq5 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -345,17 +317,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and (bool_eq4((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and (bool_eq4((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq4((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq5(a,
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq4((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq5(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -365,9 +337,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq4((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq4((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -375,118 +347,38 @@ logic i : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic a : (int,us_rep) farray
-
-logic o : value
-
-logic o1 : bool
-
-logic o2 : value
-
-logic o3 : value
-
-logic o4 : bool
-
-logic o5 : value
-
-logic o6 : value
-
-logic o7 : (int,us_rep) farray
-
-logic o8 : value
-
-logic o9 : bool
-
-logic o10 : value
-
-logic o11 : value
-
-logic o12 : bool
-
-logic o13 : value
-
-logic o14 : value
-
-logic o15 : (int,us_rep) farray
-
-logic result : (int,us_rep) farray
-
-logic a1 : (int,us_rep) farray
-
-logic result1 : (int,us_rep) farray
-
-logic a2 : (int,us_rep) farray
-
-logic result2 : (int,us_rep) farray
-
-logic a3 : (int,us_rep) farray
-
-logic a4 : (int,us_rep) farray
-
-logic a5 : (int,us_rep) farray
-
-axiom H : in_range1(i)
-
-axiom H1 : (result = a)
-
-axiom H2 : (a1 = (a[i <- { us_split_fields1 = {
+ (* File "arrays_of_records.adb", line 15, characters 0-0 *)
+goal WP_parameter_def :
+  (forall a:(int,us_rep) farray. forall o:value. forall o1:bool.
+  forall o2:value. forall o3:value. forall o4:bool. forall o5:value.
+  forall o6:value. forall o7:(int,us_rep) farray. forall o8:value.
+  forall o9:bool. forall o10:value. forall o11:value. forall o12:bool.
+  forall o13:value. forall o14:value. forall o15:(int,us_rep) farray.
+  forall result:(int,us_rep) farray. forall a1:(int,us_rep) farray.
+  forall result1:(int,us_rep) farray. forall a2:(int,us_rep) farray.
+  forall result2:(int,us_rep) farray. forall a3:(int,us_rep) farray.
+  (in_range1(i) -> ((({ map__content = result } = { map__content = a }) and
+  (a1 = (a[i <- { us_split_fields1 = {
   rec__arrays_of_records__basic_record__flag = of_int(1);
   rec__arrays_of_records__basic_record__first_value =
   (((a[i])).us_split_fields1).rec__arrays_of_records__basic_record__first_value;
   rec__arrays_of_records__basic_record__second_value =
   (((a[i])).us_split_fields1).rec__arrays_of_records__basic_record__second_value
-  } }]))
-
-axiom H3 : (to_rep(o) = 42)
-
-axiom H4 :
-  ((((a1[i])).us_split_fields1).rec__arrays_of_records__basic_record__flag = o1)
-
-axiom H5 : (o = o2)
-
-axiom H6 :
-  ((((a1[i])).us_split_fields1).rec__arrays_of_records__basic_record__second_value = o3)
-
-axiom H7 : (o4 = o1)
-
-axiom H8 : (o5 = o2)
-
-axiom H9 : (o6 = o3)
-
-axiom H10 : (o7 = (a1[i <- { us_split_fields1 = {
-  rec__arrays_of_records__basic_record__flag = o4;
+  } }]))) -> ((((((to_rep(o) = 42) and
+  (((((a1[i])).us_split_fields1).rec__arrays_of_records__basic_record__flag = o1) and
+  ((o = o2) and
+  ((((a1[i])).us_split_fields1).rec__arrays_of_records__basic_record__second_value = o3)))) and
+  ((o4 = o1) and ((o5 = o2) and (o6 = o3)))) and (o7 = (a1[i <- {
+  us_split_fields1 = { rec__arrays_of_records__basic_record__flag = o4;
   rec__arrays_of_records__basic_record__first_value = o5;
-  rec__arrays_of_records__basic_record__second_value = o6 } }]))
-
-axiom H11 : (a1 = result1)
-
-axiom H12 : (a2 = o7)
-
-axiom H13 : (to_rep(o8) = 23)
-
-axiom H14 :
-  ((((a2[i])).us_split_fields1).rec__arrays_of_records__basic_record__flag = o9)
-
-axiom H15 :
-  ((((a2[i])).us_split_fields1).rec__arrays_of_records__basic_record__first_value = o10)
-
-axiom H16 : (o8 = o11)
-
-axiom H17 : (o12 = o9)
-
-axiom H18 : (o13 = o10)
-
-axiom H19 : (o14 = o11)
-
-axiom H20 : (o15 = (a2[i <- { us_split_fields1 = {
+  rec__arrays_of_records__basic_record__second_value = o6 } }]))) and
+  ((a1 = result1) and (a2 = o7))) -> ((((((to_rep(o8) = 23) and
+  (((((a2[i])).us_split_fields1).rec__arrays_of_records__basic_record__flag = o9) and
+  (((((a2[i])).us_split_fields1).rec__arrays_of_records__basic_record__first_value = o10) and
+  (o8 = o11)))) and ((o12 = o9) and ((o13 = o10) and (o14 = o11)))) and
+  (o15 = (a2[i <- { us_split_fields1 = {
   rec__arrays_of_records__basic_record__flag = o12;
   rec__arrays_of_records__basic_record__first_value = o13;
-  rec__arrays_of_records__basic_record__second_value = o14 } }]))
-
-axiom H21 : (a2 = result2)
-
-axiom H22 : (a3 = o15)
-
- (* File "arrays_of_records.adb", line 15, characters 0-0 *)
-goal WP_parameter_def :
-  (to_rep((((a3[i])).us_split_fields1).rec__arrays_of_records__basic_record__second_value) = 23)
+  rec__arrays_of_records__basic_record__second_value = o14 } }]))) and
+  ((a2 = result2) and (a3 = o15))) ->
+  (to_rep((((a3[i])).us_split_fields1).rec__arrays_of_records__basic_record__second_value) = 23))))))

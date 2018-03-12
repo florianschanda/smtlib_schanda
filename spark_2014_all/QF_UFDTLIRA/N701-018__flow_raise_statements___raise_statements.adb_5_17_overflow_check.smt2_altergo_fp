@@ -107,13 +107,6 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic g : int
-
-logic o : int
-
-axiom H : in_range(g)
-
-axiom H1 : (g <  2147483647)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((g + 1))
+goal WP_parameter_def :
+  (forall g:int. (in_range(g) -> ((g <  2147483647) -> in_range((g + 1)))))

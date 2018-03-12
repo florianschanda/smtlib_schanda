@@ -1039,12 +1039,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1056,6 +1050,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1212,109 +1212,36 @@ function tindex_floatS__ref___projection(a: tindex_floatS__ref) : tindex_floatS 
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic index : int
-
-logic pi : t
-
-logic erreur : t
-
-logic index_float : t
-
-logic o : t
-
-logic o1 : int
-
-logic o2 : t
-
-logic result : t
-
-logic pi1 : t
-
-logic result1 : int
-
-logic index1 : int
-
-logic result2 : t
-
-logic index_float1 : t
-
-logic result3 : t
-
-logic erreur1 : t
-
-logic index2 : int
-
-logic pi2 : t
-
-logic erreur2 : t
-
-logic index_float2 : t
-
-logic result4 : t
-
-logic erreur3 : t
-
-logic result5 : t
-
-logic pi3 : t
-
-logic result6 : int
-
-logic index3 : int
-
-logic result7 : t
-
-logic index_float3 : t
-
-axiom H : ((1 <= 9223372036854775807) -> in_range3(index))
-
-axiom H1 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(pi))
-
-axiom H2 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(erreur))
-
-axiom H3 : (le(fliteral, fliteral1) -> in_range4(index_float))
-
-axiom H4 : (result = pi)
-
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.0e-1))
-
-axiom H5 : (pi1 = fliteral2)
-
-axiom H6 : (result1 = index)
-
-axiom H7 : (index1 = 1)
-
-axiom H8 : (result2 = index_float)
-
-axiom H9 : (index_float1 = fliteral)
-
-axiom H10 : (result3 = erreur)
-
-axiom H11 : (erreur1 = fliteral)
 
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 0.0000000800000000000000016738048664102778140261307271430268883705139160156250))
 
-axiom H12 : (not lt(erreur1, fliteral3))
-
-axiom H13 : le(fliteral, index_float2)
-
-axiom H14 : (((((le(neg(fliteral1), fliteral1) -> tqtisFinite(erreur2)) and
-  (le(fliteral, fliteral1) -> in_range4(index_float2))) and
-  ((1 <= 9223372036854775807) -> in_range3(index2))) and (le(neg(fliteral1),
-  fliteral1) -> tqtisFinite(pi2))) and (not lt(erreur2, fliteral3)))
-
-axiom H15 : le(fliteral, index_float2)
-
-axiom H16 : (erreur2 = result4)
-
-axiom H17 : (erreur3 = div(NearestTiesToEven, div(NearestTiesToEven,
-  fliteral, index_float2), index_float2))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(add(NearestTiesToEven, pi2, erreur3))
+goal WP_parameter_def :
+  (forall index:int. forall pi:t. forall erreur:t. forall index_float:t.
+  forall result:t. forall pi1:t. forall result1:int. forall index1:int.
+  forall result2:t. forall index_float1:t. forall result3:t.
+  forall erreur1:t. forall index2:int. forall pi2:t. forall erreur2:t.
+  forall index_float2:t. forall result4:t. forall erreur3:t.
+  (((1 <= 9223372036854775807) -> in_range3(index)) -> ((le(neg(fliteral1),
+  fliteral1) -> tqtisFinite(pi)) -> ((le(neg(fliteral1), fliteral1) ->
+  tqtisFinite(erreur)) -> ((le(fliteral, fliteral1) ->
+  in_range4(index_float)) -> (((result = pi) and (pi1 = fliteral2)) ->
+  (((result1 = index) and (index1 = 1)) -> (((result2 = index_float) and
+  (index_float1 = fliteral)) -> (((result3 = erreur) and
+  (erreur1 = fliteral)) -> ((not lt(erreur1, fliteral3)) -> (le(fliteral,
+  index_float2) -> ((((((le(neg(fliteral1), fliteral1) ->
+  tqtisFinite(erreur2)) and (le(fliteral, fliteral1) ->
+  in_range4(index_float2))) and ((1 <= 9223372036854775807) ->
+  in_range3(index2))) and (le(neg(fliteral1), fliteral1) ->
+  tqtisFinite(pi2))) and (not lt(erreur2, fliteral3))) -> (le(fliteral,
+  index_float2) -> (((erreur2 = result4) and
+  (erreur3 = div(NearestTiesToEven, div(NearestTiesToEven, fliteral,
+  index_float2), index_float2))) -> tqtisFinite(add(NearestTiesToEven, pi2,
+  erreur3))))))))))))))))

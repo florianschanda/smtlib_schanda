@@ -598,12 +598,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -615,6 +609,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -751,24 +751,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,byte) farray, int, int, (int,byte) farray, int,
-  int -> (int,byte) farray
-
-axiom concat_def :
-  (forall a:(int,byte) farray. forall b:(int,byte) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : byte, int -> (int,byte) farray
-
-axiom singleton_def :
-  (forall v:byte.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,byte) farray, int, int, (int,byte) farray, int,
   int -> bool
 
@@ -779,17 +761,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -799,37 +781,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,byte) farray, int, int, (int,byte) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,byte) farray. forall b:(int,byte) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,byte) farray. forall b:(int,byte) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and ult(to_rep1((a[(i + 1)])), to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,byte) farray. forall b:(int,byte) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and ugt(to_rep1((a[(j + 1)])), to_rep1((b[(i + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type index_number
 
@@ -1420,14 +1374,14 @@ axiom bool_eq_def8 :
   (ule(b__first_2, b__last_2) and (sub(a__last_2,
   a__first_2) = sub(b__last_2, b__first_2)))) or ((not ule(a__first_2,
   a__last_2)) and ugt(b__first_2, b__last_2)))) and
-  (forall temp___idx_133:t. forall temp___idx_134:t. ((((ule(a__first,
-  temp___idx_133) and ule(temp___idx_133, a__last)) and (ule(a__first_2,
-  temp___idx_134) and ule(temp___idx_134, a__last_2))) and (to_rep2(get(a,
-  temp___idx_133, temp___idx_134)) = to_rep2(get(b, add(sub(b__first,
-  a__first), temp___idx_133), add(sub(b__first_2, a__first_2),
-  temp___idx_134))))) or (not ((ule(a__first, temp___idx_133) and
-  ule(temp___idx_133, a__last)) and (ule(a__first_2, temp___idx_134) and
-  ule(temp___idx_134, a__last_2))))))) -> (bool_eq10(a, a__first, a__last,
+  (forall temp___idx_155:t. forall temp___idx_156:t. ((((ule(a__first,
+  temp___idx_155) and ule(temp___idx_155, a__last)) and (ule(a__first_2,
+  temp___idx_156) and ule(temp___idx_156, a__last_2))) and (to_rep2(get(a,
+  temp___idx_155, temp___idx_156)) = to_rep2(get(b, add(sub(b__first,
+  a__first), temp___idx_155), add(sub(b__first_2, a__first_2),
+  temp___idx_156))))) or (not ((ule(a__first, temp___idx_155) and
+  ule(temp___idx_155, a__last)) and (ule(a__first_2, temp___idx_156) and
+  ule(temp___idx_156, a__last_2))))))) -> (bool_eq10(a, a__first, a__last,
   a__first_2, a__last_2, b, b__first, b__last, b__first_2,
   b__last_2) = true)) and ((not ((((ule(a__first, a__last) -> (ule(b__first,
   b__last) and (sub(a__last, a__first) = sub(b__last, b__first)))) and
@@ -1435,12 +1389,12 @@ axiom bool_eq_def8 :
   ((ule(a__first_2, a__last_2) -> (ule(b__first_2, b__last_2) and
   (sub(a__last_2, a__first_2) = sub(b__last_2, b__first_2)))) and
   ((not ule(a__first_2, a__last_2)) -> ugt(b__first_2, b__last_2)))) and
-  (forall temp___idx_133:t. forall temp___idx_134:t. (((ule(a__first,
-  temp___idx_133) and ule(temp___idx_133, a__last)) and (ule(a__first_2,
-  temp___idx_134) and ule(temp___idx_134, a__last_2))) -> (to_rep2(get(a,
-  temp___idx_133, temp___idx_134)) = to_rep2(get(b, add(sub(b__first,
-  a__first), temp___idx_133), add(sub(b__first_2, a__first_2),
-  temp___idx_134)))))))) -> (bool_eq10(a, a__first, a__last, a__first_2,
+  (forall temp___idx_155:t. forall temp___idx_156:t. (((ule(a__first,
+  temp___idx_155) and ule(temp___idx_155, a__last)) and (ule(a__first_2,
+  temp___idx_156) and ule(temp___idx_156, a__last_2))) -> (to_rep2(get(a,
+  temp___idx_155, temp___idx_156)) = to_rep2(get(b, add(sub(b__first,
+  a__first), temp___idx_155), add(sub(b__first_2, a__first_2),
+  temp___idx_156)))))))) -> (bool_eq10(a, a__first, a__last, a__first_2,
   a__last_2, b, b__first, b__last, b__first_2, b__last_2) = false))))
 
 axiom bool_eq_rev1 :
@@ -1455,12 +1409,12 @@ axiom bool_eq_rev1 :
   ((ule(a__first_2, a__last_2) -> (ule(b__first_2, b__last_2) and
   (sub(a__last_2, a__first_2) = sub(b__last_2, b__first_2)))) and
   ((not ule(a__first_2, a__last_2)) -> ugt(b__first_2, b__last_2)))) and
-  (forall temp___idx_133:t. forall temp___idx_134:t. (((ule(a__first,
-  temp___idx_133) and ule(temp___idx_133, a__last)) and (ule(a__first_2,
-  temp___idx_134) and ule(temp___idx_134, a__last_2))) -> (to_rep2(get(a,
-  temp___idx_133, temp___idx_134)) = to_rep2(get(b, add(sub(b__first,
-  a__first), temp___idx_133), add(sub(b__first_2, a__first_2),
-  temp___idx_134))))))))))
+  (forall temp___idx_155:t. forall temp___idx_156:t. (((ule(a__first,
+  temp___idx_155) and ule(temp___idx_155, a__last)) and (ule(a__first_2,
+  temp___idx_156) and ule(temp___idx_156, a__last_2))) -> (to_rep2(get(a,
+  temp___idx_155, temp___idx_156)) = to_rep2(get(b, add(sub(b__first,
+  a__first), temp___idx_155), add(sub(b__first_2, a__first_2),
+  temp___idx_156))))))))))
 
 type states
 
@@ -1722,14 +1676,22 @@ type us_rep = { us_split_fields1 : us_split_fields
 function us_rep___projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 4)
+
 logic bool_eq15 : us_rep, us_rep -> bool
 
 axiom bool_eq_def13 :
   (forall a:us_rep. forall b:us_rep [bool_eq15(a, b)].
   ((((((((bool_eq10(((a).us_split_fields1).rec__keccak__keccak_1600__sponge__context__state,
-  of_int(0), of_int(4), of_int(0), of_int(4),
+  rliteral, rliteral1, rliteral, rliteral1,
   ((b).us_split_fields1).rec__keccak__keccak_1600__sponge__context__state,
-  of_int(0), of_int(4), of_int(0), of_int(4)) = true) and
+  rliteral, rliteral1, rliteral, rliteral1) = true) and
   (bool_eq5(((a).us_split_fields1).rec__keccak__keccak_1600__sponge__context__block,
   0, 199,
   ((b).us_split_fields1).rec__keccak__keccak_1600__sponge__context__block, 0,
@@ -1740,9 +1702,9 @@ axiom bool_eq_def13 :
   (to_rep3(((a).us_split_fields1).rec__keccak__keccak_1600__sponge__context__curr_state) = to_rep3(((b).us_split_fields1).rec__keccak__keccak_1600__sponge__context__curr_state))) ->
   (bool_eq15(a, b) = true)) and
   ((not ((((((bool_eq10(((a).us_split_fields1).rec__keccak__keccak_1600__sponge__context__state,
-  of_int(0), of_int(4), of_int(0), of_int(4),
+  rliteral, rliteral1, rliteral, rliteral1,
   ((b).us_split_fields1).rec__keccak__keccak_1600__sponge__context__state,
-  of_int(0), of_int(4), of_int(0), of_int(4)) = true) and
+  rliteral, rliteral1, rliteral, rliteral1) = true) and
   (bool_eq5(((a).us_split_fields1).rec__keccak__keccak_1600__sponge__context__block,
   0, 199,
   ((b).us_split_fields1).rec__keccak__keccak_1600__sponge__context__block, 0,
@@ -2688,652 +2650,159 @@ function t133s__ref___projection(a: t133s__ref) : us_t6 = (a).t133s__content
 
 logic keccak__keccak_1600__sponge__finalize__next_block__aggregate_def : t -> (int,byte) farray
 
-axiom def_axiom :
-  (forall temp___982:t.
-  (forall temp___983:int.
-  ((keccak__keccak_1600__sponge__finalize__next_block__aggregate_def(temp___982)[temp___983]) = of_rep1(temp___982))))
+logic temp___1060 : t -> (int,byte) farray
 
-logic temp___991 : t -> (int,byte) farray
+axiom def_axiom :
+  (forall temp___1051:t.
+  (forall temp___1052:int.
+  (to_rep1((keccak__keccak_1600__sponge__finalize__next_block__aggregate_def(temp___1051)[temp___1052])) = temp___1051)))
 
 axiom def_axiom1 :
-  (forall temp___993:t.
-  (forall temp___994:int.
-  ((temp___991(temp___993)[temp___994]) = of_rep1(temp___993))))
-
-logic ctx__split_fields : map
-
-logic ctx__split_fields1 : (int,byte) farray
-
-logic ctx__split_fields2 : bit_absorption_number
-
-logic ctx__split_fields3 : byte_absorption_number
-
-logic ctx__split_fields4 : rate_number
-
-logic ctx__split_fields5 : states
-
-logic next_block : (int,byte) farray
-
-logic o : int
-
-logic o1 : (int,byte) farray
-
-logic temp___986 : (int,byte) farray
-
-logic temp___9861 : t3
-
-logic o2 : (int,byte) farray
-
-logic o3 : t1
-
-logic o4 : int
-
-logic o5 : bit_absorption_number
-
-logic o6 : map
-
-logic o7 : (int,byte) farray
-
-logic o8 : bit_absorption_number
-
-logic o9 : byte_absorption_number
-
-logic o10 : rate_number
-
-logic o11 : states
-
-logic temp___998 : map
-
-logic temp___9981 : (int,byte) farray
-
-logic temp___9982 : bit_absorption_number
-
-logic temp___9983 : byte_absorption_number
-
-logic temp___9984 : rate_number
-
-logic temp___9985 : states
-
-logic o12 : (int,byte) farray
-
-logic keccak__padding__pad101_multi_blocks__next_block__compl : (int,byte) farray
-
-logic keccak__padding__pad101_multi_blocks__next_block__compl1 : t5
-
-logic o13 : (int,byte) farray
-
-logic keccak__padding__pad101_multi_blocks__first_block__compl : (int,byte) farray
-
-logic keccak__padding__pad101_multi_blocks__first_block__compl1 : t4
-
-logic o14 : integer
-
-logic o15 : integer
-
-logic o16 : int
-
-logic o17 : integer
-
-logic o18 : integer
-
-logic o19 : (int,byte) farray
-
-logic o20 : map
-
-logic o21 : (int,byte) farray
-
-logic o22 : bit_absorption_number
-
-logic o23 : byte_absorption_number
-
-logic o24 : rate_number
-
-logic o25 : states
-
-logic temp___1006 : map
-
-logic temp___10061 : (int,byte) farray
-
-logic temp___10062 : bit_absorption_number
-
-logic temp___10063 : byte_absorption_number
-
-logic temp___10064 : rate_number
-
-logic temp___10065 : states
-
-logic o26 : (int,byte) farray
-
-logic o27 : (int,byte) farray
-
-logic temp___1013 : (int,byte) farray
-
-logic temp___10131 : t6
-
-logic o28 : (int,byte) farray
-
-logic o29 : t1
-
-logic o30 : int
-
-logic o31 : (int,byte) farray
-
-logic temp___1019 : (int,byte) farray
-
-logic temp___10191 : t7
-
-logic o32 : (int,byte) farray
-
-logic o33 : t1
-
-logic o34 : int
-
-logic o35 : (int,byte) farray
-
-logic keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data__compl : (int,byte) farray
-
-logic keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data__compl1 : t8
-
-logic o36 : integer
-
-logic o37 : integer
-
-logic o38 : (int,byte) farray
-
-logic o39 : map
-
-logic o40 : (int,byte) farray
-
-logic o41 : bit_absorption_number
-
-logic o42 : byte_absorption_number
-
-logic o43 : rate_number
-
-logic o44 : states
-
-logic temp___1031 : map
-
-logic temp___10311 : (int,byte) farray
-
-logic temp___10312 : bit_absorption_number
-
-logic temp___10313 : byte_absorption_number
-
-logic temp___10314 : rate_number
-
-logic temp___10315 : states
-
-logic o45 : bit_absorption_number
-
-logic o46 : map
-
-logic o47 : (int,byte) farray
-
-logic o48 : bit_absorption_number
-
-logic o49 : byte_absorption_number
-
-logic o50 : rate_number
-
-logic o51 : states
-
-logic temp___1033 : map
-
-logic temp___10331 : (int,byte) farray
-
-logic temp___10332 : bit_absorption_number
-
-logic temp___10333 : byte_absorption_number
-
-logic temp___10334 : rate_number
-
-logic temp___10335 : states
-
-logic o52 : byte_absorption_number
-
-logic o53 : map
-
-logic o54 : (int,byte) farray
-
-logic o55 : bit_absorption_number
-
-logic o56 : byte_absorption_number
-
-logic o57 : rate_number
-
-logic o58 : states
-
-logic temp___1035 : map
-
-logic temp___10351 : (int,byte) farray
-
-logic temp___10352 : bit_absorption_number
-
-logic temp___10353 : byte_absorption_number
-
-logic temp___10354 : rate_number
-
-logic temp___10355 : states
-
-logic o59 : states
-
-logic o60 : map
-
-logic o61 : (int,byte) farray
-
-logic o62 : bit_absorption_number
-
-logic o63 : byte_absorption_number
-
-logic o64 : rate_number
-
-logic o65 : states
-
-logic temp___1037 : map
-
-logic temp___10371 : (int,byte) farray
-
-logic temp___10372 : bit_absorption_number
-
-logic temp___10373 : byte_absorption_number
-
-logic temp___10374 : rate_number
-
-logic temp___10375 : states
-
-logic ctx__split_fields6 : map
-
-logic ctx__split_fields7 : (int,byte) farray
-
-logic ctx__split_fields8 : bit_absorption_number
-
-logic ctx__split_fields9 : byte_absorption_number
-
-logic ctx__split_fields10 : rate_number
-
-logic ctx__split_fields11 : states
-
-logic result : (int,byte) farray
-
-logic next_block1 : (int,byte) farray
-
-logic result1 : bool
-
-logic keccak__keccak_1600__keccakf_1600_lanes__xor_bits_into_state__a : map
-
-logic result2 : map
-
-logic result3 : (int,byte) farray
-
-logic result4 : bit_absorption_number
-
-logic result5 : byte_absorption_number
-
-logic result6 : rate_number
-
-logic result7 : states
-
-logic ctx__split_fields12 : map
-
-logic ctx__split_fields13 : (int,byte) farray
-
-logic ctx__split_fields14 : bit_absorption_number
-
-logic ctx__split_fields15 : byte_absorption_number
-
-logic ctx__split_fields16 : rate_number
-
-logic ctx__split_fields17 : states
-
-logic keccak__keccak_1600__keccakf_1600_permutation__permute__a : map
-
-logic result8 : map
-
-logic result9 : (int,byte) farray
-
-logic result10 : bit_absorption_number
-
-logic result11 : byte_absorption_number
-
-logic result12 : rate_number
-
-logic result13 : states
-
-logic ctx__split_fields18 : map
-
-logic ctx__split_fields19 : (int,byte) farray
-
-logic ctx__split_fields20 : bit_absorption_number
-
-logic ctx__split_fields21 : byte_absorption_number
-
-logic ctx__split_fields22 : rate_number
-
-logic ctx__split_fields23 : states
-
-logic result14 : map
-
-logic result15 : (int,byte) farray
-
-logic result16 : bit_absorption_number
-
-logic result17 : byte_absorption_number
-
-logic result18 : rate_number
-
-logic result19 : states
-
-logic ctx__split_fields24 : map
-
-logic ctx__split_fields25 : (int,byte) farray
-
-logic ctx__split_fields26 : bit_absorption_number
-
-logic ctx__split_fields27 : byte_absorption_number
-
-logic ctx__split_fields28 : rate_number
-
-logic ctx__split_fields29 : states
-
-logic result20 : map
-
-logic result21 : (int,byte) farray
-
-logic result22 : bit_absorption_number
-
-logic result23 : byte_absorption_number
-
-logic result24 : rate_number
-
-logic result25 : states
-
-logic ctx__split_fields30 : map
-
-logic ctx__split_fields31 : (int,byte) farray
-
-logic ctx__split_fields32 : bit_absorption_number
-
-logic ctx__split_fields33 : byte_absorption_number
-
-logic ctx__split_fields34 : rate_number
-
-logic ctx__split_fields35 : states
-
-logic spilled : bool
-
-logic keccak__padding__pad101_multi_blocks__next_block : (int,byte) farray
-
-logic keccak__padding__pad101_multi_blocks__first_block : (int,byte) farray
-
-logic result26 : map
-
-logic result27 : (int,byte) farray
-
-logic result28 : bit_absorption_number
-
-logic result29 : byte_absorption_number
-
-logic result30 : rate_number
-
-logic result31 : states
-
-logic ctx__split_fields36 : map
-
-logic ctx__split_fields37 : (int,byte) farray
-
-logic ctx__split_fields38 : bit_absorption_number
-
-logic ctx__split_fields39 : byte_absorption_number
-
-logic ctx__split_fields40 : rate_number
-
-logic ctx__split_fields41 : states
-
-logic result32 : (int,byte) farray
-
-logic next_block2 : (int,byte) farray
-
-logic keccak__keccak_1600__keccakf_1600_lanes__xor_bits_into_state__a1 : map
-
-logic result33 : map
-
-logic result34 : (int,byte) farray
-
-logic result35 : bit_absorption_number
-
-logic result36 : byte_absorption_number
-
-logic result37 : rate_number
-
-logic result38 : states
-
-logic ctx__split_fields42 : map
-
-logic ctx__split_fields43 : (int,byte) farray
-
-logic ctx__split_fields44 : bit_absorption_number
-
-logic ctx__split_fields45 : byte_absorption_number
-
-logic ctx__split_fields46 : rate_number
-
-logic ctx__split_fields47 : states
-
-logic keccak__keccak_1600__keccakf_1600_permutation__permute__a1 : map
-
-logic result39 : map
-
-logic result40 : (int,byte) farray
-
-logic result41 : bit_absorption_number
-
-logic result42 : byte_absorption_number
-
-logic result43 : rate_number
-
-logic result44 : states
-
-logic ctx__split_fields48 : map
-
-logic ctx__split_fields49 : (int,byte) farray
-
-logic ctx__split_fields50 : bit_absorption_number
-
-logic ctx__split_fields51 : byte_absorption_number
-
-logic ctx__split_fields52 : rate_number
-
-logic ctx__split_fields53 : states
-
-logic keccak__keccak_1600__keccakf_1600_lanes__xor_bits_into_state__a2 : map
-
-logic result45 : map
-
-logic result46 : (int,byte) farray
-
-logic result47 : bit_absorption_number
-
-logic result48 : byte_absorption_number
-
-logic result49 : rate_number
-
-logic result50 : states
-
-logic ctx__split_fields54 : map
-
-logic ctx__split_fields55 : (int,byte) farray
-
-logic ctx__split_fields56 : bit_absorption_number
-
-logic ctx__split_fields57 : byte_absorption_number
-
-logic ctx__split_fields58 : rate_number
-
-logic ctx__split_fields59 : states
-
-logic keccak__keccak_1600__keccakf_1600_permutation__permute__a2 : map
-
-logic result51 : map
-
-logic result52 : (int,byte) farray
-
-logic result53 : bit_absorption_number
-
-logic result54 : byte_absorption_number
-
-logic result55 : rate_number
-
-logic result56 : states
-
-logic ctx__split_fields60 : map
-
-logic ctx__split_fields61 : (int,byte) farray
-
-logic ctx__split_fields62 : bit_absorption_number
-
-logic ctx__split_fields63 : byte_absorption_number
-
-logic ctx__split_fields64 : rate_number
-
-logic ctx__split_fields65 : states
-
-logic keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data : (int,byte) farray
-
-logic result57 : map
-
-logic result58 : (int,byte) farray
-
-logic result59 : bit_absorption_number
-
-logic result60 : byte_absorption_number
-
-logic result61 : rate_number
-
-logic result62 : states
-
-logic ctx__split_fields66 : map
-
-logic ctx__split_fields67 : (int,byte) farray
-
-logic ctx__split_fields68 : bit_absorption_number
-
-logic ctx__split_fields69 : byte_absorption_number
-
-logic ctx__split_fields70 : rate_number
-
-logic ctx__split_fields71 : states
-
-logic result63 : map
-
-logic result64 : (int,byte) farray
-
-logic result65 : bit_absorption_number
-
-logic result66 : byte_absorption_number
-
-logic result67 : rate_number
-
-logic result68 : states
-
-logic ctx__split_fields72 : map
-
-logic ctx__split_fields73 : (int,byte) farray
-
-logic ctx__split_fields74 : bit_absorption_number
-
-logic ctx__split_fields75 : byte_absorption_number
-
-logic ctx__split_fields76 : rate_number
-
-logic ctx__split_fields77 : states
-
-logic result69 : map
-
-logic result70 : (int,byte) farray
-
-logic result71 : bit_absorption_number
-
-logic result72 : byte_absorption_number
-
-logic result73 : rate_number
-
-logic result74 : states
-
-logic ctx__split_fields78 : map
-
-logic ctx__split_fields79 : (int,byte) farray
-
-logic ctx__split_fields80 : bit_absorption_number
-
-logic ctx__split_fields81 : byte_absorption_number
-
-logic ctx__split_fields82 : rate_number
-
-logic ctx__split_fields83 : states
-
-logic result75 : map
-
-logic result76 : (int,byte) farray
-
-logic result77 : bit_absorption_number
-
-logic result78 : byte_absorption_number
-
-logic result79 : rate_number
-
-logic result80 : states
-
-logic ctx__split_fields84 : map
-
-logic ctx__split_fields85 : (int,byte) farray
-
-logic ctx__split_fields86 : bit_absorption_number
-
-logic ctx__split_fields87 : byte_absorption_number
-
-logic ctx__split_fields88 : rate_number
-
-logic ctx__split_fields89 : states
-
-logic ctx__split_fields90 : map
-
-logic ctx__split_fields91 : (int,byte) farray
-
-logic ctx__split_fields92 : bit_absorption_number
-
-logic ctx__split_fields93 : byte_absorption_number
-
-logic ctx__split_fields94 : rate_number
-
-logic ctx__split_fields95 : states
-
-logic next_block3 : (int,byte) farray
-
-logic spilled1 : bool
-
-logic ctx__split_fields96 : map
-
-logic ctx__split_fields97 : (int,byte) farray
-
-logic ctx__split_fields98 : bit_absorption_number
-
-logic ctx__split_fields99 : byte_absorption_number
-
-logic ctx__split_fields100 : rate_number
-
-logic ctx__split_fields101 : states
-
-logic next_block4 : (int,byte) farray
-
-logic spilled2 : bool
-
-axiom H : (result = next_block)
-
-axiom H1 :
-  (next_block1 = keccak__keccak_1600__sponge__finalize__next_block__aggregate_def(of_int(0)))
-
-axiom H2 : ((o = rate_of({ us_split_fields1 = {
+  (forall temp___1062:t.
+  (forall temp___1063:int.
+  (to_rep1((temp___1060(temp___1062)[temp___1063])) = temp___1062)))
+
+ (* File "keccak-sponge.adb", line 291, characters 0-0 *)
+goal WP_parameter_def :
+  (forall ctx__split_fields:map. forall ctx__split_fields1:(int,byte) farray.
+  forall ctx__split_fields2:bit_absorption_number.
+  forall ctx__split_fields3:byte_absorption_number.
+  forall ctx__split_fields4:rate_number. forall ctx__split_fields5:states.
+  forall next_block:(int,byte) farray. forall o:int.
+  forall o1:(int,byte) farray. forall temp___1055:(int,byte) farray.
+  forall temp___10551:t3. forall o2:(int,byte) farray. forall o3:t1.
+  forall o4:int. forall o5:bit_absorption_number. forall o6:map.
+  forall o7:(int,byte) farray. forall o8:bit_absorption_number.
+  forall o9:byte_absorption_number. forall o10:rate_number.
+  forall o11:states. forall temp___1067:map.
+  forall temp___10671:(int,byte) farray.
+  forall temp___10672:bit_absorption_number.
+  forall temp___10673:byte_absorption_number.
+  forall temp___10674:rate_number. forall temp___10675:states.
+  forall o12:(int,byte) farray.
+  forall keccak__padding__pad101_multi_blocks__next_block__compl:(int,byte) farray.
+  forall keccak__padding__pad101_multi_blocks__next_block__compl1:t5.
+  forall o13:(int,byte) farray.
+  forall keccak__padding__pad101_multi_blocks__first_block__compl:(int,byte) farray.
+  forall keccak__padding__pad101_multi_blocks__first_block__compl1:t4.
+  forall o14:integer. forall o15:integer. forall o16:int. forall o17:integer.
+  forall o18:integer. forall o19:(int,byte) farray. forall o20:map.
+  forall o21:(int,byte) farray. forall o22:bit_absorption_number.
+  forall o23:byte_absorption_number. forall o24:rate_number.
+  forall o25:states. forall temp___1075:map.
+  forall temp___10751:(int,byte) farray.
+  forall temp___10752:bit_absorption_number.
+  forall temp___10753:byte_absorption_number.
+  forall temp___10754:rate_number. forall temp___10755:states.
+  forall o26:(int,byte) farray. forall o27:(int,byte) farray.
+  forall temp___1082:(int,byte) farray. forall temp___10821:t6.
+  forall o28:(int,byte) farray. forall o29:t1. forall o30:int.
+  forall o31:(int,byte) farray. forall temp___1088:(int,byte) farray.
+  forall temp___10881:t7. forall o32:(int,byte) farray. forall o33:t1.
+  forall o34:int. forall o35:(int,byte) farray.
+  forall keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data__compl:(int,byte) farray.
+  forall keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data__compl1:t8.
+  forall o36:integer. forall o37:integer. forall o38:(int,byte) farray.
+  forall o39:map. forall o40:(int,byte) farray.
+  forall o41:bit_absorption_number. forall o42:byte_absorption_number.
+  forall o43:rate_number. forall o44:states. forall temp___1100:map.
+  forall temp___11001:(int,byte) farray.
+  forall temp___11002:bit_absorption_number.
+  forall temp___11003:byte_absorption_number.
+  forall temp___11004:rate_number. forall temp___11005:states.
+  forall o45:bit_absorption_number. forall o46:map.
+  forall o47:(int,byte) farray. forall o48:bit_absorption_number.
+  forall o49:byte_absorption_number. forall o50:rate_number.
+  forall o51:states. forall temp___1102:map.
+  forall temp___11021:(int,byte) farray.
+  forall temp___11022:bit_absorption_number.
+  forall temp___11023:byte_absorption_number.
+  forall temp___11024:rate_number. forall temp___11025:states.
+  forall o52:byte_absorption_number. forall o53:map.
+  forall o54:(int,byte) farray. forall o55:bit_absorption_number.
+  forall o56:byte_absorption_number. forall o57:rate_number.
+  forall o58:states. forall temp___1104:map.
+  forall temp___11041:(int,byte) farray.
+  forall temp___11042:bit_absorption_number.
+  forall temp___11043:byte_absorption_number.
+  forall temp___11044:rate_number. forall temp___11045:states.
+  forall o59:states. forall o60:map. forall o61:(int,byte) farray.
+  forall o62:bit_absorption_number. forall o63:byte_absorption_number.
+  forall o64:rate_number. forall o65:states. forall temp___1106:map.
+  forall temp___11061:(int,byte) farray.
+  forall temp___11062:bit_absorption_number.
+  forall temp___11063:byte_absorption_number.
+  forall temp___11064:rate_number. forall temp___11065:states.
+  forall ctx__split_fields6:map. forall ctx__split_fields7:(int,byte) farray.
+  forall ctx__split_fields8:bit_absorption_number.
+  forall ctx__split_fields9:byte_absorption_number.
+  forall ctx__split_fields10:rate_number. forall ctx__split_fields11:states.
+  forall result:(int,byte) farray. forall next_block1:(int,byte) farray.
+  forall result1:bool.
+  forall keccak__keccak_1600__keccakf_1600_lanes__xor_bits_into_state__a:map.
+  forall result2:map. forall result3:(int,byte) farray.
+  forall result4:bit_absorption_number.
+  forall result5:byte_absorption_number. forall result6:rate_number.
+  forall result7:states. forall ctx__split_fields12:map.
+  forall ctx__split_fields13:(int,byte) farray.
+  forall ctx__split_fields14:bit_absorption_number.
+  forall ctx__split_fields15:byte_absorption_number.
+  forall ctx__split_fields16:rate_number. forall ctx__split_fields17:states.
+  forall keccak__keccak_1600__keccakf_1600_permutation__permute__a:map.
+  forall result8:map. forall result9:(int,byte) farray.
+  forall result10:bit_absorption_number.
+  forall result11:byte_absorption_number. forall result12:rate_number.
+  forall result13:states. forall ctx__split_fields18:map.
+  forall ctx__split_fields19:(int,byte) farray.
+  forall ctx__split_fields20:bit_absorption_number.
+  forall ctx__split_fields21:byte_absorption_number.
+  forall ctx__split_fields22:rate_number. forall ctx__split_fields23:states.
+  forall result14:map. forall result15:(int,byte) farray.
+  forall result16:bit_absorption_number.
+  forall result17:byte_absorption_number. forall result18:rate_number.
+  forall result19:states. forall ctx__split_fields24:map.
+  forall ctx__split_fields25:(int,byte) farray.
+  forall ctx__split_fields26:bit_absorption_number.
+  forall ctx__split_fields27:byte_absorption_number.
+  forall ctx__split_fields28:rate_number. forall ctx__split_fields29:states.
+  forall result20:map. forall result21:(int,byte) farray.
+  forall result22:bit_absorption_number.
+  forall result23:byte_absorption_number. forall result24:rate_number.
+  forall result25:states. forall ctx__split_fields30:us_split_fields.
+  forall spilled:bool.
+  forall keccak__padding__pad101_multi_blocks__next_block:(int,byte) farray.
+  forall keccak__padding__pad101_multi_blocks__first_block:(int,byte) farray.
+  forall result26:us_split_fields__ref.
+  forall ctx__split_fields31:us_split_fields. forall result27:map__ref.
+  forall next_block2:(int,byte) farray.
+  forall keccak__keccak_1600__keccakf_1600_lanes__xor_bits_into_state__a1:map.
+  forall result28:us_split_fields__ref.
+  forall ctx__split_fields32:us_split_fields.
+  forall keccak__keccak_1600__keccakf_1600_permutation__permute__a1:map.
+  forall result29:us_split_fields__ref.
+  forall ctx__split_fields33:us_split_fields.
+  forall keccak__keccak_1600__keccakf_1600_lanes__xor_bits_into_state__a2:map.
+  forall result30:us_split_fields__ref.
+  forall ctx__split_fields34:us_split_fields.
+  forall keccak__keccak_1600__keccakf_1600_permutation__permute__a2:map.
+  forall result31:us_split_fields__ref.
+  forall ctx__split_fields35:us_split_fields.
+  forall keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data:(int,byte) farray.
+  forall result32:us_split_fields__ref.
+  forall ctx__split_fields36:us_split_fields.
+  forall result33:us_split_fields__ref.
+  forall ctx__split_fields37:us_split_fields.
+  forall result34:us_split_fields__ref.
+  forall ctx__split_fields38:us_split_fields.
+  forall result35:us_split_fields__ref.
+  forall ctx__split_fields39:us_split_fields.
+  forall ctx__split_fields40:us_split_fields__ref.
+  forall next_block3:map__ref. forall spilled1:bool__ref.
+  forall ctx__split_fields41:us_split_fields.
+  forall next_block4:(int,byte) farray. forall spilled2:bool.
+  (((((result = next_block) and
+  (next_block1 = keccak__keccak_1600__sponge__finalize__next_block__aggregate_def(rliteral))) and
+  (((((o = rate_of({ us_split_fields1 = {
   rec__keccak__keccak_1600__sponge__context__state = ctx__split_fields;
   rec__keccak__keccak_1600__sponge__context__block = ctx__split_fields1;
   rec__keccak__keccak_1600__sponge__context__bits_absorbed =
@@ -3342,16 +2811,11 @@ axiom H2 : ((o = rate_of({ us_split_fields1 = {
   ctx__split_fields3; rec__keccak__keccak_1600__sponge__context__rate =
   ctx__split_fields4; rec__keccak__keccak_1600__sponge__context__curr_state =
   ctx__split_fields5 } })) and (in_range7(o) and
-  ((o = (to_rep6(ctx__split_fields4) * 8)) and (o <  1600))))
-
-axiom H3 : (((o <= to_rep5(ctx__split_fields2)) -> (result1 = true)) and
-  ((not (o <= to_rep5(ctx__split_fields2))) -> (result1 = false)))
-
-axiom H4 : ((result1 = true) -> ((to_rep6(ctx__split_fields4) - 1) = r114s))
-
-axiom H5 : ((result1 = true) -> in_range1(r114s))
-
-axiom H6 : ((result1 = true) -> ((o4 = rate_of({ us_split_fields1 = {
+  ((o = (to_rep6(ctx__split_fields4) * 8)) and (o <  1600)))) and
+  (((o <= to_rep5(ctx__split_fields2)) and (result1 = true)) or
+  ((not (o <= to_rep5(ctx__split_fields2))) and (result1 = false)))) and
+  (((result1 = true) and ((((to_rep6(ctx__split_fields4) - 1) = r114s) and
+  in_range1(r114s)) and (((((o4 = rate_of({ us_split_fields1 = {
   rec__keccak__keccak_1600__sponge__context__state = ctx__split_fields;
   rec__keccak__keccak_1600__sponge__context__block = ctx__split_fields1;
   rec__keccak__keccak_1600__sponge__context__bits_absorbed =
@@ -3360,525 +2824,296 @@ axiom H6 : ((result1 = true) -> ((o4 = rate_of({ us_split_fields1 = {
   ctx__split_fields3; rec__keccak__keccak_1600__sponge__context__rate =
   ctx__split_fields4; rec__keccak__keccak_1600__sponge__context__curr_state =
   ctx__split_fields5 } })) and (in_range7(o4) and
-  ((o4 = (to_rep6(ctx__split_fields4) * 8)) and (o4 <  1600)))))
-
-axiom H7 : ((result1 = true) -> ((0 <= r114s) -> (((0 <= 0) and
-  (0 <= 199)) and ((0 <= r114s) and (r114s <= 199)))))
-
-axiom H8 : ((result1 = true) -> (o1 = ctx__split_fields1))
-
-axiom H9 : ((result1 = true) -> (o1 = temp___986))
-
-axiom H10 : ((result1 = true) -> (mk1(0, r114s) = temp___9861))
-
-axiom H11 : ((result1 = true) -> (temp___986 = o2))
-
-axiom H12 : ((result1 = true) -> (mk(to_rep(first2(temp___9861)),
-  to_rep(last2(temp___9861))) = o3))
-
-axiom H13 : true
-
-axiom H14 : ((result1 = true) -> ((result2 = ctx__split_fields) and
-  ((result3 = ctx__split_fields1) and ((result4 = ctx__split_fields2) and
-  ((result5 = ctx__split_fields3) and ((result6 = ctx__split_fields4) and
-  (result7 = ctx__split_fields5)))))))
-
-axiom H15 : ((result1 = true) ->
-  ((ctx__split_fields12 = keccak__keccak_1600__keccakf_1600_lanes__xor_bits_into_state__a) and
-  ((ctx__split_fields13 = ctx__split_fields1) and
-  ((ctx__split_fields14 = ctx__split_fields2) and
-  ((ctx__split_fields15 = ctx__split_fields3) and
-  ((ctx__split_fields16 = ctx__split_fields4) and
-  (ctx__split_fields17 = ctx__split_fields5)))))))
-
-axiom H16 : ((result1 = true) -> ((result8 = ctx__split_fields12) and
-  ((result9 = ctx__split_fields13) and ((result10 = ctx__split_fields14) and
-  ((result11 = ctx__split_fields15) and ((result12 = ctx__split_fields16) and
-  (result13 = ctx__split_fields17)))))))
-
-axiom H17 : ((result1 = true) ->
-  ((ctx__split_fields18 = keccak__keccak_1600__keccakf_1600_permutation__permute__a) and
-  ((ctx__split_fields19 = ctx__split_fields13) and
-  ((ctx__split_fields20 = ctx__split_fields14) and
-  ((ctx__split_fields21 = ctx__split_fields15) and
-  ((ctx__split_fields22 = ctx__split_fields16) and
-  (ctx__split_fields23 = ctx__split_fields17)))))))
-
-axiom H18 : ((result1 = true) -> ((result14 = ctx__split_fields18) and
+  ((o4 = (to_rep6(ctx__split_fields4) * 8)) and (o4 <  1600)))) and
+  (((((0 <= r114s) -> (((0 <= 0) and (0 <= 199)) and ((0 <= r114s) and
+  (r114s <= 199)))) and (o1 = ctx__split_fields1)) and
+  ((o1 = temp___1055) and (mk1(0, r114s) = temp___10551))) and
+  ((temp___1055 = o2) and (mk(to_rep(first2(temp___10551)),
+  to_rep(last2(temp___10551))) = o3)))) and
+  (((result2 = ctx__split_fields) and ((result3 = ctx__split_fields1) and
+  ((result4 = ctx__split_fields2) and ((result5 = ctx__split_fields3) and
+  ((result6 = ctx__split_fields4) and (result7 = ctx__split_fields5)))))) and
+  ((keccak__keccak_1600__keccakf_1600_lanes__xor_bits_into_state__a = ctx__split_fields12) and
+  ((ctx__split_fields1 = ctx__split_fields13) and
+  ((ctx__split_fields2 = ctx__split_fields14) and
+  ((ctx__split_fields3 = ctx__split_fields15) and
+  ((ctx__split_fields4 = ctx__split_fields16) and
+  (ctx__split_fields5 = ctx__split_fields17)))))))) and
+  ((((result8 = ctx__split_fields12) and ((result9 = ctx__split_fields13) and
+  ((result10 = ctx__split_fields14) and ((result11 = ctx__split_fields15) and
+  ((result12 = ctx__split_fields16) and
+  (result13 = ctx__split_fields17)))))) and
+  ((keccak__keccak_1600__keccakf_1600_permutation__permute__a = ctx__split_fields18) and
+  ((ctx__split_fields13 = ctx__split_fields19) and
+  ((ctx__split_fields14 = ctx__split_fields20) and
+  ((ctx__split_fields15 = ctx__split_fields21) and
+  ((ctx__split_fields16 = ctx__split_fields22) and
+  (ctx__split_fields17 = ctx__split_fields23))))))) and
+  ((((result14 = ctx__split_fields18) and
   ((result15 = ctx__split_fields19) and ((result16 = ctx__split_fields20) and
   ((result17 = ctx__split_fields21) and ((result18 = ctx__split_fields22) and
-  (result19 = ctx__split_fields23)))))))
-
-axiom H19 : ((result1 = true) ->
-  ((ctx__split_fields24 = ctx__split_fields18) and
-  ((ctx__split_fields25 = temp___991(of_int(0))) and
-  ((ctx__split_fields26 = ctx__split_fields20) and
-  ((ctx__split_fields27 = ctx__split_fields21) and
-  ((ctx__split_fields28 = ctx__split_fields22) and
-  (ctx__split_fields29 = ctx__split_fields23)))))))
-
-axiom H20 : ((result1 = true) -> (to_rep5(o5) = 0))
-
-axiom H21 : ((result1 = true) -> (ctx__split_fields24 = o6))
-
-axiom H22 : ((result1 = true) -> (ctx__split_fields25 = o7))
-
-axiom H23 : ((result1 = true) -> (o5 = o8))
-
-axiom H24 : ((result1 = true) -> (ctx__split_fields27 = o9))
-
-axiom H25 : ((result1 = true) -> (ctx__split_fields28 = o10))
-
-axiom H26 : ((result1 = true) -> (ctx__split_fields29 = o11))
-
-axiom H27 : ((result1 = true) -> (temp___998 = o6))
-
-axiom H28 : ((result1 = true) -> (temp___9981 = o7))
-
-axiom H29 : ((result1 = true) -> (temp___9982 = o8))
-
-axiom H30 : ((result1 = true) -> (temp___9983 = o9))
-
-axiom H31 : ((result1 = true) -> (temp___9984 = o10))
-
-axiom H32 : ((result1 = true) -> (temp___9985 = o11))
-
-axiom H33 : ((result1 = true) -> ((result20 = ctx__split_fields24) and
+  (result19 = ctx__split_fields23)))))) and
+  ((ctx__split_fields18 = ctx__split_fields24) and
+  ((temp___1060(rliteral) = ctx__split_fields25) and
+  ((ctx__split_fields20 = ctx__split_fields26) and
+  ((ctx__split_fields21 = ctx__split_fields27) and
+  ((ctx__split_fields22 = ctx__split_fields28) and
+  (ctx__split_fields23 = ctx__split_fields29))))))) and
+  ((((to_rep5(o5) = 0) and ((ctx__split_fields24 = o6) and
+  ((ctx__split_fields25 = o7) and ((o5 = o8) and
+  ((ctx__split_fields27 = o9) and ((ctx__split_fields28 = o10) and
+  (ctx__split_fields29 = o11))))))) and ((temp___1067 = o6) and
+  ((temp___10671 = o7) and ((temp___10672 = o8) and ((temp___10673 = o9) and
+  ((temp___10674 = o10) and (temp___10675 = o11))))))) and
+  (((result20 = ctx__split_fields24) and
   ((result21 = ctx__split_fields25) and ((result22 = ctx__split_fields26) and
   ((result23 = ctx__split_fields27) and ((result24 = ctx__split_fields28) and
-  (result25 = ctx__split_fields29)))))))
-
-axiom H34 : ((result1 = true) -> ((ctx__split_fields30 = temp___998) and
-  ((ctx__split_fields31 = temp___9981) and
-  ((ctx__split_fields32 = temp___9982) and
-  ((ctx__split_fields33 = temp___9983) and
-  ((ctx__split_fields34 = temp___9984) and
-  (ctx__split_fields35 = temp___9985)))))))
-
-axiom H35 : ((not (result1 = true)) ->
-  ((ctx__split_fields30 = ctx__split_fields) and
-  ((ctx__split_fields31 = ctx__split_fields1) and
-  ((ctx__split_fields32 = ctx__split_fields2) and
-  ((ctx__split_fields33 = ctx__split_fields3) and
-  ((ctx__split_fields34 = ctx__split_fields4) and
-  (ctx__split_fields35 = ctx__split_fields5)))))))
-
-axiom H36 : ((not (result1 = true)) ->
-  ((ctx__split_fields30 = ctx__split_fields6) and
-  ((ctx__split_fields31 = ctx__split_fields7) and
-  ((ctx__split_fields32 = ctx__split_fields8) and
-  ((ctx__split_fields33 = ctx__split_fields9) and
-  ((ctx__split_fields34 = ctx__split_fields10) and
-  (ctx__split_fields35 = ctx__split_fields11)))))))
-
-axiom H37 : ((to_rep6(ctx__split_fields34) - 1) = r119s)
-
-axiom H38 : in_range1(r119s)
-
-axiom H39 : ((to_rep6(ctx__split_fields34) - 1) = r122s)
-
-axiom H40 : in_range1(r122s)
-
-axiom H41 : ((0 <= r122s) -> (((0 <= 0) and (0 <= 199)) and ((0 <= r122s) and
-  (r122s <= 199))))
-
-axiom H42 : (o12 = next_block1)
-
-axiom H43 : (o12 = keccak__padding__pad101_multi_blocks__next_block__compl)
-
-axiom H44 : (mk3(0,
-  r122s) = keccak__padding__pad101_multi_blocks__next_block__compl1)
-
-axiom H45 : ((0 <= r119s) -> (((0 <= 0) and (0 <= 199)) and ((0 <= r119s) and
-  (r119s <= 199))))
-
-axiom H46 : (o13 = ctx__split_fields31)
-
-axiom H47 : (o13 = keccak__padding__pad101_multi_blocks__first_block__compl)
-
-axiom H48 : (mk2(0,
-  r119s) = keccak__padding__pad101_multi_blocks__first_block__compl1)
-
-axiom H49 :
-  (to_rep(o18) = to_rep(last6(keccak__padding__pad101_multi_blocks__next_block__compl1)))
-
-axiom H50 :
-  (to_rep(o17) = to_rep(first6(keccak__padding__pad101_multi_blocks__next_block__compl1)))
-
-axiom H51 : ((o16 = rate_of({ us_split_fields1 = {
-  rec__keccak__keccak_1600__sponge__context__state = ctx__split_fields30;
-  rec__keccak__keccak_1600__sponge__context__block = ctx__split_fields31;
+  (result25 = ctx__split_fields29)))))) and (ctx__split_fields30 = {
+  rec__keccak__keccak_1600__sponge__context__state = temp___1067;
+  rec__keccak__keccak_1600__sponge__context__block = temp___10671;
+  rec__keccak__keccak_1600__sponge__context__bits_absorbed = temp___10672;
+  rec__keccak__keccak_1600__sponge__context__bytes_squeezed = temp___10673;
+  rec__keccak__keccak_1600__sponge__context__rate = temp___10674;
+  rec__keccak__keccak_1600__sponge__context__curr_state = temp___10675
+  })))))))) or ((not (result1 = true)) and ((ctx__split_fields30 = {
+  rec__keccak__keccak_1600__sponge__context__state = ctx__split_fields;
+  rec__keccak__keccak_1600__sponge__context__block = ctx__split_fields1;
   rec__keccak__keccak_1600__sponge__context__bits_absorbed =
-  ctx__split_fields32;
+  ctx__split_fields2;
   rec__keccak__keccak_1600__sponge__context__bytes_squeezed =
-  ctx__split_fields33; rec__keccak__keccak_1600__sponge__context__rate =
-  ctx__split_fields34;
-  rec__keccak__keccak_1600__sponge__context__curr_state = ctx__split_fields35
-  } })) and (in_range7(o16) and
-  ((o16 = (to_rep6(ctx__split_fields34) * 8)) and (o16 <  1600))))
-
-axiom H52 :
-  (to_rep(o15) = to_rep(last4(keccak__padding__pad101_multi_blocks__first_block__compl1)))
-
-axiom H53 :
-  (to_rep(o14) = to_rep(first4(keccak__padding__pad101_multi_blocks__first_block__compl1)))
-
-axiom H54 : ((spilled = true) <->
-  (o16 <  (to_rep5(ctx__split_fields32) + 2)))
-
-axiom H55 :
-  (forall temp___1004:int. ((((0 <= temp___1004) and
-  (temp___1004 <= r119s)) ->
-  ((o19[temp___1004]) = (slide(keccak__padding__pad101_multi_blocks__first_block,
-  to_rep(first(mk(to_rep(first4(keccak__padding__pad101_multi_blocks__first_block__compl1)),
-  to_rep(last4(keccak__padding__pad101_multi_blocks__first_block__compl1))))),
-  0)[temp___1004]))) and ((not ((0 <= temp___1004) and
-  (temp___1004 <= r119s))) ->
-  ((o19[temp___1004]) = (ctx__split_fields31[temp___1004])))))
-
-axiom H56 : (ctx__split_fields30 = o20)
-
-axiom H57 : (o19 = o21)
-
-axiom H58 : (ctx__split_fields32 = o22)
-
-axiom H59 : (ctx__split_fields33 = o23)
-
-axiom H60 : (ctx__split_fields34 = o24)
-
-axiom H61 : (ctx__split_fields35 = o25)
-
-axiom H62 : (temp___1006 = o20)
-
-axiom H63 : (temp___10061 = o21)
-
-axiom H64 : (temp___10062 = o22)
-
-axiom H65 : (temp___10063 = o23)
-
-axiom H66 : (temp___10064 = o24)
-
-axiom H67 : (temp___10065 = o25)
-
-axiom H68 : ((result26 = ctx__split_fields30) and
-  ((result27 = ctx__split_fields31) and ((result28 = ctx__split_fields32) and
-  ((result29 = ctx__split_fields33) and ((result30 = ctx__split_fields34) and
-  (result31 = ctx__split_fields35))))))
-
-axiom H69 : ((ctx__split_fields36 = temp___1006) and
-  ((ctx__split_fields37 = temp___10061) and
-  ((ctx__split_fields38 = temp___10062) and
-  ((ctx__split_fields39 = temp___10063) and
-  ((ctx__split_fields40 = temp___10064) and
-  (ctx__split_fields41 = temp___10065))))))
-
-axiom H70 :
-  (forall temp___1010:int. ((((0 <= temp___1010) and
-  (temp___1010 <= r122s)) ->
-  ((o26[temp___1010]) = (slide(keccak__padding__pad101_multi_blocks__next_block,
-  to_rep(first(mk(to_rep(first6(keccak__padding__pad101_multi_blocks__next_block__compl1)),
-  to_rep(last6(keccak__padding__pad101_multi_blocks__next_block__compl1))))),
-  0)[temp___1010]))) and ((not ((0 <= temp___1010) and
-  (temp___1010 <= r122s))) ->
-  ((o26[temp___1010]) = (next_block1[temp___1010])))))
-
-axiom H71 : (result32 = next_block1)
-
-axiom H72 : (next_block2 = o26)
-
-axiom H73 : ((to_rep6(ctx__split_fields40) - 1) = r125s)
-
-axiom H74 : in_range1(r125s)
-
-axiom H75 : ((o30 = rate_of({ us_split_fields1 = {
-  rec__keccak__keccak_1600__sponge__context__state = ctx__split_fields36;
-  rec__keccak__keccak_1600__sponge__context__block = ctx__split_fields37;
+  ctx__split_fields3; rec__keccak__keccak_1600__sponge__context__rate =
+  ctx__split_fields4; rec__keccak__keccak_1600__sponge__context__curr_state =
+  ctx__split_fields5 }) and (ctx__split_fields30 = {
+  rec__keccak__keccak_1600__sponge__context__state = ctx__split_fields6;
+  rec__keccak__keccak_1600__sponge__context__block = ctx__split_fields7;
   rec__keccak__keccak_1600__sponge__context__bits_absorbed =
-  ctx__split_fields38;
+  ctx__split_fields8;
   rec__keccak__keccak_1600__sponge__context__bytes_squeezed =
-  ctx__split_fields39; rec__keccak__keccak_1600__sponge__context__rate =
-  ctx__split_fields40;
-  rec__keccak__keccak_1600__sponge__context__curr_state = ctx__split_fields41
-  } })) and (in_range7(o30) and
-  ((o30 = (to_rep6(ctx__split_fields40) * 8)) and (o30 <  1600))))
-
-axiom H76 : ((0 <= r125s) -> (((0 <= 0) and (0 <= 199)) and ((0 <= r125s) and
-  (r125s <= 199))))
-
-axiom H77 : (o27 = ctx__split_fields37)
-
-axiom H78 : (o27 = temp___1013)
-
-axiom H79 : (mk4(0, r125s) = temp___10131)
-
-axiom H80 : (temp___1013 = o28)
-
-axiom H81 : (mk(to_rep(first8(temp___10131)),
-  to_rep(last8(temp___10131))) = o29)
-
-axiom H82 : true
-
-axiom H83 : ((result33 = ctx__split_fields36) and
-  ((result34 = ctx__split_fields37) and ((result35 = ctx__split_fields38) and
-  ((result36 = ctx__split_fields39) and ((result37 = ctx__split_fields40) and
-  (result38 = ctx__split_fields41))))))
-
-axiom H84 :
-  ((ctx__split_fields42 = keccak__keccak_1600__keccakf_1600_lanes__xor_bits_into_state__a1) and
-  ((ctx__split_fields43 = ctx__split_fields37) and
-  ((ctx__split_fields44 = ctx__split_fields38) and
-  ((ctx__split_fields45 = ctx__split_fields39) and
-  ((ctx__split_fields46 = ctx__split_fields40) and
-  (ctx__split_fields47 = ctx__split_fields41))))))
-
-axiom H85 : ((result39 = ctx__split_fields42) and
-  ((result40 = ctx__split_fields43) and ((result41 = ctx__split_fields44) and
-  ((result42 = ctx__split_fields45) and ((result43 = ctx__split_fields46) and
-  (result44 = ctx__split_fields47))))))
-
-axiom H86 :
-  ((ctx__split_fields48 = keccak__keccak_1600__keccakf_1600_permutation__permute__a1) and
-  ((ctx__split_fields49 = ctx__split_fields43) and
-  ((ctx__split_fields50 = ctx__split_fields44) and
-  ((ctx__split_fields51 = ctx__split_fields45) and
-  ((ctx__split_fields52 = ctx__split_fields46) and
-  (ctx__split_fields53 = ctx__split_fields47))))))
-
-axiom H87 : ((spilled = true) ->
-  ((to_rep6(ctx__split_fields52) - 1) = r128s))
-
-axiom H88 : ((spilled = true) -> in_range1(r128s))
-
-axiom H89 : ((spilled = true) -> ((o34 = rate_of({ us_split_fields1 = {
-  rec__keccak__keccak_1600__sponge__context__state = ctx__split_fields48;
-  rec__keccak__keccak_1600__sponge__context__block = ctx__split_fields49;
+  ctx__split_fields9; rec__keccak__keccak_1600__sponge__context__rate =
+  ctx__split_fields10;
+  rec__keccak__keccak_1600__sponge__context__curr_state = ctx__split_fields11
+  }))))) and
+  ((((to_rep6((ctx__split_fields30).rec__keccak__keccak_1600__sponge__context__rate) - 1) = r119s) and
+  in_range1(r119s)) and
+  ((((to_rep6((ctx__split_fields30).rec__keccak__keccak_1600__sponge__context__rate) - 1) = r122s) and
+  in_range1(r122s)) and ((((((0 <= r122s) -> (((0 <= 0) and (0 <= 199)) and
+  ((0 <= r122s) and (r122s <= 199)))) and (o12 = next_block1)) and
+  ((o12 = keccak__padding__pad101_multi_blocks__next_block__compl) and
+  (mk3(0,
+  r122s) = keccak__padding__pad101_multi_blocks__next_block__compl1))) and
+  (((((0 <= r119s) -> (((0 <= 0) and (0 <= 199)) and ((0 <= r119s) and
+  (r119s <= 199)))) and
+  (o13 = (ctx__split_fields30).rec__keccak__keccak_1600__sponge__context__block)) and
+  ((o13 = keccak__padding__pad101_multi_blocks__first_block__compl) and
+  (mk2(0,
+  r119s) = keccak__padding__pad101_multi_blocks__first_block__compl1))) and
+  (((to_rep(o18) = to_rep(last6(keccak__padding__pad101_multi_blocks__next_block__compl1))) and
+  ((to_rep(o17) = to_rep(first6(keccak__padding__pad101_multi_blocks__next_block__compl1))) and
+  (((o16 = rate_of({ us_split_fields1 = ctx__split_fields30 })) and
+  (in_range7(o16) and
+  ((o16 = (to_rep6((ctx__split_fields30).rec__keccak__keccak_1600__sponge__context__rate) * 8)) and
+  (o16 <  1600)))) and
+  ((to_rep(o15) = to_rep(last4(keccak__padding__pad101_multi_blocks__first_block__compl1))) and
+  ((to_rep(o14) = to_rep(first4(keccak__padding__pad101_multi_blocks__first_block__compl1))) and
+  ((spilled = true) <->
+  (o16 <  (to_rep5((ctx__split_fields30).rec__keccak__keccak_1600__sponge__context__bits_absorbed) + 2)))))))) and
+  (((((forall temp___1073:int. ((((0 <= temp___1073) and
+      (temp___1073 <= r119s)) and
+      ((o19[temp___1073]) = (slide(keccak__padding__pad101_multi_blocks__first_block,
+      to_rep(first(mk(to_rep(first4(keccak__padding__pad101_multi_blocks__first_block__compl1)),
+      to_rep(last4(keccak__padding__pad101_multi_blocks__first_block__compl1))))),
+      0)[temp___1073]))) or ((not ((0 <= temp___1073) and
+      (temp___1073 <= r119s))) and
+      ((o19[temp___1073]) = ((ctx__split_fields30).rec__keccak__keccak_1600__sponge__context__block[temp___1073]))))) and
+  (((ctx__split_fields30).rec__keccak__keccak_1600__sponge__context__state = o20) and
+  ((o19 = o21) and
+  (((ctx__split_fields30).rec__keccak__keccak_1600__sponge__context__bits_absorbed = o22) and
+  (((ctx__split_fields30).rec__keccak__keccak_1600__sponge__context__bytes_squeezed = o23) and
+  (((ctx__split_fields30).rec__keccak__keccak_1600__sponge__context__rate = o24) and
+  ((ctx__split_fields30).rec__keccak__keccak_1600__sponge__context__curr_state = o25))))))) and
+  ((temp___1075 = o20) and ((temp___10751 = o21) and
+  ((temp___10752 = o22) and ((temp___10753 = o23) and
+  ((temp___10754 = o24) and (temp___10755 = o25))))))) and ((result26 = {
+  us_split_fields__content = ctx__split_fields30 }) and
+  (ctx__split_fields31 = { rec__keccak__keccak_1600__sponge__context__state =
+  temp___1075; rec__keccak__keccak_1600__sponge__context__block =
+  temp___10751; rec__keccak__keccak_1600__sponge__context__bits_absorbed =
+  temp___10752; rec__keccak__keccak_1600__sponge__context__bytes_squeezed =
+  temp___10753; rec__keccak__keccak_1600__sponge__context__rate =
+  temp___10754; rec__keccak__keccak_1600__sponge__context__curr_state =
+  temp___10755 }))) and
+  ((forall temp___1079:int. ((((0 <= temp___1079) and
+   (temp___1079 <= r122s)) and
+   ((o26[temp___1079]) = (slide(keccak__padding__pad101_multi_blocks__next_block,
+   to_rep(first(mk(to_rep(first6(keccak__padding__pad101_multi_blocks__next_block__compl1)),
+   to_rep(last6(keccak__padding__pad101_multi_blocks__next_block__compl1))))),
+   0)[temp___1079]))) or ((not ((0 <= temp___1079) and
+   (temp___1079 <= r122s))) and
+   ((o26[temp___1079]) = (next_block1[temp___1079]))))) and
+  ((result27 = { map__content = next_block1 }) and
+  (next_block2 = o26))))))) and
+  ((((to_rep6((ctx__split_fields31).rec__keccak__keccak_1600__sponge__context__rate) - 1) = r125s) and
+  in_range1(r125s)) and (((((o30 = rate_of({ us_split_fields1 =
+  ctx__split_fields31 })) and (in_range7(o30) and
+  ((o30 = (to_rep6((ctx__split_fields31).rec__keccak__keccak_1600__sponge__context__rate) * 8)) and
+  (o30 <  1600)))) and (((((0 <= r125s) -> (((0 <= 0) and (0 <= 199)) and
+  ((0 <= r125s) and (r125s <= 199)))) and
+  (o27 = (ctx__split_fields31).rec__keccak__keccak_1600__sponge__context__block)) and
+  ((o27 = temp___1082) and (mk4(0, r125s) = temp___10821))) and
+  ((temp___1082 = o28) and (mk(to_rep(first8(temp___10821)),
+  to_rep(last8(temp___10821))) = o29)))) and ((result28 = {
+  us_split_fields__content = ctx__split_fields31 }) and
+  (ctx__split_fields32 = { rec__keccak__keccak_1600__sponge__context__state =
+  keccak__keccak_1600__keccakf_1600_lanes__xor_bits_into_state__a1;
+  rec__keccak__keccak_1600__sponge__context__block =
+  (ctx__split_fields31).rec__keccak__keccak_1600__sponge__context__block;
   rec__keccak__keccak_1600__sponge__context__bits_absorbed =
-  ctx__split_fields50;
+  (ctx__split_fields31).rec__keccak__keccak_1600__sponge__context__bits_absorbed;
   rec__keccak__keccak_1600__sponge__context__bytes_squeezed =
-  ctx__split_fields51; rec__keccak__keccak_1600__sponge__context__rate =
-  ctx__split_fields52;
-  rec__keccak__keccak_1600__sponge__context__curr_state = ctx__split_fields53
-  } })) and (in_range7(o34) and
-  ((o34 = (to_rep6(ctx__split_fields52) * 8)) and (o34 <  1600)))))
-
-axiom H90 : ((spilled = true) -> ((0 <= r128s) -> (((0 <= 0) and
-  (0 <= 199)) and ((0 <= r128s) and (r128s <= 199)))))
-
-axiom H91 : ((spilled = true) -> (o31 = next_block2))
-
-axiom H92 : ((spilled = true) -> (o31 = temp___1019))
-
-axiom H93 : ((spilled = true) -> (mk5(0, r128s) = temp___10191))
-
-axiom H94 : ((spilled = true) -> (temp___1019 = o32))
-
-axiom H95 : ((spilled = true) -> (mk(to_rep(first10(temp___10191)),
-  to_rep(last10(temp___10191))) = o33))
-
-axiom H96 : true
-
-axiom H97 : ((spilled = true) -> ((result45 = ctx__split_fields48) and
-  ((result46 = ctx__split_fields49) and ((result47 = ctx__split_fields50) and
-  ((result48 = ctx__split_fields51) and ((result49 = ctx__split_fields52) and
-  (result50 = ctx__split_fields53)))))))
-
-axiom H98 : ((spilled = true) ->
-  ((ctx__split_fields54 = keccak__keccak_1600__keccakf_1600_lanes__xor_bits_into_state__a2) and
-  ((ctx__split_fields55 = ctx__split_fields49) and
-  ((ctx__split_fields56 = ctx__split_fields50) and
-  ((ctx__split_fields57 = ctx__split_fields51) and
-  ((ctx__split_fields58 = ctx__split_fields52) and
-  (ctx__split_fields59 = ctx__split_fields53)))))))
-
-axiom H99 : ((spilled = true) -> ((result51 = ctx__split_fields54) and
-  ((result52 = ctx__split_fields55) and ((result53 = ctx__split_fields56) and
-  ((result54 = ctx__split_fields57) and ((result55 = ctx__split_fields58) and
-  (result56 = ctx__split_fields59)))))))
-
-axiom H100 : ((spilled = true) ->
-  ((ctx__split_fields60 = keccak__keccak_1600__keccakf_1600_permutation__permute__a2) and
-  ((ctx__split_fields61 = ctx__split_fields55) and
-  ((ctx__split_fields62 = ctx__split_fields56) and
-  ((ctx__split_fields63 = ctx__split_fields57) and
-  ((ctx__split_fields64 = ctx__split_fields58) and
-  (ctx__split_fields65 = ctx__split_fields59)))))))
-
-axiom H101 : ((not (spilled = true)) ->
-  ((ctx__split_fields60 = ctx__split_fields48) and
-  ((ctx__split_fields61 = ctx__split_fields49) and
-  ((ctx__split_fields62 = ctx__split_fields50) and
-  ((ctx__split_fields63 = ctx__split_fields51) and
-  ((ctx__split_fields64 = ctx__split_fields52) and
-  (ctx__split_fields65 = ctx__split_fields53)))))))
-
-axiom H102 : ((to_rep6(ctx__split_fields64) - 1) = r131s)
-
-axiom H103 : in_range1(r131s)
-
-axiom H104 : ((0 <= r131s) -> (((0 <= 0) and (0 <= 199)) and
-  ((0 <= r131s) and (r131s <= 199))))
-
-axiom H105 : (o35 = ctx__split_fields61)
-
-axiom H106 :
-  (o35 = keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data__compl)
-
-axiom H107 : (mk6(0,
-  r131s) = keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data__compl1)
-
-axiom H108 :
-  (to_rep(o37) = to_rep(last12(keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data__compl1)))
-
-axiom H109 :
-  (to_rep(o36) = to_rep(first12(keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data__compl1)))
-
-axiom H110 : true
-
-axiom H111 :
-  (forall temp___1029:int. ((((0 <= temp___1029) and
-  (temp___1029 <= r131s)) ->
-  ((o38[temp___1029]) = (slide(keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data,
-  to_rep(first(mk(to_rep(first12(keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data__compl1)),
-  to_rep(last12(keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data__compl1))))),
-  0)[temp___1029]))) and ((not ((0 <= temp___1029) and
-  (temp___1029 <= r131s))) ->
-  ((o38[temp___1029]) = (ctx__split_fields61[temp___1029])))))
-
-axiom H112 : (ctx__split_fields60 = o39)
-
-axiom H113 : (o38 = o40)
-
-axiom H114 : (ctx__split_fields62 = o41)
-
-axiom H115 : (ctx__split_fields63 = o42)
-
-axiom H116 : (ctx__split_fields64 = o43)
-
-axiom H117 : (ctx__split_fields65 = o44)
-
-axiom H118 : (temp___1031 = o39)
-
-axiom H119 : (temp___10311 = o40)
-
-axiom H120 : (temp___10312 = o41)
-
-axiom H121 : (temp___10313 = o42)
-
-axiom H122 : (temp___10314 = o43)
-
-axiom H123 : (temp___10315 = o44)
-
-axiom H124 : ((result57 = ctx__split_fields60) and
-  ((result58 = ctx__split_fields61) and ((result59 = ctx__split_fields62) and
-  ((result60 = ctx__split_fields63) and ((result61 = ctx__split_fields64) and
-  (result62 = ctx__split_fields65))))))
-
-axiom H125 : ((ctx__split_fields66 = temp___1031) and
-  ((ctx__split_fields67 = temp___10311) and
-  ((ctx__split_fields68 = temp___10312) and
-  ((ctx__split_fields69 = temp___10313) and
-  ((ctx__split_fields70 = temp___10314) and
-  (ctx__split_fields71 = temp___10315))))))
-
-axiom H126 : (to_rep5(o45) = 0)
-
-axiom H127 : ((o46 = ctx__split_fields66) and
-  ((o47 = ctx__split_fields67) and ((o48 = o45) and
-  ((o49 = ctx__split_fields69) and ((o50 = ctx__split_fields70) and
-  (o51 = ctx__split_fields71))))))
-
-axiom H128 : ((temp___1033 = o46) and ((temp___10331 = o47) and
-  ((temp___10332 = o48) and ((temp___10333 = o49) and
-  ((temp___10334 = o50) and (temp___10335 = o51))))))
-
-axiom H129 : ((result63 = ctx__split_fields66) and
-  ((result64 = ctx__split_fields67) and ((result65 = ctx__split_fields68) and
-  ((result66 = ctx__split_fields69) and ((result67 = ctx__split_fields70) and
-  (result68 = ctx__split_fields71))))))
-
-axiom H130 : ((ctx__split_fields72 = temp___1033) and
-  ((ctx__split_fields73 = temp___10331) and
-  ((ctx__split_fields74 = temp___10332) and
-  ((ctx__split_fields75 = temp___10333) and
-  ((ctx__split_fields76 = temp___10334) and
-  (ctx__split_fields77 = temp___10335))))))
-
-axiom H131 : (to_rep4(o52) = 0)
-
-axiom H132 : ((o53 = ctx__split_fields72) and
-  ((o54 = ctx__split_fields73) and ((o55 = ctx__split_fields74) and
-  ((o56 = o52) and ((o57 = ctx__split_fields76) and
-  (o58 = ctx__split_fields77))))))
-
-axiom H133 : ((temp___1035 = o53) and ((temp___10351 = o54) and
-  ((temp___10352 = o55) and ((temp___10353 = o56) and
-  ((temp___10354 = o57) and (temp___10355 = o58))))))
-
-axiom H134 : ((result69 = ctx__split_fields72) and
-  ((result70 = ctx__split_fields73) and ((result71 = ctx__split_fields74) and
-  ((result72 = ctx__split_fields75) and ((result73 = ctx__split_fields76) and
-  (result74 = ctx__split_fields77))))))
-
-axiom H135 : ((ctx__split_fields78 = temp___1035) and
-  ((ctx__split_fields79 = temp___10351) and
-  ((ctx__split_fields80 = temp___10352) and
-  ((ctx__split_fields81 = temp___10353) and
-  ((ctx__split_fields82 = temp___10354) and
-  (ctx__split_fields83 = temp___10355))))))
-
-axiom H136 : (to_rep3(o59) = 1)
-
-axiom H137 : ((o60 = ctx__split_fields78) and
-  ((o61 = ctx__split_fields79) and ((o62 = ctx__split_fields80) and
-  ((o63 = ctx__split_fields81) and ((o64 = ctx__split_fields82) and
-  (o65 = o59))))))
-
-axiom H138 : ((temp___1037 = o60) and ((temp___10371 = o61) and
-  ((temp___10372 = o62) and ((temp___10373 = o63) and
-  ((temp___10374 = o64) and (temp___10375 = o65))))))
-
-axiom H139 : ((result75 = ctx__split_fields78) and
-  ((result76 = ctx__split_fields79) and ((result77 = ctx__split_fields80) and
-  ((result78 = ctx__split_fields81) and ((result79 = ctx__split_fields82) and
-  (result80 = ctx__split_fields83))))))
-
-axiom H140 : ((ctx__split_fields84 = temp___1037) and
-  ((ctx__split_fields85 = temp___10371) and
-  ((ctx__split_fields86 = temp___10372) and
-  ((ctx__split_fields87 = temp___10373) and
-  ((ctx__split_fields88 = temp___10374) and
-  (ctx__split_fields89 = temp___10375))))))
-
-axiom H141 : (spilled1 = spilled)
-
-axiom H142 : (next_block3 = next_block2)
-
-axiom H143 : ((ctx__split_fields90 = ctx__split_fields84) and
-  ((ctx__split_fields91 = ctx__split_fields85) and
-  ((ctx__split_fields92 = ctx__split_fields86) and
-  ((ctx__split_fields93 = ctx__split_fields87) and
-  ((ctx__split_fields94 = ctx__split_fields88) and
-  (ctx__split_fields95 = ctx__split_fields89))))))
-
-axiom H144 : (spilled2 = spilled)
-
-axiom H145 : (next_block4 = next_block2)
-
-axiom H146 : ((ctx__split_fields96 = ctx__split_fields84) and
-  ((ctx__split_fields97 = ctx__split_fields85) and
-  ((ctx__split_fields98 = ctx__split_fields86) and
-  ((ctx__split_fields99 = ctx__split_fields87) and
-  ((ctx__split_fields100 = ctx__split_fields88) and
-  (ctx__split_fields101 = ctx__split_fields89))))))
-
- (* File "keccak-sponge.ads", line 222, characters 0-0 *)
-goal WP_parameter_def : (state_of({ us_split_fields1 = {
-  rec__keccak__keccak_1600__sponge__context__state = ctx__split_fields90;
-  rec__keccak__keccak_1600__sponge__context__block = ctx__split_fields91;
+  (ctx__split_fields31).rec__keccak__keccak_1600__sponge__context__bytes_squeezed;
+  rec__keccak__keccak_1600__sponge__context__rate =
+  (ctx__split_fields31).rec__keccak__keccak_1600__sponge__context__rate;
+  rec__keccak__keccak_1600__sponge__context__curr_state =
+  (ctx__split_fields31).rec__keccak__keccak_1600__sponge__context__curr_state
+  }))) and (((result29 = { us_split_fields__content = ctx__split_fields32
+  }) and (ctx__split_fields33 = {
+  rec__keccak__keccak_1600__sponge__context__state =
+  keccak__keccak_1600__keccakf_1600_permutation__permute__a1;
+  rec__keccak__keccak_1600__sponge__context__block =
+  (ctx__split_fields32).rec__keccak__keccak_1600__sponge__context__block;
   rec__keccak__keccak_1600__sponge__context__bits_absorbed =
-  ctx__split_fields92;
+  (ctx__split_fields32).rec__keccak__keccak_1600__sponge__context__bits_absorbed;
   rec__keccak__keccak_1600__sponge__context__bytes_squeezed =
-  ctx__split_fields93; rec__keccak__keccak_1600__sponge__context__rate =
-  ctx__split_fields94;
-  rec__keccak__keccak_1600__sponge__context__curr_state = ctx__split_fields95
-  } }) = 1)
+  (ctx__split_fields32).rec__keccak__keccak_1600__sponge__context__bytes_squeezed;
+  rec__keccak__keccak_1600__sponge__context__rate =
+  (ctx__split_fields32).rec__keccak__keccak_1600__sponge__context__rate;
+  rec__keccak__keccak_1600__sponge__context__curr_state =
+  (ctx__split_fields32).rec__keccak__keccak_1600__sponge__context__curr_state
+  })) and ((((spilled = true) and
+  ((((to_rep6((ctx__split_fields33).rec__keccak__keccak_1600__sponge__context__rate) - 1) = r128s) and
+  in_range1(r128s)) and (((((o34 = rate_of({ us_split_fields1 =
+  ctx__split_fields33 })) and (in_range7(o34) and
+  ((o34 = (to_rep6((ctx__split_fields33).rec__keccak__keccak_1600__sponge__context__rate) * 8)) and
+  (o34 <  1600)))) and (((((0 <= r128s) -> (((0 <= 0) and (0 <= 199)) and
+  ((0 <= r128s) and (r128s <= 199)))) and (o31 = next_block2)) and
+  ((o31 = temp___1088) and (mk5(0, r128s) = temp___10881))) and
+  ((temp___1088 = o32) and (mk(to_rep(first10(temp___10881)),
+  to_rep(last10(temp___10881))) = o33)))) and ((result30 = {
+  us_split_fields__content = ctx__split_fields33 }) and
+  (ctx__split_fields34 = { rec__keccak__keccak_1600__sponge__context__state =
+  keccak__keccak_1600__keccakf_1600_lanes__xor_bits_into_state__a2;
+  rec__keccak__keccak_1600__sponge__context__block =
+  (ctx__split_fields33).rec__keccak__keccak_1600__sponge__context__block;
+  rec__keccak__keccak_1600__sponge__context__bits_absorbed =
+  (ctx__split_fields33).rec__keccak__keccak_1600__sponge__context__bits_absorbed;
+  rec__keccak__keccak_1600__sponge__context__bytes_squeezed =
+  (ctx__split_fields33).rec__keccak__keccak_1600__sponge__context__bytes_squeezed;
+  rec__keccak__keccak_1600__sponge__context__rate =
+  (ctx__split_fields33).rec__keccak__keccak_1600__sponge__context__rate;
+  rec__keccak__keccak_1600__sponge__context__curr_state =
+  (ctx__split_fields33).rec__keccak__keccak_1600__sponge__context__curr_state
+  }))) and ((result31 = { us_split_fields__content = ctx__split_fields34
+  }) and (ctx__split_fields35 = {
+  rec__keccak__keccak_1600__sponge__context__state =
+  keccak__keccak_1600__keccakf_1600_permutation__permute__a2;
+  rec__keccak__keccak_1600__sponge__context__block =
+  (ctx__split_fields34).rec__keccak__keccak_1600__sponge__context__block;
+  rec__keccak__keccak_1600__sponge__context__bits_absorbed =
+  (ctx__split_fields34).rec__keccak__keccak_1600__sponge__context__bits_absorbed;
+  rec__keccak__keccak_1600__sponge__context__bytes_squeezed =
+  (ctx__split_fields34).rec__keccak__keccak_1600__sponge__context__bytes_squeezed;
+  rec__keccak__keccak_1600__sponge__context__rate =
+  (ctx__split_fields34).rec__keccak__keccak_1600__sponge__context__rate;
+  rec__keccak__keccak_1600__sponge__context__curr_state =
+  (ctx__split_fields34).rec__keccak__keccak_1600__sponge__context__curr_state
+  }))))) or ((not (spilled = true)) and
+  (ctx__split_fields35 = ctx__split_fields33))) and
+  ((((to_rep6((ctx__split_fields35).rec__keccak__keccak_1600__sponge__context__rate) - 1) = r131s) and
+  in_range1(r131s)) and ((((((0 <= r131s) -> (((0 <= 0) and (0 <= 199)) and
+  ((0 <= r131s) and (r131s <= 199)))) and
+  (o35 = (ctx__split_fields35).rec__keccak__keccak_1600__sponge__context__block)) and
+  ((o35 = keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data__compl) and
+  (mk6(0,
+  r131s) = keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data__compl1))) and
+  (((to_rep(o37) = to_rep(last12(keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data__compl1))) and
+  (to_rep(o36) = to_rep(first12(keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data__compl1)))) and
+  ((((forall temp___1098:int. ((((0 <= temp___1098) and
+     (temp___1098 <= r131s)) and
+     ((o38[temp___1098]) = (slide(keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data,
+     to_rep(first(mk(to_rep(first12(keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data__compl1)),
+     to_rep(last12(keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data__compl1))))),
+     0)[temp___1098]))) or ((not ((0 <= temp___1098) and
+     (temp___1098 <= r131s))) and
+     ((o38[temp___1098]) = ((ctx__split_fields35).rec__keccak__keccak_1600__sponge__context__block[temp___1098]))))) and
+  (((ctx__split_fields35).rec__keccak__keccak_1600__sponge__context__state = o39) and
+  ((o38 = o40) and
+  (((ctx__split_fields35).rec__keccak__keccak_1600__sponge__context__bits_absorbed = o41) and
+  (((ctx__split_fields35).rec__keccak__keccak_1600__sponge__context__bytes_squeezed = o42) and
+  (((ctx__split_fields35).rec__keccak__keccak_1600__sponge__context__rate = o43) and
+  ((ctx__split_fields35).rec__keccak__keccak_1600__sponge__context__curr_state = o44))))))) and
+  ((temp___1100 = o39) and ((temp___11001 = o40) and
+  ((temp___11002 = o41) and ((temp___11003 = o42) and
+  ((temp___11004 = o43) and (temp___11005 = o44))))))) and ((result32 = {
+  us_split_fields__content = ctx__split_fields35 }) and
+  (ctx__split_fields36 = { rec__keccak__keccak_1600__sponge__context__state =
+  temp___1100; rec__keccak__keccak_1600__sponge__context__block =
+  temp___11001; rec__keccak__keccak_1600__sponge__context__bits_absorbed =
+  temp___11002; rec__keccak__keccak_1600__sponge__context__bytes_squeezed =
+  temp___11003; rec__keccak__keccak_1600__sponge__context__rate =
+  temp___11004; rec__keccak__keccak_1600__sponge__context__curr_state =
+  temp___11005 }))))) and (((((to_rep5(o45) = 0) and
+  (((ctx__split_fields36).rec__keccak__keccak_1600__sponge__context__state = o46) and
+  (((ctx__split_fields36).rec__keccak__keccak_1600__sponge__context__block = o47) and
+  ((o45 = o48) and
+  (((ctx__split_fields36).rec__keccak__keccak_1600__sponge__context__bytes_squeezed = o49) and
+  (((ctx__split_fields36).rec__keccak__keccak_1600__sponge__context__rate = o50) and
+  ((ctx__split_fields36).rec__keccak__keccak_1600__sponge__context__curr_state = o51))))))) and
+  ((temp___1102 = o46) and ((temp___11021 = o47) and
+  ((temp___11022 = o48) and ((temp___11023 = o49) and
+  ((temp___11024 = o50) and (temp___11025 = o51))))))) and ((result33 = {
+  us_split_fields__content = ctx__split_fields36 }) and
+  (ctx__split_fields37 = { rec__keccak__keccak_1600__sponge__context__state =
+  temp___1102; rec__keccak__keccak_1600__sponge__context__block =
+  temp___11021; rec__keccak__keccak_1600__sponge__context__bits_absorbed =
+  temp___11022; rec__keccak__keccak_1600__sponge__context__bytes_squeezed =
+  temp___11023; rec__keccak__keccak_1600__sponge__context__rate =
+  temp___11024; rec__keccak__keccak_1600__sponge__context__curr_state =
+  temp___11025 }))) and (((((to_rep4(o52) = 0) and
+  (((ctx__split_fields37).rec__keccak__keccak_1600__sponge__context__state = o53) and
+  (((ctx__split_fields37).rec__keccak__keccak_1600__sponge__context__block = o54) and
+  (((ctx__split_fields37).rec__keccak__keccak_1600__sponge__context__bits_absorbed = o55) and
+  ((o52 = o56) and
+  (((ctx__split_fields37).rec__keccak__keccak_1600__sponge__context__rate = o57) and
+  ((ctx__split_fields37).rec__keccak__keccak_1600__sponge__context__curr_state = o58))))))) and
+  ((temp___1104 = o53) and ((temp___11041 = o54) and
+  ((temp___11042 = o55) and ((temp___11043 = o56) and
+  ((temp___11044 = o57) and (temp___11045 = o58))))))) and ((result34 = {
+  us_split_fields__content = ctx__split_fields37 }) and
+  (ctx__split_fields38 = { rec__keccak__keccak_1600__sponge__context__state =
+  temp___1104; rec__keccak__keccak_1600__sponge__context__block =
+  temp___11041; rec__keccak__keccak_1600__sponge__context__bits_absorbed =
+  temp___11042; rec__keccak__keccak_1600__sponge__context__bytes_squeezed =
+  temp___11043; rec__keccak__keccak_1600__sponge__context__rate =
+  temp___11044; rec__keccak__keccak_1600__sponge__context__curr_state =
+  temp___11045 }))) and ((((to_rep3(o59) = 1) and
+  (((ctx__split_fields38).rec__keccak__keccak_1600__sponge__context__state = o60) and
+  (((ctx__split_fields38).rec__keccak__keccak_1600__sponge__context__block = o61) and
+  (((ctx__split_fields38).rec__keccak__keccak_1600__sponge__context__bits_absorbed = o62) and
+  (((ctx__split_fields38).rec__keccak__keccak_1600__sponge__context__bytes_squeezed = o63) and
+  (((ctx__split_fields38).rec__keccak__keccak_1600__sponge__context__rate = o64) and
+  (o59 = o65))))))) and ((temp___1106 = o60) and ((temp___11061 = o61) and
+  ((temp___11062 = o62) and ((temp___11063 = o63) and
+  ((temp___11064 = o64) and (temp___11065 = o65))))))) and ((result35 = {
+  us_split_fields__content = ctx__split_fields38 }) and
+  (ctx__split_fields39 = { rec__keccak__keccak_1600__sponge__context__state =
+  temp___1106; rec__keccak__keccak_1600__sponge__context__block =
+  temp___11061; rec__keccak__keccak_1600__sponge__context__bits_absorbed =
+  temp___11062; rec__keccak__keccak_1600__sponge__context__bytes_squeezed =
+  temp___11063; rec__keccak__keccak_1600__sponge__context__rate =
+  temp___11064; rec__keccak__keccak_1600__sponge__context__curr_state =
+  temp___11065 })))))))))))))))) and (((spilled1 = { bool__content = spilled
+  }) and ((next_block3 = { map__content = next_block2 }) and
+  (ctx__split_fields40 = { us_split_fields__content = ctx__split_fields39
+  }))) and ((spilled2 = spilled) and ((next_block4 = next_block2) and
+  (ctx__split_fields41 = ctx__split_fields39))))) -> (state_of({
+  us_split_fields1 = (ctx__split_fields40).us_split_fields__content }) = 1)))

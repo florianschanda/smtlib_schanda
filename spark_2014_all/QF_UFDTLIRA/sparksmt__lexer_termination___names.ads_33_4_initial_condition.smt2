@@ -29,7 +29,7 @@
 (declare-const dummy name_id)
 (declare-datatypes () ((name_id__ref (mk_name_id__ref (name_id__content name_id)))))
 (define-fun name_id__ref___projection ((a name_id__ref)) name_id (name_id__content a))
-(define-fun dynamic_invariant ((temp___expr_135 Int) (temp___is_init_132 Bool) (temp___skip_constant_133 Bool) (temp___do_toplevel_134 Bool)) Bool (=> (or (= temp___is_init_132 true) (<= 0 2147483647)) (in_range temp___expr_135)))
+(define-fun dynamic_invariant ((temp___expr_158 Int) (temp___is_init_154 Bool) (temp___skip_constant_155 Bool) (temp___do_toplevel_156 Bool) (temp___do_typ_inv_157 Bool)) Bool (=> (or (= temp___is_init_154 true) (<= 0 2147483647)) (in_range temp___expr_158)))
 (declare-const no_name Int)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-fun invariant__ (us_private) Bool)

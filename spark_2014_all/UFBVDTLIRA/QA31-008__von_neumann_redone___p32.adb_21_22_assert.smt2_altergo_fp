@@ -668,10 +668,10 @@ logic y : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-axiom H : true
+logic rliteral : t
 
-axiom H1 : true
+axiom rliteral_axiom : (tqtint(rliteral) = 2)
 
  (* File "p32.ads", line 13, characters 0-0 *)
 goal WP_parameter_def : (mul(add(x, y), add(x, y)) = add(mul(x, x), mul(y,
-  add(mul(of_int(2), x), y))))
+  add(mul(rliteral, x), y))))

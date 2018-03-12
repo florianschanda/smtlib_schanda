@@ -225,11 +225,7 @@ axiom zero__def_axiom : (zero(void) = 0)
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : int
-
-logic o1 : int
-
-axiom H : ((o = zero(void)) and (in_range(o) and (o = 0)))
-
  (* File "p.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : (not (o = 0))
+goal WP_parameter_def :
+  (forall o:int. (((o = zero(void)) and (in_range(o) and (o = 0))) ->
+  (not (o = 0))))

@@ -56,12 +56,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -73,6 +67,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -496,81 +496,19 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 axiom y__def_axiom : (y = of_fixed1(32))
 
-logic two : int
-
-logic z : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-logic result : int
-
-logic two1 : int
-
-logic result1 : t
-
-logic z1 : t
-
-logic result2 : t
-
-logic z2 : t
-
-logic result3 : t
-
-logic z3 : t
-
-logic result4 : t
-
-logic z4 : t
-
-logic result5 : t
-
-logic z5 : t
-
-axiom H : (((- 80) <= to_fixed1(x)) and (to_fixed1(x) <= 80))
-
-axiom H1 : (result = two)
-
-axiom H2 : (two1 = 2)
-
-axiom H3 : in_range1(two1)
-
-axiom H4 : (to_fixed1(o) = (to_fixed1(x) * 2))
-
-axiom H5 : (result1 = z)
-
-axiom H6 : (z1 = o)
-
-axiom H7 : (to_fixed1(z1) = (to_fixed1(x) + to_fixed1(x)))
-
-axiom H8 : (to_fixed1(o1) = (to_fixed1(x) * 2))
-
-axiom H9 : (result2 = z1)
-
-axiom H10 : (z2 = o1)
-
-axiom H11 : (to_fixed1(z2) = (to_fixed1(x) + to_fixed1(x)))
-
-axiom H12 : (to_fixed1(o2) = (to_fixed1(x) * two1))
-
-axiom H13 : (result3 = z2)
-
-axiom H14 : (z3 = o2)
-
-axiom H15 : (to_fixed1(z3) = (to_fixed1(x) + to_fixed1(x)))
-
-axiom H16 : (to_fixed1(o3) = (to_fixed1(x) * two1))
-
-axiom H17 : (result4 = z3)
-
-axiom H18 : (z4 = o3)
-
  (* File "decimal_fixed.adb", line 25, characters 0-0 *)
-goal WP_parameter_def : in_range2((to_fixed1(x) + to_fixed1(x)))
+goal WP_parameter_def :
+  (forall two:int. forall z:t. forall o:t. forall o1:t. forall o2:t.
+  forall o3:t. forall result:int. forall two1:int. forall result1:t.
+  forall z1:t. forall result2:t. forall z2:t. forall result3:t. forall z3:t.
+  forall result4:t. forall z4:t. ((((- 80) <= to_fixed1(x)) and
+  (to_fixed1(x) <= 80)) -> (((result = two) and (two1 = 2)) ->
+  (in_range1(two1) -> (((to_fixed1(o) = (to_fixed1(x) * 2)) and
+  ((result1 = z) and (z1 = o))) ->
+  ((to_fixed1(z1) = (to_fixed1(x) + to_fixed1(x))) ->
+  (((to_fixed1(o1) = (to_fixed1(x) * 2)) and ((result2 = z1) and
+  (z2 = o1))) -> ((to_fixed1(z2) = (to_fixed1(x) + to_fixed1(x))) ->
+  (((to_fixed1(o2) = (to_fixed1(x) * two1)) and ((result3 = z2) and
+  (z3 = o2))) -> ((to_fixed1(z3) = (to_fixed1(x) + to_fixed1(x))) ->
+  (((to_fixed1(o3) = (to_fixed1(x) * two1)) and ((result4 = z3) and
+  (z4 = o3))) -> in_range2((to_fixed1(x) + to_fixed1(x))))))))))))))

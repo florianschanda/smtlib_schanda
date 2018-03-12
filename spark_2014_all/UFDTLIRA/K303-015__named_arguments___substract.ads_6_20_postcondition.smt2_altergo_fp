@@ -122,46 +122,22 @@ logic second : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic substract__subsimp__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic substract__subsimp__result1 : int
-
-logic substract__subsimp__result2 : int
-
-logic substract__subsimp__result3 : int
-
-logic substract__subsimp__result4 : int
-
-logic substract__subsimp__result5 : int
-
-logic result1 : int
-
-axiom H : in_range(first)
-
-axiom H1 : in_range(second)
-
-axiom H2 : (substract__subsimp__result1 = substract__subsimp__result2)
-
-axiom H3 : (substract__subsimp__result3 = substract__subsimp__result1)
-
-axiom H4 : ((o = sub(first, second)) and (in_range(o) and
-  (o = (first - second))))
-
-axiom H5 : (result = substract__subsimp__result)
-
-axiom H6 : (substract__subsimp__result1 = o)
-
-axiom H7 : (substract__subsimp__result4 = substract__subsimp__result2)
-
-axiom H8 : (substract__subsimp__result5 = substract__subsimp__result3)
-
-axiom H9 : (result1 = substract__subsimp__result4)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (substract__subsimp__result4 = (first - second))
+goal WP_parameter_def :
+  (forall substract__subsimp__result:int. forall o:int. forall result:int.
+  forall substract__subsimp__result1:int.
+  forall substract__subsimp__result2:int.
+  forall substract__subsimp__result3:int.
+  forall substract__subsimp__result4:int.
+  forall substract__subsimp__result5:int.
+  (forall result1:int. ((in_range(first) and (in_range(second) and
+  (((((substract__subsimp__result1 = substract__subsimp__result2) and
+  (substract__subsimp__result3 = substract__subsimp__result1)) and
+  (((o = sub(first, second)) and (in_range(o) and
+  (o = (first - second)))) and (({ int__content = result } = { int__content =
+  substract__subsimp__result }) and (substract__subsimp__result1 = o)))) and
+  (({ int__content = substract__subsimp__result4 } = { int__content =
+  substract__subsimp__result2 }) and
+  (substract__subsimp__result5 = substract__subsimp__result3))) and
+  (result1 = substract__subsimp__result4)))) ->
+  (substract__subsimp__result4 = (first - second)))))

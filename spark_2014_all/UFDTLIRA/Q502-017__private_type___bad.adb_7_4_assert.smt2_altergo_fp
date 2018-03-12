@@ -287,13 +287,10 @@ logic y1 : us_main_type1
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-axiom H : (always_true({ us_split_discrs1 = { rec__p1__t1__d = x };
-  us_split_fields1 = { rec__p1__t1 = x1 } }, { us_split_discrs1 = {
-  rec__p1__t1__d = x }; us_split_fields1 = { rec__p1__t1 = x1 } }) = true)
-
-axiom H1 : (always_true1({ us_split_discrs3 = { rec__p2__t2__d = y };
-  us_split_fields3 = { rec__p2__t2 = y1 } }, { us_split_discrs3 = {
-  rec__p2__t2__d = y }; us_split_fields3 = { rec__p2__t2 = y1 } }) = true)
-
  (* File "p2.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def : ((always_true({ us_split_discrs1 = { rec__p1__t1__d =
+  x }; us_split_fields1 = { rec__p1__t1 = x1 } }, { us_split_discrs1 = {
+  rec__p1__t1__d = x }; us_split_fields1 = { rec__p1__t1 = x1 } }) = true) ->
+  (not (always_true1({ us_split_discrs3 = { rec__p2__t2__d = y };
+  us_split_fields3 = { rec__p2__t2 = y1 } }, { us_split_discrs3 = {
+  rec__p2__t2__d = y }; us_split_fields3 = { rec__p2__t2 = y1 } }) = true)))

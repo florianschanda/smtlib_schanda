@@ -30,7 +30,7 @@
 (declare-const dummy index_type)
 (declare-datatypes () ((index_type__ref (mk_index_type__ref (index_type__content index_type)))))
 (define-fun index_type__ref___projection ((a index_type__ref)) index_type (index_type__content a))
-(define-fun dynamic_invariant ((temp___expr_153 Int) (temp___is_init_150 Bool) (temp___skip_constant_151 Bool) (temp___do_toplevel_152 Bool)) Bool (=> (or (= temp___is_init_150 true) (<= 0 128)) (in_range temp___expr_153)))
+(define-fun dynamic_invariant ((temp___expr_178 Int) (temp___is_init_174 Bool) (temp___skip_constant_175 Bool) (temp___do_toplevel_176 Bool) (temp___do_typ_inv_177 Bool)) Bool (=> (or (= temp___is_init_174 true) (<= 0 128)) (in_range temp___expr_178)))
 (declare-const count Int)
 (declare-const list_handler__integer_list__size__result Int)
 (declare-const result Int)

@@ -427,19 +427,8 @@ logic t__split_discrs : natural
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : int
-
-logic p__R1s__assume : int
-
-logic us : int
-
-axiom H : ((o = zero(void)) and in_range(o))
-
-axiom H1 : (p__R1s__assume = comp_div(10,o))
-
-axiom H2 : (p__R1s__assume = r1s)
-
-axiom H3 : in_range1(r1s)
-
  (* File "system.ads", line 81, characters 0-0 *)
-goal WP_parameter_def : in_range(r1s)
+goal WP_parameter_def :
+  (forall o:int. forall p__R1s__assume:int. (((((o = zero(void)) and
+  in_range(o)) and (p__R1s__assume = comp_div(10,o))) and
+  (p__R1s__assume = r1s)) -> (in_range1(r1s) -> in_range(r1s))))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -746,8 +746,8 @@ axiom elements__post_axiom :
   rec__use_ordered_sets__my_sets__set__capacity = container };
   us_split_fields1 = { rec__use_ordered_sets__my_sets__set = container1 }
   })) and
-  (forall temp___393:int. ((in_range5(temp___393) and ((1 <= temp___393) and
-  (temp___393 <= (0 + length3(elements({ us_split_discrs1 = {
+  (forall temp___435:int. ((in_range5(temp___435) and ((1 <= temp___435) and
+  (temp___435 <= (0 + length3(elements({ us_split_discrs1 = {
   rec__use_ordered_sets__my_sets__set__capacity = container };
   us_split_fields1 = { rec__use_ordered_sets__my_sets__set = container1 }
   })))))) -> (contains(model__({ us_split_discrs1 = {
@@ -756,7 +756,7 @@ axiom elements__post_axiom :
   get(elements({ us_split_discrs1 = {
   rec__use_ordered_sets__my_sets__set__capacity = container };
   us_split_fields1 = { rec__use_ordered_sets__my_sets__set = container1 } }),
-  temp___393)) = true)))) and
+  temp___435)) = true)))) and
   (forall item:int. ((in_range2(item) and (contains(model__({
   us_split_discrs1 = { rec__use_ordered_sets__my_sets__set__capacity =
   container }; us_split_fields1 = { rec__use_ordered_sets__my_sets__set =
@@ -1183,40 +1183,18 @@ axiom w_get__post_axiom :
   ((in_range1(witness1) and (has_witness(container, witness1) = true)) ->
   in_range7(w_get(container, witness1)))))
 
-logic temp___833 : us_rep2
-
-logic e : int
-
-logic o : bool
-
-logic cu : count_type
-
-logic o1 : bool
-
-logic o2 : bool
-
-logic o3 : int
-
-logic result : bool
-
-axiom H :
-  (forall e1:int. ((in_range2(e1) and (contains(model__({ us_split_discrs1 =
-  { rec__use_ordered_sets__my_sets__set__capacity = s }; us_split_fields1 = {
-  rec__use_ordered_sets__my_sets__set = s1 } }), e1) = true)) ->
-  (q(e1) = true)))
-
-logic cu1 : count_type
-
-axiom H1 : (has_key(positions({ us_split_discrs1 = {
-  rec__use_ordered_sets__my_sets__set__capacity = s }; us_split_fields1 = {
-  rec__use_ordered_sets__my_sets__set = s1 } }), { us_split_fields3 = {
-  rec__use_ordered_sets__my_sets__cursor__node = cu1 } }) = true)
-
  (* File "use_ordered_sets.ads", line 137, characters 0-0 *)
-goal WP_parameter_def : (q(get(elements({ us_split_discrs1 = {
+goal WP_parameter_def :
+  ((forall e:int. ((in_range2(e) and (contains(model__({ us_split_discrs1 = {
+   rec__use_ordered_sets__my_sets__set__capacity = s }; us_split_fields1 = {
+   rec__use_ordered_sets__my_sets__set = s1 } }), e) = true)) ->
+   (q(e) = true))) ->
+  (forall cu:us_rep1. ((has_key(positions({ us_split_discrs1 = {
+  rec__use_ordered_sets__my_sets__set__capacity = s }; us_split_fields1 = {
+  rec__use_ordered_sets__my_sets__set = s1 } }), cu) = true) ->
+  (q(get(elements({ us_split_discrs1 = {
   rec__use_ordered_sets__my_sets__set__capacity = s }; us_split_fields1 = {
   rec__use_ordered_sets__my_sets__set = s1 } }), get1(positions({
   us_split_discrs1 = { rec__use_ordered_sets__my_sets__set__capacity = s };
-  us_split_fields1 = { rec__use_ordered_sets__my_sets__set = s1 } }), {
-  us_split_fields3 = { rec__use_ordered_sets__my_sets__cursor__node = cu1 }
-  }))) = true)
+  us_split_fields1 = { rec__use_ordered_sets__my_sets__set = s1 } }),
+  cu))) = true))))

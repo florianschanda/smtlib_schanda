@@ -113,61 +113,16 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic x : int
-
-logic y : int
-
-logic temp : int
-
-logic temp1 : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic temp2 : int
-
-logic result1 : int
-
-logic temp3 : int
-
-logic result2 : int
-
-logic x1 : int
-
-logic result3 : int
-
-logic y1 : int
-
-axiom H : in_range(x)
-
-axiom H1 : in_range(y)
-
-axiom H2 : (result = temp)
-
-axiom H3 : (temp2 = x)
-
-axiom H4 : in_range(temp2)
-
-axiom H5 : (result1 = temp1)
-
-axiom H6 : (temp3 = y)
-
-axiom H7 : in_range(temp3)
-
-axiom H8 : ((o = (x * temp3)) and in_range((x * temp3)))
-
-axiom H9 : (result2 = x)
-
-axiom H10 : (x1 = o)
-
-axiom H11 : ((o1 = (y * temp2)) and in_range((y * temp2)))
-
-axiom H12 : (result3 = y)
-
-axiom H13 : (y1 = o1)
-
  (* File "test.adb", line 14, characters 0-0 *)
-goal WP_parameter_def : (x1 = y1)
+goal WP_parameter_def :
+  (forall x:int. forall y:int. forall temp:int. forall temp1:int.
+  forall o:int. forall o1:int. forall result:int. forall temp2:int.
+  forall result1:int. forall temp3:int. forall result2:int. forall x1:int.
+  forall result3:int. forall y1:int. (in_range(x) -> (in_range(y) -> (((({
+  int__content = result } = { int__content = temp }) and (temp2 = x)) and
+  (in_range(temp2) and (((({ int__content = result1 } = { int__content =
+  temp1 }) and (temp3 = y)) and (in_range(temp3) and (((o = (x * temp3)) and
+  in_range((x * temp3))) and (({ int__content = result2 } = { int__content =
+  x }) and (x1 = o))))) and (((o1 = (y * temp2)) and
+  in_range((y * temp2))) and ((result3 = y) and (y1 = o1)))))) ->
+  (x1 = y1)))))

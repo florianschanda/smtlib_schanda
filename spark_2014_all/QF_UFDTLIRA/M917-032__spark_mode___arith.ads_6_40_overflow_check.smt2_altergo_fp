@@ -113,15 +113,6 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : int
-
-logic o1 : int
-
-axiom H : in_range(x)
-
-axiom H1 : in_range(y)
-
-axiom H2 : (0 <  x)
-
  (* File "arith.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : in_range((2147483647 - x))
+goal WP_parameter_def : (in_range(x) -> (in_range(y) -> ((0 <  x) ->
+  in_range((2147483647 - x)))))

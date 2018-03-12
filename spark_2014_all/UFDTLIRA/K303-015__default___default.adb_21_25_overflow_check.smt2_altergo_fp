@@ -113,19 +113,8 @@ axiom add__post_axiom :
   (forall x:int. forall y:int [add(x, y)]. ((in_range(x) and in_range(y)) ->
   in_range(add(x, y))))
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-axiom H : ((o = add(2, 0)) and in_range(o))
-
-axiom H1 : ((o1 = add(1, 2)) and in_range(o1))
-
-axiom H2 : (o2 = (o1 + o))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(o2)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. forall o2:int. ((((o = add(2, 0)) and
+  in_range(o)) and (((o1 = add(1, 2)) and in_range(o1)) and
+  (o2 = (o1 + o)))) -> in_range(o2)))

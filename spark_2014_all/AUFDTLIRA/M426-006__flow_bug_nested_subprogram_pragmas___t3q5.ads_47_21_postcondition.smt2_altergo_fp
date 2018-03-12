@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -217,24 +217,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,contents_type) farray, int, int,
-  (int,contents_type) farray, int, int -> (int,contents_type) farray
-
-axiom concat_def :
-  (forall a:(int,contents_type) farray. forall b:(int,contents_type) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : contents_type, int -> (int,contents_type) farray
-
-axiom singleton_def :
-  (forall v:contents_type.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,contents_type) farray, int, int,
   (int,contents_type) farray, int, int -> bool
 
@@ -246,17 +228,17 @@ axiom bool_eq_def4 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -266,37 +248,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,contents_type) farray, int, int,
-  (int,contents_type) farray, int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,contents_type) farray. forall b:(int,contents_type) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,contents_type) farray. forall b:(int,contents_type) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,contents_type) farray. forall b:(int,contents_type) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic ordered : (int,contents_type) farray, int, int -> bool
 
@@ -366,180 +320,52 @@ function t18b__ref___projection(a: t18b__ref) : t18b = (a).t18b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic table : (int,contents_type) farray
-
-logic key : int
-
-logic low : int
-
-logic temp___177 : int
-
-logic temp___176 : int
-
-logic temp___175 : (int,contents_type) farray
-
-logic temp___179 : (int,contents_type) farray
-
-logic o : int
-
-logic x : int
-
-logic x1 : int
-
-logic temp___178 : int
-
-logic o1 : int
-
-logic o2 : contents_type
-
-logic o3 : int
-
-logic o4 : int
-
-logic table1 : (int,contents_type) farray
-
-logic key1 : int
-
-logic result : int
-
-logic low1 : int
-
-logic result1 : int
-
-logic key2 : int
-
-logic table2 : (int,contents_type) farray
-
-logic table3 : (int,contents_type) farray
-
-logic key3 : int
-
-logic low2 : int
-
-logic result2 : bool
-
-logic result3 : int
-
-logic low3 : int
-
-logic result4 : int
-
-logic key4 : int
-
-logic table4 : (int,contents_type) farray
-
-logic table5 : (int,contents_type) farray
-
-logic key5 : int
-
-logic low4 : int
-
-logic table6 : (int,contents_type) farray
-
-logic key6 : int
-
-logic low5 : int
-
-logic table7 : (int,contents_type) farray
-
-logic key7 : int
-
-logic low6 : int
-
-logic table8 : (int,contents_type) farray
-
-logic key8 : int
-
-logic low7 : int
-
-logic table9 : (int,contents_type) farray
-
-logic key9 : int
-
-logic low8 : int
-
-logic table10 : (int,contents_type) farray
-
-logic key10 : int
-
-logic low9 : int
-
-logic table11 : (int,contents_type) farray
-
-logic key11 : int
-
-logic low10 : int
-
-logic table12 : (int,contents_type) farray
-
-logic key12 : int
-
-logic low11 : int
-
-axiom H : ((1 <= 100) -> in_range2(key))
-
-axiom H1 : (result = low)
-
-axiom H2 : (low1 = 1)
-
-axiom H3 : (((1 <= low1) and (low1 <= 99)) -> (((temp___177 = low1) and
-  ((temp___176 = key) and ((temp___175 = table) and ((temp___179 = table) and
+ (* File "t3q5.ads", line 19, characters 0-0 *)
+goal WP_parameter_def :
+  (forall table:(int,contents_type) farray. forall key:int. forall low:int.
+  forall temp___203:int. forall temp___202:int.
+  forall temp___201:(int,contents_type) farray.
+  forall temp___205:(int,contents_type) farray. forall o:int.
+  forall table1:(int,contents_type) farray. forall key1:int.
+  forall result:int. forall low1:int. forall result1:int. forall key2:int.
+  forall table2:(int,contents_type) farray.
+  forall table3:(int,contents_type) farray. forall key3:int. forall low2:int.
+  forall table4:(int,contents_type) farray. forall key4:int. forall low3:int.
+  forall table5:(int,contents_type) farray. forall key5:int. forall low4:int.
+  forall table6:(int,contents_type) farray. forall key6:int. forall low5:int.
+  forall table7:(int,contents_type) farray. forall key7:int. forall low6:int.
+  forall table8:(int,contents_type) farray. forall key8:int. forall low7:int.
+  forall table9:(int,contents_type) farray. forall key9:int. forall low8:int.
+  (((((1 <= 100) -> in_range2(key)) and ((({ int__content = result } = {
+  int__content = low }) and (low1 = 1)) and ((((1 <= low1) and
+  (low1 <= 99)) and ((((temp___203 = low1) and ((temp___202 = key) and
+  ((temp___201 = table) and ((temp___205 = table) and
   ((((o = find_smallest(table, low1, 100)) and (in_range2(o) and
   (((low1 <= o) and (o <= 100)) and
-  (forall x2:int. (((low1 <= x2) and (x2 <= 100)) ->
-  (to_rep((table[o])) <= to_rep((table[x2])))))))) and ((result1 = key) and
-  (key2 = o))) and ((((not (key2 = low1)) ->
+  (forall x:int. (((low1 <= x) and (x <= 100)) ->
+  (to_rep((table[o])) <= to_rep((table[x])))))))) and (({ int__content =
+  result1 } = { int__content = key }) and (key2 = o))) and
+  ((((not (key2 = low1)) and
   ((to_rep((table2[low1])) = to_rep((table[key2]))) and
   ((to_rep((table2[key2])) = to_rep((table[low1]))) and
-  ((forall x2:int. (((1 <= x2) and (x2 <= 100)) -> (((not (x2 = low1)) and
-   (not (x2 = key2))) -> (to_rep((table2[x2])) = to_rep((table[x2])))))) and
-  (perm(table2, table) = true))))) and ((key2 = low1) ->
+  ((forall x:int. (((1 <= x) and (x <= 100)) -> (((not (x = low1)) and
+   (not (x = key2))) -> (to_rep((table2[x])) = to_rep((table[x])))))) and
+  (perm(table2, table) = true))))) or ((key2 = low1) and
   ((table2 = table) and (table2 = table1)))) and
-  ((((forall x2:int. (((1 <= x2) and (x2 <= low2)) ->
-     (to_rep((table3[x2])) <= to_rep((table3[(x2 + 1)]))))) and
-  (forall x2:int. (((low2 <= x2) and (x2 <= 100)) ->
-  (to_rep((table3[low2])) <= to_rep((table3[x2])))))) and (perm(table3,
-  temp___179) = true)) and (((((1 <= 100) -> in_range2(key3)) and
+  ((((forall x:int. (((1 <= x) and (x <= low2)) ->
+     (to_rep((table3[x])) <= to_rep((table3[(x + 1)]))))) and
+  (forall x:int. (((low2 <= x) and (x <= 100)) ->
+  (to_rep((table3[low2])) <= to_rep((table3[x])))))) and (perm(table3,
+  temp___205) = true)) and (((((1 <= 100) -> in_range2(key3)) and
   ((1 <= 99) -> in_range4(low2))) and ((1 <= low2) and (low2 <= 99))) and
-  (low2 = 99))))))))) and (((low2 = low6) and ((key3 = key7) and
-  (table3 = table7))) and ((low7 = low2) and ((key8 = key3) and
-  (table8 = table3))))))
-
-axiom H4 : (((1 <= low1) and (low1 <= 99)) -> (low8 = low6))
-
-axiom H5 : (((1 <= low1) and (low1 <= 99)) -> (key9 = key7))
-
-axiom H6 : (((1 <= low1) and (low1 <= 99)) -> (table9 = table7))
-
-axiom H7 : (((1 <= low1) and (low1 <= 99)) -> (low9 = low7))
-
-axiom H8 : (((1 <= low1) and (low1 <= 99)) -> (key10 = key8))
-
-axiom H9 : (((1 <= low1) and (low1 <= 99)) -> (table10 = table8))
-
-axiom H10 : ((not ((1 <= low1) and (low1 <= 99))) -> (low1 = low8))
-
-axiom H11 : ((not ((1 <= low1) and (low1 <= 99))) -> (key9 = key))
-
-axiom H12 : ((not ((1 <= low1) and (low1 <= 99))) -> (table9 = table))
-
-axiom H13 : ((not ((1 <= low1) and (low1 <= 99))) -> (low9 = low1))
-
-axiom H14 : ((not ((1 <= low1) and (low1 <= 99))) -> (key10 = key1))
-
-axiom H15 : ((not ((1 <= low1) and (low1 <= 99))) -> (table10 = table1))
-
-axiom H16 : (low10 = low8)
-
-axiom H17 : (key11 = key9)
-
-axiom H18 : (table11 = table9)
-
-axiom H19 : (low11 = low9)
-
-axiom H20 : (key12 = key10)
-
-axiom H21 : (table12 = table10)
-
- (* File "t3q5.ads", line 19, characters 0-0 *)
-goal WP_parameter_def : (ordered(table11, 1, 100) = true)
+  (low2 = 99))))))))) and (((low2 = low3) and ((key3 = key4) and
+  (table3 = table4))) and ((low4 = low2) and ((key5 = key3) and
+  (table5 = table3))))) and (((low5 = low3) and (({ int__content = key6 } = {
+  int__content = key4 }) and ({ map__content = table6 } = { map__content =
+  table4 }))) and ((low6 = low4) and ((key7 = key5) and
+  (table7 = table5)))))) or ((not ((1 <= low1) and (low1 <= 99))) and
+  (((low1 = low5) and (({ int__content = key6 } = { int__content = key }) and
+  (table = table6))) and ((low6 = low1) and ((key7 = key1) and
+  (table7 = table1)))))))) and (((low7 = low5) and ((key8 = key6) and
+  (table8 = table6))) and ((low8 = low6) and ((key9 = key7) and
+  (table9 = table7))))) -> (ordered(table8, 1, 100) = true)))

@@ -379,44 +379,17 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
-logic present_sliprate : int
-
-logic rudder_movement : int
-
-logic target_angle : int
-
-logic o : int
-
-logic ap__heading__yaw__rate__calc_yawrate__present_yawrate : int
-
-logic result : int
-
-logic present_sliprate1 : int
-
-axiom H : in_range(mach)
-
-axiom H1 : in_range1(slip)
-
-axiom H2 : (((- 180) <= 180) -> in_range5(present_sliprate))
-
-axiom H3 : (((- 45) <= 45) -> in_range2(rudder_movement))
-
-axiom H4 : in_range4(ap__heading__yaw__rate__calc_yawrate__present_yawrate)
-
-axiom H5 : (result = present_sliprate)
-
-axiom H6 :
-  (present_sliprate1 = ap__heading__yaw__rate__calc_yawrate__present_yawrate)
-
-axiom H7 : (present_sliprate1 = c3b)
-
-axiom H8 : in_range5(c3b)
-
-axiom H9 : (mach = c4b)
-
-axiom H10 : in_range(c4b)
-
-axiom H11 : (((- 45) <= 45) -> in_range2(target_angle))
-
  (* File "ap-heading-yaw-rate.ads", line 8, characters 0-0 *)
-goal WP_parameter_def : (not (2 = 0))
+goal WP_parameter_def :
+  (forall present_sliprate:int. forall rudder_movement:int.
+  forall target_angle:int.
+  forall ap__heading__yaw__rate__calc_yawrate__present_yawrate:int.
+  forall result:int. forall present_sliprate1:int. (in_range(mach) ->
+  (in_range1(slip) -> ((((- 180) <= 180) -> in_range5(present_sliprate)) ->
+  ((((- 45) <= 45) -> in_range2(rudder_movement)) ->
+  ((in_range4(ap__heading__yaw__rate__calc_yawrate__present_yawrate) and
+  ((result = present_sliprate) and
+  (present_sliprate1 = ap__heading__yaw__rate__calc_yawrate__present_yawrate))) ->
+  (((present_sliprate1 = c3b) and in_range5(c3b)) -> (((mach = c4b) and
+  in_range(c4b)) -> ((((- 45) <= 45) -> in_range2(target_angle)) ->
+  (not (2 = 0)))))))))))

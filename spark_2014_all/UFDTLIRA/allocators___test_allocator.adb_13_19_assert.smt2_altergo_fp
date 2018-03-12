@@ -117,10 +117,6 @@ logic is_allocated__function_guard : bool, int, us_private -> prop
 
 axiom is_allocated__post_axiom : true
 
-logic all_available : us_private -> bool
-
-logic all_available__function_guard : bool, us_private -> prop
-
 type us_main_type
 
 logic us_main_eq : us_main_type, us_main_type -> bool
@@ -319,10 +315,6 @@ axiom user_eq__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic is_valid : us_private, us_split_fields -> bool
-
-logic is_valid__function_guard : bool, us_private, us_split_fields -> prop
-
 logic is_prepend : us_rep, int, us_rep -> bool
 
 logic is_prepend__function_guard : bool, us_rep, int, us_rep -> prop
@@ -330,6 +322,10 @@ logic is_prepend__function_guard : bool, us_rep, int, us_rep -> prop
 logic is_add : us_rep1, int, us_rep1 -> bool
 
 logic is_add__function_guard : bool, us_rep1, int, us_rep1 -> prop
+
+logic is_valid : us_private, us_split_fields -> bool
+
+logic is_valid__function_guard : bool, us_private, us_split_fields -> prop
 
 logic contains : us_rep1, int -> bool
 
@@ -343,15 +339,7 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-axiom all_available__post_axiom : true
-
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
-
-logic bool_eq5 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
 
 logic to_int : bool -> int
 
@@ -364,6 +352,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq5 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -608,131 +602,58 @@ axiom included_except__post_axiom :
   (forall e:int. ((in_range5(e) and (contains(left, e) = true)) ->
   ((contains(right, e) = true) or (e = item))))))))
 
-logic model____split_fields : us_rep
-
-logic model____split_fields1 : us_rep1
-
-logic res1 : int
-
-logic res2 : int
-
-logic res3 : int
-
-logic res4 : int
-
-logic state : us_private
-
-logic model____split_fields2 : us_rep
-
-logic model____split_fields3 : us_rep1
-
-logic res11 : int
-
-logic state1 : us_private
-
-logic model____split_fields4 : us_rep
-
-logic model____split_fields5 : us_rep1
-
-logic res21 : int
-
-logic state2 : us_private
-
-logic model____split_fields6 : us_rep
-
-logic model____split_fields7 : us_rep1
-
-logic res31 : int
-
-logic state3 : us_private
-
-logic model____split_fields8 : us_rep
-
-logic model____split_fields9 : us_rep1
-
-logic res41 : int
-
-logic state4 : us_private
-
-logic model____split_fields10 : us_rep
-
-logic model____split_fields11 : us_rep1
-
-logic state5 : us_private
-
-logic model____split_fields12 : us_rep
-
-logic model____split_fields13 : us_rep1
-
-logic state6 : us_private
-
-logic model____split_fields14 : us_rep
-
-logic model____split_fields15 : us_rep1
-
-logic state7 : us_private
-
-axiom H : ((all_available(state) = true) and (is_valid(state, {
-  rec__list_allocator__m__t__available = model____split_fields;
-  rec__list_allocator__m__t__allocated = model____split_fields1 }) = true))
-
-axiom H1 : ((0 <= 10000) -> in_range(res1))
-
-axiom H2 : ((0 <= 10000) -> in_range(res2))
-
-axiom H3 : ((0 <= 10000) -> in_range(res3))
-
-axiom H4 : ((0 <= 10000) -> in_range(res4))
-
-axiom H5 : (((is_valid(state1, { rec__list_allocator__m__t__available =
-  model____split_fields2; rec__list_allocator__m__t__allocated =
-  model____split_fields3 }) = true) and
-  (((bool_eq(length(model____split_fields), 0) = true) -> ((res11 = 0) and
-  (oeq({ us_split_fields1 = { rec__list_allocator__m__t__available =
-  model____split_fields2; rec__list_allocator__m__t__allocated =
-  model____split_fields3 } }, { us_split_fields1 = {
-  rec__list_allocator__m__t__available = model____split_fields;
-  rec__list_allocator__m__t__allocated = model____split_fields1 }
-  }) = true))) and ((not (bool_eq(length(model____split_fields),
-  0) = true)) -> ((is_prepend(model____split_fields2, res11,
+ (* File "list_allocator.ads", line 80, characters 0-0 *)
+goal WP_parameter_def :
+  (forall model____split_fields:us_rep.
+  forall model____split_fields1:us_rep1. forall res1:int. forall res2:int.
+  forall res3:int. forall res4:int. forall model____split_fields2:us_rep.
+  forall model____split_fields3:us_rep1. forall res11:int.
+  forall state:us_private. forall model____split_fields4:us_rep.
+  forall model____split_fields5:us_rep1. forall res21:int.
+  forall state1:us_private. forall model____split_fields6:us_rep.
+  forall model____split_fields7:us_rep1. forall res31:int.
+  forall state2:us_private. (((0 <= 10000) -> in_range(res1)) ->
+  (((0 <= 10000) -> in_range(res2)) -> (((0 <= 10000) -> in_range(res3)) ->
+  (((0 <= 10000) -> in_range(res4)) -> ((((is_valid(state, {
+  rec__list_allocator__m__t__available = model____split_fields2;
+  rec__list_allocator__m__t__allocated = model____split_fields3
+  }) = true) and (((bool_eq(length(model____split_fields), 0) = true) and
+  ((res11 = 0) and (oeq({ us_split_fields1 = {
+  rec__list_allocator__m__t__available = model____split_fields2;
+  rec__list_allocator__m__t__allocated = model____split_fields3 } }, {
+  us_split_fields1 = { rec__list_allocator__m__t__available =
+  model____split_fields; rec__list_allocator__m__t__allocated =
+  model____split_fields1 } }) = true))) or
+  ((not (bool_eq(length(model____split_fields), 0) = true)) and
+  ((is_prepend(model____split_fields2, res11,
   model____split_fields) = true) and (is_add(model____split_fields1, res11,
-  model____split_fields3) = true))))) and in_range(res11))
-
-axiom H6 : (not (res11 = 0))
-
-axiom H7 : (is_allocated(res11, state1) = true)
-
-axiom H8 : (((is_valid(state2, { rec__list_allocator__m__t__available =
+  model____split_fields3) = true))))) and in_range(res11)) ->
+  ((not (res11 = 0)) -> ((is_allocated(res11, state) = true) ->
+  ((((is_valid(state1, { rec__list_allocator__m__t__available =
   model____split_fields4; rec__list_allocator__m__t__allocated =
   model____split_fields5 }) = true) and
-  (((bool_eq(length(model____split_fields2), 0) = true) -> ((res21 = 0) and
+  (((bool_eq(length(model____split_fields2), 0) = true) and ((res21 = 0) and
   (oeq({ us_split_fields1 = { rec__list_allocator__m__t__available =
   model____split_fields4; rec__list_allocator__m__t__allocated =
   model____split_fields5 } }, { us_split_fields1 = {
   rec__list_allocator__m__t__available = model____split_fields2;
   rec__list_allocator__m__t__allocated = model____split_fields3 }
-  }) = true))) and ((not (bool_eq(length(model____split_fields2),
-  0) = true)) -> ((is_prepend(model____split_fields4, res21,
+  }) = true))) or ((not (bool_eq(length(model____split_fields2),
+  0) = true)) and ((is_prepend(model____split_fields4, res21,
   model____split_fields2) = true) and (is_add(model____split_fields3, res21,
-  model____split_fields5) = true))))) and in_range(res21))
-
-axiom H9 : (not (res21 = 0))
-
-axiom H10 : (is_allocated(res21, state2) = true)
-
-axiom H11 : (((is_valid(state3, { rec__list_allocator__m__t__available =
+  model____split_fields5) = true))))) and in_range(res21)) ->
+  ((not (res21 = 0)) -> ((is_allocated(res21, state1) = true) ->
+  ((((is_valid(state2, { rec__list_allocator__m__t__available =
   model____split_fields6; rec__list_allocator__m__t__allocated =
   model____split_fields7 }) = true) and
-  (((bool_eq(length(model____split_fields4), 0) = true) -> ((res31 = 0) and
+  (((bool_eq(length(model____split_fields4), 0) = true) and ((res31 = 0) and
   (oeq({ us_split_fields1 = { rec__list_allocator__m__t__available =
   model____split_fields6; rec__list_allocator__m__t__allocated =
   model____split_fields7 } }, { us_split_fields1 = {
   rec__list_allocator__m__t__available = model____split_fields4;
   rec__list_allocator__m__t__allocated = model____split_fields5 }
-  }) = true))) and ((not (bool_eq(length(model____split_fields4),
-  0) = true)) -> ((is_prepend(model____split_fields6, res31,
+  }) = true))) or ((not (bool_eq(length(model____split_fields4),
+  0) = true)) and ((is_prepend(model____split_fields6, res31,
   model____split_fields4) = true) and (is_add(model____split_fields5, res31,
-  model____split_fields7) = true))))) and in_range(res31))
-
- (* File "list_allocator.ads", line 80, characters 0-0 *)
-goal WP_parameter_def : (not (res31 = 0))
+  model____split_fields7) = true))))) and in_range(res31)) ->
+  (not (res31 = 0))))))))))))))

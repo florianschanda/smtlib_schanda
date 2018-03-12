@@ -211,122 +211,34 @@ axiom is_base__def_axiom :
   (forall pumpunit__cur_state:int [is_base(pumpunit__cur_state)].
   ((is_base(pumpunit__cur_state) = true) <-> (pumpunit__cur_state = 3)))
 
-logic cur_state : int
-
-logic total_pay : int
-
-logic outstanding : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic cur_state1 : int
-
-logic total_pay1 : int
-
-logic outstanding1 : int
-
-logic result : bool
-
-logic result1 : bool
-
-logic result2 : int
-
-logic total_pay2 : int
-
-logic result3 : int
-
-logic cur_state2 : int
-
-logic result4 : int
-
-logic outstanding2 : int
-
-logic cur_state3 : int
-
-logic total_pay3 : int
-
-logic outstanding3 : int
-
-logic cur_state4 : int
-
-logic total_pay4 : int
-
-logic outstanding4 : int
-
-logic result5 : bool
-
-axiom H : in_range2(cur_state)
-
-axiom H1 : in_range1(total_pay)
-
-axiom H2 : in_range1(outstanding)
-
-axiom H3 : ((is_waiting(cur_state) = true) and
-  (get_total(total_pay) <  (2147483647 - get_outstanding(outstanding))))
-
-axiom H4 : ((result1 = is_waiting(cur_state)) and ((result1 = true) <->
-  (cur_state = 2)))
-
-axiom H5 : ((result1 = true) -> ((o3 = (total_pay + outstanding)) and
-  in_range((total_pay + outstanding))))
-
-axiom H6 : ((result1 = true) -> (result2 = total_pay))
-
-axiom H7 : ((result1 = true) -> (total_pay2 = o3))
-
-axiom H8 : ((result1 = true) -> (result3 = cur_state))
-
-axiom H9 : ((result1 = true) -> (cur_state2 = 3))
-
-axiom H10 : ((result1 = true) -> (result4 = outstanding))
-
-axiom H11 : ((result1 = true) -> (outstanding2 = 0))
-
-axiom H12 : ((not (result1 = true)) -> (outstanding2 = outstanding))
-
-axiom H13 : ((not (result1 = true)) -> (total_pay2 = total_pay))
-
-axiom H14 : ((not (result1 = true)) -> (cur_state2 = cur_state))
-
-axiom H15 : ((not (result1 = true)) -> (outstanding2 = outstanding1))
-
-axiom H16 : ((not (result1 = true)) -> (total_pay2 = total_pay1))
-
-axiom H17 : ((not (result1 = true)) -> (cur_state2 = cur_state1))
-
-axiom H18 : (outstanding2 = outstanding3)
-
-axiom H19 : (total_pay2 = total_pay3)
-
-axiom H20 : (cur_state2 = cur_state3)
-
-axiom H21 : (outstanding4 = outstanding2)
-
-axiom H22 : (total_pay4 = total_pay2)
-
-axiom H23 : (cur_state4 = cur_state2)
-
-axiom H24 : ((result5 = is_base(cur_state3)) and ((result5 = true) <->
-  (cur_state3 = 3)))
-
-axiom H25 : (result5 = true)
-
-axiom H26 : ((o4 = get_outstanding(outstanding3)) and (in_range1(o4) and
-  (o4 = outstanding3)))
-
-axiom H27 : (o5 = (get_total(total_pay) + o4))
-
  (* File "pumpunit.ads", line 36, characters 0-0 *)
-goal WP_parameter_def : in_range(o5)
+goal WP_parameter_def :
+  (forall cur_state:int. forall total_pay:int. forall outstanding:int.
+  forall o:int. forall o1:int. forall o2:int. forall cur_state1:int.
+  forall total_pay1:int. forall outstanding1:int. forall result:bool.
+  forall result1:int. forall total_pay2:int. forall result2:int.
+  forall cur_state2:int. forall result3:int. forall outstanding2:int.
+  forall cur_state3:int. forall total_pay3:int. forall outstanding3:int.
+  forall cur_state4:int. forall total_pay4:int. forall outstanding4:int.
+  forall result4:bool. (in_range2(cur_state) -> (in_range1(total_pay) ->
+  (in_range1(outstanding) -> (((is_waiting(cur_state) = true) and
+  (get_total(total_pay) <  (2147483647 - get_outstanding(outstanding)))) ->
+  (((((result = is_waiting(cur_state)) and ((result = true) <->
+  (cur_state = 2))) and (((result = true) and
+  ((((o = (total_pay + outstanding)) and
+  in_range((total_pay + outstanding))) and (({ int__content = result1 } = {
+  int__content = total_pay }) and (total_pay2 = o))) and ((({ int__content =
+  result2 } = { int__content = cur_state }) and (cur_state2 = 3)) and (({
+  int__content = result3 } = { int__content = outstanding }) and
+  (outstanding2 = 0))))) or ((not (result = true)) and
+  (((outstanding2 = outstanding) and ((total_pay2 = total_pay) and
+  (cur_state2 = cur_state))) and ((outstanding2 = outstanding1) and
+  ((total_pay2 = total_pay1) and (cur_state2 = cur_state1))))))) and
+  (((outstanding2 = outstanding3) and ((total_pay2 = total_pay3) and
+  (cur_state2 = cur_state3))) and ((outstanding4 = outstanding2) and
+  ((total_pay4 = total_pay2) and (cur_state4 = cur_state2))))) ->
+  (((result4 = is_base(cur_state3)) and ((result4 = true) <->
+  (cur_state3 = 3))) -> ((result4 = true) ->
+  ((((o1 = get_outstanding(outstanding3)) and (in_range1(o1) and
+  (o1 = outstanding3))) and (o2 = (get_total(total_pay) + o1))) ->
+  in_range(o2))))))))))

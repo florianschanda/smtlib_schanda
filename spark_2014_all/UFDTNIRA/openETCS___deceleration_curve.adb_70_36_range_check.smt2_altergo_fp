@@ -246,11 +246,6 @@ logic d : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : int
-
-axiom H : in_range(d)
-
-axiom H1 : (d <= 5000)
-
  (* File "deceleration_curve.ads", line 32, characters 0-0 *)
-goal WP_parameter_def : in_range1(comp_div(d,5))
+goal WP_parameter_def : (in_range(d) -> ((d <= 5000) ->
+  in_range1(comp_div(d,5))))

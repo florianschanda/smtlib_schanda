@@ -599,12 +599,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -616,6 +610,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -764,24 +764,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq6 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -792,17 +774,17 @@ axiom bool_eq_def5 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -812,37 +794,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq6(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq6(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq6(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 type unsigned32
 
@@ -991,157 +945,28 @@ function t74b__ref___projection(a: t74b__ref) : integer = (a).t74b__content
 
 logic attr__ATTRIBUTE_ADDRESS11 : int
 
-logic newserialnumber : t
+logic rliteral : t
 
-logic begidx : int
-
-logic endidx : int
-
-logic foundtype : int
-
-logic digitval : t
-
-logic tmpval : int
-
-logic i : int
-
-logic temp___1762 : int
-
-logic temp___1761 : t
-
-logic temp___1760 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic digitval1 : t
-
-logic result : int
-
-logic begidx1 : int
-
-logic result1 : t
-
-logic newserialnumber1 : t
-
-logic begidx2 : int
-
-logic endidx1 : int
-
-logic foundtype1 : int
-
-logic result2 : int
-
-logic tmpval1 : int
-
-logic result3 : int
-
-logic i1 : int
-
-logic digitval2 : t
-
-logic tmpval2 : int
-
-logic i2 : int
-
-logic result4 : t
-
-logic digitval3 : t
-
-logic result5 : int
-
-logic tmpval3 : int
-
-logic result6 : int
-
-logic i3 : int
-
-logic digitval4 : t
-
-logic tmpval4 : int
-
-logic i4 : int
-
-logic digitval5 : t
-
-logic tmpval5 : int
-
-logic i5 : int
-
-logic digitval6 : t
-
-logic tmpval6 : int
-
-logic i6 : int
-
-logic digitval7 : t
-
-logic tmpval7 : int
-
-logic i7 : int
-
-logic digitval8 : t
-
-logic tmpval8 : int
-
-logic i8 : int
-
-logic digitval9 : t
-
-logic tmpval9 : int
-
-logic i9 : int
-
-axiom H : true
-
-axiom H1 : in_range5(zlength)
-
-axiom H2 : (result = begidx)
-
-axiom H3 : (begidx1 = 1)
-
-axiom H4 : in_range5(begidx1)
-
-axiom H5 : ((1 <= 256) -> in_range5(endidx))
-
-axiom H6 : ((0 <= 10) -> in_range4(foundtype))
-
-axiom H7 : true
-
-axiom H8 : (((- 9223372036854775808) <= 9223372036854775807) ->
-  in_range2(tmpval))
-
-axiom H9 : (result1 = newserialnumber)
-
-axiom H10 : (newserialnumber1 = of_int(0))
-
-axiom H11 : (((((begidx2 <= endidx1) and (begidx2 <= zlength)) and
-  (endidx1 <= zlength)) and ((foundtype1 = 1) ->
-  (forall i10:int. (((begidx2 <= i10) and (i10 <= endidx1)) ->
-  ((48 <= to_rep((zonefileline[i10]))) and
-  (to_rep((zonefileline[i10])) <= 57)))))) and ((in_range5(begidx2) and
-  in_range5(endidx1)) and in_range4(foundtype1)))
-
-axiom H12 : (foundtype1 = 1)
-
-axiom H13 : (result2 = tmpval)
-
-axiom H14 : (tmpval1 = 0)
-
-axiom H15 : (begidx2 = r72b)
-
-axiom H16 : in_range5(r72b)
-
-axiom H17 : (endidx1 = r73b)
-
-axiom H18 : in_range5(r73b)
-
-axiom H19 : (r72b <= r73b)
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
 
  (* File "zone_file_parser.adb", line 1467, characters 0-0 *)
-goal WP_parameter_def : ((- 2147483648) <= r72b)
+goal WP_parameter_def :
+  (forall newserialnumber:t. forall begidx:int. forall endidx:int.
+  forall foundtype:int. forall tmpval:int. forall result:int.
+  forall begidx1:int. forall result1:t. forall newserialnumber1:t.
+  forall begidx2:int. forall endidx1:int. forall foundtype1:int.
+  forall result2:int. forall tmpval1:int. (in_range5(zlength) ->
+  (((result = begidx) and (begidx1 = 1)) -> (in_range5(begidx1) ->
+  (((1 <= 256) -> in_range5(endidx)) -> (((0 <= 10) ->
+  in_range4(foundtype)) ->
+  ((((- 9223372036854775808) <= 9223372036854775807) -> in_range2(tmpval)) ->
+  (((result1 = newserialnumber) and (newserialnumber1 = rliteral)) ->
+  ((((((begidx2 <= endidx1) and (begidx2 <= zlength)) and
+  (endidx1 <= zlength)) and ((foundtype1 = 1) ->
+  (forall i:int. (((begidx2 <= i) and (i <= endidx1)) ->
+  ((48 <= to_rep((zonefileline[i]))) and (to_rep((zonefileline[i])) <= 57)))))) and
+  ((in_range5(begidx2) and in_range5(endidx1)) and in_range4(foundtype1))) ->
+  ((foundtype1 = 1) -> (((result2 = tmpval) and (tmpval1 = 0)) ->
+  (((begidx2 = r72b) and in_range5(r72b)) -> (((endidx1 = r73b) and
+  in_range5(r73b)) -> ((r72b <= r73b) ->
+  ((- 2147483648) <= r72b)))))))))))))))

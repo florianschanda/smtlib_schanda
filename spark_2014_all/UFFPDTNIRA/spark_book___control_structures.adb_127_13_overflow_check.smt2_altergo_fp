@@ -1147,12 +1147,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1164,6 +1158,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1459,759 +1459,139 @@ axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
 
 axiom tolerance__def_axiom : (tolerance = fliteral1)
 
-logic default_width : int
-
-logic default_base : int
-
-logic a : int
-
-logic b : int
-
-logic c : int
-
-logic d : int
-
-logic e : int
-
-logic f : int
-
-logic g : int
-
-logic h : int
-
-logic ch : int
-
-logic temperature : int
-
-logic valve_setting : int
-
-logic value : int
-
-logic sum : int
-
-logic success : bool
-
-logic approx : t
-
-logic x : t
-
-logic y : t
-
-logic letter : int
-
-logic count : int
-
-logic count1 : int
-
-logic count2 : int
-
-logic count3 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : t
-
-logic o7 : t
-
-logic o8 : t
-
-logic o9 : t
-
-logic o10 : t
-
-logic o11 : t
-
-logic o12 : int
-
-logic o13 : int
-
-logic o14 : int
-
-logic temp___525 : int
-
-logic temp___524 : int
-
-logic o15 : int
-
-logic o16 : t
-
-logic o17 : t
-
-logic o18 : t
-
-logic o19 : t
-
-logic temp___526 : t
-
-logic o20 : t
-
-logic o21 : t
-
-logic o22 : t
-
-logic o23 : t
-
-logic o24 : t
-
-logic o25 : t
-
-logic o26 : t
-
-logic o27 : t
-
-logic o28 : bool
-
-logic o29 : int
-
-logic g1 : int
-
-logic result : int
-
-logic letter1 : int
-
-logic result1 : int
-
-logic a1 : int
-
-logic result2 : int
-
-logic b1 : int
-
-logic result3 : int
-
-logic c1 : int
-
-logic result4 : int
-
-logic d1 : int
-
-logic result5 : int
-
-logic e1 : int
-
-logic result6 : int
-
-logic ch1 : int
-
-logic result7 : t
-
-logic x1 : t
-
-logic result8 : int
-
-logic a2 : int
-
-logic result9 : int
-
-logic d2 : int
-
-logic result10 : int
-
-logic b2 : int
-
-logic result11 : int
-
-logic e2 : int
-
-logic result12 : int
-
-logic f1 : int
-
-logic result13 : int
-
-logic e3 : int
-
-logic result14 : int
-
-logic f2 : int
-
-logic result15 : int
-
-logic f3 : int
-
-logic result16 : int
-
-logic f4 : int
-
-logic result17 : int
-
-logic f5 : int
-
-logic result18 : int
-
-logic g2 : int
-
-logic result19 : int
-
-logic g3 : int
-
-logic result20 : int
-
-logic g4 : int
-
-logic result21 : bool
-
-logic success1 : bool
-
-logic result22 : int
-
-logic h1 : int
-
-logic result23 : int
-
-logic h2 : int
-
-logic result24 : int
-
-logic h3 : int
-
-logic result25 : int
-
-logic h4 : int
-
-logic result26 : int
-
-logic h5 : int
-
-logic result27 : bool
-
-logic success2 : bool
-
-logic result28 : int
-
-logic c2 : int
-
-logic result29 : int
-
-logic c3 : int
-
-logic result30 : int
-
-logic c4 : int
-
-logic result31 : int
-
-logic c5 : int
-
-logic result32 : int
-
-logic c6 : int
-
-logic result33 : int
-
-logic c7 : int
-
-logic result34 : int
-
-logic c8 : int
-
-logic result35 : t
-
-logic y1 : t
-
-logic result36 : t
-
-logic y2 : t
-
-logic result37 : t
-
-logic y3 : t
-
-logic result38 : bool
-
-logic result39 : bool
-
-logic result40 : bool
-
-logic result41 : bool
-
-logic result42 : bool
-
-logic result43 : int
-
-logic value1 : int
-
-logic result44 : int
-
-logic sum1 : int
-
-logic value2 : int
-
-logic sum2 : int
-
-logic ada__integer_text_io__get__2__item : int
-
-logic result45 : int
-
-logic value3 : int
-
-logic sum3 : int
-
-logic sum4 : int
-
-logic value4 : int
-
-logic sum5 : int
-
-logic value5 : int
-
-logic sum6 : int
-
-logic value6 : int
-
-logic sum7 : int
-
-logic value7 : int
-
-logic sum8 : int
-
-logic result46 : t
-
-logic approx1 : t
-
-logic result47 : bool
-
-logic approx2 : t
-
-logic result48 : t
-
-logic approx3 : t
-
-logic result49 : bool
-
-logic approx4 : t
-
-logic approx5 : t
-
-logic approx6 : t
-
-logic approx7 : t
-
-logic result50 : int
-
-logic count4 : int
-
-logic result51 : int
-
-logic count5 : int
-
-logic result52 : int
-
-logic count6 : int
-
-logic result53 : int
-
-logic count7 : int
-
-logic result54 : int
-
-logic count8 : int
-
-logic result55 : int
-
-logic count9 : int
-
-logic result56 : int
-
-logic count10 : int
-
-logic result57 : int
-
-logic count11 : int
-
-logic result58 : int
-
-logic a3 : int
-
-logic result59 : int
-
-logic b3 : int
-
-logic result60 : int
-
-logic count12 : int
-
-logic count13 : int
-
-logic count14 : int
-
-logic count15 : int
-
-logic count16 : int
-
-logic count17 : int
-
-logic result61 : int
-
-logic count18 : int
-
-logic count19 : int
-
-logic count20 : int
-
-logic count21 : int
-
-logic count22 : int
-
-logic count23 : int
-
-logic temperature1 : int
-
-logic valve_setting1 : int
-
-logic temperature2 : int
-
-axiom H : in_range4(default_width)
-
-axiom H1 : in_range5(default_base)
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range2(a))
-
-axiom H3 : (((- 2147483648) <= 2147483647) -> in_range2(b))
-
-axiom H4 : (((- 2147483648) <= 2147483647) -> in_range2(c))
-
-axiom H5 : (((- 2147483648) <= 2147483647) -> in_range2(d))
-
-axiom H6 : (((- 2147483648) <= 2147483647) -> in_range2(e))
-
-axiom H7 : (((- 2147483648) <= 2147483647) -> in_range2(f))
-
-axiom H8 : (((- 2147483648) <= 2147483647) -> in_range2(g))
-
-axiom H9 : (((- 2147483648) <= 2147483647) -> in_range2(h))
-
-axiom H10 : ((0 <= 255) -> in_range3(ch))
-
-axiom H11 : (((- 2147483648) <= 2147483647) -> in_range2(temperature))
-
-axiom H12 : (((- 2147483648) <= 2147483647) -> in_range2(valve_setting))
-
-axiom H13 : (((- 2147483648) <= 2147483647) -> in_range2(value))
-
-axiom H14 : (((- 2147483648) <= 2147483647) -> in_range2(sum))
-
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 340282346638528859811704183484516925440.0))
-
-axiom H15 : (le(neg(fliteral2), fliteral2) -> tqtisFinite(approx))
-
-axiom H16 : (le(neg(fliteral2), fliteral2) -> tqtisFinite(x))
-
-axiom H17 : (le(neg(fliteral2), fliteral2) -> tqtisFinite(y))
-
-axiom H18 : tqtisFinite(tolerance)
-
-axiom H19 : (result = letter)
-
-axiom H20 : (letter1 = 81)
-
-axiom H21 : in_range7(letter1)
-
-axiom H22 : (result1 = a)
-
-axiom H23 : (a1 = 1)
-
-axiom H24 : (result2 = b)
-
-axiom H25 : (b1 = 2)
-
-axiom H26 : (result3 = c)
-
-axiom H27 : (c1 = 3)
-
-axiom H28 : (result4 = d)
-
-axiom H29 : (d1 = 3)
-
-axiom H30 : (result5 = e)
-
-axiom H31 : (e1 = 4)
-
-axiom H32 : (result6 = ch)
-
-axiom H33 : (ch1 = 68)
-
-axiom H34 : (result7 = x)
 
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 123.45459747314453125))
 
-axiom H35 : (x1 = fliteral3)
-
-axiom H36 : ((a1 <  0) -> ((o = (-a1)) and in_range2((-a1))))
-
-axiom H37 : ((a1 <  0) -> (result8 = a1))
-
-axiom H38 : ((a1 <  0) -> (a2 = o))
-
-axiom H39 : ((a1 <  0) -> (result9 = d1))
-
-axiom H40 : ((a1 <  0) -> (d2 = 1))
-
-axiom H41 : ((not (a1 <  0)) -> (d2 = d1))
-
-axiom H42 : ((not (a1 <  0)) -> (a2 = a1))
-
-axiom H43 : (((1 <= a2) and (a2 <= 12)) -> (result10 = b1))
-
-axiom H44 : (((1 <= a2) and (a2 <= 12)) -> (b2 = 17))
-
-axiom H45 : ((not ((1 <= a2) and (a2 <= 12))) -> (b2 = b1))
-
-axiom H46 : ((b2 <  a2) -> (result11 = e1))
-
-axiom H47 : ((b2 <  a2) -> (e2 = 1))
-
-axiom H48 : ((b2 <  a2) -> (result12 = f))
-
-axiom H49 : ((b2 <  a2) -> (f1 = a2))
-
-axiom H50 : ((not (b2 <  a2)) -> (result13 = e1))
-
-axiom H51 : ((not (b2 <  a2)) -> (e3 = 2))
-
-axiom H52 : ((not (b2 <  a2)) -> (result14 = f))
-
-axiom H53 : ((not (b2 <  a2)) -> (f2 = b2))
-
-axiom H54 : ((not (b2 <  a2)) -> (f1 = f2))
-
-axiom H55 : ((not (b2 <  a2)) -> (e2 = e3))
-
-axiom H56 : ((a2 = b2) -> (result15 = f1))
-
-axiom H57 : ((a2 = b2) -> (f3 = 3))
-
-axiom H58 : ((not (a2 = b2)) -> ((b2 <  a2) -> (result16 = f1)))
-
-axiom H59 : ((not (a2 = b2)) -> ((b2 <  a2) -> (f4 = 4)))
-
-axiom H60 : ((not (a2 = b2)) -> ((not (b2 <  a2)) -> (result17 = f1)))
-
-axiom H61 : ((not (a2 = b2)) -> ((not (b2 <  a2)) -> (f5 = 5)))
-
-axiom H62 : ((not (a2 = b2)) -> ((not (b2 <  a2)) -> (f4 = f5)))
-
-axiom H63 : ((not (a2 = b2)) -> (f3 = f4))
-
-axiom H64 : (((b2 <  a2) and (c1 <  a2)) -> (result18 = g))
-
-axiom H65 : (((b2 <  a2) and (c1 <  a2)) -> (g2 = 6))
-
-axiom H66 : ((not ((b2 <  a2) and (c1 <  a2))) -> (((a2 <  b2) and
-  (c1 <  b2)) -> (result19 = g)))
-
-axiom H67 : ((not ((b2 <  a2) and (c1 <  a2))) -> (((a2 <  b2) and
-  (c1 <  b2)) -> (g3 = 7)))
-
-axiom H68 : ((not ((b2 <  a2) and (c1 <  a2))) -> ((not ((a2 <  b2) and
-  (c1 <  b2))) -> (((a2 <  c1) and (b2 <  c1)) -> (result20 = g))))
-
-axiom H69 : ((not ((b2 <  a2) and (c1 <  a2))) -> ((not ((a2 <  b2) and
-  (c1 <  b2))) -> (((a2 <  c1) and (b2 <  c1)) -> (g4 = 8))))
-
-axiom H70 : ((not ((b2 <  a2) and (c1 <  a2))) -> ((not ((a2 <  b2) and
-  (c1 <  b2))) -> ((not ((a2 <  c1) and (b2 <  c1))) -> (g4 = g))))
-
-axiom H71 : ((not ((b2 <  a2) and (c1 <  a2))) -> ((not ((a2 <  b2) and
-  (c1 <  b2))) -> ((not ((a2 <  c1) and (b2 <  c1))) -> (g4 = g1))))
-
-axiom H72 : ((not ((b2 <  a2) and (c1 <  a2))) -> ((not ((a2 <  b2) and
-  (c1 <  b2))) -> (g3 = g4)))
-
-axiom H73 : ((not ((b2 <  a2) and (c1 <  a2))) -> (g2 = g3))
-
-axiom H74 : (result21 = success)
-
-axiom H75 : (success1 = of_int1(1))
-
-axiom H76 : (((97 <= ch1) and (ch1 <= 122)) -> (result22 = h))
-
-axiom H77 : (((97 <= ch1) and (ch1 <= 122)) -> (h1 = 1))
-
-axiom H78 : (((97 <= ch1) and (ch1 <= 122)) -> (success2 = success1))
-
-axiom H79 : ((not ((97 <= ch1) and (ch1 <= 122))) -> (((65 <= ch1) and
-  (ch1 <= 90)) -> (result23 = h)))
-
-axiom H80 : ((not ((97 <= ch1) and (ch1 <= 122))) -> (((65 <= ch1) and
-  (ch1 <= 90)) -> (h2 = 2)))
-
-axiom H81 : ((not ((97 <= ch1) and (ch1 <= 122))) -> (((65 <= ch1) and
-  (ch1 <= 90)) -> (success2 = success1)))
-
-axiom H82 : ((not ((97 <= ch1) and (ch1 <= 122))) -> ((not ((65 <= ch1) and
-  (ch1 <= 90))) -> (((48 <= ch1) and (ch1 <= 57)) -> (result24 = h))))
-
-axiom H83 : ((not ((97 <= ch1) and (ch1 <= 122))) -> ((not ((65 <= ch1) and
-  (ch1 <= 90))) -> (((48 <= ch1) and (ch1 <= 57)) -> (h3 = 3))))
-
-axiom H84 : ((not ((97 <= ch1) and (ch1 <= 122))) -> ((not ((65 <= ch1) and
-  (ch1 <= 90))) -> (((48 <= ch1) and (ch1 <= 57)) -> (success2 = success1))))
-
-axiom H85 : ((not ((97 <= ch1) and (ch1 <= 122))) -> ((not ((65 <= ch1) and
-  (ch1 <= 90))) -> ((not ((48 <= ch1) and (ch1 <= 57))) ->
-  (((not (ch1 = 46)) -> ((not (ch1 = 33)) -> (ch1 = 63))) ->
-  (result25 = h)))))
-
-axiom H86 : ((not ((97 <= ch1) and (ch1 <= 122))) -> ((not ((65 <= ch1) and
-  (ch1 <= 90))) -> ((not ((48 <= ch1) and (ch1 <= 57))) ->
-  (((not (ch1 = 46)) -> ((not (ch1 = 33)) -> (ch1 = 63))) -> (h4 = 4)))))
-
-axiom H87 : ((not ((97 <= ch1) and (ch1 <= 122))) -> ((not ((65 <= ch1) and
-  (ch1 <= 90))) -> ((not ((48 <= ch1) and (ch1 <= 57))) ->
-  (((not (ch1 = 46)) -> ((not (ch1 = 33)) -> (ch1 = 63))) ->
-  (success2 = success1)))))
-
-axiom H88 : ((not ((97 <= ch1) and (ch1 <= 122))) -> ((not ((65 <= ch1) and
-  (ch1 <= 90))) -> ((not ((48 <= ch1) and (ch1 <= 57))) ->
-  ((not ((not (ch1 = 46)) -> ((not (ch1 = 33)) -> (ch1 = 63)))) ->
-  (result26 = h)))))
-
-axiom H89 : ((not ((97 <= ch1) and (ch1 <= 122))) -> ((not ((65 <= ch1) and
-  (ch1 <= 90))) -> ((not ((48 <= ch1) and (ch1 <= 57))) ->
-  ((not ((not (ch1 = 46)) -> ((not (ch1 = 33)) -> (ch1 = 63)))) ->
-  (h5 = 5)))))
-
-axiom H90 : ((not ((97 <= ch1) and (ch1 <= 122))) -> ((not ((65 <= ch1) and
-  (ch1 <= 90))) -> ((not ((48 <= ch1) and (ch1 <= 57))) ->
-  ((not ((not (ch1 = 46)) -> ((not (ch1 = 33)) -> (ch1 = 63)))) ->
-  (result27 = success1)))))
-
-axiom H91 : ((not ((97 <= ch1) and (ch1 <= 122))) -> ((not ((65 <= ch1) and
-  (ch1 <= 90))) -> ((not ((48 <= ch1) and (ch1 <= 57))) ->
-  ((not ((not (ch1 = 46)) -> ((not (ch1 = 33)) -> (ch1 = 63)))) ->
-  (success2 = of_int1(0))))))
-
-axiom H92 : ((not ((97 <= ch1) and (ch1 <= 122))) -> ((not ((65 <= ch1) and
-  (ch1 <= 90))) -> ((not ((48 <= ch1) and (ch1 <= 57))) ->
-  ((not ((not (ch1 = 46)) -> ((not (ch1 = 33)) -> (ch1 = 63)))) ->
-  (h4 = h5)))))
-
-axiom H93 : ((not ((97 <= ch1) and (ch1 <= 122))) -> ((not ((65 <= ch1) and
-  (ch1 <= 90))) -> ((not ((48 <= ch1) and (ch1 <= 57))) -> (h3 = h4))))
-
-axiom H94 : ((not ((97 <= ch1) and (ch1 <= 122))) -> ((not ((65 <= ch1) and
-  (ch1 <= 90))) -> (h2 = h3)))
-
-axiom H95 : ((not ((97 <= ch1) and (ch1 <= 122))) -> (h1 = h2))
-
-axiom H96 : ((b2 <  a2) -> ((o1 = (d2 + 5)) and in_range2((d2 + 5))))
-
-axiom H97 : ((b2 <  a2) -> (result28 = c1))
-
-axiom H98 : ((b2 <  a2) -> (c2 = o1))
-
-axiom H99 : ((not (b2 <  a2)) -> (result29 = c1))
-
-axiom H100 : ((not (b2 <  a2)) -> (c3 = comp_div(f3,2)))
-
-axiom H101 : ((not (b2 <  a2)) -> (c2 = c3))
-
-axiom H102 : ((b2 <  a2) -> ((o2 = (d2 + 5)) and in_range2((d2 + 5))))
-
-axiom H103 : ((not (b2 <  a2)) -> (o2 = comp_div(f3,2)))
-
-axiom H104 : (result30 = c2)
-
-axiom H105 : (c4 = o2)
-
-axiom H106 : ((b2 <  a2) -> ((o3 = (d2 + 5)) and in_range2((d2 + 5))))
-
-axiom H107 : ((b2 <  a2) -> (result31 = c4))
-
-axiom H108 : ((b2 <  a2) -> (c5 = o3))
-
-axiom H109 : ((not (b2 <  a2)) -> ((a2 = b2) -> ((o4 = (2 * a2)) and
-  in_range2((2 * a2)))))
-
-axiom H110 : ((not (b2 <  a2)) -> ((a2 = b2) -> (result32 = c4)))
-
-axiom H111 : ((not (b2 <  a2)) -> ((a2 = b2) -> (c6 = o4)))
-
-axiom H112 : ((not (b2 <  a2)) -> ((not (a2 = b2)) -> (result33 = c4)))
-
-axiom H113 : ((not (b2 <  a2)) -> ((not (a2 = b2)) -> (c7 = comp_div(f3,2))))
-
-axiom H114 : ((not (b2 <  a2)) -> ((not (a2 = b2)) -> (c6 = c7)))
-
-axiom H115 : ((not (b2 <  a2)) -> (c5 = c6))
-
-axiom H116 : ((b2 <  a2) -> ((o5 = (d2 + 5)) and in_range2((d2 + 5))))
-
-axiom H117 : ((not (b2 <  a2)) -> ((a2 = b2) -> ((o5 = (2 * a2)) and
-  in_range2((2 * a2)))))
-
-axiom H118 : ((not (b2 <  a2)) -> ((not (a2 = b2)) -> (o5 = comp_div(f3,2))))
-
-axiom H119 : (result34 = c5)
-
-axiom H120 : (c8 = o5)
-
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 0.0e-1))
-
-axiom H121 : (le(fliteral4, x1) -> (result35 = y))
-
-axiom H122 : (le(fliteral4, x1) -> (y1 = sqrt(NearestTiesToEven, x1)))
 
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 2.0))
 
-axiom H123 : ((not le(fliteral4, x1)) -> ((o6 = mul(NearestTiesToEven,
-  fliteral5, x1)) and tqtisFinite(mul(NearestTiesToEven, fliteral5, x1))))
-
-axiom H124 : ((not le(fliteral4, x1)) -> (o7 = neg(o6)))
-
-axiom H125 : ((not le(fliteral4, x1)) -> (o8 = sqrt(NearestTiesToEven, o7)))
-
-axiom H126 : ((not le(fliteral4, x1)) -> (result36 = y))
-
-axiom H127 : ((not le(fliteral4, x1)) -> (y2 = o8))
-
-axiom H128 : ((not le(fliteral4, x1)) -> (y1 = y2))
-
-axiom H129 : (le(fliteral4, x1) -> (o10 = x1))
-
-axiom H130 : ((not le(fliteral4, x1)) -> ((o9 = mul(NearestTiesToEven,
-  fliteral5, x1)) and tqtisFinite(mul(NearestTiesToEven, fliteral5, x1))))
-
-axiom H131 : ((not le(fliteral4, x1)) -> (o10 = neg(o9)))
-
-axiom H132 : (o11 = sqrt(NearestTiesToEven, o10))
-
-axiom H133 : (result37 = y1)
-
-axiom H134 : (y3 = o11)
-
-axiom H135 : ((o12 = (c8 - d2)) and in_range2((c8 - d2)))
-
-axiom H136 : (((o12 = 0) -> (result39 = true)) and ((not (o12 = 0)) ->
-  (result39 = false)))
-
-axiom H137 : ((result39 = true) -> (((2 <  e2) -> (result38 = true)) and
-  ((not (2 <  e2)) -> (result38 = false))))
-
-axiom H138 : ((not (result39 = true)) -> (result38 = of_int1(1)))
-
  (* File "control_structures.adb", line 29, characters 0-0 *)
-goal WP_parameter_def : in_range2((c8 - d2))
+goal WP_parameter_def :
+  (forall default_width:int. forall default_base:int. forall a:int.
+  forall b:int. forall c:int. forall d:int. forall e:int. forall f:int.
+  forall g:int. forall h:int. forall ch:int. forall temperature:int.
+  forall valve_setting:int. forall value:int. forall sum:int.
+  forall success:bool. forall approx:t. forall x:t. forall y:t.
+  forall letter:int. forall o:int. forall o1:int. forall o2:int.
+  forall o3:int. forall o4:int. forall o5:int. forall o6:t. forall o7:t.
+  forall o8:t. forall o9:t. forall o10:t. forall o11:t. forall o12:int.
+  forall g1:int. forall result:int. forall letter1:int. forall result1:int.
+  forall a1:int. forall result2:int. forall b1:int. forall result3:int.
+  forall c1:int. forall result4:int. forall d1:int. forall result5:int.
+  forall e1:int. forall result6:int. forall ch1:int. forall result7:t.
+  forall x1:t. forall result8:int. forall a2:int. forall result9:int.
+  forall d2:int. forall result10:int. forall b2:int. forall result11:int.
+  forall e2:int. forall result12:int. forall f1:int. forall result13:int.
+  forall e3:int. forall result14:int. forall f2:int. forall result15:int.
+  forall f3:int. forall result16:int. forall f4:int. forall result17:int.
+  forall f5:int. forall result18:int__ref. forall g2:int.
+  forall result19:int__ref. forall g3:int. forall result20:int__ref.
+  forall g4:int. forall result21:bool__ref. forall success1:bool.
+  forall result22:int__ref. forall h1:int. forall result23:int__ref.
+  forall h2:int. forall result24:int__ref. forall h3:int.
+  forall result25:int__ref. forall h4:int. forall result26:int__ref.
+  forall h5:int. forall result27:bool__ref. forall success2:bool.
+  forall result28:int__ref. forall c2:int. forall result29:int__ref.
+  forall c3:int. forall result30:int__ref. forall c4:int.
+  forall result31:int__ref. forall c5:int. forall result32:int__ref.
+  forall c6:int. forall result33:int__ref. forall c7:int.
+  forall result34:int__ref. forall c8:int. forall result35:t__ref.
+  forall y1:t. forall result36:t__ref. forall y2:t. forall result37:t__ref.
+  forall y3:t. forall result38:bool. forall result39:bool.
+  (in_range4(default_width) -> (in_range5(default_base) ->
+  ((((- 2147483648) <= 2147483647) -> in_range2(a)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range2(b)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range2(c)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range2(d)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range2(e)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range2(f)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range2(g)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range2(h)) -> (((0 <= 255) ->
+  in_range3(ch)) -> ((((- 2147483648) <= 2147483647) ->
+  in_range2(temperature)) -> ((((- 2147483648) <= 2147483647) ->
+  in_range2(valve_setting)) -> ((((- 2147483648) <= 2147483647) ->
+  in_range2(value)) -> ((((- 2147483648) <= 2147483647) -> in_range2(sum)) ->
+  ((le(neg(fliteral2), fliteral2) -> tqtisFinite(approx)) ->
+  ((le(neg(fliteral2), fliteral2) -> tqtisFinite(x)) -> ((le(neg(fliteral2),
+  fliteral2) -> tqtisFinite(y)) -> (tqtisFinite(tolerance) ->
+  (((result = letter) and (letter1 = 81)) -> (in_range7(letter1) ->
+  (((result1 = a) and (a1 = 1)) -> (((result2 = b) and (b1 = 2)) ->
+  (((result3 = c) and (c1 = 3)) -> (((result4 = d) and (d1 = 3)) ->
+  (((result5 = e) and (e1 = 4)) -> (((result6 = ch) and (ch1 = 68)) ->
+  (((result7 = x) and (x1 = fliteral3)) -> ((((a1 <  0) and
+  ((((o = (-a1)) and in_range2((-a1))) and ((result8 = a1) and (a2 = o))) and
+  ((result9 = d1) and (d2 = 1)))) or ((not (a1 <  0)) and ((d2 = d1) and
+  (a2 = a1)))) -> (((((1 <= a2) and (a2 <= 12)) and ((result10 = b1) and
+  (b2 = 17))) or ((not ((1 <= a2) and (a2 <= 12))) and (b2 = b1))) ->
+  ((((b2 <  a2) and (((result11 = e1) and (e2 = 1)) and ((result12 = f) and
+  (f1 = a2)))) or ((not (b2 <  a2)) and ((((result13 = e1) and (e3 = 2)) and
+  ((result14 = f) and (f2 = b2))) and ((f1 = f2) and (e2 = e3))))) ->
+  ((((a2 = b2) and ((result15 = f1) and (f3 = 3))) or ((not (a2 = b2)) and
+  ((((b2 <  a2) and ((result16 = f1) and (f4 = 4))) or ((not (b2 <  a2)) and
+  (((result17 = f1) and (f5 = 5)) and (f4 = f5)))) and (f3 = f4)))) ->
+  (((((b2 <  a2) and (c1 <  a2)) and ((result18 = { int__content = g }) and
+  (g2 = 6))) or ((not ((b2 <  a2) and (c1 <  a2))) and (((((a2 <  b2) and
+  (c1 <  b2)) and ((result19 = { int__content = g }) and (g3 = 7))) or
+  ((not ((a2 <  b2) and (c1 <  b2))) and (((((a2 <  c1) and (b2 <  c1)) and
+  ((result20 = { int__content = g }) and (g4 = 8))) or ((not ((a2 <  c1) and
+  (b2 <  c1))) and ((g4 = g) and (g4 = g1)))) and (g3 = g4)))) and
+  (g2 = g3)))) -> (((result21 = { bool__content = success }) and
+  (success1 = of_int1(1))) -> (((((97 <= ch1) and (ch1 <= 122)) and
+  (((result22 = { int__content = h }) and (h1 = 1)) and
+  (success2 = success1))) or ((not ((97 <= ch1) and (ch1 <= 122))) and
+  (((((65 <= ch1) and (ch1 <= 90)) and (((result23 = { int__content = h
+  }) and (h2 = 2)) and (success2 = success1))) or ((not ((65 <= ch1) and
+  (ch1 <= 90))) and (((((48 <= ch1) and (ch1 <= 57)) and (((result24 = {
+  int__content = h }) and (h3 = 3)) and (success2 = success1))) or
+  ((not ((48 <= ch1) and (ch1 <= 57))) and (((((not (ch1 = 46)) ->
+  ((not (ch1 = 33)) -> (ch1 = 63))) and (((result25 = { int__content = h
+  }) and (h4 = 4)) and (success2 = success1))) or ((not ((not (ch1 = 46)) ->
+  ((not (ch1 = 33)) -> (ch1 = 63)))) and ((((result26 = { int__content = h
+  }) and (h5 = 5)) and ((result27 = { bool__content = success1 }) and
+  (success2 = of_int1(0)))) and (h4 = h5)))) and (h3 = h4)))) and
+  (h2 = h3)))) and (h1 = h2)))) -> ((((b2 <  a2) and (((o1 = (d2 + 5)) and
+  in_range2((d2 + 5))) and ((result28 = { int__content = c1 }) and
+  (c2 = o1)))) or ((not (b2 <  a2)) and (((result29 = { int__content = c1
+  }) and (c3 = comp_div(f3,2))) and (c2 = c3)))) -> (((((b2 <  a2) and
+  ((o2 = (d2 + 5)) and in_range2((d2 + 5)))) or ((not (b2 <  a2)) and
+  (o2 = comp_div(f3,2)))) and ((result30 = { int__content = c2 }) and
+  (c4 = o2))) -> ((((b2 <  a2) and (((o3 = (d2 + 5)) and
+  in_range2((d2 + 5))) and ((result31 = { int__content = c4 }) and
+  (c5 = o3)))) or ((not (b2 <  a2)) and ((((a2 = b2) and
+  (((o4 = (2 * a2)) and in_range2((2 * a2))) and ((result32 = {
+  int__content = c4 }) and (c6 = o4)))) or ((not (a2 = b2)) and
+  (((result33 = { int__content = c4 }) and (c7 = comp_div(f3,2))) and
+  (c6 = c7)))) and (c5 = c6)))) -> (((((b2 <  a2) and ((o5 = (d2 + 5)) and
+  in_range2((d2 + 5)))) or ((not (b2 <  a2)) and (((a2 = b2) and
+  ((o5 = (2 * a2)) and in_range2((2 * a2)))) or ((not (a2 = b2)) and
+  (o5 = comp_div(f3,2)))))) and ((result34 = { int__content = c5 }) and
+  (c8 = o5))) -> (((le(fliteral4, x1) and ((result35 = { t__content = y
+  }) and (y1 = sqrt(NearestTiesToEven, x1)))) or ((not le(fliteral4, x1)) and
+  ((((((o6 = mul(NearestTiesToEven, fliteral5, x1)) and
+  tqtisFinite(mul(NearestTiesToEven, fliteral5, x1))) and (o7 = neg(o6))) and
+  (o8 = sqrt(NearestTiesToEven, o7))) and ((result36 = { t__content = y
+  }) and (y2 = o8))) and (y1 = y2)))) -> (((((le(fliteral4, x1) and
+  (o10 = x1)) or ((not le(fliteral4, x1)) and (((o9 = mul(NearestTiesToEven,
+  fliteral5, x1)) and tqtisFinite(mul(NearestTiesToEven, fliteral5, x1))) and
+  (o10 = neg(o9))))) and (o11 = sqrt(NearestTiesToEven, o10))) and
+  ((result37 = { t__content = y1 }) and (y3 = o11))) ->
+  (((((o12 = (c8 - d2)) and in_range2((c8 - d2))) and (((o12 = 0) and
+  (result39 = true)) or ((not (o12 = 0)) and (result39 = false)))) and
+  (((result39 = true) and (((2 <  e2) and (result38 = true)) or
+  ((not (2 <  e2)) and (result38 = false)))) or ((not (result39 = true)) and
+  (result38 = of_int1(1))))) ->
+  in_range2((c8 - d2)))))))))))))))))))))))))))))))))))))))))))))

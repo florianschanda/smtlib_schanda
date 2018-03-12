@@ -741,39 +741,9 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic v1raw : t
-
-logic x : int
-
-logic tmp : t
-
-logic o : t
-
-logic o1 : int
-
-logic o2 : int
-
-logic v1raw1 : t
-
-logic result : t
-
-logic tmp1 : t
-
-axiom H : true
-
-axiom H1 : ((0 <= 17) -> in_range(x))
-
-axiom H2 : true
-
-axiom H3 : true
-
-axiom H4 : (o = v1raw1)
-
-axiom H5 : (result = tmp)
-
-axiom H6 : (tmp1 = o)
-
-axiom H7 : ((o1 = c(tmp1)) and in_range1(o1))
-
  (* File "a-unccon.ads", line 20, characters 0-0 *)
-goal WP_parameter_def : in_range(o1)
+goal WP_parameter_def :
+  (forall x:int. forall tmp:t. forall o:t. forall o1:int. forall v1raw:t.
+  forall result:t. forall tmp1:t. (((0 <= 17) -> in_range(x)) ->
+  (((o = v1raw) and ((result = tmp) and (tmp1 = o))) -> (((o1 = c(tmp1)) and
+  in_range1(o1)) -> in_range(o1)))))

@@ -175,45 +175,15 @@ axiom get_current_id__post_refine_axiom :
   ((get_current_id1(entities__current_id) = entities__current_id) and
   in_range1(get_current_id1(entities__current_id)))))
 
-logic current_id : int
-
-logic current_cycles : int
-
-logic result : int
-
-logic current_id1 : int
-
-logic result1 : int
-
-logic current_cycles1 : int
-
-logic current_id2 : int
-
-logic current_cycles2 : int
-
-logic current_id3 : int
-
-logic current_cycles3 : int
-
-axiom H : ((1 <= 10) -> in_range1(current_id))
-
-axiom H1 : ((1 <= 2147483647) -> in_range(current_cycles))
-
-axiom H2 : (result = current_id)
-
-axiom H3 : (current_id1 = 1)
-
-axiom H4 : (result1 = current_cycles)
-
-axiom H5 : (current_cycles1 = 2147483647)
-
-axiom H6 : (current_cycles1 = current_cycles2)
-
-axiom H7 : (current_id1 = current_id2)
-
-axiom H8 : (current_cycles3 = current_cycles1)
-
-axiom H9 : (current_id3 = current_id1)
-
  (* File "entities.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : (get_current_id1(current_id2) = 1)
+goal WP_parameter_def :
+  (forall current_id:int. forall current_cycles:int. forall result:int.
+  forall current_id1:int. forall result1:int. forall current_cycles1:int.
+  forall current_id2:int. forall current_cycles2:int. forall current_id3:int.
+  forall current_cycles3:int. ((((1 <= 10) -> in_range1(current_id)) and
+  (((1 <= 2147483647) -> in_range(current_cycles)) and
+  ((((result = current_id) and (current_id1 = 1)) and
+  ((result1 = current_cycles) and (current_cycles1 = 2147483647))) and
+  (((current_cycles1 = current_cycles2) and (current_id1 = current_id2)) and
+  ((current_cycles3 = current_cycles1) and
+  (current_id3 = current_id1)))))) -> (get_current_id1(current_id2) = 1)))

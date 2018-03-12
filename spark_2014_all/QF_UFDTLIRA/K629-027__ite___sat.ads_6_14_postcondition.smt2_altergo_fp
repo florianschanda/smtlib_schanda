@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -141,47 +141,19 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic sat__add__result : int
-
-logic o : int
-
-logic result : int
-
-logic sat__add__result1 : int
-
-logic sat__add__result2 : int
-
-logic sat__add__result3 : int
-
-logic sat__add__result4 : int
-
-logic sat__add__result5 : int
-
-logic result1 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : in_range1(y)
-
-axiom H2 : (sat__add__result1 = sat__add__result2)
-
-axiom H3 : (sat__add__result3 = sat__add__result1)
-
-axiom H4 : (((x + y) <  10000) -> ((o = (x + y)) and in_range1((x + y))))
-
-axiom H5 : ((not ((x + y) <  10000)) -> (o = 10000))
-
-axiom H6 : (result = sat__add__result)
-
-axiom H7 : (sat__add__result1 = o)
-
-axiom H8 : (sat__add__result4 = sat__add__result2)
-
-axiom H9 : (sat__add__result5 = sat__add__result3)
-
-axiom H10 : (result1 = sat__add__result4)
-
  (* File "sat.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : ((((x + y) <  10000) and
+goal WP_parameter_def :
+  (forall sat__add__result:int. forall o:int. forall result:int.
+  forall sat__add__result1:int. forall sat__add__result2:int.
+  forall sat__add__result3:int. forall sat__add__result4:int.
+  forall sat__add__result5:int.
+  (forall result1:int. ((in_range1(x) and (in_range1(y) and
+  (((((sat__add__result1 = sat__add__result2) and
+  (sat__add__result3 = sat__add__result1)) and (((((x + y) <  10000) and
+  ((o = (x + y)) and in_range1((x + y)))) or ((not ((x + y) <  10000)) and
+  (o = 10000))) and ((result = sat__add__result) and
+  (sat__add__result1 = o)))) and ((sat__add__result4 = sat__add__result2) and
+  (sat__add__result5 = sat__add__result3))) and
+  (result1 = sat__add__result4)))) -> ((((x + y) <  10000) and
   (sat__add__result4 = (x + y))) or ((10000 <= (x + y)) and
-  (sat__add__result4 = 10000)))
+  (sat__add__result4 = 10000))))))

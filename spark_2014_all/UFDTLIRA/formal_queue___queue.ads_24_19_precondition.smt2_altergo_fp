@@ -337,12 +337,6 @@ logic length__function_guard1 : int, us_rep1 -> prop
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq5 : bool, bool -> bool
-
-axiom bool_eq_def3 :
-  (forall x:bool. forall y:bool [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -354,6 +348,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq5 : bool, bool -> bool
+
+axiom bool_eq_def3 :
+  (forall x:bool. forall y:bool [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
 
 predicate in_range2(x: int) = ((x = 0) or (x = 1))
 
@@ -461,50 +461,26 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length1(container))))) ->
   in_range4(get(container, position)))))
 
-logic queue__front__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic queue__front__result1 : int
-
-logic queue__front__result2 : int
-
-logic queue__front__result3 : int
-
-logic queue__front__result4 : int
-
-logic queue__front__result5 : int
-
-axiom H : (0 <  length({ us_split_discrs1 = {
+ (* File "queue.ads", line 17, characters 0-0 *)
+goal WP_parameter_def :
+  (forall queue__front__result:int. forall o:int. forall result:int.
+  forall queue__front__result1:int. forall queue__front__result2:int.
+  forall queue__front__result3:int. forall queue__front__result4:int.
+  forall queue__front__result5:int. ((0 <  length({ us_split_discrs1 = {
   rec__queue__mylists__list__capacity = q }; us_split_fields1 = {
-  rec__queue__mylists__list = q1 } }))
-
-axiom H1 : (queue__front__result1 = queue__front__result2)
-
-axiom H2 : (queue__front__result3 = queue__front__result1)
-
-axiom H3 : ((o = last_element({ us_split_discrs1 = {
-  rec__queue__mylists__list__capacity = q }; us_split_fields1 = {
-  rec__queue__mylists__list = q1 } })) and (in_range1(o) and
-  (o = get(model__({ us_split_discrs1 = {
+  rec__queue__mylists__list = q1 } })) ->
+  (((((queue__front__result1 = queue__front__result2) and
+  (queue__front__result3 = queue__front__result1)) and (((o = last_element({
+  us_split_discrs1 = { rec__queue__mylists__list__capacity = q };
+  us_split_fields1 = { rec__queue__mylists__list = q1 } })) and
+  (in_range1(o) and (o = get(model__({ us_split_discrs1 = {
   rec__queue__mylists__list__capacity = q }; us_split_fields1 = {
   rec__queue__mylists__list = q1 } }), length({ us_split_discrs1 = {
   rec__queue__mylists__list__capacity = q }; us_split_fields1 = {
-  rec__queue__mylists__list = q1 } })))))
-
-axiom H4 : (result = queue__front__result)
-
-axiom H5 : (queue__front__result1 = o)
-
-axiom H6 : (queue__front__result4 = queue__front__result2)
-
-axiom H7 : (queue__front__result5 = queue__front__result3)
-
- (* File "queue.ads", line 17, characters 0-0 *)
-goal WP_parameter_def : (not (is_empty({ us_split_discrs1 = {
-  rec__queue__mylists__list__capacity = q }; us_split_fields1 = {
-  rec__queue__mylists__list = q1 } }) = true))
+  rec__queue__mylists__list = q1 } }))))) and (({ int__content = result } = {
+  int__content = queue__front__result }) and
+  (queue__front__result1 = o)))) and (({ int__content = queue__front__result4
+  } = { int__content = queue__front__result2 }) and
+  (queue__front__result5 = queue__front__result3))) -> (not (is_empty({
+  us_split_discrs1 = { rec__queue__mylists__list__capacity = q };
+  us_split_fields1 = { rec__queue__mylists__list = q1 } }) = true)))))

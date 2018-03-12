@@ -162,29 +162,11 @@ axiom number_of_oranges__def_axiom :
   (in_range1(fruit__oranges) ->
   (number_of_oranges(fruit__oranges) = fruit__oranges)))
 
-logic apples : int
-
-logic oranges : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-axiom H : in_range1(apples)
-
-axiom H1 : in_range1(oranges)
-
-axiom H2 : ((o = number_of_oranges(oranges)) and (in_range1(o) and
-  (o = oranges)))
-
-axiom H3 : ((o1 = number_of_apples(apples)) and (in_range1(o1) and
-  (o1 = apples)))
-
-axiom H4 : (o2 = (o1 + o))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(o2)
+goal WP_parameter_def :
+  (forall apples:int. forall oranges:int. forall o:int. forall o1:int.
+  forall o2:int. (in_range1(apples) -> (in_range1(oranges) ->
+  ((((o = number_of_oranges(oranges)) and (in_range1(o) and
+  (o = oranges))) and (((o1 = number_of_apples(apples)) and
+  (in_range1(o1) and (o1 = apples))) and (o2 = (o1 + o)))) ->
+  in_range(o2)))))

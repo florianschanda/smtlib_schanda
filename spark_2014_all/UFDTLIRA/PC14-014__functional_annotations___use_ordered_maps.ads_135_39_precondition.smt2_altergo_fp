@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -589,8 +589,8 @@ axiom keys__post_axiom :
   rec__use_ordered_maps__my_maps__map__capacity = container };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = container1 }
   })) and
-  (forall temp___399:int. ((in_range3(temp___399) and ((1 <= temp___399) and
-  (temp___399 <= (0 + length2(keys({ us_split_discrs1 = {
+  (forall temp___442:int. ((in_range3(temp___442) and ((1 <= temp___442) and
+  (temp___442 <= (0 + length2(keys({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = container };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = container1 }
   })))))) -> (has_key(model__({ us_split_discrs1 = {
@@ -599,7 +599,7 @@ axiom keys__post_axiom :
   get(keys({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = container };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = container1 } }),
-  temp___399)) = true)))) and
+  temp___442)) = true)))) and
   (forall key:int. ((in_range4(key) and (has_key(model__({ us_split_discrs1 =
   { rec__use_ordered_maps__my_maps__map__capacity = container };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = container1 } }),
@@ -1258,47 +1258,19 @@ axiom w_get__post_axiom1 :
   ((in_range1(witness2) and (has_witness1(container, witness2) = true)) ->
   in_range9(w_get1(container, witness2)))))
 
-logic cu : count_type
-
-logic o : bool
-
-logic o1 : bool
-
-logic o2 : int
-
-logic i : int
-
-logic o3 : int
-
-logic o4 : bool
-
-logic o5 : us_rep2
-
-logic o6 : int
-
-logic o7 : int
-
-logic result : bool
-
-logic result1 : bool
-
-axiom H : ((o = has_key1(positions({ us_split_discrs1 = {
+ (* File "use_ordered_maps.ads", line 122, characters 0-0 *)
+goal WP_parameter_def :
+  (forall cu:count_type. forall o:bool. forall o1:bool. forall result:bool.
+  ((((o = has_key1(positions({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
   rec__use_ordered_maps__my_maps__map = s1 } }), { us_split_fields3 = {
   rec__use_ordered_maps__my_maps__cursor__node = cu } })) and ((o = true) <->
   (has_key1(positions({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
   rec__use_ordered_maps__my_maps__map = s1 } }), { us_split_fields3 = {
-  rec__use_ordered_maps__my_maps__cursor__node = cu } }) = true)))
-
-axiom H1 : (o1 = true)
-
-axiom H2 : (result = match_bool(o1, o, false))
-
-axiom H3 : (result = true)
-
- (* File "use_ordered_maps.ads", line 122, characters 0-0 *)
-goal WP_parameter_def : (has_key1(positions({ us_split_discrs1 = {
+  rec__use_ordered_maps__my_maps__cursor__node = cu } }) = true))) and
+  ((o1 = true) and (result = match_bool(o1, o, false)))) ->
+  ((result = true) -> (has_key1(positions({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
   rec__use_ordered_maps__my_maps__map = s1 } }), { us_split_fields3 = {
-  rec__use_ordered_maps__my_maps__cursor__node = cu } }) = true)
+  rec__use_ordered_maps__my_maps__cursor__node = cu } }) = true))))

@@ -374,27 +374,12 @@ logic c64b1 : unsigned_byte
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic r__split_fields : unsigned_byte
-
-logic r__split_fields1 : unsigned_byte
-
-logic o : int
-
-logic result : unsigned_byte
-
-logic result1 : unsigned_byte
-
-logic r__split_fields2 : unsigned_byte
-
-logic r__split_fields3 : unsigned_byte
-
-axiom H : (to_rep1(p2) = 0)
-
-axiom H1 : (result = r__split_fields)
-
-axiom H2 : (result1 = r__split_fields1)
-
-axiom H3 : ((r__split_fields2 = p) and (r__split_fields3 = p1))
-
  (* File "records_prooffuncs.ads", line 11, characters 0-0 *)
-goal WP_parameter_def : in_range((to_rep(r__split_fields2) + 1))
+goal WP_parameter_def :
+  (forall r__split_fields:unsigned_byte.
+  forall r__split_fields1:unsigned_byte. forall result:unsigned_byte.
+  forall result1:unsigned_byte. forall r__split_fields2:unsigned_byte.
+  forall r__split_fields3:unsigned_byte. ((to_rep1(p2) = 0) ->
+  ((((result = r__split_fields) and (result1 = r__split_fields1)) and
+  ((r__split_fields2 = p) and (r__split_fields3 = p1))) ->
+  in_range((to_rep(r__split_fields2) + 1)))))

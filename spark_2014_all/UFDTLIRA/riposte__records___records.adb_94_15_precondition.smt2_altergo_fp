@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -276,81 +276,6 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic r__split_fields : unsigned_byte
-
-logic r__split_fields1 : unsigned_byte
-
-logic records__safe_add_pair_b__result : unsigned_byte
-
-logic records__safe_add_pair_b__result1 : unsigned_byte
-
-logic temp___276 : unsigned_byte
-
-logic temp___2761 : unsigned_byte
-
-logic o : unsigned_byte
-
-logic o1 : unsigned_byte
-
-logic o2 : unsigned_byte
-
-logic o3 : unsigned_byte
-
-logic temp___275 : unsigned_byte
-
-logic temp___2751 : unsigned_byte
-
-logic result : unsigned_byte
-
-logic result1 : unsigned_byte
-
-logic r__split_fields2 : unsigned_byte
-
-logic r__split_fields3 : unsigned_byte
-
-logic result2 : unsigned_byte
-
-logic result3 : unsigned_byte
-
-logic r__split_fields4 : unsigned_byte
-
-logic r__split_fields5 : unsigned_byte
-
-logic result4 : unsigned_byte
-
-logic result5 : unsigned_byte
-
-logic records__safe_add_pair_b__result2 : unsigned_byte
-
-logic records__safe_add_pair_b__result3 : unsigned_byte
-
-logic records__safe_add_pair_b__result4 : unsigned_byte
-
-logic records__safe_add_pair_b__result5 : unsigned_byte
-
-logic records__safe_add_pair_b__result6 : unsigned_byte
-
-logic records__safe_add_pair_b__result7 : unsigned_byte
-
-logic r__split_fields6 : unsigned_byte
-
-logic r__split_fields7 : unsigned_byte
-
-logic records__safe_add_pair_b__result8 : unsigned_byte
-
-logic records__safe_add_pair_b__result9 : unsigned_byte
-
-logic r__split_fields8 : unsigned_byte
-
-logic r__split_fields9 : unsigned_byte
-
-logic records__safe_add_pair_b__result10 : unsigned_byte
-
-logic records__safe_add_pair_b__result11 : unsigned_byte
-
-axiom H : ((to_rep(a) + 1) <= (255 - to_rep(b)))
-
-axiom H1 : (to_rep(a1) <= (255 - to_rep(b1)))
-
  (* File "records_prooffuncs.ads", line 11, characters 0-0 *)
-goal WP_parameter_def : in_range1((to_rep(a) + to_rep(b)))
+goal WP_parameter_def : ((((to_rep(a) + 1) <= (255 - to_rep(b))) and
+  (to_rep(a1) <= (255 - to_rep(b1)))) -> in_range1((to_rep(a) + to_rep(b))))

@@ -62,7 +62,5 @@ axiom get__def_axiom :
   (forall proc__nested__x:bool [get(proc__nested__x)].
   ((get(proc__nested__x) = true) <-> (proc__nested__x = true)))
 
-logic x : bool
-
  (* File "proc.adb", line 6, characters 0-0 *)
-goal WP_parameter_def : (get(x) = true)
+goal WP_parameter_def : (forall x:bool. (get(x) = true))

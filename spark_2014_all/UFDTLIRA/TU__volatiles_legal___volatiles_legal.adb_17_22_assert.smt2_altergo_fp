@@ -196,141 +196,31 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic tmp1 : int
-
-logic tmp2 : int
-
-logic o : integer
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic o3 : int
-
-logic o4 : integer
-
-logic o5 : integer
-
-logic temp___219 : integer
-
-logic o6 : integer
-
-logic o7 : integer
-
-logic o8 : integer
-
-logic o9 : int
-
-logic o10 : integer
-
-logic o11 : integer
-
-logic temp___221 : integer
-
-logic o12 : integer
-
-logic o13 : integer
-
-logic o14 : integer
-
-logic o15 : int
-
-logic o16 : integer
-
-logic o17 : integer
-
-logic o18 : integer
-
-logic o19 : int
-
-logic par__split_fields : integer
-
-logic result : integer
-
-logic par__split_fields1 : integer
-
-logic par__split_fields2 : integer
-
-logic result1 : integer
-
-logic par__split_fields3 : integer
-
-logic par__split_fields4 : integer
-
-logic result2 : int
-
-logic tmp11 : int
-
-logic par__split_fields5 : integer
-
-logic result3 : int
-
-logic tmp21 : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range(tmp1))
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(tmp2))
-
-axiom H2 : (par__split_fields = o)
-
-axiom H3 : (o = o1)
-
-axiom H4 : (o2 = o1)
-
-axiom H5 : (o3 = to_rep(o2))
-
-axiom H6 : (to_rep(o4) = o3)
-
-axiom H7 : (o4 = o5)
-
-axiom H8 : (temp___219 = o5)
-
-axiom H9 : (result = par__split_fields)
-
-axiom H10 : (par__split_fields1 = temp___219)
-
-axiom H11 : (par__split_fields2 = o6)
-
-axiom H12 : (o6 = o7)
-
-axiom H13 : (o8 = o7)
-
-axiom H14 : (o9 = to_rep(o8))
-
-axiom H15 : (to_rep(o10) = o9)
-
-axiom H16 : (o10 = o11)
-
-axiom H17 : (temp___221 = o11)
-
-axiom H18 : (result1 = par__split_fields2)
-
-axiom H19 : (par__split_fields3 = temp___221)
-
-axiom H20 : (par__split_fields4 = o12)
-
-axiom H21 : (o12 = o13)
-
-axiom H22 : (o14 = o13)
-
-axiom H23 : (o15 = to_rep(o14))
-
-axiom H24 : (result2 = tmp1)
-
-axiom H25 : (tmp11 = o15)
-
-axiom H26 : (par__split_fields5 = o16)
-
-axiom H27 : (o17 = o16)
-
-axiom H28 : (o18 = o17)
-
-axiom H29 : (o19 = to_rep(o18))
-
-axiom H30 : (result3 = tmp2)
-
-axiom H31 : (tmp21 = o19)
-
  (* File "volatiles_legal.adb", line 32, characters 0-0 *)
-goal WP_parameter_def : (tmp11 = tmp21)
+goal WP_parameter_def :
+  (forall tmp1:int. forall tmp2:int. forall o:integer. forall o1:integer.
+  forall o2:integer. forall o3:int. forall o4:integer. forall o5:integer.
+  forall temp___253:integer. forall o6:integer. forall o7:integer.
+  forall o8:integer. forall o9:int. forall o10:integer. forall o11:integer.
+  forall temp___255:integer. forall o12:integer. forall o13:integer.
+  forall o14:integer. forall o15:int. forall o16:integer. forall o17:integer.
+  forall o18:integer. forall o19:int. forall par__split_fields:integer.
+  forall result:integer. forall par__split_fields1:integer.
+  forall par__split_fields2:integer. forall result1:integer.
+  forall par__split_fields3:integer. forall par__split_fields4:integer.
+  forall result2:int. forall tmp11:int. forall par__split_fields5:integer.
+  forall result3:int. forall tmp21:int. ((((- 2147483648) <= 2147483647) ->
+  in_range(tmp1)) -> ((((- 2147483648) <= 2147483647) -> in_range(tmp2)) ->
+  (((((((((o = par__split_fields) and (o = o1)) and (o2 = o1)) and
+  (o3 = to_rep(o2))) and (to_rep(o4) = o3)) and (o4 = o5)) and
+  (temp___253 = o5)) and ((result = par__split_fields) and
+  (par__split_fields1 = temp___253))) ->
+  (((((((((o6 = par__split_fields2) and (o6 = o7)) and (o8 = o7)) and
+  (o9 = to_rep(o8))) and (to_rep(o10) = o9)) and (o10 = o11)) and
+  (temp___255 = o11)) and ((result1 = par__split_fields2) and
+  (par__split_fields3 = temp___255))) -> ((((((par__split_fields4 = o12) and
+  (o12 = o13)) and (o14 = o13)) and (o15 = to_rep(o14))) and
+  ((result2 = tmp1) and (tmp11 = o15))) ->
+  ((((((par__split_fields5 = o16) and (o16 = o17)) and (o18 = o17)) and
+  (o19 = to_rep(o18))) and ((result3 = tmp2) and (tmp21 = o19))) ->
+  (tmp11 = tmp21))))))))

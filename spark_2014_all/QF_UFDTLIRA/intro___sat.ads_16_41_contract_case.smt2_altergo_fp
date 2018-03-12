@@ -113,46 +113,18 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic sat__add__result : int
-
-logic o : int
-
-logic result : int
-
-logic sat__add__result1 : int
-
-logic sat__add__result2 : int
-
-logic sat__add__result3 : int
-
-logic sat__add__result4 : int
-
-logic sat__add__result5 : int
-
-axiom H : in_range(x)
-
-axiom H1 : in_range(y)
-
-axiom H2 : (sat__add__result1 = sat__add__result2)
-
-axiom H3 : (sat__add__result3 = sat__add__result1)
-
-axiom H4 : (((x + y) <  10000) -> ((o = (x + y)) and in_range((x + y))))
-
-axiom H5 : ((not ((x + y) <  10000)) -> (o = 10000))
-
-axiom H6 : (result = sat__add__result)
-
-axiom H7 : (sat__add__result1 = o)
-
-axiom H8 : (sat__add__result4 = sat__add__result2)
-
-axiom H9 : (sat__add__result5 = sat__add__result3)
-
-axiom H10 : ((bool_lt((x + y), 10000) = true) ->
-  (sat__add__result4 = (x + y)))
-
-axiom H11 : (bool_ge((x + y), 10000) = true)
-
  (* File "sat.ads", line 12, characters 0-0 *)
-goal WP_parameter_def : (sat__add__result4 = 10000)
+goal WP_parameter_def :
+  (forall sat__add__result:int. forall o:int. forall result:int.
+  forall sat__add__result1:int. forall sat__add__result2:int.
+  forall sat__add__result3:int. forall sat__add__result4:int.
+  forall sat__add__result5:int. (in_range(x) -> (in_range(y) ->
+  (((((sat__add__result1 = sat__add__result2) and
+  (sat__add__result3 = sat__add__result1)) and (((((x + y) <  10000) and
+  ((o = (x + y)) and in_range((x + y)))) or ((not ((x + y) <  10000)) and
+  (o = 10000))) and ((result = sat__add__result) and
+  (sat__add__result1 = o)))) and ((sat__add__result4 = sat__add__result2) and
+  (sat__add__result5 = sat__add__result3))) -> ((((bool_lt((x + y),
+  10000) = true) and (sat__add__result4 = (x + y))) or (not (bool_lt((x + y),
+  10000) = true))) -> ((bool_ge((x + y), 10000) = true) ->
+  (sat__add__result4 = 10000)))))))

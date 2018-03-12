@@ -20,7 +20,7 @@
 (define-fun bool__ref___projection ((a bool__ref)) Bool (bool__content a))
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 (define-fun us_private__ref___projection ((a us_private__ref)) us_private (us_private__content a))
-(define-fun type_invariant ((temp___132 Int)) Bool (not (= temp___132 0)))
+(define-fun type_invariant ((temp___154 Int)) Bool (not (= temp___154 0)))
 (declare-const type_invariant_legal__e_pub__result Int)
 (declare-const result Int)
 (declare-const type_invariant_legal__e_pub__result1 Int)

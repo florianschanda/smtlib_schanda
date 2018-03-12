@@ -80,7 +80,5 @@ function a_subtype__ref___projection(a: a_subtype__ref) : a_subtype =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic temp___178 : a_subtype
-
  (* File "inst.adb", line 3, characters 0-0 *)
 goal WP_parameter_def : false

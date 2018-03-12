@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -280,27 +280,10 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic b : int
-
-logic result : int
-
-logic b1 : int
-
-logic b2 : int
-
-logic b3 : int
-
-axiom H : in_range1(a)
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(b))
-
-axiom H2 : (result = b)
-
-axiom H3 : (b1 = comp_div(a,2))
-
-axiom H4 : (b1 = comp_div(a,2))
-
-axiom H5 : (b1 = prf_public1(a))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (b1 = prf_hidden1(a))
+goal WP_parameter_def :
+  (forall b:int. forall result:int. forall b1:int. (in_range1(a) ->
+  ((((- 2147483648) <= 2147483647) -> in_range1(b)) -> ((({ int__content =
+  result } = { int__content = b }) and (b1 = comp_div(a,2))) ->
+  ((b1 = comp_div(a,2)) -> ((b1 = prf_public1(a)) ->
+  (b1 = prf_hidden1(a))))))))

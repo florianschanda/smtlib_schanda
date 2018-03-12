@@ -1019,12 +1019,6 @@ axiom positions__post_axiom :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq8 : bool, bool -> bool
-
-axiom bool_eq_def6 :
-  (forall x:bool. forall y:bool [bool_eq8(x, y)]. (((x = y) -> (bool_eq8(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq8(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -1036,6 +1030,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq8 : bool, bool -> bool
+
+axiom bool_eq_def6 :
+  (forall x:bool. forall y:bool [bool_eq8(x, y)]. (((x = y) -> (bool_eq8(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq8(x, y) = false))))
 
 predicate in_range2(x: int) = ((x = 0) or (x = 1))
 
@@ -1140,25 +1140,9 @@ axiom w_get__post_axiom :
   ((in_range1(witness1) and (has_witness(container, witness1) = true)) ->
   in_range3(w_get(container, witness1)))))
 
-logic o : count_type
-
-logic o1 : count_type
-
-logic temp___404 : count_type
-
-logic o2 : int
-
-axiom H : (to_rep(o) = 0)
-
-axiom H1 : (o = o1)
-
-axiom H2 : (temp___404 = o1)
-
-axiom H3 : (temp___404 = no_element)
-
-axiom H4 : true
-
-axiom H5 : in_range1(count)
-
  (* File "a-cfdlli.ads", line 55, characters 0-0 *)
-goal WP_parameter_def : in_range((to_rep(container__split_discrs) - count))
+goal WP_parameter_def :
+  (forall o:count_type. forall o1:count_type. forall temp___448:count_type.
+  (((((to_rep(o) = 0) and (o = o1)) and (temp___448 = o1)) and
+  (temp___448 = no_element)) -> (in_range1(count) ->
+  in_range((to_rep(container__split_discrs) - count)))))

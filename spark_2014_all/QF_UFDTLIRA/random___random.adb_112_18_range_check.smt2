@@ -29,7 +29,7 @@
 (declare-const dummy state_range)
 (declare-datatypes () ((state_range__ref (mk_state_range__ref (state_range__content state_range)))))
 (define-fun state_range__ref___projection ((a state_range__ref)) state_range (state_range__content a))
-(define-fun dynamic_invariant ((temp___expr_207 Int) (temp___is_init_204 Bool) (temp___skip_constant_205 Bool) (temp___do_toplevel_206 Bool)) Bool (=> (or (= temp___is_init_204 true) (<= 0 623)) (in_range temp___expr_207)))
+(define-fun dynamic_invariant ((temp___expr_241 Int) (temp___is_init_237 Bool) (temp___skip_constant_238 Bool) (temp___do_toplevel_239 Bool) (temp___do_typ_inv_240 Bool)) Bool (=> (or (= temp___is_init_237 true) (<= 0 623)) (in_range temp___expr_241)))
 (declare-const x Int)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (assert (in_range x))

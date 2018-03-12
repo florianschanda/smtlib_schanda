@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -357,62 +357,8 @@ function even_pair__ref___projection(a: even_pair__ref) : us_rep =
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x__split_fields : even
-
-logic x__split_fields1 : even
-
-logic o : int
-
-logic o1 : even
-
-logic o2 : even
-
-logic o3 : even
-
-logic temp___310 : even
-
-logic temp___3101 : even
-
-logic o4 : int
-
-logic o5 : even
-
-logic o6 : even
-
-logic o7 : even
-
-logic temp___314 : even
-
-logic temp___3141 : even
-
-logic result : even
-
-logic result1 : even
-
-logic x__split_fields2 : even
-
-logic x__split_fields3 : even
-
-logic result2 : even
-
-logic result3 : even
-
-logic x__split_fields4 : even
-
-logic x__split_fields5 : even
-
-logic x__split_fields6 : even
-
-logic x__split_fields7 : even
-
-logic x__split_fields8 : even
-
-logic x__split_fields9 : even
-
-axiom H : (in_range1(i7s) and (mod(i7s, 2) = 0))
-
-axiom H1 : ((mod(to_rep(x__split_fields), 2) = 0) and
-  (mod(to_rep(x__split_fields1), 2) = 0))
-
  (* File "dynamic_preds.adb", line 125, characters 0-0 *)
-goal WP_parameter_def : (mod(0, 2) = 0)
+goal WP_parameter_def :
+  (forall x__split_fields:even. forall x__split_fields1:even.
+  ((in_range1(i7s) and (mod(i7s, 2) = 0)) -> (((mod(to_rep(x__split_fields),
+  2) = 0) and (mod(to_rep(x__split_fields1), 2) = 0)) -> (mod(0, 2) = 0))))

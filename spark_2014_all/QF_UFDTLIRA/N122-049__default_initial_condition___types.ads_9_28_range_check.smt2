@@ -29,7 +29,7 @@
 (declare-const dummy t7)
 (declare-datatypes () ((t7__ref (mk_t7__ref (t7__content t7)))))
 (define-fun t7__ref___projection ((a t7__ref)) t7 (t7__content a))
-(define-fun dynamic_invariant ((temp___expr_228 Int) (temp___is_init_225 Bool) (temp___skip_constant_226 Bool) (temp___do_toplevel_227 Bool)) Bool (=> (or (= temp___is_init_225 true) (<= 1 10)) (in_range temp___expr_228)))
+(define-fun dynamic_invariant ((temp___expr_264 Int) (temp___is_init_260 Bool) (temp___skip_constant_261 Bool) (temp___do_toplevel_262 Bool) (temp___do_typ_inv_263 Bool)) Bool (=> (or (= temp___is_init_260 true) (<= 1 10)) (in_range temp___expr_264)))
 (assert (not (in_range 3)))
 (check-sat)
 (exit)

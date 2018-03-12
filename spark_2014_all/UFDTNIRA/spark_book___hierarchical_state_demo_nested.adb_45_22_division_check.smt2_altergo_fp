@@ -249,41 +249,7 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic value : int
-
-logic count : int
-
-logic total : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic result : int
-
-logic count1 : int
-
-axiom H : in_range1(count)
-
-axiom H1 : in_range1(total)
-
-axiom H2 : in_range1(value)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (not (128 = 0))
+goal WP_parameter_def :
+  (forall value:int. forall count:int. forall total:int. (in_range1(count) ->
+  (in_range1(total) -> (in_range1(value) -> (not (128 = 0))))))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -346,27 +346,11 @@ logic c2__attr__constrained : bool
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic c2__split_fields : natural
-
-logic c2__split_discrs : bool
-
-logic result : natural
-
-logic c2__split_fields1 : natural
-
-logic result1 : bool
-
-logic c2__split_discrs1 : bool
-
-axiom H : (result = c2__split_fields)
-
-axiom H1 : (dummy = c2__split_fields1)
-
-axiom H2 : (result1 = c2__split_discrs)
-
-axiom H3 : (of_int(0) = c2__split_discrs1)
-
-axiom H4 : (c2__attr__constrained = false)
-
  (* File "minimal.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : (c2__split_discrs1 = true)
+goal WP_parameter_def :
+  (forall c2__split_fields:natural. forall c2__split_discrs:bool.
+  forall result:natural. forall c2__split_fields1:natural.
+  forall result1:bool. forall c2__split_discrs1:bool.
+  ((((result = c2__split_fields) and (dummy = c2__split_fields1)) and
+  (((result1 = c2__split_discrs) and (of_int(0) = c2__split_discrs1)) and
+  (c2__attr__constrained = false))) -> (c2__split_discrs1 = true)))

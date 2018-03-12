@@ -643,76 +643,11 @@ axiom is_empty__post_axiom :
   rec__my_lists__my_lists__list__capacity = container }; us_split_fields1 = {
   rec__my_lists__my_lists__list = container1 } }) = 0)))
 
-logic l1__split_fields : us_main_type
-
-logic l2__split_fields : us_main_type
-
-logic l3__split_fields : us_main_type
-
-logic l4__split_fields : us_main_type
-
-logic l5__split_fields : us_main_type
-
-logic l6__split_fields : us_main_type
-
-logic l7__split_fields : us_main_type
-
-logic us : int
-
-logic result : us_main_type
-
-logic l2__split_fields1 : us_main_type
-
-logic my_lists__my_lists__clear__container__fields : us_main_type
-
-logic result1 : us_main_type
-
-logic l1__split_fields1 : us_main_type
-
-logic my_lists__my_lists__clear__container__fields1 : us_main_type
-
-logic result2 : us_main_type
-
-logic l2__split_fields2 : us_main_type
-
-logic my_lists__my_lists__clear__container__fields2 : us_main_type
-
-logic result3 : us_main_type
-
-logic l3__split_fields1 : us_main_type
-
-logic my_lists__my_lists__clear__container__fields3 : us_main_type
-
-logic result4 : us_main_type
-
-logic l4__split_fields1 : us_main_type
-
-logic my_lists__my_lists__clear__container__fields4 : us_main_type
-
-logic result5 : us_main_type
-
-logic l5__split_fields1 : us_main_type
-
-logic my_lists__my_lists__clear__container__fields5 : us_main_type
-
-logic result6 : us_main_type
-
-logic l6__split_fields1 : us_main_type
-
-logic my_lists__my_lists__clear__container__fields6 : us_main_type
-
-logic result7 : us_main_type
-
-logic l7__split_fields1 : us_main_type
-
-axiom H : ((us = 100) and in_range(100))
-
-axiom H1 : ((to_rep(l1__split_discrs) = 100) and (is_empty({
+ (* File "a-contai.ads", line 20, characters 0-0 *)
+goal WP_parameter_def :
+  (forall l1__split_fields:us_main_type. forall us:int. (((us = 100) and
+  in_range(100)) -> (((to_rep(l1__split_discrs) = 100) and (is_empty({
   us_split_discrs1 = { rec__my_lists__my_lists__list__capacity =
   l1__split_discrs }; us_split_fields1 = { rec__my_lists__my_lists__list =
-  l1__split_fields } }) = true))
-
-axiom H2 : (100 = to_rep(l1__split_discrs))
-
- (* File "a-contai.ads", line 20, characters 0-0 *)
-goal WP_parameter_def : (100 = to_rep(l1__split_discrs))
+  l1__split_fields } }) = true)) -> ((100 = to_rep(l1__split_discrs)) ->
+  (100 = to_rep(l1__split_discrs))))))

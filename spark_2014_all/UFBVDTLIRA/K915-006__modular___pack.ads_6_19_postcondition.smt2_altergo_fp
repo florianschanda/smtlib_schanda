@@ -652,37 +652,20 @@ logic m : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic pack__next__result : t
+logic rliteral : t
 
-logic result : t
-
-logic pack__next__result1 : t
-
-logic pack__next__result2 : t
-
-logic pack__next__result3 : t
-
-logic pack__next__result4 : t
-
-logic pack__next__result5 : t
-
-logic result1 : t
-
-axiom H : true
-
-axiom H1 : (pack__next__result1 = pack__next__result2)
-
-axiom H2 : (pack__next__result3 = pack__next__result1)
-
-axiom H3 : (result = pack__next__result)
-
-axiom H4 : (pack__next__result1 = add(m, of_int(1)))
-
-axiom H5 : (pack__next__result4 = pack__next__result2)
-
-axiom H6 : (pack__next__result5 = pack__next__result3)
-
-axiom H7 : (result1 = pack__next__result4)
+axiom rliteral_axiom : (tqtint(rliteral) = 1)
 
  (* File "pack.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (pack__next__result4 = add(m, of_int(1)))
+goal WP_parameter_def :
+  (forall pack__next__result:t. forall result:t.
+  forall pack__next__result1:t. forall pack__next__result2:t.
+  forall pack__next__result3:t. forall pack__next__result4:t.
+  forall pack__next__result5:t.
+  (forall result1:t. ((((((pack__next__result1 = pack__next__result2) and
+  (pack__next__result3 = pack__next__result1)) and
+  ((result = pack__next__result) and (pack__next__result1 = add(m,
+  rliteral)))) and ((pack__next__result4 = pack__next__result2) and
+  (pack__next__result5 = pack__next__result3))) and
+  (result1 = pack__next__result4)) -> (pack__next__result4 = add(m,
+  rliteral)))))

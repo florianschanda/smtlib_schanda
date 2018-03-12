@@ -321,17 +321,7 @@ logic d2__attr__constrained : bool
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic d1__split_discrs : natural
-
-logic o : int
-
-logic temp___302 : int
-
-logic temp___306 : int
-
-axiom H : in_range1(c)
-
-axiom H1 : ((o = (c + 1)) and in_range((c + 1)))
-
  (* File "discr.adb", line 61, characters 0-0 *)
-goal WP_parameter_def : in_range1(o)
+goal WP_parameter_def :
+  (forall o:int. (in_range1(c) -> (((o = (c + 1)) and in_range((c + 1))) ->
+  in_range1(o))))

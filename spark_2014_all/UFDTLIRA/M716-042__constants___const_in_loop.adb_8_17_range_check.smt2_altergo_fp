@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -210,89 +210,13 @@ axiom last__def_axiom :
   (forall const_in_loop__B_2__x:int [last(const_in_loop__B_2__x)].
   (last(const_in_loop__B_2__x) = const_in_loop__B_2__x))
 
-logic z : int
-
-logic v1 : int
-
-logic v2 : int
-
-logic x : int
-
-logic result : int
-
-logic v11 : int
-
-logic result1 : int
-
-logic v21 : int
-
-logic result2 : int
-
-logic z1 : int
-
-logic result3 : int
-
-logic x1 : int
-
-logic result4 : int
-
-logic v12 : int
-
-logic result5 : int
-
-logic v22 : int
-
-logic z2 : int
-
-logic v13 : int
-
-logic v23 : int
-
-logic x2 : int
-
-logic result6 : int
-
-logic z3 : int
-
-logic result7 : int
-
-logic x3 : int
-
-logic result8 : int
-
-logic v14 : int
-
-logic result9 : int
-
-logic v24 : int
-
-axiom H : ((1 <= 2147483647) -> in_range2(z))
-
-axiom H1 : (result = v1)
-
-axiom H2 : (v11 = 1)
-
-axiom H3 : in_range1(v11)
-
-axiom H4 : (result1 = v2)
-
-axiom H5 : (v21 = 1)
-
-axiom H6 : in_range1(v21)
-
-axiom H7 : (result2 = z)
-
-axiom H8 : (z1 = 1)
-
-axiom H9 : (of_int(1) = true)
-
-axiom H10 : (result3 = x)
-
-axiom H11 : (x1 = z1)
-
-axiom H12 : in_range1(x1)
-
-axiom H13 : (1 <= x1)
-
  (* File "const_in_loop.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : (1 <= 1)
+goal WP_parameter_def :
+  (forall z:int. forall v1:int. forall v2:int. forall x:int.
+  forall result:int. forall v11:int. forall result1:int. forall v21:int.
+  forall result2:int. forall z1:int. forall result3:int. forall x1:int.
+  (((1 <= 2147483647) -> in_range2(z)) -> (((result = v1) and (v11 = 1)) ->
+  (in_range1(v11) -> (((result1 = v2) and (v21 = 1)) -> (in_range1(v21) ->
+  (((result2 = z) and (z1 = 1)) -> ((of_int(1) = true) ->
+  ((((result3 = x) and (x1 = z1)) and in_range1(x1)) -> ((1 <= x1) ->
+  (1 <= 1)))))))))))

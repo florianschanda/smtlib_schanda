@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -286,26 +286,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def :
-  (forall v:natural.
-  (forall i:int [(singleton({ us_split_fields1 = { rec__main__rec__comp = v }
-  }, i)[i])]. ((singleton({ us_split_fields1 = { rec__main__rec__comp = v }
-  }, i)[i]) = { us_split_fields1 = { rec__main__rec__comp = v } })))
-
 logic bool_eq6 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -316,17 +296,17 @@ axiom bool_eq_def5 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and (bool_eq4((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and (bool_eq4((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq4((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq6(a,
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq4((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq6(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -336,9 +316,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq4((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq4((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)))))))
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
@@ -353,15 +333,9 @@ logic get_arr : unit -> (int,us_rep) farray
 
 logic get_arr__function_guard : (int,us_rep) farray, unit -> prop
 
-logic temp___157 : us_rep -> (int,us_rep) farray
+logic temp___182 : us_rep -> (int,us_rep) farray
 
-axiom def_axiom :
-  (forall temp___159:natural.
-  (forall temp___160:int. ((temp___157({ us_split_fields1 = {
-  rec__main__rec__comp = temp___159 } })[temp___160]) = { us_split_fields1 =
-  { rec__main__rec__comp = temp___159 } })))
-
-axiom get_arr__post_axiom : (bool_eq6(get_arr(void), 1, 10, temp___157({
+axiom get_arr__post_axiom : (bool_eq6(get_arr(void), 1, 10, temp___182({
   us_split_fields1 = { rec__main__rec__comp = of_rep(9012) } }), 1,
   10) = true)
 
@@ -395,139 +369,51 @@ logic r16b : (int,us_rep) farray
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
-logic cheat : bool
-
-logic arr_obj : (int,us_rep) farray
-
-logic rec_obj__split_fields : natural
-
-logic o : (int,us_rep) farray
-
-logic main__rec_obj__assume : natural
-
-logic main__the_index__assume : int
-
-logic main__R14b__assume : (int,us_rep) farray
-
-logic main__R15b__assume : natural
-
-logic main__R16b__assume : (int,us_rep) farray
-
-logic o1 : natural
-
-logic o2 : natural
-
-logic o3 : natural
-
-logic o4 : (int,us_rep) farray
-
-logic o5 : int
-
-logic o6 : natural
-
-logic o7 : natural
-
-logic o8 : natural
-
-logic o9 : (int,us_rep) farray
-
-logic o10 : natural
-
-logic o11 : natural
-
-logic temp___167 : natural
-
-logic result : bool
-
-logic cheat1 : bool
-
-logic result1 : (int,us_rep) farray
-
-logic arr_obj1 : (int,us_rep) farray
-
-logic result2 : natural
-
-logic rec_obj__split_fields1 : natural
-
-logic result3 : bool
-
-logic cheat2 : bool
-
-logic result4 : (int,us_rep) farray
-
-logic arr_obj2 : (int,us_rep) farray
-
-logic result5 : (int,us_rep) farray
-
-logic arr_obj3 : (int,us_rep) farray
-
-logic result6 : natural
-
-logic rec_obj__split_fields2 : natural
-
-axiom H : in_range1(choose)
-
-axiom H1 : (result = cheat)
-
-axiom H2 : (cheat1 = of_int(1))
-
-axiom H3 : ((o = get_arr(void)) and (bool_eq6(o, 1, 10, temp___157({
-  us_split_fields1 = { rec__main__rec__comp = of_rep(9012) } }), 1,
-  10) = true))
-
-axiom H4 : (result1 = arr_obj)
-
-axiom H5 : (arr_obj1 = o)
-
-axiom H6 : (({ us_split_fields1 = { rec__main__rec__comp =
-  main__rec_obj__assume } } = get_rec(void)) and (bool_eq4({
-  us_split_fields1 = { rec__main__rec__comp = main__rec_obj__assume } }, {
-  us_split_fields1 = { rec__main__rec__comp = of_rep(5678) } }) = true))
-
-axiom H7 : (result2 = rec_obj__split_fields)
-
-axiom H8 : (rec_obj__split_fields1 = main__rec_obj__assume)
-
-axiom H9 : ((main__the_index__assume = get_index(cheat1)) and
-  (in_range3(main__the_index__assume) and (((cheat1 = true) ->
-  (main__the_index__assume = 3)) and ((not (cheat1 = true)) ->
-  (main__the_index__assume = 5)))))
-
-axiom H10 : (main__the_index__assume = the_index)
-
-axiom H11 : in_range3(the_index)
-
-axiom H12 : ((main__R14b__assume = get_arr(void)) and
-  (bool_eq6(main__R14b__assume, 1, 10, temp___157({ us_split_fields1 = {
-  rec__main__rec__comp = of_rep(9012) } }), 1, 10) = true))
-
-axiom H13 : (main__R14b__assume = r14b)
-
-axiom H14 : (({ us_split_fields1 = { rec__main__rec__comp =
-  main__R15b__assume } } = get_rec(void)) and (bool_eq4({ us_split_fields1 =
-  { rec__main__rec__comp = main__R15b__assume } }, { us_split_fields1 = {
-  rec__main__rec__comp = of_rep(5678) } }) = true))
-
-axiom H15 : (main__R15b__assume = r15b)
-
-axiom H16 : ((main__R16b__assume = get_arr(void)) and
-  (bool_eq6(main__R16b__assume, 1, 10, temp___157({ us_split_fields1 = {
-  rec__main__rec__comp = of_rep(9012) } }), 1, 10) = true))
-
-axiom H17 : (main__R16b__assume = r16b)
-
-axiom H18 : (result3 = cheat1)
-
-axiom H19 : (cheat2 = of_int(0))
-
-axiom H20 :
-  (to_rep((((arr_obj1[1])).us_split_fields1).rec__main__rec__comp) = 9012)
-
-axiom H21 :
-  (to_rep((((arr_obj1[the_index])).us_split_fields1).rec__main__rec__comp) = 9012)
-
-axiom H22 :
-  (to_rep((((r14b[the_index])).us_split_fields1).rec__main__rec__comp) = 9012)
+axiom def_axiom :
+  (forall temp___184:natural.
+  (forall temp___185:int. ((temp___182({ us_split_fields1 = {
+  rec__main__rec__comp = temp___184 } })[temp___185]) = { us_split_fields1 =
+  { rec__main__rec__comp = temp___184 } })))
 
  (* File "main.adb", line 9, characters 0-0 *)
-goal WP_parameter_def : (to_rep(rec_obj__split_fields1) = 5678)
+goal WP_parameter_def :
+  (forall cheat:bool. forall arr_obj:(int,us_rep) farray.
+  forall rec_obj__split_fields:natural. forall o:(int,us_rep) farray.
+  forall main__rec_obj__assume:natural. forall main__the_index__assume:int.
+  forall main__R14b__assume:(int,us_rep) farray.
+  forall main__R15b__assume:natural.
+  forall main__R16b__assume:(int,us_rep) farray. forall result:bool.
+  forall cheat1:bool. forall result1:(int,us_rep) farray.
+  forall arr_obj1:(int,us_rep) farray. forall result2:natural.
+  forall rec_obj__split_fields1:natural. forall result3:bool.
+  forall cheat2:bool. (in_range1(choose) -> (((result = cheat) and
+  (cheat1 = of_int(1))) -> ((((o = get_arr(void)) and (bool_eq6(o, 1, 10,
+  temp___182({ us_split_fields1 = { rec__main__rec__comp = of_rep(9012) } }),
+  1, 10) = true)) and ((result1 = arr_obj) and (arr_obj1 = o))) -> (((({
+  us_split_fields1 = { rec__main__rec__comp = main__rec_obj__assume }
+  } = get_rec(void)) and (bool_eq4({ us_split_fields1 = {
+  rec__main__rec__comp = main__rec_obj__assume } }, { us_split_fields1 = {
+  rec__main__rec__comp = of_rep(5678) } }) = true)) and
+  ((result2 = rec_obj__split_fields) and
+  (main__rec_obj__assume = rec_obj__split_fields1))) ->
+  ((((main__the_index__assume = get_index(cheat1)) and
+  (in_range3(main__the_index__assume) and (((cheat1 = true) and
+  (main__the_index__assume = 3)) or ((not (cheat1 = true)) and
+  (main__the_index__assume = 5))))) and
+  (main__the_index__assume = the_index)) -> (in_range3(the_index) ->
+  ((((main__R14b__assume = get_arr(void)) and (bool_eq6(main__R14b__assume,
+  1, 10, temp___182({ us_split_fields1 = { rec__main__rec__comp =
+  of_rep(9012) } }), 1, 10) = true)) and (main__R14b__assume = r14b)) ->
+  (((({ us_split_fields1 = { rec__main__rec__comp = main__R15b__assume }
+  } = get_rec(void)) and (bool_eq4({ us_split_fields1 = {
+  rec__main__rec__comp = main__R15b__assume } }, { us_split_fields1 = {
+  rec__main__rec__comp = of_rep(5678) } }) = true)) and
+  (r15b = main__R15b__assume)) -> ((((main__R16b__assume = get_arr(void)) and
+  (bool_eq6(main__R16b__assume, 1, 10, temp___182({ us_split_fields1 = {
+  rec__main__rec__comp = of_rep(9012) } }), 1, 10) = true)) and
+  (main__R16b__assume = r16b)) -> (((result3 = cheat1) and
+  (cheat2 = of_int(0))) ->
+  ((to_rep((((arr_obj1[1])).us_split_fields1).rec__main__rec__comp) = 9012) ->
+  ((to_rep((((arr_obj1[the_index])).us_split_fields1).rec__main__rec__comp) = 9012) ->
+  ((to_rep((((r14b[the_index])).us_split_fields1).rec__main__rec__comp) = 9012) ->
+  (to_rep(rec_obj__split_fields1) = 5678)))))))))))))))

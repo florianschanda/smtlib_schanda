@@ -93,7 +93,7 @@
 (define-fun rr__ref___projection ((a rr__ref)) us_rep1 (rr__content a))
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
-(define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool) (temp___skip_constant_13 Bool) (temp___do_toplevel_14 Bool)) Bool (=> (or (= temp___is_init_12 true) (<= (- 2147483648) 2147483647)) (in_range temp___expr_15)))
+(define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool) (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool) (temp___do_typ_inv_17 Bool)) Bool (=> (or (= temp___is_init_14 true) (<= (- 2147483648) 2147483647)) (in_range temp___expr_18)))
 (declare-fun oeq (us_rep us_rep) Bool)
 (declare-fun oeq__function_guard (Bool us_rep us_rep) Bool)
 (assert (forall ((a us_rep) (b us_rep)) (! (= (user_eq1 a b) (oeq a b)) :pattern ((user_eq1 a b)))))

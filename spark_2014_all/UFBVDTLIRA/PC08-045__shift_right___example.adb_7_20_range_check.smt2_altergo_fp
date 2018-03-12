@@ -1047,26 +1047,32 @@ logic shift_right : t1, int -> t1
 
 logic shift_right__function_guard : t1, t1, int -> prop
 
+logic rliteral1 : t1
+
+axiom rliteral_axiom1 : (tqtint1(rliteral1) = 1)
+
+logic rliteral2 : t1
+
+axiom rliteral_axiom2 : (tqtint1(rliteral2) = 0)
+
 axiom shift_right__post_axiom :
   (forall value:t1.
   (forall count:int [shift_right(value, count)]. (in_range(count) ->
   (((count <  65536) -> (shift_right(value, count) = udiv1(value,
-  lsl_bv1(of_int1(1), of_int1(count))))) and ((not (count <  65536)) ->
-  (shift_right(value, count) = udiv1(value, of_int1(0))))))))
+  lsl_bv1(rliteral1, of_int1(count))))) and ((not (count <  65536)) ->
+  (shift_right(value, count) = udiv1(value, rliteral2)))))))
 
 logic value : t1
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : t1
+logic rliteral3 : t
 
-logic o1 : t1
-
-axiom H : true
-
-axiom H1 : ((o = shift_right(value, 8)) and (((8 <  65536) ->
-  (o = udiv1(value, lsl_bv1(of_int1(1), of_int1(8))))) and
-  ((not (8 <  65536)) -> (o = udiv1(value, of_int1(0))))))
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 0)
 
  (* File "example.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : ule1(toBig(of_int(0)), o)
+goal WP_parameter_def :
+  (forall o:t1. (((o = shift_right(value, 8)) and (((8 <  65536) and
+  (o = udiv1(value, lsl_bv1(rliteral1, of_int1(8))))) or
+  ((not (8 <  65536)) and (o = udiv1(value, rliteral2))))) ->
+  ule1(toBig(rliteral3), o)))

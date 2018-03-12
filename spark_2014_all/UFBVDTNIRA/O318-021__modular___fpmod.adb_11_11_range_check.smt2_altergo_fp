@@ -848,53 +848,8 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : f
-
-logic y : t
-
-logic o : f
-
-logic o1 : int
-
-logic o2 : t
-
-logic o3 : f
-
-logic o4 : int
-
-logic o5 : t
-
-logic o6 : f
-
-logic o7 : int
-
-logic result : f
-
-logic x1 : f
-
-logic result1 : t
-
-logic y1 : t
-
-logic result2 : f
-
-logic x2 : f
-
-logic result3 : t
-
-logic y2 : t
-
-logic result4 : f
-
-logic x3 : f
-
-axiom H : true
-
-axiom H1 : (to_fixed(o) = 64)
-
-axiom H2 : (result = x)
-
-axiom H3 : (x1 = o)
-
  (* File "fpmod.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : uint_in_range(to_int1(to_fixed(x1)))
+goal WP_parameter_def :
+  (forall x:f. forall o:f. forall result:f. forall x1:f.
+  (((to_fixed(o) = 64) and ((result = x) and (x1 = o))) ->
+  uint_in_range(to_int1(to_fixed(x1)))))

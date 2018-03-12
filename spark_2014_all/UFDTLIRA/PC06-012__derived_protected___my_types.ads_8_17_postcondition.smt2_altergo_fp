@@ -195,38 +195,11 @@ logic v : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic self__ : integer
-
-logic o : integer
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic result : integer
-
-logic self__1 : integer
-
-logic self__2 : integer
-
-logic self__3 : integer
-
-axiom H : in_range(v)
-
-axiom H1 : (to_rep(o) = v)
-
-axiom H2 : (o = o1)
-
-axiom H3 : (o2 = o1)
-
-axiom H4 : (result = self__)
-
-axiom H5 : (self__1 = o2)
-
-axiom H6 : (self__2 = self__1)
-
-axiom H7 : (self__3 = self__1)
-
  (* File "my_types.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : (get_f({ us_split_fields1 = {
-  rec__my_types__prot__f = self__2 } }) = v)
+goal WP_parameter_def :
+  (forall self__:integer. forall o:integer. forall o1:integer.
+  forall o2:integer. forall result:integer. forall self__1:integer.
+  forall self__2:integer. forall self__3:integer. ((in_range(v) and
+  (((((to_rep(o) = v) and (o = o1)) and (o2 = o1)) and ((result = self__) and
+  (self__1 = o2))) and ((self__2 = self__1) and (self__3 = self__1)))) ->
+  (get_f({ us_split_fields1 = { rec__my_types__prot__f = self__2 } }) = v)))

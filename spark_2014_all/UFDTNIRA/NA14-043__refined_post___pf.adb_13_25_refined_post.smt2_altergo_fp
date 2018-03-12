@@ -219,33 +219,16 @@ logic i : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic pf__prf_hidden__result : int
-
-logic result : int
-
-logic pf__prf_hidden__result1 : int
-
-logic pf__prf_hidden__result2 : int
-
-logic pf__prf_hidden__result3 : int
-
-logic pf__prf_hidden__result4 : int
-
-logic pf__prf_hidden__result5 : int
-
-axiom H : in_range(i)
-
-axiom H1 : (pf__prf_hidden__result1 = pf__prf_hidden__result2)
-
-axiom H2 : (pf__prf_hidden__result3 = pf__prf_hidden__result1)
-
-axiom H3 : (result = pf__prf_hidden__result)
-
-axiom H4 : (pf__prf_hidden__result1 = comp_div(i,2))
-
-axiom H5 : (pf__prf_hidden__result4 = pf__prf_hidden__result2)
-
-axiom H6 : (pf__prf_hidden__result5 = pf__prf_hidden__result3)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (pf__prf_hidden__result4 = comp_div(i,2))
+goal WP_parameter_def :
+  (forall pf__prf_hidden__result:int. forall result:int.
+  forall pf__prf_hidden__result1:int. forall pf__prf_hidden__result2:int.
+  forall pf__prf_hidden__result3:int. forall pf__prf_hidden__result4:int.
+  forall pf__prf_hidden__result5:int. (in_range(i) ->
+  (((((pf__prf_hidden__result1 = pf__prf_hidden__result2) and
+  (pf__prf_hidden__result3 = pf__prf_hidden__result1)) and (({ int__content =
+  result } = { int__content = pf__prf_hidden__result }) and
+  (pf__prf_hidden__result1 = comp_div(i,2)))) and (({ int__content =
+  pf__prf_hidden__result4 } = { int__content = pf__prf_hidden__result2 }) and
+  (pf__prf_hidden__result5 = pf__prf_hidden__result3))) ->
+  (pf__prf_hidden__result4 = comp_div(i,2)))))

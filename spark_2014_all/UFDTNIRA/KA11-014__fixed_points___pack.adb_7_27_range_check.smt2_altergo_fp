@@ -517,56 +517,15 @@ logic s : salary
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic stash : money
-
-logic pocket : money
-
-logic o : money
-
-logic o1 : int
-
-logic o2 : money
-
-logic o3 : money
-
-logic stash1 : money
-
-logic pocket1 : money
-
-logic result : bool
-
-logic result1 : money
-
-logic stash2 : money
-
-logic result2 : money
-
-logic pocket2 : money
-
-logic stash3 : money
-
-logic pocket3 : money
-
-logic stash4 : money
-
-logic pocket4 : money
-
-axiom H : (0 <  to_fixed2(s))
-
-axiom H1 : (to_fixed1(o) = to_fixed2(s))
-
-axiom H2 : (o1 = to_fixed1(o))
-
-axiom H3 : (((o1 <  to_fixed1(stash)) -> (result = true)) and
-  ((not (o1 <  to_fixed1(stash))) -> (result = false)))
-
-axiom H4 : (result = true)
-
-axiom H5 : (to_fixed1(o2) = (to_fixed1(stash) - to_fixed2(s)))
-
-axiom H6 : (result1 = stash)
-
-axiom H7 : (stash2 = o2)
-
  (* File "pack.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : in_range1((to_fixed1(pocket) + to_fixed2(s)))
+goal WP_parameter_def :
+  (forall stash:money. forall pocket:money. forall o:money. forall o1:int.
+  forall o2:money. forall result:bool. forall result1:money.
+  forall stash1:money. ((0 <  to_fixed2(s)) ->
+  ((((to_fixed1(o) = to_fixed2(s)) and (o1 = to_fixed1(o))) and
+  (((o1 <  to_fixed1(stash)) and (result = true)) or
+  ((not (o1 <  to_fixed1(stash))) and (result = false)))) ->
+  ((result = true) ->
+  (((to_fixed1(o2) = (to_fixed1(stash) - to_fixed2(s))) and (({
+  money__content = result1 } = { money__content = stash }) and
+  (stash1 = o2))) -> in_range1((to_fixed1(pocket) + to_fixed2(s))))))))

@@ -346,26 +346,15 @@ axiom get_month_length__post_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic current_date__split_fields : day_type
-
-logic current_date__split_fields1 : month_type
-
-logic current_date__split_fields2 : year_type
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-axiom H : (not (bool_eq4({ us_split_fields1 = { rec__dates__date__day =
-  current_date__split_fields; rec__dates__date__month =
-  current_date__split_fields1; rec__dates__date__year =
-  current_date__split_fields2 } }, minimum_date(void)) = true))
-
-axiom H1 : (to_rep2(current_date__split_fields) = 1)
-
-axiom H2 : (to_rep1(current_date__split_fields1) = 1)
-
  (* File "dates.adb", line 70, characters 0-0 *)
-goal WP_parameter_def : in_range((to_rep(current_date__split_fields2) - 1))
+goal WP_parameter_def :
+  (forall current_date__split_fields:day_type.
+  forall current_date__split_fields1:month_type.
+  forall current_date__split_fields2:year_type. ((not (bool_eq4({
+  us_split_fields1 = { rec__dates__date__day = current_date__split_fields;
+  rec__dates__date__month = current_date__split_fields1;
+  rec__dates__date__year = current_date__split_fields2 } },
+  minimum_date(void)) = true)) ->
+  ((to_rep2(current_date__split_fields) = 1) ->
+  ((to_rep1(current_date__split_fields1) = 1) ->
+  in_range((to_rep(current_date__split_fields2) - 1))))))

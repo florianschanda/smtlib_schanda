@@ -56,12 +56,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -73,6 +67,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -501,51 +501,14 @@ axiom y__def_axiom : (y = of_fixed1(1280))
 
 axiom yy__def_axiom : (yy = 5)
 
-logic z : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic result : t
-
-logic z1 : t
-
-logic result1 : t
-
-logic z2 : t
-
-logic result2 : t
-
-logic z3 : t
-
-axiom H : (((- 1280) <= to_fixed1(x)) and (to_fixed1(x) <= 1280))
-
-axiom H1 : in_range1(yy)
-
-axiom H2 : (to_fixed1(o) = (to_fixed1(x) - to_fixed1(x)))
-
-axiom H3 : (result = z)
-
-axiom H4 : (z1 = o)
-
-axiom H5 : (to_fixed1(z1) = 0)
-
-axiom H6 : (to_fixed1(o1) = (to_fixed1(x) - 1280))
-
-axiom H7 : (result1 = z1)
-
-axiom H8 : (z2 = o1)
-
-axiom H9 : (to_fixed1(z2) <  to_fixed1(x))
-
-axiom H10 : (to_fixed1(o2) = (- 768))
-
-axiom H11 : (result2 = z2)
-
-axiom H12 : (z3 = o2)
-
  (* File "binary_fixed.adb", line 13, characters 0-0 *)
-goal WP_parameter_def : (to_fixed1(z3) = (- 768))
+goal WP_parameter_def :
+  (forall z:t. forall o:t. forall o1:t. forall o2:t. forall result:t.
+  forall z1:t. forall result1:t. forall z2:t. forall result2:t. forall z3:t.
+  ((((- 1280) <= to_fixed1(x)) and (to_fixed1(x) <= 1280)) ->
+  (in_range1(yy) -> (((to_fixed1(o) = (to_fixed1(x) - to_fixed1(x))) and
+  ((result = z) and (z1 = o))) -> ((to_fixed1(z1) = 0) ->
+  (((to_fixed1(o1) = (to_fixed1(x) - 1280)) and ((result1 = z1) and
+  (z2 = o1))) -> ((to_fixed1(z2) <  to_fixed1(x)) ->
+  (((to_fixed1(o2) = (- 768)) and ((result2 = z2) and (z3 = o2))) ->
+  (to_fixed1(z3) = (- 768))))))))))

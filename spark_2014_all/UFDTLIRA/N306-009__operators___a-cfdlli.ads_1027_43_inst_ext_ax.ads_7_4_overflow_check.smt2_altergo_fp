@@ -455,12 +455,6 @@ axiom positions__post_axiom :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq6 : bool, bool -> bool
-
-axiom bool_eq_def4 :
-  (forall x:bool. forall y:bool [bool_eq6(x, y)]. (((x = y) -> (bool_eq6(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq6(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -472,6 +466,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq6 : bool, bool -> bool
+
+axiom bool_eq_def4 :
+  (forall x:bool. forall y:bool [bool_eq6(x, y)]. (((x = y) -> (bool_eq6(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq6(x, y) = false))))
 
 predicate in_range2(x: int) = ((x = 0) or (x = 1))
 
@@ -579,35 +579,14 @@ axiom w_get__post_axiom :
   ((in_range1(witness1) and (has_witness(container, witness1) = true)) ->
   in_range3(w_get(container, witness1)))))
 
-logic target__split_fields : us_main_type
-
-logic o : count_type
-
-logic o1 : count_type
-
-logic temp___697 : count_type
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-axiom H : (to_rep(o) = 0)
-
-axiom H1 : (o = o1)
-
-axiom H2 : (temp___697 = o1)
-
-axiom H3 : (temp___697 = no_element)
-
-axiom H4 : ((o2 = length({ us_split_discrs1 = {
+ (* File "a-cfdlli.ads", line 1006, characters 0-0 *)
+goal WP_parameter_def :
+  (forall target__split_fields:us_main_type. forall o:count_type.
+  forall o1:count_type. forall temp___753:count_type. forall o2:int.
+  forall o3:int. (((((to_rep(o) = 0) and (o = o1)) and (temp___753 = o1)) and
+  (temp___753 = no_element)) -> ((((o2 = length({ us_split_discrs1 = {
   rec__inst_ext_ax__ok_lists2__list__capacity = target__split_discrs };
   us_split_fields1 = { rec__inst_ext_ax__ok_lists2__list =
   target__split_fields } })) and (in_range1(o2) and
-  (o2 <= to_rep(target__split_discrs))))
-
-axiom H5 : (o3 = (to_rep(target__split_discrs) - o2))
-
- (* File "a-cfdlli.ads", line 1006, characters 0-0 *)
-goal WP_parameter_def : in_range(o3)
+  (o2 <= to_rep(target__split_discrs)))) and
+  (o3 = (to_rep(target__split_discrs) - o2))) -> in_range(o3))))

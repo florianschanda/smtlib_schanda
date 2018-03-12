@@ -667,23 +667,5 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic res : t
-
-logic result : t
-
-logic res1 : t
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : true
-
-axiom H3 : true
-
-axiom H4 : ule(x, y)
-
-axiom H5 : ult(y, z)
-
  (* File "nonlinear.adb", line 5, characters 0-0 *)
-goal WP_parameter_def : (not (z = zeros))
+goal WP_parameter_def : (ule(x, y) -> (ult(y, z) -> (not (z = zeros))))

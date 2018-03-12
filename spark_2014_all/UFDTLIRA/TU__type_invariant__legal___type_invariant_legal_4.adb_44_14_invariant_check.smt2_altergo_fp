@@ -184,61 +184,12 @@ axiom e_priv__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : int
-
-logic tmp : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic result : int
-
-logic x1 : int
-
-logic result1 : int
-
-logic tmp1 : int
-
-logic result2 : int
-
-logic tmp2 : int
-
-logic result3 : int
-
-logic tmp3 : int
-
-logic result4 : int
-
-logic tmp4 : int
-
-logic x2 : int
-
-logic tmp5 : int
-
-logic x3 : int
-
-logic tmp6 : int
-
-axiom H : ((0 <= 2147483647) -> in_range1(x))
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(tmp))
-
-axiom H2 : (result = x)
-
-axiom H3 : (x1 = 1)
-
-axiom H4 : (not (x1 = 0))
-
-axiom H5 : ((o = pub(x1)) and in_range(o))
-
-axiom H6 : (result1 = tmp)
-
-axiom H7 : (tmp1 = o)
-
  (* File "type_invariant_legal_4.adb", line 19, characters 0-0 *)
-goal WP_parameter_def : (not (x1 = 0))
+goal WP_parameter_def :
+  (forall x:int. forall tmp:int. forall o:int. forall result:int.
+  forall x1:int. forall result1:int. forall tmp1:int. (((0 <= 2147483647) ->
+  in_range1(x)) -> ((((- 2147483648) <= 2147483647) -> in_range(tmp)) -> ((({
+  int__content = result } = { int__content = x }) and (x1 = 1)) ->
+  ((((not (x1 = 0)) and ((o = pub(x1)) and in_range(o))) and (({
+  int__content = result1 } = { int__content = tmp }) and (tmp1 = o))) ->
+  (not (x1 = 0)))))))

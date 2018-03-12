@@ -217,7 +217,5 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic g2 : bool
-
  (* File "misc.adb", line 5, characters 0-0 *)
-goal WP_parameter_def : (g2 = true)
+goal WP_parameter_def : (forall g2:bool. (g2 = true))

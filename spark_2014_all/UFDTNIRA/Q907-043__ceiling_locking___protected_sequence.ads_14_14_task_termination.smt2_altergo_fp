@@ -330,19 +330,5 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic local : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic local1 : int
-
-logic local2 : int
-
-axiom H : false
-
  (* File "protected_sequence.adb", line 12, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def : true

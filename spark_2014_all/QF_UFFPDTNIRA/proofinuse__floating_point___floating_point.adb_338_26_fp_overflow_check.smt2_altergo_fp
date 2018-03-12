@@ -1037,12 +1037,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1054,6 +1048,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1096,46 +1096,18 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic res : bool
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : bool
-
-logic result : bool
-
-logic res1 : bool
-
-axiom H : tqtisFinite(x)
-
-axiom H1 : tqtisFinite(y)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 7800.0))
 
-axiom H2 : (le(neg(fliteral1), x) and le(x, fliteral1))
-
-axiom H3 : (le(neg(fliteral1), y) and le(y, fliteral1))
-
-axiom H4 : lt(abs(y), x)
-
-axiom H5 : ((o = mul(NearestTiesToEven, y, y)) and
-  tqtisFinite(mul(NearestTiesToEven, y, y)))
-
-axiom H6 : ((o1 = mul(NearestTiesToEven, x, x)) and
-  tqtisFinite(mul(NearestTiesToEven, x, x)))
-
-axiom H7 : (o2 = sub(NearestTiesToEven, o1, o))
-
  (* File "floating_point.adb", line 320, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(o2)
+goal WP_parameter_def :
+  (forall o:t. forall o1:t. forall o2:t. (tqtisFinite(x) ->
+  (tqtisFinite(y) -> ((le(neg(fliteral1), x) and le(x, fliteral1)) ->
+  ((le(neg(fliteral1), y) and le(y, fliteral1)) -> (lt(abs(y), x) ->
+  ((((o = mul(NearestTiesToEven, y, y)) and
+  tqtisFinite(mul(NearestTiesToEven, y, y))) and
+  (((o1 = mul(NearestTiesToEven, x, x)) and
+  tqtisFinite(mul(NearestTiesToEven, x, x))) and (o2 = sub(NearestTiesToEven,
+  o1, o)))) -> tqtisFinite(o2))))))))

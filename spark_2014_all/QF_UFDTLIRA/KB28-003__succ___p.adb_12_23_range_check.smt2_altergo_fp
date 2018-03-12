@@ -108,35 +108,7 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic p__id_not_d__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic result : int
-
-logic p__id_not_d__result1 : int
-
-logic p__id_not_d__result2 : int
-
-logic p__id_not_d__result3 : int
-
-logic p__id_not_d__result4 : int
-
-logic p__id_not_d__result5 : int
-
-axiom H : in_range(x)
-
-axiom H1 : (not (x = 3))
-
-axiom H2 : ((o = x) and (not (x = 3)))
-
-axiom H3 : (o1 = (o + 1))
-
  (* File "p.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : (not (o1 = 0))
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. (in_range(x) -> ((not (x = 3)) ->
+  ((((o = x) and (not (x = 3))) and (o1 = (o + 1))) -> (not (o1 = 0))))))

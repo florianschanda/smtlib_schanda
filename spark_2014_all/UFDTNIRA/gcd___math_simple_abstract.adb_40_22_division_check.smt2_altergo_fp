@@ -189,12 +189,6 @@ axiom Max_assoc :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -206,6 +200,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -291,91 +291,9 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic c : int
-
-logic math_simple_abstract__gcd__result : int
-
-logic o : int
-
-logic temp___132 : int
-
-logic x : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : bool
-
-logic o4 : int
-
-logic x1 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : bool
-
-logic result : int
-
-logic c1 : int
-
-logic c2 : int
-
-logic result1 : int
-
-logic c3 : int
-
-logic c4 : int
-
-logic c5 : int
-
-logic c6 : int
-
-logic c7 : int
-
-logic c8 : int
-
-logic c9 : int
-
-logic c10 : int
-
-logic c11 : int
-
-logic result2 : int
-
-logic math_simple_abstract__gcd__result1 : int
-
-logic math_simple_abstract__gcd__result2 : int
-
-logic math_simple_abstract__gcd__result3 : int
-
-logic c12 : int
-
-logic math_simple_abstract__gcd__result4 : int
-
-logic c13 : int
-
-logic math_simple_abstract__gcd__result5 : int
-
-logic result3 : bool
-
-logic result4 : bool
-
-axiom H : in_range1(a)
-
-axiom H1 : in_range1(b)
-
-axiom H2 : ((o = min(a, b)) and in_range1(min(a, b)))
-
-axiom H3 : (result = c)
-
-axiom H4 : (c1 = o)
-
-axiom H5 : in_range1(c1)
-
-axiom H6 : (1 <  c1)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (not (c1 = 0))
+goal WP_parameter_def :
+  (forall c:int. forall o:int. forall result:int. forall c1:int.
+  (in_range1(a) -> (in_range1(b) -> ((((o = min(a, b)) and in_range1(min(a,
+  b))) and (({ int__content = result } = { int__content = c }) and
+  (c1 = o))) -> (in_range1(c1) -> ((1 <  c1) -> (not (c1 = 0))))))))

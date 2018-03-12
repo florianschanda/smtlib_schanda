@@ -1037,12 +1037,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1054,6 +1048,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1127,54 +1127,6 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic res : t
-
-logic safety_pack__lift_away_from_zero__result : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic result : t
-
-logic res1 : t
-
-logic result1 : t
-
-logic res2 : t
-
-logic result2 : t
-
-logic res3 : t
-
-logic result3 : t
-
-logic res4 : t
-
-logic result4 : t
-
-logic safety_pack__lift_away_from_zero__result1 : t
-
-logic safety_pack__lift_away_from_zero__result2 : t
-
-logic safety_pack__lift_away_from_zero__result3 : t
-
-logic res5 : t
-
-logic safety_pack__lift_away_from_zero__result4 : t
-
-logic res6 : t
-
-logic safety_pack__lift_away_from_zero__result5 : t
-
-axiom H : in_range2(x)
-
-axiom H1 : (le(neg(fliteral1), fliteral1) -> in_range3(res))
-
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
@@ -1185,94 +1137,41 @@ logic fliteral3 : t
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 0.0000000000000000000000529395592033937711917701562924776226282119750976562500000000000000000000000))
 
-axiom H2 : (eq(x, fliteral2) -> ((eq(fliteral2, fliteral2) or le(fliteral2,
-  neg(fliteral3))) or le(fliteral3, fliteral2)))
-
-axiom H3 : (eq(x, fliteral2) -> (o = fliteral2))
-
-axiom H4 : (eq(x, fliteral2) -> (result = res))
-
-axiom H5 : (eq(x, fliteral2) -> (res1 = o))
-
-axiom H6 : ((not eq(x, fliteral2)) -> ((le(neg(fliteral3), x) and le(x,
-  fliteral2)) -> ((eq(neg(fliteral3), fliteral2) or le(neg(fliteral3),
-  neg(fliteral3))) or le(fliteral3, neg(fliteral3)))))
-
-axiom H7 : ((not eq(x, fliteral2)) -> ((le(neg(fliteral3), x) and le(x,
-  fliteral2)) -> (o1 = neg(fliteral3))))
-
-axiom H8 : ((not eq(x, fliteral2)) -> ((le(neg(fliteral3), x) and le(x,
-  fliteral2)) -> (result1 = res)))
-
-axiom H9 : ((not eq(x, fliteral2)) -> ((le(neg(fliteral3), x) and le(x,
-  fliteral2)) -> (res2 = o1)))
-
-axiom H10 : ((not eq(x, fliteral2)) -> ((not (le(neg(fliteral3), x) and le(x,
-  fliteral2))) -> ((le(fliteral2, x) and le(x, fliteral3)) -> ((eq(fliteral3,
-  fliteral2) or le(fliteral3, neg(fliteral3))) or le(fliteral3,
-  fliteral3)))))
-
-axiom H11 : ((not eq(x, fliteral2)) -> ((not (le(neg(fliteral3), x) and le(x,
-  fliteral2))) -> ((le(fliteral2, x) and le(x, fliteral3)) ->
-  (o2 = fliteral3))))
-
-axiom H12 : ((not eq(x, fliteral2)) -> ((not (le(neg(fliteral3), x) and le(x,
-  fliteral2))) -> ((le(fliteral2, x) and le(x, fliteral3)) ->
-  (result2 = res))))
-
-axiom H13 : ((not eq(x, fliteral2)) -> ((not (le(neg(fliteral3), x) and le(x,
-  fliteral2))) -> ((le(fliteral2, x) and le(x, fliteral3)) -> (res3 = o2))))
-
-axiom H14 : ((not eq(x, fliteral2)) -> ((not (le(neg(fliteral3), x) and le(x,
-  fliteral2))) -> ((not (le(fliteral2, x) and le(x, fliteral3))) -> ((eq(x,
-  fliteral2) or le(x, neg(fliteral3))) or le(fliteral3, x)))))
-
-axiom H15 : ((not eq(x, fliteral2)) -> ((not (le(neg(fliteral3), x) and le(x,
-  fliteral2))) -> ((not (le(fliteral2, x) and le(x, fliteral3))) ->
-  (o3 = x))))
-
-axiom H16 : ((not eq(x, fliteral2)) -> ((not (le(neg(fliteral3), x) and le(x,
-  fliteral2))) -> ((not (le(fliteral2, x) and le(x, fliteral3))) ->
-  (result3 = res))))
-
-axiom H17 : ((not eq(x, fliteral2)) -> ((not (le(neg(fliteral3), x) and le(x,
-  fliteral2))) -> ((not (le(fliteral2, x) and le(x, fliteral3))) ->
-  (res4 = o3))))
-
-axiom H18 : ((not eq(x, fliteral2)) -> ((not (le(neg(fliteral3), x) and le(x,
-  fliteral2))) -> ((not (le(fliteral2, x) and le(x, fliteral3))) ->
-  (res3 = res4))))
-
-axiom H19 : ((not eq(x, fliteral2)) -> ((not (le(neg(fliteral3), x) and le(x,
-  fliteral2))) -> (res2 = res3)))
-
-axiom H20 : ((not eq(x, fliteral2)) -> (res1 = res2))
-
-axiom H21 :
-  (safety_pack__lift_away_from_zero__result1 = safety_pack__lift_away_from_zero__result2)
-
-axiom H22 :
-  (safety_pack__lift_away_from_zero__result3 = safety_pack__lift_away_from_zero__result1)
-
-axiom H23 : (result4 = safety_pack__lift_away_from_zero__result)
-
-axiom H24 : (safety_pack__lift_away_from_zero__result1 = res1)
-
-axiom H25 :
-  (safety_pack__lift_away_from_zero__result4 = safety_pack__lift_away_from_zero__result2)
-
-axiom H26 : (res5 = res1)
-
-axiom H27 :
-  (safety_pack__lift_away_from_zero__result5 = safety_pack__lift_away_from_zero__result3)
-
-axiom H28 : (res6 = res1)
-
-axiom H29 : ((bool_eq(x, fliteral2) = true) ->
-  eq(safety_pack__lift_away_from_zero__result4, fliteral2))
-
-axiom H30 : (bool_neq(x, fliteral2) = true)
-
  (* File "imu_pack.ads", line 16, characters 0-0 *)
-goal WP_parameter_def : neq(safety_pack__lift_away_from_zero__result4,
-  fliteral2)
+goal WP_parameter_def :
+  (forall res:t. forall safety_pack__lift_away_from_zero__result:t.
+  forall o:t. forall o1:t. forall o2:t. forall o3:t. forall result:t.
+  forall res1:t. forall result1:t. forall res2:t. forall result2:t.
+  forall res3:t. forall result3:t. forall res4:t. forall result4:t.
+  forall safety_pack__lift_away_from_zero__result1:t.
+  forall safety_pack__lift_away_from_zero__result2:t.
+  forall safety_pack__lift_away_from_zero__result3:t. forall res5:t.
+  forall safety_pack__lift_away_from_zero__result4:t. forall res6:t.
+  forall safety_pack__lift_away_from_zero__result5:t. (in_range2(x) ->
+  ((((le(neg(fliteral1), fliteral1) -> in_range3(res)) and (((eq(x,
+  fliteral2) and ((((eq(fliteral2, fliteral2) or le(fliteral2,
+  neg(fliteral3))) or le(fliteral3, fliteral2)) and (o = fliteral2)) and
+  ((result = res) and (res1 = o)))) or ((not eq(x, fliteral2)) and
+  ((((le(neg(fliteral3), x) and le(x, fliteral2)) and ((((eq(neg(fliteral3),
+  fliteral2) or le(neg(fliteral3), neg(fliteral3))) or le(fliteral3,
+  neg(fliteral3))) and (o1 = neg(fliteral3))) and ((result1 = res) and
+  (res2 = o1)))) or ((not (le(neg(fliteral3), x) and le(x, fliteral2))) and
+  ((((le(fliteral2, x) and le(x, fliteral3)) and ((((eq(fliteral3,
+  fliteral2) or le(fliteral3, neg(fliteral3))) or le(fliteral3,
+  fliteral3)) and (o2 = fliteral3)) and ((result2 = res) and
+  (res3 = o2)))) or ((not (le(fliteral2, x) and le(x, fliteral3))) and
+  (((((eq(x, fliteral2) or le(x, neg(fliteral3))) or le(fliteral3, x)) and
+  (o3 = x)) and ((result3 = res) and (res4 = o3))) and (res3 = res4)))) and
+  (res2 = res3)))) and (res1 = res2)))) and
+  (((safety_pack__lift_away_from_zero__result1 = safety_pack__lift_away_from_zero__result2) and
+  (safety_pack__lift_away_from_zero__result3 = safety_pack__lift_away_from_zero__result1)) and
+  ((result4 = safety_pack__lift_away_from_zero__result) and
+  (safety_pack__lift_away_from_zero__result1 = res1))))) and
+  (((safety_pack__lift_away_from_zero__result4 = safety_pack__lift_away_from_zero__result2) and
+  (res5 = res1)) and
+  ((safety_pack__lift_away_from_zero__result5 = safety_pack__lift_away_from_zero__result3) and
+  (res6 = res1)))) -> ((((bool_eq(x, fliteral2) = true) and
+  eq(safety_pack__lift_away_from_zero__result4, fliteral2)) or
+  (not (bool_eq(x, fliteral2) = true))) -> ((bool_neq(x,
+  fliteral2) = true) -> neq(safety_pack__lift_away_from_zero__result4,
+  fliteral2))))))

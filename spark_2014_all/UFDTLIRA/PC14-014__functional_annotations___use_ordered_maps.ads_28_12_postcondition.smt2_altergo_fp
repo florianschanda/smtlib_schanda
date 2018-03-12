@@ -573,12 +573,6 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq9 : bool, bool -> bool
-
-axiom bool_eq_def5 :
-  (forall x:bool. forall y:bool [bool_eq9(x, y)]. (((x = y) -> (bool_eq9(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq9(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -590,6 +584,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq9 : bool, bool -> bool
+
+axiom bool_eq_def5 :
+  (forall x:bool. forall y:bool [bool_eq9(x, y)]. (((x = y) -> (bool_eq9(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq9(x, y) = false))))
 
 predicate in_range3(x: int) = ((x = 0) or (x = 1))
 
@@ -750,8 +750,8 @@ axiom keys__post_axiom :
   rec__use_ordered_maps__my_maps__map__capacity = container };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = container1 }
   })) and
-  (forall temp___399:int. ((in_range5(temp___399) and ((1 <= temp___399) and
-  (temp___399 <= (0 + length2(keys({ us_split_discrs1 = {
+  (forall temp___442:int. ((in_range5(temp___442) and ((1 <= temp___442) and
+  (temp___442 <= (0 + length2(keys({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = container };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = container1 }
   })))))) -> (has_key(model__({ us_split_discrs1 = {
@@ -760,7 +760,7 @@ axiom keys__post_axiom :
   get(keys({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = container };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = container1 } }),
-  temp___399)) = true)))) and
+  temp___442)) = true)))) and
   (forall key1:int. ((in_range4(key1) and (has_key(model__({
   us_split_discrs1 = { rec__use_ordered_maps__my_maps__map__capacity =
   container }; us_split_fields1 = { rec__use_ordered_maps__my_maps__map =
@@ -1228,69 +1228,32 @@ axiom w_get__post_axiom1 :
   ((in_range1(witness2) and (has_witness1(container, witness2) = true)) ->
   in_range8(w_get1(container, witness2)))))
 
-logic use_ordered_maps__my_contains__result : bool
-
-logic o : count_type
-
-logic o1 : count_type
-
-logic temp___633 : count_type
-
-logic o2 : bool
-
-logic result : bool
-
-logic use_ordered_maps__my_contains__result1 : bool
-
-logic use_ordered_maps__my_contains__result2 : bool
-
-logic use_ordered_maps__my_contains__result3 : bool
-
-logic use_ordered_maps__my_contains__result4 : bool
-
-logic use_ordered_maps__my_contains__result5 : bool
-
-logic result1 : bool
-
-axiom H : (to_rep(o) = 0)
-
-axiom H1 : (o = o1)
-
-axiom H2 : (temp___633 = o1)
-
-axiom H3 : (temp___633 = no_element)
-
-axiom H4 : in_range(k)
-
-axiom H5 :
-  (use_ordered_maps__my_contains__result1 = use_ordered_maps__my_contains__result2)
-
-axiom H6 :
-  (use_ordered_maps__my_contains__result3 = use_ordered_maps__my_contains__result1)
-
-axiom H7 : ((o2 = has_key(model__({ us_split_discrs1 = {
+ (* File "use_ordered_maps.ads", line 26, characters 0-0 *)
+goal WP_parameter_def :
+  (forall use_ordered_maps__my_contains__result:bool. forall o:count_type.
+  forall o1:count_type. forall temp___676:count_type. forall o2:bool.
+  forall result:bool. forall use_ordered_maps__my_contains__result1:bool.
+  forall use_ordered_maps__my_contains__result2:bool.
+  forall use_ordered_maps__my_contains__result3:bool.
+  forall use_ordered_maps__my_contains__result4:bool.
+  forall use_ordered_maps__my_contains__result5:bool.
+  (forall result1:bool. ((((((to_rep(o) = 0) and (o = o1)) and
+  (temp___676 = o1)) and (temp___676 = no_element)) and (in_range(k) and
+  (((((use_ordered_maps__my_contains__result1 = use_ordered_maps__my_contains__result2) and
+  (use_ordered_maps__my_contains__result3 = use_ordered_maps__my_contains__result1)) and
+  (((o2 = has_key(model__({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
   rec__use_ordered_maps__my_maps__map = s1 } }), k)) and ((o2 = true) <->
   (has_key(model__({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
-  rec__use_ordered_maps__my_maps__map = s1 } }), k) = true)))
-
-axiom H8 : (result = use_ordered_maps__my_contains__result)
-
-axiom H9 : (use_ordered_maps__my_contains__result1 = o2)
-
-axiom H10 :
-  (use_ordered_maps__my_contains__result4 = use_ordered_maps__my_contains__result2)
-
-axiom H11 :
-  (use_ordered_maps__my_contains__result5 = use_ordered_maps__my_contains__result3)
-
-axiom H12 : (result1 = use_ordered_maps__my_contains__result4)
-
-axiom H13 : (use_ordered_maps__my_contains__result4 = true)
-
- (* File "use_ordered_maps.ads", line 26, characters 0-0 *)
-goal WP_parameter_def : (not (bool_eq4(my_find({ us_split_discrs1 = {
+  rec__use_ordered_maps__my_maps__map = s1 } }), k) = true))) and
+  ((result = use_ordered_maps__my_contains__result) and
+  (use_ordered_maps__my_contains__result1 = o2)))) and
+  ((use_ordered_maps__my_contains__result4 = use_ordered_maps__my_contains__result2) and
+  (use_ordered_maps__my_contains__result5 = use_ordered_maps__my_contains__result3))) and
+  (result1 = use_ordered_maps__my_contains__result4)))) ->
+  ((use_ordered_maps__my_contains__result4 = true) ->
+  (not (bool_eq4(my_find({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
   rec__use_ordered_maps__my_maps__map = s1 } }, k), { us_split_fields3 = {
-  rec__use_ordered_maps__my_maps__cursor__node = no_element } }) = true))
+  rec__use_ordered_maps__my_maps__cursor__node = no_element } }) = true))))))

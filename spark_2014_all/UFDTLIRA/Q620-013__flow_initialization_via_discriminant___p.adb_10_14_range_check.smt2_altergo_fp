@@ -297,23 +297,8 @@ logic hack__split_discrs : integer
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic result__ : int
-
-logic hack__split_fields : integer
-
-logic us : int
-
-logic result : int
-
-logic result__1 : int
-
-logic result__2 : int
-
-logic result__3 : int
-
-axiom H : in_range(value)
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(result__))
-
  (* File "p.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(value)
+goal WP_parameter_def :
+  (forall result__:int. (in_range(value) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(result__)) ->
+  in_range(value))))

@@ -659,29 +659,17 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic res : t
+logic rliteral : t
 
-logic result : t
+axiom rliteral_axiom : (tqtint(rliteral) = 2)
 
-logic res1 : t
+logic rliteral1 : t
 
-logic result1 : t
-
-logic res2 : t
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : (result = res)
-
-axiom H3 : (res1 = lsr_bv(x, of_int(1)))
-
-axiom H4 : (res1 = udiv(x, of_int(2)))
-
-axiom H5 : (result1 = res1)
-
-axiom H6 : (res2 = lsr_bv(res1, of_int(2)))
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 8)
 
  (* File "bitwise.adb", line 10, characters 0-0 *)
-goal WP_parameter_def : (res2 = udiv(x, of_int(8)))
+goal WP_parameter_def :
+  (forall res:t. forall result:t. forall res1:t. forall result1:t.
+  forall res2:t. (((result = res) and (res1 = lsr_bv(x, of_int(1)))) ->
+  ((res1 = udiv(x, rliteral)) -> (((result1 = res1) and (res2 = lsr_bv(res1,
+  of_int(2)))) -> (res2 = udiv(x, rliteral1))))))

@@ -218,7 +218,5 @@ logic i7s : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-axiom H : in_range(i7s)
-
  (* File "dynamic_preds.ads", line 4, characters 0-0 *)
-goal WP_parameter_def : (not (2 = 0))
+goal WP_parameter_def : (in_range(i7s) -> (not (2 = 0)))

@@ -111,23 +111,8 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic used : int
-
-logic nested_var : int
-
-logic nested_var2 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-axiom H : in_range(used)
-
-axiom H1 : in_range(nested_var)
-
-axiom H2 : in_range(nested_var2)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((nested_var + nested_var2))
+goal WP_parameter_def :
+  (forall used:int. forall nested_var:int. forall nested_var2:int.
+  (in_range(used) -> (in_range(nested_var) -> (in_range(nested_var2) ->
+  in_range((nested_var + nested_var2))))))

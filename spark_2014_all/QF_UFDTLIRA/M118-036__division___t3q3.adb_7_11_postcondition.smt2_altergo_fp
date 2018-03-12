@@ -141,39 +141,11 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic k : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic result : int
-
-logic k1 : int
-
-logic k2 : int
-
-logic k3 : int
-
-axiom H : in_range1(i)
-
-axiom H1 : in_range1(j)
-
-axiom H2 : ((0 <= 2147483647) -> in_range1(k))
-
-axiom H3 : (i <= (2147483647 - j))
-
-axiom H4 : ((o1 = (i + j)) and in_range((i + j)))
-
-axiom H5 : (result = k)
-
-axiom H6 : (k1 = o1)
-
-axiom H7 : (k1 = k2)
-
-axiom H8 : (k3 = k1)
-
  (* File "t3q3.ads", line 4, characters 0-0 *)
-goal WP_parameter_def : (k2 = (i + j))
+goal WP_parameter_def :
+  (forall k:int. forall o:int. forall result:int. forall k1:int.
+  forall k2:int. forall k3:int. ((in_range1(i) and (in_range1(j) and
+  (((0 <= 2147483647) -> in_range1(k)) and ((i <= (2147483647 - j)) and
+  ((((o = (i + j)) and in_range((i + j))) and (({ int__content = result } = {
+  int__content = k }) and (k1 = o))) and ((k1 = k2) and (k3 = k1))))))) ->
+  (k2 = (i + j))))

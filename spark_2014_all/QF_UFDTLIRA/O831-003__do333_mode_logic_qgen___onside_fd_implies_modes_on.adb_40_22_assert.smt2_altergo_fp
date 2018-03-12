@@ -64,48 +64,18 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
-logic fd_on_out1 : bool
-
-logic modes_on_out1 : bool
-
-logic not1_out1 : bool
-
-logic not5_out1 : bool
-
-logic result : bool
-
-logic fd_on_out11 : bool
-
-logic result1 : bool
-
-logic modes_on_out11 : bool
-
-logic result2 : bool
-
-logic not1_out11 : bool
-
-logic result3 : bool
-
-logic not5_out11 : bool
-
-axiom H : (result = fd_on_out1)
-
-axiom H1 : (fd_on_out11 = fd_on)
-
-axiom H2 : (result1 = modes_on_out1)
-
-axiom H3 : (modes_on_out11 = modes_on)
-
-axiom H4 : (result2 = not1_out1)
-
-axiom H5 : (((not (fd_on_out11 = true)) -> (not1_out11 = true)) and
-  ((fd_on_out11 = true) -> (not1_out11 = false)))
-
-axiom H6 : (result3 = not5_out1)
-
-axiom H7 : ((((not1_out11 = true) or (modes_on_out11 = true)) ->
-  (not5_out11 = true)) and ((not ((not1_out11 = true) or
-  (modes_on_out11 = true))) -> (not5_out11 = false)))
-
  (* File "onside_fd_implies_modes_on.ads", line 15, characters 0-0 *)
-goal WP_parameter_def : (not5_out11 = true)
+goal WP_parameter_def :
+  (forall fd_on_out1:bool. forall modes_on_out1:bool. forall not1_out1:bool.
+  forall not5_out1:bool. forall result:bool. forall fd_on_out11:bool.
+  forall result1:bool. forall modes_on_out11:bool. forall result2:bool.
+  forall not1_out11:bool. forall result3:bool. forall not5_out11:bool.
+  (((result = fd_on_out1) and (fd_on_out11 = fd_on)) ->
+  (((result1 = modes_on_out1) and (modes_on_out11 = modes_on)) ->
+  (((result2 = not1_out1) and (((not (fd_on_out11 = true)) and
+  (not1_out11 = true)) or ((fd_on_out11 = true) and
+  (not1_out11 = false)))) -> (((result3 = not5_out1) and
+  ((((not1_out11 = true) or (modes_on_out11 = true)) and
+  (not5_out11 = true)) or ((not ((not1_out11 = true) or
+  (modes_on_out11 = true))) and (not5_out11 = false)))) ->
+  (not5_out11 = true))))))

@@ -111,15 +111,9 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic v : int
-
-axiom H : (in_range(i1s) and (((0 <= i1s) and (i1s <= 0)) or ((4 <= i1s) and
-  (i1s <= 4))))
-
-axiom H1 : (in_range(v) and (((0 <= v) and (v <= 0)) or ((4 <= v) and
-  (v <= 4))))
-
-axiom H2 : (not (v = 1))
-
  (* File "tests.ads", line 10, characters 0-0 *)
-goal WP_parameter_def : (((0 <= 1) and (1 <= 0)) or ((4 <= 1) and (1 <= 4)))
+goal WP_parameter_def :
+  (forall v:int. ((in_range(i1s) and (((0 <= i1s) and (i1s <= 0)) or
+  ((4 <= i1s) and (i1s <= 4)))) -> ((in_range(v) and (((0 <= v) and
+  (v <= 0)) or ((4 <= v) and (v <= 4)))) -> ((not (v = 1)) -> (((0 <= 1) and
+  (1 <= 0)) or ((4 <= 1) and (1 <= 4)))))))

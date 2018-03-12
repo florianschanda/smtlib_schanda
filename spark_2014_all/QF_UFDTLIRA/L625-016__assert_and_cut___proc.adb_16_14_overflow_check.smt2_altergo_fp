@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -149,63 +149,9 @@ logic attr__ATTRIBUTE_ADDRESS6 : int
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
-logic a : int
-
-logic b : int
-
-logic c : int
-
-logic d : int
-
-logic e : int
-
-logic f : int
-
-logic g : int
-
-logic h : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic h1 : int
-
-logic result : int
-
-logic h2 : int
-
-axiom H : in_range1(a)
-
-axiom H1 : in_range1(b)
-
-axiom H2 : in_range1(c)
-
-axiom H3 : in_range1(d)
-
-axiom H4 : in_range1(e)
-
-axiom H5 : in_range1(f)
-
-axiom H6 : in_range1(g)
-
-axiom H7 : in_range1(h)
-
-axiom H8 : true
-
-axiom H9 : (b = 0)
-
  (* File "proc.adb", line 8, characters 0-0 *)
-goal WP_parameter_def : in_range1((b + 1))
+goal WP_parameter_def :
+  (forall a:int. forall b:int. forall c:int. forall d:int. forall e:int.
+  forall f:int. forall g:int. forall h:int. (in_range1(a) -> (in_range1(b) ->
+  (in_range1(c) -> (in_range1(d) -> (in_range1(e) -> (in_range1(f) ->
+  (in_range1(g) -> (in_range1(h) -> ((b = 0) -> in_range1((b + 1))))))))))))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -761,258 +761,87 @@ axiom first__def_axiom4 : (first3 = fst)
 
 axiom last__def_axiom5 : (last4 = lst)
 
-logic v__split_fields : us_main_type
-
-logic current : int
-
-logic temp___473 : tcount_typeB
-
-logic temp___4731 : us_main_type
-
-logic temp___472 : int
-
-logic temp___476 : us_rep1
-
-logic temp___474 : int
-
-logic temp___475 : us_rep1
-
-logic i : int
-
-logic o : int
-
-logic o1 : bool
-
-logic us : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic i1 : int
-
-logic o4 : int
-
-logic o5 : bool
-
-logic us1 : int
-
-logic o6 : int
-
-logic us2 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic i2 : int
-
-logic o10 : int
-
-logic o11 : bool
-
-logic us3 : int
-
-logic o12 : int
-
-logic us4 : int
-
-logic o13 : int
-
-logic o14 : int
-
-logic o15 : int
-
-logic i3 : int
-
-logic o16 : int
-
-logic o17 : bool
-
-logic us5 : int
-
-logic o18 : int
-
-logic o19 : int
-
-logic us6 : int
-
-logic o20 : int
-
-logic us7 : int
-
-logic o21 : int
-
-logic o22 : int
-
-logic o23 : int
-
-logic v__split_fields1 : us_main_type
-
-logic result : int
-
-logic current1 : int
-
-logic v__split_fields2 : us_main_type
-
-logic current2 : int
-
-logic result1 : bool
-
-logic result2 : bool
-
-logic result3 : bool
-
-logic v__split_fields3 : us_main_type
-
-logic result4 : int
-
-logic current3 : int
-
-logic v__split_fields4 : us_main_type
-
-logic current4 : int
-
-logic v__split_fields5 : us_main_type
-
-logic current5 : int
-
-logic v__split_fields6 : us_main_type
-
-logic current6 : int
-
-logic v__split_fields7 : us_main_type
-
-logic current7 : int
-
-logic v__split_fields8 : us_main_type
-
-logic current8 : int
-
-logic v__split_fields9 : us_main_type
-
-logic current9 : int
-
-logic result5 : bool
-
-axiom H : dynamic_property2(0, last2, to_rep1(v__split_discrs))
-
-axiom H1 : dynamic_property(first, last, fst1)
-
-axiom H2 : dynamic_property(first, last, lst1)
-
-axiom H3 : ((lst1 <= ((first3 - 1) + length1(model__({ us_split_discrs1 = {
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (forall v__split_fields:us_main_type. forall current:int.
+  forall result:int. forall current1:int.
+  forall v__split_fields1:us_main_type. forall current2:int.
+  forall v__split_fields2:us_main_type. forall result1:int.
+  forall current3:int. (dynamic_property2(0, last2,
+  to_rep1(v__split_discrs)) -> (dynamic_property(first, last, fst1) ->
+  (dynamic_property(first, last, lst1) ->
+  (((lst1 <= ((first3 - 1) + length1(model__({ us_split_discrs1 = {
   rec__use_vectors__my_vectors__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__use_vectors__my_vectors__vector = v__split_fields
-  } })))) and (fst1 <= lst1))
-
-axiom H4 : (result = current)
-
-axiom H5 : (current1 = fst1)
-
-axiom H6 : (fst1 <= current1)
-
-axiom H7 : (current1 <= lst1)
-
-axiom H8 : (length({ us_split_discrs1 = {
+  } })))) and (fst1 <= lst1)) -> ((({ int__content = result } = {
+  int__content = current }) and (current1 = fst1)) ->
+  (((fst1 <= current1) and (current1 <= lst1)) -> (((length({
+  us_split_discrs1 = { rec__use_vectors__my_vectors__vector__capacity =
+  v__split_discrs }; us_split_fields1 = {
+  rec__use_vectors__my_vectors__vector = v__split_fields1 } }) = length({
+  us_split_discrs1 = { rec__use_vectors__my_vectors__vector__capacity =
+  v__split_discrs }; us_split_fields1 = {
+  rec__use_vectors__my_vectors__vector = v__split_fields } })) and
+  ((forall i:int. (((fst1 <= i) and (i <= (current2 - 1))) -> (get(model__({
+   us_split_discrs1 = { rec__use_vectors__my_vectors__vector__capacity =
+   v__split_discrs }; us_split_fields1 = {
+   rec__use_vectors__my_vectors__vector = v__split_fields1 } }), i) = 0))) and
+  ((forall i:int. (((first <= i) and (i <= (fst1 - 1))) -> (get(model__({
+   us_split_discrs1 = { rec__use_vectors__my_vectors__vector__capacity =
+   v__split_discrs }; us_split_fields1 = {
+   rec__use_vectors__my_vectors__vector = v__split_fields1 } }),
+   i) = get(model__({ us_split_discrs1 = {
+   rec__use_vectors__my_vectors__vector__capacity = v__split_discrs };
+   us_split_fields1 = { rec__use_vectors__my_vectors__vector =
+   v__split_fields } }), i)))) and
+  (forall i:int. (((current2 <= i) and
+  (i <= ((first3 - 1) + length1(model__({ us_split_discrs1 = {
   rec__use_vectors__my_vectors__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__use_vectors__my_vectors__vector =
-  v__split_fields2 } }) = length({ us_split_discrs1 = {
+  v__split_fields1 } }))))) -> (get(model__({ us_split_discrs1 = {
+  rec__use_vectors__my_vectors__vector__capacity = v__split_discrs };
+  us_split_fields1 = { rec__use_vectors__my_vectors__vector =
+  v__split_fields1 } }), i) = get(model__({ us_split_discrs1 = {
   rec__use_vectors__my_vectors__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__use_vectors__my_vectors__vector = v__split_fields
-  } }))
-
-axiom H9 :
-  (forall i4:int. (((fst1 <= i4) and (i4 <= (current2 - 1))) ->
+  } }), i))))))) -> ((((((fst1 <= lst1) -> dynamic_property6(fst1, lst1,
+  current2)) and dynamic_property2(0, last2, to_rep1(v__split_discrs))) and
+  ((fst1 <= current2) and (current2 <= lst1))) and (((((length({
+  us_split_discrs1 = { rec__use_vectors__my_vectors__vector__capacity =
+  v__split_discrs }; us_split_fields1 = {
+  rec__use_vectors__my_vectors__vector = v__split_fields2 } }) = length({
+  us_split_discrs1 = { rec__use_vectors__my_vectors__vector__capacity =
+  v__split_discrs }; us_split_fields1 = {
+  rec__use_vectors__my_vectors__vector = v__split_fields1 } })) and
   (get(model__({ us_split_discrs1 = {
   rec__use_vectors__my_vectors__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__use_vectors__my_vectors__vector =
-  v__split_fields2 } }), i4) = 0)))
-
-axiom H10 :
-  (forall i4:int. (((first <= i4) and (i4 <= (fst1 - 1))) -> (get(model__({
+  v__split_fields2 } }), current2) = 0)) and ((bool_eq1(length1(model__({
   us_split_discrs1 = { rec__use_vectors__my_vectors__vector__capacity =
   v__split_discrs }; us_split_fields1 = {
-  rec__use_vectors__my_vectors__vector = v__split_fields2 } }),
-  i4) = get(model__({ us_split_discrs1 = {
-  rec__use_vectors__my_vectors__vector__capacity = v__split_discrs };
-  us_split_fields1 = { rec__use_vectors__my_vectors__vector = v__split_fields
-  } }), i4))))
-
-axiom H11 :
-  (forall i4:int. (((current2 <= i4) and
-  (i4 <= ((first3 - 1) + length1(model__({ us_split_discrs1 = {
-  rec__use_vectors__my_vectors__vector__capacity = v__split_discrs };
-  us_split_fields1 = { rec__use_vectors__my_vectors__vector =
-  v__split_fields2 } }))))) -> (get(model__({ us_split_discrs1 = {
-  rec__use_vectors__my_vectors__vector__capacity = v__split_discrs };
-  us_split_fields1 = { rec__use_vectors__my_vectors__vector =
-  v__split_fields2 } }), i4) = get(model__({ us_split_discrs1 = {
-  rec__use_vectors__my_vectors__vector__capacity = v__split_discrs };
-  us_split_fields1 = { rec__use_vectors__my_vectors__vector = v__split_fields
-  } }), i4))))
-
-axiom H12 : ((((fst1 <= lst1) -> dynamic_property6(fst1, lst1, current2)) and
-  dynamic_property2(0, last2, to_rep1(v__split_discrs))) and
-  ((fst1 <= current2) and (current2 <= lst1)))
-
-axiom H13 : ((((length({ us_split_discrs1 = {
-  rec__use_vectors__my_vectors__vector__capacity = v__split_discrs };
-  us_split_fields1 = { rec__use_vectors__my_vectors__vector =
-  v__split_fields3 } }) = length({ us_split_discrs1 = {
-  rec__use_vectors__my_vectors__vector__capacity = v__split_discrs };
-  us_split_fields1 = { rec__use_vectors__my_vectors__vector =
-  v__split_fields2 } })) and (get(model__({ us_split_discrs1 = {
-  rec__use_vectors__my_vectors__vector__capacity = v__split_discrs };
-  us_split_fields1 = { rec__use_vectors__my_vectors__vector =
-  v__split_fields3 } }), current2) = 0)) and (((bool_eq1(length1(model__({
-  us_split_discrs1 = { rec__use_vectors__my_vectors__vector__capacity =
-  v__split_discrs }; us_split_fields1 = {
-  rec__use_vectors__my_vectors__vector = v__split_fields2 } })),
+  rec__use_vectors__my_vectors__vector = v__split_fields1 } })),
   length1(model__({ us_split_discrs1 = {
   rec__use_vectors__my_vectors__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__use_vectors__my_vectors__vector =
-  v__split_fields3 } }))) = true) ->
-  (forall i4:int. (((first3 <= i4) and
-  (i4 <= ((first3 - 1) + length1(model__({ us_split_discrs1 = {
+  v__split_fields2 } }))) = true) and
+  (forall i:int. (((first3 <= i) and (i <= ((first3 - 1) + length1(model__({
+  us_split_discrs1 = { rec__use_vectors__my_vectors__vector__capacity =
+  v__split_discrs }; us_split_fields1 = {
+  rec__use_vectors__my_vectors__vector = v__split_fields1 } }))))) ->
+  ((not (i = current2)) -> (get(model__({ us_split_discrs1 = {
   rec__use_vectors__my_vectors__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__use_vectors__my_vectors__vector =
-  v__split_fields2 } }))))) -> ((not (i4 = current2)) -> (get(model__({
+  v__split_fields1 } }), i) = get(model__({ us_split_discrs1 = {
+  rec__use_vectors__my_vectors__vector__capacity = v__split_discrs };
+  us_split_fields1 = { rec__use_vectors__my_vectors__vector =
+  v__split_fields2 } }), i))))))) and dynamic_property2(0, last2,
+  to_rep1(v__split_discrs))) and ((not (current2 = lst1)) and
+  ((result1 = current2) and (current3 = (current2 + 1)))))) ->
+  (forall i:int. (((first <= i) and (i <= (fst1 - 1))) -> (get(model__({
   us_split_discrs1 = { rec__use_vectors__my_vectors__vector__capacity =
   v__split_discrs }; us_split_fields1 = {
   rec__use_vectors__my_vectors__vector = v__split_fields2 } }),
-  i4) = get(model__({ us_split_discrs1 = {
-  rec__use_vectors__my_vectors__vector__capacity = v__split_discrs };
-  us_split_fields1 = { rec__use_vectors__my_vectors__vector =
-  v__split_fields3 } }), i4)))))) and (not (bool_eq1(length1(model__({
-  us_split_discrs1 = { rec__use_vectors__my_vectors__vector__capacity =
-  v__split_discrs }; us_split_fields1 = {
-  rec__use_vectors__my_vectors__vector = v__split_fields2 } })),
-  length1(model__({ us_split_discrs1 = {
-  rec__use_vectors__my_vectors__vector__capacity = v__split_discrs };
-  us_split_fields1 = { rec__use_vectors__my_vectors__vector =
-  v__split_fields3 } }))) = false)))) and dynamic_property2(0, last2,
-  to_rep1(v__split_discrs)))
-
-axiom H14 : (not (current2 = lst1))
-
-axiom H15 : (result4 = current2)
-
-axiom H16 : (current3 = (current2 + 1))
-
-logic i4 : int
-
-axiom H17 : (first <= i4)
-
-axiom H18 : (i4 <= (fst1 - 1))
-
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (get(model__({ us_split_discrs1 = {
-  rec__use_vectors__my_vectors__vector__capacity = v__split_discrs };
-  us_split_fields1 = { rec__use_vectors__my_vectors__vector =
-  v__split_fields3 } }), i4) = get(model__({ us_split_discrs1 = {
+  i) = get(model__({ us_split_discrs1 = {
   rec__use_vectors__my_vectors__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__use_vectors__my_vectors__vector = v__split_fields
-  } }), i4))
+  } }), i)))))))))))))

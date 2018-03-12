@@ -127,33 +127,12 @@ axiom is_pumping__def_axiom :
   (forall pumpunit__cur_state:int [is_pumping(pumpunit__cur_state)].
   ((is_pumping(pumpunit__cur_state) = true) <-> (pumpunit__cur_state = 0)))
 
-logic cur_state : int
-
-logic cur_state1 : int
-
-logic result : int
-
-logic cur_state2 : int
-
-logic cur_state3 : int
-
-logic cur_state4 : int
-
-axiom H : in_range(cur_state)
-
-axiom H1 : (is_pumping(cur_state) = true)
-
-axiom H2 : ((cur_state = 0) -> (result = cur_state))
-
-axiom H3 : ((cur_state = 0) -> (cur_state2 = 1))
-
-axiom H4 : ((not (cur_state = 0)) -> (cur_state2 = cur_state))
-
-axiom H5 : ((not (cur_state = 0)) -> (cur_state2 = cur_state1))
-
-axiom H6 : (cur_state2 = cur_state3)
-
-axiom H7 : (cur_state4 = cur_state2)
-
  (* File "pumpunit.ads", line 65, characters 0-0 *)
-goal WP_parameter_def : (is_ready(cur_state3) = true)
+goal WP_parameter_def :
+  (forall cur_state:int. forall cur_state1:int. forall result:int.
+  forall cur_state2:int. forall cur_state3:int. forall cur_state4:int.
+  ((in_range(cur_state) and ((is_pumping(cur_state) = true) and
+  ((((cur_state = 0) and ((result = cur_state) and (cur_state2 = 1))) or
+  ((not (cur_state = 0)) and ((cur_state2 = cur_state) and
+  (cur_state2 = cur_state1)))) and ((cur_state2 = cur_state3) and
+  (cur_state4 = cur_state2))))) -> (is_ready(cur_state3) = true)))

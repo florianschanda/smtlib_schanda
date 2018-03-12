@@ -107,13 +107,5 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic v : int
-
-logic o : int
-
-logic v1 : int
-
-axiom H : false
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def : true

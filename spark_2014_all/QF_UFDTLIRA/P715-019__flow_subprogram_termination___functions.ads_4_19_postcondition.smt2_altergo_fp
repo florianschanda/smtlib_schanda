@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -69,6 +63,12 @@ axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
 
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
 logic attr__ATTRIBUTE_IMAGE : bool -> us_image
@@ -76,63 +76,6 @@ logic attr__ATTRIBUTE_IMAGE : bool -> us_image
 logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE : us_image -> bool
-
-logic functions__non_ter_func__result : bool
-
-logic functions__non_ter_func__result1 : bool
-
-logic functions__non_ter_func__result2 : bool
-
-logic result : bool
-
-logic functions__non_ter_func__result3 : bool
-
-logic functions__non_ter_func__result4 : bool
-
-logic functions__non_ter_func__result5 : bool
-
-logic result1 : bool
-
-logic functions__non_ter_func__result6 : bool
-
-logic functions__non_ter_func__result7 : bool
-
-logic functions__non_ter_func__result8 : bool
-
-logic functions__non_ter_func__result9 : bool
-
-logic functions__non_ter_func__result10 : bool
-
-logic functions__non_ter_func__result11 : bool
-
-logic functions__non_ter_func__result12 : bool
-
-logic result2 : bool
-
-axiom H :
-  ((((functions__non_ter_func__result3 = functions__non_ter_func__result9) and
-  (functions__non_ter_func__result10 = functions__non_ter_func__result3)) and
-  ((of_int(1) = true) and ((result = functions__non_ter_func__result2) and
-  (functions__non_ter_func__result3 = of_int(1))))) or
-  (((not (of_int(1) = true)) and
-  ((functions__non_ter_func__result4 = functions__non_ter_func__result) and
-  (functions__non_ter_func__result5 = functions__non_ter_func__result1))) and
-  (((functions__non_ter_func__result9 = functions__non_ter_func__result7) and
-  (functions__non_ter_func__result10 = functions__non_ter_func__result8)) and
-  (((functions__non_ter_func__result6 = functions__non_ter_func__result7) and
-  (functions__non_ter_func__result8 = functions__non_ter_func__result6)) and
-  ((result1 = functions__non_ter_func__result4) and
-  (functions__non_ter_func__result6 = of_int(0)))))))
-
-axiom H1 :
-  (functions__non_ter_func__result11 = functions__non_ter_func__result9)
-
-axiom H2 :
-  (functions__non_ter_func__result12 = functions__non_ter_func__result10)
-
-axiom H3 : (result2 = functions__non_ter_func__result11)
-
-axiom H4 : (functions__non_ter_func__result11 = true)
 
  (* File "functions.ads", line 3, characters 0-0 *)
 goal WP_parameter_def : true

@@ -1033,21 +1033,23 @@ logic readreg16 : t -> t1
 
 logic readreg16__function_guard : t1, t -> prop
 
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 18446744073709486080)
+
 axiom writereg16post__post_axiom :
   (forall regold:t. forall regnew:t.
   (forall val__:t1 [writereg16post(regold, regnew, val__)].
   ((writereg16post(regold, regnew, val__) = true) <->
   ((readreg16(regnew) = val__) and (bw_and(regnew,
-  of_int(18446744073709486080)) = bw_and(regold,
-  of_int(18446744073709486080)))))))
+  rliteral1) = bw_and(regold, rliteral1))))))
 
 axiom writereg16post__def_axiom :
   (forall regold:t. forall regnew:t.
   (forall val__:t1 [writereg16post(regold, regnew, val__)].
   ((writereg16post(regold, regnew, val__) = true) <->
   ((readreg16(regnew) = val__) and (bw_and(regnew,
-  of_int(18446744073709486080)) = bw_and(regold,
-  of_int(18446744073709486080)))))))
+  rliteral1) = bw_and(regold, rliteral1))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -1055,32 +1057,17 @@ logic val__ : t1
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 65535)
+
 axiom readreg16__post_axiom :
   (forall reg:t [readreg16(reg)]. (readreg16(reg) = toSmall(bw_and(reg,
-  of_int(65535)))))
-
-logic rax : t
-
-logic result : t
-
-logic rax1 : t
-
-logic rax2 : t
-
-logic rax3 : t
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : (result = rax)
-
-axiom H3 : (rax1 = bw_or(bw_and(rax, of_int(18446744073709486080)),
-  toBig(val__)))
-
-axiom H4 : (rax1 = rax2)
-
-axiom H5 : (rax3 = rax1)
+  rliteral2))))
 
  (* File "x86.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : (writereg16post(rax, rax2, val__) = true)
+goal WP_parameter_def :
+  (forall rax:t. forall result:t. forall rax1:t. forall rax2:t.
+  forall rax3:t. ((((result = rax) and (rax1 = bw_or(bw_and(rax, rliteral1),
+  toBig(val__)))) and ((rax1 = rax2) and (rax3 = rax1))) ->
+  (writereg16post(rax, rax2, val__) = true)))

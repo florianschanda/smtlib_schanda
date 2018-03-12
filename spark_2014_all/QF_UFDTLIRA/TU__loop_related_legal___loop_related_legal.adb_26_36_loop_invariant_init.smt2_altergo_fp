@@ -109,43 +109,8 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic par : int
-
-logic x : int
-
-logic o : int
-
-logic result : int
-
-logic x1 : int
-
-logic par1 : int
-
-logic x2 : int
-
-logic temp___150 : int
-
-logic result1 : int
-
-logic temp___1501 : int
-
-logic result2 : int
-
-logic par2 : int
-
-logic result3 : int
-
-logic x3 : int
-
-axiom H : in_range(par)
-
-axiom H1 : (0 <  par)
-
-axiom H2 : ((0 <= 2147483647) -> in_range(x))
-
-axiom H3 : (result = x)
-
-axiom H4 : (x1 = 0)
-
  (* File "loop_related_legal.adb", line 5, characters 0-0 *)
-goal WP_parameter_def : (x1 <  par)
+goal WP_parameter_def :
+  (forall par:int. forall x:int. forall result:int. forall x1:int.
+  (in_range(par) -> ((0 <  par) -> (((0 <= 2147483647) -> in_range(x)) ->
+  (((result = x) and (x1 = 0)) -> (x1 <  par))))))

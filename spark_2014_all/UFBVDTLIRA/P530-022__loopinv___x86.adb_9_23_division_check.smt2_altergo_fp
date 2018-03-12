@@ -663,25 +663,10 @@ logic divisor : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x86__safedivision64__result : t
+logic rliteral : t
 
-logic result : t
-
-logic x86__safedivision64__result1 : t
-
-logic x86__safedivision64__result2 : t
-
-logic x86__safedivision64__result3 : t
-
-logic x86__safedivision64__result4 : t
-
-logic x86__safedivision64__result5 : t
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : (not (divisor = of_int(0)))
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
 
  (* File "x86.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : (not (divisor = zeros))
+goal WP_parameter_def : ((not (divisor = rliteral)) ->
+  (not (divisor = zeros)))

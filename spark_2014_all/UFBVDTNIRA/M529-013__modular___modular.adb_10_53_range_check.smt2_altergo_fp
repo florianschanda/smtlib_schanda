@@ -746,33 +746,6 @@ logic b : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic modular__add_byte_c__result : t
-
-logic o : int
-
-logic o1 : t
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic result : t
-
-logic modular__add_byte_c__result1 : t
-
-logic modular__add_byte_c__result2 : t
-
-logic modular__add_byte_c__result3 : t
-
-logic modular__add_byte_c__result4 : t
-
-logic modular__add_byte_c__result5 : t
-
-axiom H : in_range(a)
-
-axiom H1 : in_range(b)
-
  (* File "modular.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : uint_in_range(mod((mod(a, 256) + mod(b, 256)), 256))
+goal WP_parameter_def : (in_range(a) -> (in_range(b) ->
+  uint_in_range(mod((mod(a, 256) + mod(b, 256)), 256))))

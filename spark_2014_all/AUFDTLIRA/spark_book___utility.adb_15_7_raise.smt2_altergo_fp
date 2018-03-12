@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -188,24 +188,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> (int,integer) farray
-
-axiom concat_def :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : integer, int -> (int,integer) farray
-
-axiom singleton_def :
-  (forall v:integer.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,integer) farray, int, int, (int,integer) farray, int,
   int -> bool
 
@@ -216,17 +198,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -236,37 +218,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic values : (int,integer) farray
 
@@ -274,128 +228,37 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic index : int
-
-logic utility__search_for_zero__result : int
-
-logic temp___151 : int
-
-logic temp___152 : int
-
-logic temp___150 : int
-
-logic j : int
-
-logic utility__search_for_zero__result1 : int
-
-logic result : int
-
-logic index1 : int
-
-logic result1 : int
-
-logic utility__search_for_zero__result2 : int
-
-logic index2 : int
-
-logic utility__search_for_zero__result3 : int
-
-logic result2 : int
-
-logic index3 : int
-
-logic result3 : int
-
-logic utility__search_for_zero__result4 : int
-
-logic index4 : int
-
-logic utility__search_for_zero__result5 : int
-
-logic index5 : int
-
-logic utility__search_for_zero__result6 : int
-
-logic index6 : int
-
-logic utility__search_for_zero__result7 : int
-
-logic index7 : int
-
-logic utility__search_for_zero__result8 : int
-
-logic index8 : int
-
-logic utility__search_for_zero__result9 : int
-
-logic index9 : int
-
-logic utility__search_for_zero__result10 : int
-
-logic index10 : int
-
-logic utility__search_for_zero__result11 : int
-
-logic index11 : int
-
-logic utility__search_for_zero__result12 : int
-
-logic index12 : int
-
-logic utility__search_for_zero__result13 : int
-
-logic index13 : int
-
-logic utility__search_for_zero__result14 : int
-
-logic index14 : int
-
-logic utility__search_for_zero__result15 : int
-
-logic index15 : int
-
-logic utility__search_for_zero__result16 : int
-
-axiom H :
-  (exists index16:int. (((0 <= index16) and (index16 <= 1023)) and
-  (to_rep((values[index16])) = 0)))
-
-axiom H1 : (result = index)
-
-axiom H2 : (index1 = 0)
-
-axiom H3 : (((0 <= index1) and (index1 <= 1023)) ->
-  (((temp___150 = index1) and (((not (to_rep((values[index1])) = 0)) and
+ (* File "utility.ads", line 6, characters 0-0 *)
+goal WP_parameter_def :
+  (forall index:int. forall utility__search_for_zero__result:int.
+  forall temp___174:int. forall utility__search_for_zero__result1:int.
+  forall result:int. forall index1:int.
+  forall utility__search_for_zero__result2:int. forall index2:int.
+  forall utility__search_for_zero__result3:int. forall index3:int.
+  forall utility__search_for_zero__result4:int. forall index4:int.
+  forall utility__search_for_zero__result5:int. forall index5:int.
+  forall utility__search_for_zero__result6:int. forall index6:int.
+  forall utility__search_for_zero__result7:int.
+  ((exists index7:int. (((0 <= index7) and (index7 <= 1023)) and
+   (to_rep((values[index7])) = 0))) ->
+  (not ((({ int__content = result } = { int__content = index }) and
+  (index1 = 0)) and ((((0 <= index1) and (index1 <= 1023)) and
+  ((((temp___174 = index1) and (((not (to_rep((values[index1])) = 0)) and
   ((utility__search_for_zero__result2 = utility__search_for_zero__result) and
   (utility__search_for_zero__result2 = utility__search_for_zero__result1))) and
-  ((exists j1:int. ((((index2 + 1) <= j1) and (j1 <= 1023)) and
-   (to_rep((values[j1])) = 0))) and ((((0 <= 1023) -> in_range2(index2)) and
-  ((0 <= index2) and (index2 <= 1023))) and (index2 = 1023))))) and
-  (((utility__search_for_zero__result3 = utility__search_for_zero__result9) and
-  (index2 = index8)) and
-  ((utility__search_for_zero__result10 = utility__search_for_zero__result3) and
-  (index9 = index2)))))
-
-axiom H4 : (((0 <= index1) and (index1 <= 1023)) ->
-  (utility__search_for_zero__result11 = utility__search_for_zero__result9))
-
-axiom H5 : (((0 <= index1) and (index1 <= 1023)) -> (index10 = index8))
-
-axiom H6 : (((0 <= index1) and (index1 <= 1023)) ->
-  (utility__search_for_zero__result12 = utility__search_for_zero__result10))
-
-axiom H7 : (((0 <= index1) and (index1 <= 1023)) -> (index11 = index9))
-
-axiom H8 : ((not ((0 <= index1) and (index1 <= 1023))) ->
-  (utility__search_for_zero__result11 = utility__search_for_zero__result))
-
-axiom H9 : ((not ((0 <= index1) and (index1 <= 1023))) -> (index1 = index10))
-
-axiom H10 : ((not ((0 <= index1) and (index1 <= 1023))) ->
-  (utility__search_for_zero__result12 = utility__search_for_zero__result1))
-
-axiom H11 : ((not ((0 <= index1) and (index1 <= 1023))) ->
-  (index11 = index1))
-
- (* File "utility.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : false
+  ((exists j:int. ((((index2 + 1) <= j) and (j <= 1023)) and
+   (to_rep((values[j])) = 0))) and
+  ((((0 <= 1023) -> in_range2(index2)) and ((0 <= index2) and
+  (index2 <= 1023))) and (index2 = 1023))))) and
+  (((utility__search_for_zero__result3 = utility__search_for_zero__result4) and
+  (index2 = index3)) and
+  ((utility__search_for_zero__result5 = utility__search_for_zero__result3) and
+  (index4 = index2)))) and ((({ int__content =
+  utility__search_for_zero__result6 } = { int__content =
+  utility__search_for_zero__result4 }) and (index5 = index3)) and
+  ((utility__search_for_zero__result7 = utility__search_for_zero__result5) and
+  (index6 = index4))))) or ((not ((0 <= index1) and (index1 <= 1023))) and
+  (((utility__search_for_zero__result = utility__search_for_zero__result6) and
+  (index1 = index5)) and
+  ((utility__search_for_zero__result7 = utility__search_for_zero__result1) and
+  (index6 = index1)))))))))

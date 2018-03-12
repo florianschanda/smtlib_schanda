@@ -380,42 +380,8 @@ axiom d_zero__2__def_axiom :
   rec__private_types__simple = s1 }; attr__constrained = s2 } }
   }) = true) <-> (to_rep(s) = 0)))
 
-logic s__split_fields : natural
-
-logic s__split_fields1 : us_main_type
-
-logic s__split_fields2 : bool
-
-logic private_types__private_reinit__s__discrs : natural
-
-logic private_types__private_reinit__s__fields : us_main_type
-
-logic result : natural
-
-logic result1 : us_main_type
-
-logic result2 : bool
-
-logic s__split_fields3 : natural
-
-logic s__split_fields4 : us_main_type
-
-logic s__split_fields5 : bool
-
-logic s__split_fields6 : natural
-
-logic s__split_fields7 : us_main_type
-
-logic s__split_fields8 : bool
-
-logic s__split_fields9 : natural
-
-logic s__split_fields10 : us_main_type
-
-logic s__split_fields11 : bool
-
-axiom H : (s__split_fields2 = false)
-
  (* File "use_private_types.ads", line 40, characters 0-0 *)
-goal WP_parameter_def : ((to_rep(s__split_fields) = 0) or
-  (not (s__split_fields2 = true)))
+goal WP_parameter_def :
+  (forall s__split_fields:natural. forall s__split_fields1:bool.
+  ((s__split_fields1 = false) -> ((to_rep(s__split_fields) = 0) or
+  (not (s__split_fields1 = true)))))

@@ -969,44 +969,14 @@ logic p5__split_discrs : any_priority
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic p1__split_fields : integer
-
-logic p2__split_fields : integer
-
-logic p3__split_fields : integer
-
-logic p4__split_fields : integer
-
-logic us : int
-
-logic us1 : int
-
-logic us2 : int
-
-logic us3 : int
-
-logic us4 : int
-
-axiom H : ((us = 0) and in_range(0))
-
-axiom H1 : ((to_rep(p1__split_discrs) = 0) and
-  (to_rep1(p1__split_fields) = 0))
-
-axiom H2 : (0 = to_rep(p1__split_discrs))
-
-axiom H3 : ((us1 = 98) and in_range(98))
-
-axiom H4 : ((to_rep(p2__split_discrs) = 98) and
-  (to_rep1(p2__split_fields) = 0))
-
-axiom H5 : (98 = to_rep(p2__split_discrs))
-
-axiom H6 : ((us2 = 0) and in_range(0))
-
-axiom H7 : ((to_rep(p3__split_discrs) = 0) and
-  (to_rep1(p3__split_fields) = 0))
-
-axiom H8 : (0 = to_rep(p3__split_discrs))
-
  (* File "interrupt_priority.ads", line 18, characters 0-0 *)
-goal WP_parameter_def : in_range(98)
+goal WP_parameter_def :
+  (forall p1__split_fields:integer. forall p2__split_fields:integer.
+  forall p3__split_fields:integer. forall us:int. forall us1:int.
+  forall us2:int. (((us = 0) and in_range(0)) ->
+  (((to_rep(p1__split_discrs) = 0) and (to_rep1(p1__split_fields) = 0)) ->
+  ((0 = to_rep(p1__split_discrs)) -> (((us1 = 98) and in_range(98)) ->
+  (((to_rep(p2__split_discrs) = 98) and (to_rep1(p2__split_fields) = 0)) ->
+  ((98 = to_rep(p2__split_discrs)) -> (((us2 = 0) and in_range(0)) ->
+  (((to_rep(p3__split_discrs) = 0) and (to_rep1(p3__split_fields) = 0)) ->
+  ((0 = to_rep(p3__split_discrs)) -> in_range(98)))))))))))

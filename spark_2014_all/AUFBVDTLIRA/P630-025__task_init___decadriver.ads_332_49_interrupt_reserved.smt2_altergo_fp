@@ -1259,12 +1259,6 @@ axiom bv_max_to_uint2 :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq3 : bool, bool -> bool
-
-axiom bool_eq_def3 :
-  (forall x:bool. forall y:bool [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
-
 logic to_int3 : bool -> int
 
 axiom to_int_def3 :
@@ -1277,6 +1271,12 @@ axiom of_int_def :
   (forall i:int [of_int3(i)]. (((i = 0) -> (of_int3(i) = false)) and
   ((not (i = 0)) -> (of_int3(i) = true))))
 
+logic bool_eq3 : bool, bool -> bool
+
+axiom bool_eq_def3 :
+  (forall x:bool. forall y:bool [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
 logic attr__ATTRIBUTE_IMAGE : bool -> us_image
@@ -1287,7 +1287,15 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type bits_1
 
-predicate in_range1(x: t) = (ule(of_int(0), x) and ule(x, of_int(1)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 1)
+
+predicate in_range1(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 1))
 
@@ -1352,9 +1360,13 @@ axiom inversion_axiom :
 
 axiom range_axiom : (forall x:bits_1 [to_rep(x)]. in_range1(to_rep(x)))
 
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 2)
+
 axiom coerce_axiom :
-  (forall x:t [to_rep(of_rep(x))]. (in_range1(urem(x, of_int(2))) ->
-  (to_rep(of_rep(x)) = urem(x, of_int(2)))))
+  (forall x:t [to_rep(of_rep(x))]. (in_range1(urem(x, rliteral2)) ->
+  (to_rep(of_rep(x)) = urem(x, rliteral2))))
 
 function to_int4(x: bits_1) : int = tqtint(to_rep(x))
 
@@ -1363,7 +1375,11 @@ axiom range_int_axiom :
 
 type bits_2
 
-predicate in_range2(x: t) = (ule(of_int(0), x) and ule(x, of_int(3)))
+logic rliteral3 : t
+
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 3)
+
+predicate in_range2(x: t) = (ule(rliteral, x) and ule(x, rliteral3))
 
 predicate in_range_int1(x: int) = ((0 <= x) and (x <= 3))
 
@@ -1398,9 +1414,13 @@ axiom inversion_axiom1 :
 
 axiom range_axiom1 : (forall x:bits_2 [to_rep1(x)]. in_range2(to_rep1(x)))
 
+logic rliteral4 : t
+
+axiom rliteral_axiom4 : (tqtint(rliteral4) = 4)
+
 axiom coerce_axiom1 :
-  (forall x:t [to_rep1(of_rep1(x))]. (in_range2(urem(x, of_int(4))) ->
-  (to_rep1(of_rep1(x)) = urem(x, of_int(4)))))
+  (forall x:t [to_rep1(of_rep1(x))]. (in_range2(urem(x, rliteral4)) ->
+  (to_rep1(of_rep1(x)) = urem(x, rliteral4))))
 
 function to_int5(x: bits_2) : int = tqtint(to_rep1(x))
 
@@ -1409,7 +1429,11 @@ axiom range_int_axiom1 :
 
 type bits_3
 
-predicate in_range3(x: t) = (ule(of_int(0), x) and ule(x, of_int(7)))
+logic rliteral5 : t
+
+axiom rliteral_axiom5 : (tqtint(rliteral5) = 7)
+
+predicate in_range3(x: t) = (ule(rliteral, x) and ule(x, rliteral5))
 
 predicate in_range_int2(x: int) = ((0 <= x) and (x <= 7))
 
@@ -1444,9 +1468,13 @@ axiom inversion_axiom2 :
 
 axiom range_axiom2 : (forall x:bits_3 [to_rep2(x)]. in_range3(to_rep2(x)))
 
+logic rliteral6 : t
+
+axiom rliteral_axiom6 : (tqtint(rliteral6) = 8)
+
 axiom coerce_axiom2 :
-  (forall x:t [to_rep2(of_rep2(x))]. (in_range3(urem(x, of_int(8))) ->
-  (to_rep2(of_rep2(x)) = urem(x, of_int(8)))))
+  (forall x:t [to_rep2(of_rep2(x))]. (in_range3(urem(x, rliteral6)) ->
+  (to_rep2(of_rep2(x)) = urem(x, rliteral6))))
 
 function to_int6(x: bits_3) : int = tqtint(to_rep2(x))
 
@@ -1455,7 +1483,11 @@ axiom range_int_axiom2 :
 
 type bits_5
 
-predicate in_range4(x: t) = (ule(of_int(0), x) and ule(x, of_int(31)))
+logic rliteral7 : t
+
+axiom rliteral_axiom7 : (tqtint(rliteral7) = 31)
+
+predicate in_range4(x: t) = (ule(rliteral, x) and ule(x, rliteral7))
 
 predicate in_range_int3(x: int) = ((0 <= x) and (x <= 31))
 
@@ -1490,9 +1522,13 @@ axiom inversion_axiom3 :
 
 axiom range_axiom3 : (forall x:bits_5 [to_rep3(x)]. in_range4(to_rep3(x)))
 
+logic rliteral8 : t
+
+axiom rliteral_axiom8 : (tqtint(rliteral8) = 32)
+
 axiom coerce_axiom3 :
-  (forall x:t [to_rep3(of_rep3(x))]. (in_range4(urem(x, of_int(32))) ->
-  (to_rep3(of_rep3(x)) = urem(x, of_int(32)))))
+  (forall x:t [to_rep3(of_rep3(x))]. (in_range4(urem(x, rliteral8)) ->
+  (to_rep3(of_rep3(x)) = urem(x, rliteral8))))
 
 function to_int7(x: bits_5) : int = tqtint(to_rep3(x))
 
@@ -2205,24 +2241,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,bits_32) farray, int, int, (int,bits_32) farray, int,
-  int -> (int,bits_32) farray
-
-axiom concat_def :
-  (forall a:(int,bits_32) farray. forall b:(int,bits_32) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : bits_32, int -> (int,bits_32) farray
-
-axiom singleton_def :
-  (forall v:bits_32.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq12 : (int,bits_32) farray, int, int, (int,bits_32) farray, int,
   int -> bool
 
@@ -2233,17 +2251,17 @@ axiom bool_eq_def11 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_184:int. ((((a__first <= temp___idx_184) and
-  (temp___idx_184 <= a__last)) and
-  (to_rep4((a[temp___idx_184])) = to_rep4((b[((b__first - a__first) + temp___idx_184)])))) or
-  (not ((a__first <= temp___idx_184) and (temp___idx_184 <= a__last)))))) ->
+  (forall temp___idx_206:int. ((((a__first <= temp___idx_206) and
+  (temp___idx_206 <= a__last)) and
+  (to_rep4((a[temp___idx_206])) = to_rep4((b[((b__first - a__first) + temp___idx_206)])))) or
+  (not ((a__first <= temp___idx_206) and (temp___idx_206 <= a__last)))))) ->
   (bool_eq12(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_184:int. (((a__first <= temp___idx_184) and
-  (temp___idx_184 <= a__last)) ->
-  (to_rep4((a[temp___idx_184])) = to_rep4((b[((b__first - a__first) + temp___idx_184)]))))))) ->
+  (forall temp___idx_206:int. (((a__first <= temp___idx_206) and
+  (temp___idx_206 <= a__last)) ->
+  (to_rep4((a[temp___idx_206])) = to_rep4((b[((b__first - a__first) + temp___idx_206)]))))))) ->
   (bool_eq12(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -2253,37 +2271,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_184:int. (((a__first <= temp___idx_184) and
-  (temp___idx_184 <= a__last)) ->
-  (to_rep4((a[temp___idx_184])) = to_rep4((b[((b__first - a__first) + temp___idx_184)])))))))))
-
-logic compare : (int,bits_32) farray, int, int, (int,bits_32) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,bits_32) farray. forall b:(int,bits_32) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq12(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,bits_32) farray. forall b:(int,bits_32) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq12(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and ult2(to_rep4((a[(i + 1)])), to_rep4((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,bits_32) farray. forall b:(int,bits_32) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq12(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and ugt2(to_rep4((a[(j + 1)])), to_rep4((b[(i + 1)]))))))))))))
+  (forall temp___idx_206:int. (((a__first <= temp___idx_206) and
+  (temp___idx_206 <= a__last)) ->
+  (to_rep4((a[temp___idx_206])) = to_rep4((b[((b__first - a__first) + temp___idx_206)])))))))))
 
 type us_split_fields2 = { rec__decadriver__driver_type__part_id : bits_32;
 rec__decadriver__driver_type__lot_id : bits_32;
@@ -2609,12 +2599,7 @@ type driver_type__ref = { driver_type__content : us_rep1
 function driver_type__ref___projection(a: driver_type__ref) : us_rep1 =
   (a).driver_type__content
 
-logic temp___4490 : t2 -> (int,bits_32) farray
-
-axiom def_axiom :
-  (forall temp___4492:t2.
-  (forall temp___4493:int.
-  ((temp___4490(temp___4492)[temp___4493]) = of_rep4(temp___4492))))
+logic temp___4981 : t2 -> (int,bits_32) farray
 
 logic to_rep5 : bits_16 -> t1
 
@@ -2632,6 +2617,11 @@ function to_int9(x: bits_16) : int = tqtint1(to_rep5(x))
 
 axiom range_int_axiom5 :
   (forall x:bits_16 [to_int9(x)]. uint_in_range1(to_int9(x)))
+
+axiom def_axiom :
+  (forall temp___4983:t2.
+  (forall temp___4984:int.
+  (to_rep4((temp___4981(temp___4983)[temp___4984])) = temp___4983)))
 
 logic self__ : bits_32
 
@@ -2711,7 +2701,5 @@ logic self__37 : bool
 
 logic self__38 : bool
 
-logic temp___4590 : bool
-
  (* File "decadriver.ads", line 242, characters 0-0 *)
-goal WP_parameter_def : (temp___4590 = false)
+goal WP_parameter_def : (forall temp___5083:bool. (temp___5083 = false))

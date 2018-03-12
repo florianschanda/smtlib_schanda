@@ -402,47 +402,14 @@ logic to_x : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic us : int
-
-logic us1 : int
-
-logic o : integer
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic p__po_x__assume : int
-
-axiom H : ((us = 0) and in_range(0))
-
-axiom H1 : (to_rep(po__split_discrs) = 0)
-
-axiom H2 : (0 = to_rep(po__split_discrs))
-
-axiom H3 : ((us1 = 0) and in_range(0))
-
-axiom H4 : (to_rep(to____split_discrs) = 0)
-
-axiom H5 : (0 = to_rep(to____split_discrs))
-
-axiom H6 : (po__split_discrs = o)
-
-axiom H7 : (o = o1)
-
-axiom H8 : (o2 = o1)
-
-axiom H9 : (p__po_x__assume = to_rep(o2))
-
-axiom H10 : (p__po_x__assume = po_x)
-
-axiom H11 : in_range(po_x)
-
-axiom H12 : (to_rep(to____split_discrs) = to_x)
-
-axiom H13 : in_range(to_x)
-
-axiom H14 : (po_x = 0)
-
  (* File "system.ads", line 81, characters 0-0 *)
-goal WP_parameter_def : (to_x = 0)
+goal WP_parameter_def :
+  (forall us:int. forall us1:int. forall o:integer. forall o1:integer.
+  forall o2:integer. forall p__po_x__assume:int. (((us = 0) and
+  in_range(0)) -> ((to_rep(po__split_discrs) = 0) ->
+  ((0 = to_rep(po__split_discrs)) -> (((us1 = 0) and in_range(0)) ->
+  ((to_rep(to____split_discrs) = 0) -> ((0 = to_rep(to____split_discrs)) ->
+  ((((((po__split_discrs = o) and (o = o1)) and (o2 = o1)) and
+  (p__po_x__assume = to_rep(o2))) and (p__po_x__assume = po_x)) ->
+  (in_range(po_x) -> ((to_rep(to____split_discrs) = to_x) ->
+  (in_range(to_x) -> ((po_x = 0) -> (to_x = 0)))))))))))))

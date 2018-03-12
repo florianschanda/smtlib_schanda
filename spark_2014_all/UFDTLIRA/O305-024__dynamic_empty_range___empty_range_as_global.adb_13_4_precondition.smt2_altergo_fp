@@ -185,15 +185,5 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 axiom max__def_axiom : (max = 100)
 
-logic e : int
-
-logic e1 : int
-
-axiom H : in_range(c)
-
-axiom H1 : in_range(max)
-
-axiom H2 : ((first <= 100) -> dynamic_property(first, 100, e))
-
  (* File "empty_range_as_global.adb", line 4, characters 0-0 *)
 goal WP_parameter_def : true

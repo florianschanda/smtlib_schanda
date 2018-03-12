@@ -46,7 +46,7 @@
 (declare-const dummy natural)
 (declare-datatypes () ((natural__ref (mk_natural__ref (natural__content natural)))))
 (define-fun natural__ref___projection ((a natural__ref)) natural (natural__content a))
-(define-fun dynamic_invariant ((temp___expr_33 Int) (temp___is_init_30 Bool) (temp___skip_constant_31 Bool) (temp___do_toplevel_32 Bool)) Bool (=> (or (= temp___is_init_30 true) (<= 0 2147483647)) (in_range temp___expr_33)))
+(define-fun dynamic_invariant ((temp___expr_39 Int) (temp___is_init_35 Bool) (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool) (temp___do_typ_inv_38 Bool)) Bool (=> (or (= temp___is_init_35 true) (<= 0 2147483647)) (in_range temp___expr_39)))
 (declare-fun property (Int Int) Bool)
 (declare-fun property__function_guard (Bool Int Int) Bool)
 (assert true)

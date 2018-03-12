@@ -120,27 +120,8 @@ axiom f_6__post_axiom :
   a__priv__i, a__h)]. (((in_range(a__g) and in_range(a__priv__i)) and
   in_range(a__h)) -> in_range(f_6(a__g, a__priv__i, a__h))))
 
-logic g : int
-
-logic i : int
-
-logic h : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-axiom H : in_range(h)
-
-axiom H1 : in_range(g)
-
-axiom H2 : in_range(i)
-
-axiom H3 : ((o = f_6(g, i, h)) and in_range(o))
-
-axiom H4 : (o1 = (h + o))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(o1)
+goal WP_parameter_def :
+  (forall g:int. forall i:int. forall h:int. forall o:int. forall o1:int.
+  (in_range(h) -> (in_range(g) -> (in_range(i) -> ((((o = f_6(g, i, h)) and
+  in_range(o)) and (o1 = (h + o))) -> in_range(o1))))))

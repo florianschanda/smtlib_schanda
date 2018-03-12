@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1487,8 +1487,8 @@ axiom keys__post_axiom :
   rec__p__my_maps__map__capacity = container; rec__p__my_maps__map__modulus =
   container1 }; us_split_fields1 = { rec__p__my_maps__map = container2 }
   })) and
-  (forall temp___447:int. ((in_range7(temp___447) and ((1 <= temp___447) and
-  (temp___447 <= (0 + length2(keys({ us_split_discrs1 = {
+  (forall temp___492:int. ((in_range7(temp___492) and ((1 <= temp___492) and
+  (temp___492 <= (0 + length2(keys({ us_split_discrs1 = {
   rec__p__my_maps__map__capacity = container; rec__p__my_maps__map__modulus =
   container1 }; us_split_fields1 = { rec__p__my_maps__map = container2 }
   })))))) -> (has_key(model__({ us_split_discrs1 = {
@@ -1496,7 +1496,7 @@ axiom keys__post_axiom :
   container1 }; us_split_fields1 = { rec__p__my_maps__map = container2 } }),
   get1(keys({ us_split_discrs1 = { rec__p__my_maps__map__capacity =
   container; rec__p__my_maps__map__modulus = container1 }; us_split_fields1 =
-  { rec__p__my_maps__map = container2 } }), temp___447)) = true)))) and
+  { rec__p__my_maps__map = container2 } }), temp___492)) = true)))) and
   (forall key1:int. ((in_range6(key1) and (has_key(model__({
   us_split_discrs1 = { rec__p__my_maps__map__capacity = container;
   rec__p__my_maps__map__modulus = container1 }; us_split_fields1 = {
@@ -1946,43 +1946,27 @@ axiom w_get__post_axiom1 :
   ((in_range1(witness2) and (has_witness1(container, witness2) = true)) ->
   in_range10(w_get1(container, witness2)))))
 
-logic l__split_fields : us_main_type
-
-logic o : int
-
-logic result : bool
-
-logic l__split_fields1 : us_main_type
-
-logic l__split_fields2 : us_main_type
-
-logic l__split_fields3 : us_main_type
-
-logic l__split_fields4 : us_main_type
-
-axiom H : in_range3(k)
-
-axiom H1 : in_range2(e)
-
-axiom H2 : ((has_key(model__({ us_split_discrs1 = {
+ (* File "a-cfhama.ads", line 781, characters 0-0 *)
+goal WP_parameter_def :
+  (forall l__split_fields:us_main_type. forall result:bool.
+  forall l__split_fields1:us_main_type. forall l__split_fields2:us_main_type.
+  forall l__split_fields3:us_main_type. forall l__split_fields4:us_main_type.
+  (in_range3(k) -> (in_range2(e) -> (((has_key(model__({ us_split_discrs1 = {
   rec__p__my_maps__map__capacity = l__split_discrs;
   rec__p__my_maps__map__modulus = l__split_discrs1 }; us_split_fields1 = {
   rec__p__my_maps__map = l__split_fields } }), k) = true) or (length({
   us_split_discrs1 = { rec__p__my_maps__map__capacity = l__split_discrs;
   rec__p__my_maps__map__modulus = l__split_discrs1 }; us_split_fields1 = {
-  rec__p__my_maps__map = l__split_fields } }) <  to_rep(l__split_discrs)))
-
-axiom H3 : ((result = has_key(model__({ us_split_discrs1 = {
+  rec__p__my_maps__map = l__split_fields } }) <  to_rep(l__split_discrs))) ->
+  (((((result = has_key(model__({ us_split_discrs1 = {
   rec__p__my_maps__map__capacity = l__split_discrs;
   rec__p__my_maps__map__modulus = l__split_discrs1 }; us_split_fields1 = {
   rec__p__my_maps__map = l__split_fields } }), k)) and ((result = true) <->
   (has_key(model__({ us_split_discrs1 = { rec__p__my_maps__map__capacity =
   l__split_discrs; rec__p__my_maps__map__modulus = l__split_discrs1 };
   us_split_fields1 = { rec__p__my_maps__map = l__split_fields } }),
-  k) = true)))
-
-axiom H4 : ((result = true) -> ((((((oeq2(positions({ us_split_discrs1 = {
-  rec__p__my_maps__map__capacity = l__split_discrs;
+  k) = true))) and (((result = true) and ((((((oeq2(positions({
+  us_split_discrs1 = { rec__p__my_maps__map__capacity = l__split_discrs;
   rec__p__my_maps__map__modulus = l__split_discrs1 }; us_split_fields1 = {
   rec__p__my_maps__map = l__split_fields1 } }), positions({
   us_split_discrs1 = { rec__p__my_maps__map__capacity = l__split_discrs;
@@ -1997,13 +1981,13 @@ axiom H4 : ((result = true) -> ((((((oeq2(positions({ us_split_discrs1 = {
   rec__p__my_maps__map__capacity = l__split_discrs;
   rec__p__my_maps__map__modulus = l__split_discrs1 }; us_split_fields1 = {
   rec__p__my_maps__map = l__split_fields1 } }, k))) = k)) and
-  (((bool_eq1(length2(keys({ us_split_discrs1 = {
+  ((bool_eq1(length2(keys({ us_split_discrs1 = {
   rec__p__my_maps__map__capacity = l__split_discrs;
   rec__p__my_maps__map__modulus = l__split_discrs1 }; us_split_fields1 = {
   rec__p__my_maps__map = l__split_fields } })), length2(keys({
   us_split_discrs1 = { rec__p__my_maps__map__capacity = l__split_discrs;
   rec__p__my_maps__map__modulus = l__split_discrs1 }; us_split_fields1 = {
-  rec__p__my_maps__map = l__split_fields1 } }))) = true) ->
+  rec__p__my_maps__map = l__split_fields1 } }))) = true) and
   (forall i:int. (((1 <= i) and (i <= (0 + length2(keys({ us_split_discrs1 =
   { rec__p__my_maps__map__capacity = l__split_discrs;
   rec__p__my_maps__map__modulus = l__split_discrs1 }; us_split_fields1 = {
@@ -2020,18 +2004,11 @@ axiom H4 : ((result = true) -> ((((((oeq2(positions({ us_split_discrs1 = {
   rec__p__my_maps__map = l__split_fields } }), i) = get1(keys({
   us_split_discrs1 = { rec__p__my_maps__map__capacity = l__split_discrs;
   rec__p__my_maps__map__modulus = l__split_discrs1 }; us_split_fields1 = {
-  rec__p__my_maps__map = l__split_fields1 } }), i)))))) and
-  (not (bool_eq1(length2(keys({ us_split_discrs1 = {
-  rec__p__my_maps__map__capacity = l__split_discrs;
-  rec__p__my_maps__map__modulus = l__split_discrs1 }; us_split_fields1 = {
-  rec__p__my_maps__map = l__split_fields } })), length2(keys({
+  rec__p__my_maps__map = l__split_fields1 } }), i))))))) and (get(model__({
   us_split_discrs1 = { rec__p__my_maps__map__capacity = l__split_discrs;
   rec__p__my_maps__map__modulus = l__split_discrs1 }; us_split_fields1 = {
-  rec__p__my_maps__map = l__split_fields1 } }))) = false)))) and
-  (get(model__({ us_split_discrs1 = { rec__p__my_maps__map__capacity =
-  l__split_discrs; rec__p__my_maps__map__modulus = l__split_discrs1 };
-  us_split_fields1 = { rec__p__my_maps__map = l__split_fields1 } }),
-  k) = e)) and (match_bool(keys_included(model__({ us_split_discrs1 = {
+  rec__p__my_maps__map = l__split_fields1 } }), k) = e)) and
+  (match_bool(keys_included(model__({ us_split_discrs1 = {
   rec__p__my_maps__map__capacity = l__split_discrs;
   rec__p__my_maps__map__modulus = l__split_discrs1 }; us_split_fields1 = {
   rec__p__my_maps__map = l__split_fields1 } }), model__({ us_split_discrs1 =
@@ -2050,9 +2027,8 @@ axiom H4 : ((result = true) -> ((((((oeq2(positions({ us_split_discrs1 = {
   rec__p__my_maps__map = l__split_fields1 } }), model__({ us_split_discrs1 =
   { rec__p__my_maps__map__capacity = l__split_discrs;
   rec__p__my_maps__map__modulus = l__split_discrs1 }; us_split_fields1 = {
-  rec__p__my_maps__map = l__split_fields } }), k) = true)))
-
-axiom H5 : ((not (result = true)) -> ((((((((length({ us_split_discrs1 = {
+  rec__p__my_maps__map = l__split_fields } }), k) = true))) or
+  ((not (result = true)) and (((((((((length({ us_split_discrs1 = {
   rec__p__my_maps__map__capacity = l__split_discrs;
   rec__p__my_maps__map__modulus = l__split_discrs1 }; us_split_fields1 = {
   rec__p__my_maps__map = l__split_fields2 } }) = (length({ us_split_discrs1 =
@@ -2109,16 +2085,11 @@ axiom H5 : ((not (result = true)) -> ((((((((length({ us_split_discrs1 = {
   rec__p__my_maps__map = l__split_fields } }), find({ us_split_discrs1 = {
   rec__p__my_maps__map__capacity = l__split_discrs;
   rec__p__my_maps__map__modulus = l__split_discrs1 }; us_split_fields1 = {
-  rec__p__my_maps__map = l__split_fields2 } }, k)) = true)))
-
-axiom H6 : ((not (result = true)) -> (l__split_fields1 = l__split_fields2))
-
-axiom H7 : (l__split_fields3 = l__split_fields1)
-
-axiom H8 : (l__split_fields4 = l__split_fields1)
-
- (* File "a-cfhama.ads", line 781, characters 0-0 *)
-goal WP_parameter_def : (has_key(model__({ us_split_discrs1 = {
+  rec__p__my_maps__map = l__split_fields2 } }, k)) = true)) and ({
+  rec__p__my_maps__map = l__split_fields1 } = { rec__p__my_maps__map =
+  l__split_fields2 }))))) and ((l__split_fields3 = l__split_fields1) and ({
+  rec__p__my_maps__map = l__split_fields4 } = { rec__p__my_maps__map =
+  l__split_fields1 }))) -> (has_key(model__({ us_split_discrs1 = {
   rec__p__my_maps__map__capacity = l__split_discrs;
   rec__p__my_maps__map__modulus = l__split_discrs1 }; us_split_fields1 = {
-  rec__p__my_maps__map = l__split_fields3 } }), k) = true)
+  rec__p__my_maps__map = l__split_fields3 } }), k) = true))))))

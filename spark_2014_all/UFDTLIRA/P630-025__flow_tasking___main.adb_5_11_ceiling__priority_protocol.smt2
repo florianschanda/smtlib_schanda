@@ -42,7 +42,7 @@
 (declare-datatypes () ((example_pt__ref (mk_example_pt__ref (example_pt__content example_pt)))))
 (define-fun example_pt__ref___projection ((a example_pt__ref)) example_pt (example_pt__content a))
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
-(define-fun dynamic_invariant ((temp___expr_214 Int) (temp___is_init_211 Bool) (temp___skip_constant_212 Bool) (temp___do_toplevel_213 Bool)) Bool (=> (or (= temp___is_init_211 true) (<= 98 98)) (in_range temp___expr_214)))
+(define-fun dynamic_invariant ((temp___expr_242 Int) (temp___is_init_238 Bool) (temp___skip_constant_239 Bool) (temp___do_toplevel_240 Bool) (temp___do_typ_inv_241 Bool)) Bool (=> (or (= temp___is_init_238 true) (<= 98 98)) (in_range temp___expr_242)))
 (assert (not (<= 48 98)))
 (check-sat)
 (exit)

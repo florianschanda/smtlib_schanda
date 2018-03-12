@@ -111,13 +111,8 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic v : int
-
-axiom H : (in_range(i7s) and ((2 <= i7s) and (i7s <= 2147483647)))
-
-axiom H1 : (in_range(v) and ((2 <= v) and (v <= 2147483647)))
-
-axiom H2 : (not (v = 1))
-
  (* File "tests.adb", line 15, characters 0-0 *)
-goal WP_parameter_def : (2 <= 1)
+goal WP_parameter_def :
+  (forall v:int. ((in_range(i7s) and ((2 <= i7s) and (i7s <= 2147483647))) ->
+  ((in_range(v) and ((2 <= v) and (v <= 2147483647))) -> ((not (v = 1)) ->
+  (2 <= 1)))))

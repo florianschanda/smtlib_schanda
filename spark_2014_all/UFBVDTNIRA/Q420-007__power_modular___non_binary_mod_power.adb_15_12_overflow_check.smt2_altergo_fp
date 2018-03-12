@@ -779,7 +779,15 @@ function t1__ref___projection(a: t1__ref) : t1 = (a).t1__content
 
 type t2
 
-predicate in_range1(x: t) = (ule(of_int(0), x) and ule(x, of_int(4)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 4)
+
+predicate in_range1(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 4))
 
@@ -838,77 +846,20 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic x : t
+logic rliteral2 : t
 
-logic y : t
-
-logic z : int
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic result : t
-
-logic x1 : t
-
-logic result1 : t
-
-logic y1 : t
-
-logic result2 : int
-
-logic z1 : int
-
-logic result3 : t
-
-logic x2 : t
-
-logic result4 : t
-
-logic y2 : t
-
-logic result5 : int
-
-logic z2 : int
-
-axiom H : ((o = id(of_int(2))) and (o = of_int(2)))
-
-axiom H1 : (result = x)
-
-axiom H2 : (x1 = o)
-
-axiom H3 : true
-
-axiom H4 : ((o1 = id__2(of_int(2))) and (in_range1(o1) and (o1 = of_int(2))))
-
-axiom H5 : (result1 = y)
-
-axiom H6 : (y1 = o1)
-
-axiom H7 : in_range1(y1)
-
-axiom H8 : ((o2 = id__3(2)) and (in_range(o2) and (o2 = 2)))
-
-axiom H9 : (result2 = z)
-
-axiom H10 : (z1 = o2)
-
-axiom H11 : in_range(z1)
-
-axiom H12 : (result3 = x1)
-
-axiom H13 : (x2 = power1(x1, 4))
-
-axiom H14 : (result4 = y1)
-
-axiom H15 : (y2 = of_int(comp_mod(power(tqtint(y1), 4),5)))
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 2)
 
  (* File "non_binary_mod_power.adb", line 7, characters 0-0 *)
-goal WP_parameter_def : in_range(power(z1, 4))
+goal WP_parameter_def :
+  (forall x:t. forall y:t. forall z:int. forall o:t. forall o1:t.
+  forall o2:int. forall result:t. forall x1:t. forall result1:t. forall y1:t.
+  forall result2:int. forall z1:int. forall result3:t. forall x2:t.
+  forall result4:t. forall y2:t. ((((o = id(rliteral2)) and
+  (o = rliteral2)) and ((result = x) and (x1 = o))) ->
+  ((((o1 = id__2(rliteral2)) and (in_range1(o1) and (o1 = rliteral2))) and
+  ((result1 = y) and (y1 = o1))) -> (in_range1(y1) -> ((((o2 = id__3(2)) and
+  (in_range(o2) and (o2 = 2))) and ((result2 = z) and (z1 = o2))) ->
+  (in_range(z1) -> (((result3 = x1) and (x2 = power1(x1, 4))) ->
+  (((result4 = y1) and (y2 = of_int(comp_mod(power(tqtint(y1), 4),5)))) ->
+  in_range(power(z1, 4))))))))))

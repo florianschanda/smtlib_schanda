@@ -81,12 +81,6 @@ axiom bool_ge_axiom :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -98,6 +92,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -800,15 +800,15 @@ axiom elements__post_axiom :
   rec__my_ordered_sets__n__set = container3 } })) = length({
   us_split_discrs1 = { rec__my_ordered_sets__n__set__capacity = container2 };
   us_split_fields3 = { rec__my_ordered_sets__n__set = container3 } })) and
-  (forall temp___626:int. ((in_range6(temp___626) and ((1 <= temp___626) and
-  (temp___626 <= (0 + length2(elements({ us_split_discrs1 = {
+  (forall temp___683:int. ((in_range6(temp___683) and ((1 <= temp___683) and
+  (temp___683 <= (0 + length2(elements({ us_split_discrs1 = {
   rec__my_ordered_sets__n__set__capacity = container2 }; us_split_fields3 = {
   rec__my_ordered_sets__n__set = container3 } })))))) -> (contains(model__({
   us_split_discrs1 = { rec__my_ordered_sets__n__set__capacity = container2 };
   us_split_fields3 = { rec__my_ordered_sets__n__set = container3 } }),
   get(elements({ us_split_discrs1 = {
   rec__my_ordered_sets__n__set__capacity = container2 }; us_split_fields3 = {
-  rec__my_ordered_sets__n__set = container3 } }), temp___626)) = true)))) and
+  rec__my_ordered_sets__n__set = container3 } }), temp___683)) = true)))) and
   (forall item:natural. forall item1:integer. ((contains(model__({
   us_split_discrs1 = { rec__my_ordered_sets__n__set__capacity = container2 };
   us_split_fields3 = { rec__my_ordered_sets__n__set = container3 } }), {
@@ -1087,27 +1087,13 @@ axiom length__post_axiom2 :
 
 axiom get__post_axiom : true
 
-logic o : natural
-
-logic o1 : integer
-
-logic o2 : int
-
-logic result : bool
-
-axiom H : in_range5(key)
-
-axiom H1 : ((o2 = length({ us_split_discrs1 = {
-  rec__my_ordered_sets__n__set__capacity = container }; us_split_fields3 = {
-  rec__my_ordered_sets__n__set = container1 } })) and (in_range3(o2) and
-  (o2 <= to_rep2(container))))
-
-axiom H2 : (((o2 = 0) -> (result = true)) and ((not (o2 = 0)) ->
-  (result = false)))
-
-axiom H3 : (not (result = true))
-
  (* File "a-cforse.ads", line 1649, characters 0-0 *)
-goal WP_parameter_def : (not (is_empty({ us_split_discrs1 = {
+goal WP_parameter_def :
+  (forall o:int. forall result:bool. (in_range5(key) -> ((((o = length({
+  us_split_discrs1 = { rec__my_ordered_sets__n__set__capacity = container };
+  us_split_fields3 = { rec__my_ordered_sets__n__set = container1 } })) and
+  (in_range3(o) and (o <= to_rep2(container)))) and (((o = 0) and
+  (result = true)) or ((not (o = 0)) and (result = false)))) ->
+  ((not (result = true)) -> (not (is_empty({ us_split_discrs1 = {
   rec__my_ordered_sets__n__set__capacity = container }; us_split_fields3 = {
-  rec__my_ordered_sets__n__set = container1 } }) = true))
+  rec__my_ordered_sets__n__set = container1 } }) = true))))))

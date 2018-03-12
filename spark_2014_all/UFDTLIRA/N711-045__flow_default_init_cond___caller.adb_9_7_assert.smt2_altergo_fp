@@ -323,18 +323,11 @@ axiom add__post_axiom :
   in_range(add({ us_split_fields3 = { rec__dic__pr_record_t__x = r;
   rec__dic__pr_record_t__y = r1 } })))
 
-logic i__split_fields : integer
-
-logic r__split_fields : integer
-
-logic r__split_fields1 : integer
-
-axiom H : ((to_rep(r__split_fields) = 0) and (to_rep(r__split_fields1) = 0))
-
-axiom H1 : (evaluate({ us_split_fields1 = { rec__dic__pr_t__x =
-  i__split_fields } }) = 0)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (add2({ us_split_fields3 = {
-  rec__dic__pr_record_t__x = r__split_fields; rec__dic__pr_record_t__y =
-  r__split_fields1 } }) = 0)
+goal WP_parameter_def :
+  (forall i__split_fields:integer. forall r__split_fields:integer.
+  forall r__split_fields1:integer. (((to_rep(r__split_fields) = 0) and
+  (to_rep(r__split_fields1) = 0)) -> ((evaluate({ us_split_fields1 = {
+  rec__dic__pr_t__x = i__split_fields } }) = 0) -> (add2({ us_split_fields3 =
+  { rec__dic__pr_record_t__x = r__split_fields; rec__dic__pr_record_t__y =
+  r__split_fields1 } }) = 0))))

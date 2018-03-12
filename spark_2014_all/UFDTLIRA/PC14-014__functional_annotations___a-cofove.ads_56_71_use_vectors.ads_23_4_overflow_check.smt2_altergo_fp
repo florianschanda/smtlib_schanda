@@ -79,12 +79,6 @@ axiom Max_assoc :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -96,6 +90,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -213,40 +213,6 @@ type count_type__ref = { count_type__content : count_type
 function count_type__ref___projection(a: count_type__ref) : count_type =
   (a).count_type__content
 
-logic id : int, int, int -> int
-
-logic id__function_guard : int, int, int, int -> prop
-
-type smaller
-
-predicate in_range4(x: int) = (((- 2147483647) <= x) and (x <= 2147483647))
-
-logic bool_eq5 : int, int -> bool
-
-axiom bool_eq_def4 :
-  (forall x:int. forall y:int [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE4 : us_image -> int
-
-logic user_eq3 : smaller, smaller -> bool
-
-logic dummy3 : smaller
-
-type smaller__ref = { smaller__content : smaller
-}
-
-function smaller__ref___projection(a: smaller__ref) : smaller =
-  (a).smaller__content
-
-logic fst : int
-
-logic attr__ATTRIBUTE_ADDRESS : int
-
 logic to_rep : integer -> int
 
 logic of_rep : int -> integer
@@ -262,7 +228,38 @@ axiom coerce_axiom :
 
 logic first : int
 
+logic last : int
+
 predicate dynamic_property(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq5 : int, int -> bool
+
+axiom bool_eq_def4 :
+  (forall x:int. forall y:int [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> int
+
+logic user_eq3 : integer, integer -> bool
+
+logic dummy3 : integer
+
+type index_type__ref = { index_type__content : integer
+}
+
+function index_type__ref___2__projection(a: index_type__ref) : integer =
+  (a).index_type__content
+
+logic first1 : int
+
+logic last1 : int
+
+predicate dynamic_property1(first_int: int, last_int: int, x: int) =
   ((first_int <= x) and (x <= last_int))
 
 logic bool_eq6 : int, int -> bool
@@ -281,116 +278,27 @@ logic user_eq4 : integer, integer -> bool
 
 logic dummy4 : integer
 
-type bigger__ref = { bigger__content : integer
-}
-
-function bigger__ref___projection(a: bigger__ref) : integer =
-  (a).bigger__content
-
-axiom first__def_axiom : (first = fst)
-
-logic lst : int
-
-logic attr__ATTRIBUTE_ADDRESS1 : int
-
-logic first1 : int
-
-logic last : int
-
-predicate dynamic_property1(first_int: int, last_int: int, x: int) =
-  ((first_int <= x) and (x <= last_int))
-
-logic bool_eq7 : int, int -> bool
-
-axiom bool_eq_def6 :
-  (forall x:int. forall y:int [bool_eq7(x, y)]. (((x = y) -> (bool_eq7(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq7(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE6 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE6 : us_image -> int
-
-logic user_eq5 : integer, integer -> bool
-
-logic dummy5 : integer
-
-type index_type__ref = { index_type__content : integer
-}
-
-function index_type__ref___projection(a: index_type__ref) : integer =
-  (a).index_type__content
-
-logic first2 : int
-
-logic last1 : int
-
-predicate dynamic_property2(first_int: int, last_int: int, x: int) =
-  ((first_int <= x) and (x <= last_int))
-
-logic bool_eq8 : int, int -> bool
-
-axiom bool_eq_def7 :
-  (forall x:int. forall y:int [bool_eq8(x, y)]. (((x = y) -> (bool_eq8(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq8(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE7 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check7 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE7 : us_image -> int
-
-logic user_eq6 : integer, integer -> bool
-
-logic dummy6 : integer
-
-type index_type__ref1 = { index_type__content1 : integer
-}
-
-function index_type__ref___2__projection(a: index_type__ref1) : integer =
-  (a).index_type__content1
-
-logic first3 : int
-
-logic last2 : int
-
-predicate dynamic_property3(first_int: int, last_int: int, x: int) =
-  ((first_int <= x) and (x <= last_int))
-
-logic bool_eq9 : int, int -> bool
-
-axiom bool_eq_def8 :
-  (forall x:int. forall y:int [bool_eq9(x, y)]. (((x = y) -> (bool_eq9(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq9(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE8 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check8 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE8 : us_image -> int
-
-logic user_eq7 : integer, integer -> bool
-
-logic dummy7 : integer
-
 type extended_index__ref = { extended_index__content : integer
 }
 
 function extended_index__ref___projection(a: extended_index__ref) : integer =
   (a).extended_index__content
 
-axiom first__def_axiom1 : (first3 = (first2 - 1))
+axiom first__def_axiom : (first1 = (first - 1))
 
-axiom last__def_axiom : (last2 = (min(2147483646, last1) + 1))
+axiom last__def_axiom : (last1 = (min(2147483646, last) + 1))
 
 logic no_index : int
 
-logic attr__ATTRIBUTE_ADDRESS2 : int
+logic attr__ATTRIBUTE_ADDRESS : int
 
 logic last_count : int
 
-logic attr__ATTRIBUTE_ADDRESS3 : int
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic id : int, int, int -> int
+
+logic id__function_guard : int, int, int, int -> prop
 
 axiom id__post_axiom :
   (forall x:int. forall f:int. forall l:int [id(x, f, l)].
@@ -398,65 +306,29 @@ axiom id__post_axiom :
   (x <= l)) -> ((f <= id(x, f, l)) and (id(x, f, l) <= l))) and
   in_range1(id(x, f, l)))))
 
+logic fst : int
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
 axiom fst__def_axiom : (fst = id(1, (- 2147483647), 2147483647))
+
+logic lst : int
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
 
 axiom lst__def_axiom : (lst = id(2147483647, fst, 2147483647))
 
-axiom first__def_axiom2 : (first1 = fst)
+axiom no_index__def_axiom : (no_index = first1)
+
+axiom last_count__def_axiom : (((last <  first) -> (last_count = 0)) and
+  ((not (last <  first)) -> ((((last <  (- 1)) or
+  ((last - 2147483647) <  first)) -> (last_count = ((last - first) + 1))) and
+  ((not ((last <  (- 1)) or ((last - 2147483647) <  first))) ->
+  (last_count = 2147483647)))))
+
+axiom first__def_axiom1 : (first = fst)
 
 axiom last__def_axiom1 : (last = lst)
 
-axiom no_index__def_axiom : (no_index = first3)
-
-axiom last_count__def_axiom : (((last1 <  first2) -> (last_count = 0)) and
-  ((not (last1 <  first2)) -> ((((last1 <  (- 1)) or
-  ((last1 - 2147483647) <  first2)) ->
-  (last_count = ((last1 - first2) + 1))) and ((not ((last1 <  (- 1)) or
-  ((last1 - 2147483647) <  first2))) -> (last_count = 2147483647)))))
-
-axiom first__def_axiom3 : (first2 = fst)
-
-axiom last__def_axiom2 : (last1 = lst)
-
-logic us : int
-
-logic us1 : int
-
-logic us2 : int
-
-logic use_vectors__my_vectors__no_index__assume : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic use_vectors__my_vectors__last_count__assume : int
-
-logic result : bool
-
-axiom H : in_range4(fst)
-
-axiom H1 : (id(1, (- 2147483647), 2147483647) = fst)
-
-axiom H2 : dynamic_property(first, 2147483647, lst)
-
-axiom H3 : (id(2147483647, fst, 2147483647) = lst)
-
  (* File "use_vectors.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : in_range1((min(2147483646, last1) + 1))
+goal WP_parameter_def : in_range1((min(2147483646, last) + 1))

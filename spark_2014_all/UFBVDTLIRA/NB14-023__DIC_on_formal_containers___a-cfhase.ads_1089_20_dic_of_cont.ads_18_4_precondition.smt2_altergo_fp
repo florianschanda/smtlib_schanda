@@ -81,12 +81,6 @@ axiom bool_ge_axiom :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -98,6 +92,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1414,8 +1414,8 @@ axiom elements__post_axiom :
   us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity = container3;
   rec__dic_of_cont__my_hase__set__modulus = container4 }; us_split_fields1 =
   { rec__dic_of_cont__my_hase__set = container5 } })) and
-  (forall temp___845:int. ((in_range5(temp___845) and ((1 <= temp___845) and
-  (temp___845 <= (0 + length3(elements({ us_split_discrs1 = {
+  (forall temp___916:int. ((in_range5(temp___916) and ((1 <= temp___916) and
+  (temp___916 <= (0 + length3(elements({ us_split_discrs1 = {
   rec__dic_of_cont__my_hase__set__capacity = container3;
   rec__dic_of_cont__my_hase__set__modulus = container4 }; us_split_fields1 =
   { rec__dic_of_cont__my_hase__set = container5 } })))))) ->
@@ -1425,7 +1425,7 @@ axiom elements__post_axiom :
   { rec__dic_of_cont__my_hase__set = container5 } }), get1(elements({
   us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity = container3;
   rec__dic_of_cont__my_hase__set__modulus = container4 }; us_split_fields1 =
-  { rec__dic_of_cont__my_hase__set = container5 } }), temp___845)) = true)))) and
+  { rec__dic_of_cont__my_hase__set = container5 } }), temp___916)) = true)))) and
   (forall item:int. ((in_range4(item) and (contains(model__({
   us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity = container3;
   rec__dic_of_cont__my_hase__set__modulus = container4 }; us_split_fields1 =
@@ -1664,29 +1664,13 @@ axiom w_get__post_axiom :
   ((in_range1(witness1) and (has_witness(container3, witness1) = true)) ->
   in_range2(w_get(container3, witness1)))))
 
-logic position__split_fields : count_type
-
-logic o : count_type
-
-logic o1 : count_type
-
-logic temp___2001 : count_type
-
-logic o2 : us_rep2
-
-logic o3 : int
-
-logic o4 : int
-
-axiom H : (to_rep(o) = 0)
-
-axiom H1 : (o = o1)
-
-axiom H2 : (temp___2001 = o1)
-
-axiom H3 : (temp___2001 = no_element)
-
-axiom H4 : ((has_key(positions({ us_split_discrs1 = {
+ (* File "a-cfhase.ads", line 1068, characters 0-0 *)
+goal WP_parameter_def :
+  (forall position__split_fields:count_type. forall o:count_type.
+  forall o1:count_type. forall temp___2119:count_type. forall o2:us_rep2.
+  forall o3:int. (((((to_rep(o) = 0) and (o = o1)) and
+  (temp___2119 = o1)) and (temp___2119 = no_element)) ->
+  (((has_key(positions({ us_split_discrs1 = {
   rec__dic_of_cont__my_hase__set__capacity = container;
   rec__dic_of_cont__my_hase__set__modulus = container1 }; us_split_fields1 =
   { rec__dic_of_cont__my_hase__set = container2 } }), { us_split_fields3 = {
@@ -1694,43 +1678,25 @@ axiom H4 : ((has_key(positions({ us_split_discrs1 = {
   }) = true) or (bool_eq6({ us_split_fields3 = {
   rec__dic_of_cont__my_hase__cursor__node = position__split_fields } }, {
   us_split_fields3 = { rec__dic_of_cont__my_hase__cursor__node = no_element }
-  }) = true))
-
-axiom H5 : (not (bool_eq6({ us_split_fields3 = {
+  }) = true)) -> ((not (bool_eq6({ us_split_fields3 = {
   rec__dic_of_cont__my_hase__cursor__node = position__split_fields } }, {
   us_split_fields3 = { rec__dic_of_cont__my_hase__cursor__node = no_element }
-  }) = true))
-
-axiom H6 : ((o3 = length({ us_split_discrs1 = {
+  }) = true)) -> (((o3 = length({ us_split_discrs1 = {
   rec__dic_of_cont__my_hase__set__capacity = container;
   rec__dic_of_cont__my_hase__set__modulus = container1 }; us_split_fields1 =
   { rec__dic_of_cont__my_hase__set = container2 } })) and (in_range1(o3) and
-  (o3 <= to_rep(container))))
-
-axiom H7 : ((o2 = positions({ us_split_discrs1 = {
+  (o3 <= to_rep(container)))) -> (((o2 = positions({ us_split_discrs1 = {
   rec__dic_of_cont__my_hase__set__capacity = container;
   rec__dic_of_cont__my_hase__set__modulus = container1 }; us_split_fields1 =
   { rec__dic_of_cont__my_hase__set = container2 } })) and ((not (has_key(o2,
   { us_split_fields3 = { rec__dic_of_cont__my_hase__cursor__node = no_element
   } }) = true)) and
-  (forall i:count_type. ((has_key(o2, { us_split_fields3 = {
-  rec__dic_of_cont__my_hase__cursor__node = i } }) = true) -> (((1 <= get(o2,
-  { us_split_fields3 = { rec__dic_of_cont__my_hase__cursor__node = i }
-  })) and (get(o2, { us_split_fields3 = {
-  rec__dic_of_cont__my_hase__cursor__node = i } }) <= length({
-  us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity = container;
+  (forall i:us_rep1. ((has_key(o2, i) = true) -> (((1 <= get(o2, i)) and
+  (get(o2, i) <= length({ us_split_discrs1 = {
+  rec__dic_of_cont__my_hase__set__capacity = container;
   rec__dic_of_cont__my_hase__set__modulus = container1 }; us_split_fields1 =
   { rec__dic_of_cont__my_hase__set = container2 } }))) and
-  (forall j:count_type. ((has_key(o2, { us_split_fields3 = {
-  rec__dic_of_cont__my_hase__cursor__node = j } }) = true) -> ((get(o2, {
-  us_split_fields3 = { rec__dic_of_cont__my_hase__cursor__node = i }
-  }) = get(o2, { us_split_fields3 = {
-  rec__dic_of_cont__my_hase__cursor__node = j } })) -> (bool_eq6({
-  us_split_fields3 = { rec__dic_of_cont__my_hase__cursor__node = i } }, {
-  us_split_fields3 = { rec__dic_of_cont__my_hase__cursor__node = j }
-  }) = true)))))))))
-
- (* File "a-cfhase.ads", line 1068, characters 0-0 *)
-goal WP_parameter_def : (has_key(o2, { us_split_fields3 = {
-  rec__dic_of_cont__my_hase__cursor__node = position__split_fields }
-  }) = true)
+  (forall j:us_rep1. ((has_key(o2, j) = true) -> ((get(o2, i) = get(o2,
+  j)) -> (bool_eq6(i, j) = true))))))))) -> (has_key(o2, { us_split_fields3 =
+  { rec__dic_of_cont__my_hase__cursor__node = position__split_fields }
+  }) = true)))))))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -377,14 +377,8 @@ type t3__ref = { t3__content : us_rep2
 
 function t3__ref___projection(a: t3__ref) : us_rep2 = (a).t3__content
 
-logic temp___158 : integer
-
-logic temp___157 : integer
-
-logic temp___156 : integer
-
-axiom H : (to_rep(temp___158) = 42)
-
  (* File "test_08_util.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : ((is_positive_good(to_rep(temp___158)) = true) or
-  (to_rep(temp___158) = (- 5)))
+goal WP_parameter_def :
+  (forall temp___183:integer. ((to_rep(temp___183) = 42) ->
+  ((is_positive_good(to_rep(temp___183)) = true) or
+  (to_rep(temp___183) = (- 5)))))

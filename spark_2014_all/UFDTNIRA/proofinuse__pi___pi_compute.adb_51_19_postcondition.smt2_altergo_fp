@@ -451,353 +451,130 @@ logic attr__ATTRIBUTE_ADDRESS21 : int
 
 logic attr__ATTRIBUTE_ADDRESS22 : int
 
-logic t1 : fixed
-
-logic t2 : fixed
-
-logic t3 : fixed
-
-logic t4 : fixed
-
-logic t5 : fixed
-
-logic t6 : fixed
-
-logic t7 : fixed
-
-logic t8 : fixed
-
-logic t9 : fixed
-
-logic t10 : fixed
-
-logic a1 : fixed
-
-logic a2 : fixed
-
-logic a3 : fixed
-
-logic a4 : fixed
-
-logic a5 : fixed
-
-logic a6 : fixed
-
-logic a7 : fixed
-
-logic a8 : fixed
-
-logic a9 : fixed
-
-logic a10 : fixed
-
-logic num : fixed
-
-logic den : fixed
-
-logic res : fixed
-
-logic pi_compute__shanks_fixed__result : fixed
-
-logic o : fixed
-
-logic o1 : fixed
-
-logic o2 : fixed
-
-logic o3 : fixed
-
-logic o4 : fixed
-
-logic o5 : fixed
-
-logic o6 : fixed
-
-logic o7 : fixed
-
-logic o8 : fixed
-
-logic o9 : fixed
-
-logic o10 : fixed
-
-logic o11 : fixed
-
-logic o12 : fixed
-
-logic o13 : fixed
-
-logic o14 : fixed
-
-logic o15 : fixed
-
-logic o16 : fixed
-
-logic o17 : fixed
-
-logic o18 : fixed
-
-logic o19 : fixed
-
-logic o20 : fixed
-
-logic o21 : fixed
-
-logic result : fixed
-
-logic t11 : fixed
-
-logic result1 : fixed
-
-logic t21 : fixed
-
-logic result2 : fixed
-
-logic t31 : fixed
-
-logic result3 : fixed
-
-logic t41 : fixed
-
-logic result4 : fixed
-
-logic t51 : fixed
-
-logic result5 : fixed
-
-logic t61 : fixed
-
-logic result6 : fixed
-
-logic t71 : fixed
-
-logic result7 : fixed
-
-logic t81 : fixed
-
-logic result8 : fixed
-
-logic t91 : fixed
-
-logic result9 : fixed
-
-logic t101 : fixed
-
-logic result10 : fixed
-
-logic a11 : fixed
-
-logic result11 : fixed
-
-logic a21 : fixed
-
-logic result12 : fixed
-
-logic a31 : fixed
-
-logic result13 : fixed
-
-logic a41 : fixed
-
-logic result14 : fixed
-
-logic a51 : fixed
-
-logic result15 : fixed
-
-logic a61 : fixed
-
-logic result16 : fixed
-
-logic a71 : fixed
-
-logic result17 : fixed
-
-logic a81 : fixed
-
-logic result18 : fixed
-
-logic a91 : fixed
-
-logic result19 : fixed
-
-logic a101 : fixed
-
-logic result20 : fixed
-
-logic num1 : fixed
-
-logic result21 : fixed
-
-logic den1 : fixed
-
-logic result22 : fixed
-
-logic res1 : fixed
-
-logic result23 : fixed
-
-logic pi_compute__shanks_fixed__result1 : fixed
-
-logic pi_compute__shanks_fixed__result2 : fixed
-
-logic pi_compute__shanks_fixed__result3 : fixed
-
-logic t12 : fixed
-
-logic t22 : fixed
-
-logic t32 : fixed
-
-logic t42 : fixed
-
-logic t52 : fixed
-
-logic t62 : fixed
-
-logic t72 : fixed
-
-logic t82 : fixed
-
-logic t92 : fixed
-
-logic t102 : fixed
-
-logic a12 : fixed
-
-logic a22 : fixed
-
-logic a32 : fixed
-
-logic a42 : fixed
-
-logic a52 : fixed
-
-logic a62 : fixed
-
-logic a72 : fixed
-
-logic a82 : fixed
-
-logic a92 : fixed
-
-logic a102 : fixed
-
-logic num2 : fixed
-
-logic den2 : fixed
-
-logic res2 : fixed
-
-logic pi_compute__shanks_fixed__result4 : fixed
-
-logic t13 : fixed
-
-logic t23 : fixed
-
-logic t33 : fixed
-
-logic t43 : fixed
-
-logic t53 : fixed
-
-logic t63 : fixed
-
-logic t73 : fixed
-
-logic t83 : fixed
-
-logic t93 : fixed
-
-logic t103 : fixed
-
-logic a13 : fixed
-
-logic a23 : fixed
-
-logic a33 : fixed
-
-logic a43 : fixed
-
-logic a53 : fixed
-
-logic a63 : fixed
-
-logic a73 : fixed
-
-logic a83 : fixed
-
-logic a93 : fixed
-
-logic a103 : fixed
-
-logic num3 : fixed
-
-logic den3 : fixed
-
-logic res3 : fixed
-
-logic pi_compute__shanks_fixed__result5 : fixed
-
-logic result24 : fixed
-
-axiom H : ((((to_fixed1(o) = 1048576) and ((result = t1) and (t11 = o))) and
-  (((to_fixed1(o1) = 349525) and ((result1 = t2) and (t21 = o1))) and
-  (((to_fixed1(o2) = 209715) and ((result2 = t3) and (t31 = o2))) and
-  (((to_fixed1(o3) = 149796) and ((result3 = t4) and (t41 = o3))) and
-  (((to_fixed1(o4) = 116508) and ((result4 = t5) and (t51 = o4))) and
-  (((to_fixed1(o5) = 95325) and ((result5 = t6) and (t61 = o5))) and
-  (((to_fixed1(o6) = 80659) and ((result6 = t7) and (t71 = o6))) and
-  (((to_fixed1(o7) = 69905) and ((result7 = t8) and (t81 = o7))) and
-  (((to_fixed1(o8) = 61680) and ((result8 = t9) and (t91 = o8))) and
-  (((to_fixed1(o9) = 55188) and ((result9 = t10) and (t101 = o9))) and
-  (((result10 = a1) and (a11 = t11)) and
-  (((to_fixed1(o10) = (to_fixed1(a11) - to_fixed1(t21))) and
-  ((result11 = a2) and (a21 = o10))) and
-  (((to_fixed1(o11) = (to_fixed1(a21) + to_fixed1(t31))) and
-  ((result12 = a3) and (a31 = o11))) and
-  (((to_fixed1(o12) = (to_fixed1(a31) - to_fixed1(t41))) and
-  ((result13 = a4) and (a41 = o12))) and
-  (((to_fixed1(o13) = (to_fixed1(a41) + to_fixed1(t51))) and
-  ((result14 = a5) and (a51 = o13))) and
-  (((to_fixed1(o14) = (to_fixed1(a51) - to_fixed1(t61))) and
-  ((result15 = a6) and (a61 = o14))) and
-  (((to_fixed1(o15) = (to_fixed1(a61) + to_fixed1(t71))) and
-  ((result16 = a7) and (a71 = o15))) and
-  (((to_fixed1(o16) = (to_fixed1(a71) - to_fixed1(t81))) and
-  ((result17 = a8) and (a81 = o16))) and
-  (((to_fixed1(o17) = (to_fixed1(a81) + to_fixed1(t91))) and
-  ((result18 = a9) and (a91 = o17))) and
-  (((to_fixed1(o18) = (to_fixed1(a91) - to_fixed1(t101))) and
-  ((result19 = a10) and (a101 = o18))) and
+ (* File "pi_compute.adb", line 7, characters 0-0 *)
+goal WP_parameter_def :
+  (forall t1:fixed. forall t2:fixed. forall t3:fixed. forall t4:fixed.
+  forall t5:fixed. forall t6:fixed. forall t7:fixed. forall t8:fixed.
+  forall t9:fixed. forall t10:fixed. forall a1:fixed. forall a2:fixed.
+  forall a3:fixed. forall a4:fixed. forall a5:fixed. forall a6:fixed.
+  forall a7:fixed. forall a8:fixed. forall a9:fixed. forall a10:fixed.
+  forall num:fixed. forall den:fixed. forall res:fixed.
+  forall pi_compute__shanks_fixed__result:fixed. forall o:fixed.
+  forall o1:fixed. forall o2:fixed. forall o3:fixed. forall o4:fixed.
+  forall o5:fixed. forall o6:fixed. forall o7:fixed. forall o8:fixed.
+  forall o9:fixed. forall o10:fixed. forall o11:fixed. forall o12:fixed.
+  forall o13:fixed. forall o14:fixed. forall o15:fixed. forall o16:fixed.
+  forall o17:fixed. forall o18:fixed. forall o19:fixed. forall o20:fixed.
+  forall o21:fixed. forall result:fixed. forall t11:fixed.
+  forall result1:fixed. forall t21:fixed. forall result2:fixed.
+  forall t31:fixed. forall result3:fixed. forall t41:fixed.
+  forall result4:fixed. forall t51:fixed. forall result5:fixed.
+  forall t61:fixed. forall result6:fixed. forall t71:fixed.
+  forall result7:fixed. forall t81:fixed. forall result8:fixed.
+  forall t91:fixed. forall result9:fixed. forall t101:fixed.
+  forall result10:fixed. forall a11:fixed. forall result11:fixed.
+  forall a21:fixed. forall result12:fixed. forall a31:fixed.
+  forall result13:fixed. forall a41:fixed. forall result14:fixed.
+  forall a51:fixed. forall result15:fixed. forall a61:fixed.
+  forall result16:fixed. forall a71:fixed. forall result17:fixed.
+  forall a81:fixed. forall result18:fixed__ref. forall a91:fixed.
+  forall result19:fixed__ref. forall a101:fixed. forall result20:fixed__ref.
+  forall num1:fixed. forall result21:fixed__ref. forall den1:fixed.
+  forall result22:fixed__ref. forall res1:fixed. forall result23:fixed__ref.
+  forall pi_compute__shanks_fixed__result1:fixed.
+  forall pi_compute__shanks_fixed__result2:fixed__ref.
+  forall pi_compute__shanks_fixed__result3:fixed. forall t12:fixed__ref.
+  forall t22:fixed__ref. forall t32:fixed__ref. forall t42:fixed__ref.
+  forall t52:fixed__ref. forall t62:fixed__ref. forall t72:fixed__ref.
+  forall t82:fixed__ref. forall t92:fixed__ref. forall t102:fixed__ref.
+  forall a12:fixed__ref. forall a22:fixed__ref. forall a32:fixed__ref.
+  forall a42:fixed__ref. forall a52:fixed__ref. forall a62:fixed__ref.
+  forall a72:fixed__ref. forall a82:fixed__ref. forall a92:fixed__ref.
+  forall a102:fixed__ref. forall num2:fixed__ref. forall den2:fixed__ref.
+  forall res2:fixed__ref.
+  forall pi_compute__shanks_fixed__result4:fixed__ref. forall t13:fixed.
+  forall t23:fixed. forall t33:fixed. forall t43:fixed. forall t53:fixed.
+  forall t63:fixed. forall t73:fixed. forall t83:fixed. forall t93:fixed.
+  forall t103:fixed. forall a13:fixed. forall a23:fixed. forall a33:fixed.
+  forall a43:fixed. forall a53:fixed. forall a63:fixed. forall a73:fixed.
+  forall a83:fixed. forall a93:fixed. forall a103:fixed. forall num3:fixed.
+  forall den3:fixed. forall res3:fixed.
+  forall pi_compute__shanks_fixed__result5:fixed.
+  (forall result24:fixed. ((((((to_fixed1(o) = 1048576) and (({
+  fixed__content = result } = { fixed__content = t1 }) and (t11 = o))) and
+  (((to_fixed1(o1) = 349525) and (({ fixed__content = result1 } = {
+  fixed__content = t2 }) and (t21 = o1))) and (((to_fixed1(o2) = 209715) and
+  (({ fixed__content = result2 } = { fixed__content = t3 }) and
+  (t31 = o2))) and (((to_fixed1(o3) = 149796) and (({ fixed__content =
+  result3 } = { fixed__content = t4 }) and (t41 = o3))) and
+  (((to_fixed1(o4) = 116508) and (({ fixed__content = result4 } = {
+  fixed__content = t5 }) and (t51 = o4))) and (((to_fixed1(o5) = 95325) and
+  (({ fixed__content = result5 } = { fixed__content = t6 }) and
+  (t61 = o5))) and (((to_fixed1(o6) = 80659) and (({ fixed__content = result6
+  } = { fixed__content = t7 }) and (t71 = o6))) and
+  (((to_fixed1(o7) = 69905) and (({ fixed__content = result7 } = {
+  fixed__content = t8 }) and (t81 = o7))) and (((to_fixed1(o8) = 61680) and
+  (({ fixed__content = result8 } = { fixed__content = t9 }) and
+  (t91 = o8))) and (((to_fixed1(o9) = 55188) and (({ fixed__content = result9
+  } = { fixed__content = t10 }) and (t101 = o9))) and ((({ fixed__content =
+  result10 } = { fixed__content = a1 }) and (a11 = t11)) and
+  (((to_fixed1(o10) = (to_fixed1(a11) - to_fixed1(t21))) and (({
+  fixed__content = result11 } = { fixed__content = a2 }) and
+  (a21 = o10))) and
+  (((to_fixed1(o11) = (to_fixed1(a21) + to_fixed1(t31))) and (({
+  fixed__content = result12 } = { fixed__content = a3 }) and
+  (a31 = o11))) and
+  (((to_fixed1(o12) = (to_fixed1(a31) - to_fixed1(t41))) and (({
+  fixed__content = result13 } = { fixed__content = a4 }) and
+  (a41 = o12))) and
+  (((to_fixed1(o13) = (to_fixed1(a41) + to_fixed1(t51))) and (({
+  fixed__content = result14 } = { fixed__content = a5 }) and
+  (a51 = o13))) and
+  (((to_fixed1(o14) = (to_fixed1(a51) - to_fixed1(t61))) and (({
+  fixed__content = result15 } = { fixed__content = a6 }) and
+  (a61 = o14))) and
+  (((to_fixed1(o15) = (to_fixed1(a61) + to_fixed1(t71))) and (({
+  fixed__content = result16 } = { fixed__content = a7 }) and
+  (a71 = o15))) and
+  (((to_fixed1(o16) = (to_fixed1(a71) - to_fixed1(t81))) and (({
+  fixed__content = result17 } = { fixed__content = a8 }) and
+  (a81 = o16))) and
+  (((to_fixed1(o17) = (to_fixed1(a81) + to_fixed1(t91))) and ((result18 = {
+  fixed__content = a9 }) and (a91 = o17))) and
+  (((to_fixed1(o18) = (to_fixed1(a91) - to_fixed1(t101))) and ((result19 = {
+  fixed__content = a10 }) and (a101 = o18))) and
   (((to_fixed1(o19) = ((fxp_mult(to_fixed1(a101),
   to_fixed1(a81)) - fxp_mult(to_fixed1(a91), to_fixed1(a91))) * 4)) and
-  ((result20 = num) and (num1 = o19))) and
+  ((result20 = { fixed__content = num }) and (num1 = o19))) and
   (((to_fixed1(o20) = ((to_fixed1(a101) - (to_fixed1(a91) * 2)) + to_fixed1(a81))) and
-  ((result21 = den) and (den1 = o20))) and
+  ((result21 = { fixed__content = den }) and (den1 = o20))) and
   (((to_fixed1(o21) = fxp_div(to_fixed1(num1), to_fixed1(den1))) and
-  ((result22 = res) and (res1 = o21))) and ((to_fixed1(res1) = 3293842) and
-  (((pi_compute__shanks_fixed__result2 = pi_compute__shanks_fixed__result1) and
+  ((result22 = { fixed__content = res }) and (res1 = o21))) and
+  ((to_fixed1(res1) = 3293842) and (((pi_compute__shanks_fixed__result2 = {
+  fixed__content = pi_compute__shanks_fixed__result1 }) and
   (pi_compute__shanks_fixed__result3 = pi_compute__shanks_fixed__result1)) and
-  ((result23 = pi_compute__shanks_fixed__result) and
+  ((result23 = { fixed__content = pi_compute__shanks_fixed__result }) and
   (pi_compute__shanks_fixed__result1 = res1))))))))))))))))))))))))))) and
   (((pi_compute__shanks_fixed__result4 = pi_compute__shanks_fixed__result2) and
-  ((res2 = res1) and ((den2 = den1) and ((num2 = num1) and ((a102 = a101) and
-  ((a92 = a91) and ((a82 = a81) and ((a72 = a71) and ((a62 = a61) and
-  ((a52 = a51) and ((a42 = a41) and ((a32 = a31) and ((a22 = a21) and
-  ((a12 = a11) and ((t102 = t101) and ((t92 = t91) and ((t82 = t81) and
-  ((t72 = t71) and ((t62 = t61) and ((t52 = t51) and ((t42 = t41) and
-  ((t32 = t31) and ((t22 = t21) and (t12 = t11)))))))))))))))))))))))) and
+  ((res2 = { fixed__content = res1 }) and ((den2 = { fixed__content = den1
+  }) and ((num2 = { fixed__content = num1 }) and ((a102 = { fixed__content =
+  a101 }) and ((a92 = { fixed__content = a91 }) and ((a82 = {
+  fixed__content = a81 }) and ((a72 = { fixed__content = a71 }) and ((a62 = {
+  fixed__content = a61 }) and ((a52 = { fixed__content = a51 }) and ((a42 = {
+  fixed__content = a41 }) and ((a32 = { fixed__content = a31 }) and ((a22 = {
+  fixed__content = a21 }) and ((a12 = { fixed__content = a11 }) and
+  ((t102 = { fixed__content = t101 }) and ((t92 = { fixed__content = t91
+  }) and ((t82 = { fixed__content = t81 }) and ((t72 = { fixed__content = t71
+  }) and ((t62 = { fixed__content = t61 }) and ((t52 = { fixed__content = t51
+  }) and ((t42 = { fixed__content = t41 }) and ((t32 = { fixed__content = t31
+  }) and ((t22 = { fixed__content = t21 }) and (t12 = { fixed__content = t11
+  })))))))))))))))))))))))) and
   ((pi_compute__shanks_fixed__result5 = pi_compute__shanks_fixed__result3) and
   ((res3 = res1) and ((den3 = den1) and ((num3 = num1) and ((a103 = a101) and
   ((a93 = a91) and ((a83 = a81) and ((a73 = a71) and ((a63 = a61) and
   ((a53 = a51) and ((a43 = a41) and ((a33 = a31) and ((a23 = a21) and
   ((a13 = a11) and ((t103 = t101) and ((t93 = t91) and ((t83 = t81) and
   ((t73 = t71) and ((t63 = t61) and ((t53 = t51) and ((t43 = t41) and
-  ((t33 = t31) and ((t23 = t21) and (t13 = t11))))))))))))))))))))))))))
-
-axiom H1 : (result24 = pi_compute__shanks_fixed__result4)
-
- (* File "pi_compute.adb", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (to_fixed1(pi_compute__shanks_fixed__result4) = 3293842)
+  ((t33 = t31) and ((t23 = t21) and (t13 = t11)))))))))))))))))))))))))) and
+  (result24 = (pi_compute__shanks_fixed__result4).fixed__content)) ->
+  (to_fixed1((pi_compute__shanks_fixed__result4).fixed__content) = 3293842))))

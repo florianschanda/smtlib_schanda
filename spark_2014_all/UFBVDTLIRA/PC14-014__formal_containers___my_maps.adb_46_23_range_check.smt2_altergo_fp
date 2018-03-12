@@ -599,12 +599,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -616,6 +610,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -2013,8 +2013,8 @@ axiom keys__post_axiom :
   rec__my_maps__n__map__capacity = container; rec__my_maps__n__map__modulus =
   container1 }; us_split_fields3 = { rec__my_maps__n__map = container2 }
   })) and
-  (forall temp___693:int. ((in_range4(temp___693) and ((1 <= temp___693) and
-  (temp___693 <= (0 + length2(keys({ us_split_discrs1 = {
+  (forall temp___754:int. ((in_range4(temp___754) and ((1 <= temp___754) and
+  (temp___754 <= (0 + length2(keys({ us_split_discrs1 = {
   rec__my_maps__n__map__capacity = container; rec__my_maps__n__map__modulus =
   container1 }; us_split_fields3 = { rec__my_maps__n__map = container2 }
   })))))) -> (has_key1(model__({ us_split_discrs1 = {
@@ -2022,7 +2022,7 @@ axiom keys__post_axiom :
   container1 }; us_split_fields3 = { rec__my_maps__n__map = container2 } }),
   get(keys({ us_split_discrs1 = { rec__my_maps__n__map__capacity = container;
   rec__my_maps__n__map__modulus = container1 }; us_split_fields3 = {
-  rec__my_maps__n__map = container2 } }), temp___693)) = true)))) and
+  rec__my_maps__n__map = container2 } }), temp___754)) = true)))) and
   (forall key1:positive. forall key2:integer. ((has_key1(model__({
   us_split_discrs1 = { rec__my_maps__n__map__capacity = container;
   rec__my_maps__n__map__modulus = container1 }; us_split_fields3 = {
@@ -2439,292 +2439,6 @@ axiom w_get__post_axiom1 :
   (forall witness2:int [w_get1(container, witness2)].
   ((in_range3(witness2) and (has_witness1(container, witness2) = true)) ->
   in_range9(w_get1(container, witness2)))))
-
-logic l__split_fields : us_main_type
-
-logic k__split_fields : us_main_type
-
-logic c__split_fields : count_type
-
-logic my_maps__test_map_rec__R9b__assume : t
-
-logic us : t
-
-logic us1 : int
-
-logic my_maps__test_map_rec__R12b__assume : t
-
-logic us2 : t
-
-logic us3 : int
-
-logic temp___1102 : count_type
-
-logic temp___1103 : count_type
-
-logic o : integer
-
-logic o1 : positive
-
-logic o2 : positive
-
-logic o3 : integer
-
-logic o4 : positive
-
-logic o5 : integer
-
-logic o6 : integer
-
-logic o7 : positive
-
-logic o8 : positive
-
-logic o9 : integer
-
-logic o10 : positive
-
-logic o11 : integer
-
-logic o12 : integer
-
-logic o13 : positive
-
-logic o14 : positive
-
-logic o15 : integer
-
-logic o16 : positive
-
-logic o17 : integer
-
-logic o18 : int
-
-logic o19 : integer
-
-logic o20 : positive
-
-logic o21 : positive
-
-logic o22 : integer
-
-logic o23 : positive
-
-logic o24 : integer
-
-logic o25 : int
-
-logic o26 : integer
-
-logic o27 : positive
-
-logic o28 : positive
-
-logic o29 : integer
-
-logic o30 : positive
-
-logic o31 : integer
-
-logic o32 : integer
-
-logic o33 : positive
-
-logic o34 : positive
-
-logic o35 : integer
-
-logic o36 : positive
-
-logic o37 : integer
-
-logic o38 : integer
-
-logic o39 : positive
-
-logic o40 : positive
-
-logic o41 : integer
-
-logic o42 : positive
-
-logic o43 : integer
-
-logic o44 : integer
-
-logic o45 : positive
-
-logic o46 : positive
-
-logic o47 : integer
-
-logic o48 : positive
-
-logic o49 : integer
-
-logic o50 : integer
-
-logic o51 : positive
-
-logic o52 : positive
-
-logic o53 : integer
-
-logic o54 : positive
-
-logic o55 : integer
-
-logic temp___1115 : count_type
-
-logic o56 : integer
-
-logic o57 : positive
-
-logic o58 : positive
-
-logic o59 : integer
-
-logic o60 : positive
-
-logic o61 : integer
-
-logic temp___1117 : count_type
-
-logic o62 : integer
-
-logic o63 : positive
-
-logic o64 : positive
-
-logic o65 : integer
-
-logic o66 : positive
-
-logic o67 : integer
-
-logic o68 : integer
-
-logic o69 : positive
-
-logic o70 : positive
-
-logic o71 : integer
-
-logic o72 : positive
-
-logic o73 : integer
-
-logic result : count_type
-
-logic c__split_fields1 : count_type
-
-logic result1 : count_type
-
-logic c__split_fields2 : count_type
-
-logic my_maps__n__insert__2__container__fields : us_main_type
-
-logic result2 : us_main_type
-
-logic l__split_fields1 : us_main_type
-
-logic my_maps__n__insert__2__container__fields1 : us_main_type
-
-logic result3 : us_main_type
-
-logic l__split_fields2 : us_main_type
-
-logic c__split_fields3 : count_type
-
-logic b : bool
-
-logic my_maps__n__insert__container__fields : us_main_type
-
-logic result4 : us_main_type
-
-logic l__split_fields3 : us_main_type
-
-logic my_maps__n__replace_element__container__fields : us_main_type
-
-logic result5 : us_main_type
-
-logic l__split_fields4 : us_main_type
-
-logic my_maps__n__replace__container__fields : us_main_type
-
-logic result6 : us_main_type
-
-logic l__split_fields5 : us_main_type
-
-logic my_maps__n__assign__target__fields : us_main_type
-
-logic result7 : us_main_type
-
-logic k__split_fields1 : us_main_type
-
-logic my_maps__n__move__source__fields : us_main_type
-
-logic my_maps__n__move__target__fields : us_main_type
-
-logic result8 : us_main_type
-
-logic l__split_fields6 : us_main_type
-
-logic result9 : us_main_type
-
-logic k__split_fields2 : us_main_type
-
-logic my_maps__n__include__container__fields : us_main_type
-
-logic result10 : us_main_type
-
-logic l__split_fields7 : us_main_type
-
-logic my_maps__n__include__container__fields1 : us_main_type
-
-logic result11 : us_main_type
-
-logic l__split_fields8 : us_main_type
-
-logic my_maps__n__delete__container__fields : us_main_type
-
-logic result12 : us_main_type
-
-logic l__split_fields9 : us_main_type
-
-logic result13 : count_type
-
-logic c__split_fields4 : count_type
-
-logic c__split_fields5 : count_type
-
-logic my_maps__n__delete__2__container__fields : us_main_type
-
-logic result14 : us_main_type
-
-logic l__split_fields10 : us_main_type
-
-logic result15 : count_type
-
-logic c__split_fields6 : count_type
-
-logic my_maps__n__exclude__container__fields : us_main_type
-
-logic result16 : us_main_type
-
-logic l__split_fields11 : us_main_type
-
-logic my_maps__n__exclude__container__fields1 : us_main_type
-
-logic result17 : us_main_type
-
-logic l__split_fields12 : us_main_type
-
-axiom H : (my_maps__test_map_rec__R9b__assume = default_modulus(10))
-
-axiom H1 : (my_maps__test_map_rec__R9b__assume = r9b)
-
-axiom H2 : true
 
  (* File "my_maps.adb", line 4, characters 0-0 *)
 goal WP_parameter_def : true

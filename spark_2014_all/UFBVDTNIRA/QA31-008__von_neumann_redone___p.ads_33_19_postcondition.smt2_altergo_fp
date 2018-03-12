@@ -596,12 +596,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -613,6 +607,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -759,70 +759,49 @@ logic sqrt_von_neumann_aux16 : t -> t
 
 logic sqrt_von_neumann_aux16__function_guard : t, t -> prop
 
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 1)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 32767)
+
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 181)
+
 axiom sqrt_von_neumann_aux16__post_axiom :
   (forall x:t [sqrt_von_neumann_aux16(x)].
   ((ule(mul(sqrt_von_neumann_aux16(x), sqrt_von_neumann_aux16(x)), x) and
-  uge(sub(mul(add(sqrt_von_neumann_aux16(x), of_int(1)),
-  add(sqrt_von_neumann_aux16(x), of_int(1))), of_int(1)), x)) and (ule(x,
-  of_int(32767)) -> ule(sqrt_von_neumann_aux16(x), of_int(181)))))
+  uge(sub(mul(add(sqrt_von_neumann_aux16(x), rliteral),
+  add(sqrt_von_neumann_aux16(x), rliteral)), rliteral), x)) and (ule(x,
+  rliteral1) -> ule(sqrt_von_neumann_aux16(x), rliteral2))))
 
 logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic p__sqrt_von_neumann16__result : int
-
-logic o : t
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : bool
-
-logic result : int
-
-logic p__sqrt_von_neumann16__result1 : int
-
-logic p__sqrt_von_neumann16__result2 : int
-
-logic p__sqrt_von_neumann16__result3 : int
-
-logic p__sqrt_von_neumann16__result4 : int
-
-logic p__sqrt_von_neumann16__result5 : int
-
-logic result1 : int
-
-axiom H : in_range2(x)
-
-axiom H1 : (p__sqrt_von_neumann16__result1 = p__sqrt_von_neumann16__result2)
-
-axiom H2 : (p__sqrt_von_neumann16__result3 = p__sqrt_von_neumann16__result1)
-
-axiom H3 : ((o = sqrt_von_neumann_aux16(of_int(x))) and ((ule(mul(o, o),
-  of_int(x)) and uge(sub(mul(add(o, of_int(1)), add(o, of_int(1))),
-  of_int(1)), of_int(x))) and (ule(of_int(x), of_int(32767)) -> ule(o,
-  of_int(181)))))
-
-axiom H4 : (o1 = tqtint(o))
-
-axiom H5 : ((o2 = o1) and in_range3(o1))
-
-axiom H6 : (result = p__sqrt_von_neumann16__result)
-
-axiom H7 : (p__sqrt_von_neumann16__result1 = o2)
-
-axiom H8 : (p__sqrt_von_neumann16__result4 = p__sqrt_von_neumann16__result2)
-
-axiom H9 : (p__sqrt_von_neumann16__result5 = p__sqrt_von_neumann16__result3)
-
-axiom H10 : (result1 = p__sqrt_von_neumann16__result4)
-
  (* File "p.ads", line 13, characters 0-0 *)
 goal WP_parameter_def :
-  ((p__sqrt_von_neumann16__result4 * p__sqrt_von_neumann16__result4) <= x)
+  (forall p__sqrt_von_neumann16__result:int. forall o:t. forall o1:int.
+  forall o2:int. forall result:int.
+  forall p__sqrt_von_neumann16__result1:int.
+  forall p__sqrt_von_neumann16__result2:int.
+  forall p__sqrt_von_neumann16__result3:int.
+  forall p__sqrt_von_neumann16__result4:int.
+  forall p__sqrt_von_neumann16__result5:int.
+  (forall result1:int. ((in_range2(x) and
+  (((((p__sqrt_von_neumann16__result1 = p__sqrt_von_neumann16__result2) and
+  (p__sqrt_von_neumann16__result3 = p__sqrt_von_neumann16__result1)) and
+  (((((o = sqrt_von_neumann_aux16(of_int(x))) and ((ule(mul(o, o),
+  of_int(x)) and uge(sub(mul(add(o, rliteral), add(o, rliteral)), rliteral),
+  of_int(x))) and (ule(of_int(x), rliteral1) -> ule(o, rliteral2)))) and
+  (o1 = tqtint(o))) and ((o2 = o1) and in_range3(o1))) and (({ int__content =
+  result } = { int__content = p__sqrt_von_neumann16__result }) and
+  (p__sqrt_von_neumann16__result1 = o2)))) and (({ int__content =
+  p__sqrt_von_neumann16__result4 } = { int__content =
+  p__sqrt_von_neumann16__result2 }) and
+  (p__sqrt_von_neumann16__result5 = p__sqrt_von_neumann16__result3))) and
+  (result1 = p__sqrt_von_neumann16__result4))) ->
+  ((p__sqrt_von_neumann16__result4 * p__sqrt_von_neumann16__result4) <= x))))

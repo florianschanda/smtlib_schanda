@@ -1045,33 +1045,14 @@ function unsigned_64__ref___projection(a: unsigned_64__ref) : unsigned_64 =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic value : t
+logic rliteral1 : t
 
-logic o : t1
-
-logic o1 : t
-
-logic o2 : t1
-
-logic o3 : t1
-
-logic foo__get__data : t1
-
-logic foo__get__data1 : t1
-
-axiom H : true
-
-axiom H1 : (o = toBig(value))
-
-axiom H2 : (o1 = toSmall(o))
-
-axiom H3 : (o2 = toBig(o1))
-
-axiom H4 : (o3 = o2)
-
-axiom H5 : (o3 = foo__get__data)
-
-axiom H6 : true
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 0)
 
  (* File "main.adb", line 4, characters 0-0 *)
-goal WP_parameter_def : ule1(toBig(of_int(0)), foo__get__data1)
+goal WP_parameter_def :
+  (forall value:t. forall o:t1. forall o1:t. forall o2:t1. forall o3:t1.
+  forall foo__get__data:t1. forall foo__get__data1:t1.
+  ((((((o = toBig(value)) and (o1 = toSmall(o))) and (o2 = toBig(o1))) and
+  (o3 = o2)) and (o3 = foo__get__data)) -> ule1(toBig(rliteral1),
+  foo__get__data1)))

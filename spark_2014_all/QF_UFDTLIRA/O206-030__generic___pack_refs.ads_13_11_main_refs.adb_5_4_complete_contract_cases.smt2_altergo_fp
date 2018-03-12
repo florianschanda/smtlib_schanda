@@ -81,12 +81,6 @@ axiom bool_ge_axiom :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -98,6 +92,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -139,34 +139,10 @@ logic formal : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic external : int
-
-logic main_refs__func_inst__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic main_refs__func_inst__result1 : int
-
-logic main_refs__func_inst__result2 : int
-
-logic main_refs__func_inst__result3 : int
-
-logic main_refs__func_inst__result4 : int
-
-logic main_refs__func_inst__result5 : int
-
-axiom H : in_range1(external)
-
-axiom H1 : in_range1(formal)
-
-axiom H2 : (0 <  external)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (((bool_lt(formal, 0) = true) -> (((bool_eq(formal,
+goal WP_parameter_def :
+  (forall external:int. (in_range1(external) -> (in_range1(formal) ->
+  ((0 <  external) -> (((bool_lt(formal, 0) = true) -> (((bool_eq(formal,
   0) = true) -> (((bool_gt(formal, 0) = true) ->
   (1 <= (((0 + 1) + 1) + 1))) and ((not (bool_gt(formal, 0) = true)) ->
   (1 <= (((0 + 1) + 1) + 0))))) and ((not (bool_eq(formal, 0) = true)) ->
@@ -177,4 +153,4 @@ goal WP_parameter_def : (((bool_lt(formal, 0) = true) -> (((bool_eq(formal,
   ((not (bool_gt(formal, 0) = true)) -> (1 <= (((0 + 0) + 1) + 0))))) and
   ((not (bool_eq(formal, 0) = true)) -> (((bool_gt(formal, 0) = true) ->
   (1 <= (((0 + 0) + 0) + 1))) and ((not (bool_gt(formal, 0) = true)) ->
-  (1 <= (((0 + 0) + 0) + 0))))))))
+  (1 <= (((0 + 0) + 0) + 0))))))))))))

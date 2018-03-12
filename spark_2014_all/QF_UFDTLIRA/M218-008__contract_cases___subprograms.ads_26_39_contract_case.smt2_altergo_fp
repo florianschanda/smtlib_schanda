@@ -81,12 +81,6 @@ axiom bool_ge_axiom :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -98,6 +92,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -137,41 +137,20 @@ logic val__ : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic subprograms__f3bis__result : int
-
-logic o : int
-
-logic result : int
-
-logic subprograms__f3bis__result1 : int
-
-logic subprograms__f3bis__result2 : int
-
-logic subprograms__f3bis__result3 : int
-
-logic subprograms__f3bis__result4 : int
-
-logic subprograms__f3bis__result5 : int
-
-axiom H : in_range1(val__)
-
-axiom H1 : (((- 1) <= val__) and (val__ <= 1))
-
-axiom H2 : (subprograms__f3bis__result1 = subprograms__f3bis__result2)
-
-axiom H3 : (subprograms__f3bis__result3 = subprograms__f3bis__result1)
-
-axiom H4 : ((o = (2 - val__)) and in_range1((2 - val__)))
-
-axiom H5 : (result = subprograms__f3bis__result)
-
-axiom H6 : (subprograms__f3bis__result1 = o)
-
-axiom H7 : (subprograms__f3bis__result4 = subprograms__f3bis__result2)
-
-axiom H8 : (subprograms__f3bis__result5 = subprograms__f3bis__result3)
-
-axiom H9 : (bool_gt(val__, 0) = true)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (subprograms__f3bis__result4 = 1)
+goal WP_parameter_def :
+  (forall subprograms__f3bis__result:int. forall o:int. forall result:int.
+  forall subprograms__f3bis__result1:int.
+  forall subprograms__f3bis__result2:int.
+  forall subprograms__f3bis__result3:int.
+  forall subprograms__f3bis__result4:int.
+  forall subprograms__f3bis__result5:int. (in_range1(val__) ->
+  ((((- 1) <= val__) and (val__ <= 1)) ->
+  (((((subprograms__f3bis__result1 = subprograms__f3bis__result2) and
+  (subprograms__f3bis__result3 = subprograms__f3bis__result1)) and
+  (((o = (2 - val__)) and in_range1((2 - val__))) and
+  ((result = subprograms__f3bis__result) and
+  (subprograms__f3bis__result1 = o)))) and
+  ((subprograms__f3bis__result4 = subprograms__f3bis__result2) and
+  (subprograms__f3bis__result5 = subprograms__f3bis__result3))) ->
+  ((bool_gt(val__, 0) = true) -> (subprograms__f3bis__result4 = 1))))))

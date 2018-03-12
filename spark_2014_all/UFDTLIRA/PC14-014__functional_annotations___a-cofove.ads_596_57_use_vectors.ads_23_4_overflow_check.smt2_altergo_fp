@@ -81,12 +81,6 @@ axiom bool_ge_axiom :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -98,6 +92,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -672,28 +672,12 @@ axiom first__def_axiom3 : (first2 = fst)
 
 axiom last__def_axiom4 : (last3 = lst)
 
-logic container__split_fields : us_main_type
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-axiom H : dynamic_property2(0, last2, to_rep1(container__split_discrs))
-
-axiom H1 : dynamic_property1(first1, last1, index)
-
-axiom H2 : in_range3(count)
-
-axiom H3 : ((first <= index) and (index <= ((first2 - 1) + length1(model__({
-  us_split_discrs1 = { rec__use_vectors__my_vectors__vector__capacity =
-  container__split_discrs }; us_split_fields1 = {
-  rec__use_vectors__my_vectors__vector = container__split_fields } })))))
-
  (* File "a-cofove.ads", line 549, characters 0-0 *)
-goal WP_parameter_def : in_range1((index - first))
+goal WP_parameter_def :
+  (forall container__split_fields:us_main_type. (dynamic_property2(0, last2,
+  to_rep1(container__split_discrs)) -> (dynamic_property1(first1, last1,
+  index) -> (in_range3(count) -> (((first <= index) and
+  (index <= ((first2 - 1) + length1(model__({ us_split_discrs1 = {
+  rec__use_vectors__my_vectors__vector__capacity = container__split_discrs };
+  us_split_fields1 = { rec__use_vectors__my_vectors__vector =
+  container__split_fields } }))))) -> in_range1((index - first)))))))

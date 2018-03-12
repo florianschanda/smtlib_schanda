@@ -137,17 +137,7 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic x : int
-
-logic y : int
-
-logic n : int
-
-logic o : int
-
-axiom H : in_range1(x)
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(n))
-
  (* File "foo.adb", line 13, characters 0-0 *)
-goal WP_parameter_def : in_range((x + y))
+goal WP_parameter_def :
+  (forall x:int. forall y:int. forall n:int. (in_range1(x) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(n)) -> in_range((x + y)))))

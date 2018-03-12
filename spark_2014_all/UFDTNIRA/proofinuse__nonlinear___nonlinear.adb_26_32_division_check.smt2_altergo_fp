@@ -251,33 +251,10 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic res : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic result : int
-
-logic res1 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : in_range1(y)
-
-axiom H2 : ((1 <= 2147483647) -> in_range1(res))
-
-axiom H3 : (y <= x)
-
-axiom H4 : ((o = comp_div(x,y)) and in_range1(comp_div(x,y)))
-
-axiom H5 : (result = res)
-
-axiom H6 : (res1 = o)
-
-axiom H7 : ((o1 = (res1 * y)) and in_range((res1 * y)))
-
  (* File "nonlinear.adb", line 14, characters 0-0 *)
-goal WP_parameter_def : (not (res1 = 0))
+goal WP_parameter_def :
+  (forall res:int. forall o:int. forall o1:int. forall result:int.
+  forall res1:int. (in_range1(x) -> (in_range1(y) -> (((1 <= 2147483647) ->
+  in_range1(res)) -> ((y <= x) -> ((((o = comp_div(x,y)) and
+  in_range1(comp_div(x,y))) and ((result = res) and (res1 = o))) ->
+  (((o1 = (res1 * y)) and in_range((res1 * y))) -> (not (res1 = 0)))))))))

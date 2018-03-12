@@ -357,31 +357,9 @@ axiom get_even_close_pair__2__post_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x__split_fields : even
-
-logic x__split_fields1 : even
-
-logic o : even
-
-logic o1 : even
-
-logic temp___322 : even
-
-logic temp___3221 : even
-
-logic result : even
-
-logic result1 : even
-
-logic x__split_fields2 : even
-
-logic x__split_fields3 : even
-
-axiom H : (in_range(i7s) and (mod(i7s, 2) = 0))
-
-axiom H1 : ((mod(to_rep(x__split_fields), 2) = 0) and
-  (mod(to_rep(x__split_fields1), 2) = 0))
-
  (* File "dynamic_preds.adb", line 148, characters 0-0 *)
 goal WP_parameter_def :
-  (to_rep(x__split_fields1) = (to_rep(x__split_fields) + 2))
+  (forall x__split_fields:even. forall x__split_fields1:even.
+  ((in_range(i7s) and (mod(i7s, 2) = 0)) -> (((mod(to_rep(x__split_fields),
+  2) = 0) and (mod(to_rep(x__split_fields1), 2) = 0)) ->
+  (to_rep(x__split_fields1) = (to_rep(x__split_fields) + 2)))))

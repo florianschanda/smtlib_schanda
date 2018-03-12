@@ -427,11 +427,5 @@ logic t__split_discrs : natural
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : int
-
-logic p__R1s__assume : int
-
-logic us : int
-
  (* File "system.ads", line 81, characters 0-0 *)
 goal WP_parameter_def : true

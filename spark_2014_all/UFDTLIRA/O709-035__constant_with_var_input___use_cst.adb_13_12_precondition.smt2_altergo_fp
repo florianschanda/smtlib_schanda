@@ -117,13 +117,5 @@ axiom local__post_axiom : in_range(local(void))
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : int
-
-logic o : int
-
-axiom H : in_range(y)
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(x))
-
  (* File "use_cst.adb", line 6, characters 0-0 *)
 goal WP_parameter_def : true

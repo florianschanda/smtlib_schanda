@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -266,24 +266,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,positive) farray, int, int, (int,positive) farray, int,
-  int -> (int,positive) farray
-
-axiom concat_def :
-  (forall a:(int,positive) farray. forall b:(int,positive) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : positive, int -> (int,positive) farray
-
-axiom singleton_def :
-  (forall v:positive.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq6 : (int,positive) farray, int, int, (int,positive) farray, int,
   int -> bool
 
@@ -294,17 +276,17 @@ axiom bool_eq_def5 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) and
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)])))) or
-  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (forall temp___idx_155:int. ((((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) and
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)])))) or
+  (not ((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) ->
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)]))))))) ->
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) ->
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)]))))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -314,37 +296,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) ->
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)])))))))))
-
-logic compare : (int,positive) farray, int, int, (int,positive) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,positive) farray. forall b:(int,positive) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq6(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,positive) farray. forall b:(int,positive) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq6(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,positive) farray. forall b:(int,positive) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq6(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) ->
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)])))))))))
 
 type count_type
 
@@ -1891,25 +1845,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,partition_index) farray, int, int,
-  (int,partition_index) farray, int, int -> (int,partition_index) farray
-
-axiom concat_def1 :
-  (forall a:(int,partition_index) farray.
-  forall b:(int,partition_index) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : partition_index, int -> (int,partition_index) farray
-
-axiom singleton_def1 :
-  (forall v:partition_index.
-  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq25 : (int,partition_index) farray, int, int,
   (int,partition_index) farray, int, int -> bool
 
@@ -1921,17 +1856,17 @@ axiom bool_eq_def18 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_134:int. ((((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) and
-  (to_rep4((a[temp___idx_134])) = to_rep4((b[((b__first - a__first) + temp___idx_134)])))) or
-  (not ((a__first <= temp___idx_134) and (temp___idx_134 <= a__last)))))) ->
+  (forall temp___idx_156:int. ((((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) and
+  (to_rep4((a[temp___idx_156])) = to_rep4((b[((b__first - a__first) + temp___idx_156)])))) or
+  (not ((a__first <= temp___idx_156) and (temp___idx_156 <= a__last)))))) ->
   (bool_eq25(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_134:int. (((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) ->
-  (to_rep4((a[temp___idx_134])) = to_rep4((b[((b__first - a__first) + temp___idx_134)]))))))) ->
+  (forall temp___idx_156:int. (((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) ->
+  (to_rep4((a[temp___idx_156])) = to_rep4((b[((b__first - a__first) + temp___idx_156)]))))))) ->
   (bool_eq25(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -1942,40 +1877,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_134:int. (((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) ->
-  (to_rep4((a[temp___idx_134])) = to_rep4((b[((b__first - a__first) + temp___idx_134)])))))))))
-
-logic compare1 : (int,partition_index) farray, int, int,
-  (int,partition_index) farray, int, int -> int
-
-axiom compare_def_eq1 :
-  (forall a:(int,partition_index) farray.
-  forall b:(int,partition_index) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq25(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt1 :
-  (forall a:(int,partition_index) farray.
-  forall b:(int,partition_index) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq25(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep4((a[(i + 1)])) <  to_rep4((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt1 :
-  (forall a:(int,partition_index) farray.
-  forall b:(int,partition_index) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare1(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq25(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep4((b[(i + 1)])) <  to_rep4((a[(j + 1)]))))))))))))
+  (forall temp___idx_156:int. (((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) ->
+  (to_rep4((a[temp___idx_156])) = to_rep4((b[((b__first - a__first) + temp___idx_156)])))))))))
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
@@ -2442,8 +2346,8 @@ axiom keys__post_axiom :
   rec__partition_refinement__inverse_sets__map__capacity = container };
   us_split_fields7 = { rec__partition_refinement__inverse_sets__map =
   container1 } })) and
-  (forall temp___607:int. ((in_range16(temp___607) and ((1 <= temp___607) and
-  (temp___607 <= (0 + length7(keys({ us_split_discrs3 = {
+  (forall temp___666:int. ((in_range16(temp___666) and ((1 <= temp___666) and
+  (temp___666 <= (0 + length7(keys({ us_split_discrs3 = {
   rec__partition_refinement__inverse_sets__map__capacity = container };
   us_split_fields7 = { rec__partition_refinement__inverse_sets__map =
   container1 } })))))) -> (has_key2(model__1({ us_split_discrs3 = {
@@ -2452,7 +2356,7 @@ axiom keys__post_axiom :
   container1 } }), get2(keys({ us_split_discrs3 = {
   rec__partition_refinement__inverse_sets__map__capacity = container };
   us_split_fields7 = { rec__partition_refinement__inverse_sets__map =
-  container1 } }), temp___607)) = true)))) and
+  container1 } }), temp___666)) = true)))) and
   (forall key1:int. ((in_range15(key1) and (has_key2(model__1({
   us_split_discrs3 = {
   rec__partition_refinement__inverse_sets__map__capacity = container };
@@ -3032,478 +2936,35 @@ axiom length__post_axiom8 :
 
 axiom get__post_axiom5 : true
 
-logic a : (int,positive) farray
-
-logic d__split_fields : us_main_type3
-
-logic p__split_fields : us_main_type7
-
-logic f : (int,partition_index) farray
-
-logic c__split_fields : count_type
-
-logic j : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : bool
-
-logic o4 : int
-
-logic o5 : index
-
-logic o6 : index
-
-logic o7 : index_count
-
-logic j1 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : bool
-
-logic k : int
-
-logic o11 : int
-
-logic o12 : index
-
-logic o13 : index
-
-logic o14 : index_count
-
-logic o15 : int
-
-logic o16 : index
-
-logic o17 : index
-
-logic o18 : index_count
-
-logic o19 : int
-
-logic o20 : index
-
-logic o21 : index
-
-logic o22 : index_count
-
-logic o23 : index
-
-logic o24 : index
-
-logic o25 : index_count
-
-logic o26 : index
-
-logic o27 : int
-
-logic o28 : int
-
-logic o29 : index
-
-logic o30 : index
-
-logic o31 : index_count
-
-logic o32 : index
-
-logic o33 : index
-
-logic o34 : index_count
-
-logic o35 : index
-
-logic o36 : int
-
-logic o37 : bool
-
-logic o38 : bool
-
-logic j2 : int
-
-logic o39 : index
-
-logic o40 : index
-
-logic o41 : index_count
-
-logic o42 : index
-
-logic o43 : index
-
-logic o44 : index_count
-
-logic o45 : index
-
-logic o46 : index
-
-logic o47 : index_count
-
-logic o48 : index
-
-logic o49 : int
-
-logic o50 : bool
-
-logic c : count_type
-
-logic o51 : bool
-
-logic o52 : bool
-
-logic o53 : int
-
-logic c1 : count_type
-
-logic o54 : bool
-
-logic o55 : bool
-
-logic o56 : int
-
-logic o57 : int
-
-logic o58 : int
-
-logic o59 : int
-
-logic o60 : int
-
-logic o61 : int
-
-logic o62 : int
-
-logic partition_refinement__refine__c__assume : count_type
-
-logic temp___1137 : capacity_range
-
-logic temp___11371 : us_main_type7
-
-logic temp___1136 : count_type
-
-logic temp___11361 : us_main_type3
-
-logic temp___1135 : (int,positive) farray
-
-logic temp___1139 : int
-
-logic temp___1134 : count_type
-
-logic temp___1138 : int
-
-logic o63 : int
-
-logic o64 : int
-
-logic o65 : int
-
-logic c2 : count_type
-
-logic o66 : bool
-
-logic o67 : bool
-
-logic o68 : int
-
-logic o69 : int
-
-logic c3 : count_type
-
-logic o70 : bool
-
-logic c4 : count_type
-
-logic o71 : bool
-
-logic o72 : bool
-
-logic o73 : int
-
-logic j3 : int
-
-logic o74 : index
-
-logic o75 : index
-
-logic o76 : index_count
-
-logic o77 : index
-
-logic o78 : index
-
-logic o79 : index_count
-
-logic o80 : index
-
-logic o81 : index
-
-logic o82 : index_count
-
-logic o83 : index
-
-logic o84 : int
-
-logic o85 : bool
-
-logic j4 : int
-
-logic o86 : int
-
-logic o87 : int
-
-logic o88 : bool
-
-logic k1 : int
-
-logic o89 : int
-
-logic o90 : index
-
-logic o91 : index
-
-logic o92 : index_count
-
-logic o93 : index
-
-logic o94 : index
-
-logic o95 : index_count
-
-logic o96 : index
-
-logic o97 : int
-
-logic o98 : int
-
-logic o99 : index
-
-logic o100 : index
-
-logic o101 : index_count
-
-logic o102 : index
-
-logic o103 : index
-
-logic o104 : index_count
-
-logic o105 : index
-
-logic o106 : int
-
-logic o107 : bool
-
-logic o108 : bool
-
-logic o109 : bool
-
-logic o110 : int
-
-logic o111 : int
-
-logic o112 : int
-
-logic j5 : int
-
-logic o113 : index
-
-logic o114 : index
-
-logic o115 : index_count
-
-logic o116 : index
-
-logic o117 : index
-
-logic o118 : index_count
-
-logic o119 : index
-
-logic o120 : index
-
-logic o121 : index_count
-
-logic o122 : index
-
-logic o123 : int
-
-logic o124 : bool
-
-logic a1 : (int,positive) farray
-
-logic d__split_fields1 : us_main_type3
-
-logic p__split_fields1 : us_main_type7
-
-logic result : bool
-
-logic result1 : bool
-
-logic result2 : bool
-
-logic result3 : bool
-
-logic result4 : bool
-
-logic result5 : bool
-
-logic result6 : bool
-
-logic result7 : bool
-
-logic result8 : bool
-
-logic result9 : bool
-
-logic result10 : bool
-
-logic result11 : bool
-
-logic result12 : bool
-
-logic result13 : count_type
-
-logic c__split_fields1 : count_type
-
-logic result14 : bool
-
-logic a2 : (int,positive) farray
-
-logic d__split_fields2 : us_main_type3
-
-logic p__split_fields2 : us_main_type7
-
-logic c__split_fields2 : count_type
-
-logic a3 : (int,positive) farray
-
-logic d__split_fields3 : us_main_type3
-
-logic p__split_fields3 : us_main_type7
-
-logic c__split_fields3 : count_type
-
-logic result15 : bool
-
-logic result16 : bool
-
-logic result17 : bool
-
-logic result18 : bool
-
-logic result19 : bool
-
-logic a4 : (int,positive) farray
-
-logic d__split_fields4 : us_main_type3
-
-logic p__split_fields4 : us_main_type7
-
-logic c__split_fields4 : count_type
-
-logic a5 : (int,positive) farray
-
-logic d__split_fields5 : us_main_type3
-
-logic p__split_fields5 : us_main_type7
-
-logic c__split_fields5 : count_type
-
-logic a6 : (int,positive) farray
-
-logic d__split_fields6 : us_main_type3
-
-logic p__split_fields6 : us_main_type7
-
-logic c__split_fields6 : count_type
-
-logic a7 : (int,positive) farray
-
-logic d__split_fields7 : us_main_type3
-
-logic p__split_fields7 : us_main_type7
-
-logic c__split_fields7 : count_type
-
-logic a8 : (int,positive) farray
-
-logic d__split_fields8 : us_main_type3
-
-logic p__split_fields8 : us_main_type7
-
-logic c__split_fields8 : count_type
-
-logic a9 : (int,positive) farray
-
-logic d__split_fields9 : us_main_type3
-
-logic p__split_fields9 : us_main_type7
-
-logic c__split_fields9 : count_type
-
-logic a10 : (int,positive) farray
-
-logic d__split_fields10 : us_main_type3
-
-logic p__split_fields10 : us_main_type7
-
-logic c__split_fields10 : count_type
-
-logic p__split_fields11 : us_main_type7
-
-logic f1 : (int,partition_index) farray
-
-logic a11 : (int,positive) farray
-
-logic d__split_fields11 : us_main_type3
-
-logic p__split_fields12 : us_main_type7
-
-logic f2 : (int,partition_index) farray
-
-logic c__split_fields11 : count_type
-
-logic a12 : (int,positive) farray
-
-logic d__split_fields12 : us_main_type3
-
-logic p__split_fields13 : us_main_type7
-
-logic f3 : (int,partition_index) farray
-
-logic c__split_fields12 : count_type
-
-logic result20 : bool
-
-axiom H : ((((of_int(1) = true) -> ((2 * length1({ us_split_discrs5 = {
+ (* File "a-cofove.ads", line 807, characters 0-0 *)
+goal WP_parameter_def :
+  (forall a:(int,positive) farray. forall d__split_fields:us_main_type3.
+  forall p__split_fields:us_main_type7.
+  forall f:(int,partition_index) farray. forall c__split_fields:count_type.
+  forall partition_refinement__refine__c__assume:count_type.
+  forall result:us_split_fields__ref.
+  forall c__split_fields1:us_split_fields. forall result1:bool.
+  (((((of_int(1) = true) and ((2 * length1({ us_split_discrs5 = {
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
   }; us_split_fields11 = { rec__partition_refinement__partitions__vector =
-  p__split_fields } })) <= to_rep5(p__split_discrs))) and
-  ((not (of_int(1) = true)) -> ((2 * length1({ us_split_discrs5 = {
+  p__split_fields } })) <= to_rep5(p__split_discrs))) or
+  ((not (of_int(1) = true)) and ((2 * length1({ us_split_discrs5 = {
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
   }; us_split_fields11 = { rec__partition_refinement__partitions__vector =
   p__split_fields } })) <= 10001))) and ((length1({ us_split_discrs5 = {
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
   }; us_split_fields11 = { rec__partition_refinement__partitions__vector =
   p__split_fields } }) <= 5000) and
-  ((forall j6:int. (((0 <= j6) and (j6 <= 5)) -> (has_key2(model__1({
+  ((forall j:int. (((0 <= j) and (j <= 5)) -> (has_key2(model__1({
    us_split_discrs3 = {
    rec__partition_refinement__inverse_sets__map__capacity = d__split_discrs
    }; us_split_fields7 = { rec__partition_refinement__inverse_sets__map =
-   d__split_fields } }), to_rep((a[j6]))) = true))) and
-  ((forall c5:count_type. ((has_key1(positions1({ us_split_discrs3 = {
+   d__split_fields } }), to_rep((a[j]))) = true))) and
+  ((forall c:us_rep4. ((has_key1(positions1({ us_split_discrs3 = {
    rec__partition_refinement__inverse_sets__map__capacity = d__split_discrs
    }; us_split_fields7 = { rec__partition_refinement__inverse_sets__map =
-   d__split_fields } }), { us_split_fields5 = {
-   rec__partition_refinement__inverse_sets__cursor__node = c5 } }) = true) ->
-   (to_rep((a[get4(model__1({ us_split_discrs3 = {
+   d__split_fields } }), c) = true) -> (to_rep((a[get4(model__1({
+   us_split_discrs3 = {
    rec__partition_refinement__inverse_sets__map__capacity = d__split_discrs
    }; us_split_fields7 = { rec__partition_refinement__inverse_sets__map =
    d__split_fields } }), get2(keys({ us_split_discrs3 = {
@@ -3512,22 +2973,17 @@ axiom H : ((((of_int(1) = true) -> ((2 * length1({ us_split_discrs5 = {
    d__split_fields } }), get3(positions1({ us_split_discrs3 = {
    rec__partition_refinement__inverse_sets__map__capacity = d__split_discrs
    }; us_split_fields7 = { rec__partition_refinement__inverse_sets__map =
-   d__split_fields } }), { us_split_fields5 = {
-   rec__partition_refinement__inverse_sets__cursor__node = c5 }
-   })))])) = get2(keys({ us_split_discrs3 = {
+   d__split_fields } }), c)))])) = get2(keys({ us_split_discrs3 = {
    rec__partition_refinement__inverse_sets__map__capacity = d__split_discrs
    }; us_split_fields7 = { rec__partition_refinement__inverse_sets__map =
    d__split_fields } }), get3(positions1({ us_split_discrs3 = {
    rec__partition_refinement__inverse_sets__map__capacity = d__split_discrs
    }; us_split_fields7 = { rec__partition_refinement__inverse_sets__map =
-   d__split_fields } }), { us_split_fields5 = {
-   rec__partition_refinement__inverse_sets__cursor__node = c5 } }))))) and
-  ((forall c5:count_type. ((has_key(positions({ us_split_discrs1 = {
+   d__split_fields } }), c))))) and
+  ((forall c:us_rep. ((has_key(positions({ us_split_discrs1 = {
    rec__partition_refinement__partitioning_sets__list__capacity = x };
    us_split_fields3 = { rec__partition_refinement__partitioning_sets__list =
-   x1 } }), { us_split_fields1 = {
-   rec__partition_refinement__partitioning_sets__cursor__node = c5 }
-   }) = true) -> (has_key2(model__1({ us_split_discrs3 = {
+   x1 } }), c) = true) -> (has_key2(model__1({ us_split_discrs3 = {
    rec__partition_refinement__inverse_sets__map__capacity = d__split_discrs
    }; us_split_fields7 = { rec__partition_refinement__inverse_sets__map =
    d__split_fields } }), get(model__({ us_split_discrs1 = {
@@ -3536,41 +2992,39 @@ axiom H : ((((of_int(1) = true) -> ((2 * length1({ us_split_discrs5 = {
    x1 } }), get1(positions({ us_split_discrs1 = {
    rec__partition_refinement__partitioning_sets__list__capacity = x };
    us_split_fields3 = { rec__partition_refinement__partitioning_sets__list =
-   x1 } }), { us_split_fields1 = {
-   rec__partition_refinement__partitioning_sets__cursor__node = c5 }
-   }))) = true))) and
-  ((forall j6:int. (((0 <= j6) and (j6 <= 5)) -> ((0 <= to_rep4((f[j6]))) and
-   (to_rep4((f[j6])) <= (length1({ us_split_discrs5 = {
+   x1 } }), c))) = true))) and
+  ((forall j:int. (((0 <= j) and (j <= 5)) -> ((0 <= to_rep4((f[j]))) and
+   (to_rep4((f[j])) <= (length1({ us_split_discrs5 = {
    rec__partition_refinement__partitions__vector__capacity = p__split_discrs
    }; us_split_fields11 = { rec__partition_refinement__partitions__vector =
    p__split_fields } }) - 1))))) and
-  ((forall j6:int. (((0 <= j6) and (j6 <= 5)) -> ((to_rep2(((get5(model__2({
+  ((forall j:int. (((0 <= j) and (j <= 5)) -> ((to_rep2(((get5(model__2({
    us_split_discrs5 = {
    rec__partition_refinement__partitions__vector__capacity = p__split_discrs
    }; us_split_fields11 = { rec__partition_refinement__partitions__vector =
    p__split_fields } }),
-   to_rep4((f[j6])))).us_split_fields9).rec__partition_refinement__interval__first) <= j6) and
-   (j6 <= to_rep2(((get5(model__2({ us_split_discrs5 = {
+   to_rep4((f[j])))).us_split_fields9).rec__partition_refinement__interval__first) <= j) and
+   (j <= to_rep2(((get5(model__2({ us_split_discrs5 = {
    rec__partition_refinement__partitions__vector__capacity = p__split_discrs
    }; us_split_fields11 = { rec__partition_refinement__partitions__vector =
    p__split_fields } }),
-   to_rep4((f[j6])))).us_split_fields9).rec__partition_refinement__interval__last))))) and
-  ((forall j6:int. (((0 <= j6) and (j6 <= (length1({ us_split_discrs5 = {
+   to_rep4((f[j])))).us_split_fields9).rec__partition_refinement__interval__last))))) and
+  ((forall j:int. (((0 <= j) and (j <= (length1({ us_split_discrs5 = {
    rec__partition_refinement__partitions__vector__capacity = p__split_discrs
    }; us_split_fields11 = { rec__partition_refinement__partitions__vector =
    p__split_fields } }) - 1))) ->
-   (forall k2:int. (((to_rep2(((get5(model__2({ us_split_discrs5 = {
+   (forall k:int. (((to_rep2(((get5(model__2({ us_split_discrs5 = {
    rec__partition_refinement__partitions__vector__capacity = p__split_discrs
    }; us_split_fields11 = { rec__partition_refinement__partitions__vector =
    p__split_fields } }),
-   j6)).us_split_fields9).rec__partition_refinement__interval__first) <= k2) and
-   (k2 <= to_rep2(((get5(model__2({ us_split_discrs5 = {
+   j)).us_split_fields9).rec__partition_refinement__interval__first) <= k) and
+   (k <= to_rep2(((get5(model__2({ us_split_discrs5 = {
    rec__partition_refinement__partitions__vector__capacity = p__split_discrs
    }; us_split_fields11 = { rec__partition_refinement__partitions__vector =
    p__split_fields } }),
-   j6)).us_split_fields9).rec__partition_refinement__interval__last))) ->
-   (to_rep4((f[k2])) = j6))))) and
-  (forall j6:int. (((0 <= j6) and (j6 <= (length1({ us_split_discrs5 = {
+   j)).us_split_fields9).rec__partition_refinement__interval__last))) ->
+   (to_rep4((f[k])) = j))))) and
+  (forall j:int. (((0 <= j) and (j <= (length1({ us_split_discrs5 = {
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
   }; us_split_fields11 = { rec__partition_refinement__partitions__vector =
   p__split_fields } }) - 1))) -> (to_rep1(((get5(model__2({
@@ -3578,9 +3032,8 @@ axiom H : ((((of_int(1) = true) -> ((2 * length1({ us_split_discrs5 = {
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
   }; us_split_fields11 = { rec__partition_refinement__partitions__vector =
   p__split_fields } }),
-  j6)).us_split_fields9).rec__partition_refinement__interval__count) = 0)))))))))))
-
-axiom H1 : (({ us_split_fields1 = {
+  j)).us_split_fields9).rec__partition_refinement__interval__count) = 0))))))))))) ->
+  (((({ us_split_fields1 = {
   rec__partition_refinement__partitioning_sets__cursor__node =
   partition_refinement__refine__c__assume } } = first({ us_split_discrs1 = {
   rec__partition_refinement__partitioning_sets__list__capacity = x };
@@ -3588,14 +3041,14 @@ axiom H1 : (({ us_split_fields1 = {
   x1 } })) and (((bool_eq1(length({ us_split_discrs1 = {
   rec__partition_refinement__partitioning_sets__list__capacity = x };
   us_split_fields3 = { rec__partition_refinement__partitioning_sets__list =
-  x1 } }), 0) = true) -> (bool_eq8({ us_split_fields1 = {
+  x1 } }), 0) = true) and (bool_eq8({ us_split_fields1 = {
   rec__partition_refinement__partitioning_sets__cursor__node =
   partition_refinement__refine__c__assume } }, { us_split_fields1 = {
   rec__partition_refinement__partitioning_sets__cursor__node = no_element }
-  }) = true)) and ((not (bool_eq1(length({ us_split_discrs1 = {
+  }) = true)) or ((not (bool_eq1(length({ us_split_discrs1 = {
   rec__partition_refinement__partitioning_sets__list__capacity = x };
   us_split_fields3 = { rec__partition_refinement__partitioning_sets__list =
-  x1 } }), 0) = true)) -> ((has_key(positions({ us_split_discrs1 = {
+  x1 } }), 0) = true)) and ((has_key(positions({ us_split_discrs1 = {
   rec__partition_refinement__partitioning_sets__list__capacity = x };
   us_split_fields3 = { rec__partition_refinement__partitioning_sets__list =
   x1 } }), { us_split_fields1 = {
@@ -3606,30 +3059,22 @@ axiom H1 : (({ us_split_fields1 = {
   us_split_fields3 = { rec__partition_refinement__partitioning_sets__list =
   x1 } }), { us_split_fields1 = {
   rec__partition_refinement__partitioning_sets__cursor__node =
-  partition_refinement__refine__c__assume } }) = 1)))))
-
-axiom H2 : (result13 = c__split_fields)
-
-axiom H3 : (c__split_fields1 = partition_refinement__refine__c__assume)
-
-axiom H4 : ((d__split_discrs = d_old) and (d__split_fields = d_old1))
-
-axiom H5 : ((result14 = has_key(positions({ us_split_discrs1 = {
+  partition_refinement__refine__c__assume } }) = 1))))) and ((result = {
+  us_split_fields__content = {
+  rec__partition_refinement__partitioning_sets__cursor__node =
+  c__split_fields } }) and (c__split_fields1 = {
+  rec__partition_refinement__partitioning_sets__cursor__node =
+  partition_refinement__refine__c__assume }))) ->
+  (((d__split_discrs = d_old) and (d__split_fields = d_old1)) ->
+  (((result1 = has_key(positions({ us_split_discrs1 = {
   rec__partition_refinement__partitioning_sets__list__capacity = x };
   us_split_fields3 = { rec__partition_refinement__partitioning_sets__list =
-  x1 } }), { us_split_fields1 = {
-  rec__partition_refinement__partitioning_sets__cursor__node =
-  c__split_fields1 } })) and ((result14 = true) <-> (has_key(positions({
-  us_split_discrs1 = {
+  x1 } }), { us_split_fields1 = c__split_fields1 })) and
+  ((result1 = true) <-> (has_key(positions({ us_split_discrs1 = {
   rec__partition_refinement__partitioning_sets__list__capacity = x };
   us_split_fields3 = { rec__partition_refinement__partitioning_sets__list =
-  x1 } }), { us_split_fields1 = {
-  rec__partition_refinement__partitioning_sets__cursor__node =
-  c__split_fields1 } }) = true)))
-
-axiom H6 : (result14 = true)
-
-axiom H7 : (has_key1(positions1({ us_split_discrs3 = {
+  x1 } }), { us_split_fields1 = c__split_fields1 }) = true))) ->
+  ((result1 = true) -> ((has_key1(positions1({ us_split_discrs3 = {
   rec__partition_refinement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields7 = { rec__partition_refinement__inverse_sets__map =
   d__split_fields } }), find({ us_split_discrs3 = {
@@ -3641,11 +3086,8 @@ axiom H7 : (has_key1(positions1({ us_split_discrs3 = {
   x1 } }), get1(positions({ us_split_discrs1 = {
   rec__partition_refinement__partitioning_sets__list__capacity = x };
   us_split_fields3 = { rec__partition_refinement__partitioning_sets__list =
-  x1 } }), { us_split_fields1 = {
-  rec__partition_refinement__partitioning_sets__cursor__node =
-  c__split_fields1 } })))) = true)
-
-axiom H8 : (has_key2(model__1({ us_split_discrs3 = {
+  x1 } }), { us_split_fields1 = c__split_fields1 })))) = true) ->
+  ((has_key2(model__1({ us_split_discrs3 = {
   rec__partition_refinement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields7 = { rec__partition_refinement__inverse_sets__map =
   d__split_fields } }), get(model__({ us_split_discrs1 = {
@@ -3654,14 +3096,8 @@ axiom H8 : (has_key2(model__1({ us_split_discrs3 = {
   x1 } }), get1(positions({ us_split_discrs1 = {
   rec__partition_refinement__partitioning_sets__list__capacity = x };
   us_split_fields3 = { rec__partition_refinement__partitioning_sets__list =
-  x1 } }), { us_split_fields1 = {
-  rec__partition_refinement__partitioning_sets__cursor__node =
-  c__split_fields1 } }))) = true)
-
- (* File "a-cofove.ads", line 807, characters 0-0 *)
-goal WP_parameter_def : (has_key(positions({ us_split_discrs1 = {
+  x1 } }), { us_split_fields1 = c__split_fields1 }))) = true) ->
+  (has_key(positions({ us_split_discrs1 = {
   rec__partition_refinement__partitioning_sets__list__capacity = x };
   us_split_fields3 = { rec__partition_refinement__partitioning_sets__list =
-  x1 } }), { us_split_fields1 = {
-  rec__partition_refinement__partitioning_sets__cursor__node =
-  c__split_fields1 } }) = true)
+  x1 } }), { us_split_fields1 = c__split_fields1 }) = true)))))))))

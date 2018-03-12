@@ -133,15 +133,8 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic num_accounts : int
-
-logic o : int
-
-logic num_accounts1 : int
-
-axiom H : in_range1(num_accounts)
-
-axiom H1 : in_range1(num_accounts1)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((num_accounts1 + 1))
+goal WP_parameter_def :
+  (forall num_accounts:int. forall num_accounts1:int.
+  (in_range1(num_accounts) -> (in_range1(num_accounts1) ->
+  in_range((num_accounts1 + 1)))))

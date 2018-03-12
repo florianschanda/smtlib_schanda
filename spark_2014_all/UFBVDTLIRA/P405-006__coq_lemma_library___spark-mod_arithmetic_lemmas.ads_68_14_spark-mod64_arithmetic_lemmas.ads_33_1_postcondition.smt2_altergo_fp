@@ -666,14 +666,15 @@ logic factor : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-axiom H : true
+logic rliteral : t
 
-axiom H1 : true
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
 
-axiom H2 : true
+logic rliteral1 : t
 
-axiom H3 : (ule(val1, val2) and ((factor = of_int(0)) or ule(val2,
-  udiv(of_int(18446744073709551615), factor))))
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 18446744073709551615)
 
  (* File "spark-mod_arithmetic_lemmas.ads", line 52, characters 0-0 *)
-goal WP_parameter_def : ule(mul(val1, factor), mul(val2, factor))
+goal WP_parameter_def : ((ule(val1, val2) and ((factor = rliteral) or
+  ule(val2, udiv(rliteral1, factor)))) -> ule(mul(val1, factor), mul(val2,
+  factor)))

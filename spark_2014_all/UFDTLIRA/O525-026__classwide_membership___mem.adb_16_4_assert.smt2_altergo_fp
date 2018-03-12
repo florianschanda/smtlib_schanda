@@ -199,16 +199,11 @@ axiom test_mem_class2__def_axiom :
   us_split_fields1 = { rec__ext__ = v }; attr__tag = v1 }) = true) <->
   ((v1 = us_tag) or us_compatible_tags(v1, us_tag))))
 
-logic x__split_fields : us_private
-
-axiom H : (x__attr__tag = us_tag)
-
-axiom H1 : (test_mem({ us_split_fields1 = { rec__ext__ = x__split_fields };
-  attr__tag = x__attr__tag }) = true)
-
-axiom H2 : (test_mem_class({ us_split_fields1 = { rec__ext__ =
-  x__split_fields }; attr__tag = x__attr__tag }) = true)
-
  (* File "mem.adb", line 12, characters 0-0 *)
-goal WP_parameter_def : (test_mem_class1({ us_split_fields1 = { rec__ext__ =
-  x__split_fields }; attr__tag = x__attr__tag }) = true)
+goal WP_parameter_def :
+  (forall x__split_fields:us_private. ((x__attr__tag = us_tag) ->
+  ((test_mem({ us_split_fields1 = { rec__ext__ = x__split_fields };
+  attr__tag = x__attr__tag }) = true) -> ((test_mem_class({
+  us_split_fields1 = { rec__ext__ = x__split_fields }; attr__tag =
+  x__attr__tag }) = true) -> (test_mem_class1({ us_split_fields1 = {
+  rec__ext__ = x__split_fields }; attr__tag = x__attr__tag }) = true)))))

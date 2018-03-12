@@ -235,7 +235,5 @@ logic po__split_discrs : integer
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic us : int
-
  (* File "p.ads", line 3, characters 0-0 *)
 goal WP_parameter_def : in_range(0)

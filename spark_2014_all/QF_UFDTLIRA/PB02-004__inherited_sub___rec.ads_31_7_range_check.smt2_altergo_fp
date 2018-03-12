@@ -182,35 +182,12 @@ type sub_enum__ref = { sub_enum__content : sub_enum
 function sub_enum__ref___projection(a: sub_enum__ref) : sub_enum =
   (a).sub_enum__content
 
-logic temp___z_186 : int
-
-logic us : int
-
-logic temp___z_185 : int
-
-logic us1 : int
-
-logic temp___l_184 : int
-
-logic temp___f_183 : int
-
-logic temp___l_182 : int
-
-logic temp___f_181 : int
-
-axiom H : in_range2(temp___z_186)
-
-axiom H1 : ((us = temp___z_186) and in_range3(temp___z_186))
-
-axiom H2 : in_range2(temp___z_185)
-
-axiom H3 : ((us1 = temp___z_185) and in_range3(temp___z_185))
-
-axiom H4 : in_range(temp___l_184)
-
-axiom H5 : in_range(temp___f_183)
-
-axiom H6 : (temp___f_183 <= temp___l_184)
-
  (* File "rec.ads", line 34, characters 0-0 *)
-goal WP_parameter_def : (1 <= temp___f_183)
+goal WP_parameter_def :
+  (forall temp___z_216:int. forall us:int. forall temp___z_215:int.
+  forall us1:int. forall temp___l_214:int. forall temp___f_213:int.
+  ((in_range2(temp___z_216) and ((us = temp___z_216) and
+  in_range3(temp___z_216))) -> ((in_range2(temp___z_215) and
+  ((us1 = temp___z_215) and in_range3(temp___z_215))) ->
+  (in_range(temp___l_214) -> (in_range(temp___f_213) ->
+  ((temp___f_213 <= temp___l_214) -> (1 <= temp___f_213)))))))

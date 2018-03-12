@@ -231,7 +231,5 @@ logic self__1 : integer
 
 logic self__2 : integer
 
-logic temp___1548 : bool
-
  (* File "p.ads", line 5, characters 0-0 *)
 goal WP_parameter_def : (98 <= 98)

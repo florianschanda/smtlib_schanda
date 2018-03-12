@@ -366,164 +366,44 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic current_read__split_fields : character
-
-logic current_read__split_discrs : read_status
-
-logic current_line : int
-
-logic current_col : int
-
-logic current_pos : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic current_line1 : int
-
-logic current_col1 : int
-
-logic current_pos1 : int
-
-logic result : int
-
-logic current_line2 : int
-
-logic result1 : int
-
-logic current_col2 : int
-
-logic result2 : int
-
-logic current_col3 : int
-
-logic result3 : int
-
-logic current_pos2 : int
-
-logic current_line3 : int
-
-logic current_col4 : int
-
-logic current_pos3 : int
-
-logic current_line4 : int
-
-logic current_col5 : int
-
-logic current_pos4 : int
-
-axiom H : (current_read__attr__constrained = false)
-
-axiom H1 : in_range2(current_line)
-
-axiom H2 : in_range1(current_col)
-
-axiom H3 : in_range1(current_pos)
-
-axiom H4 : (current_line <  2147483647)
-
-axiom H5 : (current_col <  2147483647)
-
-axiom H6 : (current_pos <  2147483647)
-
-axiom H7 : ((to_rep1(current_read__split_discrs) = 0) ->
-  ((to_rep(current_read__split_fields) = 10) -> ((o = (current_line + 1)) and
-  in_range((current_line + 1)))))
-
-axiom H8 : ((to_rep1(current_read__split_discrs) = 0) ->
-  ((to_rep(current_read__split_fields) = 10) -> (result = current_line)))
-
-axiom H9 : ((to_rep1(current_read__split_discrs) = 0) ->
-  ((to_rep(current_read__split_fields) = 10) -> (current_line2 = o)))
-
-axiom H10 : ((to_rep1(current_read__split_discrs) = 0) ->
-  ((to_rep(current_read__split_fields) = 10) -> (result1 = current_col)))
-
-axiom H11 : ((to_rep1(current_read__split_discrs) = 0) ->
-  ((to_rep(current_read__split_fields) = 10) -> (current_col2 = 0)))
-
-axiom H12 : ((to_rep1(current_read__split_discrs) = 0) ->
-  ((not (to_rep(current_read__split_fields) = 10)) ->
-  ((to_rep(current_read__split_fields) = 13) ->
-  (current_col3 = current_col))))
-
-axiom H13 : ((to_rep1(current_read__split_discrs) = 0) ->
-  ((not (to_rep(current_read__split_fields) = 10)) ->
-  ((to_rep(current_read__split_fields) = 13) ->
-  (current_col3 = current_col1))))
-
-axiom H14 : ((to_rep1(current_read__split_discrs) = 0) ->
-  ((not (to_rep(current_read__split_fields) = 10)) ->
-  ((not (to_rep(current_read__split_fields) = 13)) ->
-  ((o1 = (current_col + 1)) and in_range((current_col + 1))))))
-
-axiom H15 : ((to_rep1(current_read__split_discrs) = 0) ->
-  ((not (to_rep(current_read__split_fields) = 10)) ->
-  ((not (to_rep(current_read__split_fields) = 13)) ->
-  (result2 = current_col))))
-
-axiom H16 : ((to_rep1(current_read__split_discrs) = 0) ->
-  ((not (to_rep(current_read__split_fields) = 10)) ->
-  ((not (to_rep(current_read__split_fields) = 13)) -> (current_col3 = o1))))
-
-axiom H17 : ((to_rep1(current_read__split_discrs) = 0) ->
-  ((not (to_rep(current_read__split_fields) = 10)) ->
-  (current_col2 = current_col3)))
-
-axiom H18 : ((to_rep1(current_read__split_discrs) = 0) ->
-  ((not (to_rep(current_read__split_fields) = 10)) ->
-  (current_line2 = current_line)))
-
-axiom H19 : ((to_rep1(current_read__split_discrs) = 0) ->
-  ((not (to_rep(current_read__split_fields) = 10)) ->
-  (current_col2 = current_col3)))
-
-axiom H20 : ((to_rep1(current_read__split_discrs) = 0) ->
-  ((not (to_rep(current_read__split_fields) = 10)) ->
-  (current_line2 = current_line1)))
-
-axiom H21 : ((to_rep1(current_read__split_discrs) = 0) ->
-  ((o2 = (current_pos + 1)) and in_range((current_pos + 1))))
-
-axiom H22 : ((to_rep1(current_read__split_discrs) = 0) ->
-  (result3 = current_pos))
-
-axiom H23 : ((to_rep1(current_read__split_discrs) = 0) ->
-  (current_pos2 = o2))
-
-axiom H24 : ((not (to_rep1(current_read__split_discrs) = 0)) ->
-  (current_pos2 = current_pos))
-
-axiom H25 : ((not (to_rep1(current_read__split_discrs) = 0)) ->
-  (current_col2 = current_col))
-
-axiom H26 : ((not (to_rep1(current_read__split_discrs) = 0)) ->
-  (current_line2 = current_line))
-
-axiom H27 : ((not (to_rep1(current_read__split_discrs) = 0)) ->
-  (current_pos2 = current_pos1))
-
-axiom H28 : ((not (to_rep1(current_read__split_discrs) = 0)) ->
-  (current_col2 = current_col1))
-
-axiom H29 : ((not (to_rep1(current_read__split_discrs) = 0)) ->
-  (current_line2 = current_line1))
-
-axiom H30 : (current_pos2 = current_pos3)
-
-axiom H31 : (current_col4 = current_col2)
-
-axiom H32 : (current_line3 = current_line2)
-
-axiom H33 : (current_pos4 = current_pos2)
-
-axiom H34 : (current_col5 = current_col2)
-
-axiom H35 : (current_line4 = current_line2)
-
  (* File "lexer.adb", line 578, characters 0-0 *)
-goal WP_parameter_def : (current_pos <= current_pos3)
+goal WP_parameter_def :
+  (forall current_read__split_fields:character.
+  forall current_read__split_discrs:read_status. forall current_line:int.
+  forall current_col:int. forall current_pos:int. forall o:int.
+  forall o1:int. forall o2:int. forall current_line1:int.
+  forall current_col1:int. forall current_pos1:int. forall result:int.
+  forall current_line2:int. forall result1:int. forall current_col2:int.
+  forall result2:int. forall current_col3:int. forall result3:int.
+  forall current_pos2:int. forall current_line3:int. forall current_col4:int.
+  forall current_pos3:int. forall current_line4:int. forall current_col5:int.
+  forall current_pos4:int. (((current_read__attr__constrained = false) and
+  (in_range2(current_line) and (in_range1(current_col) and
+  (in_range1(current_pos) and (((current_line <  2147483647) and
+  ((current_col <  2147483647) and ((current_pos <  2147483647) and
+  (((to_rep1(current_read__split_discrs) = 0) and
+  ((((to_rep(current_read__split_fields) = 10) and
+  ((((o = (current_line + 1)) and in_range((current_line + 1))) and (({
+  int__content = result } = { int__content = current_line }) and
+  (current_line2 = o))) and (({ int__content = result1 } = { int__content =
+  current_col }) and (current_col2 = 0)))) or
+  ((not (to_rep(current_read__split_fields) = 10)) and
+  ((((to_rep(current_read__split_fields) = 13) and
+  ((current_col3 = current_col) and (current_col3 = current_col1))) or
+  ((not (to_rep(current_read__split_fields) = 13)) and
+  (((o1 = (current_col + 1)) and in_range((current_col + 1))) and (({
+  int__content = result2 } = { int__content = current_col }) and
+  (current_col3 = o1))))) and (((current_col2 = current_col3) and
+  (current_line2 = current_line)) and ((current_col2 = current_col3) and
+  (current_line2 = current_line1)))))) and (((o2 = (current_pos + 1)) and
+  in_range((current_pos + 1))) and ((result3 = current_pos) and
+  (current_pos2 = o2))))) or
+  ((not (to_rep1(current_read__split_discrs) = 0)) and
+  (((current_pos2 = current_pos) and ((current_col2 = current_col) and
+  (current_line2 = current_line))) and ((current_pos2 = current_pos1) and
+  ((current_col2 = current_col1) and
+  (current_line2 = current_line1))))))))) and
+  (((current_pos2 = current_pos3) and ((current_col4 = current_col2) and
+  (current_line3 = current_line2))) and ((current_pos4 = current_pos2) and
+  ((current_col5 = current_col2) and
+  (current_line4 = current_line2))))))))) -> (current_pos <= current_pos3)))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -139,65 +139,15 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic x : int
-
-logic y : int
-
-logic temporary : int
-
-logic result : int
-
-logic temporary1 : int
-
-logic result1 : int
-
-logic x1 : int
-
-logic result2 : int
-
-logic y1 : int
-
-logic x2 : int
-
-logic y2 : int
-
-logic temporary2 : int
-
-logic x3 : int
-
-logic y3 : int
-
-logic temporary3 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : in_range1(y)
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range1(temporary))
-
-axiom H3 : (result = temporary)
-
-axiom H4 : (temporary1 = x)
-
-axiom H5 : (result1 = x)
-
-axiom H6 : (x1 = y)
-
-axiom H7 : (result2 = y)
-
-axiom H8 : (y1 = temporary1)
-
-axiom H9 : (temporary2 = temporary1)
-
-axiom H10 : (y1 = y2)
-
-axiom H11 : (x1 = x2)
-
-axiom H12 : (temporary3 = temporary1)
-
-axiom H13 : (y3 = y1)
-
-axiom H14 : (x3 = x1)
-
  (* File "swap_add_max_14.ads", line 24, characters 0-0 *)
-goal WP_parameter_def : (x2 = y)
+goal WP_parameter_def :
+  (forall x:int. forall y:int. forall temporary:int. forall result:int.
+  forall temporary1:int. forall result1:int. forall x1:int.
+  forall result2:int. forall y1:int. forall x2:int. forall y2:int.
+  forall temporary2:int. forall x3:int. forall y3:int. forall temporary3:int.
+  ((in_range1(x) and (in_range1(y) and (((((- 2147483648) <= 2147483647) ->
+  in_range1(temporary)) and (((result = temporary) and (temporary1 = x)) and
+  (((result1 = x) and (x1 = y)) and ((result2 = y) and
+  (y1 = temporary1))))) and (((temporary2 = temporary1) and ((y1 = y2) and
+  (x1 = x2))) and ((temporary3 = temporary1) and ((y3 = y1) and
+  (x3 = x1))))))) -> (x2 = y)))

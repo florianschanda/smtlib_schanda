@@ -343,85 +343,44 @@ axiom update_a__post_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x__split_fields : bool
-
-logic x__split_fields1 : unsigned_byte
-
-logic x__split_fields2 : unsigned_byte
-
-logic temp___399 : bool
-
-logic temp___3991 : unsigned_byte
-
-logic temp___3992 : unsigned_byte
-
-logic result : bool
-
-logic result1 : unsigned_byte
-
-logic result2 : unsigned_byte
-
-logic x__split_fields3 : bool
-
-logic x__split_fields4 : unsigned_byte
-
-logic x__split_fields5 : unsigned_byte
-
-logic x__split_fields6 : bool
-
-logic x__split_fields7 : unsigned_byte
-
-logic x__split_fields8 : unsigned_byte
-
-logic x__split_fields9 : bool
-
-logic x__split_fields10 : unsigned_byte
-
-logic x__split_fields11 : unsigned_byte
-
-axiom H : (({ us_split_fields3 = {
-  rec__records_prooffuncs__optional_pair__exists = temp___399;
+ (* File "records.adb", line 333, characters 0-0 *)
+goal WP_parameter_def :
+  (forall x__split_fields:bool. forall x__split_fields1:unsigned_byte.
+  forall x__split_fields2:unsigned_byte. forall temp___432:bool.
+  forall temp___4321:unsigned_byte. forall temp___4322:unsigned_byte.
+  forall result:bool. forall result1:unsigned_byte.
+  forall result2:unsigned_byte. forall x__split_fields3:bool.
+  forall x__split_fields4:unsigned_byte.
+  forall x__split_fields5:unsigned_byte. forall x__split_fields6:bool.
+  forall x__split_fields7:unsigned_byte.
+  forall x__split_fields8:unsigned_byte. forall x__split_fields9:bool.
+  forall x__split_fields10:unsigned_byte.
+  forall x__split_fields11:unsigned_byte. ((((({ us_split_fields3 = {
+  rec__records_prooffuncs__optional_pair__exists = temp___432;
   rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
-  rec__records_prooffuncs__pair__a = temp___3991;
-  rec__records_prooffuncs__pair__b = temp___3992 } } } } = update_a({
+  rec__records_prooffuncs__pair__a = temp___4321;
+  rec__records_prooffuncs__pair__b = temp___4322 } } } } = update_a({
   us_split_fields3 = { rec__records_prooffuncs__optional_pair__exists =
   x__split_fields; rec__records_prooffuncs__optional_pair__the_pair = {
   us_split_fields1 = { rec__records_prooffuncs__pair__a = x__split_fields1;
   rec__records_prooffuncs__pair__b = x__split_fields2 } } } },
   to_rep(x__split_fields2))) and (bool_eq3({ us_split_fields3 = {
-  rec__records_prooffuncs__optional_pair__exists = temp___399;
+  rec__records_prooffuncs__optional_pair__exists = temp___432;
   rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
-  rec__records_prooffuncs__pair__a = temp___3991;
-  rec__records_prooffuncs__pair__b = temp___3992 } } } }, {
+  rec__records_prooffuncs__pair__a = temp___4321;
+  rec__records_prooffuncs__pair__b = temp___4322 } } } }, {
   us_split_fields3 = { rec__records_prooffuncs__optional_pair__exists =
   x__split_fields; rec__records_prooffuncs__optional_pair__the_pair = {
   us_split_fields1 = { rec__records_prooffuncs__pair__a =
   of_rep(to_rep(x__split_fields2)); rec__records_prooffuncs__pair__b =
-  x__split_fields2 } } } }) = true))
-
-axiom H1 : (result = x__split_fields)
-
-axiom H2 : (result1 = x__split_fields1)
-
-axiom H3 : (result2 = x__split_fields2)
-
-axiom H4 : (temp___399 = x__split_fields3)
-
-axiom H5 : (temp___3991 = x__split_fields4)
-
-axiom H6 : (temp___3992 = x__split_fields5)
-
-axiom H7 : (x__split_fields6 = x__split_fields3)
-
-axiom H8 : (x__split_fields7 = x__split_fields4)
-
-axiom H9 : (x__split_fields8 = x__split_fields5)
-
-axiom H10 : (x__split_fields9 = x__split_fields3)
-
-axiom H11 : (x__split_fields10 = x__split_fields4)
-
-axiom H12 : (x__split_fields11 = x__split_fields5)
-
- (* File "records.adb", line 333, characters 0-0 *)
-goal WP_parameter_def : (to_rep(x__split_fields7) = to_rep(x__split_fields2))
+  x__split_fields2 } } } }) = true)) and (((result = x__split_fields) and
+  ((result1 = x__split_fields1) and (result2 = x__split_fields2))) and
+  ((temp___432 = x__split_fields3) and ((temp___4321 = x__split_fields4) and
+  (temp___4322 = x__split_fields5))))) and
+  (((x__split_fields6 = x__split_fields3) and
+  ((x__split_fields7 = x__split_fields4) and
+  (x__split_fields8 = x__split_fields5))) and
+  ((x__split_fields9 = x__split_fields3) and
+  ((x__split_fields10 = x__split_fields4) and
+  (x__split_fields11 = x__split_fields5))))) ->
+  (to_rep(x__split_fields7) = to_rep(x__split_fields2))))

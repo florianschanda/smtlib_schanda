@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -189,146 +189,38 @@ axiom state_d__def_axiom :
   state_machine__num) = true) <-> ((not (state_machine__flag = true)) and
   (state_machine__num <  0)))))
 
-logic flag : bool
-
-logic num : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic flag1 : bool
-
-logic num1 : int
-
-logic result : bool
-
-logic result1 : bool
-
-logic result2 : int
-
-logic num2 : int
-
-logic result3 : bool
-
-logic result4 : bool
-
-logic flag2 : bool
-
-logic result5 : int
-
-logic num3 : int
-
-logic result6 : bool
-
-logic result7 : int
-
-logic num4 : int
-
-logic flag3 : bool
-
-logic num5 : int
-
-logic flag4 : bool
-
-logic num6 : int
-
-axiom H : in_range1(num)
-
-axiom H1 : ((result = state_a(flag, num)) and ((result = true) <->
-  ((flag = true) and (0 <  num))))
-
-axiom H2 : ((result = true) -> (num2 = num))
-
-axiom H3 : ((result = true) -> (flag2 = flag))
-
-axiom H4 : ((result = true) -> (num2 = num1))
-
-axiom H5 : ((result = true) -> (flag2 = flag1))
-
-axiom H6 : ((not (result = true)) -> ((result1 = state_b(flag, num)) and
-  ((result1 = true) <-> ((flag = true) and (num <= 0)))))
-
-axiom H7 : ((not (result = true)) -> ((result1 = true) ->
-  ((o = (num + 1)) and in_range1((num + 1)))))
-
-axiom H8 : ((not (result = true)) -> ((result1 = true) -> (result2 = num)))
-
-axiom H9 : ((not (result = true)) -> ((result1 = true) -> (num2 = o)))
-
-axiom H10 : ((not (result = true)) -> ((result1 = true) -> (flag2 = flag)))
-
-axiom H11 : ((not (result = true)) -> ((result1 = true) -> (flag2 = flag1)))
-
-axiom H12 : ((not (result = true)) -> ((not (result1 = true)) ->
-  ((result3 = state_c(flag, num)) and ((result3 = true) <->
-  ((not (flag = true)) and (0 <  num))))))
-
-axiom H13 : ((not (result = true)) -> ((not (result1 = true)) ->
-  ((result3 = true) -> (result4 = flag))))
-
-axiom H14 : ((not (result = true)) -> ((not (result1 = true)) ->
-  ((result3 = true) -> (flag2 = of_int(1)))))
-
-axiom H15 : ((not (result = true)) -> ((not (result1 = true)) ->
-  ((result3 = true) -> ((o1 = (-num)) and in_range1((-num))))))
-
-axiom H16 : ((not (result = true)) -> ((not (result1 = true)) ->
-  ((result3 = true) -> (result5 = num))))
-
-axiom H17 : ((not (result = true)) -> ((not (result1 = true)) ->
-  ((result3 = true) -> (num3 = o1))))
-
-axiom H18 : ((not (result = true)) -> ((not (result1 = true)) ->
-  ((not (result3 = true)) -> ((result6 = state_d(flag, num)) and
-  ((result6 = true) <-> ((not (flag = true)) and (num <  0)))))))
-
-axiom H19 : ((not (result = true)) -> ((not (result1 = true)) ->
-  ((not (result3 = true)) -> (result6 = true))))
-
-axiom H20 : ((not (result = true)) -> ((not (result1 = true)) ->
-  ((not (result3 = true)) -> ((o2 = (num + 1)) and in_range1((num + 1))))))
-
-axiom H21 : ((not (result = true)) -> ((not (result1 = true)) ->
-  ((not (result3 = true)) -> (result7 = num))))
-
-axiom H22 : ((not (result = true)) -> ((not (result1 = true)) ->
-  ((not (result3 = true)) -> (num4 = o2))))
-
-axiom H23 : ((not (result = true)) -> ((not (result1 = true)) ->
-  ((not (result3 = true)) -> (num3 = num4))))
-
-axiom H24 : ((not (result = true)) -> ((not (result1 = true)) ->
-  ((not (result3 = true)) -> (flag2 = flag))))
-
-axiom H25 : ((not (result = true)) -> ((not (result1 = true)) ->
-  ((not (result3 = true)) -> (num3 = num4))))
-
-axiom H26 : ((not (result = true)) -> ((not (result1 = true)) ->
-  ((not (result3 = true)) -> (flag2 = flag1))))
-
-axiom H27 : ((not (result = true)) -> ((not (result1 = true)) ->
-  (num2 = num3)))
-
-axiom H28 : (num2 = num5)
-
-axiom H29 : (flag2 = flag3)
-
-axiom H30 : (num6 = num2)
-
-axiom H31 : (flag4 = flag2)
-
-axiom H32 : ((state_a(flag, num) = true) -> (state_a(flag3, num5) = true))
-
-axiom H33 : ((state_b(flag, num) = true) -> ((state_a(flag3, num5) = true) or
-  (state_b(flag3, num5) = true)))
-
-axiom H34 : ((state_c(flag, num) = true) -> (state_b(flag3, num5) = true))
-
-axiom H35 : (state_d(flag, num) = true)
-
  (* File "state_machine.adb", line 22, characters 0-0 *)
-goal WP_parameter_def : ((state_c(flag3, num5) = true) or (state_d(flag3,
-  num5) = true))
+goal WP_parameter_def :
+  (forall flag:bool. forall num:int. forall o:int. forall o1:int.
+  forall o2:int. forall flag1:bool. forall num1:int. forall result:bool.
+  forall result1:bool. forall result2:int. forall num2:int.
+  forall result3:bool. forall result4:bool. forall flag2:bool.
+  forall result5:int. forall num3:int. forall result6:bool.
+  forall result7:int. forall num4:int. forall flag3:bool. forall num5:int.
+  forall flag4:bool. forall num6:int. (in_range1(num) ->
+  (((((result = state_a(flag, num)) and ((result = true) <->
+  ((flag = true) and (0 <  num)))) and (((result = true) and
+  (((num2 = num) and (flag2 = flag)) and ((num2 = num1) and
+  (flag2 = flag1)))) or ((not (result = true)) and (((result1 = state_b(flag,
+  num)) and ((result1 = true) <-> ((flag = true) and (num <= 0)))) and
+  (((result1 = true) and ((((o = (num + 1)) and in_range1((num + 1))) and
+  ((result2 = num) and (num2 = o))) and ((flag2 = flag) and
+  (flag2 = flag1)))) or ((not (result1 = true)) and
+  ((((result3 = state_c(flag, num)) and ((result3 = true) <->
+  ((not (flag = true)) and (0 <  num)))) and (((result3 = true) and ((({
+  bool__content = result4 } = { bool__content = flag }) and
+  (flag2 = of_int(1))) and (((o1 = (-num)) and in_range1((-num))) and
+  ((result5 = num) and (num3 = o1))))) or ((not (result3 = true)) and
+  ((((result6 = state_d(flag, num)) and ((result6 = true) <->
+  ((not (flag = true)) and (num <  0)))) and ((result6 = true) and
+  (((o2 = (num + 1)) and in_range1((num + 1))) and ((result7 = num) and
+  (num4 = o2))))) and (((num3 = num4) and (flag2 = flag)) and
+  ((num3 = num4) and (flag2 = flag1))))))) and (num2 = num3)))))))) and
+  (((num2 = num5) and (flag2 = flag3)) and ((num6 = num2) and
+  (flag4 = flag2)))) -> ((((state_a(flag, num) = true) and (state_a(flag3,
+  num5) = true)) or (not (state_a(flag, num) = true))) -> ((((state_b(flag,
+  num) = true) and ((state_a(flag3, num5) = true) or (state_b(flag3,
+  num5) = true))) or (not (state_b(flag, num) = true))) -> ((((state_c(flag,
+  num) = true) and (state_b(flag3, num5) = true)) or (not (state_c(flag,
+  num) = true))) -> ((state_d(flag, num) = true) -> ((state_c(flag3,
+  num5) = true) or (state_d(flag3, num5) = true)))))))))

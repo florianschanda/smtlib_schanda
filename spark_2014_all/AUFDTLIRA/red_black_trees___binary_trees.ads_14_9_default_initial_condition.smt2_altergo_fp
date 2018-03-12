@@ -349,33 +349,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def :
-  (forall v:extended_index_type. forall v1:extended_index_type.
-  forall v2:extended_index_type. forall v3:position_type.
-  (forall i:int [(singleton({ us_split_fields1 = {
-  rec__binary_trees__cell__left = v; rec__binary_trees__cell__right = v1;
-  rec__binary_trees__cell__parent = v2; rec__binary_trees__cell__position =
-  v3 } }, i)[i])]. ((singleton({ us_split_fields1 = {
-  rec__binary_trees__cell__left = v; rec__binary_trees__cell__right = v1;
-  rec__binary_trees__cell__parent = v2; rec__binary_trees__cell__position =
-  v3 } }, i)[i]) = { us_split_fields1 = { rec__binary_trees__cell__left = v;
-  rec__binary_trees__cell__right = v1; rec__binary_trees__cell__parent = v2;
-  rec__binary_trees__cell__position = v3 } })))
-
 logic bool_eq5 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -386,17 +359,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) and (bool_eq4((a[temp___idx_133]),
-  (b[((b__first - a__first) + temp___idx_133)])) = true)) or
-  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (forall temp___idx_155:int. ((((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) and (bool_eq4((a[temp___idx_155]),
+  (b[((b__first - a__first) + temp___idx_155)])) = true)) or
+  (not ((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) -> (bool_eq4((a[temp___idx_133]),
-  (b[((b__first - a__first) + temp___idx_133)])) = true))))) -> (bool_eq5(a,
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) -> (bool_eq4((a[temp___idx_155]),
+  (b[((b__first - a__first) + temp___idx_155)])) = true))))) -> (bool_eq5(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -406,9 +379,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) -> (bool_eq4((a[temp___idx_133]),
-  (b[((b__first - a__first) + temp___idx_133)])) = true)))))))
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) -> (bool_eq4((a[temp___idx_155]),
+  (b[((b__first - a__first) + temp___idx_155)])) = true)))))))
 
 logic dummy7 : (int,us_rep) farray
 
@@ -607,18 +580,14 @@ axiom tree_structure__def_axiom :
   (to_rep1((((f1[i])).us_split_fields1).rec__binary_trees__cell__position) = 1)) ->
   (to_rep((((f1[to_rep((((f1[i])).us_split_fields1).rec__binary_trees__cell__parent)])).us_split_fields1).rec__binary_trees__cell__right) = i)))))))
 
-logic temp___574 : extended_index_type
-
-logic temp___5741 : (int,us_rep) farray
-
-axiom H : ((to_rep(temp___574) = 0) and
-  (forall temp___268:int. (((1 <= temp___268) and (temp___268 <= 100)) ->
-  ((((to_rep((((temp___5741[temp___268])).us_split_fields1).rec__binary_trees__cell__left) = 0) and
-  (to_rep((((temp___5741[temp___268])).us_split_fields1).rec__binary_trees__cell__right) = 0)) and
-  (to_rep((((temp___5741[temp___268])).us_split_fields1).rec__binary_trees__cell__parent) = 0)) and
-  (to_rep1((((temp___5741[temp___268])).us_split_fields1).rec__binary_trees__cell__position) = 2)))))
-
  (* File "binary_trees.ads", line 418, characters 0-0 *)
-goal WP_parameter_def : (size({ us_split_fields3 = {
-  rec__binary_trees__forest__s = temp___574; rec__binary_trees__forest__c =
-  temp___5741 } }) = 0)
+goal WP_parameter_def :
+  (forall temp___620:extended_index_type.
+  forall temp___6201:(int,us_rep) farray. (((to_rep(temp___620) = 0) and
+  (forall temp___309:int. (((1 <= temp___309) and (temp___309 <= 100)) ->
+  ((((to_rep((((temp___6201[temp___309])).us_split_fields1).rec__binary_trees__cell__left) = 0) and
+  (to_rep((((temp___6201[temp___309])).us_split_fields1).rec__binary_trees__cell__right) = 0)) and
+  (to_rep((((temp___6201[temp___309])).us_split_fields1).rec__binary_trees__cell__parent) = 0)) and
+  (to_rep1((((temp___6201[temp___309])).us_split_fields1).rec__binary_trees__cell__position) = 2))))) ->
+  (size({ us_split_fields3 = { rec__binary_trees__forest__s = temp___620;
+  rec__binary_trees__forest__c = temp___6201 } }) = 0)))

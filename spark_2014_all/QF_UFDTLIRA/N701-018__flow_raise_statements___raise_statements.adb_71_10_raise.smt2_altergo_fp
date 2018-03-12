@@ -111,11 +111,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range(o))
-
-axiom H1 : (not (a = true))
-
  (* File "raise_statements.adb", line 50, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def :
+  (forall o:int. ((((- 2147483648) <= 2147483647) -> in_range(o)) ->
+  (a = true)))

@@ -358,95 +358,35 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x__split_fields : integer
-
-logic x__split_fields1 : integer
-
-logic o : integer
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic temp___209 : integer
-
-logic temp___2091 : integer
-
-logic temp___210 : integer
-
-logic temp___2101 : integer
-
-logic o3 : integer
-
-logic o4 : integer
-
-logic o5 : integer
-
-logic temp___212 : integer
-
-logic temp___2121 : integer
-
-logic dynamic_preds__init_even__x : int
-
-logic result : integer
-
-logic result1 : integer
-
-logic x__split_fields2 : integer
-
-logic x__split_fields3 : integer
-
-logic dynamic_preds__init_ok_even__x : int
-
-axiom H : ((in_range1(to_rep(i9s)) and (mod(to_rep(i9s), 2) = 0)) and
-  (in_range1(to_rep(i9s1)) and (mod(to_rep(i9s1), 2) = 0)))
-
-axiom H1 : ((in_range1(to_rep(x__split_fields)) and
+ (* File "dynamic_preds.adb", line 26, characters 0-0 *)
+goal WP_parameter_def :
+  (forall x__split_fields:integer. forall x__split_fields1:integer.
+  forall o:integer. forall o1:integer. forall o2:integer.
+  forall temp___235:integer. forall temp___2351:integer.
+  forall temp___236:integer. forall temp___2361:integer. forall o3:integer.
+  forall o4:integer. forall o5:integer. forall temp___238:integer.
+  forall temp___2381:integer. forall dynamic_preds__init_even__x:int.
+  forall result:integer. forall result1:integer.
+  forall x__split_fields2:integer. forall x__split_fields3:integer.
+  forall dynamic_preds__init_ok_even__x:int. (((in_range1(to_rep(i9s)) and
+  (mod(to_rep(i9s), 2) = 0)) and (in_range1(to_rep(i9s1)) and
+  (mod(to_rep(i9s1), 2) = 0))) -> (((in_range1(to_rep(x__split_fields)) and
   (mod(to_rep(x__split_fields), 2) = 0)) and
   (in_range1(to_rep(x__split_fields1)) and (mod(to_rep(x__split_fields1),
-  2) = 0)))
-
-axiom H2 : in_range(dynamic_preds__init_even__x)
-
-axiom H3 : (to_rep(o) = dynamic_preds__init_even__x)
-
-axiom H4 : (o = o1)
-
-axiom H5 : (x__split_fields1 = o2)
-
-axiom H6 : (temp___209 = o1)
-
-axiom H7 : (temp___2091 = o2)
-
-axiom H8 : ((in_range1(to_rep(temp___209)) and (mod(to_rep(temp___209),
-  2) = 0)) and (in_range1(to_rep(temp___2091)) and (mod(to_rep(temp___2091),
-  2) = 0)))
-
-axiom H9 : ((temp___210 = temp___209) and (temp___2101 = temp___2091))
-
-axiom H10 : (result = x__split_fields)
-
-axiom H11 : (result1 = x__split_fields1)
-
-axiom H12 : (temp___210 = x__split_fields2)
-
-axiom H13 : (temp___2101 = x__split_fields3)
-
-axiom H14 : ((in_range1(dynamic_preds__init_ok_even__x) and
+  2) = 0))) -> ((in_range(dynamic_preds__init_even__x) and
+  (((((to_rep(o) = dynamic_preds__init_even__x) and ((o = o1) and
+  (x__split_fields1 = o2))) and ((temp___235 = o1) and
+  (temp___2351 = o2))) and (((in_range1(to_rep(temp___235)) and
+  (mod(to_rep(temp___235), 2) = 0)) and (in_range1(to_rep(temp___2351)) and
+  (mod(to_rep(temp___2351), 2) = 0))) and ((temp___236 = temp___235) and
+  (temp___2361 = temp___2351)))) and (((result = x__split_fields) and
+  (result1 = x__split_fields1)) and ((temp___236 = x__split_fields2) and
+  (temp___2361 = x__split_fields3))))) ->
+  (((in_range1(dynamic_preds__init_ok_even__x) and
   (mod(dynamic_preds__init_ok_even__x, 2) = 0)) and
-  in_range(dynamic_preds__init_ok_even__x))
-
-axiom H15 : (to_rep(o3) = dynamic_preds__init_ok_even__x)
-
-axiom H16 : (x__split_fields2 = o4)
-
-axiom H17 : (o3 = o5)
-
-axiom H18 : (temp___212 = o4)
-
-axiom H19 : (temp___2121 = o5)
-
- (* File "dynamic_preds.adb", line 26, characters 0-0 *)
-goal WP_parameter_def : ((in_range1(to_rep(temp___212)) and
-  (mod(to_rep(temp___212), 2) = 0)) and (in_range1(to_rep(temp___2121)) and
-  (mod(to_rep(temp___2121), 2) = 0)))
+  in_range(dynamic_preds__init_ok_even__x)) ->
+  ((((to_rep(o3) = dynamic_preds__init_ok_even__x) and
+  ((x__split_fields2 = o4) and (o3 = o5))) and ((temp___238 = o4) and
+  (temp___2381 = o5))) -> ((in_range1(to_rep(temp___238)) and
+  (mod(to_rep(temp___238), 2) = 0)) and (in_range1(to_rep(temp___2381)) and
+  (mod(to_rep(temp___2381), 2) = 0)))))))))

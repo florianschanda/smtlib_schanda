@@ -111,39 +111,14 @@ logic f__function_guard : int, unit -> prop
 
 axiom f__post_axiom : ((f(void) = 2) and in_range(f(void)))
 
-logic b__f__result : int
-
-logic o : int
-
-logic result : int
-
-logic b__f__result1 : int
-
-logic b__f__result2 : int
-
-logic b__f__result3 : int
-
-logic b__f__result4 : int
-
-logic b__f__result5 : int
-
-logic result1 : int
-
-axiom H : (b__f__result1 = b__f__result2)
-
-axiom H1 : (b__f__result3 = b__f__result1)
-
-axiom H2 : ((o = f(void)) and (in_range(o) and (o = 2)))
-
-axiom H3 : (result = b__f__result)
-
-axiom H4 : (b__f__result1 = o)
-
-axiom H5 : (b__f__result4 = b__f__result2)
-
-axiom H6 : (b__f__result5 = b__f__result3)
-
-axiom H7 : (result1 = b__f__result4)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (b__f__result4 = 2)
+goal WP_parameter_def :
+  (forall b__f__result:int. forall o:int. forall result:int.
+  forall b__f__result1:int. forall b__f__result2:int.
+  forall b__f__result3:int. forall b__f__result4:int.
+  forall b__f__result5:int.
+  (forall result1:int. ((((((b__f__result1 = b__f__result2) and
+  (b__f__result3 = b__f__result1)) and (((o = f(void)) and (in_range(o) and
+  (o = 2))) and ((result = b__f__result) and (b__f__result1 = o)))) and
+  ((b__f__result4 = b__f__result2) and (b__f__result5 = b__f__result3))) and
+  (result1 = b__f__result4)) -> (b__f__result4 = 2))))

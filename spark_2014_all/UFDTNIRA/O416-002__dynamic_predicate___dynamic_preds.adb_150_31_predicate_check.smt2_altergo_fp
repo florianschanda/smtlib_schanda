@@ -335,31 +335,9 @@ function even_close_pair__ref___projection(a: even_close_pair__ref) : us_rep =
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x__split_fields : even
-
-logic x__split_fields1 : even
-
-logic dynamic_preds__update_even_close_pair__x__compl : even
-
-logic dynamic_preds__update_even_close_pair__x__compl1 : even
-
-logic dynamic_preds__update_even_close_pair__x__fields : even
-
-logic dynamic_preds__update_even_close_pair__x__fields1 : even
-
-logic result : even
-
-logic result1 : even
-
-logic x__split_fields2 : even
-
-logic x__split_fields3 : even
-
-axiom H : (in_range(i7s) and (mod(i7s, 2) = 0))
-
-axiom H1 : ((mod(to_rep(x__split_fields), 2) = 0) and
-  (mod(to_rep(x__split_fields1), 2) = 0))
-
  (* File "dynamic_preds.ads", line 25, characters 0-0 *)
 goal WP_parameter_def :
-  (to_rep(x__split_fields1) = (to_rep(x__split_fields) + 2))
+  (forall x__split_fields:even. forall x__split_fields1:even.
+  ((in_range(i7s) and (mod(i7s, 2) = 0)) -> (((mod(to_rep(x__split_fields),
+  2) = 0) and (mod(to_rep(x__split_fields1), 2) = 0)) ->
+  (to_rep(x__split_fields1) = (to_rep(x__split_fields) + 2)))))

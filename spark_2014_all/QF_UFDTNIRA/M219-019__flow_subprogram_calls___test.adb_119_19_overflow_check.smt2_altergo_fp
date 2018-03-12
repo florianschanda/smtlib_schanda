@@ -139,25 +139,9 @@ logic factorial : int -> int
 
 logic factorial__function_guard : int, int -> prop
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-axiom H : in_range1(n)
-
-axiom H1 : (not (n = 1))
-
-axiom H2 : ((o = (n - 1)) and in_range1((n - 1)))
-
-axiom H3 : ((o1 = factorial(o)) and in_range1(o1))
-
-axiom H4 : (o2 = (n * o1))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(o2)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. forall o2:int. (in_range1(n) ->
+  ((not (n = 1)) -> (((((o = (n - 1)) and in_range1((n - 1))) and
+  ((o1 = factorial(o)) and in_range1(o1))) and (o2 = (n * o1))) ->
+  in_range(o2)))))

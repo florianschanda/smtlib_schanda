@@ -1771,17 +1771,25 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 axiom shift_right__post_axiom : true
 
+logic rliteral3 : t1
+
+axiom rliteral_axiom3 : (tqtint1(rliteral3) = 0)
+
+logic rliteral4 : t
+
+axiom rliteral_axiom4 : (tqtint(rliteral4) = 0)
+
 axiom shift_right__def_axiom :
   (forall v:t.
   (forall amount:int [shift_right(v, amount)]. (in_range2(amount) ->
   ((((1 <= 16) and (16 <= 8)) -> (((amount <  8) -> (shift_right(v,
   amount) = toBig2(lsr_bv1(toSmall2(v), of_int1(amount))))) and
-  ((not (amount <  8)) -> (shift_right(v,
-  amount) = toBig2(of_int1(0)))))) and ((not ((1 <= 16) and (16 <= 8))) ->
-  ((((9 <= 16) and (16 <= 16)) -> (((amount <  16) -> (shift_right(v,
-  amount) = lsr_bv(v, of_int(amount)))) and ((not (amount <  16)) ->
-  (shift_right(v, amount) = of_int(0))))) and ((not ((9 <= 16) and
-  (16 <= 16))) -> ((((17 <= 16) and (16 <= 32)) -> (shift_right(v,
+  ((not (amount <  8)) -> (shift_right(v, amount) = toBig2(rliteral3))))) and
+  ((not ((1 <= 16) and (16 <= 8))) -> ((((9 <= 16) and (16 <= 16)) ->
+  (((amount <  16) -> (shift_right(v, amount) = lsr_bv(v,
+  of_int(amount)))) and ((not (amount <  16)) -> (shift_right(v,
+  amount) = rliteral4)))) and ((not ((9 <= 16) and (16 <= 16))) ->
+  ((((17 <= 16) and (16 <= 32)) -> (shift_right(v,
   amount) = toSmall1(lsr_bv2(toBig1(v), of_int2(amount))))) and
   ((not ((17 <= 16) and (16 <= 32))) -> (shift_right(v,
   amount) = toSmall(lsr_bv3(toBig(v), of_int3(amount)))))))))))))
@@ -1797,11 +1805,11 @@ axiom shift_left__def_axiom :
   (forall amount:int [shift_left(v, amount)]. (in_range2(amount) ->
   ((((1 <= 16) and (16 <= 8)) -> (((amount <  8) -> (shift_left(v,
   amount) = toBig2(lsl_bv1(toSmall2(v), of_int1(amount))))) and
-  ((not (amount <  8)) -> (shift_left(v, amount) = toBig2(of_int1(0)))))) and
+  ((not (amount <  8)) -> (shift_left(v, amount) = toBig2(rliteral3))))) and
   ((not ((1 <= 16) and (16 <= 8))) -> ((((9 <= 16) and (16 <= 16)) ->
   (((amount <  16) -> (shift_left(v, amount) = lsl_bv(v,
   of_int(amount)))) and ((not (amount <  16)) -> (shift_left(v,
-  amount) = of_int(0))))) and ((not ((9 <= 16) and (16 <= 16))) ->
+  amount) = rliteral4)))) and ((not ((9 <= 16) and (16 <= 16))) ->
   ((((17 <= 16) and (16 <= 32)) -> (shift_left(v,
   amount) = toSmall1(urem2(lsl_bv2(toBig1(v), of_int2(amount)),
   of_int2(65536))))) and ((not ((17 <= 16) and (16 <= 32))) -> (shift_left(v,
@@ -1814,9 +1822,13 @@ logic make_mask__function_guard : t, int -> prop
 
 axiom make_mask__post_axiom : true
 
+logic rliteral5 : t
+
+axiom rliteral_axiom5 : (tqtint(rliteral5) = 65535)
+
 axiom make_mask__def_axiom :
   (forall num_bits:int [make_mask(num_bits)]. (in_range1(num_bits) ->
-  (make_mask(num_bits) = shift_right(of_int(65535), (16 - num_bits)))))
+  (make_mask(num_bits) = shift_right(rliteral5, (16 - num_bits)))))
 
 logic value : t
 
@@ -1895,79 +1907,6 @@ axiom extract_bits_not_inline__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic result__ : t
-
-logic bits_manipulation_unsigned__unsigned_16__functions__extract_bits__result : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : t
-
-logic o6 : int
-
-logic o7 : t
-
-logic o8 : t
-
-logic o9 : t
-
-logic result : t
-
-logic result__1 : t
-
-logic result1 : t
-
-logic result__2 : t
-
-logic result2 : t
-
-logic result__3 : t
-
-logic result3 : t
-
-logic bits_manipulation_unsigned__unsigned_16__functions__extract_bits__result1 : t
-
-logic result__4 : t
-
-logic bits_manipulation_unsigned__unsigned_16__functions__extract_bits__result2 : t
-
-logic result__5 : t
-
-logic bits_manipulation_unsigned__unsigned_16__functions__extract_bits__result3 : t
-
-logic result__6 : t
-
-logic bits_manipulation_unsigned__unsigned_16__functions__extract_bits__result4 : t
-
-logic result__7 : t
-
-logic bits_manipulation_unsigned__unsigned_16__functions__extract_bits__result5 : t
-
-logic result4 : bool
-
-logic result5 : bool
-
-axiom H : true
-
-axiom H1 : in_range(from)
-
-axiom H2 : in_range(to__)
-
-axiom H3 : (from <= to__)
-
-axiom H4 : true
-
-axiom H5 : (not (2 = 0))
-
-axiom H6 : (not (2 = 1))
-
  (* File "bits_manipulation.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (from <= to__)
+goal WP_parameter_def : (in_range(from) -> (in_range(to__) ->
+  ((from <= to__) -> ((not (2 = 0)) -> ((not (2 = 1)) -> (from <= to__))))))

@@ -217,19 +217,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic c : int
-
-logic o : int
-
-logic result : int
-
-logic c1 : int
-
-axiom H : (result = c)
-
-axiom H1 : (c1 = 0)
-
-axiom H2 : in_range(c1)
-
  (* File "div_zero.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(comp_div(c1,c1))
+goal WP_parameter_def :
+  (forall c:int. forall result:int. forall c1:int. (((result = c) and
+  (c1 = 0)) -> (in_range(c1) -> in_range(comp_div(c1,c1)))))

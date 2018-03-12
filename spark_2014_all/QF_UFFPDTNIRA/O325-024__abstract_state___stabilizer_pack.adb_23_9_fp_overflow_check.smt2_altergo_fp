@@ -1037,12 +1037,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1054,6 +1048,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1106,108 +1106,35 @@ logic attr__ATTRIBUTE_ADDRESS8 : int
 
 logic attr__ATTRIBUTE_ADDRESS9 : int
 
-logic temperature : t
-
-logic pressure : t
-
-logic asl : t
-
-logic asl_raw : t
-
-logic asl_long : t
-
-logic asl_err_deadband : t
-
-logic asl_alpha : t
-
-logic asl_alpha_long : t
-
-logic asl_tmp : t
-
-logic asl_long_tmp : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : t
-
-logic o6 : t
-
-logic o7 : t
-
-logic o8 : t
-
-logic o9 : t
-
-logic o10 : t
-
-logic o11 : t
-
-logic result : t
-
-logic asl_tmp1 : t
-
-axiom H : tqtisFinite(temperature)
-
-axiom H1 : tqtisFinite(pressure)
-
-axiom H2 : tqtisFinite(asl)
-
-axiom H3 : tqtisFinite(asl_raw)
-
-axiom H4 : tqtisFinite(asl_long)
-
-axiom H5 : tqtisFinite(asl_err_deadband)
-
-axiom H6 : tqtisFinite(asl_alpha)
-
-axiom H7 : tqtisFinite(asl_alpha_long)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
 
-axiom H8 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(asl_tmp))
-
-axiom H9 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(asl_long_tmp))
-
-axiom H10 : ((o = sub(NearestTiesToEven, fliteral, asl_alpha)) and
-  tqtisFinite(sub(NearestTiesToEven, fliteral, asl_alpha)))
-
-axiom H11 : (o1 = mul(NearestTiesToEven, asl_raw, o))
-
-axiom H12 : ((o2 = o1) and tqtisFinite(o1))
-
-axiom H13 : ((o3 = mul(NearestTiesToEven, asl, asl_alpha)) and
-  tqtisFinite(mul(NearestTiesToEven, asl, asl_alpha)))
-
-axiom H14 : (o4 = add(NearestTiesToEven, o3, o2))
-
-axiom H15 : ((o5 = o4) and tqtisFinite(o4))
-
-axiom H16 : (result = asl_tmp)
-
-axiom H17 : (asl_tmp1 = o5)
-
-axiom H18 : ((o6 = sub(NearestTiesToEven, fliteral, asl_alpha_long)) and
-  tqtisFinite(sub(NearestTiesToEven, fliteral, asl_alpha_long)))
-
-axiom H19 : (o7 = mul(NearestTiesToEven, asl_raw, o6))
-
-axiom H20 : ((o8 = o7) and tqtisFinite(o7))
-
-axiom H21 : ((o9 = mul(NearestTiesToEven, asl_long, asl_alpha_long)) and
-  tqtisFinite(mul(NearestTiesToEven, asl_long, asl_alpha_long)))
-
-axiom H22 : (o10 = add(NearestTiesToEven, o9, o8))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(o10)
+goal WP_parameter_def :
+  (forall temperature:t. forall pressure:t. forall asl:t. forall asl_raw:t.
+  forall asl_long:t. forall asl_err_deadband:t. forall asl_alpha:t.
+  forall asl_alpha_long:t. forall asl_tmp:t. forall asl_long_tmp:t.
+  forall o:t. forall o1:t. forall o2:t. forall o3:t. forall o4:t.
+  forall o5:t. forall o6:t. forall o7:t. forall o8:t. forall o9:t.
+  forall o10:t. forall result:t. forall asl_tmp1:t.
+  (tqtisFinite(temperature) -> (tqtisFinite(pressure) -> (tqtisFinite(asl) ->
+  (tqtisFinite(asl_raw) -> (tqtisFinite(asl_long) ->
+  (tqtisFinite(asl_err_deadband) -> (tqtisFinite(asl_alpha) ->
+  (tqtisFinite(asl_alpha_long) -> ((le(neg(fliteral1), fliteral1) ->
+  tqtisFinite(asl_tmp)) -> ((le(neg(fliteral1), fliteral1) ->
+  tqtisFinite(asl_long_tmp)) -> ((((((((o = sub(NearestTiesToEven, fliteral,
+  asl_alpha)) and tqtisFinite(sub(NearestTiesToEven, fliteral,
+  asl_alpha))) and (o1 = mul(NearestTiesToEven, asl_raw, o))) and
+  ((o2 = o1) and tqtisFinite(o1))) and (((o3 = mul(NearestTiesToEven, asl,
+  asl_alpha)) and tqtisFinite(mul(NearestTiesToEven, asl, asl_alpha))) and
+  (o4 = add(NearestTiesToEven, o3, o2)))) and ((o5 = o4) and
+  tqtisFinite(o4))) and ((result = asl_tmp) and (asl_tmp1 = o5))) ->
+  ((((((o6 = sub(NearestTiesToEven, fliteral, asl_alpha_long)) and
+  tqtisFinite(sub(NearestTiesToEven, fliteral, asl_alpha_long))) and
+  (o7 = mul(NearestTiesToEven, asl_raw, o6))) and ((o8 = o7) and
+  tqtisFinite(o7))) and (((o9 = mul(NearestTiesToEven, asl_long,
+  asl_alpha_long)) and tqtisFinite(mul(NearestTiesToEven, asl_long,
+  asl_alpha_long))) and (o10 = add(NearestTiesToEven, o9, o8)))) ->
+  tqtisFinite(o10))))))))))))))

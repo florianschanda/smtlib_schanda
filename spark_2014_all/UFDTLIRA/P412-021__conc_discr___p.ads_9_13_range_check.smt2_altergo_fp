@@ -402,23 +402,8 @@ logic to_x : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic us : int
-
-logic us1 : int
-
-logic o : integer
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic p__po_x__assume : int
-
-axiom H : ((us = 0) and in_range(0))
-
-axiom H1 : (to_rep(po__split_discrs) = 0)
-
-axiom H2 : (0 = to_rep(po__split_discrs))
-
  (* File "system.ads", line 81, characters 0-0 *)
-goal WP_parameter_def : in_range(0)
+goal WP_parameter_def :
+  (forall us:int. (((us = 0) and in_range(0)) ->
+  ((to_rep(po__split_discrs) = 0) -> ((0 = to_rep(po__split_discrs)) ->
+  in_range(0)))))

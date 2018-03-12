@@ -117,19 +117,5 @@ axiom add_one__post_axiom :
 axiom add_one__def_axiom :
   (forall x:int [add_one(x)]. (in_range(x) -> (add_one(x) = (x + 1))))
 
-logic x : int
-
-logic o : int
-
-logic result : int
-
-logic x1 : int
-
-logic x2 : int
-
-logic x3 : int
-
-axiom H : in_range(x)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((x + 1))
+goal WP_parameter_def : (forall x:int. (in_range(x) -> in_range((x + 1))))

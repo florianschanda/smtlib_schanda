@@ -219,23 +219,7 @@ logic i : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic pf__prf_public__result : int
-
-logic result : int
-
-logic pf__prf_public__result1 : int
-
-logic pf__prf_public__result2 : int
-
-logic pf__prf_public__result3 : int
-
-logic pf__prf_public__result4 : int
-
-logic pf__prf_public__result5 : int
-
-axiom H : in_range(i)
-
-axiom H1 : (pf__prf_public__result4 = comp_div(i,2))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (not (2 = 0))
+goal WP_parameter_def :
+  (forall pf__prf_public__result:int. (in_range(i) ->
+  ((pf__prf_public__result = comp_div(i,2)) -> (not (2 = 0)))))

@@ -273,12 +273,6 @@ function vector__ref___projection(a: vector__ref) : us_rep =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq5 : bool, bool -> bool
-
-axiom bool_eq_def4 :
-  (forall x:bool. forall y:bool [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -290,6 +284,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq5 : bool, bool -> bool
+
+axiom bool_eq_def4 :
+  (forall x:bool. forall y:bool [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
 
 predicate in_range4(x: int) = ((x = 0) or (x = 1))
 
@@ -346,25 +346,11 @@ logic count : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic container__split_fields : us_main_type
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-axiom H : in_range2(new_item)
-
-axiom H1 : in_range1(count)
-
-axiom H2 : ((((of_int(1) = true) ->
-  (o = to_rep(container__split_discrs))) and ((not (of_int(1) = true)) ->
-  (o = 2147483647))) and (in_range3(o) and (((of_int(1) = true) ->
-  (o = to_rep(container__split_discrs))) and ((not (of_int(1) = true)) ->
-  (o = 2147483647)))))
-
-axiom H3 : (o1 = (o - count))
-
  (* File "a-cfinve.ads", line 447, characters 0-0 *)
-goal WP_parameter_def : in_range(o1)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. (in_range2(new_item) -> (in_range1(count) ->
+  ((((((of_int(1) = true) and (o = to_rep(container__split_discrs))) or
+  ((not (of_int(1) = true)) and (o = 2147483647))) and (in_range3(o) and
+  (((of_int(1) = true) and (o = to_rep(container__split_discrs))) or
+  ((not (of_int(1) = true)) and (o = 2147483647))))) and
+  (o1 = (o - count))) -> in_range(o1)))))

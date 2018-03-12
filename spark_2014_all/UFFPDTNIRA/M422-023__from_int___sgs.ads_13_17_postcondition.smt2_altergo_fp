@@ -1155,47 +1155,22 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic sgs__a__result : t
-
-logic o : t
-
-logic result : t
-
-logic sgs__a__result1 : t
-
-logic sgs__a__result2 : t
-
-logic sgs__a__result3 : t
-
-logic sgs__a__result4 : t
-
-logic sgs__a__result5 : t
-
-logic result1 : t
-
-axiom H : in_range2(x)
-
-axiom H1 : (sgs__a__result1 = sgs__a__result2)
-
-axiom H2 : (sgs__a__result3 = sgs__a__result1)
-
-axiom H3 : ((o = c(x)) and (tqtisFinite(o) and (o = of_int(NearestTiesToEven,
-  x))))
-
-axiom H4 : (result = sgs__a__result)
-
-axiom H5 : (sgs__a__result1 = o)
-
-axiom H6 : (sgs__a__result4 = sgs__a__result2)
-
-axiom H7 : (sgs__a__result5 = sgs__a__result3)
-
-axiom H8 : (result1 = sgs__a__result4)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
  (* File "sgs.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : le(fliteral1, sgs__a__result4)
+goal WP_parameter_def :
+  (forall sgs__a__result:t. forall o:t. forall result:t.
+  forall sgs__a__result1:t. forall sgs__a__result2:t.
+  forall sgs__a__result3:t. forall sgs__a__result4:t.
+  forall sgs__a__result5:t.
+  (forall result1:t. ((in_range2(x) and
+  (((((sgs__a__result1 = sgs__a__result2) and
+  (sgs__a__result3 = sgs__a__result1)) and (((o = c(x)) and
+  (tqtisFinite(o) and (o = of_int(NearestTiesToEven, x)))) and
+  ((result = sgs__a__result) and (sgs__a__result1 = o)))) and
+  ((sgs__a__result4 = sgs__a__result2) and
+  (sgs__a__result5 = sgs__a__result3))) and (result1 = sgs__a__result4))) ->
+  le(fliteral1, sgs__a__result4))))

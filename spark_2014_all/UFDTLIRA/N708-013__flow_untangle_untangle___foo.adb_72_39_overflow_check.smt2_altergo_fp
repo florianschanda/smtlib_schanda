@@ -350,141 +350,39 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic o : int
-
-logic tmp__split_fields : integer
-
-logic tmp__split_fields1 : integer
-
-logic tmp__split_fields2 : integer
-
-logic tmp__split_fields3 : integer
-
-logic tmp__split_fields4 : integer
-
-logic tmp__split_fields5 : integer
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic o3 : integer
-
-logic o4 : integer
-
-logic o5 : integer
-
-logic o6 : integer
-
-logic o7 : integer
-
-logic o8 : integer
-
-logic o9 : integer
-
-logic o10 : integer
-
-logic o11 : integer
-
-logic o12 : integer
-
-logic o13 : integer
-
-logic temp___215 : integer
-
-logic temp___2151 : integer
-
-logic temp___2152 : integer
-
-logic temp___2153 : integer
-
-logic temp___2154 : integer
-
-logic temp___2155 : integer
-
-logic o14 : int
-
-logic o15 : int
-
-logic result : integer
-
-logic result1 : integer
-
-logic result2 : integer
-
-logic result3 : integer
-
-logic result4 : integer
-
-logic result5 : integer
-
-logic tmp__split_fields6 : integer
-
-logic tmp__split_fields7 : integer
-
-logic tmp__split_fields8 : integer
-
-logic tmp__split_fields9 : integer
-
-logic tmp__split_fields10 : integer
-
-logic tmp__split_fields11 : integer
-
-axiom H : in_range(a)
-
-axiom H1 : in_range(b)
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range(o))
-
-axiom H3 : (to_rep(o1) = a)
-
-axiom H4 : (o1 = o2)
-
-axiom H5 : (tmp__split_fields1 = o3)
-
-axiom H6 : (tmp__split_fields2 = o4)
-
-axiom H7 : (o5 = o2)
-
-axiom H8 : (o6 = o3)
-
-axiom H9 : (o7 = o4)
-
-axiom H10 : (o8 = o5)
-
-axiom H11 : (o9 = o6)
-
-axiom H12 : (o10 = o7)
-
-axiom H13 : (tmp__split_fields3 = o11)
-
-axiom H14 : (tmp__split_fields4 = o12)
-
-axiom H15 : (tmp__split_fields5 = o13)
-
-axiom H16 : (temp___215 = o8)
-
-axiom H17 : (temp___2151 = o9)
-
-axiom H18 : (temp___2152 = o10)
-
-axiom H19 : (temp___2153 = o11)
-
-axiom H20 : (temp___2154 = o12)
-
-axiom H21 : (temp___2155 = o13)
-
-axiom H22 : (((result = tmp__split_fields) and
+ (* File "foo.adb", line 52, characters 0-0 *)
+goal WP_parameter_def :
+  (forall o:int. forall tmp__split_fields:integer.
+  forall tmp__split_fields1:integer. forall tmp__split_fields2:integer.
+  forall tmp__split_fields3:integer. forall tmp__split_fields4:integer.
+  forall tmp__split_fields5:integer. forall o1:integer. forall o2:integer.
+  forall o3:integer. forall o4:integer. forall o5:integer. forall o6:integer.
+  forall o7:integer. forall o8:integer. forall o9:integer.
+  forall o10:integer. forall o11:integer. forall o12:integer.
+  forall o13:integer. forall temp___243:integer. forall temp___2431:integer.
+  forall temp___2432:integer. forall temp___2433:integer.
+  forall temp___2434:integer. forall temp___2435:integer.
+  forall result:integer. forall result1:integer. forall result2:integer.
+  forall result3:integer. forall result4:integer. forall result5:integer.
+  forall tmp__split_fields6:integer. forall tmp__split_fields7:integer.
+  forall tmp__split_fields8:integer. forall tmp__split_fields9:integer.
+  forall tmp__split_fields10:integer. forall tmp__split_fields11:integer.
+  (in_range(a) -> (in_range(b) -> ((((- 2147483648) <= 2147483647) ->
+  in_range(o)) -> (((((((to_rep(o1) = a) and ((o1 = o2) and
+  ((tmp__split_fields1 = o3) and (tmp__split_fields2 = o4)))) and
+  ((o5 = o2) and ((o6 = o3) and (o7 = o4)))) and (((o8 = o5) and
+  ((o9 = o6) and (o10 = o7))) and ((tmp__split_fields3 = o11) and
+  ((tmp__split_fields4 = o12) and (tmp__split_fields5 = o13))))) and
+  (((temp___243 = o8) and ((temp___2431 = o9) and (temp___2432 = o10))) and
+  ((temp___2433 = o11) and ((temp___2434 = o12) and
+  (temp___2435 = o13))))) and ((((result = tmp__split_fields) and
   ((result1 = tmp__split_fields1) and (result2 = tmp__split_fields2))) and
   ((result3 = tmp__split_fields3) and ((result4 = tmp__split_fields4) and
-  (result5 = tmp__split_fields5))))
-
-axiom H23 : (((tmp__split_fields6 = temp___215) and
-  ((tmp__split_fields7 = temp___2151) and
-  (tmp__split_fields8 = temp___2152))) and
-  ((tmp__split_fields9 = temp___2153) and
-  ((tmp__split_fields10 = temp___2154) and
-  (tmp__split_fields11 = temp___2155))))
-
- (* File "foo.adb", line 52, characters 0-0 *)
-goal WP_parameter_def : in_range((a + to_rep(tmp__split_fields6)))
+  (result5 = tmp__split_fields5)))) and
+  (((temp___243 = tmp__split_fields6) and
+  ((temp___2431 = tmp__split_fields7) and
+  (temp___2432 = tmp__split_fields8))) and
+  ((temp___2433 = tmp__split_fields9) and
+  ((temp___2434 = tmp__split_fields10) and
+  (temp___2435 = tmp__split_fields11)))))) ->
+  in_range((a + to_rep(tmp__split_fields6))))))))

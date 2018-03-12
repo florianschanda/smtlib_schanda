@@ -369,99 +369,30 @@ logic r2b : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic u__split_fields : us_main_type
-
-logic u__split_discrs : natural
-
-logic u1__split_fields : us_main_type
-
-logic u1__split_discrs : natural
-
-logic u2__split_fields : us_main_type
-
-logic c__split_fields : us_main_type
-
-logic us : int
-
-logic usq_ : natural
-
-logic usq_1 : us_main_type
-
-logic usq_2 : bool
-
-logic temp___272 : natural
-
-logic temp___2721 : us_main_type
-
-logic temp___2722 : bool
-
-logic result : us_main_type
-
-logic u1__split_fields1 : us_main_type
-
-logic result1 : natural
-
-logic u1__split_discrs1 : natural
-
-logic result2 : us_main_type
-
-logic u2__split_fields1 : us_main_type
-
-logic result3 : us_main_type
-
-logic c__split_fields1 : us_main_type
-
-axiom H : (u__attr__constrained = true)
-
-axiom H1 : ((u1__attr__constrained = false) and
-  (to_rep(u1__split_discrs) = 0))
-
-axiom H2 : ((us = 0) and in_range(0))
-
-axiom H3 : ((u2__attr__constrained = true) and
-  (to_rep(u2__split_discrs) = 0))
-
-axiom H4 : ((0 = to_rep(u2__split_discrs)) and
-  (u2__attr__constrained = true))
-
-axiom H5 : ((c__attr__constrained = true) and (to_rep(c__split_discrs) = 0))
-
-axiom H6 : ((0 = to_rep(c__split_discrs)) and (c__attr__constrained = true))
-
-axiom H7 : (u__attr__constrained = true)
-
-axiom H8 : (not (u1__attr__constrained = true))
-
-axiom H9 : (u2__attr__constrained = true)
-
-axiom H10 : (c__attr__constrained = true)
-
-axiom H11 : (to_rep(u__split_discrs) = r2b)
-
-axiom H12 : in_range(r2b)
-
-axiom H13 : ((u1__attr__constrained = true) ->
-  (u__split_discrs = u1__split_discrs))
-
-axiom H14 : (u__split_discrs = usq_)
-
-axiom H15 : (u__split_fields = usq_1)
-
-axiom H16 : (u__attr__constrained = usq_2)
-
-axiom H17 : (usq_ = temp___272)
-
-axiom H18 : (usq_1 = temp___2721)
-
-axiom H19 : (u1__attr__constrained = temp___2722)
-
-axiom H20 : (result = u1__split_fields)
-
-axiom H21 : (temp___2721 = u1__split_fields1)
-
-axiom H22 : (result1 = u1__split_discrs)
-
-axiom H23 : (u1__split_discrs1 = temp___272)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (0 = to_rep(u1__split_discrs1))
+goal WP_parameter_def :
+  (forall u__split_fields:us_main_type. forall u__split_discrs:natural.
+  forall u1__split_fields:us_main_type. forall u1__split_discrs:natural.
+  forall us:int. forall usq_:natural. forall usq_1:us_main_type.
+  forall usq_2:bool. forall temp___270:natural.
+  forall temp___2701:us_main_type. forall temp___2702:bool.
+  forall result:us_main_type. forall u1__split_fields1:us_main_type.
+  forall result1:natural. forall u1__split_discrs1:natural.
+  ((u__attr__constrained = true) -> (((u1__attr__constrained = false) and
+  (to_rep(u1__split_discrs) = 0)) -> (((us = 0) and in_range(0)) ->
+  (((u2__attr__constrained = true) and (to_rep(u2__split_discrs) = 0)) ->
+  (((0 = to_rep(u2__split_discrs)) and (u2__attr__constrained = true)) ->
+  (((c__attr__constrained = true) and (to_rep(c__split_discrs) = 0)) ->
+  (((0 = to_rep(c__split_discrs)) and (c__attr__constrained = true)) ->
+  ((u__attr__constrained = true) -> ((not (u1__attr__constrained = true)) ->
+  ((u2__attr__constrained = true) -> ((c__attr__constrained = true) ->
+  (((to_rep(u__split_discrs) = r2b) and in_range(r2b)) ->
+  (((((((u1__attr__constrained = true) and
+  (u__split_discrs = u1__split_discrs)) or
+  (not (u1__attr__constrained = true))) and ((u__split_discrs = usq_) and
+  ((u__split_fields = usq_1) and (u__attr__constrained = usq_2)))) and
+  ((usq_ = temp___270) and ((usq_1 = temp___2701) and
+  (u1__attr__constrained = temp___2702)))) and
+  (((result = u1__split_fields) and (temp___2701 = u1__split_fields1)) and
+  ((result1 = u1__split_discrs) and (temp___270 = u1__split_discrs1)))) ->
+  (0 = to_rep(u1__split_discrs1))))))))))))))))

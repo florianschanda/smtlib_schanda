@@ -133,13 +133,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic oranges : int
-
-logic o : int
-
-axiom H : in_range1(oranges)
-
-axiom H1 : (oranges <  2147483637)
-
  (* File "fruit.adb", line 32, characters 0-0 *)
-goal WP_parameter_def : in_range((oranges + 10))
+goal WP_parameter_def :
+  (forall oranges:int. (in_range1(oranges) -> ((oranges <  2147483637) ->
+  in_range((oranges + 10)))))

@@ -383,217 +383,96 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic d1__split_fields : us_main_type
-
-logic d2__split_fields : us_main_type
-
-logic d2__split_discrs : natural
-
-logic h__split_fields : natural
-
-logic h__split_fields1 : us_main_type
-
-logic h__split_fields2 : bool
-
-logic us : int
-
-logic o : natural
-
-logic o1 : us_main_type
-
-logic o2 : bool
-
-logic o3 : natural
-
-logic o4 : us_main_type
-
-logic o5 : bool
-
-logic discr__p5__d1__assume : natural
-
-logic discr__p5__d1__assume1 : us_main_type
-
-logic discr__p5__d1__assume2 : bool
-
-logic discr__p5__d2__assume : natural
-
-logic discr__p5__d2__assume1 : us_main_type
-
-logic discr__p5__d2__assume2 : bool
-
-logic usq_ : natural
-
-logic usq_1 : us_main_type
-
-logic usq_2 : bool
-
-logic o6 : natural
-
-logic o7 : us_main_type
-
-logic o8 : bool
-
-logic o9 : natural
-
-logic o10 : us_main_type
-
-logic o11 : bool
-
-logic temp___343 : natural
-
-logic temp___3431 : us_main_type
-
-logic temp___3432 : bool
-
-logic usq_3 : natural
-
-logic usq_4 : us_main_type
-
-logic usq_5 : bool
-
-logic o12 : natural
-
-logic o13 : us_main_type
-
-logic o14 : bool
-
-logic o15 : natural
-
-logic o16 : us_main_type
-
-logic o17 : bool
-
-logic temp___347 : natural
-
-logic temp___3471 : us_main_type
-
-logic temp___3472 : bool
-
-logic result : us_main_type
-
-logic d1__split_fields1 : us_main_type
-
-logic result1 : us_main_type
-
-logic d2__split_fields1 : us_main_type
-
-logic result2 : natural
-
-logic d2__split_discrs1 : natural
-
-logic result3 : natural
-
-logic result4 : us_main_type
-
-logic result5 : bool
-
-logic h__split_fields3 : natural
-
-logic h__split_fields4 : us_main_type
-
-logic h__split_fields5 : bool
-
-logic result6 : natural
-
-logic result7 : us_main_type
-
-logic result8 : bool
-
-logic h__split_fields6 : natural
-
-logic h__split_fields7 : us_main_type
-
-logic h__split_fields8 : bool
-
-axiom H : in_range(c)
-
-axiom H1 : ((us = c) and in_range(c))
-
-axiom H2 : (({ us_split_discrs1 = { rec__private_discr__p_with_default__c = o
-  }; us_split_fields1 = { rec__private_discr__p_with_default = o1 };
-  attr__constrained = o2 } = new_with_default(c)) and (to_rep(o) = c))
-
-axiom H3 : ((o3 = o) and ((o4 = o1) and (o5 = o2)))
-
-axiom H4 : ((discr__p5__d1__assume = o3) and
-  ((discr__p5__d1__assume1 = o4) and (discr__p5__d1__assume2 = o5)))
-
-axiom H5 : (result = d1__split_fields)
-
-axiom H6 : (d1__split_fields1 = discr__p5__d1__assume1)
-
-axiom H7 : (d1__split_discrs = discr__p5__d1__assume)
-
-axiom H8 : (d1__attr__constrained = true)
-
-axiom H9 : ((c = to_rep(d1__split_discrs)) and
-  (d1__attr__constrained = true))
-
-axiom H10 : (({ us_split_discrs1 = { rec__private_discr__p_with_default__c =
-  discr__p5__d2__assume }; us_split_fields1 = {
-  rec__private_discr__p_with_default = discr__p5__d2__assume1 };
-  attr__constrained = discr__p5__d2__assume2 } = new_with_default(c)) and
-  (to_rep(discr__p5__d2__assume) = c))
-
-axiom H11 : (result1 = d2__split_fields)
-
-axiom H12 : (d2__split_fields1 = discr__p5__d2__assume1)
-
-axiom H13 : (result2 = d2__split_discrs)
-
-axiom H14 : (d2__split_discrs1 = discr__p5__d2__assume)
-
-axiom H15 : (d2__attr__constrained = false)
-
-axiom H16 : ((h__split_fields2 = false) and (to_rep(h__split_fields) = 0))
-
-axiom H17 : (h__split_fields2 = false)
-
-axiom H18 : (to_rep(h__split_fields) = 0)
-
-axiom H19 : (not (h__split_fields2 = true))
-
-axiom H20 : ((h__split_fields2 = true) ->
-  (d1__split_discrs = h__split_fields))
-
-axiom H21 : ((usq_ = d1__split_discrs) and ((usq_1 = d1__split_fields1) and
-  (usq_2 = d1__attr__constrained)))
-
-axiom H22 : ((o6 = usq_) and ((o7 = usq_1) and (o8 = h__split_fields2)))
-
-axiom H23 : ((o9 = o6) and ((o10 = o7) and (o11 = o8)))
-
-axiom H24 : ((temp___343 = o9) and ((temp___3431 = o10) and
-  (temp___3432 = o11)))
-
-axiom H25 : ((result3 = h__split_fields) and
-  ((result4 = h__split_fields1) and (result5 = h__split_fields2)))
-
-axiom H26 : ((h__split_fields3 = temp___343) and
-  ((h__split_fields4 = temp___3431) and (h__split_fields5 = temp___3432)))
-
-axiom H27 : (not (h__split_fields5 = true))
-
-axiom H28 : (to_rep(h__split_fields3) = c)
-
-axiom H29 : ((h__split_fields5 = true) ->
-  (d2__split_discrs1 = h__split_fields3))
-
-axiom H30 : ((usq_3 = d2__split_discrs1) and ((usq_4 = d2__split_fields1) and
-  (usq_5 = d2__attr__constrained)))
-
-axiom H31 : ((o12 = usq_3) and ((o13 = usq_4) and (o14 = h__split_fields5)))
-
-axiom H32 : ((o15 = o12) and ((o16 = o13) and (o17 = o14)))
-
-axiom H33 : ((temp___347 = o15) and ((temp___3471 = o16) and
-  (temp___3472 = o17)))
-
-axiom H34 : ((result6 = h__split_fields3) and
-  ((result7 = h__split_fields4) and (result8 = h__split_fields5)))
-
-axiom H35 : ((h__split_fields6 = temp___347) and
-  ((h__split_fields7 = temp___3471) and (h__split_fields8 = temp___3472)))
-
  (* File "discr.adb", line 118, characters 0-0 *)
-goal WP_parameter_def : (not (h__split_fields8 = true))
+goal WP_parameter_def :
+  (forall d1__split_fields:us_main_type.
+  forall d2__split_fields:us_main_type. forall d2__split_discrs:natural.
+  forall h__split_fields:natural. forall h__split_fields1:us_main_type.
+  forall h__split_fields2:bool. forall us:int. forall o:natural.
+  forall o1:us_main_type. forall o2:bool. forall o3:natural.
+  forall o4:us_main_type. forall o5:bool.
+  forall discr__p5__d1__assume:natural.
+  forall discr__p5__d1__assume1:us_main_type.
+  forall discr__p5__d1__assume2:bool. forall discr__p5__d2__assume:natural.
+  forall discr__p5__d2__assume1:us_main_type.
+  forall discr__p5__d2__assume2:bool. forall usq_:natural.
+  forall usq_1:us_main_type. forall usq_2:bool. forall o6:natural.
+  forall o7:us_main_type. forall o8:bool. forall o9:natural.
+  forall o10:us_main_type. forall o11:bool. forall temp___381:natural.
+  forall temp___3811:us_main_type. forall temp___3812:bool.
+  forall usq_3:natural. forall usq_4:us_main_type. forall usq_5:bool.
+  forall o12:natural. forall o13:us_main_type. forall o14:bool.
+  forall o15:us_split_fields2. forall temp___385:us_rep1.
+  forall result:us_split_fields__ref.
+  forall d1__split_fields1:us_split_fields.
+  forall result1:us_split_fields__ref.
+  forall d2__split_fields1:us_split_fields.
+  forall result2:us_split_discrs__ref.
+  forall d2__split_discrs1:us_split_discrs.
+  forall result3:us_split_fields__ref1.
+  forall h__split_fields3:us_split_fields2.
+  forall result4:us_split_fields__ref1.
+  forall h__split_fields4:us_split_fields2. (in_range(c) -> (((us = c) and
+  in_range(c)) -> (((((({ us_split_discrs1 = {
+  rec__private_discr__p_with_default__c = o }; us_split_fields1 = {
+  rec__private_discr__p_with_default = o1 }; attr__constrained = o2
+  } = new_with_default(c)) and (to_rep(o) = c)) and ({ us_split_discrs1 = {
+  rec__private_discr__p_with_default__c = o3 }; us_split_fields1 = {
+  rec__private_discr__p_with_default = o4 }; attr__constrained = o5 } = {
+  us_split_discrs1 = { rec__private_discr__p_with_default__c = o };
+  us_split_fields1 = { rec__private_discr__p_with_default = o1 };
+  attr__constrained = o2 })) and ((discr__p5__d1__assume = o3) and
+  ((discr__p5__d1__assume1 = o4) and (discr__p5__d1__assume2 = o5)))) and
+  (((result = { us_split_fields__content = {
+  rec__private_discr__p_with_default = d1__split_fields } }) and
+  (d1__split_fields1 = { rec__private_discr__p_with_default =
+  discr__p5__d1__assume1 })) and
+  ((d1__split_discrs = discr__p5__d1__assume) and
+  (d1__attr__constrained = true)))) -> (((c = to_rep(d1__split_discrs)) and
+  (d1__attr__constrained = true)) -> (((({ us_split_discrs1 = {
+  rec__private_discr__p_with_default__c = discr__p5__d2__assume };
+  us_split_fields1 = { rec__private_discr__p_with_default =
+  discr__p5__d2__assume1 }; attr__constrained = discr__p5__d2__assume2
+  } = new_with_default(c)) and (to_rep(discr__p5__d2__assume) = c)) and
+  (((result1 = { us_split_fields__content = {
+  rec__private_discr__p_with_default = d2__split_fields } }) and
+  (d2__split_fields1 = { rec__private_discr__p_with_default =
+  discr__p5__d2__assume1 })) and (((result2 = { us_split_discrs__content = {
+  rec__private_discr__p_with_default__c = d2__split_discrs } }) and
+  (d2__split_discrs1 = { rec__private_discr__p_with_default__c =
+  discr__p5__d2__assume })) and (d2__attr__constrained = false)))) ->
+  (((h__split_fields2 = false) and (to_rep(h__split_fields) = 0)) ->
+  ((h__split_fields2 = false) -> ((to_rep(h__split_fields) = 0) ->
+  ((not (h__split_fields2 = true)) -> (((((((((h__split_fields2 = true) and
+  (d1__split_discrs = h__split_fields)) or
+  (not (h__split_fields2 = true))) and ((d1__split_discrs = usq_) and
+  ((d1__split_fields1 = { rec__private_discr__p_with_default = usq_1 }) and
+  (d1__attr__constrained = usq_2)))) and ((usq_ = o6) and ((usq_1 = o7) and
+  (h__split_fields2 = o8)))) and ((o9 = o6) and ((o10 = o7) and
+  (o11 = o8)))) and ((temp___381 = o9) and ((temp___3811 = o10) and
+  (temp___3812 = o11)))) and ((result3 = { us_split_fields__content1 = {
+  rec__private_discr__p_holder__content = { us_split_discrs1 = {
+  rec__private_discr__p_with_default__c = h__split_fields };
+  us_split_fields1 = { rec__private_discr__p_with_default = h__split_fields1
+  }; attr__constrained = h__split_fields2 } } }) and (h__split_fields3 = {
+  rec__private_discr__p_holder__content = { us_split_discrs1 = {
+  rec__private_discr__p_with_default__c = temp___381 }; us_split_fields1 = {
+  rec__private_discr__p_with_default = temp___3811 }; attr__constrained =
+  temp___3812 } }))) ->
+  ((not (((h__split_fields3).rec__private_discr__p_holder__content).attr__constrained = true)) ->
+  ((to_rep((((h__split_fields3).rec__private_discr__p_holder__content).us_split_discrs1).rec__private_discr__p_with_default__c) = c) ->
+  (((((((((((h__split_fields3).rec__private_discr__p_holder__content).attr__constrained = true) and
+  ((d2__split_discrs1).rec__private_discr__p_with_default__c = (((h__split_fields3).rec__private_discr__p_holder__content).us_split_discrs1).rec__private_discr__p_with_default__c)) or
+  (not (((h__split_fields3).rec__private_discr__p_holder__content).attr__constrained = true))) and
+  ((d2__split_discrs1 = { rec__private_discr__p_with_default__c = usq_3
+  }) and ((d2__split_fields1 = { rec__private_discr__p_with_default = usq_4
+  }) and (d2__attr__constrained = usq_5)))) and ((usq_3 = o12) and
+  ((usq_4 = o13) and
+  (((h__split_fields3).rec__private_discr__p_holder__content).attr__constrained = o14)))) and
+  (o15 = { rec__private_discr__p_holder__content = { us_split_discrs1 = {
+  rec__private_discr__p_with_default__c = o12 }; us_split_fields1 = {
+  rec__private_discr__p_with_default = o13 }; attr__constrained = o14 }
+  })) and (temp___385 = { us_split_fields3 = o15 })) and ((result4 = {
+  us_split_fields__content1 = h__split_fields3 }) and
+  (h__split_fields4 = (temp___385).us_split_fields3))) ->
+  (not (((h__split_fields4).rec__private_discr__p_holder__content).attr__constrained = true))))))))))))))))

@@ -349,33 +349,11 @@ logic attr__ATTRIBUTE_ADDRESS6 : int
 
 axiom min_distance__def_axiom : (min_distance = min)
 
-logic status : int
-
-logic line_algorithm : int
-
-logic line_count : int
-
-logic o : int
-
-logic status1 : int
-
-axiom H : ((0 <= 2) -> in_range4(status))
-
-axiom H1 : in_range3(line_algorithm)
-
-axiom H2 : in_range1(line_count)
-
-axiom H3 : in_range2(min)
-
-axiom H4 : (min = min_distance)
-
-axiom H5 : in_range2(min_distance)
-
-axiom H6 : in_range4(status1)
-
-axiom H7 : (status1 = 0)
-
-axiom H8 : (line_algorithm = 0)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((line_count + 1))
+goal WP_parameter_def :
+  (forall status:int. forall line_algorithm:int. forall line_count:int.
+  forall status1:int. (((0 <= 2) -> in_range4(status)) ->
+  (in_range3(line_algorithm) -> (in_range1(line_count) -> (in_range2(min) ->
+  ((min = min_distance) -> (in_range2(min_distance) -> (in_range4(status1) ->
+  ((status1 = 0) -> ((line_algorithm = 0) ->
+  in_range((line_count + 1))))))))))))

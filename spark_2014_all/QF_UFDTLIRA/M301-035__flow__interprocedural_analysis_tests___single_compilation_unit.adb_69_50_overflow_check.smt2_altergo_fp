@@ -113,21 +113,6 @@ logic fibonacci : int -> int
 
 logic fibonacci__function_guard : int, int -> prop
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-axiom H : in_range(n)
-
-axiom H1 : (not (n <  3))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((n - 2))
+goal WP_parameter_def : (in_range(n) -> ((not (n <  3)) ->
+  in_range((n - 2))))

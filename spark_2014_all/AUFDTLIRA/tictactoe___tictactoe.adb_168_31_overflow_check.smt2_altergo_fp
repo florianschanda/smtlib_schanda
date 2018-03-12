@@ -196,24 +196,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,slot) farray, int, int, (int,slot) farray, int,
-  int -> (int,slot) farray
-
-axiom concat_def :
-  (forall a:(int,slot) farray. forall b:(int,slot) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : slot, int -> (int,slot) farray
-
-axiom singleton_def :
-  (forall v:slot.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,slot) farray, int, int, (int,slot) farray, int,
   int -> bool
 
@@ -224,17 +206,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_151:int. ((((a__first <= temp___idx_151) and
-  (temp___idx_151 <= a__last)) and
-  (to_rep((a[temp___idx_151])) = to_rep((b[((b__first - a__first) + temp___idx_151)])))) or
-  (not ((a__first <= temp___idx_151) and (temp___idx_151 <= a__last)))))) ->
+  (forall temp___idx_173:int. ((((a__first <= temp___idx_173) and
+  (temp___idx_173 <= a__last)) and
+  (to_rep((a[temp___idx_173])) = to_rep((b[((b__first - a__first) + temp___idx_173)])))) or
+  (not ((a__first <= temp___idx_173) and (temp___idx_173 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_151:int. (((a__first <= temp___idx_151) and
-  (temp___idx_151 <= a__last)) ->
-  (to_rep((a[temp___idx_151])) = to_rep((b[((b__first - a__first) + temp___idx_151)]))))))) ->
+  (forall temp___idx_173:int. (((a__first <= temp___idx_173) and
+  (temp___idx_173 <= a__last)) ->
+  (to_rep((a[temp___idx_173])) = to_rep((b[((b__first - a__first) + temp___idx_173)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -244,37 +226,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_151:int. (((a__first <= temp___idx_151) and
-  (temp___idx_151 <= a__last)) ->
-  (to_rep((a[temp___idx_151])) = to_rep((b[((b__first - a__first) + temp___idx_151)])))))))))
-
-logic compare : (int,slot) farray, int, int, (int,slot) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,slot) farray. forall b:(int,slot) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,slot) farray. forall b:(int,slot) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,slot) farray. forall b:(int,slot) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_173:int. (((a__first <= temp___idx_173) and
+  (temp___idx_173 <= a__last)) ->
+  (to_rep((a[temp___idx_173])) = to_rep((b[((b__first - a__first) + temp___idx_173)])))))))))
 
 logic dummy3 : (int,slot) farray
 
@@ -324,25 +278,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,(int,slot) farray) farray, int, int,
-  (int,(int,slot) farray) farray, int, int -> (int,(int,slot) farray) farray
-
-axiom concat_def1 :
-  (forall a:(int,(int,slot) farray) farray.
-  forall b:(int,(int,slot) farray) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : (int,slot) farray, int -> (int,(int,slot) farray) farray
-
-axiom singleton_def1 :
-  (forall v:(int,slot) farray.
-  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,(int,slot) farray) farray, int, int,
   (int,(int,slot) farray) farray, int, int -> bool
 
@@ -354,17 +289,17 @@ axiom bool_eq_def4 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_152:int. ((((a__first <= temp___idx_152) and
-  (temp___idx_152 <= a__last)) and (bool_eq4((a[temp___idx_152]), 1, 3,
-  (b[((b__first - a__first) + temp___idx_152)]), 1, 3) = true)) or
-  (not ((a__first <= temp___idx_152) and (temp___idx_152 <= a__last)))))) ->
+  (forall temp___idx_174:int. ((((a__first <= temp___idx_174) and
+  (temp___idx_174 <= a__last)) and (bool_eq4((a[temp___idx_174]), 1, 3,
+  (b[((b__first - a__first) + temp___idx_174)]), 1, 3) = true)) or
+  (not ((a__first <= temp___idx_174) and (temp___idx_174 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_152:int. (((a__first <= temp___idx_152) and
-  (temp___idx_152 <= a__last)) -> (bool_eq4((a[temp___idx_152]), 1, 3,
-  (b[((b__first - a__first) + temp___idx_152)]), 1, 3) = true))))) ->
+  (forall temp___idx_174:int. (((a__first <= temp___idx_174) and
+  (temp___idx_174 <= a__last)) -> (bool_eq4((a[temp___idx_174]), 1, 3,
+  (b[((b__first - a__first) + temp___idx_174)]), 1, 3) = true))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -375,9 +310,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_152:int. (((a__first <= temp___idx_152) and
-  (temp___idx_152 <= a__last)) -> (bool_eq4((a[temp___idx_152]), 1, 3,
-  (b[((b__first - a__first) + temp___idx_152)]), 1, 3) = true)))))))
+  (forall temp___idx_174:int. (((a__first <= temp___idx_174) and
+  (temp___idx_174 <= a__last)) -> (bool_eq4((a[temp___idx_174]), 1, 3,
+  (b[((b__first - a__first) + temp___idx_174)]), 1, 3) = true)))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -492,28 +427,6 @@ axiom slide_def2 :
   (forall i:int [(slide2(a, old_first, new_first)[i])]. ((slide2(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat2 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def2 :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat2(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat2(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat2(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton2 : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def2 :
-  (forall v:pos. forall v1:pos.
-  (forall i:int [(singleton2({ us_split_fields1 = {
-  rec__tictactoe__position__x = v; rec__tictactoe__position__y = v1 } },
-  i)[i])]. ((singleton2({ us_split_fields1 = { rec__tictactoe__position__x =
-  v; rec__tictactoe__position__y = v1 } }, i)[i]) = { us_split_fields1 = {
-  rec__tictactoe__position__x = v; rec__tictactoe__position__y = v1 } })))
-
 logic bool_eq7 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -524,17 +437,17 @@ axiom bool_eq_def6 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_153:int. ((((a__first <= temp___idx_153) and
-  (temp___idx_153 <= a__last)) and (bool_eq6((a[temp___idx_153]),
-  (b[((b__first - a__first) + temp___idx_153)])) = true)) or
-  (not ((a__first <= temp___idx_153) and (temp___idx_153 <= a__last)))))) ->
+  (forall temp___idx_175:int. ((((a__first <= temp___idx_175) and
+  (temp___idx_175 <= a__last)) and (bool_eq6((a[temp___idx_175]),
+  (b[((b__first - a__first) + temp___idx_175)])) = true)) or
+  (not ((a__first <= temp___idx_175) and (temp___idx_175 <= a__last)))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_153:int. (((a__first <= temp___idx_153) and
-  (temp___idx_153 <= a__last)) -> (bool_eq6((a[temp___idx_153]),
-  (b[((b__first - a__first) + temp___idx_153)])) = true))))) -> (bool_eq7(a,
+  (forall temp___idx_175:int. (((a__first <= temp___idx_175) and
+  (temp___idx_175 <= a__last)) -> (bool_eq6((a[temp___idx_175]),
+  (b[((b__first - a__first) + temp___idx_175)])) = true))))) -> (bool_eq7(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev2 :
@@ -544,9 +457,9 @@ axiom bool_eq_rev2 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_153:int. (((a__first <= temp___idx_153) and
-  (temp___idx_153 <= a__last)) -> (bool_eq6((a[temp___idx_153]),
-  (b[((b__first - a__first) + temp___idx_153)])) = true)))))))
+  (forall temp___idx_175:int. (((a__first <= temp___idx_175) and
+  (temp___idx_175 <= a__last)) -> (bool_eq6((a[temp___idx_175]),
+  (b[((b__first - a__first) + temp___idx_175)])) = true)))))))
 
 logic dummy6 : (int,us_rep) farray
 
@@ -596,27 +509,6 @@ axiom slide_def3 :
   (forall i:int [(slide3(a, old_first, new_first)[i])]. ((slide3(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat3 : (int,(int,us_rep) farray) farray, int, int,
-  (int,(int,us_rep) farray) farray, int,
-  int -> (int,(int,us_rep) farray) farray
-
-axiom concat_def3 :
-  (forall a:(int,(int,us_rep) farray) farray.
-  forall b:(int,(int,us_rep) farray) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat3(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat3(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat3(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton3 : (int,us_rep) farray,
-  int -> (int,(int,us_rep) farray) farray
-
-axiom singleton_def3 :
-  (forall v:(int,us_rep) farray.
-  (forall i:int [(singleton3(v, i)[i])]. ((singleton3(v, i)[i]) = v)))
-
 logic bool_eq8 : (int,(int,us_rep) farray) farray, int, int,
   (int,(int,us_rep) farray) farray, int, int -> bool
 
@@ -628,17 +520,17 @@ axiom bool_eq_def7 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
-  (temp___idx_154 <= a__last)) and (bool_eq7((a[temp___idx_154]), 1, 3,
-  (b[((b__first - a__first) + temp___idx_154)]), 1, 3) = true)) or
-  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
+  (forall temp___idx_176:int. ((((a__first <= temp___idx_176) and
+  (temp___idx_176 <= a__last)) and (bool_eq7((a[temp___idx_176]), 1, 3,
+  (b[((b__first - a__first) + temp___idx_176)]), 1, 3) = true)) or
+  (not ((a__first <= temp___idx_176) and (temp___idx_176 <= a__last)))))) ->
   (bool_eq8(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
-  (temp___idx_154 <= a__last)) -> (bool_eq7((a[temp___idx_154]), 1, 3,
-  (b[((b__first - a__first) + temp___idx_154)]), 1, 3) = true))))) ->
+  (forall temp___idx_176:int. (((a__first <= temp___idx_176) and
+  (temp___idx_176 <= a__last)) -> (bool_eq7((a[temp___idx_176]), 1, 3,
+  (b[((b__first - a__first) + temp___idx_176)]), 1, 3) = true))))) ->
   (bool_eq8(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev3 :
@@ -649,9 +541,9 @@ axiom bool_eq_rev3 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
-  (temp___idx_154 <= a__last)) -> (bool_eq7((a[temp___idx_154]), 1, 3,
-  (b[((b__first - a__first) + temp___idx_154)]), 1, 3) = true)))))))
+  (forall temp___idx_176:int. (((a__first <= temp___idx_176) and
+  (temp___idx_176 <= a__last)) -> (bool_eq7((a[temp___idx_176]), 1, 3,
+  (b[((b__first - a__first) + temp___idx_176)]), 1, 3) = true)))))))
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
@@ -663,706 +555,23 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
-logic my_board : (int,(int,slot) farray) farray
-
-logic all_solutions : (int,(int,us_rep) farray) farray
-
-logic score : int
-
-logic p__split_fields : pos
-
-logic p__split_fields1 : pos
-
-logic c50b : int
-
-logic i : int
-
-logic tictactoe__won__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : int
-
-logic o13 : int
-
-logic o14 : int
-
-logic o15 : int
-
-logic o16 : int
-
-logic o17 : int
-
-logic o18 : int
-
-logic o19 : int
-
-logic o20 : int
-
-logic o21 : int
-
-logic o22 : int
-
-logic o23 : int
-
-logic o24 : int
-
-logic o25 : int
-
-logic o26 : int
-
-logic o27 : int
-
-logic o28 : int
-
-logic o29 : int
-
-logic o30 : int
-
-logic o31 : int
-
-logic o32 : int
-
-logic o33 : int
-
-logic o34 : int
-
-logic o35 : int
-
-logic o36 : int
-
-logic o37 : int
-
-logic o38 : int
-
-logic o39 : int
-
-logic o40 : int
-
-logic o41 : int
-
-logic o42 : int
-
-logic o43 : int
-
-logic o44 : int
-
-logic o45 : int
-
-logic o46 : int
-
-logic o47 : int
-
-logic tictactoe__won__result1 : int
-
-logic result : int
-
-logic c50b1 : int
-
-logic result1 : int
-
-logic score1 : int
-
-logic result2 : int
-
-logic i1 : int
-
-logic result3 : pos
-
-logic result4 : pos
-
-logic p__split_fields2 : pos
-
-logic p__split_fields3 : pos
-
-logic result5 : int
-
-logic score2 : int
-
-logic result6 : int
-
-logic score3 : int
-
-logic result7 : int
-
-logic i2 : int
-
-logic result8 : pos
-
-logic result9 : pos
-
-logic p__split_fields4 : pos
-
-logic p__split_fields5 : pos
-
-logic result10 : int
-
-logic score4 : int
-
-logic result11 : int
-
-logic score5 : int
-
-logic result12 : int
-
-logic i3 : int
-
-logic result13 : pos
-
-logic result14 : pos
-
-logic p__split_fields6 : pos
-
-logic p__split_fields7 : pos
-
-logic result15 : int
-
-logic score6 : int
-
-logic result16 : int
-
-logic score7 : int
-
-logic tictactoe__won__result2 : int
-
-logic tictactoe__won__result3 : int
-
-logic result17 : int
-
-logic c50b2 : int
-
-logic result18 : int
-
-logic score8 : int
-
-logic result19 : int
-
-logic i4 : int
-
-logic result20 : pos
-
-logic result21 : pos
-
-logic p__split_fields8 : pos
-
-logic p__split_fields9 : pos
-
-logic result22 : int
-
-logic score9 : int
-
-logic result23 : int
-
-logic score10 : int
-
-logic result24 : int
-
-logic i5 : int
-
-logic result25 : pos
-
-logic result26 : pos
-
-logic p__split_fields10 : pos
-
-logic p__split_fields11 : pos
-
-logic result27 : int
-
-logic score11 : int
-
-logic result28 : int
-
-logic score12 : int
-
-logic result29 : int
-
-logic i6 : int
-
-logic result30 : pos
-
-logic result31 : pos
-
-logic p__split_fields12 : pos
-
-logic p__split_fields13 : pos
-
-logic result32 : int
-
-logic score13 : int
-
-logic result33 : int
-
-logic score14 : int
-
-logic tictactoe__won__result4 : int
-
-logic tictactoe__won__result5 : int
-
-logic result34 : int
-
-logic c50b3 : int
-
-logic result35 : int
-
-logic score15 : int
-
-logic result36 : int
-
-logic i7 : int
-
-logic result37 : pos
-
-logic result38 : pos
-
-logic p__split_fields14 : pos
-
-logic p__split_fields15 : pos
-
-logic result39 : int
-
-logic score16 : int
-
-logic result40 : int
-
-logic score17 : int
-
-logic result41 : int
-
-logic i8 : int
-
-logic result42 : pos
-
-logic result43 : pos
-
-logic p__split_fields16 : pos
-
-logic p__split_fields17 : pos
-
-logic result44 : int
-
-logic score18 : int
-
-logic result45 : int
-
-logic score19 : int
-
-logic result46 : int
-
-logic i9 : int
-
-logic result47 : pos
-
-logic result48 : pos
-
-logic p__split_fields18 : pos
-
-logic p__split_fields19 : pos
-
-logic result49 : int
-
-logic score20 : int
-
-logic result50 : int
-
-logic score21 : int
-
-logic tictactoe__won__result6 : int
-
-logic tictactoe__won__result7 : int
-
-logic result51 : int
-
-logic c50b4 : int
-
-logic result52 : int
-
-logic score22 : int
-
-logic result53 : int
-
-logic i10 : int
-
-logic result54 : pos
-
-logic result55 : pos
-
-logic p__split_fields20 : pos
-
-logic p__split_fields21 : pos
-
-logic result56 : int
-
-logic score23 : int
-
-logic result57 : int
-
-logic score24 : int
-
-logic result58 : int
-
-logic i11 : int
-
-logic result59 : pos
-
-logic result60 : pos
-
-logic p__split_fields22 : pos
-
-logic p__split_fields23 : pos
-
-logic result61 : int
-
-logic score25 : int
-
-logic result62 : int
-
-logic score26 : int
-
-logic result63 : int
-
-logic i12 : int
-
-logic result64 : pos
-
-logic result65 : pos
-
-logic p__split_fields24 : pos
-
-logic p__split_fields25 : pos
-
-logic result66 : int
-
-logic score27 : int
-
-logic result67 : int
-
-logic score28 : int
-
-logic tictactoe__won__result8 : int
-
-logic tictactoe__won__result9 : int
-
-logic result68 : int
-
-logic c50b5 : int
-
-logic result69 : int
-
-logic score29 : int
-
-logic result70 : int
-
-logic i13 : int
-
-logic result71 : pos
-
-logic result72 : pos
-
-logic p__split_fields26 : pos
-
-logic p__split_fields27 : pos
-
-logic result73 : int
-
-logic score30 : int
-
-logic result74 : int
-
-logic score31 : int
-
-logic result75 : int
-
-logic i14 : int
-
-logic result76 : pos
-
-logic result77 : pos
-
-logic p__split_fields28 : pos
-
-logic p__split_fields29 : pos
-
-logic result78 : int
-
-logic score32 : int
-
-logic result79 : int
-
-logic score33 : int
-
-logic result80 : int
-
-logic i15 : int
-
-logic result81 : pos
-
-logic result82 : pos
-
-logic p__split_fields30 : pos
-
-logic p__split_fields31 : pos
-
-logic result83 : int
-
-logic score34 : int
-
-logic result84 : int
-
-logic score35 : int
-
-logic tictactoe__won__result10 : int
-
-logic tictactoe__won__result11 : int
-
-logic result85 : int
-
-logic c50b6 : int
-
-logic result86 : int
-
-logic score36 : int
-
-logic result87 : int
-
-logic i16 : int
-
-logic result88 : pos
-
-logic result89 : pos
-
-logic p__split_fields32 : pos
-
-logic p__split_fields33 : pos
-
-logic result90 : int
-
-logic score37 : int
-
-logic result91 : int
-
-logic score38 : int
-
-logic result92 : int
-
-logic i17 : int
-
-logic result93 : pos
-
-logic result94 : pos
-
-logic p__split_fields34 : pos
-
-logic p__split_fields35 : pos
-
-logic result95 : int
-
-logic score39 : int
-
-logic result96 : int
-
-logic score40 : int
-
-logic result97 : int
-
-logic i18 : int
-
-logic result98 : pos
-
-logic result99 : pos
-
-logic p__split_fields36 : pos
-
-logic p__split_fields37 : pos
-
-logic result100 : int
-
-logic score41 : int
-
-logic result101 : int
-
-logic score42 : int
-
-logic tictactoe__won__result12 : int
-
-logic tictactoe__won__result13 : int
-
-logic result102 : int
-
-logic c50b7 : int
-
-logic result103 : int
-
-logic score43 : int
-
-logic result104 : int
-
-logic i19 : int
-
-logic result105 : pos
-
-logic result106 : pos
-
-logic p__split_fields38 : pos
-
-logic p__split_fields39 : pos
-
-logic result107 : int
-
-logic score44 : int
-
-logic result108 : int
-
-logic score45 : int
-
-logic result109 : int
-
-logic i20 : int
-
-logic result110 : pos
-
-logic result111 : pos
-
-logic p__split_fields40 : pos
-
-logic p__split_fields41 : pos
-
-logic result112 : int
-
-logic score46 : int
-
-logic result113 : int
-
-logic score47 : int
-
-logic result114 : int
-
-logic i21 : int
-
-logic result115 : pos
-
-logic result116 : pos
-
-logic p__split_fields42 : pos
-
-logic p__split_fields43 : pos
-
-logic result117 : int
-
-logic score48 : int
-
-logic result118 : int
-
-logic score49 : int
-
-logic tictactoe__won__result14 : int
-
-logic tictactoe__won__result15 : int
-
-logic result119 : int
-
-logic c50b8 : int
-
-logic result120 : int
-
-logic score50 : int
-
-logic result121 : int
-
-logic i22 : int
-
-logic result122 : pos
-
-logic result123 : pos
-
-logic p__split_fields44 : pos
-
-logic p__split_fields45 : pos
-
-logic result124 : int
-
-logic score51 : int
-
-logic result125 : int
-
-logic score52 : int
-
-logic result126 : int
-
-logic i23 : int
-
-logic result127 : pos
-
-logic result128 : pos
-
-logic p__split_fields46 : pos
-
-logic p__split_fields47 : pos
-
-logic result129 : int
-
-logic score53 : int
-
-logic result130 : int
-
-logic score54 : int
-
-logic result131 : int
-
-logic i24 : int
-
-logic result132 : pos
-
-logic result133 : pos
-
-logic p__split_fields48 : pos
-
-logic p__split_fields49 : pos
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range(score))
-
-axiom H1 : (result = c50b)
-
-axiom H2 : (c50b1 = 1)
-
-axiom H3 : (result1 = score)
-
-axiom H4 : (score1 = 0)
-
-axiom H5 : (result2 = i)
-
-axiom H6 : (i1 = 1)
-
-axiom H7 : ((result3 = p__split_fields) and (result4 = p__split_fields1))
-
-axiom H8 : ({ rec__tictactoe__position__x = p__split_fields2;
-  rec__tictactoe__position__y = p__split_fields3
-  } = (((all_solutions[c50b1])[i1])).us_split_fields1)
-
-axiom H9 :
-  (to_rep(((my_board[to_rep1(p__split_fields2)])[to_rep1(p__split_fields3)])) = 2)
-
  (* File "tictactoe.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : in_range((score1 + 1))
+goal WP_parameter_def :
+  (forall my_board:(int,(int,slot) farray) farray.
+  forall all_solutions:(int,(int,us_rep) farray) farray. forall score:int.
+  forall p__split_fields:pos. forall p__split_fields1:pos. forall c50b:int.
+  forall i:int. forall result:int. forall c50b1:int. forall result1:int.
+  forall score1:int. forall result2:int. forall i1:int. forall result3:pos.
+  forall result4:pos. forall p__split_fields2:pos.
+  forall p__split_fields3:pos. ((((- 2147483648) <= 2147483647) ->
+  in_range(score)) -> (((result = c50b) and (c50b1 = 1)) ->
+  (((result1 = score) and (score1 = 0)) -> ((({ int__content = result2 } = {
+  int__content = i }) and (i1 = 1)) -> ((({ us_split_fields__content = {
+  rec__tictactoe__position__x = result3; rec__tictactoe__position__y =
+  result4 } } = { us_split_fields__content = { rec__tictactoe__position__x =
+  p__split_fields; rec__tictactoe__position__y = p__split_fields1 } }) and ({
+  rec__tictactoe__position__x = p__split_fields2;
+  rec__tictactoe__position__y = p__split_fields3
+  } = (((all_solutions[c50b1])[i1])).us_split_fields1)) ->
+  ((to_rep(((my_board[to_rep1(p__split_fields2)])[to_rep1(p__split_fields3)])) = 2) ->
+  in_range((score1 + 1)))))))))

@@ -105,6 +105,32 @@ type integer__ref = { integer__content : integer
 function integer__ref___projection(a: integer__ref) : integer =
   (a).integer__content
 
+type positive
+
+predicate in_range1(x: int) = ((1 <= x) and (x <= 2147483647))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq1 : positive, positive -> bool
+
+logic dummy1 : positive
+
+type positive__ref = { positive__content : positive
+}
+
+function positive__ref___projection(a: positive__ref) : positive =
+  (a).positive__content
+
 logic to_rep : integer -> int
 
 logic of_rep : int -> integer
@@ -117,6 +143,32 @@ axiom range_axiom : (forall x:integer [to_rep(x)]. in_range(to_rep(x)))
 axiom coerce_axiom :
   (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
   (to_rep(of_rep(x)) = x)))
+
+type byte_index
+
+predicate in_range2(x: int) = ((1 <= x) and (x <= 2147483647))
+
+logic bool_eq3 : int, int -> bool
+
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+
+logic user_eq2 : byte_index, byte_index -> bool
+
+logic dummy2 : byte_index
+
+type byte_index__ref = { byte_index__content : byte_index
+}
+
+function byte_index__ref___projection(a: byte_index__ref) : byte_index =
+  (a).byte_index__content
 
 type t
 
@@ -551,11 +603,11 @@ axiom Extensionality :
 type t__ref = { t__content : t
 }
 
-logic bool_eq2 : t, t -> bool
+logic bool_eq4 : t, t -> bool
 
-axiom bool_eq_def1 :
-  (forall x:t. forall y:t [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+axiom bool_eq_def3 :
+  (forall x:t. forall y:t [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
 
 logic bool_ne1 : t, t -> bool
 
@@ -665,21 +717,21 @@ type byte
 
 logic attr__ATTRIBUTE_MODULUS : t
 
-logic bool_eq3 : t, t -> bool
+logic bool_eq5 : t, t -> bool
 
-axiom bool_eq_def2 :
-  (forall x:t. forall y:t [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+axiom bool_eq_def4 :
+  (forall x:t. forall y:t [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
 
-logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
+logic attr__ATTRIBUTE_IMAGE3 : t -> us_image
 
-logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE1 : us_image -> t
+logic attr__ATTRIBUTE_VALUE3 : us_image -> t
 
-logic user_eq1 : byte, byte -> bool
+logic user_eq3 : byte, byte -> bool
 
-logic dummy1 : byte
+logic dummy3 : byte
 
 type byte__ref = { byte__content : byte
 }
@@ -719,137 +771,264 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,byte) farray, int, int, (int,byte) farray, int,
-  int -> (int,byte) farray
-
-axiom concat_def :
-  (forall a:(int,byte) farray. forall b:(int,byte) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : byte, int -> (int,byte) farray
-
-axiom singleton_def :
-  (forall v:byte.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
-logic bool_eq4 : (int,byte) farray, int, int, (int,byte) farray, int,
+logic bool_eq6 : (int,byte) farray, int, int, (int,byte) farray, int,
   int -> bool
 
-axiom bool_eq_def3 :
+axiom bool_eq_def5 :
   (forall a:(int,byte) farray. forall a__first:int. forall a__last:int.
   forall b:(int,byte) farray. forall b__first:int. forall b__last:int
-  [bool_eq4(a, a__first, a__last, b, b__first, b__last)].
+  [bool_eq6(a, a__first, a__last, b, b__first, b__last)].
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
-  (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
+  (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)]))))))) ->
-  (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)]))))))) ->
+  (bool_eq6(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
   (forall a:(int,byte) farray. forall b:(int,byte) farray.
   (forall a__first:int. forall a__last:int. forall b__first:int.
-  forall b__last:int. ((bool_eq4(b, b__first, b__last, a, a__first,
+  forall b__last:int. ((bool_eq6(b, b__first, b__last, a, a__first,
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))))))))
 
-logic compare : (int,byte) farray, int, int, (int,byte) farray, int,
-  int -> int
+type t1
 
-axiom compare_def_eq :
-  (forall a:(int,byte) farray. forall b:(int,byte) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
+logic first : t1 -> integer
 
-axiom compare_def_lt :
-  (forall a:(int,byte) farray. forall b:(int,byte) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and ult(to_rep1((a[(i + 1)])), to_rep1((b[(j + 1)]))))))))))))
+logic last : t1 -> integer
 
-axiom compare_def_gt :
-  (forall a:(int,byte) farray. forall b:(int,byte) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and ugt(to_rep1((a[(j + 1)])), to_rep1((b[(i + 1)]))))))))))))
+logic mk : int, int -> t1
+
+axiom mk_def :
+  (forall f:int. forall l:int [mk(f, l)]. (in_range(f) -> (in_range(l) ->
+  ((to_rep(first(mk(f, l))) = f) and (to_rep(last(mk(f, l))) = l)))))
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range(low) and (in_range(high) and ((low <= high) ->
+  (in_range2(low) and in_range2(high)))))
+
+type us_t = { elts : (int,byte) farray; rt : t1
+}
+
+function to_array(a: us_t) : (int,byte) farray = (a).elts
+
+function of_array(a: (int,byte) farray, f: int, l: int) : us_t = { elts = a;
+  rt = mk(f, l) }
+
+function first1(a: us_t) : int = to_rep(first((a).rt))
+
+function last1(a: us_t) : int = to_rep(last((a).rt))
+
+logic length : us_t -> int
+
+axiom length_def :
+  (forall a:us_t [length(a)]. (((first1(a) <= last1(a)) ->
+  (length(a) = ((last1(a) - first1(a)) + 1))) and
+  ((not (first1(a) <= last1(a))) -> (length(a) = 0))))
+
+logic value__size : int
+
+logic object__size : (int,byte) farray -> int
+
+logic value__component__size : int
+
+logic object__component__size : (int,byte) farray -> int
+
+logic value__alignment : int
+
+logic object__alignment : (int,byte) farray -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:(int,byte) farray. (0 <= object__size(a)))
+
+axiom value__component__size_axiom : (0 <= value__component__size)
+
+axiom object__component__size_axiom :
+  (forall a:(int,byte) farray. (0 <= object__component__size(a)))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:(int,byte) farray. (0 <= object__alignment(a)))
+
+function bool_eq7(x: us_t, y: us_t) : bool = bool_eq6((x).elts,
+  to_rep(first((x).rt)), to_rep(last((x).rt)), (y).elts,
+  to_rep(first((y).rt)), to_rep(last((y).rt)))
+
+logic user_eq4 : us_t, us_t -> bool
+
+logic dummy4 : (int,byte) farray
+
+logic dummy5 : t1
+
+type byte_array__ref = { byte_array__content : us_t
+}
+
+function byte_array__ref___projection(a: byte_array__ref) : us_t =
+  (a).byte_array__content
+
+logic dummy6 : (int,byte) farray
+
+logic value__size1 : int
+
+logic object__size1 : (int,byte) farray -> int
+
+logic value__component__size1 : int
+
+logic object__component__size1 : (int,byte) farray -> int
+
+logic value__alignment1 : int
+
+logic object__alignment1 : (int,byte) farray -> int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 :
+  (forall a:(int,byte) farray. (0 <= object__size1(a)))
+
+axiom value__component__size_axiom1 : (0 <= value__component__size1)
+
+axiom object__component__size_axiom1 :
+  (forall a:(int,byte) farray. (0 <= object__component__size1(a)))
+
+axiom value__alignment_axiom1 : (0 <= value__alignment1)
+
+axiom object__alignment_axiom1 :
+  (forall a:(int,byte) farray. (0 <= object__alignment1(a)))
+
+logic user_eq5 : (int,byte) farray, (int,byte) farray -> bool
+
+type us_split_fields = { rec__payload__t__payload : (int,byte) farray
+}
+
+function us_split_fields_Payload__projection(a: us_split_fields) : (int,byte) farray =
+  (a).rec__payload__t__payload
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref___projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+function us_rep___projection(a: us_rep) : us_split_fields =
+  (a).us_split_fields1
+
+logic bool_eq8 : us_rep, us_rep -> bool
+
+axiom bool_eq_def6 :
+  (forall a:us_rep. forall b:us_rep [bool_eq8(a, b)].
+  (((bool_eq6(((a).us_split_fields1).rec__payload__t__payload, 1, 500,
+  ((b).us_split_fields1).rec__payload__t__payload, 1, 500) = true) ->
+  (bool_eq8(a, b) = true)) and
+  ((not (bool_eq6(((a).us_split_fields1).rec__payload__t__payload, 1, 500,
+  ((b).us_split_fields1).rec__payload__t__payload, 1, 500) = true)) ->
+  (bool_eq8(a, b) = false))))
+
+logic value__size2 : int
+
+logic object__size2 : us_rep -> int
+
+logic value__alignment2 : int
+
+logic object__alignment2 : us_rep -> int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 :
+  (forall a:(int,byte) farray. (0 <= object__size2({ us_split_fields1 = {
+  rec__payload__t__payload = a } })))
+
+axiom value__alignment_axiom2 : (0 <= value__alignment2)
+
+axiom object__alignment_axiom2 :
+  (forall a:(int,byte) farray. (0 <= object__alignment2({ us_split_fields1 =
+  { rec__payload__t__payload = a } })))
+
+logic payload__t__payload__first__bit : int
+
+logic payload__t__payload__last__bit : int
+
+logic payload__t__payload__position : int
+
+axiom payload__t__payload__first__bit_axiom :
+  (0 <= payload__t__payload__first__bit)
+
+axiom payload__t__payload__last__bit_axiom :
+  (payload__t__payload__first__bit <  payload__t__payload__last__bit)
+
+axiom payload__t__payload__position_axiom :
+  (0 <= payload__t__payload__position)
+
+logic user_eq6 : us_rep, us_rep -> bool
+
+logic dummy7 : (int,byte) farray
+
+type t__ref1 = { t__content1 : us_rep
+}
+
+function t__ref___projection(a: t__ref1) : us_rep = (a).t__content1
+
+logic get_packed_payload : us_rep -> us_t
+
+logic get_packed_payload__function_guard : us_t, us_rep -> prop
+
+axiom get_packed_payload__post_axiom :
+  (forall data:(int,byte) farray [get_packed_payload({ us_split_fields1 = {
+  rec__payload__t__payload = data } })]. dynamic_property(1, 2147483647,
+  to_rep(first((get_packed_payload({ us_split_fields1 = {
+  rec__payload__t__payload = data } })).rt)),
+  to_rep(last((get_packed_payload({ us_split_fields1 = {
+  rec__payload__t__payload = data } })).rt))))
+
+logic data : (int,byte) farray
+
+logic attr__ATTRIBUTE_ADDRESS : int
 
 logic payload_as_bytes__first : integer
 
 logic payload_as_bytes__last : integer
 
-logic attr__ATTRIBUTE_ADDRESS : int
+logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic last : int
-
-predicate dynamic_property(first_int: int, last_int: int, x: int) =
-  ((first_int <= x) and (x <= last_int))
-
-logic bool_eq5 : int, int -> bool
-
-axiom bool_eq_def4 :
-  (forall x:int. forall y:int [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE2 : us_image -> int
-
-logic user_eq2 : integer, integer -> bool
-
-logic dummy2 : integer
-
-type payload_as_string_index__ref = { payload_as_string_index__content :
-integer
-}
-
-function payload_as_string_index__ref___projection(a: payload_as_string_index__ref) : integer =
-  (a).payload_as_string_index__content
-
-axiom last__def_axiom :
-  (((to_rep(payload_as_bytes__first) <= to_rep(payload_as_bytes__last)) ->
-  (last = ((to_rep(payload_as_bytes__last) - to_rep(payload_as_bytes__first)) + 1))) and
-  ((not (to_rep(payload_as_bytes__first) <= to_rep(payload_as_bytes__last))) ->
-  (last = 0)))
-
-logic o : int
-
-logic us : int
-
-axiom H :
-  ((to_rep(payload_as_bytes__first) <= to_rep(payload_as_bytes__last)) ->
-  (o = ((to_rep(payload_as_bytes__last) - to_rep(payload_as_bytes__first)) + 1)))
-
-axiom H1 :
-  ((not (to_rep(payload_as_bytes__first) <= to_rep(payload_as_bytes__last))) ->
-  (o = 0))
-
- (* File "logging.adb", line 9, characters 0-0 *)
-goal WP_parameter_def : in_range(o)
+ (* File "a-unccon.ads", line 20, characters 0-0 *)
+goal WP_parameter_def :
+  (forall payload_as_bytes:(int,byte) farray.
+  forall logging__log_payload__payload_as_bytes__assume:(int,byte) farray.
+  forall logging__log_payload__payload_as_bytes__assume1:t1. forall o:int.
+  forall result:(int,byte) farray.
+  forall payload_as_bytes1:(int,byte) farray. (((({ elts =
+  logging__log_payload__payload_as_bytes__assume; rt =
+  logging__log_payload__payload_as_bytes__assume1 } = get_packed_payload({
+  us_split_fields1 = { rec__payload__t__payload = data } })) and
+  dynamic_property(1, 2147483647,
+  to_rep(first(logging__log_payload__payload_as_bytes__assume1)),
+  to_rep(last(logging__log_payload__payload_as_bytes__assume1)))) and
+  (((result = payload_as_bytes) and
+  (payload_as_bytes1 = logging__log_payload__payload_as_bytes__assume)) and
+  ((to_rep(payload_as_bytes__first) = to_rep(first(logging__log_payload__payload_as_bytes__assume1))) and
+  (to_rep(payload_as_bytes__last) = to_rep(last(logging__log_payload__payload_as_bytes__assume1)))))) ->
+  (dynamic_property(1, 2147483647, to_rep(payload_as_bytes__first),
+  to_rep(payload_as_bytes__last)) ->
+  ((((to_rep(payload_as_bytes__first) <= to_rep(payload_as_bytes__last)) and
+  (o = ((to_rep(payload_as_bytes__last) - to_rep(payload_as_bytes__first)) + 1))) or
+  ((not (to_rep(payload_as_bytes__first) <= to_rep(payload_as_bytes__last))) and
+  (o = 0))) -> in_range(o)))))

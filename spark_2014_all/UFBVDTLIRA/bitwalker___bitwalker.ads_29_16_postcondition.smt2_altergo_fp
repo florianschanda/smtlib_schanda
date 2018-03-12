@@ -601,12 +601,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -618,6 +612,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -735,89 +735,62 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 axiom left_bv__def_axiom : (left_bv = of_int(left))
 
-axiom mask__def_axiom : (mask = lsl_bv(of_int(1), of_int((63 - left))))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 1)
+
+axiom mask__def_axiom : (mask = lsl_bv(rliteral, of_int((63 - left))))
 
 axiom r__def_axiom : (((flag = true) -> (r = bw_or(value, mask))) and
   ((not (flag = true)) -> (r = bw_and(value, bw_not(mask)))))
 
-logic bitwalker__pokebit64__result : t
+logic rliteral1 : t
 
-logic o : int
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 64)
 
-logic o1 : int
+logic rliteral2 : t
 
-logic o2 : t
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 63)
 
-logic bitwalker__pokebit64__B_1__mask__assume : t
+logic rliteral3 : t
 
-logic bitwalker__pokebit64__B_1__r__assume : t
-
-logic i : t
-
-logic i1 : int
-
-logic o3 : int
-
-logic o4 : bool
-
-logic o5 : int
-
-logic o6 : bool
-
-logic result : t
-
-logic bitwalker__pokebit64__result1 : t
-
-logic bitwalker__pokebit64__result2 : t
-
-logic bitwalker__pokebit64__result3 : t
-
-logic bitwalker__pokebit64__result4 : t
-
-logic bitwalker__pokebit64__result5 : t
-
-logic result1 : t
-
-axiom H : true
-
-axiom H1 : in_range1(left)
-
-axiom H2 : (left <  64)
-
-axiom H3 : (((of_int(left) = left_bv) and (ult(left_bv, of_int(64)) and
-  ((sub(of_int(63), left_bv) = of_int((63 - left))) and
-  (((bitwalker__pokebit64__result1 = bitwalker__pokebit64__result2) and
-  (bitwalker__pokebit64__result3 = bitwalker__pokebit64__result1)) and
-  ((((((o1 = (63 - left)) and in_range1((63 - left))) and
-  (o2 = of_int(o1))) and
-  (bitwalker__pokebit64__B_1__mask__assume = lsl_bv(of_int(1), o2))) and
-  (bitwalker__pokebit64__B_1__mask__assume = mask)) and (((((flag = true) ->
-  (bitwalker__pokebit64__B_1__r__assume = bw_or(value, mask))) and
-  ((not (flag = true)) ->
-  (bitwalker__pokebit64__B_1__r__assume = bw_and(value, bw_not(mask))))) and
-  (bitwalker__pokebit64__B_1__r__assume = r)) and
-  ((forall i2:t. ((ule(of_int(0), i2) and ule(i2, of_int(63))) ->
-   ((not (i2 = sub(of_int(63), left_bv))) -> ((nth_bv(r, i2) = true) <->
-   (nth_bv(value, i2) = true))))) and
-  ((forall i2:int. (((0 <= i2) and (i2 <= 63)) -> (ule(of_int(0),
-   of_int(i2)) and ule(of_int(i2), of_int(63))))) and (((flag = true) <->
-  (nth_bv(r, sub(of_int(63), left_bv)) = true)) and
-  ((result = bitwalker__pokebit64__result) and
-  (bitwalker__pokebit64__result1 = r))))))))))) and
-  ((bitwalker__pokebit64__result4 = bitwalker__pokebit64__result2) and
-  (bitwalker__pokebit64__result5 = bitwalker__pokebit64__result3)))
-
-axiom H4 : (result1 = bitwalker__pokebit64__result4)
-
-logic i2 : int
-
-axiom H5 : (0 <= i2)
-
-axiom H6 : (i2 <= 63)
-
-axiom H7 : (not (i2 = (63 - left)))
-
-axiom H8 : (nth(bitwalker__pokebit64__result4, i2) = true)
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 0)
 
  (* File "interfac.ads", line 77, characters 0-0 *)
-goal WP_parameter_def : (nth(value, i2) = true)
+goal WP_parameter_def :
+  (forall bitwalker__pokebit64__result:t. forall o:int. forall o1:t.
+  forall bitwalker__pokebit64__B_1__mask__assume:t.
+  forall bitwalker__pokebit64__B_1__r__assume:t. forall result:t.
+  forall bitwalker__pokebit64__result1:t.
+  forall bitwalker__pokebit64__result2:t.
+  forall bitwalker__pokebit64__result3:t.
+  forall bitwalker__pokebit64__result4:t.
+  forall bitwalker__pokebit64__result5:t.
+  (forall result1:t. ((in_range1(left) and ((left <  64) and
+  ((((of_int(left) = left_bv) and (ult(left_bv, rliteral1) and
+  ((sub(rliteral2, left_bv) = of_int((63 - left))) and
+  (((bitwalker__pokebit64__result1 = bitwalker__pokebit64__result2) and
+  (bitwalker__pokebit64__result3 = bitwalker__pokebit64__result1)) and
+  ((((((o = (63 - left)) and in_range1((63 - left))) and
+  (o1 = of_int(o))) and
+  (bitwalker__pokebit64__B_1__mask__assume = lsl_bv(rliteral, o1))) and
+  (bitwalker__pokebit64__B_1__mask__assume = mask)) and (((((flag = true) and
+  (bitwalker__pokebit64__B_1__r__assume = bw_or(value, mask))) or
+  ((not (flag = true)) and
+  (bitwalker__pokebit64__B_1__r__assume = bw_and(value, bw_not(mask))))) and
+  (bitwalker__pokebit64__B_1__r__assume = r)) and
+  ((forall i:t. ((ule(rliteral3, i) and ule(i, rliteral2)) ->
+   ((not (i = sub(rliteral2, left_bv))) -> ((nth_bv(r, i) = true) <->
+   (nth_bv(value, i) = true))))) and
+  ((forall i:int. (((0 <= i) and (i <= 63)) -> (ule(rliteral3, of_int(i)) and
+   ule(of_int(i), rliteral2)))) and
+  (((flag = true) <-> (nth_bv(r, sub(rliteral2, left_bv)) = true)) and (({
+  t__content = result } = { t__content = bitwalker__pokebit64__result }) and
+  (bitwalker__pokebit64__result1 = r))))))))))) and (({ t__content =
+  bitwalker__pokebit64__result4 } = { t__content =
+  bitwalker__pokebit64__result2 }) and
+  (bitwalker__pokebit64__result5 = bitwalker__pokebit64__result3))) and
+  (result1 = bitwalker__pokebit64__result4)))) ->
+  (forall i:int. (((0 <= i) and (i <= 63)) -> ((not (i = (63 - left))) ->
+  ((nth(bitwalker__pokebit64__result4, i) = true) -> (nth(value,
+  i) = true))))))))

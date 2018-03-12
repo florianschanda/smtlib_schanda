@@ -332,7 +332,5 @@ axiom valid__def_axiom :
   us_split_discrs1 = { rec__types__t__d = x }; us_split_fields1 = {
   rec__types__t__c = x1; rec__ext__ = x2 }; attr__tag = x3 }) = true))
 
-logic us : int
-
  (* File "use_types.adb", line 2, characters 0-0 *)
 goal WP_parameter_def : in_range(3)

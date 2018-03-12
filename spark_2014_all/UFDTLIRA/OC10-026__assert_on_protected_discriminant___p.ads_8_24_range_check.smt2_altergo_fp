@@ -232,11 +232,7 @@ logic self__ : integer
 
 logic self__1 : positive
 
-logic o : int
-
-logic us : int
-
-axiom H : ((o = zero(void)) and (in_range(o) and (o = 0)))
-
  (* File "p.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : in_range1(o)
+goal WP_parameter_def :
+  (forall o:int. (((o = zero(void)) and (in_range(o) and (o = 0))) ->
+  in_range1(o)))

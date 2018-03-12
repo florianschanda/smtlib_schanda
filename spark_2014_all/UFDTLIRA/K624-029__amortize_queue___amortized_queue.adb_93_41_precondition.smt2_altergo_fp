@@ -202,12 +202,6 @@ logic length__function_guard : int, us_rep -> prop
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -219,6 +213,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1006,278 +1006,18 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length1(container))))) ->
   in_range9(get(container, position)))))
 
-logic result____split_fields : capacity_range
-
-logic result____split_fields1 : us_main_type
-
-logic result____split_fields2 : capacity_range
-
-logic result____split_fields3 : us_main_type
-
-logic amortized_queue__tail__result : capacity_range
-
-logic amortized_queue__tail__result1 : us_main_type
-
-logic amortized_queue__tail__result2 : capacity_range
-
-logic amortized_queue__tail__result3 : us_main_type
-
-logic o : capacity_range
-
-logic o1 : us_main_type
-
-logic o2 : capacity_range
-
-logic o3 : us_main_type
-
-logic o4 : capacity_range
-
-logic o5 : us_main_type
-
-logic o6 : capacity_range
-
-logic o7 : us_main_type
-
-logic o8 : capacity_range
-
-logic o9 : us_main_type
-
-logic o10 : capacity_range
-
-logic o11 : us_main_type
-
-logic o12 : capacity_range
-
-logic o13 : us_main_type
-
-logic o14 : capacity_range
-
-logic o15 : us_main_type
-
-logic amortized_queue__tail__R62b__result__assume : capacity_range
-
-logic amortized_queue__tail__R62b__result__assume1 : us_main_type
-
-logic amortized_queue__tail__R62b__result__assume2 : capacity_range
-
-logic amortized_queue__tail__R62b__result__assume3 : us_main_type
-
-logic o16 : int
-
-logic o17 : int
-
-logic o18 : capacity_range
-
-logic o19 : us_main_type
-
-logic o20 : capacity_range
-
-logic o21 : us_main_type
-
-logic o22 : capacity_range
-
-logic o23 : us_main_type
-
-logic o24 : capacity_range
-
-logic o25 : us_main_type
-
-logic o26 : capacity_range
-
-logic o27 : us_main_type
-
-logic o28 : capacity_range
-
-logic o29 : us_main_type
-
-logic o30 : capacity_range
-
-logic o31 : us_main_type
-
-logic o32 : capacity_range
-
-logic o33 : us_main_type
-
-logic o34 : capacity_range
-
-logic o35 : us_main_type
-
-logic o36 : int
-
-logic o37 : capacity_range
-
-logic o38 : us_main_type
-
-logic result : capacity_range
-
-logic result1 : us_main_type
-
-logic result2 : capacity_range
-
-logic result3 : us_main_type
-
-logic result____split_fields4 : capacity_range
-
-logic result____split_fields5 : us_main_type
-
-logic result____split_fields6 : capacity_range
-
-logic result____split_fields7 : us_main_type
-
-logic amortized_queue__my_vectors__delete_last__container__fields : us_main_type
-
-logic result4 : capacity_range
-
-logic result5 : us_main_type
-
-logic result6 : capacity_range
-
-logic result7 : us_main_type
-
-logic result____split_fields8 : capacity_range
-
-logic result____split_fields9 : us_main_type
-
-logic result____split_fields10 : capacity_range
-
-logic result____split_fields11 : us_main_type
-
-logic result8 : bool
-
-logic amortized_queue__reverse_insert__rear__fields : us_main_type
-
-logic amortized_queue__reverse_insert__front__fields : us_main_type
-
-logic result9 : capacity_range
-
-logic result10 : us_main_type
-
-logic result11 : capacity_range
-
-logic result12 : us_main_type
-
-logic result____split_fields12 : capacity_range
-
-logic result____split_fields13 : us_main_type
-
-logic result____split_fields14 : capacity_range
-
-logic result____split_fields15 : us_main_type
-
-logic result13 : capacity_range
-
-logic result14 : us_main_type
-
-logic result15 : capacity_range
-
-logic result16 : us_main_type
-
-logic result____split_fields16 : capacity_range
-
-logic result____split_fields17 : us_main_type
-
-logic result____split_fields18 : capacity_range
-
-logic result____split_fields19 : us_main_type
-
-logic result17 : capacity_range
-
-logic result18 : us_main_type
-
-logic result19 : capacity_range
-
-logic result20 : us_main_type
-
-logic amortized_queue__tail__result4 : capacity_range
-
-logic amortized_queue__tail__result5 : us_main_type
-
-logic amortized_queue__tail__result6 : capacity_range
-
-logic amortized_queue__tail__result7 : us_main_type
-
-logic result____split_fields20 : capacity_range
-
-logic result____split_fields21 : us_main_type
-
-logic result____split_fields22 : capacity_range
-
-logic result____split_fields23 : us_main_type
-
-logic amortized_queue__tail__result8 : capacity_range
-
-logic amortized_queue__tail__result9 : us_main_type
-
-logic amortized_queue__tail__result10 : capacity_range
-
-logic amortized_queue__tail__result11 : us_main_type
-
-logic result____split_fields24 : capacity_range
-
-logic result____split_fields25 : us_main_type
-
-logic result____split_fields26 : capacity_range
-
-logic result____split_fields27 : us_main_type
-
-logic amortized_queue__tail__result12 : capacity_range
-
-logic amortized_queue__tail__result13 : us_main_type
-
-logic amortized_queue__tail__result14 : capacity_range
-
-logic amortized_queue__tail__result15 : us_main_type
-
-logic result____split_fields28 : capacity_range
-
-logic result____split_fields29 : us_main_type
-
-logic result____split_fields30 : capacity_range
-
-logic result____split_fields31 : us_main_type
-
-logic amortized_queue__tail__result16 : capacity_range
-
-logic amortized_queue__tail__result17 : us_main_type
-
-logic amortized_queue__tail__result18 : capacity_range
-
-logic amortized_queue__tail__result19 : us_main_type
-
-logic result____split_fields32 : capacity_range
-
-logic result____split_fields33 : us_main_type
-
-logic result____split_fields34 : capacity_range
-
-logic result____split_fields35 : us_main_type
-
-logic amortized_queue__tail__result20 : capacity_range
-
-logic amortized_queue__tail__result21 : us_main_type
-
-logic amortized_queue__tail__result22 : capacity_range
-
-logic amortized_queue__tail__result23 : us_main_type
-
-logic result21 : bool
-
-axiom H : ((1000 = to_rep(q)) and (1000 = to_rep(q2)))
-
-axiom H1 : ((inv({ us_split_fields3 = { rec__amortized_queue__queue__front =
-  { us_split_discrs1 = { rec__amortized_queue__my_vectors__vector__capacity =
-  q }; us_split_fields1 = { rec__amortized_queue__my_vectors__vector = q1 }
-  }; rec__amortized_queue__queue__rear = { us_split_discrs1 = {
+ (* File "amortized_queue.ads", line 41, characters 0-0 *)
+goal WP_parameter_def : (((1000 = to_rep(q)) and (1000 = to_rep(q2))) ->
+  (((inv({ us_split_fields3 = { rec__amortized_queue__queue__front = {
+  us_split_discrs1 = { rec__amortized_queue__my_vectors__vector__capacity = q
+  }; us_split_fields1 = { rec__amortized_queue__my_vectors__vector = q1 } };
+  rec__amortized_queue__queue__rear = { us_split_discrs1 = {
   rec__amortized_queue__my_vectors__vector__capacity = q2 };
   us_split_fields1 = { rec__amortized_queue__my_vectors__vector = q3 } } }
   }) = true) and (0 <  length({ us_split_discrs1 = {
   rec__amortized_queue__my_vectors__vector__capacity = q };
-  us_split_fields1 = { rec__amortized_queue__my_vectors__vector = q1 } })))
-
-axiom H2 : (of_int(1) = true)
-
- (* File "amortized_queue.ads", line 41, characters 0-0 *)
-goal WP_parameter_def : ((1000 = 0) or (length({ us_split_discrs1 = {
-  rec__amortized_queue__my_vectors__vector__capacity = q2 };
+  us_split_fields1 = { rec__amortized_queue__my_vectors__vector = q1 }
+  }))) -> ((of_int(1) = true) -> ((1000 = 0) or (length({ us_split_discrs1 =
+  { rec__amortized_queue__my_vectors__vector__capacity = q2 };
   us_split_fields1 = { rec__amortized_queue__my_vectors__vector = q3 }
-  }) <= 1000))
+  }) <= 1000)))))

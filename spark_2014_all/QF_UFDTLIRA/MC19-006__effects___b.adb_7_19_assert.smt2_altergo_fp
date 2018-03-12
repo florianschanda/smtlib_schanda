@@ -111,13 +111,7 @@ logic tmp : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic a : int
-
-axiom H : in_range(a)
-
-axiom H1 : (a = tmp)
-
-axiom H2 : in_range(tmp)
-
  (* File "a.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (tmp = a)
+goal WP_parameter_def :
+  (forall a:int. (in_range(a) -> ((a = tmp) -> (in_range(tmp) ->
+  (tmp = a)))))

@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -247,15 +247,7 @@ logic value : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic v : int
-
-axiom H : in_range1(value)
-
-axiom H1 : (2 <= value)
-
-axiom H2 : (2 <= v)
-
-axiom H3 : (v <= (value - 1))
-
  (* File "prime_and_coprime_numbers.ads", line 24, characters 0-0 *)
-goal WP_parameter_def : (not (v = 0))
+goal WP_parameter_def :
+  (forall v:int. (in_range1(value) -> ((2 <= value) -> (((2 <= v) and
+  (v <= (value - 1))) -> (not (v = 0))))))

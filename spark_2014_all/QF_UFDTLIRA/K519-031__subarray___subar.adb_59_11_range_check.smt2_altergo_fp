@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -178,127 +178,24 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
-logic x : int
-
-logic i : int
-
-logic i1 : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic x1 : int
-
-logic result1 : int
-
-logic i2 : int
-
-logic i3 : int
-
-logic i4 : int
-
-logic i5 : int
-
-logic i6 : int
-
-logic i7 : int
-
-logic result2 : int
-
-logic x2 : int
-
-logic result3 : int
-
-logic i8 : int
-
-logic i9 : int
-
-logic i10 : int
-
-logic i11 : int
-
-logic i12 : int
-
-logic i13 : int
-
-logic result4 : int
-
-logic x3 : int
-
-axiom H : (result = x)
-
-axiom H1 : (x1 = 18)
-
-axiom H2 : in_range1(x1)
-
-axiom H3 : (x1 = r11b)
-
-axiom H4 : in_range1(r11b)
-
-axiom H5 : (result1 = i)
-
-axiom H6 : (i2 = 12)
-
-axiom H7 : (((12 <= i2) and (i2 <= r11b)) -> ((12 <= i3) and (i3 <= r11b)))
-
-axiom H8 : (((12 <= i2) and (i2 <= r11b)) -> (i3 = r11b))
-
-axiom H9 : (((12 <= i2) and (i2 <= r11b)) -> (i3 = i4))
-
-axiom H10 : (((12 <= i2) and (i2 <= r11b)) -> (i5 = i3))
-
-axiom H11 : (((12 <= i2) and (i2 <= r11b)) -> (i6 = i4))
-
-axiom H12 : (((12 <= i2) and (i2 <= r11b)) -> (i7 = i5))
-
-axiom H13 : ((not ((12 <= i2) and (i2 <= r11b))) -> (i2 = i6))
-
-axiom H14 : ((not ((12 <= i2) and (i2 <= r11b))) -> (i7 = i2))
-
-axiom H15 : ((o = (x1 + 1)) and in_range1((x1 + 1)))
-
-axiom H16 : (result2 = x1)
-
-axiom H17 : (x2 = o)
-
-axiom H18 : (x2 = r13b)
-
-axiom H19 : in_range1(r13b)
-
-axiom H20 : (result3 = i1)
-
-axiom H21 : (i8 = 20)
-
-axiom H22 : (((20 <= i8) and (i8 <= r13b)) -> ((20 <= i9) and (i9 <= r13b)))
-
-axiom H23 : (((20 <= i8) and (i8 <= r13b)) -> (i9 = r13b))
-
-axiom H24 : (((20 <= i8) and (i8 <= r13b)) -> (i9 = i10))
-
-axiom H25 : (((20 <= i8) and (i8 <= r13b)) -> (i11 = i9))
-
-axiom H26 : (((20 <= i8) and (i8 <= r13b)) -> (i12 = i10))
-
-axiom H27 : (((20 <= i8) and (i8 <= r13b)) -> (i13 = i11))
-
-axiom H28 : ((not ((20 <= i8) and (i8 <= r13b))) -> (i8 = i12))
-
-axiom H29 : ((not ((20 <= i8) and (i8 <= r13b))) -> (i13 = i8))
-
-axiom H30 : ((o1 = (x2 + 1)) and in_range1((x2 + 1)))
-
-axiom H31 : (result4 = x2)
-
-axiom H32 : (x3 = o1)
-
-axiom H33 : (x3 = r15b)
-
-axiom H34 : in_range1(r15b)
-
-axiom H35 : (19 <= r15b)
-
  (* File "subar.adb", line 30, characters 0-0 *)
-goal WP_parameter_def : (11 <= 19)
+goal WP_parameter_def :
+  (forall x:int. forall i:int. forall i1:int. forall o:int. forall o1:int.
+  forall result:int. forall x1:int. forall result1:int. forall i2:int.
+  forall i3:int. forall i4:int. forall i5:int. forall i6:int. forall i7:int.
+  forall result2:int. forall x2:int. forall result3:int. forall i8:int.
+  forall i9:int. forall i10:int. forall i11:int. forall i12:int.
+  forall i13:int. forall result4:int. forall x3:int. (((result = x) and
+  (x1 = 18)) -> (in_range1(x1) -> (((x1 = r11b) and in_range1(r11b)) ->
+  ((((result1 = i) and (i2 = 12)) and ((((12 <= i2) and (i2 <= r11b)) and
+  (((((12 <= i3) and (i3 <= r11b)) and (i3 = r11b)) and ((i3 = i4) and
+  (i5 = i3))) and ((i6 = i4) and (i7 = i5)))) or ((not ((12 <= i2) and
+  (i2 <= r11b))) and ((i2 = i6) and (i7 = i2))))) -> ((((o = (x1 + 1)) and
+  in_range1((x1 + 1))) and ((result2 = x1) and (x2 = o))) ->
+  (((x2 = r13b) and in_range1(r13b)) -> ((((result3 = i1) and (i8 = 20)) and
+  ((((20 <= i8) and (i8 <= r13b)) and (((((20 <= i9) and (i9 <= r13b)) and
+  (i9 = r13b)) and ((i9 = i10) and (i11 = i9))) and ((i12 = i10) and
+  (i13 = i11)))) or ((not ((20 <= i8) and (i8 <= r13b))) and ((i8 = i12) and
+  (i13 = i8))))) -> ((((o1 = (x2 + 1)) and in_range1((x2 + 1))) and
+  ((result4 = x2) and (x3 = o1))) -> (((x3 = r15b) and in_range1(r15b)) ->
+  ((19 <= r15b) -> (11 <= 19))))))))))))

@@ -225,99 +225,25 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic x : int
-
-logic y : int
-
-logic k : int
-
-logic loc__local__result : int
-
-logic result : int
-
-logic x1 : int
-
-logic result1 : int
-
-logic y1 : int
-
-logic result2 : int
-
-logic k1 : int
-
-logic result3 : int
-
-logic loc__local__result1 : int
-
-logic loc__local__result2 : int
-
-logic loc__local__result3 : int
-
-logic x2 : int
-
-logic y2 : int
-
-logic k2 : int
-
-logic loc__local__result4 : int
-
-logic x3 : int
-
-logic y3 : int
-
-logic k3 : int
-
-logic loc__local__result5 : int
-
-logic result4 : int
-
-axiom H : in_range(z)
-
-axiom H1 : (z = 1)
-
-axiom H2 : (result = x)
-
-axiom H3 : (x1 = comp_div(1,z))
-
-axiom H4 : in_range(x1)
-
-axiom H5 : (result1 = y)
-
-axiom H6 : (y1 = comp_div(1,x1))
-
-axiom H7 : in_range(y1)
-
-axiom H8 : (((- 2147483648) <= 2147483647) -> in_range(k))
-
-axiom H9 : (result2 = k)
-
-axiom H10 : (k1 = 1)
-
-axiom H11 : (loc__local__result1 = loc__local__result2)
-
-axiom H12 : (loc__local__result3 = loc__local__result1)
-
-axiom H13 : (result3 = loc__local__result)
-
-axiom H14 : (loc__local__result1 = k1)
-
-axiom H15 : (loc__local__result4 = loc__local__result2)
-
-axiom H16 : (k2 = k1)
-
-axiom H17 : (y2 = y1)
-
-axiom H18 : (x2 = x1)
-
-axiom H19 : (loc__local__result5 = loc__local__result3)
-
-axiom H20 : (k3 = k1)
-
-axiom H21 : (y3 = y1)
-
-axiom H22 : (x3 = x1)
-
-axiom H23 : (result4 = loc__local__result4)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (loc__local__result4 = 1)
+goal WP_parameter_def :
+  (forall x:int. forall y:int. forall k:int. forall loc__local__result:int.
+  forall result:int. forall x1:int. forall result1:int. forall y1:int.
+  forall result2:int. forall k1:int. forall result3:int.
+  forall loc__local__result1:int. forall loc__local__result2:int.
+  forall loc__local__result3:int. forall x2:int. forall y2:int.
+  forall k2:int. forall loc__local__result4:int. forall x3:int.
+  forall y3:int. forall k3:int. forall loc__local__result5:int.
+  (forall result4:int. ((in_range(z) and ((z = 1) and ((((({ int__content =
+  result } = { int__content = x }) and (x1 = comp_div(1,z))) and
+  (in_range(x1) and (((result1 = y) and (y1 = comp_div(1,x1))) and
+  (in_range(y1) and ((((- 2147483648) <= 2147483647) -> in_range(k)) and
+  (((result2 = k) and (k1 = 1)) and
+  (((loc__local__result1 = loc__local__result2) and
+  (loc__local__result3 = loc__local__result1)) and
+  ((result3 = loc__local__result) and (loc__local__result1 = k1))))))))) and
+  (((loc__local__result4 = loc__local__result2) and ((k2 = k1) and
+  ((y2 = y1) and (x2 = x1)))) and
+  ((loc__local__result5 = loc__local__result3) and ((k3 = k1) and
+  ((y3 = y1) and (x3 = x1)))))) and (result4 = loc__local__result4)))) ->
+  (loc__local__result4 = 1))))

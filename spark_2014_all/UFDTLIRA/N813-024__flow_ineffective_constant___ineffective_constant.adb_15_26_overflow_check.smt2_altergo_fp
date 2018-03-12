@@ -198,25 +198,9 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 axiom c__def_axiom : (c = of_rep(0))
 
-logic g : int
-
-logic o : integer
-
-logic o1 : integer
-
-logic temp___139 : integer
-
-logic o2 : int
-
-axiom H : (to_rep(o) = 0)
-
-axiom H1 : (o = o1)
-
-axiom H2 : (temp___139 = o1)
-
-axiom H3 : (temp___139 = c)
-
-axiom H4 : in_range(g)
-
  (* File "ineffective_constant.adb", line 9, characters 0-0 *)
-goal WP_parameter_def : in_range((to_rep(c) + g))
+goal WP_parameter_def :
+  (forall g:int. forall o:integer. forall o1:integer.
+  forall temp___162:integer. (((((to_rep(o) = 0) and (o = o1)) and
+  (temp___162 = o1)) and (temp___162 = c)) -> (in_range(g) ->
+  in_range((to_rep(c) + g)))))

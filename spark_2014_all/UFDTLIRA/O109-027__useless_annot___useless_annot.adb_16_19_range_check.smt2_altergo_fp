@@ -143,23 +143,8 @@ axiom posit__post_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic x1 : int
-
-axiom H : (result = x)
-
-axiom H1 : (x1 = 0)
-
-axiom H2 : in_range(x1)
-
-axiom H3 : ((o = posit(1)) and (in_range(o) and (1 <  o)))
-
  (* File "useless_annot.adb", line 7, characters 0-0 *)
-goal WP_parameter_def : in_range1(o)
+goal WP_parameter_def :
+  (forall x:int. forall o:int. forall result:int. forall x1:int.
+  (((result = x) and (x1 = 0)) -> (in_range(x1) -> (((o = posit(1)) and
+  (in_range(o) and (1 <  o))) -> in_range1(o)))))

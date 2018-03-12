@@ -1745,17 +1745,24 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 axiom shift_right__post_axiom : true
 
+logic rliteral3 : t1
+
+axiom rliteral_axiom3 : (tqtint1(rliteral3) = 0)
+
+logic rliteral4 : t2
+
+axiom rliteral_axiom4 : (tqtint2(rliteral4) = 0)
+
 axiom shift_right__def_axiom :
   (forall v:t.
   (forall amount:int [shift_right(v, amount)]. (in_range1(amount) ->
   ((((1 <= 32) and (32 <= 8)) -> (((amount <  8) -> (shift_right(v,
   amount) = toBig2(lsr_bv1(toSmall2(v), of_int1(amount))))) and
-  ((not (amount <  8)) -> (shift_right(v,
-  amount) = toBig2(of_int1(0)))))) and ((not ((1 <= 32) and (32 <= 8))) ->
-  ((((9 <= 32) and (32 <= 16)) -> (((amount <  16) -> (shift_right(v,
-  amount) = toBig1(lsr_bv2(toSmall1(v), of_int2(amount))))) and
-  ((not (amount <  16)) -> (shift_right(v,
-  amount) = toBig1(of_int2(0)))))) and ((not ((9 <= 32) and (32 <= 16))) ->
+  ((not (amount <  8)) -> (shift_right(v, amount) = toBig2(rliteral3))))) and
+  ((not ((1 <= 32) and (32 <= 8))) -> ((((9 <= 32) and (32 <= 16)) ->
+  (((amount <  16) -> (shift_right(v, amount) = toBig1(lsr_bv2(toSmall1(v),
+  of_int2(amount))))) and ((not (amount <  16)) -> (shift_right(v,
+  amount) = toBig1(rliteral4))))) and ((not ((9 <= 32) and (32 <= 16))) ->
   ((((17 <= 32) and (32 <= 32)) -> (shift_right(v, amount) = lsr_bv(v,
   of_int(amount)))) and ((not ((17 <= 32) and (32 <= 32))) -> (shift_right(v,
   amount) = toSmall(lsr_bv3(toBig(v), of_int3(amount)))))))))))))
@@ -1788,10 +1795,18 @@ logic msb_index_slow_inline_always : t -> int
 
 logic msb_index_slow_inline_always__function_guard : int, t -> prop
 
+logic rliteral5 : t
+
+axiom rliteral_axiom5 : (tqtint(rliteral5) = 0)
+
+logic rliteral6 : t
+
+axiom rliteral_axiom6 : (tqtint(rliteral6) = 1)
+
 axiom msb_index_slow_inline_always__post_axiom :
   (forall value1:t [msb_index_slow_inline_always(value1)].
-  ((not (value1 = of_int(0))) -> ((shift_right(value1,
-  msb_index_slow_inline_always(value1)) = of_int(1)) and
+  ((not (value1 = rliteral5)) -> ((shift_right(value1,
+  msb_index_slow_inline_always(value1)) = rliteral6) and
   in_range(msb_index_slow_inline_always(value1)))))
 
 logic msb_index_slow_inline : t -> int
@@ -1800,8 +1815,8 @@ logic msb_index_slow_inline__function_guard : int, t -> prop
 
 axiom msb_index_slow_inline__post_axiom :
   (forall value1:t [msb_index_slow_inline(value1)].
-  ((not (value1 = of_int(0))) -> ((shift_right(value1,
-  msb_index_slow_inline(value1)) = of_int(1)) and
+  ((not (value1 = rliteral5)) -> ((shift_right(value1,
+  msb_index_slow_inline(value1)) = rliteral6) and
   in_range(msb_index_slow_inline(value1)))))
 
 axiom msb_index_slow_inline__def_axiom :
@@ -1814,8 +1829,8 @@ logic msb_index_slow_not_inline__function_guard : int, t -> prop
 
 axiom msb_index_slow_not_inline__post_axiom :
   (forall value1:t [msb_index_slow_not_inline(value1)].
-  ((not (value1 = of_int(0))) -> ((shift_right(value1,
-  msb_index_slow_not_inline(value1)) = of_int(1)) and
+  ((not (value1 = rliteral5)) -> ((shift_right(value1,
+  msb_index_slow_not_inline(value1)) = rliteral6) and
   in_range(msb_index_slow_not_inline(value1)))))
 
 axiom msb_index_slow_not_inline__def_axiom :
@@ -1824,49 +1839,7 @@ axiom msb_index_slow_not_inline__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic result__ : int
-
-logic bits_manipulation_unsigned__unsigned_32__functions__msb_index__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic result__1 : int
-
-logic result1 : int
-
-logic result__2 : int
-
-logic result2 : int
-
-logic bits_manipulation_unsigned__unsigned_32__functions__msb_index__result1 : int
-
-logic result__3 : int
-
-logic bits_manipulation_unsigned__unsigned_32__functions__msb_index__result2 : int
-
-logic result__4 : int
-
-logic bits_manipulation_unsigned__unsigned_32__functions__msb_index__result3 : int
-
-logic result__5 : int
-
-logic bits_manipulation_unsigned__unsigned_32__functions__msb_index__result4 : int
-
-logic result__6 : int
-
-logic bits_manipulation_unsigned__unsigned_32__functions__msb_index__result5 : int
-
-axiom H : true
-
-axiom H1 : (not (value = of_int(0)))
-
-axiom H2 : ((0 <= 31) -> in_range(result__))
-
-axiom H3 : (2 = 0)
-
  (* File "bits_manipulation.ads", line 10, characters 0-0 *)
-goal WP_parameter_def : (not (value = of_int(0)))
+goal WP_parameter_def :
+  (forall result__:int. ((not (value = rliteral5)) -> (((0 <= 31) ->
+  in_range(result__)) -> ((2 = 0) -> (not (value = rliteral5))))))

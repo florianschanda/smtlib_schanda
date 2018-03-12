@@ -177,12 +177,6 @@ function my_nat__ref___projection(a: my_nat__ref) : integer =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq4 : bool, bool -> bool
-
-axiom bool_eq_def3 :
-  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -194,6 +188,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq4 : bool, bool -> bool
+
+axiom bool_eq_def3 :
+  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
 
 predicate in_range2(x: int) = ((x = 0) or (x = 1))
 
@@ -362,14 +362,8 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 axiom last__def_axiom : (last = c)
 
-axiom H : in_range1(c)
-
-axiom H1 : (((to_int(r) = 1) -> dynamic_property(0, last, to_rep(r1))) and
-  ((to_int(r) = 0) -> dynamic_property(0, last, to_rep(r2))))
-
-axiom H2 : (r = true)
-
-axiom H3 : (to_rep(r1) <  c)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((to_rep(r1) + 1))
+goal WP_parameter_def : (in_range1(c) -> ((((to_int(r) = 1) ->
+  dynamic_property(0, last, to_rep(r1))) and ((to_int(r) = 0) ->
+  dynamic_property(0, last, to_rep(r2)))) -> ((r = true) ->
+  ((to_rep(r1) <  c) -> in_range((to_rep(r1) + 1))))))

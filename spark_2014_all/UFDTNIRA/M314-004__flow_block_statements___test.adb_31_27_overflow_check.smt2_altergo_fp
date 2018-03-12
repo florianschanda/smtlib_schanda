@@ -235,61 +235,12 @@ logic attr__ATTRIBUTE_ADDRESS7 : int
 
 logic attr__ATTRIBUTE_ADDRESS8 : int
 
-logic x : int
-
-logic y : int
-
-logic temp1 : int
-
-logic temp2 : int
-
-logic temp11 : int
-
-logic temp21 : int
-
-logic temp12 : int
-
-logic temp22 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic result : int
-
-logic temp13 : int
-
-logic result1 : int
-
-logic temp14 : int
-
-logic result2 : int
-
-logic temp15 : int
-
-axiom H : in_range(operation)
-
-axiom H1 : in_range(x)
-
-axiom H2 : in_range(y)
-
-axiom H3 : (not (operation = 1))
-
-axiom H4 : (operation = 2)
-
-axiom H5 : (((- 2147483648) <= 2147483647) -> in_range(temp11))
-
-axiom H6 : (((- 2147483648) <= 2147483647) -> in_range(temp21))
-
-axiom H7 : ((o2 = (x * y)) and in_range((x * y)))
-
-axiom H8 : (result1 = temp11)
-
-axiom H9 : (temp14 = o2)
-
  (* File "test.adb", line 2, characters 0-0 *)
-goal WP_parameter_def : in_range(comp_div(x,y))
+goal WP_parameter_def :
+  (forall x:int. forall y:int. forall temp1:int. forall temp2:int.
+  forall o:int. forall result:int. forall temp11:int. (in_range(operation) ->
+  (in_range(x) -> (in_range(y) -> ((not (operation = 1)) ->
+  ((operation = 2) -> ((((- 2147483648) <= 2147483647) -> in_range(temp1)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(temp2)) ->
+  ((((o = (x * y)) and in_range((x * y))) and ((result = temp1) and
+  (temp11 = o))) -> in_range(comp_div(x,y)))))))))))

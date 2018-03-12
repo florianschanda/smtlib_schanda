@@ -135,33 +135,5 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic zero : int
-
-logic branch : int
-
-logic result : int
-
-logic zero1 : int
-
-logic result1 : int
-
-logic branch1 : int
-
-axiom H : (result = zero)
-
-axiom H1 : (zero1 = 0)
-
-axiom H2 : in_range(zero1)
-
-axiom H3 : (result1 = branch)
-
-axiom H4 : (branch1 = 1001)
-
-axiom H5 : in_range1(branch1)
-
-axiom H6 : true
-
-axiom H7 : true
-
  (* File "do_checks.adb", line 463, characters 0-0 *)
 goal WP_parameter_def : true

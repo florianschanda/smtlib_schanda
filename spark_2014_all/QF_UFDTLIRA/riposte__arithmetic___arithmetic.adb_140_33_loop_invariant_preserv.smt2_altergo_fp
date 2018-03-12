@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -172,138 +172,18 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 axiom half_range__def_axiom : (half_range = 127)
 
-logic r : int
-
-logic i : int
-
-logic arithmetic__halve_c__result : int
-
-logic temp___180 : int
-
-logic temp___179 : int
-
-logic r1 : int
-
-logic result : int
-
-logic i1 : int
-
-logic result1 : int
-
-logic r2 : int
-
-logic r3 : int
-
-logic i2 : int
-
-logic result2 : int
-
-logic i3 : int
-
-logic result3 : int
-
-logic r4 : int
-
-logic r5 : int
-
-logic i4 : int
-
-logic r6 : int
-
-logic i5 : int
-
-logic r7 : int
-
-logic i6 : int
-
-logic r8 : int
-
-logic i7 : int
-
-logic r9 : int
-
-logic i8 : int
-
-logic r10 : int
-
-logic i9 : int
-
-logic r11 : int
-
-logic i10 : int
-
-logic r12 : int
-
-logic i11 : int
-
-logic r13 : int
-
-logic i12 : int
-
-logic r14 : int
-
-logic i13 : int
-
-logic result4 : int
-
-logic arithmetic__halve_c__result1 : int
-
-logic arithmetic__halve_c__result2 : int
-
-logic arithmetic__halve_c__result3 : int
-
-logic r15 : int
-
-logic i14 : int
-
-logic arithmetic__halve_c__result4 : int
-
-logic r16 : int
-
-logic i15 : int
-
-logic arithmetic__halve_c__result5 : int
-
-axiom H : in_range1(n)
-
-axiom H1 : in_range1(half_range)
-
-axiom H2 : ((0 <= 255) -> in_range1(r))
-
-axiom H3 : (result = i)
-
-axiom H4 : (i1 = 0)
-
-axiom H5 : (0 <= i1)
-
-axiom H6 : (i1 <= 127)
-
-axiom H7 : (result1 = r)
-
-axiom H8 : (r2 = i1)
-
-axiom H9 : (not ((r2 + r2) = n))
-
-axiom H10 : (not (((r2 + r2) + 1) = n))
-
-axiom H11 : (((r3 = i2) and (((r3 + r3) + 1) <  n)) and in_range1(r3))
-
-axiom H12 : ((((0 <= 127) -> in_range2(i2)) and ((0 <= 255) ->
-  in_range1(r3))) and ((0 <= i2) and (i2 <= 127)))
-
-axiom H13 : (not (i2 = 127))
-
-axiom H14 : (i2 = result2)
-
-axiom H15 : (i3 = (i2 + 1))
-
-axiom H16 : (r3 = result3)
-
-axiom H17 : (r4 = i3)
-
-axiom H18 : (not ((r4 + r4) = n))
-
-axiom H19 : (not (((r4 + r4) + 1) = n))
-
  (* File "arithmetic.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (r4 = i3)
+goal WP_parameter_def :
+  (forall r:int. forall i:int. forall result:int. forall i1:int.
+  forall result1:int. forall r1:int. forall r2:int. forall i2:int.
+  forall result2:int. forall i3:int. forall result3:int. forall r3:int.
+  (in_range1(n) -> (in_range1(half_range) -> (((0 <= 255) -> in_range1(r)) ->
+  ((({ int__content = result } = { int__content = i }) and (i1 = 0)) ->
+  (((0 <= i1) and (i1 <= 127)) -> ((({ int__content = result1 } = {
+  int__content = r }) and (r1 = i1)) -> ((not ((not ((r1 + r1) = n)) ->
+  (((r1 + r1) + 1) = n))) -> ((((r2 = i2) and (((r2 + r2) + 1) <  n)) and
+  in_range1(r2)) -> ((((((0 <= 127) -> in_range2(i2)) and ((0 <= 255) ->
+  in_range1(r2))) and ((0 <= i2) and (i2 <= 127))) and ((not (i2 = 127)) and
+  (((i2 = result2) and (i3 = (i2 + 1))) and (((r2 = result3) and
+  (r3 = i3)) and (not ((not ((r3 + r3) = n)) ->
+  (((r3 + r3) + 1) = n))))))) -> (r3 = i3)))))))))))

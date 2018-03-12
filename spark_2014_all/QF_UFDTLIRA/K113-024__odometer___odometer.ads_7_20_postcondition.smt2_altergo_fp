@@ -107,25 +107,9 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic trip : int
-
-logic result : int
-
-logic trip1 : int
-
-logic trip2 : int
-
-logic trip3 : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range(trip))
-
-axiom H1 : (result = trip)
-
-axiom H2 : (trip1 = 0)
-
-axiom H3 : (trip1 = trip2)
-
-axiom H4 : (trip3 = trip1)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (trip2 = 0)
+goal WP_parameter_def :
+  (forall trip:int. forall result:int. forall trip1:int. forall trip2:int.
+  forall trip3:int. (((((- 2147483648) <= 2147483647) -> in_range(trip)) and
+  (((result = trip) and (trip1 = 0)) and ((trip1 = trip2) and
+  (trip3 = trip1)))) -> (trip2 = 0)))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1365,15 +1365,15 @@ axiom keys__post_axiom :
   rec__my_ordered_maps__n__map = container1 } })) = length({
   us_split_discrs1 = { rec__my_ordered_maps__n__map__capacity = container };
   us_split_fields3 = { rec__my_ordered_maps__n__map = container1 } })) and
-  (forall temp___608:int. ((in_range3(temp___608) and ((1 <= temp___608) and
-  (temp___608 <= (0 + length2(keys({ us_split_discrs1 = {
+  (forall temp___669:int. ((in_range3(temp___669) and ((1 <= temp___669) and
+  (temp___669 <= (0 + length2(keys({ us_split_discrs1 = {
   rec__my_ordered_maps__n__map__capacity = container }; us_split_fields3 = {
   rec__my_ordered_maps__n__map = container1 } })))))) -> (has_key1(model__({
   us_split_discrs1 = { rec__my_ordered_maps__n__map__capacity = container };
   us_split_fields3 = { rec__my_ordered_maps__n__map = container1 } }),
   get(keys({ us_split_discrs1 = { rec__my_ordered_maps__n__map__capacity =
   container }; us_split_fields3 = { rec__my_ordered_maps__n__map = container1
-  } }), temp___608)) = true)))) and
+  } }), temp___669)) = true)))) and
   (forall key1:integer. forall key2:integer. ((has_key1(model__({
   us_split_discrs1 = { rec__my_ordered_maps__n__map__capacity = container };
   us_split_fields3 = { rec__my_ordered_maps__n__map = container1 } }), {
@@ -1929,312 +1929,20 @@ axiom w_get__post_axiom1 :
   ((in_range2(witness2) and (has_witness1(container, witness2) = true)) ->
   in_range9(w_get1(container, witness2)))))
 
-logic l__split_fields : us_main_type
-
-logic k__split_fields : us_main_type
-
-logic c__split_fields : count_type
-
-logic o : count_type
-
-logic o1 : count_type
-
-logic temp___992 : count_type
-
-logic us : int
-
-logic us1 : int
-
-logic temp___974 : count_type
-
-logic temp___975 : count_type
-
-logic o2 : integer
-
-logic o3 : integer
-
-logic o4 : integer
-
-logic o5 : integer
-
-logic o6 : integer
-
-logic o7 : integer
-
-logic o8 : integer
-
-logic o9 : integer
-
-logic o10 : integer
-
-logic o11 : integer
-
-logic o12 : integer
-
-logic o13 : integer
-
-logic o14 : integer
-
-logic o15 : integer
-
-logic o16 : integer
-
-logic o17 : integer
-
-logic o18 : integer
-
-logic o19 : integer
-
-logic o20 : int
-
-logic o21 : integer
-
-logic o22 : integer
-
-logic o23 : integer
-
-logic o24 : integer
-
-logic o25 : integer
-
-logic o26 : integer
-
-logic o27 : int
-
-logic o28 : integer
-
-logic o29 : integer
-
-logic o30 : integer
-
-logic o31 : integer
-
-logic o32 : integer
-
-logic o33 : integer
-
-logic o34 : integer
-
-logic o35 : integer
-
-logic o36 : integer
-
-logic o37 : integer
-
-logic o38 : integer
-
-logic o39 : integer
-
-logic o40 : integer
-
-logic o41 : integer
-
-logic o42 : integer
-
-logic o43 : integer
-
-logic o44 : integer
-
-logic o45 : integer
-
-logic o46 : integer
-
-logic o47 : integer
-
-logic o48 : integer
-
-logic o49 : integer
-
-logic o50 : integer
-
-logic o51 : integer
-
-logic o52 : integer
-
-logic o53 : integer
-
-logic o54 : integer
-
-logic o55 : integer
-
-logic o56 : integer
-
-logic o57 : integer
-
-logic temp___987 : count_type
-
-logic o58 : integer
-
-logic o59 : integer
-
-logic o60 : integer
-
-logic o61 : integer
-
-logic o62 : integer
-
-logic o63 : integer
-
-logic temp___989 : count_type
-
-logic o64 : integer
-
-logic o65 : integer
-
-logic o66 : integer
-
-logic o67 : integer
-
-logic o68 : integer
-
-logic o69 : integer
-
-logic o70 : integer
-
-logic o71 : integer
-
-logic o72 : integer
-
-logic o73 : integer
-
-logic o74 : integer
-
-logic o75 : integer
-
-logic result : count_type
-
-logic c__split_fields1 : count_type
-
-logic result1 : count_type
-
-logic c__split_fields2 : count_type
-
-logic my_ordered_maps__n__insert__2__container__fields : us_main_type
-
-logic result2 : us_main_type
-
-logic l__split_fields1 : us_main_type
-
-logic my_ordered_maps__n__insert__2__container__fields1 : us_main_type
-
-logic result3 : us_main_type
-
-logic l__split_fields2 : us_main_type
-
-logic c__split_fields3 : count_type
-
-logic b : bool
-
-logic my_ordered_maps__n__insert__container__fields : us_main_type
-
-logic result4 : us_main_type
-
-logic l__split_fields3 : us_main_type
-
-logic my_ordered_maps__n__replace_element__container__fields : us_main_type
-
-logic result5 : us_main_type
-
-logic l__split_fields4 : us_main_type
-
-logic my_ordered_maps__n__replace__container__fields : us_main_type
-
-logic result6 : us_main_type
-
-logic l__split_fields5 : us_main_type
-
-logic my_ordered_maps__n__assign__target__fields : us_main_type
-
-logic result7 : us_main_type
-
-logic k__split_fields1 : us_main_type
-
-logic my_ordered_maps__n__move__source__fields : us_main_type
-
-logic my_ordered_maps__n__move__target__fields : us_main_type
-
-logic result8 : us_main_type
-
-logic l__split_fields6 : us_main_type
-
-logic result9 : us_main_type
-
-logic k__split_fields2 : us_main_type
-
-logic my_ordered_maps__n__include__container__fields : us_main_type
-
-logic result10 : us_main_type
-
-logic l__split_fields7 : us_main_type
-
-logic my_ordered_maps__n__include__container__fields1 : us_main_type
-
-logic result11 : us_main_type
-
-logic l__split_fields8 : us_main_type
-
-logic my_ordered_maps__n__delete__container__fields : us_main_type
-
-logic result12 : us_main_type
-
-logic l__split_fields9 : us_main_type
-
-logic result13 : count_type
-
-logic c__split_fields4 : count_type
-
-logic c__split_fields5 : count_type
-
-logic my_ordered_maps__n__delete__2__container__fields : us_main_type
-
-logic result14 : us_main_type
-
-logic l__split_fields10 : us_main_type
-
-logic result15 : count_type
-
-logic c__split_fields6 : count_type
-
-logic my_ordered_maps__n__exclude__container__fields : us_main_type
-
-logic result16 : us_main_type
-
-logic l__split_fields11 : us_main_type
-
-logic my_ordered_maps__n__exclude__container__fields1 : us_main_type
-
-logic result17 : us_main_type
-
-logic l__split_fields12 : us_main_type
-
-axiom H : (to_rep1(o) = 0)
-
-axiom H1 : (o = o1)
-
-axiom H2 : (temp___992 = o1)
-
-axiom H3 : (temp___992 = no_element)
-
-axiom H4 : ((us = 10) and in_range2(10))
-
-axiom H5 : ((to_rep1(l__split_discrs) = 10) and (is_empty({
+ (* File "my_ordered_maps.adb", line 60, characters 0-0 *)
+goal WP_parameter_def :
+  (forall l__split_fields:us_main_type. forall k__split_fields:us_main_type.
+  forall o:count_type. forall o1:count_type. forall temp___1059:count_type.
+  forall us:int. forall us1:int. (((((to_rep1(o) = 0) and (o = o1)) and
+  (temp___1059 = o1)) and (temp___1059 = no_element)) -> (((us = 10) and
+  in_range2(10)) -> (((to_rep1(l__split_discrs) = 10) and (is_empty({
   us_split_discrs1 = { rec__my_ordered_maps__n__map__capacity =
   l__split_discrs }; us_split_fields3 = { rec__my_ordered_maps__n__map =
-  l__split_fields } }) = true))
-
-axiom H6 : (10 = to_rep1(l__split_discrs))
-
-axiom H7 : ((us1 = 10) and in_range2(10))
-
-axiom H8 : ((to_rep1(k__split_discrs) = 10) and (is_empty({
-  us_split_discrs1 = { rec__my_ordered_maps__n__map__capacity =
+  l__split_fields } }) = true)) -> ((10 = to_rep1(l__split_discrs)) ->
+  (((us1 = 10) and in_range2(10)) -> (((to_rep1(k__split_discrs) = 10) and
+  (is_empty({ us_split_discrs1 = { rec__my_ordered_maps__n__map__capacity =
   k__split_discrs }; us_split_fields3 = { rec__my_ordered_maps__n__map =
-  k__split_fields } }) = true))
-
-axiom H9 : (10 = to_rep1(k__split_discrs))
-
- (* File "my_ordered_maps.adb", line 60, characters 0-0 *)
-goal WP_parameter_def : (is_empty({ us_split_discrs1 = {
-  rec__my_ordered_maps__n__map__capacity = l__split_discrs };
-  us_split_fields3 = { rec__my_ordered_maps__n__map = l__split_fields }
-  }) = true)
+  k__split_fields } }) = true)) -> ((10 = to_rep1(k__split_discrs)) ->
+  (is_empty({ us_split_discrs1 = { rec__my_ordered_maps__n__map__capacity =
+  l__split_discrs }; us_split_fields3 = { rec__my_ordered_maps__n__map =
+  l__split_fields } }) = true)))))))))

@@ -275,9 +275,5 @@ logic y3 : bool
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic us : int
-
-logic us1 : int
-
  (* File "pkg.ads", line 5, characters 0-0 *)
 goal WP_parameter_def : in_range(to_rep(y))

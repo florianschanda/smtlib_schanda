@@ -594,12 +594,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -611,6 +605,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -624,7 +624,15 @@ type time_slot_length
 
 logic attr__ATTRIBUTE_MODULUS : t
 
-predicate in_range1(x: t) = (ule(of_int(0), x) and ule(x, of_int(10)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 10)
+
+predicate in_range1(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 10))
 
@@ -684,7 +692,11 @@ type time_slot
 
 logic attr__ATTRIBUTE_MODULUS1 : t
 
-predicate in_range2(x: t) = (ule(of_int(1), x) and ule(x, of_int(10)))
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 1)
+
+predicate in_range2(x: t) = (ule(rliteral2, x) and ule(x, rliteral1))
 
 predicate in_range_int1(x: int) = ((1 <= x) and (x <= 10))
 
@@ -726,24 +738,6 @@ axiom slide_def :
   (forall i:t [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[sub(i, sub(new_first, old_first))]))))))
 
-logic concat : (t,bool) farray, t, t, (t,bool) farray, t,
-  t -> (t,bool) farray
-
-axiom concat_def :
-  (forall a:(t,bool) farray. forall b:(t,bool) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t.
-  (forall i:t [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((ule(a_first, i) and ule(i, a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and (ugt(i, a_last) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[add(sub(i, a_last), sub(b_first,
-  one))])))))))
-
-logic singleton : bool, t -> (t,bool) farray
-
-axiom singleton_def :
-  (forall v:bool.
-  (forall i:t [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (t,bool) farray, t, t, (t,bool) farray, t, t -> bool
 
 axiom bool_eq_def4 :
@@ -753,18 +747,18 @@ axiom bool_eq_def4 :
   (ule(b__first, b__last) and (sub(a__last, a__first) = sub(b__last,
   b__first)))) or ((not ule(a__first, a__last)) and ugt(b__first,
   b__last))) and
-  (forall temp___idx_132:t. (((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) and
-  ((a[temp___idx_132]) = (b[add(sub(b__first, a__first),
-  temp___idx_132)]))) or (not (ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)))))) -> (bool_eq5(a, a__first, a__last, b,
+  (forall temp___idx_154:t. (((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) and
+  ((a[temp___idx_154]) = (b[add(sub(b__first, a__first),
+  temp___idx_154)]))) or (not (ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)))))) -> (bool_eq5(a, a__first, a__last, b,
   b__first, b__last) = true)) and ((not (((ule(a__first, a__last) ->
   (ule(b__first, b__last) and (sub(a__last, a__first) = sub(b__last,
   b__first)))) and ((not ule(a__first, a__last)) -> ugt(b__first,
   b__last))) and
-  (forall temp___idx_132:t. ((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) ->
-  ((a[temp___idx_132]) = (b[add(sub(b__first, a__first), temp___idx_132)])))))) ->
+  (forall temp___idx_154:t. ((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) ->
+  ((a[temp___idx_154]) = (b[add(sub(b__first, a__first), temp___idx_154)])))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -774,204 +768,35 @@ axiom bool_eq_rev :
   (((ule(a__first, a__last) -> (ule(b__first, b__last) and (sub(a__last,
   a__first) = sub(b__last, b__first)))) and ((not ule(a__first, a__last)) ->
   ugt(b__first, b__last))) and
-  (forall temp___idx_132:t. ((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) ->
-  ((a[temp___idx_132]) = (b[add(sub(b__first, a__first), temp___idx_132)]))))))))
-
-logic compare : (t,bool) farray, t, t, (t,bool) farray, t, t -> int
-
-axiom compare_def_eq :
-  (forall a:(t,bool) farray. forall b:(t,bool) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a, a_first, a_last, b,
-  b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(t,bool) farray. forall b:(t,bool) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) <  0) <->
-  (exists i:t. exists j:t. (ule(i, a_last) and (ult(j, b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  (ult(i, a_last) and (to_int1((a[add(i, one)])) <  to_int1((b[add(j,
-  one)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(t,bool) farray. forall b:(t,bool) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((0 <  compare(a,
-  a_first, a_last, b, b_first, b_last)) <->
-  (exists i:t. exists j:t. (ule(i, b_last) and (ult(j, a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  (ult(i, b_last) and (to_int1((b[add(i, one)])) <  to_int1((a[add(j,
-  one)]))))))))))))
-
-logic xorb1 : (t,bool) farray, t, t, (t,bool) farray, t, t -> (t,bool) farray
-
-logic andb1 : (t,bool) farray, t, t, (t,bool) farray, t, t -> (t,bool) farray
-
-logic orb1 : (t,bool) farray, t, t, (t,bool) farray, t, t -> (t,bool) farray
-
-logic notb1 : (t,bool) farray, t, t -> (t,bool) farray
-
-axiom op_def :
-  (forall a:(t,bool) farray. forall b:(t,bool) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t.
-  (forall i:t [(orb1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((ule(a_first, i) and ule(i, a_last)) -> ((orb1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = match_bool((a[i]), true, (b[add(sub(i, a_first),
-  b_first)])))))))
-
-axiom op_def1 :
-  (forall a:(t,bool) farray. forall b:(t,bool) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t.
-  (forall i:t [(andb1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((ule(a_first, i) and ule(i, a_last)) -> ((andb1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = match_bool((a[i]), (b[add(sub(i, a_first),
-  b_first)]), false))))))
-
-axiom op_def2 :
-  (forall a:(t,bool) farray. forall b:(t,bool) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t.
-  (forall i:t [(xorb1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((ule(a_first, i) and ule(i, a_last)) -> ((xorb1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = xorb((a[i]), (b[add(sub(i, a_first), b_first)])))))))
-
-axiom notb_def :
-  (forall a:(t,bool) farray.
-  (forall a_first:t. forall a_last:t.
-  (forall i:t [(notb1(a, a_first, a_last)[i])]. ((ule(a_first, i) and ule(i,
-  a_last)) -> ((notb1(a, a_first, a_last)[i]) = match_bool((a[i]), false,
-  true))))))
+  (forall temp___idx_154:t. ((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) ->
+  ((a[temp___idx_154]) = (b[add(sub(b__first, a__first), temp___idx_154)]))))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic inputs : (t,bool) farray
-
-logic res : t
-
-logic counter__model__current_chain_length__result : t
-
-logic o : t
-
-logic temp___228 : t
-
-logic temp___229 : t
-
-logic i : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : bool
-
-logic i1 : t
-
-logic result : t
-
-logic res1 : t
-
-logic result1 : bool
-
-logic res2 : t
-
-logic temp___2291 : t
-
-logic result2 : t
-
-logic temp___2292 : t
-
-logic result3 : t
-
-logic res3 : t
-
-logic result4 : bool
-
-logic res4 : t
-
-logic temp___2293 : t
-
-logic res5 : t
-
-logic temp___2294 : t
-
-logic res6 : t
-
-logic res7 : t
-
-logic res8 : t
-
-logic res9 : t
-
-logic result5 : t
-
-logic counter__model__current_chain_length__result1 : t
-
-logic counter__model__current_chain_length__result2 : t
-
-logic counter__model__current_chain_length__result3 : t
-
-logic res10 : t
-
-logic counter__model__current_chain_length__result4 : t
-
-logic res11 : t
-
-logic counter__model__current_chain_length__result5 : t
-
-logic result6 : bool
-
-axiom H : (result = res)
-
-axiom H1 : (res1 = of_int(0))
-
-axiom H2 : in_range1(res1)
-
-axiom H3 : (ult(res1, of_int(10)) -> (ule(of_int(1), sub(of_int(10),
-  res1)) and ule(sub(of_int(10), res1), of_int(10))))
-
-axiom H4 : (ult(res1, of_int(10)) -> (o = sub(of_int(10), res1)))
-
-axiom H5 : (ult(res1, of_int(10)) -> (result1 = (inputs[o])))
-
-axiom H6 : ((not ult(res1, of_int(10))) -> (result1 = false))
-
-axiom H7 : (result1 = true)
-
-axiom H8 :
-  (forall i2:t. ((ule(sub(of_int(10), res2), i2) and ule(i2, of_int(10))) ->
-  ((inputs[i2]) = true)))
-
-axiom H9 : ((ule(of_int(0), of_int(10)) -> in_range1(res2)) and (ult(res2,
-  of_int(10)) and ((inputs[sub(of_int(10), res2)]) = true)))
-
-axiom H10 : (temp___2291 = result2)
-
-axiom H11 : (temp___2292 = res2)
-
-axiom H12 : ((o1 = add(res2, of_int(1))) and in_range1(add(res2, of_int(1))))
-
-axiom H13 : (res2 = result3)
-
-axiom H14 : (res3 = o1)
-
-axiom H15 : (ult(res3, of_int(10)) -> (ule(of_int(1), sub(of_int(10),
-  res3)) and ule(sub(of_int(10), res3), of_int(10))))
-
-axiom H16 : (ult(res3, of_int(10)) -> (o2 = sub(of_int(10), res3)))
-
-axiom H17 : (ult(res3, of_int(10)) -> (o3 = (inputs[o2])))
-
-axiom H18 : ((not ult(res3, of_int(10))) -> (o3 = false))
-
-axiom H19 : (((not (o3 = true)) -> (result4 = true)) and ((o3 = true) ->
-  (result4 = false)))
-
-axiom H20 : (not (result4 = true))
-
  (* File "counter.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : ugt(res3, temp___2292)
+goal WP_parameter_def :
+  (forall inputs:(t,bool) farray. forall res:t. forall o:t. forall o1:t.
+  forall o2:t. forall o3:bool. forall result:t. forall res1:t.
+  forall result1:bool. forall res2:t. forall temp___264:t. forall result2:t.
+  forall temp___2641:t. forall result3:t. forall res3:t. forall result4:bool.
+  ((({ t__content = result } = { t__content = res }) and
+  (res1 = rliteral)) -> (in_range1(res1) -> (((ult(res1, rliteral1) and
+  (((ule(rliteral2, sub(rliteral1, res1)) and ule(sub(rliteral1, res1),
+  rliteral1)) and (o = sub(rliteral1, res1))) and
+  (result1 = (inputs[o])))) or ((not ult(res1, rliteral1)) and
+  (result1 = false))) -> ((result1 = true) ->
+  ((forall i:t. ((ule(sub(rliteral1, res2), i) and ule(i, rliteral1)) ->
+   ((inputs[i]) = true))) ->
+  (((ule(rliteral, rliteral1) -> in_range1(res2)) and (ult(res2,
+  rliteral1) and ((inputs[sub(rliteral1, res2)]) = true))) ->
+  (((temp___264 = result2) and (temp___2641 = res2)) -> ((((o1 = add(res2,
+  rliteral2)) and in_range1(add(res2, rliteral2))) and ((res2 = result3) and
+  (res3 = o1))) -> (((((ult(res3, rliteral1) and (((ule(rliteral2,
+  sub(rliteral1, res3)) and ule(sub(rliteral1, res3), rliteral1)) and
+  (o2 = sub(rliteral1, res3))) and (o3 = (inputs[o2])))) or ((not ult(res3,
+  rliteral1)) and (o3 = false))) and (((not (o3 = true)) and
+  (result4 = true)) or ((o3 = true) and (result4 = false)))) and
+  (not (result4 = true))) -> ugt(res3, temp___2641)))))))))))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -199,253 +199,27 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
-logic result__ : int
-
-logic i : int
-
-logic j : int
-
-logic totalsum : int
-
-logic innersum : int
-
-logic temp___514 : int
-
-logic temp___513 : int
-
-logic temp___512 : int
-
-logic temp___511 : int
-
-logic temp___510 : int
-
-logic temp___509 : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic result : int
-
-logic i1 : int
-
-logic result1 : int
-
-logic j1 : int
-
-logic result2 : int
-
-logic totalsum1 : int
-
-logic result3 : int
-
-logic innersum1 : int
-
-logic i2 : int
-
-logic j2 : int
-
-logic totalsum2 : int
-
-logic innersum2 : int
-
-logic result4 : int
-
-logic innersum3 : int
-
-logic result5 : int
-
-logic j3 : int
-
-logic j4 : int
-
-logic innersum4 : int
-
-logic result6 : int
-
-logic innersum5 : int
-
-logic result7 : int
-
-logic j5 : int
-
-logic j6 : int
-
-logic innersum6 : int
-
-logic j7 : int
-
-logic innersum7 : int
-
-logic j8 : int
-
-logic innersum8 : int
-
-logic j9 : int
-
-logic innersum9 : int
-
-logic j10 : int
-
-logic innersum10 : int
-
-logic j11 : int
-
-logic innersum11 : int
-
-logic result8 : int
-
-logic totalsum3 : int
-
-logic result9 : int
-
-logic i3 : int
-
-logic i4 : int
-
-logic j12 : int
-
-logic totalsum4 : int
-
-logic innersum12 : int
-
-logic i5 : int
-
-logic j13 : int
-
-logic totalsum5 : int
-
-logic innersum13 : int
-
-logic i6 : int
-
-logic j14 : int
-
-logic totalsum6 : int
-
-logic innersum14 : int
-
-logic i7 : int
-
-logic j15 : int
-
-logic totalsum7 : int
-
-logic innersum15 : int
-
-logic i8 : int
-
-logic j16 : int
-
-logic totalsum8 : int
-
-logic innersum16 : int
-
-logic i9 : int
-
-logic j17 : int
-
-logic totalsum9 : int
-
-logic innersum17 : int
-
-logic i10 : int
-
-logic j18 : int
-
-logic totalsum10 : int
-
-logic innersum18 : int
-
-logic i11 : int
-
-logic j19 : int
-
-logic totalsum11 : int
-
-logic innersum19 : int
-
-logic result10 : int
-
-logic result__1 : int
-
-logic result__2 : int
-
-logic i12 : int
-
-logic j20 : int
-
-logic totalsum12 : int
-
-logic innersum20 : int
-
-logic result__3 : int
-
-logic i13 : int
-
-logic j21 : int
-
-logic totalsum13 : int
-
-logic innersum21 : int
-
-axiom H : in_range3(n)
-
-axiom H1 : ((1 <= 2147483647) -> in_range3(result__))
-
-axiom H2 : (result = i)
-
-axiom H3 : (i1 = 1)
-
-axiom H4 : in_range3(i1)
-
-axiom H5 : (result1 = j)
-
-axiom H6 : (j1 = 1)
-
-axiom H7 : in_range3(j1)
-
-axiom H8 : (result2 = totalsum)
-
-axiom H9 : (totalsum1 = 0)
-
-axiom H10 : in_range2(totalsum1)
-
-axiom H11 : (result3 = innersum)
-
-axiom H12 : (innersum1 = 0)
-
-axiom H13 : in_range2(innersum1)
-
-axiom H14 : (i1 <= n)
-
-axiom H15 : ((6 * totalsum2) = (((i2 - 1) * i2) * (i2 + 1)))
-
-axiom H16 : ((((((0 <= 2147483647) -> in_range2(innersum2)) and
-  ((1 <= 2147483647) -> in_range3(i2))) and ((1 <= 2147483647) ->
-  in_range3(j2))) and ((0 <= 2147483647) -> in_range2(totalsum2))) and
-  (i2 <= n))
-
-axiom H17 : (innersum2 = result4)
-
-axiom H18 : (innersum3 = 0)
-
-axiom H19 : (j2 = result5)
-
-axiom H20 : (j3 = 1)
-
-axiom H21 : (j3 <= i2)
-
-axiom H22 : ((2 * innersum4) = (j4 * (j4 - 1)))
-
-axiom H23 : ((((0 <= 2147483647) -> in_range2(innersum4)) and
-  ((1 <= 2147483647) -> in_range3(j4))) and (j4 <= i2))
-
  (* File "power_and_sum.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : in_range1((innersum4 + j4))
+goal WP_parameter_def :
+  (forall result__:int. forall i:int. forall j:int. forall totalsum:int.
+  forall innersum:int. forall result:int. forall i1:int. forall result1:int.
+  forall j1:int. forall result2:int. forall totalsum1:int.
+  forall result3:int. forall innersum1:int. forall i2:int. forall j2:int.
+  forall totalsum2:int. forall innersum2:int. forall result4:int.
+  forall innersum3:int. forall result5:int. forall j3:int. forall j4:int.
+  forall innersum4:int. (in_range3(n) -> (((1 <= 2147483647) ->
+  in_range3(result__)) -> ((({ int__content = result } = { int__content = i
+  }) and (i1 = 1)) -> (in_range3(i1) -> ((({ int__content = result1 } = {
+  int__content = j }) and (j1 = 1)) -> (in_range3(j1) -> ((({ int__content =
+  result2 } = { int__content = totalsum }) and (totalsum1 = 0)) ->
+  (in_range2(totalsum1) -> ((({ int__content = result3 } = { int__content =
+  innersum }) and (innersum1 = 0)) -> (in_range2(innersum1) -> ((i1 <= n) ->
+  (((6 * totalsum2) = (((i2 - 1) * i2) * (i2 + 1))) ->
+  (((((((0 <= 2147483647) -> in_range2(innersum2)) and ((1 <= 2147483647) ->
+  in_range3(i2))) and ((1 <= 2147483647) -> in_range3(j2))) and
+  ((0 <= 2147483647) -> in_range2(totalsum2))) and (i2 <= n)) ->
+  (((innersum2 = result4) and (innersum3 = 0)) -> (((j2 = result5) and
+  (j3 = 1)) -> ((j3 <= i2) -> (((2 * innersum4) = (j4 * (j4 - 1))) ->
+  (((((0 <= 2147483647) -> in_range2(innersum4)) and ((1 <= 2147483647) ->
+  in_range3(j4))) and (j4 <= i2)) ->
+  in_range1((innersum4 + j4)))))))))))))))))))))

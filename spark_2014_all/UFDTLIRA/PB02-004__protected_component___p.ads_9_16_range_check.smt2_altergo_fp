@@ -147,16 +147,8 @@ logic r3s : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic p__R2s__assume : int
-
-logic us : int
-
-axiom H : ((p__R2s__assume = zero(void)) and (in_range(p__R2s__assume) and
-  (p__R2s__assume = 0)))
-
-axiom H1 : (p__R2s__assume = r2s)
-
-axiom H2 : in_range(r2s)
-
  (* File "p.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : in_range1(r2s)
+goal WP_parameter_def :
+  (forall p__R2s__assume:int. ((((p__R2s__assume = zero(void)) and
+  (in_range(p__R2s__assume) and (p__R2s__assume = 0))) and
+  (p__R2s__assume = r2s)) -> (in_range(r2s) -> in_range1(r2s))))

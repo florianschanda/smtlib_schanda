@@ -302,12 +302,6 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq4 : bool, bool -> bool
-
-axiom bool_eq_def3 :
-  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -319,6 +313,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq4 : bool, bool -> bool
+
+axiom bool_eq_def3 :
+  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
 
 predicate in_range2(x: int) = ((x = 0) or (x = 1))
 
@@ -407,122 +407,41 @@ axiom get_stored_area__def_axiom :
   rec__object__t__max_width = obj1; rec__object__t__max_height = obj2;
   rec__ext__ = obj3 }; attr__tag = obj4 }) = to_rep(obj)))
 
-logic obj__split_fields : integer
-
-logic obj__split_fields1 : integer
-
-logic obj__split_fields2 : integer
-
-logic obj__split_fields3 : us_private
-
-logic o : integer
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic o3 : integer
-
-logic o4 : us_private
-
-logic temp___146 : integer
-
-logic temp___1461 : integer
-
-logic temp___1462 : integer
-
-logic temp___1463 : us_private
-
-logic temp___1464 : int
-
-logic result : integer
-
-logic result1 : integer
-
-logic result2 : integer
-
-logic result3 : us_private
-
-logic obj__split_fields4 : integer
-
-logic obj__split_fields5 : integer
-
-logic obj__split_fields6 : integer
-
-logic obj__split_fields7 : us_private
-
-logic obj__split_fields8 : integer
-
-logic obj__split_fields9 : integer
-
-logic obj__split_fields10 : integer
-
-logic obj__split_fields11 : us_private
-
-logic obj__split_fields12 : integer
-
-logic obj__split_fields13 : integer
-
-logic obj__split_fields14 : integer
-
-logic obj__split_fields15 : us_private
-
-axiom H : in_range1(value)
-
-axiom H1 : (to_rep(o) = value)
-
-axiom H2 : (o = o1)
-
-axiom H3 : (obj__split_fields1 = o2)
-
-axiom H4 : (obj__split_fields2 = o3)
-
-axiom H5 : (obj__split_fields3 = o4)
-
-axiom H6 : (temp___146 = o1)
-
-axiom H7 : (temp___1461 = o2)
-
-axiom H8 : (temp___1462 = o3)
-
-axiom H9 : (temp___1463 = o4)
-
-axiom H10 : (obj__attr__tag = temp___1464)
-
-axiom H11 : (result = obj__split_fields)
-
-axiom H12 : (result1 = obj__split_fields1)
-
-axiom H13 : (result2 = obj__split_fields2)
-
-axiom H14 : (result3 = obj__split_fields3)
-
-axiom H15 : (temp___146 = obj__split_fields4)
-
-axiom H16 : (temp___1461 = obj__split_fields5)
-
-axiom H17 : (temp___1462 = obj__split_fields6)
-
-axiom H18 : (temp___1463 = obj__split_fields7)
-
-axiom H19 : (obj__split_fields8 = obj__split_fields4)
-
-axiom H20 : (obj__split_fields9 = obj__split_fields5)
-
-axiom H21 : (obj__split_fields10 = obj__split_fields6)
-
-axiom H22 : (obj__split_fields11 = obj__split_fields7)
-
-axiom H23 : (obj__split_fields12 = obj__split_fields4)
-
-axiom H24 : (obj__split_fields13 = obj__split_fields5)
-
-axiom H25 : (obj__split_fields14 = obj__split_fields6)
-
-axiom H26 : (obj__split_fields15 = obj__split_fields7)
-
  (* File "object.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : (has_stored_area({ us_split_fields1 = {
-  rec__object__t__area = obj__split_fields8; rec__object__t__max_width =
-  obj__split_fields9; rec__object__t__max_height = obj__split_fields10;
-  rec__ext__ = obj__split_fields11 }; attr__tag = obj__attr__tag }) = true)
+goal WP_parameter_def :
+  (forall obj__split_fields:integer. forall obj__split_fields1:integer.
+  forall obj__split_fields2:integer. forall obj__split_fields3:us_private.
+  forall o:integer. forall o1:integer. forall o2:integer. forall o3:integer.
+  forall o4:us_private. forall temp___170:integer.
+  forall temp___1701:integer. forall temp___1702:integer.
+  forall temp___1703:us_private. forall temp___1704:int.
+  forall result:integer. forall result1:integer. forall result2:integer.
+  forall result3:us_private. forall obj__split_fields4:integer.
+  forall obj__split_fields5:integer. forall obj__split_fields6:integer.
+  forall obj__split_fields7:us_private. forall obj__split_fields8:integer.
+  forall obj__split_fields9:integer. forall obj__split_fields10:integer.
+  forall obj__split_fields11:us_private. forall obj__split_fields12:integer.
+  forall obj__split_fields13:integer. forall obj__split_fields14:integer.
+  forall obj__split_fields15:us_private. ((in_range1(value) and
+  (((((to_rep(o) = value) and ((o = o1) and ((obj__split_fields1 = o2) and
+  ((obj__split_fields2 = o3) and (obj__split_fields3 = o4))))) and
+  (((temp___170 = o1) and ((temp___1701 = o2) and ((temp___1702 = o3) and
+  (temp___1703 = o4)))) and (obj__attr__tag = temp___1704))) and
+  (((result = obj__split_fields) and ((result1 = obj__split_fields1) and
+  ((result2 = obj__split_fields2) and (result3 = obj__split_fields3)))) and
+  ((temp___170 = obj__split_fields4) and
+  ((temp___1701 = obj__split_fields5) and
+  ((temp___1702 = obj__split_fields6) and
+  (temp___1703 = obj__split_fields7)))))) and
+  (((obj__split_fields8 = obj__split_fields4) and
+  ((obj__split_fields9 = obj__split_fields5) and
+  ((obj__split_fields10 = obj__split_fields6) and
+  (obj__split_fields11 = obj__split_fields7)))) and
+  ((obj__split_fields12 = obj__split_fields4) and
+  ((obj__split_fields13 = obj__split_fields5) and
+  ((obj__split_fields14 = obj__split_fields6) and
+  (obj__split_fields15 = obj__split_fields7))))))) -> (has_stored_area({
+  us_split_fields1 = { rec__object__t__area = obj__split_fields8;
+  rec__object__t__max_width = obj__split_fields9;
+  rec__object__t__max_height = obj__split_fields10; rec__ext__ =
+  obj__split_fields11 }; attr__tag = obj__attr__tag }) = true)))

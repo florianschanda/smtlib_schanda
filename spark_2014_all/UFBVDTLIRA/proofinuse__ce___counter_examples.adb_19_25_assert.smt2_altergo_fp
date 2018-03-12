@@ -663,21 +663,16 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic res : t
+logic rliteral : t
 
-logic result : t
+axiom rliteral_axiom : (tqtint(rliteral) = 63)
 
-logic res1 : t
+logic rliteral1 : t
 
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : (result = res)
-
-axiom H3 : (res1 = mul(udiv(add(x, of_int(63)), of_int(64)), of_int(64)))
-
-axiom H4 : (b = true)
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 64)
 
  (* File "counter_examples.adb", line 5, characters 0-0 *)
-goal WP_parameter_def : ule(res1, x)
+goal WP_parameter_def :
+  (forall res:t. forall result:t. forall res1:t. (((result = res) and
+  (res1 = mul(udiv(add(x, rliteral), rliteral1), rliteral1))) ->
+  ((b = true) -> ule(res1, x))))

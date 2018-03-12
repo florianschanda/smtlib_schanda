@@ -1349,29 +1349,9 @@ axiom sin__post_axiom :
   le(sin(x), fliteral)) and (eq(x, fliteral6) -> eq(sin(x), fliteral6))) and
   tqtisFinite(sin(x)))))
 
-logic lat_long__delta_long_in_meters__result : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic result : t
-
-logic lat_long__delta_long_in_meters__result1 : t
-
-logic lat_long__delta_long_in_meters__result2 : t
-
-logic lat_long__delta_long_in_meters__result3 : t
-
-logic lat_long__delta_long_in_meters__result4 : t
-
-logic lat_long__delta_long_in_meters__result5 : t
-
-axiom H : ((o = cos(to_rep(source))) and (tqtisFinite(o) and
-  ((o = sin(to_rep(source))) and ((le(neg(fliteral2), to_rep(source)) and
-  le(to_rep(source), fliteral2)) -> le(fliteral3, o)))))
-
  (* File "lat_long.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : (not is_zero(o))
+goal WP_parameter_def :
+  (forall o:t. (((o = cos(to_rep(source))) and (tqtisFinite(o) and
+  ((o = sin(to_rep(source))) and ((le(neg(fliteral2), to_rep(source)) and
+  le(to_rep(source), fliteral2)) -> le(fliteral3, o))))) ->
+  (not is_zero(o))))

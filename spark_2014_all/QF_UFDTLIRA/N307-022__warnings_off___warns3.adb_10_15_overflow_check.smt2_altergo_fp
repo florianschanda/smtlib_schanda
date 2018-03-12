@@ -109,35 +109,10 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : int
-
-logic tmp : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic tmp1 : int
-
-logic result1 : int
-
-logic x1 : int
-
-axiom H : in_range(x)
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(tmp))
-
-axiom H2 : ((o = (x + 1)) and in_range((x + 1)))
-
-axiom H3 : (result = tmp)
-
-axiom H4 : (tmp1 = o)
-
-axiom H5 : (result1 = x)
-
-axiom H6 : (x1 = tmp1)
-
  (* File "warns3.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((tmp1 + 1))
+goal WP_parameter_def :
+  (forall x:int. forall tmp:int. forall o:int. forall result:int.
+  forall tmp1:int. forall result1:int. forall x1:int. (in_range(x) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(tmp)) -> ((((o = (x + 1)) and
+  in_range((x + 1))) and ((result = tmp) and (tmp1 = o))) ->
+  (((result1 = x) and (x1 = tmp1)) -> in_range((tmp1 + 1)))))))

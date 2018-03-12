@@ -251,24 +251,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,element) farray, int, int, (int,element) farray, int,
-  int -> (int,element) farray
-
-axiom concat_def :
-  (forall a:(int,element) farray. forall b:(int,element) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : element, int -> (int,element) farray
-
-axiom singleton_def :
-  (forall v:element.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,element) farray, int, int, (int,element) farray, int,
   int -> bool
 
@@ -279,17 +261,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep3((a[temp___idx_132])) = to_rep3((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep3((a[temp___idx_154])) = to_rep3((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep3((a[temp___idx_132])) = to_rep3((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep3((a[temp___idx_154])) = to_rep3((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -299,37 +281,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep3((a[temp___idx_132])) = to_rep3((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,element) farray, int, int, (int,element) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,element) farray. forall b:(int,element) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,element) farray. forall b:(int,element) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep3((a[(i + 1)])) <  to_rep3((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,element) farray. forall b:(int,element) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep3((b[(i + 1)])) <  to_rep3((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep3((a[temp___idx_154])) = to_rep3((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 predicate dynamic_property(first_int: int, last_int: int, x: int) =
   ((first_int <= x) and (x <= last_int))
@@ -701,12 +655,6 @@ logic empty__function_guard1 : bool, int, us_rep -> prop
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq11 : bool, bool -> bool
-
-axiom bool_eq_def8 :
-  (forall x:bool. forall y:bool [bool_eq11(x, y)]. (((x = y) -> (bool_eq11(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq11(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -718,6 +666,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq11 : bool, bool -> bool
+
+axiom bool_eq_def8 :
+  (forall x:bool. forall y:bool [bool_eq11(x, y)]. (((x = y) -> (bool_eq11(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq11(x, y) = false))))
 
 predicate in_range4(x: int) = ((x = 0) or (x = 1))
 
@@ -1633,94 +1587,7 @@ axiom empty__def_axiom :
   rec__integer_stacks__stack__top = this3; rec__ext__ = this4 }; attr__tag =
   this5 }) = true) <-> (to_rep(this3) = 0)))
 
-type t5
-
-logic first10 : t5 -> integer
-
-logic last10 : t5 -> integer
-
-logic mk5 : int, int -> t5
-
-axiom mk_def5 :
-  (forall f:int. forall l:int [mk5(f, l)]. (in_range2(f) -> (in_range2(l) ->
-  ((to_rep2(first10(mk5(f, l))) = f) and (to_rep2(last10(mk5(f, l))) = l)))))
-
-predicate dynamic_property10(range_first: int, range_last: int, low: int,
-  high: int) = (in_range2(low) and (in_range2(high) and ((low <= high) ->
-  (in_range1(low) and in_range1(high)))))
-
-type us_t5 = { elts5 : (int,element) farray; rt5 : t5
-}
-
-function to_array5(a: us_t5) : (int,element) farray = (a).elts5
-
-function of_array5(a: (int,element) farray, f: int, l: int) : us_t5 = {
-  elts5 = a; rt5 = mk5(f, l) }
-
-function first11(a: us_t5) : int = to_rep2(first10((a).rt5))
-
-function last11(a: us_t5) : int = to_rep2(last10((a).rt5))
-
-logic length5 : us_t5 -> int
-
-axiom length_def5 :
-  (forall a:us_t5 [length5(a)]. (((first11(a) <= last11(a)) ->
-  (length5(a) = ((last11(a) - first11(a)) + 1))) and
-  ((not (first11(a) <= last11(a))) -> (length5(a) = 0))))
-
-logic value__size9 : int
-
-logic object__size9 : (int,element) farray -> int
-
-logic value__component__size5 : int
-
-logic object__component__size5 : (int,element) farray -> int
-
-logic value__alignment9 : int
-
-logic object__alignment9 : (int,element) farray -> int
-
-axiom value__size_axiom9 : (0 <= value__size9)
-
-axiom object__size_axiom9 :
-  (forall a:(int,element) farray. (0 <= object__size9(a)))
-
-axiom value__component__size_axiom5 : (0 <= value__component__size5)
-
-axiom object__component__size_axiom5 :
-  (forall a:(int,element) farray. (0 <= object__component__size5(a)))
-
-axiom value__alignment_axiom9 : (0 <= value__alignment9)
-
-axiom object__alignment_axiom9 :
-  (forall a:(int,element) farray. (0 <= object__alignment9(a)))
-
-function bool_eq21(x: us_t5, y: us_t5) : bool = bool_eq5((x).elts5,
-  to_rep2(first10((x).rt5)), to_rep2(last10((x).rt5)), (y).elts5,
-  to_rep2(first10((y).rt5)), to_rep2(last10((y).rt5)))
-
-logic user_eq18 : us_t5, us_t5 -> bool
-
-logic dummy43 : (int,element) farray
-
-logic dummy44 : t5
-
-type contents__ref = { contents__content : us_t5
-}
-
-function contents__ref___projection(a: contents__ref) : us_t5 =
-  (a).contents__content
-
-logic temp___218 : int, int, int -> us_t1
-
-axiom def_axiom :
-  (forall temp___220:int. forall temp___221:int. forall temp___222:int.
-  ((dynamic_property10(1, 2147483647, temp___221, temp___222) ->
-  ((to_rep2(first2((temp___218(temp___220, temp___221,
-  temp___222)).rt1)) = temp___221) and (to_rep2(last2((temp___218(temp___220,
-  temp___221, temp___222)).rt1)) = temp___222))) and
-  (forall temp___223:int. (((temp___218(temp___220, temp___221,
-  temp___222)).elts1[temp___223]) = of_rep3(temp___220)))))
+logic temp___245 : int, int, int -> us_t1
 
 logic oeq : us_rep, us_rep -> bool
 
@@ -1850,6 +1717,93 @@ axiom integer_stacks__Oeq__S27b__compat_axiom1 :
   right1; rt = right2 }; rec__integer_stacks__stack__top = right3;
   rec__ext__ = right4 }; attr__tag = right5 }))))
 
+type t5
+
+logic first10 : t5 -> integer
+
+logic last10 : t5 -> integer
+
+logic mk5 : int, int -> t5
+
+axiom mk_def5 :
+  (forall f:int. forall l:int [mk5(f, l)]. (in_range2(f) -> (in_range2(l) ->
+  ((to_rep2(first10(mk5(f, l))) = f) and (to_rep2(last10(mk5(f, l))) = l)))))
+
+predicate dynamic_property10(range_first: int, range_last: int, low: int,
+  high: int) = (in_range2(low) and (in_range2(high) and ((low <= high) ->
+  (in_range1(low) and in_range1(high)))))
+
+type us_t5 = { elts5 : (int,element) farray; rt5 : t5
+}
+
+function to_array5(a: us_t5) : (int,element) farray = (a).elts5
+
+function of_array5(a: (int,element) farray, f: int, l: int) : us_t5 = {
+  elts5 = a; rt5 = mk5(f, l) }
+
+function first11(a: us_t5) : int = to_rep2(first10((a).rt5))
+
+function last11(a: us_t5) : int = to_rep2(last10((a).rt5))
+
+logic length5 : us_t5 -> int
+
+axiom length_def5 :
+  (forall a:us_t5 [length5(a)]. (((first11(a) <= last11(a)) ->
+  (length5(a) = ((last11(a) - first11(a)) + 1))) and
+  ((not (first11(a) <= last11(a))) -> (length5(a) = 0))))
+
+logic value__size9 : int
+
+logic object__size9 : (int,element) farray -> int
+
+logic value__component__size5 : int
+
+logic object__component__size5 : (int,element) farray -> int
+
+logic value__alignment9 : int
+
+logic object__alignment9 : (int,element) farray -> int
+
+axiom value__size_axiom9 : (0 <= value__size9)
+
+axiom object__size_axiom9 :
+  (forall a:(int,element) farray. (0 <= object__size9(a)))
+
+axiom value__component__size_axiom5 : (0 <= value__component__size5)
+
+axiom object__component__size_axiom5 :
+  (forall a:(int,element) farray. (0 <= object__component__size5(a)))
+
+axiom value__alignment_axiom9 : (0 <= value__alignment9)
+
+axiom object__alignment_axiom9 :
+  (forall a:(int,element) farray. (0 <= object__alignment9(a)))
+
+function bool_eq21(x: us_t5, y: us_t5) : bool = bool_eq5((x).elts5,
+  to_rep2(first10((x).rt5)), to_rep2(last10((x).rt5)), (y).elts5,
+  to_rep2(first10((y).rt5)), to_rep2(last10((y).rt5)))
+
+logic user_eq18 : us_t5, us_t5 -> bool
+
+logic dummy43 : (int,element) farray
+
+logic dummy44 : t5
+
+type contents__ref = { contents__content : us_t5
+}
+
+function contents__ref___projection(a: contents__ref) : us_t5 =
+  (a).contents__content
+
+axiom def_axiom :
+  (forall temp___247:int. forall temp___248:int. forall temp___249:int.
+  (in_range3(temp___247) -> ((dynamic_property10(1, 2147483647, temp___248,
+  temp___249) -> ((to_rep2(first2((temp___245(temp___247, temp___248,
+  temp___249)).rt1)) = temp___248) and (to_rep2(last2((temp___245(temp___247,
+  temp___248, temp___249)).rt1)) = temp___249))) and
+  (forall temp___250:int. (to_rep3(((temp___245(temp___247, temp___248,
+  temp___249)).elts1[temp___250])) = temp___247)))))
+
 axiom user_eq__def_axiom :
   (forall a:positive. forall a1:(int,element) farray. forall a2:t2.
   forall a3:natural. forall a4:us_private. forall a5:int. forall b:positive.
@@ -1959,43 +1913,23 @@ axiom user_eq__def_axiom2 :
   b1; rt3 = b2 }; rec__integer_stacks__stack__top2 = b3; rec__ext__2 = b4 };
   attr__tag2 = b5 }))))
 
-logic temp___239 : int
-
-logic temp___238 : positive
-
-logic temp___241 : (int,element) farray
-
-logic temp___2411 : t1
-
-logic temp___242 : positive
-
-logic temp___2421 : (int,element) farray
-
-logic temp___2422 : t
-
-logic temp___2423 : natural
-
-logic temp___2424 : us_private
-
-logic temp___2425 : int
-
-axiom H : in_range1(temp___239)
-
-axiom H1 : (temp___239 = to_rep1(temp___238))
-
-axiom H2 : ((dynamic_property1(1, to_rep1(temp___242),
-  to_rep2(first(temp___2422)), to_rep2(last(temp___2422))) and
-  ((to_rep2(first(temp___2422)) = 1) and
-  (to_rep2(last(temp___2422)) = to_rep1(temp___242)))) and
-  ((temp___2425 = us_tag) and (((temp___2421 = (temp___218(0, 1,
-  to_rep1(temp___242))).elts1) and
-  (temp___2422 = mk(to_rep2(first2((temp___218(0, 1,
-  to_rep1(temp___242))).rt1)), to_rep2(last2((temp___218(0, 1,
-  to_rep1(temp___242))).rt1))))) and (to_rep(temp___2423) = 0))))
-
  (* File "bounded_stacks.ads", line 48, characters 0-0 *)
-goal WP_parameter_def : (empty({ us_split_discrs1 = {
-  rec__integer_stacks__stack__capacity = temp___242 }; us_split_fields1 = {
-  rec__integer_stacks__stack__values = { elts = temp___2421; rt = temp___2422
-  }; rec__integer_stacks__stack__top = temp___2423; rec__ext__ = temp___2424
-  }; attr__tag = temp___2425 }) = true)
+goal WP_parameter_def :
+  (forall temp___267:int. forall temp___266:positive.
+  forall temp___270:positive. forall temp___2701:(int,element) farray.
+  forall temp___2702:t. forall temp___2703:natural.
+  forall temp___2704:us_private. forall temp___2705:int.
+  ((in_range1(temp___267) and (temp___267 = to_rep1(temp___266))) ->
+  (((dynamic_property1(1, to_rep1(temp___270), to_rep2(first(temp___2702)),
+  to_rep2(last(temp___2702))) and ((to_rep2(first(temp___2702)) = 1) and
+  (to_rep2(last(temp___2702)) = to_rep1(temp___270)))) and
+  ((temp___2705 = us_tag) and (((temp___2701 = (temp___245(0, 1,
+  to_rep1(temp___270))).elts1) and
+  (temp___2702 = mk(to_rep2(first2((temp___245(0, 1,
+  to_rep1(temp___270))).rt1)), to_rep2(last2((temp___245(0, 1,
+  to_rep1(temp___270))).rt1))))) and (to_rep(temp___2703) = 0)))) -> (empty({
+  us_split_discrs1 = { rec__integer_stacks__stack__capacity = temp___270 };
+  us_split_fields1 = { rec__integer_stacks__stack__values = { elts =
+  temp___2701; rt = temp___2702 }; rec__integer_stacks__stack__top =
+  temp___2703; rec__ext__ = temp___2704 }; attr__tag = temp___2705
+  }) = true))))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -578,36 +578,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def :
-  (forall v:bool. forall v1:natural. forall v2:bool.
-  (forall i:int [(singleton({ us_split_discrs1 = {
-  rec__split_records__record_with_mutable_discrs__present = v };
-  us_split_fields1 = {
-  rec__split_records__record_with_mutable_discrs__field = v1 };
-  attr__constrained = v2 }, i)[i])]. ((singleton({ us_split_discrs1 = {
-  rec__split_records__record_with_mutable_discrs__present = v };
-  us_split_fields1 = {
-  rec__split_records__record_with_mutable_discrs__field = v1 };
-  attr__constrained = v2 }, i)[i]) = { us_split_discrs1 = {
-  rec__split_records__record_with_mutable_discrs__present = v };
-  us_split_fields1 = {
-  rec__split_records__record_with_mutable_discrs__field = v1 };
-  attr__constrained = v2 })))
-
 logic bool_eq6 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -618,17 +588,17 @@ axiom bool_eq_def5 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and (bool_eq3((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and (bool_eq3((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq3((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq6(a,
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq3((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq6(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -638,9 +608,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq3((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq3((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)))))))
 
 predicate in_range3(rec__split_records__record_with_mutable_discrs__present1: bool,
   a: us_rep) =
@@ -2379,19 +2349,6 @@ logic attr__ATTRIBUTE_ADDRESS9 : int
 
 logic split_records__test__a2__aggregate_def : us_rep -> (int,us_rep) farray
 
-axiom def_axiom :
-  (forall temp___134:bool. forall temp___1341:natural.
-  forall temp___1342:bool. ((split_records__test__a2__aggregate_def({
-  us_split_discrs1 = {
-  rec__split_records__record_with_mutable_discrs__present = temp___134 };
-  us_split_fields1 = {
-  rec__split_records__record_with_mutable_discrs__field = temp___1341 };
-  attr__constrained = temp___1342 })[1]) = { us_split_discrs1 = {
-  rec__split_records__record_with_mutable_discrs__present = temp___134 };
-  us_split_fields1 = {
-  rec__split_records__record_with_mutable_discrs__field = temp___1341 };
-  attr__constrained = temp___1342 }))
-
 predicate in_range24(rec__split_records__record_with_mutable_discrs__present1: bool,
   a: us_rep) =
   (rec__split_records__record_with_mutable_discrs__present1 = ((a).us_split_discrs1).rec__split_records__record_with_mutable_discrs__present)
@@ -2544,18 +2501,18 @@ function t24b__ref___projection(a: t24b__ref) : us_rep = (a).t24b__content
 
 logic split_records__test__a__aggregate_def : us_rep -> (int,us_rep) farray
 
-axiom def_axiom1 :
-  (forall temp___248:bool. forall temp___2481:natural.
-  forall temp___2482:bool. ((split_records__test__a__aggregate_def({
+axiom def_axiom :
+  (forall temp___280:bool. forall temp___2801:natural.
+  forall temp___2802:bool. ((split_records__test__a__aggregate_def({
   us_split_discrs1 = {
-  rec__split_records__record_with_mutable_discrs__present = temp___248 };
+  rec__split_records__record_with_mutable_discrs__present = temp___280 };
   us_split_fields1 = {
-  rec__split_records__record_with_mutable_discrs__field = temp___2481 };
-  attr__constrained = temp___2482 })[1]) = { us_split_discrs1 = {
-  rec__split_records__record_with_mutable_discrs__present = temp___248 };
+  rec__split_records__record_with_mutable_discrs__field = temp___2801 };
+  attr__constrained = temp___2802 })[1]) = { us_split_discrs1 = {
+  rec__split_records__record_with_mutable_discrs__present = temp___280 };
   us_split_fields1 = {
-  rec__split_records__record_with_mutable_discrs__field = temp___2481 };
-  attr__constrained = temp___2482 }))
+  rec__split_records__record_with_mutable_discrs__field = temp___2801 };
+  attr__constrained = temp___2802 }))
 
 axiom c3__def_axiom : ((c3 = of_int(0)) and ((c31 = dummy) and (c32 = true)))
 
@@ -2574,312 +2531,141 @@ axiom a2__def_axiom : (a2 = split_records__test__a2__aggregate_def({
   rec__split_records__record_with_mutable_discrs__field = dummy };
   attr__constrained = false }))
 
-logic c1__split_fields : natural
-
-logic c2__split_fields : natural
-
-logic c2__split_discrs : bool
-
-logic h1__split_fields : bool
-
-logic h1__split_fields1 : natural
-
-logic h1__split_fields2 : bool
-
-logic h2__split_fields : bool
-
-logic h2__split_fields1 : natural
-
-logic h2__split_fields2 : bool
-
-logic a : (int,us_rep) farray
-
-logic usq_ : bool
-
-logic usq_1 : natural
-
-logic usq_2 : bool
-
-logic o : bool
-
-logic o1 : natural
-
-logic o2 : bool
-
-logic o3 : bool
-
-logic o4 : natural
-
-logic o5 : bool
-
-logic temp___257 : bool
-
-logic temp___2571 : natural
-
-logic temp___2572 : bool
-
-logic usq_3 : bool
-
-logic usq_4 : natural
-
-logic usq_5 : bool
-
-logic o6 : bool
-
-logic o7 : natural
-
-logic o8 : bool
-
-logic o9 : (int,us_rep) farray
-
-logic result : natural
-
-logic c2__split_fields1 : natural
-
-logic result1 : bool
-
-logic c2__split_discrs1 : bool
-
-logic result2 : bool
-
-logic result3 : natural
-
-logic result4 : bool
-
-logic h1__split_fields3 : bool
-
-logic h1__split_fields4 : natural
-
-logic h1__split_fields5 : bool
-
-logic result5 : bool
-
-logic result6 : natural
-
-logic result7 : bool
-
-logic h2__split_fields3 : bool
-
-logic h2__split_fields4 : natural
-
-logic h2__split_fields5 : bool
-
-logic result8 : (int,us_rep) farray
-
-logic a1 : (int,us_rep) farray
-
-logic split_records__update_field_if_possible__r__discrs : bool
-
-logic split_records__update_field_if_possible__r__fields : natural
-
-logic result9 : natural
-
-logic c1__split_fields1 : natural
-
-logic c2__split_fields2 : natural
-
-logic c2__split_discrs2 : bool
-
-logic split_records__update_field_if_possible__r__discrs1 : bool
-
-logic split_records__update_field_if_possible__r__fields1 : natural
-
-logic result10 : bool
-
-logic result11 : natural
-
-logic result12 : bool
-
-logic h1__split_fields6 : bool
-
-logic h1__split_fields7 : natural
-
-logic h1__split_fields8 : bool
-
-logic result13 : bool
-
-logic result14 : natural
-
-logic result15 : bool
-
-logic h2__split_fields6 : bool
-
-logic h2__split_fields7 : natural
-
-logic h2__split_fields8 : bool
-
-logic split_records__update_field_if_possible__r__discrs2 : bool
-
-logic split_records__update_field_if_possible__r__fields2 : natural
-
-logic result16 : bool
-
-logic result17 : natural
-
-logic result18 : bool
-
-logic h2__split_fields9 : bool
-
-logic h2__split_fields10 : natural
-
-logic h2__split_fields11 : bool
-
-logic result19 : (int,us_rep) farray
-
-logic a3 : (int,us_rep) farray
-
-logic split_records__update_field_if_possible__r__discrs3 : bool
-
-logic split_records__update_field_if_possible__r__fields3 : natural
-
-logic result20 : (int,us_rep) farray
-
-logic a4 : (int,us_rep) farray
-
-axiom H : ((c1__attr__constrained = true) and (c1__split_discrs = of_int(0)))
-
-axiom H1 : ((of_int(0) = c1__split_discrs) and
-  (c1__attr__constrained = true))
-
-axiom H2 : (result = c2__split_fields)
-
-axiom H3 : (c2__split_fields1 = dummy)
-
-axiom H4 : (result1 = c2__split_discrs)
-
-axiom H5 : (c2__split_discrs1 = of_int(0))
-
-axiom H6 : (c2__attr__constrained = false)
-
-axiom H7 : ((result2 = h1__split_fields) and
-  ((result3 = h1__split_fields1) and (result4 = h1__split_fields2)))
-
-axiom H8 : ((h1__split_fields3 = of_int(0)) and
-  ((h1__split_fields4 = dummy) and (h1__split_fields5 = true)))
-
-axiom H9 : (h1__split_discrs = of_int(0))
-
-axiom H10 : ((of_int(0) = h1__split_discrs) and
-  (((of_int(0) = h1__split_fields3) and (h1__split_fields5 = true)) and
-  (h1__split_fields5 = true)))
-
-axiom H11 : ((result5 = h2__split_fields) and
-  ((result6 = h2__split_fields1) and (result7 = h2__split_fields2)))
-
-axiom H12 : ((h2__split_fields3 = of_int(0)) and
-  ((h2__split_fields4 = dummy) and (h2__split_fields5 = false)))
-
-axiom H13 : (h2__split_fields5 = false)
-
-axiom H14 : (result8 = a)
-
-axiom H15 : (a1 = split_records__test__a__aggregate_def({ us_split_discrs1 =
-  { rec__split_records__record_with_mutable_discrs__present = of_int(0) };
+axiom def_axiom1 :
+  (forall temp___156:bool. forall temp___1561:natural.
+  forall temp___1562:bool. ((split_records__test__a2__aggregate_def({
+  us_split_discrs1 = {
+  rec__split_records__record_with_mutable_discrs__present = temp___156 };
   us_split_fields1 = {
-  rec__split_records__record_with_mutable_discrs__field = dummy };
-  attr__constrained = false }))
+  rec__split_records__record_with_mutable_discrs__field = temp___1561 };
+  attr__constrained = temp___1562 })[1]) = { us_split_discrs1 = {
+  rec__split_records__record_with_mutable_discrs__present = temp___156 };
+  us_split_fields1 = {
+  rec__split_records__record_with_mutable_discrs__field = temp___1561 };
+  attr__constrained = temp___1562 }))
 
-axiom H16 :
-  (forall temp___194:int. (((1 <= temp___194) and (temp___194 <= 1)) ->
-  (((a1[temp___194])).attr__constrained = false)))
-
-axiom H17 : ((of_int(0) = c3) and ((dummy = c31) and (true = c32)))
-
-axiom H18 : ((of_int(0) = c3) and (c32 = true))
-
-axiom H19 : ((of_int(0) = c4) and ((dummy = c41) and (true = c42)))
-
-axiom H20 : ((of_int(0) = c4) and (c42 = true))
-
-axiom H21 : ((of_int(0) = h3) and ((of_int(0) = h31) and ((dummy = h32) and
-  (true = h33))))
-
-axiom H22 : ((of_int(0) = h3) and (((of_int(0) = h31) and (h33 = true)) and
-  (h33 = true)))
-
-axiom H23 : ((of_int(0) = h4) and ((dummy = h41) and (false = h42)))
-
-axiom H24 : (h42 = false)
-
-axiom H25 : (split_records__test__a2__aggregate_def({ us_split_discrs1 = {
+ (* File "split_records.adb", line 18, characters 0-0 *)
+goal WP_parameter_def :
+  (forall c1__split_fields:natural. forall c2__split_fields:natural.
+  forall c2__split_discrs:bool. forall h1__split_fields:bool.
+  forall h1__split_fields1:natural. forall h1__split_fields2:bool.
+  forall h2__split_fields:bool. forall h2__split_fields1:natural.
+  forall h2__split_fields2:bool. forall a:(int,us_rep) farray.
+  forall usq_:bool. forall usq_1:natural. forall usq_2:bool. forall o:bool.
+  forall o1:natural. forall o2:bool. forall o3:bool. forall o4:natural.
+  forall o5:bool. forall temp___289:bool. forall temp___2891:natural.
+  forall temp___2892:bool. forall result:natural.
+  forall c2__split_fields1:natural. forall result1:bool.
+  forall c2__split_discrs1:bool. forall result2:us_split_fields__ref3.
+  forall h1__split_fields3:us_split_fields6.
+  forall result3:us_split_fields__ref1.
+  forall h2__split_fields3:us_split_fields2. forall result4:map__ref.
+  forall a1:(int,us_rep) farray.
+  forall split_records__update_field_if_possible__r__discrs:us_split_discrs.
+  forall split_records__update_field_if_possible__r__fields:us_split_fields.
+  forall result5:us_split_fields__ref.
+  forall c1__split_fields1:us_split_fields.
+  forall c2__split_fields2:us_split_fields.
+  forall c2__split_discrs2:us_split_discrs.
+  forall split_records__update_field_if_possible__r__discrs1:us_split_discrs.
+  forall split_records__update_field_if_possible__r__fields1:us_split_fields.
+  forall result6:us_split_fields__ref3.
+  forall h1__split_fields4:us_split_fields6.
+  forall result7:us_split_fields__ref1.
+  forall h2__split_fields4:us_split_fields2.
+  (((c1__attr__constrained = true) and (c1__split_discrs = of_int(0))) ->
+  (((of_int(0) = c1__split_discrs) and (c1__attr__constrained = true)) ->
+  ((((result = c2__split_fields) and (c2__split_fields1 = dummy)) and
+  (((result1 = c2__split_discrs) and (c2__split_discrs1 = of_int(0))) and
+  (c2__attr__constrained = false))) -> ((((result2 = {
+  us_split_fields__content3 = { rec__split_records__holder__content1 = {
+  us_split_discrs1 = {
+  rec__split_records__record_with_mutable_discrs__present = h1__split_fields
+  }; us_split_fields1 = {
+  rec__split_records__record_with_mutable_discrs__field = h1__split_fields1
+  }; attr__constrained = h1__split_fields2 } } }) and (h1__split_fields3 = {
+  rec__split_records__holder__content1 = { us_split_discrs1 = {
   rec__split_records__record_with_mutable_discrs__present = of_int(0) };
   us_split_fields1 = {
   rec__split_records__record_with_mutable_discrs__field = dummy };
-  attr__constrained = false }) = a2)
-
-axiom H26 :
-  (forall temp___227:int. (((1 <= temp___227) and (temp___227 <= 1)) ->
-  (((a2[temp___227])).attr__constrained = false)))
-
-axiom H27 : true
-
-axiom H28 : true
-
-axiom H29 : true
-
-axiom H30 : true
-
-axiom H31 : true
-
-axiom H32 : ((split_records__update_field_if_possible__r__discrs = true) ->
-  (to_rep(split_records__update_field_if_possible__r__fields) = 0))
-
-axiom H33 : (result9 = c1__split_fields)
-
-axiom H34 :
-  (c1__split_fields1 = split_records__update_field_if_possible__r__fields)
-
-axiom H35 : ((c1__attr__constrained = true) ->
-  (split_records__update_field_if_possible__r__discrs = c1__split_discrs))
-
-axiom H36 : (not (c1__split_discrs = true))
-
-axiom H37 : ((c2__split_discrs2 = true) -> (to_rep(c2__split_fields2) = 0))
-
-axiom H38 : (not (c2__split_discrs2 = true))
-
-axiom H39 : ((split_records__update_field_if_possible__r__discrs1 = true) ->
-  (to_rep(split_records__update_field_if_possible__r__fields1) = 0))
-
-axiom H40 : ((result10 = h1__split_fields3) and
-  ((result11 = h1__split_fields4) and (result12 = h1__split_fields5)))
-
-axiom H41 :
-  ((h1__split_fields6 = split_records__update_field_if_possible__r__discrs1) and
-  ((h1__split_fields7 = split_records__update_field_if_possible__r__fields1) and
-  (h1__split_fields8 = h1__split_fields5)))
-
-axiom H42 : ((h1__split_fields5 = true) ->
-  (split_records__update_field_if_possible__r__discrs1 = h1__split_fields3))
-
-axiom H43 : (not (h1__split_fields6 = true))
-
-axiom H44 : (not (h2__split_fields5 = true))
-
-axiom H45 : ((h2__split_fields5 = true) -> (of_int(0) = h2__split_fields3))
-
-axiom H46 : (of_int(0) = usq_)
-
-axiom H47 : (dummy = usq_1)
-
-axiom H48 : (true = usq_2)
-
-axiom H49 : (usq_ = o)
-
-axiom H50 : (usq_1 = o1)
-
-axiom H51 : (h2__split_fields5 = o2)
-
-axiom H52 : ((o3 = o) and ((o4 = o1) and (o5 = o2)))
-
-axiom H53 : ((temp___257 = o3) and ((temp___2571 = o4) and
-  (temp___2572 = o5)))
-
-axiom H54 : ((result13 = h2__split_fields3) and
-  ((result14 = h2__split_fields4) and (result15 = h2__split_fields5)))
-
-axiom H55 : ((h2__split_fields6 = temp___257) and
-  ((h2__split_fields7 = temp___2571) and (h2__split_fields8 = temp___2572)))
-
- (* File "split_records.ads", line 24, characters 0-0 *)
-goal WP_parameter_def : (not (h2__split_fields8 = true))
+  attr__constrained = true } })) and (h1__split_discrs = of_int(0))) ->
+  (((of_int(0) = h1__split_discrs) and
+  (((of_int(0) = (((h1__split_fields3).rec__split_records__holder__content1).us_split_discrs1).rec__split_records__record_with_mutable_discrs__present) and
+  (((h1__split_fields3).rec__split_records__holder__content1).attr__constrained = true)) and
+  (((h1__split_fields3).rec__split_records__holder__content1).attr__constrained = true))) ->
+  (((result3 = { us_split_fields__content1 = {
+  rec__split_records__mutable_holder__content = { us_split_discrs1 = {
+  rec__split_records__record_with_mutable_discrs__present = h2__split_fields
+  }; us_split_fields1 = {
+  rec__split_records__record_with_mutable_discrs__field = h2__split_fields1
+  }; attr__constrained = h2__split_fields2 } } }) and (h2__split_fields3 = {
+  rec__split_records__mutable_holder__content = { us_split_discrs1 = {
+  rec__split_records__record_with_mutable_discrs__present = of_int(0) };
+  us_split_fields1 = {
+  rec__split_records__record_with_mutable_discrs__field = dummy };
+  attr__constrained = false } })) ->
+  ((((h2__split_fields3).rec__split_records__mutable_holder__content).attr__constrained = false) ->
+  (((result4 = { map__content = a }) and
+  (a1 = split_records__test__a__aggregate_def({ us_split_discrs1 = {
+  rec__split_records__record_with_mutable_discrs__present = of_int(0) };
+  us_split_fields1 = {
+  rec__split_records__record_with_mutable_discrs__field = dummy };
+  attr__constrained = false }))) ->
+  ((forall temp___223:int. (((1 <= temp___223) and (temp___223 <= 1)) ->
+   (((a1[temp___223])).attr__constrained = false))) ->
+  (((of_int(0) = c3) and ((dummy = c31) and (true = c32))) ->
+  (((of_int(0) = c3) and (c32 = true)) -> (((of_int(0) = c4) and
+  ((dummy = c41) and (true = c42))) -> (((of_int(0) = c4) and
+  (c42 = true)) -> (((of_int(0) = h3) and ((of_int(0) = h31) and
+  ((dummy = h32) and (true = h33)))) -> (((of_int(0) = h3) and
+  (((of_int(0) = h31) and (h33 = true)) and (h33 = true))) ->
+  (((of_int(0) = h4) and ((dummy = h41) and (false = h42))) ->
+  ((h42 = false) -> ((split_records__test__a2__aggregate_def({
+  us_split_discrs1 = {
+  rec__split_records__record_with_mutable_discrs__present = of_int(0) };
+  us_split_fields1 = {
+  rec__split_records__record_with_mutable_discrs__field = dummy };
+  attr__constrained = false }) = a2) ->
+  ((forall temp___259:int. (((1 <= temp___259) and (temp___259 <= 1)) ->
+   (((a2[temp___259])).attr__constrained = false))) ->
+  (((((split_records__update_field_if_possible__r__discrs).rec__split_records__record_with_mutable_discrs__present = true) ->
+  (to_rep((split_records__update_field_if_possible__r__fields).rec__split_records__record_with_mutable_discrs__field) = 0)) and
+  (((result5 = { us_split_fields__content = {
+  rec__split_records__record_with_mutable_discrs__field = c1__split_fields }
+  }) and
+  (c1__split_fields1 = split_records__update_field_if_possible__r__fields)) and
+  ((c1__attr__constrained = true) ->
+  (split_records__update_field_if_possible__r__discrs = {
+  rec__split_records__record_with_mutable_discrs__present = c1__split_discrs
+  })))) -> ((not (c1__split_discrs = true)) ->
+  ((((c2__split_discrs2).rec__split_records__record_with_mutable_discrs__present = true) ->
+  (to_rep((c2__split_fields2).rec__split_records__record_with_mutable_discrs__field) = 0)) ->
+  ((not ((c2__split_discrs2).rec__split_records__record_with_mutable_discrs__present = true)) ->
+  (((((split_records__update_field_if_possible__r__discrs1).rec__split_records__record_with_mutable_discrs__present = true) ->
+  (to_rep((split_records__update_field_if_possible__r__fields1).rec__split_records__record_with_mutable_discrs__field) = 0)) and
+  (((result6 = { us_split_fields__content3 = h1__split_fields3 }) and
+  (h1__split_fields4 = { rec__split_records__holder__content1 = {
+  us_split_discrs1 = split_records__update_field_if_possible__r__discrs1;
+  us_split_fields1 = split_records__update_field_if_possible__r__fields1;
+  attr__constrained =
+  ((h1__split_fields3).rec__split_records__holder__content1).attr__constrained
+  } })) and
+  ((((h1__split_fields3).rec__split_records__holder__content1).attr__constrained = true) ->
+  (split_records__update_field_if_possible__r__discrs1 = ((h1__split_fields3).rec__split_records__holder__content1).us_split_discrs1)))) ->
+  ((not ((((h1__split_fields4).rec__split_records__holder__content1).us_split_discrs1).rec__split_records__record_with_mutable_discrs__present = true)) ->
+  ((not (((h2__split_fields3).rec__split_records__mutable_holder__content).attr__constrained = true)) ->
+  (((((((((((h2__split_fields3).rec__split_records__mutable_holder__content).attr__constrained = true) and
+  (of_int(0) = (((h2__split_fields3).rec__split_records__mutable_holder__content).us_split_discrs1).rec__split_records__record_with_mutable_discrs__present)) or
+  (not (((h2__split_fields3).rec__split_records__mutable_holder__content).attr__constrained = true))) and
+  ((of_int(0) = usq_) and ((dummy = usq_1) and (true = usq_2)))) and
+  ((usq_ = o) and ((usq_1 = o1) and
+  (((h2__split_fields3).rec__split_records__mutable_holder__content).attr__constrained = o2)))) and
+  ((o = o3) and ((o1 = o4) and (o2 = o5)))) and ((temp___289 = o3) and
+  ((temp___2891 = o4) and (temp___2892 = o5)))) and ((result7 = {
+  us_split_fields__content1 = h2__split_fields3 }) and (h2__split_fields4 = {
+  rec__split_records__mutable_holder__content = { us_split_discrs1 = {
+  rec__split_records__record_with_mutable_discrs__present = temp___289 };
+  us_split_fields1 = {
+  rec__split_records__record_with_mutable_discrs__field = temp___2891 };
+  attr__constrained = temp___2892 } }))) ->
+  (not (((h2__split_fields4).rec__split_records__mutable_holder__content).attr__constrained = true))))))))))))))))))))))))))))))

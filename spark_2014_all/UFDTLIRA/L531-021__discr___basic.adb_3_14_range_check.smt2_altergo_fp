@@ -399,9 +399,5 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic z : int
-
-logic us : int
-
  (* File "basic.ads", line 4, characters 0-0 *)
 goal WP_parameter_def : in_range2(to_rep2(v))

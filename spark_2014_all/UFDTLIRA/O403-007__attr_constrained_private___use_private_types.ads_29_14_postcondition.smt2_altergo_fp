@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -395,69 +395,29 @@ function d_holder_1__ref___projection(a: d_holder_1__ref) : us_rep1 =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic s__split_fields : natural
-
-logic s__split_fields1 : us_main_type
-
-logic s__split_fields2 : bool
-
-logic private_types__private_reinit__s__discrs : natural
-
-logic private_types__private_reinit__s__fields : us_main_type
-
-logic result : natural
-
-logic result1 : us_main_type
-
-logic result2 : bool
-
-logic s__split_fields3 : natural
-
-logic s__split_fields4 : us_main_type
-
-logic s__split_fields5 : bool
-
-logic s__split_fields6 : natural
-
-logic s__split_fields7 : us_main_type
-
-logic s__split_fields8 : bool
-
-logic s__split_fields9 : natural
-
-logic s__split_fields10 : us_main_type
-
-logic s__split_fields11 : bool
-
-axiom H : (((1 = to_rep(s__split_fields)) and (s__split_fields2 = true)) and
-  (s__split_fields2 = true))
-
-axiom H1 : (to_rep(private_types__private_reinit__s__discrs) = 0)
-
-axiom H2 : (result = s__split_fields)
-
-axiom H3 : (result1 = s__split_fields1)
-
-axiom H4 : (result2 = s__split_fields2)
-
-axiom H5 : (s__split_fields3 = private_types__private_reinit__s__discrs)
-
-axiom H6 : (s__split_fields4 = private_types__private_reinit__s__fields)
-
-axiom H7 : (s__split_fields2 = s__split_fields5)
-
-axiom H8 : ((s__split_fields2 = true) ->
-  (s__split_fields = private_types__private_reinit__s__discrs))
-
-axiom H9 : (s__split_fields6 = s__split_fields3)
-
-axiom H10 : (s__split_fields7 = s__split_fields4)
-
-axiom H11 : (s__split_fields8 = s__split_fields5)
-
-axiom H12 : ((s__split_fields9 = s__split_fields3) and
-  ((s__split_fields10 = s__split_fields4) and
-  (s__split_fields11 = s__split_fields5)))
-
  (* File "use_private_types.ads", line 11, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def :
+  (forall s__split_fields:natural. forall s__split_fields1:us_main_type.
+  forall s__split_fields2:bool.
+  forall private_types__private_reinit__s__discrs:natural.
+  forall private_types__private_reinit__s__fields:us_main_type.
+  forall result:natural. forall result1:us_main_type. forall result2:bool.
+  forall s__split_fields3:natural. forall s__split_fields4:us_main_type.
+  forall s__split_fields5:bool. forall s__split_fields6:natural.
+  forall s__split_fields7:us_main_type. forall s__split_fields8:bool.
+  forall s__split_fields9:natural. forall s__split_fields10:us_main_type.
+  forall s__split_fields11:bool. (not ((((1 = to_rep(s__split_fields)) and
+  (s__split_fields2 = true)) and (s__split_fields2 = true)) and
+  (((to_rep(private_types__private_reinit__s__discrs) = 0) and
+  ((((result = s__split_fields) and ((result1 = s__split_fields1) and
+  (result2 = s__split_fields2))) and
+  ((s__split_fields3 = private_types__private_reinit__s__discrs) and
+  ((s__split_fields4 = private_types__private_reinit__s__fields) and
+  (s__split_fields2 = s__split_fields5)))) and ((s__split_fields2 = true) ->
+  (s__split_fields = private_types__private_reinit__s__discrs)))) and
+  (((s__split_fields6 = s__split_fields3) and
+  ((s__split_fields7 = s__split_fields4) and
+  (s__split_fields8 = s__split_fields5))) and
+  ((s__split_fields9 = s__split_fields3) and
+  ((s__split_fields10 = s__split_fields4) and
+  (s__split_fields11 = s__split_fields5))))))))

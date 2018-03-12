@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -694,25 +694,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,partition_index) farray, int, int,
-  (int,partition_index) farray, int, int -> (int,partition_index) farray
-
-axiom concat_def :
-  (forall a:(int,partition_index) farray.
-  forall b:(int,partition_index) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : partition_index, int -> (int,partition_index) farray
-
-axiom singleton_def :
-  (forall v:partition_index.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq10 : (int,partition_index) farray, int, int,
   (int,partition_index) farray, int, int -> bool
 
@@ -724,17 +705,17 @@ axiom bool_eq_def8 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep2((a[temp___idx_132])) = to_rep2((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep2((a[temp___idx_154])) = to_rep2((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq10(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep2((a[temp___idx_132])) = to_rep2((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep2((a[temp___idx_154])) = to_rep2((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq10(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -745,40 +726,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep2((a[temp___idx_132])) = to_rep2((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,partition_index) farray, int, int,
-  (int,partition_index) farray, int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,partition_index) farray.
-  forall b:(int,partition_index) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq10(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,partition_index) farray.
-  forall b:(int,partition_index) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq10(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep2((a[(i + 1)])) <  to_rep2((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,partition_index) farray.
-  forall b:(int,partition_index) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq10(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep2((b[(i + 1)])) <  to_rep2((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep2((a[temp___idx_154])) = to_rep2((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic p__split_discrs : capacity_range
 
@@ -984,313 +934,106 @@ axiom length__post_axiom1 :
 
 axiom get__post_axiom : true
 
-logic p__split_fields : us_main_type
-
-logic p_prime_index : int
-
-logic j : int
-
-logic o : int
-
-logic partition_refinement__make_new_partitions__L_1__R1b__assume : int
-
-logic temp___501 : index
-
-logic temp___5011 : index
-
-logic temp___5012 : index_count
-
-logic o1 : int
-
-logic o2 : index_count
-
-logic o3 : index
-
-logic o4 : index
-
-logic o5 : index
-
-logic o6 : index_count
-
-logic temp___502 : index
-
-logic temp___5021 : index
-
-logic temp___5022 : index_count
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : partition_index
-
-logic o10 : (int,partition_index) farray
-
-logic j1 : int
-
-logic j2 : int
-
-logic o11 : int
-
-logic o12 : partition_index
-
-logic o13 : int
-
-logic j3 : int
-
-logic us : int
-
-logic o14 : int
-
-logic o15 : bool
-
-logic o16 : int
-
-logic o17 : partition_index
-
-logic o18 : int
-
-logic o19 : partition_index
-
-logic o20 : (int,partition_index) farray
-
-logic result : int
-
-logic j4 : int
-
-logic f : (int,partition_index) farray
-
-logic p_elem__split_fields : index
-
-logic p_elem__split_fields1 : index
-
-logic p_elem__split_fields2 : index_count
-
-logic p_prime__split_fields : index
-
-logic p_prime__split_fields1 : index
-
-logic p_prime__split_fields2 : index_count
-
-logic p_prime_index1 : int
-
-logic j5 : int
-
-logic i : int
-
-logic result1 : index
-
-logic result2 : index
-
-logic result3 : index_count
-
-logic p_elem__split_fields3 : index
-
-logic p_elem__split_fields4 : index
-
-logic p_elem__split_fields5 : index_count
-
-logic result4 : index
-
-logic result5 : index
-
-logic result6 : index_count
-
-logic p_prime__split_fields3 : index
-
-logic p_prime__split_fields4 : index
-
-logic p_prime__split_fields5 : index_count
-
-logic result7 : int
-
-logic p_prime_index2 : int
-
-logic result8 : int
-
-logic i1 : int
-
-logic result9 : (int,partition_index) farray
-
-logic f1 : (int,partition_index) farray
-
-logic f2 : (int,partition_index) farray
-
-logic i2 : int
-
-logic result10 : bool
-
-logic result11 : int
-
-logic i3 : int
-
-logic result12 : (int,partition_index) farray
-
-logic f3 : (int,partition_index) farray
-
-axiom H : ((0 <= 10000) -> in_range5(p_prime_index))
-
-axiom H1 : ((o = length({ us_split_discrs1 = {
+ (* File "a-cofove.ads", line 807, characters 0-0 *)
+goal WP_parameter_def :
+  (forall p__split_fields:us_main_type. forall p_prime_index:int.
+  forall j:int. forall o:int.
+  forall partition_refinement__make_new_partitions__L_1__R1b__assume:int.
+  forall temp___541:index. forall temp___5411:index.
+  forall temp___5412:index_count. forall o1:int. forall o2:index_count.
+  forall o3:index. forall o4:index. forall o5:index. forall o6:index_count.
+  forall temp___542:index. forall temp___5421:index.
+  forall temp___5422:index_count. forall o7:int. forall o8:int.
+  forall o9:partition_index. forall o10:(int,partition_index) farray.
+  forall o11:partition_index. forall o12:(int,partition_index) farray.
+  forall result:int. forall j1:int. forall f:(int,partition_index) farray.
+  forall p_elem__split_fields:index. forall p_elem__split_fields1:index.
+  forall p_elem__split_fields2:index_count.
+  forall p_prime__split_fields:index. forall p_prime__split_fields1:index.
+  forall p_prime__split_fields2:index_count. forall p_prime_index1:int.
+  forall j2:int. forall i:int. forall result1:index. forall result2:index.
+  forall result3:index_count. forall p_elem__split_fields3:index.
+  forall p_elem__split_fields4:index.
+  forall p_elem__split_fields5:index_count. forall result4:index.
+  forall result5:index. forall result6:index_count.
+  forall p_prime__split_fields3:index. forall p_prime__split_fields4:index.
+  forall p_prime__split_fields5:index_count. forall result7:int.
+  forall p_prime_index2:int. forall result8:int. forall i1:int.
+  forall result9:(int,partition_index) farray.
+  forall f1:(int,partition_index) farray.
+  forall f2:(int,partition_index) farray. forall i2:int. forall result10:int.
+  forall i3:int. forall result11:(int,partition_index) farray.
+  forall f3:(int,partition_index) farray. (((0 <= 10000) ->
+  in_range5(p_prime_index)) -> ((((((o = length({ us_split_discrs1 = {
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
   }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
-  p__split_fields } })) and (in_range6(o) and (((of_int(1) = true) ->
-  (o <= to_rep3(p__split_discrs))) and ((not (of_int(1) = true)) ->
-  (o <= 10001)))))
-
-axiom H2 :
-  (partition_refinement__make_new_partitions__L_1__R1b__assume = (o - 1))
-
-axiom H3 :
-  (partition_refinement__make_new_partitions__L_1__R1b__assume = r1b)
-
-axiom H4 : in_range4(r1b)
-
-axiom H5 : (result = j)
-
-axiom H6 : (j4 = 0)
-
-axiom H7 : (0 <= j4)
-
-axiom H8 : (j4 <= r1b)
-
-axiom H9 : (((0 <= 10000) -> in_range5(p_prime_index1)) and ((0 <= j5) and
-  (j5 <= r1b)))
-
-axiom H10 : (({ us_split_fields1 = {
-  rec__partition_refinement__interval__first = temp___501;
-  rec__partition_refinement__interval__last = temp___5011;
-  rec__partition_refinement__interval__count = temp___5012 }
+  p__split_fields } })) and (in_range6(o) and (((of_int(1) = true) and
+  (o <= to_rep3(p__split_discrs))) or ((not (of_int(1) = true)) and
+  (o <= 10001))))) and
+  (partition_refinement__make_new_partitions__L_1__R1b__assume = (o - 1))) and
+  (partition_refinement__make_new_partitions__L_1__R1b__assume = r1b)) and
+  in_range4(r1b)) -> (((result = j) and (j1 = 0)) -> (((0 <= j1) and
+  (j1 <= r1b)) -> ((((0 <= 10000) -> in_range5(p_prime_index1)) and
+  ((0 <= j2) and (j2 <= r1b))) -> (((({ us_split_fields1 = {
+  rec__partition_refinement__interval__first = temp___541;
+  rec__partition_refinement__interval__last = temp___5411;
+  rec__partition_refinement__interval__count = temp___5412 }
   } = get(model__({ us_split_discrs1 = {
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
   }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
-  p__split_fields } }), j5)) and (bool_eq5({ us_split_fields1 = {
-  rec__partition_refinement__interval__first = temp___501;
-  rec__partition_refinement__interval__last = temp___5011;
-  rec__partition_refinement__interval__count = temp___5012 } }, get(model__({
+  p__split_fields } }), j2)) and (bool_eq5({ us_split_fields1 = {
+  rec__partition_refinement__interval__first = temp___541;
+  rec__partition_refinement__interval__last = temp___5411;
+  rec__partition_refinement__interval__count = temp___5412 } }, get(model__({
   us_split_discrs1 = {
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
   }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
-  p__split_fields } }), j5)) = true))
-
-axiom H11 : (result1 = p_elem__split_fields)
-
-axiom H12 : (result2 = p_elem__split_fields1)
-
-axiom H13 : (result3 = p_elem__split_fields2)
-
-axiom H14 : (temp___501 = p_elem__split_fields3)
-
-axiom H15 : (temp___5011 = p_elem__split_fields4)
-
-axiom H16 : (temp___5012 = p_elem__split_fields5)
-
-axiom H17 : (1 <= to_rep(p_elem__split_fields5))
-
-axiom H18 :
-  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))
-
-axiom H19 : (to_rep(o2) = 0)
-
-axiom H20 :
-  ((o1 = (to_rep1(p_elem__split_fields3) + to_rep(p_elem__split_fields5))) and
-  in_range3((to_rep1(p_elem__split_fields3) + to_rep(p_elem__split_fields5))))
-
-axiom H21 : (to_rep1(o3) = o1)
-
-axiom H22 : (o3 = o4)
-
-axiom H23 : (p_elem__split_fields4 = o5)
-
-axiom H24 : (o2 = o6)
-
-axiom H25 : (temp___502 = o4)
-
-axiom H26 : (temp___5021 = o5)
-
-axiom H27 : (temp___5022 = o6)
-
-axiom H28 : ((result4 = p_prime__split_fields) and
+  p__split_fields } }), j2)) = true)) and
+  (((result1 = p_elem__split_fields) and
+  ((result2 = p_elem__split_fields1) and
+  (result3 = p_elem__split_fields2))) and
+  ((temp___541 = p_elem__split_fields3) and
+  ((temp___5411 = p_elem__split_fields4) and
+  (temp___5412 = p_elem__split_fields5))))) ->
+  (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (((((to_rep(o2) = 0) and
+  ((((o1 = (to_rep1(p_elem__split_fields3) + to_rep(p_elem__split_fields5))) and
+  in_range3((to_rep1(p_elem__split_fields3) + to_rep(p_elem__split_fields5)))) and
+  (to_rep1(o3) = o1)) and ((o3 = o4) and ((p_elem__split_fields4 = o5) and
+  (o2 = o6))))) and ((temp___542 = o4) and ((temp___5421 = o5) and
+  (temp___5422 = o6)))) and (((result4 = p_prime__split_fields) and
   ((result5 = p_prime__split_fields1) and
-  (result6 = p_prime__split_fields2)))
-
-axiom H29 : ((p_prime__split_fields3 = temp___502) and
-  ((p_prime__split_fields4 = temp___5021) and
-  (p_prime__split_fields5 = temp___5022)))
-
-axiom H30 : ((o7 = length({ us_split_discrs1 = {
+  (result6 = p_prime__split_fields2))) and
+  ((temp___542 = p_prime__split_fields3) and
+  ((temp___5421 = p_prime__split_fields4) and
+  (temp___5422 = p_prime__split_fields5))))) -> (((((o7 = length({
+  us_split_discrs1 = {
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
   }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
-  p__split_fields } })) and (in_range6(o7) and (((of_int(1) = true) ->
-  (o7 <= to_rep3(p__split_discrs))) and ((not (of_int(1) = true)) ->
-  (o7 <= 10001)))))
-
-axiom H31 : ((o8 = o7) and in_range5(o7))
-
-axiom H32 : (result7 = p_prime_index1)
-
-axiom H33 : (p_prime_index2 = o8)
-
-axiom H34 : (to_rep1(p_prime__split_fields3) = r3b)
-
-axiom H35 : in_range3(r3b)
-
-axiom H36 : (to_rep1(p_prime__split_fields4) = r4b)
-
-axiom H37 : in_range3(r4b)
-
-axiom H38 : (result8 = i)
-
-axiom H39 : (i1 = r3b)
-
-axiom H40 : (r3b <= i1)
-
-axiom H41 : (i1 <= r4b)
-
-axiom H42 : (to_rep2(o9) = p_prime_index2)
-
-axiom H43 : (o10 = (f[i1 <- o9]))
-
-axiom H44 : (result9 = f)
-
-axiom H45 : (f1 = o10)
-
-axiom H46 :
-  (forall j6:int. (((to_rep1(p_prime__split_fields3) <= j6) and
-  (j6 <= i2)) -> (to_rep2((f2[j6])) = p_prime_index2)))
-
-axiom H47 :
-  (forall j6:int. (((0 <= j6) and
-  (j6 <= (to_rep1(p_prime__split_fields3) - 1))) ->
-  (to_rep2((f2[j6])) = to_rep2((f[j6])))))
-
-axiom H48 :
-  (forall j6:int. ((((i2 + 1) <= j6) and (j6 <= 5)) ->
-  (to_rep2((f2[j6])) = to_rep2((f[j6])))))
-
-axiom H49 : ((((r3b <= r4b) -> dynamic_property(r3b, r4b, i2)) and
-  (forall temp___505:int. (((0 <= temp___505) and (temp___505 <= 5)) ->
-  ((i2 <  temp___505) -> ((f2[temp___505]) = (f[temp___505])))))) and
-  ((r3b <= i2) and (i2 <= r4b)))
-
-axiom H50 : (not (i2 = r4b))
-
-axiom H51 : (result11 = i2)
-
-axiom H52 : (i3 = (i2 + 1))
-
-axiom H53 : (to_rep2(o19) = p_prime_index2)
-
-axiom H54 : (o20 = (f2[i3 <- o19]))
-
-axiom H55 : (result12 = f2)
-
-axiom H56 : (f3 = o20)
-
-logic j6 : int
-
-axiom H57 : (0 <= j6)
-
-axiom H58 : (j6 <= (to_rep1(p_prime__split_fields3) - 1))
-
- (* File "a-cofove.ads", line 807, characters 0-0 *)
-goal WP_parameter_def : (to_rep2((f3[j6])) = to_rep2((f[j6])))
+  p__split_fields } })) and (in_range6(o7) and (((of_int(1) = true) and
+  (o7 <= to_rep3(p__split_discrs))) or ((not (of_int(1) = true)) and
+  (o7 <= 10001))))) and ((o8 = o7) and in_range5(o7))) and
+  ((result7 = p_prime_index1) and (p_prime_index2 = o8))) ->
+  (((to_rep1(p_prime__split_fields3) = r3b) and in_range3(r3b)) ->
+  (((to_rep1(p_prime__split_fields4) = r4b) and in_range3(r4b)) ->
+  (((result8 = i) and (i1 = r3b)) -> (((r3b <= i1) and (i1 <= r4b)) ->
+  ((((to_rep2(o9) = p_prime_index2) and (o10 = (f[i1 <- o9]))) and
+  ((result9 = f) and (f1 = o10))) ->
+  (((forall j3:int. (((to_rep1(p_prime__split_fields3) <= j3) and
+    (j3 <= i2)) -> (to_rep2((f2[j3])) = p_prime_index2))) and
+  ((forall j3:int. (((0 <= j3) and
+   (j3 <= (to_rep1(p_prime__split_fields3) - 1))) ->
+   (to_rep2((f2[j3])) = to_rep2((f[j3]))))) and
+  (forall j3:int. ((((i2 + 1) <= j3) and (j3 <= 5)) ->
+  (to_rep2((f2[j3])) = to_rep2((f[j3]))))))) -> ((((((r3b <= r4b) ->
+  dynamic_property(r3b, r4b, i2)) and
+  (forall temp___545:int. (((0 <= temp___545) and (temp___545 <= 5)) ->
+  ((i2 <  temp___545) -> ((f2[temp___545]) = (f[temp___545])))))) and
+  ((r3b <= i2) and (i2 <= r4b))) and ((not (i2 = r4b)) and
+  (((result10 = i2) and (i3 = (i2 + 1))) and
+  (((to_rep2(o11) = p_prime_index2) and (o12 = (f2[i3 <- o11]))) and
+  ((result11 = f2) and (f3 = o12)))))) ->
+  (forall j3:int. (((0 <= j3) and
+  (j3 <= (to_rep1(p_prime__split_fields3) - 1))) ->
+  (to_rep2((f3[j3])) = to_rep2((f[j3]))))))))))))))))))))))

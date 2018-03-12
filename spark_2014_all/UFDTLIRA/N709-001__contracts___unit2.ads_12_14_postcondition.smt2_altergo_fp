@@ -380,12 +380,6 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq4 : bool, bool -> bool
-
-axiom bool_eq_def3 :
-  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -397,6 +391,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq4 : bool, bool -> bool
+
+axiom bool_eq_def3 :
+  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -463,121 +463,40 @@ axiom is_zero__def_axiom1 :
   x2 })]. ((is_zero({ us_split_fields1 = { rec__unit1__t1__c1 = x;
   rec__ext__ = x1 }; attr__tag = x2 }) = true) <-> (to_rep(x) = 0)))
 
-logic x__split_fields : integer
-
-logic x__split_fields1 : integer
-
-logic x__split_fields2 : us_private
-
-logic o : integer
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic o3 : us_private
-
-logic temp___172 : integer
-
-logic temp___1721 : integer
-
-logic temp___1722 : us_private
-
-logic temp___1723 : int
-
-logic unit1__create__x__fields : integer
-
-logic unit1__create__x__fields1 : us_private
-
-logic result : integer
-
-logic result1 : integer
-
-logic result2 : us_private
-
-logic x__split_fields3 : integer
-
-logic x__split_fields4 : integer
-
-logic x__split_fields5 : us_private
-
-logic result3 : integer
-
-logic result4 : integer
-
-logic result5 : us_private
-
-logic x__split_fields6 : integer
-
-logic x__split_fields7 : integer
-
-logic x__split_fields8 : us_private
-
-logic x__split_fields9 : integer
-
-logic x__split_fields10 : integer
-
-logic x__split_fields11 : us_private
-
-logic x__split_fields12 : integer
-
-logic x__split_fields13 : integer
-
-logic x__split_fields14 : us_private
-
-axiom H : (to_rep(unit1__create__x__fields) = 0)
-
-axiom H1 : (result = x__split_fields)
-
-axiom H2 : (result1 = x__split_fields1)
-
-axiom H3 : (result2 = x__split_fields2)
-
-axiom H4 : ({ rec__unit2__t2__c2 = x__split_fields3; rec__unit1__t1__c11 =
-  x__split_fields4; rec__ext__1 = x__split_fields5 } = (of_base({
-  us_split_fields1 = { rec__unit1__t1__c1 = unit1__create__x__fields;
-  rec__ext__ = unit1__create__x__fields1 }; attr__tag = x__attr__tag
-  })).us_split_fields3)
-
-axiom H5 : (to_rep(o) = 0)
-
-axiom H6 : (o = o1)
-
-axiom H7 : (x__split_fields4 = o2)
-
-axiom H8 : (x__split_fields5 = o3)
-
-axiom H9 : (temp___172 = o1)
-
-axiom H10 : (temp___1721 = o2)
-
-axiom H11 : (temp___1722 = o3)
-
-axiom H12 : (x__attr__tag = temp___1723)
-
-axiom H13 : (result3 = x__split_fields3)
-
-axiom H14 : (result4 = x__split_fields4)
-
-axiom H15 : (result5 = x__split_fields5)
-
-axiom H16 : (temp___172 = x__split_fields6)
-
-axiom H17 : (temp___1721 = x__split_fields7)
-
-axiom H18 : (temp___1722 = x__split_fields8)
-
-axiom H19 : (x__split_fields9 = x__split_fields6)
-
-axiom H20 : (x__split_fields10 = x__split_fields7)
-
-axiom H21 : (x__split_fields11 = x__split_fields8)
-
-axiom H22 : (x__split_fields12 = x__split_fields6)
-
-axiom H23 : (x__split_fields13 = x__split_fields7)
-
-axiom H24 : (x__split_fields14 = x__split_fields8)
-
  (* File "unit2.ads", line 17, characters 0-0 *)
-goal WP_parameter_def : (to_rep(x__split_fields10) = 0)
+goal WP_parameter_def :
+  (forall x__split_fields:integer. forall x__split_fields1:integer.
+  forall x__split_fields2:us_private. forall o:integer. forall o1:integer.
+  forall o2:integer. forall o3:us_private. forall temp___198:integer.
+  forall temp___1981:integer. forall temp___1982:us_private.
+  forall temp___1983:int. forall unit1__create__x__fields:integer.
+  forall unit1__create__x__fields1:us_private. forall result:integer.
+  forall result1:integer. forall result2:us_private.
+  forall x__split_fields3:integer. forall x__split_fields4:integer.
+  forall x__split_fields5:us_private. forall result3:integer.
+  forall result4:integer. forall result5:us_private.
+  forall x__split_fields6:integer. forall x__split_fields7:integer.
+  forall x__split_fields8:us_private. forall x__split_fields9:integer.
+  forall x__split_fields10:integer. forall x__split_fields11:us_private.
+  forall x__split_fields12:integer. forall x__split_fields13:integer.
+  forall x__split_fields14:us_private.
+  (((((to_rep(unit1__create__x__fields) = 0) and
+  (((result = x__split_fields) and ((result1 = x__split_fields1) and
+  (result2 = x__split_fields2))) and ({ rec__unit2__t2__c2 =
+  x__split_fields3; rec__unit1__t1__c11 = x__split_fields4; rec__ext__1 =
+  x__split_fields5 } = (of_base({ us_split_fields1 = { rec__unit1__t1__c1 =
+  unit1__create__x__fields; rec__ext__ = unit1__create__x__fields1 };
+  attr__tag = x__attr__tag })).us_split_fields3))) and ((((to_rep(o) = 0) and
+  ((o = o1) and ((x__split_fields4 = o2) and (x__split_fields5 = o3)))) and
+  (((temp___198 = o1) and ((temp___1981 = o2) and (temp___1982 = o3))) and
+  (x__attr__tag = temp___1983))) and (((result3 = x__split_fields3) and
+  ((result4 = x__split_fields4) and (result5 = x__split_fields5))) and
+  ((temp___198 = x__split_fields6) and ((temp___1981 = x__split_fields7) and
+  (temp___1982 = x__split_fields8)))))) and
+  (((x__split_fields9 = x__split_fields6) and
+  ((x__split_fields10 = x__split_fields7) and
+  (x__split_fields11 = x__split_fields8))) and
+  ((x__split_fields12 = x__split_fields6) and
+  ((x__split_fields13 = x__split_fields7) and
+  (x__split_fields14 = x__split_fields8))))) ->
+  (to_rep(x__split_fields10) = 0)))

@@ -189,12 +189,6 @@ axiom Max_assoc :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -206,6 +200,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -291,109 +291,25 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic c : int
-
-logic math_simple_abstract__gcd__result : int
-
-logic o : int
-
-logic temp___132 : int
-
-logic x : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : bool
-
-logic o4 : int
-
-logic x1 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : bool
-
-logic result : int
-
-logic c1 : int
-
-logic c2 : int
-
-logic result1 : int
-
-logic c3 : int
-
-logic c4 : int
-
-logic c5 : int
-
-logic c6 : int
-
-logic c7 : int
-
-logic c8 : int
-
-logic c9 : int
-
-logic c10 : int
-
-logic c11 : int
-
-logic result2 : int
-
-logic math_simple_abstract__gcd__result1 : int
-
-logic math_simple_abstract__gcd__result2 : int
-
-logic math_simple_abstract__gcd__result3 : int
-
-logic c12 : int
-
-logic math_simple_abstract__gcd__result4 : int
-
-logic c13 : int
-
-logic math_simple_abstract__gcd__result5 : int
-
-logic result3 : bool
-
-logic result4 : bool
-
-axiom H : in_range1(a)
-
-axiom H1 : in_range1(b)
-
-axiom H2 : ((o = min(a, b)) and in_range1(min(a, b)))
-
-axiom H3 : (result = c)
-
-axiom H4 : (c1 = o)
-
-axiom H5 : in_range1(c1)
-
-axiom H6 : ((1 <  c1) -> (((temp___132 = c1) and ((((c1 = c6) and
-  (c7 = c1)) and ((mod(a, c1) = 0) and (mod(b, c1) = 0))) or ((not ((mod(a,
-  c1) = 0) and (mod(b, c1) = 0))) and (((c3 = c6) and (c7 = c3)) and
-  ((((not (mod(a, c1) = 0)) -> (not (divides(c1, a) = true))) and ((mod(a,
-  c1) = 0) -> (not (divides(c1, b) = true)))) and
-  ((forall x2:int. (((c2 <= x2) and (x2 <= min(a, b))) -> (not ((divides(x2,
-   a) = true) and (divides(x2, b) = true))))) and (((1 <= 2147483647) ->
-  in_range1(c2)) and ((((o4 = (c2 - 1)) and in_range1((c2 - 1))) and
-  ((c2 = result1) and (c3 = o4))) and ((not (1 <  c3)) or ((1 <  c3) and
-  ((mod(a, c3) = 0) and (mod(b, c3) = 0)))))))))))) and ((c8 = c6) and
-  (c9 = c7))))
-
-axiom H7 : ((1 <  c1) -> (c10 = c8))
-
-axiom H8 : ((1 <  c1) -> (c11 = c9))
-
-axiom H9 : ((not (1 <  c1)) -> (c1 = c10))
-
-axiom H10 : ((not (1 <  c1)) -> (c11 = c1))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (mod(a, c10) = 0)
+goal WP_parameter_def :
+  (forall c:int. forall o:int. forall temp___154:int. forall o1:int.
+  forall result:int. forall c1:int. forall c2:int. forall result1:int.
+  forall c3:int. forall c4:int. forall c5:int. forall c6:int. forall c7:int.
+  forall c8:int. forall c9:int. (in_range1(a) -> (in_range1(b) ->
+  ((((o = min(a, b)) and in_range1(min(a, b))) and (({ int__content = result
+  } = { int__content = c }) and (c1 = o))) -> (in_range1(c1) ->
+  ((((1 <  c1) and ((((temp___154 = c1) and ((((c1 = c4) and (c5 = c1)) and
+  ((mod(a, c1) = 0) and (mod(b, c1) = 0))) or ((not ((mod(a, c1) = 0) and
+  (mod(b, c1) = 0))) and (((c3 = c4) and (c5 = c3)) and ((((not (mod(a,
+  c1) = 0)) and (not (divides(c1, a) = true))) or ((mod(a, c1) = 0) and
+  (not (divides(c1, b) = true)))) and
+  ((forall x:int. (((c2 <= x) and (x <= min(a, b))) -> (not ((divides(x,
+   a) = true) and (divides(x, b) = true))))) and
+  (((1 <= 2147483647) -> in_range1(c2)) and ((((o1 = (c2 - 1)) and
+  in_range1((c2 - 1))) and ((c2 = result1) and (c3 = o1))) and
+  ((not (1 <  c3)) or ((1 <  c3) and ((mod(a, c3) = 0) and (mod(b,
+  c3) = 0)))))))))))) and (({ int__content = c6 } = { int__content = c4
+  }) and (c7 = c5))) and (({ int__content = c8 } = { int__content = c6 }) and
+  (c9 = c7)))) or ((not (1 <  c1)) and ((c1 = c8) and (c9 = c1)))) -> (mod(a,
+  c8) = 0)))))))

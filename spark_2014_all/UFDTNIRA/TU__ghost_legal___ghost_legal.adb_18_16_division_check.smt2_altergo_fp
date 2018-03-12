@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -284,117 +284,15 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic temp : int
-
-logic ghost_legal__is_prime__result : bool
-
-logic temp___132 : int
-
-logic o : int
-
-logic temp1 : int
-
-logic ghost_legal__is_prime__result1 : bool
-
-logic result : bool
-
-logic ghost_legal__is_prime__result2 : bool
-
-logic result1 : int
-
-logic temp2 : int
-
-logic temp3 : int
-
-logic ghost_legal__is_prime__result3 : bool
-
-logic result2 : bool
-
-logic ghost_legal__is_prime__result4 : bool
-
-logic result3 : int
-
-logic temp4 : int
-
-logic temp5 : int
-
-logic ghost_legal__is_prime__result5 : bool
-
-logic temp6 : int
-
-logic ghost_legal__is_prime__result6 : bool
-
-logic temp7 : int
-
-logic ghost_legal__is_prime__result7 : bool
-
-logic temp8 : int
-
-logic ghost_legal__is_prime__result8 : bool
-
-logic temp9 : int
-
-logic ghost_legal__is_prime__result9 : bool
-
-logic temp10 : int
-
-logic ghost_legal__is_prime__result10 : bool
-
-logic result4 : bool
-
-logic ghost_legal__is_prime__result11 : bool
-
-logic ghost_legal__is_prime__result12 : bool
-
-logic ghost_legal__is_prime__result13 : bool
-
-logic temp11 : int
-
-logic ghost_legal__is_prime__result14 : bool
-
-logic temp12 : int
-
-logic ghost_legal__is_prime__result15 : bool
-
-logic temp13 : int
-
-logic ghost_legal__is_prime__result16 : bool
-
-logic temp14 : int
-
-logic ghost_legal__is_prime__result17 : bool
-
-logic temp15 : int
-
-logic ghost_legal__is_prime__result18 : bool
-
-logic temp16 : int
-
-logic ghost_legal__is_prime__result19 : bool
-
-axiom H : in_range2(x)
-
-axiom H1 : ((0 <= 2147483647) -> in_range2(temp))
-
-axiom H2 : ((mod(x, 2) = 0) -> (is_even(x) = true))
-
-axiom H3 : (not (mod(x, 2) = 0))
-
-axiom H4 : ((not (mod(x, 2) = 0)) ->
-  (ghost_legal__is_prime__result2 = ghost_legal__is_prime__result))
-
-axiom H5 : ((not (mod(x, 2) = 0)) ->
-  (ghost_legal__is_prime__result2 = ghost_legal__is_prime__result1))
-
-axiom H6 : (result1 = temp)
-
-axiom H7 : (temp2 = 2)
-
-axiom H8 : (temp2 <  x)
-
-axiom H9 : (2 <= temp3)
-
-axiom H10 : (((0 <= 2147483647) -> in_range2(temp3)) and (temp3 <  x))
-
  (* File "ghost_legal.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : (not (temp3 = 0))
+goal WP_parameter_def :
+  (forall temp:int. forall ghost_legal__is_prime__result:bool.
+  forall ghost_legal__is_prime__result1:bool.
+  forall ghost_legal__is_prime__result2:bool. forall result:int.
+  forall temp1:int. forall temp2:int. (in_range2(x) -> (((0 <= 2147483647) ->
+  in_range2(temp)) -> (((not (mod(x, 2) = 0)) and
+  ((ghost_legal__is_prime__result2 = ghost_legal__is_prime__result) and
+  (ghost_legal__is_prime__result2 = ghost_legal__is_prime__result1))) -> ((({
+  int__content = result } = { int__content = temp }) and (temp1 = 2)) ->
+  ((temp1 <  x) -> ((2 <= temp2) -> ((((0 <= 2147483647) ->
+  in_range2(temp2)) and (temp2 <  x)) -> (not (temp2 = 0))))))))))

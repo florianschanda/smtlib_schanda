@@ -925,12 +925,6 @@ axiom bv_max_to_uint1 :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int2 : bool -> int
 
 axiom to_int_def2 :
@@ -943,6 +937,12 @@ axiom of_int_def :
   (forall i:int [of_int2(i)]. (((i = 0) -> (of_int2(i) = false)) and
   ((not (i = 0)) -> (of_int2(i) = true))))
 
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
 logic attr__ATTRIBUTE_IMAGE : bool -> us_image
@@ -953,7 +953,15 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type bits_1
 
-predicate in_range1(x: t) = (ule(of_int(0), x) and ule(x, of_int(1)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 1)
+
+predicate in_range1(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 1))
 
@@ -1018,9 +1026,13 @@ axiom inversion_axiom :
 
 axiom range_axiom : (forall x:bits_1 [to_rep(x)]. in_range1(to_rep(x)))
 
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 2)
+
 axiom coerce_axiom :
-  (forall x:t [to_rep(of_rep(x))]. (in_range1(urem(x, of_int(2))) ->
-  (to_rep(of_rep(x)) = urem(x, of_int(2)))))
+  (forall x:t [to_rep(of_rep(x))]. (in_range1(urem(x, rliteral2)) ->
+  (to_rep(of_rep(x)) = urem(x, rliteral2))))
 
 function to_int3(x: bits_1) : int = tqtint(to_rep(x))
 
@@ -1029,7 +1041,11 @@ axiom range_int_axiom :
 
 type bits_2
 
-predicate in_range2(x: t) = (ule(of_int(0), x) and ule(x, of_int(3)))
+logic rliteral3 : t
+
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 3)
+
+predicate in_range2(x: t) = (ule(rliteral, x) and ule(x, rliteral3))
 
 predicate in_range_int1(x: int) = ((0 <= x) and (x <= 3))
 
@@ -1064,9 +1080,13 @@ axiom inversion_axiom1 :
 
 axiom range_axiom1 : (forall x:bits_2 [to_rep1(x)]. in_range2(to_rep1(x)))
 
+logic rliteral4 : t
+
+axiom rliteral_axiom4 : (tqtint(rliteral4) = 4)
+
 axiom coerce_axiom1 :
-  (forall x:t [to_rep1(of_rep1(x))]. (in_range2(urem(x, of_int(4))) ->
-  (to_rep1(of_rep1(x)) = urem(x, of_int(4)))))
+  (forall x:t [to_rep1(of_rep1(x))]. (in_range2(urem(x, rliteral4)) ->
+  (to_rep1(of_rep1(x)) = urem(x, rliteral4))))
 
 function to_int4(x: bits_2) : int = tqtint(to_rep1(x))
 
@@ -1075,7 +1095,11 @@ axiom range_int_axiom1 :
 
 type bits_3
 
-predicate in_range3(x: t) = (ule(of_int(0), x) and ule(x, of_int(7)))
+logic rliteral5 : t
+
+axiom rliteral_axiom5 : (tqtint(rliteral5) = 7)
+
+predicate in_range3(x: t) = (ule(rliteral, x) and ule(x, rliteral5))
 
 predicate in_range_int2(x: int) = ((0 <= x) and (x <= 7))
 
@@ -1110,9 +1134,13 @@ axiom inversion_axiom2 :
 
 axiom range_axiom2 : (forall x:bits_3 [to_rep2(x)]. in_range3(to_rep2(x)))
 
+logic rliteral6 : t
+
+axiom rliteral_axiom6 : (tqtint(rliteral6) = 8)
+
 axiom coerce_axiom2 :
-  (forall x:t [to_rep2(of_rep2(x))]. (in_range3(urem(x, of_int(8))) ->
-  (to_rep2(of_rep2(x)) = urem(x, of_int(8)))))
+  (forall x:t [to_rep2(of_rep2(x))]. (in_range3(urem(x, rliteral6)) ->
+  (to_rep2(of_rep2(x)) = urem(x, rliteral6))))
 
 function to_int5(x: bits_3) : int = tqtint(to_rep2(x))
 
@@ -1121,7 +1149,11 @@ axiom range_int_axiom2 :
 
 type bits_4
 
-predicate in_range4(x: t) = (ule(of_int(0), x) and ule(x, of_int(15)))
+logic rliteral7 : t
+
+axiom rliteral_axiom7 : (tqtint(rliteral7) = 15)
+
+predicate in_range4(x: t) = (ule(rliteral, x) and ule(x, rliteral7))
 
 predicate in_range_int3(x: int) = ((0 <= x) and (x <= 15))
 
@@ -1156,9 +1188,13 @@ axiom inversion_axiom3 :
 
 axiom range_axiom3 : (forall x:bits_4 [to_rep3(x)]. in_range4(to_rep3(x)))
 
+logic rliteral8 : t
+
+axiom rliteral_axiom8 : (tqtint(rliteral8) = 16)
+
 axiom coerce_axiom3 :
-  (forall x:t [to_rep3(of_rep3(x))]. (in_range4(urem(x, of_int(16))) ->
-  (to_rep3(of_rep3(x)) = urem(x, of_int(16)))))
+  (forall x:t [to_rep3(of_rep3(x))]. (in_range4(urem(x, rliteral8)) ->
+  (to_rep3(of_rep3(x)) = urem(x, rliteral8))))
 
 function to_int6(x: bits_4) : int = tqtint(to_rep3(x))
 
@@ -1167,7 +1203,11 @@ axiom range_int_axiom3 :
 
 type bits_5
 
-predicate in_range5(x: t) = (ule(of_int(0), x) and ule(x, of_int(31)))
+logic rliteral9 : t
+
+axiom rliteral_axiom9 : (tqtint(rliteral9) = 31)
+
+predicate in_range5(x: t) = (ule(rliteral, x) and ule(x, rliteral9))
 
 predicate in_range_int4(x: int) = ((0 <= x) and (x <= 31))
 
@@ -1202,9 +1242,13 @@ axiom inversion_axiom4 :
 
 axiom range_axiom4 : (forall x:bits_5 [to_rep4(x)]. in_range5(to_rep4(x)))
 
+logic rliteral10 : t
+
+axiom rliteral_axiom10 : (tqtint(rliteral10) = 32)
+
 axiom coerce_axiom4 :
-  (forall x:t [to_rep4(of_rep4(x))]. (in_range5(urem(x, of_int(32))) ->
-  (to_rep4(of_rep4(x)) = urem(x, of_int(32)))))
+  (forall x:t [to_rep4(of_rep4(x))]. (in_range5(urem(x, rliteral10)) ->
+  (to_rep4(of_rep4(x)) = urem(x, rliteral10))))
 
 function to_int7(x: bits_5) : int = tqtint(to_rep4(x))
 
@@ -1213,7 +1257,11 @@ axiom range_int_axiom4 :
 
 type bits_7
 
-predicate in_range6(x: t) = (ule(of_int(0), x) and ule(x, of_int(127)))
+logic rliteral11 : t
+
+axiom rliteral_axiom11 : (tqtint(rliteral11) = 127)
+
+predicate in_range6(x: t) = (ule(rliteral, x) and ule(x, rliteral11))
 
 predicate in_range_int5(x: int) = ((0 <= x) and (x <= 127))
 
@@ -1248,9 +1296,13 @@ axiom inversion_axiom5 :
 
 axiom range_axiom5 : (forall x:bits_7 [to_rep5(x)]. in_range6(to_rep5(x)))
 
+logic rliteral12 : t
+
+axiom rliteral_axiom12 : (tqtint(rliteral12) = 128)
+
 axiom coerce_axiom5 :
-  (forall x:t [to_rep5(of_rep5(x))]. (in_range6(urem(x, of_int(128))) ->
-  (to_rep5(of_rep5(x)) = urem(x, of_int(128)))))
+  (forall x:t [to_rep5(of_rep5(x))]. (in_range6(urem(x, rliteral12)) ->
+  (to_rep5(of_rep5(x)) = urem(x, rliteral12))))
 
 function to_int8(x: bits_7) : int = tqtint(to_rep5(x))
 
@@ -1302,7 +1354,15 @@ axiom range_int_axiom6 :
 
 type bits_9
 
-predicate in_range7(x: t1) = (ule1(of_int1(0), x) and ule1(x, of_int1(511)))
+logic rliteral13 : t1
+
+axiom rliteral_axiom13 : (tqtint1(rliteral13) = 0)
+
+logic rliteral14 : t1
+
+axiom rliteral_axiom14 : (tqtint1(rliteral14) = 511)
+
+predicate in_range7(x: t1) = (ule1(rliteral13, x) and ule1(x, rliteral14))
 
 predicate in_range_int6(x: int) = ((0 <= x) and (x <= 511))
 
@@ -1337,9 +1397,13 @@ axiom inversion_axiom7 :
 
 axiom range_axiom7 : (forall x:bits_9 [to_rep7(x)]. in_range7(to_rep7(x)))
 
+logic rliteral15 : t1
+
+axiom rliteral_axiom15 : (tqtint1(rliteral15) = 512)
+
 axiom coerce_axiom7 :
-  (forall x:t1 [to_rep7(of_rep7(x))]. (in_range7(urem1(x, of_int1(512))) ->
-  (to_rep7(of_rep7(x)) = urem1(x, of_int1(512)))))
+  (forall x:t1 [to_rep7(of_rep7(x))]. (in_range7(urem1(x, rliteral15)) ->
+  (to_rep7(of_rep7(x)) = urem1(x, rliteral15))))
 
 function to_int10(x: bits_9) : int = tqtint1(to_rep7(x))
 
@@ -1348,7 +1412,11 @@ axiom range_int_axiom7 :
 
 type bits_10
 
-predicate in_range8(x: t1) = (ule1(of_int1(0), x) and ule1(x, of_int1(1023)))
+logic rliteral16 : t1
+
+axiom rliteral_axiom16 : (tqtint1(rliteral16) = 1023)
+
+predicate in_range8(x: t1) = (ule1(rliteral13, x) and ule1(x, rliteral16))
 
 predicate in_range_int7(x: int) = ((0 <= x) and (x <= 1023))
 
@@ -1383,9 +1451,13 @@ axiom inversion_axiom8 :
 
 axiom range_axiom8 : (forall x:bits_10 [to_rep8(x)]. in_range8(to_rep8(x)))
 
+logic rliteral17 : t1
+
+axiom rliteral_axiom17 : (tqtint1(rliteral17) = 1024)
+
 axiom coerce_axiom8 :
-  (forall x:t1 [to_rep8(of_rep8(x))]. (in_range8(urem1(x, of_int1(1024))) ->
-  (to_rep8(of_rep8(x)) = urem1(x, of_int1(1024)))))
+  (forall x:t1 [to_rep8(of_rep8(x))]. (in_range8(urem1(x, rliteral17)) ->
+  (to_rep8(of_rep8(x)) = urem1(x, rliteral17))))
 
 function to_int11(x: bits_10) : int = tqtint1(to_rep8(x))
 
@@ -3784,24 +3856,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,bits_32) farray, int, int, (int,bits_32) farray, int,
-  int -> (int,bits_32) farray
-
-axiom concat_def :
-  (forall a:(int,bits_32) farray. forall b:(int,bits_32) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : bits_32, int -> (int,bits_32) farray
-
-axiom singleton_def :
-  (forall v:bits_32.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq29 : (int,bits_32) farray, int, int, (int,bits_32) farray, int,
   int -> bool
 
@@ -3812,17 +3866,17 @@ axiom bool_eq_def28 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_184:int. ((((a__first <= temp___idx_184) and
-  (temp___idx_184 <= a__last)) and
-  (to_rep18((a[temp___idx_184])) = to_rep18((b[((b__first - a__first) + temp___idx_184)])))) or
-  (not ((a__first <= temp___idx_184) and (temp___idx_184 <= a__last)))))) ->
+  (forall temp___idx_206:int. ((((a__first <= temp___idx_206) and
+  (temp___idx_206 <= a__last)) and
+  (to_rep18((a[temp___idx_206])) = to_rep18((b[((b__first - a__first) + temp___idx_206)])))) or
+  (not ((a__first <= temp___idx_206) and (temp___idx_206 <= a__last)))))) ->
   (bool_eq29(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_184:int. (((a__first <= temp___idx_184) and
-  (temp___idx_184 <= a__last)) ->
-  (to_rep18((a[temp___idx_184])) = to_rep18((b[((b__first - a__first) + temp___idx_184)]))))))) ->
+  (forall temp___idx_206:int. (((a__first <= temp___idx_206) and
+  (temp___idx_206 <= a__last)) ->
+  (to_rep18((a[temp___idx_206])) = to_rep18((b[((b__first - a__first) + temp___idx_206)]))))))) ->
   (bool_eq29(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -3832,39 +3886,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_184:int. (((a__first <= temp___idx_184) and
-  (temp___idx_184 <= a__last)) ->
-  (to_rep18((a[temp___idx_184])) = to_rep18((b[((b__first - a__first) + temp___idx_184)])))))))))
-
-logic compare : (int,bits_32) farray, int, int, (int,bits_32) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,bits_32) farray. forall b:(int,bits_32) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq29(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,bits_32) farray. forall b:(int,bits_32) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq29(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and ult2(to_rep18((a[(i + 1)])),
-  to_rep18((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,bits_32) farray. forall b:(int,bits_32) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq29(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and ugt2(to_rep18((a[(j + 1)])),
-  to_rep18((b[(i + 1)]))))))))))))
+  (forall temp___idx_206:int. (((a__first <= temp___idx_206) and
+  (temp___idx_206 <= a__last)) ->
+  (to_rep18((a[temp___idx_206])) = to_rep18((b[((b__first - a__first) + temp___idx_206)])))))))))
 
 type us_split_fields10 = { rec__decadriver__driver_type__part_id : bits_32;
 rec__decadriver__driver_type__lot_id : bits_32;
@@ -4190,12 +4214,7 @@ type driver_type__ref = { driver_type__content : us_rep5
 function driver_type__ref___projection(a: driver_type__ref) : us_rep5 =
   (a).driver_type__content
 
-logic temp___4490 : t2 -> (int,bits_32) farray
-
-axiom def_axiom :
-  (forall temp___4492:t2.
-  (forall temp___4493:int.
-  ((temp___4490(temp___4492)[temp___4493]) = of_rep18(temp___4492))))
+logic temp___4981 : t2 -> (int,bits_32) farray
 
 logic config : channel_number
 
@@ -4244,24 +4263,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,bits_16) farray, int, int, (int,bits_16) farray, int,
-  int -> (int,bits_16) farray
-
-axiom concat_def1 :
-  (forall a:(int,bits_16) farray. forall b:(int,bits_16) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : bits_16, int -> (int,bits_16) farray
-
-axiom singleton_def1 :
-  (forall v:bits_16.
-  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq30 : (int,bits_16) farray, int, int, (int,bits_16) farray, int,
   int -> bool
 
@@ -4272,17 +4273,17 @@ axiom bool_eq_def29 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_185:int. ((((a__first <= temp___idx_185) and
-  (temp___idx_185 <= a__last)) and
-  (to_rep9((a[temp___idx_185])) = to_rep9((b[((b__first - a__first) + temp___idx_185)])))) or
-  (not ((a__first <= temp___idx_185) and (temp___idx_185 <= a__last)))))) ->
+  (forall temp___idx_207:int. ((((a__first <= temp___idx_207) and
+  (temp___idx_207 <= a__last)) and
+  (to_rep9((a[temp___idx_207])) = to_rep9((b[((b__first - a__first) + temp___idx_207)])))) or
+  (not ((a__first <= temp___idx_207) and (temp___idx_207 <= a__last)))))) ->
   (bool_eq30(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_185:int. (((a__first <= temp___idx_185) and
-  (temp___idx_185 <= a__last)) ->
-  (to_rep9((a[temp___idx_185])) = to_rep9((b[((b__first - a__first) + temp___idx_185)]))))))) ->
+  (forall temp___idx_207:int. (((a__first <= temp___idx_207) and
+  (temp___idx_207 <= a__last)) ->
+  (to_rep9((a[temp___idx_207])) = to_rep9((b[((b__first - a__first) + temp___idx_207)]))))))) ->
   (bool_eq30(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -4292,37 +4293,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_185:int. (((a__first <= temp___idx_185) and
-  (temp___idx_185 <= a__last)) ->
-  (to_rep9((a[temp___idx_185])) = to_rep9((b[((b__first - a__first) + temp___idx_185)])))))))))
-
-logic compare1 : (int,bits_16) farray, int, int, (int,bits_16) farray, int,
-  int -> int
-
-axiom compare_def_eq1 :
-  (forall a:(int,bits_16) farray. forall b:(int,bits_16) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq30(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt1 :
-  (forall a:(int,bits_16) farray. forall b:(int,bits_16) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq30(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and ult1(to_rep9((a[(i + 1)])), to_rep9((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt1 :
-  (forall a:(int,bits_16) farray. forall b:(int,bits_16) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare1(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq30(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and ugt1(to_rep9((a[(j + 1)])), to_rep9((b[(i + 1)]))))))))))))
+  (forall temp___idx_207:int. (((a__first <= temp___idx_207) and
+  (temp___idx_207 <= a__last)) ->
+  (to_rep9((a[temp___idx_207])) = to_rep9((b[((b__first - a__first) + temp___idx_207)])))))))))
 
 logic lde_replica_coeffs : (int,bits_16) farray
 
@@ -4332,2284 +4305,501 @@ logic decadriver__lde_replica_coeffs__aggregate_def : t1, t1, t1, t1, t1, t1,
   t1, t1, t1, t1, t1, t1, t1, t1, t1, t1, t1, t1, t1, t1, t1, t1, t1,
   t1 -> (int,bits_16) farray
 
-axiom def_axiom1 :
-  (forall temp___187:t1. forall temp___188:t1. forall temp___189:t1.
-  forall temp___190:t1. forall temp___191:t1. forall temp___192:t1.
-  forall temp___193:t1. forall temp___194:t1. forall temp___195:t1.
-  forall temp___196:t1. forall temp___197:t1. forall temp___198:t1.
-  forall temp___199:t1. forall temp___200:t1. forall temp___201:t1.
-  forall temp___202:t1. forall temp___203:t1. forall temp___204:t1.
-  forall temp___205:t1. forall temp___206:t1. forall temp___207:t1.
-  forall temp___208:t1. forall temp___209:t1. forall temp___210:t1.
-  (((((((((((((((((((((((((decadriver__lde_replica_coeffs__aggregate_def(temp___187,
-  temp___188, temp___189, temp___190, temp___191, temp___192, temp___193,
-  temp___194, temp___195, temp___196, temp___197, temp___198, temp___199,
-  temp___200, temp___201, temp___202, temp___203, temp___204, temp___205,
-  temp___206, temp___207, temp___208, temp___209,
-  temp___210)[1]) = of_rep9(temp___187)) and
-  ((decadriver__lde_replica_coeffs__aggregate_def(temp___187, temp___188,
-  temp___189, temp___190, temp___191, temp___192, temp___193, temp___194,
-  temp___195, temp___196, temp___197, temp___198, temp___199, temp___200,
-  temp___201, temp___202, temp___203, temp___204, temp___205, temp___206,
-  temp___207, temp___208, temp___209,
-  temp___210)[2]) = of_rep9(temp___188))) and
-  ((decadriver__lde_replica_coeffs__aggregate_def(temp___187, temp___188,
-  temp___189, temp___190, temp___191, temp___192, temp___193, temp___194,
-  temp___195, temp___196, temp___197, temp___198, temp___199, temp___200,
-  temp___201, temp___202, temp___203, temp___204, temp___205, temp___206,
-  temp___207, temp___208, temp___209,
-  temp___210)[3]) = of_rep9(temp___189))) and
-  ((decadriver__lde_replica_coeffs__aggregate_def(temp___187, temp___188,
-  temp___189, temp___190, temp___191, temp___192, temp___193, temp___194,
-  temp___195, temp___196, temp___197, temp___198, temp___199, temp___200,
-  temp___201, temp___202, temp___203, temp___204, temp___205, temp___206,
-  temp___207, temp___208, temp___209,
-  temp___210)[4]) = of_rep9(temp___190))) and
-  ((decadriver__lde_replica_coeffs__aggregate_def(temp___187, temp___188,
-  temp___189, temp___190, temp___191, temp___192, temp___193, temp___194,
-  temp___195, temp___196, temp___197, temp___198, temp___199, temp___200,
-  temp___201, temp___202, temp___203, temp___204, temp___205, temp___206,
-  temp___207, temp___208, temp___209,
-  temp___210)[5]) = of_rep9(temp___191))) and
-  ((decadriver__lde_replica_coeffs__aggregate_def(temp___187, temp___188,
-  temp___189, temp___190, temp___191, temp___192, temp___193, temp___194,
-  temp___195, temp___196, temp___197, temp___198, temp___199, temp___200,
-  temp___201, temp___202, temp___203, temp___204, temp___205, temp___206,
-  temp___207, temp___208, temp___209,
-  temp___210)[6]) = of_rep9(temp___192))) and
-  ((decadriver__lde_replica_coeffs__aggregate_def(temp___187, temp___188,
-  temp___189, temp___190, temp___191, temp___192, temp___193, temp___194,
-  temp___195, temp___196, temp___197, temp___198, temp___199, temp___200,
-  temp___201, temp___202, temp___203, temp___204, temp___205, temp___206,
-  temp___207, temp___208, temp___209,
-  temp___210)[7]) = of_rep9(temp___193))) and
-  ((decadriver__lde_replica_coeffs__aggregate_def(temp___187, temp___188,
-  temp___189, temp___190, temp___191, temp___192, temp___193, temp___194,
-  temp___195, temp___196, temp___197, temp___198, temp___199, temp___200,
-  temp___201, temp___202, temp___203, temp___204, temp___205, temp___206,
-  temp___207, temp___208, temp___209,
-  temp___210)[8]) = of_rep9(temp___194))) and
-  ((decadriver__lde_replica_coeffs__aggregate_def(temp___187, temp___188,
-  temp___189, temp___190, temp___191, temp___192, temp___193, temp___194,
-  temp___195, temp___196, temp___197, temp___198, temp___199, temp___200,
-  temp___201, temp___202, temp___203, temp___204, temp___205, temp___206,
-  temp___207, temp___208, temp___209,
-  temp___210)[9]) = of_rep9(temp___195))) and
-  ((decadriver__lde_replica_coeffs__aggregate_def(temp___187, temp___188,
-  temp___189, temp___190, temp___191, temp___192, temp___193, temp___194,
-  temp___195, temp___196, temp___197, temp___198, temp___199, temp___200,
-  temp___201, temp___202, temp___203, temp___204, temp___205, temp___206,
-  temp___207, temp___208, temp___209,
-  temp___210)[10]) = of_rep9(temp___196))) and
-  ((decadriver__lde_replica_coeffs__aggregate_def(temp___187, temp___188,
-  temp___189, temp___190, temp___191, temp___192, temp___193, temp___194,
-  temp___195, temp___196, temp___197, temp___198, temp___199, temp___200,
-  temp___201, temp___202, temp___203, temp___204, temp___205, temp___206,
-  temp___207, temp___208, temp___209,
-  temp___210)[11]) = of_rep9(temp___197))) and
-  ((decadriver__lde_replica_coeffs__aggregate_def(temp___187, temp___188,
-  temp___189, temp___190, temp___191, temp___192, temp___193, temp___194,
-  temp___195, temp___196, temp___197, temp___198, temp___199, temp___200,
-  temp___201, temp___202, temp___203, temp___204, temp___205, temp___206,
-  temp___207, temp___208, temp___209,
-  temp___210)[12]) = of_rep9(temp___198))) and
-  ((decadriver__lde_replica_coeffs__aggregate_def(temp___187, temp___188,
-  temp___189, temp___190, temp___191, temp___192, temp___193, temp___194,
-  temp___195, temp___196, temp___197, temp___198, temp___199, temp___200,
-  temp___201, temp___202, temp___203, temp___204, temp___205, temp___206,
-  temp___207, temp___208, temp___209,
-  temp___210)[13]) = of_rep9(temp___199))) and
-  ((decadriver__lde_replica_coeffs__aggregate_def(temp___187, temp___188,
-  temp___189, temp___190, temp___191, temp___192, temp___193, temp___194,
-  temp___195, temp___196, temp___197, temp___198, temp___199, temp___200,
-  temp___201, temp___202, temp___203, temp___204, temp___205, temp___206,
-  temp___207, temp___208, temp___209,
-  temp___210)[14]) = of_rep9(temp___200))) and
-  ((decadriver__lde_replica_coeffs__aggregate_def(temp___187, temp___188,
-  temp___189, temp___190, temp___191, temp___192, temp___193, temp___194,
-  temp___195, temp___196, temp___197, temp___198, temp___199, temp___200,
-  temp___201, temp___202, temp___203, temp___204, temp___205, temp___206,
-  temp___207, temp___208, temp___209,
-  temp___210)[15]) = of_rep9(temp___201))) and
-  ((decadriver__lde_replica_coeffs__aggregate_def(temp___187, temp___188,
-  temp___189, temp___190, temp___191, temp___192, temp___193, temp___194,
-  temp___195, temp___196, temp___197, temp___198, temp___199, temp___200,
-  temp___201, temp___202, temp___203, temp___204, temp___205, temp___206,
-  temp___207, temp___208, temp___209,
-  temp___210)[16]) = of_rep9(temp___202))) and
-  ((decadriver__lde_replica_coeffs__aggregate_def(temp___187, temp___188,
-  temp___189, temp___190, temp___191, temp___192, temp___193, temp___194,
-  temp___195, temp___196, temp___197, temp___198, temp___199, temp___200,
-  temp___201, temp___202, temp___203, temp___204, temp___205, temp___206,
-  temp___207, temp___208, temp___209,
-  temp___210)[17]) = of_rep9(temp___203))) and
-  ((decadriver__lde_replica_coeffs__aggregate_def(temp___187, temp___188,
-  temp___189, temp___190, temp___191, temp___192, temp___193, temp___194,
-  temp___195, temp___196, temp___197, temp___198, temp___199, temp___200,
-  temp___201, temp___202, temp___203, temp___204, temp___205, temp___206,
-  temp___207, temp___208, temp___209,
-  temp___210)[18]) = of_rep9(temp___204))) and
-  ((decadriver__lde_replica_coeffs__aggregate_def(temp___187, temp___188,
-  temp___189, temp___190, temp___191, temp___192, temp___193, temp___194,
-  temp___195, temp___196, temp___197, temp___198, temp___199, temp___200,
-  temp___201, temp___202, temp___203, temp___204, temp___205, temp___206,
-  temp___207, temp___208, temp___209,
-  temp___210)[19]) = of_rep9(temp___205))) and
-  ((decadriver__lde_replica_coeffs__aggregate_def(temp___187, temp___188,
-  temp___189, temp___190, temp___191, temp___192, temp___193, temp___194,
-  temp___195, temp___196, temp___197, temp___198, temp___199, temp___200,
-  temp___201, temp___202, temp___203, temp___204, temp___205, temp___206,
-  temp___207, temp___208, temp___209,
-  temp___210)[20]) = of_rep9(temp___206))) and
-  ((decadriver__lde_replica_coeffs__aggregate_def(temp___187, temp___188,
-  temp___189, temp___190, temp___191, temp___192, temp___193, temp___194,
-  temp___195, temp___196, temp___197, temp___198, temp___199, temp___200,
-  temp___201, temp___202, temp___203, temp___204, temp___205, temp___206,
-  temp___207, temp___208, temp___209,
-  temp___210)[21]) = of_rep9(temp___207))) and
-  ((decadriver__lde_replica_coeffs__aggregate_def(temp___187, temp___188,
-  temp___189, temp___190, temp___191, temp___192, temp___193, temp___194,
-  temp___195, temp___196, temp___197, temp___198, temp___199, temp___200,
-  temp___201, temp___202, temp___203, temp___204, temp___205, temp___206,
-  temp___207, temp___208, temp___209,
-  temp___210)[22]) = of_rep9(temp___208))) and
-  ((decadriver__lde_replica_coeffs__aggregate_def(temp___187, temp___188,
-  temp___189, temp___190, temp___191, temp___192, temp___193, temp___194,
-  temp___195, temp___196, temp___197, temp___198, temp___199, temp___200,
-  temp___201, temp___202, temp___203, temp___204, temp___205, temp___206,
-  temp___207, temp___208, temp___209,
-  temp___210)[23]) = of_rep9(temp___209))) and
-  ((decadriver__lde_replica_coeffs__aggregate_def(temp___187, temp___188,
-  temp___189, temp___190, temp___191, temp___192, temp___193, temp___194,
-  temp___195, temp___196, temp___197, temp___198, temp___199, temp___200,
-  temp___201, temp___202, temp___203, temp___204, temp___205, temp___206,
-  temp___207, temp___208, temp___209,
-  temp___210)[24]) = of_rep9(temp___210))))
-
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic rliteral18 : t1
+
+axiom rliteral_axiom18 : (tqtint1(rliteral18) = 22938)
+
+logic rliteral19 : t1
+
+axiom rliteral_axiom19 : (tqtint1(rliteral19) = 20972)
+
+logic rliteral20 : t1
+
+axiom rliteral_axiom20 : (tqtint1(rliteral20) = 17039)
+
+logic rliteral21 : t1
+
+axiom rliteral_axiom21 : (tqtint1(rliteral21) = 17695)
+
+logic rliteral22 : t1
+
+axiom rliteral_axiom22 : (tqtint1(rliteral22) = 11796)
+
+logic rliteral23 : t1
+
+axiom rliteral_axiom23 : (tqtint1(rliteral23) = 32768)
+
+logic rliteral24 : t1
+
+axiom rliteral_axiom24 : (tqtint1(rliteral24) = 10486)
+
+logic rliteral25 : t1
+
+axiom rliteral_axiom25 : (tqtint1(rliteral25) = 13107)
+
+logic rliteral26 : t1
+
+axiom rliteral_axiom26 : (tqtint1(rliteral26) = 15073)
+
+logic rliteral27 : t1
+
+axiom rliteral_axiom27 : (tqtint1(rliteral27) = 15729)
+
+logic rliteral28 : t1
+
+axiom rliteral_axiom28 : (tqtint1(rliteral28) = 13763)
+
+logic rliteral29 : t1
+
+axiom rliteral_axiom29 : (tqtint1(rliteral29) = 18350)
+
+logic rliteral30 : t1
+
+axiom rliteral_axiom30 : (tqtint1(rliteral30) = 14418)
+
+logic rliteral31 : t1
+
+axiom rliteral_axiom31 : (tqtint1(rliteral31) = 12452)
+
 axiom lde_replica_coeffs__def_axiom :
-  (lde_replica_coeffs = decadriver__lde_replica_coeffs__aggregate_def(of_int1(22938),
-  of_int1(22938), of_int1(20972), of_int1(17039), of_int1(17695),
-  of_int1(11796), of_int1(32768), of_int1(20972), of_int1(10486),
-  of_int1(13107), of_int1(15073), of_int1(15729), of_int1(15073),
-  of_int1(13763), of_int1(17695), of_int1(13763), of_int1(13107),
-  of_int1(13763), of_int1(13763), of_int1(18350), of_int1(15073),
-  of_int1(14418), of_int1(12452), of_int1(14418)))
-
-logic lde_repc_reg__split_fields : bits_16
-
-logic sfd_timeout : int
-
-logic self__ : bits_32
-
-logic self__1 : bits_32
-
-logic self__2 : bits_16
-
-logic self__3 : bits_16
-
-logic self__4 : bits_5
-
-logic self__5 : (int,bits_32) farray
-
-logic self__6 : bool
-
-logic self__7 : bits_1
-
-logic self__8 : bits_1
-
-logic self__9 : bits_1
-
-logic self__10 : bits_1
-
-logic self__11 : bits_1
-
-logic self__12 : bits_1
-
-logic self__13 : bits_1
-
-logic self__14 : bits_1
-
-logic self__15 : bits_1
-
-logic self__16 : bits_1
-
-logic self__17 : bits_1
-
-logic self__18 : bits_1
-
-logic self__19 : bits_1
-
-logic self__20 : bits_1
-
-logic self__21 : bits_1
-
-logic self__22 : bits_1
-
-logic self__23 : bits_2
-
-logic self__24 : bits_1
-
-logic self__25 : bits_1
-
-logic self__26 : bits_1
-
-logic self__27 : bits_1
-
-logic self__28 : bits_1
-
-logic self__29 : bits_1
-
-logic self__30 : bits_3
-
-logic self__31 : bits_5
-
-logic self__32 : bool
-
-logic self__33 : bool
-
-logic self__34 : bool
-
-logic self__35 : bool
-
-logic self__36 : bool
-
-logic self__37 : bool
-
-logic self__38 : bool
-
-logic o : bits_16
-
-logic o1 : bits_16
-
-logic temp___4643 : bits_16
-
-logic o2 : bits_1
-
-logic o3 : bits_1
-
-logic o4 : bits_1
-
-logic o5 : bits_1
-
-logic o6 : bits_1
-
-logic o7 : bits_1
-
-logic o8 : bits_1
-
-logic o9 : bits_1
-
-logic o10 : bits_1
-
-logic o11 : bits_1
-
-logic o12 : bits_1
-
-logic o13 : bits_1
-
-logic o14 : bits_1
-
-logic o15 : bits_1
-
-logic o16 : bits_1
-
-logic o17 : bits_1
-
-logic o18 : bits_1
-
-logic o19 : bits_2
-
-logic o20 : bits_1
-
-logic o21 : bits_1
-
-logic o22 : bits_1
-
-logic o23 : bits_1
-
-logic o24 : bits_1
-
-logic o25 : bits_1
-
-logic o26 : bits_3
-
-logic o27 : bits_5
-
-logic o28 : bits_1
-
-logic o29 : bits_1
-
-logic o30 : bits_1
-
-logic o31 : bits_1
-
-logic o32 : bits_1
-
-logic o33 : bits_1
-
-logic o34 : bits_1
-
-logic o35 : bits_1
-
-logic o36 : bits_1
-
-logic o37 : bits_1
-
-logic o38 : bits_1
-
-logic o39 : bits_1
-
-logic o40 : bits_1
-
-logic o41 : bits_1
-
-logic o42 : bits_1
-
-logic o43 : bits_1
-
-logic o44 : bits_2
-
-logic o45 : bits_1
-
-logic o46 : bits_1
-
-logic o47 : bits_1
-
-logic o48 : bits_1
-
-logic o49 : bits_1
-
-logic o50 : bits_1
-
-logic o51 : bits_3
-
-logic o52 : bits_5
-
-logic o53 : bits_32
-
-logic o54 : bits_32
-
-logic o55 : bits_16
-
-logic o56 : bits_16
-
-logic o57 : bits_5
-
-logic o58 : (int,bits_32) farray
-
-logic o59 : bool
-
-logic o60 : bits_1
-
-logic o61 : bits_1
-
-logic o62 : bits_1
-
-logic o63 : bits_1
-
-logic o64 : bits_1
-
-logic o65 : bits_1
-
-logic o66 : bits_1
-
-logic o67 : bits_1
-
-logic o68 : bits_1
-
-logic o69 : bits_1
-
-logic o70 : bits_1
-
-logic o71 : bits_1
-
-logic o72 : bits_1
-
-logic o73 : bits_1
-
-logic o74 : bits_1
-
-logic o75 : bits_1
-
-logic o76 : bits_2
-
-logic o77 : bits_1
-
-logic o78 : bits_1
-
-logic o79 : bits_1
-
-logic o80 : bits_1
-
-logic o81 : bits_1
-
-logic o82 : bits_1
-
-logic o83 : bits_3
-
-logic o84 : bits_5
-
-logic o85 : bool
-
-logic o86 : bool
-
-logic o87 : bool
-
-logic o88 : bool
-
-logic o89 : bool
-
-logic o90 : bool
-
-logic o91 : bool
-
-logic o92 : bits_32
-
-logic o93 : bits_32
-
-logic o94 : bits_16
-
-logic o95 : bits_16
-
-logic o96 : bits_5
-
-logic o97 : (int,bits_32) farray
-
-logic o98 : bool
-
-logic o99 : bits_1
-
-logic o100 : bits_1
-
-logic o101 : bits_1
-
-logic o102 : bits_1
-
-logic o103 : bits_1
-
-logic o104 : bits_1
-
-logic o105 : bits_1
-
-logic o106 : bits_1
-
-logic o107 : bits_1
-
-logic o108 : bits_1
-
-logic o109 : bits_1
-
-logic o110 : bits_1
-
-logic o111 : bits_1
-
-logic o112 : bits_1
-
-logic o113 : bits_1
-
-logic o114 : bits_1
-
-logic o115 : bits_2
-
-logic o116 : bits_1
-
-logic o117 : bits_1
-
-logic o118 : bits_1
-
-logic o119 : bits_1
-
-logic o120 : bits_1
-
-logic o121 : bits_1
-
-logic o122 : bits_3
-
-logic o123 : bits_5
-
-logic o124 : bool
-
-logic o125 : bool
-
-logic o126 : bool
-
-logic o127 : bool
-
-logic o128 : bool
-
-logic o129 : bool
-
-logic o130 : bool
-
-logic o131 : bits_16
-
-logic o132 : bits_16
-
-logic temp___4647 : bits_16
-
-logic o133 : bits_1
-
-logic o134 : bits_1
-
-logic o135 : bits_1
-
-logic o136 : bits_1
-
-logic o137 : bits_1
-
-logic o138 : bits_1
-
-logic o139 : bits_1
-
-logic o140 : bits_1
-
-logic o141 : bits_1
-
-logic o142 : bits_1
-
-logic o143 : bits_1
-
-logic o144 : bits_1
-
-logic o145 : bits_1
-
-logic o146 : bits_1
-
-logic o147 : bits_1
-
-logic o148 : bits_1
-
-logic o149 : bits_1
-
-logic o150 : bits_2
-
-logic o151 : bits_1
-
-logic o152 : bits_1
-
-logic o153 : bits_1
-
-logic o154 : bits_1
-
-logic o155 : bits_1
-
-logic o156 : bits_1
-
-logic o157 : bits_3
-
-logic o158 : bits_5
-
-logic o159 : bits_1
-
-logic o160 : bits_1
-
-logic o161 : bits_1
-
-logic o162 : bits_1
-
-logic o163 : bits_1
-
-logic o164 : bits_1
-
-logic o165 : bits_1
-
-logic o166 : bits_1
-
-logic o167 : bits_1
-
-logic o168 : bits_1
-
-logic o169 : bits_1
-
-logic o170 : bits_1
-
-logic o171 : bits_1
-
-logic o172 : bits_1
-
-logic o173 : bits_1
-
-logic o174 : bits_1
-
-logic o175 : bits_2
-
-logic o176 : bits_1
-
-logic o177 : bits_1
-
-logic o178 : bits_1
-
-logic o179 : bits_1
-
-logic o180 : bits_1
-
-logic o181 : bits_1
-
-logic o182 : bits_3
-
-logic o183 : bits_5
-
-logic o184 : bits_32
-
-logic o185 : bits_32
-
-logic o186 : bits_16
-
-logic o187 : bits_16
-
-logic o188 : bits_5
-
-logic o189 : (int,bits_32) farray
-
-logic o190 : bool
-
-logic o191 : bits_1
-
-logic o192 : bits_1
-
-logic o193 : bits_1
-
-logic o194 : bits_1
-
-logic o195 : bits_1
-
-logic o196 : bits_1
-
-logic o197 : bits_1
-
-logic o198 : bits_1
-
-logic o199 : bits_1
-
-logic o200 : bits_1
-
-logic o201 : bits_1
-
-logic o202 : bits_1
-
-logic o203 : bits_1
-
-logic o204 : bits_1
-
-logic o205 : bits_1
-
-logic o206 : bits_1
-
-logic o207 : bits_2
-
-logic o208 : bits_1
-
-logic o209 : bits_1
-
-logic o210 : bits_1
-
-logic o211 : bits_1
-
-logic o212 : bits_1
-
-logic o213 : bits_1
-
-logic o214 : bits_3
-
-logic o215 : bits_5
-
-logic o216 : bool
-
-logic o217 : bool
-
-logic o218 : bool
-
-logic o219 : bool
-
-logic o220 : bool
-
-logic o221 : bool
-
-logic o222 : bool
-
-logic o223 : bits_32
-
-logic o224 : bits_32
-
-logic o225 : bits_16
-
-logic o226 : bits_16
-
-logic o227 : bits_5
-
-logic o228 : (int,bits_32) farray
-
-logic o229 : bool
-
-logic o230 : bits_1
-
-logic o231 : bits_1
-
-logic o232 : bits_1
-
-logic o233 : bits_1
-
-logic o234 : bits_1
-
-logic o235 : bits_1
-
-logic o236 : bits_1
-
-logic o237 : bits_1
-
-logic o238 : bits_1
-
-logic o239 : bits_1
-
-logic o240 : bits_1
-
-logic o241 : bits_1
-
-logic o242 : bits_1
-
-logic o243 : bits_1
-
-logic o244 : bits_1
-
-logic o245 : bits_1
-
-logic o246 : bits_2
-
-logic o247 : bits_1
-
-logic o248 : bits_1
-
-logic o249 : bits_1
-
-logic o250 : bits_1
-
-logic o251 : bits_1
-
-logic o252 : bits_1
-
-logic o253 : bits_3
-
-logic o254 : bits_5
-
-logic o255 : bool
-
-logic o256 : bool
-
-logic o257 : bool
-
-logic o258 : bool
-
-logic o259 : bool
-
-logic o260 : bool
-
-logic o261 : bool
-
-logic o262 : int
-
-logic o263 : t
-
-logic o264 : bits_2
-
-logic o265 : bits_1
-
-logic o266 : bits_1
-
-logic o267 : bits_1
-
-logic o268 : bits_1
-
-logic o269 : bits_1
-
-logic o270 : bits_1
-
-logic o271 : bits_1
-
-logic o272 : bits_1
-
-logic o273 : bits_1
-
-logic o274 : bits_1
-
-logic o275 : bits_1
-
-logic o276 : bits_1
-
-logic o277 : bits_1
-
-logic o278 : bits_1
-
-logic o279 : bits_1
-
-logic o280 : bits_1
-
-logic o281 : bits_2
-
-logic o282 : bits_1
-
-logic o283 : bits_1
-
-logic o284 : bits_1
-
-logic o285 : bits_1
-
-logic o286 : bits_1
-
-logic o287 : bits_1
-
-logic o288 : bits_3
-
-logic o289 : bits_5
-
-logic o290 : bits_1
-
-logic o291 : bits_1
-
-logic o292 : bits_1
-
-logic o293 : bits_1
-
-logic o294 : bits_1
-
-logic o295 : bits_1
-
-logic o296 : bits_1
-
-logic o297 : bits_1
-
-logic o298 : bits_1
-
-logic o299 : bits_1
-
-logic o300 : bits_1
-
-logic o301 : bits_1
-
-logic o302 : bits_1
-
-logic o303 : bits_1
-
-logic o304 : bits_1
-
-logic o305 : bits_1
-
-logic o306 : bits_2
-
-logic o307 : bits_1
-
-logic o308 : bits_1
-
-logic o309 : bits_1
-
-logic o310 : bits_1
-
-logic o311 : bits_1
-
-logic o312 : bits_1
-
-logic o313 : bits_3
-
-logic o314 : bits_5
-
-logic o315 : bits_32
-
-logic o316 : bits_32
-
-logic o317 : bits_16
-
-logic o318 : bits_16
-
-logic o319 : bits_5
-
-logic o320 : (int,bits_32) farray
-
-logic o321 : bool
-
-logic o322 : bits_1
-
-logic o323 : bits_1
-
-logic o324 : bits_1
-
-logic o325 : bits_1
-
-logic o326 : bits_1
-
-logic o327 : bits_1
-
-logic o328 : bits_1
-
-logic o329 : bits_1
-
-logic o330 : bits_1
-
-logic o331 : bits_1
-
-logic o332 : bits_1
-
-logic o333 : bits_1
-
-logic o334 : bits_1
-
-logic o335 : bits_1
-
-logic o336 : bits_1
-
-logic o337 : bits_1
-
-logic o338 : bits_2
-
-logic o339 : bits_1
-
-logic o340 : bits_1
-
-logic o341 : bits_1
-
-logic o342 : bits_1
-
-logic o343 : bits_1
-
-logic o344 : bits_1
-
-logic o345 : bits_3
-
-logic o346 : bits_5
-
-logic o347 : bool
-
-logic o348 : bool
-
-logic o349 : bool
-
-logic o350 : bool
-
-logic o351 : bool
-
-logic o352 : bool
-
-logic o353 : bool
-
-logic o354 : bits_32
-
-logic o355 : bits_32
-
-logic o356 : bits_16
-
-logic o357 : bits_16
-
-logic o358 : bits_5
-
-logic o359 : (int,bits_32) farray
-
-logic o360 : bool
-
-logic o361 : bits_1
-
-logic o362 : bits_1
-
-logic o363 : bits_1
-
-logic o364 : bits_1
-
-logic o365 : bits_1
-
-logic o366 : bits_1
-
-logic o367 : bits_1
-
-logic o368 : bits_1
-
-logic o369 : bits_1
-
-logic o370 : bits_1
-
-logic o371 : bits_1
-
-logic o372 : bits_1
-
-logic o373 : bits_1
-
-logic o374 : bits_1
-
-logic o375 : bits_1
-
-logic o376 : bits_1
-
-logic o377 : bits_2
-
-logic o378 : bits_1
-
-logic o379 : bits_1
-
-logic o380 : bits_1
-
-logic o381 : bits_1
-
-logic o382 : bits_1
-
-logic o383 : bits_1
-
-logic o384 : bits_3
-
-logic o385 : bits_5
-
-logic o386 : bool
-
-logic o387 : bool
-
-logic o388 : bool
-
-logic o389 : bool
-
-logic o390 : bool
-
-logic o391 : bool
-
-logic o392 : bool
-
-logic o393 : int
-
-logic o394 : bits_9
-
-logic o395 : bits_5
-
-logic o396 : bits_5
-
-logic o397 : bits_1
-
-logic o398 : bits_1
-
-logic o399 : bits_2
-
-logic o400 : bits_1
-
-logic o401 : bits_4
-
-logic o402 : bits_4
-
-logic o403 : bits_4
-
-logic o404 : bits_4
-
-logic o405 : bits_1
-
-logic o406 : bits_2
-
-logic o407 : bits_1
-
-logic o408 : bits_1
-
-logic o409 : bits_5
-
-logic o410 : bits_5
-
-logic o411 : bits_9
-
-logic o412 : bits_4
-
-logic o413 : bits_4
-
-logic o414 : bits_1
-
-logic o415 : bits_2
-
-logic o416 : bits_1
-
-logic o417 : bits_1
-
-logic o418 : bits_5
-
-logic o419 : bits_5
-
-logic o420 : bits_9
-
-logic o421 : int
-
-logic o422 : t
-
-logic o423 : bits_8
-
-logic o424 : bits_10
-
-logic o425 : bits_2
-
-logic o426 : bits_2
-
-logic o427 : bits_2
-
-logic o428 : bits_1
-
-logic o429 : bits_2
-
-logic o430 : bits_3
-
-logic o431 : bits_3
-
-logic o432 : bits_7
-
-logic o433 : bits_7
-
-logic o434 : bits_3
-
-logic o435 : bits_3
-
-logic o436 : bits_2
-
-logic o437 : bits_1
-
-logic o438 : bits_2
-
-logic o439 : bits_2
-
-logic o440 : bits_2
-
-logic o441 : bits_10
-
-logic o442 : bits_8
-
-logic o443 : bits_7
-
-logic o444 : bits_3
-
-logic o445 : bits_3
-
-logic o446 : bits_2
-
-logic o447 : bits_1
-
-logic o448 : bits_2
-
-logic o449 : bits_2
-
-logic o450 : bits_2
-
-logic o451 : bits_10
-
-logic o452 : bits_8
-
-logic result : bits_16
-
-logic lde_repc_reg__split_fields1 : bits_16
-
-logic result1 : bits_32
-
-logic result2 : bits_32
-
-logic result3 : bits_16
-
-logic result4 : bits_16
-
-logic result5 : bits_5
-
-logic result6 : (int,bits_32) farray
-
-logic result7 : bool
-
-logic result8 : bits_1
-
-logic result9 : bits_1
-
-logic result10 : bits_1
-
-logic result11 : bits_1
-
-logic result12 : bits_1
-
-logic result13 : bits_1
-
-logic result14 : bits_1
-
-logic result15 : bits_1
-
-logic result16 : bits_1
-
-logic result17 : bits_1
-
-logic result18 : bits_1
-
-logic result19 : bits_1
-
-logic result20 : bits_1
-
-logic result21 : bits_1
-
-logic result22 : bits_1
-
-logic result23 : bits_1
-
-logic result24 : bits_2
-
-logic result25 : bits_1
-
-logic result26 : bits_1
-
-logic result27 : bits_1
-
-logic result28 : bits_1
-
-logic result29 : bits_1
-
-logic result30 : bits_1
-
-logic result31 : bits_3
-
-logic result32 : bits_5
-
-logic result33 : bool
-
-logic result34 : bool
-
-logic result35 : bool
-
-logic result36 : bool
-
-logic result37 : bool
-
-logic result38 : bool
-
-logic result39 : bool
-
-logic self__39 : bits_32
-
-logic self__40 : bits_32
-
-logic self__41 : bits_16
-
-logic self__42 : bits_16
-
-logic self__43 : bits_5
-
-logic self__44 : (int,bits_32) farray
-
-logic self__45 : bool
-
-logic self__46 : bits_1
-
-logic self__47 : bits_1
-
-logic self__48 : bits_1
-
-logic self__49 : bits_1
-
-logic self__50 : bits_1
-
-logic self__51 : bits_1
-
-logic self__52 : bits_1
-
-logic self__53 : bits_1
-
-logic self__54 : bits_1
-
-logic self__55 : bits_1
-
-logic self__56 : bits_1
-
-logic self__57 : bits_1
-
-logic self__58 : bits_1
-
-logic self__59 : bits_1
-
-logic self__60 : bits_1
-
-logic self__61 : bits_1
-
-logic self__62 : bits_2
-
-logic self__63 : bits_1
-
-logic self__64 : bits_1
-
-logic self__65 : bits_1
-
-logic self__66 : bits_1
-
-logic self__67 : bits_1
-
-logic self__68 : bits_1
-
-logic self__69 : bits_3
-
-logic self__70 : bits_5
-
-logic self__71 : bool
-
-logic self__72 : bool
-
-logic self__73 : bool
-
-logic self__74 : bool
-
-logic self__75 : bool
-
-logic self__76 : bool
-
-logic self__77 : bool
-
-logic result40 : bits_16
-
-logic lde_repc_reg__split_fields2 : bits_16
-
-logic result41 : bits_32
-
-logic result42 : bits_32
-
-logic result43 : bits_16
-
-logic result44 : bits_16
-
-logic result45 : bits_5
-
-logic result46 : (int,bits_32) farray
-
-logic result47 : bool
-
-logic result48 : bits_1
-
-logic result49 : bits_1
-
-logic result50 : bits_1
-
-logic result51 : bits_1
-
-logic result52 : bits_1
-
-logic result53 : bits_1
-
-logic result54 : bits_1
-
-logic result55 : bits_1
-
-logic result56 : bits_1
-
-logic result57 : bits_1
-
-logic result58 : bits_1
-
-logic result59 : bits_1
-
-logic result60 : bits_1
-
-logic result61 : bits_1
-
-logic result62 : bits_1
-
-logic result63 : bits_1
-
-logic result64 : bits_2
-
-logic result65 : bits_1
-
-logic result66 : bits_1
-
-logic result67 : bits_1
-
-logic result68 : bits_1
-
-logic result69 : bits_1
-
-logic result70 : bits_1
-
-logic result71 : bits_3
-
-logic result72 : bits_5
-
-logic result73 : bool
-
-logic result74 : bool
-
-logic result75 : bool
-
-logic result76 : bool
-
-logic result77 : bool
-
-logic result78 : bool
-
-logic result79 : bool
-
-logic self__78 : bits_32
-
-logic self__79 : bits_32
-
-logic self__80 : bits_16
-
-logic self__81 : bits_16
-
-logic self__82 : bits_5
-
-logic self__83 : (int,bits_32) farray
-
-logic self__84 : bool
-
-logic self__85 : bits_1
-
-logic self__86 : bits_1
-
-logic self__87 : bits_1
-
-logic self__88 : bits_1
-
-logic self__89 : bits_1
-
-logic self__90 : bits_1
-
-logic self__91 : bits_1
-
-logic self__92 : bits_1
-
-logic self__93 : bits_1
-
-logic self__94 : bits_1
-
-logic self__95 : bits_1
-
-logic self__96 : bits_1
-
-logic self__97 : bits_1
-
-logic self__98 : bits_1
-
-logic self__99 : bits_1
-
-logic self__100 : bits_1
-
-logic self__101 : bits_2
-
-logic self__102 : bits_1
-
-logic self__103 : bits_1
-
-logic self__104 : bits_1
-
-logic self__105 : bits_1
-
-logic self__106 : bits_1
-
-logic self__107 : bits_1
-
-logic self__108 : bits_3
-
-logic self__109 : bits_5
-
-logic self__110 : bool
-
-logic self__111 : bool
-
-logic self__112 : bool
-
-logic self__113 : bool
-
-logic self__114 : bool
-
-logic self__115 : bool
-
-logic self__116 : bool
-
-logic result80 : bits_32
-
-logic result81 : bits_32
-
-logic result82 : bits_16
-
-logic result83 : bits_16
-
-logic result84 : bits_5
-
-logic result85 : (int,bits_32) farray
-
-logic result86 : bool
-
-logic result87 : bits_1
-
-logic result88 : bits_1
-
-logic result89 : bits_1
-
-logic result90 : bits_1
-
-logic result91 : bits_1
-
-logic result92 : bits_1
-
-logic result93 : bits_1
-
-logic result94 : bits_1
-
-logic result95 : bits_1
-
-logic result96 : bits_1
-
-logic result97 : bits_1
-
-logic result98 : bits_1
-
-logic result99 : bits_1
-
-logic result100 : bits_1
-
-logic result101 : bits_1
-
-logic result102 : bits_1
-
-logic result103 : bits_2
-
-logic result104 : bits_1
-
-logic result105 : bits_1
-
-logic result106 : bits_1
-
-logic result107 : bits_1
-
-logic result108 : bits_1
-
-logic result109 : bits_1
-
-logic result110 : bits_3
-
-logic result111 : bits_5
-
-logic result112 : bool
-
-logic result113 : bool
-
-logic result114 : bool
-
-logic result115 : bool
-
-logic result116 : bool
-
-logic result117 : bool
-
-logic result118 : bool
-
-logic self__117 : bits_32
-
-logic self__118 : bits_32
-
-logic self__119 : bits_16
-
-logic self__120 : bits_16
-
-logic self__121 : bits_5
-
-logic self__122 : (int,bits_32) farray
-
-logic self__123 : bool
-
-logic self__124 : bits_1
-
-logic self__125 : bits_1
-
-logic self__126 : bits_1
-
-logic self__127 : bits_1
-
-logic self__128 : bits_1
-
-logic self__129 : bits_1
-
-logic self__130 : bits_1
-
-logic self__131 : bits_1
-
-logic self__132 : bits_1
-
-logic self__133 : bits_1
-
-logic self__134 : bits_1
-
-logic self__135 : bits_1
-
-logic self__136 : bits_1
-
-logic self__137 : bits_1
-
-logic self__138 : bits_1
-
-logic self__139 : bits_1
-
-logic self__140 : bits_2
-
-logic self__141 : bits_1
-
-logic self__142 : bits_1
-
-logic self__143 : bits_1
-
-logic self__144 : bits_1
-
-logic self__145 : bits_1
-
-logic self__146 : bits_1
-
-logic self__147 : bits_3
-
-logic self__148 : bits_5
-
-logic self__149 : bool
-
-logic self__150 : bool
-
-logic self__151 : bool
-
-logic self__152 : bool
-
-logic self__153 : bool
-
-logic self__154 : bool
-
-logic self__155 : bool
-
-logic result119 : bits_32
-
-logic result120 : bits_32
-
-logic result121 : bits_16
-
-logic result122 : bits_16
-
-logic result123 : bits_5
-
-logic result124 : (int,bits_32) farray
-
-logic result125 : bool
-
-logic result126 : bits_1
-
-logic result127 : bits_1
-
-logic result128 : bits_1
-
-logic result129 : bits_1
-
-logic result130 : bits_1
-
-logic result131 : bits_1
-
-logic result132 : bits_1
-
-logic result133 : bits_1
-
-logic result134 : bits_1
-
-logic result135 : bits_1
-
-logic result136 : bits_1
-
-logic result137 : bits_1
-
-logic result138 : bits_1
-
-logic result139 : bits_1
-
-logic result140 : bits_1
-
-logic result141 : bits_1
-
-logic result142 : bits_2
-
-logic result143 : bits_1
-
-logic result144 : bits_1
-
-logic result145 : bits_1
-
-logic result146 : bits_1
-
-logic result147 : bits_1
-
-logic result148 : bits_1
-
-logic result149 : bits_3
-
-logic result150 : bits_5
-
-logic result151 : bool
-
-logic result152 : bool
-
-logic result153 : bool
-
-logic result154 : bool
-
-logic result155 : bool
-
-logic result156 : bool
-
-logic result157 : bool
-
-logic self__156 : bits_32
-
-logic self__157 : bits_32
-
-logic self__158 : bits_16
-
-logic self__159 : bits_16
-
-logic self__160 : bits_5
-
-logic self__161 : (int,bits_32) farray
-
-logic self__162 : bool
-
-logic self__163 : bits_1
-
-logic self__164 : bits_1
-
-logic self__165 : bits_1
-
-logic self__166 : bits_1
-
-logic self__167 : bits_1
-
-logic self__168 : bits_1
-
-logic self__169 : bits_1
-
-logic self__170 : bits_1
-
-logic self__171 : bits_1
-
-logic self__172 : bits_1
-
-logic self__173 : bits_1
-
-logic self__174 : bits_1
-
-logic self__175 : bits_1
-
-logic self__176 : bits_1
-
-logic self__177 : bits_1
-
-logic self__178 : bits_1
-
-logic self__179 : bits_2
-
-logic self__180 : bits_1
-
-logic self__181 : bits_1
-
-logic self__182 : bits_1
-
-logic self__183 : bits_1
-
-logic self__184 : bits_1
-
-logic self__185 : bits_1
-
-logic self__186 : bits_3
-
-logic self__187 : bits_5
-
-logic self__188 : bool
-
-logic self__189 : bool
-
-logic self__190 : bool
-
-logic self__191 : bool
-
-logic self__192 : bool
-
-logic self__193 : bool
-
-logic self__194 : bool
-
-logic result158 : int
-
-logic sfd_timeout1 : int
-
-logic device_state : us_private
-
-logic device_state1 : us_private
-
-logic device_state2 : us_private
-
-logic device_state3 : us_private
-
-logic device_state4 : us_private
-
-logic device_state5 : us_private
-
-logic lde_repc_reg__split_fields3 : bits_16
-
-logic sfd_timeout2 : int
-
-logic device_state6 : us_private
-
-logic self__195 : bits_32
-
-logic self__196 : bits_32
-
-logic self__197 : bits_16
-
-logic self__198 : bits_16
-
-logic self__199 : bits_5
-
-logic self__200 : (int,bits_32) farray
-
-logic self__201 : bool
-
-logic self__202 : bits_1
-
-logic self__203 : bits_1
-
-logic self__204 : bits_1
-
-logic self__205 : bits_1
-
-logic self__206 : bits_1
-
-logic self__207 : bits_1
-
-logic self__208 : bits_1
-
-logic self__209 : bits_1
-
-logic self__210 : bits_1
-
-logic self__211 : bits_1
-
-logic self__212 : bits_1
-
-logic self__213 : bits_1
-
-logic self__214 : bits_1
-
-logic self__215 : bits_1
-
-logic self__216 : bits_1
-
-logic self__217 : bits_1
-
-logic self__218 : bits_2
-
-logic self__219 : bits_1
-
-logic self__220 : bits_1
-
-logic self__221 : bits_1
-
-logic self__222 : bits_1
-
-logic self__223 : bits_1
-
-logic self__224 : bits_1
-
-logic self__225 : bits_3
-
-logic self__226 : bits_5
-
-logic self__227 : bool
-
-logic self__228 : bool
-
-logic self__229 : bool
-
-logic self__230 : bool
-
-logic self__231 : bool
-
-logic self__232 : bool
-
-logic self__233 : bool
-
-logic lde_repc_reg__split_fields4 : bits_16
-
-logic sfd_timeout3 : int
-
-logic device_state7 : us_private
-
-logic self__234 : bits_32
-
-logic self__235 : bits_32
-
-logic self__236 : bits_16
-
-logic self__237 : bits_16
-
-logic self__238 : bits_5
-
-logic self__239 : (int,bits_32) farray
-
-logic self__240 : bool
-
-logic self__241 : bits_1
-
-logic self__242 : bits_1
-
-logic self__243 : bits_1
-
-logic self__244 : bits_1
-
-logic self__245 : bits_1
-
-logic self__246 : bits_1
-
-logic self__247 : bits_1
-
-logic self__248 : bits_1
-
-logic self__249 : bits_1
-
-logic self__250 : bits_1
-
-logic self__251 : bits_1
-
-logic self__252 : bits_1
-
-logic self__253 : bits_1
-
-logic self__254 : bits_1
-
-logic self__255 : bits_1
-
-logic self__256 : bits_1
-
-logic self__257 : bits_2
-
-logic self__258 : bits_1
-
-logic self__259 : bits_1
-
-logic self__260 : bits_1
-
-logic self__261 : bits_1
-
-logic self__262 : bits_1
-
-logic self__263 : bits_1
-
-logic self__264 : bits_3
-
-logic self__265 : bits_5
-
-logic self__266 : bool
-
-logic self__267 : bool
-
-logic self__268 : bool
-
-logic self__269 : bool
-
-logic self__270 : bool
-
-logic self__271 : bool
-
-logic self__272 : bool
-
-axiom H : (decadriver__lde_replica_coeffs__aggregate_def(of_int1(22938),
-  of_int1(22938), of_int1(20972), of_int1(17039), of_int1(17695),
-  of_int1(11796), of_int1(32768), of_int1(20972), of_int1(10486),
-  of_int1(13107), of_int1(15073), of_int1(15729), of_int1(15073),
-  of_int1(13763), of_int1(17695), of_int1(13763), of_int1(13107),
-  of_int1(13763), of_int1(13763), of_int1(18350), of_int1(15073),
-  of_int1(14418), of_int1(12452), of_int1(14418)) = lde_replica_coeffs)
-
-axiom H1 : (in_range10(i17s) and (((1 <= i17s) and (i17s <= 5)) or
-  ((7 <= i17s) and (i17s <= 7))))
-
-axiom H2 : (((1 <= to_rep11(config)) and (to_rep11(config) <= 5)) or
-  ((7 <= to_rep11(config)) and (to_rep11(config) <= 7)))
-
-axiom H3 : ((0 <= 65535) -> in_range16(sfd_timeout))
-
-axiom H4 : (to_rep9(o) = to_rep9((lde_replica_coeffs[to_rep15(config5)])))
-
-axiom H5 : (o = o1)
-
-axiom H6 : (temp___4643 = o1)
-
-axiom H7 : (result = lde_repc_reg__split_fields)
-
-axiom H8 : (temp___4643 = lde_repc_reg__split_fields1)
-
-axiom H9 : ((to_rep10(config7) = 0) -> (to_rep(o2) = of_int(1)))
-
-axiom H10 : ((to_rep10(config7) = 0) -> ((o3 = self__7) and
-  ((o4 = self__8) and ((o5 = self__9) and ((o6 = self__10) and
-  ((o7 = self__11) and ((o8 = self__12) and ((o9 = self__13) and
-  ((o10 = self__14) and ((o11 = self__15) and ((o12 = self__16) and
-  ((o13 = self__17) and ((o14 = self__18) and ((o15 = self__19) and
-  ((o16 = self__20) and ((o17 = self__21) and ((o18 = self__22) and
-  ((o19 = self__23) and ((o20 = self__24) and ((o21 = o2) and
-  ((o22 = self__26) and ((o23 = self__27) and ((o24 = self__28) and
-  ((o25 = self__29) and ((o26 = self__30) and
-  (o27 = self__31))))))))))))))))))))))))))
-
-axiom H11 : ((to_rep10(config7) = 0) -> ((o28 = o3) and ((o29 = o4) and
-  ((o30 = o5) and ((o31 = o6) and ((o32 = o7) and ((o33 = o8) and
-  ((o34 = o9) and ((o35 = o10) and ((o36 = o11) and ((o37 = o12) and
-  ((o38 = o13) and ((o39 = o14) and ((o40 = o15) and ((o41 = o16) and
-  ((o42 = o17) and ((o43 = o18) and ((o44 = o19) and ((o45 = o20) and
-  ((o46 = o21) and ((o47 = o22) and ((o48 = o23) and ((o49 = o24) and
-  ((o50 = o25) and ((o51 = o26) and (o52 = o27))))))))))))))))))))))))))
-
-axiom H12 : ((to_rep10(config7) = 0) -> ((o53 = self__) and
-  ((o54 = self__1) and ((o55 = self__2) and ((o56 = self__3) and
-  ((o57 = self__4) and ((o58 = self__5) and ((o59 = self__6) and
-  (((o60 = o28) and ((o61 = o29) and ((o62 = o30) and ((o63 = o31) and
-  ((o64 = o32) and ((o65 = o33) and ((o66 = o34) and ((o67 = o35) and
-  ((o68 = o36) and ((o69 = o37) and ((o70 = o38) and ((o71 = o39) and
-  ((o72 = o40) and ((o73 = o41) and ((o74 = o42) and ((o75 = o43) and
-  ((o76 = o44) and ((o77 = o45) and ((o78 = o46) and ((o79 = o47) and
-  ((o80 = o48) and ((o81 = o49) and ((o82 = o50) and ((o83 = o51) and
-  (o84 = o52))))))))))))))))))))))))) and ((o85 = self__32) and
-  ((o86 = self__33) and ((o87 = self__34) and ((o88 = self__35) and
-  ((o89 = self__36) and ((o90 = self__37) and (o91 = self__38))))))))))))))))
-
-axiom H13 : ((to_rep10(config7) = 0) -> ((o92 = o53) and ((o93 = o54) and
-  ((o94 = o55) and ((o95 = o56) and ((o96 = o57) and ((o97 = o58) and
-  ((o98 = o59) and (((o99 = o60) and ((o100 = o61) and ((o101 = o62) and
-  ((o102 = o63) and ((o103 = o64) and ((o104 = o65) and ((o105 = o66) and
-  ((o106 = o67) and ((o107 = o68) and ((o108 = o69) and ((o109 = o70) and
-  ((o110 = o71) and ((o111 = o72) and ((o112 = o73) and ((o113 = o74) and
-  ((o114 = o75) and ((o115 = o76) and ((o116 = o77) and ((o117 = o78) and
-  ((o118 = o79) and ((o119 = o80) and ((o120 = o81) and ((o121 = o82) and
-  ((o122 = o83) and (o123 = o84))))))))))))))))))))))))) and
-  ((o124 = o85) and ((o125 = o86) and ((o126 = o87) and ((o127 = o88) and
-  ((o128 = o89) and ((o129 = o90) and (o130 = o91))))))))))))))))
-
-axiom H14 : ((to_rep10(config7) = 0) -> ((result1 = self__) and
-  ((result2 = self__1) and ((result3 = self__2) and ((result4 = self__3) and
-  ((result5 = self__4) and ((result6 = self__5) and ((result7 = self__6) and
-  (((result8 = self__7) and ((result9 = self__8) and
-  ((result10 = self__9) and ((result11 = self__10) and
-  ((result12 = self__11) and ((result13 = self__12) and
-  ((result14 = self__13) and ((result15 = self__14) and
-  ((result16 = self__15) and ((result17 = self__16) and
-  ((result18 = self__17) and ((result19 = self__18) and
-  ((result20 = self__19) and ((result21 = self__20) and
-  ((result22 = self__21) and ((result23 = self__22) and
-  ((result24 = self__23) and ((result25 = self__24) and
-  ((result26 = self__25) and ((result27 = self__26) and
-  ((result28 = self__27) and ((result29 = self__28) and
-  ((result30 = self__29) and ((result31 = self__30) and
-  (result32 = self__31))))))))))))))))))))))))) and
-  ((result33 = self__32) and ((result34 = self__33) and
-  ((result35 = self__34) and ((result36 = self__35) and
-  ((result37 = self__36) and ((result38 = self__37) and
-  (result39 = self__38))))))))))))))))
-
-axiom H15 : ((to_rep10(config7) = 0) -> ((self__39 = o92) and
-  ((self__40 = o93) and ((self__41 = o94) and ((self__42 = o95) and
-  ((self__43 = o96) and ((self__44 = o97) and ((self__45 = o98) and
-  (((self__46 = o99) and ((self__47 = o100) and ((self__48 = o101) and
-  ((self__49 = o102) and ((self__50 = o103) and ((self__51 = o104) and
-  ((self__52 = o105) and ((self__53 = o106) and ((self__54 = o107) and
-  ((self__55 = o108) and ((self__56 = o109) and ((self__57 = o110) and
-  ((self__58 = o111) and ((self__59 = o112) and ((self__60 = o113) and
-  ((self__61 = o114) and ((self__62 = o115) and ((self__63 = o116) and
-  ((self__64 = o117) and ((self__65 = o118) and ((self__66 = o119) and
-  ((self__67 = o120) and ((self__68 = o121) and ((self__69 = o122) and
-  (self__70 = o123))))))))))))))))))))))))) and ((self__71 = o124) and
-  ((self__72 = o125) and ((self__73 = o126) and ((self__74 = o127) and
-  ((self__75 = o128) and ((self__76 = o129) and
-  (self__77 = o130))))))))))))))))
-
-axiom H16 : ((to_rep10(config7) = 0) ->
-  (to_rep9(o131) = udiv1(to_rep9(lde_repc_reg__split_fields1), of_int1(8))))
-
-axiom H17 : ((to_rep10(config7) = 0) -> (o131 = o132))
-
-axiom H18 : ((to_rep10(config7) = 0) -> (temp___4647 = o132))
-
-axiom H19 : ((to_rep10(config7) = 0) ->
-  (result40 = lde_repc_reg__split_fields1))
-
-axiom H20 : ((to_rep10(config7) = 0) ->
-  (lde_repc_reg__split_fields2 = temp___4647))
-
-axiom H21 : ((not (to_rep10(config7) = 0)) -> (to_rep(o133) = of_int(0)))
-
-axiom H22 : ((not (to_rep10(config7) = 0)) -> ((o134 = self__7) and
-  ((o135 = self__8) and ((o136 = self__9) and ((o137 = self__10) and
-  ((o138 = self__11) and ((o139 = self__12) and ((o140 = self__13) and
-  ((o141 = self__14) and ((o142 = self__15) and ((o143 = self__16) and
-  ((o144 = self__17) and ((o145 = self__18) and ((o146 = self__19) and
-  ((o147 = self__20) and ((o148 = self__21) and ((o149 = self__22) and
-  ((o150 = self__23) and ((o151 = self__24) and ((o152 = o133) and
-  ((o153 = self__26) and ((o154 = self__27) and ((o155 = self__28) and
-  ((o156 = self__29) and ((o157 = self__30) and
-  (o158 = self__31))))))))))))))))))))))))))
-
-axiom H23 : ((not (to_rep10(config7) = 0)) -> ((o159 = o134) and
-  ((o160 = o135) and ((o161 = o136) and ((o162 = o137) and ((o163 = o138) and
-  ((o164 = o139) and ((o165 = o140) and ((o166 = o141) and ((o167 = o142) and
-  ((o168 = o143) and ((o169 = o144) and ((o170 = o145) and ((o171 = o146) and
-  ((o172 = o147) and ((o173 = o148) and ((o174 = o149) and ((o175 = o150) and
-  ((o176 = o151) and ((o177 = o152) and ((o178 = o153) and ((o179 = o154) and
-  ((o180 = o155) and ((o181 = o156) and ((o182 = o157) and
-  (o183 = o158))))))))))))))))))))))))))
-
-axiom H24 : ((not (to_rep10(config7) = 0)) -> ((o184 = self__) and
-  ((o185 = self__1) and ((o186 = self__2) and ((o187 = self__3) and
-  ((o188 = self__4) and ((o189 = self__5) and ((o190 = self__6) and
-  (((o191 = o159) and ((o192 = o160) and ((o193 = o161) and
-  ((o194 = o162) and ((o195 = o163) and ((o196 = o164) and ((o197 = o165) and
-  ((o198 = o166) and ((o199 = o167) and ((o200 = o168) and ((o201 = o169) and
-  ((o202 = o170) and ((o203 = o171) and ((o204 = o172) and ((o205 = o173) and
-  ((o206 = o174) and ((o207 = o175) and ((o208 = o176) and ((o209 = o177) and
-  ((o210 = o178) and ((o211 = o179) and ((o212 = o180) and ((o213 = o181) and
-  ((o214 = o182) and (o215 = o183))))))))))))))))))))))))) and
-  ((o216 = self__32) and ((o217 = self__33) and ((o218 = self__34) and
-  ((o219 = self__35) and ((o220 = self__36) and ((o221 = self__37) and
-  (o222 = self__38))))))))))))))))
-
-axiom H25 : ((not (to_rep10(config7) = 0)) -> ((o223 = o184) and
-  ((o224 = o185) and ((o225 = o186) and ((o226 = o187) and ((o227 = o188) and
-  ((o228 = o189) and ((o229 = o190) and (((o230 = o191) and
-  ((o231 = o192) and ((o232 = o193) and ((o233 = o194) and ((o234 = o195) and
-  ((o235 = o196) and ((o236 = o197) and ((o237 = o198) and ((o238 = o199) and
-  ((o239 = o200) and ((o240 = o201) and ((o241 = o202) and ((o242 = o203) and
-  ((o243 = o204) and ((o244 = o205) and ((o245 = o206) and ((o246 = o207) and
-  ((o247 = o208) and ((o248 = o209) and ((o249 = o210) and ((o250 = o211) and
-  ((o251 = o212) and ((o252 = o213) and ((o253 = o214) and
-  (o254 = o215))))))))))))))))))))))))) and ((o255 = o216) and
-  ((o256 = o217) and ((o257 = o218) and ((o258 = o219) and ((o259 = o220) and
-  ((o260 = o221) and (o261 = o222))))))))))))))))
-
-axiom H26 : ((not (to_rep10(config7) = 0)) -> ((result41 = self__) and
-  ((result42 = self__1) and ((result43 = self__2) and
-  ((result44 = self__3) and ((result45 = self__4) and
-  ((result46 = self__5) and ((result47 = self__6) and
-  (((result48 = self__7) and ((result49 = self__8) and
-  ((result50 = self__9) and ((result51 = self__10) and
-  ((result52 = self__11) and ((result53 = self__12) and
-  ((result54 = self__13) and ((result55 = self__14) and
-  ((result56 = self__15) and ((result57 = self__16) and
-  ((result58 = self__17) and ((result59 = self__18) and
-  ((result60 = self__19) and ((result61 = self__20) and
-  ((result62 = self__21) and ((result63 = self__22) and
-  ((result64 = self__23) and ((result65 = self__24) and
-  ((result66 = self__25) and ((result67 = self__26) and
-  ((result68 = self__27) and ((result69 = self__28) and
-  ((result70 = self__29) and ((result71 = self__30) and
-  (result72 = self__31))))))))))))))))))))))))) and
-  ((result73 = self__32) and ((result74 = self__33) and
-  ((result75 = self__34) and ((result76 = self__35) and
-  ((result77 = self__36) and ((result78 = self__37) and
-  (result79 = self__38))))))))))))))))
-
-axiom H27 : ((not (to_rep10(config7) = 0)) -> ((self__78 = o223) and
-  ((self__79 = o224) and ((self__80 = o225) and ((self__81 = o226) and
-  ((self__82 = o227) and ((self__83 = o228) and ((self__84 = o229) and
-  (((self__85 = o230) and ((self__86 = o231) and ((self__87 = o232) and
-  ((self__88 = o233) and ((self__89 = o234) and ((self__90 = o235) and
-  ((self__91 = o236) and ((self__92 = o237) and ((self__93 = o238) and
-  ((self__94 = o239) and ((self__95 = o240) and ((self__96 = o241) and
-  ((self__97 = o242) and ((self__98 = o243) and ((self__99 = o244) and
-  ((self__100 = o245) and ((self__101 = o246) and ((self__102 = o247) and
-  ((self__103 = o248) and ((self__104 = o249) and ((self__105 = o250) and
-  ((self__106 = o251) and ((self__107 = o252) and ((self__108 = o253) and
-  (self__109 = o254))))))))))))))))))))))))) and ((self__110 = o255) and
-  ((self__111 = o256) and ((self__112 = o257) and ((self__113 = o258) and
-  ((self__114 = o259) and ((self__115 = o260) and
-  (self__116 = o261))))))))))))))))
-
-axiom H28 : ((not (to_rep10(config7) = 0)) -> ((self__39 = self__78) and
-  ((self__40 = self__79) and ((self__41 = self__80) and
-  ((self__42 = self__81) and ((self__43 = self__82) and
-  ((self__44 = self__83) and ((self__45 = self__84) and
-  (((self__46 = self__85) and ((self__47 = self__86) and
-  ((self__48 = self__87) and ((self__49 = self__88) and
-  ((self__50 = self__89) and ((self__51 = self__90) and
-  ((self__52 = self__91) and ((self__53 = self__92) and
-  ((self__54 = self__93) and ((self__55 = self__94) and
-  ((self__56 = self__95) and ((self__57 = self__96) and
-  ((self__58 = self__97) and ((self__59 = self__98) and
-  ((self__60 = self__99) and ((self__61 = self__100) and
-  ((self__62 = self__101) and ((self__63 = self__102) and
-  ((self__64 = self__103) and ((self__65 = self__104) and
-  ((self__66 = self__105) and ((self__67 = self__106) and
-  ((self__68 = self__107) and ((self__69 = self__108) and
-  (self__70 = self__109))))))))))))))))))))))))) and
-  ((self__71 = self__110) and ((self__72 = self__111) and
-  ((self__73 = self__112) and ((self__74 = self__113) and
-  ((self__75 = self__114) and ((self__76 = self__115) and
-  (self__77 = self__116))))))))))))))))
-
-axiom H29 : ((not (to_rep10(config7) = 0)) ->
-  (lde_repc_reg__split_fields2 = lde_repc_reg__split_fields1))
-
-axiom H30 : ((not (to_rep10(config7) = 0)) -> ((self__39 = self__78) and
-  ((self__40 = self__79) and ((self__41 = self__80) and
-  ((self__42 = self__81) and ((self__43 = self__82) and
-  ((self__44 = self__83) and ((self__45 = self__84) and
-  (((self__46 = self__85) and ((self__47 = self__86) and
-  ((self__48 = self__87) and ((self__49 = self__88) and
-  ((self__50 = self__89) and ((self__51 = self__90) and
-  ((self__52 = self__91) and ((self__53 = self__92) and
-  ((self__54 = self__93) and ((self__55 = self__94) and
-  ((self__56 = self__95) and ((self__57 = self__96) and
-  ((self__58 = self__97) and ((self__59 = self__98) and
-  ((self__60 = self__99) and ((self__61 = self__100) and
-  ((self__62 = self__101) and ((self__63 = self__102) and
-  ((self__64 = self__103) and ((self__65 = self__104) and
-  ((self__66 = self__105) and ((self__67 = self__106) and
-  ((self__68 = self__107) and ((self__69 = self__108) and
-  (self__70 = self__109))))))))))))))))))))))))) and
-  ((self__71 = self__110) and ((self__72 = self__111) and
-  ((self__73 = self__112) and ((self__74 = self__113) and
-  ((self__75 = self__114) and ((self__76 = self__115) and
-  (self__77 = self__116))))))))))))))))
-
-axiom H31 : ((not (to_rep10(config7) = 0)) ->
-  (lde_repc_reg__split_fields2 = lde_repc_reg__split_fields1))
-
-axiom H32 : ((result80 = self__39) and ((result81 = self__40) and
-  ((result82 = self__41) and ((result83 = self__42) and
-  ((result84 = self__43) and ((result85 = self__44) and
-  ((result86 = self__45) and (((result87 = self__46) and
-  ((result88 = self__47) and ((result89 = self__48) and
-  ((result90 = self__49) and ((result91 = self__50) and
-  ((result92 = self__51) and ((result93 = self__52) and
-  ((result94 = self__53) and ((result95 = self__54) and
-  ((result96 = self__55) and ((result97 = self__56) and
-  ((result98 = self__57) and ((result99 = self__58) and
-  ((result100 = self__59) and ((result101 = self__60) and
-  ((result102 = self__61) and ((result103 = self__62) and
-  ((result104 = self__63) and ((result105 = self__64) and
-  ((result106 = self__65) and ((result107 = self__66) and
-  ((result108 = self__67) and ((result109 = self__68) and
-  ((result110 = self__69) and
-  (result111 = self__70))))))))))))))))))))))))) and
-  ((result112 = self__71) and ((result113 = self__72) and
-  ((result114 = self__73) and ((result115 = self__74) and
-  ((result116 = self__75) and ((result117 = self__76) and
-  (result118 = self__77)))))))))))))))
-
-axiom H33 : ((self__117 = self__39) and ((self__118 = self__40) and
-  ((self__119 = self__41) and ((self__120 = self__42) and
-  ((self__121 = self__43) and ((self__122 = self__44) and
-  ((((to_rep16(config8) = 1) -> (self__123 = true)) and
-  ((not (to_rep16(config8) = 1)) -> (self__123 = false))) and
-  (((self__124 = self__46) and ((self__125 = self__47) and
-  ((self__126 = self__48) and ((self__127 = self__49) and
-  ((self__128 = self__50) and ((self__129 = self__51) and
-  ((self__130 = self__52) and ((self__131 = self__53) and
-  ((self__132 = self__54) and ((self__133 = self__55) and
-  ((self__134 = self__56) and ((self__135 = self__57) and
-  ((self__136 = self__58) and ((self__137 = self__59) and
-  ((self__138 = self__60) and ((self__139 = self__61) and
-  ((self__140 = self__62) and ((self__141 = self__63) and
-  ((self__142 = self__64) and ((self__143 = self__65) and
-  ((self__144 = self__66) and ((self__145 = self__67) and
-  ((self__146 = self__68) and ((self__147 = self__69) and
-  (self__148 = self__70))))))))))))))))))))))))) and
-  ((self__149 = self__71) and ((self__150 = self__72) and
-  ((self__151 = self__73) and ((self__152 = self__74) and
-  ((self__153 = self__75) and ((self__154 = self__76) and
-  (self__155 = self__77)))))))))))))))
+  (lde_replica_coeffs = decadriver__lde_replica_coeffs__aggregate_def(rliteral18,
+  rliteral18, rliteral19, rliteral20, rliteral21, rliteral22, rliteral23,
+  rliteral19, rliteral24, rliteral25, rliteral26, rliteral27, rliteral26,
+  rliteral28, rliteral21, rliteral28, rliteral25, rliteral28, rliteral28,
+  rliteral29, rliteral26, rliteral30, rliteral31, rliteral30))
+
+axiom def_axiom :
+  (forall temp___209:t1. forall temp___210:t1. forall temp___211:t1.
+  forall temp___212:t1. forall temp___213:t1. forall temp___214:t1.
+  forall temp___215:t1. forall temp___216:t1. forall temp___217:t1.
+  forall temp___218:t1. forall temp___219:t1. forall temp___220:t1.
+  forall temp___221:t1. forall temp___222:t1. forall temp___223:t1.
+  forall temp___224:t1. forall temp___225:t1. forall temp___226:t1.
+  forall temp___227:t1. forall temp___228:t1. forall temp___229:t1.
+  forall temp___230:t1. forall temp___231:t1. forall temp___232:t1.
+  ((((((((((((((((((((((((to_rep9((decadriver__lde_replica_coeffs__aggregate_def(temp___209,
+  temp___210, temp___211, temp___212, temp___213, temp___214, temp___215,
+  temp___216, temp___217, temp___218, temp___219, temp___220, temp___221,
+  temp___222, temp___223, temp___224, temp___225, temp___226, temp___227,
+  temp___228, temp___229, temp___230, temp___231,
+  temp___232)[1])) = temp___209) and
+  (to_rep9((decadriver__lde_replica_coeffs__aggregate_def(temp___209,
+  temp___210, temp___211, temp___212, temp___213, temp___214, temp___215,
+  temp___216, temp___217, temp___218, temp___219, temp___220, temp___221,
+  temp___222, temp___223, temp___224, temp___225, temp___226, temp___227,
+  temp___228, temp___229, temp___230, temp___231,
+  temp___232)[2])) = temp___210)) and
+  (to_rep9((decadriver__lde_replica_coeffs__aggregate_def(temp___209,
+  temp___210, temp___211, temp___212, temp___213, temp___214, temp___215,
+  temp___216, temp___217, temp___218, temp___219, temp___220, temp___221,
+  temp___222, temp___223, temp___224, temp___225, temp___226, temp___227,
+  temp___228, temp___229, temp___230, temp___231,
+  temp___232)[3])) = temp___211)) and
+  (to_rep9((decadriver__lde_replica_coeffs__aggregate_def(temp___209,
+  temp___210, temp___211, temp___212, temp___213, temp___214, temp___215,
+  temp___216, temp___217, temp___218, temp___219, temp___220, temp___221,
+  temp___222, temp___223, temp___224, temp___225, temp___226, temp___227,
+  temp___228, temp___229, temp___230, temp___231,
+  temp___232)[4])) = temp___212)) and
+  (to_rep9((decadriver__lde_replica_coeffs__aggregate_def(temp___209,
+  temp___210, temp___211, temp___212, temp___213, temp___214, temp___215,
+  temp___216, temp___217, temp___218, temp___219, temp___220, temp___221,
+  temp___222, temp___223, temp___224, temp___225, temp___226, temp___227,
+  temp___228, temp___229, temp___230, temp___231,
+  temp___232)[5])) = temp___213)) and
+  (to_rep9((decadriver__lde_replica_coeffs__aggregate_def(temp___209,
+  temp___210, temp___211, temp___212, temp___213, temp___214, temp___215,
+  temp___216, temp___217, temp___218, temp___219, temp___220, temp___221,
+  temp___222, temp___223, temp___224, temp___225, temp___226, temp___227,
+  temp___228, temp___229, temp___230, temp___231,
+  temp___232)[6])) = temp___214)) and
+  (to_rep9((decadriver__lde_replica_coeffs__aggregate_def(temp___209,
+  temp___210, temp___211, temp___212, temp___213, temp___214, temp___215,
+  temp___216, temp___217, temp___218, temp___219, temp___220, temp___221,
+  temp___222, temp___223, temp___224, temp___225, temp___226, temp___227,
+  temp___228, temp___229, temp___230, temp___231,
+  temp___232)[7])) = temp___215)) and
+  (to_rep9((decadriver__lde_replica_coeffs__aggregate_def(temp___209,
+  temp___210, temp___211, temp___212, temp___213, temp___214, temp___215,
+  temp___216, temp___217, temp___218, temp___219, temp___220, temp___221,
+  temp___222, temp___223, temp___224, temp___225, temp___226, temp___227,
+  temp___228, temp___229, temp___230, temp___231,
+  temp___232)[8])) = temp___216)) and
+  (to_rep9((decadriver__lde_replica_coeffs__aggregate_def(temp___209,
+  temp___210, temp___211, temp___212, temp___213, temp___214, temp___215,
+  temp___216, temp___217, temp___218, temp___219, temp___220, temp___221,
+  temp___222, temp___223, temp___224, temp___225, temp___226, temp___227,
+  temp___228, temp___229, temp___230, temp___231,
+  temp___232)[9])) = temp___217)) and
+  (to_rep9((decadriver__lde_replica_coeffs__aggregate_def(temp___209,
+  temp___210, temp___211, temp___212, temp___213, temp___214, temp___215,
+  temp___216, temp___217, temp___218, temp___219, temp___220, temp___221,
+  temp___222, temp___223, temp___224, temp___225, temp___226, temp___227,
+  temp___228, temp___229, temp___230, temp___231,
+  temp___232)[10])) = temp___218)) and
+  (to_rep9((decadriver__lde_replica_coeffs__aggregate_def(temp___209,
+  temp___210, temp___211, temp___212, temp___213, temp___214, temp___215,
+  temp___216, temp___217, temp___218, temp___219, temp___220, temp___221,
+  temp___222, temp___223, temp___224, temp___225, temp___226, temp___227,
+  temp___228, temp___229, temp___230, temp___231,
+  temp___232)[11])) = temp___219)) and
+  (to_rep9((decadriver__lde_replica_coeffs__aggregate_def(temp___209,
+  temp___210, temp___211, temp___212, temp___213, temp___214, temp___215,
+  temp___216, temp___217, temp___218, temp___219, temp___220, temp___221,
+  temp___222, temp___223, temp___224, temp___225, temp___226, temp___227,
+  temp___228, temp___229, temp___230, temp___231,
+  temp___232)[12])) = temp___220)) and
+  (to_rep9((decadriver__lde_replica_coeffs__aggregate_def(temp___209,
+  temp___210, temp___211, temp___212, temp___213, temp___214, temp___215,
+  temp___216, temp___217, temp___218, temp___219, temp___220, temp___221,
+  temp___222, temp___223, temp___224, temp___225, temp___226, temp___227,
+  temp___228, temp___229, temp___230, temp___231,
+  temp___232)[13])) = temp___221)) and
+  (to_rep9((decadriver__lde_replica_coeffs__aggregate_def(temp___209,
+  temp___210, temp___211, temp___212, temp___213, temp___214, temp___215,
+  temp___216, temp___217, temp___218, temp___219, temp___220, temp___221,
+  temp___222, temp___223, temp___224, temp___225, temp___226, temp___227,
+  temp___228, temp___229, temp___230, temp___231,
+  temp___232)[14])) = temp___222)) and
+  (to_rep9((decadriver__lde_replica_coeffs__aggregate_def(temp___209,
+  temp___210, temp___211, temp___212, temp___213, temp___214, temp___215,
+  temp___216, temp___217, temp___218, temp___219, temp___220, temp___221,
+  temp___222, temp___223, temp___224, temp___225, temp___226, temp___227,
+  temp___228, temp___229, temp___230, temp___231,
+  temp___232)[15])) = temp___223)) and
+  (to_rep9((decadriver__lde_replica_coeffs__aggregate_def(temp___209,
+  temp___210, temp___211, temp___212, temp___213, temp___214, temp___215,
+  temp___216, temp___217, temp___218, temp___219, temp___220, temp___221,
+  temp___222, temp___223, temp___224, temp___225, temp___226, temp___227,
+  temp___228, temp___229, temp___230, temp___231,
+  temp___232)[16])) = temp___224)) and
+  (to_rep9((decadriver__lde_replica_coeffs__aggregate_def(temp___209,
+  temp___210, temp___211, temp___212, temp___213, temp___214, temp___215,
+  temp___216, temp___217, temp___218, temp___219, temp___220, temp___221,
+  temp___222, temp___223, temp___224, temp___225, temp___226, temp___227,
+  temp___228, temp___229, temp___230, temp___231,
+  temp___232)[17])) = temp___225)) and
+  (to_rep9((decadriver__lde_replica_coeffs__aggregate_def(temp___209,
+  temp___210, temp___211, temp___212, temp___213, temp___214, temp___215,
+  temp___216, temp___217, temp___218, temp___219, temp___220, temp___221,
+  temp___222, temp___223, temp___224, temp___225, temp___226, temp___227,
+  temp___228, temp___229, temp___230, temp___231,
+  temp___232)[18])) = temp___226)) and
+  (to_rep9((decadriver__lde_replica_coeffs__aggregate_def(temp___209,
+  temp___210, temp___211, temp___212, temp___213, temp___214, temp___215,
+  temp___216, temp___217, temp___218, temp___219, temp___220, temp___221,
+  temp___222, temp___223, temp___224, temp___225, temp___226, temp___227,
+  temp___228, temp___229, temp___230, temp___231,
+  temp___232)[19])) = temp___227)) and
+  (to_rep9((decadriver__lde_replica_coeffs__aggregate_def(temp___209,
+  temp___210, temp___211, temp___212, temp___213, temp___214, temp___215,
+  temp___216, temp___217, temp___218, temp___219, temp___220, temp___221,
+  temp___222, temp___223, temp___224, temp___225, temp___226, temp___227,
+  temp___228, temp___229, temp___230, temp___231,
+  temp___232)[20])) = temp___228)) and
+  (to_rep9((decadriver__lde_replica_coeffs__aggregate_def(temp___209,
+  temp___210, temp___211, temp___212, temp___213, temp___214, temp___215,
+  temp___216, temp___217, temp___218, temp___219, temp___220, temp___221,
+  temp___222, temp___223, temp___224, temp___225, temp___226, temp___227,
+  temp___228, temp___229, temp___230, temp___231,
+  temp___232)[21])) = temp___229)) and
+  (to_rep9((decadriver__lde_replica_coeffs__aggregate_def(temp___209,
+  temp___210, temp___211, temp___212, temp___213, temp___214, temp___215,
+  temp___216, temp___217, temp___218, temp___219, temp___220, temp___221,
+  temp___222, temp___223, temp___224, temp___225, temp___226, temp___227,
+  temp___228, temp___229, temp___230, temp___231,
+  temp___232)[22])) = temp___230)) and
+  (to_rep9((decadriver__lde_replica_coeffs__aggregate_def(temp___209,
+  temp___210, temp___211, temp___212, temp___213, temp___214, temp___215,
+  temp___216, temp___217, temp___218, temp___219, temp___220, temp___221,
+  temp___222, temp___223, temp___224, temp___225, temp___226, temp___227,
+  temp___228, temp___229, temp___230, temp___231,
+  temp___232)[23])) = temp___231)) and
+  (to_rep9((decadriver__lde_replica_coeffs__aggregate_def(temp___209,
+  temp___210, temp___211, temp___212, temp___213, temp___214, temp___215,
+  temp___216, temp___217, temp___218, temp___219, temp___220, temp___221,
+  temp___222, temp___223, temp___224, temp___225, temp___226, temp___227,
+  temp___228, temp___229, temp___230, temp___231,
+  temp___232)[24])) = temp___232)))
+
+axiom def_axiom1 :
+  (forall temp___4983:t2.
+  (forall temp___4984:int.
+  (to_rep18((temp___4981(temp___4983)[temp___4984])) = temp___4983)))
+
+logic rliteral32 : t1
+
+axiom rliteral_axiom32 : (tqtint1(rliteral32) = 8)
 
  (* File "decadriver.ads", line 242, characters 0-0 *)
-goal WP_parameter_def : in_range_int1(to_rep16(config8))
+goal WP_parameter_def :
+  (forall lde_repc_reg__split_fields:bits_16. forall sfd_timeout:int.
+  forall self__:driver_type__ref. forall o:bits_16. forall o1:bits_16.
+  forall temp___5136:bits_16. forall o2:bits_1. forall o3:us_split_fields.
+  forall o4:us_rep. forall o5:us_split_fields10. forall o6:us_rep5.
+  forall o7:bits_16. forall o8:bits_16. forall temp___5140:bits_16.
+  forall o9:bits_1. forall o10:us_split_fields. forall o11:us_rep.
+  forall o12:us_split_fields10. forall o13:us_rep5. forall result:bits_16.
+  forall lde_repc_reg__split_fields1:bits_16.
+  forall result1:driver_type__ref. forall self__1:us_rep5.
+  forall result2:bits_16. forall lde_repc_reg__split_fields2:bits_16.
+  forall result3:driver_type__ref. forall self__2:us_rep5.
+  forall result4:driver_type__ref. forall self__3:us_rep5.
+  ((decadriver__lde_replica_coeffs__aggregate_def(rliteral18, rliteral18,
+  rliteral19, rliteral20, rliteral21, rliteral22, rliteral23, rliteral19,
+  rliteral24, rliteral25, rliteral26, rliteral27, rliteral26, rliteral28,
+  rliteral21, rliteral28, rliteral25, rliteral28, rliteral28, rliteral29,
+  rliteral26, rliteral30, rliteral31, rliteral30) = lde_replica_coeffs) ->
+  ((in_range10(i17s) and (((1 <= i17s) and (i17s <= 5)) or ((7 <= i17s) and
+  (i17s <= 7)))) -> ((((1 <= to_rep11(config)) and
+  (to_rep11(config) <= 5)) or ((7 <= to_rep11(config)) and
+  (to_rep11(config) <= 7))) -> (((0 <= 65535) -> in_range16(sfd_timeout)) ->
+  (((((to_rep9(o) = to_rep9((lde_replica_coeffs[to_rep15(config5)]))) and
+  (o = o1)) and (temp___5136 = o1)) and (({ us_split_fields__content3 = {
+  rec__dw1000__register_types__lde_repc_type__lde_repc = result } } = {
+  us_split_fields__content3 = {
+  rec__dw1000__register_types__lde_repc_type__lde_repc =
+  lde_repc_reg__split_fields } }) and
+  (temp___5136 = lde_repc_reg__split_fields1))) ->
+  ((((to_rep10(config7) = 0) and (((((((to_rep(o2) = rliteral1) and (o3 = {
+  rec__dw1000__register_types__sys_cfg_type__ffen =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__ffen;
+  rec__dw1000__register_types__sys_cfg_type__ffbc =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__ffbc;
+  rec__dw1000__register_types__sys_cfg_type__ffab =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__ffab;
+  rec__dw1000__register_types__sys_cfg_type__ffad =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__ffad;
+  rec__dw1000__register_types__sys_cfg_type__ffaa =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__ffaa;
+  rec__dw1000__register_types__sys_cfg_type__ffam =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__ffam;
+  rec__dw1000__register_types__sys_cfg_type__ffar =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__ffar;
+  rec__dw1000__register_types__sys_cfg_type__ffa4 =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__ffa4;
+  rec__dw1000__register_types__sys_cfg_type__ffa5 =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__ffa5;
+  rec__dw1000__register_types__sys_cfg_type__hirq_pol =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__hirq_pol;
+  rec__dw1000__register_types__sys_cfg_type__spi_edge =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__spi_edge;
+  rec__dw1000__register_types__sys_cfg_type__dis_fce =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__dis_fce;
+  rec__dw1000__register_types__sys_cfg_type__dis_drxb =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__dis_drxb;
+  rec__dw1000__register_types__sys_cfg_type__dis_phe =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__dis_phe;
+  rec__dw1000__register_types__sys_cfg_type__dis_rsde =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__dis_rsde;
+  rec__dw1000__register_types__sys_cfg_type__fcs_int2f =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__fcs_int2f;
+  rec__dw1000__register_types__sys_cfg_type__phr_mode =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__phr_mode;
+  rec__dw1000__register_types__sys_cfg_type__dis_stxp =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__dis_stxp;
+  rec__dw1000__register_types__sys_cfg_type__rxm110k = o2;
+  rec__dw1000__register_types__sys_cfg_type__rxwtoe =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__rxwtoe;
+  rec__dw1000__register_types__sys_cfg_type__rxautr =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__rxautr;
+  rec__dw1000__register_types__sys_cfg_type__autoack =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__autoack;
+  rec__dw1000__register_types__sys_cfg_type__aackpend =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__aackpend;
+  rec__dw1000__register_types__sys_cfg_type__reserved_1 =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__reserved_1;
+  rec__dw1000__register_types__sys_cfg_type__reserved_2 =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__reserved_2
+  })) and (o4 = { us_split_fields1 = o3 })) and (o5 = {
+  rec__decadriver__driver_type__part_id =
+  (((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__part_id;
+  rec__decadriver__driver_type__lot_id =
+  (((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__lot_id;
+  rec__decadriver__driver_type__antenna_delay_prf_64 =
+  (((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__antenna_delay_prf_64;
+  rec__decadriver__driver_type__antenna_delay_prf_16 =
+  (((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__antenna_delay_prf_16;
+  rec__decadriver__driver_type__xtal_trim =
+  (((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__xtal_trim;
+  rec__decadriver__driver_type__otp_tx_power_levels =
+  (((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__otp_tx_power_levels;
+  rec__decadriver__driver_type__long_frames =
+  (((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__long_frames;
+  rec__decadriver__driver_type__sys_cfg_reg = o4;
+  rec__decadriver__driver_type__use_otp_xtal_trim =
+  (((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__use_otp_xtal_trim;
+  rec__decadriver__driver_type__use_otp_antenna_delay =
+  (((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__use_otp_antenna_delay;
+  rec__decadriver__driver_type__detect_frame_timeout =
+  (((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__detect_frame_timeout;
+  rec__decadriver__driver_type__detect_sfd_timeout =
+  (((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__detect_sfd_timeout;
+  rec__decadriver__driver_type__detect_phr_error =
+  (((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__detect_phr_error;
+  rec__decadriver__driver_type__detect_rs_error =
+  (((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__detect_rs_error;
+  rec__decadriver__driver_type__detect_fcs_error =
+  (((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__detect_fcs_error
+  })) and (o6 = { us_split_fields11 = o5 })) and ((result1 = self__) and
+  (self__1 = o6))) and
+  ((((to_rep9(o7) = udiv1(to_rep9(lde_repc_reg__split_fields1),
+  rliteral32)) and (o7 = o8)) and (temp___5140 = o8)) and
+  ((result2 = lde_repc_reg__split_fields1) and
+  (temp___5140 = lde_repc_reg__split_fields2))))) or
+  ((not (to_rep10(config7) = 0)) and (((((((to_rep(o9) = rliteral) and
+  (o10 = { rec__dw1000__register_types__sys_cfg_type__ffen =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__ffen;
+  rec__dw1000__register_types__sys_cfg_type__ffbc =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__ffbc;
+  rec__dw1000__register_types__sys_cfg_type__ffab =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__ffab;
+  rec__dw1000__register_types__sys_cfg_type__ffad =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__ffad;
+  rec__dw1000__register_types__sys_cfg_type__ffaa =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__ffaa;
+  rec__dw1000__register_types__sys_cfg_type__ffam =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__ffam;
+  rec__dw1000__register_types__sys_cfg_type__ffar =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__ffar;
+  rec__dw1000__register_types__sys_cfg_type__ffa4 =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__ffa4;
+  rec__dw1000__register_types__sys_cfg_type__ffa5 =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__ffa5;
+  rec__dw1000__register_types__sys_cfg_type__hirq_pol =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__hirq_pol;
+  rec__dw1000__register_types__sys_cfg_type__spi_edge =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__spi_edge;
+  rec__dw1000__register_types__sys_cfg_type__dis_fce =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__dis_fce;
+  rec__dw1000__register_types__sys_cfg_type__dis_drxb =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__dis_drxb;
+  rec__dw1000__register_types__sys_cfg_type__dis_phe =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__dis_phe;
+  rec__dw1000__register_types__sys_cfg_type__dis_rsde =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__dis_rsde;
+  rec__dw1000__register_types__sys_cfg_type__fcs_int2f =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__fcs_int2f;
+  rec__dw1000__register_types__sys_cfg_type__phr_mode =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__phr_mode;
+  rec__dw1000__register_types__sys_cfg_type__dis_stxp =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__dis_stxp;
+  rec__dw1000__register_types__sys_cfg_type__rxm110k = o9;
+  rec__dw1000__register_types__sys_cfg_type__rxwtoe =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__rxwtoe;
+  rec__dw1000__register_types__sys_cfg_type__rxautr =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__rxautr;
+  rec__dw1000__register_types__sys_cfg_type__autoack =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__autoack;
+  rec__dw1000__register_types__sys_cfg_type__aackpend =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__aackpend;
+  rec__dw1000__register_types__sys_cfg_type__reserved_1 =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__reserved_1;
+  rec__dw1000__register_types__sys_cfg_type__reserved_2 =
+  (((((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg).us_split_fields1).rec__dw1000__register_types__sys_cfg_type__reserved_2
+  })) and (o11 = { us_split_fields1 = o10 })) and (o12 = {
+  rec__decadriver__driver_type__part_id =
+  (((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__part_id;
+  rec__decadriver__driver_type__lot_id =
+  (((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__lot_id;
+  rec__decadriver__driver_type__antenna_delay_prf_64 =
+  (((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__antenna_delay_prf_64;
+  rec__decadriver__driver_type__antenna_delay_prf_16 =
+  (((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__antenna_delay_prf_16;
+  rec__decadriver__driver_type__xtal_trim =
+  (((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__xtal_trim;
+  rec__decadriver__driver_type__otp_tx_power_levels =
+  (((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__otp_tx_power_levels;
+  rec__decadriver__driver_type__long_frames =
+  (((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__long_frames;
+  rec__decadriver__driver_type__sys_cfg_reg = o11;
+  rec__decadriver__driver_type__use_otp_xtal_trim =
+  (((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__use_otp_xtal_trim;
+  rec__decadriver__driver_type__use_otp_antenna_delay =
+  (((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__use_otp_antenna_delay;
+  rec__decadriver__driver_type__detect_frame_timeout =
+  (((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__detect_frame_timeout;
+  rec__decadriver__driver_type__detect_sfd_timeout =
+  (((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__detect_sfd_timeout;
+  rec__decadriver__driver_type__detect_phr_error =
+  (((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__detect_phr_error;
+  rec__decadriver__driver_type__detect_rs_error =
+  (((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__detect_rs_error;
+  rec__decadriver__driver_type__detect_fcs_error =
+  (((self__).driver_type__content).us_split_fields11).rec__decadriver__driver_type__detect_fcs_error
+  })) and (o13 = { us_split_fields11 = o12 })) and ((result3 = self__) and
+  (self__2 = o13))) and ((({ driver_type__content = self__1 } = {
+  driver_type__content = self__2 }) and ({
+  rec__dw1000__register_types__lde_repc_type__lde_repc =
+  lde_repc_reg__split_fields2 } = {
+  rec__dw1000__register_types__lde_repc_type__lde_repc =
+  lde_repc_reg__split_fields1 })) and ((self__1 = self__2) and ({
+  rec__dw1000__register_types__lde_repc_type__lde_repc =
+  lde_repc_reg__split_fields2 } = {
+  rec__dw1000__register_types__lde_repc_type__lde_repc =
+  lde_repc_reg__split_fields1 })))))) -> (((result4 = {
+  driver_type__content = self__1 }) and (((to_rep16(config8) = 1) and
+  (self__3 = { us_split_fields11 = { rec__decadriver__driver_type__part_id =
+  ((self__1).us_split_fields11).rec__decadriver__driver_type__part_id;
+  rec__decadriver__driver_type__lot_id =
+  ((self__1).us_split_fields11).rec__decadriver__driver_type__lot_id;
+  rec__decadriver__driver_type__antenna_delay_prf_64 =
+  ((self__1).us_split_fields11).rec__decadriver__driver_type__antenna_delay_prf_64;
+  rec__decadriver__driver_type__antenna_delay_prf_16 =
+  ((self__1).us_split_fields11).rec__decadriver__driver_type__antenna_delay_prf_16;
+  rec__decadriver__driver_type__xtal_trim =
+  ((self__1).us_split_fields11).rec__decadriver__driver_type__xtal_trim;
+  rec__decadriver__driver_type__otp_tx_power_levels =
+  ((self__1).us_split_fields11).rec__decadriver__driver_type__otp_tx_power_levels;
+  rec__decadriver__driver_type__long_frames = true;
+  rec__decadriver__driver_type__sys_cfg_reg =
+  ((self__1).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg;
+  rec__decadriver__driver_type__use_otp_xtal_trim =
+  ((self__1).us_split_fields11).rec__decadriver__driver_type__use_otp_xtal_trim;
+  rec__decadriver__driver_type__use_otp_antenna_delay =
+  ((self__1).us_split_fields11).rec__decadriver__driver_type__use_otp_antenna_delay;
+  rec__decadriver__driver_type__detect_frame_timeout =
+  ((self__1).us_split_fields11).rec__decadriver__driver_type__detect_frame_timeout;
+  rec__decadriver__driver_type__detect_sfd_timeout =
+  ((self__1).us_split_fields11).rec__decadriver__driver_type__detect_sfd_timeout;
+  rec__decadriver__driver_type__detect_phr_error =
+  ((self__1).us_split_fields11).rec__decadriver__driver_type__detect_phr_error;
+  rec__decadriver__driver_type__detect_rs_error =
+  ((self__1).us_split_fields11).rec__decadriver__driver_type__detect_rs_error;
+  rec__decadriver__driver_type__detect_fcs_error =
+  ((self__1).us_split_fields11).rec__decadriver__driver_type__detect_fcs_error
+  } })) or ((not (to_rep16(config8) = 1)) and (self__3 = {
+  us_split_fields11 = { rec__decadriver__driver_type__part_id =
+  ((self__1).us_split_fields11).rec__decadriver__driver_type__part_id;
+  rec__decadriver__driver_type__lot_id =
+  ((self__1).us_split_fields11).rec__decadriver__driver_type__lot_id;
+  rec__decadriver__driver_type__antenna_delay_prf_64 =
+  ((self__1).us_split_fields11).rec__decadriver__driver_type__antenna_delay_prf_64;
+  rec__decadriver__driver_type__antenna_delay_prf_16 =
+  ((self__1).us_split_fields11).rec__decadriver__driver_type__antenna_delay_prf_16;
+  rec__decadriver__driver_type__xtal_trim =
+  ((self__1).us_split_fields11).rec__decadriver__driver_type__xtal_trim;
+  rec__decadriver__driver_type__otp_tx_power_levels =
+  ((self__1).us_split_fields11).rec__decadriver__driver_type__otp_tx_power_levels;
+  rec__decadriver__driver_type__long_frames = false;
+  rec__decadriver__driver_type__sys_cfg_reg =
+  ((self__1).us_split_fields11).rec__decadriver__driver_type__sys_cfg_reg;
+  rec__decadriver__driver_type__use_otp_xtal_trim =
+  ((self__1).us_split_fields11).rec__decadriver__driver_type__use_otp_xtal_trim;
+  rec__decadriver__driver_type__use_otp_antenna_delay =
+  ((self__1).us_split_fields11).rec__decadriver__driver_type__use_otp_antenna_delay;
+  rec__decadriver__driver_type__detect_frame_timeout =
+  ((self__1).us_split_fields11).rec__decadriver__driver_type__detect_frame_timeout;
+  rec__decadriver__driver_type__detect_sfd_timeout =
+  ((self__1).us_split_fields11).rec__decadriver__driver_type__detect_sfd_timeout;
+  rec__decadriver__driver_type__detect_phr_error =
+  ((self__1).us_split_fields11).rec__decadriver__driver_type__detect_phr_error;
+  rec__decadriver__driver_type__detect_rs_error =
+  ((self__1).us_split_fields11).rec__decadriver__driver_type__detect_rs_error;
+  rec__decadriver__driver_type__detect_fcs_error =
+  ((self__1).us_split_fields11).rec__decadriver__driver_type__detect_fcs_error
+  } })))) -> in_range_int1(to_rep16(config8))))))))))

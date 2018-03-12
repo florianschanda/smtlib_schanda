@@ -110,35 +110,10 @@ logic b : bool
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : int
-
-logic result : int
-
-logic x1 : int
-
-logic result1 : int
-
-logic x2 : int
-
-logic x3 : int
-
-logic x4 : int
-
-axiom H : ((1 <= 10) -> in_range(x))
-
-axiom H1 : ((b = true) -> (result = x))
-
-axiom H2 : ((b = true) -> (x1 = 4))
-
-axiom H3 : ((not (b = true)) -> (result1 = x))
-
-axiom H4 : ((not (b = true)) -> (x2 = 3))
-
-axiom H5 : ((not (b = true)) -> (x1 = x2))
-
-axiom H6 : (x1 = x3)
-
-axiom H7 : (x4 = x1)
-
  (* File "pack.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : (not (x3 = 5))
+goal WP_parameter_def :
+  (forall x:int. forall result:int. forall x1:int. forall result1:int.
+  forall x2:int. forall x3:int. forall x4:int. ((((1 <= 10) ->
+  in_range(x)) and ((((b = true) and ((result = x) and (x1 = 4))) or
+  ((not (b = true)) and (((result1 = x) and (x2 = 3)) and (x1 = x2)))) and
+  ((x1 = x3) and (x4 = x1)))) -> (not (x3 = 5))))

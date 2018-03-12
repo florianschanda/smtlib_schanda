@@ -133,100 +133,28 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : int
-
-logic y : int
-
-logic inrange__do_it__result : int
-
-logic o : int
-
-logic inrange__add_out__i : int
-
-logic o1 : int
-
-logic result : int
-
-logic x1 : int
-
-logic result1 : int
-
-logic y1 : int
-
-logic inrange__add_out__i1 : int
-
-logic result2 : int
-
-logic x2 : int
-
-logic result3 : int
-
-logic inrange__do_it__result1 : int
-
-logic inrange__do_it__result2 : int
-
-logic inrange__do_it__result3 : int
-
-logic x3 : int
-
-logic y2 : int
-
-logic inrange__do_it__result4 : int
-
-logic x4 : int
-
-logic y3 : int
-
-logic inrange__do_it__result5 : int
-
-logic result4 : int
-
-axiom H : (result = x)
-
-axiom H1 : (x1 = 10)
-
-axiom H2 : in_range1(x1)
-
-axiom H3 : (result1 = y)
-
-axiom H4 : (y1 = 10)
-
-axiom H5 : in_range1(y1)
-
-axiom H6 : ((o = x1) and in_range(x1))
-
-axiom H7 : (o = inrange__add_out__i)
-
-axiom H8 : ((inrange__add_out__i1 = (inrange__add_out__i + y1)) and
-  in_range(inrange__add_out__i1))
-
-axiom H9 : ((o1 = inrange__add_out__i1) and in_range1(inrange__add_out__i1))
-
-axiom H10 : (result2 = x1)
-
-axiom H11 : (x2 = o1)
-
-axiom H12 : (inrange__do_it__result1 = inrange__do_it__result2)
-
-axiom H13 : (inrange__do_it__result3 = inrange__do_it__result1)
-
-axiom H14 : (result3 = inrange__do_it__result)
-
-axiom H15 : (inrange__do_it__result1 = x2)
-
-axiom H16 : (inrange__do_it__result4 = inrange__do_it__result2)
-
-axiom H17 : (y2 = y1)
-
-axiom H18 : (x3 = x2)
-
-axiom H19 : (inrange__do_it__result5 = inrange__do_it__result3)
-
-axiom H20 : (y3 = y1)
-
-axiom H21 : (x4 = x2)
-
-axiom H22 : (result4 = inrange__do_it__result4)
-
  (* File "inrange.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (inrange__do_it__result4 <= 10)
+goal WP_parameter_def :
+  (forall x:int. forall y:int. forall inrange__do_it__result:int.
+  forall o:int. forall inrange__add_out__i:int. forall o1:int.
+  forall result:int. forall x1:int. forall result1:int. forall y1:int.
+  forall inrange__add_out__i1:int. forall result2:int. forall x2:int.
+  forall result3:int. forall inrange__do_it__result1:int.
+  forall inrange__do_it__result2:int. forall inrange__do_it__result3:int.
+  forall x3:int. forall y2:int. forall inrange__do_it__result4:int.
+  forall x4:int. forall y3:int. forall inrange__do_it__result5:int.
+  (forall result4:int. (((((({ int__content = result } = { int__content = x
+  }) and (x1 = 10)) and (in_range1(x1) and ((({ int__content = result1 } = {
+  int__content = y }) and (y1 = 10)) and (in_range1(y1) and (((((o = x1) and
+  in_range(x1)) and (o = inrange__add_out__i)) and
+  (((inrange__add_out__i1 = (inrange__add_out__i + y1)) and
+  in_range(inrange__add_out__i1)) and (((o1 = inrange__add_out__i1) and
+  in_range1(inrange__add_out__i1)) and ((result2 = x1) and (x2 = o1))))) and
+  (((inrange__do_it__result1 = inrange__do_it__result2) and
+  (inrange__do_it__result3 = inrange__do_it__result1)) and
+  ((result3 = inrange__do_it__result) and
+  (inrange__do_it__result1 = x2)))))))) and
+  (((inrange__do_it__result4 = inrange__do_it__result2) and ((y2 = y1) and
+  (x3 = x2))) and ((inrange__do_it__result5 = inrange__do_it__result3) and
+  ((y3 = y1) and (x4 = x2))))) and (result4 = inrange__do_it__result4)) ->
+  (inrange__do_it__result4 <= 10))))

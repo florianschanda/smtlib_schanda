@@ -618,22 +618,10 @@ axiom is_valid__def_axiom3 :
   us_split_fields1 = { rec__dic_and_predicate_checks__r__f = x;
   rec__dic_and_predicate_checks__r__g = x1 } }) = true)))
 
-logic x1__split_fields : integer
-
-logic x1__split_fields1 : integer
-
-logic x2__split_fields : integer
-
-logic temp___210 : integer
-
-logic temp___207 : integer
-
-logic temp___2071 : integer
-
-axiom H : ((to_rep(x1__split_fields1) = 0) and (is_valid1({
-  us_split_fields1 = { rec__dic_and_predicate_checks__r__f =
-  x1__split_fields; rec__dic_and_predicate_checks__r__g = x1__split_fields1 }
-  }) = true))
-
  (* File "dic_and_predicate_checks.ads", line 41, characters 0-0 *)
-goal WP_parameter_def : (0 <  to_rep(temp___210))
+goal WP_parameter_def :
+  (forall x1__split_fields:integer. forall x1__split_fields1:integer.
+  forall temp___240:integer. (((to_rep(x1__split_fields1) = 0) and
+  (is_valid1({ us_split_fields1 = { rec__dic_and_predicate_checks__r__f =
+  x1__split_fields; rec__dic_and_predicate_checks__r__g = x1__split_fields1 }
+  }) = true)) -> (0 <  to_rep(temp___240))))

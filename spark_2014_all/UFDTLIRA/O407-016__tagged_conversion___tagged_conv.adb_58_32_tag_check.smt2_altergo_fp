@@ -56,12 +56,6 @@ axiom us_compatible_tags_refl :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -73,6 +67,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -204,31 +204,12 @@ axiom r__def_axiom : ((r = us_null_ext__) and (r1 = us_tag))
 
 axiom rc__def_axiom : ((rc = r) and (rc1 = r1))
 
-logic rc2__split_fields : us_private
-
-logic rc3__split_fields : us_private
-
-logic result : us_private
-
-logic rc2__split_fields1 : us_private
-
-logic result1 : us_private
-
-logic rc3__split_fields1 : us_private
-
-axiom H : ((r = rc) and (r1 = rc1))
-
-axiom H1 : (result = rc2__split_fields)
-
-axiom H2 : (rc2__split_fields1 = rc)
-
-axiom H3 : (rc2__attr__tag = us_tag)
-
-axiom H4 : (result1 = rc3__split_fields)
-
-axiom H5 : (rc3__split_fields1 = rc)
-
-axiom H6 : (rc3__attr__tag = rc1)
-
  (* File "tagged_conv.adb", line 49, characters 0-0 *)
-goal WP_parameter_def : us_compatible_tags(rc3__attr__tag, us_tag1)
+goal WP_parameter_def :
+  (forall rc2__split_fields:us_private. forall rc3__split_fields:us_private.
+  forall result:us_private. forall rc2__split_fields1:us_private.
+  forall result1:us_private. forall rc3__split_fields1:us_private.
+  (((r = rc) and (r1 = rc1)) -> ((((result = rc2__split_fields) and
+  (rc2__split_fields1 = rc)) and (rc2__attr__tag = us_tag)) ->
+  ((((result1 = rc3__split_fields) and (rc3__split_fields1 = rc)) and
+  (rc3__attr__tag = rc1)) -> us_compatible_tags(rc3__attr__tag, us_tag1)))))

@@ -146,9 +146,5 @@ function natural__ref___projection(a: natural__ref) : natural =
 axiom init__post_axiom :
   (forall x:int [init(x)]. (in_range1(x) -> in_range1(init(x))))
 
-logic us : int
-
-logic temp___278 : int
-
  (* File "default_init.ads", line 61, characters 0-0 *)
 goal WP_parameter_def : in_range(0)

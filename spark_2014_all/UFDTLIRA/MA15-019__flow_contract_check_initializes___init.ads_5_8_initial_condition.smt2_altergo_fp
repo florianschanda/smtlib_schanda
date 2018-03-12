@@ -131,63 +131,15 @@ axiom sum_all__def_axiom :
   in_range(init__d)) -> (sum_all(init__b, init__a, init__c,
   init__d) = (((init__a + init__b) + init__c) + init__d))))
 
-logic a : int
-
-logic b : int
-
-logic c : int
-
-logic d : int
-
-logic o : int
-
-logic result : int
-
-logic a1 : int
-
-logic result1 : int
-
-logic b1 : int
-
-logic result2 : int
-
-logic c1 : int
-
-logic result3 : int
-
-logic d1 : int
-
-logic result4 : bool
-
-axiom H : (result = a)
-
-axiom H1 : (a1 = 0)
-
-axiom H2 : in_range(a1)
-
-axiom H3 : (result1 = b)
-
-axiom H4 : (b1 = 0)
-
-axiom H5 : in_range(b1)
-
-axiom H6 : (result2 = c)
-
-axiom H7 : (c1 = a1)
-
-axiom H8 : in_range(c1)
-
-axiom H9 : (result3 = d)
-
-axiom H10 : (d1 = b1)
-
-axiom H11 : in_range(d1)
-
-axiom H12 : ((o = sum_all(b1, a1, c1, d1)) and (in_range(o) and
-  (o = (((a1 + b1) + c1) + d1))))
-
-axiom H13 : (((o = 0) -> (result4 = true)) and ((not (o = 0)) ->
-  (result4 = false)))
-
  (* File "init.adb", line 6, characters 0-0 *)
-goal WP_parameter_def : (sum_all(b1, a1, c1, d1) = 0)
+goal WP_parameter_def :
+  (forall a:int. forall b:int. forall c:int. forall d:int. forall o:int.
+  forall result:int. forall a1:int. forall result1:int. forall b1:int.
+  forall result2:int. forall c1:int. forall result3:int. forall d1:int.
+  (forall result4:bool. ((((result = a) and (a1 = 0)) and (in_range(a1) and
+  (((result1 = b) and (b1 = 0)) and (in_range(b1) and (((result2 = c) and
+  (c1 = a1)) and (in_range(c1) and (((result3 = d) and (d1 = b1)) and
+  (in_range(d1) and (((o = sum_all(b1, a1, c1, d1)) and (in_range(o) and
+  (o = (((a1 + b1) + c1) + d1)))) and (((o = 0) and (result4 = true)) or
+  ((not (o = 0)) and (result4 = false)))))))))))) -> (sum_all(b1, a1, c1,
+  d1) = 0))))

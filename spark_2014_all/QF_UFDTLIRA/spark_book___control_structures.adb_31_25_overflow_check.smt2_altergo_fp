@@ -113,17 +113,6 @@ logic second : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-axiom H : in_range(first)
-
-axiom H1 : in_range(second)
-
  (* File "control_structures.adb", line 29, characters 0-0 *)
-goal WP_parameter_def : in_range(abs_int(first))
+goal WP_parameter_def : (in_range(first) -> (in_range(second) ->
+  in_range(abs_int(first))))

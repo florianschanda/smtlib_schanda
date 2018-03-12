@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -188,24 +188,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> (int,natural) farray
-
-axiom concat_def :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : natural, int -> (int,natural) farray
-
-axiom singleton_def :
-  (forall v:natural.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,natural) farray, int, int, (int,natural) farray, int,
   int -> bool
 
@@ -216,17 +198,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -236,37 +218,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type us_split_fields = { rec__my_container__cursor__index : natural
 }
@@ -411,138 +365,41 @@ function t2b__ref___projection(a: t2b__ref) : t2b = (a).t2b__content
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic c : (int,natural) farray
-
-logic i : int
-
-logic temp___174 : int
-
-logic temp___172 : (int,natural) farray
-
-logic o : natural
-
-logic o1 : (int,natural) farray
-
-logic j : int
-
-logic o2 : natural
-
-logic o3 : (int,natural) farray
-
-logic temp___178 : natural
-
-logic o4 : bool
-
-logic o5 : bool
-
-logic e : int
-
-logic c1 : (int,natural) farray
-
-logic result : int
-
-logic i1 : int
-
-logic result1 : (int,natural) farray
-
-logic c2 : (int,natural) farray
-
-logic c3 : (int,natural) farray
-
-logic i2 : int
-
-logic result2 : int
-
-logic i3 : int
-
-logic result3 : (int,natural) farray
-
-logic c4 : (int,natural) farray
-
-logic c5 : (int,natural) farray
-
-logic i4 : int
-
-logic c6 : (int,natural) farray
-
-logic i5 : int
-
-logic c7 : (int,natural) farray
-
-logic i6 : int
-
-logic c8 : (int,natural) farray
-
-logic i7 : int
-
-logic c9 : (int,natural) farray
-
-logic i8 : int
-
-logic c10 : (int,natural) farray
-
-logic i9 : int
-
-logic c11 : (int,natural) farray
-
-logic i10 : int
-
-logic c12 : (int,natural) farray
-
-logic i11 : int
-
-logic result4 : bool
-
-axiom H : (result = i)
-
-axiom H1 : (i1 = 1)
-
-axiom H2 : (((1 <= i1) and (i1 <= 100)) -> (((temp___174 = i1) and
-  ((temp___172 = c) and ((((to_rep((c[i1])) = 0) -> (((to_rep(o) = 1) and
-  (o1 = (c[i1 <- o]))) and ((result1 = c) and (c2 = o1)))) and
-  ((not (to_rep((c[i1])) = 0)) -> ((c2 = c) and (c2 = c1)))) and
-  ((forall j1:int. (((1 <= j1) and (j1 <= i2)) ->
-   (valid(to_rep((c3[j1]))) = true))) and
-  ((((forall temp___173:int. (((1 <= temp___173) and (temp___173 <= 100)) ->
-     ((i2 <  temp___173) -> ((c3[temp___173]) = (temp___172[temp___173]))))) and
-  ((1 <= 100) -> in_range3(i2))) and ((1 <= i2) and (i2 <= 100))) and
-  (i2 = 100)))))) and (((i2 = i6) and (c3 = c7)) and ((i7 = i2) and
-  (c8 = c3)))))
-
-axiom H3 : (((1 <= i1) and (i1 <= 100)) -> (i8 = i6))
-
-axiom H4 : (((1 <= i1) and (i1 <= 100)) -> (c9 = c7))
-
-axiom H5 : (((1 <= i1) and (i1 <= 100)) -> (i9 = i7))
-
-axiom H6 : (((1 <= i1) and (i1 <= 100)) -> (c10 = c8))
-
-axiom H7 : ((not ((1 <= i1) and (i1 <= 100))) -> (i1 = i8))
-
-axiom H8 : ((not ((1 <= i1) and (i1 <= 100))) -> (c9 = c))
-
-axiom H9 : ((not ((1 <= i1) and (i1 <= 100))) -> (i9 = i1))
-
-axiom H10 : ((not ((1 <= i1) and (i1 <= 100))) -> (c10 = c1))
-
-axiom H11 : (i10 = i8)
-
-axiom H12 : (c11 = c9)
-
-axiom H13 : (i11 = i9)
-
-axiom H14 : (c12 = c10)
-
-axiom H15 : ((o4 = has_element(c11, { us_split_fields1 = {
-  rec__my_container__cursor__index = temp___178 } })) and ((o4 = true) <->
-  ((1 <= to_rep(temp___178)) and (to_rep(temp___178) <= 100))))
-
-axiom H16 : (o5 = true)
-
-axiom H17 : (result4 = match_bool(o5, o4, false))
-
-axiom H18 : (result4 = true)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (has_element(c11, { us_split_fields1 = {
-  rec__my_container__cursor__index = temp___178 } }) = true)
+goal WP_parameter_def :
+  (forall c:(int,natural) farray. forall i:int. forall temp___199:int.
+  forall temp___197:(int,natural) farray. forall o:natural.
+  forall o1:(int,natural) farray. forall temp___203:natural. forall o2:bool.
+  forall o3:bool. forall c1:(int,natural) farray. forall result:int.
+  forall i1:int. forall result1:(int,natural) farray.
+  forall c2:(int,natural) farray. forall c3:(int,natural) farray.
+  forall i2:int. forall c4:(int,natural) farray. forall i3:int.
+  forall c5:(int,natural) farray. forall i4:int.
+  forall c6:(int,natural) farray. forall i5:int.
+  forall c7:(int,natural) farray. forall i6:int.
+  forall c8:(int,natural) farray. forall i7:int.
+  forall c9:(int,natural) farray. forall i8:int. forall result2:bool. ((((({
+  int__content = result } = { int__content = i }) and (i1 = 1)) and
+  ((((1 <= i1) and (i1 <= 100)) and ((((temp___199 = i1) and
+  ((temp___197 = c) and ((((to_rep((c[i1])) = 0) and (((to_rep(o) = 1) and
+  (o1 = (c[i1 <- o]))) and (({ map__content = result1 } = { map__content = c
+  }) and (c2 = o1)))) or ((not (to_rep((c[i1])) = 0)) and ((c2 = c) and
+  (c2 = c1)))) and
+  ((forall j:int. (((1 <= j) and (j <= i2)) ->
+   (valid(to_rep((c3[j]))) = true))) and
+  ((((forall temp___198:int. (((1 <= temp___198) and (temp___198 <= 100)) ->
+     ((i2 <  temp___198) -> ((c3[temp___198]) = (temp___197[temp___198]))))) and
+  ((1 <= 100) -> in_range3(i2))) and ((1 <= i2) and (i2 <= 100))) and
+  (i2 = 100)))))) and (((i2 = i3) and (c3 = c4)) and ((i4 = i2) and
+  (c5 = c3)))) and ((({ int__content = i5 } = { int__content = i3 }) and ({
+  map__content = c6 } = { map__content = c4 })) and ((i6 = i4) and
+  (c7 = c5))))) or ((not ((1 <= i1) and (i1 <= 100))) and (((i1 = i5) and ({
+  map__content = c6 } = { map__content = c })) and ((i6 = i1) and
+  (c7 = c1)))))) and ((({ int__content = i7 } = { int__content = i5 }) and ({
+  map__content = c8 } = { map__content = c6 })) and ((i8 = i6) and
+  (c9 = c7)))) -> ((((o2 = has_element(c8, { us_split_fields1 = {
+  rec__my_container__cursor__index = temp___203 } })) and ((o2 = true) <->
+  ((1 <= to_rep(temp___203)) and (to_rep(temp___203) <= 100)))) and
+  ((o3 = true) and (result2 = match_bool(o3, o2, false)))) ->
+  ((result2 = true) -> (has_element(c8, { us_split_fields1 = {
+  rec__my_container__cursor__index = temp___203 } }) = true)))))

@@ -274,66 +274,38 @@ logic l1 : us_main_type
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic p__identity1__result : integer
-
-logic p__identity1__result1 : us_main_type
-
-logic result : integer
-
-logic result1 : us_main_type
-
-logic p__identity1__result2 : integer
-
-logic p__identity1__result3 : us_main_type
-
-logic p__identity1__result4 : integer
-
-logic p__identity1__result5 : us_main_type
-
-logic p__identity1__result6 : integer
-
-logic p__identity1__result7 : us_main_type
-
-logic p__identity1__result8 : integer
-
-logic p__identity1__result9 : us_main_type
-
-logic p__identity1__result10 : integer
-
-logic p__identity1__result11 : us_main_type
-
-logic result2 : integer
-
-logic result3 : us_main_type
-
-axiom H : (10 = to_rep(l))
-
-axiom H1 : (p__identity1__result4 = p__identity1__result2)
-
-axiom H2 : (p__identity1__result5 = p__identity1__result3)
-
-axiom H3 : ((p__identity1__result6 = p__identity1__result2) and
-  (p__identity1__result7 = p__identity1__result3))
-
-axiom H4 : (result = p__identity1__result)
-
-axiom H5 : (result1 = p__identity1__result1)
-
-axiom H6 : ((p__identity1__result2 = l) and (p__identity1__result3 = l1))
-
-axiom H7 : ((p__identity1__result8 = p__identity1__result4) and
-  (p__identity1__result9 = p__identity1__result5))
-
-axiom H8 : ((p__identity1__result10 = p__identity1__result6) and
-  (p__identity1__result11 = p__identity1__result7))
-
-axiom H9 : (result2 = p__identity1__result8)
-
-axiom H10 : (result3 = p__identity1__result9)
-
  (* File "p.ads", line 19, characters 0-0 *)
-goal WP_parameter_def : (bool_eq2({ us_split_discrs1 = {
+goal WP_parameter_def :
+  (forall p__identity1__result:integer.
+  forall p__identity1__result1:us_main_type. forall result:integer.
+  forall result1:us_main_type. forall p__identity1__result2:integer.
+  forall p__identity1__result3:us_main_type.
+  forall p__identity1__result4:integer.
+  forall p__identity1__result5:us_main_type.
+  forall p__identity1__result6:integer.
+  forall p__identity1__result7:us_main_type.
+  forall p__identity1__result8:integer.
+  forall p__identity1__result9:us_main_type.
+  forall p__identity1__result10:integer.
+  forall p__identity1__result11:us_main_type.
+  (forall result2:integer. forall result3:us_main_type.
+  (((10 = to_rep(l)) and
+  ((((((p__identity1__result4 = p__identity1__result2) and
+  (p__identity1__result5 = p__identity1__result3)) and ({ us_split_discrs1 =
+  { rec__p__private_types__t1__capacity = p__identity1__result6 };
+  us_split_fields1 = { rec__p__private_types__t1 = p__identity1__result7 }
+  } = { us_split_discrs1 = { rec__p__private_types__t1__capacity =
+  p__identity1__result2 }; us_split_fields1 = { rec__p__private_types__t1 =
+  p__identity1__result3 } })) and (((result = p__identity1__result) and
+  (result1 = p__identity1__result1)) and ((l = p__identity1__result2) and
+  (l1 = p__identity1__result3)))) and
+  (((p__identity1__result8 = p__identity1__result4) and
+  (p__identity1__result9 = p__identity1__result5)) and
+  ((p__identity1__result10 = p__identity1__result6) and
+  (p__identity1__result11 = p__identity1__result7)))) and
+  ((result2 = p__identity1__result8) and
+  (result3 = p__identity1__result9)))) -> (bool_eq2({ us_split_discrs1 = {
   rec__p__private_types__t1__capacity = p__identity1__result8 };
   us_split_fields1 = { rec__p__private_types__t1 = p__identity1__result9 } },
   { us_split_discrs1 = { rec__p__private_types__t1__capacity = l };
-  us_split_fields1 = { rec__p__private_types__t1 = l1 } }) = true)
+  us_split_fields1 = { rec__p__private_types__t1 = l1 } }) = true))))

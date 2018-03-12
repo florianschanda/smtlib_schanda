@@ -239,142 +239,16 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
-logic g : int
-
-logic c : int
-
-logic d : int
-
-logic r : int
-
-logic temp___134 : int
-
-logic temp___133 : int
-
-logic temp___132 : int
-
-logic o : int
-
-logic result : int
-
-logic c1 : int
-
-logic result1 : int
-
-logic d1 : int
-
-logic c2 : int
-
-logic d2 : int
-
-logic r1 : int
-
-logic result2 : int
-
-logic r2 : int
-
-logic result3 : int
-
-logic c3 : int
-
-logic result4 : int
-
-logic d3 : int
-
-logic c4 : int
-
-logic d4 : int
-
-logic r3 : int
-
-logic c5 : int
-
-logic d5 : int
-
-logic r4 : int
-
-logic c6 : int
-
-logic d6 : int
-
-logic r5 : int
-
-logic c7 : int
-
-logic d7 : int
-
-logic r6 : int
-
-logic c8 : int
-
-logic d8 : int
-
-logic r7 : int
-
-logic c9 : int
-
-logic d9 : int
-
-logic r8 : int
-
-logic c10 : int
-
-logic d10 : int
-
-logic r9 : int
-
-logic c11 : int
-
-logic d11 : int
-
-logic r10 : int
-
-logic result5 : int
-
-logic g1 : int
-
-logic g2 : int
-
-logic c12 : int
-
-logic d12 : int
-
-logic r11 : int
-
-logic g3 : int
-
-logic c13 : int
-
-logic d13 : int
-
-logic r12 : int
-
-axiom H : in_range(m)
-
-axiom H1 : in_range(n)
-
-axiom H2 : ((0 <= 2147483647) -> in_range(g))
-
-axiom H3 : ((0 <= 2147483647) -> in_range(c))
-
-axiom H4 : ((0 <= 2147483647) -> in_range(d))
-
-axiom H5 : ((0 <= 2147483647) -> in_range(r))
-
-axiom H6 : (result = c)
-
-axiom H7 : (c1 = m)
-
-axiom H8 : (result1 = d)
-
-axiom H9 : (d1 = n)
-
-axiom H10 : (gcd(c2, d2) = gcd(m, n))
-
-axiom H11 : ((((0 <= 2147483647) -> in_range(c2)) and ((0 <= 2147483647) ->
-  in_range(d2))) and ((0 <= 2147483647) -> in_range(r1)))
-
-axiom H12 : (not (d2 = 0))
-
  (* File "greatest_common_divisor.ads", line 4, characters 0-0 *)
-goal WP_parameter_def : in_range(mod(c2, d2))
+goal WP_parameter_def :
+  (forall g:int. forall c:int. forall d:int. forall r:int. forall result:int.
+  forall c1:int. forall result1:int. forall d1:int. forall c2:int.
+  forall d2:int. forall r1:int. (in_range(m) -> (in_range(n) ->
+  (((0 <= 2147483647) -> in_range(g)) -> (((0 <= 2147483647) ->
+  in_range(c)) -> (((0 <= 2147483647) -> in_range(d)) ->
+  (((0 <= 2147483647) -> in_range(r)) -> ((({ int__content = result } = {
+  int__content = c }) and (c1 = m)) -> ((({ int__content = result1 } = {
+  int__content = d }) and (d1 = n)) -> ((gcd(c2, d2) = gcd(m, n)) ->
+  (((((0 <= 2147483647) -> in_range(c2)) and ((0 <= 2147483647) ->
+  in_range(d2))) and ((0 <= 2147483647) -> in_range(r1))) ->
+  ((not (d2 = 0)) -> in_range(mod(c2, d2))))))))))))))

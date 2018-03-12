@@ -1064,48 +1064,13 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic b : t
-
-logic test__test_6__result : t
-
-logic o : t
-
-logic result : t
-
-logic b1 : t
-
-logic result1 : t
-
-logic b2 : t
-
-logic result2 : t
-
-logic test__test_6__result1 : t
-
-logic test__test_6__result2 : t
-
-logic test__test_6__result3 : t
-
-logic b3 : t
-
-logic test__test_6__result4 : t
-
-logic b4 : t
-
-logic test__test_6__result5 : t
-
-axiom H : tqtisFinite(a)
-
-axiom H1 : (result = b)
-
-axiom H2 : (b1 = a)
-
-axiom H3 : tqtisFinite(b1)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 1.10000002384185791015625))
 
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(add(NearestTiesToEven, b1, fliteral1))
+goal WP_parameter_def :
+  (forall b:t. forall result:t. forall b1:t. (tqtisFinite(a) -> ((({
+  t__content = result } = { t__content = b }) and (b1 = a)) ->
+  (tqtisFinite(b1) -> tqtisFinite(add(NearestTiesToEven, b1, fliteral1))))))

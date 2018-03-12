@@ -1374,21 +1374,23 @@ logic readreghigh8 : t1 -> t2
 
 logic readreghigh8__function_guard : t2, t1 -> prop
 
+logic rliteral2 : t1
+
+axiom rliteral_axiom2 : (tqtint1(rliteral2) = 18446744073709486335)
+
 axiom writereghigh8post__post_axiom :
   (forall regold:t1. forall regnew:t1.
   (forall val__:t2 [writereghigh8post(regold, regnew, val__)].
   ((writereghigh8post(regold, regnew, val__) = true) <->
   ((readreghigh8(regnew) = val__) and (bw_and1(regnew,
-  of_int1(18446744073709486335)) = bw_and1(regold,
-  of_int1(18446744073709486335)))))))
+  rliteral2) = bw_and1(regold, rliteral2))))))
 
 axiom writereghigh8post__def_axiom :
   (forall regold:t1. forall regnew:t1.
   (forall val__:t2 [writereghigh8post(regold, regnew, val__)].
   ((writereghigh8post(regold, regnew, val__) = true) <->
   ((readreghigh8(regnew) = val__) and (bw_and1(regnew,
-  of_int1(18446744073709486335)) = bw_and1(regold,
-  of_int1(18446744073709486335)))))))
+  rliteral2) = bw_and1(regold, rliteral2))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -1400,42 +1402,35 @@ logic toBig2 : t2 -> t1
 
 logic toSmall2 : t1 -> t2
 
-logic rliteral2 : t1
+logic rliteral3 : t1
 
-axiom rliteral_axiom2 : (tqtint1(rliteral2) = 255)
+axiom rliteral_axiom3 : (tqtint1(rliteral3) = 255)
 
 axiom toSmall_to_uint2 :
-  (forall x:t1. (ule1(x, rliteral2) -> (tqtint1(x) = tqtint2(toSmall2(x)))))
+  (forall x:t1. (ule1(x, rliteral3) -> (tqtint1(x) = tqtint2(toSmall2(x)))))
 
 axiom toBig_to_uint2 : (forall x:t2. (tqtint2(x) = tqtint1(toBig2(x))))
 
+logic rliteral4 : t1
+
+axiom rliteral_axiom4 : (tqtint1(rliteral4) = 65280)
+
+logic rliteral5 : t1
+
+axiom rliteral_axiom5 : (tqtint1(rliteral5) = 256)
+
 axiom readreghigh8__post_axiom :
   (forall reg:t1 [readreghigh8(reg)].
-  (readreghigh8(reg) = toSmall2(urem1(udiv1(bw_and1(reg, of_int1(65280)),
-  of_int1(256)), of_int1(256)))))
+  (readreghigh8(reg) = toSmall2(urem1(udiv1(bw_and1(reg, rliteral4),
+  rliteral5), of_int1(256)))))
 
-logic rdx : t1
+logic rliteral6 : t
 
-logic result : t1
-
-logic rdx1 : t1
-
-logic rdx2 : t1
-
-logic rdx3 : t1
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : (result = rdx)
-
-axiom H3 : (rdx1 = bw_or1(bw_and1(rdx, of_int1(18446744073709486335)),
-  toBig(mul(toBig1(val__), of_int(256)))))
-
-axiom H4 : (rdx1 = rdx2)
-
-axiom H5 : (rdx3 = rdx1)
+axiom rliteral_axiom6 : (tqtint(rliteral6) = 256)
 
  (* File "x86.ads", line 10, characters 0-0 *)
-goal WP_parameter_def : (writereghigh8post(rdx, rdx2, val__) = true)
+goal WP_parameter_def :
+  (forall rdx:t1. forall result:t1. forall rdx1:t1. forall rdx2:t1.
+  forall rdx3:t1. ((((result = rdx) and (rdx1 = bw_or1(bw_and1(rdx,
+  rliteral2), toBig(mul(toBig1(val__), rliteral6))))) and ((rdx1 = rdx2) and
+  (rdx3 = rdx1))) -> (writereghigh8post(rdx, rdx2, val__) = true)))

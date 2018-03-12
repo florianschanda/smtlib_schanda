@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1154,27 +1154,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,tscalar_with_defaultB) farray, int, int,
-  (int,tscalar_with_defaultB) farray, int,
-  int -> (int,tscalar_with_defaultB) farray
-
-axiom concat_def :
-  (forall a:(int,tscalar_with_defaultB) farray.
-  forall b:(int,tscalar_with_defaultB) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : tscalar_with_defaultB,
-  int -> (int,tscalar_with_defaultB) farray
-
-axiom singleton_def :
-  (forall v:tscalar_with_defaultB.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq16 : (int,tscalar_with_defaultB) farray, int, int,
   (int,tscalar_with_defaultB) farray, int, int -> bool
 
@@ -1186,17 +1165,17 @@ axiom bool_eq_def15 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_138:int. ((((a__first <= temp___idx_138) and
-  (temp___idx_138 <= a__last)) and
-  (to_rep1((a[temp___idx_138])) = to_rep1((b[((b__first - a__first) + temp___idx_138)])))) or
-  (not ((a__first <= temp___idx_138) and (temp___idx_138 <= a__last)))))) ->
+  (forall temp___idx_160:int. ((((a__first <= temp___idx_160) and
+  (temp___idx_160 <= a__last)) and
+  (to_rep1((a[temp___idx_160])) = to_rep1((b[((b__first - a__first) + temp___idx_160)])))) or
+  (not ((a__first <= temp___idx_160) and (temp___idx_160 <= a__last)))))) ->
   (bool_eq16(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_138:int. (((a__first <= temp___idx_138) and
-  (temp___idx_138 <= a__last)) ->
-  (to_rep1((a[temp___idx_138])) = to_rep1((b[((b__first - a__first) + temp___idx_138)]))))))) ->
+  (forall temp___idx_160:int. (((a__first <= temp___idx_160) and
+  (temp___idx_160 <= a__last)) ->
+  (to_rep1((a[temp___idx_160])) = to_rep1((b[((b__first - a__first) + temp___idx_160)]))))))) ->
   (bool_eq16(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1207,40 +1186,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_138:int. (((a__first <= temp___idx_138) and
-  (temp___idx_138 <= a__last)) ->
-  (to_rep1((a[temp___idx_138])) = to_rep1((b[((b__first - a__first) + temp___idx_138)])))))))))
-
-logic compare : (int,tscalar_with_defaultB) farray, int, int,
-  (int,tscalar_with_defaultB) farray, int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,tscalar_with_defaultB) farray.
-  forall b:(int,tscalar_with_defaultB) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq16(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,tscalar_with_defaultB) farray.
-  forall b:(int,tscalar_with_defaultB) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq16(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep1((a[(i + 1)])) <  to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,tscalar_with_defaultB) farray.
-  forall b:(int,tscalar_with_defaultB) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq16(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep1((b[(i + 1)])) <  to_rep1((a[(j + 1)]))))))))))))
+  (forall temp___idx_160:int. (((a__first <= temp___idx_160) and
+  (temp___idx_160 <= a__last)) ->
+  (to_rep1((a[temp___idx_160])) = to_rep1((b[((b__first - a__first) + temp___idx_160)])))))))))
 
 predicate dynamic_property2(first_int: int, last_int: int, x: int) =
   ((first_int <= x) and (x <= last_int))
@@ -2010,159 +1958,5 @@ axiom first__def_axiom : (first = c)
 
 axiom first__def_axiom1 : (first1 = c)
 
-logic no_def__split_fields : scalar_with_default
-
-logic no_def__split_fields1 : tscalar_with_defaultB
-
-logic no_def__split_discrs : bool
-
-logic simple__split_fields : scalar_with_default
-
-logic simple__split_fields1 : integer
-
-logic w_disc__split_fields : scalar_with_default
-
-logic w_disc__split_fields1 : tscalar_with_defaultB
-
-logic w_d_di__split_fields : scalar_with_default
-
-logic w_d_di__split_fields1 : tscalar_with_defaultB
-
-logic w_d_di__split_discrs : bool
-
-logic w_o_di__split_fields : scalar_with_default
-
-logic w_o_di__split_fields1 : tscalar_with_defaultB
-
-logic w_o_di__split_discrs : bool
-
-logic empty__split_fields : (int,tscalar_with_defaultB) farray
-
-logic empty__split_fields1 : t
-
-logic empty__split_discrs : small_natural
-
-logic wrap__split_fields : bool
-
-logic wrap__split_fields1 : scalar_with_default
-
-logic wrap__split_fields2 : tscalar_with_defaultB
-
-logic wrap__split_fields3 : bool
-
-logic wrap__split_discrs : bool
-
-logic temp___d_618 : int
-
-logic temp___b_619 : bool
-
-logic us : int
-
-logic o : int
-
-logic o1 : tscalar_with_defaultB
-
-logic o2 : scalar_with_default
-
-logic o3 : tscalar_with_defaultB
-
-logic with_default__ok_record__no_def__assume : bool
-
-logic with_default__ok_record__no_def__assume1 : scalar_with_default
-
-logic with_default__ok_record__no_def__assume2 : tscalar_with_defaultB
-
-logic with_default__ok_record__no_def__assume3 : bool
-
-logic us1 : int
-
-logic us2 : int
-
-logic temp___622 : bool
-
-logic temp___6221 : scalar_with_default
-
-logic temp___6222 : tscalar_with_defaultB
-
-logic us3 : int
-
-logic temp___625 : bool
-
-logic temp___6251 : scalar_with_default
-
-logic temp___6252 : tscalar_with_defaultB
-
-logic temp___6253 : bool
-
-logic us4 : int
-
-logic us5 : int
-
-logic temp___629 : bool
-
-logic temp___6291 : scalar_with_default
-
-logic temp___6292 : tscalar_with_defaultB
-
-logic temp___6293 : bool
-
-logic us6 : int
-
-logic us7 : int
-
-logic temp___632 : small_natural
-
-logic temp___6321 : (int,tscalar_with_defaultB) farray
-
-logic temp___6322 : t
-
-logic temp___6323 : bool
-
-logic o4 : int
-
-logic us8 : int
-
-logic temp___636 : bool
-
-logic temp___6361 : bool
-
-logic temp___6362 : scalar_with_default
-
-logic temp___6363 : tscalar_with_defaultB
-
-logic temp___6364 : bool
-
-logic temp___6365 : bool
-
-logic temp___638 : bool
-
-logic temp___6381 : scalar_with_default
-
-logic temp___6382 : tscalar_with_defaultB
-
-logic temp___6383 : bool
-
-logic us9 : int
-
-logic us10 : int
-
-logic result : scalar_with_default
-
-logic result1 : tscalar_with_defaultB
-
-logic no_def__split_fields2 : scalar_with_default
-
-logic no_def__split_fields3 : tscalar_with_defaultB
-
-logic result2 : bool
-
-logic no_def__split_discrs1 : bool
-
-logic result3 : bool
-
-axiom H : in_range1(c)
-
-axiom H1 : (c <= 2147483647)
-
  (* File "with_default.adb", line 45, characters 0-0 *)
-goal WP_parameter_def : (0 <= c)
+goal WP_parameter_def : (in_range1(c) -> ((c <= 2147483647) -> (0 <= c)))

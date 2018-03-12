@@ -217,29 +217,8 @@ function positive__ref___projection(a: positive__ref) : positive =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic c : int
-
-logic o : int
-
-logic result : int
-
-logic c1 : int
-
-logic c2 : int
-
-logic result1 : int
-
-logic c3 : int
-
-axiom H : (result = c)
-
-axiom H1 : (c1 = 100)
-
-axiom H2 : in_range(c1)
-
-axiom H3 : (1 <  c1)
-
-axiom H4 : (not (mod(10, c1) = 0))
-
  (* File "loop_decr.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : (1 <  c1)
+goal WP_parameter_def :
+  (forall c:int. forall result:int. forall c1:int. (((result = c) and
+  (c1 = 100)) -> (in_range(c1) -> ((1 <  c1) -> ((not (mod(10, c1) = 0)) ->
+  (1 <  c1))))))

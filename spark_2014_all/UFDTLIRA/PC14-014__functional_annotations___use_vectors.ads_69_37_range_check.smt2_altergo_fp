@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -789,299 +789,142 @@ axiom first__def_axiom4 : (first2 = fst)
 
 axiom last__def_axiom5 : (last3 = lst)
 
-logic lst1 : int
-
-logic current : int
-
-logic use_vectors__my_find__result : int
-
-logic i : int
-
-logic o : int
-
-logic o1 : bool
-
-logic us : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic temp___469 : int
-
-logic temp___470 : int
-
-logic temp___468 : int
-
-logic i1 : int
-
-logic o5 : int
-
-logic o6 : bool
-
-logic us1 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic us2 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : int
-
-logic i2 : int
-
-logic o13 : int
-
-logic o14 : bool
-
-logic us3 : int
-
-logic o15 : int
-
-logic o16 : int
-
-logic us4 : int
-
-logic o17 : int
-
-logic o18 : int
-
-logic o19 : int
-
-logic o20 : bool
-
-logic use_vectors__my_find__result1 : int
-
-logic result : bool
-
-logic result1 : int
-
-logic lst2 : int
-
-logic result2 : int
-
-logic current1 : int
-
-logic current2 : int
-
-logic use_vectors__my_find__result2 : int
-
-logic result3 : bool
-
-logic result4 : bool
-
-logic result5 : int
-
-logic use_vectors__my_find__result3 : int
-
-logic result6 : int
-
-logic current3 : int
-
-logic current4 : int
-
-logic use_vectors__my_find__result4 : int
-
-logic current5 : int
-
-logic use_vectors__my_find__result5 : int
-
-logic current6 : int
-
-logic use_vectors__my_find__result6 : int
-
-logic current7 : int
-
-logic use_vectors__my_find__result7 : int
-
-logic current8 : int
-
-logic use_vectors__my_find__result8 : int
-
-logic current9 : int
-
-logic use_vectors__my_find__result9 : int
-
-logic result7 : int
-
-logic use_vectors__my_find__result10 : int
-
-logic use_vectors__my_find__result11 : int
-
-logic use_vectors__my_find__result12 : int
-
-logic current10 : int
-
-logic use_vectors__my_find__result13 : int
-
-logic current11 : int
-
-logic use_vectors__my_find__result14 : int
-
-logic lst3 : int
-
-logic current12 : int
-
-logic use_vectors__my_find__result15 : int
-
-logic lst4 : int
-
-logic current13 : int
-
-logic use_vectors__my_find__result16 : int
-
-logic result8 : bool
-
-logic result9 : bool
-
-logic result10 : bool
-
-axiom H : dynamic_property2(0, last2, to_rep1(v))
-
-axiom H1 : in_range2(e)
-
-axiom H2 : ((o4 = ((first2 - 1) + length(model__({ us_split_discrs1 = {
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (forall lst1:int. forall current:int.
+  forall use_vectors__my_find__result:int. forall o:int.
+  forall temp___508:int. forall temp___509:int. forall temp___507:int.
+  forall us:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
+  forall o5:bool. forall use_vectors__my_find__result1:int.
+  forall result:int. forall lst2:int. forall result1:int.
+  forall current1:int. forall current2:int.
+  forall use_vectors__my_find__result2:int. forall result2:bool.
+  forall result3:int. forall use_vectors__my_find__result3:int.
+  forall current3:int. forall use_vectors__my_find__result4:int.
+  forall current4:int. forall use_vectors__my_find__result5:int.
+  forall current5:int. forall use_vectors__my_find__result6:int.
+  forall current6:int. forall use_vectors__my_find__result7:int.
+  forall result4:int. forall use_vectors__my_find__result8:int.
+  forall use_vectors__my_find__result9:int.
+  forall use_vectors__my_find__result10:int. forall current7:int.
+  forall use_vectors__my_find__result11:int. forall current8:int.
+  forall use_vectors__my_find__result12:int. forall lst3:int.
+  forall current9:int. forall use_vectors__my_find__result13:int.
+  forall lst4:int. forall current10:int.
+  forall use_vectors__my_find__result14:int. forall result5:bool.
+  (dynamic_property2(0, last2, to_rep1(v)) -> (in_range2(e) ->
+  ((((((o = ((first2 - 1) + length(model__({ us_split_discrs1 = {
   rec__use_vectors__my_vectors__vector__capacity = v }; us_split_fields1 = {
   rec__use_vectors__my_vectors__vector = v1 } })))) and
-  (dynamic_property4(first3, last4, o4) and
-  (o4 = ((first2 - 1) + length(model__({ us_split_discrs1 = {
+  (dynamic_property4(first3, last4, o) and
+  (o = ((first2 - 1) + length(model__({ us_split_discrs1 = {
   rec__use_vectors__my_vectors__vector__capacity = v }; us_split_fields1 = {
-  rec__use_vectors__my_vectors__vector = v1 } }))))))
-
-axiom H3 : (result1 = lst1)
-
-axiom H4 : (lst2 = o4)
-
-axiom H5 : in_range1(lst2)
-
-axiom H6 : (lst2 = r27b)
-
-axiom H7 : in_range1(r27b)
-
-axiom H8 :
-  (((((use_vectors__my_find__result3 = use_vectors__my_find__result13) and
-  (current2 = current10)) and
-  ((use_vectors__my_find__result14 = use_vectors__my_find__result3) and
-  (current11 = current2))) and ((temp___469 = first) and
-  ((temp___470 = r27b) and (((result2 = current) and
-  (current1 = temp___469)) and (((temp___469 <= current1) and
-  (current1 <= temp___470)) and ((temp___468 = current1) and
-  ((forall i3:int. (((first <= i3) and (i3 <= (current2 - 1))) ->
+  rec__use_vectors__my_vectors__vector = v1 } })))))) and (({ int__content =
+  result } = { int__content = lst1 }) and (lst2 = o))) and
+  (in_range1(lst2) and (((lst2 = r27b) and in_range1(r27b)) and
+  (((((use_vectors__my_find__result3 = use_vectors__my_find__result11) and
+  (current2 = current7)) and
+  ((use_vectors__my_find__result12 = use_vectors__my_find__result3) and
+  (current8 = current2))) and ((temp___508 = first) and
+  ((temp___509 = r27b) and ((({ int__content = result1 } = { int__content =
+  current }) and (current1 = temp___508)) and (((temp___508 <= current1) and
+  (current1 <= temp___509)) and ((temp___507 = current1) and
+  ((forall i:int. (((first <= i) and (i <= (current2 - 1))) ->
    (not (get(model__({ us_split_discrs1 = {
    rec__use_vectors__my_vectors__vector__capacity = v }; us_split_fields1 = {
-   rec__use_vectors__my_vectors__vector = v1 } }), i3) = e)))) and
+   rec__use_vectors__my_vectors__vector = v1 } }), i) = e)))) and
   ((((first <= r27b) -> dynamic_property5(first, r27b, current2)) and
-  ((first <= current2) and (current2 <= r27b))) and ((((((us2 = current2) and
-  dynamic_property1(first1, last1, current2)) and (o9 = current2)) and
-  ((o10 = get(model__({ us_split_discrs1 = {
+  ((first <= current2) and (current2 <= r27b))) and ((((((us = current2) and
+  dynamic_property1(first1, last1, current2)) and (o1 = current2)) and
+  ((o2 = get(model__({ us_split_discrs1 = {
   rec__use_vectors__my_vectors__vector__capacity = v }; us_split_fields1 = {
-  rec__use_vectors__my_vectors__vector = v1 } }), o9)) and
-  (in_range4(o10) and (o10 = get(model__({ us_split_discrs1 = {
+  rec__use_vectors__my_vectors__vector = v1 } }), o1)) and (in_range4(o2) and
+  (o2 = get(model__({ us_split_discrs1 = {
   rec__use_vectors__my_vectors__vector__capacity = v }; us_split_fields1 = {
-  rec__use_vectors__my_vectors__vector = v1 } }), o9))))) and (((o10 = e) ->
-  (result4 = true)) and ((not (o10 = e)) -> (result4 = false)))) and
-  ((result4 = true) and ((result5 = use_vectors__my_find__result2) and
-  (use_vectors__my_find__result3 = current2)))))))))))) or
-  ((((result2 = current) and (current1 = first)) and
-  ((((first <= current1) and (current1 <= r27b)) ->
-  ((((temp___468 = current1) and
-  ((forall i3:int. (((first <= i3) and (i3 <= (current2 - 1))) ->
+  rec__use_vectors__my_vectors__vector = v1 } }), o1))))) and (((o2 = e) and
+  (result2 = true)) or ((not (o2 = e)) and (result2 = false)))) and
+  ((result2 = true) and ((result3 = use_vectors__my_find__result2) and
+  (use_vectors__my_find__result3 = current2)))))))))))) or (((({
+  int__content = result1 } = { int__content = current }) and
+  (current1 = first)) and ((((first <= current1) and (current1 <= r27b)) and
+  ((((temp___507 = current1) and
+  ((forall i:int. (((first <= i) and (i <= (current2 - 1))) ->
    (not (get(model__({ us_split_discrs1 = {
    rec__use_vectors__my_vectors__vector__capacity = v }; us_split_fields1 = {
-   rec__use_vectors__my_vectors__vector = v1 } }), i3) = e)))) and
+   rec__use_vectors__my_vectors__vector = v1 } }), i) = e)))) and
   ((((first <= r27b) -> dynamic_property5(first, r27b, current2)) and
-  ((first <= current2) and (current2 <= r27b))) and
-  (((((((us2 = current2) and dynamic_property1(first1, last1, current2)) and
-  (o9 = current2)) and ((o10 = get(model__({ us_split_discrs1 = {
+  ((first <= current2) and (current2 <= r27b))) and (((((((us = current2) and
+  dynamic_property1(first1, last1, current2)) and (o1 = current2)) and
+  ((o2 = get(model__({ us_split_discrs1 = {
   rec__use_vectors__my_vectors__vector__capacity = v }; us_split_fields1 = {
-  rec__use_vectors__my_vectors__vector = v1 } }), o9)) and
-  (in_range4(o10) and (o10 = get(model__({ us_split_discrs1 = {
+  rec__use_vectors__my_vectors__vector = v1 } }), o1)) and (in_range4(o2) and
+  (o2 = get(model__({ us_split_discrs1 = {
   rec__use_vectors__my_vectors__vector__capacity = v }; us_split_fields1 = {
-  rec__use_vectors__my_vectors__vector = v1 } }), o9))))) and (((o10 = e) ->
-  (result4 = true)) and ((not (o10 = e)) -> (result4 = false)))) and
-  ((not (result4 = true)) and
+  rec__use_vectors__my_vectors__vector = v1 } }), o1))))) and (((o2 = e) and
+  (result2 = true)) or ((not (o2 = e)) and (result2 = false)))) and
+  ((not (result2 = true)) and
   (use_vectors__my_find__result3 = use_vectors__my_find__result2))) and
   (current2 = r27b))))) and
-  (((use_vectors__my_find__result3 = use_vectors__my_find__result6) and
-  (current2 = current6)) and
-  ((use_vectors__my_find__result7 = use_vectors__my_find__result3) and
-  (current7 = current2)))) and
-  (((use_vectors__my_find__result8 = use_vectors__my_find__result6) and
-  (current8 = current6)) and
-  ((use_vectors__my_find__result9 = use_vectors__my_find__result7) and
-  (current9 = current7))))) and ((not ((first <= current1) and
-  (current1 <= r27b))) ->
-  (((use_vectors__my_find__result8 = use_vectors__my_find__result) and
-  (current1 = current8)) and
-  ((use_vectors__my_find__result9 = use_vectors__my_find__result1) and
-  (current9 = current1)))))) and
-  ((((use_vectors__my_find__result13 = use_vectors__my_find__result11) and
-  (current10 = current8)) and
+  (((use_vectors__my_find__result3 = use_vectors__my_find__result4) and
+  (current2 = current3)) and
+  ((use_vectors__my_find__result5 = use_vectors__my_find__result3) and
+  (current4 = current2)))) and ((({ int__content =
+  use_vectors__my_find__result6 } = { int__content =
+  use_vectors__my_find__result4 }) and ({ int__content = current5 } = {
+  int__content = current3 })) and
+  ((use_vectors__my_find__result7 = use_vectors__my_find__result5) and
+  (current6 = current4))))) or ((not ((first <= current1) and
+  (current1 <= r27b))) and ((({ int__content = use_vectors__my_find__result6
+  } = { int__content = use_vectors__my_find__result }) and
+  (current1 = current5)) and
+  ((use_vectors__my_find__result7 = use_vectors__my_find__result1) and
+  (current6 = current1)))))) and
+  ((((use_vectors__my_find__result9 = use_vectors__my_find__result11) and
+  (current7 = current5)) and
+  ((use_vectors__my_find__result12 = use_vectors__my_find__result10) and
+  (current8 = current6))) and
+  (((use_vectors__my_find__result8 = use_vectors__my_find__result9) and
+  (use_vectors__my_find__result10 = use_vectors__my_find__result8)) and
+  (((o3 = (first - 1)) and in_range1((first - 1))) and
+  ((result4 = use_vectors__my_find__result6) and
+  (use_vectors__my_find__result8 = o3)))))))))) and
+  (((use_vectors__my_find__result13 = use_vectors__my_find__result11) and
+  ((current9 = current7) and (lst3 = lst2))) and
   ((use_vectors__my_find__result14 = use_vectors__my_find__result12) and
-  (current11 = current9))) and
-  (((use_vectors__my_find__result10 = use_vectors__my_find__result11) and
-  (use_vectors__my_find__result12 = use_vectors__my_find__result10)) and
-  (((o11 = (first - 1)) and in_range1((first - 1))) and
-  ((result7 = use_vectors__my_find__result8) and
-  (use_vectors__my_find__result10 = o11)))))))
-
-axiom H9 : (use_vectors__my_find__result15 = use_vectors__my_find__result13)
-
-axiom H10 : (current12 = current10)
-
-axiom H11 : (lst3 = lst2)
-
-axiom H12 : (use_vectors__my_find__result16 = use_vectors__my_find__result14)
-
-axiom H13 : (current13 = current11)
-
-axiom H14 : (lst4 = lst2)
-
-axiom H15 :
-  ((forall i3:int. (((first <= i3) and
-   (i3 <= ((first2 - 1) + length(model__({ us_split_discrs1 = {
-   rec__use_vectors__my_vectors__vector__capacity = v }; us_split_fields1 = {
-   rec__use_vectors__my_vectors__vector = v1 } }))))) -> (not (get(model__({
-   us_split_discrs1 = { rec__use_vectors__my_vectors__vector__capacity = v };
-   us_split_fields1 = { rec__use_vectors__my_vectors__vector = v1 } }),
-   i3) = e)))) -> (use_vectors__my_find__result15 = (first - 1)))
-
-axiom H16 :
-  (not (forall i3:int. (((first <= i3) and
-       (i3 <= ((first2 - 1) + length(model__({ us_split_discrs1 = {
+  ((current10 = current8) and (lst4 = lst2))))) ->
+  ((((forall i:int. (((first <= i) and (i <= ((first2 - 1) + length(model__({
+     us_split_discrs1 = { rec__use_vectors__my_vectors__vector__capacity = v
+     }; us_split_fields1 = { rec__use_vectors__my_vectors__vector = v1 }
+     }))))) -> (not (get(model__({ us_split_discrs1 = {
+     rec__use_vectors__my_vectors__vector__capacity = v }; us_split_fields1 =
+     { rec__use_vectors__my_vectors__vector = v1 } }), i) = e)))) and
+  (use_vectors__my_find__result13 = (first - 1))) or
+  (not (forall i:int. (((first <= i) and
+       (i <= ((first2 - 1) + length(model__({ us_split_discrs1 = {
        rec__use_vectors__my_vectors__vector__capacity = v };
        us_split_fields1 = { rec__use_vectors__my_vectors__vector = v1 }
        }))))) -> (not (get(model__({ us_split_discrs1 = {
        rec__use_vectors__my_vectors__vector__capacity = v };
        us_split_fields1 = { rec__use_vectors__my_vectors__vector = v1 } }),
-       i3) = e)))))
-
-axiom H17 : ((o19 = ((first2 - 1) + length(model__({ us_split_discrs1 = {
+       i) = e)))))) ->
+  ((not (forall i:int. (((first <= i) and
+        (i <= ((first2 - 1) + length(model__({ us_split_discrs1 = {
+        rec__use_vectors__my_vectors__vector__capacity = v };
+        us_split_fields1 = { rec__use_vectors__my_vectors__vector = v1 }
+        }))))) -> (not (get(model__({ us_split_discrs1 = {
+        rec__use_vectors__my_vectors__vector__capacity = v };
+        us_split_fields1 = { rec__use_vectors__my_vectors__vector = v1 } }),
+        i) = e))))) ->
+  (((((o4 = ((first2 - 1) + length(model__({ us_split_discrs1 = {
   rec__use_vectors__my_vectors__vector__capacity = v }; us_split_fields1 = {
   rec__use_vectors__my_vectors__vector = v1 } })))) and
-  (dynamic_property4(first3, last4, o19) and
-  (o19 = ((first2 - 1) + length(model__({ us_split_discrs1 = {
+  (dynamic_property4(first3, last4, o4) and
+  (o4 = ((first2 - 1) + length(model__({ us_split_discrs1 = {
   rec__use_vectors__my_vectors__vector__capacity = v }; us_split_fields1 = {
-  rec__use_vectors__my_vectors__vector = v1 } }))))))
-
-axiom H18 : (((use_vectors__my_find__result15 <= o19) -> (o20 = true)) and
-  ((not (use_vectors__my_find__result15 <= o19)) -> (o20 = false)))
-
-axiom H19 : (((first <= use_vectors__my_find__result15) ->
-  (result9 = o20)) and ((not (first <= use_vectors__my_find__result15)) ->
-  (result9 = false)))
-
-axiom H20 : (result9 = true)
-
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : dynamic_property1(first1, last1,
-  use_vectors__my_find__result15)
+  rec__use_vectors__my_vectors__vector = v1 } })))))) and
+  (((use_vectors__my_find__result13 <= o4) and (o5 = true)) or
+  ((not (use_vectors__my_find__result13 <= o4)) and (o5 = false)))) and
+  (((first <= use_vectors__my_find__result13) and (result5 = o5)) or
+  ((not (first <= use_vectors__my_find__result13)) and
+  (result5 = false)))) -> ((result5 = true) -> dynamic_property1(first1,
+  last1, use_vectors__my_find__result13)))))))))

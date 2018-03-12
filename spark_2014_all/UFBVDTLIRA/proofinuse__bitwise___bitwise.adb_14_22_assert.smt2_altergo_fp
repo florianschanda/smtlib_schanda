@@ -1018,23 +1018,17 @@ logic lmask_8 : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-axiom lmask_8__def_axiom : (lmask_8 = of_int(255))
+logic rliteral : t
 
-logic res : t1
+axiom rliteral_axiom : (tqtint(rliteral) = 255)
 
-logic result : t1
+axiom lmask_8__def_axiom : (lmask_8 = rliteral)
 
-logic res1 : t1
+logic rliteral1 : t1
 
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : true
-
-axiom H3 : (result = res)
-
-axiom H4 : (res1 = of_int1(255))
+axiom rliteral_axiom1 : (tqtint1(rliteral1) = 255)
 
  (* File "bitwise.adb", line 4, characters 0-0 *)
-goal WP_parameter_def : (bw_and1(x, res1) = bw_and1(x, of_int1(255)))
+goal WP_parameter_def :
+  (forall res:t1. forall result:t1. forall res1:t1. (((result = res) and
+  (res1 = rliteral1)) -> (bw_and1(x, res1) = bw_and1(x, rliteral1))))

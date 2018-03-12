@@ -173,65 +173,17 @@ axiom f4__post_axiom : in_range(f4(void))
 
 axiom f4__def_axiom : (f4(void) = ((f3(void) + g3(void)) - 1))
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic result : bool
-
-logic result1 : bool
-
-logic result2 : bool
-
-logic result3 : bool
-
-logic result4 : bool
-
-logic result5 : bool
-
-logic result6 : bool
-
-logic result7 : bool
-
-axiom H : ((o = value(void)) and in_range(o))
-
-axiom H1 : (((o = 0) -> (result = true)) and ((not (o = 0)) ->
-  (result = false)))
-
-axiom H2 : (not (result = true))
-
-axiom H3 : ((o1 = value(void)) and in_range(o1))
-
-axiom H4 : (((o1 = 1) -> (result1 = true)) and ((not (o1 = 1)) ->
-  (result1 = false)))
-
-axiom H5 : (not (result1 = true))
-
-axiom H6 : ((o2 = value(void)) and in_range(o2))
-
-axiom H7 : (((o2 = 2) -> (result2 = true)) and ((not (o2 = 2)) ->
-  (result2 = false)))
-
-axiom H8 : (not (result2 = true))
-
-axiom H9 : ((o3 = value(void)) and in_range(o3))
-
-axiom H10 : (((o3 = 3) -> (result3 = true)) and ((not (o3 = 3)) ->
-  (result3 = false)))
-
-axiom H11 : (result3 = true)
-
  (* File "private_q.adb", line 4, characters 0-0 *)
-goal WP_parameter_def : (f4(void) = 1)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. forall o2:int. forall o3:int.
+  forall result:bool. forall result1:bool. forall result2:bool.
+  forall result3:bool. ((((o = value(void)) and in_range(o)) and
+  (((o = 0) and (result = true)) or ((not (o = 0)) and (result = false)))) ->
+  ((not (result = true)) -> ((((o1 = value(void)) and in_range(o1)) and
+  (((o1 = 1) and (result1 = true)) or ((not (o1 = 1)) and
+  (result1 = false)))) -> ((not (result1 = true)) ->
+  ((((o2 = value(void)) and in_range(o2)) and (((o2 = 2) and
+  (result2 = true)) or ((not (o2 = 2)) and (result2 = false)))) ->
+  ((not (result2 = true)) -> ((((o3 = value(void)) and in_range(o3)) and
+  (((o3 = 3) and (result3 = true)) or ((not (o3 = 3)) and
+  (result3 = false)))) -> ((result3 = true) -> (f4(void) = 1))))))))))

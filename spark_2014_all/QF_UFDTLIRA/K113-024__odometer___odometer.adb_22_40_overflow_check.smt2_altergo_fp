@@ -109,47 +109,11 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic trip : int
-
-logic total : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic result : int
-
-logic trip1 : int
-
-logic result1 : int
-
-logic total1 : int
-
-logic trip2 : int
-
-logic total2 : int
-
-logic trip3 : int
-
-logic total3 : int
-
-logic result2 : bool
-
-axiom H : in_range(trip)
-
-axiom H1 : in_range(total)
-
-axiom H2 : ((trip <  2147483647) and (total <  2147483647))
-
-axiom H3 : ((o = (trip + 1)) and in_range((trip + 1)))
-
-axiom H4 : (result = trip)
-
-axiom H5 : (trip1 = o)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((total + 1))
+goal WP_parameter_def :
+  (forall trip:int. forall total:int. forall o:int. forall result:int.
+  forall trip1:int. (in_range(trip) -> (in_range(total) ->
+  (((trip <  2147483647) and (total <  2147483647)) ->
+  ((((o = (trip + 1)) and in_range((trip + 1))) and (({ int__content = result
+  } = { int__content = trip }) and (trip1 = o))) ->
+  in_range((total + 1)))))))

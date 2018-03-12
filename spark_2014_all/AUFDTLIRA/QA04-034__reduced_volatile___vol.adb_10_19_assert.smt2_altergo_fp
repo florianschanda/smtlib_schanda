@@ -203,26 +203,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def :
-  (forall v:integer.
-  (forall i:int [(singleton({ us_split_fields1 = { rec__vol__t__c = v } },
-  i)[i])]. ((singleton({ us_split_fields1 = { rec__vol__t__c = v } },
-  i)[i]) = { us_split_fields1 = { rec__vol__t__c = v } })))
-
 logic bool_eq3 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -233,17 +213,17 @@ axiom bool_eq_def2 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and (bool_eq2((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and (bool_eq2((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq3(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq2((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq3(a,
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq2((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq3(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -253,9 +233,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq2((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq2((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -267,123 +247,35 @@ logic h3 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic h1 : int
-
-logic h2 : int
-
-logic temp___156 : (int,us_rep) farray
-
-logic vol__ident__x__compl : integer
-
-logic temp___157 : int
-
-logic vol__h3__assume : int
-
-logic temp___152 : (int,us_rep) farray
-
-logic vol__ident__x__compl1 : integer
-
-logic temp___153 : int
-
-logic o : int
-
-logic temp___154 : (int,us_rep) farray
-
-logic vol__ident__x__compl2 : integer
-
-logic temp___155 : int
-
-logic o1 : int
-
-logic g : (int,us_rep) farray
-
-logic vol__ident__x__fields : integer
-
-logic result : (int,us_rep) farray
-
-logic g1 : (int,us_rep) farray
-
-logic g2 : (int,us_rep) farray
-
-logic vol__ident__x__fields1 : integer
-
-logic result1 : (int,us_rep) farray
-
-logic g3 : (int,us_rep) farray
-
-logic result2 : int
-
-logic h11 : int
-
-logic g4 : (int,us_rep) farray
-
-logic vol__ident__x__fields2 : integer
-
-logic result3 : (int,us_rep) farray
-
-logic g5 : (int,us_rep) farray
-
-logic result4 : int
-
-logic h21 : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range(h1))
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(h2))
-
-axiom H2 : (temp___156 = g)
-
-axiom H3 : ({ us_split_fields1 = { rec__vol__t__c = vol__ident__x__compl }
-  } = (temp___156[1]))
-
-axiom H4 : in_range(temp___157)
-
-axiom H5 : (result = g)
-
-axiom H6 : (g1 = (g[1 <- { us_split_fields1 = { rec__vol__t__c =
-  vol__ident__x__fields } }]))
-
-axiom H7 : (vol__h3__assume = temp___157)
-
-axiom H8 : (vol__h3__assume = h3)
-
-axiom H9 : in_range(h3)
-
-axiom H10 : (temp___152 = g2)
-
-axiom H11 : ({ us_split_fields1 = { rec__vol__t__c = vol__ident__x__compl1 }
-  } = (temp___152[1]))
-
-axiom H12 : in_range(temp___153)
-
-axiom H13 : (result1 = g2)
-
-axiom H14 : (g3 = (g2[1 <- { us_split_fields1 = { rec__vol__t__c =
-  vol__ident__x__fields1 } }]))
-
-axiom H15 : (o = temp___153)
-
-axiom H16 : (result2 = h1)
-
-axiom H17 : (h11 = o)
-
-axiom H18 : (temp___154 = g4)
-
-axiom H19 : ({ us_split_fields1 = { rec__vol__t__c = vol__ident__x__compl2 }
-  } = (temp___154[1]))
-
-axiom H20 : in_range(temp___155)
-
-axiom H21 : (result3 = g4)
-
-axiom H22 : (g5 = (g4[1 <- { us_split_fields1 = { rec__vol__t__c =
-  vol__ident__x__fields2 } }]))
-
-axiom H23 : (o1 = temp___155)
-
-axiom H24 : (result4 = h2)
-
-axiom H25 : (h21 = o1)
-
  (* File "vol.ads", line 10, characters 0-0 *)
-goal WP_parameter_def : (h11 = h21)
+goal WP_parameter_def :
+  (forall h1:int. forall h2:int. forall temp___180:(int,us_rep) farray.
+  forall vol__ident__x__compl:integer. forall temp___181:int.
+  forall vol__h3__assume:int. forall temp___176:(int,us_rep) farray.
+  forall vol__ident__x__compl1:integer. forall temp___177:int. forall o:int.
+  forall temp___178:(int,us_rep) farray.
+  forall vol__ident__x__compl2:integer. forall temp___179:int. forall o1:int.
+  forall g:(int,us_rep) farray. forall vol__ident__x__fields:integer.
+  forall result:(int,us_rep) farray. forall g1:(int,us_rep) farray.
+  forall g2:(int,us_rep) farray. forall vol__ident__x__fields1:integer.
+  forall result1:(int,us_rep) farray. forall g3:(int,us_rep) farray.
+  forall result2:int. forall h11:int. forall g4:(int,us_rep) farray.
+  forall vol__ident__x__fields2:integer. forall result3:(int,us_rep) farray.
+  forall g5:(int,us_rep) farray. forall result4:int. forall h21:int.
+  ((((- 2147483648) <= 2147483647) -> in_range(h1)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(h2)) ->
+  (((((temp___180 = g) and ({ us_split_fields1 = { rec__vol__t__c =
+  vol__ident__x__compl } } = (temp___180[1]))) and (in_range(temp___181) and
+  (((result = g) and (g1 = (g[1 <- { us_split_fields1 = { rec__vol__t__c =
+  vol__ident__x__fields } }]))) and (vol__h3__assume = temp___181)))) and
+  (vol__h3__assume = h3)) -> (in_range(h3) -> (((((temp___176 = g2) and ({
+  us_split_fields1 = { rec__vol__t__c = vol__ident__x__compl1 }
+  } = (temp___176[1]))) and (in_range(temp___177) and (((result1 = g2) and
+  (g3 = (g2[1 <- { us_split_fields1 = { rec__vol__t__c =
+  vol__ident__x__fields1 } }]))) and (o = temp___177)))) and
+  ((result2 = h1) and (h11 = o))) -> (((((temp___178 = g4) and ({
+  us_split_fields1 = { rec__vol__t__c = vol__ident__x__compl2 }
+  } = (temp___178[1]))) and (in_range(temp___179) and (((result3 = g4) and
+  (g5 = (g4[1 <- { us_split_fields1 = { rec__vol__t__c =
+  vol__ident__x__fields2 } }]))) and (o1 = temp___179)))) and
+  ((result4 = h2) and (h21 = o1))) -> (h11 = h21))))))))

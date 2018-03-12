@@ -344,12 +344,8 @@ logic c__attr__tag : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic c__split_fields : integer
-
-logic c__split_fields1 : integer
-
-axiom H : ((c__attr__tag = us_tag1) and ((to_rep(c__split_fields) = 0) and
-  (to_rep(c__split_fields1) = 1)))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (to_rep(c__split_fields) = 1)
+goal WP_parameter_def :
+  (forall c__split_fields:integer. forall c__split_fields1:integer.
+  (((c__attr__tag = us_tag1) and ((to_rep(c__split_fields) = 0) and
+  (to_rep(c__split_fields1) = 1))) -> (to_rep(c__split_fields) = 1)))

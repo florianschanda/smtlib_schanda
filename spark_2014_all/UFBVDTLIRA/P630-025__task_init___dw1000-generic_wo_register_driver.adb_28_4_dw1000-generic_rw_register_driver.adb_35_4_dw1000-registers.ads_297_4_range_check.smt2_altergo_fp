@@ -981,7 +981,15 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type bits_6
 
-predicate in_range1(x: t) = (ule(of_int(0), x) and ule(x, of_int(63)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 63)
+
+predicate in_range1(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 63))
 
@@ -1009,8 +1017,15 @@ function bits_6__ref___projection(a: bits_6__ref) : bits_6 =
 
 type bits_15
 
-predicate in_range2(x: t1) = (ule1(of_int1(0), x) and ule1(x,
-  of_int1(32767)))
+logic rliteral2 : t1
+
+axiom rliteral_axiom2 : (tqtint1(rliteral2) = 0)
+
+logic rliteral3 : t1
+
+axiom rliteral_axiom3 : (tqtint1(rliteral3) = 32767)
+
+predicate in_range2(x: t1) = (ule1(rliteral2, x) and ule1(x, rliteral3))
 
 predicate in_range_int1(x: int) = ((0 <= x) and (x <= 32767))
 
@@ -1044,15 +1059,18 @@ logic sub_register : t1
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-axiom register_id__def_axiom : (register_id = of_int(35))
+logic rliteral4 : t
 
-axiom sub_register__def_axiom : (sub_register = of_int1(2))
+axiom rliteral_axiom4 : (tqtint(rliteral4) = 35)
 
-axiom H : in_range1(register_id)
+axiom register_id__def_axiom : (register_id = rliteral4)
 
-axiom H1 : in_range2(sub_register)
+logic rliteral5 : t1
 
-axiom H2 : (1 <= 2)
+axiom rliteral_axiom5 : (tqtint1(rliteral5) = 2)
+
+axiom sub_register__def_axiom : (sub_register = rliteral5)
 
  (* File "dw1000-generic_ro_register_driver.ads", line 38, characters 0-0 *)
-goal WP_parameter_def : (0 <= 1)
+goal WP_parameter_def : (in_range1(register_id) ->
+  (in_range2(sub_register) -> ((1 <= 2) -> (0 <= 1))))

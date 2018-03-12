@@ -235,37 +235,18 @@ function r2__ref___projection(a: r2__ref) : us_rep = (a).r2__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x__split_fields : integer
-
-logic types_with_inv__set_to_zero__2__x__fields : integer
-
-logic result : integer
-
-logic x__split_fields1 : integer
-
-logic types_with_inv__set_to_zero__2__x__fields1 : integer
-
-logic result1 : integer
-
-logic x__split_fields2 : integer
-
-logic x__split_fields3 : integer
-
-logic x__split_fields4 : integer
-
-axiom H : (not (to_rep(x__split_fields) = 0))
-
-axiom H1 : (result = x__split_fields)
-
-axiom H2 : (x__split_fields1 = types_with_inv__set_to_zero__2__x__fields)
-
-axiom H3 : (result1 = x__split_fields1)
-
-axiom H4 : (x__split_fields2 = types_with_inv__set_to_zero__2__x__fields1)
-
-axiom H5 : (x__split_fields3 = x__split_fields2)
-
-axiom H6 : (x__split_fields4 = x__split_fields2)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (not (to_rep(x__split_fields3) = 0))
+goal WP_parameter_def :
+  (forall x__split_fields:integer.
+  forall types_with_inv__set_to_zero__2__x__fields:integer.
+  forall result:integer. forall x__split_fields1:integer.
+  forall types_with_inv__set_to_zero__2__x__fields1:integer.
+  forall result1:integer. forall x__split_fields2:integer.
+  forall x__split_fields3:integer. forall x__split_fields4:integer.
+  ((not (to_rep(x__split_fields) = 0)) -> (((((result = x__split_fields) and
+  (x__split_fields1 = types_with_inv__set_to_zero__2__x__fields)) and
+  ((result1 = x__split_fields1) and
+  (x__split_fields2 = types_with_inv__set_to_zero__2__x__fields1))) and
+  ((x__split_fields3 = x__split_fields2) and
+  (x__split_fields4 = x__split_fields2))) ->
+  (not (to_rep(x__split_fields3) = 0)))))

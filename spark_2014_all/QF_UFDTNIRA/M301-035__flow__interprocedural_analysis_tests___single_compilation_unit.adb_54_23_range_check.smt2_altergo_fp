@@ -137,27 +137,10 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic fact : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic fact1 : int
-
-axiom H : in_range1(var)
-
-axiom H1 : ((0 <= 2147483647) -> in_range1(fact))
-
-axiom H2 : (1 <  var)
-
-axiom H3 : ((o = (var - 1)) and in_range1((var - 1)))
-
-axiom H4 : in_range1(fact1)
-
-axiom H5 : ((o1 = (fact1 * var)) and in_range((fact1 * var)))
-
  (* File "single_compilation_unit.adb", line 104, characters 0-0 *)
-goal WP_parameter_def : in_range1(o1)
+goal WP_parameter_def :
+  (forall fact:int. forall o:int. forall o1:int. forall fact1:int.
+  (in_range1(var) -> (((0 <= 2147483647) -> in_range1(fact)) ->
+  ((1 <  var) -> ((((o = (var - 1)) and in_range1((var - 1))) and
+  in_range1(fact1)) -> (((o1 = (fact1 * var)) and in_range((fact1 * var))) ->
+  in_range1(o1)))))))

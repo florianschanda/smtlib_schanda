@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -205,55 +205,11 @@ axiom add_annotated__def_axiom :
   (forall x:int. forall y:int [add_annotated(x, y)]. ((in_range1(x) and
   in_range1(y)) -> (add_annotated(x, y) = (x + y))))
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-axiom H : in_range1(c3)
-
-axiom H1 : (add_annotated_local(42, 44) = c3)
-
-axiom H2 : in_range1(c4)
-
-axiom H3 : (add_annotated_local(42, c3) = c4)
-
-axiom H4 : in_range1(c5)
-
-axiom H5 : (add_annotated(c3, c4) = c5)
-
-axiom H6 : in_range1(c6)
-
-axiom H7 : (add_annotated(c3, c5) = c6)
-
-axiom H8 : in_range1(c7)
-
-axiom H9 : (add(c5, c6) = c7)
-
-axiom H10 : in_range1(c8)
-
-axiom H11 : (add(c5, c7) = c8)
-
-axiom H12 : ((o = (86 + c3)) and in_range1((86 + c3)))
-
-axiom H13 : (o1 = (o + c4))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range1(o1)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. (in_range1(c3) -> ((add_annotated_local(42,
+  44) = c3) -> (in_range1(c4) -> ((add_annotated_local(42, c3) = c4) ->
+  (in_range1(c5) -> ((add_annotated(c3, c4) = c5) -> (in_range1(c6) ->
+  ((add_annotated(c3, c5) = c6) -> (in_range1(c7) -> ((add(c5, c6) = c7) ->
+  (in_range1(c8) -> ((add(c5, c7) = c8) -> ((((o = (86 + c3)) and
+  in_range1((86 + c3))) and (o1 = (o + c4))) -> in_range1(o1)))))))))))))))

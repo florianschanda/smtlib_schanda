@@ -337,12 +337,6 @@ logic length__function_guard1 : int, us_rep1 -> prop
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq5 : bool, bool -> bool
-
-axiom bool_eq_def3 :
-  (forall x:bool. forall y:bool [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -354,6 +348,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq5 : bool, bool -> bool
+
+axiom bool_eq_def3 :
+  (forall x:bool. forall y:bool [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
 
 predicate in_range2(x: int) = ((x = 0) or (x = 1))
 
@@ -461,29 +461,9 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length1(container))))) ->
   in_range4(get(container, position)))))
 
-logic queue__front__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic queue__front__result1 : int
-
-logic queue__front__result2 : int
-
-logic queue__front__result3 : int
-
-logic queue__front__result4 : int
-
-logic queue__front__result5 : int
-
-axiom H : (0 <  length({ us_split_discrs1 = {
-  rec__queue__mylists__list__capacity = q }; us_split_fields1 = {
-  rec__queue__mylists__list = q1 } }))
-
  (* File "queue.ads", line 17, characters 0-0 *)
-goal WP_parameter_def : (not (is_empty({ us_split_discrs1 = {
+goal WP_parameter_def : ((0 <  length({ us_split_discrs1 = {
   rec__queue__mylists__list__capacity = q }; us_split_fields1 = {
-  rec__queue__mylists__list = q1 } }) = true))
+  rec__queue__mylists__list = q1 } })) -> (not (is_empty({ us_split_discrs1 =
+  { rec__queue__mylists__list__capacity = q }; us_split_fields1 = {
+  rec__queue__mylists__list = q1 } }) = true)))

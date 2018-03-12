@@ -722,24 +722,6 @@ axiom slide_def :
   (forall i:t [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[sub(i, sub(new_first, old_first))]))))))
 
-logic concat : (t,natural) farray, t, t, (t,natural) farray, t,
-  t -> (t,natural) farray
-
-axiom concat_def :
-  (forall a:(t,natural) farray. forall b:(t,natural) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t.
-  (forall i:t [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((ule(a_first, i) and ule(i, a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and (ugt(i, a_last) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[add(sub(i, a_last), sub(b_first,
-  one))])))))))
-
-logic singleton : natural, t -> (t,natural) farray
-
-axiom singleton_def :
-  (forall v:natural.
-  (forall i:t [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (t,natural) farray, t, t, (t,natural) farray, t, t -> bool
 
 axiom bool_eq_def3 :
@@ -749,19 +731,19 @@ axiom bool_eq_def3 :
   a__last) and (ule(b__first, b__last) and (sub(a__last,
   a__first) = sub(b__last, b__first)))) or ((not ule(a__first, a__last)) and
   ugt(b__first, b__last))) and
-  (forall temp___idx_132:t. (((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) and
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[add(sub(b__first, a__first),
-  temp___idx_132)])))) or (not (ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)))))) -> (bool_eq4(a, a__first, a__last, b,
+  (forall temp___idx_154:t. (((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) and
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[add(sub(b__first, a__first),
+  temp___idx_154)])))) or (not (ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)))))) -> (bool_eq4(a, a__first, a__last, b,
   b__first, b__last) = true)) and ((not (((ule(a__first, a__last) ->
   (ule(b__first, b__last) and (sub(a__last, a__first) = sub(b__last,
   b__first)))) and ((not ule(a__first, a__last)) -> ugt(b__first,
   b__last))) and
-  (forall temp___idx_132:t. ((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[add(sub(b__first, a__first),
-  temp___idx_132)]))))))) -> (bool_eq4(a, a__first, a__last, b, b__first,
+  (forall temp___idx_154:t. ((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[add(sub(b__first, a__first),
+  temp___idx_154)]))))))) -> (bool_eq4(a, a__first, a__last, b, b__first,
   b__last) = false))))
 
 axiom bool_eq_rev :
@@ -771,39 +753,10 @@ axiom bool_eq_rev :
   (((ule(a__first, a__last) -> (ule(b__first, b__last) and (sub(a__last,
   a__first) = sub(b__last, b__first)))) and ((not ule(a__first, a__last)) ->
   ugt(b__first, b__last))) and
-  (forall temp___idx_132:t. ((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[add(sub(b__first, a__first),
-  temp___idx_132)])))))))))
-
-logic compare : (t,natural) farray, t, t, (t,natural) farray, t, t -> int
-
-axiom compare_def_eq :
-  (forall a:(t,natural) farray. forall b:(t,natural) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a, a_first, a_last, b,
-  b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(t,natural) farray. forall b:(t,natural) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) <  0) <->
-  (exists i:t. exists j:t. (ule(i, a_last) and (ult(j, b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  (ult(i, a_last) and (to_rep1((a[add(i, one)])) <  to_rep1((b[add(j,
-  one)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(t,natural) farray. forall b:(t,natural) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((0 <  compare(a,
-  a_first, a_last, b, b_first, b_last)) <->
-  (exists i:t. exists j:t. (ule(i, b_last) and (ult(j, a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  (ult(i, b_last) and (to_rep1((b[add(i, one)])) <  to_rep1((a[add(j,
-  one)]))))))))))))
+  (forall temp___idx_154:t. ((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[add(sub(b__first, a__first),
+  temp___idx_154)])))))))))
 
 type t1
 
@@ -1107,136 +1060,81 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic bv_arrays__create__a__aggregate_def : int, t, t -> us_t2
 
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 65535)
+
 axiom def_axiom :
-  (forall temp___162:int.
-  (forall temp___163:t. forall temp___164:t. ((dynamic_property(of_int(0),
-  of_int(65535), temp___163, temp___164) ->
-  ((to_rep(first4((bv_arrays__create__a__aggregate_def(temp___162,
-  temp___163, temp___164)).rt2)) = temp___163) and
-  (to_rep(last4((bv_arrays__create__a__aggregate_def(temp___162, temp___163,
-  temp___164)).rt2)) = temp___164))) and
-  (forall temp___165:t. (((bv_arrays__create__a__aggregate_def(temp___162,
-  temp___163, temp___164)).elts2[temp___165]) = of_rep1(temp___162))))))
-
-logic a : (t,natural) farray
-
-logic bv_arrays__create__result : (t,natural) farray
-
-logic bv_arrays__create__result1 : t1
-
-logic temp___167 : (t,natural) farray
-
-logic temp___1671 : t3
-
-logic bv_arrays__create__a__assume : (t,natural) farray
-
-logic bv_arrays__create__a__assume1 : t2
-
-logic result : (t,natural) farray
-
-logic a1 : (t,natural) farray
-
-logic result1 : (t,natural) farray
-
-logic result2 : t1
-
-logic bv_arrays__create__result2 : (t,natural) farray
-
-logic bv_arrays__create__result3 : t1
-
-logic bv_arrays__create__result4 : (t,natural) farray
-
-logic bv_arrays__create__result5 : t1
-
-logic bv_arrays__create__result6 : (t,natural) farray
-
-logic bv_arrays__create__result7 : t1
-
-logic a2 : (t,natural) farray
-
-logic bv_arrays__create__result8 : (t,natural) farray
-
-logic bv_arrays__create__result9 : t1
-
-logic a3 : (t,natural) farray
-
-logic bv_arrays__create__result10 : (t,natural) farray
-
-logic bv_arrays__create__result11 : t1
-
-logic result3 : (t,natural) farray
-
-logic result4 : t1
-
-axiom H : true
-
-axiom H1 : (to_rep(first4((bv_arrays__create__a__aggregate_def(0, of_int(0),
-  c)).rt2)) = of_int(0))
-
-axiom H2 : (to_rep(last4((bv_arrays__create__a__aggregate_def(0, of_int(0),
-  c)).rt2)) = c)
-
-axiom H3 : ({ elts2 = temp___167; rt2 = temp___1671
-  } = bv_arrays__create__a__aggregate_def(0, of_int(0), c))
-
-axiom H4 :
-  (((tqtint(to_rep(first4(temp___1671))) <= tqtint(to_rep(last4(temp___1671)))) ->
-  (((tqtint(of_int(0)) <= tqtint(c)) ->
-  (((tqtint(to_rep(last4(temp___1671))) - tqtint(to_rep(first4(temp___1671)))) + 1) = ((tqtint(c) - tqtint(of_int(0))) + 1))) and
-  ((not (tqtint(of_int(0)) <= tqtint(c))) ->
-  (((tqtint(to_rep(last4(temp___1671))) - tqtint(to_rep(first4(temp___1671)))) + 1) = 0)))) and
-  ((not (tqtint(to_rep(first4(temp___1671))) <= tqtint(to_rep(last4(temp___1671))))) ->
-  ((tqtint(of_int(0)) <= tqtint(c)) ->
-  (0 = ((tqtint(c) - tqtint(of_int(0))) + 1)))))
-
-axiom H5 : (temp___167 = bv_arrays__create__a__assume)
-
-axiom H6 : (mk1(to_rep(first4(temp___1671)),
-  to_rep(last4(temp___1671))) = bv_arrays__create__a__assume1)
-
-axiom H7 : (result = a)
-
-axiom H8 : (a1 = bv_arrays__create__a__assume)
-
-axiom H9 : (to_rep(a__first) = to_rep(first2(bv_arrays__create__a__assume1)))
-
-axiom H10 : (to_rep(a__last) = to_rep(last2(bv_arrays__create__a__assume1)))
-
-axiom H11 : (dynamic_property2(of_int(0), c, to_rep(a__first),
-  to_rep(a__last)) and ((to_rep(a__first) = of_int(0)) and
-  (to_rep(a__last) = c)))
-
-axiom H12 : (bv_arrays__create__result4 = bv_arrays__create__result2)
-
-axiom H13 : (bv_arrays__create__result5 = bv_arrays__create__result3)
-
-axiom H14 : ((bv_arrays__create__result6 = bv_arrays__create__result2) and
-  (bv_arrays__create__result7 = bv_arrays__create__result3))
-
-axiom H15 : (result1 = bv_arrays__create__result)
-
-axiom H16 : (result2 = bv_arrays__create__result1)
-
-axiom H17 : (a1 = bv_arrays__create__result2)
-
-axiom H18 : (mk(to_rep(a__first),
-  to_rep(a__last)) = bv_arrays__create__result3)
-
-axiom H19 : ((bv_arrays__create__result8 = bv_arrays__create__result4) and
-  (bv_arrays__create__result9 = bv_arrays__create__result5))
-
-axiom H20 : (a2 = a1)
-
-axiom H21 : (bv_arrays__create__result10 = bv_arrays__create__result6)
-
-axiom H22 : (bv_arrays__create__result11 = bv_arrays__create__result7)
-
-axiom H23 : (a3 = a1)
-
-axiom H24 : (result3 = bv_arrays__create__result8)
-
-axiom H25 : (result4 = bv_arrays__create__result9)
+  (forall temp___188:int.
+  (forall temp___189:t. forall temp___190:t. (in_range(temp___188) ->
+  ((dynamic_property(rliteral, rliteral1, temp___189, temp___190) ->
+  ((to_rep(first4((bv_arrays__create__a__aggregate_def(temp___188,
+  temp___189, temp___190)).rt2)) = temp___189) and
+  (to_rep(last4((bv_arrays__create__a__aggregate_def(temp___188, temp___189,
+  temp___190)).rt2)) = temp___190))) and
+  (forall temp___191:t.
+  (to_rep1(((bv_arrays__create__a__aggregate_def(temp___188, temp___189,
+  temp___190)).elts2[temp___191])) = temp___188))))))
 
  (* File "bv_arrays.ads", line 5, characters 0-0 *)
 goal WP_parameter_def :
-  (to_rep(first(bv_arrays__create__result9)) = of_int(0))
+  (forall a:(t,natural) farray.
+  forall bv_arrays__create__result:(t,natural) farray.
+  forall bv_arrays__create__result1:t1. forall temp___193:(t,natural) farray.
+  forall temp___1931:t3.
+  forall bv_arrays__create__a__assume:(t,natural) farray.
+  forall bv_arrays__create__a__assume1:t2. forall result:(t,natural) farray.
+  forall a1:(t,natural) farray. forall result1:(t,natural) farray.
+  forall result2:t1. forall bv_arrays__create__result2:(t,natural) farray.
+  forall bv_arrays__create__result3:t1.
+  forall bv_arrays__create__result4:(t,natural) farray.
+  forall bv_arrays__create__result5:t1.
+  forall bv_arrays__create__result6:(t,natural) farray.
+  forall bv_arrays__create__result7:t1. forall a2:(t,natural) farray.
+  forall bv_arrays__create__result8:(t,natural) farray.
+  forall bv_arrays__create__result9:t1. forall a3:(t,natural) farray.
+  forall bv_arrays__create__result10:(t,natural) farray.
+  forall bv_arrays__create__result11:t1.
+  (forall result3:(t,natural) farray. forall result4:t1.
+  ((((((((to_rep(first4((bv_arrays__create__a__aggregate_def(0, rliteral,
+  c)).rt2)) = rliteral) and
+  ((to_rep(last4((bv_arrays__create__a__aggregate_def(0, rliteral,
+  c)).rt2)) = c) and ({ elts2 = temp___193; rt2 = temp___1931
+  } = bv_arrays__create__a__aggregate_def(0, rliteral, c)))) and
+  ((((tqtint(to_rep(first4(temp___1931))) <= tqtint(to_rep(last4(temp___1931)))) and
+  (((tqtint(rliteral) <= tqtint(c)) and
+  (((tqtint(to_rep(last4(temp___1931))) - tqtint(to_rep(first4(temp___1931)))) + 1) = ((tqtint(c) - tqtint(rliteral)) + 1))) or
+  ((not (tqtint(rliteral) <= tqtint(c))) and
+  (((tqtint(to_rep(last4(temp___1931))) - tqtint(to_rep(first4(temp___1931)))) + 1) = 0)))) or
+  ((not (tqtint(to_rep(first4(temp___1931))) <= tqtint(to_rep(last4(temp___1931))))) and
+  (((tqtint(rliteral) <= tqtint(c)) and
+  (0 = ((tqtint(c) - tqtint(rliteral)) + 1))) or
+  (not (tqtint(rliteral) <= tqtint(c)))))) and
+  ((temp___193 = bv_arrays__create__a__assume) and
+  (mk1(to_rep(first4(temp___1931)),
+  to_rep(last4(temp___1931))) = bv_arrays__create__a__assume1)))) and
+  (((result = a) and (a1 = bv_arrays__create__a__assume)) and
+  ((to_rep(a__first) = to_rep(first2(bv_arrays__create__a__assume1))) and
+  (to_rep(a__last) = to_rep(last2(bv_arrays__create__a__assume1)))))) and
+  ((dynamic_property2(rliteral, c, to_rep(a__first), to_rep(a__last)) and
+  ((to_rep(a__first) = rliteral) and (to_rep(a__last) = c))) and
+  ((((bv_arrays__create__result4 = bv_arrays__create__result2) and
+  (bv_arrays__create__result5 = bv_arrays__create__result3)) and
+  ((bv_arrays__create__result6 = bv_arrays__create__result2) and
+  (bv_arrays__create__result7 = bv_arrays__create__result3))) and
+  (((result1 = bv_arrays__create__result) and
+  (result2 = bv_arrays__create__result1)) and
+  ((a1 = bv_arrays__create__result2) and (mk(to_rep(a__first),
+  to_rep(a__last)) = bv_arrays__create__result3)))))) and
+  ((((bv_arrays__create__result8 = bv_arrays__create__result4) and
+  (bv_arrays__create__result9 = bv_arrays__create__result5)) and
+  (a2 = a1)) and
+  (((bv_arrays__create__result10 = bv_arrays__create__result6) and
+  (bv_arrays__create__result11 = bv_arrays__create__result7)) and
+  (a3 = a1)))) and ((result3 = bv_arrays__create__result8) and
+  (result4 = bv_arrays__create__result9))) ->
+  (to_rep(first(bv_arrays__create__result9)) = rliteral))))

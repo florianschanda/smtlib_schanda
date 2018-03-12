@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -273,33 +273,5 @@ type ttB__ref = { ttB__content : ttB
 
 function ttB__ref___projection(a: ttB__ref) : ttB = (a).ttB__content
 
-logic arithmetic__ispositive__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic result : int
-
-logic arithmetic__ispositive__result1 : int
-
-logic arithmetic__ispositive__result2 : int
-
-logic arithmetic__ispositive__result3 : int
-
-logic arithmetic__ispositive__result4 : int
-
-logic arithmetic__ispositive__result5 : int
-
-axiom H : in_range1(x)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range2((2 * x))
+goal WP_parameter_def : (in_range1(x) -> in_range2((2 * x)))

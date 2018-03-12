@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -214,24 +214,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -242,17 +224,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -262,37 +244,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 logic to_rep1 : integer -> int
 
@@ -1483,477 +1437,113 @@ type t22b__ref = { t22b__content : us_rep1
 
 function t22b__ref___projection(a: t22b__ref) : us_rep1 = (a).t22b__content
 
-logic word_size : int
-
-logic o : integer
-
-logic o1 : integer
-
-logic o2 : (int,character) farray
-
-logic temp___229 : (int,character) farray
-
-logic temp___2291 : t1
-
-logic tokens__next__read_a_valid_token__word__assume : (int,character) farray
-
-logic tokens__next__read_a_valid_token__word__assume1 : t
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : character
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : character
-
-logic o9 : int
-
-logic o10 : bool
-
-logic o11 : bool
-
-logic o12 : int
-
-logic o13 : character
-
-logic o14 : int
-
-logic o15 : bool
-
-logic o16 : bool
-
-logic o17 : token_kind
-
-logic o18 : integer
-
-logic o19 : integer
-
-logic o20 : operation
-
-logic o21 : instruction
-
-logic o22 : token_kind
-
-logic temp___232 : token_kind
-
-logic temp___2321 : integer
-
-logic temp___2322 : operation
-
-logic temp___2323 : instruction
-
-logic temp___2324 : bool
-
-logic o23 : int
-
-logic o24 : character
-
-logic o25 : int
-
-logic o26 : int
-
-logic o27 : character
-
-logic o28 : int
-
-logic o29 : bool
-
-logic o30 : bool
-
-logic o31 : int
-
-logic o32 : character
-
-logic o33 : int
-
-logic o34 : bool
-
-logic o35 : bool
-
-logic o36 : token_kind
-
-logic o37 : int
-
-logic o38 : operation
-
-logic o39 : integer
-
-logic o40 : operation
-
-logic o41 : instruction
-
-logic o42 : token_kind
-
-logic temp___235 : token_kind
-
-logic temp___2351 : integer
-
-logic temp___2352 : operation
-
-logic temp___2353 : instruction
-
-logic temp___2354 : bool
-
-logic o43 : int
-
-logic o44 : character
-
-logic o45 : int
-
-logic o46 : int
-
-logic o47 : token_kind
-
-logic o48 : integer
-
-logic o49 : integer
-
-logic o50 : operation
-
-logic o51 : instruction
-
-logic o52 : token_kind
-
-logic temp___241 : token_kind
-
-logic temp___2411 : integer
-
-logic temp___2412 : operation
-
-logic temp___2413 : instruction
-
-logic temp___2414 : bool
-
-logic o53 : token_kind
-
-logic o54 : int
-
-logic o55 : operation
-
-logic o56 : integer
-
-logic o57 : operation
-
-logic o58 : instruction
-
-logic o59 : token_kind
-
-logic temp___238 : token_kind
-
-logic temp___2381 : integer
-
-logic temp___2382 : operation
-
-logic temp___2383 : instruction
-
-logic temp___2384 : bool
-
-logic o60 : int
-
-logic o61 : character
-
-logic o62 : int
-
-logic o63 : int
-
-logic o64 : character
-
-logic o65 : int
-
-logic o66 : bool
-
-logic o67 : bool
-
-logic o68 : int
-
-logic o69 : character
-
-logic o70 : int
-
-logic o71 : int
-
-logic o72 : character
-
-logic o73 : int
-
-logic o74 : bool
-
-logic o75 : bool
-
-logic o76 : bool
-
-logic o77 : bool
-
-logic o78 : token_kind
-
-logic o79 : int
-
-logic o80 : instruction
-
-logic o81 : integer
-
-logic o82 : operation
-
-logic o83 : instruction
-
-logic o84 : token_kind
-
-logic temp___244 : token_kind
-
-logic temp___2441 : integer
-
-logic temp___2442 : operation
-
-logic temp___2443 : instruction
-
-logic temp___2444 : bool
-
-logic v__split_discrs : token_kind
-
-logic word_buffer : (int,character) farray
-
-logic word_size1 : int
-
-logic word : (int,character) farray
-
-logic word_size2 : int
-
-logic input__next_word__v : (int,character) farray
-
-logic result : (int,character) farray
-
-logic word_buffer1 : (int,character) farray
-
-logic result1 : (int,character) farray
-
-logic word1 : (int,character) farray
-
-logic result2 : bool
-
-logic result3 : bool
-
-logic result4 : bool
-
-logic result5 : bool
-
-logic result6 : bool
-
-logic result7 : bool
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range1(word_size))
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(word_size1))
-
-axiom H2 : (to_rep1(o1) = 1024)
-
-axiom H3 : (to_rep1(o) = 1)
-
-axiom H4 : ((word_size2 <= 1024) and in_range1(word_size2))
-
-axiom H5 : (result = word_buffer)
-
-axiom H6 : (word_buffer1 = slide(input__next_word__v, to_rep1(first(mk(1,
-  1024))), 1))
-
-axiom H7 : (word_size2 = r1b)
-
-axiom H8 : in_range1(r1b)
-
-axiom H9 : ((1 <= r1b) -> (((1 <= 1) and (1 <= 1024)) and ((1 <= r1b) and
-  (r1b <= 1024))))
-
-axiom H10 : (o2 = word_buffer1)
-
-axiom H11 : (o2 = temp___229)
-
-axiom H12 : (mk1(1, r1b) = temp___2291)
-
-axiom H13 : (temp___229 = tokens__next__read_a_valid_token__word__assume)
-
-axiom H14 : (mk(to_rep1(first2(temp___2291)),
-  to_rep1(last2(temp___2291))) = tokens__next__read_a_valid_token__word__assume1)
-
-axiom H15 : (result1 = word)
-
-axiom H16 : (word1 = tokens__next__read_a_valid_token__word__assume)
-
-axiom H17 :
-  (to_rep1(word__first) = to_rep1(first(tokens__next__read_a_valid_token__word__assume1)))
-
-axiom H18 :
-  (to_rep1(word__last) = to_rep1(last(tokens__next__read_a_valid_token__word__assume1)))
-
-axiom H19 : dynamic_property(1, 2147483647, to_rep1(word__first),
-  to_rep1(word__last))
-
-axiom H20 : ((to_rep1(word__first) <= to_rep1(word__last)) ->
-  (o3 = ((to_rep1(word__last) - to_rep1(word__first)) + 1)))
-
-axiom H21 : ((not (to_rep1(word__first) <= to_rep1(word__last))) -> (o3 = 0))
-
-axiom H22 : (((1 <= o3) -> (result2 = true)) and ((not (1 <= o3)) ->
-  (result2 = false)))
-
-axiom H23 : (result2 = true)
-
-axiom H24 : ((to_rep1(word__first) <= to_rep1(word__first)) and
-  (to_rep1(word__first) <= to_rep1(word__last)))
-
-axiom H25 : (o12 = to_rep1(word__first))
-
-axiom H26 : (o13 = (word1[o12]))
-
-axiom H27 : (o14 = to_rep(o13))
-
-axiom H28 : (((o14 = 46) -> (o15 = true)) and ((not (o14 = 46)) ->
-  (o15 = false)))
-
-axiom H29 : ((to_rep1(word__first) <= to_rep1(word__first)) and
-  (to_rep1(word__first) <= to_rep1(word__last)))
-
-axiom H30 : (o7 = to_rep1(word__first))
-
-axiom H31 : (o8 = (word1[o7]))
-
-axiom H32 : (o9 = to_rep(o8))
-
-axiom H33 : (((o9 <= 57) -> (o10 = true)) and ((not (o9 <= 57)) ->
-  (o10 = false)))
-
-axiom H34 : ((to_rep1(word__first) <= to_rep1(word__first)) and
-  (to_rep1(word__first) <= to_rep1(word__last)))
-
-axiom H35 : (o4 = to_rep1(word__first))
-
-axiom H36 : (o5 = (word1[o4]))
-
-axiom H37 : (o6 = to_rep(o5))
-
-axiom H38 : (((48 <= o6) -> (o11 = true)) and ((not (48 <= o6)) ->
-  (o11 = false)))
-
-axiom H39 : (o16 = match_bool(o11, o10, false))
-
-axiom H40 : (result3 = match_bool(o16, true, o15))
-
-axiom H41 : (not (result3 = true))
-
-axiom H42 : ((to_rep1(word__first) <= to_rep1(word__first)) and
-  (to_rep1(word__first) <= to_rep1(word__last)))
-
-axiom H43 : (o31 = to_rep1(word__first))
-
-axiom H44 : (o32 = (word1[o31]))
-
-axiom H45 : (o33 = to_rep(o32))
-
-axiom H46 : (((o33 = 47) -> (o34 = true)) and ((not (o33 = 47)) ->
-  (o34 = false)))
-
-axiom H47 : ((to_rep1(word__first) <= to_rep1(word__first)) and
-  (to_rep1(word__first) <= to_rep1(word__last)))
-
-axiom H48 : (o26 = to_rep1(word__first))
-
-axiom H49 : (o27 = (word1[o26]))
-
-axiom H50 : (o28 = to_rep(o27))
-
-axiom H51 : (((o28 = 42) -> (o29 = true)) and ((not (o28 = 42)) ->
-  (o29 = false)))
-
-axiom H52 : ((to_rep1(word__first) <= to_rep1(word__first)) and
-  (to_rep1(word__first) <= to_rep1(word__last)))
-
-axiom H53 : (o23 = to_rep1(word__first))
-
-axiom H54 : (o24 = (word1[o23]))
-
-axiom H55 : (o25 = to_rep(o24))
-
-axiom H56 : (((o25 = 43) -> (o30 = true)) and ((not (o25 = 43)) ->
-  (o30 = false)))
-
-axiom H57 : (o35 = match_bool(o30, true, o29))
-
-axiom H58 : (result4 = match_bool(o35, true, o34))
-
-axiom H59 : (not (result4 = true))
-
-axiom H60 : ((to_rep1(word__first) <= to_rep1(word__first)) and
-  (to_rep1(word__first) <= to_rep1(word__last)))
-
-axiom H61 : (o43 = to_rep1(word__first))
-
-axiom H62 : (o44 = (word1[o43]))
-
-axiom H63 : (o45 = to_rep(o44))
-
-axiom H64 : (((o45 = 45) -> (result5 = true)) and ((not (o45 = 45)) ->
-  (result5 = false)))
-
-axiom H65 : (not (result5 = true))
-
-axiom H66 : ((to_rep1(word__first) <= to_rep1(word__first)) and
-  (to_rep1(word__first) <= to_rep1(word__last)))
-
-axiom H67 : (o71 = to_rep1(word__first))
-
-axiom H68 : (o72 = (word1[o71]))
-
-axiom H69 : (o73 = to_rep(o72))
-
-axiom H70 : (((o73 <= 90) -> (o74 = true)) and ((not (o73 <= 90)) ->
-  (o74 = false)))
-
-axiom H71 : ((to_rep1(word__first) <= to_rep1(word__first)) and
-  (to_rep1(word__first) <= to_rep1(word__last)))
-
-axiom H72 : (o68 = to_rep1(word__first))
-
-axiom H73 : (o69 = (word1[o68]))
-
-axiom H74 : (o70 = to_rep(o69))
-
-axiom H75 : (((65 <= o70) -> (o75 = true)) and ((not (65 <= o70)) ->
-  (o75 = false)))
-
-axiom H76 : (o76 = match_bool(o75, o74, false))
-
-axiom H77 : ((to_rep1(word__first) <= to_rep1(word__first)) and
-  (to_rep1(word__first) <= to_rep1(word__last)))
-
-axiom H78 : (o63 = to_rep1(word__first))
-
-axiom H79 : (o64 = (word1[o63]))
-
-axiom H80 : (o65 = to_rep(o64))
-
-axiom H81 : (((o65 <= 122) -> (o66 = true)) and ((not (o65 <= 122)) ->
-  (o66 = false)))
-
-axiom H82 : ((to_rep1(word__first) <= to_rep1(word__first)) and
-  (to_rep1(word__first) <= to_rep1(word__last)))
-
-axiom H83 : (o60 = to_rep1(word__first))
-
-axiom H84 : (o61 = (word1[o60]))
-
-axiom H85 : (o62 = to_rep(o61))
-
-axiom H86 : (((97 <= o62) -> (o67 = true)) and ((not (97 <= o62)) ->
-  (o67 = false)))
-
-axiom H87 : (o77 = match_bool(o67, o66, false))
-
-axiom H88 : (result7 = match_bool(o77, true, o76))
-
-axiom H89 : (not (result7 = true))
-
  (* File "tokens.ads", line 14, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def :
+  (forall word_size:int. forall o:integer. forall o1:integer.
+  forall o2:(int,character) farray. forall temp___260:(int,character) farray.
+  forall temp___2601:t1.
+  forall tokens__next__read_a_valid_token__word__assume:(int,character) farray.
+  forall tokens__next__read_a_valid_token__word__assume1:t. forall o3:int.
+  forall o4:int. forall o5:character. forall o6:int. forall o7:int.
+  forall o8:character. forall o9:int. forall o10:bool. forall o11:bool.
+  forall o12:int. forall o13:character. forall o14:int. forall o15:bool.
+  forall o16:bool. forall o17:int. forall o18:character. forall o19:int.
+  forall o20:int. forall o21:character. forall o22:int. forall o23:bool.
+  forall o24:bool. forall o25:int. forall o26:character. forall o27:int.
+  forall o28:bool. forall o29:bool. forall o30:int. forall o31:character.
+  forall o32:int. forall o33:int. forall o34:character. forall o35:int.
+  forall o36:int. forall o37:character. forall o38:int. forall o39:bool.
+  forall o40:bool. forall o41:int. forall o42:character. forall o43:int.
+  forall o44:int. forall o45:character. forall o46:int. forall o47:bool.
+  forall o48:bool. forall o49:bool. forall o50:bool.
+  forall word_buffer:(int,character) farray. forall word_size1:int.
+  forall word:(int,character) farray. forall word_size2:int.
+  forall input__next_word__v:(int,character) farray. forall result:map__ref.
+  forall word_buffer1:(int,character) farray. forall result1:map__ref.
+  forall word1:(int,character) farray. forall result2:bool.
+  forall result3:bool. forall result4:bool. forall result5:bool.
+  forall result6:bool. ((((- 2147483648) <= 2147483647) ->
+  in_range1(word_size)) -> ((((- 2147483648) <= 2147483647) ->
+  in_range1(word_size1)) -> ((((to_rep1(o1) = 1024) and ((to_rep1(o) = 1) and
+  ((word_size2 <= 1024) and in_range1(word_size2)))) and ((result = {
+  map__content = word_buffer }) and
+  (word_buffer1 = slide(input__next_word__v, to_rep1(first(mk(1, 1024))),
+  1)))) -> (((word_size2 = r1b) and in_range1(r1b)) -> ((((((((1 <= r1b) ->
+  (((1 <= 1) and (1 <= 1024)) and ((1 <= r1b) and (r1b <= 1024)))) and
+  (o2 = word_buffer1)) and ((o2 = temp___260) and (mk1(1,
+  r1b) = temp___2601))) and
+  ((temp___260 = tokens__next__read_a_valid_token__word__assume) and
+  (mk(to_rep1(first2(temp___2601)),
+  to_rep1(last2(temp___2601))) = tokens__next__read_a_valid_token__word__assume1))) and
+  (((result1 = { map__content = word }) and
+  (word1 = tokens__next__read_a_valid_token__word__assume)) and
+  ((to_rep1(word__first) = to_rep1(first(tokens__next__read_a_valid_token__word__assume1))) and
+  (to_rep1(word__last) = to_rep1(last(tokens__next__read_a_valid_token__word__assume1)))))) and
+  dynamic_property(1, 2147483647, to_rep1(word__first),
+  to_rep1(word__last))) ->
+  (((((to_rep1(word__first) <= to_rep1(word__last)) and
+  (o3 = ((to_rep1(word__last) - to_rep1(word__first)) + 1))) or
+  ((not (to_rep1(word__first) <= to_rep1(word__last))) and (o3 = 0))) and
+  (((1 <= o3) and (result2 = true)) or ((not (1 <= o3)) and
+  (result2 = false)))) -> ((result2 = true) ->
+  ((((((((to_rep1(word__first) <= to_rep1(word__first)) and
+  (to_rep1(word__first) <= to_rep1(word__last))) and
+  (o12 = to_rep1(word__first))) and (o13 = (word1[o12]))) and
+  (o14 = to_rep(o13))) and (((o14 = 46) and (o15 = true)) or
+  ((not (o14 = 46)) and (o15 = false)))) and
+  ((((((((to_rep1(word__first) <= to_rep1(word__first)) and
+  (to_rep1(word__first) <= to_rep1(word__last))) and
+  (o7 = to_rep1(word__first))) and (o8 = (word1[o7]))) and
+  (o9 = to_rep(o8))) and (((o9 <= 57) and (o10 = true)) or
+  ((not (o9 <= 57)) and (o10 = false)))) and
+  (((((((to_rep1(word__first) <= to_rep1(word__first)) and
+  (to_rep1(word__first) <= to_rep1(word__last))) and
+  (o4 = to_rep1(word__first))) and (o5 = (word1[o4]))) and
+  (o6 = to_rep(o5))) and (((48 <= o6) and (o11 = true)) or
+  ((not (48 <= o6)) and (o11 = false)))) and (o16 = match_bool(o11, o10,
+  false)))) and (result3 = match_bool(o16, true, o15)))) ->
+  ((not (result3 = true)) ->
+  ((((((((to_rep1(word__first) <= to_rep1(word__first)) and
+  (to_rep1(word__first) <= to_rep1(word__last))) and
+  (o25 = to_rep1(word__first))) and (o26 = (word1[o25]))) and
+  (o27 = to_rep(o26))) and (((o27 = 47) and (o28 = true)) or
+  ((not (o27 = 47)) and (o28 = false)))) and
+  ((((((((to_rep1(word__first) <= to_rep1(word__first)) and
+  (to_rep1(word__first) <= to_rep1(word__last))) and
+  (o20 = to_rep1(word__first))) and (o21 = (word1[o20]))) and
+  (o22 = to_rep(o21))) and (((o22 = 42) and (o23 = true)) or
+  ((not (o22 = 42)) and (o23 = false)))) and
+  (((((((to_rep1(word__first) <= to_rep1(word__first)) and
+  (to_rep1(word__first) <= to_rep1(word__last))) and
+  (o17 = to_rep1(word__first))) and (o18 = (word1[o17]))) and
+  (o19 = to_rep(o18))) and (((o19 = 43) and (o24 = true)) or
+  ((not (o19 = 43)) and (o24 = false)))) and (o29 = match_bool(o24, true,
+  o23)))) and (result4 = match_bool(o29, true, o28)))) ->
+  ((not (result4 = true)) ->
+  (((((((to_rep1(word__first) <= to_rep1(word__first)) and
+  (to_rep1(word__first) <= to_rep1(word__last))) and
+  (o30 = to_rep1(word__first))) and (o31 = (word1[o30]))) and
+  (o32 = to_rep(o31))) and (((o32 = 45) and (result5 = true)) or
+  ((not (o32 = 45)) and (result5 = false)))) -> ((not (result5 = true)) ->
+  (((((((((to_rep1(word__first) <= to_rep1(word__first)) and
+  (to_rep1(word__first) <= to_rep1(word__last))) and
+  (o44 = to_rep1(word__first))) and (o45 = (word1[o44]))) and
+  (o46 = to_rep(o45))) and (((o46 <= 90) and (o47 = true)) or
+  ((not (o46 <= 90)) and (o47 = false)))) and
+  (((((((to_rep1(word__first) <= to_rep1(word__first)) and
+  (to_rep1(word__first) <= to_rep1(word__last))) and
+  (o41 = to_rep1(word__first))) and (o42 = (word1[o41]))) and
+  (o43 = to_rep(o42))) and (((65 <= o43) and (o48 = true)) or
+  ((not (65 <= o43)) and (o48 = false)))) and (o49 = match_bool(o48, o47,
+  false)))) and ((((((((to_rep1(word__first) <= to_rep1(word__first)) and
+  (to_rep1(word__first) <= to_rep1(word__last))) and
+  (o36 = to_rep1(word__first))) and (o37 = (word1[o36]))) and
+  (o38 = to_rep(o37))) and (((o38 <= 122) and (o39 = true)) or
+  ((not (o38 <= 122)) and (o39 = false)))) and
+  (((((((to_rep1(word__first) <= to_rep1(word__first)) and
+  (to_rep1(word__first) <= to_rep1(word__last))) and
+  (o33 = to_rep1(word__first))) and (o34 = (word1[o33]))) and
+  (o35 = to_rep(o34))) and (((97 <= o35) and (o40 = true)) or
+  ((not (97 <= o35)) and (o40 = false)))) and (o50 = match_bool(o40, o39,
+  false)))) and (result6 = match_bool(o50, true, o49)))) ->
+  (result6 = true))))))))))))))))

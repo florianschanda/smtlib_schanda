@@ -139,17 +139,6 @@ logic sum_of : int -> int
 
 logic sum_of__function_guard : int, int -> prop
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-axiom H : in_range1(val__)
-
-axiom H1 : (0 <  val__)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range1((val__ - 1))
+goal WP_parameter_def : (in_range1(val__) -> ((0 <  val__) ->
+  in_range1((val__ - 1))))

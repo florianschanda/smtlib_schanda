@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -496,197 +496,54 @@ function t39b__ref___projection(a: t39b__ref) : integer = (a).t39b__content
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
-logic current_date__split_fields : day_type
-
-logic current_date__split_fields1 : month_type
-
-logic current_date__split_fields2 : year_type
-
-logic valid : bool
-
-logic steps : int
-
-logic i : int
-
-logic i1 : int
-
-logic o : day_type
-
-logic o1 : month_type
-
-logic o2 : year_type
-
-logic o3 : day_type
-
-logic o4 : month_type
-
-logic o5 : year_type
-
-logic o6 : day_type
-
-logic o7 : month_type
-
-logic o8 : year_type
-
-logic o9 : day_type
-
-logic o10 : month_type
-
-logic o11 : year_type
-
-logic result : bool
-
-logic valid1 : bool
-
-logic result1 : int
-
-logic steps1 : int
-
-logic result2 : int
-
-logic i2 : int
-
-logic result3 : bool
-
-logic valid2 : bool
-
-logic current_date__split_fields3 : day_type
-
-logic current_date__split_fields4 : month_type
-
-logic current_date__split_fields5 : year_type
-
-logic valid3 : bool
-
-logic i3 : int
-
-logic current_date__split_fields6 : day_type
-
-logic current_date__split_fields7 : month_type
-
-logic current_date__split_fields8 : year_type
-
-logic result4 : int
-
-logic i4 : int
-
-logic result5 : bool
-
-logic valid4 : bool
-
-logic result6 : int
-
-logic steps2 : int
-
-logic result7 : int
-
-logic i5 : int
-
-logic result8 : bool
-
-logic valid5 : bool
-
-logic current_date__split_fields9 : day_type
-
-logic current_date__split_fields10 : month_type
-
-logic current_date__split_fields11 : year_type
-
-logic valid6 : bool
-
-logic i6 : int
-
-logic current_date__split_fields12 : day_type
-
-logic current_date__split_fields13 : month_type
-
-logic current_date__split_fields14 : year_type
-
-logic result9 : int
-
-logic i7 : int
-
-logic result10 : bool
-
-logic valid7 : bool
-
-axiom H : in_range1(by__)
-
-axiom H1 : (((- 36524) <= 36524) -> in_range1(steps))
-
-axiom H2 : (result = valid)
-
-axiom H3 : (valid1 = of_int(1))
-
-axiom H4 : (0 <= by__)
-
-axiom H5 : (result1 = steps)
-
-axiom H6 : (steps1 = by__)
-
-axiom H7 : (steps1 = r36b)
-
-axiom H8 : in_range1(r36b)
-
-axiom H9 : (result2 = i)
-
-axiom H10 : (i2 = 1)
-
-axiom H11 : (1 <= i2)
-
-axiom H12 : (i2 <= r36b)
-
-axiom H13 : (({ us_split_fields1 = { rec__dates__date__day = o;
-  rec__dates__date__month = o1; rec__dates__date__year = o2 }
-  } = maximum_date(void)) and ((of_rep2(31) = o) and ((of_rep1(12) = o1) and
-  (of_rep(2099) = o2))))
-
-axiom H14 : (result3 = bool_eq6({ us_split_fields1 = {
-  rec__dates__date__day = current_date__split_fields;
-  rec__dates__date__month = current_date__split_fields1;
-  rec__dates__date__year = current_date__split_fields2 } }, {
-  us_split_fields1 = { rec__dates__date__day = o; rec__dates__date__month =
-  o1; rec__dates__date__year = o2 } }))
-
-axiom H15 : (not (result3 = true))
-
-axiom H16 : (valid2 = valid1)
-
-axiom H17 : (not (bool_eq6({ us_split_fields1 = { rec__dates__date__day =
-  current_date__split_fields3; rec__dates__date__month =
-  current_date__split_fields4; rec__dates__date__year =
-  current_date__split_fields5 } }, maximum_date(void)) = true))
-
-axiom H18 : (((1 <= r36b) -> dynamic_property(1, r36b, i3)) and
-  ((1 <= i3) and (i3 <= r36b)))
-
-axiom H19 : true
-
-axiom H20 : (not (i3 = r36b))
-
-axiom H21 : (result4 = i3)
-
-axiom H22 : (i4 = (i3 + 1))
-
-axiom H23 : (({ us_split_fields1 = { rec__dates__date__day = o3;
-  rec__dates__date__month = o4; rec__dates__date__year = o5 }
-  } = maximum_date(void)) and ((of_rep2(31) = o3) and ((of_rep1(12) = o4) and
-  (of_rep(2099) = o5))))
-
-axiom H24 : (result5 = bool_eq6({ us_split_fields1 = {
-  rec__dates__date__day = current_date__split_fields6;
-  rec__dates__date__month = current_date__split_fields7;
-  rec__dates__date__year = current_date__split_fields8 } }, {
-  us_split_fields1 = { rec__dates__date__day = o3; rec__dates__date__month =
-  o4; rec__dates__date__year = o5 } }))
-
-axiom H25 : (not (result5 = true))
-
-axiom H26 : (valid4 = valid3)
-
  (* File "dates.ads", line 89, characters 0-0 *)
-goal WP_parameter_def : (not (bool_eq6({ us_split_fields1 = {
+goal WP_parameter_def :
+  (forall current_date__split_fields:day_type.
+  forall current_date__split_fields1:month_type.
+  forall current_date__split_fields2:year_type. forall valid:bool.
+  forall steps:int. forall i:int. forall o:day_type. forall o1:month_type.
+  forall o2:year_type. forall o3:day_type. forall o4:month_type.
+  forall o5:year_type. forall result:bool. forall valid1:bool.
+  forall result1:int. forall steps1:int. forall result2:int. forall i1:int.
+  forall result3:bool. forall valid2:bool.
+  forall current_date__split_fields3:day_type.
+  forall current_date__split_fields4:month_type.
+  forall current_date__split_fields5:year_type. forall valid3:bool.
+  forall i2:int. forall current_date__split_fields6:day_type.
+  forall current_date__split_fields7:month_type.
+  forall current_date__split_fields8:year_type. forall result4:int.
+  forall i3:int. forall result5:bool. forall valid4:bool. (in_range1(by__) ->
+  ((((- 36524) <= 36524) -> in_range1(steps)) -> (((result = valid) and
+  (valid1 = of_int(1))) -> ((0 <= by__) -> (((result1 = steps) and
+  (steps1 = by__)) -> (((steps1 = r36b) and in_range1(r36b)) ->
+  (((result2 = i) and (i1 = 1)) -> (((1 <= i1) and (i1 <= r36b)) -> ((((({
+  us_split_fields1 = { rec__dates__date__day = o; rec__dates__date__month =
+  o1; rec__dates__date__year = o2 } } = maximum_date(void)) and
+  ((of_rep2(31) = o) and ((of_rep1(12) = o1) and (of_rep(2099) = o2)))) and
+  (result3 = bool_eq6({ us_split_fields1 = { rec__dates__date__day =
+  current_date__split_fields; rec__dates__date__month =
+  current_date__split_fields1; rec__dates__date__year =
+  current_date__split_fields2 } }, { us_split_fields1 = {
+  rec__dates__date__day = o; rec__dates__date__month = o1;
+  rec__dates__date__year = o2 } }))) and ((not (result3 = true)) and
+  (valid2 = valid1))) -> ((not (bool_eq6({ us_split_fields1 = {
+  rec__dates__date__day = current_date__split_fields3;
+  rec__dates__date__month = current_date__split_fields4;
+  rec__dates__date__year = current_date__split_fields5 } },
+  maximum_date(void)) = true)) -> (((((1 <= r36b) -> dynamic_property(1,
+  r36b, i2)) and ((1 <= i2) and (i2 <= r36b))) and ((not (i2 = r36b)) and
+  (((result4 = i2) and (i3 = (i2 + 1))) and (((({ us_split_fields1 = {
+  rec__dates__date__day = o3; rec__dates__date__month = o4;
+  rec__dates__date__year = o5 } } = maximum_date(void)) and
+  ((of_rep2(31) = o3) and ((of_rep1(12) = o4) and (of_rep(2099) = o5)))) and
+  (result5 = bool_eq6({ us_split_fields1 = { rec__dates__date__day =
+  current_date__split_fields6; rec__dates__date__month =
+  current_date__split_fields7; rec__dates__date__year =
+  current_date__split_fields8 } }, { us_split_fields1 = {
+  rec__dates__date__day = o3; rec__dates__date__month = o4;
+  rec__dates__date__year = o5 } }))) and ((not (result5 = true)) and
+  (valid4 = valid3)))))) -> (not (bool_eq6({ us_split_fields1 = {
   rec__dates__date__day = current_date__split_fields6;
   rec__dates__date__month = current_date__split_fields7;
   rec__dates__date__year = current_date__split_fields8 } },
-  maximum_date(void)) = true))
+  maximum_date(void)) = true))))))))))))))

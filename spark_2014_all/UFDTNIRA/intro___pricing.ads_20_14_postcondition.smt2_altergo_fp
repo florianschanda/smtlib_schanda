@@ -229,47 +229,25 @@ logic it1 : my_int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic pricing__price_of_item__result : int
-
-logic o : int
-
-logic result : int
-
-logic pricing__price_of_item__result1 : int
-
-logic pricing__price_of_item__result2 : int
-
-logic pricing__price_of_item__result3 : int
-
-logic pricing__price_of_item__result4 : int
-
-logic pricing__price_of_item__result5 : int
-
-logic result1 : int
-
-axiom H : (pricing__price_of_item__result1 = pricing__price_of_item__result2)
-
-axiom H1 :
-  (pricing__price_of_item__result3 = pricing__price_of_item__result1)
-
-axiom H2 : ((o = mult(to_rep(it), to_rep(it1))) and (in_range(o) and
-  (((bool_lt((to_rep(it) * to_rep(it1)), 10000) = true) ->
-  (o = (to_rep(it) * to_rep(it1)))) and
-  ((not (bool_lt((to_rep(it) * to_rep(it1)), 10000) = true)) ->
-  ((bool_ge((to_rep(it) * to_rep(it1)), 10000) = true) -> (o = 10000))))))
-
-axiom H3 : (result = pricing__price_of_item__result)
-
-axiom H4 : (pricing__price_of_item__result1 = o)
-
-axiom H5 :
-  (pricing__price_of_item__result4 = pricing__price_of_item__result2)
-
-axiom H6 :
-  (pricing__price_of_item__result5 = pricing__price_of_item__result3)
-
-axiom H7 : (result1 = pricing__price_of_item__result4)
-
  (* File "sat.ads", line 12, characters 0-0 *)
-goal WP_parameter_def : (pricing__price_of_item__result4 = mult(to_rep(it),
-  to_rep(it1)))
+goal WP_parameter_def :
+  (forall pricing__price_of_item__result:int. forall o:int.
+  forall result:int. forall pricing__price_of_item__result1:int.
+  forall pricing__price_of_item__result2:int.
+  forall pricing__price_of_item__result3:int.
+  forall pricing__price_of_item__result4:int.
+  forall pricing__price_of_item__result5:int.
+  (forall result1:int.
+  ((((((pricing__price_of_item__result1 = pricing__price_of_item__result2) and
+  (pricing__price_of_item__result3 = pricing__price_of_item__result1)) and
+  (((o = mult(to_rep(it), to_rep(it1))) and (in_range(o) and
+  (((bool_lt((to_rep(it) * to_rep(it1)), 10000) = true) and
+  (o = (to_rep(it) * to_rep(it1)))) or
+  ((not (bool_lt((to_rep(it) * to_rep(it1)), 10000) = true)) and
+  ((bool_ge((to_rep(it) * to_rep(it1)), 10000) = true) ->
+  (o = 10000)))))) and ((result = pricing__price_of_item__result) and
+  (pricing__price_of_item__result1 = o)))) and
+  ((pricing__price_of_item__result4 = pricing__price_of_item__result2) and
+  (pricing__price_of_item__result5 = pricing__price_of_item__result3))) and
+  (result1 = pricing__price_of_item__result4)) ->
+  (pricing__price_of_item__result4 = mult(to_rep(it), to_rep(it1))))))

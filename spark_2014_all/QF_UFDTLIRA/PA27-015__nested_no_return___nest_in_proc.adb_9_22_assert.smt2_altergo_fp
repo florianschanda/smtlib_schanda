@@ -53,7 +53,5 @@ logic x : bool
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-axiom H : (x = true)
-
  (* File "nest_in_proc.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (x = true)
+goal WP_parameter_def : ((x = true) -> (x = true))

@@ -185,24 +185,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,positive) farray, int, int, (int,positive) farray, int,
-  int -> (int,positive) farray
-
-axiom concat_def :
-  (forall a:(int,positive) farray. forall b:(int,positive) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : positive, int -> (int,positive) farray
-
-axiom singleton_def :
-  (forall v:positive.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq3 : (int,positive) farray, int, int, (int,positive) farray, int,
   int -> bool
 
@@ -213,17 +195,17 @@ axiom bool_eq_def2 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq3(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq3(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -233,37 +215,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,positive) farray, int, int, (int,positive) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,positive) farray. forall b:(int,positive) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq3(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,positive) farray. forall b:(int,positive) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq3(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep1((a[(i + 1)])) <  to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,positive) farray. forall b:(int,positive) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq3(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep1((b[(i + 1)])) <  to_rep1((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic content__first : integer
 
@@ -458,47 +412,16 @@ axiom all_eq__def_axiom :
   (forall i:int. (((1 <= i) and (i <= to_rep(content__last))) ->
   (to_rep1((use_stack__stacks__content[i])) = e))))))
 
-logic c : int
-
-logic top : int
-
-logic e : int
-
-logic result : int
-
-logic e1 : int
-
-logic top1 : int
-
-logic content : (int,positive) farray
-
-logic top2 : int
-
-logic e2 : int
-
-axiom H : in_range(c)
-
-axiom H1 : in_range(max)
-
-axiom H2 : dynamic_property(0, last, top)
-
-axiom H3 : (dynamic_property2(1, max, to_rep(content__first),
-  to_rep(content__last)) and ((to_rep(content__first) = 1) and
-  (to_rep(content__last) = max)))
-
-axiom H4 : (is_empty(top) = true)
-
-axiom H5 : (result = e)
-
-axiom H6 : (e1 = 1)
-
-axiom H7 : in_range(e1)
-
-axiom H8 : (((is_full(top1) = true) and (all_eq(e1, content) = true)) and
-  dynamic_property(0, last, top1))
-
-axiom H9 : (((not (is_full(top2) = true)) and (peek(top1, content) = e2)) and
-  (in_range(e2) and dynamic_property(0, last, top2)))
-
  (* File "use_stack.adb", line 26, characters 0-0 *)
-goal WP_parameter_def : (e2 = 1)
+goal WP_parameter_def :
+  (forall c:int. forall top:int. forall e:int. forall result:int.
+  forall e1:int. forall top1:int. forall content:(int,positive) farray.
+  forall top2:int. forall e2:int. (in_range(c) -> (in_range(max) ->
+  (dynamic_property(0, last, top) -> ((dynamic_property2(1, max,
+  to_rep(content__first), to_rep(content__last)) and
+  ((to_rep(content__first) = 1) and (to_rep(content__last) = max))) ->
+  ((is_empty(top) = true) -> (((result = e) and (e1 = 1)) -> (in_range(e1) ->
+  ((((is_full(top1) = true) and (all_eq(e1, content) = true)) and
+  dynamic_property(0, last, top1)) -> ((((not (is_full(top2) = true)) and
+  (peek(top1, content) = e2)) and (in_range(e2) and dynamic_property(0, last,
+  top2))) -> (e2 = 1)))))))))))

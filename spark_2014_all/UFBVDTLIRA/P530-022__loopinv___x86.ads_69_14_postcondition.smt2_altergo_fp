@@ -601,12 +601,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -618,6 +612,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -695,67 +695,48 @@ logic range_size : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic x86__inrange64__result : bool
+logic rliteral : t
 
-logic o : bool
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
 
-logic result : bool
+logic rliteral1 : t
 
-logic x86__inrange64__result1 : bool
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 18446744073709551615)
 
-logic x86__inrange64__result2 : bool
+logic rliteral2 : t
 
-logic x86__inrange64__result3 : bool
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 1)
 
-logic x86__inrange64__result4 : bool
+logic rliteral3 : t
 
-logic x86__inrange64__result5 : bool
-
-logic result1 : bool
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : true
-
-axiom H3 : (x86__inrange64__result1 = x86__inrange64__result2)
-
-axiom H4 : (x86__inrange64__result3 = x86__inrange64__result1)
-
-axiom H5 : ((range_size = of_int(0)) -> (o = of_int1(0)))
-
-axiom H6 : ((not (range_size = of_int(0))) -> (ule(bottom,
-  sub(of_int(18446744073709551615), sub(range_size, of_int(1)))) ->
-  ((ule(bottom, var) -> ((ule(var, add(bottom, sub(range_size,
-  of_int(1)))) -> (o = true)) and ((not ule(var, add(bottom, sub(range_size,
-  of_int(1))))) -> (o = false)))) and ((not ule(bottom, var)) ->
-  (o = false)))))
-
-axiom H7 : ((not (range_size = of_int(0))) -> ((not ule(bottom,
-  sub(of_int(18446744073709551615), sub(range_size, of_int(1))))) ->
-  ((ule(bottom, var) -> ((ule(var, sub(sub(range_size,
-  sub(of_int(18446744073709551615), bottom)), of_int(2))) ->
-  (o = match_bool(of_int1(1), true, true))) and ((not ule(var,
-  sub(sub(range_size, sub(of_int(18446744073709551615), bottom)),
-  of_int(2)))) -> (o = match_bool(of_int1(1), true, false))))) and
-  ((not ule(bottom, var)) -> ((ule(var, sub(sub(range_size,
-  sub(of_int(18446744073709551615), bottom)), of_int(2))) ->
-  (o = match_bool(false, true, true))) and ((not ule(var, sub(sub(range_size,
-  sub(of_int(18446744073709551615), bottom)), of_int(2)))) ->
-  (o = match_bool(false, true, false))))))))
-
-axiom H8 : (result = x86__inrange64__result)
-
-axiom H9 : (x86__inrange64__result1 = o)
-
-axiom H10 : (x86__inrange64__result4 = x86__inrange64__result2)
-
-axiom H11 : (x86__inrange64__result5 = x86__inrange64__result3)
-
-axiom H12 : (result1 = x86__inrange64__result4)
-
-axiom H13 : (x86__inrange64__result4 = true)
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 2)
 
  (* File "x86.ads", line 64, characters 0-0 *)
-goal WP_parameter_def : (not (range_size = of_int(0)))
+goal WP_parameter_def :
+  (forall x86__inrange64__result:bool. forall o:bool. forall result:bool.
+  forall x86__inrange64__result1:bool. forall x86__inrange64__result2:bool.
+  forall x86__inrange64__result3:bool. forall x86__inrange64__result4:bool.
+  forall x86__inrange64__result5:bool.
+  (forall result1:bool.
+  ((((((x86__inrange64__result1 = x86__inrange64__result2) and
+  (x86__inrange64__result3 = x86__inrange64__result1)) and
+  ((((range_size = rliteral) and (o = of_int1(0))) or
+  ((not (range_size = rliteral)) and ((ule(bottom, sub(rliteral1,
+  sub(range_size, rliteral2))) and ((ule(bottom, var) and ((ule(var,
+  add(bottom, sub(range_size, rliteral2))) and (o = true)) or ((not ule(var,
+  add(bottom, sub(range_size, rliteral2)))) and (o = false)))) or
+  ((not ule(bottom, var)) and (o = false)))) or ((not ule(bottom,
+  sub(rliteral1, sub(range_size, rliteral2)))) and ((ule(bottom, var) and
+  ((ule(var, sub(sub(range_size, sub(rliteral1, bottom)), rliteral3)) and
+  (o = match_bool(of_int1(1), true, true))) or ((not ule(var,
+  sub(sub(range_size, sub(rliteral1, bottom)), rliteral3))) and
+  (o = match_bool(of_int1(1), true, false))))) or ((not ule(bottom, var)) and
+  ((ule(var, sub(sub(range_size, sub(rliteral1, bottom)), rliteral3)) and
+  (o = match_bool(false, true, true))) or ((not ule(var, sub(sub(range_size,
+  sub(rliteral1, bottom)), rliteral3))) and (o = match_bool(false, true,
+  false)))))))))) and ((result = x86__inrange64__result) and
+  (x86__inrange64__result1 = o)))) and
+  ((x86__inrange64__result4 = x86__inrange64__result2) and
+  (x86__inrange64__result5 = x86__inrange64__result3))) and
+  (result1 = x86__inrange64__result4)) ->
+  ((x86__inrange64__result4 = true) -> (not (range_size = rliteral))))))

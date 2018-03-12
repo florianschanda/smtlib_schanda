@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -281,83 +281,19 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic k : int
-
-logic l : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : bool
-
-logic result : int
-
-logic k1 : int
-
-logic result1 : int
-
-logic l1 : int
-
-logic k2 : int
-
-logic l2 : int
-
-logic k3 : int
-
-logic l3 : int
-
-axiom H : in_range2(i)
-
-axiom H1 : in_range2(j)
-
-axiom H2 : ((0 <= 2147483647) -> in_range2(k))
-
-axiom H3 : ((0 <= 2147483647) -> in_range2(l))
-
-axiom H4 : (not (j = 0))
-
-axiom H5 : ((o = comp_div(i,j)) and in_range2(comp_div(i,j)))
-
-axiom H6 : (result = k)
-
-axiom H7 : (k1 = o)
-
-axiom H8 : ((o1 = (k1 * j)) and in_range1((k1 * j)))
-
-axiom H9 : (o2 = (i - o1))
-
-axiom H10 : ((o3 = o2) and in_range1(o2))
-
-axiom H11 : ((o4 = o3) and in_range2(o3))
-
-axiom H12 : (result1 = l)
-
-axiom H13 : (l1 = o4)
-
-axiom H14 : (l1 = l2)
-
-axiom H15 : (k1 = k2)
-
-axiom H16 : (l3 = l1)
-
-axiom H17 : (k3 = k1)
-
-axiom H18 : ((o5 = (k2 * j)) and in_range1((k2 * j)))
-
-axiom H19 : (o6 = (i - o5))
-
  (* File "t3q3.adb", line 16, characters 0-0 *)
-goal WP_parameter_def : in_range1(o6)
+goal WP_parameter_def :
+  (forall k:int. forall l:int. forall o:int. forall o1:int. forall o2:int.
+  forall o3:int. forall o4:int. forall o5:int. forall o6:int.
+  forall result:int. forall k1:int. forall result1:int. forall l1:int.
+  forall k2:int. forall l2:int. forall k3:int. forall l3:int.
+  (in_range2(i) -> (in_range2(j) -> (((0 <= 2147483647) -> in_range2(k)) ->
+  (((0 <= 2147483647) -> in_range2(l)) -> ((not (j = 0)) ->
+  ((((((o = comp_div(i,j)) and in_range2(comp_div(i,j))) and (({
+  int__content = result } = { int__content = k }) and (k1 = o))) and
+  ((((((o1 = (k1 * j)) and in_range1((k1 * j))) and (o2 = (i - o1))) and
+  ((o3 = o2) and in_range1(o2))) and ((o4 = o3) and in_range2(o3))) and (({
+  int__content = result1 } = { int__content = l }) and (l1 = o4)))) and
+  (((l1 = l2) and (k1 = k2)) and ((l3 = l1) and (k3 = k1)))) ->
+  ((((o5 = (k2 * j)) and in_range1((k2 * j))) and (o6 = (i - o5))) ->
+  in_range1(o6)))))))))

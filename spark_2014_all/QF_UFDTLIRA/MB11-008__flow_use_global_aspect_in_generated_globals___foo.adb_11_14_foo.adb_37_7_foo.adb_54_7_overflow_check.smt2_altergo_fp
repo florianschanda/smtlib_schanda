@@ -107,9 +107,5 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic a : int
-
-logic o : int
-
  (* File "foo.adb", line 41, characters 0-0 *)
-goal WP_parameter_def : in_range((a + 1))
+goal WP_parameter_def : (forall a:int. in_range((a + 1)))

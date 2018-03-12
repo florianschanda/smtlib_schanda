@@ -96,7 +96,6 @@
 (declare-const o my_subduration)
 (declare-const o1 duration)
 (declare-const o2 Int)
-(declare-const o3 Int)
 (declare-const result my_subduration)
 (declare-const ms1 my_subduration)
 (assert (= (to_fixed1 o) 0))

@@ -142,13 +142,7 @@ logic factor : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-axiom H : in_range(val1)
-
-axiom H1 : in_range(val2)
-
-axiom H2 : in_range1(factor)
-
-axiom H3 : (val1 <  val2)
-
  (* File "spark-arithmetic_lemmas.ads", line 69, characters 0-0 *)
-goal WP_parameter_def : ((val1 * factor) <  (val2 * factor))
+goal WP_parameter_def : ((in_range(val1) and (in_range(val2) and
+  (in_range1(factor) and (val1 <  val2)))) ->
+  ((val1 * factor) <  (val2 * factor)))

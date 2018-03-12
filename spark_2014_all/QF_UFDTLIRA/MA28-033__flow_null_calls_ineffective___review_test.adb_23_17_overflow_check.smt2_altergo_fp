@@ -115,37 +115,10 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic testpoint : int
-
-logic var : int
-
-logic a : int
-
-logic x : int
-
-logic y : int
-
-logic o : int
-
-logic result : int
-
-logic a1 : int
-
-axiom H : in_range(x)
-
-axiom H1 : in_range(y)
-
-axiom H2 : in_range(var)
-
-axiom H3 : (((- 2147483648) <= 2147483647) -> in_range(a))
-
-axiom H4 : in_range(testpoint)
-
-axiom H5 : (result = a)
-
-axiom H6 : (a1 = x)
-
-axiom H7 : (not (y <  0))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((a1 + 1))
+goal WP_parameter_def :
+  (forall testpoint:int. forall var:int. forall a:int. forall x:int.
+  forall y:int. forall result:int. forall a1:int. (in_range(x) ->
+  (in_range(y) -> (in_range(var) -> ((((- 2147483648) <= 2147483647) ->
+  in_range(a)) -> (in_range(testpoint) -> (((result = a) and (a1 = x)) ->
+  ((not (y <  0)) -> in_range((a1 + 1))))))))))

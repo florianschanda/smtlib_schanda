@@ -106,11 +106,5 @@ function t__ref___projection(a: t__ref) : t = (a).t__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : int
-
-logic o : int
-
-axiom H : in_range(x)
-
  (* File "parent.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : in_range((x + 1))
+goal WP_parameter_def : (forall x:int. (in_range(x) -> in_range((x + 1))))

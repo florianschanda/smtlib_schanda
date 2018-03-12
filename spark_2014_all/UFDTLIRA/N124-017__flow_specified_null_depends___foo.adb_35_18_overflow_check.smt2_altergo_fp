@@ -193,11 +193,7 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic g__split_fields : integer
-
-logic o : int
-
-axiom H : in_range(x)
-
  (* File "foo.adb", line 19, characters 0-0 *)
-goal WP_parameter_def : in_range((to_rep(g__split_fields) + 1))
+goal WP_parameter_def :
+  (forall g__split_fields:integer. (in_range(x) ->
+  in_range((to_rep(g__split_fields) + 1))))

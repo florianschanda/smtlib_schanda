@@ -391,11 +391,6 @@ axiom time_span_unit__def_axiom : (time_span_unit = of_fixed(1))
 
 axiom x__def_axiom : (x = multiply(of_fixed(9223372036854775807), 1))
 
-logic o : duration
-
-logic fxp_div__x__assume : duration
-
-axiom H : (to_fixed(o) = 9223372036854775807)
-
  (* File "fxp_div.adb", line 19, characters 0-0 *)
-goal WP_parameter_def : (0 <  1)
+goal WP_parameter_def :
+  (forall o:duration. ((to_fixed(o) = 9223372036854775807) -> (0 <  1)))

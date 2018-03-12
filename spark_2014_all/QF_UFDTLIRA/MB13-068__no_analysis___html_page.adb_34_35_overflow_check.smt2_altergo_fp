@@ -191,19 +191,8 @@ function list_of_styles__ref___projection(a: list_of_styles__ref) : list_of_styl
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic content_body : int
-
-logic fonts : int
-
-logic title_styles : int
-
-logic o : int
-
-axiom H : in_range1(content_body)
-
-axiom H1 : in_range2(fonts)
-
-axiom H2 : in_range3(title_styles)
-
  (* File "html_page.adb", line 25, characters 0-0 *)
-goal WP_parameter_def : in_range((content_body + title_styles))
+goal WP_parameter_def :
+  (forall content_body:int. forall fonts:int. forall title_styles:int.
+  (in_range1(content_body) -> (in_range2(fonts) ->
+  (in_range3(title_styles) -> in_range((content_body + title_styles))))))

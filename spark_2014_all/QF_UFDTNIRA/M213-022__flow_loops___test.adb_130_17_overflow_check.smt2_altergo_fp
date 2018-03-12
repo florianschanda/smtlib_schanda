@@ -133,23 +133,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic x1 : int
-
-logic result : int
-
-logic x2 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : in_range1(x1)
-
  (* File "test.adb", line 117, characters 0-0 *)
-goal WP_parameter_def : in_range((x1 * 2))
+goal WP_parameter_def :
+  (forall x:int. forall x1:int. (in_range1(x) -> (in_range1(x1) ->
+  in_range((x1 * 2)))))

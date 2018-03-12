@@ -115,41 +115,16 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 axiom x__def_axiom : (x = n)
 
-logic localcst__id__result : int
-
-logic result : int
-
-logic localcst__id__result1 : int
-
-logic localcst__id__result2 : int
-
-logic localcst__id__result3 : int
-
-logic localcst__id__result4 : int
-
-logic localcst__id__result5 : int
-
-logic result1 : int
-
-axiom H : in_range(n)
-
-axiom H1 : (n = x)
-
-axiom H2 : in_range(x)
-
-axiom H3 : (localcst__id__result1 = localcst__id__result2)
-
-axiom H4 : (localcst__id__result3 = localcst__id__result1)
-
-axiom H5 : (result = localcst__id__result)
-
-axiom H6 : (localcst__id__result1 = x)
-
-axiom H7 : (localcst__id__result4 = localcst__id__result2)
-
-axiom H8 : (localcst__id__result5 = localcst__id__result3)
-
-axiom H9 : (result1 = localcst__id__result4)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (localcst__id__result4 = n)
+goal WP_parameter_def :
+  (forall localcst__id__result:int. forall result:int.
+  forall localcst__id__result1:int. forall localcst__id__result2:int.
+  forall localcst__id__result3:int. forall localcst__id__result4:int.
+  forall localcst__id__result5:int.
+  (forall result1:int. ((in_range(n) and ((((n = x) and (in_range(x) and
+  (((localcst__id__result1 = localcst__id__result2) and
+  (localcst__id__result3 = localcst__id__result1)) and
+  ((result = localcst__id__result) and (localcst__id__result1 = x))))) and
+  ((localcst__id__result4 = localcst__id__result2) and
+  (localcst__id__result5 = localcst__id__result3))) and
+  (result1 = localcst__id__result4))) -> (localcst__id__result4 = n))))

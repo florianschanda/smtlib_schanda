@@ -109,43 +109,20 @@ logic a : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic arithmetic__negation_i__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic arithmetic__negation_i__result1 : int
-
-logic arithmetic__negation_i__result2 : int
-
-logic arithmetic__negation_i__result3 : int
-
-logic arithmetic__negation_i__result4 : int
-
-logic arithmetic__negation_i__result5 : int
-
-axiom H : in_range(a)
-
-axiom H1 :
-  (arithmetic__negation_i__result1 = arithmetic__negation_i__result2)
-
-axiom H2 :
-  (arithmetic__negation_i__result3 = arithmetic__negation_i__result1)
-
-axiom H3 : ((o = (-a)) and in_range((-a)))
-
-axiom H4 : (result = arithmetic__negation_i__result)
-
-axiom H5 : (arithmetic__negation_i__result1 = o)
-
-axiom H6 :
-  (arithmetic__negation_i__result4 = arithmetic__negation_i__result2)
-
-axiom H7 :
-  (arithmetic__negation_i__result5 = arithmetic__negation_i__result3)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((-a))
+goal WP_parameter_def :
+  (forall arithmetic__negation_i__result:int. forall o:int.
+  forall result:int. forall arithmetic__negation_i__result1:int.
+  forall arithmetic__negation_i__result2:int.
+  forall arithmetic__negation_i__result3:int.
+  forall arithmetic__negation_i__result4:int.
+  forall arithmetic__negation_i__result5:int. (in_range(a) ->
+  (((((arithmetic__negation_i__result1 = arithmetic__negation_i__result2) and
+  (arithmetic__negation_i__result3 = arithmetic__negation_i__result1)) and
+  (((o = (-a)) and in_range((-a))) and (({ int__content = result } = {
+  int__content = arithmetic__negation_i__result }) and
+  (arithmetic__negation_i__result1 = o)))) and (({ int__content =
+  arithmetic__negation_i__result4 } = { int__content =
+  arithmetic__negation_i__result2 }) and
+  (arithmetic__negation_i__result5 = arithmetic__negation_i__result3))) ->
+  in_range((-a)))))

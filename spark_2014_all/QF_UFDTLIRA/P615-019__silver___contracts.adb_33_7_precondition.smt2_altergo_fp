@@ -135,19 +135,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic y : int
-
-logic z : int
-
-logic o : int
-
-logic o1 : int
-
-logic z1 : int
-
-axiom H : in_range1(y)
-
-axiom H1 : ((0 <= 2147483647) -> in_range1(z))
-
  (* File "contracts.adb", line 23, characters 0-0 *)
-goal WP_parameter_def : (0 <= y)
+goal WP_parameter_def :
+  (forall y:int. forall z:int. (in_range1(y) -> (((0 <= 2147483647) ->
+  in_range1(z)) -> (0 <= y))))

@@ -114,19 +114,7 @@ axiom get_int__post_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-axiom H : in_range(x)
-
-axiom H1 : ((o = get_int(4)) and in_range(o))
-
-axiom H2 : (o1 = (x + o))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(o1)
+goal WP_parameter_def :
+  (forall x:int. forall o:int. forall o1:int. (in_range(x) ->
+  ((((o = get_int(4)) and in_range(o)) and (o1 = (x + o))) -> in_range(o1))))

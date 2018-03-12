@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -526,55 +526,13 @@ type t35b__ref = { t35b__content : us_rep
 
 function t35b__ref___projection(a: t35b__ref) : us_rep = (a).t35b__content
 
-logic x__split_discrs : bool
-
-logic o : integer
-
-logic o1 : integer
-
-logic o2 : failure_reason
-
-logic temp___272 : bool
-
-logic temp___2721 : integer
-
-logic temp___2722 : failure_reason
-
-logic temp___2723 : bool
-
-logic o3 : failure_reason
-
-logic o4 : integer
-
-logic o5 : failure_reason
-
-logic temp___275 : bool
-
-logic temp___2751 : integer
-
-logic temp___2752 : failure_reason
-
-logic temp___2753 : bool
-
-axiom H : (not (to_int(x__split_discrs) = 1))
-
-axiom H1 : (x__split_discrs = r34b)
-
-axiom H2 : (to_rep1(o3) = 0)
-
-axiom H3 : (dummy = o4)
-
-axiom H4 : (o3 = o5)
-
-axiom H5 : (of_int(0) = temp___275)
-
-axiom H6 : (temp___2751 = o4)
-
-axiom H7 : (temp___2752 = o5)
-
-axiom H8 : (true = temp___2753)
-
-axiom H9 : (x__attr__constrained = true)
-
  (* File "test.adb", line 96, characters 0-0 *)
-goal WP_parameter_def : (temp___275 = x__split_discrs)
+goal WP_parameter_def :
+  (forall x__split_discrs:bool. forall o:failure_reason. forall o1:integer.
+  forall o2:failure_reason. forall temp___308:bool.
+  forall temp___3081:integer. forall temp___3082:failure_reason.
+  forall temp___3083:bool. ((not (to_int(x__split_discrs) = 1)) ->
+  ((x__split_discrs = r34b) -> ((((to_rep1(o) = 0) and ((dummy = o1) and
+  (o = o2))) and ((of_int(0) = temp___308) and (((temp___3081 = o1) and
+  (temp___3082 = o2)) and (true = temp___3083)))) ->
+  ((x__attr__constrained = true) -> (temp___308 = x__split_discrs))))))

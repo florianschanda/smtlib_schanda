@@ -298,12 +298,6 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq4 : bool, bool -> bool
-
-axiom bool_eq_def3 :
-  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -315,6 +309,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq4 : bool, bool -> bool
+
+axiom bool_eq_def3 :
+  (forall x:bool. forall y:bool [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
 
 predicate in_range2(x: int) = ((x = 0) or (x = 1))
 
@@ -352,11 +352,8 @@ axiom has_stored_area__def_axiom :
   rec__ext__ = obj8 }; attr__tag = obj9 }) = true) <->
   in_range1(to_rep(obj5))))
 
-logic o : int
-
-axiom H : (has_stored_area({ us_split_fields1 = { rec__object__t__area = obj;
-  rec__object__t__max_width = obj1; rec__object__t__max_height = obj2;
-  rec__ext__ = obj3 }; attr__tag = obj4 }) = true)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range1(to_rep(obj))
+goal WP_parameter_def : ((has_stored_area({ us_split_fields1 = {
+  rec__object__t__area = obj; rec__object__t__max_width = obj1;
+  rec__object__t__max_height = obj2; rec__ext__ = obj3 }; attr__tag = obj4
+  }) = true) -> in_range1(to_rep(obj)))

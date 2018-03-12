@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -642,155 +642,48 @@ axiom length__post_axiom1 :
   (forall container:us_rep1 [length1(container)].
   (((0 + length1(container)) <= 100) and in_range9(length1(container))))
 
-logic container__split_fields : us_main_type
-
-logic position : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic temp___404 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : bool
-
-logic i : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : int
-
-logic o13 : int
-
-logic i1 : int
-
-logic o14 : int
-
-logic o15 : bool
-
-logic o16 : int
-
-logic o17 : int
-
-logic o18 : int
-
-logic o19 : int
-
-logic o20 : int
-
-logic o21 : bool
-
-logic o22 : bool
-
-logic o23 : int
-
-logic o24 : int
-
-logic o25 : int
-
-logic o26 : int
-
-logic o27 : bool
-
-logic o28 : bool
-
-logic result : int
-
-logic position1 : int
-
-logic result1 : bool
-
-logic result2 : bool
-
-logic position2 : int
-
-logic result3 : bool
-
-logic result4 : int
-
-logic position3 : int
-
-logic result5 : bool
-
-logic result6 : bool
-
-logic position4 : int
-
-logic position5 : int
-
-logic position6 : int
-
-logic position7 : int
-
-logic position8 : int
-
-logic position9 : int
-
-logic container__split_fields1 : us_main_type
-
-logic container__split_fields2 : us_main_type
-
-logic position10 : int
-
-logic container__split_fields3 : us_main_type
-
-logic position11 : int
-
-logic result7 : bool
-
-logic result8 : bool
-
-logic result9 : bool
-
-logic result10 : bool
-
-logic result11 : bool
-
-axiom H : in_range2(new_item)
-
-axiom H1 : ((1 <= 100) -> in_range3(position))
-
-axiom H2 : (length({ us_split_discrs1 = {
+ (* File "a-cofove.ads", line 855, characters 0-0 *)
+goal WP_parameter_def :
+  (forall container__split_fields:us_main_type. forall position:int.
+  forall o:int. forall o1:int. forall o2:int. forall temp___445:int.
+  forall o3:int. forall o4:int. forall o5:int. forall o6:bool. forall i:int.
+  forall o7:int. forall o8:bool. forall o9:int. forall o10:int.
+  forall o11:int. forall o12:int. forall o13:bool. forall o14:int.
+  forall o15:int. forall o16:int. forall o17:int. forall o18:bool.
+  forall o19:bool. forall result:int. forall position1:int.
+  forall result1:bool. forall result2:bool. forall position2:int.
+  forall result3:int. forall position3:int. forall result4:bool.
+  forall result5:bool. forall position4:int. forall position5:int.
+  forall position6:int. forall position7:int.
+  forall container__split_fields1:us_main_type.
+  forall container__split_fields2:us_main_type. forall position8:int.
+  forall container__split_fields3:us_main_type. forall position9:int.
+  forall result6:bool. forall result7:bool. forall result8:bool.
+  forall result9:bool. forall result10:bool. (in_range2(new_item) ->
+  (((1 <= 100) -> in_range3(position)) -> ((length({ us_split_discrs1 = {
   rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
   }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
-  container__split_fields } }) <  to_rep(container__split_discrs))
-
-axiom H3 : (((((o = 1) and (in_range4(o) and (o = 1))) and
-  ((result = position) and (position1 = o))) and ((((((o2 = length({
-  us_split_discrs1 = { rec__sorted_vectors__my_vectors__vector__capacity =
-  container__split_discrs }; us_split_fields1 = {
-  rec__sorted_vectors__my_vectors__vector = container__split_fields } })) and
-  (in_range5(o2) and (((of_int(1) = true) ->
-  (o2 <= to_rep(container__split_discrs))) and ((not (of_int(1) = true)) ->
-  (o2 <= 100))))) and (((position1 <= o2) -> (result2 = true)) and
-  ((not (position1 <= o2)) -> (result2 = false)))) and (((result2 = true) ->
-  (((o1 = get(model__({ us_split_discrs1 = {
+  container__split_fields } }) <  to_rep(container__split_discrs)) ->
+  ((((((o = 1) and (in_range4(o) and (o = 1))) and (({ int__content = result
+  } = { int__content = position }) and (position1 = o))) and
+  ((((((o2 = length({ us_split_discrs1 = {
+  rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
+  }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
+  container__split_fields } })) and (in_range5(o2) and
+  (((of_int(1) = true) and (o2 <= to_rep(container__split_discrs))) or
+  ((not (of_int(1) = true)) and (o2 <= 100))))) and (((position1 <= o2) and
+  (result2 = true)) or ((not (position1 <= o2)) and (result2 = false)))) and
+  (((result2 = true) and (((o1 = get(model__({ us_split_discrs1 = {
   rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
   }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
   container__split_fields } }), position1)) and (in_range8(o1) and
   (o1 = get(model__({ us_split_discrs1 = {
   rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
   }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
-  container__split_fields } }), position1)))) and (((o1 <  new_item) ->
-  (result1 = true)) and ((not (o1 <  new_item)) -> (result1 = false))))) and
-  ((not (result2 = true)) -> (result1 = false)))) and (((result1 = true) ->
-  ((((temp___404 = position1) and (((position2 = 1) or (get(model__({
+  container__split_fields } }), position1)))) and (((o1 <  new_item) and
+  (result1 = true)) or ((not (o1 <  new_item)) and (result1 = false))))) or
+  ((not (result2 = true)) and (result1 = false)))) and (((result1 = true) and
+  ((((temp___445 = position1) and (((position2 = 1) or (get(model__({
   us_split_discrs1 = { rec__sorted_vectors__my_vectors__vector__capacity =
   container__split_discrs }; us_split_fields1 = {
   rec__sorted_vectors__my_vectors__vector = container__split_fields } }),
@@ -802,50 +695,50 @@ axiom H3 : (((((o = 1) and (in_range4(o) and (o = 1))) and
   rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
   }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
   container__split_fields } }), position2) <  new_item))) and
-  ((((o6 = (position2 + 1)) and in_range3((position2 + 1))) and
-  ((position2 = result4) and (position3 = o6))) and ((((((o8 = length({
+  ((((o3 = (position2 + 1)) and in_range3((position2 + 1))) and
+  ((position2 = result3) and (position3 = o3))) and ((((((o5 = length({
   us_split_discrs1 = { rec__sorted_vectors__my_vectors__vector__capacity =
   container__split_discrs }; us_split_fields1 = {
   rec__sorted_vectors__my_vectors__vector = container__split_fields } })) and
-  (in_range5(o8) and (((of_int(1) = true) ->
-  (o8 <= to_rep(container__split_discrs))) and ((not (of_int(1) = true)) ->
-  (o8 <= 100))))) and (((position3 <= o8) -> (result6 = true)) and
-  ((not (position3 <= o8)) -> (result6 = false)))) and (((result6 = true) ->
-  (((o7 = get(model__({ us_split_discrs1 = {
+  (in_range5(o5) and (((of_int(1) = true) and
+  (o5 <= to_rep(container__split_discrs))) or ((not (of_int(1) = true)) and
+  (o5 <= 100))))) and (((position3 <= o5) and (result5 = true)) or
+  ((not (position3 <= o5)) and (result5 = false)))) and
+  (((result5 = true) and (((o4 = get(model__({ us_split_discrs1 = {
   rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
   }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
-  container__split_fields } }), position3)) and (in_range8(o7) and
-  (o7 = get(model__({ us_split_discrs1 = {
+  container__split_fields } }), position3)) and (in_range8(o4) and
+  (o4 = get(model__({ us_split_discrs1 = {
   rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
   }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
-  container__split_fields } }), position3)))) and (((o7 <  new_item) ->
-  (o9 = true)) and ((not (o7 <  new_item)) -> (o9 = false))))) and
-  ((not (result6 = true)) -> (o9 = false)))) and (((not (o9 = true)) ->
-  (result5 = true)) and ((o9 = true) -> (result5 = false)))) and
-  (result5 = true)))))) and ((position3 = position6) and
-  (position7 = position3))) and ((position8 = position6) and
-  (position9 = position7)))) and ((not (result1 = true)) ->
-  ((position1 = position8) and (position9 = position1))))) and ((((length({
-  us_split_discrs1 = { rec__sorted_vectors__my_vectors__vector__capacity =
-  container__split_discrs }; us_split_fields1 = {
-  rec__sorted_vectors__my_vectors__vector = container__split_fields1 }
-  }) = (length({ us_split_discrs1 = {
+  container__split_fields } }), position3)))) and (((o4 <  new_item) and
+  (o6 = true)) or ((not (o4 <  new_item)) and (o6 = false))))) or
+  ((not (result5 = true)) and (o6 = false)))) and (((not (o6 = true)) and
+  (result4 = true)) or ((o6 = true) and (result4 = false)))) and
+  (result4 = true)))))) and ((position3 = position4) and
+  (position5 = position3))) and (({ int__content = position6 } = {
+  int__content = position4 }) and (position7 = position5)))) or
+  ((not (result1 = true)) and ((position1 = position6) and
+  (position7 = position1))))) and ((((length({ us_split_discrs1 = {
+  rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
+  }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
+  container__split_fields1 } }) = (length({ us_split_discrs1 = {
   rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
   }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
   container__split_fields } }) + 1)) and
-  (forall i2:int. (((1 <= i2) and (i2 <= (position8 - 1))) -> (get(model__({
+  (forall i1:int. (((1 <= i1) and (i1 <= (position6 - 1))) -> (get(model__({
   us_split_discrs1 = { rec__sorted_vectors__my_vectors__vector__capacity =
   container__split_discrs }; us_split_fields1 = {
   rec__sorted_vectors__my_vectors__vector = container__split_fields } }),
-  i2) = get(model__({ us_split_discrs1 = {
+  i1) = get(model__({ us_split_discrs1 = {
   rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
   }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
-  container__split_fields1 } }), i2))))) and (get(model__({
+  container__split_fields1 } }), i1))))) and (get(model__({
   us_split_discrs1 = { rec__sorted_vectors__my_vectors__vector__capacity =
   container__split_discrs }; us_split_fields1 = {
   rec__sorted_vectors__my_vectors__vector = container__split_fields1 } }),
-  position8) = new_item)) and
-  ((forall i2:int. (((position8 <= i2) and (i2 <= (0 + length1(model__({
+  position6) = new_item)) and
+  ((forall i1:int. (((position6 <= i1) and (i1 <= (0 + length1(model__({
    us_split_discrs1 = { rec__sorted_vectors__my_vectors__vector__capacity =
    container__split_discrs }; us_split_fields1 = {
    rec__sorted_vectors__my_vectors__vector = container__split_fields }
@@ -853,113 +746,97 @@ axiom H3 : (((((o = 1) and (in_range4(o) and (o = 1))) and
    rec__sorted_vectors__my_vectors__vector__capacity =
    container__split_discrs }; us_split_fields1 = {
    rec__sorted_vectors__my_vectors__vector = container__split_fields } }),
-   i2) = get(model__({ us_split_discrs1 = {
+   i1) = get(model__({ us_split_discrs1 = {
    rec__sorted_vectors__my_vectors__vector__capacity =
    container__split_discrs }; us_split_fields1 = {
    rec__sorted_vectors__my_vectors__vector = container__split_fields1 } }),
-   (i2 + 1))))) and
-  (forall i2:int. ((((position8 + 1) <= i2) and
-  (i2 <= ((0 + length1(model__({ us_split_discrs1 = {
+   (i1 + 1))))) and
+  (forall i1:int. ((((position6 + 1) <= i1) and
+  (i1 <= ((0 + length1(model__({ us_split_discrs1 = {
   rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
   }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
   container__split_fields } }))) + 1))) -> (get(model__({ us_split_discrs1 =
   { rec__sorted_vectors__my_vectors__vector__capacity =
   container__split_discrs }; us_split_fields1 = {
   rec__sorted_vectors__my_vectors__vector = container__split_fields } }),
-  (i2 - 1)) = get(model__({ us_split_discrs1 = {
+  (i1 - 1)) = get(model__({ us_split_discrs1 = {
   rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
   }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
-  container__split_fields1 } }), i2)))))))) and
-  (((position10 = position8) and
+  container__split_fields1 } }), i1)))))))) and ((({ int__content = position8
+  } = { int__content = position6 }) and
   (container__split_fields2 = container__split_fields1)) and
-  ((position11 = position9) and
-  (container__split_fields3 = container__split_fields1))))
-
-axiom H4 : ((o26 = length({ us_split_discrs1 = {
+  ((position9 = position7) and ({ rec__sorted_vectors__my_vectors__vector =
+  container__split_fields3 } = { rec__sorted_vectors__my_vectors__vector =
+  container__split_fields1 })))) -> (((((o17 = length({ us_split_discrs1 = {
   rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
   }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
-  container__split_fields2 } })) and (in_range5(o26) and
-  (((of_int(1) = true) -> (o26 <= to_rep(container__split_discrs))) and
-  ((not (of_int(1) = true)) -> (o26 <= 100)))))
-
-axiom H5 : (((position10 <= o26) -> (o27 = true)) and
-  ((not (position10 <= o26)) -> (o27 = false)))
-
-axiom H6 : ((o25 = 1) and (in_range4(o25) and (o25 = 1)))
-
-axiom H7 : (((o25 <= position10) -> (o28 = true)) and
-  ((not (o25 <= position10)) -> (o28 = false)))
-
-axiom H8 : (result7 = match_bool(o28, o27, false))
-
-axiom H9 : (result7 = true)
-
-axiom H10 : ((o24 = length({ us_split_discrs1 = {
+  container__split_fields2 } })) and (in_range5(o17) and
+  (((of_int(1) = true) and (o17 <= to_rep(container__split_discrs))) or
+  ((not (of_int(1) = true)) and (o17 <= 100))))) and (((position8 <= o17) and
+  (o18 = true)) or ((not (position8 <= o17)) and (o18 = false)))) and
+  ((((o16 = 1) and (in_range4(o16) and (o16 = 1))) and
+  (((o16 <= position8) and (o19 = true)) or ((not (o16 <= position8)) and
+  (o19 = false)))) and (result6 = match_bool(o19, o18, false)))) ->
+  ((result6 = true) -> ((((o15 = length({ us_split_discrs1 = {
   rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
   }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
-  container__split_fields2 } })) and (in_range5(o24) and
-  (((of_int(1) = true) -> (o24 <= to_rep(container__split_discrs))) and
-  ((not (of_int(1) = true)) -> (o24 <= 100)))))
-
-axiom H11 : (((o24 = (length({ us_split_discrs1 = {
+  container__split_fields2 } })) and (in_range5(o15) and
+  (((of_int(1) = true) and (o15 <= to_rep(container__split_discrs))) or
+  ((not (of_int(1) = true)) and (o15 <= 100))))) and (((o15 = (length({
+  us_split_discrs1 = { rec__sorted_vectors__my_vectors__vector__capacity =
+  container__split_discrs }; us_split_fields1 = {
+  rec__sorted_vectors__my_vectors__vector = container__split_fields }
+  }) + 1)) and (result7 = true)) or ((not (o15 = (length({ us_split_discrs1 =
+  { rec__sorted_vectors__my_vectors__vector__capacity =
+  container__split_discrs }; us_split_fields1 = {
+  rec__sorted_vectors__my_vectors__vector = container__split_fields }
+  }) + 1))) and (result7 = false)))) -> ((result7 = true) ->
+  ((((o14 = get(model__({ us_split_discrs1 = {
   rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
   }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
-  container__split_fields } }) + 1)) -> (result8 = true)) and
-  ((not (o24 = (length({ us_split_discrs1 = {
+  container__split_fields2 } }), position8)) and (in_range8(o14) and
+  (o14 = get(model__({ us_split_discrs1 = {
   rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
   }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
-  container__split_fields } }) + 1))) -> (result8 = false)))
-
-axiom H12 : (result8 = true)
-
-axiom H13 : ((o23 = get(model__({ us_split_discrs1 = {
-  rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
-  }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
-  container__split_fields2 } }), position10)) and (in_range8(o23) and
-  (o23 = get(model__({ us_split_discrs1 = {
-  rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
-  }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
-  container__split_fields2 } }), position10))))
-
-axiom H14 : (((o23 = new_item) -> (result9 = true)) and
-  ((not (o23 = new_item)) -> (result9 = false)))
-
-axiom H15 : (result9 = true)
-
-axiom H16 :
-  ((((forall i2:int. (((1 <= i2) and (i2 <= (0 + length1(model__({
-     us_split_discrs1 = { rec__sorted_vectors__my_vectors__vector__capacity =
-     container__split_discrs }; us_split_fields1 = {
-     rec__sorted_vectors__my_vectors__vector = container__split_fields }
-     }))))) ->
-     (forall j:int. (((i2 <= j) and (j <= (0 + length1(model__({
-     us_split_discrs1 = { rec__sorted_vectors__my_vectors__vector__capacity =
-     container__split_discrs }; us_split_fields1 = {
-     rec__sorted_vectors__my_vectors__vector = container__split_fields }
-     }))))) -> ((get(model__({ us_split_discrs1 = {
-     rec__sorted_vectors__my_vectors__vector__capacity =
-     container__split_discrs }; us_split_fields1 = {
-     rec__sorted_vectors__my_vectors__vector = container__split_fields } }),
-     i2) = get(model__({ us_split_discrs1 = {
-     rec__sorted_vectors__my_vectors__vector__capacity =
-     container__split_discrs }; us_split_fields1 = {
-     rec__sorted_vectors__my_vectors__vector = container__split_fields } }),
-     j)) or (my_lt(get(model__({ us_split_discrs1 = {
-     rec__sorted_vectors__my_vectors__vector__capacity =
-     container__split_discrs }; us_split_fields1 = {
-     rec__sorted_vectors__my_vectors__vector = container__split_fields } }),
-     i2), get(model__({ us_split_discrs1 = {
-     rec__sorted_vectors__my_vectors__vector__capacity =
-     container__split_discrs }; us_split_fields1 = {
-     rec__sorted_vectors__my_vectors__vector = container__split_fields } }),
-     j)) = true)))))) -> (result10 = true)) and
-  ((not (forall i2:int. (((1 <= i2) and (i2 <= (0 + length1(model__({
+  container__split_fields2 } }), position8)))) and (((o14 = new_item) and
+  (result8 = true)) or ((not (o14 = new_item)) and (result8 = false)))) ->
+  ((result8 = true) ->
+  ((((((forall i1:int. (((1 <= i1) and (i1 <= (0 + length1(model__({
+       us_split_discrs1 = {
+       rec__sorted_vectors__my_vectors__vector__capacity =
+       container__split_discrs }; us_split_fields1 = {
+       rec__sorted_vectors__my_vectors__vector = container__split_fields }
+       }))))) ->
+       (forall j:int. (((i1 <= j) and (j <= (0 + length1(model__({
+       us_split_discrs1 = {
+       rec__sorted_vectors__my_vectors__vector__capacity =
+       container__split_discrs }; us_split_fields1 = {
+       rec__sorted_vectors__my_vectors__vector = container__split_fields }
+       }))))) -> ((get(model__({ us_split_discrs1 = {
+       rec__sorted_vectors__my_vectors__vector__capacity =
+       container__split_discrs }; us_split_fields1 = {
+       rec__sorted_vectors__my_vectors__vector = container__split_fields }
+       }), i1) = get(model__({ us_split_discrs1 = {
+       rec__sorted_vectors__my_vectors__vector__capacity =
+       container__split_discrs }; us_split_fields1 = {
+       rec__sorted_vectors__my_vectors__vector = container__split_fields }
+       }), j)) or (my_lt(get(model__({ us_split_discrs1 = {
+       rec__sorted_vectors__my_vectors__vector__capacity =
+       container__split_discrs }; us_split_fields1 = {
+       rec__sorted_vectors__my_vectors__vector = container__split_fields }
+       }), i1), get(model__({ us_split_discrs1 = {
+       rec__sorted_vectors__my_vectors__vector__capacity =
+       container__split_discrs }; us_split_fields1 = {
+       rec__sorted_vectors__my_vectors__vector = container__split_fields }
+       }), j)) = true)))))) and
+  (result9 = true)) or
+  ((not (forall i1:int. (((1 <= i1) and (i1 <= (0 + length1(model__({
         us_split_discrs1 = {
         rec__sorted_vectors__my_vectors__vector__capacity =
         container__split_discrs }; us_split_fields1 = {
         rec__sorted_vectors__my_vectors__vector = container__split_fields }
         }))))) ->
-        (forall j:int. (((i2 <= j) and (j <= (0 + length1(model__({
+        (forall j:int. (((i1 <= j) and (j <= (0 + length1(model__({
         us_split_discrs1 = {
         rec__sorted_vectors__my_vectors__vector__capacity =
         container__split_discrs }; us_split_fields1 = {
@@ -968,7 +845,7 @@ axiom H16 :
         rec__sorted_vectors__my_vectors__vector__capacity =
         container__split_discrs }; us_split_fields1 = {
         rec__sorted_vectors__my_vectors__vector = container__split_fields }
-        }), i2) = get(model__({ us_split_discrs1 = {
+        }), i1) = get(model__({ us_split_discrs1 = {
         rec__sorted_vectors__my_vectors__vector__capacity =
         container__split_discrs }; us_split_fields1 = {
         rec__sorted_vectors__my_vectors__vector = container__split_fields }
@@ -976,91 +853,75 @@ axiom H16 :
         rec__sorted_vectors__my_vectors__vector__capacity =
         container__split_discrs }; us_split_fields1 = {
         rec__sorted_vectors__my_vectors__vector = container__split_fields }
-        }), i2), get(model__({ us_split_discrs1 = {
+        }), i1), get(model__({ us_split_discrs1 = {
         rec__sorted_vectors__my_vectors__vector__capacity =
         container__split_discrs }; us_split_fields1 = {
         rec__sorted_vectors__my_vectors__vector = container__split_fields }
-        }), j)) = true))))))) -> (result10 = false))) and
-  ((result10 = true) <->
-  (forall i2:int. (((1 <= i2) and (i2 <= (0 + length1(model__({
+        }), j)) = true))))))) and
+  (result9 = false))) and ((result9 = true) <->
+  (forall i1:int. (((1 <= i1) and (i1 <= (0 + length1(model__({
   us_split_discrs1 = { rec__sorted_vectors__my_vectors__vector__capacity =
   container__split_discrs }; us_split_fields1 = {
   rec__sorted_vectors__my_vectors__vector = container__split_fields }
   }))))) ->
-  (forall j:int. (((i2 <= j) and (j <= (0 + length1(model__({
+  (forall j:int. (((i1 <= j) and (j <= (0 + length1(model__({
   us_split_discrs1 = { rec__sorted_vectors__my_vectors__vector__capacity =
   container__split_discrs }; us_split_fields1 = {
   rec__sorted_vectors__my_vectors__vector = container__split_fields }
   }))))) -> ((get(model__({ us_split_discrs1 = {
   rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
   }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
-  container__split_fields } }), i2) = get(model__({ us_split_discrs1 = {
+  container__split_fields } }), i1) = get(model__({ us_split_discrs1 = {
   rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
   }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
   container__split_fields } }), j)) or (my_lt(get(model__({
   us_split_discrs1 = { rec__sorted_vectors__my_vectors__vector__capacity =
   container__split_discrs }; us_split_fields1 = {
   rec__sorted_vectors__my_vectors__vector = container__split_fields } }),
-  i2), get(model__({ us_split_discrs1 = {
+  i1), get(model__({ us_split_discrs1 = {
   rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
   }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
-  container__split_fields } }), j)) = true))))))))
-
-axiom H17 : ((result10 = true) -> ((o22 = is_sorted({ us_split_discrs1 = {
+  container__split_fields } }), j)) = true)))))))) and (((result9 = true) and
+  ((o13 = is_sorted({ us_split_discrs1 = {
   rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
   }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
-  container__split_fields2 } })) and ((o22 = true) <->
-  (forall i2:int. (((1 <= i2) and (i2 <= (0 + length1(model__({
+  container__split_fields2 } })) and ((o13 = true) <->
+  (forall i1:int. (((1 <= i1) and (i1 <= (0 + length1(model__({
   us_split_discrs1 = { rec__sorted_vectors__my_vectors__vector__capacity =
   container__split_discrs }; us_split_fields1 = {
   rec__sorted_vectors__my_vectors__vector = container__split_fields2 }
   }))))) ->
-  (forall j:int. (((i2 <= j) and (j <= (0 + length1(model__({
+  (forall j:int. (((i1 <= j) and (j <= (0 + length1(model__({
   us_split_discrs1 = { rec__sorted_vectors__my_vectors__vector__capacity =
   container__split_discrs }; us_split_fields1 = {
   rec__sorted_vectors__my_vectors__vector = container__split_fields2 }
   }))))) -> ((get(model__({ us_split_discrs1 = {
   rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
   }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
-  container__split_fields2 } }), i2) = get(model__({ us_split_discrs1 = {
+  container__split_fields2 } }), i1) = get(model__({ us_split_discrs1 = {
   rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
   }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
   container__split_fields2 } }), j)) or (my_lt(get(model__({
   us_split_discrs1 = { rec__sorted_vectors__my_vectors__vector__capacity =
   container__split_discrs }; us_split_fields1 = {
   rec__sorted_vectors__my_vectors__vector = container__split_fields2 } }),
-  i2), get(model__({ us_split_discrs1 = {
+  i1), get(model__({ us_split_discrs1 = {
   rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
   }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
-  container__split_fields2 } }), j)) = true)))))))))
-
-axiom H18 : ((not (result10 = true)) -> (o22 = of_int(1)))
-
-axiom H19 : ((o14 = length({ us_split_discrs1 = {
-  rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
-  }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
-  container__split_fields2 } })) and (in_range5(o14) and
-  (((of_int(1) = true) -> (o14 <= to_rep(container__split_discrs))) and
-  ((not (of_int(1) = true)) -> (o14 <= 100)))))
-
-axiom H20 : (((i1 <= o14) -> (o15 = true)) and ((not (i1 <= o14)) ->
-  (o15 = false)))
-
-axiom H21 : ((((position10 + 1) <= i1) -> (result11 = o15)) and
-  ((not ((position10 + 1) <= i1)) -> (result11 = false)))
-
-axiom H22 : (result11 = true)
-
-axiom H23 : ((o17 = (i1 - 1)) and in_range1((i1 - 1)))
-
-axiom H24 : ((o18 = o17) and in_range6(o17))
-
-axiom H25 : ((o19 = get(model__({ us_split_discrs1 = {
-  rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
-  }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
-  container__split_fields } }), o18)) and in_range7(o19))
-
-axiom H26 : ((o16 = i1) and in_range4(i1))
-
- (* File "a-cofove.ads", line 855, characters 0-0 *)
-goal WP_parameter_def : (1 <= o16)
+  container__split_fields2 } }), j)) = true))))))))) or
+  ((not (result9 = true)) and (o13 = of_int(1))))) -> (((((o7 = length({
+  us_split_discrs1 = { rec__sorted_vectors__my_vectors__vector__capacity =
+  container__split_discrs }; us_split_fields1 = {
+  rec__sorted_vectors__my_vectors__vector = container__split_fields2 }
+  })) and (in_range5(o7) and (((of_int(1) = true) and
+  (o7 <= to_rep(container__split_discrs))) or ((not (of_int(1) = true)) and
+  (o7 <= 100))))) and (((i <= o7) and (o8 = true)) or ((not (i <= o7)) and
+  (o8 = false)))) and ((((position8 + 1) <= i) and (result10 = o8)) or
+  ((not ((position8 + 1) <= i)) and (result10 = false)))) ->
+  ((result10 = true) -> (((((o10 = (i - 1)) and in_range1((i - 1))) and
+  ((o11 = o10) and in_range6(o10))) and ((o12 = get(model__({
+  us_split_discrs1 = { rec__sorted_vectors__my_vectors__vector__capacity =
+  container__split_discrs }; us_split_fields1 = {
+  rec__sorted_vectors__my_vectors__vector = container__split_fields } }),
+  o11)) and in_range7(o12))) -> (((o9 = i) and in_range4(i)) ->
+  (1 <= o9)))))))))))))))))

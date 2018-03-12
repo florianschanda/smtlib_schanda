@@ -224,9 +224,6 @@ type internal_stateT__ref = { internal_stateT__content : us_rep
 function internal_stateT__ref___projection(a: internal_stateT__ref) : us_rep =
   (a).internal_stateT__content
 
-logic self__ : natural
-
-logic o : int
-
  (* File "display.adb", line 7, characters 0-0 *)
-goal WP_parameter_def : in_range((to_rep1(self__) + 1))
+goal WP_parameter_def :
+  (forall self__:natural. in_range((to_rep1(self__) + 1)))

@@ -49,7 +49,7 @@
 (declare-const dummy us_rep)
 (declare-datatypes () ((r1__ref (mk_r1__ref (r1__content us_rep)))))
 (define-fun r1__ref___projection ((a r1__ref)) us_rep (r1__content a))
-(define-fun default_initial_assumption ((temp___expr_179 us_rep) (temp___skip_top_level_180 Bool)) Bool (= (attr__tag temp___expr_179) us_tag))
+(define-fun default_initial_assumption ((temp___expr_209 us_rep) (temp___skip_top_level_210 Bool)) Bool (= (attr__tag temp___expr_209) us_tag))
 (declare-const x us_rep)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (assert (not (<= 0 storage_place_attributes__r1__f1__first__bit)))

@@ -375,12 +375,6 @@ logic get__function_guard : int, us_rep2, us_rep1 -> prop
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq6 : bool, bool -> bool
-
-axiom bool_eq_def4 :
-  (forall x:bool. forall y:bool [bool_eq6(x, y)]. (((x = y) -> (bool_eq6(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq6(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -392,6 +386,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq6 : bool, bool -> bool
+
+axiom bool_eq_def4 :
+  (forall x:bool. forall y:bool [bool_eq6(x, y)]. (((x = y) -> (bool_eq6(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq6(x, y) = false))))
 
 predicate in_range2(x: int) = ((x = 0) or (x = 1))
 
@@ -569,49 +569,26 @@ axiom w_get__post_axiom :
   ((in_range1(witness1) and (has_witness(container, witness1) = true)) ->
   in_range3(w_get(container, witness1)))))
 
-logic container__split_fields : us_main_type
-
-logic position__split_fields : count_type
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : us_rep2
-
-logic o3 : int
-
-logic o4 : int
-
-axiom H : in_range1(count)
-
-axiom H1 : (has_key(positions({ us_split_discrs1 = {
+ (* File "a-cfdlli.ads", line 51, characters 0-0 *)
+goal WP_parameter_def :
+  (forall container__split_fields:us_main_type.
+  forall position__split_fields:count_type. forall o:us_rep2.
+  (in_range1(count) -> ((has_key(positions({ us_split_discrs1 = {
   rec__my_lists__my_lists__list__capacity = container__split_discrs };
   us_split_fields1 = { rec__my_lists__my_lists__list =
   container__split_fields } }), { us_split_fields3 = {
-  rec__my_lists__my_lists__cursor__node = position__split_fields } }) = true)
-
-axiom H2 : ((o2 = positions({ us_split_discrs1 = {
+  rec__my_lists__my_lists__cursor__node = position__split_fields }
+  }) = true) -> (((o = positions({ us_split_discrs1 = {
   rec__my_lists__my_lists__list__capacity = container__split_discrs };
   us_split_fields1 = { rec__my_lists__my_lists__list =
-  container__split_fields } })) and ((not (has_key(o2, { us_split_fields3 = {
+  container__split_fields } })) and ((not (has_key(o, { us_split_fields3 = {
   rec__my_lists__my_lists__cursor__node = no_element } }) = true)) and
-  (forall i:count_type. ((has_key(o2, { us_split_fields3 = {
-  rec__my_lists__my_lists__cursor__node = i } }) = true) -> (((1 <= get(o2, {
-  us_split_fields3 = { rec__my_lists__my_lists__cursor__node = i } })) and
-  (get(o2, { us_split_fields3 = { rec__my_lists__my_lists__cursor__node = i }
-  }) <= length({ us_split_discrs1 = {
+  (forall i:us_rep1. ((has_key(o, i) = true) -> (((1 <= get(o, i)) and
+  (get(o, i) <= length({ us_split_discrs1 = {
   rec__my_lists__my_lists__list__capacity = container__split_discrs };
   us_split_fields1 = { rec__my_lists__my_lists__list =
   container__split_fields } }))) and
-  (forall j:count_type. ((has_key(o2, { us_split_fields3 = {
-  rec__my_lists__my_lists__cursor__node = j } }) = true) -> ((get(o2, {
-  us_split_fields3 = { rec__my_lists__my_lists__cursor__node = i }
-  }) = get(o2, { us_split_fields3 = { rec__my_lists__my_lists__cursor__node =
-  j } })) -> (bool_eq4({ us_split_fields3 = {
-  rec__my_lists__my_lists__cursor__node = i } }, { us_split_fields3 = {
-  rec__my_lists__my_lists__cursor__node = j } }) = true)))))))))
-
- (* File "a-cfdlli.ads", line 51, characters 0-0 *)
-goal WP_parameter_def : (has_key(o2, { us_split_fields3 = {
-  rec__my_lists__my_lists__cursor__node = position__split_fields } }) = true)
+  (forall j:us_rep1. ((has_key(o, j) = true) -> ((get(o, i) = get(o, j)) ->
+  (bool_eq4(i, j) = true))))))))) -> (has_key(o, { us_split_fields3 = {
+  rec__my_lists__my_lists__cursor__node = position__split_fields }
+  }) = true)))))

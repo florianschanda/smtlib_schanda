@@ -946,12 +946,6 @@ axiom toBig_to_uint : (forall x:t. (tqtint(x) = tqtint1(toBig(x))))
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int2 : bool -> int
 
 axiom to_int_def2 :
@@ -963,6 +957,12 @@ logic of_int2 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int2(i)]. (((i = 0) -> (of_int2(i) = false)) and
   ((not (i = 0)) -> (of_int2(i) = true))))
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1060,36 +1060,25 @@ logic esi : t1 -> t
 
 logic esi__function_guard : t, t1 -> prop
 
+logic rliteral1 : t1
+
+axiom rliteral_axiom1 : (tqtint1(rliteral1) = 4294967295)
+
 axiom esi__post_axiom :
   (forall x86__rsi:t1 [esi(x86__rsi)].
-  (esi(x86__rsi) = toSmall(bw_and1(x86__rsi, of_int1(4294967295)))))
+  (esi(x86__rsi) = toSmall(bw_and1(x86__rsi, rliteral1))))
 
 logic val__ : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic rsi : t1
+logic rliteral2 : t1
 
-logic result : t1
-
-logic rsi1 : t1
-
-logic rsi2 : t1
-
-logic rsi3 : t1
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : (result = rsi)
-
-axiom H3 : (rsi1 = bw_or1(bw_and1(rsi, of_int1(18446744069414584320)),
-  toBig(val__)))
-
-axiom H4 : (rsi1 = rsi2)
-
-axiom H5 : (rsi3 = rsi1)
+axiom rliteral_axiom2 : (tqtint1(rliteral2) = 18446744069414584320)
 
  (* File "x86.ads", line 8, characters 0-0 *)
-goal WP_parameter_def : (esi(rsi2) = val__)
+goal WP_parameter_def :
+  (forall rsi:t1. forall result:t1. forall rsi1:t1. forall rsi2:t1.
+  forall rsi3:t1. ((((result = rsi) and (rsi1 = bw_or1(bw_and1(rsi,
+  rliteral2), toBig(val__)))) and ((rsi1 = rsi2) and (rsi3 = rsi1))) ->
+  (esi(rsi2) = val__)))

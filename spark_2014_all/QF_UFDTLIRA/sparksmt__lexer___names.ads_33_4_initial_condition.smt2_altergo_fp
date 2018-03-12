@@ -117,13 +117,8 @@ axiom invariant____post_axiom : true
 
 axiom no_name__def_axiom : (no_name = 0)
 
-logic name_table : us_private
-
-logic result : bool
-
-axiom H : in_range(no_name)
-
-axiom H1 : (result = invariant__(name_table))
-
  (* File "names.ads", line 53, characters 0-0 *)
-goal WP_parameter_def : (invariant__(name_table) = true)
+goal WP_parameter_def :
+  (forall name_table:us_private.
+  (forall result:bool. ((in_range(no_name) and
+  (result = invariant__(name_table))) -> (invariant__(name_table) = true))))

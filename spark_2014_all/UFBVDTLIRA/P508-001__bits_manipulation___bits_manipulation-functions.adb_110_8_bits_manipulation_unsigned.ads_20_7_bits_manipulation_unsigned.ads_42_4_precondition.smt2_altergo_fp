@@ -1718,16 +1718,24 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 axiom shift_right__post_axiom : true
 
+logic rliteral3 : t
+
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 0)
+
+logic rliteral4 : t1
+
+axiom rliteral_axiom4 : (tqtint1(rliteral4) = 0)
+
 axiom shift_right__def_axiom :
   (forall v:t.
   (forall amount:int [shift_right(v, amount)]. (in_range(amount) ->
   ((((1 <= 8) and (8 <= 8)) -> (((amount <  8) -> (shift_right(v,
   amount) = lsr_bv(v, of_int(amount)))) and ((not (amount <  8)) ->
-  (shift_right(v, amount) = of_int(0))))) and ((not ((1 <= 8) and
+  (shift_right(v, amount) = rliteral3)))) and ((not ((1 <= 8) and
   (8 <= 8))) -> ((((9 <= 8) and (8 <= 16)) -> (((amount <  16) ->
   (shift_right(v, amount) = toSmall2(lsr_bv1(toBig2(v),
   of_int1(amount))))) and ((not (amount <  16)) -> (shift_right(v,
-  amount) = toSmall2(of_int1(0)))))) and ((not ((9 <= 8) and (8 <= 16))) ->
+  amount) = toSmall2(rliteral4))))) and ((not ((9 <= 8) and (8 <= 16))) ->
   ((((17 <= 8) and (8 <= 32)) -> (shift_right(v,
   amount) = toSmall1(lsr_bv2(toBig1(v), of_int2(amount))))) and
   ((not ((17 <= 8) and (8 <= 32))) -> (shift_right(v,
@@ -1767,25 +1775,6 @@ logic value : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic bits_manipulation_unsigned__unsigned_8__functions__msb_index_fast_not_inline__result : int
-
-logic o : int
-
-logic result : int
-
-logic bits_manipulation_unsigned__unsigned_8__functions__msb_index_fast_not_inline__result1 : int
-
-logic bits_manipulation_unsigned__unsigned_8__functions__msb_index_fast_not_inline__result2 : int
-
-logic bits_manipulation_unsigned__unsigned_8__functions__msb_index_fast_not_inline__result3 : int
-
-logic bits_manipulation_unsigned__unsigned_8__functions__msb_index_fast_not_inline__result4 : int
-
-logic bits_manipulation_unsigned__unsigned_8__functions__msb_index_fast_not_inline__result5 : int
-
-axiom H : true
-
-axiom H1 : (not (value = of_int(0)))
-
  (* File "bits_manipulation.ads", line 10, characters 0-0 *)
-goal WP_parameter_def : (not (value = of_int(0)))
+goal WP_parameter_def : ((not (value = rliteral3)) ->
+  (not (value = rliteral3)))

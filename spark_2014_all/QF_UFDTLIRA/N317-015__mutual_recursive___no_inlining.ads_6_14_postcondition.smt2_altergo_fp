@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -84,58 +84,6 @@ logic recurse2 : bool -> bool
 logic recurse2__function_guard : bool, bool -> prop
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
-
-logic res : bool
-
-logic tmp : bool
-
-logic o : bool
-
-logic result : bool
-
-logic tmp1 : bool
-
-logic result1 : bool
-
-logic tmp2 : bool
-
-logic result2 : bool
-
-logic res1 : bool
-
-logic res2 : bool
-
-logic tmp3 : bool
-
-logic res3 : bool
-
-logic tmp4 : bool
-
-axiom H : ((of_int(0) = true) -> (result = tmp))
-
-axiom H1 : ((of_int(0) = true) -> (tmp1 = of_int(1)))
-
-axiom H2 : ((not (of_int(0) = true)) -> (o = recurse2(of_int(1))))
-
-axiom H3 : ((not (of_int(0) = true)) -> (result1 = tmp))
-
-axiom H4 : ((not (of_int(0) = true)) -> (tmp2 = o))
-
-axiom H5 : ((not (of_int(0) = true)) -> (tmp1 = tmp2))
-
-axiom H6 : (result2 = res)
-
-axiom H7 : (res1 = tmp1)
-
-axiom H8 : (tmp3 = tmp1)
-
-axiom H9 : (res1 = res2)
-
-axiom H10 : (tmp4 = tmp1)
-
-axiom H11 : (res3 = res1)
-
-axiom H12 : (res2 = true)
 
  (* File "no_inlining.adb", line 7, characters 0-0 *)
 goal WP_parameter_def : true

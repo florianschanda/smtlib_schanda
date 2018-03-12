@@ -378,15 +378,6 @@ type c__ref = { c__content : us_rep1
 
 function c__ref___3__projection(a: c__ref) : us_rep1 = (a).c__content
 
-logic o : int
-
-logic us : int
-
-logic o1 : int
-
-logic us1 : int
-
-axiom H : ((o1 = hide(4)) and in_range1(o1))
-
  (* File "tagged_component_check.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : in_range(o1)
+goal WP_parameter_def :
+  (forall o:int. (((o = hide(4)) and in_range1(o)) -> in_range(o)))

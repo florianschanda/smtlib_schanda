@@ -218,29 +218,5 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic tmp : int
-
-logic o : integer
-
-logic us_self__compl : integer
-
-logic o1 : integer
-
-logic o2 : int
-
-logic the_po__split_fields : integer
-
-logic us_self__compl1 : integer
-
-logic result : integer
-
-logic the_po__split_fields1 : integer
-
-logic the_po__split_fields2 : integer
-
-logic result1 : int
-
-logic tmp1 : int
-
  (* File "p.ads", line 11, characters 0-0 *)
 goal WP_parameter_def : (48 <= 97)

@@ -324,20 +324,8 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : t
-
-logic o : t
-
-logic result : t
-
-logic x1 : t
-
-axiom H : (to_fixed(o) = 8)
-
-axiom H1 : (result = x)
-
-axiom H2 : (x1 = o)
-
  (* File "fixed.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(min(to_fixed(x1), max(to_fixed(x1),
-  to_fixed(x1))))
+goal WP_parameter_def :
+  (forall x:t. forall o:t. forall result:t. forall x1:t.
+  (((to_fixed(o) = 8) and ((result = x) and (x1 = o))) ->
+  in_range(min(to_fixed(x1), max(to_fixed(x1), to_fixed(x1))))))

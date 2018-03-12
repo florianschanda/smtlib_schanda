@@ -216,12 +216,6 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq3 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -233,6 +227,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq3 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -249,8 +249,6 @@ axiom private_type__root__compat_axiom1 :
   us_split_fields1 = { rec__private_type__root = r3; rec__ext__ = r4 };
   attr__tag = r5 })) = to_int(is_valid1(us_tag, { us_split_fields1 = {
   rec__private_type__root = r3; rec__ext__ = r4 }; attr__tag = r5 }))))
-
-logic o : int
 
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def : (is_valid({ us_split_fields1 = {

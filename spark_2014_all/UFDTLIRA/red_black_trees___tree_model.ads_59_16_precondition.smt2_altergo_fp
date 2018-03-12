@@ -146,12 +146,6 @@ logic length__function_guard : int, us_rep -> prop
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq3 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -163,6 +157,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq3 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -293,49 +293,22 @@ logic s2 : us_rep
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic result : bool
-
-logic result1 : bool
-
-axiom H : in_range(d)
-
-axiom H1 : ((o3 = length(s1)) and (in_range2(o3) and
-  ((0 + o3) <= 2147483647)))
-
-axiom H2 : ((o2 = length(s2)) and (in_range2(o2) and
-  ((0 + o2) <= 2147483647)))
-
-axiom H3 : (o4 = (o2 - 1))
-
-axiom H4 : (((o4 = o3) -> (result1 = true)) and ((not (o4 = o3)) ->
-  (result1 = false)))
-
-axiom H5 : ((result1 = true) ->
-  ((((forall n:int. (((1 <= n) and (n <= (0 + length(s1)))) -> (get(s1,
-     n) = get(s2, n)))) -> (result = match_bool(bool_lt(length(s1),
-  length(s2)), true, false))) and
-  ((not (forall n:int. (((1 <= n) and (n <= (0 + length(s1)))) -> (get(s1,
-        n) = get(s2, n))))) -> (result = match_bool(bool_lt(length(s1),
-  length(s2)), false, false)))) and ((result = true) <->
-  ((length(s1) <  length(s2)) and
-  (forall n:int. (((1 <= n) and (n <= (0 + length(s1)))) -> (get(s1,
-  n) = get(s2, n))))))))
-
-axiom H6 : ((not (result1 = true)) -> (result = false))
-
-axiom H7 : (result = true)
-
-axiom H8 : ((o = length(s2)) and (in_range2(o) and ((0 + o) <= 2147483647)))
-
  (* File "tree_model.ads", line 56, characters 0-0 *)
-goal WP_parameter_def : (1 <= o)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. forall o2:int. forall o3:int.
+  forall result:bool. forall result1:bool. (in_range(d) ->
+  (((((o2 = length(s1)) and (in_range2(o2) and ((0 + o2) <= 2147483647))) and
+  ((((o1 = length(s2)) and (in_range2(o1) and ((0 + o1) <= 2147483647))) and
+  (o3 = (o1 - 1))) and (((o3 = o2) and (result1 = true)) or
+  ((not (o3 = o2)) and (result1 = false))))) and (((result1 = true) and
+  ((((forall n:int. (((1 <= n) and (n <= (0 + length(s1)))) -> (get(s1,
+     n) = get(s2, n)))) and
+  (result = match_bool(bool_lt(length(s1), length(s2)), true, false))) or
+  ((not (forall n:int. (((1 <= n) and (n <= (0 + length(s1)))) -> (get(s1,
+        n) = get(s2, n))))) and
+  (result = match_bool(bool_lt(length(s1), length(s2)), false, false)))) and
+  ((result = true) <-> ((length(s1) <  length(s2)) and
+  (forall n:int. (((1 <= n) and (n <= (0 + length(s1)))) -> (get(s1,
+  n) = get(s2, n)))))))) or ((not (result1 = true)) and
+  (result = false)))) -> ((result = true) -> (((o = length(s2)) and
+  (in_range2(o) and ((0 + o) <= 2147483647))) -> (1 <= o))))))

@@ -682,11 +682,9 @@ logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : int
+logic rliteral : t
 
-axiom H : true
-
-axiom H1 : ule(x, of_int(32))
+axiom rliteral_axiom : (tqtint(rliteral) = 32)
 
  (* File "p32.ads", line 13, characters 0-0 *)
-goal WP_parameter_def : in_range(tqtint(x))
+goal WP_parameter_def : (ule(x, rliteral) -> in_range(tqtint(x)))

@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -245,32 +245,15 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : int
-
-logic pack__f__result : bool
-
-logic result : bool
-
-logic pack__f__result1 : bool
-
-logic pack__f__result2 : bool
-
-logic pack__f__result3 : bool
-
-logic pack__f__result4 : bool
-
-logic pack__f__result5 : bool
-
-axiom H : in_range1(x)
-
-axiom H1 : (0 <  x)
-
-axiom H2 : (((0 <  x) and ((x = 10) and
-  (((pack__f__result1 = pack__f__result2) and
-  (pack__f__result3 = pack__f__result1)) and ((result = pack__f__result) and
-  (pack__f__result1 = of_int(1)))))) and
-  ((pack__f__result4 = pack__f__result2) and
-  (pack__f__result5 = pack__f__result3)))
-
  (* File "pack.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : (not (x = 0))
+goal WP_parameter_def :
+  (forall x:int. forall pack__f__result:bool. forall result:bool.
+  forall pack__f__result1:bool. forall pack__f__result2:bool.
+  forall pack__f__result3:bool. forall pack__f__result4:bool.
+  forall pack__f__result5:bool. (in_range1(x) -> ((0 <  x) -> ((((0 <  x) and
+  ((x = 10) and (((pack__f__result1 = pack__f__result2) and
+  (pack__f__result3 = pack__f__result1)) and (({ bool__content = result } = {
+  bool__content = pack__f__result }) and
+  (pack__f__result1 = of_int(1)))))) and (({ bool__content = pack__f__result4
+  } = { bool__content = pack__f__result2 }) and
+  (pack__f__result5 = pack__f__result3))) -> (not (x = 0))))))

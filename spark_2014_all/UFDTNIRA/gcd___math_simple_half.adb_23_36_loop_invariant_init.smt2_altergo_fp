@@ -189,12 +189,6 @@ axiom Max_assoc :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -206,6 +200,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -360,209 +360,19 @@ function t5b__ref___projection(a1: t5b__ref) : integer = (a1).t5b__content
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic c : int
-
-logic j : int
-
-logic math_simple_half__gcd__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic temp___132 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic x : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic temp___135 : int
-
-logic x1 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : bool
-
-logic o11 : int
-
-logic x2 : int
-
-logic o12 : int
-
-logic o13 : int
-
-logic o14 : bool
-
-logic j1 : int
-
-logic result : int
-
-logic c1 : int
-
-logic result1 : int
-
-logic math_simple_half__gcd__result1 : int
-
-logic result2 : int
-
-logic c2 : int
-
-logic result3 : int
-
-logic j2 : int
-
-logic j3 : int
-
-logic result4 : int
-
-logic j4 : int
-
-logic j5 : int
-
-logic j6 : int
-
-logic j7 : int
-
-logic j8 : int
-
-logic j9 : int
-
-logic j10 : int
-
-logic c3 : int
-
-logic result5 : int
-
-logic c4 : int
-
-logic c5 : int
-
-logic c6 : int
-
-logic c7 : int
-
-logic c8 : int
-
-logic c9 : int
-
-logic c10 : int
-
-logic c11 : int
-
-logic c12 : int
-
-logic result6 : int
-
-logic math_simple_half__gcd__result2 : int
-
-logic c13 : int
-
-logic j11 : int
-
-logic math_simple_half__gcd__result3 : int
-
-logic c14 : int
-
-logic j12 : int
-
-logic math_simple_half__gcd__result4 : int
-
-logic c15 : int
-
-logic j13 : int
-
-logic math_simple_half__gcd__result5 : int
-
-logic c16 : int
-
-logic j14 : int
-
-logic math_simple_half__gcd__result6 : int
-
-logic c17 : int
-
-logic j15 : int
-
-logic math_simple_half__gcd__result7 : int
-
-logic c18 : int
-
-logic j16 : int
-
-logic math_simple_half__gcd__result8 : int
-
-logic c19 : int
-
-logic j17 : int
-
-logic math_simple_half__gcd__result9 : int
-
-logic c20 : int
-
-logic j18 : int
-
-logic math_simple_half__gcd__result10 : int
-
-logic result7 : bool
-
-logic result8 : bool
-
-axiom H : in_range1(a)
-
-axiom H1 : in_range1(b)
-
-axiom H2 : ((o = min(a, b)) and in_range1(min(a, b)))
-
-axiom H3 : (result = c)
-
-axiom H4 : (c1 = o)
-
-axiom H5 : in_range1(c1)
-
-axiom H6 : (not ((mod(a, c1) = 0) and (mod(b, c1) = 0)))
-
-axiom H7 : ((o1 = comp_div(c1,2)) and in_range1(comp_div(c1,2)))
-
-axiom H8 : (c1 = result2)
-
-axiom H9 : (c2 = o1)
-
-axiom H10 : ((c2 + 1) = r4b)
-
-axiom H11 : in_range2(r4b)
-
-axiom H12 : (result3 = j)
-
-axiom H13 : (j2 = r4b)
-
-axiom H14 : (r4b <= j2)
-
-axiom H15 : (j2 <= (min(a, b) - 1))
-
-axiom H16 : ((o3 = min(a, b)) and in_range1(min(a, b)))
-
-axiom H17 : ((o2 = j2) and in_range1(j2))
-
-axiom H18 : (not (divides(o2, o3) = true))
-
-logic x3 : int
-
-axiom H19 : ((c2 + 1) <= x3)
-
-axiom H20 : (x3 <= j2)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (not (divides(x3, min(a, b)) = true))
+goal WP_parameter_def :
+  (forall c:int. forall j:int. forall o:int. forall o1:int. forall o2:int.
+  forall o3:int. forall result:int. forall c1:int. forall result1:int.
+  forall c2:int. forall result2:int. forall j1:int. (in_range1(a) ->
+  (in_range1(b) -> ((((o = min(a, b)) and in_range1(min(a, b))) and (({
+  int__content = result } = { int__content = c }) and (c1 = o))) ->
+  (in_range1(c1) -> ((not ((mod(a, c1) = 0) and (mod(b, c1) = 0))) ->
+  ((((o1 = comp_div(c1,2)) and in_range1(comp_div(c1,2))) and
+  ((c1 = result1) and (c2 = o1))) -> ((((c2 + 1) = r4b) and
+  in_range2(r4b)) -> ((({ int__content = result2 } = { int__content = j
+  }) and (j1 = r4b)) -> (((r4b <= j1) and (j1 <= (min(a, b) - 1))) ->
+  ((((o3 = min(a, b)) and in_range1(min(a, b))) and (((o2 = j1) and
+  in_range1(j1)) and (not (divides(o2, o3) = true)))) ->
+  (forall x:int. ((((c2 + 1) <= x) and (x <= j1)) -> (not (divides(x, min(a,
+  b)) = true)))))))))))))))

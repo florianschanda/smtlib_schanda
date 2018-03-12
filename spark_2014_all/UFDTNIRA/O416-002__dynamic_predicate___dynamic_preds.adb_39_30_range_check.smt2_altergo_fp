@@ -365,25 +365,6 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic x__split_fields : even
-
-logic x__split_fields1 : even
-
-logic temp___214 : int
-
-logic temp___216 : int
-
-logic o : int
-
-logic o1 : even
-
-axiom H : (in_range1(i7s) and (mod(i7s, 2) = 0))
-
-axiom H1 : true
-
-axiom H2 : in_range(a)
-
-axiom H3 : in_range(b)
-
  (* File "dynamic_preds.ads", line 25, characters 0-0 *)
-goal WP_parameter_def : in_range1(b)
+goal WP_parameter_def : ((in_range1(i7s) and (mod(i7s, 2) = 0)) ->
+  (in_range(a) -> (in_range(b) -> in_range1(b))))

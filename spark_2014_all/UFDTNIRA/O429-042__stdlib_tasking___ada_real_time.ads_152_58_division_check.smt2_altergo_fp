@@ -162,12 +162,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -179,6 +173,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -516,129 +516,11 @@ logic oge__2__function_guard : bool, us_rep, us_rep -> prop
 
 axiom oge__2__post_axiom : true
 
-logic o : duration
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : duration
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : duration
-
-logic o13 : int
-
-logic o14 : int
-
-logic o15 : int
-
-logic o16 : duration
-
-logic o17 : int
-
-logic o18 : int
-
-logic o19 : int
-
-logic o20 : int
-
-logic o21 : int
-
-logic o22 : int
-
-logic o23 : int
-
-logic o24 : us_rep
-
-logic o25 : duration
-
-logic o26 : int
-
-logic o27 : int
-
-logic o28 : int
-
-logic o29 : duration
-
-logic o30 : int
-
-logic o31 : int
-
-logic o32 : int
-
-logic o33 : int
-
-logic o34 : int
-
-logic o35 : int
-
-logic o36 : int
-
-logic o37 : duration
-
-logic o38 : int
-
-logic o39 : int
-
-logic o40 : int
-
-logic o41 : duration
-
-logic o42 : int
-
-logic o43 : int
-
-logic o44 : int
-
-logic o45 : int
-
-logic o46 : int
-
-logic o47 : int
-
-logic o48 : int
-
-logic result : bool
-
-logic result1 : bool
-
-logic result2 : bool
-
-logic result3 : bool
-
-axiom H : in_range1(right)
-
-axiom H1 : (not (0 <  right))
-
-axiom H2 : (right <  0)
-
-axiom H3 : (result2 = ogt__2(left, time_span_zero))
-
-axiom H4 : (not (result2 = true))
-
-axiom H5 : (result3 = olt__2(left, time_span_zero))
-
-axiom H6 : (result3 = true)
-
-axiom H7 : (o41 = to_duration__2(time_span_last))
-
-axiom H8 : (o42 = to_fixed(o41))
-
  (* File "ada_real_time.ads", line 210, characters 0-0 *)
-goal WP_parameter_def : (not (1 = 0))
+goal WP_parameter_def :
+  (forall o:duration. forall o1:int. forall result:bool. forall result1:bool.
+  (in_range1(right) -> ((not (0 <  right)) -> ((right <  0) ->
+  ((result = ogt__2(left, time_span_zero)) -> ((not (result = true)) ->
+  ((result1 = olt__2(left, time_span_zero)) -> ((result1 = true) ->
+  (((o = to_duration__2(time_span_last)) and (o1 = to_fixed(o))) ->
+  (not (1 = 0)))))))))))

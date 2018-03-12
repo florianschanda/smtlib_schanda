@@ -933,12 +933,6 @@ axiom bv_max_to_uint1 :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int2 : bool -> int
 
 axiom to_int_def2 :
@@ -950,6 +944,12 @@ logic of_int2 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int2(i)]. (((i = 0) -> (of_int2(i) = false)) and
   ((not (i = 0)) -> (of_int2(i) = true))))
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1089,27 +1089,27 @@ axiom toSmall_to_uint :
 
 axiom toBig_to_uint : (forall x:t. (tqtint(x) = tqtint1(toBig(x))))
 
+logic rliteral1 : t1
+
+axiom rliteral_axiom1 : (tqtint1(rliteral1) = 4294967295)
+
 axiom readreg32__post_axiom :
   (forall reg:t1 [readreg32(reg)]. (readreg32(reg) = toSmall(bw_and1(reg,
-  of_int1(4294967295)))))
+  rliteral1))))
+
+logic rliteral2 : t1
+
+axiom rliteral_axiom2 : (tqtint1(rliteral2) = 18446744069414584320)
+
+logic rliteral3 : t1
+
+axiom rliteral_axiom3 : (tqtint1(rliteral3) = 0)
 
 axiom writereg32post__post_axiom :
   (forall regnew:t1.
   (forall val__:t [writereg32post(regnew, val__)]. ((writereg32post(regnew,
   val__) = true) <-> ((readreg32(regnew) = val__) and (bw_and1(regnew,
-  of_int1(18446744069414584320)) = of_int1(0))))))
-
-logic rax : t1
-
-logic rcx : t1
-
-logic rdx : t1
-
-logic rsp : t1
-
-logic rdi : t1
-
-logic r8 : t1
+  rliteral2) = rliteral3)))))
 
  (* File "x86.ads", line 334, characters 0-0 *)
 goal WP_parameter_def : true

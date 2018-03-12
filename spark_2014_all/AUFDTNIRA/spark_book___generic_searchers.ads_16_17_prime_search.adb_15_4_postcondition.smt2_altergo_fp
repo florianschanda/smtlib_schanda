@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -298,24 +298,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> (int,natural) farray
-
-axiom concat_def :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : natural, int -> (int,natural) farray
-
-axiom singleton_def :
-  (forall v:natural.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,natural) farray, int, int, (int,natural) farray, int,
   int -> bool
 
@@ -326,17 +308,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -346,37 +328,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type element_type
 
@@ -448,345 +402,78 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
-logic found : bool
-
-logic result__ : int
-
-logic low_index : int
-
-logic mid_index : int
-
-logic high_index : int
-
-logic j : int
-
-logic k : int
-
-logic temp___187 : bool
-
-logic temp___186 : int
-
-logic temp___185 : int
-
-logic temp___184 : int
-
-logic temp___183 : int
-
-logic temp___189 : int
-
-logic temp___188 : int
-
-logic o : int
-
-logic o1 : natural
-
-logic o2 : int
-
-logic o3 : int
-
-logic mid_index1 : int
-
-logic result : int
-
-logic low_index1 : int
-
-logic result1 : int
-
-logic high_index1 : int
-
-logic result2 : bool
-
-logic found1 : bool
-
-logic result3 : int
-
-logic result__1 : int
-
-logic temp___1891 : int
-
-logic temp___1881 : int
-
-logic result4 : int
-
-logic mid_index2 : int
-
-logic result5 : bool
-
-logic found2 : bool
-
-logic result6 : int
-
-logic result__2 : int
-
-logic found3 : bool
-
-logic result__3 : int
-
-logic low_index2 : int
-
-logic mid_index3 : int
-
-logic high_index2 : int
-
-logic temp___1892 : int
-
-logic temp___1882 : int
-
-logic result7 : int
-
-logic temp___1893 : int
-
-logic result8 : int
-
-logic temp___1883 : int
-
-logic result9 : bool
-
-logic result10 : int
-
-logic low_index3 : int
-
-logic result11 : int
-
-logic high_index3 : int
-
-logic result12 : int
-
-logic mid_index4 : int
-
-logic result13 : bool
-
-logic found4 : bool
-
-logic result14 : int
-
-logic result__4 : int
-
-logic found5 : bool
-
-logic result__5 : int
-
-logic mid_index5 : int
-
-logic found6 : bool
-
-logic result__6 : int
-
-logic mid_index6 : int
-
-logic found7 : bool
-
-logic result__7 : int
-
-logic low_index4 : int
-
-logic mid_index7 : int
-
-logic high_index4 : int
-
-logic found8 : bool
-
-logic result__8 : int
-
-logic low_index5 : int
-
-logic mid_index8 : int
-
-logic high_index5 : int
-
-logic found9 : bool
-
-logic result__9 : int
-
-logic low_index6 : int
-
-logic mid_index9 : int
-
-logic high_index6 : int
-
-logic temp___1894 : int
-
-logic temp___1884 : int
-
-logic found10 : bool
-
-logic result__10 : int
-
-logic low_index7 : int
-
-logic mid_index10 : int
-
-logic high_index7 : int
-
-logic temp___1895 : int
-
-logic temp___1885 : int
-
-logic found11 : bool
-
-logic result__11 : int
-
-logic low_index8 : int
-
-logic mid_index11 : int
-
-logic high_index8 : int
-
-logic temp___1896 : int
-
-logic temp___1886 : int
-
-logic found12 : bool
-
-logic result__12 : int
-
-logic low_index9 : int
-
-logic mid_index12 : int
-
-logic high_index9 : int
-
-logic temp___1897 : int
-
-logic temp___1887 : int
-
-logic found13 : bool
-
-logic result__13 : int
-
-logic low_index10 : int
-
-logic mid_index13 : int
-
-logic high_index10 : int
-
-logic found14 : bool
-
-logic result__14 : int
-
-logic low_index11 : int
-
-logic mid_index14 : int
-
-logic high_index11 : int
-
-logic found15 : bool
-
-logic result__15 : int
-
-logic low_index12 : int
-
-logic mid_index15 : int
-
-logic high_index12 : int
-
-logic found16 : bool
-
-logic result__16 : int
-
-logic low_index13 : int
-
-logic mid_index16 : int
-
-logic high_index13 : int
-
-logic found17 : bool
-
-logic result__17 : int
-
-logic low_index14 : int
-
-logic mid_index17 : int
-
-logic high_index14 : int
-
-logic found18 : bool
-
-logic result__18 : int
-
-logic low_index15 : int
-
-logic mid_index18 : int
-
-logic high_index15 : int
-
-logic found19 : bool
-
-logic result__19 : int
-
-logic low_index16 : int
-
-logic mid_index19 : int
-
-logic high_index16 : int
-
-logic found20 : bool
-
-logic result__20 : int
-
-logic low_index17 : int
-
-logic mid_index20 : int
-
-logic high_index17 : int
-
-logic found21 : bool
-
-logic result__21 : int
-
-logic low_index18 : int
-
-logic mid_index21 : int
-
-logic high_index18 : int
-
-logic found22 : bool
-
-logic result__22 : int
-
-logic low_index19 : int
-
-logic mid_index22 : int
-
-logic high_index19 : int
-
-axiom H : in_range3(search_item)
-
-axiom H1 : ((1 <= 10) -> in_range4(result__))
-
-axiom H2 :
-  (forall j1:int. (((1 <= j1) and (j1 <= 10)) ->
-  (forall k1:int. ((((j1 + 1) <= k1) and (k1 <= 10)) ->
-  (to_rep((items[j1])) <  to_rep((items[k1])))))))
-
-axiom H3 : (result = low_index)
-
-axiom H4 : (low_index1 = 1)
-
-axiom H5 : in_range4(low_index1)
-
-axiom H6 : ((1 <= 10) -> in_range4(mid_index))
-
-axiom H7 : (result1 = high_index)
-
-axiom H8 : (high_index1 = 10)
-
-axiom H9 : in_range4(high_index1)
-
-axiom H10 : (result2 = found)
-
-axiom H11 : (found1 = of_int(0))
-
-axiom H12 : (result3 = result__)
-
-axiom H13 : (result__1 = 1)
-
-axiom H14 : (((((high_index16 = high_index1) and
-  ((mid_index19 = mid_index) and ((low_index16 = low_index1) and
-  ((result__19 = result__1) and (found19 = found1))))) and
-  ((high_index17 = high_index1) and ((mid_index20 = mid_index1) and
-  ((low_index17 = low_index1) and ((result__20 = result__1) and
-  (found20 = found1)))))) and
+ (* File "prime_search.adb", line 3, characters 0-0 *)
+goal WP_parameter_def :
+  (forall found:bool. forall result__:int. forall low_index:int.
+  forall mid_index:int. forall high_index:int. forall temp___214:bool.
+  forall temp___213:int. forall temp___212:int. forall temp___211:int.
+  forall temp___210:int. forall temp___216:int. forall temp___215:int.
+  forall o:int. forall o1:natural. forall o2:int. forall o3:int.
+  forall mid_index1:int. forall result:int. forall low_index1:int.
+  forall result1:int. forall high_index1:int. forall result2:bool.
+  forall found1:bool. forall result3:int. forall result__1:int.
+  forall temp___2161:int. forall temp___2151:int. forall result4:int.
+  forall mid_index2:int. forall result5:bool. forall found2:bool.
+  forall result6:int. forall result__2:int. forall found3:bool.
+  forall result__3:int. forall low_index2:int. forall mid_index3:int.
+  forall high_index2:int. forall temp___2162:int. forall temp___2152:int.
+  forall result7:int. forall temp___2163:int. forall result8:int.
+  forall temp___2153:int. forall result9:bool. forall result10:int.
+  forall low_index3:int. forall result11:int. forall high_index3:int.
+  forall result12:int. forall mid_index4:int. forall result13:bool.
+  forall found4:bool. forall result14:int. forall result__4:int.
+  forall found5:bool. forall result__5:int. forall mid_index5:int.
+  forall found6:bool. forall result__6:int. forall mid_index6:int.
+  forall found7:bool. forall result__7:int. forall low_index4:int.
+  forall mid_index7:int. forall high_index4:int. forall found8:bool.
+  forall result__8:int. forall low_index5:int. forall mid_index8:int.
+  forall high_index5:int. forall found9:bool. forall result__9:int.
+  forall low_index6:int. forall mid_index9:int. forall high_index6:int.
+  forall temp___2164:int. forall temp___2154:int. forall found10:bool.
+  forall result__10:int. forall low_index7:int. forall mid_index10:int.
+  forall high_index7:int. forall temp___2165:int. forall temp___2155:int.
+  forall found11:bool. forall result__11:int. forall low_index8:int.
+  forall mid_index11:int. forall high_index8:int. forall temp___2166:int.
+  forall temp___2156:int__ref. forall found12:bool. forall result__12:int.
+  forall low_index9:int. forall mid_index12:int. forall high_index9:int.
+  forall temp___2167:int. forall temp___2157:int. forall found13:bool__ref.
+  forall result__13:int__ref. forall low_index10:int__ref.
+  forall mid_index13:int__ref. forall high_index10:int__ref.
+  forall found14:bool. forall result__14:int. forall low_index11:int.
+  forall mid_index14:int. forall high_index11:int. forall found15:bool__ref.
+  forall result__15:int__ref. forall low_index12:int__ref.
+  forall mid_index15:int__ref. forall high_index12:int__ref.
+  forall found16:bool. forall result__16:int. forall low_index13:int.
+  forall mid_index16:int. forall high_index13:int. forall found17:bool__ref.
+  forall result__17:int__ref. forall low_index14:int__ref.
+  forall mid_index17:int__ref. forall high_index14:int__ref.
+  forall found18:bool. forall result__18:int. forall low_index15:int.
+  forall mid_index18:int. forall high_index15:int. forall found19:bool__ref.
+  forall result__19:int__ref. forall low_index16:int__ref.
+  forall mid_index19:int__ref. forall high_index16:int__ref.
+  forall found20:bool. forall result__20:int. forall low_index17:int.
+  forall mid_index20:int. forall high_index17:int. forall found21:bool__ref.
+  forall result__21:int__ref. forall low_index18:int__ref.
+  forall mid_index21:int__ref. forall high_index18:int__ref.
+  forall found22:bool. forall result__22:int. forall low_index19:int.
+  forall mid_index22:int. forall high_index19:int.
+  ((in_range3(search_item) and (((1 <= 10) -> in_range4(result__)) and
+  ((forall j:int. (((1 <= j) and (j <= 10)) ->
+   (forall k:int. ((((j + 1) <= k) and (k <= 10)) ->
+   (to_rep((items[j])) <  to_rep((items[k]))))))) and
+  (((({ int__content = result } = { int__content = low_index }) and
+  (low_index1 = 1)) and (in_range4(low_index1) and (((1 <= 10) ->
+  in_range4(mid_index)) and ((({ int__content = result1 } = { int__content =
+  high_index }) and (high_index1 = 10)) and (in_range4(high_index1) and ((({
+  bool__content = result2 } = { bool__content = found }) and
+  (found1 = of_int(0))) and ((({ int__content = result3 } = { int__content =
+  result__ }) and (result__1 = 1)) and (((((high_index16 = { int__content =
+  high_index1 }) and ((mid_index19 = { int__content = mid_index }) and
+  ((low_index16 = { int__content = low_index1 }) and ((result__19 = {
+  int__content = result__1 }) and (found19 = { bool__content = found1
+  }))))) and ((high_index17 = high_index1) and
+  ((mid_index20 = mid_index1) and ((low_index17 = low_index1) and
+  ((result__20 = result__1) and (found20 = found1)))))) and
   ((not (search_item <  to_rep((items[low_index1])))) ->
   (to_rep((items[high_index1])) <  search_item))) or
   ((not ((not (search_item <  to_rep((items[low_index1])))) ->
@@ -796,98 +483,41 @@ axiom H14 : (((((high_index16 = high_index1) and
   (found19 = found17))))) and ((high_index17 = high_index15) and
   ((mid_index20 = mid_index18) and ((low_index17 = low_index15) and
   ((result__20 = result__18) and (found20 = found18)))))) and
-  (((((high_index14 = high_index8) and ((mid_index17 = mid_index11) and
-  ((low_index14 = low_index8) and ((result__17 = result__11) and
-  (found17 = found11))))) and ((high_index15 = high_index9) and
-  ((mid_index18 = mid_index12) and ((low_index15 = low_index9) and
-  ((result__18 = result__12) and (found18 = found12)))))) and
-  ((temp___187 = found1) and ((temp___186 = high_index1) and
-  ((temp___185 = mid_index) and ((temp___184 = low_index1) and
-  ((temp___183 = result__1) and ((0 = temp___189) and ((0 = temp___188) and
-  (((result4 = mid_index) and
+  (((((high_index14 = { int__content = high_index8 }) and ((mid_index17 = {
+  int__content = mid_index11 }) and ((low_index14 = { int__content =
+  low_index8 }) and ((result__17 = { int__content = result__11 }) and
+  (found17 = { bool__content = found11 }))))) and
+  ((high_index15 = high_index9) and ((mid_index18 = mid_index12) and
+  ((low_index15 = low_index9) and ((result__18 = result__12) and
+  (found18 = found12)))))) and ((temp___214 = found1) and
+  ((temp___213 = high_index1) and ((temp___212 = mid_index) and
+  ((temp___211 = low_index1) and ((temp___210 = result__1) and
+  ((0 = temp___216) and ((0 = temp___215) and ((({ int__content = result4
+  } = { int__content = mid_index }) and
   (mid_index2 = comp_div((low_index1 + high_index1),2))) and
-  (((((temp___1886 = temp___188) and ((temp___1896 = temp___189) and
-  ((high_index8 = high_index1) and ((mid_index11 = mid_index2) and
-  ((low_index8 = low_index1) and ((result__11 = result__2) and
-  (found11 = found2))))))) and ((temp___1887 = temp___1881) and
-  ((temp___1897 = temp___1891) and ((high_index9 = high_index1) and
+  (((((temp___2156 = { int__content = temp___215 }) and (({ int__content =
+  temp___2166 } = { int__content = temp___216 }) and
+  ((high_index1 = high_index8) and ((mid_index2 = mid_index11) and
+  ((low_index1 = low_index8) and ((result__2 = result__11) and
+  (found2 = found11))))))) and ((temp___2157 = temp___2151) and
+  ((temp___2167 = temp___2161) and ((high_index9 = high_index1) and
   ((mid_index12 = mid_index2) and ((low_index9 = low_index1) and
   ((result__12 = result__2) and (found12 = found2)))))))) and
   ((search_item = to_rep((items[mid_index2]))) and (((result5 = found1) and
   (found2 = of_int(1))) and ((result6 = result__1) and
   (result__2 = mid_index2))))) or
   (((not (search_item = to_rep((items[mid_index2])))) and
-  ((result__2 = result__1) and (found2 = found1))) and
-  ((((temp___1886 = temp___1883) and ((temp___1896 = temp___1893) and
-  ((high_index8 = high_index4) and ((mid_index11 = mid_index7) and
-  ((low_index8 = low_index4) and ((result__11 = result__7) and
-  (found11 = found7))))))) and ((temp___1887 = temp___1883) and
-  ((temp___1897 = temp___1893) and ((high_index9 = high_index5) and
-  ((mid_index12 = mid_index8) and ((low_index9 = low_index5) and
-  ((result__12 = result__8) and (found12 = found8)))))))) and
-  ((not (low_index1 = high_index1)) and (((not (found3 = true)) and
-  (((low_index2 <= mid_index3) and (mid_index3 <  high_index2)) and
-  (((to_rep((items[low_index2])) <  search_item) or
-  (to_rep((items[low_index2])) = search_item)) and
-  ((search_item <  to_rep((items[high_index2]))) or
-  (search_item = to_rep((items[high_index2]))))))) and ((((((1 <= 10) ->
-  in_range4(result__3)) and ((1 <= 10) -> in_range4(low_index2))) and
-  ((1 <= 10) -> in_range4(mid_index3))) and ((1 <= 10) ->
-  in_range4(high_index2))) and (((temp___1892 = result7) and
-  (temp___1893 = low_index2)) and (((temp___1882 = result8) and
-  (temp___1883 = high_index2)) and (((((high_index4 = high_index2) and
-  ((mid_index7 = mid_index3) and ((low_index4 = low_index2) and
-  ((result__7 = result__3) and (found7 = found3))))) and
-  ((high_index5 = high_index2) and ((mid_index8 = mid_index3) and
-  ((low_index5 = low_index2) and ((result__8 = result__3) and
-  (found8 = found3)))))) and
-  ((to_rep((items[mid_index3])) <  search_item) and
-  (((((((1 <= (mid_index3 + 1)) and ((mid_index3 + 1) <= 10)) and
-  (o = (mid_index3 + 1))) and (o1 = (items[o]))) and (o2 = to_rep(o1))) and
-  (((search_item <  o2) -> (result9 = true)) and
-  ((not (search_item <  o2)) -> (result9 = false)))) and
-  (result9 = true)))) or ((((to_rep((items[mid_index3])) <  search_item) ->
-  (((((((((1 <= (mid_index3 + 1)) and ((mid_index3 + 1) <= 10)) and
-  (o = (mid_index3 + 1))) and (o1 = (items[o]))) and (o2 = to_rep(o1))) and
-  (((search_item <  o2) -> (result9 = true)) and
-  ((not (search_item <  o2)) -> (result9 = false)))) and
-  (not (result9 = true))) and (((o3 = (mid_index3 + 1)) and
-  in_range4((mid_index3 + 1))) and ((low_index2 = result10) and
-  (low_index3 = o3)))) and (high_index3 = high_index2))) and
-  ((not (to_rep((items[mid_index3])) <  search_item)) ->
-  (((high_index2 = result11) and (high_index3 = mid_index3)) and
-  (low_index3 = low_index2)))) and ((((high_index4 = high_index3) and
-  ((mid_index7 = mid_index4) and ((low_index4 = low_index3) and
-  ((result__7 = result__4) and (found7 = found4))))) and
-  ((high_index5 = high_index3) and ((mid_index8 = mid_index4) and
-  ((low_index5 = low_index3) and ((result__8 = result__4) and
-  (found8 = found4)))))) and (((mid_index3 = result12) and
-  (mid_index4 = comp_div((low_index3 + high_index3),2))) and
-  ((search_item = to_rep((items[mid_index4]))) and (((result13 = found3) and
-  (found4 = of_int(1))) and ((result14 = result__3) and
-  (result__4 = mid_index4))))))))))))))))))))))))) or
-  (((((temp___187 = found1) and ((temp___186 = high_index1) and
-  ((temp___185 = mid_index) and ((temp___184 = low_index1) and
-  ((temp___183 = result__1) and ((0 = temp___189) and ((0 = temp___188) and
-  (((result4 = mid_index) and
-  (mid_index2 = comp_div((low_index1 + high_index1),2))) and
-  (((not (search_item = to_rep((items[mid_index2])))) and
-  ((result__2 = result__1) and (found2 = found1))) and
-  (((((temp___1884 = temp___188) and ((temp___1894 = temp___189) and
-  ((high_index6 = high_index1) and ((mid_index9 = mid_index2) and
-  ((low_index6 = low_index1) and ((result__9 = result__2) and
-  (found9 = found2))))))) and ((temp___1885 = temp___1881) and
-  ((temp___1895 = temp___1891) and ((high_index7 = high_index1) and
-  ((mid_index10 = mid_index2) and ((low_index7 = low_index1) and
-  ((result__10 = result__2) and (found10 = found2)))))))) and
-  (low_index1 = high_index1)) or ((not (low_index1 = high_index1)) and
-  ((((temp___1884 = temp___1883) and ((temp___1894 = temp___1893) and
-  ((high_index6 = high_index3) and ((mid_index9 = mid_index5) and
-  ((low_index6 = low_index3) and ((result__9 = result__5) and
-  (found9 = found5))))))) and ((temp___1885 = temp___1883) and
-  ((temp___1895 = temp___1893) and ((high_index7 = high_index3) and
-  ((mid_index10 = mid_index6) and ((low_index7 = low_index3) and
-  ((result__10 = result__6) and (found10 = found6)))))))) and
+  ((result__2 = result__1) and (found2 = found1))) and ((((temp___2156 = {
+  int__content = temp___2153 }) and ((temp___2163 = temp___2166) and (({
+  int__content = high_index8 } = { int__content = high_index4 }) and (({
+  int__content = mid_index11 } = { int__content = mid_index7 }) and (({
+  int__content = low_index8 } = { int__content = low_index4 }) and (({
+  int__content = result__11 } = { int__content = result__7 }) and ({
+  bool__content = found11 } = { bool__content = found7 }))))))) and
+  ((temp___2157 = temp___2153) and ((temp___2167 = temp___2163) and
+  ((high_index9 = high_index5) and ((mid_index12 = mid_index8) and
+  ((low_index9 = low_index5) and ((result__12 = result__8) and
+  (found12 = found8)))))))) and ((not (low_index1 = high_index1)) and
   (((not (found3 = true)) and (((low_index2 <= mid_index3) and
   (mid_index3 <  high_index2)) and
   (((to_rep((items[low_index2])) <  search_item) or
@@ -896,30 +526,96 @@ axiom H14 : (((((high_index16 = high_index1) and
   (search_item = to_rep((items[high_index2]))))))) and ((((((1 <= 10) ->
   in_range4(result__3)) and ((1 <= 10) -> in_range4(low_index2))) and
   ((1 <= 10) -> in_range4(mid_index3))) and ((1 <= 10) ->
-  in_range4(high_index2))) and (((temp___1892 = result7) and
-  (temp___1893 = low_index2)) and (((temp___1882 = result8) and
-  (temp___1883 = high_index2)) and
-  ((((to_rep((items[mid_index3])) <  search_item) ->
+  in_range4(high_index2))) and (((temp___2162 = result7) and
+  (temp___2163 = low_index2)) and (((temp___2152 = result8) and
+  (temp___2153 = high_index2)) and (((((high_index2 = high_index4) and
+  ((mid_index3 = mid_index7) and ((low_index2 = low_index4) and
+  ((result__3 = result__7) and (found3 = found7))))) and
+  ((high_index5 = high_index2) and ((mid_index8 = mid_index3) and
+  ((low_index5 = low_index2) and ((result__8 = result__3) and
+  (found8 = found3)))))) and
+  ((to_rep((items[mid_index3])) <  search_item) and
+  (((((((1 <= (mid_index3 + 1)) and ((mid_index3 + 1) <= 10)) and
+  (o = (mid_index3 + 1))) and (o1 = (items[o]))) and (o2 = to_rep(o1))) and
+  (((search_item <  o2) and (result9 = true)) or
+  ((not (search_item <  o2)) and (result9 = false)))) and
+  (result9 = true)))) or ((((to_rep((items[mid_index3])) <  search_item) and
   (((((((((1 <= (mid_index3 + 1)) and ((mid_index3 + 1) <= 10)) and
   (o = (mid_index3 + 1))) and (o1 = (items[o]))) and (o2 = to_rep(o1))) and
-  (((search_item <  o2) -> (result9 = true)) and
-  ((not (search_item <  o2)) -> (result9 = false)))) and
+  (((search_item <  o2) and (result9 = true)) or
+  ((not (search_item <  o2)) and (result9 = false)))) and
   (not (result9 = true))) and (((o3 = (mid_index3 + 1)) and
   in_range4((mid_index3 + 1))) and ((low_index2 = result10) and
-  (low_index3 = o3)))) and (high_index3 = high_index2))) and
-  ((not (to_rep((items[mid_index3])) <  search_item)) ->
+  (low_index3 = o3)))) and (high_index3 = high_index2))) or
+  ((not (to_rep((items[mid_index3])) <  search_item)) and
   (((high_index2 = result11) and (high_index3 = mid_index3)) and
-  (low_index3 = low_index2)))) and ((((mid_index5 = mid_index4) and
-  ((result__5 = result__4) and (found5 = found4))) and
+  (low_index3 = low_index2)))) and ((((high_index3 = high_index4) and
+  ((mid_index4 = mid_index7) and ((low_index3 = low_index4) and
+  ((result__4 = result__7) and (found4 = found7))))) and
+  ((high_index5 = high_index3) and ((mid_index8 = mid_index4) and
+  ((low_index5 = low_index3) and ((result__8 = result__4) and
+  (found8 = found4)))))) and (((mid_index3 = result12) and
+  (mid_index4 = comp_div((low_index3 + high_index3),2))) and
+  ((search_item = to_rep((items[mid_index4]))) and (((result13 = found3) and
+  (found4 = of_int(1))) and ((result14 = result__3) and
+  (result__4 = mid_index4))))))))))))))))))))))))) or
+  (((((temp___214 = found1) and ((temp___213 = high_index1) and
+  ((temp___212 = mid_index) and ((temp___211 = low_index1) and
+  ((temp___210 = result__1) and ((0 = temp___216) and ((0 = temp___215) and
+  ((({ int__content = result4 } = { int__content = mid_index }) and
+  (mid_index2 = comp_div((low_index1 + high_index1),2))) and
+  (((not (search_item = to_rep((items[mid_index2])))) and
+  ((result__2 = result__1) and (found2 = found1))) and ((((({ int__content =
+  temp___2154 } = { int__content = temp___215 }) and (({ int__content =
+  temp___2164 } = { int__content = temp___216 }) and
+  ((high_index1 = high_index6) and ((mid_index2 = mid_index9) and
+  ((low_index1 = low_index6) and ((result__2 = result__9) and
+  (found2 = found9))))))) and ((temp___2155 = temp___2151) and
+  ((temp___2165 = temp___2161) and ((high_index7 = high_index1) and
+  ((mid_index10 = mid_index2) and ((low_index7 = low_index1) and
+  ((result__10 = result__2) and (found10 = found2)))))))) and
+  (low_index1 = high_index1)) or ((not (low_index1 = high_index1)) and
+  ((((temp___2153 = temp___2154) and ((temp___2163 = temp___2164) and
+  ((high_index3 = high_index6) and (({ int__content = mid_index9 } = {
+  int__content = mid_index5 }) and ((low_index3 = low_index6) and (({
+  int__content = result__9 } = { int__content = result__5 }) and ({
+  bool__content = found9 } = { bool__content = found5 }))))))) and
+  ((temp___2155 = temp___2153) and ((temp___2165 = temp___2163) and
+  ((high_index7 = high_index3) and ((mid_index10 = mid_index6) and
+  ((low_index7 = low_index3) and ((result__10 = result__6) and
+  (found10 = found6)))))))) and (((not (found3 = true)) and
+  (((low_index2 <= mid_index3) and (mid_index3 <  high_index2)) and
+  (((to_rep((items[low_index2])) <  search_item) or
+  (to_rep((items[low_index2])) = search_item)) and
+  ((search_item <  to_rep((items[high_index2]))) or
+  (search_item = to_rep((items[high_index2]))))))) and ((((((1 <= 10) ->
+  in_range4(result__3)) and ((1 <= 10) -> in_range4(low_index2))) and
+  ((1 <= 10) -> in_range4(mid_index3))) and ((1 <= 10) ->
+  in_range4(high_index2))) and (((temp___2162 = result7) and
+  (temp___2163 = low_index2)) and (((temp___2152 = result8) and
+  (temp___2153 = high_index2)) and
+  ((((to_rep((items[mid_index3])) <  search_item) and
+  (((((((((1 <= (mid_index3 + 1)) and ((mid_index3 + 1) <= 10)) and
+  (o = (mid_index3 + 1))) and (o1 = (items[o]))) and (o2 = to_rep(o1))) and
+  (((search_item <  o2) and (result9 = true)) or
+  ((not (search_item <  o2)) and (result9 = false)))) and
+  (not (result9 = true))) and (((o3 = (mid_index3 + 1)) and
+  in_range4((mid_index3 + 1))) and ((low_index2 = result10) and
+  (low_index3 = o3)))) and (high_index3 = high_index2))) or
+  ((not (to_rep((items[mid_index3])) <  search_item)) and
+  (((high_index2 = result11) and (high_index3 = mid_index3)) and
+  (low_index3 = low_index2)))) and ((((mid_index4 = mid_index5) and
+  ((result__4 = result__5) and (found4 = found5))) and
   ((mid_index6 = mid_index4) and ((result__6 = result__4) and
   (found6 = found4)))) and (((mid_index3 = result12) and
   (mid_index4 = comp_div((low_index3 + high_index3),2))) and
   (((not (search_item = to_rep((items[mid_index4])))) and
   ((result__4 = result__3) and (found4 = found3))) and
-  (low_index3 = high_index3))))))))))))))))))))) and
-  (((high_index10 = high_index6) and ((mid_index13 = mid_index9) and
-  ((low_index10 = low_index6) and ((result__13 = result__9) and
-  (found13 = found9))))) and ((high_index11 = high_index7) and
+  (low_index3 = high_index3))))))))))))))))))))) and (((high_index10 = {
+  int__content = high_index6 }) and ((mid_index13 = { int__content =
+  mid_index9 }) and ((low_index10 = { int__content = low_index6 }) and
+  ((result__13 = { int__content = result__9 }) and (found13 = {
+  bool__content = found9 }))))) and ((high_index11 = high_index7) and
   ((mid_index14 = mid_index10) and ((low_index11 = low_index7) and
   ((result__14 = result__10) and (found14 = found10))))))) and
   (((high_index12 = high_index10) and ((mid_index15 = mid_index13) and
@@ -931,29 +627,11 @@ axiom H14 : (((((high_index16 = high_index1) and
   ((low_index14 = low_index12) and ((result__17 = result__15) and
   (found17 = found15))))) and ((high_index15 = high_index13) and
   ((mid_index18 = mid_index16) and ((low_index15 = low_index13) and
-  ((result__18 = result__16) and (found18 = found16)))))))))))
-
-axiom H15 : (high_index18 = high_index16)
-
-axiom H16 : (mid_index21 = mid_index19)
-
-axiom H17 : (low_index18 = low_index16)
-
-axiom H18 : (result__21 = result__19)
-
-axiom H19 : (found21 = found19)
-
-axiom H20 : (high_index19 = high_index17)
-
-axiom H21 : (mid_index22 = mid_index20)
-
-axiom H22 : (low_index19 = low_index17)
-
-axiom H23 : (result__22 = result__20)
-
-axiom H24 : (found22 = found20)
-
-axiom H25 : (found21 = true)
-
- (* File "prime_search.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (search_item = to_rep((items[result__21])))
+  ((result__18 = result__16) and (found18 = found16)))))))))))))))))) and
+  (((high_index18 = high_index16) and ((mid_index21 = mid_index19) and
+  ((low_index18 = low_index16) and ((result__21 = result__19) and
+  (found21 = found19))))) and ((high_index19 = high_index17) and
+  ((mid_index22 = mid_index20) and ((low_index19 = low_index17) and
+  ((result__22 = result__20) and (found22 = found20)))))))))) ->
+  (((found21).bool__content = true) ->
+  (search_item = to_rep((items[(result__21).int__content]))))))

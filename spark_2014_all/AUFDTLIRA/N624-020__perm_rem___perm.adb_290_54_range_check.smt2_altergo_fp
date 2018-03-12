@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -252,24 +252,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> (int,natural) farray
-
-axiom concat_def :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : natural, int -> (int,natural) farray
-
-axiom singleton_def :
-  (forall v:natural.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq6 : (int,natural) farray, int, int, (int,natural) farray, int,
   int -> bool
 
@@ -280,17 +262,17 @@ axiom bool_eq_def5 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -300,37 +282,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq6(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq6(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq6(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic to_rep2 : integer -> int
 
@@ -751,1067 +705,29 @@ axiom aa__def_axiom : ({ elts = aa; rt = aa1 } = remove({ elts = a; rt = a1
 axiom bb__def_axiom : ({ elts = bb; rt = bb1 } = remove({ elts = b; rt = b1
   }, to_rep1(w1)))
 
-logic ih : int
-
-logic ia : int
-
-logic ib : int
-
-logic perm__extended_perm__result : int
-
-logic perm__extended_perm__B_6__w__assume : index
-
-logic perm__extended_perm__B_6__w__assume1 : index
-
-logic perm__extended_perm__B_6__aa__assume : (int,natural) farray
-
-logic perm__extended_perm__B_6__aa__assume1 : t
-
-logic perm__extended_perm__B_6__bb__assume : (int,natural) farray
-
-logic perm__extended_perm__B_6__bb__assume1 : t
-
-logic o : int
-
-logic temp___595 : int
-
-logic temp___594 : int
-
-logic temp___593 : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : (int,natural) farray
-
-logic o7 : t
-
-logic o8 : (int,natural) farray
-
-logic o9 : t
-
-logic o10 : int
-
-logic o11 : (int,natural) farray
-
-logic o12 : t
-
-logic o13 : int
-
-logic o14 : (int,natural) farray
-
-logic o15 : t
-
-logic o16 : int
-
-logic o17 : int
-
-logic o18 : int
-
-logic o19 : (int,natural) farray
-
-logic o20 : t
-
-logic o21 : int
-
-logic o22 : (int,natural) farray
-
-logic o23 : t
-
-logic o24 : (int,natural) farray
-
-logic o25 : t
-
-logic o26 : (int,natural) farray
-
-logic o27 : t
-
-logic o28 : int
-
-logic o29 : (int,natural) farray
-
-logic o30 : t
-
-logic o31 : int
-
-logic o32 : int
-
-logic o33 : (int,natural) farray
-
-logic o34 : t
-
-logic o35 : int
-
-logic o36 : (int,natural) farray
-
-logic o37 : t
-
-logic o38 : (int,natural) farray
-
-logic o39 : t
-
-logic o40 : int
-
-logic o41 : (int,natural) farray
-
-logic o42 : t
-
-logic us : bool
-
-logic o43 : int
-
-logic o44 : (int,natural) farray
-
-logic o45 : t
-
-logic o46 : (int,natural) farray
-
-logic o47 : t
-
-logic us1 : bool
-
-logic o48 : int
-
-logic o49 : int
-
-logic o50 : int
-
-logic o51 : (int,natural) farray
-
-logic o52 : t
-
-logic o53 : int
-
-logic o54 : (int,natural) farray
-
-logic o55 : t
-
-logic o56 : int
-
-logic o57 : (int,natural) farray
-
-logic o58 : t
-
-logic o59 : (int,natural) farray
-
-logic o60 : t
-
-logic o61 : (int,natural) farray
-
-logic o62 : t
-
-logic o63 : int
-
-logic o64 : int
-
-logic o65 : (int,natural) farray
-
-logic o66 : t
-
-logic o67 : int
-
-logic o68 : (int,natural) farray
-
-logic o69 : t
-
-logic o70 : (int,natural) farray
-
-logic o71 : t
-
-logic o72 : (int,natural) farray
-
-logic o73 : t
-
-logic us2 : bool
-
-logic o74 : int
-
-logic o75 : (int,natural) farray
-
-logic o76 : t
-
-logic o77 : (int,natural) farray
-
-logic o78 : t
-
-logic us3 : bool
-
-logic o79 : int
-
-logic o80 : int
-
-logic o81 : int
-
-logic o82 : int
-
-logic o83 : int
-
-logic o84 : int
-
-logic o85 : int
-
-logic o86 : (int,natural) farray
-
-logic o87 : t
-
-logic o88 : (int,natural) farray
-
-logic o89 : t
-
-logic o90 : int
-
-logic o91 : (int,natural) farray
-
-logic o92 : t
-
-logic o93 : (int,natural) farray
-
-logic o94 : t
-
-logic o95 : int
-
-logic o96 : int
-
-logic o97 : int
-
-logic o98 : (int,natural) farray
-
-logic o99 : t
-
-logic o100 : (int,natural) farray
-
-logic o101 : t
-
-logic o102 : (int,natural) farray
-
-logic o103 : t
-
-logic o104 : (int,natural) farray
-
-logic o105 : t
-
-logic o106 : int
-
-logic o107 : (int,natural) farray
-
-logic o108 : t
-
-logic o109 : int
-
-logic o110 : int
-
-logic o111 : (int,natural) farray
-
-logic o112 : t
-
-logic o113 : (int,natural) farray
-
-logic o114 : t
-
-logic o115 : (int,natural) farray
-
-logic o116 : t
-
-logic o117 : int
-
-logic o118 : (int,natural) farray
-
-logic o119 : t
-
-logic us4 : bool
-
-logic o120 : int
-
-logic o121 : (int,natural) farray
-
-logic o122 : t
-
-logic o123 : (int,natural) farray
-
-logic o124 : t
-
-logic us5 : bool
-
-logic o125 : int
-
-logic o126 : int
-
-logic o127 : int
-
-logic o128 : (int,natural) farray
-
-logic o129 : t
-
-logic o130 : (int,natural) farray
-
-logic o131 : t
-
-logic o132 : int
-
-logic o133 : (int,natural) farray
-
-logic o134 : t
-
-logic o135 : (int,natural) farray
-
-logic o136 : t
-
-logic o137 : (int,natural) farray
-
-logic o138 : t
-
-logic o139 : int
-
-logic o140 : int
-
-logic o141 : (int,natural) farray
-
-logic o142 : t
-
-logic o143 : (int,natural) farray
-
-logic o144 : t
-
-logic o145 : (int,natural) farray
-
-logic o146 : t
-
-logic o147 : (int,natural) farray
-
-logic o148 : t
-
-logic us6 : bool
-
-logic o149 : int
-
-logic o150 : (int,natural) farray
-
-logic o151 : t
-
-logic o152 : (int,natural) farray
-
-logic o153 : t
-
-logic us7 : bool
-
-logic ib1 : int
-
-logic o154 : int
-
-logic o155 : (int,natural) farray
-
-logic o156 : t
-
-logic o157 : int
-
-logic o158 : (int,natural) farray
-
-logic o159 : t
-
-logic o160 : int
-
-logic o161 : natural
-
-logic o162 : int
-
-logic o163 : natural
-
-logic o164 : int
-
-logic o165 : int
-
-logic k : int
-
-logic ib2 : int
-
-logic o166 : int
-
-logic o167 : (int,natural) farray
-
-logic o168 : t
-
-logic o169 : int
-
-logic o170 : (int,natural) farray
-
-logic o171 : t
-
-logic o172 : int
-
-logic o173 : natural
-
-logic o174 : int
-
-logic o175 : natural
-
-logic o176 : int
-
-logic o177 : int
-
-logic o178 : int
-
-logic o179 : int
-
-logic o180 : int
-
-logic o181 : int
-
-logic o182 : int
-
-logic o183 : (int,natural) farray
-
-logic o184 : t
-
-logic o185 : (int,natural) farray
-
-logic o186 : t
-
-logic o187 : int
-
-logic o188 : (int,natural) farray
-
-logic o189 : t
-
-logic o190 : int
-
-logic o191 : (int,natural) farray
-
-logic o192 : t
-
-logic o193 : int
-
-logic o194 : int
-
-logic o195 : int
-
-logic o196 : (int,natural) farray
-
-logic o197 : t
-
-logic o198 : int
-
-logic o199 : (int,natural) farray
-
-logic o200 : t
-
-logic o201 : (int,natural) farray
-
-logic o202 : t
-
-logic o203 : (int,natural) farray
-
-logic o204 : t
-
-logic o205 : int
-
-logic o206 : (int,natural) farray
-
-logic o207 : t
-
-logic o208 : int
-
-logic o209 : int
-
-logic o210 : (int,natural) farray
-
-logic o211 : t
-
-logic o212 : int
-
-logic o213 : (int,natural) farray
-
-logic o214 : t
-
-logic o215 : (int,natural) farray
-
-logic o216 : t
-
-logic o217 : int
-
-logic o218 : (int,natural) farray
-
-logic o219 : t
-
-logic us8 : bool
-
-logic o220 : int
-
-logic o221 : (int,natural) farray
-
-logic o222 : t
-
-logic o223 : (int,natural) farray
-
-logic o224 : t
-
-logic us9 : bool
-
-logic o225 : int
-
-logic o226 : int
-
-logic o227 : int
-
-logic o228 : (int,natural) farray
-
-logic o229 : t
-
-logic o230 : int
-
-logic o231 : (int,natural) farray
-
-logic o232 : t
-
-logic o233 : int
-
-logic o234 : (int,natural) farray
-
-logic o235 : t
-
-logic o236 : (int,natural) farray
-
-logic o237 : t
-
-logic o238 : (int,natural) farray
-
-logic o239 : t
-
-logic o240 : int
-
-logic o241 : int
-
-logic o242 : (int,natural) farray
-
-logic o243 : t
-
-logic o244 : int
-
-logic o245 : (int,natural) farray
-
-logic o246 : t
-
-logic o247 : (int,natural) farray
-
-logic o248 : t
-
-logic o249 : (int,natural) farray
-
-logic o250 : t
-
-logic us10 : bool
-
-logic o251 : int
-
-logic o252 : (int,natural) farray
-
-logic o253 : t
-
-logic o254 : (int,natural) farray
-
-logic o255 : t
-
-logic us11 : bool
-
-logic o256 : int
-
-logic o257 : int
-
-logic o258 : int
-
-logic o259 : int
-
-logic o260 : int
-
-logic o261 : int
-
-logic o262 : int
-
-logic o263 : (int,natural) farray
-
-logic o264 : t
-
-logic o265 : (int,natural) farray
-
-logic o266 : t
-
-logic o267 : int
-
-logic o268 : (int,natural) farray
-
-logic o269 : t
-
-logic o270 : (int,natural) farray
-
-logic o271 : t
-
-logic o272 : int
-
-logic o273 : int
-
-logic o274 : int
-
-logic o275 : (int,natural) farray
-
-logic o276 : t
-
-logic o277 : (int,natural) farray
-
-logic o278 : t
-
-logic o279 : (int,natural) farray
-
-logic o280 : t
-
-logic o281 : (int,natural) farray
-
-logic o282 : t
-
-logic o283 : int
-
-logic o284 : (int,natural) farray
-
-logic o285 : t
-
-logic o286 : int
-
-logic o287 : int
-
-logic o288 : (int,natural) farray
-
-logic o289 : t
-
-logic o290 : (int,natural) farray
-
-logic o291 : t
-
-logic o292 : (int,natural) farray
-
-logic o293 : t
-
-logic o294 : int
-
-logic o295 : (int,natural) farray
-
-logic o296 : t
-
-logic us12 : bool
-
-logic o297 : int
-
-logic o298 : (int,natural) farray
-
-logic o299 : t
-
-logic o300 : (int,natural) farray
-
-logic o301 : t
-
-logic us13 : bool
-
-logic o302 : int
-
-logic o303 : int
-
-logic o304 : int
-
-logic o305 : (int,natural) farray
-
-logic o306 : t
-
-logic o307 : (int,natural) farray
-
-logic o308 : t
-
-logic o309 : int
-
-logic o310 : (int,natural) farray
-
-logic o311 : t
-
-logic o312 : (int,natural) farray
-
-logic o313 : t
-
-logic o314 : (int,natural) farray
-
-logic o315 : t
-
-logic o316 : int
-
-logic o317 : int
-
-logic o318 : (int,natural) farray
-
-logic o319 : t
-
-logic o320 : (int,natural) farray
-
-logic o321 : t
-
-logic o322 : (int,natural) farray
-
-logic o323 : t
-
-logic o324 : (int,natural) farray
-
-logic o325 : t
-
-logic us14 : bool
-
-logic o326 : int
-
-logic o327 : (int,natural) farray
-
-logic o328 : t
-
-logic o329 : (int,natural) farray
-
-logic o330 : t
-
-logic us15 : bool
-
-logic ib3 : int
-
-logic o331 : int
-
-logic o332 : (int,natural) farray
-
-logic o333 : t
-
-logic o334 : int
-
-logic o335 : (int,natural) farray
-
-logic o336 : t
-
-logic o337 : int
-
-logic o338 : natural
-
-logic o339 : int
-
-logic o340 : natural
-
-logic o341 : int
-
-logic o342 : int
-
-logic ia1 : int
-
-logic ib4 : int
-
-logic o343 : int
-
-logic o344 : (int,natural) farray
-
-logic o345 : t
-
-logic o346 : int
-
-logic o347 : (int,natural) farray
-
-logic o348 : t
-
-logic o349 : int
-
-logic o350 : natural
-
-logic o351 : int
-
-logic o352 : natural
-
-logic o353 : int
-
-logic o354 : int
-
-logic ih1 : int
-
-logic ia2 : int
-
-logic ib5 : int
-
-logic perm__extended_perm__result1 : int
-
-logic result : bool
-
-logic result1 : bool
-
-logic result2 : int
-
-logic perm__extended_perm__result2 : int
-
-logic result3 : int
-
-logic ih2 : int
-
-logic result4 : int
-
-logic ia3 : int
-
-logic result5 : int
-
-logic ib6 : int
-
-logic result6 : int
-
-logic ih3 : int
-
-logic result7 : int
-
-logic ib7 : int
-
-logic result8 : int
-
-logic ih4 : int
-
-logic result9 : int
-
-logic ih5 : int
-
-logic result10 : int
-
-logic ih6 : int
-
-logic result11 : int
-
-logic ib8 : int
-
-logic result12 : int
-
-logic ih7 : int
-
-logic result13 : int
-
-logic ih8 : int
-
-logic result14 : int
-
-logic ih9 : int
-
-logic result15 : int
-
-logic ib9 : int
-
-logic result16 : int
-
-logic ih10 : int
-
-logic result17 : int
-
-logic ih11 : int
-
-logic result18 : int
-
-logic ih12 : int
-
-logic result19 : int
-
-logic ib10 : int
-
-logic result20 : int
-
-logic ih13 : int
-
-logic result21 : int
-
-logic ih14 : int
-
-logic result22 : bool
-
-logic ih15 : int
-
-logic ia4 : int
-
-logic ib11 : int
-
-logic result23 : bool
-
-logic result24 : int
-
-logic ia5 : int
-
-logic result25 : int
-
-logic ib12 : int
-
-logic result26 : int
-
-logic ih16 : int
-
-logic result27 : int
-
-logic ib13 : int
-
-logic result28 : int
-
-logic ih17 : int
-
-logic result29 : int
-
-logic ih18 : int
-
-logic result30 : int
-
-logic ih19 : int
-
-logic result31 : int
-
-logic ib14 : int
-
-logic result32 : int
-
-logic ih20 : int
-
-logic result33 : int
-
-logic ih21 : int
-
-logic result34 : int
-
-logic ih22 : int
-
-logic result35 : int
-
-logic ib15 : int
-
-logic result36 : int
-
-logic ih23 : int
-
-logic result37 : int
-
-logic ih24 : int
-
-logic result38 : int
-
-logic ih25 : int
-
-logic result39 : int
-
-logic ib16 : int
-
-logic result40 : int
-
-logic ih26 : int
-
-logic result41 : int
-
-logic ih27 : int
-
-logic result42 : bool
-
-logic ih28 : int
-
-logic ia6 : int
-
-logic ib17 : int
-
-logic ih29 : int
-
-logic ia7 : int
-
-logic ib18 : int
-
-logic ih30 : int
-
-logic ia8 : int
-
-logic ib19 : int
-
-logic ih31 : int
-
-logic ia9 : int
-
-logic ib20 : int
-
-logic ih32 : int
-
-logic ia10 : int
-
-logic ib21 : int
-
-logic ih33 : int
-
-logic ia11 : int
-
-logic ib22 : int
-
-logic result43 : int
-
-logic perm__extended_perm__result3 : int
-
-logic ih34 : int
-
-logic ia12 : int
-
-logic ib23 : int
-
-logic perm__extended_perm__result4 : int
-
-logic ih35 : int
-
-logic ia13 : int
-
-logic ib24 : int
-
-logic perm__extended_perm__result5 : int
-
-logic ih36 : int
-
-logic ia14 : int
-
-logic ib25 : int
-
-logic perm__extended_perm__result6 : int
-
-logic ih37 : int
-
-logic ia15 : int
-
-logic ib26 : int
-
-logic perm__extended_perm__result7 : int
-
-logic ih38 : int
-
-logic ia16 : int
-
-logic ib27 : int
-
-logic perm__extended_perm__result8 : int
-
-logic ih39 : int
-
-logic ia17 : int
-
-logic ib28 : int
-
-logic perm__extended_perm__result9 : int
-
-logic result44 : bool
-
-axiom H : dynamic_property(1, 100, to_rep2(first(a1)), to_rep2(last(a1)))
-
-axiom H1 : dynamic_property(1, 100, to_rep2(first(b1)), to_rep2(last(b1)))
-
-axiom H2 : ((invariant__({ elts = a; rt = a1 }) = true) and ((invariant__({
-  elts = b; rt = b1 }) = true) and (is_perm({ elts = a; rt = a1 }, { elts =
-  b; rt = b1 }) = true)))
-
-axiom H3 : (not (length({ elts = a; rt = a1 }) = 0))
-
-axiom H4 : (perm__extended_perm__result2 = perm__extended_perm__result)
-
-axiom H5 : (perm__extended_perm__result2 = perm__extended_perm__result1)
-
-axiom H6 : (({ us_split_fields1 = { rec__perm__witnesses__ia =
+ (* File "perm.ads", line 2, characters 0-0 *)
+goal WP_parameter_def :
+  (forall ih:int. forall ia:int. forall perm__extended_perm__result:int.
+  forall perm__extended_perm__B_6__w__assume:index.
+  forall perm__extended_perm__B_6__w__assume1:index.
+  forall perm__extended_perm__B_6__aa__assume:(int,natural) farray.
+  forall perm__extended_perm__B_6__aa__assume1:t.
+  forall perm__extended_perm__B_6__bb__assume:(int,natural) farray.
+  forall perm__extended_perm__B_6__bb__assume1:t. forall o:int. forall k:int.
+  forall ib:int. forall o1:int. forall o2:natural. forall o3:int.
+  forall o4:natural. forall o5:int. forall o6:int.
+  forall perm__extended_perm__result1:int.
+  forall perm__extended_perm__result2:int. forall result:int__ref.
+  forall ih1:int. forall result1:int__ref. forall ia1:int. forall ih2:int.
+  forall ia2:int. forall ib1:int. forall result2:bool. (dynamic_property(1,
+  100, to_rep2(first(a1)), to_rep2(last(a1))) -> (dynamic_property(1, 100,
+  to_rep2(first(b1)), to_rep2(last(b1))) -> (((invariant__({ elts = a; rt =
+  a1 }) = true) and ((invariant__({ elts = b; rt = b1 }) = true) and
+  (is_perm({ elts = a; rt = a1 }, { elts = b; rt = b1 }) = true))) ->
+  (((not (length({ elts = a; rt = a1 }) = 0)) and
+  ((perm__extended_perm__result2 = perm__extended_perm__result) and
+  (perm__extended_perm__result2 = perm__extended_perm__result1))) -> (((({
+  us_split_fields1 = { rec__perm__witnesses__ia =
   perm__extended_perm__B_6__w__assume; rec__perm__witnesses__ib =
   perm__extended_perm__B_6__w__assume1 } } = get_witnesses({ elts = a; rt =
   a1 }, { elts = b; rt = b1 })) and
@@ -1822,12 +738,10 @@ axiom H6 : (({ us_split_fields1 = { rec__perm__witnesses__ia =
   ((to_rep((a[to_rep1(perm__extended_perm__B_6__w__assume)])) = to_rep((b[to_rep1(perm__extended_perm__B_6__w__assume1)]))) and
   (is_perm(remove({ elts = a; rt = a1 },
   to_rep1(perm__extended_perm__B_6__w__assume)), remove({ elts = b; rt = b1
-  }, to_rep1(perm__extended_perm__B_6__w__assume1))) = true)))))
-
-axiom H7 : ((perm__extended_perm__B_6__w__assume = w) and
-  (perm__extended_perm__B_6__w__assume1 = w1))
-
-axiom H8 : (({ elts = perm__extended_perm__B_6__aa__assume; rt =
+  }, to_rep1(perm__extended_perm__B_6__w__assume1))) = true))))) and
+  ((w = perm__extended_perm__B_6__w__assume) and
+  (w1 = perm__extended_perm__B_6__w__assume1))) -> (((({ elts =
+  perm__extended_perm__B_6__aa__assume; rt =
   perm__extended_perm__B_6__aa__assume1 } = remove({ elts = a; rt = a1 },
   to_rep1(w))) and (dynamic_property(1, 100,
   to_rep2(first(perm__extended_perm__B_6__aa__assume1)),
@@ -1842,14 +756,11 @@ axiom H8 : (({ elts = perm__extended_perm__B_6__aa__assume; rt =
    (to_rep((a[k1])) = to_rep((perm__extended_perm__B_6__aa__assume[(k1 - 1)]))))) and
   (forall k1:int. (((to_rep1(w) <= k1) and
   (k1 <= (to_rep2(last(a1)) - 1))) ->
-  (to_rep((a[(k1 + 1)])) = to_rep((perm__extended_perm__B_6__aa__assume[k1])))))))))))
-
-axiom H9 : ((perm__extended_perm__B_6__aa__assume = aa) and
-  (perm__extended_perm__B_6__aa__assume1 = aa1))
-
-axiom H10 : dynamic_property(1, 100, to_rep2(first(aa1)), to_rep2(last(aa1)))
-
-axiom H11 : (({ elts = perm__extended_perm__B_6__bb__assume; rt =
+  (to_rep((a[(k1 + 1)])) = to_rep((perm__extended_perm__B_6__aa__assume[k1]))))))))))) and
+  ((aa = perm__extended_perm__B_6__aa__assume) and
+  (aa1 = perm__extended_perm__B_6__aa__assume1))) -> (dynamic_property(1,
+  100, to_rep2(first(aa1)), to_rep2(last(aa1))) -> (((({ elts =
+  perm__extended_perm__B_6__bb__assume; rt =
   perm__extended_perm__B_6__bb__assume1 } = remove({ elts = b; rt = b1 },
   to_rep1(w1))) and (dynamic_property(1, 100,
   to_rep2(first(perm__extended_perm__B_6__bb__assume1)),
@@ -1864,88 +775,42 @@ axiom H11 : (({ elts = perm__extended_perm__B_6__bb__assume; rt =
    (to_rep((b[k1])) = to_rep((perm__extended_perm__B_6__bb__assume[(k1 - 1)]))))) and
   (forall k1:int. (((to_rep1(w1) <= k1) and
   (k1 <= (to_rep2(last(b1)) - 1))) ->
-  (to_rep((b[(k1 + 1)])) = to_rep((perm__extended_perm__B_6__bb__assume[k1])))))))))))
-
-axiom H12 : ((perm__extended_perm__B_6__bb__assume = bb) and
-  (perm__extended_perm__B_6__bb__assume1 = bb1))
-
-axiom H13 : dynamic_property(1, 100, to_rep2(first(bb1)), to_rep2(last(bb1)))
-
-axiom H14 : ((o = extended_perm({ elts = aa; rt = aa1 }, { elts = bb; rt =
-  bb1 })) and (in_range3(o) and ((of_int(o) = true) ->
-  (forall ia18:int. (((to_rep2(first(aa1)) <= ia18) and
-  (ia18 <= to_rep2(last(aa1)))) ->
-  (exists ib29:int. (((to_rep2(first(bb1)) <= ib29) and
-  (ib29 <= to_rep2(last(bb1)))) and
-  ((to_rep((aa[ia18])) = to_rep((bb[ib29]))) and (is_perm(remove({ elts = aa;
-  rt = aa1 }, ia18), remove({ elts = bb; rt = bb1 }, ib29)) = true)))))))))
-
-axiom H15 : (result3 = ih)
-
-axiom H16 : (ih2 = o)
-
-axiom H17 : in_range3(ih2)
-
-axiom H18 : (of_int(ih2) = true)
-
-axiom H19 : (result4 = ia)
-
-axiom H20 : (ia3 = to_rep2(first(a1)))
-
-axiom H21 : (to_rep2(first(a1)) <= ia3)
-
-axiom H22 : (ia3 <= to_rep2(last(a1)))
-
-axiom H23 :
-  (exists ib29:int. (((to_rep2(first(b1)) <= ib29) and
-  (ib29 <= to_rep2(last(b1)))) and
-  ((to_rep((a[ia3])) = to_rep((b[ib29]))) and (is_perm(remove({ elts = a;
-  rt = a1 }, ia3), remove({ elts = b; rt = b1 }, ib29)) = true))))
-
-axiom H24 : ((to_rep2(first(a1)) <= to_rep2(last(a1))) ->
-  dynamic_property1(to_rep2(first(a1)), to_rep2(last(a1)), ia3))
-
-axiom H25 :
-  (forall k1:int. (((1 <= k1) and (k1 <= ia4)) ->
-  (exists ib29:int. (((to_rep2(first(b1)) <= ib29) and
-  (ib29 <= to_rep2(last(b1)))) and ((to_rep((a[k1])) = to_rep((b[ib29]))) and
-  (is_perm(remove({ elts = a; rt = a1 }, k1), remove({ elts = b; rt = b1 },
-  ib29)) = true))))))
-
-axiom H26 : (((((1 <= 1) -> in_range3(ih15)) and
+  (to_rep((b[(k1 + 1)])) = to_rep((perm__extended_perm__B_6__bb__assume[k1]))))))))))) and
+  ((bb = perm__extended_perm__B_6__bb__assume) and
+  (bb1 = perm__extended_perm__B_6__bb__assume1))) -> (dynamic_property(1,
+  100, to_rep2(first(bb1)), to_rep2(last(bb1))) -> ((((o = extended_perm({
+  elts = aa; rt = aa1 }, { elts = bb; rt = bb1 })) and (in_range3(o) and
+  ((of_int(o) = true) ->
+  (forall ia3:int. (((to_rep2(first(aa1)) <= ia3) and
+  (ia3 <= to_rep2(last(aa1)))) ->
+  (exists ib2:int. (((to_rep2(first(bb1)) <= ib2) and
+  (ib2 <= to_rep2(last(bb1)))) and
+  ((to_rep((aa[ia3])) = to_rep((bb[ib2]))) and (is_perm(remove({ elts = aa;
+  rt = aa1 }, ia3), remove({ elts = bb; rt = bb1 }, ib2)) = true))))))))) and
+  ((result = { int__content = ih }) and (ih1 = o))) -> (in_range3(ih1) ->
+  ((of_int(ih1) = true) -> (((result1 = { int__content = ia }) and
+  (ia1 = to_rep2(first(a1)))) -> (((to_rep2(first(a1)) <= ia1) and
+  (ia1 <= to_rep2(last(a1)))) ->
+  ((exists ib2:int. (((to_rep2(first(b1)) <= ib2) and
+   (ib2 <= to_rep2(last(b1)))) and ((to_rep((a[ia1])) = to_rep((b[ib2]))) and
+   (is_perm(remove({ elts = a; rt = a1 }, ia1), remove({ elts = b; rt = b1 },
+   ib2)) = true)))) ->
+  (((to_rep2(first(a1)) <= to_rep2(last(a1))) ->
+  dynamic_property1(to_rep2(first(a1)), to_rep2(last(a1)), ia1)) ->
+  ((forall k1:int. (((1 <= k1) and (k1 <= ia2)) ->
+   (exists ib2:int. (((to_rep2(first(b1)) <= ib2) and
+   (ib2 <= to_rep2(last(b1)))) and ((to_rep((a[k1])) = to_rep((b[ib2]))) and
+   (is_perm(remove({ elts = a; rt = a1 }, k1), remove({ elts = b; rt = b1 },
+   ib2)) = true)))))) ->
+  ((((((1 <= 1) -> in_range3(ih2)) and
   ((to_rep2(first(a1)) <= to_rep2(last(a1))) ->
-  dynamic_property1(to_rep2(first(a1)), to_rep2(last(a1)), ia4))) and
-  ((1 <= 100) -> in_range4(ib11))) and ((to_rep2(first(a1)) <= ia4) and
-  (ia4 <= to_rep2(last(a1)))))
-
-axiom H27 : (1 <= k)
-
-axiom H28 : (k <= ia4)
-
-axiom H29 : (to_rep2(first(b1)) <= ib2)
-
-axiom H30 : (ib2 <= to_rep2(last(b1)))
-
-axiom H31 : ((to_rep2(first(b1)) <= ib2) and (ib2 <= to_rep2(last(b1))))
-
-axiom H32 : (o174 = ib2)
-
-axiom H33 : (o175 = (b[o174]))
-
-axiom H34 : (o176 = to_rep(o175))
-
-axiom H35 : ((to_rep2(first(a1)) <= k) and (k <= to_rep2(last(a1))))
-
-axiom H36 : (o172 = k)
-
-axiom H37 : (o173 = (a[o172]))
-
-axiom H38 : (o177 = to_rep(o173))
-
-axiom H39 : (((o177 = o176) -> (result23 = true)) and ((not (o177 = o176)) ->
-  (result23 = false)))
-
-axiom H40 : (result23 = true)
-
- (* File "perm.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : in_range4(ib2)
+  dynamic_property1(to_rep2(first(a1)), to_rep2(last(a1)), ia2))) and
+  ((1 <= 100) -> in_range4(ib1))) and ((to_rep2(first(a1)) <= ia2) and
+  (ia2 <= to_rep2(last(a1))))) -> (((1 <= k) and (k <= ia2)) ->
+  (((to_rep2(first(b1)) <= ib) and (ib <= to_rep2(last(b1)))) ->
+  (((((((to_rep2(first(b1)) <= ib) and (ib <= to_rep2(last(b1)))) and
+  (o3 = ib)) and (o4 = (b[o3]))) and (o5 = to_rep(o4))) and
+  ((((((to_rep2(first(a1)) <= k) and (k <= to_rep2(last(a1)))) and
+  (o1 = k)) and (o2 = (a[o1]))) and (o6 = to_rep(o2))) and (((o6 = o5) and
+  (result2 = true)) or ((not (o6 = o5)) and (result2 = false))))) ->
+  ((result2 = true) -> in_range4(ib))))))))))))))))))))))))

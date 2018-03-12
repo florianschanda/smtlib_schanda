@@ -143,25 +143,6 @@ axiom slide_def :
   (forall i:int [(slide(a1, old_first, new_first)[i])]. ((slide(a1,
   old_first, new_first)[i]) = (a1[(i - (new_first - old_first))]))))))
 
-logic concat : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> (int,integer) farray
-
-axiom concat_def :
-  (forall a1:(int,integer) farray. forall b1:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a1, a_first, a_last, b1, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a1, a_first, a_last, b1,
-  b_first, b_last)[i]) = (a1[i]))) and ((a_last <  i) -> ((concat(a1,
-  a_first, a_last, b1, b_first,
-  b_last)[i]) = (b1[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : integer, int -> (int,integer) farray
-
-axiom singleton_def :
-  (forall v:integer.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq2 : (int,integer) farray, int, int, (int,integer) farray, int,
   int -> bool
 
@@ -172,17 +153,17 @@ axiom bool_eq_def1 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a1[temp___idx_132])) = to_rep((b1[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a1[temp___idx_154])) = to_rep((b1[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq2(a1, a__first, a__last, b1, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a1[temp___idx_132])) = to_rep((b1[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a1[temp___idx_154])) = to_rep((b1[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq2(a1, a__first, a__last, b1, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -192,37 +173,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a1[temp___idx_132])) = to_rep((b1[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,integer) farray, int, int, (int,integer) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a1:(int,integer) farray. forall b1:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a1, a_first, a_last, b1, b_first, b_last)].
-  ((compare(a1, a_first, a_last, b1, b_first, b_last) = 0) <-> (bool_eq2(a1,
-  a_first, a_last, b1, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a1:(int,integer) farray. forall b1:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a1, a_first, a_last, b1, b_first, b_last)].
-  ((compare(a1, a_first, a_last, b1, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq2(a1, a_first, i, b1, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a1[(i + 1)])) <  to_rep((b1[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a1:(int,integer) farray. forall b1:(int,integer) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a1, a_first, a_last, b1, b_first, b_last)].
-  ((0 <  compare(a1, a_first, a_last, b1, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq2(a1, a_first, j, b1, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b1[(i + 1)])) <  to_rep((a1[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a1[temp___idx_154])) = to_rep((b1[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic c : (int,integer) farray
 
@@ -230,21 +183,11 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic const__c__aggregate_def : int -> (int,integer) farray
 
-axiom def_axiom :
-  (forall temp___134:int.
-  (forall temp___135:int.
-  ((const__c__aggregate_def(temp___134)[temp___135]) = of_rep(temp___134))))
-
 logic c2 : (int,integer) farray
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic const__c2__aggregate_def : int -> (int,integer) farray
-
-axiom def_axiom1 :
-  (forall temp___137:int.
-  (forall temp___138:int.
-  ((const__c2__aggregate_def(temp___137)[temp___138]) = of_rep(temp___137))))
 
 logic d : (int,integer) farray
 
@@ -252,25 +195,11 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 logic const__d__aggregate_def : int, int -> (int,integer) farray
 
-axiom def_axiom2 :
-  (forall temp___140:int. forall temp___141:int.
-  (((const__d__aggregate_def(temp___140,
-  temp___141)[1]) = of_rep(temp___140)) and
-  ((const__d__aggregate_def(temp___140,
-  temp___141)[2]) = of_rep(temp___141))))
-
 logic d2 : (int,integer) farray
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic const__d2__aggregate_def : int, int -> (int,integer) farray
-
-axiom def_axiom3 :
-  (forall temp___144:int. forall temp___145:int.
-  (((const__d2__aggregate_def(temp___144,
-  temp___145)[1]) = of_rep(temp___144)) and
-  ((const__d2__aggregate_def(temp___144,
-  temp___145)[2]) = of_rep(temp___145))))
 
 type us_split_fields = { rec__const__te__x : integer; rec__const__te__y :
 integer
@@ -441,11 +370,35 @@ axiom b__def_axiom : (b = 1)
 
 axiom c__def_axiom : (c = const__c__aggregate_def(1))
 
+axiom def_axiom :
+  (forall temp___156:int. (in_range(temp___156) ->
+  (forall temp___157:int.
+  (to_rep((const__c__aggregate_def(temp___156)[temp___157])) = temp___156))))
+
 axiom c2__def_axiom : (c2 = const__c2__aggregate_def(1))
+
+axiom def_axiom1 :
+  (forall temp___159:int. (in_range(temp___159) ->
+  (forall temp___160:int.
+  (to_rep((const__c2__aggregate_def(temp___159)[temp___160])) = temp___159))))
 
 axiom d__def_axiom : (d = const__d__aggregate_def(1, 1))
 
+axiom def_axiom2 :
+  (forall temp___162:int. forall temp___163:int. ((in_range(temp___162) and
+  in_range(temp___163)) -> ((to_rep((const__d__aggregate_def(temp___162,
+  temp___163)[1])) = temp___162) and
+  (to_rep((const__d__aggregate_def(temp___162,
+  temp___163)[2])) = temp___163))))
+
 axiom d2__def_axiom : (d2 = const__d2__aggregate_def(1, 1))
+
+axiom def_axiom3 :
+  (forall temp___166:int. forall temp___167:int. ((in_range(temp___166) and
+  in_range(temp___167)) -> ((to_rep((const__d2__aggregate_def(temp___166,
+  temp___167)[1])) = temp___166) and
+  (to_rep((const__d2__aggregate_def(temp___166,
+  temp___167)[2])) = temp___167))))
 
 axiom e__def_axiom : ((e = of_rep(1)) and (e1 = of_rep(1)))
 
@@ -465,163 +418,37 @@ axiom m__def_axiom : (m = fm(1))
 
 axiom n__def_axiom : (n = ((2 * fm(1)) - 1))
 
-logic o : integer
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic o3 : integer
-
-logic const__e__assume : integer
-
-logic const__e__assume1 : integer
-
-logic o4 : integer
-
-logic o5 : integer
-
-logic o6 : integer
-
-logic o7 : integer
-
-logic const__f__assume : integer
-
-logic const__f__assume1 : integer
-
-logic o8 : integer
-
-logic o9 : integer
-
-logic o10 : integer
-
-logic o11 : integer
-
-logic const__g__assume : integer
-
-logic const__g__assume1 : integer
-
-logic const__i__assume : int
-
-logic o12 : int
-
-logic o13 : int
-
-logic o14 : int
-
-logic o15 : int
-
-logic const__j__assume : int
-
-logic const__k__assume : int
-
-logic o16 : int
-
-logic o17 : int
-
-logic o18 : int
-
-logic o19 : int
-
-logic const__l__assume : int
-
-logic const__m__assume : int
-
-logic o20 : int
-
-logic o21 : int
-
-logic o22 : int
-
-logic o23 : int
-
-logic const__n__assume : int
-
-axiom H : in_range(a)
-
-axiom H1 : in_range(b)
-
-axiom H2 : (const__c__aggregate_def(1) = c)
-
-axiom H3 : (const__c2__aggregate_def(1) = c2)
-
-axiom H4 : (const__d__aggregate_def(1, 1) = d)
-
-axiom H5 : (const__d2__aggregate_def(1, 1) = d2)
-
-axiom H6 : (to_rep(o) = 1)
-
-axiom H7 : (to_rep(o1) = 1)
-
-axiom H8 : (o1 = o2)
-
-axiom H9 : (o = o3)
-
-axiom H10 : (const__e__assume = o2)
-
-axiom H11 : (const__e__assume1 = o3)
-
-axiom H12 : ((const__e__assume = e) and (const__e__assume1 = e1))
-
-axiom H13 : (to_rep(o4) = 1)
-
-axiom H14 : (to_rep(o5) = 1)
-
-axiom H15 : (o5 = o6)
-
-axiom H16 : (o4 = o7)
-
-axiom H17 : (const__f__assume = o6)
-
-axiom H18 : (const__f__assume1 = o7)
-
-axiom H19 : ((const__f__assume = f) and (const__f__assume1 = f1))
-
-axiom H20 : (to_rep(o8) = 1)
-
-axiom H21 : (to_rep(o9) = 1)
-
-axiom H22 : (o9 = o10)
-
-axiom H23 : (o8 = o11)
-
-axiom H24 : (const__g__assume = o10)
-
-axiom H25 : (const__g__assume1 = o11)
-
-axiom H26 : ((const__g__assume = g) and (const__g__assume1 = g1))
-
-axiom H27 : ((const__i__assume = fi(void)) and
-  (in_range(const__i__assume) and (const__i__assume = 1)))
-
-axiom H28 : (const__i__assume = i)
-
-axiom H29 : in_range(i)
-
-axiom H30 : ((o12 = fi(void)) and (in_range(o12) and (o12 = 1)))
-
-axiom H31 : (o13 = (2 * o12))
-
-axiom H32 : ((o14 = o13) and in_range(o13))
-
-axiom H33 : (o15 = (o14 - 1))
-
-axiom H34 : ((const__j__assume = o15) and in_range(o15))
-
-axiom H35 : (const__j__assume = j)
-
-axiom H36 : in_range(j)
-
-axiom H37 : ((const__k__assume = fk(void)) and
-  (in_range(const__k__assume) and (const__k__assume = 1)))
-
-axiom H38 : (const__k__assume = k)
-
-axiom H39 : in_range(k)
-
-axiom H40 : ((o16 = fk(void)) and (in_range(o16) and (o16 = 1)))
-
-axiom H41 : (o17 = (2 * o16))
-
  (* File "const.ads", line 36, characters 0-0 *)
-goal WP_parameter_def : in_range(o17)
+goal WP_parameter_def :
+  (forall o:integer. forall o1:integer. forall o2:integer. forall o3:integer.
+  forall const__e__assume:integer. forall const__e__assume1:integer.
+  forall o4:integer. forall o5:integer. forall o6:integer. forall o7:integer.
+  forall const__f__assume:integer. forall const__f__assume1:integer.
+  forall o8:integer. forall o9:integer. forall o10:integer.
+  forall o11:integer. forall const__g__assume:integer.
+  forall const__g__assume1:integer. forall const__i__assume:int.
+  forall o12:int. forall o13:int. forall o14:int. forall o15:int.
+  forall const__j__assume:int. forall const__k__assume:int. forall o16:int.
+  forall o17:int. (in_range(a) -> (in_range(b) ->
+  ((const__c__aggregate_def(1) = c) -> ((const__c2__aggregate_def(1) = c2) ->
+  ((const__d__aggregate_def(1, 1) = d) -> ((const__d2__aggregate_def(1,
+  1) = d2) -> (((((to_rep(o) = 1) and ((to_rep(o1) = 1) and ((o1 = o2) and
+  (o = o3)))) and ((const__e__assume = o2) and (const__e__assume1 = o3))) and
+  ((const__e__assume = e) and (const__e__assume1 = e1))) ->
+  (((((to_rep(o4) = 1) and ((to_rep(o5) = 1) and ((o5 = o6) and
+  (o4 = o7)))) and ((const__f__assume = o6) and
+  (const__f__assume1 = o7))) and ((const__f__assume = f) and
+  (const__f__assume1 = f1))) -> (((((to_rep(o8) = 1) and
+  ((to_rep(o9) = 1) and ((o9 = o10) and (o8 = o11)))) and
+  ((const__g__assume = o10) and (const__g__assume1 = o11))) and
+  ((const__g__assume = g) and (const__g__assume1 = g1))) ->
+  ((((const__i__assume = fi(void)) and (in_range(const__i__assume) and
+  (const__i__assume = 1))) and (const__i__assume = i)) -> (in_range(i) ->
+  ((((((((o12 = fi(void)) and (in_range(o12) and (o12 = 1))) and
+  (o13 = (2 * o12))) and ((o14 = o13) and in_range(o13))) and
+  (o15 = (o14 - 1))) and ((const__j__assume = o15) and in_range(o15))) and
+  (const__j__assume = j)) -> (in_range(j) ->
+  ((((const__k__assume = fk(void)) and (in_range(const__k__assume) and
+  (const__k__assume = 1))) and (const__k__assume = k)) -> (in_range(k) ->
+  ((((o16 = fk(void)) and (in_range(o16) and (o16 = 1))) and
+  (o17 = (2 * o16))) -> in_range(o17))))))))))))))))))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -260,27 +260,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def :
-  (forall v:name_t.
-  (forall i:int [(singleton({ us_split_fields1 = {
-  rec__model__uml_state__name_data = v } }, i)[i])]. ((singleton({
-  us_split_fields1 = { rec__model__uml_state__name_data = v } }, i)[i]) = {
-  us_split_fields1 = { rec__model__uml_state__name_data = v } })))
-
 logic bool_eq5 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -291,17 +270,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and (bool_eq3((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and (bool_eq3((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq3((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq5(a,
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq3((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq5(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -311,9 +290,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq3((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq3((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)))))))
 
 logic name : us_rep -> int
 
@@ -485,30 +464,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,us_rep1) farray, int, int, (int,us_rep1) farray, int,
-  int -> (int,us_rep1) farray
-
-axiom concat_def1 :
-  (forall a:(int,us_rep1) farray. forall b:(int,us_rep1) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : us_rep1, int -> (int,us_rep1) farray
-
-axiom singleton_def1 :
-  (forall v:uml_state_access. forall v1:uml_state_access.
-  (forall i:int [(singleton1({ us_split_fields3 = {
-  rec__model__uml_transition__from_data = v;
-  rec__model__uml_transition__to_data = v1 } }, i)[i])]. ((singleton1({
-  us_split_fields3 = { rec__model__uml_transition__from_data = v;
-  rec__model__uml_transition__to_data = v1 } }, i)[i]) = { us_split_fields3 =
-  { rec__model__uml_transition__from_data = v;
-  rec__model__uml_transition__to_data = v1 } })))
-
 logic bool_eq8 : (int,us_rep1) farray, int, int, (int,us_rep1) farray, int,
   int -> bool
 
@@ -519,17 +474,17 @@ axiom bool_eq_def7 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) and (bool_eq6((a[temp___idx_133]),
-  (b[((b__first - a__first) + temp___idx_133)])) = true)) or
-  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (forall temp___idx_155:int. ((((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) and (bool_eq6((a[temp___idx_155]),
+  (b[((b__first - a__first) + temp___idx_155)])) = true)) or
+  (not ((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)))))) ->
   (bool_eq8(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) -> (bool_eq6((a[temp___idx_133]),
-  (b[((b__first - a__first) + temp___idx_133)])) = true))))) -> (bool_eq8(a,
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) -> (bool_eq6((a[temp___idx_155]),
+  (b[((b__first - a__first) + temp___idx_155)])) = true))))) -> (bool_eq8(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -539,9 +494,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) -> (bool_eq6((a[temp___idx_133]),
-  (b[((b__first - a__first) + temp___idx_133)])) = true)))))))
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) -> (bool_eq6((a[temp___idx_155]),
+  (b[((b__first - a__first) + temp___idx_155)])) = true)))))))
 
 logic from : us_rep1 -> int
 
@@ -901,27 +856,6 @@ axiom slide_def2 :
   (forall i:int [(slide2(a, old_first, new_first)[i])]. ((slide2(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat2 : (int,us_rep3) farray, int, int, (int,us_rep3) farray, int,
-  int -> (int,us_rep3) farray
-
-axiom concat_def2 :
-  (forall a:(int,us_rep3) farray. forall b:(int,us_rep3) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat2(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat2(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat2(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton2 : us_rep3, int -> (int,us_rep3) farray
-
-axiom singleton_def2 :
-  (forall v:name_t.
-  (forall i:int [(singleton2({ us_split_fields7 = {
-  rec__model__uml_action__name_data = v } }, i)[i])]. ((singleton2({
-  us_split_fields7 = { rec__model__uml_action__name_data = v } }, i)[i]) = {
-  us_split_fields7 = { rec__model__uml_action__name_data = v } })))
-
 logic bool_eq12 : (int,us_rep3) farray, int, int, (int,us_rep3) farray, int,
   int -> bool
 
@@ -932,17 +866,17 @@ axiom bool_eq_def11 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_134:int. ((((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) and (bool_eq10((a[temp___idx_134]),
-  (b[((b__first - a__first) + temp___idx_134)])) = true)) or
-  (not ((a__first <= temp___idx_134) and (temp___idx_134 <= a__last)))))) ->
+  (forall temp___idx_156:int. ((((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) and (bool_eq10((a[temp___idx_156]),
+  (b[((b__first - a__first) + temp___idx_156)])) = true)) or
+  (not ((a__first <= temp___idx_156) and (temp___idx_156 <= a__last)))))) ->
   (bool_eq12(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_134:int. (((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) -> (bool_eq10((a[temp___idx_134]),
-  (b[((b__first - a__first) + temp___idx_134)])) = true))))) -> (bool_eq12(a,
+  (forall temp___idx_156:int. (((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) -> (bool_eq10((a[temp___idx_156]),
+  (b[((b__first - a__first) + temp___idx_156)])) = true))))) -> (bool_eq12(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev2 :
@@ -952,22 +886,15 @@ axiom bool_eq_rev2 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_134:int. (((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) -> (bool_eq10((a[temp___idx_134]),
-  (b[((b__first - a__first) + temp___idx_134)])) = true)))))))
+  (forall temp___idx_156:int. (((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) -> (bool_eq10((a[temp___idx_156]),
+  (b[((b__first - a__first) + temp___idx_156)])) = true)))))))
 
 logic no_uml_action_vector : (int,us_rep3) farray
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic model__no_uml_action_vector__aggregate_def : us_rep3 -> (int,us_rep3) farray
-
-axiom def_axiom :
-  (forall temp___136:name_t.
-  (forall temp___137:int. ((model__no_uml_action_vector__aggregate_def({
-  us_split_fields7 = { rec__model__uml_action__name_data = temp___136 }
-  })[temp___137]) = { us_split_fields7 = {
-  rec__model__uml_action__name_data = temp___136 } })))
 
 logic name__2 : us_rep3 -> int
 
@@ -1146,30 +1073,6 @@ axiom slide_def3 :
   (forall i:int [(slide3(a, old_first, new_first)[i])]. ((slide3(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat3 : (int,us_rep4) farray, int, int, (int,us_rep4) farray, int,
-  int -> (int,us_rep4) farray
-
-axiom concat_def3 :
-  (forall a:(int,us_rep4) farray. forall b:(int,us_rep4) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat3(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat3(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat3(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton3 : us_rep4, int -> (int,us_rep4) farray
-
-axiom singleton_def3 :
-  (forall v:uml_action_access. forall v1:uml_action_access.
-  (forall i:int [(singleton3({ us_split_fields9 = {
-  rec__model__uml_control_flow__from_data = v;
-  rec__model__uml_control_flow__to_data = v1 } }, i)[i])]. ((singleton3({
-  us_split_fields9 = { rec__model__uml_control_flow__from_data = v;
-  rec__model__uml_control_flow__to_data = v1 } }, i)[i]) = {
-  us_split_fields9 = { rec__model__uml_control_flow__from_data = v;
-  rec__model__uml_control_flow__to_data = v1 } })))
-
 logic bool_eq15 : (int,us_rep4) farray, int, int, (int,us_rep4) farray, int,
   int -> bool
 
@@ -1180,17 +1083,17 @@ axiom bool_eq_def14 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_138:int. ((((a__first <= temp___idx_138) and
-  (temp___idx_138 <= a__last)) and (bool_eq13((a[temp___idx_138]),
-  (b[((b__first - a__first) + temp___idx_138)])) = true)) or
-  (not ((a__first <= temp___idx_138) and (temp___idx_138 <= a__last)))))) ->
+  (forall temp___idx_160:int. ((((a__first <= temp___idx_160) and
+  (temp___idx_160 <= a__last)) and (bool_eq13((a[temp___idx_160]),
+  (b[((b__first - a__first) + temp___idx_160)])) = true)) or
+  (not ((a__first <= temp___idx_160) and (temp___idx_160 <= a__last)))))) ->
   (bool_eq15(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_138:int. (((a__first <= temp___idx_138) and
-  (temp___idx_138 <= a__last)) -> (bool_eq13((a[temp___idx_138]),
-  (b[((b__first - a__first) + temp___idx_138)])) = true))))) -> (bool_eq15(a,
+  (forall temp___idx_160:int. (((a__first <= temp___idx_160) and
+  (temp___idx_160 <= a__last)) -> (bool_eq13((a[temp___idx_160]),
+  (b[((b__first - a__first) + temp___idx_160)])) = true))))) -> (bool_eq15(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev3 :
@@ -1200,24 +1103,15 @@ axiom bool_eq_rev3 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_138:int. (((a__first <= temp___idx_138) and
-  (temp___idx_138 <= a__last)) -> (bool_eq13((a[temp___idx_138]),
-  (b[((b__first - a__first) + temp___idx_138)])) = true)))))))
+  (forall temp___idx_160:int. (((a__first <= temp___idx_160) and
+  (temp___idx_160 <= a__last)) -> (bool_eq13((a[temp___idx_160]),
+  (b[((b__first - a__first) + temp___idx_160)])) = true)))))))
 
 logic no_uml_control_flow_vector : (int,us_rep4) farray
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic model__no_uml_control_flow_vector__aggregate_def : us_rep4 -> (int,us_rep4) farray
-
-axiom def_axiom1 :
-  (forall temp___140:uml_action_access. forall temp___1401:uml_action_access.
-  (forall temp___141:int.
-  ((model__no_uml_control_flow_vector__aggregate_def({ us_split_fields9 = {
-  rec__model__uml_control_flow__from_data = temp___140;
-  rec__model__uml_control_flow__to_data = temp___1401 } })[temp___141]) = {
-  us_split_fields9 = { rec__model__uml_control_flow__from_data = temp___140;
-  rec__model__uml_control_flow__to_data = temp___1401 } })))
 
 logic from__2 : us_rep4 -> int
 
@@ -1540,6 +1434,13 @@ axiom no_uml_action_vector__def_axiom :
   us_split_fields7 = { rec__model__uml_action__name_data = no_uml_action }
   }))
 
+axiom def_axiom :
+  (forall temp___158:name_t.
+  (forall temp___159:int. ((model__no_uml_action_vector__aggregate_def({
+  us_split_fields7 = { rec__model__uml_action__name_data = temp___158 }
+  })[temp___159]) = { us_split_fields7 = {
+  rec__model__uml_action__name_data = temp___158 } })))
+
 axiom no_uml_control_flow__def_axiom :
   ((no_uml_control_flow = of_rep2(0)) and
   (no_uml_control_flow1 = of_rep2(0)))
@@ -1550,354 +1451,51 @@ axiom no_uml_control_flow_vector__def_axiom :
   no_uml_control_flow; rec__model__uml_control_flow__to_data =
   no_uml_control_flow1 } }))
 
+axiom def_axiom1 :
+  (forall temp___162:uml_action_access. forall temp___1621:uml_action_access.
+  (forall temp___163:int.
+  ((model__no_uml_control_flow_vector__aggregate_def({ us_split_fields9 = {
+  rec__model__uml_control_flow__from_data = temp___162;
+  rec__model__uml_control_flow__to_data = temp___1621 } })[temp___163]) = {
+  us_split_fields9 = { rec__model__uml_control_flow__from_data = temp___162;
+  rec__model__uml_control_flow__to_data = temp___1621 } })))
+
 axiom no_uml_activity__def_axiom :
   ((no_uml_activity = no_uml_action_vector) and
   (no_uml_activity1 = no_uml_control_flow_vector))
 
-logic av : (int,us_rep3) farray
-
-logic cfv : (int,us_rep4) farray
-
-logic act__split_fields : (int,us_rep3) farray
-
-logic act__split_fields1 : (int,us_rep4) farray
-
-logic s : int
-
-logic s1 : int
-
-logic model__transform__result : (int,us_rep3) farray
-
-logic model__transform__result1 : (int,us_rep4) farray
-
-logic model__transform__L_1__R1b__assume : (int,us_rep) farray
-
-logic temp___436 : (int,us_rep3) farray
-
-logic temp___435 : int
-
-logic t : int
-
-logic temp___438 : (int,us_rep) farray
-
-logic o : int
-
-logic o1 : name_t
-
-logic o2 : int
-
-logic temp___434 : (int,us_rep) farray
-
-logic o3 : name_t
-
-logic o4 : int
-
-logic o5 : name_t
-
-logic o6 : name_t
-
-logic o7 : name_t
-
-logic o8 : (int,us_rep3) farray
-
-logic model__transform__L_2__R7b__assume : (int,us_rep1) farray
-
-logic temp___446 : (int,us_rep4) farray
-
-logic temp___445 : int
-
-logic t1 : int
-
-logic temp___448 : (int,us_rep) farray
-
-logic temp___449 : (int,us_rep1) farray
-
-logic o9 : int
-
-logic o10 : uml_action_access
-
-logic o11 : uml_action_access
-
-logic o12 : int
-
-logic o13 : name_t
-
-logic o14 : int
-
-logic temp___450 : (int,us_rep) farray
-
-logic temp___451 : (int,us_rep1) farray
-
-logic o15 : int
-
-logic o16 : uml_state_access
-
-logic o17 : uml_state_access
-
-logic o18 : int
-
-logic o19 : name_t
-
-logic o20 : int
-
-logic o21 : uml_action_access
-
-logic o22 : uml_action_access
-
-logic o23 : int
-
-logic o24 : name_t
-
-logic o25 : int
-
-logic o26 : int
-
-logic o27 : bool
-
-logic temp___443 : (int,us_rep1) farray
-
-logic o28 : uml_state_access
-
-logic o29 : uml_state_access
-
-logic o30 : int
-
-logic temp___444 : (int,us_rep1) farray
-
-logic o31 : uml_state_access
-
-logic o32 : uml_state_access
-
-logic o33 : int
-
-logic result : (int,us_rep3) farray
-
-logic av1 : (int,us_rep3) farray
-
-logic result1 : (int,us_rep4) farray
-
-logic cfv1 : (int,us_rep4) farray
-
-logic result2 : (int,us_rep3) farray
-
-logic result3 : (int,us_rep4) farray
-
-logic act__split_fields2 : (int,us_rep3) farray
-
-logic act__split_fields3 : (int,us_rep4) farray
-
-logic result4 : int
-
-logic s2 : int
-
-logic av2 : (int,us_rep3) farray
-
-logic s3 : int
-
-logic result5 : (int,us_rep3) farray
-
-logic av3 : (int,us_rep3) farray
-
-logic result6 : int
-
-logic s4 : int
-
-logic av4 : (int,us_rep3) farray
-
-logic s5 : int
-
-logic av5 : (int,us_rep3) farray
-
-logic s6 : int
-
-logic av6 : (int,us_rep3) farray
-
-logic s7 : int
-
-logic av7 : (int,us_rep3) farray
-
-logic s8 : int
-
-logic av8 : (int,us_rep3) farray
-
-logic s9 : int
-
-logic av9 : (int,us_rep3) farray
-
-logic s10 : int
-
-logic result7 : int
-
-logic s11 : int
-
-logic cfv2 : (int,us_rep4) farray
-
-logic s12 : int
-
-logic model__set_from__2__self__fields : uml_action_access
-
-logic model__set_from__2__self__fields1 : uml_action_access
-
-logic result8 : (int,us_rep4) farray
-
-logic cfv3 : (int,us_rep4) farray
-
-logic model__set_to__2__self__fields : uml_action_access
-
-logic model__set_to__2__self__fields1 : uml_action_access
-
-logic result9 : (int,us_rep4) farray
-
-logic cfv4 : (int,us_rep4) farray
-
-logic result10 : int
-
-logic s13 : int
-
-logic cfv5 : (int,us_rep4) farray
-
-logic s14 : int
-
-logic cfv6 : (int,us_rep4) farray
-
-logic s15 : int
-
-logic rho : uml_action_access
-
-logic rho1 : uml_action_access
-
-logic rho2 : uml_action_access
-
-logic rho3 : uml_action_access
-
-logic cfv7 : (int,us_rep4) farray
-
-logic s16 : int
-
-logic cfv8 : (int,us_rep4) farray
-
-logic s17 : int
-
-logic cfv9 : (int,us_rep4) farray
-
-logic s18 : int
-
-logic cfv10 : (int,us_rep4) farray
-
-logic s19 : int
-
-logic cfv11 : (int,us_rep4) farray
-
-logic s20 : int
-
-logic cfv12 : (int,us_rep4) farray
-
-logic s21 : int
-
-logic act__split_fields4 : (int,us_rep3) farray
-
-logic act__split_fields5 : (int,us_rep4) farray
-
-logic act__split_fields6 : (int,us_rep3) farray
-
-logic act__split_fields7 : (int,us_rep4) farray
-
-logic result11 : (int,us_rep3) farray
-
-logic result12 : (int,us_rep4) farray
-
-logic model__transform__result2 : (int,us_rep3) farray
-
-logic model__transform__result3 : (int,us_rep4) farray
-
-logic model__transform__result4 : (int,us_rep3) farray
-
-logic model__transform__result5 : (int,us_rep4) farray
-
-logic model__transform__result6 : (int,us_rep3) farray
-
-logic model__transform__result7 : (int,us_rep4) farray
-
-logic av10 : (int,us_rep3) farray
-
-logic cfv13 : (int,us_rep4) farray
-
-logic act__split_fields8 : (int,us_rep3) farray
-
-logic act__split_fields9 : (int,us_rep4) farray
-
-logic s22 : int
-
-logic s23 : int
-
-logic model__transform__result8 : (int,us_rep3) farray
-
-logic model__transform__result9 : (int,us_rep4) farray
-
-logic av11 : (int,us_rep3) farray
-
-logic cfv14 : (int,us_rep4) farray
-
-logic act__split_fields10 : (int,us_rep3) farray
-
-logic act__split_fields11 : (int,us_rep4) farray
-
-logic s24 : int
-
-logic s25 : int
-
-logic model__transform__result10 : (int,us_rep3) farray
-
-logic model__transform__result11 : (int,us_rep4) farray
-
-axiom H : (model__no_uml_action_vector__aggregate_def({ us_split_fields7 = {
-  rec__model__uml_action__name_data = no_uml_action }
-  }) = no_uml_action_vector)
-
-axiom H1 : (model__no_uml_control_flow_vector__aggregate_def({
-  us_split_fields9 = { rec__model__uml_control_flow__from_data =
-  no_uml_control_flow; rec__model__uml_control_flow__to_data =
-  no_uml_control_flow1 } }) = no_uml_control_flow_vector)
-
-axiom H2 : ((no_uml_action_vector = no_uml_activity) and
-  (no_uml_control_flow_vector = no_uml_activity1))
-
-axiom H3 : (result = av)
-
-axiom H4 : (av1 = no_uml_action_vector)
-
-axiom H5 : (result1 = cfv)
-
-axiom H6 : (cfv1 = no_uml_control_flow_vector)
-
-axiom H7 : ((result2 = act__split_fields) and (result3 = act__split_fields1))
-
-axiom H8 : ((act__split_fields2 = no_uml_activity) and
-  (act__split_fields3 = no_uml_activity1))
-
-axiom H9 : ((model__transform__L_1__R1b__assume = owned_state({
-  us_split_fields5 = { rec__model__uml_state_machine__owned_state_data = sm;
-  rec__model__uml_state_machine__owned_transition_data = sm1 } })) and
-  (model__transform__L_1__R1b__assume = sm))
-
-axiom H10 : (model__transform__L_1__R1b__assume = r1b)
-
-axiom H11 : (result4 = s)
-
-axiom H12 : (s2 = 0)
-
-axiom H13 : (0 <= s2)
-
-axiom H14 : (s2 <= 100)
-
-logic t2 : int
-
-axiom H15 : (0 <= t2)
-
-axiom H16 : (t2 <= (s2 - 1))
-
  (* File "model.ads", line 121, characters 0-0 *)
-goal WP_parameter_def : (name((owned_state({ us_split_fields5 = {
+goal WP_parameter_def :
+  (forall av:(int,us_rep3) farray. forall cfv:(int,us_rep4) farray.
+  forall act__split_fields:(int,us_rep3) farray.
+  forall act__split_fields1:(int,us_rep4) farray. forall s:int.
+  forall model__transform__L_1__R1b__assume:(int,us_rep) farray.
+  forall result:(int,us_rep3) farray. forall av1:(int,us_rep3) farray.
+  forall result1:(int,us_rep4) farray. forall cfv1:(int,us_rep4) farray.
+  forall result2:(int,us_rep3) farray. forall result3:(int,us_rep4) farray.
+  forall act__split_fields2:(int,us_rep3) farray.
+  forall act__split_fields3:(int,us_rep4) farray. forall result4:int.
+  forall s1:int. ((model__no_uml_action_vector__aggregate_def({
+  us_split_fields7 = { rec__model__uml_action__name_data = no_uml_action }
+  }) = no_uml_action_vector) ->
+  ((model__no_uml_control_flow_vector__aggregate_def({ us_split_fields9 = {
+  rec__model__uml_control_flow__from_data = no_uml_control_flow;
+  rec__model__uml_control_flow__to_data = no_uml_control_flow1 }
+  }) = no_uml_control_flow_vector) ->
+  (((no_uml_action_vector = no_uml_activity) and
+  (no_uml_control_flow_vector = no_uml_activity1)) -> (((result = av) and
+  (av1 = no_uml_action_vector)) -> (((result1 = cfv) and
+  (cfv1 = no_uml_control_flow_vector)) ->
+  ((((result2 = act__split_fields) and (result3 = act__split_fields1)) and
+  ((act__split_fields2 = no_uml_activity) and
+  (act__split_fields3 = no_uml_activity1))) ->
+  ((((model__transform__L_1__R1b__assume = owned_state({ us_split_fields5 = {
   rec__model__uml_state_machine__owned_state_data = sm;
+  rec__model__uml_state_machine__owned_transition_data = sm1 } })) and
+  (model__transform__L_1__R1b__assume = sm)) and
+  (model__transform__L_1__R1b__assume = r1b)) -> (((result4 = s) and
+  (s1 = 0)) -> (((0 <= s1) and (s1 <= 100)) ->
+  (forall t:int. (((0 <= t) and (t <= (s1 - 1))) -> (name((owned_state({
+  us_split_fields5 = { rec__model__uml_state_machine__owned_state_data = sm;
   rec__model__uml_state_machine__owned_transition_data = sm1 }
-  })[t2])) = name__2((av1[t2])))
+  })[t])) = name__2((av1[t])))))))))))))))

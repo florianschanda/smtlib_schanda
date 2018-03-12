@@ -1023,23 +1023,14 @@ function unsigned8__ref___projection(a: unsigned8__ref) : unsigned8 =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic r15 : t1
+logic rliteral1 : t
 
-logic x86__r15l__result : t
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 0)
 
-logic result : t
+logic rliteral2 : t1
 
-logic x86__r15l__result1 : t
-
-logic x86__r15l__result2 : t
-
-logic x86__r15l__result3 : t
-
-logic x86__r15l__result4 : t
-
-logic x86__r15l__result5 : t
-
-axiom H : true
+axiom rliteral_axiom2 : (tqtint1(rliteral2) = 255)
 
  (* File "x86.ads", line 10, characters 0-0 *)
-goal WP_parameter_def : ule1(toBig(of_int(0)), bw_and1(r15, of_int1(255)))
+goal WP_parameter_def :
+  (forall r15:t1. ule1(toBig(rliteral1), bw_and1(r15, rliteral2)))

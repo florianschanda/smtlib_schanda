@@ -309,44 +309,10 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic a__split_fields : integer
-
-logic b__split_fields : integer
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : integer
-
-logic o3 : integer
-
-logic temp___140 : integer
-
-logic o4 : integer
-
-logic o5 : integer
-
-logic temp___142 : integer
-
-logic result : integer
-
-logic a__split_fields1 : integer
-
-logic result1 : integer
-
-logic b__split_fields1 : integer
-
-logic a__split_fields2 : integer
-
-logic b__split_fields2 : integer
-
-logic a__split_fields3 : integer
-
-logic b__split_fields3 : integer
-
-axiom H : ((o = (to_rep(a__split_fields) + to_rep(b__split_fields))) and
-  in_range((to_rep(a__split_fields) + to_rep(b__split_fields))))
-
  (* File "main.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (not (2 = 0))
+goal WP_parameter_def :
+  (forall a__split_fields:integer. forall b__split_fields:integer.
+  forall o:int.
+  (((o = (to_rep(a__split_fields) + to_rep(b__split_fields))) and
+  in_range((to_rep(a__split_fields) + to_rep(b__split_fields)))) ->
+  (not (2 = 0))))

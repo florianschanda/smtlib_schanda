@@ -824,226 +824,79 @@ axiom c1__def_axiom : ((c1 = of_rep1(0)) and (((c11 = of_rep(1)) and
 axiom c2__def_axiom : ((c2 = of_rep1(1)) and (((c21 = of_rep(1)) and
   (c22 = of_rep(2))) and (c23 = true)))
 
-logic y1__split_fields : integer
-
-logic y1__split_fields1 : integer
-
-logic y1__split_discrs : enum
-
-logic y2__split_fields : integer
-
-logic y2__split_fields1 : integer
-
-logic y2__split_discrs : enum
-
-logic z1__split_fields : integer
-
-logic z1__split_fields1 : integer
-
-logic us : int
-
-logic o : enum
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic o3 : integer
-
-logic o4 : enum
-
-logic o5 : enum
-
-logic o6 : integer
-
-logic o7 : integer
-
-logic o8 : bool
-
-logic o9 : enum
-
-logic o10 : integer
-
-logic o11 : integer
-
-logic o12 : bool
-
-logic o13 : enum
-
-logic o14 : integer
-
-logic o15 : integer
-
-logic o16 : bool
-
-logic run__c1__assume : enum
-
-logic run__c1__assume1 : integer
-
-logic run__c1__assume2 : integer
-
-logic run__c1__assume3 : bool
-
-logic us1 : int
-
-logic o17 : enum
-
-logic o18 : integer
-
-logic o19 : integer
-
-logic o20 : integer
-
-logic o21 : integer
-
-logic o22 : enum
-
-logic o23 : enum
-
-logic o24 : integer
-
-logic o25 : integer
-
-logic o26 : bool
-
-logic o27 : enum
-
-logic o28 : integer
-
-logic o29 : integer
-
-logic o30 : bool
-
-logic o31 : enum
-
-logic o32 : integer
-
-logic o33 : integer
-
-logic o34 : bool
-
-logic run__c2__assume : enum
-
-logic run__c2__assume1 : integer
-
-logic run__c2__assume2 : integer
-
-logic run__c2__assume3 : bool
-
-logic us2 : int
-
-logic us3 : int
-
-logic result : integer
-
-logic result1 : integer
-
-logic y1__split_fields2 : integer
-
-logic y1__split_fields3 : integer
-
-logic result2 : enum
-
-logic y1__split_discrs1 : enum
-
-logic result3 : integer
-
-logic result4 : integer
-
-logic y2__split_fields2 : integer
-
-logic y2__split_fields3 : integer
-
-logic result5 : enum
-
-logic y2__split_discrs1 : enum
-
-logic result6 : integer
-
-logic result7 : integer
-
-logic z1__split_fields2 : integer
-
-logic z1__split_fields3 : integer
-
-axiom H : ((us = 0) and in_range1(0))
-
-axiom H1 : (to_rep(o1) = 1)
-
-axiom H2 : (o1 = o2)
-
-axiom H3 : (dummy = o3)
-
-axiom H4 : (to_rep1(o) = 0)
-
-axiom H5 : (o = o4)
-
-axiom H6 : (o5 = o4)
-
-axiom H7 : (o6 = o2)
-
-axiom H8 : (o7 = o3)
-
-axiom H9 : (true = o8)
-
-axiom H10 : ((o9 = o5) and (((o10 = o6) and (o11 = o7)) and (o12 = o8)))
-
-axiom H11 : ((o13 = o9) and (((o14 = o10) and (o15 = o11)) and (o16 = o12)))
-
-axiom H12 : ((run__c1__assume = o13) and (((run__c1__assume1 = o14) and
-  (run__c1__assume2 = o15)) and (run__c1__assume3 = o16)))
-
-axiom H13 : ((run__c1__assume = c1) and (((run__c1__assume1 = c11) and
-  (run__c1__assume2 = c12)) and (run__c1__assume3 = c13)))
-
-axiom H14 : ((0 = to_rep1(c1)) and (c13 = true))
-
-axiom H15 : ((us1 = 1) and in_range1(1))
-
-axiom H16 : (to_rep(o18) = 2)
-
-axiom H17 : (to_rep(o19) = 1)
-
-axiom H18 : ((o20 = o19) and (o21 = o18))
-
-axiom H19 : (to_rep1(o17) = 1)
-
-axiom H20 : (o22 = o17)
-
-axiom H21 : ((o23 = o22) and (((o24 = o20) and (o25 = o21)) and
-  (o26 = true)))
-
-axiom H22 : ((o27 = o23) and (((o28 = o24) and (o29 = o25)) and (o30 = o26)))
-
-axiom H23 : ((o31 = o27) and (((o32 = o28) and (o33 = o29)) and (o34 = o30)))
-
-axiom H24 : ((run__c2__assume = o31) and (((run__c2__assume1 = o32) and
-  (run__c2__assume2 = o33)) and (run__c2__assume3 = o34)))
-
-axiom H25 : ((run__c2__assume = c2) and (((run__c2__assume1 = c21) and
-  (run__c2__assume2 = c22)) and (run__c2__assume3 = c23)))
-
-axiom H26 : ((1 = to_rep1(c2)) and (c23 = true))
-
-axiom H27 : ((result = y1__split_fields) and (result1 = y1__split_fields1))
-
-axiom H28 : ((y1__split_fields2 = c11) and (y1__split_fields3 = c12))
-
-axiom H29 : (result2 = y1__split_discrs)
-
-axiom H30 : (y1__split_discrs1 = c1)
-
-axiom H31 : (y1__attr__constrained = false)
-
-axiom H32 : ((result3 = y2__split_fields) and (result4 = y2__split_fields1))
-
-axiom H33 : ((y2__split_fields2 = c21) and (y2__split_fields3 = c22))
-
-axiom H34 : (result5 = y2__split_discrs)
-
-axiom H35 : (y2__split_discrs1 = c2)
-
-axiom H36 : (y2__attr__constrained = false)
-
  (* File "run.adb", line 15, characters 0-0 *)
-goal WP_parameter_def : in_range1(0)
+goal WP_parameter_def :
+  (forall y1__split_fields:integer. forall y1__split_fields1:integer.
+  forall y1__split_discrs:enum. forall y2__split_fields:integer.
+  forall y2__split_fields1:integer. forall y2__split_discrs:enum.
+  forall us:int. forall o:enum. forall o1:integer. forall o2:integer.
+  forall o3:integer. forall o4:enum. forall o5:enum. forall o6:integer.
+  forall o7:integer. forall o8:bool. forall o9:enum. forall o10:integer.
+  forall o11:integer. forall o12:bool. forall o13:enum. forall o14:integer.
+  forall o15:integer. forall o16:bool. forall run__c1__assume:enum.
+  forall run__c1__assume1:integer. forall run__c1__assume2:integer.
+  forall run__c1__assume3:bool. forall us1:int. forall o17:enum.
+  forall o18:integer. forall o19:integer. forall o20:integer.
+  forall o21:integer. forall o22:enum. forall o23:enum. forall o24:integer.
+  forall o25:integer. forall o26:bool. forall o27:enum. forall o28:integer.
+  forall o29:integer. forall o30:bool. forall o31:enum. forall o32:integer.
+  forall o33:integer. forall o34:bool. forall run__c2__assume:enum.
+  forall run__c2__assume1:integer. forall run__c2__assume2:integer.
+  forall run__c2__assume3:bool. forall result:integer.
+  forall result1:integer. forall y1__split_fields2:integer.
+  forall y1__split_fields3:integer. forall result2:enum.
+  forall y1__split_discrs1:us_split_discrs.
+  forall result3:us_split_fields__ref.
+  forall y2__split_fields2:us_split_fields.
+  forall result4:us_split_discrs__ref.
+  forall y2__split_discrs1:us_split_discrs. (((us = 0) and in_range1(0)) ->
+  ((((((((to_rep(o1) = 1) and ((o1 = o2) and (dummy = o3))) and
+  (((to_rep1(o) = 0) and (o = o4)) and ((o5 = o4) and (((o6 = o2) and
+  (o7 = o3)) and (true = o8))))) and ({ us_split_discrs1 = {
+  rec__p_init__t__e = o9 }; us_split_fields1 = { rec__p_init__t__x1 = o10;
+  rec__p_init__t__x2 = o11 }; attr__constrained = o12 } = {
+  us_split_discrs1 = { rec__p_init__t__e = o5 }; us_split_fields1 = {
+  rec__p_init__t__x1 = o6; rec__p_init__t__x2 = o7 }; attr__constrained = o8
+  })) and ({ us_split_discrs1 = { rec__p_init__t__e = o13 };
+  us_split_fields1 = { rec__p_init__t__x1 = o14; rec__p_init__t__x2 = o15 };
+  attr__constrained = o16 } = { us_split_discrs1 = { rec__p_init__t__e = o9
+  }; us_split_fields1 = { rec__p_init__t__x1 = o10; rec__p_init__t__x2 = o11
+  }; attr__constrained = o12 })) and ({ us_split_discrs1 = {
+  rec__p_init__t__e = run__c1__assume }; us_split_fields1 = {
+  rec__p_init__t__x1 = run__c1__assume1; rec__p_init__t__x2 =
+  run__c1__assume2 }; attr__constrained = run__c1__assume3 } = {
+  us_split_discrs1 = { rec__p_init__t__e = o13 }; us_split_fields1 = {
+  rec__p_init__t__x1 = o14; rec__p_init__t__x2 = o15 }; attr__constrained =
+  o16 })) and ((c1 = run__c1__assume) and (((c11 = run__c1__assume1) and
+  (c12 = run__c1__assume2)) and (c13 = run__c1__assume3)))) ->
+  (((0 = to_rep1(c1)) and (c13 = true)) -> (((us1 = 1) and in_range1(1)) ->
+  ((((((((to_rep(o18) = 2) and ((to_rep(o19) = 1) and ((o19 = o20) and
+  (o18 = o21)))) and (((to_rep1(o17) = 1) and (o17 = o22)) and
+  ((o23 = o22) and (((o24 = o20) and (o25 = o21)) and (true = o26))))) and ({
+  us_split_discrs1 = { rec__p_init__t__e = o27 }; us_split_fields1 = {
+  rec__p_init__t__x1 = o28; rec__p_init__t__x2 = o29 }; attr__constrained =
+  o30 } = { us_split_discrs1 = { rec__p_init__t__e = o23 };
+  us_split_fields1 = { rec__p_init__t__x1 = o24; rec__p_init__t__x2 = o25 };
+  attr__constrained = o26 })) and ({ us_split_discrs1 = { rec__p_init__t__e =
+  o31 }; us_split_fields1 = { rec__p_init__t__x1 = o32; rec__p_init__t__x2 =
+  o33 }; attr__constrained = o34 } = { us_split_discrs1 = {
+  rec__p_init__t__e = o27 }; us_split_fields1 = { rec__p_init__t__x1 = o28;
+  rec__p_init__t__x2 = o29 }; attr__constrained = o30 })) and ({
+  us_split_discrs1 = { rec__p_init__t__e = run__c2__assume };
+  us_split_fields1 = { rec__p_init__t__x1 = run__c2__assume1;
+  rec__p_init__t__x2 = run__c2__assume2 }; attr__constrained =
+  run__c2__assume3 } = { us_split_discrs1 = { rec__p_init__t__e = o31 };
+  us_split_fields1 = { rec__p_init__t__x1 = o32; rec__p_init__t__x2 = o33 };
+  attr__constrained = o34 })) and ((c2 = run__c2__assume) and
+  (((c21 = run__c2__assume1) and (c22 = run__c2__assume2)) and
+  (c23 = run__c2__assume3)))) -> (((1 = to_rep1(c2)) and (c23 = true)) ->
+  (((((result = y1__split_fields) and (result1 = y1__split_fields1)) and
+  ((y1__split_fields2 = c11) and (y1__split_fields3 = c12))) and
+  (((result2 = y1__split_discrs) and (y1__split_discrs1 = {
+  rec__p_init__t__e = c1 })) and (y1__attr__constrained = false))) ->
+  ((((result3 = { us_split_fields__content = { rec__p_init__t__x1 =
+  y2__split_fields; rec__p_init__t__x2 = y2__split_fields1 } }) and
+  (y2__split_fields2 = { rec__p_init__t__x1 = c21; rec__p_init__t__x2 = c22
+  })) and (((result4 = { us_split_discrs__content = { rec__p_init__t__e =
+  y2__split_discrs } }) and (y2__split_discrs1 = { rec__p_init__t__e = c2
+  })) and (y2__attr__constrained = false))) -> in_range1(0))))))))))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -137,119 +137,8 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : int
-
-logic j : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic result : int
-
-logic x1 : int
-
-logic result1 : int
-
-logic j1 : int
-
-logic result2 : int
-
-logic x2 : int
-
-logic result3 : int
-
-logic j2 : int
-
-logic result4 : int
-
-logic x3 : int
-
-logic result5 : int
-
-logic j3 : int
-
-logic result6 : int
-
-logic x4 : int
-
-logic result7 : int
-
-logic j4 : int
-
-logic result8 : int
-
-logic x5 : int
-
-logic result9 : int
-
-logic j5 : int
-
-logic result10 : int
-
-logic x6 : int
-
-logic result11 : int
-
-logic j6 : int
-
-logic result12 : int
-
-logic x7 : int
-
-logic result13 : int
-
-logic j7 : int
-
-logic result14 : int
-
-logic x8 : int
-
-logic result15 : int
-
-logic j8 : int
-
-logic result16 : int
-
-logic x9 : int
-
-logic result17 : int
-
-logic j9 : int
-
-logic result18 : int
-
-logic x10 : int
-
-logic result19 : int
-
-logic j10 : int
-
-axiom H : (result = x)
-
-axiom H1 : (x1 = 10)
-
-axiom H2 : in_range1(x1)
-
-axiom H3 : (result1 = j)
-
-axiom H4 : (j1 = 1)
-
  (* File "badjustif.adb", line 6, characters 0-0 *)
-goal WP_parameter_def : in_range1((x1 + 1))
+goal WP_parameter_def :
+  (forall x:int. forall j:int. forall result:int. forall x1:int.
+  forall result1:int. forall j1:int. (((result = x) and (x1 = 10)) ->
+  (in_range1(x1) -> (((result1 = j) and (j1 = 1)) -> in_range1((x1 + 1))))))

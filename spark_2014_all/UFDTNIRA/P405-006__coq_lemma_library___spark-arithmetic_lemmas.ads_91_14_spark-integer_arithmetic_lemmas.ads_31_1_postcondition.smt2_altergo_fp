@@ -251,13 +251,7 @@ logic upper_bound : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-axiom H : in_range(arg1)
-
-axiom H1 : in_range1(arg2)
-
-axiom H2 : in_range1(upper_bound)
-
-axiom H3 : ((arg2 = 0) or (arg1 <= comp_div(upper_bound,arg2)))
-
  (* File "spark-arithmetic_lemmas.ads", line 78, characters 0-0 *)
-goal WP_parameter_def : ((arg1 * arg2) <= upper_bound)
+goal WP_parameter_def : ((in_range(arg1) and (in_range1(arg2) and
+  (in_range1(upper_bound) and ((arg2 = 0) or
+  (arg1 <= comp_div(upper_bound,arg2)))))) -> ((arg1 * arg2) <= upper_bound))

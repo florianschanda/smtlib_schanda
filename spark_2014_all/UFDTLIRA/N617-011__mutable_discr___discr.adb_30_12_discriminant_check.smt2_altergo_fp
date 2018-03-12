@@ -355,61 +355,14 @@ type t9b__ref = { t9b__content : us_rep
 
 function t9b__ref___projection(a: t9b__ref) : us_rep = (a).t9b__content
 
-logic us : int
-
-logic o : natural
-
-logic o1 : natural
-
-logic o2 : natural
-
-logic o3 : bool
-
-logic o4 : natural
-
-logic o5 : bool
-
-logic o6 : natural
-
-logic o7 : bool
-
-logic temp___284 : natural
-
-logic temp___2841 : bool
-
-logic o8 : natural
-
-logic o9 : natural
-
-logic o10 : natural
-
-logic o11 : bool
-
-logic o12 : natural
-
-logic o13 : bool
-
-logic o14 : natural
-
-logic o15 : bool
-
-axiom H : in_range(c)
-
-axiom H1 : ((us = c) and in_range(c))
-
-axiom H2 : ((d__attr__constrained = true) and (to_rep(d__split_discrs) = c))
-
-axiom H3 : ((c = to_rep(d__split_discrs)) and (d__attr__constrained = true))
-
-axiom H4 : (to_rep(o) = c)
-
-axiom H5 : (o = o1)
-
-axiom H6 : (o2 = o1)
-
-axiom H7 : (true = o3)
-
-axiom H8 : ((o4 = o2) and (o5 = o3))
-
  (* File "discr.adb", line 11, characters 0-0 *)
-goal WP_parameter_def : (c = to_rep(o4))
+goal WP_parameter_def :
+  (forall us:int. forall o:natural. forall o1:natural. forall o2:natural.
+  forall o3:bool. forall o4:natural. forall o5:bool. (in_range(c) ->
+  (((us = c) and in_range(c)) -> (((d__attr__constrained = true) and
+  (to_rep(d__split_discrs) = c)) -> (((c = to_rep(d__split_discrs)) and
+  (d__attr__constrained = true)) -> (((((to_rep(o) = c) and (o = o1)) and
+  ((o2 = o1) and (true = o3))) and ({ us_split_discrs1 = {
+  rec__discr__with_default__c = o4 }; attr__constrained = o5 } = {
+  us_split_discrs1 = { rec__discr__with_default__c = o2 };
+  attr__constrained = o3 })) -> (c = to_rep(o4))))))))

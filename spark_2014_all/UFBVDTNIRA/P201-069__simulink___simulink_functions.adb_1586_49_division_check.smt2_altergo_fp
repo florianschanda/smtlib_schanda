@@ -722,9 +722,5 @@ logic right : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-axiom H : true
-
-axiom H1 : true
-
  (* File "interfac.ads", line 66, characters 0-0 *)
 goal WP_parameter_def : (not (32 = 0))

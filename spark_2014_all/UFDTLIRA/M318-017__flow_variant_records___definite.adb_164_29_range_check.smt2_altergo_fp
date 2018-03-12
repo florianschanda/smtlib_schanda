@@ -456,37 +456,7 @@ type t49b__ref = { t49b__content : us_rep
 
 function t49b__ref___projection(a: t49b__ref) : us_rep = (a).t49b__content
 
-logic x__split_discrs : status
-
-logic o : status
-
-logic o1 : int
-
-logic o2 : natural
-
-logic o3 : natural
-
-logic o4 : natural
-
-logic o5 : bool
-
-logic o6 : status
-
-logic temp___222 : status
-
-logic temp___2221 : natural
-
-logic temp___2222 : natural
-
-logic temp___2223 : bool
-
-logic temp___2224 : bool
-
-axiom H : in_range(i)
-
-axiom H1 : (to_rep1(x__split_discrs) = r48b)
-
-axiom H2 : in_range2(r48b)
-
  (* File "definite.adb", line 149, characters 0-0 *)
-goal WP_parameter_def : in_range1(i)
+goal WP_parameter_def :
+  (forall x__split_discrs:status. (in_range(i) ->
+  (((to_rep1(x__split_discrs) = r48b) and in_range2(r48b)) -> in_range1(i))))

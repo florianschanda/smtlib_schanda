@@ -1027,20 +1027,24 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic res : t
+logic rliteral1 : t1
 
-logic result : t
+axiom rliteral_axiom1 : (tqtint1(rliteral1) = 4294967040)
 
-logic res1 : t
+logic rliteral2 : t1
 
-axiom H : true
+axiom rliteral_axiom2 : (tqtint1(rliteral2) = 1)
 
-axiom H1 : true
+logic rliteral3 : t1
 
-axiom H2 : (result = res)
+axiom rliteral_axiom3 : (tqtint1(rliteral3) = 255)
 
-axiom H3 : (res1 = toSmall(bw_and1(bw_or1(bw_and1(x, of_int1(4294967040)),
-  of_int1(1)), of_int1(255))))
+logic rliteral4 : t
+
+axiom rliteral_axiom4 : (tqtint(rliteral4) = 1)
 
  (* File "bitwise.ads", line 22, characters 0-0 *)
-goal WP_parameter_def : (res1 = of_int(1))
+goal WP_parameter_def :
+  (forall res:t. forall result:t. forall res1:t. (((result = res) and
+  (res1 = toSmall(bw_and1(bw_or1(bw_and1(x, rliteral1), rliteral2),
+  rliteral3)))) -> (res1 = rliteral4)))

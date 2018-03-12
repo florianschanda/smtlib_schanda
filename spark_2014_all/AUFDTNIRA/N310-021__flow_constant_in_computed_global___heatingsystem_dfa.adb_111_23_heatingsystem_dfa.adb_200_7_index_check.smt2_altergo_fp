@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -311,24 +311,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,displaydigits) farray, int, int,
-  (int,displaydigits) farray, int, int -> (int,displaydigits) farray
-
-axiom concat_def :
-  (forall a:(int,displaydigits) farray. forall b:(int,displaydigits) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : displaydigits, int -> (int,displaydigits) farray
-
-axiom singleton_def :
-  (forall v:displaydigits.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,displaydigits) farray, int, int,
   (int,displaydigits) farray, int, int -> bool
 
@@ -340,17 +322,17 @@ axiom bool_eq_def3 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -360,37 +342,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,displaydigits) farray, int, int,
-  (int,displaydigits) farray, int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,displaydigits) farray. forall b:(int,displaydigits) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,displaydigits) farray. forall b:(int,displaydigits) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep1((a[(i + 1)])) <  to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,displaydigits) farray. forall b:(int,displaydigits) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep1((b[(i + 1)])) <  to_rep1((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type positions
 
@@ -511,24 +465,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,times) farray, int, int, (int,times) farray, int,
-  int -> (int,times) farray
-
-axiom concat_def1 :
-  (forall a:(int,times) farray. forall b:(int,times) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : times, int -> (int,times) farray
-
-axiom singleton_def1 :
-  (forall v:times.
-  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq8 : (int,times) farray, int, int, (int,times) farray, int,
   int -> bool
 
@@ -539,17 +475,17 @@ axiom bool_eq_def7 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) and
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)])))) or
-  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (forall temp___idx_155:int. ((((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) and
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)])))) or
+  (not ((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)))))) ->
   (bool_eq8(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) ->
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)]))))))) ->
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) ->
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)]))))))) ->
   (bool_eq8(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -559,37 +495,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) ->
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)])))))))))
-
-logic compare1 : (int,times) farray, int, int, (int,times) farray, int,
-  int -> int
-
-axiom compare_def_eq1 :
-  (forall a:(int,times) farray. forall b:(int,times) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq8(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt1 :
-  (forall a:(int,times) farray. forall b:(int,times) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq8(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt1 :
-  (forall a:(int,times) farray. forall b:(int,times) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare1(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq8(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) ->
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)])))))))))
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
@@ -679,27 +587,9 @@ logic attr__ATTRIBUTE_ADDRESS19 : int
 
 logic attr__ATTRIBUTE_ADDRESS20 : int
 
-logic temp___268 : int, int, int, int -> (int,times) farray
+logic temp___311 : int, int, int, int -> (int,times) farray
 
-axiom def_axiom :
-  (forall temp___270:int. forall temp___271:int. forall temp___272:int.
-  forall temp___273:int. (((((temp___268(temp___270, temp___271, temp___272,
-  temp___273)[2]) = of_rep(temp___270)) and ((temp___268(temp___270,
-  temp___271, temp___272, temp___273)[3]) = of_rep(temp___271))) and
-  ((temp___268(temp___270, temp___271, temp___272,
-  temp___273)[4]) = of_rep(temp___272))) and ((temp___268(temp___270,
-  temp___271, temp___272, temp___273)[5]) = of_rep(temp___273))))
-
-logic temp___275 : int, int, int, int -> (int,displaydigits) farray
-
-axiom def_axiom1 :
-  (forall temp___277:int. forall temp___278:int. forall temp___279:int.
-  forall temp___280:int. (((((temp___275(temp___277, temp___278, temp___279,
-  temp___280)[0]) = of_rep1(temp___277)) and ((temp___275(temp___277,
-  temp___278, temp___279, temp___280)[1]) = of_rep1(temp___278))) and
-  ((temp___275(temp___277, temp___278, temp___279,
-  temp___280)[2]) = of_rep1(temp___279))) and ((temp___275(temp___277,
-  temp___278, temp___279, temp___280)[3]) = of_rep1(temp___280))))
+logic temp___318 : int, int, int, int -> (int,displaydigits) farray
 
 axiom hoursinday__def_axiom : (hoursinday = 24)
 
@@ -709,257 +599,74 @@ axiom secondsinminute__def_axiom : (secondsinminute = 60)
 
 axiom secondsinhour__def_axiom : (secondsinhour = 3600)
 
-logic onofftime : (int,times) farray
-
-logic clockoffset : int
-
-logic heatingison : bool
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : times
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : times
-
-logic o6 : int
-
-logic o7 : (int,times) farray
-
-logic result : bool
-
-logic heatingison1 : bool
-
-logic result1 : int
-
-logic clockoffset1 : int
-
-logic result2 : (int,times) farray
-
-logic onofftime1 : (int,times) farray
-
-logic onofftime2 : (int,times) farray
-
-logic clockoffset2 : int
-
-logic switchposition : int
-
-logic timer : int
-
-logic slowadvance : bool
-
-logic fastadvance : bool
-
-logic changetoslowmode : bool
-
-logic changetofastmode : bool
-
-logic slowadvance1 : bool
-
-logic fastadvance1 : bool
-
-logic changetoslowmode1 : bool
-
-logic changetofastmode1 : bool
-
-logic hour : int
-
-logic minute : int
-
-logic advancemode : us_private
-
-logic advpressed : us_private
-
-logic advtimer : us_private
-
-logic switchposition1 : int
-
-logic timer1 : int
-
-logic result3 : int
-
-logic timer2 : int
-
-logic timer3 : int
-
-logic result4 : bool
-
-logic slowadvance2 : bool
-
-logic result5 : int
-
-logic clockoffset3 : int
-
-logic changetofastmode2 : bool
-
-logic advpressed1 : us_private
-
-logic advtimer1 : us_private
-
-logic advancemode1 : us_private
-
-logic fastadvance2 : bool
-
-logic advtimer2 : us_private
-
-logic result6 : int
-
-logic clockoffset4 : int
-
-logic changetoslowmode2 : bool
-
-logic advpressed2 : us_private
-
-logic advancemode2 : us_private
-
-logic result7 : int
-
-logic timer4 : int
-
-logic result8 : int
-
-logic timer5 : int
-
-logic result9 : bool
-
-logic slowadvance3 : bool
-
-logic result10 : int
-
-logic timer6 : int
-
-logic changetofastmode3 : bool
-
-logic advpressed3 : us_private
-
-logic advtimer3 : us_private
-
-logic advancemode3 : us_private
-
-logic fastadvance3 : bool
-
-logic advtimer4 : us_private
-
-logic result11 : int
-
-logic timer7 : int
-
-logic changetoslowmode3 : bool
-
-logic advpressed4 : us_private
-
-logic advancemode4 : us_private
-
-logic result12 : (int,times) farray
-
-logic onofftime3 : (int,times) farray
-
-logic result13 : int
-
-logic hour1 : int
-
-logic result14 : int
-
-logic minute1 : int
-
-axiom H : in_range1(hoursinday)
-
-axiom H1 : in_range1(minutesinhour)
-
-axiom H2 : in_range1(secondsinminute)
-
-axiom H3 : in_range1(secondsinhour)
-
-axiom H4 : ((0 <= 86399) -> in_range1(clockoffset))
-
-axiom H5 : (result = heatingison)
-
-axiom H6 : (heatingison1 = of_int(0))
-
-axiom H7 : (result1 = clockoffset)
-
-axiom H8 : (clockoffset1 = 0)
-
-axiom H9 : (result2 = onofftime)
-
-axiom H10 : (onofftime1 = temp___268(0, 0, 0, 0))
-
-axiom H11 : ((0 <= 86399) -> in_range1(clockoffset2))
-
-axiom H12 : ((0 <= 5) -> in_range3(switchposition))
-
-axiom H13 : ((0 <= 86399) -> in_range1(timer))
-
-axiom H14 : in_range3(switchposition1)
-
-axiom H15 : (not (switchposition1 = 0))
-
-axiom H16 : (not (switchposition1 = 1))
-
-axiom H17 : ((2 <= switchposition1) and (switchposition1 <= 5))
-
-axiom H18 : (o1 = switchposition1)
-
-axiom H19 : (o2 = (onofftime2[o1]))
-
-axiom H20 : (o3 = to_rep(o2))
-
-axiom H21 : (result8 = timer)
-
-axiom H22 : (timer5 = o3)
-
-axiom H23 : ((o4 = currentmode(advancemode)) and in_range4(o4))
-
-axiom H24 : (((o4 = 0) -> (result9 = true)) and ((not (o4 = 0)) ->
-  (result9 = false)))
-
-axiom H25 : ((result9 = true) -> ((slowadvance3 = true) ->
-  (result10 = timer5)))
-
-axiom H26 : ((result9 = true) -> ((slowadvance3 = true) ->
-  (timer6 = mod((timer5 + 60), 86400))))
-
-axiom H27 : ((result9 = true) -> ((not (slowadvance3 = true)) ->
-  (timer6 = timer5)))
-
-axiom H28 : ((result9 = true) -> ((not (changetofastmode3 = true)) ->
-  (advancemode3 = advancemode)))
-
-axiom H29 : ((result9 = true) -> (changetoslowmode3 = changetoslowmode1))
-
-axiom H30 : ((result9 = true) -> (fastadvance3 = fastadvance1))
-
-axiom H31 : ((not (result9 = true)) -> ((fastadvance3 = true) ->
-  (result11 = timer5)))
-
-axiom H32 : ((not (result9 = true)) -> ((fastadvance3 = true) ->
-  (timer7 = mod((timer5 + 600), 86400))))
-
-axiom H33 : ((not (result9 = true)) -> ((not (fastadvance3 = true)) ->
-  (timer7 = timer5)))
-
-axiom H34 : ((not (result9 = true)) -> ((not (changetoslowmode3 = true)) ->
-  (advancemode4 = advancemode)))
-
-axiom H35 : ((not (result9 = true)) -> (advtimer3 = advtimer4))
-
-axiom H36 : ((not (result9 = true)) -> (advpressed3 = advpressed4))
-
-axiom H37 : ((not (result9 = true)) -> (advancemode3 = advancemode4))
-
-axiom H38 : ((not (result9 = true)) ->
-  (changetofastmode3 = changetofastmode1))
-
-axiom H39 : ((not (result9 = true)) -> (slowadvance3 = slowadvance1))
-
-axiom H40 : ((not (result9 = true)) -> (timer6 = timer7))
-
-axiom H41 : (to_rep(o5) = timer6)
-
- (* File "heatingsystem_dfa.adb", line 143, characters 0-0 *)
-goal WP_parameter_def : (2 <= switchposition1)
+axiom def_axiom :
+  (forall temp___313:int. forall temp___314:int. forall temp___315:int.
+  forall temp___316:int. ((((in_range1(temp___313) and
+  in_range1(temp___314)) and in_range1(temp___315)) and
+  in_range1(temp___316)) -> ((((to_rep((temp___311(temp___313, temp___314,
+  temp___315, temp___316)[2])) = temp___313) and
+  (to_rep((temp___311(temp___313, temp___314, temp___315,
+  temp___316)[3])) = temp___314)) and (to_rep((temp___311(temp___313,
+  temp___314, temp___315, temp___316)[4])) = temp___315)) and
+  (to_rep((temp___311(temp___313, temp___314, temp___315,
+  temp___316)[5])) = temp___316))))
+
+axiom def_axiom1 :
+  (forall temp___320:int. forall temp___321:int. forall temp___322:int.
+  forall temp___323:int. ((((in_range2(temp___320) and
+  in_range2(temp___321)) and in_range2(temp___322)) and
+  in_range2(temp___323)) -> ((((to_rep1((temp___318(temp___320, temp___321,
+  temp___322, temp___323)[0])) = temp___320) and
+  (to_rep1((temp___318(temp___320, temp___321, temp___322,
+  temp___323)[1])) = temp___321)) and (to_rep1((temp___318(temp___320,
+  temp___321, temp___322, temp___323)[2])) = temp___322)) and
+  (to_rep1((temp___318(temp___320, temp___321, temp___322,
+  temp___323)[3])) = temp___323))))
+
+ (* File "heatingsystem_dfa.adb", line 41, characters 0-0 *)
+goal WP_parameter_def :
+  (forall onofftime:(int,times) farray. forall clockoffset:int.
+  forall heatingison:bool. forall o:int. forall o1:times. forall o2:int.
+  forall o3:int. forall o4:times. forall result:bool.
+  forall heatingison1:bool. forall result1:int. forall clockoffset1:int.
+  forall result2:(int,times) farray. forall onofftime1:(int,times) farray.
+  forall onofftime2:(int,times) farray. forall clockoffset2:int.
+  forall switchposition:int. forall timer:int. forall slowadvance:bool.
+  forall fastadvance:bool. forall changetoslowmode:bool.
+  forall changetofastmode:bool. forall advancemode:us_private.
+  forall switchposition1:int. forall result3:int. forall timer1:int.
+  forall result4:bool. forall slowadvance1:bool. forall result5:int.
+  forall timer2:int. forall changetofastmode1:bool.
+  forall advpressed:us_private. forall advtimer:us_private.
+  forall advancemode1:us_private. forall fastadvance1:bool.
+  forall advtimer1:us_private. forall result6:int. forall timer3:int.
+  forall changetoslowmode1:bool. forall advpressed1:us_private.
+  forall advancemode2:us_private. (in_range1(hoursinday) ->
+  (in_range1(minutesinhour) -> (in_range1(secondsinminute) ->
+  (in_range1(secondsinhour) -> (((0 <= 86399) -> in_range1(clockoffset)) ->
+  (((result = heatingison) and (heatingison1 = of_int(0))) ->
+  (((result1 = clockoffset) and (clockoffset1 = 0)) ->
+  (((result2 = onofftime) and (onofftime1 = temp___311(0, 0, 0, 0))) ->
+  (((0 <= 86399) -> in_range1(clockoffset2)) -> (((0 <= 5) ->
+  in_range3(switchposition)) -> (((0 <= 86399) -> in_range1(timer)) ->
+  (in_range3(switchposition1) -> ((not (switchposition1 = 0)) ->
+  ((not (switchposition1 = 1)) -> (((((((2 <= switchposition1) and
+  (switchposition1 <= 5)) and (o = switchposition1)) and
+  (o1 = (onofftime2[o]))) and (o2 = to_rep(o1))) and ((result3 = timer) and
+  (timer1 = o2))) -> (((((o3 = currentmode(advancemode)) and
+  in_range4(o3)) and (((o3 = 0) and (result4 = true)) or ((not (o3 = 0)) and
+  (result4 = false)))) and (((result4 = true) and
+  (((((slowadvance1 = true) and ((result5 = timer1) and
+  (timer2 = mod((timer1 + 60), 86400)))) or ((not (slowadvance1 = true)) and
+  (timer2 = timer1))) and ((not (changetofastmode1 = true)) ->
+  (advancemode1 = advancemode))) and
+  ((changetoslowmode1 = changetoslowmode) and
+  (fastadvance1 = fastadvance)))) or ((not (result4 = true)) and
+  (((((fastadvance1 = true) and ((result6 = timer1) and
+  (timer3 = mod((timer1 + 600), 86400)))) or ((not (fastadvance1 = true)) and
+  (timer3 = timer1))) and ((not (changetoslowmode1 = true)) ->
+  (advancemode2 = advancemode))) and ((advtimer = advtimer1) and
+  ((advpressed = advpressed1) and ((advancemode1 = advancemode2) and
+  ((changetofastmode1 = changetofastmode) and
+  ((slowadvance1 = slowadvance) and (timer2 = timer3)))))))))) ->
+  ((to_rep(o4) = timer2) -> (2 <= switchposition1)))))))))))))))))))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -143,50 +143,20 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic r : int
-
-logic basic__min_ub__result : int
-
-logic result : int
-
-logic r1 : int
-
-logic result1 : int
-
-logic r2 : int
-
-logic result2 : int
-
-logic basic__min_ub__result1 : int
-
-logic basic__min_ub__result2 : int
-
-logic basic__min_ub__result3 : int
-
-logic r3 : int
-
-logic basic__min_ub__result4 : int
-
-logic r4 : int
-
-logic basic__min_ub__result5 : int
-
-logic result3 : int
-
-axiom H : in_range1(a)
-
-axiom H1 : in_range1(b)
-
-axiom H2 : ((((0 <= 255) -> in_range1(r)) and ((((a <= b) -> (r1 = a)) and
-  ((b <= a) -> (r1 = b))) and (((0 <= 255) -> in_range1(r1)) and
+ (* File "basic.adb", line 3, characters 0-0 *)
+goal WP_parameter_def :
+  (forall r:int. forall basic__min_ub__result:int. forall r1:int.
+  forall result:int. forall basic__min_ub__result1:int.
+  forall basic__min_ub__result2:int. forall basic__min_ub__result3:int.
+  forall r2:int. forall basic__min_ub__result4:int. forall r3:int.
+  forall basic__min_ub__result5:int.
+  (forall result1:int. ((in_range1(a) and (in_range1(b) and (((((0 <= 255) ->
+  in_range1(r)) and ((((a <= b) -> (r1 = a)) and ((b <= a) -> (r1 = b))) and
+  (((0 <= 255) -> in_range1(r1)) and
   (((basic__min_ub__result1 = basic__min_ub__result2) and
   (basic__min_ub__result3 = basic__min_ub__result1)) and
-  ((result2 = basic__min_ub__result) and
+  ((result = basic__min_ub__result) and
   (basic__min_ub__result1 = r1)))))) and
-  (((basic__min_ub__result4 = basic__min_ub__result2) and (r1 = r3)) and
-  ((basic__min_ub__result5 = basic__min_ub__result3) and (r4 = r1))))
-
-axiom H3 : (result3 = basic__min_ub__result4)
-
- (* File "basic.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (basic__min_ub__result4 <= a)
+  (((basic__min_ub__result4 = basic__min_ub__result2) and (r1 = r2)) and
+  ((basic__min_ub__result5 = basic__min_ub__result3) and (r3 = r1)))) and
+  (result1 = basic__min_ub__result4)))) -> (basic__min_ub__result4 <= a))))

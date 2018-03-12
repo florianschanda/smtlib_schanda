@@ -160,24 +160,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> (int,natural) farray
-
-axiom concat_def :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : natural, int -> (int,natural) farray
-
-axiom singleton_def :
-  (forall v:natural.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq3 : (int,natural) farray, int, int, (int,natural) farray, int,
   int -> bool
 
@@ -188,17 +170,17 @@ axiom bool_eq_def2 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq3(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq3(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -208,37 +190,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq3(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq3(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq3(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type us_split_fields = { rec__my_container_contains__cursor__index : natural
 }
@@ -345,57 +299,24 @@ logic p : natural
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic my_container_contains__element__result : int
-
-logic o : int
-
-logic o1 : natural
-
-logic o2 : int
-
-logic result : int
-
-logic my_container_contains__element__result1 : int
-
-logic my_container_contains__element__result2 : int
-
-logic my_container_contains__element__result3 : int
-
-logic my_container_contains__element__result4 : int
-
-logic my_container_contains__element__result5 : int
-
-logic result1 : int
-
-axiom H : (has_element(c, { us_split_fields1 = {
-  rec__my_container_contains__cursor__index = p } }) = true)
-
-axiom H1 :
-  (my_container_contains__element__result1 = my_container_contains__element__result2)
-
-axiom H2 :
-  (my_container_contains__element__result3 = my_container_contains__element__result1)
-
-axiom H3 : ((1 <= to_rep(p)) and (to_rep(p) <= 100))
-
-axiom H4 : (o = to_rep(p))
-
-axiom H5 : (o1 = (c[o]))
-
-axiom H6 : (o2 = to_rep(o1))
-
-axiom H7 : (result = my_container_contains__element__result)
-
-axiom H8 : (my_container_contains__element__result1 = o2)
-
-axiom H9 :
-  (my_container_contains__element__result4 = my_container_contains__element__result2)
-
-axiom H10 :
-  (my_container_contains__element__result5 = my_container_contains__element__result3)
-
-axiom H11 : (result1 = my_container_contains__element__result4)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (mem(c,
-  my_container_contains__element__result4) = true)
+goal WP_parameter_def :
+  (forall my_container_contains__element__result:int. forall o:int.
+  forall o1:natural. forall o2:int. forall result:int.
+  forall my_container_contains__element__result1:int.
+  forall my_container_contains__element__result2:int.
+  forall my_container_contains__element__result3:int.
+  forall my_container_contains__element__result4:int.
+  forall my_container_contains__element__result5:int.
+  (forall result1:int. (((has_element(c, { us_split_fields1 = {
+  rec__my_container_contains__cursor__index = p } }) = true) and
+  (((((my_container_contains__element__result1 = my_container_contains__element__result2) and
+  (my_container_contains__element__result3 = my_container_contains__element__result1)) and
+  ((((((1 <= to_rep(p)) and (to_rep(p) <= 100)) and (o = to_rep(p))) and
+  (o1 = (c[o]))) and (o2 = to_rep(o1))) and
+  ((result = my_container_contains__element__result) and
+  (my_container_contains__element__result1 = o2)))) and
+  ((my_container_contains__element__result4 = my_container_contains__element__result2) and
+  (my_container_contains__element__result5 = my_container_contains__element__result3))) and
+  (result1 = my_container_contains__element__result4))) -> (mem(c,
+  my_container_contains__element__result4) = true))))

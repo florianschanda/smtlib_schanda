@@ -109,37 +109,10 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : int
-
-logic y : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic x1 : int
-
-logic result1 : int
-
-logic y1 : int
-
-axiom H : in_range(o)
-
-axiom H1 : (result = x)
-
-axiom H2 : (x1 = o)
-
-axiom H3 : in_range(x1)
-
-axiom H4 : in_range(o1)
-
-axiom H5 : (result1 = y)
-
-axiom H6 : (y1 = o1)
-
-axiom H7 : in_range(y1)
-
  (* File "main.adb", line 2, characters 0-0 *)
-goal WP_parameter_def : (x1 = y1)
+goal WP_parameter_def :
+  (forall x:int. forall y:int. forall o:int. forall o1:int.
+  forall result:int. forall x1:int. forall result1:int. forall y1:int.
+  ((in_range(o) and ((result = x) and (x1 = o))) -> (in_range(x1) ->
+  ((in_range(o1) and ((result1 = y) and (y1 = o1))) -> (in_range(y1) ->
+  (x1 = y1))))))

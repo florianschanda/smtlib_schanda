@@ -215,7 +215,5 @@ function r__ref___projection(a: r__ref) : us_rep = (a).r__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : int
-
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def : in_range(pedantic__r__f1__last__bit)

@@ -745,7 +745,15 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type score_t
 
-predicate in_range2(x: t) = (ule(of_int(0), x) and ule(x, of_int(99999)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 99999)
+
+predicate in_range2(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 99999))
 
@@ -777,21 +785,7 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic level_nbr : t
-
-logic speed_up : bool
-
-logic interval : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic interval1 : int
-
-axiom H : in_range2(level_nbr)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(((11 - mod(tqtint(level_nbr), 11)) * 50))
+goal WP_parameter_def :
+  (forall level_nbr:t. (in_range2(level_nbr) ->
+  in_range(((11 - mod(tqtint(level_nbr), 11)) * 50))))

@@ -135,24 +135,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,unsigned_byte) farray, int, int,
-  (int,unsigned_byte) farray, int, int -> (int,unsigned_byte) farray
-
-axiom concat_def :
-  (forall a:(int,unsigned_byte) farray. forall b:(int,unsigned_byte) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : unsigned_byte, int -> (int,unsigned_byte) farray
-
-axiom singleton_def :
-  (forall v:unsigned_byte.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq2 : (int,unsigned_byte) farray, int, int,
   (int,unsigned_byte) farray, int, int -> bool
 
@@ -164,17 +146,17 @@ axiom bool_eq_def1 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_144:int. ((((a__first <= temp___idx_144) and
-  (temp___idx_144 <= a__last)) and
-  (to_rep((a[temp___idx_144])) = to_rep((b[((b__first - a__first) + temp___idx_144)])))) or
-  (not ((a__first <= temp___idx_144) and (temp___idx_144 <= a__last)))))) ->
+  (forall temp___idx_166:int. ((((a__first <= temp___idx_166) and
+  (temp___idx_166 <= a__last)) and
+  (to_rep((a[temp___idx_166])) = to_rep((b[((b__first - a__first) + temp___idx_166)])))) or
+  (not ((a__first <= temp___idx_166) and (temp___idx_166 <= a__last)))))) ->
   (bool_eq2(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_144:int. (((a__first <= temp___idx_144) and
-  (temp___idx_144 <= a__last)) ->
-  (to_rep((a[temp___idx_144])) = to_rep((b[((b__first - a__first) + temp___idx_144)]))))))) ->
+  (forall temp___idx_166:int. (((a__first <= temp___idx_166) and
+  (temp___idx_166 <= a__last)) ->
+  (to_rep((a[temp___idx_166])) = to_rep((b[((b__first - a__first) + temp___idx_166)]))))))) ->
   (bool_eq2(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -184,60 +166,29 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_144:int. (((a__first <= temp___idx_144) and
-  (temp___idx_144 <= a__last)) ->
-  (to_rep((a[temp___idx_144])) = to_rep((b[((b__first - a__first) + temp___idx_144)])))))))))
-
-logic compare : (int,unsigned_byte) farray, int, int,
-  (int,unsigned_byte) farray, int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,unsigned_byte) farray. forall b:(int,unsigned_byte) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq2(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,unsigned_byte) farray. forall b:(int,unsigned_byte) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq2(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,unsigned_byte) farray. forall b:(int,unsigned_byte) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq2(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_166:int. (((a__first <= temp___idx_166) and
+  (temp___idx_166 <= a__last)) ->
+  (to_rep((a[temp___idx_166])) = to_rep((b[((b__first - a__first) + temp___idx_166)])))))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic temp___430 : int, int, int -> (int,unsigned_byte) farray
+logic temp___479 : int, int, int -> (int,unsigned_byte) farray
 
 axiom def_axiom :
-  (forall temp___432:int. forall temp___433:int. forall temp___434:int.
-  (forall temp___435:int. (((temp___435 = 7) -> ((temp___430(temp___432,
-  temp___433, temp___434)[temp___435]) = of_rep(temp___433))) and
-  ((not (temp___435 = 7)) -> (((temp___435 = 2) -> ((temp___430(temp___432,
-  temp___433, temp___434)[temp___435]) = of_rep(temp___432))) and
-  ((not (temp___435 = 2)) -> ((temp___430(temp___432, temp___433,
-  temp___434)[temp___435]) = of_rep(temp___434))))))))
+  (forall temp___481:int. forall temp___482:int. forall temp___483:int.
+  (((in_range(temp___481) and in_range(temp___482)) and
+  in_range(temp___483)) ->
+  (forall temp___484:int. (((temp___484 = 7) ->
+  (to_rep((temp___479(temp___481, temp___482,
+  temp___483)[temp___484])) = temp___482)) and ((not (temp___484 = 7)) ->
+  (((temp___484 = 2) -> (to_rep((temp___479(temp___481, temp___482,
+  temp___483)[temp___484])) = temp___481)) and ((not (temp___484 = 2)) ->
+  (to_rep((temp___479(temp___481, temp___482,
+  temp___483)[temp___484])) = temp___483))))))))
 
-logic x : (int,unsigned_byte) farray
-
-logic result : (int,unsigned_byte) farray
-
-logic x1 : (int,unsigned_byte) farray
-
-axiom H : (result = x)
-
-axiom H1 : (x1 = temp___430(2, 10, 8))
-
- (* File "array_aggregates.adb", line 111, characters 0-0 *)
-goal WP_parameter_def : (to_rep((x1[7])) = 2)
+ (* File "array_aggregates.adb", line 127, characters 0-0 *)
+goal WP_parameter_def :
+  (forall x:(int,unsigned_byte) farray.
+  forall result:(int,unsigned_byte) farray.
+  forall x1:(int,unsigned_byte) farray. (((result = x) and
+  (x1 = temp___479(2, 10, 8))) -> (to_rep((x1[7])) = 2)))

@@ -286,21 +286,5 @@ logic x1 : integer
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic my_ordered_sets__get_f__result : int
-
-logic o : int
-
-logic result : int
-
-logic my_ordered_sets__get_f__result1 : int
-
-logic my_ordered_sets__get_f__result2 : int
-
-logic my_ordered_sets__get_f__result3 : int
-
-logic my_ordered_sets__get_f__result4 : int
-
-logic my_ordered_sets__get_f__result5 : int
-
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def : in_range1(to_rep(x))

@@ -594,7 +594,15 @@ axiom bv_max_to_uint :
 
 type t1
 
-predicate in_range(x: t) = (ule(of_int(0), x) and ule(x, of_int(15)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 15)
+
+predicate in_range(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 15))
 
@@ -653,37 +661,14 @@ logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic p__id__result : t
-
-logic result : t
-
-logic p__id__result1 : t
-
-logic p__id__result2 : t
-
-logic p__id__result3 : t
-
-logic p__id__result4 : t
-
-logic p__id__result5 : t
-
-logic result1 : t
-
-axiom H : in_range(x)
-
-axiom H1 : (p__id__result1 = p__id__result2)
-
-axiom H2 : (p__id__result3 = p__id__result1)
-
-axiom H3 : (result = p__id__result)
-
-axiom H4 : (p__id__result1 = x)
-
-axiom H5 : (p__id__result4 = p__id__result2)
-
-axiom H6 : (p__id__result5 = p__id__result3)
-
-axiom H7 : (result1 = p__id__result4)
-
  (* File "p.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (p__id__result4 = x)
+goal WP_parameter_def :
+  (forall p__id__result:t. forall result:t. forall p__id__result1:t.
+  forall p__id__result2:t. forall p__id__result3:t. forall p__id__result4:t.
+  forall p__id__result5:t.
+  (forall result1:t. ((in_range(x) and
+  (((((p__id__result1 = p__id__result2) and
+  (p__id__result3 = p__id__result1)) and ((result = p__id__result) and
+  (p__id__result1 = x))) and ((p__id__result4 = p__id__result2) and
+  (p__id__result5 = p__id__result3))) and (result1 = p__id__result4))) ->
+  (p__id__result4 = x))))

@@ -231,7 +231,5 @@ logic self__1 : integer
 
 logic self__2 : integer
 
-logic temp___1548 : bool
-
  (* File "p.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : (temp___1548 = false)
+goal WP_parameter_def : (forall temp___1734:bool. (temp___1734 = false))

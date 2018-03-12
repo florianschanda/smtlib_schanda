@@ -105,13 +105,5 @@ type value_kind__ref = { value_kind__content : value_kind
 function value_kind__ref___projection(a: value_kind__ref) : value_kind =
   (a).value_kind__content
 
-logic us : int
-
-logic us1 : int
-
-logic us2 : int
-
-logic temp___kind_185 : int
-
  (* File "foo.adb", line 33, characters 0-0 *)
 goal WP_parameter_def : in_range(0)

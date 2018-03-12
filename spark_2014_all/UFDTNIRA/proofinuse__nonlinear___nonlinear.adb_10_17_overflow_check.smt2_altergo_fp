@@ -255,31 +255,8 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic res : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic result : int
-
-logic res1 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : in_range1(y)
-
-axiom H2 : in_range1(z)
-
-axiom H3 : ((0 <= 2147483647) -> in_range1(res))
-
-axiom H4 : (x <= y)
-
-axiom H5 : (y <  z)
-
-axiom H6 : (y <  32768)
-
  (* File "nonlinear.ads", line 23, characters 0-0 *)
-goal WP_parameter_def : in_range((x * y))
+goal WP_parameter_def :
+  (forall res:int. (in_range1(x) -> (in_range1(y) -> (in_range1(z) ->
+  (((0 <= 2147483647) -> in_range1(res)) -> ((x <= y) -> ((y <  z) ->
+  ((y <  32768) -> in_range((x * y))))))))))

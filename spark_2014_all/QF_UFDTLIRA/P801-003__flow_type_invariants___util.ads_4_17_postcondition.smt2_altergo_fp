@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -85,40 +85,21 @@ logic b : bool
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic util__exclusive_or__result : bool
-
-logic result : bool
-
-logic util__exclusive_or__result1 : bool
-
-logic util__exclusive_or__result2 : bool
-
-logic util__exclusive_or__result3 : bool
-
-logic util__exclusive_or__result4 : bool
-
-logic util__exclusive_or__result5 : bool
-
-logic result1 : bool
-
-axiom H : (util__exclusive_or__result1 = util__exclusive_or__result2)
-
-axiom H1 : (util__exclusive_or__result3 = util__exclusive_or__result1)
-
-axiom H2 : (result = util__exclusive_or__result)
-
-axiom H3 : (util__exclusive_or__result1 = match_bool(match_bool(a, true, b),
-  match_bool(match_bool(a, b, false), false, true), false))
-
-axiom H4 : (util__exclusive_or__result4 = util__exclusive_or__result2)
-
-axiom H5 : (util__exclusive_or__result5 = util__exclusive_or__result3)
-
-axiom H6 : (result1 = util__exclusive_or__result4)
-
-axiom H7 : (a = true)
-
-axiom H8 : (util__exclusive_or__result4 = true)
-
  (* File "util.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (not (b = true))
+goal WP_parameter_def :
+  (forall util__exclusive_or__result:bool. forall result:bool.
+  forall util__exclusive_or__result1:bool.
+  forall util__exclusive_or__result2:bool.
+  forall util__exclusive_or__result3:bool.
+  forall util__exclusive_or__result4:bool.
+  forall util__exclusive_or__result5:bool.
+  (forall result1:bool.
+  ((((((util__exclusive_or__result1 = util__exclusive_or__result2) and
+  (util__exclusive_or__result3 = util__exclusive_or__result1)) and
+  ((result = util__exclusive_or__result) and
+  (util__exclusive_or__result1 = match_bool(match_bool(a, true, b),
+  match_bool(match_bool(a, b, false), false, true), false)))) and
+  ((util__exclusive_or__result4 = util__exclusive_or__result2) and
+  (util__exclusive_or__result5 = util__exclusive_or__result3))) and
+  (result1 = util__exclusive_or__result4)) -> ((a = true) ->
+  ((util__exclusive_or__result4 = true) -> (not (b = true)))))))

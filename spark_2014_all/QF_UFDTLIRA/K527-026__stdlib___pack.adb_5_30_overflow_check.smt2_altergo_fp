@@ -137,13 +137,7 @@ logic c : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic col_count : int
-
-logic o : int
-
-axiom H : in_range1(col_count)
-
-axiom H1 : in_range1(c)
-
  (* File "a-textio.ads", line 68, characters 0-0 *)
-goal WP_parameter_def : in_range((col_count + c))
+goal WP_parameter_def :
+  (forall col_count:int. (in_range1(col_count) -> (in_range1(c) ->
+  in_range((col_count + c)))))

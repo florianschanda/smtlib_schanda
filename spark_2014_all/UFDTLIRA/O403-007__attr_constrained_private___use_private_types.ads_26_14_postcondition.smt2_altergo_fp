@@ -367,44 +367,20 @@ function d_holder_0__ref___projection(a: d_holder_0__ref) : us_rep1 =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic s__split_fields : natural
-
-logic s__split_fields1 : us_main_type
-
-logic s__split_fields2 : bool
-
-logic private_types__private_reinit__s__discrs : natural
-
-logic private_types__private_reinit__s__fields : us_main_type
-
-logic result : natural
-
-logic result1 : us_main_type
-
-logic result2 : bool
-
-logic s__split_fields3 : natural
-
-logic s__split_fields4 : us_main_type
-
-logic s__split_fields5 : bool
-
-logic s__split_fields6 : natural
-
-logic s__split_fields7 : us_main_type
-
-logic s__split_fields8 : bool
-
-logic s__split_fields9 : natural
-
-logic s__split_fields10 : us_main_type
-
-logic s__split_fields11 : bool
-
-axiom H : (((0 = to_rep(s__split_fields)) and (s__split_fields2 = true)) and
-  (s__split_fields2 = true))
-
-axiom H1 : (((s__split_fields2 = true) and
+ (* File "use_private_types.ads", line 37, characters 0-0 *)
+goal WP_parameter_def :
+  (forall s__split_fields:natural. forall s__split_fields1:us_main_type.
+  forall s__split_fields2:bool.
+  forall private_types__private_reinit__s__discrs:natural.
+  forall private_types__private_reinit__s__fields:us_main_type.
+  forall result:natural. forall result1:us_main_type. forall result2:bool.
+  forall s__split_fields3:natural. forall s__split_fields4:us_main_type.
+  forall s__split_fields5:bool. forall s__split_fields6:natural.
+  forall s__split_fields7:us_main_type. forall s__split_fields8:bool.
+  forall s__split_fields9:natural. forall s__split_fields10:us_main_type.
+  forall s__split_fields11:bool. (((((0 = to_rep(s__split_fields)) and
+  (s__split_fields2 = true)) and (s__split_fields2 = true)) and
+  (((s__split_fields2 = true) and
   ((to_rep(private_types__private_reinit__s__discrs) = 0) and
   ((((result = s__split_fields) and ((result1 = s__split_fields1) and
   (result2 = s__split_fields2))) and
@@ -414,10 +390,12 @@ axiom H1 : (((s__split_fields2 = true) and
   (s__split_fields = private_types__private_reinit__s__discrs))))) and
   (((s__split_fields6 = s__split_fields3) and
   ((s__split_fields7 = s__split_fields4) and
-  (s__split_fields8 = s__split_fields5))) and
-  ((s__split_fields9 = s__split_fields3) and
-  ((s__split_fields10 = s__split_fields4) and
-  (s__split_fields11 = s__split_fields5)))))
-
- (* File "use_private_types.ads", line 37, characters 0-0 *)
-goal WP_parameter_def : (to_rep(s__split_fields6) = 0)
+  (s__split_fields8 = s__split_fields5))) and ({
+  rec__use_private_types__d_holder_0__content = { us_split_discrs1 = {
+  rec__private_types__simple__d = s__split_fields9 }; us_split_fields1 = {
+  rec__private_types__simple = s__split_fields10 }; attr__constrained =
+  s__split_fields11 } } = { rec__use_private_types__d_holder_0__content = {
+  us_split_discrs1 = { rec__private_types__simple__d = s__split_fields3 };
+  us_split_fields1 = { rec__private_types__simple = s__split_fields4 };
+  attr__constrained = s__split_fields5 } })))) ->
+  (to_rep(s__split_fields6) = 0)))

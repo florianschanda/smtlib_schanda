@@ -195,12 +195,6 @@ function vector__ref___projection(a: vector__ref) : us_rep =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -212,6 +206,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -515,24 +515,6 @@ axiom get__post_axiom :
   (forall position:int [get(container, position)]. ((in_range5(position) and
   ((1 <= position) and (position <= (0 + length1(container))))) ->
   in_range6(get(container, position)))))
-
-logic v__split_fields : us_main_type
-
-logic us : int
-
-logic bounded__vect__append__2__container__fields : us_main_type
-
-logic result : us_main_type
-
-logic v__split_fields1 : us_main_type
-
-logic bounded__vect__append__2__container__fields1 : us_main_type
-
-logic result1 : us_main_type
-
-logic v__split_fields2 : us_main_type
-
-logic bounded__vect__append__2__container__fields2 : us_main_type
 
  (* File "a-cofove.ads", line 807, characters 0-0 *)
 goal WP_parameter_def : in_range(2)

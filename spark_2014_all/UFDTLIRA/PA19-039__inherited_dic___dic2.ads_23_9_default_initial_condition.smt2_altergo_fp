@@ -137,12 +137,6 @@ logic is_ok__function_guard1 : bool, int, us_rep -> prop
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -154,6 +148,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -245,15 +245,9 @@ axiom dic2__child__compat_axiom1 :
   rec__dic2__nested__parent = obj; rec__ext__ = obj1 }; attr__tag = obj2
   }))))
 
-logic temp___158 : us_main_type
-
-logic temp___1581 : us_private
-
-logic temp___1582 : int
-
-axiom H : (temp___1582 = us_tag)
-
  (* File "dic2.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : (is_ok({ us_split_fields1 = {
-  rec__dic2__nested__parent = temp___158; rec__ext__ = temp___1581 };
-  attr__tag = temp___1582 }) = true)
+goal WP_parameter_def :
+  (forall temp___174:us_main_type. forall temp___1741:us_private.
+  forall temp___1742:int. ((temp___1742 = us_tag) -> (is_ok({
+  us_split_fields1 = { rec__dic2__nested__parent = temp___174; rec__ext__ =
+  temp___1741 }; attr__tag = temp___1742 }) = true)))

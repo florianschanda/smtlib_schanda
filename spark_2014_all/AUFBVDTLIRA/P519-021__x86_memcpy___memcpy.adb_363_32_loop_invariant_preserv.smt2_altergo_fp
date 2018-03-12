@@ -1275,12 +1275,6 @@ axiom toBig_to_uint : (forall x:t. (tqtint(x) = tqtint1(toBig(x))))
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq3 : bool, bool -> bool
-
-axiom bool_eq_def3 :
-  (forall x:bool. forall y:bool [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
-
 logic to_int3 : bool -> int
 
 axiom to_int_def3 :
@@ -1292,6 +1286,12 @@ logic of_int3 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int3(i)]. (((i = 0) -> (of_int3(i) = false)) and
   ((not (i = 0)) -> (of_int3(i) = true))))
+
+logic bool_eq3 : bool, bool -> bool
+
+axiom bool_eq_def3 :
+  (forall x:bool. forall y:bool [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1416,24 +1416,6 @@ axiom slide_def :
   (forall i:t2 [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[sub2(i, sub2(new_first, old_first))]))))))
 
-logic concat : (t2,unsigned8) farray, t2, t2, (t2,unsigned8) farray, t2,
-  t2 -> (t2,unsigned8) farray
-
-axiom concat_def :
-  (forall a:(t2,unsigned8) farray. forall b:(t2,unsigned8) farray.
-  (forall a_first:t2. forall a_last:t2. forall b_first:t2. forall b_last:t2.
-  (forall i:t2 [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((ule2(a_first, i) and ule2(i, a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and (ugt2(i, a_last) -> ((concat(a,
-  a_first, a_last, b, b_first, b_last)[i]) = (b[add2(sub2(i, a_last),
-  sub2(b_first, one2))])))))))
-
-logic singleton : unsigned8, t2 -> (t2,unsigned8) farray
-
-axiom singleton_def :
-  (forall v:unsigned8.
-  (forall i:t2 [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq7 : (t2,unsigned8) farray, t2, t2, (t2,unsigned8) farray, t2,
   t2 -> bool
 
@@ -1444,19 +1426,19 @@ axiom bool_eq_def6 :
   a__last) and (ule2(b__first, b__last) and (sub2(a__last,
   a__first) = sub2(b__last, b__first)))) or ((not ule2(a__first,
   a__last)) and ugt2(b__first, b__last))) and
-  (forall temp___idx_132:t2. (((ule2(a__first, temp___idx_132) and
-  ule2(temp___idx_132, a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[add2(sub2(b__first, a__first),
-  temp___idx_132)])))) or (not (ule2(a__first, temp___idx_132) and
-  ule2(temp___idx_132, a__last)))))) -> (bool_eq7(a, a__first, a__last, b,
+  (forall temp___idx_154:t2. (((ule2(a__first, temp___idx_154) and
+  ule2(temp___idx_154, a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[add2(sub2(b__first, a__first),
+  temp___idx_154)])))) or (not (ule2(a__first, temp___idx_154) and
+  ule2(temp___idx_154, a__last)))))) -> (bool_eq7(a, a__first, a__last, b,
   b__first, b__last) = true)) and ((not (((ule2(a__first, a__last) ->
   (ule2(b__first, b__last) and (sub2(a__last, a__first) = sub2(b__last,
   b__first)))) and ((not ule2(a__first, a__last)) -> ugt2(b__first,
   b__last))) and
-  (forall temp___idx_132:t2. ((ule2(a__first, temp___idx_132) and
-  ule2(temp___idx_132, a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[add2(sub2(b__first, a__first),
-  temp___idx_132)]))))))) -> (bool_eq7(a, a__first, a__last, b, b__first,
+  (forall temp___idx_154:t2. ((ule2(a__first, temp___idx_154) and
+  ule2(temp___idx_154, a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[add2(sub2(b__first, a__first),
+  temp___idx_154)]))))))) -> (bool_eq7(a, a__first, a__last, b, b__first,
   b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1466,40 +1448,10 @@ axiom bool_eq_rev :
   a__last) = true) -> (((ule2(a__first, a__last) -> (ule2(b__first,
   b__last) and (sub2(a__last, a__first) = sub2(b__last, b__first)))) and
   ((not ule2(a__first, a__last)) -> ugt2(b__first, b__last))) and
-  (forall temp___idx_132:t2. ((ule2(a__first, temp___idx_132) and
-  ule2(temp___idx_132, a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[add2(sub2(b__first, a__first),
-  temp___idx_132)])))))))))
-
-logic compare : (t2,unsigned8) farray, t2, t2, (t2,unsigned8) farray, t2,
-  t2 -> int
-
-axiom compare_def_eq :
-  (forall a:(t2,unsigned8) farray. forall b:(t2,unsigned8) farray.
-  (forall a_first:t2. forall a_last:t2. forall b_first:t2. forall b_last:t2
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) = 0) <-> (bool_eq7(a, a_first, a_last, b,
-  b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(t2,unsigned8) farray. forall b:(t2,unsigned8) farray.
-  (forall a_first:t2. forall a_last:t2. forall b_first:t2. forall b_last:t2
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
-  a_last, b, b_first, b_last) <  0) <->
-  (exists i:t2. exists j:t2. (ule2(i, a_last) and (ult2(j, b_last) and
-  ((bool_eq7(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  (ult2(i, a_last) and ult(to_rep((a[add2(i, one2)])), to_rep((b[add2(j,
-  one2)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(t2,unsigned8) farray. forall b:(t2,unsigned8) farray.
-  (forall a_first:t2. forall a_last:t2. forall b_first:t2. forall b_last:t2
-  [compare(a, a_first, a_last, b, b_first, b_last)]. ((0 <  compare(a,
-  a_first, a_last, b, b_first, b_last)) <->
-  (exists i:t2. exists j:t2. (ule2(i, b_last) and (ult2(j, a_last) and
-  ((bool_eq7(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  (ult2(i, b_last) and ugt(to_rep((a[add2(j, one2)])), to_rep((b[add2(i,
-  one2)]))))))))))))
+  (forall temp___idx_154:t2. ((ule2(a__first, temp___idx_154) and
+  ule2(temp___idx_154, a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[add2(sub2(b__first, a__first),
+  temp___idx_154)])))))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -1513,33 +1465,58 @@ logic inrange64 : t2, t2, t2 -> bool
 
 logic inrange64__function_guard : bool, t2, t2, t2 -> prop
 
+logic rliteral1 : t2
+
+axiom rliteral_axiom1 : (tqtint2(rliteral1) = 18446744073709551615)
+
+logic rliteral2 : t2
+
+axiom rliteral_axiom2 : (tqtint2(rliteral2) = 1)
+
+logic rliteral3 : t2
+
+axiom rliteral_axiom3 : (tqtint2(rliteral3) = 2)
+
 axiom inrange64__post_axiom :
   (forall var:t2. forall bottom:t2. forall range_size:t2 [inrange64(var,
   bottom, range_size)]. (((inrange64(var, bottom, range_size) = true) ->
-  ((ule2(bottom, add2(sub2(of_int2(18446744073709551615), range_size),
-  of_int2(1))) -> (ule2(bottom, var) and ule2(var, add2(bottom,
-  sub2(range_size, of_int2(1)))))) and ((not ule2(bottom,
-  add2(sub2(of_int2(18446744073709551615), range_size), of_int2(1)))) ->
-  ((ule2(bottom, var) and ule2(var, of_int2(18446744073709551615))) or
-  ule2(var, sub2(sub2(range_size, sub2(of_int2(18446744073709551615),
-  bottom)), of_int2(2))))))) and (((ule2(bottom,
-  add2(sub2(of_int2(18446744073709551615), range_size), of_int2(1))) and
+  ((ule2(bottom, add2(sub2(rliteral1, range_size), rliteral2)) ->
   (ule2(bottom, var) and ule2(var, add2(bottom, sub2(range_size,
-  of_int2(1)))))) or ((not ule2(bottom,
-  add2(sub2(of_int2(18446744073709551615), range_size), of_int2(1)))) and
-  ((ule2(bottom, var) and ule2(var, of_int2(18446744073709551615))) or
-  ule2(var, sub2(sub2(range_size, sub2(of_int2(18446744073709551615),
-  bottom)), of_int2(2)))))) -> (inrange64(var, bottom, range_size) = true))))
+  rliteral2))))) and ((not ule2(bottom, add2(sub2(rliteral1, range_size),
+  rliteral2))) -> ((ule2(bottom, var) and ule2(var, rliteral1)) or ule2(var,
+  sub2(sub2(range_size, sub2(rliteral1, bottom)), rliteral3)))))) and
+  (((ule2(bottom, add2(sub2(rliteral1, range_size), rliteral2)) and
+  (ule2(bottom, var) and ule2(var, add2(bottom, sub2(range_size,
+  rliteral2))))) or ((not ule2(bottom, add2(sub2(rliteral1, range_size),
+  rliteral2))) and ((ule2(bottom, var) and ule2(var, rliteral1)) or ule2(var,
+  sub2(sub2(range_size, sub2(rliteral1, bottom)), rliteral3))))) ->
+  (inrange64(var, bottom, range_size) = true))))
 
 logic insaferegion64 : t2, t2 -> bool
 
 logic insaferegion64__function_guard : bool, t2, t2 -> prop
 
+logic rliteral4 : t2
+
+axiom rliteral_axiom4 : (tqtint2(rliteral4) = 14987979559889010687)
+
+logic rliteral5 : t2
+
+axiom rliteral_axiom5 : (tqtint2(rliteral5) = 8)
+
+logic rliteral6 : t2
+
+axiom rliteral_axiom6 : (tqtint2(rliteral6) = 4611686018427387903)
+
+logic rliteral7 : t2
+
+axiom rliteral_axiom7 : (tqtint2(rliteral7) = 0)
+
 axiom insaferegion64__post_axiom :
   (forall var:t2. forall rsp:t2 [insaferegion64(var, rsp)].
-  ((insaferegion64(var, rsp) = true) <-> ((ule2(var,
-  of_int2(14987979559889010687)) and uge2(var, add2(rsp, of_int2(8)))) or
-  (ule2(var, of_int2(4611686018427387903)) and uge2(var, of_int2(0))))))
+  ((insaferegion64(var, rsp) = true) <-> ((ule2(var, rliteral4) and uge2(var,
+  add2(rsp, rliteral5))) or (ule2(var, rliteral6) and uge2(var,
+  rliteral7)))))
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
@@ -1585,40 +1562,115 @@ logic toBig1 : t -> t2
 
 logic toSmall1 : t2 -> t
 
-logic rliteral1 : t2
+logic rliteral8 : t2
 
-axiom rliteral_axiom1 : (tqtint2(rliteral1) = 255)
+axiom rliteral_axiom8 : (tqtint2(rliteral8) = 255)
 
 axiom toSmall_to_uint1 :
-  (forall x:t2. (ule2(x, rliteral1) -> (tqtint2(x) = tqtint(toSmall1(x)))))
+  (forall x:t2. (ule2(x, rliteral8) -> (tqtint2(x) = tqtint(toSmall1(x)))))
 
 axiom toBig_to_uint1 : (forall x:t. (tqtint(x) = tqtint2(toBig1(x))))
+
+logic rliteral9 : t2
+
+axiom rliteral_axiom9 : (tqtint2(rliteral9) = 255)
+
+logic rliteral10 : t2
+
+axiom rliteral_axiom10 : (tqtint2(rliteral10) = 65280)
+
+logic rliteral11 : t2
+
+axiom rliteral_axiom11 : (tqtint2(rliteral11) = 256)
+
+logic rliteral12 : t2
+
+axiom rliteral_axiom12 : (tqtint2(rliteral12) = 16711680)
+
+logic rliteral13 : t2
+
+axiom rliteral_axiom13 : (tqtint2(rliteral13) = 65536)
+
+logic rliteral14 : t2
+
+axiom rliteral_axiom14 : (tqtint2(rliteral14) = 4278190080)
+
+logic rliteral15 : t2
+
+axiom rliteral_axiom15 : (tqtint2(rliteral15) = 3)
+
+logic rliteral16 : t2
+
+axiom rliteral_axiom16 : (tqtint2(rliteral16) = 16777216)
+
+logic rliteral17 : t2
+
+axiom rliteral_axiom17 : (tqtint2(rliteral17) = 1095216660480)
+
+logic rliteral18 : t2
+
+axiom rliteral_axiom18 : (tqtint2(rliteral18) = 4)
+
+logic rliteral19 : t2
+
+axiom rliteral_axiom19 : (tqtint2(rliteral19) = 4294967296)
+
+logic rliteral20 : t2
+
+axiom rliteral_axiom20 : (tqtint2(rliteral20) = 280375465082880)
+
+logic rliteral21 : t2
+
+axiom rliteral_axiom21 : (tqtint2(rliteral21) = 5)
+
+logic rliteral22 : t2
+
+axiom rliteral_axiom22 : (tqtint2(rliteral22) = 1099511627776)
+
+logic rliteral23 : t2
+
+axiom rliteral_axiom23 : (tqtint2(rliteral23) = 71776119061217280)
+
+logic rliteral24 : t2
+
+axiom rliteral_axiom24 : (tqtint2(rliteral24) = 6)
+
+logic rliteral25 : t2
+
+axiom rliteral_axiom25 : (tqtint2(rliteral25) = 281474976710656)
+
+logic rliteral26 : t2
+
+axiom rliteral_axiom26 : (tqtint2(rliteral26) = 18374686479671623680)
+
+logic rliteral27 : t2
+
+axiom rliteral_axiom27 : (tqtint2(rliteral27) = 7)
+
+logic rliteral28 : t2
+
+axiom rliteral_axiom28 : (tqtint2(rliteral28) = 72057594037927936)
 
 axiom readmem64__post_axiom :
   (forall addr:t2.
   (forall x86__memory:(t2,unsigned8) farray [readmem64(addr, x86__memory)].
   ((((((((bw_and2(readmem64(addr, x86__memory),
-  of_int2(255)) = toBig1(to_rep((x86__memory[addr])))) and
+  rliteral9) = toBig1(to_rep((x86__memory[addr])))) and
   (bw_and2(readmem64(addr, x86__memory),
-  of_int2(65280)) = mul2(toBig1(to_rep((x86__memory[add2(addr,
-  of_int2(1))]))), of_int2(256)))) and (bw_and2(readmem64(addr, x86__memory),
-  of_int2(16711680)) = mul2(toBig1(to_rep((x86__memory[add2(addr,
-  of_int2(2))]))), of_int2(65536)))) and (bw_and2(readmem64(addr,
-  x86__memory),
-  of_int2(4278190080)) = mul2(toBig1(to_rep((x86__memory[add2(addr,
-  of_int2(3))]))), of_int2(16777216)))) and (bw_and2(readmem64(addr,
-  x86__memory),
-  of_int2(1095216660480)) = mul2(toBig1(to_rep((x86__memory[add2(addr,
-  of_int2(4))]))), of_int2(4294967296)))) and (bw_and2(readmem64(addr,
-  x86__memory),
-  of_int2(280375465082880)) = mul2(toBig1(to_rep((x86__memory[add2(addr,
-  of_int2(5))]))), of_int2(1099511627776)))) and (bw_and2(readmem64(addr,
-  x86__memory),
-  of_int2(71776119061217280)) = mul2(toBig1(to_rep((x86__memory[add2(addr,
-  of_int2(6))]))), of_int2(281474976710656)))) and (bw_and2(readmem64(addr,
-  x86__memory),
-  of_int2(18374686479671623680)) = mul2(toBig1(to_rep((x86__memory[add2(addr,
-  of_int2(7))]))), of_int2(72057594037927936))))))
+  rliteral10) = mul2(toBig1(to_rep((x86__memory[add2(addr, rliteral2)]))),
+  rliteral11))) and (bw_and2(readmem64(addr, x86__memory),
+  rliteral12) = mul2(toBig1(to_rep((x86__memory[add2(addr, rliteral3)]))),
+  rliteral13))) and (bw_and2(readmem64(addr, x86__memory),
+  rliteral14) = mul2(toBig1(to_rep((x86__memory[add2(addr, rliteral15)]))),
+  rliteral16))) and (bw_and2(readmem64(addr, x86__memory),
+  rliteral17) = mul2(toBig1(to_rep((x86__memory[add2(addr, rliteral18)]))),
+  rliteral19))) and (bw_and2(readmem64(addr, x86__memory),
+  rliteral20) = mul2(toBig1(to_rep((x86__memory[add2(addr, rliteral21)]))),
+  rliteral22))) and (bw_and2(readmem64(addr, x86__memory),
+  rliteral23) = mul2(toBig1(to_rep((x86__memory[add2(addr, rliteral24)]))),
+  rliteral25))) and (bw_and2(readmem64(addr, x86__memory),
+  rliteral26) = mul2(toBig1(to_rep((x86__memory[add2(addr, rliteral27)]))),
+  rliteral28)))))
 
 logic readmem64ghost : (t2,unsigned8) farray, t2, (t2,unsigned8) farray -> t2
 
@@ -1631,13 +1683,13 @@ axiom readmem64ghost__post_axiom :
   (forall addr:t2 [readmem64ghost(mem, addr, x86__memory)].
   (readmem64ghost(mem, addr,
   x86__memory) = bw_or2(bw_or2(bw_or2(bw_or2(bw_or2(bw_or2(bw_or2(toBig1(to_rep((mem[addr]))),
-  lsl_bv2(toBig1(to_rep((mem[add2(addr, of_int2(1))]))), of_int2(8))),
-  lsl_bv2(toBig1(to_rep((mem[add2(addr, of_int2(2))]))), of_int2(16))),
-  lsl_bv2(toBig1(to_rep((mem[add2(addr, of_int2(3))]))), of_int2(24))),
-  lsl_bv2(toBig1(to_rep((mem[add2(addr, of_int2(4))]))), of_int2(32))),
-  lsl_bv2(toBig1(to_rep((mem[add2(addr, of_int2(5))]))), of_int2(40))),
-  lsl_bv2(toBig1(to_rep((mem[add2(addr, of_int2(6))]))), of_int2(48))),
-  lsl_bv2(toBig1(to_rep((mem[add2(addr, of_int2(7))]))), of_int2(56))))))
+  lsl_bv2(toBig1(to_rep((mem[add2(addr, rliteral2)]))), of_int2(8))),
+  lsl_bv2(toBig1(to_rep((mem[add2(addr, rliteral3)]))), of_int2(16))),
+  lsl_bv2(toBig1(to_rep((mem[add2(addr, rliteral15)]))), of_int2(24))),
+  lsl_bv2(toBig1(to_rep((mem[add2(addr, rliteral18)]))), of_int2(32))),
+  lsl_bv2(toBig1(to_rep((mem[add2(addr, rliteral21)]))), of_int2(40))),
+  lsl_bv2(toBig1(to_rep((mem[add2(addr, rliteral24)]))), of_int2(48))),
+  lsl_bv2(toBig1(to_rep((mem[add2(addr, rliteral27)]))), of_int2(56))))))
 
 type unsigned641
 
@@ -1705,18 +1757,18 @@ function unsigned32__ref___projection(a: unsigned32__ref) : unsigned32 =
 
 axiom readreglow8__post_axiom :
   (forall reg:t2 [readreglow8(reg)].
-  (readreglow8(reg) = toSmall1(bw_and2(reg, of_int2(255)))))
+  (readreglow8(reg) = toSmall1(bw_and2(reg, rliteral9))))
 
 logic toBig2 : t1 -> t2
 
 logic toSmall2 : t2 -> t1
 
-logic rliteral2 : t2
+logic rliteral29 : t2
 
-axiom rliteral_axiom2 : (tqtint2(rliteral2) = 4294967295)
+axiom rliteral_axiom29 : (tqtint2(rliteral29) = 4294967295)
 
 axiom toSmall_to_uint2 :
-  (forall x:t2. (ule2(x, rliteral2) -> (tqtint2(x) = tqtint1(toSmall2(x)))))
+  (forall x:t2. (ule2(x, rliteral29) -> (tqtint2(x) = tqtint1(toSmall2(x)))))
 
 axiom toBig_to_uint2 : (forall x:t1. (tqtint1(x) = tqtint2(toBig2(x))))
 
@@ -1724,1080 +1776,448 @@ logic readreg32 : t2 -> t1
 
 logic readreg32__function_guard : t1, t2 -> prop
 
+logic rliteral30 : t2
+
+axiom rliteral_axiom30 : (tqtint2(rliteral30) = 4294967295)
+
 axiom readreg32__post_axiom :
   (forall reg:t2 [readreg32(reg)]. (readreg32(reg) = toSmall2(bw_and2(reg,
-  of_int2(4294967295)))))
+  rliteral30))))
+
+logic rliteral31 : t2
+
+axiom rliteral_axiom31 : (tqtint2(rliteral31) = 18446744069414584320)
 
 axiom writereg32post__post_axiom :
   (forall regnew:t2.
   (forall val__:t1 [writereg32post(regnew, val__)]. ((writereg32post(regnew,
   val__) = true) <-> ((readreg32(regnew) = val__) and (bw_and2(regnew,
-  of_int2(18446744069414584320)) = of_int2(0))))))
+  rliteral31) = rliteral7)))))
 
-logic zeroflag : bool
+logic rliteral32 : t2
 
-logic carryflag : bool
+axiom rliteral_axiom32 : (tqtint2(rliteral32) = 32)
 
-logic signflag : bool
+logic rliteral33 : t2
 
-logic overflowflag : bool
+axiom rliteral_axiom33 : (tqtint2(rliteral33) = 72)
 
-logic rax : t2
+logic rliteral34 : t2
 
-logic rcx : t2
+axiom rliteral_axiom34 : (tqtint2(rliteral34) = 12105675798371893255)
 
-logic rdx : t2
+logic rliteral35 : t2
 
-logic rsp : t2
+axiom rliteral_axiom35 : (tqtint2(rliteral35) = 9223372036854775807)
 
-logic rbp : t2
+logic rliteral36 : t2
 
-logic memory : (t2,unsigned8) farray
-
-logic saved_32 : t2
-
-logic saved_72 : t2
-
-logic tmp_register : t2
-
-logic saved_rbp : t2
-
-logic saved_ra : t2
-
-logic saved_mem : (t2,unsigned8) farray
-
-logic o : t2
-
-logic o1 : t2
-
-logic o2 : t2
-
-logic o3 : t2
-
-logic o4 : t2
-
-logic o5 : t2
-
-logic o6 : t2
-
-logic o7 : t2
-
-logic o8 : t2
-
-logic o9 : t2
-
-logic temp___581 : t2
-
-logic temp___580 : (t2,unsigned8) farray
-
-logic temp___579 : bool
-
-logic temp___578 : bool
-
-logic temp___572 : (t2,unsigned8) farray
-
-logic temp___577 : t2
-
-logic temp___576 : bool
-
-logic temp___575 : t2
-
-logic temp___582 : (t2,unsigned8) farray
-
-logic temp___573 : t2
-
-logic temp___574 : bool
-
-logic o10 : t2
-
-logic o11 : t2
-
-logic o12 : bool
-
-logic o13 : t2
-
-logic o14 : t2
-
-logic o15 : bool
-
-logic o16 : t2
-
-logic o17 : bool
-
-logic o18 : t2
-
-logic o19 : bool
-
-logic o20 : t2
-
-logic o21 : bool
-
-logic o22 : bool
-
-logic o23 : bool
-
-logic o24 : t2
-
-logic o25 : t2
-
-logic o26 : t
-
-logic o27 : t1
-
-logic o28 : t
-
-logic o29 : t2
-
-logic o30 : t2
-
-logic o31 : bool
-
-logic o32 : t2
-
-logic o33 : t2
-
-logic o34 : bool
-
-logic o35 : t2
-
-logic o36 : bool
-
-logic o37 : t2
-
-logic o38 : bool
-
-logic o39 : t2
-
-logic o40 : bool
-
-logic o41 : bool
-
-logic o42 : bool
-
-logic o43 : t2
-
-logic o44 : t2
-
-logic rcx1 : t2
-
-logic rdx1 : t2
-
-logic memory1 : (t2,unsigned8) farray
-
-logic result : t2
-
-logic saved_321 : t2
-
-logic result1 : t2
-
-logic saved_721 : t2
-
-logic result2 : t2
-
-logic tmp_register1 : t2
-
-logic result3 : t2
-
-logic saved_rbp1 : t2
-
-logic result4 : t2
-
-logic saved_ra1 : t2
-
-logic result5 : (t2,unsigned8) farray
-
-logic saved_mem1 : (t2,unsigned8) farray
-
-logic result6 : t2
-
-logic rax1 : t2
-
-logic result7 : bool
-
-logic zeroflag1 : bool
-
-logic result8 : bool
-
-logic signflag1 : bool
-
-logic result9 : bool
-
-logic carryflag1 : bool
-
-logic result10 : bool
-
-logic overflowflag1 : bool
-
-logic zeroflag2 : bool
-
-logic carryflag2 : bool
-
-logic signflag2 : bool
-
-logic overflowflag2 : bool
-
-logic rax2 : t2
-
-logic rcx2 : t2
-
-logic rdx2 : t2
-
-logic memory2 : (t2,unsigned8) farray
-
-logic tmp_register2 : t2
-
-logic result11 : t2
-
-logic rdx3 : t2
-
-logic result12 : t2
-
-logic rax3 : t2
-
-logic result13 : bool
-
-logic zeroflag3 : bool
-
-logic result14 : bool
-
-logic signflag3 : bool
-
-logic result15 : t2
-
-logic rdx4 : t2
-
-logic result16 : t2
-
-logic rcx3 : t2
-
-logic result17 : t2
-
-logic rax4 : t2
-
-logic result18 : bool
-
-logic zeroflag4 : bool
-
-logic result19 : bool
-
-logic signflag4 : bool
-
-logic result20 : t2
-
-logic rax5 : t2
-
-logic rax6 : t2
-
-logic memory3 : (t2,unsigned8) farray
-
-logic result21 : t2
-
-logic tmp_register3 : t2
-
-logic result22 : t2
-
-logic rax7 : t2
-
-logic result23 : bool
-
-logic zeroflag5 : bool
-
-logic result24 : bool
-
-logic signflag5 : bool
-
-logic result25 : bool
-
-logic carryflag3 : bool
-
-logic result26 : bool
-
-logic overflowflag3 : bool
-
-logic zeroflag6 : bool
-
-logic carryflag4 : bool
-
-logic signflag6 : bool
-
-logic overflowflag4 : bool
-
-logic rax8 : t2
-
-logic zeroflag7 : bool
-
-logic carryflag5 : bool
-
-logic signflag7 : bool
-
-logic overflowflag5 : bool
-
-logic rax9 : t2
-
-logic zeroflag8 : bool
-
-logic carryflag6 : bool
-
-logic signflag8 : bool
-
-logic overflowflag6 : bool
-
-logic rax10 : t2
-
-logic rcx4 : t2
-
-logic rdx5 : t2
-
-logic memory4 : (t2,unsigned8) farray
-
-logic tmp_register4 : t2
-
-logic zeroflag9 : bool
-
-logic carryflag7 : bool
-
-logic signflag9 : bool
-
-logic overflowflag7 : bool
-
-logic rax11 : t2
-
-logic rcx5 : t2
-
-logic rdx6 : t2
-
-logic memory5 : (t2,unsigned8) farray
-
-logic tmp_register5 : t2
-
-logic zeroflag10 : bool
-
-logic carryflag8 : bool
-
-logic signflag10 : bool
-
-logic overflowflag8 : bool
-
-logic rax12 : t2
-
-logic rcx6 : t2
-
-logic rdx7 : t2
-
-logic memory6 : (t2,unsigned8) farray
-
-logic tmp_register6 : t2
-
-logic zeroflag11 : bool
-
-logic carryflag9 : bool
-
-logic signflag11 : bool
-
-logic overflowflag9 : bool
-
-logic rax13 : t2
-
-logic rcx7 : t2
-
-logic rdx8 : t2
-
-logic memory7 : (t2,unsigned8) farray
-
-logic tmp_register7 : t2
-
-logic zeroflag12 : bool
-
-logic carryflag10 : bool
-
-logic signflag12 : bool
-
-logic overflowflag10 : bool
-
-logic rax14 : t2
-
-logic rcx8 : t2
-
-logic rdx9 : t2
-
-logic memory8 : (t2,unsigned8) farray
-
-logic tmp_register8 : t2
-
-logic zeroflag13 : bool
-
-logic carryflag11 : bool
-
-logic signflag13 : bool
-
-logic overflowflag11 : bool
-
-logic rax15 : t2
-
-logic rcx9 : t2
-
-logic rdx10 : t2
-
-logic memory9 : (t2,unsigned8) farray
-
-logic tmp_register9 : t2
-
-logic memory10 : (t2,unsigned8) farray
-
-logic zeroflag14 : bool
-
-logic carryflag12 : bool
-
-logic signflag14 : bool
-
-logic overflowflag12 : bool
-
-logic rax16 : t2
-
-logic rcx10 : t2
-
-logic rdx11 : t2
-
-logic memory11 : (t2,unsigned8) farray
-
-logic saved_322 : t2
-
-logic saved_722 : t2
-
-logic tmp_register10 : t2
-
-logic saved_rbp2 : t2
-
-logic saved_ra2 : t2
-
-logic saved_mem2 : (t2,unsigned8) farray
-
-logic zeroflag15 : bool
-
-logic carryflag13 : bool
-
-logic signflag15 : bool
-
-logic overflowflag13 : bool
-
-logic rax17 : t2
-
-logic rcx11 : t2
-
-logic rdx12 : t2
-
-logic memory12 : (t2,unsigned8) farray
-
-logic saved_323 : t2
-
-logic saved_723 : t2
-
-logic tmp_register11 : t2
-
-logic saved_rbp3 : t2
-
-logic saved_ra3 : t2
-
-logic saved_mem3 : (t2,unsigned8) farray
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : true
-
-axiom H3 : true
-
-axiom H4 : true
-
-axiom H5 : (((rbp = rsp) and (readmem64(sub2(rbp, of_int2(8)),
-  memory) = of_int2(0))) and
-  (forall i:t2. ((ule2(of_int2(0), i) and ule2(i,
-  of_int2(18446744073709551615))) -> ((inrange64(i, readmem64(sub2(rbp,
-  of_int2(32)), memory), readmem64(sub2(rbp, of_int2(72)),
-  memory)) = true) -> (insaferegion64(i, add2(rsp, of_int2(8))) = true)))))
-
-axiom H6 : ((o = readmem64(sub2(rbp, of_int2(32)), memory)) and
-  ((((((((bw_and2(o, of_int2(255)) = toBig1(to_rep((memory[sub2(rbp,
-  of_int2(32))])))) and (bw_and2(o,
-  of_int2(65280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, of_int2(32)),
-  of_int2(1))]))), of_int2(256)))) and (bw_and2(o,
-  of_int2(16711680)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(32)), of_int2(2))]))), of_int2(65536)))) and (bw_and2(o,
-  of_int2(4278190080)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(32)), of_int2(3))]))), of_int2(16777216)))) and (bw_and2(o,
-  of_int2(1095216660480)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(32)), of_int2(4))]))), of_int2(4294967296)))) and (bw_and2(o,
-  of_int2(280375465082880)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(32)), of_int2(5))]))), of_int2(1099511627776)))) and (bw_and2(o,
-  of_int2(71776119061217280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(32)), of_int2(6))]))), of_int2(281474976710656)))) and (bw_and2(o,
-  of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(32)), of_int2(7))]))), of_int2(72057594037927936)))))
-
-axiom H7 : (o1 = o)
-
-axiom H8 : (result = saved_32)
-
-axiom H9 : (saved_321 = o1)
-
-axiom H10 : true
-
-axiom H11 : ((o2 = readmem64(sub2(rbp, of_int2(72)), memory)) and
-  ((((((((bw_and2(o2, of_int2(255)) = toBig1(to_rep((memory[sub2(rbp,
-  of_int2(72))])))) and (bw_and2(o2,
-  of_int2(65280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, of_int2(72)),
-  of_int2(1))]))), of_int2(256)))) and (bw_and2(o2,
-  of_int2(16711680)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(2))]))), of_int2(65536)))) and (bw_and2(o2,
-  of_int2(4278190080)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(3))]))), of_int2(16777216)))) and (bw_and2(o2,
-  of_int2(1095216660480)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(4))]))), of_int2(4294967296)))) and (bw_and2(o2,
-  of_int2(280375465082880)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(5))]))), of_int2(1099511627776)))) and (bw_and2(o2,
-  of_int2(71776119061217280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(6))]))), of_int2(281474976710656)))) and (bw_and2(o2,
-  of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(7))]))), of_int2(72057594037927936)))))
-
-axiom H12 : (o3 = o2)
-
-axiom H13 : (result1 = saved_72)
-
-axiom H14 : (saved_721 = o3)
-
-axiom H15 : true
-
-axiom H16 : ((o4 = readmem64(sub2(rbp, of_int2(8)), memory)) and
-  ((((((((bw_and2(o4, of_int2(255)) = toBig1(to_rep((memory[sub2(rbp,
-  of_int2(8))])))) and (bw_and2(o4,
-  of_int2(65280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, of_int2(8)),
-  of_int2(1))]))), of_int2(256)))) and (bw_and2(o4,
-  of_int2(16711680)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, of_int2(8)),
-  of_int2(2))]))), of_int2(65536)))) and (bw_and2(o4,
-  of_int2(4278190080)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(8)), of_int2(3))]))), of_int2(16777216)))) and (bw_and2(o4,
-  of_int2(1095216660480)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(8)), of_int2(4))]))), of_int2(4294967296)))) and (bw_and2(o4,
-  of_int2(280375465082880)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(8)), of_int2(5))]))), of_int2(1099511627776)))) and (bw_and2(o4,
-  of_int2(71776119061217280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(8)), of_int2(6))]))), of_int2(281474976710656)))) and (bw_and2(o4,
-  of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(8)), of_int2(7))]))), of_int2(72057594037927936)))))
-
-axiom H17 : (o5 = o4)
-
-axiom H18 : (result2 = tmp_register)
-
-axiom H19 : (tmp_register1 = o5)
-
-axiom H20 : true
-
-axiom H21 : ((o6 = readmem64(rbp, memory)) and ((((((((bw_and2(o6,
-  of_int2(255)) = toBig1(to_rep((memory[rbp])))) and (bw_and2(o6,
-  of_int2(65280)) = mul2(toBig1(to_rep((memory[add2(rbp, of_int2(1))]))),
-  of_int2(256)))) and (bw_and2(o6,
-  of_int2(16711680)) = mul2(toBig1(to_rep((memory[add2(rbp, of_int2(2))]))),
-  of_int2(65536)))) and (bw_and2(o6,
-  of_int2(4278190080)) = mul2(toBig1(to_rep((memory[add2(rbp,
-  of_int2(3))]))), of_int2(16777216)))) and (bw_and2(o6,
-  of_int2(1095216660480)) = mul2(toBig1(to_rep((memory[add2(rbp,
-  of_int2(4))]))), of_int2(4294967296)))) and (bw_and2(o6,
-  of_int2(280375465082880)) = mul2(toBig1(to_rep((memory[add2(rbp,
-  of_int2(5))]))), of_int2(1099511627776)))) and (bw_and2(o6,
-  of_int2(71776119061217280)) = mul2(toBig1(to_rep((memory[add2(rbp,
-  of_int2(6))]))), of_int2(281474976710656)))) and (bw_and2(o6,
-  of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory[add2(rbp,
-  of_int2(7))]))), of_int2(72057594037927936)))))
-
-axiom H22 : (o7 = o6)
-
-axiom H23 : (result3 = saved_rbp)
-
-axiom H24 : (saved_rbp1 = o7)
-
-axiom H25 : true
-
-axiom H26 : ((o8 = readmem64(add2(rsp, of_int2(8)), memory)) and
-  ((((((((bw_and2(o8, of_int2(255)) = toBig1(to_rep((memory[add2(rsp,
-  of_int2(8))])))) and (bw_and2(o8,
-  of_int2(65280)) = mul2(toBig1(to_rep((memory[add2(add2(rsp, of_int2(8)),
-  of_int2(1))]))), of_int2(256)))) and (bw_and2(o8,
-  of_int2(16711680)) = mul2(toBig1(to_rep((memory[add2(add2(rsp, of_int2(8)),
-  of_int2(2))]))), of_int2(65536)))) and (bw_and2(o8,
-  of_int2(4278190080)) = mul2(toBig1(to_rep((memory[add2(add2(rsp,
-  of_int2(8)), of_int2(3))]))), of_int2(16777216)))) and (bw_and2(o8,
-  of_int2(1095216660480)) = mul2(toBig1(to_rep((memory[add2(add2(rsp,
-  of_int2(8)), of_int2(4))]))), of_int2(4294967296)))) and (bw_and2(o8,
-  of_int2(280375465082880)) = mul2(toBig1(to_rep((memory[add2(add2(rsp,
-  of_int2(8)), of_int2(5))]))), of_int2(1099511627776)))) and (bw_and2(o8,
-  of_int2(71776119061217280)) = mul2(toBig1(to_rep((memory[add2(add2(rsp,
-  of_int2(8)), of_int2(6))]))), of_int2(281474976710656)))) and (bw_and2(o8,
-  of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory[add2(add2(rsp,
-  of_int2(8)), of_int2(7))]))), of_int2(72057594037927936)))))
-
-axiom H27 : (o9 = o8)
-
-axiom H28 : (result4 = saved_ra)
-
-axiom H29 : (saved_ra1 = o9)
-
-axiom H30 : true
-
-axiom H31 : (result5 = saved_mem)
-
-axiom H32 : (saved_mem1 = memory)
-
-axiom H33 : (rsp = of_int2(12105675798371893255))
-
-axiom H34 : (result6 = rax)
-
-axiom H35 : (rax1 = tmp_register1)
-
-axiom H36 : ((o10 = readmem64(sub2(rbp, of_int2(72)), memory)) and
-  ((((((((bw_and2(o10, of_int2(255)) = toBig1(to_rep((memory[sub2(rbp,
-  of_int2(72))])))) and (bw_and2(o10,
-  of_int2(65280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, of_int2(72)),
-  of_int2(1))]))), of_int2(256)))) and (bw_and2(o10,
-  of_int2(16711680)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(2))]))), of_int2(65536)))) and (bw_and2(o10,
-  of_int2(4278190080)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(3))]))), of_int2(16777216)))) and (bw_and2(o10,
-  of_int2(1095216660480)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(4))]))), of_int2(4294967296)))) and (bw_and2(o10,
-  of_int2(280375465082880)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(5))]))), of_int2(1099511627776)))) and (bw_and2(o10,
-  of_int2(71776119061217280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(6))]))), of_int2(281474976710656)))) and
-  (bw_and2(o10,
-  of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(7))]))), of_int2(72057594037927936)))))
-
-axiom H37 : (o11 = sub2(rax1, o10))
-
-axiom H38 : (((o11 = of_int2(0)) -> (o12 = true)) and
-  ((not (o11 = of_int2(0))) -> (o12 = false)))
-
-axiom H39 : (result7 = zeroflag)
-
-axiom H40 : (zeroflag1 = o12)
-
-axiom H41 : ((o13 = readmem64(sub2(rbp, of_int2(72)), memory)) and
-  ((((((((bw_and2(o13, of_int2(255)) = toBig1(to_rep((memory[sub2(rbp,
-  of_int2(72))])))) and (bw_and2(o13,
-  of_int2(65280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, of_int2(72)),
-  of_int2(1))]))), of_int2(256)))) and (bw_and2(o13,
-  of_int2(16711680)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(2))]))), of_int2(65536)))) and (bw_and2(o13,
-  of_int2(4278190080)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(3))]))), of_int2(16777216)))) and (bw_and2(o13,
-  of_int2(1095216660480)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(4))]))), of_int2(4294967296)))) and (bw_and2(o13,
-  of_int2(280375465082880)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(5))]))), of_int2(1099511627776)))) and (bw_and2(o13,
-  of_int2(71776119061217280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(6))]))), of_int2(281474976710656)))) and
-  (bw_and2(o13,
-  of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(7))]))), of_int2(72057594037927936)))))
-
-axiom H42 : (o14 = sub2(rax1, o13))
-
-axiom H43 : ((ugt2(o14, of_int2(9223372036854775807)) -> (o15 = true)) and
-  ((not ugt2(o14, of_int2(9223372036854775807))) -> (o15 = false)))
-
-axiom H44 : (result8 = signflag)
-
-axiom H45 : (signflag1 = o15)
-
-axiom H46 : ((o16 = readmem64(sub2(rbp, of_int2(72)), memory)) and
-  ((((((((bw_and2(o16, of_int2(255)) = toBig1(to_rep((memory[sub2(rbp,
-  of_int2(72))])))) and (bw_and2(o16,
-  of_int2(65280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, of_int2(72)),
-  of_int2(1))]))), of_int2(256)))) and (bw_and2(o16,
-  of_int2(16711680)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(2))]))), of_int2(65536)))) and (bw_and2(o16,
-  of_int2(4278190080)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(3))]))), of_int2(16777216)))) and (bw_and2(o16,
-  of_int2(1095216660480)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(4))]))), of_int2(4294967296)))) and (bw_and2(o16,
-  of_int2(280375465082880)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(5))]))), of_int2(1099511627776)))) and (bw_and2(o16,
-  of_int2(71776119061217280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(6))]))), of_int2(281474976710656)))) and
-  (bw_and2(o16,
-  of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(7))]))), of_int2(72057594037927936)))))
-
-axiom H47 : ((ult2(rax1, o16) -> (o17 = true)) and ((not ult2(rax1, o16)) ->
-  (o17 = false)))
-
-axiom H48 : (result9 = carryflag)
-
-axiom H49 : (carryflag1 = o17)
-
-axiom H50 : (((not (signflag1 = true)) and ugt2(rax1,
-  of_int2(9223372036854775807))) -> ((o20 = readmem64(sub2(rbp, of_int2(72)),
-  memory)) and ((((((((bw_and2(o20,
-  of_int2(255)) = toBig1(to_rep((memory[sub2(rbp, of_int2(72))])))) and
-  (bw_and2(o20, of_int2(65280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(1))]))), of_int2(256)))) and (bw_and2(o20,
-  of_int2(16711680)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(2))]))), of_int2(65536)))) and (bw_and2(o20,
-  of_int2(4278190080)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(3))]))), of_int2(16777216)))) and (bw_and2(o20,
-  of_int2(1095216660480)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(4))]))), of_int2(4294967296)))) and (bw_and2(o20,
-  of_int2(280375465082880)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(5))]))), of_int2(1099511627776)))) and (bw_and2(o20,
-  of_int2(71776119061217280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(6))]))), of_int2(281474976710656)))) and
-  (bw_and2(o20,
-  of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(7))]))), of_int2(72057594037927936))))))
-
-axiom H51 : (((not (signflag1 = true)) and ugt2(rax1,
-  of_int2(9223372036854775807))) -> ((ule2(o20,
-  of_int2(9223372036854775807)) -> (o21 = true)) and ((not ule2(o20,
-  of_int2(9223372036854775807))) -> (o21 = false))))
-
-axiom H52 : ((not ((not (signflag1 = true)) and ugt2(rax1,
-  of_int2(9223372036854775807)))) -> (o21 = false))
-
-axiom H53 : ((signflag1 = true) -> ((o18 = readmem64(sub2(rbp, of_int2(72)),
-  memory)) and ((((((((bw_and2(o18,
-  of_int2(255)) = toBig1(to_rep((memory[sub2(rbp, of_int2(72))])))) and
-  (bw_and2(o18, of_int2(65280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(1))]))), of_int2(256)))) and (bw_and2(o18,
-  of_int2(16711680)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(2))]))), of_int2(65536)))) and (bw_and2(o18,
-  of_int2(4278190080)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(3))]))), of_int2(16777216)))) and (bw_and2(o18,
-  of_int2(1095216660480)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(4))]))), of_int2(4294967296)))) and (bw_and2(o18,
-  of_int2(280375465082880)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(5))]))), of_int2(1099511627776)))) and (bw_and2(o18,
-  of_int2(71776119061217280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(6))]))), of_int2(281474976710656)))) and
-  (bw_and2(o18,
-  of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(7))]))), of_int2(72057594037927936))))))
-
-axiom H54 : ((signflag1 = true) -> ((ugt2(o18,
-  of_int2(9223372036854775807)) -> (o19 = true)) and ((not ugt2(o18,
-  of_int2(9223372036854775807))) -> (o19 = false))))
-
-axiom H55 : ((not (signflag1 = true)) -> (o19 = false))
-
-axiom H56 : ((((o19 = true) and ule2(rax1, of_int2(9223372036854775807))) ->
-  (o22 = true)) and ((not ((o19 = true) and ule2(rax1,
-  of_int2(9223372036854775807)))) -> (o22 = false)))
-
-axiom H57 : (o23 = match_bool(o22, true, o21))
-
-axiom H58 : (result10 = overflowflag)
-
-axiom H59 : (overflowflag1 = o23)
-
-axiom H60 : (carryflag1 = true)
-
-axiom H61 :
-  (forall i:t2. ((ule2(saved_321, i) and ule2(i, sub2(add2(saved_321,
-  saved_721), of_int2(1)))) -> (insaferegion64(i, add2(rsp,
-  of_int2(8))) = true)))
-
-axiom H62 :
-  (forall i:t2. ((ule2(of_int2(0), i) and ule2(i,
-  of_int2(18446744073709551615))) -> (((not (inrange64(i, saved_321,
-  saved_721) = true)) and (not (inrange64(i, sub2(rbp, of_int2(8)),
-  of_int2(8)) = true))) -> (to_rep((memory2[i])) = to_rep((memory[i]))))))
-
-axiom H63 : (saved_321 = readmem64(sub2(rbp, of_int2(32)), memory2))
-
-axiom H64 : (saved_721 = readmem64(sub2(rbp, of_int2(72)), memory2))
-
-axiom H65 : ult2(tmp_register2, saved_721)
-
-axiom H66 : (readmem64(rbp, memory2) = saved_rbp1)
-
-axiom H67 : (readmem64(add2(rsp, of_int2(8)), memory2) = saved_ra1)
-
-axiom H68 : true
-
-axiom H69 : ((o24 = readmem64(sub2(rbp, of_int2(32)), memory2)) and
-  ((((((((bw_and2(o24, of_int2(255)) = toBig1(to_rep((memory2[sub2(rbp,
-  of_int2(32))])))) and (bw_and2(o24,
-  of_int2(65280)) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, of_int2(32)),
-  of_int2(1))]))), of_int2(256)))) and (bw_and2(o24,
-  of_int2(16711680)) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp,
-  of_int2(32)), of_int2(2))]))), of_int2(65536)))) and (bw_and2(o24,
-  of_int2(4278190080)) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp,
-  of_int2(32)), of_int2(3))]))), of_int2(16777216)))) and (bw_and2(o24,
-  of_int2(1095216660480)) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp,
-  of_int2(32)), of_int2(4))]))), of_int2(4294967296)))) and (bw_and2(o24,
-  of_int2(280375465082880)) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp,
-  of_int2(32)), of_int2(5))]))), of_int2(1099511627776)))) and (bw_and2(o24,
-  of_int2(71776119061217280)) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp,
-  of_int2(32)), of_int2(6))]))), of_int2(281474976710656)))) and
-  (bw_and2(o24,
-  of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp,
-  of_int2(32)), of_int2(7))]))), of_int2(72057594037927936)))))
-
-axiom H70 : (result11 = rdx2)
-
-axiom H71 : (rdx3 = o24)
-
-axiom H72 : (result12 = rax2)
-
-axiom H73 : (rax3 = tmp_register2)
-
-axiom H74 : (result13 = zeroflag2)
-
-axiom H75 : (((add2(rdx3, rax3) = of_int2(0)) -> (zeroflag3 = true)) and
-  ((not (add2(rdx3, rax3) = of_int2(0))) -> (zeroflag3 = false)))
-
-axiom H76 : (result14 = signflag2)
-
-axiom H77 : ((ugt2(add2(rdx3, rax3), of_int2(9223372036854775807)) ->
-  (signflag3 = true)) and ((not ugt2(add2(rdx3, rax3),
-  of_int2(9223372036854775807))) -> (signflag3 = false)))
-
-axiom H78 : (result15 = rdx3)
-
-axiom H79 : (rdx4 = add2(rdx3, rax3))
-
-axiom H80 : ((o25 = readmem64(sub2(rbp, of_int2(40)), memory2)) and
-  ((((((((bw_and2(o25, of_int2(255)) = toBig1(to_rep((memory2[sub2(rbp,
-  of_int2(40))])))) and (bw_and2(o25,
-  of_int2(65280)) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, of_int2(40)),
-  of_int2(1))]))), of_int2(256)))) and (bw_and2(o25,
-  of_int2(16711680)) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp,
-  of_int2(40)), of_int2(2))]))), of_int2(65536)))) and (bw_and2(o25,
-  of_int2(4278190080)) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp,
-  of_int2(40)), of_int2(3))]))), of_int2(16777216)))) and (bw_and2(o25,
-  of_int2(1095216660480)) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp,
-  of_int2(40)), of_int2(4))]))), of_int2(4294967296)))) and (bw_and2(o25,
-  of_int2(280375465082880)) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp,
-  of_int2(40)), of_int2(5))]))), of_int2(1099511627776)))) and (bw_and2(o25,
-  of_int2(71776119061217280)) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp,
-  of_int2(40)), of_int2(6))]))), of_int2(281474976710656)))) and
-  (bw_and2(o25,
-  of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp,
-  of_int2(40)), of_int2(7))]))), of_int2(72057594037927936)))))
-
-axiom H81 : (result16 = rcx2)
-
-axiom H82 : (rcx3 = o25)
-
-axiom H83 : (result17 = rax3)
-
-axiom H84 : (rax4 = tmp_register2)
-
-axiom H85 : (result18 = zeroflag3)
-
-axiom H86 : (((add2(rax4, rcx3) = of_int2(0)) -> (zeroflag4 = true)) and
-  ((not (add2(rax4, rcx3) = of_int2(0))) -> (zeroflag4 = false)))
-
-axiom H87 : (result19 = signflag3)
-
-axiom H88 : ((ugt2(add2(rax4, rcx3), of_int2(9223372036854775807)) ->
-  (signflag4 = true)) and ((not ugt2(add2(rax4, rcx3),
-  of_int2(9223372036854775807))) -> (signflag4 = false)))
-
-axiom H89 : (result20 = rax4)
-
-axiom H90 : (rax5 = add2(rax4, rcx3))
-
-axiom H91 : ((o26 = readmem8(rax5, memory2)) and
-  (o26 = to_rep((memory2[rax5]))))
-
-axiom H92 : (o27 = toBig(o26))
-
-axiom H93 : (writereg32post(rax6, o27) = true)
-
-axiom H94 :
-  (forall i:t2. ((ule2(saved_321, i) and ule2(i, sub2(add2(saved_321,
-  saved_721), of_int2(1)))) -> (insaferegion64(i, add2(rsp,
-  of_int2(8))) = true)))
-
-axiom H95 :
-  (forall i:t2. ((ule2(of_int2(0), i) and ule2(i,
-  of_int2(18446744073709551615))) -> (((not (inrange64(i, saved_321,
-  saved_721) = true)) and (not (inrange64(i, sub2(rbp, of_int2(8)),
-  of_int2(8)) = true))) -> (to_rep((memory2[i])) = to_rep((memory[i]))))))
-
-axiom H96 : (saved_321 = readmem64(sub2(rbp, of_int2(32)), memory2))
-
-axiom H97 : (saved_721 = readmem64(sub2(rbp, of_int2(72)), memory2))
-
-axiom H98 : ult2(tmp_register2, saved_721)
-
-axiom H99 : (inrange64(rdx4, saved_321, saved_721) = true)
-
-axiom H100 : ((o28 = al(rax6)) and (o28 = readreglow8(rax6)))
-
-axiom H101 : ((to_rep((memory3[rdx4])) = o28) and
-  (forall i:t2. ((ule2(of_int2(0), i) and ule2(i,
-  of_int2(18446744073709551615))) -> ((not (i = rdx4)) ->
-  (to_rep((memory3[i])) = to_rep((memory2[i])))))))
-
-axiom H102 : (result21 = tmp_register2)
-
-axiom H103 : (tmp_register3 = add2(tmp_register2, of_int2(1)))
-
-axiom H104 : (result22 = rax6)
-
-axiom H105 : (rax7 = tmp_register3)
-
-axiom H106 : ((o29 = readmem64(sub2(rbp, of_int2(72)), memory3)) and
-  ((((((((bw_and2(o29, of_int2(255)) = toBig1(to_rep((memory3[sub2(rbp,
-  of_int2(72))])))) and (bw_and2(o29,
-  of_int2(65280)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp, of_int2(72)),
-  of_int2(1))]))), of_int2(256)))) and (bw_and2(o29,
-  of_int2(16711680)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(2))]))), of_int2(65536)))) and (bw_and2(o29,
-  of_int2(4278190080)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(3))]))), of_int2(16777216)))) and (bw_and2(o29,
-  of_int2(1095216660480)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(4))]))), of_int2(4294967296)))) and (bw_and2(o29,
-  of_int2(280375465082880)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(5))]))), of_int2(1099511627776)))) and (bw_and2(o29,
-  of_int2(71776119061217280)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(6))]))), of_int2(281474976710656)))) and
-  (bw_and2(o29,
-  of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(7))]))), of_int2(72057594037927936)))))
-
-axiom H107 : (o30 = sub2(rax7, o29))
-
-axiom H108 : (((o30 = of_int2(0)) -> (o31 = true)) and
-  ((not (o30 = of_int2(0))) -> (o31 = false)))
-
-axiom H109 : (result23 = zeroflag4)
-
-axiom H110 : (zeroflag5 = o31)
-
-axiom H111 : ((o32 = readmem64(sub2(rbp, of_int2(72)), memory3)) and
-  ((((((((bw_and2(o32, of_int2(255)) = toBig1(to_rep((memory3[sub2(rbp,
-  of_int2(72))])))) and (bw_and2(o32,
-  of_int2(65280)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp, of_int2(72)),
-  of_int2(1))]))), of_int2(256)))) and (bw_and2(o32,
-  of_int2(16711680)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(2))]))), of_int2(65536)))) and (bw_and2(o32,
-  of_int2(4278190080)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(3))]))), of_int2(16777216)))) and (bw_and2(o32,
-  of_int2(1095216660480)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(4))]))), of_int2(4294967296)))) and (bw_and2(o32,
-  of_int2(280375465082880)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(5))]))), of_int2(1099511627776)))) and (bw_and2(o32,
-  of_int2(71776119061217280)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(6))]))), of_int2(281474976710656)))) and
-  (bw_and2(o32,
-  of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(7))]))), of_int2(72057594037927936)))))
-
-axiom H112 : (o33 = sub2(rax7, o32))
-
-axiom H113 : ((ugt2(o33, of_int2(9223372036854775807)) -> (o34 = true)) and
-  ((not ugt2(o33, of_int2(9223372036854775807))) -> (o34 = false)))
-
-axiom H114 : (result24 = signflag4)
-
-axiom H115 : (signflag5 = o34)
-
-axiom H116 : ((o35 = readmem64(sub2(rbp, of_int2(72)), memory3)) and
-  ((((((((bw_and2(o35, of_int2(255)) = toBig1(to_rep((memory3[sub2(rbp,
-  of_int2(72))])))) and (bw_and2(o35,
-  of_int2(65280)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp, of_int2(72)),
-  of_int2(1))]))), of_int2(256)))) and (bw_and2(o35,
-  of_int2(16711680)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(2))]))), of_int2(65536)))) and (bw_and2(o35,
-  of_int2(4278190080)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(3))]))), of_int2(16777216)))) and (bw_and2(o35,
-  of_int2(1095216660480)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(4))]))), of_int2(4294967296)))) and (bw_and2(o35,
-  of_int2(280375465082880)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(5))]))), of_int2(1099511627776)))) and (bw_and2(o35,
-  of_int2(71776119061217280)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(6))]))), of_int2(281474976710656)))) and
-  (bw_and2(o35,
-  of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(7))]))), of_int2(72057594037927936)))))
-
-axiom H117 : ((ult2(rax7, o35) -> (o36 = true)) and ((not ult2(rax7, o35)) ->
-  (o36 = false)))
-
-axiom H118 : (result25 = carryflag2)
-
-axiom H119 : (carryflag3 = o36)
-
-axiom H120 : (((not (signflag5 = true)) and ugt2(rax7,
-  of_int2(9223372036854775807))) -> ((o39 = readmem64(sub2(rbp, of_int2(72)),
-  memory3)) and ((((((((bw_and2(o39,
-  of_int2(255)) = toBig1(to_rep((memory3[sub2(rbp, of_int2(72))])))) and
-  (bw_and2(o39, of_int2(65280)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(1))]))), of_int2(256)))) and (bw_and2(o39,
-  of_int2(16711680)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(2))]))), of_int2(65536)))) and (bw_and2(o39,
-  of_int2(4278190080)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(3))]))), of_int2(16777216)))) and (bw_and2(o39,
-  of_int2(1095216660480)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(4))]))), of_int2(4294967296)))) and (bw_and2(o39,
-  of_int2(280375465082880)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(5))]))), of_int2(1099511627776)))) and (bw_and2(o39,
-  of_int2(71776119061217280)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(6))]))), of_int2(281474976710656)))) and
-  (bw_and2(o39,
-  of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(7))]))), of_int2(72057594037927936))))))
-
-axiom H121 : (((not (signflag5 = true)) and ugt2(rax7,
-  of_int2(9223372036854775807))) -> ((ule2(o39,
-  of_int2(9223372036854775807)) -> (o40 = true)) and ((not ule2(o39,
-  of_int2(9223372036854775807))) -> (o40 = false))))
-
-axiom H122 : ((not ((not (signflag5 = true)) and ugt2(rax7,
-  of_int2(9223372036854775807)))) -> (o40 = false))
-
-axiom H123 : ((signflag5 = true) -> ((o37 = readmem64(sub2(rbp, of_int2(72)),
-  memory3)) and ((((((((bw_and2(o37,
-  of_int2(255)) = toBig1(to_rep((memory3[sub2(rbp, of_int2(72))])))) and
-  (bw_and2(o37, of_int2(65280)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(1))]))), of_int2(256)))) and (bw_and2(o37,
-  of_int2(16711680)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(2))]))), of_int2(65536)))) and (bw_and2(o37,
-  of_int2(4278190080)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(3))]))), of_int2(16777216)))) and (bw_and2(o37,
-  of_int2(1095216660480)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(4))]))), of_int2(4294967296)))) and (bw_and2(o37,
-  of_int2(280375465082880)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(5))]))), of_int2(1099511627776)))) and (bw_and2(o37,
-  of_int2(71776119061217280)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(6))]))), of_int2(281474976710656)))) and
-  (bw_and2(o37,
-  of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(7))]))), of_int2(72057594037927936))))))
-
-axiom H124 : ((signflag5 = true) -> ((ugt2(o37,
-  of_int2(9223372036854775807)) -> (o38 = true)) and ((not ugt2(o37,
-  of_int2(9223372036854775807))) -> (o38 = false))))
-
-axiom H125 : ((not (signflag5 = true)) -> (o38 = false))
-
-axiom H126 : ((((o38 = true) and ule2(rax7, of_int2(9223372036854775807))) ->
-  (o41 = true)) and ((not ((o38 = true) and ule2(rax7,
-  of_int2(9223372036854775807)))) -> (o41 = false)))
-
-axiom H127 : (o42 = match_bool(o41, true, o40))
-
-axiom H128 : (result26 = overflowflag2)
-
-axiom H129 : (overflowflag3 = o42)
-
-axiom H130 : (carryflag3 = true)
+axiom rliteral_axiom36 : (tqtint2(rliteral36) = 40)
 
  (* File "x86.ads", line 334, characters 0-0 *)
-goal WP_parameter_def : (saved_721 = readmem64(sub2(rbp, of_int2(72)),
-  memory3))
+goal WP_parameter_def :
+  (forall zeroflag:bool. forall carryflag:bool. forall signflag:bool.
+  forall overflowflag:bool. forall rax:t2. forall rsp:t2. forall rbp:t2.
+  forall memory:(t2,unsigned8) farray. forall saved_32:t2.
+  forall saved_72:t2. forall tmp_register:t2. forall saved_rbp:t2.
+  forall saved_ra:t2. forall saved_mem:(t2,unsigned8) farray. forall o:t2.
+  forall o1:t2. forall o2:t2. forall o3:t2. forall o4:t2. forall o5:t2.
+  forall o6:t2. forall o7:t2. forall o8:t2. forall o9:t2. forall o10:t2.
+  forall o11:t2. forall o12:bool. forall o13:t2. forall o14:t2.
+  forall o15:bool. forall o16:t2. forall o17:bool. forall o18:t2.
+  forall o19:bool. forall o20:t2. forall o21:bool. forall o22:bool.
+  forall o23:bool. forall o24:t2. forall o25:t2. forall o26:t. forall o27:t1.
+  forall o28:t. forall o29:t2. forall o30:t2. forall o31:bool. forall o32:t2.
+  forall o33:t2. forall o34:bool. forall o35:t2. forall o36:bool.
+  forall o37:t2. forall o38:bool. forall o39:t2. forall o40:bool.
+  forall o41:bool. forall o42:bool. forall result:t2. forall saved_321:t2.
+  forall result1:t2. forall saved_721:t2. forall result2:t2.
+  forall tmp_register1:t2. forall result3:t2. forall saved_rbp1:t2.
+  forall result4:t2. forall saved_ra1:t2.
+  forall result5:(t2,unsigned8) farray.
+  forall saved_mem1:(t2,unsigned8) farray. forall result6:t2. forall rax1:t2.
+  forall result7:bool. forall zeroflag1:bool. forall result8:bool.
+  forall signflag1:bool. forall result9:bool. forall carryflag1:bool.
+  forall result10:bool. forall overflowflag1:bool. forall zeroflag2:bool.
+  forall carryflag2:bool. forall signflag2:bool. forall overflowflag2:bool.
+  forall rax2:t2. forall rcx:t2. forall rdx:t2.
+  forall memory1:(t2,unsigned8) farray. forall tmp_register2:t2.
+  forall result11:t2. forall rdx1:t2. forall result12:t2. forall rax3:t2.
+  forall result13:bool. forall zeroflag3:bool. forall result14:bool.
+  forall signflag3:bool. forall result15:t2. forall rdx2:t2.
+  forall result16:t2. forall rcx1:t2. forall result17:t2. forall rax4:t2.
+  forall result18:bool. forall zeroflag4:bool. forall result19:bool.
+  forall signflag4:bool. forall result20:t2. forall rax5:t2. forall rax6:t2.
+  forall memory2:(t2,unsigned8) farray. forall result21:t2.
+  forall tmp_register3:t2. forall result22:t2. forall rax7:t2.
+  forall result23:bool. forall zeroflag5:bool. forall result24:bool.
+  forall signflag5:bool. forall result25:bool. forall carryflag3:bool.
+  forall result26:bool__ref. forall overflowflag3:bool. ((((rbp = rsp) and
+  (readmem64(sub2(rbp, rliteral5), memory) = rliteral7)) and
+  (forall i:t2. ((ule2(rliteral7, i) and ule2(i, rliteral1)) ->
+  ((inrange64(i, readmem64(sub2(rbp, rliteral32), memory),
+  readmem64(sub2(rbp, rliteral33), memory)) = true) -> (insaferegion64(i,
+  add2(rsp, rliteral5)) = true))))) -> (((((o = readmem64(sub2(rbp,
+  rliteral32), memory)) and ((((((((bw_and2(o,
+  rliteral9) = toBig1(to_rep((memory[sub2(rbp, rliteral32)])))) and
+  (bw_and2(o, rliteral10) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
+  rliteral32), rliteral2)]))), rliteral11))) and (bw_and2(o,
+  rliteral12) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral32),
+  rliteral3)]))), rliteral13))) and (bw_and2(o,
+  rliteral14) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral32),
+  rliteral15)]))), rliteral16))) and (bw_and2(o,
+  rliteral17) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral32),
+  rliteral18)]))), rliteral19))) and (bw_and2(o,
+  rliteral20) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral32),
+  rliteral21)]))), rliteral22))) and (bw_and2(o,
+  rliteral23) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral32),
+  rliteral24)]))), rliteral25))) and (bw_and2(o,
+  rliteral26) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral32),
+  rliteral27)]))), rliteral28)))) and (o1 = o)) and (({ t__content2 = result
+  } = { t__content2 = saved_32 }) and (saved_321 = o1))) ->
+  (((((o2 = readmem64(sub2(rbp, rliteral33), memory)) and ((((((((bw_and2(o2,
+  rliteral9) = toBig1(to_rep((memory[sub2(rbp, rliteral33)])))) and
+  (bw_and2(o2, rliteral10) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
+  rliteral33), rliteral2)]))), rliteral11))) and (bw_and2(o2,
+  rliteral12) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral3)]))), rliteral13))) and (bw_and2(o2,
+  rliteral14) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral15)]))), rliteral16))) and (bw_and2(o2,
+  rliteral17) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral18)]))), rliteral19))) and (bw_and2(o2,
+  rliteral20) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral21)]))), rliteral22))) and (bw_and2(o2,
+  rliteral23) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral24)]))), rliteral25))) and (bw_and2(o2,
+  rliteral26) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral27)]))), rliteral28)))) and (o3 = o2)) and (({ t__content2 =
+  result1 } = { t__content2 = saved_72 }) and (saved_721 = o3))) ->
+  (((((o4 = readmem64(sub2(rbp, rliteral5), memory)) and ((((((((bw_and2(o4,
+  rliteral9) = toBig1(to_rep((memory[sub2(rbp, rliteral5)])))) and
+  (bw_and2(o4, rliteral10) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
+  rliteral5), rliteral2)]))), rliteral11))) and (bw_and2(o4,
+  rliteral12) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral5),
+  rliteral3)]))), rliteral13))) and (bw_and2(o4,
+  rliteral14) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral5),
+  rliteral15)]))), rliteral16))) and (bw_and2(o4,
+  rliteral17) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral5),
+  rliteral18)]))), rliteral19))) and (bw_and2(o4,
+  rliteral20) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral5),
+  rliteral21)]))), rliteral22))) and (bw_and2(o4,
+  rliteral23) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral5),
+  rliteral24)]))), rliteral25))) and (bw_and2(o4,
+  rliteral26) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral5),
+  rliteral27)]))), rliteral28)))) and (o5 = o4)) and (({ t__content2 =
+  result2 } = { t__content2 = tmp_register }) and (tmp_register1 = o5))) ->
+  (((((o6 = readmem64(rbp, memory)) and ((((((((bw_and2(o6,
+  rliteral9) = toBig1(to_rep((memory[rbp])))) and (bw_and2(o6,
+  rliteral10) = mul2(toBig1(to_rep((memory[add2(rbp, rliteral2)]))),
+  rliteral11))) and (bw_and2(o6,
+  rliteral12) = mul2(toBig1(to_rep((memory[add2(rbp, rliteral3)]))),
+  rliteral13))) and (bw_and2(o6,
+  rliteral14) = mul2(toBig1(to_rep((memory[add2(rbp, rliteral15)]))),
+  rliteral16))) and (bw_and2(o6,
+  rliteral17) = mul2(toBig1(to_rep((memory[add2(rbp, rliteral18)]))),
+  rliteral19))) and (bw_and2(o6,
+  rliteral20) = mul2(toBig1(to_rep((memory[add2(rbp, rliteral21)]))),
+  rliteral22))) and (bw_and2(o6,
+  rliteral23) = mul2(toBig1(to_rep((memory[add2(rbp, rliteral24)]))),
+  rliteral25))) and (bw_and2(o6,
+  rliteral26) = mul2(toBig1(to_rep((memory[add2(rbp, rliteral27)]))),
+  rliteral28)))) and (o7 = o6)) and (({ t__content2 = result3 } = {
+  t__content2 = saved_rbp }) and (saved_rbp1 = o7))) ->
+  (((((o8 = readmem64(add2(rsp, rliteral5), memory)) and ((((((((bw_and2(o8,
+  rliteral9) = toBig1(to_rep((memory[add2(rsp, rliteral5)])))) and
+  (bw_and2(o8, rliteral10) = mul2(toBig1(to_rep((memory[add2(add2(rsp,
+  rliteral5), rliteral2)]))), rliteral11))) and (bw_and2(o8,
+  rliteral12) = mul2(toBig1(to_rep((memory[add2(add2(rsp, rliteral5),
+  rliteral3)]))), rliteral13))) and (bw_and2(o8,
+  rliteral14) = mul2(toBig1(to_rep((memory[add2(add2(rsp, rliteral5),
+  rliteral15)]))), rliteral16))) and (bw_and2(o8,
+  rliteral17) = mul2(toBig1(to_rep((memory[add2(add2(rsp, rliteral5),
+  rliteral18)]))), rliteral19))) and (bw_and2(o8,
+  rliteral20) = mul2(toBig1(to_rep((memory[add2(add2(rsp, rliteral5),
+  rliteral21)]))), rliteral22))) and (bw_and2(o8,
+  rliteral23) = mul2(toBig1(to_rep((memory[add2(add2(rsp, rliteral5),
+  rliteral24)]))), rliteral25))) and (bw_and2(o8,
+  rliteral26) = mul2(toBig1(to_rep((memory[add2(add2(rsp, rliteral5),
+  rliteral27)]))), rliteral28)))) and (o9 = o8)) and (({ t__content2 =
+  result4 } = { t__content2 = saved_ra }) and (saved_ra1 = o9))) ->
+  (((result5 = saved_mem) and (saved_mem1 = memory)) ->
+  ((rsp = rliteral34) -> (((result6 = rax) and (rax1 = tmp_register1)) ->
+  ((((((o10 = readmem64(sub2(rbp, rliteral33), memory)) and
+  ((((((((bw_and2(o10, rliteral9) = toBig1(to_rep((memory[sub2(rbp,
+  rliteral33)])))) and (bw_and2(o10,
+  rliteral10) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral2)]))), rliteral11))) and (bw_and2(o10,
+  rliteral12) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral3)]))), rliteral13))) and (bw_and2(o10,
+  rliteral14) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral15)]))), rliteral16))) and (bw_and2(o10,
+  rliteral17) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral18)]))), rliteral19))) and (bw_and2(o10,
+  rliteral20) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral21)]))), rliteral22))) and (bw_and2(o10,
+  rliteral23) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral24)]))), rliteral25))) and (bw_and2(o10,
+  rliteral26) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral27)]))), rliteral28)))) and (o11 = sub2(rax1, o10))) and
+  (((o11 = rliteral7) and (o12 = true)) or ((not (o11 = rliteral7)) and
+  (o12 = false)))) and ((result7 = zeroflag) and (zeroflag1 = o12))) ->
+  ((((((o13 = readmem64(sub2(rbp, rliteral33), memory)) and
+  ((((((((bw_and2(o13, rliteral9) = toBig1(to_rep((memory[sub2(rbp,
+  rliteral33)])))) and (bw_and2(o13,
+  rliteral10) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral2)]))), rliteral11))) and (bw_and2(o13,
+  rliteral12) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral3)]))), rliteral13))) and (bw_and2(o13,
+  rliteral14) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral15)]))), rliteral16))) and (bw_and2(o13,
+  rliteral17) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral18)]))), rliteral19))) and (bw_and2(o13,
+  rliteral20) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral21)]))), rliteral22))) and (bw_and2(o13,
+  rliteral23) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral24)]))), rliteral25))) and (bw_and2(o13,
+  rliteral26) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral27)]))), rliteral28)))) and (o14 = sub2(rax1, o13))) and
+  ((ugt2(o14, rliteral35) and (o15 = true)) or ((not ugt2(o14,
+  rliteral35)) and (o15 = false)))) and ((result8 = signflag) and
+  (signflag1 = o15))) -> (((((o16 = readmem64(sub2(rbp, rliteral33),
+  memory)) and ((((((((bw_and2(o16,
+  rliteral9) = toBig1(to_rep((memory[sub2(rbp, rliteral33)])))) and
+  (bw_and2(o16, rliteral10) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
+  rliteral33), rliteral2)]))), rliteral11))) and (bw_and2(o16,
+  rliteral12) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral3)]))), rliteral13))) and (bw_and2(o16,
+  rliteral14) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral15)]))), rliteral16))) and (bw_and2(o16,
+  rliteral17) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral18)]))), rliteral19))) and (bw_and2(o16,
+  rliteral20) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral21)]))), rliteral22))) and (bw_and2(o16,
+  rliteral23) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral24)]))), rliteral25))) and (bw_and2(o16,
+  rliteral26) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral27)]))), rliteral28)))) and ((ult2(rax1, o16) and (o17 = true)) or
+  ((not ult2(rax1, o16)) and (o17 = false)))) and ((result9 = carryflag) and
+  (carryflag1 = o17))) -> (((((((not (signflag1 = true)) and ugt2(rax1,
+  rliteral35)) and (((o20 = readmem64(sub2(rbp, rliteral33), memory)) and
+  ((((((((bw_and2(o20, rliteral9) = toBig1(to_rep((memory[sub2(rbp,
+  rliteral33)])))) and (bw_and2(o20,
+  rliteral10) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral2)]))), rliteral11))) and (bw_and2(o20,
+  rliteral12) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral3)]))), rliteral13))) and (bw_and2(o20,
+  rliteral14) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral15)]))), rliteral16))) and (bw_and2(o20,
+  rliteral17) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral18)]))), rliteral19))) and (bw_and2(o20,
+  rliteral20) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral21)]))), rliteral22))) and (bw_and2(o20,
+  rliteral23) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral24)]))), rliteral25))) and (bw_and2(o20,
+  rliteral26) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral27)]))), rliteral28)))) and ((ule2(o20, rliteral35) and
+  (o21 = true)) or ((not ule2(o20, rliteral35)) and (o21 = false))))) or
+  ((not ((not (signflag1 = true)) and ugt2(rax1, rliteral35))) and
+  (o21 = false))) and (((((signflag1 = true) and (((o18 = readmem64(sub2(rbp,
+  rliteral33), memory)) and ((((((((bw_and2(o18,
+  rliteral9) = toBig1(to_rep((memory[sub2(rbp, rliteral33)])))) and
+  (bw_and2(o18, rliteral10) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
+  rliteral33), rliteral2)]))), rliteral11))) and (bw_and2(o18,
+  rliteral12) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral3)]))), rliteral13))) and (bw_and2(o18,
+  rliteral14) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral15)]))), rliteral16))) and (bw_and2(o18,
+  rliteral17) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral18)]))), rliteral19))) and (bw_and2(o18,
+  rliteral20) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral21)]))), rliteral22))) and (bw_and2(o18,
+  rliteral23) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral24)]))), rliteral25))) and (bw_and2(o18,
+  rliteral26) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, rliteral33),
+  rliteral27)]))), rliteral28)))) and ((ugt2(o18, rliteral35) and
+  (o19 = true)) or ((not ugt2(o18, rliteral35)) and (o19 = false))))) or
+  ((not (signflag1 = true)) and (o19 = false))) and ((((o19 = true) and
+  ule2(rax1, rliteral35)) and (o22 = true)) or ((not ((o19 = true) and
+  ule2(rax1, rliteral35))) and (o22 = false)))) and (o23 = match_bool(o22,
+  true, o21)))) and ((result10 = overflowflag) and (overflowflag1 = o23))) ->
+  ((carryflag1 = true) ->
+  (((forall i:t2. ((ule2(saved_321, i) and ule2(i, sub2(add2(saved_321,
+    saved_721), rliteral2))) -> (insaferegion64(i, add2(rsp,
+    rliteral5)) = true))) and
+  ((forall i:t2. ((ule2(rliteral7, i) and ule2(i, rliteral1)) ->
+   (((not (inrange64(i, saved_321, saved_721) = true)) and (not (inrange64(i,
+   sub2(rbp, rliteral5), rliteral5) = true))) ->
+   (to_rep((memory1[i])) = to_rep((memory[i])))))) and
+  ((saved_321 = readmem64(sub2(rbp, rliteral32), memory1)) and
+  ((saved_721 = readmem64(sub2(rbp, rliteral33), memory1)) and
+  (ult2(tmp_register2, saved_721) and ((readmem64(rbp,
+  memory1) = saved_rbp1) and (readmem64(add2(rsp, rliteral5),
+  memory1) = saved_ra1))))))) -> (((((o24 = readmem64(sub2(rbp, rliteral32),
+  memory1)) and ((((((((bw_and2(o24,
+  rliteral9) = toBig1(to_rep((memory1[sub2(rbp, rliteral32)])))) and
+  (bw_and2(o24, rliteral10) = mul2(toBig1(to_rep((memory1[add2(sub2(rbp,
+  rliteral32), rliteral2)]))), rliteral11))) and (bw_and2(o24,
+  rliteral12) = mul2(toBig1(to_rep((memory1[add2(sub2(rbp, rliteral32),
+  rliteral3)]))), rliteral13))) and (bw_and2(o24,
+  rliteral14) = mul2(toBig1(to_rep((memory1[add2(sub2(rbp, rliteral32),
+  rliteral15)]))), rliteral16))) and (bw_and2(o24,
+  rliteral17) = mul2(toBig1(to_rep((memory1[add2(sub2(rbp, rliteral32),
+  rliteral18)]))), rliteral19))) and (bw_and2(o24,
+  rliteral20) = mul2(toBig1(to_rep((memory1[add2(sub2(rbp, rliteral32),
+  rliteral21)]))), rliteral22))) and (bw_and2(o24,
+  rliteral23) = mul2(toBig1(to_rep((memory1[add2(sub2(rbp, rliteral32),
+  rliteral24)]))), rliteral25))) and (bw_and2(o24,
+  rliteral26) = mul2(toBig1(to_rep((memory1[add2(sub2(rbp, rliteral32),
+  rliteral27)]))), rliteral28)))) and ((result11 = rdx) and
+  (rdx1 = o24))) and (((result12 = rax2) and (rax3 = tmp_register2)) and
+  (((result13 = zeroflag2) and (((add2(rdx1, rax3) = rliteral7) and
+  (zeroflag3 = true)) or ((not (add2(rdx1, rax3) = rliteral7)) and
+  (zeroflag3 = false)))) and (((result14 = signflag2) and ((ugt2(add2(rdx1,
+  rax3), rliteral35) and (signflag3 = true)) or ((not ugt2(add2(rdx1, rax3),
+  rliteral35)) and (signflag3 = false)))) and (((result15 = rdx1) and
+  (rdx2 = add2(rdx1, rax3))) and ((((o25 = readmem64(sub2(rbp, rliteral36),
+  memory1)) and ((((((((bw_and2(o25,
+  rliteral9) = toBig1(to_rep((memory1[sub2(rbp, rliteral36)])))) and
+  (bw_and2(o25, rliteral10) = mul2(toBig1(to_rep((memory1[add2(sub2(rbp,
+  rliteral36), rliteral2)]))), rliteral11))) and (bw_and2(o25,
+  rliteral12) = mul2(toBig1(to_rep((memory1[add2(sub2(rbp, rliteral36),
+  rliteral3)]))), rliteral13))) and (bw_and2(o25,
+  rliteral14) = mul2(toBig1(to_rep((memory1[add2(sub2(rbp, rliteral36),
+  rliteral15)]))), rliteral16))) and (bw_and2(o25,
+  rliteral17) = mul2(toBig1(to_rep((memory1[add2(sub2(rbp, rliteral36),
+  rliteral18)]))), rliteral19))) and (bw_and2(o25,
+  rliteral20) = mul2(toBig1(to_rep((memory1[add2(sub2(rbp, rliteral36),
+  rliteral21)]))), rliteral22))) and (bw_and2(o25,
+  rliteral23) = mul2(toBig1(to_rep((memory1[add2(sub2(rbp, rliteral36),
+  rliteral24)]))), rliteral25))) and (bw_and2(o25,
+  rliteral26) = mul2(toBig1(to_rep((memory1[add2(sub2(rbp, rliteral36),
+  rliteral27)]))), rliteral28)))) and ((result16 = rcx) and
+  (rcx1 = o25))) and (((result17 = rax3) and (rax4 = tmp_register2)) and
+  (((result18 = zeroflag3) and (((add2(rax4, rcx1) = rliteral7) and
+  (zeroflag4 = true)) or ((not (add2(rax4, rcx1) = rliteral7)) and
+  (zeroflag4 = false)))) and (((result19 = signflag3) and ((ugt2(add2(rax4,
+  rcx1), rliteral35) and (signflag4 = true)) or ((not ugt2(add2(rax4, rcx1),
+  rliteral35)) and (signflag4 = false)))) and (((result20 = rax4) and
+  (rax5 = add2(rax4, rcx1))) and (((((o26 = readmem8(rax5, memory1)) and
+  (o26 = to_rep((memory1[rax5])))) and (o27 = toBig(o26))) and
+  (writereg32post(rax6, o27) = true)) and
+  ((forall i:t2. ((ule2(saved_321, i) and ule2(i, sub2(add2(saved_321,
+   saved_721), rliteral2))) -> (insaferegion64(i, add2(rsp,
+   rliteral5)) = true))) and
+  ((forall i:t2. ((ule2(rliteral7, i) and ule2(i, rliteral1)) ->
+   (((not (inrange64(i, saved_321, saved_721) = true)) and (not (inrange64(i,
+   sub2(rbp, rliteral5), rliteral5) = true))) ->
+   (to_rep((memory1[i])) = to_rep((memory[i])))))) and
+  ((saved_321 = readmem64(sub2(rbp, rliteral32), memory1)) and
+  ((saved_721 = readmem64(sub2(rbp, rliteral33), memory1)) and
+  (ult2(tmp_register2, saved_721) and ((inrange64(rdx2, saved_321,
+  saved_721) = true) and ((((o28 = al(rax6)) and
+  (o28 = readreglow8(rax6))) and ((to_rep((memory2[rdx2])) = o28) and
+  (forall i:t2. ((ule2(rliteral7, i) and ule2(i, rliteral1)) ->
+  ((not (i = rdx2)) -> (to_rep((memory2[i])) = to_rep((memory1[i])))))))) and
+  (((result21 = tmp_register2) and (tmp_register3 = add2(tmp_register2,
+  rliteral2))) and (((result22 = rax6) and (rax7 = tmp_register3)) and
+  ((((((o29 = readmem64(sub2(rbp, rliteral33), memory2)) and
+  ((((((((bw_and2(o29, rliteral9) = toBig1(to_rep((memory2[sub2(rbp,
+  rliteral33)])))) and (bw_and2(o29,
+  rliteral10) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral2)]))), rliteral11))) and (bw_and2(o29,
+  rliteral12) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral3)]))), rliteral13))) and (bw_and2(o29,
+  rliteral14) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral15)]))), rliteral16))) and (bw_and2(o29,
+  rliteral17) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral18)]))), rliteral19))) and (bw_and2(o29,
+  rliteral20) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral21)]))), rliteral22))) and (bw_and2(o29,
+  rliteral23) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral24)]))), rliteral25))) and (bw_and2(o29,
+  rliteral26) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral27)]))), rliteral28)))) and (o30 = sub2(rax7, o29))) and
+  (((o30 = rliteral7) and (o31 = true)) or ((not (o30 = rliteral7)) and
+  (o31 = false)))) and ((result23 = zeroflag4) and (zeroflag5 = o31))) and
+  ((((((o32 = readmem64(sub2(rbp, rliteral33), memory2)) and
+  ((((((((bw_and2(o32, rliteral9) = toBig1(to_rep((memory2[sub2(rbp,
+  rliteral33)])))) and (bw_and2(o32,
+  rliteral10) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral2)]))), rliteral11))) and (bw_and2(o32,
+  rliteral12) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral3)]))), rliteral13))) and (bw_and2(o32,
+  rliteral14) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral15)]))), rliteral16))) and (bw_and2(o32,
+  rliteral17) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral18)]))), rliteral19))) and (bw_and2(o32,
+  rliteral20) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral21)]))), rliteral22))) and (bw_and2(o32,
+  rliteral23) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral24)]))), rliteral25))) and (bw_and2(o32,
+  rliteral26) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral27)]))), rliteral28)))) and (o33 = sub2(rax7, o32))) and
+  ((ugt2(o33, rliteral35) and (o34 = true)) or ((not ugt2(o33,
+  rliteral35)) and (o34 = false)))) and ((result24 = signflag4) and
+  (signflag5 = o34))) and (((((o35 = readmem64(sub2(rbp, rliteral33),
+  memory2)) and ((((((((bw_and2(o35,
+  rliteral9) = toBig1(to_rep((memory2[sub2(rbp, rliteral33)])))) and
+  (bw_and2(o35, rliteral10) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp,
+  rliteral33), rliteral2)]))), rliteral11))) and (bw_and2(o35,
+  rliteral12) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral3)]))), rliteral13))) and (bw_and2(o35,
+  rliteral14) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral15)]))), rliteral16))) and (bw_and2(o35,
+  rliteral17) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral18)]))), rliteral19))) and (bw_and2(o35,
+  rliteral20) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral21)]))), rliteral22))) and (bw_and2(o35,
+  rliteral23) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral24)]))), rliteral25))) and (bw_and2(o35,
+  rliteral26) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral27)]))), rliteral28)))) and ((ult2(rax7, o35) and (o36 = true)) or
+  ((not ult2(rax7, o35)) and (o36 = false)))) and
+  ((result25 = carryflag2) and (carryflag3 = o36))) and
+  (((((((not (signflag5 = true)) and ugt2(rax7, rliteral35)) and
+  (((o39 = readmem64(sub2(rbp, rliteral33), memory2)) and
+  ((((((((bw_and2(o39, rliteral9) = toBig1(to_rep((memory2[sub2(rbp,
+  rliteral33)])))) and (bw_and2(o39,
+  rliteral10) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral2)]))), rliteral11))) and (bw_and2(o39,
+  rliteral12) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral3)]))), rliteral13))) and (bw_and2(o39,
+  rliteral14) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral15)]))), rliteral16))) and (bw_and2(o39,
+  rliteral17) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral18)]))), rliteral19))) and (bw_and2(o39,
+  rliteral20) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral21)]))), rliteral22))) and (bw_and2(o39,
+  rliteral23) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral24)]))), rliteral25))) and (bw_and2(o39,
+  rliteral26) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral27)]))), rliteral28)))) and ((ule2(o39, rliteral35) and
+  (o40 = true)) or ((not ule2(o39, rliteral35)) and (o40 = false))))) or
+  ((not ((not (signflag5 = true)) and ugt2(rax7, rliteral35))) and
+  (o40 = false))) and (((((signflag5 = true) and (((o37 = readmem64(sub2(rbp,
+  rliteral33), memory2)) and ((((((((bw_and2(o37,
+  rliteral9) = toBig1(to_rep((memory2[sub2(rbp, rliteral33)])))) and
+  (bw_and2(o37, rliteral10) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp,
+  rliteral33), rliteral2)]))), rliteral11))) and (bw_and2(o37,
+  rliteral12) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral3)]))), rliteral13))) and (bw_and2(o37,
+  rliteral14) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral15)]))), rliteral16))) and (bw_and2(o37,
+  rliteral17) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral18)]))), rliteral19))) and (bw_and2(o37,
+  rliteral20) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral21)]))), rliteral22))) and (bw_and2(o37,
+  rliteral23) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral24)]))), rliteral25))) and (bw_and2(o37,
+  rliteral26) = mul2(toBig1(to_rep((memory2[add2(sub2(rbp, rliteral33),
+  rliteral27)]))), rliteral28)))) and ((ugt2(o37, rliteral35) and
+  (o38 = true)) or ((not ugt2(o37, rliteral35)) and (o38 = false))))) or
+  ((not (signflag5 = true)) and (o38 = false))) and ((((o38 = true) and
+  ule2(rax7, rliteral35)) and (o41 = true)) or ((not ((o38 = true) and
+  ule2(rax7, rliteral35))) and (o41 = false)))) and (o42 = match_bool(o41,
+  true, o40)))) and ((result26 = { bool__content = overflowflag2 }) and
+  (overflowflag3 = o42))) and (carryflag3 = true))))))))))))))))))))))))) ->
+  (saved_721 = readmem64(sub2(rbp, rliteral33), memory2)))))))))))))))))))

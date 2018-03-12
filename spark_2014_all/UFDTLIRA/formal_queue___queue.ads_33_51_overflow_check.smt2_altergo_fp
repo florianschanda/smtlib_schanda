@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -939,99 +939,43 @@ axiom w_get__post_axiom :
   ((in_range2(witness1) and (has_witness(container, witness1) = true)) ->
   in_range8(w_get(container, witness1)))))
 
-logic r__split_fields : us_main_type
-
-logic queue__enqueue__result : count_type
-
-logic queue__enqueue__result1 : us_main_type
-
-logic queue__enqueue__r__assume : count_type
-
-logic queue__enqueue__r__assume1 : us_main_type
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : bool
-
-logic i : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : bool
-
-logic o9 : us_rep1
-
-logic o10 : us_rep1
-
-logic o11 : int
-
-logic o12 : int
-
-logic o13 : bool
-
-logic result : us_main_type
-
-logic r__split_fields1 : us_main_type
-
-logic r__split_fields2 : us_main_type
-
-logic result1 : count_type
-
-logic result2 : us_main_type
-
-logic queue__enqueue__result2 : count_type
-
-logic queue__enqueue__result3 : us_main_type
-
-logic queue__enqueue__result4 : count_type
-
-logic queue__enqueue__result5 : us_main_type
-
-logic queue__enqueue__result6 : count_type
-
-logic queue__enqueue__result7 : us_main_type
-
-logic r__split_fields3 : us_main_type
-
-logic queue__enqueue__result8 : count_type
-
-logic queue__enqueue__result9 : us_main_type
-
-logic r__split_fields4 : us_main_type
-
-logic queue__enqueue__result10 : count_type
-
-logic queue__enqueue__result11 : us_main_type
-
-logic result3 : bool
-
-axiom H : in_range3(v)
-
-axiom H1 : (length({ us_split_discrs1 = {
+ (* File "a-cfdlli.ads", line 43, characters 0-0 *)
+goal WP_parameter_def :
+  (forall r__split_fields:us_main_type.
+  forall queue__enqueue__result:count_type.
+  forall queue__enqueue__result1:us_main_type.
+  forall queue__enqueue__r__assume:count_type.
+  forall queue__enqueue__r__assume1:us_main_type. forall o:int.
+  forall o1:int. forall o2:int. forall o3:bool. forall i:int. forall o4:int.
+  forall o5:int. forall o6:int. forall o7:bool. forall o8:bool.
+  forall result:us_main_type. forall r__split_fields1:us_main_type.
+  forall r__split_fields2:us_main_type. forall result1:count_type.
+  forall result2:us_main_type. forall queue__enqueue__result2:count_type.
+  forall queue__enqueue__result3:us_main_type.
+  forall queue__enqueue__result4:count_type.
+  forall queue__enqueue__result5:us_main_type.
+  forall queue__enqueue__result6:count_type.
+  forall queue__enqueue__result7:us_main_type.
+  forall r__split_fields3:us_main_type.
+  forall queue__enqueue__result8:count_type.
+  forall queue__enqueue__result9:us_main_type.
+  forall r__split_fields4:us_main_type.
+  forall queue__enqueue__result10:count_type.
+  forall queue__enqueue__result11:us_main_type. forall result3:bool.
+  (in_range3(v) -> ((length({ us_split_discrs1 = {
   rec__queue__mylists__list__capacity = q }; us_split_fields1 = {
-  rec__queue__mylists__list = q1 } }) <  to_rep(q))
-
-axiom H2 : ((((({ us_split_discrs1 = { rec__queue__mylists__list__capacity =
+  rec__queue__mylists__list = q1 } }) <  to_rep(q)) -> (((((({
+  us_split_discrs1 = { rec__queue__mylists__list__capacity =
   queue__enqueue__r__assume }; us_split_fields1 = {
   rec__queue__mylists__list = queue__enqueue__r__assume1 } } = copy({
   us_split_discrs1 = { rec__queue__mylists__list__capacity = q };
   us_split_fields1 = { rec__queue__mylists__list = q1 } }, 0)) and
-  (((((bool_eq1(length1(model__({ us_split_discrs1 = {
+  ((((bool_eq1(length1(model__({ us_split_discrs1 = {
   rec__queue__mylists__list__capacity = queue__enqueue__r__assume };
   us_split_fields1 = { rec__queue__mylists__list = queue__enqueue__r__assume1
   } })), length1(model__({ us_split_discrs1 = {
   rec__queue__mylists__list__capacity = q }; us_split_fields1 = {
-  rec__queue__mylists__list = q1 } }))) = true) ->
+  rec__queue__mylists__list = q1 } }))) = true) and
   (forall n:int. (((1 <= n) and (n <= (0 + length1(model__({
   us_split_discrs1 = { rec__queue__mylists__list__capacity =
   queue__enqueue__r__assume }; us_split_fields1 = {
@@ -1041,21 +985,16 @@ axiom H2 : ((((({ us_split_discrs1 = { rec__queue__mylists__list__capacity =
   rec__queue__mylists__list = queue__enqueue__r__assume1 } }),
   n) = get(model__({ us_split_discrs1 = {
   rec__queue__mylists__list__capacity = q }; us_split_fields1 = {
-  rec__queue__mylists__list = q1 } }), n))))) and
-  (not (bool_eq1(length1(model__({ us_split_discrs1 = {
-  rec__queue__mylists__list__capacity = queue__enqueue__r__assume };
-  us_split_fields1 = { rec__queue__mylists__list = queue__enqueue__r__assume1
-  } })), length1(model__({ us_split_discrs1 = {
-  rec__queue__mylists__list__capacity = q }; us_split_fields1 = {
-  rec__queue__mylists__list = q1 } }))) = false))) and (oeq(positions({
+  rec__queue__mylists__list = q1 } }), n))))) and (oeq(positions({
   us_split_discrs1 = { rec__queue__mylists__list__capacity =
   queue__enqueue__r__assume }; us_split_fields1 = {
   rec__queue__mylists__list = queue__enqueue__r__assume1 } }), positions({
   us_split_discrs1 = { rec__queue__mylists__list__capacity = q };
   us_split_fields1 = { rec__queue__mylists__list = q1 } })) = true)) and
-  (to_rep(queue__enqueue__r__assume) = to_rep(q)))) and
-  (((result = r__split_fields) and
-  (queue__enqueue__r__assume1 = r__split_fields1)) and
+  (to_rep(queue__enqueue__r__assume) = to_rep(q)))) and ((({
+  us_split_fields__content = { rec__queue__mylists__list = result } } = {
+  us_split_fields__content = { rec__queue__mylists__list = r__split_fields }
+  }) and (queue__enqueue__r__assume1 = r__split_fields1)) and
   (r__split_discrs = queue__enqueue__r__assume))) and (((((length({
   us_split_discrs1 = { rec__queue__mylists__list__capacity = r__split_discrs
   }; us_split_fields1 = { rec__queue__mylists__list = r__split_fields2 }
@@ -1089,35 +1028,39 @@ axiom H2 : ((((({ us_split_discrs1 = { rec__queue__mylists__list__capacity =
   r__split_discrs }; us_split_fields1 = { rec__queue__mylists__list =
   r__split_fields2 } }), 1, 1) = true)) and
   ((((queue__enqueue__result4 = queue__enqueue__result2) and
-  (queue__enqueue__result5 = queue__enqueue__result3)) and
-  ((queue__enqueue__result6 = queue__enqueue__result2) and
-  (queue__enqueue__result7 = queue__enqueue__result3))) and
-  (((result1 = queue__enqueue__result) and
-  (result2 = queue__enqueue__result1)) and
+  (queue__enqueue__result5 = queue__enqueue__result3)) and ({
+  us_split_discrs1 = { rec__queue__mylists__list__capacity =
+  queue__enqueue__result6 }; us_split_fields1 = { rec__queue__mylists__list =
+  queue__enqueue__result7 } } = { us_split_discrs1 = {
+  rec__queue__mylists__list__capacity = queue__enqueue__result2 };
+  us_split_fields1 = { rec__queue__mylists__list = queue__enqueue__result3 }
+  })) and (({ list__content = { us_split_discrs1 = {
+  rec__queue__mylists__list__capacity = result1 }; us_split_fields1 = {
+  rec__queue__mylists__list = result2 } } } = { list__content = {
+  us_split_discrs1 = { rec__queue__mylists__list__capacity =
+  queue__enqueue__result }; us_split_fields1 = { rec__queue__mylists__list =
+  queue__enqueue__result1 } } }) and
   ((r__split_discrs = queue__enqueue__result2) and
-  (queue__enqueue__result3 = r__split_fields2)))))) and
-  ((((queue__enqueue__result8 = queue__enqueue__result4) and
-  (queue__enqueue__result9 = queue__enqueue__result5)) and
-  (r__split_fields3 = r__split_fields2)) and
-  (((queue__enqueue__result10 = queue__enqueue__result6) and
-  (queue__enqueue__result11 = queue__enqueue__result7)) and
-  (r__split_fields4 = r__split_fields2))))
-
-axiom H3 : ((o5 = length({ us_split_discrs1 = {
+  (queue__enqueue__result3 = r__split_fields2)))))) and ((({ list__content =
+  { us_split_discrs1 = { rec__queue__mylists__list__capacity =
+  queue__enqueue__result8 }; us_split_fields1 = { rec__queue__mylists__list =
+  queue__enqueue__result9 } } } = { list__content = { us_split_discrs1 = {
+  rec__queue__mylists__list__capacity = queue__enqueue__result4 };
+  us_split_fields1 = { rec__queue__mylists__list = queue__enqueue__result5 }
+  } }) and (r__split_fields3 = r__split_fields2)) and (({ us_split_discrs1 =
+  { rec__queue__mylists__list__capacity = queue__enqueue__result10 };
+  us_split_fields1 = { rec__queue__mylists__list = queue__enqueue__result11 }
+  } = { us_split_discrs1 = { rec__queue__mylists__list__capacity =
+  queue__enqueue__result6 }; us_split_fields1 = { rec__queue__mylists__list =
+  queue__enqueue__result7 } }) and ({ rec__queue__mylists__list =
+  r__split_fields4 } = { rec__queue__mylists__list = r__split_fields2
+  })))) -> ((((((((o4 = length({ us_split_discrs1 = {
   rec__queue__mylists__list__capacity = q }; us_split_fields1 = {
-  rec__queue__mylists__list = q1 } })) and (in_range2(o5) and
-  (o5 <= to_rep(q))))
-
-axiom H4 : (o6 = (o5 + 1))
-
-axiom H5 : ((o7 = o6) and in_range1(o6))
-
-axiom H6 : (((i <= o7) -> (o8 = true)) and ((not (i <= o7)) -> (o8 = false)))
-
-axiom H7 : (((2 <= i) -> (result3 = o8)) and ((not (2 <= i)) ->
-  (result3 = false)))
-
-axiom H8 : ((o13 = true) <->
+  rec__queue__mylists__list = q1 } })) and (in_range2(o4) and
+  (o4 <= to_rep(q)))) and (o5 = (o4 + 1))) and ((o6 = o5) and
+  in_range1(o5))) and (((i <= o6) and (o7 = true)) or ((not (i <= o6)) and
+  (o7 = false)))) and (((2 <= i) and (result3 = o7)) or ((not (2 <= i)) and
+  (result3 = false)))) and ((o8 = true) <->
   (forall i1:int. (((2 <= i1) and (i1 <= (length({ us_split_discrs1 = {
   rec__queue__mylists__list__capacity = q }; us_split_fields1 = {
   rec__queue__mylists__list = q1 } }) + 1))) -> (get(model__({
@@ -1125,24 +1068,15 @@ axiom H8 : ((o13 = true) <->
   queue__enqueue__result8 }; us_split_fields1 = { rec__queue__mylists__list =
   queue__enqueue__result9 } }), i1) = get(model__({ us_split_discrs1 = {
   rec__queue__mylists__list__capacity = q }; us_split_fields1 = {
-  rec__queue__mylists__list = q1 } }), (i1 - 1))))))
-
-axiom H9 : ((o3 = first_element({ us_split_discrs1 = {
+  rec__queue__mylists__list = q1 } }), (i1 - 1))))))) ->
+  ((((o2 = first_element({ us_split_discrs1 = {
   rec__queue__mylists__list__capacity = queue__enqueue__result8 };
   us_split_fields1 = { rec__queue__mylists__list = queue__enqueue__result9 }
-  })) and (in_range6(o3) and (o3 = get(model__({ us_split_discrs1 = {
+  })) and (in_range6(o2) and (o2 = get(model__({ us_split_discrs1 = {
   rec__queue__mylists__list__capacity = queue__enqueue__result8 };
   us_split_fields1 = { rec__queue__mylists__list = queue__enqueue__result9 }
-  }), 1))))
-
-axiom H10 : (((o3 = v) -> (o4 = true)) and ((not (o3 = v)) -> (o4 = false)))
-
-axiom H11 : ((o = length({ us_split_discrs1 = {
+  }), 1)))) and (((o2 = v) and (o3 = true)) or ((not (o2 = v)) and
+  (o3 = false)))) -> ((((o = length({ us_split_discrs1 = {
   rec__queue__mylists__list__capacity = q }; us_split_fields1 = {
   rec__queue__mylists__list = q1 } })) and (in_range2(o) and
-  (o <= to_rep(q))))
-
-axiom H12 : (o1 = (o + 1))
-
- (* File "a-cfdlli.ads", line 43, characters 0-0 *)
-goal WP_parameter_def : in_range1(o1)
+  (o <= to_rep(q)))) and (o1 = (o + 1))) -> in_range1(o1))))))))

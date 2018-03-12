@@ -241,13 +241,7 @@ axiom size__def_axiom :
   (forall stack__last:int [size(stack__last)]. (in_range1(stack__last) ->
   (size(stack__last) = stack__last)))
 
-logic last : int
-
-logic last1 : int
-
-axiom H : in_range1(last)
-
-axiom H1 : (not (full(last) = true))
-
  (* File "types.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : (not (full(last) = true))
+goal WP_parameter_def :
+  (forall last:int. (in_range1(last) -> ((not (full(last) = true)) ->
+  (not (full(last) = true)))))

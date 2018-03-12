@@ -302,28 +302,18 @@ axiom logging__log_type_public__compat_axiom2 :
   rec__logging__log_type_public__tmp = log; rec__ext__ = log1 }; attr__tag =
   log2 })))
 
-logic log__split_fields : log_count
-
-logic log__split_fields1 : us_private
-
-logic log__split_fields2 : log_count
-
-logic log__split_fields3 : us_private
-
-logic log__split_fields4 : log_count
-
-logic log__split_fields5 : us_private
-
-axiom H : ((log_size__21(log__attr__tag, { us_split_fields1 = {
+ (* File "foo.adb", line 22, characters 0-0 *)
+goal WP_parameter_def :
+  (forall log__split_fields:log_count. forall log__split_fields1:us_private.
+  forall log__split_fields2:log_count. forall log__split_fields3:us_private.
+  (((log_size__21(log__attr__tag, { us_split_fields1 = {
   rec__logging__log_type_public__tmp = log__split_fields2; rec__ext__ =
   log__split_fields3 }; attr__tag = log__attr__tag }) = 0) and
   init_log__2__specific_post(log__attr__tag, {
   rec__logging__log_type_public__tmp = log__split_fields2; rec__ext__ =
   log__split_fields3 }, log__attr__tag, {
   rec__logging__log_type_public__tmp = log__split_fields; rec__ext__ =
-  log__split_fields1 }))
-
- (* File "foo.adb", line 22, characters 0-0 *)
-goal WP_parameter_def : (log_size__21(log__attr__tag, { us_split_fields1 = {
-  rec__logging__log_type_public__tmp = log__split_fields2; rec__ext__ =
-  log__split_fields3 }; attr__tag = log__attr__tag }) <  10000)
+  log__split_fields1 })) -> (log_size__21(log__attr__tag, {
+  us_split_fields1 = { rec__logging__log_type_public__tmp =
+  log__split_fields2; rec__ext__ = log__split_fields3 }; attr__tag =
+  log__attr__tag }) <  10000)))

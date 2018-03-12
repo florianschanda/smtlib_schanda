@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -298,30 +298,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def :
-  (forall v:bool. forall v1:percentage.
-  (forall i:int [(singleton({ us_split_fields1 = {
-  rec__pupils__participation__studying = v;
-  rec__pupils__participation__score = v1 } }, i)[i])]. ((singleton({
-  us_split_fields1 = { rec__pupils__participation__studying = v;
-  rec__pupils__participation__score = v1 } }, i)[i]) = { us_split_fields1 = {
-  rec__pupils__participation__studying = v;
-  rec__pupils__participation__score = v1 } })))
-
 logic bool_eq5 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -332,17 +308,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and (bool_eq3((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and (bool_eq3((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq3((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq5(a,
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq3((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq5(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -352,9 +328,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq3((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq3((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)))))))
 
 type character
 
@@ -411,24 +387,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,character) farray, int, int, (int,character) farray,
-  int, int -> (int,character) farray
-
-axiom concat_def1 :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : character, int -> (int,character) farray
-
-axiom singleton_def1 :
-  (forall v:character.
-  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq7 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -439,17 +397,17 @@ axiom bool_eq_def6 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep2((a[temp___idx_78])) = to_rep2((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep2((a[temp___idx_91])) = to_rep2((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep2((a[temp___idx_78])) = to_rep2((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep2((a[temp___idx_91])) = to_rep2((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -459,37 +417,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep2((a[temp___idx_78])) = to_rep2((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq7(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq7(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep2((a[(i + 1)])) <  to_rep2((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq7(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep2((b[(i + 1)])) <  to_rep2((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep2((a[temp___idx_91])) = to_rep2((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 type formtype
 
@@ -832,33 +762,6 @@ axiom slide_def2 :
   (forall i:int [(slide2(a, old_first, new_first)[i])]. ((slide2(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat2 : (int,us_rep1) farray, int, int, (int,us_rep1) farray, int,
-  int -> (int,us_rep1) farray
-
-axiom concat_def2 :
-  (forall a:(int,us_rep1) farray. forall b:(int,us_rep1) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat2(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat2(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat2(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton2 : us_rep1, int -> (int,us_rep1) farray
-
-axiom singleton_def2 :
-  (forall v:(int,character) farray. forall v1:(int,character) farray.
-  forall v2:formtype. forall v3:(int,us_rep) farray.
-  (forall i:int [(singleton2({ us_split_fields3 = {
-  rec__pupils__pupiltype__surname = v; rec__pupils__pupiltype__forename = v1;
-  rec__pupils__pupiltype__form = v2; rec__pupils__pupiltype__scores = v3 } },
-  i)[i])]. ((singleton2({ us_split_fields3 = {
-  rec__pupils__pupiltype__surname = v; rec__pupils__pupiltype__forename = v1;
-  rec__pupils__pupiltype__form = v2; rec__pupils__pupiltype__scores = v3 } },
-  i)[i]) = { us_split_fields3 = { rec__pupils__pupiltype__surname = v;
-  rec__pupils__pupiltype__forename = v1; rec__pupils__pupiltype__form = v2;
-  rec__pupils__pupiltype__scores = v3 } })))
-
 logic bool_eq12 : (int,us_rep1) farray, int, int, (int,us_rep1) farray, int,
   int -> bool
 
@@ -869,17 +772,17 @@ axiom bool_eq_def11 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_139:int. ((((a__first <= temp___idx_139) and
-  (temp___idx_139 <= a__last)) and (bool_eq9((a[temp___idx_139]),
-  (b[((b__first - a__first) + temp___idx_139)])) = true)) or
-  (not ((a__first <= temp___idx_139) and (temp___idx_139 <= a__last)))))) ->
+  (forall temp___idx_161:int. ((((a__first <= temp___idx_161) and
+  (temp___idx_161 <= a__last)) and (bool_eq9((a[temp___idx_161]),
+  (b[((b__first - a__first) + temp___idx_161)])) = true)) or
+  (not ((a__first <= temp___idx_161) and (temp___idx_161 <= a__last)))))) ->
   (bool_eq12(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_139:int. (((a__first <= temp___idx_139) and
-  (temp___idx_139 <= a__last)) -> (bool_eq9((a[temp___idx_139]),
-  (b[((b__first - a__first) + temp___idx_139)])) = true))))) -> (bool_eq12(a,
+  (forall temp___idx_161:int. (((a__first <= temp___idx_161) and
+  (temp___idx_161 <= a__last)) -> (bool_eq9((a[temp___idx_161]),
+  (b[((b__first - a__first) + temp___idx_161)])) = true))))) -> (bool_eq12(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev2 :
@@ -889,9 +792,9 @@ axiom bool_eq_rev2 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_139:int. (((a__first <= temp___idx_139) and
-  (temp___idx_139 <= a__last)) -> (bool_eq9((a[temp___idx_139]),
-  (b[((b__first - a__first) + temp___idx_139)])) = true)))))))
+  (forall temp___idx_161:int. (((a__first <= temp___idx_161) and
+  (temp___idx_161 <= a__last)) -> (bool_eq9((a[temp___idx_161]),
+  (b[((b__first - a__first) + temp___idx_161)])) = true)))))))
 
 logic dummy14 : (int,us_rep1) farray
 
@@ -1041,24 +944,6 @@ axiom slide_def3 :
   (forall i:int [(slide3(a, old_first, new_first)[i])]. ((slide3(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat3 : (int,subject) farray, int, int, (int,subject) farray, int,
-  int -> (int,subject) farray
-
-axiom concat_def3 :
-  (forall a:(int,subject) farray. forall b:(int,subject) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat3(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat3(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat3(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton3 : subject, int -> (int,subject) farray
-
-axiom singleton_def3 :
-  (forall v:subject.
-  (forall i:int [(singleton3(v, i)[i])]. ((singleton3(v, i)[i]) = v)))
-
 logic bool_eq14 : (int,subject) farray, int, int, (int,subject) farray, int,
   int -> bool
 
@@ -1069,17 +954,17 @@ axiom bool_eq_def13 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_144:int. ((((a__first <= temp___idx_144) and
-  (temp___idx_144 <= a__last)) and
-  (to_rep1((a[temp___idx_144])) = to_rep1((b[((b__first - a__first) + temp___idx_144)])))) or
-  (not ((a__first <= temp___idx_144) and (temp___idx_144 <= a__last)))))) ->
+  (forall temp___idx_166:int. ((((a__first <= temp___idx_166) and
+  (temp___idx_166 <= a__last)) and
+  (to_rep1((a[temp___idx_166])) = to_rep1((b[((b__first - a__first) + temp___idx_166)])))) or
+  (not ((a__first <= temp___idx_166) and (temp___idx_166 <= a__last)))))) ->
   (bool_eq14(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_144:int. (((a__first <= temp___idx_144) and
-  (temp___idx_144 <= a__last)) ->
-  (to_rep1((a[temp___idx_144])) = to_rep1((b[((b__first - a__first) + temp___idx_144)]))))))) ->
+  (forall temp___idx_166:int. (((a__first <= temp___idx_166) and
+  (temp___idx_166 <= a__last)) ->
+  (to_rep1((a[temp___idx_166])) = to_rep1((b[((b__first - a__first) + temp___idx_166)]))))))) ->
   (bool_eq14(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev3 :
@@ -1089,37 +974,9 @@ axiom bool_eq_rev3 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_144:int. (((a__first <= temp___idx_144) and
-  (temp___idx_144 <= a__last)) ->
-  (to_rep1((a[temp___idx_144])) = to_rep1((b[((b__first - a__first) + temp___idx_144)])))))))))
-
-logic compare1 : (int,subject) farray, int, int, (int,subject) farray, int,
-  int -> int
-
-axiom compare_def_eq1 :
-  (forall a:(int,subject) farray. forall b:(int,subject) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq14(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt1 :
-  (forall a:(int,subject) farray. forall b:(int,subject) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((compare1(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq14(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep1((a[(i + 1)])) <  to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt1 :
-  (forall a:(int,subject) farray. forall b:(int,subject) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare1(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq14(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep1((b[(i + 1)])) <  to_rep1((a[(j + 1)]))))))))))))
+  (forall temp___idx_166:int. (((a__first <= temp___idx_166) and
+  (temp___idx_166 <= a__last)) ->
+  (to_rep1((a[temp___idx_166])) = to_rep1((b[((b__first - a__first) + temp___idx_166)])))))))))
 
 type us_split_fields6 = { rec__pupils__subject_score_pair__subj : subject;
 rec__pupils__subject_score_pair__score : percentage
@@ -1234,30 +1091,6 @@ axiom slide_def4 :
   (forall i:int [(slide4(a, old_first, new_first)[i])]. ((slide4(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat4 : (int,us_rep3) farray, int, int, (int,us_rep3) farray, int,
-  int -> (int,us_rep3) farray
-
-axiom concat_def4 :
-  (forall a:(int,us_rep3) farray. forall b:(int,us_rep3) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat4(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat4(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat4(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton4 : us_rep3, int -> (int,us_rep3) farray
-
-axiom singleton_def4 :
-  (forall v:subject. forall v1:percentage.
-  (forall i:int [(singleton4({ us_split_fields7 = {
-  rec__pupils__subject_score_pair__subj = v;
-  rec__pupils__subject_score_pair__score = v1 } }, i)[i])]. ((singleton4({
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = v;
-  rec__pupils__subject_score_pair__score = v1 } }, i)[i]) = {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = v;
-  rec__pupils__subject_score_pair__score = v1 } })))
-
 logic bool_eq16 : (int,us_rep3) farray, int, int, (int,us_rep3) farray, int,
   int -> bool
 
@@ -1268,17 +1101,17 @@ axiom bool_eq_def15 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_145:int. ((((a__first <= temp___idx_145) and
-  (temp___idx_145 <= a__last)) and (bool_eq15((a[temp___idx_145]),
-  (b[((b__first - a__first) + temp___idx_145)])) = true)) or
-  (not ((a__first <= temp___idx_145) and (temp___idx_145 <= a__last)))))) ->
+  (forall temp___idx_167:int. ((((a__first <= temp___idx_167) and
+  (temp___idx_167 <= a__last)) and (bool_eq15((a[temp___idx_167]),
+  (b[((b__first - a__first) + temp___idx_167)])) = true)) or
+  (not ((a__first <= temp___idx_167) and (temp___idx_167 <= a__last)))))) ->
   (bool_eq16(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_145:int. (((a__first <= temp___idx_145) and
-  (temp___idx_145 <= a__last)) -> (bool_eq15((a[temp___idx_145]),
-  (b[((b__first - a__first) + temp___idx_145)])) = true))))) -> (bool_eq16(a,
+  (forall temp___idx_167:int. (((a__first <= temp___idx_167) and
+  (temp___idx_167 <= a__last)) -> (bool_eq15((a[temp___idx_167]),
+  (b[((b__first - a__first) + temp___idx_167)])) = true))))) -> (bool_eq16(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev4 :
@@ -1288,9 +1121,9 @@ axiom bool_eq_rev4 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_145:int. (((a__first <= temp___idx_145) and
-  (temp___idx_145 <= a__last)) -> (bool_eq15((a[temp___idx_145]),
-  (b[((b__first - a__first) + temp___idx_145)])) = true)))))))
+  (forall temp___idx_167:int. (((a__first <= temp___idx_167) and
+  (temp___idx_167 <= a__last)) -> (bool_eq15((a[temp___idx_167]),
+  (b[((b__first - a__first) + temp___idx_167)])) = true)))))))
 
 logic sname : (int,character) farray
 
@@ -1392,2118 +1225,656 @@ logic attr__ATTRIBUTE_ADDRESS25 : int
 
 logic attr__ATTRIBUTE_ADDRESS26 : int
 
-logic temp___311 : int, int, int, int, int, int, int, int, int,
+logic temp___348 : int, int, int, int, int, int, int, int, int,
   int -> (int,subject) farray
 
-axiom def_axiom :
-  (forall temp___313:int. forall temp___314:int. forall temp___315:int.
-  forall temp___316:int. forall temp___317:int. forall temp___318:int.
-  forall temp___319:int. forall temp___320:int. forall temp___321:int.
-  forall temp___322:int. (((((((((((temp___311(temp___313, temp___314,
-  temp___315, temp___316, temp___317, temp___318, temp___319, temp___320,
-  temp___321, temp___322)[0]) = of_rep1(temp___313)) and
-  ((temp___311(temp___313, temp___314, temp___315, temp___316, temp___317,
-  temp___318, temp___319, temp___320, temp___321,
-  temp___322)[1]) = of_rep1(temp___314))) and ((temp___311(temp___313,
-  temp___314, temp___315, temp___316, temp___317, temp___318, temp___319,
-  temp___320, temp___321, temp___322)[2]) = of_rep1(temp___315))) and
-  ((temp___311(temp___313, temp___314, temp___315, temp___316, temp___317,
-  temp___318, temp___319, temp___320, temp___321,
-  temp___322)[3]) = of_rep1(temp___316))) and ((temp___311(temp___313,
-  temp___314, temp___315, temp___316, temp___317, temp___318, temp___319,
-  temp___320, temp___321, temp___322)[4]) = of_rep1(temp___317))) and
-  ((temp___311(temp___313, temp___314, temp___315, temp___316, temp___317,
-  temp___318, temp___319, temp___320, temp___321,
-  temp___322)[5]) = of_rep1(temp___318))) and ((temp___311(temp___313,
-  temp___314, temp___315, temp___316, temp___317, temp___318, temp___319,
-  temp___320, temp___321, temp___322)[6]) = of_rep1(temp___319))) and
-  ((temp___311(temp___313, temp___314, temp___315, temp___316, temp___317,
-  temp___318, temp___319, temp___320, temp___321,
-  temp___322)[7]) = of_rep1(temp___320))) and ((temp___311(temp___313,
-  temp___314, temp___315, temp___316, temp___317, temp___318, temp___319,
-  temp___320, temp___321, temp___322)[8]) = of_rep1(temp___321))) and
-  ((temp___311(temp___313, temp___314, temp___315, temp___316, temp___317,
-  temp___318, temp___319, temp___320, temp___321,
-  temp___322)[9]) = of_rep1(temp___322))))
-
-logic temp___325 : int, int, int, int, int, int, int, int, int,
+logic temp___362 : int, int, int, int, int, int, int, int, int,
   int -> (int,subject) farray
 
-axiom def_axiom1 :
-  (forall temp___327:int. forall temp___328:int. forall temp___329:int.
-  forall temp___330:int. forall temp___331:int. forall temp___332:int.
-  forall temp___333:int. forall temp___334:int. forall temp___335:int.
-  forall temp___336:int. (((((((((((temp___325(temp___327, temp___328,
-  temp___329, temp___330, temp___331, temp___332, temp___333, temp___334,
-  temp___335, temp___336)[0]) = of_rep1(temp___327)) and
-  ((temp___325(temp___327, temp___328, temp___329, temp___330, temp___331,
-  temp___332, temp___333, temp___334, temp___335,
-  temp___336)[1]) = of_rep1(temp___328))) and ((temp___325(temp___327,
-  temp___328, temp___329, temp___330, temp___331, temp___332, temp___333,
-  temp___334, temp___335, temp___336)[2]) = of_rep1(temp___329))) and
-  ((temp___325(temp___327, temp___328, temp___329, temp___330, temp___331,
-  temp___332, temp___333, temp___334, temp___335,
-  temp___336)[3]) = of_rep1(temp___330))) and ((temp___325(temp___327,
-  temp___328, temp___329, temp___330, temp___331, temp___332, temp___333,
-  temp___334, temp___335, temp___336)[4]) = of_rep1(temp___331))) and
-  ((temp___325(temp___327, temp___328, temp___329, temp___330, temp___331,
-  temp___332, temp___333, temp___334, temp___335,
-  temp___336)[5]) = of_rep1(temp___332))) and ((temp___325(temp___327,
-  temp___328, temp___329, temp___330, temp___331, temp___332, temp___333,
-  temp___334, temp___335, temp___336)[6]) = of_rep1(temp___333))) and
-  ((temp___325(temp___327, temp___328, temp___329, temp___330, temp___331,
-  temp___332, temp___333, temp___334, temp___335,
-  temp___336)[7]) = of_rep1(temp___334))) and ((temp___325(temp___327,
-  temp___328, temp___329, temp___330, temp___331, temp___332, temp___333,
-  temp___334, temp___335, temp___336)[8]) = of_rep1(temp___335))) and
-  ((temp___325(temp___327, temp___328, temp___329, temp___330, temp___331,
-  temp___332, temp___333, temp___334, temp___335,
-  temp___336)[9]) = of_rep1(temp___336))))
-
-logic temp___339 : int, int, int, int, int, int, int, int, int,
+logic temp___376 : int, int, int, int, int, int, int, int, int,
   int -> (int,subject) farray
 
-axiom def_axiom2 :
-  (forall temp___341:int. forall temp___342:int. forall temp___343:int.
-  forall temp___344:int. forall temp___345:int. forall temp___346:int.
-  forall temp___347:int. forall temp___348:int. forall temp___349:int.
-  forall temp___350:int. (((((((((((temp___339(temp___341, temp___342,
-  temp___343, temp___344, temp___345, temp___346, temp___347, temp___348,
-  temp___349, temp___350)[0]) = of_rep1(temp___341)) and
-  ((temp___339(temp___341, temp___342, temp___343, temp___344, temp___345,
-  temp___346, temp___347, temp___348, temp___349,
-  temp___350)[1]) = of_rep1(temp___342))) and ((temp___339(temp___341,
-  temp___342, temp___343, temp___344, temp___345, temp___346, temp___347,
-  temp___348, temp___349, temp___350)[2]) = of_rep1(temp___343))) and
-  ((temp___339(temp___341, temp___342, temp___343, temp___344, temp___345,
-  temp___346, temp___347, temp___348, temp___349,
-  temp___350)[3]) = of_rep1(temp___344))) and ((temp___339(temp___341,
-  temp___342, temp___343, temp___344, temp___345, temp___346, temp___347,
-  temp___348, temp___349, temp___350)[4]) = of_rep1(temp___345))) and
-  ((temp___339(temp___341, temp___342, temp___343, temp___344, temp___345,
-  temp___346, temp___347, temp___348, temp___349,
-  temp___350)[5]) = of_rep1(temp___346))) and ((temp___339(temp___341,
-  temp___342, temp___343, temp___344, temp___345, temp___346, temp___347,
-  temp___348, temp___349, temp___350)[6]) = of_rep1(temp___347))) and
-  ((temp___339(temp___341, temp___342, temp___343, temp___344, temp___345,
-  temp___346, temp___347, temp___348, temp___349,
-  temp___350)[7]) = of_rep1(temp___348))) and ((temp___339(temp___341,
-  temp___342, temp___343, temp___344, temp___345, temp___346, temp___347,
-  temp___348, temp___349, temp___350)[8]) = of_rep1(temp___349))) and
-  ((temp___339(temp___341, temp___342, temp___343, temp___344, temp___345,
-  temp___346, temp___347, temp___348, temp___349,
-  temp___350)[9]) = of_rep1(temp___350))))
-
-logic temp___354 : (int,us_rep) farray, int, us_rep, int, us_rep, int,
+logic temp___391 : (int,us_rep) farray, int, us_rep, int, us_rep, int,
   us_rep, int, us_rep, int, us_rep, int, us_rep, int, us_rep, int, us_rep,
   int, us_rep, int, us_rep -> (int,us_rep) farray
 
-axiom def_axiom3 :
-  (forall temp___356:(int,us_rep) farray.
-  (forall temp___357:int. forall temp___359:int. forall temp___361:int.
-  forall temp___363:int. forall temp___365:int. forall temp___367:int.
-  forall temp___369:int. forall temp___371:int. forall temp___373:int.
-  forall temp___375:int.
-  (forall temp___358:bool. forall temp___3581:percentage.
-  forall temp___360:bool. forall temp___3601:percentage.
-  forall temp___362:bool. forall temp___3621:percentage.
-  forall temp___364:bool. forall temp___3641:percentage.
-  forall temp___366:bool. forall temp___3661:percentage.
-  forall temp___368:bool. forall temp___3681:percentage.
-  forall temp___370:bool. forall temp___3701:percentage.
-  forall temp___372:bool. forall temp___3721:percentage.
-  forall temp___374:bool. forall temp___3741:percentage.
-  forall temp___376:bool. forall temp___3761:percentage.
-  (forall temp___377:int. (((temp___377 = temp___375) ->
-  ((temp___354(temp___356, temp___357, { us_split_fields1 = {
-  rec__pupils__participation__studying = temp___358;
-  rec__pupils__participation__score = temp___3581 } }, temp___359, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___360;
-  rec__pupils__participation__score = temp___3601 } }, temp___361, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___362;
-  rec__pupils__participation__score = temp___3621 } }, temp___363, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___364;
-  rec__pupils__participation__score = temp___3641 } }, temp___365, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___366;
-  rec__pupils__participation__score = temp___3661 } }, temp___367, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___368;
-  rec__pupils__participation__score = temp___3681 } }, temp___369, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___370;
-  rec__pupils__participation__score = temp___3701 } }, temp___371, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___372;
-  rec__pupils__participation__score = temp___3721 } }, temp___373, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___374;
-  rec__pupils__participation__score = temp___3741 } }, temp___375, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___376;
-  rec__pupils__participation__score = temp___3761 } })[temp___377]) = {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___376;
-  rec__pupils__participation__score = temp___3761 } })) and
-  ((not (temp___377 = temp___375)) -> (((temp___377 = temp___373) ->
-  ((temp___354(temp___356, temp___357, { us_split_fields1 = {
-  rec__pupils__participation__studying = temp___358;
-  rec__pupils__participation__score = temp___3581 } }, temp___359, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___360;
-  rec__pupils__participation__score = temp___3601 } }, temp___361, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___362;
-  rec__pupils__participation__score = temp___3621 } }, temp___363, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___364;
-  rec__pupils__participation__score = temp___3641 } }, temp___365, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___366;
-  rec__pupils__participation__score = temp___3661 } }, temp___367, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___368;
-  rec__pupils__participation__score = temp___3681 } }, temp___369, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___370;
-  rec__pupils__participation__score = temp___3701 } }, temp___371, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___372;
-  rec__pupils__participation__score = temp___3721 } }, temp___373, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___374;
-  rec__pupils__participation__score = temp___3741 } }, temp___375, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___376;
-  rec__pupils__participation__score = temp___3761 } })[temp___377]) = {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___374;
-  rec__pupils__participation__score = temp___3741 } })) and
-  ((not (temp___377 = temp___373)) -> (((temp___377 = temp___371) ->
-  ((temp___354(temp___356, temp___357, { us_split_fields1 = {
-  rec__pupils__participation__studying = temp___358;
-  rec__pupils__participation__score = temp___3581 } }, temp___359, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___360;
-  rec__pupils__participation__score = temp___3601 } }, temp___361, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___362;
-  rec__pupils__participation__score = temp___3621 } }, temp___363, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___364;
-  rec__pupils__participation__score = temp___3641 } }, temp___365, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___366;
-  rec__pupils__participation__score = temp___3661 } }, temp___367, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___368;
-  rec__pupils__participation__score = temp___3681 } }, temp___369, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___370;
-  rec__pupils__participation__score = temp___3701 } }, temp___371, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___372;
-  rec__pupils__participation__score = temp___3721 } }, temp___373, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___374;
-  rec__pupils__participation__score = temp___3741 } }, temp___375, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___376;
-  rec__pupils__participation__score = temp___3761 } })[temp___377]) = {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___372;
-  rec__pupils__participation__score = temp___3721 } })) and
-  ((not (temp___377 = temp___371)) -> (((temp___377 = temp___369) ->
-  ((temp___354(temp___356, temp___357, { us_split_fields1 = {
-  rec__pupils__participation__studying = temp___358;
-  rec__pupils__participation__score = temp___3581 } }, temp___359, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___360;
-  rec__pupils__participation__score = temp___3601 } }, temp___361, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___362;
-  rec__pupils__participation__score = temp___3621 } }, temp___363, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___364;
-  rec__pupils__participation__score = temp___3641 } }, temp___365, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___366;
-  rec__pupils__participation__score = temp___3661 } }, temp___367, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___368;
-  rec__pupils__participation__score = temp___3681 } }, temp___369, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___370;
-  rec__pupils__participation__score = temp___3701 } }, temp___371, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___372;
-  rec__pupils__participation__score = temp___3721 } }, temp___373, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___374;
-  rec__pupils__participation__score = temp___3741 } }, temp___375, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___376;
-  rec__pupils__participation__score = temp___3761 } })[temp___377]) = {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___370;
-  rec__pupils__participation__score = temp___3701 } })) and
-  ((not (temp___377 = temp___369)) -> (((temp___377 = temp___367) ->
-  ((temp___354(temp___356, temp___357, { us_split_fields1 = {
-  rec__pupils__participation__studying = temp___358;
-  rec__pupils__participation__score = temp___3581 } }, temp___359, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___360;
-  rec__pupils__participation__score = temp___3601 } }, temp___361, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___362;
-  rec__pupils__participation__score = temp___3621 } }, temp___363, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___364;
-  rec__pupils__participation__score = temp___3641 } }, temp___365, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___366;
-  rec__pupils__participation__score = temp___3661 } }, temp___367, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___368;
-  rec__pupils__participation__score = temp___3681 } }, temp___369, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___370;
-  rec__pupils__participation__score = temp___3701 } }, temp___371, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___372;
-  rec__pupils__participation__score = temp___3721 } }, temp___373, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___374;
-  rec__pupils__participation__score = temp___3741 } }, temp___375, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___376;
-  rec__pupils__participation__score = temp___3761 } })[temp___377]) = {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___368;
-  rec__pupils__participation__score = temp___3681 } })) and
-  ((not (temp___377 = temp___367)) -> (((temp___377 = temp___365) ->
-  ((temp___354(temp___356, temp___357, { us_split_fields1 = {
-  rec__pupils__participation__studying = temp___358;
-  rec__pupils__participation__score = temp___3581 } }, temp___359, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___360;
-  rec__pupils__participation__score = temp___3601 } }, temp___361, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___362;
-  rec__pupils__participation__score = temp___3621 } }, temp___363, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___364;
-  rec__pupils__participation__score = temp___3641 } }, temp___365, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___366;
-  rec__pupils__participation__score = temp___3661 } }, temp___367, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___368;
-  rec__pupils__participation__score = temp___3681 } }, temp___369, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___370;
-  rec__pupils__participation__score = temp___3701 } }, temp___371, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___372;
-  rec__pupils__participation__score = temp___3721 } }, temp___373, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___374;
-  rec__pupils__participation__score = temp___3741 } }, temp___375, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___376;
-  rec__pupils__participation__score = temp___3761 } })[temp___377]) = {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___366;
-  rec__pupils__participation__score = temp___3661 } })) and
-  ((not (temp___377 = temp___365)) -> (((temp___377 = temp___363) ->
-  ((temp___354(temp___356, temp___357, { us_split_fields1 = {
-  rec__pupils__participation__studying = temp___358;
-  rec__pupils__participation__score = temp___3581 } }, temp___359, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___360;
-  rec__pupils__participation__score = temp___3601 } }, temp___361, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___362;
-  rec__pupils__participation__score = temp___3621 } }, temp___363, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___364;
-  rec__pupils__participation__score = temp___3641 } }, temp___365, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___366;
-  rec__pupils__participation__score = temp___3661 } }, temp___367, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___368;
-  rec__pupils__participation__score = temp___3681 } }, temp___369, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___370;
-  rec__pupils__participation__score = temp___3701 } }, temp___371, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___372;
-  rec__pupils__participation__score = temp___3721 } }, temp___373, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___374;
-  rec__pupils__participation__score = temp___3741 } }, temp___375, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___376;
-  rec__pupils__participation__score = temp___3761 } })[temp___377]) = {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___364;
-  rec__pupils__participation__score = temp___3641 } })) and
-  ((not (temp___377 = temp___363)) -> (((temp___377 = temp___361) ->
-  ((temp___354(temp___356, temp___357, { us_split_fields1 = {
-  rec__pupils__participation__studying = temp___358;
-  rec__pupils__participation__score = temp___3581 } }, temp___359, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___360;
-  rec__pupils__participation__score = temp___3601 } }, temp___361, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___362;
-  rec__pupils__participation__score = temp___3621 } }, temp___363, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___364;
-  rec__pupils__participation__score = temp___3641 } }, temp___365, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___366;
-  rec__pupils__participation__score = temp___3661 } }, temp___367, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___368;
-  rec__pupils__participation__score = temp___3681 } }, temp___369, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___370;
-  rec__pupils__participation__score = temp___3701 } }, temp___371, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___372;
-  rec__pupils__participation__score = temp___3721 } }, temp___373, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___374;
-  rec__pupils__participation__score = temp___3741 } }, temp___375, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___376;
-  rec__pupils__participation__score = temp___3761 } })[temp___377]) = {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___362;
-  rec__pupils__participation__score = temp___3621 } })) and
-  ((not (temp___377 = temp___361)) -> (((temp___377 = temp___359) ->
-  ((temp___354(temp___356, temp___357, { us_split_fields1 = {
-  rec__pupils__participation__studying = temp___358;
-  rec__pupils__participation__score = temp___3581 } }, temp___359, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___360;
-  rec__pupils__participation__score = temp___3601 } }, temp___361, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___362;
-  rec__pupils__participation__score = temp___3621 } }, temp___363, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___364;
-  rec__pupils__participation__score = temp___3641 } }, temp___365, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___366;
-  rec__pupils__participation__score = temp___3661 } }, temp___367, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___368;
-  rec__pupils__participation__score = temp___3681 } }, temp___369, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___370;
-  rec__pupils__participation__score = temp___3701 } }, temp___371, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___372;
-  rec__pupils__participation__score = temp___3721 } }, temp___373, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___374;
-  rec__pupils__participation__score = temp___3741 } }, temp___375, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___376;
-  rec__pupils__participation__score = temp___3761 } })[temp___377]) = {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___360;
-  rec__pupils__participation__score = temp___3601 } })) and
-  ((not (temp___377 = temp___359)) -> (((temp___377 = temp___357) ->
-  ((temp___354(temp___356, temp___357, { us_split_fields1 = {
-  rec__pupils__participation__studying = temp___358;
-  rec__pupils__participation__score = temp___3581 } }, temp___359, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___360;
-  rec__pupils__participation__score = temp___3601 } }, temp___361, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___362;
-  rec__pupils__participation__score = temp___3621 } }, temp___363, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___364;
-  rec__pupils__participation__score = temp___3641 } }, temp___365, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___366;
-  rec__pupils__participation__score = temp___3661 } }, temp___367, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___368;
-  rec__pupils__participation__score = temp___3681 } }, temp___369, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___370;
-  rec__pupils__participation__score = temp___3701 } }, temp___371, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___372;
-  rec__pupils__participation__score = temp___3721 } }, temp___373, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___374;
-  rec__pupils__participation__score = temp___3741 } }, temp___375, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___376;
-  rec__pupils__participation__score = temp___3761 } })[temp___377]) = {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___358;
-  rec__pupils__participation__score = temp___3581 } })) and
-  ((not (temp___377 = temp___357)) -> ((temp___354(temp___356, temp___357, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___358;
-  rec__pupils__participation__score = temp___3581 } }, temp___359, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___360;
-  rec__pupils__participation__score = temp___3601 } }, temp___361, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___362;
-  rec__pupils__participation__score = temp___3621 } }, temp___363, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___364;
-  rec__pupils__participation__score = temp___3641 } }, temp___365, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___366;
-  rec__pupils__participation__score = temp___3661 } }, temp___367, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___368;
-  rec__pupils__participation__score = temp___3681 } }, temp___369, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___370;
-  rec__pupils__participation__score = temp___3701 } }, temp___371, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___372;
-  rec__pupils__participation__score = temp___3721 } }, temp___373, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___374;
-  rec__pupils__participation__score = temp___3741 } }, temp___375, {
-  us_split_fields1 = { rec__pupils__participation__studying = temp___376;
-  rec__pupils__participation__score = temp___3761 }
-  })[temp___377]) = (temp___356[temp___377]))))))))))))))))))))))))))
-
-logic temp___390 : us_rep3, us_rep3, us_rep3, us_rep3, us_rep3, us_rep3,
+logic temp___427 : us_rep3, us_rep3, us_rep3, us_rep3, us_rep3, us_rep3,
   us_rep3, us_rep3, us_rep3, us_rep3 -> (int,us_rep3) farray
 
+axiom def_axiom :
+  (forall temp___429:subject. forall temp___4291:percentage.
+  forall temp___430:subject. forall temp___4301:percentage.
+  forall temp___431:subject. forall temp___4311:percentage.
+  forall temp___432:subject. forall temp___4321:percentage.
+  forall temp___433:subject. forall temp___4331:percentage.
+  forall temp___434:subject. forall temp___4341:percentage.
+  forall temp___435:subject. forall temp___4351:percentage.
+  forall temp___436:subject. forall temp___4361:percentage.
+  forall temp___437:subject. forall temp___4371:percentage.
+  forall temp___438:subject. forall temp___4381:percentage.
+  (((((((((((temp___427({ us_split_fields7 = {
+  rec__pupils__subject_score_pair__subj = temp___429;
+  rec__pupils__subject_score_pair__score = temp___4291 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___430;
+  rec__pupils__subject_score_pair__score = temp___4301 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___431;
+  rec__pupils__subject_score_pair__score = temp___4311 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___432;
+  rec__pupils__subject_score_pair__score = temp___4321 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___433;
+  rec__pupils__subject_score_pair__score = temp___4331 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___434;
+  rec__pupils__subject_score_pair__score = temp___4341 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___435;
+  rec__pupils__subject_score_pair__score = temp___4351 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___436;
+  rec__pupils__subject_score_pair__score = temp___4361 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___437;
+  rec__pupils__subject_score_pair__score = temp___4371 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___438;
+  rec__pupils__subject_score_pair__score = temp___4381 } })[0]) = {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___429;
+  rec__pupils__subject_score_pair__score = temp___4291 } }) and
+  ((temp___427({ us_split_fields7 = { rec__pupils__subject_score_pair__subj =
+  temp___429; rec__pupils__subject_score_pair__score = temp___4291 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___430;
+  rec__pupils__subject_score_pair__score = temp___4301 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___431;
+  rec__pupils__subject_score_pair__score = temp___4311 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___432;
+  rec__pupils__subject_score_pair__score = temp___4321 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___433;
+  rec__pupils__subject_score_pair__score = temp___4331 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___434;
+  rec__pupils__subject_score_pair__score = temp___4341 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___435;
+  rec__pupils__subject_score_pair__score = temp___4351 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___436;
+  rec__pupils__subject_score_pair__score = temp___4361 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___437;
+  rec__pupils__subject_score_pair__score = temp___4371 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___438;
+  rec__pupils__subject_score_pair__score = temp___4381 } })[1]) = {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___430;
+  rec__pupils__subject_score_pair__score = temp___4301 } })) and
+  ((temp___427({ us_split_fields7 = { rec__pupils__subject_score_pair__subj =
+  temp___429; rec__pupils__subject_score_pair__score = temp___4291 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___430;
+  rec__pupils__subject_score_pair__score = temp___4301 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___431;
+  rec__pupils__subject_score_pair__score = temp___4311 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___432;
+  rec__pupils__subject_score_pair__score = temp___4321 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___433;
+  rec__pupils__subject_score_pair__score = temp___4331 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___434;
+  rec__pupils__subject_score_pair__score = temp___4341 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___435;
+  rec__pupils__subject_score_pair__score = temp___4351 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___436;
+  rec__pupils__subject_score_pair__score = temp___4361 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___437;
+  rec__pupils__subject_score_pair__score = temp___4371 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___438;
+  rec__pupils__subject_score_pair__score = temp___4381 } })[2]) = {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___431;
+  rec__pupils__subject_score_pair__score = temp___4311 } })) and
+  ((temp___427({ us_split_fields7 = { rec__pupils__subject_score_pair__subj =
+  temp___429; rec__pupils__subject_score_pair__score = temp___4291 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___430;
+  rec__pupils__subject_score_pair__score = temp___4301 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___431;
+  rec__pupils__subject_score_pair__score = temp___4311 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___432;
+  rec__pupils__subject_score_pair__score = temp___4321 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___433;
+  rec__pupils__subject_score_pair__score = temp___4331 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___434;
+  rec__pupils__subject_score_pair__score = temp___4341 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___435;
+  rec__pupils__subject_score_pair__score = temp___4351 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___436;
+  rec__pupils__subject_score_pair__score = temp___4361 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___437;
+  rec__pupils__subject_score_pair__score = temp___4371 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___438;
+  rec__pupils__subject_score_pair__score = temp___4381 } })[3]) = {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___432;
+  rec__pupils__subject_score_pair__score = temp___4321 } })) and
+  ((temp___427({ us_split_fields7 = { rec__pupils__subject_score_pair__subj =
+  temp___429; rec__pupils__subject_score_pair__score = temp___4291 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___430;
+  rec__pupils__subject_score_pair__score = temp___4301 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___431;
+  rec__pupils__subject_score_pair__score = temp___4311 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___432;
+  rec__pupils__subject_score_pair__score = temp___4321 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___433;
+  rec__pupils__subject_score_pair__score = temp___4331 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___434;
+  rec__pupils__subject_score_pair__score = temp___4341 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___435;
+  rec__pupils__subject_score_pair__score = temp___4351 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___436;
+  rec__pupils__subject_score_pair__score = temp___4361 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___437;
+  rec__pupils__subject_score_pair__score = temp___4371 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___438;
+  rec__pupils__subject_score_pair__score = temp___4381 } })[4]) = {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___433;
+  rec__pupils__subject_score_pair__score = temp___4331 } })) and
+  ((temp___427({ us_split_fields7 = { rec__pupils__subject_score_pair__subj =
+  temp___429; rec__pupils__subject_score_pair__score = temp___4291 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___430;
+  rec__pupils__subject_score_pair__score = temp___4301 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___431;
+  rec__pupils__subject_score_pair__score = temp___4311 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___432;
+  rec__pupils__subject_score_pair__score = temp___4321 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___433;
+  rec__pupils__subject_score_pair__score = temp___4331 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___434;
+  rec__pupils__subject_score_pair__score = temp___4341 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___435;
+  rec__pupils__subject_score_pair__score = temp___4351 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___436;
+  rec__pupils__subject_score_pair__score = temp___4361 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___437;
+  rec__pupils__subject_score_pair__score = temp___4371 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___438;
+  rec__pupils__subject_score_pair__score = temp___4381 } })[5]) = {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___434;
+  rec__pupils__subject_score_pair__score = temp___4341 } })) and
+  ((temp___427({ us_split_fields7 = { rec__pupils__subject_score_pair__subj =
+  temp___429; rec__pupils__subject_score_pair__score = temp___4291 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___430;
+  rec__pupils__subject_score_pair__score = temp___4301 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___431;
+  rec__pupils__subject_score_pair__score = temp___4311 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___432;
+  rec__pupils__subject_score_pair__score = temp___4321 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___433;
+  rec__pupils__subject_score_pair__score = temp___4331 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___434;
+  rec__pupils__subject_score_pair__score = temp___4341 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___435;
+  rec__pupils__subject_score_pair__score = temp___4351 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___436;
+  rec__pupils__subject_score_pair__score = temp___4361 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___437;
+  rec__pupils__subject_score_pair__score = temp___4371 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___438;
+  rec__pupils__subject_score_pair__score = temp___4381 } })[6]) = {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___435;
+  rec__pupils__subject_score_pair__score = temp___4351 } })) and
+  ((temp___427({ us_split_fields7 = { rec__pupils__subject_score_pair__subj =
+  temp___429; rec__pupils__subject_score_pair__score = temp___4291 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___430;
+  rec__pupils__subject_score_pair__score = temp___4301 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___431;
+  rec__pupils__subject_score_pair__score = temp___4311 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___432;
+  rec__pupils__subject_score_pair__score = temp___4321 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___433;
+  rec__pupils__subject_score_pair__score = temp___4331 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___434;
+  rec__pupils__subject_score_pair__score = temp___4341 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___435;
+  rec__pupils__subject_score_pair__score = temp___4351 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___436;
+  rec__pupils__subject_score_pair__score = temp___4361 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___437;
+  rec__pupils__subject_score_pair__score = temp___4371 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___438;
+  rec__pupils__subject_score_pair__score = temp___4381 } })[7]) = {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___436;
+  rec__pupils__subject_score_pair__score = temp___4361 } })) and
+  ((temp___427({ us_split_fields7 = { rec__pupils__subject_score_pair__subj =
+  temp___429; rec__pupils__subject_score_pair__score = temp___4291 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___430;
+  rec__pupils__subject_score_pair__score = temp___4301 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___431;
+  rec__pupils__subject_score_pair__score = temp___4311 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___432;
+  rec__pupils__subject_score_pair__score = temp___4321 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___433;
+  rec__pupils__subject_score_pair__score = temp___4331 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___434;
+  rec__pupils__subject_score_pair__score = temp___4341 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___435;
+  rec__pupils__subject_score_pair__score = temp___4351 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___436;
+  rec__pupils__subject_score_pair__score = temp___4361 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___437;
+  rec__pupils__subject_score_pair__score = temp___4371 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___438;
+  rec__pupils__subject_score_pair__score = temp___4381 } })[8]) = {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___437;
+  rec__pupils__subject_score_pair__score = temp___4371 } })) and
+  ((temp___427({ us_split_fields7 = { rec__pupils__subject_score_pair__subj =
+  temp___429; rec__pupils__subject_score_pair__score = temp___4291 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___430;
+  rec__pupils__subject_score_pair__score = temp___4301 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___431;
+  rec__pupils__subject_score_pair__score = temp___4311 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___432;
+  rec__pupils__subject_score_pair__score = temp___4321 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___433;
+  rec__pupils__subject_score_pair__score = temp___4331 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___434;
+  rec__pupils__subject_score_pair__score = temp___4341 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___435;
+  rec__pupils__subject_score_pair__score = temp___4351 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___436;
+  rec__pupils__subject_score_pair__score = temp___4361 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___437;
+  rec__pupils__subject_score_pair__score = temp___4371 } }, {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___438;
+  rec__pupils__subject_score_pair__score = temp___4381 } })[9]) = {
+  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___438;
+  rec__pupils__subject_score_pair__score = temp___4381 } })))
+
+axiom def_axiom1 :
+  (forall temp___350:int. forall temp___351:int. forall temp___352:int.
+  forall temp___353:int. forall temp___354:int. forall temp___355:int.
+  forall temp___356:int. forall temp___357:int. forall temp___358:int.
+  forall temp___359:int. ((((((((((in_range2(temp___350) and
+  in_range2(temp___351)) and in_range2(temp___352)) and
+  in_range2(temp___353)) and in_range2(temp___354)) and
+  in_range2(temp___355)) and in_range2(temp___356)) and
+  in_range2(temp___357)) and in_range2(temp___358)) and
+  in_range2(temp___359)) -> ((((((((((to_rep1((temp___348(temp___350,
+  temp___351, temp___352, temp___353, temp___354, temp___355, temp___356,
+  temp___357, temp___358, temp___359)[0])) = temp___350) and
+  (to_rep1((temp___348(temp___350, temp___351, temp___352, temp___353,
+  temp___354, temp___355, temp___356, temp___357, temp___358,
+  temp___359)[1])) = temp___351)) and (to_rep1((temp___348(temp___350,
+  temp___351, temp___352, temp___353, temp___354, temp___355, temp___356,
+  temp___357, temp___358, temp___359)[2])) = temp___352)) and
+  (to_rep1((temp___348(temp___350, temp___351, temp___352, temp___353,
+  temp___354, temp___355, temp___356, temp___357, temp___358,
+  temp___359)[3])) = temp___353)) and (to_rep1((temp___348(temp___350,
+  temp___351, temp___352, temp___353, temp___354, temp___355, temp___356,
+  temp___357, temp___358, temp___359)[4])) = temp___354)) and
+  (to_rep1((temp___348(temp___350, temp___351, temp___352, temp___353,
+  temp___354, temp___355, temp___356, temp___357, temp___358,
+  temp___359)[5])) = temp___355)) and (to_rep1((temp___348(temp___350,
+  temp___351, temp___352, temp___353, temp___354, temp___355, temp___356,
+  temp___357, temp___358, temp___359)[6])) = temp___356)) and
+  (to_rep1((temp___348(temp___350, temp___351, temp___352, temp___353,
+  temp___354, temp___355, temp___356, temp___357, temp___358,
+  temp___359)[7])) = temp___357)) and (to_rep1((temp___348(temp___350,
+  temp___351, temp___352, temp___353, temp___354, temp___355, temp___356,
+  temp___357, temp___358, temp___359)[8])) = temp___358)) and
+  (to_rep1((temp___348(temp___350, temp___351, temp___352, temp___353,
+  temp___354, temp___355, temp___356, temp___357, temp___358,
+  temp___359)[9])) = temp___359))))
+
+axiom def_axiom2 :
+  (forall temp___364:int. forall temp___365:int. forall temp___366:int.
+  forall temp___367:int. forall temp___368:int. forall temp___369:int.
+  forall temp___370:int. forall temp___371:int. forall temp___372:int.
+  forall temp___373:int. ((((((((((in_range2(temp___364) and
+  in_range2(temp___365)) and in_range2(temp___366)) and
+  in_range2(temp___367)) and in_range2(temp___368)) and
+  in_range2(temp___369)) and in_range2(temp___370)) and
+  in_range2(temp___371)) and in_range2(temp___372)) and
+  in_range2(temp___373)) -> ((((((((((to_rep1((temp___362(temp___364,
+  temp___365, temp___366, temp___367, temp___368, temp___369, temp___370,
+  temp___371, temp___372, temp___373)[0])) = temp___364) and
+  (to_rep1((temp___362(temp___364, temp___365, temp___366, temp___367,
+  temp___368, temp___369, temp___370, temp___371, temp___372,
+  temp___373)[1])) = temp___365)) and (to_rep1((temp___362(temp___364,
+  temp___365, temp___366, temp___367, temp___368, temp___369, temp___370,
+  temp___371, temp___372, temp___373)[2])) = temp___366)) and
+  (to_rep1((temp___362(temp___364, temp___365, temp___366, temp___367,
+  temp___368, temp___369, temp___370, temp___371, temp___372,
+  temp___373)[3])) = temp___367)) and (to_rep1((temp___362(temp___364,
+  temp___365, temp___366, temp___367, temp___368, temp___369, temp___370,
+  temp___371, temp___372, temp___373)[4])) = temp___368)) and
+  (to_rep1((temp___362(temp___364, temp___365, temp___366, temp___367,
+  temp___368, temp___369, temp___370, temp___371, temp___372,
+  temp___373)[5])) = temp___369)) and (to_rep1((temp___362(temp___364,
+  temp___365, temp___366, temp___367, temp___368, temp___369, temp___370,
+  temp___371, temp___372, temp___373)[6])) = temp___370)) and
+  (to_rep1((temp___362(temp___364, temp___365, temp___366, temp___367,
+  temp___368, temp___369, temp___370, temp___371, temp___372,
+  temp___373)[7])) = temp___371)) and (to_rep1((temp___362(temp___364,
+  temp___365, temp___366, temp___367, temp___368, temp___369, temp___370,
+  temp___371, temp___372, temp___373)[8])) = temp___372)) and
+  (to_rep1((temp___362(temp___364, temp___365, temp___366, temp___367,
+  temp___368, temp___369, temp___370, temp___371, temp___372,
+  temp___373)[9])) = temp___373))))
+
+axiom def_axiom3 :
+  (forall temp___378:int. forall temp___379:int. forall temp___380:int.
+  forall temp___381:int. forall temp___382:int. forall temp___383:int.
+  forall temp___384:int. forall temp___385:int. forall temp___386:int.
+  forall temp___387:int. ((((((((((in_range2(temp___378) and
+  in_range2(temp___379)) and in_range2(temp___380)) and
+  in_range2(temp___381)) and in_range2(temp___382)) and
+  in_range2(temp___383)) and in_range2(temp___384)) and
+  in_range2(temp___385)) and in_range2(temp___386)) and
+  in_range2(temp___387)) -> ((((((((((to_rep1((temp___376(temp___378,
+  temp___379, temp___380, temp___381, temp___382, temp___383, temp___384,
+  temp___385, temp___386, temp___387)[0])) = temp___378) and
+  (to_rep1((temp___376(temp___378, temp___379, temp___380, temp___381,
+  temp___382, temp___383, temp___384, temp___385, temp___386,
+  temp___387)[1])) = temp___379)) and (to_rep1((temp___376(temp___378,
+  temp___379, temp___380, temp___381, temp___382, temp___383, temp___384,
+  temp___385, temp___386, temp___387)[2])) = temp___380)) and
+  (to_rep1((temp___376(temp___378, temp___379, temp___380, temp___381,
+  temp___382, temp___383, temp___384, temp___385, temp___386,
+  temp___387)[3])) = temp___381)) and (to_rep1((temp___376(temp___378,
+  temp___379, temp___380, temp___381, temp___382, temp___383, temp___384,
+  temp___385, temp___386, temp___387)[4])) = temp___382)) and
+  (to_rep1((temp___376(temp___378, temp___379, temp___380, temp___381,
+  temp___382, temp___383, temp___384, temp___385, temp___386,
+  temp___387)[5])) = temp___383)) and (to_rep1((temp___376(temp___378,
+  temp___379, temp___380, temp___381, temp___382, temp___383, temp___384,
+  temp___385, temp___386, temp___387)[6])) = temp___384)) and
+  (to_rep1((temp___376(temp___378, temp___379, temp___380, temp___381,
+  temp___382, temp___383, temp___384, temp___385, temp___386,
+  temp___387)[7])) = temp___385)) and (to_rep1((temp___376(temp___378,
+  temp___379, temp___380, temp___381, temp___382, temp___383, temp___384,
+  temp___385, temp___386, temp___387)[8])) = temp___386)) and
+  (to_rep1((temp___376(temp___378, temp___379, temp___380, temp___381,
+  temp___382, temp___383, temp___384, temp___385, temp___386,
+  temp___387)[9])) = temp___387))))
+
 axiom def_axiom4 :
-  (forall temp___392:subject. forall temp___3921:percentage.
-  forall temp___393:subject. forall temp___3931:percentage.
-  forall temp___394:subject. forall temp___3941:percentage.
-  forall temp___395:subject. forall temp___3951:percentage.
-  forall temp___396:subject. forall temp___3961:percentage.
-  forall temp___397:subject. forall temp___3971:percentage.
-  forall temp___398:subject. forall temp___3981:percentage.
-  forall temp___399:subject. forall temp___3991:percentage.
-  forall temp___400:subject. forall temp___4001:percentage.
-  forall temp___401:subject. forall temp___4011:percentage.
-  (((((((((((temp___390({ us_split_fields7 = {
-  rec__pupils__subject_score_pair__subj = temp___392;
-  rec__pupils__subject_score_pair__score = temp___3921 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___393;
-  rec__pupils__subject_score_pair__score = temp___3931 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___394;
-  rec__pupils__subject_score_pair__score = temp___3941 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___395;
-  rec__pupils__subject_score_pair__score = temp___3951 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___396;
-  rec__pupils__subject_score_pair__score = temp___3961 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___397;
-  rec__pupils__subject_score_pair__score = temp___3971 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___398;
-  rec__pupils__subject_score_pair__score = temp___3981 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___399;
-  rec__pupils__subject_score_pair__score = temp___3991 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___400;
-  rec__pupils__subject_score_pair__score = temp___4001 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___401;
-  rec__pupils__subject_score_pair__score = temp___4011 } })[0]) = {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___392;
-  rec__pupils__subject_score_pair__score = temp___3921 } }) and
-  ((temp___390({ us_split_fields7 = { rec__pupils__subject_score_pair__subj =
-  temp___392; rec__pupils__subject_score_pair__score = temp___3921 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___393;
-  rec__pupils__subject_score_pair__score = temp___3931 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___394;
-  rec__pupils__subject_score_pair__score = temp___3941 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___395;
-  rec__pupils__subject_score_pair__score = temp___3951 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___396;
-  rec__pupils__subject_score_pair__score = temp___3961 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___397;
-  rec__pupils__subject_score_pair__score = temp___3971 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___398;
-  rec__pupils__subject_score_pair__score = temp___3981 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___399;
-  rec__pupils__subject_score_pair__score = temp___3991 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___400;
-  rec__pupils__subject_score_pair__score = temp___4001 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___401;
-  rec__pupils__subject_score_pair__score = temp___4011 } })[1]) = {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___393;
-  rec__pupils__subject_score_pair__score = temp___3931 } })) and
-  ((temp___390({ us_split_fields7 = { rec__pupils__subject_score_pair__subj =
-  temp___392; rec__pupils__subject_score_pair__score = temp___3921 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___393;
-  rec__pupils__subject_score_pair__score = temp___3931 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___394;
-  rec__pupils__subject_score_pair__score = temp___3941 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___395;
-  rec__pupils__subject_score_pair__score = temp___3951 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___396;
-  rec__pupils__subject_score_pair__score = temp___3961 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___397;
-  rec__pupils__subject_score_pair__score = temp___3971 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___398;
-  rec__pupils__subject_score_pair__score = temp___3981 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___399;
-  rec__pupils__subject_score_pair__score = temp___3991 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___400;
-  rec__pupils__subject_score_pair__score = temp___4001 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___401;
-  rec__pupils__subject_score_pair__score = temp___4011 } })[2]) = {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___394;
-  rec__pupils__subject_score_pair__score = temp___3941 } })) and
-  ((temp___390({ us_split_fields7 = { rec__pupils__subject_score_pair__subj =
-  temp___392; rec__pupils__subject_score_pair__score = temp___3921 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___393;
-  rec__pupils__subject_score_pair__score = temp___3931 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___394;
-  rec__pupils__subject_score_pair__score = temp___3941 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___395;
-  rec__pupils__subject_score_pair__score = temp___3951 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___396;
-  rec__pupils__subject_score_pair__score = temp___3961 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___397;
-  rec__pupils__subject_score_pair__score = temp___3971 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___398;
-  rec__pupils__subject_score_pair__score = temp___3981 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___399;
-  rec__pupils__subject_score_pair__score = temp___3991 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___400;
-  rec__pupils__subject_score_pair__score = temp___4001 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___401;
-  rec__pupils__subject_score_pair__score = temp___4011 } })[3]) = {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___395;
-  rec__pupils__subject_score_pair__score = temp___3951 } })) and
-  ((temp___390({ us_split_fields7 = { rec__pupils__subject_score_pair__subj =
-  temp___392; rec__pupils__subject_score_pair__score = temp___3921 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___393;
-  rec__pupils__subject_score_pair__score = temp___3931 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___394;
-  rec__pupils__subject_score_pair__score = temp___3941 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___395;
-  rec__pupils__subject_score_pair__score = temp___3951 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___396;
-  rec__pupils__subject_score_pair__score = temp___3961 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___397;
-  rec__pupils__subject_score_pair__score = temp___3971 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___398;
-  rec__pupils__subject_score_pair__score = temp___3981 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___399;
-  rec__pupils__subject_score_pair__score = temp___3991 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___400;
-  rec__pupils__subject_score_pair__score = temp___4001 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___401;
-  rec__pupils__subject_score_pair__score = temp___4011 } })[4]) = {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___396;
-  rec__pupils__subject_score_pair__score = temp___3961 } })) and
-  ((temp___390({ us_split_fields7 = { rec__pupils__subject_score_pair__subj =
-  temp___392; rec__pupils__subject_score_pair__score = temp___3921 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___393;
-  rec__pupils__subject_score_pair__score = temp___3931 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___394;
-  rec__pupils__subject_score_pair__score = temp___3941 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___395;
-  rec__pupils__subject_score_pair__score = temp___3951 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___396;
-  rec__pupils__subject_score_pair__score = temp___3961 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___397;
-  rec__pupils__subject_score_pair__score = temp___3971 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___398;
-  rec__pupils__subject_score_pair__score = temp___3981 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___399;
-  rec__pupils__subject_score_pair__score = temp___3991 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___400;
-  rec__pupils__subject_score_pair__score = temp___4001 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___401;
-  rec__pupils__subject_score_pair__score = temp___4011 } })[5]) = {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___397;
-  rec__pupils__subject_score_pair__score = temp___3971 } })) and
-  ((temp___390({ us_split_fields7 = { rec__pupils__subject_score_pair__subj =
-  temp___392; rec__pupils__subject_score_pair__score = temp___3921 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___393;
-  rec__pupils__subject_score_pair__score = temp___3931 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___394;
-  rec__pupils__subject_score_pair__score = temp___3941 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___395;
-  rec__pupils__subject_score_pair__score = temp___3951 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___396;
-  rec__pupils__subject_score_pair__score = temp___3961 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___397;
-  rec__pupils__subject_score_pair__score = temp___3971 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___398;
-  rec__pupils__subject_score_pair__score = temp___3981 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___399;
-  rec__pupils__subject_score_pair__score = temp___3991 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___400;
-  rec__pupils__subject_score_pair__score = temp___4001 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___401;
-  rec__pupils__subject_score_pair__score = temp___4011 } })[6]) = {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___398;
-  rec__pupils__subject_score_pair__score = temp___3981 } })) and
-  ((temp___390({ us_split_fields7 = { rec__pupils__subject_score_pair__subj =
-  temp___392; rec__pupils__subject_score_pair__score = temp___3921 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___393;
-  rec__pupils__subject_score_pair__score = temp___3931 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___394;
-  rec__pupils__subject_score_pair__score = temp___3941 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___395;
-  rec__pupils__subject_score_pair__score = temp___3951 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___396;
-  rec__pupils__subject_score_pair__score = temp___3961 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___397;
-  rec__pupils__subject_score_pair__score = temp___3971 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___398;
-  rec__pupils__subject_score_pair__score = temp___3981 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___399;
-  rec__pupils__subject_score_pair__score = temp___3991 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___400;
-  rec__pupils__subject_score_pair__score = temp___4001 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___401;
-  rec__pupils__subject_score_pair__score = temp___4011 } })[7]) = {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___399;
-  rec__pupils__subject_score_pair__score = temp___3991 } })) and
-  ((temp___390({ us_split_fields7 = { rec__pupils__subject_score_pair__subj =
-  temp___392; rec__pupils__subject_score_pair__score = temp___3921 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___393;
-  rec__pupils__subject_score_pair__score = temp___3931 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___394;
-  rec__pupils__subject_score_pair__score = temp___3941 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___395;
-  rec__pupils__subject_score_pair__score = temp___3951 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___396;
-  rec__pupils__subject_score_pair__score = temp___3961 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___397;
-  rec__pupils__subject_score_pair__score = temp___3971 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___398;
-  rec__pupils__subject_score_pair__score = temp___3981 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___399;
-  rec__pupils__subject_score_pair__score = temp___3991 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___400;
-  rec__pupils__subject_score_pair__score = temp___4001 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___401;
-  rec__pupils__subject_score_pair__score = temp___4011 } })[8]) = {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___400;
-  rec__pupils__subject_score_pair__score = temp___4001 } })) and
-  ((temp___390({ us_split_fields7 = { rec__pupils__subject_score_pair__subj =
-  temp___392; rec__pupils__subject_score_pair__score = temp___3921 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___393;
-  rec__pupils__subject_score_pair__score = temp___3931 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___394;
-  rec__pupils__subject_score_pair__score = temp___3941 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___395;
-  rec__pupils__subject_score_pair__score = temp___3951 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___396;
-  rec__pupils__subject_score_pair__score = temp___3961 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___397;
-  rec__pupils__subject_score_pair__score = temp___3971 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___398;
-  rec__pupils__subject_score_pair__score = temp___3981 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___399;
-  rec__pupils__subject_score_pair__score = temp___3991 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___400;
-  rec__pupils__subject_score_pair__score = temp___4001 } }, {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___401;
-  rec__pupils__subject_score_pair__score = temp___4011 } })[9]) = {
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___401;
-  rec__pupils__subject_score_pair__score = temp___4011 } })))
-
-logic p__split_fields : pupilnumbers
-
-logic p__split_fields1 : (int,us_rep1) farray
-
-logic success : bool
-
-logic subject_scores : (int,us_rep3) farray
-
-logic i : int
-
-logic o : percentage
-
-logic o1 : subject
-
-logic o2 : subject
-
-logic o3 : percentage
-
-logic o4 : percentage
-
-logic o5 : subject
-
-logic o6 : subject
-
-logic o7 : percentage
-
-logic o8 : percentage
-
-logic o9 : subject
-
-logic o10 : subject
-
-logic o11 : percentage
-
-logic o12 : percentage
-
-logic o13 : subject
-
-logic o14 : subject
-
-logic o15 : percentage
-
-logic o16 : percentage
-
-logic o17 : subject
-
-logic o18 : subject
-
-logic o19 : percentage
-
-logic o20 : percentage
-
-logic o21 : subject
-
-logic o22 : subject
-
-logic o23 : percentage
-
-logic o24 : percentage
-
-logic o25 : subject
-
-logic o26 : subject
-
-logic o27 : percentage
-
-logic o28 : percentage
-
-logic o29 : subject
-
-logic o30 : subject
-
-logic o31 : percentage
-
-logic o32 : percentage
-
-logic o33 : subject
-
-logic o34 : subject
-
-logic o35 : percentage
-
-logic o36 : percentage
-
-logic o37 : subject
-
-logic o38 : subject
-
-logic o39 : percentage
-
-logic o40 : subject
-
-logic o41 : percentage
-
-logic o42 : subject
-
-logic o43 : percentage
-
-logic o44 : subject
-
-logic o45 : percentage
-
-logic o46 : subject
-
-logic o47 : percentage
-
-logic o48 : subject
-
-logic o49 : percentage
-
-logic o50 : subject
-
-logic o51 : percentage
-
-logic o52 : subject
-
-logic o53 : percentage
-
-logic o54 : subject
-
-logic o55 : percentage
-
-logic o56 : subject
-
-logic o57 : percentage
-
-logic o58 : subject
-
-logic o59 : percentage
-
-logic o60 : (int,us_rep3) farray
-
-logic temp___420 : bool
-
-logic temp___417 : pupilnumbers
-
-logic temp___4171 : (int,us_rep1) farray
-
-logic o61 : int
-
-logic o62 : (int,character) farray
-
-logic o63 : (int,character) farray
-
-logic o64 : formtype
-
-logic o65 : (int,us_rep) farray
-
-logic o66 : (int,character) farray
-
-logic o67 : (int,character) farray
-
-logic o68 : formtype
-
-logic o69 : (int,us_rep) farray
-
-logic temp___405 : (int,us_rep) farray
-
-logic o70 : bool
-
-logic o71 : percentage
-
-logic o72 : bool
-
-logic o73 : percentage
-
-logic o74 : bool
-
-logic o75 : bool
-
-logic o76 : percentage
-
-logic o77 : bool
-
-logic o78 : percentage
-
-logic o79 : bool
-
-logic o80 : percentage
-
-logic o81 : (int,us_rep) farray
-
-logic o82 : (int,character) farray
-
-logic o83 : (int,character) farray
-
-logic o84 : formtype
-
-logic o85 : (int,us_rep) farray
-
-logic o86 : (int,character) farray
-
-logic o87 : (int,character) farray
-
-logic o88 : formtype
-
-logic o89 : (int,us_rep) farray
-
-logic o90 : int
-
-logic o91 : (int,us_rep1) farray
-
-logic o92 : pupilnumbers
-
-logic o93 : (int,us_rep1) farray
-
-logic temp___416 : pupilnumbers
-
-logic temp___4161 : (int,us_rep1) farray
-
-logic o94 : int
-
-logic o95 : (int,character) farray
-
-logic o96 : (int,character) farray
-
-logic o97 : formtype
-
-logic o98 : (int,us_rep) farray
-
-logic o99 : (int,character) farray
-
-logic o100 : (int,character) farray
-
-logic o101 : formtype
-
-logic o102 : (int,us_rep) farray
-
-logic temp___4051 : (int,us_rep) farray
-
-logic o103 : bool
-
-logic o104 : percentage
-
-logic o105 : bool
-
-logic o106 : percentage
-
-logic o107 : bool
-
-logic o108 : bool
-
-logic o109 : percentage
-
-logic o110 : bool
-
-logic o111 : percentage
-
-logic o112 : bool
-
-logic o113 : percentage
-
-logic o114 : (int,us_rep) farray
-
-logic o115 : (int,character) farray
-
-logic o116 : (int,character) farray
-
-logic o117 : formtype
-
-logic o118 : (int,us_rep) farray
-
-logic o119 : (int,character) farray
-
-logic o120 : (int,character) farray
-
-logic o121 : formtype
-
-logic o122 : (int,us_rep) farray
-
-logic o123 : int
-
-logic o124 : (int,us_rep1) farray
-
-logic o125 : pupilnumbers
-
-logic o126 : (int,us_rep1) farray
-
-logic temp___4162 : pupilnumbers
-
-logic temp___4163 : (int,us_rep1) farray
-
-logic o127 : int
-
-logic o128 : (int,character) farray
-
-logic o129 : (int,character) farray
-
-logic o130 : formtype
-
-logic o131 : (int,us_rep) farray
-
-logic o132 : (int,character) farray
-
-logic o133 : (int,character) farray
-
-logic o134 : formtype
-
-logic o135 : (int,us_rep) farray
-
-logic temp___4052 : (int,us_rep) farray
-
-logic o136 : bool
-
-logic o137 : percentage
-
-logic o138 : bool
-
-logic o139 : percentage
-
-logic o140 : bool
-
-logic o141 : bool
-
-logic o142 : percentage
-
-logic o143 : bool
-
-logic o144 : percentage
-
-logic o145 : bool
-
-logic o146 : percentage
-
-logic o147 : (int,us_rep) farray
-
-logic o148 : (int,character) farray
-
-logic o149 : (int,character) farray
-
-logic o150 : formtype
-
-logic o151 : (int,us_rep) farray
-
-logic o152 : (int,character) farray
-
-logic o153 : (int,character) farray
-
-logic o154 : formtype
-
-logic o155 : (int,us_rep) farray
-
-logic o156 : int
-
-logic o157 : (int,us_rep1) farray
-
-logic o158 : pupilnumbers
-
-logic o159 : (int,us_rep1) farray
-
-logic temp___4164 : pupilnumbers
-
-logic temp___4165 : (int,us_rep1) farray
-
-logic o160 : int
-
-logic o161 : (int,character) farray
-
-logic o162 : (int,character) farray
-
-logic o163 : formtype
-
-logic o164 : (int,us_rep) farray
-
-logic o165 : (int,character) farray
-
-logic o166 : (int,character) farray
-
-logic o167 : formtype
-
-logic o168 : (int,us_rep) farray
-
-logic temp___4053 : (int,us_rep) farray
-
-logic o169 : bool
-
-logic o170 : percentage
-
-logic o171 : bool
-
-logic o172 : percentage
-
-logic o173 : bool
-
-logic o174 : bool
-
-logic o175 : percentage
-
-logic o176 : bool
-
-logic o177 : percentage
-
-logic o178 : bool
-
-logic o179 : percentage
-
-logic o180 : (int,us_rep) farray
-
-logic o181 : (int,character) farray
-
-logic o182 : (int,character) farray
-
-logic o183 : formtype
-
-logic o184 : (int,us_rep) farray
-
-logic o185 : (int,character) farray
-
-logic o186 : (int,character) farray
-
-logic o187 : formtype
-
-logic o188 : (int,us_rep) farray
-
-logic o189 : int
-
-logic o190 : (int,us_rep1) farray
-
-logic o191 : pupilnumbers
-
-logic o192 : (int,us_rep1) farray
-
-logic temp___4166 : pupilnumbers
-
-logic temp___4167 : (int,us_rep1) farray
-
-logic o193 : int
-
-logic o194 : (int,character) farray
-
-logic o195 : (int,character) farray
-
-logic o196 : formtype
-
-logic o197 : (int,us_rep) farray
-
-logic o198 : (int,character) farray
-
-logic o199 : (int,character) farray
-
-logic o200 : formtype
-
-logic o201 : (int,us_rep) farray
-
-logic temp___4054 : (int,us_rep) farray
-
-logic o202 : bool
-
-logic o203 : percentage
-
-logic o204 : bool
-
-logic o205 : percentage
-
-logic o206 : bool
-
-logic o207 : bool
-
-logic o208 : percentage
-
-logic o209 : bool
-
-logic o210 : percentage
-
-logic o211 : bool
-
-logic o212 : percentage
-
-logic o213 : (int,us_rep) farray
-
-logic o214 : (int,character) farray
-
-logic o215 : (int,character) farray
-
-logic o216 : formtype
-
-logic o217 : (int,us_rep) farray
-
-logic o218 : (int,character) farray
-
-logic o219 : (int,character) farray
-
-logic o220 : formtype
-
-logic o221 : (int,us_rep) farray
-
-logic o222 : int
-
-logic o223 : (int,us_rep1) farray
-
-logic o224 : pupilnumbers
-
-logic o225 : (int,us_rep1) farray
-
-logic temp___4168 : pupilnumbers
-
-logic temp___4169 : (int,us_rep1) farray
-
-logic o226 : int
-
-logic o227 : (int,character) farray
-
-logic o228 : (int,character) farray
-
-logic o229 : formtype
-
-logic o230 : (int,us_rep) farray
-
-logic o231 : (int,character) farray
-
-logic o232 : (int,character) farray
-
-logic o233 : formtype
-
-logic o234 : (int,us_rep) farray
-
-logic temp___4055 : (int,us_rep) farray
-
-logic o235 : bool
-
-logic o236 : percentage
-
-logic o237 : bool
-
-logic o238 : percentage
-
-logic o239 : bool
-
-logic o240 : bool
-
-logic o241 : percentage
-
-logic o242 : bool
-
-logic o243 : percentage
-
-logic o244 : bool
-
-logic o245 : percentage
-
-logic o246 : (int,us_rep) farray
-
-logic o247 : (int,character) farray
-
-logic o248 : (int,character) farray
-
-logic o249 : formtype
-
-logic o250 : (int,us_rep) farray
-
-logic o251 : (int,character) farray
-
-logic o252 : (int,character) farray
-
-logic o253 : formtype
-
-logic o254 : (int,us_rep) farray
-
-logic o255 : int
-
-logic o256 : (int,us_rep1) farray
-
-logic o257 : pupilnumbers
-
-logic o258 : (int,us_rep1) farray
-
-logic temp___41610 : pupilnumbers
-
-logic temp___41611 : (int,us_rep1) farray
-
-logic o259 : int
-
-logic o260 : (int,character) farray
-
-logic o261 : (int,character) farray
-
-logic o262 : formtype
-
-logic o263 : (int,us_rep) farray
-
-logic o264 : (int,character) farray
-
-logic o265 : (int,character) farray
-
-logic o266 : formtype
-
-logic o267 : (int,us_rep) farray
-
-logic temp___4056 : (int,us_rep) farray
-
-logic o268 : bool
-
-logic o269 : percentage
-
-logic o270 : bool
-
-logic o271 : percentage
-
-logic o272 : bool
-
-logic o273 : bool
-
-logic o274 : percentage
-
-logic o275 : bool
-
-logic o276 : percentage
-
-logic o277 : bool
-
-logic o278 : percentage
-
-logic o279 : (int,us_rep) farray
-
-logic o280 : (int,character) farray
-
-logic o281 : (int,character) farray
-
-logic o282 : formtype
-
-logic o283 : (int,us_rep) farray
-
-logic o284 : (int,character) farray
-
-logic o285 : (int,character) farray
-
-logic o286 : formtype
-
-logic o287 : (int,us_rep) farray
-
-logic o288 : int
-
-logic o289 : (int,us_rep1) farray
-
-logic o290 : pupilnumbers
-
-logic o291 : (int,us_rep1) farray
-
-logic temp___41612 : pupilnumbers
-
-logic temp___41613 : (int,us_rep1) farray
-
-logic o292 : int
-
-logic o293 : (int,character) farray
-
-logic o294 : (int,character) farray
-
-logic o295 : formtype
-
-logic o296 : (int,us_rep) farray
-
-logic o297 : (int,character) farray
-
-logic o298 : (int,character) farray
-
-logic o299 : formtype
-
-logic o300 : (int,us_rep) farray
-
-logic temp___4057 : (int,us_rep) farray
-
-logic o301 : bool
-
-logic o302 : percentage
-
-logic o303 : bool
-
-logic o304 : percentage
-
-logic o305 : bool
-
-logic o306 : bool
-
-logic o307 : percentage
-
-logic o308 : bool
-
-logic o309 : percentage
-
-logic o310 : bool
-
-logic o311 : percentage
-
-logic o312 : (int,us_rep) farray
-
-logic o313 : (int,character) farray
-
-logic o314 : (int,character) farray
-
-logic o315 : formtype
-
-logic o316 : (int,us_rep) farray
-
-logic o317 : (int,character) farray
-
-logic o318 : (int,character) farray
-
-logic o319 : formtype
-
-logic o320 : (int,us_rep) farray
-
-logic o321 : int
-
-logic o322 : (int,us_rep1) farray
-
-logic o323 : pupilnumbers
-
-logic o324 : (int,us_rep1) farray
-
-logic temp___41614 : pupilnumbers
-
-logic temp___41615 : (int,us_rep1) farray
-
-logic o325 : int
-
-logic o326 : (int,character) farray
-
-logic o327 : (int,character) farray
-
-logic o328 : formtype
-
-logic o329 : (int,us_rep) farray
-
-logic o330 : (int,character) farray
-
-logic o331 : (int,character) farray
-
-logic o332 : formtype
-
-logic o333 : (int,us_rep) farray
-
-logic temp___4058 : (int,us_rep) farray
-
-logic o334 : bool
-
-logic o335 : percentage
-
-logic o336 : bool
-
-logic o337 : percentage
-
-logic o338 : bool
-
-logic o339 : bool
-
-logic o340 : percentage
-
-logic o341 : bool
-
-logic o342 : percentage
-
-logic o343 : bool
-
-logic o344 : percentage
-
-logic o345 : (int,us_rep) farray
-
-logic o346 : (int,character) farray
-
-logic o347 : (int,character) farray
-
-logic o348 : formtype
-
-logic o349 : (int,us_rep) farray
-
-logic o350 : (int,character) farray
-
-logic o351 : (int,character) farray
-
-logic o352 : formtype
-
-logic o353 : (int,us_rep) farray
-
-logic o354 : int
-
-logic o355 : (int,us_rep1) farray
-
-logic o356 : pupilnumbers
-
-logic o357 : (int,us_rep1) farray
-
-logic temp___41616 : pupilnumbers
-
-logic temp___41617 : (int,us_rep1) farray
-
-logic o358 : int
-
-logic o359 : (int,character) farray
-
-logic o360 : (int,character) farray
-
-logic o361 : formtype
-
-logic o362 : (int,us_rep) farray
-
-logic o363 : (int,character) farray
-
-logic o364 : (int,character) farray
-
-logic o365 : formtype
-
-logic o366 : (int,us_rep) farray
-
-logic temp___4059 : (int,us_rep) farray
-
-logic o367 : bool
-
-logic o368 : percentage
-
-logic o369 : bool
-
-logic o370 : percentage
-
-logic o371 : bool
-
-logic o372 : bool
-
-logic o373 : percentage
-
-logic o374 : bool
-
-logic o375 : percentage
-
-logic o376 : bool
-
-logic o377 : percentage
-
-logic o378 : (int,us_rep) farray
-
-logic o379 : (int,character) farray
-
-logic o380 : (int,character) farray
-
-logic o381 : formtype
-
-logic o382 : (int,us_rep) farray
-
-logic o383 : (int,character) farray
-
-logic o384 : (int,character) farray
-
-logic o385 : formtype
-
-logic o386 : (int,us_rep) farray
-
-logic o387 : int
-
-logic o388 : (int,us_rep1) farray
-
-logic o389 : pupilnumbers
-
-logic o390 : (int,us_rep1) farray
-
-logic temp___41618 : pupilnumbers
-
-logic temp___41619 : (int,us_rep1) farray
-
-logic o391 : int
-
-logic o392 : pupilnumbers
-
-logic o393 : pupilnumbers
-
-logic o394 : (int,us_rep1) farray
-
-logic temp___424 : pupilnumbers
-
-logic temp___4241 : (int,us_rep1) farray
-
-logic o395 : int
-
-logic o396 : (int,us_rep1) farray
-
-logic o397 : pupilnumbers
-
-logic o398 : (int,us_rep1) farray
-
-logic temp___430 : pupilnumbers
-
-logic temp___4301 : (int,us_rep1) farray
-
-logic o399 : int
-
-logic o400 : (int,us_rep1) farray
-
-logic o401 : pupilnumbers
-
-logic o402 : (int,us_rep1) farray
-
-logic temp___436 : pupilnumbers
-
-logic temp___4361 : (int,us_rep1) farray
-
-logic o403 : formtype
-
-logic o404 : (int,character) farray
-
-logic o405 : (int,character) farray
-
-logic o406 : formtype
-
-logic o407 : (int,us_rep) farray
-
-logic o408 : (int,character) farray
-
-logic o409 : (int,character) farray
-
-logic o410 : formtype
-
-logic o411 : (int,us_rep) farray
-
-logic o412 : int
-
-logic o413 : (int,us_rep1) farray
-
-logic o414 : pupilnumbers
-
-logic o415 : (int,us_rep1) farray
-
-logic temp___442 : pupilnumbers
-
-logic temp___4421 : (int,us_rep1) farray
-
-logic i1 : int
-
-logic o416 : int
-
-logic o417 : (int,character) farray
-
-logic o418 : (int,character) farray
-
-logic o419 : formtype
-
-logic o420 : (int,us_rep) farray
-
-logic i2 : int
-
-logic o421 : percentage
-
-logic o422 : bool
-
-logic o423 : percentage
-
-logic o424 : percentage
-
-logic o425 : bool
-
-logic o426 : percentage
-
-logic o427 : percentage
-
-logic o428 : bool
-
-logic o429 : percentage
-
-logic o430 : percentage
-
-logic o431 : bool
-
-logic o432 : percentage
-
-logic o433 : percentage
-
-logic o434 : bool
-
-logic o435 : percentage
-
-logic o436 : percentage
-
-logic o437 : bool
-
-logic o438 : percentage
-
-logic o439 : percentage
-
-logic o440 : bool
-
-logic o441 : percentage
-
-logic o442 : percentage
-
-logic o443 : bool
-
-logic o444 : percentage
-
-logic o445 : percentage
-
-logic o446 : bool
-
-logic o447 : percentage
-
-logic o448 : percentage
-
-logic o449 : bool
-
-logic o450 : percentage
-
-logic o451 : bool
-
-logic o452 : percentage
-
-logic o453 : bool
-
-logic o454 : percentage
-
-logic o455 : bool
-
-logic o456 : percentage
-
-logic o457 : bool
-
-logic o458 : percentage
-
-logic o459 : bool
-
-logic o460 : percentage
-
-logic o461 : bool
-
-logic o462 : percentage
-
-logic o463 : bool
-
-logic o464 : percentage
-
-logic o465 : bool
-
-logic o466 : percentage
-
-logic o467 : bool
-
-logic o468 : percentage
-
-logic o469 : bool
-
-logic o470 : percentage
-
-logic o471 : (int,us_rep) farray
-
-logic o472 : formtype
-
-logic o473 : (int,character) farray
-
-logic o474 : (int,character) farray
-
-logic o475 : formtype
-
-logic o476 : (int,us_rep) farray
-
-logic o477 : (int,character) farray
-
-logic o478 : (int,character) farray
-
-logic o479 : formtype
-
-logic o480 : (int,us_rep) farray
-
-logic o481 : bool
-
-logic p__split_fields2 : pupilnumbers
-
-logic p__split_fields3 : (int,us_rep1) farray
-
-logic result : (int,us_rep3) farray
-
-logic subject_scores1 : (int,us_rep3) farray
-
-logic result1 : int
-
-logic i3 : int
-
-logic result2 : bool
-
-logic success1 : bool
-
-logic result3 : pupilnumbers
-
-logic result4 : (int,us_rep1) farray
-
-logic p__split_fields4 : pupilnumbers
-
-logic p__split_fields5 : (int,us_rep1) farray
-
-logic result5 : int
-
-logic i4 : int
-
-logic result6 : bool
-
-logic success2 : bool
-
-logic result7 : pupilnumbers
-
-logic result8 : (int,us_rep1) farray
-
-logic p__split_fields6 : pupilnumbers
-
-logic p__split_fields7 : (int,us_rep1) farray
-
-logic result9 : int
-
-logic i5 : int
-
-logic result10 : bool
-
-logic success3 : bool
-
-logic result11 : pupilnumbers
-
-logic result12 : (int,us_rep1) farray
-
-logic p__split_fields8 : pupilnumbers
-
-logic p__split_fields9 : (int,us_rep1) farray
-
-logic result13 : int
-
-logic i6 : int
-
-logic result14 : bool
-
-logic success4 : bool
-
-logic result15 : pupilnumbers
-
-logic result16 : (int,us_rep1) farray
-
-logic p__split_fields10 : pupilnumbers
-
-logic p__split_fields11 : (int,us_rep1) farray
-
-logic result17 : int
-
-logic i7 : int
-
-logic result18 : bool
-
-logic success5 : bool
-
-logic result19 : pupilnumbers
-
-logic result20 : (int,us_rep1) farray
-
-logic p__split_fields12 : pupilnumbers
-
-logic p__split_fields13 : (int,us_rep1) farray
-
-logic result21 : int
-
-logic i8 : int
-
-logic result22 : bool
-
-logic success6 : bool
-
-logic result23 : pupilnumbers
-
-logic result24 : (int,us_rep1) farray
-
-logic p__split_fields14 : pupilnumbers
-
-logic p__split_fields15 : (int,us_rep1) farray
-
-logic result25 : int
-
-logic i9 : int
-
-logic result26 : bool
-
-logic success7 : bool
-
-logic result27 : pupilnumbers
-
-logic result28 : (int,us_rep1) farray
-
-logic p__split_fields16 : pupilnumbers
-
-logic p__split_fields17 : (int,us_rep1) farray
-
-logic result29 : int
-
-logic i10 : int
-
-logic result30 : bool
-
-logic success8 : bool
-
-logic result31 : pupilnumbers
-
-logic result32 : (int,us_rep1) farray
-
-logic p__split_fields18 : pupilnumbers
-
-logic p__split_fields19 : (int,us_rep1) farray
-
-logic result33 : int
-
-logic i11 : int
-
-logic result34 : bool
-
-logic success9 : bool
-
-logic result35 : pupilnumbers
-
-logic result36 : (int,us_rep1) farray
-
-logic p__split_fields20 : pupilnumbers
-
-logic p__split_fields21 : (int,us_rep1) farray
-
-logic result37 : int
-
-logic i12 : int
-
-logic result38 : bool
-
-logic success10 : bool
-
-logic result39 : pupilnumbers
-
-logic result40 : (int,us_rep1) farray
-
-logic p__split_fields22 : pupilnumbers
-
-logic p__split_fields23 : (int,us_rep1) farray
-
-logic p__split_fields24 : pupilnumbers
-
-logic p__split_fields25 : (int,us_rep1) farray
-
-logic success11 : bool
-
-logic i13 : int
-
-logic p__split_fields26 : pupilnumbers
-
-logic p__split_fields27 : (int,us_rep1) farray
-
-logic success12 : bool
-
-logic i14 : int
-
-logic p__split_fields28 : pupilnumbers
-
-logic p__split_fields29 : (int,us_rep1) farray
-
-logic success13 : bool
-
-logic i15 : int
-
-logic p__split_fields30 : pupilnumbers
-
-logic p__split_fields31 : (int,us_rep1) farray
-
-logic success14 : bool
-
-logic i16 : int
-
-logic p__split_fields32 : pupilnumbers
-
-logic p__split_fields33 : (int,us_rep1) farray
-
-logic success15 : bool
-
-logic i17 : int
-
-logic p__split_fields34 : pupilnumbers
-
-logic p__split_fields35 : (int,us_rep1) farray
-
-logic success16 : bool
-
-logic i18 : int
-
-logic p__split_fields36 : pupilnumbers
-
-logic p__split_fields37 : (int,us_rep1) farray
-
-logic success17 : bool
-
-logic i19 : int
-
-logic p__split_fields38 : pupilnumbers
-
-logic p__split_fields39 : (int,us_rep1) farray
-
-logic success18 : bool
-
-logic i20 : int
-
-logic p__split_fields40 : pupilnumbers
-
-logic p__split_fields41 : (int,us_rep1) farray
-
-logic success19 : bool
-
-logic i21 : int
-
-logic p__split_fields42 : pupilnumbers
-
-logic p__split_fields43 : (int,us_rep1) farray
-
-logic success20 : bool
-
-logic i22 : int
-
-logic p__split_fields44 : pupilnumbers
-
-logic p__split_fields45 : (int,us_rep1) farray
-
-logic success21 : bool
-
-logic i23 : int
-
-logic p__split_fields46 : pupilnumbers
-
-logic p__split_fields47 : (int,us_rep1) farray
-
-logic success22 : bool
-
-logic i24 : int
-
-logic p__split_fields48 : pupilnumbers
-
-logic p__split_fields49 : (int,us_rep1) farray
-
-logic success23 : bool
-
-logic i25 : int
-
-logic p__split_fields50 : pupilnumbers
-
-logic p__split_fields51 : (int,us_rep1) farray
-
-logic success24 : bool
-
-logic i26 : int
-
-logic p__split_fields52 : pupilnumbers
-
-logic p__split_fields53 : (int,us_rep1) farray
-
-logic success25 : bool
-
-logic i27 : int
-
-logic p__split_fields54 : pupilnumbers
-
-logic p__split_fields55 : (int,us_rep1) farray
-
-logic success26 : bool
-
-logic i28 : int
-
-logic p__split_fields56 : pupilnumbers
-
-logic p__split_fields57 : (int,us_rep1) farray
-
-logic success27 : bool
-
-logic i29 : int
-
-logic p__split_fields58 : pupilnumbers
-
-logic p__split_fields59 : (int,us_rep1) farray
-
-logic success28 : bool
-
-logic i30 : int
-
-logic p__split_fields60 : pupilnumbers
-
-logic p__split_fields61 : (int,us_rep1) farray
-
-logic success29 : bool
-
-logic i31 : int
-
-logic p__split_fields62 : pupilnumbers
-
-logic p__split_fields63 : (int,us_rep1) farray
-
-logic success30 : bool
-
-logic i32 : int
-
-logic result41 : pupilnumbers
-
-logic result42 : (int,us_rep1) farray
-
-logic p__split_fields64 : pupilnumbers
-
-logic p__split_fields65 : (int,us_rep1) farray
-
-logic result43 : pupilnumbers
-
-logic result44 : (int,us_rep1) farray
-
-logic p__split_fields66 : pupilnumbers
-
-logic p__split_fields67 : (int,us_rep1) farray
-
-logic result45 : pupilnumbers
-
-logic result46 : (int,us_rep1) farray
-
-logic p__split_fields68 : pupilnumbers
-
-logic p__split_fields69 : (int,us_rep1) farray
-
-logic result47 : pupilnumbers
-
-logic result48 : (int,us_rep1) farray
-
-logic p__split_fields70 : pupilnumbers
-
-logic p__split_fields71 : (int,us_rep1) farray
-
-logic p__split_fields72 : pupilnumbers
-
-logic p__split_fields73 : (int,us_rep1) farray
-
-logic p__split_fields74 : pupilnumbers
-
-logic p__split_fields75 : (int,us_rep1) farray
-
-logic p__split_fields76 : pupilnumbers
-
-logic p__split_fields77 : (int,us_rep1) farray
-
-logic success31 : bool
-
-logic subject_scores2 : (int,us_rep3) farray
-
-logic i33 : int
-
-logic p__split_fields78 : pupilnumbers
-
-logic p__split_fields79 : (int,us_rep1) farray
-
-logic success32 : bool
-
-logic subject_scores3 : (int,us_rep3) farray
-
-logic i34 : int
-
-axiom H : in_range4(fm)
-
-axiom H1 : in_range2(subj0)
-
-axiom H2 : in_range1(score0)
-
-axiom H3 : in_range2(subj1)
-
-axiom H4 : in_range1(score1)
-
-axiom H5 : in_range2(subj2)
-
-axiom H6 : in_range1(score2)
-
-axiom H7 : in_range2(subj3)
-
-axiom H8 : in_range1(score3)
-
-axiom H9 : in_range2(subj4)
-
-axiom H10 : in_range1(score4)
-
-axiom H11 : in_range2(subj5)
-
-axiom H12 : in_range1(score5)
-
-axiom H13 : in_range2(subj6)
-
-axiom H14 : in_range1(score6)
-
-axiom H15 : in_range2(subj7)
-
-axiom H16 : in_range1(score7)
-
-axiom H17 : in_range2(subj8)
-
-axiom H18 : in_range1(score8)
-
-axiom H19 : in_range2(subj9)
-
-axiom H20 : in_range1(score9)
-
-axiom H21 : ((to_rep4(p__split_fields) <  250) and (not (fm = 8)))
-
- (* File "pupils.ads", line 74, characters 0-0 *)
-goal WP_parameter_def : (1 <= (to_rep4(p__split_fields) + 1))
+  (forall temp___393:(int,us_rep) farray.
+  (forall temp___394:int. forall temp___396:int. forall temp___398:int.
+  forall temp___400:int. forall temp___402:int. forall temp___404:int.
+  forall temp___406:int. forall temp___408:int. forall temp___410:int.
+  forall temp___412:int.
+  (forall temp___395:bool. forall temp___3951:percentage.
+  forall temp___397:bool. forall temp___3971:percentage.
+  forall temp___399:bool. forall temp___3991:percentage.
+  forall temp___401:bool. forall temp___4011:percentage.
+  forall temp___403:bool. forall temp___4031:percentage.
+  forall temp___405:bool. forall temp___4051:percentage.
+  forall temp___407:bool. forall temp___4071:percentage.
+  forall temp___409:bool. forall temp___4091:percentage.
+  forall temp___411:bool. forall temp___4111:percentage.
+  forall temp___413:bool. forall temp___4131:percentage.
+  ((((((((((in_range2(temp___394) and in_range2(temp___396)) and
+  in_range2(temp___398)) and in_range2(temp___400)) and
+  in_range2(temp___402)) and in_range2(temp___404)) and
+  in_range2(temp___406)) and in_range2(temp___408)) and
+  in_range2(temp___410)) and in_range2(temp___412)) ->
+  (forall temp___414:int. (((temp___414 = temp___412) ->
+  ((temp___391(temp___393, temp___394, { us_split_fields1 = {
+  rec__pupils__participation__studying = temp___395;
+  rec__pupils__participation__score = temp___3951 } }, temp___396, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___397;
+  rec__pupils__participation__score = temp___3971 } }, temp___398, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___399;
+  rec__pupils__participation__score = temp___3991 } }, temp___400, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___401;
+  rec__pupils__participation__score = temp___4011 } }, temp___402, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___403;
+  rec__pupils__participation__score = temp___4031 } }, temp___404, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___405;
+  rec__pupils__participation__score = temp___4051 } }, temp___406, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___407;
+  rec__pupils__participation__score = temp___4071 } }, temp___408, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___409;
+  rec__pupils__participation__score = temp___4091 } }, temp___410, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___411;
+  rec__pupils__participation__score = temp___4111 } }, temp___412, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___413;
+  rec__pupils__participation__score = temp___4131 } })[temp___414]) = {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___413;
+  rec__pupils__participation__score = temp___4131 } })) and
+  ((not (temp___414 = temp___412)) -> (((temp___414 = temp___410) ->
+  ((temp___391(temp___393, temp___394, { us_split_fields1 = {
+  rec__pupils__participation__studying = temp___395;
+  rec__pupils__participation__score = temp___3951 } }, temp___396, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___397;
+  rec__pupils__participation__score = temp___3971 } }, temp___398, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___399;
+  rec__pupils__participation__score = temp___3991 } }, temp___400, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___401;
+  rec__pupils__participation__score = temp___4011 } }, temp___402, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___403;
+  rec__pupils__participation__score = temp___4031 } }, temp___404, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___405;
+  rec__pupils__participation__score = temp___4051 } }, temp___406, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___407;
+  rec__pupils__participation__score = temp___4071 } }, temp___408, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___409;
+  rec__pupils__participation__score = temp___4091 } }, temp___410, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___411;
+  rec__pupils__participation__score = temp___4111 } }, temp___412, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___413;
+  rec__pupils__participation__score = temp___4131 } })[temp___414]) = {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___411;
+  rec__pupils__participation__score = temp___4111 } })) and
+  ((not (temp___414 = temp___410)) -> (((temp___414 = temp___408) ->
+  ((temp___391(temp___393, temp___394, { us_split_fields1 = {
+  rec__pupils__participation__studying = temp___395;
+  rec__pupils__participation__score = temp___3951 } }, temp___396, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___397;
+  rec__pupils__participation__score = temp___3971 } }, temp___398, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___399;
+  rec__pupils__participation__score = temp___3991 } }, temp___400, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___401;
+  rec__pupils__participation__score = temp___4011 } }, temp___402, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___403;
+  rec__pupils__participation__score = temp___4031 } }, temp___404, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___405;
+  rec__pupils__participation__score = temp___4051 } }, temp___406, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___407;
+  rec__pupils__participation__score = temp___4071 } }, temp___408, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___409;
+  rec__pupils__participation__score = temp___4091 } }, temp___410, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___411;
+  rec__pupils__participation__score = temp___4111 } }, temp___412, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___413;
+  rec__pupils__participation__score = temp___4131 } })[temp___414]) = {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___409;
+  rec__pupils__participation__score = temp___4091 } })) and
+  ((not (temp___414 = temp___408)) -> (((temp___414 = temp___406) ->
+  ((temp___391(temp___393, temp___394, { us_split_fields1 = {
+  rec__pupils__participation__studying = temp___395;
+  rec__pupils__participation__score = temp___3951 } }, temp___396, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___397;
+  rec__pupils__participation__score = temp___3971 } }, temp___398, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___399;
+  rec__pupils__participation__score = temp___3991 } }, temp___400, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___401;
+  rec__pupils__participation__score = temp___4011 } }, temp___402, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___403;
+  rec__pupils__participation__score = temp___4031 } }, temp___404, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___405;
+  rec__pupils__participation__score = temp___4051 } }, temp___406, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___407;
+  rec__pupils__participation__score = temp___4071 } }, temp___408, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___409;
+  rec__pupils__participation__score = temp___4091 } }, temp___410, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___411;
+  rec__pupils__participation__score = temp___4111 } }, temp___412, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___413;
+  rec__pupils__participation__score = temp___4131 } })[temp___414]) = {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___407;
+  rec__pupils__participation__score = temp___4071 } })) and
+  ((not (temp___414 = temp___406)) -> (((temp___414 = temp___404) ->
+  ((temp___391(temp___393, temp___394, { us_split_fields1 = {
+  rec__pupils__participation__studying = temp___395;
+  rec__pupils__participation__score = temp___3951 } }, temp___396, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___397;
+  rec__pupils__participation__score = temp___3971 } }, temp___398, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___399;
+  rec__pupils__participation__score = temp___3991 } }, temp___400, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___401;
+  rec__pupils__participation__score = temp___4011 } }, temp___402, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___403;
+  rec__pupils__participation__score = temp___4031 } }, temp___404, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___405;
+  rec__pupils__participation__score = temp___4051 } }, temp___406, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___407;
+  rec__pupils__participation__score = temp___4071 } }, temp___408, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___409;
+  rec__pupils__participation__score = temp___4091 } }, temp___410, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___411;
+  rec__pupils__participation__score = temp___4111 } }, temp___412, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___413;
+  rec__pupils__participation__score = temp___4131 } })[temp___414]) = {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___405;
+  rec__pupils__participation__score = temp___4051 } })) and
+  ((not (temp___414 = temp___404)) -> (((temp___414 = temp___402) ->
+  ((temp___391(temp___393, temp___394, { us_split_fields1 = {
+  rec__pupils__participation__studying = temp___395;
+  rec__pupils__participation__score = temp___3951 } }, temp___396, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___397;
+  rec__pupils__participation__score = temp___3971 } }, temp___398, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___399;
+  rec__pupils__participation__score = temp___3991 } }, temp___400, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___401;
+  rec__pupils__participation__score = temp___4011 } }, temp___402, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___403;
+  rec__pupils__participation__score = temp___4031 } }, temp___404, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___405;
+  rec__pupils__participation__score = temp___4051 } }, temp___406, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___407;
+  rec__pupils__participation__score = temp___4071 } }, temp___408, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___409;
+  rec__pupils__participation__score = temp___4091 } }, temp___410, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___411;
+  rec__pupils__participation__score = temp___4111 } }, temp___412, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___413;
+  rec__pupils__participation__score = temp___4131 } })[temp___414]) = {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___403;
+  rec__pupils__participation__score = temp___4031 } })) and
+  ((not (temp___414 = temp___402)) -> (((temp___414 = temp___400) ->
+  ((temp___391(temp___393, temp___394, { us_split_fields1 = {
+  rec__pupils__participation__studying = temp___395;
+  rec__pupils__participation__score = temp___3951 } }, temp___396, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___397;
+  rec__pupils__participation__score = temp___3971 } }, temp___398, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___399;
+  rec__pupils__participation__score = temp___3991 } }, temp___400, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___401;
+  rec__pupils__participation__score = temp___4011 } }, temp___402, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___403;
+  rec__pupils__participation__score = temp___4031 } }, temp___404, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___405;
+  rec__pupils__participation__score = temp___4051 } }, temp___406, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___407;
+  rec__pupils__participation__score = temp___4071 } }, temp___408, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___409;
+  rec__pupils__participation__score = temp___4091 } }, temp___410, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___411;
+  rec__pupils__participation__score = temp___4111 } }, temp___412, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___413;
+  rec__pupils__participation__score = temp___4131 } })[temp___414]) = {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___401;
+  rec__pupils__participation__score = temp___4011 } })) and
+  ((not (temp___414 = temp___400)) -> (((temp___414 = temp___398) ->
+  ((temp___391(temp___393, temp___394, { us_split_fields1 = {
+  rec__pupils__participation__studying = temp___395;
+  rec__pupils__participation__score = temp___3951 } }, temp___396, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___397;
+  rec__pupils__participation__score = temp___3971 } }, temp___398, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___399;
+  rec__pupils__participation__score = temp___3991 } }, temp___400, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___401;
+  rec__pupils__participation__score = temp___4011 } }, temp___402, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___403;
+  rec__pupils__participation__score = temp___4031 } }, temp___404, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___405;
+  rec__pupils__participation__score = temp___4051 } }, temp___406, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___407;
+  rec__pupils__participation__score = temp___4071 } }, temp___408, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___409;
+  rec__pupils__participation__score = temp___4091 } }, temp___410, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___411;
+  rec__pupils__participation__score = temp___4111 } }, temp___412, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___413;
+  rec__pupils__participation__score = temp___4131 } })[temp___414]) = {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___399;
+  rec__pupils__participation__score = temp___3991 } })) and
+  ((not (temp___414 = temp___398)) -> (((temp___414 = temp___396) ->
+  ((temp___391(temp___393, temp___394, { us_split_fields1 = {
+  rec__pupils__participation__studying = temp___395;
+  rec__pupils__participation__score = temp___3951 } }, temp___396, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___397;
+  rec__pupils__participation__score = temp___3971 } }, temp___398, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___399;
+  rec__pupils__participation__score = temp___3991 } }, temp___400, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___401;
+  rec__pupils__participation__score = temp___4011 } }, temp___402, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___403;
+  rec__pupils__participation__score = temp___4031 } }, temp___404, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___405;
+  rec__pupils__participation__score = temp___4051 } }, temp___406, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___407;
+  rec__pupils__participation__score = temp___4071 } }, temp___408, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___409;
+  rec__pupils__participation__score = temp___4091 } }, temp___410, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___411;
+  rec__pupils__participation__score = temp___4111 } }, temp___412, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___413;
+  rec__pupils__participation__score = temp___4131 } })[temp___414]) = {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___397;
+  rec__pupils__participation__score = temp___3971 } })) and
+  ((not (temp___414 = temp___396)) -> (((temp___414 = temp___394) ->
+  ((temp___391(temp___393, temp___394, { us_split_fields1 = {
+  rec__pupils__participation__studying = temp___395;
+  rec__pupils__participation__score = temp___3951 } }, temp___396, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___397;
+  rec__pupils__participation__score = temp___3971 } }, temp___398, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___399;
+  rec__pupils__participation__score = temp___3991 } }, temp___400, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___401;
+  rec__pupils__participation__score = temp___4011 } }, temp___402, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___403;
+  rec__pupils__participation__score = temp___4031 } }, temp___404, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___405;
+  rec__pupils__participation__score = temp___4051 } }, temp___406, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___407;
+  rec__pupils__participation__score = temp___4071 } }, temp___408, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___409;
+  rec__pupils__participation__score = temp___4091 } }, temp___410, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___411;
+  rec__pupils__participation__score = temp___4111 } }, temp___412, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___413;
+  rec__pupils__participation__score = temp___4131 } })[temp___414]) = {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___395;
+  rec__pupils__participation__score = temp___3951 } })) and
+  ((not (temp___414 = temp___394)) -> ((temp___391(temp___393, temp___394, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___395;
+  rec__pupils__participation__score = temp___3951 } }, temp___396, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___397;
+  rec__pupils__participation__score = temp___3971 } }, temp___398, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___399;
+  rec__pupils__participation__score = temp___3991 } }, temp___400, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___401;
+  rec__pupils__participation__score = temp___4011 } }, temp___402, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___403;
+  rec__pupils__participation__score = temp___4031 } }, temp___404, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___405;
+  rec__pupils__participation__score = temp___4051 } }, temp___406, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___407;
+  rec__pupils__participation__score = temp___4071 } }, temp___408, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___409;
+  rec__pupils__participation__score = temp___4091 } }, temp___410, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___411;
+  rec__pupils__participation__score = temp___4111 } }, temp___412, {
+  us_split_fields1 = { rec__pupils__participation__studying = temp___413;
+  rec__pupils__participation__score = temp___4131 }
+  })[temp___414]) = (temp___393[temp___414])))))))))))))))))))))))))))
+
+ (* File "pupils.adb", line 22, characters 0-0 *)
+goal WP_parameter_def :
+  (forall p__split_fields:pupilnumbers. (in_range4(fm) ->
+  (in_range2(subj0) -> (in_range1(score0) -> (in_range2(subj1) ->
+  (in_range1(score1) -> (in_range2(subj2) -> (in_range1(score2) ->
+  (in_range2(subj3) -> (in_range1(score3) -> (in_range2(subj4) ->
+  (in_range1(score4) -> (in_range2(subj5) -> (in_range1(score5) ->
+  (in_range2(subj6) -> (in_range1(score6) -> (in_range2(subj7) ->
+  (in_range1(score7) -> (in_range2(subj8) -> (in_range1(score8) ->
+  (in_range2(subj9) -> (in_range1(score9) ->
+  (((to_rep4(p__split_fields) <  250) and (not (fm = 8))) ->
+  (1 <= (to_rep4(p__split_fields) + 1)))))))))))))))))))))))))

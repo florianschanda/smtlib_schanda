@@ -262,9 +262,6 @@ axiom dispatch_offset__def_axiom : (dispatch_offset = milliseconds(100))
 
 axiom task_period__def_axiom : (task_period = milliseconds(500))
 
-axiom H : (milliseconds(100) = dispatch_offset)
-
-axiom H1 : (milliseconds(500) = task_period)
-
  (* File "polyorb_hi-periodic_task.ads", line 65, characters 0-0 *)
-goal WP_parameter_def : (97 <= 97)
+goal WP_parameter_def : ((milliseconds(100) = dispatch_offset) ->
+  ((milliseconds(500) = task_period) -> (97 <= 97)))

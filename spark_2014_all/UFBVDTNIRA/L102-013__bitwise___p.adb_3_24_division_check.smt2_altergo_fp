@@ -749,21 +749,6 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic x : t
-
-logic o : int
-
-logic o1 : t
-
-logic o2 : int
-
-logic result : t
-
-logic x1 : t
-
-axiom H : in_range(havok_x)
-
-axiom H1 : in_range(havok_y)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (not (256 = 0))
+goal WP_parameter_def : (in_range(havok_x) -> (in_range(havok_y) ->
+  (not (256 = 0))))

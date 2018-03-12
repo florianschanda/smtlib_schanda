@@ -1073,14 +1073,14 @@ axiom bool_eq_def4 :
   (ule(b__first_2, b__last_2) and (sub(a__last_2,
   a__first_2) = sub(b__last_2, b__first_2)))) or ((not ule(a__first_2,
   a__last_2)) and ugt(b__first_2, b__last_2)))) and
-  (forall temp___idx_133:t. forall temp___idx_134:t. ((((ule(a__first,
-  temp___idx_133) and ule(temp___idx_133, a__last)) and (ule(a__first_2,
-  temp___idx_134) and ule(temp___idx_134, a__last_2))) and (to_rep(get(a,
-  temp___idx_133, temp___idx_134)) = to_rep(get(b, add(sub(b__first,
-  a__first), temp___idx_133), add(sub(b__first_2, a__first_2),
-  temp___idx_134))))) or (not ((ule(a__first, temp___idx_133) and
-  ule(temp___idx_133, a__last)) and (ule(a__first_2, temp___idx_134) and
-  ule(temp___idx_134, a__last_2))))))) -> (bool_eq5(a, a__first, a__last,
+  (forall temp___idx_155:t. forall temp___idx_156:t. ((((ule(a__first,
+  temp___idx_155) and ule(temp___idx_155, a__last)) and (ule(a__first_2,
+  temp___idx_156) and ule(temp___idx_156, a__last_2))) and (to_rep(get(a,
+  temp___idx_155, temp___idx_156)) = to_rep(get(b, add(sub(b__first,
+  a__first), temp___idx_155), add(sub(b__first_2, a__first_2),
+  temp___idx_156))))) or (not ((ule(a__first, temp___idx_155) and
+  ule(temp___idx_155, a__last)) and (ule(a__first_2, temp___idx_156) and
+  ule(temp___idx_156, a__last_2))))))) -> (bool_eq5(a, a__first, a__last,
   a__first_2, a__last_2, b, b__first, b__last, b__first_2,
   b__last_2) = true)) and ((not ((((ule(a__first, a__last) -> (ule(b__first,
   b__last) and (sub(a__last, a__first) = sub(b__last, b__first)))) and
@@ -1088,12 +1088,12 @@ axiom bool_eq_def4 :
   ((ule(a__first_2, a__last_2) -> (ule(b__first_2, b__last_2) and
   (sub(a__last_2, a__first_2) = sub(b__last_2, b__first_2)))) and
   ((not ule(a__first_2, a__last_2)) -> ugt(b__first_2, b__last_2)))) and
-  (forall temp___idx_133:t. forall temp___idx_134:t. (((ule(a__first,
-  temp___idx_133) and ule(temp___idx_133, a__last)) and (ule(a__first_2,
-  temp___idx_134) and ule(temp___idx_134, a__last_2))) -> (to_rep(get(a,
-  temp___idx_133, temp___idx_134)) = to_rep(get(b, add(sub(b__first,
-  a__first), temp___idx_133), add(sub(b__first_2, a__first_2),
-  temp___idx_134)))))))) -> (bool_eq5(a, a__first, a__last, a__first_2,
+  (forall temp___idx_155:t. forall temp___idx_156:t. (((ule(a__first,
+  temp___idx_155) and ule(temp___idx_155, a__last)) and (ule(a__first_2,
+  temp___idx_156) and ule(temp___idx_156, a__last_2))) -> (to_rep(get(a,
+  temp___idx_155, temp___idx_156)) = to_rep(get(b, add(sub(b__first,
+  a__first), temp___idx_155), add(sub(b__first_2, a__first_2),
+  temp___idx_156)))))))) -> (bool_eq5(a, a__first, a__last, a__first_2,
   a__last_2, b, b__first, b__last, b__first_2, b__last_2) = false))))
 
 axiom bool_eq_rev :
@@ -1108,12 +1108,12 @@ axiom bool_eq_rev :
   ((ule(a__first_2, a__last_2) -> (ule(b__first_2, b__last_2) and
   (sub(a__last_2, a__first_2) = sub(b__last_2, b__first_2)))) and
   ((not ule(a__first_2, a__last_2)) -> ugt(b__first_2, b__last_2)))) and
-  (forall temp___idx_133:t. forall temp___idx_134:t. (((ule(a__first,
-  temp___idx_133) and ule(temp___idx_133, a__last)) and (ule(a__first_2,
-  temp___idx_134) and ule(temp___idx_134, a__last_2))) -> (to_rep(get(a,
-  temp___idx_133, temp___idx_134)) = to_rep(get(b, add(sub(b__first,
-  a__first), temp___idx_133), add(sub(b__first_2, a__first_2),
-  temp___idx_134))))))))))
+  (forall temp___idx_155:t. forall temp___idx_156:t. (((ule(a__first,
+  temp___idx_155) and ule(temp___idx_155, a__last)) and (ule(a__first_2,
+  temp___idx_156) and ule(temp___idx_156, a__last_2))) -> (to_rep(get(a,
+  temp___idx_155, temp___idx_156)) = to_rep(get(b, add(sub(b__first,
+  a__first), temp___idx_155), add(sub(b__first_2, a__first_2),
+  temp___idx_156))))))))))
 
 type rate_number
 
@@ -1206,20 +1206,28 @@ type us_rep = { us_split_fields1 : us_split_fields
 function us_rep___2__projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 4)
+
 logic bool_eq7 : us_rep, us_rep -> bool
 
 axiom bool_eq_def6 :
   (forall a:us_rep. forall b:us_rep [bool_eq7(a, b)].
   ((((bool_eq5(((a).us_split_fields1).rec__keccak__keccak_1600__duplex__context__state,
-  of_int(0), of_int(4), of_int(0), of_int(4),
+  rliteral, rliteral1, rliteral, rliteral1,
   ((b).us_split_fields1).rec__keccak__keccak_1600__duplex__context__state,
-  of_int(0), of_int(4), of_int(0), of_int(4)) = true) and
+  rliteral, rliteral1, rliteral, rliteral1) = true) and
   (to_rep1(((a).us_split_fields1).rec__keccak__keccak_1600__duplex__context__rate) = to_rep1(((b).us_split_fields1).rec__keccak__keccak_1600__duplex__context__rate))) ->
   (bool_eq7(a, b) = true)) and
   ((not ((bool_eq5(((a).us_split_fields1).rec__keccak__keccak_1600__duplex__context__state,
-  of_int(0), of_int(4), of_int(0), of_int(4),
+  rliteral, rliteral1, rliteral, rliteral1,
   ((b).us_split_fields1).rec__keccak__keccak_1600__duplex__context__state,
-  of_int(0), of_int(4), of_int(0), of_int(4)) = true) and
+  rliteral, rliteral1, rliteral, rliteral1) = true) and
   (to_rep1(((a).us_split_fields1).rec__keccak__keccak_1600__duplex__context__rate) = to_rep1(((b).us_split_fields1).rec__keccak__keccak_1600__duplex__context__rate)))) ->
   (bool_eq7(a, b) = false))))
 
@@ -1313,88 +1321,37 @@ axiom rate_of__def_axiom :
   ctx; rec__keccak__keccak_1600__duplex__context__rate = ctx1 }
   }) = to_rep1(ctx1)))
 
-logic ctx__split_fields : map
-
-logic ctx__split_fields1 : rate_number
-
-logic o : int
-
-logic o1 : rate_number
-
-logic o2 : map
-
-logic o3 : rate_number
-
-logic temp___1045 : map
-
-logic temp___10451 : rate_number
-
-logic keccak__keccak_1600__keccakf_1600__init__a : map
-
-logic result : map
-
-logic result1 : rate_number
-
-logic ctx__split_fields2 : map
-
-logic ctx__split_fields3 : rate_number
-
-logic result2 : map
-
-logic result3 : rate_number
-
-logic ctx__split_fields4 : map
-
-logic ctx__split_fields5 : rate_number
-
-logic ctx__split_fields6 : map
-
-logic ctx__split_fields7 : rate_number
-
-logic ctx__split_fields8 : map
-
-logic ctx__split_fields9 : rate_number
-
-axiom H : in_range(capacity)
-
-axiom H1 : (capacity <  1598)
-
-axiom H2 : ((result = ctx__split_fields) and (result1 = ctx__split_fields1))
-
-axiom H3 : (keccak__keccak_1600__keccakf_1600__init__a = ctx__split_fields2)
-
-axiom H4 : (ctx__split_fields1 = ctx__split_fields3)
-
-axiom H5 : ((o = (1600 - capacity)) and in_range1((1600 - capacity)))
-
-axiom H6 : (to_rep1(o1) = o)
-
-axiom H7 : (ctx__split_fields2 = o2)
-
-axiom H8 : (o1 = o3)
-
-axiom H9 : (temp___1045 = o2)
-
-axiom H10 : (temp___10451 = o3)
-
-axiom H11 : (result2 = ctx__split_fields2)
-
-axiom H12 : (result3 = ctx__split_fields3)
-
-axiom H13 : (temp___1045 = ctx__split_fields4)
-
-axiom H14 : (temp___10451 = ctx__split_fields5)
-
-axiom H15 : (ctx__split_fields6 = ctx__split_fields4)
-
-axiom H16 : (ctx__split_fields7 = ctx__split_fields5)
-
-axiom H17 : (ctx__split_fields8 = ctx__split_fields4)
-
-axiom H18 : (ctx__split_fields9 = ctx__split_fields5)
-
  (* File "keccak-duplex.ads", line 71, characters 0-0 *)
-goal WP_parameter_def : (rate_of({ us_split_fields1 = {
-  rec__keccak__keccak_1600__duplex__context__state = ctx__split_fields6;
-  rec__keccak__keccak_1600__duplex__context__rate = ctx__split_fields7 }
-  }) = (1600 - capacity))
+goal WP_parameter_def :
+  (forall ctx__split_fields:map. forall ctx__split_fields1:rate_number.
+  forall o:int. forall o1:rate_number. forall o2:map. forall o3:rate_number.
+  forall temp___1114:map. forall temp___11141:rate_number.
+  forall keccak__keccak_1600__keccakf_1600__init__a:map. forall result:map.
+  forall result1:rate_number. forall ctx__split_fields2:map.
+  forall ctx__split_fields3:rate_number. forall result2:map.
+  forall result3:rate_number. forall ctx__split_fields4:map.
+  forall ctx__split_fields5:rate_number. forall ctx__split_fields6:map.
+  forall ctx__split_fields7:rate_number. forall ctx__split_fields8:map.
+  forall ctx__split_fields9:rate_number. ((in_range(capacity) and
+  ((capacity <  1598) and (((({ us_split_fields__content = {
+  rec__keccak__keccak_1600__duplex__context__state = result;
+  rec__keccak__keccak_1600__duplex__context__rate = result1 } } = {
+  us_split_fields__content = {
+  rec__keccak__keccak_1600__duplex__context__state = ctx__split_fields;
+  rec__keccak__keccak_1600__duplex__context__rate = ctx__split_fields1 }
+  }) and
+  ((keccak__keccak_1600__keccakf_1600__init__a = ctx__split_fields2) and
+  (ctx__split_fields1 = ctx__split_fields3))) and
+  ((((((o = (1600 - capacity)) and in_range1((1600 - capacity))) and
+  (to_rep1(o1) = o)) and ((ctx__split_fields2 = o2) and (o1 = o3))) and
+  ((temp___1114 = o2) and (temp___11141 = o3))) and
+  (((result2 = ctx__split_fields2) and (result3 = ctx__split_fields3)) and
+  ((temp___1114 = ctx__split_fields4) and
+  (temp___11141 = ctx__split_fields5))))) and
+  (((ctx__split_fields6 = ctx__split_fields4) and
+  (ctx__split_fields7 = ctx__split_fields5)) and
+  ((ctx__split_fields8 = ctx__split_fields4) and
+  (ctx__split_fields9 = ctx__split_fields5)))))) -> (rate_of({
+  us_split_fields1 = { rec__keccak__keccak_1600__duplex__context__state =
+  ctx__split_fields6; rec__keccak__keccak_1600__duplex__context__rate =
+  ctx__split_fields7 } }) = (1600 - capacity))))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -245,24 +245,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,message_type) farray, int, int,
-  (int,message_type) farray, int, int -> (int,message_type) farray
-
-axiom concat_def :
-  (forall a:(int,message_type) farray. forall b:(int,message_type) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : message_type, int -> (int,message_type) farray
-
-axiom singleton_def :
-  (forall v:message_type.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,message_type) farray, int, int,
   (int,message_type) farray, int, int -> bool
 
@@ -274,17 +256,17 @@ axiom bool_eq_def4 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -294,37 +276,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,message_type) farray, int, int,
-  (int,message_type) farray, int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,message_type) farray. forall b:(int,message_type) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,message_type) farray. forall b:(int,message_type) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,message_type) farray. forall b:(int,message_type) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type us_split_fields = { rec__tasking__mailboxT__next_in :
 message_index_type; rec__tasking__mailboxT__next_out : message_index_type;
@@ -473,177 +427,39 @@ type mailboxT__ref = { mailboxT__content : us_rep
 function mailboxT__ref___projection(a: mailboxT__ref) : us_rep =
   (a).mailboxT__content
 
-logic temp___203 : int -> (int,message_type) farray
-
-axiom def_axiom :
-  (forall temp___205:int.
-  (forall temp___206:int.
-  ((temp___203(temp___205)[temp___206]) = of_rep(temp___205))))
+logic temp___236 : int -> (int,message_type) farray
 
 logic m : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic self__ : message_index_type
-
-logic self__1 : message_index_type
-
-logic self__2 : message_count_type
-
-logic self__3 : bool
-
-logic self__4 : (int,message_type) farray
-
-logic o : message_type
-
-logic o1 : (int,message_type) farray
-
-logic o2 : message_index_type
-
-logic o3 : message_index_type
-
-logic o4 : message_count_type
-
-logic o5 : bool
-
-logic o6 : (int,message_type) farray
-
-logic o7 : message_index_type
-
-logic o8 : message_index_type
-
-logic o9 : message_count_type
-
-logic o10 : bool
-
-logic o11 : (int,message_type) farray
-
-logic o12 : int
-
-logic o13 : message_count_type
-
-logic o14 : message_index_type
-
-logic o15 : message_index_type
-
-logic o16 : message_count_type
-
-logic o17 : bool
-
-logic o18 : (int,message_type) farray
-
-logic o19 : message_index_type
-
-logic o20 : message_index_type
-
-logic o21 : message_count_type
-
-logic o22 : bool
-
-logic o23 : (int,message_type) farray
-
-logic o24 : int
-
-logic result : message_index_type
-
-logic result1 : message_index_type
-
-logic result2 : message_count_type
-
-logic result3 : bool
-
-logic result4 : (int,message_type) farray
-
-logic self__5 : message_index_type
-
-logic self__6 : message_index_type
-
-logic self__7 : message_count_type
-
-logic self__8 : bool
-
-logic self__9 : (int,message_type) farray
-
-logic result5 : message_index_type
-
-logic result6 : message_index_type
-
-logic result7 : message_count_type
-
-logic result8 : bool
-
-logic result9 : (int,message_type) farray
-
-logic self__10 : message_index_type
-
-logic self__11 : message_index_type
-
-logic self__12 : message_count_type
-
-logic self__13 : bool
-
-logic self__14 : (int,message_type) farray
-
-logic result10 : message_index_type
-
-logic result11 : message_index_type
-
-logic result12 : message_count_type
-
-logic result13 : bool
-
-logic result14 : (int,message_type) farray
-
-logic self__15 : message_index_type
-
-logic self__16 : message_index_type
-
-logic self__17 : message_count_type
-
-logic self__18 : bool
-
-logic self__19 : (int,message_type) farray
-
-axiom H : in_range1(m)
-
-axiom H1 : (to_rep2(self__2) <  64)
-
-axiom H2 : (to_rep(o) = m)
-
-axiom H3 : (o1 = (self__4[to_rep1(self__) <- o]))
-
-axiom H4 : (self__ = o2)
-
-axiom H5 : (self__1 = o3)
-
-axiom H6 : (self__2 = o4)
-
-axiom H7 : (self__3 = o5)
-
-axiom H8 : (o1 = o6)
-
-axiom H9 : (o7 = o2)
-
-axiom H10 : (o8 = o3)
-
-axiom H11 : (o9 = o4)
-
-axiom H12 : (o10 = o5)
-
-axiom H13 : (o11 = o6)
-
-axiom H14 : (result = self__)
-
-axiom H15 : (result1 = self__1)
-
-axiom H16 : (result2 = self__2)
-
-axiom H17 : (result3 = self__3)
-
-axiom H18 : (result4 = self__4)
-
-axiom H19 : ((self__5 = o7) and ((self__6 = o8) and ((self__7 = o9) and
-  ((self__8 = o10) and (self__9 = o11)))))
+axiom def_axiom :
+  (forall temp___238:int. (in_range1(temp___238) ->
+  (forall temp___239:int.
+  (to_rep((temp___236(temp___238)[temp___239])) = temp___238))))
 
  (* File "tasking.ads", line 11, characters 0-0 *)
-goal WP_parameter_def : in_range3((to_rep2(self__7) + 1))
+goal WP_parameter_def :
+  (forall self__:message_index_type. forall self__1:message_index_type.
+  forall self__2:message_count_type. forall self__3:bool.
+  forall self__4:(int,message_type) farray. forall o:message_type.
+  forall o1:(int,message_type) farray. forall o2:message_index_type.
+  forall o3:message_index_type. forall o4:message_count_type. forall o5:bool.
+  forall o6:(int,message_type) farray. forall o7:message_index_type.
+  forall o8:message_index_type. forall o9:message_count_type.
+  forall o10:bool. forall o11:(int,message_type) farray.
+  forall result:message_index_type. forall result1:message_index_type.
+  forall result2:message_count_type. forall result3:bool.
+  forall result4:(int,message_type) farray.
+  forall self__5:message_index_type. forall self__6:message_index_type.
+  forall self__7:message_count_type. forall self__8:bool.
+  forall self__9:(int,message_type) farray. (in_range1(m) ->
+  ((to_rep2(self__2) <  64) -> ((((((to_rep(o) = m) and
+  (o1 = (self__4[to_rep1(self__) <- o]))) and ((self__ = o2) and
+  ((self__1 = o3) and ((self__2 = o4) and ((self__3 = o5) and
+  (o1 = o6)))))) and ((o7 = o2) and ((o8 = o3) and ((o9 = o4) and
+  ((o10 = o5) and (o11 = o6)))))) and (((result = self__) and
+  ((result1 = self__1) and ((result2 = self__2) and ((result3 = self__3) and
+  (result4 = self__4))))) and ((self__5 = o7) and ((self__6 = o8) and
+  ((self__7 = o9) and ((self__8 = o10) and (self__9 = o11))))))) ->
+  in_range3((to_rep2(self__7) + 1))))))

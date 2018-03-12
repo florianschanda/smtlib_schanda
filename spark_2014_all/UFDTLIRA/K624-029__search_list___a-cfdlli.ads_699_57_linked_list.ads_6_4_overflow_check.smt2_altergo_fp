@@ -297,11 +297,6 @@ logic count : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic o : int
-
-axiom H : in_range2(new_item)
-
-axiom H1 : in_range1(count)
-
  (* File "a-cfdlli.ads", line 667, characters 0-0 *)
-goal WP_parameter_def : in_range((to_rep(container__split_discrs) - count))
+goal WP_parameter_def : (in_range2(new_item) -> (in_range1(count) ->
+  in_range((to_rep(container__split_discrs) - count))))

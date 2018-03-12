@@ -109,32 +109,12 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic threshold : int
-
-logic x : int
-
-logic o : int
-
-logic o1 : int
-
-logic x1 : int
-
-logic result : int
-
-logic x2 : int
-
-logic x3 : int
-
-logic x4 : int
-
-axiom H : in_range(threshold)
-
-axiom H1 : in_range(x)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (((bool_lt(x, threshold) = true) -> (((bool_ge(x,
+goal WP_parameter_def :
+  (forall threshold:int. forall x:int. (in_range(threshold) ->
+  (in_range(x) -> (((bool_lt(x, threshold) = true) -> (((bool_ge(x,
   threshold) = true) -> (((0 + 1) + 1) <= 1)) and ((not (bool_ge(x,
   threshold) = true)) -> (((0 + 1) + 0) <= 1)))) and ((not (bool_lt(x,
   threshold) = true)) -> (((bool_ge(x, threshold) = true) ->
   (((0 + 0) + 1) <= 1)) and ((not (bool_ge(x, threshold) = true)) ->
-  (((0 + 0) + 0) <= 1)))))
+  (((0 + 0) + 0) <= 1))))))))

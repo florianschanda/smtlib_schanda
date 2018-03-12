@@ -92,24 +92,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,r) farray, int, int, (int,r) farray, int,
-  int -> (int,r) farray
-
-axiom concat_def :
-  (forall a:(int,r) farray. forall b:(int,r) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : r, int -> (int,r) farray
-
-axiom singleton_def :
-  (forall v:r.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq : (int,r) farray, int, int, (int,r) farray, int, int -> bool
 
 axiom bool_eq_def :
@@ -119,9 +101,9 @@ axiom bool_eq_def :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_135:int. (((a__first <= temp___idx_135) and
-  (temp___idx_135 <= a__last)) or (not ((a__first <= temp___idx_135) and
-  (temp___idx_135 <= a__last)))))) -> (bool_eq(a, a__first, a__last, b,
+  (forall temp___idx_157:int. (((a__first <= temp___idx_157) and
+  (temp___idx_157 <= a__last)) or (not ((a__first <= temp___idx_157) and
+  (temp___idx_157 <= a__last)))))) -> (bool_eq(a, a__first, a__last, b,
   b__first, b__last) = true)) and ((not (((a__first <= a__last) ->
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
@@ -167,7 +149,6 @@ axiom object__alignment_axiom1 :
 
 logic user_eq1 : (int,r) farray, (int,r) farray -> bool
 
-axiom H : (0 <= value__component__size)
-
  (* File "component_size_attribute.adb", line 13, characters 0-0 *)
-goal WP_parameter_def : (value__component__size <  0)
+goal WP_parameter_def : ((0 <= value__component__size) ->
+  (value__component__size <  0))

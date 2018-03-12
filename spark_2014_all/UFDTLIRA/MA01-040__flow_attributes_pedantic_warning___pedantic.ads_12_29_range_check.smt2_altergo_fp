@@ -227,29 +227,10 @@ axiom c__def_axiom : (c = value__alignment)
 
 axiom c2__def_axiom : (c2 = 1)
 
-logic v__split_fields : integer
-
-logic o : integer
-
-logic o1 : integer
-
-logic pedantic__v__assume : integer
-
-logic pedantic__c__assume : int
-
-logic result : integer
-
-logic v__split_fields1 : integer
-
-axiom H : (to_rep(o) = 0)
-
-axiom H1 : (o = o1)
-
-axiom H2 : (pedantic__v__assume = o1)
-
-axiom H3 : (result = v__split_fields)
-
-axiom H4 : (pedantic__v__assume = v__split_fields1)
-
  (* File "pedantic.ads", line 10, characters 0-0 *)
-goal WP_parameter_def : in_range1(value__alignment)
+goal WP_parameter_def :
+  (forall v__split_fields:integer. forall o:integer. forall o1:integer.
+  forall pedantic__v__assume:integer. forall result:integer.
+  forall v__split_fields1:integer. (((((to_rep(o) = 0) and (o = o1)) and
+  (pedantic__v__assume = o1)) and ((result = v__split_fields) and
+  (pedantic__v__assume = v__split_fields1))) -> in_range1(value__alignment)))

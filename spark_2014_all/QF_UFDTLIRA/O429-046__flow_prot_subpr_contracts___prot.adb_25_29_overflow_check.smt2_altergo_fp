@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -137,39 +137,9 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic visible : int
-
-logic hidden : int
-
-logic temp___200 : int
-
-logic o : int
-
-logic visible1 : int
-
-logic visible2 : int
-
-logic result : int
-
-logic visible3 : int
-
-logic visible4 : int
-
-logic visible5 : int
-
-logic visible6 : int
-
-logic visible7 : int
-
-axiom H : in_range1(hidden)
-
-axiom H1 : in_range1(visible)
-
-axiom H2 : (hidden <= 0)
-
-axiom H3 : (visible <= 0)
-
-axiom H4 : (in_range1(visible2) and ((hidden <= 0) and (visible2 <= 0)))
-
  (* File "prot.adb", line 13, characters 0-0 *)
-goal WP_parameter_def : in_range1((visible2 + hidden))
+goal WP_parameter_def :
+  (forall visible:int. forall hidden:int. forall visible1:int.
+  (in_range1(hidden) -> (in_range1(visible) -> (((hidden <= 0) and
+  (visible <= 0)) -> ((in_range1(visible1) and ((hidden <= 0) and
+  (visible1 <= 0))) -> in_range1((visible1 + hidden)))))))

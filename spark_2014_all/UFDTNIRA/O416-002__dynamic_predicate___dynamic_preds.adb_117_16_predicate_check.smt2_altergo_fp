@@ -361,95 +361,13 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic result____split_fields : even
-
-logic result____split_fields1 : even
-
-logic o : int
-
-logic o1 : even
-
-logic o2 : even
-
-logic o3 : even
-
-logic temp___292 : even
-
-logic temp___2921 : even
-
-logic temp___293 : even
-
-logic temp___2931 : even
-
-logic temp___284 : int
-
-logic o4 : int
-
-logic o5 : even
-
-logic o6 : even
-
-logic o7 : even
-
-logic temp___287 : even
-
-logic temp___2871 : even
-
-logic temp___288 : even
-
-logic temp___2881 : even
-
-logic temp___294 : int
-
-logic o8 : int
-
-logic o9 : even
-
-logic o10 : even
-
-logic o11 : even
-
-logic temp___297 : even
-
-logic temp___2971 : even
-
-logic result : even
-
-logic result1 : even
-
-logic result____split_fields2 : even
-
-logic result____split_fields3 : even
-
-logic result2 : even
-
-logic result3 : even
-
-logic result____split_fields4 : even
-
-logic result____split_fields5 : even
-
-axiom H : in_range(above)
-
-axiom H1 : true
-
-axiom H2 : (not (mod(above, 2) = 0))
-
-axiom H3 : ((temp___284 = (above + 1)) and in_range((above + 1)))
-
-axiom H4 : (mod(temp___284, 2) = 0)
-
-axiom H5 : (o4 = temp___284)
-
-axiom H6 : (to_rep(o5) = o4)
-
-axiom H7 : (o5 = o6)
-
-axiom H8 : (result____split_fields1 = o7)
-
-axiom H9 : (temp___287 = o6)
-
-axiom H10 : (temp___2871 = o7)
-
  (* File "dynamic_preds.ads", line 25, characters 0-0 *)
-goal WP_parameter_def : (to_rep(temp___2871) = (to_rep(temp___287) + 2))
+goal WP_parameter_def :
+  (forall result____split_fields:even. forall temp___310:int. forall o:int.
+  forall o1:even. forall o2:even. forall o3:even. forall temp___313:even.
+  forall temp___3131:even. (in_range(above) -> ((not (mod(above, 2) = 0)) ->
+  (((((((temp___310 = (above + 1)) and in_range((above + 1))) and
+  ((mod(temp___310, 2) = 0) and (o = temp___310))) and (to_rep(o1) = o)) and
+  ((o1 = o2) and (result____split_fields = o3))) and ((temp___313 = o2) and
+  (temp___3131 = o3))) ->
+  (to_rep(temp___3131) = (to_rep(temp___313) + 2))))))

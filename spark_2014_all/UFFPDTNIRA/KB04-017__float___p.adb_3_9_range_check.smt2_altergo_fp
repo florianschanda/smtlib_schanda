@@ -1148,32 +1148,10 @@ axiom last__def_axiom : (last = t_LAST)
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic p__t_FIRST__assume : t
-
-logic p__t_LAST__assume : t
-
-logic us : t
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
-
-axiom H : ((p__t_FIRST__assume = id(fliteral1)) and
-  (tqtisFinite(p__t_FIRST__assume) and (p__t_FIRST__assume = fliteral1)))
-
-axiom H1 : (p__t_FIRST__assume = t_FIRST)
-
-axiom H2 : tqtisFinite(t_FIRST)
-
-axiom H3 : ((p__t_LAST__assume = id(fliteral)) and
-  (tqtisFinite(p__t_LAST__assume) and (p__t_LAST__assume = fliteral)))
-
-axiom H4 : (p__t_LAST__assume = t_LAST)
-
-axiom H5 : tqtisFinite(t_LAST)
-
-axiom H6 : le(t_FIRST, t_LAST)
 
 logic fliteral2 : t
 
@@ -1181,4 +1159,12 @@ axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 340282346638528859811704183484516925440.0))
 
  (* File "p.adb", line 2, characters 0-0 *)
-goal WP_parameter_def : le(neg(fliteral2), t_FIRST)
+goal WP_parameter_def :
+  (forall p__t_FIRST__assume:t. forall p__t_LAST__assume:t.
+  ((((p__t_FIRST__assume = id(fliteral1)) and
+  (tqtisFinite(p__t_FIRST__assume) and (p__t_FIRST__assume = fliteral1))) and
+  (p__t_FIRST__assume = t_FIRST)) -> (tqtisFinite(t_FIRST) ->
+  ((((p__t_LAST__assume = id(fliteral)) and
+  (tqtisFinite(p__t_LAST__assume) and (p__t_LAST__assume = fliteral))) and
+  (p__t_LAST__assume = t_LAST)) -> (tqtisFinite(t_LAST) -> (le(t_FIRST,
+  t_LAST) -> le(neg(fliteral2), t_FIRST)))))))

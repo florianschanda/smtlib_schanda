@@ -121,29 +121,8 @@ axiom some_func__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : int
-
-logic foo : int
-
-logic o : int
-
-logic x1 : int
-
-logic result : int
-
-logic x2 : int
-
-logic x3 : int
-
-logic x4 : int
-
-axiom H : in_range(foo)
-
-axiom H1 : in_range(x)
-
-axiom H2 : (foo <= x3)
-
-axiom H3 : in_range(x3)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (some_func(foo) <= x3)
+goal WP_parameter_def :
+  (forall x:int. forall foo:int. forall x1:int. ((in_range(foo) and
+  (in_range(x) and ((foo <= x1) and in_range(x1)))) ->
+  (some_func(foo) <= x1)))

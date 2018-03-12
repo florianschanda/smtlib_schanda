@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -642,189 +642,48 @@ axiom length__post_axiom1 :
   (forall container:us_rep1 [length1(container)].
   (((0 + length1(container)) <= 100) and in_range9(length1(container))))
 
-logic container__split_fields : us_main_type
-
-logic position : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic temp___404 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : bool
-
-logic i : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : int
-
-logic o13 : int
-
-logic i1 : int
-
-logic o14 : int
-
-logic o15 : bool
-
-logic o16 : int
-
-logic o17 : int
-
-logic o18 : int
-
-logic o19 : int
-
-logic o20 : int
-
-logic o21 : bool
-
-logic o22 : bool
-
-logic o23 : int
-
-logic o24 : int
-
-logic o25 : int
-
-logic o26 : int
-
-logic o27 : bool
-
-logic o28 : bool
-
-logic result : int
-
-logic position1 : int
-
-logic result1 : bool
-
-logic result2 : bool
-
-logic position2 : int
-
-logic result3 : bool
-
-logic result4 : int
-
-logic position3 : int
-
-logic result5 : bool
-
-logic result6 : bool
-
-logic position4 : int
-
-logic position5 : int
-
-logic position6 : int
-
-logic position7 : int
-
-logic position8 : int
-
-logic position9 : int
-
-logic container__split_fields1 : us_main_type
-
-logic container__split_fields2 : us_main_type
-
-logic position10 : int
-
-logic container__split_fields3 : us_main_type
-
-logic position11 : int
-
-logic result7 : bool
-
-logic result8 : bool
-
-logic result9 : bool
-
-logic result10 : bool
-
-logic result11 : bool
-
-axiom H : in_range2(new_item)
-
-axiom H1 : ((1 <= 100) -> in_range3(position))
-
-axiom H2 : (length({ us_split_discrs1 = {
-  rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
-  }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
-  container__split_fields } }) <  to_rep(container__split_discrs))
-
-axiom H3 : ((o = 1) and (in_range4(o) and (o = 1)))
-
-axiom H4 : (result = position)
-
-axiom H5 : (position1 = o)
-
-axiom H6 : ((o2 = length({ us_split_discrs1 = {
+ (* File "a-cofove.ads", line 855, characters 0-0 *)
+goal WP_parameter_def :
+  (forall container__split_fields:us_main_type. forall position:int.
+  forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
+  forall result:int. forall position1:int. forall result1:bool.
+  forall result2:bool. forall position2:int. forall result3:bool.
+  (in_range2(new_item) -> (((1 <= 100) -> in_range3(position)) -> ((length({
+  us_split_discrs1 = { rec__sorted_vectors__my_vectors__vector__capacity =
+  container__split_discrs }; us_split_fields1 = {
+  rec__sorted_vectors__my_vectors__vector = container__split_fields }
+  }) <  to_rep(container__split_discrs)) -> ((((o = 1) and (in_range4(o) and
+  (o = 1))) and (({ int__content = result } = { int__content = position
+  }) and (position1 = o))) -> (((((o2 = length({ us_split_discrs1 = {
   rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
   }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
   container__split_fields } })) and (in_range5(o2) and
-  (((of_int(1) = true) -> (o2 <= to_rep(container__split_discrs))) and
-  ((not (of_int(1) = true)) -> (o2 <= 100)))))
-
-axiom H7 : (((position1 <= o2) -> (result2 = true)) and
-  ((not (position1 <= o2)) -> (result2 = false)))
-
-axiom H8 : ((result2 = true) -> ((o1 = get(model__({ us_split_discrs1 = {
+  (((of_int(1) = true) and (o2 <= to_rep(container__split_discrs))) or
+  ((not (of_int(1) = true)) and (o2 <= 100))))) and (((position1 <= o2) and
+  (result2 = true)) or ((not (position1 <= o2)) and (result2 = false)))) and
+  (((result2 = true) and (((o1 = get(model__({ us_split_discrs1 = {
   rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
   }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
   container__split_fields } }), position1)) and (in_range8(o1) and
   (o1 = get(model__({ us_split_discrs1 = {
   rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
   }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
-  container__split_fields } }), position1)))))
-
-axiom H9 : ((result2 = true) -> (((o1 <  new_item) -> (result1 = true)) and
-  ((not (o1 <  new_item)) -> (result1 = false))))
-
-axiom H10 : ((not (result2 = true)) -> (result1 = false))
-
-axiom H11 : (result1 = true)
-
-axiom H12 : ((position2 = 1) or (get(model__({ us_split_discrs1 = {
+  container__split_fields } }), position1)))) and (((o1 <  new_item) and
+  (result1 = true)) or ((not (o1 <  new_item)) and (result1 = false))))) or
+  ((not (result2 = true)) and (result1 = false)))) -> ((result1 = true) ->
+  (((position2 = 1) or (get(model__({ us_split_discrs1 = {
   rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
   }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
-  container__split_fields } }), (position2 - 1)) <  new_item))
-
-axiom H13 : (((1 <= 100) -> in_range3(position2)) and ((position2 <= length({
+  container__split_fields } }), (position2 - 1)) <  new_item)) ->
+  ((((1 <= 100) -> in_range3(position2)) and ((position2 <= length({
   us_split_discrs1 = { rec__sorted_vectors__my_vectors__vector__capacity =
   container__split_discrs }; us_split_fields1 = {
   rec__sorted_vectors__my_vectors__vector = container__split_fields } })) and
   (get(model__({ us_split_discrs1 = {
   rec__sorted_vectors__my_vectors__vector__capacity = container__split_discrs
   }; us_split_fields1 = { rec__sorted_vectors__my_vectors__vector =
-  container__split_fields } }), position2) <  new_item)))
-
-axiom H14 : ((o5 = 1) and (in_range4(o5) and (o5 = 1)))
-
-axiom H15 : (((position2 = o5) -> (result3 = true)) and
-  ((not (position2 = o5)) -> (result3 = false)))
-
-axiom H16 : (not (result3 = true))
-
-axiom H17 : ((o3 = (position2 - 1)) and in_range4((position2 - 1)))
-
- (* File "a-cofove.ads", line 855, characters 0-0 *)
-goal WP_parameter_def : (1 <= o3)
+  container__split_fields } }), position2) <  new_item))) -> ((((o4 = 1) and
+  (in_range4(o4) and (o4 = 1))) and (((position2 = o4) and
+  (result3 = true)) or ((not (position2 = o4)) and (result3 = false)))) ->
+  ((not (result3 = true)) -> (((o3 = (position2 - 1)) and
+  in_range4((position2 - 1))) -> (1 <= o3)))))))))))))

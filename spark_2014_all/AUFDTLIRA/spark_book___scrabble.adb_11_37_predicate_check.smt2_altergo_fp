@@ -162,25 +162,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,scrabble_value) farray, int, int,
-  (int,scrabble_value) farray, int, int -> (int,scrabble_value) farray
-
-axiom concat_def :
-  (forall a:(int,scrabble_value) farray.
-  forall b:(int,scrabble_value) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : scrabble_value, int -> (int,scrabble_value) farray
-
-axiom singleton_def :
-  (forall v:scrabble_value.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq3 : (int,scrabble_value) farray, int, int,
   (int,scrabble_value) farray, int, int -> bool
 
@@ -192,17 +173,17 @@ axiom bool_eq_def2 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) and
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)])))) or
-  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (forall temp___idx_155:int. ((((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) and
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)])))) or
+  (not ((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)))))) ->
   (bool_eq3(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) ->
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)]))))))) ->
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) ->
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)]))))))) ->
   (bool_eq3(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -213,40 +194,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) ->
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)])))))))))
-
-logic compare : (int,scrabble_value) farray, int, int,
-  (int,scrabble_value) farray, int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,scrabble_value) farray.
-  forall b:(int,scrabble_value) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq3(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,scrabble_value) farray.
-  forall b:(int,scrabble_value) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq3(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,scrabble_value) farray.
-  forall b:(int,scrabble_value) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq3(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) ->
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)])))))))))
 
 logic lookup_table : (int,scrabble_value) farray
 
@@ -256,262 +206,255 @@ logic scrabble__lookup_table__aggregate_def : int, int, int, int, int, int,
   int, int, int, int, int, int, int, int, int, int, int, int, int, int, int,
   int, int, int, int, int -> (int,scrabble_value) farray
 
-axiom def_axiom :
-  (forall temp___135:int. forall temp___136:int. forall temp___137:int.
-  forall temp___138:int. forall temp___139:int. forall temp___140:int.
-  forall temp___141:int. forall temp___142:int. forall temp___143:int.
-  forall temp___144:int. forall temp___145:int. forall temp___146:int.
-  forall temp___147:int. forall temp___148:int. forall temp___149:int.
-  forall temp___150:int. forall temp___151:int. forall temp___152:int.
-  forall temp___153:int. forall temp___154:int. forall temp___155:int.
-  forall temp___156:int. forall temp___157:int. forall temp___158:int.
-  forall temp___159:int. forall temp___160:int.
-  (((((((((((((((((((((((((((scrabble__lookup_table__aggregate_def(temp___135,
-  temp___136, temp___137, temp___138, temp___139, temp___140, temp___141,
-  temp___142, temp___143, temp___144, temp___145, temp___146, temp___147,
-  temp___148, temp___149, temp___150, temp___151, temp___152, temp___153,
-  temp___154, temp___155, temp___156, temp___157, temp___158, temp___159,
-  temp___160)[65]) = of_rep(temp___135)) and
-  ((scrabble__lookup_table__aggregate_def(temp___135, temp___136, temp___137,
-  temp___138, temp___139, temp___140, temp___141, temp___142, temp___143,
-  temp___144, temp___145, temp___146, temp___147, temp___148, temp___149,
-  temp___150, temp___151, temp___152, temp___153, temp___154, temp___155,
-  temp___156, temp___157, temp___158, temp___159,
-  temp___160)[66]) = of_rep(temp___136))) and
-  ((scrabble__lookup_table__aggregate_def(temp___135, temp___136, temp___137,
-  temp___138, temp___139, temp___140, temp___141, temp___142, temp___143,
-  temp___144, temp___145, temp___146, temp___147, temp___148, temp___149,
-  temp___150, temp___151, temp___152, temp___153, temp___154, temp___155,
-  temp___156, temp___157, temp___158, temp___159,
-  temp___160)[67]) = of_rep(temp___137))) and
-  ((scrabble__lookup_table__aggregate_def(temp___135, temp___136, temp___137,
-  temp___138, temp___139, temp___140, temp___141, temp___142, temp___143,
-  temp___144, temp___145, temp___146, temp___147, temp___148, temp___149,
-  temp___150, temp___151, temp___152, temp___153, temp___154, temp___155,
-  temp___156, temp___157, temp___158, temp___159,
-  temp___160)[68]) = of_rep(temp___138))) and
-  ((scrabble__lookup_table__aggregate_def(temp___135, temp___136, temp___137,
-  temp___138, temp___139, temp___140, temp___141, temp___142, temp___143,
-  temp___144, temp___145, temp___146, temp___147, temp___148, temp___149,
-  temp___150, temp___151, temp___152, temp___153, temp___154, temp___155,
-  temp___156, temp___157, temp___158, temp___159,
-  temp___160)[69]) = of_rep(temp___139))) and
-  ((scrabble__lookup_table__aggregate_def(temp___135, temp___136, temp___137,
-  temp___138, temp___139, temp___140, temp___141, temp___142, temp___143,
-  temp___144, temp___145, temp___146, temp___147, temp___148, temp___149,
-  temp___150, temp___151, temp___152, temp___153, temp___154, temp___155,
-  temp___156, temp___157, temp___158, temp___159,
-  temp___160)[70]) = of_rep(temp___140))) and
-  ((scrabble__lookup_table__aggregate_def(temp___135, temp___136, temp___137,
-  temp___138, temp___139, temp___140, temp___141, temp___142, temp___143,
-  temp___144, temp___145, temp___146, temp___147, temp___148, temp___149,
-  temp___150, temp___151, temp___152, temp___153, temp___154, temp___155,
-  temp___156, temp___157, temp___158, temp___159,
-  temp___160)[71]) = of_rep(temp___141))) and
-  ((scrabble__lookup_table__aggregate_def(temp___135, temp___136, temp___137,
-  temp___138, temp___139, temp___140, temp___141, temp___142, temp___143,
-  temp___144, temp___145, temp___146, temp___147, temp___148, temp___149,
-  temp___150, temp___151, temp___152, temp___153, temp___154, temp___155,
-  temp___156, temp___157, temp___158, temp___159,
-  temp___160)[72]) = of_rep(temp___142))) and
-  ((scrabble__lookup_table__aggregate_def(temp___135, temp___136, temp___137,
-  temp___138, temp___139, temp___140, temp___141, temp___142, temp___143,
-  temp___144, temp___145, temp___146, temp___147, temp___148, temp___149,
-  temp___150, temp___151, temp___152, temp___153, temp___154, temp___155,
-  temp___156, temp___157, temp___158, temp___159,
-  temp___160)[73]) = of_rep(temp___143))) and
-  ((scrabble__lookup_table__aggregate_def(temp___135, temp___136, temp___137,
-  temp___138, temp___139, temp___140, temp___141, temp___142, temp___143,
-  temp___144, temp___145, temp___146, temp___147, temp___148, temp___149,
-  temp___150, temp___151, temp___152, temp___153, temp___154, temp___155,
-  temp___156, temp___157, temp___158, temp___159,
-  temp___160)[74]) = of_rep(temp___144))) and
-  ((scrabble__lookup_table__aggregate_def(temp___135, temp___136, temp___137,
-  temp___138, temp___139, temp___140, temp___141, temp___142, temp___143,
-  temp___144, temp___145, temp___146, temp___147, temp___148, temp___149,
-  temp___150, temp___151, temp___152, temp___153, temp___154, temp___155,
-  temp___156, temp___157, temp___158, temp___159,
-  temp___160)[75]) = of_rep(temp___145))) and
-  ((scrabble__lookup_table__aggregate_def(temp___135, temp___136, temp___137,
-  temp___138, temp___139, temp___140, temp___141, temp___142, temp___143,
-  temp___144, temp___145, temp___146, temp___147, temp___148, temp___149,
-  temp___150, temp___151, temp___152, temp___153, temp___154, temp___155,
-  temp___156, temp___157, temp___158, temp___159,
-  temp___160)[76]) = of_rep(temp___146))) and
-  ((scrabble__lookup_table__aggregate_def(temp___135, temp___136, temp___137,
-  temp___138, temp___139, temp___140, temp___141, temp___142, temp___143,
-  temp___144, temp___145, temp___146, temp___147, temp___148, temp___149,
-  temp___150, temp___151, temp___152, temp___153, temp___154, temp___155,
-  temp___156, temp___157, temp___158, temp___159,
-  temp___160)[77]) = of_rep(temp___147))) and
-  ((scrabble__lookup_table__aggregate_def(temp___135, temp___136, temp___137,
-  temp___138, temp___139, temp___140, temp___141, temp___142, temp___143,
-  temp___144, temp___145, temp___146, temp___147, temp___148, temp___149,
-  temp___150, temp___151, temp___152, temp___153, temp___154, temp___155,
-  temp___156, temp___157, temp___158, temp___159,
-  temp___160)[78]) = of_rep(temp___148))) and
-  ((scrabble__lookup_table__aggregate_def(temp___135, temp___136, temp___137,
-  temp___138, temp___139, temp___140, temp___141, temp___142, temp___143,
-  temp___144, temp___145, temp___146, temp___147, temp___148, temp___149,
-  temp___150, temp___151, temp___152, temp___153, temp___154, temp___155,
-  temp___156, temp___157, temp___158, temp___159,
-  temp___160)[79]) = of_rep(temp___149))) and
-  ((scrabble__lookup_table__aggregate_def(temp___135, temp___136, temp___137,
-  temp___138, temp___139, temp___140, temp___141, temp___142, temp___143,
-  temp___144, temp___145, temp___146, temp___147, temp___148, temp___149,
-  temp___150, temp___151, temp___152, temp___153, temp___154, temp___155,
-  temp___156, temp___157, temp___158, temp___159,
-  temp___160)[80]) = of_rep(temp___150))) and
-  ((scrabble__lookup_table__aggregate_def(temp___135, temp___136, temp___137,
-  temp___138, temp___139, temp___140, temp___141, temp___142, temp___143,
-  temp___144, temp___145, temp___146, temp___147, temp___148, temp___149,
-  temp___150, temp___151, temp___152, temp___153, temp___154, temp___155,
-  temp___156, temp___157, temp___158, temp___159,
-  temp___160)[81]) = of_rep(temp___151))) and
-  ((scrabble__lookup_table__aggregate_def(temp___135, temp___136, temp___137,
-  temp___138, temp___139, temp___140, temp___141, temp___142, temp___143,
-  temp___144, temp___145, temp___146, temp___147, temp___148, temp___149,
-  temp___150, temp___151, temp___152, temp___153, temp___154, temp___155,
-  temp___156, temp___157, temp___158, temp___159,
-  temp___160)[82]) = of_rep(temp___152))) and
-  ((scrabble__lookup_table__aggregate_def(temp___135, temp___136, temp___137,
-  temp___138, temp___139, temp___140, temp___141, temp___142, temp___143,
-  temp___144, temp___145, temp___146, temp___147, temp___148, temp___149,
-  temp___150, temp___151, temp___152, temp___153, temp___154, temp___155,
-  temp___156, temp___157, temp___158, temp___159,
-  temp___160)[83]) = of_rep(temp___153))) and
-  ((scrabble__lookup_table__aggregate_def(temp___135, temp___136, temp___137,
-  temp___138, temp___139, temp___140, temp___141, temp___142, temp___143,
-  temp___144, temp___145, temp___146, temp___147, temp___148, temp___149,
-  temp___150, temp___151, temp___152, temp___153, temp___154, temp___155,
-  temp___156, temp___157, temp___158, temp___159,
-  temp___160)[84]) = of_rep(temp___154))) and
-  ((scrabble__lookup_table__aggregate_def(temp___135, temp___136, temp___137,
-  temp___138, temp___139, temp___140, temp___141, temp___142, temp___143,
-  temp___144, temp___145, temp___146, temp___147, temp___148, temp___149,
-  temp___150, temp___151, temp___152, temp___153, temp___154, temp___155,
-  temp___156, temp___157, temp___158, temp___159,
-  temp___160)[85]) = of_rep(temp___155))) and
-  ((scrabble__lookup_table__aggregate_def(temp___135, temp___136, temp___137,
-  temp___138, temp___139, temp___140, temp___141, temp___142, temp___143,
-  temp___144, temp___145, temp___146, temp___147, temp___148, temp___149,
-  temp___150, temp___151, temp___152, temp___153, temp___154, temp___155,
-  temp___156, temp___157, temp___158, temp___159,
-  temp___160)[86]) = of_rep(temp___156))) and
-  ((scrabble__lookup_table__aggregate_def(temp___135, temp___136, temp___137,
-  temp___138, temp___139, temp___140, temp___141, temp___142, temp___143,
-  temp___144, temp___145, temp___146, temp___147, temp___148, temp___149,
-  temp___150, temp___151, temp___152, temp___153, temp___154, temp___155,
-  temp___156, temp___157, temp___158, temp___159,
-  temp___160)[87]) = of_rep(temp___157))) and
-  ((scrabble__lookup_table__aggregate_def(temp___135, temp___136, temp___137,
-  temp___138, temp___139, temp___140, temp___141, temp___142, temp___143,
-  temp___144, temp___145, temp___146, temp___147, temp___148, temp___149,
-  temp___150, temp___151, temp___152, temp___153, temp___154, temp___155,
-  temp___156, temp___157, temp___158, temp___159,
-  temp___160)[88]) = of_rep(temp___158))) and
-  ((scrabble__lookup_table__aggregate_def(temp___135, temp___136, temp___137,
-  temp___138, temp___139, temp___140, temp___141, temp___142, temp___143,
-  temp___144, temp___145, temp___146, temp___147, temp___148, temp___149,
-  temp___150, temp___151, temp___152, temp___153, temp___154, temp___155,
-  temp___156, temp___157, temp___158, temp___159,
-  temp___160)[89]) = of_rep(temp___159))) and
-  ((scrabble__lookup_table__aggregate_def(temp___135, temp___136, temp___137,
-  temp___138, temp___139, temp___140, temp___141, temp___142, temp___143,
-  temp___144, temp___145, temp___146, temp___147, temp___148, temp___149,
-  temp___150, temp___151, temp___152, temp___153, temp___154, temp___155,
-  temp___156, temp___157, temp___158, temp___159,
-  temp___160)[90]) = of_rep(temp___160))))
-
 axiom lookup_table__def_axiom :
   (lookup_table = scrabble__lookup_table__aggregate_def(1, 3, 3, 2, 1, 4, 2,
   4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4, 10))
 
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-logic o11 : int
-
-logic o12 : int
-
-logic o13 : int
-
-logic o14 : int
-
-logic o15 : int
-
-logic o16 : int
-
-logic o17 : int
-
-logic o18 : int
-
-logic o19 : int
-
-logic o20 : int
-
-logic o21 : int
-
-logic o22 : int
-
-logic o23 : int
-
-logic o24 : int
-
-axiom H : (((1 <= 10) and (10 <= 5)) or (((8 <= 10) and (10 <= 8)) or
-  (10 <= 10)))
-
-axiom H1 : (o = 10)
-
-axiom H2 : (((1 <= 4) and (4 <= 5)) or (((8 <= 4) and (4 <= 8)) or
-  ((10 <= 4) and (4 <= 10))))
-
-axiom H3 : (o1 = 4)
-
-axiom H4 : (((1 <= 8) and (8 <= 5)) or ((8 <= 8) or ((10 <= 8) and
-  (8 <= 10))))
-
-axiom H5 : (o2 = 8)
-
-axiom H6 : (((1 <= 4) and (4 <= 5)) or (((8 <= 4) and (4 <= 8)) or
-  ((10 <= 4) and (4 <= 10))))
-
-axiom H7 : (o3 = 4)
-
-axiom H8 : (((1 <= 4) and (4 <= 5)) or (((8 <= 4) and (4 <= 8)) or
-  ((10 <= 4) and (4 <= 10))))
-
-axiom H9 : (o4 = 4)
-
-axiom H10 : (((1 <= 1) and (1 <= 5)) or (((8 <= 1) and (1 <= 8)) or
-  ((10 <= 1) and (1 <= 10))))
-
-axiom H11 : (o5 = 1)
-
-axiom H12 : (((1 <= 1) and (1 <= 5)) or (((8 <= 1) and (1 <= 8)) or
-  ((10 <= 1) and (1 <= 10))))
-
-axiom H13 : (o6 = 1)
+axiom def_axiom :
+  (forall temp___157:int. forall temp___158:int. forall temp___159:int.
+  forall temp___160:int. forall temp___161:int. forall temp___162:int.
+  forall temp___163:int. forall temp___164:int. forall temp___165:int.
+  forall temp___166:int. forall temp___167:int. forall temp___168:int.
+  forall temp___169:int. forall temp___170:int. forall temp___171:int.
+  forall temp___172:int. forall temp___173:int. forall temp___174:int.
+  forall temp___175:int. forall temp___176:int. forall temp___177:int.
+  forall temp___178:int. forall temp___179:int. forall temp___180:int.
+  forall temp___181:int. forall temp___182:int.
+  (((((((((((((((((((((((((((in_range1(temp___157) and
+  (((1 <= temp___157) and (temp___157 <= 5)) or (((8 <= temp___157) and
+  (temp___157 <= 8)) or ((10 <= temp___157) and (temp___157 <= 10))))) and
+  (in_range1(temp___158) and (((1 <= temp___158) and (temp___158 <= 5)) or
+  (((8 <= temp___158) and (temp___158 <= 8)) or ((10 <= temp___158) and
+  (temp___158 <= 10)))))) and (in_range1(temp___159) and
+  (((1 <= temp___159) and (temp___159 <= 5)) or (((8 <= temp___159) and
+  (temp___159 <= 8)) or ((10 <= temp___159) and (temp___159 <= 10)))))) and
+  (in_range1(temp___160) and (((1 <= temp___160) and (temp___160 <= 5)) or
+  (((8 <= temp___160) and (temp___160 <= 8)) or ((10 <= temp___160) and
+  (temp___160 <= 10)))))) and (in_range1(temp___161) and
+  (((1 <= temp___161) and (temp___161 <= 5)) or (((8 <= temp___161) and
+  (temp___161 <= 8)) or ((10 <= temp___161) and (temp___161 <= 10)))))) and
+  (in_range1(temp___162) and (((1 <= temp___162) and (temp___162 <= 5)) or
+  (((8 <= temp___162) and (temp___162 <= 8)) or ((10 <= temp___162) and
+  (temp___162 <= 10)))))) and (in_range1(temp___163) and
+  (((1 <= temp___163) and (temp___163 <= 5)) or (((8 <= temp___163) and
+  (temp___163 <= 8)) or ((10 <= temp___163) and (temp___163 <= 10)))))) and
+  (in_range1(temp___164) and (((1 <= temp___164) and (temp___164 <= 5)) or
+  (((8 <= temp___164) and (temp___164 <= 8)) or ((10 <= temp___164) and
+  (temp___164 <= 10)))))) and (in_range1(temp___165) and
+  (((1 <= temp___165) and (temp___165 <= 5)) or (((8 <= temp___165) and
+  (temp___165 <= 8)) or ((10 <= temp___165) and (temp___165 <= 10)))))) and
+  (in_range1(temp___166) and (((1 <= temp___166) and (temp___166 <= 5)) or
+  (((8 <= temp___166) and (temp___166 <= 8)) or ((10 <= temp___166) and
+  (temp___166 <= 10)))))) and (in_range1(temp___167) and
+  (((1 <= temp___167) and (temp___167 <= 5)) or (((8 <= temp___167) and
+  (temp___167 <= 8)) or ((10 <= temp___167) and (temp___167 <= 10)))))) and
+  (in_range1(temp___168) and (((1 <= temp___168) and (temp___168 <= 5)) or
+  (((8 <= temp___168) and (temp___168 <= 8)) or ((10 <= temp___168) and
+  (temp___168 <= 10)))))) and (in_range1(temp___169) and
+  (((1 <= temp___169) and (temp___169 <= 5)) or (((8 <= temp___169) and
+  (temp___169 <= 8)) or ((10 <= temp___169) and (temp___169 <= 10)))))) and
+  (in_range1(temp___170) and (((1 <= temp___170) and (temp___170 <= 5)) or
+  (((8 <= temp___170) and (temp___170 <= 8)) or ((10 <= temp___170) and
+  (temp___170 <= 10)))))) and (in_range1(temp___171) and
+  (((1 <= temp___171) and (temp___171 <= 5)) or (((8 <= temp___171) and
+  (temp___171 <= 8)) or ((10 <= temp___171) and (temp___171 <= 10)))))) and
+  (in_range1(temp___172) and (((1 <= temp___172) and (temp___172 <= 5)) or
+  (((8 <= temp___172) and (temp___172 <= 8)) or ((10 <= temp___172) and
+  (temp___172 <= 10)))))) and (in_range1(temp___173) and
+  (((1 <= temp___173) and (temp___173 <= 5)) or (((8 <= temp___173) and
+  (temp___173 <= 8)) or ((10 <= temp___173) and (temp___173 <= 10)))))) and
+  (in_range1(temp___174) and (((1 <= temp___174) and (temp___174 <= 5)) or
+  (((8 <= temp___174) and (temp___174 <= 8)) or ((10 <= temp___174) and
+  (temp___174 <= 10)))))) and (in_range1(temp___175) and
+  (((1 <= temp___175) and (temp___175 <= 5)) or (((8 <= temp___175) and
+  (temp___175 <= 8)) or ((10 <= temp___175) and (temp___175 <= 10)))))) and
+  (in_range1(temp___176) and (((1 <= temp___176) and (temp___176 <= 5)) or
+  (((8 <= temp___176) and (temp___176 <= 8)) or ((10 <= temp___176) and
+  (temp___176 <= 10)))))) and (in_range1(temp___177) and
+  (((1 <= temp___177) and (temp___177 <= 5)) or (((8 <= temp___177) and
+  (temp___177 <= 8)) or ((10 <= temp___177) and (temp___177 <= 10)))))) and
+  (in_range1(temp___178) and (((1 <= temp___178) and (temp___178 <= 5)) or
+  (((8 <= temp___178) and (temp___178 <= 8)) or ((10 <= temp___178) and
+  (temp___178 <= 10)))))) and (in_range1(temp___179) and
+  (((1 <= temp___179) and (temp___179 <= 5)) or (((8 <= temp___179) and
+  (temp___179 <= 8)) or ((10 <= temp___179) and (temp___179 <= 10)))))) and
+  (in_range1(temp___180) and (((1 <= temp___180) and (temp___180 <= 5)) or
+  (((8 <= temp___180) and (temp___180 <= 8)) or ((10 <= temp___180) and
+  (temp___180 <= 10)))))) and (in_range1(temp___181) and
+  (((1 <= temp___181) and (temp___181 <= 5)) or (((8 <= temp___181) and
+  (temp___181 <= 8)) or ((10 <= temp___181) and (temp___181 <= 10)))))) and
+  (in_range1(temp___182) and (((1 <= temp___182) and (temp___182 <= 5)) or
+  (((8 <= temp___182) and (temp___182 <= 8)) or ((10 <= temp___182) and
+  (temp___182 <= 10)))))) ->
+  ((((((((((((((((((((((((((to_rep((scrabble__lookup_table__aggregate_def(temp___157,
+  temp___158, temp___159, temp___160, temp___161, temp___162, temp___163,
+  temp___164, temp___165, temp___166, temp___167, temp___168, temp___169,
+  temp___170, temp___171, temp___172, temp___173, temp___174, temp___175,
+  temp___176, temp___177, temp___178, temp___179, temp___180, temp___181,
+  temp___182)[65])) = temp___157) and
+  (to_rep((scrabble__lookup_table__aggregate_def(temp___157, temp___158,
+  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
+  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
+  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
+  temp___177, temp___178, temp___179, temp___180, temp___181,
+  temp___182)[66])) = temp___158)) and
+  (to_rep((scrabble__lookup_table__aggregate_def(temp___157, temp___158,
+  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
+  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
+  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
+  temp___177, temp___178, temp___179, temp___180, temp___181,
+  temp___182)[67])) = temp___159)) and
+  (to_rep((scrabble__lookup_table__aggregate_def(temp___157, temp___158,
+  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
+  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
+  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
+  temp___177, temp___178, temp___179, temp___180, temp___181,
+  temp___182)[68])) = temp___160)) and
+  (to_rep((scrabble__lookup_table__aggregate_def(temp___157, temp___158,
+  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
+  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
+  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
+  temp___177, temp___178, temp___179, temp___180, temp___181,
+  temp___182)[69])) = temp___161)) and
+  (to_rep((scrabble__lookup_table__aggregate_def(temp___157, temp___158,
+  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
+  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
+  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
+  temp___177, temp___178, temp___179, temp___180, temp___181,
+  temp___182)[70])) = temp___162)) and
+  (to_rep((scrabble__lookup_table__aggregate_def(temp___157, temp___158,
+  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
+  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
+  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
+  temp___177, temp___178, temp___179, temp___180, temp___181,
+  temp___182)[71])) = temp___163)) and
+  (to_rep((scrabble__lookup_table__aggregate_def(temp___157, temp___158,
+  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
+  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
+  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
+  temp___177, temp___178, temp___179, temp___180, temp___181,
+  temp___182)[72])) = temp___164)) and
+  (to_rep((scrabble__lookup_table__aggregate_def(temp___157, temp___158,
+  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
+  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
+  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
+  temp___177, temp___178, temp___179, temp___180, temp___181,
+  temp___182)[73])) = temp___165)) and
+  (to_rep((scrabble__lookup_table__aggregate_def(temp___157, temp___158,
+  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
+  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
+  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
+  temp___177, temp___178, temp___179, temp___180, temp___181,
+  temp___182)[74])) = temp___166)) and
+  (to_rep((scrabble__lookup_table__aggregate_def(temp___157, temp___158,
+  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
+  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
+  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
+  temp___177, temp___178, temp___179, temp___180, temp___181,
+  temp___182)[75])) = temp___167)) and
+  (to_rep((scrabble__lookup_table__aggregate_def(temp___157, temp___158,
+  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
+  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
+  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
+  temp___177, temp___178, temp___179, temp___180, temp___181,
+  temp___182)[76])) = temp___168)) and
+  (to_rep((scrabble__lookup_table__aggregate_def(temp___157, temp___158,
+  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
+  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
+  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
+  temp___177, temp___178, temp___179, temp___180, temp___181,
+  temp___182)[77])) = temp___169)) and
+  (to_rep((scrabble__lookup_table__aggregate_def(temp___157, temp___158,
+  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
+  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
+  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
+  temp___177, temp___178, temp___179, temp___180, temp___181,
+  temp___182)[78])) = temp___170)) and
+  (to_rep((scrabble__lookup_table__aggregate_def(temp___157, temp___158,
+  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
+  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
+  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
+  temp___177, temp___178, temp___179, temp___180, temp___181,
+  temp___182)[79])) = temp___171)) and
+  (to_rep((scrabble__lookup_table__aggregate_def(temp___157, temp___158,
+  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
+  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
+  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
+  temp___177, temp___178, temp___179, temp___180, temp___181,
+  temp___182)[80])) = temp___172)) and
+  (to_rep((scrabble__lookup_table__aggregate_def(temp___157, temp___158,
+  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
+  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
+  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
+  temp___177, temp___178, temp___179, temp___180, temp___181,
+  temp___182)[81])) = temp___173)) and
+  (to_rep((scrabble__lookup_table__aggregate_def(temp___157, temp___158,
+  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
+  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
+  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
+  temp___177, temp___178, temp___179, temp___180, temp___181,
+  temp___182)[82])) = temp___174)) and
+  (to_rep((scrabble__lookup_table__aggregate_def(temp___157, temp___158,
+  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
+  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
+  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
+  temp___177, temp___178, temp___179, temp___180, temp___181,
+  temp___182)[83])) = temp___175)) and
+  (to_rep((scrabble__lookup_table__aggregate_def(temp___157, temp___158,
+  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
+  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
+  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
+  temp___177, temp___178, temp___179, temp___180, temp___181,
+  temp___182)[84])) = temp___176)) and
+  (to_rep((scrabble__lookup_table__aggregate_def(temp___157, temp___158,
+  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
+  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
+  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
+  temp___177, temp___178, temp___179, temp___180, temp___181,
+  temp___182)[85])) = temp___177)) and
+  (to_rep((scrabble__lookup_table__aggregate_def(temp___157, temp___158,
+  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
+  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
+  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
+  temp___177, temp___178, temp___179, temp___180, temp___181,
+  temp___182)[86])) = temp___178)) and
+  (to_rep((scrabble__lookup_table__aggregate_def(temp___157, temp___158,
+  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
+  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
+  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
+  temp___177, temp___178, temp___179, temp___180, temp___181,
+  temp___182)[87])) = temp___179)) and
+  (to_rep((scrabble__lookup_table__aggregate_def(temp___157, temp___158,
+  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
+  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
+  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
+  temp___177, temp___178, temp___179, temp___180, temp___181,
+  temp___182)[88])) = temp___180)) and
+  (to_rep((scrabble__lookup_table__aggregate_def(temp___157, temp___158,
+  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
+  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
+  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
+  temp___177, temp___178, temp___179, temp___180, temp___181,
+  temp___182)[89])) = temp___181)) and
+  (to_rep((scrabble__lookup_table__aggregate_def(temp___157, temp___158,
+  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
+  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
+  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
+  temp___177, temp___178, temp___179, temp___180, temp___181,
+  temp___182)[90])) = temp___182))))
 
  (* File "scrabble.ads", line 12, characters 0-0 *)
-goal WP_parameter_def : (((1 <= 1) and (1 <= 5)) or (((8 <= 1) and
-  (1 <= 8)) or ((10 <= 1) and (1 <= 10))))
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
+  forall o5:int. forall o6:int. (((((1 <= 10) and (10 <= 5)) or
+  (((8 <= 10) and (10 <= 8)) or (10 <= 10))) and (o = 10)) ->
+  (((((1 <= 4) and (4 <= 5)) or (((8 <= 4) and (4 <= 8)) or ((10 <= 4) and
+  (4 <= 10)))) and (o1 = 4)) -> (((((1 <= 8) and (8 <= 5)) or ((8 <= 8) or
+  ((10 <= 8) and (8 <= 10)))) and (o2 = 8)) -> (((((1 <= 4) and (4 <= 5)) or
+  (((8 <= 4) and (4 <= 8)) or ((10 <= 4) and (4 <= 10)))) and (o3 = 4)) ->
+  (((((1 <= 4) and (4 <= 5)) or (((8 <= 4) and (4 <= 8)) or ((10 <= 4) and
+  (4 <= 10)))) and (o4 = 4)) -> (((((1 <= 1) and (1 <= 5)) or (((8 <= 1) and
+  (1 <= 8)) or ((10 <= 1) and (1 <= 10)))) and (o5 = 1)) -> (((((1 <= 1) and
+  (1 <= 5)) or (((8 <= 1) and (1 <= 8)) or ((10 <= 1) and (1 <= 10)))) and
+  (o6 = 1)) -> (((1 <= 1) and (1 <= 5)) or (((8 <= 1) and (1 <= 8)) or
+  ((10 <= 1) and (1 <= 10))))))))))))

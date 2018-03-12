@@ -126,20 +126,12 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic x : int
-
-logic temp___324 : int
-
-logic temp___326 : sub_int_ok
-
-axiom H : (in_range(i11s) and ((((- 2147483648) <= i11s) and
-  (i11s <= (- 1))) or ((1 <= i11s) and (i11s <= 2147483647))))
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(x))
-
-axiom H2 : (to_rep(temp___326) = 1)
-
  (* File "preds.ads", line 23, characters 0-0 *)
-goal WP_parameter_def : ((((- 2147483648) <= to_rep(temp___326)) and
-  (to_rep(temp___326) <= (- 1))) or ((1 <= to_rep(temp___326)) and
-  (to_rep(temp___326) <= 2147483647)))
+goal WP_parameter_def :
+  (forall x:int. forall temp___365:sub_int_ok. ((in_range(i11s) and
+  ((((- 2147483648) <= i11s) and (i11s <= (- 1))) or ((1 <= i11s) and
+  (i11s <= 2147483647)))) -> ((((- 2147483648) <= 2147483647) ->
+  in_range(x)) -> ((to_rep(temp___365) = 1) ->
+  ((((- 2147483648) <= to_rep(temp___365)) and
+  (to_rep(temp___365) <= (- 1))) or ((1 <= to_rep(temp___365)) and
+  (to_rep(temp___365) <= 2147483647)))))))

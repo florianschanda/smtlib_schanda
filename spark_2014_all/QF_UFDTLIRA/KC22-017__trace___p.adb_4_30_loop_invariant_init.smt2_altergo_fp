@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -69,6 +63,12 @@ axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
 
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
 logic attr__ATTRIBUTE_IMAGE : bool -> us_image
@@ -79,27 +79,8 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic b : int
-
-logic result : int
-
-logic b1 : int
-
-logic b2 : int
-
-logic result1 : int
-
-logic b3 : int
-
-axiom H : (result = b)
-
-axiom H1 : (b1 = 0)
-
-axiom H2 : (0 <= b1)
-
-axiom H3 : (b1 <= 1)
-
-axiom H4 : (of_int(b1) = true)
-
  (* File "p.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : (of_int(b1) = true)
+goal WP_parameter_def :
+  (forall b:int. forall result:int. forall b1:int. (((result = b) and
+  (b1 = 0)) -> (((0 <= b1) and (b1 <= 1)) -> ((of_int(b1) = true) ->
+  (of_int(b1) = true)))))

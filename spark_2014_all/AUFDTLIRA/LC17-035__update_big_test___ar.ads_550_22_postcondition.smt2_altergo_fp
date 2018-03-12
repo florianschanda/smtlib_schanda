@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -210,24 +210,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,et1) farray, int, int, (int,et1) farray, int,
-  int -> (int,et1) farray
-
-axiom concat_def :
-  (forall a:(int,et1) farray. forall b:(int,et1) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : et1, int -> (int,et1) farray
-
-axiom singleton_def :
-  (forall v:et1.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,et1) farray, int, int, (int,et1) farray, int,
   int -> bool
 
@@ -238,17 +220,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -258,36 +240,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,et1) farray, int, int, (int,et1) farray, int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,et1) farray. forall b:(int,et1) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,et1) farray. forall b:(int,et1) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,et1) farray. forall b:(int,et1) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic dummy3 : (int,et1) farray
 
@@ -337,25 +292,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,(int,et1) farray) farray, int, int,
-  (int,(int,et1) farray) farray, int, int -> (int,(int,et1) farray) farray
-
-axiom concat_def1 :
-  (forall a:(int,(int,et1) farray) farray.
-  forall b:(int,(int,et1) farray) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : (int,et1) farray, int -> (int,(int,et1) farray) farray
-
-axiom singleton_def1 :
-  (forall v:(int,et1) farray.
-  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq6 : (int,(int,et1) farray) farray, int, int,
   (int,(int,et1) farray) farray, int, int -> bool
 
@@ -367,17 +303,17 @@ axiom bool_eq_def5 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) and (bool_eq5((a[temp___idx_133]), 1, 10,
-  (b[((b__first - a__first) + temp___idx_133)]), 1, 10) = true)) or
-  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (forall temp___idx_155:int. ((((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) and (bool_eq5((a[temp___idx_155]), 1, 10,
+  (b[((b__first - a__first) + temp___idx_155)]), 1, 10) = true)) or
+  (not ((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) -> (bool_eq5((a[temp___idx_133]), 1, 10,
-  (b[((b__first - a__first) + temp___idx_133)]), 1, 10) = true))))) ->
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) -> (bool_eq5((a[temp___idx_155]), 1, 10,
+  (b[((b__first - a__first) + temp___idx_155)]), 1, 10) = true))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -388,9 +324,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) -> (bool_eq5((a[temp___idx_133]), 1, 10,
-  (b[((b__first - a__first) + temp___idx_133)]), 1, 10) = true)))))))
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) -> (bool_eq5((a[temp___idx_155]), 1, 10,
+  (b[((b__first - a__first) + temp___idx_155)]), 1, 10) = true)))))))
 
 logic dummy4 : (int,(int,et1) farray) farray
 
@@ -442,27 +378,6 @@ axiom slide_def2 :
   (forall i:int [(slide2(a, old_first, new_first)[i])]. ((slide2(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat2 : (int,(int,(int,et1) farray) farray) farray, int, int,
-  (int,(int,(int,et1) farray) farray) farray, int,
-  int -> (int,(int,(int,et1) farray) farray) farray
-
-axiom concat_def2 :
-  (forall a:(int,(int,(int,et1) farray) farray) farray.
-  forall b:(int,(int,(int,et1) farray) farray) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat2(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat2(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat2(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton2 : (int,(int,et1) farray) farray,
-  int -> (int,(int,(int,et1) farray) farray) farray
-
-axiom singleton_def2 :
-  (forall v:(int,(int,et1) farray) farray.
-  (forall i:int [(singleton2(v, i)[i])]. ((singleton2(v, i)[i]) = v)))
-
 logic bool_eq7 : (int,(int,(int,et1) farray) farray) farray, int, int,
   (int,(int,(int,et1) farray) farray) farray, int, int -> bool
 
@@ -474,17 +389,17 @@ axiom bool_eq_def6 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_134:int. ((((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) and (bool_eq6((a[temp___idx_134]), 5, 50,
-  (b[((b__first - a__first) + temp___idx_134)]), 5, 50) = true)) or
-  (not ((a__first <= temp___idx_134) and (temp___idx_134 <= a__last)))))) ->
+  (forall temp___idx_156:int. ((((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) and (bool_eq6((a[temp___idx_156]), 5, 50,
+  (b[((b__first - a__first) + temp___idx_156)]), 5, 50) = true)) or
+  (not ((a__first <= temp___idx_156) and (temp___idx_156 <= a__last)))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_134:int. (((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) -> (bool_eq6((a[temp___idx_134]), 5, 50,
-  (b[((b__first - a__first) + temp___idx_134)]), 5, 50) = true))))) ->
+  (forall temp___idx_156:int. (((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) -> (bool_eq6((a[temp___idx_156]), 5, 50,
+  (b[((b__first - a__first) + temp___idx_156)]), 5, 50) = true))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev2 :
@@ -495,9 +410,9 @@ axiom bool_eq_rev2 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_134:int. (((a__first <= temp___idx_134) and
-  (temp___idx_134 <= a__last)) -> (bool_eq6((a[temp___idx_134]), 5, 50,
-  (b[((b__first - a__first) + temp___idx_134)]), 5, 50) = true)))))))
+  (forall temp___idx_156:int. (((a__first <= temp___idx_156) and
+  (temp___idx_156 <= a__last)) -> (bool_eq6((a[temp___idx_156]), 5, 50,
+  (b[((b__first - a__first) + temp___idx_156)]), 5, 50) = true)))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -525,120 +440,97 @@ logic c : (int,et1) farray
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
-logic temp___2130 : (int,(int,(int,et1) farray) farray) farray, int,
+logic temp___2189 : (int,(int,(int,et1) farray) farray) farray, int,
   (int,(int,et1) farray) farray -> (int,(int,(int,et1) farray) farray) farray
 
-axiom def_axiom :
-  (forall temp___2132:(int,(int,(int,et1) farray) farray) farray.
-  (forall temp___2133:int.
-  (forall temp___2134:(int,(int,et1) farray) farray.
-  (forall temp___2135:int. (((temp___2135 = temp___2133) ->
-  ((temp___2130(temp___2132, temp___2133,
-  temp___2134)[temp___2135]) = temp___2134)) and
-  ((not (temp___2135 = temp___2133)) -> ((temp___2130(temp___2132,
-  temp___2133, temp___2134)[temp___2135]) = (temp___2132[temp___2135]))))))))
-
-logic temp___2136 : (int,(int,et1) farray) farray, int, (int,et1) farray,
+logic temp___2195 : (int,(int,et1) farray) farray, int, (int,et1) farray,
   int, (int,et1) farray -> (int,(int,et1) farray) farray
 
-axiom def_axiom1 :
-  (forall temp___2138:(int,(int,et1) farray) farray.
-  (forall temp___2139:int. forall temp___2141:int.
-  (forall temp___2140:(int,et1) farray. forall temp___2142:(int,et1) farray.
-  (forall temp___2143:int. (((temp___2143 = temp___2141) ->
-  ((temp___2136(temp___2138, temp___2139, temp___2140, temp___2141,
-  temp___2142)[temp___2143]) = temp___2142)) and
-  ((not (temp___2143 = temp___2141)) -> (((temp___2143 = temp___2139) ->
-  ((temp___2136(temp___2138, temp___2139, temp___2140, temp___2141,
-  temp___2142)[temp___2143]) = temp___2140)) and
-  ((not (temp___2143 = temp___2139)) -> ((temp___2136(temp___2138,
-  temp___2139, temp___2140, temp___2141,
-  temp___2142)[temp___2143]) = (temp___2138[temp___2143]))))))))))
-
-logic temp___2146 : (int,(int,(int,et1) farray) farray) farray, int,
+logic temp___2205 : (int,(int,(int,et1) farray) farray) farray, int,
   (int,(int,et1) farray) farray, int,
   (int,(int,et1) farray) farray -> (int,(int,(int,et1) farray) farray) farray
 
-axiom def_axiom2 :
-  (forall temp___2148:(int,(int,(int,et1) farray) farray) farray.
-  (forall temp___2149:int. forall temp___2151:int.
-  (forall temp___2150:(int,(int,et1) farray) farray.
-  forall temp___2152:(int,(int,et1) farray) farray.
-  (forall temp___2153:int. (((temp___2153 = temp___2151) ->
-  ((temp___2146(temp___2148, temp___2149, temp___2150, temp___2151,
-  temp___2152)[temp___2153]) = temp___2152)) and
-  ((not (temp___2153 = temp___2151)) -> (((temp___2153 = temp___2149) ->
-  ((temp___2146(temp___2148, temp___2149, temp___2150, temp___2151,
-  temp___2152)[temp___2153]) = temp___2150)) and
-  ((not (temp___2153 = temp___2149)) -> ((temp___2146(temp___2148,
-  temp___2149, temp___2150, temp___2151,
-  temp___2152)[temp___2153]) = (temp___2148[temp___2153]))))))))))
-
-logic temp___2154 : (int,(int,et1) farray) farray, int,
+logic temp___2213 : (int,(int,et1) farray) farray, int,
   (int,et1) farray -> (int,(int,et1) farray) farray
+
+logic temp___2220 : (int,(int,et1) farray) farray, int,
+  (int,et1) farray -> (int,(int,et1) farray) farray
+
+axiom def_axiom :
+  (forall temp___2207:(int,(int,(int,et1) farray) farray) farray.
+  (forall temp___2208:int. forall temp___2210:int.
+  (forall temp___2209:(int,(int,et1) farray) farray.
+  forall temp___2211:(int,(int,et1) farray) farray.
+  ((in_range2(temp___2208) and in_range2(temp___2210)) ->
+  (forall temp___2212:int. (((temp___2212 = temp___2210) ->
+  ((temp___2205(temp___2207, temp___2208, temp___2209, temp___2210,
+  temp___2211)[temp___2212]) = temp___2211)) and
+  ((not (temp___2212 = temp___2210)) -> (((temp___2212 = temp___2208) ->
+  ((temp___2205(temp___2207, temp___2208, temp___2209, temp___2210,
+  temp___2211)[temp___2212]) = temp___2209)) and
+  ((not (temp___2212 = temp___2208)) -> ((temp___2205(temp___2207,
+  temp___2208, temp___2209, temp___2210,
+  temp___2211)[temp___2212]) = (temp___2207[temp___2212])))))))))))
+
+axiom def_axiom1 :
+  (forall temp___2215:(int,(int,et1) farray) farray.
+  (forall temp___2216:int.
+  (forall temp___2217:(int,et1) farray. (in_range1(temp___2216) ->
+  (forall temp___2218:int. (((temp___2218 = temp___2216) ->
+  ((temp___2213(temp___2215, temp___2216,
+  temp___2217)[temp___2218]) = temp___2217)) and
+  ((not (temp___2218 = temp___2216)) -> ((temp___2213(temp___2215,
+  temp___2216, temp___2217)[temp___2218]) = (temp___2215[temp___2218])))))))))
+
+axiom def_axiom2 :
+  (forall temp___2222:(int,(int,et1) farray) farray.
+  (forall temp___2223:int.
+  (forall temp___2224:(int,et1) farray. (in_range1(temp___2223) ->
+  (forall temp___2225:int. (((temp___2225 = temp___2223) ->
+  ((temp___2220(temp___2222, temp___2223,
+  temp___2224)[temp___2225]) = temp___2224)) and
+  ((not (temp___2225 = temp___2223)) -> ((temp___2220(temp___2222,
+  temp___2223, temp___2224)[temp___2225]) = (temp___2222[temp___2225])))))))))
 
 axiom def_axiom3 :
-  (forall temp___2156:(int,(int,et1) farray) farray.
-  (forall temp___2157:int.
-  (forall temp___2158:(int,et1) farray.
-  (forall temp___2159:int. (((temp___2159 = temp___2157) ->
-  ((temp___2154(temp___2156, temp___2157,
-  temp___2158)[temp___2159]) = temp___2158)) and
-  ((not (temp___2159 = temp___2157)) -> ((temp___2154(temp___2156,
-  temp___2157, temp___2158)[temp___2159]) = (temp___2156[temp___2159]))))))))
-
-logic temp___2161 : (int,(int,et1) farray) farray, int,
-  (int,et1) farray -> (int,(int,et1) farray) farray
+  (forall temp___2191:(int,(int,(int,et1) farray) farray) farray.
+  (forall temp___2192:int.
+  (forall temp___2193:(int,(int,et1) farray) farray.
+  (in_range2(temp___2192) ->
+  (forall temp___2194:int. (((temp___2194 = temp___2192) ->
+  ((temp___2189(temp___2191, temp___2192,
+  temp___2193)[temp___2194]) = temp___2193)) and
+  ((not (temp___2194 = temp___2192)) -> ((temp___2189(temp___2191,
+  temp___2192, temp___2193)[temp___2194]) = (temp___2191[temp___2194])))))))))
 
 axiom def_axiom4 :
-  (forall temp___2163:(int,(int,et1) farray) farray.
-  (forall temp___2164:int.
-  (forall temp___2165:(int,et1) farray.
-  (forall temp___2166:int. (((temp___2166 = temp___2164) ->
-  ((temp___2161(temp___2163, temp___2164,
-  temp___2165)[temp___2166]) = temp___2165)) and
-  ((not (temp___2166 = temp___2164)) -> ((temp___2161(temp___2163,
-  temp___2164, temp___2165)[temp___2166]) = (temp___2163[temp___2166]))))))))
-
-logic a : (int,(int,(int,et1) farray) farray) farray
-
-logic result : (int,(int,(int,et1) farray) farray) farray
-
-logic a1 : (int,(int,(int,et1) farray) farray) farray
-
-logic result1 : (int,(int,(int,et1) farray) farray) farray
-
-logic a2 : (int,(int,(int,et1) farray) farray) farray
-
-logic a3 : (int,(int,(int,et1) farray) farray) farray
-
-logic a4 : (int,(int,(int,et1) farray) farray) farray
-
-axiom H : in_range2(i1)
-
-axiom H1 : in_range2(i2)
-
-axiom H2 : in_range1(j1)
-
-axiom H3 : in_range1(j2)
-
-axiom H4 : ((not (i1 = i2)) or (not (j1 = j2)))
-
-axiom H5 : (result = a)
-
-axiom H6 : (a1 = (a[i1 <- ((a[i1])[j1 <- b])]))
-
-axiom H7 : (result1 = a1)
-
-axiom H8 : (a2 = (a1[i2 <- ((a1[i2])[j2 <- c])]))
-
-axiom H9 : (a2 = a3)
-
-axiom H10 : (a4 = a2)
-
-axiom H11 : (not (i1 = i2))
+  (forall temp___2197:(int,(int,et1) farray) farray.
+  (forall temp___2198:int. forall temp___2200:int.
+  (forall temp___2199:(int,et1) farray. forall temp___2201:(int,et1) farray.
+  ((in_range1(temp___2198) and in_range1(temp___2200)) ->
+  (forall temp___2202:int. (((temp___2202 = temp___2200) ->
+  ((temp___2195(temp___2197, temp___2198, temp___2199, temp___2200,
+  temp___2201)[temp___2202]) = temp___2201)) and
+  ((not (temp___2202 = temp___2200)) -> (((temp___2202 = temp___2198) ->
+  ((temp___2195(temp___2197, temp___2198, temp___2199, temp___2200,
+  temp___2201)[temp___2202]) = temp___2199)) and
+  ((not (temp___2202 = temp___2198)) -> ((temp___2195(temp___2197,
+  temp___2198, temp___2199, temp___2200,
+  temp___2201)[temp___2202]) = (temp___2197[temp___2202])))))))))))
 
  (* File "ar.ads", line 541, characters 0-0 *)
-goal WP_parameter_def : (bool_eq7(a3, 1, 16, temp___2146(a, i1,
-  temp___2154((a[i1]), j1, b), i2, temp___2161((a[i2]), j2, c)), 1,
-  16) = true)
+goal WP_parameter_def :
+  (forall a:(int,(int,(int,et1) farray) farray) farray.
+  forall result:(int,(int,(int,et1) farray) farray) farray.
+  forall a1:(int,(int,(int,et1) farray) farray) farray.
+  forall result1:(int,(int,(int,et1) farray) farray) farray.
+  forall a2:(int,(int,(int,et1) farray) farray) farray.
+  forall a3:(int,(int,(int,et1) farray) farray) farray.
+  forall a4:(int,(int,(int,et1) farray) farray) farray. ((in_range2(i1) and
+  (in_range2(i2) and (in_range1(j1) and (in_range1(j2) and
+  (((not (i1 = i2)) or (not (j1 = j2))) and ((((result = a) and
+  (a1 = (a[i1 <- ((a[i1])[j1 <- b])]))) and ((result1 = a1) and
+  (a2 = (a1[i2 <- ((a1[i2])[j2 <- c])])))) and ((a2 = a3) and
+  (a4 = a2)))))))) -> ((not (i1 = i2)) -> (bool_eq7(a3, 1, 16, temp___2205(a,
+  i1, temp___2213((a[i1]), j1, b), i2, temp___2220((a[i2]), j2, c)), 1,
+  16) = true))))

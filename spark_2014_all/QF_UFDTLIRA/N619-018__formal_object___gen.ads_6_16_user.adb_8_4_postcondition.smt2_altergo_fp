@@ -111,27 +111,9 @@ logic v : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic y : int
-
-logic result : int
-
-logic y1 : int
-
-logic y2 : int
-
-logic y3 : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range(y))
-
-axiom H1 : in_range(v)
-
-axiom H2 : (result = y)
-
-axiom H3 : (y1 = v)
-
-axiom H4 : (y1 = y2)
-
-axiom H5 : (y3 = y1)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (y2 = v)
+goal WP_parameter_def :
+  (forall y:int. forall result:int. forall y1:int. forall y2:int.
+  forall y3:int. (((((- 2147483648) <= 2147483647) -> in_range(y)) and
+  (in_range(v) and (((result = y) and (y1 = v)) and ((y1 = y2) and
+  (y3 = y1))))) -> (y2 = v)))

@@ -601,12 +601,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -618,6 +612,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -687,7 +687,15 @@ type word64_pos
 
 logic attr__ATTRIBUTE_MODULUS1 : t
 
-predicate in_range1(x: t) = (ule(of_int(0), x) and ule(x, of_int(63)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 63)
+
+predicate in_range1(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 63))
 
@@ -717,17 +725,21 @@ logic bit_test : t, t -> bool
 
 logic bit_test__function_guard : bool, t, t -> prop
 
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 1)
+
 axiom bit_test__post_axiom :
   (forall value:t. forall pos:t [bit_test(value, pos)]. (in_range1(pos) ->
   (((bit_test(value, pos) = true) ->
   (not (((tqtint(pos) <  18446744073709551616) and (bw_and(value,
-  lsl_bv(of_int(1), of_int(tqtint(pos)))) = of_int(0))) or
+  lsl_bv(rliteral2, of_int(tqtint(pos)))) = rliteral)) or
   ((not (tqtint(pos) <  18446744073709551616)) and (bw_and(value,
-  of_int(0)) = of_int(0)))))) and
+  rliteral) = rliteral))))) and
   ((not (((tqtint(pos) <  18446744073709551616) -> (bw_and(value,
-  lsl_bv(of_int(1), of_int(tqtint(pos)))) = of_int(0))) and
+  lsl_bv(rliteral2, of_int(tqtint(pos)))) = rliteral)) and
   ((not (tqtint(pos) <  18446744073709551616)) -> (bw_and(value,
-  of_int(0)) = of_int(0))))) -> (bit_test(value, pos) = true)))))
+  rliteral) = rliteral)))) -> (bit_test(value, pos) = true)))))
 
 logic value : t
 
@@ -739,72 +751,25 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic mask : t
-
-logic bitset__bit_clear__result : t
-
-logic o : t
-
-logic o1 : t
-
-logic result : t
-
-logic mask1 : t
-
-logic result1 : t
-
-logic bitset__bit_clear__result1 : t
-
-logic bitset__bit_clear__result2 : t
-
-logic bitset__bit_clear__result3 : t
-
-logic mask2 : t
-
-logic bitset__bit_clear__result4 : t
-
-logic mask3 : t
-
-logic bitset__bit_clear__result5 : t
-
-logic result2 : t
-
-axiom H : true
-
-axiom H1 : in_range1(pos)
-
-axiom H2 : true
-
-axiom H3 : ((tqtint(pos) <  18446744073709551616) -> (o = lsl_bv(of_int(1),
-  of_int(tqtint(pos)))))
-
-axiom H4 : ((not (tqtint(pos) <  18446744073709551616)) -> (o = of_int(0)))
-
-axiom H5 : (o1 = bw_not(o))
-
-axiom H6 : (result = mask)
-
-axiom H7 : (mask1 = o1)
-
-axiom H8 : (bitset__bit_clear__result1 = bitset__bit_clear__result2)
-
-axiom H9 : (bitset__bit_clear__result3 = bitset__bit_clear__result1)
-
-axiom H10 : (result1 = bitset__bit_clear__result)
-
-axiom H11 : (bitset__bit_clear__result1 = bw_and(value, mask1))
-
-axiom H12 : (bitset__bit_clear__result4 = bitset__bit_clear__result2)
-
-axiom H13 : (mask2 = mask1)
-
-axiom H14 : (bitset__bit_clear__result5 = bitset__bit_clear__result3)
-
-axiom H15 : (mask3 = mask1)
-
-axiom H16 : (result2 = bitset__bit_clear__result4)
-
-axiom H17 : (bit_test(bitset__bit_clear__result4, pos) = true)
-
  (* File "bitset.ads", line 4, characters 0-0 *)
-goal WP_parameter_def : false
+goal WP_parameter_def :
+  (forall mask:t. forall bitset__bit_clear__result:t. forall o:t.
+  forall o1:t. forall result:t. forall mask1:t. forall result1:t.
+  forall bitset__bit_clear__result1:t. forall bitset__bit_clear__result2:t.
+  forall bitset__bit_clear__result3:t. forall mask2:t.
+  forall bitset__bit_clear__result4:t. forall mask3:t.
+  forall bitset__bit_clear__result5:t.
+  (forall result2:t. ((in_range1(pos) and
+  ((((((((tqtint(pos) <  18446744073709551616) and (o = lsl_bv(rliteral2,
+  of_int(tqtint(pos))))) or ((not (tqtint(pos) <  18446744073709551616)) and
+  (o = rliteral))) and (o1 = bw_not(o))) and ((result = mask) and
+  (mask1 = o1))) and
+  (((bitset__bit_clear__result1 = bitset__bit_clear__result2) and
+  (bitset__bit_clear__result3 = bitset__bit_clear__result1)) and
+  ((result1 = bitset__bit_clear__result) and
+  (bitset__bit_clear__result1 = bw_and(value, mask1))))) and
+  (((bitset__bit_clear__result4 = bitset__bit_clear__result2) and
+  (mask2 = mask1)) and
+  ((bitset__bit_clear__result5 = bitset__bit_clear__result3) and
+  (mask3 = mask1)))) and (result2 = bitset__bit_clear__result4))) ->
+  (not (bit_test(bitset__bit_clear__result4, pos) = true)))))

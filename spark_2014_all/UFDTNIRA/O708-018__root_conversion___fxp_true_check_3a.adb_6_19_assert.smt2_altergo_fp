@@ -410,20 +410,9 @@ function my_duration__ref___projection(a: my_duration__ref) : my_duration =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic md : my_duration
-
-logic o : my_duration
-
-logic result : my_duration
-
-logic md1 : my_duration
-
-axiom H : (to_fixed1(o) = 0)
-
-axiom H1 : (result = md)
-
-axiom H2 : (md1 = o)
-
  (* File "fxp_true_check_3a.adb", line 3, characters 0-0 *)
 goal WP_parameter_def :
-  (to_fixed1(of_fixed1(to_fixed(of_fixed(to_fixed1(md1))))) = to_fixed1(md1))
+  (forall md:my_duration. forall o:my_duration. forall result:my_duration.
+  forall md1:my_duration. (((to_fixed1(o) = 0) and ((result = md) and
+  (md1 = o))) ->
+  (to_fixed1(of_fixed1(to_fixed(of_fixed(to_fixed1(md1))))) = to_fixed1(md1))))

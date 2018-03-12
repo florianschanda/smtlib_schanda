@@ -79,21 +79,12 @@ axiom both_are_true__def_axiom : ((both_are_true(void) = true) <->
 
 axiom ordinary_constant__def_axiom : (ordinary_constant = simply_true(void))
 
-logic var : us_private
-
-logic main__variable_constant__assume : bool
-
-logic main__ordinary_constant__assume : bool
-
-logic us : bool
-
-axiom H : (main__variable_constant__assume = read_variable(var))
-
-axiom H1 : (main__variable_constant__assume = variable_constant)
-
-axiom H2 : (main__ordinary_constant__assume = simply_true(void))
-
-axiom H3 : (main__ordinary_constant__assume = ordinary_constant)
-
  (* File "main.adb", line 6, characters 0-0 *)
-goal WP_parameter_def : (both_are_true(void) = true)
+goal WP_parameter_def :
+  (forall var:us_private. forall main__variable_constant__assume:bool.
+  forall main__ordinary_constant__assume:bool.
+  (((main__variable_constant__assume = read_variable(var)) and
+  (main__variable_constant__assume = variable_constant)) ->
+  (((main__ordinary_constant__assume = simply_true(void)) and
+  (main__ordinary_constant__assume = ordinary_constant)) ->
+  (both_are_true(void) = true))))

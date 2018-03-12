@@ -107,11 +107,5 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic f : int
-
-logic o : int
-
-axiom H : in_range(f)
-
  (* File "skein.adb", line 9, characters 0-0 *)
-goal WP_parameter_def : in_range((f + 1))
+goal WP_parameter_def : (forall f:int. (in_range(f) -> in_range((f + 1))))

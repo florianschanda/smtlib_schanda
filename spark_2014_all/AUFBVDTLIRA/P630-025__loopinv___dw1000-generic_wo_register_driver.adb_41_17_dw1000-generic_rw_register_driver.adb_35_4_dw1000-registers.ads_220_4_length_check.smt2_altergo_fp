@@ -1077,24 +1077,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,bits_8) farray, int, int, (int,bits_8) farray, int,
-  int -> (int,bits_8) farray
-
-axiom concat_def :
-  (forall a:(int,bits_8) farray. forall b:(int,bits_8) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : bits_8, int -> (int,bits_8) farray
-
-axiom singleton_def :
-  (forall v:bits_8.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq6 : (int,bits_8) farray, int, int, (int,bits_8) farray, int,
   int -> bool
 
@@ -1105,17 +1087,17 @@ axiom bool_eq_def5 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1125,37 +1107,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,bits_8) farray, int, int, (int,bits_8) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,bits_8) farray. forall b:(int,bits_8) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq6(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,bits_8) farray. forall b:(int,bits_8) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq6(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and ult(to_rep1((a[(i + 1)])), to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,bits_8) farray. forall b:(int,bits_8) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq6(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and ugt(to_rep1((a[(j + 1)])), to_rep1((b[(i + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type t2
 
@@ -1571,8 +1525,15 @@ axiom bv_max_to_uint2 :
 
 type bits_40
 
-predicate in_range2(x: t3) = (ule2(of_int2(0), x) and ule2(x,
-  of_int2(1099511627775)))
+logic rliteral : t3
+
+axiom rliteral_axiom : (tqtint2(rliteral) = 0)
+
+logic rliteral1 : t3
+
+axiom rliteral_axiom1 : (tqtint2(rliteral1) = 1099511627775)
+
+predicate in_range2(x: t3) = (ule2(rliteral, x) and ule2(x, rliteral1))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 1099511627775))
 
@@ -1607,10 +1568,13 @@ axiom inversion_axiom2 :
 
 axiom range_axiom2 : (forall x:bits_40 [to_rep2(x)]. in_range2(to_rep2(x)))
 
+logic rliteral2 : t3
+
+axiom rliteral_axiom2 : (tqtint2(rliteral2) = 1099511627776)
+
 axiom coerce_axiom2 :
-  (forall x:t3 [to_rep2(of_rep2(x))]. (in_range2(urem2(x,
-  of_int2(1099511627776))) -> (to_rep2(of_rep2(x)) = urem2(x,
-  of_int2(1099511627776)))))
+  (forall x:t3 [to_rep2(of_rep2(x))]. (in_range2(urem2(x, rliteral2)) ->
+  (to_rep2(of_rep2(x)) = urem2(x, rliteral2))))
 
 function to_int4(x: bits_40) : int = tqtint2(to_rep2(x))
 
@@ -1912,57 +1876,32 @@ logic reg_bytes__last : integer
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic reg_bytes : (int,bits_8) farray
-
-logic temp___7729 : (int,bits_8) farray
-
-logic temp___77291 : t5
-
-logic temp___7730 : (int,bits_8) farray
-
-logic temp___77301 : t4
-
-logic o : (int,bits_8) farray
-
-logic o1 : t4
-
-logic o2 : (int,bits_8) farray
-
-logic result : (int,bits_8) farray
-
-logic reg_bytes1 : (int,bits_8) farray
-
-axiom H : (dynamic_property2(1, 5, to_rep(reg_bytes__first),
-  to_rep(reg_bytes__last)) and ((to_rep(reg_bytes__first) = 1) and
-  (to_rep(reg_bytes__last) = 5)))
-
-axiom H1 : (({ elts2 = temp___7729; rt2 = temp___77291
-  } = register_to_bytes({ us_split_fields1 = {
-  rec__dw1000__register_types__dx_time_type__dx_time = reg } })) and
-  (dynamic_property3(1, 5, to_rep(first4(temp___77291)),
-  to_rep(last4(temp___77291))) and ((to_rep(first4(temp___77291)) = 1) and
-  (to_rep(last4(temp___77291)) = 5))))
-
-axiom H2 : (((to_rep(first4(temp___77291)) <= to_rep(last4(temp___77291))) ->
-  (((1 <= 5) ->
-  (((to_rep(last4(temp___77291)) - to_rep(first4(temp___77291))) + 1) = ((5 - 1) + 1))) and
-  ((not (1 <= 5)) ->
-  (((to_rep(last4(temp___77291)) - to_rep(first4(temp___77291))) + 1) = 0)))) and
-  ((not (to_rep(first4(temp___77291)) <= to_rep(last4(temp___77291)))) ->
-  ((1 <= 5) -> (0 = ((5 - 1) + 1)))))
-
-axiom H3 : (temp___7729 = temp___7730)
-
-axiom H4 : (mk1(to_rep(first4(temp___77291)),
-  to_rep(last4(temp___77291))) = temp___77301)
-
  (* File "dw1000-generic_wo_register_driver.adb", line 28, characters 0-0 *)
 goal WP_parameter_def :
-  (((to_rep(first2(temp___77301)) <= to_rep(last2(temp___77301))) ->
+  (forall temp___8501:(int,bits_8) farray. forall temp___85011:t5.
+  forall temp___8502:(int,bits_8) farray. forall temp___85021:t4.
+  ((dynamic_property2(1, 5, to_rep(reg_bytes__first),
+  to_rep(reg_bytes__last)) and ((to_rep(reg_bytes__first) = 1) and
+  (to_rep(reg_bytes__last) = 5))) -> (((({ elts2 = temp___8501; rt2 =
+  temp___85011 } = register_to_bytes({ us_split_fields1 = {
+  rec__dw1000__register_types__dx_time_type__dx_time = reg } })) and
+  (dynamic_property3(1, 5, to_rep(first4(temp___85011)),
+  to_rep(last4(temp___85011))) and ((to_rep(first4(temp___85011)) = 1) and
+  (to_rep(last4(temp___85011)) = 5)))) and
+  ((((to_rep(first4(temp___85011)) <= to_rep(last4(temp___85011))) and
+  (((1 <= 5) and
+  (((to_rep(last4(temp___85011)) - to_rep(first4(temp___85011))) + 1) = ((5 - 1) + 1))) or
+  ((not (1 <= 5)) and
+  (((to_rep(last4(temp___85011)) - to_rep(first4(temp___85011))) + 1) = 0)))) or
+  ((not (to_rep(first4(temp___85011)) <= to_rep(last4(temp___85011)))) and
+  (((1 <= 5) and (0 = ((5 - 1) + 1))) or (not (1 <= 5))))) and
+  ((temp___8501 = temp___8502) and (mk1(to_rep(first4(temp___85011)),
+  to_rep(last4(temp___85011))) = temp___85021)))) ->
+  (((to_rep(first2(temp___85021)) <= to_rep(last2(temp___85021))) ->
   (((to_rep(reg_bytes__first) <= to_rep(reg_bytes__last)) ->
-  (((to_rep(last2(temp___77301)) - to_rep(first2(temp___77301))) + 1) = ((to_rep(reg_bytes__last) - to_rep(reg_bytes__first)) + 1))) and
+  (((to_rep(last2(temp___85021)) - to_rep(first2(temp___85021))) + 1) = ((to_rep(reg_bytes__last) - to_rep(reg_bytes__first)) + 1))) and
   ((not (to_rep(reg_bytes__first) <= to_rep(reg_bytes__last))) ->
-  (((to_rep(last2(temp___77301)) - to_rep(first2(temp___77301))) + 1) = 0)))) and
-  ((not (to_rep(first2(temp___77301)) <= to_rep(last2(temp___77301)))) ->
+  (((to_rep(last2(temp___85021)) - to_rep(first2(temp___85021))) + 1) = 0)))) and
+  ((not (to_rep(first2(temp___85021)) <= to_rep(last2(temp___85021)))) ->
   ((to_rep(reg_bytes__first) <= to_rep(reg_bytes__last)) ->
-  (0 = ((to_rep(reg_bytes__last) - to_rep(reg_bytes__first)) + 1)))))
+  (0 = ((to_rep(reg_bytes__last) - to_rep(reg_bytes__first)) + 1))))))))

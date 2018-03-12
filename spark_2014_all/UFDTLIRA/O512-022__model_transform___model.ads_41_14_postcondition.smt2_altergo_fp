@@ -242,65 +242,28 @@ logic val__ : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic self__split_fields : uml_state_access
-
-logic self__split_fields1 : uml_state_access
-
-logic o : uml_state_access
-
-logic o1 : uml_state_access
-
-logic o2 : uml_state_access
-
-logic temp___369 : uml_state_access
-
-logic temp___3691 : uml_state_access
-
-logic result : uml_state_access
-
-logic result1 : uml_state_access
-
-logic self__split_fields2 : uml_state_access
-
-logic self__split_fields3 : uml_state_access
-
-logic self__split_fields4 : uml_state_access
-
-logic self__split_fields5 : uml_state_access
-
-logic self__split_fields6 : uml_state_access
-
-logic self__split_fields7 : uml_state_access
-
-axiom H : in_range(val__)
-
-axiom H1 : (to_rep(o) = val__)
-
-axiom H2 : (self__split_fields = o1)
-
-axiom H3 : (o = o2)
-
-axiom H4 : (temp___369 = o1)
-
-axiom H5 : (temp___3691 = o2)
-
-axiom H6 : (result = self__split_fields)
-
-axiom H7 : (result1 = self__split_fields1)
-
-axiom H8 : (temp___369 = self__split_fields2)
-
-axiom H9 : (temp___3691 = self__split_fields3)
-
-axiom H10 : (self__split_fields4 = self__split_fields2)
-
-axiom H11 : (self__split_fields5 = self__split_fields3)
-
-axiom H12 : (self__split_fields6 = self__split_fields2)
-
-axiom H13 : (self__split_fields7 = self__split_fields3)
-
  (* File "model.ads", line 35, characters 0-0 *)
-goal WP_parameter_def : (to__({ us_split_fields1 = {
-  rec__model__uml_transition__from_data = self__split_fields4;
-  rec__model__uml_transition__to_data = self__split_fields5 } }) = val__)
+goal WP_parameter_def :
+  (forall self__split_fields:uml_state_access.
+  forall self__split_fields1:uml_state_access. forall o:uml_state_access.
+  forall o1:uml_state_access. forall o2:uml_state_access.
+  forall temp___408:uml_state_access. forall temp___4081:uml_state_access.
+  forall result:uml_state_access. forall result1:uml_state_access.
+  forall self__split_fields2:uml_state_access.
+  forall self__split_fields3:uml_state_access.
+  forall self__split_fields4:uml_state_access.
+  forall self__split_fields5:uml_state_access.
+  forall self__split_fields6:uml_state_access.
+  forall self__split_fields7:uml_state_access. ((in_range(val__) and
+  (((((to_rep(o) = val__) and ((self__split_fields = o1) and (o = o2))) and
+  ((temp___408 = o1) and (temp___4081 = o2))) and
+  (((result = self__split_fields) and (result1 = self__split_fields1)) and
+  ((temp___408 = self__split_fields2) and
+  (temp___4081 = self__split_fields3)))) and
+  (((self__split_fields4 = self__split_fields2) and
+  (self__split_fields5 = self__split_fields3)) and
+  ((self__split_fields6 = self__split_fields2) and
+  (self__split_fields7 = self__split_fields3))))) -> (to__({
+  us_split_fields1 = { rec__model__uml_transition__from_data =
+  self__split_fields4; rec__model__uml_transition__to_data =
+  self__split_fields5 } }) = val__)))

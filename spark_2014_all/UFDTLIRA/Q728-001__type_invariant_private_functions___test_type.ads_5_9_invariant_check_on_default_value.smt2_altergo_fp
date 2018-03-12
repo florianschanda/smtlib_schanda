@@ -213,9 +213,7 @@ type t__ref = { t__content : us_rep
 
 function t__ref___projection(a: t__ref) : us_rep = (a).t__content
 
-logic temp___140 : integer
-
-axiom H : (to_rep(temp___140) = 0)
-
  (* File "test_type.ads", line 20, characters 0-0 *)
-goal WP_parameter_def : in_range1(to_rep(temp___140))
+goal WP_parameter_def :
+  (forall temp___163:integer. ((to_rep(temp___163) = 0) ->
+  in_range1(to_rep(temp___163))))

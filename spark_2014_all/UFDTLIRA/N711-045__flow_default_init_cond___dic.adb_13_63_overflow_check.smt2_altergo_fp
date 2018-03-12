@@ -237,11 +237,6 @@ axiom foo__def_axiom :
   rec__dic__pr_record_t2__y = par3 } }, dic__g) = true) <->
   ((to_rep(par2) + to_rep(par3)) = dic__g))))
 
-logic g : int
-
-logic o : int
-
-axiom H : in_range(g)
-
  (* File "dic.ads", line 24, characters 0-0 *)
-goal WP_parameter_def : in_range((to_rep(par) + to_rep(par1)))
+goal WP_parameter_def :
+  (forall g:int. (in_range(g) -> in_range((to_rep(par) + to_rep(par1)))))

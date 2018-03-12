@@ -197,49 +197,21 @@ axiom c6__def_axiom : (c6 = f4(5, c3))
 
 axiom c7__def_axiom : (c7 = f4(c3, c4))
 
-logic a : int
-
-logic info_flow_tests__test_04__c2__assume : int
-
-logic info_flow_tests__test_04__c3__assume : int
-
-logic info_flow_tests__test_04__c4__assume : int
-
-logic info_flow_tests__test_04__c6__assume : int
-
-logic info_flow_tests__test_04__c7__assume : int
-
-axiom H : in_range(a)
-
-axiom H1 : in_range(c1)
-
-axiom H2 : ((info_flow_tests__test_04__c2__assume = f1(5)) and
-  (in_range(info_flow_tests__test_04__c2__assume) and
-  (info_flow_tests__test_04__c2__assume = 5)))
-
-axiom H3 : (info_flow_tests__test_04__c2__assume = c2)
-
-axiom H4 : in_range(c2)
-
-axiom H5 : ((info_flow_tests__test_04__c3__assume = f2(5, a)) and
-  (in_range(info_flow_tests__test_04__c3__assume) and
-  (info_flow_tests__test_04__c3__assume = (a + 5))))
-
-axiom H6 : (info_flow_tests__test_04__c3__assume = c3)
-
-axiom H7 : in_range(c3)
-
-axiom H8 : ((info_flow_tests__test_04__c4__assume = f3(5, a)) and
-  (in_range(info_flow_tests__test_04__c4__assume) and
-  (info_flow_tests__test_04__c4__assume = 5)))
-
-axiom H9 : (info_flow_tests__test_04__c4__assume = c4)
-
-axiom H10 : in_range(c4)
-
-axiom H11 : (a = c5)
-
-axiom H12 : in_range(c5)
-
  (* File "info_flow_tests.adb", line 53, characters 0-0 *)
-goal WP_parameter_def : (0 <  c3)
+goal WP_parameter_def :
+  (forall a:int. forall info_flow_tests__test_04__c2__assume:int.
+  forall info_flow_tests__test_04__c3__assume:int.
+  forall info_flow_tests__test_04__c4__assume:int. (in_range(a) ->
+  (in_range(c1) -> ((((info_flow_tests__test_04__c2__assume = f1(5)) and
+  (in_range(info_flow_tests__test_04__c2__assume) and
+  (info_flow_tests__test_04__c2__assume = 5))) and
+  (info_flow_tests__test_04__c2__assume = c2)) -> (in_range(c2) ->
+  ((((info_flow_tests__test_04__c3__assume = f2(5, a)) and
+  (in_range(info_flow_tests__test_04__c3__assume) and
+  (info_flow_tests__test_04__c3__assume = (a + 5)))) and
+  (info_flow_tests__test_04__c3__assume = c3)) -> (in_range(c3) ->
+  ((((info_flow_tests__test_04__c4__assume = f3(5, a)) and
+  (in_range(info_flow_tests__test_04__c4__assume) and
+  (info_flow_tests__test_04__c4__assume = 5))) and
+  (info_flow_tests__test_04__c4__assume = c4)) -> (in_range(c4) ->
+  ((a = c5) -> (in_range(c5) -> (0 <  c3))))))))))))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -86,35 +86,12 @@ axiom original__post_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : bool
-
-logic o : bool
-
-logic o1 : bool
-
-logic result : bool
-
-logic x1 : bool
-
-logic result1 : bool
-
-logic x2 : bool
-
-axiom H : ((o = original(of_int(0))) and ((o = true) <->
-  (not (of_int(0) = true))))
-
-axiom H1 : (result = x)
-
-axiom H2 : (x1 = o)
-
-axiom H3 : (x1 = true)
-
-axiom H4 : ((o1 = original(of_int(1))) and ((o1 = true) <->
-  (not (of_int(1) = true))))
-
-axiom H5 : (result1 = x1)
-
-axiom H6 : (x2 = o1)
-
  (* File "report.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (not (x2 = true))
+goal WP_parameter_def :
+  (forall x:bool. forall o:bool. forall o1:bool. forall result:bool.
+  forall x1:bool. forall result1:bool. forall x2:bool.
+  ((((o = original(of_int(0))) and ((o = true) <->
+  (not (of_int(0) = true)))) and ((result = x) and (x1 = o))) ->
+  ((x1 = true) -> ((((o1 = original(of_int(1))) and ((o1 = true) <->
+  (not (of_int(1) = true)))) and ((result1 = x1) and (x2 = o1))) ->
+  (not (x2 = true))))))

@@ -594,12 +594,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -611,6 +605,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -706,26 +706,37 @@ logic axiom__ : unit -> bool
 
 logic axiom____function_guard : bool, unit -> prop
 
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 255)
+
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 1)
+
 axiom axiom____post_axiom : ((axiom__(void) = true) ->
-  (forall v:t. ((ule(of_int(0), v) and ule(v, of_int(255))) ->
+  (forall v:t. ((ule(rliteral, v) and ule(v, rliteral1)) ->
   (forall n:int. (((0 <= n) and (n <= 7)) -> ((((n <  256) and (bw_and(v,
-  lsl_bv(of_int(1), of_int(n))) = of_int(0))) or ((not (n <  256)) and
-  (bw_and(v, of_int(0)) = of_int(0)))) -> (((n <  256) -> (((n <  256) ->
-  (((n <  256) -> (bw_and(add(v, lsl_bv(of_int(1), of_int(n))),
-  lsl_bv(of_int(1), of_int(n))) = lsl_bv(of_int(1), of_int(n)))) and
-  ((not (n <  256)) -> (bw_and(add(v, lsl_bv(of_int(1), of_int(n))),
-  lsl_bv(of_int(1), of_int(n))) = of_int(0))))) and ((not (n <  256)) ->
-  (((n <  256) -> (bw_and(add(v, lsl_bv(of_int(1), of_int(n))),
-  of_int(0)) = lsl_bv(of_int(1), of_int(n)))) and ((not (n <  256)) ->
-  (bw_and(add(v, lsl_bv(of_int(1), of_int(n))),
-  of_int(0)) = of_int(0))))))) and ((not (n <  256)) -> (((n <  256) ->
-  (((n <  256) -> (bw_and(add(v, of_int(0)), lsl_bv(of_int(1),
-  of_int(n))) = lsl_bv(of_int(1), of_int(n)))) and ((not (n <  256)) ->
-  (bw_and(add(v, of_int(0)), lsl_bv(of_int(1),
-  of_int(n))) = of_int(0))))) and ((not (n <  256)) -> (((n <  256) ->
-  (bw_and(add(v, of_int(0)), of_int(0)) = lsl_bv(of_int(1), of_int(n)))) and
-  ((not (n <  256)) -> (bw_and(add(v, of_int(0)),
-  of_int(0)) = of_int(0))))))))))))))
+  lsl_bv(rliteral2, of_int(n))) = rliteral)) or ((not (n <  256)) and
+  (bw_and(v, rliteral) = rliteral))) -> (((n <  256) -> (((n <  256) ->
+  (((n <  256) -> (bw_and(add(v, lsl_bv(rliteral2, of_int(n))),
+  lsl_bv(rliteral2, of_int(n))) = lsl_bv(rliteral2, of_int(n)))) and
+  ((not (n <  256)) -> (bw_and(add(v, lsl_bv(rliteral2, of_int(n))),
+  lsl_bv(rliteral2, of_int(n))) = rliteral)))) and ((not (n <  256)) ->
+  (((n <  256) -> (bw_and(add(v, lsl_bv(rliteral2, of_int(n))),
+  rliteral) = lsl_bv(rliteral2, of_int(n)))) and ((not (n <  256)) ->
+  (bw_and(add(v, lsl_bv(rliteral2, of_int(n))),
+  rliteral) = rliteral)))))) and ((not (n <  256)) -> (((n <  256) ->
+  (((n <  256) -> (bw_and(add(v, rliteral), lsl_bv(rliteral2,
+  of_int(n))) = lsl_bv(rliteral2, of_int(n)))) and ((not (n <  256)) ->
+  (bw_and(add(v, rliteral), lsl_bv(rliteral2, of_int(n))) = rliteral)))) and
+  ((not (n <  256)) -> (((n <  256) -> (bw_and(add(v, rliteral),
+  rliteral) = lsl_bv(rliteral2, of_int(n)))) and ((not (n <  256)) ->
+  (bw_and(add(v, rliteral), rliteral) = rliteral)))))))))))))
 
 logic amount : int
 
@@ -799,186 +810,64 @@ function t582s__ref___projection(a: t582s__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic result__ : t
-
-logic i : int
-
-logic bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result : t
-
-logic temp___400 : int
-
-logic temp___399 : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic result : t
-
-logic result__1 : t
-
-logic result1 : int
-
-logic i1 : int
-
-logic result2 : t
-
-logic result__2 : t
-
-logic result__3 : t
-
-logic i2 : int
-
-logic result3 : int
-
-logic i3 : int
-
-logic result4 : t
-
-logic result__4 : t
-
-logic result__5 : t
-
-logic i4 : int
-
-logic result__6 : t
-
-logic i5 : int
-
-logic result__7 : t
-
-logic i6 : int
-
-logic result__8 : t
-
-logic i7 : int
-
-logic result__9 : t
-
-logic i8 : int
-
-logic result__10 : t
-
-logic i9 : int
-
-logic result5 : t
-
-logic bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result1 : t
-
-logic bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result2 : t
-
-logic bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result3 : t
-
-logic result__11 : t
-
-logic i10 : int
-
-logic bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result4 : t
-
-logic result__12 : t
-
-logic i11 : int
-
-logic bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result5 : t
-
-logic result6 : t
-
-axiom H : in_range1(amount)
-
-axiom H1 : (result = result__)
-
-axiom H2 : (result__1 = of_int(0))
-
-axiom H3 : true
-
-axiom H4 : (axiom__(void) = true)
-
-axiom H5 : (result1 = i)
-
-axiom H6 : (i1 = 1)
-
-axiom H7 : (((1 <= i1) and (i1 <= amount)) -> (((temp___400 = i1) and
-  ((temp___399 = result__1) and (((((((i1 - 1) <  256) ->
-  (o = lsl_bv(of_int(1), of_int((i1 - 1))))) and ((not ((i1 - 1) <  256)) ->
-  (o = of_int(0)))) and (o1 = add(result__1, o))) and
-  ((result__1 = result2) and (result__2 = o1))) and (((((i2 - 1) <  256) ->
-  ((((i2 - 1) <  256) -> (bw_and(result__3, lsl_bv(of_int(1),
-  of_int((i2 - 1)))) = lsl_bv(of_int(1), of_int((i2 - 1))))) and
-  ((not ((i2 - 1) <  256)) -> (bw_and(result__3, lsl_bv(of_int(1),
-  of_int((i2 - 1)))) = of_int(0))))) and ((not ((i2 - 1) <  256)) ->
-  ((((i2 - 1) <  256) -> (bw_and(result__3, of_int(0)) = lsl_bv(of_int(1),
-  of_int((i2 - 1))))) and ((not ((i2 - 1) <  256)) -> (bw_and(result__3,
-  of_int(0)) = of_int(0)))))) and ((((1 <= amount) -> dynamic_property(1,
-  amount, i2)) and ((1 <= i2) and (i2 <= amount))) and (i2 = amount)))))) and
-  (((i2 = i6) and (result__3 = result__7)) and ((i7 = i2) and
-  (result__8 = result__3)))))
-
-axiom H8 : (((1 <= i1) and (i1 <= amount)) -> (i8 = i6))
-
-axiom H9 : (((1 <= i1) and (i1 <= amount)) -> (result__9 = result__7))
-
-axiom H10 : (((1 <= i1) and (i1 <= amount)) -> (i9 = i7))
-
-axiom H11 : (((1 <= i1) and (i1 <= amount)) -> (result__10 = result__8))
-
-axiom H12 : ((not ((1 <= i1) and (i1 <= amount))) -> (i1 = i8))
-
-axiom H13 : ((not ((1 <= i1) and (i1 <= amount))) -> (result__1 = result__9))
-
-axiom H14 : ((not ((1 <= i1) and (i1 <= amount))) -> (i9 = i1))
-
-axiom H15 : ((not ((1 <= i1) and (i1 <= amount))) ->
-  (result__10 = result__1))
-
-axiom H16 :
-  (bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result1 = bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result2)
-
-axiom H17 :
-  (bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result3 = bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result1)
-
-axiom H18 :
-  (result5 = bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result)
-
-axiom H19 :
-  (bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result1 = result__9)
-
-axiom H20 :
-  (bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result4 = bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result2)
-
-axiom H21 : (i10 = i8)
-
-axiom H22 : (result__11 = result__9)
-
-axiom H23 :
-  (bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result5 = bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result3)
-
-axiom H24 : (i11 = i9)
-
-axiom H25 : (result__12 = result__10)
-
-axiom H26 :
-  (result6 = bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result4)
-
-logic i12 : int
-
-axiom H27 : (1 <= i12)
-
-axiom H28 : (i12 <= amount)
-
  (* File "bits_manipulation.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : ((((i12 - 1) <  256) -> ((((i12 - 1) <  256) ->
+goal WP_parameter_def :
+  (forall result__:t. forall i:int.
+  forall bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result:t.
+  forall temp___460:int. forall temp___459:t. forall o:t. forall o1:t.
+  forall result:t. forall result__1:t. forall result1:int. forall i1:int.
+  forall result2:t. forall result__2:t. forall result__3:t. forall i2:int.
+  forall result__4:t. forall i3:int. forall result__5:t. forall i4:int.
+  forall result__6:t. forall i5:int. forall result__7:t. forall i6:int.
+  forall result3:t.
+  forall bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result1:t.
+  forall bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result2:t.
+  forall bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result3:t.
+  forall result__8:t. forall i7:int.
+  forall bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result4:t.
+  forall result__9:t. forall i8:int.
+  forall bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result5:t.
+  (forall result4:t. ((in_range1(amount) and ((((({ t__content = result } = {
+  t__content = result__ }) and (result__1 = rliteral)) and
+  ((axiom__(void) = true) and (((({ int__content = result1 } = {
+  int__content = i }) and (i1 = 1)) and ((((1 <= i1) and (i1 <= amount)) and
+  ((((temp___460 = i1) and ((temp___459 = result__1) and
+  (((((((i1 - 1) <  256) and (o = lsl_bv(rliteral2, of_int((i1 - 1))))) or
+  ((not ((i1 - 1) <  256)) and (o = rliteral))) and (o1 = add(result__1,
+  o))) and ((result__1 = result2) and (result__2 = o1))) and
+  (((((i2 - 1) <  256) and ((((i2 - 1) <  256) and (bw_and(result__3,
+  lsl_bv(rliteral2, of_int((i2 - 1)))) = lsl_bv(rliteral2,
+  of_int((i2 - 1))))) or ((not ((i2 - 1) <  256)) and (bw_and(result__3,
+  lsl_bv(rliteral2, of_int((i2 - 1)))) = rliteral)))) or
+  ((not ((i2 - 1) <  256)) and ((((i2 - 1) <  256) and (bw_and(result__3,
+  rliteral) = lsl_bv(rliteral2, of_int((i2 - 1))))) or
+  ((not ((i2 - 1) <  256)) and (bw_and(result__3,
+  rliteral) = rliteral))))) and ((((1 <= amount) -> dynamic_property(1,
+  amount, i2)) and ((1 <= i2) and (i2 <= amount))) and (i2 = amount)))))) and
+  (((i2 = i3) and (result__3 = result__4)) and ((i4 = i2) and
+  (result__5 = result__3)))) and (((i5 = i3) and (result__6 = result__4)) and
+  ((i6 = i4) and (result__7 = result__5))))) or ((not ((1 <= i1) and
+  (i1 <= amount))) and (((i1 = i5) and (result__1 = result__6)) and
+  ((i6 = i1) and (result__7 = result__1)))))) and
+  (((bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result1 = bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result2) and
+  (bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result3 = bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result1)) and
+  ((result3 = bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result) and
+  (bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result1 = result__6)))))) and
+  (((bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result4 = bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result2) and
+  ((i7 = i5) and (result__8 = result__6))) and
+  ((bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result5 = bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result3) and
+  ((i8 = i6) and (result__9 = result__7))))) and
+  (result4 = bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result4))) ->
+  (forall i9:int. (((1 <= i9) and (i9 <= amount)) -> ((((i9 - 1) <  256) ->
+  ((((i9 - 1) <  256) ->
   (bw_and(bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result4,
-  lsl_bv(of_int(1), of_int((i12 - 1)))) = lsl_bv(of_int(1),
-  of_int((i12 - 1))))) and ((not ((i12 - 1) <  256)) ->
+  lsl_bv(rliteral2, of_int((i9 - 1)))) = lsl_bv(rliteral2,
+  of_int((i9 - 1))))) and ((not ((i9 - 1) <  256)) ->
   (bw_and(bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result4,
-  lsl_bv(of_int(1), of_int((i12 - 1)))) = of_int(0))))) and
-  ((not ((i12 - 1) <  256)) -> ((((i12 - 1) <  256) ->
+  lsl_bv(rliteral2, of_int((i9 - 1)))) = rliteral)))) and
+  ((not ((i9 - 1) <  256)) -> ((((i9 - 1) <  256) ->
   (bw_and(bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result4,
-  of_int(0)) = lsl_bv(of_int(1), of_int((i12 - 1))))) and
-  ((not ((i12 - 1) <  256)) ->
+  rliteral) = lsl_bv(rliteral2, of_int((i9 - 1))))) and
+  ((not ((i9 - 1) <  256)) ->
   (bw_and(bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__ones__result4,
-  of_int(0)) = of_int(0))))))
+  rliteral) = rliteral))))))))))

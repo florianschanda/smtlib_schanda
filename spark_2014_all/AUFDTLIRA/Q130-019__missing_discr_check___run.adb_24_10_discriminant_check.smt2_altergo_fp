@@ -186,24 +186,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -214,17 +196,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -234,37 +216,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 logic to_rep1 : integer -> int
 
@@ -895,312 +849,108 @@ logic c13 : bool
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic temp___String_Literal_223 : unit -> (int,character) farray
+logic temp___String_Literal_253 : unit -> (int,character) farray
 
-axiom temp___String_Literal_223__def_axiom :
-  ((to_rep((temp___String_Literal_223(void)[1])) = 89) and
-  (to_rep((temp___String_Literal_223(void)[2])) = 50))
+axiom temp___String_Literal_253__def_axiom :
+  ((to_rep((temp___String_Literal_253(void)[1])) = 89) and
+  (to_rep((temp___String_Literal_253(void)[2])) = 50))
 
-logic temp___String_Literal_225 : unit -> (int,character) farray
+logic temp___String_Literal_255 : unit -> (int,character) farray
 
-axiom temp___String_Literal_225__def_axiom :
-  ((to_rep((temp___String_Literal_225(void)[1])) = 90) and
-  (to_rep((temp___String_Literal_225(void)[2])) = 50))
+axiom temp___String_Literal_255__def_axiom :
+  ((to_rep((temp___String_Literal_255(void)[1])) = 90) and
+  (to_rep((temp___String_Literal_255(void)[2])) = 50))
 
-logic temp___String_Literal_229 : unit -> (int,character) farray
+logic temp___String_Literal_259 : unit -> (int,character) farray
 
-axiom temp___String_Literal_229__def_axiom :
-  ((to_rep((temp___String_Literal_229(void)[1])) = 89) and
-  (to_rep((temp___String_Literal_229(void)[2])) = 49))
+axiom temp___String_Literal_259__def_axiom :
+  ((to_rep((temp___String_Literal_259(void)[1])) = 89) and
+  (to_rep((temp___String_Literal_259(void)[2])) = 49))
 
-logic temp___String_Literal_233 : unit -> (int,character) farray
+logic temp___String_Literal_263 : unit -> (int,character) farray
 
-axiom temp___String_Literal_233__def_axiom :
-  ((to_rep((temp___String_Literal_233(void)[1])) = 90) and
-  (to_rep((temp___String_Literal_233(void)[2])) = 49))
+axiom temp___String_Literal_263__def_axiom :
+  ((to_rep((temp___String_Literal_263(void)[1])) = 90) and
+  (to_rep((temp___String_Literal_263(void)[2])) = 49))
 
 axiom c1__def_axiom : ((c1 = of_rep2(0)) and (((c11 = of_rep1(1)) and
   (c12 = dummy)) and (c13 = true)))
 
-logic y1__split_fields : integer
-
-logic y1__split_fields1 : integer
-
-logic y1__split_discrs : enum
-
-logic y2__split_fields : integer
-
-logic y2__split_fields1 : integer
-
-logic y2__split_discrs : enum
-
-logic z2__split_fields : integer
-
-logic z2__split_fields1 : integer
-
-logic o : enum
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic o3 : integer
-
-logic o4 : enum
-
-logic o5 : enum
-
-logic o6 : integer
-
-logic o7 : integer
-
-logic o8 : bool
-
-logic o9 : enum
-
-logic o10 : integer
-
-logic o11 : integer
-
-logic o12 : bool
-
-logic temp___238 : enum
-
-logic temp___2381 : integer
-
-logic temp___2382 : integer
-
-logic temp___2383 : bool
-
-logic temp___220 : enum
-
-logic temp___2201 : integer
-
-logic temp___2202 : integer
-
-logic temp___2203 : bool
-
-logic usq_ : enum
-
-logic usq_1 : integer
-
-logic usq_2 : integer
-
-logic usq_3 : bool
-
-logic temp___222 : enum
-
-logic temp___2221 : integer
-
-logic temp___2222 : integer
-
-logic temp___2223 : bool
-
-logic o13 : enum
-
-logic o14 : integer
-
-logic o15 : integer
-
-logic o16 : bool
-
-logic o17 : enum
-
-logic o18 : integer
-
-logic o19 : integer
-
-logic o20 : bool
-
-logic temp___224 : enum
-
-logic temp___2241 : integer
-
-logic temp___2242 : integer
-
-logic temp___2243 : bool
-
-logic temp___226 : enum
-
-logic temp___2261 : integer
-
-logic temp___2262 : integer
-
-logic temp___2263 : bool
-
-logic usq_4 : enum
-
-logic usq_5 : integer
-
-logic usq_6 : integer
-
-logic usq_7 : bool
-
-logic temp___228 : enum
-
-logic temp___2281 : integer
-
-logic temp___2282 : integer
-
-logic temp___2283 : bool
-
-logic usq_8 : enum
-
-logic usq_9 : integer
-
-logic usq_10 : integer
-
-logic usq_11 : bool
-
-logic temp___231 : enum
-
-logic temp___2311 : integer
-
-logic temp___2312 : integer
-
-logic temp___2313 : bool
-
-logic o21 : enum
-
-logic o22 : integer
-
-logic o23 : integer
-
-logic o24 : bool
-
-logic o25 : enum
-
-logic o26 : integer
-
-logic o27 : integer
-
-logic o28 : bool
-
-logic result : integer
-
-logic result1 : integer
-
-logic y2__split_fields2 : integer
-
-logic y2__split_fields3 : integer
-
-logic result2 : enum
-
-logic y2__split_discrs1 : enum
-
-logic result3 : integer
-
-logic result4 : integer
-
-logic z2__split_fields2 : integer
-
-logic z2__split_fields3 : integer
-
-logic result5 : integer
-
-logic result6 : integer
-
-logic y1__split_fields2 : integer
-
-logic y1__split_fields3 : integer
-
-logic result7 : enum
-
-logic y1__split_discrs1 : enum
-
-logic result8 : integer
-
-logic result9 : integer
-
-logic y1__split_fields4 : integer
-
-logic y1__split_fields5 : integer
-
-logic result10 : enum
-
-logic y1__split_discrs2 : enum
-
-axiom H : ((0 = to_rep2(c1)) and (c13 = true))
-
-axiom H1 : (to_rep1(o1) = 1)
-
-axiom H2 : (o1 = o2)
-
-axiom H3 : (dummy = o3)
-
-axiom H4 : (to_rep2(o) = 0)
-
-axiom H5 : (o = o4)
-
-axiom H6 : (o5 = o4)
-
-axiom H7 : (o6 = o2)
-
-axiom H8 : (o7 = o3)
-
-axiom H9 : (true = o8)
-
-axiom H10 : ((o9 = o5) and (((o10 = o6) and (o11 = o7)) and (o12 = o8)))
-
-axiom H11 : ((temp___238 = o9) and (((temp___2381 = o10) and
-  (temp___2382 = o11)) and (temp___2383 = o12)))
-
-axiom H12 : ((temp___238 = c1) and (((temp___2381 = c11) and
-  (temp___2382 = c12)) and (temp___2383 = c13)))
-
-axiom H13 : (y1__attr__constrained = false)
-
-axiom H14 : (y2__attr__constrained = false)
-
-axiom H15 : ((0 = to_rep2(z1__split_discrs)) and
-  (z1__attr__constrained = true))
-
-axiom H16 : ((1 = to_rep2(z2__split_discrs)) and
-  (z2__attr__constrained = true))
-
-axiom H17 : ({ us_split_discrs1 = { rec__p_init__t__e = temp___220 };
-  us_split_fields1 = { rec__p_init__t__x1 = temp___2201; rec__p_init__t__x2 =
-  temp___2202 }; attr__constrained = temp___2203 } = init(void))
-
-axiom H18 : ((y2__attr__constrained = true) ->
-  (temp___220 = y2__split_discrs))
-
-axiom H19 : ((usq_ = temp___220) and (((usq_1 = temp___2201) and
-  (usq_2 = temp___2202)) and (usq_3 = temp___2203)))
-
-axiom H20 : ((temp___222 = usq_) and (((temp___2221 = usq_1) and
-  (temp___2222 = usq_2)) and (temp___2223 = y2__attr__constrained)))
-
-axiom H21 : ((result = y2__split_fields) and (result1 = y2__split_fields1))
-
-axiom H22 : ((y2__split_fields2 = temp___2221) and
-  (y2__split_fields3 = temp___2222))
-
-axiom H23 : (result2 = y2__split_discrs)
-
-axiom H24 : (y2__split_discrs1 = temp___222)
-
-axiom H25 : ({ us_split_discrs1 = { rec__p_init__t__e = o13 };
-  us_split_fields1 = { rec__p_init__t__x1 = o14; rec__p_init__t__x2 = o15 };
-  attr__constrained = o16 } = init(void))
-
-axiom H26 : ((o17 = o13) and (((o18 = o14) and (o19 = o15)) and (o20 = o16)))
-
-axiom H27 : ((temp___224 = o17) and (((temp___2241 = o18) and
-  (temp___2242 = o19)) and (temp___2243 = o20)))
-
-axiom H28 : ((result3 = z2__split_fields) and (result4 = z2__split_fields1))
-
-axiom H29 : ((z2__split_fields2 = temp___2241) and
-  (z2__split_fields3 = temp___2242))
-
-axiom H30 : (z2__split_discrs = temp___224)
-
-axiom H31 : ({ us_split_discrs1 = { rec__p_init__t__e = temp___226 };
-  us_split_fields1 = { rec__p_init__t__x1 = temp___2261; rec__p_init__t__x2 =
-  temp___2262 }; attr__constrained = temp___2263 } = init(void))
-
-axiom H32 : (y1__attr__constrained = true)
-
  (* File "run.adb", line 15, characters 0-0 *)
-goal WP_parameter_def : (temp___226 = y1__split_discrs)
+goal WP_parameter_def :
+  (forall y1__split_discrs:enum. forall y2__split_fields:integer.
+  forall y2__split_fields1:integer. forall y2__split_discrs:enum.
+  forall z2__split_fields:integer. forall z2__split_fields1:integer.
+  forall o:enum. forall o1:integer. forall o2:integer. forall o3:integer.
+  forall o4:enum. forall o5:enum. forall o6:integer. forall o7:integer.
+  forall o8:bool. forall o9:enum. forall o10:integer. forall o11:integer.
+  forall o12:bool. forall temp___268:enum. forall temp___2681:integer.
+  forall temp___2682:integer. forall temp___2683:bool.
+  forall temp___250:enum. forall temp___2501:integer.
+  forall temp___2502:integer. forall temp___2503:bool. forall usq_:enum.
+  forall usq_1:integer. forall usq_2:integer. forall usq_3:bool.
+  forall temp___252:enum. forall temp___2521:integer.
+  forall temp___2522:integer. forall temp___2523:bool. forall o13:enum.
+  forall o14:integer. forall o15:integer. forall o16:bool. forall o17:enum.
+  forall o18:integer. forall o19:integer. forall o20:bool.
+  forall temp___254:enum. forall temp___2541:integer.
+  forall temp___2542:integer. forall temp___2543:bool.
+  forall temp___256:enum. forall temp___2561:integer.
+  forall temp___2562:integer. forall temp___2563:bool.
+  forall result:us_split_fields__ref.
+  forall y2__split_fields2:us_split_fields.
+  forall result1:us_split_discrs__ref.
+  forall y2__split_discrs1:us_split_discrs.
+  forall result2:us_split_fields__ref.
+  forall z2__split_fields2:us_split_fields. (((0 = to_rep2(c1)) and
+  (c13 = true)) -> (((((((to_rep1(o1) = 1) and ((o1 = o2) and
+  (dummy = o3))) and (((to_rep2(o) = 0) and (o = o4)) and ((o5 = o4) and
+  (((o6 = o2) and (o7 = o3)) and (true = o8))))) and ((o5 = o9) and
+  (((o6 = o10) and (o7 = o11)) and (o8 = o12)))) and ({ us_split_discrs1 = {
+  rec__p_init__t__e = temp___268 }; us_split_fields1 = { rec__p_init__t__x1 =
+  temp___2681; rec__p_init__t__x2 = temp___2682 }; attr__constrained =
+  temp___2683 } = { us_split_discrs1 = { rec__p_init__t__e = o9 };
+  us_split_fields1 = { rec__p_init__t__x1 = o10; rec__p_init__t__x2 = o11 };
+  attr__constrained = o12 })) and ((c1 = temp___268) and
+  (((c11 = temp___2681) and (c12 = temp___2682)) and
+  (c13 = temp___2683)))) -> ((y1__attr__constrained = false) ->
+  ((y2__attr__constrained = false) -> (((0 = to_rep2(z1__split_discrs)) and
+  (z1__attr__constrained = true)) -> (((1 = to_rep2(z2__split_discrs)) and
+  (z2__attr__constrained = true)) -> ((((({ us_split_discrs1 = {
+  rec__p_init__t__e = temp___250 }; us_split_fields1 = { rec__p_init__t__x1 =
+  temp___2501; rec__p_init__t__x2 = temp___2502 }; attr__constrained =
+  temp___2503 } = init(void)) and ((((y2__attr__constrained = true) and
+  (temp___250 = y2__split_discrs)) or
+  (not (y2__attr__constrained = true))) and ({ us_split_discrs1 = {
+  rec__p_init__t__e = usq_ }; us_split_fields1 = { rec__p_init__t__x1 =
+  usq_1; rec__p_init__t__x2 = usq_2 }; attr__constrained = usq_3 } = {
+  us_split_discrs1 = { rec__p_init__t__e = temp___250 }; us_split_fields1 = {
+  rec__p_init__t__x1 = temp___2501; rec__p_init__t__x2 = temp___2502 };
+  attr__constrained = temp___2503 }))) and ((usq_ = temp___252) and
+  (((usq_1 = temp___2521) and (usq_2 = temp___2522)) and
+  (y2__attr__constrained = temp___2523)))) and (((result = {
+  us_split_fields__content = { rec__p_init__t__x1 = y2__split_fields;
+  rec__p_init__t__x2 = y2__split_fields1 } }) and (y2__split_fields2 = {
+  rec__p_init__t__x1 = temp___2521; rec__p_init__t__x2 = temp___2522 })) and
+  ((result1 = { us_split_discrs__content = { rec__p_init__t__e =
+  y2__split_discrs } }) and (y2__split_discrs1 = { rec__p_init__t__e =
+  temp___252 })))) -> ((((({ us_split_discrs1 = { rec__p_init__t__e = o13 };
+  us_split_fields1 = { rec__p_init__t__x1 = o14; rec__p_init__t__x2 = o15 };
+  attr__constrained = o16 } = init(void)) and ({ us_split_discrs1 = {
+  rec__p_init__t__e = o17 }; us_split_fields1 = { rec__p_init__t__x1 = o18;
+  rec__p_init__t__x2 = o19 }; attr__constrained = o20 } = {
+  us_split_discrs1 = { rec__p_init__t__e = o13 }; us_split_fields1 = {
+  rec__p_init__t__x1 = o14; rec__p_init__t__x2 = o15 }; attr__constrained =
+  o16 })) and ({ us_split_discrs1 = { rec__p_init__t__e = temp___254 };
+  us_split_fields1 = { rec__p_init__t__x1 = temp___2541; rec__p_init__t__x2 =
+  temp___2542 }; attr__constrained = temp___2543 } = { us_split_discrs1 = {
+  rec__p_init__t__e = o17 }; us_split_fields1 = { rec__p_init__t__x1 = o18;
+  rec__p_init__t__x2 = o19 }; attr__constrained = o20 })) and (((result2 = {
+  us_split_fields__content = { rec__p_init__t__x1 = z2__split_fields;
+  rec__p_init__t__x2 = z2__split_fields1 } }) and (z2__split_fields2 = {
+  rec__p_init__t__x1 = temp___2541; rec__p_init__t__x2 = temp___2542 })) and
+  (z2__split_discrs = temp___254))) -> (({ us_split_discrs1 = {
+  rec__p_init__t__e = temp___256 }; us_split_fields1 = { rec__p_init__t__x1 =
+  temp___2561; rec__p_init__t__x2 = temp___2562 }; attr__constrained =
+  temp___2563 } = init(void)) -> ((y1__attr__constrained = true) ->
+  (temp___256 = y1__split_discrs))))))))))))

@@ -132,55 +132,14 @@ axiom return_x__post_axiom :
   in_range(return_x(test__unused_variables_2__x,
   test__unused_variables_2__y))))
 
-logic x : int
-
-logic y : int
-
-logic z : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic result : int
-
-logic x1 : int
-
-logic result1 : int
-
-logic y1 : int
-
-axiom H : in_range(par1)
-
-axiom H1 : in_range(par2)
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range(x))
-
-axiom H3 : (((- 2147483648) <= 2147483647) -> in_range(y))
-
-axiom H4 : (((- 2147483648) <= 2147483647) -> in_range(z))
-
-axiom H5 : (result = x)
-
-axiom H6 : (x1 = (- 11))
-
-axiom H7 : (result1 = y)
-
-axiom H8 : (y1 = 2)
-
-axiom H9 : ((o = return_x(x1, y1)) and in_range(o))
-
-axiom H10 : (o1 = (o + par1))
-
-axiom H11 : ((o2 = o1) and in_range(o1))
-
-axiom H12 : (o3 = (o2 - y1))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(o3)
+goal WP_parameter_def :
+  (forall x:int. forall y:int. forall z:int. forall o:int. forall o1:int.
+  forall o2:int. forall o3:int. forall result:int. forall x1:int.
+  forall result1:int. forall y1:int. (in_range(par1) -> (in_range(par2) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(x)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(y)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range(z)) -> (((result = x) and
+  (x1 = (- 11))) -> (((result1 = y) and (y1 = 2)) -> ((((((o = return_x(x1,
+  y1)) and in_range(o)) and (o1 = (o + par1))) and ((o2 = o1) and
+  in_range(o1))) and (o3 = (o2 - y1))) -> in_range(o3))))))))))

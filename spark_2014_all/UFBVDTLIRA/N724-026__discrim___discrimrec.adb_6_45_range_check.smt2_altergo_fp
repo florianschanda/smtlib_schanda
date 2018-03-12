@@ -2488,21 +2488,9 @@ logic rax__attr__constrained : bool
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic us : int
-
-logic us1 : int
-
-logic us2 : int
-
-axiom H : ((us = 0) and in_range(0))
-
-axiom H1 : ((rax__attr__constrained = true) and
-  (to_rep4(rax__split_discrs) = 0))
-
-axiom H2 : ((0 = to_rep4(rax__split_discrs)) and
-  (rax__attr__constrained = true))
-
-axiom H3 : ((us1 = 0) and in_range(0))
-
  (* File "discrimrec.adb", line 9, characters 0-0 *)
-goal WP_parameter_def : in_range(1)
+goal WP_parameter_def :
+  (forall us:int. forall us1:int. (((us = 0) and in_range(0)) ->
+  (((rax__attr__constrained = true) and (to_rep4(rax__split_discrs) = 0)) ->
+  (((0 = to_rep4(rax__split_discrs)) and (rax__attr__constrained = true)) ->
+  (((us1 = 0) and in_range(0)) -> in_range(1))))))

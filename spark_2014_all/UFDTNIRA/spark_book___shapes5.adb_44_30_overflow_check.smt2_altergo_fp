@@ -362,84 +362,25 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
-logic wild_man : int
-
-logic delta_x : int
-
-logic delta_y : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic result : int
-
-logic delta_x1 : int
-
-logic result1 : int
-
-logic delta_y1 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : in_range1(y)
-
-axiom H2 : in_range(wild_man)
-
-axiom H3 : (in_bounds({ us_split_fields1 = { rec__shapes5__circle__center_x =
-  c; rec__shapes5__circle__center_y = c1; rec__shapes5__circle__radius = c2 }
-  }, wild_man) = true)
-
-axiom H4 : ((0 <= 200) -> in_range3(delta_x))
-
-axiom H5 : ((0 <= 200) -> in_range3(delta_y))
-
-axiom H6 : ((o = abs_int((x - to_rep(c)))) and
-  in_range(abs_int((x - to_rep(c)))))
-
-axiom H7 : ((o1 = o) and in_range3(o))
-
-axiom H8 : (result = delta_x)
-
-axiom H9 : (delta_x1 = o1)
-
-axiom H10 : ((o2 = abs_int((y - to_rep(c1)))) and
-  in_range(abs_int((y - to_rep(c1)))))
-
-axiom H11 : ((o3 = o2) and in_range3(o2))
-
-axiom H12 : (result1 = delta_y)
-
-axiom H13 : (delta_y1 = o3)
-
-axiom H14 : ((o7 = (to_rep1(c2) * to_rep1(c2))) and
-  in_range((to_rep1(c2) * to_rep1(c2))))
-
-axiom H15 : ((o8 = o7) and in_range3(o7))
-
-axiom H16 : ((o4 = (delta_y1 * delta_y1)) and
-  in_range((delta_y1 * delta_y1)))
-
-axiom H17 : ((o5 = (delta_x1 * delta_x1)) and
-  in_range((delta_x1 * delta_x1)))
-
-axiom H18 : (o6 = (o5 + o4))
-
  (* File "shapes5.ads", line 17, characters 0-0 *)
-goal WP_parameter_def : in_range(o6)
+goal WP_parameter_def :
+  (forall wild_man:int. forall delta_x:int. forall delta_y:int. forall o:int.
+  forall o1:int. forall o2:int. forall o3:int. forall o4:int. forall o5:int.
+  forall o6:int. forall o7:int. forall o8:int. forall result:int.
+  forall delta_x1:int. forall result1:int. forall delta_y1:int.
+  (in_range1(x) -> (in_range1(y) -> (in_range(wild_man) -> ((in_bounds({
+  us_split_fields1 = { rec__shapes5__circle__center_x = c;
+  rec__shapes5__circle__center_y = c1; rec__shapes5__circle__radius = c2 } },
+  wild_man) = true) -> (((0 <= 200) -> in_range3(delta_x)) -> (((0 <= 200) ->
+  in_range3(delta_y)) -> (((((o = abs_int((x - to_rep(c)))) and
+  in_range(abs_int((x - to_rep(c))))) and ((o1 = o) and in_range3(o))) and
+  ((result = delta_x) and (delta_x1 = o1))) ->
+  (((((o2 = abs_int((y - to_rep(c1)))) and
+  in_range(abs_int((y - to_rep(c1))))) and ((o3 = o2) and in_range3(o2))) and
+  ((result1 = delta_y) and (delta_y1 = o3))) ->
+  ((((o7 = (to_rep1(c2) * to_rep1(c2))) and
+  in_range((to_rep1(c2) * to_rep1(c2)))) and ((o8 = o7) and
+  in_range3(o7))) -> ((((o4 = (delta_y1 * delta_y1)) and
+  in_range((delta_y1 * delta_y1))) and (((o5 = (delta_x1 * delta_x1)) and
+  in_range((delta_x1 * delta_x1))) and (o6 = (o5 + o4)))) ->
+  in_range(o6))))))))))))

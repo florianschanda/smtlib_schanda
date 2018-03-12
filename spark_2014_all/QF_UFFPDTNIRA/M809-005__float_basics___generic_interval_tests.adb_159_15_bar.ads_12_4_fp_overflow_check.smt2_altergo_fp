@@ -1039,12 +1039,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1056,6 +1050,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1118,30 +1118,10 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic z : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic result : t
-
-logic z1 : t
-
-logic z2 : t
-
-logic z3 : t
-
-axiom H : tqtisFinite(x)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0))
-
-axiom H1 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(z))
 
 logic fliteral2 : t
 
@@ -1163,13 +1143,14 @@ logic fliteral5 : t
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 20.0))
 
-axiom H2 : ((le(fliteral2, x) and le(x, fliteral3)) and (le(fliteral4, x) and
-  le(x, fliteral5)))
-
 logic fliteral6 : t
 
 axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
   (tqtreal(fliteral6) = 2.0))
 
  (* File "generic_interval_tests.adb", line 144, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(mul(NearestTiesToEven, x, fliteral6))
+goal WP_parameter_def :
+  (forall z:t. (tqtisFinite(x) -> ((le(neg(fliteral1), fliteral1) ->
+  tqtisFinite(z)) -> (((le(fliteral2, x) and le(x, fliteral3)) and
+  (le(fliteral4, x) and le(x, fliteral5))) ->
+  tqtisFinite(mul(NearestTiesToEven, x, fliteral6))))))

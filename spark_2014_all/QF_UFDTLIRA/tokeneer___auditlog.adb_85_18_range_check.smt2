@@ -29,7 +29,7 @@
 (declare-const dummy logfileindext)
 (declare-datatypes () ((logfileindext__ref (mk_logfileindext__ref (logfileindext__content logfileindext)))))
 (define-fun logfileindext__ref___projection ((a logfileindext__ref)) logfileindext (logfileindext__content a))
-(define-fun dynamic_invariant ((temp___expr_1072 Int) (temp___is_init_1069 Bool) (temp___skip_constant_1070 Bool) (temp___do_toplevel_1071 Bool)) Bool (=> (or (= temp___is_init_1069 true) (<= 1 17)) (in_range temp___expr_1072)))
+(define-fun dynamic_invariant ((temp___expr_1211 Int) (temp___is_init_1207 Bool) (temp___skip_constant_1208 Bool) (temp___do_toplevel_1209 Bool) (temp___do_typ_inv_1210 Bool)) Bool (=> (or (= temp___is_init_1207 true) (<= 1 17)) (in_range temp___expr_1211)))
 (declare-const value Int)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (assert (in_range value))

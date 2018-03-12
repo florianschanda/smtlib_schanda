@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -686,347 +686,107 @@ type t23b__ref = { t23b__content : us_rep
 
 function t23b__ref___projection(a: t23b__ref) : us_rep = (a).t23b__content
 
-logic t__split_fields : natural
-
-logic t__split_fields1 : natural
-
-logic t__split_fields2 : natural
-
-logic t__split_fields3 : name_id
-
-logic t__split_discrs : token_kind
-
-logic first_line : int
-
-logic first_col : int
-
-logic o : token_kind
-
-logic o1 : natural
-
-logic o2 : natural
-
-logic o3 : natural
-
-logic o4 : natural
-
-logic o5 : natural
-
-logic o6 : natural
-
-logic o7 : name_id
-
-logic o8 : token_kind
-
-logic temp___934 : token_kind
-
-logic temp___9341 : natural
-
-logic temp___9342 : natural
-
-logic temp___9343 : natural
-
-logic temp___9344 : name_id
-
-logic temp___9345 : bool
-
-logic usq_ : token_kind
-
-logic usq_1 : natural
-
-logic usq_2 : natural
-
-logic usq_3 : natural
-
-logic usq_4 : name_id
-
-logic usq_5 : bool
-
-logic temp___936 : token_kind
-
-logic temp___9361 : natural
-
-logic temp___9362 : natural
-
-logic temp___9363 : natural
-
-logic temp___9364 : name_id
-
-logic temp___9365 : bool
-
-logic o9 : token_kind
-
-logic o10 : natural
-
-logic o11 : natural
-
-logic o12 : natural
-
-logic o13 : natural
-
-logic o14 : natural
-
-logic o15 : natural
-
-logic o16 : name_id
-
-logic o17 : token_kind
-
-logic temp___937 : token_kind
-
-logic temp___9371 : natural
-
-logic temp___9372 : natural
-
-logic temp___9373 : natural
-
-logic temp___9374 : name_id
-
-logic temp___9375 : bool
-
-logic usq_6 : token_kind
-
-logic usq_7 : natural
-
-logic usq_8 : natural
-
-logic usq_9 : natural
-
-logic usq_10 : name_id
-
-logic usq_11 : bool
-
-logic temp___939 : token_kind
-
-logic temp___9391 : natural
-
-logic temp___9392 : natural
-
-logic temp___9393 : natural
-
-logic temp___9394 : name_id
-
-logic temp___9395 : bool
-
-logic result : natural
-
-logic result1 : natural
-
-logic result2 : natural
-
-logic result3 : name_id
-
-logic t__split_fields4 : natural
-
-logic t__split_fields5 : natural
-
-logic t__split_fields6 : natural
-
-logic t__split_fields7 : name_id
-
-logic result4 : token_kind
-
-logic t__split_discrs1 : token_kind
-
-logic result5 : natural
-
-logic result6 : natural
-
-logic result7 : natural
-
-logic result8 : name_id
-
-logic t__split_fields8 : natural
-
-logic t__split_fields9 : natural
-
-logic t__split_fields10 : natural
-
-logic t__split_fields11 : name_id
-
-logic result9 : token_kind
-
-logic t__split_discrs2 : token_kind
-
-logic t__split_fields12 : natural
-
-logic t__split_fields13 : natural
-
-logic t__split_fields14 : natural
-
-logic t__split_fields15 : name_id
-
-logic t__split_discrs3 : token_kind
-
-logic t__split_fields16 : natural
-
-logic t__split_fields17 : natural
-
-logic t__split_fields18 : natural
-
-logic t__split_fields19 : name_id
-
-logic t__split_discrs4 : token_kind
-
-axiom H : in_range1(first_line)
-
-axiom H1 : in_range1(first_col)
-
-axiom H2 : in_range3(kind)
-
-axiom H3 : ((not (t__attr__constrained = true)) and ((kind = 1) or
-  (kind = 2)))
-
-axiom H4 : ((kind = 1) -> (to_rep1(t__split_discrs) = r19b))
-
-axiom H5 : ((kind = 1) -> in_range3(r19b))
-
-axiom H6 : ((kind = 1) -> (to_rep(o1) = 1))
-
-axiom H7 : ((kind = 1) -> (to_rep(o2) = first_col))
-
-axiom H8 : ((kind = 1) -> (to_rep(o3) = first_line))
-
-axiom H9 : ((kind = 1) -> (o3 = o4))
-
-axiom H10 : ((kind = 1) -> (o2 = o5))
-
-axiom H11 : ((kind = 1) -> (o1 = o6))
-
-axiom H12 : ((kind = 1) -> (dummy1 = o7))
-
-axiom H13 : ((kind = 1) -> (to_rep1(o) = 1))
-
-axiom H14 : ((kind = 1) -> (o = o8))
-
-axiom H15 : ((kind = 1) -> (temp___934 = o8))
-
-axiom H16 : ((kind = 1) -> (temp___9341 = o4))
-
-axiom H17 : ((kind = 1) -> (temp___9342 = o5))
-
-axiom H18 : ((kind = 1) -> (temp___9343 = o6))
-
-axiom H19 : ((kind = 1) -> (temp___9344 = o7))
-
-axiom H20 : ((kind = 1) -> (true = temp___9345))
-
-axiom H21 : ((kind = 1) -> ((t__attr__constrained = true) ->
-  (temp___934 = t__split_discrs)))
-
-axiom H22 : ((kind = 1) -> ((usq_ = temp___934) and
-  (((usq_1 = temp___9341) and ((usq_2 = temp___9342) and
-  ((usq_3 = temp___9343) and (usq_4 = temp___9344)))) and
-  (usq_5 = temp___9345))))
-
-axiom H23 : ((kind = 1) -> (usq_ = temp___936))
-
-axiom H24 : ((kind = 1) -> (usq_1 = temp___9361))
-
-axiom H25 : ((kind = 1) -> (usq_2 = temp___9362))
-
-axiom H26 : ((kind = 1) -> (usq_3 = temp___9363))
-
-axiom H27 : ((kind = 1) -> (usq_4 = temp___9364))
-
-axiom H28 : ((kind = 1) -> (t__attr__constrained = temp___9365))
-
-axiom H29 : ((kind = 1) -> ((result = t__split_fields) and
-  ((result1 = t__split_fields1) and ((result2 = t__split_fields2) and
-  (result3 = t__split_fields3)))))
-
-axiom H30 : ((kind = 1) -> ((t__split_fields4 = temp___9361) and
-  ((t__split_fields5 = temp___9362) and ((t__split_fields6 = temp___9363) and
-  (t__split_fields7 = temp___9364)))))
-
-axiom H31 : ((kind = 1) -> (result4 = t__split_discrs))
-
-axiom H32 : ((kind = 1) -> (t__split_discrs1 = temp___936))
-
-axiom H33 : ((not (kind = 1)) -> ((kind = 2) ->
-  (to_rep1(t__split_discrs) = r22b)))
-
-axiom H34 : ((not (kind = 1)) -> ((kind = 2) -> in_range3(r22b)))
-
-axiom H35 : ((not (kind = 1)) -> ((kind = 2) -> (to_rep(o10) = 1)))
-
-axiom H36 : ((not (kind = 1)) -> ((kind = 2) -> (to_rep(o11) = first_col)))
-
-axiom H37 : ((not (kind = 1)) -> ((kind = 2) -> (to_rep(o12) = first_line)))
-
-axiom H38 : ((not (kind = 1)) -> ((kind = 2) -> (o12 = o13)))
-
-axiom H39 : ((not (kind = 1)) -> ((kind = 2) -> (o11 = o14)))
-
-axiom H40 : ((not (kind = 1)) -> ((kind = 2) -> (o10 = o15)))
-
-axiom H41 : ((not (kind = 1)) -> ((kind = 2) -> (dummy1 = o16)))
-
-axiom H42 : ((not (kind = 1)) -> ((kind = 2) -> (to_rep1(o9) = 2)))
-
-axiom H43 : ((not (kind = 1)) -> ((kind = 2) -> (o9 = o17)))
-
-axiom H44 : ((not (kind = 1)) -> ((kind = 2) -> (temp___937 = o17)))
-
-axiom H45 : ((not (kind = 1)) -> ((kind = 2) -> (temp___9371 = o13)))
-
-axiom H46 : ((not (kind = 1)) -> ((kind = 2) -> (temp___9372 = o14)))
-
-axiom H47 : ((not (kind = 1)) -> ((kind = 2) -> (temp___9373 = o15)))
-
-axiom H48 : ((not (kind = 1)) -> ((kind = 2) -> (temp___9374 = o16)))
-
-axiom H49 : ((not (kind = 1)) -> ((kind = 2) -> (true = temp___9375)))
-
-axiom H50 : ((not (kind = 1)) -> ((kind = 2) ->
-  ((t__attr__constrained = true) -> (temp___937 = t__split_discrs))))
-
-axiom H51 : ((not (kind = 1)) -> ((kind = 2) -> ((usq_6 = temp___937) and
-  (((usq_7 = temp___9371) and ((usq_8 = temp___9372) and
-  ((usq_9 = temp___9373) and (usq_10 = temp___9374)))) and
-  (usq_11 = temp___9375)))))
-
-axiom H52 : ((not (kind = 1)) -> ((kind = 2) -> ((temp___939 = usq_6) and
-  (((temp___9391 = usq_7) and ((temp___9392 = usq_8) and
-  ((temp___9393 = usq_9) and (temp___9394 = usq_10)))) and
-  (temp___9395 = t__attr__constrained)))))
-
-axiom H53 : ((not (kind = 1)) -> ((kind = 2) ->
-  ((result5 = t__split_fields) and ((result6 = t__split_fields1) and
-  ((result7 = t__split_fields2) and (result8 = t__split_fields3))))))
-
-axiom H54 : ((not (kind = 1)) -> ((kind = 2) ->
-  ((t__split_fields8 = temp___9391) and ((t__split_fields9 = temp___9392) and
-  ((t__split_fields10 = temp___9393) and
-  (t__split_fields11 = temp___9394))))))
-
-axiom H55 : ((not (kind = 1)) -> ((kind = 2) -> (result9 = t__split_discrs)))
-
-axiom H56 : ((not (kind = 1)) -> ((kind = 2) ->
-  (t__split_discrs2 = temp___939)))
-
-axiom H57 : ((not (kind = 1)) -> (kind = 2))
-
-axiom H58 : ((not (kind = 1)) -> (t__split_discrs1 = t__split_discrs2))
-
-axiom H59 : ((not (kind = 1)) -> ((t__split_fields4 = t__split_fields8) and
-  ((t__split_fields5 = t__split_fields9) and
-  ((t__split_fields6 = t__split_fields10) and
-  (t__split_fields7 = t__split_fields11)))))
-
-axiom H60 : (t__split_discrs3 = t__split_discrs1)
-
-axiom H61 : ((t__split_fields12 = t__split_fields4) and
+ (* File "lexer.adb", line 220, characters 0-0 *)
+goal WP_parameter_def :
+  (forall t__split_fields:natural. forall t__split_fields1:natural.
+  forall t__split_fields2:natural. forall t__split_fields3:name_id.
+  forall t__split_discrs:token_kind. forall first_line:int.
+  forall first_col:int. forall o:token_kind. forall o1:natural.
+  forall o2:natural. forall o3:natural. forall o4:natural. forall o5:natural.
+  forall o6:natural. forall o7:name_id. forall o8:token_kind.
+  forall temp___1030:token_kind. forall temp___10301:natural.
+  forall temp___10302:natural. forall temp___10303:natural.
+  forall temp___10304:name_id. forall temp___10305:bool.
+  forall usq_:token_kind. forall usq_1:natural. forall usq_2:natural.
+  forall usq_3:natural. forall usq_4:name_id. forall usq_5:bool.
+  forall temp___1032:token_kind. forall temp___10321:natural.
+  forall temp___10322:natural. forall temp___10323:natural.
+  forall temp___10324:name_id. forall temp___10325:bool.
+  forall o9:token_kind. forall o10:natural. forall o11:natural.
+  forall o12:natural. forall o13:natural. forall o14:natural.
+  forall o15:natural. forall o16:name_id. forall o17:token_kind.
+  forall temp___1033:token_kind. forall temp___10331:natural.
+  forall temp___10332:natural. forall temp___10333:natural.
+  forall temp___10334:name_id. forall temp___10335:bool.
+  forall usq_6:token_kind. forall usq_7:natural. forall usq_8:natural.
+  forall usq_9:natural. forall usq_10:name_id. forall usq_11:bool.
+  forall temp___1035:token_kind. forall temp___10351:natural.
+  forall temp___10352:natural. forall temp___10353:natural.
+  forall temp___10354:name_id. forall temp___10355:bool.
+  forall result:natural. forall result1:natural. forall result2:natural.
+  forall result3:name_id. forall t__split_fields4:natural.
+  forall t__split_fields5:natural. forall t__split_fields6:natural.
+  forall t__split_fields7:name_id. forall result4:token_kind.
+  forall t__split_discrs1:token_kind. forall result5:natural.
+  forall result6:natural. forall result7:natural. forall result8:name_id.
+  forall t__split_fields8:natural. forall t__split_fields9:natural.
+  forall t__split_fields10:natural. forall t__split_fields11:name_id.
+  forall result9:token_kind. forall t__split_discrs2:token_kind.
+  forall t__split_fields12:natural. forall t__split_fields13:natural.
+  forall t__split_fields14:natural. forall t__split_fields15:name_id.
+  forall t__split_discrs3:token_kind.
+  forall t__split_fields16:us_split_fields.
+  forall t__split_discrs4:us_split_discrs. ((in_range1(first_line) and
+  (in_range1(first_col) and (in_range3(kind) and
+  (((not (t__attr__constrained = true)) and ((kind = 1) or (kind = 2))) and
+  ((((kind = 1) and (((to_rep1(t__split_discrs) = r19b) and
+  in_range3(r19b)) and ((((((to_rep(o1) = 1) and
+  ((to_rep(o2) = first_col) and ((to_rep(o3) = first_line) and ((o3 = o4) and
+  ((o2 = o5) and ((o1 = o6) and (dummy1 = o7))))))) and
+  (((to_rep1(o) = 1) and (o = o8)) and ((temp___1030 = o8) and
+  (((temp___10301 = o4) and ((temp___10302 = o5) and ((temp___10303 = o6) and
+  (temp___10304 = o7)))) and (true = temp___10305))))) and
+  ((((t__attr__constrained = true) and (temp___1030 = t__split_discrs)) or
+  (not (t__attr__constrained = true))) and ((usq_ = temp___1030) and
+  (((usq_1 = temp___10301) and ((usq_2 = temp___10302) and
+  ((usq_3 = temp___10303) and (usq_4 = temp___10304)))) and
+  (usq_5 = temp___10305))))) and ((usq_ = temp___1032) and
+  (((usq_1 = temp___10321) and ((usq_2 = temp___10322) and
+  ((usq_3 = temp___10323) and (usq_4 = temp___10324)))) and
+  (t__attr__constrained = temp___10325)))) and
+  ((((result = t__split_fields) and ((result1 = t__split_fields1) and
+  ((result2 = t__split_fields2) and (result3 = t__split_fields3)))) and
+  ((temp___10321 = t__split_fields4) and
+  ((temp___10322 = t__split_fields5) and
+  ((temp___10323 = t__split_fields6) and
+  (temp___10324 = t__split_fields7))))) and ((result4 = t__split_discrs) and
+  (temp___1032 = t__split_discrs1)))))) or ((not (kind = 1)) and
+  (((kind = 2) and (((to_rep1(t__split_discrs) = r22b) and
+  in_range3(r22b)) and ((((((to_rep(o10) = 1) and
+  ((to_rep(o11) = first_col) and ((to_rep(o12) = first_line) and
+  ((o12 = o13) and ((o11 = o14) and ((o10 = o15) and (dummy1 = o16))))))) and
+  (((to_rep1(o9) = 2) and (o9 = o17)) and ((temp___1033 = o17) and
+  (((temp___10331 = o13) and ((temp___10332 = o14) and
+  ((temp___10333 = o15) and (temp___10334 = o16)))) and
+  (true = temp___10335))))) and ((((t__attr__constrained = true) and
+  (temp___1033 = t__split_discrs)) or
+  (not (t__attr__constrained = true))) and ((temp___1033 = usq_6) and
+  (((temp___10331 = usq_7) and ((temp___10332 = usq_8) and
+  ((temp___10333 = usq_9) and (temp___10334 = usq_10)))) and
+  (temp___10335 = usq_11))))) and ((usq_6 = temp___1035) and
+  (((usq_7 = temp___10351) and ((usq_8 = temp___10352) and
+  ((usq_9 = temp___10353) and (usq_10 = temp___10354)))) and
+  (t__attr__constrained = temp___10355)))) and
+  ((((result5 = t__split_fields) and ((result6 = t__split_fields1) and
+  ((result7 = t__split_fields2) and (result8 = t__split_fields3)))) and
+  ((temp___10351 = t__split_fields8) and
+  ((temp___10352 = t__split_fields9) and
+  ((temp___10353 = t__split_fields10) and
+  (temp___10354 = t__split_fields11))))) and ((result9 = t__split_discrs) and
+  (temp___1035 = t__split_discrs2)))))) and (({ rec__lexer__token__kind =
+  t__split_discrs1 } = { rec__lexer__token__kind = t__split_discrs2 }) and ({
+  rec__lexer__token__line = t__split_fields4; rec__lexer__token__col =
+  t__split_fields5; rec__lexer__token__length = t__split_fields6;
+  rec__lexer__token__value = t__split_fields7 } = { rec__lexer__token__line =
+  t__split_fields8; rec__lexer__token__col = t__split_fields9;
+  rec__lexer__token__length = t__split_fields10; rec__lexer__token__value =
+  t__split_fields11 }))))) and (((t__split_discrs3 = t__split_discrs1) and
+  ((t__split_fields12 = t__split_fields4) and
   ((t__split_fields13 = t__split_fields5) and
   ((t__split_fields14 = t__split_fields6) and
-  (t__split_fields15 = t__split_fields7))))
-
-axiom H62 : (t__split_discrs4 = t__split_discrs1)
-
-axiom H63 : ((t__split_fields16 = t__split_fields4) and
-  ((t__split_fields17 = t__split_fields5) and
-  ((t__split_fields18 = t__split_fields6) and
-  (t__split_fields19 = t__split_fields7))))
-
- (* File "lexer.adb", line 220, characters 0-0 *)
-goal WP_parameter_def : (to_rep1(t__split_discrs3) = kind)
+  (t__split_fields15 = t__split_fields7))))) and ((t__split_discrs4 = {
+  rec__lexer__token__kind = t__split_discrs1 }) and (t__split_fields16 = {
+  rec__lexer__token__line = t__split_fields4; rec__lexer__token__col =
+  t__split_fields5; rec__lexer__token__length = t__split_fields6;
+  rec__lexer__token__value = t__split_fields7 })))))))) ->
+  (to_rep1(t__split_discrs3) = kind)))

@@ -111,13 +111,7 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : int
-
-logic o : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range(x))
-
-axiom H1 : in_range(y)
-
  (* File "bad_assign.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((x + 1))
+goal WP_parameter_def :
+  (forall x:int. ((((- 2147483648) <= 2147483647) -> in_range(x)) ->
+  (in_range(y) -> in_range((x + 1)))))

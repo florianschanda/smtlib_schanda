@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -433,372 +433,22 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
-logic the_file : us_rep
-
-logic current_read__split_fields : character
-
-logic current_read__split_discrs : read_status
-
-logic current_line : int
-
-logic current_col : int
-
-logic current_pos : int
-
-logic next_read__split_fields : character
-
-logic next_read__split_discrs : read_status
-
-logic temp___918 : us_rep
-
-logic temp___917 : read_status
-
-logic temp___9171 : character
-
-logic temp___9172 : bool
-
-logic temp___916 : int
-
-logic temp___915 : int
-
-logic temp___914 : int
-
-logic temp___913 : read_status
-
-logic temp___9131 : character
-
-logic temp___9132 : bool
-
-logic temp___904 : us_rep
-
-logic temp___903 : read_status
-
-logic temp___9031 : character
-
-logic temp___9032 : bool
-
-logic temp___902 : int
-
-logic temp___901 : int
-
-logic temp___900 : int
-
-logic temp___899 : read_status
-
-logic temp___8991 : character
-
-logic temp___8992 : bool
-
-logic o : bool
-
-logic the_file1 : us_rep
-
-logic current_read__split_fields1 : character
-
-logic current_read__split_discrs1 : read_status
-
-logic current_line1 : int
-
-logic current_col1 : int
-
-logic current_pos1 : int
-
-logic next_read__split_fields1 : character
-
-logic next_read__split_discrs1 : read_status
-
-logic result : bool
-
-logic current_read__split_fields2 : character
-
-logic current_read__split_discrs2 : read_status
-
-logic current_line2 : int
-
-logic current_col2 : int
-
-logic current_pos2 : int
-
-logic next_read__split_fields2 : character
-
-logic next_read__split_discrs2 : read_status
-
-logic the_file2 : us_rep
-
-logic current_read__split_fields3 : character
-
-logic current_read__split_discrs3 : read_status
-
-logic current_line3 : int
-
-logic current_col3 : int
-
-logic current_pos3 : int
-
-logic next_read__split_fields3 : character
-
-logic next_read__split_discrs3 : read_status
-
-logic result1 : bool
-
-logic the_file3 : us_rep
-
-logic current_read__split_fields4 : character
-
-logic current_read__split_discrs4 : read_status
-
-logic current_line4 : int
-
-logic current_col4 : int
-
-logic current_pos4 : int
-
-logic next_read__split_fields4 : character
-
-logic next_read__split_discrs4 : read_status
-
-logic the_file4 : us_rep
-
-logic current_read__split_fields5 : character
-
-logic current_read__split_discrs5 : read_status
-
-logic current_line5 : int
-
-logic current_col5 : int
-
-logic current_pos5 : int
-
-logic next_read__split_fields5 : character
-
-logic next_read__split_discrs5 : read_status
-
-logic the_file5 : us_rep
-
-logic current_read__split_fields6 : character
-
-logic current_read__split_discrs6 : read_status
-
-logic current_line6 : int
-
-logic current_col6 : int
-
-logic current_pos6 : int
-
-logic next_read__split_fields6 : character
-
-logic next_read__split_discrs6 : read_status
-
-logic the_file6 : us_rep
-
-logic current_read__split_fields7 : character
-
-logic current_read__split_discrs7 : read_status
-
-logic current_line7 : int
-
-logic current_col7 : int
-
-logic current_pos7 : int
-
-logic next_read__split_fields7 : character
-
-logic next_read__split_discrs7 : read_status
-
-logic result2 : bool
-
-logic current_read__split_fields8 : character
-
-logic current_read__split_discrs8 : read_status
-
-logic current_line8 : int
-
-logic current_col8 : int
-
-logic current_pos8 : int
-
-logic next_read__split_fields8 : character
-
-logic next_read__split_discrs8 : read_status
-
-logic result3 : bool
-
-logic current_read__split_fields9 : character
-
-logic current_read__split_discrs9 : read_status
-
-logic current_line9 : int
-
-logic current_col9 : int
-
-logic current_pos9 : int
-
-logic next_read__split_fields9 : character
-
-logic next_read__split_discrs9 : read_status
-
-logic current_read__split_fields10 : character
-
-logic current_read__split_discrs10 : read_status
-
-logic current_line10 : int
-
-logic current_col10 : int
-
-logic current_pos10 : int
-
-logic next_read__split_fields10 : character
-
-logic next_read__split_discrs10 : read_status
-
-logic the_file7 : us_rep
-
-logic current_read__split_fields11 : character
-
-logic current_read__split_discrs11 : read_status
-
-logic current_line11 : int
-
-logic current_col11 : int
-
-logic current_pos11 : int
-
-logic next_read__split_fields11 : character
-
-logic next_read__split_discrs11 : read_status
-
-logic the_file8 : us_rep
-
-logic current_read__split_fields12 : character
-
-logic current_read__split_discrs12 : read_status
-
-logic current_line12 : int
-
-logic current_col12 : int
-
-logic current_pos12 : int
-
-logic next_read__split_fields12 : character
-
-logic next_read__split_discrs12 : read_status
-
-logic the_file9 : us_rep
-
-logic current_read__split_fields13 : character
-
-logic current_read__split_discrs13 : read_status
-
-logic current_line13 : int
-
-logic current_col13 : int
-
-logic current_pos13 : int
-
-logic next_read__split_fields13 : character
-
-logic next_read__split_discrs13 : read_status
-
-logic the_file10 : us_rep
-
-logic current_read__split_fields14 : character
-
-logic current_read__split_discrs14 : read_status
-
-logic current_line14 : int
-
-logic current_col14 : int
-
-logic current_pos14 : int
-
-logic next_read__split_fields14 : character
-
-logic next_read__split_discrs14 : read_status
-
-logic the_file11 : us_rep
-
-logic current_read__split_fields15 : character
-
-logic current_read__split_discrs15 : read_status
-
-logic current_line15 : int
-
-logic current_col15 : int
-
-logic current_pos15 : int
-
-logic next_read__split_fields15 : character
-
-logic next_read__split_discrs15 : read_status
-
-logic the_file12 : us_rep
-
-logic current_read__split_fields16 : character
-
-logic current_read__split_discrs16 : read_status
-
-logic current_line16 : int
-
-logic current_col16 : int
-
-logic current_pos16 : int
-
-logic next_read__split_fields16 : character
-
-logic next_read__split_discrs16 : read_status
-
-logic the_file13 : us_rep
-
-logic current_read__split_fields17 : character
-
-logic current_read__split_discrs17 : read_status
-
-logic current_line17 : int
-
-logic current_col17 : int
-
-logic current_pos17 : int
-
-logic next_read__split_fields17 : character
-
-logic next_read__split_discrs17 : read_status
-
-logic the_file14 : us_rep
-
-logic current_read__split_fields18 : character
-
-logic current_read__split_discrs18 : read_status
-
-logic current_line18 : int
-
-logic current_col18 : int
-
-logic current_pos18 : int
-
-logic next_read__split_fields18 : character
-
-logic next_read__split_discrs18 : read_status
-
-axiom H : (current_read__attr__constrained = false)
-
-axiom H1 : in_range2(current_line)
-
-axiom H2 : in_range1(current_col)
-
-axiom H3 : in_range1(current_pos)
-
-axiom H4 : (next_read__attr__constrained = false)
-
-axiom H5 : (local_invariant({ rec__file_io__read_result__c =
-  current_read__split_fields }, { rec__file_io__read_result__status =
-  current_read__split_discrs }, { rec__file_io__read_result__c =
-  next_read__split_fields }, { rec__file_io__read_result__status =
-  next_read__split_discrs }) = true)
-
-axiom H6 : ((in_range2(current_line1) and in_range1(current_col1)) and
-  in_range1(current_pos1))
-
-axiom H7 : (to_rep1(current_read__split_discrs1) = 0)
-
  (* File "lexer.adb", line 47, characters 0-0 *)
-goal WP_parameter_def : (to_rep1(current_read__split_discrs1) = 0)
+goal WP_parameter_def :
+  (forall current_read__split_fields:character.
+  forall current_read__split_discrs:read_status. forall current_line:int.
+  forall current_col:int. forall current_pos:int.
+  forall next_read__split_fields:character.
+  forall next_read__split_discrs:read_status.
+  forall current_read__split_discrs1:read_status. forall current_line1:int.
+  forall current_col1:int. forall current_pos1:int.
+  ((current_read__attr__constrained = false) -> (in_range2(current_line) ->
+  (in_range1(current_col) -> (in_range1(current_pos) ->
+  ((next_read__attr__constrained = false) -> ((local_invariant({
+  rec__file_io__read_result__c = current_read__split_fields }, {
+  rec__file_io__read_result__status = current_read__split_discrs }, {
+  rec__file_io__read_result__c = next_read__split_fields }, {
+  rec__file_io__read_result__status = next_read__split_discrs }) = true) ->
+  (((in_range2(current_line1) and in_range1(current_col1)) and
+  in_range1(current_pos1)) -> ((to_rep1(current_read__split_discrs1) = 0) ->
+  (to_rep1(current_read__split_discrs1) = 0))))))))))

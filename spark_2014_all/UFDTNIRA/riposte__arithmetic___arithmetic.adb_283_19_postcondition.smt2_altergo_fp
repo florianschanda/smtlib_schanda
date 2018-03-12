@@ -161,12 +161,6 @@ axiom mod_def :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -178,6 +172,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -273,67 +273,24 @@ type ttB__ref = { ttB__content : ttB
 
 function ttB__ref___projection(a: ttB__ref) : ttB = (a).ttB__content
 
-logic arithmetic__ispositive__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic result : int
-
-logic arithmetic__ispositive__result1 : int
-
-logic arithmetic__ispositive__result2 : int
-
-logic arithmetic__ispositive__result3 : int
-
-logic arithmetic__ispositive__result4 : int
-
-logic arithmetic__ispositive__result5 : int
-
-logic result1 : int
-
-axiom H : in_range1(x)
-
-axiom H1 :
-  (arithmetic__ispositive__result1 = arithmetic__ispositive__result2)
-
-axiom H2 :
-  (arithmetic__ispositive__result3 = arithmetic__ispositive__result1)
-
-axiom H3 : ((o = (2 * x)) and in_range2((2 * x)))
-
-axiom H4 : (o1 = (o - 1))
-
-axiom H5 : ((o2 = o1) and in_range2(o1))
-
-axiom H6 : (o3 = comp_div(o2,2))
-
-axiom H7 : (o4 = (x - o3))
-
-axiom H8 : ((o5 = o4) and in_range1(o4))
-
-axiom H9 : (result = arithmetic__ispositive__result)
-
-axiom H10 : (arithmetic__ispositive__result1 = o5)
-
-axiom H11 :
-  (arithmetic__ispositive__result4 = arithmetic__ispositive__result2)
-
-axiom H12 :
-  (arithmetic__ispositive__result5 = arithmetic__ispositive__result3)
-
-axiom H13 : (result1 = arithmetic__ispositive__result4)
-
-axiom H14 : (x <= 0)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (arithmetic__ispositive__result4 = 0)
+goal WP_parameter_def :
+  (forall arithmetic__ispositive__result:int. forall o:int. forall o1:int.
+  forall o2:int. forall o3:int. forall o4:int. forall o5:int.
+  forall result:int. forall arithmetic__ispositive__result1:int.
+  forall arithmetic__ispositive__result2:int.
+  forall arithmetic__ispositive__result3:int.
+  forall arithmetic__ispositive__result4:int.
+  forall arithmetic__ispositive__result5:int.
+  (forall result1:int. ((in_range1(x) and
+  (((((arithmetic__ispositive__result1 = arithmetic__ispositive__result2) and
+  (arithmetic__ispositive__result3 = arithmetic__ispositive__result1)) and
+  ((((((((o = (2 * x)) and in_range2((2 * x))) and (o1 = (o - 1))) and
+  ((o2 = o1) and in_range2(o1))) and (o3 = comp_div(o2,2))) and
+  (o4 = (x - o3))) and ((o5 = o4) and in_range1(o4))) and
+  ((result = arithmetic__ispositive__result) and
+  (arithmetic__ispositive__result1 = o5)))) and
+  ((arithmetic__ispositive__result4 = arithmetic__ispositive__result2) and
+  (arithmetic__ispositive__result5 = arithmetic__ispositive__result3))) and
+  (result1 = arithmetic__ispositive__result4))) -> ((x <= 0) ->
+  (arithmetic__ispositive__result4 = 0)))))

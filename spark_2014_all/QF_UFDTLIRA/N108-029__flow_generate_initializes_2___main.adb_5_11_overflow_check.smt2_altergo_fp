@@ -115,27 +115,9 @@ logic foo__function_guard : int, unit -> prop
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic a : int
-
-logic visible_var : int
-
-logic x : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range(x))
-
-axiom H1 : in_range(a)
-
-axiom H2 : in_range(visible_var)
-
-axiom H3 : ((o = foo(void)) and in_range(o))
-
  (* File "main.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : in_range((a + visible_var))
+goal WP_parameter_def :
+  (forall a:int. forall visible_var:int. forall x:int. forall o:int.
+  ((((- 2147483648) <= 2147483647) -> in_range(x)) -> (in_range(a) ->
+  (in_range(visible_var) -> (((o = foo(void)) and in_range(o)) ->
+  in_range((a + visible_var)))))))

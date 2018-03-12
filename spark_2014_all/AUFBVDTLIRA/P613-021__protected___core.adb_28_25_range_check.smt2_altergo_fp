@@ -663,7 +663,15 @@ axiom coerce_axiom :
 
 type message_index
 
-predicate in_range1(x: t) = (ule(of_int(0), x) and ule(x, of_int(15)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 15)
+
+predicate in_range1(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 15))
 
@@ -699,9 +707,13 @@ axiom inversion_axiom1 :
 axiom range_axiom1 :
   (forall x:message_index [to_rep1(x)]. in_range1(to_rep1(x)))
 
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 16)
+
 axiom coerce_axiom1 :
-  (forall x:t [to_rep1(of_rep1(x))]. (in_range1(urem(x, of_int(16))) ->
-  (to_rep1(of_rep1(x)) = urem(x, of_int(16)))))
+  (forall x:t [to_rep1(of_rep1(x))]. (in_range1(urem(x, rliteral2)) ->
+  (to_rep1(of_rep1(x)) = urem(x, rliteral2))))
 
 function to_int1(x: message_index) : int = tqtint(to_rep1(x))
 
@@ -900,29 +912,6 @@ axiom slide_def :
   (forall i:t [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[sub(i, sub(new_first, old_first))]))))))
 
-logic concat : (t,us_rep) farray, t, t, (t,us_rep) farray, t,
-  t -> (t,us_rep) farray
-
-axiom concat_def :
-  (forall a:(t,us_rep) farray. forall b:(t,us_rep) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t.
-  (forall i:t [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((ule(a_first, i) and ule(i, a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and (ugt(i, a_last) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[add(sub(i, a_last), sub(b_first,
-  one))])))))))
-
-logic singleton : us_rep, t -> (t,us_rep) farray
-
-axiom singleton_def :
-  (forall v:integer. forall v1:natural.
-  (forall i:t [(singleton({ us_split_fields1 = {
-  rec__core__message_record__value = v; rec__core__message_record__size = v1
-  } }, i)[i])]. ((singleton({ us_split_fields1 = {
-  rec__core__message_record__value = v; rec__core__message_record__size = v1
-  } }, i)[i]) = { us_split_fields1 = { rec__core__message_record__value = v;
-  rec__core__message_record__size = v1 } })))
-
 logic bool_eq7 : (t,us_rep) farray, t, t, (t,us_rep) farray, t, t -> bool
 
 axiom bool_eq_def6 :
@@ -932,17 +921,17 @@ axiom bool_eq_def6 :
   a__last) and (ule(b__first, b__last) and (sub(a__last,
   a__first) = sub(b__last, b__first)))) or ((not ule(a__first, a__last)) and
   ugt(b__first, b__last))) and
-  (forall temp___idx_132:t. (((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) and (bool_eq6((a[temp___idx_132]),
-  (b[add(sub(b__first, a__first), temp___idx_132)])) = true)) or
-  (not (ule(a__first, temp___idx_132) and ule(temp___idx_132, a__last)))))) ->
+  (forall temp___idx_154:t. (((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) and (bool_eq6((a[temp___idx_154]),
+  (b[add(sub(b__first, a__first), temp___idx_154)])) = true)) or
+  (not (ule(a__first, temp___idx_154) and ule(temp___idx_154, a__last)))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not (((ule(a__first, a__last) -> (ule(b__first, b__last) and
   (sub(a__last, a__first) = sub(b__last, b__first)))) and ((not ule(a__first,
   a__last)) -> ugt(b__first, b__last))) and
-  (forall temp___idx_132:t. ((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) -> (bool_eq6((a[temp___idx_132]),
-  (b[add(sub(b__first, a__first), temp___idx_132)])) = true))))) ->
+  (forall temp___idx_154:t. ((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) -> (bool_eq6((a[temp___idx_154]),
+  (b[add(sub(b__first, a__first), temp___idx_154)])) = true))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -952,9 +941,9 @@ axiom bool_eq_rev :
   (((ule(a__first, a__last) -> (ule(b__first, b__last) and (sub(a__last,
   a__first) = sub(b__last, b__first)))) and ((not ule(a__first, a__last)) ->
   ugt(b__first, b__last))) and
-  (forall temp___idx_132:t. ((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) -> (bool_eq6((a[temp___idx_132]),
-  (b[add(sub(b__first, a__first), temp___idx_132)])) = true)))))))
+  (forall temp___idx_154:t. ((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) -> (bool_eq6((a[temp___idx_154]),
+  (b[add(sub(b__first, a__first), temp___idx_154)])) = true)))))))
 
 type us_split_fields2 = { rec__core__mailboxT__messages : (t,us_rep) farray;
 rec__core__mailboxT__next_in : message_index; rec__core__mailboxT__next_out :
@@ -1079,105 +1068,42 @@ type mailboxT__ref = { mailboxT__content : us_rep1
 function mailboxT__ref___projection(a: mailboxT__ref) : us_rep1 =
   (a).mailboxT__content
 
-logic temp___207 : us_rep -> (t,us_rep) farray
-
-axiom def_axiom :
-  (forall temp___209:integer. forall temp___2091:natural.
-  (forall temp___210:t. ((temp___207({ us_split_fields1 = {
-  rec__core__message_record__value = temp___209;
-  rec__core__message_record__size = temp___2091 } })[temp___210]) = {
-  us_split_fields1 = { rec__core__message_record__value = temp___209;
-  rec__core__message_record__size = temp___2091 } })))
+logic temp___240 : us_rep -> (t,us_rep) farray
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic n : int
+axiom def_axiom :
+  (forall temp___242:integer. forall temp___2421:natural.
+  (forall temp___243:t. ((temp___240({ us_split_fields1 = {
+  rec__core__message_record__value = temp___242;
+  rec__core__message_record__size = temp___2421 } })[temp___243]) = {
+  us_split_fields1 = { rec__core__message_record__value = temp___242;
+  rec__core__message_record__size = temp___2421 } })))
 
-logic self__ : (t,us_rep) farray
+logic rliteral3 : t
 
-logic self__1 : message_index
-
-logic self__2 : message_index
-
-logic self__3 : message_count
-
-logic o : message_index
-
-logic o1 : (t,us_rep) farray
-
-logic o2 : message_index
-
-logic o3 : message_index
-
-logic o4 : message_count
-
-logic o5 : (t,us_rep) farray
-
-logic o6 : message_index
-
-logic o7 : message_index
-
-logic o8 : message_count
-
-logic o9 : int
-
-logic result : int
-
-logic n1 : int
-
-logic result1 : (t,us_rep) farray
-
-logic result2 : message_index
-
-logic result3 : message_index
-
-logic result4 : message_count
-
-logic self__4 : (t,us_rep) farray
-
-logic self__5 : message_index
-
-logic self__6 : message_index
-
-logic self__7 : message_count
-
-axiom H : (((- 2147483648) <= 2147483647) -> in_range(n))
-
-axiom H1 : (0 <  to_rep2(self__3))
-
-axiom H2 : (result = n)
-
-axiom H3 :
-  (n1 = to_rep((((self__[to_rep1(self__2)])).us_split_fields1).rec__core__message_record__value))
-
-axiom H4 : (to_rep1(o) = urem(add(to_rep1(self__2), of_int(1)), of_int(16)))
-
-axiom H5 : (self__ = o1)
-
-axiom H6 : (self__1 = o2)
-
-axiom H7 : (o = o3)
-
-axiom H8 : (self__3 = o4)
-
-axiom H9 : (o5 = o1)
-
-axiom H10 : (o6 = o2)
-
-axiom H11 : (o7 = o3)
-
-axiom H12 : (o8 = o4)
-
-axiom H13 : (result1 = self__)
-
-axiom H14 : (result2 = self__1)
-
-axiom H15 : (result3 = self__2)
-
-axiom H16 : (result4 = self__3)
-
-axiom H17 : ((self__4 = o5) and ((self__5 = o6) and ((self__6 = o7) and
-  (self__7 = o8))))
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 1)
 
  (* File "core.ads", line 23, characters 0-0 *)
-goal WP_parameter_def : in_range2((to_rep2(self__7) - 1))
+goal WP_parameter_def :
+  (forall n:int. forall self__:(t,us_rep) farray.
+  forall self__1:message_index. forall self__2:message_index.
+  forall self__3:message_count. forall o:message_index.
+  forall o1:(t,us_rep) farray. forall o2:message_index.
+  forall o3:message_index. forall o4:message_count.
+  forall o5:(t,us_rep) farray. forall o6:message_index.
+  forall o7:message_index. forall o8:message_count. forall result:int.
+  forall n1:int. forall result1:(t,us_rep) farray.
+  forall result2:message_index. forall result3:message_index.
+  forall result4:message_count. forall self__4:(t,us_rep) farray.
+  forall self__5:message_index. forall self__6:message_index.
+  forall self__7:message_count. ((((- 2147483648) <= 2147483647) ->
+  in_range(n)) -> ((0 <  to_rep2(self__3)) -> (((result = n) and
+  (n1 = to_rep((((self__[to_rep1(self__2)])).us_split_fields1).rec__core__message_record__value))) ->
+  (((((to_rep1(o) = urem(add(to_rep1(self__2), rliteral3), rliteral2)) and
+  ((self__ = o1) and ((self__1 = o2) and ((o = o3) and (self__3 = o4))))) and
+  ((o5 = o1) and ((o6 = o2) and ((o7 = o3) and (o8 = o4))))) and
+  (((result1 = self__) and ((result2 = self__1) and ((result3 = self__2) and
+  (result4 = self__3)))) and ((self__4 = o5) and ((self__5 = o6) and
+  ((self__6 = o7) and (self__7 = o8)))))) ->
+  in_range2((to_rep2(self__7) - 1)))))))

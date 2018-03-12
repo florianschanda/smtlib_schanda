@@ -244,96 +244,30 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x__split_fields : integer
-
-logic x__split_fields1 : integer
-
-logic y__split_fields : integer
-
-logic y__split_fields1 : integer
-
-logic o : integer
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic o3 : integer
-
-logic new_eq__x__assume : integer
-
-logic new_eq__x__assume1 : integer
-
-logic o4 : integer
-
-logic o5 : integer
-
-logic o6 : integer
-
-logic o7 : integer
-
-logic new_eq__y__assume : integer
-
-logic new_eq__y__assume1 : integer
-
-logic result : integer
-
-logic result1 : integer
-
-logic x__split_fields2 : integer
-
-logic x__split_fields3 : integer
-
-logic result2 : integer
-
-logic result3 : integer
-
-logic y__split_fields2 : integer
-
-logic y__split_fields3 : integer
-
-axiom H : (to_rep(o) = 2)
-
-axiom H1 : (to_rep(o1) = 1)
-
-axiom H2 : (o1 = o2)
-
-axiom H3 : (o = o3)
-
-axiom H4 : (new_eq__x__assume = o2)
-
-axiom H5 : (new_eq__x__assume1 = o3)
-
-axiom H6 : (result = x__split_fields)
-
-axiom H7 : (result1 = x__split_fields1)
-
-axiom H8 : (new_eq__x__assume = x__split_fields2)
-
-axiom H9 : (new_eq__x__assume1 = x__split_fields3)
-
-axiom H10 : (to_rep(o4) = 3)
-
-axiom H11 : (to_rep(o5) = 1)
-
-axiom H12 : (o5 = o6)
-
-axiom H13 : (o4 = o7)
-
-axiom H14 : (new_eq__y__assume = o6)
-
-axiom H15 : (new_eq__y__assume1 = o7)
-
-axiom H16 : (result2 = y__split_fields)
-
-axiom H17 : (result3 = y__split_fields1)
-
-axiom H18 : (new_eq__y__assume = y__split_fields2)
-
-axiom H19 : (new_eq__y__assume1 = y__split_fields3)
-
  (* File "new_eq.adb", line 6, characters 0-0 *)
-goal WP_parameter_def : (not (oeq({ us_split_fields1 = {
-  rec__new_eq__my_rec__f = x__split_fields2; rec__new_eq__my_rec__g =
-  x__split_fields3 } }, { us_split_fields1 = { rec__new_eq__my_rec__f =
-  y__split_fields2; rec__new_eq__my_rec__g = y__split_fields3 } }) = true))
+goal WP_parameter_def :
+  (forall x__split_fields:integer. forall x__split_fields1:integer.
+  forall y__split_fields:integer. forall y__split_fields1:integer.
+  forall o:integer. forall o1:integer. forall o2:integer. forall o3:integer.
+  forall new_eq__x__assume:integer. forall new_eq__x__assume1:integer.
+  forall o4:integer. forall o5:integer. forall o6:integer. forall o7:integer.
+  forall new_eq__y__assume:integer. forall new_eq__y__assume1:integer.
+  forall result:integer. forall result1:integer.
+  forall x__split_fields2:integer. forall x__split_fields3:integer.
+  forall result2:integer. forall result3:integer.
+  forall y__split_fields2:integer. forall y__split_fields3:integer.
+  (((((to_rep(o) = 2) and ((to_rep(o1) = 1) and ((o1 = o2) and
+  (o = o3)))) and ((new_eq__x__assume = o2) and
+  (new_eq__x__assume1 = o3))) and (((result = x__split_fields) and
+  (result1 = x__split_fields1)) and
+  ((new_eq__x__assume = x__split_fields2) and
+  (new_eq__x__assume1 = x__split_fields3)))) -> (((((to_rep(o4) = 3) and
+  ((to_rep(o5) = 1) and ((o5 = o6) and (o4 = o7)))) and
+  ((new_eq__y__assume = o6) and (new_eq__y__assume1 = o7))) and
+  (((result2 = y__split_fields) and (result3 = y__split_fields1)) and
+  ((new_eq__y__assume = y__split_fields2) and
+  (new_eq__y__assume1 = y__split_fields3)))) -> (not (oeq({
+  us_split_fields1 = { rec__new_eq__my_rec__f = x__split_fields2;
+  rec__new_eq__my_rec__g = x__split_fields3 } }, { us_split_fields1 = {
+  rec__new_eq__my_rec__f = y__split_fields2; rec__new_eq__my_rec__g =
+  y__split_fields3 } }) = true)))))

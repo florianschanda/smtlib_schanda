@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -141,53 +141,25 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic swap_add_max_14__add__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic result : int
-
-logic swap_add_max_14__add__result1 : int
-
-logic swap_add_max_14__add__result2 : int
-
-logic swap_add_max_14__add__result3 : int
-
-logic swap_add_max_14__add__result4 : int
-
-logic swap_add_max_14__add__result5 : int
-
-logic result1 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : in_range1(y)
-
-axiom H2 : ((((0 <= x) and (0 <= y)) -> (x <= (2147483647 - y))) and
-  ((not ((0 <= x) and (0 <= y))) -> (((x <  0) and (y <  0)) ->
-  (((- 2147483648) - y) <= x))))
-
-axiom H3 : (swap_add_max_14__add__result1 = swap_add_max_14__add__result2)
-
-axiom H4 : (swap_add_max_14__add__result3 = swap_add_max_14__add__result1)
-
-axiom H5 : ((o2 = (x + y)) and in_range1((x + y)))
-
-axiom H6 : (result = swap_add_max_14__add__result)
-
-axiom H7 : (swap_add_max_14__add__result1 = o2)
-
-axiom H8 : (swap_add_max_14__add__result4 = swap_add_max_14__add__result2)
-
-axiom H9 : (swap_add_max_14__add__result5 = swap_add_max_14__add__result3)
-
-axiom H10 : (result1 = swap_add_max_14__add__result4)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (swap_add_max_14__add__result4 = (x + y))
+goal WP_parameter_def :
+  (forall swap_add_max_14__add__result:int. forall o:int. forall result:int.
+  forall swap_add_max_14__add__result1:int.
+  forall swap_add_max_14__add__result2:int.
+  forall swap_add_max_14__add__result3:int.
+  forall swap_add_max_14__add__result4:int.
+  forall swap_add_max_14__add__result5:int.
+  (forall result1:int. ((in_range1(x) and (in_range1(y) and (((((0 <= x) and
+  (0 <= y)) and (x <= (2147483647 - y))) or ((not ((0 <= x) and
+  (0 <= y))) and (((x <  0) and (y <  0)) ->
+  (((- 2147483648) - y) <= x)))) and
+  (((((swap_add_max_14__add__result1 = swap_add_max_14__add__result2) and
+  (swap_add_max_14__add__result3 = swap_add_max_14__add__result1)) and
+  (((o = (x + y)) and in_range1((x + y))) and (({ int__content = result } = {
+  int__content = swap_add_max_14__add__result }) and
+  (swap_add_max_14__add__result1 = o)))) and (({ int__content =
+  swap_add_max_14__add__result4 } = { int__content =
+  swap_add_max_14__add__result2 }) and
+  (swap_add_max_14__add__result5 = swap_add_max_14__add__result3))) and
+  (result1 = swap_add_max_14__add__result4))))) ->
+  (swap_add_max_14__add__result4 = (x + y)))))

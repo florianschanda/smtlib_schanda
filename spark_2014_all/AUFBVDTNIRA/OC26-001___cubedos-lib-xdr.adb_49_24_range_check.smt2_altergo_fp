@@ -1005,12 +1005,6 @@ axiom toBig_to_uint : (forall x:t. (tqtint(x) = tqtint1(toBig(x))))
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int2 : bool -> int
 
 axiom to_int_def2 :
@@ -1022,6 +1016,12 @@ logic of_int2 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int2(i)]. (((i = 0) -> (of_int2(i) = false)) and
   ((not (i = 0)) -> (of_int2(i) = true))))
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -1211,24 +1211,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,octet) farray, int, int, (int,octet) farray, int,
-  int -> (int,octet) farray
-
-axiom concat_def :
-  (forall a:(int,octet) farray. forall b:(int,octet) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : octet, int -> (int,octet) farray
-
-axiom singleton_def :
-  (forall v:octet.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq8 : (int,octet) farray, int, int, (int,octet) farray, int,
   int -> bool
 
@@ -1239,17 +1221,17 @@ axiom bool_eq_def7 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq8(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq8(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1259,37 +1241,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,octet) farray, int, int, (int,octet) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,octet) farray. forall b:(int,octet) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq8(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,octet) farray. forall b:(int,octet) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq8(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and ult(to_rep1((a[(i + 1)])), to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,octet) farray. forall b:(int,octet) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq8(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and ugt(to_rep1((a[(j + 1)])), to_rep1((b[(i + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type t2
 
@@ -1391,264 +1345,71 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
-logic data : (int,octet) farray
+logic rliteral1 : t1
 
-logic last2 : int
-
-logic temporary_1 : t1
-
-logic temporary_2 : t1
-
-logic i : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : bool
-
-logic o3 : octet
-
-logic o4 : int
-
-logic o5 : (int,octet) farray
-
-logic o6 : octet
-
-logic o7 : int
-
-logic o8 : (int,octet) farray
-
-logic o9 : octet
-
-logic o10 : int
-
-logic o11 : (int,octet) farray
-
-logic o12 : octet
-
-logic o13 : int
-
-logic o14 : (int,octet) farray
-
-logic o15 : int
-
-logic result : t1
-
-logic temporary_11 : t1
-
-logic result1 : int
-
-logic i1 : int
-
-logic result2 : t1
-
-logic temporary_21 : t1
-
-logic result3 : (int,octet) farray
-
-logic data1 : (int,octet) farray
-
-logic result4 : t1
-
-logic temporary_12 : t1
-
-logic result5 : int
-
-logic i2 : int
-
-logic result6 : t1
-
-logic temporary_22 : t1
-
-logic result7 : (int,octet) farray
-
-logic data2 : (int,octet) farray
-
-logic result8 : t1
-
-logic temporary_13 : t1
-
-logic result9 : int
-
-logic i3 : int
-
-logic result10 : t1
-
-logic temporary_23 : t1
-
-logic result11 : (int,octet) farray
-
-logic data3 : (int,octet) farray
-
-logic result12 : t1
-
-logic temporary_14 : t1
-
-logic result13 : int
-
-logic i4 : int
-
-logic result14 : t1
-
-logic temporary_24 : t1
-
-logic result15 : (int,octet) farray
-
-logic data4 : (int,octet) farray
-
-logic result16 : t1
-
-logic temporary_15 : t1
-
-logic result17 : int
-
-logic last3 : int
-
-logic data5 : (int,octet) farray
-
-logic last4 : int
-
-logic temporary_16 : t1
-
-logic temporary_25 : t1
-
-logic i5 : int
-
-logic data6 : (int,octet) farray
-
-logic last5 : int
-
-logic temporary_17 : t1
-
-logic temporary_26 : t1
-
-logic i6 : int
-
-axiom H : true
-
-axiom H1 : dynamic_property(0, 65535, to_rep(data__first),
-  to_rep(data__last))
-
-axiom H2 : in_range2(position)
-
-axiom H3 : ((0 <= 65535) -> in_range2(last2))
-
-axiom H4 : ((((comp_mod(position,4) = 0) and
-  (((to_rep(data__first) <= to_rep(data__last)) ->
-  (comp_mod(((to_rep(data__last) - to_rep(data__first)) + 1),4) = 0)) and
-  ((not (to_rep(data__first) <= to_rep(data__last))) ->
-  (comp_mod(0,4) = 0)))) and ((to_rep(data__first) <= position) and
-  (position <= to_rep(data__last)))) and
-  ((position + 3) <= to_rep(data__last)))
-
-axiom H5 : (result = temporary_1)
-
-axiom H6 : (temporary_11 = value)
-
-axiom H7 : true
-
-axiom H8 : true
-
-axiom H9 : (result1 = i)
-
-axiom H10 : (i1 = 1)
-
-axiom H11 : (result2 = temporary_2)
-
-axiom H12 : (temporary_21 = urem1(temporary_11, of_int1(256)))
-
-axiom H13 : (to_rep1(o3) = toSmall(temporary_21))
-
-axiom H14 : ((to_rep(data__first) <= (position + (4 - i1))) and
-  ((position + (4 - i1)) <= to_rep(data__last)))
-
-axiom H15 : (o4 = (position + (4 - i1)))
-
-axiom H16 : (o5 = (data[o4 <- o3]))
-
-axiom H17 : (result3 = data)
-
-axiom H18 : (data1 = o5)
-
-axiom H19 : (temporary_11 = result4)
-
-axiom H20 : (temporary_12 = udiv1(temporary_11, of_int1(256)))
-
-axiom H21 : (i1 = result5)
-
-axiom H22 : (i2 = 2)
-
-axiom H23 : (temporary_21 = result6)
-
-axiom H24 : (temporary_22 = urem1(temporary_12, of_int1(256)))
-
-axiom H25 : (to_rep1(o6) = toSmall(temporary_22))
-
-axiom H26 : ((to_rep(data__first) <= (position + (4 - i2))) and
-  ((position + (4 - i2)) <= to_rep(data__last)))
-
-axiom H27 : (o7 = (position + (4 - i2)))
-
-axiom H28 : (o8 = (data1[o7 <- o6]))
-
-axiom H29 : (data1 = result7)
-
-axiom H30 : (data2 = o8)
-
-axiom H31 : (temporary_12 = result8)
-
-axiom H32 : (temporary_13 = udiv1(temporary_12, of_int1(256)))
-
-axiom H33 : (i2 = result9)
-
-axiom H34 : (i3 = 3)
-
-axiom H35 : (temporary_22 = result10)
-
-axiom H36 : (temporary_23 = urem1(temporary_13, of_int1(256)))
-
-axiom H37 : (to_rep1(o9) = toSmall(temporary_23))
-
-axiom H38 : ((to_rep(data__first) <= (position + (4 - i3))) and
-  ((position + (4 - i3)) <= to_rep(data__last)))
-
-axiom H39 : (o10 = (position + (4 - i3)))
-
-axiom H40 : (o11 = (data2[o10 <- o9]))
-
-axiom H41 : (data2 = result11)
-
-axiom H42 : (data3 = o11)
-
-axiom H43 : (temporary_13 = result12)
-
-axiom H44 : (temporary_14 = udiv1(temporary_13, of_int1(256)))
-
-axiom H45 : (i3 = result13)
-
-axiom H46 : (i4 = 4)
-
-axiom H47 : (temporary_23 = result14)
-
-axiom H48 : (temporary_24 = urem1(temporary_14, of_int1(256)))
-
-axiom H49 : (to_rep1(o12) = toSmall(temporary_24))
-
-axiom H50 : ((to_rep(data__first) <= (position + (4 - i4))) and
-  ((position + (4 - i4)) <= to_rep(data__last)))
-
-axiom H51 : (o13 = (position + (4 - i4)))
-
-axiom H52 : (o14 = (data3[o13 <- o12]))
-
-axiom H53 : (data3 = result15)
-
-axiom H54 : (data4 = o14)
-
-axiom H55 : (result16 = temporary_14)
-
-axiom H56 : (temporary_15 = udiv1(temporary_14, of_int1(256)))
+axiom rliteral_axiom1 : (tqtint1(rliteral1) = 256)
 
  (* File "cubedos-lib-xdr.ads", line 57, characters 0-0 *)
-goal WP_parameter_def : in_range2((position + 3))
+goal WP_parameter_def :
+  (forall data:(int,octet) farray. forall last2:int. forall temporary_1:t1.
+  forall temporary_2:t1. forall i:int. forall o:octet. forall o1:int.
+  forall o2:(int,octet) farray. forall o3:octet. forall o4:int.
+  forall o5:(int,octet) farray. forall o6:octet. forall o7:int.
+  forall o8:(int,octet) farray. forall o9:octet. forall o10:int.
+  forall o11:(int,octet) farray. forall result:t1. forall temporary_11:t1.
+  forall result1:int. forall i1:int. forall result2:t1.
+  forall temporary_21:t1. forall result3:(int,octet) farray.
+  forall data1:(int,octet) farray. forall result4:t1. forall temporary_12:t1.
+  forall result5:int. forall i2:int. forall result6:t1.
+  forall temporary_22:t1. forall result7:(int,octet) farray.
+  forall data2:(int,octet) farray. forall result8:t1. forall temporary_13:t1.
+  forall result9:int. forall i3:int. forall result10:t1.
+  forall temporary_23:t1. forall result11:(int,octet) farray.
+  forall data3:(int,octet) farray. forall result12:t1.
+  forall temporary_14:t1. forall result13:int. forall i4:int.
+  forall result14:t1. forall temporary_24:t1.
+  forall result15:(int,octet) farray. forall data4:(int,octet) farray.
+  forall result16:t1. forall temporary_15:t1. (dynamic_property(0, 65535,
+  to_rep(data__first), to_rep(data__last)) -> (in_range2(position) ->
+  (((0 <= 65535) -> in_range2(last2)) -> (((((comp_mod(position,4) = 0) and
+  (((to_rep(data__first) <= to_rep(data__last)) and
+  (comp_mod(((to_rep(data__last) - to_rep(data__first)) + 1),4) = 0)) or
+  ((not (to_rep(data__first) <= to_rep(data__last))) and
+  (comp_mod(0,4) = 0)))) and ((to_rep(data__first) <= position) and
+  (position <= to_rep(data__last)))) and
+  ((position + 3) <= to_rep(data__last))) -> ((({ t__content1 = result } = {
+  t__content1 = temporary_1 }) and (temporary_11 = value)) -> (((({
+  int__content = result1 } = { int__content = i }) and (i1 = 1)) and ((({
+  t__content1 = result2 } = { t__content1 = temporary_2 }) and
+  (temporary_21 = urem1(temporary_11, rliteral1))) and
+  ((((to_rep1(o) = toSmall(temporary_21)) and
+  ((((to_rep(data__first) <= (position + (4 - i1))) and
+  ((position + (4 - i1)) <= to_rep(data__last))) and
+  (o1 = (position + (4 - i1)))) and (o2 = (data[o1 <- o])))) and (({
+  map__content = result3 } = { map__content = data }) and (data1 = o2))) and
+  (((temporary_11 = result4) and (temporary_12 = udiv1(temporary_11,
+  rliteral1))) and (((i1 = result5) and (i2 = 2)) and
+  (((temporary_21 = result6) and (temporary_22 = urem1(temporary_12,
+  rliteral1))) and ((((to_rep1(o3) = toSmall(temporary_22)) and
+  ((((to_rep(data__first) <= (position + (4 - i2))) and
+  ((position + (4 - i2)) <= to_rep(data__last))) and
+  (o4 = (position + (4 - i2)))) and (o5 = (data1[o4 <- o3])))) and
+  ((data1 = result7) and (data2 = o5))) and (((temporary_12 = result8) and
+  (temporary_13 = udiv1(temporary_12, rliteral1))) and (((i2 = result9) and
+  (i3 = 3)) and (((temporary_22 = result10) and
+  (temporary_23 = urem1(temporary_13, rliteral1))) and
+  ((((to_rep1(o6) = toSmall(temporary_23)) and
+  ((((to_rep(data__first) <= (position + (4 - i3))) and
+  ((position + (4 - i3)) <= to_rep(data__last))) and
+  (o7 = (position + (4 - i3)))) and (o8 = (data2[o7 <- o6])))) and
+  ((data2 = result11) and (data3 = o8))) and (((temporary_13 = result12) and
+  (temporary_14 = udiv1(temporary_13, rliteral1))) and (((i3 = result13) and
+  (i4 = 4)) and (((temporary_23 = result14) and
+  (temporary_24 = urem1(temporary_14, rliteral1))) and
+  ((((to_rep1(o9) = toSmall(temporary_24)) and
+  ((((to_rep(data__first) <= (position + (4 - i4))) and
+  ((position + (4 - i4)) <= to_rep(data__last))) and
+  (o10 = (position + (4 - i4)))) and (o11 = (data3[o10 <- o9])))) and
+  ((data3 = result15) and (data4 = o11))) and ((result16 = temporary_14) and
+  (temporary_15 = udiv1(temporary_14, rliteral1)))))))))))))))))) ->
+  in_range2((position + 3)))))))))

@@ -81,12 +81,6 @@ axiom bool_ge_axiom :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -98,6 +92,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -511,40 +511,20 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length(container2))))) ->
   in_range7(get(container2, position)))))
 
-logic o : us_rep1
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : bool
-
-logic o4 : int
-
-logic result : bool
-
-axiom H : in_range2(item)
-
-axiom H1 : in_range1(index)
-
-axiom H2 : ((o4 = (0 + length(model__({ us_split_discrs1 = {
-  rec__formal_list__vec__vector__capacity = container }; us_split_fields1 = {
-  rec__formal_list__vec__vector = container1 } })))) and (in_range5(o4) and
-  (o4 = (0 + length(model__({ us_split_discrs1 = {
-  rec__formal_list__vec__vector__capacity = container }; us_split_fields1 = {
-  rec__formal_list__vec__vector = container1 } }))))))
-
-axiom H3 : (((o4 <  index) -> (result = true)) and ((not (o4 <  index)) ->
-  (result = false)))
-
-axiom H4 : (not (result = true))
-
-axiom H5 : ((o1 = (0 + length(model__({ us_split_discrs1 = {
+ (* File "a-cofove.ads", line 704, characters 0-0 *)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. forall result:bool. (in_range2(item) ->
+  (in_range1(index) -> ((((o1 = (0 + length(model__({ us_split_discrs1 = {
   rec__formal_list__vec__vector__capacity = container }; us_split_fields1 = {
   rec__formal_list__vec__vector = container1 } })))) and (in_range5(o1) and
   (o1 = (0 + length(model__({ us_split_discrs1 = {
   rec__formal_list__vec__vector__capacity = container }; us_split_fields1 = {
-  rec__formal_list__vec__vector = container1 } }))))))
-
- (* File "a-cofove.ads", line 704, characters 0-0 *)
-goal WP_parameter_def : in_range4(o1)
+  rec__formal_list__vec__vector = container1 } })))))) and
+  (((o1 <  index) and (result = true)) or ((not (o1 <  index)) and
+  (result = false)))) -> ((not (result = true)) ->
+  (((o = (0 + length(model__({ us_split_discrs1 = {
+  rec__formal_list__vec__vector__capacity = container }; us_split_fields1 = {
+  rec__formal_list__vec__vector = container1 } })))) and (in_range5(o) and
+  (o = (0 + length(model__({ us_split_discrs1 = {
+  rec__formal_list__vec__vector__capacity = container }; us_split_fields1 = {
+  rec__formal_list__vec__vector = container1 } })))))) -> in_range4(o)))))))

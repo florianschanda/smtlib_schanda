@@ -480,27 +480,7 @@ logic z__attr__constrained : bool
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic y__split_fields : integer
-
-logic y__split_fields1 : integer
-
-logic z__split_fields : integer
-
-logic z__split_fields1 : integer
-
-logic us : int
-
-logic result : integer
-
-logic result1 : integer
-
-logic z__split_fields2 : integer
-
-logic z__split_fields3 : integer
-
-axiom H : ((0 = to_rep(y__split_discrs)) and (y__attr__constrained = true))
-
-axiom H1 : ((1 = to_rep(z__split_discrs)) and (z__attr__constrained = true))
-
  (* File "variants.ads", line 14, characters 0-0 *)
-goal WP_parameter_def : in_range(to_rep(x))
+goal WP_parameter_def : (((0 = to_rep(y__split_discrs)) and
+  (y__attr__constrained = true)) -> (((1 = to_rep(z__split_discrs)) and
+  (z__attr__constrained = true)) -> in_range(to_rep(x))))

@@ -135,9 +135,5 @@ logic c : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-axiom H : in_range1(c)
-
-axiom H1 : (0 <= c)
-
  (* File "dyn_bounds.adb", line 18, characters 0-0 *)
-goal WP_parameter_def : (0 <= 0)
+goal WP_parameter_def : (in_range1(c) -> ((0 <= c) -> (0 <= 0)))

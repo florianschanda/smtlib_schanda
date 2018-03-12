@@ -306,26 +306,15 @@ axiom is_valid__def_axiom1 :
   rec__dic_and_predicate_checks__r__g = x1 } }) = true) <->
   (0 <  to_rep(x))))
 
-logic temp___215 : integer
-
-logic temp___2151 : integer
-
-logic temp___218 : integer
-
-logic temp___2181 : integer
-
-axiom H : (to_rep(temp___2151) = 0)
-
-axiom H1 : (is_valid({ us_split_fields1 = {
-  rec__dic_and_predicate_checks__r__f = temp___215;
-  rec__dic_and_predicate_checks__r__g = temp___2151 } }) = true)
-
-axiom H2 : ((is_valid({ us_split_fields1 = {
-  rec__dic_and_predicate_checks__r__f = temp___218;
-  rec__dic_and_predicate_checks__r__g = temp___2181 } }) = true) and
-  (to_rep(temp___2181) = 0))
-
  (* File "dic_and_predicate_checks.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : (is_valid1({ us_split_fields1 = {
-  rec__dic_and_predicate_checks__r__f = temp___218;
-  rec__dic_and_predicate_checks__r__g = temp___2181 } }) = true)
+goal WP_parameter_def :
+  (forall temp___245:integer. forall temp___2451:integer.
+  forall temp___248:integer. forall temp___2481:integer.
+  (((to_rep(temp___2451) = 0) and (is_valid({ us_split_fields1 = {
+  rec__dic_and_predicate_checks__r__f = temp___245;
+  rec__dic_and_predicate_checks__r__g = temp___2451 } }) = true)) ->
+  (((is_valid({ us_split_fields1 = { rec__dic_and_predicate_checks__r__f =
+  temp___248; rec__dic_and_predicate_checks__r__g = temp___2481 }
+  }) = true) and (to_rep(temp___2481) = 0)) -> (is_valid1({
+  us_split_fields1 = { rec__dic_and_predicate_checks__r__f = temp___248;
+  rec__dic_and_predicate_checks__r__g = temp___2481 } }) = true))))

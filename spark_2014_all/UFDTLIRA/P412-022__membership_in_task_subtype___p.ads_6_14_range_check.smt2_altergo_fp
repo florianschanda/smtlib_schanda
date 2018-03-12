@@ -357,11 +357,6 @@ logic foo : bool
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic us : int
-
-logic us1 : int
-
-axiom H : ((us = 1) and in_range(1))
-
  (* File "system.ads", line 81, characters 0-0 *)
-goal WP_parameter_def : in_range(1)
+goal WP_parameter_def :
+  (forall us:int. (((us = 1) and in_range(1)) -> in_range(1)))

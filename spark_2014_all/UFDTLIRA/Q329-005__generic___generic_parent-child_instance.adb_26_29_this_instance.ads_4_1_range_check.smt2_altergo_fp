@@ -347,125 +347,37 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic this__split_fields : element
-
-logic this__split_fields1 : element
-
-logic this__split_fields2 : us_private
-
-logic step : int
-
-logic o : int
-
-logic o1 : element
-
-logic o2 : element
-
-logic o3 : element
-
-logic o4 : us_private
-
-logic temp___551 : element
-
-logic temp___5511 : element
-
-logic temp___5512 : us_private
-
-logic temp___5513 : int
-
-logic o5 : int
-
-logic this__split_fields3 : element
-
-logic this__split_fields4 : element
-
-logic this__split_fields5 : us_private
-
-logic result : int
-
-logic step1 : int
-
-logic result1 : element
-
-logic result2 : element
-
-logic result3 : us_private
-
-logic this__split_fields6 : element
-
-logic this__split_fields7 : element
-
-logic this__split_fields8 : us_private
-
-axiom H : (result = step)
-
-axiom H1 : (step1 = 1)
-
-axiom H2 : in_range(step1)
-
-axiom H3 : ((to_rep(this__split_fields1) <= (9 - step1)) ->
-  ((o = (to_rep(this__split_fields1) + step1)) and
-  in_range((to_rep(this__split_fields1) + step1))))
-
-axiom H4 : ((to_rep(this__split_fields1) <= (9 - step1)) -> (to_rep(o1) = o))
-
-axiom H5 : ((to_rep(this__split_fields1) <= (9 - step1)) ->
-  (this__split_fields = o2))
-
-axiom H6 : ((to_rep(this__split_fields1) <= (9 - step1)) -> (o1 = o3))
-
-axiom H7 : ((to_rep(this__split_fields1) <= (9 - step1)) ->
-  (this__split_fields2 = o4))
-
-axiom H8 : ((to_rep(this__split_fields1) <= (9 - step1)) ->
-  (temp___551 = o2))
-
-axiom H9 : ((to_rep(this__split_fields1) <= (9 - step1)) ->
-  (temp___5511 = o3))
-
-axiom H10 : ((to_rep(this__split_fields1) <= (9 - step1)) ->
-  (temp___5512 = o4))
-
-axiom H11 : ((to_rep(this__split_fields1) <= (9 - step1)) ->
-  (this__attr__tag = temp___5513))
-
-axiom H12 : ((to_rep(this__split_fields1) <= (9 - step1)) ->
-  (result1 = this__split_fields))
-
-axiom H13 : ((to_rep(this__split_fields1) <= (9 - step1)) ->
-  (result2 = this__split_fields1))
-
-axiom H14 : ((to_rep(this__split_fields1) <= (9 - step1)) ->
-  (result3 = this__split_fields2))
-
-axiom H15 : ((to_rep(this__split_fields1) <= (9 - step1)) ->
-  (temp___551 = this__split_fields6))
-
-axiom H16 : ((to_rep(this__split_fields1) <= (9 - step1)) ->
-  (temp___5511 = this__split_fields7))
-
-axiom H17 : ((to_rep(this__split_fields1) <= (9 - step1)) ->
-  (temp___5512 = this__split_fields8))
-
-axiom H18 : ((not (to_rep(this__split_fields1) <= (9 - step1))) ->
-  (this__split_fields = this__split_fields6))
-
-axiom H19 : ((not (to_rep(this__split_fields1) <= (9 - step1))) ->
-  (this__split_fields1 = this__split_fields7))
-
-axiom H20 : ((not (to_rep(this__split_fields1) <= (9 - step1))) ->
-  (this__split_fields2 = this__split_fields8))
-
-axiom H21 : ((not (to_rep(this__split_fields1) <= (9 - step1))) ->
-  (this__split_fields3 = this__split_fields6))
-
-axiom H22 : ((not (to_rep(this__split_fields1) <= (9 - step1))) ->
-  (this__split_fields4 = this__split_fields7))
-
-axiom H23 : ((not (to_rep(this__split_fields1) <= (9 - step1))) ->
-  (this__split_fields5 = this__split_fields8))
-
-axiom H24 : ((0 + step1) <= to_rep(this__split_fields6))
-
  (* File "generic_parent-child_instance.ads", line 12, characters 0-0 *)
-goal WP_parameter_def : in_range((to_rep(this__split_fields6) - step1))
+goal WP_parameter_def :
+  (forall this__split_fields:element. forall this__split_fields1:element.
+  forall this__split_fields2:us_private. forall step:int. forall o:int.
+  forall o1:element. forall o2:element. forall o3:element.
+  forall o4:us_private. forall temp___617:element.
+  forall temp___6171:element. forall temp___6172:us_private.
+  forall temp___6173:int. forall this__split_fields3:element.
+  forall this__split_fields4:element. forall this__split_fields5:us_private.
+  forall result:int. forall step1:int. forall result1:element.
+  forall result2:element. forall result3:us_private.
+  forall this__split_fields6:element. forall this__split_fields7:element.
+  forall this__split_fields8:us_private. (((result = step) and
+  (step1 = 1)) -> (in_range(step1) ->
+  ((((to_rep(this__split_fields1) <= (9 - step1)) and
+  ((((((o = (to_rep(this__split_fields1) + step1)) and
+  in_range((to_rep(this__split_fields1) + step1))) and (to_rep(o1) = o)) and
+  ((this__split_fields = o2) and ((o1 = o3) and
+  (this__split_fields2 = o4)))) and (((temp___617 = o2) and
+  ((temp___6171 = o3) and (temp___6172 = o4))) and
+  (this__attr__tag = temp___6173))) and (((result1 = this__split_fields) and
+  ((result2 = this__split_fields1) and (result3 = this__split_fields2))) and
+  ((temp___617 = this__split_fields6) and
+  ((temp___6171 = this__split_fields7) and
+  (temp___6172 = this__split_fields8)))))) or
+  ((not (to_rep(this__split_fields1) <= (9 - step1))) and
+  (((this__split_fields = this__split_fields6) and
+  ((this__split_fields1 = this__split_fields7) and
+  (this__split_fields2 = this__split_fields8))) and
+  ((this__split_fields3 = this__split_fields6) and
+  ((this__split_fields4 = this__split_fields7) and
+  (this__split_fields5 = this__split_fields8)))))) ->
+  (((0 + step1) <= to_rep(this__split_fields6)) ->
+  in_range((to_rep(this__split_fields6) - step1)))))))

@@ -107,39 +107,18 @@ type index_type__ref = { index_type__content : index_type
 function index_type__ref___projection(a: index_type__ref) : index_type =
   (a).index_type__content
 
-logic count : int
-
-logic list_handler__integer_list__size__result : int
-
-logic result : int
-
-logic list_handler__integer_list__size__result1 : int
-
-logic list_handler__integer_list__size__result2 : int
-
-logic list_handler__integer_list__size__result3 : int
-
-logic list_handler__integer_list__size__result4 : int
-
-logic list_handler__integer_list__size__result5 : int
-
-axiom H : in_range(count)
-
-axiom H1 :
-  (list_handler__integer_list__size__result1 = list_handler__integer_list__size__result2)
-
-axiom H2 :
-  (list_handler__integer_list__size__result3 = list_handler__integer_list__size__result1)
-
-axiom H3 : (result = list_handler__integer_list__size__result)
-
-axiom H4 : (list_handler__integer_list__size__result1 = count)
-
-axiom H5 :
-  (list_handler__integer_list__size__result4 = list_handler__integer_list__size__result2)
-
-axiom H6 :
-  (list_handler__integer_list__size__result5 = list_handler__integer_list__size__result3)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (list_handler__integer_list__size__result4 = count)
+goal WP_parameter_def :
+  (forall count:int. forall list_handler__integer_list__size__result:int.
+  forall result:int. forall list_handler__integer_list__size__result1:int.
+  forall list_handler__integer_list__size__result2:int.
+  forall list_handler__integer_list__size__result3:int.
+  forall list_handler__integer_list__size__result4:int.
+  forall list_handler__integer_list__size__result5:int. (in_range(count) ->
+  (((((list_handler__integer_list__size__result1 = list_handler__integer_list__size__result2) and
+  (list_handler__integer_list__size__result3 = list_handler__integer_list__size__result1)) and
+  ((result = list_handler__integer_list__size__result) and
+  (list_handler__integer_list__size__result1 = count))) and
+  ((list_handler__integer_list__size__result4 = list_handler__integer_list__size__result2) and
+  (list_handler__integer_list__size__result5 = list_handler__integer_list__size__result3))) ->
+  (list_handler__integer_list__size__result4 = count))))

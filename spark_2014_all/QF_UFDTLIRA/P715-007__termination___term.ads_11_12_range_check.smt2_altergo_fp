@@ -111,15 +111,7 @@ logic c : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic c1 : int
-
-axiom H : in_range(c1)
-
-axiom H1 : (c1 = c)
-
-axiom H2 : in_range(c)
-
-axiom H3 : (0 <= c)
-
  (* File "term.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : ((- 2147483648) <= 0)
+goal WP_parameter_def :
+  (forall c1:int. (in_range(c1) -> ((c1 = c) -> (in_range(c) -> ((0 <= c) ->
+  ((- 2147483648) <= 0))))))

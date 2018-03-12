@@ -141,71 +141,11 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic res : int
-
-logic count__count__result : int
-
-logic o : int
-
-logic temp___132 : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic result : int
-
-logic res1 : int
-
-logic res2 : int
-
-logic result1 : int
-
-logic res3 : int
-
-logic res4 : int
-
-logic res5 : int
-
-logic res6 : int
-
-logic res7 : int
-
-logic res8 : int
-
-logic res9 : int
-
-logic result2 : int
-
-logic count__count__result1 : int
-
-logic count__count__result2 : int
-
-logic count__count__result3 : int
-
-logic res10 : int
-
-logic count__count__result4 : int
-
-logic res11 : int
-
-logic count__count__result5 : int
-
-axiom H : in_range(max)
-
-axiom H1 : in_range1(step)
-
-axiom H2 : ((0 <  step) and ((0 <= max) and (max <  (2147483647 - step))))
-
-axiom H3 : (result = res)
-
-axiom H4 : (res1 = 0)
-
-axiom H5 : in_range1(res1)
-
-axiom H6 : (res2 <= max)
-
-axiom H7 : ((0 <= 2147483647) -> in_range1(res2))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range((res2 + step))
+goal WP_parameter_def :
+  (forall res:int. forall result:int. forall res1:int. forall res2:int.
+  (in_range(max) -> (in_range1(step) -> (((0 <  step) and ((0 <= max) and
+  (max <  (2147483647 - step)))) -> ((({ int__content = result } = {
+  int__content = res }) and (res1 = 0)) -> (in_range1(res1) ->
+  ((res2 <= max) -> (((0 <= 2147483647) -> in_range1(res2)) ->
+  in_range((res2 + step))))))))))

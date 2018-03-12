@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -135,39 +135,8 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic counter : int
-
-logic temp___186 : int
-
-logic o : int
-
-logic result : int
-
-logic counter1 : int
-
-logic counter2 : int
-
-logic result1 : int
-
-logic counter3 : int
-
-logic counter4 : int
-
-logic counter5 : int
-
-logic counter6 : int
-
-logic counter7 : int
-
-logic counter8 : int
-
-logic counter9 : int
-
-axiom H : (result = counter)
-
-axiom H1 : (counter1 = 5)
-
-axiom H2 : in_range1(counter1)
-
  (* File "system.ads", line 81, characters 0-0 *)
-goal WP_parameter_def : (0 <= counter1)
+goal WP_parameter_def :
+  (forall counter:int. forall result:int. forall counter1:int. ((({
+  int__content = result } = { int__content = counter }) and
+  (counter1 = 5)) -> (in_range1(counter1) -> (0 <= counter1))))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -188,24 +188,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> (int,natural) farray
-
-axiom concat_def :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : natural, int -> (int,natural) farray
-
-axiom singleton_def :
-  (forall v:natural.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,natural) farray, int, int, (int,natural) farray, int,
   int -> bool
 
@@ -216,17 +198,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -236,37 +218,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type integer
 
@@ -444,213 +398,65 @@ function t23b__ref___projection(a: t23b__ref) : integer = (a).t23b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic min : int
-
-logic index1 : int
-
-logic sort__index_of_minimum__result : int
-
-logic o : int
-
-logic temp___277 : int
-
-logic temp___276 : int
-
-logic o1 : int
-
-logic o2 : natural
-
-logic o3 : int
-
-logic o4 : int
-
-logic i : int
-
-logic o5 : int
-
-logic o6 : natural
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : natural
-
-logic o10 : int
-
-logic o11 : int
-
-logic i1 : int
-
-logic o12 : int
-
-logic o13 : natural
-
-logic o14 : int
-
-logic result : int
-
-logic min1 : int
-
-logic result1 : int
-
-logic index2 : int
-
-logic result2 : bool
-
-logic result3 : int
-
-logic min2 : int
-
-logic min3 : int
-
-logic index3 : int
-
-logic result4 : int
-
-logic index4 : int
-
-logic result5 : bool
-
-logic result6 : int
-
-logic min4 : int
-
-logic min5 : int
-
-logic index5 : int
-
-logic min6 : int
-
-logic index6 : int
-
-logic min7 : int
-
-logic index7 : int
-
-logic min8 : int
-
-logic index8 : int
-
-logic min9 : int
-
-logic index9 : int
-
-logic min10 : int
-
-logic index10 : int
-
-logic result7 : int
-
-logic sort__index_of_minimum__result1 : int
-
-logic sort__index_of_minimum__result2 : int
-
-logic sort__index_of_minimum__result3 : int
-
-logic min11 : int
-
-logic index11 : int
-
-logic sort__index_of_minimum__result4 : int
-
-logic min12 : int
-
-logic index12 : int
-
-logic sort__index_of_minimum__result5 : int
-
-logic result8 : int
-
-axiom H : dynamic_property(1, 100, to_rep1(first(values1)),
-  to_rep1(last(values1)))
-
-axiom H1 : (0 <  length({ elts = values; rt = values1 }))
-
-axiom H2 : ((1 <= 2147483647) -> in_range2(min))
-
-axiom H3 : ((o = to_rep1(first(values1))) and
-  in_range2(to_rep1(first(values1))))
-
-axiom H4 : (result = min)
-
-axiom H5 : (min1 = o)
-
-axiom H6 : (result1 = index1)
-
-axiom H7 : (index2 = to_rep1(first(values1)))
-
-axiom H8 : (((to_rep1(first(values1)) <= index2) and
-  (index2 <= to_rep1(last(values1)))) -> (((temp___277 = min1) and
-  ((temp___276 = index2) and ((((((((to_rep1(first(values1)) <= min1) and
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (forall min:int. forall index1:int.
+  forall sort__index_of_minimum__result:int. forall o:int.
+  forall temp___308:int. forall temp___307:int. forall o1:int.
+  forall o2:natural. forall o3:int. forall o4:int. forall result:int.
+  forall min1:int. forall result1:int. forall index2:int.
+  forall result2:bool. forall result3:int. forall min2:int. forall min3:int.
+  forall index3:int. forall min4:int. forall index4:int. forall min5:int.
+  forall index5:int. forall min6:int. forall index6:int. forall min7:int.
+  forall index7:int. forall result4:int.
+  forall sort__index_of_minimum__result1:int.
+  forall sort__index_of_minimum__result2:int.
+  forall sort__index_of_minimum__result3:int. forall min8:int.
+  forall index8:int. forall sort__index_of_minimum__result4:int.
+  forall min9:int. forall index9:int.
+  forall sort__index_of_minimum__result5:int.
+  (forall result5:int. ((dynamic_property(1, 100, to_rep1(first(values1)),
+  to_rep1(last(values1))) and ((0 <  length({ elts = values; rt = values1
+  })) and (((((1 <= 2147483647) -> in_range2(min)) and
+  ((((o = to_rep1(first(values1))) and
+  in_range2(to_rep1(first(values1)))) and (({ int__content = result } = {
+  int__content = min }) and (min1 = o))) and (((({ int__content = result1
+  } = { int__content = index1 }) and (index2 = to_rep1(first(values1)))) and
+  ((((to_rep1(first(values1)) <= index2) and
+  (index2 <= to_rep1(last(values1)))) and ((((temp___308 = min1) and
+  ((temp___307 = index2) and ((((((((to_rep1(first(values1)) <= min1) and
   (min1 <= to_rep1(last(values1)))) and (o1 = min1)) and
   (o2 = (values[o1]))) and (o3 = to_rep(o2))) and
-  (((to_rep((values[index2])) <  o3) -> (result2 = true)) and
-  ((not (to_rep((values[index2])) <  o3)) -> (result2 = false)))) and
-  (((result2 = true) -> (((o4 = index2) and in_range2(index2)) and
-  ((min1 = result3) and (min2 = o4)))) and ((not (result2 = true)) ->
+  (((to_rep((values[index2])) <  o3) and (result2 = true)) or
+  ((not (to_rep((values[index2])) <  o3)) and (result2 = false)))) and
+  (((result2 = true) and (((o4 = index2) and in_range2(index2)) and
+  ((min1 = result3) and (min2 = o4)))) or ((not (result2 = true)) and
   (min2 = min1)))) and ((((to_rep1(first(values1)) <= min3) and
   (min3 <= to_rep1(last(values1)))) and
-  (forall i2:int. (((to_rep1(first(values1)) <= i2) and (i2 <= index3)) ->
-  (to_rep((values[min3])) <= to_rep((values[i2])))))) and
+  (forall i:int. (((to_rep1(first(values1)) <= i) and (i <= index3)) ->
+  (to_rep((values[min3])) <= to_rep((values[i])))))) and
   (((((to_rep1(first(values1)) <= to_rep1(last(values1))) ->
   dynamic_property1(to_rep1(first(values1)), to_rep1(last(values1)),
   index3)) and ((1 <= 2147483647) -> in_range2(min3))) and
   ((to_rep1(first(values1)) <= index3) and
   (index3 <= to_rep1(last(values1))))) and
-  (index3 = to_rep1(last(values1)))))))) and (((index3 = index7) and
-  (min3 = min7)) and ((index8 = index3) and (min8 = min3)))))
-
-axiom H9 : (((to_rep1(first(values1)) <= index2) and
-  (index2 <= to_rep1(last(values1)))) -> (index9 = index7))
-
-axiom H10 : (((to_rep1(first(values1)) <= index2) and
-  (index2 <= to_rep1(last(values1)))) -> (min9 = min7))
-
-axiom H11 : (((to_rep1(first(values1)) <= index2) and
-  (index2 <= to_rep1(last(values1)))) -> (index10 = index8))
-
-axiom H12 : (((to_rep1(first(values1)) <= index2) and
-  (index2 <= to_rep1(last(values1)))) -> (min10 = min8))
-
-axiom H13 : ((not ((to_rep1(first(values1)) <= index2) and
-  (index2 <= to_rep1(last(values1))))) -> (index2 = index9))
-
-axiom H14 : ((not ((to_rep1(first(values1)) <= index2) and
-  (index2 <= to_rep1(last(values1))))) -> (min1 = min9))
-
-axiom H15 : ((not ((to_rep1(first(values1)) <= index2) and
-  (index2 <= to_rep1(last(values1))))) -> (index10 = index2))
-
-axiom H16 : ((not ((to_rep1(first(values1)) <= index2) and
-  (index2 <= to_rep1(last(values1))))) -> (min10 = min1))
-
-axiom H17 :
-  (sort__index_of_minimum__result1 = sort__index_of_minimum__result2)
-
-axiom H18 :
-  (sort__index_of_minimum__result3 = sort__index_of_minimum__result1)
-
-axiom H19 : (result7 = sort__index_of_minimum__result)
-
-axiom H20 : (sort__index_of_minimum__result1 = min9)
-
-axiom H21 :
-  (sort__index_of_minimum__result4 = sort__index_of_minimum__result2)
-
-axiom H22 : (index11 = index9)
-
-axiom H23 : (min11 = min9)
-
-axiom H24 :
-  (sort__index_of_minimum__result5 = sort__index_of_minimum__result3)
-
-axiom H25 : (index12 = index10)
-
-axiom H26 : (min12 = min10)
-
-axiom H27 : (result8 = sort__index_of_minimum__result4)
-
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (to_rep1(first(values1)) <= sort__index_of_minimum__result4)
+  (index3 = to_rep1(last(values1)))))))) and (((index3 = index4) and
+  (min3 = min4)) and ((index5 = index3) and (min5 = min3)))) and ((({
+  int__content = index6 } = { int__content = index4 }) and ({ int__content =
+  min6 } = { int__content = min4 })) and ((index7 = index5) and
+  (min7 = min5))))) or ((not ((to_rep1(first(values1)) <= index2) and
+  (index2 <= to_rep1(last(values1))))) and (((index2 = index6) and
+  (min1 = min6)) and ((index7 = index2) and (min7 = min1)))))) and
+  (((sort__index_of_minimum__result1 = sort__index_of_minimum__result2) and
+  (sort__index_of_minimum__result3 = sort__index_of_minimum__result1)) and
+  (({ int__content = result4 } = { int__content =
+  sort__index_of_minimum__result }) and
+  (sort__index_of_minimum__result1 = min6)))))) and ((({ int__content =
+  sort__index_of_minimum__result4 } = { int__content =
+  sort__index_of_minimum__result2 }) and (({ int__content = index8 } = {
+  int__content = index6 }) and ({ int__content = min8 } = { int__content =
+  min6 }))) and
+  ((sort__index_of_minimum__result5 = sort__index_of_minimum__result3) and
+  ((index9 = index7) and (min9 = min7))))) and
+  (result5 = sort__index_of_minimum__result4)))) ->
+  (to_rep1(first(values1)) <= sort__index_of_minimum__result4))))

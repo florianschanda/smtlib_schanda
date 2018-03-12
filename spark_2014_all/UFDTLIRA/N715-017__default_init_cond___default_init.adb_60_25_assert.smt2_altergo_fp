@@ -206,22 +206,10 @@ axiom glob2_ok__def_axiom :
   us_split_fields1 = { rec__default_init__glob2__f = x } },
   default_init__n) = true) <-> (to_rep(x) = default_init__n))))
 
-logic n : int
-
-logic g__split_fields : natural
-
-logic result : int
-
-logic n1 : int
-
-axiom H : in_range(n)
-
-axiom H1 : (result = n)
-
-axiom H2 : (n1 = 0)
-
-axiom H3 : ((to_rep(g__split_fields) = 0) and (glob2_ok({ us_split_fields1 =
-  { rec__default_init__glob2__f = g__split_fields } }, n1) = true))
-
  (* File "default_init.adb", line 48, characters 0-0 *)
-goal WP_parameter_def : (to_rep(g__split_fields) = n1)
+goal WP_parameter_def :
+  (forall n:int. forall g__split_fields:natural. forall result:int.
+  forall n1:int. (in_range(n) -> (((result = n) and (n1 = 0)) ->
+  (((to_rep(g__split_fields) = 0) and (glob2_ok({ us_split_fields1 = {
+  rec__default_init__glob2__f = g__split_fields } }, n1) = true)) ->
+  (to_rep(g__split_fields) = n1)))))

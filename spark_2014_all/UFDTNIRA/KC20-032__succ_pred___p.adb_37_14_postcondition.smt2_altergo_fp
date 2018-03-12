@@ -406,41 +406,18 @@ logic m : money
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic p__ident__4__result : money
-
-logic o : money
-
-logic result : money
-
-logic p__ident__4__result1 : money
-
-logic p__ident__4__result2 : money
-
-logic p__ident__4__result3 : money
-
-logic p__ident__4__result4 : money
-
-logic p__ident__4__result5 : money
-
-logic result1 : money
-
-axiom H : (not (to_fixed1(m) = 999999999999999))
-
-axiom H1 : (p__ident__4__result1 = p__ident__4__result2)
-
-axiom H2 : (p__ident__4__result3 = p__ident__4__result1)
-
-axiom H3 : (to_fixed1(o) = ((to_fixed1(m) + 1) - 1))
-
-axiom H4 : (result = p__ident__4__result)
-
-axiom H5 : (p__ident__4__result1 = o)
-
-axiom H6 : (p__ident__4__result4 = p__ident__4__result2)
-
-axiom H7 : (p__ident__4__result5 = p__ident__4__result3)
-
-axiom H8 : (result1 = p__ident__4__result4)
-
  (* File "p.adb", line 6, characters 0-0 *)
-goal WP_parameter_def : (to_fixed1(p__ident__4__result4) = to_fixed1(m))
+goal WP_parameter_def :
+  (forall p__ident__4__result:money. forall o:money. forall result:money.
+  forall p__ident__4__result1:money. forall p__ident__4__result2:money.
+  forall p__ident__4__result3:money. forall p__ident__4__result4:money.
+  forall p__ident__4__result5:money.
+  (forall result1:money. (((not (to_fixed1(m) = 999999999999999)) and
+  (((((p__ident__4__result1 = p__ident__4__result2) and
+  (p__ident__4__result3 = p__ident__4__result1)) and
+  ((to_fixed1(o) = ((to_fixed1(m) + 1) - 1)) and
+  ((result = p__ident__4__result) and (p__ident__4__result1 = o)))) and
+  ((p__ident__4__result4 = p__ident__4__result2) and
+  (p__ident__4__result5 = p__ident__4__result3))) and
+  (result1 = p__ident__4__result4))) ->
+  (to_fixed1(p__ident__4__result4) = to_fixed1(m)))))

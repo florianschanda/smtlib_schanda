@@ -56,12 +56,6 @@ axiom us_compatible_tags_refl :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -73,6 +67,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -188,29 +188,13 @@ logic rc2__attr__tag : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic r__split_fields : us_private
-
-logic rc__split_fields : us_private
-
-logic result : us_private
-
-logic r__split_fields1 : us_private
-
-logic result1 : us_private
-
-logic rc__split_fields1 : us_private
-
-axiom H : (result = r__split_fields)
-
-axiom H1 : (us_null_ext__ = r__split_fields1)
-
-axiom H2 : (r__attr__tag = us_tag)
-
-axiom H3 : (result1 = rc__split_fields)
-
-axiom H4 : (rc__split_fields1 = r__split_fields1)
-
-axiom H5 : (rc__attr__tag = r__attr__tag)
-
  (* File "tagged_conv.adb", line 35, characters 0-0 *)
-goal WP_parameter_def : us_compatible_tags(rc__attr__tag, us_tag1)
+goal WP_parameter_def :
+  (forall r__split_fields:us_private. forall rc__split_fields:us_private.
+  forall result:us_private. forall r__split_fields1:us_private.
+  forall result1:us_private. forall rc__split_fields1:us_private.
+  ((((result = r__split_fields) and (us_null_ext__ = r__split_fields1)) and
+  (r__attr__tag = us_tag)) -> ((((result1 = rc__split_fields) and
+  (rc__split_fields1 = r__split_fields1)) and
+  (rc__attr__tag = r__attr__tag)) -> us_compatible_tags(rc__attr__tag,
+  us_tag1))))

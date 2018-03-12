@@ -1230,62 +1230,10 @@ axiom high_bound__def_axiom :
   (high_bound(n1) = mul(NearestTiesToEven, mul(NearestTiesToEven,
   of_int(NearestTiesToEven, n1), fliteral1), fliteral2))))
 
-logic new_speed : t
-
-logic average : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : int
-
-logic result : t
-
-logic new_speed1 : t
-
-logic result1 : t
-
-logic average1 : t
-
-logic new_speed2 : t
-
-logic average2 : t
-
-logic new_speed3 : t
-
-logic average3 : t
-
-axiom H : in_range1(n)
-
-axiom H1 : in_range2(factor)
-
-axiom H2 : tqtisFinite(old_speed)
-
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0))
-
-axiom H3 : (le(neg(fliteral3), fliteral3) -> tqtisFinite(new_speed))
-
-axiom H4 : (le(neg(fliteral3), fliteral3) -> tqtisFinite(average))
-
-axiom H5 : ((n <  25000) and (invariant__(n, old_speed) = true))
-
-axiom H6 : ((o = add(NearestTiesToEven, old_speed, mul(NearestTiesToEven,
-  mul(NearestTiesToEven, factor, fliteral1), fliteral2))) and
-  tqtisFinite(add(NearestTiesToEven, old_speed, mul(NearestTiesToEven,
-  mul(NearestTiesToEven, factor, fliteral1), fliteral2))))
-
-axiom H7 : (result = new_speed)
-
-axiom H8 : (new_speed1 = o)
-
-axiom H9 : ((o1 = add(NearestTiesToEven, old_speed, new_speed1)) and
-  tqtisFinite(add(NearestTiesToEven, old_speed, new_speed1)))
 
 logic fliteral4 : t
 
@@ -1293,4 +1241,17 @@ axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 2.0))
 
  (* File "attempt_1.adb", line 19, characters 0-0 *)
-goal WP_parameter_def : (not is_zero(fliteral4))
+goal WP_parameter_def :
+  (forall new_speed:t. forall average:t. forall o:t. forall o1:t.
+  forall result:t. forall new_speed1:t. (in_range1(n) ->
+  (in_range2(factor) -> (tqtisFinite(old_speed) -> ((le(neg(fliteral3),
+  fliteral3) -> tqtisFinite(new_speed)) -> ((le(neg(fliteral3), fliteral3) ->
+  tqtisFinite(average)) -> (((n <  25000) and (invariant__(n,
+  old_speed) = true)) -> ((((o = add(NearestTiesToEven, old_speed,
+  mul(NearestTiesToEven, mul(NearestTiesToEven, factor, fliteral1),
+  fliteral2))) and tqtisFinite(add(NearestTiesToEven, old_speed,
+  mul(NearestTiesToEven, mul(NearestTiesToEven, factor, fliteral1),
+  fliteral2)))) and (({ t__content = result } = { t__content = new_speed
+  }) and (new_speed1 = o))) -> (((o1 = add(NearestTiesToEven, old_speed,
+  new_speed1)) and tqtisFinite(add(NearestTiesToEven, old_speed,
+  new_speed1))) -> (not is_zero(fliteral4)))))))))))

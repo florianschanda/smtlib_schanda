@@ -49,35 +49,20 @@ function real__ref___projection(a: real__ref) : real = (a).real__content
 function us_private__ref___projection(a: us_private__ref) : us_private =
   (a).us_private__content
 
-logic pack__query_x2_bis__result : int
-
-logic result : int
-
-logic pack__query_x2_bis__result1 : int
-
-logic pack__query_x2_bis__result2 : int
-
-logic pack__query_x2_bis__result3 : int
-
-logic pack__query_x2_bis__result4 : int
-
-logic pack__query_x2_bis__result5 : int
-
-logic result1 : int
-
-axiom H : (pack__query_x2_bis__result1 = pack__query_x2_bis__result2)
-
-axiom H1 : (pack__query_x2_bis__result3 = pack__query_x2_bis__result1)
-
-axiom H2 : (result = pack__query_x2_bis__result)
-
-axiom H3 : (pack__query_x2_bis__result1 = 3)
-
-axiom H4 : (pack__query_x2_bis__result4 = pack__query_x2_bis__result2)
-
-axiom H5 : (pack__query_x2_bis__result5 = pack__query_x2_bis__result3)
-
-axiom H6 : (result1 = pack__query_x2_bis__result4)
-
  (* File "pack.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : (pack__query_x2_bis__result4 = 3)
+goal WP_parameter_def :
+  (forall pack__query_x2_bis__result:int. forall result:int.
+  forall pack__query_x2_bis__result1:int.
+  forall pack__query_x2_bis__result2:int.
+  forall pack__query_x2_bis__result3:int.
+  forall pack__query_x2_bis__result4:int.
+  forall pack__query_x2_bis__result5:int.
+  (forall result1:int.
+  ((((((pack__query_x2_bis__result1 = pack__query_x2_bis__result2) and
+  (pack__query_x2_bis__result3 = pack__query_x2_bis__result1)) and
+  ((result = pack__query_x2_bis__result) and
+  (pack__query_x2_bis__result1 = 3))) and
+  ((pack__query_x2_bis__result4 = pack__query_x2_bis__result2) and
+  (pack__query_x2_bis__result5 = pack__query_x2_bis__result3))) and
+  (result1 = pack__query_x2_bis__result4)) ->
+  (pack__query_x2_bis__result4 = 3))))

@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -93,60 +93,21 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
-logic true_out1 : bool
-
-logic unit_delay_memory : bool
-
-logic unit_delay_out1 : bool
-
-logic modes_on_out1 : bool
-
-logic not_out1 : bool
-
-logic or_out1 : bool
-
-logic result : bool
-
-logic unit_delay_out11 : bool
-
-logic result1 : bool
-
-logic modes_on_out11 : bool
-
-logic result2 : bool
-
-logic not_out11 : bool
-
-logic result3 : bool
-
-logic true_out11 : bool
-
-logic result4 : bool
-
-logic or_out11 : bool
-
-axiom H : (result = unit_delay_out1)
-
-axiom H1 : (unit_delay_out11 = unit_delay_memory)
-
-axiom H2 : (result1 = modes_on_out1)
-
-axiom H3 : (modes_on_out11 = modes_on)
-
-axiom H4 : (result2 = not_out1)
-
-axiom H5 : (((not (modes_on_out11 = true)) -> (not_out11 = true)) and
-  ((modes_on_out11 = true) -> (not_out11 = false)))
-
-axiom H6 : (result3 = true_out1)
-
-axiom H7 : (true_out11 = of_int(1))
-
-axiom H8 : (result4 = or_out1)
-
-axiom H9 : ((((unit_delay_out11 = true) or (not_out11 = true)) ->
-  (or_out11 = true)) and ((not ((unit_delay_out11 = true) or
-  (not_out11 = true))) -> (or_out11 = false)))
-
  (* File "modes_off_at_startup.adb", line 17, characters 0-0 *)
-goal WP_parameter_def : (or_out11 = true)
+goal WP_parameter_def :
+  (forall true_out1:bool. forall unit_delay_memory:bool.
+  forall unit_delay_out1:bool. forall modes_on_out1:bool.
+  forall not_out1:bool. forall or_out1:bool. forall result:bool.
+  forall unit_delay_out11:bool. forall result1:bool.
+  forall modes_on_out11:bool. forall result2:bool. forall not_out11:bool.
+  forall result3:bool. forall true_out11:bool. forall result4:bool.
+  forall or_out11:bool. (((result = unit_delay_out1) and
+  (unit_delay_out11 = unit_delay_memory)) -> (((result1 = modes_on_out1) and
+  (modes_on_out11 = modes_on)) -> (((result2 = not_out1) and
+  (((not (modes_on_out11 = true)) and (not_out11 = true)) or
+  ((modes_on_out11 = true) and (not_out11 = false)))) ->
+  (((result3 = true_out1) and (true_out11 = of_int(1))) ->
+  (((result4 = or_out1) and ((((unit_delay_out11 = true) or
+  (not_out11 = true)) and (or_out11 = true)) or
+  ((not ((unit_delay_out11 = true) or (not_out11 = true))) and
+  (or_out11 = false)))) -> (or_out11 = true)))))))

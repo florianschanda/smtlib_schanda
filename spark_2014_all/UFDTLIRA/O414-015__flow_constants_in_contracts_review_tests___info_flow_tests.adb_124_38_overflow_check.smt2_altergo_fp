@@ -184,67 +184,15 @@ axiom c6__def_axiom : (c6 = f4(5, c3))
 
 axiom c7__def_axiom : (c7 = f4(c3, c4))
 
-logic x : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : int
-
-logic o10 : int
-
-axiom H : in_range1(c2)
-
-axiom H1 : (f1(5) = c2)
-
-axiom H2 : in_range1(c4)
-
-axiom H3 : in_range1(c6)
-
-axiom H4 : (f4(5, c3) = c6)
-
-axiom H5 : in_range1(c4)
-
-axiom H6 : in_range1(c3)
-
-axiom H7 : in_range1(c5)
-
-axiom H8 : in_range1(c7)
-
-axiom H9 : (f4(c3, c4) = c7)
-
-axiom H10 : ((0 <= 2147483647) -> in_range1(x))
-
-axiom H11 : ((o = (5 + c2)) and in_range((5 + c2)))
-
-axiom H12 : (o1 = (o + c3))
-
-axiom H13 : ((o2 = o1) and in_range(o1))
-
-axiom H14 : (o3 = (o2 + c4))
-
-axiom H15 : ((o4 = o3) and in_range(o3))
-
-axiom H16 : (o5 = (o4 + c5))
-
-axiom H17 : ((o6 = o5) and in_range(o5))
-
-axiom H18 : (o7 = (o6 + c6))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range(o7)
+goal WP_parameter_def :
+  (forall x:int. forall o:int. forall o1:int. forall o2:int. forall o3:int.
+  forall o4:int. forall o5:int. forall o6:int. forall o7:int.
+  (in_range1(c2) -> ((f1(5) = c2) -> (in_range1(c4) -> (in_range1(c6) ->
+  ((f4(5, c3) = c6) -> (in_range1(c4) -> (in_range1(c3) -> (in_range1(c5) ->
+  (in_range1(c7) -> ((f4(c3, c4) = c7) -> (((0 <= 2147483647) ->
+  in_range1(x)) -> ((((((((((o = (5 + c2)) and in_range((5 + c2))) and
+  (o1 = (o + c3))) and ((o2 = o1) and in_range(o1))) and
+  (o3 = (o2 + c4))) and ((o4 = o3) and in_range(o3))) and
+  (o5 = (o4 + c5))) and ((o6 = o5) and in_range(o5))) and
+  (o7 = (o6 + c6))) -> in_range(o7))))))))))))))

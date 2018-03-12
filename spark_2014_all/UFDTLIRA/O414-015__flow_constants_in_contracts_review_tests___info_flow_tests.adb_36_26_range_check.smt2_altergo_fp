@@ -248,27 +248,9 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 axiom last__def_axiom1 : (last1 = c2)
 
-logic a : int
-
-logic b : int
-
-logic o : int
-
-logic o1 : int
-
-logic result : int
-
-logic a1 : int
-
-axiom H : ((0 <= 2147483647) -> in_range(a))
-
-axiom H1 : ((0 <= 2147483647) -> in_range(b))
-
-axiom H2 : ((o = last1) and in_range(last1))
-
-axiom H3 : (result = a)
-
-axiom H4 : (a1 = o)
-
  (* File "info_flow_tests.adb", line 20, characters 0-0 *)
-goal WP_parameter_def : in_range(last)
+goal WP_parameter_def :
+  (forall a:int. forall b:int. forall o:int. forall result:int.
+  forall a1:int. (((0 <= 2147483647) -> in_range(a)) ->
+  (((0 <= 2147483647) -> in_range(b)) -> ((((o = last1) and
+  in_range(last1)) and ((result = a) and (a1 = o))) -> in_range(last)))))

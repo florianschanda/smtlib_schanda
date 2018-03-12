@@ -1026,31 +1026,13 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic fsthalf : t
+logic rliteral1 : t
 
-logic sndhalf : t
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 0)
 
-logic o : t1
+logic rliteral2 : t1
 
-logic o1 : t1
-
-logic o2 : t1
-
-logic o3 : t
-
-logic result : t
-
-logic fsthalf1 : t
-
-logic result1 : t
-
-logic sndhalf1 : t
-
-axiom H : true
-
-axiom H1 : true
-
-axiom H2 : true
+axiom rliteral_axiom2 : (tqtint1(rliteral2) = 255)
 
  (* File "bitwise.adb", line 25, characters 0-0 *)
-goal WP_parameter_def : ule1(toBig(of_int(0)), bw_and1(val__, of_int1(255)))
+goal WP_parameter_def : ule1(toBig(rliteral1), bw_and1(val__, rliteral2))

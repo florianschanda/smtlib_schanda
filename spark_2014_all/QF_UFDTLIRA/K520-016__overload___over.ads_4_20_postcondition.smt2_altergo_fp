@@ -109,37 +109,15 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic over__f__result : int
-
-logic result : int
-
-logic over__f__result1 : int
-
-logic over__f__result2 : int
-
-logic over__f__result3 : int
-
-logic over__f__result4 : int
-
-logic over__f__result5 : int
-
-logic result1 : int
-
-axiom H : in_range(x)
-
-axiom H1 : (over__f__result1 = over__f__result2)
-
-axiom H2 : (over__f__result3 = over__f__result1)
-
-axiom H3 : (result = over__f__result)
-
-axiom H4 : (over__f__result1 = x)
-
-axiom H5 : (over__f__result4 = over__f__result2)
-
-axiom H6 : (over__f__result5 = over__f__result3)
-
-axiom H7 : (result1 = over__f__result4)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (over__f__result4 = x)
+goal WP_parameter_def :
+  (forall over__f__result:int. forall result:int.
+  forall over__f__result1:int. forall over__f__result2:int.
+  forall over__f__result3:int. forall over__f__result4:int.
+  forall over__f__result5:int.
+  (forall result1:int. ((in_range(x) and
+  (((((over__f__result1 = over__f__result2) and
+  (over__f__result3 = over__f__result1)) and ((result = over__f__result) and
+  (over__f__result1 = x))) and ((over__f__result4 = over__f__result2) and
+  (over__f__result5 = over__f__result3))) and
+  (result1 = over__f__result4))) -> (over__f__result4 = x))))

@@ -133,15 +133,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : int
-
-logic o : int
-
-logic unknown__x : int
-
-axiom H : ((1 <= 2147483647) -> in_range(x))
-
-axiom H1 : in_range1(unknown__x)
-
  (* File "call_unknown_pos.adb", line 2, characters 0-0 *)
-goal WP_parameter_def : in_range(unknown__x)
+goal WP_parameter_def :
+  (forall x:int. forall unknown__x:int. (((1 <= 2147483647) ->
+  in_range(x)) -> (in_range1(unknown__x) -> in_range(unknown__x))))

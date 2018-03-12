@@ -664,13 +664,10 @@ logic upper_bound : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-axiom H : true
+logic rliteral : t
 
-axiom H1 : true
-
-axiom H2 : true
-
-axiom H3 : ((arg2 = of_int(0)) or ule(arg1, udiv(upper_bound, arg2)))
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
 
  (* File "spark-mod_arithmetic_lemmas.ads", line 73, characters 0-0 *)
-goal WP_parameter_def : ule(mul(arg1, arg2), upper_bound)
+goal WP_parameter_def : (((arg2 = rliteral) or ule(arg1, udiv(upper_bound,
+  arg2))) -> ule(mul(arg1, arg2), upper_bound))

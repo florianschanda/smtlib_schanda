@@ -343,101 +343,43 @@ axiom get_current_time__def_axiom :
 axiom zero__def_axiom : ((zero = of_rep(0)) and ((zero1 = of_rep1(0)) and
   (zero2 = of_rep2(0))))
 
-logic current_time__split_fields : natural
-
-logic current_time__split_fields1 : minutes_t
-
-logic current_time__split_fields2 : seconds_t
-
-logic o : seconds_t
-
-logic o1 : minutes_t
-
-logic o2 : natural
-
-logic o3 : natural
-
-logic o4 : minutes_t
-
-logic o5 : seconds_t
-
-logic temp___155 : natural
-
-logic temp___1551 : minutes_t
-
-logic temp___1552 : seconds_t
-
-logic result : natural
-
-logic result1 : minutes_t
-
-logic result2 : seconds_t
-
-logic current_time__split_fields3 : natural
-
-logic current_time__split_fields4 : minutes_t
-
-logic current_time__split_fields5 : seconds_t
-
-logic current_time__split_fields6 : natural
-
-logic current_time__split_fields7 : minutes_t
-
-logic current_time__split_fields8 : seconds_t
-
-logic current_time__split_fields9 : natural
-
-logic current_time__split_fields10 : minutes_t
-
-logic current_time__split_fields11 : seconds_t
-
-axiom H : (to_rep2(o) = 0)
-
-axiom H1 : (to_rep1(o1) = 0)
-
-axiom H2 : (to_rep(o2) = 0)
-
-axiom H3 : (o2 = o3)
-
-axiom H4 : (o1 = o4)
-
-axiom H5 : (o = o5)
-
-axiom H6 : (temp___155 = o3)
-
-axiom H7 : (temp___1551 = o4)
-
-axiom H8 : (temp___1552 = o5)
-
-axiom H9 : ((temp___155 = zero) and ((temp___1551 = zero1) and
-  (temp___1552 = zero2)))
-
-axiom H10 : (result = current_time__split_fields)
-
-axiom H11 : (result1 = current_time__split_fields1)
-
-axiom H12 : (result2 = current_time__split_fields2)
-
-axiom H13 : ((current_time__split_fields3 = zero) and
-  ((current_time__split_fields4 = zero1) and
-  (current_time__split_fields5 = zero2)))
-
-axiom H14 : (current_time__split_fields6 = current_time__split_fields3)
-
-axiom H15 : (current_time__split_fields7 = current_time__split_fields4)
-
-axiom H16 : (current_time__split_fields8 = current_time__split_fields5)
-
-axiom H17 : (current_time__split_fields9 = current_time__split_fields3)
-
-axiom H18 : (current_time__split_fields10 = current_time__split_fields4)
-
-axiom H19 : (current_time__split_fields11 = current_time__split_fields5)
-
  (* File "time.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : (bool_eq4(get_current_time({ rec__time__t__hours =
+goal WP_parameter_def :
+  (forall current_time__split_fields:natural.
+  forall current_time__split_fields1:minutes_t.
+  forall current_time__split_fields2:seconds_t. forall o:seconds_t.
+  forall o1:minutes_t. forall o2:natural. forall o3:natural.
+  forall o4:minutes_t. forall o5:seconds_t. forall temp___180:natural.
+  forall temp___1801:minutes_t. forall temp___1802:seconds_t.
+  forall result:natural. forall result1:minutes_t. forall result2:seconds_t.
+  forall current_time__split_fields3:natural.
+  forall current_time__split_fields4:minutes_t.
+  forall current_time__split_fields5:seconds_t.
+  forall current_time__split_fields6:natural.
+  forall current_time__split_fields7:minutes_t.
+  forall current_time__split_fields8:seconds_t.
+  forall current_time__split_fields9:natural.
+  forall current_time__split_fields10:minutes_t.
+  forall current_time__split_fields11:seconds_t. ((((((to_rep2(o) = 0) and
+  ((to_rep1(o1) = 0) and ((to_rep(o2) = 0) and ((o2 = o3) and ((o1 = o4) and
+  (o = o5)))))) and ((temp___180 = o3) and ((temp___1801 = o4) and
+  (temp___1802 = o5)))) and ((temp___180 = zero) and
+  ((temp___1801 = zero1) and (temp___1802 = zero2)))) and
+  ((((result = current_time__split_fields) and
+  ((result1 = current_time__split_fields1) and
+  (result2 = current_time__split_fields2))) and
+  ((current_time__split_fields3 = zero) and
+  ((current_time__split_fields4 = zero1) and
+  (current_time__split_fields5 = zero2)))) and
+  (((current_time__split_fields6 = current_time__split_fields3) and
+  ((current_time__split_fields7 = current_time__split_fields4) and
+  (current_time__split_fields8 = current_time__split_fields5))) and
+  ((current_time__split_fields9 = current_time__split_fields3) and
+  ((current_time__split_fields10 = current_time__split_fields4) and
+  (current_time__split_fields11 = current_time__split_fields5)))))) ->
+  (bool_eq4(get_current_time({ rec__time__t__hours =
   current_time__split_fields6; rec__time__t__minutes =
   current_time__split_fields7; rec__time__t__seconds =
   current_time__split_fields8 }), { us_split_fields1 = {
   rec__time__t__hours = zero; rec__time__t__minutes = zero1;
-  rec__time__t__seconds = zero2 } }) = true)
+  rec__time__t__seconds = zero2 } }) = true)))

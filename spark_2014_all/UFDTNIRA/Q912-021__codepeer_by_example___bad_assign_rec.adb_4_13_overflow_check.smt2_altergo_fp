@@ -433,41 +433,5 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x__split_fields : integer
-
-logic x__split_fields1 : integer
-
-logic x__split_fields2 : integer
-
-logic o : int
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic o3 : integer
-
-logic o4 : integer
-
-logic temp___151 : integer
-
-logic temp___1511 : integer
-
-logic temp___1512 : integer
-
-logic result : integer
-
-logic result1 : integer
-
-logic result2 : integer
-
-logic x__split_fields3 : integer
-
-logic x__split_fields4 : integer
-
-logic x__split_fields5 : integer
-
-axiom H : in_range(y)
-
  (* File "bad_assign_rec.adb", line 2, characters 0-0 *)
-goal WP_parameter_def : in_range((y * 1000000))
+goal WP_parameter_def : (in_range(y) -> in_range((y * 1000000)))

@@ -657,7 +657,15 @@ type unsigned_32_m1_0_m100_0
 
 logic attr__ATTRIBUTE_MODULUS1 : t
 
-predicate in_range(x: t) = (ule(of_int(1), x) and ule(x, of_int(100)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 1)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 100)
+
+predicate in_range(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((1 <= x) and (x <= 100))
 
@@ -700,63 +708,22 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic saturated_value : t
-
-logic saturation_dynamic_out1 : t
-
-logic result : t
-
-logic saturation_dynamic_out11 : t
-
-logic result1 : t
-
-logic saturation_dynamic_out12 : t
-
-logic result2 : t
-
-logic saturation_dynamic_out13 : t
-
-logic result3 : t
-
-logic saturated_value1 : t
-
-axiom H : in_range(value)
-
-axiom H1 : in_range(max1)
-
-axiom H2 : in_range(min1)
-
-axiom H3 : true
-
-axiom H4 : uge(max1, min1)
-
-axiom H5 : true
-
-axiom H6 : (ult(value, min1) -> (result = saturation_dynamic_out1))
-
-axiom H7 : (ult(value, min1) -> (saturation_dynamic_out11 = min1))
-
-axiom H8 : ((not ult(value, min1)) -> (ugt(value, max1) ->
-  (result1 = saturation_dynamic_out1)))
-
-axiom H9 : ((not ult(value, min1)) -> (ugt(value, max1) ->
-  (saturation_dynamic_out12 = max1)))
-
-axiom H10 : ((not ult(value, min1)) -> ((not ugt(value, max1)) ->
-  (result2 = saturation_dynamic_out1)))
-
-axiom H11 : ((not ult(value, min1)) -> ((not ugt(value, max1)) ->
-  (saturation_dynamic_out13 = value)))
-
-axiom H12 : ((not ult(value, min1)) -> ((not ugt(value, max1)) ->
-  (saturation_dynamic_out12 = saturation_dynamic_out13)))
-
-axiom H13 : ((not ult(value, min1)) ->
-  (saturation_dynamic_out11 = saturation_dynamic_out12))
-
-axiom H14 : (result3 = saturated_value)
-
-axiom H15 : (saturated_value1 = saturation_dynamic_out11)
-
  (* File "dynamicsaturateassert.ads", line 23, characters 0-0 *)
-goal WP_parameter_def : ule(saturation_dynamic_out11, max1)
+goal WP_parameter_def :
+  (forall saturated_value:t. forall saturation_dynamic_out1:t.
+  forall result:t. forall saturation_dynamic_out11:t. forall result1:t.
+  forall saturation_dynamic_out12:t. forall result2:t.
+  forall saturation_dynamic_out13:t. forall result3:t.
+  forall saturated_value1:t. (in_range(value) -> (in_range(max1) ->
+  (in_range(min1) -> (uge(max1, min1) -> (((ult(value, min1) and
+  ((result = saturation_dynamic_out1) and
+  (saturation_dynamic_out11 = min1))) or ((not ult(value, min1)) and
+  (((ugt(value, max1) and ((result1 = saturation_dynamic_out1) and
+  (saturation_dynamic_out12 = max1))) or ((not ugt(value, max1)) and
+  (((result2 = saturation_dynamic_out1) and
+  (saturation_dynamic_out13 = value)) and
+  (saturation_dynamic_out12 = saturation_dynamic_out13)))) and
+  (saturation_dynamic_out11 = saturation_dynamic_out12)))) ->
+  (((result3 = saturated_value) and
+  (saturated_value1 = saturation_dynamic_out11)) ->
+  ule(saturation_dynamic_out11, max1))))))))

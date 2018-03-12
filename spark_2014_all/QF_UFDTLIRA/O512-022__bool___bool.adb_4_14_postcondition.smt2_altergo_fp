@@ -51,12 +51,6 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
 logic to_int : bool -> int
 
 axiom to_int_def :
@@ -68,6 +62,12 @@ logic of_int : int -> bool
 axiom of_int_def :
   (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
   ((not (i = 0)) -> (of_int(i) = true))))
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -81,72 +81,20 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : bool
-
-logic y : bool
-
-logic result : bool
-
-logic x1 : bool
-
-logic result1 : bool
-
-logic y1 : bool
-
-logic result2 : bool
-
-logic x2 : bool
-
-logic result3 : bool
-
-logic x3 : bool
-
-logic result4 : bool
-
-logic y2 : bool
-
-logic x4 : bool
-
-logic y3 : bool
-
-logic x5 : bool
-
-logic y4 : bool
-
-axiom H : (result = x)
-
-axiom H1 : (x1 = match_bool(match_bool(x, true, y), match_bool(match_bool(x,
-  y, false), false, true), false))
-
-axiom H2 : (result1 = y)
-
-axiom H3 : (((to_int(x1) = to_int(y)) -> (y1 = true)) and
-  ((not (to_int(x1) = to_int(y))) -> (y1 = false)))
-
-axiom H4 : (result2 = x1)
-
-axiom H5 : (x2 = match_bool(match_bool(x1, true, y1),
-  match_bool(match_bool(x1, y1, false), false, true), false))
-
-axiom H6 : (result3 = x2)
-
-axiom H7 : (((not (x2 = true)) -> (x3 = true)) and ((x2 = true) ->
-  (x3 = false)))
-
-axiom H8 : (result4 = y1)
-
-axiom H9 : (((not (y1 = true)) -> (y2 = true)) and ((y1 = true) ->
-  (y2 = false)))
-
-axiom H10 : (y2 = y3)
-
-axiom H11 : (x3 = x4)
-
-axiom H12 : (y4 = y2)
-
-axiom H13 : (x5 = x3)
-
-axiom H14 : (x4 = true)
-
  (* File "bool.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : (y = true)
+goal WP_parameter_def :
+  (forall x:bool. forall y:bool. forall result:bool. forall x1:bool.
+  forall result1:bool. forall y1:bool. forall result2:bool. forall x2:bool.
+  forall result3:bool. forall x3:bool. forall result4:bool. forall y2:bool.
+  forall x4:bool. forall y3:bool. forall x5:bool. forall y4:bool.
+  (((((result = x) and (x1 = match_bool(match_bool(x, true, y),
+  match_bool(match_bool(x, y, false), false, true), false))) and
+  (((result1 = y) and (((to_int(x1) = to_int(y)) and (y1 = true)) or
+  ((not (to_int(x1) = to_int(y))) and (y1 = false)))) and
+  (((result2 = x1) and (x2 = match_bool(match_bool(x1, true, y1),
+  match_bool(match_bool(x1, y1, false), false, true), false))) and
+  (((result3 = x2) and (((not (x2 = true)) and (x3 = true)) or
+  ((x2 = true) and (x3 = false)))) and ((result4 = y1) and
+  (((not (y1 = true)) and (y2 = true)) or ((y1 = true) and
+  (y2 = false)))))))) and (((y2 = y3) and (x3 = x4)) and ((y4 = y2) and
+  (x5 = x3)))) -> ((x4 = true) -> (y = true))))

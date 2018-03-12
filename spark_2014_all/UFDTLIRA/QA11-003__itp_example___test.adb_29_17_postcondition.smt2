@@ -68,7 +68,7 @@
 (define-fun w__ref___projection ((a w__ref)) us_rep (w__content a))
 (declare-const a us_rep)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
-(define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool) (temp___skip_constant_13 Bool) (temp___do_toplevel_14 Bool)) Bool (=> (or (= temp___is_init_12 true) (<= (- 2147483648) 2147483647)) (in_range temp___expr_15)))
+(define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool) (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool) (temp___do_typ_inv_17 Bool)) Bool (=> (or (= temp___is_init_14 true) (<= (- 2147483648) 2147483647)) (in_range temp___expr_18)))
 (declare-const test__test_3__result Int)
 (declare-const result Int)
 (declare-const test__test_3__result1 Int)

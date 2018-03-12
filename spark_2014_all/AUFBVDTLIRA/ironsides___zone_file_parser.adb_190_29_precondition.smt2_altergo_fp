@@ -594,12 +594,6 @@ axiom bv_max_to_uint :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def1 :
@@ -611,6 +605,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range(x: int) = ((x = 0) or (x = 1))
 
@@ -800,24 +800,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,character) farray, int, int, (int,character) farray, int,
-  int -> (int,character) farray
-
-axiom concat_def :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : character, int -> (int,character) farray
-
-axiom singleton_def :
-  (forall v:character.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq7 : (int,character) farray, int, int, (int,character) farray,
   int, int -> bool
 
@@ -828,17 +810,17 @@ axiom bool_eq_def6 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) and
-  (to_rep1((a[temp___idx_78])) = to_rep1((b[((b__first - a__first) + temp___idx_78)])))) or
-  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (forall temp___idx_91:int. ((((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) and
+  (to_rep1((a[temp___idx_91])) = to_rep1((b[((b__first - a__first) + temp___idx_91)])))) or
+  (not ((a__first <= temp___idx_91) and (temp___idx_91 <= a__last)))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep1((a[temp___idx_78])) = to_rep1((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep1((a[temp___idx_91])) = to_rep1((b[((b__first - a__first) + temp___idx_91)]))))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -848,37 +830,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
-  (temp___idx_78 <= a__last)) ->
-  (to_rep1((a[temp___idx_78])) = to_rep1((b[((b__first - a__first) + temp___idx_78)])))))))))
-
-logic compare : (int,character) farray, int, int, (int,character) farray,
-  int, int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq7(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq7(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep1((a[(i + 1)])) <  to_rep1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,character) farray. forall b:(int,character) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq7(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep1((b[(i + 1)])) <  to_rep1((a[(j + 1)]))))))))))))
+  (forall temp___idx_91:int. (((a__first <= temp___idx_91) and
+  (temp___idx_91 <= a__last)) ->
+  (to_rep1((a[temp___idx_91])) = to_rep1((b[((b__first - a__first) + temp___idx_91)])))))))))
 
 type query_type
 
@@ -2552,702 +2506,267 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
-logic rrsig_rec__split_fields : query_type
-
-logic rrsig_rec__split_fields1 : unsigned8
-
-logic rrsig_rec__split_fields2 : unsigned8
-
-logic rrsig_rec__split_fields3 : unsigned32
-
-logic rrsig_rec__split_fields4 : unsigned32
-
-logic rrsig_rec__split_fields5 : unsigned32
-
-logic rrsig_rec__split_fields6 : unsigned16
-
-logic rrsig_rec__split_fields7 : (int,character) farray
-
-logic rrsig_rec__split_fields8 : (int,character) farray
-
-logic rrsig_rec__split_fields9 : siglengthvaluetype
-
-logic rrsig_rec__split_fields10 : unsigned32
-
-logic rrsig_rec__split_fields11 : classtype
-
-logic rrsig_rec__split_fields12 : us_private
-
-logic endidx : int
-
-logic success : bool
-
-logic begidx : int
-
-logic foundtype : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : query_type
-
-logic o3 : query_type
-
-logic o4 : unsigned8
-
-logic o5 : unsigned8
-
-logic o6 : unsigned32
-
-logic o7 : unsigned32
-
-logic o8 : unsigned32
-
-logic o9 : unsigned16
-
-logic o10 : (int,character) farray
-
-logic o11 : (int,character) farray
-
-logic o12 : siglengthvaluetype
-
-logic o13 : unsigned32
-
-logic o14 : classtype
-
-logic o15 : us_private
-
-logic temp___1805 : query_type
-
-logic temp___18051 : unsigned8
-
-logic temp___18052 : unsigned8
-
-logic temp___18053 : unsigned32
-
-logic temp___18054 : unsigned32
-
-logic temp___18055 : unsigned32
-
-logic temp___18056 : unsigned16
-
-logic temp___18057 : (int,character) farray
-
-logic temp___18058 : (int,character) farray
-
-logic temp___18059 : siglengthvaluetype
-
-logic temp___180510 : unsigned32
-
-logic temp___180511 : classtype
-
-logic temp___180512 : us_private
-
-logic temp___180513 : int
-
-logic o16 : int
-
-logic o17 : unsigned8
-
-logic o18 : query_type
-
-logic o19 : unsigned8
-
-logic o20 : unsigned8
-
-logic o21 : unsigned32
-
-logic o22 : unsigned32
-
-logic o23 : unsigned32
-
-logic o24 : unsigned16
-
-logic o25 : (int,character) farray
-
-logic o26 : (int,character) farray
-
-logic o27 : siglengthvaluetype
-
-logic o28 : unsigned32
-
-logic o29 : classtype
-
-logic o30 : us_private
-
-logic temp___1807 : query_type
-
-logic temp___18071 : unsigned8
-
-logic temp___18072 : unsigned8
-
-logic temp___18073 : unsigned32
-
-logic temp___18074 : unsigned32
-
-logic temp___18075 : unsigned32
-
-logic temp___18076 : unsigned16
-
-logic temp___18077 : (int,character) farray
-
-logic temp___18078 : (int,character) farray
-
-logic temp___18079 : siglengthvaluetype
-
-logic temp___180710 : unsigned32
-
-logic temp___180711 : classtype
-
-logic temp___180712 : us_private
-
-logic temp___180713 : int
-
-logic o31 : int
-
-logic rrsig_rec__split_fields13 : query_type
-
-logic rrsig_rec__split_fields14 : unsigned8
-
-logic rrsig_rec__split_fields15 : unsigned8
-
-logic rrsig_rec__split_fields16 : unsigned32
-
-logic rrsig_rec__split_fields17 : unsigned32
-
-logic rrsig_rec__split_fields18 : unsigned32
-
-logic rrsig_rec__split_fields19 : unsigned16
-
-logic rrsig_rec__split_fields20 : (int,character) farray
-
-logic rrsig_rec__split_fields21 : (int,character) farray
-
-logic rrsig_rec__split_fields22 : siglengthvaluetype
-
-logic rrsig_rec__split_fields23 : unsigned32
-
-logic rrsig_rec__split_fields24 : classtype
-
-logic rrsig_rec__split_fields25 : us_private
-
-logic endidx1 : int
-
-logic begidx1 : int
-
-logic foundtype1 : int
-
-logic result : bool
-
-logic success1 : bool
-
-logic result1 : int
-
-logic begidx2 : int
-
-logic endidx2 : int
-
-logic begidx3 : int
-
-logic foundtype2 : int
-
-logic result2 : bool
-
-logic success2 : bool
-
-logic result3 : query_type
-
-logic result4 : unsigned8
-
-logic result5 : unsigned8
-
-logic result6 : unsigned32
-
-logic result7 : unsigned32
-
-logic result8 : unsigned32
-
-logic result9 : unsigned16
-
-logic result10 : (int,character) farray
-
-logic result11 : (int,character) farray
-
-logic result12 : siglengthvaluetype
-
-logic result13 : unsigned32
-
-logic result14 : classtype
-
-logic result15 : us_private
-
-logic rrsig_rec__split_fields26 : query_type
-
-logic rrsig_rec__split_fields27 : unsigned8
-
-logic rrsig_rec__split_fields28 : unsigned8
-
-logic rrsig_rec__split_fields29 : unsigned32
-
-logic rrsig_rec__split_fields30 : unsigned32
-
-logic rrsig_rec__split_fields31 : unsigned32
-
-logic rrsig_rec__split_fields32 : unsigned16
-
-logic rrsig_rec__split_fields33 : (int,character) farray
-
-logic rrsig_rec__split_fields34 : (int,character) farray
-
-logic rrsig_rec__split_fields35 : siglengthvaluetype
-
-logic rrsig_rec__split_fields36 : unsigned32
-
-logic rrsig_rec__split_fields37 : classtype
-
-logic rrsig_rec__split_fields38 : us_private
-
-logic result16 : bool
-
-logic success3 : bool
-
-logic result17 : int
-
-logic begidx4 : int
-
-logic endidx3 : int
-
-logic begidx5 : int
-
-logic foundtype3 : int
-
-logic result18 : bool
-
-logic success4 : bool
-
-logic success5 : bool
-
-logic parser_utilities__convert8bitunsigned__value : t
-
-logic result19 : query_type
-
-logic result20 : unsigned8
-
-logic result21 : unsigned8
-
-logic result22 : unsigned32
-
-logic result23 : unsigned32
-
-logic result24 : unsigned32
-
-logic result25 : unsigned16
-
-logic result26 : (int,character) farray
-
-logic result27 : (int,character) farray
-
-logic result28 : siglengthvaluetype
-
-logic result29 : unsigned32
-
-logic result30 : classtype
-
-logic result31 : us_private
-
-logic rrsig_rec__split_fields39 : query_type
-
-logic rrsig_rec__split_fields40 : unsigned8
-
-logic rrsig_rec__split_fields41 : unsigned8
-
-logic rrsig_rec__split_fields42 : unsigned32
-
-logic rrsig_rec__split_fields43 : unsigned32
-
-logic rrsig_rec__split_fields44 : unsigned32
-
-logic rrsig_rec__split_fields45 : unsigned16
-
-logic rrsig_rec__split_fields46 : (int,character) farray
-
-logic rrsig_rec__split_fields47 : (int,character) farray
-
-logic rrsig_rec__split_fields48 : siglengthvaluetype
-
-logic rrsig_rec__split_fields49 : unsigned32
-
-logic rrsig_rec__split_fields50 : classtype
-
-logic rrsig_rec__split_fields51 : us_private
-
-logic result32 : bool
-
-logic success6 : bool
-
-logic result33 : int
-
-logic begidx6 : int
-
-logic endidx4 : int
-
-logic begidx7 : int
-
-logic foundtype4 : int
-
-logic result34 : bool
-
-logic success7 : bool
-
-logic parser_utilities__convert8bitunsigned__value1 : t
-
-axiom H : in_range2(zlength)
-
-axiom H1 : in_range2(endidx)
-
-axiom H2 : ((1 <= 256) -> in_range2(begidx))
-
-axiom H3 : ((0 <= 10) -> in_range1(foundtype))
-
-axiom H4 : (result = success)
-
-axiom H5 : (((endidx <  zlength) -> (success1 = match_bool(success, true,
-  false))) and ((not (endidx <  zlength)) -> (success1 = match_bool(success,
-  false, false))))
-
-axiom H6 : ((success1 = true) -> ((o = (endidx + 1)) and
-  in_range2((endidx + 1))))
-
-axiom H7 : ((success1 = true) -> (result1 = begidx))
-
-axiom H8 : ((success1 = true) -> (begidx2 = o))
-
-axiom H9 : ((success1 = true) -> (((((begidx3 <= endidx2) and
-  (begidx3 <= zlength)) and (endidx2 <= zlength)) and ((foundtype2 = 1) ->
+ (* File "zone_file_parser.adb", line 1583, characters 0-0 *)
+goal WP_parameter_def :
+  (forall rrsig_rec__split_fields:query_type.
+  forall rrsig_rec__split_fields1:unsigned8.
+  forall rrsig_rec__split_fields2:unsigned8.
+  forall rrsig_rec__split_fields3:unsigned32.
+  forall rrsig_rec__split_fields4:unsigned32.
+  forall rrsig_rec__split_fields5:unsigned32.
+  forall rrsig_rec__split_fields6:unsigned16.
+  forall rrsig_rec__split_fields7:(int,character) farray.
+  forall rrsig_rec__split_fields8:(int,character) farray.
+  forall rrsig_rec__split_fields9:siglengthvaluetype.
+  forall rrsig_rec__split_fields10:unsigned32.
+  forall rrsig_rec__split_fields11:classtype.
+  forall rrsig_rec__split_fields12:us_private. forall endidx:int.
+  forall success:bool. forall begidx:int. forall foundtype:int. forall o:int.
+  forall o1:int. forall o2:query_type. forall o3:query_type.
+  forall o4:unsigned8. forall o5:unsigned8. forall o6:unsigned32.
+  forall o7:unsigned32. forall o8:unsigned32. forall o9:unsigned16.
+  forall o10:(int,character) farray. forall o11:(int,character) farray.
+  forall o12:siglengthvaluetype. forall o13:unsigned32. forall o14:classtype.
+  forall o15:us_private. forall temp___1864:query_type.
+  forall temp___18641:unsigned8. forall temp___18642:unsigned8.
+  forall temp___18643:unsigned32. forall temp___18644:unsigned32.
+  forall temp___18645:unsigned32. forall temp___18646:unsigned16.
+  forall temp___18647:(int,character) farray.
+  forall temp___18648:(int,character) farray.
+  forall temp___18649:siglengthvaluetype. forall temp___186410:unsigned32.
+  forall temp___186411:classtype. forall temp___186412:us_private.
+  forall temp___186413:int. forall o16:int.
+  forall rrsig_rec__split_fields13:query_type.
+  forall rrsig_rec__split_fields14:unsigned8.
+  forall rrsig_rec__split_fields15:unsigned8.
+  forall rrsig_rec__split_fields16:unsigned32.
+  forall rrsig_rec__split_fields17:unsigned32.
+  forall rrsig_rec__split_fields18:unsigned32.
+  forall rrsig_rec__split_fields19:unsigned16.
+  forall rrsig_rec__split_fields20:(int,character) farray.
+  forall rrsig_rec__split_fields21:(int,character) farray.
+  forall rrsig_rec__split_fields22:siglengthvaluetype.
+  forall rrsig_rec__split_fields23:unsigned32.
+  forall rrsig_rec__split_fields24:classtype.
+  forall rrsig_rec__split_fields25:us_private. forall endidx1:int.
+  forall begidx1:int. forall foundtype1:int. forall result:bool.
+  forall success1:bool. forall result1:int. forall begidx2:int.
+  forall endidx2:int. forall begidx3:int. forall foundtype2:int.
+  forall result2:bool. forall success2:bool. forall result3:query_type.
+  forall result4:unsigned8. forall result5:unsigned8.
+  forall result6:unsigned32. forall result7:unsigned32.
+  forall result8:unsigned32. forall result9:unsigned16.
+  forall result10:(int,character) farray.
+  forall result11:(int,character) farray. forall result12:siglengthvaluetype.
+  forall result13:unsigned32. forall result14:classtype.
+  forall result15:us_private. forall rrsig_rec__split_fields26:query_type.
+  forall rrsig_rec__split_fields27:unsigned8.
+  forall rrsig_rec__split_fields28:unsigned8.
+  forall rrsig_rec__split_fields29:unsigned32.
+  forall rrsig_rec__split_fields30:unsigned32.
+  forall rrsig_rec__split_fields31:unsigned32.
+  forall rrsig_rec__split_fields32:unsigned16.
+  forall rrsig_rec__split_fields33:(int,character) farray.
+  forall rrsig_rec__split_fields34:(int,character) farray.
+  forall rrsig_rec__split_fields35:siglengthvaluetype.
+  forall rrsig_rec__split_fields36:unsigned32.
+  forall rrsig_rec__split_fields37:classtype.
+  forall rrsig_rec__split_fields38:us_private. forall result16:bool.
+  forall success3:bool. forall result17:int. forall begidx4:int.
+  forall endidx3:int. forall begidx5:int. forall foundtype3:int.
+  forall result18:bool. forall success4:bool. (in_range2(zlength) ->
+  (in_range2(endidx) -> (((1 <= 256) -> in_range2(begidx)) -> (((0 <= 10) ->
+  in_range1(foundtype)) -> (((result = success) and (((endidx <  zlength) and
+  (success1 = match_bool(success, true, false))) or
+  ((not (endidx <  zlength)) and (success1 = match_bool(success, false,
+  false))))) -> ((((success1 = true) and ((((o = (endidx + 1)) and
+  in_range2((endidx + 1))) and (({ int__content = result1 } = {
+  int__content = begidx }) and (begidx2 = o))) and
+  ((((((begidx3 <= endidx2) and (begidx3 <= zlength)) and
+  (endidx2 <= zlength)) and ((foundtype2 = 1) ->
   (forall i:int. (((begidx3 <= i) and (i <= endidx2)) ->
   ((48 <= to_rep1((zonefileline[i]))) and
   (to_rep1((zonefileline[i])) <= 57)))))) and ((in_range2(begidx3) and
-  in_range2(endidx2)) and in_range1(foundtype2))))
-
-axiom H10 : ((success1 = true) -> (success1 = result2))
-
-axiom H11 : ((success1 = true) -> (((foundtype2 = 3) ->
-  (success2 = true)) and ((not (foundtype2 = 3)) -> (success2 = false))))
-
-axiom H12 : ((success1 = true) -> ((success2 = true) ->
-  ((o1 = getrecordtype(zonefileline, begidx3, endidx2)) and in_range4(o1))))
-
-axiom H13 : ((success1 = true) -> ((success2 = true) -> (to_rep2(o2) = o1)))
-
-axiom H14 : ((success1 = true) -> ((success2 = true) -> (o2 = o3)))
-
-axiom H15 : ((success1 = true) -> ((success2 = true) ->
-  (rrsig_rec__split_fields1 = o4)))
-
-axiom H16 : ((success1 = true) -> ((success2 = true) ->
-  (rrsig_rec__split_fields2 = o5)))
-
-axiom H17 : ((success1 = true) -> ((success2 = true) ->
-  (rrsig_rec__split_fields3 = o6)))
-
-axiom H18 : ((success1 = true) -> ((success2 = true) ->
-  (rrsig_rec__split_fields4 = o7)))
-
-axiom H19 : ((success1 = true) -> ((success2 = true) ->
-  (rrsig_rec__split_fields5 = o8)))
-
-axiom H20 : ((success1 = true) -> ((success2 = true) ->
-  (rrsig_rec__split_fields6 = o9)))
-
-axiom H21 : ((success1 = true) -> ((success2 = true) ->
-  (rrsig_rec__split_fields7 = o10)))
-
-axiom H22 : ((success1 = true) -> ((success2 = true) ->
-  (rrsig_rec__split_fields8 = o11)))
-
-axiom H23 : ((success1 = true) -> ((success2 = true) ->
-  (rrsig_rec__split_fields9 = o12)))
-
-axiom H24 : ((success1 = true) -> ((success2 = true) ->
-  (rrsig_rec__split_fields10 = o13)))
-
-axiom H25 : ((success1 = true) -> ((success2 = true) ->
-  (rrsig_rec__split_fields11 = o14)))
-
-axiom H26 : ((success1 = true) -> ((success2 = true) ->
-  (rrsig_rec__split_fields12 = o15)))
-
-axiom H27 : ((success1 = true) -> ((success2 = true) -> (temp___1805 = o3)))
-
-axiom H28 : ((success1 = true) -> ((success2 = true) -> (temp___18051 = o4)))
-
-axiom H29 : ((success1 = true) -> ((success2 = true) -> (temp___18052 = o5)))
-
-axiom H30 : ((success1 = true) -> ((success2 = true) -> (temp___18053 = o6)))
-
-axiom H31 : ((success1 = true) -> ((success2 = true) -> (temp___18054 = o7)))
-
-axiom H32 : ((success1 = true) -> ((success2 = true) -> (temp___18055 = o8)))
-
-axiom H33 : ((success1 = true) -> ((success2 = true) -> (temp___18056 = o9)))
-
-axiom H34 : ((success1 = true) -> ((success2 = true) ->
-  (temp___18057 = o10)))
-
-axiom H35 : ((success1 = true) -> ((success2 = true) ->
-  (temp___18058 = o11)))
-
-axiom H36 : ((success1 = true) -> ((success2 = true) ->
-  (temp___18059 = o12)))
-
-axiom H37 : ((success1 = true) -> ((success2 = true) ->
-  (temp___180510 = o13)))
-
-axiom H38 : ((success1 = true) -> ((success2 = true) ->
-  (temp___180511 = o14)))
-
-axiom H39 : ((success1 = true) -> ((success2 = true) ->
-  (temp___180512 = o15)))
-
-axiom H40 : ((success1 = true) -> ((success2 = true) ->
-  (rrsig_rec__attr__tag = temp___180513)))
-
-axiom H41 : ((success1 = true) -> ((success2 = true) ->
-  (result3 = rrsig_rec__split_fields)))
-
-axiom H42 : ((success1 = true) -> ((success2 = true) ->
-  (result4 = rrsig_rec__split_fields1)))
-
-axiom H43 : ((success1 = true) -> ((success2 = true) ->
-  (result5 = rrsig_rec__split_fields2)))
-
-axiom H44 : ((success1 = true) -> ((success2 = true) ->
-  (result6 = rrsig_rec__split_fields3)))
-
-axiom H45 : ((success1 = true) -> ((success2 = true) ->
-  (result7 = rrsig_rec__split_fields4)))
-
-axiom H46 : ((success1 = true) -> ((success2 = true) ->
-  (result8 = rrsig_rec__split_fields5)))
-
-axiom H47 : ((success1 = true) -> ((success2 = true) ->
-  (result9 = rrsig_rec__split_fields6)))
-
-axiom H48 : ((success1 = true) -> ((success2 = true) ->
-  (result10 = rrsig_rec__split_fields7)))
-
-axiom H49 : ((success1 = true) -> ((success2 = true) ->
-  (result11 = rrsig_rec__split_fields8)))
-
-axiom H50 : ((success1 = true) -> ((success2 = true) ->
-  (result12 = rrsig_rec__split_fields9)))
-
-axiom H51 : ((success1 = true) -> ((success2 = true) ->
-  (result13 = rrsig_rec__split_fields10)))
-
-axiom H52 : ((success1 = true) -> ((success2 = true) ->
-  (result14 = rrsig_rec__split_fields11)))
-
-axiom H53 : ((success1 = true) -> ((success2 = true) ->
-  (result15 = rrsig_rec__split_fields12)))
-
-axiom H54 : ((success1 = true) -> ((success2 = true) ->
-  (temp___1805 = rrsig_rec__split_fields26)))
-
-axiom H55 : ((success1 = true) -> ((success2 = true) ->
-  (temp___18051 = rrsig_rec__split_fields27)))
-
-axiom H56 : ((success1 = true) -> ((success2 = true) ->
-  (temp___18052 = rrsig_rec__split_fields28)))
-
-axiom H57 : ((success1 = true) -> ((success2 = true) ->
-  (temp___18053 = rrsig_rec__split_fields29)))
-
-axiom H58 : ((success1 = true) -> ((success2 = true) ->
-  (temp___18054 = rrsig_rec__split_fields30)))
-
-axiom H59 : ((success1 = true) -> ((success2 = true) ->
-  (temp___18055 = rrsig_rec__split_fields31)))
-
-axiom H60 : ((success1 = true) -> ((success2 = true) ->
-  (temp___18056 = rrsig_rec__split_fields32)))
-
-axiom H61 : ((success1 = true) -> ((success2 = true) ->
-  (temp___18057 = rrsig_rec__split_fields33)))
-
-axiom H62 : ((success1 = true) -> ((success2 = true) ->
-  (temp___18058 = rrsig_rec__split_fields34)))
-
-axiom H63 : ((success1 = true) -> ((success2 = true) ->
-  (temp___18059 = rrsig_rec__split_fields35)))
-
-axiom H64 : ((success1 = true) -> ((success2 = true) ->
-  (temp___180510 = rrsig_rec__split_fields36)))
-
-axiom H65 : ((success1 = true) -> ((success2 = true) ->
-  (temp___180511 = rrsig_rec__split_fields37)))
-
-axiom H66 : ((success1 = true) -> ((success2 = true) ->
-  (temp___180512 = rrsig_rec__split_fields38)))
-
-axiom H67 : ((success1 = true) -> ((not (success2 = true)) ->
-  (rrsig_rec__split_fields = rrsig_rec__split_fields26)))
-
-axiom H68 : ((success1 = true) -> ((not (success2 = true)) ->
-  (rrsig_rec__split_fields1 = rrsig_rec__split_fields27)))
-
-axiom H69 : ((success1 = true) -> ((not (success2 = true)) ->
-  (rrsig_rec__split_fields2 = rrsig_rec__split_fields28)))
-
-axiom H70 : ((success1 = true) -> ((not (success2 = true)) ->
-  (rrsig_rec__split_fields3 = rrsig_rec__split_fields29)))
-
-axiom H71 : ((success1 = true) -> ((not (success2 = true)) ->
-  (rrsig_rec__split_fields4 = rrsig_rec__split_fields30)))
-
-axiom H72 : ((success1 = true) -> ((not (success2 = true)) ->
-  (rrsig_rec__split_fields5 = rrsig_rec__split_fields31)))
-
-axiom H73 : ((success1 = true) -> ((not (success2 = true)) ->
-  (rrsig_rec__split_fields6 = rrsig_rec__split_fields32)))
-
-axiom H74 : ((success1 = true) -> ((not (success2 = true)) ->
-  (rrsig_rec__split_fields7 = rrsig_rec__split_fields33)))
-
-axiom H75 : ((success1 = true) -> ((not (success2 = true)) ->
-  (rrsig_rec__split_fields8 = rrsig_rec__split_fields34)))
-
-axiom H76 : ((success1 = true) -> ((not (success2 = true)) ->
-  (rrsig_rec__split_fields9 = rrsig_rec__split_fields35)))
-
-axiom H77 : ((success1 = true) -> ((not (success2 = true)) ->
-  (rrsig_rec__split_fields10 = rrsig_rec__split_fields36)))
-
-axiom H78 : ((success1 = true) -> ((not (success2 = true)) ->
-  (rrsig_rec__split_fields11 = rrsig_rec__split_fields37)))
-
-axiom H79 : ((success1 = true) -> ((not (success2 = true)) ->
-  (rrsig_rec__split_fields12 = rrsig_rec__split_fields38)))
-
-axiom H80 : ((success1 = true) -> ((not (success2 = true)) ->
-  ((rrsig_rec__split_fields26 = rrsig_rec__split_fields13) and
-  ((rrsig_rec__split_fields27 = rrsig_rec__split_fields14) and
-  ((rrsig_rec__split_fields28 = rrsig_rec__split_fields15) and
-  ((rrsig_rec__split_fields29 = rrsig_rec__split_fields16) and
-  ((rrsig_rec__split_fields30 = rrsig_rec__split_fields17) and
-  ((rrsig_rec__split_fields31 = rrsig_rec__split_fields18) and
-  ((rrsig_rec__split_fields32 = rrsig_rec__split_fields19) and
-  ((rrsig_rec__split_fields33 = rrsig_rec__split_fields20) and
-  ((rrsig_rec__split_fields34 = rrsig_rec__split_fields21) and
-  ((rrsig_rec__split_fields35 = rrsig_rec__split_fields22) and
-  ((rrsig_rec__split_fields36 = rrsig_rec__split_fields23) and
-  ((rrsig_rec__split_fields37 = rrsig_rec__split_fields24) and
-  (rrsig_rec__split_fields38 = rrsig_rec__split_fields25)))))))))))))))
-
-axiom H81 : ((not (success1 = true)) -> (foundtype2 = foundtype))
-
-axiom H82 : ((not (success1 = true)) -> (begidx3 = begidx))
-
-axiom H83 : ((not (success1 = true)) -> (success2 = success1))
-
-axiom H84 : ((not (success1 = true)) -> (endidx2 = endidx))
-
-axiom H85 : ((not (success1 = true)) ->
-  (rrsig_rec__split_fields = rrsig_rec__split_fields26))
-
-axiom H86 : ((not (success1 = true)) ->
-  (rrsig_rec__split_fields1 = rrsig_rec__split_fields27))
-
-axiom H87 : ((not (success1 = true)) ->
-  (rrsig_rec__split_fields2 = rrsig_rec__split_fields28))
-
-axiom H88 : ((not (success1 = true)) ->
-  (rrsig_rec__split_fields3 = rrsig_rec__split_fields29))
-
-axiom H89 : ((not (success1 = true)) ->
-  (rrsig_rec__split_fields4 = rrsig_rec__split_fields30))
-
-axiom H90 : ((not (success1 = true)) ->
-  (rrsig_rec__split_fields5 = rrsig_rec__split_fields31))
-
-axiom H91 : ((not (success1 = true)) ->
-  (rrsig_rec__split_fields6 = rrsig_rec__split_fields32))
-
-axiom H92 : ((not (success1 = true)) ->
-  (rrsig_rec__split_fields7 = rrsig_rec__split_fields33))
-
-axiom H93 : ((not (success1 = true)) ->
-  (rrsig_rec__split_fields8 = rrsig_rec__split_fields34))
-
-axiom H94 : ((not (success1 = true)) ->
-  (rrsig_rec__split_fields9 = rrsig_rec__split_fields35))
-
-axiom H95 : ((not (success1 = true)) ->
-  (rrsig_rec__split_fields10 = rrsig_rec__split_fields36))
-
-axiom H96 : ((not (success1 = true)) ->
-  (rrsig_rec__split_fields11 = rrsig_rec__split_fields37))
-
-axiom H97 : ((not (success1 = true)) ->
-  (rrsig_rec__split_fields12 = rrsig_rec__split_fields38))
-
-axiom H98 : ((not (success1 = true)) -> (foundtype2 = foundtype1))
-
-axiom H99 : ((not (success1 = true)) -> (begidx3 = begidx1))
-
-axiom H100 : ((not (success1 = true)) -> (success2 = success1))
-
-axiom H101 : ((not (success1 = true)) -> (endidx2 = endidx1))
-
-axiom H102 : ((not (success1 = true)) ->
-  ((rrsig_rec__split_fields26 = rrsig_rec__split_fields13) and
-  ((rrsig_rec__split_fields27 = rrsig_rec__split_fields14) and
-  ((rrsig_rec__split_fields28 = rrsig_rec__split_fields15) and
-  ((rrsig_rec__split_fields29 = rrsig_rec__split_fields16) and
-  ((rrsig_rec__split_fields30 = rrsig_rec__split_fields17) and
-  ((rrsig_rec__split_fields31 = rrsig_rec__split_fields18) and
-  ((rrsig_rec__split_fields32 = rrsig_rec__split_fields19) and
-  ((rrsig_rec__split_fields33 = rrsig_rec__split_fields20) and
-  ((rrsig_rec__split_fields34 = rrsig_rec__split_fields21) and
-  ((rrsig_rec__split_fields35 = rrsig_rec__split_fields22) and
-  ((rrsig_rec__split_fields36 = rrsig_rec__split_fields23) and
-  ((rrsig_rec__split_fields37 = rrsig_rec__split_fields24) and
-  (rrsig_rec__split_fields38 = rrsig_rec__split_fields25))))))))))))))
-
-axiom H103 : (result16 = success2)
-
-axiom H104 : (((endidx2 <  zlength) -> (success3 = match_bool(success2, true,
-  false))) and ((not (endidx2 <  zlength)) ->
-  (success3 = match_bool(success2, false, false))))
-
-axiom H105 : (success3 = true)
-
-axiom H106 : ((o16 = (endidx2 + 1)) and in_range2((endidx2 + 1)))
-
-axiom H107 : (begidx3 = result17)
-
-axiom H108 : (begidx4 = o16)
-
-axiom H109 : (((((begidx5 <= endidx3) and (begidx5 <= zlength)) and
-  (endidx3 <= zlength)) and ((foundtype3 = 1) ->
+  in_range2(endidx2)) and in_range1(foundtype2))) and
+  (((success1 = result2) and (((foundtype2 = 3) and (success2 = true)) or
+  ((not (foundtype2 = 3)) and (success2 = false)))) and
+  (((success2 = true) and ((((((o1 = getrecordtype(zonefileline, begidx3,
+  endidx2)) and in_range4(o1)) and (to_rep2(o2) = o1)) and ((o2 = o3) and
+  ((rrsig_rec__split_fields1 = o4) and ((rrsig_rec__split_fields2 = o5) and
+  ((rrsig_rec__split_fields3 = o6) and ((rrsig_rec__split_fields4 = o7) and
+  ((rrsig_rec__split_fields5 = o8) and ((rrsig_rec__split_fields6 = o9) and
+  ((rrsig_rec__split_fields7 = o10) and ((rrsig_rec__split_fields8 = o11) and
+  ((rrsig_rec__split_fields9 = o12) and
+  ((rrsig_rec__split_fields10 = o13) and
+  ((rrsig_rec__split_fields11 = o14) and
+  (rrsig_rec__split_fields12 = o15)))))))))))))) and (((temp___1864 = o3) and
+  ((temp___18641 = o4) and ((temp___18642 = o5) and ((temp___18643 = o6) and
+  ((temp___18644 = o7) and ((temp___18645 = o8) and ((temp___18646 = o9) and
+  ((temp___18647 = o10) and ((temp___18648 = o11) and
+  ((temp___18649 = o12) and ((temp___186410 = o13) and
+  ((temp___186411 = o14) and (temp___186412 = o15))))))))))))) and
+  (rrsig_rec__attr__tag = temp___186413))) and
+  (((result3 = rrsig_rec__split_fields) and
+  ((result4 = rrsig_rec__split_fields1) and
+  ((result5 = rrsig_rec__split_fields2) and
+  ((result6 = rrsig_rec__split_fields3) and
+  ((result7 = rrsig_rec__split_fields4) and
+  ((result8 = rrsig_rec__split_fields5) and
+  ((result9 = rrsig_rec__split_fields6) and
+  ((result10 = rrsig_rec__split_fields7) and
+  ((result11 = rrsig_rec__split_fields8) and
+  ((result12 = rrsig_rec__split_fields9) and
+  ((result13 = rrsig_rec__split_fields10) and
+  ((result14 = rrsig_rec__split_fields11) and
+  (result15 = rrsig_rec__split_fields12))))))))))))) and
+  ((temp___1864 = rrsig_rec__split_fields26) and
+  ((temp___18641 = rrsig_rec__split_fields27) and
+  ((temp___18642 = rrsig_rec__split_fields28) and
+  ((temp___18643 = rrsig_rec__split_fields29) and
+  ((temp___18644 = rrsig_rec__split_fields30) and
+  ((temp___18645 = rrsig_rec__split_fields31) and
+  ((temp___18646 = rrsig_rec__split_fields32) and
+  ((temp___18647 = rrsig_rec__split_fields33) and
+  ((temp___18648 = rrsig_rec__split_fields34) and
+  ((temp___18649 = rrsig_rec__split_fields35) and
+  ((temp___186410 = rrsig_rec__split_fields36) and
+  ((temp___186411 = rrsig_rec__split_fields37) and
+  (temp___186412 = rrsig_rec__split_fields38)))))))))))))))) or
+  ((not (success2 = true)) and
+  (((rrsig_rec__split_fields = rrsig_rec__split_fields26) and
+  ((rrsig_rec__split_fields1 = rrsig_rec__split_fields27) and
+  ((rrsig_rec__split_fields2 = rrsig_rec__split_fields28) and
+  ((rrsig_rec__split_fields3 = rrsig_rec__split_fields29) and
+  ((rrsig_rec__split_fields4 = rrsig_rec__split_fields30) and
+  ((rrsig_rec__split_fields5 = rrsig_rec__split_fields31) and
+  ((rrsig_rec__split_fields6 = rrsig_rec__split_fields32) and
+  ((rrsig_rec__split_fields7 = rrsig_rec__split_fields33) and
+  ((rrsig_rec__split_fields8 = rrsig_rec__split_fields34) and
+  ((rrsig_rec__split_fields9 = rrsig_rec__split_fields35) and
+  ((rrsig_rec__split_fields10 = rrsig_rec__split_fields36) and
+  ((rrsig_rec__split_fields11 = rrsig_rec__split_fields37) and
+  (rrsig_rec__split_fields12 = rrsig_rec__split_fields38))))))))))))) and ({
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__typecovered =
+  rrsig_rec__split_fields26;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__algorithm =
+  rrsig_rec__split_fields27;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__numlabels =
+  rrsig_rec__split_fields28;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__origttl =
+  rrsig_rec__split_fields29;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__sigexpiration =
+  rrsig_rec__split_fields30;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__siginception =
+  rrsig_rec__split_fields31;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__keytag =
+  rrsig_rec__split_fields32;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__signername =
+  rrsig_rec__split_fields33;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__signature =
+  rrsig_rec__split_fields34;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__signaturelength =
+  rrsig_rec__split_fields35;
+  rec__rr_type__resourcerecordtype__ttlinseconds1 =
+  rrsig_rec__split_fields36; rec__rr_type__resourcerecordtype__class1 =
+  rrsig_rec__split_fields37; rec__ext__1 = rrsig_rec__split_fields38 } = {
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__typecovered =
+  rrsig_rec__split_fields13;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__algorithm =
+  rrsig_rec__split_fields14;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__numlabels =
+  rrsig_rec__split_fields15;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__origttl =
+  rrsig_rec__split_fields16;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__sigexpiration =
+  rrsig_rec__split_fields17;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__siginception =
+  rrsig_rec__split_fields18;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__keytag =
+  rrsig_rec__split_fields19;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__signername =
+  rrsig_rec__split_fields20;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__signature =
+  rrsig_rec__split_fields21;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__signaturelength =
+  rrsig_rec__split_fields22;
+  rec__rr_type__resourcerecordtype__ttlinseconds1 =
+  rrsig_rec__split_fields23; rec__rr_type__resourcerecordtype__class1 =
+  rrsig_rec__split_fields24; rec__ext__1 = rrsig_rec__split_fields25
+  })))))))) or ((not (success1 = true)) and (((foundtype2 = foundtype) and
+  ((begidx3 = begidx) and ((success2 = success1) and ((endidx2 = endidx) and
+  ((rrsig_rec__split_fields = rrsig_rec__split_fields26) and
+  ((rrsig_rec__split_fields1 = rrsig_rec__split_fields27) and
+  ((rrsig_rec__split_fields2 = rrsig_rec__split_fields28) and
+  ((rrsig_rec__split_fields3 = rrsig_rec__split_fields29) and
+  ((rrsig_rec__split_fields4 = rrsig_rec__split_fields30) and
+  ((rrsig_rec__split_fields5 = rrsig_rec__split_fields31) and
+  ((rrsig_rec__split_fields6 = rrsig_rec__split_fields32) and
+  ((rrsig_rec__split_fields7 = rrsig_rec__split_fields33) and
+  ((rrsig_rec__split_fields8 = rrsig_rec__split_fields34) and
+  ((rrsig_rec__split_fields9 = rrsig_rec__split_fields35) and
+  ((rrsig_rec__split_fields10 = rrsig_rec__split_fields36) and
+  ((rrsig_rec__split_fields11 = rrsig_rec__split_fields37) and
+  (rrsig_rec__split_fields12 = rrsig_rec__split_fields38))))))))))))))))) and
+  ((foundtype2 = foundtype1) and ((begidx3 = begidx1) and
+  ((success2 = success1) and ((endidx2 = endidx1) and ({
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__typecovered =
+  rrsig_rec__split_fields26;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__algorithm =
+  rrsig_rec__split_fields27;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__numlabels =
+  rrsig_rec__split_fields28;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__origttl =
+  rrsig_rec__split_fields29;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__sigexpiration =
+  rrsig_rec__split_fields30;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__siginception =
+  rrsig_rec__split_fields31;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__keytag =
+  rrsig_rec__split_fields32;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__signername =
+  rrsig_rec__split_fields33;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__signature =
+  rrsig_rec__split_fields34;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__signaturelength =
+  rrsig_rec__split_fields35;
+  rec__rr_type__resourcerecordtype__ttlinseconds1 =
+  rrsig_rec__split_fields36; rec__rr_type__resourcerecordtype__class1 =
+  rrsig_rec__split_fields37; rec__ext__1 = rrsig_rec__split_fields38 } = {
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__typecovered =
+  rrsig_rec__split_fields13;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__algorithm =
+  rrsig_rec__split_fields14;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__numlabels =
+  rrsig_rec__split_fields15;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__origttl =
+  rrsig_rec__split_fields16;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__sigexpiration =
+  rrsig_rec__split_fields17;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__siginception =
+  rrsig_rec__split_fields18;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__keytag =
+  rrsig_rec__split_fields19;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__signername =
+  rrsig_rec__split_fields20;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__signature =
+  rrsig_rec__split_fields21;
+  rec__rr_type__rrsig_record_type__rrsigrecordtype__signaturelength =
+  rrsig_rec__split_fields22;
+  rec__rr_type__resourcerecordtype__ttlinseconds1 =
+  rrsig_rec__split_fields23; rec__rr_type__resourcerecordtype__class1 =
+  rrsig_rec__split_fields24; rec__ext__1 = rrsig_rec__split_fields25
+  })))))))) -> (((result16 = success2) and (((endidx2 <  zlength) and
+  (success3 = match_bool(success2, true, false))) or
+  ((not (endidx2 <  zlength)) and (success3 = match_bool(success2, false,
+  false))))) -> ((success3 = true) -> ((((o16 = (endidx2 + 1)) and
+  in_range2((endidx2 + 1))) and ((begidx3 = result17) and
+  (begidx4 = o16))) -> ((((((begidx5 <= endidx3) and
+  (begidx5 <= zlength)) and (endidx3 <= zlength)) and ((foundtype3 = 1) ->
   (forall i:int. (((begidx5 <= i) and (i <= endidx3)) ->
   ((48 <= to_rep1((zonefileline[i]))) and
   (to_rep1((zonefileline[i])) <= 57)))))) and ((in_range2(begidx5) and
-  in_range2(endidx3)) and in_range1(foundtype3)))
-
-axiom H110 : (result18 = success3)
-
-axiom H111 : (((foundtype3 = 1) -> (success4 = true)) and
-  ((not (foundtype3 = 1)) -> (success4 = false)))
-
-axiom H112 : (success4 = true)
-
-logic i : int
-
-axiom H113 : (begidx5 <= i)
-
-axiom H114 : (i <= endidx3)
-
- (* File "zone_file_parser.adb", line 1583, characters 0-0 *)
-goal WP_parameter_def : (48 <= to_rep1((zonefileline[i])))
+  in_range2(endidx3)) and in_range1(foundtype3))) ->
+  (((result18 = success3) and (((foundtype3 = 1) and (success4 = true)) or
+  ((not (foundtype3 = 1)) and (success4 = false)))) -> ((success4 = true) ->
+  (forall i:int. (((begidx5 <= i) and (i <= endidx3)) ->
+  (48 <= to_rep1((zonefileline[i]))))))))))))))))))
